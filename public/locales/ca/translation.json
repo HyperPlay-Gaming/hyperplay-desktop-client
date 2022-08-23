@@ -283,15 +283,15 @@
         "finished": {
             "add": {
                 "steam": {
-                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
+                    "corrupt": "{{game}} no s'ha pogut afegir per tots els usuaris de l'Steam. Vegeu els registres per més informació. Cal reiniciar l'Steam perquè els canvis tinguin efecte.",
+                    "success": "{{game}} s'ha afegit correctament a l'Steam. Cal reiniciar l'Steam perquè els canvis tinguin efecte.",
                     "title": "S'ha afegit a l'Steam"
                 }
             },
             "remove": {
                 "steam": {
-                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
+                    "corrupt": "{{game}} no s'ha pogut eliminar de tots els usuaris de l'Steam trobats. Consulteu els registres per obtenir més informació. Cal reiniciar l'Steam perquè els canvis tinguin efecte.",
+                    "success": "{{game}} s'ha eliminat correctament de l'Steam. Cal reiniciar l'Steam perquè els canvis tinguin efecte.",
                     "title": "S'ha tret de l'Steam"
                 }
             },
@@ -502,7 +502,7 @@
         "open-config-file": "Obre el fitxer de configuració",
         "reset-hyperplay": "Restableix l'HyperPlay",
         "saves": {
-            "label": "Save Location:",
+            "label": "Ubicació de les desades:",
             "warning": "La funció de desar al núvol està en versió beta. Si us plau, feu una còpia de seguretat de les vostres partides desades abans de sincronitzar-les, per si quelcom sortís malament."
         }
     },
