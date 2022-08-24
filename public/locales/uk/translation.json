@@ -1,0 +1,562 @@
+{
+    "accessibility": {
+        "actions_font_family": "Сімейство шрифтів для дій (Типово: \"Rubik\")",
+        "all_tiles_in_color": "Показувати кольорові образці ігор",
+        "content_font_family": "Сімейство шрифтів для вмісту (Типово: \"Cabin\")",
+        "fonts": "Шрифти",
+        "title": "Спец. можливості",
+        "zoom": "Маштабування"
+    },
+    "All": "Всі",
+    "anticheat": {
+        "anticheats": "Античіти",
+        "may_not_work": "Може не працювати через відмову або відсутність підтримки системи античитів.",
+        "reference": "Посилання",
+        "source": "Джерело",
+        "status": "Стан",
+        "title": "Ця гра містить в собі систему античитів"
+    },
+    "Assets": "Надатки",
+    "box": {
+        "cache-cleared": {
+            "message": "Кеш HyperPlay очищено.",
+            "title": "Кеш очищено"
+        },
+        "choose": "Оберіть",
+        "choose-egs-prefix": "Оберіть префікс під яким встановлено EGS",
+        "choose-gogdl-binary": "Оберіть двійковий GOGDL-файл (потребує перезавантаження)",
+        "choose-legendary-binary": "Оберіть двійковий файл Legendary",
+        "customWine": "Оберіть двійковий файл Wine або Proton",
+        "default-install-path": "Вкажіть стандартний шлях встановлення",
+        "default-steam-path": "Шлях до Steam.",
+        "downloadNow": "Download now",
+        "error": {
+            "add": {
+                "steam": {
+                    "body": "Не вдалося додати {{game}} до Steam, з наступною помилкою: {{newLine}} {{error}}",
+                    "title": "Помилка при додаванні"
+                }
+            },
+            "credentials": {
+                "message": "Термін дії ваших облікових даних скінчився, будь ласка вийдіть і увійдіть знову."
+            },
+            "cx-bottle-not-found": {
+                "message": "Пляшки CrossOver \"{{bottle_name}}\" не існує. Запуск неможливий!",
+                "title": "Пляшку CrossOver не знайдено"
+            },
+            "diskspace": {
+                "message": "Недостатньо місця на диску",
+                "title": "Недостатньо місця"
+            },
+            "dxvk": {
+                "message": "Помилка встановлення DXVK/VKD3D! Будь ласка перевірте ваше з'єднання з мережею Інтернет!",
+                "title": "Помилка DXVK/VKD3D"
+            },
+            "folder-not-found": {
+                "title": "Здається, тека з грою видалена. Ви бажаєте видалити гру зі списку встановлених?"
+            },
+            "generic": {
+                "message": "",
+                "title": ""
+            },
+            "no-offline-mode": {
+                "message": "Запуск перервано! Гра потребує з'єднання з інтернетом.",
+                "title": "Автономний режим не підтримується."
+            },
+            "title": "Помилка",
+            "uncaught-exception": {
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
+                "title": "Uncaught Exception occured!"
+            },
+            "update": {
+                "message": "З оновленням щось пішло не так. Будь ласка, перевірте журнали або повторіть спробу пізніше!",
+                "title": "Помилка оновлення"
+            },
+            "wine-not-found": {
+                "message": "Не обрана версія Wine. Перевірте налаштування гри!",
+                "title": "Wine не знайдено"
+            }
+        },
+        "info": {
+            "update": {
+                "changelog": "Відкрити журнал змін",
+                "detail": "Бажаєте завантажити оновлення у фоновому режимі?",
+                "message": "Доступна нова версія!",
+                "message-finished": "Бажаєте перезапустити HyperPlay зараз?",
+                "title": "HyperPlay",
+                "title-finished": "Оновлення завершено"
+            }
+        },
+        "no": "НІ",
+        "ok": "Гаразд",
+        "protocol": {
+            "install": {
+                "not_installed": "Наразі не встановлена, встановити?"
+            }
+        },
+        "quit": {
+            "message": "Є очікувані операції, ви впевнені?",
+            "title": "Вийти"
+        },
+        "reset-hyperplay": {
+            "question": {
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
+                "title": "Скинути HyperPlay"
+            }
+        },
+        "runexe": {
+            "title": "Оберіть EXE щоб запустити"
+        },
+        "select": {
+            "button": "Обрати",
+            "exe": "Оберіть EXE"
+        },
+        "shortcuts": {
+            "message": "На робочому столі та в головному меню створені ярлики",
+            "message-remove": "Shortcuts were removed from Desktop and Start Menu",
+            "title": "Ярлики"
+        },
+        "sync": {
+            "button": "Обрати",
+            "error": "Неіснуючий шлях",
+            "title": "Оберіть теку збережень"
+        },
+        "vcruntime": {
+            "install": {
+                "message": "The download links for the Visual C++ Runtimes have been opened. Please install both the x86 and x64 versions."
+            },
+            "notfound": {
+                "message": "The Microsoft Visual C++ Runtimes are not installed, which are required by some games",
+                "title": "VCRuntime not installed"
+            }
+        },
+        "warning": {
+            "epic": {
+                "import": "На серверах Epic сталася значна аварія, неможливо імпортувати гру!",
+                "install": "На серверах Epic сталася значна аварія, неможливо імпортувати гру!",
+                "update": "На серверах Epic сталася значна аварія, неможливо імпортувати гру!"
+            },
+            "title": "Увага"
+        },
+        "wineprefix": "Оберіть теку префікса Wine",
+        "yes": "ТАК"
+    },
+    "button": {
+        "go_to_library": "Перейти до бібліотеки",
+        "login": "Увійти",
+        "sync": "Синхронізувати",
+        "syncing": "Синхронізація",
+        "unsync": "Десинхронізувати"
+    },
+    "controller": {
+        "hints": {
+            "activate": "Activate",
+            "back": "Back",
+            "backspace": "Backspace",
+            "close_context_menu": "Close context menu",
+            "close_dialog": "Close dialog",
+            "close_keyboard": "Close keyboard",
+            "context_menu": "Context menu",
+            "game_details": "Game details",
+            "game_settings": "Game settings",
+            "install_game": "Install game",
+            "move_cursor": "Move cursor",
+            "none": "None",
+            "open_virtual_keyboard": "Open virtual keyboard",
+            "play_game": "Play game",
+            "scroll": "Scroll",
+            "space": "Space",
+            "update_game": "Update game"
+        }
+    },
+    "docs": "Документація",
+    "epic": {
+        "offline-notification-body": "Мережеві сервіси можуть не повністю працювати, тому що сервери Epic Games наразі недоступні!",
+        "offline-notification-title": "офлайн"
+    },
+    "Epic Games": "Epic Games",
+    "favourites": "Уподобання",
+    "game": {
+        "status": "Стан",
+        "store": "Крамниця",
+        "title": "Назва гри"
+    },
+    "GameSettings": "Налаштування гри",
+    "generic": {
+        "error": {
+            "component": "Жодної гри не знайдено - Спробуйте вийти та увійти заново або один із варіантів нижче"
+        },
+        "library": {
+            "refresh": "Оновити бібліотеку"
+        }
+    },
+    "globalSettings": "Глобальні налаштування",
+    "GOG": "GOG",
+    "gog-store": "Крамниця GOG",
+    "header": {
+        "ignore_hidden": "Ігнорувати приховані",
+        "platform": "Платформа",
+        "show_all_games": "Показати всі ігри",
+        "show_favourites_only": "Показати лише вподобання",
+        "show_hidden": "Показати приховані",
+        "store": "Фільтрувати крамницю"
+    },
+    "help": {
+        "amdfsr": "AMD's FSR допомагає збільшити частоту кадрів шляхом підвищення маштабу кожного кадру гри, яка відтворюється у нижчій роздільній здатності, у повноекранному режимі. Якість картинки збільшується з 5 до 1, ціною незначного зниження продуктивності. Увімкнення може покращити продуктивність.",
+        "dxvk": "DXVK це перекладний шар основний на Vulkan, для ігор написаних з DirectX 9, 10 та 11. Увімкнення може покращити сумісність. Може викликати проблеми, особливо у старіших DirectX іграх.",
+        "esync": "Esync має на меті зменшити споживання ресурсів wineserver -а, у іграх з інтенсивним використанням процесора. Увімкнення може покращити продуктивність.",
+        "fsync": "Fsync має на меті зменшити споживання ресурсів wineserver -а, у іграх з інтенсивним використанням процесора. Увімкнення може покращити продуктивність на підтриманих Linux ядрах.",
+        "game_language": {
+            "fallback": "Залиште порожнім для використання мови HyperPlay.",
+            "in_game_config": "Не всі ігри підтримують цю конфігурацію, деякі мають налаштування мови всередині гри.",
+            "valid_codes": "Прийнятні коди мов залежать від гри."
+        },
+        "gamemode": "Feral GameMode застосовує автоматичні та тимчасові налаштування системи під час гри. Увімкнення може покращити продуктивність.",
+        "general": "Синхронізувати з EGL якщо ви маєте встановлений Epic Games Launcher і хочете імпортувати ігри уникнувши їх повторного завантаження.",
+        "mangohud": "MangoHUD це оверлей, який відображає та моніторить частоту кадрів, температуру, навантаження процесора та відеокарти, та інші системні ресурси.",
+        "other": {
+            "part4": "Використовувати ",
+            "part5": "Команди для гри",
+            "part6": " які будуть вжиті після команди запуску, наприклад: ",
+            "part7": " щоб пропустити запускник в деяких іграх, тощо."
+        },
+        "preferSystemLibs": "Спеціальні версії Wine (Wine-GE, Wine-Lutris) постачаються разом із залежностями бібліотеки. Якщо ввімкнути цю опцію, ці бібліотеки ігноруватимуться, а Wine замість них завантажуватиме системні бібліотеки. УВАГА! Якщо залежності не виконано, можуть виникнути проблеми.",
+        "resizablebar": "NVIDIA's Resizable Bar допомагає підвищити частоту кадрів, дозволяючи процесору отримати доступ до всього графічного буфера. Увімкнення може покращити продуктивність ігор, основаних на Vulkan.",
+        "steamruntime": "Спеціальні бібліотеки, надані Steam -ом, щоб допомогти з запуском ігор під Linux та Windows (Proton). Увімкнення може покращити сумісність.",
+        "sync": {
+            "part1": "HyperPlay намагається вгадати теку збережень і це працює в більшості випадків. Якщо тека неправильна, використайте поле заміни щоб змінити шлях.",
+            "part2": "Якщо ви зміните теку префіксу для Wine або Proton, вам доведеться перевірити шлях знову оскільки Proton використовує инший префікс (/pfx) та ім'я користувача (steamuser). Тому ви можете просто стерти поточний шлях, вийти з налаштувань синхронізації і повернутись щоб HyperPlay знов спробував вгадати теку з правильним префіксом.",
+            "part3": "Ручна синхронізація: Оберіть \"Завантажити\" щоб завантажити збереження, розташовані у хмарі. \"Вивантажити\" щоб відправити локальні збереження у хмару. \"Примусове завантаження\" і \"Примусове вивантаження\" ігноруватимуть локальну чи хмарну версію збереження.",
+            "part4": "Функція автоматичної синхронізації збережень виконуватиметься кожен раз коли ви починаєте та закінчуєте грати."
+        },
+        "vkd3d": "VKD3D це перекладний шар основний на Vulkan, для ігор написаних з DirectX 12. Увімкнення може покращити сумісність. Не спричиняє проблем з старіших DirectX іграх.",
+        "wine": {
+            "part1": "HyperPlay шукає версії Wine, Proton, і CrossOver в цих теках:",
+            "part2": "Для інших місць, скористайтесь символьною ланкою на одну з цих тек"
+        }
+    },
+    "info": {
+        "hyperplay": {
+            "beta": "Beta",
+            "newReleases": "Update Available!",
+            "stable": "Stable",
+            "version": "Версія HyperPlay"
+        },
+        "settings": "Налаштування збережено автоматично",
+        "version": "Версія Wine"
+    },
+    "infobox": {
+        "help": "Допомога",
+        "requirements": "Системні вимоги",
+        "wine-path": "Шлях до Wine"
+    },
+    "install": {
+        "path": "Вкажіть шлях встановлення"
+    },
+    "library": {
+        "refresh": "Оновити",
+        "sortAscending": "Сортувати за зростанням",
+        "sortByStatus": "Сортувати за станом",
+        "sortDescending": "Сортувати за спаданням",
+        "toggleLayout": {
+            "grid": "Toggle to a grid layout",
+            "list": "Toggle to a list layout"
+        }
+    },
+    "Library": "Бібліотека",
+    "loading": {
+        "default": "Завантаження",
+        "website": "Завантаження вебсайту"
+    },
+    "login": {
+        "externalLogin": "Зовнішній вхід"
+    },
+    "message": {
+        "sync": "Синхронізація завершена",
+        "unsync": "Десинхронізація завершена"
+    },
+    "notify": {
+        "error": {
+            "move": "Помилка під час переміщення гри",
+            "reparing": "Помилка під час відновлення"
+        },
+        "finished": {
+            "add": {
+                "steam": {
+                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "Додано до Steam"
+                }
+            },
+            "remove": {
+                "steam": {
+                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "Прибрано зі Steam"
+                }
+            },
+            "reparing": "Відновлення закінчено"
+        },
+        "install": {
+            "canceled": "Встановлення скасовано",
+            "error": "Помилка встановлення",
+            "finished": "Встановлення закінчено",
+            "imported": "Гра імпортована",
+            "startInstall": "Розпочалось встановлення"
+        },
+        "moved": "Переміщення завершене",
+        "moving": "Переміщення гри",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "refresh": {
+            "error": "Не вдалося отримати версію з джерела, можливо, через обмеження API Github! Спробуйте пізніше."
+        },
+        "uninstalled": "Видалено",
+        "update": {
+            "canceled": "Оновлення скасовано",
+            "finished": "Оновлення завершено",
+            "started": "Розпочалось оновлення"
+        }
+    },
+    "options": {
+        "advanced": {
+            "key": "Ім'я змінного",
+            "placeHolderKey": "NAME",
+            "placeHolderValue": "Приклад: шлях/до/додатковихфайлів",
+            "title": "Додаткові параметри (змінні середовища):",
+            "value": "Значення"
+        },
+        "gameargs": {
+            "placeholder": "Вкажіть тут команди запуску",
+            "title": "Команди для гри (для виконання після команди запуску):"
+        },
+        "quote-args-with-spaces": "Увага: Обов’язково вводьте команди в лапки якщо у них є пробіли! Приклад: \"шлях/з пробілами/\"",
+        "wrapper": {
+            "args": "Команди",
+            "arguments_example": "Приклад команди: --arg; --extra-file=\"file-path/ with/spaces\"",
+            "exe": "Wrapper",
+            "placeHolderKey": "New Wrapper",
+            "placeHolderValue": "Команди до Wrapper",
+            "title": "Команда до Wrapper:"
+        }
+    },
+    "other": {
+        "gogdl-version": "Версія GOGDL: ",
+        "legendary-version": "Версія Legendary: ",
+        "weblate": "Допоможіть перекласти HyperPlay."
+    },
+    "placeholder": {
+        "alt-gogdl-bin": "Використання вбудованого двійкового до GOGDL...",
+        "alt-legendary-bin": "Використання вбудованого двійкового до Legendary...",
+        "egs-prefix": "Префікс де встановлено EGS",
+        "prefered_language": "2-значний код (приклад: \"en\" або \"uk\")"
+    },
+    "platforms": {
+        "linux": "Linux",
+        "mac": "Mac",
+        "win": "Windows"
+    },
+    "Plugins": "Плагіни",
+    "Projects": "Проєкти",
+    "Recent": "Нещодавно зіграні",
+    "search": "Пошук ігор",
+    "setting": {
+        "adddesktopshortcuts": "Створювати ярлики на робочому столі автоматично",
+        "addgamestostartmenu": "Додавати ігри до головного меню автоматично",
+        "alt-gogdl-bin": "Обрати інший двійковий файл GOGDL",
+        "alt-legendary-bin": "Обрати інший двійковий файл Legendary",
+        "audiofix": "Лагодження звуку (затримка Pulse Audio)",
+        "autodxvk": "Автоматично встановлювати/оновлювати DXVK на префіксі",
+        "autosync": "Автосинхронізувати збереження",
+        "autovkd3d": "Автоматично встановлювати/оновлювати VKD3D на префіксі",
+        "change-target-exe": "Обрати для запуску альтернативний EXE файл",
+        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
+        "crossover-version": "Crossover Version",
+        "customWineProton": "Інші шляхи до Wine/Proton",
+        "darktray": "Використовувати темну піктограму на панелі",
+        "default-install-path": "Стандартний шлях встановлення",
+        "default-steam-path": "Стандартний шлях Steam",
+        "defaultWinePrefix": "Обрати теку для нових префіксів Wine",
+        "disable_controller": "Вимкнути навігацію HyperPlay за допомогою контролера",
+        "discordRPC": "Ввімкнути Discord Rich Presence",
+        "download-no-https": "Завантажувати ігри без HTTPS (корисно для власних CDN як наприклад LanCache)",
+        "egs-sync": "Синхронізуватися із встановленим Epic Games Launcher",
+        "enableFSRHack": "Ввімкнути FSR Hack (версія Wine має це підтримувати)",
+        "eosOverlay": {
+            "cancelInstall": "Відмінити",
+            "checkForUpdates": "Перевірити на оновлення",
+            "checkingForUpdates": "Перевірка оновлень...",
+            "currentVersion": "Поточна версія: {{version}}",
+            "disable": "Вимкнути",
+            "enable": "Увімкнути",
+            "install": "Встановити",
+            "installed": "Оверлей EOS встановлено",
+            "installing": "Оверлей EOS встановлюється...",
+            "latestVersion": "Остання версія: {{version}}",
+            "notInstalled": "Оверлей EOS не встановлено",
+            "notInstalledMsg": "Оверлей EOS не встановлено. Бажаєте встановити зараз?",
+            "notInstalledTitle": "Оверлей не встановлено",
+            "remove": "Видалити",
+            "removeConfirm": "Ви впевнені що бажаєте видалити Оверлей EOS?",
+            "removeConfirmTitle": "Підтвердьте видалення оверлея",
+            "updateNow": "Оновити",
+            "updating": "Оновлення..."
+        },
+        "esync": "Ввімкнути Esync",
+        "exit-to-tray": "Вийти до системної панелі",
+        "FsrSharpnessStrenght": "Посилення різкості FSR",
+        "fsync": "Ввімкнути Fsync",
+        "gamemode": "Використовувати GameMode (Feral Game Mode має бути встановлений)",
+        "language": "Оберіть мову застосунка",
+        "library_top_option": {
+            "disabled": "Вимкнено",
+            "favourites": "Улюблені ігри",
+            "recently_played": "Нещодавно зіграні ігри",
+            "recently_played_installed": "Recently Played Games (Only Installed)"
+        },
+        "library_top_section": "Верхній розділ бібліотеки",
+        "log": {
+            "copy-to-clipboard": "Копіювати вміст журналу в сховище обміну",
+            "current-log": "Поточний журнал",
+            "instructions": "Приєднуйтесь до нашого Discord і шукайте канал, що відповідає вашій операційній системі. Поділіться вмістом журналу, і додайте чіткий опис проблеми з будь-якою відповідною інформацією та деталями.",
+            "instructions_title": "Як повідомити про проблему?",
+            "last-log": "Останній журнал",
+            "no-file": "Файл журналу не знайдено",
+            "show-in-folder": "Показати файл журналу в теці"
+        },
+        "mangohud": "Ввімкнути Mangohud (Mangohud має бути встановлений)",
+        "manualsync": {
+            "download": "Завантажити",
+            "forcedownload": "Примусове завантаження",
+            "forceupload": "Примусове вивантаження",
+            "sync": "Синхронізувати",
+            "syncing": "Синхронізація",
+            "title": "Синхронізувати збереження власноруч",
+            "upload": "Вивантажити"
+        },
+        "maxRecentGames": "Кількість нещодавно зіграних ігор для показу",
+        "maxworkers": "Максимальна кількість паралельних працівників під час завантаження",
+        "minimize-on-launch": "Згортати HyperPlay після запуску гри",
+        "offlinemode": "Запустити гру офлайн",
+        "prefered_language": "Бажана мова (код мови)",
+        "preferSystemLibs": "Надавати перевагу системним бібліотекам",
+        "primerun": "Використовувати виділену відеокарту",
+        "resizableBar": "Ввімкнути Resizable BAR (тільки NVIDIA RTX 30xx)",
+        "runexe": {
+            "message": "Перетягніть сюди файли",
+            "title": "Запустити EXE на префіксі"
+        },
+        "savefolder": {
+            "placeholder": "Вкажіть точну теку збережень для гри"
+        },
+        "select_theme": "Оберіть тему",
+        "showfps": "Показувати кількість кадрів (DX9, 10 та 11)",
+        "showUnrealMarket": "Показувати торговий майданчик Unreal (необхідний перезапуск)",
+        "start-in-tray": "Запускати згорнутим",
+        "steamruntime": "Використовувати Steam Runtime",
+        "winecrossoverbottle": "Пляшка CrossOver",
+        "wineprefix": "Тека префікса Wine",
+        "wineversion": "Версія Wine"
+    },
+    "settings": {
+        "battlEyeRuntime": {
+            "installing": "Installing BattlEye Runtime...",
+            "name": "BattlEye AntiCheat Runtime"
+        },
+        "clear-cache": "Очистити кеш HyperPlay",
+        "copiedToClipboard": "Копійовано у сховище обміну!",
+        "copyToClipboard": "Копіювати всі налаштування у сховище обміну",
+        "eacRuntime": {
+            "gameModeRequired": {
+                "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
+                "title": "GameMode required"
+            },
+            "installing": "Installing EAC Runtime...",
+            "name": "EasyAntiCheat Runtime"
+        },
+        "gameMode": {
+            "eacRuntimeEnabled": {
+                "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
+                "title": "EAC runtime enabled"
+            }
+        },
+        "log": {
+            "long-log-hint": "Журнал обрізаний, показані останні 1000 рядків!"
+        },
+        "navbar": {
+            "advanced": "Розширені",
+            "general": "Загальні",
+            "log": "Журнал",
+            "other": "Інше",
+            "sync": "Синхронізація збережень",
+            "wineExt": "Wine Extensions"
+        },
+        "open-config-file": "Відкрити файл налаштування",
+        "reset-hyperplay": "Скинути HyperPlay",
+        "saves": {
+            "label": "Save Location:",
+            "warning": "Збереження у хмарі, наразі у тестовому режимі. Будь ласка збережіть ваш файл збереження у іншому місці (у разі якщо щось піде не так)"
+        }
+    },
+    "Settings": "Налаштування",
+    "sidebar": {
+        "collapse": "Згорнути бічну панель",
+        "uncollapse": "Розгорнути бічну панель"
+    },
+    "status": {
+        "installing": "Встановлення",
+        "logging": "Вхід...",
+        "processing": "Обробка файлів, будь ласка, зачекайте"
+    },
+    "store": "Крамниця Epic",
+    "stores": "Крамниці",
+    "title": {
+        "allGames": "Усі ігри",
+        "allUnreal": "Unreal - Всі",
+        "unrealAssets": "Unreal - Надатки",
+        "unrealPlugins": "Unreal - Плагіни",
+        "unrealProjects": "Unreal - Проєкти"
+    },
+    "toolbox": {
+        "settings": {
+            "default-wineprefix": "Вкажіть базову теку з префіксом для нових налаштувань",
+            "wineprefix": "Вкажіть теку для нових префіксів Wine"
+        }
+    },
+    "tooltip": {
+        "addpath": "Додати новий шлях",
+        "removepath": "Вилучити шлях"
+    },
+    "tray": {
+        "about": "Про застосунок",
+        "quit": "Закрити",
+        "reload": "Перезавантажити",
+        "show": "Показати"
+    },
+    "Update Available!": "",
+    "userselector": {
+        "discord": "Discord",
+        "logout": "Вийти",
+        "logout_confirmation": "Точно бажаєте вийти?",
+        "manageaccounts": "Облікові записи",
+        "quit": "Закрити"
+    },
+    "webview": {
+        "controls": {
+            "back": "Назад",
+            "forward": "Вперед",
+            "openInBrowser": "Відкрити у бравзері",
+            "reload": "Перезавантажити сторінку"
+        }
+    },
+    "wine": {
+        "actions": "Дія",
+        "manager": {
+            "error": "Цього разу не вдалось отримати версії Wine/Proton.",
+            "link": "Керування Wine",
+            "title": "Керування Wine",
+            "unzipping": "Розпакування"
+        },
+        "release": "Дата випуску",
+        "size": "Розмір"
+    }
+}

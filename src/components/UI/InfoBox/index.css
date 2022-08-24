@@ -1,0 +1,40 @@
+.infoBox {
+  cursor: default;
+  width: 100%;
+  padding: 12px 22px 12px 22px;
+  font-size: 16px;
+  line-height: 19px;
+  background-color: var(--input-background);
+  border-radius: 10px;
+  text-align: start;
+}
+
+.helpLink {
+  margin-block-start: 4px;
+  transition: 500ms;
+  color: var(--accent);
+  cursor: pointer;
+  display: flex;
+  height: 40px;
+  position: relative;
+  align-items: center;
+  min-width: 45px;
+  justify-content: flex-start;
+}
+
+.helpLink:hover {
+  color: var(--accent-overlay);
+}
+
+.helpLink > svg {
+  margin-inline-end: 4px;
+}
+
+.infoBox > ul {
+  text-align: left;
+}
+
+.infoBox > strong {
+  color: var(--accent);
+  font: var(--font-secondary-bold);
+}

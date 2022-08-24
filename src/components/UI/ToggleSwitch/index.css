@@ -1,0 +1,54 @@
+.toggleSwitchWrapper {
+  display: grid;
+  grid-template-areas: 'check text';
+  grid-template-columns: min-content 1fr;
+  align-items: center;
+  justify-items: flex-start;
+  text-align: start;
+  cursor: pointer;
+}
+
+.hiddenCheckbox {
+  display: none;
+}
+
+/* add fake checkbox */
+.toggleSwitchWrapper:before {
+  content: '';
+  display: inline-block;
+  margin-inline-start: 13px;
+  margin-inline-end: 0.5rem;
+  width: 20px;
+  height: 20px;
+  transition: 350ms;
+  border: 3px solid var(--accent);
+  border-radius: 2px;
+  grid-area: check;
+  color: var(--background);
+  font-size: 1.5rem;
+  line-height: 1.2rem;
+  font-weight: 900;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.toggleSwitchWrapper span {
+  align-self: center;
+  justify-self: flex-start;
+  transition: 350ms;
+  color: var(--text-default);
+}
+
+.toggleSwitchWrapper:hover span {
+  transition: 350ms;
+  color: var(--accent);
+}
+
+.hiddenCheckbox:checked + .toggleSwitchWrapper:before {
+  content: '\2713';
+  background: var(--accent);
+}
+
+.hiddenCheckbox:checked + .toggleSwitchWrapper span {
+  font-weight: 700;
+  color: var(--accent);
+}

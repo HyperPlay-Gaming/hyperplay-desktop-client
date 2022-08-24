@@ -1,0 +1,26 @@
+.SidebarLinks {
+  grid-area: links;
+  padding-top: var(--sidebar-vertical-padding);
+  font-size: 18.5px;
+}
+
+.Sidebar__item.SidebarLinks__subItem {
+  padding: 4px var(--sidebar-horizontal-padding) 4px 50px;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: break-spaces;
+}
+
+.Sidebar__item.SidebarLinks__subItem::before {
+  content: '• ';
+}
+
+.SidebarLinks__subItem + .Sidebar__item:not(.SidebarLinks__subItem) {
+  margin-top: 4px;
+}
+
+@media screen and (max-width: 730px) {
+  .Sidebar__item.SidebarLinks__subItem {
+    padding: 4px var(--sidebar-horizontal-padding) 4px 20px;
+  }
+}

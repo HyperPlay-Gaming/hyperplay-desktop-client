@@ -1,0 +1,562 @@
+{
+    "accessibility": {
+        "actions_font_family": "Οικογένεια γραμματοσειρών ενεργειών (Προεπιλογή: \"Rubik\")",
+        "all_tiles_in_color": "Εμφάνιση όλων των πλακιδίων παιχνιδιού με χρώμα",
+        "content_font_family": "Οικογένεια γραμματοσειρών περιεχομένου (Προεπιλογή: \"Καμπίνα\")",
+        "fonts": "Γραμματοσειρές",
+        "title": "Προσβασιμότητα",
+        "zoom": "Zoom"
+    },
+    "All": "Όλα",
+    "anticheat": {
+        "anticheats": "Προστασία από cheats",
+        "may_not_work": "Μπορεί να μην λειτουργεί λόγω άρνησης ή ελλειπής υποστήριξης anticheat.",
+        "reference": "Αναφορά",
+        "source": "Πηγή",
+        "status": "Κατάσταση",
+        "title": "Αυτό το παιχνίδι περιλαμβάνει λογισμικό anticheat"
+    },
+    "Assets": "Αντικείμενα",
+    "box": {
+        "cache-cleared": {
+            "message": "Η προσωρινή μνήμη HyperPlay καθαρίστηκε.",
+            "title": "Προσωρινή Μνήμη Καθαρίστηκε"
+        },
+        "choose": "Επιλογή",
+        "choose-egs-prefix": "Επιλέξτε πρόθημα στη διαδρομή εγκατάστασης EGS",
+        "choose-gogdl-binary": "Επιλογή δυαδικού αρχείου GOGDL (χρειάζεται επανεκκίνηση)",
+        "choose-legendary-binary": "Επιλέξτε το δυαδικό αρχείο του Legendary",
+        "customWine": "Επιλέξτε το δυαδικό αρχείο Wine ή Proton",
+        "default-install-path": "Επιλέξτε Κύρια Διαδρομή Εγκατάστασης",
+        "default-steam-path": "Διαδρομή Steam.",
+        "downloadNow": "Κατεβάστε τώρα",
+        "error": {
+            "add": {
+                "steam": {
+                    "body": "Η προσθήκη του {{game}} στο Steam απέτυχε με:{{newLine}} {{error}}",
+                    "title": "Σφάλμα προσθήκης"
+                }
+            },
+            "credentials": {
+                "message": "Τα διαπιστευτήριά σας έληξαν, παρακαλώ αποσυνδεθείτε και επανασυνδεθείτε εκ νέου."
+            },
+            "cx-bottle-not-found": {
+                "message": "Το μπουκάλι CrossOver \"{{bottle_name}}\" δεν υπάρχει, δεν μπορεί να εκκινήσει!",
+                "title": "Το μπουκάλι CrossOver δεν βρέθηκε"
+            },
+            "diskspace": {
+                "message": "Δεν υπάρχει αρκετός διαθέσιμος χώρος στο δίσκο",
+                "title": "Ανεπαρκής χώρος"
+            },
+            "dxvk": {
+                "message": "Σφάλμα κατά την εγκατάσταση του DXVK/VKD3D! Παρακαλώ ελέγξτε τη σύνδεσή σας!",
+                "title": "Σφάλμα DXVK/VKD3D"
+            },
+            "folder-not-found": {
+                "title": "Ο φάκελος παιχνιδιού φαίνεται να έχει διαγραφεί, θέλετε να αφαιρέσετε το παιχνίδι από την λίστα εγκατεστημένων;"
+            },
+            "generic": {
+                "message": "",
+                "title": ""
+            },
+            "no-offline-mode": {
+                "message": "Η έναρξη διακόπηκε! Το παιχνίδι απαιτεί σύνδεση στο διαδύκτιο για να τρέξει.",
+                "title": "Η λειτουργία εκτός σύνδεσης δεν υποστηρίζεται."
+            },
+            "title": "Σφάλμα",
+            "uncaught-exception": {
+                "message": "Συνέβη μια μη διαχειρίσιμη εξαίρεση:{{newLine}}{{error}}{{newLine}}{{newLine}} Το HyperPlay θα κλείσει! Κάντε αναφορά στο Github repository μας.",
+                "title": "Συνέβη μια μη διαχειρίσιμη εξαίρεση!"
+            },
+            "update": {
+                "message": "Κάτι πήγε στραβά με την ενημέρωση, ελέγξτε τα αρχεία καταγραφής ή δοκιμάστε ξανά αργότερα!",
+                "title": "Σφάλμα ενημέρωσης"
+            },
+            "wine-not-found": {
+                "message": "Δεν επιλέχθηκε έκδοση Wine. Ελέγξτε τις ρυθμίσεις παιχνιδιού!",
+                "title": "Το Wine δεν βρέθηκε"
+            }
+        },
+        "info": {
+            "update": {
+                "changelog": "Άνοιγμα αρχείου καταγραφής αλλαγών",
+                "detail": "Θέλετε να κάνετε λήψη της ενημέρωσης στο παρασκήνιο;",
+                "message": "Υπάρχει μια νέα έκδοση διαθέσιμη!",
+                "message-finished": "Θέλετε να επανεκκινήσετε το HyperPlay τώρα;",
+                "title": "HyperPlay",
+                "title-finished": "Η ενημέρωση ολοκληρώθηκε"
+            }
+        },
+        "no": "ΟΧΙ",
+        "ok": "ΟΚ",
+        "protocol": {
+            "install": {
+                "not_installed": "Αυτή τη στιγμή είναι μη εγκατεστημένο.Να εγκατασταθεί;"
+            }
+        },
+        "quit": {
+            "message": "Υπάρχουν εκκρεμείς διεργασίες, είστε σίγουροι;",
+            "title": "Έξοδος"
+        },
+        "reset-hyperplay": {
+            "question": {
+                "message": "Είστε σίγουροι ότι θέλετε να επαναφέρετε το HyperPlay? Αυτό θα αφαιρέσαι όλες τις Ρυθμίσεις και την προσωρινή μνήμη, αλλά δεν θα αφαιρέσει τα εγκατεστημένα παιχνίδια ή τις πληροφορίες εισόδου του Epic. Οι φορητές εκδόσεις (AppImage, WinPortable, ...) του hyperplay θα πρέπει να επανεκκινηθούν χειροκίνητα.",
+                "title": "Επαναφορά HyperPlay"
+            }
+        },
+        "runexe": {
+            "title": "Επιλέξτε EXE για εκτέλεση"
+        },
+        "select": {
+            "button": "Επιλογή",
+            "exe": "Επιλογή αρχείου EXE"
+        },
+        "shortcuts": {
+            "message": "Συντομεύσεις δημιουργήθηκαν στην Επιφάνεια Εργασίας και στο Μενού Έναρξης",
+            "message-remove": "Οι συντομεύσεις αφαιρέθηκαν από την Επιφάνεια Εργασίας και την Εκκίνηση",
+            "title": "Συντομεύσεις"
+        },
+        "sync": {
+            "button": "Επιλέξτε",
+            "error": "Μη έγκυρη διαδρομή",
+            "title": "Επιλέξτε την διαδρομή αποθήκευσης"
+        },
+        "vcruntime": {
+            "install": {
+                "message": "Οι σύνδεσμοι για τη λήψη των Runtimes της Visual C++ έχουν ανοίξει. Παρακαλώ εγκαταστείστε τις εκδόσεις x86 και x64."
+            },
+            "notfound": {
+                "message": "Τα Runtimes της Microsoft για τη Visual C++, τα οποία είναι απαραίτητα για κάποια παιχνίδια, δεν είναι εγκατεστημένα",
+                "title": "Το VCRuntime δεν είναι εγκατεστημένο"
+            }
+        },
+        "warning": {
+            "epic": {
+                "import": "Οι Epic Servers έχουν σημαντικές διακοπές λειτουργίας, το παιχνίδι δεν μπορεί να εισαχθεί!",
+                "install": "Οι Epic Servers έχουν σημαντικές διακοπές λειτουργίας, το παιχνίδι δεν μπορεί να εγκατασταθεί!",
+                "update": "Οι Epic Servers έχουν σημαντικές διακοπές λειτουργίας, το παιχνίδι δεν μπορεί να ενημερωθεί!"
+            },
+            "title": "Προειδοποίηση"
+        },
+        "wineprefix": "Διαλέξτε τον φάκελο Προθέματος Wine",
+        "yes": "ΝΑΙ"
+    },
+    "button": {
+        "go_to_library": "Μεταβείτε στη Συλλογή",
+        "login": "Σύνδεση",
+        "sync": "Συγχρονισμός",
+        "syncing": "Συγχρονισμός",
+        "unsync": "Αποσυγχρονισμός"
+    },
+    "controller": {
+        "hints": {
+            "activate": "Ενεργοποίηση",
+            "back": "Πίσω",
+            "backspace": "Backspace",
+            "close_context_menu": "Κλείστε το σχετικό μενού",
+            "close_dialog": "Κλείσιμο παραθύρου διαλόγου",
+            "close_keyboard": "Κλείσιμο πληκτρολογίου",
+            "context_menu": "Context menu",
+            "game_details": "Πληροφορίες παιχνιδιού",
+            "game_settings": "Ρυθμίσεις παιχνιδιού",
+            "install_game": "Εγκατάσταση παιχνιδιού",
+            "move_cursor": "Μετακίνηση του δείκτη ποντικιού",
+            "none": "None",
+            "open_virtual_keyboard": "Άνοιγκα ψηφιακού πληκτρολογίου",
+            "play_game": "Παίξτε",
+            "scroll": "Scroll",
+            "space": "Space",
+            "update_game": "Ενημέρωση παιχνιδιού"
+        }
+    },
+    "docs": "Documentation",
+    "epic": {
+        "offline-notification-body": "Οι διαδικτυακές υπηρεσίες πιθανό να μη λειτουργούν πλήρως καθώς οι διακομιστές Epic Games ειναι εκτός σύνδεσης!",
+        "offline-notification-title": "Εκτός Σύνδεσης"
+    },
+    "Epic Games": "Epic Games",
+    "favourites": "Αγαπημένα",
+    "game": {
+        "status": "Κατάσταση",
+        "store": "Κατάστημα",
+        "title": "Τίτλος παιχνιδιού"
+    },
+    "GameSettings": "Ρυθμίσεις παιχνιδιού",
+    "generic": {
+        "error": {
+            "component": "Δεν βρέθηκαν παιχνίδια - Δοκιμάστε να αποσυνδεθείτε και να συνδεθείτε ξανά ή μια από τις παρακάτω επιλογές"
+        },
+        "library": {
+            "refresh": "Ανανέωση συλλογής"
+        }
+    },
+    "globalSettings": "Καθολικές Ρυθμίσεις",
+    "GOG": "GOG",
+    "gog-store": "Κατάστημα GOG",
+    "header": {
+        "ignore_hidden": "Παράλειψη κρυφών στοιχείων",
+        "platform": "Πλατφόρμα",
+        "show_all_games": "Εμφάνιση όλων των παιχνιδιών",
+        "show_favourites_only": "Εμφάνιση μόνο αγαπημένων",
+        "show_hidden": "Εμφάνιση κρυφών στοιχείων",
+        "store": "Φιλτράρισμα καταστήματος"
+    },
+    "help": {
+        "amdfsr": "Το FSR της AMD συμβάλλει στην ενίσχυση του ρυθμού καρέ αναβαθμίζοντας χαμηλότερες αναλύσεις σε λειτουργία πλήρους οθόνης. Η ποιότητα της εικόνας αυξάνεται από 5 σε 1 με το κόστος μιας μικρής μείωσης της απόδοσης. Η ενεργοποίηση μπορεί να βελτιώσει την απόδοση.",
+        "dxvk": "Το DXVK είναι ένα πρόγραμμα μετάφρασης που βασίζεται σε Vulkan για παιχνίδια DirectX 9, 10 και 11. Η ενεργοποίηση μπορεί να βελτιώσει τη συμβατότητα. Μπορεί να προκαλέσει προβλήματα ειδικά για παλαιότερα παιχνίδια DirectX.",
+        "esync": "Το Esync στοχεύει να μειώσει το κόστος του wineserver σε παιχνίδια που χρησιμοποιούν εντατικά τη CPU. Η ενεργοποίηση μπορεί να βελτιώσει την απόδοση.",
+        "fsync": "Το Fsync στοχεύει να μειώσει το κόστος του wineserver σε παιχνίδια που χρησιμοποιούν εντατικά τη CPU. Η ενεργοποίηση μπορεί να βελτιώσει την απόδοση σε υποστηριζόμενους πυρήνες Linux.",
+        "game_language": {
+            "fallback": "Αφήστε το κενό για να χρησιμοποιήσετε τη γλώσσα του HyperPlay.",
+            "in_game_config": "Δεν υποστηρίζουν όλα τα παιχνίδια αυτήν τη διαμόρφωση, ορισμένα έχουν ρύθμιση γλώσσας εντός του παιχνιδιού.",
+            "valid_codes": "Οι έγκυροι κωδικοί γλώσσας εξαρτώνται από το παιχνίδι."
+        },
+        "gamemode": "Το Feral GameMode εφαρμόζει αυτόματες και προσωρινές τροποποιήσεις στο σύστημα κατά την εκτέλεση παιχνιδιών. Η ενεργοποίηση μπορεί να βελτιώσει την απόδοση.",
+        "general": "Συγχρονίστε με το EGL εάν έχετε μια λειτουργική εγκατάσταση του Epic Games Launcher αλλού και θέλετε να εισαγάγετε τα παιχνίδια σας για να αποφύγετε τη λήψη τους ξανά.",
+        "mangohud": "Το MangoHUD είναι μια επικάλυψη που εμφανίζει και παρακολουθεί τα FPS, τις θερμοκρασίες, το φορτίο CPU/GPU και άλλους πόρους του συστήματος.",
+        "other": {
+            "part4": "Χρησιμοποιήστε το ",
+            "part5": "Επιχειρήματα Παιχνιδιού",
+            "part6": " για κλήση μετά την εντολή εκκίνησης, για παράδειγμα: ",
+            "part7": " για παράλειψη του εκκινητή σε κάποια παιχνίδια, κτλ."
+        },
+        "preferSystemLibs": "Οι προσαρμοσμένες εκδόσεις Wine (Wine-GE, Wine-Lutris) αποστέλλονται με τις εξαρτήσεις της βιβλιοθήκης τους. Με την ενεργοποίηση αυτής της επιλογής, αυτές οι αποσταλμένες βιβλιοθήκες θα αγνοηθούν και το Wine θα φορτώσει τις βιβλιοθήκες του συστήματος. Προειδοποίηση! Ενδέχεται να προκύψουν προβλήματα εάν δεν ικανοποιηθούν οι εξαρτήσεις.",
+        "resizablebar": "NVIDIA's Resizable Bar helps boost framerate by making the CPU access the entire graphics buffer. Enabling may improve performance for Vulkan-based games.",
+        "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
+        "sync": {
+            "part1": "Το HyperPlay προσπαθεί να μαντέψει τον σωστό φάκελο αποθήκευσης και αυτό θα δουλέψει στην πλειοψηφία των περιπτώσεων. Αν ο φάκελος είναι λάθος, χρησιμοποιήστε το κουτί κατίσχυσης για να τον αλλάξετε.",
+            "part2": "Αν αλλάξετε τον φάκελο προθημάτων Wine ή Proton, θα χρειαστεί να επανελέγξετε την διαδρομή, καθώς το Proton χρησιμοποιεί διαφορετικό πρόθημα (/pfx) και όνομα χρήστη (steamuser). Έτσι, μπορείτε απλά να διαγράψετε την παρούσα διαδρομή, να βγείτε έξω από την σελίδα επιλογών συγχρονισμού και να επιστρέψετε για να μαντέψει το HyperPlay μία ακόμη φορά τον φάκελο χρησιμοποιώντας το σωστό πρόθημα.",
+            "part3": "Χειροκίνητος Συγχρονισμός: Επιλέξτε Λήψη για να κατεβάσετε τα δεδομένα παιχνιδιού αποθηκευμένα στο Νέφος. Μεταφόρτωση για να ανεβάσετε τα τοπικά στο Νέφος. Επιβολή Λήψης και Επιβολή Μεταφόρτωσης θα αγνοήσει την τοπική ή στο Νέφος έκδοση.",
+            "part4": "Ο Αυτόματος Συγχρονισμός Δεδομένων θα συγχρονίσει τα δεδομένα παιχνιδιού κάθε φορά που ξεκινάτε ένα παιχνίδι και αφού το κλείσετε."
+        },
+        "vkd3d": "Το VKD3D είναι ένα πρόγραμμα μετάφρασης που βασίζεται σε Vulkan για παιχνίδια DirectX 12. Η ενεργοποίηση μπορεί να βελτιώσει σημαντικά τη συμβατότητα. Δεν έχει καμία επίδραση σε παλαιότερα παιχνίδια DirectX.",
+        "wine": {
+            "part1": "Το HyperPlay αναζητά εκδόσεις Wine, Proton και CrossOver στους ακόλουθους φακέλους:",
+            "part2": "Για άλλες τοποθεσίες, χρησιμοποιήστε έναν συμβολικό σύνδεσμο σε έναν απ' αυτούς τους φακέλους"
+        }
+    },
+    "info": {
+        "hyperplay": {
+            "beta": "Beta",
+            "newReleases": "Ενημέρωση διαθέσιμη!",
+            "stable": "Σταθερή",
+            "version": "Έκδοση HyperPlay"
+        },
+        "settings": "Οι ρυθμίσεις αποθηκεύονται αυτομάτως",
+        "version": "Έκδοση Wine"
+    },
+    "infobox": {
+        "help": "Βοήθεια",
+        "requirements": "Απαιτήσεις Συστήματος",
+        "wine-path": "Διαδρομή Wine"
+    },
+    "install": {
+        "path": "Επιλέξτε διαδρομή εγκατάστασης"
+    },
+    "library": {
+        "refresh": "Ανανέωση",
+        "sortAscending": "Αύξουσα ταξινόμηση",
+        "sortByStatus": "Ταξινόμηση κατά Κατάσταση",
+        "sortDescending": "Φθίνουσα ταξινόμηση",
+        "toggleLayout": {
+            "grid": "Toggle to a grid layout",
+            "list": "Toggle to a list layout"
+        }
+    },
+    "Library": "Συλλογή",
+    "loading": {
+        "default": "Φόρτωση",
+        "website": "Φόρτωση Ιστοσελίδας"
+    },
+    "login": {
+        "externalLogin": "Εξωτερική Σύνδεση"
+    },
+    "message": {
+        "sync": "Ο συγχρονισμός ολοκληρώθηκε",
+        "unsync": "Ο αποσυγχρονισμός ολοκληρώθηκε"
+    },
+    "notify": {
+        "error": {
+            "move": "Σφάλμα μετακίνησης του Παιχνιδιού",
+            "reparing": "Σφάλμα Επιδιόρθωσης"
+        },
+        "finished": {
+            "add": {
+                "steam": {
+                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "Προστέθηκε στο Steam"
+                }
+            },
+            "remove": {
+                "steam": {
+                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "Καταργήθηκε από το Steam"
+                }
+            },
+            "reparing": "Ολοκλήρωση Επιδιόρθωσης"
+        },
+        "install": {
+            "canceled": "Η εγκατάσταση ακυρώθηκε",
+            "error": "Αποτυχημένη Εγκατάσταση",
+            "finished": "Η εγκατάσταση ολοκληρώθηκε",
+            "imported": "Το παιχνίδι εισάχθηκε",
+            "startInstall": "Η Εγκατάσταση έχει ξεκινήσει"
+        },
+        "moved": "Η μετακίνηση ολοκληρώθηκε",
+        "moving": "Μετακίνηση παιχνιδιού",
+        "new-hyperplay-version": "Μια νέα έκδοση του HyperPlay κυκλοφόρησε!",
+        "refresh": {
+            "error": "Δεν ήταν δυνατή η ανάκτηση εκδόσεων από το upstream, ίσως λόγω περιορισμών στο Github API! Προσπαθήστε ξανά αργότερα."
+        },
+        "uninstalled": "Απεγκαταστάθηκε",
+        "update": {
+            "canceled": "Η ενημέρωση ακυρώθηκε",
+            "finished": "Η ενημέρωση ολοκληρώθηκε",
+            "started": "Έναρξη Ενημέρωσης"
+        }
+    },
+    "options": {
+        "advanced": {
+            "key": "Variable Name",
+            "placeHolderKey": "NAME",
+            "placeHolderValue": "Π.χ..: Διαδρομή/Στα/ΕπιπλέονΑρχεία",
+            "title": "Προχωρημένες ρυθμίσεις (Μεταβλητές περιβάλλοντος):",
+            "value": "Τιμή"
+        },
+        "gameargs": {
+            "placeholder": "Εισαγάγετε τα επιχειρήματα εκκινητή",
+            "title": "Επιχειρήματα παιχνιδιού (Εκτέλεση μετά την εντολή):"
+        },
+        "quote-args-with-spaces": "Warning: Make sure to quote args with spaces! E.g.: \"path/with spaces/\"",
+        "wrapper": {
+            "args": "Arguments",
+            "arguments_example": "Arguments example: --arg; --extra-file=\"file-path/ with/spaces\"",
+            "exe": "Wrapper",
+            "placeHolderKey": "New Wrapper",
+            "placeHolderValue": "Wrapper Arguments",
+            "title": "Wrapper command:"
+        }
+    },
+    "other": {
+        "gogdl-version": "Έκδοση GOGDL: ",
+        "legendary-version": "Έκδοση Legendary: ",
+        "weblate": "Βοηθήστε να μεταφραστεί το HyperPlay."
+    },
+    "placeholder": {
+        "alt-gogdl-bin": "Χρήση ενσωματωμένου δυαδικού αρχείου GOGDL...",
+        "alt-legendary-bin": "Χρήση ενσωματωμένου δυαδικού αρχείου Legendary...",
+        "egs-prefix": "Πρόθημα διαδρομής εγκατάστασης EGS",
+        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+    },
+    "platforms": {
+        "linux": "Linux",
+        "mac": "Mac",
+        "win": "Windows"
+    },
+    "Plugins": "Plugins",
+    "Projects": "Πρότζεκτ",
+    "Recent": "Παίχτηκε Πρόσφατα",
+    "search": "Αναζήτηση για Παιχνίδια",
+    "setting": {
+        "adddesktopshortcuts": "Αυτόματη προσθήκη συντομεύσεων επιφάνειας εργασίας",
+        "addgamestostartmenu": "Αυτόματη προσθήκη παιχνιδιών στο Μενού εκκίνησης",
+        "alt-gogdl-bin": "Επιλογή Εναλλακτικού δυαδικού GOGDL για χρήση",
+        "alt-legendary-bin": "Επιλέξτε ένα εναλλακτικό δυαδικό αρχείο Legendary",
+        "audiofix": "Επισκευή ήχου (Καθυστέρηση Pulse Audio)",
+        "autodxvk": "Αυτόματη Εγκατάσταση/Ενημέρωση DXVK με Πρόθημα",
+        "autosync": "Αυτόματος συγχρονισμός δεδομένων",
+        "autovkd3d": "Αυτόματη Εγκατάσταση/Ενημέρωση VKD3D με Πρόθημα",
+        "change-target-exe": "Επιλέξτε ένα εναλλακτικό αρχείο EXE προς εκτέλεση",
+        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
+        "crossover-version": "Crossover Version",
+        "customWineProton": "Ειδικές διαδρομές Wine/Proton",
+        "darktray": "Χρήση σκοτεινού εικονιδίου",
+        "default-install-path": "Προεπιλεγμένη Διαδρομή Εγκατάστασης",
+        "default-steam-path": "Προεπιλεγμένη διαδρομή Steam",
+        "defaultWinePrefix": "Καθορισμός Φακέλου για νέα Προθήματα Wine",
+        "disable_controller": "Απενεργοποίηση πλοήγησης με χρήση χειριστηρίου στο HyperPlay",
+        "discordRPC": "Ενεργοποίηση Discord Rich Presence",
+        "download-no-https": "Λήψη παιχνιδιών χωρίς HTTPS (χρήσιμο για CDN π.χ. LanCache)",
+        "egs-sync": "Συγχρονισμός με εγκατεστημένο Epic Games",
+        "enableFSRHack": "Ενεργοποίηση FSR Hack (Η έκδοση Wine πρέπει να το υποστηρίζει)",
+        "eosOverlay": {
+            "cancelInstall": "Ακύρωση",
+            "checkForUpdates": "Ελεγχος για ενημερώσεις",
+            "checkingForUpdates": "Ελεγχος για ενημερώσεις...",
+            "currentVersion": "Τρέχουσα έκδοση: {{version}}",
+            "disable": "Απενεργοποίηση",
+            "enable": "Ενεργοποίηση",
+            "install": "Εγκατάσταση",
+            "installed": "Η επικάλυψη EOS έχει εγκατασταθεί",
+            "installing": "Η επικάλυψη EOS εγκαθίσταται...",
+            "latestVersion": "Τελευταία έκδοση: {{version}}",
+            "notInstalled": "Η επικάλυψη EOS δεν έχει εγκατασταθεί",
+            "notInstalledMsg": "Η επικάλυψη EOS δεν έχει εγκατασταθεί. Θέλετε να τη εγκαταστήσετε τώρα;",
+            "notInstalledTitle": "Η επικάλυψη δεν έχει εγκατασταθεί",
+            "remove": "Απεγκατάσταση",
+            "removeConfirm": "Είστε βέβαιοι ότι θέλετε να απεγκαταστήσετε την επικάλυψη EOS;",
+            "removeConfirmTitle": "Επιβεβαίωση αφαίρεσης επικάλυψης",
+            "updateNow": "Ενημέρωση",
+            "updating": "Ενημέρωση..."
+        },
+        "esync": "Ενεργοποίηση Esync",
+        "exit-to-tray": "Έξοδος σε Μπάρα Εργαλειών",
+        "FsrSharpnessStrenght": "Βαθμός οξύτητας FSR",
+        "fsync": "Ενεργοποίηση Fsync",
+        "gamemode": "Χρήση λειτουργίας παιχνιδιού (απαραίτητη η εγκατάσταση του Feral Game Mode)",
+        "language": "Διαλέξτε γλώσσα εφαρμογής",
+        "library_top_option": {
+            "disabled": "Disabled",
+            "favourites": "Αγαπημένα παιχνίδια",
+            "recently_played": "Παιχνίδια που παίχτηκαν πρόσφατα",
+            "recently_played_installed": "Recently Played Games (Only Installed)"
+        },
+        "library_top_section": "Library Top Section",
+        "log": {
+            "copy-to-clipboard": "Αντιγραφή αρχείου καταγραφής στο πρόχειρο",
+            "current-log": "Τρέχων Αρχείο Καταγραφής",
+            "instructions": "Join our Discord and look for the channel that matches your operating system. Share the content of the logs displayed here, and include a clear description of the problem with any relevant information and details.",
+            "instructions_title": "How to report a problem?",
+            "last-log": "Τελευταίο Αρχείο Καταγραφής",
+            "no-file": "Δεν βρέθηκε αρχείο σύνδεσης",
+            "show-in-folder": "Εμφάνιση αρχείου καταγραφής στον φάκελο"
+        },
+        "mangohud": "Ενεργοποίηση Mangohud (απαραίτητη η εγκατάσταση του Mangohud)",
+        "manualsync": {
+            "download": "Λήψη",
+            "forcedownload": "Εξαναγκασμός Λήψης",
+            "forceupload": "Εξαναγκασμός Μεταφόρτωσης",
+            "sync": "Συγχρονισμός",
+            "syncing": "Συγχρονίζεται",
+            "title": "Δεδομένα Χειροκίνητου Συγχρονισμού",
+            "upload": "Μεταφόρτωση"
+        },
+        "maxRecentGames": "Παίχτηκε Πρόσφατα για Προβολή",
+        "maxworkers": "Μέγιστος αριθμός εργατών κατά την λήψη",
+        "minimize-on-launch": "Ελαχιστοποίηση HyperPlay Μετά Την 'Εναρξη",
+        "offlinemode": "Εκτέλεση Παιχνιδιού Εκτός Δικτύου",
+        "prefered_language": "Προτιμώμενη γλώσσα (Κωδικός γλώσσας)",
+        "preferSystemLibs": "Προτίμηση βιβλιοθηκών συστήματος",
+        "primerun": "Χρήση κύριας κάρτας γραφικών",
+        "resizableBar": "Ενεργοποίηση Μεταβλητού BAR (NVIDIA RTX 30xx μόνο)",
+        "runexe": {
+            "message": "Εναποθέστε αρχεία εδώ",
+            "title": "Εκτέλεση EXE με Πρόθημα"
+        },
+        "savefolder": {
+            "placeholder": "Διαλέξτε τον ακριβή φάκελο αποθήκευσης παιχνιδιών"
+        },
+        "select_theme": "Επιλογή θέματος",
+        "showfps": "Ένδειξη ταχύτητας καρέ (DX9, 10 και 11)",
+        "showUnrealMarket": "Εμφάνιση Καταστήματος Unreal (απαιτεί επανεκίννηση)",
+        "start-in-tray": "Ελαχιστοποιημένη Έναρξη",
+        "steamruntime": "Χρήση Steam Runtime",
+        "winecrossoverbottle": "CrossOver Περιβάλλον",
+        "wineprefix": "Φάκελος Προθημάτων Wine",
+        "wineversion": "Έκδοση Wine"
+    },
+    "settings": {
+        "battlEyeRuntime": {
+            "installing": "Installing BattlEye Runtime...",
+            "name": "BattlEye AntiCheat Runtime"
+        },
+        "clear-cache": "Εκκαθάριση κρυφής μνήμης HyperPlay",
+        "copiedToClipboard": "Αντιγράφηκε στο πρόχειρο!",
+        "copyToClipboard": "Αντιγραφή όλων των ρυθμίσεων στο Πρόχειρο",
+        "eacRuntime": {
+            "gameModeRequired": {
+                "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
+                "title": "GameMode required"
+            },
+            "installing": "Installing EAC Runtime...",
+            "name": "EasyAntiCheat Runtime"
+        },
+        "gameMode": {
+            "eacRuntimeEnabled": {
+                "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
+                "title": "EAC runtime enabled"
+            }
+        },
+        "log": {
+            "long-log-hint": "Το αρχείο καταγραφής ελαττώθηκε, εμφάνιση τελευταίων 1000 γραμμών!"
+        },
+        "navbar": {
+            "advanced": "Προχωρημένες",
+            "general": "Γενικά",
+            "log": "Αρχεία καταγραφής",
+            "other": "Άλλα",
+            "sync": "Αποθήκευση-Συγχρονισμός",
+            "wineExt": "Wine Extensions"
+        },
+        "open-config-file": "Άνοιγμα αρχείου παραμετροποίησης",
+        "reset-hyperplay": "Επαναφορά HyperPlay",
+        "saves": {
+            "label": "Save Location:",
+            "warning": "Η λειτουργία Cloud Saves είναι σε Beta, δημιουργήστε αντίγραφα ασφαλείας των αποθηκευμένων παιχνιδιών σας πριν από τον συγχρονισμό (σε περίπτωση που κάτι πάει στραβά)"
+        }
+    },
+    "Settings": "Ρυθμίσεις",
+    "sidebar": {
+        "collapse": "Σύμπτυξη πλαϊνής γραμμής",
+        "uncollapse": "Κατάργηση σύμπτυξης πλαϊνής γραμμής"
+    },
+    "status": {
+        "installing": "Εγκατάσταση",
+        "logging": "Σύνδεση...",
+        "processing": "Επεξεργασία αρχείων, παρακαλώ περιμένετε"
+    },
+    "store": "Κατάστημα Epic",
+    "stores": "Καταστήματα",
+    "title": {
+        "allGames": "Όλα τα παιχνίδια",
+        "allUnreal": "Unreal - Όλα",
+        "unrealAssets": "Unreal - Στοιχεία",
+        "unrealPlugins": "Unreal - Πρόσθετα",
+        "unrealProjects": "Unreal - Πρότζεκτ"
+    },
+    "toolbox": {
+        "settings": {
+            "default-wineprefix": "Επιλέξτε τον βασικό φάκελο προθημάτων για νέες παραμετροποιήσεις",
+            "wineprefix": "Επιλέξτε έναν φάκελο για νέα Προθήματα Wine"
+        }
+    },
+    "tooltip": {
+        "addpath": "Προσθήκη Νέας Διαδρομής",
+        "removepath": "Αφαίρεση Διαδρομής"
+    },
+    "tray": {
+        "about": "Περί",
+        "quit": "Έξοδος",
+        "reload": "Επαναφόρτωση",
+        "show": "Εμφάνιση"
+    },
+    "Update Available!": "",
+    "userselector": {
+        "discord": "Discord",
+        "logout": "Αποσύνδεση",
+        "logout_confirmation": "Είστε σίγουροι πως θέλετε να αποσυνδεθείτε;",
+        "manageaccounts": "Διαχείριση Λογαριασμών",
+        "quit": "Έξοδος"
+    },
+    "webview": {
+        "controls": {
+            "back": "Πήγαινε πίσω",
+            "forward": "Πήγαινε μπροστά",
+            "openInBrowser": "Άνοιγμα σε πρόγραμμα περιήγησης",
+            "reload": "Επαναφόρτωση σελίδας"
+        }
+    },
+    "wine": {
+        "actions": "Ενέργεια",
+        "manager": {
+            "error": "Μη δυνατή πάρση Wine/Proton εκδόσεων αυτή τη φορά.",
+            "link": "Διαχειριστής Wine",
+            "title": "Διαχειριστής Wine",
+            "unzipping": "Αποσυμπίεση"
+        },
+        "release": "Ημερομηνία κυκλοφορίας",
+        "size": "Μέγεθος"
+    }
+}

@@ -1,0 +1,70 @@
+.Header {
+  position: sticky;
+  top: 0;
+  z-index: 7;
+  display: grid;
+  grid-template-columns: minmax(min-content, 350px) 1fr;
+  grid-template-areas: 'filters search';
+  grid-gap: 8px;
+  align-items: start;
+  margin: 0 1rem 24px;
+  padding: 15px 0;
+  background: var(--gradient-body-background);
+  color: var(--text-secondary);
+}
+
+@media screen and (max-width: 1000px) {
+  .Header {
+    grid-template-columns: 1fr min-content;
+    grid-template-areas:
+      'search search'
+      'filters filters';
+  }
+}
+
+.Header__filters {
+  grid-area: filters;
+  display: flex;
+}
+
+.Header__filters .FormControl {
+  margin-right: 8px;
+}
+
+.Header__search {
+  grid-area: search;
+  max-width: 700px;
+}
+
+.Header__search .FormControl {
+  width: 100%;
+}
+
+.Header__summary {
+  grid-area: summary;
+  text-align: right;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+
+/* TODO move following styles to the components which use them */
+
+.iconsWrapper {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.refreshIcon:hover,
+.svg-button:focus-visible .refreshIcon {
+  animation: refreshing 2s infinite;
+}
+
+@keyframes refreshing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

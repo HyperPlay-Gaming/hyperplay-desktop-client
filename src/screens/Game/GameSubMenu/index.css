@@ -1,0 +1,53 @@
+.subMenuContainer {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.submenu {
+  font-size: 25px;
+  width: -webkit-fill-available;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: 150ms;
+  text-align: initial;
+  align-items: flex-start;
+}
+
+.dots {
+  position: absolute;
+  right: 46px;
+  top: 64px;
+  width: 25px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.linkTitle {
+  font-family: var(--actions-font-family);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--text-hover);
+}
+
+.otherInfo {
+  width: 210px;
+  padding-top: 60px;
+  word-break: break-word;
+}
+
+.otherInfo > .clickable {
+  margin-top: 12px;
+}
+
+.submenu .MuiCircularProgress-root.is-link {
+  width: auto !important;
+  height: auto !important;
+}
+.submenu .MuiCircularProgress-root.is-link svg {
+  width: var(--line-height) !important;
+  height: var(--line-height) !important;
+}

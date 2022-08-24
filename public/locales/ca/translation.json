@@ -1,0 +1,562 @@
+{
+    "accessibility": {
+        "actions_font_family": "Tipus de lletra per les accions (per defecte: «Rubik»)",
+        "all_tiles_in_color": "Mostra tots els títols dels jocs en color",
+        "content_font_family": "Tipus de lletra del contingut (per defecte: «Cabin»)",
+        "fonts": "Fonts",
+        "title": "Accessibilitat",
+        "zoom": "Zoom"
+    },
+    "All": "Tot",
+    "anticheat": {
+        "anticheats": "Antitrampes",
+        "may_not_work": "Potser no funcionarà a causa d'un suport antitrampes que no funciona o que s'ha denegat.",
+        "reference": "Referència",
+        "source": "Source",
+        "status": "Status",
+        "title": "Aquest joc inclou programari antitrampes."
+    },
+    "Assets": "Recursos",
+    "box": {
+        "cache-cleared": {
+            "message": "S'ha buidat la memòria cau de l'HyperPlay.",
+            "title": "S'ha esborrat la memòria cau"
+        },
+        "choose": "Tria",
+        "choose-egs-prefix": "Tria el prefix on l'EGS està instal·lat",
+        "choose-gogdl-binary": "Selecciona el binari del GOGDL (cal reiniciar)",
+        "choose-legendary-binary": "Selecciona el binari del Legendary",
+        "customWine": "Selecciona el binary del Wine o del Proton",
+        "default-install-path": "Tria la ruta d'instal·lació predefinida",
+        "default-steam-path": "Camí de l'Steam.",
+        "downloadNow": "Descarrega ara",
+        "error": {
+            "add": {
+                "steam": {
+                    "body": "{{game}} no s'ha pogut afegir a l'Steam a causa de:{{newLine}} {{error}}",
+                    "title": "Error a l'afegir el component"
+                }
+            },
+            "credentials": {
+                "message": "Les teves credencials han caducat, tanca la sessió i inicia-la de nou."
+            },
+            "cx-bottle-not-found": {
+                "message": "L'ampolla CrossOver «{{bottle_name}}» no existeix. No es pot executar.",
+                "title": "L'ampolla CrossOver no s'ha trobat."
+            },
+            "diskspace": {
+                "message": "No hi ha prou espai al disc",
+                "title": "No hi ha espai"
+            },
+            "dxvk": {
+                "message": "Hi ha hagut un error en instal·lar el DXVK/VKD3D. Comproveu la connexió.",
+                "title": "Error del DXVK/VKD3D"
+            },
+            "folder-not-found": {
+                "title": "La carpeta del joc sembla que s'ha esborrat. Voleu treure el joc de la llista de jocs instal·lats?"
+            },
+            "generic": {
+                "message": "",
+                "title": ""
+            },
+            "no-offline-mode": {
+                "message": "L'execució del programa ha fallat. El joc necessita una connexió a Internet per funcionar.",
+                "title": "El mode sense connexió no està suportat."
+            },
+            "title": "Error",
+            "uncaught-exception": {
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
+                "title": "Uncaught Exception occured!"
+            },
+            "update": {
+                "message": "L'actualització ha fallat. Si us plau, comproveu els registres o proveu-ho de nou més tard.",
+                "title": "Update Error"
+            },
+            "wine-not-found": {
+                "message": "No s'ha seleccionat cap versió del Wine. Comprova la configuració del joc.",
+                "title": "No s'ha trobat el Wine"
+            }
+        },
+        "info": {
+            "update": {
+                "changelog": "Obre el registre de canvis",
+                "detail": "Voleu descarregar l'actualització en segon pla?",
+                "message": "Hi ha una versió nova disponible.",
+                "message-finished": "Voleu reiniciar el HyperPlay ara?",
+                "title": "HyperPlay",
+                "title-finished": "L'actualització s'ha completat."
+            }
+        },
+        "no": "NO",
+        "ok": "D'acord",
+        "protocol": {
+            "install": {
+                "not_installed": "No està instal·lat. El vols instal·lar?"
+            }
+        },
+        "quit": {
+            "message": "Hi ha operacions pendents, estàs segur?",
+            "title": "Surt"
+        },
+        "reset-hyperplay": {
+            "question": {
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
+                "title": "Restableix l'HyperPlay"
+            }
+        },
+        "runexe": {
+            "title": "Selecciona un EXE a iniciar"
+        },
+        "select": {
+            "button": "Selecciona",
+            "exe": "Selecciona l'EXE"
+        },
+        "shortcuts": {
+            "message": "S'han creat dreceres a l'escriptori i al menú d'inici",
+            "message-remove": "S'han eliminat les dreceres de l'escriptori i del menú d'inici.",
+            "title": "Dreceres"
+        },
+        "sync": {
+            "button": "Tria",
+            "error": "Ruta no vàlida",
+            "title": "Tria el directori de partides desades"
+        },
+        "vcruntime": {
+            "install": {
+                "message": "Els enllaços de descàrrega dels Visual C++ Runtimes s'han obert. Instal·leu les versions x86 i x64."
+            },
+            "notfound": {
+                "message": "Els Microsoft Visual C++ Runtimes no estan instal·lats i els necessiten alguns jocs.",
+                "title": "El VCRuntime no està instal·lat."
+            }
+        },
+        "warning": {
+            "epic": {
+                "import": "Els servidors de l'Epic estan patint una caiguda massiva ara mateix. El joc no s'ha pogut importar.",
+                "install": "Els servidors de l'Epic estan patint una caiguda massiva ara mateix. El joc no s'ha pogut instal·lar.",
+                "update": "Els servidors de l'Epic estan patint una caiguda massiva ara mateix. El joc no s'ha pogut actualitzar."
+            },
+            "title": "Atenció"
+        },
+        "wineprefix": "Tria la carpeta del WinePrefix",
+        "yes": "SÍ"
+    },
+    "button": {
+        "go_to_library": "Vés a la biblioteca",
+        "login": "Inicia la sessió",
+        "sync": "Sincronitza",
+        "syncing": "S'està sincronitzant",
+        "unsync": "Dessincronitza"
+    },
+    "controller": {
+        "hints": {
+            "activate": "Activa",
+            "back": "Enrere",
+            "backspace": "Backspace",
+            "close_context_menu": "Tanca el menú contextual",
+            "close_dialog": "Tanca el diàleg",
+            "close_keyboard": "Tanca el teclat virtual",
+            "context_menu": "Context menu",
+            "game_details": "Detalls del joc",
+            "game_settings": "Configuració del joc",
+            "install_game": "Instal·la el joc",
+            "move_cursor": "Mou el cursor",
+            "none": "None",
+            "open_virtual_keyboard": "Obre el teclat virtual",
+            "play_game": "Juga al joc",
+            "scroll": "Scroll",
+            "space": "Espai",
+            "update_game": "Actualitza el joc"
+        }
+    },
+    "docs": "Documentation",
+    "epic": {
+        "offline-notification-body": "Els serveis en línia potser no funcionen del tot, ja que els servidors d'Epic Games estan desconnectats!",
+        "offline-notification-title": "fora de línia"
+    },
+    "Epic Games": "Epic Games",
+    "favourites": "Preferits",
+    "game": {
+        "status": "Status",
+        "store": "Botiga",
+        "title": "Títol del joc"
+    },
+    "GameSettings": "Configuració del joc",
+    "generic": {
+        "error": {
+            "component": "No s'han trobat jocs. Proveu a reiniciar la sessió o alguna de les opcions de sota."
+        },
+        "library": {
+            "refresh": "Actualitza la biblioteca"
+        }
+    },
+    "globalSettings": "Configuració global",
+    "GOG": "GOG",
+    "gog-store": "Botiga del GOG",
+    "header": {
+        "ignore_hidden": "Ignora els amagats",
+        "platform": "Plataforma",
+        "show_all_games": "Mostra tots els jocs",
+        "show_favourites_only": "Mostra només els preferits",
+        "show_hidden": "Mostra els amagats",
+        "store": "Filtre de botigues"
+    },
+    "help": {
+        "amdfsr": "L'FSR d'AMD ajuda a augmentar els fotogrames per segon emprant resolucions més baixes en el mode de pantalla completa i després escalant-les. La qualitat d'imatge augmenta de 5 a 1 a costa d'un petit increment de rendiment. Si s'habilita, pot millorar el rendiment.",
+        "dxvk": "DXVK és una capa de traducció basada en Vulkan per a jocs que emprin DirectX 9, 10 i 11. Si s'habilita, pot millorar la compatibilitat. Pot causar problemes, especialment per als jocs que emprin versions del DirectX més antigues.",
+        "esync": "Esync té com a objectiu reduir sobrecàrregues del Wineserver en jocs intensius en CPU. Si s'activa, el rendiment pot millorar.",
+        "fsync": "Fsync té com a objectiu reduir sobrecàrregues del Wineserver en jocs intensius en CPU. Si s'activa, el rendiment pot millorar en versions de Linux compatibles.",
+        "game_language": {
+            "fallback": "Deixeu-ho en blanc per usar l'idioma del HyperPlay.",
+            "in_game_config": "No tots els jocs suporten aquesta configuració. En alguns s'ha de configurar l'idioma quan s'executa el programa.",
+            "valid_codes": "Els codis de llenguatge vàlids depenen del joc."
+        },
+        "gamemode": "Feral GameMode aplica ajustaments automàtics i temporals al sistema quan s'executen jocs. Si s'habilitat, el rendiment pot millorar.",
+        "general": "Sincronitza amb l'EGL si ja tens instal·lat l'Epic Games Laucher en qualsevol altre lloc i vols importar els jocs sense haver de baixar-los de nou.",
+        "mangohud": "MangoHUD és una capa addicional que mostra i supervisa els FPS, la temperatura, la càrrega de CPU/GPU i altres recursos del sistema.",
+        "other": {
+            "part4": "Utilitza els ",
+            "part5": "arguments del joc",
+            "part6": " després de l'ordre d'inici, com ara: ",
+            "part7": " per a ometre el llançador a alguns jocs, etc."
+        },
+        "preferSystemLibs": "Les versions personalitzades del Wine (Wine-GE, Wine-Lutris) s'envien amb les seves dependències de biblioteques. Quan s'activa aquesta opció, s'ignoraran les biblioteques enviades i Wine carregarà les biblioteques del sistema. Avís! Es poden produir problemes si no es compleixen les dependències.",
+        "resizablebar": "La barra redimensionable de NVIDIA ajuda a augmentar els FPS fent que la CPU accedeixi a la memòria gràfica. Si s'habilita, el rendiment dels jocs basats en Vulkan pot millorar.",
+        "steamruntime": "Biblioteques personalitzades que proporciona l'Steam per executar jocs en Linux i en Windows (Proton). Si s'activa, pot millorar la compatibilitat.",
+        "sync": {
+            "part1": "L'HyperPlay prova d'endevinar el directori on es desen les partides, i això funcionarà a la majoria de casos. En cas que el directori no sigui el correcte, utilitza la caixa per a canviar-lo.",
+            "part2": "Si canvies el directori del prefix del Wine o del Proton, hauràs de comprovar de nou la ruta perquè el Proton empra un prefix (/pfx) i nom d'usuari (steamuser) diferent. Així doncs, pots suprimir la ruta actual, sortir de la configuració de sincronització i tornar-hi de nou perquè l'HyperPlay pugui esbrinar el directori de nou amb el prefix correcte.",
+            "part3": "Sincronització manual: Tria «Baixa» per a baixar les partides desades al núvol. «Puja» per a pujar les dades locals al núvol. «Força la baixada» i «Força la pujada» ignorarà la versió local o del núvol.",
+            "part4": "«Sincronitza les partides desades automàticament» sincronitzarà les dades cada vegada que iniciïs un joc i quan acabis de jugar."
+        },
+        "vkd3d": "VKD3D és una capa de traducció basada en Vulkan per a jocs que fan servir DirectX 12. Si s'habilitat, la compatibilitat pot millorar significativament. No té cap efecte en jocs que emprin DirectX més antics.",
+        "wine": {
+            "part1": "L'HyperPlay cerca les versions del Wine, Proton i CrossOver als directoris següents:",
+            "part2": "Per a altres llocs, utilitza un enllaç simbòlic (symlink) a algun d'aquests directoris"
+        }
+    },
+    "info": {
+        "hyperplay": {
+            "beta": "Beta",
+            "newReleases": "Update Available!",
+            "stable": "Stable",
+            "version": "HyperPlay Version"
+        },
+        "settings": "La configuració es desa automàticament",
+        "version": "Versió del Wine"
+    },
+    "infobox": {
+        "help": "Ajuda",
+        "requirements": "Requisits del sistema",
+        "wine-path": "Camí del Wine"
+    },
+    "install": {
+        "path": "Selecciona la ruta d'instal·lació"
+    },
+    "library": {
+        "refresh": "Actualitza",
+        "sortAscending": "Ordre ascendent",
+        "sortByStatus": "Ordena per estat",
+        "sortDescending": "Ordre descendent",
+        "toggleLayout": {
+            "grid": "Commuta a una vista de graella",
+            "list": "Commuta a una vista en llista"
+        }
+    },
+    "Library": "Biblioteca",
+    "loading": {
+        "default": "S'està carregant...",
+        "website": "S'està carregant el lloc web"
+    },
+    "login": {
+        "externalLogin": "Inici de sessió extern"
+    },
+    "message": {
+        "sync": "S'ha completat la sincronització",
+        "unsync": "S'ha completat la dessincronització"
+    },
+    "notify": {
+        "error": {
+            "move": "Error en desplaçar el joc",
+            "reparing": "Error en reparar"
+        },
+        "finished": {
+            "add": {
+                "steam": {
+                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "S'ha afegit a l'Steam"
+                }
+            },
+            "remove": {
+                "steam": {
+                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "S'ha tret de l'Steam"
+                }
+            },
+            "reparing": "Ha finalitzat la reparació del joc"
+        },
+        "install": {
+            "canceled": "S'ha cancel·lat la instal·lació",
+            "error": "La instal·lació ha fallat",
+            "finished": "Ha finalitzat la instal·lació",
+            "imported": "S'ha importat el joc",
+            "startInstall": "S'ha iniciat la instal·lació"
+        },
+        "moved": "Ha finalitzat el desplaçament",
+        "moving": "S'està movent el joc...",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "refresh": {
+            "error": "No s'ha pogut aconseguir el llistat de versions, potser per les restriccions de l'API del GitHub. Proveu-ho més tard."
+        },
+        "uninstalled": "Desinstal·lat",
+        "update": {
+            "canceled": "S'ha cancel·lat l'actualització",
+            "finished": "L'actualització ha acabat",
+            "started": "S'ha iniciat l'actualització"
+        }
+    },
+    "options": {
+        "advanced": {
+            "key": "Variable Name",
+            "placeHolderKey": "NAME",
+            "placeHolderValue": "Per exemple: Camí/A/FitxersAddicionals",
+            "title": "Opcions avançades (variables d'entorn):",
+            "value": "Valor"
+        },
+        "gameargs": {
+            "placeholder": "Introdueix aquí els arguments del llançador",
+            "title": "Arguments del joc (s'executaran després de l'ordre):"
+        },
+        "quote-args-with-spaces": "Avís: poseu els paràmetres que continguin espais entre cometes! Per exemple: \"camí/amb espais/\"",
+        "wrapper": {
+            "args": "Paràmetres",
+            "arguments_example": "Exemple de paràmetres: --arg; --extra-file=\"camí-del-fitxer/ amb/espais\"",
+            "exe": "Embolcall",
+            "placeHolderKey": "Embolcall nou",
+            "placeHolderValue": "Paràmetres de l'embolcall",
+            "title": "Ordre de l'embolcall:"
+        }
+    },
+    "other": {
+        "gogdl-version": "Versió del GOGDL: ",
+        "legendary-version": "Versió del Legendary: ",
+        "weblate": "Ajuda a traduir l'HyperPlay."
+    },
+    "placeholder": {
+        "alt-gogdl-bin": "S'està usant un binari del GOGDL integrat.",
+        "alt-legendary-bin": "S'està utilitzant el binari integrat del Legendary...",
+        "egs-prefix": "Prefix on l'EGS està instal·lat",
+        "prefered_language": "Codi de dos caràcters, com ara «en», «fr» o «ca»"
+    },
+    "platforms": {
+        "linux": "Linux",
+        "mac": "Mac",
+        "win": "Windows"
+    },
+    "Plugins": "Extensions",
+    "Projects": "Projectes",
+    "Recent": "Jugats fa poc",
+    "search": "Cerca jocs",
+    "setting": {
+        "adddesktopshortcuts": "Afegeix les dreceres a l'escriptori automàticament",
+        "addgamestostartmenu": "Afegeix els jocs al menú d'inici automàticament",
+        "alt-gogdl-bin": "Tria un fitxer binari alternatiu del GOGDL",
+        "alt-legendary-bin": "Tria un binari alternatiu del Legendary",
+        "audiofix": "Corregeix l'àudio (latència del Pulse Audio)",
+        "autodxvk": "Instal·la/Actualitza el DXVK al prefix automàticament",
+        "autosync": "Sincronitza automàticament les partides desades",
+        "autovkd3d": "Instal·la/Actualitza el VKD3D al prefix automàticament",
+        "change-target-exe": "Selecciona un EXE alternatiu a executar",
+        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
+        "crossover-version": "Versió híbrida (crossover)",
+        "customWineProton": "Rutes del Wine o Proton personalitzades",
+        "darktray": "Utilitza la icona fosca a la safata",
+        "default-install-path": "Ruta d'instal·lació predefinida",
+        "default-steam-path": "Camí de l'Steam per defecte",
+        "defaultWinePrefix": "Directori de prefixos Wine nous",
+        "disable_controller": "Desactiva la navegació del HyperPlay amb el controlador",
+        "discordRPC": "Activa la Discord Rich Presence",
+        "download-no-https": "Descarrega jocs sense HTTPS (útil per CDNs com ara LanCache)",
+        "egs-sync": "Sincronitza amb l'Epic Games instal·lat",
+        "enableFSRHack": "Activa el FSR Hack (cal que la versió del Wine en sigui compatible)",
+        "eosOverlay": {
+            "cancelInstall": "Cancel·la",
+            "checkForUpdates": "Comprova si hi ha actualitzacions",
+            "checkingForUpdates": "S'estan buscant actualitzacions…",
+            "currentVersion": "Versió actual: {{version}}",
+            "disable": "Desactiva",
+            "enable": "Activa",
+            "install": "Instal·la",
+            "installed": "La capa de superposició EOS està instal·lada.",
+            "installing": "S'està instal·lant la capa de superposició EOS…",
+            "latestVersion": "Última versió: {{version}}",
+            "notInstalled": "La capa de superposició EOS no està instal·lada.",
+            "notInstalledMsg": "La capa de superposició EOS no està instal·lada. Voleu instal·lar-la?",
+            "notInstalledTitle": "La capa de superposició no està instal·lada.",
+            "remove": "Desinstal·la",
+            "removeConfirm": "Esteu segur que voleu desinstal·lar la capa de superposició EOS?",
+            "removeConfirmTitle": "Confirmació d'eliminació de la capa de superposició",
+            "updateNow": "Actualitza",
+            "updating": "S'està actualitzant…"
+        },
+        "esync": "Activa l'Esync",
+        "exit-to-tray": "Surt a la safata del sistema",
+        "FsrSharpnessStrenght": "Força de la nitidesa de l'FSR",
+        "fsync": "Activa l'Fsync",
+        "gamemode": "Utilitza el GameMode (cal que el Feral Game Mode estigui instal·lat)",
+        "language": "Tria la llengua de l'aplicació",
+        "library_top_option": {
+            "disabled": "Desactivat",
+            "favourites": "Jocs preferits",
+            "recently_played": "Jocs jugats fa poc",
+            "recently_played_installed": "Jocs jugats fa poc (només els instal·lats)"
+        },
+        "library_top_section": "Secció superior de la biblioteca",
+        "log": {
+            "copy-to-clipboard": "Copia el registre al porta-retalls",
+            "current-log": "Registre actual",
+            "instructions": "Uniu-vos al nostra canal de Discord i busqueu el canal que s'adigui amb el vostre sistema operatiu. Compartiu-hi el contingut del registre i incloeu-hi una explicació clara del problema amb tota la informació i detalls rellevants.",
+            "instructions_title": "Com informar d'un problema",
+            "last-log": "Últim registre",
+            "no-file": "No s'ha trobat cap registre",
+            "show-in-folder": "Obre la carpeta del registre"
+        },
+        "mangohud": "Activa el Mangohud (cal que el Mangohud estigui instal·lat)",
+        "manualsync": {
+            "download": "Baixa",
+            "forcedownload": "Força la baixada",
+            "forceupload": "Força la pujada",
+            "sync": "Sincronitza",
+            "syncing": "S'està sincronitzant",
+            "title": "Sincronització manual de partides desades",
+            "upload": "Puja"
+        },
+        "maxRecentGames": "Jugats fa poc a mostrar",
+        "maxworkers": "Nombre màxim de Workers en baixar",
+        "minimize-on-launch": "Minimitza el HyperPlay després d'executar un joc",
+        "offlinemode": "Executa el joc sense connexió",
+        "prefered_language": "Idioma preferit (codi de l'idioma)",
+        "preferSystemLibs": "Dóna preferència a les biblioteques del sistema",
+        "primerun": "Usa la targeta gràfica dedicada",
+        "resizableBar": "Activa el BAR redimensionable (només amb NVIDIA RTX 30xx)",
+        "runexe": {
+            "message": "Arrossega i solta els fitxers aquí",
+            "title": "Executa l'EXE al prefix"
+        },
+        "savefolder": {
+            "placeholder": "Selecciona el directori exacte on es desen els jocs"
+        },
+        "select_theme": "Selecciona un tema",
+        "showfps": "Mostra els FPS (DX9, 10 i 11)",
+        "showUnrealMarket": "Mostra la llibreria d'Unreal (cal reiniciar)",
+        "start-in-tray": "Inicia minimitzat",
+        "steamruntime": "Usa el Runtime de l'Steam",
+        "winecrossoverbottle": "Ampolla CrossOver",
+        "wineprefix": "Directori WinePrefix",
+        "wineversion": "Versió del Wine"
+    },
+    "settings": {
+        "battlEyeRuntime": {
+            "installing": "S'està instal·lant el BattlEye Runtime...",
+            "name": "Antitrampes BattlEye Runtime"
+        },
+        "clear-cache": "Esborra la memòria cau de l'HyperPlay",
+        "copiedToClipboard": "S'ha copiat al porta-retalls.",
+        "copyToClipboard": "Copia tota la configuració al porta-retalls",
+        "eacRuntime": {
+            "gameModeRequired": {
+                "message": "Es necessita el GameMode per tal que el EAC funcioni en Flatpak. Voleu activar-lo?",
+                "title": "Necessita el GameMode."
+            },
+            "installing": "S'està instal·lant el EAC Runtime...",
+            "name": "EasyAntiCheat Runtime"
+        },
+        "gameMode": {
+            "eacRuntimeEnabled": {
+                "message": "El EAC runtime està activat, però no funcionarà correctament sense el GameMode. Voleu desactivar el EAC Runtime i el GameMode?",
+                "title": "S'ha activat el EAC runtime."
+            }
+        },
+        "log": {
+            "long-log-hint": "S'ha truncat el registre. Es mostren les últimes 1.000 línies."
+        },
+        "navbar": {
+            "advanced": "Avançat",
+            "general": "General",
+            "log": "Registre",
+            "other": "Altres",
+            "sync": "Desa-sincronitza",
+            "wineExt": "Extensions del Wine"
+        },
+        "open-config-file": "Obre el fitxer de configuració",
+        "reset-hyperplay": "Restableix l'HyperPlay",
+        "saves": {
+            "label": "Save Location:",
+            "warning": "La funció de desar al núvol està en versió beta. Si us plau, feu una còpia de seguretat de les vostres partides desades abans de sincronitzar-les, per si quelcom sortís malament."
+        }
+    },
+    "Settings": "Configuració",
+    "sidebar": {
+        "collapse": "Col·lapsa la barra lateral",
+        "uncollapse": "Expandeix la barra lateral"
+    },
+    "status": {
+        "installing": "S'està instal·lant...",
+        "logging": "S'està iniciant la sessió...",
+        "processing": "S'està processant els fitxers. Espereu."
+    },
+    "store": "Botiga de l'Epic",
+    "stores": "Botigues",
+    "title": {
+        "allGames": "Tots els jocs",
+        "allUnreal": "Unreal - Tot",
+        "unrealAssets": "Unreal - Recursos",
+        "unrealPlugins": "Unreal - Extensions",
+        "unrealProjects": "Unreal - Projectes"
+    },
+    "toolbox": {
+        "settings": {
+            "default-wineprefix": "Selecciona el directori predefinit dels prefixos per a configuracions noves",
+            "wineprefix": "Selecciona un directori per als Wine Prefixes nous"
+        }
+    },
+    "tooltip": {
+        "addpath": "Afegeix una ruta",
+        "removepath": "Suprimeix la ruta"
+    },
+    "tray": {
+        "about": "Quant a",
+        "quit": "Surt",
+        "reload": "Carrega de nou",
+        "show": "Mostra"
+    },
+    "Update Available!": "",
+    "userselector": {
+        "discord": "Discord",
+        "logout": "Tanca la sessió",
+        "logout_confirmation": "Segur que vols tancar la sessió?",
+        "manageaccounts": "Gestiona els comptes",
+        "quit": "Surt"
+    },
+    "webview": {
+        "controls": {
+            "back": "Enrere",
+            "forward": "Endavant",
+            "openInBrowser": "Obre al gestor de fitxers",
+            "reload": "Torna a carregar la pàgina"
+        }
+    },
+    "wine": {
+        "actions": "Action",
+        "manager": {
+            "error": "No s'ha pogut obtenir les versions de Wine/Proton.",
+            "link": "Gestor del Wine",
+            "title": "Gestor del Wine",
+            "unzipping": "S'està descomprimint"
+        },
+        "release": "Release Date",
+        "size": "Mida"
+    }
+}

@@ -1,0 +1,186 @@
+.Sidebar {
+  --sidebar-horizontal-padding: 16px;
+  --sidebar-vertical-padding: 24px;
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-rows: 2fr min-content min-content;
+  grid-template-areas: 'links' 'utils' 'updates' 'version';
+  grid-area: sidebar;
+  height: 100%;
+  padding: 0;
+  font-family: var(--actions-font-family);
+  text-align: left;
+  background: var(--navbar-background);
+  overflow: auto;
+}
+
+.Sidebar.collapsed {
+  --sidebar-vertical-padding: 8px;
+  --sidebar-horizontal-padding: 22px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.Sidebar__section {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  font-family: var(--actions-font-family);
+  flex-direction: column;
+}
+
+.Sidebar__item {
+  display: flex;
+  width: 100%;
+  padding: 7px var(--sidebar-horizontal-padding);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: var(--navbar-accent);
+  transition: color 250ms;
+  text-align: start;
+}
+
+.Sidebar__item:focus-visible {
+  outline: 2px solid var(--text-hover);
+  outline-offset: -2px;
+}
+
+.Sidebar__item:hover {
+  background-color: var(--navbar-active-background);
+}
+
+.Sidebar__item.active {
+  color: var(--accent);
+}
+
+.Sidebar__item.active.SidebarLinks__subItem {
+  font-weight: 700;
+  background-color: var(--navbar-active-background);
+}
+
+.Sidebar__itemIcon {
+  box-sizing: border-box;
+  width: 24px;
+  margin-right: 10px;
+  display: inline-flex;
+  justify-content: center;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.currentDownloads {
+  grid-area: utils;
+  align-self: end;
+  margin: 0 4px var(--sidebar-vertical-padding)
+    var(--sidebar-horizontal-padding);
+}
+
+.divider {
+  border: solid 1px var(--divider);
+  opacity: 0.2;
+  margin: 4px 8px;
+}
+
+.appVersion {
+  grid-area: version;
+  margin: 0 4px var(--sidebar-vertical-padding)
+    var(--sidebar-horizontal-padding);
+  font-size: 0.9rem;
+}
+
+.newReleases {
+  grid-area: updates;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 4px 12px var(--sidebar-horizontal-padding);
+  font-size: 0.9rem;
+}
+
+.newReleases > a {
+  color: var(--accent);
+  transition: 300ms;
+}
+
+.newReleases > a:hover {
+  color: var(--accent-overlay);
+}
+
+.collapseIcon {
+  position: fixed;
+  left: calc(var(--sidebar-width) - 21px);
+  bottom: 100px;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 500ms 500ms;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.collapseIcon svg {
+  color: var(--text-secondary);
+  transform: scaleX(0.6);
+  height: 40px;
+}
+
+.Sidebar:hover .collapseIcon {
+  opacity: 1;
+}
+
+.Sidebar.collapsed .appVersion {
+  margin: 10px;
+  font-size: 11px;
+}
+
+.Sidebar.collapsed .divider {
+  margin: 4px 0;
+}
+
+.Sidebar.collapsed .Sidebar__item.active span,
+.Sidebar.collapsed .Sidebar__item > span {
+  display: none;
+}
+
+.Sidebar.collapsed .SidebarItemWithSubmenu .SidebarSubmenu {
+  display: none;
+}
+
+.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu span,
+.Sidebar.collapsed .SidebarItemWithSubmenu:focus-within .SidebarSubmenu span {
+  display: block;
+}
+
+.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu,
+.Sidebar.collapsed .SidebarItemWithSubmenu:focus-within .SidebarSubmenu {
+  display: block;
+  position: fixed;
+  left: 62px;
+  top: 66px;
+  background-color: var(--navbar-background);
+  padding: 6px 0;
+}
+
+.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu.settings,
+.Sidebar.collapsed
+  .SidebarItemWithSubmenu:focus-within
+  .SidebarSubmenu.settings {
+  top: 114px;
+}
+
+.Sidebar.collapsed .Sidebar__item.SidebarLinks__subItem::before {
+  display: none;
+}
+
+.Sidebar.collapsed .Sidebar__item.SidebarLinks__subItem {
+  padding: 7px var(--sidebar-horizontal-padding);
+}
+.Sidebar.collapsed .Sidebar__item.active svg,
+.Sidebar.collapsed .Sidebar__item svg {
+  transform: scale(1.2);
+  padding: 6px 0;
+}

@@ -1,0 +1,562 @@
+{
+    "accessibility": {
+        "actions_font_family": "Keluarga Fon Aksi (Bawaan: \"Rubik\")",
+        "all_tiles_in_color": "Tampilkan semua kolom gim dalam warna",
+        "content_font_family": "Keluarga Fon Konten (Bawaan: \"Cabin\")",
+        "fonts": "Fon",
+        "title": "Aksesibilitas",
+        "zoom": "Zoom"
+    },
+    "All": "Semua",
+    "anticheat": {
+        "anticheats": "Anticheat",
+        "may_not_work": "Ini mungkin tidak berfungsi karena dukungan anticheat yang ditolak atau rusak.",
+        "reference": "Referensi",
+        "source": "Source",
+        "status": "Status",
+        "title": "Gim ini mengandung perangkat lunak anticheat"
+    },
+    "Assets": "Aset",
+    "box": {
+        "cache-cleared": {
+            "message": "Tembolok HyperPlay telah dibersihkan.",
+            "title": "Tembolok telah dibersihkan"
+        },
+        "choose": "Pilih",
+        "choose-egs-prefix": "Pilih Prefiks di mana EGS dipasang",
+        "choose-gogdl-binary": "Pilih GOGDL Binary (perlu memulai ulang)",
+        "choose-legendary-binary": "Pilih Legendary binary",
+        "customWine": "Pilih Wine atau Proton Binary",
+        "default-install-path": "Pilih Lokasi Pemasangan Bawaan",
+        "default-steam-path": "Lokasi Steam.",
+        "downloadNow": "Download now",
+        "error": {
+            "add": {
+                "steam": {
+                    "body": "Gagal menambahkan {{game}} ke Steam dengan:{{newLine}} {{error}}",
+                    "title": "Galat Menambahkan Gim"
+                }
+            },
+            "credentials": {
+                "message": "Kredensial Anda telah kedaluwarsa, silakan keluar dan masuk lagi."
+            },
+            "cx-bottle-not-found": {
+                "message": "CrossOver bottle \"{{bottle_name}}\" tidak ada, tidak bisa dijalankan!",
+                "title": "CrossOver bottle tidak ditemukan"
+            },
+            "diskspace": {
+                "message": "Ruang penyimpanan tidak cukup",
+                "title": "Tidak Ada Ruang"
+            },
+            "dxvk": {
+                "message": "Galat saat memasang DXVK/VKD3D! Mohon periksa koneksi Anda!",
+                "title": "Terjadi Kesalahan DXVK/VKD3D"
+            },
+            "folder-not-found": {
+                "title": "Folder gim tampaknya sudah dihapus, apakah Anda ingin menghapus gim dari daftar?"
+            },
+            "generic": {
+                "message": "",
+                "title": ""
+            },
+            "no-offline-mode": {
+                "message": "Peluncuran dibatalkan! Gim membutuhkan koneksi internet untuk menjalankannya.",
+                "title": "Mode luring tidak didukung."
+            },
+            "title": "Galat",
+            "uncaught-exception": {
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
+                "title": "Uncaught Exception occured!"
+            },
+            "update": {
+                "message": "Terjadi kesalahan saat melakukan pembaruan, silakan cek log atau coba lagi nanti!",
+                "title": "Update Error"
+            },
+            "wine-not-found": {
+                "message": "Tidak Ada Versi Wine yang Dipilih. Periksa Pengaturan Gim!",
+                "title": "Wine Tidak Ditemukan"
+            }
+        },
+        "info": {
+            "update": {
+                "changelog": "Buka log perubahan",
+                "detail": "Apakah Anda ingin mengunduh pembaruan di latar belakang?",
+                "message": "Ada Versi baru yang tersedia!",
+                "message-finished": "Apakah Anda ingin memulai ulang HyperPlay sekarang?",
+                "title": "HyperPlay",
+                "title-finished": "Pembaruan Selesai"
+            }
+        },
+        "no": "TIDAK",
+        "ok": "OKE",
+        "protocol": {
+            "install": {
+                "not_installed": "Saat ini tidak dipasang. Pasang?"
+            }
+        },
+        "quit": {
+            "message": "Ada operasi yang tertunda, apakah Anda yakin?",
+            "title": "Keluar"
+        },
+        "reset-hyperplay": {
+            "question": {
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
+            }
+        },
+        "runexe": {
+            "title": "Pilih EXE untuk Dijalankan"
+        },
+        "select": {
+            "button": "Pilih",
+            "exe": "Pilih EXE"
+        },
+        "shortcuts": {
+            "message": "Pintasan dibuat di Desktop dan Start Menu",
+            "message-remove": "Shortcuts were removed from Desktop and Start Menu",
+            "title": "Pintasan"
+        },
+        "sync": {
+            "button": "Pilih",
+            "error": "Lokasi Tidak Valid",
+            "title": "Pilih direktori penyimpanan"
+        },
+        "vcruntime": {
+            "install": {
+                "message": "The download links for the Visual C++ Runtimes have been opened. Please install both the x86 and x64 versions."
+            },
+            "notfound": {
+                "message": "The Microsoft Visual C++ Runtimes are not installed, which are required by some games",
+                "title": "VCRuntime not installed"
+            }
+        },
+        "warning": {
+            "epic": {
+                "import": "Server Epic mengalami penghentian besar saat ini, gim tidak dapat diimpor!",
+                "install": "Server Epic mengalami penghentian besar saat ini, gim tidak dapat dipasang!",
+                "update": "Server Epic mengalami penghentian besar saat ini, gim tidak dapat diperbarui!"
+            },
+            "title": "Peringatan"
+        },
+        "wineprefix": "Pilih Folder Prefiks Wine",
+        "yes": "YA"
+    },
+    "button": {
+        "go_to_library": "Pergi ke Pustaka",
+        "login": "Log Masuk",
+        "sync": "Sinkronkan",
+        "syncing": "Menyinkronkan",
+        "unsync": "Batalkan sinkronisasi"
+    },
+    "controller": {
+        "hints": {
+            "activate": "Activate",
+            "back": "Back",
+            "backspace": "Backspace",
+            "close_context_menu": "Close context menu",
+            "close_dialog": "Close dialog",
+            "close_keyboard": "Close keyboard",
+            "context_menu": "Context menu",
+            "game_details": "Game details",
+            "game_settings": "Game settings",
+            "install_game": "Install game",
+            "move_cursor": "Move cursor",
+            "none": "None",
+            "open_virtual_keyboard": "Open virtual keyboard",
+            "play_game": "Play game",
+            "scroll": "Scroll",
+            "space": "Space",
+            "update_game": "Update game"
+        }
+    },
+    "docs": "Documentation",
+    "epic": {
+        "offline-notification-body": "Layanan daring mungkin tidak akan bekerja sepenuhnya karena server Epic Games sedang luring!",
+        "offline-notification-title": "luring"
+    },
+    "Epic Games": "Epic Games",
+    "favourites": "Favorit",
+    "game": {
+        "status": "Status",
+        "store": "Toko",
+        "title": "Judul Gim"
+    },
+    "GameSettings": "Pengaturan Gim",
+    "generic": {
+        "error": {
+            "component": "Tidak ada Gim yang ditemukan - Silakan coba log keluar lalu log masuk lagi atau salah satu opsi di bawah ini"
+        },
+        "library": {
+            "refresh": "Segarkan Pustaka"
+        }
+    },
+    "globalSettings": "Pengaturan Global",
+    "GOG": "GOG",
+    "gog-store": "GOG Store",
+    "header": {
+        "ignore_hidden": "Abaikan yang Disembunyikan",
+        "platform": "Platform",
+        "show_all_games": "Tampilkan semua gim",
+        "show_favourites_only": "Hanya Tampilkan Gim Favorit",
+        "show_hidden": "Tampilkan yang Disembunyikan",
+        "store": "Toko Filter"
+    },
+    "help": {
+        "amdfsr": "FSR AMD membantu untuk meningkatkan framerate dengan meningkatkan resolusi yang lebih rendah dalam Mode Layar Penuh. Kualitas gambar meningkat dari 5 menjadi 1 dengan mengorbankan sedikit kinerja. Mengaktifkannya dapat meningkatkan kinerja.",
+        "dxvk": "DXVK adalah lapisan translasi berbasis Vulkan untuk gim yang memakai DirectX 9, 10, dan 11. Mengaktifkannya dapat meningkatkan kompatibilitas. Mungkin dapat menyebabkan masalah terutama untuk gim dengan versi DirectX yang lebih lama.",
+        "esync": "Esync bertujuan untuk mengurangi overhead server Wine di gim dengan CPU yang intensif. Mengaktifkannya dapat meningkatkan kinerja.",
+        "fsync": "Fsync bertujuan untuk mengurangi overhead server Wine di gim dengan CPU intensif. Mengaktifkannya dapat meningkatkan kinerja pada kernel Linux yang didukung.",
+        "game_language": {
+            "fallback": "Biarkan kosong untuk menggunakan bahasa HyperPlay.",
+            "in_game_config": "Tidak semua gim mendukung konfigurasi ini, sebagian memiliki pengaturan bahasa dalam gim.",
+            "valid_codes": "Kode bahasa yang valid bergantung pada gim."
+        },
+        "gamemode": "Feral GameMode menerapkan penyesuaian otomatis dan penyesuaian sementara ke sistem saat menjalankan gim. Mengaktifkannya dapat meningkatkan kinerja.",
+        "general": "Sinkronkan dengan EGL jika Anda memiliki instalasi Epic Games Launcher yang berjalan di tempat lain dan ingin mengimpor gim Anda untuk menghindari pengunduhan ulang.",
+        "mangohud": "MangoHUD adalah hamparan yang menampilkan dan memantau FPS, suhu, beban CPU/GPU, dan sumber daya sistem lainnya.",
+        "other": {
+            "part4": "Gunakan ",
+            "part5": "Argumen Permainan",
+            "part6": " dipanggil setelah perintah peluncuran, misalnya: ",
+            "part7": " untuk melewati peluncur di beberapa gim, dll."
+        },
+        "preferSystemLibs": "Versi Wine khusus (Wine-GE, Wine-Lutris) dikirimkan dengan dependensi pustakanya. Dengan mengaktifkan opsi ini, pustaka yang dikirimkan tersebut akan diabaikan dan Wine akan memuat pustaka sistem sebagai gantinya. Peringatan! Masalah dapat terjadi jika dependensi tidak terpenuhi.",
+        "resizablebar": "Resizable Bar NVIDIA membantu meningkatkan framerate dengan membuat CPU mengakses seluruh penyangga grafis. Mengaktifkannya dapat meningkatkan kinerja untuk gim berbasis Vulkan.",
+        "steamruntime": "Pustaka khusus disediakan oleh Steam untuk membantu menjalankan gim Linux dan Windows (Proton). Mengaktifkannya dapat meningkatkan kompatibilitas.",
+        "sync": {
+            "part1": "HyperPlay mencoba untuk menebak folder penyimpanan yang tepat dan ini biasanya akan berhasil. Jika folder salah, gunakan kotak penimpaan untuk mengubahnya.",
+            "part2": "Jika Anda mengubah prefiks folder untuk Wine atau Proton, Anda perlu memeriksa lokasinya lagi karena Proton menggunakan prefiks (/pfx) dan nama pengguna (steamuser) yang berbeda. Jadi Anda dapat dengan mudah menghapus lokasi saat ini, keluar dari halaman pengaturan sinkronisasi, lalu kembali lagi dan biarkan HyperPlay menebak folder dengan prefiks yang tepat sekali lagi.",
+            "part3": "Sinkronisasi Manual: Pilih Unduh untuk mengunduh gim yang tersimpan di Awan. Unggah untuk mengunggah berkas lokal ke Awan. Unduh Paksa dan Unggah Paksa akan mengabaikan versi yang ada di penyimpanan lokal atau awan.",
+            "part4": "Sinkroninasi Penyimpanan Secara Otomatis akan menyinkronkan penyimpanan setiap kali Anda Memulai Gim dan setelah Anda selesai bermain."
+        },
+        "vkd3d": "VKD3D adalah lapisan translasi berbasis Vulkan untuk gim dengan DirectX 12. Mengaktifkannya dapat meningkatkan kompatibilitas secara signifikan. Tidak berpengaruh pada gim dengan DirectX versi lama.",
+        "wine": {
+            "part1": "HyperPlay mencari versi Wine, Proton, dan CrossOver di folder berikut ini:",
+            "part2": "Untuk tempat lain, gunakan tautan simbolis ke salah satu folder ini"
+        }
+    },
+    "info": {
+        "hyperplay": {
+            "beta": "Beta",
+            "newReleases": "Update Available!",
+            "stable": "Stable",
+            "version": "Versi HyperPlay"
+        },
+        "settings": "Pengaturan disimpan secara otomatis",
+        "version": "Versi Wine"
+    },
+    "infobox": {
+        "help": "Bantuan",
+        "requirements": "Persyaratan Sistem",
+        "wine-path": "Lokasi Wine"
+    },
+    "install": {
+        "path": "Pilih Lokasi Pemasangan"
+    },
+    "library": {
+        "refresh": "Segarkan",
+        "sortAscending": "Urutkan Naik",
+        "sortByStatus": "Urutkan Berdasarkan Status",
+        "sortDescending": "Urutkan Turun",
+        "toggleLayout": {
+            "grid": "Toggle to a grid layout",
+            "list": "Toggle to a list layout"
+        }
+    },
+    "Library": "Pustaka",
+    "loading": {
+        "default": "Memuat",
+        "website": "Memuat Situs Web"
+    },
+    "login": {
+        "externalLogin": "Log Masuk Eksternal"
+    },
+    "message": {
+        "sync": "Sinkronisasi Selesai",
+        "unsync": "Pembatalan Sinkronisasi Selesai"
+    },
+    "notify": {
+        "error": {
+            "move": "Galat dalam Memindahkan Gim",
+            "reparing": "Perbaikan Kesalahan"
+        },
+        "finished": {
+            "add": {
+                "steam": {
+                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "Ditambahkan ke Steam"
+                }
+            },
+            "remove": {
+                "steam": {
+                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "Dihapus dari Steam"
+                }
+            },
+            "reparing": "Perbaikan Selesai"
+        },
+        "install": {
+            "canceled": "Pemasangan Dibatalkan",
+            "error": "Pemasangan Gagal",
+            "finished": "Pemasangan Selesai",
+            "imported": "Gim Diimpor",
+            "startInstall": "Pemasangan Dimulai"
+        },
+        "moved": "Selesai Memindahkan",
+        "moving": "Memindahkan Gim",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "refresh": {
+            "error": "Tidak dapat mengambil rilis dari sumber, ini mungkin karena pembatasan API Github! Coba lagi nanti."
+        },
+        "uninstalled": "Dihapus",
+        "update": {
+            "canceled": "Pembaruan Dibatalkan",
+            "finished": "Pembaruan Selesai",
+            "started": "Pembaruan Dimulai"
+        }
+    },
+    "options": {
+        "advanced": {
+            "key": "Nama Variabel",
+            "placeHolderKey": "NAMA",
+            "placeHolderValue": "Misalnya: Lokasi/Ke/BerkasEkstra",
+            "title": "Opsi Lanjutan (Variabel Lingkungan):",
+            "value": "Nilai"
+        },
+        "gameargs": {
+            "placeholder": "Letakkan Argumen Peluncur di sini",
+            "title": "Argumen Gim (Untuk dijalankan setelah perintah):"
+        },
+        "quote-args-with-spaces": "Peringatan: Pastikan untuk mengutip argumen dengan spasi! Misalnya: \"lokasi/dengan spasi/\"",
+        "wrapper": {
+            "args": "Argumen",
+            "arguments_example": "Contoh argumen: --arg; --extra-file=\"file-path/ with/spaces\"",
+            "exe": "Wrapper",
+            "placeHolderKey": "Wrapper baru",
+            "placeHolderValue": "Argumen Wrapper",
+            "title": "Perintah Wrapper:"
+        }
+    },
+    "other": {
+        "gogdl-version": "Versi GOGDL: ",
+        "legendary-version": "Versi Legendary: ",
+        "weblate": "Bantu kami untuk menerjemahkan HyperPlay."
+    },
+    "placeholder": {
+        "alt-gogdl-bin": "Menggunakan GOGDL binary bawaan…",
+        "alt-legendary-bin": "Menggunakan Legendary binary bawaan...",
+        "egs-prefix": "Prefiks di mana EGS dipasang",
+        "prefered_language": "Kode 2 karakter (contohnya: \"en\" atau \"fr\")"
+    },
+    "platforms": {
+        "linux": "Linux",
+        "mac": "Mac",
+        "win": "Windows"
+    },
+    "Plugins": "Pengaya",
+    "Projects": "Proyek",
+    "Recent": "Dimainkan Baru-Baru Ini",
+    "search": "Cari Gim",
+    "setting": {
+        "adddesktopshortcuts": "Tambahkan pintasan desktop secara otomatis",
+        "addgamestostartmenu": "Tambahkan gim untuk memulai menu secara otomatis",
+        "alt-gogdl-bin": "Pilih GOGDL Binary alternatif untuk digunakan",
+        "alt-legendary-bin": "Pilih Legendary Binary Alternatif",
+        "audiofix": "Perbaikan Audio (Latensi Pulsa Audio )",
+        "autodxvk": "Pasang/Perbarui Otomatis DXVK di Prefiks",
+        "autosync": "Sinkronisasi Penyimpanan Otomatis",
+        "autovkd3d": "Pemasangan/Pembaruan VKD3D Otomatis di Prefiks",
+        "change-target-exe": "Pilih EXE alternatif untuk dijalankan",
+        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
+        "crossover-version": "Crossover Version",
+        "customWineProton": "Lokasi Wine/Proton Khusus",
+        "darktray": "Gunakan Ikon Baki Gelap",
+        "default-install-path": "Lokasi Pemasangan Bawaan",
+        "default-steam-path": "Lokasi Steam bawaan",
+        "defaultWinePrefix": "Atur Folder untuk Prefiks Wine baru",
+        "disable_controller": "Nonaktifkan navigasi HyperPlay menggunakan pengontrol",
+        "discordRPC": "Aktifkan Discord Rich Presence",
+        "download-no-https": "Unduh gim tanpa HTTPS (berguna untuk CDN misalnya LanCache)",
+        "egs-sync": "Sinkronkan dengan Epic Games yang Terpasang",
+        "enableFSRHack": "Aktifkan Peretasan FSR (perlu versi Wine yang mendukung)",
+        "eosOverlay": {
+            "cancelInstall": "Batal",
+            "checkForUpdates": "Periksa pembaruan",
+            "checkingForUpdates": "Memeriksa pembaruan...",
+            "currentVersion": "Versi Saat Ini: {{version}}",
+            "disable": "Nonaktif",
+            "enable": "Aktif",
+            "install": "Install",
+            "installed": "EOS Overlay terpasang",
+            "installing": "EOS Overlay sedang dipasang....",
+            "latestVersion": "Versi Terbaru: {{version}}",
+            "notInstalled": "EOS Overlay tidak dipasang",
+            "notInstalledMsg": "EOS Overlay tidak dipasang. Apakah Anda ingin memasangnya sekarang?",
+            "notInstalledTitle": "Overlay tidak dipasang",
+            "remove": "Copot",
+            "removeConfirm": "Apakah Anda yakin ingin mencopot EOS Overlay?",
+            "removeConfirmTitle": "Konfirmasi penghapusan Overlay",
+            "updateNow": "Update",
+            "updating": "Memperbarui..."
+        },
+        "esync": "Aktifkan Esync",
+        "exit-to-tray": "Keluar ke Baki Sistem",
+        "FsrSharpnessStrenght": "Kekuatan Ketajaman FSR",
+        "fsync": "Aktifkan Fsync",
+        "gamemode": "Gunakan GameMode (Feral Game Mode perlu dipasang)",
+        "language": "Pilih Bahasa",
+        "library_top_option": {
+            "disabled": "Matikan",
+            "favourites": "Gim Favorit",
+            "recently_played": "Gim yang Baru Dimainkan",
+            "recently_played_installed": "Recently Played Games (Only Installed)"
+        },
+        "library_top_section": "Bagian Atas Pustaka",
+        "log": {
+            "copy-to-clipboard": "Salin konten log ke papan klip",
+            "current-log": "Log Saat Ini",
+            "instructions": "Bergabunglah dengan Discord kami dan cari saluran yang cocok dengan sistem operasi Anda. Bagikan konten log yang ditampilkan di sini, dan sertakan deskripsi yang jelas tentang masalah yang dialami dengan informasi dan detail yang relevan.",
+            "instructions_title": "Bagaimana cara melaporkan masalah?",
+            "last-log": "Log Terakhir",
+            "no-file": "Tidak ditemukan berkas log",
+            "show-in-folder": "Tampilkan berkas log di dalam folder"
+        },
+        "mangohud": "Aktifkan Mangohud (Mangohud perlu dipasang)",
+        "manualsync": {
+            "download": "Unduh",
+            "forcedownload": "Unduh Paksa",
+            "forceupload": "Unggah Paksa",
+            "sync": "Sinkronisasi",
+            "syncing": "Menyinkronkan",
+            "title": "Sinkronisasi Penyimpanan Secara Manual",
+            "upload": "Unggah"
+        },
+        "maxRecentGames": "Gim yang Dimainkan Baru-Baru Ini",
+        "maxworkers": "Jumlah Maksimum Worker saat mengunduh",
+        "minimize-on-launch": "Minimalkan Jendela HyperPlay Setelah Gim Diluncurkan",
+        "offlinemode": "Jalankan Game Secara Luring",
+        "prefered_language": "Bahasa Pilihan (Kode Bahasa)",
+        "preferSystemLibs": "Lebih memilih pustaka sistem",
+        "primerun": "Gunakan Kartu Grafis untuk Rendering",
+        "resizableBar": "Aktifkan Resizable BAR (hanya untuk NVIDIA RTX 30xx saja)",
+        "runexe": {
+            "message": "Seret dan Jatuhkan Berkas di sini",
+            "title": "Jalankan EXE di Prefiks"
+        },
+        "savefolder": {
+            "placeholder": "Pilih folder gim tersimpan yang tepat"
+        },
+        "select_theme": "Pilih Tema",
+        "showfps": "Tampilkan FPS (DX9, 10, dan 11)",
+        "showUnrealMarket": "Tampilkan Unreal Marketplace (perlu memulai ulang)",
+        "start-in-tray": "Mulai Diminimalkan",
+        "steamruntime": "Gunakan Steam Runtime",
+        "winecrossoverbottle": "CrossOver Bottle",
+        "wineprefix": "Folder Prefiks Wine",
+        "wineversion": "Versi Wine"
+    },
+    "settings": {
+        "battlEyeRuntime": {
+            "installing": "Installing BattlEye Runtime...",
+            "name": "BattlEye AntiCheat Runtime"
+        },
+        "clear-cache": "Hapus Tembolok HyperPlay",
+        "copiedToClipboard": "Disalin ke Papan Klip!",
+        "copyToClipboard": "Salin Semua Pengaturan ke Papan Klip",
+        "eacRuntime": {
+            "gameModeRequired": {
+                "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
+                "title": "GameMode required"
+            },
+            "installing": "Installing EAC Runtime...",
+            "name": "EasyAntiCheat Runtime"
+        },
+        "gameMode": {
+            "eacRuntimeEnabled": {
+                "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
+                "title": "EAC runtime enabled"
+            }
+        },
+        "log": {
+            "long-log-hint": "Log terpotong, 1000 baris terakhir akan ditampilkan!"
+        },
+        "navbar": {
+            "advanced": "Tambahan",
+            "general": "Umum",
+            "log": "Log",
+            "other": "Lainnya",
+            "sync": "Sinkronisasi Penyimpanan",
+            "wineExt": "Wine Extensions"
+        },
+        "open-config-file": "Buka Berkas Pengaturan",
+        "reset-hyperplay": "Reset HyperPlay",
+        "saves": {
+            "label": "Save Location:",
+            "warning": "Fitur Cloud Saves masih dalam versi Beta, harap buat rekam cadang penyimpanan Anda sebelum menyinkronkan (jaga-jaga bila terjadi kesalahan)"
+        }
+    },
+    "Settings": "Pengaturan",
+    "sidebar": {
+        "collapse": "Tutup bilah samping",
+        "uncollapse": "Tampilkan bilah samping"
+    },
+    "status": {
+        "installing": "Memasang",
+        "logging": "Log Masuk...",
+        "processing": "Memproses berkas, harap tunggu"
+    },
+    "store": "Epic Store",
+    "stores": "Toko",
+    "title": {
+        "allGames": "Semua Gim",
+        "allUnreal": "Unreal - Semuanya",
+        "unrealAssets": "Unreal - Aset",
+        "unrealPlugins": "Unreal - Pengaya",
+        "unrealProjects": "Unreal - Proyek"
+    },
+    "toolbox": {
+        "settings": {
+            "default-wineprefix": "Pilih folder prefiks asali untuk konfigurasi yang baru",
+            "wineprefix": "Pilih Folder untuk Prefiks Wine yang Baru"
+        }
+    },
+    "tooltip": {
+        "addpath": "Tambahkan Lokasi Baru",
+        "removepath": "Hapus Lokasi"
+    },
+    "tray": {
+        "about": "Tentang",
+        "quit": "Keluar",
+        "reload": "Muat Ulang",
+        "show": "Tampilkan"
+    },
+    "Update Available!": "",
+    "userselector": {
+        "discord": "Discord",
+        "logout": "Keluar",
+        "logout_confirmation": "Apakah Anda yakin ingin keluar?",
+        "manageaccounts": "Kelola Akun",
+        "quit": "Keluar"
+    },
+    "webview": {
+        "controls": {
+            "back": "Kembali",
+            "forward": "Maju",
+            "openInBrowser": "Buka di peramban",
+            "reload": "Muat ulang halaman"
+        }
+    },
+    "wine": {
+        "actions": "Action",
+        "manager": {
+            "error": "Tidak dapat mengambil versi Wine/Proton saat ini.",
+            "link": "Manajer Wine",
+            "title": "Manajer Wine",
+            "unzipping": "Mengekstrak"
+        },
+        "release": "Release Date",
+        "size": "Ukuran"
+    }
+}

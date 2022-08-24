@@ -1,0 +1,228 @@
+.Settings {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  grid-template-columns: 1fr 5fr;
+  width: 100%;
+  border-radius: 1rem;
+  grid-area: content;
+  padding: 2rem 48px;
+  position: relative;
+  margin-bottom: 35px;
+}
+
+.Settings .Field,
+.Accessibility .Field,
+.InstallModal__dialog .Field {
+  margin: 16px 0px;
+  width: 100%;
+}
+
+.Settings .Field label,
+.Accessibility .Field label,
+.InstallModal__dialog .Field label {
+  cursor: default;
+  margin-bottom: 14px;
+  font: var(--font-secondary-regular);
+  font-size: 16px;
+  line-height: 19px;
+  color: var(--text-secondary);
+}
+
+.settingsWrapper {
+  margin-inline-end: auto;
+  max-width: 513px;
+  display: flex;
+  flex-direction: column;
+  place-self: center;
+  place-items: flex-start;
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+.headerTitle {
+  transition: 350ms;
+  margin-top: 0px;
+  margin-left: 20px;
+  margin-bottom: 6px;
+}
+
+.headerTitle > svg {
+  margin-left: 12px;
+}
+
+.settingSubheader {
+  text-align: left;
+  margin-top: 0;
+  padding-left: 20px;
+}
+
+.settingSubheader::before {
+  content: '• ';
+}
+
+.settingsWrapper > .backButton {
+  position: absolute;
+  top: 2rem;
+  right: 100%;
+}
+
+.settingsTools {
+  margin-block: 16px;
+  justify-content: left;
+  max-width: 512px;
+}
+
+.save {
+  cursor: default;
+  margin: 1em 0 0 18px;
+  padding-block-end: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: var(--font-secondary-regular-italic);
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  color: #5a5e5f;
+}
+
+.appName {
+  margin-inline-start: 18px;
+  padding-block: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: var(--font-secondary-regular-italic);
+  font-size: 14px;
+  line-height: 17px;
+  /* identical to box height */
+  color: #5a5e5f;
+}
+
+.save > .material-icons {
+  font-size: 28px;
+  margin-inline-start: 6px;
+}
+
+.warning {
+  color: yellow;
+  font-size: 13px;
+  width: 100%;
+  max-width: 513px;
+  white-space: break-spaces;
+  padding-top: 4px;
+}
+
+.smallLink {
+  font-size: 13px;
+  width: 100%;
+  max-width: 513px;
+  white-space: break-spaces;
+  padding-top: 4px;
+  cursor: pointer;
+  transition: 300ms;
+}
+
+.smallLink:hover {
+  color: var(--text-secondary);
+}
+
+a {
+  cursor: pointer;
+}
+.settingsWrapper > .button.is-text {
+  margin-inline: 8px;
+  padding-block: 8px;
+  color: var(--text-quartenary);
+}
+
+.button.is-footer {
+  margin-block: 8px;
+  min-width: 120px;
+  max-height: 80px;
+  background-color: transparent;
+  box-shadow: none;
+  color: var(--text-default);
+}
+
+.button.is-footer:hover,
+.button.is-footer:focus-visible {
+  background-color: var(--stop-button);
+  color: var(--text-hover);
+}
+
+.button.is-danger.is-footer {
+  background: transparent;
+  color: var(--danger-hover);
+}
+
+.button.is-danger.is-footer:hover,
+.button.is-danger.is-footer:focus-visible {
+  background: var(--danger);
+  color: var(--text-secondary);
+}
+
+.button.is-danger:disabled,
+.button.is-danger.is-footer:disabled {
+  background: var(--icon-disabled);
+  color: var(--text-default);
+}
+
+.button.is-footer.isSuccess {
+  color: var(--success) !important;
+}
+
+.footerFlex {
+  margin-inline-start: 6px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: 16px;
+}
+
+.button-icontext-flex {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  margin-block: auto;
+  margin-inline: auto;
+  gap: 4px;
+  position: relative;
+}
+
+.button-icontext-flex .button-icon-text {
+  margin-block: auto;
+  font-size: 13px;
+}
+
+.button-icon-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.addRemoveSvgButtons button {
+  min-width: none;
+  max-width: none;
+  margin: 0;
+}
+
+.eosSettings {
+  text-align: left;
+}
+
+.settingsWrapper .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.infoBox.saves-warning {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.infoBox.saves-warning svg {
+  padding-right: 10px;
+}

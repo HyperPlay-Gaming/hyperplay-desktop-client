@@ -1,0 +1,139 @@
+{
+    "box": {
+        "change": {
+            "message": "Ovo će promijeniti lokaciju instalacije za ovu igru, jeste li sigurni?",
+            "path": "Odaberite novu lokaciju za instalaciju",
+            "title": "Promijenite lokaciju instalacije igre"
+        },
+        "choose": "Odaberi",
+        "importpath": "Odaberi mapu igre za uvesti",
+        "move": {
+            "message": "Ovo može potrajati, jeste li sigurni?",
+            "path": "Odaberite gdje želite premjestiti",
+            "title": "Premjestite instalaciju igrice"
+        },
+        "no": "NE",
+        "repair": {
+            "message": "Želite li pokušati popraviti ovu igricu? Ovo može potrajati.",
+            "title": "Provjeri i Popravi"
+        },
+        "stopInstall": {
+            "keepInstalling": "Nastavite instalaciju",
+            "message": "Želite li ZADRŽATI preuzete datoteke?",
+            "title": "Zaustavi instalaciju"
+        },
+        "uninstall": {
+            "checkbox": "Želite li obrisati i prefix? Nemože se poništiti.",
+            "checkbox_prefix": "Prefix",
+            "message": "Želite li deinstalirati igricu?",
+            "title": "Deinstaliraj"
+        },
+        "update": {
+            "message": "Ova igra ima ažuriranje, želite li ažurirati sada?",
+            "title": "Igra treba ažuriranje"
+        },
+        "wineprefix": "Odaberite WinePrefix mapu",
+        "yes": "DA"
+    },
+    "button": {
+        "add_to_favourites": "Dodaj u omiljene",
+        "cancel": "Otkaži/Prekini",
+        "continue": "Nastavi preuzimanje",
+        "force_update": "Prisilno akturaliziraj ako je dostupno",
+        "hide_game": "Sakrij igru",
+        "import": "Uvezi igru",
+        "install": "Instaliraj",
+        "remove_from_favourites": "Makni iz omiljenih",
+        "unhide_game": "Prikaži igru",
+        "uninstall": "Deinstaliraj",
+        "update": "Ažuriraj"
+    },
+    "disabled": "Onemogućeno",
+    "dlc": {
+        "installDlcs": "Instaliraj sve DLC-eve"
+    },
+    "enabled": "Omogućeno",
+    "game": {
+        "downloadSize": "Veličina Preuzimanja",
+        "firstPlayed": "Prvo odigrano",
+        "info": "Info",
+        "installSize": "Veličina Instalacije",
+        "language": "Jezik",
+        "lastPlayed": "Zadnje odigrano",
+        "neverPlayed": "Nikad",
+        "platform": "Odaberi verziju platforme za instalirati",
+        "reuirements": "Zahtjevi sustava",
+        "tools": "Alati",
+        "totalPlayed": "Vrijeme igranja"
+    },
+    "gamecard": {
+        "moving": "Premještanje",
+        "repairing": "Popravljanje"
+    },
+    "generic": {
+        "error": "Nepoznata greška"
+    },
+    "info": {
+        "canRunOffline": "Internet Potreban",
+        "installedPlatform": "Instalirane Platforme",
+        "path": "Put instalacije",
+        "size": "Veličina",
+        "syncsaves": "Sinkroniziraj podatke",
+        "version": "Verzija"
+    },
+    "install": {
+        "disk-space-left": "Prostora dostupno",
+        "not-enough-disk-space": "Nema dovoljno prostora na disku",
+        "path": "Odaberi stazu instalacije",
+        "path-not-writtable": "Upozorenje: staza se možda ne može prepisati.",
+        "space-after-install": "Nakon Instalacije",
+        "wineprefix": "WinePrefix",
+        "wineversion": "Wine verzija"
+    },
+    "label": {
+        "playing": {
+            "start": "Igraj Sada",
+            "stop": "Igra se (Prekini)"
+        },
+        "saves": {
+            "syncing": "Sinkoniziranje podataka"
+        }
+    },
+    "launch": {
+        "options": "Opcije za pokretanje..."
+    },
+    "report_problem": "Prijavi problem za ovu igricu",
+    "sdl": {
+        "title": "Odaberite komponente za instalaciju"
+    },
+    "specs": {
+        "minimum": "Minimalno",
+        "recommended": "Preporučeno"
+    },
+    "status": {
+        "clickToUpdate": "Klikni za ažuriranje",
+        "hasUpdates": "Nova Verzija Dostupna!",
+        "installed": "Instalirano",
+        "installing": "Instaliranje u tijeku",
+        "moving": "Premještanje instalacije, molim pričekajte",
+        "notinstalled": "Ova igra nije instalirana",
+        "processing": "Obrada datoteka, pričekaj",
+        "reparing": "Popravljanje igrice, molimo pričekajte",
+        "totalDownloaded": "Sveukupno preuzeto",
+        "updating": "Ažuriranje igrice"
+    },
+    "submenu": {
+        "addShortcut": "Dodaj prečace",
+        "addToSteam": "Dodaj Steamu",
+        "change": "Promijeni put instalacije",
+        "disableEosOverlay": "Isključi EOS prekrivanje",
+        "enableEosOverlay": "Uključi EOS prekrivanje",
+        "move": "Premjesti igricu",
+        "protondb": "Provjeri Kompatibilnost",
+        "removeFromSteam": "Ukloni iz Steama",
+        "removeShortcut": "Ukloni prečace",
+        "settings": "Postavke",
+        "store": "Stranica Trgovine",
+        "verify": "Provjeri i popravi"
+    }
+}

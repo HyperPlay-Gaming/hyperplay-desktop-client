@@ -1,0 +1,139 @@
+{
+    "box": {
+        "change": {
+            "message": "Questo cambierà il percorso d'installazione del gioco, sei sicuro?",
+            "path": "Seleziona un nuovo percorso d'installazione",
+            "title": "Cambia il percorso d'installazione del gioco"
+        },
+        "choose": "Scegli",
+        "importpath": "Seleziona la cartella del gioco da importare",
+        "move": {
+            "message": "Quest'operazione può richiedere molto tempo, sei sicuro?",
+            "path": "Seleziona dove vuoi muoverla",
+            "title": "Muovi l'installazione del gioco"
+        },
+        "no": "NO",
+        "repair": {
+            "message": "Vuoi provare a riparare questo gioco? Potrebbe richiedere molto tempo.",
+            "title": "Verifica e ripara"
+        },
+        "stopInstall": {
+            "keepInstalling": "Continua l'installazione",
+            "message": "Desideri tenere i files scaricati?",
+            "title": "Ferma l'installazione"
+        },
+        "uninstall": {
+            "checkbox": "Vuoi rimuovere anche il prefisso? Non può essere annullato.",
+            "checkbox_prefix": "Prefix",
+            "message": "Vuoi disinstallare questo gioco?",
+            "title": "Disinstalla"
+        },
+        "update": {
+            "message": "Questo gioco ha un aggiornamento, desideri aggiornarlo ora?",
+            "title": "Il gioco richiede un aggiornamento"
+        },
+        "wineprefix": "Seleziona la cartella del prefisso di Wine",
+        "yes": "SI"
+    },
+    "button": {
+        "add_to_favourites": "Aggiungi Ai Preferiti",
+        "cancel": "Pausa/Annulla",
+        "continue": "Continua Download",
+        "force_update": "Forza aggiornamento se disponibile",
+        "hide_game": "Nascondi Gioco",
+        "import": "Importa gioco",
+        "install": "Installa",
+        "remove_from_favourites": "Rimuovi Dai Preferiti",
+        "unhide_game": "Mostra gioco",
+        "uninstall": "Disinstalla",
+        "update": "Update"
+    },
+    "disabled": "Disattivato",
+    "dlc": {
+        "installDlcs": "Installa tutti i DLC"
+    },
+    "enabled": "attivato",
+    "game": {
+        "downloadSize": "Dimensione del download",
+        "firstPlayed": "Giocato per la prima volta",
+        "info": "Info",
+        "installSize": "Dimensione dell'installazione",
+        "language": "Lingua",
+        "lastPlayed": "Giocato recentemente",
+        "neverPlayed": "Mai",
+        "platform": "Seleziona la versione della piattaforma da installare",
+        "reuirements": "Requisiti Di Sistema",
+        "tools": "Strumenti",
+        "totalPlayed": "Tempo giocato"
+    },
+    "gamecard": {
+        "moving": "Spostamento in corso",
+        "repairing": "Riparazione in corso"
+    },
+    "generic": {
+        "error": "Errore sconosciuto"
+    },
+    "info": {
+        "canRunOffline": "Online richiesto",
+        "installedPlatform": "Piattaforma installata",
+        "path": "Percorso d'installazione",
+        "size": "Dimensione",
+        "syncsaves": "Sincronizza i salvataggi",
+        "version": "Versione"
+    },
+    "install": {
+        "disk-space-left": "Spazio Disponibile",
+        "not-enough-disk-space": "Spazio su disco insufficiente",
+        "path": "Seleziona percorso di installazione",
+        "path-not-writtable": "Attenzione: il percorso potrebbe non essere scrivibile.",
+        "space-after-install": "Dopo l'installazione",
+        "wineprefix": "Prefisso Wine",
+        "wineversion": "Versione Wine"
+    },
+    "label": {
+        "playing": {
+            "start": "Esegui ora",
+            "stop": "In esecuzione (Stop)"
+        },
+        "saves": {
+            "syncing": "Sincronizzando i salvataggi"
+        }
+    },
+    "launch": {
+        "options": "Opzioni di avvio..."
+    },
+    "report_problem": "Segnala un problema nell'esecuzione di questo gioco",
+    "sdl": {
+        "title": "Seleziona i componenti da installare"
+    },
+    "specs": {
+        "minimum": "Minime",
+        "recommended": "Raccomandate"
+    },
+    "status": {
+        "clickToUpdate": "Click to Update",
+        "hasUpdates": "Nuova versione disponibile!",
+        "installed": "Installata",
+        "installing": "Installazione in corso",
+        "moving": "Spostamento dell'installazione in corso, per favore attendi",
+        "notinstalled": "Questo gioco non è installato",
+        "processing": "File in elaborazione, attendere",
+        "reparing": "Riparazione del gioco in corso, per favore attendi",
+        "totalDownloaded": "Totale scaricato",
+        "updating": "Aggiornamento in corso"
+    },
+    "submenu": {
+        "addShortcut": "Aggiungi scorciatoia",
+        "addToSteam": "Aggiungi a Steam",
+        "change": "Cambia percorso d'installazione",
+        "disableEosOverlay": "Disabilita overlay EOS",
+        "enableEosOverlay": "Abilita overlay EOS",
+        "move": "Muovi gioco",
+        "protondb": "Controlla compatibilità",
+        "removeFromSteam": "Rimuovi da Steam",
+        "removeShortcut": "Rimuovi le scorciatoie",
+        "settings": "Impostazioni",
+        "store": "Pagina dello store",
+        "verify": "Verifica e ripara"
+    }
+}

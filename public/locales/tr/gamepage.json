@@ -1,0 +1,139 @@
+{
+    "box": {
+        "change": {
+            "message": "Bu oyunun kurulum yerini değiştirecek, emin misin?",
+            "path": "Yeni kurulum yeri seçin",
+            "title": "Oyun Kurulum Yerini Değiştir"
+        },
+        "choose": "Seç",
+        "importpath": "İçeri Aktarılacak Oyun Klasörünü Seçin",
+        "move": {
+            "message": "Bu uzun sürebilir, emin misin?",
+            "path": "Nereye taşımak istediğinizi seçin",
+            "title": "Oyun kurulumunu taşı"
+        },
+        "no": "HAYIR",
+        "repair": {
+            "message": "Oyunu onarmayı denemek ister misiniz? Bu uzun sürebilir.",
+            "title": "Doğrula ve Onar"
+        },
+        "stopInstall": {
+            "keepInstalling": "Kuruluma Devam Et",
+            "message": "İndirilen dosyaları SAKLAMAK ister misiniz?",
+            "title": "Kurulumu Durdur"
+        },
+        "uninstall": {
+            "checkbox": "Prefix'i de kaldırmak ister misiniz? Bu geri alınamaz.",
+            "checkbox_prefix": "Prefix",
+            "message": "Oyunu kaldırmak istiyor musunuz?",
+            "title": "Kaldır"
+        },
+        "update": {
+            "message": "Bu oyunun bir güncellemesi var, güncelleme şimdi uygulansın mı?",
+            "title": "Oyunun Güncellenmesi Gerekiyor"
+        },
+        "wineprefix": "Wine Prefix Klasörünü Seçin",
+        "yes": "EVET"
+    },
+    "button": {
+        "add_to_favourites": "Favorilere Ekle",
+        "cancel": "Duraklat/İptal",
+        "continue": "İndirmeye Devam Et",
+        "force_update": "Varsa Güncellemeyi Zorunlu Kur",
+        "hide_game": "Oyunu Gizle",
+        "import": "Oyunu İçe Aktar",
+        "install": "Kur",
+        "remove_from_favourites": "Favorilerden Kaldır",
+        "unhide_game": "Oyunu Göster",
+        "uninstall": "Kaldır",
+        "update": "Güncelle"
+    },
+    "disabled": "Devre dışı",
+    "dlc": {
+        "installDlcs": "Tüm DLC'leri kur"
+    },
+    "enabled": "Etkin",
+    "game": {
+        "downloadSize": "İndirme Boyutu",
+        "firstPlayed": "İlk Oynanan",
+        "info": "Info",
+        "installSize": "Kurulum Boyutu",
+        "language": "Dil",
+        "lastPlayed": "Son Oynanan",
+        "neverPlayed": "Hiç Oynanmadı",
+        "platform": "Kurulacak Platform Sürümünü Seç",
+        "reuirements": "Sistem Gereksinimleri",
+        "tools": "Araçlar",
+        "totalPlayed": "Oynanan Zaman"
+    },
+    "gamecard": {
+        "moving": "Taşınıyor",
+        "repairing": "Onarılıyor"
+    },
+    "generic": {
+        "error": "Bilinmeyen hata"
+    },
+    "info": {
+        "canRunOffline": "Çevrim İçi Gerekli",
+        "installedPlatform": "Kurulu Platform",
+        "path": "Kurulum Yeri",
+        "size": "Boyut",
+        "syncsaves": "Kayıtları Eşzamanla",
+        "version": "Sürüm"
+    },
+    "install": {
+        "disk-space-left": "Kullanılabilir Alan",
+        "not-enough-disk-space": "Yeterli disk alanı yok",
+        "path": "Kurulum Yolunu Seçin",
+        "path-not-writtable": "Uyarı: yol yazılabilir olmayabilir.",
+        "space-after-install": "Kurulumdan Sonra",
+        "wineprefix": "WinePrefix",
+        "wineversion": "Wine sürümü"
+    },
+    "label": {
+        "playing": {
+            "start": "Şimdi Oyna",
+            "stop": "Oynanıyor (Durdur)"
+        },
+        "saves": {
+            "syncing": "Kayıtlar Eşzamanlanıyor"
+        }
+    },
+    "launch": {
+        "options": "Başlatma Seçenekleri..."
+    },
+    "report_problem": "Bu oyunun çalışmasıyla ilgili bir sorun bildir",
+    "sdl": {
+        "title": "Kurulacak bileşenleri seç"
+    },
+    "specs": {
+        "minimum": "Asgari",
+        "recommended": "Tavsiye edilen"
+    },
+    "status": {
+        "clickToUpdate": "Güncellemek için tıklayın",
+        "hasUpdates": "Yeni sürüm var!",
+        "installed": "Kuruldu",
+        "installing": "Kuruluyor",
+        "moving": "Kurulum taşınıyor, lütfen bekleyin",
+        "notinstalled": "Bu oyun kurulu değil",
+        "processing": "Dosyalar işleniyor, lütfen bekleyin",
+        "reparing": "Oyun onarılıyor, lütfen bekleyin",
+        "totalDownloaded": "Toplam İndirilen",
+        "updating": "Oyun Güncelleniyor"
+    },
+    "submenu": {
+        "addShortcut": "Kısayol ekle",
+        "addToSteam": "Steam'e Ekle",
+        "change": "Kurulum yerini değiştir",
+        "disableEosOverlay": "Disable EOS Overlay",
+        "enableEosOverlay": "Enable EOS Overlay",
+        "move": "Oyunu Taşı",
+        "protondb": "Uyumluluğu Denetle",
+        "removeFromSteam": "Steam'den Kaldır",
+        "removeShortcut": "Kısayolları kaldır",
+        "settings": "Ayarlar",
+        "store": "Mağaza Sayfası",
+        "verify": "Doğrula ve Onar"
+    }
+}

@@ -1,0 +1,139 @@
+{
+    "box": {
+        "change": {
+            "message": "இது இந்த விளையாட்டின் நிறுவல் இடத்தை மாற்றும், உறுதி செய்யவா?",
+            "path": "புதிய நிறுவல் பாதையை தேர்வுசெய்க",
+            "title": "விளையாட்டுகளை நிறுவும் பாதையை மாற்று"
+        },
+        "choose": "தேர்வு செய்",
+        "importpath": "இறக்குமதி செய்ய விளையாட்டு கோப்புறையை தேர்வுசெய்க",
+        "move": {
+            "message": "இது நீண்ட நேரம் எடுக்கலாம், உறுதி செய்யவா?",
+            "path": "எங்கு நகர்த்த விரும்புகிறீர்கள் என்பதை தேர்வுசெய்க",
+            "title": "விளையாட்டு நிறுவலை நகர்த்து"
+        },
+        "no": "இல்லை",
+        "repair": {
+            "message": "இந்த விளையாட்டை சரிசெய்ய விரும்புகிறீர்களா? இது நீண்ட நேரம் எடுக்கலாம்.",
+            "title": "சரிபார்த்து சரிசெய்"
+        },
+        "stopInstall": {
+            "keepInstalling": "நிறுவுவதை தொடரு",
+            "message": "பதிவிறக்கம் செய்யப்பட்ட கோப்புகளை வைத்திருக்க விரும்புகிறீர்களா?",
+            "title": "நிறுவலை நிறுத்து"
+        },
+        "uninstall": {
+            "checkbox": "முன்னொட்டையும் நீக்க விரும்புகிறீர்களா? இதை செயல்தவிர்க்க முடியாது.",
+            "checkbox_prefix": "முன்னொட்டு",
+            "message": "இந்த விளையாட்டை நிறுவல்-நீக்க விரும்புகிறீர்களா?",
+            "title": "நிறுவல் நீக்கு"
+        },
+        "update": {
+            "message": "இந்த விளையாட்டுக்கு ஒரு புதுப்பிப்பு உள்ளது, இப்போது புதுப்பிக்க விரும்புகிறீர்களா?",
+            "title": "விளையாட்டு புதுப்பிப்பு தேவை"
+        },
+        "wineprefix": "ஒயின் ப்ரிஃபிக்ஸ் கோப்புறையைத் தேர்ந்தெடுக்கவும்",
+        "yes": "ஆம்"
+    },
+    "button": {
+        "add_to_favourites": "Add To Favourites",
+        "cancel": "இடைநிறுத்து/ரத்துசெய்",
+        "continue": "பதிவிறக்கத்தை தொடரு",
+        "force_update": "Force Update if Available",
+        "hide_game": "Hide Game",
+        "import": "விளையாட்டை இறக்குமதி செய்",
+        "install": "நிறுவு",
+        "remove_from_favourites": "Remove From Favourites",
+        "unhide_game": "Unhide Game",
+        "uninstall": "நிறுவல் நீக்கு",
+        "update": "Update"
+    },
+    "disabled": "முடக்கப்பட்டது",
+    "dlc": {
+        "installDlcs": "Install all DLCs"
+    },
+    "enabled": "இயக்கப்பட்டது",
+    "game": {
+        "downloadSize": "Download Size",
+        "firstPlayed": "First Played",
+        "info": "Info",
+        "installSize": "Install Size",
+        "language": "Language",
+        "lastPlayed": "Last Played",
+        "neverPlayed": "Never",
+        "platform": "Select Platform Version to Install",
+        "reuirements": "System Requirements",
+        "tools": "Tools",
+        "totalPlayed": "Time Played"
+    },
+    "gamecard": {
+        "moving": "நகர்த்தப்படுகிறது",
+        "repairing": "பழுதுபார்க்கப்படுகிறது"
+    },
+    "generic": {
+        "error": "Unknown error"
+    },
+    "info": {
+        "canRunOffline": "Online Required",
+        "installedPlatform": "Installed Platform",
+        "path": "நிறுவல் பாதை",
+        "size": "அளவு",
+        "syncsaves": "சேமிப்புகளை ஒத்திசைவு செய்",
+        "version": "பதிப்பு"
+    },
+    "install": {
+        "disk-space-left": "Space Available",
+        "not-enough-disk-space": "Not enough disk space",
+        "path": "Select Install Path",
+        "path-not-writtable": "Warning: path might not be writable.",
+        "space-after-install": "After Install",
+        "wineprefix": "WinePrefix",
+        "wineversion": "வைன் பதிப்பு"
+    },
+    "label": {
+        "playing": {
+            "start": "இப்போது விளையாடு",
+            "stop": "விளையாடப்படுகிறது (நிறுத்து)"
+        },
+        "saves": {
+            "syncing": "சேமிப்புகள் ஒத்திசைவு செய்யப்படுகிறது"
+        }
+    },
+    "launch": {
+        "options": "Launch Options..."
+    },
+    "report_problem": "Report a problem running this game",
+    "sdl": {
+        "title": "Select components to Install"
+    },
+    "specs": {
+        "minimum": "குறைந்தபட்சம்",
+        "recommended": "பரிந்துரைக்கப்பட்டது"
+    },
+    "status": {
+        "clickToUpdate": "புதுப்பிக்க அழுத்து",
+        "hasUpdates": "புதிய பதிப்பு உள்ளது!",
+        "installed": "நிறுவப்பட்டது",
+        "installing": "நிறுவப்படுகிறது",
+        "moving": "நிறுவல் நகர்த்தப்படுகிறது, தயவுசெய்து காத்திருக்கவும்",
+        "notinstalled": "இந்த விளையாட்டு நிறுவப்படவில்லை",
+        "processing": "Processing files, please wait",
+        "reparing": "விளையாட்டு பழுதுபார்க்கப்படுகிறது, தயவுசெய்து காத்திருக்கவும்",
+        "totalDownloaded": "மொத்த பதிவிறக்கம்",
+        "updating": "விளையாட்டு புதுப்பிக்கப்படுகிறது"
+    },
+    "submenu": {
+        "addShortcut": "குறுக்குவழியை சேர்",
+        "addToSteam": "Add to Steam",
+        "change": "நிறுவல் பாதையை மாற்று",
+        "disableEosOverlay": "Disable EOS Overlay",
+        "enableEosOverlay": "Enable EOS Overlay",
+        "move": "விளையாட்டை நகர்த்து",
+        "protondb": "பொருந்தக்கூடிய தன்மையை சரிபார்",
+        "removeFromSteam": "Remove from Steam",
+        "removeShortcut": "Remove shortcuts",
+        "settings": "அமைப்புகள்",
+        "store": "விற்பனைக்கூடம்",
+        "verify": "சரிபார்த்து சரிசெய்"
+    }
+}

@@ -1,0 +1,139 @@
+{
+    "box": {
+        "change": {
+            "message": "これにより、このゲームのインストール場所が変更されます、よろしいですか？",
+            "path": "新しいインストールパスを選択します",
+            "title": "ゲームのインストールパスを変更します"
+        },
+        "choose": "選ぶ",
+        "importpath": "インポートするゲームフォルダを選択します",
+        "move": {
+            "message": "これには長い時間がかかることがあります、よろしいですか ？",
+            "path": "移動したい場所を選択してください",
+            "title": "ゲームのインストールを移動します"
+        },
+        "no": "いいえ",
+        "repair": {
+            "message": "このゲームを修復したいですか？これには長い時間がかかることがあります。",
+            "title": "確認と修復"
+        },
+        "stopInstall": {
+            "keepInstalling": "インストールを続ける",
+            "message": "ダウンロードしたファイルを保持しますか？",
+            "title": "インストールを停止する"
+        },
+        "uninstall": {
+            "checkbox": "Would you like to remove the prefix aswell? This can't be undone.",
+            "checkbox_prefix": "Prefix",
+            "message": "このゲームをアンインストールしたいですか？",
+            "title": "アンインストール"
+        },
+        "update": {
+            "message": "このゲームにはアップデートがありますが、今すぐアップデートしたいですか？",
+            "title": "ゲームの更新が必要"
+        },
+        "wineprefix": "Select WinePrefix Folder",
+        "yes": "はい"
+    },
+    "button": {
+        "add_to_favourites": "Add To Favourites",
+        "cancel": "一時停止/キャンセル",
+        "continue": "ダウンロードを続ける",
+        "force_update": "Force Update if Available",
+        "hide_game": "Hide Game",
+        "import": "インポート",
+        "install": "インストール",
+        "remove_from_favourites": "Remove From Favourites",
+        "unhide_game": "Unhide Game",
+        "uninstall": "アンインストール",
+        "update": "アップデート"
+    },
+    "disabled": "無効になっています",
+    "dlc": {
+        "installDlcs": "すべてのDLCをインストールします"
+    },
+    "enabled": "有効になっています",
+    "game": {
+        "downloadSize": "ダウンロードサイズ",
+        "firstPlayed": "最初にプレイした",
+        "info": "Info",
+        "installSize": "インストールサイズ",
+        "language": "Language",
+        "lastPlayed": "最後にプレイした",
+        "neverPlayed": "一度もない",
+        "platform": "Select Platform Version to Install",
+        "reuirements": "System Requirements",
+        "tools": "Tools",
+        "totalPlayed": "プレイ時間"
+    },
+    "gamecard": {
+        "moving": "移動しています",
+        "repairing": "修復しています"
+    },
+    "generic": {
+        "error": "Unknown error"
+    },
+    "info": {
+        "canRunOffline": "Online Required",
+        "installedPlatform": "Installed Platform",
+        "path": "インストールパス",
+        "size": "サイズ",
+        "syncsaves": "保存を同期",
+        "version": "バージョン"
+    },
+    "install": {
+        "disk-space-left": "Space Available",
+        "not-enough-disk-space": "Not enough disk space",
+        "path": "Select Install Path",
+        "path-not-writtable": "Warning: path might not be writable.",
+        "space-after-install": "After Install",
+        "wineprefix": "WinePrefix",
+        "wineversion": "Wine Version"
+    },
+    "label": {
+        "playing": {
+            "start": "プレイ",
+            "stop": "プレイしています（停止）"
+        },
+        "saves": {
+            "syncing": "保存を同期しています"
+        }
+    },
+    "launch": {
+        "options": "Launch Options..."
+    },
+    "report_problem": "Report a problem running this game",
+    "sdl": {
+        "title": "インストールするコンポーネントを選択します"
+    },
+    "specs": {
+        "minimum": "最小",
+        "recommended": "推奨される"
+    },
+    "status": {
+        "clickToUpdate": "クリックして更新",
+        "hasUpdates": "新しいバージョンが利用可能です！",
+        "installed": "インストールされています",
+        "installing": "インストールしています",
+        "moving": "インストールを移動しています、お待ちください",
+        "notinstalled": "このゲームはインストールされていません",
+        "processing": "Processing files, please wait",
+        "reparing": "ゲームを修復しています、お待ちください",
+        "totalDownloaded": "ダウンロードの総数",
+        "updating": "ゲームを更新しています"
+    },
+    "submenu": {
+        "addShortcut": "ショートカットを追加する",
+        "addToSteam": "Add to Steam",
+        "change": "インストールパスを変更する",
+        "disableEosOverlay": "Disable EOS Overlay",
+        "enableEosOverlay": "Enable EOS Overlay",
+        "move": "ゲームを移動する",
+        "protondb": "互換性を確認する",
+        "removeFromSteam": "Remove from Steam",
+        "removeShortcut": "Remove shortcuts",
+        "settings": "設定",
+        "store": "ストアページ",
+        "verify": "確認と修復"
+    }
+}

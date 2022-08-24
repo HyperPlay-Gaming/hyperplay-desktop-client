@@ -1,0 +1,29 @@
+.gameRequirements {
+  flex-direction: column;
+  user-select: text;
+}
+.gameRequirements table td {
+  width: 40%;
+  vertical-align: baseline;
+  padding: 0.5em;
+}
+
+.gameRequirements table td:first-child {
+  width: 20%;
+}
+
+table td.specs {
+  cursor: default;
+  color: var(--accent);
+  opacity: 0.8;
+}
+
+.gameRequirements table span.title {
+  color: var(--text-secondary);
+  font-size: 1em;
+}
+
+table span.text {
+  color: var(--text-secondary);
+  font-size: 0.9em;
+}

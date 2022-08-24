@@ -1,0 +1,81 @@
+.InstallModal__dialog {
+  width: 48vw;
+  height: fit-content;
+  max-width: 560px;
+  max-height: 100vh;
+}
+
+.InstallModal__dialog--loading {
+  width: 200px;
+  height: 200px;
+}
+
+.InstallModal__platformIcon {
+  margin-left: 16px;
+}
+
+.InstallModal__sizes {
+  display: inline-grid;
+  grid-gap: 24px;
+  grid-auto-flow: column;
+  margin: 8px 0;
+}
+
+.InstallModal__size {
+  display: inline-grid;
+  grid-template-areas: 'icon label' 'icon value';
+}
+
+.InstallModal__sizeIcon {
+  grid-area: icon;
+  align-self: center;
+  height: 28px;
+  margin-right: 16px;
+  color: var(--text-secondary);
+}
+
+.InstallModal__sizeLabel {
+  grid-area: label;
+  line-height: 20px;
+  color: var(--text-secondary);
+}
+
+.InstallModal__sizeValue {
+  grid-area: value;
+  line-height: 24px;
+}
+
+.InstallModal__sectionHeader {
+  margin: 16px 0;
+  color: var(--text-secondary);
+}
+
+.InstallModal__toggle {
+  display: flex;
+  align-items: center;
+  margin: 16px 0;
+  cursor: pointer;
+}
+
+.InstallModal__toggle .switch {
+  margin: 0 8px 0 13px;
+  transform: scale(1.5) translateX(33%);
+}
+
+.InstallModal__dlcs,
+.InstallModal__sdls {
+  margin: 0 16px;
+}
+
+.InstallModal__dlcsList {
+  max-width: 300px;
+  margin: 16px calc(16px + 8px + 13px);
+  color: var(--text-default);
+}
+
+.diskSpaceInfo {
+  font-size: 14px;
+  align-self: flex-start;
+  padding: 4px 0 4px 8px;
+  color: var(--text-secondary);
+}

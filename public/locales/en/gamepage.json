@@ -1,0 +1,139 @@
+{
+    "box": {
+        "change": {
+            "message": "This will change the install location of this game, are you sure?",
+            "path": "Choose a new install path",
+            "title": "Change Games Install Path"
+        },
+        "choose": "Choose",
+        "importpath": "Choose Game Folder to import",
+        "move": {
+            "message": "This can take a long time, are you sure?",
+            "path": "Choose where you want to move",
+            "title": "Move Game Installation"
+        },
+        "no": "NO",
+        "repair": {
+            "message": "Do you want to try to repair this game? This can take a long time.",
+            "title": "Verify and Repair"
+        },
+        "stopInstall": {
+            "keepInstalling": "Keep Installing",
+            "message": "Do you wish to KEEP downloaded files?",
+            "title": "Stop Installation"
+        },
+        "uninstall": {
+            "checkbox": "Would you like to remove the prefix as well? This can't be undone.",
+            "checkbox_prefix": "Prefix",
+            "message": "Do you want to uninstall this game?",
+            "title": "Uninstall"
+        },
+        "update": {
+            "message": "This game has an update, apply update now?",
+            "title": "Game Needs Update"
+        },
+        "wineprefix": "Select WinePrefix Folder",
+        "yes": "YES"
+    },
+    "button": {
+        "add_to_favourites": "Add To Favourites",
+        "cancel": "Pause/Cancel",
+        "continue": "Continue Download",
+        "force_update": "Force Update if Available",
+        "hide_game": "Hide Game",
+        "import": "Import Game",
+        "install": "Install",
+        "remove_from_favourites": "Remove From Favourites",
+        "unhide_game": "Unhide Game",
+        "uninstall": "Uninstall",
+        "update": "Update"
+    },
+    "disabled": "Disabled",
+    "dlc": {
+        "installDlcs": "Install all DLCs"
+    },
+    "enabled": "Enabled",
+    "game": {
+        "downloadSize": "Download Size",
+        "firstPlayed": "First Played",
+        "info": "Info",
+        "installSize": "Install Size",
+        "language": "Language",
+        "lastPlayed": "Last Played",
+        "neverPlayed": "Never",
+        "platform": "Select Platform Version to Install",
+        "reuirements": "System Requirements",
+        "tools": "Tools",
+        "totalPlayed": "Time Played"
+    },
+    "gamecard": {
+        "moving": "Moving",
+        "repairing": "Repairing"
+    },
+    "generic": {
+        "error": "Unknown error"
+    },
+    "info": {
+        "canRunOffline": "Online Required",
+        "installedPlatform": "Installed Platform",
+        "path": "Install Path",
+        "size": "Size",
+        "syncsaves": "Sync Saves",
+        "version": "Version"
+    },
+    "install": {
+        "disk-space-left": "Space Available",
+        "not-enough-disk-space": "Not enough disk space",
+        "path": "Select Install Path",
+        "path-not-writtable": "Warning: path might not be writable.",
+        "space-after-install": "After Install",
+        "wineprefix": "WinePrefix",
+        "wineversion": "Wine version"
+    },
+    "label": {
+        "playing": {
+            "start": "Play Now",
+            "stop": "Playing (Stop)"
+        },
+        "saves": {
+            "syncing": "Syncing Saves"
+        }
+    },
+    "launch": {
+        "options": "Launch Options..."
+    },
+    "report_problem": "Report a problem running this game",
+    "sdl": {
+        "title": "Select components to Install"
+    },
+    "specs": {
+        "minimum": "Minimum",
+        "recommended": "Recommended"
+    },
+    "status": {
+        "clickToUpdate": "Click to Update",
+        "hasUpdates": "New Version Available!",
+        "installed": "Installed",
+        "installing": "Installing",
+        "moving": "Moving Installation, please wait",
+        "notinstalled": "This game is not installed",
+        "processing": "Processing files, please wait",
+        "reparing": "Repairing Game, please wait",
+        "totalDownloaded": "Total Downloaded",
+        "updating": "Updating Game"
+    },
+    "submenu": {
+        "addShortcut": "Add shortcut",
+        "addToSteam": "Add to Steam",
+        "change": "Change install path",
+        "disableEosOverlay": "Disable EOS Overlay",
+        "enableEosOverlay": "Enable EOS Overlay",
+        "move": "Move Game",
+        "protondb": "Check Compatibility",
+        "removeFromSteam": "Remove from Steam",
+        "removeShortcut": "Remove shortcuts",
+        "settings": "Settings",
+        "store": "Store Page",
+        "verify": "Verify and Repair"
+    }
+}

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=HyperPlay
+Exec=hyperplay-run
+Terminal=false
+Type=Application
+Icon=gg.hyperplay.hp
+StartupWMClass=HyperPlay
+Comment=An Open Source GOG and Epic Games launcher
+MimeType=x-scheme-handler/hyperplay;
+Categories=Game;

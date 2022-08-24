@@ -1,0 +1,562 @@
+{
+    "accessibility": {
+        "actions_font_family": "خانواده فونت اعمال (پیش فرض: \"Rubik\")",
+        "all_tiles_in_color": "نمایش رنگی تمام کاشی های بازی",
+        "content_font_family": "خانواده فونت محتوا (پیش فرض: \"Cabin\")",
+        "fonts": "فونت ها",
+        "title": "دسترسی ها",
+        "zoom": "زوم"
+    },
+    "All": "همه",
+    "anticheat": {
+        "anticheats": "آنتی چیت ها",
+        "may_not_work": "ممکن است به خاطر پشتیبانی ناقص یا عدم پشتیبانی آنتی چیت کار نکند.",
+        "reference": "مرجع",
+        "source": "Source",
+        "status": "Status",
+        "title": "این بازی شامل نرم افزار آنتی چیت می باشد"
+    },
+    "Assets": "دارایی ها",
+    "box": {
+        "cache-cleared": {
+            "message": "کش HyperPlay پاک شد.",
+            "title": "کش پاک شد"
+        },
+        "choose": "انتخاب",
+        "choose-egs-prefix": "انتخاب محل نصب شده EGS",
+        "choose-gogdl-binary": "انتخاب باینری GOGDL (نیازمند راهاندازی مجدد)",
+        "choose-legendary-binary": "انتخاب باینری Legendary",
+        "customWine": "انتخاب فایل باینری Wine یا Proton",
+        "default-install-path": "انتخاب محل پیشفرض نصب",
+        "default-steam-path": "مسیر استیم.",
+        "downloadNow": "شروع دانلود",
+        "error": {
+            "add": {
+                "steam": {
+                    "body": "افزودن {{game}} به استیم با مشکل مواجه شد:{{newLine}} {{error}}",
+                    "title": "خطای افزودن"
+                }
+            },
+            "credentials": {
+                "message": "اعتبار ورود شما منقضی شده است، لطفا دوباره خارج شده و داخل شوید."
+            },
+            "cx-bottle-not-found": {
+                "message": "باتل CrossOver \"{{bottle_name}}\" موجود نمی باشد، نمیتوان اجرا کرد!",
+                "title": "باتل CrossOver یافت نشد"
+            },
+            "diskspace": {
+                "message": "فضای ذخیره سازی کافی موجود نیست",
+                "title": "فضایی موجود نیست"
+            },
+            "dxvk": {
+                "message": "خطا در نصب DXVK/VKD3D! اتصال به اینترنت خود را چک کنید!",
+                "title": "خطای DXVK/VKD3D"
+            },
+            "folder-not-found": {
+                "title": "به نظر می رسد پوشه بازی حذف شده است،cآیا می خواهید بازی از لیست نصب شده ها حذف شود؟"
+            },
+            "generic": {
+                "message": "",
+                "title": ""
+            },
+            "no-offline-mode": {
+                "message": "اجرا متوقف شد! بازی برای اجرا به اتصال اینترنت نیاز دارد.",
+                "title": "حالت آفلاین پشتیبانی نمیشود."
+            },
+            "title": "خطا",
+            "uncaught-exception": {
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
+                "title": "Uncaught Exception occured!"
+            },
+            "update": {
+                "message": "مشکلی در به روز رسانی پیش آمد، لطفا لاگ ها را بررسی کرده و مجددا امتحان کنید!",
+                "title": "Update Error"
+            },
+            "wine-not-found": {
+                "message": "نسخه ای از Wine انتخاب نشده است. تنظیمات بازی را چک کنید!",
+                "title": "Wine یافت نشد"
+            }
+        },
+        "info": {
+            "update": {
+                "changelog": "باز کردن تغییرات جدید",
+                "detail": "آیا می خواهید در پس زمینه به روز رسانی را دانلود کنید؟",
+                "message": "نسخه جدید موجود است!",
+                "message-finished": "آیا می خواهید اکنون HyperPlay را مجددا اجرا کنید؟",
+                "title": "HyperPlay",
+                "title-finished": "به روز رسانی به پایان رسید"
+            }
+        },
+        "no": "خیر",
+        "ok": "اوکی",
+        "protocol": {
+            "install": {
+                "not_installed": "نصب نشده است، آیا میخواهید آن را نصب کنید؟"
+            }
+        },
+        "quit": {
+            "message": "کارهای ناتمامی موجود است، آیا مطمئن هستید؟",
+            "title": "خروج"
+        },
+        "reset-hyperplay": {
+            "question": {
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
+            }
+        },
+        "runexe": {
+            "title": "انتخاب EXE برای اجرا"
+        },
+        "select": {
+            "button": "انتخاب",
+            "exe": "انتخاب EXE"
+        },
+        "shortcuts": {
+            "message": "میانبرها در دسکتاپ و منوی استارت ایجاد شدند",
+            "message-remove": "میانبرها از میزکار و منوی استارت حذف شدند",
+            "title": "میانبرها"
+        },
+        "sync": {
+            "button": "انتخاب",
+            "error": "مسیر نامعتبر",
+            "title": "انتخاب محل ذخیره"
+        },
+        "vcruntime": {
+            "install": {
+                "message": "The download links for the Visual C++ Runtimes have been opened. Please install both the x86 and x64 versions."
+            },
+            "notfound": {
+                "message": "The Microsoft Visual C++ Runtimes are not installed, which are required by some games",
+                "title": "VCRuntime not installed"
+            }
+        },
+        "warning": {
+            "epic": {
+                "import": "سرورهای اپیک در حال حاضر قطعی عمده دارند، بازی نمیتواند اضافه شود!",
+                "install": "سرورهای اپیک در حال حاضر قطعی عمده دارند، بازی نمیتواند نصب شود!",
+                "update": "سرورهای اپیک در حال حاضر قطعی عمده دارند، بازی نمیتواند بهروزرسانی شود!"
+            },
+            "title": "هشدار"
+        },
+        "wineprefix": "انتخاب پوشه Wine Prefix",
+        "yes": "بله"
+    },
+    "button": {
+        "go_to_library": "رفتن به کتابخانه",
+        "login": "ورود",
+        "sync": "همگام سازی",
+        "syncing": "در حال همگام سازی",
+        "unsync": "عدم همگام سازی"
+    },
+    "controller": {
+        "hints": {
+            "activate": "Activate",
+            "back": "Back",
+            "backspace": "Backspace",
+            "close_context_menu": "Close context menu",
+            "close_dialog": "Close dialog",
+            "close_keyboard": "Close keyboard",
+            "context_menu": "Context menu",
+            "game_details": "Game details",
+            "game_settings": "Game settings",
+            "install_game": "Install game",
+            "move_cursor": "Move cursor",
+            "none": "None",
+            "open_virtual_keyboard": "Open virtual keyboard",
+            "play_game": "Play game",
+            "scroll": "Scroll",
+            "space": "Space",
+            "update_game": "Update game"
+        }
+    },
+    "docs": "Documentation",
+    "epic": {
+        "offline-notification-body": "به علت آفلاین بودن سرورهای اپیک گیمز سرویسهای آنلاین ممکن است کار نکنند!",
+        "offline-notification-title": "offline"
+    },
+    "Epic Games": "اپیک گیمز",
+    "favourites": "علاقه مندی ها",
+    "game": {
+        "status": "Status",
+        "store": "فروشگاه",
+        "title": "عنوان بازی"
+    },
+    "GameSettings": "تنظیمات بازی",
+    "generic": {
+        "error": {
+            "component": "بازی یافت نشد - خروج از حساب و ورود مجدد را امتحان کرده یا یکی از گزینه های زیر را امتحان کنید"
+        },
+        "library": {
+            "refresh": "تازه سازی کتابخانه"
+        }
+    },
+    "globalSettings": "تنظیمات عمومی",
+    "GOG": "GOG",
+    "gog-store": "فروشگاه GOG",
+    "header": {
+        "ignore_hidden": "نادیده گرفتن موارد پنهان",
+        "platform": "پلتفرم",
+        "show_all_games": "نمایش همه بازی ها",
+        "show_favourites_only": "نمایش مورد علاقه ها",
+        "show_hidden": "نمایش موارد پنهان",
+        "store": "فیلتر فروشگاه"
+    },
+    "help": {
+        "amdfsr": "AMD's FSR با ارتقاء مقیاس وضوح پایینتر در حالت تمام صفحه به افزایش فریم ریت کمک می کند. کیفیت تصویر در ازای کاهش جزئی عملکرد از ۵ به ۱ افزایش می یابد. فعال کردن ممکن است باعث بهبود کارایی شود.",
+        "dxvk": "DXVK لایه ترجمهcای بر پایه Vulkan برای بازی های DirectX 9، 10، 11 می باشد. فعال کردن ممکن است سبب افزایش سازگاری شود. ممکن است باعث ایجاد مشکلات خصوصا برای بازی های DirectX قدیمی شود.",
+        "esync": "Esync در بازی های متمرکز بر CPU سبب کاهش سربار wineserver میشود. فعال کردن ممکن است باعث افزایش کارایی شود.",
+        "fsync": "Fsync در بازی های متمرکز بر CPU سبب کاهش سربار wineserver میشود. فعال کردن ممکن است در لینوکس کرنل های پشتیبانی شده باعث افزایش کارایی شود.",
+        "game_language": {
+            "fallback": "برای استفاده از زبان HyperPlay خالی بگذارید.",
+            "in_game_config": "تمام بازی ها از این پیکربندی پشتیبانی نمی کنند،cبرخی تنظیمات زبان داخل بازی دارند.",
+            "valid_codes": "کدهای معتبر زبان وابسته به بازی هستند."
+        },
+        "gamemode": "Feral GameMode هنگام اجرای بازی ها تغییرات خودکار و موقت را در سیستم به وجود می آورد. فعال کردن ممکن است باعث افزایش کارایی شود.",
+        "general": "در صورتی که در جایی لانچر اپیک گیمز را به صورت فعال نصب کردهاید و میخواهید بازیهای خود را وارد کنید با EGL همگامسازی کنید تا از دانلود مجدد آنها جلوگیری کنید.",
+        "mangohud": "MangoHUD پوششی است که FPS، دماها،c لود CPU/GPU و دیگر منابع سیستم را نظارت و نمایش می دهد.",
+        "other": {
+            "part4": "استفاده کنید ",
+            "part5": "آرگومانهای بازی",
+            "part6": " تا قبل از اجرای دستور صدا زده شود، به عنوان مثال: ",
+            "part7": " تا لانچر در برخی بازیها رد شود، غیره."
+        },
+        "preferSystemLibs": "نسخه های سفارشی Wine (Wine-GE, Wine-Lutris) همراه با وابستگی های کتابخانه خود عرضه می شوند. با فعال کردن این گزینه، این کتابخانه ها نادیده گرفته شده و Wine به جای آن کتابخانه های سیستم را اجرا خواهد کرد. هشدار! در صورت عدم وجود وابستگی ها امکان بروز مشکلات وجود دارد.",
+        "resizablebar": "NVIDIA's Resizable Bar با ایجاد امکان دسترسی CPU به کل بافر گرافیک سبب افزایش نرخ فریم می شود.فعال کردن ممکن است باعث بهبود عملکرد بازی های مبتنی بر Vulkan شود.",
+        "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
+        "sync": {
+            "part1": "HyperPlay تلاش میکند تا پوشه صحیح ذخیره سازی را پیدا کند و در اکثر مواقع کار خواهد کرد. در صورتی که پوشه اشتباه بود، از بخش رونویسی برای تغییر آن استفاده کنید.",
+            "part2": "در صورتی که محل Wine یا Proton را تغییر دهید، شما باید دوباره مسیر را چک کنید از آنجایی که Proton از محل و کاربری متفاوتی استفاده میکند. پس شما میتوانید مسیر فعلی را حذف ساده کنید از صفحه تنظیمات همگامسازی خارج شده و دوباره برگردید تا HyperPlay یک بار دیگر با محل درست پوشه را حدس بزند.",
+            "part3": "همگام سازی دستی: برای بارگیری ذخیره بازیهای ذخیره شده در Cloud ، بارگیری را انتخاب کنید. آپلود تا موارد محلی را روی ابر آپلود کنید. دانلود اجباری و آپلود اجباری نسخه ای را که بصورت محلی یا روی ابر است نادیده می گیرند.",
+            "part4": "همگامسازی ذخیرهها به طور خودکار هر زمان که یک بازی را شروع می کنید و پس از اتمام بازی ، ذخیره ها را همگامسازی می کند."
+        },
+        "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
+        "wine": {
+            "part1": "HyperPlay در این پوشهها برای نسخههای Wine، Proton و CrossOver جستوجو میکند:",
+            "part2": "برای دیگر مکانها،از یک symbolic link به یکی از این پوشهها استفاده کنید"
+        }
+    },
+    "info": {
+        "hyperplay": {
+            "beta": "Beta",
+            "newReleases": "Update Available!",
+            "stable": "Stable",
+            "version": "HyperPlay Version"
+        },
+        "settings": "تنظیمات به صورت خودکار ذخیره شدند",
+        "version": "نسخه Wine"
+    },
+    "infobox": {
+        "help": "راهنما",
+        "requirements": "نیازمندیهای سیستم",
+        "wine-path": "Wine Path"
+    },
+    "install": {
+        "path": "انتخاب محل نصب"
+    },
+    "library": {
+        "refresh": "تازه کردن",
+        "sortAscending": "چینش صعودی",
+        "sortByStatus": "چینش بر اساس وضعیت",
+        "sortDescending": "چینش نزولی",
+        "toggleLayout": {
+            "grid": "Toggle to a grid layout",
+            "list": "Toggle to a list layout"
+        }
+    },
+    "Library": "کتابخانه",
+    "loading": {
+        "default": "در حال بارگذاری",
+        "website": "درحال بارگیری وبسایت"
+    },
+    "login": {
+        "externalLogin": "ورود خارجی"
+    },
+    "message": {
+        "sync": "همگامسازی کامل شد",
+        "unsync": "عدم همگامسازی کامل شد"
+    },
+    "notify": {
+        "error": {
+            "move": "خطا در جابهجا کردن بازی",
+            "reparing": "خطا در تعمیر"
+        },
+        "finished": {
+            "add": {
+                "steam": {
+                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "Added to Steam"
+                }
+            },
+            "remove": {
+                "steam": {
+                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
+                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
+                    "title": "Removed from Steam"
+                }
+            },
+            "reparing": "تعمیر کردن کامل شد"
+        },
+        "install": {
+            "canceled": "نصب لغو شد",
+            "error": "نصب با شکست مواجه شد",
+            "finished": "نصب به پایان رسید",
+            "imported": "بازی وارد شد",
+            "startInstall": "نصب آغاز شد"
+        },
+        "moved": "انتقال کامل شد",
+        "moving": "در حال انتقال بازی",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "refresh": {
+            "error": "امکان دریافت نسخه از آپ استریم گیت هاب نیست! بعدا تلاش کنید."
+        },
+        "uninstalled": "حذف شد",
+        "update": {
+            "canceled": "بهروزرسانی لغو شد",
+            "finished": "آپدیت به پایان رسید",
+            "started": "بهروزرسانی آغاز شد"
+        }
+    },
+    "options": {
+        "advanced": {
+            "key": "Variable Name",
+            "placeHolderKey": "NAME",
+            "placeHolderValue": "E.g.: Path/To/ExtraFiles",
+            "title": "گزینههای پیشرفته (متغیرهای محیطی):",
+            "value": "Value"
+        },
+        "gameargs": {
+            "placeholder": "آرگومانهای لانچر را اینجا بگذارید",
+            "title": "آرگومانهای بازی (برای اجرا پس از دستور):"
+        },
+        "quote-args-with-spaces": "Warning: Make sure to quote args with spaces! E.g.: \"path/with spaces/\"",
+        "wrapper": {
+            "args": "Arguments",
+            "arguments_example": "Arguments example: --arg; --extra-file=\"file-path/ with/spaces\"",
+            "exe": "Wrapper",
+            "placeHolderKey": "New Wrapper",
+            "placeHolderValue": "Wrapper Arguments",
+            "title": "Wrapper command:"
+        }
+    },
+    "other": {
+        "gogdl-version": "نسخه GOGDL: ",
+        "legendary-version": "نسخه Legendary: ",
+        "weblate": "کمک به ترجمه HyperPlay."
+    },
+    "placeholder": {
+        "alt-gogdl-bin": "استفاده از باینری GOGDL داخلی...",
+        "alt-legendary-bin": "استفاده از باینری Legendary داخلی...",
+        "egs-prefix": "محل نصب شده EGS",
+        "prefered_language": "کد دو حرفی (مانند \"en\" یا \"fr\")"
+    },
+    "platforms": {
+        "linux": "لینوکس",
+        "mac": "مک",
+        "win": "ویندوز"
+    },
+    "Plugins": "افزونهها",
+    "Projects": "پروژهها",
+    "Recent": "اخیرا بازی شده",
+    "search": "جست و جو برای بازی ها",
+    "setting": {
+        "adddesktopshortcuts": "افزودن خودکار میانبرهای دسکتاپ",
+        "addgamestostartmenu": "افزودن خودکار میانبرهای منوی استارت",
+        "alt-gogdl-bin": "انتخاب باینری GOGDL جایگزین برای استفاده",
+        "alt-legendary-bin": "انتخاب باینری Legendary جایگزین",
+        "audiofix": "تنظیم صدا (تاخیر Pulse Audio)",
+        "autodxvk": "نصب/بهروزرسانی خودکار DXVK در Prefix",
+        "autosync": "همگامسازی خودکار ذخیرهها",
+        "autovkd3d": "نصب/بهروزرسانی خودکار VKD3D در مسیر",
+        "change-target-exe": "انتخاب EXE جایگزین برای اجرا",
+        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
+        "crossover-version": "Crossover Version",
+        "customWineProton": "مسیرهای سفارشی Wine/Proton",
+        "darktray": "استفاده از آیکون میزکار تاریک",
+        "default-install-path": "محل پیشفرض نصب",
+        "default-steam-path": "Default Steam path",
+        "defaultWinePrefix": "تنظیم پوشه برای Wine Prefix جدید",
+        "disable_controller": "غیر فعال کردن کنترل HyperPlay با استفاده از دسته",
+        "discordRPC": "فعالسازی Discord Rich Presence",
+        "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
+        "egs-sync": "همگامسازی با بازیهای اپیک نصب شده",
+        "enableFSRHack": "فعالسازی FSR Hack (نسخه Wine باید از آن پشتیبانی کند)",
+        "eosOverlay": {
+            "cancelInstall": "Cancel",
+            "checkForUpdates": "Check for updates",
+            "checkingForUpdates": "Checking for updates...",
+            "currentVersion": "Current Version: {{version}}",
+            "disable": "Disable",
+            "enable": "Enable",
+            "install": "Install",
+            "installed": "The EOS Overlay is installed",
+            "installing": "The EOS Overlay is being installed...",
+            "latestVersion": "Latest Version: {{version}}",
+            "notInstalled": "The EOS Overlay is not installed",
+            "notInstalledMsg": "The EOS Overlay is not installed. Do you want to install it now?",
+            "notInstalledTitle": "Overlay not installed",
+            "remove": "Uninstall",
+            "removeConfirm": "Are you sure you want to uninstall the EOS Overlay?",
+            "removeConfirmTitle": "Confirm overlay removal",
+            "updateNow": "Update",
+            "updating": "Updating..."
+        },
+        "esync": "فعالسازی Esync",
+        "exit-to-tray": "خروج به میزکار سیستم",
+        "FsrSharpnessStrenght": "قدرت تیزی FSR",
+        "fsync": "فعالسازی Fsync",
+        "gamemode": "استفاده از GameMode (Feral Game Mode باید نصب شده باشد)",
+        "language": "انتخاب زبان نرمافزار",
+        "library_top_option": {
+            "disabled": "غیر فعال",
+            "favourites": "بازی های مورد علاقه",
+            "recently_played": "بازی های اخیرا اجرا شده",
+            "recently_played_installed": "Recently Played Games (Only Installed)"
+        },
+        "library_top_section": "قسمت بالایی کتابخانه",
+        "log": {
+            "copy-to-clipboard": "کپی کردن محتوای لاگ در کليپ بورد",
+            "current-log": "لاگ اخیر",
+            "instructions": "به دیسکورد ما بپیوندید و به کانال منطبق با سیستم عامل خود نگاه کنید. محتوای لاگ نمایش داده شده در اینجا را با توضیح واضح از مشکل همراه هر اطلاعات مربوط به اشتراک بگذارید.",
+            "instructions_title": "چگونه یک مشکل را گزارش کنید؟",
+            "last-log": "آخرین لاگ",
+            "no-file": "فایل لاگی پیدا نشد",
+            "show-in-folder": "نمایش فایل لاگ در پوشه"
+        },
+        "mangohud": "فعالسازی Mangohud (Mangohud باید نصب شده باشد)",
+        "manualsync": {
+            "download": "دانلود",
+            "forcedownload": "دانلود اجباری",
+            "forceupload": "آپلود اجباری",
+            "sync": "همگامسازی",
+            "syncing": "در حال همگامسازی",
+            "title": "همگامسازی دستی ذخیرهها",
+            "upload": "آپلود"
+        },
+        "maxRecentGames": "اخیرا بازی شده برای نمایش",
+        "maxworkers": "بیسترین تعداد ورکر هنگام دانلود",
+        "minimize-on-launch": "کوچک کردن HyperPlay بعد از اجرای بازی",
+        "offlinemode": "اجرای آفلاین بازی",
+        "prefered_language": "زبان ترجیحی (کد زبان)",
+        "preferSystemLibs": "Prefer system libraries",
+        "primerun": "استفاده از کارت گرافیک اختصاص یافته",
+        "resizableBar": "فعالسازی Resizable BAR (فقط محصولات NVIDIA RTX 30xx)",
+        "runexe": {
+            "message": "فایلها را اینجا درج کنید",
+            "title": "اجرای EXE در محل"
+        },
+        "savefolder": {
+            "placeholder": "انتخاب پوشه دقیق ذخیرههای بازیها"
+        },
+        "select_theme": "انتخاب تم",
+        "showfps": "نمایش تعداد فریم (11 و DX9, 10)",
+        "showUnrealMarket": "نمایش فروشگاه Unreal (نیازمند راهاندازی مجدد)",
+        "start-in-tray": "شروع در حالت پسزمینه",
+        "steamruntime": "استفاده از Steam Runtime",
+        "winecrossoverbottle": "CrossOver باتل",
+        "wineprefix": "پوشه محل Wine",
+        "wineversion": "نسخه Wine"
+    },
+    "settings": {
+        "battlEyeRuntime": {
+            "installing": "Installing BattlEye Runtime...",
+            "name": "BattlEye AntiCheat Runtime"
+        },
+        "clear-cache": "پاک کردن کش HyperPlay",
+        "copiedToClipboard": "در کليپ بورد کپی شد!",
+        "copyToClipboard": "کپی کردن همه تنظیمات در کليپ بورد",
+        "eacRuntime": {
+            "gameModeRequired": {
+                "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
+                "title": "GameMode required"
+            },
+            "installing": "Installing EAC Runtime...",
+            "name": "EasyAntiCheat Runtime"
+        },
+        "gameMode": {
+            "eacRuntimeEnabled": {
+                "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
+                "title": "EAC runtime enabled"
+            }
+        },
+        "log": {
+            "long-log-hint": "لاگ کوتاه شد، ١٠٠٠ خط آخر نمایش داده شدهاند!"
+        },
+        "navbar": {
+            "advanced": "پیشرفته",
+            "general": "عمومی",
+            "log": "Log",
+            "other": "بقیه",
+            "sync": "همگامسازی ذخیرهها",
+            "wineExt": "Wine Extensions"
+        },
+        "open-config-file": "باز کردن فایل پیکربندی",
+        "reset-hyperplay": "Reset HyperPlay",
+        "saves": {
+            "label": "Save Location:",
+            "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        }
+    },
+    "Settings": "تنظیمات",
+    "sidebar": {
+        "collapse": "بستن ساید بار",
+        "uncollapse": "باز کردن سایدبار"
+    },
+    "status": {
+        "installing": "در حال نصب",
+        "logging": "در حال وارد شدن...",
+        "processing": "در حال پردازش فایلها، لطفا منتظر بمانید"
+    },
+    "store": "فروشگاه اپیک",
+    "stores": "فروشگاهها",
+    "title": {
+        "allGames": "همه بازیها",
+        "allUnreal": "Unreal - همهچیز",
+        "unrealAssets": "Unreal - مهرهها",
+        "unrealPlugins": "Unreal - افزونهها",
+        "unrealProjects": "Unreal - پروژهها"
+    },
+    "toolbox": {
+        "settings": {
+            "default-wineprefix": "انتخاب پوشه مسیر پیشفرض برای تنظیمات جدید",
+            "wineprefix": "انتخاب پوشه برای مسیر Wine جدید"
+        }
+    },
+    "tooltip": {
+        "addpath": "افزودن مسیر جدید",
+        "removepath": "حذف مسیر"
+    },
+    "tray": {
+        "about": "درباره",
+        "quit": "خروج",
+        "reload": "بارگیری مجدد",
+        "show": "نمایش"
+    },
+    "Update Available!": "",
+    "userselector": {
+        "discord": "Discord",
+        "logout": "خروج از حساب",
+        "logout_confirmation": "آیا میخواهید از حساب خود خارج شوید؟",
+        "manageaccounts": "مدیریت حسابها",
+        "quit": "خروج"
+    },
+    "webview": {
+        "controls": {
+            "back": "بازگشت به عقب",
+            "forward": "بازگشت به جلو",
+            "openInBrowser": "باز کردن در مرورگر",
+            "reload": "تازه کردن صفحه"
+        }
+    },
+    "wine": {
+        "actions": "Action",
+        "manager": {
+            "error": "نمیتوان در این زمان نسخههای Wine/Proton را به دست آورد.",
+            "link": "مدیریت Wine",
+            "title": "مدیریت کننده Wine",
+            "unzipping": "در حال خارج کردن از حالت فشرده"
+        },
+        "release": "Release Date",
+        "size": "اندازه"
+    }
+}

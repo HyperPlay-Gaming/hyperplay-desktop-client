@@ -1,0 +1,139 @@
+{
+    "box": {
+        "change": {
+            "message": "Això canviarà la ruta d'instal·lació d'aquest joc, estàs segur?",
+            "path": "Tria una ruta d'instal·lació nova",
+            "title": "Canvia la ruta d'instal·lació dels jocs"
+        },
+        "choose": "Tria",
+        "importpath": "Tria un directori per importar",
+        "move": {
+            "message": "Això pot trigar molt de temps, estàs segur?",
+            "path": "Tria on vols moure el joc",
+            "title": "Mou la ruta d'instal·lació del joc"
+        },
+        "no": "NO",
+        "repair": {
+            "message": "Vols provar de reparar aquest joc? Això pot trigar molt de temps.",
+            "title": "Verifica i repara"
+        },
+        "stopInstall": {
+            "keepInstalling": "Continua amb la instal·lació",
+            "message": "Vols MANTENIR els fitxers baixats?",
+            "title": "Atura la instal·lació"
+        },
+        "uninstall": {
+            "checkbox": "Vols suprimir també el prefix? Això no es pot desfer.",
+            "checkbox_prefix": "Prefix",
+            "message": "Vols desinstal·lar aquest joc?",
+            "title": "Desinstal·la"
+        },
+        "update": {
+            "message": "Hi ha una actualització per a aquest joc, el vols actualitzar ara?",
+            "title": "Cal actualitzar el joc"
+        },
+        "wineprefix": "Selecciona el directori del WinePrefix",
+        "yes": "SÍ"
+    },
+    "button": {
+        "add_to_favourites": "Afegeix a preferits",
+        "cancel": "Pausa/Cancel·la",
+        "continue": "Continua la baixada",
+        "force_update": "Força l'actualització si n'hi ha alguna de disponible",
+        "hide_game": "Amaga el joc",
+        "import": "Importa el joc",
+        "install": "Instal·la",
+        "remove_from_favourites": "Treu dels preferits",
+        "unhide_game": "Torna a mostrar el joc",
+        "uninstall": "Desinstal·la",
+        "update": "Actualitza"
+    },
+    "disabled": "Desactivat",
+    "dlc": {
+        "installDlcs": "Instal·la tots els DLCs"
+    },
+    "enabled": "Activat",
+    "game": {
+        "downloadSize": "Mida de la baixada",
+        "firstPlayed": "Primera partida",
+        "info": "Info",
+        "installSize": "Mida d'instal·lació",
+        "language": "Idioma",
+        "lastPlayed": "Última partida",
+        "neverPlayed": "Mai",
+        "platform": "Selecciona la versió de la plataforma per instal·lar",
+        "reuirements": "Requeriments del sistema",
+        "tools": "Eines",
+        "totalPlayed": "Temps jugat"
+    },
+    "gamecard": {
+        "moving": "S'està movent",
+        "repairing": "S'està reparant"
+    },
+    "generic": {
+        "error": "Error desconegut"
+    },
+    "info": {
+        "canRunOffline": "Cal connexió a internet",
+        "installedPlatform": "Plataforma instal·lada",
+        "path": "Ruta d'instal·lació",
+        "size": "Mida",
+        "syncsaves": "Sincronitza les partides desades",
+        "version": "Versió"
+    },
+    "install": {
+        "disk-space-left": "Espai disponible",
+        "not-enough-disk-space": "No hi ha prou espai al disc",
+        "path": "Selecciona la ruta d'instal·lació",
+        "path-not-writtable": "Avís: potser no es pot escriure al camí indicat.",
+        "space-after-install": "Després de la instal·lació",
+        "wineprefix": "WinePrefix",
+        "wineversion": "Versió del Wine"
+    },
+    "label": {
+        "playing": {
+            "start": "Juga",
+            "stop": "Atura"
+        },
+        "saves": {
+            "syncing": "S'estan sincronitzant les partides"
+        }
+    },
+    "launch": {
+        "options": "Opcions d'execució..."
+    },
+    "report_problem": "Informa d'un problema quan s'executa el joc",
+    "sdl": {
+        "title": "Selecciona els components a instal·lar"
+    },
+    "specs": {
+        "minimum": "Mínim",
+        "recommended": "Recomanat"
+    },
+    "status": {
+        "clickToUpdate": "Fes clic per a actualitzar",
+        "hasUpdates": "Hi ha una versió nova disponible!",
+        "installed": "Instal·lat",
+        "installing": "S'està instal·lant...",
+        "moving": "S'està movent la instal·lació. Espereu.",
+        "notinstalled": "Aquest joc no està instal·lat",
+        "processing": "S'està processant els fitxers. Espereu.",
+        "reparing": "S'està reparant el joc. Espereu.",
+        "totalDownloaded": "Total baixat",
+        "updating": "S'està actualitzant el joc"
+    },
+    "submenu": {
+        "addShortcut": "Afegeix una drecera",
+        "addToSteam": "Afegeix a l'Steam",
+        "change": "Canvia la ruta d'instal·lació",
+        "disableEosOverlay": "Desactiva la superposició EOS",
+        "enableEosOverlay": "Activa la superposició EOS",
+        "move": "Mou el joc",
+        "protondb": "Comprova la compatibilitat",
+        "removeFromSteam": "Treu de l'Steam",
+        "removeShortcut": "Treu les dreceres",
+        "settings": "Configuració",
+        "store": "Botiga",
+        "verify": "Verifica i repara"
+    }
+}

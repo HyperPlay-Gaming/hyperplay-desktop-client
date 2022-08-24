@@ -1,0 +1,23 @@
+.smallInfo {
+  text-align: left;
+}
+
+.smallTitle {
+  font-size: 14px;
+  color: var(--text-default);
+}
+
+.smallSubtitle {
+  font-size: 15px;
+  color: var(--text-default);
+}
+
+.clickable {
+  color: var(--accent);
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.clickable:hover {
+  color: var(--accent-overlay);
+}
