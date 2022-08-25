@@ -55,6 +55,7 @@ const userInfo = join(legendaryConfigPath, 'user.json')
 const installPath = join(homedir(), 'Games', 'HyperPlay')
 const defaultWinePrefix = join(homedir(), 'Games', 'HyperPlay', 'Prefixes')
 const anticheatDataPath = join(appConfigFolder, 'areweanticheatyet.json')
+const imagesCachePath = join(appConfigFolder, 'images-cache')
 
 const { currentLogFile: currentLogFile, lastLogFile: lastLogFile } =
   createNewLogFileAndClearOldOnces()
@@ -190,6 +191,7 @@ export {
   toolsPath,
   defaultWinePrefix,
   anticheatDataPath,
+  imagesCachePath,
   userHome,
   flatPakHome,
   kofiPage,
