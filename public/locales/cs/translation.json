@@ -16,7 +16,6 @@
         "status": "Status",
         "title": "Tato hra obsahuje anticheatový software"
     },
-    "Assets": "Assety",
     "box": {
         "cache-cleared": {
             "message": "Mezipaměť HyperPlay vymazána.",
@@ -59,10 +58,7 @@
                 "message": "",
                 "title": ""
             },
-            "no-offline-mode": {
-                "message": "Spouštění přerušeno! Ke spuštění hry je potřeba připojení k internetu.",
-                "title": "Režim offline není podporován."
-            },
+            "launchAborted": "Launch aborted",
             "title": "Error",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
@@ -371,8 +367,6 @@
         "mac": "Mac",
         "win": "Windows"
     },
-    "Plugins": "Plugins",
-    "Projects": "Projekty",
     "Recent": "Recently Played",
     "search": "Vyhledat hry",
     "setting": {
@@ -466,7 +460,6 @@
         },
         "select_theme": "Vybrat motiv",
         "showfps": "Zobrazit FPS (DX9, 10 a 11)",
-        "showUnrealMarket": "Zobrazit Unreal Marketplace (vyžaduje restart)",
         "start-in-tray": "Spustit minimalizované",
         "steamruntime": "Použít služby Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
@@ -526,11 +519,7 @@
     "store": "Epic Store",
     "stores": "Obchody",
     "title": {
-        "allGames": "Všechny hry",
-        "allUnreal": "Unreal - Vše",
-        "unrealAssets": "Unreal - Součásti",
-        "unrealPlugins": "Unreal - Pluginy",
-        "unrealProjects": "Unreal - Projekty"
+        "allGames": "Všechny hry"
     },
     "toolbox": {
         "settings": {

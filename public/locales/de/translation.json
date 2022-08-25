@@ -16,7 +16,6 @@
         "status": "Status",
         "title": "Dieses Spiel enthält Anticheat-Software"
     },
-    "Assets": "Assets",
     "box": {
         "cache-cleared": {
             "message": "HyperPlay Cache wurde geleert.",
@@ -59,10 +58,7 @@
                 "message": "",
                 "title": ""
             },
-            "no-offline-mode": {
-                "message": "Start abgebrochen! Das Spiel benötigt eine Internetverbindung, damit es läuft.",
-                "title": "Offline-Modus wird nicht unterstützt."
-            },
+            "launchAborted": "Launch aborted",
             "title": "Error",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
@@ -371,8 +367,6 @@
         "mac": "Mac",
         "win": "Windows"
     },
-    "Plugins": "Plugins",
-    "Projects": "Projekte",
     "Recent": "Zuletzt gespielte Spiele",
     "search": "Suche nach Spielen",
     "setting": {
@@ -466,7 +460,6 @@
         },
         "select_theme": "Design auswählen",
         "showfps": "FPS anzeigen (DX9, 10 und 11)",
-        "showUnrealMarket": "Unreal Marketplace anzeigen (benötigt Neustart)",
         "start-in-tray": "Minimiert starten",
         "steamruntime": "Steam Runtime verwenden",
         "winecrossoverbottle": "CrossOver Flasche",
@@ -526,11 +519,7 @@
     "store": "Epic Store",
     "stores": "Shops",
     "title": {
-        "allGames": "Alle Spiele",
-        "allUnreal": "Unreal - Alles",
-        "unrealAssets": "Unreal - Assets",
-        "unrealPlugins": "Unreal - Plugins",
-        "unrealProjects": "Unreal - Projekte"
+        "allGames": "Alle Spiele"
     },
     "toolbox": {
         "settings": {
