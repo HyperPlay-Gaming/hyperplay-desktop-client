@@ -201,7 +201,7 @@ yarn (or npm run) dist:mac
 
 1. Download Yarn and Node.js
 2. Download the dependencies with `yarn`
-3. Go to the debug tab on vscode and start the two tasks, 'Start renderer process' and 'Debug main process' or `yarn react-start && yarn electron`
+3. Run `yarn dev` on the terminal
 
 ### Building with VS Code
 

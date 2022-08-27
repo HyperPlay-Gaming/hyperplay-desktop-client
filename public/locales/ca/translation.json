@@ -16,7 +16,6 @@
         "status": "Status",
         "title": "Aquest joc inclou programari antitrampes."
     },
-    "Assets": "Recursos",
     "box": {
         "cache-cleared": {
             "message": "S'ha buidat la memòria cau de l'HyperPlay.",
@@ -59,10 +58,7 @@
                 "message": "",
                 "title": ""
             },
-            "no-offline-mode": {
-                "message": "L'execució del programa ha fallat. El joc necessita una connexió a Internet per funcionar.",
-                "title": "El mode sense connexió no està suportat."
-            },
+            "launchAborted": "Launch aborted",
             "title": "Error",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
@@ -371,8 +367,6 @@
         "mac": "Mac",
         "win": "Windows"
     },
-    "Plugins": "Extensions",
-    "Projects": "Projectes",
     "Recent": "Jugats fa poc",
     "search": "Cerca jocs",
     "setting": {
@@ -466,7 +460,6 @@
         },
         "select_theme": "Selecciona un tema",
         "showfps": "Mostra els FPS (DX9, 10 i 11)",
-        "showUnrealMarket": "Mostra la llibreria d'Unreal (cal reiniciar)",
         "start-in-tray": "Inicia minimitzat",
         "steamruntime": "Usa el Runtime de l'Steam",
         "winecrossoverbottle": "Ampolla CrossOver",
@@ -526,11 +519,7 @@
     "store": "Botiga de l'Epic",
     "stores": "Botigues",
     "title": {
-        "allGames": "Tots els jocs",
-        "allUnreal": "Unreal - Tot",
-        "unrealAssets": "Unreal - Recursos",
-        "unrealPlugins": "Unreal - Extensions",
-        "unrealProjects": "Unreal - Projectes"
+        "allGames": "Tots els jocs"
     },
     "toolbox": {
         "settings": {
