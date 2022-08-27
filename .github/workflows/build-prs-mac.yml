@@ -27,5 +27,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: mac-dmg
-          path: dist/Heroic*.dmg
+          path: dist/HyperPlay*.dmg
           retention-days: 14

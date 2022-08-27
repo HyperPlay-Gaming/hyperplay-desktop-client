@@ -27,5 +27,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: linux-appimage
-          path: dist/Heroic-*.AppImage
+          path: dist/HyperPlay-*.AppImage
           retention-days: 14
