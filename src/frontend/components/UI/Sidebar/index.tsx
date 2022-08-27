@@ -10,7 +10,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import CurrentDownload from './components/CurrentDownload'
 import SidebarLinks from './components/SidebarLinks'
 import './index.css'
-import AppVersion from './components/AppVersion'
+import AppVersion from './components/HeroicVersion'
 
 export default function Sidebar() {
   const { t } = useTranslation()

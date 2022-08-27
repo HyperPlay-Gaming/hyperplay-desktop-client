@@ -209,7 +209,7 @@ class GOGGame extends Game {
     const installPlatform =
       platformToInstall.toLowerCase() as GogInstallPlatform
 
-    const logPath = join(heroicGamesConfigPath, this.appName + '.log')
+    const logPath = join(gamesConfigPath, this.appName + '.log')
 
     const commandParts: string[] = [
       'download',
@@ -726,7 +726,7 @@ class GOGGame extends Game {
     const { maxWorkers } = await GlobalConfig.get().getSettings()
     const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
     const gameData = this.getGameInfo()
-    const logPath = join(heroicGamesConfigPath, this.appName + '.log')
+    const logPath = join(gamesConfigPath, this.appName + '.log')
     const credentials = await GOGUser.getCredentials()
 
     const withDlcs = gameData.install.installedWithDLCs

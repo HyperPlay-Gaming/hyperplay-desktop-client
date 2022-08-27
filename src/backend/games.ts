@@ -10,7 +10,7 @@ import {
 
 import { BrowserWindow } from 'electron'
 import { join } from 'path'
-import { heroicGamesConfigPath } from './constants'
+import { gamesConfigPath } from './constants'
 
 abstract class Game {
   public get logFileLocation() {
