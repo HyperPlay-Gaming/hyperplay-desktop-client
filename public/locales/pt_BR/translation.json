@@ -1,7 +1,7 @@
 {
     "accessibility": {
         "actions_font_family": "Fonte para ações (Padrão: \"Rubik\")",
-        "all_tiles_in_color": "Mostrar quadrados dos jogos coloridos",
+        "all_tiles_in_color": "Mostrar todas os quadrados de jogos em cores",
         "content_font_family": "Fonte para conteúdo (Padrão: \"Cabin\")",
         "fonts": "Fontes",
         "title": "Accessibilidade",
