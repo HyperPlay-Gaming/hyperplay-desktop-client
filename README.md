@@ -153,7 +153,7 @@ Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications fold
 
 - All Platforms:
   Requires NodeJS to build \
-  Use yarn or npm
+  Use yarn. npm conflicts with existing build scripts
 
 ```bash
 git clone https://github.com/G7DAO/HyperPlay.git
@@ -172,17 +172,17 @@ yarn dist:linux {package to create} (eg: deb, pacman, tar.xz, rpm, AppImage)
 - Build for Windows (Beta):
 
 ```bash
-yarn.cmd (or npm install)
+yarn.cmd
 
-yarn.cmd (or npm run) dist:win
+yarn.cmd dist:win
 ```
 
 - Build for Mac (Alpha):
 
 ```bash
-yarn (or npm install)
+yarn
 
-yarn (or npm run) dist:mac
+yarn dist:mac
 ```
 
 ### Any OS (development environment)

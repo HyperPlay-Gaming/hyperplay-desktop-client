@@ -81,22 +81,22 @@ app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
   res.send(result)
 })
 
-async function switchChain(chainId: string | number) {
-  try {
-    if (web3.currentProvider === null) return
-    const provider: any = web3.currentProvider
-    await provider.request({
-      method: 'wallet_switchEthereumChain',
-      params: [{ chainId: Web3.utils.toHex(chainId) }]
-    })
-  } catch (switchError) {
-    console.log('ERROR: ', switchError)
-    // This error code indicates that the chain has not been added to MetaMask.
-    // if (switchError.code === 4902) {
-    //   alert('add this chain id')
-    // }
-  }
-}
+// async function switchChain(chainId: string | number) {
+//   try {
+//     if (web3.currentProvider === null) return
+//     const provider: any = web3.currentProvider
+//     await provider.request({
+//       method: 'wallet_switchEthereumChain',
+//       params: [{ chainId: Web3.utils.toHex(chainId) }]
+//     })
+//   } catch (switchError) {
+//     console.log('ERROR: ', switchError)
+//     // This error code indicates that the chain has not been added to MetaMask.
+//     // if (switchError.code === 4902) {
+//     //   alert('add this chain id')
+//     // }
+//   }
+// }
 
 app.listen(port, () => {
   console.log(`🚀 Ready at http://localhost:${port}`)
