@@ -1,10 +1,9 @@
-import { walletInitialized } from '../../wallets/proxy'
+import { PROVIDERS } from 'backend/wallets/types'
+import { getConnectionUris } from '../../wallets/providerHelper'
 
 describe.only('tests the proxy server', function () {
   test.only('should log a qr code', async function () {
-    console.log('INITIALIZING')
-    await walletInitialized
-    console.log('INITIALIZED')
+    await getConnectionUris(PROVIDERS.METAMASK_MOBILE)
   }, 240000)
 })
 
