@@ -25,7 +25,6 @@ import {
   icon,
   isWindows,
   publicDir,
-  GITHUB_API,
   isSteamDeckGameMode
 } from './constants'
 import { logError, logInfo, LogPrefix, logWarning } from './logger/logger'
