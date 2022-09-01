@@ -3,6 +3,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers'
 import { AbstractProvider } from 'web3-core/types'
 import Web3Core from 'web3-core'
+import WCTypes from '@walletconnect/types'
 
 export interface RequestBody<T> extends Express.Request {
   body: T
@@ -49,4 +50,23 @@ export interface TxnRequest {
   abiItem: Web3Utils.AbiItem
   params: string[]
   contractAddress: string
+}
+
+export interface IMobileRegistryEntryWithQrLink
+  extends WCTypes.IMobileRegistryEntry {
+  qrCodeLink: string
+}
+
+export interface UrisReturn {
+  [key: string]: IMobileRegistryEntryWithQrLink
+}
+
+export interface ProviderRpcError extends Error {
+  message: string
+  code: number
+  data?: unknown
+}
+
+export interface ConnectInfo {
+  chainId: string
 }

@@ -1,6 +1,6 @@
 import express from 'express'
 import { RequestBody, TxnRequest } from './types'
-import { web3, provider, accounts } from './providerHelper'
+import { web3, provider } from './providerHelper'
 
 const port = 8080
 export const app = express()
@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 })
 
 //forwards body of request to provider
-app.post('/provider', async (req, res) => {
+app.post('/providerRequest', async (req, res) => {
   // if provider is not connected, then return
   if (!provider.isConnected()) res.send('Wallet not connected')
   try {
@@ -43,6 +43,7 @@ app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
     req.body.abiItem,
     req.body.contractAddress
   )
+  const accounts: string[] = await web3.eth.getAccounts()
 
   const result = await contract.methods[req.body.abiItem.name](
     ...req.body.params

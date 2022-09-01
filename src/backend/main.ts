@@ -114,6 +114,8 @@ import { gameInfoStore } from './legendary/electronStores'
 import { getFonts } from 'font-list'
 import { verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
+import { PROXY_TOPICS } from 'common/types/preload'
+import * as ProviderHelper from 'backend/wallets/providerHelper'
 
 const { showMessageBox, showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
@@ -166,7 +168,8 @@ async function createWindow(): Promise<BrowserWindow> {
     webPreferences: {
       webviewTag: true,
       contextIsolation: false,
-      nodeIntegration: true
+      nodeIntegration: true,
+      preload: path.join(__dirname, 'preload.ts')
     }
   })
 
@@ -1538,6 +1541,7 @@ ipcMain.handle('getRealPath', (event, path) => {
 
   return resolvedPath
 })
+
 /*
   Other Keys that should go into translation files:
   t('box.error.generic.title')
@@ -1553,3 +1557,27 @@ import './shortcuts/ipc_handler'
 import './anticheat/ipc_handler'
 import './legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
+
+// sends messages to renderer process through preload.ts callbacks
+export function walletConnected(accounts: string[]) {
+  mainWindow.webContents.send(PROXY_TOPICS.WALLET_CONNECTED, accounts)
+}
+
+export function walletDisonnected(code: number, reason: string) {
+  mainWindow.webContents.send(PROXY_TOPICS.WALLET_DISCONNECTED, code, reason)
+}
+
+export function accountsChanged(accounts: string[]) {
+  mainWindow.webContents.send(PROXY_TOPICS.ACCOUNT_CHANGED, accounts)
+}
+
+export function chainChanged(chainId: number) {
+  mainWindow.webContents.send(PROXY_TOPICS.CHAIN_CHANGED, chainId)
+}
+
+ProviderHelper.passEventCallbacks(
+  accountsChanged,
+  walletConnected,
+  walletDisonnected,
+  chainChanged
+)
