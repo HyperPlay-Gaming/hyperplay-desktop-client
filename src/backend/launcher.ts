@@ -634,10 +634,10 @@ function getRunnerCallWithoutCredentials(
   wrappers: string[] = [],
   runnerPath: string
 ): string {
-  const modifiedCommandParts = [...commandParts]
-  // Redact sensitive arguments (SID for Legendary, token for GOGDL)
-  for (const sensitiveArg of ['--sid', '--token']) {
-    const sensitiveArgIndex = modifiedCommandParts.indexOf(sensitiveArg)
+  const commandArguments = Object.assign([], commandParts)
+  // Redact sensitive arguments (Authorization Code for Legendary, token for GOGDL)
+  for (const sensitiveArg of ['--code', '--token']) {
+    const sensitiveArgIndex = commandArguments.indexOf(sensitiveArg)
     if (sensitiveArgIndex === -1) {
       continue
     }
