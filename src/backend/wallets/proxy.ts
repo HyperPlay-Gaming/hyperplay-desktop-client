@@ -1,10 +1,12 @@
 import express from 'express'
 import { RequestBody, TxnRequest } from './types'
 import { web3, provider } from './providerHelper'
+import { isUserAuthenticated } from './auth'
 
 const port = 8080
 export const app = express()
 app.use(express.json())
+app.use(isUserAuthenticated)
 
 app.get('/', (req, res) => {
   res.send({
@@ -70,6 +72,9 @@ app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
 //   }
 // }
 
-app.listen(port, () => {
-  console.log(`🚀 Ready at http://localhost:${port}`)
+export const connected = new Promise((resolve) => {
+  app.listen(port, () => {
+    console.log(`🚀 Ready at http://localhost:${port}`)
+    resolve(1)
+  })
 })
