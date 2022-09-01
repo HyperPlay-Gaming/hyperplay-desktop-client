@@ -36,5 +36,3 @@ flatpak/build
 
 vite-plugin-electron.log
 .tool-versions
-
-/wallet_sdk
