@@ -20,13 +20,7 @@ import * as WCBrowserUtils from '@walletconnect/browser-utils'
 import { ipcMain } from 'electron'
 import { PROXY_TOPICS } from '../../common/types/preload'
 
-const sdk = new MetaMaskSDK({
-  dappMetadata: {
-    name: 'HyperPlay',
-    url: 'https://hyperplay.gg'
-  },
-  shouldShimWeb3: false // disable window.web3
-})
+let sdk: MetaMaskSDK
 
 export let provider: WalletConnectWeb3Provider | mmSdkProvider
 export let web3: Web3
@@ -110,6 +104,15 @@ function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
 
 async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
   const uris: UrisReturn = {}
+  if (sdk === undefined) {
+    sdk = new MetaMaskSDK({
+      dappMetadata: {
+        name: 'HyperPlay',
+        url: 'https://hyperplay.gg'
+      },
+      shouldShimWeb3: false // disable window.web3
+    })
+  }
   const mmSdkProvider = sdk.getProvider()
   if (mmSdkProvider === null) return {}
 

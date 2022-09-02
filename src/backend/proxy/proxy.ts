@@ -6,6 +6,7 @@ import { isProviderConnected, isUserAuthenticated, unless } from './middleware'
 import jsdom from 'jsdom'
 const { JSDOM } = jsdom
 import Web3Utils from 'web3-utils'
+import { Server } from 'http'
 
 // could dynamically select by setting = 0
 // then set local env var that games could use
@@ -151,8 +152,10 @@ app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
   }
 })
 
+export let server: Server
+
 export const serverStarted = new Promise((resolve) => {
-  app.listen(port, () => {
+  server = app.listen(port, () => {
     console.log(`🚀 Ready at http://localhost:${port}`)
     resolve(1)
   })

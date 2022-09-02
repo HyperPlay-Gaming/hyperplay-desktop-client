@@ -1,6 +1,6 @@
 // import { PROVIDERS, WalletConnectWeb3Provider } from '../../wallets/types'
-import { PROVIDERS } from '../../proxy/types'
-import { app, serverStarted } from '../../proxy/proxy'
+// import { PROVIDERS } from '../../proxy/types'
+import { app, server, serverStarted } from '../../proxy/proxy'
 import {
   getConnectionUris,
   passEventCallbacks
@@ -24,7 +24,18 @@ passEventCallbacks(
 )
 
 describe('MANUAL tests for the proxy server', function () {
+  beforeAll(async function () {
+    await serverStarted
+  }, 10000)
+
+  afterAll(function (done) {
+    server.close((err) => {
+      done()
+    })
+  }, 10000)
+
   test('should do nothing', function () {})
+
   // beforeAll(async function () {
   //   let connectedPromise = getConnectedPromise()
   //   await getConnectionUris(PROVIDERS.WALLET_CONNECT)
