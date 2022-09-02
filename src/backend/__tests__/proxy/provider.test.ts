@@ -19,10 +19,11 @@ passEventCallbacks(
 )
 
 describe('MANUAL tests for the provider helper', function () {
-  test('should log a qr code and/or uri link', async function () {
-    await getConnectionUris(PROVIDERS.WALLET_CONNECT)
-    await wait(200000)
-  }, 240000)
+  test('should do nothing', function () {})
+  // test('should log a qr code and/or uri link', async function () {
+  //   await getConnectionUris(PROVIDERS.WALLET_CONNECT)
+  //   await wait(200000)
+  // }, 60000)
 })
 
 export {}
