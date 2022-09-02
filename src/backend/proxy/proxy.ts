@@ -9,8 +9,14 @@ import Web3Utils from 'web3-utils'
 
 // could dynamically select by setting = 0
 // then set local env var that games could use
-// if hyperplay relaunches, game might have to relaunch
+// if hyperplay relaunches, game might have to relaunch though
 const port = process.env.HYPERPLAY_PORT || 9680
+
+const chainIdExplorerMap = {
+  1: 'https://etherscan.io/address/',
+  4: 'https://rinkeby.etherscan.io/address/',
+  5: 'https://goerli.etherscan.io/address/'
+}
 
 export const app = express()
 app.use(express.json())
@@ -65,16 +71,12 @@ app.post('/sendEth', async (req: RequestBody<sendEthRequest>, res) => {
   }
 })
 
-const chainIdExplorerMap = {
-  1: 'https://etherscan.io/address/',
-  4: 'https://rinkeby.etherscan.io/address/',
-  5: 'https://goerli.etherscan.io/address/'
-}
-
 async function cacheAbiFromBlockExplorer(
   contractAddress: string
 ): Promise<boolean> {
   const chainId = await web3.eth.getChainId()
+  if (!Object.hasOwn(chainIdExplorerMap, chainId)) return false
+
   const response = await fetch(
     chainIdExplorerMap[chainId] + contractAddress + '#code'
   )
@@ -93,6 +95,7 @@ async function cacheAbiFromBlockExplorer(
   return isOk
 }
 
+// receipt exposes `from` address to game dev which may not be desirable
 app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
   // type guards
   if (
@@ -118,16 +121,17 @@ app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
         message:
           'Error: No ABI was provided or cached nor could it be fetched from block explorer'
       })
+      return
     }
   }
 
   // call function
-  const contract = new web3.eth.Contract(
-    abiCache[req.body.contractAddress],
-    req.body.contractAddress
-  )
-
   try {
+    const contract = new web3.eth.Contract(
+      abiCache[req.body.contractAddress],
+      req.body.contractAddress
+    )
+
     const accounts: string[] = await web3.eth.getAccounts()
     const gasPrice = await web3.eth.getGasPrice()
 

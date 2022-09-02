@@ -6,7 +6,7 @@ import {
   PROXY_TOPICS
 } from 'common/types/preload'
 import { contextBridge, ipcRenderer } from 'electron'
-import { PROVIDERS, UrisReturn } from './wallets/types'
+import { PROVIDERS, UrisReturn } from './proxy/types'
 
 contextBridge.exposeInMainWorld('proxyServer', {
   handleConnected: (callback: walletConnectedHandler) =>

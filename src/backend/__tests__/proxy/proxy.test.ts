@@ -1,10 +1,10 @@
 // import { PROVIDERS, WalletConnectWeb3Provider } from '../../wallets/types'
-import { PROVIDERS } from '../../wallets/types'
-import { app, serverStarted } from '../../wallets/proxy'
+import { PROVIDERS } from '../../proxy/types'
+import { app, serverStarted } from '../../proxy/proxy'
 import {
   getConnectionUris,
   passEventCallbacks
-} from '../../wallets/providerHelper'
+} from '../../proxy/providerHelper'
 import request from 'supertest'
 import {
   accountsChanged,

@@ -115,7 +115,7 @@ import { getFonts } from 'font-list'
 import { verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { PROXY_TOPICS } from 'common/types/preload'
-import * as ProviderHelper from 'backend/wallets/providerHelper'
+import * as ProviderHelper from 'backend/proxy/providerHelper'
 
 const { showMessageBox, showOpenDialog } = dialog
 const isWindows = platform() === 'win32'

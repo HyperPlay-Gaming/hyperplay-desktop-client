@@ -6,7 +6,12 @@ import {
   WalletConnectWeb3Provider,
   IMobileRegistryEntryWithQrLink,
   ProviderRpcError,
-  ConnectInfo
+  ConnectInfo,
+  accountsChangedType,
+  walletConnectedType,
+  walletConnectedBroadcastType,
+  walletDisconnectedType,
+  chainChangedType
 } from './types'
 import Web3 from 'web3'
 import WalletConnectProvider from '@walletconnect/web3-provider'
@@ -47,7 +52,6 @@ export async function getConnectionUris(
       break
   }
   web3 = new Web3(provider)
-  // accounts = await web3.eth.getAccounts()
   return uris
 }
 
@@ -60,20 +64,12 @@ async function handleGetConnectionUris(
 
 ipcMain?.handle(PROXY_TOPICS.GET_CONNECTION_URIS, handleGetConnectionUris)
 
-type accountsChangedType = (accounts: string[]) => void
 let accountsChanged: accountsChangedType
-
-type walletConnectedType = () => void
 let walletConnected: walletConnectedType
-
-type walletConnectedBroadcastType = (accounts: string[]) => void
-
-type walletDisconnectedType = (code: number, reason: string) => void
 let walletDisconnected: walletDisconnectedType
-
-type chainChangedType = (chainId: number) => void
 let chainChanged: chainChangedType
 
+// main uses this to pass in callbacks
 export function passEventCallbacks(
   _accountsChanged: accountsChangedType,
   _walletConnected: walletConnectedBroadcastType,
@@ -94,27 +90,21 @@ function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
   mmSdkProvider.on('accountsChanged', (accounts: string[]) => {
     console.log('accounts changed to ', accounts)
     accountsChanged(accounts)
-    // MainProcess.accountsChanged(accounts)
   })
 
-  // update type to reference metamask sdk when type is added
   mmSdkProvider.on('disconnect', (error: ProviderRpcError) => {
     console.log('disconnected: ', error.code, error.message)
     walletDisconnected(error.code, error.message)
-    // MainProcess.walletDisonnected(error.code, error.message)
   })
 
-  // update type to reference metamask sdk when type is added
   mmSdkProvider.on('connect', (connectInfo: ConnectInfo) => {
     console.log('connected id = ', connectInfo.chainId)
     walletConnected()
-    // MainProcess.walletConnected()
   })
 
   mmSdkProvider.on('chainChanged', (chainId: number) => {
     console.log('chain changed to ', chainId)
     chainChanged(chainId)
-    // MainProcess.chainChanged(chainId)
   })
 }
 
@@ -122,8 +112,8 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
   const uris: UrisReturn = {}
   const mmSdkProvider = sdk.getProvider()
   if (mmSdkProvider === null) return {}
+
   // call this to generate link
-  // const accountsPromise =
   mmSdkProvider
     .request({
       method: 'eth_requestAccounts'
@@ -133,7 +123,6 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
         'mm request accounts returned should be connected: ',
         accounts
       )
-      // MainProcess.walletConnected()
     })
 
   // get link for metamask mobile. Use as QR code
@@ -183,6 +172,7 @@ function handleEventsWalletConectProvider(
 async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
   return new Promise((resolve) => {
     const uris: UrisReturn = {}
+
     //  Create WalletConnect Provider
     const wcProvider = new WalletConnectProvider({
       infuraId: 'bde1e349aa3c4803a5c3a71f5623ecce',

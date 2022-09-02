@@ -83,3 +83,9 @@ export interface ProviderRpcError extends Error {
 export interface ConnectInfo {
   chainId: string
 }
+
+export type accountsChangedType = (accounts: string[]) => void
+export type walletConnectedType = () => void
+export type walletConnectedBroadcastType = (accounts: string[]) => void
+export type walletDisconnectedType = (code: number, reason: string) => void
+export type chainChangedType = (chainId: number) => void
