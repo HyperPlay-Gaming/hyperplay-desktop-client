@@ -116,6 +116,9 @@ import { verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { PROXY_TOPICS } from 'common/types/preload'
 import * as ProviderHelper from 'backend/proxy/providerHelper'
+import * as ProxyServer from './proxy/proxy'
+
+ProxyServer.serverStarted.then(() => console.log('Server started'))
 
 const { showMessageBox, showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
