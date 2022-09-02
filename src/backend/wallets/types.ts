@@ -9,6 +9,12 @@ export interface RequestBody<T> extends Express.Request {
   body: T
 }
 
+// export interface RequestGetEthBalance extends Express.Request {
+//   query: {
+//     address: string
+//   }
+// }
+
 export enum PROVIDERS {
   METAMASK_MOBILE,
   WALLET_CONNECT
@@ -34,12 +40,6 @@ export declare class WalletConnectWeb3Provider
   ): void
 }
 
-// export class test extends WalletConnectWeb3Provider {
-//   isConnected(): boolean {
-//     return this.connected
-//   }
-// }
-
 export type mmSdkProvider = Web3Core.provider & {
   /* eslint-disable  @typescript-eslint/no-explicit-any */
   request: (payload: any) => Promise<any>
@@ -47,9 +47,22 @@ export type mmSdkProvider = Web3Core.provider & {
 }
 
 export interface TxnRequest {
-  abiItem: Web3Utils.AbiItem
-  params: string[]
   contractAddress: string
+  functionName: string
+  abi?: Web3Utils.AbiItem[]
+  params?: string[]
+  valueInWei?: string
+  gasLimit?: string
+}
+
+type ContractAddress = string
+export interface AbiCache {
+  [key: ContractAddress]: Web3Utils.AbiItem[]
+}
+
+export interface sendEthRequest {
+  to: string
+  valueInWei: string
 }
 
 export interface IMobileRegistryEntryWithQrLink

@@ -10,7 +10,7 @@ import {
 } from './types'
 import Web3 from 'web3'
 import WalletConnectProvider from '@walletconnect/web3-provider'
-// import QRCodeModal from '@walletconnect/qrcode-modal'
+import QRCodeModal from '@walletconnect/qrcode-modal'
 import * as WCBrowserUtils from '@walletconnect/browser-utils'
 import { ipcMain } from 'electron'
 import { PROXY_TOPICS } from '../../common/types/preload'
@@ -31,6 +31,8 @@ export async function getConnectionUris(
   providerSelection: PROVIDERS
 ): Promise<UrisReturn> {
   let uris: UrisReturn = {}
+  // if (provider.isConnected()) return uris
+
   switch (providerSelection) {
     case PROVIDERS.METAMASK_MOBILE: {
       uris = await getMetamaskSdkConnectionUris()
@@ -38,8 +40,7 @@ export async function getConnectionUris(
     }
     case PROVIDERS.WALLET_CONNECT: {
       uris = await getWalletConnectConnectionUris()
-      console.log('URIS: ', JSON.stringify(uris, null, 4))
-      // QRCodeModal.open(uris['ledger live'].qrCodeLink, null)
+      QRCodeModal.open(uris['metamask'].qrCodeLink, null)
       break
     }
     default:
@@ -148,10 +149,6 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
   }
   uris.metamask = entry
 
-  // once user scans QR, get accounts
-  // accounts = await accountsPromise
-  // console.log({ accounts })
-
   handleMetamaskSdkProviderEvents(mmSdkProvider)
 
   provider = mmSdkProvider
@@ -163,30 +160,23 @@ function handleEventsWalletConectProvider(
 ) {
   // Subscribe to accounts change
   wcProvider.on('accountsChanged', (accounts: string[]) => {
-    console.log('accounts changed to ', accounts)
     accountsChanged(accounts)
-    // MainProcess.accountsChanged(accounts)
   })
 
   // Subscribe to chainId change
   wcProvider.on('chainChanged', (chainId: number) => {
-    console.log('chain changed to ', chainId)
     chainChanged(chainId)
-    // MainProcess.chainChanged(chainId)
   })
 
   // Subscribe to session disconnection
   wcProvider.on('disconnect', (code: number, reason: string) => {
-    console.log('disconnected: ', code, reason)
     walletDisconnected(code, reason)
-    // MainProcess.walletDisonnected(code, reason)
   })
 
   //  Enable session (optionally triggers QR Code modal)
   wcProvider.enable().then((accounts: string[]) => {
     console.log('connected ', accounts)
     walletConnected()
-    // MainProcess.walletConnected()
   })
 }
 
@@ -213,9 +203,7 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
 
       const registryUrl = WCBrowserUtils.getWalletRegistryUrl()
       //might want to have local json fallback
-      console.log('fetching ', registryUrl)
       const registryResponse = await fetch(registryUrl)
-      console.log('received registry')
       const _registryResponse$jso = await registryResponse.json()
       const registry = _registryResponse$jso.listings
       // mobile works for desktop too
