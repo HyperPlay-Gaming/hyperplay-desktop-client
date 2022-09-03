@@ -8,7 +8,9 @@ import {
   Runner,
   AppSettings,
   GameSettings,
-  InstallPlatform
+  InstallPlatform,
+  LaunchParams,
+  Tools
 } from 'common/types'
 import { GOGCloudSavesLocation } from 'common/types/gog'
 import * as path from 'path'
@@ -175,10 +177,12 @@ async function createWindow(): Promise<BrowserWindow> {
     minHeight: 345,
     minWidth: 600,
     show: false,
+
     webPreferences: {
       webviewTag: true,
-      contextIsolation: false,
-      nodeIntegration: true,
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: true,
       preload: path.join(__dirname, 'preload.ts')
     }
   })
@@ -624,13 +628,6 @@ ipcMain.on('removeFolder', async (e, [path, folderName]) => {
 })
 
 // Calls WineCFG or Winetricks. If is WineCFG, use the same binary as wine to launch it to dont update the prefix
-interface Tools {
-  exe: string
-  tool: string
-  appName: string
-  runner: Runner
-}
-
 ipcMain.handle(
   'callTool',
   async (event, { tool, exe, appName, runner }: Tools) => {
@@ -887,22 +884,25 @@ if (existsSync(installed)) {
   })
 }
 
-ipcMain.handle('refreshLibrary', async (e, fullRefresh, library?: Runner) => {
-  switch (library) {
-    case 'legendary':
-      await LegendaryLibrary.get().getGames(fullRefresh)
-      break
-    case 'gog':
-      await GOGLibrary.get().sync()
-      break
-    default:
-      await Promise.allSettled([
-        LegendaryLibrary.get().getGames(fullRefresh),
-        GOGLibrary.get().sync()
-      ])
-      break
+ipcMain.handle(
+  'refreshLibrary',
+  async (e, fullRefresh?: boolean, library?: Runner) => {
+    switch (library) {
+      case 'legendary':
+        await LegendaryLibrary.get().getGames(fullRefresh)
+        break
+      case 'gog':
+        await GOGLibrary.get().sync()
+        break
+      default:
+        await Promise.allSettled([
+          LegendaryLibrary.get().getGames(fullRefresh),
+          GOGLibrary.get().sync()
+        ])
+        break
+    }
   }
-})
+)
 
 ipcMain.on('logError', (e, err) => logError(`${err}`, LogPrefix.Frontend))
 ipcMain.on('logInfo', (e, info) => logInfo(`${info}`, LogPrefix.Frontend))
@@ -910,12 +910,6 @@ ipcMain.on('logInfo', (e, info) => logInfo(`${info}`, LogPrefix.Frontend))
 type RecentGame = {
   appName: string
   title: string
-}
-
-type LaunchParams = {
-  appName: string
-  launchArguments: string
-  runner: Runner
 }
 
 let powerDisplayId: number | null
@@ -1271,7 +1265,9 @@ ipcMain.handle(
     return { status: 'done' }
   }
 )
-
+// here is a way to type the callback function
+// does not prevent callbacks with fewer parameters from being passed though
+// typedCallback<WrapApiFunction<typeof updateGame>>()
 ipcMain.handle('updateGame', async (e, appName, runner) => {
   if (!isOnline()) {
     logWarning(
@@ -1296,7 +1292,10 @@ ipcMain.handle('updateGame', async (e, appName, runner) => {
 
   const game = getGame(appName, runner)
   const { title } = game.getGameInfo()
-  notify({ title, body: i18next.t('notify.update.started', 'Update Started') })
+  notify({
+    title,
+    body: i18next.t('notify.update.started', 'Update Started')
+  })
 
   return game
     .update()
