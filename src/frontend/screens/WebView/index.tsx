@@ -8,10 +8,8 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { Runner, WebviewType } from 'common/types'
 import './index.css'
 
-const { clipboard } = window.require('electron')
-
-type CODE = {
-  authorizationCode: string
+type SID = {
+  sid: string
 }
 
 export default function WebView() {
@@ -105,9 +103,8 @@ export default function WebView() {
               webview.copy()
 
               setTimeout(async () => {
-                const { authorizationCode }: CODE = JSON.parse(
-                  clipboard.readText()
-                )
+                const text = await window.api.clipboardReadText()
+                const { sid }: SID = JSON.parse(text) // clipboard.readText())
 
                 try {
                   setLoading({
@@ -118,7 +115,7 @@ export default function WebView() {
                   handleSuccessfulLogin()
                 } catch (error) {
                   console.error(error)
-                  window.api.logError(error)
+                  window.api.logError(String(error))
                 }
               }, 500)
             })
