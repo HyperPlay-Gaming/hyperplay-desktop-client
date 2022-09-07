@@ -37,6 +37,7 @@ app.get('/', (req, res) => {
 
 app.get('/ethBalance', async (req, res) => {
   const accounts: string[] = await web3.eth.getAccounts()
+  console.log('/ethbalance accounts = ', accounts)
   const bal = await web3.eth.getBalance(accounts[0])
   res.send({
     balance: bal

@@ -85,7 +85,6 @@ export interface ConnectInfo {
 }
 
 export type accountsChangedType = (accounts: string[]) => void
-export type walletConnectedType = () => void
-export type walletConnectedBroadcastType = (accounts: string[]) => void
+export type walletConnectedType = (accounts: string[]) => void
 export type walletDisconnectedType = (code: number, reason: string) => void
 export type chainChangedType = (chainId: number) => void

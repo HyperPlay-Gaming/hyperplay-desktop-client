@@ -1,5 +1,4 @@
-// import { PROVIDERS, WalletConnectWeb3Provider } from '../../wallets/types'
-// import { PROVIDERS } from '../../proxy/types'
+import { PROVIDERS } from '../../proxy/types'
 import { app, server, serverStarted } from '../../proxy/proxy'
 import {
   getConnectionUris,
@@ -38,7 +37,7 @@ describe('MANUAL tests for the proxy server', function () {
 
   // beforeAll(async function () {
   //   let connectedPromise = getConnectedPromise()
-  //   await getConnectionUris(PROVIDERS.WALLET_CONNECT)
+  //   await getConnectionUris(PROVIDERS.METAMASK_MOBILE)
   //   await serverStarted
   //   console.log('Please scan the QR code with your metamask mobile app')
   //   await connectedPromise
@@ -99,6 +98,9 @@ describe('MANUAL tests for the proxy server', function () {
   //   expect(res.statusCode).toEqual(200)
   // }, 60000)
   // test('should fail to get contract abi from etherscan', async function () {
+  //   console.log(
+  //     'Error messages for invalid parameters is expected in this test'
+  //   )
   //   let resErr = await request(app)
   //     .post('/callContract')
   //     .send({
@@ -109,7 +111,7 @@ describe('MANUAL tests for the proxy server', function () {
   //         '1000000000000000000'
   //       ]
   //     })
-  //   console.log(resErr.body)
+  //   // console.log(resErr.body.message) //should be an error message
   //   expect(resErr.statusCode).toEqual(500)
   //   resErr = await request(app)
   //     .post('/callContract')

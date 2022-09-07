@@ -6,10 +6,8 @@ import {
   WalletConnectWeb3Provider,
   IMobileRegistryEntryWithQrLink,
   ProviderRpcError,
-  ConnectInfo,
   accountsChangedType,
   walletConnectedType,
-  walletConnectedBroadcastType,
   walletDisconnectedType,
   chainChangedType
 } from './types'
@@ -66,15 +64,12 @@ let chainChanged: chainChangedType
 // main uses this to pass in callbacks
 export function passEventCallbacks(
   _accountsChanged: accountsChangedType,
-  _walletConnected: walletConnectedBroadcastType,
+  _walletConnected: walletConnectedType,
   _walletDisconnected: walletDisconnectedType,
   _chainChanged: chainChangedType
 ) {
   accountsChanged = _accountsChanged
-  walletConnected = async () => {
-    const accounts: string[] = await web3.eth.getAccounts()
-    _walletConnected(accounts)
-  }
+  walletConnected = _walletConnected
   walletDisconnected = _walletDisconnected
   chainChanged = _chainChanged
 }
@@ -91,10 +86,10 @@ function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
     walletDisconnected(error.code, error.message)
   })
 
-  mmSdkProvider.on('connect', (connectInfo: ConnectInfo) => {
-    console.log('connected id = ', connectInfo.chainId)
-    walletConnected()
-  })
+  // mmSdkProvider.on('connect', (connectInfo: ConnectInfo) => {
+  //   console.log('connected id = ', connectInfo.chainId)
+  //   walletConnected()
+  // })
 
   mmSdkProvider.on('chainChanged', (chainId: number) => {
     console.log('chain changed to ', chainId)
@@ -126,6 +121,7 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
         'mm request accounts returned should be connected: ',
         accounts
       )
+      walletConnected(accounts)
     })
 
   // get link for metamask mobile. Use as QR code
@@ -168,7 +164,7 @@ function handleEventsWalletConectProvider(
   //  Enable session (optionally triggers QR Code modal)
   wcProvider.enable().then((accounts: string[]) => {
     console.log('connected ', accounts)
-    walletConnected()
+    walletConnected(accounts)
   })
 }
 
@@ -192,7 +188,11 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
 
     wcProvider.connector.on('display_uri', async (err, payload) => {
       const baseUri = payload.params[0]
-      console.log('base uri is ', baseUri)
+      console.log(
+        'base uri is ',
+        baseUri,
+        ' copy paste this in ledger live or wherever your wallet connect wallet is if you cannot scan the qr code'
+      )
 
       const registryUrl = WCBrowserUtils.getWalletRegistryUrl()
       //might want to have local json fallback
