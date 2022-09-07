@@ -8,8 +8,8 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { Runner, WebviewType } from 'common/types'
 import './index.css'
 
-type SID = {
-  sid: string
+type CODE = {
+  authorizationCode: string
 }
 
 export default function WebView() {
@@ -104,7 +104,7 @@ export default function WebView() {
 
               setTimeout(async () => {
                 const text = await window.api.clipboardReadText()
-                const { sid }: SID = JSON.parse(text) // clipboard.readText())
+                const { authorizationCode }: CODE = JSON.parse(text)
 
                 try {
                   setLoading({

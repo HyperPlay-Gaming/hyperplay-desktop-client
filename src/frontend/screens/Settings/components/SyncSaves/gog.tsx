@@ -126,12 +126,10 @@ export default function GOGSyncSaves({
 
     await window.api
       .syncGOGSaves(gogSaves, appName, syncType)
-      .then(async (res: { stderr: string }) =>
-        window.api.openMessageBox({
-          message: res.stderr,
-          title: 'Saves Sync'
-        })
-      )
+      .then(async (res: { stderr: string }) => {
+        setManuallyOutput(res.stderr.split('\n'))
+        setManuallyOutputShow(true)
+      })
 
     setIsSyncing(false)
   }

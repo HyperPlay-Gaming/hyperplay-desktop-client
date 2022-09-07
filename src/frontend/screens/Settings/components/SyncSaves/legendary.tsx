@@ -109,11 +109,10 @@ export default function LegendarySyncSaves({
     setIsSyncing(true)
 
     await syncSaves(savesPath, appName, 'legendary', syncType).then(
-      async (res: string) =>
-        window.api.openMessageBox({
-          message: res,
-          title: 'Saves Sync'
-        })
+      (response: string) => {
+        setManuallyOutput(response.split('\n'))
+        setManuallyOutputShow(true)
+      }
     )
     setIsSyncing(false)
   }
