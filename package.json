@@ -174,7 +174,7 @@
     "web3": "^1.7.5"
   },
   "scripts": {
-    "dev": "esbuild src/backend/preload.ts --platform=node --external:electron --bundle --outfile=build/electron/preload.js && vite",
+    "dev": "vite",
     "codecheck": "tsc --noEmit",
     "test": "jest --noStackTrace",
     "testProxy": "jest proxy.test.ts",
