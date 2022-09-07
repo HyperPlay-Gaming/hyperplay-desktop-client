@@ -116,6 +116,7 @@ import { gameInfoStore } from './legendary/electronStores'
 import { getFonts } from 'font-list'
 import { verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
+import { clipboard } from 'electron'
 import { PROXY_TOPICS } from './proxy/types'
 import * as ProviderHelper from 'backend/proxy/providerHelper'
 import * as ProxyServer from './proxy/proxy'
@@ -1265,9 +1266,7 @@ ipcMain.handle(
     return { status: 'done' }
   }
 )
-// here is a way to type the callback function
-// does not prevent callbacks with fewer parameters from being passed though
-// typedCallback<WrapApiFunction<typeof updateGame>>()
+
 ipcMain.handle('updateGame', async (e, appName, runner) => {
   if (!isOnline()) {
     logWarning(
@@ -1551,6 +1550,14 @@ ipcMain.handle('getRealPath', (event, path) => {
   return resolvedPath
 })
 
+ipcMain.handle('clipboardReadText', () => {
+  return clipboard.readText()
+})
+
+ipcMain.on('clipboardWriteText', (event, text) => {
+  return clipboard.writeText(text)
+})
+
 /*
   Other Keys that should go into translation files:
   t('box.error.generic.title')
@@ -1566,15 +1573,6 @@ import './shortcuts/ipc_handler'
 import './anticheat/ipc_handler'
 import './legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
-
-import { clipboard } from 'electron'
-ipcMain.handle('clipboardReadText', () => {
-  return clipboard.readText()
-})
-
-ipcMain.on('clipboardWriteText', (event, text) => {
-  return clipboard.writeText(text)
-})
 
 // import Store from 'electron-store'
 // interface StoreMap {
