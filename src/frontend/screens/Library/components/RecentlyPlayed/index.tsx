@@ -39,6 +39,10 @@ export default function RecentlyPlayed({ handleModal, onlyInstalled }: Props) {
     }
   })
 
+  if (!recentGames.length) {
+    return null
+  }
+
   return (
     <>
       <h3 className="libraryHeader">{t('Recent', 'Played Recently')}</h3>

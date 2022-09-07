@@ -71,6 +71,10 @@
             "wine-not-found": {
                 "message": "No Wine Version Selected. Check Game Settings!",
                 "title": "Wine Not Found"
+            },
+            "winetricks": {
+                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
+                "title": "Winetricks error"
             }
         },
         "info": {
@@ -367,6 +371,7 @@
         "mac": "Mac",
         "win": "ramen"
     },
+    "progress": "Progress",
     "Recent": "Recente Spellen",
     "search": "Voor je spel naam hier in...",
     "setting": {

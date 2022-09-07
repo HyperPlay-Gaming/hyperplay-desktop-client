@@ -3,7 +3,7 @@
         "actions_font_family": "Fonte para ações (Padrão: \"Rubik\")",
         "all_tiles_in_color": "Mostrar todas os quadrados de jogos em cores",
         "content_font_family": "Fonte para conteúdo (Padrão: \"Cabin\")",
-        "fonts": "Fontes",
+        "fonts": "Fontees",
         "title": "Accessibilidade",
         "zoom": "Zoom"
     },
@@ -71,6 +71,10 @@
             "wine-not-found": {
                 "message": "Nenhuma Versão do wine selecionada. Cheque as configurações do jogo!",
                 "title": "Wine Não Encontrado"
+            },
+            "winetricks": {
+                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
+                "title": "Winetricks error"
             }
         },
         "info": {
@@ -367,6 +371,7 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "progress": "Progress",
     "Recent": "Jogados Recentemente",
     "search": "Buscar jogos",
     "setting": {

@@ -61,8 +61,8 @@
             "launchAborted": "Launch aborted",
             "title": "خطا",
             "uncaught-exception": {
-                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
-                "title": "Uncaught Exception occured!"
+                "message": "یک خطای نامشخص رخ داد:{{newLine}}{{error}}{{newLine}}{{newLine}}Heroic بسته خواهد شد! خطا را در ریپوزیتوری گیت\u200cهاب ما گزارش دهید.",
+                "title": "خطای نامشخص رخ داد!"
             },
             "update": {
                 "message": "مشکلی در به روز رسانی پیش آمد، لطفا لاگ ها را بررسی کرده و مجددا امتحان کنید!",
@@ -71,6 +71,10 @@
             "wine-not-found": {
                 "message": "نسخه ای از Wine انتخاب نشده است. تنظیمات بازی را چک کنید!",
                 "title": "Wine یافت نشد"
+            },
+            "winetricks": {
+                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
+                "title": "Winetricks error"
             }
         },
         "info": {
@@ -367,6 +371,7 @@
         "mac": "مک",
         "win": "ویندوز"
     },
+    "progress": "Progress",
     "Recent": "اخیرا بازی شده",
     "search": "جست و جو برای بازی ها",
     "setting": {
