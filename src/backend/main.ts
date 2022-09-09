@@ -114,9 +114,16 @@ import { gameInfoStore } from './legendary/electronStores'
 import { getFonts } from 'font-list'
 import { verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
-import { PROXY_TOPICS } from 'common/types/preload'
+import { PROXY_TOPICS } from './proxy/types'
 import * as ProviderHelper from 'backend/proxy/providerHelper'
 import * as ProxyServer from './proxy/proxy'
+import {
+  AccountsChangedType,
+  ChainChangedType,
+  ConnectionRequestRejectedType,
+  WalletConnectedType,
+  WalletDisconnectedType
+} from './proxy/types'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 
@@ -1562,25 +1569,38 @@ import './legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
 
 // sends messages to renderer process through preload.ts callbacks
-export function walletConnected(accounts: string[]) {
+export const walletConnected: WalletConnectedType = function (
+  accounts: string[]
+) {
   mainWindow.webContents.send(PROXY_TOPICS.WALLET_CONNECTED, accounts)
 }
 
-export function walletDisonnected(code: number, reason: string) {
+export const walletDisconnected: WalletDisconnectedType = function (
+  code: number,
+  reason: string
+) {
   mainWindow.webContents.send(PROXY_TOPICS.WALLET_DISCONNECTED, code, reason)
 }
 
-export function accountsChanged(accounts: string[]) {
+export const accountsChanged: AccountsChangedType = function (
+  accounts: string[]
+) {
   mainWindow.webContents.send(PROXY_TOPICS.ACCOUNT_CHANGED, accounts)
 }
 
-export function chainChanged(chainId: number) {
+export const chainChanged: ChainChangedType = function (chainId: number) {
   mainWindow.webContents.send(PROXY_TOPICS.CHAIN_CHANGED, chainId)
 }
+
+export const connectionRequestRejected: ConnectionRequestRejectedType =
+  function () {
+    mainWindow.webContents.send(PROXY_TOPICS.CONNECTION_REQUEST_REJECTED)
+  }
 
 ProviderHelper.passEventCallbacks(
   accountsChanged,
   walletConnected,
-  walletDisonnected,
-  chainChanged
+  walletDisconnected,
+  chainChanged,
+  connectionRequestRejected
 )

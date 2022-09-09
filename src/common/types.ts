@@ -3,6 +3,14 @@ import { LegendaryInstallPlatform } from './types/legendary'
 import { ChildProcess } from 'child_process'
 import { VersionInfo } from 'heroic-wine-downloader'
 
+export type WrapRendererCallback<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  TFunction extends (...args: any) => any
+> = (
+  e: Electron.IpcRendererEvent,
+  ...args: [...Parameters<TFunction>]
+) => ReturnType<TFunction>
+
 export type Runner = 'legendary' | 'gog'
 
 interface About {

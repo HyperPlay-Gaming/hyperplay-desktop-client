@@ -8,18 +8,20 @@ import request from 'supertest'
 import {
   accountsChanged,
   walletConnected,
-  walletDisonnected,
+  walletDisconnected,
   chainChanged,
   wait,
-  getConnectedPromise
+  getConnectedPromise,
+  connectionRequestRejected
 } from '../../__mocks__/providerCallbacks'
 import BN from 'bn.js'
 
 passEventCallbacks(
   accountsChanged,
   walletConnected,
-  walletDisonnected,
-  chainChanged
+  walletDisconnected,
+  chainChanged,
+  connectionRequestRejected
 )
 
 describe('MANUAL tests for the proxy server', function () {
@@ -37,7 +39,7 @@ describe('MANUAL tests for the proxy server', function () {
 
   // beforeAll(async function () {
   //   let connectedPromise = getConnectedPromise()
-  //   await getConnectionUris(PROVIDERS.METAMASK_MOBILE)
+  //   await getConnectionUris(PROVIDERS.WALLET_CONNECT)
   //   await serverStarted
   //   console.log('Please scan the QR code with your metamask mobile app')
   //   await connectedPromise

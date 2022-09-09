@@ -12,7 +12,7 @@ export function walletConnected(accounts: string[]) {
   connectedResolve()
 }
 
-export function walletDisonnected(code: number, reason: string) {
+export function walletDisconnected(code: number, reason: string) {
   console.log('renderer receives: disconnected: ', code, reason)
 }
 
@@ -22,6 +22,10 @@ export function accountsChanged(accounts: string[]) {
 
 export function chainChanged(chainId: number) {
   console.log('renderer receives: chain changed to ', chainId)
+}
+
+export function connectionRequestRejected() {
+  console.log('renderer receives: connection request rejected ')
 }
 
 export async function wait(ms: number) {

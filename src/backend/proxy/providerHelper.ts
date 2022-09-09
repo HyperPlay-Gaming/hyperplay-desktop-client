@@ -6,17 +6,20 @@ import {
   WalletConnectWeb3Provider,
   IMobileRegistryEntryWithQrLink,
   ProviderRpcError,
-  accountsChangedType,
-  walletConnectedType,
-  walletDisconnectedType,
-  chainChangedType
+  AccountsChangedType,
+  WalletConnectedType,
+  WalletDisconnectedType,
+  ChainChangedType,
+  ConnectInfo,
+  ProviderMessage,
+  ConnectionRequestRejectedType,
+  PROXY_TOPICS
 } from './types'
 import Web3 from 'web3'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import * as WCBrowserUtils from '@walletconnect/browser-utils'
 import { ipcMain } from 'electron'
-import { PROXY_TOPICS } from '../../common/types/preload'
 
 let sdk: MetaMaskSDK
 
@@ -56,22 +59,26 @@ async function handleGetConnectionUris(
 
 ipcMain?.handle(PROXY_TOPICS.GET_CONNECTION_URIS, handleGetConnectionUris)
 
-let accountsChanged: accountsChangedType
-let walletConnected: walletConnectedType
-let walletDisconnected: walletDisconnectedType
-let chainChanged: chainChangedType
+let accountsChanged: AccountsChangedType
+let walletConnected: WalletConnectedType
+let walletDisconnected: WalletDisconnectedType
+let chainChanged: ChainChangedType
+let connectionRequestRejected: ConnectionRequestRejectedType
 
 // main uses this to pass in callbacks
 export function passEventCallbacks(
-  _accountsChanged: accountsChangedType,
-  _walletConnected: walletConnectedType,
-  _walletDisconnected: walletDisconnectedType,
-  _chainChanged: chainChangedType
+  _accountsChanged: AccountsChangedType,
+  _walletConnected: WalletConnectedType,
+  _walletDisconnected: WalletDisconnectedType,
+  _chainChanged: ChainChangedType,
+  // _qrCodeScanned
+  _connectionRequestRejected: ConnectionRequestRejectedType
 ) {
   accountsChanged = _accountsChanged
   walletConnected = _walletConnected
   walletDisconnected = _walletDisconnected
   chainChanged = _chainChanged
+  connectionRequestRejected = _connectionRequestRejected
 }
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -86,10 +93,10 @@ function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
     walletDisconnected(error.code, error.message)
   })
 
-  // mmSdkProvider.on('connect', (connectInfo: ConnectInfo) => {
-  //   console.log('connected id = ', connectInfo.chainId)
-  //   walletConnected()
-  // })
+  mmSdkProvider.on('connect', (connectInfo: ConnectInfo) => {
+    console.log('connected mm sdk id = ', connectInfo.chainId)
+    // walletConnected()
+  })
 
   mmSdkProvider.on('chainChanged', (chainId: number) => {
     console.log('chain changed to ', chainId)
@@ -108,6 +115,16 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
       shouldShimWeb3: false // disable window.web3
     })
   }
+  // const wcConnector = sdk.getWalletConnectConnector()
+  // /* eslint-disable  @typescript-eslint/no-explicit-any */
+  // wcConnector.on('disconnect', (err: any, payload: any) => {
+  //   console.log('session update MM SDK wc connector DISCONNECTED')
+  //   console.log(err)
+  //   console.log(payload)
+  //   if (payload.params[0].message === 'Session Rejected') {
+  //     // connection request was rejected
+  //   }
+  // })
   const mmSdkProvider = sdk.getProvider()
   if (mmSdkProvider === null) return {}
 
@@ -161,10 +178,21 @@ function handleEventsWalletConectProvider(
     walletDisconnected(code, reason)
   })
 
+  // wcProvider.on('connect', (connectInfo: ConnectInfo) => {
+  //   console.log('connected to wc = ', connectInfo.chainId)
+  // })
+
   //  Enable session (optionally triggers QR Code modal)
   wcProvider.enable().then((accounts: string[]) => {
     console.log('connected ', accounts)
     walletConnected(accounts)
+  })
+
+  wcProvider.on('message', (msg: ProviderMessage) => {
+    console.log(
+      'message received by wc Provider: ',
+      JSON.stringify(msg, null, 4)
+    )
   })
 }
 
@@ -185,6 +213,20 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
         name: 'HyperPlay'
       }
     }) as WalletConnectWeb3Provider
+    wcProvider.connector.on('connect', (err, payload) => {
+      console.log('session update wc connector')
+      console.log(err)
+      console.log(payload)
+    })
+    wcProvider.connector.on('disconnect', (err, payload) => {
+      console.log('session update wc connector DISCONNECTED')
+      console.log(err)
+      console.log(payload)
+      if (payload.params[0].message === 'Session Rejected') {
+        // connection request was rejected
+        connectionRequestRejected()
+      }
+    })
 
     wcProvider.connector.on('display_uri', async (err, payload) => {
       const baseUri = payload.params[0]

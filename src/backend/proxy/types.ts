@@ -5,6 +5,15 @@ import { AbstractProvider } from 'web3-core/types'
 import Web3Core from 'web3-core'
 import WCTypes from '@walletconnect/types'
 
+export enum PROXY_TOPICS {
+  WALLET_CONNECTED = 'wallet-connected',
+  WALLET_DISCONNECTED = 'wallet-disconnected',
+  ACCOUNT_CHANGED = 'account-changed',
+  CHAIN_CHANGED = 'chain-changed',
+  GET_CONNECTION_URIS = 'get-connection-uris',
+  CONNECTION_REQUEST_REJECTED = 'connection-request-rejected'
+}
+
 export interface RequestBody<T> extends Express.Request {
   body: T
 }
@@ -84,7 +93,13 @@ export interface ConnectInfo {
   chainId: string
 }
 
-export type accountsChangedType = (accounts: string[]) => void
-export type walletConnectedType = (accounts: string[]) => void
-export type walletDisconnectedType = (code: number, reason: string) => void
-export type chainChangedType = (chainId: number) => void
+export type AccountsChangedType = (accounts: string[]) => void
+export type WalletConnectedType = (accounts: string[]) => void
+export type WalletDisconnectedType = (code: number, reason: string) => void
+export type ChainChangedType = (chainId: number) => void
+export type ConnectionRequestRejectedType = () => void
+
+export interface ProviderMessage {
+  readonly type: string
+  readonly data: unknown
+}
