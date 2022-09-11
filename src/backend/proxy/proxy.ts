@@ -1,12 +1,21 @@
 import express from 'express'
-import { AbiCache, RequestBody, sendEthRequest, TxnRequest } from './types'
-import { web3 } from './providerHelper'
+import {
+  AbiCache,
+  RequestBody,
+  TxnRequest,
+  RpcRequest,
+  AddEthereumChainParameter,
+  Chain,
+  SignRequest
+} from './types'
+import { web3, provider } from './providerHelper'
 import { isProviderConnected, isUserAuthenticated, unless } from './middleware'
 // import { TransactionReceipt } from 'web3-core'
 import jsdom from 'jsdom'
 const { JSDOM } = jsdom
 import Web3Utils from 'web3-utils'
 import { Server } from 'http'
+import { RequestArguments } from 'web3-core'
 
 // could dynamically select by setting = 0
 // then set local env var that games could use
@@ -35,37 +44,116 @@ app.get('/', (req, res) => {
   })
 })
 
-app.get('/ethBalance', async (req, res) => {
-  const accounts: string[] = await web3.eth.getAccounts()
-  console.log('/ethbalance accounts = ', accounts)
-  const bal = await web3.eth.getBalance(accounts[0])
-  res.send({
-    balance: bal
-  })
-})
+// NOTE: This only works with MetaMask currently but could expand to other providers with EIP-3326
+// Attempts to switch to the provided Ethereum chain with chainId
+// If chainId is not added and addEthChainParams is passed, it will request to add the chain
+// Returns empty string on success and human readable error message on failure
+async function switchOrAddEthereumChain(chain: Chain) {
+  try {
+    await provider.request({
+      method: 'wallet_switchEthereumChain',
+      params: [{ chainId: web3.utils.toHex(chain.chainId) }]
+    })
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
+  } catch (switchError: any) {
+    // Not working with MM SDK: This error code indicates that the chain has not been added to MetaMask.
+    // if (switchError.code === 4902) {
+    // type guards to ensure the ethereum chain can be added
+    const requiredFieldsAreSupplied =
+      chain.chainMetadata !== undefined &&
+      chain.chainMetadata.chainName !== undefined &&
+      chain.chainMetadata.nativeCurrency !== undefined &&
+      chain.chainMetadata.nativeCurrency.name !== undefined &&
+      chain.chainMetadata.nativeCurrency.symbol !== undefined &&
+      chain.chainMetadata.nativeCurrency.decimals === 18 &&
+      chain.chainMetadata.rpcUrls !== undefined &&
+      chain.chainMetadata.rpcUrls.length > 0
+    if (chain.chainMetadata === undefined || !requiredFieldsAreSupplied) {
+      console.log(JSON.stringify(chain.chainMetadata, null, 4))
+      throw 'Chain is not added and the chain data was not provided or malformed. Please pass chain data on the next call.'
+    }
+    const chainParameter: AddEthereumChainParameter = {
+      chainId: web3.utils.toHex(chain.chainId),
+      ...chain.chainMetadata
+    }
+    try {
+      await provider.request({
+        method: 'wallet_addEthereumChain',
+        params: [chainParameter]
+      })
+      return
+    } catch (addError) {
+      // handle "add" error
+      throw `There was an error adding the chain. ${addError}`
+    }
+    // }
+    // handle other "switch" errors
+    // console.log(switchError.code)
+    // throw `There was an error switching to the chain. ${switchError}`
+  }
+}
 
-// receipt exposes `from` address to game dev which may not be desirable
-app.post('/sendEth', async (req: RequestBody<sendEthRequest>, res) => {
+async function checkChainId(chain: Chain) {
+  //type guard
+  if (chain === undefined || chain.chainId === undefined) {
+    throw 'ChainId must be specified'
+  }
+  // need to check because only MetaMask supports `wallet_switchEthereumChain`
+  const currentChainId: number = await web3.eth.getChainId()
+
+  if (chain.chainId !== currentChainId.toString()) {
+    // what does this return for non metamask? expected that it throws
+    // shouldn't send txn in that instance
+    await switchOrAddEthereumChain(chain)
+    // not necessary for metamask. might be needed for other wallets
+    // double check that user did not reject request to switch networks
+    // const currentChainIdAfterSwitch: number = await web3.eth.getChainId()
+    // if (chain.chainId !== currentChainIdAfterSwitch.toString()) {
+    //   throw 'User rejected the chain swap request'
+    // }
+  }
+}
+
+app.post('/rpc', async (req: RequestBody<RpcRequest>, res) => {
+  const requestArgs: RequestArguments = req.body.request
   // type guards
-  if (req.body.to === undefined || req.body.valueInWei === undefined) {
-    res
-      .status(500)
-      .send({ message: 'Recipient address and value must be passed' })
+  if (requestArgs === undefined || requestArgs.method === undefined) {
+    res.status(500).send({
+      message: 'ChainId and provider request method must be specified'
+    })
     return
   }
 
   try {
-    const accounts: string[] = await web3.eth.getAccounts()
-    const valueInWei = req.body.valueInWei
+    await checkChainId(req.body.chain)
+    // if params passed to provider are malformed, request will throw
+    const result = await provider.request(requestArgs)
+    res.send(result)
+  } catch (e) {
+    const errStr = String(e)
+    console.log(errStr)
+    res.status(500).send({ message: errStr })
+  }
+})
 
-    const receipt = await web3.eth.sendTransaction({
-      from: accounts[0],
-      to: req.body.to,
-      value: valueInWei
+app.post('/sign', async (req: RequestBody<SignRequest>, res) => {
+  console.log(JSON.stringify(req.body, null, 4))
+  // type guards
+  if (req.body.data === undefined || req.body.address === undefined) {
+    res.status(500).send({
+      message: 'Data and address must be specified'
     })
-    // console.log('receipt first returned = ', receipt)
-    // receipt = await txnConfirmation(receipt.transactionHash, 120000)
-    res.send({ receipt: receipt })
+    return
+  }
+
+  try {
+    await checkChainId(req.body.chain)
+    const response = await web3.eth.personal.sign(
+      req.body.data,
+      req.body.address,
+      ''
+    )
+    res.send(response)
   } catch (e) {
     const errStr = String(e)
     console.log(errStr)
@@ -129,6 +217,7 @@ app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
 
   // call function
   try {
+    await checkChainId(req.body.chain)
     const contract = new web3.eth.Contract(
       abiCache[req.body.contractAddress],
       req.body.contractAddress

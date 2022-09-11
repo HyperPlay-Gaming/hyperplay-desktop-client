@@ -4,6 +4,7 @@ import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers'
 import { AbstractProvider } from 'web3-core/types'
 import Web3Core from 'web3-core'
 import WCTypes from '@walletconnect/types'
+import { RequestArguments } from 'web3-core'
 
 export enum PROXY_TOPICS {
   WALLET_CONNECTED = 'wallet-connected',
@@ -55,6 +56,36 @@ export type mmSdkProvider = Web3Core.provider & {
   isConnected: () => boolean
 }
 
+export type AddEthereumChainParameter = {
+  chainId: string
+} & AddChainMetadata
+
+export interface Chain {
+  // chainId is required to ensure players don't send funds on wrong network
+  // decimal based to match chainlist.org
+  chainId: string
+  // if chainId is not supported, this will be required to add the chain
+  chainMetadata?: AddChainMetadata
+}
+
+// specified by MetaMask, may change with EIP-3085
+export interface AddChainMetadata {
+  chainName: string
+  nativeCurrency: {
+    name: string
+    symbol: string // 2-6 characters long
+    decimals: 18
+  }
+  rpcUrls: string[]
+  blockExplorerUrls?: string[] //not necessary to add chain
+  iconUrls?: string[] // Currently ignored.
+}
+
+export interface RpcRequest {
+  request: RequestArguments
+  chain: Chain
+}
+
 export interface TxnRequest {
   contractAddress: string
   functionName: string
@@ -62,6 +93,7 @@ export interface TxnRequest {
   params?: string[]
   valueInWei?: string
   gasLimit?: string
+  chain: Chain
 }
 
 type ContractAddress = string
@@ -102,4 +134,10 @@ export type ConnectionRequestRejectedType = () => void
 export interface ProviderMessage {
   readonly type: string
   readonly data: unknown
+}
+
+export interface SignRequest {
+  data: string
+  address: string
+  chain: Chain
 }

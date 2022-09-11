@@ -20,6 +20,8 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import * as WCBrowserUtils from '@walletconnect/browser-utils'
 import { ipcMain } from 'electron'
+import { registryCache } from './registryBackup'
+import { IAppRegistry } from '@walletconnect/types'
 
 let sdk: MetaMaskSDK
 
@@ -40,6 +42,7 @@ export async function getConnectionUris(
     }
     case PROVIDERS.WALLET_CONNECT: {
       uris = await getWalletConnectConnectionUris()
+      console.log('opening qr code')
       QRCodeModal.open(uris['metamask'].qrCodeLink, null)
       break
     }
@@ -238,9 +241,16 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
 
       const registryUrl = WCBrowserUtils.getWalletRegistryUrl()
       //might want to have local json fallback
-      const registryResponse = await fetch(registryUrl)
-      const _registryResponse$jso = await registryResponse.json()
-      const registry = _registryResponse$jso.listings
+      console.log('fetching url = ', registryUrl)
+      let _registryResponseJSON = registryCache
+      try {
+        const registryResponse = await fetch(registryUrl)
+        _registryResponseJSON = await registryResponse.json()
+      } catch (e) {
+        console.log(String(e))
+      }
+      console.log('fetched')
+      const registry: IAppRegistry = _registryResponseJSON.listings
       // mobile works for desktop too
       const platform = 'mobile'
       const whitelist = ['metamask', 'ledger live'] // not case sensitive //212 wallets supported

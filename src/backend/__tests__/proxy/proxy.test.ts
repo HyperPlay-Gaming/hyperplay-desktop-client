@@ -44,6 +44,7 @@ describe('MANUAL tests for the proxy server', function () {
   //   console.log('Please scan the QR code with your metamask mobile app')
   //   await connectedPromise
   // }, 60000)
+
   // test('should start server and get / endpoint', async function () {
   //   // await serverStarted
   //   const res = await request(app).get('/')
@@ -51,12 +52,180 @@ describe('MANUAL tests for the proxy server', function () {
   //   expect(res.body.message).toEqual('The HyperPlay proxy server is running!')
   //   expect(res.statusCode).toEqual(200)
   // }, 10000)
-  // test('should connect wallet, start server, and get eth balance', async function () {
-  //   const res = await request(app).get('/ethBalance')
-  //   console.log('eth balance is ', res.body.balance)
-  //   // expect(res.body.balance).toEqual('4000000000000000')
-  //   expect(res.statusCode).toEqual(200)
+
+  // test('should fail to get accounts', async function () {
+  //   let acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       // request: {
+  //       //   method: 'eth_accounts'
+  //       // },
+  //       chain: {
+  //         chainId: '0x4'
+  //       }
+  //     })
+  //   expect(acctsRes.statusCode).toEqual(500)
+  //   console.log(acctsRes.body)
+  //   acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         // method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         chainId: '0x4'
+  //       }
+  //     })
+  //   expect(acctsRes.statusCode).toEqual(500)
+  //   console.log(acctsRes.body)
+  //   acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         // chainId: '0x4'
+  //       }
+  //     })
+  //   expect(acctsRes.statusCode).toEqual(500)
+  //   console.log(acctsRes.body)
+  //   acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       }
+  //       // chain: {
+  //       //   chainId: '0x4'
+  //       // }
+  //     })
+  //   expect(acctsRes.statusCode).toEqual(500)
+  //   console.log(acctsRes.body)
+  //   acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         //polygon but no add chain parameters supplied
+  //         chainId: '0x89'
+  //       }
+  //     })
+  //   expect(acctsRes.statusCode).toEqual(500)
+  //   console.log('Cant switch to polygon before it is added', acctsRes.body)
+  // }, 20000)
+
+  // test('should switch to Polygon and get accounts and then back to rinkeby', async function () {
+  //   let acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         //polygon but no add chain parameters supplied
+  //         chainId: '137',
+  //         chainMetadata: {
+  //           chainName: 'Polygon',
+  //           nativeCurrency: {
+  //             name: 'MATIC',
+  //             symbol: 'MATIC',
+  //             decimals: 18
+  //           },
+  //           rpcUrls: ['https://polygon-rpc.com']
+  //         }
+  //       }
+  //     })
+  //   console.log('should have added and switched to polygon ', acctsRes.body)
+  //   expect(acctsRes.statusCode).toEqual(200)
+  //   acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         chainId: '4'
+  //       }
+  //     })
+  //   console.log('should have switched back to Rinkeby ', acctsRes.body)
+  //   expect(acctsRes.statusCode).toEqual(200)
+  // }, 20000)
+
+  // test('should get eth balance on Rinkeby', async function () {
+  //   const acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         chainId: '4'
+  //       }
+  //     })
+  //   console.log('should have switched back to Rinkeby ', acctsRes.body)
+  //   expect(acctsRes.statusCode).toEqual(200)
+  //   const balRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_getBalance',
+  //         params: [acctsRes.body[0], 'latest']
+  //       },
+  //       chain: {
+  //         chainId: '4'
+  //       }
+  //     })
+  //   console.log('eth balance response ', balRes.body)
+  //   expect(balRes.statusCode).toEqual(200)
+  // })
+
+  // test.only('should sign a message', async function () {
+  //   const acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         chainId: '4'
+  //       }
+  //     })
+  //   console.log('should be on Rinkeby ', acctsRes.body)
+  //   expect(acctsRes.statusCode).toEqual(200)
+  //   const balRes = await request(app).post('/sign').send({
+  //     data: '0xdeadbeaf',
+  //     address: acctsRes.body[0]
+  //   })
+  //   console.log('sign message response = ', balRes.body)
+  //   expect(balRes.statusCode).toEqual(200)
+  // })
+
+  // test('should get accounts', async function () {
+  //   const acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         chainId: '0x4'
+  //       }
+  //     })
+  //   console.log('accounts response body = ', acctsRes.body)
+  //   // expect(acctsRes.statusCode).toEqual(200)
+  //   // //need a test for when game dev sends account different from what's connected to hyperplay
+  //   // const res = await request(app).post('/rpc').send({
+  //   //   method: 'eth_getBalance',
+  //   //   params: []
+  //   // })
+  //   // console.log('eth balance is ', res.body.balance)
+  //   // // expect(res.body.balance).toEqual('4000000000000000')
+  //   // expect(res.statusCode).toEqual(200)
   // }, 60000)
+
   // test('should connect wallet, start server, and fail to send eth over testnet', async function () {
   //   const resBefore = await request(app).get('/ethBalance')
   //   const ethBefore = resBefore.body.balance
@@ -99,6 +268,7 @@ describe('MANUAL tests for the proxy server', function () {
   //   )
   //   expect(res.statusCode).toEqual(200)
   // }, 60000)
+
   // test('should fail to get contract abi from etherscan', async function () {
   //   console.log(
   //     'Error messages for invalid parameters is expected in this test'
@@ -138,6 +308,7 @@ describe('MANUAL tests for the proxy server', function () {
   //     })
   //   expect(resErr.statusCode).toEqual(500)
   // }, 60000)
+
   // test('should get contract abi from etherscan', async function () {
   //   const res = await request(app)
   //     .post('/callContract')
