@@ -73,7 +73,6 @@ export function passEventCallbacks(
   _walletConnected: WalletConnectedType,
   _walletDisconnected: WalletDisconnectedType,
   _chainChanged: ChainChangedType,
-  // _qrCodeScanned
   _connectionRequestRejected: ConnectionRequestRejectedType
 ) {
   accountsChanged = _accountsChanged
@@ -97,7 +96,6 @@ function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
 
   mmSdkProvider.on('connect', (connectInfo: ConnectInfo) => {
     console.log('connected mm sdk id = ', connectInfo.chainId)
-    // walletConnected()
   })
 
   mmSdkProvider.on('chainChanged', (chainId: number) => {
@@ -180,10 +178,6 @@ function handleEventsWalletConectProvider(
     walletDisconnected(code, reason)
   })
 
-  // wcProvider.on('connect', (connectInfo: ConnectInfo) => {
-  //   console.log('connected to wc = ', connectInfo.chainId)
-  // })
-
   //  Enable session (optionally triggers QR Code modal)
   wcProvider.enable().then((accounts: string[]) => {
     walletConnected(accounts)
@@ -214,10 +208,9 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
         name: 'HyperPlay'
       }
     }) as WalletConnectWeb3Provider
-    // wcProvider.connector.on('connect', (err, payload) => {})
     wcProvider.connector.on('disconnect', (err, payload) => {
       if (payload.params[0].message === 'Session Rejected') {
-        // connection request was rejected
+        // connection request was rejected by user
         connectionRequestRejected()
       }
     })
@@ -244,7 +237,8 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
       const registry: IAppRegistry = _registryResponseJSON.listings
       // mobile works for desktop too
       const platform = 'mobile'
-      const whitelist = ['metamask', 'ledger live'] // not case sensitive //212 wallets supported
+      // not case sensitive
+      const whitelist = ['metamask', 'ledger live']
       // returns a formatted object of the link registries whose name matches whitelist entries
       const _links = WCBrowserUtils.getMobileLinkRegistry(
         WCBrowserUtils.formatMobileRegistry(registry, platform),

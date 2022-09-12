@@ -13,8 +13,6 @@ async function switchOrAddEthereumChain(chain: Chain) {
     })
     /* eslint-disable  @typescript-eslint/no-explicit-any */
   } catch (switchError: any) {
-    // Not working with MM SDK: This error code indicates that the chain has not been added to MetaMask.
-    // if (switchError.code === 4902) {
     // type guards to ensure the ethereum chain can be added
     const requiredFieldsAreSupplied =
       chain.chainMetadata !== undefined &&
@@ -43,10 +41,6 @@ async function switchOrAddEthereumChain(chain: Chain) {
       // handle "add" error
       throw `There was an error adding the chain. ${addError}`
     }
-    // }
-    // handle other "switch" errors
-    // console.log(switchError.code)
-    // throw `There was an error switching to the chain. ${switchError}`
   }
 }
 
@@ -59,14 +53,6 @@ export async function checkChainId(chain: Chain) {
   const currentChainId: number = await web3.eth.getChainId()
 
   if (chain.chainId !== currentChainId.toString()) {
-    // what does this return for non metamask? expected that it throws
-    // shouldn't send txn in that instance
     await switchOrAddEthereumChain(chain)
-    // not necessary for metamask. might be needed for other wallets
-    // double check that user did not reject request to switch networks
-    // const currentChainIdAfterSwitch: number = await web3.eth.getChainId()
-    // if (chain.chainId !== currentChainIdAfterSwitch.toString()) {
-    //   throw 'User rejected the chain swap request'
-    // }
   }
 }

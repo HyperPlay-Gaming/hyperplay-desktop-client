@@ -1,23 +1,5 @@
 import { IAppEntry } from '@walletconnect/types'
 
-// type RecursivePartialNull<T> = {
-//   [P in keyof T]: T[P] extends (infer U)[]
-//     ? RecursivePartialNull<U>[] | null
-//     : T[P] extends object
-//     ? RecursivePartialNull<T[P]> | null
-//     : T[P] | null
-// }
-
-// interface IAppRegistryPartialNull {
-//   [id: string]: RecursivePartialNull<
-//     IAppEntry & {
-//       description: string
-//       versions: Array<string>
-//       app_type: string
-//     }
-//   >
-// }
-
 interface IAppRegistryWithExtraFields {
   [id: string]: IAppEntry & {
     description: string

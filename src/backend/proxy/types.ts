@@ -19,12 +19,6 @@ export interface RequestBody<T> extends Express.Request {
   body: T
 }
 
-// export interface RequestGetEthBalance extends Express.Request {
-//   query: {
-//     address: string
-//   }
-// }
-
 export enum PROVIDERS {
   METAMASK_MOBILE,
   WALLET_CONNECT
