@@ -20,7 +20,7 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import * as WCBrowserUtils from '@walletconnect/browser-utils'
 import { ipcMain } from 'electron'
-import { registryCache } from './registryBackup'
+import { registryCache } from './data/registryBackup'
 import { IAppRegistry } from '@walletconnect/types'
 
 let sdk: MetaMaskSDK
@@ -33,7 +33,6 @@ export async function getConnectionUris(
   providerSelection: PROVIDERS
 ): Promise<UrisReturn> {
   let uris: UrisReturn = {}
-  // if (provider.isConnected()) return uris
 
   switch (providerSelection) {
     case PROVIDERS.METAMASK_MOBILE: {
@@ -187,7 +186,6 @@ function handleEventsWalletConectProvider(
 
   //  Enable session (optionally triggers QR Code modal)
   wcProvider.enable().then((accounts: string[]) => {
-    console.log('connected ', accounts)
     walletConnected(accounts)
   })
 
@@ -216,15 +214,8 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
         name: 'HyperPlay'
       }
     }) as WalletConnectWeb3Provider
-    wcProvider.connector.on('connect', (err, payload) => {
-      console.log('session update wc connector')
-      console.log(err)
-      console.log(payload)
-    })
+    // wcProvider.connector.on('connect', (err, payload) => {})
     wcProvider.connector.on('disconnect', (err, payload) => {
-      console.log('session update wc connector DISCONNECTED')
-      console.log(err)
-      console.log(payload)
       if (payload.params[0].message === 'Session Rejected') {
         // connection request was rejected
         connectionRequestRejected()

@@ -102,19 +102,6 @@ describe('MANUAL tests for the proxy server', function () {
   //     })
   //   expect(acctsRes.statusCode).toEqual(500)
   //   console.log(acctsRes.body)
-  //   acctsRes = await request(app)
-  //     .post('/rpc')
-  //     .send({
-  //       request: {
-  //         method: 'eth_accounts'
-  //       },
-  //       chain: {
-  //         //polygon but no add chain parameters supplied
-  //         chainId: '0x89'
-  //       }
-  //     })
-  //   expect(acctsRes.statusCode).toEqual(500)
-  //   console.log('Cant switch to polygon before it is added', acctsRes.body)
   // }, 20000)
 
   // test('should switch to Polygon and get accounts and then back to rinkeby', async function () {
@@ -154,7 +141,7 @@ describe('MANUAL tests for the proxy server', function () {
   //   expect(acctsRes.statusCode).toEqual(200)
   // }, 20000)
 
-  // test('should get eth balance on Rinkeby', async function () {
+  // async function getEthBalance(chainId: string) {
   //   const acctsRes = await request(app)
   //     .post('/rpc')
   //     .send({
@@ -162,10 +149,10 @@ describe('MANUAL tests for the proxy server', function () {
   //         method: 'eth_accounts'
   //       },
   //       chain: {
-  //         chainId: '4'
+  //         chainId: chainId
   //       }
   //     })
-  //   console.log('should have switched back to Rinkeby ', acctsRes.body)
+  //   console.log('accounts = ', acctsRes.body, ' on chainId = ', chainId)
   //   expect(acctsRes.statusCode).toEqual(200)
   //   const balRes = await request(app)
   //     .post('/rpc')
@@ -175,14 +162,20 @@ describe('MANUAL tests for the proxy server', function () {
   //         params: [acctsRes.body[0], 'latest']
   //       },
   //       chain: {
-  //         chainId: '4'
+  //         chainId: chainId
   //       }
   //     })
-  //   console.log('eth balance response ', balRes.body)
+  //   console.log('eth balance response ', balRes.text)
   //   expect(balRes.statusCode).toEqual(200)
-  // })
+  //   return balRes.text
+  // }
 
-  // test.only('should sign a message', async function () {
+  // test('should get eth balance on Rinkeby', async function () {
+  //   const bal = await getEthBalance('4')
+  //   console.log('balance = ', bal)
+  // }, 20000)
+
+  // test('should sign a message', async function () {
   //   const acctsRes = await request(app)
   //     .post('/rpc')
   //     .send({
@@ -195,13 +188,64 @@ describe('MANUAL tests for the proxy server', function () {
   //     })
   //   console.log('should be on Rinkeby ', acctsRes.body)
   //   expect(acctsRes.statusCode).toEqual(200)
-  //   const balRes = await request(app).post('/sign').send({
-  //     data: '0xdeadbeaf',
-  //     address: acctsRes.body[0]
-  //   })
-  //   console.log('sign message response = ', balRes.body)
-  //   expect(balRes.statusCode).toEqual(200)
-  // })
+  //   const signRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_signTypedData_v3',
+  //         params: [
+  //           acctsRes.body[0],
+  //           JSON.stringify({
+  //             types: {
+  //               EIP712Domain: [
+  //                 { name: 'name', type: 'string' },
+  //                 { name: 'version', type: 'string' },
+  //                 { name: 'chainId', type: 'uint256' },
+  //                 { name: 'verifyingContract', type: 'address' }
+  //               ],
+  //               Person: [
+  //                 { name: 'name', type: 'string' },
+  //                 { name: 'wallet', type: 'address' }
+  //               ],
+  //               Mail: [
+  //                 { name: 'from', type: 'Person' },
+  //                 { name: 'to', type: 'Person' },
+  //                 { name: 'contents', type: 'string' }
+  //               ]
+  //             },
+  //             primaryType: 'Mail',
+  //             domain: {
+  //               name: 'Ether Mail',
+  //               version: '1',
+  //               chainId: '4',
+  //               verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC'
+  //             },
+  //             message: {
+  //               from: {
+  //                 name: 'Cow',
+  //                 wallet: '0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826'
+  //               },
+  //               to: {
+  //                 name: 'Bob',
+  //                 wallet: '0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB'
+  //               },
+  //               contents: 'Hello, Bob!'
+  //             }
+  //           })
+  //         ]
+  //       },
+  //       chain: {
+  //         chainId: '4'
+  //       }
+  //     })
+  //   console.log('sign message response = ', signRes.text)
+  //   const signature = signRes.text.substring(2)
+  //   const r = '0x' + signature.substring(0, 64)
+  //   const s = '0x' + signature.substring(64, 128)
+  //   const v = parseInt(signature.substring(128, 130), 16)
+  //   console.log('sign result r = ', r, ' s = ', s, ' v = ', v)
+  //   expect(signRes.statusCode).toEqual(200)
+  // }, 20000)
 
   // test('should get accounts', async function () {
   //   const acctsRes = await request(app)
@@ -226,99 +270,129 @@ describe('MANUAL tests for the proxy server', function () {
   //   // expect(res.statusCode).toEqual(200)
   // }, 60000)
 
-  // test('should connect wallet, start server, and fail to send eth over testnet', async function () {
-  //   const resBefore = await request(app).get('/ethBalance')
-  //   const ethBefore = resBefore.body.balance
-  //   console.log('eth before = ', ethBefore)
-  //   const valueInWeiToSend = '1000000000000000'
-  //   let res = await request(app).post('/sendEth').send({
-  //     // to: '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
-  //     valueInWei: valueInWeiToSend
-  //   })
-  //   expect(res.statusCode).toEqual(500)
-  //   res = await request(app).post('/sendEth').send({
-  //     to: '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682'
-  //     // valueInWei: valueInWeiToSend
-  //   })
-  //   expect(res.statusCode).toEqual(500)
-  //   const resAfter = await request(app).get('/ethBalance')
-  //   const ethAfter = resAfter.body.balance
-  //   console.log('eth after = ', ethAfter)
-  //   const changeInWei = new BN(ethBefore).sub(new BN(ethAfter))
-  //   expect(changeInWei.toString()).toEqual(new BN(0).toString())
-  // }, 60000)
+  // async function sendEth(chainId: string, value: string, to: string) {
+  //   const acctsRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_accounts'
+  //       },
+  //       chain: {
+  //         chainId: chainId
+  //       }
+  //     })
+  //   console.log('accounts = ', acctsRes.body, ' on chainId = ', chainId)
+  //   expect(acctsRes.statusCode).toEqual(200)
+  //   const sendRes = await request(app)
+  //     .post('/rpc')
+  //     .send({
+  //       request: {
+  //         method: 'eth_sendTransaction',
+  //         params: [
+  //           {
+  //             from: acctsRes.body[0],
+  //             to: to,
+  //             // gas: "0x76c0", // 30400
+  //             // gasPrice: "0x9184e72a000", // 10000000000000
+  //             value: value // 2441406250
+  //             // data: "0x",
+  //           }
+  //         ]
+  //       },
+  //       chain: {
+  //         chainId: chainId
+  //       }
+  //     })
+  //   // console.log('send eth response ', sendRes)
+  //   expect(sendRes.statusCode).toEqual(200)
+  //   return sendRes.body
+  // }
+
   // test('should connect wallet, start server, and send eth over testnet', async function () {
-  //   const resBefore = await request(app).get('/ethBalance')
-  //   const ethBefore = resBefore.body.balance
+  //   const ethBefore = await getEthBalance('4')
   //   console.log('eth before = ', ethBefore)
   //   const valueInWeiToSend = '1000000000000000'
-  //   const res = await request(app).post('/sendEth').send({
-  //     to: '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
-  //     valueInWei: valueInWeiToSend
-  //   })
-  //   const resAfter = await request(app).get('/ethBalance')
-  //   const ethAfter = resAfter.body.balance
-  //   console.log('eth after = ', ethAfter)
-  //   const totalSpentInWei = new BN(res.body.receipt.gasUsed)
-  //     .mul(new BN(res.body.receipt.effectiveGasPrice))
-  //     .add(new BN(valueInWeiToSend))
-  //   const changeInWei = new BN(ethBefore).sub(new BN(ethAfter))
-  //   expect(changeInWei.divRound(new BN(100000)).toString()).toEqual(
-  //     totalSpentInWei.divRound(new BN(100000)).toString()
+  //   const res = await sendEth(
+  //     '4',
+  //     '1000000000000000',
+  //     '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682'
   //   )
-  //   expect(res.statusCode).toEqual(200)
+
+  //   // GAS USED DATA IS PROVIDED WITH web3.eth.sendTransaction method
+  //   // wait for txn to confirm before checking balance again
+  //   // await wait(12000)
+  //   // const ethAfter = await getEthBalance('4')
+  //   // console.log('eth after = ', ethAfter)
+  //   // const totalSpentInWei = new BN(res.body.gasUsed)
+  //   //   .mul(new BN(res.body.effectiveGasPrice))
+  //   //   .add(new BN(valueInWeiToSend))
+  //   // const changeInWei = new BN(ethBefore).sub(new BN(ethAfter))
+  //   // expect(changeInWei.divRound(new BN(100000)).toString()).toEqual(
+  //   //   totalSpentInWei.divRound(new BN(100000)).toString()
+  //   // )
+  //   // expect(res.statusCode).toEqual(200)
   // }, 60000)
 
   // test('should fail to get contract abi from etherscan', async function () {
-  //   console.log(
-  //     'Error messages for invalid parameters is expected in this test'
-  //   )
   //   let resErr = await request(app)
-  //     .post('/callContract')
+  //     .post('/sendContract')
   //     .send({
   //       contractAddress: '0xFab46E002BbF0b4509813474841E0716E6730136',
   //       functionName: 'transfer',
   //       params: [
   //         // '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
   //         '1000000000000000000'
-  //       ]
+  //       ],
+  //       chain: {
+  //         chainId: '4'
+  //       }
   //     })
   //   // console.log(resErr.body.message) //should be an error message
   //   expect(resErr.statusCode).toEqual(500)
   //   resErr = await request(app)
-  //     .post('/callContract')
+  //     .post('/sendContract')
   //     .send({
   //       contractAddress: '0xFab46E002BbF0b4509813474841E0716E6730136',
   //       // functionName: 'transfer',
   //       params: [
   //         '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
   //         '1000000000000000000'
-  //       ]
+  //       ],
+  //       chain: {
+  //         chainId: '4'
+  //       }
   //     })
   //   expect(resErr.statusCode).toEqual(500)
   //   resErr = await request(app)
-  //     .post('/callContract')
+  //     .post('/sendContract')
   //     .send({
   //       // contractAddress: '0xFab46E002BbF0b4509813474841E0716E6730136',
   //       functionName: 'transfer',
   //       params: [
   //         '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
   //         '1000000000000000000'
-  //       ]
+  //       ],
+  //       chain: {
+  //         chainId: '4'
+  //       }
   //     })
   //   expect(resErr.statusCode).toEqual(500)
   // }, 60000)
 
   // test('should get contract abi from etherscan', async function () {
   //   const res = await request(app)
-  //     .post('/callContract')
+  //     .post('/sendContract')
   //     .send({
   //       contractAddress: '0xFab46E002BbF0b4509813474841E0716E6730136',
   //       functionName: 'transfer',
   //       params: [
   //         '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
   //         '1000000000000000000'
-  //       ]
+  //       ],
+  //       gasLimit: '60000',
+  //       chain: {
+  //         chainId: '4'
+  //       }
   //     })
   //   console.log(res.body)
   //   expect(res.statusCode).toEqual(200)
