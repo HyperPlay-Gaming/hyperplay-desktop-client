@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express'
-import { provider } from './providerHelper'
+import { provider } from '../providerHelper'
 
 export const isUserAuthenticated = (
   req: Request,

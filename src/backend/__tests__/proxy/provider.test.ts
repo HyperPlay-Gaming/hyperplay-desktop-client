@@ -6,16 +6,18 @@ import {
 import {
   accountsChanged,
   walletConnected,
-  walletDisonnected,
+  walletDisconnected,
   chainChanged,
-  wait
+  wait,
+  connectionRequestRejected
 } from '../../__mocks__/providerCallbacks'
 
 passEventCallbacks(
   accountsChanged,
   walletConnected,
-  walletDisonnected,
-  chainChanged
+  walletDisconnected,
+  chainChanged,
+  connectionRequestRejected
 )
 
 describe('MANUAL tests for the provider helper', function () {

@@ -6,19 +6,22 @@ import {
   WalletConnectWeb3Provider,
   IMobileRegistryEntryWithQrLink,
   ProviderRpcError,
+  AccountsChangedType,
+  WalletConnectedType,
+  WalletDisconnectedType,
+  ChainChangedType,
   ConnectInfo,
-  accountsChangedType,
-  walletConnectedType,
-  walletConnectedBroadcastType,
-  walletDisconnectedType,
-  chainChangedType
+  ProviderMessage,
+  ConnectionRequestRejectedType,
+  PROXY_TOPICS
 } from './types'
 import Web3 from 'web3'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import QRCodeModal from '@walletconnect/qrcode-modal'
 import * as WCBrowserUtils from '@walletconnect/browser-utils'
 import { ipcMain } from 'electron'
-import { PROXY_TOPICS } from '../../common/types/preload'
+import { registryCache } from './data/registryBackup'
+import { IAppRegistry } from '@walletconnect/types'
 
 let sdk: MetaMaskSDK
 
@@ -30,7 +33,6 @@ export async function getConnectionUris(
   providerSelection: PROVIDERS
 ): Promise<UrisReturn> {
   let uris: UrisReturn = {}
-  // if (provider.isConnected()) return uris
 
   switch (providerSelection) {
     case PROVIDERS.METAMASK_MOBILE: {
@@ -39,6 +41,7 @@ export async function getConnectionUris(
     }
     case PROVIDERS.WALLET_CONNECT: {
       uris = await getWalletConnectConnectionUris()
+      console.log('opening qr code')
       QRCodeModal.open(uris['metamask'].qrCodeLink, null)
       break
     }
@@ -58,25 +61,25 @@ async function handleGetConnectionUris(
 
 ipcMain?.handle(PROXY_TOPICS.GET_CONNECTION_URIS, handleGetConnectionUris)
 
-let accountsChanged: accountsChangedType
-let walletConnected: walletConnectedType
-let walletDisconnected: walletDisconnectedType
-let chainChanged: chainChangedType
+let accountsChanged: AccountsChangedType
+let walletConnected: WalletConnectedType
+let walletDisconnected: WalletDisconnectedType
+let chainChanged: ChainChangedType
+let connectionRequestRejected: ConnectionRequestRejectedType
 
 // main uses this to pass in callbacks
 export function passEventCallbacks(
-  _accountsChanged: accountsChangedType,
-  _walletConnected: walletConnectedBroadcastType,
-  _walletDisconnected: walletDisconnectedType,
-  _chainChanged: chainChangedType
+  _accountsChanged: AccountsChangedType,
+  _walletConnected: WalletConnectedType,
+  _walletDisconnected: WalletDisconnectedType,
+  _chainChanged: ChainChangedType,
+  _connectionRequestRejected: ConnectionRequestRejectedType
 ) {
   accountsChanged = _accountsChanged
-  walletConnected = async () => {
-    const accounts: string[] = await web3.eth.getAccounts()
-    _walletConnected(accounts)
-  }
+  walletConnected = _walletConnected
   walletDisconnected = _walletDisconnected
   chainChanged = _chainChanged
+  connectionRequestRejected = _connectionRequestRejected
 }
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
@@ -92,8 +95,7 @@ function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
   })
 
   mmSdkProvider.on('connect', (connectInfo: ConnectInfo) => {
-    console.log('connected id = ', connectInfo.chainId)
-    walletConnected()
+    console.log('connected mm sdk id = ', connectInfo.chainId)
   })
 
   mmSdkProvider.on('chainChanged', (chainId: number) => {
@@ -113,6 +115,16 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
       shouldShimWeb3: false // disable window.web3
     })
   }
+  // const wcConnector = sdk.getWalletConnectConnector()
+  // /* eslint-disable  @typescript-eslint/no-explicit-any */
+  // wcConnector.on('disconnect', (err: any, payload: any) => {
+  //   console.log('session update MM SDK wc connector DISCONNECTED')
+  //   console.log(err)
+  //   console.log(payload)
+  //   if (payload.params[0].message === 'Session Rejected') {
+  //     // connection request was rejected
+  //   }
+  // })
   const mmSdkProvider = sdk.getProvider()
   if (mmSdkProvider === null) return {}
 
@@ -126,6 +138,7 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
         'mm request accounts returned should be connected: ',
         accounts
       )
+      walletConnected(accounts)
     })
 
   // get link for metamask mobile. Use as QR code
@@ -167,8 +180,14 @@ function handleEventsWalletConectProvider(
 
   //  Enable session (optionally triggers QR Code modal)
   wcProvider.enable().then((accounts: string[]) => {
-    console.log('connected ', accounts)
-    walletConnected()
+    walletConnected(accounts)
+  })
+
+  wcProvider.on('message', (msg: ProviderMessage) => {
+    console.log(
+      'message received by wc Provider: ',
+      JSON.stringify(msg, null, 4)
+    )
   })
 }
 
@@ -189,19 +208,37 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
         name: 'HyperPlay'
       }
     }) as WalletConnectWeb3Provider
+    wcProvider.connector.on('disconnect', (err, payload) => {
+      if (payload.params[0].message === 'Session Rejected') {
+        // connection request was rejected by user
+        connectionRequestRejected()
+      }
+    })
 
     wcProvider.connector.on('display_uri', async (err, payload) => {
       const baseUri = payload.params[0]
-      console.log('base uri is ', baseUri)
+      console.log(
+        'base uri is ',
+        baseUri,
+        ' copy paste this in ledger live or wherever your wallet connect wallet is if you cannot scan the qr code'
+      )
 
       const registryUrl = WCBrowserUtils.getWalletRegistryUrl()
       //might want to have local json fallback
-      const registryResponse = await fetch(registryUrl)
-      const _registryResponse$jso = await registryResponse.json()
-      const registry = _registryResponse$jso.listings
+      console.log('fetching url = ', registryUrl)
+      let _registryResponseJSON = registryCache
+      try {
+        const registryResponse = await fetch(registryUrl)
+        _registryResponseJSON = await registryResponse.json()
+      } catch (e) {
+        console.log(String(e))
+      }
+      console.log('fetched')
+      const registry: IAppRegistry = _registryResponseJSON.listings
       // mobile works for desktop too
       const platform = 'mobile'
-      const whitelist = ['metamask', 'ledger live'] // not case sensitive //212 wallets supported
+      // not case sensitive
+      const whitelist = ['metamask', 'ledger live']
       // returns a formatted object of the link registries whose name matches whitelist entries
       const _links = WCBrowserUtils.getMobileLinkRegistry(
         WCBrowserUtils.formatMobileRegistry(registry, platform),

@@ -1,23 +1,20 @@
 import express from 'express'
-import { AbiCache, RequestBody, sendEthRequest, TxnRequest } from './types'
-import { web3 } from './providerHelper'
-import { isProviderConnected, isUserAuthenticated, unless } from './middleware'
-// import { TransactionReceipt } from 'web3-core'
-import jsdom from 'jsdom'
-const { JSDOM } = jsdom
-import Web3Utils from 'web3-utils'
+import { RequestBody, TxnRequest, RpcRequest } from './types'
+import { web3, provider } from './providerHelper'
+import {
+  isProviderConnected,
+  isUserAuthenticated,
+  unless
+} from './proxyHelpers/middleware'
 import { Server } from 'http'
+import { RequestArguments } from 'web3-core'
+import { checkChainId } from './proxyHelpers/checkChain'
+import { cacheAbiFromBlockExplorer, abiCache } from './proxyHelpers/cacheAbi'
 
 // could dynamically select by setting = 0
 // then set local env var that games could use
 // if hyperplay relaunches, game might have to relaunch though
 const port = process.env.HYPERPLAY_PORT || 9680
-
-const chainIdExplorerMap = {
-  1: 'https://etherscan.io/address/',
-  4: 'https://rinkeby.etherscan.io/address/',
-  5: 'https://goerli.etherscan.io/address/'
-}
 
 export const app = express()
 app.use(express.json())
@@ -27,44 +24,27 @@ app.use(isUserAuthenticated)
 // if server is running independently for troubleshooting
 app.use(unless('/', isProviderConnected))
 
-const abiCache: AbiCache = {}
-
 app.get('/', (req, res) => {
   res.send({
     message: 'The HyperPlay proxy server is running!'
   })
 })
 
-app.get('/ethBalance', async (req, res) => {
-  const accounts: string[] = await web3.eth.getAccounts()
-  const bal = await web3.eth.getBalance(accounts[0])
-  res.send({
-    balance: bal
-  })
-})
-
-// receipt exposes `from` address to game dev which may not be desirable
-app.post('/sendEth', async (req: RequestBody<sendEthRequest>, res) => {
+app.post('/rpc', async (req: RequestBody<RpcRequest>, res) => {
+  const requestArgs: RequestArguments = req.body.request
   // type guards
-  if (req.body.to === undefined || req.body.valueInWei === undefined) {
-    res
-      .status(500)
-      .send({ message: 'Recipient address and value must be passed' })
+  if (requestArgs === undefined || requestArgs.method === undefined) {
+    res.status(500).send({
+      message: 'ChainId and provider request method must be specified'
+    })
     return
   }
 
   try {
-    const accounts: string[] = await web3.eth.getAccounts()
-    const valueInWei = req.body.valueInWei
-
-    const receipt = await web3.eth.sendTransaction({
-      from: accounts[0],
-      to: req.body.to,
-      value: valueInWei
-    })
-    // console.log('receipt first returned = ', receipt)
-    // receipt = await txnConfirmation(receipt.transactionHash, 120000)
-    res.send({ receipt: receipt })
+    await checkChainId(req.body.chain)
+    // if params passed to provider are malformed, request will throw
+    const result = await provider.request(requestArgs)
+    res.send(result)
   } catch (e) {
     const errStr = String(e)
     console.log(errStr)
@@ -72,32 +52,7 @@ app.post('/sendEth', async (req: RequestBody<sendEthRequest>, res) => {
   }
 })
 
-async function cacheAbiFromBlockExplorer(
-  contractAddress: string
-): Promise<boolean> {
-  const chainId = await web3.eth.getChainId()
-  if (!Object.hasOwn(chainIdExplorerMap, chainId)) return false
-
-  const response = await fetch(
-    chainIdExplorerMap[chainId] + contractAddress + '#code'
-  )
-  let isOk = response.ok
-  if (isOk) {
-    const text = await response.text()
-    const dom = new JSDOM(text)
-    const abiContent =
-      dom.window.document.getElementById('js-copytextarea2')?.innerHTML
-    if (abiContent !== undefined) {
-      abiCache[contractAddress] = JSON.parse(abiContent) as Web3Utils.AbiItem[]
-    } else {
-      isOk = false
-    }
-  }
-  return isOk
-}
-
-// receipt exposes `from` address to game dev which may not be desirable
-app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
+app.post('/sendContract', async (req: RequestBody<TxnRequest>, res) => {
   // type guards
   if (
     req.body.contractAddress === undefined ||
@@ -126,8 +81,9 @@ app.post('/callContract', async (req: RequestBody<TxnRequest>, res) => {
     }
   }
 
-  // call function
+  // send function
   try {
+    await checkChainId(req.body.chain)
     const contract = new web3.eth.Contract(
       abiCache[req.body.contractAddress],
       req.body.contractAddress
@@ -160,19 +116,3 @@ export const serverStarted = new Promise((resolve) => {
     resolve(1)
   })
 })
-
-// waits for txn hash to be confirmed
-// async function txnConfirmation(
-//   txnHash: string,
-//   timeoutInMs: number
-// ): Promise<TransactionReceipt> {
-//   const timer = setTimeout(() => {
-//     return null
-//   }, timeoutInMs)
-//   let receipt = await web3.eth.getTransactionReceipt(txnHash)
-//   while (receipt === null) {
-//     receipt = await web3.eth.getTransactionReceipt(txnHash)
-//   }
-//   clearTimeout(timer)
-//   return receipt
-// }
