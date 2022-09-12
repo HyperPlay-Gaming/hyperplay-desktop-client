@@ -103,7 +103,8 @@ import {
   isCLIFullscreen,
   isCLINoGui,
   isFlatpak,
-  publicDir
+  publicDir,
+  wineprefixFAQ
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -384,7 +385,10 @@ if (!gotTheLock) {
       fallbackLng: 'en',
       lng: language,
       supportedLngs: [
+        'az',
+        'be',
         'bg',
+        'bs',
         'ca',
         'cs',
         'de',
@@ -392,6 +396,7 @@ if (!gotTheLock) {
         'en',
         'es',
         'et',
+        'eu',
         'fa',
         'fi',
         'fr',
@@ -403,11 +408,14 @@ if (!gotTheLock) {
         'id',
         'it',
         'ml',
+        'nb_NO',
         'nl',
         'pl',
         'pt',
         'pt_BR',
+        'ro',
         'ru',
+        'sk',
         'sv',
         'ta',
         'tr',
@@ -486,6 +494,10 @@ ipcMain.on('Notify', (event, args) => {
 
 ipcMain.on('frontendReady', () => {
   handleProtocol(mainWindow, [openUrlArgument, ...process.argv])
+})
+
+ipcMain.on('frontendError', async (event, error: string) => {
+  logError(error, LogPrefix.Frontend)
 })
 
 // Maybe this can help with white screens
@@ -603,6 +615,7 @@ ipcMain.on('openLoginPage', async () => openUrlOrFile(epicLoginUrl))
 ipcMain.on('openDiscordLink', async () => openUrlOrFile(discordLink))
 ipcMain.on('openPatreonPage', async () => openUrlOrFile(patreonPage))
 ipcMain.on('openKofiPage', async () => openUrlOrFile(kofiPage))
+ipcMain.on('openWinePrefixFAQ', async () => openUrlOrFile(wineprefixFAQ))
 ipcMain.on('openWebviewPage', async (event, url) => openUrlOrFile(url))
 ipcMain.on('openWikiLink', async () => openUrlOrFile(wikiLink))
 ipcMain.on('openSidInfoPage', async () => openUrlOrFile(sidInfoUrl))
