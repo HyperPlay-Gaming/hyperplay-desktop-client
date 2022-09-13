@@ -120,7 +120,7 @@ import { verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { clipboard } from 'electron'
 import { PROXY_TOPICS } from './proxy/types'
-import * as ProviderHelper from 'backend/proxy/providerHelper'
+import * as ProviderHelper from './proxy/providerHelper'
 import * as ProxyServer from './proxy/proxy'
 import {
   AccountsChangedType,

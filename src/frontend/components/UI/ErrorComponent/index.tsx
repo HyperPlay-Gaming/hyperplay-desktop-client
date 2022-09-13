@@ -52,7 +52,7 @@ export default function ErrorComponent({ message }: { message: string }) {
 
         <button
           className="button is-footer is-danger"
-          onClick={window.api.resetHeroic}
+          onClick={window.api.resetApp}
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">

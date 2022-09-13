@@ -208,7 +208,7 @@ export const Winetricks = {
     event: Electron.IpcMainInvokeEvent
   ) => {
     return new Promise<void>((resolve) => {
-      const winetricks = `${heroicToolsPath}/winetricks`
+      const winetricks = `${toolsPath}/winetricks`
 
       const { winePrefix, wineBin } = getWineFromProton(
         wineVersion,

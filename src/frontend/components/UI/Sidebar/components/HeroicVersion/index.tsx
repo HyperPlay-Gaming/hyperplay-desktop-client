@@ -18,7 +18,7 @@ export default function AppVersion() {
   const { sidebarCollapsed } = useContext(ContextProvider)
 
   useEffect(() => {
-    window.api.getHeroicVersion().then((version) => setHeroicVersion(version))
+    window.api.getAppVersion().then((version) => setAppVersion(version))
   }, [])
 
   useEffect(() => {

@@ -3,7 +3,7 @@ import { ipcRenderer } from 'electron'
 import { Runner, Tools } from '../../common/types'
 
 export const clearCache = () => ipcRenderer.send('clearCache')
-export const resetHeroic = () => ipcRenderer.send('resetHeroic')
+export const resetApp = () => ipcRenderer.send('resetApp')
 
 export const openWeblate = () => ipcRenderer.send('openWeblate')
 export const changeLanguage = (newLanguage: string) =>
@@ -11,8 +11,7 @@ export const changeLanguage = (newLanguage: string) =>
 
 export const openExternalUrl = (url: string) =>
   ipcRenderer.send('openExternalUrl', url)
-export const getHeroicVersion = async () =>
-  ipcRenderer.invoke('getHeroicVersion')
+export const getAppVersion = async () => ipcRenderer.invoke('getAppVersion')
 export const getLatestReleases = async () =>
   ipcRenderer.invoke('getLatestReleases')
 
