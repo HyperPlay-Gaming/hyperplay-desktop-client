@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ipcRenderer } from 'frontend/helpers'
 import ContextProvider from 'frontend/state/ContextProvider'
 
 type Release = {
@@ -19,15 +18,11 @@ export default function AppVersion() {
   const { sidebarCollapsed } = useContext(ContextProvider)
 
   useEffect(() => {
-    ipcRenderer
-      .invoke('getAppVersion')
-      .then((version) => setAppVersion(version))
+    window.api.getAppVersion().then((version) => setAppVersion(version))
   }, [])
 
   useEffect(() => {
-    ipcRenderer
-      .invoke('getLatestReleases')
-      .then((releases) => setNewReleases(releases))
+    window.api.getLatestReleases().then((releases) => setNewReleases(releases))
   }, [])
 
   const newStable: Release | undefined = newReleases?.filter(
@@ -58,9 +53,7 @@ export default function AppVersion() {
           {newStable && (
             <a
               title={newStable.tag_name}
-              onClick={() =>
-                ipcRenderer.send('openExternalUrl', newStable.html_url)
-              }
+              onClick={() => window.api.openExternalUrl(newStable.html_url)}
             >
               {t('info.hyperplay.stable', 'Stable')} ({newStable.tag_name})
             </a>
@@ -68,9 +61,7 @@ export default function AppVersion() {
           {newBeta && (
             <a
               title={newBeta.tag_name}
-              onClick={() =>
-                ipcRenderer.send('openExternalUrl', newBeta.html_url)
-              }
+              onClick={() => window.api.openExternalUrl(newBeta.html_url)}
             >
               {t('info.hyperplay.beta', 'Beta')} ({newBeta.tag_name})
             </a>

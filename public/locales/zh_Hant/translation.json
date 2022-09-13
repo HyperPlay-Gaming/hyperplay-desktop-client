@@ -71,6 +71,10 @@
             "wine-not-found": {
                 "message": "沒有選擇之 Wine 版本。檢查遊戲設定！",
                 "title": "未找到Wine"
+            },
+            "winetricks": {
+                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
+                "title": "Winetricks error"
             }
         },
         "info": {
@@ -367,6 +371,7 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "progress": "Progress",
     "Recent": "最近遊玩的遊戲",
     "search": "搜尋遊戲",
     "setting": {

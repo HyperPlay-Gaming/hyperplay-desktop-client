@@ -69,7 +69,13 @@ HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, Node
 
 ## Language Support
 
+Thanks to the community Heroic was translated to almost 40 different languages so far:
+
 - English
+- Azerbaijani
+- Basque
+- Belarussian
+- Bosnian
 - Bulgarian
 - Catalan
 - Czech
@@ -82,11 +88,13 @@ HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, Node
 - French
 - German
 - Greek
+- Japanese
 - Korean
 - Hungarian
 - Italian
 - Indonesian
 - Malayalam
+- Norwegian Bokmål
 - Persian
 - Polish
 - Portuguese
@@ -94,6 +102,7 @@ HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, Node
 - Romanian
 - Russian
 - Spanish
+- Slovak
 - Swedish
 - Tamil
 - Turkish

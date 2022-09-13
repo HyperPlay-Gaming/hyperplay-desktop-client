@@ -13,11 +13,11 @@ import {
 import {
   fixLegendarySaveFolder,
   getGameInfo,
-  ipcRenderer,
   syncSaves
 } from 'frontend/helpers'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { Path, SyncType } from 'frontend/types'
+import { ProgressDialog } from 'frontend/components/UI/ProgressDialog'
 
 interface Props {
   appName: string
@@ -43,6 +43,8 @@ export default function LegendarySyncSaves({
   const [isSyncing, setIsSyncing] = useState(false)
   const [isLoading, setLoading] = useState(false)
   const [syncType, setSyncType] = useState('--skip-upload')
+  const [manuallyOutput, setManuallyOutput] = useState<string[]>([])
+  const [manuallyOutputShow, setManuallyOutputShow] = useState<boolean>(false)
   const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
   const isWin = platform === 'win32'
@@ -74,8 +76,8 @@ export default function LegendarySyncSaves({
       const isNative = isWin || isMacNative
 
       if (!isNative) {
-        const { stdout } = await ipcRenderer
-          .invoke('runWineCommandForGame', {
+        const { stdout } = await window.api
+          .runWineCommandForGame({
             appName,
             runner: 'legendary',
             command: `cmd /c winepath "${folder}"`
@@ -86,12 +88,10 @@ export default function LegendarySyncSaves({
           })
         actualPath = stdout.trim()
       } else {
-        actualPath = await ipcRenderer.invoke('getShellPath', folder)
+        actualPath = await window.api.getShellPath(folder)
       }
 
-      actualPath = isWin
-        ? actualPath
-        : await ipcRenderer.invoke('getRealPath', actualPath)
+      actualPath = isWin ? actualPath : await window.api.getRealPath(actualPath)
 
       const path = savesPath ? savesPath : actualPath
       const fixedPath = isWin
@@ -109,11 +109,10 @@ export default function LegendarySyncSaves({
     setIsSyncing(true)
 
     await syncSaves(savesPath, appName, 'legendary', syncType).then(
-      async (res: string) =>
-        ipcRenderer.invoke('openMessageBox', {
-          message: res,
-          title: 'Saves Sync'
-        })
+      (response: string) => {
+        setManuallyOutput(response.split('\n'))
+        setManuallyOutputShow(true)
+      }
     )
     setIsSyncing(false)
   }
@@ -121,6 +120,16 @@ export default function LegendarySyncSaves({
   return (
     <>
       <h3 className="settingSubheader">{t('settings.navbar.sync')}</h3>
+      {manuallyOutputShow && (
+        <ProgressDialog
+          title={'Sync-Saves'}
+          progress={manuallyOutput}
+          showCloseButton={true}
+          onClose={() => {
+            setManuallyOutputShow(false)
+          }}
+        />
+      )}
       <div className="infoBox saves-warning">
         <FontAwesomeIcon icon={faExclamationTriangle} color={'yellow'} />
         {t(
@@ -156,8 +165,8 @@ export default function LegendarySyncSaves({
             onIconClick={
               !isLinked
                 ? async () =>
-                    ipcRenderer
-                      .invoke('openDialog', {
+                    window.api
+                      .openDialog({
                         buttonLabel: t('box.sync.button'),
                         properties: ['openDirectory'],
                         title: t('box.sync.title')

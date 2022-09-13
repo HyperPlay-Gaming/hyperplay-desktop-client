@@ -49,6 +49,9 @@
         "build/bin/win32/*"
       ]
     },
+    "portable": {
+      "artifactName": "${productName}-${version}-Portable.${ext}"
+    },
     "mac": {
       "target": "dmg",
       "category": "public.app-category.games",

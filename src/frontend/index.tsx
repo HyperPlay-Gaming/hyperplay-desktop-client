@@ -13,6 +13,10 @@ import { UpdateComponentBase } from './components/UI/UpdateComponent'
 import { initShortcuts } from './helpers/shortcuts'
 import { configStore } from './helpers/electronStores'
 
+window.addEventListener('error', (ev: ErrorEvent) => {
+  window.api.logError(ev.error.stack)
+})
+
 const Backend = new HttpApi(null, {
   addPath: 'build/locales/{{lng}}/{{ns}}',
   allowMultiLoading: false,
@@ -24,7 +28,7 @@ initShortcuts()
 
 const storage: Storage = window.localStorage
 
-let languageCode = configStore.get('language')
+let languageCode: string | undefined = configStore.get('language') as string
 
 if (!languageCode) {
   languageCode = storage.getItem('language') || 'en'
@@ -48,7 +52,10 @@ i18next
       useSuspense: true
     },
     supportedLngs: [
+      'az',
+      'be',
       'bg',
+      'bs',
       'ca',
       'cs',
       'de',
@@ -56,6 +63,7 @@ i18next
       'en',
       'es',
       'et',
+      'eu',
       'fa',
       'fi',
       'fr',
@@ -67,11 +75,14 @@ i18next
       'id',
       'it',
       'ml',
+      'nb_NO',
       'nl',
       'pl',
       'pt',
       'pt_BR',
+      'ro',
       'ru',
+      'sk',
       'sv',
       'ta',
       'tr',

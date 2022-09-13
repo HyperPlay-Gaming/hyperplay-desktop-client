@@ -71,6 +71,10 @@
             "wine-not-found": {
                 "message": "No se seleccionou a versión de Wine. ¡Comprueba a configuración do xogo!",
                 "title": "No se atopou Wine"
+            },
+            "winetricks": {
+                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
+                "title": "Winetricks error"
             }
         },
         "info": {
@@ -367,6 +371,7 @@
         "mac": "macOS",
         "win": "Windows"
     },
+    "progress": "Progress",
     "Recent": "Xogado recentemente",
     "search": "Escribe o nome do xogo aquí...",
     "setting": {

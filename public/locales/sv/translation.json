@@ -71,6 +71,10 @@
             "wine-not-found": {
                 "message": "Ingen Wine version vald. Kontrollera spelinställningar!",
                 "title": "Wine hittades ej"
+            },
+            "winetricks": {
+                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
+                "title": "Winetricks error"
             }
         },
         "info": {
@@ -367,6 +371,7 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "progress": "Progress",
     "Recent": "Nyligen spelat",
     "search": "Sök efter spel",
     "setting": {

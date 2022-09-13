@@ -1,13 +1,13 @@
 import './index.css'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
-import { getGameInfo, quoteIfNecessary } from 'frontend/helpers'
+import { getGameInfo } from 'frontend/helpers'
 
-import { ipcRenderer } from 'frontend/helpers'
 import { Runner } from 'common/types'
+import { ProgressDialog } from 'frontend/components/UI/ProgressDialog'
 
 interface Props {
   appName: string
@@ -18,6 +18,7 @@ export default function Tools({ appName, runner }: Props) {
   const { t } = useTranslation()
   const [winecfgRunning, setWinecfgRunning] = useState(false)
   const [winetricksRunning, setWinetricksRunning] = useState(false)
+  const [progress, setProgress] = useState<string[]>([])
 
   type Tool = 'winecfg' | 'winetricks' | string
   async function callTools(tool: Tool, exe?: string) {
@@ -27,8 +28,7 @@ export default function Tools({ appName, runner }: Props) {
     if (tool === 'winecfg') {
       setWinecfgRunning(true)
     }
-    exe = exe ? quoteIfNecessary(exe) : undefined
-    await ipcRenderer.invoke('callTool', {
+    await window.api.callTool({
       tool,
       exe,
       appName,
@@ -38,10 +38,27 @@ export default function Tools({ appName, runner }: Props) {
     setWinecfgRunning(false)
   }
 
+  useEffect(() => {
+    const onProgress = (e: Electron.IpcRendererEvent, messages: string[]) => {
+      setProgress(messages)
+    }
+
+    window.api.handleProgressOfWinetricks(onProgress)
+
+    //useEffect unmount
+    return () => {
+      window.api.progressOfWinetricksRemoveListener(onProgress)
+    }
+  }, [])
+
+  useEffect(() => {
+    setProgress([])
+  }, [winetricksRunning])
+
   const handleRunExe = async () => {
     let exe = ''
     const gameinfo = await getGameInfo(appName, runner)
-    const { path } = await ipcRenderer.invoke('openDialog', {
+    const { path } = await window.api.openDialog({
       buttonLabel: t('box.select.button', 'Select'),
       properties: ['openFile'],
       title: t('box.runexe.title'),
@@ -79,6 +96,16 @@ export default function Tools({ appName, runner }: Props) {
   return (
     <>
       <div data-testid="toolsSettings" className="settingsTools">
+        {winetricksRunning && (
+          <ProgressDialog
+            title={'Winetricks'}
+            progress={progress}
+            showCloseButton={false}
+            onClose={() => {
+              return
+            }}
+          />
+        )}
         <div className="toolsWrapper">
           <button
             data-testid="wineCFG"
