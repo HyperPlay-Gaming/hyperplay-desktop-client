@@ -1,18 +1,23 @@
 import { WrapRendererCallback } from './../../common/types'
 import { PROXY_TOPICS } from '../proxy/types'
 import { ipcRenderer } from 'electron'
-import { PROVIDERS, UrisReturn } from '../proxy/types'
+import { PROVIDERS, UrisReturn } from '../../common/types/proxy-types'
 import {
   AccountsChangedType,
   WalletConnectedType,
   WalletDisconnectedType,
   ChainChangedType,
   ConnectionRequestRejectedType
-} from '../proxy/types'
+} from '../../common/types/proxy-types'
 
 export const handleConnected = (
   callback: WrapRendererCallback<WalletConnectedType>
-) => ipcRenderer.on(PROXY_TOPICS.WALLET_CONNECTED, callback)
+) => {
+  ipcRenderer.on(PROXY_TOPICS.WALLET_CONNECTED, callback)
+  return () => {
+    ipcRenderer.removeListener(PROXY_TOPICS.WALLET_CONNECTED, callback)
+  }
+}
 
 export const handleDisconnected = (
   callback: WrapRendererCallback<WalletDisconnectedType>
@@ -33,4 +38,14 @@ export const getConnectionUris = async (
 
 export const handleConnectionRequestRejected = (
   callback: WrapRendererCallback<ConnectionRequestRejectedType>
-) => ipcRenderer.on(PROXY_TOPICS.CONNECTION_REQUEST_REJECTED, callback)
+) => {
+  ipcRenderer.on(PROXY_TOPICS.CONNECTION_REQUEST_REJECTED, callback)
+  return () => {
+    ipcRenderer.removeListener(
+      PROXY_TOPICS.CONNECTION_REQUEST_REJECTED,
+      callback
+    )
+  }
+}
+
+export const openHyperplaySite = () => ipcRenderer.send('openHyperplaySite')

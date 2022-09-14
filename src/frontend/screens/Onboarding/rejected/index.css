@@ -1,0 +1,80 @@
+.rejectedImg {
+  width: 200px;
+  height: 200px;
+}
+
+.rejectedTextContainer {
+  margin: 22px;
+}
+
+.rejectedCancelButton {
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 10px;
+
+  /* width: 96px; */
+  /* height: 34px; */
+
+  border: 1px solid #6900ff;
+  border-radius: 7.59624px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.rejectedRetryButton {
+  box-sizing: border-box;
+
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 10px;
+
+  /* width: 96px;
+  height: 34px; */
+
+  background: #6900ff;
+  border-radius: 7.59624px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 1;
+  cursor: pointer;
+}
+
+.actionButtonsContainer {
+  /* Auto layout */
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 8px;
+
+  /* width: 200px;
+  height: 34px; */
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}

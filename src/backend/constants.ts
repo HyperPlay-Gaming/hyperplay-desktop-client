@@ -81,6 +81,7 @@ const weblateUrl =
 const kofiPage = 'https://ko-fi.com/heroicgames'
 const patreonPage = 'https://www.patreon.com/heroicgameslauncher'
 const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
+const hyperplaySite = 'https://game7.io/'
 
 /**
  * Get shell for different os
@@ -223,5 +224,6 @@ export {
   isCLINoGui,
   publicDir,
   GITHUB_API,
-  wineprefixFAQ
+  wineprefixFAQ,
+  hyperplaySite
 }

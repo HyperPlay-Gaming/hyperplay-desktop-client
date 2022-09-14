@@ -1,0 +1,127 @@
+.walletOption {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  gap: 16px;
+
+  width: 100%;
+  height: 64px;
+
+  background: #282828;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
+  border: transparent;
+  border-radius: 6px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.optionContent {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0px;
+  gap: 16px;
+
+  width: 100%;
+  height: 40px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+div.walletOptionIcon {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  gap: 4.82px;
+
+  width: 40px;
+  height: 40px;
+
+  border-radius: 41px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+img.walletOptionIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.walletOptionContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  width: calc(100% - 60px);
+  height: 35px;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  background: transparent;
+  background-color: transparent;
+  color: transparent;
+  border-color: transparent;
+}
+
+.walletOptionTitleText {
+  /* width: 105px; */
+  height: 21px;
+
+  /* font-family: 'PP Fraktion Sans';
+  font-style: normal; */
+  font-weight: 560;
+  font-size: 14px;
+  line-height: 21px;
+  /* identical to box height */
+
+  color: #ffffff;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  margin: -1px 0px;
+}
+
+.walletOptionSubtext {
+  /* width: 136px; */
+  height: 15px;
+
+  /* font-family: 'PP Fraktion Sans';
+  font-style: normal; */
+  font-weight: 560;
+  font-size: 10px;
+  line-height: 15px;
+  /* identical to box height */
+
+  color: #a8a8a8;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}

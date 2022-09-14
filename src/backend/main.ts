@@ -104,7 +104,8 @@ import {
   isCLINoGui,
   isFlatpak,
   publicDir,
-  wineprefixFAQ
+  wineprefixFAQ,
+  hyperplaySite
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -128,7 +129,7 @@ import {
   ConnectionRequestRejectedType,
   WalletConnectedType,
   WalletDisconnectedType
-} from './proxy/types'
+} from '../common/types/proxy-types'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 
@@ -1648,3 +1649,5 @@ ProviderHelper.passEventCallbacks(
   chainChanged,
   connectionRequestRejected
 )
+
+ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
