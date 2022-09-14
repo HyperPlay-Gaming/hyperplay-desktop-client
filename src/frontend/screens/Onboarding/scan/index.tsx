@@ -24,14 +24,19 @@ const Scan: React.FC<ScanProps> = function (props) {
   return (
     <div>
       <div className="connectingDisplay">
-        <img src={props.providerImg} className="providerImg"></img>
+        <img
+          src={props.providerImg}
+          className="providerImg connectingFrom"
+        ></img>
         <img
           src="/src/frontend/assets/hyperplay/hyperplay_logo.svg"
-          className="providerImg"
+          className="providerImg connectingTo"
         ></img>
       </div>
-      <div className="qrCodeContainer">
-        <img src={url}></img>
+      <div className="borderWrap">
+        <div className="qrCodeContainer">
+          <img src={url} className="qrCodeImage"></img>
+        </div>
       </div>
       <p>
         Scan QR code with your mobile wallet. Approve connection request to sign

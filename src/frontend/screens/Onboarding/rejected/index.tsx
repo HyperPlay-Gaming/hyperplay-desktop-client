@@ -22,12 +22,10 @@ const Rejected: React.FC<RejectedProps> = function (props) {
         src="/src/frontend/assets/hyperplay/rejected.svg"
         className="rejectedImg"
       ></img>
-      <div className="rejectedTextContainer">
-        <p>
-          You cancelled the connection request on your wallet. Please retry
-          connecting to proceed.
-        </p>
-      </div>
+      <p className="rejectedSubtext">
+        You cancelled the connection request on your wallet. Please retry
+        connecting to proceed.
+      </p>
       <div className="actionButtonsContainer">
         <button
           onClick={() => props.disableOnboarding()}

@@ -5,8 +5,10 @@
   align-items: center;
   padding: 12px;
   gap: 16px;
+  margin-top: 12px;
+  margin-bottom: 12px;
 
-  width: 100%;
+  width: calc(100%);
   height: 64px;
 
   background: #282828;
@@ -30,7 +32,7 @@
   padding: 0px;
   gap: 16px;
 
-  width: 100%;
+  /* width: 100%; */
   height: 40px;
 
   /* Inside auto layout */
@@ -70,9 +72,9 @@ img.walletOptionIcon {
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
+  justify-content: center;
 
-  width: calc(100% - 60px);
-  height: 35px;
+  /* height: 35px; */
 
   /* Inside auto layout */
 
@@ -87,7 +89,7 @@ img.walletOptionIcon {
 
 .walletOptionTitleText {
   /* width: 105px; */
-  height: 21px;
+  /* height: 21px; */
 
   /* font-family: 'PP Fraktion Sans';
   font-style: normal; */
@@ -108,7 +110,7 @@ img.walletOptionIcon {
 
 .walletOptionSubtext {
   /* width: 136px; */
-  height: 15px;
+  /* height: 15px; */
 
   /* font-family: 'PP Fraktion Sans';
   font-style: normal; */
@@ -118,6 +120,19 @@ img.walletOptionIcon {
   /* identical to box height */
 
   color: #a8a8a8;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  white-space: nowrap;
+  margin: 0px;
+}
+
+.walletOptionArrow {
+  width: 6px;
+  height: 12px;
 
   /* Inside auto layout */
 

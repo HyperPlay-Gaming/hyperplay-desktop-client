@@ -20,7 +20,10 @@ const WalletOption: React.FC<WalletOptionProps> = function (props) {
           <p className="walletOptionSubtext">{props.subtext}</p>
         </div>
       </div>
-      <img className="walletOptionArrow"></img>
+      <img
+        className="walletOptionArrow"
+        src="/src/frontend/assets/hyperplay/forward_arrow.svg"
+      ></img>
     </button>
   )
 }

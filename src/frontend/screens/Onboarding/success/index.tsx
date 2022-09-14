@@ -25,9 +25,9 @@ const Success: React.FC<SuccessParams> = function (props) {
         src="/src/frontend/assets/hyperplay/success.svg"
         className="successImg"
       ></img>
-      <div className="successTextContainer">
-        <p>Your wallet is now connected! You&apos;re ready to game. </p>
-      </div>
+      <p className="rejectedSubtext">
+        Your wallet is now connected! You&apos;re ready to game.{' '}
+      </p>
     </div>
   )
 }

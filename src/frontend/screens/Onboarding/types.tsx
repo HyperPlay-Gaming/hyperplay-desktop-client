@@ -2,7 +2,8 @@ export enum ONBOARDING_CONTENT {
   WELCOME = 'WELCOME',
   SCAN = 'SCAN',
   REJECTED = 'REJECTED',
-  SUCCESS = 'SUCCESS'
+  SUCCESS = 'SUCCESS',
+  DOWNLOAD = 'DOWNLOAD'
 }
 
 // keep this state in top level Onboarding

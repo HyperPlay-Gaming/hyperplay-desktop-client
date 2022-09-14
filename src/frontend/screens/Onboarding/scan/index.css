@@ -1,19 +1,25 @@
-.providerImg {
-  border-radius: 8px;
-  width: 35px;
-  height: 35px;
-  margin: 24px;
+.qrCodeContainer {
+  position: relative;
+  padding: 0px;
+  border: 14px solid #121212;
+  /*should equal .borderwrap's border-radius - .borderwrap's padding*/
+  border-radius: 24px;
+  background-color: #121212;
 }
 
-.qrCodeContainer {
-  padding: 20px;
-  border: 8px solid linear-gradient(#10a6d6 0%, #5d43ff 50%, #ff43d4 100%);
+.borderWrap {
+  background: linear-gradient(82deg, #4126e8, #ea1aba, #10a6d6);
+  padding: 7px;
+  border-radius: 32px;
+  background-clip: padding-box;
+}
+
+.qrCodeImage {
+  padding: 0px;
+  margin: 0px;
 }
 
 .scanLearnMoreButton {
-  /* width: 61px;
-  height: 18px; */
-
   font-family: 'PP Fraktion Sans';
   font-style: normal;
   font-weight: 560;
@@ -30,4 +36,31 @@
   flex-grow: 0;
   background: transparent;
   border: none;
+}
+
+.providerImg {
+  position: absolute;
+  border-radius: 8px;
+  width: 35px;
+  height: 35px;
+  /* margin: 24px; */
+  transform: translate(-50%, -50%);
+}
+
+.connectingFrom {
+  left: 0%;
+}
+
+.connectingTo {
+  left: 100%;
+}
+
+.connectingDisplay {
+  position: relative;
+  /* background-color: white */
+  border-top: 2px dashed white;
+  /* border-style: dashed; */
+  height: 12px;
+  margin: 30px;
+  margin-top: 6px;
 }

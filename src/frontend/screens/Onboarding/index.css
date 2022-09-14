@@ -21,8 +21,8 @@
 }
 
 .welcomeTitle {
-  width: 154px;
-  height: 21px;
+  /* width: 154px;
+  height: 21px; */
 
   /* font-family: 'PP Fraktion Sans'; */
   /* font-style: normal; */
@@ -42,29 +42,6 @@
   flex-grow: 0;
 }
 
-.actionButton {
-  /* width: 66px; */
-  /* height: 18px; */
-
-  /* font-family: 'PP Fraktion Sans';
-  font-style: normal; */
-  font-weight: 560;
-  font-size: 12px;
-  line-height: 18px;
-  /* identical to box height */
-
-  color: #7761ff;
-
-  /* Inside auto layout */
-
-  flex: none;
-  order: 0;
-  flex-grow: 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
 .welcomeTitleFrame {
   display: flex;
   flex-direction: row;
@@ -73,7 +50,7 @@
   padding: 0px;
 
   width: 100%;
-  height: 21px;
+  /* height: 21px; */
 
   /* Inside auto layout */
 
@@ -115,4 +92,9 @@
 
 .disableButton {
   visibility: hidden;
+}
+
+.contentContainer {
+  padding-left: 15%;
+  padding-right: 15%;
 }

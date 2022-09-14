@@ -14,6 +14,7 @@ import { toString, QRCodeToStringOptions } from 'qrcode'
 import { WrapRendererCallback } from 'common/types'
 import Success from './success'
 import Rejected from './rejected'
+import Download from './download'
 
 interface OnboardingProps {
   disableOnboarding: () => void
@@ -96,9 +97,15 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
       case ONBOARDING_CONTENT.WELCOME:
         return (
           <Welcome
+            setOnboardingModalParams={setOnboardingParams}
             disableOnboarding={props.disableOnboarding}
             handleProviderClicked={async (prov: PROVIDERS) =>
               handleProviderClicked(prov)
+            }
+            downloadMetaMaskClicked={() =>
+              setContentParams({
+                content: ONBOARDING_CONTENT.DOWNLOAD
+              })
             }
           />
         )
@@ -129,12 +136,30 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
             }
           ></Rejected>
         )
+      case ONBOARDING_CONTENT.DOWNLOAD:
+        return (
+          <Download
+            setOnboardingModalParams={setOnboardingParams}
+            disableOnboarding={props.disableOnboarding}
+            onRetryClick={() =>
+              setContentParams({
+                content: ONBOARDING_CONTENT.WELCOME
+              })
+            }
+          ></Download>
+        )
       default:
         return (
           <Welcome
+            setOnboardingModalParams={setOnboardingParams}
             disableOnboarding={props.disableOnboarding}
             handleProviderClicked={async (prov: PROVIDERS) =>
               handleProviderClicked(prov)
+            }
+            downloadMetaMaskClicked={() =>
+              setContentParams({
+                content: ONBOARDING_CONTENT.DOWNLOAD
+              })
             }
           />
         )
@@ -167,7 +192,9 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
           <img src="/src/frontend/assets/hyperplay/close_x.svg"></img>
         </button>
       </div>
-      {renderContent(contentParams.content)}
+      <div className="contentContainer">
+        {renderContent(contentParams.content)}
+      </div>
     </div>
   )
 }
