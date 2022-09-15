@@ -1,3 +1,16 @@
 .centerSidebarItem {
   align-items: flex-end;
 }
+
+.connectedImageStatus {
+  color: green;
+}
+
+.disconnectedImageStatus {
+  fill: purple;
+}
+.connectedStatusLogoMask {
+  background-color: pink;
+  mask: url(/src/frontend/assets/hyperplay/hyperplay_logo_outline.svg) no-repeat
+    center;
+}

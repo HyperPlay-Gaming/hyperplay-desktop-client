@@ -43,7 +43,6 @@ export async function getConnectionUris(
     }
     case PROVIDERS.WALLET_CONNECT: {
       uris = await getWalletConnectConnectionUris()
-      console.log('opening qr code')
       QRCodeModal.open(uris['metamask'].qrCodeLink, null)
       break
     }
@@ -227,7 +226,6 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
 
       const registryUrl = WCBrowserUtils.getWalletRegistryUrl()
       //might want to have local json fallback
-      console.log('fetching url = ', registryUrl)
       let _registryResponseJSON = registryCache
       try {
         const registryResponse = await fetch(registryUrl)
@@ -235,7 +233,6 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
       } catch (e) {
         console.log(String(e))
       }
-      console.log('fetched')
       const registry: IAppRegistry = _registryResponseJSON.listings
       // mobile works for desktop too
       const platform = 'mobile'

@@ -27,7 +27,11 @@ const Wallet: React.FC<WalletProps> = function (props) {
       className="Sidebar__item centerSidebarItem wallet"
     >
       <img
-        src="/src/frontend/assets/hyperplay/hyperplay_logo.svg"
+        src={
+          walletText !== disconnectedText
+            ? '/src/frontend/assets/hyperplay/hyperplay_logo_green.svg'
+            : '/src/frontend/assets/hyperplay/hyperplay_logo_red.svg'
+        }
         className="Sidebar__itemIcon"
       ></img>
       <span className="sidebarConnectText">{walletText}</span>

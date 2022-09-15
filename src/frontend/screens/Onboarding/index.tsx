@@ -39,7 +39,6 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   async function handleProviderClicked(provider: PROVIDERS) {
     const uris: UrisReturn = await window.api.getConnectionUris(provider)
     const qrCodeLink: IMobileRegistryEntryWithQrLink = uris.metamask
-    console.log(qrCodeLink)
     const qrCode = qrCodeLink.qrCodeLink
     const options: QRCodeToStringOptions = {
       type: 'svg',
