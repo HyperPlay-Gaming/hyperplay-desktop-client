@@ -16,8 +16,6 @@
   border: transparent;
   border-radius: 6px;
 
-  /* Inside auto layout */
-
   flex: none;
   order: 0;
   align-self: stretch;
@@ -32,10 +30,7 @@
   padding: 0px;
   gap: 16px;
 
-  /* width: 100%; */
   height: 40px;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 0;
@@ -55,8 +50,6 @@ div.walletOptionIcon {
 
   border-radius: 41px;
 
-  /* Inside auto layout */
-
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -74,10 +67,6 @@ img.walletOptionIcon {
   padding: 0px;
   justify-content: center;
 
-  /* height: 35px; */
-
-  /* Inside auto layout */
-
   flex: none;
   order: 1;
   flex-grow: 0;
@@ -88,19 +77,11 @@ img.walletOptionIcon {
 }
 
 .walletOptionTitleText {
-  /* width: 105px; */
-  /* height: 21px; */
-
-  /* font-family: 'PP Fraktion Sans';
-  font-style: normal; */
   font-weight: 560;
   font-size: 14px;
   line-height: 21px;
-  /* identical to box height */
 
   color: #ffffff;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 0;
@@ -109,19 +90,11 @@ img.walletOptionIcon {
 }
 
 .walletOptionSubtext {
-  /* width: 136px; */
-  /* height: 15px; */
-
-  /* font-family: 'PP Fraktion Sans';
-  font-style: normal; */
   font-weight: 560;
   font-size: 10px;
   line-height: 15px;
-  /* identical to box height */
 
   color: #a8a8a8;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 1;
@@ -133,8 +106,6 @@ img.walletOptionIcon {
 .walletOptionArrow {
   width: 6px;
   height: 12px;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 1;

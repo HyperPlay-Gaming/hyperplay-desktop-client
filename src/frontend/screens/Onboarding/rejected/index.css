@@ -6,8 +6,6 @@
 .rejectedCancelButton {
   box-sizing: border-box;
 
-  /* Auto layout */
-
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -15,14 +13,9 @@
   padding: 8px 18px;
   gap: 10px;
 
-  /* width: 96px; */
-  /* height: 34px; */
-
   border: 1px solid #6900ff;
   border-radius: 7.59624px;
   color: #6900ff;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 0;
@@ -34,8 +27,6 @@
 .rejectedRetryButton {
   box-sizing: border-box;
 
-  /* Auto layout */
-
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -43,14 +34,9 @@
   padding: 8px 18px;
   gap: 10px;
 
-  /* width: 96px;
-  height: 34px; */
-
   background: #6900ff;
   border-radius: 7.59624px;
   color: white;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 1;
@@ -59,19 +45,12 @@
 }
 
 .actionButtonsContainer {
-  /* Auto layout */
-
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
   padding: 0px;
   gap: 8px;
-
-  /* width: 200px;
-  height: 34px; */
-
-  /* Inside auto layout */
 
   flex: none;
   order: 2;

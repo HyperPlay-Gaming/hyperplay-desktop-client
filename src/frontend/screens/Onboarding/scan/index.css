@@ -2,7 +2,7 @@
   position: relative;
   padding: 0px;
   border: 14px solid #121212;
-  /*should equal .borderwrap's border-radius - .borderwrap's padding*/
+  /*should equal .borderwrap's border-radius minus .borderwrap's padding*/
   border-radius: 24px;
   background-color: #121212;
 }
@@ -25,11 +25,8 @@
   font-weight: 560;
   font-size: 12px;
   line-height: 18px;
-  /* identical to box height */
 
   color: #7761ff;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 4;
@@ -43,7 +40,6 @@
   border-radius: 8px;
   width: 35px;
   height: 35px;
-  /* margin: 24px; */
   transform: translate(-50%, -50%);
 }
 
@@ -57,9 +53,7 @@
 
 .connectingDisplay {
   position: relative;
-  /* background-color: white */
   border-top: 2px dashed white;
-  /* border-style: dashed; */
   height: 12px;
   margin: 30px;
   margin-top: 6px;

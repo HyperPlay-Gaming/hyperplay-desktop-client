@@ -29,7 +29,6 @@ const Download: React.FC<DownloadProps> = function (props) {
       'https://metamask.app.link/skAH3BaF99',
       options
     )
-    // console.log(qrCodeSvgUpdated)
     const blob = new Blob([qrCodeSvg], { type: 'image/svg+xml' })
     setQrUrl(URL.createObjectURL(blob))
   }

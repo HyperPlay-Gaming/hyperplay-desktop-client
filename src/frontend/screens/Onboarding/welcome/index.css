@@ -1,17 +1,9 @@
 .actionButton {
-  /* width: 66px; */
-  /* height: 18px; */
-
-  /* font-family: 'PP Fraktion Sans';
-  font-style: normal; */
   font-weight: 560;
   font-size: 12px;
   line-height: 18px;
-  /* identical to box height */
 
   color: #7761ff;
-
-  /* Inside auto layout */
 
   flex: none;
   order: 0;
