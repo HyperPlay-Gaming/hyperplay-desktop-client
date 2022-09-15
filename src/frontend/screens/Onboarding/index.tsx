@@ -166,34 +166,36 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     }
   }
   return (
-    <div className="welcomeModal">
-      <div className="welcomeTitleFrame">
-        <button
-          className={
-            onboardingParams.enableBackButton
-              ? 'backArrow'
-              : 'backArrow disableButton'
-          }
-          onClick={() =>
-            setContentParams({ content: ONBOARDING_CONTENT.WELCOME })
-          }
-        >
-          <img src="/src/frontend/assets/hyperplay/back_arrow.svg"></img>
-        </button>
-        <h1 className="welcomeTitle">{onboardingParams.title}</h1>
-        <button
-          className={
-            onboardingParams.enableCloseButton
-              ? 'closeButton'
-              : 'closeButton disableButton'
-          }
-          onClick={() => props.disableOnboarding()}
-        >
-          <img src="/src/frontend/assets/hyperplay/close_x.svg"></img>
-        </button>
-      </div>
-      <div className="contentContainer">
-        {renderContent(contentParams.content)}
+    <div className="blurBackground">
+      <div className="welcomeModal">
+        <div className="welcomeTitleFrame">
+          <button
+            className={
+              onboardingParams.enableBackButton
+                ? 'backArrow'
+                : 'backArrow disableButton'
+            }
+            onClick={() =>
+              setContentParams({ content: ONBOARDING_CONTENT.WELCOME })
+            }
+          >
+            <img src="/src/frontend/assets/hyperplay/back_arrow.svg"></img>
+          </button>
+          <h1 className="welcomeTitle">{onboardingParams.title}</h1>
+          <button
+            className={
+              onboardingParams.enableCloseButton
+                ? 'closeButton'
+                : 'closeButton disableButton'
+            }
+            onClick={() => props.disableOnboarding()}
+          >
+            <img src="/src/frontend/assets/hyperplay/close_x.svg"></img>
+          </button>
+        </div>
+        <div className="contentContainer">
+          {renderContent(contentParams.content)}
+        </div>
       </div>
     </div>
   )
