@@ -3,7 +3,7 @@
   font-size: 12px;
   line-height: 18px;
 
-  color: #7761ff;
+  color: var(--primary-variant);
 
   flex: none;
   order: 0;

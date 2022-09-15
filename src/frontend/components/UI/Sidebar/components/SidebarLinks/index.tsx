@@ -11,12 +11,8 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { faDiscord, faPatreon } from '@fortawesome/free-brands-svg-icons'
-import {
-  faCoffee,
-  faUserAlt,
-  faWineGlass
-} from '@fortawesome/free-solid-svg-icons'
+import { faDiscord } from '@fortawesome/free-brands-svg-icons'
+import { faUserAlt, faWineGlass } from '@fortawesome/free-solid-svg-icons'
 import { openDiscordLink, getGameInfo } from 'frontend/helpers'
 
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -373,18 +369,6 @@ export default function SidebarLinks() {
           />
         </div>
         <span>{t('userselector.discord', 'Discord')}</span>
-      </button>
-      <button className="Sidebar__item" onClick={window.api.openPatreonPage}>
-        <div className="Sidebar__itemIcon">
-          <FontAwesomeIcon icon={faPatreon} title="Patreon" />
-        </div>
-        <span>Patreon</span>
-      </button>
-      <button className="Sidebar__item" onClick={window.api.openKofiPage}>
-        <div className="Sidebar__itemIcon">
-          <FontAwesomeIcon icon={faCoffee} title="Ko-fi" />
-        </div>
-        <span>Ko-fi</span>
       </button>
       {(isFullscreen || activeController) && <QuitButton />}
     </div>

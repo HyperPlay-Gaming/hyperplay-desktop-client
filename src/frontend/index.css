@@ -1,30 +1,36 @@
 html {
   /* Generic colors */
-  --background: #151f3d;
-  --background-darker: #0d0f1c;
-  --background-darker-80: #0d0f1ce0;
-  --background-secondary: #323035;
-  --background-lighter: #152f6d;
+  --background: #121212;
+  --background-darker: #121212;
+  --background-darker-80: #1f1f1fe0;
+  --background-secondary: #282828;
+  --background-lighter: #d9d9d90d;
   --background-gradient: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.418) 2.4%,
     #0d0f1cd2 64%
   );
 
+  /* Primary */
+  --primary-variant: #7761ff;
+  --primary: #6900ff;
+
+  /* Gradients */
+  --gradient-1: linear-gradient(82deg, #4126e8, #ea1aba, #10a6d6);
+
   /* Colours */
   --navbar-background: var(--background);
   --input-background: var(--background-darker);
-  --body-background: #13172a;
+  --body-background: #292929;
   --current-background: var(--body-background);
-  --modal-background: #13172a;
-  --modal-border: #1f253f;
+  --modal-background: #2d2d2d;
+  --modal-border: #3e3e3e;
   --modal-backdrop: #00000074;
   --text-hover: #59d0ea;
-  --primary: #07c5ef;
   --primary-hover: #4cdafa;
   --link-highlight: #07c5ef;
-  --accent: #eaa114;
-  --accent-overlay: #ffbb33;
+  --accent: #909090;
+  --accent-overlay: #bbbbbb;
   --navbar-accent: var(--accent);
   --navbar-active-background: var(--background-lighter);
   --play-button: #59d0ea;
@@ -35,12 +41,12 @@ html {
   --favourite-active: #97f4e9;
   --favourite-inactive: #eae8e5;
   --danger: #bd0a0a; /* These success, danger and disabled colours need to be documented */
-  --success: #0bd58c;
+  --success: #eda7ff;
   --success-hover: #30eca8;
   --danger-hover: #e43f3f;
   --icon-disabled: #625e69;
-  --icons-background: #17131c;
-  --divider: #ffbb3384;
+  --icons-background: var(--background-darker);
+  --divider: var(--accent);
   --osk-background: var(--body-background);
   --osk-button-background: var(--input-background);
   --osk-button-border: var(--navbar-background);
@@ -64,17 +70,12 @@ html {
     #17131cd2 45%
   );
   --gradient-game-hover: linear-gradient(#000000 30.8%, #141515 77%);
-  --gradient-body-background: linear-gradient(
-    90deg,
-    var(--background-darker) -32px,
-    var(--body-background) 64px,
-    var(--body-background) 100%
-  );
+  --gradient-body-background: #000000;
   /* Text colours */
   --text-default: #eae8e5;
-  --text-secondary: #b1b1b1;
-  --text-pause-cancel: #97f4e9;
-  --text-title: #97f4e9;
+  --text-secondary: #888888;
+  --text-pause-cancel: white;
+  --text-title: white;
   --text-tertiary: #101111; /* This is not defined in figma */
   --text-quartenary: #5a5e5f; /* this is meant to be a background colour */
   --text-danger: #d22121;

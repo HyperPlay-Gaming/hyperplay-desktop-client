@@ -13,9 +13,9 @@
   padding: 8px 18px;
   gap: 10px;
 
-  border: 1px solid #6900ff;
+  border: 1px solid var(--primary);
   border-radius: 7.59624px;
-  color: #6900ff;
+  color: var(--primary);
 
   flex: none;
   order: 0;
@@ -34,7 +34,7 @@
   padding: 8px 18px;
   gap: 10px;
 
-  background: #6900ff;
+  background: var(--primary);
   border-radius: 7.59624px;
   color: white;
 

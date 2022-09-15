@@ -1,14 +1,14 @@
 .qrCodeContainer {
   position: relative;
   padding: 0px;
-  border: 14px solid #121212;
+  border: 14px solid var(--background);
   /*should equal .borderwrap's border-radius - .borderwrap's padding*/
   border-radius: 24px;
-  background-color: #121212;
+  background-color: var(--background);
 }
 
 .borderWrap {
-  background: linear-gradient(82deg, #4126e8, #ea1aba, #10a6d6);
+  background: var(--gradient-1);
   padding: 7px;
   border-radius: 32px;
   background-clip: padding-box;
@@ -28,9 +28,9 @@
   padding: 8px 18px;
   gap: 10px;
 
-  border: 1px solid #6900ff;
+  border: 1px solid var(--primary);
   border-radius: 7.59624px;
-  color: #6900ff;
+  color: var(--primary);
 
   flex: none;
   order: 0;
@@ -49,7 +49,7 @@
   padding: 8px 18px;
   gap: 10px;
 
-  background: #6900ff;
+  background: var(--primary);
   border-radius: 7.59624px;
   color: white;
 

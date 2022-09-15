@@ -109,7 +109,7 @@
   justify-content: space-around;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-areas: 'update settings play';
+  grid-template-areas: 'update play settings';
   padding: 6px auto;
 }
 
