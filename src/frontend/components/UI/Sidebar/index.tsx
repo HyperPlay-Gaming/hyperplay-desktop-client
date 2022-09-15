@@ -11,8 +11,13 @@ import CurrentDownload from './components/CurrentDownload'
 import SidebarLinks from './components/SidebarLinks'
 import './index.css'
 import AppVersion from './components/HeroicVersion'
+import Wallet from './components/wallet'
 
-export default function Sidebar() {
+interface SidebarProps {
+  openOnboarding: () => void
+}
+
+const Sidebar: React.FC<SidebarProps> = function (props) {
   const { t } = useTranslation()
   const { libraryStatus, sidebarCollapsed, setSideBarCollapsed } =
     useContext(ContextProvider)
@@ -22,6 +27,7 @@ export default function Sidebar() {
 
   return (
     <aside className={classNames('Sidebar', { collapsed: sidebarCollapsed })}>
+      <Wallet onClick={props.openOnboarding} />
       <SidebarLinks />
       <div className="currentDownloads">
         {downloading.map((g) => (
@@ -49,3 +55,5 @@ export default function Sidebar() {
     </aside>
   )
 }
+
+export default Sidebar

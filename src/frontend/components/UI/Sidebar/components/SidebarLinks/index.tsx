@@ -103,6 +103,7 @@ export default function SidebarLinks() {
 
   return (
     <div className="SidebarLinks Sidebar__section">
+      <div className="divider" />
       {loggedIn && (
         <NavLink
           className={({ isActive }) =>

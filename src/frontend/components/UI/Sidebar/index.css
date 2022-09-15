@@ -4,8 +4,8 @@
   position: relative;
   z-index: 10;
   display: grid;
-  grid-template-rows: 2fr min-content min-content;
-  grid-template-areas: 'links' 'utils' 'updates' 'version';
+  grid-template-rows: min-content 2fr min-content min-content;
+  grid-template-areas: 'wallet' 'links' 'utils' 'updates' 'version';
   grid-area: sidebar;
   height: 100%;
   padding: 0;
@@ -98,6 +98,12 @@
   justify-content: space-around;
   margin: 0 4px 12px var(--sidebar-horizontal-padding);
   font-size: 0.9rem;
+}
+
+.wallet {
+  grid-area: wallet;
+  align-self: start;
+  margin-top: var(--sidebar-vertical-padding);
 }
 
 .newReleases > a {

@@ -34,7 +34,7 @@ function App() {
       style={style}
     >
       <HashRouter>
-        <Sidebar />
+        <Sidebar openOnboarding={() => setOnboardingEnabled(true)} />
         <main className="content">
           <Routes>
             <Route path="/" element={loggedIn ? <Library /> : <Login />} />
