@@ -24,7 +24,9 @@ class Application {
   private tray: Electron.Tray | null
   private markQuit = false
 
+  // @ts-expect-error TODO
   private Overlay: typeof IOverlay
+  // @ts-expect-error TODO
   private OvHook: typeof IOVhook
 
   constructor() {
