@@ -1,8 +1,5 @@
 {
-  "ExpandedNodes": [
-    "",
-    "\\src"
-  ],
+  "ExpandedNodes": ["", "\\src"],
   "SelectedNode": "\\src\\main.cc",
   "PreviewInSolutionExplorer": false
 }

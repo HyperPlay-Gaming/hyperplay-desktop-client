@@ -1,4 +1,5 @@
 import { IpcRendererEvent } from 'electron'
+/* eslint-disable @typescript-eslint/no-var-requires */
 const { ipcRenderer } = require('electron')
 console.log('renderer js imported')
 

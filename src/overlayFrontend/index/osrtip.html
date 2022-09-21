@@ -1,51 +1,47 @@
 <html>
-
-<head>
+  <head>
     <style>
-        body {
-            background-color: transparent;
-            margin: 0px;
-            overflow: hidden;
-        }
+      body {
+        background-color: transparent;
+        margin: 0px;
+        overflow: hidden;
+      }
 
-        .content {
-            background-color:rgba(61, 70, 73, 0.25);
-            border-radius: 100px;
-            padding: 30px
-        }
+      .content {
+        background-color: rgba(61, 70, 73, 0.25);
+        border-radius: 100px;
+        padding: 30px;
+      }
 
-        h1 {
-            color: maroon;
-            margin-left: 40px;
-        }
+      h1 {
+        color: maroon;
+        margin-left: 40px;
+      }
 
-        .caption {
-            height: 40px;
-            background-color: brown
-        }
+      .caption {
+        height: 40px;
+        background-color: brown;
+      }
     </style>
     <title>OsrWindow</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="content">
-        <div class="caption"></div>
-        <button id='button'>intercept</button>
-        <br /> offscreen window!
+      <div class="caption"></div>
+      <button id="button">intercept</button>
+      <br />
+      offscreen window!
 
-        <input type="text"><input>
-
+      <input type="text" /><input />
     </div>
     <script>
-         const {
-            ipcRenderer, remote
-        } = window.require('electron')
-        const label = document.getElementById('label')
-        const button = document.getElementById('button')
-        button.addEventListener('click', () => {
-            ipcRenderer.send('stopIntercept')
-        })
+      const { ipcRenderer, remote } = window.require('electron')
+      const label = document.getElementById('label')
+      const button = document.getElementById('button')
+      button.addEventListener('click', () => {
+        ipcRenderer.send('stopIntercept')
+      })
     </script>
-</body>
-
+  </body>
 </html>
