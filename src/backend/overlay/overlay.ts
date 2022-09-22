@@ -7,6 +7,7 @@ import { fileUrl } from './utils/utils'
 import * as IOverlay from 'electron-overlay'
 
 import * as IOVhook from 'node-ovhook'
+import { wait } from '../../common/types/proxy-types'
 
 enum AppWindows {
   main = 'main',
@@ -16,7 +17,6 @@ enum AppWindows {
 
 const DEBUG = true
 const distDir = path.join(__dirname, '../../src/overlayFrontend')
-console.log('DIST DIRECTORY = ', distDir)
 const entryUrl = fileUrl(path.join(distDir, 'index/index.html'))
 
 class Application {
@@ -123,14 +123,14 @@ class Application {
       if (event === 'game.input') {
         const window = BrowserWindow.fromId(payload.windowId)
         if (window) {
-          const intpuEvent = this.Overlay!.translateInputEvent(payload)
+          const inputEvent = this.Overlay!.translateInputEvent(payload)
           // if (payload.msg !== 512) {
           //   console.log(event, payload)
           //   console.log(`translate ${JSON.stringify(intpuEvent)}`)
           // }
 
-          if (intpuEvent) {
-            window.webContents.sendInputEvent(intpuEvent)
+          if (inputEvent) {
+            window.webContents.sendInputEvent(inputEvent)
           }
         }
       } else if (event === 'graphics.fps') {
@@ -473,20 +473,35 @@ class Application {
     return window
   }
 
+  public async inject(pid: string) {
+    console.log(`--------------------\n try inject method ${pid}`)
+    // TO DO: Find a way to listen to when window is created at pid and inject on handle that event
+    await wait(5000)
+    for (const window of this.OvHook.getTopWindows()) {
+      if (window.processId.toString() === pid) {
+        try {
+          this.OvHook.injectProcess(window)
+        } catch (e) {
+          console.log('error: ', JSON.stringify(e))
+        }
+      }
+    }
+  }
+
   private setupIpc() {
-    ipcMain.once('start', () => {
-      console.log('STARTING OVERLAY')
-      if (!this.Overlay) {
-        this.startOverlay()
+    // ipcMain.once('start', () => {
+    console.log('STARTING OVERLAY')
+    if (!this.Overlay) {
+      this.startOverlay()
 
-        this.createOsrWindow()
-        this.createOsrStatusbarWindow()
-      }
+      this.createOsrWindow()
+      this.createOsrStatusbarWindow()
+    }
 
-      if (!this.OvHook) {
-        this.OvHook = require('node-ovhook')
-      }
-    })
+    if (!this.OvHook) {
+      this.OvHook = require('node-ovhook')
+    }
+    // })
 
     ipcMain.on('inject', (event, arg) => {
       console.log(`--------------------\n try inject ${arg}`)

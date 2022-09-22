@@ -510,7 +510,7 @@ class GOGGame extends Game {
 
     launchCleanup(rpcClient)
 
-    return !error
+    return !gogResult.error
   }
 
   public async moveInstall(newInstallPath: string): Promise<string> {

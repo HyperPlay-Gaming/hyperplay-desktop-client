@@ -151,6 +151,7 @@ import {
   initExtension
 } from './hyperplay-extension-helper/ipcHandlers'
 import { initTrayIcon } from './tray_icon/tray_icon'
+export const overlayApp = new Application()
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -217,7 +218,6 @@ async function createWindow(): Promise<BrowserWindow> {
   ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
 
-  const overlayApp = new Application()
   overlayApp.start()
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
@@ -948,6 +948,7 @@ ipcMain.on('logInfo', (e, info) =>
 
 let powerDisplayId: number | null
 
+// get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {
