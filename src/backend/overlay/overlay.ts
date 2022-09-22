@@ -1,23 +1,24 @@
 import { BrowserWindow, ipcMain } from 'electron'
-import { Menu, Tray } from 'electron'
+// import { Menu, Tray } from 'electron'
 import { screen, shell } from 'electron'
 import * as path from 'path'
-import { fileUrl } from './utils/utils'
+// import { fileUrl } from './utils/utils'
 
 import * as IOverlay from 'electron-overlay'
 
 import * as IOVhook from 'node-ovhook'
 import { wait } from '../../common/types/proxy-types'
+import { resolve } from 'path'
+import { app } from 'electron'
+const buildDir = resolve(__dirname, '../../build')
 
 enum AppWindows {
-  main = 'main',
-  osr = 'osr',
-  osrpopup = 'osrpopup'
+  MAIN_OVERLAY = 'MainOverlay',
+  STATUS_BAR = 'StatusBar',
+  OVERLAY_TIP = 'OverlayTip'
 }
 
 const DEBUG = true
-const distDir = path.join(__dirname, '../../src/overlayFrontend')
-const entryUrl = fileUrl(path.join(distDir, 'index/index.html'))
 
 class Application {
   private windows: Map<string, Electron.BrowserWindow>
@@ -34,77 +35,8 @@ class Application {
     this.tray = null
   }
 
-  get mainWindow() {
-    return this.windows.get(AppWindows.main) || null
-  }
-
-  set mainWindow(window: Electron.BrowserWindow | null) {
-    if (!window) {
-      this.windows.delete(AppWindows.main)
-    } else {
-      this.windows.set(AppWindows.main, window)
-      window.on('closed', () => {
-        this.mainWindow = null
-      })
-
-      window.loadURL(entryUrl)
-
-      window.on('ready-to-show', () => {
-        this.showAndFocusWindow(AppWindows.main)
-      })
-
-      window.webContents.on('did-fail-load', () => {
-        window.reload()
-      })
-
-      window.on('close', (event) => {
-        if (this.markQuit) {
-          return
-        }
-        event.preventDefault()
-        window.hide()
-        return false
-      })
-
-      if (DEBUG) {
-        window.webContents.openDevTools()
-      }
-    }
-  }
-
   public getWindow(window: string) {
     return this.windows.get(window) || null
-  }
-
-  public createMainWindow() {
-    const options: Electron.BrowserWindowConstructorOptions = {
-      height: 600,
-      width: 800,
-      show: false,
-      webPreferences: {
-        nodeIntegration: true,
-        contextIsolation: false
-      }
-    }
-    const mainWindow = this.createWindow(AppWindows.main, options)
-    this.mainWindow = mainWindow
-    return mainWindow
-  }
-
-  public openMainWindow() {
-    let mainWindow = this.mainWindow
-    if (!mainWindow) {
-      mainWindow = this.createMainWindow()
-    }
-    mainWindow!.show()
-    mainWindow!.focus()
-  }
-
-  public closeMainWindow() {
-    const mainWindow = this.mainWindow
-    if (mainWindow) {
-      mainWindow.close()
-    }
   }
 
   public startOverlay() {
@@ -124,24 +56,20 @@ class Application {
         const window = BrowserWindow.fromId(payload.windowId)
         if (window) {
           const inputEvent = this.Overlay!.translateInputEvent(payload)
-          // if (payload.msg !== 512) {
-          //   console.log(event, payload)
-          //   console.log(`translate ${JSON.stringify(intpuEvent)}`)
-          // }
 
           if (inputEvent) {
             window.webContents.sendInputEvent(inputEvent)
           }
         }
       } else if (event === 'graphics.fps') {
-        const window = this.getWindow('StatusBar')
+        const window = this.getWindow(AppWindows.STATUS_BAR)
         if (window) {
           window.webContents.send('fps', payload.fps)
         }
       } else if (event === 'game.hotkey.down') {
-        if (payload.name === 'app.doit') {
-          this.doit()
-        }
+        // if (payload.name === 'app.doit') {
+        //   this.doit()
+        // }
       } else if (event === 'game.window.focused') {
         console.log('focusWindowId', payload.focusWindowId)
 
@@ -164,6 +92,7 @@ class Application {
     captionHeight = 0,
     transparent = false
   ) {
+    console.log('adding window ', name, ' with id ', window.id)
     const display = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
 
     this.Overlay!.addWindow(window.id, {
@@ -269,95 +198,41 @@ class Application {
     })
   }
 
-  public createOsrWindow() {
+  public createHyperplayOverlay() {
     const options: Electron.BrowserWindowConstructorOptions = {
       height: 360,
       width: 640,
       frame: false,
       show: false,
       transparent: true,
-      webPreferences: {
-        offscreen: true
-      }
-    }
-
-    const window = this.createWindow(AppWindows.osr, options)
-
-    window.setPosition(0, 0)
-    // window.webContents.openDevTools({
-    //   mode: "detach"
-    // })
-    window.loadURL(fileUrl(path.join(distDir, 'index/osr.html')))
-
-    window.webContents.on(
-      'paint',
-      (event, dirty, image: Electron.NativeImage) => {
-        if (this.markQuit) {
-          return
-        }
-        this.mainWindow!.webContents.send('osrImage', {
-          image: image.toDataURL()
-        })
-      }
-    )
-
-    this.addOverlayWindow('MainOverlay', window, 10, 40)
-    return window
-  }
-
-  public createOsrStatusbarWindow() {
-    const options: Electron.BrowserWindowConstructorOptions = {
-      height: 50,
-      width: 200,
-      frame: false,
-      show: false,
-      transparent: true,
       resizable: false,
       backgroundColor: '#00000000',
       webPreferences: {
-        offscreen: true
+        offscreen: true,
+        nodeIntegration: true,
+        contextIsolation: true,
+        // preload: path.join(__dirname, 'overlayPreload.js')
+        preload: path.join(__dirname, 'preload.js')
       }
     }
 
-    const name = 'StatusBar'
+    const name = AppWindows.OVERLAY_TIP
     const window = this.createWindow(name, options)
 
     window.setPosition(100, 0)
-    // window.webContents.openDevTools({
-    //   mode: "detach"
-    // })
-    window.loadURL(fileUrl(path.join(distDir, 'index/statusbar.html')))
 
-    this.addOverlayWindow(name, window, 0, 0)
-    return window
-  }
+    console.log(
+      'loading url from ',
+      path.join(buildDir, './index.html?HyperplayOverlay')
+    )
+    window.loadURL(
+      !app.isPackaged
+        ? 'http://localhost:5173?HyperplayOverlay'
+        : `file://${path.join(buildDir, './index.html?HyperplayOverlay')}`
+    ) //'index/osr.html')))
 
-  public createOsrTipWindow() {
-    const options: Electron.BrowserWindowConstructorOptions = {
-      height: 220,
-      width: 320,
-      resizable: false,
-      frame: false,
-      show: false,
-      transparent: true,
-      webPreferences: {
-        offscreen: true
-      }
-    }
-
-    const getRandomInt = (min: number, max: number) => {
-      return Math.floor(Math.random() * (max - min + 1)) + min
-    }
-    const name = `osrtip ${getRandomInt(1, 10000)}`
-    const window = this.createWindow(name, options)
-
-    window.setPosition(0, 0)
-    // window.webContents.openDevTools({
-    //   mode: "detach"
-    // })
-    window.loadURL(fileUrl(path.join(distDir, 'index/osrtip.html')))
-
-    this.addOverlayWindow(name, window, 30, 40, true)
+    this.addOverlayWindow(name, window, 10, 40)
+    console.log('OSR WINDOW CREATED AND ADDED')
     return window
   }
 
@@ -390,47 +265,13 @@ class Application {
     }
   }
 
-  public setupSystemTray() {
-    if (!this.tray) {
-      this.tray = new Tray(path.join(distDir, 'assets/icon-16.png'))
-      const contextMenu = Menu.buildFromTemplate([
-        {
-          label: 'OpenMainWindow',
-          click: () => {
-            this.showAndFocusWindow(AppWindows.main)
-          }
-        },
-        {
-          label: 'Quit',
-          click: () => {
-            this.quit()
-          }
-        }
-      ])
-      this.tray.setToolTip('WelCome')
-      this.tray.setContextMenu(contextMenu)
-
-      this.tray.on('click', () => {
-        this.showAndFocusWindow(AppWindows.main)
-      })
-    }
-  }
-
   public start() {
-    this.createMainWindow()
-
-    this.setupSystemTray()
-
     this.setupIpc()
-  }
-
-  public activate() {
-    this.openMainWindow()
   }
 
   public quit() {
     this.markQuit = true
-    this.closeMainWindow()
+    // this.closeMainWindow()
     this.closeAllWindows()
     if (this.tray) {
       this.tray.destroy()
@@ -480,7 +321,8 @@ class Application {
     for (const window of this.OvHook.getTopWindows()) {
       if (window.processId.toString() === pid) {
         try {
-          this.OvHook.injectProcess(window)
+          const injectResult = this.OvHook.injectProcess(window)
+          console.log('inject result = ', JSON.stringify(injectResult, null, 4))
         } catch (e) {
           console.log('error: ', JSON.stringify(e))
         }
@@ -489,19 +331,15 @@ class Application {
   }
 
   private setupIpc() {
-    // ipcMain.once('start', () => {
-    console.log('STARTING OVERLAY')
     if (!this.Overlay) {
       this.startOverlay()
 
-      this.createOsrWindow()
-      this.createOsrStatusbarWindow()
+      this.createHyperplayOverlay()
     }
 
     if (!this.OvHook) {
       this.OvHook = require('node-ovhook')
     }
-    // })
 
     ipcMain.on('inject', (event, arg) => {
       console.log(`--------------------\n try inject ${arg}`)
@@ -519,14 +357,6 @@ class Application {
       console.log('done injecting')
     })
 
-    ipcMain.on('osrClick', () => {
-      this.createOsrTipWindow()
-    })
-
-    ipcMain.on('doit', () => {
-      this.doit()
-    })
-
     ipcMain.on('startIntercept', () => {
       this.Overlay!.sendCommand({
         command: 'input.intercept',
@@ -540,35 +370,6 @@ class Application {
         intercept: false
       })
     })
-  }
-
-  private doit() {
-    const name = 'OverlayTip'
-    this.closeWindow(name)
-
-    screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
-
-    const window = this.createWindow(name, {
-      width: 480,
-      height: 270,
-      frame: false,
-      show: false,
-      transparent: true,
-      resizable: false,
-      x: 0,
-      y: 0,
-      webPreferences: {
-        offscreen: true,
-        nodeIntegration: true,
-        contextIsolation: false
-      }
-    })
-
-    this.addOverlayWindow(name, window, 0, 0)
-
-    // window.webContents.openDevTools({mode: "detach"})
-
-    window.loadURL(fileUrl(path.join(distDir, 'doit/index.html')))
   }
 }
 

@@ -281,12 +281,15 @@ async function createWindow(): Promise<BrowserWindow> {
     //     })
     //   })
     // }
-    mainWindow.loadURL('http://localhost:5173')
+
+    mainWindow.loadURL('http://localhost:5173?App')
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
-    mainWindow.loadURL(`file://${path.join(publicDir, '../build/index.html')}`)
+    mainWindow.loadURL(
+      `file://${path.join(publicDir, '../build/index.html?App')}`
+    )
     if (!isMac) {
       autoUpdater.checkForUpdates()
     }

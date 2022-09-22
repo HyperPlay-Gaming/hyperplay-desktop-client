@@ -19,6 +19,7 @@ import '@fontsource/jura'
 import StoreController from './store'
 
 initOnlineMonitor()
+import ViewManager from './ViewManager'
 
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
@@ -111,7 +112,7 @@ root.render(
     <GlobalState>
       <I18nextProvider i18n={i18next}>
         <Suspense fallback={<Loading />}>
-          <App />
+          <ViewManager />
         </Suspense>
       </I18nextProvider>
     </GlobalState>
