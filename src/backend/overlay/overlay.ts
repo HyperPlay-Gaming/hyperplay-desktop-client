@@ -200,8 +200,8 @@ class Application {
 
   public createHyperplayOverlay() {
     const options: Electron.BrowserWindowConstructorOptions = {
-      height: 360,
-      width: 640,
+      height: 400,
+      width: 800,
       frame: false,
       show: false,
       transparent: true,
@@ -219,7 +219,7 @@ class Application {
     const name = AppWindows.OVERLAY_TIP
     const window = this.createWindow(name, options)
 
-    window.setPosition(100, 0)
+    window.setPosition(0, 0)
 
     console.log(
       'loading url from ',
