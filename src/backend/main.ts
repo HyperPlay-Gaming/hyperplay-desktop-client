@@ -70,7 +70,7 @@ import {
   getGOGdlBin,
   showErrorBoxModal,
   getFileSize,
-  // detectVCRedist,
+  detectVCRedist,
   getGame,
   getFirstExistingParentPath,
   getLatestReleases,
@@ -237,9 +237,9 @@ async function createWindow(): Promise<BrowserWindow> {
     handleExit(mainWindow)
   })
 
-  // if (isWindows) {
-  //   detectVCRedist(mainWindow)
-  // }
+  if (isWindows) {
+    detectVCRedist(mainWindow)
+  }
 
   if (!app.isPackaged) {
     /* eslint-disable @typescript-eslint/ban-ts-comment */
