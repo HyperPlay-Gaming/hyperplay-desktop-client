@@ -16,23 +16,14 @@ import { ControllerHints } from './components/UI'
 import Onboarding from './screens/Onboarding'
 
 function App() {
-  const { epic, gog, contentFontFamily, actionsFontFamily, sidebarCollapsed } =
-    useContext(ContextProvider)
-
-  const style = {
-    '--content-font-family': contentFontFamily,
-    '--actions-font-family': actionsFontFamily
-  } as React.CSSProperties
+  const { epic, gog, sidebarCollapsed } = useContext(ContextProvider)
 
   const loggedIn = epic.username || gog.username
 
   const [onboardingEnabled, setOnboardingEnabled] = useState(true)
 
   return (
-    <div
-      className={classNames('App', { collapsed: sidebarCollapsed })}
-      style={style}
-    >
+    <div className={classNames('App', { collapsed: sidebarCollapsed })}>
       <HashRouter>
         <Sidebar openOnboarding={() => setOnboardingEnabled(true)} />
         <main className="content">
