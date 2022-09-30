@@ -1,13 +1,12 @@
 .successImg {
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  height: 150px;
 }
 
-.successTextContainer {
-  margin: 22px;
+.successSubtext {
+  margin-top: var(--space-md) 0;
 }
 
-.rejectedSubtext {
-  margin-top: 20px;
-  margin-bottom: 30px;
+.successImgContainer {
+  margin: var(--space-lg);
 }

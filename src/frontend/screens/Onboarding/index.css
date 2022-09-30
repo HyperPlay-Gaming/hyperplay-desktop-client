@@ -11,6 +11,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  max-width: 600px;
 
   background: var(--background);
   box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.4);
@@ -19,13 +20,7 @@
 }
 
 .welcomeTitle {
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 21px;
-
   text-transform: uppercase;
-
-  color: #ffffff;
 
   flex: none;
   order: 1;
@@ -78,8 +73,7 @@
 }
 
 .contentContainer {
-  padding-left: 15%;
-  padding-right: 15%;
+  margin: 0 var(--space-2xl);
 }
 
 .blurBackground {

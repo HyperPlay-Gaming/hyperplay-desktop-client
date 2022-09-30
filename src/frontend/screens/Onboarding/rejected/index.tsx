@@ -1,6 +1,7 @@
 import './index.css'
 import React, { useEffect } from 'react'
 import { OnboardingModalConfig } from '../types'
+import YesNoActionButtons from '../components/yesNoActionButtons'
 
 interface RejectedProps {
   setOnboardingModalParams: React.Dispatch<Partial<OnboardingModalConfig>>
@@ -18,28 +19,22 @@ const Rejected: React.FC<RejectedProps> = function (props) {
   }, [])
   return (
     <div>
-      <img
-        src="/src/frontend/assets/hyperplay/rejected.svg"
-        className="rejectedImg"
-      ></img>
-      <p className="rejectedSubtext">
+      <div className="content-s text-secondary rejectedSubtext">
         You cancelled the connection request on your wallet. Please retry
         connecting to proceed.
-      </p>
-      <div className="actionButtonsContainer">
-        <button
-          onClick={() => props.disableOnboarding()}
-          className="rejectedCancelButton"
-        >
-          CANCEL
-        </button>
-        <button
-          onClick={() => props.onRetryClick()}
-          className="rejectedRetryButton"
-        >
-          RETRY
-        </button>
       </div>
+      <div className="rejectedImgContainer">
+        <img
+          src="/src/frontend/assets/hyperplay/rejected.svg"
+          className="rejectedImg"
+        ></img>
+      </div>
+      <YesNoActionButtons
+        yesText="CONNECT"
+        noText="CANCEL"
+        onYes={props.onRetryClick}
+        onNo={props.disableOnboarding}
+      />
     </div>
   )
 }

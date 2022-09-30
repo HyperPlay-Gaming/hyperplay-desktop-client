@@ -12,8 +12,7 @@
   );
 
   /* Primary */
-  --primary-variant: #7761ff;
-  --primary: #6900ff;
+  --primary: #761dfe;
 
   /* Gradients */
   --gradient-1: linear-gradient(82deg, #4126e8, #ea1aba, #10a6d6);
@@ -73,7 +72,7 @@
   --gradient-body-background: #000000;
   /* Text colours */
   --text-default: #eae8e5;
-  --text-secondary: #888888;
+  --text-secondary: #c4c4c4;
   --text-pause-cancel: white;
   --text-title: white;
   --text-tertiary: #101111; /* This is not defined in figma */
@@ -111,4 +110,8 @@ h3 {
 
 .gogIcon {
   fill: var(--text-default);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
 }

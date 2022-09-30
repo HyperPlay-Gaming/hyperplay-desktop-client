@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import WalletOption from '../components/walletOption'
 import { PROVIDERS } from 'common/types/proxy-types'
 import './index.css'
@@ -12,7 +12,6 @@ interface WelcomeProps {
 }
 
 const Welcome: React.FC<WelcomeProps> = function (props) {
-  const [isWaiting, setIsWaiting] = useState(false)
   useEffect(() => {
     props.setOnboardingModalParams({
       title: 'WELCOME TO HYPERPLAY',
@@ -21,35 +20,26 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
     })
   }, [])
   function providerClicked(prov: PROVIDERS) {
-    setIsWaiting(true)
     props.handleProviderClicked(prov)
   }
   return (
-    <div>
-      <h5>
+    <div className="welcomeContainer">
+      <div className="content-s text-secondary">
         Please connect your wallet, or download the Metamask mobile-app to get
         started.
-      </h5>
-      {isWaiting ? (
-        <div className="loader" />
-      ) : (
-        <WalletOption
-          title="MetaMask Mobile"
-          subtext="Connect with MetaMask Mobile"
-          icon="/src/frontend/assets/hyperplay/mm_icon_md_transparent.svg"
-          onClick={() => providerClicked(PROVIDERS.METAMASK_MOBILE)}
-        />
-      )}
-      {isWaiting ? (
-        <div className="loader" />
-      ) : (
-        <WalletOption
-          title="WalletConnect"
-          subtext="Connect with WalletConnect"
-          icon="/src/frontend/assets/hyperplay/walletconnect_icon_blue.svg"
-          onClick={() => providerClicked(PROVIDERS.WALLET_CONNECT)}
-        />
-      )}
+      </div>
+      <WalletOption
+        title="MetaMask Mobile"
+        subtext="Connect with MetaMask Mobile"
+        icon="/src/frontend/assets/hyperplay/mm_icon_md_transparent.svg"
+        onClick={() => providerClicked(PROVIDERS.METAMASK_MOBILE)}
+      />
+      <WalletOption
+        title="WalletConnect"
+        subtext="Connect with WalletConnect"
+        icon="/src/frontend/assets/hyperplay/walletconnect_icon_blue.svg"
+        onClick={() => providerClicked(PROVIDERS.WALLET_CONNECT)}
+      />
       <WalletOption
         title="Create new wallet"
         subtext="Download MetaMask Mobile"
@@ -57,7 +47,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         onClick={() => props.downloadMetaMaskClicked()}
       />
       <button
-        className="actionButton"
+        className="button-s actionButton"
         onClick={() => props.disableOnboarding()}
       >
         Skip for Now

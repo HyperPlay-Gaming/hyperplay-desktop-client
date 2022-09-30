@@ -1,9 +1,5 @@
 .actionButton {
-  font-weight: 560;
-  font-size: 12px;
-  line-height: 18px;
-
-  color: var(--primary-variant);
+  color: var(--primary);
 
   flex: none;
   order: 0;
@@ -14,7 +10,7 @@
   margin: 12px;
 }
 
-.loader {
+/* .loader {
   border: 16px solid var(--background-darker);
   border-top: 16px solid var(--primary);
   border-radius: 50%;
@@ -22,4 +18,4 @@
   height: 48px;
   animation: spin 2s linear infinite;
   margin: auto;
-}
+} */

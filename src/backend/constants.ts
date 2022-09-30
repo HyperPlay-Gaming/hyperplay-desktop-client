@@ -62,8 +62,8 @@ const { currentLogFile: currentLogFile, lastLogFile: lastLogFile } =
 
 const publicDir = resolve(__dirname, '..', app.isPackaged ? '' : '../public')
 const icon = fixAsarPath(join(publicDir, 'icon.png'))
-const iconDark = fixAsarPath(join(publicDir, 'icon-dark.png'))
-const iconLight = fixAsarPath(join(publicDir, 'icon-light.png'))
+const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
+const iconLight = fixAsarPath(join(publicDir, 'trayIconLight24x24.png'))
 const installed = join(legendaryConfigPath, 'installed.json')
 const legendaryMetadata = join(legendaryConfigPath, 'metadata')
 const fallBackImage = 'fallback'

@@ -3,13 +3,12 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  gap: 16px;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  padding: var(--space-sm);
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-sm);
 
   width: calc(100%);
-  height: 64px;
 
   background: var(--background-secondary);
   box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
@@ -28,7 +27,7 @@
   flex-direction: row;
   align-items: center;
   padding: 0px;
-  gap: 16px;
+  gap: var(--space-md);
 
   height: 40px;
 
@@ -42,11 +41,8 @@ div.walletOptionIcon {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  padding: 0px;
-  gap: 4.82px;
-
-  width: 40px;
-  height: 40px;
+  padding: 8px;
+  gap: var(--space-3xs);
 
   border-radius: 41px;
 
@@ -56,8 +52,8 @@ div.walletOptionIcon {
 }
 
 img.walletOptionIcon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
 }
 
 .walletOptionContent {
@@ -72,17 +68,10 @@ img.walletOptionIcon {
   flex-grow: 0;
   background: transparent;
   background-color: transparent;
-  color: transparent;
   border-color: transparent;
 }
 
 .walletOptionTitleText {
-  font-weight: 560;
-  font-size: 14px;
-  line-height: 21px;
-
-  color: #ffffff;
-
   flex: none;
   order: 0;
   flex-grow: 0;
@@ -90,10 +79,6 @@ img.walletOptionIcon {
 }
 
 .walletOptionSubtext {
-  font-weight: 560;
-  font-size: 10px;
-  line-height: 15px;
-
   color: #a8a8a8;
 
   flex: none;

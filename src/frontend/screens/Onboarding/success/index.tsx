@@ -16,18 +16,20 @@ const Success: React.FC<SuccessParams> = function (props) {
     props.setOnboardingModalParams({
       title: 'SUCCESS',
       enableBackButton: false,
-      enableCloseButton: false
+      enableCloseButton: true
     })
   }, [])
   return (
     <div>
-      <img
-        src="/src/frontend/assets/hyperplay/success.svg"
-        className="successImg"
-      ></img>
-      <p className="rejectedSubtext">
+      <div className="content-s text-secondary successSubtext">
         Your wallet is now connected! You&apos;re ready to game.{' '}
-      </p>
+      </div>
+      <div className="successImgContainer">
+        <img
+          src="/src/frontend/assets/hyperplay/success.svg"
+          className="successImg"
+        ></img>
+      </div>
     </div>
   )
 }

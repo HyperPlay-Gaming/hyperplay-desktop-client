@@ -180,7 +180,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
           >
             <img src="/src/frontend/assets/hyperplay/back_arrow.svg"></img>
           </button>
-          <h1 className="welcomeTitle">{onboardingParams.title}</h1>
+          <h6 className="welcomeTitle">{onboardingParams.title}</h6>
           <button
             className={
               onboardingParams.enableCloseButton

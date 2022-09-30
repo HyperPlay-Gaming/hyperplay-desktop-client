@@ -16,8 +16,8 @@ const WalletOption: React.FC<WalletOptionProps> = function (props) {
           <img className="walletOptionIcon" src={props.icon}></img>
         </div>
         <div className="walletOptionContent">
-          <h3 className="walletOptionTitleText">{props.title}</h3>
-          <p className="walletOptionSubtext">{props.subtext}</p>
+          <div className="subtitle walletOptionTitleText">{props.title}</div>
+          <div className="content-s walletOptionSubtext">{props.subtext}</div>
         </div>
       </div>
       <img

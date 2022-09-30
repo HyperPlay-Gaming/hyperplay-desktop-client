@@ -14,8 +14,8 @@ xl	23.04	1.44
 */
 
 @mixin typeSystem {
-  --default-primary-font-family: 'Rubik', sans-serif;
-  --default-secondary-font-family: 'Cabin', sans-serif;
+  --default-primary-font-family: 'Chakra Petch', normal;
+  --default-secondary-font-family: 'Jura', normal;
   --primary-font-family: var(--default-primary-font-family);
   --secondary-font-family: var(--default-secondary-font-family);
   --light: 300;
@@ -80,8 +80,13 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.subtitle {
   font-family: var(--primary-font-family);
+}
+
+.content-s {
+  font-family: var(--secondary-font-family);
 }
 
 .text--6xl {
@@ -113,7 +118,8 @@ h4,
 }
 
 h5,
-.text--lg {
+.text--lg,
+.button-md {
   font-size: var(--text-lg);
 }
 
@@ -127,7 +133,7 @@ h6,
 }
 
 .content-s,
-.button,
+.button-s,
 .text--sm {
   font-size: var(--text-sm);
 }
@@ -137,4 +143,26 @@ h6,
 .status,
 .text--xs {
   font-size: var(--text-xs);
+}
+
+.subtitle,
+.content-s,
+h5,
+h4 {
+  font-weight: var(--medium);
+}
+
+.subtitle-s,
+.button-s,
+.button-m,
+h3,
+h2,
+h1 {
+  font-weight: var(--bold);
+}
+
+.uppercase,
+.status,
+h6 {
+  font-weight: var(--semibold);
 }

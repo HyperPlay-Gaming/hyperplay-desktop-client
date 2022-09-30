@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { OnboardingModalConfig } from '../types'
-import './index.css'
+import './index.scss'
 import { toString, QRCodeToStringOptions } from 'qrcode'
+import QrCodeGradientBorder from '../components/qrCodeGradientBorder'
+import YesNoActionButtons from '../components/yesNoActionButtons'
 
 interface DownloadProps {
   setOnboardingModalParams: React.Dispatch<Partial<OnboardingModalConfig>>
@@ -35,30 +37,20 @@ const Download: React.FC<DownloadProps> = function (props) {
 
   return (
     <div>
-      <p>
+      <div className="content-s text-secondary downloadDescription">
         Web3 games use a crypto wallet to approve in-game transactions. Download
         MetaMask to get started.
-      </p>
-      <div className="borderWrap">
-        <div className="qrCodeContainer">
-          <img src={qrUrl} className="qrCodeImage"></img>
-        </div>
       </div>
-      <p>Scan QR code or visit metamask.io to create a wallet</p>
-      <div className="actionButtonsContainer">
-        <button
-          onClick={() => props.disableOnboarding()}
-          className="downloadCancelButton"
-        >
-          CANCEL
-        </button>
-        <button
-          onClick={() => props.onRetryClick()}
-          className="downloadConnectButton"
-        >
-          CONNECT
-        </button>
+      <QrCodeGradientBorder qrUrl={qrUrl} imageMargin="-28px" />
+      <div className="content-s text-secondary downloadScanMessage">
+        Scan QR code or visit metamask.io to create a wallet
       </div>
+      <YesNoActionButtons
+        yesText="CONNECT"
+        noText="CANCEL"
+        onYes={props.onRetryClick}
+        onNo={props.disableOnboarding}
+      />
     </div>
   )
 }

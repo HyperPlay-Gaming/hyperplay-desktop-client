@@ -13,6 +13,9 @@ import { UpdateComponentBase } from './components/UI/UpdateComponent'
 import { initShortcuts } from './helpers/shortcuts'
 import { configStore } from './helpers/electronStores'
 
+import '@fontsource/chakra-petch'
+import '@fontsource/jura'
+
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
 })

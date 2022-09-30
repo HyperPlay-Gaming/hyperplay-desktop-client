@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import QrCodeGradientBorder from '../components/qrCodeGradientBorder'
 import { OnboardingModalConfig } from '../types'
 import './index.css'
 
@@ -23,6 +24,10 @@ const Scan: React.FC<ScanProps> = function (props) {
 
   return (
     <div>
+      <div className="content-s text-secondary">
+        Scan QR code with your mobile wallet, and approve the connection request
+        to sign in.
+      </div>
       <div className="connectingDisplay">
         <img
           src={props.providerImg}
@@ -33,18 +38,10 @@ const Scan: React.FC<ScanProps> = function (props) {
           className="providerImg connectingTo"
         ></img>
       </div>
-      <div className="borderWrap">
-        <div className="qrCodeContainer">
-          <img src={url} className="qrCodeImage"></img>
-        </div>
-      </div>
-      <p>
-        Scan QR code with your mobile wallet. Approve connection request to sign
-        in.
-      </p>
+      <QrCodeGradientBorder qrUrl={url} imageMargin="-14px" />
       <button
         onClick={() => window.api.openHyperplaySite()}
-        className="scanLearnMoreButton"
+        className="scanLearnMoreButton button-s"
       >
         Learn more
       </button>

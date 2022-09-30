@@ -1,32 +1,5 @@
-.qrCodeContainer {
-  position: relative;
-  padding: 0px;
-  border: 14px solid var(--background);
-  /*should equal .borderwrap's border-radius minus .borderwrap's padding*/
-  border-radius: 24px;
-  background-color: var(--background);
-}
-
-.borderWrap {
-  background: var(--gradient-1);
-  padding: 7px;
-  border-radius: 32px;
-  background-clip: padding-box;
-}
-
-.qrCodeImage {
-  padding: 0px;
-  margin: 0px;
-}
-
 .scanLearnMoreButton {
-  font-family: 'PP Fraktion Sans';
-  font-style: normal;
-  font-weight: 560;
-  font-size: 12px;
-  line-height: 18px;
-
-  color: var(--primary-variant);
+  color: var(--primary);
 
   flex: none;
   order: 4;
@@ -34,6 +7,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  margin-top: var(--space-md);
 }
 
 .providerImg {
@@ -54,8 +28,8 @@
 
 .connectingDisplay {
   position: relative;
-  border-top: 2px dashed white;
+  border-top: 1px dashed white;
   height: 12px;
-  margin: 30px;
-  margin-top: 6px;
+  margin: 30px auto;
+  width: 50%;
 }
