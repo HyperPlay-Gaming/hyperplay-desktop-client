@@ -313,7 +313,7 @@
         },
         "moved": "Przenoszenie zakończone",
         "moving": "Przenoszenie gry",
-        "new-heroic-version": "Pojawiła się nowa wersja Heroic!",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
             "error": "Nie udało się pobrać nowej wersji, prawdopodobnie z powodu limitacji API Github'a! Spróbuj ponownie później."
         },

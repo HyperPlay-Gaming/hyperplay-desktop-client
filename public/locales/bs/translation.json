@@ -237,11 +237,11 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
-            "newReleases": "Dostupno ažuriranje!",
-            "stable": "Stabilan",
-            "version": "Heroic verzija"
+            "newReleases": "Update Available!",
+            "stable": "Stable",
+            "version": "HyperPlay Version"
         },
         "settings": "Postavke se automatski spremaju",
         "version": "Verzija Wine-a"
@@ -313,7 +313,7 @@
         },
         "moved": "Premještanje završeno",
         "moving": "Igra se premješta",
-        "new-heroic-version": "Objavljena je nova Heroic verzija!",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
             "error": "Nije moguće dohvatiti izdanja iz uzvodnog izvora, možda zbog ograničenja Github API-ja! Pokušajte ponovo kasnije."
         },
@@ -505,7 +505,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Otvorite konfig. fajl",
-        "reset-heroic": "Resetujte Heroic",
+        "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Sačuvaj lokaciju:",
             "warning": "Funkcija čuvanja u oblaku je u beta verziji, napravite sigurnosnu kopiju vaših sačuvanih podataka prije sinhronizacije (u slučaju da nešto krene po zlu)"

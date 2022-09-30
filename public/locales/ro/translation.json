@@ -98,10 +98,10 @@
             "message": "Sunt operațiuni în așteptare, ești sigur?",
             "title": "Ieșire"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
-                "message": "Sigur doriți să resetați Heroic? Acest lucru va elimina toate setările și stocarea în cache, dar nu va elimina jocurile dvs. instalate sau acreditările Epic",
-                "title": "Resetează eroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -237,11 +237,11 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
-            "newReleases": "Actualizare disponibila",
-            "stable": "Grajd",
-            "version": "Versiune eroică"
+            "newReleases": "Update Available!",
+            "stable": "Stable",
+            "version": "HyperPlay Version"
         },
         "settings": "Setările sunt salvate automat",
         "version": "Versiune Wine"
@@ -313,7 +313,7 @@
         },
         "moved": "Mutare Finalizată",
         "moving": "Joc de Mișcare",
-        "new-heroic-version": "A fost lansată o nouă versiune heroică!",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
             "error": "Nu s-au putut prelua versiunile din amonte, poate din cauza restricțiilor API-ului Github! Încercați mai târziu."
         },
@@ -505,7 +505,7 @@
             "wineExt": "Extensii de vin"
         },
         "open-config-file": "Deschideți fișierul de configurare",
-        "reset-heroic": "Resetează eroic",
+        "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Salveaza locatia:",
             "warning": "Funcția Cloud Saves este în versiune beta, vă rugăm să faceți backup înainte de sincronizare (în cazul în care ceva nu merge bine)"

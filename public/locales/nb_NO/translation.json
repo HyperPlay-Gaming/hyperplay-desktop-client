@@ -237,11 +237,11 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
-            "newReleases": "Ny versjon tilgjengelig",
-            "stable": "Stabil",
-            "version": "Heroisk versjon"
+            "newReleases": "Update Available!",
+            "stable": "Stable",
+            "version": "HyperPlay Version"
         },
         "settings": "Innstillinger lagres automatisk",
         "version": "Vinversjon"
@@ -313,7 +313,7 @@
         },
         "moved": "Flytting fullført",
         "moving": "Moving Game",
-        "new-heroic-version": "En ny Heroic-versjon ble utgitt!",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
             "error": "Kunne ikke hente utgivelser fra oppstrøms, kanskje på grunn av Github API-begrensninger! Prøv igjen senere."
         },
@@ -505,7 +505,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Åpne konfigurasjonsfil",
-        "reset-heroic": "Tilbakestill Heroic",
+        "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Lagre plassering:",
             "warning": "Cloud Saves-funksjonen er i beta, vennligst ta sikkerhetskopi av lagrene dine før synkronisering (i tilfelle noe går galt)"
