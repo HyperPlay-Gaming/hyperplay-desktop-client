@@ -11,10 +11,10 @@ interface QrCodeProps {
 const YesNoActionButtons: React.FC<QrCodeProps> = function (props) {
   return (
     <div className="actionButtonsContainer">
-      <button onClick={props.onNo} className="downloadCancelButton button-s">
+      <button onClick={props.onNo} className="downloadCancelButton button-sm">
         {props.noText}
       </button>
-      <button onClick={props.onYes} className="downloadConnectButton button-s">
+      <button onClick={props.onYes} className="downloadConnectButton button-sm">
         {props.yesText}
       </button>
     </div>

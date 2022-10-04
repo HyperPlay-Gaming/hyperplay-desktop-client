@@ -19,7 +19,7 @@ const Rejected: React.FC<RejectedProps> = function (props) {
   }, [])
   return (
     <div>
-      <div className="content-s text-secondary rejectedSubtext">
+      <div className="content-sm text-secondary rejectedSubtext">
         You cancelled the connection request on your wallet. Please retry
         connecting to proceed.
       </div>

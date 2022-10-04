@@ -24,7 +24,7 @@ const Scan: React.FC<ScanProps> = function (props) {
 
   return (
     <div>
-      <div className="content-s text-secondary">
+      <div className="content-sm text-secondary">
         Scan QR code with your mobile wallet, and approve the connection request
         to sign in.
       </div>
@@ -41,7 +41,7 @@ const Scan: React.FC<ScanProps> = function (props) {
       <QrCodeGradientBorder qrUrl={url} imageMargin="-14px" />
       <button
         onClick={() => window.api.openHyperplaySite()}
-        className="scanLearnMoreButton button-s"
+        className="scanLearnMoreButton button-sm"
       >
         Learn more
       </button>

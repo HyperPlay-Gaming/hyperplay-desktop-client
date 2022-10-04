@@ -24,7 +24,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
   }
   return (
     <div className="welcomeContainer">
-      <div className="content-s text-secondary">
+      <div className="content-sm text-secondary">
         Please connect your wallet, or download the Metamask mobile-app to get
         started.
       </div>
@@ -47,7 +47,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         onClick={() => props.downloadMetaMaskClicked()}
       />
       <button
-        className="button-s actionButton"
+        className="button-sm actionButton"
         onClick={() => props.disableOnboarding()}
       >
         Skip for Now

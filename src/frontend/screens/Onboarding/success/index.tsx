@@ -21,7 +21,7 @@ const Success: React.FC<SuccessParams> = function (props) {
   }, [])
   return (
     <div>
-      <div className="content-s text-secondary successSubtext">
+      <div className="content-sm text-secondary successSubtext">
         Your wallet is now connected! You&apos;re ready to game.{' '}
       </div>
       <div className="successImgContainer">

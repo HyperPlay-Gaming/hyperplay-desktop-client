@@ -37,12 +37,12 @@ const Download: React.FC<DownloadProps> = function (props) {
 
   return (
     <div>
-      <div className="content-s text-secondary downloadDescription">
+      <div className="content-sm text-secondary downloadDescription">
         Web3 games use a crypto wallet to approve in-game transactions. Download
         MetaMask to get started.
       </div>
       <QrCodeGradientBorder qrUrl={qrUrl} imageMargin="-28px" />
-      <div className="content-s text-secondary downloadScanMessage">
+      <div className="content-sm text-secondary downloadScanMessage">
         Scan QR code or visit metamask.io to create a wallet
       </div>
       <YesNoActionButtons
