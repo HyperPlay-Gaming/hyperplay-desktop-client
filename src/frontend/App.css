@@ -36,12 +36,14 @@ html,
   grid-template-rows: 1fr min-content;
   --sidebar-width: 240px;
   --content-width: calc(100vw - var(--sidebar-width));
+  --hp-logo-sidebar-width: 64px;
 }
 
 .App.collapsed {
   --sidebar-width: 68px;
   --content-width: calc(100vw - var(--sidebar-width));
   grid-template-columns: var(--sidebar-width) 1fr;
+  --hp-logo-sidebar-width: 24px;
 }
 
 .App .content {

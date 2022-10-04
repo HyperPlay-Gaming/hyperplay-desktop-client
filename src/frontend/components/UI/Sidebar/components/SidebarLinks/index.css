@@ -1,5 +1,6 @@
 .SidebarLinks {
   grid-area: links;
+  padding-top: var(--sidebar-vertical-padding);
   font-size: var(--text-lg);
 }
 
@@ -24,4 +25,27 @@
     padding: var(--space-3xs) var(--sidebar-horizontal-padding) var(--space-3xs)
       var(--space-lg);
   }
+}
+
+.Sidebar__categoryTitle {
+  padding: 0 var(--sidebar-horizontal-padding);
+  color: var(--accent);
+  margin-top: var(--space-md);
+}
+
+.App.collapsed .Sidebar__categoryTitle {
+  display: none;
+}
+
+.hyperplaySidebarLogoContainer {
+  margin: 0 auto var(--sidebar-vertical-padding);
+}
+
+.App.collapsed .hyperplaySidebarLogoContainer {
+  margin: 0 auto;
+  padding: var(--space-xs) 0;
+}
+
+.hyperplaySidebarLogo {
+  width: var(--hp-logo-sidebar-width);
 }

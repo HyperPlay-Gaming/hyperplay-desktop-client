@@ -10,7 +10,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import CurrentDownload from './components/CurrentDownload'
 import SidebarLinks from './components/SidebarLinks'
 import './index.css'
-import AppVersion from './components/HeroicVersion'
+// import AppVersion from './components/HeroicVersion'
 import Wallet from './components/wallet'
 
 interface SidebarProps {
@@ -27,7 +27,6 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
 
   return (
     <aside className={classNames('Sidebar', { collapsed: sidebarCollapsed })}>
-      <Wallet onClick={props.openOnboarding} />
       <SidebarLinks />
       <div className="currentDownloads">
         {downloading.map((g) => (
@@ -38,7 +37,8 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
           />
         ))}
       </div>
-      <AppVersion />
+      <Wallet onClick={props.openOnboarding} />
+      {/* <AppVersion /> */}
       <button
         className="collapseIcon"
         onClick={() => setSideBarCollapsed(!sidebarCollapsed)}

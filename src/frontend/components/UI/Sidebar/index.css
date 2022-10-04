@@ -5,7 +5,7 @@
   z-index: 10;
   display: grid;
   grid-template-rows: min-content 2fr min-content min-content;
-  grid-template-areas: 'wallet' 'links' 'utils' 'updates' 'version';
+  grid-template-areas: 'links' 'utils' 'updates' 'version' 'wallet';
   grid-area: sidebar;
   height: 100%;
   padding: 0;
@@ -42,6 +42,15 @@
   transition: color 250ms;
   text-align: start;
   font-family: var(--primary-font-family);
+  border-radius: 0;
+}
+
+.App.collapsed .Sidebar__item {
+  padding: var(--space-xs) 0;
+}
+
+.App.collapsed .Sidebar__itemIcon {
+  margin: 0 auto;
 }
 
 .Sidebar__item:focus-visible {
@@ -65,11 +74,10 @@
 .Sidebar__itemIcon {
   box-sizing: border-box;
   width: 24px;
-  margin-right: 10px;
   display: inline-flex;
   justify-content: center;
   color: var(--accent);
-  flex-shrink: 0;
+  margin-right: 10px;
 }
 
 .currentDownloads {
@@ -105,7 +113,7 @@
 .wallet {
   grid-area: wallet;
   align-self: start;
-  margin-top: var(--sidebar-vertical-padding);
+  margin-bottom: var(--sidebar-vertical-padding);
 }
 
 .newReleases > a {

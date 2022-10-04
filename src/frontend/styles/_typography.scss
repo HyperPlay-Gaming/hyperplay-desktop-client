@@ -85,7 +85,7 @@ h6,
   font-family: var(--primary-font-family);
 }
 
-.content-s {
+.content-sm {
   font-family: var(--secondary-font-family);
 }
 
@@ -118,27 +118,27 @@ h4,
 }
 
 h5,
-.text--lg,
-.button-md {
+.text--lg {
   font-size: var(--text-lg);
 }
 
 .subtitle,
 .content,
-.uppercase,
 p,
 h6,
-.text--md {
+.text--md,
+button,
+.button-md {
   font-size: var(--text-md);
 }
 
-.content-s,
-.button-s,
+.content-sm,
+.button-sm,
 .text--sm {
   font-size: var(--text-sm);
 }
 
-.subtitle-s,
+.subtitle-sm,
 .caption,
 .status,
 .text--xs {
@@ -146,22 +146,21 @@ h6,
 }
 
 .subtitle,
-.content-s,
+.content-sm,
 h5,
 h4 {
   font-weight: var(--medium);
 }
 
-.subtitle-s,
-.button-s,
-.button-m,
+.subtitle-sm,
+.button-sm,
+.button-md,
 h3,
 h2,
 h1 {
   font-weight: var(--bold);
 }
 
-.uppercase,
 .status,
 h6 {
   font-weight: var(--semibold);
