@@ -10,7 +10,6 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import CurrentDownload from './components/CurrentDownload'
 import SidebarLinks from './components/SidebarLinks'
 import './index.css'
-// import AppVersion from './components/HeroicVersion'
 import Wallet from './components/wallet'
 
 interface SidebarProps {
@@ -38,7 +37,6 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
         ))}
       </div>
       <Wallet onClick={props.openOnboarding} />
-      {/* <AppVersion /> */}
       <button
         className="collapseIcon"
         onClick={() => setSideBarCollapsed(!sidebarCollapsed)}
