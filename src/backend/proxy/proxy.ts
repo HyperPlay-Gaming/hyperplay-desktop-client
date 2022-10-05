@@ -46,8 +46,7 @@ app.post('/rpc', async (req: RequestBody<RpcRequest>, res) => {
     const result = await provider.request(requestArgs)
     res.send(result)
   } catch (e) {
-    const errStr = String(e)
-    console.log(errStr)
+    const errStr = JSON.stringify(e)
     res.status(500).send({ message: errStr })
   }
 })
@@ -102,8 +101,7 @@ app.post('/sendContract', async (req: RequestBody<TxnRequest>, res) => {
     })
     res.send(result)
   } catch (e) {
-    const errStr = String(e)
-    console.log(errStr)
+    const errStr = JSON.stringify(e)
     res.status(500).send({ message: errStr })
   }
 })

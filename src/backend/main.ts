@@ -70,7 +70,7 @@ import {
   getGOGdlBin,
   showErrorBoxModal,
   getFileSize,
-  detectVCRedist,
+  // detectVCRedist,
   getGame,
   getFirstExistingParentPath,
   getLatestReleases,
@@ -104,7 +104,8 @@ import {
   isCLINoGui,
   isFlatpak,
   publicDir,
-  wineprefixFAQ
+  wineprefixFAQ,
+  hyperplaySite
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -128,7 +129,7 @@ import {
   ConnectionRequestRejectedType,
   WalletConnectedType,
   WalletDisconnectedType
-} from './proxy/types'
+} from '../common/types/proxy-types'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 
@@ -236,9 +237,9 @@ async function createWindow(): Promise<BrowserWindow> {
     handleExit(mainWindow)
   })
 
-  if (isWindows) {
-    detectVCRedist(mainWindow)
-  }
+  // if (isWindows) {
+  //   detectVCRedist(mainWindow)
+  // }
 
   if (!app.isPackaged) {
     /* eslint-disable @typescript-eslint/ban-ts-comment */
@@ -1648,3 +1649,5 @@ ProviderHelper.passEventCallbacks(
   chainChanged,
   connectionRequestRejected
 )
+
+ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))

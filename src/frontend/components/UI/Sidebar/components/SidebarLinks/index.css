@@ -1,12 +1,13 @@
 .SidebarLinks {
   grid-area: links;
   padding-top: var(--sidebar-vertical-padding);
-  font-size: 18.5px;
+  font-size: var(--text-lg);
 }
 
 .Sidebar__item.SidebarLinks__subItem {
-  padding: 4px var(--sidebar-horizontal-padding) 4px 50px;
-  font-size: 14px;
+  padding: var(--space-3xs) var(--sidebar-horizontal-padding) var(--space-3xs)
+    var(--space-xl);
+  font-size: var(--text-sm);
   line-height: 20px;
   white-space: break-spaces;
 }
@@ -21,6 +22,30 @@
 
 @media screen and (max-width: 730px) {
   .Sidebar__item.SidebarLinks__subItem {
-    padding: 4px var(--sidebar-horizontal-padding) 4px 20px;
+    padding: var(--space-3xs) var(--sidebar-horizontal-padding) var(--space-3xs)
+      var(--space-lg);
   }
+}
+
+.Sidebar__categoryTitle {
+  padding: 0 var(--sidebar-horizontal-padding);
+  color: var(--accent);
+  margin-top: var(--space-md);
+}
+
+.App.collapsed .Sidebar__categoryTitle {
+  display: none;
+}
+
+.hyperplaySidebarLogoContainer {
+  margin: 0 auto var(--sidebar-vertical-padding);
+}
+
+.App.collapsed .hyperplaySidebarLogoContainer {
+  margin: 0 auto;
+  padding: var(--space-xs) 0;
+}
+
+.hyperplaySidebarLogo {
+  width: var(--hp-logo-sidebar-width);
 }

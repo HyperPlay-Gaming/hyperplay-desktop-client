@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 
 import './App.css'
 import { HashRouter, Route, Routes } from 'react-router-dom'
@@ -13,25 +13,19 @@ import Accessibility from './screens/Accessibility'
 import ContextProvider from './state/ContextProvider'
 import classNames from 'classnames'
 import { ControllerHints } from './components/UI'
+import Onboarding from './screens/Onboarding'
 
 function App() {
-  const { epic, gog, contentFontFamily, actionsFontFamily, sidebarCollapsed } =
-    useContext(ContextProvider)
-
-  const style = {
-    '--content-font-family': contentFontFamily,
-    '--actions-font-family': actionsFontFamily
-  } as React.CSSProperties
+  const { epic, gog, sidebarCollapsed } = useContext(ContextProvider)
 
   const loggedIn = epic.username || gog.username
 
+  const [onboardingEnabled, setOnboardingEnabled] = useState(true)
+
   return (
-    <div
-      className={classNames('App', { collapsed: sidebarCollapsed })}
-      style={style}
-    >
+    <div className={classNames('App', { collapsed: sidebarCollapsed })}>
       <HashRouter>
-        <Sidebar />
+        <Sidebar openOnboarding={() => setOnboardingEnabled(true)} />
         <main className="content">
           <Routes>
             <Route path="/" element={loggedIn ? <Library /> : <Login />} />
@@ -64,6 +58,9 @@ function App() {
           <div className="simple-keyboard"></div>
         </div>
       </HashRouter>
+      {onboardingEnabled && (
+        <Onboarding disableOnboarding={() => setOnboardingEnabled(false)} />
+      )}
     </div>
   )
 }

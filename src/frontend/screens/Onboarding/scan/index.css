@@ -1,0 +1,35 @@
+.scanLearnMoreButton {
+  color: var(--primary);
+
+  flex: none;
+  order: 4;
+  flex-grow: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-top: var(--space-md);
+}
+
+.providerImg {
+  position: absolute;
+  border-radius: 8px;
+  width: 35px;
+  height: 35px;
+  transform: translate(-50%, -50%);
+}
+
+.connectingFrom {
+  left: 0%;
+}
+
+.connectingTo {
+  left: 100%;
+}
+
+.connectingDisplay {
+  position: relative;
+  border-top: 1px dashed white;
+  height: 12px;
+  margin: 30px auto;
+  width: 50%;
+}

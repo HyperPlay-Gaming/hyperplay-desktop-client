@@ -1,0 +1,88 @@
+.welcomeModal {
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 18px 32px;
+  gap: 18px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 600px;
+
+  background: var(--background);
+  box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.4);
+  border-radius: 6px;
+  z-index: 101;
+}
+
+.welcomeTitle {
+  text-transform: uppercase;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+}
+
+.welcomeTitleFrame {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px;
+
+  width: 100%;
+
+  flex: none;
+  order: 0;
+  align-self: stretch;
+  flex-grow: 0;
+}
+
+.backArrow {
+  width: 6px;
+  height: 12px;
+
+  background: transparent;
+  border: transparent;
+
+  flex: none;
+  order: 1;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.closeButton {
+  width: 12px;
+  height: 12px;
+
+  background: transparent;
+  border: transparent;
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+  cursor: pointer;
+}
+
+.disableButton {
+  visibility: hidden;
+}
+
+.contentContainer {
+  margin: 0 var(--space-2xl);
+}
+
+.blurBackground {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+}

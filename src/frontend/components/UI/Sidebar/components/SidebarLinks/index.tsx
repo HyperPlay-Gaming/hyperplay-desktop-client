@@ -11,12 +11,8 @@ import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { faDiscord, faPatreon } from '@fortawesome/free-brands-svg-icons'
-import {
-  faCoffee,
-  faUserAlt,
-  faWineGlass
-} from '@fortawesome/free-solid-svg-icons'
+import { faDiscord } from '@fortawesome/free-brands-svg-icons'
+import { faUserAlt, faWineGlass } from '@fortawesome/free-solid-svg-icons'
 import { openDiscordLink, getGameInfo } from 'frontend/helpers'
 
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -103,6 +99,14 @@ export default function SidebarLinks() {
 
   return (
     <div className="SidebarLinks Sidebar__section">
+      <div className="hyperplaySidebarLogoContainer">
+        <img
+          className="hyperplaySidebarLogo"
+          src="/src/frontend/assets/hyperplay/hyperplay_logo_white.svg"
+        />
+      </div>
+      <h6 className="Sidebar__categoryTitle">GAMES</h6>
+
       {loggedIn && (
         <NavLink
           className={({ isActive }) =>
@@ -118,6 +122,7 @@ export default function SidebarLinks() {
           </>
         </NavLink>
       )}
+      <h6 className="Sidebar__categoryTitle">ACCOUNTS</h6>
       {!loggedIn && (
         <NavLink
           className={({ isActive }) =>
@@ -136,6 +141,7 @@ export default function SidebarLinks() {
           </>
         </NavLink>
       )}
+
       <div className="SidebarItemWithSubmenu">
         <NavLink
           className={({ isActive }) =>
@@ -177,7 +183,16 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
-      <div className="divider" />
+      <button className="Sidebar__item" onClick={() => navigate('/login')}>
+        <div className="Sidebar__itemIcon">
+          <FontAwesomeIcon
+            icon={faUserAlt}
+            title={t('userselector.manageaccounts', 'Manage Accounts')}
+          />
+        </div>
+        <span>{t('userselector.manageaccounts', 'Manage Accounts')}</span>
+      </button>
+      <h6 className="Sidebar__categoryTitle">OTHER</h6>
       <div className="SidebarItemWithSubmenu">
         <NavLink
           data-testid="settings"
@@ -320,15 +335,6 @@ export default function SidebarLinks() {
           </>
         </NavLink>
       )}
-      <button className="Sidebar__item" onClick={() => navigate('/login')}>
-        <div className="Sidebar__itemIcon">
-          <FontAwesomeIcon
-            icon={faUserAlt}
-            title={t('userselector.manageaccounts', 'Manage Accounts')}
-          />
-        </div>
-        <span>{t('userselector.manageaccounts', 'Manage Accounts')}</span>
-      </button>
       <NavLink
         data-testid="accessibility"
         className={({ isActive }) =>
@@ -346,7 +352,7 @@ export default function SidebarLinks() {
           <span>{t('accessibility.title', 'Accessibility')}</span>
         </>
       </NavLink>
-      <div className="divider" />
+      <h6 className="Sidebar__categoryTitle">COMMUNITY</h6>
       <NavLink
         data-testid="wiki"
         className={({ isActive }) =>
@@ -372,18 +378,6 @@ export default function SidebarLinks() {
           />
         </div>
         <span>{t('userselector.discord', 'Discord')}</span>
-      </button>
-      <button className="Sidebar__item" onClick={window.api.openPatreonPage}>
-        <div className="Sidebar__itemIcon">
-          <FontAwesomeIcon icon={faPatreon} title="Patreon" />
-        </div>
-        <span>Patreon</span>
-      </button>
-      <button className="Sidebar__item" onClick={window.api.openKofiPage}>
-        <div className="Sidebar__itemIcon">
-          <FontAwesomeIcon icon={faCoffee} title="Ko-fi" />
-        </div>
-        <span>Ko-fi</span>
       </button>
       {(isFullscreen || activeController) && <QuitButton />}
     </div>

@@ -1,4 +1,4 @@
-import { PROVIDERS, WalletConnectWeb3Provider } from '../../proxy/types'
+import { PROVIDERS, wait } from '../../../common/types/proxy-types'
 import {
   getConnectionUris,
   passEventCallbacks
@@ -8,7 +8,6 @@ import {
   walletConnected,
   walletDisconnected,
   chainChanged,
-  wait,
   connectionRequestRejected
 } from '../../__mocks__/providerCallbacks'
 

@@ -1,0 +1,117 @@
+@mixin colorSystem {
+  /* Generic colors */
+  --background: #121212;
+  --background-darker: #121212;
+  --background-darker-80: #1f1f1fe0;
+  --background-secondary: #282828;
+  --background-lighter: #d9d9d90d;
+  --background-gradient: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.418) 2.4%,
+    #0d0f1cd2 64%
+  );
+
+  /* Primary */
+  --primary: #761dfe;
+
+  /* Gradients */
+  --gradient-1: linear-gradient(82deg, #4126e8, #ea1aba, #10a6d6);
+
+  /* Colours */
+  --navbar-background: var(--background);
+  --input-background: var(--background-darker);
+  --body-background: #292929;
+  --current-background: var(--body-background);
+  --modal-background: #2d2d2d;
+  --modal-border: #3e3e3e;
+  --modal-backdrop: #00000074;
+  --text-hover: #59d0ea;
+  --primary-hover: #4cdafa;
+  --link-highlight: #07c5ef;
+  --accent: #909090;
+  --accent-overlay: #bbbbbb;
+  --navbar-accent: var(--accent);
+  --navbar-active-background: var(--background-lighter);
+  --play-button: #59d0ea;
+  --download-button: #3082d9;
+  --download-button-overlay: #1372d7;
+  --stop-button: #252121;
+  --scrollbar-thumb: #ffffff33;
+  --favourite-active: #97f4e9;
+  --favourite-inactive: #eae8e5;
+  --danger: #bd0a0a; /* These success, danger and disabled colours need to be documented */
+  --success: #eda7ff;
+  --success-hover: #30eca8;
+  --danger-hover: #e43f3f;
+  --icon-disabled: #625e69;
+  --icons-background: var(--background-darker);
+  --divider: var(--accent);
+  --osk-background: var(--body-background);
+  --osk-button-background: var(--input-background);
+  --osk-button-border: var(--navbar-background);
+
+  --anticheat-denied: var(--danger);
+  --anticheat-broken: #e8590c;
+  --anticheat-running: #0e8598;
+  --anticheat-supported: #2f9e44;
+  --anticheat-planned: #6841d9;
+
+  /* Gradients */
+  --gradient-welcome: linear-gradient(#13172a 100%, #13172a 89%, #13172a 0%);
+  --gradient-big-game-menu: linear-gradient(
+    #13172a 100%,
+    #1d1f1f 31.77%,
+    #1d1f1f 0%
+  );
+  --gradient-gamecard: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.418) 1.8%,
+    #17131cd2 45%
+  );
+  --gradient-game-hover: linear-gradient(#000000 30.8%, #141515 77%);
+  --gradient-body-background: #000000;
+  /* Text colours */
+  --text-default: #eae8e5;
+  --text-secondary: #c4c4c4;
+  --text-pause-cancel: white;
+  --text-title: white;
+  --text-tertiary: #101111; /* This is not defined in figma */
+  --text-quartenary: #5a5e5f; /* this is meant to be a background colour */
+  --text-danger: #d22121;
+}
+
+body {
+  color: var(--text-default);
+  background: var(--body-background);
+}
+
+a {
+  color: var(--text-default);
+  text-decoration: none;
+}
+
+.simple-keyboard .hg-button {
+  background: var(--osk-button-background);
+  border-color: var(--osk-button-border);
+  color: var(--text-default);
+}
+
+.simple-keyboard .hg-button.hg-activeButton {
+  background: var(--osk-button-border);
+  border-color: var(--osk-button-border);
+  color: var(--text-default);
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-title);
+}
+
+.gogIcon {
+  fill: var(--text-default);
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}

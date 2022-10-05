@@ -27,11 +27,3 @@ export function chainChanged(chainId: number) {
 export function connectionRequestRejected() {
   console.log('renderer receives: connection request rejected ')
 }
-
-export async function wait(ms: number) {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(ms)
-    }, ms)
-  })
-}

@@ -1,4 +1,4 @@
-import { PROVIDERS } from '../../proxy/types'
+import { PROVIDERS, wait } from '../../../common/types/proxy-types'
 import { app, server, serverStarted } from '../../proxy/proxy'
 import {
   getConnectionUris,
@@ -10,7 +10,6 @@ import {
   walletConnected,
   walletDisconnected,
   chainChanged,
-  wait,
   getConnectedPromise,
   connectionRequestRejected
 } from '../../__mocks__/providerCallbacks'

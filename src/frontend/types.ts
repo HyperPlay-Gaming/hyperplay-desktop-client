@@ -46,10 +46,6 @@ export interface ContextType {
   setTheme: (themeName: string) => void
   zoomPercent: number
   setZoomPercent: (newZoomPercent: number) => void
-  contentFontFamily: string
-  setContentFontFamily: (newFontFamily: string) => void
-  actionsFontFamily: string
-  setActionsFontFamily: (newFontFamily: string) => void
   epic: {
     library: GameInfo[]
     username: string | null
@@ -67,6 +63,8 @@ export interface ContextType {
   setSideBarCollapsed: (value: boolean) => void
   sidebarCollapsed: boolean
   activeController: string
+  setSecondaryFontFamily: (newFontFamily: string, saveToFile?: boolean) => void
+  setPrimaryFontFamily: (newFontFamily: string, saveToFile?: boolean) => void
 }
 
 export type LibraryTopSectionOptions =

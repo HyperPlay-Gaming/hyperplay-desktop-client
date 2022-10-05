@@ -3,7 +3,6 @@ import WalletConnectProvider from '@walletconnect/web3-provider'
 import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers'
 import { AbstractProvider } from 'web3-core/types'
 import Web3Core from 'web3-core'
-import WCTypes from '@walletconnect/types'
 import { RequestArguments } from 'web3-core'
 
 export enum PROXY_TOPICS {
@@ -17,11 +16,6 @@ export enum PROXY_TOPICS {
 
 export interface RequestBody<T> extends Express.Request {
   body: T
-}
-
-export enum PROVIDERS {
-  METAMASK_MOBILE,
-  WALLET_CONNECT
 }
 
 declare module '@walletconnect/web3-provider' {
@@ -100,15 +94,6 @@ export interface sendEthRequest {
   valueInWei: string
 }
 
-export interface IMobileRegistryEntryWithQrLink
-  extends WCTypes.IMobileRegistryEntry {
-  qrCodeLink: string
-}
-
-export interface UrisReturn {
-  [key: string]: IMobileRegistryEntryWithQrLink
-}
-
 export interface ProviderRpcError extends Error {
   message: string
   code: number
@@ -118,12 +103,6 @@ export interface ProviderRpcError extends Error {
 export interface ConnectInfo {
   chainId: string
 }
-
-export type AccountsChangedType = (accounts: string[]) => void
-export type WalletConnectedType = (accounts: string[]) => void
-export type WalletDisconnectedType = (code: number, reason: string) => void
-export type ChainChangedType = (chainId: number) => void
-export type ConnectionRequestRejectedType = () => void
 
 export interface ProviderMessage {
   readonly type: string

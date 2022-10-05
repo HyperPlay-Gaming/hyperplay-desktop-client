@@ -10,9 +10,13 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import CurrentDownload from './components/CurrentDownload'
 import SidebarLinks from './components/SidebarLinks'
 import './index.css'
-import AppVersion from './components/HeroicVersion'
+import Wallet from './components/wallet'
 
-export default function Sidebar() {
+interface SidebarProps {
+  openOnboarding: () => void
+}
+
+const Sidebar: React.FC<SidebarProps> = function (props) {
   const { t } = useTranslation()
   const { libraryStatus, sidebarCollapsed, setSideBarCollapsed } =
     useContext(ContextProvider)
@@ -32,7 +36,7 @@ export default function Sidebar() {
           />
         ))}
       </div>
-      <AppVersion />
+      <Wallet onClick={props.openOnboarding} />
       <button
         className="collapseIcon"
         onClick={() => setSideBarCollapsed(!sidebarCollapsed)}
@@ -49,3 +53,5 @@ export default function Sidebar() {
     </aside>
   )
 }
+
+export default Sidebar

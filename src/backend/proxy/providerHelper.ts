@@ -1,18 +1,10 @@
 import MetaMaskSDK from '@metamask/sdk'
 import {
   mmSdkProvider,
-  PROVIDERS,
-  UrisReturn,
   WalletConnectWeb3Provider,
-  IMobileRegistryEntryWithQrLink,
   ProviderRpcError,
-  AccountsChangedType,
-  WalletConnectedType,
-  WalletDisconnectedType,
-  ChainChangedType,
   ConnectInfo,
   ProviderMessage,
-  ConnectionRequestRejectedType,
   PROXY_TOPICS
 } from './types'
 import Web3 from 'web3'
@@ -22,6 +14,16 @@ import * as WCBrowserUtils from '@walletconnect/browser-utils'
 import { ipcMain } from 'electron'
 import { registryCache } from './data/registryBackup'
 import { IAppRegistry } from '@walletconnect/types'
+import {
+  PROVIDERS,
+  UrisReturn,
+  IMobileRegistryEntryWithQrLink,
+  ConnectionRequestRejectedType,
+  AccountsChangedType,
+  WalletConnectedType,
+  WalletDisconnectedType,
+  ChainChangedType
+} from '../../common/types/proxy-types'
 
 let sdk: MetaMaskSDK
 
@@ -41,7 +43,6 @@ export async function getConnectionUris(
     }
     case PROVIDERS.WALLET_CONNECT: {
       uris = await getWalletConnectConnectionUris()
-      console.log('opening qr code')
       QRCodeModal.open(uris['metamask'].qrCodeLink, null)
       break
     }
@@ -225,7 +226,6 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
 
       const registryUrl = WCBrowserUtils.getWalletRegistryUrl()
       //might want to have local json fallback
-      console.log('fetching url = ', registryUrl)
       let _registryResponseJSON = registryCache
       try {
         const registryResponse = await fetch(registryUrl)
@@ -233,7 +233,6 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
       } catch (e) {
         console.log(String(e))
       }
-      console.log('fetched')
       const registry: IAppRegistry = _registryResponseJSON.listings
       // mobile works for desktop too
       const platform = 'mobile'
