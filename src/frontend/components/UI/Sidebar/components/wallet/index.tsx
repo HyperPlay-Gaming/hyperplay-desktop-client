@@ -1,40 +1,91 @@
 import './index.css'
 import React, { useState } from 'react'
+import Blockies from 'react-blockies'
 
 interface WalletProps {
   onClick: () => void
 }
 
 const Wallet: React.FC<WalletProps> = function (props) {
-  const disconnectedText = 'Connect'
+  const disconnectedText = '???'
   const [walletText, setWalletText] = useState(disconnectedText)
+  const [account, setAccount] = useState('')
 
   window.api.handleAccountsChanged((e, accounts: string[]) => {
     setWalletText(
-      accounts[0].substring(0, 4) +
+      accounts[0].substring(0, 6) +
         '..' +
-        accounts[0].substring(accounts[0].length - 2)
+        accounts[0].substring(accounts[0].length - 4)
     )
+    setAccount(accounts[0])
   })
 
   window.api.handleDisconnected(() => {
     setWalletText(disconnectedText)
   })
 
+  const getProfilePic = function () {
+    if (walletText === disconnectedText) {
+      return (
+        <img
+          src={'/src/frontend/assets/hyperplay/disconnected.svg'}
+          className="Sidebar__itemIcon disconnectedImg"
+        ></img>
+      )
+    }
+    const itemIconCssClass = 'Sidebar__itemIcon'
+    const itemElem = document.querySelector('.' + itemIconCssClass)
+    let itemIconWidth = 34
+    if (itemElem !== null) {
+      itemIconWidth = (parseInt(getComputedStyle(itemElem).width) * 34) / 24
+    }
+    const iconColor = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue('--primary')
+
+    const bgColor = getComputedStyle(document.documentElement).getPropertyValue(
+      '--secondary'
+    )
+
+    const spotColor = getComputedStyle(
+      document.documentElement
+    ).getPropertyValue('--tertiary')
+
+    const iconScale = 4
+    return (
+      <div className={itemIconCssClass}>
+        <Blockies
+          seed={account}
+          size={itemIconWidth / iconScale}
+          scale={iconScale}
+          color={iconColor}
+          bgColor={bgColor}
+          spotColor={spotColor}
+          className="identicon"
+        />
+      </div>
+    )
+  }
+
   return (
     <button
       onClick={props.onClick}
       className="Sidebar__item centerSidebarItem wallet"
     >
-      <img
-        src={
-          walletText !== disconnectedText
-            ? '/src/frontend/assets/hyperplay/hyperplay_logo_green.svg'
-            : '/src/frontend/assets/hyperplay/hyperplay_logo_red.svg'
-        }
-        className="Sidebar__itemIcon"
-      ></img>
-      <span className="sidebarConnectText">{walletText}</span>
+      {getProfilePic()}
+      <span>
+        <div className="walletAccountText">{walletText}</div>
+        <div
+          className={
+            'subtitle-sm ' +
+            (walletText === disconnectedText
+              ? 'disconnectedStatus'
+              : 'connectedStatus')
+          }
+        >
+          {walletText === disconnectedText ? 'Not connected' : 'Connected'}
+        </div>
+      </span>
     </button>
   )
 }

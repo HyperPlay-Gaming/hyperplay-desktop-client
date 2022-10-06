@@ -78,6 +78,8 @@
   justify-content: center;
   color: var(--accent);
   margin-right: 10px;
+  align-items: center;
+  align-self: center;
 }
 
 .currentDownloads {

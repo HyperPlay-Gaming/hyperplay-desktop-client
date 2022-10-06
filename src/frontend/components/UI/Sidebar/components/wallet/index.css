@@ -2,15 +2,22 @@
   align-items: flex-end;
 }
 
-.connectedImageStatus {
-  color: green;
+.identicon {
+  border-radius: var(--space-3xl);
 }
 
-.disconnectedImageStatus {
-  fill: purple;
+.connectedStatus {
+  color: var(--tertiary-01-100);
 }
-.connectedStatusLogoMask {
-  background-color: pink;
-  mask: url(/src/frontend/assets/hyperplay/hyperplay_logo_outline.svg) no-repeat
-    center;
+
+.disconnectedStatus {
+  color: var(--error);
+}
+
+.walletAccountText {
+  color: var(--regular-01-50);
+}
+
+.disconnectedImg {
+  width: 2.125em;
 }
