@@ -32,7 +32,7 @@
             "title": "Zastavit instalaci"
         },
         "uninstall": {
-            "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
+            "checkbox": "Odebete předponu: {{prefix}}{{newLine}}Poznámka: Tato akce je nevratná a také neodebere zálohované soubory uložení.",
             "message": "Chcete odinstalovat tuto hru?",
             "title": "Odinstalovat"
         },
@@ -68,7 +68,7 @@
         "uninstall": "Odinstalovat",
         "update": "Update"
     },
-    "cloud_save_unsupported": "Unsupported",
+    "cloud_save_unsupported": "není podporována",
     "disabled": "Zakázáno",
     "dlc": {
         "installDlcs": "Instalovat všechna DLC"
@@ -99,9 +99,9 @@
         "installedPlatform": "Nainstalovaná platforma",
         "path": "Cesta pro instalaci",
         "size": "Velikost",
-        "syncsaves": "Synchronizovat uložené soubory",
-        "version": "Verze",
-        "web3-supported": "Has Web3 features"
+        "web3-supported": "Has Web3 features",
+        "syncsaves": "Synchronizace uložených souborů",
+        "version": "Verze"
     },
     "install": {
         "disk-space-left": "Volné místo",

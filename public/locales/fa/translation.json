@@ -59,10 +59,10 @@
                 "message": "",
                 "title": "Select EXE to Run"
             },
-            "launchAborted": "Launch aborted",
+            "launchAborted": "راه اندازی متوقف شد",
             "title": "خطا",
             "uncaught-exception": {
-                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
+                "message": "یک خطای نامشخص رخ داد:{{newLine}}{{error}}{{newLine}}{{newLine}}Heroic بسته خواهد شد! خطا را در ریپوزیتوری گیت‌هاب ما گزارش دهید.",
                 "title": "خطای نامشخص رخ داد!"
             },
             "update": {
@@ -75,8 +75,8 @@
                 "title": "Wine یافت نشد"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
-                "title": "Winetricks error"
+                "message": "Winetricks هنگام اجرا این خطا را برگرداند:{{newLine}}{{error}}",
+                "title": "خطای Winetricks"
             }
         },
         "info": {
@@ -537,7 +537,7 @@
         },
         "gameMode": {
             "eacRuntimeEnabled": {
-                "message": "ران تایم EAC که بدون GameMode به درستی کار نمی کند،\u200c فعال شده است. آیا می خواهید ران تایم EAC و GameMode را غیرفعال کنید؟",
+                "message": "ران تایم EAC که بدون GameMode به درستی کار نمی کند،‌ فعال شده است. آیا می خواهید ران تایم EAC و GameMode را غیرفعال کنید؟",
                 "title": "ران تایم EAC فعال شد"
             }
         },
