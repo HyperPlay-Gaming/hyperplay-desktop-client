@@ -7,7 +7,8 @@ export const isUserAuthenticated = (
   next: NextFunction
 ) => {
   const userIP = req.socket.remoteAddress
-  const callerIsLocal = userIP?.includes('127.0.0.1')
+  //::1 is the loopback address in IPv6
+  const callerIsLocal = userIP?.includes('127.0.0.1') || userIP?.includes('::1')
   if (!callerIsLocal) {
     return res.status(403).json({
       status: 403,

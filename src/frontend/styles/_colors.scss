@@ -11,8 +11,22 @@
     #0d0f1cd2 64%
   );
 
-  /* Primary */
+  /* Primary Colors */
   --primary: #761dfe;
+  --primary-500: #a74dff;
+
+  /* Secondary Colors */
+  --secondary: #90006b;
+
+  /* Tertiary Colors */
+  --tertiary: #00436c;
+  --tertiary-01-100: #79eaff;
+
+  /* Grayscale Colors */
+  --regular-01-50: #f4f3f6;
+
+  /* Misc Design System Colors */
+  --error: #f62570;
 
   /* Gradients */
   --gradient-1: linear-gradient(82deg, #4126e8, #ea1aba, #10a6d6);
