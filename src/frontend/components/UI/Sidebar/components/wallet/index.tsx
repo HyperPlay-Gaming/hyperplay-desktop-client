@@ -1,6 +1,7 @@
 import './index.css'
 import React, { useState } from 'react'
 import Blockies from 'react-blockies'
+import classNames from 'classnames'
 
 interface WalletProps {
   onClick: () => void
@@ -67,6 +68,7 @@ const Wallet: React.FC<WalletProps> = function (props) {
     )
   }
 
+  const isConnected = walletText !== disconnectedText
   return (
     <button
       onClick={props.onClick}
@@ -76,12 +78,10 @@ const Wallet: React.FC<WalletProps> = function (props) {
       <span>
         <div className="walletAccountText">{walletText}</div>
         <div
-          className={
-            'subtitle-sm ' +
-            (walletText === disconnectedText
-              ? 'disconnectedStatus'
-              : 'connectedStatus')
-          }
+          className={classNames('subtitle-sm', {
+            disconnectedStatus: !isConnected,
+            connectedStatus: isConnected
+          })}
         >
           {walletText === disconnectedText ? 'Not connected' : 'Connected'}
         </div>
