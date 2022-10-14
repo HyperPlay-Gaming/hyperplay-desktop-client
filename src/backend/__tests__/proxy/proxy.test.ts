@@ -23,6 +23,12 @@ passEventCallbacks(
   connectionRequestRejected
 )
 
+const CHAIN_ID = '5'
+const CHAIN_ID_HEX = '0x' + CHAIN_ID
+const TRANSFER_TO = '0x62bb848ec84D08d55Ea70a19118300bae6658F18'
+const ERC20_TO_TRANSFER = '1000000000000000000'
+const ERC20_ADDRESS = '0xBA62BCfcAaFc6622853cca2BE6Ac7d845BC0f2Dc'
+
 describe('MANUAL tests for the proxy server', function () {
   beforeAll(async function () {
     await serverStarted
@@ -38,7 +44,7 @@ describe('MANUAL tests for the proxy server', function () {
 
   // beforeAll(async function () {
   //   let connectedPromise = getConnectedPromise()
-  //   await getConnectionUris(PROVIDERS.WALLET_CONNECT)
+  //   await getConnectionUris(PROVIDERS.METAMASK_MOBILE)
   //   await serverStarted
   //   console.log('Please scan the QR code with your metamask mobile app')
   //   await connectedPromise
@@ -60,7 +66,7 @@ describe('MANUAL tests for the proxy server', function () {
   //       //   method: 'eth_accounts'
   //       // },
   //       chain: {
-  //         chainId: '0x4'
+  //         chainId: CHAIN_ID_HEX
   //       }
   //     })
   //   expect(acctsRes.statusCode).toEqual(500)
@@ -72,7 +78,7 @@ describe('MANUAL tests for the proxy server', function () {
   //         // method: 'eth_accounts'
   //       },
   //       chain: {
-  //         chainId: '0x4'
+  //         chainId: CHAIN_ID_HEX
   //       }
   //     })
   //   expect(acctsRes.statusCode).toEqual(500)
@@ -84,7 +90,7 @@ describe('MANUAL tests for the proxy server', function () {
   //         method: 'eth_accounts'
   //       },
   //       chain: {
-  //         // chainId: '0x4'
+  //         // chainId: CHAIN_ID_HEX
   //       }
   //     })
   //   expect(acctsRes.statusCode).toEqual(500)
@@ -96,7 +102,7 @@ describe('MANUAL tests for the proxy server', function () {
   //         method: 'eth_accounts'
   //       }
   //       // chain: {
-  //       //   chainId: '0x4'
+  //       //   chainId: CHAIN_ID_HEX
   //       // }
   //     })
   //   expect(acctsRes.statusCode).toEqual(500)
@@ -133,7 +139,7 @@ describe('MANUAL tests for the proxy server', function () {
   //         method: 'eth_accounts'
   //       },
   //       chain: {
-  //         chainId: '4'
+  //         chainId: CHAIN_ID
   //       }
   //     })
   //   console.log('should have switched back to Rinkeby ', acctsRes.body)
@@ -170,7 +176,7 @@ describe('MANUAL tests for the proxy server', function () {
   // }
 
   // test('should get eth balance on Rinkeby', async function () {
-  //   const bal = await getEthBalance('4')
+  //   const bal = await getEthBalance(CHAIN_ID)
   //   console.log('balance = ', bal)
   // }, 20000)
 
@@ -182,7 +188,7 @@ describe('MANUAL tests for the proxy server', function () {
   //         method: 'eth_accounts'
   //       },
   //       chain: {
-  //         chainId: '4'
+  //         chainId: CHAIN_ID
   //       }
   //     })
   //   console.log('should be on Rinkeby ', acctsRes.body)
@@ -216,7 +222,7 @@ describe('MANUAL tests for the proxy server', function () {
   //             domain: {
   //               name: 'Ether Mail',
   //               version: '1',
-  //               chainId: '4',
+  //               chainId: CHAIN_ID,
   //               verifyingContract: '0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC'
   //             },
   //             message: {
@@ -234,7 +240,7 @@ describe('MANUAL tests for the proxy server', function () {
   //         ]
   //       },
   //       chain: {
-  //         chainId: '4'
+  //         chainId: CHAIN_ID
   //       }
   //     })
   //   console.log('sign message response = ', signRes.text)
@@ -254,7 +260,7 @@ describe('MANUAL tests for the proxy server', function () {
   //         method: 'eth_accounts'
   //       },
   //       chain: {
-  //         chainId: '0x4'
+  //         chainId: CHAIN_ID_HEX
   //       }
   //     })
   //   console.log('accounts response body = ', acctsRes.body)
@@ -308,14 +314,10 @@ describe('MANUAL tests for the proxy server', function () {
   // }
 
   // test('should connect wallet, start server, and send eth over testnet', async function () {
-  //   const ethBefore = await getEthBalance('4')
+  //   const ethBefore = await getEthBalance(CHAIN_ID)
   //   console.log('eth before = ', ethBefore)
   //   const valueInWeiToSend = '1000000000000000'
-  //   const res = await sendEth(
-  //     '4',
-  //     '1000000000000000',
-  //     '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682'
-  //   )
+  //   const res = await sendEth(CHAIN_ID, valueInWeiToSend, TRANSFER_TO)
 
   //   // GAS USED DATA IS PROVIDED WITH web3.eth.sendTransaction method
   //   // wait for txn to confirm before checking balance again
@@ -336,14 +338,14 @@ describe('MANUAL tests for the proxy server', function () {
   //   let resErr = await request(app)
   //     .post('/sendContract')
   //     .send({
-  //       contractAddress: '0xFab46E002BbF0b4509813474841E0716E6730136',
+  //       contractAddress: ERC20_ADDRESS,
   //       functionName: 'transfer',
   //       params: [
-  //         // '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
-  //         '1000000000000000000'
+  //         // TRANSFER_TO,
+  //         ERC20_TO_TRANSFER
   //       ],
   //       chain: {
-  //         chainId: '4'
+  //         chainId: CHAIN_ID
   //       }
   //     })
   //   // console.log(resErr.body.message) //should be an error message
@@ -351,46 +353,37 @@ describe('MANUAL tests for the proxy server', function () {
   //   resErr = await request(app)
   //     .post('/sendContract')
   //     .send({
-  //       contractAddress: '0xFab46E002BbF0b4509813474841E0716E6730136',
+  //       contractAddress: ERC20_ADDRESS,
   //       // functionName: 'transfer',
-  //       params: [
-  //         '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
-  //         '1000000000000000000'
-  //       ],
+  //       params: [TRANSFER_TO, ERC20_TO_TRANSFER],
   //       chain: {
-  //         chainId: '4'
+  //         chainId: CHAIN_ID
   //       }
   //     })
   //   expect(resErr.statusCode).toEqual(500)
   //   resErr = await request(app)
   //     .post('/sendContract')
   //     .send({
-  //       // contractAddress: '0xFab46E002BbF0b4509813474841E0716E6730136',
+  //       // contractAddress: ERC20_ADDRESS,
   //       functionName: 'transfer',
-  //       params: [
-  //         '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
-  //         '1000000000000000000'
-  //       ],
+  //       params: [TRANSFER_TO, ERC20_TO_TRANSFER],
   //       chain: {
-  //         chainId: '4'
+  //         chainId: CHAIN_ID
   //       }
   //     })
   //   expect(resErr.statusCode).toEqual(500)
   // }, 60000)
 
-  // test('should get contract abi from etherscan', async function () {
+  // test.only('should get contract abi from etherscan', async function () {
   //   const res = await request(app)
   //     .post('/sendContract')
   //     .send({
-  //       contractAddress: '0xFab46E002BbF0b4509813474841E0716E6730136',
+  //       contractAddress: ERC20_ADDRESS,
   //       functionName: 'transfer',
-  //       params: [
-  //         '0xCb0dF2FA613b5bef71DD453A3496224a5dfc8682',
-  //         '1000000000000000000'
-  //       ],
+  //       params: [TRANSFER_TO, ERC20_TO_TRANSFER],
   //       gasLimit: '60000',
   //       chain: {
-  //         chainId: '4'
+  //         chainId: CHAIN_ID
   //       }
   //     })
   //   console.log(res.body)
