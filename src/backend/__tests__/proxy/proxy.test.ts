@@ -38,7 +38,7 @@ const CHAIN_ID_HEX = '0x' + CHAIN_ID
 const TRANSFER_TO = '0x62bb848ec84D08d55Ea70a19118300bae6658F18'
 const ERC20_TO_TRANSFER = '1000000000000000000'
 const ERC20_ADDRESS = '0xBA62BCfcAaFc6622853cca2BE6Ac7d845BC0f2Dc'
-const TESTS_ENABLED = true
+const TESTS_ENABLED = false
 const testIf = (condition: boolean) => (condition ? test : test.skip)
 
 describe('MANUAL tests for the proxy server', function () {
