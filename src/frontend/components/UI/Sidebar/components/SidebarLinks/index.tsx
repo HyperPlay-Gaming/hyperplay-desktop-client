@@ -101,7 +101,11 @@ export default function SidebarLinks() {
   return (
     <div className="SidebarLinks Sidebar__section">
       <div className="hyperplaySidebarLogoContainer">
-        <HyperPlayLogoWhite className="hyperplaySidebarLogo" />
+        <HyperPlayLogoWhite
+          height={64}
+          width={64}
+          className="hyperplaySidebarLogo"
+        />
       </div>
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
 

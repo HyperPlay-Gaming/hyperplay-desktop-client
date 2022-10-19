@@ -3,7 +3,6 @@ import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
 import { icon } from './constants'
-import { logError, LogPrefix } from './logger/logger'
 import { nativeImage } from 'electron'
 
 autoUpdater.autoDownload = false
