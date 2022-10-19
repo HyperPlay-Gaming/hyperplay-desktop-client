@@ -355,7 +355,7 @@ describe('MANUAL tests for the proxy server', function () {
     return sendRes.body
   }
 
-  testIf(TESTS_ENABLED).only(
+  testIf(TESTS_ENABLED)(
     'should connect wallet, start server, and send eth over testnet',
     async function () {
       const ethBefore = await getEthBalance(CHAIN_ID)
