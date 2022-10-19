@@ -2,6 +2,7 @@ import './index.css'
 import React, { useEffect } from 'react'
 import { OnboardingModalConfig } from '../types'
 import YesNoActionButtons from '../components/yesNoActionButtons'
+import { RejectedIcon } from 'frontend/assets/hyperplay'
 
 interface RejectedProps {
   setOnboardingModalParams: React.Dispatch<Partial<OnboardingModalConfig>>
@@ -24,10 +25,7 @@ const Rejected: React.FC<RejectedProps> = function (props) {
         connecting to proceed.
       </div>
       <div className="rejectedImgContainer">
-        <img
-          src="/src/frontend/assets/hyperplay/rejected.svg"
-          className="rejectedImg"
-        ></img>
+        <RejectedIcon className="rejectedImg" />
       </div>
       <YesNoActionButtons
         yesText="CONNECT"

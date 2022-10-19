@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { OnboardingModalConfig } from '../types'
 import { wait } from '../../../../common/types/proxy-types'
 import './index.css'
+import { SuccessIcon } from 'frontend/assets/hyperplay'
 
 interface SuccessParams {
   setOnboardingModalParams: React.Dispatch<Partial<OnboardingModalConfig>>
@@ -25,10 +26,7 @@ const Success: React.FC<SuccessParams> = function (props) {
         Your wallet is now connected! You&apos;re ready to game.{' '}
       </div>
       <div className="successImgContainer">
-        <img
-          src="/src/frontend/assets/hyperplay/success.svg"
-          className="successImg"
-        ></img>
+        <SuccessIcon className="successImg" />
       </div>
     </div>
   )

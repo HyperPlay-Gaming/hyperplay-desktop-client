@@ -19,6 +19,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { Runner, GameInfo } from 'common/types'
 import './index.css'
 import QuitButton from '../QuitButton'
+import { HyperPlayLogoWhite } from 'frontend/assets/hyperplay'
 
 interface LocationState {
   fromGameCard: boolean
@@ -100,10 +101,7 @@ export default function SidebarLinks() {
   return (
     <div className="SidebarLinks Sidebar__section">
       <div className="hyperplaySidebarLogoContainer">
-        <img
-          className="hyperplaySidebarLogo"
-          src="/src/frontend/assets/hyperplay/hyperplay_logo_white.svg"
-        />
+        <HyperPlayLogoWhite className="hyperplaySidebarLogo" />
       </div>
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
 
