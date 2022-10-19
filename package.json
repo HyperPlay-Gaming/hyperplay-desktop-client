@@ -27,7 +27,7 @@
       "build/icon.png",
       "build/icon.icns",
       "build/win_icon.ico",
-      "build/icon-trayIconLight24x24.png",
+      "build/trayIconLight24x24.png",
       "build/trayIconDark24x24.png"
     ],
     "protocols": [
