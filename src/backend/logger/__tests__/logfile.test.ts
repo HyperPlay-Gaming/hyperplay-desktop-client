@@ -131,11 +131,11 @@ describe('logger/logfile.ts', () => {
 
     // get game log
     expect(logfile.getLogFile({ appName: 'MyApp' })).toBe(
-      '/tmp/appData/heroic/GamesConfig/MyApp-lastPlay.log'
+      '/tmp/appData/hyperplay/GamesConfig/MyApp-lastPlay.log'
     )
     // get game log and isDefaultLast has no impact
     expect(logfile.getLogFile({ appName: 'MyApp', defaultLast: true })).toBe(
-      '/tmp/appData/heroic/GamesConfig/MyApp-lastPlay.log'
+      '/tmp/appData/hyperplay/GamesConfig/MyApp-lastPlay.log'
     )
   })
 
