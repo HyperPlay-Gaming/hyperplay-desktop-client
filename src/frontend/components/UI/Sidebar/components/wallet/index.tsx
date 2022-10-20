@@ -2,6 +2,7 @@ import './index.css'
 import React, { useState } from 'react'
 import Blockies from 'react-blockies'
 import classNames from 'classnames'
+import { Disconnected } from 'frontend/assets/hyperplay'
 
 interface WalletProps {
   onClick: () => void
@@ -27,12 +28,7 @@ const Wallet: React.FC<WalletProps> = function (props) {
 
   const getProfilePic = function () {
     if (walletText === disconnectedText) {
-      return (
-        <img
-          src={'/src/frontend/assets/hyperplay/disconnected.svg'}
-          className="Sidebar__itemIcon disconnectedImg"
-        ></img>
-      )
+      return <Disconnected className="Sidebar__itemIcon disconnectedImg" />
     }
     const itemIconCssClass = 'Sidebar__itemIcon'
     const itemElem = document.querySelector('.' + itemIconCssClass)

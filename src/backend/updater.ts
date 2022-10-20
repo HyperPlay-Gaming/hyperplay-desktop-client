@@ -3,8 +3,8 @@ import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
 import { icon } from './constants'
-import { logError, LogPrefix } from './logger/logger'
 import { nativeImage } from 'electron'
+import { logError, LogPrefix } from './logger/logger'
 
 autoUpdater.autoDownload = false
 autoUpdater.autoInstallOnAppQuit = false
@@ -47,12 +47,22 @@ autoUpdater.on('update-downloaded', async () => {
 })
 
 autoUpdater.on('error', (err) => {
-  dialog.showErrorBox(
-    t('box.error.update.title', 'Update Error'),
-    t(
-      'box.error.update.message',
-      'Something went wrong with the update, please check the logs or try again later!'
-    )
+  logError(
+    [
+      t('box.error.update.title', 'Update Error'),
+      t(
+        'box.error.update.message',
+        'Something went wrong with the update, please check the logs or try again later!'
+      )
+    ],
+    LogPrefix.Backend
   )
+  // dialog.showErrorBox(
+  //   t('box.error.update.title', 'Update Error'),
+  //   t(
+  //     'box.error.update.message',
+  //     'Something went wrong with the update, please check the logs or try again later!'
+  //   )
+  // )
   logError(['failed to update', `${err}`], LogPrefix.Backend, false)
 })

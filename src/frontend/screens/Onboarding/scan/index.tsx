@@ -1,3 +1,4 @@
+import { HyperPlayLogo } from 'frontend/assets/hyperplay'
 import React, { useEffect } from 'react'
 import QrCodeGradientBorder from '../components/qrCodeGradientBorder'
 import { OnboardingModalConfig } from '../types'
@@ -33,10 +34,7 @@ const Scan: React.FC<ScanProps> = function (props) {
           src={props.providerImg}
           className="providerImg connectingFrom"
         ></img>
-        <img
-          src="/src/frontend/assets/hyperplay/hyperplay_logo.svg"
-          className="providerImg connectingTo"
-        ></img>
+        <HyperPlayLogo className="providerImg connectingTo" />
       </div>
       <QrCodeGradientBorder qrUrl={url} imageMargin="-14px" />
       <button
