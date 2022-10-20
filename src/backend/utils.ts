@@ -8,7 +8,7 @@ import {
   Release
 } from 'common/types'
 import * as axios from 'axios'
-import { app, dialog, net, shell, Notification, BrowserWindow } from 'electron'
+import { app, dialog, shell, Notification, BrowserWindow } from 'electron'
 import { exec, spawn, spawnSync } from 'child_process'
 import { existsSync, rmSync, stat } from 'graceful-fs'
 import { promisify } from 'util'
@@ -42,41 +42,12 @@ import {
 } from './gog/electronStores'
 import fileSize from 'filesize'
 import makeClient from 'discord-rich-presence-typescript'
+import { showErrorBoxModalAuto } from './dialog/dialog'
 
 const execAsync = promisify(exec)
 const statAsync = promisify(stat)
 
-const { showErrorBox, showMessageBox } = dialog
-
-export async function showErrorBoxModal(
-  window: BrowserWindow | undefined | null,
-  title: string,
-  message: string
-) {
-  if (window) {
-    await showMessageBox(window, {
-      type: 'error',
-      title,
-      message
-    })
-  } else {
-    await showErrorBox(title, message)
-  }
-}
-
-export function showErrorBoxModalAuto(title: string, message: string) {
-  let window: BrowserWindow | null
-  try {
-    window = BrowserWindow.getFocusedWindow()
-    if (!window) {
-      window = BrowserWindow.getAllWindows()[0]
-    }
-    showErrorBoxModal(window, title, message)
-  } catch (error) {
-    logWarning(['showErrorBoxModalAuto:', `${error}`], LogPrefix.Backend)
-    showErrorBox(title, message)
-  }
-}
+const { showMessageBox } = dialog
 
 /**
  * Compares 2 SemVer strings following "major.minor.patch".
@@ -125,10 +96,6 @@ function semverGt(target: string, base: string) {
   return isGE
 }
 
-function isOnline() {
-  return net.isOnline()
-}
-
 export const getFileSize = fileSize.partial({ base: 2 })
 
 export function getWineFromProton(
@@ -156,7 +123,7 @@ export function getWineFromProton(
       wineVersion.name,
       'has an abnormal structure, unable to supply Wine binary!'
     ],
-    LogPrefix.Backend
+    { prefix: LogPrefix.Backend }
   )
 
   return { wineBin: '', winePrefix }
@@ -170,7 +137,7 @@ async function isEpicServiceOffline(
     title: `${type} ${t('epic.offline-notification-title', 'offline')}`,
     body: t(
       'epic.offline-notification-body',
-      'HyperPlay will maybe not work probably!'
+      'Heroic will maybe not work probably!'
     ),
     urgency: 'normal',
     timeoutType: 'default',
@@ -196,10 +163,9 @@ async function isEpicServiceOffline(
     notification.show()
     return false
   } catch (error) {
-    logError(
-      `Failed to get epic service status with ${error}`,
-      LogPrefix.Backend
-    )
+    logError(['Failed to get epic service status with', error], {
+      prefix: LogPrefix.Backend
+    })
     return false
   }
 }
@@ -274,15 +240,21 @@ async function handleExit(window: BrowserWindow) {
       try {
         killPattern(procName)
       } catch (error) {
-        logInfo([`Unable to kill ${procName}, ignoring.`, `${error}`])
+        logInfo([`Unable to kill ${procName}, ignoring.`, error])
       }
     })
   }
   app.exit()
 }
 
+// This won't change while the app is running
+// Caching significantly increases performance when launching games
+let systemInfoCache = ''
 export const getSystemInfo = async () => {
-  const appVersion = getAppVersion()
+  if (systemInfoCache !== '') {
+    return systemInfoCache
+  }
+  const heroicVersion = getAppVersion()
   const legendaryVersion = await getLegendaryVersion()
 
   // get CPU and RAM info
@@ -310,7 +282,7 @@ export const getSystemInfo = async () => {
     ? (await execAsync('echo $XDG_SESSION_TYPE')).stdout.replaceAll('\n', '')
     : ''
 
-  return `HyperPlay Version: ${appVersion}
+  systemInfoCache = `HyperPlay Version: ${heroicVersion}
 Legendary Version: ${legendaryVersion}
 OS: ${distro} KERNEL: ${kernel} ARCH: ${arch}
 CPU: ${manufacturer} ${brand} @${speed} ${
@@ -319,6 +291,7 @@ CPU: ${manufacturer} ${brand} @${speed} ${
 RAM: Total: ${getFileSize(total)} Available: ${getFileSize(available)}
 GRAPHICS: ${graphicsCards}
 ${isLinux ? `PROTOCOL: ${xEnv}` : ''}`
+  return systemInfoCache
 }
 
 type ErrorHandlerMessage = {
@@ -345,18 +318,19 @@ async function errorHandler(
     execAsync(`tail "${logPath}" | grep 'disk space'`)
       .then(async ({ stdout }) => {
         if (stdout.includes(noSpaceMsg)) {
-          logError(noSpaceMsg, LogPrefix.Backend)
-          return showErrorBoxModal(
-            window,
-            i18next.t('box.error.diskspace.title', 'No Space'),
-            i18next.t(
+          logError(noSpaceMsg, { prefix: LogPrefix.Backend })
+          return showErrorBoxModalAuto({
+            title: i18next.t('box.error.diskspace.title', 'No Space'),
+            error: i18next.t(
               'box.error.diskspace.message',
               'Not enough available disk space'
             )
-          )
+          })
         }
       })
-      .catch(() => logInfo('operation interrupted', LogPrefix.Backend))
+      .catch(() =>
+        logInfo('operation interrupted', { prefix: LogPrefix.Backend })
+      )
   }
   if (error) {
     if (error.includes(deletedFolderMsg) && appName) {
@@ -380,14 +354,13 @@ async function errorHandler(
 
     otherErrorMessages.forEach(async (message) => {
       if (error.includes(message)) {
-        return showErrorBoxModal(
-          window,
-          plat,
-          i18next.t(
+        return showErrorBoxModalAuto({
+          title: plat,
+          error: i18next.t(
             'box.error.credentials.message',
             'Your Crendentials have expired, Logout and Login Again!'
           )
-        )
+        })
       }
     })
   }
@@ -431,10 +404,9 @@ function showItemInFolder(item: string) {
     try {
       shell.showItemInFolder(item)
     } catch (error) {
-      logError(
-        `Failed to show item in folder with: ${error}`,
-        LogPrefix.Backend
-      )
+      logError(['Failed to show item in folder with:', error], {
+        prefix: LogPrefix.Backend
+      })
     }
   }
 }
@@ -507,7 +479,7 @@ async function searchForExecutableOnPath(executable: string): Promise<string> {
         return stdout.split('\n')[0]
       })
       .catch((error) => {
-        logError(`${error}`, LogPrefix.Backend)
+        logError(error, { prefix: LogPrefix.Backend })
         return ''
       })
   }
@@ -551,7 +523,7 @@ async function getSteamRuntime(
       requestedType,
       'could be found, returning first available one'
     ],
-    LogPrefix.Backend
+    { prefix: LogPrefix.Backend }
   )
   return allAvailableRuntimes.pop()!
 }
@@ -610,7 +582,7 @@ function removeQuoteIfNecessary(stringToUnquote: string) {
 }
 
 function killPattern(pattern: string) {
-  logInfo(['Trying to kill', pattern], LogPrefix.Backend)
+  logInfo(['Trying to kill', pattern], { prefix: LogPrefix.Backend })
   let ret
   if (isWindows) {
     ret = spawnSync('Stop-Process', ['-name', pattern], {
@@ -619,7 +591,7 @@ function killPattern(pattern: string) {
   } else {
     ret = spawnSync('pkill', ['-f', pattern])
   }
-  logInfo(['Killed', pattern], LogPrefix.Backend)
+  logInfo(['Killed', pattern], { prefix: LogPrefix.Backend })
   return ret
 }
 
@@ -669,16 +641,17 @@ function detectVCRedist(mainWindow: BrowserWindow) {
   })
 
   child.on('error', (error: Error) => {
-    logError(`Check of VCRuntime crashed with:\n${error}`, LogPrefix.Backend)
+    logError(['Check of VCRuntime crashed with:', error], {
+      prefix: LogPrefix.Backend
+    })
     return
   })
 
   child.on('close', async (code: number) => {
     if (code) {
-      logError(
-        `Failed to check for VCRuntime installations\n${stderr}`,
-        LogPrefix.Backend
-      )
+      logError(`Failed to check for VCRuntime installations\n${stderr}`, {
+        prefix: LogPrefix.Backend
+      })
       return
     }
     // VCR installers install both the "Minimal" and "Additional" runtime, and we have 2 installers (x86 and x64) -> 4 installations in total
@@ -703,9 +676,22 @@ function detectVCRedist(mainWindow: BrowserWindow) {
         })
       }
     } else {
-      logInfo('VCRuntime is installed', LogPrefix.Backend)
+      logInfo('VCRuntime is installed', { prefix: LogPrefix.Backend })
     }
   })
+}
+
+export function notify({ body, title }: NotifyType) {
+  if (Notification.isSupported() && !isSteamDeckGameMode) {
+    const mainWindow = BrowserWindow.getAllWindows()[0]
+    const notify = new Notification({
+      body,
+      title
+    })
+
+    notify.on('click', () => mainWindow.show())
+    notify.show()
+  }
 }
 
 function getGame(appName: string, runner: Runner) {
@@ -731,7 +717,7 @@ export function getFirstExistingParentPath(directoryPath: string): string {
 
 export const getLatestReleases = async (): Promise<Release[]> => {
   const newReleases: Release[] = []
-  logInfo('Checking for new HyperPlay Updates', LogPrefix.Backend)
+  logInfo('Checking for new HyperPlay Updates', { prefix: LogPrefix.Backend })
 
   try {
     const { data: releases } = await axios.default.get(GITHUB_API)
@@ -766,10 +752,9 @@ export const getLatestReleases = async (): Promise<Release[]> => {
 
     return newReleases
   } catch (error) {
-    logError(
-      ['Error when checking for HyperPlay updates', `${error}`],
-      LogPrefix.Backend
-    )
+    logError(['Error when checking for Heroic updates', error], {
+      prefix: LogPrefix.Backend
+    })
     return []
   }
 }
@@ -779,24 +764,10 @@ type NotifyType = {
   body: string
 }
 
-export function notify({ body, title }: NotifyType) {
-  if (Notification.isSupported() && !isSteamDeckGameMode) {
-    const mainWindow = BrowserWindow.getAllWindows()[0]
-    const notify = new Notification({
-      body,
-      title
-    })
-
-    notify.on('click', () => mainWindow.show())
-    notify.show()
-  }
-}
-
 export {
   errorHandler,
   execAsync,
   handleExit,
-  isOnline,
   isEpicServiceOffline,
   openUrlOrFile,
   semverGt,

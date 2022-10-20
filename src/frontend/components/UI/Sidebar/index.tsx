@@ -11,6 +11,7 @@ import CurrentDownload from './components/CurrentDownload'
 import SidebarLinks from './components/SidebarLinks'
 import './index.css'
 import Wallet from './components/wallet'
+import { GameStatus } from 'common/types'
 
 interface SidebarProps {
   openOnboarding: () => void
@@ -21,14 +22,14 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
   const { libraryStatus, sidebarCollapsed, setSideBarCollapsed } =
     useContext(ContextProvider)
   const downloading = libraryStatus.filter(
-    (g) => g.status === 'installing' || g.status === 'updating'
+    (g: GameStatus) => g.status === 'installing' || g.status === 'updating'
   )
 
   return (
     <aside className={classNames('Sidebar', { collapsed: sidebarCollapsed })}>
       <SidebarLinks />
       <div className="currentDownloads">
-        {downloading.map((g) => (
+        {downloading.map((g: GameStatus) => (
           <CurrentDownload
             key={g.appName}
             appName={g.appName}

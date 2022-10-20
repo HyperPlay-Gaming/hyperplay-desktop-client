@@ -1,5 +1,5 @@
-import { InstallPlatform } from 'common/types'
 import {
+  InstallPlatform,
   AppSettings,
   GameInfo,
   GameStatus,
@@ -141,7 +141,8 @@ async function install({
       path: `${path}`,
       installDlcs,
       sdlList,
-      runner
+      runner,
+      platformToInstall
     })
     .finally(() => {
       if (progress.percent === 100) {

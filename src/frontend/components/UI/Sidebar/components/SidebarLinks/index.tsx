@@ -4,7 +4,9 @@ import {
   faSlidersH,
   faStore,
   faUser,
-  faUniversalAccess
+  faUniversalAccess,
+  faUserAlt,
+  faWineGlass
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
@@ -12,21 +14,13 @@ import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
-import { faUserAlt, faWineGlass } from '@fortawesome/free-solid-svg-icons'
 import { openDiscordLink, getGameInfo } from 'frontend/helpers'
 
 import ContextProvider from 'frontend/state/ContextProvider'
 import { Runner, GameInfo } from 'common/types'
 import './index.css'
 import QuitButton from '../QuitButton'
-
-interface LocationState {
-  fromGameCard: boolean
-  hasCloudSave: boolean
-  runner: Runner
-  isLinuxNative: boolean
-  isMacNative: boolean
-}
+import { LocationState } from 'frontend/types'
 
 type PathSplit = [
   a: undefined,
@@ -69,7 +63,7 @@ export default function SidebarLinks() {
   const loggedIn = epic.username || gog.username
 
   useEffect(() => {
-    if (!runner || runner === 'app') {
+    if (!runner || runner === 'app' || !appName) {
       setIsDefaultSetting(true)
       setGameInfo({ ...gameInfo, cloud_save_enabled: false })
       setSettingsPath('/settings/app/default/general')
@@ -141,7 +135,6 @@ export default function SidebarLinks() {
           </>
         </NavLink>
       )}
-
       <div className="SidebarItemWithSubmenu">
         <NavLink
           className={({ isActive }) =>

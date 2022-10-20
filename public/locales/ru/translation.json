@@ -18,7 +18,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Кэш HyperPlay очищен.",
+            "message": "Кэш Heroic очищен.",
             "title": "Кэш очищен"
         },
         "choose": "Выбрать",
@@ -61,7 +61,7 @@
             "launchAborted": "Launch aborted",
             "title": "Ошибка",
             "uncaught-exception": {
-                "message": "Произошло необрабатываемое исключение:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay будет закрыт! Сообщите об исключении в нашем репозитории Github.",
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Произошло необрабатываемое исключение!"
             },
             "update": {
@@ -69,6 +69,7 @@
                 "title": "Ошибка обновления"
             },
             "wine-not-found": {
+                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
                 "message": "Не выбрана версия Wine. Проверьте настройки игры!",
                 "title": "Wine не найден"
             },
@@ -82,8 +83,8 @@
                 "changelog": "Открыть список изменений",
                 "detail": "Хотите загрузить обновление в фоновом режиме?",
                 "message": "Доступна новая версия!",
-                "message-finished": "Хотите перезапустить HyperPlay сейчас?",
-                "title": "HyperPlay",
+                "message-finished": "Хотите перезапустить Heroic сейчас?",
+                "title": "Heroic Games Launcher",
                 "title-finished": "Обновление завершено"
             }
         },
@@ -98,10 +99,10 @@
             "message": "Есть незавершенные операции. Вы уверены?",
             "title": "Выйти"
         },
-        "reset-hyperplay": {
+        "reset-heroic": {
             "question": {
-                "message": "Вы уверены, что хотите сбросить HyperPlay? Это удалит все настройки и кэширование, но не удалит установленные игры или учетные данные Epic. Портативные версии (AppImage, WinPortable, ...) HyperPlay после этого необходимо перезапустить вручную.",
-                "title": "Сброс HyperPlay"
+                "message": "Вы уверены, что хотите сбросить Heroic? Это удалит все настройки и кэширование, но не удалит установленные игры или учетные данные Epic. Портативные версии (AppImage, WinPortable, ...) Heroic после этого необходимо перезапустить вручную.",
+                "title": "Сброс Heroic"
             }
         },
         "runexe": {
@@ -175,6 +176,7 @@
         "offline-notification-title": "офлайн"
     },
     "Epic Games": "Epic Games",
+    "error": "Error",
     "favourites": "Избранное",
     "game": {
         "status": "Состояние",
@@ -207,7 +209,7 @@
         "esync": "Esync направлен на снижение лишней нагрузки wineserver в играх с интенсивным использованием процессора. Включение может улучшить производительность.",
         "fsync": "Fsync направлен на снижение лишней нагрузки wineserver в играх с интенсивным использованием процессора. Включение может улучшить производительность на совместимых ядрах Linux.",
         "game_language": {
-            "fallback": "Оставьте пустым, чтобы использовать язык HyperPlay.",
+            "fallback": "Оставьте пустым, чтобы использовать язык Heroic.",
             "in_game_config": "Не все игры поддерживают эту конфигурацию, некоторые имеют внутриигровую настройку языка.",
             "valid_codes": "Допустимые коды языков зависят от игры."
         },
@@ -223,25 +225,28 @@
         "preferSystemLibs": "Пользовательские версии Wine (Wine-GE, Wine-Lutris) поставляются со своими библиотечными зависимостями. При включении этой опции эти поставляемые библиотеки будут игнорироваться, и Wine будет загружать системные библиотеки вместо них. Внимание! При несоблюдении зависимостей могут возникнуть проблемы.",
         "primerun": "Использовать выделенную видеокарту для рендеринга игры в системах с несколькими GPU. Необходимо только для игровых ноутбуков или настольных компьютеров, использующих для рендеринга headless GPU (NVIDIA Optimus, AMD CrossFire)",
         "resizablebar": "NVIDIA's Resizable Bar помогает повысить частоту кадров, предоставляя ЦП доступ ко всему графическому буферу. Включение может повысить производительность в играх на базе Vulkan.",
+        "steam_path": {
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+        },
         "steamruntime": "Пользовательские библиотеки, предоставляемые Steam для запуска игр для Linux и Windows (Proton). Включение может улучшить совместимость.",
         "sync": {
-            "part1": "HyperPlay пытается угадать правильную папку для сохранения, и это сработает в большинстве случаев. В случае, если папка неправильная, используйте поле переопределения, чтобы изменить ее.",
-            "part2": "Если вы измените папку префиксов для Wine или Proton, вам нужно будет снова проверить путь, поскольку Proton использует другой префикс (/pfx) и имя пользователя (steamuser). Таким образом, вы можете просто стереть текущий путь, выйти из страницы настроек синхронизации и вернуться, чтобы HyperPlay еще раз угадал папку с правильным префиксом.",
+            "part1": "Heroic пытается угадать правильную папку для сохранения, и это сработает в большинстве случаев. В случае, если папка неправильная, используйте поле переопределения, чтобы изменить ее.",
+            "part2": "Если вы измените папку префиксов для Wine или Proton, вам нужно будет снова проверить путь, поскольку Proton использует другой префикс (/pfx) и имя пользователя (steamuser). Таким образом, вы можете просто стереть текущий путь, выйти из страницы настроек синхронизации и вернуться, чтобы Heroic еще раз угадал папку с правильным префиксом.",
             "part3": "Ручная синхронизация: выберите «Скачать», чтобы скачать сохраненные игры, хранящиеся в облаке. «Загрузить», чтобы загрузить локальные в облако. Принудительное скачивание и принудительная загрузка игнорируют версию, которая находится локально или в облаке.",
             "part4": "Синхронизация сохранений автоматически синхронизирует сохранения каждый раз при запуске игры и после завершения игры."
         },
         "vkd3d": "VKD3D - это транслятор вызовов в Vulkan для игр с DirectX 12. Его включение может значительно улучшить совместимость. Не влияет на игры со старым DirectX.",
         "wine": {
-            "part1": "HyperPlay ищет версии Wine, Proton и CrossOver в следующих папках:",
+            "part1": "Heroic ищет версии Wine, Proton и CrossOver в следующих папках:",
             "part2": "Для других мест используйте символическую ссылку на одну из этих папок"
         }
     },
     "info": {
-        "hyperplay": {
+        "heroic": {
             "beta": "Beta",
             "newReleases": "Доступно обновление!",
             "stable": "Стабильный",
-            "version": "Версия HyperPlay"
+            "version": "Версия Heroic"
         },
         "settings": "Настройки сохраняются автоматически",
         "version": "Версия Wine"
@@ -313,7 +318,7 @@
         },
         "moved": "Перемещение завершено",
         "moving": "Перемещение игры",
-        "new-hyperplay-version": "Вышла новая версия HyperPlay!",
+        "new-heroic-version": "Вышла новая версия Heroic!",
         "refresh": {
             "error": "Не удалось получить выпуски из основной ветки разработки, возможно, из-за ограничений Github API! Попробуйте позже."
         },
@@ -323,6 +328,12 @@
             "finished": "Обновление завершено",
             "started": "Обновление началось"
         }
+    },
+    "offline-message": {
+        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "retrying": "Retrying"
     },
     "options": {
         "advanced": {
@@ -358,7 +369,7 @@
     "other": {
         "gogdl-version": "Версия GOGDL : ",
         "legendary-version": "Версия Legendary: ",
-        "weblate": "Помогите перевести HyperPlay."
+        "weblate": "Помогите перевести Heroic."
     },
     "placeholder": {
         "alt-gogdl-bin": "Используется встроенный GOGDL...",
@@ -377,6 +388,7 @@
     "setting": {
         "adddesktopshortcuts": "Создать ярлыки на рабочем столе автоматически",
         "addgamestostartmenu": "Добавить игры в меню приложений автоматически",
+        "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Выбрать другой исполняемый файл GOGDL",
         "alt-legendary-bin": "Выбрать другой исполняемый файл Legendary",
         "audiofix": "Фикс аудио (Задержка Pulse Audio)",
@@ -384,14 +396,14 @@
         "autosync": "Автосинхронизация сохранений",
         "autovkd3d": "Автоматически устанавливать/обновлять VKD3D в префиксе",
         "change-target-exe": "Выбрать другой EXE для запуска",
-        "checkForUpdatesOnStartup": "Проверять обновления HyperPlay при запуске",
+        "checkForUpdatesOnStartup": "Проверять обновления Heroic при запуске",
         "crossover-version": "Версия Crossover",
         "customWineProton": "Пользовательские пути Wine/Proton",
         "darktray": "Использовать темную иконку в трее",
         "default-install-path": "Стандартный путь установки",
         "default-steam-path": "Путь к Steam по умолчанию",
         "defaultWinePrefix": "Указать папку для новых префиксов Wine",
-        "disable_controller": "Отключить навигацию в HyperPlay с помощью контроллера",
+        "disable_controller": "Отключить навигацию в Heroic с помощью контроллера",
         "discordRPC": "Включить Discord Rich Presence",
         "download-no-https": "Скачивание игр без HTTPS (полезно для CDN, например, LanCache)",
         "egs-sync": "Синхронизировать с установленнными играми EGS",
@@ -450,7 +462,7 @@
         },
         "maxRecentGames": "Показывать недавно запускавшихся игр",
         "maxworkers": "Максимальное количество потоков при скачивании",
-        "minimize-on-launch": "Сворачивать HyperPlay в трей при запуске игры",
+        "minimize-on-launch": "Сворачивать Heroic в трей при запуске игры",
         "offlinemode": "Запускать игру офлайн",
         "prefered_language": "Предпочтительный язык (код языка)",
         "preferSystemLibs": "Предпочитать системные библиотеки",
@@ -476,7 +488,7 @@
             "installing": "Установка среды выполнения BattlEye...",
             "name": "Среда выполнения BattlEye AntiCheat"
         },
-        "clear-cache": "Очистить кэш HyperPlay",
+        "clear-cache": "Очистить кэш Heroic",
         "copiedToClipboard": "Скопировано в буфер обмена!",
         "copyToClipboard": "Скопировать все настройки в буфер обмена",
         "eacRuntime": {
@@ -505,7 +517,7 @@
             "wineExt": "Расширения Wine"
         },
         "open-config-file": "Открыть файл конфигурации",
-        "reset-hyperplay": "Сброс HyperPlay",
+        "reset-heroic": "Сброс Heroic",
         "saves": {
             "label": "Место сохранения:",
             "warning": "Функция облачных сохранений находится в стадии бета-тестирования, сделайте резервную копию ваших сохранений перед синхронизацией (на случай, если что-то пойдет не так)"
@@ -551,7 +563,7 @@
         "logout": "Выйти из аккаунта",
         "logout_confirmation": "Вы уверены, что хотите выйти?",
         "manageaccounts": "Аккаунты",
-        "quit": "Закрыть HyperPlay"
+        "quit": "Закрыть Heroic"
     },
     "webview": {
         "controls": {

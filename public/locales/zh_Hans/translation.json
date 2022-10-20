@@ -18,7 +18,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "HyperPlay 缓存已清理。",
+            "message": "Heroic 缓存已清理。",
             "title": "缓存已清理"
         },
         "choose": "选择",
@@ -61,7 +61,7 @@
             "launchAborted": "Launch aborted",
             "title": "错误",
             "uncaught-exception": {
-                "message": "发生了未捕获的异常：{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay 将被关闭！在我们的 Github 仓库报告这个异常。",
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "发生了未捕获的异常！"
             },
             "update": {
@@ -69,6 +69,7 @@
                 "title": "更新错误"
             },
             "wine-not-found": {
+                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
                 "message": "未选择 Wine 版本。检查游戏设置！",
                 "title": "未找到 Wine"
             },
@@ -82,8 +83,8 @@
                 "changelog": "打开更新日志",
                 "detail": "你想在后台下载更新吗？",
                 "message": "有新版本可用！",
-                "message-finished": "你想立即重启 HyperPlay 吗？",
-                "title": "HyperPlay 游戏启动器",
+                "message-finished": "你想立即重启 Heroic 吗？",
+                "title": "Heroic 游戏启动器",
                 "title-finished": "更新已完成"
             }
         },
@@ -98,10 +99,10 @@
             "message": "有待处理的操作，你确定吗？",
             "title": "退出"
         },
-        "reset-hyperplay": {
+        "reset-heroic": {
             "question": {
-                "message": "你确定要重置 HyperPlay 吗？这会删除所有设置和缓存但不会删除你已安装的游戏或你的 Epic 凭据。便携版本 (AppImage, WinPortable, ...) 的 hyperplay 需要稍后手动重启。",
-                "title": "重置 HyperPlay"
+                "message": "你确定要重置 Heroic 吗？这会删除所有设置和缓存但不会删除你已安装的游戏或你的 Epic 凭据。便携版本 (AppImage, WinPortable, ...) 的 heroic 需要稍后手动重启。",
+                "title": "重置 Heroic"
             }
         },
         "runexe": {
@@ -175,6 +176,7 @@
         "offline-notification-title": "离线"
     },
     "Epic Games": "Epic 游戏",
+    "error": "Error",
     "favourites": "最爱",
     "game": {
         "status": "状态",
@@ -207,7 +209,7 @@
         "esync": "Esync 的目标是在 CPU 消耗很大的游戏中减少 wineserver 的开销。启用可能会提高性能。",
         "fsync": "Fsync 的目标是在 CPU 开销很大的游戏中减少 wineserver 的开销。启用可能会提高受支持的 Linux 内核的性能。",
         "game_language": {
-            "fallback": "留空使用 HyperPlay 的语言。",
+            "fallback": "留空使用 Heroic 的语言。",
             "in_game_config": "不是所有游戏都支持此配置，一些有游戏内语言设置。",
             "valid_codes": "有效语言代码取决于游戏。"
         },
@@ -223,25 +225,28 @@
         "preferSystemLibs": "自定义 Wine 版本(Wine- ge、Wine- lutris)随它们的库依赖项一起发布。启用此选项，这些附带的库将被忽略，Wine 将加载系统库。警告！如果不满足依赖关系，可能会出现问题。",
         "primerun": "在多 GPU 系统上使用独立显卡渲染游戏。仅适用于使用无头 GPU 进行渲染的游戏笔记本或台式机 (NVIDIA Optimus, AMD CrossFire)",
         "resizablebar": "NVIDIA 的 Resizable Bar 通过让 CPU 访问整个图形缓冲区来提高帧率。启用可能会提高基于 Vulkan 的游戏的性能。",
+        "steam_path": {
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+        },
         "steamruntime": "Steam 提供的用于帮助运行 Linux 和 Windows（Proton）游戏的自定义库。启用可能会提高兼容性。",
         "sync": {
-            "part1": "大多数情况下，HyperPlay 启动器会正确猜测的存档的位置。但如果位置是错误的，请使用覆盖框更改。",
-            "part2": "如果你改变了 Wine 或 Proton 的文件夹，你将需要再次检查路径，因为 Proton 使用不同的前置（/pfx）和用户名（steamuser）。很简单，你可以直接删除当前的路径，离开同步设置页面再回来，HyperPlay 会去重新猜测正确前置的文件夹。",
+            "part1": "大多数情况下，Heroic 启动器会正确猜测的存档的位置。但如果位置是错误的，请使用覆盖框更改。",
+            "part2": "如果你改变了 Wine 或 Proton 的文件夹，你将需要再次检查路径，因为 Proton 使用不同的前置（/pfx）和用户名（steamuser）。很简单，你可以直接删除当前的路径，离开同步设置页面再回来，Heroic 会去重新猜测正确前置的文件夹。",
             "part3": "手动同步：选择下载以下载存储在云端的存档。选择上传将会把本地存档上传到云端。强制下载将会忽略本地版本，强制上传将会忽略云端版本。",
             "part4": "自动同步将在你每次开始游戏时和结束游戏后同步存档。"
         },
         "vkd3d": "VKD3D 是一个基于 Vulkan 的转换层，用于 DirectX 12 游戏。启用可能会显著提高兼容性。对老的 DirectX 游戏没有效果。",
         "wine": {
-            "part1": "HyperPlay 启动器会在以下文件夹中查找现有的 Wine/Proton/CrossOver：",
+            "part1": "Heroic 启动器会在以下文件夹中查找现有的 Wine/Proton/CrossOver：",
             "part2": "如果在其它位置，请使用软链接连接到这些中的一个文件夹"
         }
     },
     "info": {
-        "hyperplay": {
+        "heroic": {
             "beta": "Beta",
             "newReleases": "更新可用！",
             "stable": "稳定版",
-            "version": "HyperPlay 版本"
+            "version": "Heroic 版本"
         },
         "settings": "设置会自动保存",
         "version": "Wine 版本"
@@ -313,7 +318,7 @@
         },
         "moved": "移动完成",
         "moving": "移动游戏中",
-        "new-hyperplay-version": "新的 HyperPlay 版本发布了！",
+        "new-heroic-version": "新的 Heroic 版本发布了！",
         "refresh": {
             "error": "不能从上游获取发布，可能是因为 Github API 的限制！请稍后再试。"
         },
@@ -323,6 +328,12 @@
             "finished": "更新已完成",
             "started": "更新已开始"
         }
+    },
+    "offline-message": {
+        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "retrying": "Retrying"
     },
     "options": {
         "advanced": {
@@ -358,7 +369,7 @@
     "other": {
         "gogdl-version": "GOGDL 版本： ",
         "legendary-version": "Legendary 版本： ",
-        "weblate": "请帮助翻译 HyperPlay。"
+        "weblate": "帮助翻译 Heroic。"
     },
     "placeholder": {
         "alt-gogdl-bin": "使用内置的 GOGDL 二进制文件...",
@@ -377,6 +388,7 @@
     "setting": {
         "adddesktopshortcuts": "自动添加桌面快捷方式",
         "addgamestostartmenu": "自动添加到启动菜单快捷方式",
+        "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "选择要使用的备选 GOGDL 二进制文件",
         "alt-legendary-bin": "选择备选的 Legendary 二进制文件",
         "audiofix": "音频修复（Pulse Audio延迟）",
@@ -384,14 +396,14 @@
         "autosync": "自动同步存档",
         "autovkd3d": "自动在前置中安装/更新 VKD3D",
         "change-target-exe": "选择要运行的替代 EXE",
-        "checkForUpdatesOnStartup": "启动时检查 HyperPlay 更新",
+        "checkForUpdatesOnStartup": "启动时检查 Heroic 更新",
         "crossover-version": "Crossover 版本",
         "customWineProton": "自定义 Wine/Proton 路径",
         "darktray": "使用暗色托盘图标",
         "default-install-path": "默认安装路径",
         "default-steam-path": "默认 Steam 路径",
         "defaultWinePrefix": "为新的 WinePrefix设置文件夹",
-        "disable_controller": "使用控制器禁止 HyperPlay 导航",
+        "disable_controller": "使用控制器禁止 Heroic 导航",
         "discordRPC": "启用Discord的Rich Presence（活动状态）",
         "download-no-https": "不使用 HTTPS 下载游戏 (对 LanCache 等 CDN 有用)",
         "egs-sync": "与已安装的 Epic 游戏同步",
@@ -450,7 +462,7 @@
         },
         "maxRecentGames": "要显示的最近玩过的游戏",
         "maxworkers": "下载时的最大线程数量",
-        "minimize-on-launch": "游戏启动后最小化 HyperPlay",
+        "minimize-on-launch": "游戏启动后最小化 Heroic",
         "offlinemode": "离线运行游戏",
         "prefered_language": "首选语言 (语言代码)",
         "preferSystemLibs": "首选系统库",
@@ -476,7 +488,7 @@
             "installing": "安装 BattlEye 运行时中...",
             "name": "BattlEye 反作弊运行时"
         },
-        "clear-cache": "清理 HyperPlay 缓存",
+        "clear-cache": "清理 Heroic 缓存",
         "copiedToClipboard": "已复制到剪贴板！",
         "copyToClipboard": "复制所有设置到剪贴板",
         "eacRuntime": {
@@ -505,7 +517,7 @@
             "wineExt": "Wine 扩展"
         },
         "open-config-file": "打开配置文件",
-        "reset-hyperplay": "重置 HyperPlay",
+        "reset-heroic": "重置 Heroic",
         "saves": {
             "label": "存档位置：",
             "warning": "云存档功能处于测试期，请在同步前备份你的存档（以防出现问题）"

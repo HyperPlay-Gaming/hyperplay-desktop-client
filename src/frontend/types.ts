@@ -1,5 +1,12 @@
 import { VersionInfo } from 'heroic-wine-downloader'
-import { GameInfo, GameStatus, Runner } from 'common/types'
+import {
+  AppSettings,
+  GameInfo,
+  GameSettings,
+  GameStatus,
+  Runner,
+  ConnectivityStatus
+} from 'common/types'
 
 export type Category = 'all' | 'legendary' | 'gog'
 
@@ -63,6 +70,7 @@ export interface ContextType {
   setSideBarCollapsed: (value: boolean) => void
   sidebarCollapsed: boolean
   activeController: string
+  connectivity: { status: ConnectivityStatus; retryIn: number }
   setSecondaryFontFamily: (newFontFamily: string, saveToFile?: boolean) => void
   setPrimaryFontFamily: (newFontFamily: string, saveToFile?: boolean) => void
 }
@@ -185,7 +193,30 @@ interface AntiCheatReference {
 }
 
 declare global {
+  interface Window {
+    imageData: (
+      src: string,
+      canvas_width: number,
+      canvas_height: number
+    ) => Promise<string>
+  }
   interface WindowEventMap {
     'controller-changed': CustomEvent<{ controllerId: string }>
   }
+}
+
+export interface SettingsContextType {
+  getSetting: (key: string) => unknown
+  setSetting: (key: string, value: unknown) => void
+  config: AppSettings | GameSettings | null
+  isDefault: boolean
+  appName: string
+  runner: Runner
+}
+
+export interface LocationState {
+  fromGameCard: boolean
+  runner: Runner
+  isLinuxNative: boolean
+  isMacNative: boolean
 }

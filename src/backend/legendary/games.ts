@@ -1,7 +1,7 @@
 import { appendFileSync, existsSync, mkdirSync } from 'graceful-fs'
 import axios from 'axios'
 
-import { BrowserWindow, dialog } from 'electron'
+import { BrowserWindow } from 'electron'
 import {
   ExecResult,
   ExtraInfo,
@@ -12,16 +12,16 @@ import {
 import { Game } from '../games'
 import { GameConfig } from '../game_config'
 import { GlobalConfig } from '../config'
-import { LegendaryLibrary } from './library'
+import { LegendaryLibrary, runLegendaryCommand } from './library'
 import { LegendaryUser } from './user'
-import { execAsync, getLegendaryBin, isOnline, killPattern } from '../utils'
+import { execAsync, getLegendaryBin, killPattern } from '../utils'
 import {
-  gamesConfigPath,
   userHome,
   isMac,
   isWindows,
   installed,
-  configStore
+  configStore,
+  gamesConfigPath
 } from '../constants'
 import { logError, logInfo, LogPrefix } from '../logger/logger'
 import {
@@ -35,11 +35,12 @@ import {
 } from '../launcher'
 import { addShortcuts, removeShortcuts } from '../shortcuts/shortcuts/shortcuts'
 import { basename, join } from 'path'
-import { runLegendaryCommand } from './library'
 import { gameInfoStore } from './electronStores'
 import { removeNonSteamGame } from '../shortcuts/nonesteamgame/nonesteamgame'
 import shlex from 'shlex'
 import { t } from 'i18next'
+import { isOnline } from '../online_monitor'
+import { showErrorBoxModalAuto } from '../dialog/dialog'
 
 class LegendaryGame extends Game {
   public appName: string
@@ -83,7 +84,7 @@ class LegendaryGame extends Game {
           `${this.appName},`,
           'returning empty object. Something is probably gonna go wrong soon'
         ],
-        LogPrefix.Legendary
+        { prefix: LogPrefix.Legendary }
       )
       // @ts-expect-error TODO: Handle this better
       return {}
@@ -155,7 +156,7 @@ class LegendaryGame extends Game {
       try {
         productSlug = await this.getProductSlug(namespace)
       } catch (error) {
-        logError(`${error}`, LogPrefix.Legendary)
+        logError(error, { prefix: LogPrefix.Legendary })
         productSlug = this.appName
       }
       epicUrl = `https://store-content.ak.epicgames.com/api/${lang}/content/products/${productSlug}`
@@ -167,7 +168,7 @@ class LegendaryGame extends Game {
         method: 'GET',
         url: epicUrl
       })
-      logInfo('Getting Info from Epic API', LogPrefix.Legendary)
+      logInfo('Getting Info from Epic API', { prefix: LogPrefix.Legendary })
 
       const about = data.pages.find(
         (e: { type: string }) => e.type === 'productHome'
@@ -182,7 +183,9 @@ class LegendaryGame extends Game {
         reqs: about.data.requirements.systems[0].details
       }
     } catch (error) {
-      logError('Error Getting Info from Epic API', LogPrefix.Legendary)
+      logError('Error Getting Info from Epic API', {
+        prefix: LogPrefix.Legendary
+      })
 
       gameInfoStore.set(namespace, { about: {}, reqs: [] })
       return {
@@ -233,10 +236,9 @@ class LegendaryGame extends Game {
 
     const command = `mv -f '${oldInstallPath}' '${newInstallPath}'`
 
-    logInfo(
-      [`Moving ${this.appName} to ${newInstallPath} with`, command],
-      LogPrefix.Legendary
-    )
+    logInfo([`Moving ${this.appName} to ${newInstallPath} with`, command], {
+      prefix: LogPrefix.Legendary
+    })
 
     await execAsync(command)
       .then(async () => {
@@ -246,10 +248,9 @@ class LegendaryGame extends Game {
         )
       })
       .catch((error) => {
-        logError(
-          `Failed to move ${this.appName}: ${error}`,
-          LogPrefix.Legendary
-        )
+        logError([`Failed to move ${this.appName}:`, error], {
+          prefix: LogPrefix.Legendary
+        })
       })
     return newInstallPath
   }
@@ -297,7 +298,7 @@ class LegendaryGame extends Game {
         `Progress for ${this.appName}:`,
         `${percent}%/${bytes}MiB/${eta}`.trim()
       ],
-      LogPrefix.Legendary
+      { prefix: LogPrefix.Legendary }
     )
 
     this.window.webContents.send('setGameStatus', {
@@ -353,10 +354,9 @@ class LegendaryGame extends Game {
     })
 
     if (res.error) {
-      logError(
-        ['Failed to update', `${this.appName}:`, res.error],
-        LogPrefix.Legendary
-      )
+      logError(['Failed to update', `${this.appName}:`, res.error], {
+        prefix: LogPrefix.Legendary
+      })
       return { status: 'error' }
     }
     return { status: 'done' }
@@ -453,13 +453,13 @@ class LegendaryGame extends Game {
 
     if (res.error) {
       if (!res.error.includes('signal')) {
-        logError(
-          ['Failed to install', `${this.appName}:`, res.error],
-          LogPrefix.Legendary
-        )
+        logError(['Failed to install', `${this.appName}:`, res.error], {
+          prefix: LogPrefix.Legendary
+        })
       }
       return { status: 'error' }
     }
+    this.addShortcuts()
     return { status: 'done' }
   }
 
@@ -471,20 +471,14 @@ class LegendaryGame extends Game {
     })
 
     if (res.error) {
-      logError(
-        ['Failed to uninstall', `${this.appName}:`, res.error],
-        LogPrefix.Legendary
-      )
+      logError(['Failed to uninstall', `${this.appName}:`, res.error], {
+        prefix: LogPrefix.Legendary
+      })
     } else {
       LegendaryLibrary.get().installState(this.appName, false)
       await removeShortcuts(this.appName, 'legendary')
       const gameInfo = this.getGameInfo()
-      const { defaultSteamPath } = await GlobalConfig.get().getSettings()
-      const steamUserdataDir = join(
-        defaultSteamPath.replaceAll("'", ''),
-        'userdata'
-      )
-      await removeNonSteamGame({ steamUserdataDir, gameInfo })
+      await removeNonSteamGame({ gameInfo })
     }
     return res
   }
@@ -509,10 +503,9 @@ class LegendaryGame extends Game {
     })
 
     if (res.error) {
-      logError(
-        ['Failed to repair', `${this.appName}:`, res.error],
-        LogPrefix.Legendary
-      )
+      logError(['Failed to repair', `${this.appName}:`, res.error], {
+        prefix: LogPrefix.Legendary
+      })
     }
     return res
   }
@@ -520,15 +513,14 @@ class LegendaryGame extends Game {
   public async import(path: string): Promise<ExecResult> {
     const commandParts = ['import', this.appName, path]
 
-    logInfo(`Importing ${this.appName}.`, LogPrefix.Legendary)
+    logInfo(`Importing ${this.appName}.`, { prefix: LogPrefix.Legendary })
 
     const res = await runLegendaryCommand(commandParts)
 
     if (res.error) {
-      logError(
-        ['Failed to import', `${this.appName}:`, res.error],
-        LogPrefix.Legendary
-      )
+      logError(['Failed to import', `${this.appName}:`, res.error], {
+        prefix: LogPrefix.Legendary
+      })
     }
     return res
   }
@@ -561,10 +553,9 @@ class LegendaryGame extends Game {
     })
 
     if (res.error) {
-      logError(
-        ['Failed to sync saves for', `${this.appName}:`, res.error],
-        LogPrefix.Legendary
-      )
+      logError(['Failed to sync saves for', `${this.appName}:`, res.error], {
+        prefix: LogPrefix.Legendary
+      })
     }
     return res
   }
@@ -587,10 +578,10 @@ class LegendaryGame extends Game {
         this.logFileLocation,
         `Launch aborted: ${launchPrepFailReason}`
       )
-      dialog.showErrorBox(
-        t('box.error.launchAborted', 'Launch aborted'),
-        launchPrepFailReason!
-      )
+      showErrorBoxModalAuto({
+        title: t('box.error.launchAborted', 'Launch aborted'),
+        error: launchPrepFailReason!
+      })
       return false
     }
 
@@ -619,10 +610,12 @@ class LegendaryGame extends Game {
           this.logFileLocation,
           `Launch aborted: ${wineLaunchPrepFailReason}`
         )
-        dialog.showErrorBox(
-          t('box.error.launchAborted', 'Launch aborted'),
-          wineLaunchPrepFailReason!
-        )
+        if (wineLaunchPrepFailReason) {
+          showErrorBoxModalAuto({
+            title: t('box.error.launchAborted', 'Launch aborted'),
+            error: wineLaunchPrepFailReason
+          })
+        }
         return false
       }
 
@@ -645,6 +638,24 @@ class LegendaryGame extends Game {
           : ['--wine', wineBin])
       )
     }
+
+    // Log any launch information configured in Legendary's config.ini
+    const { stdout } = await runLegendaryCommand([
+      'launch',
+      this.appName,
+      '--json',
+      '--offline'
+    ])
+    appendFileSync(
+      this.logFileLocation,
+      "Legendary's config from config.ini (before Heroic's settings):\n"
+    )
+    const json = JSON.parse(stdout)
+    // remove egl auth info
+    delete json['egl_parameters']
+
+    appendFileSync(this.logFileLocation, JSON.stringify(json, null, 2) + '\n\n')
+
     const commandParts = [
       'launch',
       this.appName,
@@ -686,11 +697,10 @@ class LegendaryGame extends Game {
 
     if (error) {
       const showDialog = !`${error}`.includes('appears to be deleted')
-      logError(
-        ['Error launching game:', error],
-        LogPrefix.Legendary,
+      logError(['Error launching game:', error], {
+        prefix: LogPrefix.Legendary,
         showDialog
-      )
+      })
     }
 
     launchCleanup(rpcClient)
@@ -704,7 +714,9 @@ class LegendaryGame extends Game {
     forceRunInPrefixVerb = false
   ): Promise<ExecResult> {
     if (this.isNative()) {
-      logError('runWineCommand called on native game!', LogPrefix.Legendary)
+      logError('runWineCommand called on native game!', {
+        prefix: LogPrefix.Legendary
+      })
       return { stdout: '', stderr: '' }
     }
 
@@ -747,10 +759,9 @@ class LegendaryGame extends Game {
         BrowserWindow.getFocusedWindow() ?? BrowserWindow.getAllWindows()[0]
       mainWindow.webContents.send('refreshLibrary', 'legendary')
     } catch (error) {
-      logError(
-        `Error reading ${installed}, could not complete operation`,
-        LogPrefix.Legendary
-      )
+      logError(`Error reading ${installed}, could not complete operation`, {
+        prefix: LogPrefix.Legendary
+      })
     }
   }
 }

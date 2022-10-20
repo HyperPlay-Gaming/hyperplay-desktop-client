@@ -18,7 +18,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "El caché de HyperPlay ha sido limpiado.",
+            "message": "El caché de Heroic ha sido limpiado.",
             "title": "Caché borrado"
         },
         "choose": "Elegir",
@@ -61,7 +61,7 @@
             "launchAborted": "Launch aborted",
             "title": "Error",
             "uncaught-exception": {
-                "message": "Ocurrió un error:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay va a ser cerrado! Reporta el error en nuestro repositorio de Github.",
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "¡Ocurrió un error!"
             },
             "update": {
@@ -69,6 +69,7 @@
                 "title": "Error al actualizar"
             },
             "wine-not-found": {
+                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
                 "message": "No se ha seleccionado la versión de Wine. ¡Comprueba la configuración del juego!",
                 "title": "No se ha encontrado Wine"
             },
@@ -82,8 +83,8 @@
                 "changelog": "Abrir registro de cambios",
                 "detail": "¿Quiere descargar la actualización en segundo plano?",
                 "message": "¡Hay una nueva versión disponible!",
-                "message-finished": "¿Quiere reiniciar HyperPlay ahora?",
-                "title": "HyperPlay",
+                "message-finished": "¿Quiere reiniciar Heroic ahora?",
+                "title": "Heroic Games Launcher",
                 "title-finished": "Actualización finalizada"
             }
         },
@@ -98,10 +99,10 @@
             "message": "Hay operaciones pendientes, ¿estás seguro?",
             "title": "Salir"
         },
-        "reset-hyperplay": {
+        "reset-heroic": {
             "question": {
-                "message": "¿Está seguro que quiere restablecer HyperPlay? Esto removerá todas las configuraciones y caché pero no removerá los juegos installados ni las credenciales. Versiones portables (AppImage, WinPortable, ...) de HyperPlay tienen que ser iniciadas manualmente luego de ejecutar esta acción.",
-                "title": "Restablecer HyperPlay"
+                "message": "¿Está seguro que quiere restablecer Heroic? Esto removerá todas las configuraciones y caché pero no removerá los juegos installados ni las credenciales. Versiones portables (AppImage, WinPortable, ...) de Heroic tienen que ser iniciadas manualmente luego de ejecutar esta acción.",
+                "title": "Restablecer Heroic"
             }
         },
         "runexe": {
@@ -175,6 +176,7 @@
         "offline-notification-title": "Sin conexión"
     },
     "Epic Games": "Epic Games",
+    "error": "Error",
     "favourites": "Favoritos",
     "game": {
         "status": "Estado",
@@ -207,7 +209,7 @@
         "esync": "Esync intenta reducir la sobrecarga de wineserver en juegos con intenso uso de CPU. Activarlo puede mejorar el rendimiento.",
         "fsync": "Fsync intenta reducir la sobrecarga de wineserver en juegos con uso intensivo de CPU. Activarlo puede mejorar el rendimiento en kernels de Linux que lo soporten.",
         "game_language": {
-            "fallback": "Dejar en blanco para usar el lenguage de HyperPlay.",
+            "fallback": "Dejar en blanco para usar el lenguage de Heroic.",
             "in_game_config": "No todos los juegos soportan esta configuración, algunos tienen configuración del lenguage dentro del juego.",
             "valid_codes": "Códigos de lenguaje válidos varian dependiendo del juego."
         },
@@ -223,10 +225,13 @@
         "preferSystemLibs": "Versiones custom de Wine (Wine-GE, Wine-Lutris) incluyen sus propias librerías para sus dependencias. Al activar esta opción, esa librarías son ignoradas y Wine cargará las librarías del sistema en su lugar. Advertencia! Pueden ocurrir errores si las dependencias no se cumplen.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
         "resizablebar": "NVIDIA's Resizable Bar ayuda a mejorar los cuadros por segundo haciendo que la CPU tenga acceso a la totalidad del buffer gráficor. Activarlo puede mejorar el rendimiento para juegos basados en Vulkan.",
+        "steam_path": {
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+        },
         "steamruntime": "Librerías provistas por Steam para ayudar a ejecutar juegos de Linux y Windows (Proton). Activarlas puede mejorar la compatibilidad.",
         "sync": {
-            "part1": "HyperPlay intenta adivinar la carpeta de guardado correcta y esto funcionará en la mayoría de los casos. En caso de que la carpeta sea incorrecta, use el cuadro de sobreescritura para cambiarla.",
-            "part2": "En caso de que cambie la carpeta del prefijo de Wine o Proton, deberá verificar la ruta nuevamente, ya que Proton usa un prefijo (/pfx) y un nombre de usuario (steamuser) diferentes. Por lo tanto, puede borrar la ruta actual, salir de la página de configuración de sincronización y volver para que HyperPlay adivine la carpeta una vez más con el prefijo correcto.",
+            "part1": "Heroic intenta adivinar la carpeta de guardado correcta y esto funcionará en la mayoría de los casos. En caso de que la carpeta sea incorrecta, use el cuadro de sobreescritura para cambiarla.",
+            "part2": "En caso de que cambie la carpeta del prefijo de Wine o Proton, deberá verificar la ruta nuevamente, ya que Proton usa un prefijo (/pfx) y un nombre de usuario (steamuser) diferentes. Por lo tanto, puede borrar la ruta actual, salir de la página de configuración de sincronización y volver para que Heroic adivine la carpeta una vez más con el prefijo correcto.",
             "part3": "Sincronización manual: elija Descargar para descargar los juegos guardados en la nube. Subir para subir los locales a la nube. Forzar descarga y Carga forzada ignorarán la versión local o en la nube.",
             "part4": "Sincronizar guardados automáticamente sincronizará los guardados cada vez que inicie un juego y después de terminar de jugar."
         },
@@ -237,11 +242,11 @@
         }
     },
     "info": {
-        "hyperplay": {
+        "heroic": {
             "beta": "Beta",
             "newReleases": "¡Actualización disponible!",
             "stable": "Estable",
-            "version": "Versión de HyperPlay"
+            "version": "Versión de Heroic"
         },
         "settings": "Los ajustes se guardan automáticamente",
         "version": "Versión de Wine"
@@ -313,7 +318,7 @@
         },
         "moved": "Movimiento terminado",
         "moving": "Moviendo juego",
-        "new-hyperplay-version": "¡Una nueva versión de HyperPlay fue publicada!",
+        "new-heroic-version": "¡Una nueva versión de Heroic fue publicada!",
         "refresh": {
             "error": "No se pudieron descargar las versiones, puede deberse a una limitación en la API de Github! Intente más tarde nuevamente."
         },
@@ -323,6 +328,12 @@
             "finished": "Actualización terminada",
             "started": "Actualización iniciada"
         }
+    },
+    "offline-message": {
+        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "retrying": "Retrying"
     },
     "options": {
         "advanced": {
@@ -358,7 +369,7 @@
     "other": {
         "gogdl-version": "Versión de GOGDL: ",
         "legendary-version": "Versión de Legendary: ",
-        "weblate": "Ayuda a traducir HyperPlay."
+        "weblate": "Ayuda a traducir Heroic."
     },
     "placeholder": {
         "alt-gogdl-bin": "Utilizando el binario incorporado de GOGDL...",
@@ -377,6 +388,7 @@
     "setting": {
         "adddesktopshortcuts": "Añadir accesos directos al escritorio automáticamente",
         "addgamestostartmenu": "Añadir juegos al menú de inicio automáticamente",
+        "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Elige un binario de GOGDL alternativo para usar",
         "alt-legendary-bin": "Elige un binario de Legendary alternativo",
         "audiofix": "Corrección de audio (latencia de Pulseaudio)",
@@ -384,7 +396,7 @@
         "autosync": "Autosincronizar guardados",
         "autovkd3d": "Instalación/actualización automática de VKD3D en el prefijo",
         "change-target-exe": "Seleccione un EXE alternativo para ejecutar",
-        "checkForUpdatesOnStartup": "Comprobar actualizaciones de HyperPlay al iniciar",
+        "checkForUpdatesOnStartup": "Comprobar actualizaciones de Heroic al iniciar",
         "crossover-version": "Versión de Crossover",
         "customWineProton": "Rutas personalizadas de Wine o Proton",
         "darktray": "Utilizar el icono oscuro en la bandeja",
@@ -450,7 +462,7 @@
         },
         "maxRecentGames": "Cantidad de jugados recientemente a mostrar",
         "maxworkers": "Número máximo de procesos al descargar",
-        "minimize-on-launch": "Minimizar HyperPlay al ejecutar un juego",
+        "minimize-on-launch": "Minimizar Heroic al ejecutar un juego",
         "offlinemode": "Ejecutar juego sin conexión",
         "prefered_language": "Lenguaje preferido (Código de Lenguage)",
         "preferSystemLibs": "Preferir librerías del sistema",
@@ -476,7 +488,7 @@
             "installing": "Instalando runtime de BattlEye...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "Borrar la caché de HyperPlay",
+        "clear-cache": "Borrar la caché de Heroic",
         "copiedToClipboard": "¡Copiado en el portapapeles!",
         "copyToClipboard": "Copiar todas las configuraciones al portapapeles",
         "eacRuntime": {
@@ -505,7 +517,7 @@
             "wineExt": "Extensiones de Wine"
         },
         "open-config-file": "Abrir archivo de configuración",
-        "reset-hyperplay": "Restablecer HyperPlay",
+        "reset-heroic": "Restablecer Heroic",
         "saves": {
             "label": "Ubicación de guardados:",
             "warning": "La funcionalidad Cloud Saves es Beta, por favor, respalda tus guardados antes de sincronizar (en caso de que algo salga mal)"

@@ -1,24 +1,20 @@
 import './index.css'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import classNames from 'classnames'
 import { getGameInfo } from 'frontend/helpers'
 
-import { Runner } from 'common/types'
 import { ProgressDialog } from 'frontend/components/UI/ProgressDialog'
+import SettingsContext from '../../SettingsContext'
 
-interface Props {
-  appName: string
-  runner: Runner
-}
-
-export default function Tools({ appName, runner }: Props) {
+export default function Tools() {
   const { t } = useTranslation()
   const [winecfgRunning, setWinecfgRunning] = useState(false)
   const [winetricksRunning, setWinetricksRunning] = useState(false)
   const [progress, setProgress] = useState<string[]>([])
+  const { appName, runner } = useContext(SettingsContext)
 
   type Tool = 'winecfg' | 'winetricks' | string
   async function callTools(tool: Tool, exe?: string) {
@@ -43,12 +39,11 @@ export default function Tools({ appName, runner }: Props) {
       setProgress(messages)
     }
 
-    window.api.handleProgressOfWinetricks(onProgress)
+    const removeWinetricksProgressListener =
+      window.api.handleProgressOfWinetricks(onProgress)
 
     //useEffect unmount
-    return () => {
-      window.api.progressOfWinetricksRemoveListener(onProgress)
-    }
+    return removeWinetricksProgressListener
   }, [])
 
   useEffect(() => {
@@ -66,9 +61,8 @@ export default function Tools({ appName, runner }: Props) {
     })
     if (path) {
       exe = path
-      return callTools('runExe', exe)
+      callTools('runExe', exe)
     }
-    return
   }
 
   function dropHandler(ev: React.DragEvent<HTMLSpanElement>) {
@@ -124,12 +118,10 @@ export default function Tools({ appName, runner }: Props) {
             <span className="toolTitle">Winetricks</span>
           </button>
           <a
-            data-testid="toolsDrag"
-            draggable
             onDrop={(ev) => dropHandler(ev)}
             onDragOver={(ev) => dragOverHandler(ev)}
             className="tools drag"
-            onClick={async () => handleRunExe()}
+            onClick={handleRunExe}
           >
             {t('setting.runexe.title')}
             <br />
