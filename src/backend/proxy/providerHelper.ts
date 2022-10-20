@@ -83,7 +83,7 @@ export function passEventCallbacks(
   connectionRequestRejected = _connectionRequestRejected
 }
 
-/* eslint-disable  @typescript-eslint/no-explicit-any */
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
   mmSdkProvider.on('accountsChanged', (accounts: string[]) => {
     console.log('accounts changed to ', accounts)
@@ -108,6 +108,7 @@ function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
 async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
   const uris: UrisReturn = {}
   if (sdk === undefined) {
+    // icon on connection request is from <link rel="icon" href="/.../> tag in website head tag
     sdk = new MetaMaskSDK({
       dappMetadata: {
         name: 'HyperPlay',
@@ -116,16 +117,6 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
       shouldShimWeb3: false // disable window.web3
     })
   }
-  // const wcConnector = sdk.getWalletConnectConnector()
-  // /* eslint-disable  @typescript-eslint/no-explicit-any */
-  // wcConnector.on('disconnect', (err: any, payload: any) => {
-  //   console.log('session update MM SDK wc connector DISCONNECTED')
-  //   console.log(err)
-  //   console.log(payload)
-  //   if (payload.params[0].message === 'Session Rejected') {
-  //     // connection request was rejected
-  //   }
-  // })
   const mmSdkProvider = sdk.getProvider()
   if (mmSdkProvider === null) return {}
 
@@ -140,6 +131,10 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
         accounts
       )
       walletConnected(accounts)
+    })
+    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+    .catch(() => {
+      connectionRequestRejected()
     })
 
   // get link for metamask mobile. Use as QR code

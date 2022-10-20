@@ -3,6 +3,7 @@ import WalletOption from '../components/walletOption'
 import { PROVIDERS } from 'common/types/proxy-types'
 import './index.css'
 import { OnboardingModalConfig } from '../types'
+import { MMTransparent, PlusIcon, WCBlue } from 'frontend/assets/hyperplay'
 
 interface WelcomeProps {
   handleProviderClicked: (provider: PROVIDERS) => void
@@ -31,19 +32,19 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
       <WalletOption
         title="MetaMask Mobile"
         subtext="Connect with MetaMask Mobile"
-        icon="/src/frontend/assets/hyperplay/mm_icon_md_transparent.svg"
+        icon={<MMTransparent height={34} width={34} />}
         onClick={() => providerClicked(PROVIDERS.METAMASK_MOBILE)}
       />
       <WalletOption
         title="WalletConnect"
         subtext="Connect with WalletConnect"
-        icon="/src/frontend/assets/hyperplay/walletconnect_icon_blue.svg"
+        icon={<WCBlue height={34} width={34} />}
         onClick={() => providerClicked(PROVIDERS.WALLET_CONNECT)}
       />
       <WalletOption
         title="Create new wallet"
         subtext="Download MetaMask Mobile"
-        icon="/src/frontend/assets/hyperplay/plus.svg"
+        icon={<PlusIcon height={34} width={34} />}
         onClick={() => props.downloadMetaMaskClicked()}
       />
       <button

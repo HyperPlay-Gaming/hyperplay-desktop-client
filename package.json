@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-alpha.1",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -27,8 +27,8 @@
       "build/icon.png",
       "build/icon.icns",
       "build/win_icon.ico",
-      "build/icon-dark.png",
-      "build/icon-light.png"
+      "build/trayIconLight24x24.png",
+      "build/trayIconDark24x24.png"
     ],
     "protocols": [
       {
@@ -132,7 +132,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@metamask/sdk": "file:./wallet_sdk/metamask-sdk-v0.0.2.tgz",
+    "@metamask/sdk": "^0.0.1-beta.5",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.2",
     "@node-steam/vdf": "^2.2.0",

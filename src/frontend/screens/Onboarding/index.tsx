@@ -15,6 +15,7 @@ import { WrapRendererCallback } from 'common/types'
 import Success from './success'
 import Rejected from './rejected'
 import Download from './download'
+import { BackArrow, CloseX } from 'frontend/assets/hyperplay'
 
 interface OnboardingProps {
   disableOnboarding: () => void
@@ -178,7 +179,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
               setContentParams({ content: ONBOARDING_CONTENT.WELCOME })
             }
           >
-            <img src="/src/frontend/assets/hyperplay/back_arrow.svg"></img>
+            <BackArrow />
           </button>
           <h6 className="welcomeTitle">{onboardingParams.title}</h6>
           <button
@@ -189,7 +190,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
             }
             onClick={() => props.disableOnboarding()}
           >
-            <img src="/src/frontend/assets/hyperplay/close_x.svg"></img>
+            <CloseX />
           </button>
         </div>
         <div className="contentContainer">
