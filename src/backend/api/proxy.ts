@@ -1,13 +1,14 @@
 import { WrapRendererCallback } from './../../common/types'
 import { PROXY_TOPICS } from '../proxy/types'
 import { ipcRenderer } from 'electron'
-import { PROVIDERS, UrisReturn } from '../../common/types/proxy-types'
 import {
   AccountsChangedType,
   WalletConnectedType,
   WalletDisconnectedType,
   ChainChangedType,
-  ConnectionRequestRejectedType
+  ConnectionRequestRejectedType,
+  PROVIDERS,
+  UrisReturn
 } from '../../common/types/proxy-types'
 
 export const handleConnected = (
