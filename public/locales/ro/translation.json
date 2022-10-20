@@ -99,7 +99,7 @@
             "message": "Sunt operațiuni în așteptare, ești sigur?",
             "title": "Ieșire"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Sigur doriți să resetați Heroic? Acest lucru va elimina toate setările și stocarea în cache, dar nu va elimina jocurile dvs. instalate sau acreditările Epic",
                 "title": "Resetează eroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Actualizare disponibila",
             "stable": "Grajd",
@@ -318,7 +318,7 @@
         },
         "moved": "Mutare Finalizată",
         "moving": "Joc de Mișcare",
-        "new-heroic-version": "A fost lansată o nouă versiune heroică!",
+        "new-hyperplay-version": "A fost lansată o nouă versiune heroică!",
         "refresh": {
             "error": "Nu s-au putut prelua versiunile din amonte, poate din cauza restricțiilor API-ului Github! Încercați mai târziu."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Extensii de vin"
         },
         "open-config-file": "Deschideți fișierul de configurare",
-        "reset-heroic": "Resetează eroic",
+        "reset-hyperplay": "Resetează eroic",
         "saves": {
             "label": "Salveaza locatia:",
             "warning": "Funcția Cloud Saves este în versiune beta, vă rugăm să faceți backup înainte de sincronizare (în cazul în care ceva nu merge bine)"

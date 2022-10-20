@@ -99,7 +99,7 @@
             "message": "Existem operações pendentes, tem certeza disso?",
             "title": "Sair"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Redefinir Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
@@ -318,7 +318,7 @@
         },
         "moved": "Movido com sucesso",
         "moving": "Movendo jogo",
-        "new-heroic-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Não foi possível buscar lançamentos do upstream, talvez por causa das restrições da API do Github! Tente mais tarde."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Extensões do Wine"
         },
         "open-config-file": "Abrir arquivo de configuração",
-        "reset-heroic": "Redefinir Heroic",
+        "reset-hyperplay": "Redefinir Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "O recurso Cloud Saves está em Beta, faça backup de seus saves antes de sincronizar (caso algo dê errado)"

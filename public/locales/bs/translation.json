@@ -99,7 +99,7 @@
             "message": "Postoje operacije na čekanju, jeste li sigurni?",
             "title": "Izlaz"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Jeste li sigurni da želite resetirati Heroic? Ovo će ukloniti sve postavke i memoriju, ali neće ukloniti vaše instalirane igre ili Epic akreditacije",
                 "title": "Resetujte Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Dostupno ažuriranje!",
             "stable": "Stabilan",
@@ -318,7 +318,7 @@
         },
         "moved": "Premještanje završeno",
         "moving": "Igra se premješta",
-        "new-heroic-version": "Objavljena je nova Heroic verzija!",
+        "new-hyperplay-version": "Objavljena je nova Heroic verzija!",
         "refresh": {
             "error": "Nije moguće dohvatiti izdanja iz uzvodnog izvora, možda zbog ograničenja Github API-ja! Pokušajte ponovo kasnije."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Otvorite konfig. fajl",
-        "reset-heroic": "Resetujte Heroic",
+        "reset-hyperplay": "Resetujte Heroic",
         "saves": {
             "label": "Sačuvaj lokaciju:",
             "warning": "Funkcija čuvanja u oblaku je u beta verziji, napravite sigurnosnu kopiju vaših sačuvanih podataka prije sinhronizacije (u slučaju da nešto krene po zlu)"

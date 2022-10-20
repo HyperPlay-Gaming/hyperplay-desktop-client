@@ -99,7 +99,7 @@
             "message": "有待處理的操作，您確定嗎？",
             "title": "退出"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Reset Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
@@ -318,7 +318,7 @@
         },
         "moved": "移動完成",
         "moving": "移動遊戲中",
-        "new-heroic-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "不能從上遊獲取releases，可能是因為 Github API 的限制！請稍後再試。"
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine 擴充元件"
         },
         "open-config-file": "開啟配置檔案",
-        "reset-heroic": "Reset Heroic",
+        "reset-hyperplay": "Reset Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "雲端存檔功能處於測試階段，請在同步前備份你的存檔（以防出現問題）"

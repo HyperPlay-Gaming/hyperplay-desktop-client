@@ -99,7 +99,7 @@
             "message": "On odottavia toimintoja, oletko varma?",
             "title": "Poistu"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Reset Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
@@ -318,7 +318,7 @@
         },
         "moved": "Siirto valmis",
         "moving": "Moving Game",
-        "new-heroic-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Open Config File",
-        "reset-heroic": "Reset Heroic",
+        "reset-hyperplay": "Reset Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"

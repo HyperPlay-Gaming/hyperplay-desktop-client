@@ -99,7 +99,7 @@
             "message": "Es gibt anstehende Operationen, möchtst du wirklich fortfahren?",
             "title": "Beenden"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Bist du sicher, dass du Heroic zurücksetzen willst? Dadurch werden alle Einstellungen und der Zwischenspeicher gelöscht, nicht aber deine installierten Spiele oder Epic-Anmeldedaten. Portable Versionen (AppImage, WinPortable, ...) von Heroic müssen anschließend manuell neu gestartet werden.",
                 "title": "Heroic zurücksetzen"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update verfügbar!",
             "stable": "Stabil",
@@ -318,7 +318,7 @@
         },
         "moved": "Verschieben abgeschlossen",
         "moving": "Spiel wird verschoben",
-        "new-heroic-version": "Eine neue Heroic-Version wurde veröffentlicht!",
+        "new-hyperplay-version": "Eine neue Heroic-Version wurde veröffentlicht!",
         "refresh": {
             "error": "Konnte keine Veröffentlichungen von der Quelle laden, vielleicht wegen GitHub API Einschränkungen! Versuche es später noch einmal."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine-Erweiterungen"
         },
         "open-config-file": "Konfigurationsdatei öffnen",
-        "reset-heroic": "Heroic zurücksetzen",
+        "reset-hyperplay": "Heroic zurücksetzen",
         "saves": {
             "label": "Speicherstand-Pfad:",
             "warning": "Die Cloudspeicher-Funktion befindet sich in der Beta-Phase, bitte sichere deine Speicherstände vor der Synchronisierung (falls etwas schiefgeht)"

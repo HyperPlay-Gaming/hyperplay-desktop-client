@@ -99,7 +99,7 @@
             "message": "有待处理的操作，你确定吗？",
             "title": "退出"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "你确定要重置 Heroic 吗？这会删除所有设置和缓存但不会删除你已安装的游戏或你的 Epic 凭据。便携版本 (AppImage, WinPortable, ...) 的 heroic 需要稍后手动重启。",
                 "title": "重置 Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "更新可用！",
             "stable": "稳定版",
@@ -318,7 +318,7 @@
         },
         "moved": "移动完成",
         "moving": "移动游戏中",
-        "new-heroic-version": "新的 Heroic 版本发布了！",
+        "new-hyperplay-version": "新的 Heroic 版本发布了！",
         "refresh": {
             "error": "不能从上游获取发布，可能是因为 Github API 的限制！请稍后再试。"
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine 扩展"
         },
         "open-config-file": "打开配置文件",
-        "reset-heroic": "重置 Heroic",
+        "reset-hyperplay": "重置 Heroic",
         "saves": {
             "label": "存档位置：",
             "warning": "云存档功能处于测试期，请在同步前备份你的存档（以防出现问题）"

@@ -99,7 +99,7 @@
             "message": "Bekleyen işlemler var, emin misiniz?",
             "title": "Çık"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Heroic'i Sıfırla"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
@@ -318,7 +318,7 @@
         },
         "moved": "Taşıma Tamamlandı",
         "moving": "Oyun Taşınıyor",
-        "new-heroic-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Belki de Github API kısıtlamaları nedeniyle yukarı akıştan sürümler getirilemedi! Daha sonra tekrar deneyin."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Yapılandırma Dosyasını Aç",
-        "reset-heroic": "Heroic'i Sıfırla",
+        "reset-hyperplay": "Heroic'i Sıfırla",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"

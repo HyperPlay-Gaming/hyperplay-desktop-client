@@ -99,7 +99,7 @@
             "message": "Existují nevyřízené operace, jste si jisti?",
             "title": "Ukončit"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Jste si jistí, že chcete resetovat Heroic? Tím se odstraní všechna nastavení a mezipaměť, ale neodstraní se nainstalované hry ani přihlašovací údaje Epic. Přenosné verze (AppImage, WinPortable, ...) je poté nutné restartovat ručně.",
                 "title": "Reset Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "K dispozici je nová aktualizace!",
             "stable": "Stabilní",
@@ -318,7 +318,7 @@
         },
         "moved": "Přesun dokončen",
         "moving": "Přesouvám hru",
-        "new-heroic-version": "Byla vydána nová verze Heroic!",
+        "new-hyperplay-version": "Byla vydána nová verze Heroic!",
         "refresh": {
             "error": "Nepodařilo se načíst vydání z upstreamu, možná kvůli omezením Github API! Zkuste to později."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine rozšíření"
         },
         "open-config-file": "Otevřít soubor konfigurace",
-        "reset-heroic": "Reset Heroic",
+        "reset-hyperplay": "Reset Heroic",
         "saves": {
             "label": "Umístění pro ukládání:",
             "warning": "Funkce Cloud Saves je v Beta verzi, před synchronizací si prosím uložená data zálohujte (pro případ, že by se něco pokazilo)"

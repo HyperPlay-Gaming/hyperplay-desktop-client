@@ -121,7 +121,7 @@
             "title": "تحذير"
         },
         "wineprefix": "اختر مجلد WinePrefix",
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "title": "إعادة ضبط هيرويك",
                 "message": "هل أنت متأكد أنك تريد إعادة تعيين هيرويك ؟ سيؤدي هذا إلى إزالة جميع الإعدادات وذاكرة التخزين المؤقت ولكنه لن يزيل الألعاب المثبتة أو بيانات اعتماد Epic الخاصة بك"
@@ -262,7 +262,7 @@
     "Filter": "فلتر",
     "info": {
         "settings": "يتم حفظ الإعدادات تلقائيًا",
-        "heroic": {
+        "hyperplay": {
             "version": "إصدار Heroic",
             "beta": "بيتا",
             "newReleases": "يتوفر تحديث",
@@ -332,7 +332,7 @@
             "error": "تعذر جلب الإصدارات من المصدر, ربما بسبب قيود API جيتهاب! الرجاء المحاولة لاحقا."
         },
         "moving": "لعبة تتحرك",
-        "new-heroic-version": "تم إصدار نسخة بطولية جديدة!"
+        "new-hyperplay-version": "تم إصدار نسخة بطولية جديدة!"
     },
     "Projects": "المشاريع",
     "Epic Games": "Epic Games",
@@ -443,7 +443,7 @@
     "Ready": "مستعد",
     "settings": {
         "copiedToClipboard": "تم النسخ إلى الحافظة!",
-        "reset-heroic": "إعادة تعيين هيرويك",
+        "reset-hyperplay": "إعادة تعيين هيرويك",
         "clear-cache": "امسح ذاكرة التخزين المؤقت لهيرويك",
         "navbar": {
             "general": "عام",

@@ -99,7 +99,7 @@
             "message": "Има незавършени операции. Наистина ли искате това?",
             "title": "Изход"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Зачистване на Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
@@ -318,7 +318,7 @@
         },
         "moved": "Преместването е завършено",
         "moving": "Преместване на играта",
-        "new-heroic-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Не могат да бъдат получени изданията от отдалеченото хранилище, може би поради ограничения на ППИ на Github! Опитайте отново по-късно."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Отваряне на конфигурационния файл",
-        "reset-heroic": "Зачистване на Heroic",
+        "reset-hyperplay": "Зачистване на Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "Функционалността за съхраняване на запазените игри в облака е в състояние на Бета. Направете резервно копие на запазените си игри, преди да синхронизирате (в случай, че нещо се обърка)"

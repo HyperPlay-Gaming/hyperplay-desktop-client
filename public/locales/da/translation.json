@@ -89,7 +89,7 @@
             "title": "Afslut",
             "message": "Der er uafgjorte handlinger, er du sikker?"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "title": "Nulstil Heroic",
                 "message": "Er du sikker på, at du vil nulstille Heroic? Dette fjerner alle indstillinger og cache, men vil ikke fjerne dine installerede spil eller dine Epic legitimation"
@@ -143,7 +143,7 @@
     },
     "info": {
         "version": "Wine Version",
-        "heroic": {
+        "hyperplay": {
             "version": "Heroisk version",
             "beta": "Beta",
             "newReleases": "Opdatering tilgængelig!",
@@ -253,7 +253,7 @@
             "finished": "Opdatering Færdig",
             "started": "Opdatering startet"
         },
-        "new-heroic-version": "En ny Heroic-version blev frigivet!"
+        "new-hyperplay-version": "En ny Heroic-version blev frigivet!"
     },
     "Plugins": "Plugins",
     "Projects": "Projekter",
@@ -396,7 +396,7 @@
             }
         },
         "open-config-file": "Åbn Config File",
-        "reset-heroic": "Nulstil Heroic",
+        "reset-hyperplay": "Nulstil Heroic",
         "saves": {
             "warning": "Cloud Saves-funktionen er i beta, vær venlig at sikkerhedskopiere dine gemmer før synkronisering (i tilfælde af at noget går galt)",
             "label": "Gem placering:"

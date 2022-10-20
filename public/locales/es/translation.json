@@ -99,7 +99,7 @@
             "message": "Hay operaciones pendientes, ¿estás seguro?",
             "title": "Salir"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "¿Está seguro que quiere restablecer Heroic? Esto removerá todas las configuraciones y caché pero no removerá los juegos installados ni las credenciales. Versiones portables (AppImage, WinPortable, ...) de Heroic tienen que ser iniciadas manualmente luego de ejecutar esta acción.",
                 "title": "Restablecer Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "¡Actualización disponible!",
             "stable": "Estable",
@@ -318,7 +318,7 @@
         },
         "moved": "Movimiento terminado",
         "moving": "Moviendo juego",
-        "new-heroic-version": "¡Una nueva versión de Heroic fue publicada!",
+        "new-hyperplay-version": "¡Una nueva versión de Heroic fue publicada!",
         "refresh": {
             "error": "No se pudieron descargar las versiones, puede deberse a una limitación en la API de Github! Intente más tarde nuevamente."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Extensiones de Wine"
         },
         "open-config-file": "Abrir archivo de configuración",
-        "reset-heroic": "Restablecer Heroic",
+        "reset-hyperplay": "Restablecer Heroic",
         "saves": {
             "label": "Ubicación de guardados:",
             "warning": "La funcionalidad Cloud Saves es Beta, por favor, respalda tus guardados antes de sincronizar (en caso de que algo salga mal)"

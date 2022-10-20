@@ -99,7 +99,7 @@
             "message": "Det er ventende operasjoner, er du sikker?",
             "title": "Avslutt"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Er du sikker på at du vil tilbakestille Heroic? Dette vil fjerne alle innstillinger og hurtigbufring, men vil ikke fjerne de installerte spillene dine eller Epic-legitimasjonen din",
                 "title": "Tilbakestill Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Ny versjon tilgjengelig",
             "stable": "Stabil",
@@ -318,7 +318,7 @@
         },
         "moved": "Flytting fullført",
         "moving": "Moving Game",
-        "new-heroic-version": "En ny Heroic-versjon ble utgitt!",
+        "new-hyperplay-version": "En ny Heroic-versjon ble utgitt!",
         "refresh": {
             "error": "Kunne ikke hente utgivelser fra oppstrøms, kanskje på grunn av Github API-begrensninger! Prøv igjen senere."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Åpne konfigurasjonsfil",
-        "reset-heroic": "Tilbakestill Heroic",
+        "reset-hyperplay": "Tilbakestill Heroic",
         "saves": {
             "label": "Lagre plassering:",
             "warning": "Cloud Saves-funksjonen er i beta, vennligst ta sikkerhetskopi av lagrene dine før synkronisering (i tilfelle noe går galt)"

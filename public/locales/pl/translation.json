@@ -99,7 +99,7 @@
             "message": "Istnieją oczekujące operacje, czy jesteś pewien?",
             "title": "Wyjście"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Czy jesteś pewny, że chcesz zresetować Heroic? To działanie usunie wszystkie twoje ustawienia i pliki cache, lecz nie usunie zainstalowanych gier. Wersje przenośne (AppImage, WinPortable, ...) muszą później zostać uruchomione ponownie ręcznie.",
                 "title": "Zresetuj Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Dostępna Aktualizacja!",
             "stable": "Stabilna",
@@ -318,7 +318,7 @@
         },
         "moved": "Przenoszenie zakończone",
         "moving": "Przenoszenie gry",
-        "new-heroic-version": "Pojawiła się nowa wersja Heroic!",
+        "new-hyperplay-version": "Pojawiła się nowa wersja Heroic!",
         "refresh": {
             "error": "Nie udało się pobrać nowej wersji, prawdopodobnie z powodu limitacji API Github'a! Spróbuj ponownie później."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Rozszerzenia Wine"
         },
         "open-config-file": "Otwórz plik konfiguracyjny",
-        "reset-heroic": "Zresetuj Heroic",
+        "reset-hyperplay": "Zresetuj Heroic",
         "saves": {
             "label": "Lokalizacja zapisów gry:",
             "warning": "Zapisy w chmurze są w wazie Beta, zrób kopię swoich zapisów przed synchronizacją (na wypadek niepowodzenia)"

@@ -99,7 +99,7 @@
             "message": "Hi ha operacions pendents, estàs segur?",
             "title": "Surt"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Esteu segur que voleu restablir el Heroic? Es suprimirà tota la configuració i la memòria cau, però no eliminarà els jocs instal·lats ni les vostres credencials d'Epic. Les versions portables (AppImage, WinPortable, ...) del Heroic s'han de reiniciar manualment després.",
                 "title": "Restableix l'Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Hi ha una actualització disponible!",
             "stable": "Estable",
@@ -318,7 +318,7 @@
         },
         "moved": "Ha finalitzat el desplaçament",
         "moving": "S'està movent el joc...",
-        "new-heroic-version": "Hi ha una nova versió del Heroic!",
+        "new-hyperplay-version": "Hi ha una nova versió del Heroic!",
         "refresh": {
             "error": "No s'ha pogut aconseguir el llistat de versions, potser per les restriccions de l'API del GitHub. Proveu-ho més tard."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Extensions del Wine"
         },
         "open-config-file": "Obre el fitxer de configuració",
-        "reset-heroic": "Restableix l'Heroic",
+        "reset-hyperplay": "Restableix l'Heroic",
         "saves": {
             "label": "Ubicació de les desades:",
             "warning": "La funció de desar al núvol està en versió beta. Si us plau, feu una còpia de seguretat de les vostres partides desades abans de sincronitzar-les, per si quelcom sortís malament."

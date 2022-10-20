@@ -99,7 +99,7 @@
             "message": "보류 중인 작업 있습니다, 계속 하시겠습니까?",
             "title": "종료"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Heroic을 정말 리셋하시겠습니까? 모든 설정과 캐시를 삭제하지만 설치된 게임이나 Epic 인증은 삭제되지 않습니다. 포터블 버전 Heroic은(AppImage, WinPortable 등) 나중에 직접 재시작해야 합니다.",
                 "title": "Reset Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
@@ -318,7 +318,7 @@
         },
         "moved": "이동 완료됨",
         "moving": "Moving Game",
-        "new-heroic-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Open Config File",
-        "reset-heroic": "Reset Heroic",
+        "reset-hyperplay": "Reset Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"

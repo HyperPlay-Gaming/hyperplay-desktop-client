@@ -99,7 +99,7 @@
             "message": "Є очікувані операції, ви впевнені?",
             "title": "Вийти"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Скинути Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
@@ -318,7 +318,7 @@
         },
         "moved": "Переміщення завершене",
         "moving": "Переміщення гри",
-        "new-heroic-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Не вдалося отримати версію з джерела, можливо, через обмеження API Github! Спробуйте пізніше."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Відкрити файл налаштування",
-        "reset-heroic": "Скинути Heroic",
+        "reset-hyperplay": "Скинути Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "Збереження у хмарі, наразі у тестовому режимі. Будь ласка збережіть ваш файл збереження у іншому місці (у разі якщо щось піде не так)"

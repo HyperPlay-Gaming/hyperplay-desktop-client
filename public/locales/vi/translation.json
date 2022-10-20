@@ -99,7 +99,7 @@
             "message": "Vẫn có lệnh đang chờ, bạn chắc chứ?",
             "title": "Thoát"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Đặt lại Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
@@ -318,7 +318,7 @@
         },
         "moved": "Di chuyển hoàn tất",
         "moving": "Đang di chuyển Game",
-        "new-heroic-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Không thể tìm nạp các bản phát hành từ server, có thể do các hạn chế của API Github! Thử lại sau."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Mở tệp cấu hình",
-        "reset-heroic": "Đặt lại Heroic",
+        "reset-hyperplay": "Đặt lại Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"

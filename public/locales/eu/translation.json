@@ -99,7 +99,7 @@
             "message": "Oraindik eragiketa batzuk egiteko daude, ziur zaude?",
             "title": "Irten"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Ziur zaude Heroic berrabiarazi nahi duzula? Horrek ezarpen guztiak eta cacheko biltegiratzea ezabatuko ditu, baina ez ditu zure instalatutako jokoak edo Epic-eko kredentzialak ezabatuko. Heroic-en bertsio eramangarriak (AppImage, WinPortable, ...) berrabiarazi egin behar dira.",
                 "title": "Berrezarri Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Eguneraketa eskuragarri!",
             "stable": "Egonkorra",
@@ -318,7 +318,7 @@
         },
         "moved": "Mugitzen amaitu",
         "moving": "Mugimendu Jokoa",
-        "new-heroic-version": "Bertsio heroiko berri bat kaleratu zen!",
+        "new-hyperplay-version": "Bertsio heroiko berri bat kaleratu zen!",
         "refresh": {
             "error": "Ezin izan dira igoko bertsioak eskuratu, agian Github APIaren murrizketak direla eta! Saiatu berriro geroago."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Ardoaren luzapenak"
         },
         "open-config-file": "Ireki Konfigurazio fitxategia",
-        "reset-heroic": "Berrezarri Heroic",
+        "reset-hyperplay": "Berrezarri Heroic",
         "saves": {
             "label": "Gorde kokapena:",
             "warning": "Hodeiko Gordeen eginbidea beta-n dago. Sinkronizatu aurretik gordetako babeskopiak egin behar dira (zerbait gaizki gertatzen bada)"

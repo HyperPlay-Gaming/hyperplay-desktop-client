@@ -99,7 +99,7 @@
             "message": "On pooleliolevad toimingud, kas olete kindel?",
             "title": "Välju"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Kas olete kindel, et soovite Heroicu lähtestada? See eemaldab kõik Seaded ja Vahemällu salvestamise, kuid ei eemalda teie paigaldatud mänge ega Epicu mandaate. Heroicu kaasaskantavad versioonid (AppImage, WinPortable, ...) tuleb hiljem käsitsi taaskäivitada.",
                 "title": "Lähtesta Heroic"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Uuendus saadaval!",
             "stable": "Stabiilne",
@@ -318,7 +318,7 @@
         },
         "moved": "Teisaldamine on lõpule viidud",
         "moving": "Mängu liigutamine",
-        "new-heroic-version": "Ilmus uus Heroicu versioon!",
+        "new-hyperplay-version": "Ilmus uus Heroicu versioon!",
         "refresh": {
             "error": "Ei saanud hankida väljalaskeid upstream'ist, võib-olla Githubi API piirangute tõttu! Proovige hiljem uuesti."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Wine'i laiendused"
         },
         "open-config-file": "Ava konfiguratsioonifail",
-        "reset-heroic": "Lähtesta Heroic",
+        "reset-hyperplay": "Lähtesta Heroic",
         "saves": {
             "label": "Salvestuste asukoht:",
             "warning": "Pilvesalvestuse funktsioon on beetaversioonis, enne sünkroonimist varundage oma salvestused (juhuks, kui midagi läheb valesti)"

@@ -99,7 +99,7 @@
             "message": "Gözləyən əməliyyatlar var, əminsinizmi?",
             "title": "Çıx"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Heroic'i sıfırlamaq istədiyinizə əminsiniz? Bu, bütün Parametrləri və Keşləməni siləcək, lakin Quraşdırılmış oyunları və ya Epic etimadnaməsini silməyəcək",
                 "title": "Qəhrəmanı sıfırlayın"
@@ -242,7 +242,7 @@
         }
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "newReleases": "Yeniləmə Mövcuddur!",
             "stable": "Stabil",
@@ -318,7 +318,7 @@
         },
         "moved": "Hərəkət tamamlandı",
         "moving": "Hərəkətli Oyun",
-        "new-heroic-version": "Yeni \"Heroic\" versiyası təqdim edildi!",
+        "new-hyperplay-version": "Yeni \"Heroic\" versiyası təqdim edildi!",
         "refresh": {
             "error": "Github API məhdudiyyətlərinə görə ola bilsin ki, yuxarıdan buraxılışları əldə etmək mümkün olmadı! Biraz sonra yenidən cəhd edin."
         },
@@ -517,7 +517,7 @@
             "wineExt": "Şərab uzantıları"
         },
         "open-config-file": "Konfiqurasiya faylını açın",
-        "reset-heroic": "Qəhrəmanı sıfırlayın",
+        "reset-hyperplay": "Qəhrəmanı sıfırlayın",
         "saves": {
             "label": "Məkanı Saxla:",
             "warning": "Bulud Saxlama funksiyası Beta-dadır, lütfən, sinxronizasiya etməzdən əvvəl yaddaşı ehtiyat nüsxəsini çıxarın (nəsə səhv olarsa)"
