@@ -16,7 +16,7 @@ export const ThemeSelector = () => {
     >
       <option value="default">Default</option>
       <option value="classic">Classic</option>
-      <option value="old-school">Old School HyperPlay</option>
+      <option value="old-school">Old School</option>
       <option value="dracula">Dracula</option>
       <option value="marine">Marine</option>
       <option value="marine-classic">Marine Classic</option>

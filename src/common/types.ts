@@ -10,8 +10,18 @@ export type WrapRendererCallback<
   e: Electron.IpcRendererEvent,
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
+import { IpcRendererEvent } from 'electron'
 
 export type Runner = 'legendary' | 'gog'
+
+// NOTE: Do not put enum's in this module or it will break imports
+
+export type DialogType = 'MESSAGE' | 'ERROR'
+
+export interface ButtonOptions {
+  text: string
+  onClick?: () => void
+}
 
 // here is a way to type the callback function in ipcMain.on or ipcMain.handle
 // does not prevent callbacks with fewer parameters from being passed though
@@ -58,6 +68,7 @@ export interface AppSettings {
   enableUpdates: boolean
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
+  addSteamShortcuts: boolean
   altLegendaryBin: string
   altGogdlBin: string
   audioFix: boolean
@@ -481,6 +492,13 @@ export type ElWebview = {
 export type WebviewType = HTMLWebViewElement & ElWebview
 
 export type InstallPlatform = LegendaryInstallPlatform | GogInstallPlatform
+
+export type ConnectivityChangedCallback = (
+  event: IpcRendererEvent,
+  status: ConnectivityStatus
+) => void
+
+export type ConnectivityStatus = 'offline' | 'check-online' | 'online'
 
 export interface Tools {
   exe?: string

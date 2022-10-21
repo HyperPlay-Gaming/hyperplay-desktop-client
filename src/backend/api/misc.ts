@@ -1,6 +1,6 @@
 import { GOGCloudSavesLocation } from 'common/types/gog'
 import { ipcRenderer } from 'electron'
-import { Runner, Tools } from '../../common/types'
+import { Runner, Tools, ButtonOptions, DialogType } from 'common/types'
 
 export const clearCache = () => ipcRenderer.send('clearCache')
 export const resetApp = () => ipcRenderer.send('resetApp')
@@ -34,8 +34,6 @@ export const authGOG = async (token: string) =>
 export const logoutGOG = async () => ipcRenderer.invoke('logoutGOG')
 export const checkGameUpdates = async () =>
   ipcRenderer.invoke('checkGameUpdates')
-export const refreshWineVersionInfo = async (fetch?: boolean) =>
-  ipcRenderer.invoke('refreshWineVersionInfo', fetch)
 export const refreshLibrary = async (
   fullRefresh?: boolean,
   library?: Runner | 'all'
@@ -77,15 +75,27 @@ export const getAnticheatInfo = async (namespace: string) =>
 
 export const requestSettingsRemoveListeners = () =>
   ipcRenderer.removeAllListeners('requestSettings')
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const setGameStatusRemoveListener = (onGameStatusUpdate: any) =>
-  ipcRenderer.removeListener('setGameStatus', onGameStatusUpdate)
 
 export const clipboardReadText = async () =>
   ipcRenderer.invoke('clipboardReadText')
 
 export const clipboardWriteText = async (text: string) =>
   ipcRenderer.send('clipboardWriteText', text)
+
+export const handleShowDialog = (
+  onMessage: (
+    e: Electron.IpcRendererEvent,
+    title: string,
+    message: string,
+    type: DialogType,
+    buttons?: Array<ButtonOptions>
+  ) => void
+) => {
+  ipcRenderer.on('showDialog', onMessage)
+  return () => {
+    ipcRenderer.removeListener('showDialog', onMessage)
+  }
+}
 
 import Store from 'electron-store'
 // FUTURE WORK

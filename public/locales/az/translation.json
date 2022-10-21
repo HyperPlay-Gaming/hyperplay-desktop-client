@@ -61,7 +61,7 @@
             "launchAborted": "Launch aborted",
             "title": "Xəta",
             "uncaught-exception": {
-                "message": "Tutulmamış istisna baş verdi:{{newLine}}{{error}}{{newLine}}{{newLine}}Heroic bağlanacaq! Github anbarımızdakı istisnanı bildirin.",
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Tutulmamış İstisna baş verdi!"
             },
             "update": {
@@ -69,6 +69,7 @@
                 "title": "Yeniləmə xətası"
             },
             "wine-not-found": {
+                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
                 "message": "Şərab Versiyası Seçilməyib. Oyun Parametrlərini yoxlayın!",
                 "title": "Şərab tapılmadı"
             },
@@ -82,7 +83,7 @@
                 "changelog": "Dəyişikliklər jurnalını açın",
                 "detail": "Güncəlləməni arxa planda yükləmək istəyirsiniz?",
                 "message": "Yeni Versiya mövcuddur!",
-                "message-finished": "İndi HyperPlay-i yenidən başlatmaq istəyirsiniz?",
+                "message-finished": "İndi Heroic-i yenidən başlatmaq istəyirsiniz?",
                 "title": "Qəhrəmanlıq Oyunları Başlatıcısı",
                 "title-finished": "Yeniləmə Tamamlandı"
             }
@@ -100,7 +101,7 @@
         },
         "reset-hyperplay": {
             "question": {
-                "message": "HyperPlay'i sıfırlamaq istədiyinizə əminsiniz? Bu, bütün Parametrləri və Keşləməni siləcək, lakin Quraşdırılmış oyunları və ya Epic etimadnaməsini silməyəcək",
+                "message": "Heroic'i sıfırlamaq istədiyinizə əminsiniz? Bu, bütün Parametrləri və Keşləməni siləcək, lakin Quraşdırılmış oyunları və ya Epic etimadnaməsini silməyəcək",
                 "title": "Qəhrəmanı sıfırlayın"
             }
         },
@@ -175,6 +176,7 @@
         "offline-notification-title": "oflayn"
     },
     "Epic Games": "Epik oyunlar",
+    "error": "Error",
     "favourites": "Sevimlilər",
     "game": {
         "status": "Vəziyyət",
@@ -223,6 +225,9 @@
         "preferSystemLibs": "Fərdi Şərab versiyaları (Wine-GE, Wine-Lutris) kitabxana asılılıqları ilə göndərilir. Bu seçimi aktiv etməklə, bu göndərilmiş kitabxanalar nəzərə alınmayacaq və Wine əvəzinə sistem kitabxanalarını yükləyəcək. Xəbərdarlıq! Asılılıqlar təmin edilmədikdə problemlər yarana bilər.",
         "primerun": "Multi-GPU sistemlərində oyunu göstərmək üçün xüsusi qrafik kartdan istifadə edin. Yalnız göstərmə üçün başsız GPU istifadə edən oyun noutbukları və ya stolüstü kompüterlərdə lazımdır (NVIDIA Optimus, AMD CrossFire)",
         "resizablebar": "NVIDIA-nın Ölçüləndirilə bilən Çubuğu CPU-nun bütün qrafik buferinə daxil olmasını təmin edərək kadr sürətini artırmağa kömək edir. Aktivləşdirilməsi Vulkan əsaslı oyunlar üçün performansı yaxşılaşdıra bilər.",
+        "steam_path": {
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+        },
         "steamruntime": "Linux və Windows (Proton) oyunlarını idarə etməyə kömək etmək üçün Steam tərəfindən təmin edilən xüsusi kitabxanalar. Aktivləşdirmə uyğunluğu yaxşılaşdıra bilər.",
         "sync": {
             "part1": "Heroic düzgün saxlama qovluğunu təxmin etməyə çalışır və bu, əksər hallarda işləyəcək. Qovluq səhv olarsa, onu dəyişdirmək üçün dəyişdirmə qutusundan istifadə edin.",
@@ -313,7 +318,7 @@
         },
         "moved": "Hərəkət tamamlandı",
         "moving": "Hərəkətli Oyun",
-        "new-hyperplay-version": "Yeni \"HyperPlay\" versiyası təqdim edildi!",
+        "new-hyperplay-version": "Yeni \"Heroic\" versiyası təqdim edildi!",
         "refresh": {
             "error": "Github API məhdudiyyətlərinə görə ola bilsin ki, yuxarıdan buraxılışları əldə etmək mümkün olmadı! Biraz sonra yenidən cəhd edin."
         },
@@ -323,6 +328,12 @@
             "finished": "Yeniləmə Tamamlandı",
             "started": "Yeniləmə Başladı"
         }
+    },
+    "offline-message": {
+        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "retrying": "Retrying"
     },
     "options": {
         "advanced": {
@@ -358,7 +369,7 @@
     "other": {
         "gogdl-version": "GOGDL versiyası: ",
         "legendary-version": "Əfsanəvi Versiya: ",
-        "weblate": "HyperPlay tərcüməsinə kömək edin."
+        "weblate": "Heroic tərcüməsinə kömək edin."
     },
     "placeholder": {
         "alt-gogdl-bin": "Daxili GOGDL ikili proqramından istifadə...",
@@ -377,6 +388,7 @@
     "setting": {
         "adddesktopshortcuts": "İş masası qısayollarını avtomatik əlavə edin",
         "addgamestostartmenu": "Menyuya avtomatik başlamaq üçün oyunlar əlavə edin",
+        "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "İstifadə etmək üçün Alternativ GOGDL Binary seçin",
         "alt-legendary-bin": "Alternativ Əfsanəvi Binary seçin",
         "audiofix": "Audio Düzəltmə (Pulse Audio Latency)",
@@ -505,7 +517,7 @@
             "wineExt": "Şərab uzantıları"
         },
         "open-config-file": "Konfiqurasiya faylını açın",
-        "reset-hyperplay": "Reset HyperPlay",
+        "reset-hyperplay": "Qəhrəmanı sıfırlayın",
         "saves": {
             "label": "Məkanı Saxla:",
             "warning": "Bulud Saxlama funksiyası Beta-dadır, lütfən, sinxronizasiya etməzdən əvvəl yaddaşı ehtiyat nüsxəsini çıxarın (nəsə səhv olarsa)"

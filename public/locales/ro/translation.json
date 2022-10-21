@@ -61,7 +61,7 @@
             "launchAborted": "Launch aborted",
             "title": "Eroare",
             "uncaught-exception": {
-                "message": "A apărut o excepție neprinsă:{{newLine}}{{error}}{{newLine}}{{newLine}}Heroic va fi închis! Raportați excepția în depozitul nostru Github.",
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "A avut loc o excepție neprinsă!"
             },
             "update": {
@@ -69,6 +69,7 @@
                 "title": "Eroare de actualizare"
             },
             "wine-not-found": {
+                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
                 "message": "Nicio versiune Wine selectată. Verificați setările jocului!",
                 "title": "Wine nu a fost găsit"
             },
@@ -100,8 +101,8 @@
         },
         "reset-hyperplay": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "Sigur doriți să resetați Heroic? Acest lucru va elimina toate setările și stocarea în cache, dar nu va elimina jocurile dvs. instalate sau acreditările Epic",
+                "title": "Resetează eroic"
             }
         },
         "runexe": {
@@ -175,6 +176,7 @@
         "offline-notification-title": "deconectat"
     },
     "Epic Games": "Epic Games",
+    "error": "Error",
     "favourites": "Favorite",
     "game": {
         "status": "stare",
@@ -207,7 +209,7 @@
         "esync": "Esync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța.",
         "fsync": "Fsync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța pe nucleele Linux acceptate.",
         "game_language": {
-            "fallback": "Lăsați necompletat pentru a folosi limbajul lui HyperPlay.",
+            "fallback": "Lăsați necompletat pentru a folosi limbajul lui Heroic.",
             "in_game_config": "Nu toate jocurile acceptă această configurație, unele au setări de limbă în joc.",
             "valid_codes": "Codurile de limbă valide depind de joc."
         },
@@ -223,6 +225,9 @@
         "preferSystemLibs": "Versiunile personalizate de vin (Wine-GE, Wine-Lutris) sunt livrate cu dependențele lor de bibliotecă. Prin activarea acestei opțiuni, aceste biblioteci livrate vor fi ignorate și Wine va încărca biblioteci de sistem. Avertizare! Pot apărea probleme dacă dependențele nu sunt îndeplinite.",
         "primerun": "Utilizați placa grafică dedicată pentru a reda jocul pe sisteme multi-GPU. Este necesar doar pe laptop-uri sau desktop-uri de jocuri care utilizează un GPU fără cap pentru randare (NVIDIA Optimus, AMD CrossFire)",
         "resizablebar": "Bara resizable de la NVIDIA ajută la creșterea ratei de cadre, făcând ca procesorul să acceseze întregul buffer grafic. Activarea poate îmbunătăți performanța pentru jocurile bazate pe Vulkan.",
+        "steam_path": {
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+        },
         "steamruntime": "Biblioteci personalizate furnizate de Steam pentru a ajuta la rularea jocurilor Linux și Windows (Proton). Activarea ar putea îmbunătăți compatibilitatea.",
         "sync": {
             "part1": "Heroic încearcă să ghicească folderul de salvare corect și acest lucru va funcționa în majoritatea cazurilor. În cazul în care folderul este greșit, utilizați caseta de înlocuire pentru a-l schimba.",
@@ -239,9 +244,9 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
-            "newReleases": "Update Available!",
-            "stable": "Stable",
-            "version": "HyperPlay Version"
+            "newReleases": "Actualizare disponibila",
+            "stable": "Grajd",
+            "version": "Versiune eroică"
         },
         "settings": "Setările sunt salvate automat",
         "version": "Versiune Wine"
@@ -313,7 +318,7 @@
         },
         "moved": "Mutare Finalizată",
         "moving": "Joc de Mișcare",
-        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "new-hyperplay-version": "A fost lansată o nouă versiune heroică!",
         "refresh": {
             "error": "Nu s-au putut prelua versiunile din amonte, poate din cauza restricțiilor API-ului Github! Încercați mai târziu."
         },
@@ -323,6 +328,12 @@
             "finished": "Actualizare Finalizată",
             "started": "Actualizarea a început"
         }
+    },
+    "offline-message": {
+        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "retrying": "Retrying"
     },
     "options": {
         "advanced": {
@@ -377,6 +388,7 @@
     "setting": {
         "adddesktopshortcuts": "Adăugați automat comenzi rapide pe desktop",
         "addgamestostartmenu": "Adăugați jocuri în meniul Start automat",
+        "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Alegeți un binar GOGDL alternativ pe care să îl utilizați",
         "alt-legendary-bin": "Alegeți un Legendary Binary alternativ pe care să îl utilizați",
         "audiofix": "Fixare Audio (Latență în PulseAudio)",
@@ -505,7 +517,7 @@
             "wineExt": "Extensii de vin"
         },
         "open-config-file": "Deschideți fișierul de configurare",
-        "reset-hyperplay": "Reset HyperPlay",
+        "reset-hyperplay": "Resetează eroic",
         "saves": {
             "label": "Salveaza locatia:",
             "warning": "Funcția Cloud Saves este în versiune beta, vă rugăm să faceți backup înainte de sincronizare (în cazul în care ceva nu merge bine)"

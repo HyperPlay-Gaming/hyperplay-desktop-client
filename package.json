@@ -229,6 +229,7 @@
     "electron-devtools-installer": "^3.2.0",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-react": "^7.29.4",
     "husky": "^7.0.4",
     "i18next-parser": "^6.3.0",
@@ -242,7 +243,6 @@
     "typescript": "^4.6.3",
     "vite": "^3.0.3",
     "vite-plugin-electron": "^0.8.3",
-    "vite-plugin-svgr": "^2.2.1",
-    "vite-tsconfig-paths": "^3.5.0"
+    "vite-plugin-svgr": "^2.2.1"
   }
 }

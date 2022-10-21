@@ -18,7 +18,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "کش HyperPlay پاک شد.",
+            "message": "کش Heroic پاک شد.",
             "title": "کش پاک شد"
         },
         "choose": "انتخاب",
@@ -61,7 +61,7 @@
             "launchAborted": "Launch aborted",
             "title": "خطا",
             "uncaught-exception": {
-                "message": "یک خطای نامشخص رخ داد:{{newLine}}{{error}}{{newLine}}{{newLine}}Heroic بسته خواهد شد! خطا را در ریپوزیتوری گیت\u200cهاب ما گزارش دهید.",
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "خطای نامشخص رخ داد!"
             },
             "update": {
@@ -69,6 +69,7 @@
                 "title": "Update Error"
             },
             "wine-not-found": {
+                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
                 "message": "نسخه ای از Wine انتخاب نشده است. تنظیمات بازی را چک کنید!",
                 "title": "Wine یافت نشد"
             },
@@ -82,8 +83,8 @@
                 "changelog": "باز کردن تغییرات جدید",
                 "detail": "آیا می خواهید در پس زمینه به روز رسانی را دانلود کنید؟",
                 "message": "نسخه جدید موجود است!",
-                "message-finished": "آیا می خواهید اکنون HyperPlay را مجددا اجرا کنید؟",
-                "title": "HyperPlay",
+                "message-finished": "آیا می خواهید اکنون Heroic را مجددا اجرا کنید؟",
+                "title": "Heroic Games Launcher",
                 "title-finished": "به روز رسانی به پایان رسید"
             }
         },
@@ -100,8 +101,8 @@
         },
         "reset-hyperplay": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "آیا از بازنشانی Heroic مطمئن هستید؟ این کار تمام تنظیمات و کش ها را پاک می کند اما بازی های نصب شده شما یا اعتبارهای Epic شما را پاک نمی کند. نسخه های پورتابل (AppImage, WinPortable, ...) نیازمند راه اندازی مجدد دستی پس از آن هستند.",
+                "title": "Reset Heroic"
             }
         },
         "runexe": {
@@ -175,6 +176,7 @@
         "offline-notification-title": "offline"
     },
     "Epic Games": "اپیک گیمز",
+    "error": "Error",
     "favourites": "علاقه مندی ها",
     "game": {
         "status": "Status",
@@ -207,7 +209,7 @@
         "esync": "Esync در بازی های متمرکز بر CPU سبب کاهش سربار wineserver میشود. فعال کردن ممکن است باعث افزایش کارایی شود.",
         "fsync": "Fsync در بازی های متمرکز بر CPU سبب کاهش سربار wineserver میشود. فعال کردن ممکن است در لینوکس کرنل های پشتیبانی شده باعث افزایش کارایی شود.",
         "game_language": {
-            "fallback": "برای استفاده از زبان HyperPlay خالی بگذارید.",
+            "fallback": "برای استفاده از زبان Heroic خالی بگذارید.",
             "in_game_config": "تمام بازی ها از این پیکربندی پشتیبانی نمی کنند،cبرخی تنظیمات زبان داخل بازی دارند.",
             "valid_codes": "کدهای معتبر زبان وابسته به بازی هستند."
         },
@@ -223,25 +225,28 @@
         "preferSystemLibs": "نسخه های سفارشی Wine (Wine-GE, Wine-Lutris) همراه با وابستگی های کتابخانه خود عرضه می شوند. با فعال کردن این گزینه، این کتابخانه ها نادیده گرفته شده و Wine به جای آن کتابخانه های سیستم را اجرا خواهد کرد. هشدار! در صورت عدم وجود وابستگی ها امکان بروز مشکلات وجود دارد.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
         "resizablebar": "NVIDIA's Resizable Bar با ایجاد امکان دسترسی CPU به کل بافر گرافیک سبب افزایش نرخ فریم می شود.فعال کردن ممکن است باعث بهبود عملکرد بازی های مبتنی بر Vulkan شود.",
+        "steam_path": {
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+        },
         "steamruntime": "کتابخانه های سفارشی توسط استیم برای کمک به اجرا بازی های لینوکس و ویندوز (Proton) ارائه می شود. فعال کردن ممکن است سبب افزایش سازگاری شود.",
         "sync": {
-            "part1": "HyperPlay تلاش میکند تا پوشه صحیح ذخیره سازی را پیدا کند و در اکثر مواقع کار خواهد کرد. در صورتی که پوشه اشتباه بود، از بخش رونویسی برای تغییر آن استفاده کنید.",
-            "part2": "در صورتی که محل Wine یا Proton را تغییر دهید، شما باید دوباره مسیر را چک کنید از آنجایی که Proton از محل و کاربری متفاوتی استفاده میکند. پس شما میتوانید مسیر فعلی را حذف ساده کنید از صفحه تنظیمات همگامسازی خارج شده و دوباره برگردید تا HyperPlay یک بار دیگر با محل درست پوشه را حدس بزند.",
+            "part1": "Heroic تلاش میکند تا پوشه صحیح ذخیره سازی را پیدا کند و در اکثر مواقع کار خواهد کرد. در صورتی که پوشه اشتباه بود، از بخش رونویسی برای تغییر آن استفاده کنید.",
+            "part2": "در صورتی که محل Wine یا Proton را تغییر دهید، شما باید دوباره مسیر را چک کنید از آنجایی که Proton از محل و کاربر متفاوتی استفاده می کند. پس شما می توانید مسیر فعلی را حذف ساده کنید از صفحه تنظیمات همگام سازی خارج شده و دوباره برگردید تا Heroic یک بار دیگر با محل درست پوشه را پیدا کند.",
             "part3": "همگام سازی دستی: برای بارگیری ذخیره بازیهای ذخیره شده در Cloud ، بارگیری را انتخاب کنید. آپلود تا موارد محلی را روی ابر آپلود کنید. دانلود اجباری و آپلود اجباری نسخه ای را که بصورت محلی یا روی ابر است نادیده می گیرند.",
             "part4": "همگامسازی ذخیرهها به طور خودکار هر زمان که یک بازی را شروع می کنید و پس از اتمام بازی ، ذخیره ها را همگامسازی می کند."
         },
         "vkd3d": "VKD3D یک لایه ترجمه ای برا پایه Vulkan برای بازی های DirectX 12 است. فعال کردن ممکن است سبب افزایش چشمگیر سازگاری شود. بر روی بازی های قدیمی تر DirectX تاثیری ندارد.",
         "wine": {
-            "part1": "HyperPlay در این پوشهها برای نسخههای Wine، Proton و CrossOver جستوجو میکند:",
+            "part1": "Heroic در این پوشهها برای نسخههای Wine، Proton و CrossOver جستوجو میکند:",
             "part2": "برای دیگر مکانها،از یک symbolic link به یکی از این پوشهها استفاده کنید"
         }
     },
     "info": {
         "hyperplay": {
             "beta": "Beta",
-            "newReleases": "Update Available!",
-            "stable": "Stable",
-            "version": "HyperPlay Version"
+            "newReleases": "به روزرسانی موجود است!",
+            "stable": "پایدار",
+            "version": "Heroic Version"
         },
         "settings": "تنظیمات به صورت خودکار ذخیره شدند",
         "version": "نسخه Wine"
@@ -313,7 +318,7 @@
         },
         "moved": "انتقال کامل شد",
         "moving": "در حال انتقال بازی",
-        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "new-hyperplay-version": "نسخه جدید Heroic منتشر شد!",
         "refresh": {
             "error": "امکان دریافت نسخه از آپ استریم گیت هاب نیست! بعدا تلاش کنید."
         },
@@ -323,6 +328,12 @@
             "finished": "آپدیت به پایان رسید",
             "started": "بهروزرسانی آغاز شد"
         }
+    },
+    "offline-message": {
+        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "retrying": "Retrying"
     },
     "options": {
         "advanced": {
@@ -358,7 +369,7 @@
     "other": {
         "gogdl-version": "نسخه GOGDL: ",
         "legendary-version": "نسخه Legendary: ",
-        "weblate": "کمک به ترجمه HyperPlay."
+        "weblate": "کمک به ترجمه Heroic."
     },
     "placeholder": {
         "alt-gogdl-bin": "استفاده از باینری GOGDL داخلی...",
@@ -377,6 +388,7 @@
     "setting": {
         "adddesktopshortcuts": "افزودن خودکار میانبرهای دسکتاپ",
         "addgamestostartmenu": "افزودن خودکار میانبرهای منوی استارت",
+        "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "انتخاب باینری GOGDL جایگزین برای استفاده",
         "alt-legendary-bin": "انتخاب باینری Legendary جایگزین",
         "audiofix": "تنظیم صدا (تاخیر Pulse Audio)",
@@ -384,14 +396,14 @@
         "autosync": "همگامسازی خودکار ذخیرهها",
         "autovkd3d": "نصب/بهروزرسانی خودکار VKD3D در مسیر",
         "change-target-exe": "انتخاب EXE جایگزین برای اجرا",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
+        "checkForUpdatesOnStartup": "بررسی برای به روزرسانی های Heroic در آغاز به کار",
+        "crossover-version": "نسخه Crossover",
         "customWineProton": "مسیرهای سفارشی Wine/Proton",
         "darktray": "استفاده از آیکون میزکار تاریک",
         "default-install-path": "محل پیشفرض نصب",
         "default-steam-path": "مسیر پیش فرض استیم",
         "defaultWinePrefix": "تنظیم پوشه برای Wine Prefix جدید",
-        "disable_controller": "غیر فعال کردن کنترل HyperPlay با استفاده از دسته",
+        "disable_controller": "غیر فعال کردن کنترل Heroic با استفاده از دسته",
         "discordRPC": "فعالسازی Discord Rich Presence",
         "download-no-https": "دانلود بازی ها بدون HTTPS (مفید برای CDNs مانند LanCache)",
         "egs-sync": "همگامسازی با بازیهای اپیک نصب شده",
@@ -450,7 +462,7 @@
         },
         "maxRecentGames": "اخیرا بازی شده برای نمایش",
         "maxworkers": "بیسترین تعداد ورکر هنگام دانلود",
-        "minimize-on-launch": "کوچک کردن HyperPlay بعد از اجرای بازی",
+        "minimize-on-launch": "کوچک کردن Heroic بعد از اجرای بازی",
         "offlinemode": "اجرای آفلاین بازی",
         "prefered_language": "زبان ترجیحی (کد زبان)",
         "preferSystemLibs": "ارجحیت کتابخانه های سیستم",
@@ -476,7 +488,7 @@
             "installing": "در حال نصب ران تایم BattlEye...",
             "name": "ران تایم BattlEye AntiCheat"
         },
-        "clear-cache": "پاک کردن کش HyperPlay",
+        "clear-cache": "پاک کردن کش Heroic",
         "copiedToClipboard": "در کليپ بورد کپی شد!",
         "copyToClipboard": "کپی کردن همه تنظیمات در کليپ بورد",
         "eacRuntime": {
@@ -505,7 +517,7 @@
             "wineExt": "افزونه های Wine"
         },
         "open-config-file": "باز کردن فایل پیکربندی",
-        "reset-hyperplay": "Reset HyperPlay",
+        "reset-hyperplay": "Reset Heroic",
         "saves": {
             "label": "محل ذخیره:",
             "warning": "ویژگی ذخیره های ابری آزمایشی می باشد، لطفا قبل از هنگام سازی از ذخیره های خود نسخه پشتیبان تهیه کنید (در صورتی که مشکلی به وجود آید)"

@@ -12,8 +12,9 @@ import Settings from './screens/Settings'
 import Accessibility from './screens/Accessibility'
 import ContextProvider from './state/ContextProvider'
 import classNames from 'classnames'
-import { ControllerHints } from './components/UI'
 import Onboarding from './screens/Onboarding'
+import { ControllerHints, OfflineMessage } from './components/UI'
+import DialogHandler from './components/UI/DialogHandler'
 
 function App() {
   const { epic, gog, sidebarCollapsed } = useContext(ContextProvider)
@@ -25,8 +26,10 @@ function App() {
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
       <HashRouter>
+        <OfflineMessage />
         <Sidebar openOnboarding={() => setOnboardingEnabled(true)} />
         <main className="content">
+          <DialogHandler />
           <Routes>
             <Route path="/" element={loggedIn ? <Library /> : <Login />} />
             <Route path="login" element={<Login />} />

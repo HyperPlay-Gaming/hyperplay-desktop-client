@@ -18,7 +18,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "HyperPlay 캐시 삭제됨.",
+            "message": "Heroic 캐시 삭제됨.",
             "title": "캐시 삭제됨"
         },
         "choose": "선택",
@@ -61,14 +61,15 @@
             "launchAborted": "Launch aborted",
             "title": "오류",
             "uncaught-exception": {
-                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
-                "title": "Uncaught Exception occured!"
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
+                "title": "잡히지 않은 예외 발생!"
             },
             "update": {
                 "message": "업데이트에 문제가 발생했습니다. 로그를 확인하거나 나중에 다시 시도하세요!",
                 "title": "Update Error"
             },
             "wine-not-found": {
+                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
                 "message": "Wine 버전이 선택되지 않았습니다. 게임 설정을 확인하세요!",
                 "title": "Wine을 찾을 수 없음"
             },
@@ -82,8 +83,8 @@
                 "changelog": "변경 로그 열기",
                 "detail": "백그라운드에서 업데이트를 다운로드하시겠습니까?",
                 "message": "사용 가능한 새 버전이 있습니다!",
-                "message-finished": "지금 App을 다시 시작하시겠습니까?",
-                "title": "HyperPlay",
+                "message-finished": "지금 Heroic을 다시 시작하시겠습니까?",
+                "title": "Heroic Games Launcher",
                 "title-finished": "업데이트 완료"
             }
         },
@@ -100,8 +101,8 @@
         },
         "reset-hyperplay": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "Heroic을 정말 리셋하시겠습니까? 모든 설정과 캐시를 삭제하지만 설치된 게임이나 Epic 인증은 삭제되지 않습니다. 포터블 버전 Heroic은(AppImage, WinPortable 등) 나중에 직접 재시작해야 합니다.",
+                "title": "Reset Heroic"
             }
         },
         "runexe": {
@@ -175,6 +176,7 @@
         "offline-notification-title": "offline"
     },
     "Epic Games": "Epic Games",
+    "error": "Error",
     "favourites": "즐겨찾기",
     "game": {
         "status": "Status",
@@ -207,7 +209,7 @@
         "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
         "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
         "game_language": {
-            "fallback": "Leave blank to use HyperPlay's language.",
+            "fallback": "Leave blank to use Heroic's language.",
             "in_game_config": "Not all games support this configuration, some have in-game language setting.",
             "valid_codes": "Valid language codes are game-dependant."
         },
@@ -223,10 +225,13 @@
         "preferSystemLibs": "Custom Wine versions (Wine-GE, Wine-Lutris) are shipped with their library dependencies. By enabling this option, these shipped libraries will be ignored and Wine will load system libraries instead. Warning! Issues may occur if dependencies are not met.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
         "resizablebar": "NVIDIA's Resizable Bar helps boost framerate by making the CPU access the entire graphics buffer. Enabling may improve performance for Vulkan-based games.",
+        "steam_path": {
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+        },
         "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
         "sync": {
-            "part1": "App은 올바른 저장 폴더를 찾으려고 시도하며 대부분의 경우에 작동합니다. 폴더가 잘못된 경우 재정의 상자를 사용하여 변경하세요.",
-            "part2": "Wine 또는 Proton의 접두사 폴더를 변경하면 Proton은 다른 접두사(/pfx)와 사용자 이름(steamuser)을 사용하므로 경로를 다시 확인해야 합니다. 따라서 현재 경로를 지우고 동기화 설정 페이지에서 나갔다 돌아오면 App이 올바른 접두사로 폴더를 다시 찾을 수 있습니다.",
+            "part1": "Heroic은 올바른 저장 폴더를 찾으려고 시도하며 대부분의 경우에 작동합니다. 폴더가 잘못된 경우 재정의 상자를 사용하여 변경하세요.",
+            "part2": "Wine 또는 Proton의 접두사 폴더를 변경하면 Proton은 다른 접두사(/pfx)와 사용자 이름(steamuser)을 사용하므로 경로를 다시 확인해야 합니다. 따라서 현재 경로를 지우고 동기화 설정 페이지에서 나갔다 돌아오면 Heroic이 올바른 접두사로 폴더를 다시 찾을 수 있습니다.",
             "part3": "수동 동기화: 다운로드를 선택하여 클라우드에 저장된 게임 세이브을 다운로드합니다. 로컬 항목을 클라우드에 업로드하려면 업로드를 선택합니다. 강제 다운로드 및 강제 업로드는 로컬 또는 클라우드에 있는 버전을 무시합니다.",
             "part4": "세이브 동기화는 게임을 시작하거나 종료할 때 마다 자동으로 동기화 합니다."
         },
@@ -241,7 +246,7 @@
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
-            "version": "HyperPlay Version"
+            "version": "Heroic Version"
         },
         "settings": "설정은 자동으로 저장됩니다",
         "version": "Wine Version"
@@ -313,7 +318,7 @@
         },
         "moved": "이동 완료됨",
         "moving": "Moving Game",
-        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
         },
@@ -323,6 +328,12 @@
             "finished": "업데이트 완료",
             "started": "업데이트 시작됨"
         }
+    },
+    "offline-message": {
+        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "retrying": "Retrying"
     },
     "options": {
         "advanced": {
@@ -377,6 +388,7 @@
     "setting": {
         "adddesktopshortcuts": "데스크톱 바로 가기 자동 추가",
         "addgamestostartmenu": "시작 메뉴에 게임 자동 추가",
+        "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "대신 사용할 GOGDL 바이너리 파일 선택",
         "alt-legendary-bin": "대신 사용할 Legendary 바이너리 파일 선택",
         "audiofix": "오디오 픽스 (Pulse Audio 지연)",
@@ -384,14 +396,14 @@
         "autosync": "세이브 자동 동기화",
         "autovkd3d": "접두사에서 VKD3D 자동 설치/업데이트",
         "change-target-exe": "대체하여 실행할 EXE 선택",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
+        "checkForUpdatesOnStartup": "Check for Heroic Updates on Startup",
         "crossover-version": "Crossover Version",
         "customWineProton": "커스텀 Wine/Proton 경로",
         "darktray": "다크 트레이 아이콘 사용",
         "default-install-path": "기본 설치 경로",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "새로운 Wine 접두사를 위한 폴더 설정",
-        "disable_controller": "컨트롤러를 이용한 HyperPlay 탐색 비활성화",
+        "disable_controller": "컨트롤러를 이용한 Heroic 탐색 비활성화",
         "discordRPC": "Discord Rich Presence 활성화",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "설치된 Epic Games와 동기화",
@@ -450,7 +462,7 @@
         },
         "maxRecentGames": "표시할 최근 플레이한 게임",
         "maxworkers": "다운로드할 때 최대 워커 개수",
-        "minimize-on-launch": "게임 실행 후 HyperPlay 최소화",
+        "minimize-on-launch": "게임 실행 후 Heroic 최소화",
         "offlinemode": "게임 오프라인으로 실행",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
@@ -476,7 +488,7 @@
             "installing": "Installing BattlEye Runtime...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "HyperPlay 캐시 삭제",
+        "clear-cache": "Heroic 캐시 삭제",
         "copiedToClipboard": "클립보드에 복사되었습니다!",
         "copyToClipboard": "모든 설정을 클립보드에 복사",
         "eacRuntime": {
@@ -505,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Open Config File",
-        "reset-hyperplay": "Reset HyperPlay",
+        "reset-hyperplay": "Reset Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"

@@ -18,7 +18,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Tembolok HyperPlay telah dibersihkan.",
+            "message": "Tembolok Heroic telah dibersihkan.",
             "title": "Tembolok telah dibersihkan"
         },
         "choose": "Pilih",
@@ -61,7 +61,7 @@
             "launchAborted": "Launch aborted",
             "title": "Galat",
             "uncaught-exception": {
-                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay will be closed! Report the exception on our Github repository.",
+                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Uncaught Exception occured!"
             },
             "update": {
@@ -69,6 +69,7 @@
                 "title": "Update Error"
             },
             "wine-not-found": {
+                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
                 "message": "Tidak Ada Versi Wine yang Dipilih. Periksa Pengaturan Gim!",
                 "title": "Wine Tidak Ditemukan"
             },
@@ -82,8 +83,8 @@
                 "changelog": "Buka log perubahan",
                 "detail": "Apakah Anda ingin mengunduh pembaruan di latar belakang?",
                 "message": "Ada Versi baru yang tersedia!",
-                "message-finished": "Apakah Anda ingin memulai ulang HyperPlay sekarang?",
-                "title": "HyperPlay",
+                "message-finished": "Apakah Anda ingin memulai ulang Heroic sekarang?",
+                "title": "Heroic Games Launcher",
                 "title-finished": "Pembaruan Selesai"
             }
         },
@@ -100,8 +101,8 @@
         },
         "reset-hyperplay": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
+                "title": "Reset Heroic"
             }
         },
         "runexe": {
@@ -175,6 +176,7 @@
         "offline-notification-title": "luring"
     },
     "Epic Games": "Epic Games",
+    "error": "Error",
     "favourites": "Favorit",
     "game": {
         "status": "Status",
@@ -207,7 +209,7 @@
         "esync": "Esync bertujuan untuk mengurangi overhead server Wine di gim dengan CPU yang intensif. Mengaktifkannya dapat meningkatkan kinerja.",
         "fsync": "Fsync bertujuan untuk mengurangi overhead server Wine di gim dengan CPU intensif. Mengaktifkannya dapat meningkatkan kinerja pada kernel Linux yang didukung.",
         "game_language": {
-            "fallback": "Biarkan kosong untuk menggunakan bahasa HyperPlay.",
+            "fallback": "Biarkan kosong untuk menggunakan bahasa Heroic.",
             "in_game_config": "Tidak semua gim mendukung konfigurasi ini, sebagian memiliki pengaturan bahasa dalam gim.",
             "valid_codes": "Kode bahasa yang valid bergantung pada gim."
         },
@@ -223,16 +225,19 @@
         "preferSystemLibs": "Versi Wine khusus (Wine-GE, Wine-Lutris) dikirimkan dengan dependensi pustakanya. Dengan mengaktifkan opsi ini, pustaka yang dikirimkan tersebut akan diabaikan dan Wine akan memuat pustaka sistem sebagai gantinya. Peringatan! Masalah dapat terjadi jika dependensi tidak terpenuhi.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
         "resizablebar": "Resizable Bar NVIDIA membantu meningkatkan framerate dengan membuat CPU mengakses seluruh penyangga grafis. Mengaktifkannya dapat meningkatkan kinerja untuk gim berbasis Vulkan.",
+        "steam_path": {
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+        },
         "steamruntime": "Pustaka khusus disediakan oleh Steam untuk membantu menjalankan gim Linux dan Windows (Proton). Mengaktifkannya dapat meningkatkan kompatibilitas.",
         "sync": {
-            "part1": "HyperPlay mencoba untuk menebak folder penyimpanan yang tepat dan ini biasanya akan berhasil. Jika folder salah, gunakan kotak penimpaan untuk mengubahnya.",
-            "part2": "Jika Anda mengubah prefiks folder untuk Wine atau Proton, Anda perlu memeriksa lokasinya lagi karena Proton menggunakan prefiks (/pfx) dan nama pengguna (steamuser) yang berbeda. Jadi Anda dapat dengan mudah menghapus lokasi saat ini, keluar dari halaman pengaturan sinkronisasi, lalu kembali lagi dan biarkan HyperPlay menebak folder dengan prefiks yang tepat sekali lagi.",
+            "part1": "Heroic mencoba untuk menebak folder penyimpanan yang tepat dan ini biasanya akan berhasil. Jika folder salah, gunakan kotak penimpaan untuk mengubahnya.",
+            "part2": "Jika Anda mengubah prefiks folder untuk Wine atau Proton, Anda perlu memeriksa lokasinya lagi karena Proton menggunakan prefiks (/pfx) dan nama pengguna (steamuser) yang berbeda. Jadi Anda dapat dengan mudah menghapus lokasi saat ini, keluar dari halaman pengaturan sinkronisasi, lalu kembali lagi dan biarkan Heroic menebak folder dengan prefiks yang tepat sekali lagi.",
             "part3": "Sinkronisasi Manual: Pilih Unduh untuk mengunduh gim yang tersimpan di Awan. Unggah untuk mengunggah berkas lokal ke Awan. Unduh Paksa dan Unggah Paksa akan mengabaikan versi yang ada di penyimpanan lokal atau awan.",
             "part4": "Sinkroninasi Penyimpanan Secara Otomatis akan menyinkronkan penyimpanan setiap kali Anda Memulai Gim dan setelah Anda selesai bermain."
         },
         "vkd3d": "VKD3D adalah lapisan translasi berbasis Vulkan untuk gim dengan DirectX 12. Mengaktifkannya dapat meningkatkan kompatibilitas secara signifikan. Tidak berpengaruh pada gim dengan DirectX versi lama.",
         "wine": {
-            "part1": "HyperPlay mencari versi Wine, Proton, dan CrossOver di folder berikut ini:",
+            "part1": "Heroic mencari versi Wine, Proton, dan CrossOver di folder berikut ini:",
             "part2": "Untuk tempat lain, gunakan tautan simbolis ke salah satu folder ini"
         }
     },
@@ -241,7 +246,7 @@
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
-            "version": "Versi HyperPlay"
+            "version": "Versi Heroic"
         },
         "settings": "Pengaturan disimpan secara otomatis",
         "version": "Versi Wine"
@@ -313,7 +318,7 @@
         },
         "moved": "Selesai Memindahkan",
         "moving": "Memindahkan Gim",
-        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "new-hyperplay-version": "A new Heroic version was released!",
         "refresh": {
             "error": "Tidak dapat mengambil rilis dari sumber, ini mungkin karena pembatasan API Github! Coba lagi nanti."
         },
@@ -323,6 +328,12 @@
             "finished": "Pembaruan Selesai",
             "started": "Pembaruan Dimulai"
         }
+    },
+    "offline-message": {
+        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "retrying": "Retrying"
     },
     "options": {
         "advanced": {
@@ -358,7 +369,7 @@
     "other": {
         "gogdl-version": "Versi GOGDL: ",
         "legendary-version": "Versi Legendary: ",
-        "weblate": "Bantu kami untuk menerjemahkan HyperPlay."
+        "weblate": "Bantu kami untuk menerjemahkan Heroic."
     },
     "placeholder": {
         "alt-gogdl-bin": "Menggunakan GOGDL binary bawaan…",
@@ -377,6 +388,7 @@
     "setting": {
         "adddesktopshortcuts": "Tambahkan pintasan desktop secara otomatis",
         "addgamestostartmenu": "Tambahkan gim untuk memulai menu secara otomatis",
+        "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Pilih GOGDL Binary alternatif untuk digunakan",
         "alt-legendary-bin": "Pilih Legendary Binary Alternatif",
         "audiofix": "Perbaikan Audio (Latensi Pulsa Audio )",
@@ -384,14 +396,14 @@
         "autosync": "Sinkronisasi Penyimpanan Otomatis",
         "autovkd3d": "Pemasangan/Pembaruan VKD3D Otomatis di Prefiks",
         "change-target-exe": "Pilih EXE alternatif untuk dijalankan",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
+        "checkForUpdatesOnStartup": "Check for Heroic Updates on Startup",
         "crossover-version": "Crossover Version",
         "customWineProton": "Lokasi Wine/Proton Khusus",
         "darktray": "Gunakan Ikon Baki Gelap",
         "default-install-path": "Lokasi Pemasangan Bawaan",
         "default-steam-path": "Lokasi Steam bawaan",
         "defaultWinePrefix": "Atur Folder untuk Prefiks Wine baru",
-        "disable_controller": "Nonaktifkan navigasi HyperPlay menggunakan pengontrol",
+        "disable_controller": "Nonaktifkan navigasi Heroic menggunakan pengontrol",
         "discordRPC": "Aktifkan Discord Rich Presence",
         "download-no-https": "Unduh gim tanpa HTTPS (berguna untuk CDN misalnya LanCache)",
         "egs-sync": "Sinkronkan dengan Epic Games yang Terpasang",
@@ -450,7 +462,7 @@
         },
         "maxRecentGames": "Gim yang Dimainkan Baru-Baru Ini",
         "maxworkers": "Jumlah Maksimum Worker saat mengunduh",
-        "minimize-on-launch": "Minimalkan Jendela HyperPlay Setelah Gim Diluncurkan",
+        "minimize-on-launch": "Minimalkan Jendela Heroic Setelah Gim Diluncurkan",
         "offlinemode": "Jalankan Game Secara Luring",
         "prefered_language": "Bahasa Pilihan (Kode Bahasa)",
         "preferSystemLibs": "Lebih memilih pustaka sistem",
@@ -476,7 +488,7 @@
             "installing": "Installing BattlEye Runtime...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "Hapus Tembolok HyperPlay",
+        "clear-cache": "Hapus Tembolok Heroic",
         "copiedToClipboard": "Disalin ke Papan Klip!",
         "copyToClipboard": "Salin Semua Pengaturan ke Papan Klip",
         "eacRuntime": {
@@ -505,7 +517,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Buka Berkas Pengaturan",
-        "reset-hyperplay": "Reset HyperPlay",
+        "reset-hyperplay": "Reset Heroic",
         "saves": {
             "label": "Save Location:",
             "warning": "Fitur Cloud Saves masih dalam versi Beta, harap buat rekam cadang penyimpanan Anda sebelum menyinkronkan (jaga-jaga bila terjadi kesalahan)"

@@ -7,7 +7,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import cx from 'classnames'
 import classNames from 'classnames'
 
 import React, {
@@ -107,7 +106,7 @@ export default function InstallModal({
 
   const { i18n, t } = useTranslation('gamepage')
   const { t: tr } = useTranslation()
-  const { libraryStatus, handleGameStatus, platform } =
+  const { libraryStatus, handleGameStatus, platform, showDialogModal } =
     useContext(ContextProvider)
   const gameStatus: GameStatus = libraryStatus.filter(
     (game: GameStatus) => game.appName === appName
@@ -239,7 +238,8 @@ export default function InstallModal({
       installDlcs,
       installLanguage,
       runner,
-      platformToInstall
+      platformToInstall,
+      showDialogModal
     })
   }
 
@@ -289,10 +289,10 @@ export default function InstallModal({
         platformToInstall
       )
       if (!gameInstallInfo) {
-        window.api.showErrorBox([
-          tr('box.error.generic.title', 'Error!'),
-          tr('box.error.generic.message', 'Something Went Wrong!')
-        ])
+        showDialogModal({
+          title: tr('box.error.generic.title', 'Error!'),
+          message: tr('box.error.generic.message', 'Something Went Wrong!')
+        })
         backdropClick()
         return
       }
@@ -393,7 +393,7 @@ export default function InstallModal({
     <div className="InstallModal">
       <Dialog
         onClose={backdropClick}
-        className={cx('InstallModal__dialog', {
+        className={classNames('InstallModal__dialog', {
           'InstallModal__dialog--loading': !title
         })}
       >

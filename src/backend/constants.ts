@@ -5,11 +5,8 @@ import Store from 'electron-store'
 import { parse } from '@node-steam/vdf'
 
 import { GameConfigVersion, GlobalConfigVersion } from 'common/types'
-import {
-  createNewLogFileAndClearOldOnces,
-  logDebug,
-  LogPrefix
-} from './logger/logger'
+import { logDebug, LogPrefix } from './logger/logger'
+import { createNewLogFileAndClearOldOnces } from './logger/logfile'
 import { env } from 'process'
 import { app } from 'electron'
 import { existsSync, readFileSync } from 'graceful-fs'
@@ -50,12 +47,13 @@ const configPath = join(appConfigFolder, 'config.json')
 const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
 const toolsPath = join(appConfigFolder, 'tools')
 const iconsFolder = join(appConfigFolder, 'icons')
-const runtimePath = join(toolsPath, 'runtimes')
-const userInfo = join(legendaryConfigPath, 'user.json')
 const installPath = join(homedir(), 'Games', 'HyperPlay')
 const defaultWinePrefix = join(homedir(), 'Games', 'HyperPlay', 'Prefixes')
 const anticheatDataPath = join(appConfigFolder, 'areweanticheatyet.json')
-const imagesCachePath = join(appConfigFolder, 'images-cache')
+const heroicFolder = join(configFolder, 'heroic')
+const runtimePath = join(toolsPath, 'runtimes')
+const userInfo = join(legendaryConfigPath, 'user.json')
+const imagesCachePath = join(heroicFolder, 'images-cache')
 
 const { currentLogFile: currentLogFile, lastLogFile: lastLogFile } =
   createNewLogFileAndClearOldOnces()
@@ -74,7 +72,7 @@ const sidInfoUrl = 'https://github.com/G7DAO/HyperPlay/issues/42'
 const githubURL = 'https://github.com/G7DAO/HyperPlay/releases/latest'
 const GITHUB_API = 'https://api.github.com/repos/G7DAO/HyperPlay/releases'
 const supportURL = 'https://github.com/G7DAO/HyperPlay/blob/main/Support.md'
-const discordLink = 'https://discord.gg/rHJ2uqdquK'
+const discordLink = 'https://discord.gg/Vx4ky6ZbAK'
 const wikiLink = 'https://github.com/G7DAO/HyperPlay/wiki'
 const weblateUrl =
   'https://hosted.weblate.org/projects/hyperplay-games-launcher'
@@ -160,10 +158,9 @@ export async function getSteamLibraries(): Promise<string[]> {
       (path) => existsSync(path)
     )
   }
-  logDebug(
-    'Unable to load Steam Libraries, libraryfolders.vdf not found',
-    LogPrefix.Backend
-  )
+  logDebug('Unable to load Steam Libraries, libraryfolders.vdf not found', {
+    prefix: LogPrefix.Backend
+  })
   return libraries
 }
 

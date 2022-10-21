@@ -68,8 +68,8 @@ abstract class GlobalConfig {
       } catch (error) {
         logError(
           `Config file is corrupted, please check ${configPath}`,
-          LogPrefix.Backend,
-          false
+
+          { prefix: LogPrefix.Backend }
         )
         version = 'v0'
       }
@@ -99,11 +99,9 @@ abstract class GlobalConfig {
         GlobalConfig.globalInstance = new GlobalConfigV0()
         break
       default:
-        logError(
-          `Invalid config version '${version}' requested.`,
-          LogPrefix.GlobalConfig,
-          false
-        )
+        logError(`Invalid config version '${version}' requested.`, {
+          prefix: LogPrefix.GlobalConfig
+        })
         break
     }
     // Try to upgrade outdated config.
@@ -111,16 +109,14 @@ abstract class GlobalConfig {
       // Upgrade done, we need to fully reload config.
       logInfo(
         `Upgraded outdated ${version} config to ${currentGlobalConfigVersion}.`,
-        LogPrefix.GlobalConfig
+        { prefix: LogPrefix.GlobalConfig }
       )
       return GlobalConfig.reload(currentGlobalConfigVersion)
     } else if (version !== currentGlobalConfigVersion) {
       // Upgrade failed.
-      logError(
-        `Failed to upgrade outdated ${version} config.`,
-        LogPrefix.GlobalConfig,
-        false
-      )
+      logError(`Failed to upgrade outdated ${version} config.`, {
+        prefix: LogPrefix.GlobalConfig
+      })
     }
   }
 
@@ -481,6 +477,7 @@ class GlobalConfigV0 extends GlobalConfig {
       enableUpdates: false,
       addDesktopShortcuts: false,
       addStartMenuShortcuts: false,
+      addSteamShortcuts: false,
       autoInstallDxvk: false,
       autoInstallVkd3d: false,
       preferSystemLibs: false,

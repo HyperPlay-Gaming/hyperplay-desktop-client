@@ -2,8 +2,7 @@ import Web3Utils from 'web3-utils'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers'
 import { AbstractProvider } from 'web3-core/types'
-import Web3Core from 'web3-core'
-import { RequestArguments } from 'web3-core'
+import Web3Core, { RequestArguments } from 'web3-core'
 
 export enum PROXY_TOPICS {
   WALLET_CONNECTED = 'wallet-connected',

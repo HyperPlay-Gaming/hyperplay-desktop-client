@@ -7,6 +7,7 @@ import { Runner, GameInfo } from 'common/types'
 import { userHome } from '../../constants'
 import { GOGLibrary } from '../../gog/library'
 import { getIcon } from '../utils'
+import { addNonSteamGame } from '../nonesteamgame/nonesteamgame'
 
 /**
  * Adds a desktop shortcut to $HOME/Desktop and to /usr/share/applications
@@ -25,8 +26,12 @@ async function addShortcuts(gameInfo: GameInfo, fromMenu?: boolean) {
   if (!desktopFile || !menuFile) {
     return
   }
-  const { addDesktopShortcuts, addStartMenuShortcuts } =
+  const { addDesktopShortcuts, addStartMenuShortcuts, addSteamShortcuts } =
     await GlobalConfig.get().getSettings()
+
+  if (addSteamShortcuts) {
+    addNonSteamGame({ gameInfo })
+  }
 
   switch (process.platform) {
     case 'linux': {
@@ -43,12 +48,16 @@ Categories=Game;
       if (addDesktopShortcuts || fromMenu) {
         //777 = -rwxrwxrwx
         writeFile(desktopFile, shortcut, { mode: 0o777 }, () => {
-          logInfo(`Shortcut saved on ${desktopFile}`, LogPrefix.Backend)
+          logInfo(`Shortcut saved on ${desktopFile}`, {
+            prefix: LogPrefix.Backend
+          })
         })
       }
       if (addStartMenuShortcuts || fromMenu) {
         writeFile(menuFile, shortcut, () => {
-          logInfo(`Shortcut saved on ${menuFile}`, LogPrefix.Backend)
+          logInfo(`Shortcut saved on ${menuFile}`, {
+            prefix: LogPrefix.Backend
+          })
         })
       }
       break
@@ -76,11 +85,9 @@ Categories=Game;
       break
     }
     default:
-      logError(
-        "Shortcuts haven't been implemented in the current platform.",
-        LogPrefix.Backend,
-        false
-      )
+      logError("Shortcuts haven't been implemented in the current platform.", {
+        prefix: LogPrefix.Backend
+      })
   }
 }
 
@@ -95,12 +102,12 @@ async function removeShortcuts(appName: string, runner: Runner) {
 
   if (desktopFile) {
     unlink(desktopFile, () =>
-      logInfo('Desktop shortcut removed', LogPrefix.Backend)
+      logInfo('Desktop shortcut removed', { prefix: LogPrefix.Backend })
     )
   }
   if (menuFile) {
     unlink(menuFile, () =>
-      logInfo('Applications shortcut removed', LogPrefix.Backend)
+      logInfo('Applications shortcut removed', { prefix: LogPrefix.Backend })
     )
   }
 }
@@ -123,11 +130,9 @@ function shortcutFiles(gameTitle: string) {
       break
     }
     default:
-      logError(
-        "Shortcuts haven't been implemented in the current platform.",
-        LogPrefix.Backend,
-        false
-      )
+      logError("Shortcuts haven't been implemented in the current platform.", {
+        prefix: LogPrefix.Backend
+      })
   }
 
   return [desktopFile, menuFile]

@@ -62,8 +62,12 @@ const initialContext: ContextType = {
   sidebarCollapsed: false,
   setSideBarCollapsed: () => null,
   activeController: '',
+  connectivity: { status: 'online', retryIn: 0 },
   setPrimaryFontFamily: () => null,
-  setSecondaryFontFamily: () => null
+  setSecondaryFontFamily: () => null,
+  dialogModalOptions: { showDialog: false },
+  showDialogModal: () => null,
+  showResetDialog: () => null
 }
 
 export default React.createContext(initialContext)
