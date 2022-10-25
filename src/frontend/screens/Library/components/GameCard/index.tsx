@@ -301,7 +301,7 @@ const GameCard = ({
   }
 
   return (
-    <>
+    <div>
       {showUninstallModal && (
         <UninstallModal
           appName={appName}
@@ -395,7 +395,7 @@ const GameCard = ({
           }
         </div>
       </ContextMenu>
-    </>
+    </div>
   )
 
   async function handlePlay(runner: Runner) {
