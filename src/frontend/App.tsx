@@ -17,9 +17,7 @@ import { ControllerHints, OfflineMessage } from './components/UI'
 import DialogHandler from './components/UI/DialogHandler'
 
 function App() {
-  const { epic, gog, sidebarCollapsed } = useContext(ContextProvider)
-
-  const loggedIn = epic.username || gog.username
+  const { sidebarCollapsed } = useContext(ContextProvider)
 
   const [onboardingEnabled, setOnboardingEnabled] = useState(true)
 
@@ -31,7 +29,7 @@ function App() {
         <main className="content">
           <DialogHandler />
           <Routes>
-            <Route path="/" element={loggedIn ? <Library /> : <Login />} />
+            <Route path="/" element={<Library />} />
             <Route path="login" element={<Login />} />
             <Route path="epicstore" element={<WebView />} />
             <Route path="gogstore" element={<WebView />} />

@@ -1,6 +1,5 @@
 import {
   faBookOpen,
-  faGamepad,
   faSlidersH,
   faStore,
   faUser,
@@ -9,7 +8,7 @@ import {
   faWineGlass
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { NavLink, useNavigate, useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -37,7 +36,6 @@ export default function SidebarLinks() {
     is_installed: false
   })
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const { state } = useLocation() as { state: LocationState }
   const location = useLocation() as { pathname: string }
   const [, , runner, appName, type] = location.pathname.split('/') as PathSplit
@@ -47,39 +45,39 @@ export default function SidebarLinks() {
   const isStore = location.pathname.includes('store')
   const isSettings = location.pathname.includes('settings')
   const [isDefaultSetting, setIsDefaultSetting] = useState(true)
+  const [isNativeApp, setIsNativeApp] = useState(true)
   const [settingsPath, setSettingsPath] = useState(
     '/settings/app/default/general'
   )
   const [isFullscreen, setIsFullscreen] = useState(false)
 
-  const { isLinuxNative = false, isMacNative = false } = state || {}
-  const isWin = platform === 'win32'
   const isMac = platform === 'darwin'
-  const isLinuxGame = isLinuxNative && platform === 'linux'
-  const isMacGame = isMacNative && isMac
   const isLinux = platform === 'linux'
-
-  const shouldRenderWineSettings = !isWin && !isMacGame && !isLinuxGame
+  const isLinuxGame = isLinux && gameInfo.install?.platform === 'linux'
 
   const loggedIn = epic.username || gog.username
 
   useEffect(() => {
-    if (!runner || runner === 'app' || !appName) {
-      setIsDefaultSetting(true)
-      setGameInfo({ ...gameInfo, cloud_save_enabled: false })
-      setSettingsPath('/settings/app/default/general')
-    } else {
-      getGameInfo(appName, runner).then((info) => {
+    const gameInfo = async () => {
+      if (!runner || runner === 'app' || !appName) {
+        setIsDefaultSetting(true)
+        setGameInfo({ ...gameInfo, cloud_save_enabled: false })
+        setSettingsPath('/settings/app/default/general')
+      } else {
+        const info = await getGameInfo(appName, runner)
         setGameInfo(info)
         if (info?.is_installed) {
           setIsDefaultSetting(false)
-          const wineOrOther = isWin
+          const isNative = await window.api.isNative({ appName, runner })
+          setIsNativeApp(isNative)
+          const wineOrOther = isNative
             ? `/settings/${runner}/${appName}/other`
             : `/settings/${runner}/${appName}/wine`
           setSettingsPath(wineOrOther)
         }
-      })
+      }
     }
+    gameInfo()
   }, [location])
 
   useEffect(() => {
@@ -108,13 +106,16 @@ export default function SidebarLinks() {
           className={({ isActive }) =>
             classNames('Sidebar__item', { active: isActive })
           }
-          to={'/'}
+          to={'/login'}
         >
           <>
             <div className="Sidebar__itemIcon">
-              <FontAwesomeIcon icon={faGamepad} title={t('Library')} />
+              <FontAwesomeIcon
+                icon={faUser}
+                title={t('button.login', 'Login')}
+              />
             </div>
-            <span>{t('Library')}</span>
+            <span>{t('button.login', 'Login')}</span>
           </>
         </NavLink>
       )}
@@ -178,7 +179,7 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
-      <button className="Sidebar__item" onClick={() => navigate('/login')}>
+      <NavLink className="Sidebar__item" to={'/login'}>
         <div className="Sidebar__itemIcon">
           <FontAwesomeIcon
             icon={faUserAlt}
@@ -186,7 +187,7 @@ export default function SidebarLinks() {
           />
         </div>
         <span>{t('userselector.manageaccounts', 'Manage Accounts')}</span>
-      </button>
+      </NavLink>
       <h6 className="Sidebar__categoryTitle">OTHER</h6>
       <div className="SidebarItemWithSubmenu">
         <NavLink
@@ -233,7 +234,7 @@ export default function SidebarLinks() {
                 <span>{t('settings.navbar.general')}</span>
               </NavLink>
             )}
-            {shouldRenderWineSettings && (
+            {!isNativeApp && (
               <>
                 <NavLink
                   role="link"
