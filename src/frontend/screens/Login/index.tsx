@@ -11,6 +11,10 @@ import { LanguageSelector, UpdateComponent } from '../../components/UI'
 import { FlagPosition } from '../../components/UI/LanguageSelector'
 import SIDLogin from './components/SIDLogin'
 import ContextProvider from '../../state/ContextProvider'
+import { HyperPlayLogo } from 'frontend/assets/hyperplay'
+
+export const epicLoginPath = '/loginweb/legendary'
+export const gogLoginPath = '/loginweb/gog'
 
 export default function NewLogin() {
   const { epic, gog } = useContext(ContextProvider)
@@ -29,6 +33,11 @@ export default function NewLogin() {
     setIsEpicLoggedIn(Boolean(epic.username))
     setIsGogLoggedIn(Boolean(gog.username))
   }, [epic.username, gog.username, t])
+
+  const loginMessage = t(
+    'login.message',
+    'Login with your platform. You can login to more than one platform at the same time.'
+  )
 
   return (
     <div className="loginPage">
@@ -54,25 +63,44 @@ export default function NewLogin() {
           />
         )}
         <div className="runnerList">
-          <Runner
-            class="epic"
-            loginUrl="/loginweb/legendary"
-            icon={() => <EpicLogo />}
-            isLoggedIn={isEpicLoggedIn}
-            user={epic.username}
-            logoutAction={epic.logout}
-            alternativeLoginAction={() => {
-              setShowSidLogin(true)
-            }}
-          />
-          <Runner
-            class="gog"
-            icon={() => <GOGLogo />}
-            loginUrl="/loginweb/gog"
-            isLoggedIn={isGogLoggedIn}
-            user={gog.username}
-            logoutAction={gog.logout}
-          />
+          <div className="runnerHeader">
+            <HyperPlayLogo className="runnerHeaderIcon" />
+            <div className="runnerHeaderText">
+              <h1 className="title">Heroic</h1>
+              <h2 className="subtitle">Games Launcher</h2>
+            </div>
+
+            {!loading && (
+              <LanguageSelector
+                flagPossition={FlagPosition.PREPEND}
+                showWeblateLink={true}
+              />
+            )}
+          </div>
+
+          <p className="runnerMessage">{loginMessage}</p>
+
+          <div className="runnerGroup">
+            <Runner
+              class="epic"
+              loginUrl={epicLoginPath}
+              icon={() => <EpicLogo />}
+              isLoggedIn={isEpicLoggedIn}
+              user={epic.username}
+              logoutAction={epic.logout}
+              alternativeLoginAction={() => {
+                setShowSidLogin(true)
+              }}
+            />
+            <Runner
+              class="gog"
+              icon={() => <GOGLogo />}
+              loginUrl={gogLoginPath}
+              isLoggedIn={isGogLoggedIn}
+              user={gog.username}
+              logoutAction={gog.logout}
+            />
+          </div>
         </div>
         {(epic.username || gog.username) && (
           <button onClick={() => navigate('/')} className="goToLibrary">
