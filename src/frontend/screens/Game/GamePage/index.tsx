@@ -2,7 +2,11 @@ import './index.scss'
 
 import React, { useContext, useEffect, useState } from 'react'
 
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
+import {
+  BackArrowOutlinedCircled,
+  CyberDividerVertical,
+  SettingsIcon
+} from 'frontend/assets/hyperplay/index'
 
 import {
   getGameInfo,
@@ -257,19 +261,36 @@ export default function GamePage(): JSX.Element | null {
         {title ? (
           <>
             <GamePicture art_square={art_square} store={runner} />
+            <div className="store-icon">
+              {runner === 'legendary' ? <EpicLogo /> : <GOGLogo />}
+            </div>
+            <CyberDividerVertical
+              className="cyberDivider"
+              preserveAspectRatio="xMinYMin slice"
+            />
             <NavLink
               className="backButton"
               to="/"
               title={t2('webview.controls.back', 'Go Back')}
             >
-              <ArrowCircleLeftIcon />
+              <BackArrowOutlinedCircled />
             </NavLink>
-            <div className="store-icon">
-              {runner === 'legendary' ? <EpicLogo /> : <GOGLogo />}
-            </div>
             <div className="gameInfo">
               <div className="titleWrapper">
-                <h1 className="title">{title}</h1>
+                <h2 className="title">{title}</h2>
+                <Link
+                  to={pathname}
+                  state={{
+                    fromGameCard: false,
+                    runner,
+                    isLinuxNative: isNative,
+                    isMacNative: isNative,
+                    hasCloudSave: cloud_save_enabled
+                  }}
+                  className={`settings-icon`}
+                >
+                  <SettingsIcon />
+                </Link>
                 <div className="game-actions">
                   <button className="toggle">
                     <FontAwesomeIcon icon={faEllipsisV} />
@@ -292,7 +313,7 @@ export default function GamePage(): JSX.Element | null {
                 </div>
               </div>
               <div className="infoWrapper">
-                <div className="developer">{developer}</div>
+                <h6 className="developer">{developer}</h6>
                 <div className="summary">
                   {extra && extra.about
                     ? extra.about.description
@@ -417,48 +438,31 @@ export default function GamePage(): JSX.Element | null {
                 </SelectField>
               )}
               <Anticheat gameInfo={gameInfo} />
-              <div className="buttonsWrapper">
-                {is_installed && (
-                  <>
-                    <button
-                      disabled={isReparing || isMoving || isUpdating}
-                      onClick={handlePlay()}
-                      className={`button ${getPlayBtnClass()}`}
-                    >
-                      {getPlayLabel()}
-                    </button>
-                  </>
-                )}
-                {is_installed ? (
-                  <Link
-                    to={pathname}
-                    state={{
-                      fromGameCard: false,
-                      runner,
-                      isLinuxNative: isNative,
-                      isMacNative: isNative,
-                      hasCloudSave: cloud_save_enabled
-                    }}
-                    className={`button ${getButtonClass(is_installed)}`}
-                  >
-                    {`${getButtonLabel(is_installed)}`}
-                  </Link>
-                ) : (
+              {is_installed ? (
+                <>
                   <button
-                    onClick={async () => handleInstall(is_installed)}
-                    disabled={
-                      isPlaying ||
-                      isUpdating ||
-                      isReparing ||
-                      isMoving ||
-                      (hasDownloads && !isInstalling)
-                    }
-                    className={`button ${getButtonClass(is_installed)}`}
+                    disabled={isReparing || isMoving || isUpdating}
+                    onClick={handlePlay()}
+                    className={`button ${getPlayBtnClass()}`}
                   >
-                    {`${getButtonLabel(is_installed)}`}
+                    {getPlayLabel()}
                   </button>
-                )}
-              </div>
+                </>
+              ) : (
+                <button
+                  onClick={async () => handleInstall(is_installed)}
+                  disabled={
+                    isPlaying ||
+                    isUpdating ||
+                    isReparing ||
+                    isMoving ||
+                    (hasDownloads && !isInstalling)
+                  }
+                  className={`button ${getButtonClass(is_installed)}`}
+                >
+                  {`${getButtonLabel(is_installed)}`}
+                </button>
+              )}
               {is_installed && (
                 <NavLink
                   to={`/settings/${runner}/${appName}/log`}
@@ -508,7 +512,7 @@ export default function GamePage(): JSX.Element | null {
     if (isSyncing) {
       return 'is-primary'
     }
-    return isPlaying ? 'is-tertiary' : 'is-success'
+    return isPlaying ? 'is-tertiary' : 'is-cta'
   }
 
   function getPlayLabel(): React.ReactNode {

@@ -8,14 +8,16 @@
 
   .titleWrapper {
     display: flex;
+    align-items: center;
     .title {
-      font-weight: var(--medium);
-      font-size: var(--text-xl);
-      line-height: 30px;
       color: var(--text-default);
       text-align: left;
       flex-basis: 100%;
       align-self: center;
+    }
+
+    .settings-icon {
+      padding-right: var(--space-sm);
     }
 
     .game-actions {
@@ -115,9 +117,7 @@
 }
 
 .backButton {
-  position: absolute;
-  top: 12px;
-  left: 12px;
+  padding: calc(8vh + 12px) var(--space-md) 0;
   background: none;
   border: none;
   color: var(--accent);
@@ -131,6 +131,12 @@
       color: var(--accent-overlay);
     }
   }
+}
+
+.cyberDivider {
+  height: 100%;
+  margin: 0px 0px 0px -6px;
+  z-index: 100;
 }
 
 .gameInfo {
@@ -162,7 +168,7 @@
 
   .developer {
     padding: var(--space-md-fixed) 0 var(--space-md-fixed) 0;
-    color: var(--text-default);
+    color: var(--tertiary-01-400);
   }
 
   .summary {

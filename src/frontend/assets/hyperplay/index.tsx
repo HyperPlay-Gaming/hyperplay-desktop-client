@@ -11,6 +11,9 @@ import { ReactComponent as PlusIcon } from './plus.svg'
 import { ReactComponent as RejectedIcon } from './rejected.svg'
 import { ReactComponent as SuccessIcon } from './success.svg'
 import { ReactComponent as WCBlue } from './walletconnect_icon_blue.svg'
+import { ReactComponent as SettingsIcon } from './settings_icon.svg'
+import { ReactComponent as BackArrowOutlinedCircled } from './back_arrow_outlined_circle.svg'
+import { ReactComponent as CyberDividerVertical } from './cyber_divider_vertical.svg'
 
 export {
   BackArrow,
@@ -25,5 +28,8 @@ export {
   PlusIcon,
   RejectedIcon,
   SuccessIcon,
-  WCBlue
+  WCBlue,
+  SettingsIcon,
+  BackArrowOutlinedCircled,
+  CyberDividerVertical
 }

@@ -38,6 +38,10 @@ button {
   background: #58545d;
 }
 
+.button.is-cta {
+  background: var(--gradient-1);
+}
+
 .button.is-primary {
   background: var(--primary);
 }
