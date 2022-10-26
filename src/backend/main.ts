@@ -1,7 +1,6 @@
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
-  InstallParams,
   GamepadInputEventKey,
   GamepadInputEventWheel,
   GamepadInputEventMouse,
@@ -12,7 +11,8 @@ import {
   LaunchParams,
   Tools,
   WineCommandArgs,
-  SideloadGame
+  SideloadGame,
+  InstallParams
 } from 'common/types'
 import { GOGCloudSavesLocation } from 'common/types/gog'
 import * as path from 'path'
@@ -122,6 +122,7 @@ import { gameInfoStore } from './legendary/electronStores'
 import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
+import { initQueue } from './downloadmanager/downloadqueue'
 import { PROXY_TOPICS } from './proxy/types'
 import * as ProviderHelper from './proxy/providerHelper'
 import * as ProxyServer from './proxy/proxy'
@@ -147,9 +148,9 @@ import {
   getAppSettings,
   isNativeApp,
   launchApp,
-  removeApp,
-  stop
+  removeApp
 } from './sideload/games'
+import { callAbortController } from './utils/aborthandler/aborthandler'
 
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
@@ -528,6 +529,7 @@ ipcMain.on('Notify', (event, args) => {
 
 ipcMain.on('frontendReady', () => {
   handleProtocol(mainWindow, [openUrlArgument, ...process.argv])
+  initQueue()
 })
 
 // Maybe this can help with white screens
@@ -571,7 +573,7 @@ ipcMain.on('unlock', () => {
 })
 
 ipcMain.handle('kill', async (event, appName, runner) => {
-  return runner === 'sideload' ? stop(appName) : getGame(appName, runner).stop()
+  return getGame(appName, runner).stop()
 })
 
 ipcMain.handle('checkDiskSpace', async (event, folder: string) => {
@@ -663,15 +665,21 @@ ipcMain.on('removeFolder', async (e, [path, folderName]) => {
     const { defaultInstallPath } = await GlobalConfig.get().getSettings()
     const path = defaultInstallPath.replaceAll("'", '')
     const folderToDelete = `${path}/${folderName}`
-    return setTimeout(() => {
-      rmSync(folderToDelete, { recursive: true })
-    }, 5000)
+    if (existsSync(folderToDelete)) {
+      return setTimeout(() => {
+        rmSync(folderToDelete, { recursive: true })
+      }, 5000)
+    }
+    return
   }
 
   const folderToDelete = `${path}/${folderName}`.replaceAll("'", '')
-  return setTimeout(() => {
-    rmSync(folderToDelete, { recursive: true })
-  }, 2000)
+  if (existsSync(folderToDelete)) {
+    return setTimeout(() => {
+      rmSync(folderToDelete, { recursive: true })
+    }, 2000)
+  }
+  return
 })
 
 // Calls WineCFG or Winetricks. If is WineCFG, use the same binary as wine to launch it to dont update the prefix
@@ -1296,15 +1304,24 @@ ipcMain.handle(
       runner,
       status: 'installing'
     })
-    try {
-      await game.import(path)
-    } catch (error) {
+
+    const abortMessage = () => {
       notify({ title, body: i18next.t('notify.install.canceled') })
       mainWindow.webContents.send('setGameStatus', {
         appName,
         runner,
         status: 'done'
       })
+    }
+
+    try {
+      const { abort, error } = await game.import(path)
+      if (abort || error) {
+        abortMessage()
+        return { status: 'done' }
+      }
+    } catch (error) {
+      abortMessage()
       logError(error, { prefix: LogPrefix.Backend })
       return { status: 'error' }
     }
@@ -1322,6 +1339,11 @@ ipcMain.handle(
     return { status: 'done' }
   }
 )
+
+ipcMain.handle('kill', async (event, appName, runner) => {
+  callAbortController(appName)
+  return getGame(appName, runner).stop()
+})
 
 ipcMain.handle('updateGame', async (event, appName, runner) => {
   if (!isOnline()) {
@@ -1440,10 +1462,12 @@ ipcMain.handle(
 
 ipcMain.handle('syncSaves', async (event, args) => {
   const [arg = '', path, appName, runner] = args
-  const epicOffline = await isEpicServiceOffline()
-  if (epicOffline) {
-    logWarning('Epic is Offline right now, cannot sync saves!')
-    return 'Epic is Offline right now, cannot sync saves!'
+  if (runner === 'legendary') {
+    const epicOffline = await isEpicServiceOffline()
+    if (epicOffline) {
+      logWarning('Epic is Offline right now, cannot sync saves!')
+      return 'Epic is Offline right now, cannot sync saves!'
+    }
   }
   if (!isOnline()) {
     logWarning(`App offline, skipping syncing saves for game '${appName}'.`, {
@@ -1680,6 +1704,8 @@ import './shortcuts/ipc_handler'
 import './anticheat/ipc_handler'
 import './legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
+import './downloadmanager/ipc_handler'
+import './utils/ipc_handler'
 
 // import Store from 'electron-store'
 // interface StoreMap {

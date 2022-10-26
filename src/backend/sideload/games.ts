@@ -36,6 +36,7 @@ import { addShortcuts, removeShortcuts } from '../shortcuts/shortcuts/shortcuts'
 import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { BrowserWindow } from 'electron'
+import { createAbortController } from '../utils/aborthandler/aborthandler'
 
 export function appLogFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
@@ -183,6 +184,7 @@ export async function launchApp(appName: string): Promise<boolean> {
           bin: executable,
           dir: dirname(executable)
         },
+        createAbortController(appName),
         {
           env,
           wrappers,

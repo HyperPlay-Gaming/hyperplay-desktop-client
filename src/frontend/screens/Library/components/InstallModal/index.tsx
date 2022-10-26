@@ -157,6 +157,8 @@ export default function InstallModal({
     )
   }
 
+  const showDownloadDialog = !isSideload && gameInfo
+
   return (
     <div className="InstallModal">
       <Dialog
@@ -164,7 +166,7 @@ export default function InstallModal({
         showCloseButton
         className={'InstallModal__dialog'}
       >
-        {!isSideload ? (
+        {showDownloadDialog ? (
           <DownloadDialog
             setIsLinuxNative={setIsLinuxNative}
             setIsMacNative={setIsMacNative}

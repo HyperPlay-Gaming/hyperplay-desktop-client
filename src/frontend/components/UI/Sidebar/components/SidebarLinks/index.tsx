@@ -316,6 +316,22 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
+      <NavLink
+        className={({ isActive }) =>
+          classNames('Sidebar__item', { active: isActive })
+        }
+        to={{ pathname: '/download-manager' }}
+      >
+        <>
+          <div className="Sidebar__itemIcon">
+            <FontAwesomeIcon
+              icon={faBarsProgress}
+              title={t('download.manager.link', 'Download Manager')}
+            />
+          </div>
+          <span>{t('download.manager.link', 'Download Manager')}</span>
+        </>
+      </NavLink>
       {isLinux && (
         <NavLink
           className={({ isActive }) =>
