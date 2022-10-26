@@ -5,7 +5,8 @@ import {
   faUser,
   faUniversalAccess,
   faUserAlt,
-  faWineGlass
+  faWineGlass,
+  faGamepad
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink, useLocation } from 'react-router-dom'
@@ -100,25 +101,22 @@ export default function SidebarLinks() {
         />
       </div>
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
-
-      {loggedIn && (
-        <NavLink
-          className={({ isActive }) =>
-            classNames('Sidebar__item', { active: isActive })
-          }
-          to={'/login'}
-        >
-          <>
-            <div className="Sidebar__itemIcon">
-              <FontAwesomeIcon
-                icon={faUser}
-                title={t('button.login', 'Login')}
-              />
-            </div>
-            <span>{t('button.login', 'Login')}</span>
-          </>
-        </NavLink>
-      )}
+      <NavLink
+        className={({ isActive }) =>
+          classNames('Sidebar__item', { active: isActive })
+        }
+        to={'/'}
+      >
+        <>
+          <div className="Sidebar__itemIcon">
+            <FontAwesomeIcon
+              icon={faGamepad}
+              title={t('button.library', 'Library')}
+            />
+          </div>
+          <span>{t('button.library', 'Library')}</span>
+        </>
+      </NavLink>
       <h6 className="Sidebar__categoryTitle">ACCOUNTS</h6>
       {!loggedIn && (
         <NavLink
