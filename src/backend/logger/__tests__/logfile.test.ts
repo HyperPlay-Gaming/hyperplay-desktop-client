@@ -5,6 +5,7 @@ import { app } from 'electron'
 import { configStore } from '../../constants'
 import * as logfile from '../logfile'
 import { logError } from '../logger'
+import { platform } from 'os'
 
 jest.mock('electron')
 jest.mock('electron-store')
@@ -14,7 +15,9 @@ jest.unmock('../logfile')
 
 let tmpDir = {} as DirResult
 
-describe('logger/logfile.ts', () => {
+const skipIfOnWin = platform() === 'win32' ? describe.skip : describe
+
+skipIfOnWin('logger/logfile.ts', () => {
   beforeEach(() => {
     tmpDir = dirSync({ unsafeCleanup: true })
   })
