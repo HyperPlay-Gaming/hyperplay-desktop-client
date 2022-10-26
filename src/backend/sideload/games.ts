@@ -11,7 +11,7 @@ import {
   isMac,
   isLinux,
   execOptions,
-  heroicGamesConfigPath
+  gamesConfigPath
 } from '../constants'
 import { execAsync, killPattern, notify } from '../utils'
 import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
@@ -37,7 +37,7 @@ import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
 
 export function appLogFileLocation(appName: string) {
-  return join(heroicGamesConfigPath, `${appName}-lastPlay.log`)
+  return join(gamesConfigPath, `${appName}-lastPlay.log`)
 }
 
 export function getAppInfo(appName: string): GameInfo {
