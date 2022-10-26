@@ -277,6 +277,7 @@
             "list": "Cambiar a vista de lista"
         }
     },
+    "Library": "",
     "loading": {
         "default": "Cargando",
         "website": "Cargando el sitio web"

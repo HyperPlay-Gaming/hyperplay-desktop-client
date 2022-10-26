@@ -277,6 +277,7 @@
             "list": "Toggle to a list layout"
         }
     },
+    "Library": "",
     "loading": {
         "default": "Chargement",
         "website": "Chargement du site internet"

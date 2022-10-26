@@ -277,6 +277,7 @@
             "list": "Commuta a una vista en llista"
         }
     },
+    "Library": "",
     "loading": {
         "default": "S'està carregant...",
         "website": "S'està carregant el lloc web"

@@ -277,6 +277,7 @@
             "list": "Umschalten auf ein Listenlayout"
         }
     },
+    "Library": "",
     "loading": {
         "default": "Wird geladen",
         "website": "Lade Webseite"

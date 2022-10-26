@@ -277,6 +277,7 @@
             "list": "Toggle to a list layout"
         }
     },
+    "Library": "",
     "loading": {
         "default": "로딩 중",
         "website": "웹사이트 로드 중"

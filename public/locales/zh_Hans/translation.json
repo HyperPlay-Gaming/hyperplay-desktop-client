@@ -277,6 +277,7 @@
             "list": "切换到列表布局"
         }
     },
+    "Library": "",
     "loading": {
         "default": "加载中",
         "website": "正在加载网站"

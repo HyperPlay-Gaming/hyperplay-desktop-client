@@ -277,6 +277,7 @@
             "list": "Toggle to a list layout"
         }
     },
+    "Library": "",
     "loading": {
         "default": "Carregando",
         "website": "Loading Website"

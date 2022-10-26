@@ -277,6 +277,7 @@
             "list": "Toggle to a list layout"
         }
     },
+    "Library": "",
     "loading": {
         "default": "読み込み中",
         "website": "Loading Website"

@@ -277,6 +277,7 @@
             "list": "Toggle to a list layout"
         }
     },
+    "Library": "",
     "loading": {
         "default": "Зареждане",
         "website": "Зареждане на уеб сайта"

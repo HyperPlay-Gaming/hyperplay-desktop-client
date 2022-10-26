@@ -277,6 +277,7 @@
             "list": "Toggle to a list layout"
         }
     },
+    "Library": "",
     "loading": {
         "default": "Caricamento in corso",
         "website": "Caricamento sito web incorso"
