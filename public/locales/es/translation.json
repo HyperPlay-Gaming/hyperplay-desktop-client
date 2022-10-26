@@ -99,10 +99,10 @@
             "message": "Hay operaciones pendientes, ¿estás seguro?",
             "title": "Salir"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "¿Está seguro que quiere restablecer Heroic? Esto removerá todas las configuraciones y caché pero no removerá los juegos installados ni las credenciales. Versiones portables (AppImage, WinPortable, ...) de Heroic tienen que ser iniciadas manualmente luego de ejecutar esta acción.",
-                "title": "Restablecer Heroic"
+                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
+                "title": "Reset Heroic"
             }
         },
         "runexe": {
@@ -277,7 +277,6 @@
             "list": "Cambiar a vista de lista"
         }
     },
-    "Library": "Biblioteca",
     "loading": {
         "default": "Cargando",
         "website": "Cargando el sitio web"

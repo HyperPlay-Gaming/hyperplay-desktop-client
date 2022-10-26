@@ -99,9 +99,9 @@
             "message": "보류 중인 작업 있습니다, 계속 하시겠습니까?",
             "title": "종료"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Heroic을 정말 리셋하시겠습니까? 모든 설정과 캐시를 삭제하지만 설치된 게임이나 Epic 인증은 삭제되지 않습니다. 포터블 버전 Heroic은(AppImage, WinPortable 등) 나중에 직접 재시작해야 합니다.",
+                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Reset Heroic"
             }
         },
@@ -277,7 +277,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "라이브러리",
     "loading": {
         "default": "로딩 중",
         "website": "웹사이트 로드 중"

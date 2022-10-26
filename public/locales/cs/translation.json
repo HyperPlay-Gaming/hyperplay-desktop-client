@@ -99,9 +99,9 @@
             "message": "Existují nevyřízené operace, jste si jisti?",
             "title": "Ukončit"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Jste si jistí, že chcete resetovat Heroic? Tím se odstraní všechna nastavení a mezipaměť, ale neodstraní se nainstalované hry ani přihlašovací údaje Epic. Přenosné verze (AppImage, WinPortable, ...) je poté nutné restartovat ručně.",
+                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Reset Heroic"
             }
         },
@@ -277,7 +277,6 @@
             "list": "Přepnutí na rozvržení seznamu"
         }
     },
-    "Library": "Knihovna",
     "loading": {
         "default": "Načítání",
         "website": "Načítání webu"

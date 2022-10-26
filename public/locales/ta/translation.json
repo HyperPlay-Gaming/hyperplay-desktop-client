@@ -99,7 +99,7 @@
             "message": "செயல்பாடுகள் நிலுவையில் உள்ளன, உறுதி செய்யவா?",
             "title": "வெளியேறு"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Reset Heroic"
@@ -277,7 +277,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "விளையாட்டு பட்டியல்",
     "loading": {
         "default": "ஏற்றுகிறது",
         "website": "Loading Website"

@@ -99,10 +99,10 @@
             "message": "有待处理的操作，你确定吗？",
             "title": "退出"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "你确定要重置 Heroic 吗？这会删除所有设置和缓存但不会删除你已安装的游戏或你的 Epic 凭据。便携版本 (AppImage, WinPortable, ...) 的 heroic 需要稍后手动重启。",
-                "title": "重置 Heroic"
+                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
+                "title": "Reset Heroic"
             }
         },
         "runexe": {
@@ -277,7 +277,6 @@
             "list": "切换到列表布局"
         }
     },
-    "Library": "仓库",
     "loading": {
         "default": "加载中",
         "website": "正在加载网站"

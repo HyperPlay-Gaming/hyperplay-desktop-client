@@ -99,7 +99,7 @@
             "message": "有待處理的操作，您確定嗎？",
             "title": "退出"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Reset Heroic"
@@ -277,7 +277,6 @@
             "list": "切換到清單排版"
         }
     },
-    "Library": "遊戲庫",
     "loading": {
         "default": "載入",
         "website": "載入網站"

@@ -99,7 +99,7 @@
             "message": "D'autres opérations sont en cours, êtes-vous sûr(e)?",
             "title": "Quitter"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
                 "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
                 "title": "Reset Heroic"
@@ -277,7 +277,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "Bibliothèque",
     "loading": {
         "default": "Chargement",
         "website": "Chargement du site internet"

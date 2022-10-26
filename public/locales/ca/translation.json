@@ -99,10 +99,10 @@
             "message": "Hi ha operacions pendents, estàs segur?",
             "title": "Surt"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Esteu segur que voleu restablir el Heroic? Es suprimirà tota la configuració i la memòria cau, però no eliminarà els jocs instal·lats ni les vostres credencials d'Epic. Les versions portables (AppImage, WinPortable, ...) del Heroic s'han de reiniciar manualment després.",
-                "title": "Restableix l'Heroic"
+                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
+                "title": "Reset Heroic"
             }
         },
         "runexe": {
@@ -277,7 +277,6 @@
             "list": "Commuta a una vista en llista"
         }
     },
-    "Library": "Biblioteca",
     "loading": {
         "default": "S'està carregant...",
         "website": "S'està carregant el lloc web"

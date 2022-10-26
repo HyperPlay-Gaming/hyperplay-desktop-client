@@ -99,10 +99,10 @@
             "message": "Postoje operacije na čekanju, jeste li sigurni?",
             "title": "Izlaz"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Jeste li sigurni da želite resetirati Heroic? Ovo će ukloniti sve postavke i memoriju, ali neće ukloniti vaše instalirane igre ili Epic akreditacije",
-                "title": "Resetujte Heroic"
+                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
+                "title": "Reset Heroic"
             }
         },
         "runexe": {
@@ -277,7 +277,6 @@
             "list": "Prebacite se na izgled liste"
         }
     },
-    "Library": "Biblioteka",
     "loading": {
         "default": "Učitava se",
         "website": "Učitavanje webstranice"
