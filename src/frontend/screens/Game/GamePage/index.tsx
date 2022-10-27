@@ -266,7 +266,7 @@ export default function GamePage(): JSX.Element | null {
             </div>
             <CyberDividerVertical
               className="cyberDivider"
-              preserveAspectRatio="xMinYMin slice"
+              preserveAspectRatio="none"
             />
             <NavLink
               className="backButton"
