@@ -23,9 +23,16 @@ const testTarFileWithSubfolder = join(
 
 afterEach(jest.restoreAllMocks)
 
-const skipIfNotOnLinux = platform() === 'linux' ? describe : describe.skip
+const shouldSkip = platform() !== 'linux'
+const skipMessage = 'not on linux so skipping test'
+const emptyTest = it('should do nothing', () => {})
 
-skipIfNotOnLinux('getAssetDataFromDownload', () => {
+describe('getAssetDataFromDownload', () => {
+  if (shouldSkip) {
+    console.log(skipMessage)
+    emptyTest
+    return
+  }
   it('Success', async () => {
     // https://stackoverflow.com/a/43047378
     jest.spyOn(axios, 'get').mockResolvedValue(test_data)
@@ -78,7 +85,12 @@ skipIfNotOnLinux('getAssetDataFromDownload', () => {
   })
 })
 
-skipIfNotOnLinux('downloadFile', () => {
+describe('downloadFile', () => {
+  if (shouldSkip) {
+    console.log(skipMessage)
+    emptyTest
+    return
+  }
   it('Success', async () => {
     const expectedData = readFileSync(testTarFilePath)
 
@@ -153,7 +165,12 @@ skipIfNotOnLinux('downloadFile', () => {
   })
 })
 
-skipIfNotOnLinux('extractTarFile', () => {
+describe('extractTarFile', () => {
+  if (shouldSkip) {
+    console.log(skipMessage)
+    emptyTest
+    return
+  }
   it('Success without strip', async () => {
     const tmpDir = dirSync({ unsafeCleanup: true })
     jest.spyOn(child_process, 'spawn')

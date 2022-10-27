@@ -15,9 +15,16 @@ jest.unmock('../logfile')
 
 let tmpDir = {} as DirResult
 
-const skipIfOnWin = platform() === 'win32' ? describe.skip : describe
+const shouldSkip = platform() === 'win32'
+const skipMessage = 'on windows so skipping test'
+const emptyTest = it('should do nothing', () => {})
 
-skipIfOnWin('logger/logfile.ts', () => {
+describe('logger/logfile.ts', () => {
+  if (shouldSkip) {
+    console.log(skipMessage)
+    emptyTest
+    return
+  }
   beforeEach(() => {
     tmpDir = dirSync({ unsafeCleanup: true })
   })
