@@ -323,85 +323,102 @@ export default function GamePage(): JSX.Element | null {
                       : ''
                     : ''}
                 </div>
-                {is_installed && showCloudSaveInfo && (
-                  <div
-                    style={{
-                      color: autoSyncSaves ? '#07C5EF' : ''
-                    }}
-                  >
-                    <b>{t('info.syncsaves')}:</b>{' '}
-                    {autoSyncSaves ? t('enabled') : t('disabled')}
-                  </div>
-                )}
-                {is_installed && !showCloudSaveInfo && (
-                  <div
-                    style={{
-                      color: '#F45460'
-                    }}
-                  >
-                    <b>{t('info.syncsaves')}:</b>{' '}
-                    {t('cloud_save_unsupported', 'Unsupported')}
-                  </div>
-                )}
-                {!is_installed && (
-                  <>
-                    <div>
-                      <b>{t('game.downloadSize', 'Download Size')}:</b>{' '}
-                      {downloadSize ?? '...'}
-                    </div>
-                    <div>
-                      <b>{t('game.installSize', 'Install Size')}:</b>{' '}
-                      {installSize ?? '...'}
-                    </div>
-                    <br />
-                  </>
-                )}
                 {is_installed && (
                   <>
-                    <div>
-                      <b>{t('info.size')}:</b> {install_size}
-                    </div>
-                    <div style={{ textTransform: 'capitalize' }}>
-                      <b>
-                        {t('info.installedPlatform', 'Installed Platform')}:
-                      </b>{' '}
-                      {installPlatform === 'osx' ? 'MacOS' : installPlatform}
-                    </div>
-                    <div>
-                      <b>{t('info.version')}:</b> {version}
-                    </div>
-                    <div>
-                      <b>{t('info.canRunOffline', 'Online Required')}:</b>{' '}
-                      {t(canRunOffline ? 'box.no' : 'box.yes')}
-                    </div>
                     <div
-                      className="clickable"
+                      className="italic clickablePath"
                       onClick={() =>
                         install_path !== undefined
                           ? window.api.openFolder(install_path)
                           : {}
                       }
                     >
-                      <b>{t('info.path')}:</b> {install_path}
+                      {t('info.path') + ': ' + install_path}
                     </div>
-                    {isLinux && !isNative && (
-                      <>
-                        <div>
-                          <b>Wine:</b> {wineVersion}
-                        </div>
-                        <div
-                          className="clickable"
-                          onClick={() => window.api.openFolder(winePrefix)}
-                        >
-                          <b>Prefix:</b> {winePrefix}
-                        </div>
-                      </>
-                    )}
-                    <br />
                   </>
                 )}
+                <div className="grid-container">
+                  {!is_installed && (
+                    <>
+                      <div className="subtitle">
+                        {t('game.downloadSize', 'Download Size')}
+                      </div>
+                      <div className="col2-item italic">
+                        {downloadSize ?? '...'}
+                      </div>
+                      <div className="subtitle">
+                        {t('game.installSize', 'Install Size')}
+                      </div>
+                      <div className="col2-item italic">
+                        {installSize ?? '...'}
+                      </div>
+                    </>
+                  )}
+                  {is_installed && (
+                    <>
+                      {showCloudSaveInfo ? (
+                        <>
+                          <div className="subtitle">{t('info.syncsaves')}</div>
+                          <div
+                            style={{
+                              color: autoSyncSaves ? '#07C5EF' : ''
+                            }}
+                            className="col2-item italic"
+                          >
+                            {autoSyncSaves ? t('enabled') : t('disabled')}
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="subtitle">{t('info.syncsaves')}:</div>
+                          <div
+                            style={{
+                              color: '#F45460'
+                            }}
+                            className="col2-item italic"
+                          >
+                            {t('cloud_save_unsupported', 'Unsupported')}
+                          </div>
+                        </>
+                      )}
+                      <div className="subtitle">{t('info.size')}</div>
+                      <div className="col2-item italic">{install_size}</div>
+                      <div className="subtitle">
+                        {t('info.installedPlatform', 'Installed Platform')}:
+                      </div>
+                      <div
+                        style={{ textTransform: 'capitalize' }}
+                        className="col2-item"
+                      >
+                        {installPlatform === 'osx' ? 'MacOS' : installPlatform}
+                      </div>
+                      <div className="subtitle">{t('info.version')}</div>
+                      <div className="col2-item italic">{version}</div>
+                      <div className="subtitle">
+                        {t('info.canRunOffline', 'Online Required')}:
+                      </div>
+                      <div className="col2-item italic">
+                        {t(canRunOffline ? 'box.no' : 'box.yes')}
+                      </div>
+                      {isLinux && !isNative && (
+                        <>
+                          <div className="subtitle">Wine</div>
+                          <div className="col2-item italic">{wineVersion}</div>
+                          <div className="subtitle">Prefix:</div>
+                          <div
+                            className="italic clickablePath"
+                            onClick={() => window.api.openFolder(winePrefix)}
+                          >
+                            {winePrefix}
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
+
+                  <TimeContainer game={appName} />
+                </div>
               </div>
-              <TimeContainer game={appName} />
               <div className="gameStatus">
                 {isInstalling ||
                   (isUpdating && (

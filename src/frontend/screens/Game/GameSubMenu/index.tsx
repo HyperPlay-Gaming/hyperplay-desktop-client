@@ -227,6 +227,28 @@ export default function GamesSubmenu({
         />
       )}
       <div className={`submenu`}>
+        <NavLink
+          className="link button is-text is-link"
+          to={`/store-page?store-url=${storeUrl}`}
+        >
+          {t('submenu.store')}
+        </NavLink>
+        {!isWin && (
+          <button
+            onClick={() => createNewWindow(protonDBurl)}
+            className="link button is-text is-link"
+          >
+            {t('submenu.protondb')}
+          </button>
+        )}
+        {onShowRequirements && (
+          <button
+            onClick={async () => onShowRequirements()}
+            className="link button is-text is-link"
+          >
+            {t('game.requirements', 'Requirements')}
+          </button>
+        )}
         {isInstalled && (
           <>
             {!isMac && (
@@ -252,38 +274,30 @@ export default function GamesSubmenu({
               </button>
             )}
             <button
-              onClick={() => {
-                setShowUninstallModal(true)
-              }}
-              className="link button is-text is-link"
-            >
-              {t('button.uninstall')}
-            </button>{' '}
-            <button
               onClick={async () => handleUpdate()}
               className="link button is-text is-link"
               disabled={disableUpdate}
             >
               {t('button.force_update', 'Force Update if Available')}
-            </button>{' '}
+            </button>
             <button
               onClick={async () => handleMoveInstall()}
               className="link button is-text is-link"
             >
               {t('submenu.move')}
-            </button>{' '}
+            </button>
             <button
               onClick={async () => handleChangeInstall()}
               className="link button is-text is-link"
             >
               {t('submenu.change')}
-            </button>{' '}
+            </button>
             <button
               onClick={async () => handleRepair(appName)}
               className="link button is-text is-link"
             >
               {t('submenu.verify')}
-            </button>{' '}
+            </button>
             {isLinux &&
               runner === 'legendary' &&
               (eosOverlayRefresh ? (
@@ -298,29 +312,15 @@ export default function GamesSubmenu({
                     : t('submenu.enableEosOverlay', 'Enable EOS Overlay')}
                 </button>
               ))}
+            <button
+              onClick={() => {
+                setShowUninstallModal(true)
+              }}
+              className="link button is-text is-link is-dangerous"
+            >
+              {t('button.uninstall')}
+            </button>
           </>
-        )}
-        <NavLink
-          className="link button is-text is-link"
-          to={`/store-page?store-url=${storeUrl}`}
-        >
-          {t('submenu.store')}
-        </NavLink>
-        {!isWin && (
-          <button
-            onClick={() => createNewWindow(protonDBurl)}
-            className="link button is-text is-link"
-          >
-            {t('submenu.protondb')}
-          </button>
-        )}
-        {onShowRequirements && (
-          <button
-            onClick={async () => onShowRequirements()}
-            className="link button is-text is-link"
-          >
-            {t('game.requirements', 'Requirements')}
-          </button>
         )}
       </div>
     </div>

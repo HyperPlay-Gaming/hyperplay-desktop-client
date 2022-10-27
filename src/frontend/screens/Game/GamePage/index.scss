@@ -2,8 +2,9 @@
   background: var(--background-darker);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
-  height: 100vh;
+  flex-direction: row;
   justify-content: stretch;
+  align-items: stretch;
   position: relative;
 
   .titleWrapper {
@@ -18,6 +19,10 @@
 
     .settings-icon {
       padding-right: var(--space-sm);
+
+      &:hover {
+        color: var(--primary);
+      }
     }
 
     .game-actions {
@@ -41,7 +46,7 @@
       &:focus-within .toggle,
       &:hover .toggle,
       .toggle:hover {
-        color: var(--text-title);
+        color: var(--primary);
       }
 
       .gameTools {
@@ -147,6 +152,7 @@
   display: flex;
   flex-direction: column;
   max-width: 650px;
+  width: 100%;
   user-select: text;
   padding: 8vh 2.2em 1.2em 1.2em;
 
@@ -176,7 +182,6 @@
     font-style: normal;
     font-weight: normal;
     padding-bottom: var(--space-sm);
-    margin-bottom: var(--space-md);
     font-size: var(--text-md);
     max-width: 560px;
     text-overflow: ellipsis;
@@ -320,4 +325,27 @@
   100% {
     background-position: -100px 0px;
   }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-top: var(--space-xl);
+}
+
+.grid-container > div {
+  border-bottom: 1px white solid;
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-2xs);
+}
+
+.clickablePath {
+  color: var(--primary-50);
+  cursor: pointer;
+  transition: 400ms;
+  margin: var(--space-sm) 0;
+}
+
+.col2-item {
+  color: var(--primary-50);
 }

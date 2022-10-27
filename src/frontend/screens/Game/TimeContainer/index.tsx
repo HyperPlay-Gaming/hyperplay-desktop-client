@@ -2,7 +2,6 @@ import * as React from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import { SmallInfo } from 'frontend/components/UI'
 import { timestampStore } from 'frontend/helpers/electronStores'
 
 import './index.css'
@@ -23,10 +22,16 @@ function TimeContainer({ game }: Props) {
 
   if (!hasPlayed) {
     return (
-      <SmallInfo
-        title={`${t('game.lastPlayed', 'Last Played')}:`}
-        subtitle={`${t('game.neverPlayed', 'Never')}`}
-      />
+      <>
+        <div className="subtitle">{`${t(
+          'game.lastPlayed',
+          'Last Played'
+        )}:`}</div>
+        <div className="col2-item italic">{`${t(
+          'game.neverPlayed',
+          'Never'
+        )}`}</div>
+      </>
     )
   }
 
@@ -52,24 +57,28 @@ function TimeContainer({ game }: Props) {
   )
 
   return (
-    <div className="info">
-      <SmallInfo
-        title={`${t('game.firstPlayed', 'First Played')}:`}
-        subtitle={firstDate}
-      />
+    <>
+      <div className="subtitle">{`${t(
+        'game.firstPlayed',
+        'First Played'
+      )}:`}</div>
+      <div className="col2-item italic">{firstDate}</div>
+
       {lastPlayed && (
-        <SmallInfo
-          title={`${t('game.lastPlayed', 'Last Played')}:`}
-          subtitle={lastDate}
-        />
+        <>
+          <div className="subtitle">{`${t(
+            'game.lastPlayed',
+            'Last Played'
+          )}:`}</div>
+          <div className="col2-item italic">{lastDate}</div>
+        </>
       )}
-      {totalPlayed && (
-        <SmallInfo
-          title={`${t('game.totalPlayed', 'Time Played')}:`}
-          subtitle={`${totalPlayed}`}
-        />
-      )}
-    </div>
+      <div className="subtitle">{`${t(
+        'game.totalPlayed',
+        'Time Played'
+      )}:`}</div>
+      <div className="col2-item italic">{`${totalPlayed}`}</div>
+    </>
   )
 }
 

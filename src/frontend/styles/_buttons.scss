@@ -185,3 +185,11 @@ button {
   color: var(--icon-disabled);
   cursor: wait;
 }
+
+.button.is-dangerous {
+  color: var(--danger);
+}
+
+.button.is-dangerous:hover {
+  color: var(--danger);
+}

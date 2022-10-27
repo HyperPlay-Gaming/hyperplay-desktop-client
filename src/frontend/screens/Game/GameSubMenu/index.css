@@ -51,3 +51,7 @@
   width: var(--line-height) !important;
   height: var(--line-height) !important;
 }
+
+.dangerous-button {
+  color: red;
+}
