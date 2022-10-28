@@ -58,7 +58,8 @@ export function addNewApp({
   install: { executable, platform },
   art_cover,
   art_square,
-  web3
+  web3,
+  browserUrl
 }: SideloadGame): void {
   const game: SideloadGame = {
     runner: 'sideload',
@@ -72,7 +73,8 @@ export function addNewApp({
     art_cover,
     is_installed: true,
     art_square,
-    canRunOffline: true,
+    canRunOffline: !browserUrl,
+    browserUrl,
     web3
   }
 

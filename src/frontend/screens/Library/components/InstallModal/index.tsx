@@ -1,4 +1,9 @@
-import { faApple, faLinux, faWindows } from '@fortawesome/free-brands-svg-icons'
+import {
+  faApple,
+  faLinux,
+  faWindows,
+  faChrome
+} from '@fortawesome/free-brands-svg-icons'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 import React, { useContext, useEffect, useState } from 'react'
@@ -76,6 +81,12 @@ export default function InstallModal({
       available: true,
       value: 'Windows',
       icon: faWindows
+    },
+    {
+      name: 'Browser',
+      available: true,
+      value: 'Browser',
+      icon: faChrome
     }
   ]
 

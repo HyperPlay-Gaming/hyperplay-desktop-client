@@ -210,7 +210,9 @@ export default function GamePage(): JSX.Element | null {
 
     hasRequirements = extra?.reqs?.length > 0
     hasUpdate = is_installed && gameUpdates?.includes(appName)
-    const appLocation = install_path || folder_name
+    const appLocation = gameInfo.browserUrl
+      ? false
+      : install_path || folder_name
 
     const downloadSize =
       gameInstallInfo?.manifest?.download_size &&
@@ -372,16 +374,18 @@ export default function GamePage(): JSX.Element | null {
                       <b>{t('info.canRunOffline', 'Online Required')}:</b>{' '}
                       {t(canRunOffline ? 'box.no' : 'box.yes')}
                     </div>
-                    <div
-                      className="clickable"
-                      onClick={() =>
-                        appLocation !== undefined
-                          ? window.api.openFolder(appLocation)
-                          : {}
-                      }
-                    >
-                      <b>{t('info.path')}:</b> {appLocation}
-                    </div>
+                    {appLocation && (
+                      <div
+                        className="clickable"
+                        onClick={() =>
+                          appLocation !== undefined
+                            ? window.api.openFolder(appLocation)
+                            : {}
+                        }
+                      >
+                        <b>{t('info.path')}:</b> {appLocation}
+                      </div>
+                    )}
                     {isLinux && !isNative && (
                       <>
                         <div>

@@ -150,6 +150,7 @@ export interface GameInfo {
   canRunOffline: boolean
   is_mac_native: boolean
   is_linux_native: boolean
+  browserUrl?: string
   web3?: Web3Features
 }
 export interface GameSettings {
@@ -490,7 +491,10 @@ export type ElWebview = {
 
 export type WebviewType = HTMLWebViewElement & ElWebview
 
-export type InstallPlatform = LegendaryInstallPlatform | GogInstallPlatform
+export type InstallPlatform =
+  | LegendaryInstallPlatform
+  | GogInstallPlatform
+  | 'Browser'
 
 export type ConnectivityChangedCallback = (
   event: IpcRendererEvent,
@@ -533,5 +537,6 @@ export interface SideloadGame {
   }
   folder_name?: string
   canRunOffline: boolean
+  browserUrl: string
   web3: Web3Features
 }

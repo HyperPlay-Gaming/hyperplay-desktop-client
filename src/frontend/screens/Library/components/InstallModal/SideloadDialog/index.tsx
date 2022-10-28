@@ -54,6 +54,7 @@ export default function SideloadDialog({
     t('sideload.field.title', 'Title')
   )
   const [selectedExe, setSelectedExe] = useState('')
+  const [gameUrl, setGameUrl] = useState('')
   const [imageUrl, setImageUrl] = useState('')
   const [app_name, setApp_name] = useState(appName ?? '')
   const [runningSetup, setRunningSetup] = useState(false)
@@ -124,7 +125,8 @@ export default function SideloadDialog({
       is_installed: true,
       art_square: imageUrl,
       canRunOffline: true,
-      web3
+      web3,
+      browserUrl: gameUrl
     })
     const notWin = platform !== 'win32'
     const otherPlatforms = ['linux', 'Mac']
@@ -245,25 +247,39 @@ export default function SideloadDialog({
               value={imageUrl}
             />
             {!editMode && children}
-            <TextInputWithIconField
-              htmlId="sideload-exe"
-              label={t('sideload.info.exe', 'Select Executable')}
-              onChange={(e) => setSelectedExe(e.target.value)}
-              icon={<FontAwesomeIcon icon={faFolderOpen} />}
-              value={selectedExe}
-              placeholder={t('sideload.info.exe', 'Select Executable')}
-              onIconClick={async () =>
-                window.api
-                  .openDialog({
-                    buttonLabel: t('box.select.button', 'Select'),
-                    properties: ['openFile'],
-                    title: t('box.sideload.exe', 'Select Executable'),
-                    filters: fileFilters[platformToInstall],
-                    defaultPath: winePrefix
-                  })
-                  .then(({ path }: Path) => setSelectedExe(path ? path : ''))
-              }
-            />
+            {platformToInstall !== 'Browser' && (
+              <TextInputWithIconField
+                htmlId="sideload-exe"
+                label={t('sideload.info.exe', 'Select Executable')}
+                onChange={(e) => setSelectedExe(e.target.value)}
+                icon={<FontAwesomeIcon icon={faFolderOpen} />}
+                value={selectedExe}
+                placeholder={t('sideload.info.exe', 'Select Executable')}
+                onIconClick={async () =>
+                  window.api
+                    .openDialog({
+                      buttonLabel: t('box.select.button', 'Select'),
+                      properties: ['openFile'],
+                      title: t('box.sideload.exe', 'Select Executable'),
+                      filters: fileFilters[platformToInstall],
+                      defaultPath: winePrefix
+                    })
+                    .then(({ path }: Path) => setSelectedExe(path ? path : ''))
+                }
+              />
+            )}
+            {platformToInstall === 'Browser' && (
+              <TextInputField
+                label={t('sideload.info.broser', 'BrowserURL')}
+                placeholder={t(
+                  'sideload.placeholder.url',
+                  'Paste the Game URL here'
+                )}
+                onChange={(e) => setGameUrl(e.target.value)}
+                htmlId="sideload-game-url"
+                value={gameUrl}
+              />
+            )}
             <ToggleSwitch
               htmlId="web3features"
               value={web3.supported}
@@ -293,7 +309,7 @@ export default function SideloadDialog({
         <button
           onClick={async () => handleInstall()}
           className={`button is-primary`}
-          disabled={!selectedExe.length}
+          disabled={!selectedExe.length && !gameUrl}
         >
           {t('button.finish', 'Finish')}
         </button>
