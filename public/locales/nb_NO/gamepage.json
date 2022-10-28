@@ -121,7 +121,6 @@
     "launch": {
         "options": "Startalternativer..."
     },
-    "No": "",
     "report_problem": "Rapporter et problem med å kjøre dette spillet",
     "sdl": {
         "title": "Velg komponenter som skal installeres"
@@ -172,6 +171,5 @@
         "settings": "Innstillinger",
         "store": "Butikkside",
         "verify": "Bekreft og reparer"
-    },
-    "Yes": ""
+    }
 }

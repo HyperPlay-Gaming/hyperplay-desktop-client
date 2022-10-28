@@ -120,7 +120,6 @@
     "launch": {
         "options": "വിക്ഷേപണ ബദലുകൾ..."
     },
-    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "നടുവാനുള്ള ഘടകങ്ങള് തിരഞ്ഞെടുക്കൂ"
@@ -171,6 +170,5 @@
         "settings": "ക്രമീകരണങ്ങള്",
         "store": "കടത്താള്",
         "verify": "കണ്ടെത്തി നന്നാക്കൂ"
-    },
-    "Yes": ""
+    }
 }

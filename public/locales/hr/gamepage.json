@@ -120,7 +120,6 @@
     "launch": {
         "options": "Opcije za pokretanje..."
     },
-    "No": "",
     "report_problem": "Prijavi problem za ovu igricu",
     "sdl": {
         "title": "Odaberite komponente za instalaciju"
@@ -171,6 +170,5 @@
         "settings": "Postavke",
         "store": "Stranica Trgovine",
         "verify": "Provjeri i popravi"
-    },
-    "Yes": ""
+    }
 }

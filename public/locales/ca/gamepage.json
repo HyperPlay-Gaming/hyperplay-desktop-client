@@ -120,7 +120,6 @@
     "launch": {
         "options": "Opcions d'execució..."
     },
-    "No": "",
     "report_problem": "Informa d'un problema quan s'executa el joc",
     "sdl": {
         "title": "Selecciona els components a instal·lar"
@@ -171,6 +170,5 @@
         "settings": "Configuració",
         "store": "Botiga",
         "verify": "Verifica i repara"
-    },
-    "Yes": ""
+    }
 }

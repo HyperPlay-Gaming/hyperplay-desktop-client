@@ -120,7 +120,6 @@
     "launch": {
         "options": "Başlatma Seçenekleri..."
     },
-    "No": "",
     "report_problem": "Bu oyunun çalışmasıyla ilgili bir sorun bildir",
     "sdl": {
         "title": "Kurulacak bileşenleri seç"
@@ -171,6 +170,5 @@
         "settings": "Ayarlar",
         "store": "Mağaza Sayfası",
         "verify": "Doğrula ve Onar"
-    },
-    "Yes": ""
+    }
 }

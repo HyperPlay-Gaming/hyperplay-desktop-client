@@ -120,7 +120,6 @@
     "launch": {
         "options": "Launch Options..."
     },
-    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "Selecione os componentes para instalar"
@@ -171,6 +170,5 @@
         "settings": "Configurações",
         "store": "Página da Loja",
         "verify": "Verificar e Reparar"
-    },
-    "Yes": ""
+    }
 }

@@ -120,7 +120,6 @@
     "launch": {
         "options": "Käynnistysasetukset..."
     },
-    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "Valitse asennettavat komponentit"
@@ -171,6 +170,5 @@
         "settings": "Asetukset",
         "store": "Kauppasivu",
         "verify": "Vahvista ja korjaa"
-    },
-    "Yes": ""
+    }
 }

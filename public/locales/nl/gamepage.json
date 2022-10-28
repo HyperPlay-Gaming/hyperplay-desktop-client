@@ -120,7 +120,6 @@
     "launch": {
         "options": "Opstartopties..."
     },
-    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "Selecteer componenten om te installeren"
@@ -171,6 +170,5 @@
         "settings": "Instellingen",
         "store": "Winkel",
         "verify": "Verifiëren en repareren"
-    },
-    "Yes": ""
+    }
 }

@@ -120,7 +120,6 @@
     "launch": {
         "options": "Opcje Uruchamiania..."
     },
-    "No": "",
     "report_problem": "Zgłoś problem z uruchamianiem tej gry",
     "sdl": {
         "title": "Wybierz komponenty do instalacji"
@@ -171,6 +170,5 @@
         "settings": "Ustawienia",
         "store": "Strona sklepu",
         "verify": "Sprawdź i napraw"
-    },
-    "Yes": ""
+    }
 }

@@ -120,7 +120,6 @@
     "launch": {
         "options": "Tuỳ chọn khởi chạy..."
     },
-    "No": "",
     "report_problem": "Báo cáo sự cố khi chạy game này",
     "sdl": {
         "title": "Chọn các thành phần cần cài"
@@ -171,6 +170,5 @@
         "settings": "Cài đặt",
         "store": "Cửa hàng",
         "verify": "Kiểm tra và sửa chữa"
-    },
-    "Yes": ""
+    }
 }

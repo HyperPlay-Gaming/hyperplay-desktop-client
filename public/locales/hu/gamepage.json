@@ -120,7 +120,6 @@
     "launch": {
         "options": "Indítási opciók..."
     },
-    "No": "",
     "report_problem": "Játék futtatásával kapcsolatos hiba jelentése",
     "sdl": {
         "title": "Válaszd ki a telepíteni kívánt elemeket"
@@ -171,6 +170,5 @@
         "settings": "Beállítások",
         "store": "Áruházi oldal",
         "verify": "Ellenőrzés és javítás"
-    },
-    "Yes": ""
+    }
 }

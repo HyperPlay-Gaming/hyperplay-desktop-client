@@ -120,7 +120,6 @@
     "launch": {
         "options": "Launch Options..."
     },
-    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "インストールするコンポーネントを選択します"
@@ -171,6 +170,5 @@
         "settings": "設定",
         "store": "ストアページ",
         "verify": "確認と修復"
-    },
-    "Yes": ""
+    }
 }

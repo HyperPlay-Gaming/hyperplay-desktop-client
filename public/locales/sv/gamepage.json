@@ -120,7 +120,6 @@
     "launch": {
         "options": "Startalternativ..."
     },
-    "No": "",
     "report_problem": "Rapportera problem med spelet",
     "sdl": {
         "title": "Ange komponenter att installera"
@@ -171,6 +170,5 @@
         "settings": "Inställningar",
         "store": "Butikssida",
         "verify": "Verifiera och reparera"
-    },
-    "Yes": ""
+    }
 }

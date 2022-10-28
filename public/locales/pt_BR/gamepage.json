@@ -120,7 +120,6 @@
     "launch": {
         "options": "Opções de Inicialização..."
     },
-    "No": "",
     "report_problem": "Relatar um problema na execução deste jogo",
     "sdl": {
         "title": "Selecione os componentes para instalar"
@@ -171,6 +170,5 @@
         "settings": "Configurações",
         "store": "Loja Epic",
         "verify": "Verificar e Reparar"
-    },
-    "Yes": ""
+    }
 }

@@ -120,7 +120,6 @@
     "launch": {
         "options": "Možnosti spustenia..."
     },
-    "No": "",
     "report_problem": "Nahlásiť problém so spustením tejto hry",
     "sdl": {
         "title": "Vyberte komponenty na inštaláciu"
@@ -171,6 +170,5 @@
         "settings": "nastavenie",
         "store": "Stránka obchodu",
         "verify": "Overiť a opraviť"
-    },
-    "Yes": ""
+    }
 }

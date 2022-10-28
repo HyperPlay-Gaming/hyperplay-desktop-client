@@ -120,7 +120,6 @@
     "launch": {
         "options": "Opsi Peluncuran…"
     },
-    "No": "",
     "report_problem": "Laporkan masalah yang terjadi saat memainkan gim ini",
     "sdl": {
         "title": "Pilih komponen untuk dipasang"
@@ -171,6 +170,5 @@
         "settings": "Pengaturan",
         "store": "Halaman Toko",
         "verify": "Verifikasi dan Perbaiki"
-    },
-    "Yes": ""
+    }
 }

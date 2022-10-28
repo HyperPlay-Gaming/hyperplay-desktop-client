@@ -120,7 +120,6 @@
     "launch": {
         "options": "Käivitusvalikud..."
     },
-    "No": "",
     "report_problem": "Teatage selle mängu käivitamise probleemist",
     "sdl": {
         "title": "Valige komponendid, mida installida"
@@ -171,6 +170,5 @@
         "settings": "Seaded",
         "store": "Poe lehekülg",
         "verify": "Kontrolli ja paranda"
-    },
-    "Yes": ""
+    }
 }

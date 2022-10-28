@@ -120,7 +120,6 @@
     "launch": {
         "options": "Opcións de arrinque..."
     },
-    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "Seleccione os compoñentes a instalar"
@@ -171,6 +170,5 @@
         "settings": "Axustes",
         "store": "Páxina da tenda",
         "verify": "Verificar e reparar"
-    },
-    "Yes": ""
+    }
 }

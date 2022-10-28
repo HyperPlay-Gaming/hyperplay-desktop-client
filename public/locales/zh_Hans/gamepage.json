@@ -120,7 +120,6 @@
     "launch": {
         "options": "启动选项..."
     },
-    "No": "",
     "report_problem": "报告运行此游戏时出现的问题",
     "sdl": {
         "title": "选择要安装的组件"
@@ -171,6 +170,5 @@
         "settings": "设置",
         "store": "商店页面",
         "verify": "验证和修复"
-    },
-    "Yes": ""
+    }
 }

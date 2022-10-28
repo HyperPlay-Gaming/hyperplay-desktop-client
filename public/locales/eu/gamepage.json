@@ -121,7 +121,6 @@
     "launch": {
         "options": "Jaurtiketa-aukerak..."
     },
-    "No": "",
     "report_problem": "Joko hau gauzatzean arazo baten berri ematea",
     "sdl": {
         "title": "Instalatzeko osagaiak hautatzea"
@@ -172,6 +171,5 @@
         "settings": "Konfigurazioa",
         "store": "Dendaren orrialdea",
         "verify": "Egiaztatzea eta konpontzea"
-    },
-    "Yes": ""
+    }
 }

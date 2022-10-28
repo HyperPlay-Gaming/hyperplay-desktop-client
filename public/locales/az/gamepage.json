@@ -121,7 +121,6 @@
     "launch": {
         "options": "Başlama Seçimləri..."
     },
-    "No": "",
     "report_problem": "Bu oyunu idarə edən problemi bildirin",
     "sdl": {
         "title": "Quraşdırılacaq komponentləri seçin"
@@ -172,6 +171,5 @@
         "settings": "Parametrlər",
         "store": "Mağaza Səhifəsi",
         "verify": "Doğrulayın və Təmir edin"
-    },
-    "Yes": ""
+    }
 }

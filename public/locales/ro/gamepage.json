@@ -121,7 +121,6 @@
     "launch": {
         "options": "Opțiuni de Lansare..."
     },
-    "No": "",
     "report_problem": "Raportați o problemă la rularea acestui joc",
     "sdl": {
         "title": "Selectați componentele de instalat"
@@ -172,6 +171,5 @@
         "settings": "Setări",
         "store": "Pagina magazinului",
         "verify": "Verificați și Reparați"
-    },
-    "Yes": ""
+    }
 }
