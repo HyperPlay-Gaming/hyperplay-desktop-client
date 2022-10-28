@@ -115,7 +115,7 @@ export async function launchApp(appName: string): Promise<boolean> {
 
   if (browserUrl) {
     return new Promise((res) => {
-      const browserGame = new BrowserWindow()
+      const browserGame = new BrowserWindow({ fullscreen: true })
       browserGame.loadURL(browserUrl)
       browserGame.focus()
       browserGame.setTitle(title)
