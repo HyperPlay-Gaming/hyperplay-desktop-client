@@ -268,6 +268,7 @@
         "path": "選擇安裝路徑"
     },
     "library": {
+        "label": "Library",
         "refresh": "重新整理",
         "sortAscending": "升序排列",
         "sortByStatus": "依安裝狀態排序",
@@ -277,7 +278,6 @@
             "list": "切換到清單排版"
         }
     },
-    "Library": "",
     "loading": {
         "default": "載入",
         "website": "載入網站"

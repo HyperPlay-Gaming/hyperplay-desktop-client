@@ -96,7 +96,8 @@
         "path": "مسیر نصب",
         "size": "اندازه",
         "syncsaves": "همگام سازی ذخیره ها",
-        "version": "نسخه"
+        "version": "نسخه",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "فضای موجود",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "گزینه های اجرا..."
     },
+    "No": "",
     "report_problem": "گزارش مشکل اجرای این بازی",
     "sdl": {
         "title": "انتخاب محتواها برای نصب"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "تنظیمات",
         "store": "صفحه فروشگاه",
         "verify": "بررسی و تعمیر"
-    }
+    },
+    "Yes": ""
 }

@@ -97,7 +97,8 @@
         "path": "Installer bane",
         "size": "Størrelse",
         "syncsaves": "Synkroniser lagrer",
-        "version": "Versjon"
+        "version": "Versjon",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Plass tilgjengelig",
@@ -120,6 +121,7 @@
     "launch": {
         "options": "Startalternativer..."
     },
+    "No": "",
     "report_problem": "Rapporter et problem med å kjøre dette spillet",
     "sdl": {
         "title": "Velg komponenter som skal installeres"
@@ -131,6 +133,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -167,5 +170,6 @@
         "settings": "Innstillinger",
         "store": "Butikkside",
         "verify": "Bekreft og reparer"
-    }
+    },
+    "Yes": ""
 }

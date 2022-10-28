@@ -97,7 +97,8 @@
         "path": "Quraşdırma Yolu",
         "size": "Ölçü",
         "syncsaves": "Sync Saves",
-        "version": "Versiya"
+        "version": "Versiya",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Yer Mövcuddur",
@@ -120,6 +121,7 @@
     "launch": {
         "options": "Başlama Seçimləri..."
     },
+    "No": "",
     "report_problem": "Bu oyunu idarə edən problemi bildirin",
     "sdl": {
         "title": "Quraşdırılacaq komponentləri seçin"
@@ -131,6 +133,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -167,5 +170,6 @@
         "settings": "Parametrlər",
         "store": "Mağaza Səhifəsi",
         "verify": "Doğrulayın və Təmir edin"
-    }
+    },
+    "Yes": ""
 }

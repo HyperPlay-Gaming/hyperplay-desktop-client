@@ -268,6 +268,7 @@
         "path": "Quraşdırma yolunu seçin"
     },
     "library": {
+        "label": "Library",
         "refresh": "təzələmək",
         "sortAscending": "Artan sırala",
         "sortByStatus": "Status üzrə çeşidləyin",
@@ -277,7 +278,6 @@
             "list": "Siyahı düzümünə keçin"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Yüklənir",
         "website": "Veb sayt yüklənir"

@@ -96,7 +96,8 @@
         "path": "Installationspfad",
         "size": "Größe",
         "syncsaves": "Spielstände synchronisieren",
-        "version": "Version"
+        "version": "Version",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Verfügbarer Speicherplatz auf dem Gerät",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Startoptionen..."
     },
+    "No": "",
     "report_problem": "Ein Problem bei der Ausführung dieses Spiels melden",
     "sdl": {
         "title": "Zu installierende Komponenten auswählen"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Einstellungen",
         "store": "Store-Seite",
         "verify": "Prüfen und reparieren"
-    }
+    },
+    "Yes": ""
 }

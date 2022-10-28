@@ -268,6 +268,7 @@
         "path": "설치 경로 선택"
     },
     "library": {
+        "label": "Library",
         "refresh": "새로고침",
         "sortAscending": "오름차순 정렬",
         "sortByStatus": "상태별 정렬",
@@ -277,7 +278,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "",
     "loading": {
         "default": "로딩 중",
         "website": "웹사이트 로드 중"

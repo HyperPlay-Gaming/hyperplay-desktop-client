@@ -268,6 +268,7 @@
         "path": "Select Install Path"
     },
     "library": {
+        "label": "Library",
         "refresh": "リフレッシュ",
         "sortAscending": "Sort Ascending",
         "sortByStatus": "Sort by Status",
@@ -277,7 +278,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "",
     "loading": {
         "default": "読み込み中",
         "website": "Loading Website"

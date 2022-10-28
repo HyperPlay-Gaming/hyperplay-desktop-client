@@ -109,9 +109,12 @@ export default function SidebarLinks() {
       >
         <>
           <div className="Sidebar__itemIcon">
-            <FontAwesomeIcon icon={faGamepad} title={t('Library')} />
+            <FontAwesomeIcon
+              icon={faGamepad}
+              title={t('library.label', 'Library')}
+            />
           </div>
-          <span>{t('Library')}</span>
+          <span>{t('library.label', 'Library')}</span>
         </>
       </NavLink>
       <h6 className="Sidebar__categoryTitle">ACCOUNTS</h6>

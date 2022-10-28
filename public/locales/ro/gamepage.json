@@ -97,7 +97,8 @@
         "path": "Cale De Instalare",
         "size": "Mărime",
         "syncsaves": "Salvări sincronizate",
-        "version": "Versiune"
+        "version": "Versiune",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Spatiu disponibil",
@@ -120,6 +121,7 @@
     "launch": {
         "options": "Opțiuni de Lansare..."
     },
+    "No": "",
     "report_problem": "Raportați o problemă la rularea acestui joc",
     "sdl": {
         "title": "Selectați componentele de instalat"
@@ -131,6 +133,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -167,5 +170,6 @@
         "settings": "Setări",
         "store": "Pagina magazinului",
         "verify": "Verificați și Reparați"
-    }
+    },
+    "Yes": ""
 }

@@ -96,7 +96,8 @@
         "path": "Đường dẫn cài đặt",
         "size": "Kích thước",
         "syncsaves": "Đồng bộ bản lưu",
-        "version": "Phiên bản"
+        "version": "Phiên bản",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Dung lượng trống",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Tuỳ chọn khởi chạy..."
     },
+    "No": "",
     "report_problem": "Báo cáo sự cố khi chạy game này",
     "sdl": {
         "title": "Chọn các thành phần cần cài"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Cài đặt",
         "store": "Cửa hàng",
         "verify": "Kiểm tra và sửa chữa"
-    }
+    },
+    "Yes": ""
 }

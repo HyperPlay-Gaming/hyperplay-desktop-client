@@ -96,7 +96,8 @@
         "path": "Шлях встановлення",
         "size": "Розмір",
         "syncsaves": "Синхронізувати збереження",
-        "version": "Версія"
+        "version": "Версія",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Доступний простір",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Параметри запуску..."
     },
+    "No": "",
     "report_problem": "Повідомити про проблему запуску цієї гри",
     "sdl": {
         "title": "Оберіть компоненти для встановлення"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Налаштування",
         "store": "Сторінка в крамниці",
         "verify": "Перевірити і відновити"
-    }
+    },
+    "Yes": ""
 }

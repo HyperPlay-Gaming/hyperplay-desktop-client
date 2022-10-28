@@ -268,6 +268,7 @@
         "path": "Vyberte cestu instalace"
     },
     "library": {
+        "label": "Library",
         "refresh": "Obnovit",
         "sortAscending": "Seřadit vzestupně",
         "sortByStatus": "Seřadit podle stavu",
@@ -277,7 +278,6 @@
             "list": "Přepnutí na rozvržení seznamu"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Načítání",
         "website": "Načítání webu"

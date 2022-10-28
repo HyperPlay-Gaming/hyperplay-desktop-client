@@ -96,7 +96,8 @@
         "path": "설치 경로",
         "size": "크기",
         "syncsaves": "세이브 동기화",
-        "version": "버전"
+        "version": "버전",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "사용 가능한 공간",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "시작 옵션..."
     },
+    "No": "",
     "report_problem": "게임 실행 중에 생긴 문제를 제보하기",
     "sdl": {
         "title": "설치할 구성 요소를 선택합니다"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "설정",
         "store": "스토어 페이지",
         "verify": "확인 및 복구"
-    }
+    },
+    "Yes": ""
 }

@@ -96,7 +96,8 @@
         "path": "Inštalovať cestu",
         "size": "Veľkosť",
         "syncsaves": "Synchronizovať uloženia",
-        "version": "Verzia"
+        "version": "Verzia",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Priestor k dispozícii",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Možnosti spustenia..."
     },
+    "No": "",
     "report_problem": "Nahlásiť problém so spustením tejto hry",
     "sdl": {
         "title": "Vyberte komponenty na inštaláciu"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "nastavenie",
         "store": "Stránka obchodu",
         "verify": "Overiť a opraviť"
-    }
+    },
+    "Yes": ""
 }

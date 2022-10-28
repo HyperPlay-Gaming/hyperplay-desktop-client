@@ -268,6 +268,7 @@
         "path": "Seleccionar a ruta de instalación"
     },
     "library": {
+        "label": "Library",
         "refresh": "Actualizar",
         "sortAscending": "Sort Ascending",
         "sortByStatus": "Sort by Status",
@@ -277,7 +278,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Cargando",
         "website": "Cargando sitio web"

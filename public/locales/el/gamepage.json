@@ -96,7 +96,8 @@
         "path": "Διαδρομή Εγκατάστασης",
         "size": "Μέγεθος",
         "syncsaves": "Συγχρονισμός Αποθηκεύσεων",
-        "version": "Έκδοση"
+        "version": "Έκδοση",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Διαθέσιμος Αποθηκευτικός Χώρος",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Ρυθμίσεις εκκίνησης..."
     },
+    "No": "",
     "report_problem": "Αναφορά προβλήματος κατά την εκτέλεση του παιχνιδιού",
     "sdl": {
         "title": "Διαλέξτε στοιχεία για εγκατάσταση"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Ρυθμίσεις",
         "store": "Κατάστημα",
         "verify": "Επαλήθευση και Επιδιόρθωση"
-    }
+    },
+    "Yes": ""
 }

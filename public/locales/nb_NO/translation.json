@@ -268,6 +268,7 @@
         "path": "Velg Installer bane"
     },
     "library": {
+        "label": "Library",
         "refresh": "Forfriske",
         "sortAscending": "Sorter stigende",
         "sortByStatus": "Sorter etter status",
@@ -277,7 +278,6 @@
             "list": "Bytt til et listeoppsett"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Laster",
         "website": "Laster inn nettsted"

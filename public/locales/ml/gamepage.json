@@ -96,7 +96,8 @@
         "path": "നടീലിടം",
         "size": "വലുപ്പം",
         "syncsaves": "സൂക്ഷിക്കപ്പെട്ട ഒന്നിപ്പിക്കലുകള്",
-        "version": "പതിപ്പ്"
+        "version": "പതിപ്പ്",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Space Available",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "വിക്ഷേപണ ബദലുകൾ..."
     },
+    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "നടുവാനുള്ള ഘടകങ്ങള് തിരഞ്ഞെടുക്കൂ"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "ക്രമീകരണങ്ങള്",
         "store": "കടത്താള്",
         "verify": "കണ്ടെത്തി നന്നാക്കൂ"
-    }
+    },
+    "Yes": ""
 }

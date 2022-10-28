@@ -96,7 +96,8 @@
         "path": "インストールパス",
         "size": "サイズ",
         "syncsaves": "保存を同期",
-        "version": "バージョン"
+        "version": "バージョン",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Space Available",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Launch Options..."
     },
+    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "インストールするコンポーネントを選択します"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "設定",
         "store": "ストアページ",
         "verify": "確認と修復"
-    }
+    },
+    "Yes": ""
 }

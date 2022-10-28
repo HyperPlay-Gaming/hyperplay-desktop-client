@@ -268,6 +268,7 @@
         "path": "Seleziona percorso di installazione"
     },
     "library": {
+        "label": "Library",
         "refresh": "Aggiorna",
         "sortAscending": "Ordinamento crescente",
         "sortByStatus": "Ordina per stato",
@@ -277,7 +278,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Caricamento in corso",
         "website": "Caricamento sito web incorso"

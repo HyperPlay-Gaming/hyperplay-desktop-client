@@ -96,7 +96,8 @@
         "path": "安裝路徑",
         "size": "大小",
         "syncsaves": "同步存檔",
-        "version": "版本"
+        "version": "版本",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "可用空間",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "啟動選項..."
     },
+    "No": "",
     "report_problem": "回報執行此遊戲時出現的問題",
     "sdl": {
         "title": "選擇要安裝的元件"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "設定",
         "store": "商店頁面",
         "verify": "驗證並修復遊戲文件"
-    }
+    },
+    "Yes": ""
 }

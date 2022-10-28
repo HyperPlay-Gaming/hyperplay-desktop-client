@@ -96,7 +96,8 @@
         "path": "Put instalacije",
         "size": "Veličina",
         "syncsaves": "Sinkroniziraj podatke",
-        "version": "Verzija"
+        "version": "Verzija",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Prostora dostupno",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Opcije za pokretanje..."
     },
+    "No": "",
     "report_problem": "Prijavi problem za ovu igricu",
     "sdl": {
         "title": "Odaberite komponente za instalaciju"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Postavke",
         "store": "Stranica Trgovine",
         "verify": "Provjeri i popravi"
-    }
+    },
+    "Yes": ""
 }

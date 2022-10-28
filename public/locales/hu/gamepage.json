@@ -96,7 +96,8 @@
         "path": "Telepítési útvonal",
         "size": "Méret",
         "syncsaves": "Mentések szinkronizálása",
-        "version": "Verzió"
+        "version": "Verzió",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Elérhető tárhely",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Indítási opciók..."
     },
+    "No": "",
     "report_problem": "Játék futtatásával kapcsolatos hiba jelentése",
     "sdl": {
         "title": "Válaszd ki a telepíteni kívánt elemeket"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Beállítások",
         "store": "Áruházi oldal",
         "verify": "Ellenőrzés és javítás"
-    }
+    },
+    "Yes": ""
 }

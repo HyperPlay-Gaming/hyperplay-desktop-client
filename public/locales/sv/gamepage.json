@@ -96,7 +96,8 @@
         "path": "Installationssökväg",
         "size": "Storlek",
         "syncsaves": "Synkronisera sparfiler",
-        "version": "Version"
+        "version": "Version",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Utrymme tillgängligt",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Startalternativ..."
     },
+    "No": "",
     "report_problem": "Rapportera problem med spelet",
     "sdl": {
         "title": "Ange komponenter att installera"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Inställningar",
         "store": "Butikssida",
         "verify": "Verifiera och reparera"
-    }
+    },
+    "Yes": ""
 }

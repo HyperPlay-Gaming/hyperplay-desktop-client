@@ -97,7 +97,8 @@
         "path": "Instalazio-ibilbidea",
         "size": "Tamaina",
         "syncsaves": "Sinkronizatu gordetakoak",
-        "version": "Bertsioa"
+        "version": "Bertsioa",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Espazio erabilgarria",
@@ -120,6 +121,7 @@
     "launch": {
         "options": "Jaurtiketa-aukerak..."
     },
+    "No": "",
     "report_problem": "Joko hau gauzatzean arazo baten berri ematea",
     "sdl": {
         "title": "Instalatzeko osagaiak hautatzea"
@@ -131,6 +133,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -167,5 +170,6 @@
         "settings": "Konfigurazioa",
         "store": "Dendaren orrialdea",
         "verify": "Egiaztatzea eta konpontzea"
-    }
+    },
+    "Yes": ""
 }

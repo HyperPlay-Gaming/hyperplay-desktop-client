@@ -268,6 +268,7 @@
         "path": "Selectați Calea de instalare"
     },
     "library": {
+        "label": "Library",
         "refresh": "Reîmprospăta",
         "sortAscending": "Sortare ascendentă",
         "sortByStatus": "Sortați după Stare",
@@ -277,7 +278,6 @@
             "list": "Comutați la un aspect de listă"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Se încarcă",
         "website": "Se încarcă site-ul web"

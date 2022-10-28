@@ -268,6 +268,7 @@
         "path": "Изберете местоположение за инсталиране"
     },
     "library": {
+        "label": "Library",
         "refresh": "Опресняване",
         "sortAscending": "Подреждане във възходящ ред",
         "sortByStatus": "Подреждане по състояние",
@@ -277,7 +278,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Зареждане",
         "website": "Зареждане на уеб сайта"

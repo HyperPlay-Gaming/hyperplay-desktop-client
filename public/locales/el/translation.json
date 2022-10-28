@@ -268,6 +268,7 @@
         "path": "Επιλέξτε διαδρομή εγκατάστασης"
     },
     "library": {
+        "label": "Library",
         "refresh": "Ανανέωση",
         "sortAscending": "Αύξουσα ταξινόμηση",
         "sortByStatus": "Ταξινόμηση κατά Κατάσταση",
@@ -277,7 +278,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Φόρτωση",
         "website": "Φόρτωση Ιστοσελίδας"

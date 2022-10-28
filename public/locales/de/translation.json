@@ -268,6 +268,7 @@
         "path": "Installationspfad auswählen"
     },
     "library": {
+        "label": "Library",
         "refresh": "Aktualisieren",
         "sortAscending": "Aufsteigend sortieren",
         "sortByStatus": "Nach Status sortieren",
@@ -277,7 +278,6 @@
             "list": "Umschalten auf ein Listenlayout"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Wird geladen",
         "website": "Lade Webseite"

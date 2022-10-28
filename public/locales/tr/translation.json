@@ -268,6 +268,7 @@
         "path": "Kurulum Yolunu Seçin"
     },
     "library": {
+        "label": "Library",
         "refresh": "Yenile",
         "sortAscending": "Artan Sıralama",
         "sortByStatus": "Duruma Göre Sırala",
@@ -277,7 +278,6 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "",
     "loading": {
         "default": "Yükleniyor",
         "website": "Web Sitesi Yükleniyor"

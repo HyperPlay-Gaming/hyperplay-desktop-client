@@ -268,6 +268,7 @@
         "path": "Selecciona la ruta d'instal·lació"
     },
     "library": {
+        "label": "Library",
         "refresh": "Actualitza",
         "sortAscending": "Ordre ascendent",
         "sortByStatus": "Ordena per estat",
@@ -277,7 +278,6 @@
             "list": "Commuta a una vista en llista"
         }
     },
-    "Library": "",
     "loading": {
         "default": "S'està carregant...",
         "website": "S'està carregant el lloc web"

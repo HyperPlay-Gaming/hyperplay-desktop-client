@@ -96,7 +96,8 @@
         "path": "Cesta pro instalaci",
         "size": "Velikost",
         "syncsaves": "Synchronizovat uložené soubory",
-        "version": "Verze"
+        "version": "Verze",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Volné místo",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Možnosti spuštění..."
     },
+    "No": "",
     "report_problem": "Nahlásit problém se spouštěním této hry",
     "sdl": {
         "title": "Vyberte součásti k instalaci"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Nastavení",
         "store": "Stránka obchodu",
         "verify": "Zkontrolovat a opravit"
-    }
+    },
+    "Yes": ""
 }

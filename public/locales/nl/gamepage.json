@@ -96,7 +96,8 @@
         "path": "Installatie pad",
         "size": "Grootte",
         "syncsaves": "Synchroniseer saves",
-        "version": "Versie"
+        "version": "Versie",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Space Available",
@@ -119,6 +120,7 @@
     "launch": {
         "options": "Opstartopties..."
     },
+    "No": "",
     "report_problem": "Report a problem running this game",
     "sdl": {
         "title": "Selecteer componenten om te installeren"
@@ -130,6 +132,7 @@
         "info": {
             "exe": "Select Executable",
             "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -166,5 +169,6 @@
         "settings": "Instellingen",
         "store": "Winkel",
         "verify": "Verifiëren en repareren"
-    }
+    },
+    "Yes": ""
 }
