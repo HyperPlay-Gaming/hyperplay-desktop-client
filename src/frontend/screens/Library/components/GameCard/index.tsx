@@ -15,7 +15,7 @@ import { ReactComponent as StopIconAlt } from 'frontend/assets/stop-icon-alt.svg
 import { getProgress, install, launch, sendKill } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
-import fallbackImage from 'frontend/assets/heroic_card.jpg'
+import fallbackImage from 'frontend/assets/fallback_card.jpg'
 import { updateGame } from 'frontend/helpers/library'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import ContextMenu, { Item } from '../ContextMenu'

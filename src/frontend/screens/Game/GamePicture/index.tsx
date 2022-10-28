@@ -2,7 +2,7 @@ import React from 'react'
 import { CachedImage } from 'frontend/components/UI'
 
 import './index.css'
-import fallbackImage from 'frontend/assets/heroic_card.jpg'
+import fallbackImage from 'frontend/assets/fallback_card.jpg'
 
 type Props = {
   art_square: string

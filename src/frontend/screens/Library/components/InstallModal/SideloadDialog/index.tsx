@@ -9,6 +9,7 @@ import {
 } from 'common/types'
 import {
   CachedImage,
+  SvgButton,
   TextInputField,
   TextInputWithIconField,
   ToggleSwitch
@@ -25,8 +26,9 @@ import { Path } from 'frontend/types'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AvailablePlatforms } from '..'
-import fallbackImage from 'frontend/assets/heroic_card.jpg'
+import fallbackImage from 'frontend/assets/fallback_card.jpg'
 import ContextProvider from 'frontend/state/ContextProvider'
+import { ReactComponent as BrowserIcon } from 'frontend/assets/browser-icon.svg'
 
 type Props = {
   availablePlatforms: AvailablePlatforms
@@ -203,9 +205,22 @@ export default function SideloadDialog({
     return
   }
 
-  const platformIcon = availablePlatforms.filter(
-    (p) => p.name === platformToInstall
-  )[0]?.icon
+  function platformIcon() {
+    if (platformToInstall !== 'Browser') {
+      const platformIcon = availablePlatforms.filter(
+        (p) => p.name === platformToInstall
+      )[0]?.icon
+
+      return (
+        <FontAwesomeIcon
+          className="InstallModal__platformIcon"
+          icon={platformIcon}
+        />
+      )
+    }
+
+    return <BrowserIcon width={14} height={14} />
+  }
 
   return (
     <>
@@ -218,10 +233,7 @@ export default function SideloadDialog({
             />
             <span className="titleIcon">
               {title}
-              <FontAwesomeIcon
-                className="InstallModal__platformIcon"
-                icon={platformIcon}
-              />
+              {platformIcon()}
             </span>
           </div>
           <div className="sideloadForm">

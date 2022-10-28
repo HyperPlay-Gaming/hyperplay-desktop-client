@@ -316,7 +316,7 @@ export default function GamePage(): JSX.Element | null {
                     }}
                   >
                     <b>{t('info.web3-supported', 'Has Web3 features')}:</b>{' '}
-                    {supportsWeb3 ? t('Yes') : t('No')}
+                    {supportsWeb3 ? t('box.yes') : t('box.no')}
                   </div>
                 )}
                 {is_installed && showCloudSaveInfo && (
