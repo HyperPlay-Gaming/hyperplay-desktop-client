@@ -131,6 +131,7 @@
             "title": "Title"
         },
         "info": {
+            "broser": "BrowserURL",
             "exe": "Select Executable",
             "image": "App Image",
             "supports-web3": "This Games has Web3 Features",
@@ -138,7 +139,8 @@
         },
         "placeholder": {
             "image": "Paste an Image URL here",
-            "title": "Add a title to your Game/App"
+            "title": "Add a title to your Game/App",
+            "url": "Paste the Game URL here"
         }
     },
     "specs": {
