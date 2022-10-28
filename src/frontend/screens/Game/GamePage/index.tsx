@@ -229,6 +229,7 @@ export default function GamePage(): JSX.Element | null {
       : `/settings/${runner}/${appName}/wine`
 
     const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
+    const supportsWeb3 = gameInfo.web3?.supported
     /*
     Other Keys:
     t('box.stopInstall.title')
@@ -306,6 +307,16 @@ export default function GamePage(): JSX.Element | null {
                       : ''
                     : ''}
                 </div>
+                {is_installed && supportsWeb3 && (
+                  <div
+                    style={{
+                      color: autoSyncSaves ? '#07C5EF' : ''
+                    }}
+                  >
+                    <b>{t('info.web3-supported', 'Has Web3 features')}:</b>{' '}
+                    {supportsWeb3 ? t('Yes') : t('No')}
+                  </div>
+                )}
                 {is_installed && showCloudSaveInfo && (
                   <div
                     style={{

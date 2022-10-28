@@ -150,6 +150,7 @@ export interface GameInfo {
   canRunOffline: boolean
   is_mac_native: boolean
   is_linux_native: boolean
+  web3?: Web3Features
 }
 export interface GameSettings {
   audioFix: boolean
@@ -515,6 +516,10 @@ export type WineCommandArgs = {
   startFolder?: string
 }
 
+export type Web3Features = {
+  supported: boolean
+}
+
 export interface SideloadGame {
   runner: Runner
   app_name: string
@@ -528,4 +533,5 @@ export interface SideloadGame {
   }
   folder_name?: string
   canRunOffline: boolean
+  web3: Web3Features
 }

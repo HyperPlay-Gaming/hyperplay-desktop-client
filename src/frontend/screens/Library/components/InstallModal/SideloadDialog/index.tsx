@@ -1,11 +1,17 @@
 import short from 'short-uuid'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { GameInfo, InstallPlatform, WineInstallation } from 'common/types'
+import {
+  GameInfo,
+  InstallPlatform,
+  Web3Features,
+  WineInstallation
+} from 'common/types'
 import {
   CachedImage,
   TextInputField,
-  TextInputWithIconField
+  TextInputWithIconField,
+  ToggleSwitch
 } from 'frontend/components/UI'
 import { DialogContent, DialogFooter } from 'frontend/components/UI/Dialog'
 import {
@@ -52,6 +58,7 @@ export default function SideloadDialog({
   const [app_name, setApp_name] = useState(appName ?? '')
   const [runningSetup, setRunningSetup] = useState(false)
   const [gameInfo, setGameInfo] = useState<Partial<GameInfo>>({})
+  const [web3, setWeb3] = useState<Web3Features>({ supported: false })
   const editMode = Boolean(appName)
 
   const { refreshLibrary, platform } = useContext(ContextProvider)
@@ -60,6 +67,8 @@ export default function SideloadDialog({
     value = removeSpecialcharacters(value)
     setTitle(value)
   }
+
+  const isLinux = platform === 'linux'
 
   useEffect(() => {
     if (appName) {
@@ -114,7 +123,8 @@ export default function SideloadDialog({
       art_cover: imageUrl,
       is_installed: true,
       art_square: imageUrl,
-      canRunOffline: true
+      canRunOffline: true,
+      web3
     })
     const notWin = platform !== 'win32'
     const otherPlatforms = ['linux', 'Mac']
@@ -254,19 +264,32 @@ export default function SideloadDialog({
                   .then(({ path }: Path) => setSelectedExe(path ? path : ''))
               }
             />
+            <ToggleSwitch
+              htmlId="web3features"
+              value={web3.supported}
+              handleChange={() =>
+                setWeb3({ ...web3, supported: !web3.supported })
+              }
+              title={t(
+                'sideload.info.supports-web3',
+                'This Games has Web3 Features'
+              )}
+            />
           </div>
         </div>
       </DialogContent>
       <DialogFooter>
-        <button
-          onClick={async () => handleRunExe()}
-          className={`button is-secondary`}
-          disabled={runningSetup || !title.length}
-        >
-          {runningSetup
-            ? t('button.running-setup', 'Running Setup')
-            : t('button.run-exe-first', 'Run Installer First')}
-        </button>
+        {isLinux && (
+          <button
+            onClick={async () => handleRunExe()}
+            className={`button is-secondary`}
+            disabled={runningSetup || !title.length}
+          >
+            {runningSetup
+              ? t('button.running-setup', 'Running Setup')
+              : t('button.run-exe-first', 'Run Installer First')}
+          </button>
+        )}
         <button
           onClick={async () => handleInstall()}
           className={`button is-primary`}

@@ -57,7 +57,8 @@ export function addNewApp({
   title,
   install: { executable, platform },
   art_cover,
-  art_square
+  art_square,
+  web3
 }: SideloadGame): void {
   const game: SideloadGame = {
     runner: 'sideload',
@@ -71,7 +72,8 @@ export function addNewApp({
     art_cover,
     is_installed: true,
     art_square,
-    canRunOffline: true
+    canRunOffline: true,
+    web3
   }
 
   const current = libraryStore.get('games', []) as SideloadGame[]
