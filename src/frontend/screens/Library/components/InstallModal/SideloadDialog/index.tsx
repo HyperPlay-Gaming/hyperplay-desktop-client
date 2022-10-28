@@ -9,7 +9,6 @@ import {
 } from 'common/types'
 import {
   CachedImage,
-  SvgButton,
   TextInputField,
   TextInputWithIconField,
   ToggleSwitch
@@ -222,6 +221,8 @@ export default function SideloadDialog({
     return <BrowserIcon width={14} height={14} />
   }
 
+  console.log({ g: gameInfo.install?.platform, platformToInstall })
+
   return (
     <>
       <DialogContent>
@@ -259,27 +260,30 @@ export default function SideloadDialog({
               value={imageUrl}
             />
             {!editMode && children}
-            {platformToInstall !== 'Browser' && (
-              <TextInputWithIconField
-                htmlId="sideload-exe"
-                label={t('sideload.info.exe', 'Select Executable')}
-                onChange={(e) => setSelectedExe(e.target.value)}
-                icon={<FontAwesomeIcon icon={faFolderOpen} />}
-                value={selectedExe}
-                placeholder={t('sideload.info.exe', 'Select Executable')}
-                onIconClick={async () =>
-                  window.api
-                    .openDialog({
-                      buttonLabel: t('box.select.button', 'Select'),
-                      properties: ['openFile'],
-                      title: t('box.sideload.exe', 'Select Executable'),
-                      filters: fileFilters[platformToInstall],
-                      defaultPath: winePrefix
-                    })
-                    .then(({ path }: Path) => setSelectedExe(path ? path : ''))
-                }
-              />
-            )}
+            {gameInfo.install?.platform !== 'Browser' ||
+              (platformToInstall !== 'Browser' && (
+                <TextInputWithIconField
+                  htmlId="sideload-exe"
+                  label={t('sideload.info.exe', 'Select Executable')}
+                  onChange={(e) => setSelectedExe(e.target.value)}
+                  icon={<FontAwesomeIcon icon={faFolderOpen} />}
+                  value={selectedExe}
+                  placeholder={t('sideload.info.exe', 'Select Executable')}
+                  onIconClick={async () =>
+                    window.api
+                      .openDialog({
+                        buttonLabel: t('box.select.button', 'Select'),
+                        properties: ['openFile'],
+                        title: t('box.sideload.exe', 'Select Executable'),
+                        filters: fileFilters[platformToInstall],
+                        defaultPath: winePrefix
+                      })
+                      .then(({ path }: Path) =>
+                        setSelectedExe(path ? path : '')
+                      )
+                  }
+                />
+              ))}
             {platformToInstall === 'Browser' && (
               <TextInputField
                 label={t('sideload.info.broser', 'BrowserURL')}
