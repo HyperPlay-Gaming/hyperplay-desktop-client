@@ -35,6 +35,7 @@ import { access, chmod } from 'fs/promises'
 import { addShortcuts, removeShortcuts } from '../shortcuts/shortcuts/shortcuts'
 import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
+import { BrowserWindow } from 'electron'
 
 export function appLogFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
@@ -107,8 +108,20 @@ export async function launchApp(appName: string): Promise<boolean> {
   const gameInfo = getAppInfo(appName)
   const {
     install: { executable },
-    folder_name
+    folder_name,
+    browserUrl,
+    title
   } = gameInfo
+
+  if (browserUrl) {
+    return new Promise((res) => {
+      const browserGame = new BrowserWindow()
+      browserGame.loadURL(browserUrl)
+      browserGame.focus()
+      browserGame.setTitle(title)
+      browserGame.on('close', () => res(true))
+    })
+  }
 
   if (executable) {
     const gameSettings = await getAppSettings(appName)
