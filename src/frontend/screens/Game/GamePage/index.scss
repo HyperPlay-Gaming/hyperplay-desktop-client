@@ -139,7 +139,8 @@
 }
 
 .cyberDivider {
-  height: 100%;
+  height: 0px;
+  min-height: 100%;
   margin: 0px 0px 0px -6px;
   z-index: 100;
   min-width: 40px;
@@ -155,7 +156,7 @@
   max-width: 650px;
   width: 100%;
   user-select: text;
-  padding: 8vh var(--space-lg) var(--space-2xl) var(--space-lg);
+  padding: var(--space-xl) var(--space-lg) var(--space-xl) var(--space-lg);
   min-height: 100vh;
 
   .title {
