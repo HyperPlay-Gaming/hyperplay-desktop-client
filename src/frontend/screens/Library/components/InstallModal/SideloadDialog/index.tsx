@@ -71,6 +71,7 @@ export default function SideloadDialog({
   }
 
   const isLinux = platform === 'linux'
+  const appPlatform = gameInfo.install?.platform || platformToInstall
 
   useEffect(() => {
     if (appName) {
@@ -80,14 +81,20 @@ export default function SideloadDialog({
           art_cover,
           art_square,
           install: { executable, platform },
-          title
+          title,
+          browserUrl
         } = info
 
         if (executable && platform) {
           setSelectedExe(executable)
         }
 
+        if (browserUrl) {
+          setGameUrl(browserUrl)
+        }
+
         setTitle(title)
+        setWeb3(info.web3 ?? web3)
         setImageUrl(art_cover ? art_cover : art_square)
       })
     } else {
@@ -205,7 +212,7 @@ export default function SideloadDialog({
   }
 
   function platformIcon() {
-    if (platformToInstall !== 'Browser') {
+    if (appPlatform !== 'Browser') {
       const platformIcon = availablePlatforms.filter(
         (p) => p.name === platformToInstall
       )[0]?.icon
@@ -221,7 +228,7 @@ export default function SideloadDialog({
     return <BrowserIcon width={14} height={14} />
   }
 
-  console.log({ g: gameInfo.install?.platform, platformToInstall })
+  const showSideloadExe = appPlatform !== 'Browser'
 
   return (
     <>
@@ -260,31 +267,28 @@ export default function SideloadDialog({
               value={imageUrl}
             />
             {!editMode && children}
-            {gameInfo.install?.platform !== 'Browser' ||
-              (platformToInstall !== 'Browser' && (
-                <TextInputWithIconField
-                  htmlId="sideload-exe"
-                  label={t('sideload.info.exe', 'Select Executable')}
-                  onChange={(e) => setSelectedExe(e.target.value)}
-                  icon={<FontAwesomeIcon icon={faFolderOpen} />}
-                  value={selectedExe}
-                  placeholder={t('sideload.info.exe', 'Select Executable')}
-                  onIconClick={async () =>
-                    window.api
-                      .openDialog({
-                        buttonLabel: t('box.select.button', 'Select'),
-                        properties: ['openFile'],
-                        title: t('box.sideload.exe', 'Select Executable'),
-                        filters: fileFilters[platformToInstall],
-                        defaultPath: winePrefix
-                      })
-                      .then(({ path }: Path) =>
-                        setSelectedExe(path ? path : '')
-                      )
-                  }
-                />
-              ))}
-            {platformToInstall === 'Browser' && (
+            {showSideloadExe && (
+              <TextInputWithIconField
+                htmlId="sideload-exe"
+                label={t('sideload.info.exe', 'Select Executable')}
+                onChange={(e) => setSelectedExe(e.target.value)}
+                icon={<FontAwesomeIcon icon={faFolderOpen} />}
+                value={selectedExe}
+                placeholder={t('sideload.info.exe', 'Select Executable')}
+                onIconClick={async () =>
+                  window.api
+                    .openDialog({
+                      buttonLabel: t('box.select.button', 'Select'),
+                      properties: ['openFile'],
+                      title: t('box.sideload.exe', 'Select Executable'),
+                      filters: fileFilters[platformToInstall],
+                      defaultPath: winePrefix
+                    })
+                    .then(({ path }: Path) => setSelectedExe(path ? path : ''))
+                }
+              />
+            )}
+            {!showSideloadExe && (
               <TextInputField
                 label={t('sideload.info.broser', 'BrowserURL')}
                 placeholder={t(
@@ -293,7 +297,7 @@ export default function SideloadDialog({
                 )}
                 onChange={(e) => setGameUrl(e.target.value)}
                 htmlId="sideload-game-url"
-                value={gameUrl}
+                value={gameInfo.browserUrl ?? gameUrl}
               />
             )}
             <ToggleSwitch
