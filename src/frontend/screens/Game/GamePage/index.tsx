@@ -452,7 +452,7 @@ export default function GamePage(): JSX.Element | null {
                     </button>
                   </>
                 )}
-                {is_installed ? (
+                {installPlatform !== 'Browser' && is_installed && (
                   <Link
                     to={pathname}
                     state={{
@@ -466,7 +466,8 @@ export default function GamePage(): JSX.Element | null {
                   >
                     {`${getButtonLabel(is_installed)}`}
                   </Link>
-                ) : (
+                )}
+                {!is_installed && (
                   <button
                     onClick={async () => handleInstall(is_installed)}
                     disabled={
@@ -482,7 +483,7 @@ export default function GamePage(): JSX.Element | null {
                   </button>
                 )}
               </div>
-              {is_installed && (
+              {installPlatform !== 'Browser' && is_installed && (
                 <NavLink
                   to={`/settings/${runner}/${appName}/log`}
                   state={{

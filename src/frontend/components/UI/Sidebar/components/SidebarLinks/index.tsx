@@ -55,12 +55,17 @@ export default function SidebarLinks() {
   const isMac = platform === 'darwin'
   const isLinux = platform === 'linux'
   const isLinuxGame = isLinux && gameInfo.install?.platform === 'linux'
+  const notAnApp =
+    !runner ||
+    runner === 'app' ||
+    gameInfo.install?.platform === 'Browser' ||
+    !appName
 
   const loggedIn = epic.username || gog.username
 
   useEffect(() => {
-    const gameInfo = async () => {
-      if (!runner || runner === 'app' || !appName) {
+    const updateGameInfo = async () => {
+      if (notAnApp) {
         setIsDefaultSetting(true)
         setGameInfo({ ...gameInfo, cloud_save_enabled: false })
         setSettingsPath('/settings/app/default/general')
@@ -78,7 +83,7 @@ export default function SidebarLinks() {
         }
       }
     }
-    gameInfo()
+    updateGameInfo()
   }, [location])
 
   useEffect(() => {
@@ -86,7 +91,7 @@ export default function SidebarLinks() {
   }, [])
 
   useEffect(() => {
-    if (!runner || runner === 'app') {
+    if (notAnApp) {
       return setIsDefaultSetting(true)
     }
   }, [location])

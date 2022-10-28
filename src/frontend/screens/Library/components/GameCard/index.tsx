@@ -6,7 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faRepeat } from '@fortawesome/free-solid-svg-icons'
 
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
-import { FavouriteGame, GameStatus, HiddenGame, Runner } from 'common/types'
+import {
+  FavouriteGame,
+  GameStatus,
+  HiddenGame,
+  InstallPlatform,
+  Runner
+} from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
 import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as SettingsIcon } from 'frontend/assets/settings-sharp.svg'
@@ -38,7 +44,7 @@ interface Card {
   title: string
   version: string
   runner: Runner
-  installedPlatform: string | undefined
+  installedPlatform: InstallPlatform | undefined
   forceCard?: boolean
 }
 
@@ -218,6 +224,7 @@ const GameCard = ({
   const isMacNative = isMac.includes(installedPlatform ?? '')
   const isLinuxNative = installedPlatform === 'linux'
   const isNative = isWin || isMacNative || isLinuxNative
+  const isBrowserGame = installedPlatform === 'Browser'
   const pathname = isNative
     ? `/settings/${runner}/${appName}/other`
     : `/settings/${runner}/${appName}/wine`
@@ -361,7 +368,7 @@ const GameCard = ({
                     <FontAwesomeIcon size={'2x'} icon={faRepeat} />
                   </SvgButton>
                 )}
-                {isInstalled && (
+                {!isBrowserGame && isInstalled && (
                   <>
                     <SvgButton
                       title={`${t('submenu.settings')} (${title})`}
