@@ -3,7 +3,6 @@
   justify-content: center;
   align-content: center;
   position: relative;
-  min-height: 100vh;
 }
 
 .gamePicture::after {
