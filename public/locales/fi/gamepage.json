@@ -173,6 +173,7 @@
         "queued": "Queued",
         "reparing": "Korjataan peliä, odota",
         "totalDownloaded": "Ladattu yhteensä",
+        "uninstalling": "Uninstalling",
         "updating": "Päivitetään peliä"
     },
     "submenu": {

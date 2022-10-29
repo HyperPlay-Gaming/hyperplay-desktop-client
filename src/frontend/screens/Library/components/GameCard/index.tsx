@@ -102,8 +102,14 @@ const GameCard = ({
   const isMoving = status === 'moving'
   const isPlaying = status === 'playing'
   const isQueued = status === 'queued'
+  const isUninstalling = status === 'uninstalling'
   const haveStatus =
-    isMoving || isReparing || isInstalling || isUpdating || isQueued
+    isMoving ||
+    isReparing ||
+    isInstalling ||
+    isUpdating ||
+    isQueued ||
+    isUninstalling
 
   const { percent = '' } = progress
   const installingGrayscale = isInstalling
@@ -133,6 +139,9 @@ const GameCard = ({
   }
 
   function getStatus() {
+    if (isUninstalling) {
+      return t('status.uninstalling', 'Uninstalling')
+    }
     if (isUpdating) {
       return t('status.updating') + ` ${percent}%`
     }
@@ -161,6 +170,13 @@ const GameCard = ({
   }
 
   const renderIcon = () => {
+    if (isUninstalling) {
+      return (
+        <button className="svg-button iconDisabled">
+          <svg />
+        </button>
+      )
+    }
     if (isQueued) {
       return (
         <SvgButton
@@ -373,7 +389,7 @@ const GameCard = ({
                     <FontAwesomeIcon size={'2x'} icon={faRepeat} />
                   </SvgButton>
                 )}
-                {!isBrowserGame && isInstalled && (
+                {!isBrowserGame && isInstalled && !isUninstalling && (
                   <>
                     <SvgButton
                       title={`${t('submenu.settings')} (${title})`}

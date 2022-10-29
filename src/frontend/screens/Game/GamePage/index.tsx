@@ -99,6 +99,7 @@ export default function GamePage(): JSX.Element | null {
   const isQueued = status === 'queued'
   const isReparing = status === 'repairing'
   const isMoving = status === 'moving'
+  const isUninstalling = status === 'uninstalling'
 
   const backRoute = location.state?.fromDM ? '/download-manager' : '/'
 
@@ -405,6 +406,16 @@ export default function GamePage(): JSX.Element | null {
               </div>
               <TimeContainer game={appName} />
               <div className="gameStatus">
+                {isUninstalling && (
+                  <p
+                    style={{
+                      color: 'var(--danger)',
+                      fontStyle: 'italic'
+                    }}
+                  >
+                    {t('status.uninstalling', 'Uninstalling')}
+                  </p>
+                )}
                 {isInstalling ||
                   (isUpdating && (
                     <progress
@@ -442,15 +453,15 @@ export default function GamePage(): JSX.Element | null {
               <Anticheat gameInfo={gameInfo} />
               <div className="buttonsWrapper">
                 {is_installed && (
-                  <>
-                    <button
-                      disabled={isReparing || isMoving || isUpdating}
-                      onClick={handlePlay()}
-                      className={`button ${getPlayBtnClass()}`}
-                    >
-                      {getPlayLabel()}
-                    </button>
-                  </>
+                  <button
+                    disabled={
+                      isReparing || isMoving || isUpdating || isUninstalling
+                    }
+                    onClick={handlePlay()}
+                    className={`button ${getPlayBtnClass()}`}
+                  >
+                    {getPlayLabel()}
+                  </button>
                 )}
                 {installPlatform !== 'Browser' && is_installed && (
                   <Link
@@ -470,7 +481,13 @@ export default function GamePage(): JSX.Element | null {
                 {!is_installed && (
                   <button
                     onClick={async () => handleInstall(is_installed)}
-                    disabled={isPlaying || isUpdating || isReparing || isMoving}
+                    disabled={
+                      isPlaying ||
+                      isUpdating ||
+                      isReparing ||
+                      isMoving ||
+                      isUninstalling
+                    }
                     className={`button ${getButtonClass(is_installed)}`}
                   >
                     {`${getButtonLabel(is_installed)}`}
