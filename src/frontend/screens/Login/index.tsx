@@ -17,7 +17,7 @@ export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
 
 export default function NewLogin() {
-  const { epic, gog } = useContext(ContextProvider)
+  const { epic, gog, refreshLibrary } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
@@ -38,6 +38,10 @@ export default function NewLogin() {
     'login.message',
     'Login with your platform. You can login to more than one platform at the same time.'
   )
+  async function handleLibraryClick() {
+    await refreshLibrary({ fullRefresh: true, runInBackground: false })
+    navigate('/')
+  }
 
   return (
     <div className="loginPage">
@@ -102,11 +106,12 @@ export default function NewLogin() {
             />
           </div>
         </div>
-        {(epic.username || gog.username) && (
-          <button onClick={() => navigate('/')} className="goToLibrary">
-            {t('button.go_to_library', 'Go to Library')}
-          </button>
-        )}
+        <button
+          onClick={async () => handleLibraryClick()}
+          className="goToLibrary"
+        >
+          {t('button.go_to_library', 'Go to Library')}
+        </button>
       </div>
     </div>
   )
