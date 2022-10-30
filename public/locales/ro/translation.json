@@ -84,7 +84,7 @@
                 "changelog": "Deschideți jurnalul de modificări",
                 "detail": "Doriți să descărcați actualizarea în fundal?",
                 "message": "Există o nouă versiune disponibilă!",
-                "message-finished": "Doriți să reporniți Heroic acum?",
+                "message-finished": "Doriți să reporniți HyperPlay acum?",
                 "title": "Lansatorul de jocuri eroice",
                 "title-finished": "Actualizare Finalizată"
             }
@@ -102,8 +102,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
-                "title": "Reset Heroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -225,7 +225,7 @@
         "esync": "Esync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța.",
         "fsync": "Fsync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța pe nucleele Linux acceptate.",
         "game_language": {
-            "fallback": "Lăsați necompletat pentru a folosi limbajul lui Heroic.",
+            "fallback": "Lăsați necompletat pentru a folosi limbajul lui HyperPlay.",
             "in_game_config": "Nu toate jocurile acceptă această configurație, unele au setări de limbă în joc.",
             "valid_codes": "Codurile de limbă valide depind de joc."
         },
@@ -241,18 +241,18 @@
         "preferSystemLibs": "Versiunile personalizate de vin (Wine-GE, Wine-Lutris) sunt livrate cu dependențele lor de bibliotecă. Prin activarea acestei opțiuni, aceste biblioteci livrate vor fi ignorate și Wine va încărca biblioteci de sistem. Avertizare! Pot apărea probleme dacă dependențele nu sunt îndeplinite.",
         "primerun": "Utilizați placa grafică dedicată pentru a reda jocul pe sisteme multi-GPU. Este necesar doar pe laptop-uri sau desktop-uri de jocuri care utilizează un GPU fără cap pentru randare (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Biblioteci personalizate furnizate de Steam pentru a ajuta la rularea jocurilor Linux și Windows (Proton). Activarea ar putea îmbunătăți compatibilitatea.",
         "sync": {
-            "part1": "Heroic încearcă să ghicească folderul de salvare corect și acest lucru va funcționa în majoritatea cazurilor. În cazul în care folderul este greșit, utilizați caseta de înlocuire pentru a-l schimba.",
-            "part2": "In case you change the prefix folder for Wine or Proton, you will need to check the path again since Proton uses a different prefix (/pfx) and username (steamuser). Deci, puteți șterge simplu calea curentă, ieșiți din pagina de setări de sincronizare și reveniți din nou pentru ca Heroic să ghicească folderul încă o dată cu prefixul corect.",
+            "part1": "HyperPlay încearcă să ghicească folderul de salvare corect și acest lucru va funcționa în majoritatea cazurilor. În cazul în care folderul este greșit, utilizați caseta de înlocuire pentru a-l schimba.",
+            "part2": "In case you change the prefix folder for Wine or Proton, you will need to check the path again since Proton uses a different prefix (/pfx) and username (steamuser). Deci, puteți șterge simplu calea curentă, ieșiți din pagina de setări de sincronizare și reveniți din nou pentru ca HyperPlay să ghicească folderul încă o dată cu prefixul corect.",
             "part3": "Sincronizare manuală: alegeți Descărcare pentru a descărca salvările de jocuri stocate pe Cloud. Încărcați pentru a încărca cele locale în cloud. Descărcarea forțată și încărcarea forțată vor ignora versiunea locală sau în cloud.",
             "part4": "Sincronizarea salvărilor automat va sincroniza salvările de fiecare dată când începeți un joc și după ce terminați jocul."
         },
         "vkd3d": "VKD3D este un strat translațional bazat pe Vulkan pentru jocurile DirectX 12. Activarea poate îmbunătăți semnificativ compatibilitatea. Nu are niciun efect asupra jocurilor DirectX mai vechi.",
         "wine": {
-            "part1": "Heroic caută pentru versiuni de Wine, Proton și CrossOver în următoarele foldere:",
+            "part1": "HyperPlay caută pentru versiuni de Wine, Proton și CrossOver în următoarele foldere:",
             "part2": "Pentru alte locuri, utilizați un link simbolic către unul dintre aceste dosare"
         }
     },
@@ -338,7 +338,7 @@
         },
         "moved": "Mutare Finalizată",
         "moving": "Joc de Mișcare",
-        "new-hyperplay-version": "A fost lansată o nouă versiune heroică!",
+        "new-hyperplay-version": "A fost lansată o nouă versiune HyperPlayă!",
         "refresh": {
             "error": "Nu s-au putut prelua versiunile din amonte, poate din cauza restricțiilor API-ului Github! Încercați mai târziu."
         },
@@ -389,7 +389,7 @@
     "other": {
         "gogdl-version": "Versiunea GOGDL: ",
         "legendary-version": "Versiune Legendary: ",
-        "weblate": "Ajută la traducerea Heroic."
+        "weblate": "Ajută la traducerea HyperPlay."
     },
     "Other": "Other",
     "placeholder": {

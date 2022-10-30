@@ -19,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Heroic-en catxea garbitu da.",
+            "message": "HyperPlay-en catxea garbitu da.",
             "title": "Cachea ezabatuta"
         },
         "choose": "Aukeratu",
@@ -84,8 +84,8 @@
                 "changelog": "Ireki aldaketa erregistroa",
                 "detail": "Eguneraketa atzeko planoan deskargatu nahi duzu?",
                 "message": "Bertsio berri bat eskuragarri dago!",
-                "message-finished": "Heroic berrabiarazi nahi duzu?",
-                "title": "Heroic Games Launcher",
+                "message-finished": "HyperPlay berrabiarazi nahi duzu?",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "Eguneraketa bukatu da"
             }
         },
@@ -102,8 +102,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
-                "title": "Reset Heroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -225,7 +225,7 @@
         "esync": "Esync-ek ardo-zerbitzariaren gainkostua murriztea du helburu PUZa duten jokoetan. Gaitzeak errendimendua hobe dezake.",
         "fsync": "Fsync-ek ardo-zerbitzariaren gainkostua murriztea du helburu PUZa duten jokoetan. Gaitzeak errendimendua hobetu dezake onartzen diren Linux nukleoetan.",
         "game_language": {
-            "fallback": "Utzi hutsik Heroic-en hizkuntza erabiltzeko.",
+            "fallback": "Utzi hutsik HyperPlay-en hizkuntza erabiltzeko.",
             "in_game_config": "Joko guztiek ez dute konfigurazio hau onartzen, batzuek jokoaren hizkuntza ezarpena dute.",
             "valid_codes": "Baliozko hizkuntza-kodeak jokoaren araberakoak dira."
         },
@@ -241,12 +241,12 @@
         "preferSystemLibs": "Wine bertsio pertsonalizatuak (Wine-GE, Wine-Lutris) beren liburutegiko mendekotasunekin bidaltzen dira. Aukera hau gaituz gero, bidaltzen diren liburutegi hauek ez ikusi egingo dira eta Wine-k sistemako liburutegiak kargatuko ditu ordez. Kontuz! Arazoak gerta daitezke mendekotasunak betetzen ez badira.",
         "primerun": "Erabili txartel grafiko dedikatua jokoa errendatzeko GPU anitzeko sistemetan. Errendatzeko bururik gabeko GPU bat erabiltzen duten joko-ordenagailu eramangarrietan edo mahaigainetan bakarrik behar da (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Steam-ek eskaintzen dituen liburutegi pertsonalizatuak Linux eta Windows (Proton) jokoak exekutatzen laguntzeko. Gaitzeak bateragarritasuna hobetu dezake.",
         "sync": {
-            "part1": "Heroic ondo gordetzeko karpeta asmatzen saiatzen da, eta honek kasu gehienetan funtzionatuko du. Karpeta okerra bada, erabili baliogabetze-koadroa karpeta aldatzeko.",
-            "part2": "Prefix karpeta Wine edo Proton karpeta erabiliz gero, berriro egiaztatu beharko duzu ibilbidea, Proton-ek Prefix (/pfx) bat eta erabiltzaile-izen (steamuser) bat erabiltzen baititu. Beraz, uneko ibilbidea ezaba dezakezu, sinkronizazioko konfigurazio-orritik irten eta itzuli Heroic-ek karpeta berriro ere Prefix zuzenarekin asma dezan.",
+            "part1": "HyperPlay ondo gordetzeko karpeta asmatzen saiatzen da, eta honek kasu gehienetan funtzionatuko du. Karpeta okerra bada, erabili baliogabetze-koadroa karpeta aldatzeko.",
+            "part2": "Prefix karpeta Wine edo Proton karpeta erabiliz gero, berriro egiaztatu beharko duzu ibilbidea, Proton-ek Prefix (/pfx) bat eta erabiltzaile-izen (steamuser) bat erabiltzen baititu. Beraz, uneko ibilbidea ezaba dezakezu, sinkronizazioko konfigurazio-orritik irten eta itzuli HyperPlay-ek karpeta berriro ere Prefix zuzenarekin asma dezan.",
             "part3": "Eskuzko sinkronizazioa: Aukeratu «Deskargatu» hodeian gordetako jokoak deskargatzeko. «Igo» Igo lokalak hodeira igotzeko. «Behartu deskarga» eta «Karga behartua» ez dute kontuan hartuko tokiko bertsioa edo hodeiko bertsioa.",
             "part4": "Automatikoki gordetako sinkronizatzeak gordeak sinkronizatuko ditu joko bat hasten den bakoitzean eta jolasten amaitu ondoren."
         },
@@ -261,7 +261,7 @@
             "beta": "Beta",
             "newReleases": "Eguneraketa eskuragarri!",
             "stable": "Egonkorra",
-            "version": "Heroic bertsioa"
+            "version": "HyperPlay bertsioa"
         },
         "save-sync": {
             "searching": "Trying to detect the correct save folder"
@@ -389,7 +389,7 @@
     "other": {
         "gogdl-version": "GOGDL bertsioa: ",
         "legendary-version": "Bertsio mitikoa: ",
-        "weblate": "Lagundu Heroic itzultzen."
+        "weblate": "Lagundu HyperPlay itzultzen."
     },
     "Other": "Other",
     "placeholder": {
@@ -553,7 +553,7 @@
             "wineExt": "Ardoaren luzapenak"
         },
         "open-config-file": "Ireki Konfigurazio fitxategia",
-        "reset-hyperplay": "Berrezarri Heroic",
+        "reset-hyperplay": "Berrezarri HyperPlay",
         "saves": {
             "label": "Gorde kokapena:",
             "warning": "Hodeiko Gordeen eginbidea beta-n dago. Sinkronizatu aurretik gordetako babeskopiak egin behar dira (zerbait gaizki gertatzen bada)"

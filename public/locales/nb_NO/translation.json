@@ -19,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Heroic-hurtiglager tømt.",
+            "message": "HyperPlay-hurtiglager tømt.",
             "title": "Hurtiglager tømt"
         },
         "choose": "Velg",
@@ -84,8 +84,8 @@
                 "changelog": "Åpne endringslogg",
                 "detail": "Vil du laste ned oppdateringen i bakgrunnen?",
                 "message": "Det er en ny versjon tilgjengelig!",
-                "message-finished": "Vil du starte Heroic på nytt nå?",
-                "title": "Heroic Games Launcher",
+                "message-finished": "Vil du starte HyperPlay på nytt nå?",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "Oppgradering fullført"
             }
         },
@@ -102,8 +102,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
-                "title": "Reset Heroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -225,7 +225,7 @@
         "esync": "Esync har som mål å redusere vinserveroverhead i CPU-intensive spill. Aktivering kan forbedre ytelsen.",
         "fsync": "Fsync har som mål å redusere vinserveroverhead i CPU-intensive spill. Aktivering kan forbedre ytelsen på støttede Linux-kjerner.",
         "game_language": {
-            "fallback": "La stå tomt for å bruke Heroics språk.",
+            "fallback": "La stå tomt for å bruke HyperPlays språk.",
             "in_game_config": "Ikke alle spill støtter denne konfigurasjonen, noen har språkinnstilling i spillet.",
             "valid_codes": "Gyldige språkkoder er spillavhengige."
         },
@@ -241,12 +241,12 @@
         "preferSystemLibs": "Custom Wine-versjoner (Wine-GE, Wine-Lutris) sendes med deres bibliotekavhengigheter. Ved å aktivere dette alternativet vil disse sendte bibliotekene bli ignorert og Wine vil laste inn systembibliotekene i stedet. Advarsel! Problemer kan oppstå hvis avhengigheter ikke oppfylles.",
         "primerun": "Bruk dedikert grafikkort til å gjengi spill på multi-GPU-systemer. Bare nødvendig på bærbare eller stasjonære gaming-maskiner som bruker en hodeløs GPU for gjengivelse (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Egendefinerte biblioteker levert av Steam for å hjelpe til med å kjøre Linux og Windows (Proton)-spill. Aktivering kan forbedre kompatibiliteten.",
         "sync": {
-            "part1": "Heroic prøver å gjette riktig lagringsmappe, og dette vil fungere i de fleste tilfeller. I tilfelle mappen er feil, bruk overstyringsboksen for å endre den.",
-            "part2": "I tilfelle du endrer prefiksmappen for Wine eller Proton, må du sjekke banen på nytt siden Proton bruker et annet prefiks (/pfx) og brukernavn (steamuser). Så du kan enkelt slette den gjeldende banen gå ut av siden med synkroniseringsinnstillinger og komme tilbake igjen for Heroic å gjette mappen en gang til med riktig prefiks.",
+            "part1": "HyperPlay prøver å gjette riktig lagringsmappe, og dette vil fungere i de fleste tilfeller. I tilfelle mappen er feil, bruk overstyringsboksen for å endre den.",
+            "part2": "I tilfelle du endrer prefiksmappen for Wine eller Proton, må du sjekke banen på nytt siden Proton bruker et annet prefiks (/pfx) og brukernavn (steamuser). Så du kan enkelt slette den gjeldende banen gå ut av siden med synkroniseringsinnstillinger og komme tilbake igjen for HyperPlay å gjette mappen en gang til med riktig prefiks.",
             "part3": "Manuell synkronisering: Velg Last ned for å laste ned spill som er lagret i nettskyen. Last opp for å laste opp de lokale til skyen. Tving nedlasting og Tving opplasting vil ignorere versjonen som er lokalt eller på skyen.",
             "part4": "Synkroniser lagrer Automatisk vil synkronisere lagrene hver gang du starter et spill og etter endt spill."
         },
@@ -338,7 +338,7 @@
         },
         "moved": "Flytting fullført",
         "moving": "Moving Game",
-        "new-hyperplay-version": "En ny Heroic-versjon ble utgitt!",
+        "new-hyperplay-version": "En ny HyperPlay-versjon ble utgitt!",
         "refresh": {
             "error": "Kunne ikke hente utgivelser fra oppstrøms, kanskje på grunn av Github API-begrensninger! Prøv igjen senere."
         },
@@ -389,7 +389,7 @@
     "other": {
         "gogdl-version": "GOGDL-versjon: ",
         "legendary-version": "Legendarisk versjon: ",
-        "weblate": "Hjelp til å oversette Heroic."
+        "weblate": "Hjelp til å oversette HyperPlay."
     },
     "Other": "Other",
     "placeholder": {
@@ -553,7 +553,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Åpne konfigurasjonsfil",
-        "reset-hyperplay": "Tilbakestill Heroic",
+        "reset-hyperplay": "Tilbakestill HyperPlay",
         "saves": {
             "label": "Lagre plassering:",
             "warning": "Cloud Saves-funksjonen er i beta, vennligst ta sikkerhetskopi av lagrene dine før synkronisering (i tilfelle noe går galt)"
