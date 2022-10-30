@@ -10,6 +10,7 @@ export type WrapRendererCallback<
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
 import { IpcRendererEvent } from 'electron'
+import { ChildProcess } from 'child_process'
 
 export type Runner = 'legendary' | 'gog' | 'sideload'
 
@@ -381,7 +382,7 @@ export interface CallRunnerOptions {
   logFile?: string
   env?: Record<string, string> | NodeJS.ProcessEnv
   wrappers?: string[]
-  onOutput?: (output: string) => void
+  onOutput?: (output: string, child: ChildProcess) => void
 }
 
 export interface EnviromentVariable {
@@ -531,9 +532,9 @@ export interface DMQueueElement {
 }
 
 export type WineCommandArgs = {
-  command: string
+  commandParts: string[]
   wait: boolean
-  forceRunInPrefixVerb?: boolean
+  protonVerb?: ProtonVerb
   gameSettings?: GameSettings
   installFolderName?: string
   options?: CallRunnerOptions
@@ -560,3 +561,11 @@ export interface SideloadGame {
   browserUrl: string
   web3: Web3Features
 }
+
+export type ProtonVerb =
+  | 'run'
+  | 'waitforexitandrun'
+  | 'runinprefix'
+  | 'destroyprefix'
+  | 'getcompatpath'
+  | 'getnativepath'
