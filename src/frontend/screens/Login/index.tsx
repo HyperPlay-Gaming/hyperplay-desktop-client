@@ -6,12 +6,12 @@ import { useNavigate } from 'react-router'
 
 import { ReactComponent as EpicLogo } from 'frontend/assets/epic-logo.svg'
 import { ReactComponent as GOGLogo } from 'frontend/assets/gog-logo.svg'
+import { ReactComponent as HyperPlayLogo } from 'frontend/assets/hyperplay/hyperplay_logo.svg'
 
 import { LanguageSelector, UpdateComponent } from '../../components/UI'
 import { FlagPosition } from '../../components/UI/LanguageSelector'
 import SIDLogin from './components/SIDLogin'
 import ContextProvider from '../../state/ContextProvider'
-import { HyperPlayLogo } from 'frontend/assets/hyperplay'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
@@ -25,6 +25,11 @@ export default function NewLogin() {
   const [isEpicLoggedIn, setIsEpicLoggedIn] = useState(Boolean(epic.username))
   const [isGogLoggedIn, setIsGogLoggedIn] = useState(Boolean(gog.username))
 
+  const loginMessage = t(
+    'login.message',
+    'Login with your platform. You can login to more than one platform at the same time.'
+  )
+
   useEffect(() => {
     setLoading(false)
   }, [epic, gog])
@@ -34,10 +39,6 @@ export default function NewLogin() {
     setIsGogLoggedIn(Boolean(gog.username))
   }, [epic.username, gog.username, t])
 
-  const loginMessage = t(
-    'login.message',
-    'Login with your platform. You can login to more than one platform at the same time.'
-  )
   async function handleLibraryClick() {
     await refreshLibrary({ fullRefresh: true, runInBackground: false })
     navigate('/')
@@ -60,17 +61,11 @@ export default function NewLogin() {
       <div className="loginBackground"></div>
 
       <div className="loginContentWrapper">
-        {!loading && (
-          <LanguageSelector
-            flagPossition={FlagPosition.PREPEND}
-            showWeblateLink={true}
-          />
-        )}
         <div className="runnerList">
           <div className="runnerHeader">
             <HyperPlayLogo className="runnerHeaderIcon" />
             <div className="runnerHeaderText">
-              <h1 className="title">Heroic</h1>
+              <h1 className="title">Hyperplay</h1>
               <h2 className="subtitle">Games Launcher</h2>
             </div>
 
