@@ -20,6 +20,7 @@
 .loginContentWrapper {
   width: 75%;
   height: 100%;
+  max-width: 850px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -133,7 +134,7 @@
 }
 
 .runnerMessage {
-  width: 75%;
+  width: 85%;
   margin-top: 0;
   margin-bottom: var(--message-padding);
   text-align: left;

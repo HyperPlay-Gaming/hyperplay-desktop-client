@@ -7,7 +7,8 @@
         "title": "Accessibility",
         "zoom": "Zoom"
     },
-    "All": "",
+    "add_game": "Add Game",
+    "All": "Усе",
     "anticheat": {
         "anticheats": "Anticheats",
         "may_not_work": "It may not work due to denied or broken anticheat support.",
@@ -596,6 +597,7 @@
     "userselector": {
         "discord": "Discord",
         "logout": "Logout",
+        "logout_confirmation": "Вы ўпэўнены, што хочаце выйсці?",
         "manageaccounts": "Manage Accounts",
         "quit": "Quit"
     },
