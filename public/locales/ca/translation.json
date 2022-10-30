@@ -283,7 +283,8 @@
         "website": "S'està carregant el lloc web"
     },
     "login": {
-        "externalLogin": "Inici de sessió extern"
+        "externalLogin": "Inici de sessió extern",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "S'ha completat la sincronització",

@@ -283,7 +283,8 @@
         "website": "Cargando el sitio web"
     },
     "login": {
-        "externalLogin": "Inicio de sesión externo"
+        "externalLogin": "Inicio de sesión externo",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Sincronización completa",

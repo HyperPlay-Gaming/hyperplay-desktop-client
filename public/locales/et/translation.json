@@ -283,7 +283,8 @@
         "website": "Veebilehe laadimine"
     },
     "login": {
-        "externalLogin": "Väline sisselogimine"
+        "externalLogin": "Väline sisselogimine",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Sünkroonimine lõpetatud",

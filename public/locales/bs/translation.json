@@ -283,7 +283,8 @@
         "website": "Učitavanje webstranice"
     },
     "login": {
-        "externalLogin": "Vanjska prijava"
+        "externalLogin": "Vanjska prijava",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Sinhranizovanje završeno",

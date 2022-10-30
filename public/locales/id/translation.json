@@ -283,7 +283,8 @@
         "website": "Memuat Situs Web"
     },
     "login": {
-        "externalLogin": "Log Masuk Eksternal"
+        "externalLogin": "Log Masuk Eksternal",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Sinkronisasi Selesai",

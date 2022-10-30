@@ -283,7 +283,8 @@
         "website": "Зареждане на уеб сайта"
     },
     "login": {
-        "externalLogin": "Вход чрез външна услуга"
+        "externalLogin": "Вход чрез външна услуга",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Синхронизацията е завършена",

@@ -283,7 +283,8 @@
         "website": "Đang tải trang web"
     },
     "login": {
-        "externalLogin": "Đăng nhập bên ngoài"
+        "externalLogin": "Đăng nhập bên ngoài",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Hoàn tất quá trình đồng bộ",

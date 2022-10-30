@@ -283,7 +283,8 @@
         "website": "Загрузка веб-сайта"
     },
     "login": {
-        "externalLogin": "Внешний вход"
+        "externalLogin": "Внешний вход",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Синхронизация завершена",

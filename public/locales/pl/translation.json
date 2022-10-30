@@ -283,7 +283,8 @@
         "website": "Ładowanie strony"
     },
     "login": {
-        "externalLogin": "Zewnętrzne logowanie"
+        "externalLogin": "Zewnętrzne logowanie",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Synchronizacja zakończona",

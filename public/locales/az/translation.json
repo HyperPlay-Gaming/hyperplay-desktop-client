@@ -283,7 +283,8 @@
         "website": "Veb sayt yüklənir"
     },
     "login": {
-        "externalLogin": "Xarici Giriş"
+        "externalLogin": "Xarici Giriş",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Sinxronizasiya tamamlandı",
