@@ -6,7 +6,8 @@ import {
   faUniversalAccess,
   faUserAlt,
   faWineGlass,
-  faGamepad
+  faGamepad,
+  faBarsProgress
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink, useLocation } from 'react-router-dom'
