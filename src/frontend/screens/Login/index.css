@@ -10,7 +10,7 @@
 .loginBackground {
   height: 100%;
   width: 100%;
-  background: url('../../assets/login-background-1536x864.jpg');
+  background: url('../../assets/login-background.jpg');
   background-size: cover;
   opacity: 0.3;
   grid-column: 1;
