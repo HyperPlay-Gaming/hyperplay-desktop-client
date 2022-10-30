@@ -72,7 +72,7 @@
   transition: 0.2s;
   width: fit-content;
   backdrop-filter: blur(var(--blur-light));
-  margin: 20px 0px 10px auto;
+  margin: 20px 0px 0px auto;
   text-transform: uppercase;
 }
 

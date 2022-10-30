@@ -100,13 +100,13 @@ export default function NewLogin() {
               logoutAction={gog.logout}
             />
           </div>
+          <button
+            onClick={async () => handleLibraryClick()}
+            className="goToLibrary"
+          >
+            {t('button.go_to_library', 'Go to Library')}
+          </button>
         </div>
-        <button
-          onClick={async () => handleLibraryClick()}
-          className="goToLibrary"
-        >
-          {t('button.go_to_library', 'Go to Library')}
-        </button>
       </div>
     </div>
   )
