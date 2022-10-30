@@ -83,7 +83,7 @@
         "language": "Language",
         "lastPlayed": "Laatst gespeeld",
         "neverPlayed": "Nooit",
-        "platform": "Select Platform Version to Install",
+        "platform": "Select Platform",
         "requirements": "System Requirements",
         "totalPlayed": "Tijd gespeeld"
     },

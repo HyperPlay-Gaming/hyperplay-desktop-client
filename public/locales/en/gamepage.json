@@ -83,7 +83,7 @@
         "language": "Language",
         "lastPlayed": "Last Played",
         "neverPlayed": "Never",
-        "platform": "Select Platform Version to Install",
+        "platform": "Select Platform",
         "requirements": "System Requirements",
         "totalPlayed": "Time Played"
     },

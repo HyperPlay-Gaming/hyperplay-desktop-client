@@ -83,7 +83,7 @@
         "language": "Language",
         "lastPlayed": "最後にプレイした",
         "neverPlayed": "一度もない",
-        "platform": "Select Platform Version to Install",
+        "platform": "Select Platform",
         "requirements": "System Requirements",
         "totalPlayed": "プレイ時間"
     },
