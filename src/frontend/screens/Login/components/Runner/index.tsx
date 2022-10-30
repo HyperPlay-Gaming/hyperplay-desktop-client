@@ -64,7 +64,7 @@ export default function Runner(props: RunnerProps) {
       </div>
       {props.alternativeLoginAction && !props.isLoggedIn && (
         <div className="runnerWrapper">
-          <div className="runnerIcon alternative">{props.icon()}</div>
+          <div className="runnerIcon">{props.icon()}</div>
           <div className="runnerButtons">
             <div
               onClick={props.alternativeLoginAction}
