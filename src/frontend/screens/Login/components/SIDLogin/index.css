@@ -66,7 +66,7 @@
   color: var(--text-default);
   font-size: var(--text-md);
   padding: var(--space-2xs);
-  background-color: var(--background);
+  background-color: var(--background-lighter);
   border: none;
   height: 50px;
   width: 250px;
