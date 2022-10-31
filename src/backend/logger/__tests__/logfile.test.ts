@@ -1,6 +1,6 @@
 import { DirResult, dirSync } from 'tmp'
 import graceful_fs from 'graceful-fs'
-import { join } from 'path'
+// import { join } from 'path'
 import { app } from 'electron'
 import { configStore } from '../../constants'
 import * as logfile from '../logfile'
@@ -73,7 +73,7 @@ describe('logger/logfile.ts', () => {
     })
   })
 
-/*   test('createNewLogFileAndClearOldOnces removing old logs successful', () => {
+  /*   test('createNewLogFileAndClearOldOnces removing old logs successful', () => {
     jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
     const date = new Date()
     date.setMonth(date.getMonth() > 0 ? date.getMonth() - 1 : 11)
