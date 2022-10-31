@@ -34,18 +34,21 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         subtext="Connect with MetaMask Mobile"
         icon={<MMTransparent height={34} width={34} />}
         onClick={() => providerClicked(PROVIDERS.METAMASK_MOBILE)}
+        isRecommended={true}
       />
       <WalletOption
         title="WalletConnect"
         subtext="Connect with WalletConnect"
         icon={<WCBlue height={34} width={34} />}
         onClick={() => providerClicked(PROVIDERS.WALLET_CONNECT)}
+        isRecommended={false}
       />
       <WalletOption
         title="Create new wallet"
         subtext="Download MetaMask Mobile"
         icon={<PlusIcon height={34} width={34} />}
         onClick={() => props.downloadMetaMaskClicked()}
+        isRecommended={false}
       />
       <button
         className="button-sm actionButton"
