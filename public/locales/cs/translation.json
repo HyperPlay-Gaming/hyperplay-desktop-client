@@ -559,7 +559,7 @@
         "wineExt": "Wine rozšíření"
       },
       "open-config-file": "Otevřít soubor konfigurace",
-      "reset-HyperPlay": "Resetovat Hyperplay",
+      "reset-HyperPlay": "Resetovat HyperPlay",
       "saves": {
         "label": "Umístění pro ukládání:",
         "warning": "Funkce Cloud Saves je v Beta verzi, před synchronizací si prosím uložená data zálohujte (pro případ, že by se něco pokazilo)"
