@@ -14,12 +14,11 @@ import ContextProvider from './state/ContextProvider'
 import classNames from 'classnames'
 import Onboarding from './screens/Onboarding'
 import { ControllerHints, OfflineMessage } from './components/UI'
+import DownloadManager from './screens/DownloadManager'
 import DialogHandler from './components/UI/DialogHandler'
 
 function App() {
-  const { epic, gog, sidebarCollapsed } = useContext(ContextProvider)
-
-  const loggedIn = epic.username || gog.username
+  const { sidebarCollapsed } = useContext(ContextProvider)
 
   const [onboardingEnabled, setOnboardingEnabled] = useState(true)
 
@@ -31,7 +30,7 @@ function App() {
         <main className="content">
           <DialogHandler />
           <Routes>
-            <Route path="/" element={loggedIn ? <Library /> : <Login />} />
+            <Route path="/" element={<Library />} />
             <Route path="login" element={<Login />} />
             <Route path="epicstore" element={<WebView />} />
             <Route path="gogstore" element={<WebView />} />
@@ -53,6 +52,7 @@ function App() {
               </Route>
             </Route>
             <Route path="/wine-manager" element={<WineManager />} />
+            <Route path="/download-manager" element={<DownloadManager />} />
             <Route path="/accessibility" element={<Accessibility />} />
           </Routes>
         </main>

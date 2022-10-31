@@ -1,15 +1,16 @@
 import {
   faBookOpen,
-  faGamepad,
   faSlidersH,
   faStore,
   faUser,
   faUniversalAccess,
   faUserAlt,
-  faWineGlass
+  faWineGlass,
+  faGamepad,
+  faBarsProgress
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { NavLink, useNavigate, useLocation } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -37,49 +38,54 @@ export default function SidebarLinks() {
     is_installed: false
   })
   const { t } = useTranslation()
-  const navigate = useNavigate()
   const { state } = useLocation() as { state: LocationState }
   const location = useLocation() as { pathname: string }
   const [, , runner, appName, type] = location.pathname.split('/') as PathSplit
 
-  const { epic, gog, platform, activeController } = useContext(ContextProvider)
+  const { epic, gog, platform, activeController, refreshLibrary } =
+    useContext(ContextProvider)
 
   const isStore = location.pathname.includes('store')
   const isSettings = location.pathname.includes('settings')
   const [isDefaultSetting, setIsDefaultSetting] = useState(true)
+  const [isNativeApp, setIsNativeApp] = useState(true)
   const [settingsPath, setSettingsPath] = useState(
     '/settings/app/default/general'
   )
   const [isFullscreen, setIsFullscreen] = useState(false)
 
-  const { isLinuxNative = false, isMacNative = false } = state || {}
-  const isWin = platform === 'win32'
   const isMac = platform === 'darwin'
-  const isLinuxGame = isLinuxNative && platform === 'linux'
-  const isMacGame = isMacNative && isMac
   const isLinux = platform === 'linux'
-
-  const shouldRenderWineSettings = !isWin && !isMacGame && !isLinuxGame
+  const isLinuxGame = isLinux && gameInfo.install?.platform === 'linux'
+  const notAnApp =
+    !runner ||
+    runner === 'app' ||
+    gameInfo.install?.platform === 'Browser' ||
+    !appName
 
   const loggedIn = epic.username || gog.username
 
   useEffect(() => {
-    if (!runner || runner === 'app' || !appName) {
-      setIsDefaultSetting(true)
-      setGameInfo({ ...gameInfo, cloud_save_enabled: false })
-      setSettingsPath('/settings/app/default/general')
-    } else {
-      getGameInfo(appName, runner).then((info) => {
+    const updateGameInfo = async () => {
+      if (notAnApp) {
+        setIsDefaultSetting(true)
+        setGameInfo({ ...gameInfo, cloud_save_enabled: false })
+        setSettingsPath('/settings/app/default/general')
+      } else {
+        const info = await getGameInfo(appName, runner)
         setGameInfo(info)
         if (info?.is_installed) {
           setIsDefaultSetting(false)
-          const wineOrOther = isWin
+          const isNative = await window.api.isNative({ appName, runner })
+          setIsNativeApp(isNative)
+          const wineOrOther = isNative
             ? `/settings/${runner}/${appName}/other`
             : `/settings/${runner}/${appName}/wine`
           setSettingsPath(wineOrOther)
         }
-      })
+      }
     }
+    updateGameInfo()
   }, [location])
 
   useEffect(() => {
@@ -87,7 +93,7 @@ export default function SidebarLinks() {
   }, [])
 
   useEffect(() => {
-    if (!runner || runner === 'app') {
+    if (notAnApp) {
       return setIsDefaultSetting(true)
     }
   }, [location])
@@ -102,22 +108,25 @@ export default function SidebarLinks() {
         />
       </div>
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
-
-      {loggedIn && (
-        <NavLink
-          className={({ isActive }) =>
-            classNames('Sidebar__item', { active: isActive })
-          }
-          to={'/'}
-        >
-          <>
-            <div className="Sidebar__itemIcon">
-              <FontAwesomeIcon icon={faGamepad} title={t('Library')} />
-            </div>
-            <span>{t('Library')}</span>
-          </>
-        </NavLink>
-      )}
+      <NavLink
+        className={({ isActive }) =>
+          classNames('Sidebar__item', { active: isActive })
+        }
+        to={'/'}
+        onClick={async () =>
+          refreshLibrary({ runInBackground: false, fullRefresh: true })
+        }
+      >
+        <>
+          <div className="Sidebar__itemIcon">
+            <FontAwesomeIcon
+              icon={faGamepad}
+              title={t('library.label', 'Library')}
+            />
+          </div>
+          <span>{t('library.label', 'Library')}</span>
+        </>
+      </NavLink>
       <h6 className="Sidebar__categoryTitle">ACCOUNTS</h6>
       {!loggedIn && (
         <NavLink
@@ -178,7 +187,7 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
-      <button className="Sidebar__item" onClick={() => navigate('/login')}>
+      <NavLink className="Sidebar__item" to={'/login'}>
         <div className="Sidebar__itemIcon">
           <FontAwesomeIcon
             icon={faUserAlt}
@@ -186,7 +195,7 @@ export default function SidebarLinks() {
           />
         </div>
         <span>{t('userselector.manageaccounts', 'Manage Accounts')}</span>
-      </button>
+      </NavLink>
       <h6 className="Sidebar__categoryTitle">OTHER</h6>
       <div className="SidebarItemWithSubmenu">
         <NavLink
@@ -233,7 +242,7 @@ export default function SidebarLinks() {
                 <span>{t('settings.navbar.general')}</span>
               </NavLink>
             )}
-            {shouldRenderWineSettings && (
+            {!isNativeApp && (
               <>
                 <NavLink
                   role="link"
@@ -312,6 +321,22 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
+      <NavLink
+        className={({ isActive }) =>
+          classNames('Sidebar__item', { active: isActive })
+        }
+        to={{ pathname: '/download-manager' }}
+      >
+        <>
+          <div className="Sidebar__itemIcon">
+            <FontAwesomeIcon
+              icon={faBarsProgress}
+              title={t('download.manager.link', 'Download Manager')}
+            />
+          </div>
+          <span>{t('download.manager.link', 'Download Manager')}</span>
+        </>
+      </NavLink>
       {isLinux && (
         <NavLink
           className={({ isActive }) =>

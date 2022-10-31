@@ -7,6 +7,7 @@
         "title": "Accessibilitat",
         "zoom": "Zoom"
     },
+    "add_game": "Add Game",
     "All": "Tot",
     "anticheat": {
         "anticheats": "Antitrampes",
@@ -18,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "S'ha buidat la memòria cau de l'Heroic.",
+            "message": "S'ha buidat la memòria cau de l'HyperPlay.",
             "title": "S'ha esborrat la memòria cau"
         },
         "choose": "Tria",
@@ -56,9 +57,9 @@
             },
             "generic": {
                 "message": "",
-                "title": ""
+                "title": "Select EXE to Run"
             },
-            "launchAborted": "Launch aborted",
+            "launchAborted": "S'ha avortat el llançament.",
             "title": "Error",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
@@ -83,8 +84,8 @@
                 "changelog": "Obre el registre de canvis",
                 "detail": "Voleu descarregar l'actualització en segon pla?",
                 "message": "Hi ha una versió nova disponible.",
-                "message-finished": "Voleu reiniciar el Heroic ara?",
-                "title": "Heroic Games Launcher",
+                "message-finished": "Voleu reiniciar el HyperPlay ara?",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "L'actualització s'ha completat."
             }
         },
@@ -99,10 +100,10 @@
             "message": "Hi ha operacions pendents, estàs segur?",
             "title": "Surt"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Esteu segur que voleu restablir el Heroic? Es suprimirà tota la configuració i la memòria cau, però no eliminarà els jocs instal·lats ni les vostres credencials d'Epic. Les versions portables (AppImage, WinPortable, ...) del Heroic s'han de reiniciar manualment després.",
-                "title": "Restableix l'Heroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -171,6 +172,19 @@
         }
     },
     "docs": "Documentation",
+    "download": {
+        "manager": {
+            "empty": "Nothing to download.",
+            "link": "Download Manager",
+            "queue": {
+                "actions": "Action",
+                "element": "Name",
+                "platform": "Platform",
+                "store": "Store"
+            },
+            "title": "Downloads"
+        }
+    },
     "epic": {
         "offline-notification-body": "Els serveis en línia potser no funcionen del tot, ja que els servidors d'Epic Games estan desconnectats!",
         "offline-notification-title": "fora de línia"
@@ -205,11 +219,13 @@
     },
     "help": {
         "amdfsr": "L'FSR d'AMD ajuda a augmentar els fotogrames per segon emprant resolucions més baixes en el mode de pantalla completa i després escalant-les. La qualitat d'imatge augmenta de 5 a 1 a costa d'un petit increment de rendiment. Si s'habilita, pot millorar el rendiment.",
+        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
+        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
         "dxvk": "DXVK és una capa de traducció basada en Vulkan per a jocs que emprin DirectX 9, 10 i 11. Si s'habilita, pot millorar la compatibilitat. Pot causar problemes, especialment per als jocs que emprin versions del DirectX més antigues.",
         "esync": "Esync té com a objectiu reduir sobrecàrregues del Wineserver en jocs intensius en CPU. Si s'activa, el rendiment pot millorar.",
         "fsync": "Fsync té com a objectiu reduir sobrecàrregues del Wineserver en jocs intensius en CPU. Si s'activa, el rendiment pot millorar en versions de Linux compatibles.",
         "game_language": {
-            "fallback": "Deixeu-ho en blanc per usar l'idioma del Heroic.",
+            "fallback": "Deixeu-ho en blanc per usar l'idioma del HyperPlay.",
             "in_game_config": "No tots els jocs suporten aquesta configuració. En alguns s'ha de configurar l'idioma quan s'executa el programa.",
             "valid_codes": "Els codis de llenguatge vàlids depenen del joc."
         },
@@ -224,20 +240,19 @@
         },
         "preferSystemLibs": "Les versions personalitzades del Wine (Wine-GE, Wine-Lutris) s'envien amb les seves dependències de biblioteques. Quan s'activa aquesta opció, s'ignoraran les biblioteques enviades i Wine carregarà les biblioteques del sistema. Avís! Es poden produir problemes si no es compleixen les dependències.",
         "primerun": "Fes servir la targeta de gràfics dedicada per renderitzar el joc en sistemes de diverses GPU. Només cal en portàtils o ordinadors de sobretaula que tenen una GPU headless per renderitzar, com ara NVIDIA Optimus o AMD Crossfire.",
-        "resizablebar": "La barra redimensionable de NVIDIA ajuda a augmentar els FPS fent que la CPU accedeixi a la memòria gràfica. Si s'habilita, el rendiment dels jocs basats en Vulkan pot millorar.",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Biblioteques personalitzades que proporciona l'Steam per executar jocs en Linux i en Windows (Proton). Si s'activa, pot millorar la compatibilitat.",
         "sync": {
-            "part1": "L'Heroic prova d'endevinar el directori on es desen les partides, i això funcionarà a la majoria de casos. En cas que el directori no sigui el correcte, utilitza la caixa per a canviar-lo.",
-            "part2": "Si canvies el directori del prefix del Wine o del Proton, hauràs de comprovar de nou la ruta perquè el Proton empra un prefix (/pfx) i nom d'usuari (steamuser) diferent. Així doncs, pots suprimir la ruta actual, sortir de la configuració de sincronització i tornar-hi de nou perquè l'Heroic pugui esbrinar el directori de nou amb el prefix correcte.",
+            "part1": "L'HyperPlay prova d'endevinar el directori on es desen les partides, i això funcionarà a la majoria de casos. En cas que el directori no sigui el correcte, utilitza la caixa per a canviar-lo.",
+            "part2": "Si canvies el directori del prefix del Wine o del Proton, hauràs de comprovar de nou la ruta perquè el Proton empra un prefix (/pfx) i nom d'usuari (steamuser) diferent. Així doncs, pots suprimir la ruta actual, sortir de la configuració de sincronització i tornar-hi de nou perquè l'HyperPlay pugui esbrinar el directori de nou amb el prefix correcte.",
             "part3": "Sincronització manual: Tria «Baixa» per a baixar les partides desades al núvol. «Puja» per a pujar les dades locals al núvol. «Força la baixada» i «Força la pujada» ignorarà la versió local o del núvol.",
             "part4": "«Sincronitza les partides desades automàticament» sincronitzarà les dades cada vegada que iniciïs un joc i quan acabis de jugar."
         },
         "vkd3d": "VKD3D és una capa de traducció basada en Vulkan per a jocs que fan servir DirectX 12. Si s'habilitat, la compatibilitat pot millorar significativament. No té cap efecte en jocs que emprin DirectX més antics.",
         "wine": {
-            "part1": "L'Heroic cerca les versions del Wine, Proton i CrossOver als directoris següents:",
+            "part1": "L'HyperPlay cerca les versions del Wine, Proton i CrossOver als directoris següents:",
             "part2": "Per a altres llocs, utilitza un enllaç simbòlic (symlink) a algun d'aquests directoris"
         }
     },
@@ -246,7 +261,10 @@
             "beta": "Beta",
             "newReleases": "Hi ha una actualització disponible!",
             "stable": "Estable",
-            "version": "Heroic Version"
+            "version": "HyperPlay Version"
+        },
+        "save-sync": {
+            "searching": "Trying to detect the correct save folder"
         },
         "settings": "La configuració es desa automàticament",
         "version": "Versió del Wine"
@@ -254,6 +272,7 @@
     "infobox": {
         "help": "Ajuda",
         "requirements": "Requisits del sistema",
+        "warning": "Warning",
         "wine-path": "Camí del Wine",
         "wine-prefix": {
             "title": "Prefix del Wine"
@@ -266,6 +285,7 @@
         "path": "Selecciona la ruta d'instal·lació"
     },
     "library": {
+        "label": "Library",
         "refresh": "Actualitza",
         "sortAscending": "Ordre ascendent",
         "sortByStatus": "Ordena per estat",
@@ -275,13 +295,13 @@
             "list": "Commuta a una vista en llista"
         }
     },
-    "Library": "Biblioteca",
     "loading": {
         "default": "S'està carregant...",
         "website": "S'està carregant el lloc web"
     },
     "login": {
-        "externalLogin": "Inici de sessió extern"
+        "externalLogin": "Inici de sessió extern",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "S'ha completat la sincronització",
@@ -318,7 +338,7 @@
         },
         "moved": "Ha finalitzat el desplaçament",
         "moving": "S'està movent el joc...",
-        "new-hyperplay-version": "Hi ha una nova versió del Heroic!",
+        "new-hyperplay-version": "Hi ha una nova versió del HyperPlay!",
         "refresh": {
             "error": "No s'ha pogut aconseguir el llistat de versions, potser per les restriccions de l'API del GitHub. Proveu-ho més tard."
         },
@@ -369,11 +389,13 @@
     "other": {
         "gogdl-version": "Versió del GOGDL: ",
         "legendary-version": "Versió del Legendary: ",
-        "weblate": "Ajuda a traduir l'Heroic."
+        "weblate": "Ajuda a traduir l'HyperPlay."
     },
+    "Other": "Other",
     "placeholder": {
         "alt-gogdl-bin": "S'està usant un binari del GOGDL integrat.",
         "alt-legendary-bin": "S'està utilitzant el binari integrat del Legendary...",
+        "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix on l'EGS està instal·lat",
         "prefered_language": "Codi de dos caràcters, com ara «en», «fr» o «ca»"
     },
@@ -383,6 +405,14 @@
         "win": "Windows"
     },
     "progress": "Progress",
+    "queue": {
+        "label": {
+            "clear": "Clear List",
+            "downloading": "Downloading",
+            "finished": "Completed",
+            "queued": "Queued"
+        }
+    },
     "Recent": "Jugats fa poc",
     "search": "Cerca jocs",
     "setting": {
@@ -396,14 +426,15 @@
         "autosync": "Sincronitza automàticament les partides desades",
         "autovkd3d": "Instal·la/Actualitza el VKD3D al prefix automàticament",
         "change-target-exe": "Selecciona un EXE alternatiu a executar",
-        "checkForUpdatesOnStartup": "Comprova si hi ha actualitzacions del Heroic a l'inici",
+        "checkForUpdatesOnStartup": "Comprova si hi ha actualitzacions del HyperPlay a l'inici",
         "crossover-version": "Versió híbrida (crossover)",
+        "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Rutes del Wine o Proton personalitzades",
         "darktray": "Utilitza la icona fosca a la safata",
         "default-install-path": "Ruta d'instal·lació predefinida",
         "default-steam-path": "Camí de l'Steam per defecte",
         "defaultWinePrefix": "Directori de prefixos Wine nous",
-        "disable_controller": "Desactiva la navegació del Heroic amb el controlador",
+        "disable_controller": "Desactiva la navegació del HyperPlay amb el controlador",
         "discordRPC": "Activa la Discord Rich Presence",
         "download-no-https": "Descarrega jocs sense HTTPS (útil per CDNs com ara LanCache)",
         "egs-sync": "Sincronitza amb l'Epic Games instal·lat",
@@ -462,12 +493,17 @@
         },
         "maxRecentGames": "Jugats fa poc a mostrar",
         "maxworkers": "Nombre màxim de Workers en baixar",
-        "minimize-on-launch": "Minimitza el Heroic després d'executar un joc",
+        "minimize-on-launch": "Minimitza el HyperPlay després d'executar un joc",
         "offlinemode": "Executa el joc sense connexió",
         "prefered_language": "Idioma preferit (codi de l'idioma)",
         "preferSystemLibs": "Dóna preferència a les biblioteques del sistema",
-        "primerun": "Usa la targeta gràfica dedicada",
-        "resizableBar": "Activa el BAR redimensionable (només amb NVIDIA RTX 30xx)",
+        "primerun": {
+            "confirmation": {
+                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
+                "title": "Only 1 GPU detected"
+            },
+            "description": "Usa la targeta gràfica dedicada"
+        },
         "runexe": {
             "message": "Arrossega i solta els fitxers aquí",
             "title": "Executa l'EXE al prefix"
@@ -488,7 +524,7 @@
             "installing": "S'està instal·lant el BattlEye Runtime...",
             "name": "Antitrampes BattlEye Runtime"
         },
-        "clear-cache": "Esborra la memòria cau de l'Heroic",
+        "clear-cache": "Esborra la memòria cau de l'HyperPlay",
         "copiedToClipboard": "S'ha copiat al porta-retalls.",
         "copyToClipboard": "Copia tota la configuració al porta-retalls",
         "eacRuntime": {
@@ -517,7 +553,7 @@
             "wineExt": "Extensions del Wine"
         },
         "open-config-file": "Obre el fitxer de configuració",
-        "reset-hyperplay": "Restableix l'Heroic",
+        "reset-hyperplay": "Restableix l'HyperPlay",
         "saves": {
             "label": "Ubicació de les desades:",
             "warning": "La funció de desar al núvol està en versió beta. Si us plau, feu una còpia de seguretat de les vostres partides desades abans de sincronitzar-les, per si quelcom sortís malament."

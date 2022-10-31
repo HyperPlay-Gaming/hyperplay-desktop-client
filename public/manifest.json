@@ -3,7 +3,7 @@
   "name": "HyperPlay",
   "icons": [
     {
-      "src": "icon.png",
+      "src": "app_icon.png",
       "type": "image/png",
       "sizes": "512x512"
     }

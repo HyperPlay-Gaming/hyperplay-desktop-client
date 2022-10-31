@@ -59,7 +59,7 @@ const { currentLogFile: currentLogFile, lastLogFile: lastLogFile } =
   createNewLogFileAndClearOldOnces()
 
 const publicDir = resolve(__dirname, '..', app.isPackaged ? '' : '../public')
-const icon = fixAsarPath(join(publicDir, 'icon.png'))
+const icon = fixAsarPath(join(publicDir, 'app_icon.png'))
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
 const iconLight = fixAsarPath(join(publicDir, 'trayIconLight24x24.png'))
 const installed = join(legendaryConfigPath, 'installed.json')
@@ -80,6 +80,8 @@ const kofiPage = 'https://ko-fi.com/heroicgames'
 const patreonPage = 'https://www.patreon.com/heroicgameslauncher'
 const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
 const hyperplaySite = 'https://game7.io/'
+const customThemesWikiLink =
+  'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/Custom-Themes'
 
 /**
  * Get shell for different os
@@ -222,5 +224,6 @@ export {
   publicDir,
   GITHUB_API,
   wineprefixFAQ,
-  hyperplaySite
+  hyperplaySite,
+  customThemesWikiLink
 }

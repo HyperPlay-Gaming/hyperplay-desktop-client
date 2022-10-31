@@ -5,7 +5,8 @@ import {
   ExtraInfo,
   GameInfo,
   GameSettings,
-  InstallArgs
+  InstallArgs,
+  ProtonVerb
 } from 'common/types'
 
 import { BrowserWindow } from 'electron'
@@ -30,9 +31,9 @@ abstract class Game {
   abstract install(args: InstallArgs): Promise<{ status: string }>
   abstract addShortcuts(): Promise<void>
   abstract launch(launchArguments?: string): Promise<boolean>
+  abstract stop(): Promise<void>
   abstract moveInstall(newInstallPath: string): Promise<string>
   abstract repair(): Promise<ExecResult>
-  abstract stop(): Promise<void>
   abstract forceUninstall(): Promise<void>
   abstract syncSaves(arg: string, path: string): Promise<ExecResult>
   abstract syncSaves(
@@ -41,9 +42,13 @@ abstract class Game {
     gogSaves?: GOGCloudSavesLocation[]
   ): Promise<ExecResult>
   abstract uninstall(): Promise<ExecResult>
-  abstract update(): Promise<{ status: 'done' | 'error' }>
+  abstract update(): Promise<{ status: 'done' | 'error' | 'abort' }>
   abstract isNative(): boolean
-  abstract runWineCommand(command: string, wait?: boolean): Promise<ExecResult>
+  abstract runWineCommand(
+    commandParts: string[],
+    wait?: boolean,
+    protonVerb?: ProtonVerb
+  ): Promise<ExecResult>
 }
 
 export { Game }
