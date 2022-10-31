@@ -34,6 +34,7 @@
   flex: none;
   order: 0;
   flex-grow: 0;
+  flex-shrink: 1;
 }
 
 div.walletOptionIcon {
@@ -69,6 +70,7 @@ img.walletOptionIcon {
   background: transparent;
   background-color: transparent;
   border-color: transparent;
+  flex-shrink: 1;
 }
 
 .walletOptionTitleText {
@@ -76,6 +78,11 @@ img.walletOptionIcon {
   order: 0;
   flex-grow: 0;
   margin: -1px 0px;
+  text-align: left;
+}
+
+.walletOptionTitleText > span {
+  color: var(--success);
 }
 
 .walletOptionSubtext {

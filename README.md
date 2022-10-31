@@ -151,7 +151,7 @@ To run it use:
 
 ### Windows
 
-Download Hyperplay_Setup.x.x.x.exe or the Portable HyperPlay-x.x.x.exe file and run it. It will install it to the start menu and desktop, use those to run it.
+Download HyperPlay_Setup.x.x.x.exe or the Portable HyperPlay-x.x.x.exe file and run it. It will install it to the start menu and desktop, use those to run it.
 
 ### macOS
 
