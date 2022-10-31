@@ -24,8 +24,8 @@
       "build/bin/legendary.LICENSE"
     ],
     "asarUnpack": [
-      "build/icon.png",
-      "build/icon.icns",
+      "build/app_icon.png",
+      "build/app_icon.icns",
       "build/win_icon.ico",
       "build/trayIconLight24x24.png",
       "build/trayIconDark24x24.png"
@@ -55,7 +55,7 @@
     "mac": {
       "target": "dmg",
       "category": "public.app-category.games",
-      "icon": "build/icon.icns",
+      "icon": "build/app_icon.icns",
       "asarUnpack": [
         "build/bin/darwin/legendary",
         "build/bin/darwin/gogdl"
@@ -86,7 +86,7 @@
     },
     "linux": {
       "category": "Game",
-      "icon": "build/icon.icns",
+      "icon": "build/app_icon.icns",
       "description": "An Open Source Launcher for Web3, GOG and Epic Games",
       "desktop": {
         "Name": "HyperPlay",

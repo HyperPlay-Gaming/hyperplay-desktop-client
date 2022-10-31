@@ -59,7 +59,7 @@ const { currentLogFile: currentLogFile, lastLogFile: lastLogFile } =
   createNewLogFileAndClearOldOnces()
 
 const publicDir = resolve(__dirname, '..', app.isPackaged ? '' : '../public')
-const icon = fixAsarPath(join(publicDir, 'icon.png'))
+const icon = fixAsarPath(join(publicDir, 'app_icon.png'))
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
 const iconLight = fixAsarPath(join(publicDir, 'trayIconLight24x24.png'))
 const installed = join(legendaryConfigPath, 'installed.json')
