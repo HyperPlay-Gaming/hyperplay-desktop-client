@@ -23,7 +23,7 @@ function TimeContainer({ game }: Props) {
   if (!hasPlayed) {
     return (
       <>
-        <div className="subtitle">{`${t(
+        <div className="hp-subtitle">{`${t(
           'game.lastPlayed',
           'Last Played'
         )}:`}</div>
@@ -58,7 +58,7 @@ function TimeContainer({ game }: Props) {
 
   return (
     <>
-      <div className="subtitle">{`${t(
+      <div className="hp-subtitle">{`${t(
         'game.firstPlayed',
         'First Played'
       )}:`}</div>
@@ -66,14 +66,14 @@ function TimeContainer({ game }: Props) {
 
       {lastPlayed && (
         <>
-          <div className="subtitle">{`${t(
+          <div className="hp-subtitle">{`${t(
             'game.lastPlayed',
             'Last Played'
           )}:`}</div>
           <div className="col2-item italic">{lastDate}</div>
         </>
       )}
-      <div className="subtitle">{`${t(
+      <div className="hp-subtitle">{`${t(
         'game.totalPlayed',
         'Time Played'
       )}:`}</div>

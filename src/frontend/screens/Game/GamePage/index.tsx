@@ -269,9 +269,6 @@ export default function GamePage(): JSX.Element | null {
         {title ? (
           <>
             <GamePicture art_square={art_square} store={runner} />
-            <div className="store-icon">
-              {runner === 'legendary' ? <EpicLogo /> : <GOGLogo />}
-            </div>
             <CyberDividerVertical
               className="cyberDivider"
               preserveAspectRatio="none"
@@ -289,19 +286,21 @@ export default function GamePage(): JSX.Element | null {
             <div className="gameInfo">
               <div className="titleWrapper">
                 <h2 className="title">{title}</h2>
-                <Link
-                  to={pathname}
-                  state={{
-                    fromGameCard: false,
-                    runner,
-                    isLinuxNative: isNative,
-                    isMacNative: isNative,
-                    hasCloudSave: cloud_save_enabled
-                  }}
-                  className={`settings-icon`}
-                >
-                  <SettingsIcon />
-                </Link>
+                {installPlatform !== 'Browser' && (
+                  <Link
+                    to={pathname}
+                    state={{
+                      fromGameCard: false,
+                      runner,
+                      isLinuxNative: isNative,
+                      isMacNative: isNative,
+                      hasCloudSave: cloud_save_enabled
+                    }}
+                    className={`settings-icon`}
+                  >
+                    <SettingsIcon />
+                  </Link>
+                )}
                 <div className="game-actions">
                   <button className="toggle">
                     <FontAwesomeIcon icon={faEllipsisV} />
@@ -516,7 +515,7 @@ export default function GamePage(): JSX.Element | null {
                     isUpdating ||
                     isReparing ||
                     isMoving ||
-                    isUninstalling(hasDownloads && !isInstalling)
+                    isUninstalling
                   }
                   className={`button ${getButtonClass(is_installed)}`}
                 >
@@ -525,19 +524,6 @@ export default function GamePage(): JSX.Element | null {
               )}
               {installPlatform !== 'Browser' && is_installed && (
                 <>
-                  <Link
-                    to={pathname}
-                    state={{
-                      fromGameCard: false,
-                      runner,
-                      isLinuxNative: isNative,
-                      isMacNative: isNative,
-                      hasCloudSave: cloud_save_enabled
-                    }}
-                    className={`button ${getButtonClass(is_installed)}`}
-                  >
-                    {`${getButtonLabel(is_installed)}`}
-                  </Link>
                   <NavLink
                     to={`/settings/${runner}/${appName}/log`}
                     state={{
