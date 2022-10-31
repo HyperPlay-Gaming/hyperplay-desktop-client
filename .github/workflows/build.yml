@@ -29,7 +29,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: win-portable
-          path: dist/Hyperplay*.exe
+          path: dist/HyperPlay*.exe
           retention-days: 14
   build_linux:
     runs-on: ubuntu-latest
@@ -52,7 +52,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: linux-appimage
-          path: dist/Hyperplay-*.AppImage
+          path: dist/HyperPlay-*.AppImage
           retention-days: 14
   build_mac:
     runs-on: macos-11
@@ -75,5 +75,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: mac-dmg
-          path: dist/Hyperplay*.dmg
+          path: dist/HyperPlay*.dmg
           retention-days: 14

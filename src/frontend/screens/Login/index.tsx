@@ -65,7 +65,7 @@ export default function NewLogin() {
           <div className="runnerHeader">
             <HyperPlayLogo className="runnerHeaderIcon" />
             <div className="runnerHeaderText">
-              <h1 className="title">Hyperplay</h1>
+              <h1 className="title">HyperPlay</h1>
               <h2 className="subtitle">Games Launcher</h2>
             </div>
 
