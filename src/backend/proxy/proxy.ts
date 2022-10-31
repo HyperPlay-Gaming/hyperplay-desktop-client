@@ -63,6 +63,14 @@ app.post('/sendContract', async (req: RequestBody<TxnRequest>, res) => {
     return
   }
 
+  if (req.body.abi !== undefined && typeof req.body.abi !== 'object') {
+    res.status(500).send({
+      message: `Abi must be an object. Type ${typeof req.body
+        .abi} was sent instead.`
+    })
+    return
+  }
+
   // ensure abi is available and cached locally
   if (req.body.abi !== undefined) {
     // abi is defined so cache it
@@ -113,4 +121,5 @@ export const serverStarted = new Promise((resolve) => {
     console.log(`🚀 Ready at http://localhost:${port}`)
     resolve(1)
   })
+  server.setTimeout(0)
 })
