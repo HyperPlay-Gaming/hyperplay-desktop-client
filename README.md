@@ -123,8 +123,7 @@ sudo dpkg -i hyperplay.x.x.x_amd64.deb
 
 #### Other Distributions (AppImage and TAR.XZ)
 
-Download the `hyperplay-x.x.x.AppImage` or `hyperplay-x.x.x.tar.xz` from the Releases section.
-Make sure you have Curl and Gawk, normally it comes with most distros but check for them if you have any issue.
+Since these two distribution formats don't have a form of dependency management, make sure the `curl` command is available. You might run into weird issues if it's not.
 
 To make the AppImage it executable use:
 
@@ -198,13 +197,12 @@ yarn dist:mac
 
 1. Download Yarn and Node.js
 2. Download the dependencies with `yarn`
-3. Run `yarn dev` on the terminal
+3. Run `yarn start` on the terminal
 
-### Building with VS Code
+If you want to quickly test a change, or you're implementing features that require a lot of restarts, you can use Vite's development server to speed up the process:  
+Go to the "Run and Debug" tab of VSCode and start the "Launch Heroic (HMR & HR)" task (alternatively, if you're not using VSCode or just prefer the terminal, run `yarn start`). Heroic will start up after a short while, and once you make any change to the code, it'll reload/restart.
 
-1. Download Yarn and Node.js
-2. Download the dependencies with `yarn`
-3. Open the tasks. Select "Build with [your OS]"
+Note: If you do not need the React developer tools while testing changes, you can skip their install by setting the `HEROIC_NO_REACT_DEVTOOLS` environment variable before running `yarn start` (for example with `HEROIC_NO_REACT_DEVTOOLS=1 yarn start`).
 
 ### Development Using a Container
 

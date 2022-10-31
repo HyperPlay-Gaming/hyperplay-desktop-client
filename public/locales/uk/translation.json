@@ -7,6 +7,7 @@
         "title": "Спец. можливості",
         "zoom": "Маштабування"
     },
+    "add_game": "Add Game",
     "All": "Всі",
     "anticheat": {
         "anticheats": "Античіти",
@@ -18,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Кеш Heroic очищено.",
+            "message": "Кеш HyperPlay очищено.",
             "title": "Кеш очищено"
         },
         "choose": "Оберіть",
@@ -56,7 +57,7 @@
             },
             "generic": {
                 "message": "",
-                "title": ""
+                "title": "Select EXE to Run"
             },
             "launchAborted": "Launch aborted",
             "title": "Помилка",
@@ -83,8 +84,8 @@
                 "changelog": "Відкрити журнал змін",
                 "detail": "Бажаєте завантажити оновлення у фоновому режимі?",
                 "message": "Доступна нова версія!",
-                "message-finished": "Бажаєте перезапустити Heroic зараз?",
-                "title": "Heroic Games Launcher",
+                "message-finished": "Бажаєте перезапустити HyperPlay зараз?",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "Оновлення завершено"
             }
         },
@@ -99,10 +100,10 @@
             "message": "Є очікувані операції, ви впевнені?",
             "title": "Вийти"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
-                "title": "Скинути Heroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -171,6 +172,19 @@
         }
     },
     "docs": "Документація",
+    "download": {
+        "manager": {
+            "empty": "Nothing to download.",
+            "link": "Download Manager",
+            "queue": {
+                "actions": "Action",
+                "element": "Name",
+                "platform": "Platform",
+                "store": "Store"
+            },
+            "title": "Downloads"
+        }
+    },
     "epic": {
         "offline-notification-body": "Мережеві сервіси можуть не повністю працювати, тому що сервери Epic Games наразі недоступні!",
         "offline-notification-title": "офлайн"
@@ -205,11 +219,13 @@
     },
     "help": {
         "amdfsr": "AMD's FSR допомагає збільшити частоту кадрів шляхом підвищення маштабу кожного кадру гри, яка відтворюється у нижчій роздільній здатності, у повноекранному режимі. Якість картинки збільшується з 5 до 1, ціною незначного зниження продуктивності. Увімкнення може покращити продуктивність.",
+        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
+        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
         "dxvk": "DXVK це перекладний шар основний на Vulkan, для ігор написаних з DirectX 9, 10 та 11. Увімкнення може покращити сумісність. Може викликати проблеми, особливо у старіших DirectX іграх.",
         "esync": "Esync має на меті зменшити споживання ресурсів wineserver -а, у іграх з інтенсивним використанням процесора. Увімкнення може покращити продуктивність.",
         "fsync": "Fsync має на меті зменшити споживання ресурсів wineserver -а, у іграх з інтенсивним використанням процесора. Увімкнення може покращити продуктивність на підтриманих Linux ядрах.",
         "game_language": {
-            "fallback": "Залиште порожнім для використання мови Heroic.",
+            "fallback": "Залиште порожнім для використання мови HyperPlay.",
             "in_game_config": "Не всі ігри підтримують цю конфігурацію, деякі мають налаштування мови всередині гри.",
             "valid_codes": "Прийнятні коди мов залежать від гри."
         },
@@ -224,20 +240,19 @@
         },
         "preferSystemLibs": "Спеціальні версії Wine (Wine-GE, Wine-Lutris) постачаються разом із залежностями бібліотеки. Якщо ввімкнути цю опцію, ці бібліотеки ігноруватимуться, а Wine замість них завантажуватиме системні бібліотеки. УВАГА! Якщо залежності не виконано, можуть виникнути проблеми.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
-        "resizablebar": "NVIDIA's Resizable Bar допомагає підвищити частоту кадрів, дозволяючи процесору отримати доступ до всього графічного буфера. Увімкнення може покращити продуктивність ігор, основаних на Vulkan.",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Спеціальні бібліотеки, надані Steam -ом, щоб допомогти з запуском ігор під Linux та Windows (Proton). Увімкнення може покращити сумісність.",
         "sync": {
-            "part1": "Heroic намагається вгадати теку збережень і це працює в більшості випадків. Якщо тека неправильна, використайте поле заміни щоб змінити шлях.",
-            "part2": "Якщо ви зміните теку префіксу для Wine або Proton, вам доведеться перевірити шлях знову оскільки Proton використовує инший префікс (/pfx) та ім'я користувача (steamuser). Тому ви можете просто стерти поточний шлях, вийти з налаштувань синхронізації і повернутись щоб Heroic знов спробував вгадати теку з правильним префіксом.",
+            "part1": "HyperPlay намагається вгадати теку збережень і це працює в більшості випадків. Якщо тека неправильна, використайте поле заміни щоб змінити шлях.",
+            "part2": "Якщо ви зміните теку префіксу для Wine або Proton, вам доведеться перевірити шлях знову оскільки Proton використовує инший префікс (/pfx) та ім'я користувача (steamuser). Тому ви можете просто стерти поточний шлях, вийти з налаштувань синхронізації і повернутись щоб HyperPlay знов спробував вгадати теку з правильним префіксом.",
             "part3": "Ручна синхронізація: Оберіть \"Завантажити\" щоб завантажити збереження, розташовані у хмарі. \"Вивантажити\" щоб відправити локальні збереження у хмару. \"Примусове завантаження\" і \"Примусове вивантаження\" ігноруватимуть локальну чи хмарну версію збереження.",
             "part4": "Функція автоматичної синхронізації збережень виконуватиметься кожен раз коли ви починаєте та закінчуєте грати."
         },
         "vkd3d": "VKD3D це перекладний шар основний на Vulkan, для ігор написаних з DirectX 12. Увімкнення може покращити сумісність. Не спричиняє проблем з старіших DirectX іграх.",
         "wine": {
-            "part1": "Heroic шукає версії Wine, Proton, і CrossOver в цих теках:",
+            "part1": "HyperPlay шукає версії Wine, Proton, і CrossOver в цих теках:",
             "part2": "Для інших місць, скористайтесь символьною ланкою на одну з цих тек"
         }
     },
@@ -246,7 +261,10 @@
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
-            "version": "Версія Heroic"
+            "version": "Версія HyperPlay"
+        },
+        "save-sync": {
+            "searching": "Trying to detect the correct save folder"
         },
         "settings": "Налаштування збережено автоматично",
         "version": "Версія Wine"
@@ -254,6 +272,7 @@
     "infobox": {
         "help": "Допомога",
         "requirements": "Системні вимоги",
+        "warning": "Warning",
         "wine-path": "Шлях до Wine",
         "wine-prefix": {
             "title": "Wine Prefix"
@@ -266,6 +285,7 @@
         "path": "Вкажіть шлях встановлення"
     },
     "library": {
+        "label": "Library",
         "refresh": "Оновити",
         "sortAscending": "Сортувати за зростанням",
         "sortByStatus": "Сортувати за станом",
@@ -275,13 +295,13 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "Бібліотека",
     "loading": {
         "default": "Завантаження",
         "website": "Завантаження вебсайту"
     },
     "login": {
-        "externalLogin": "Зовнішній вхід"
+        "externalLogin": "Зовнішній вхід",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Синхронізація завершена",
@@ -318,7 +338,7 @@
         },
         "moved": "Переміщення завершене",
         "moving": "Переміщення гри",
-        "new-hyperplay-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
             "error": "Не вдалося отримати версію з джерела, можливо, через обмеження API Github! Спробуйте пізніше."
         },
@@ -369,11 +389,13 @@
     "other": {
         "gogdl-version": "Версія GOGDL: ",
         "legendary-version": "Версія Legendary: ",
-        "weblate": "Допоможіть перекласти Heroic."
+        "weblate": "Допоможіть перекласти HyperPlay."
     },
+    "Other": "Other",
     "placeholder": {
         "alt-gogdl-bin": "Використання вбудованого двійкового до GOGDL...",
         "alt-legendary-bin": "Використання вбудованого двійкового до Legendary...",
+        "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Префікс де встановлено EGS",
         "prefered_language": "2-значний код (приклад: \"en\" або \"uk\")"
     },
@@ -383,6 +405,14 @@
         "win": "Windows"
     },
     "progress": "Progress",
+    "queue": {
+        "label": {
+            "clear": "Clear List",
+            "downloading": "Downloading",
+            "finished": "Completed",
+            "queued": "Queued"
+        }
+    },
     "Recent": "Нещодавно зіграні",
     "search": "Пошук ігор",
     "setting": {
@@ -396,14 +426,15 @@
         "autosync": "Автосинхронізувати збереження",
         "autovkd3d": "Автоматично встановлювати/оновлювати VKD3D на префіксі",
         "change-target-exe": "Обрати для запуску альтернативний EXE файл",
-        "checkForUpdatesOnStartup": "Check for Heroic Updates on Startup",
+        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
         "crossover-version": "Crossover Version",
+        "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Інші шляхи до Wine/Proton",
         "darktray": "Використовувати темну піктограму на панелі",
         "default-install-path": "Стандартний шлях встановлення",
         "default-steam-path": "Стандартний шлях Steam",
         "defaultWinePrefix": "Обрати теку для нових префіксів Wine",
-        "disable_controller": "Вимкнути навігацію Heroic за допомогою контролера",
+        "disable_controller": "Вимкнути навігацію HyperPlay за допомогою контролера",
         "discordRPC": "Ввімкнути Discord Rich Presence",
         "download-no-https": "Завантажувати ігри без HTTPS (корисно для власних CDN як наприклад LanCache)",
         "egs-sync": "Синхронізуватися із встановленим Epic Games Launcher",
@@ -462,12 +493,17 @@
         },
         "maxRecentGames": "Кількість нещодавно зіграних ігор для показу",
         "maxworkers": "Максимальна кількість паралельних працівників під час завантаження",
-        "minimize-on-launch": "Згортати Heroic після запуску гри",
+        "minimize-on-launch": "Згортати HyperPlay після запуску гри",
         "offlinemode": "Запустити гру офлайн",
         "prefered_language": "Бажана мова (код мови)",
         "preferSystemLibs": "Надавати перевагу системним бібліотекам",
-        "primerun": "Використовувати виділену відеокарту",
-        "resizableBar": "Ввімкнути Resizable BAR (тільки NVIDIA RTX 30xx)",
+        "primerun": {
+            "confirmation": {
+                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
+                "title": "Only 1 GPU detected"
+            },
+            "description": "Використовувати виділену відеокарту"
+        },
         "runexe": {
             "message": "Перетягніть сюди файли",
             "title": "Запустити EXE на префіксі"
@@ -488,7 +524,7 @@
             "installing": "Installing BattlEye Runtime...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "Очистити кеш Heroic",
+        "clear-cache": "Очистити кеш HyperPlay",
         "copiedToClipboard": "Копійовано у сховище обміну!",
         "copyToClipboard": "Копіювати всі налаштування у сховище обміну",
         "eacRuntime": {
@@ -517,7 +553,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Відкрити файл налаштування",
-        "reset-hyperplay": "Скинути Heroic",
+        "reset-hyperplay": "Скинути HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Збереження у хмарі, наразі у тестовому режимі. Будь ласка збережіть ваш файл збереження у іншому місці (у разі якщо щось піде не так)"

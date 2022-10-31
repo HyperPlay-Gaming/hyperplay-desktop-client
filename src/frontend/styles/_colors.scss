@@ -35,7 +35,7 @@
 
   /* Colours */
   --navbar-background: var(--background);
-  --input-background: var(--background-darker);
+  --input-background: var(--background-lighter);
   --body-background: #292929;
   --current-background: var(--body-background);
   --modal-background: #2d2d2d;
@@ -94,6 +94,11 @@
   --text-tertiary: #101111; /* This is not defined in figma */
   --text-quartenary: #5a5e5f; /* this is meant to be a background colour */
   --text-danger: #d22121;
+
+  /*Action Icons*/
+  --action-icon: var(--text-default);
+  --action-icon-hover: var(--text-hover);
+  --action-icon-active: var(--accent);
 }
 
 body {

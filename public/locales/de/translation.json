@@ -7,6 +7,7 @@
         "title": "Barrierefreiheit",
         "zoom": "Zoom"
     },
+    "add_game": "Add Game",
     "All": "Alle",
     "anticheat": {
         "anticheats": "Anticheat-Systeme",
@@ -18,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Heroic-Cache wurde geleert.",
+            "message": "HyperPlay-Cache wurde geleert.",
             "title": "Cache geleert"
         },
         "choose": "Auswählen",
@@ -56,7 +57,7 @@
             },
             "generic": {
                 "message": "",
-                "title": ""
+                "title": "Select EXE to Run"
             },
             "launchAborted": "Launch aborted",
             "title": "Error",
@@ -83,8 +84,8 @@
                 "changelog": "Changelog öffnen",
                 "detail": "Möchtest du das Update im Hintergrund herunterladen?",
                 "message": "Es ist eine neue Version verfügbar!",
-                "message-finished": "Möchtest du Heroic jetzt neu starten?",
-                "title": "Heroic Games Launcher",
+                "message-finished": "Möchtest du HyperPlay jetzt neu starten?",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "Update abgeschlossen"
             }
         },
@@ -99,10 +100,10 @@
             "message": "Es gibt anstehende Operationen, möchtst du wirklich fortfahren?",
             "title": "Beenden"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Bist du sicher, dass du Heroic zurücksetzen willst? Dadurch werden alle Einstellungen und der Zwischenspeicher gelöscht, nicht aber deine installierten Spiele oder Epic-Anmeldedaten. Portable Versionen (AppImage, WinPortable, ...) von Heroic müssen anschließend manuell neu gestartet werden.",
-                "title": "Heroic zurücksetzen"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -171,6 +172,19 @@
         }
     },
     "docs": "Documentation",
+    "download": {
+        "manager": {
+            "empty": "Nothing to download.",
+            "link": "Download Manager",
+            "queue": {
+                "actions": "Action",
+                "element": "Name",
+                "platform": "Platform",
+                "store": "Store"
+            },
+            "title": "Downloads"
+        }
+    },
     "epic": {
         "offline-notification-body": "Online-Dienste funktionieren möglicherweise nicht vollständig, da die Server von Epic Games offline sind!",
         "offline-notification-title": "offline"
@@ -205,11 +219,13 @@
     },
     "help": {
         "amdfsr": "AMDs FSR hilft bei der Verbesserung der Framerate durch Hochskalierung niedrigerer Auflösungen im Vollbildmodus. Die Bildqualität wird von 5 auf 1 erhöht, allerdings auf Kosten einer leichten Leistungseinbuße. Das Aktivieren kann die Leistung verbessern.",
+        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
+        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
         "dxvk": "DXVK ist eine Vulkan-basierte Übersetzungsschicht für DirectX 9, 10 und 11 Spiele. Durch Aktivieren kann die Kompatibilität verbessert werden. Kann Probleme verursachen, insbesondere bei älteren DirectX-Spielen.",
         "esync": "Esync zielt darauf ab, den Wineserver-Overhead in CPU-intensiven Spielen zu reduzieren. Durch Aktivieren kann die Leistung verbessert werden.",
         "fsync": "Fsync zielt darauf ab, den Wineserver-Overhead in CPU-intensiven Spielen zu reduzieren. Durch Aktivieren kann die Leistung auf unterstützten Linux-Kerneln verbessert werden.",
         "game_language": {
-            "fallback": "Leer lassen, um die Sprache von Heroic zu verwenden.",
+            "fallback": "Leer lassen, um die Sprache von HyperPlay zu verwenden.",
             "in_game_config": "Nicht alle Spiele unterstützen diese Einstellung, einige haben eine spielinterne Spracheinstellung.",
             "valid_codes": "Gültige Sprachcodes sind spielabhängig."
         },
@@ -224,20 +240,19 @@
         },
         "preferSystemLibs": "Benutzerdefinierte Wine-Versionen (Wine-GE, Wine-Lutris) werden mit ihren Bibliotheks-Abhängigkeiten ausgeliefert. Wenn du diese Option aktivierst, werden diese mitgelieferten Bibliotheken ignoriert und Wine lädt stattdessen die Systembibliotheken. Warnung! Es können Probleme auftreten, wenn die Abhängigkeiten nicht erfüllt sind.",
         "primerun": "Verwende dedizierte Grafikkarte zum Rendern von Spielen auf Multi-GPU-Systemen. Nur auf Gaming-Laptops oder -Desktops erforderlich, die eine Headless-GPU zum Rendern verwenden (NVIDIA Optimus, AMD CrossFire)",
-        "resizablebar": "NVIDIAs Resizable Bar trägt zur Verbesserung der Framerate bei, indem die CPU auf den gesamten Grafikpuffer zugreift. Durch Aktivieren kann die Leistung für Vulkan-basierte Spiele verbessert werden.",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Benutzerdefinierte Bibliotheken, die von Steam bereitgestellt werden, um die Ausführung von Linux- und Windows-Spielen (Proton) zu unterstützen. Durch Aktivieren kann die Kompatibilität verbessert werden.",
         "sync": {
-            "part1": "Heroic versucht, den richtigen Spielstände Ordner zu erraten, was in den meisten Fällen auch funktioniert. Falls der richtige Ordner nicht gefunden wurde, verwende das Feld, um den jetzigen Ordner zu überschreiben.",
-            "part2": "Falls du den Präfix-Ordner für Wine oder Proton änderst, musst du auch den Pfad erneut überprüfen, da Proton einen anderen Präfix (/pfx) und Benutzernamen (steamuser) verwendet. Du kannst in diesem Fall den jetzigen Ordner löschen, die Synchronisations-Einstellungen verlassen und wieder zurückkehren. Heroic wird dann erneut versuchen, den Ordner erneut mit dem richtigen Prefix zu finden.",
+            "part1": "HyperPlay versucht, den richtigen Spielstände Ordner zu erraten, was in den meisten Fällen auch funktioniert. Falls der richtige Ordner nicht gefunden wurde, verwende das Feld, um den jetzigen Ordner zu überschreiben.",
+            "part2": "Falls du den Präfix-Ordner für Wine oder Proton änderst, musst du auch den Pfad erneut überprüfen, da Proton einen anderen Präfix (/pfx) und Benutzernamen (steamuser) verwendet. Du kannst in diesem Fall den jetzigen Ordner löschen, die Synchronisations-Einstellungen verlassen und wieder zurückkehren. HyperPlay wird dann erneut versuchen, den Ordner erneut mit dem richtigen Prefix zu finden.",
             "part3": "Manuelle Synchronisierung: Wähle Download, um die in der Cloud gespeicherten Spielstände herunterzuladen. Upload, um die lokalen in die Cloud hochzuladen. Force Download und Force Upload ignorieren die Version, die sich lokal oder in der Cloud befindet.",
             "part4": "Die Spielstände werden automatisch bei jedem Spielstart und nach Beendigung des Spiels synchronisiert."
         },
         "vkd3d": "VKD3D ist eine Vulkan-basierte Übersetzungsschicht für DirectX 12-Spiele. Durch Aktivieren kann die Kompatibilität erheblich verbessert werden. Hat keine Auswirkung auf ältere DirectX-Spiele.",
         "wine": {
-            "part1": "Heroic sucht in den folgenden Verzeichnissen nach Versionen von Wine, Proton und CrossOver:",
+            "part1": "HyperPlay sucht in den folgenden Verzeichnissen nach Versionen von Wine, Proton und CrossOver:",
             "part2": "Für andere Orte verwende einen symbolischen Link zu einem dieser Ordner"
         }
     },
@@ -246,7 +261,10 @@
             "beta": "Beta",
             "newReleases": "Update verfügbar!",
             "stable": "Stabil",
-            "version": "Heroic-Version"
+            "version": "HyperPlay-Version"
+        },
+        "save-sync": {
+            "searching": "Trying to detect the correct save folder"
         },
         "settings": "Einstellungen werden automatisch gespeichert",
         "version": "Wine-Version"
@@ -254,6 +272,7 @@
     "infobox": {
         "help": "Hilfe",
         "requirements": "Systemanforderungen",
+        "warning": "Warning",
         "wine-path": "Wine-Pfad",
         "wine-prefix": {
             "title": "Wine Prefix"
@@ -266,6 +285,7 @@
         "path": "Installationspfad auswählen"
     },
     "library": {
+        "label": "Library",
         "refresh": "Aktualisieren",
         "sortAscending": "Aufsteigend sortieren",
         "sortByStatus": "Nach Status sortieren",
@@ -275,13 +295,13 @@
             "list": "Umschalten auf ein Listenlayout"
         }
     },
-    "Library": "Bibliothek",
     "loading": {
         "default": "Wird geladen",
         "website": "Lade Webseite"
     },
     "login": {
-        "externalLogin": "Externe Anmeldung"
+        "externalLogin": "Externe Anmeldung",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Synchronisation abgeschlossen",
@@ -318,7 +338,7 @@
         },
         "moved": "Verschieben abgeschlossen",
         "moving": "Spiel wird verschoben",
-        "new-hyperplay-version": "Eine neue Heroic-Version wurde veröffentlicht!",
+        "new-hyperplay-version": "Eine neue HyperPlay-Version wurde veröffentlicht!",
         "refresh": {
             "error": "Konnte keine Veröffentlichungen von der Quelle laden, vielleicht wegen GitHub API Einschränkungen! Versuche es später noch einmal."
         },
@@ -369,11 +389,13 @@
     "other": {
         "gogdl-version": "GOGDL-Version: ",
         "legendary-version": "Legendary-Version: ",
-        "weblate": "Hilf bei der Übersetzung von Heroic."
+        "weblate": "Hilf bei der Übersetzung von HyperPlay."
     },
+    "Other": "Other",
     "placeholder": {
         "alt-gogdl-bin": "Nutze eingebaute GOGDL Binärdatei...",
         "alt-legendary-bin": "Benutze eingebaute Legendary Binärdatei...",
+        "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix, in dem EGS installiert ist",
         "prefered_language": "2-Zeichen-Code (z. B.: \"en\" oder \"fr\")"
     },
@@ -383,6 +405,14 @@
         "win": "Windows"
     },
     "progress": "Progress",
+    "queue": {
+        "label": {
+            "clear": "Clear List",
+            "downloading": "Downloading",
+            "finished": "Completed",
+            "queued": "Queued"
+        }
+    },
     "Recent": "Zuletzt gespielte Spiele",
     "search": "Suche nach Spielen",
     "setting": {
@@ -396,14 +426,15 @@
         "autosync": "Spielstände automatisch synchronisieren",
         "autovkd3d": "VKD3D automatisch im Präfix installieren/aktualisieren",
         "change-target-exe": "Wähle eine alternative EXE zum Ausführen",
-        "checkForUpdatesOnStartup": "Beim Start nach Updates für Heroic suchen",
+        "checkForUpdatesOnStartup": "Beim Start nach Updates für HyperPlay suchen",
         "crossover-version": "Crossover-Version",
+        "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Wähle die Wine oder Proton Binärdatei",
         "darktray": "Dunkles Taskleisten-Icon benutzen",
         "default-install-path": "Standard-Installationspfad",
         "default-steam-path": "Standard Steam-Pfad",
         "defaultWinePrefix": "Ordner für neue Wine Präfixe festlegen",
-        "disable_controller": "Heroic Navigation mit Controller deaktivieren",
+        "disable_controller": "HyperPlay Navigation mit Controller deaktivieren",
         "discordRPC": "Discord Rich Presence aktivieren",
         "download-no-https": "Spiele ohne HTTPS herunterladen (nützlich für CDNs z. B. LanCache)",
         "egs-sync": "Mit installiertem Epic Games synchronisieren",
@@ -462,12 +493,17 @@
         },
         "maxRecentGames": "Zuletzt gespielte Spiele anzeigen",
         "maxworkers": "Maximale Anzahl von Prozessen zum gleichzeitigem Herunterladen",
-        "minimize-on-launch": "Heroic nach Spielstart minimieren",
+        "minimize-on-launch": "HyperPlay nach Spielstart minimieren",
         "offlinemode": "Spiel offline ausführen",
         "prefered_language": "Bevorzugte Sprache (Sprachcode)",
         "preferSystemLibs": "Systembibliotheken bevorzugen",
-        "primerun": "Dedizierte Grafikkarte verwenden",
-        "resizableBar": "Resizable BAR aktivieren (nur NVIDIA RTX 30xx)",
+        "primerun": {
+            "confirmation": {
+                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
+                "title": "Only 1 GPU detected"
+            },
+            "description": "Dedizierte Grafikkarte verwenden"
+        },
         "runexe": {
             "message": "Dateien hierher ziehen und ablegen",
             "title": "EXE in Prefix starten"
@@ -488,7 +524,7 @@
             "installing": "BattlEye Runtime wird installiert...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "Heroic Cache leeren",
+        "clear-cache": "HyperPlay Cache leeren",
         "copiedToClipboard": "In die Zwischenablage kopiert!",
         "copyToClipboard": "Alle Einstellungen in die Zwischenablage kopieren",
         "eacRuntime": {
@@ -517,7 +553,7 @@
             "wineExt": "Wine-Erweiterungen"
         },
         "open-config-file": "Konfigurationsdatei öffnen",
-        "reset-hyperplay": "Heroic zurücksetzen",
+        "reset-hyperplay": "HyperPlay zurücksetzen",
         "saves": {
             "label": "Speicherstand-Pfad:",
             "warning": "Die Cloudspeicher-Funktion befindet sich in der Beta-Phase, bitte sichere deine Speicherstände vor der Synchronisierung (falls etwas schiefgeht)"
@@ -549,7 +585,7 @@
         "removepath": "Pfad entfernen"
     },
     "tray": {
-        "about": "Über Heroic",
+        "about": "Über HyperPlay",
         "quit": "Beenden",
         "reload": "Neu laden",
         "show": "Anzeigen"

@@ -24,8 +24,8 @@
       "build/bin/legendary.LICENSE"
     ],
     "asarUnpack": [
-      "build/icon.png",
-      "build/icon.icns",
+      "build/app_icon.png",
+      "build/app_icon.icns",
       "build/win_icon.ico",
       "build/trayIconLight24x24.png",
       "build/trayIconDark24x24.png"
@@ -55,7 +55,7 @@
     "mac": {
       "target": "dmg",
       "category": "public.app-category.games",
-      "icon": "build/icon.icns",
+      "icon": "build/app_icon.icns",
       "asarUnpack": [
         "build/bin/darwin/legendary",
         "build/bin/darwin/gogdl"
@@ -86,7 +86,7 @@
     },
     "linux": {
       "category": "Game",
-      "icon": "build/icon.icns",
+      "icon": "build/app_icon.icns",
       "description": "An Open Source Launcher for Web3, GOG and Epic Games",
       "desktop": {
         "Name": "HyperPlay",
@@ -103,21 +103,18 @@
     "deb": {
       "packageCategory": "games",
       "depends": [
-        "gawk",
         "curl"
       ]
     },
     "pacman": {
       "packageCategory": "games",
       "depends": [
-        "gawk",
         "curl"
       ]
     },
     "rpm": {
       "packageCategory": "games",
       "depends": [
-        "gawk",
         "curl"
       ]
     }
@@ -169,7 +166,9 @@
     "react-dom": "17",
     "react-i18next": "^11.16.7",
     "react-router-dom": "^6.3.0",
+    "recharts": "^2.1.14",
     "shlex": "^2.1.2",
+    "short-uuid": "^4.2.0",
     "simple-keyboard": "^3.4.136",
     "source-map-support": "^0.5.21",
     "steam-shortcut-editor": "^3.1.1",
@@ -178,7 +177,7 @@
     "web3": "^1.7.5"
   },
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "codecheck": "tsc --noEmit",
     "test": "jest --noStackTrace",
     "testProxy": "jest proxy.test.ts",
@@ -190,7 +189,7 @@
     "dist:linux": "vite build && electron-builder --linux",
     "dist:mac": "vite build && electron-builder --mac",
     "dist:win": "vite build && electron-builder --win",
-    "lint": "eslint -c .eslintrc --ext .tsx,ts ./src",
+    "lint": "eslint --cache -c .eslintrc --ext .tsx,ts ./src",
     "lint-fix": "eslint --fix -c .eslintrc --ext .tsx,ts ./src",
     "dist-flatpak": "cd flatpak && flatpak-builder build local.heroic.yml --install --force-clean --user",
     "flatpak-test": "yarn dist:linux appimage && cd flatpak && flatpak-builder build local.heroic.yml --install --force-clean --user",
@@ -224,7 +223,7 @@
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "@vitejs/plugin-react": "^2.0.0",
-    "electron": "^20.0.1",
+    "electron": "^21.1.1",
     "electron-builder": "^23.1.0",
     "electron-devtools-installer": "^3.2.0",
     "eslint": "^8.13.0",

@@ -17,13 +17,22 @@
             "message": "Chcete se pokusit opravit tuto hru? Může to chvíli trvat.",
             "title": "Zkontrolovat a opravit"
         },
+        "runexe": {
+            "title": "Select EXE to Run"
+        },
+        "select": {
+            "button": "Select"
+        },
+        "sideload": {
+            "exe": "Select Executable"
+        },
         "stopInstall": {
             "keepInstalling": "Pokračovat v instalaci",
             "message": "Chcete ponechat stažené soubory?",
             "title": "Zastavit instalaci"
         },
         "uninstall": {
-            "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
+            "checkbox": "Odebete předponu: {{prefix}}{{newLine}}Poznámka: Tato akce je nevratná a také neodebere zálohované soubory uložení.",
             "message": "Chcete odinstalovat tuto hru?",
             "title": "Odinstalovat"
         },
@@ -38,16 +47,28 @@
         "add_to_favourites": "Přidat do oblíbených",
         "cancel": "Zrušit",
         "continue": "Pokračovat ve stahování",
+        "finish": "Finish",
         "force_update": "Vynutit aktualizaci, pokud je dostupná",
+        "force-innstall": "Force Install",
         "hide_game": "Skrýt hru",
         "import": "Importovat Hru",
         "install": "Instalovat",
+        "no-path-selected": "No path selected",
+        "queue": {
+            "remove": "Remove from Queue"
+        },
         "remove_from_favourites": "Odebrat z oblíbených",
+        "remove_from_recent": "Remove From Recent",
+        "run-exe-first": "Run Installer First",
+        "running-setup": "Running Setup",
+        "sideload": {
+            "edit": "Edit App/Game"
+        },
         "unhide_game": "Odkrýt hru",
         "uninstall": "Odinstalovat",
         "update": "Update"
     },
-    "cloud_save_unsupported": "Unsupported",
+    "cloud_save_unsupported": "není podporována",
     "disabled": "Zakázáno",
     "dlc": {
         "installDlcs": "Instalovat všechna DLC"
@@ -56,6 +77,8 @@
     "game": {
         "downloadSize": "Velikost ke stažení",
         "firstPlayed": "Poprvé hráno",
+        "getting-download-size": "Geting download size",
+        "getting-install-size": "Geting install size",
         "installSize": "Velikost instalace",
         "language": "Jazyk",
         "lastPlayed": "Naposledy hráno",
@@ -76,7 +99,8 @@
         "installedPlatform": "Nainstalovaná platforma",
         "path": "Cesta pro instalaci",
         "size": "Velikost",
-        "syncsaves": "Synchronizovat uložené soubory",
+        "web3-supported": "Has Web3 features",
+        "syncsaves": "Synchronizace uložených souborů",
         "version": "Verze"
     },
     "install": {
@@ -100,9 +124,39 @@
     "launch": {
         "options": "Možnosti spuštění..."
     },
+    "not_logged_in": {
+        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
+        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
+        "login": "Log in",
+        "title": "You are NOT logged in"
+    },
+    "Open": "",
+    "queue": {
+        "label": {
+            "canceled": "Download Canceled",
+            "remove": "Remove from download manager"
+        }
+    },
     "report_problem": "Nahlásit problém se spouštěním této hry",
     "sdl": {
         "title": "Vyberte součásti k instalaci"
+    },
+    "sideload": {
+        "field": {
+            "title": "Title"
+        },
+        "info": {
+            "broser": "BrowserURL",
+            "exe": "Select Executable",
+            "image": "App Image",
+            "supports-web3": "This Games has Web3 Features",
+            "title": "Game/App Title"
+        },
+        "placeholder": {
+            "image": "Paste an Image URL here",
+            "title": "Add a title to your Game/App",
+            "url": "Paste the Game URL here"
+        }
     },
     "specs": {
         "minimum": "Minimum",
@@ -116,8 +170,10 @@
         "moving": "Přesouvám instalaci, čekejte prosím",
         "notinstalled": "Tato hra není nainstalována",
         "processing": "Zpracovávám soubory, čekejte prosím",
+        "queued": "Queued",
         "reparing": "Opravuji hru, čekejte prosím",
         "totalDownloaded": "Celkově staženo",
+        "uninstalling": "Uninstalling",
         "updating": "Aktualizuji hru"
     },
     "submenu": {

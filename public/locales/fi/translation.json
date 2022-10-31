@@ -7,6 +7,7 @@
         "title": "Accessibility",
         "zoom": "Zoom"
     },
+    "add_game": "Add Game",
     "All": "Kaikki",
     "anticheat": {
         "anticheats": "Anticheats",
@@ -18,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Heroic:in välimuisti tyhjennettiin.",
+            "message": "HyperPlay:in välimuisti tyhjennettiin.",
             "title": "Välimuisti tyhjennetty"
         },
         "choose": "Valitse",
@@ -56,7 +57,7 @@
             },
             "generic": {
                 "message": "",
-                "title": ""
+                "title": "Select EXE to Run"
             },
             "launchAborted": "Launch aborted",
             "title": "Virhe",
@@ -83,8 +84,8 @@
                 "changelog": "Open changelog",
                 "detail": "Do you want to download the update in the background?",
                 "message": "There is a new Version available!",
-                "message-finished": "Do you want to restart Heroic now?",
-                "title": "Heroic Games Launcher",
+                "message-finished": "Do you want to restart HyperPlay now?",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "Update Finished"
             }
         },
@@ -99,10 +100,10 @@
             "message": "On odottavia toimintoja, oletko varma?",
             "title": "Poistu"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards.",
-                "title": "Reset Heroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -171,6 +172,19 @@
         }
     },
     "docs": "Documentation",
+    "download": {
+        "manager": {
+            "empty": "Nothing to download.",
+            "link": "Download Manager",
+            "queue": {
+                "actions": "Action",
+                "element": "Name",
+                "platform": "Platform",
+                "store": "Store"
+            },
+            "title": "Downloads"
+        }
+    },
     "epic": {
         "offline-notification-body": "Verkkopalvelut eivät välttämättä toimi kokonaisuudessaan Epic Games:in palvelinten ollessa vailla verkkoyhteyttä!",
         "offline-notification-title": "offline"
@@ -205,11 +219,13 @@
     },
     "help": {
         "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
+        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
+        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
         "dxvk": "DXVK is a Vulkan-based translational layer for DirectX 9, 10 and 11 games. Enabling may improve compatibility. Might cause issues especially for older DirectX games.",
         "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
         "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
         "game_language": {
-            "fallback": "Leave blank to use Heroic's language.",
+            "fallback": "Leave blank to use HyperPlay's language.",
             "in_game_config": "Not all games support this configuration, some have in-game language setting.",
             "valid_codes": "Valid language codes are game-dependant."
         },
@@ -224,20 +240,19 @@
         },
         "preferSystemLibs": "Custom Wine versions (Wine-GE, Wine-Lutris) are shipped with their library dependencies. By enabling this option, these shipped libraries will be ignored and Wine will load system libraries instead. Warning! Issues may occur if dependencies are not met.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
-        "resizablebar": "NVIDIA's Resizable Bar helps boost framerate by making the CPU access the entire graphics buffer. Enabling may improve performance for Vulkan-based games.",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
         "sync": {
-            "part1": "Heroic yrittää arvata oikean kansion tallenteita varten. Tämä toimii useimmissa tapauksissa. Jos kansio on väärä, vaihda se ohitusruudun avulla.",
-            "part2": "Jos aiot vaihtaa Winen tai Protonin prefix-kansiota, polku tulee tarkistaa uudelleen, koska Proton käyttää toista prefixiä (/pfx) ja käyttäjänimeä (steamuser). Voit poistaa nykyisen polun synkronointiasetuksista ja antaa Heroicin arvata kansio vielä kerran oikealla prefixillä.",
+            "part1": "HyperPlay yrittää arvata oikean kansion tallenteita varten. Tämä toimii useimmissa tapauksissa. Jos kansio on väärä, vaihda se ohitusruudun avulla.",
+            "part2": "Jos aiot vaihtaa Winen tai Protonin prefix-kansiota, polku tulee tarkistaa uudelleen, koska Proton käyttää toista prefixiä (/pfx) ja käyttäjänimeä (steamuser). Voit poistaa nykyisen polun synkronointiasetuksista ja antaa HyperPlayin arvata kansio vielä kerran oikealla prefixillä.",
             "part3": "Manuaalinen synkronointi: valitse \"Lataa\" lataaksesi pelien tallennukset pilvipalvelusta. Valitse \"Lähetä\" lähettääksesi paikalliset tallennukset pilvipalveluun. \"Pakota Lataus\" ja \"Pakota Lähetys\" jättävät huomiotta version, jota säilytetään joko paikallisesti tai pilvipalvelussa.",
             "part4": "\"Synkronoi tallennukset automaattisesti\" synkronoi tallennukset joka kerta kun käynnistät pelin ja suljet sen."
         },
         "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
         "wine": {
-            "part1": "Heroic etsii Wine, Proton- ja CrossOver -versioita seuraavista kansioista:",
+            "part1": "HyperPlay etsii Wine, Proton- ja CrossOver -versioita seuraavista kansioista:",
             "part2": "Muille sijainneille käytä symbolista linkkiä kansioon"
         }
     },
@@ -246,7 +261,10 @@
             "beta": "Beta",
             "newReleases": "Update Available!",
             "stable": "Stable",
-            "version": "Heroic Version"
+            "version": "HyperPlay Version"
+        },
+        "save-sync": {
+            "searching": "Trying to detect the correct save folder"
         },
         "settings": "Asetukset tallennetaan automaattisesti",
         "version": "Wine Version"
@@ -254,6 +272,7 @@
     "infobox": {
         "help": "Apua",
         "requirements": "Laitteistovaatimukset",
+        "warning": "Warning",
         "wine-path": "Wine Path",
         "wine-prefix": {
             "title": "Wine Prefix"
@@ -266,6 +285,7 @@
         "path": "Valitse asennuspolku"
     },
     "library": {
+        "label": "Library",
         "refresh": "virkistää",
         "sortAscending": "Sort Ascending",
         "sortByStatus": "Sort by Status",
@@ -275,13 +295,13 @@
             "list": "Toggle to a list layout"
         }
     },
-    "Library": "Kirjasto",
     "loading": {
         "default": "Ladataan",
         "website": "Ladataan verkkosivustoa"
     },
     "login": {
-        "externalLogin": "Ulkoinen kirjautuminen"
+        "externalLogin": "Ulkoinen kirjautuminen",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Synkronointi valmis",
@@ -318,7 +338,7 @@
         },
         "moved": "Siirto valmis",
         "moving": "Moving Game",
-        "new-hyperplay-version": "A new Heroic version was released!",
+        "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
             "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
         },
@@ -369,11 +389,13 @@
     "other": {
         "gogdl-version": "GOGDL-versio: ",
         "legendary-version": "Legendaarinen versio: ",
-        "weblate": "Auta kääntämään Heroic."
+        "weblate": "Auta kääntämään HyperPlay."
     },
+    "Other": "Other",
     "placeholder": {
         "alt-gogdl-bin": "Käytetään sisäänrakennettua GOGDL-binääriä...",
         "alt-legendary-bin": "Käytetään sisäänrakennettua legendaarista binääriä...",
+        "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefiksi johon EGS on asennettu",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
     },
@@ -383,6 +405,14 @@
         "win": "Windows"
     },
     "progress": "Progress",
+    "queue": {
+        "label": {
+            "clear": "Clear List",
+            "downloading": "Downloading",
+            "finished": "Completed",
+            "queued": "Queued"
+        }
+    },
     "Recent": "Viimeksi pelatut",
     "search": "Kirjoita tähän pelin nimi...",
     "setting": {
@@ -396,14 +426,15 @@
         "autosync": "Automaattisesti synkronoi tallennukset",
         "autovkd3d": "VKD3D:n automaattinen asennus/päivitys prefixille",
         "change-target-exe": "Valitse vaihtoehtoinen EXE suoritettavaksi",
-        "checkForUpdatesOnStartup": "Check for Heroic Updates on Startup",
+        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
         "crossover-version": "Crossover Version",
+        "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Mukautetut Wine/Proton sijainnit",
         "darktray": "Käytä tummaa ilmaisinalueen kuvaketta",
         "default-install-path": "Oletus asennussijainti",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Aseta kansio uusille Winen Prefixeille",
-        "disable_controller": "Disable Heroic navigation using controller",
+        "disable_controller": "Disable HyperPlay navigation using controller",
         "discordRPC": "Ota käyttöön Discord Rich Presence",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "Synkronoi asennetun Epic Gamesin kanssa",
@@ -462,12 +493,17 @@
         },
         "maxRecentGames": "Viimeksi pelatut näkyvillä",
         "maxworkers": "Työntekijöiden enimmäismäärä ladattaessa",
-        "minimize-on-launch": "Minimoi Heroic pelin käynnistämisen jälkeen",
+        "minimize-on-launch": "Minimoi HyperPlay pelin käynnistämisen jälkeen",
         "offlinemode": "Käynnistä peli offline-tilassa",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
-        "primerun": "Ota käyttöön Nvidia Prime Render",
-        "resizableBar": "Ota käyttöön Resizable BAR (Vain NVIDIA RTX 30xx)",
+        "primerun": {
+            "confirmation": {
+                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
+                "title": "Only 1 GPU detected"
+            },
+            "description": "Use Dedicated Graphics Card"
+        },
         "runexe": {
             "message": "Pudota tiedostoja tänne",
             "title": "Käynnistä EXE prefixissä"
@@ -488,7 +524,7 @@
             "installing": "Installing BattlEye Runtime...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "Tyhjennä Heroicin välimuisti",
+        "clear-cache": "Tyhjennä HyperPlayin välimuisti",
         "copiedToClipboard": "Kopioitu leikepöydälle!",
         "copyToClipboard": "Jäljennä kaikki asetukset leikepöydälle",
         "eacRuntime": {
@@ -517,7 +553,7 @@
             "wineExt": "Wine Extensions"
         },
         "open-config-file": "Open Config File",
-        "reset-hyperplay": "Reset Heroic",
+        "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"

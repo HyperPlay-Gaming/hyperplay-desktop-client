@@ -7,6 +7,7 @@
         "title": "Accesibilitate",
         "zoom": "Zoom"
     },
+    "add_game": "Add Game",
     "All": "Toate",
     "anticheat": {
         "anticheats": "Antitrucuri",
@@ -83,7 +84,7 @@
                 "changelog": "Deschideți jurnalul de modificări",
                 "detail": "Doriți să descărcați actualizarea în fundal?",
                 "message": "Există o nouă versiune disponibilă!",
-                "message-finished": "Doriți să reporniți Heroic acum?",
+                "message-finished": "Doriți să reporniți HyperPlay acum?",
                 "title": "Lansatorul de jocuri eroice",
                 "title-finished": "Actualizare Finalizată"
             }
@@ -99,10 +100,10 @@
             "message": "Sunt operațiuni în așteptare, ești sigur?",
             "title": "Ieșire"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Sigur doriți să resetați Heroic? Acest lucru va elimina toate setările și stocarea în cache, dar nu va elimina jocurile dvs. instalate sau acreditările Epic",
-                "title": "Resetează eroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -171,6 +172,19 @@
         }
     },
     "docs": "Documentație",
+    "download": {
+        "manager": {
+            "empty": "Nothing to download.",
+            "link": "Download Manager",
+            "queue": {
+                "actions": "Action",
+                "element": "Name",
+                "platform": "Platform",
+                "store": "Store"
+            },
+            "title": "Downloads"
+        }
+    },
     "epic": {
         "offline-notification-body": "Este posibil ca serviciile online să nu funcționeze complet, deoarece serverele Epic Games sunt offline!",
         "offline-notification-title": "deconectat"
@@ -205,11 +219,13 @@
     },
     "help": {
         "amdfsr": "FSR de la AMD ajută la creșterea ratei de cadre prin creșterea rezoluțiilor mai mici în modul Ecran complet. Calitatea imaginii crește de la 5 la 1 cu prețul unei ușoare atingeri de performanță. Activarea poate îmbunătăți performanța.",
+        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
+        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
         "dxvk": "DXVK este un strat translațional bazat pe Vulkan pentru jocurile DirectX 9, 10 și 11. Activarea poate îmbunătăți compatibilitatea. Poate cauza probleme în special pentru jocurile DirectX mai vechi.",
         "esync": "Esync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța.",
         "fsync": "Fsync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța pe nucleele Linux acceptate.",
         "game_language": {
-            "fallback": "Lăsați necompletat pentru a folosi limbajul lui Heroic.",
+            "fallback": "Lăsați necompletat pentru a folosi limbajul lui HyperPlay.",
             "in_game_config": "Nu toate jocurile acceptă această configurație, unele au setări de limbă în joc.",
             "valid_codes": "Codurile de limbă valide depind de joc."
         },
@@ -224,20 +240,19 @@
         },
         "preferSystemLibs": "Versiunile personalizate de vin (Wine-GE, Wine-Lutris) sunt livrate cu dependențele lor de bibliotecă. Prin activarea acestei opțiuni, aceste biblioteci livrate vor fi ignorate și Wine va încărca biblioteci de sistem. Avertizare! Pot apărea probleme dacă dependențele nu sunt îndeplinite.",
         "primerun": "Utilizați placa grafică dedicată pentru a reda jocul pe sisteme multi-GPU. Este necesar doar pe laptop-uri sau desktop-uri de jocuri care utilizează un GPU fără cap pentru randare (NVIDIA Optimus, AMD CrossFire)",
-        "resizablebar": "Bara resizable de la NVIDIA ajută la creșterea ratei de cadre, făcând ca procesorul să acceseze întregul buffer grafic. Activarea poate îmbunătăți performanța pentru jocurile bazate pe Vulkan.",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Biblioteci personalizate furnizate de Steam pentru a ajuta la rularea jocurilor Linux și Windows (Proton). Activarea ar putea îmbunătăți compatibilitatea.",
         "sync": {
-            "part1": "Heroic încearcă să ghicească folderul de salvare corect și acest lucru va funcționa în majoritatea cazurilor. În cazul în care folderul este greșit, utilizați caseta de înlocuire pentru a-l schimba.",
-            "part2": "In case you change the prefix folder for Wine or Proton, you will need to check the path again since Proton uses a different prefix (/pfx) and username (steamuser). Deci, puteți șterge simplu calea curentă, ieșiți din pagina de setări de sincronizare și reveniți din nou pentru ca Heroic să ghicească folderul încă o dată cu prefixul corect.",
+            "part1": "HyperPlay încearcă să ghicească folderul de salvare corect și acest lucru va funcționa în majoritatea cazurilor. În cazul în care folderul este greșit, utilizați caseta de înlocuire pentru a-l schimba.",
+            "part2": "In case you change the prefix folder for Wine or Proton, you will need to check the path again since Proton uses a different prefix (/pfx) and username (steamuser). Deci, puteți șterge simplu calea curentă, ieșiți din pagina de setări de sincronizare și reveniți din nou pentru ca HyperPlay să ghicească folderul încă o dată cu prefixul corect.",
             "part3": "Sincronizare manuală: alegeți Descărcare pentru a descărca salvările de jocuri stocate pe Cloud. Încărcați pentru a încărca cele locale în cloud. Descărcarea forțată și încărcarea forțată vor ignora versiunea locală sau în cloud.",
             "part4": "Sincronizarea salvărilor automat va sincroniza salvările de fiecare dată când începeți un joc și după ce terminați jocul."
         },
         "vkd3d": "VKD3D este un strat translațional bazat pe Vulkan pentru jocurile DirectX 12. Activarea poate îmbunătăți semnificativ compatibilitatea. Nu are niciun efect asupra jocurilor DirectX mai vechi.",
         "wine": {
-            "part1": "Heroic caută pentru versiuni de Wine, Proton și CrossOver în următoarele foldere:",
+            "part1": "HyperPlay caută pentru versiuni de Wine, Proton și CrossOver în următoarele foldere:",
             "part2": "Pentru alte locuri, utilizați un link simbolic către unul dintre aceste dosare"
         }
     },
@@ -248,12 +263,16 @@
             "stable": "Grajd",
             "version": "Versiune eroică"
         },
+        "save-sync": {
+            "searching": "Trying to detect the correct save folder"
+        },
         "settings": "Setările sunt salvate automat",
         "version": "Versiune Wine"
     },
     "infobox": {
         "help": "Ajutor",
         "requirements": "Cerințe de sistem",
+        "warning": "Warning",
         "wine-path": "Calea Vinului",
         "wine-prefix": {
             "title": "Prefix de vin"
@@ -266,6 +285,7 @@
         "path": "Selectați Calea de instalare"
     },
     "library": {
+        "label": "Library",
         "refresh": "Reîmprospăta",
         "sortAscending": "Sortare ascendentă",
         "sortByStatus": "Sortați după Stare",
@@ -275,13 +295,13 @@
             "list": "Comutați la un aspect de listă"
         }
     },
-    "Library": "Bibliotecă",
     "loading": {
         "default": "Se încarcă",
         "website": "Se încarcă site-ul web"
     },
     "login": {
-        "externalLogin": "Autentificare externă"
+        "externalLogin": "Autentificare externă",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Sincronizare Completă",
@@ -318,7 +338,7 @@
         },
         "moved": "Mutare Finalizată",
         "moving": "Joc de Mișcare",
-        "new-hyperplay-version": "A fost lansată o nouă versiune heroică!",
+        "new-hyperplay-version": "A fost lansată o nouă versiune HyperPlayă!",
         "refresh": {
             "error": "Nu s-au putut prelua versiunile din amonte, poate din cauza restricțiilor API-ului Github! Încercați mai târziu."
         },
@@ -369,11 +389,13 @@
     "other": {
         "gogdl-version": "Versiunea GOGDL: ",
         "legendary-version": "Versiune Legendary: ",
-        "weblate": "Ajută la traducerea Heroic."
+        "weblate": "Ajută la traducerea HyperPlay."
     },
+    "Other": "Other",
     "placeholder": {
         "alt-gogdl-bin": "Se utilizează binarul GOGDL încorporat...",
         "alt-legendary-bin": "Folosind binarul Legendary încorporat...",
+        "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefixul unde este instalat EGS",
         "prefered_language": "Cod de 2 caractere (adică: „en” sau „fr”)"
     },
@@ -383,6 +405,14 @@
         "win": "Windows"
     },
     "progress": "Progres",
+    "queue": {
+        "label": {
+            "clear": "Clear List",
+            "downloading": "Downloading",
+            "finished": "Completed",
+            "queued": "Queued"
+        }
+    },
     "Recent": "Jocuri Recente",
     "search": "Introdu numele jocului aici...",
     "setting": {
@@ -398,6 +428,7 @@
         "change-target-exe": "Selectați un EXE alternativ pentru a rula",
         "checkForUpdatesOnStartup": "Verificare pentru actualizări la pornire",
         "crossover-version": "Versiune crossover",
+        "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Căi personalizate pentru Wine/Proton",
         "darktray": "Utilizați Tray Icon întunecat",
         "default-install-path": "Calea de instalare implicită",
@@ -466,8 +497,13 @@
         "offlinemode": "Rulați jocul offline",
         "prefered_language": "Limba preferată (Codul de limbă)",
         "preferSystemLibs": "Preferați bibliotecile de sistem",
-        "primerun": "Activați Nvidia Prime Render",
-        "resizableBar": "Activați BAR redimensionabil (numai pentru NVIDIA RTX 30xx)",
+        "primerun": {
+            "confirmation": {
+                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
+                "title": "Only 1 GPU detected"
+            },
+            "description": "Use Dedicated Graphics Card"
+        },
         "runexe": {
             "message": "Trageți și plasați fișiere aici",
             "title": "Rulați EXE pe Prefix"

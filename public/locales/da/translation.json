@@ -5,7 +5,7 @@
         "wineprefix": "Vælg Wine Prefix mappe",
         "no": "NEJ",
         "cache-cleared": {
-            "message": "Heroic cache ryddet.",
+            "message": "HyperPlay cache ryddet.",
             "title": "Cache ryddet"
         },
         "choose-egs-prefix": "Vælg Prefix hvor EGS er installeret",
@@ -46,7 +46,7 @@
                 "title": "Wine Ikke Fundet"
             },
             "zstd": {
-                "message": "ZSTD ikke fundet, venligst installer det og genstart Heroic"
+                "message": "ZSTD ikke fundet, venligst installer det og genstart HyperPlay"
             },
             "add": {
                 "steam": {
@@ -61,21 +61,22 @@
                 }
             },
             "uncaught-exception": {
-                "message": "En ufanget undtagelse opstod:{{newLine}}{{error}}{{newLine}}{{newLine}}Heroic vil blive lukket! Rapporter undtagelsen på vores Github-lager.",
+                "message": "En ufanget undtagelse opstod:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay vil blive lukket! Rapporter undtagelsen på vores Github-lager.",
                 "title": "Ufanget undtagelse opstod!"
             },
             "winetricks": {
                 "title": "Winetricks fejl",
                 "message": "Winetricks returnerede følgende fejl under udførelsen:{{newLine}}{{error}}"
-            }
+            },
+            "launchAborted": "Start afbrudt"
         },
         "info": {
             "update": {
                 "changelog": "Åben changelog",
                 "detail": "Vil du hente opdateringen i baggrunden?",
                 "message": "Der er en ny version tilgængelig!",
-                "message-finished": "Vil du genstarte Heroic nu?",
-                "title": "Heroic Games Launcher",
+                "message-finished": "Vil du genstarte HyperPlay nu?",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "Opdatering Færdig"
             }
         },
@@ -91,8 +92,8 @@
         },
         "reset-hyperplay": {
             "question": {
-                "title": "Nulstil Heroic",
-                "message": "Er du sikker på, at du vil nulstille Heroic? Dette fjerner alle indstillinger og cache, men vil ikke fjerne dine installerede spil eller dine Epic legitimation"
+                "title": "Nulstil HyperPlay",
+                "message": "Er du sikker på, at du vil nulstille HyperPlay? Dette fjerner alle indstillinger og cache, men vil ikke fjerne dine installerede spil eller dine Epic legitimation"
             }
         },
         "runexe": {
@@ -191,8 +192,8 @@
             "part6": " skal kaldes efter startkommandoen, for eksempel: "
         },
         "sync": {
-            "part2": "Hvis du ændrer præfiksmappen for Wine eller Proton, skal du tjekke stien igen, da Proton bruger et andet præfiks (/pfx) og brugernavn (steamuser). Så du kan simpelthen slette den aktuelle sti for at komme ud af siden med synkroniseringsindstillinger og komme tilbage igen, så Heroic kan gætte mappen en gang til med det rigtige præfiks.",
-            "part1": "Heroic forsøger at gætte den rigtige gemmemappe, og dette vil fungere i de fleste tilfælde. Hvis mappen er forkert, skal du bruge tilsidesættelsesboksen til at ændre den.",
+            "part2": "Hvis du ændrer præfiksmappen for Wine eller Proton, skal du tjekke stien igen, da Proton bruger et andet præfiks (/pfx) og brugernavn (steamuser). Så du kan simpelthen slette den aktuelle sti for at komme ud af siden med synkroniseringsindstillinger og komme tilbage igen, så HyperPlay kan gætte mappen en gang til med det rigtige præfiks.",
+            "part1": "HyperPlay forsøger at gætte den rigtige gemmemappe, og dette vil fungere i de fleste tilfælde. Hvis mappen er forkert, skal du bruge tilsidesættelsesboksen til at ændre den.",
             "part3": "Manuel synkronisering: Vælg Download for at downloade spil, der er gemt i skyen. Upload for at uploade de lokale til skyen. Force Download og Force Upload ignorerer den version, der er lokalt eller i skyen.",
             "part4": "Synkronisering gemmer Automatisk vil synkronisere gemmerne hver gang du starter et spil og efter at have spillet færdig."
         },
@@ -206,7 +207,7 @@
         "resizablebar": "NVIDIAs Resizable Bar hjælper med at booste framerate ved at få CPU'en til at få adgang til hele grafikbufferen. Aktivering kan forbedre ydeevnen for Vulkan-baserede spil.",
         "vkd3d": "VKD3D er et Vulkan-baseret translationslag til DirectX 12-spil. Aktivering kan forbedre kompatibiliteten betydeligt. Har ingen effekt på ældre DirectX-spil.",
         "game_language": {
-            "fallback": "Lad stå tomt for at bruge Heroics sprog.",
+            "fallback": "Lad stå tomt for at bruge HyperPlays sprog.",
             "in_game_config": "Ikke alle spil understøtter denne konfiguration, nogle har sprogindstilling i spillet.",
             "valid_codes": "Gyldige sprogkoder er spilafhængige."
         },
@@ -253,7 +254,7 @@
             "finished": "Opdatering Færdig",
             "started": "Opdatering startet"
         },
-        "new-hyperplay-version": "En ny Heroic-version blev frigivet!"
+        "new-hyperplay-version": "En ny HyperPlay-version blev frigivet!"
     },
     "Plugins": "Plugins",
     "Projects": "Projekter",
@@ -396,7 +397,7 @@
             }
         },
         "open-config-file": "Åbn Config File",
-        "reset-hyperplay": "Nulstil Heroic",
+        "reset-hyperplay": "Nulstil HyperPlay",
         "saves": {
             "warning": "Cloud Saves-funktionen er i beta, vær venlig at sikkerhedskopiere dine gemmer før synkronisering (i tilfælde af at noget går galt)",
             "label": "Gem placering:"
@@ -499,7 +500,7 @@
     "other": {
         "gogdl-version": "GOGDL-version: ",
         "legendary-version": "Legendarisk version: ",
-        "weblate": "Hjælp med at oversætte Heroic."
+        "weblate": "Hjælp med at oversætte HyperPlay."
     },
     "platforms": {
         "win": "Windows",

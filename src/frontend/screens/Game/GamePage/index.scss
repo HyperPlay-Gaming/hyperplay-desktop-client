@@ -321,7 +321,7 @@
 }
 
 .buttonsWrapper .button {
-  min-width: 170px;
+  min-width: max-content;
 }
 
 @keyframes animate-stripes {

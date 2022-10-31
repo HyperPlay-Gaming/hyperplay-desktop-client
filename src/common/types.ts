@@ -1,6 +1,5 @@
 import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
 import { LegendaryInstallPlatform } from './types/legendary'
-import { ChildProcess } from 'child_process'
 import { VersionInfo } from 'heroic-wine-downloader'
 
 export type WrapRendererCallback<
@@ -11,8 +10,9 @@ export type WrapRendererCallback<
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
 import { IpcRendererEvent } from 'electron'
+import { ChildProcess } from 'child_process'
 
-export type Runner = 'legendary' | 'gog'
+export type Runner = 'legendary' | 'gog' | 'sideload'
 
 // NOTE: Do not put enum's in this module or it will break imports
 
@@ -91,11 +91,11 @@ export interface AppSettings {
   enableEsync: boolean
   enableFSR: boolean
   enableFsync: boolean
-  enableResizableBar: boolean
   language: string
   launcherArgs: string
+  libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number
-  maxSharpness: number
+  maxSharpness?: number
   maxWorkers: number
   minimizeOnLaunch: boolean
   nvidiaPrime: boolean
@@ -116,13 +116,21 @@ export interface AppSettings {
   wineVersion: WineInstallation
   useSteamRuntime: boolean
   gogSaves?: GOGCloudSavesLocation[]
+  customThemesPath: string
 }
+
+export type LibraryTopSectionOptions =
+  | 'disabled'
+  | 'recently_played'
+  | 'recently_played_installed'
+  | 'favourites'
 
 export type ExecResult = {
   stderr: string
   stdout: string
   fullCommand?: string
   error?: string
+  abort?: boolean
 }
 
 export interface ExtraInfo {
@@ -151,6 +159,8 @@ export interface GameInfo {
   canRunOffline: boolean
   is_mac_native: boolean
   is_linux_native: boolean
+  browserUrl?: string
+  web3?: Web3Features
 }
 export interface GameSettings {
   audioFix: boolean
@@ -163,8 +173,7 @@ export interface GameSettings {
   enableEsync: boolean
   enableFSR: boolean
   enableFsync: boolean
-  enableResizableBar: boolean
-  maxSharpness: number
+  maxSharpness?: number
   language: string
   launcherArgs: string
   nvidiaPrime: boolean
@@ -209,6 +218,8 @@ export interface InstallProgress {
   eta: string
   folder?: string
   percent: number
+  downSpeed?: number
+  diskSpeed?: number
 }
 export interface InstalledInfo {
   executable: string
@@ -491,7 +502,10 @@ export type ElWebview = {
 
 export type WebviewType = HTMLWebViewElement & ElWebview
 
-export type InstallPlatform = LegendaryInstallPlatform | GogInstallPlatform
+export type InstallPlatform =
+  | LegendaryInstallPlatform
+  | GogInstallPlatform
+  | 'Browser'
 
 export type ConnectivityChangedCallback = (
   event: IpcRendererEvent,
@@ -506,3 +520,52 @@ export interface Tools {
   appName: string
   runner: Runner
 }
+
+export type RecentGame = {
+  appName: string
+  title: string
+}
+
+export interface DMQueueElement {
+  params: InstallParams
+  status?: 'done' | 'error' | 'abort'
+}
+
+export type WineCommandArgs = {
+  commandParts: string[]
+  wait: boolean
+  protonVerb?: ProtonVerb
+  gameSettings?: GameSettings
+  installFolderName?: string
+  options?: CallRunnerOptions
+  startFolder?: string
+}
+
+export type Web3Features = {
+  supported: boolean
+}
+
+export interface SideloadGame {
+  runner: Runner
+  app_name: string
+  art_cover: string
+  art_square: string
+  is_installed: boolean
+  title: string
+  install: {
+    executable: string
+    platform: InstallPlatform
+  }
+  folder_name?: string
+  canRunOffline: boolean
+  browserUrl: string
+  web3: Web3Features
+}
+
+export type ProtonVerb =
+  | 'run'
+  | 'waitforexitandrun'
+  | 'runinprefix'
+  | 'destroyprefix'
+  | 'getcompatpath'
+  | 'getnativepath'

@@ -7,6 +7,7 @@
         "title": "Kättesaadavus",
         "zoom": "Zoom"
     },
+    "add_game": "Add Game",
     "All": "Kõik",
     "anticheat": {
         "anticheats": "Sohitegemisvastased tarkvarad",
@@ -18,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Heroic-u vahemälu puhastati.",
+            "message": "HyperPlay-u vahemälu puhastati.",
             "title": "Vahemälu puhastati"
         },
         "choose": "Valige",
@@ -56,7 +57,7 @@
             },
             "generic": {
                 "message": "",
-                "title": ""
+                "title": "Select EXE to Run"
             },
             "launchAborted": "Launch aborted",
             "title": "Viga",
@@ -83,8 +84,8 @@
                 "changelog": "Ava muudatuste logi",
                 "detail": "Kas soovite uuenduse taustal alla laadida?",
                 "message": "Saadaval on uus versioon!",
-                "message-finished": "Kas soovite Heroicu nüüd taaskäivitada?",
-                "title": "Heroic Games Launcher",
+                "message-finished": "Kas soovite HyperPlayu nüüd taaskäivitada?",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "Uuendus lõpetatud"
             }
         },
@@ -99,10 +100,10 @@
             "message": "On pooleliolevad toimingud, kas olete kindel?",
             "title": "Välju"
         },
-        "reset-hyperplay": {
+        "reset-app": {
             "question": {
-                "message": "Kas olete kindel, et soovite Heroicu lähtestada? See eemaldab kõik Seaded ja Vahemällu salvestamise, kuid ei eemalda teie paigaldatud mänge ega Epicu mandaate. Heroicu kaasaskantavad versioonid (AppImage, WinPortable, ...) tuleb hiljem käsitsi taaskäivitada.",
-                "title": "Lähtesta Heroic"
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "title": "Reset HyperPlay"
             }
         },
         "runexe": {
@@ -171,6 +172,19 @@
         }
     },
     "docs": "Documentation",
+    "download": {
+        "manager": {
+            "empty": "Nothing to download.",
+            "link": "Download Manager",
+            "queue": {
+                "actions": "Action",
+                "element": "Name",
+                "platform": "Platform",
+                "store": "Store"
+            },
+            "title": "Downloads"
+        }
+    },
     "epic": {
         "offline-notification-body": "Võrguteenused ei pruugi täielikult töötada, kuna Epic Gamesi serverid on võrguühenduseta!",
         "offline-notification-title": "offline"
@@ -205,11 +219,13 @@
     },
     "help": {
         "amdfsr": "AMD FSR aitab suurendada kaadrisagedust, suurendades madalamaid resolutsioone täisekraani režiimis. Pildikvaliteet suureneb 5-st 1-le, mis toob aga kaasa kerge jõudluse vähenemise. Lubamine võib parandada jõudlust.",
+        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
+        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
         "dxvk": "DXVK on Vulkanil põhinev tõlkekiht DirectX 9, 10 ja 11 mängude jaoks. Lubamine võib parandada ühilduvust. Võib põhjustada probleeme, eriti vanemate DirectX-mängude puhul.",
         "esync": "Esynci eesmärk on vähendada wineserveri koormust CPU-mahukates mängudes. Lubamine võib parandada jõudlust.",
         "fsync": "Fsynci eesmärk on vähendada wineserveri koormust CPU-mahukates mängudes. Lubamine võib parandada jõudlust toetatud Linuxi kernelitel.",
         "game_language": {
-            "fallback": "Heroicu keele kasutamiseks jätke väli tühjaks.",
+            "fallback": "HyperPlayu keele kasutamiseks jätke väli tühjaks.",
             "in_game_config": "Kõik mängud ei toeta seda seadistust, mõnel on mängusisene keeleseadistus.",
             "valid_codes": "Kehtivad keelekoodid sõltuvad mängust."
         },
@@ -224,20 +240,19 @@
         },
         "preferSystemLibs": "Kohandatud Wine versioonid (Wine-GE, Wine-Lutris) tarnitakse koos nende teegi sõltuvustega. Selle valiku lubamisel ignoreeritakse neid tarnitud teeke ja Wine laadib selle asemel süsteemiteeke. Hoiatus! Kui sõltuvusi ei täideta, võib tekkida probleeme.",
         "primerun": "Mitme GPU-süsteemides mängu renderdamiseks kasutage spetsiaalset graafikakaarti. Vajalik ainult mängusülearvutites või lauaarvutites, mis kasutavad renderdamiseks peata GPU-d (NVIDIA Optimus, AMD CrossFire)",
-        "resizablebar": "NVIDIA Resizable Bar aitab suurendada kaadrisagedust, sundides protsessorit kasutama kogu graafikapuhvrit. Selle lubamine võib parandada Vulkanil põhinevate mängude jõudlust.",
         "steam_path": {
-            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Steami pakutavad kohandatud teegid, mis aitavad käivitada Linuxi ja Windowsi (Protoni) mänge. Lubamine võib parandada ühilduvust.",
         "sync": {
-            "part1": "Heroic üritab ära arvata õige salvestuskausta ja see toimib enamikul juhtudel. Juhul kui kaust on vale, kasutage selle muutmiseks override-kasti.",
-            "part2": "Kui te muudate Wine'i või Proton'i prefiksi kausta, peate te tee uuesti kontrollima, kuna Proton kasutab teistsugust prefiksit (/pfx) ja kasutajanime (steamuser). Nii et võite lihtsalt kustutada praeguse faili koha, lahkuda sünkroonimise seadete lehelt ja minna uuesti tagasi, et Heroic saaks arvata veelkord kausta õige eesliitega.",
+            "part1": "HyperPlay üritab ära arvata õige salvestuskausta ja see toimib enamikul juhtudel. Juhul kui kaust on vale, kasutage selle muutmiseks override-kasti.",
+            "part2": "Kui te muudate Wine'i või Proton'i prefiksi kausta, peate te tee uuesti kontrollima, kuna Proton kasutab teistsugust prefiksit (/pfx) ja kasutajanime (steamuser). Nii et võite lihtsalt kustutada praeguse faili koha, lahkuda sünkroonimise seadete lehelt ja minna uuesti tagasi, et HyperPlay saaks arvata veelkord kausta õige eesliitega.",
             "part3": "Manuaalne sünkroonimine: Valige Download, et laadida alla pilve salvestatud mängude salvestused. Upload, et laadida kohalikud pilve üles. Force Download ja Force Upload ignoreerivad lokaalselt või pilves olevat versiooni.",
             "part4": "Automaatne salvestuste sünkroonimine sünkroonib salvestused iga kord, kui alustate mängu ja pärast mängimise lõpetamist."
         },
         "vkd3d": "VKD3D on Vulkanil põhinev tõlkekiht DirectX 12 mängude jaoks. Selle lubamine võib ühilduvust oluliselt parandada. Ei mõjuta vanemaid DirectX mänge.",
         "wine": {
-            "part1": "Heroic otsib Wine'i, Proton'i ja CrossOveri versioone järgmistes kaustades:",
+            "part1": "HyperPlay otsib Wine'i, Proton'i ja CrossOveri versioone järgmistes kaustades:",
             "part2": "Muude kohtade puhul kasutage sümboolset linki ühele neist kaustadest"
         }
     },
@@ -246,7 +261,10 @@
             "beta": "Beta",
             "newReleases": "Uuendus saadaval!",
             "stable": "Stabiilne",
-            "version": "Heroic Version"
+            "version": "HyperPlay Version"
+        },
+        "save-sync": {
+            "searching": "Trying to detect the correct save folder"
         },
         "settings": "Seaded salvestatakse automaatselt",
         "version": "Wine'i versioon"
@@ -254,6 +272,7 @@
     "infobox": {
         "help": "Abi",
         "requirements": "Süsteeminõuded",
+        "warning": "Warning",
         "wine-path": "Wine'i tee",
         "wine-prefix": {
             "title": "Wine prefiks"
@@ -266,6 +285,7 @@
         "path": "Valige paigaldustee"
     },
     "library": {
+        "label": "Library",
         "refresh": "Värskenda",
         "sortAscending": "Järjesta kasvavalt",
         "sortByStatus": "Järjesta staatuse järgi",
@@ -275,13 +295,13 @@
             "list": "Vaheta loendi paigutusele"
         }
     },
-    "Library": "Varamu",
     "loading": {
         "default": "Laadimine",
         "website": "Veebilehe laadimine"
     },
     "login": {
-        "externalLogin": "Väline sisselogimine"
+        "externalLogin": "Väline sisselogimine",
+        "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
         "sync": "Sünkroonimine lõpetatud",
@@ -318,7 +338,7 @@
         },
         "moved": "Teisaldamine on lõpule viidud",
         "moving": "Mängu liigutamine",
-        "new-hyperplay-version": "Ilmus uus Heroicu versioon!",
+        "new-hyperplay-version": "Ilmus uus HyperPlayu versioon!",
         "refresh": {
             "error": "Ei saanud hankida väljalaskeid upstream'ist, võib-olla Githubi API piirangute tõttu! Proovige hiljem uuesti."
         },
@@ -369,11 +389,13 @@
     "other": {
         "gogdl-version": "GOGDL versioon: ",
         "legendary-version": "Legendary versioon: ",
-        "weblate": "Aidake tõlkida Heroic'ut."
+        "weblate": "Aidake tõlkida HyperPlay'ut."
     },
+    "Other": "Other",
     "placeholder": {
         "alt-gogdl-bin": "Kasutusel on sisse-ehitatud GOGDL binaarfaili...",
         "alt-legendary-bin": "Kasutusel on sisse-ehitatud Legendary binaarfail...",
+        "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefiks, kuhu EGS on paigaldatud",
         "prefered_language": "2-täheline kood (st: \"en\" või \"fr\")"
     },
@@ -383,6 +405,14 @@
         "win": "Windows"
     },
     "progress": "Progress",
+    "queue": {
+        "label": {
+            "clear": "Clear List",
+            "downloading": "Downloading",
+            "finished": "Completed",
+            "queued": "Queued"
+        }
+    },
     "Recent": "Hiljuti mängitud",
     "search": "Otsi mänge",
     "setting": {
@@ -396,14 +426,15 @@
         "autosync": "Automaatne salvestiste sünkroonimine",
         "autovkd3d": "VKD3D automaatne paigaldamine/uuendamine prefiksile",
         "change-target-exe": "Valige alternatiivne EXE käivitamiseks",
-        "checkForUpdatesOnStartup": "Kontrolli Heroicu uuendusi käivitamisel",
+        "checkForUpdatesOnStartup": "Kontrolli HyperPlayu uuendusi käivitamisel",
         "crossover-version": "Crossoveri versioon",
+        "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Kohandatud Wine/Proton teed",
         "darktray": "Kasuta tumedat süsteemiriiuli ikooni",
         "default-install-path": "Vaikimisi paigaldustee",
         "default-steam-path": "Steami vaiketee",
         "defaultWinePrefix": "Määrake uute Wine'i prefikside jaoks kaust",
-        "disable_controller": "Keela Heroic'u mängupuldiga navigeerimine",
+        "disable_controller": "Keela HyperPlay'u mängupuldiga navigeerimine",
         "discordRPC": "Luba Discord Rich Presence",
         "download-no-https": "Mängude allalaadimine ilma HTTPS-ita (kasulik CDNide jaoks, nt LanCache)",
         "egs-sync": "Sünkroonimine paigaldatud Epic Games'iga",
@@ -462,12 +493,17 @@
         },
         "maxRecentGames": "Hiljuti mängitud mänge, mida näidata",
         "maxworkers": "Töötajate maksimaalne arv allalaadimisel",
-        "minimize-on-launch": "Minimeeri Heroic pärast mängu käivitamist",
+        "minimize-on-launch": "Minimeeri HyperPlay pärast mängu käivitamist",
         "offlinemode": "Käivita mäng võrguühenduseta",
         "prefered_language": "Eelistatud keel (keelekood)",
         "preferSystemLibs": "Eelista süsteemiteeke",
-        "primerun": "Kasuta spetsiaalset graafikakaarti",
-        "resizableBar": "Luba muudetav BAR (ainult NVIDIA RTX 30xx)",
+        "primerun": {
+            "confirmation": {
+                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
+                "title": "Only 1 GPU detected"
+            },
+            "description": "Kasuta spetsiaalset graafikakaarti"
+        },
         "runexe": {
             "message": "Lohistage failid siia",
             "title": "Käivita EXE prefiksil"
@@ -488,7 +524,7 @@
             "installing": "BattlEye Runtime paigaldamine...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "Tühjenda Heroic'u vahemälu",
+        "clear-cache": "Tühjenda HyperPlay'u vahemälu",
         "copiedToClipboard": "Kopeeritud lõikelauale!",
         "copyToClipboard": "Kopeeri kõik seaded lõikelauale",
         "eacRuntime": {
@@ -517,7 +553,7 @@
             "wineExt": "Wine'i laiendused"
         },
         "open-config-file": "Ava konfiguratsioonifail",
-        "reset-hyperplay": "Lähtesta Heroic",
+        "reset-hyperplay": "Lähtesta HyperPlay",
         "saves": {
             "label": "Salvestuste asukoht:",
             "warning": "Pilvesalvestuse funktsioon on beetaversioonis, enne sünkroonimist varundage oma salvestused (juhuks, kui midagi läheb valesti)"

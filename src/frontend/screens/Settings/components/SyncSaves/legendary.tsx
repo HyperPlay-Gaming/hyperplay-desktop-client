@@ -80,7 +80,7 @@ export default function LegendarySyncSaves({
           .runWineCommandForGame({
             appName,
             runner: 'legendary',
-            command: `cmd /c winepath "${folder}"`
+            commandParts: ['cmd', '/c', 'winepath', folder]
           })
           .catch((error) => {
             console.error('There was an error getting the path', error)
@@ -139,6 +139,10 @@ export default function LegendarySyncSaves({
       </div>
       {isLoading ? (
         <div className="link button is-text is-link" style={{ width: '100%' }}>
+          {`${t(
+            'info.save-sync.searching',
+            'Trying to detect the correct save folder'
+          )}... `}
           <CircularProgress className="link button is-text is-link" />
         </div>
       ) : (

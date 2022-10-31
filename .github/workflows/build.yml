@@ -1,0 +1,79 @@
+name: Build
+
+on:
+  push:
+    branches: [main, beta]
+    tags:
+      - '!v*'
+  workflow_dispatch:
+
+jobs:
+  build_windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v2
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Install modules.
+        run: npm i --legacy-peer-deps
+      - name: Build artifacts.
+        run: npm run dist:win portable
+      - name: Upload EXE.
+        uses: actions/upload-artifact@v2
+        with:
+          name: win-portable
+          path: dist/Hyperplay*.exe
+          retention-days: 14
+  build_linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v2
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Install modules.
+        run: yarn
+      - name: Build artifacts.
+        run: yarn dist:linux appimage --publish=never
+      - name: Upload AppImage.
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-appimage
+          path: dist/Hyperplay-*.AppImage
+          retention-days: 14
+  build_mac:
+    runs-on: macos-11
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v2
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Install modules.
+        run: yarn
+      - name: Build artifacts.
+        run: yarn dist:mac --publish=never
+      - name: Upload DMG.
+        uses: actions/upload-artifact@v2
+        with:
+          name: mac-dmg
+          path: dist/Hyperplay*.dmg
+          retention-days: 14

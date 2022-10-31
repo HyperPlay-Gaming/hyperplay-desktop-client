@@ -32,10 +32,13 @@ const openAboutWindow = window.api.showAboutWindow
 
 const openDiscordLink = window.api.openDiscordLink
 
+const openCustomThemesWiki = window.api.openCustomThemesWiki
+
 export const size = fileSize.partial({ base: 2 })
 
 let progress: string
 
+const sendAbort = window.api.abort
 const sendKill = window.api.kill
 
 const isLoggedIn = window.api.isLoggedIn
@@ -139,8 +142,13 @@ async function fixGogSaveFolder(
         const documentsResult = await window.api.runWineCommandForGame({
           appName,
           runner: 'gog',
-          command:
-            'reg query "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders" /v Personal'
+          commandParts: [
+            'reg',
+            'query',
+            'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders',
+            '/v',
+            'Personal'
+          ]
         })
         const documentsFolder = documentsResult.stdout
           ?.trim()
@@ -240,8 +248,13 @@ async function fixLegendarySaveFolder(
     const documentsResult = await window.api.runWineCommandForGame({
       appName,
       runner: 'legendary',
-      command:
-        'reg query "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders" /v Personal'
+      commandParts: [
+        'reg',
+        'query',
+        'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Shell Folders',
+        '/v',
+        'Personal'
+      ]
     })
     const documentsFolder = documentsResult.stdout
       ?.trim()
@@ -260,6 +273,22 @@ async function fixLegendarySaveFolder(
 
 async function getAppSettings(): Promise<AppSettings> {
   return window.api.requestSettings('default')
+}
+
+function removeSpecialcharacters(text: string): string {
+  const regexp = new RegExp('[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+]', 'gi')
+  return text.replaceAll(regexp, '')
+}
+
+const getStoreName = (runner: Runner, other: string) => {
+  switch (runner) {
+    case 'legendary':
+      return 'Epic Games'
+    case 'gog':
+      return 'GOG'
+    default:
+      return other
+  }
 }
 
 export {
@@ -282,11 +311,15 @@ export {
   notify,
   openAboutWindow,
   openDiscordLink,
+  openCustomThemesWiki,
   progress,
   repair,
   sendKill,
   sidInfoPage,
   syncSaves,
   updateGame,
-  writeConfig
+  writeConfig,
+  sendAbort,
+  removeSpecialcharacters,
+  getStoreName
 }
