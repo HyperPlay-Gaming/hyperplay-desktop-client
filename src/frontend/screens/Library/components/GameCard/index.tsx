@@ -83,14 +83,11 @@ const GameCard = ({
     libraryStatus,
     layout,
     handleGameStatus,
-    platform,
     hiddenGames,
     favouriteGames,
     allTilesInColor,
     showDialogModal
   } = useContext(ContextProvider)
-
-  const isWin = platform === 'win32'
 
   const grid = forceCard || layout === 'grid'
 
@@ -250,11 +247,8 @@ const GameCard = ({
   const isMac = ['osx', 'Mac']
   const isMacNative = isMac.includes(installedPlatform ?? '')
   const isLinuxNative = installedPlatform === 'linux'
-  const isNative = isWin || isMacNative || isLinuxNative
   const isBrowserGame = installedPlatform === 'Browser'
-  const pathname = isNative
-    ? `/settings/${runner}/${appName}/other`
-    : `/settings/${runner}/${appName}/games_settings`
+  const pathname = `/settings/${runner}/${appName}/games_settings`
 
   const onUninstallClick = function () {
     setShowUninstallModal(true)
@@ -334,7 +328,7 @@ const GameCard = ({
         <div className={wrapperClasses}>
           {haveStatus && <span className="progress">{getStatus()}</span>}
           <Link
-            to={`gamepage/${runner}/${appName}`}
+            to={`/gamepage/${runner}/${appName}`}
             style={
               { '--installing-effect': installingGrayscale } as CSSProperties
             }
