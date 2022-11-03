@@ -82,7 +82,8 @@ h4,
 h5,
 h6,
 .hp-subtitle,
-.subtitle-sm {
+.subtitle-sm,
+.italic {
   font-family: var(--primary-font-family);
 }
 
@@ -129,7 +130,8 @@ p,
 h6,
 .text--md,
 button,
-.button-md {
+.button-md,
+.italic {
   font-size: var(--text-md);
 }
 
@@ -149,7 +151,8 @@ button,
 .hp-subtitle,
 .content-sm,
 h5,
-h4 {
+h4,
+.italic {
   font-weight: var(--medium);
 }
 
@@ -165,4 +168,8 @@ h1 {
 .status,
 h6 {
   font-weight: var(--semibold);
+}
+
+.italic {
+  font-style: italic;
 }

@@ -2,7 +2,11 @@ import './index.scss'
 
 import React, { useContext, useEffect, useState } from 'react'
 
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
+import {
+  BackArrowOutlinedCircled,
+  CyberDividerVertical,
+  SettingsIcon
+} from 'frontend/assets/hyperplay/index'
 
 import {
   getGameInfo,
@@ -265,19 +269,38 @@ export default function GamePage(): JSX.Element | null {
         {title ? (
           <>
             <GamePicture art_square={art_square} store={runner} />
+            <CyberDividerVertical
+              className="cyberDivider"
+              preserveAspectRatio="none"
+            />
             <NavLink
               className="backButton"
               to={backRoute}
               title={t2('webview.controls.back', 'Go Back')}
             >
-              <ArrowCircleLeftIcon />
+              <BackArrowOutlinedCircled />
             </NavLink>
             <div className="store-icon">
               <StoreLogos runner={runner} />
             </div>
             <div className="gameInfo">
               <div className="titleWrapper">
-                <h1 className="title">{title}</h1>
+                <h2 className="title">{title}</h2>
+                {installPlatform !== 'Browser' && (
+                  <Link
+                    to={pathname}
+                    state={{
+                      fromGameCard: false,
+                      runner,
+                      isLinuxNative: isNative,
+                      isMacNative: isNative,
+                      hasCloudSave: cloud_save_enabled
+                    }}
+                    className={`settings-icon`}
+                  >
+                    <SettingsIcon />
+                  </Link>
+                )}
                 <div className="game-actions">
                   <button className="toggle">
                     <FontAwesomeIcon icon={faEllipsisV} />
@@ -300,7 +323,7 @@ export default function GamePage(): JSX.Element | null {
                 </div>
               </div>
               <div className="infoWrapper">
-                <div className="developer">{developer}</div>
+                <h6 className="developer">{developer}</h6>
                 <div className="summary">
                   {extra && extra.about
                     ? extra.about.description
@@ -320,91 +343,114 @@ export default function GamePage(): JSX.Element | null {
                     {supportsWeb3 ? t('box.yes') : t('box.no')}
                   </div>
                 )}
-                {is_installed && showCloudSaveInfo && (
-                  <div
-                    style={{
-                      color: autoSyncSaves ? '#07C5EF' : ''
-                    }}
-                  >
-                    <b>{t('info.syncsaves')}:</b>{' '}
-                    {autoSyncSaves ? t('enabled') : t('disabled')}
-                  </div>
-                )}
-                {is_installed && !showCloudSaveInfo && (
-                  <div
-                    style={{
-                      color: '#F45460'
-                    }}
-                  >
-                    <b>{t('info.syncsaves')}:</b>{' '}
-                    {t('cloud_save_unsupported', 'Unsupported')}
-                  </div>
-                )}
-                {!is_installed && !isSideloaded && (
+                {is_installed && appLocation && (
                   <>
-                    <div>
-                      <b>{t('game.downloadSize', 'Download Size')}:</b>{' '}
-                      {downloadSize ?? '...'}
+                    <div
+                      className="italic clickablePath"
+                      onClick={() =>
+                        install_path !== undefined
+                          ? window.api.openFolder(install_path)
+                          : {}
+                      }
+                    >
+                      {t('info.path') + ': ' + install_path}
                     </div>
-                    <div>
-                      <b>{t('game.installSize', 'Install Size')}:</b>{' '}
-                      {installSize ?? '...'}
-                    </div>
-                    <br />
                   </>
                 )}
-                {is_installed && (
-                  <>
-                    {!isSideloaded && (
-                      <div>
-                        <b>{t('info.size')}:</b> {install_size}
+                <div className="grid-container">
+                  {!is_installed && !isSideloaded && (
+                    <>
+                      <div className="hp-subtitle">
+                        {t('game.downloadSize', 'Download Size')}
                       </div>
-                    )}
-                    <div style={{ textTransform: 'capitalize' }}>
-                      <b>
+                      <div className="col2-item italic">
+                        {downloadSize ?? '...'}
+                      </div>
+                      <div className="hp-subtitle">
+                        {t('game.installSize', 'Install Size')}
+                      </div>
+                      <div className="col2-item italic">
+                        {installSize ?? '...'}
+                      </div>
+                    </>
+                  )}
+                  {is_installed && (
+                    <>
+                      {showCloudSaveInfo ? (
+                        <>
+                          <div className="hp-subtitle">
+                            {t('info.syncsaves')}
+                          </div>
+                          <div
+                            style={{
+                              color: autoSyncSaves ? '#07C5EF' : ''
+                            }}
+                            className="col2-item italic"
+                          >
+                            {autoSyncSaves ? t('enabled') : t('disabled')}
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className="hp-subtitle">
+                            {t('info.syncsaves')}:
+                          </div>
+                          <div
+                            style={{
+                              color: '#F45460'
+                            }}
+                            className="col2-item italic"
+                          >
+                            {t('cloud_save_unsupported', 'Unsupported')}
+                          </div>
+                        </>
+                      )}
+                      {!isSideloaded && (
+                        <>
+                          <div className="hp-subtitle">{t('info.size')}</div>
+                          <div className="col2-item italic">{install_size}</div>
+                        </>
+                      )}
+                      <div className="hp-subtitle">
                         {t('info.installedPlatform', 'Installed Platform')}:
-                      </b>{' '}
-                      {installPlatform === 'osx' ? 'MacOS' : installPlatform}
-                    </div>
-                    {!isSideloaded && (
-                      <div>
-                        <b>{t('info.version')}:</b> {version}
                       </div>
-                    )}
-                    <div>
-                      <b>{t('info.canRunOffline', 'Online Required')}:</b>{' '}
-                      {t(canRunOffline ? 'box.no' : 'box.yes')}
-                    </div>
-                    {appLocation && (
                       <div
-                        className="clickable"
-                        onClick={() =>
-                          appLocation !== undefined
-                            ? window.api.openFolder(appLocation)
-                            : {}
-                        }
+                        style={{ textTransform: 'capitalize' }}
+                        className="col2-item"
                       >
-                        <b>{t('info.path')}:</b> {appLocation}
+                        {installPlatform === 'osx' ? 'MacOS' : installPlatform}
                       </div>
-                    )}
-                    {isLinux && !isNative && (
-                      <>
-                        <div>
-                          <b>Wine:</b> {wineVersion}
-                        </div>
-                        <div
-                          className="clickable"
-                          onClick={() => window.api.openFolder(winePrefix)}
-                        >
-                          <b>Prefix:</b> {winePrefix}
-                        </div>
-                      </>
-                    )}
-                    <br />
-                  </>
-                )}
+                      {!isSideloaded && (
+                        <>
+                          <div className="hp-subtitle">{t('info.version')}</div>
+                          <div className="col2-item italic">{version}</div>
+                        </>
+                      )}
+                      <div className="hp-subtitle">
+                        {t('info.canRunOffline', 'Online Required')}:
+                      </div>
+                      <div className="col2-item italic">
+                        {t(canRunOffline ? 'box.no' : 'box.yes')}
+                      </div>
+                      {isLinux && !isNative && (
+                        <>
+                          <div className="hp-subtitle">Wine</div>
+                          <div className="col2-item italic">{wineVersion}</div>
+                          <div className="hp-subtitle">Prefix:</div>
+                          <div
+                            className="italic clickablePath"
+                            onClick={() => window.api.openFolder(winePrefix)}
+                          >
+                            {winePrefix}
+                          </div>
+                        </>
+                      )}
+                    </>
+                  )}
+
+                  <TimeContainer game={appName} />
+                </div>
               </div>
-              <TimeContainer game={appName} />
               <div className="gameStatus">
                 {isUninstalling && (
                   <p
@@ -451,21 +497,35 @@ export default function GamePage(): JSX.Element | null {
                 </SelectField>
               )}
               <Anticheat gameInfo={gameInfo} />
-              <div className="buttonsWrapper">
-                {is_installed && (
-                  <button
-                    disabled={
-                      isReparing || isMoving || isUpdating || isUninstalling
-                    }
-                    onClick={handlePlay()}
-                    className={`button ${getPlayBtnClass()}`}
-                  >
-                    {getPlayLabel()}
-                  </button>
-                )}
-                {installPlatform !== 'Browser' && is_installed && (
-                  <Link
-                    to={pathname}
+              {is_installed ? (
+                <button
+                  disabled={
+                    isReparing || isMoving || isUpdating || isUninstalling
+                  }
+                  onClick={handlePlay()}
+                  className={`button ${getPlayBtnClass()}`}
+                >
+                  {getPlayLabel()}
+                </button>
+              ) : (
+                <button
+                  onClick={async () => handleInstall(is_installed)}
+                  disabled={
+                    isPlaying ||
+                    isUpdating ||
+                    isReparing ||
+                    isMoving ||
+                    isUninstalling
+                  }
+                  className={`button ${getButtonClass(is_installed)}`}
+                >
+                  {`${getButtonLabel(is_installed)}`}
+                </button>
+              )}
+              {installPlatform !== 'Browser' && is_installed && (
+                <>
+                  <NavLink
+                    to={`/settings/${runner}/${appName}/log`}
                     state={{
                       fromGameCard: false,
                       runner,
@@ -473,44 +533,17 @@ export default function GamePage(): JSX.Element | null {
                       isMacNative: isNative,
                       hasCloudSave: cloud_save_enabled
                     }}
-                    className={`button ${getButtonClass(is_installed)}`}
+                    className="clickable reportProblem"
                   >
-                    {`${getButtonLabel(is_installed)}`}
-                  </Link>
-                )}
-                {!is_installed && (
-                  <button
-                    onClick={async () => handleInstall(is_installed)}
-                    disabled={
-                      isPlaying ||
-                      isUpdating ||
-                      isReparing ||
-                      isMoving ||
-                      isUninstalling
-                    }
-                    className={`button ${getButtonClass(is_installed)}`}
-                  >
-                    {`${getButtonLabel(is_installed)}`}
-                  </button>
-                )}
-              </div>
-              {installPlatform !== 'Browser' && is_installed && (
-                <NavLink
-                  to={`/settings/${runner}/${appName}/log`}
-                  state={{
-                    fromGameCard: false,
-                    runner,
-                    isLinuxNative: isNative,
-                    isMacNative: isNative,
-                    hasCloudSave: cloud_save_enabled
-                  }}
-                  className="clickable reportProblem"
-                >
-                  <>
-                    {<FontAwesomeIcon icon={faTriangleExclamation} />}
-                    {t('report_problem', 'Report a problem running this game')}
-                  </>
-                </NavLink>
+                    <>
+                      {<FontAwesomeIcon icon={faTriangleExclamation} />}
+                      {t(
+                        'report_problem',
+                        'Report a problem running this game'
+                      )}
+                    </>
+                  </NavLink>
+                </>
               )}
             </div>
 
@@ -546,7 +579,7 @@ export default function GamePage(): JSX.Element | null {
     if (isSyncing) {
       return 'is-primary'
     }
-    return isPlaying ? 'is-tertiary' : 'is-success'
+    return isPlaying ? 'is-tertiary' : 'is-cta'
   }
 
   function getPlayLabel(): React.ReactNode {

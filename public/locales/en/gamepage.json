@@ -114,7 +114,7 @@
     },
     "label": {
         "playing": {
-            "start": "Play Now",
+            "start": "Play",
             "stop": "Playing (Stop)"
         },
         "saves": {

@@ -38,6 +38,10 @@ button {
   background: #58545d;
 }
 
+.button.is-cta {
+  background: var(--gradient-1);
+}
+
 .button.is-primary {
   background: var(--primary);
 }
@@ -180,4 +184,12 @@ button {
 .button.is-link[disabled] {
   color: var(--icon-disabled);
   cursor: wait;
+}
+
+.button.is-dangerous {
+  color: var(--danger);
+}
+
+.button.is-dangerous:hover {
+  color: var(--danger);
 }

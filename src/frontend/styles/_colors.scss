@@ -13,6 +13,7 @@
 
   /* Primary Colors */
   --primary: #761dfe;
+  --primary-50: #ffbfff;
   --primary-500: #a74dff;
 
   /* Secondary Colors */
@@ -21,6 +22,7 @@
   /* Tertiary Colors */
   --tertiary: #00436c;
   --tertiary-01-100: #79eaff;
+  --tertiary-01-400: #15a7d7;
 
   /* Grayscale Colors */
   --regular-01-50: #f4f3f6;
@@ -39,7 +41,7 @@
   --modal-background: #2d2d2d;
   --modal-border: #3e3e3e;
   --modal-backdrop: #00000074;
-  --text-hover: #59d0ea;
+  --text-hover: var(--primary);
   --primary-hover: #4cdafa;
   --link-highlight: #07c5ef;
   --accent: #909090;

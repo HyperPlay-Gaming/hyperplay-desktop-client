@@ -267,12 +267,6 @@ export default function GamesSubmenu({
                     : t('submenu.addToSteam', 'Add to Steam')}
                 </button>
               )}
-              <button
-                onClick={async () => setShowUninstallModal(true)}
-                className="link button is-text is-link"
-              >
-                {t('button.uninstall')}
-              </button>{' '}
               {!isSideloaded && (
                 <button
                   onClick={async () => handleUpdate()}
@@ -281,7 +275,7 @@ export default function GamesSubmenu({
                 >
                   {t('button.force_update', 'Force Update if Available')}
                 </button>
-              )}{' '}
+              )}
               {!isSideloaded && (
                 <button
                   onClick={async () => handleMoveInstall()}
@@ -346,6 +340,12 @@ export default function GamesSubmenu({
               {t('game.requirements', 'Requirements')}
             </button>
           )}
+          <button
+            onClick={async () => setShowUninstallModal(true)}
+            className="link button is-text is-link is-dangerous"
+          >
+            {t('button.uninstall')}
+          </button>
         </div>
       </div>
       {showModal && (

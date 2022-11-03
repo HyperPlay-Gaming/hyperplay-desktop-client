@@ -2,20 +2,27 @@
   background: var(--background-darker);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
-  height: 100vh;
+  flex-direction: row;
   justify-content: stretch;
+  align-items: stretch;
   position: relative;
 
   .titleWrapper {
     display: flex;
+    align-items: center;
     .title {
-      font-weight: var(--medium);
-      font-size: var(--text-xl);
-      line-height: 30px;
       color: var(--text-default);
       text-align: left;
       flex-basis: 100%;
       align-self: center;
+    }
+
+    .settings-icon {
+      padding-right: var(--space-sm);
+
+      &:hover {
+        color: var(--primary);
+      }
     }
 
     .game-actions {
@@ -39,7 +46,7 @@
       &:focus-within .toggle,
       &:hover .toggle,
       .toggle:hover {
-        color: var(--text-title);
+        color: var(--primary);
       }
 
       .gameTools {
@@ -115,9 +122,7 @@
 }
 
 .backButton {
-  position: absolute;
-  top: 12px;
-  left: 12px;
+  padding: calc(8vh + 12px) 0 0 var(--space-lg);
   background: none;
   border: none;
   color: var(--accent);
@@ -133,6 +138,14 @@
   }
 }
 
+.cyberDivider {
+  height: 0px;
+  min-height: 100%;
+  margin: 0px 0px 0px -6px;
+  z-index: 100;
+  min-width: 40px;
+}
+
 .gameInfo {
   text-align: initial;
   align-self: flex-start;
@@ -141,8 +154,10 @@
   display: flex;
   flex-direction: column;
   max-width: 650px;
+  width: 100%;
   user-select: text;
-  padding: 8vh 2.2em 1.2em 1.2em;
+  padding: var(--space-xl) var(--space-lg) var(--space-xl) var(--space-lg);
+  min-height: 100vh;
 
   .title {
     font-weight: var(--bold);
@@ -162,7 +177,7 @@
 
   .developer {
     padding: var(--space-md-fixed) 0 var(--space-md-fixed) 0;
-    color: var(--text-default);
+    color: var(--tertiary-01-400);
   }
 
   .summary {
@@ -170,7 +185,6 @@
     font-style: normal;
     font-weight: normal;
     padding-bottom: var(--space-sm);
-    margin-bottom: var(--space-md);
     font-size: var(--text-md);
     max-width: 560px;
     text-overflow: ellipsis;
@@ -314,4 +328,27 @@
   100% {
     background-position: -100px 0px;
   }
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-top: var(--space-xl);
+}
+
+.grid-container > div {
+  border-bottom: 1px white solid;
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-2xs);
+}
+
+.clickablePath {
+  color: var(--primary-50);
+  cursor: pointer;
+  transition: 400ms;
+  margin: var(--space-sm) 0;
+}
+
+.col2-item {
+  color: var(--primary-50);
 }
