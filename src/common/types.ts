@@ -542,6 +542,7 @@ export type WineCommandArgs = {
   installFolderName?: string
   options?: CallRunnerOptions
   startFolder?: string
+  skipPrefixCheckIKnowWhatImDoing?: boolean
 }
 
 export type Web3Features = {
