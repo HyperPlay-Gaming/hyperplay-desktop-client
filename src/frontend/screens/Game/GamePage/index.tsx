@@ -495,35 +495,22 @@ export default function GamePage(): JSX.Element | null {
                 </SelectField>
               )}
               <Anticheat gameInfo={gameInfo} />
-              {is_installed ? (
-                <button
-                  disabled={
-                    isReparing || isMoving || isUpdating || isUninstalling
-                  }
-                  onClick={handlePlay()}
-                  className={`button ${getPlayBtnClass()}`}
-                >
-                  {getPlayLabel()}
-                </button>
-              ) : (
-                <button
-                  onClick={async () => handleInstall(is_installed)}
-                  disabled={
-                    isPlaying ||
-                    isUpdating ||
-                    isReparing ||
-                    isMoving ||
-                    isUninstalling
-                  }
-                  className={`button ${getButtonClass(is_installed)}`}
-                >
-                  {`${getButtonLabel(is_installed)}`}
-                </button>
-              )}
-              {installPlatform !== 'Browser' && is_installed && (
-                <>
-                  <NavLink
-                    to={`/settings/${runner}/${appName}/log`}
+              <div className="buttonsWrapper">
+                {is_installed && (
+                  <button
+                    disabled={
+                      isReparing || isMoving || isUpdating || isUninstalling
+                    }
+                    autoFocus={true}
+                    onClick={handlePlay()}
+                    className={`button ${getPlayBtnClass()}`}
+                  >
+                    {getPlayLabel()}
+                  </button>
+                )}
+                {is_installed ? (
+                  <Link
+                    to={pathname}
                     state={{
                       fromGameCard: false,
                       runner,
@@ -533,15 +520,42 @@ export default function GamePage(): JSX.Element | null {
                     }}
                     className="clickable reportProblem"
                   >
-                    <>
-                      {<FontAwesomeIcon icon={faTriangleExclamation} />}
-                      {t(
-                        'report_problem',
-                        'Report a problem running this game'
-                      )}
-                    </>
-                  </NavLink>
-                </>
+                    {`${getButtonLabel(is_installed)}`}
+                  </Link>
+                ) : (
+                  <button
+                    onClick={async () => handleInstall(is_installed)}
+                    disabled={
+                      isPlaying ||
+                      isUpdating ||
+                      isReparing ||
+                      isMoving ||
+                      isUninstalling
+                    }
+                    autoFocus={true}
+                    className={`button ${getButtonClass(is_installed)}`}
+                  >
+                    {`${getButtonLabel(is_installed)}`}
+                  </button>
+                )}
+              </div>
+              {is_installed && (
+                <NavLink
+                  to={`/settings/${runner}/${appName}/log`}
+                  state={{
+                    fromGameCard: false,
+                    runner,
+                    isLinuxNative: isNative,
+                    isMacNative: isNative,
+                    hasCloudSave: cloud_save_enabled
+                  }}
+                  className="clickable reportProblem"
+                >
+                  <>
+                    {<FontAwesomeIcon icon={faTriangleExclamation} />}
+                    {t('report_problem', 'Report a problem running this game')}
+                  </>
+                </NavLink>
               )}
             </div>
 

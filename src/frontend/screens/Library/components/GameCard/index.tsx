@@ -217,8 +217,7 @@ const GameCard = ({
           <PlayIcon />
         </SvgButton>
       )
-    }
-    if (!isInstalled) {
+    } else {
       return (
         <SvgButton
           className="downIcon"
@@ -256,31 +255,49 @@ const GameCard = ({
 
   const items: Item[] = [
     {
+      // remove from install queue
+      label: t('button.queue.remove'),
+      onclick: () => handleRemoveFromQueue(),
+      show: isQueued && !isInstalling
+    },
+    {
+      // stop if running
+      label: t('label.playing.stop'),
+      onclick: async () => handlePlay(runner),
+      show: isPlaying
+    },
+    {
+      // launch game
+      label: t('label.playing.start'),
+      onclick: async () => handlePlay(runner),
+      show: isInstalled && !isPlaying && !isUpdating
+    },
+    {
+      // update
       label: t('button.update', 'Update'),
       onclick: async () => handleUpdate(),
-      show: hasUpdate
+      show: hasUpdate && !isUpdating
     },
     {
-      label: t('button.uninstall'),
-      onclick: onUninstallClick,
-      show: isInstalled
-    },
-    {
+      // install
       label: t('button.install'),
       onclick: () => (!isInstalled ? buttonClick() : () => null),
       show: !isInstalled
     },
     {
+      // cancel installation/update
       label: t('button.cancel'),
       onclick: async () => handlePlay(runner),
-      show: isInstalling && isQueued
+      show: isInstalling || isUpdating
     },
     {
+      // hide
       label: t('button.hide_game', 'Hide Game'),
       onclick: () => hiddenGames.add(appName, title),
       show: !isHiddenGame
     },
     {
+      // unhide
       label: t('button.unhide_game', 'Unhide Game'),
       onclick: () => hiddenGames.remove(appName),
       show: isHiddenGame
@@ -299,6 +316,27 @@ const GameCard = ({
       label: t('button.remove_from_recent', 'Remove From Recent'),
       onclick: async () => window.api.removeRecentGame(appName),
       show: isRecent
+    },
+    {
+      // settings
+      label: t('submenu.settings'),
+      onclick: () =>
+        navigate(pathname, {
+          state: {
+            fromGameCard: true,
+            runner,
+            hasCloudSave,
+            isLinuxNative,
+            isMacNative
+          }
+        }),
+      show: isInstalled && !isUninstalling
+    },
+    {
+      // uninstall
+      label: t('button.uninstall'),
+      onclick: onUninstallClick,
+      show: isInstalled && !isUpdating
     }
   ]
 
@@ -314,6 +352,8 @@ const GameCard = ({
   const wrapperClasses = `${
     grid ? 'gameCard' : 'gameListItem'
   }  ${instClass} ${hiddenClass}`
+
+  const { activeController } = useContext(ContextProvider)
 
   return (
     <div>
@@ -371,43 +411,45 @@ const GameCard = ({
               {getStoreName(runner, t2('Other'))}
             </span>
           </Link>
-          {
-            <>
-              <span className="icons">
-                {hasUpdate && !isUpdating && (
+          <>
+            <span
+              className={classNames('icons', {
+                gamepad: activeController
+              })}
+            >
+              {hasUpdate && !isUpdating && (
+                <SvgButton
+                  className="updateIcon"
+                  title={`${t('button.update')} (${title})`}
+                  onClick={async () => handleUpdate()}
+                >
+                  <FontAwesomeIcon size={'2x'} icon={faRepeat} />
+                </SvgButton>
+              )}
+              {!isBrowserGame && isInstalled && !isUninstalling && (
+                <>
                   <SvgButton
-                    className="updateIcon"
-                    title={`${t('button.update')} (${title})`}
-                    onClick={async () => handleUpdate()}
+                    title={`${t('submenu.settings')} (${title})`}
+                    className="settingsIcon"
+                    onClick={() =>
+                      navigate(pathname, {
+                        state: {
+                          fromGameCard: true,
+                          runner,
+                          hasCloudSave,
+                          isLinuxNative,
+                          isMacNative
+                        }
+                      })
+                    }
                   >
-                    <FontAwesomeIcon size={'2x'} icon={faRepeat} />
+                    <SettingsIcon />
                   </SvgButton>
-                )}
-                {!isBrowserGame && isInstalled && !isUninstalling && (
-                  <>
-                    <SvgButton
-                      title={`${t('submenu.settings')} (${title})`}
-                      className="settingsIcon"
-                      onClick={() =>
-                        navigate(pathname, {
-                          state: {
-                            fromGameCard: true,
-                            runner,
-                            hasCloudSave,
-                            isLinuxNative,
-                            isMacNative
-                          }
-                        })
-                      }
-                    >
-                      <SettingsIcon />
-                    </SvgButton>
-                  </>
-                )}
-                {renderIcon()}
-              </span>
-            </>
-          }
+                </>
+              )}
+              {renderIcon()}
+            </span>
+          </>
         </div>
       </ContextMenu>
     </div>
