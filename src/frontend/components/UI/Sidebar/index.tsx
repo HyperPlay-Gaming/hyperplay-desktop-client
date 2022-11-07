@@ -12,7 +12,6 @@ import SidebarLinks from './components/SidebarLinks'
 import './index.css'
 import Wallet from './components/wallet'
 import { DMQueueElement } from 'common/types'
-import { DMQueue } from 'frontend/types'
 
 interface SidebarProps {
   openOnboarding: () => void
@@ -24,12 +23,12 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
   const [currentDMElement, setCurrentDMElement] = useState<DMQueueElement>()
 
   useEffect(() => {
-    window.api.getDMQueueInformation().then(({ elements }: DMQueue) => {
+    window.api.getDMQueueInformation().then(({ elements }) => {
       setCurrentDMElement(elements[0])
     })
 
     const removeHandleDMQueueInformation = window.api.handleDMQueueInformation(
-      (e: Electron.IpcRendererEvent, elements: DMQueueElement[]) => {
+      (e, elements) => {
         setCurrentDMElement(elements[0])
       }
     )
