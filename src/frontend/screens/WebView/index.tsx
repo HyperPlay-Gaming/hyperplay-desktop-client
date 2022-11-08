@@ -60,7 +60,9 @@ export default function WebView() {
     '/loginweb/legendary': epicLoginUrl,
     '/loginweb/gog': gogLoginUrl
   }
-  let startUrl = urls[pathname]
+  let startUrl = Object.prototype.hasOwnProperty.call(urls, pathname)
+    ? urls[pathname]
+    : ''
 
   if (pathname.match(/store-page/)) {
     const searchParams = new URLSearchParams(search)

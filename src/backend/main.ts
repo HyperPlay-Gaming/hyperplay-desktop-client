@@ -26,7 +26,8 @@ import {
   powerSaveBlocker,
   protocol,
   screen,
-  clipboard
+  clipboard,
+  session
 } from 'electron'
 import 'backend/updater'
 import { autoUpdater } from 'electron-updater'
@@ -154,6 +155,7 @@ import {
 } from './sideload/games'
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import si from 'systeminformation'
+import { initExtensionIpcHandler } from './extension/ipcHandlers'
 
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
@@ -213,6 +215,10 @@ async function createWindow(): Promise<BrowserWindow> {
     }
   })
 
+  const extPath = path.resolve('./extensions/testActionExtension')
+  const extension = await session.defaultSession.loadExtension(extPath)
+  initExtensionIpcHandler(mainWindow, extension.id)
+
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
       [
@@ -269,7 +275,6 @@ async function createWindow(): Promise<BrowserWindow> {
     if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
       import('electron-devtools-installer').then((devtools) => {
         const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
-
         installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
           logWarning(['An error occurred: ', err], {
             prefix: LogPrefix.Backend

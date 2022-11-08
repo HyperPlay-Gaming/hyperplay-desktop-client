@@ -399,6 +399,12 @@ export default function SidebarLinks() {
         </div>
         <span>{t('userselector.discord', 'Discord')}</span>
       </button>
+      <button
+        className="Sidebar__item"
+        onClick={async () => window.api.showPopup()}
+      >
+        <span>MM Extension</span>
+      </button>
       {(isFullscreen || activeController) && <QuitButton />}
     </div>
   )
