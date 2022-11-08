@@ -1,8 +1,6 @@
 // this file exports chrome api action methods
 // documented here: https://developer.chrome.com/docs/extensions/reference/action/
 
-import { ipcRenderer } from 'electron'
-
 export const getPopup = function () {
   console.log('get popup called in api')
 }
