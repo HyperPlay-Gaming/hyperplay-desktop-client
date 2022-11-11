@@ -144,7 +144,7 @@ async function isEpicServiceOffline(
     title: `${type} ${t('epic.offline-notification-title', 'offline')}`,
     body: t(
       'epic.offline-notification-body',
-      'Heroic will maybe not work probably!'
+      'HyperPlay will probably not work!'
     ),
     urgency: 'normal',
     timeoutType: 'default',
@@ -768,7 +768,7 @@ export const getLatestReleases = async (): Promise<Release[]> => {
 
     return newReleases
   } catch (error) {
-    logError(['Error when checking for Heroic updates', error], {
+    logError(['Error when checking for HyperPlay updates', error], {
       prefix: LogPrefix.Backend
     })
     return []

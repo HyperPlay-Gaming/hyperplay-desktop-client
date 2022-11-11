@@ -303,10 +303,10 @@ async function addNonSteamGame(props: {
     if (!isWindows) {
       args.push('--no-sandbox')
     }
-    args.push(`"heroic://launch/${props.gameInfo.app_name}"`)
+    args.push(`"hyperplay://launch/${props.gameInfo.app_name}"`)
     newEntry.LaunchOptions = args.join(' ')
     if (isFlatpak) {
-      newEntry.LaunchOptions = `run com.heroicgameslauncher.hgl ${newEntry.LaunchOptions}`
+      newEntry.LaunchOptions = `run gg.hyperplay.hp ${newEntry.LaunchOptions}`
     }
     newEntry.IsHidden = false
     newEntry.AllowDesktopConfig = true

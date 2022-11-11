@@ -41,15 +41,15 @@ describe('logger/logfile.ts', () => {
     logfile.createNewLogFileAndClearOldOnces()
 
     expect(spyOpenSync).toBeCalledWith(
-      expect.stringContaining('invalid/heroic-'),
+      expect.stringContaining('invalid/hyperplay-'),
       'w'
     )
     expect(spyAppGetPath).toBeCalledWith('logs')
     expect(logError).toBeCalledWith(
       [
-        expect.stringContaining(`Open invalid/heroic-`),
+        expect.stringContaining(`Open invalid/hyperplay-`),
         expect.objectContaining(
-          Error("ENOENT: no such file or directory, open 'invalid/heroic-")
+          Error("ENOENT: no such file or directory, open 'invalid/hyperplay-")
         )
       ],
       { prefix: 'Backend', skipLogToFile: true }
@@ -80,13 +80,13 @@ describe('logger/logfile.ts', () => {
     const monthOutdatedLogFile = join(
       tmpDir.name,
       // @ts-ignore replaceAll error
-      `heroic-${date.toISOString().replaceAll(':', '_')}.log`
+      `hyperplay-${date.toISOString().replaceAll(':', '_')}.log`
     )
     date.setFullYear(2021)
     const yearOutdatedLogFile = join(
       tmpDir.name,
       // @ts-ignore replaceAll error
-      `heroic-${date.toISOString().replaceAll(':', '_')}.log`
+      `hyperplay-${date.toISOString().replaceAll(':', '_')}.log`
     )
 
     graceful_fs.closeSync(graceful_fs.openSync(monthOutdatedLogFile, 'w'))

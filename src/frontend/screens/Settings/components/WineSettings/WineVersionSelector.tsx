@@ -55,8 +55,8 @@ export default function WineVersionSelector() {
               <span>{t('help.wine.part1')}</span>
               <ul>
                 <i>
-                  <li>~/.config/heroic/tools/wine</li>
-                  <li>~/.config/heroic/tools/proton</li>
+                  <li>~/.config/hyperplay/tools/wine</li>
+                  <li>~/.config/hyperplay/tools/proton</li>
                   <li>~/.steam/root/compatibilitytools.d</li>
                   <li>~/.steam/steamapps/common</li>
                   <li>~/.local/share/lutris/runners/wine</li>
