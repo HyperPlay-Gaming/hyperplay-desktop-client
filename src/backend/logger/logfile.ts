@@ -25,7 +25,7 @@ let longestPrefix = 0
 export const getLongestPrefix = (): number => longestPrefix
 
 /**
- * Creates a new log file in heroic config path under folder Logs.
+ * Creates a new log file in hyperplay config path under folder Logs.
  * It also removes old logs every new month.
  * @returns path to current log file
  */
@@ -33,7 +33,7 @@ export function createNewLogFileAndClearOldOnces(): createLogFileReturn {
   const date = new Date()
   const logDir = app.getPath('logs')
   const fmtDate = date.toISOString().replaceAll(':', '_')
-  const newLogFile = join(logDir, `heroic-${fmtDate}.log`)
+  const newLogFile = join(logDir, `hyperplay-${fmtDate}.log`)
   try {
     openSync(newLogFile, 'w')
   } catch (error) {
@@ -101,7 +101,7 @@ export function createNewLogFileAndClearOldOnces(): createLogFileReturn {
 /**
  * Returns according to options the fitting log file
  * @param appName     if given returns game log
- * @param defaultLast if set getting heroic default last log
+ * @param defaultLast if set getting hyperplay default last log
  * @returns path to log file
  */
 export function getLogFile(props: {

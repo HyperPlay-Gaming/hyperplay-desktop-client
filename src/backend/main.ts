@@ -770,7 +770,7 @@ ipcMain.on('clearCache', (event) => {
   })
 })
 
-ipcMain.on('resetHeroic', async () => {
+ipcMain.on('resetApp', async () => {
   resetApp()
 })
 
