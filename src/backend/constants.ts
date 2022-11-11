@@ -50,10 +50,10 @@ const iconsFolder = join(appConfigFolder, 'icons')
 const installPath = join(homedir(), 'Games', 'HyperPlay')
 const defaultWinePrefix = join(homedir(), 'Games', 'HyperPlay', 'Prefixes')
 const anticheatDataPath = join(appConfigFolder, 'areweanticheatyet.json')
-const heroicFolder = join(configFolder, 'heroic')
+const appFolder = join(configFolder, 'hyperplay')
 const runtimePath = join(toolsPath, 'runtimes')
 const userInfo = join(legendaryConfigPath, 'user.json')
-const imagesCachePath = join(heroicFolder, 'images-cache')
+const imagesCachePath = join(appFolder, 'images-cache')
 
 const { currentLogFile: currentLogFile, lastLogFile: lastLogFile } =
   createNewLogFileAndClearOldOnces()
@@ -76,8 +76,6 @@ const discordLink = 'https://discord.gg/Vx4ky6ZbAK'
 const wikiLink = 'https://github.com/G7DAO/HyperPlay/wiki'
 const weblateUrl =
   'https://hosted.weblate.org/projects/hyperplay-games-launcher'
-const kofiPage = 'https://ko-fi.com/heroicgames'
-const patreonPage = 'https://www.patreon.com/heroicgameslauncher'
 const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
 const hyperplaySite = 'https://game7.io/'
 const customThemesWikiLink =
@@ -195,7 +193,6 @@ export {
   imagesCachePath,
   userHome,
   flatPakHome,
-  kofiPage,
   icon,
   iconDark,
   iconLight,
@@ -208,7 +205,6 @@ export {
   legendaryMetadata,
   epicLoginUrl,
   gogLoginUrl,
-  patreonPage,
   sidInfoUrl,
   supportURL,
   fallBackImage,

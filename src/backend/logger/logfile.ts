@@ -53,9 +53,9 @@ export function createNewLogFileAndClearOldOnces(): createLogFileReturn {
         .map((dirent) => dirent.name)
 
       logs.forEach((log) => {
-        if (log.includes('heroic-')) {
+        if (log.includes('hyperplay-')) {
           const dateString = log
-            .replace('heroic-', '')
+            .replace('hyperplay-', '')
             .replace('.log', '')
             .replaceAll('_', ':')
           const logDate = new Date(dateString)

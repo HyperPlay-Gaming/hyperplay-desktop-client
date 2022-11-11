@@ -713,7 +713,7 @@ class LegendaryGame extends Game {
     )
     appendFileSync(
       this.logFileLocation,
-      "Legendary's config from config.ini (before Heroic's settings):\n"
+      "Legendary's config from config.ini (before HyperPlay's settings):\n"
     )
     const json = JSON.parse(stdout)
     // remove egl auth info
