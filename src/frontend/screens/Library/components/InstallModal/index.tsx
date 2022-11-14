@@ -39,7 +39,7 @@ export type AvailablePlatforms = {
   icon: IconDefinition
 }[]
 
-export default function InstallModal({
+export default React.memo(function InstallModal({
   appName,
   backdropClick,
   runner,
@@ -215,4 +215,4 @@ export default function InstallModal({
       </Dialog>
     </div>
   )
-}
+})

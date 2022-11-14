@@ -8,9 +8,9 @@ import { faRepeat } from '@fortawesome/free-solid-svg-icons'
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
 import {
   FavouriteGame,
+  GameInfo,
   GameStatus,
   HiddenGame,
-  InstallPlatform,
   Runner
 } from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
@@ -39,39 +39,31 @@ import StoreLogos from 'frontend/components/UI/StoreLogos'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
 
 interface Card {
-  appName: string
   buttonClick: () => void
-  cover: string
-  coverList: string
   hasUpdate: boolean
-  hasCloudSave: boolean
-  isInstalled: boolean
-  logo: string
-  size: string
-  title: string
-  version: string
-  runner: Runner
-  installedPlatform: InstallPlatform | undefined
   forceCard?: boolean
   isRecent: boolean
+  gameInfo: GameInfo
 }
 
 const GameCard = ({
-  cover,
-  title,
-  appName,
-  isInstalled,
-  logo,
-  coverList,
-  size = '',
   hasUpdate,
-  hasCloudSave,
   buttonClick,
   forceCard,
-  runner,
-  installedPlatform,
-  isRecent = false
+  isRecent = false,
+  gameInfo
 }: Card) => {
+  const {
+    title,
+    art_square: cover,
+    art_logo: logo,
+    app_name: appName,
+    is_installed: isInstalled,
+    runner,
+    cloud_save_enabled: hasCloudSave,
+    install: { install_size: size, platform: installedPlatform }
+  } = gameInfo
+
   const [progress, previousProgress] = hasProgress(appName)
   const [showUninstallModal, setShowUninstallModal] = useState(false)
 
@@ -124,7 +116,7 @@ const GameCard = ({
   }
 
   function getImageFormatting() {
-    const imageBase = grid ? cover : coverList
+    const imageBase = cover
     if (imageBase === 'fallback') {
       return fallbackImage
     }
@@ -281,7 +273,7 @@ const GameCard = ({
     {
       // install
       label: t('button.install'),
-      onclick: () => (!isInstalled ? buttonClick() : () => null),
+      onclick: () => buttonClick(),
       show: !isInstalled
     },
     {
@@ -369,6 +361,7 @@ const GameCard = ({
           {haveStatus && <span className="progress">{getStatus()}</span>}
           <Link
             to={`/gamepage/${runner}/${appName}`}
+            state={{ gameInfo }}
             style={
               { '--installing-effect': installingGrayscale } as CSSProperties
             }
@@ -458,14 +451,13 @@ const GameCard = ({
   async function handlePlay(runner: Runner) {
     if (!isInstalled && !isQueued) {
       return install({
-        appName,
+        gameInfo,
         handleGameStatus,
         installPath: folder || 'default',
         isInstalling,
         previousProgress,
         progress,
         t,
-        runner,
         showDialogModal
       })
     }
@@ -491,4 +483,4 @@ const GameCard = ({
   }
 }
 
-export default GameCard
+export default React.memo(GameCard)
