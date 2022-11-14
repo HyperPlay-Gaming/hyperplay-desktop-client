@@ -350,10 +350,10 @@
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
-        "retrying": "Retrying"
+        "hint": "Estamos comprobando la conexión con:{{newline}}github.com,{{newline}}gog.com y{{newline}}store.epicgames.com",
+        "offline": "Sin conexión",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
+        "retrying": "Reintentando"
     },
     "options": {
         "advanced": {
