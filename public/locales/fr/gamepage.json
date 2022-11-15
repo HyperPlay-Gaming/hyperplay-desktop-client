@@ -32,8 +32,8 @@
             "title": "Arrêter l'installation"
         },
         "uninstall": {
-            "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
-            "message": "Voulez-vous désinstaller ce jeu\u202f?",
+            "checkbox": "Supprimer le préfixe : {{prefix}}{{newLine}}Note : cela ne peut pas être annulé et supprimera également les fichiers de sauvegarde non sauvegardés.",
+            "message": "Voulez-vous désinstaller ce jeu?",
             "title": "Désinstaller"
         },
         "update": {
@@ -140,6 +140,9 @@
     "report_problem": "Signaler un problème de fonctionnement du jeu",
     "sdl": {
         "title": "Sélectionnez les composants à installer"
+    },
+    "setting": {
+        "use-default-wine-settings": "Use Default Wine Settings"
     },
     "sideload": {
         "field": {

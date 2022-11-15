@@ -492,6 +492,7 @@ class GlobalConfigV0 extends GlobalConfig {
       checkForUpdatesOnStartup: !isFlatpak,
       customWinePaths: isWindows ? null : [],
       defaultInstallPath: installPath,
+      libraryTopSection: 'disabled',
       defaultSteamPath: getSteamCompatFolder(),
       defaultWinePrefix: defaultWinePrefix,
       language: 'en',

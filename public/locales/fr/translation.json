@@ -1,9 +1,9 @@
 {
     "accessibility": {
-        "actions_font_family_no_default": "Actions Font Family (Default: ",
-        "all_tiles_in_color": "Show all game tiles in color",
-        "content_font_family_no_default": "Content Font Family (Default: ",
-        "fonts": "Fonts",
+        "actions_font_family_no_default": "Police d'écriture pour les actions (Par défaut : ",
+        "all_tiles_in_color": "Afficher les vignettes de tous les jeux en couleur",
+        "content_font_family_no_default": "Police d'écriture pour les contenus (Par défaut: ",
+        "fonts": "Polices d'écriture",
         "title": "Accessibilité",
         "zoom": "Zoom"
     },
@@ -69,8 +69,8 @@
                 "title": "Update Error"
             },
             "wine-not-found": {
-                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
-                "message": "No Wine Version Selected. Check Game Settings!",
+                "invalid": "La version de Wine sélectionnée n'a pas été trouvée. Installez-le ou sélectionnez une version différente dans les paramètres du jeu{{newline}}Version: {{version}}{{newline}}Chemin: {{path}}",
+                "message": "Aucune version de Wine n'est sélectionnée. Vérifiez les paramètres de jeu !",
                 "title": "Wine non trouvé"
             },
             "winetricks": {

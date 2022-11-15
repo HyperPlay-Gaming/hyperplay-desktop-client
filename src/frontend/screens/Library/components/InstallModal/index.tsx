@@ -181,8 +181,7 @@ export default React.memo(function InstallModal({
                 winePrefix={winePrefix}
                 wineVersion={wineVersion}
                 wineVersionList={wineVersionList}
-                appName={appName}
-                runner={runner}
+                title={gameInfo?.title}
                 setWinePrefix={setWinePrefix}
                 setWineVersion={setWineVersion}
               />
@@ -204,8 +203,6 @@ export default React.memo(function InstallModal({
                 winePrefix={winePrefix}
                 wineVersion={wineVersion}
                 wineVersionList={wineVersionList}
-                appName={appName}
-                runner={runner}
                 setWinePrefix={setWinePrefix}
                 setWineVersion={setWineVersion}
               />
