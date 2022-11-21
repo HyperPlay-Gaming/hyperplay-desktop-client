@@ -16,3 +16,11 @@ export const enable = function () {
 export const disable = function () {
   console.log('enable action called')
 }
+
+export const setBadgeText = function () {
+  console.log('action setBadgeText called')
+}
+
+export const setBadgeBackgroundColor = function () {
+  console.log('action setBadgeBackgroundColor called')
+}

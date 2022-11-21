@@ -199,6 +199,12 @@ async function createWindow(): Promise<BrowserWindow> {
     }
   }
 
+  // const extPath = path.resolve('./extensions/testActionExtension')
+  // const extPath = path.resolve('./extensions/mmExtension')
+  const extPath = path.resolve('./extensions/mmExtProd')
+  const extension = await session.defaultSession.loadExtension(extPath)
+  console.log('LOADED EXT')
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     ...windowProps,
@@ -215,8 +221,6 @@ async function createWindow(): Promise<BrowserWindow> {
     }
   })
 
-  const extPath = path.resolve('./extensions/testActionExtension')
-  const extension = await session.defaultSession.loadExtension(extPath)
   initExtensionIpcHandler(mainWindow, extension.id)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
@@ -272,19 +276,19 @@ async function createWindow(): Promise<BrowserWindow> {
   // }
 
   if (!app.isPackaged) {
-    if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-      import('electron-devtools-installer').then((devtools) => {
-        const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
-        installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
-          logWarning(['An error occurred: ', err], {
-            prefix: LogPrefix.Backend
-          })
-        })
-      })
-    }
+    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+    //   import('electron-devtools-installer').then((devtools) => {
+    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
+    //     installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
+    //       logWarning(['An error occurred: ', err], {
+    //         prefix: LogPrefix.Backend
+    //       })
+    //     })
+    //   })
+    // }
     mainWindow.loadURL('http://localhost:5173')
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(`file://${path.join(publicDir, '../build/index.html')}`)

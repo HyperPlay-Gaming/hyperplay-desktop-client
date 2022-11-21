@@ -43,7 +43,10 @@ export default defineConfig({
       },
       preload: {
         input: {
-          preload: path.resolve(__dirname + '/src/backend/preload.ts')
+          preload: path.resolve(__dirname + '/src/backend/preload.ts'),
+          extensionPreload: path.resolve(
+            __dirname + '/src/backend/extension/extensionPreload.ts'
+          )
         }
       }
     }),

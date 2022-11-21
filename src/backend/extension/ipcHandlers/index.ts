@@ -36,14 +36,43 @@ ipcMain.handle('showPopup', () => {
   console.log(`opened popup: ${popupUrl}`)
 })
 
-ipcMain.handle('showMetaMaskExtensionHomePage', () => {
-  const mmBrowserView = new BrowserView()
-  window.addBrowserView(mmBrowserView)
-  mmBrowserView.webContents.loadURL(
-    `chrome-extension://${extensionId}/home.html`
-  )
-  mmBrowserView.setBounds({ x: 300, y: 10, width: 1400, height: 800 })
-  mmBrowserView.setAutoResize({ width: true, height: true })
+let testWindow
 
-  return 'test'
+ipcMain.handle('showMetaMaskExtensionHomePage', () => {
+  // const mmBrowserView = new BrowserView({
+  //   webPreferences: {
+  //     preload: path.join(__dirname, 'preload.js')
+  //   }
+  // })
+  // window.addBrowserView(mmBrowserView)
+  // // mmBrowserView.webContents.loadURL(
+  // //   `chrome-extension://${extensionId}/home.html`
+  // // )
+  // mmBrowserView.webContents.loadURL(
+  //   `chrome-extension://${extensionId}/background.html`
+  // )
+  // mmBrowserView.setBounds({ x: 300, y: 10, width: 1400, height: 800 })
+  // mmBrowserView.setAutoResize({ width: true, height: true })
+
+  // return 'test'
+
+  testWindow = new BrowserWindow({
+    height: 690,
+    width: 1200,
+    x: 0,
+    y: 0,
+    minHeight: 345,
+    minWidth: 600,
+    show: false,
+
+    webPreferences: {
+      webviewTag: true,
+      contextIsolation: true,
+      nodeIntegration: true,
+      // sandbox: false,
+      preload: path.join(__dirname, 'extensionPreload.js')
+    }
+  })
+  testWindow.loadURL(`chrome-extension://${extensionId}/background.html`)
+  testWindow.show()
 })
