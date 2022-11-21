@@ -1,3 +1,4 @@
+
 // Freezes all intrinsics
 try {
   // eslint-disable-next-line no-undef,import/unambiguous

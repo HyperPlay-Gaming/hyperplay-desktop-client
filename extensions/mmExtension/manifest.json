@@ -79,7 +79,8 @@
     "activeTab",
     "webRequest",
     "*://*.eth/",
-    "notifications"
+    "notifications",
+    "webRequestBlocking"
   ],
   "short_name": "__MSG_appName__",
   "content_security_policy": "frame-ancestors 'none'",
