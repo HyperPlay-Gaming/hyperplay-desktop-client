@@ -219,6 +219,10 @@ interface AsyncIPCFunctions {
     alreadyDefinedGogSaves: GOGCloudSavesLocation[]
   ) => Promise<string | GOGCloudSavesLocation[]>
   'get-connection-uris': (provider: PROVIDERS) => Promise<ConnectionURIs>
+  isGameAvailable: (args: {
+    appName: string
+    runner: Runner
+  }) => Promise<boolean>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file
