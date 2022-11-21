@@ -587,5 +587,35 @@
     "two_col_table": {
         "save_hint": "Ændringer i denne tabel gemmes ikke automatisk. Klik på knappen +"
     },
-    "progress": "Fremskridt"
+    "progress": "Fremskridt",
+    "download": {
+        "manager": {
+            "empty": "Intet at downloade.",
+            "link": "Downloads",
+            "queue": {
+                "actions": "Handling",
+                "element": "Navn",
+                "platform": "Platform",
+                "store": "butik"
+            },
+            "title": "Downloads"
+        }
+    },
+    "error": "Fejl",
+    "offline-message": {
+        "hint": "Vi tjekker forbindelsen mod:{{newline}}github.com,{{newline}}gog.com og{{newline}}store.epicgames.com",
+        "offline": "Offline",
+        "retry-in": "Prøver igen om ... {{seconds}} sekunder",
+        "retrying": "Prøver igen"
+    },
+    "Other": "Andet",
+    "queue": {
+        "label": {
+            "clear": "Ryd liste",
+            "downloading": "Downloader",
+            "finished": "Afsluttet",
+            "queued": "I kø"
+        }
+    },
+    "add_game": "Tilføj spil"
 }

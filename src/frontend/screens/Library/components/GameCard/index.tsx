@@ -110,9 +110,7 @@ const GameCard = ({
   const imageSrc = getImageFormatting()
 
   async function handleUpdate() {
-    await handleGameStatus({ appName, runner, status: 'updating' })
-    await updateGame(appName, runner)
-    return handleGameStatus({ appName, runner, status: 'done' })
+    return updateGame({ appName, runner, gameInfo })
   }
 
   function getImageFormatting() {
@@ -128,6 +126,9 @@ const GameCard = ({
   }
 
   function getStatus() {
+    if (isQueued) {
+      return `${t('status.queued', 'Queued')}`
+    }
     if (isUninstalling) {
       return t('status.uninstalling', 'Uninstalling')
     }
@@ -145,9 +146,6 @@ const GameCard = ({
     }
     if (isInstalled) {
       return `${t('status.installed')} ${runner === 'sideload' ? '' : size}`
-    }
-    if (isQueued) {
-      return `${t('status.queued', 'Queued')}`
     }
 
     return t('status.notinstalled')
@@ -262,13 +260,13 @@ const GameCard = ({
       // launch game
       label: t('label.playing.start'),
       onclick: async () => handlePlay(runner),
-      show: isInstalled && !isPlaying && !isUpdating
+      show: isInstalled && !isPlaying && !isUpdating && !isQueued
     },
     {
       // update
       label: t('button.update', 'Update'),
       onclick: async () => handleUpdate(),
-      show: hasUpdate && !isUpdating
+      show: hasUpdate && !isUpdating && !isQueued
     },
     {
       // install
@@ -347,6 +345,8 @@ const GameCard = ({
 
   const { activeController } = useContext(ContextProvider)
 
+  const showUpdateButton = hasUpdate && !isUpdating && !isQueued
+
   return (
     <div>
       {showUninstallModal && (
@@ -410,7 +410,7 @@ const GameCard = ({
                 gamepad: activeController
               })}
             >
-              {hasUpdate && !isUpdating && (
+              {showUpdateButton && (
                 <SvgButton
                   className="updateIcon"
                   title={`${t('button.update')} (${title})`}
@@ -431,7 +431,8 @@ const GameCard = ({
                           runner,
                           hasCloudSave,
                           isLinuxNative,
-                          isMacNative
+                          isMacNative,
+                          gameInfo
                         }
                       })
                     }
@@ -452,7 +453,6 @@ const GameCard = ({
     if (!isInstalled && !isQueued) {
       return install({
         gameInfo,
-        handleGameStatus,
         installPath: folder || 'default',
         isInstalling,
         previousProgress,

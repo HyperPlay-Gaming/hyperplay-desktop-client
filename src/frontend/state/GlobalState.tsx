@@ -594,7 +594,6 @@ export class GlobalState extends PureComponent<Props> {
         }
         return install({
           gameInfo,
-          handleGameStatus: this.handleGameStatus,
           installPath: path,
           isInstalling: false,
           previousProgress: null,

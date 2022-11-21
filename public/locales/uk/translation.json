@@ -143,6 +143,7 @@
         "yes": "ТАК"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Перейти до бібліотеки",
         "login": "Увійти",
         "sync": "Синхронізувати",
@@ -170,18 +171,23 @@
         }
     },
     "docs": "Документація",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "Мережеві сервіси можуть не повністю працювати, тому що сервери Epic Games наразі недоступні!",
@@ -355,6 +361,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Ім'я змінного",
@@ -407,10 +414,13 @@
     "progress": "Progress",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Нещодавно зіграні",
