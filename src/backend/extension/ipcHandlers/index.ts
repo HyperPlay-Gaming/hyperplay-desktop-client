@@ -4,11 +4,13 @@ import path from 'path'
 let extensionId = ''
 let window: BrowserWindow
 
-export const initExtensionIpcHandler = function (
-  windowInit: BrowserWindow,
-  extId: string
+export const initExtensionIpcHandlerWindow = function (
+  windowInit: BrowserWindow
 ) {
   window = windowInit
+}
+
+export const initExtensionIpcHandlerExtId = function (extId: string) {
   extensionId = extId
 }
 
@@ -38,7 +40,7 @@ ipcMain.handle('showPopup', () => {
 
 let testWindow
 
-ipcMain.handle('showMetaMaskExtensionHomePage', () => {
+ipcMain.handle('showMetaMaskExtensionHomePage', async () => {
   // const mmBrowserView = new BrowserView({
   //   webPreferences: {
   //     preload: path.join(__dirname, 'preload.js')
@@ -67,12 +69,25 @@ ipcMain.handle('showMetaMaskExtensionHomePage', () => {
 
     webPreferences: {
       webviewTag: true,
-      contextIsolation: true,
+      //the preload script needs access to window.chrome to extend the api so contextIsolation needs to be false
+      contextIsolation: false,
       nodeIntegration: true,
       // sandbox: false,
       preload: path.join(__dirname, 'extensionPreload.js')
     }
   })
-  testWindow.loadURL(`chrome-extension://${extensionId}/background.html`)
+
+  testWindow.loadURL(`chrome-extension://${extensionId}/home.html`)
   testWindow.show()
 })
+
+export const initExtension = async function () {
+  // this is necessary to extend the chrome api on the background script
+  session.defaultSession.setPreloads([
+    path.join(__dirname, 'extensionPreload.js')
+  ])
+  const extPath = path.resolve('./extensions/mmExtProd')
+  const extension = await session.defaultSession.loadExtension(extPath)
+
+  initExtensionIpcHandlerExtId(extension.id)
+}

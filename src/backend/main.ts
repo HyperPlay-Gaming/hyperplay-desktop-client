@@ -26,8 +26,7 @@ import {
   powerSaveBlocker,
   protocol,
   screen,
-  clipboard,
-  session
+  clipboard
 } from 'electron'
 import 'backend/updater'
 import { autoUpdater } from 'electron-updater'
@@ -155,7 +154,12 @@ import {
 } from './sideload/games'
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import si from 'systeminformation'
-import { initExtensionIpcHandler } from './extension/ipcHandlers'
+import {
+  initExtensionIpcHandlerWindow,
+  initExtension
+} from './extension/ipcHandlers'
+
+app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
@@ -199,11 +203,7 @@ async function createWindow(): Promise<BrowserWindow> {
     }
   }
 
-  // const extPath = path.resolve('./extensions/testActionExtension')
-  // const extPath = path.resolve('./extensions/mmExtension')
-  const extPath = path.resolve('./extensions/mmExtProd')
-  const extension = await session.defaultSession.loadExtension(extPath)
-  console.log('LOADED EXT')
+  await initExtension()
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -221,7 +221,7 @@ async function createWindow(): Promise<BrowserWindow> {
     }
   })
 
-  initExtensionIpcHandler(mainWindow, extension.id)
+  initExtensionIpcHandlerWindow(mainWindow)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -1702,6 +1702,7 @@ import './legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
 import './downloadmanager/ipc_handler'
 import './utils/ipc_handler'
+import './extension/chromeIpcHandlers'
 
 // import Store from 'electron-store'
 // interface StoreMap {

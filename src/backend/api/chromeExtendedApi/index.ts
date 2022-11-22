@@ -16,12 +16,12 @@ import * as Notifications from './notifications'
 // chrome.runtime already supports all features neccessary for metamask
 // chrome.webRequest already supports all features
 export default {
-  action: Actions
-  // alarms: Alarms,
-  // scripting: Scripting,
-  // tabs: Tabs,
-  // browserAction: BrowserAction,
-  // storage: Storage,
-  // windows: Windows,
-  // notifications: Notifications
+  action: Actions,
+  alarms: Alarms,
+  scripting: Scripting,
+  tabs: Tabs,
+  browserAction: BrowserAction,
+  storage: Storage,
+  windows: Windows,
+  notifications: Notifications
 }
