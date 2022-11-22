@@ -29,11 +29,7 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "file://*/*",
-        "http://*/*",
-        "https://*/*"
-      ],
+      "matches": ["file://*/*", "http://*/*", "https://*/*"],
       "js": [
         "disable-console.js",
         "globalthis.js",
@@ -46,12 +42,8 @@
       "all_frames": true
     },
     {
-      "matches": [
-        "*://connect.trezor.io/*/popup.html"
-      ],
-      "js": [
-        "vendor/trezor/content-script.js"
-      ]
+      "matches": ["*://connect.trezor.io/*/popup.html"],
+      "js": ["vendor/trezor/content-script.js"]
     }
   ],
   "default_locale": "en",
@@ -80,18 +72,15 @@
     "webRequest",
     "*://*.eth/",
     "notifications",
-    "webRequestBlocking"
+    "webRequestBlocking",
+    "tabs"
   ],
   "short_name": "__MSG_appName__",
   "content_security_policy": "frame-ancestors 'none'",
   "externally_connectable": {
-    "matches": [
-      "https://metamask.io/*"
-    ],
-    "ids": [
-      "*"
-    ]
+    "matches": ["https://metamask.io/*"],
+    "ids": ["*"]
   },
   "minimum_chrome_version": "66",
-  "version": "10.21.1"
+  "version": "10.23.0"
 }

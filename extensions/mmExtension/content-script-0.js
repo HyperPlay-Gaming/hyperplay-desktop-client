@@ -1,40 +1,39 @@
 LavaPack.loadBundle([
-  ["C:\\a_repos\\0_game7\\hyperplay\\metamask-extension\\app\\vendor\\trezor\\content-script.js", {}, function () {
-    with (this) {
-      return function () {
-        'use strict';
-        // source: C:\a_repos\0_game7\hyperplay\metamask-extension\app\vendor\trezor\content-script.js
-        return function (require, module, exports) {
-          "use strict";
+["C:\\a_repos\\0_game7\\hyperplay\\metamask-extension\\app\\vendor\\trezor\\content-script.js", {}, function(){
+  with (this) {
+    return function() {
+      'use strict';
+      // source: C:\a_repos\0_game7\hyperplay\metamask-extension\app\vendor\trezor\content-script.js
+      return function (require, module, exports) {
+"use strict";
 
-          /*
-          Passing messages from background script to popup
-          */
-          console.error('runtime.connect in trezor-connect')
-          let port = chrome.runtime.connect({
-            name: 'trezor-connect'
-          });
-          port.onMessage.addListener(message => {
-            window.postMessage(message, window.location.origin);
-          });
-          port.onDisconnect.addListener(d => {
-            port = null;
-          });
-          /*
-          Passing messages from popup to background script
-          */
+/*
+Passing messages from background script to popup
+*/
+let port = chrome.runtime.connect({
+  name: 'trezor-connect'
+});
+port.onMessage.addListener(message => {
+  window.postMessage(message, window.location.origin);
+});
+port.onDisconnect.addListener(d => {
+  port = null;
+});
+/*
+Passing messages from popup to background script
+*/
 
-          window.addEventListener('message', event => {
-            if (port && event.source === window && event.data) {
-              port.postMessage({
-                data: event.data
-              });
-            }
-          });
+window.addEventListener('message', event => {
+  if (port && event.source === window && event.data) {
+    port.postMessage({
+      data: event.data
+    });
+  }
+});
 
-        };
       };
-    }
-  }, { package: "$root$", }]], ["C:\\a_repos\\0_game7\\hyperplay\\metamask-extension\\app\\vendor\\trezor\\content-script.js"], {})
+    };
+  }
+}, {package:"$root$",}]],["C:\\a_repos\\0_game7\\hyperplay\\metamask-extension\\app\\vendor\\trezor\\content-script.js"],{})
 
 //# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImFwcC92ZW5kb3IvdHJlem9yL2NvbnRlbnQtc2NyaXB0LmpzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBO0FBQ0E7QUFDQTtBQUVBLElBQUksSUFBSSxHQUFHLE1BQU0sQ0FBQyxPQUFQLENBQWUsT0FBZixDQUF1QjtFQUFFLElBQUksRUFBRTtBQUFSLENBQXZCLENBQVg7QUFDQSxJQUFJLENBQUMsU0FBTCxDQUFlLFdBQWYsQ0FBMkIsT0FBTyxJQUFJO0VBQ2xDLE1BQU0sQ0FBQyxXQUFQLENBQW1CLE9BQW5CLEVBQTRCLE1BQU0sQ0FBQyxRQUFQLENBQWdCLE1BQTVDO0FBQ0gsQ0FGRDtBQUdBLElBQUksQ0FBQyxZQUFMLENBQWtCLFdBQWxCLENBQThCLENBQUMsSUFBSTtFQUMvQixJQUFJLEdBQUcsSUFBUDtBQUNILENBRkQ7QUFJQTtBQUNBO0FBQ0E7O0FBRUEsTUFBTSxDQUFDLGdCQUFQLENBQXdCLFNBQXhCLEVBQW1DLEtBQUssSUFBSTtFQUN4QyxJQUFJLElBQUksSUFBSSxLQUFLLENBQUMsTUFBTixLQUFpQixNQUF6QixJQUFtQyxLQUFLLENBQUMsSUFBN0MsRUFBbUQ7SUFDL0MsSUFBSSxDQUFDLFdBQUwsQ0FBaUI7TUFBRSxJQUFJLEVBQUUsS0FBSyxDQUFDO0lBQWQsQ0FBakI7RUFDSDtBQUNKLENBSkQiLCJmaWxlIjoiY29udGVudC1zY3JpcHQtMC5qcyIsInNvdXJjZXNDb250ZW50IjpbIi8qXHJcblBhc3NpbmcgbWVzc2FnZXMgZnJvbSBiYWNrZ3JvdW5kIHNjcmlwdCB0byBwb3B1cFxyXG4qL1xyXG5cclxubGV0IHBvcnQgPSBjaHJvbWUucnVudGltZS5jb25uZWN0KHsgbmFtZTogJ3RyZXpvci1jb25uZWN0JyB9KTtcclxucG9ydC5vbk1lc3NhZ2UuYWRkTGlzdGVuZXIobWVzc2FnZSA9PiB7XHJcbiAgICB3aW5kb3cucG9zdE1lc3NhZ2UobWVzc2FnZSwgd2luZG93LmxvY2F0aW9uLm9yaWdpbik7XHJcbn0pO1xyXG5wb3J0Lm9uRGlzY29ubmVjdC5hZGRMaXN0ZW5lcihkID0+IHtcclxuICAgIHBvcnQgPSBudWxsO1xyXG59KTtcclxuXHJcbi8qXHJcblBhc3NpbmcgbWVzc2FnZXMgZnJvbSBwb3B1cCB0byBiYWNrZ3JvdW5kIHNjcmlwdFxyXG4qL1xyXG5cclxud2luZG93LmFkZEV2ZW50TGlzdGVuZXIoJ21lc3NhZ2UnLCBldmVudCA9PiB7XHJcbiAgICBpZiAocG9ydCAmJiBldmVudC5zb3VyY2UgPT09IHdpbmRvdyAmJiBldmVudC5kYXRhKSB7XHJcbiAgICAgICAgcG9ydC5wb3N0TWVzc2FnZSh7IGRhdGE6IGV2ZW50LmRhdGEgfSk7XHJcbiAgICB9XHJcbn0pO1xyXG4iXSwicHJlRXhpc3RpbmdDb21tZW50IjoiLy8jIHNvdXJjZU1hcHBpbmdVUkw9ZGF0YTphcHBsaWNhdGlvbi9qc29uO2NoYXJzZXQ9dXRmLTg7YmFzZTY0LGV5SjJaWEp6YVc5dUlqb3pMQ0p6YjNWeVkyVnpJanBiSW1Gd2NDOTJaVzVrYjNJdmRISmxlbTl5TDJOdmJuUmxiblF0YzJOeWFYQjBMbXB6SWwwc0ltNWhiV1Z6SWpwYlhTd2liV0Z3Y0dsdVozTWlPaUk3T3pzN096czdPenRCUVVGQk8wRkJRMEU3UVVGRFFUdEJRVVZCTEVsQlFVa3NTVUZCU1N4SFFVRkhMRTFCUVUwc1EwRkJReXhQUVVGUUxFTkJRV1VzVDBGQlppeERRVUYxUWp0RlFVRkZMRWxCUVVrc1JVRkJSVHRCUVVGU0xFTkJRWFpDTEVOQlFWZzdRVUZEUVN4SlFVRkpMRU5CUVVNc1UwRkJUQ3hEUVVGbExGZEJRV1lzUTBGQk1rSXNUMEZCVHl4SlFVRkpPMFZCUTJ4RExFMUJRVTBzUTBGQlF5eFhRVUZRTEVOQlFXMUNMRTlCUVc1Q0xFVkJRVFJDTEUxQlFVMHNRMEZCUXl4UlFVRlFMRU5CUVdkQ0xFMUJRVFZETzBGQlEwZ3NRMEZHUkR0QlFVZEJMRWxCUVVrc1EwRkJReXhaUVVGTUxFTkJRV3RDTEZkQlFXeENMRU5CUVRoQ0xFTkJRVU1zU1VGQlNUdEZRVU12UWl4SlFVRkpMRWRCUVVjc1NVRkJVRHRCUVVOSUxFTkJSa1E3UVVGSlFUdEJRVU5CTzBGQlEwRTdPMEZCUlVFc1RVRkJUU3hEUVVGRExHZENRVUZRTEVOQlFYZENMRk5CUVhoQ0xFVkJRVzFETEV0QlFVc3NTVUZCU1R0RlFVTjRReXhKUVVGSkxFbEJRVWtzU1VGQlNTeExRVUZMTEVOQlFVTXNUVUZCVGl4TFFVRnBRaXhOUVVGNlFpeEpRVUZ0UXl4TFFVRkxMRU5CUVVNc1NVRkJOME1zUlVGQmJVUTdTVUZETDBNc1NVRkJTU3hEUVVGRExGZEJRVXdzUTBGQmFVSTdUVUZCUlN4SlFVRkpMRVZCUVVVc1MwRkJTeXhEUVVGRE8wbEJRV1FzUTBGQmFrSTdSVUZEU0R0QlFVTktMRU5CU2tRaUxDSm1hV3hsSWpvaVoyVnVaWEpoZEdWa0xtcHpJaXdpYzI5MWNtTmxVbTl2ZENJNklpSXNJbk52ZFhKalpYTkRiMjUwWlc1MElqcGJJaThxWEhKY2JsQmhjM05wYm1jZ2JXVnpjMkZuWlhNZ1puSnZiU0JpWVdOclozSnZkVzVrSUhOamNtbHdkQ0IwYnlCd2IzQjFjRnh5WEc0cUwxeHlYRzVjY2x4dWJHVjBJSEJ2Y25RZ1BTQmphSEp2YldVdWNuVnVkR2x0WlM1amIyNXVaV04wS0hzZ2JtRnRaVG9nSjNSeVpYcHZjaTFqYjI1dVpXTjBKeUI5S1R0Y2NseHVjRzl5ZEM1dmJrMWxjM05oWjJVdVlXUmtUR2x6ZEdWdVpYSW9iV1Z6YzJGblpTQTlQaUI3WEhKY2JpQWdJQ0IzYVc1a2IzY3VjRzl6ZEUxbGMzTmhaMlVvYldWemMyRm5aU3dnZDJsdVpHOTNMbXh2WTJGMGFXOXVMbTl5YVdkcGJpazdYSEpjYm4wcE8xeHlYRzV3YjNKMExtOXVSR2x6WTI5dWJtVmpkQzVoWkdSTWFYTjBaVzVsY2loa0lEMCtJSHRjY2x4dUlDQWdJSEJ2Y25RZ1BTQnVkV3hzTzF4eVhHNTlLVHRjY2x4dVhISmNiaThxWEhKY2JsQmhjM05wYm1jZ2JXVnpjMkZuWlhNZ1puSnZiU0J3YjNCMWNDQjBieUJpWVdOclozSnZkVzVrSUhOamNtbHdkRnh5WEc0cUwxeHlYRzVjY2x4dWQybHVaRzkzTG1Ga1pFVjJaVzUwVEdsemRHVnVaWElvSjIxbGMzTmhaMlVuTENCbGRtVnVkQ0E5UGlCN1hISmNiaUFnSUNCcFppQW9jRzl5ZENBbUppQmxkbVZ1ZEM1emIzVnlZMlVnUFQwOUlIZHBibVJ2ZHlBbUppQmxkbVZ1ZEM1a1lYUmhLU0I3WEhKY2JpQWdJQ0FnSUNBZ2NHOXlkQzV3YjNOMFRXVnpjMkZuWlNoN0lHUmhkR0U2SUdWMlpXNTBMbVJoZEdFZ2ZTazdYSEpjYmlBZ0lDQjlYSEpjYm4wcE8xeHlYRzRpWFgwPSJ9
