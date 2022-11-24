@@ -31,8 +31,12 @@
   position: relative;
   cursor: default;
   place-self: center;
-  border-bottom: 1px solid var(--divider);
-  padding: 1rem 0;
+  border-top: 1px solid var(--divider);
+  padding: var(--space-md) 0;
+}
+
+.downloadManagerListItem:hover {
+  background-color: var(--background-hover);
 }
 
 .downloadManagerTitleList {
