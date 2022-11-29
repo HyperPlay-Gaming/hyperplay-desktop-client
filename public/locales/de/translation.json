@@ -143,7 +143,7 @@
         "yes": "JA"
     },
     "button": {
-        "cancel": "Cancel",
+        "cancel": "Abbrechen",
         "go_to_library": "Zur Bibliothek",
         "login": "Anmelden",
         "sync": "Synchronisieren",
@@ -177,14 +177,14 @@
             "update": "Update"
         },
         "label": {
-            "disk": "Disk",
+            "disk": "Festplatte",
             "speed": "Download"
         },
         "link": "Downloads",
         "queue": {
-            "end-time": "Finished at",
-            "queue-time": "Added at",
-            "start-time": "Started at",
+            "end-time": "Beendet am",
+            "queue-time": "Hinzugefügt am",
+            "start-time": "Gestartet am",
             "type": "Type"
         },
         "title": "Downloads"
@@ -263,6 +263,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Klicke, um das Änderungsprotokoll anzusehen",
             "newReleases": "Update verfügbar!",
             "stable": "Stabil",
             "version": "HyperPlay-Version"
@@ -414,13 +415,13 @@
     "progress": "Progress",
     "queue": {
         "label": {
-            "canceled": "Canceled",
+            "canceled": "Abgebrochen",
             "clear": "Liste leeren",
             "downloading": "Lade herunter",
-            "empty": "Nothing to download",
+            "empty": "Nichts zum Herunterladen",
             "finished": "Abgeschlossen",
             "queued": "In Warteschlange",
-            "remove": "Remove from Downloads"
+            "remove": "Aus Downloads entfernen"
         }
     },
     "Recent": "Zuletzt gespielte Spiele",
@@ -428,10 +429,9 @@
     "setting": {
         "adddesktopshortcuts": "Desktop-Verknüpfungen automatisch hinzufügen",
         "addgamestostartmenu": "Spiele automatisch zum Startmenü hinzufügen",
-        "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Alternative GOGDL Binary zur Verwendung auswählen",
-        "alt-legendary-bin": "Alternative Legendary Binärdatei auswählen",
-        "audiofix": "Audio-Fix (Pulse Audio Latenz)",
+        "addgamestosteam": "Spiele automatisch zu Steam hinzufügen",
+        "alt-gogdl-bin": "Wähle eine alternative GOGDL-Binärdatei zur Verwendung aus",
+        "alt-legendary-bin": "Wähle eine alternative Legendary-Binärdatei",
         "autodxvk": "Automatisches Installieren/Aktualisieren von DXVK im Prefix",
         "autosync": "Spielstände automatisch synchronisieren",
         "autovkd3d": "VKD3D automatisch im Präfix installieren/aktualisieren",
@@ -474,6 +474,7 @@
         "FsrSharpnessStrenght": "FSR Schärfestärke",
         "fsync": "Fsync aktivieren",
         "gamemode": "GameMode benutzen (Feral Game Mode muss installiert sein)",
+        "hideChangelogsOnStartup": "Änderungsprotokolle beim Start nicht anzeigen",
         "language": "App-Sprache auswählen",
         "library_top_option": {
             "disabled": "Deaktiviert",

@@ -71,10 +71,6 @@ export default function SideloadDialog({
     setTitle(value)
   }
 
-  const shouldShowRunExe =
-    platform !== 'win32' &&
-    platformToInstall !== 'Mac' &&
-    platformToInstall !== 'linux'
   const appPlatform = gameInfo.install?.platform || platformToInstall
 
   useEffect(() => {
@@ -262,6 +258,11 @@ export default function SideloadDialog({
   }
 
   const showSideloadExe = appPlatform !== 'Browser'
+
+  const shouldShowRunExe =
+    platform !== 'win32' &&
+    platformToInstall !== 'Mac' &&
+    platformToInstall !== 'linux'
 
   return (
     <>

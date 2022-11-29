@@ -263,6 +263,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Dostępna Aktualizacja!",
             "stable": "Stabilna",
             "version": "Wersja HyperPlay"
@@ -431,7 +432,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Wybierz alternatywny plik binarny GOGDL",
         "alt-legendary-bin": "Wybierz alternatywny plik binarny Legendary",
-        "audiofix": "Łatka audio (Opóźnienie Pulse Audio)",
         "autodxvk": "Automatycznie instaluj/Aktualizuj DXVK w prefiksie",
         "autosync": "Automatyczna synchronizacja zapisów",
         "autovkd3d": "Automatyczne Instaluj/Aktualizuj VKD3D w prefiksie",

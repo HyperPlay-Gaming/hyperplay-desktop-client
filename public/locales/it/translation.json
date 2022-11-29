@@ -263,9 +263,10 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
-            "newReleases": "Update Available!",
-            "stable": "Stable",
-            "version": "HyperPlay Version"
+            "click-to-see-changelog": "Click to see changelog",
+            "newReleases": "Aggiornamento disponibile!",
+            "stable": "Stabile",
+            "version": "Heroic Version"
         },
         "save-sync": {
             "searching": "Trying to detect the correct save folder"
@@ -431,7 +432,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Scegli un binario GOGDL alternativo da utilizzare",
         "alt-legendary-bin": "Scegli un binario Legendary alternativo",
-        "audiofix": "Audio Fix (Latenza Pulse Audio)",
         "autodxvk": "Installa/Aggiorna automaticamente DXVK sul prefix",
         "autosync": "Sincronizza automaticamente i salvataggi",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",

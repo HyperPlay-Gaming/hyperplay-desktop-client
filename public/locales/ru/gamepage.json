@@ -120,6 +120,9 @@
         "wineversion": "Версия Wine"
     },
     "label": {
+        "game": {
+            "third-party-game": "Сторонняя игра НЕ поддерживается"
+        },
         "playing": {
             "start": "Начать игру",
             "stop": "Игра запущена (Остановить)"
@@ -167,14 +170,18 @@
     },
     "status": {
         "clickToUpdate": "Нажмите, чтобы обновить",
+        "gameNotAvailable": "Игра недоступна",
         "hasUpdates": "Доступна новая версия!",
         "installed": "Установлено",
         "installing": "Установка",
         "moving": "Перемещение установленных файлов. Пожалуйста, подождите",
         "notinstalled": "Игра не установлена",
+        "notSupported": "Не поддерживается",
+        "notSupportedGame": "Не поддерживается",
         "processing": "Обработка файлов, подождите",
         "queued": "Queued",
         "reparing": "Восстановление игры. Пожалуйста, подождите",
+        "this-game-uses-third-party": "Эта игра использует сторонний лаунчер и пока не поддерживается",
         "totalDownloaded": "Всего загружено",
         "uninstalling": "Uninstalling",
         "updating": "Обновление игры"
