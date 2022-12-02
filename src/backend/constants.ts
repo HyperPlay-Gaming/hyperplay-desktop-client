@@ -6,7 +6,7 @@ import { parse } from '@node-steam/vdf'
 
 import { GameConfigVersion, GlobalConfigVersion } from 'common/types'
 import { logDebug, LogPrefix } from './logger/logger'
-import { createNewLogFileAndClearOldOnces } from './logger/logfile'
+import { createNewLogFileAndClearOldOnes } from './logger/logfile'
 import { env } from 'process'
 import { app } from 'electron'
 import { existsSync, readFileSync } from 'graceful-fs'
@@ -55,8 +55,8 @@ const runtimePath = join(toolsPath, 'runtimes')
 const userInfo = join(legendaryConfigPath, 'user.json')
 const imagesCachePath = join(appFolder, 'images-cache')
 
-const { currentLogFile: currentLogFile, lastLogFile: lastLogFile } =
-  createNewLogFileAndClearOldOnces()
+const { currentLogFile, lastLogFile, legendaryLogFile, gogdlLogFile } =
+  createNewLogFileAndClearOldOnes()
 
 const publicDir = resolve(__dirname, '..', app.isPackaged ? '' : '../public')
 const icon = fixAsarPath(join(publicDir, 'app_icon.png'))
@@ -177,6 +177,8 @@ export {
   currentGlobalConfigVersion,
   currentLogFile,
   lastLogFile,
+  legendaryLogFile,
+  gogdlLogFile,
   discordLink,
   execOptions,
   fixAsarPath,
