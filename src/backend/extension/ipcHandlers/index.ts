@@ -25,39 +25,41 @@ const getPopupUrl = function (extensionId: string) {
 ipcMain.handle('showPopup', () => {
   const popupUrl = getPopupUrl(extensionId)
 
-  const mmBrowserView = new BrowserView({
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
-    }
-  })
-  window.addBrowserView(mmBrowserView)
-  mmBrowserView.webContents.loadURL(popupUrl)
-  mmBrowserView.setBounds({ x: 300, y: 10, width: 1400, height: 800 })
-  mmBrowserView.setAutoResize({ width: true, height: true })
-
-  console.log(`opened popup: ${popupUrl}`)
+  const showView = true
+  if (showView) {
+    const mmBrowserView = new BrowserView({
+      webPreferences: {
+        contextIsolation: false,
+        nodeIntegration: true
+      }
+    })
+    window.addBrowserView(mmBrowserView)
+    mmBrowserView.webContents.loadURL(popupUrl)
+    mmBrowserView.setBounds({ x: 150, y: 10, width: 400, height: 800 })
+    mmBrowserView.setAutoResize({ width: true, height: true })
+  } else {
+    const mmBrowserWind = new BrowserWindow({
+      height: 690,
+      width: 1200,
+      x: 0,
+      y: 0,
+      minHeight: 345,
+      minWidth: 600,
+      show: false,
+      webPreferences: {
+        webviewTag: true,
+        contextIsolation: false,
+        nodeIntegration: true
+      }
+    })
+    mmBrowserWind.loadURL(popupUrl)
+    mmBrowserWind.show()
+  }
 })
 
 let testWindow
 
 ipcMain.handle('showMetaMaskExtensionHomePage', async () => {
-  // const mmBrowserView = new BrowserView({
-  //   webPreferences: {
-  //     preload: path.join(__dirname, 'preload.js')
-  //   }
-  // })
-  // window.addBrowserView(mmBrowserView)
-  // // mmBrowserView.webContents.loadURL(
-  // //   `chrome-extension://${extensionId}/home.html`
-  // // )
-  // mmBrowserView.webContents.loadURL(
-  //   `chrome-extension://${extensionId}/background.html`
-  // )
-  // mmBrowserView.setBounds({ x: 300, y: 10, width: 1400, height: 800 })
-  // mmBrowserView.setAutoResize({ width: true, height: true })
-
-  // return 'test'
-
   testWindow = new BrowserWindow({
     height: 690,
     width: 1200,
@@ -69,11 +71,8 @@ ipcMain.handle('showMetaMaskExtensionHomePage', async () => {
 
     webPreferences: {
       webviewTag: true,
-      //the preload script needs access to window.chrome to extend the api so contextIsolation needs to be false
       contextIsolation: false,
-      nodeIntegration: true,
-      // sandbox: false,
-      preload: path.join(__dirname, 'extensionPreload.js')
+      nodeIntegration: true
     }
   })
 

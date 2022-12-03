@@ -18,7 +18,8 @@ export interface UrisReturn {
 
 export enum PROVIDERS {
   METAMASK_MOBILE,
-  WALLET_CONNECT
+  WALLET_CONNECT,
+  METAMASK_EXTENSION
 }
 
 export type AccountsChangedType = (accounts: string[]) => void
@@ -34,3 +35,5 @@ export async function wait(ms: number) {
     }, ms)
   })
 }
+
+export type MetamaskExtensionRequest = (requestId: number, args: any) => void

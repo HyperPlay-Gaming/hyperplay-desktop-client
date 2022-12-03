@@ -401,7 +401,7 @@ export default function SidebarLinks() {
       </button>
       <button
         className="Sidebar__item"
-        onClick={async () => window.api.showMMHomePage()}
+        onClick={async () => window.api.showPopup()}
       >
         <span>MM Extension</span>
       </button>

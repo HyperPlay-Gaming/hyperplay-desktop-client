@@ -125,6 +125,7 @@ import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
 import { PROXY_TOPICS } from './proxy/types'
 import * as ProviderHelper from './proxy/providerHelper'
+import * as ExtensionHelper from './proxy/extensionProvider'
 import * as ProxyServer from './proxy/proxy'
 import {
   AccountsChangedType,
@@ -221,6 +222,7 @@ async function createWindow(): Promise<BrowserWindow> {
     }
   })
 
+  ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {

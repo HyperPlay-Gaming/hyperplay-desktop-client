@@ -27,6 +27,17 @@ export const onRemoved = {
   }
 }
 
-export const getAll = function () {
-  console.log('windows getAll called')
+export const getAll = function (
+  queryOptions: chrome.windows.QueryOptions,
+  callback: (windows: chrome.windows.Window[]) => void
+) {
+  const window: chrome.windows.Window = {
+    focused: true,
+    alwaysOnTop: true,
+    incognito: false
+  }
+  if (callback) {
+    const windowsReturn = [window]
+    callback(windowsReturn)
+  }
 }

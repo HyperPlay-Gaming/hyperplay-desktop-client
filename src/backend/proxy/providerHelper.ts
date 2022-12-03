@@ -24,10 +24,14 @@ import {
   WalletDisconnectedType,
   ChainChangedType
 } from '../../common/types/proxy-types'
+import { extensionProvider, ExtensionProvider } from './extensionProvider'
 
 let sdk: MetaMaskSDK
 
-export let provider: WalletConnectWeb3Provider | mmSdkProvider
+export let provider:
+  | WalletConnectWeb3Provider
+  | mmSdkProvider
+  | ExtensionProvider
 export let web3: Web3
 
 // initializes provider and returns uris
@@ -44,6 +48,15 @@ export async function getConnectionUris(
     case PROVIDERS.WALLET_CONNECT: {
       uris = await getWalletConnectConnectionUris()
       QRCodeModal.open(uris['metamask'].qrCodeLink, null)
+      break
+    }
+    case PROVIDERS.METAMASK_EXTENSION: {
+      //we set up the wrapped mm browser extension here
+      provider = extensionProvider
+      connectMmExtension(extensionProvider)
+      // uri concept is not applicable to mm extension
+      web3 = new Web3(provider)
+      return {}
       break
     }
     default:
@@ -83,6 +96,32 @@ export function passEventCallbacks(
   connectionRequestRejected = _connectionRequestRejected
 }
 
+function connectMmExtension(extProvider: ExtensionProvider) {
+  handleMetamaskExtensionProviderEvents(extProvider)
+}
+
+function handleMetamaskExtensionProviderEvents(extProvider: ExtensionProvider) {
+  extProvider.on('accountsChanged', (accounts: string[]) => {
+    console.log('accounts changed in mm extension to ', accounts)
+    accountsChanged(accounts)
+  })
+
+  extProvider.on('disconnect', (error: ProviderRpcError) => {
+    console.log('disconnected in mm extension: ', error.code, error.message)
+    walletDisconnected(error.code, error.message)
+  })
+
+  extProvider.on('connect', (connectInfo: ConnectInfo) => {
+    console.log('connected mm extension id = ', connectInfo.chainId)
+  })
+
+  extProvider.on('chainChanged', (chainId: number) => {
+    console.log('chain changed in mm extension to ', chainId)
+    chainChanged(chainId)
+  })
+  console.log('bound on events to extension mock provider')
+}
+
 /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 function handleMetamaskSdkProviderEvents(mmSdkProvider: any) {
   mmSdkProvider.on('accountsChanged', (accounts: string[]) => {
@@ -112,7 +151,7 @@ async function getMetamaskSdkConnectionUris(): Promise<UrisReturn> {
     sdk = new MetaMaskSDK({
       dappMetadata: {
         name: 'HyperPlay',
-        url: 'https://hyperplay.gg'
+        url: 'https://www.hyperplay.xyz/'
       },
       shouldShimWeb3: false // disable window.web3
     })
@@ -197,10 +236,8 @@ async function getWalletConnectConnectionUris(): Promise<UrisReturn> {
       qrcode: false,
       clientMeta: {
         description: 'Approve game transactions with HyperPlay',
-        url: 'https://game7.io/',
-        icons: [
-          'https://pbs.twimg.com/profile_images/1532001777943465984/m6jPRFdB_400x400.jpg'
-        ],
+        url: 'https://www.hyperplay.xyz/',
+        icons: ['https://www.hyperplay.xyz/Hyperplay32x32Round.png'],
         name: 'HyperPlay'
       }
     }) as WalletConnectWeb3Provider

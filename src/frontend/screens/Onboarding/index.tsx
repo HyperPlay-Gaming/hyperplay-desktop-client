@@ -53,6 +53,11 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     })
   }
 
+  async function handleMmExtensionProviderClicked() {
+    await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
+    props.disableOnboarding()
+  }
+
   const handleConnected: WrapRendererCallback<WalletConnectedType> = (
     e,
     accounts
@@ -107,6 +112,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
                 content: ONBOARDING_CONTENT.DOWNLOAD
               })
             }
+            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
           />
         )
       case ONBOARDING_CONTENT.SCAN:
@@ -161,6 +167,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
                 content: ONBOARDING_CONTENT.DOWNLOAD
               })
             }
+            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
           />
         )
     }

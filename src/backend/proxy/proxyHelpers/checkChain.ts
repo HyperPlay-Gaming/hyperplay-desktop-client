@@ -51,6 +51,7 @@ export async function checkChainId(chain: Chain) {
   }
   // need to check because only MetaMask supports `wallet_switchEthereumChain`
   const currentChainId: number = await web3.eth.getChainId()
+  console.log('current chain id = ', currentChainId)
 
   if (chain.chainId !== currentChainId.toString()) {
     await switchOrAddEthereumChain(chain)
