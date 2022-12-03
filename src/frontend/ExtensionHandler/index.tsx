@@ -44,6 +44,8 @@ const ExtensionHandler = function () {
     } else {
       console.log('MetaMask is not installed!')
     }
+    /* eslint-disable @typescript-eslint/no-empty-function*/
+    return () => {}
   }, [])
 
   return <div></div>
