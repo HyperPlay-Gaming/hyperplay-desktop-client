@@ -123,17 +123,17 @@ import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
-import { PROXY_TOPICS } from './proxy/types'
-import * as ProviderHelper from './proxy/providerHelper'
+import { PROXY_TOPICS } from './hyperplay-proxy-server/types'
+import * as ProviderHelper from './hyperplay-proxy-server/providerHelper'
 import * as ExtensionHelper from './extension/extensionProvider'
-import * as ProxyServer from './proxy/proxy'
+import * as ProxyServer from './hyperplay-proxy-server/proxy'
 import {
   AccountsChangedType,
   ChainChangedType,
   ConnectionRequestRejectedType,
   WalletConnectedType,
   WalletDisconnectedType
-} from './proxy/commonProxyTypes'
+} from './hyperplay-proxy-server/commonProxyTypes'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {

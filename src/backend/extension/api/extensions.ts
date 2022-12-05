@@ -1,5 +1,5 @@
 import { WrapRendererCallback } from 'common/types'
-import { MetamaskExtensionRequest } from 'backend/proxy/commonProxyTypes'
+import { MetamaskExtensionRequest } from 'backend/hyperplay-proxy-server/commonProxyTypes'
 // these functions are exposed to the BrowserWindow through window.api
 
 import { ipcRenderer } from 'electron'

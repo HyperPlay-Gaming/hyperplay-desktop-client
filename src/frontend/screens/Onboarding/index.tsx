@@ -4,7 +4,7 @@ import {
   IMobileRegistryEntryWithQrLink,
   WalletConnectedType,
   ConnectionRequestRejectedType
-} from 'backend/proxy/commonProxyTypes'
+} from 'backend/hyperplay-proxy-server/commonProxyTypes'
 import React, { Reducer, useEffect, useReducer } from 'react'
 import './index.css'
 import Scan from './scan'

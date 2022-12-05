@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import WalletOption from '../components/walletOption'
-import { PROVIDERS } from 'backend/proxy/commonProxyTypes'
+import { PROVIDERS } from 'backend/hyperplay-proxy-server/commonProxyTypes'
 import './index.css'
 import { OnboardingModalConfig } from '../types'
 import { MMTransparent, PlusIcon, WCBlue } from 'frontend/assets/hyperplay'
