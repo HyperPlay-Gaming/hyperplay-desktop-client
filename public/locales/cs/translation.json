@@ -521,7 +521,9 @@
             "title": ""
         },
         "savefolder": {
-            "placeholder": ""
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Vyberte přesnou složku s uloženými soubory",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Select Theme",
         "showfps": "",
@@ -623,10 +625,10 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "error": "Could not fetch Wine/Proton versions this time.",
-            "link": "Wine Manager",
-            "title": "Wine Manager (Beta)",
-            "unzipping": "Unzipping"
+            "link": "Správce Wine",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
+            "title": "Správce Wine",
+            "unzipping": "Rozbalování"
         },
         "release": "Release Date",
         "size": "Size"

@@ -436,12 +436,30 @@
             "updating": "جارٍ التحديث ..."
         },
         "prefered_language": "اللغة المفضلة (رمز اللغة)",
-        "crossover-version": "نسخة كروس",
-        "default-steam-path": "مسار Steam الافتراضي",
-        "preferSystemLibs": "تفضل مكتبات النظام",
-        "addgamestosteam": "أضف ألعابًا إلى Steam تلقائيًا",
-        "custom_themes_path": "مسار السمات المخصصة",
-        "hideChangelogsOnStartup": "لا تظهر سجلات التغيير عند بدء التشغيل"
+        "preferSystemLibs": "فضّل مكتبات النظام",
+        "primerun": {
+            "confirmation": {
+                "message": "اُكتشفت بطاقة رسوميات واحدة فقط في هذا النظام. ترجى ملاحظة أن هذا الخيار مخصص للأنظمة المتعددة وحدات معالجة الرسوميات بدون رأس (مثل أجهزة الحاسب المحمول). في أنظمة وحدة معالجة الرسوميات الفردية، يتم استخدام وحدة معالجة الرسوميات تلقائيًا ويمكن أن يؤدي تمكين هذا الخيار إلى حدوث مشكلات. هل تريد حقًا تمكين هذا الخيار؟",
+                "title": "اُكتشفت وحدة معالجة رسوميات واحدة فقط"
+            },
+            "description": "استخدم بطاقة الرسوميات المخصصة"
+        },
+        "runexe": {
+            "message": "اسحب الملفات وأفلتها هنا",
+            "title": "قم بتشغيل الملف التنفيذي في السابقة"
+        },
+        "savefolder": {
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "حدد مجلد ملفات تخزين الألعاب بالضبط",
+            "warning": "Please check twice if the path is correct"
+        },
+        "select_theme": "اختر سِمة",
+        "showfps": "عرض معدل الإطارات (دايركت.إكس 9 و 10 و 11)",
+        "start-in-tray": "ابدأ مصغرًا",
+        "steamruntime": "استخدم بيئة تشغيل ستيم",
+        "winecrossoverbottle": "قارورة كروس.أوفر",
+        "wineprefix": "مجلد سابقة واين",
+        "wineversion": "نسخة واين"
     },
     "Recent": "لعبت مؤخرا",
     "Return": "عودة",
@@ -570,26 +588,13 @@
             "openInBrowser": "فتح في المتصفح"
         }
     },
-    "header": {
-        "ignore_hidden": "تجاهل المخفي",
-        "platform": "منصة",
-        "show_hidden": "إظهار المخفي",
-        "show_all_games": "عرض كل الألعاب",
-        "show_favourites_only": "إظهار المفضلة فقط",
-        "store": "تصفية المتجر"
-    },
-    "favourites": "المفضلة",
-    "accessibility": {
-        "content_font_family": "مجموعة خطوط المحتوى (الافتراضي: \"Cabin\")",
-        "zoom": "تكبير",
-        "actions_font_family": "مجموعة خطوط الإجراءات (الأفتراضي: \"Rubik\")",
-        "title": "إمكانية الوصول",
-        "fonts": "الخطوط",
-        "all_tiles_in_color": "اظهر جميع عناوين الالعاب ملونة"
-    },
-    "generic": {
-        "error": {
-            "component": "لم يتم العثور على ألعاب - حاول تسجيل الخروج و الدخول مرة أخرى أو أحد الخيارات أدناه"
+    "wine": {
+        "actions": "الإجراء",
+        "manager": {
+            "link": "مدير واين",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
+            "title": "مدير واين",
+            "unzipping": "جارٍ فك الضغط"
         },
         "library": {
             "refresh": "إنعاش المكتبة"

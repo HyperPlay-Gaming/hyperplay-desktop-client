@@ -8,7 +8,8 @@ import {
   GamepadActionArgs
 } from 'common/types'
 
-export const clearCache = () => ipcRenderer.send('clearCache')
+export const clearCache = (showDialog?: boolean) =>
+  ipcRenderer.send('clearCache', showDialog)
 export const resetApp = () => ipcRenderer.send('resetApp')
 
 export const openWeblate = () => ipcRenderer.send('openWeblate')
