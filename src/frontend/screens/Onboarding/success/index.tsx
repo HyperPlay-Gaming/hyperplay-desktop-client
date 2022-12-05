@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { OnboardingModalConfig } from '../types'
-import { wait } from '../../../../common/types/proxy-types'
+import { wait } from '../../../../backend/proxy/commonProxyTypes'
 import './index.css'
 import { SuccessIcon } from 'frontend/assets/hyperplay'
 

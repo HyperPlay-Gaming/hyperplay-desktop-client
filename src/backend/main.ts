@@ -125,7 +125,7 @@ import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
 import { PROXY_TOPICS } from './proxy/types'
 import * as ProviderHelper from './proxy/providerHelper'
-import * as ExtensionHelper from './proxy/extensionProvider'
+import * as ExtensionHelper from './extension/extensionProvider'
 import * as ProxyServer from './proxy/proxy'
 import {
   AccountsChangedType,
@@ -133,7 +133,7 @@ import {
   ConnectionRequestRejectedType,
   WalletConnectedType,
   WalletDisconnectedType
-} from '../common/types/proxy-types'
+} from './proxy/commonProxyTypes'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {

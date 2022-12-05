@@ -1,8 +1,5 @@
-import { PROVIDERS, wait } from '../../../common/types/proxy-types'
-import {
-  getConnectionUris,
-  passEventCallbacks
-} from '../../proxy/providerHelper'
+import { PROVIDERS, wait } from '../commonProxyTypes'
+import { getConnectionUris, passEventCallbacks } from '../providerHelper'
 import {
   accountsChanged,
   walletConnected,

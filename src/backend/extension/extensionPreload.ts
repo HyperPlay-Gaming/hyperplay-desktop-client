@@ -1,4 +1,4 @@
-import chromeExtendedApi from '../api/chromeExtendedApi'
+import chromeExtendedApi from './chromeExtendedApi'
 
 Object.keys(chromeExtendedApi).forEach((key) => {
   const baseApi = window.chrome[key]

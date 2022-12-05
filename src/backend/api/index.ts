@@ -4,9 +4,9 @@ import * as Library from './library'
 import * as Menu from './menu'
 import * as Settings from './settings'
 import * as Wine from './wine'
-import * as Proxy from './proxy'
+import * as Proxy from '../proxy/api/proxy'
 import * as DownloadManager from './downloadmanager'
-import * as Extensions from './extensions'
+import * as Extensions from '../extension/api/extensions'
 
 export default {
   ...Misc,

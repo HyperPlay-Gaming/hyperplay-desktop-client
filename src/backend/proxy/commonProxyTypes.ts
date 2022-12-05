@@ -1,5 +1,6 @@
+// proxy types used by backend, preload scripts, and frontend
 import WCTypes from '@walletconnect/types'
-type ApiType = typeof import('../../backend/api').default
+type ApiType = typeof import('../api').default
 
 declare global {
   interface Window {

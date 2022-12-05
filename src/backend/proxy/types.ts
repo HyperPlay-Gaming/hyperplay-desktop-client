@@ -1,3 +1,4 @@
+// proxy types used by the main process proxy server
 import Web3Utils from 'web3-utils'
 import WalletConnectProvider from '@walletconnect/web3-provider'
 import { JsonRpcPayload, JsonRpcResponse } from 'web3-core-helpers'

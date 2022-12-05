@@ -1,9 +1,6 @@
-import { PROVIDERS, wait } from '../../../common/types/proxy-types'
-import { app, server, serverStarted } from '../../proxy/proxy'
-import {
-  getConnectionUris,
-  passEventCallbacks
-} from '../../proxy/providerHelper'
+import { PROVIDERS, wait } from '../commonProxyTypes'
+import { app, server, serverStarted } from '../proxy'
+import { getConnectionUris, passEventCallbacks } from '../providerHelper'
 import request from 'supertest'
 import {
   accountsChanged,

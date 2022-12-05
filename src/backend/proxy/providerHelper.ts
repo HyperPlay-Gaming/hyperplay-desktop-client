@@ -23,8 +23,11 @@ import {
   WalletConnectedType,
   WalletDisconnectedType,
   ChainChangedType
-} from '../../common/types/proxy-types'
-import { extensionProvider, ExtensionProvider } from './extensionProvider'
+} from './commonProxyTypes'
+import {
+  extensionProvider,
+  ExtensionProvider
+} from '../extension/extensionProvider'
 
 let sdk: MetaMaskSDK
 
