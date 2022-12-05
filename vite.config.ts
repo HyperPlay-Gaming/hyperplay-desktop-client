@@ -45,7 +45,8 @@ export default defineConfig({
         input: {
           preload: path.resolve(__dirname + '/src/backend/preload.ts'),
           extensionPreload: path.resolve(
-            __dirname + '/src/backend/extension/extensionPreload.ts'
+            __dirname +
+              '/src/backend/hyperplay-extension-helper/extensionPreload.ts'
           )
         }
       }

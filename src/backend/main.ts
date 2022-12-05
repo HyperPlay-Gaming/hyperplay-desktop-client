@@ -125,7 +125,7 @@ import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
 import { PROXY_TOPICS } from './hyperplay-proxy-server/types'
 import * as ProviderHelper from './hyperplay-proxy-server/providerHelper'
-import * as ExtensionHelper from './extension/extensionProvider'
+import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import * as ProxyServer from './hyperplay-proxy-server/proxy'
 import {
   AccountsChangedType,
@@ -158,7 +158,7 @@ import si from 'systeminformation'
 import {
   initExtensionIpcHandlerWindow,
   initExtension
-} from './extension/ipcHandlers'
+} from './hyperplay-extension-helper/ipcHandlers'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -1704,7 +1704,7 @@ import './legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
 import './downloadmanager/ipc_handler'
 import './utils/ipc_handler'
-import './extension/chromeIpcHandlers'
+import './hyperplay-extension-helper/chromeIpcHandlers'
 
 // import Store from 'electron-store'
 // interface StoreMap {
