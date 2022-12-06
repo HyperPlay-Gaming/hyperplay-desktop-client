@@ -413,7 +413,8 @@
         "mac": "macOS",
         "win": "Windows"
     },
-    "progress": "Progress",
+    "please-wait": "Please wait...",
+    "progress": "Progreso",
     "queue": {
         "label": {
             "canceled": "Canceled",

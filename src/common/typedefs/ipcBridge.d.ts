@@ -72,7 +72,6 @@ interface SyncIPCFunctions {
   resetApp: () => void
   createNewWindow: (url: string) => void
   logoutGOG: () => void
-  toggleDXVK: (args: ToolArgs) => void
   toggleVKD3D: (args: ToolArgs) => void
   logError: (message: unknown) => void
   logInfo: (message: unknown) => void
@@ -226,6 +225,7 @@ interface AsyncIPCFunctions {
     appName: string
     runner: Runner
   }) => Promise<boolean>
+  toggleDXVK: (args: ToolArgs) => Promise<boolean>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

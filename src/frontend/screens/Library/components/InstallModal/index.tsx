@@ -58,6 +58,7 @@ export default React.memo(function InstallModal({
     useState<InstallPlatform>('Windows')
 
   const isMac = platform === 'darwin'
+  const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
   const isSideload = runner === 'sideload'
 
@@ -106,7 +107,7 @@ export default React.memo(function InstallModal({
   const [platformToInstall, setPlatformToInstall] =
     useState<InstallPlatform>(defaultPlatform)
 
-  const hasWine = platformToInstall === 'Windows' && isLinux
+  const hasWine = platformToInstall === 'Windows' && !isWin
 
   useEffect(() => {
     if (hasWine) {

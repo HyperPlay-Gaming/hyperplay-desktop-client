@@ -273,15 +273,17 @@
         },
         "version": "نسخة Wine"
     },
-    "infobox": {
-        "requirements": "متطلبات النظام",
-        "help": "مساعدة",
-        "wine-path": "مسار النبيذ",
-        "wine-prefix": {
-            "title": "بادئة النبيذ"
-        },
-        "wine-repfix": {
-            "message": "يستخدم Wine ما يسمى WINEPREFIX لتغليف تطبيقات Windows. تحتوي هذه البادئة على ملفات تكوين Wine ونسخة من التسلسل الهرمي للملف C: (القرص الرئيسي في نظام تشغيل Windows). في هذا الاستنساخ لمحرك الأقراص C: يتم تخزين ملفاتك المحفوظة والتبعيات المثبتة عبر winetricks."
+    "please-wait": "Please wait...",
+    "progress": "التقدم",
+    "queue": {
+        "label": {
+            "canceled": "أُلغيت",
+            "clear": "اُمح القائمة",
+            "downloading": "قيد التنزيل",
+            "empty": "لا شيء للتنزيل",
+            "finished": "مكتمل",
+            "queued": "في قائمة الانتظار",
+            "remove": "أزل من التنزيلات"
         }
     },
     "message": {
