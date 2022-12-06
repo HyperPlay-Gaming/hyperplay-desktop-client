@@ -183,6 +183,7 @@
     "testProxy": "jest proxy.test.ts",
     "test-watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand --silent",
+    "manualTestProxyJest": "jest mmExtIntegration.test.ts",
     "release:linux": "vite build && electron-builder -p always --linux deb AppImage rpm pacman tar.xz",
     "release:mac": "vite build && electron-builder -p always --mac",
     "release:win": "vite build && electron-builder -p always --win nsis portable",

@@ -2,8 +2,14 @@ import React, { Reducer, useEffect, useReducer } from 'react'
 
 const ExtensionHandler = function () {
   async function handleRequest(_event: any, id: number, args: any) {
-    const value = await window.ethereum.request(args)
-    window.api.returnExtensionRequest(id, value)
+    try {
+      console.log('requesting from mm browser ext = ', JSON.stringify(args))
+      const value = await window.ethereum.request(args)
+      window.api.returnExtensionRequest(id, value)
+    } catch (err: any) {
+      console.log(`error during request: ${err}`)
+      window.api.errorExtensionRequest(id, err)
+    }
   }
 
   useEffect(() => {

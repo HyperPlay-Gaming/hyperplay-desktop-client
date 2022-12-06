@@ -159,6 +159,7 @@ import {
   initExtensionIpcHandlerWindow,
   initExtension
 } from './hyperplay-extension-helper/ipcHandlers'
+import { initChromeIpcHandlerWindow } from './hyperplay-extension-helper/chromeIpcHandlers'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -224,6 +225,7 @@ async function createWindow(): Promise<BrowserWindow> {
 
   ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
+  initChromeIpcHandlerWindow(mainWindow)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -1704,7 +1706,6 @@ import './legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
 import './downloadmanager/ipc_handler'
 import './utils/ipc_handler'
-import './hyperplay-extension-helper/chromeIpcHandlers'
 
 // import Store from 'electron-store'
 // interface StoreMap {
