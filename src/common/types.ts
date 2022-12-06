@@ -92,6 +92,7 @@ export interface ExtraInfo {
 }
 
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
+
 export interface GameInfo {
   runner: Runner
   store_url: string
@@ -119,6 +120,7 @@ export interface GameInfo {
   browserUrl?: string
   web3?: Web3Features
 }
+
 export interface GameSettings {
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
