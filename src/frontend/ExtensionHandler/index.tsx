@@ -22,14 +22,6 @@ const ExtensionHandler = function () {
         window.api.extensionOnEvent('accountsChanged', accounts)
       })
 
-      window.ethereum
-        .request({ method: 'eth_requestAccounts' })
-        .then((accounts: any) => {
-          console.log('received response eth request accounts')
-          const account = accounts[0]
-          console.log('account selected is ', account)
-        })
-
       window.ethereum.on('disconnect', (error: any) => {
         window.api.extensionOnEvent('disconnect', error)
       })

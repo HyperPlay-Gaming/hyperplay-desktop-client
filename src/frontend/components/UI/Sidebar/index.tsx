@@ -65,13 +65,7 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
         className="Sidebar__item"
         onClick={async () => window.api.showPopup()}
       >
-        <span>Open MetaMask</span>
-      </button>
-      <button
-        className="Sidebar__item"
-        onClick={async () => window.api.showNotifications()}
-      >
-        <span>Show MM Notifications {badgeText}</span>
+        <span>Open MetaMask {badgeText}</span>
       </button>
 
       <Wallet onClick={props.openOnboarding} />
