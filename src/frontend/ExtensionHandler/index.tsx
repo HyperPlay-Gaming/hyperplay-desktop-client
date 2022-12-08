@@ -1,4 +1,5 @@
-import React, { Reducer, useEffect, useReducer } from 'react'
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+import React, { useEffect } from 'react'
 
 const ExtensionHandler = function () {
   async function handleRequest(_event: any, id: number, args: any) {

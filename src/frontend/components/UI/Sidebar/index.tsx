@@ -24,6 +24,7 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
   const [currentDMElement, setCurrentDMElement] = useState<DMQueueElement>()
   const [badgeText, setBadgeText] = useState('0')
 
+  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   function setBadgeString(err: any, text: string) {
     setBadgeText(text)
   }
