@@ -28,7 +28,8 @@ import {
   configStore,
   gamesConfigPath,
   isLinux,
-  isFlatpak
+  isFlatpak,
+  isCLINoGui
 } from '../constants'
 import { logError, logInfo, LogPrefix } from '../logger/logger'
 import {
@@ -773,6 +774,7 @@ class LegendaryGame extends Game {
       ...offlineFlag,
       ...wineFlag,
       ...shlex.split(launchArguments ?? ''),
+      isCLINoGui ? '--skip-version-check' : '',
       ...shlex.split(gameSettings.launcherArgs ?? '')
     ]
     const wrappers = setupWrappers(
