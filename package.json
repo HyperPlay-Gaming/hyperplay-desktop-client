@@ -129,7 +129,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@metamask/sdk": "^0.0.1-beta.5",
+    "@metamask/sdk": "^0.1.0",
     "@mui/icons-material": "^5.6.2",
     "@mui/material": "^5.6.2",
     "@node-steam/vdf": "^2.2.0",

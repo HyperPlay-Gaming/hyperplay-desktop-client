@@ -159,7 +159,6 @@ import {
   initExtensionIpcHandlerWindow,
   initExtension
 } from './hyperplay-extension-helper/ipcHandlers'
-import { initChromeIpcHandlerWindow } from './hyperplay-extension-helper/chromeIpcHandlers'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -225,7 +224,6 @@ async function createWindow(): Promise<BrowserWindow> {
 
   ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
-  initChromeIpcHandlerWindow(mainWindow)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
