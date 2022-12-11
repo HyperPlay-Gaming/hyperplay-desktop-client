@@ -615,8 +615,9 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logout": "Log uit",
-        "logout_confirmation": "weet u zeker dat u wil uitloggen?",
+        "logging_out": "Logging out",
+        "logout": "Uitloggen",
+        "logout_confirmation": "Weet u zeker dat u wilt uitloggen?",
         "manageaccounts": "Manage Accounts",
         "quit": "Sluiten"
     },

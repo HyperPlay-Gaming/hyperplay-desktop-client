@@ -613,9 +613,11 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logout": "Logout",
-        "manageaccounts": "Manage Accounts",
-        "quit": "Quit"
+        "logging_out": "Logging out",
+        "logout": "Odhlásit se",
+        "logout_confirmation": "Opravdu se chcete odhlásit?",
+        "manageaccounts": "Spravovat účty",
+        "quit": "Ukončit"
     },
     "webview": {
         "controls": {
