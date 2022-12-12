@@ -66,7 +66,6 @@
                 "title": "发生了未捕获的异常！"
             },
             "update": {
-                "message": "更新有问题，请检查日志或稍后再试！",
                 "title": "更新错误"
             },
             "wine-not-found": {
@@ -300,7 +299,9 @@
         "website": "正在加载网站"
     },
     "login": {
-        "externalLogin": "外部登录",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {

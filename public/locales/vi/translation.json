@@ -66,7 +66,6 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "message": "Đã xảy ra lỗi với bản cập nhật, vui lòng kiểm tra lại log hoặc thử lại sau!",
                 "title": "Update Error"
             },
             "wine-not-found": {
@@ -300,7 +299,9 @@
         "website": "Đang tải trang web"
     },
     "login": {
-        "externalLogin": "Đăng nhập bên ngoài",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {

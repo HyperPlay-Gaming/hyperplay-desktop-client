@@ -66,7 +66,6 @@
                 "title": "Tekkis ootamatu erand!"
             },
             "update": {
-                "message": "Midagi läks uuendusega valesti, palun kontrollige logisid või proovige hiljem uuesti!",
                 "title": "Viga uuendamisel"
             },
             "wine-not-found": {
@@ -300,7 +299,9 @@
         "website": "Veebilehe laadimine"
     },
     "login": {
-        "externalLogin": "Väline sisselogimine",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {

@@ -66,7 +66,6 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "message": "Uppdateringen misslyckades, kontrollera loggfilen eller försök igen senare.",
                 "title": "Problem vid uppdatering"
             },
             "wine-not-found": {
@@ -300,7 +299,9 @@
         "website": "Laddar websida"
     },
     "login": {
-        "externalLogin": "Externt login",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {

@@ -99,9 +99,9 @@
         "installedPlatform": "Nainstalovaná platforma",
         "path": "Cesta pro instalaci",
         "size": "Velikost",
-        "web3-supported": "Has Web3 features",
         "syncsaves": "Synchronizace uložených souborů",
-        "version": "Verze"
+        "version": "Verze",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Volné místo",

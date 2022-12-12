@@ -66,7 +66,6 @@
                 "title": "A avut loc o excepție neprinsă!"
             },
             "update": {
-                "message": "A apărut o eroare la actualizare, vă rugăm să verificați jurnalele sau încercați din nou mai târziu!",
                 "title": "Eroare de actualizare"
             },
             "wine-not-found": {
@@ -300,7 +299,9 @@
         "website": "Se încarcă site-ul web"
     },
     "login": {
-        "externalLogin": "Autentificare externă",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {

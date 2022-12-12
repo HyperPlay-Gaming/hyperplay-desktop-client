@@ -66,7 +66,6 @@
                 "title": "Tutulmamış İstisna baş verdi!"
             },
             "update": {
-                "message": "Güncəlləmə ilə nəsə xəta baş verdi, qeydləri yoxlayın və ya daha sonra yenidən cəhd edin!",
                 "title": "Yeniləmə xətası"
             },
             "wine-not-found": {
@@ -300,7 +299,9 @@
         "website": "Veb sayt yüklənir"
     },
     "login": {
-        "externalLogin": "Xarici Giriş",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {

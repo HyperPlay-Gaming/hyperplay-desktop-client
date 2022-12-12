@@ -66,7 +66,6 @@
                 "title": "¡Ocurrió un error!"
             },
             "update": {
-                "message": "Ocurrió un problema con la actualización. Por favor, revise los registros e intente nuevamente!",
                 "title": "Error al actualizar"
             },
             "wine-not-found": {
@@ -300,7 +299,9 @@
         "website": "Cargando el sitio web"
     },
     "login": {
-        "externalLogin": "Inicio de sesión externo",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {

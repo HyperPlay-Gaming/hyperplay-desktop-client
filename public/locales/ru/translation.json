@@ -66,7 +66,6 @@
                 "title": "Произошло необрабатываемое исключение!"
             },
             "update": {
-                "message": "Что-то пошло не так с обновлением, проверьте журналы или повторите попытку позже!",
                 "title": "Ошибка обновления"
             },
             "wine-not-found": {
@@ -300,7 +299,9 @@
         "website": "Загрузка веб-сайта"
     },
     "login": {
-        "externalLogin": "Внешний вход",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
