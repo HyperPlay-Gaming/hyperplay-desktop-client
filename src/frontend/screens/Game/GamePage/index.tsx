@@ -347,8 +347,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       : ''
                     : ''}
                 </div>
-                <HowLongToBeat title={title} />
-                {is_installed && supportsWeb3 && (
+                {is_installed && showCloudSaveInfo && (
                   <div
                     style={{
                       color: autoSyncSaves ? '#07C5EF' : ''
@@ -561,6 +560,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                   </button>
                 )}
               </div>
+              <HowLongToBeat title={title} />
               {is_installed && (
                 <NavLink
                   to={`/settings/${runner}/${appName}/log`}
