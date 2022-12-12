@@ -31,6 +31,7 @@ import {
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 /**
  * Some notes here:
@@ -220,6 +221,7 @@ interface AsyncIPCFunctions {
     runner: Runner,
     alreadyDefinedGogSaves: GOGCloudSavesLocation[]
   ) => Promise<string | GOGCloudSavesLocation[]>
+  'get-connection-uris': (provider: PROVIDERS) => Promise<ConnectionURIs>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file
