@@ -87,10 +87,10 @@ export const DXVK = {
         return
       }
 
-      const downloadCommand = `curl -L ${downloadUrl} -o ${latestVersion} --create-dirs`
-      const extractCommand = `${tool.extractCommand} ${latestVersion} -C ${toolsPath}/${tool.name}`
-      const echoCommand = `echo ${pkg} > ${toolsPath}/${tool.name}/latest_${tool.name}`
-      const cleanCommand = `rm ${latestVersion}`
+      const downloadCommand = `curl -L ${downloadUrl} -o '${latestVersion}' --create-dirs`
+      const extractCommand = `${tool.extractCommand} '${latestVersion}' -C '${toolsPath}/${tool.name}'`
+      const echoCommand = `echo ${pkg} > '${toolsPath}/${tool.name}/latest_${tool.name}'`
+      const cleanCommand = `rm '${latestVersion}'`
 
       logInfo([`Updating ${tool.name} to:`, pkg], {
         prefix: LogPrefix.DXVKInstaller

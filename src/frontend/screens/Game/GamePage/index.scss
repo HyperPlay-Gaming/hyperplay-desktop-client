@@ -248,13 +248,6 @@
   }
 }
 
-.buttonsWrapper {
-  display: grid;
-  grid-template-columns: min-content min-content;
-  place-items: baseline;
-  grid-column-gap: 1em;
-}
-
 .selectFieldWrapper.Field ~ .buttonsWrapper {
   margin-top: 24px;
 }
@@ -321,7 +314,7 @@
 }
 
 .buttonsWrapper .button {
-  min-width: max-content;
+  min-width: 100%;
 }
 
 @keyframes animate-stripes {

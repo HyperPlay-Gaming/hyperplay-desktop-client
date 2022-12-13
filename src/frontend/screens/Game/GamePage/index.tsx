@@ -526,22 +526,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
                     {getPlayLabel()}
                   </button>
                 )}
-                {is_installed && (
-                  <Link
-                    to={pathname}
-                    state={{
-                      fromGameCard: false,
-                      runner,
-                      isLinuxNative: isNative,
-                      isMacNative: isNative,
-                      hasCloudSave: cloud_save_enabled,
-                      gameInfo
-                    }}
-                    className="clickable reportProblem"
-                  >
-                    {t('submenu.settings')}
-                  </Link>
-                )}
                 {(!is_installed || isQueued) && (
                   <button
                     onClick={async () => handleInstall(is_installed)}
@@ -710,7 +694,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return 'is-primary'
     }
 
-    return 'is-secondary'
+    return 'is-cta'
   }
 
   function getButtonLabel(is_installed: boolean) {
