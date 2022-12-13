@@ -706,15 +706,13 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
-"@fiahfy/packbits@0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@fiahfy/packbits/-/packbits-0.0.6.tgz#d93146683fa59f476c6ccb988eb1cf9d7c16e489"
-  integrity sha512-XuhF/edg+iIvXjkCWgfj6fWtRi/KrEPg2ILXj1l86EN4EssuOiPcLKgkMDr9cL8jTGtVd/MKUWW6Y0/ZVf1PGA==
-
-"@fontsource/cabin@^4.5.5":
-  version "4.5.8"
-  resolved "https://registry.yarnpkg.com/@fontsource/cabin/-/cabin-4.5.8.tgz#73f98cbe3bef45d8b00467fecb0df253b3d46ad1"
-  integrity sha512-IdNdnl/oSC27EQQ3xJcpg1kWuSk9yAKDp2A7hDfn3xccKfWYGk9vtr85Dinv/W9KO5Kx0hWT4NT4jub2p8Mr8A==
+"@ethereumjs/common@^2.5.0", "@ethereumjs/common@^2.6.4":
+  version "2.6.5"
+  resolved "https://registry.yarnpkg.com/@ethereumjs/common/-/common-2.6.5.tgz#0a75a22a046272579d91919cb12d84f2756e8d30"
+  integrity sha512-lRyVQOeCDaIVtgfbowla32pzeDv2Obr8oR8Put5RdUBNRGr1VGPGQNGP6elWIpgK3YdpzqTOh4GyUGOureVeeA==
+  dependencies:
+    crc-32 "^1.2.0"
+    ethereumjs-util "^7.1.5"
 
 "@ethereumjs/tx@^3.3.2":
   version "3.5.2"
@@ -900,6 +898,11 @@
     "@ethersproject/logger" "^5.7.0"
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/strings" "^5.7.0"
+
+"@fiahfy/packbits@0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@fiahfy/packbits/-/packbits-0.0.6.tgz#d93146683fa59f476c6ccb988eb1cf9d7c16e489"
+  integrity sha512-XuhF/edg+iIvXjkCWgfj6fWtRi/KrEPg2ILXj1l86EN4EssuOiPcLKgkMDr9cL8jTGtVd/MKUWW6Y0/ZVf1PGA==
 
 "@fontsource/chakra-petch@^4.5.8":
   version "4.5.9"
