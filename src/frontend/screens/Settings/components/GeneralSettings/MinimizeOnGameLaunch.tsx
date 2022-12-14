@@ -17,7 +17,7 @@ const MinimizeOnGameLaunch = () => {
       handleChange={() => setMinimizeOnLaunch(!minimizeOnLaunch)}
       title={t(
         'setting.minimize-on-launch',
-        'Minimize Heroic After Game Launch'
+        'Minimize HyperPlay After Game Launch'
       )}
     />
   )

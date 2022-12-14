@@ -75,8 +75,6 @@ const discordLink = 'https://discord.gg/Vx4ky6ZbAK'
 const wikiLink = 'https://github.com/G7DAO/HyperPlay/wiki'
 const weblateUrl =
   'https://hosted.weblate.org/projects/hyperplay-games-launcher'
-const kofiPage = 'https://ko-fi.com/heroicgames'
-const patreonPage = 'https://www.patreon.com/heroicgameslauncher'
 const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
 const hyperplaySite = 'https://game7.io/'
 const customThemesWikiLink =
@@ -194,7 +192,6 @@ export {
   imagesCachePath,
   userHome,
   flatPakHome,
-  kofiPage,
   icon,
   iconDark,
   iconLight,
@@ -207,7 +204,6 @@ export {
   legendaryMetadata,
   epicLoginUrl,
   gogLoginUrl,
-  patreonPage,
   sidInfoUrl,
   supportURL,
   fallBackImage,

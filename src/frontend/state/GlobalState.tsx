@@ -278,10 +278,10 @@ export class GlobalState extends PureComponent<Props> {
 
   showResetDialog = (() => {
     this.handleShowDialogModal({
-      title: t('box.reset-app.question.title', 'Reset Heroic'),
+      title: t('box.reset-app.question.title', 'Reset HyperPlay'),
       message: t(
         'box.reset-app.question.message',
-        "Are you sure you want to reset Heroic? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of heroic needs to be restarted manually afterwards."
+        "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards."
       ),
       buttons: [
         { text: t('box.yes'), onClick: window.api.resetApp },

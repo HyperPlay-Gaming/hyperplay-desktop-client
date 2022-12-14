@@ -90,9 +90,7 @@ import {
   iconDark,
   iconLight,
   installed,
-  kofiPage,
   epicLoginUrl,
-  patreonPage,
   sidInfoUrl,
   supportURL,
   tsStore,
@@ -652,8 +650,6 @@ ipcMain.on('openWeblate', async () => openUrlOrFile(weblateUrl))
 ipcMain.on('showAboutWindow', () => showAboutWindow())
 ipcMain.on('openLoginPage', async () => openUrlOrFile(epicLoginUrl))
 ipcMain.on('openDiscordLink', async () => openUrlOrFile(discordLink))
-ipcMain.on('openPatreonPage', async () => openUrlOrFile(patreonPage))
-ipcMain.on('openKofiPage', async () => openUrlOrFile(kofiPage))
 ipcMain.on('openWinePrefixFAQ', async () => openUrlOrFile(wineprefixFAQ))
 ipcMain.on('openWebviewPage', async (event, url) => openUrlOrFile(url))
 ipcMain.on('openWikiLink', async () => openUrlOrFile(wikiLink))
@@ -785,7 +781,7 @@ ipcMain.on('clearCache', (event) => {
   })
 })
 
-ipcMain.on('resetHeroic', async () => {
+ipcMain.on('resetApp', async () => {
   resetApp()
 })
 

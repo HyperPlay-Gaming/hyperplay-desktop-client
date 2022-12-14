@@ -28,12 +28,12 @@ const LoginWarning = function ({
   if (warnLoginForStore === 'epic') {
     textContent = t(
       'not_logged_in.epic',
-      "You are not logged in with an Epic account in Heroic. Don't use the store page to login, click the following button instead:"
+      "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:"
     )
   } else if (warnLoginForStore === 'gog') {
     textContent = t(
       'not_logged_in.gog',
-      "You are not logged in with a GOG account in Heroic. Don't use the store page to login, click the following button instead:"
+      "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:"
     )
   }
 

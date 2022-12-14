@@ -39,7 +39,7 @@ export class GOGUser {
 
   public static async getUserDetails() {
     if (!isOnline()) {
-      logError('Unable to get user data, Heroic offline', {
+      logError('Unable to get user data, HyperPlay offline', {
         prefix: LogPrefix.Gog
       })
       return null
