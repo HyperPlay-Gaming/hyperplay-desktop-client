@@ -181,7 +181,7 @@
   "scripts": {
     "start": "vite",
     "codecheck": "tsc --noEmit",
-    "test": "jest --noStackTrace",
+    "test": "jest",
     "testProxy": "jest proxy.test.ts",
     "test-watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand --silent",
