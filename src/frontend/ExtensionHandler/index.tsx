@@ -47,7 +47,7 @@ const ExtensionHandler = function () {
     return () => {}
   }, [])
 
-  return <div style={{ display: 'none' }}></div>
+  return <></>
 }
 
 export default ExtensionHandler
