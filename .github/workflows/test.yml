@@ -12,8 +12,8 @@ jobs:
       - name: Checkout repository.
         uses: actions/checkout@v2
         with:
-          submodules: 'true'
-          token: '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'
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
