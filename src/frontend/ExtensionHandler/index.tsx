@@ -1,5 +1,5 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 const ExtensionHandler = function () {
   async function handleRequest(_event: any, id: number, args: any) {
@@ -47,7 +47,7 @@ const ExtensionHandler = function () {
     return () => {}
   }, [])
 
-  return null
+  return <div style={{ display: 'none' }}></div>
 }
 
 export default ExtensionHandler
