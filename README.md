@@ -111,6 +111,10 @@ Thanks to the community Heroic was translated to almost 40 different languages s
 
 ## Installation
 
+### Submodules
+
+Append `--recurse-submodules` to git fetch, pull, clone, etc. to install the submodules.
+
 ### Linux
 
 #### Debian, Ubuntu and Derivatives
