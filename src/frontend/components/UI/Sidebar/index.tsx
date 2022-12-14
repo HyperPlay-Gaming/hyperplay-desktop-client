@@ -22,6 +22,12 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
   const { t } = useTranslation()
   const { sidebarCollapsed, setSideBarCollapsed } = useContext(ContextProvider)
   const [currentDMElement, setCurrentDMElement] = useState<DMQueueElement>()
+  const [badgeText, setBadgeText] = useState('0')
+
+  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+  function setBadgeString(err: any, text: string) {
+    setBadgeText(text)
+  }
 
   useEffect(() => {
     window.api.getDMQueueInformation().then(({ elements }: DMQueue) => {
@@ -34,8 +40,12 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
       }
     )
 
+    const removeHandleSetBadgeText =
+      window.api.handleSetBadgeTextInRenderer(setBadgeString)
+
     return () => {
       removeHandleDMQueueInformation()
+      removeHandleSetBadgeText()
     }
   }, [])
 
@@ -51,6 +61,14 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
           />
         )}
       </div>
+
+      <button
+        className="Sidebar__item"
+        onClick={async () => window.api.showPopup()}
+      >
+        <span>Open MetaMask {badgeText}</span>
+      </button>
+
       <Wallet onClick={props.openOnboarding} />
       <button
         className="collapseIcon"

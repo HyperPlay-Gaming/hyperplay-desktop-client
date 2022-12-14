@@ -1,6 +1,8 @@
 import { tmpdir } from 'os'
 import { join } from 'path'
 
+const fs = jest.createMockFromModule('fs')
+
 const appBasePath = tmpdir()
 const dialog = {
   // dialog override
@@ -25,4 +27,9 @@ class Notification {
   }
 }
 
-export { dialog, app, Notification }
+const ipcMain = {
+  on: jest.fn().mockReturnThis(),
+  handle: jest.fn().mockReturnThis()
+}
+
+export { dialog, app, Notification, ipcMain }

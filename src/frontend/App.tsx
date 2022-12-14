@@ -16,6 +16,7 @@ import Onboarding from './screens/Onboarding'
 import { ControllerHints, OfflineMessage } from './components/UI'
 import DownloadManager from './screens/DownloadManager'
 import DialogHandler from './components/UI/DialogHandler'
+import ExtensionHandler from './ExtensionHandler'
 
 function App() {
   const { sidebarCollapsed } = useContext(ContextProvider)
@@ -28,6 +29,7 @@ function App() {
         <OfflineMessage />
         <Sidebar openOnboarding={() => setOnboardingEnabled(true)} />
         <main className="content">
+          <ExtensionHandler />
           <DialogHandler />
           <Routes>
             <Route path="/" element={<Library />} />

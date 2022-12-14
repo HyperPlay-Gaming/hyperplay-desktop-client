@@ -50,10 +50,9 @@ const iconsFolder = join(appConfigFolder, 'icons')
 const installPath = join(homedir(), 'Games', 'HyperPlay')
 const defaultWinePrefix = join(homedir(), 'Games', 'HyperPlay', 'Prefixes')
 const anticheatDataPath = join(appConfigFolder, 'areweanticheatyet.json')
-const appFolder = join(configFolder, 'hyperplay')
 const runtimePath = join(toolsPath, 'runtimes')
 const userInfo = join(legendaryConfigPath, 'user.json')
-const imagesCachePath = join(appFolder, 'images-cache')
+const imagesCachePath = join(appConfigFolder, 'images-cache')
 
 const { currentLogFile: currentLogFile, lastLogFile: lastLogFile } =
   createNewLogFileAndClearOldOnces()

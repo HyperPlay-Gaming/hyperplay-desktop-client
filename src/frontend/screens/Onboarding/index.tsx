@@ -4,7 +4,7 @@ import {
   IMobileRegistryEntryWithQrLink,
   WalletConnectedType,
   ConnectionRequestRejectedType
-} from 'common/types/proxy-types'
+} from 'backend/hyperplay-proxy-server/commonProxyTypes'
 import React, { Reducer, useEffect, useReducer } from 'react'
 import './index.css'
 import Scan from './scan'
@@ -51,6 +51,11 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
       qrCodeSvg: qrCodeSvgUpdated,
       providerImgUrl: qrCodeLink.logo
     })
+  }
+
+  async function handleMmExtensionProviderClicked() {
+    await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
+    props.disableOnboarding()
   }
 
   const handleConnected: WrapRendererCallback<WalletConnectedType> = (
@@ -107,6 +112,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
                 content: ONBOARDING_CONTENT.DOWNLOAD
               })
             }
+            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
           />
         )
       case ONBOARDING_CONTENT.SCAN:
@@ -161,6 +167,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
                 content: ONBOARDING_CONTENT.DOWNLOAD
               })
             }
+            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
           />
         )
     }

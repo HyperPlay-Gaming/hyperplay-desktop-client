@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import WalletOption from '../components/walletOption'
-import { PROVIDERS } from 'common/types/proxy-types'
+import { PROVIDERS } from 'backend/hyperplay-proxy-server/commonProxyTypes'
 import './index.css'
 import { OnboardingModalConfig } from '../types'
 import { MMTransparent, PlusIcon, WCBlue } from 'frontend/assets/hyperplay'
@@ -10,6 +10,7 @@ interface WelcomeProps {
   disableOnboarding: () => void
   setOnboardingModalParams: React.Dispatch<Partial<OnboardingModalConfig>>
   downloadMetaMaskClicked: () => void
+  handleMmExtensionProviderClicked: () => void
 }
 
 const Welcome: React.FC<WelcomeProps> = function (props) {
@@ -35,6 +36,13 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         icon={<MMTransparent height={34} width={34} />}
         onClick={() => providerClicked(PROVIDERS.METAMASK_MOBILE)}
         isRecommended={true}
+      />
+      <WalletOption
+        title="MetaMask Extension"
+        subtext="Connect with MetaMask Extension"
+        icon={<MMTransparent height={34} width={34} />}
+        onClick={props.handleMmExtensionProviderClicked}
+        isRecommended={false}
       />
       <WalletOption
         title="WalletConnect"
