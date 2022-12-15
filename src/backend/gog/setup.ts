@@ -50,13 +50,11 @@ async function setup(
   if (!isWindows) {
     const gameSettings = GameConfig.get(appName).config
 
-    const isCrossover = isWindows
-      ? false
-      : gameSettings.wineVersion.type === 'crossover'
-    const crossoverBottle = isWindows ? '' : gameSettings.wineCrossoverBottle
+    const isCrossover = gameSettings.wineVersion.type === 'crossover'
+    const crossoverBottle = gameSettings.wineCrossoverBottle
     const crossoverEnv =
       isCrossover && crossoverBottle ? `CX_BOTTLE=${crossoverBottle}` : ''
-    const isProton = !isWindows && gameSettings.wineVersion.type === 'proton'
+    const isProton = gameSettings.wineVersion.type === 'proton'
     const { defaultSteamPath } = await GlobalConfig.get().getSettings()
     const prefix = isProton
       ? `STEAM_COMPAT_CLIENT_INSTALL_PATH="${defaultSteamPath}" STEAM_COMPAT_DATA_PATH='${gameSettings.winePrefix
