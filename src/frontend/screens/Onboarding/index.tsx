@@ -1,10 +1,10 @@
 import {
-  PROVIDERS,
   UrisReturn,
   IMobileRegistryEntryWithQrLink,
   WalletConnectedType,
   ConnectionRequestRejectedType
 } from 'backend/hyperplay-proxy-server/commonProxyTypes'
+import { PROVIDERS } from 'common/types/proxy-types'
 import React, { Reducer, useEffect, useReducer } from 'react'
 import './index.css'
 import Scan from './scan'

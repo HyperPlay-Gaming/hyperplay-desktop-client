@@ -42,7 +42,17 @@ import { PROVIDERS } from 'common/types/proxy-types'
  *    I've decided against that to keep it in line with the `AsyncIPCFunctions`
  *    interface
  */
-interface SyncIPCFunctions {
+interface HyperPlaySyncIPCFunctions {
+  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+  extensionOnEvent: (topic: string, ...args: any[]) => void
+  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+  returnExtensionRequest: (requestId: number, args: any) => void
+  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+  errorExtensionRequest: (requestId: number, error: any) => void
+  chromeSetBadgeText: (text: string) => void
+}
+
+interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   setZoomFactor: (zoomFactor: string) => void
   changeLanguage: (language: string) => void
   notify: (args: { title: string; body: string }) => void
@@ -93,7 +103,20 @@ interface SyncIPCFunctions {
   changeTrayColor: () => void
 }
 
-interface AsyncIPCFunctions {
+interface HyperPlayAsyncIPCFunctions {
+  showPopup: (hideIfShown?: boolean) => Promise<void>
+  chromeWindowsCreate: (
+    options: chrome.windows.CreateData
+  ) => Promise<chrome.windows.Window>
+  chromeWindowsGetCurrent: () => Promise<chrome.windows.Window>
+  chromeWindowsRemove: (windowId: number) => Promise<void>
+  chromeWindowsGetAll: () => Promise<chrome.windows.Window[]>
+  chromeTabsCreate: (
+    options: chrome.tabs.CreateProperties
+  ) => Promise<chrome.tabs.Tab>
+}
+
+interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   kill: (appName: string, runner: Runner) => Promise<void>
   checkDiskSpace: (folder: string) => Promise<DiskSpaceData>
   callTool: (args: Tools) => Promise<void>
