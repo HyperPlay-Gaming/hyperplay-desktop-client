@@ -66,7 +66,6 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "message": "Qualcosa è andato storto con l'aggiornamento, controlla i log o riprova più tardi!",
                 "title": "Update Error"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "Sono stati creati i collegamenti sul Desktop e nel menu Start",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Le scorciatoie sono state rimosse dal Desktop e dal menu Start",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Collegamenti"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "SI"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Vai alla Libreria",
         "login": "Accedi",
         "sync": "Sincronizza",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Activate",
             "back": "Indietro",
             "backspace": "Backspace",
-            "close_context_menu": "Chiudi il menu contestuale",
             "close_dialog": "Close dialog",
             "close_keyboard": "Close keyboard",
-            "context_menu": "Context menu",
+            "close_options": "Close Options",
             "game_details": "Dettagli del gioco",
             "game_settings": "Game settings",
             "install_game": "Install game",
             "move_cursor": "Move cursor",
-            "none": "None",
             "open_virtual_keyboard": "Open virtual keyboard",
+            "options": "Options",
             "play_game": "Play game",
             "scroll": "Scroll",
+            "select": "Select",
             "space": "Space",
             "update_game": "Update game"
         }
     },
-    "docs": "Documentation",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "docs": "Documentazione",
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "I servizi online potrebbero non funzionare completamente poiché i server di Epic Games sono offline!",
@@ -259,9 +265,10 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
-            "newReleases": "Update Available!",
-            "stable": "Stable",
-            "version": "HyperPlay Version"
+            "click-to-see-changelog": "Click to see changelog",
+            "newReleases": "Aggiornamento disponibile!",
+            "stable": "Stabile",
+            "version": "Heroic Version"
         },
         "save-sync": {
             "searching": "Trying to detect the correct save folder"
@@ -300,7 +307,9 @@
         "website": "Caricamento sito web incorso"
     },
     "login": {
-        "externalLogin": "External Login",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Progress",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Giocato di recente",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Scegli un binario GOGDL alternativo da utilizzare",
         "alt-legendary-bin": "Scegli un binario Legendary alternativo",
-        "audiofix": "Audio Fix (Latenza Pulse Audio)",
         "autodxvk": "Installa/Aggiorna automaticamente DXVK sul prefix",
         "autosync": "Sincronizza automaticamente i salvataggi",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
@@ -436,7 +450,8 @@
         "defaultWinePrefix": "Imposta cartella per i nuovi prefissi Wine",
         "disable_controller": "Disable HyperPlay navigation using controller",
         "discordRPC": "Attiva \"Discord Rich Presence\"",
-        "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
+        "download-no-https": "Scarica i giochi senza HTTPS (utile per CDN come LanCache)",
+        "dxvkfpslimit": "Limit FPS (DX9, 10 and 11)",
         "egs-sync": "Sincronizza con l'Epic Games già installato",
         "enableFSRHack": "Attiva l'FSR Hack (la versione di Wine deve supportarlo)",
         "eosOverlay": {
@@ -509,7 +524,9 @@
             "title": "Avvia l'EXE nel prefix"
         },
         "savefolder": {
-            "placeholder": "Seleziona l'esatta cartella dei salvataggi dei giochi"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Seleziona l'esatta cartella dei salvataggi dei giochi",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Select Theme",
         "showfps": "Mostra FPS (DX9, 10 e 11)",
@@ -527,6 +544,7 @@
         "clear-cache": "Pulisci cache HyperPlay",
         "copiedToClipboard": "Copiato negli appunti!",
         "copyToClipboard": "Copia tutte le impostazioni negli appunti",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
@@ -546,6 +564,8 @@
         },
         "navbar": {
             "advanced": "Advanced",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "Generale",
             "log": "Log",
             "other": "Altro",
@@ -596,6 +616,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "Disconnetti",
         "logout_confirmation": "Sei sicuro di voler uscire?",
         "manageaccounts": "Manage Accounts",
@@ -612,8 +633,8 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "error": "Could not fetch Wine/Proton versions this time.",
             "link": "Wine Manager",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Wine Manager",
             "unzipping": "Unzipping"
         },

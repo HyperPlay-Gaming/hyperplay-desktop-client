@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 
 import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent } from 'frontend/components/UI'
@@ -7,7 +7,13 @@ import React, { lazy, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Tab, Tabs } from '@mui/material'
 import { Type } from 'heroic-wine-downloader'
-import { StoreIpc } from 'frontend/helpers/electronStores'
+import {
+  StoreIpc,
+  wineDownloaderInfoStore
+} from 'frontend/helpers/electronStores'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import { WineVersionInfo } from 'common/types'
 
 const WineItem = lazy(
   async () => import('frontend/screens/WineManager/components/WineItem')
@@ -23,12 +29,10 @@ interface WineManagerUISettings {
   showProtonGe: boolean
 }
 
-export default function WineManager(): JSX.Element | null {
+export default React.memo(function WineManager(): JSX.Element | null {
   const { t } = useTranslation()
-  const { wineVersions, refreshWineVersionInfo, refreshing } =
-    useContext(ContextProvider)
+  const { refreshWineVersionInfo, refreshing } = useContext(ContextProvider)
   const winege: Type = 'Wine-GE'
-  const winelutris: Type = 'Wine-Lutris'
   const protonge: Type = 'Proton-GE'
   const [repository, setRepository] = useState<Type>(winege)
   const [wineManagerSettings, setWineManagerSettings] =
@@ -37,6 +41,23 @@ export default function WineManager(): JSX.Element | null {
       showWineLutris: true,
       showProtonGe: true
     })
+
+  const getWineVersions = (repo: Type) => {
+    const versions = wineDownloaderInfoStore.get(
+      'wine-releases',
+      []
+    ) as WineVersionInfo[]
+    return versions.filter((version) => version.type === repo)
+  }
+
+  const [wineVersions, setWineVersions] = useState<WineVersionInfo[]>(
+    getWineVersions(repository)
+  )
+
+  const handleChangeTab = (e: React.SyntheticEvent, repo: Type) => {
+    setRepository(repo)
+    setWineVersions(getWineVersions(repo))
+  }
 
   useEffect(() => {
     const hasSettings = configStore.has('wine-manager-settings')
@@ -49,22 +70,22 @@ export default function WineManager(): JSX.Element | null {
       }
     }
 
-    return refreshWineVersionInfo(true)
+    const removeListener = window.api.handleWineVersionsUpdated(() => {
+      setWineVersions(getWineVersions(repository))
+    })
+
+    return () => {
+      removeListener()
+    }
   }, [])
-
-  if (refreshing) {
-    return <UpdateComponent />
-  }
-
-  const handleChangeTab = (e: React.SyntheticEvent, repo: Type) => {
-    setRepository(repo)
-  }
 
   return (
     <>
-      <h2>{t('wine.manager.title', 'Wine Manager (Beta)')}</h2>
-      {wineVersions?.length ? (
-        <div className="wineManager">
+      <h4 style={{ paddingTop: 'var(--space-md)' }}>
+        {t('wine.manager.title', 'Wine Manager (Beta)')}
+      </h4>
+      <div className="wineManager">
+        <span className="tabsWrapper">
           <Tabs
             className="tabs"
             value={repository}
@@ -72,15 +93,24 @@ export default function WineManager(): JSX.Element | null {
             centered={true}
           >
             {wineManagerSettings.showWineGe && (
-              <Tab className="tab" value={winege} label={winege} />
-            )}
-            {wineManagerSettings.showWineLutris && (
-              <Tab value={winelutris} label={winelutris} />
+              <Tab value={winege} label={winege} />
             )}
             {wineManagerSettings.showProtonGe && (
               <Tab value={protonge} label={protonge} />
             )}
           </Tabs>
+          <button
+            className={'FormControl__button'}
+            title={t('generic.library.refresh', 'Refresh Library')}
+            onClick={async () => refreshWineVersionInfo(true)}
+          >
+            <FontAwesomeIcon
+              className={'FormControl__segmentedFaIcon'}
+              icon={faSyncAlt}
+            />
+          </button>
+        </span>
+        {wineVersions.length ? (
           <div
             style={
               !wineVersions.length ? { backgroundColor: 'transparent' } : {}
@@ -93,23 +123,22 @@ export default function WineManager(): JSX.Element | null {
               <span>{t('wine.size', 'Size')}</span>
               <span>{t('wine.actions', 'Action')}</span>
             </div>
-            {!!wineVersions.length &&
+            {refreshing && <UpdateComponent />}
+            {!refreshing &&
+              !!wineVersions.length &&
               wineVersions.map((release, key) => {
-                if (release.type === repository) {
-                  return <WineItem key={key} {...release} />
-                }
-                return
+                return <WineItem key={key} {...release} />
               })}
           </div>
-        </div>
-      ) : (
-        <h3>
-          {t(
-            'wine.manager.error',
-            'Could not fetch Wine/Proton versions this time.'
-          )}
-        </h3>
-      )}
+        ) : (
+          <h5 className="wineList">
+            {t(
+              'wine.manager.not-found',
+              'No Wine versions found. Please click the refresh icon to try again.'
+            )}
+          </h5>
+        )}
+      </div>
     </>
   )
-}
+})

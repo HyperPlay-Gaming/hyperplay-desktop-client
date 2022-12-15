@@ -3,12 +3,15 @@ import React from 'react'
 import { SettingsContextType } from 'frontend/types'
 
 const initialContext: SettingsContextType = {
-  getSetting: () => '',
+  getSetting: (key, fallback) => fallback,
   setSetting: () => null,
-  config: null,
+  config: {},
   isDefault: true,
   appName: 'default',
-  runner: 'legendary'
+  runner: 'legendary',
+  gameInfo: null,
+  isMacNative: false,
+  isLinuxNative: false
 }
 
 export default React.createContext(initialContext)

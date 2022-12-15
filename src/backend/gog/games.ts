@@ -22,7 +22,8 @@ import {
   ExecResult,
   InstallArgs,
   InstalledInfo,
-  ProtonVerb
+  ProtonVerb,
+  InstallPlatform
 } from 'common/types'
 import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
 import {
@@ -33,7 +34,7 @@ import {
   gamesConfigPath
 } from '../constants'
 import { installedGamesStore, syncStore } from '../gog/electronStores'
-import { logError, logInfo, LogPrefix } from '../logger/logger'
+import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
 import { GOGUser } from './user'
 import {
   getRunnerCallWithoutCredentials,
@@ -105,18 +106,19 @@ class GOGGame extends Game {
     return info
   }
   async getInstallInfo(
-    installPlatform: GogInstallPlatform = 'windows'
+    installPlatform: InstallPlatform = 'windows'
   ): Promise<GogInstallInfo> {
     const info = await GOGLibrary.get().getInstallInfo(
       this.appName,
       installPlatform
     )
     if (!info) {
-      logError(
+      logWarning(
         [
-          'Could not get install info for',
-          `${this.appName},`,
-          'returning empty object. Something is probably gonna go wrong soon'
+          'Failed to get Install Info for',
+          `${this.appName}`,
+          `using ${installPlatform} as platform,`,
+          'returning empty object'
         ],
         { prefix: LogPrefix.Gog }
       )
@@ -241,7 +243,9 @@ class GOGGame extends Game {
     }
 
     const installPlatform =
-      platformToInstall.toLowerCase() as GogInstallPlatform
+      platformToInstall === 'Mac'
+        ? 'osx'
+        : (platformToInstall.toLowerCase() as GogInstallPlatform)
 
     const logPath = join(gamesConfigPath, this.appName + '.log')
 
@@ -318,7 +322,18 @@ class GOGGame extends Game {
       logInfo('Windows os, running setup instructions on install', {
         prefix: LogPrefix.Gog
       })
-      await setup(this.appName, installedData)
+      try {
+        await setup(this.appName, installedData)
+      } catch (e) {
+        logWarning(
+          [
+            `Failed to run setup instructions on install for ${gameInfo.title}, some other step might be needed for the game to work. Check the 'goggame-${this.appName}.script' file in the game folder`,
+            'Error:',
+            e
+          ],
+          { prefix: LogPrefix.Gog }
+        )
+      }
     }
     this.addShortcuts()
     return { status: 'done' }
@@ -456,9 +471,7 @@ class GOGGame extends Game {
       gameSettings,
       mangoHudCommand,
       gameModeBin,
-      steamRuntime?.length
-        ? [...steamRuntime, `--filesystem=${gameInfo.install.install_path}`]
-        : undefined
+      steamRuntime?.length ? [...steamRuntime] : undefined
     )
 
     const fullCommand = getRunnerCallWithoutCredentials(
@@ -581,25 +594,22 @@ class GOGGame extends Game {
     arg: string,
     path: string,
     gogSaves?: GOGCloudSavesLocation[]
-  ): Promise<ExecResult> {
+  ): Promise<string> {
     if (!gogSaves) {
-      return {
-        stderr: 'Unable to sync saves, gogSaves is undefined',
-        stdout: ''
-      }
+      return 'Unable to sync saves, gogSaves is undefined'
     }
 
     const credentials = await GOGUser.getCredentials()
     if (!credentials) {
-      return { stderr: 'Unable to sync saves, no credentials', stdout: '' }
+      return 'Unable to sync saves, no credentials'
     }
 
     const gameInfo = GOGLibrary.get().getGameInfo(this.appName)
     if (!gameInfo || !gameInfo.install.platform) {
-      return { stderr: 'Unable to sync saves, game info not found', stdout: '' }
+      return 'Unable to sync saves, game info not found'
     }
 
-    const stderr: string[] = []
+    let fullOutput = ''
 
     for (const location of gogSaves) {
       const commandParts = [
@@ -621,7 +631,11 @@ class GOGGame extends Game {
 
       const res = await runGogdlCommand(
         commandParts,
-        createAbortController(this.appName)
+        createAbortController(this.appName),
+        {
+          logMessagePrefix: `Syncing saves for ${this.appName}`,
+          onOutput: (output) => (fullOutput += output)
+        }
       )
 
       deleteAbortController(this.appName)
@@ -638,15 +652,9 @@ class GOGGame extends Game {
           res.stdout.trim()
         )
       }
-      if (res.stderr) {
-        stderr.push(res.stderr.toString())
-      }
     }
 
-    return {
-      stderr: stderr.join('\n'),
-      stdout: ''
-    }
+    return fullOutput
   }
   public async uninstall(): Promise<ExecResult> {
     const array: Array<InstalledInfo> =

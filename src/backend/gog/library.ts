@@ -8,13 +8,19 @@ import {
   ExecResult,
   CallRunnerOptions
 } from 'common/types'
-import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
-import { join } from 'node:path'
+import {
+  GOGCloudSavesLocation,
+  GOGGameDotInfoFile,
+  GogInstallInfo,
+  GOGGameDotIdFile,
+  GOGClientsResponse
+} from 'common/types/gog'
+import { basename, join } from 'node:path'
 import { existsSync, readFileSync } from 'graceful-fs'
 
 import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
 import { getGOGdlBin, getFileSize } from '../utils'
-import { fallBackImage } from '../constants'
+import { fallBackImage, gogdlLogFile } from '../constants'
 import {
   apiInfoCache,
   libraryStore,
@@ -40,7 +46,7 @@ export class GOGLibrary {
     appName: string,
     install: InstalledInfo
   ): Promise<GOGCloudSavesLocation[] | undefined> {
-    let syncPlatform = 'Windows'
+    let syncPlatform: 'Windows' | 'MacOS' = 'Windows'
     const platform = install.platform
     switch (platform) {
       case 'windows':
@@ -58,29 +64,26 @@ export class GOGLibrary {
       )
       return
     }
-    const response = await axios
-      .get(
-        `https://remote-config.gog.com/components/galaxy_client/clients/${clientId}?component_version=2.0.45`
-      )
-      .catch((error) => {
-        logError(
-          ['Failed to get remote config information for', appName, ':', error],
-          { prefix: LogPrefix.Gog }
+
+    let response: GOGClientsResponse | undefined
+    try {
+      response = (
+        await axios.get(
+          `https://remote-config.gog.com/components/galaxy_client/clients/${clientId}?component_version=2.0.45`
         )
-        return null
-      })
+      ).data
+    } catch (error) {
+      logError(
+        ['Failed to get remote config information for', appName, ':', error],
+        { prefix: LogPrefix.Gog }
+      )
+    }
     if (!response) {
       return
     }
-    const platformInfo = response.data.content[syncPlatform]
+    const platformInfo = response.content[syncPlatform]
     const savesInfo = platformInfo.cloudStorage
-    if (!savesInfo.enabled) {
-      return
-    }
-
-    const locations = savesInfo.locations
-
-    return locations
+    return savesInfo.locations
   }
   /**
    * Returns ids of games with requested features ids
@@ -313,7 +316,8 @@ export class GOGLibrary {
    */
   public async getInstallInfo(
     appName: string,
-    installPlatform = 'windows'
+    installPlatform = 'windows',
+    lang = 'en-US'
   ): Promise<GogInstallInfo | undefined> {
     const credentials = await GOGUser.getCredentials()
     if (!credentials) {
@@ -342,7 +346,7 @@ export class GOGLibrary {
       appName,
       '--token',
       `"${credentials.access_token}"`,
-      '--lang=en-US',
+      `--lang=${lang}`,
       '--os',
       installPlatform
     ]
@@ -357,7 +361,7 @@ export class GOGLibrary {
 
     deleteAbortController(appName)
 
-    if (res.abort) {
+    if (!res.stdout || res.abort) {
       return
     }
 
@@ -380,6 +384,23 @@ export class GOGLibrary {
       })
       return
     }
+
+    // some games don't support `en-US`
+    if (!gogInfo.languages && gogInfo.languages.includes(lang)) {
+      // if the game supports `en-us`, use it, else use the first valid language
+      const newLang = gogInfo.languages.includes('en-us')
+        ? 'en-us'
+        : gogInfo.languages[0]
+
+      // call itself with the new language and return
+      const infoWithLang = await this.getInstallInfo(
+        appName,
+        installPlatform,
+        newLang
+      )
+      return infoWithLang
+    }
+
     let libraryArray = libraryStore.get('games', []) as GameInfo[]
     let gameObjectIndex = libraryArray.findIndex(
       (value) => value.app_name === appName
@@ -484,7 +505,7 @@ export class GOGLibrary {
       appName: data.appName,
       install_path: path,
       executable: '',
-      install_size: getFileSize(gameInfo.manifest.disk_size),
+      install_size: getFileSize(gameInfo.manifest?.disk_size),
       is_dlc: false,
       version: data.versionName,
       platform: data.platform,
@@ -642,7 +663,8 @@ export class GOGLibrary {
       title: info.title,
       canRunOffline: true,
       is_mac_native: info.worksOn.Mac,
-      is_linux_native: info.worksOn.Linux
+      is_linux_native: info.worksOn.Linux,
+      thirdPartyManagedApp: undefined
     }
 
     return object
@@ -683,6 +705,9 @@ export class GOGLibrary {
       return []
     }
     const apiData = await this.getGamesData(appName)
+    if (!apiData) {
+      return []
+    }
     const operatingSystems = apiData._embedded.supportedOperatingSystems
     let requirements = operatingSystems.find(
       (value: { operatingSystem: { name: string } }) =>
@@ -718,8 +743,10 @@ export class GOGLibrary {
    * Reads goggame-appName.info file and returns JSON object of it
    * @param appName
    */
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public readInfoFile(appName: string, installPath?: string): any {
+  public readInfoFile(
+    appName: string,
+    installPath?: string
+  ): GOGGameDotInfoFile | undefined {
     const gameInfo = this.getGameInfo(appName)
     if (!gameInfo) {
       return
@@ -727,7 +754,7 @@ export class GOGLibrary {
 
     installPath = installPath ?? gameInfo?.install.install_path
     if (!installPath) {
-      return {}
+      return
     }
 
     const infoFileName = `goggame-${appName}.info`
@@ -738,29 +765,64 @@ export class GOGLibrary {
       infoFilePath = join(installPath, 'Contents', 'Resources', infoFileName)
     }
 
-    if (existsSync(infoFilePath)) {
-      const fileData = readFileSync(infoFilePath, { encoding: 'utf-8' })
+    if (!existsSync(infoFilePath)) {
+      return
+    }
 
-      try {
-        const jsonData = JSON.parse(fileData)
-        return jsonData
-      } catch (error) {
-        logError(`Error reading ${fileData}, could not complete operation`, {
-          prefix: LogPrefix.Gog
-        })
+    let infoFileData: GOGGameDotInfoFile | undefined
+    try {
+      infoFileData = JSON.parse(readFileSync(infoFilePath, 'utf-8'))
+    } catch (error) {
+      logError(`Error reading ${infoFilePath}, could not complete operation`, {
+        prefix: LogPrefix.Gog
+      })
+    }
+    if (!infoFileData) {
+      return
+    }
+
+    if (!infoFileData.buildId) {
+      const idFilePath = join(basename(infoFilePath), `goggame-${appName}.id`)
+      if (existsSync(idFilePath)) {
+        try {
+          const { buildId }: GOGGameDotIdFile = JSON.parse(
+            readFileSync(idFilePath, 'utf-8')
+          )
+          infoFileData.buildId = buildId
+        } catch (error) {
+          logError(
+            `Error reading ${idFilePath}, not adding buildId to game metadata`
+          )
+        }
       }
     }
-    return {}
+
+    return infoFileData
   }
 
   public getExecutable(appName: string): string {
     const jsonData = this.readInfoFile(appName)
+    if (!jsonData) {
+      throw new Error('No game metadata, cannot get executable')
+    }
     const playTasks = jsonData.playTasks
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const primary = playTasks.find((value: any) => value?.isPrimary)
+    let primary = playTasks.find((task) => task.isPrimary)
 
-    const workingDir = primary?.workingDir
+    if (!primary) {
+      primary = playTasks[0]
+      if (!primary) {
+        throw new Error('No play tasks in game metadata')
+      }
+    }
+
+    if (primary.type === 'URLTask') {
+      throw new Error(
+        'Primary play task is an URL task, not sure what to do here'
+      )
+    }
+
+    const workingDir = primary.workingDir
 
     if (workingDir) {
       return join(workingDir, primary.path)
@@ -832,10 +894,10 @@ export class GOGLibrary {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         (value: any) => value.os === 'linux'
       )
-      const possibleLanguages = []
+      const possibleLanguages: string[] = []
 
       for (const installer of linuxInstallers) {
-        possibleLanguages.push(installer.language)
+        possibleLanguages.push(installer.language as string)
       }
 
       return possibleLanguages
@@ -886,6 +948,9 @@ export async function runGogdlCommand(
     commandParts,
     { name: 'gog', logPrefix: LogPrefix.Gog, bin, dir },
     abortController,
-    options
+    {
+      ...options,
+      verboseLogFile: gogdlLogFile
+    }
   )
 }

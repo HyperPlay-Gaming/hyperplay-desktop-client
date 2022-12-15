@@ -6,7 +6,8 @@ import React, {
   useEffect,
   useMemo,
   useRef,
-  useState
+  useState,
+  useLayoutEffect
 } from 'react'
 
 import ArrowDropUp from '@mui/icons-material/ArrowDropUp'
@@ -16,7 +17,7 @@ import Fuse from 'fuse.js'
 
 import ContextProvider from 'frontend/state/ContextProvider'
 
-import { GamesList } from './components/GamesList'
+import GamesList from './components/GamesList'
 import {
   FavouriteGame,
   GameInfo,
@@ -46,7 +47,7 @@ type ModalState = {
   gameInfo: GameInfo | null
 }
 
-export default function Library(): JSX.Element {
+export default React.memo(function Library(): JSX.Element {
   const {
     layout,
     libraryStatus,
@@ -81,6 +82,21 @@ export default function Library(): JSX.Element {
   )
   const { t } = useTranslation()
   const backToTopElement = useRef(null)
+  const listing = useRef<HTMLDivElement>(null)
+
+  //Remember scroll position
+  useLayoutEffect(() => {
+    const scrollPosition = parseInt(storage?.getItem('scrollPosition') || '0')
+
+    if (listing.current !== null && scrollPosition > 0) {
+      listing.current.scrollTo(0, scrollPosition)
+    }
+    return () => {
+      if (listing.current !== null) {
+        storage?.setItem('scrollPosition', listing.current.scrollTop.toString())
+      }
+    }
+  }, [listing])
 
   // bind back to top button
   useEffect(() => {
@@ -145,21 +161,22 @@ export default function Library(): JSX.Element {
       return library
     }
 
-    const isMac = ['osx', 'Mac']
+    const macArray = ['osx', 'Mac']
+    const isMac = platform === 'darwin'
 
     switch (filter) {
       case 'win':
         return library.filter((game) => {
           return game?.is_installed
             ? game?.install?.platform?.toLowerCase() === 'windows'
-            : process?.platform === 'darwin'
+            : isMac
             ? !game?.is_mac_native
             : !game?.is_linux_native
         })
       case 'mac':
         return library.filter((game) => {
           return game?.is_installed
-            ? isMac.includes(game?.install?.platform ?? '')
+            ? macArray.includes(game?.install?.platform ?? '')
             : game?.is_mac_native
         })
       case 'linux':
@@ -268,13 +285,15 @@ export default function Library(): JSX.Element {
     return [...library]
   }, [
     category,
-    epic,
-    gog,
+    epic.library,
+    gog.library,
     filterText,
     filterPlatform,
     sortDescending,
     sortInstalled,
-    showHidden
+    showHidden,
+    hiddenGames,
+    showFavouritesLibrary
   ])
 
   if (!epic && !gog) {
@@ -291,7 +310,7 @@ export default function Library(): JSX.Element {
   return (
     <>
       <Header />
-      <div className="listing">
+      <div className="listing" ref={listing}>
         <span id="top" />
         {showRecentGames && (
           <RecentlyPlayed
@@ -332,7 +351,7 @@ export default function Library(): JSX.Element {
       </div>
 
       <button id="backToTopBtn" onClick={backToTop} ref={backToTopElement}>
-        <ArrowDropUp className="material-icons" />
+        <ArrowDropUp id="backToTopArrow" className="material-icons" />
       </button>
 
       {showModal.show && (
@@ -352,4 +371,4 @@ export default function Library(): JSX.Element {
       )}
     </>
   )
-}
+})

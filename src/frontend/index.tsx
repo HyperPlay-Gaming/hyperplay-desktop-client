@@ -1,7 +1,7 @@
 import { I18nextProvider, initReactI18next } from 'react-i18next'
 import HttpApi from 'i18next-http-backend'
 import React, { Suspense } from 'react'
-import ReactDOM from 'react-dom'
+import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
 import { initGamepad } from './helpers/gamepad'
 
@@ -59,6 +59,7 @@ i18next
       useSuspense: true
     },
     supportedLngs: [
+      'ar',
       'az',
       'be',
       'bg',
@@ -100,17 +101,19 @@ i18next
     ]
   })
 
-ReactDOM.render(
+const container = document.getElementById('root')
+const root = createRoot(container!) // createRoot(container!) if you use TypeScript
+
+root.render(
   <React.StrictMode>
-    <I18nextProvider i18n={i18next}>
-      <Suspense fallback={<UpdateComponentBase message="Loading" />}>
-        <GlobalState>
+    <GlobalState>
+      <I18nextProvider i18n={i18next}>
+        <Suspense fallback={<UpdateComponentBase message="Loading" />}>
           <App />
-        </GlobalState>
-      </Suspense>
-    </I18nextProvider>
-  </React.StrictMode>,
-  document.getElementById('root')
+        </Suspense>
+      </I18nextProvider>
+    </GlobalState>
+  </React.StrictMode>
 )
 
 // helper function to set the theme class and load custom css if needed

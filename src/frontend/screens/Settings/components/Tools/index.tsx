@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 
 import React, { useContext, useEffect, useState } from 'react'
 
@@ -8,13 +8,20 @@ import { getGameInfo } from 'frontend/helpers'
 
 import { ProgressDialog } from 'frontend/components/UI/ProgressDialog'
 import SettingsContext from '../../SettingsContext'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 export default function Tools() {
   const { t } = useTranslation()
   const [winecfgRunning, setWinecfgRunning] = useState(false)
   const [winetricksRunning, setWinetricksRunning] = useState(false)
   const [progress, setProgress] = useState<string[]>([])
-  const { appName, runner } = useContext(SettingsContext)
+  const { appName, runner, isDefault } = useContext(SettingsContext)
+  const { platform } = useContext(ContextProvider)
+  const isWindows = platform === 'win32'
+
+  if (isDefault || isWindows) {
+    return <></>
+  }
 
   type Tool = 'winecfg' | 'winetricks' | string
   async function callTools(tool: Tool, exe?: string) {
@@ -53,11 +60,11 @@ export default function Tools() {
   const handleRunExe = async () => {
     let exe = ''
     const gameinfo = await getGameInfo(appName, runner)
-    const { path } = await window.api.openDialog({
+    const path = await window.api.openDialog({
       buttonLabel: t('box.select.button', 'Select'),
       properties: ['openFile'],
       title: t('box.runexe.title', 'Select EXE to Run'),
-      defaultPath: gameinfo.install.install_path
+      defaultPath: gameinfo?.install.install_path
     })
     if (path) {
       exe = path
@@ -120,7 +127,7 @@ export default function Tools() {
           <a
             onDrop={(ev) => dropHandler(ev)}
             onDragOver={(ev) => dragOverHandler(ev)}
-            className="tools drag"
+            className="button outline drag"
             onClick={handleRunExe}
           >
             {t('setting.runexe.title')}

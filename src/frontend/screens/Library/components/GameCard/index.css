@@ -4,11 +4,12 @@
   width: 100%;
   overflow: hidden;
   position: relative;
-  transition-duration: 0.5s;
+  transition-duration: 0.1s;
   box-shadow: 0px 0px 12px 4px #00000055;
   display: flex;
   flex-direction: column;
   border-radius: var(--space-3xs);
+  animation: fade-in 0.2s ease-in;
 }
 
 .gameCard:focus-within {
@@ -35,7 +36,7 @@
   position: absolute;
   z-index: 5;
   bottom: 45px;
-  left: 5px;
+  right: 5px;
   color: var(--success);
   font-family: var(--secondary-font-family);
   font-style: italic;
@@ -43,7 +44,7 @@
   font-size: var(--text-xs);
   line-height: var(--space-sm);
   width: fit-content;
-  max-width: 96px;
+  max-width: 104px;
   word-wrap: break-word;
   padding: var(--space-3xs);
   background: var(--gradient-gamecard);
@@ -52,6 +53,11 @@
 .gameCard > .progress svg {
   color: var(--success);
   height: 20px;
+}
+
+.gameCard.notAvailable > .progress {
+  color: var(--text-log);
+  text-align: right;
 }
 
 .gameCard > a {
@@ -87,13 +93,13 @@
   bottom: 0px;
   padding: 0.6rem 0.3rem;
   color: var(--text-secondary);
-  background: var(--gradient-gamecard);
+  background: var(--gamecard-title-color);
   transition: 200ms;
   font-family: var(--primary-font-family);
   font-size: var(--text-md);
   font-weight: var(--bold);
   line-height: 17px;
-  color: var(--text-default);
+  color: var(--text-gametitle);
   cursor: pointer;
   z-index: 3;
   pointer-events: none;
@@ -112,6 +118,10 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-areas: 'update play settings';
   padding: var(--space-xs-fixed);
+}
+
+.gameCard > .icons.gamepad {
+  display: none;
 }
 
 .gameCard > .icons > .svg-button {
@@ -140,6 +150,12 @@
 .gameCard.hidden .gameImg,
 .gameCard.hidden .gameLogo {
   opacity: 0.2;
+}
+
+.gameCard.notAvailable .gameImg.installed,
+.gameCard.notAvailable .gameLog.installed {
+  filter: sepia(100%);
+  opacity: 0.7;
 }
 
 .gameCard .runner {
@@ -314,7 +330,8 @@
   font-size: 40px;
 }
 
-.iconDisabled circle {
+.iconDisabled circle,
+.svg-button[disabled] circle {
   fill: var(--icon-disabled);
 }
 
@@ -346,4 +363,13 @@
 .settingsIcon:hover {
   fill: var(--accent);
   transition: 300ms;
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

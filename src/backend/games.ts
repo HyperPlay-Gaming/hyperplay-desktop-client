@@ -6,7 +6,8 @@ import {
   GameInfo,
   GameSettings,
   InstallArgs,
-  ProtonVerb
+  ProtonVerb,
+  InstallPlatform
 } from 'common/types'
 
 import { BrowserWindow } from 'electron'
@@ -23,11 +24,11 @@ abstract class Game {
   abstract getExtraInfo(): Promise<ExtraInfo>
   abstract getGameInfo(installPlatform?: string): GameInfo
   abstract getInstallInfo(
-    installPlatform?: string
+    installPlatform?: InstallPlatform
   ): Promise<LegendaryInstallInfo | GogInstallInfo>
   abstract getSettings(): Promise<GameSettings>
   abstract hasUpdate(): Promise<boolean>
-  abstract import(path: string): Promise<ExecResult>
+  abstract import(path: string, platform: InstallPlatform): Promise<ExecResult>
   abstract install(args: InstallArgs): Promise<{ status: string }>
   abstract addShortcuts(): Promise<void>
   abstract launch(launchArguments?: string): Promise<boolean>
@@ -35,12 +36,12 @@ abstract class Game {
   abstract moveInstall(newInstallPath: string): Promise<string>
   abstract repair(): Promise<ExecResult>
   abstract forceUninstall(): Promise<void>
-  abstract syncSaves(arg: string, path: string): Promise<ExecResult>
+  abstract syncSaves(arg: string, path: string): Promise<string>
   abstract syncSaves(
     arg: string,
     path: string,
     gogSaves?: GOGCloudSavesLocation[]
-  ): Promise<ExecResult>
+  ): Promise<string>
   abstract uninstall(): Promise<ExecResult>
   abstract update(): Promise<{ status: 'done' | 'error' | 'abort' }>
   abstract isNative(): boolean

@@ -16,7 +16,7 @@ import ContextProvider from '../../state/ContextProvider'
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
 
-export default function NewLogin() {
+export default React.memo(function NewLogin() {
   const { epic, gog, refreshLibrary } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -41,7 +41,7 @@ export default function NewLogin() {
 
   async function handleLibraryClick() {
     await refreshLibrary({ fullRefresh: true, runInBackground: false })
-    navigate('/')
+    navigate('/library')
   }
 
   return (
@@ -110,4 +110,4 @@ export default function NewLogin() {
       </div>
     </div>
   )
-}
+})

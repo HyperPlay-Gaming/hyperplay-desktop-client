@@ -66,7 +66,6 @@
                 "title": "Произошло необрабатываемое исключение!"
             },
             "update": {
-                "message": "Что-то пошло не так с обновлением, проверьте журналы или повторите попытку позже!",
                 "title": "Ошибка обновления"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "Ярлыки созданы на рабочем столе и в меню «Пуск»",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Ярлыки были удалены с рабочего стола и меню «Пуск»",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Ярлыки"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "ДА"
     },
     "button": {
+        "cancel": "Отмена",
         "go_to_library": "Перейти в библиотеку",
         "login": "Вход",
         "sync": "Синхронизировать",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Активировать",
             "back": "Назад",
             "backspace": "Backspace",
-            "close_context_menu": "Закрыть контекстное меню",
             "close_dialog": "Закрыть диалог",
             "close_keyboard": "Закрыть клавиатуру",
-            "context_menu": "Контекстное меню",
+            "close_options": "Close Options",
             "game_details": "Детали игры",
             "game_settings": "Настройки игры",
             "install_game": "Установить игру",
             "move_cursor": "Перемещение курсора",
-            "none": "None",
             "open_virtual_keyboard": "Открыть виртуальную клавиатуру",
+            "options": "Options",
             "play_game": "Играть",
             "scroll": "Scroll",
+            "select": "Select",
             "space": "Пробел",
             "update_game": "Обновить игру"
         }
     },
     "docs": "Документация",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Диск",
+            "speed": "Загрузка"
+        },
+        "link": "Загрузки",
+        "queue": {
+            "end-time": "Завершено в",
+            "queue-time": "Добавлено в",
+            "start-time": "Начало в",
+            "type": "Тип"
+        },
+        "title": "Загрузки"
     },
     "epic": {
         "offline-notification-body": "Онлайн-сервисы могут работать не полностью, так как серверы Epic Games отключены!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Нажмите, чтобы посмотреть список изменений",
             "newReleases": "Доступно обновление!",
             "stable": "Стабильный",
             "version": "Версия HyperPlay"
@@ -300,7 +307,9 @@
         "website": "Загрузка веб-сайта"
     },
     "login": {
-        "externalLogin": "Внешний вход",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -350,11 +359,13 @@
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
-        "retrying": "Retrying"
+        "hint": "Мы проверяем подключение к: {{newline}}github.com, {{newline}}gog.com и {{newline}}store.epicgames.com",
+        "ignore": "Ignore",
+        "offline": "Не в сети",
+        "offline-retry-in": "Не в сети. Повторная попытка через {{seconds}} секунд.",
+        "retrying": "Повтор"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Имя переменной",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
-    "progress": "Progress",
+    "please-wait": "Please wait...",
+    "progress": "Прогресс",
     "queue": {
         "label": {
-            "clear": "Clear List",
-            "downloading": "Downloading",
-            "finished": "Completed",
-            "queued": "Queued"
+            "canceled": "Отменено",
+            "clear": "Очистить список",
+            "downloading": "Загрузка",
+            "empty": "Нечего скачивать",
+            "finished": "Завершено",
+            "queued": "Очередь",
+            "remove": "Удалить из загрузок"
         }
     },
     "Recent": "Запускались недавно",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Выбрать другой исполняемый файл GOGDL",
         "alt-legendary-bin": "Выбрать другой исполняемый файл Legendary",
-        "audiofix": "Фикс аудио (Задержка Pulse Audio)",
         "autodxvk": "Автоматически устанавливать/обновлять DXVK в префиксе",
         "autosync": "Автосинхронизация сохранений",
         "autovkd3d": "Автоматически устанавливать/обновлять VKD3D в префиксе",
@@ -464,6 +478,7 @@
         "FsrSharpnessStrenght": "Усиление резкости FSR",
         "fsync": "Включить Fsync",
         "gamemode": "Использовать GameMode (Нужен Feral GameMode)",
+        "hideChangelogsOnStartup": "Не показывать список изменений при запуске",
         "language": "Выберите язык приложения",
         "library_top_option": {
             "disabled": "Отключить",
@@ -509,7 +524,9 @@
             "title": "Запустить EXE в префиксе"
         },
         "savefolder": {
-            "placeholder": "Выберите точную папку для сохранений игр"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Выберите точную папку для сохранений игр",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Выбор темы",
         "showfps": "Показывать FPS (DX9, 10 и 11)",
@@ -527,6 +544,7 @@
         "clear-cache": "Очистить кэш HyperPlay",
         "copiedToClipboard": "Скопировано в буфер обмена!",
         "copyToClipboard": "Скопировать все настройки в буфер обмена",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode необходим для того, чтобы среда выполнения EAC работала на Flatpak. Хотите включить его сейчас?",
@@ -546,6 +564,8 @@
         },
         "navbar": {
             "advanced": "Продвинутые",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "Основные",
             "log": "Журнал",
             "other": "Другие",
@@ -596,6 +616,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Дискорд",
+        "logging_out": "Logging out",
         "logout": "Выйти из аккаунта",
         "logout_confirmation": "Вы уверены, что хотите выйти?",
         "manageaccounts": "Аккаунты",
@@ -612,8 +633,8 @@
     "wine": {
         "actions": "Действие",
         "manager": {
-            "error": "Не удалось получить версии Wine/Proton.",
             "link": "Менеджер Wine",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Менеджер Wine",
             "unzipping": "Распаковка"
         },

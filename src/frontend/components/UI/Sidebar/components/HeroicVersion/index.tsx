@@ -11,6 +11,9 @@ type Release = {
   id: number
 }
 
+const storage = window.localStorage
+const lastVersion = storage.getItem('last_version')?.replaceAll('"', '')
+
 export default function AppVersion() {
   const { t } = useTranslation()
   const [appVersion, setAppVersion] = useState('')
@@ -18,7 +21,14 @@ export default function AppVersion() {
   const { sidebarCollapsed } = useContext(ContextProvider)
 
   useEffect(() => {
-    window.api.getAppVersion().then((version) => setAppVersion(version))
+    window.api.getAppVersion().then((version) => {
+      if (version !== lastVersion) {
+        window.api.logInfo('Updated to a new version, cleaaning up the cache.')
+        window.api.clearCache(false)
+      }
+      storage.setItem('last_version', JSON.stringify(version))
+      setAppVersion(version)
+    })
   }, [])
 
   useEffect(() => {

@@ -39,7 +39,7 @@ export type AvailablePlatforms = {
   icon: IconDefinition
 }[]
 
-export default function InstallModal({
+export default React.memo(function InstallModal({
   appName,
   backdropClick,
   runner,
@@ -49,9 +49,7 @@ export default function InstallModal({
   const { t } = useTranslation('gamepage')
 
   const [winePrefix, setWinePrefix] = useState('...')
-  const [wineVersion, setWineVersion] = useState<WineInstallation | undefined>(
-    undefined
-  )
+  const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
 
   const [isLinuxNative, setIsLinuxNative] = useState(false)
@@ -60,6 +58,7 @@ export default function InstallModal({
     useState<InstallPlatform>('Windows')
 
   const isMac = platform === 'darwin'
+  const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
   const isSideload = runner === 'sideload'
 
@@ -108,23 +107,21 @@ export default function InstallModal({
   const [platformToInstall, setPlatformToInstall] =
     useState<InstallPlatform>(defaultPlatform)
 
-  const hasWine = platformToInstall === 'Windows' && isLinux
+  const hasWine = platformToInstall === 'Windows' && !isWin
 
   useEffect(() => {
     if (hasWine) {
       ;(async () => {
         const newWineList: WineInstallation[] =
           await window.api.getAlternativeWine()
-        if (Array.isArray(newWineList)) {
-          setWineVersionList(newWineList)
-          if (wineVersion?.bin) {
-            if (
-              !newWineList.some(
-                (newWine) => wineVersion && newWine.bin === wineVersion.bin
-              )
-            ) {
-              setWineVersion(undefined)
-            }
+        setWineVersionList(newWineList)
+        if (wineVersion?.bin) {
+          if (
+            !newWineList.some(
+              (newWine) => wineVersion && newWine.bin === wineVersion.bin
+            )
+          ) {
+            setWineVersion(undefined)
           }
         }
       })()
@@ -185,8 +182,7 @@ export default function InstallModal({
                 winePrefix={winePrefix}
                 wineVersion={wineVersion}
                 wineVersionList={wineVersionList}
-                appName={appName}
-                runner={runner}
+                title={gameInfo?.title}
                 setWinePrefix={setWinePrefix}
                 setWineVersion={setWineVersion}
               />
@@ -208,8 +204,6 @@ export default function InstallModal({
                 winePrefix={winePrefix}
                 wineVersion={wineVersion}
                 wineVersionList={wineVersionList}
-                appName={appName}
-                runner={runner}
                 setWinePrefix={setWinePrefix}
                 setWineVersion={setWineVersion}
               />
@@ -219,4 +213,4 @@ export default function InstallModal({
       </Dialog>
     </div>
   )
-}
+})

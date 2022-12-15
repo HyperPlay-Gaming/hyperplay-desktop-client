@@ -11,6 +11,19 @@ const srcAliases = ['backend', 'frontend', 'common'].map((srcFolder) => {
   }
 })
 
+const electronViteConfig = {
+  build: { outDir: 'build/electron' },
+  resolve: {
+    alias: [
+      {
+        find: '~@fontsource',
+        replacement: path.resolve(__dirname, 'node_modules/@fontsource')
+      },
+      ...srcAliases
+    ]
+  }
+}
+
 export default defineConfig({
   build: {
     outDir: 'build'
@@ -26,31 +39,23 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    electron({
-      main: {
+    electron([
+      {
         entry: 'src/backend/main.ts',
-        vite: {
-          resolve: {
-            alias: [
-              {
-                find: '~@fontsource',
-                replacement: path.resolve(__dirname, 'node_modules/@fontsource')
-              },
-              ...srcAliases
-            ]
-          }
-        }
+        vite: electronViteConfig
       },
-      preload: {
-        input: {
-          preload: path.resolve(__dirname + '/src/backend/preload.ts'),
-          extensionPreload: path.resolve(
-            __dirname +
-              '/src/backend/hyperplay-extension-helper/extensionPreload.ts'
-          )
-        }
+      {
+        entry: path.resolve(__dirname + '/src/backend/preload.ts'),
+        vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname +
+            '/src/backend/hyperplay-extension-helper/extensionPreload.ts'
+        ),
+        vite: electronViteConfig
       }
-    }),
+    ]),
     svgr()
   ]
 })

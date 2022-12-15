@@ -2,7 +2,6 @@ import { VersionInfo } from 'heroic-wine-downloader'
 import {
   AppSettings,
   GameInfo,
-  GameSettings,
   GameStatus,
   Runner,
   ConnectivityStatus,
@@ -16,7 +15,6 @@ export type Category = 'all' | 'legendary' | 'gog' | 'sideload'
 
 export interface ContextType {
   category: Category
-  wineVersions: WineVersionInfo[]
   error: boolean
   filterText: string
   filterPlatform: string
@@ -33,7 +31,7 @@ export interface ContextType {
   libraryStatus: GameStatus[]
   libraryTopSection: string
   handleLibraryTopSection: (value: LibraryTopSectionOptions) => void
-  platform: NodeJS.Platform | string
+  platform: NodeJS.Platform | 'unknown'
   refresh: (library: Runner, checkUpdates?: boolean) => Promise<void>
   refreshLibrary: (options: RefreshOptions) => Promise<void>
   refreshWineVersionInfo: (fetch: boolean) => void
@@ -103,10 +101,6 @@ export interface InstallProgress {
   eta: string
   folder?: string
   percent: number
-}
-
-export interface Path {
-  path: string
 }
 
 export type RefreshOptions = {
@@ -179,29 +173,6 @@ export type AntiCheat =
   | 'XIGNCODE3'
   | 'Zakynthos'
 
-export interface AntiCheatInfo {
-  name: string
-  status: ''
-  anticheats: AntiCheat[]
-  notes: string[]
-  native: boolean
-  storeIds: {
-    epic?: {
-      namespace: string
-      slug: string
-    }
-    steam?: string
-  }
-  reference: string
-  updates: AntiCheatReference[]
-}
-
-interface AntiCheatReference {
-  name: string
-  date: string
-  reference: string
-}
-
 declare global {
   interface Window {
     imageData: (
@@ -217,12 +188,21 @@ declare global {
 }
 
 export interface SettingsContextType {
-  getSetting: (key: string) => unknown
-  setSetting: (key: string, value: unknown) => void
-  config: AppSettings | GameSettings | null
+  getSetting: <T extends keyof AppSettings>(
+    key: T,
+    fallback: NonNullable<AppSettings[T]>
+  ) => NonNullable<AppSettings[T]>
+  setSetting: <T extends keyof AppSettings>(
+    key: T,
+    value: AppSettings[T]
+  ) => void
+  config: Partial<AppSettings>
   isDefault: boolean
   appName: string
   runner: Runner
+  gameInfo: GameInfo | null
+  isMacNative: boolean
+  isLinuxNative: boolean
 }
 
 export interface LocationState {
@@ -230,6 +210,7 @@ export interface LocationState {
   runner: Runner
   isLinuxNative: boolean
   isMacNative: boolean
+  gameInfo: GameInfo
 }
 
 export type DMQueue = {

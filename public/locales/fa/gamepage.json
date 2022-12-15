@@ -94,6 +94,13 @@
     "generic": {
         "error": "خطای نامشخص"
     },
+    "hours": "Hours",
+    "how-long-to-beat": {
+        "completionist": "Completionist",
+        "main-plus-extras": "Main + Extras",
+        "main-story": "Main Story"
+    },
+    "howLongToBeat": "How Long To Beat",
     "info": {
         "canRunOffline": "نیازمندی به آنلاین بودن",
         "installedPlatform": "پلتفرم های نصب شده",
@@ -113,6 +120,9 @@
         "wineversion": "نسخه Wine"
     },
     "label": {
+        "game": {
+            "third-party-game": "Third-Party Game NOT Supported"
+        },
         "playing": {
             "start": "اجرا",
             "stop": "در حال اجرا (توقف)"
@@ -130,16 +140,12 @@
         "login": "Log in",
         "title": "You are NOT logged in"
     },
-    "Open": "",
-    "queue": {
-        "label": {
-            "canceled": "Download Canceled",
-            "remove": "Remove from download manager"
-        }
-    },
     "report_problem": "گزارش مشکل اجرای این بازی",
     "sdl": {
         "title": "انتخاب محتواها برای نصب"
+    },
+    "setting": {
+        "use-default-wine-settings": "Use Default Wine Settings"
     },
     "sideload": {
         "field": {
@@ -164,14 +170,18 @@
     },
     "status": {
         "clickToUpdate": "برای به روزرسانی کلیک کنید",
+        "gameNotAvailable": "Game not available",
         "hasUpdates": "نسخه جدید موجود است!",
         "installed": "نصب شده",
         "installing": "در حال نصب",
         "moving": "در حال انتقال نصب، لطفا صبر کنید",
         "notinstalled": "این بازی نصب نشده است",
+        "notSupported": "Not supported",
+        "notSupportedGame": "Not Supported",
         "processing": "در حال پردازش فایلها، لطفا منتظر بمانید",
         "queued": "Queued",
         "reparing": "در حال تعمیر بازی، لطفا صبر کنید",
+        "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "حجم کل دانلود شده",
         "uninstalling": "Uninstalling",
         "updating": "در حال به روزرسانی بازی"

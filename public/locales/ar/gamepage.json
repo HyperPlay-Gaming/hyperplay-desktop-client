@@ -1,12 +1,12 @@
 {
     "box": {
         "change": {
-            "path": "اختر مسار التثبيت الجديد",
-            "message": "هذا الخِيار سيقوم بتغيير مكان تثبيت اللعبة, هل أنت متأكد؟",
-            "title": "غيِّر مسار تثبيت اللعبة"
+            "message": "سيقوم هذا الخيار بتغيير مكان تثبيت اللعبة، هل أنت متأكد؟",
+            "path": "اختر مسار تثبيت جديد",
+            "title": "غيِّر مسار تثبيت الألعاب"
         },
         "choose": "اختر",
-        "installpath": "اختر مسار التثبيت",
+        "importpath": "إختر مجلد لعبة لاستيراده",
         "move": {
             "message": "هذه العملية قد تأخذ وقتًا طويلًا، هل أنت متأكد؟",
             "path": "اختر وجهة النقل",
@@ -14,139 +14,187 @@
         },
         "no": "لا",
         "repair": {
-            "title": "تآكيد و إصلاح",
-            "message": "هل تريد إصلاح ملفات اللعبة؟ هذه العملية قد تأخذ وقتًا طويلًا."
+            "message": "هل تريد محاولة إصلاح ملفات اللعبة؟ قد تستغرق هذه العملية وقتًا طويلًا.",
+            "title": "أكّد وأصلح"
         },
-        "shortcuts": {
-            "title": "إختصارات"
+        "runexe": {
+            "title": "اختر ملفًا تنفيذيًا لتشغيله"
+        },
+        "select": {
+            "button": "اختر"
+        },
+        "sideload": {
+            "exe": "اختر ملفًا تنفيذيًا"
+        },
+        "stopInstall": {
+            "keepInstalling": "تابع التثبيت",
+            "message": "هل تريد إبقاء الملفات المُنزّلة؟",
+            "title": "أوقف التثبيت"
         },
         "uninstall": {
-            "title": "أزِل",
-            "message": "هل تريد إزالة هذه اللعبة؟",
+            "checkbox": "إزالة السابقة: {{newLine}}{{prefix}} ملاحظة: سيحذف هذا القرار ملفات التخزينات التي ليس لها نسخ احتياطية ولا يمكن التراجع عن هذا.",
             "checkbox_prefix": "بادئة",
-            "checkbox": "هل ترغب في إزالة Prefix أيضًا؟ لا يمكن التراجع عن هذا."
+            "message": "هل تريد إلغاء تثبيت هذه اللعبة؟",
+            "title": "أزِل التثبيت"
         },
-        "yes": "نعم",
-        "ok": "موافق",
-        "stopInstall": {
-            "message": "هل تريد إبقاء الملفات التي تم تحميلها؟",
-            "keepInstalling": "متابعة التثبيت",
-            "title": "إيقاف التثبيت"
-        },
-        "importpath": "إختر مجلد اللعبة ليتم إستيراده",
         "update": {
-            "message": "هنالك تحديث متاح لهذه اللعبة, هل ترغب في التحديث الان؟",
-            "title": "اللعبة تحتاج إلى تحديث"
+            "message": "هنالك تحديث متاح لهذه اللعبة، هل تريد تطبيقه الآن؟",
+            "title": "تحتاج اللعبة للتحديث"
         },
-        "wineprefix": "اختر مجلد WinePrefix"
+        "wineprefix": "اختر مجلد سابقات واين",
+        "yes": "نعم"
     },
     "button": {
-        "cancel": "إيقاف مؤقت/إلغاء",
-        "import": "استيراد لعبة",
+        "add_to_favourites": "أضف للمفضلة",
+        "cancel": "أوقف مؤقتًا/إلغِ",
+        "continue": "تابع التنزيل",
+        "finish": "أنهِ",
+        "force_update": "افرض تثبيت التحديث إذا كان متاحًا",
+        "force-innstall": "افرض التثبيت",
+        "hide_game": "أخفِ اللعبة",
+        "import": "استورد لعبةً",
         "install": "ثبت",
-        "uninstall": "الغاء التثبيت",
-        "update": "حدّث",
-        "continue": "متابعة التنزيل",
-        "hide_game": "إخفاء اللعبة",
-        "remove_from_favourites": "حذف من المفضلة",
-        "unhide_game": "إظهار اللعبة",
-        "add_to_favourites": "أضف إلي المفضلة",
-        "force_update": "فرض التحديث إذا كان متاحًا"
-    },
-    "disabled": "معطّل",
-    "enabled": "مفعّل",
-    "info": {
-        "size": "حجم",
-        "version": "الإصدار",
-        "syncsaves": "مزامنة المحفوظات",
-        "canRunOffline": "الاتصال بشبكة الإنترنت مطلوب",
-        "path": "مسار التثبيت",
-        "installedPlatform": "المنصة المثبتة"
-    },
-    "specs": {
-        "minimum": "الحد الادنى",
-        "recommended": "الموصى به"
-    },
-    "submenu": {
-        "settings": "الإعدادات",
-        "addShortcut": "إضافة اختصار",
-        "log": "آخر سجل",
-        "protondb": "تحقق من التوافق",
-        "store": "صفحة المتجر",
-        "verify": "تحقق وأصلح",
-        "move": "انقل اللعبة",
-        "change": "تغيير مسار التثبيت",
-        "removeShortcut": "إزالة الاختصارات",
-        "addToSteam": "أضف إلى Steam",
-        "disableEosOverlay": "تعطيل تراكب EOS",
-        "enableEosOverlay": "تفعيل تراكب EOS",
-        "removeFromSteam": "أخرجه من البخار"
-    },
-    "install": {
-        "another": "ثبّت في مسار آخر",
-        "import": "استورد لعبة",
-        "default": "ثبّت في",
-        "path": "اختر مسار التثبيت",
-        "wineprefix": "WinePrefix",
-        "wineversion": "إصدار Wine",
-        "disk-space-left": "المساحة المتوفرة",
-        "invalid-folder": "خطأ: المسار غير صالح",
-        "not-enough-disk-space": "مساحة غير كافيه",
-        "space-after-install": "بعد التثبيت",
-        "path-not-writtable": "تحذير: المسار قد لا يكون قابلاً للحرير."
-    },
-    "label": {
-        "playing": {
-            "start": "إلعب الأن",
-            "stop": "مشغّلة (أوقفها)"
+        "no-path-selected": "لم يُحدد مسار",
+        "queue": {
+            "remove": "أزل من قائمة الانتظار"
         },
-        "saves": {
-            "syncing": "المحفوظات قيد المزامنة"
-        }
+        "remove_from_favourites": "احذف من المفضلة",
+        "remove_from_recent": "أزل من \"المشغلة مؤخرًا\"",
+        "run-exe-first": "شغّل المُثبت أولًا",
+        "running-setup": "تشغيل الإعداد",
+        "sideload": {
+            "edit": "حرِّر التطبيق/اللعبة"
+        },
+        "unhide_game": "أظهر اللعبة",
+        "uninstall": "ألغِ التثبيت",
+        "update": "حدّث"
     },
-    "launch": {
-        "options": "خيارات التشغيل..."
+    "cloud_save_unsupported": "غير مدعوم",
+    "disabled": "معطّل",
+    "dlc": {
+        "installDlcs": "ثبت كل المحتوى القابل للتنزيل (DLC)"
     },
-    "sdl": {
-        "showList": "أنقر لـ عرض/إخفاء الاضافات",
-        "title": "إختر المكونات المراد تثبيتها"
-    },
-    "status": {
-        "clickToUpdate": "انقر للتحديث",
-        "hasUpdates": "إصدار جديد متاح!",
-        "installed": "مثبت",
-        "moving": "ينقل مجلد اللعبة، رجاءً انتظر",
-        "notinstalled": "اللعبة غير مثبتة",
-        "reparing": "جاري اصلاح اللعبة، الرجاء الانتظار",
-        "updating": "يتم تحديث اللعبة",
-        "installing": "تثبيت",
-        "totalDownloaded": "إجمالي التنزيلات",
-        "processing": "معالجة الملفات, الرجاء الانتظار"
+    "enabled": "مُمكّن",
+    "game": {
+        "downloadSize": "حجم التنزيل",
+        "firstPlayed": "لُعبت لأول مرة في",
+        "getting-download-size": "قيد الحصول على حجم التنزيل",
+        "getting-install-size": "قيد الحصول على حجم التثبيت",
+        "installSize": "حجم التثبيت",
+        "language": "اللغة",
+        "lastPlayed": "لُعِبت آخر مرة في",
+        "neverPlayed": "لم تُلعب مطلقًا",
+        "platform": "حدد إصدار المنصة لتثبيته",
+        "requirements": "متطلبات النظام",
+        "totalPlayed": "مدة اللعب"
     },
     "gamecard": {
         "moving": "قيد النقل",
         "repairing": "قيد الإصلاح"
     },
-    "game": {
-        "totalPlayed": "مدة اللعب",
-        "downloadSize": "حجم التحميل",
-        "installSize": "حجم التثبيت",
-        "firstPlayed": "لُعبت لأول مرة في",
-        "lastPlayed": "لُعِبت آخر مرة في",
-        "neverPlayed": "لَم تُلعَب مُطلَقاً",
-        "language": "اللغة",
-        "platform": "حدد إصدار النظام الأساسي المراد تثبيته",
-        "info": "معلومات",
-        "requirements": "متطلبات النظام",
-        "tools": "الأدوات"
-    },
-    "dlc": {
-        "installDlcs": "تحميل جميع المحتويات القابلة للتحميل (DLC)",
-        "title": "DLCs"
-    },
-    "report_problem": "أبلغ عن مشكلة في تشغيل هذه اللعبة",
     "generic": {
         "error": "خطأ مجهول"
     },
-    "cloud_save_unsupported": "غير مدعوم"
+    "hours": "ساعات",
+    "how-long-to-beat": {
+        "completionist": "الخاتِم",
+        "main-plus-extras": "رئيسي + إضافات",
+        "main-story": "القصة الرئيسية"
+    },
+    "howLongToBeat": "كم اُستغرق من الوقت للإنهاء",
+    "info": {
+        "canRunOffline": "يتطلب الاتصال بشبكة الإنترنت",
+        "installedPlatform": "المنصة المثبتة",
+        "path": "مسار التثبيت",
+        "size": "الحجم",
+        "syncsaves": "مزامنة ملفات التخزين",
+        "version": "النسخة"
+    },
+    "install": {
+        "disk-space-left": "المساحة المتوفرة",
+        "not-enough-disk-space": "المساحة غير كافية",
+        "path": "اختر مسار التثبيت",
+        "path-not-writtable": "تحذير: قد لا يكون المسار قابلًا للتحرير.",
+        "space-after-install": "بعد التثبيت",
+        "wineprefix": "سابقة واين",
+        "wineversion": "إصدار واين"
+    },
+    "label": {
+        "game": {
+            "third-party-game": "لعبة الطرف الثالث ليست مدعومة"
+        },
+        "playing": {
+            "start": "إلعب الأن",
+            "stop": "مشغّلة (أوقفها)"
+        },
+        "saves": {
+            "syncing": "قيد مزامنة ملفات التخزين"
+        }
+    },
+    "launch": {
+        "options": "خيارات التشغيل..."
+    },
+    "not_logged_in": {
+        "epic": "أنت لم تسجل الدخول بحساب Epic في Heroic. لا تستخدم صفحة المتجر لتسجيل الدخول ، انقر فوق الزر التالي بدلاً من ذلك:",
+        "gog": "أنت لم تسجل الدخول بحساب GOG في Heroic. لا تستخدم صفحة المتجر لتسجيل الدخول ، انقر فوق الزر التالي بدلاً من ذلك:",
+        "login": "تسجيل الدخول",
+        "title": "لم يتم دخولك"
+    },
+    "report_problem": "بلّغ عن مشكلة في تشغيل هذه اللعبة",
+    "sdl": {
+        "title": "اختر المكونات المراد تثبيتها"
+    },
+    "setting": {
+        "use-default-wine-settings": "استخدم إعدادات واين الافتراضية"
+    },
+    "sideload": {
+        "field": {
+            "title": "عنوان"
+        },
+        "info": {
+            "exe": "حدد قابل للتنفيذ",
+            "image": "صورة التطبيق",
+            "title": "عنوان اللعبة / التطبيق"
+        },
+        "placeholder": {
+            "image": "الصق عنوان URL للصورة هنا",
+            "title": "أضف عنوانًا إلى لعبتك / تطبيقك"
+        }
+    },
+    "specs": {
+        "minimum": "الحد الأدنى",
+        "recommended": "الموصى به"
+    },
+    "status": {
+        "clickToUpdate": "انقر للتحديث",
+        "gameNotAvailable": "اللعبة غير متوفرة",
+        "hasUpdates": "هناك إصدار جديد!",
+        "installed": "مثبت",
+        "installing": "قيد التثبيت",
+        "moving": "قيد نقل تثبيت اللعبة، انتظر رجاءً",
+        "notinstalled": "اللعبة غير مثبتة",
+        "notSupported": "غير مدعوم",
+        "notSupportedGame": "غير مدعوم",
+        "processing": "قيد معالجة الملفات، يرجى الانتظار",
+        "queued": "في قائمة الانتظار",
+        "reparing": "جارٍ اصلاح اللعبة، انتظر رجاءً",
+        "this-game-uses-third-party": "تستخدم هذه اللعبة مُشغل طرف ثالث وهي غير مدعومة بعد",
+        "totalDownloaded": "إجمالي التنزيلات",
+        "uninstalling": "قيد إلغاء التثبيت",
+        "updating": "قيد تحديث اللعبة"
+    },
+    "submenu": {
+        "addShortcut": "أضف اختصارًا",
+        "addToSteam": "أضف إلى ستيم",
+        "change": "غير مسار التثبيت",
+        "disableEosOverlay": "عطل طبقة EOS",
+        "enableEosOverlay": "مكن طبقة EOS",
+        "move": "انقل اللعبة",
+        "protondb": "تحقق من التوافق",
+        "removeFromSteam": "أخرجه من ستيم",
+        "removeShortcut": "أزل الاختصارات",
+        "settings": "الإعدادات",
+        "store": "صفحة المتجر",
+        "verify": "تحقق وأصلح"
+    }
 }

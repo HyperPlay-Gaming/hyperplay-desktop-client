@@ -66,7 +66,6 @@
                 "title": "Došlo je do neuhvaćenog izuzetka!"
             },
             "update": {
-                "message": "Nešto nije u redu s ažuriranjem, molimo provjerite zapise ili pokušajte ponovo kasnije!",
                 "title": "Greška ažuriranja"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "Prečice su kreirane na radnoj površini i Start meniju",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Prečice su uklonjene sa radne površine i Start menija",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Prečice"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "DA"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Idi u biblioteku",
         "login": "Prijavite se",
         "sync": "Sinhronizirajte",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Aktiviraj",
             "back": "Nazad",
             "backspace": "Backspace",
-            "close_context_menu": "Zatvorite kontekstni meni",
             "close_dialog": "Zatvori dijalog",
             "close_keyboard": "Zatvorite tastaturu",
-            "context_menu": "Kontekstni meni",
+            "close_options": "Close Options",
             "game_details": "Detalji igre",
             "game_settings": "Postavke igre",
             "install_game": "Instaliraj igru",
             "move_cursor": "Pomeri kursor",
-            "none": "Nema",
             "open_virtual_keyboard": "Otvorite virtuelnu tastaturu",
+            "options": "Options",
             "play_game": "Igrati igru",
             "scroll": "Scroll",
+            "select": "Select",
             "space": "Prostor",
             "update_game": "Ažurirajte igru"
         }
     },
     "docs": "Dokumentacija",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "Online usluge možda neće raditi u potpunosti jer su Epic Games serveri van mreže!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Dostupno ažuriranje!",
             "stable": "Stabilan",
             "version": "HyperPlay verzija"
@@ -300,7 +307,9 @@
         "website": "Učitavanje webstranice"
     },
     "login": {
-        "externalLogin": "Vanjska prijava",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Ime varijable",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Napredak",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Igrano nedavno",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Odaberite alternativnu GOGDL binarnu datoteku koju želite koristiti",
         "alt-legendary-bin": "Odaberite alternativnu Legendary binarnu datoteku",
-        "audiofix": "Popravak zvuka (kašnjenje pulsnog zvuka)",
         "autodxvk": "Automatska instalacija/ažuriranje DXVK na prefiksu",
         "autosync": "Automatska sinkronizacija spremanja",
         "autovkd3d": "Automatska instalacija/ažuriranje VKD3D na prefiksu",
@@ -509,7 +523,9 @@
             "title": "Pokrenite EXE na prefiksu"
         },
         "savefolder": {
-            "placeholder": "Odaberite tačnu mapu za spremanje video igara"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Odaberite tačnu mapu za spremanje video igara",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Izaberite temu",
         "showfps": "Pokaži FPS (DX9, 10 i 11)",
@@ -527,6 +543,7 @@
         "clear-cache": "Obrišite HyperPlay predmemoriju",
         "copiedToClipboard": "Kopirano u međuspremnik!",
         "copyToClipboard": "Kopirajte sve postavke u međuspremnik",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode je neophodan da EAC runtime radi na Flatpaku. Želite li ga sada omogućiti?",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "Napredno",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "Generalno",
             "log": "Prijavite se",
             "other": "Drugi",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "Odjavite se",
         "logout_confirmation": "Jeste li sigurni da se želite odjaviti?",
         "manageaccounts": "Upravljajte računima",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Akcija",
         "manager": {
-            "error": "Ovaj put nije bilo moguće preuzeti Wine/Proton verzije.",
             "link": "Wine menadžer",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Wine menadžer",
             "unzipping": "Raspakivanje"
         },

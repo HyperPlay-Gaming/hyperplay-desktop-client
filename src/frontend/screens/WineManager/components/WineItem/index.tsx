@@ -1,12 +1,11 @@
 import './index.css'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { WineVersionInfo } from 'common/types'
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { SvgButton } from 'frontend/components/UI'
-import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
 import { ProgressInfo, State } from 'heroic-wine-downloader'
 
@@ -27,7 +26,6 @@ const WineItem = ({
   type
 }: WineVersionInfo) => {
   const { t } = useTranslation()
-  const { refreshWineVersionInfo } = useContext(ContextProvider)
   const [progress, setProgress] = useState<{
     state: State
     progress: ProgressInfo
@@ -62,7 +60,7 @@ const WineItem = ({
   const unZipping = progress.state === 'unzipping'
 
   async function install() {
-    notify([`${version}`, t('notify.install.startInstall')])
+    notify({ title: `${version}`, body: t('notify.install.startInstall') })
     window.api
       .installWineVersion({
         version,
@@ -79,14 +77,13 @@ const WineItem = ({
       .then((response) => {
         switch (response) {
           case 'error':
-            notify([`${version}`, t('notify.install.error')])
+            notify({ title: `${version}`, body: t('notify.install.error') })
             break
           case 'abort':
-            notify([`${version}`, t('notify.install.canceled')])
+            notify({ title: `${version}`, body: t('notify.install.canceled') })
             break
           case 'success':
-            refreshWineVersionInfo(false)
-            notify([`${version}`, t('notify.install.finished')])
+            notify({ title: `${version}`, body: t('notify.install.finished') })
             break
           default:
             break
@@ -110,8 +107,7 @@ const WineItem = ({
       })
       .then((response) => {
         if (response) {
-          refreshWineVersionInfo(false)
-          notify([`${version}`, t('notify.uninstalled')])
+          notify({ title: `${version}`, body: t('notify.uninstalled') })
         }
       })
   }

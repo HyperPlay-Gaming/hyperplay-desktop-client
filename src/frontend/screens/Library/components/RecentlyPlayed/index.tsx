@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
-import { AppSettings, GameInfo, RecentGame, Runner } from 'common/types'
-import { GamesList } from '../GamesList'
+import { GameInfo, RecentGame, Runner } from 'common/types'
+import GamesList from '../GamesList'
 import { configStore } from 'frontend/helpers/electronStores'
 
 interface Props {
@@ -29,15 +29,16 @@ function getRecentGames(libraries: GameInfo[], limit: number): GameInfo[] {
   return games
 }
 
-export default function RecentlyPlayed({ handleModal, onlyInstalled }: Props) {
+export default React.memo(function RecentlyPlayed({
+  handleModal,
+  onlyInstalled
+}: Props) {
   const { t } = useTranslation()
   const { epic, gog, sideloadedLibrary } = useContext(ContextProvider)
   const [recentGames, setRecentGames] = useState<GameInfo[]>([])
 
   const loadRecentGames = async () => {
-    const { maxRecentGames }: AppSettings = await window.api.requestSettings(
-      'default'
-    )
+    const { maxRecentGames } = await window.api.requestAppSettings()
     const newRecentGames = getRecentGames(
       [...epic.library, ...gog.library, ...sideloadedLibrary],
       maxRecentGames
@@ -59,7 +60,7 @@ export default function RecentlyPlayed({ handleModal, onlyInstalled }: Props) {
     return () => {
       recentGamesChangedRemoveListener()
     }
-  }, [])
+  }, [epic.library, gog.library, sideloadedLibrary])
 
   if (!recentGames.length) {
     return null
@@ -77,4 +78,4 @@ export default function RecentlyPlayed({ handleModal, onlyInstalled }: Props) {
       />
     </>
   )
-}
+})

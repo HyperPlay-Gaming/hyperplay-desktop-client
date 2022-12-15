@@ -65,6 +65,7 @@
   --osk-background: var(--body-background);
   --osk-button-background: var(--input-background);
   --osk-button-border: var(--navbar-background);
+  --controller-hints-background: transparent;
 
   --anticheat-denied: var(--danger);
   --anticheat-broken: #e8590c;
@@ -79,10 +80,11 @@
     #1d1f1f 31.77%,
     #1d1f1f 0%
   );
+  --gamecard-title-color: #17131cd2;
   --gradient-gamecard: linear-gradient(
     180deg,
     rgba(0, 0, 0, 0.418) 1.8%,
-    #17131cd2 45%
+    var(--gamecard-title-color) 45%
   );
   --gradient-game-hover: linear-gradient(#000000 30.8%, #141515 77%);
   --gradient-body-background: #000000;
@@ -94,6 +96,8 @@
   --text-tertiary: #101111; /* This is not defined in figma */
   --text-quartenary: #5a5e5f; /* this is meant to be a background colour */
   --text-danger: #d22121;
+  --text-gametitle: var(--text-default);
+  --text-log: #f5cf69;
 
   /*Action Icons*/
   --action-icon: var(--text-default);

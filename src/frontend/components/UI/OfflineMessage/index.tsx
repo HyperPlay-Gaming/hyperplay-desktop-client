@@ -2,7 +2,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import './index.css'
+import './index.scss'
 
 const OfflineMessage = () => {
   const { t } = useTranslation()
@@ -17,12 +17,12 @@ const OfflineMessage = () => {
 
   if (connectivity.status === 'check-online') {
     if (connectivity.retryIn) {
-      content += t('offline-message.retry-in', {
-        defaultValue: 'Retrying in ... {{seconds}} seconds',
+      content = t('offline-message.offline-retry-in', {
+        defaultValue: 'Offline. Retrying in {{seconds}} seconds.',
         seconds: connectivity.retryIn
       })
     } else {
-      content = t('offline-message.retrying', 'Retrying')
+      content = t('offline-message.retrying', 'Retrying...')
     }
   }
 
@@ -32,9 +32,18 @@ const OfflineMessage = () => {
     newline: '<br />'
   })
 
+  const onIgnore = () => {
+    window.api.setConnectivityOnline()
+  }
+
   return (
     <div className="offline-message">
-      <span>{content}</span>
+      <span>
+        {content}
+        <button className="ignore" onClick={onIgnore}>
+          ({t('offline-message.ignore', 'Ignore')})
+        </button>
+      </span>
       <button className="hint-hover">?</button>
       <span
         className="retry-hint"

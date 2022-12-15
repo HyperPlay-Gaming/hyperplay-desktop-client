@@ -5,15 +5,26 @@ import './index.css'
 
 interface Props {
   htmlId: string
-  disabled?: boolean
   handleChange: ChangeEventHandler<HTMLInputElement>
   value: boolean
   title: string
+  disabled?: boolean
   extraClass?: string
+  description?: string
+  fading?: boolean
 }
 
 export default function ToggleSwitch(props: Props) {
-  const { handleChange, value, disabled, title, htmlId, extraClass } = props
+  const {
+    handleChange,
+    value,
+    disabled,
+    title,
+    htmlId,
+    extraClass,
+    description = '',
+    fading
+  } = props
   const { isRTL } = useContext(ContextProvider)
 
   return (
@@ -29,9 +40,11 @@ export default function ToggleSwitch(props: Props) {
       />
       <label
         className={classNames(`toggleSwitchWrapper Field ${extraClass}`, {
-          isRTL
+          isRTL,
+          fading
         })}
         htmlFor={htmlId}
+        title={description}
       >
         {title}
       </label>

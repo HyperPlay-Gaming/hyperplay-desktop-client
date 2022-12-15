@@ -26,7 +26,10 @@ import {
   isWindows,
   installed,
   configStore,
-  gamesConfigPath
+  gamesConfigPath,
+  isLinux,
+  isFlatpak,
+  isCLINoGui
 } from '../constants'
 import { logError, logInfo, LogPrefix } from '../logger/logger'
 import {
@@ -46,6 +49,7 @@ import shlex from 'shlex'
 import { t } from 'i18next'
 import { isOnline } from '../online_monitor'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
+import { gameAnticheatInfo } from '../anticheat/utils'
 
 class LegendaryGame extends Game {
   public appName: string
@@ -356,7 +360,7 @@ class LegendaryGame extends Game {
     const onOutput = (data: string) => {
       this.onInstallOrUpdateOutput(
         'updating',
-        info.manifest.download_size,
+        info.manifest?.download_size,
         data
       )
     }
@@ -435,7 +439,7 @@ class LegendaryGame extends Game {
     const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
     const noHttps = downloadNoHttps ? ['--no-https'] : []
     const withDlcs = installDlcs ? '--with-dlcs' : '--skip-dlcs'
-    const installSdl = sdlList.length
+    const installSdl = sdlList?.length
       ? this.getSdlList(sdlList)
       : ['--skip-sdl']
 
@@ -458,7 +462,7 @@ class LegendaryGame extends Game {
     const onOutput = (data: string) => {
       this.onInstallOrUpdateOutput(
         'installing',
-        info.manifest.download_size,
+        info.manifest?.download_size,
         data
       )
     }
@@ -502,6 +506,19 @@ class LegendaryGame extends Game {
       return { status: 'error', error: res.error }
     }
     this.addShortcuts()
+
+    const anticheatInfo = gameAnticheatInfo(this.getGameInfo().namespace)
+
+    if (anticheatInfo && isLinux) {
+      const gameSettings = await this.getSettings()
+
+      gameSettings.eacRuntime =
+        anticheatInfo.anticheats.includes('Easy Anti-Cheat')
+      if (gameSettings.eacRuntime && isFlatpak) gameSettings.useGameMode = true
+      gameSettings.battlEyeRuntime =
+        anticheatInfo.anticheats.includes('BattlEye')
+    }
+
     return { status: 'done' }
   }
 
@@ -564,8 +581,18 @@ class LegendaryGame extends Game {
     return res
   }
 
-  public async import(path: string): Promise<ExecResult> {
-    const commandParts = ['import', this.appName, path]
+  public async import(
+    path: string,
+    platform: InstallPlatform
+  ): Promise<ExecResult> {
+    const commandParts = [
+      'import',
+      '--with-dlcs',
+      '--platform',
+      platform,
+      this.appName,
+      path
+    ]
 
     logInfo(`Importing ${this.appName}.`, { prefix: LogPrefix.Legendary })
 
@@ -588,7 +615,13 @@ class LegendaryGame extends Game {
    * Sync saves.
    * Does NOT check for online connectivity.
    */
-  public async syncSaves(arg: string, path: string) {
+  public async syncSaves(arg: string, path: string): Promise<string> {
+    if (!path) {
+      logError('No path provided for SavesSync, check your settings!', {
+        prefix: LogPrefix.Legendary
+      })
+      return 'No path provided.'
+    }
     path = path.replaceAll("'", '').replaceAll('"', '')
     const fixedPath = isWindows ? path.slice(0, -1) : path
 
@@ -607,11 +640,13 @@ class LegendaryGame extends Game {
       '-y'
     ]
 
+    let fullOutput = ''
     const res = await runLegendaryCommand(
       commandParts,
       createAbortController(this.appName),
       {
-        logMessagePrefix: `Syncing saves for ${this.appName}`
+        logMessagePrefix: `Syncing saves for ${this.appName}`,
+        onOutput: (output) => (fullOutput += output)
       }
     )
 
@@ -622,7 +657,7 @@ class LegendaryGame extends Game {
         prefix: LogPrefix.Legendary
       })
     }
-    return res
+    return fullOutput
   }
 
   public async launch(launchArguments: string): Promise<boolean> {
@@ -651,7 +686,7 @@ class LegendaryGame extends Game {
       return false
     }
 
-    const offlineFlag = offlineMode ? '--offline' : ''
+    const offlineFlag = offlineMode ? ['--offline'] : []
     const exeOverrideFlag = gameSettings.targetExe
       ? ['--override-exe', gameSettings.targetExe]
       : []
@@ -711,15 +746,25 @@ class LegendaryGame extends Game {
       ['launch', this.appName, '--json', '--offline'],
       createAbortController(this.appName)
     )
+
     appendFileSync(
       this.logFileLocation,
       "Legendary's config from config.ini (before HyperPlay's settings):\n"
     )
-    const json = JSON.parse(stdout)
-    // remove egl auth info
-    delete json['egl_parameters']
 
-    appendFileSync(this.logFileLocation, JSON.stringify(json, null, 2) + '\n\n')
+    try {
+      const json = JSON.parse(stdout)
+      // remove egl auth info
+      delete json['egl_parameters']
+
+      appendFileSync(
+        this.logFileLocation,
+        JSON.stringify(json, null, 2) + '\n\n'
+      )
+    } catch (error) {
+      // in case legendary's command fails and the output is not json
+      appendFileSync(this.logFileLocation, error + '\n' + stdout + '\n\n')
+    }
 
     const commandParts = [
       'launch',
@@ -729,15 +774,14 @@ class LegendaryGame extends Game {
       ...offlineFlag,
       ...wineFlag,
       ...shlex.split(launchArguments ?? ''),
+      isCLINoGui ? '--skip-version-check' : '',
       ...shlex.split(gameSettings.launcherArgs ?? '')
     ]
     const wrappers = setupWrappers(
       gameSettings,
       mangoHudCommand,
       gameModeBin,
-      steamRuntime?.length
-        ? [...steamRuntime, `--filesystem=${gameInfo.install.install_path}`]
-        : undefined
+      steamRuntime?.length ? [...steamRuntime] : undefined
     )
 
     const fullCommand = getRunnerCallWithoutCredentials(

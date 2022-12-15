@@ -24,8 +24,8 @@
         },
         "choose": "Välj",
         "choose-egs-prefix": "Ange prefix med befintlig EGS installation",
-        "choose-gogdl-binary": "Ange GOGDL binärfil (omstart krävs)",
-        "choose-legendary-binary": "Ange Legendary binärfil",
+        "choose-gogdl-binary": "Ange GOGDL programfil (omstart krävs)",
+        "choose-legendary-binary": "Ange Legendary programfil",
         "customWine": "Ange Wine/Proton version",
         "default-install-path": "Ange standard installationssökväg",
         "default-steam-path": "Steam path.",
@@ -33,8 +33,8 @@
         "error": {
             "add": {
                 "steam": {
-                    "body": "Adding {{game}} to Steam failed with:{{newLine}} {{error}}",
-                    "title": "Adding Error"
+                    "body": "Misslyckades lägga till {{game}} i Steam:{{newLine}} {{error}}",
+                    "title": "Misslyckades lägga till spel"
                 }
             },
             "credentials": {
@@ -57,26 +57,25 @@
             },
             "generic": {
                 "message": "",
-                "title": "Select EXE to Run"
+                "title": "Ange programfil"
             },
             "launchAborted": "Launch aborted",
             "title": "Problem",
             "uncaught-exception": {
-                "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
-                "title": "Uncaught Exception occured!"
+                "message": "Okänt fel:{{newLine}}{{error}}{{newLine}}{{newLine}} Vänligen rapportera felet på vår Github.",
+                "title": "Okänt fel!"
             },
             "update": {
-                "message": "Uppdateringen misslyckades, kontrollera loggfilen eller försök igen senare.",
                 "title": "Problem vid uppdatering"
             },
             "wine-not-found": {
-                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
+                "invalid": "Angiven Wine version hittades ej. Installera denna version eller välj något annat i spelets inställningar{{newline}}Version: {{version}}{{newline}}Sökväg: {{path}}",
                 "message": "Ingen Wine version vald. Kontrollera spelinställningar!",
                 "title": "Wine hittades ej"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
-                "title": "Winetricks error"
+                "message": "Winetricks misslyckades, felmeddelande:{{newLine}}{{error}}",
+                "title": "Winetricks problem"
             }
         },
         "info": {
@@ -102,20 +101,22 @@
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "Är du säker att du vill grundåterställa Heroic? Detta raderar alla inställningar och cachefiler men raderar inte installerade spel eller Epic inloggningsuppgifter. Portabla versioner (AppImage, WinPortable, ...) av Heroic måste startas om manuellt efteråt.",
+                "title": "Grundåterställ Heroic"
             }
         },
         "runexe": {
-            "title": "Ange EXE-fil att köra"
+            "title": "Välj körbart program"
         },
         "select": {
-            "button": "Välj",
-            "exe": "Ange EXE"
+            "button": "Ange val",
+            "exe": "Ange programfil"
         },
         "shortcuts": {
             "message": "Genvägar skapades på Skrivbordet och Startmenyn",
-            "message-remove": "Shortcuts were removed from Desktop and Start Menu",
+            "message-mac": "Shortcuts were created on the Applications folder",
+            "message-remove": "Genvägar togs bort från skrivbordet och startmenyn",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Genvägar"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "Ja"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Gå till Biblioteket",
         "login": "Logga in",
         "sync": "Synkronisering",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Activate",
             "back": "Back",
             "backspace": "Backspace",
-            "close_context_menu": "Close context menu",
             "close_dialog": "Close dialog",
             "close_keyboard": "Close keyboard",
-            "context_menu": "Context menu",
+            "close_options": "Close Options",
             "game_details": "Game details",
             "game_settings": "Game settings",
             "install_game": "Install game",
             "move_cursor": "Move cursor",
-            "none": "None",
             "open_virtual_keyboard": "Open virtual keyboard",
+            "options": "Options",
             "play_game": "Play game",
             "scroll": "Scroll",
+            "select": "Select",
             "space": "Space",
             "update_game": "Update game"
         }
     },
     "docs": "Documentation",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "Onlinetjänster kanske inte fungerar korrekt då Epics servrar är nere för tillfället!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Update Available!",
             "stable": "Stable",
             "version": "HyperPlay Version"
@@ -267,7 +274,7 @@
             "searching": "Trying to detect the correct save folder"
         },
         "settings": "Inställningar sparas automatiskt",
-        "version": "Wine Version"
+        "version": "Wine version"
     },
     "infobox": {
         "help": "Hjälp",
@@ -300,7 +307,9 @@
         "website": "Laddar websida"
     },
     "login": {
-        "externalLogin": "Externt login",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Progress",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Nyligen spelat",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Ange alternativ GOGDL version (omstart krävs)",
         "alt-legendary-bin": "Ange alternativ Legendary version",
-        "audiofix": "Ljudfix (Pulse Audio latens)",
         "autodxvk": "Installera/uppdatera DXVK i prefix automatiskt",
         "autosync": "Synkronisera sparfiler automatiskt",
         "autovkd3d": "Installera/uppdatera VKD3D i prefix automatiskt",
@@ -509,13 +523,15 @@
             "title": "Kör EXE-fil i prefix"
         },
         "savefolder": {
-            "placeholder": "Ange specifik sparfilsmapp"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Ange specifik sparfilsmapp",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Välj tema",
         "showfps": "Visa FPS (DX9, 10 och 11)",
         "start-in-tray": "Starta minimerad",
         "steamruntime": "Använd Steam Runtime",
-        "winecrossoverbottle": "CrossOver Bottle",
+        "winecrossoverbottle": "CrossOver prefix",
         "wineprefix": "Wine-prefix mapp",
         "wineversion": "Wine version"
     },
@@ -527,6 +543,7 @@
         "clear-cache": "Rensa HyperPlay cache",
         "copiedToClipboard": "Kopierat till urklipp/klippbord!",
         "copyToClipboard": "Kopiera all inställningar till urklipp/klippbord",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "Avancerat",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "Allmänt",
             "log": "Logg",
             "other": "Övrigt",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "Logga ut",
         "logout_confirmation": "Är du säker att du vill logga ut?",
         "manageaccounts": "Hantera konton",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "error": "Kunde inte hämta Wine/Proton versioner.",
             "link": "Wine hanterare",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Wine hanterare",
             "unzipping": "Packar upp"
         },

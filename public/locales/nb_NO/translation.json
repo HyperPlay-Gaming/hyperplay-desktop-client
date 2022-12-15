@@ -66,7 +66,6 @@
                 "title": "Ufanget unntak skjedde!"
             },
             "update": {
-                "message": "Noe gikk galt med oppdateringen, vennligst sjekk loggene eller prøv igjen senere!",
                 "title": "Oppdateringsfeil"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "Snarveier ble opprettet på skrivebordet og startmenyen",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Snarveier ble fjernet fra skrivebordet og startmenyen",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Snarveier"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "Ja"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Gå til biblioteket",
         "login": "Logg inn",
         "sync": "Synkroniser",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Aktiver",
             "back": "Tilbake",
             "backspace": "Tilbake",
-            "close_context_menu": "Lukk kontekstmenyen",
             "close_dialog": "Lukk dialog",
             "close_keyboard": "Lukk tastaturet",
-            "context_menu": "Kontekstmenyen",
+            "close_options": "Close Options",
             "game_details": "Spilldetaljer",
             "game_settings": "Spillinnstillinger",
             "install_game": "Installer spillet",
             "move_cursor": "Flytt markøren",
-            "none": "Ingen",
             "open_virtual_keyboard": "Åpne virtuelt tastatur",
+            "options": "Options",
             "play_game": "Spill",
             "scroll": "Rull",
+            "select": "Select",
             "space": "Rom",
             "update_game": "Oppdater spillet"
         }
     },
     "docs": "Dokumentasjon",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "Netttjenester fungerer kanskje ikke fullt ut siden Epic Games-servere er offline!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Ny versjon tilgjengelig",
             "stable": "Stabil",
             "version": "Heroisk versjon"
@@ -300,7 +307,9 @@
         "website": "Laster inn nettsted"
     },
     "login": {
-        "externalLogin": "Ekstern pålogging",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Variabelnavn",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Framgang",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Spillt nylig",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Velg en alternativ GOGDL-binær du vil bruke",
         "alt-legendary-bin": "Velg en alternativ legendarisk binær",
-        "audiofix": "Lydfiks (pulslydforsinkelse)",
         "autodxvk": "Autoinstaller/oppdater DXVK på prefiks",
         "autosync": "Autosync lagrer",
         "autovkd3d": "Autoinstaller/oppdater VKD3D på prefiks",
@@ -509,7 +523,9 @@
             "title": "Kjør EXE på prefiks"
         },
         "savefolder": {
-            "placeholder": "Velg den nøyaktige mappen for lagring av spill"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Velg den nøyaktige mappen for lagring av spill",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Velg Tema",
         "showfps": "Vis FPS (DX9, 10 og 11)",
@@ -527,6 +543,7 @@
         "clear-cache": "Tøm heroisk cache",
         "copiedToClipboard": "Kopiert til utklippstavlen!",
         "copyToClipboard": "Kopier alle innstillinger til utklippstavlen",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode kreves for at EAC-kjøretiden skal fungere på Flatpak. Vil du aktivere det nå?",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "Avansert",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "Generell",
             "log": "Logg",
             "other": "Annen",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "Logg ut",
         "logout_confirmation": "Er du sikker på at du vil logge ut?",
         "manageaccounts": "Administrer kontoer",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Handling",
         "manager": {
-            "error": "Kunne ikke hente Wine/Proton-versjoner denne gangen.",
             "link": "Vinsjef",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Vinsjef",
             "unzipping": "Pakning ut"
         },

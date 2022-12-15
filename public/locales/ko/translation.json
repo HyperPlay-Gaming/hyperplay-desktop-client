@@ -66,7 +66,6 @@
                 "title": "잡히지 않은 예외 발생!"
             },
             "update": {
-                "message": "업데이트에 문제가 발생했습니다. 로그를 확인하거나 나중에 다시 시도하세요!",
                 "title": "Update Error"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "바탕 화면 및 시작 메뉴에 바로 가기가 생성되었습니다",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "데스크톱 및 시작 메뉴에서 바로 가기가 제거되었습니다",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "바로가기"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "예"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "라이브러리로 이동",
         "login": "로그인",
         "sync": "싱크",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "활성화",
             "back": "뒤로",
             "backspace": "Backspace",
-            "close_context_menu": "우클릭 메뉴 닫기",
             "close_dialog": "대화상자 닫기",
             "close_keyboard": "키보드 닫기",
-            "context_menu": "Context menu",
+            "close_options": "Close Options",
             "game_details": "게임 세부 정보",
             "game_settings": "게임 설정",
             "install_game": "게임 설치",
             "move_cursor": "커서 이동",
-            "none": "None",
             "open_virtual_keyboard": "가상 키보드 열기",
+            "options": "Options",
             "play_game": "게임 플레이",
             "scroll": "Scroll",
+            "select": "Select",
             "space": "스페이스바",
             "update_game": "게임 업데이트"
         }
     },
     "docs": "Documentation",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "Epic Games 서버가 오프라인 상태이므로 온라인 서비스가 완전히 작동하지 않을 수 있습니다!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Update Available!",
             "stable": "Stable",
             "version": "HyperPlay Version"
@@ -300,7 +307,9 @@
         "website": "웹사이트 로드 중"
     },
     "login": {
-        "externalLogin": "외부 로그인",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Progress",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "최근 플레이한 게임",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "대신 사용할 GOGDL 바이너리 파일 선택",
         "alt-legendary-bin": "대신 사용할 Legendary 바이너리 파일 선택",
-        "audiofix": "오디오 픽스 (Pulse Audio 지연)",
         "autodxvk": "접두사에서 DXVK 자동 설치/업데이트",
         "autosync": "세이브 자동 동기화",
         "autovkd3d": "접두사에서 VKD3D 자동 설치/업데이트",
@@ -509,7 +523,9 @@
             "title": "접두사에서 EXE 실행"
         },
         "savefolder": {
-            "placeholder": "올바른 게임 저장 폴더 선택"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "올바른 게임 저장 폴더 선택",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Select Theme",
         "showfps": "FPS 표시 (DX9, 10 및 11)",
@@ -527,6 +543,7 @@
         "clear-cache": "HyperPlay 캐시 삭제",
         "copiedToClipboard": "클립보드에 복사되었습니다!",
         "copyToClipboard": "모든 설정을 클립보드에 복사",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "Advanced",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "일반",
             "log": "Log",
             "other": "기타",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "로그아웃",
         "logout_confirmation": "정말로 로그아웃 하시겠습니까?",
         "manageaccounts": "계정 관리",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "error": "현재 Wine/Proton 버전을 가져올 수 없습니다.",
             "link": "Wine 관리자",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Wine 관리자",
             "unzipping": "압축 풀기"
         },

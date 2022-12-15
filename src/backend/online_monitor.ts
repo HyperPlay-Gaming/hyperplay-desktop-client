@@ -1,5 +1,5 @@
 import { ConnectivityStatus } from 'common/types'
-import { BrowserWindow, ipcMain, IpcMainEvent, net } from 'electron'
+import { BrowserWindow, ipcMain, net } from 'electron'
 import { logInfo, LogPrefix } from './logger/logger'
 import axios from 'axios'
 import EventEmitter from 'node:events'
@@ -68,7 +68,7 @@ const retry = (seconds: number) => {
 
 const ping = async (url: string, signal: AbortSignal) => {
   return axios.head(url, {
-    timeout: 2000,
+    timeout: 10000,
     signal,
     headers: { 'Cache-Control': 'no-cache' }
   })
@@ -98,9 +98,9 @@ const pingSites = () => {
 
 export const initOnlineMonitor = () => {
   // listen to events from the frontend
-  ipcMain.addListener(
+  ipcMain.on(
     'connectivity-changed',
-    (_event: IpcMainEvent, newStatus: ConnectivityStatus) => {
+    (event, newStatus: ConnectivityStatus): void => {
       setStatus(newStatus)
     }
   )
@@ -113,8 +113,15 @@ export const initOnlineMonitor = () => {
   }
 
   // listen to the frontend asking for current status
-  ipcMain.handle('get-connectivity-status', () => {
-    return { status, retryIn }
+  ipcMain.handle(
+    'get-connectivity-status',
+    (): { status: ConnectivityStatus; retryIn: number } => {
+      return { status, retryIn }
+    }
+  )
+
+  ipcMain.on('set-connectivity-online', () => {
+    setStatus('online')
   })
 }
 

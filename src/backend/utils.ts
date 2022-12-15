@@ -15,7 +15,13 @@ import {
 } from 'common/types'
 import * as axios from 'axios'
 import { app, dialog, shell, Notification, BrowserWindow } from 'electron'
-import { exec, spawn, spawnSync } from 'child_process'
+import {
+  exec,
+  ExecException,
+  spawn,
+  SpawnOptions,
+  spawnSync
+} from 'child_process'
 import { existsSync, rmSync, stat } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
@@ -31,7 +37,8 @@ import {
   icon,
   isWindows,
   publicDir,
-  isSteamDeckGameMode
+  isSteamDeckGameMode,
+  isMac
 } from './constants'
 import { logError, logInfo, LogPrefix, logWarning } from './logger/logger'
 import { basename, dirname, join, normalize } from 'path'
@@ -216,7 +223,7 @@ export const getGogdlVersion = async () => {
 export const getAppVersion = () => {
   const VERSION_NUMBER = app.getVersion()
   const BETA_VERSION_NAME = 'Caesar Clown'
-  const STABLE_VERSION_NAME = 'Chopper'
+  const STABLE_VERSION_NAME = 'Yamato'
   const isBetaorAlpha =
     VERSION_NUMBER.includes('alpha') || VERSION_NUMBER.includes('beta')
   const VERSION_NAME = isBetaorAlpha ? BETA_VERSION_NAME : STABLE_VERSION_NAME
@@ -285,15 +292,16 @@ export const getSystemInfo = async () => {
   const { total, available } = await si.mem()
 
   // get OS information
-  const { distro, kernel, arch, platform } = await si.osInfo()
+  const { distro, kernel, arch, platform, release, codename } =
+    await si.osInfo()
 
   // get GPU information
   const { controllers } = await si.graphics()
   const graphicsCards = String(
     controllers.map(
       ({ name, model, vram, driverVersion }, i) =>
-        `GPU${i}: ${name ? name : model} VRAM: ${vram}MB DRIVER: ${
-          driverVersion ?? ''
+        `GPU${i}: ${name ? name : model} ${vram ? `VRAM: ${vram}MB` : ''} ${
+          driverVersion ? `DRIVER: ${driverVersion}` : ''
         } \n`
     )
   )
@@ -308,7 +316,7 @@ export const getSystemInfo = async () => {
   systemInfoCache = `HyperPlay Version: ${heroicVersion}
 Legendary Version: ${legendaryVersion}
 GOGdl Version: ${gogdlVersion}
-OS: ${distro} KERNEL: ${kernel} ARCH: ${arch}
+OS: ${isMac ? `${codename} ${release}` : distro} KERNEL: ${kernel} ARCH: ${arch}
 CPU: ${manufacturer} ${brand} @${speed} ${
     governor ? `GOVERNOR: ${governor}` : ''
   }
@@ -353,9 +361,11 @@ async function errorHandler(
           })
         }
       })
-      .catch(() =>
-        logInfo('operation interrupted', { prefix: LogPrefix.Backend })
-      )
+      .catch((err: ExecException) => {
+        // Grep returns 1 when it didn't find any text, which is fine in this case
+        if (err.code !== 1)
+          logInfo('operation interrupted', { prefix: LogPrefix.Backend })
+      })
   }
   if (error) {
     if (error.includes(deletedFolderMsg) && appName) {
@@ -393,7 +403,7 @@ async function errorHandler(
 }
 
 function removeSpecialcharacters(text: string): string {
-  const regexp = new RegExp('[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+]', 'gi')
+  const regexp = new RegExp(/[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/, 'gi')
   return text.replaceAll(regexp, '')
 }
 
@@ -775,6 +785,27 @@ export const getLatestReleases = async (): Promise<Release[]> => {
   }
 }
 
+export const getCurrentChangelog = async (): Promise<Release | null> => {
+  logInfo('Checking for current version changelog', {
+    prefix: LogPrefix.Backend
+  })
+
+  try {
+    const current = app.getVersion()
+
+    const { data: release } = await axios.default.get(
+      `${GITHUB_API}/tags/v${current}`
+    )
+
+    return release as Release
+  } catch (error) {
+    logError(['Error when checking for current Heroic changelog'], {
+      prefix: LogPrefix.Backend
+    })
+    return null
+  }
+}
+
 function getInfo(appName: string, runner: Runner): GameInfo {
   if (runner === 'sideload') {
     return getAppInfo(appName)
@@ -808,6 +839,41 @@ function killPattern(pattern: string) {
   return ret
 }
 
+const getShellPath = async (path: string): Promise<string> =>
+  normalize((await execAsync(`echo "${path}"`)).stdout.trim())
+
+export const wait = async (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms))
+
+export const spawnAsync = async (
+  command: string,
+  args: string[],
+  options: SpawnOptions = {}
+): Promise<{ code: number | null; stdout: string; stderr: string } | Error> => {
+  const child = spawn(command, args, options)
+  const stdout: string[] = []
+  const stderr: string[] = []
+
+  if (child.stdout) {
+    child.stdout.on('data', (data) => stdout.push(data.toString()))
+  }
+
+  if (child.stderr) {
+    child.stderr.on('data', (data) => stderr.push(data.toString()))
+  }
+
+  return new Promise((resolve, reject) => {
+    child.on('error', (error) => reject(error))
+    child.on('close', (code) => {
+      resolve({
+        code,
+        stdout: stdout.join(''),
+        stderr: stderr.join('')
+      })
+    })
+  })
+}
+
 export {
   errorHandler,
   execAsync,
@@ -834,5 +900,6 @@ export {
   getGame,
   getMainWindow,
   killPattern,
-  getInfo
+  getInfo,
+  getShellPath
 }

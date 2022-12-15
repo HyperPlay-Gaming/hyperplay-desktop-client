@@ -23,25 +23,6 @@ export interface ButtonOptions {
   onClick?: () => void
 }
 
-// here is a way to type the callback function in ipcMain.on or ipcMain.handle
-// does not prevent callbacks with fewer parameters from being passed though
-// the microsoft team is very opposed to enabling the above constraint https://github.com/microsoft/TypeScript/issues/17868
-// for ipcMain.handle('updateGame', async (e, appName, runner) => { for instance could be converted to:
-// ipcMain.handle('updateGame', typedCallback<WrapApiFunction<typeof updateGame>>() => {
-// this has the benefit of type checking for the arguments typed in the preload api
-// but may be overly complex for a small benefit
-export function typedCallback<T>(arg: T) {
-  return arg
-}
-
-export type WrapApiFunction<
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  TFunction extends (...args: any) => any
-> = (
-  e: Electron.IpcMainInvokeEvent,
-  ...args: [...Parameters<TFunction>]
-) => ReturnType<TFunction>
-
 export type LaunchParams = {
   appName: string
   launchArguments: string
@@ -63,7 +44,7 @@ export type Release = {
   id: number
 }
 
-export interface AppSettings {
+export interface AppSettings extends GameSettings {
   checkUpdatesInterval: number
   enableUpdates: boolean
   addDesktopShortcuts: boolean
@@ -71,12 +52,6 @@ export interface AppSettings {
   addSteamShortcuts: boolean
   altLegendaryBin: string
   altGogdlBin: string
-  audioFix: boolean
-  autoInstallDxvk: boolean
-  autoInstallVkd3d: boolean
-  preferSystemLibs: boolean
-  autoSyncSaves: boolean
-  battlEyeRuntime: boolean
   checkForUpdatesOnStartup: boolean
   customWinePaths: string[]
   darkTrayIcon: boolean
@@ -84,38 +59,16 @@ export interface AppSettings {
   defaultSteamPath: string
   disableController: boolean
   discordRPC: boolean
-  eacRuntime: boolean
   downloadNoHttps: boolean
   egsLinkedPath: string
   exitToTray: boolean
-  enableEsync: boolean
-  enableFSR: boolean
-  enableFsync: boolean
-  language: string
-  launcherArgs: string
   libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number
-  maxSharpness?: number
   maxWorkers: number
   minimizeOnLaunch: boolean
-  nvidiaPrime: boolean
-  offlineMode: boolean
-  otherOptions?: string //depricated
-  enviromentOptions: EnviromentVariable[]
-  wrapperOptions: WrapperVariable[]
-  savesPath: string
-  showFps: boolean
-  showMangohud: boolean
   startInTray: boolean
-  useGameMode: boolean
-  targetExe: string
   userInfo: UserInfo
-  wineCrossoverBottle: string
-  winePrefix: string
   defaultWinePrefix: string
-  wineVersion: WineInstallation
-  useSteamRuntime: boolean
-  gogSaves?: GOGCloudSavesLocation[]
   customThemesPath: string
 }
 
@@ -139,6 +92,7 @@ export interface ExtraInfo {
 }
 
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
+
 export interface GameInfo {
   runner: Runner
   store_url: string
@@ -153,17 +107,21 @@ export interface GameInfo {
   install: Partial<InstalledInfo>
   is_installed: boolean
   namespace: string
+  // NOTE: This is the save folder without any variables filled in...
   save_folder: string
+  // ...and this is the folder with them filled in
+  save_path?: string
   gog_save_location?: GOGCloudSavesLocation[]
   title: string
   canRunOffline: boolean
+  thirdPartyManagedApp: string | undefined
   is_mac_native: boolean
   is_linux_native: boolean
   browserUrl?: string
   web3?: Web3Features
 }
+
 export interface GameSettings {
-  audioFix: boolean
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
   preferSystemLibs: boolean
@@ -244,11 +202,9 @@ interface Reqs {
 export type SyncType = 'Download' | 'Upload' | 'Force download' | 'Force upload'
 
 export type UserInfo = {
-  account_id?: string
-  displayName?: string
-  epicId?: string
-  name?: string
-  user?: string
+  account_id: string
+  displayName: string
+  user: string
 }
 export interface WineInstallation {
   bin: string
@@ -262,14 +218,22 @@ export interface WineInstallation {
 
 export interface InstallArgs {
   path: string
-  installDlcs?: boolean
-  sdlList: string[]
   platformToInstall: InstallPlatform
+  installDlcs?: boolean
+  sdlList?: string[]
   installLanguage?: string
 }
 
 export interface InstallParams extends InstallArgs {
   appName: string
+  gameInfo: GameInfo
+  runner: Runner
+  size?: string
+}
+
+export interface UpdateParams {
+  appName: string
+  gameInfo: GameInfo
   runner: Runner
 }
 
@@ -336,19 +300,24 @@ export interface GOGImportData {
   installedWithDlcs: boolean
 }
 
-export interface GamepadInputEventKey {
+export type GamepadInputEvent =
+  | GamepadInputEventKey
+  | GamepadInputEventWheel
+  | GamepadInputEventMouse
+
+interface GamepadInputEventKey {
   type: 'keyDown' | 'keyUp' | 'char'
   keyCode: string
 }
 
-export interface GamepadInputEventWheel {
+interface GamepadInputEventWheel {
   type: 'mouseWheel'
   deltaY: number
   x: number
   y: number
 }
 
-export interface GamepadInputEventMouse {
+interface GamepadInputEventMouse {
   type: 'mouseDown' | 'mouseUp'
   x: number
   y: number
@@ -380,6 +349,7 @@ export interface RpcClient {
 export interface CallRunnerOptions {
   logMessagePrefix?: string
   logFile?: string
+  verboseLogFile?: string
   env?: Record<string, string> | NodeJS.ProcessEnv
   wrappers?: string[]
   onOutput?: (output: string, child: ChildProcess) => void
@@ -480,11 +450,48 @@ export interface WineVersionInfo extends VersionInfo {
   installDir: string
 }
 
-export interface GamepadActionStatus {
-  [key: string]: {
+export type GamepadActionStatus = Record<
+  ValidGamepadAction,
+  {
     triggeredAt: { [key: number]: number }
     repeatDelay: false | number
   }
+>
+
+export type ValidGamepadAction = GamepadActionArgs['action']
+
+export type GamepadActionArgs =
+  | GamepadActionArgsWithMetadata
+  | GamepadActionArgsWithoutMetadata
+
+interface GamepadActionArgsWithMetadata {
+  action: 'leftClick' | 'rightClick'
+  metadata: {
+    elementTag: string
+    x: number
+    y: number
+  }
+}
+
+interface GamepadActionArgsWithoutMetadata {
+  action:
+    | 'padUp'
+    | 'padDown'
+    | 'padLeft'
+    | 'padRight'
+    | 'leftStickUp'
+    | 'leftStickDown'
+    | 'leftStickLeft'
+    | 'leftStickRight'
+    | 'rightStickUp'
+    | 'rightStickDown'
+    | 'rightStickLeft'
+    | 'rightStickRight'
+    | 'mainAction'
+    | 'back'
+    | 'altAction'
+    | 'esc'
+  metadata?: undefined
 }
 
 export type ElWebview = {
@@ -526,8 +533,16 @@ export type RecentGame = {
   title: string
 }
 
+export interface UpdateParams {
+  gameInfo: GameInfo
+}
+
 export interface DMQueueElement {
+  type: 'update' | 'install'
   params: InstallParams
+  addToQueueTime: number
+  startTime: number
+  endTime: number
   status?: 'done' | 'error' | 'abort'
 }
 
@@ -539,6 +554,7 @@ export type WineCommandArgs = {
   installFolderName?: string
   options?: CallRunnerOptions
   startFolder?: string
+  skipPrefixCheckIKnowWhatImDoing?: boolean
 }
 
 export type Web3Features = {
@@ -569,3 +585,44 @@ export type ProtonVerb =
   | 'destroyprefix'
   | 'getcompatpath'
   | 'getnativepath'
+
+export interface SaveSyncArgs {
+  arg: string | undefined
+  path: string
+  appName: string
+  runner: Runner
+}
+
+export interface RunWineCommandArgs {
+  appName: string
+  runner: Runner
+  commandParts: string[]
+}
+
+export interface ImportGameArgs {
+  appName: string
+  path: string
+  runner: Runner
+  platform: InstallPlatform
+}
+
+export interface MoveGameArgs {
+  appName: string
+  path: string
+  runner: Runner
+}
+
+export interface DiskSpaceData {
+  free: number
+  diskSize: number
+  message: string
+  validPath: boolean
+}
+
+export interface ToolArgs {
+  winePrefix: string
+  winePath: string
+  action: 'backup' | 'restore'
+}
+
+export type StatusPromise = Promise<{ status: 'done' | 'error' }>

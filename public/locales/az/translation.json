@@ -66,7 +66,6 @@
                 "title": "Tutulmamış İstisna baş verdi!"
             },
             "update": {
-                "message": "Güncəlləmə ilə nəsə xəta baş verdi, qeydləri yoxlayın və ya daha sonra yenidən cəhd edin!",
                 "title": "Yeniləmə xətası"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "Qısayollar Masaüstü və Başlat menyusunda yaradılmışdır",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Qısayollar Masaüstü və Başlat Menyusundan silindi",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Qısa yollar"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "HƏ"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Kitabxanaya gedin",
         "login": "Daxil ol",
         "sync": "Sinxronizasiya",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Aktivləşdirin",
             "back": "Geri",
             "backspace": "Backspace",
-            "close_context_menu": "Kontekst menyusunu bağlayın",
             "close_dialog": "Dialoqu bağlayın",
             "close_keyboard": "Klaviaturanı bağlayın",
-            "context_menu": "Kontekst menyusu",
+            "close_options": "Close Options",
             "game_details": "Oyun təfərrüatları",
             "game_settings": "Oyun parametrləri",
             "install_game": "Oyun quraşdırın",
             "move_cursor": "Kursoru köçürün",
-            "none": "Heç biri",
             "open_virtual_keyboard": "Virtual klaviaturanı açın",
+            "options": "Options",
             "play_game": "Oyun oynamaq",
             "scroll": "Sürüşdürün",
+            "select": "Select",
             "space": "Kosmos",
             "update_game": "Oyunu yeniləyin"
         }
     },
     "docs": "Sənədlər",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "Epic Games serverləri oflayn olduğu üçün onlayn xidmətlər tam işləməyə bilər!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Yeniləmə Mövcuddur!",
             "stable": "Stabil",
             "version": "Qəhrəmanlıq versiyası"
@@ -300,7 +307,9 @@
         "website": "Veb sayt yüklənir"
     },
     "login": {
-        "externalLogin": "Xarici Giriş",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Dəyişən adı",
@@ -404,13 +415,17 @@
         "mac": "Makintoş",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Tərəqqi",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Bu yaxınlarda oynanılıb",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "İstifadə etmək üçün Alternativ GOGDL Binary seçin",
         "alt-legendary-bin": "Alternativ Əfsanəvi Binary seçin",
-        "audiofix": "Audio Düzəltmə (Pulse Audio Latency)",
         "autodxvk": "Prefiksdə DXVK-nı Avtomatik Quraşdırın/Yeniləyin",
         "autosync": "Avtosinxronizasiya Saxlayır",
         "autovkd3d": "Prefiksdə VKD3D-ni Avtomatik Quraşdırın/Yeniləyin",
@@ -509,7 +523,9 @@
             "title": "Prefiksdə EXE-ni işə salın"
         },
         "savefolder": {
-            "placeholder": "Oyunların dəqiq saxlanması qovluğunu seçin"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Oyunların dəqiq saxlanması qovluğunu seçin",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Mövzu seçin",
         "showfps": "FPS göstərin (DX9, 10 və 11)",
@@ -527,6 +543,7 @@
         "clear-cache": "Qəhrəmanlıq önbelleğini təmizləyin",
         "copiedToClipboard": "Buferə kopyalandı!",
         "copyToClipboard": "Bütün Parametrləri Panoya kopyalayın",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "EAC iş vaxtının Flatpak üzərində işləməsi üçün GameMode tələb olunur. Onu indi aktiv etmək istəyirsiniz?",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "Qabaqcıl",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "General",
             "log": "Giriş",
             "other": "Digər",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Mübahisə",
+        "logging_out": "Logging out",
         "logout": "Çıxış",
         "logout_confirmation": "Çıxmaq istədiyinizə əminsiniz?",
         "manageaccounts": "Hesabları idarə et",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Fəaliyyət",
         "manager": {
-            "error": "Bu dəfə Şərab/Proton versiyalarını əldə etmək mümkün olmadı.",
             "link": "Şərab meneceri",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Şərab meneceri",
             "unzipping": "Açma"
         },

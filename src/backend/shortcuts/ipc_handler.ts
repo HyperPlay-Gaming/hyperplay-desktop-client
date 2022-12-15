@@ -1,44 +1,47 @@
 import { existsSync } from 'graceful-fs'
-import { ipcMain, dialog } from 'electron'
+import { ipcMain } from 'electron'
 import i18next from 'i18next'
-import { Runner } from 'common/types'
 import {
   addNonSteamGame,
   isAddedToSteam,
   removeNonSteamGame
 } from './nonesteamgame/nonesteamgame'
-import { getGame, getInfo } from '../utils'
+import { getGame, getInfo, notify } from '../utils'
 import { shortcutFiles } from './shortcuts/shortcuts'
 import {
   addAppShortcuts,
   getAppInfo,
   removeAppShortcuts
 } from '../sideload/games'
+import { isMac } from 'backend/constants'
 
-ipcMain.on(
-  'addShortcut',
-  async (event, appName: string, runner: Runner, fromMenu: boolean) => {
-    const isSideload = runner === 'sideload'
+ipcMain.on('addShortcut', async (event, appName, runner, fromMenu) => {
+  const isSideload = runner === 'sideload'
 
-    if (isSideload) {
-      addAppShortcuts(appName, fromMenu)
-    } else {
-      const game = getGame(appName, runner)
-      await game.addShortcuts(fromMenu)
-    }
-
-    dialog.showMessageBox({
-      buttons: [i18next.t('box.ok', 'Ok')],
-      message: i18next.t(
-        'box.shortcuts.message',
-        'Shortcuts were created on Desktop and Start Menu'
-      ),
-      title: i18next.t('box.shortcuts.title', 'Shortcuts')
-    })
+  if (isSideload) {
+    addAppShortcuts(appName, fromMenu)
+  } else {
+    const game = getGame(appName, runner)
+    await game.addShortcuts(fromMenu)
   }
-)
 
-ipcMain.handle('shortcutsExists', (event, appName: string, runner: Runner) => {
+  const body = i18next.t(
+    'box.shortcuts.message',
+    'Shortcuts were created on Desktop and Start Menu'
+  )
+
+  const bodyMac = i18next.t(
+    'box.shortcuts.message-mac',
+    'Shortcuts were created on the Applications folder'
+  )
+
+  notify({
+    body: isMac ? bodyMac : body,
+    title: i18next.t('box.shortcuts.title', 'Shortcuts')
+  })
+})
+
+ipcMain.handle('shortcutsExists', (event, appName, runner) => {
   const isSideload = runner === 'sideload'
   let title = ''
 
@@ -52,7 +55,7 @@ ipcMain.handle('shortcutsExists', (event, appName: string, runner: Runner) => {
   return existsSync(desktopFile ?? '') || existsSync(menuFile ?? '')
 })
 
-ipcMain.on('removeShortcut', async (event, appName: string, runner: Runner) => {
+ipcMain.on('removeShortcut', async (event, appName, runner) => {
   const isSideload = runner === 'sideload'
 
   if (isSideload) {
@@ -61,36 +64,33 @@ ipcMain.on('removeShortcut', async (event, appName: string, runner: Runner) => {
     const game = getGame(appName, runner)
     await game.removeShortcuts()
   }
-  dialog.showMessageBox({
-    buttons: [i18next.t('box.ok', 'Ok')],
-    message: i18next.t(
-      'box.shortcuts.message-remove',
-      'Shortcuts were removed from Desktop and Start Menu'
-    ),
+  const body = i18next.t(
+    'box.shortcuts.message-remove',
+    'Shortcuts were removed from Desktop and Start Menu'
+  )
+
+  const bodyMac = i18next.t(
+    'box.shortcuts.message-remove-mac',
+    'Shortcuts were removed from the Applications folder'
+  )
+
+  notify({
+    body: isMac ? bodyMac : body,
     title: i18next.t('box.shortcuts.title', 'Shortcuts Removed')
   })
 })
 
-ipcMain.handle('addToSteam', async (event, appName: string, runner: Runner) => {
+ipcMain.handle('addToSteam', async (event, appName, runner) => {
   const gameInfo = getInfo(appName, runner)
-
   return addNonSteamGame({ gameInfo })
 })
 
-ipcMain.handle(
-  'removeFromSteam',
-  async (event, appName: string, runner: Runner) => {
-    const gameInfo = getInfo(appName, runner)
+ipcMain.handle('removeFromSteam', async (event, appName, runner) => {
+  const gameInfo = getInfo(appName, runner)
+  await removeNonSteamGame({ gameInfo })
+})
 
-    await removeNonSteamGame({ gameInfo })
-  }
-)
-
-ipcMain.handle(
-  'isAddedToSteam',
-  async (event, appName: string, runner: Runner) => {
-    const gameInfo = getInfo(appName, runner)
-
-    return isAddedToSteam({ gameInfo })
-  }
-)
+ipcMain.handle('isAddedToSteam', async (event, appName, runner) => {
+  const gameInfo = getInfo(appName, runner)
+  return isAddedToSteam({ gameInfo })
+})

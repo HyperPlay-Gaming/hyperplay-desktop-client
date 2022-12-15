@@ -66,7 +66,6 @@
                 "title": "¡Ocurrió un error!"
             },
             "update": {
-                "message": "Ocurrió un problema con la actualización. Por favor, revise los registros e intente nuevamente!",
                 "title": "Error al actualizar"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "Se han creado accesos directos en el Escritorio y en el Menú Inicio",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Se removieron las accesos del Escritorio y del Menú",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Accesos directos"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "SÍ"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Ir a la biblioteca",
         "login": "Iniciar sesión",
         "sync": "Sincronizar",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Activar",
             "back": "Volver",
             "backspace": "Borrar",
-            "close_context_menu": "Cerrar menú contextual",
             "close_dialog": "Cerrar diálogo",
             "close_keyboard": "Ocultar teclado",
-            "context_menu": "Menú contextual",
+            "close_options": "Close Options",
             "game_details": "Detalles del juego",
             "game_settings": "Configuración del juego",
             "install_game": "Instalar juego",
             "move_cursor": "Mover puntero",
-            "none": "Nada",
             "open_virtual_keyboard": "Abrir teclado virtual",
+            "options": "Options",
             "play_game": "Ejecutar juego",
             "scroll": "Scroll",
+            "select": "Select",
             "space": "Espacio",
             "update_game": "Actualizar juego"
         }
     },
     "docs": "Documentación",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "¡Puede que algunos servicios no funcionen correctamente si no estás conectado a los servidores de Epic Games!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "¡Actualización disponible!",
             "stable": "Estable",
             "version": "Versión de HyperPlay"
@@ -300,7 +307,9 @@
         "website": "Cargando el sitio web"
     },
     "login": {
-        "externalLogin": "Inicio de sesión externo",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -350,11 +359,13 @@
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
-        "retrying": "Retrying"
+        "hint": "Estamos comprobando la conexión con:{{newline}}github.com,{{newline}}gog.com y{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
+        "offline": "Sin conexión",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
+        "retrying": "Reintentando"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Nombre de la variable",
@@ -404,13 +415,17 @@
         "mac": "macOS",
         "win": "Windows"
     },
-    "progress": "Progress",
+    "please-wait": "Please wait...",
+    "progress": "Progreso",
     "queue": {
         "label": {
-            "clear": "Clear List",
-            "downloading": "Downloading",
-            "finished": "Completed",
-            "queued": "Queued"
+            "canceled": "Canceled",
+            "clear": "Limpiar lista",
+            "downloading": "Descargando",
+            "empty": "Nothing to download",
+            "finished": "Completado",
+            "queued": "Encolado",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Jugado recientemente",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Elige un binario de GOGDL alternativo para usar",
         "alt-legendary-bin": "Elige un binario de Legendary alternativo",
-        "audiofix": "Corrección de audio (latencia de Pulseaudio)",
         "autodxvk": "Autoinstalar/actualizar DXVK en el Prefix",
         "autosync": "Autosincronizar guardados",
         "autovkd3d": "Instalación/actualización automática de VKD3D en el prefijo",
@@ -509,7 +523,9 @@
             "title": "Ejecutar EXE en Prefijo"
         },
         "savefolder": {
-            "placeholder": "Seleccione la carpeta exacta para guardar juegos"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Seleccione la carpeta exacta para guardar juegos",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Seleccionar Tema",
         "showfps": "Mostrar FPS (Cuadros Por Segundo) (DX9, 10 y 11)",
@@ -527,6 +543,7 @@
         "clear-cache": "Borrar la caché de HyperPlay",
         "copiedToClipboard": "¡Copiado en el portapapeles!",
         "copyToClipboard": "Copiar todas las configuraciones al portapapeles",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode es necesario para que el runtime de EAC funcione en Flatpak. Instalar ahora?",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "Avanzado",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "General",
             "log": "Registro",
             "other": "Otro",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "Cerrar sesión",
         "logout_confirmation": "¿Estás seguro de que quieres cerrar la sesión?",
         "manageaccounts": "Gestionar cuentas",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Acción",
         "manager": {
-            "error": "Esta vez no se han podido recuperar las versiones de Wine/Proton.",
             "link": "Gestor de Wine",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Gestor de Wine",
             "unzipping": "Descomprimiendo"
         },

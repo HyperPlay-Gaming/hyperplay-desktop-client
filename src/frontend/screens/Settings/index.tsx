@@ -1,6 +1,6 @@
 import './index.css'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
 import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -8,53 +8,58 @@ import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 
 import ContextMenu from '../Library/components/ContextMenu'
 import SettingsContext from './SettingsContext'
-import LogSettings from './components/LogSettings'
-import FooterInfo from './components/FooterInfo'
+import LogSettings from './sections/LogSettings'
+import FooterInfo from './sections/FooterInfo'
 import {
-  WineExtensions,
-  WineSettings,
-  Tools,
   GeneralSettings,
-  OtherSettings,
+  GamesSettings,
   SyncSaves,
   AdvancedSettings
-} from './components'
-import { AppSettings, GameSettings } from 'common/types'
-import { getGameInfo, writeConfig } from 'frontend/helpers'
+} from './sections'
+import { AppSettings, WineInstallation } from 'common/types'
+import { writeConfig } from 'frontend/helpers'
 import { UpdateComponent } from 'frontend/components/UI'
 import { LocationState, SettingsContextType } from 'frontend/types'
+import ContextProvider from 'frontend/state/ContextProvider'
+
+export const defaultWineVersion: WineInstallation = {
+  bin: '/usr/bin/wine',
+  name: 'Wine Default',
+  type: 'wine'
+}
 
 function Settings() {
   const { t, i18n } = useTranslation()
+  const { platform } = useContext(ContextProvider)
   const {
-    state: { fromGameCard, runner }
+    state: { fromGameCard, runner, gameInfo }
   } = useLocation() as { state: LocationState }
   const [title, setTitle] = useState('')
 
-  const [currentConfig, setCurrentConfig] = useState<
-    AppSettings | GameSettings | null
-  >(null)
+  const [currentConfig, setCurrentConfig] = useState<Partial<AppSettings>>({})
 
   const { appName = '', type = '' } = useParams()
   const isDefault = appName === 'default'
   const isGeneralSettings = type === 'general'
-  const isWineSettings = type === 'wine'
-  const isWineExtensions = type === 'wineExt'
   const isSyncSettings = type === 'sync'
-  const isOtherSettings = type === 'other'
+  const isGamesSettings = type === 'games_settings'
   const isLogSettings = type === 'log'
   const isAdvancedSetting = type === 'advanced' && isDefault
+  const isLinux = platform === 'linux'
+  const isMac = platform === 'darwin'
+  const isMacNative = isMac && (gameInfo?.is_mac_native || false)
+  const isLinuxNative = isLinux && (gameInfo?.is_linux_native || false)
 
   // Load App or game's config, only if not loaded already
   useEffect(() => {
     const getSettings = async () => {
-      const config: AppSettings = await window.api.requestSettings(appName)
+      const config = isDefault
+        ? await window.api.requestAppSettings()
+        : await window.api.requestGameSettings(appName)
       setCurrentConfig(config)
 
       if (!isDefault) {
-        const info = await getGameInfo(appName, runner)
-        const { title: gameTitle } = info
-        setTitle(gameTitle)
+        setTitle(gameInfo?.title ?? appName)
       } else {
         setTitle(t('globalSettings', 'Global Settings'))
       }
@@ -72,27 +77,35 @@ function Settings() {
   if (!fromGameCard) {
     returnPath = `/gamepage/${runner}/${appName}`
     if (returnPath.includes('default')) {
-      returnPath = '/'
+      returnPath = '/library'
     }
   }
 
   // create setting context functions
   const contextValues: SettingsContextType = {
-    getSetting: (key: string) => {
-      if (currentConfig) {
-        return currentConfig[key]
+    getSetting: (key, fallback) => currentConfig[key] ?? fallback,
+    setSetting: (key, value) => {
+      const currentValue = currentConfig[key]
+      if (currentValue !== undefined || currentValue !== null) {
+        // NOTE: This is the best way I've found to compare `unknown` values
+        //       If you ever modify this, know that `value` might be an array
+        //       of anything, so even something like looping over the array
+        //       and comparing every member might still give false negatives
+        //       This might *also* give false results, but only in cases where
+        //       you're already passing the wrong type for `value`
+        const noChange = JSON.stringify(value) === JSON.stringify(currentValue)
+        if (noChange) return
       }
-    },
-    setSetting: (key: string, value: unknown) => {
-      if (currentConfig) {
-        setCurrentConfig({ ...currentConfig, [key]: value })
-      }
-      writeConfig([appName, { ...currentConfig, [key]: value }])
+      setCurrentConfig({ ...currentConfig, [key]: value })
+      writeConfig({ appName, config: { ...currentConfig, [key]: value } })
     },
     config: currentConfig,
     isDefault,
     appName,
-    runner
+    runner,
+    gameInfo,
+    isLinuxNative,
+    isMacNative
   }
 
   return (
@@ -119,7 +132,12 @@ function Settings() {
       <SettingsContext.Provider value={contextValues}>
         <div className="Settings">
           <div role="list" className="settingsWrapper">
-            <NavLink to={returnPath} role="link" className="backButton">
+            <NavLink
+              to={returnPath}
+              role="link"
+              className="backButton"
+              state={{ gameInfo: gameInfo }}
+            >
               <ArrowCircleLeftIcon />
             </NavLink>
             <h1 className="headerTitle" data-testid="headerTitle">
@@ -127,10 +145,7 @@ function Settings() {
             </h1>
 
             {isGeneralSettings && <GeneralSettings />}
-            {isWineSettings && <WineSettings />}
-            {isWineSettings && !isDefault && <Tools />}
-            {isWineExtensions && <WineExtensions />}
-            {isOtherSettings && <OtherSettings />}
+            {isGamesSettings && <GamesSettings />}
             {isSyncSettings && <SyncSaves />}
             {isAdvancedSetting && <AdvancedSettings />}
             {isLogSettings && <LogSettings />}

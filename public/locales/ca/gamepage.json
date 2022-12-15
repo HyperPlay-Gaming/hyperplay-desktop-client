@@ -94,6 +94,13 @@
     "generic": {
         "error": "Error desconegut"
     },
+    "hours": "Hores",
+    "how-long-to-beat": {
+        "completionist": "Completista",
+        "main-plus-extras": "Principal + Extres",
+        "main-story": "Història principal"
+    },
+    "howLongToBeat": "Quant temps costa completar",
     "info": {
         "canRunOffline": "Cal connexió a internet",
         "installedPlatform": "Plataforma instal·lada",
@@ -113,6 +120,9 @@
         "wineversion": "Versió del Wine"
     },
     "label": {
+        "game": {
+            "third-party-game": "Third-Party Game NOT Supported"
+        },
         "playing": {
             "start": "Juga",
             "stop": "Atura"
@@ -130,16 +140,12 @@
         "login": "Log in",
         "title": "You are NOT logged in"
     },
-    "Open": "",
-    "queue": {
-        "label": {
-            "canceled": "Download Canceled",
-            "remove": "Remove from download manager"
-        }
-    },
     "report_problem": "Informa d'un problema quan s'executa el joc",
     "sdl": {
         "title": "Selecciona els components a instal·lar"
+    },
+    "setting": {
+        "use-default-wine-settings": "Use Default Wine Settings"
     },
     "sideload": {
         "field": {
@@ -164,14 +170,18 @@
     },
     "status": {
         "clickToUpdate": "Fes clic per a actualitzar",
+        "gameNotAvailable": "Game not available",
         "hasUpdates": "Hi ha una versió nova disponible!",
         "installed": "Instal·lat",
         "installing": "S'està instal·lant...",
         "moving": "S'està movent la instal·lació. Espereu.",
         "notinstalled": "Aquest joc no està instal·lat",
+        "notSupported": "Not supported",
+        "notSupportedGame": "Not Supported",
         "processing": "S'està processant els fitxers. Espereu.",
         "queued": "Queued",
         "reparing": "S'està reparant el joc. Espereu.",
+        "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total baixat",
         "uninstalling": "Uninstalling",
         "updating": "S'està actualitzant el joc"

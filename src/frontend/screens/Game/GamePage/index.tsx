@@ -23,7 +23,7 @@ import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
 
-import { AppSettings, GameInfo, GameStatus, Runner } from 'common/types'
+import { GameInfo, GameStatus, Runner, WineInstallation } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GogInstallInfo, GOGCloudSavesLocation } from 'common/types/gog'
 
@@ -49,32 +49,29 @@ import {
 } from 'frontend/components/UI/Dialog'
 
 import StoreLogos from 'frontend/components/UI/StoreLogos'
+import HowLongToBeat from 'frontend/components/UI/HowLongToBeat'
 
-export default function GamePage(): JSX.Element | null {
+export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
-  const location = useLocation() as { state: { fromDM: boolean } | null }
+  const location = useLocation() as {
+    state: { fromDM: boolean; gameInfo: GameInfo }
+  }
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
 
+  const { gameInfo: locationGameInfo } = location.state
+
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
-  const {
-    libraryStatus,
-    handleGameStatus,
-    epic,
-    gog,
-    gameUpdates,
-    platform,
-    showDialogModal
-  } = useContext(ContextProvider)
+  const { libraryStatus, epic, gog, gameUpdates, platform, showDialogModal } =
+    useContext(ContextProvider)
 
   const { status } =
     libraryStatus.find((game) => game.appName === appName) || {}
 
   const [progress, previousProgress] = hasProgress(appName)
-  // @ts-expect-error TODO: Proper default value
-  const [gameInfo, setGameInfo] = useState<GameInfo>({})
-  const [updateRequested, setUpdateRequested] = useState(false)
+
+  const [gameInfo, setGameInfo] = useState(locationGameInfo)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [savesPath, setSavesPath] = useState('')
   const [gogSaves, setGOGSaves] = useState<GOGCloudSavesLocation[]>([])
@@ -89,8 +86,9 @@ export default function GamePage(): JSX.Element | null {
     message: string | unknown
   }>({ error: false, message: '' })
   const [winePrefix, setWinePrefix] = useState('')
-  const [wineVersion, setWineVersion] = useState('')
+  const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [showRequirements, setShowRequirements] = useState(false)
+  const [gameAvailable, setGameAvailable] = useState(false)
 
   const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
@@ -104,17 +102,40 @@ export default function GamePage(): JSX.Element | null {
   const isReparing = status === 'repairing'
   const isMoving = status === 'moving'
   const isUninstalling = status === 'uninstalling'
+  const notAvailable = !gameAvailable && gameInfo.is_installed
+  const notSupportedGame = gameInfo.thirdPartyManagedApp === 'Origin'
 
-  const backRoute = location.state?.fromDM ? '/download-manager' : '/'
+  const backRoute = location.state?.fromDM ? '/download-manager' : '/library'
 
   const storage: Storage = window.localStorage
 
   useEffect(() => {
-    const updateConfig = async () => {
-      try {
-        const newInfo = await getGameInfo(appName, runner)
+    const checkGameAvailable = async () => {
+      if (gameInfo.is_installed) {
+        const gameAvailable = await window.api.isGameAvailable({
+          appName,
+          runner
+        })
+        setGameAvailable(gameAvailable)
+      }
+    }
+    checkGameAvailable()
+  }, [appName, status, gameInfo.is_installed])
+
+  useEffect(() => {
+    const updateGameInfo = async () => {
+      const newInfo = await getGameInfo(appName, runner)
+      if (newInfo) {
         setGameInfo(newInfo)
-        const { install, is_linux_native, is_mac_native } = newInfo
+      }
+    }
+    updateGameInfo()
+  }, [status, gog.library, epic.library])
+
+  useEffect(() => {
+    const updateConfig = async () => {
+      if (gameInfo) {
+        const { install, is_linux_native, is_mac_native } = gameInfo
 
         const installPlatform =
           install.platform || (is_linux_native && isLinux)
@@ -123,7 +144,7 @@ export default function GamePage(): JSX.Element | null {
             ? 'Mac'
             : 'Windows'
 
-        if (runner !== 'sideload') {
+        if (runner !== 'sideload' && !notSupportedGame) {
           getInstallInfo(appName, runner, installPlatform)
             .then((info) => {
               if (!info) {
@@ -144,8 +165,9 @@ export default function GamePage(): JSX.Element | null {
             savesPath,
             gogSaves,
             wineVersion,
-            winePrefix
-          }: AppSettings = await window.api.requestSettings(appName)
+            winePrefix,
+            wineCrossoverBottle
+          } = await window.api.requestGameSettings(appName)
 
           if (!isWin) {
             let wine = wineVersion.name
@@ -154,11 +176,15 @@ export default function GamePage(): JSX.Element | null {
             if (wine.includes('Default')) {
               wine = wine.split('-')[0]
             }
-            setWineVersion(wine)
-            setWinePrefix(winePrefix)
+            setWineVersion({ ...wineVersion, name: wine })
+            setWinePrefix(
+              wineVersion.type === 'crossover'
+                ? wineCrossoverBottle
+                : winePrefix
+            )
           }
 
-          if (newInfo?.cloud_save_enabled) {
+          if (gameInfo.cloud_save_enabled) {
             setAutoSyncSaves(autoSyncSaves)
             setGOGSaves(gogSaves ?? [])
             return setSavesPath(savesPath)
@@ -167,23 +193,13 @@ export default function GamePage(): JSX.Element | null {
           setHasError({ error: true, message: error })
           window.api.logError(`${error}`)
         }
-      } catch (error) {
-        setHasError({ error: true, message: error })
       }
     }
     updateConfig()
-  }, [isInstalling, isPlaying, appName, epic.library, gog.library])
+  }, [status, epic.library, gog.library, gameInfo])
 
-  async function handleUpdate() {
-    setUpdateRequested(true)
-    await handleGameStatus({
-      appName,
-      runner: gameInfo.runner,
-      status: 'updating'
-    })
-    await updateGame(appName, gameInfo.runner)
-    await handleGameStatus({ appName, runner: gameInfo.runner, status: 'done' })
-    setUpdateRequested(false)
+  function handleUpdate() {
+    updateGame({ appName, runner, gameInfo })
   }
 
   function handleModal() {
@@ -230,9 +246,7 @@ export default function GamePage(): JSX.Element | null {
     const isMacNative = isMac.includes(installPlatform ?? '')
     const isLinuxNative = installPlatform === 'linux'
     const isNative = isWin || isMacNative || isLinuxNative
-    const pathname = isNative
-      ? `/settings/${runner}/${appName}/other`
-      : `/settings/${runner}/${appName}/wine`
+    const pathname = `/settings/${runner}/${appName}/games_settings`
 
     const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
     const supportsWeb3 = gameInfo.web3?.supported
@@ -313,7 +327,7 @@ export default function GamePage(): JSX.Element | null {
                     storeUrl={gameInfo.store_url}
                     runner={gameInfo.runner}
                     handleUpdate={handleUpdate}
-                    disableUpdate={updateRequested || isUpdating}
+                    disableUpdate={isInstalling || isUpdating}
                     onShowRequirements={
                       hasRequirements
                         ? () => setShowRequirements(true)
@@ -333,7 +347,7 @@ export default function GamePage(): JSX.Element | null {
                       : ''
                     : ''}
                 </div>
-                {is_installed && supportsWeb3 && (
+                {is_installed && showCloudSaveInfo && (
                   <div
                     style={{
                       color: autoSyncSaves ? '#07C5EF' : ''
@@ -435,7 +449,9 @@ export default function GamePage(): JSX.Element | null {
                       {isLinux && !isNative && (
                         <>
                           <div className="hp-subtitle">Wine</div>
-                          <div className="col2-item italic">{wineVersion}</div>
+                          <div className="col2-item italic">
+                            {wineVersion?.name}
+                          </div>
                           <div className="hp-subtitle">Prefix:</div>
                           <div
                             className="italic clickablePath"
@@ -479,7 +495,7 @@ export default function GamePage(): JSX.Element | null {
                     fontStyle: 'italic'
                   }}
                 >
-                  {getInstallLabel(is_installed)}
+                  {getInstallLabel(is_installed, notAvailable)}
                 </p>
               </div>
               {is_installed && Boolean(launchOptions.length) && (
@@ -497,53 +513,56 @@ export default function GamePage(): JSX.Element | null {
                 </SelectField>
               )}
               <Anticheat gameInfo={gameInfo} />
-              {is_installed ? (
-                <button
-                  disabled={
-                    isReparing || isMoving || isUpdating || isUninstalling
-                  }
-                  onClick={handlePlay()}
-                  className={`button ${getPlayBtnClass()}`}
-                >
-                  {getPlayLabel()}
-                </button>
-              ) : (
-                <button
-                  onClick={async () => handleInstall(is_installed)}
-                  disabled={
-                    isPlaying ||
-                    isUpdating ||
-                    isReparing ||
-                    isMoving ||
-                    isUninstalling
-                  }
-                  className={`button ${getButtonClass(is_installed)}`}
-                >
-                  {`${getButtonLabel(is_installed)}`}
-                </button>
-              )}
-              {installPlatform !== 'Browser' && is_installed && (
-                <>
-                  <NavLink
-                    to={`/settings/${runner}/${appName}/log`}
-                    state={{
-                      fromGameCard: false,
-                      runner,
-                      isLinuxNative: isNative,
-                      isMacNative: isNative,
-                      hasCloudSave: cloud_save_enabled
-                    }}
-                    className="clickable reportProblem"
+              <div className="buttonsWrapper">
+                {is_installed && !isQueued && (
+                  <button
+                    disabled={
+                      isReparing || isMoving || isUpdating || isUninstalling
+                    }
+                    autoFocus={true}
+                    onClick={handlePlay()}
+                    className={`button ${getPlayBtnClass()}`}
                   >
-                    <>
-                      {<FontAwesomeIcon icon={faTriangleExclamation} />}
-                      {t(
-                        'report_problem',
-                        'Report a problem running this game'
-                      )}
-                    </>
-                  </NavLink>
-                </>
+                    {getPlayLabel()}
+                  </button>
+                )}
+                {(!is_installed || isQueued) && (
+                  <button
+                    onClick={async () => handleInstall(is_installed)}
+                    disabled={
+                      isPlaying ||
+                      isUpdating ||
+                      isReparing ||
+                      isMoving ||
+                      isUninstalling ||
+                      notSupportedGame
+                    }
+                    autoFocus={true}
+                    className={`button ${getButtonClass(is_installed)}`}
+                  >
+                    {`${getButtonLabel(is_installed)}`}
+                  </button>
+                )}
+              </div>
+              <HowLongToBeat title={title} />
+              {is_installed && (
+                <NavLink
+                  to={`/settings/${runner}/${appName}/log`}
+                  state={{
+                    fromGameCard: false,
+                    runner,
+                    isLinuxNative: isNative,
+                    isMacNative: isNative,
+                    hasCloudSave: cloud_save_enabled,
+                    gameInfo
+                  }}
+                  className="clickable reportProblem"
+                >
+                  <>
+                    {<FontAwesomeIcon icon={faTriangleExclamation} />}
+                    {t('report_problem', 'Report a problem running this game')}
+                  </>
+                </NavLink>
               )}
             </div>
 
@@ -570,6 +589,9 @@ export default function GamePage(): JSX.Element | null {
   return <UpdateComponent />
 
   function getPlayBtnClass() {
+    if (notAvailable) {
+      return 'is-tertiary'
+    }
     if (isQueued) {
       return 'is-secondary'
     }
@@ -590,8 +612,22 @@ export default function GamePage(): JSX.Element | null {
     return isPlaying ? t('label.playing.stop') : t('label.playing.start')
   }
 
-  function getInstallLabel(is_installed: boolean): React.ReactNode {
+  function getInstallLabel(
+    is_installed: boolean,
+    notAvailable?: boolean
+  ): React.ReactNode {
     const { eta, bytes, percent } = progress
+
+    if (notSupportedGame) {
+      return t(
+        'status.this-game-uses-third-party',
+        'This game uses third party launcher and it is not supported yet'
+      )
+    }
+
+    if (notAvailable) {
+      return t('status.gameNotAvailable', 'Game not available')
+    }
 
     if (isReparing) {
       return `${t('status.reparing')} ${percent ? `${percent}%` : '...'}`
@@ -657,15 +693,19 @@ export default function GamePage(): JSX.Element | null {
     if (is_installed) {
       return 'is-primary'
     }
-    return 'is-secondary'
+
+    return 'is-cta'
   }
 
   function getButtonLabel(is_installed: boolean) {
-    if (is_installed) {
-      return t('submenu.settings')
+    if (notSupportedGame) {
+      return t('status.notSupported', 'Not supported')
     }
     if (isQueued) {
       return t('button.queue.remove', 'Remove from Queue')
+    }
+    if (is_installed) {
+      return t('submenu.settings')
     }
     if (isInstalling) {
       return t('button.cancel')
@@ -699,6 +739,7 @@ export default function GamePage(): JSX.Element | null {
         launchArguments,
         runner: gameInfo.runner,
         hasUpdate,
+        syncCloud: false, //manually sync before and after so we can update the buttons
         showDialogModal
       })
 
@@ -710,11 +751,6 @@ export default function GamePage(): JSX.Element | null {
 
   async function handleInstall(is_installed: boolean) {
     if (isQueued) {
-      handleGameStatus({
-        appName,
-        runner: gameInfo.runner,
-        status: 'done'
-      })
       storage.removeItem(appName)
       return window.api.removeFromDMQueue(appName)
     }
@@ -732,15 +768,13 @@ export default function GamePage(): JSX.Element | null {
     }
 
     return install({
-      appName,
-      handleGameStatus,
+      gameInfo,
       installPath: folder,
       isInstalling,
       previousProgress,
       progress,
       t,
-      runner: gameInfo.runner,
       showDialogModal: showDialogModal
     })
   }
-}
+})

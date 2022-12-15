@@ -27,6 +27,7 @@ import {
 import {
   fallBackImage,
   legendaryConfigPath,
+  legendaryLogFile,
   legendaryMetadata
 } from '../constants'
 import {
@@ -85,7 +86,7 @@ export class LegendaryLibrary {
       if (!filename.endsWith('.json')) {
         return
       }
-      const appName = filename.split('.').at(0)!
+      const appName = filename.split('.').slice(0, -1).join('.')
       this.allGames.add(appName)
     })
   }
@@ -105,7 +106,7 @@ export class LegendaryLibrary {
 
     const abortID = 'legendary-refresh'
     const res = await runLegendaryCommand(
-      ['list'],
+      ['list', '--third-party'],
       createAbortController(abortID)
     )
 
@@ -182,10 +183,14 @@ export class LegendaryLibrary {
   /**
    * Get game info for a particular game.
    *
-   * @param appName
+   * @param appName The AppName of the game you want the info of
+   * @param forceReload Discards game info in `this.library` and always reads info from metadata files
    * @returns GameInfo
    */
-  public getGameInfo(appName: string): GameInfo | undefined {
+  public getGameInfo(
+    appName: string,
+    forceReload = false
+  ): GameInfo | undefined {
     if (!this.hasGame(appName)) {
       logWarning(['Requested game', appName, 'was not found in library'], {
         prefix: LogPrefix.Legendary
@@ -193,7 +198,7 @@ export class LegendaryLibrary {
       return
     }
     // We have the game, but info wasn't loaded yet
-    if (!this.library.has(appName)) {
+    if (!this.library.has(appName) || forceReload) {
       this.loadFile(appName + '.json')
     }
     return this.library.get(appName)
@@ -233,7 +238,6 @@ export class LegendaryLibrary {
         prefix: LogPrefix.Legendary
       })
     }
-
     try {
       const info: LegendaryInstallInfo = JSON.parse(res.stdout)
       installStore.set(appName, info)
@@ -264,7 +268,7 @@ export class LegendaryLibrary {
 
     const abortID = 'legendary-check-updates'
     const res = await runLegendaryCommand(
-      ['list'],
+      ['list', '--third-party'],
       createAbortController(abortID),
       {
         logMessagePrefix: 'Checking for game updates'
@@ -475,13 +479,26 @@ export class LegendaryLibrary {
       developer,
       dlcItemList,
       releaseInfo,
-      customAttributes
+      customAttributes,
+      categories
     } = metadata
 
+    // skip mods from the library
+    if (categories.some(({ path }) => path === 'mods')) {
+      return false
+    }
+
+    if (!customAttributes) {
+      logWarning(['Incomplete metadata for', fileName, app_name], {
+        prefix: LogPrefix.Legendary
+      })
+    }
+
     const dlcs: string[] = []
-    const CloudSaveFolder = customAttributes?.CloudSaveFolder
     const FolderName = customAttributes?.FolderName
     const canRunOffline = customAttributes?.CanRunOffline?.value === 'true'
+    const thirdPartyManagedApp =
+      customAttributes?.ThirdPartyManagedApp?.value || undefined
 
     if (dlcItemList) {
       dlcItemList.forEach((v: { releaseInfo: { appId: string }[] }) => {
@@ -491,8 +508,20 @@ export class LegendaryLibrary {
       })
     }
 
-    const cloud_save_enabled = Boolean(CloudSaveFolder?.value)
-    const saveFolder = cloud_save_enabled ? CloudSaveFolder.value : ''
+    const info = this.installedGames.get(app_name)
+    const {
+      executable,
+      version,
+      install_size,
+      install_path,
+      platform,
+      save_path
+    } = info ?? {}
+
+    const saveFolder =
+      (platform === 'Mac'
+        ? customAttributes?.CloudSaveFolder_MAC?.value
+        : customAttributes?.CloudSaveFolder?.value) ?? ''
     const installFolder = FolderName ? FolderName.value : app_name
 
     const gameBox = keyImages.find(({ type }) => type === 'DieselGameBox')
@@ -512,10 +541,6 @@ export class LegendaryLibrary {
     const art_square = gameBoxTall ? gameBoxTall.url : undefined
     const art_square_front = gameBoxStore ? gameBoxStore.url : undefined
 
-    const info = this.installedGames.get(app_name)
-    const { executable, version, install_size, install_path, platform } =
-      info ?? {}
-
     const is_dlc = Boolean(metadata.mainGameItem)
 
     const convertedSize = install_size ? getFileSize(Number(install_size)) : '0'
@@ -525,7 +550,7 @@ export class LegendaryLibrary {
       art_cover: art_cover || art_square || fallBackImage,
       art_logo,
       art_square: art_square || art_square_front || art_cover || fallBackImage,
-      cloud_save_enabled,
+      cloud_save_enabled: Boolean(saveFolder),
       developer,
       extra: {
         about: {
@@ -549,8 +574,10 @@ export class LegendaryLibrary {
         ? platform === 'Mac'
         : releaseInfo[0].platform.includes('Mac'),
       save_folder: saveFolder,
+      save_path,
       title,
       canRunOffline,
+      thirdPartyManagedApp,
       is_linux_native: false,
       runner: 'legendary',
       store_url: formatEpicStoreUrl(title)
@@ -596,6 +623,9 @@ export async function runLegendaryCommand(
     commandParts,
     { name: 'legendary', logPrefix: LogPrefix.Legendary, bin, dir },
     abortController,
-    options
+    {
+      ...options,
+      verboseLogFile: legendaryLogFile
+    }
   )
 }

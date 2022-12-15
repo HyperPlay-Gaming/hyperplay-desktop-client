@@ -124,7 +124,12 @@ async function prepareLaunch(
           } installed`
       }
     }
-    steamRuntime = [path, ...args]
+
+    steamRuntime = [
+      path,
+      isNative ? '' : `--filesystem=${gameInfo.install.install_path}`,
+      ...args
+    ]
   }
 
   return {
@@ -185,10 +190,7 @@ async function prepareWineLaunch(game: LegendaryGame | GOGGame): Promise<{
     }
   }
 
-  const { updated: winePrefixUpdated } = await verifyWinePrefix(
-    gameSettings,
-    game
-  )
+  const { updated: winePrefixUpdated } = await verifyWinePrefix(gameSettings)
   if (winePrefixUpdated) {
     logInfo(['Created/Updated Wineprefix at', gameSettings.winePrefix], {
       prefix: LogPrefix.Backend
@@ -234,9 +236,7 @@ function setupEnvVars(gameSettings: GameSettings) {
     ret.__NV_PRIME_RENDER_OFFLOAD = '1'
     ret.__GLX_VENDOR_LIBRARY_NAME = 'nvidia'
   }
-  if (gameSettings.audioFix) {
-    ret.PULSE_LATENCY_MSEC = '60'
-  }
+
   if (gameSettings.enviromentOptions) {
     gameSettings.enviromentOptions.forEach((envEntry: EnviromentVariable) => {
       ret[envEntry.key] = removeQuoteIfNecessary(envEntry.value)
@@ -428,19 +428,13 @@ export async function validWine(
 
 /**
  * Verifies that a Wineprefix exists by running 'wineboot --init'
- * @param game The game to verify the Wineprefix of
+ * @param gameSettings The settings of the game to verify the Wineprefix of
  * @returns stderr & stdout of 'wineboot --init'
  */
 export async function verifyWinePrefix(
-  settings: GameSettings,
-  game?: LegendaryGame | GOGGame
+  settings: GameSettings
 ): Promise<{ res: ExecResult; updated: boolean }> {
-  const gameSettings = game ? await game.getSettings() : settings
-  const { winePrefix, wineVersion } = gameSettings
-
-  if (!(await validWine(wineVersion))) {
-    return { res: { stdout: '', stderr: '' }, updated: false }
-  }
+  const { winePrefix, wineVersion } = settings
 
   if (!(await validWine(wineVersion))) {
     return { res: { stdout: '', stderr: '' }, updated: false }
@@ -454,10 +448,6 @@ export async function verifyWinePrefix(
     mkdirSync(winePrefix, { recursive: true })
   }
 
-  if (wineVersion.type === 'proton' && existsSync(join(winePrefix, 'pfx'))) {
-    return { res: { stdout: '', stderr: '' }, updated: false }
-  }
-
   // If the registry isn't available yet, things like DXVK installers might fail. So we have to wait on wineboot then
   const systemRegPath =
     wineVersion.type === 'proton'
@@ -465,13 +455,12 @@ export async function verifyWinePrefix(
       : join(winePrefix, 'system.reg')
   const haveToWait = !existsSync(systemRegPath)
 
-  const command = game
-    ? game.runWineCommand(['wineboot', '--init'], haveToWait)
-    : runWineCommand({
-        commandParts: ['wineboot', '--init'],
-        wait: haveToWait,
-        gameSettings
-      })
+  const command = runWineCommand({
+    commandParts: ['wineboot', '--init'],
+    wait: haveToWait,
+    gameSettings: settings,
+    skipPrefixCheckIKnowWhatImDoing: true
+  })
 
   return command
     .then((result) => {
@@ -503,15 +492,44 @@ async function runWineCommand({
   protonVerb = 'run',
   installFolderName,
   options,
-  startFolder
+  startFolder,
+  skipPrefixCheckIKnowWhatImDoing = false
 }: WineCommandArgs): Promise<{ stderr: string; stdout: string }> {
   const settings = gameSettings
     ? gameSettings
     : await GlobalConfig.get().getSettings()
   const { wineVersion, winePrefix } = settings
 
-  if (!existsSync(winePrefix)) {
-    mkdirSync(winePrefix, { recursive: true })
+  if (!skipPrefixCheckIKnowWhatImDoing && wineVersion.type !== 'crossover') {
+    let requiredPrefixFiles = [
+      'dosdevices',
+      'drive_c',
+      'system.reg',
+      'user.reg',
+      'userdef.reg'
+    ]
+    if (wineVersion.type === 'proton') {
+      requiredPrefixFiles = [
+        'pfx.lock',
+        'tracked_files',
+        'version',
+        'config_info',
+        ...requiredPrefixFiles.map((path) => join('pfx', path))
+      ]
+    }
+    requiredPrefixFiles = requiredPrefixFiles.map((path) =>
+      join(winePrefix, path)
+    )
+    requiredPrefixFiles.push(winePrefix)
+
+    if (!requiredPrefixFiles.every((path) => existsSync(path))) {
+      logWarning(
+        'Required prefix files are missing, running `verifyWinePrefix` to create prefix',
+        { prefix: LogPrefix.Backend }
+      )
+      mkdirSync(winePrefix, { recursive: true })
+      await verifyWinePrefix(settings)
+    }
   }
 
   if (!(await validWine(wineVersion))) {
@@ -656,6 +674,13 @@ async function callRunner(
     })
   }
 
+  if (options?.verboseLogFile) {
+    appendFileSync(
+      options.verboseLogFile,
+      `[${new Date().toLocaleString()}] ${safeCommand}\n`
+    )
+  }
+
   if (options?.logFile && existsSync(options.logFile)) {
     writeFileSync(options.logFile, '')
   }
@@ -687,6 +712,10 @@ async function callRunner(
         appendFileSync(options.logFile, data)
       }
 
+      if (options?.verboseLogFile) {
+        appendFileSync(options.verboseLogFile, data)
+      }
+
       if (options?.onOutput) {
         options.onOutput(data, child)
       }
@@ -698,6 +727,10 @@ async function callRunner(
     child.stderr.on('data', (data: string) => {
       if (options?.logFile) {
         appendFileSync(options.logFile, data)
+      }
+
+      if (options?.verboseLogFile) {
+        appendFileSync(options.verboseLogFile, data)
       }
 
       if (options?.onOutput) {
@@ -812,6 +845,40 @@ function getRunnerCallWithoutCredentials(
   ].join(' ')
 }
 
+/**
+ * Converts Unix paths to Windows ones or vice versa
+ * @param path The Windows/Unix path you have
+ * @param game Required for runWineCommand
+ * @param variant The path variant (Windows/Unix) that you'd like to get (passed to `winepath` as -u/-w)
+ * @returns The path returned by `winepath`
+ */
+async function getWinePath({
+  path,
+  gameSettings,
+  variant = 'unix'
+}: {
+  path: string
+  gameSettings: GameSettings
+  variant?: 'win' | 'unix'
+}): Promise<string> {
+  // TODO: Proton has a special verb for getting Unix paths, and another one for Windows ones. Use those instead
+  //       Note that this would involve running `proton runinprefix cmd /c echo path` first to expand env vars
+  //       https://github.com/ValveSoftware/Proton/blob/4221d9ef07cc38209ff93dbbbca9473581a38255/proton#L1526-L1533
+  const { stdout } = await runWineCommand({
+    gameSettings,
+    commandParts: [
+      'cmd',
+      '/c',
+      'winepath',
+      variant === 'unix' ? '-u' : '-w',
+      path
+    ],
+    wait: false,
+    protonVerb: 'runinprefix'
+  })
+  return stdout.trim()
+}
+
 export {
   prepareLaunch,
   launchCleanup,
@@ -821,5 +888,6 @@ export {
   setupWrappers,
   runWineCommand,
   callRunner,
-  getRunnerCallWithoutCredentials
+  getRunnerCallWithoutCredentials,
+  getWinePath
 }

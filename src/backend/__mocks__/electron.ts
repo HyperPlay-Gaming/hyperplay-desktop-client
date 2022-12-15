@@ -1,3 +1,5 @@
+import { EventEmitter } from 'node:events'
+import { MenuItemConstructorOptions } from 'electron'
 import { tmpdir } from 'os'
 import { join } from 'path'
 
@@ -27,9 +29,57 @@ class Notification {
   }
 }
 
+class BrowserWindow {
+  public constructor() {
+    return {}
+  }
+}
+
+const Menu = {
+  buildFromTemplate(options: MenuItemConstructorOptions[]) {
+    return options
+  }
+}
+
+const nativeImage = {
+  createFromPath: (path: string) => ({
+    resize: (size: { width: number; height: number }) =>
+      `${path} width=${size.width} height=${size.height}`
+  })
+}
+
+class Tray {
+  icon: string = ''
+  menu: MenuItemConstructorOptions[] = []
+  tooltip: string = ''
+
+  constructor(icon: string) {
+    this.icon = icon
+  }
+
+  on(event: string) {}
+
+  setContextMenu(menu: MenuItemConstructorOptions[]) {
+    this.menu = menu
+  }
+
+  setToolTip(tooltip: string) {
+    this.tooltip = tooltip
+  }
+}
+
 const ipcMain = {
   on: jest.fn().mockReturnThis(),
   handle: jest.fn().mockReturnThis()
 }
 
-export { dialog, app, Notification, ipcMain }
+export {
+  dialog,
+  app,
+  Notification,
+  BrowserWindow,
+  Menu,
+  nativeImage,
+  Tray,
+  ipcMain
+}

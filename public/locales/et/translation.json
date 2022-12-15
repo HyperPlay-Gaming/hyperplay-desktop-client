@@ -66,7 +66,6 @@
                 "title": "Tekkis ootamatu erand!"
             },
             "update": {
-                "message": "Midagi läks uuendusega valesti, palun kontrollige logisid või proovige hiljem uuesti!",
                 "title": "Viga uuendamisel"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "Töölauale ja Start Menüüsse on loodud otseteed",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Otseteed eemaldati töölaualt ja startmenüüst",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Otseteed"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "JAH"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Mine teeki",
         "login": "Logi sisse",
         "sync": "Sünkrooni",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Aktiveeri",
             "back": "Tagasi",
             "backspace": "Backspace",
-            "close_context_menu": "Sulge kontekstimenüü",
             "close_dialog": "Sulge dialoog",
             "close_keyboard": "Sulge klaviatuur",
-            "context_menu": "Context menu",
+            "close_options": "Close Options",
             "game_details": "Mängu üksikasjad",
             "game_settings": "Mängu seaded",
             "install_game": "Paigalda mäng",
             "move_cursor": "Liiguta kursorit",
-            "none": "None",
             "open_virtual_keyboard": "Ava virtuaalne klaviatuur",
+            "options": "Options",
             "play_game": "Mängi mängu",
             "scroll": "Scroll",
+            "select": "Select",
             "space": "Tühik",
             "update_game": "Uuenda mängu"
         }
     },
     "docs": "Documentation",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "Võrguteenused ei pruugi täielikult töötada, kuna Epic Gamesi serverid on võrguühenduseta!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Uuendus saadaval!",
             "stable": "Stabiilne",
             "version": "HyperPlay Version"
@@ -300,7 +307,9 @@
         "website": "Veebilehe laadimine"
     },
     "login": {
-        "externalLogin": "Väline sisselogimine",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Progress",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Hiljuti mängitud",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Valige alternatiivne GOGDL binaarfail",
         "alt-legendary-bin": "Valige alternatiivne Legendary binaarfail",
-        "audiofix": "Heliparandus (Pulse Audio Latency)",
         "autodxvk": "DXVK automaatne paigaldamine/uuendamine prefiksile",
         "autosync": "Automaatne salvestiste sünkroonimine",
         "autovkd3d": "VKD3D automaatne paigaldamine/uuendamine prefiksile",
@@ -509,7 +523,9 @@
             "title": "Käivita EXE prefiksil"
         },
         "savefolder": {
-            "placeholder": "Valige täpne mängude salvestiste kaust"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Valige täpne mängude salvestiste kaust",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Valige teema",
         "showfps": "Näita FPS-i (DX9, 10 ja 11)",
@@ -527,6 +543,7 @@
         "clear-cache": "Tühjenda HyperPlay'u vahemälu",
         "copiedToClipboard": "Kopeeritud lõikelauale!",
         "copyToClipboard": "Kopeeri kõik seaded lõikelauale",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode on vajalik selleks, et EAC runtime töötaks Flatpaki peal. Kas soovite selle nüüd sisse lülitada?",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "Täpsem",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "Üldine",
             "log": "Logi",
             "other": "Muu",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "Logi välja",
         "logout_confirmation": "Kas olete kindel, et soovite välja logida?",
         "manageaccounts": "Kontode haldamine",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "error": "Ei saanud Wine/Proton versioone kätte.",
             "link": "Wine'i haldur",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Wine'i haldur",
             "unzipping": "Lahtipakkimine"
         },

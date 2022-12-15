@@ -26,7 +26,8 @@ import {
   isMac,
   isWindows,
   getSteamLibraries,
-  getSteamCompatFolder
+  getSteamCompatFolder,
+  configStore
 } from './constants'
 import { execAsync } from './utils'
 import { logError, logInfo, LogPrefix } from './logger/logger'
@@ -151,7 +152,79 @@ abstract class GlobalConfig {
   }
 
   /**
-   * Detects CrossOver installs on Mac and Linux
+   * Detects Wine installed on home application folder on Mac
+   *
+   * @returns Promise<Set<WineInstallation>>
+   */
+  public async getWineOnMac(): Promise<Set<WineInstallation>> {
+    const wineSet = new Set<WineInstallation>()
+    if (!isMac) {
+      return wineSet
+    }
+    const apps = readdirSync(`${userHome}/Applications`)
+    for (const app of apps) {
+      if (app.includes('Wine') && app.includes('.app')) {
+        const wineBin = `${userHome}/Applications/${app}/Contents/Resources/wine/bin/wine64`
+        if (existsSync(wineBin)) {
+          try {
+            const { stdout: out } = await execAsync(`'${wineBin}' --version`)
+            const version = out.split('\n')[0]
+            wineSet.add({
+              ...this.getWineExecs(wineBin),
+              lib: `${userHome}/Applications/Wineskin/${app}/Contents/SharedSupport/wine/lib`,
+              lib32: `${userHome}/Applications/Wineskin/${app}/Contents/SharedSupport/wine/lib`,
+              name: `Wine - ${version}`,
+              type: 'wine',
+              bin: wineBin
+            })
+          } catch (error) {
+            logError(`Error getting wine version for ${wineBin}`, {
+              prefix: LogPrefix.GlobalConfig
+            })
+          }
+        }
+      }
+    }
+    return wineSet
+  }
+
+  public async getWineskinWine(): Promise<Set<WineInstallation>> {
+    const wineSet = new Set<WineInstallation>()
+    if (!isMac) {
+      return wineSet
+    }
+    const wineSkinPath = `${userHome}/Applications/Wineskin`
+    if (existsSync(wineSkinPath)) {
+      const apps = readdirSync(wineSkinPath)
+      for (const app of apps) {
+        if (app.includes('.app')) {
+          const wineBin = `${userHome}/Applications/Wineskin/${app}/Contents/SharedSupport/wine/bin/wine64`
+          if (existsSync(wineBin)) {
+            try {
+              const { stdout: out } = await execAsync(`'${wineBin}' --version`)
+              const version = out.split('\n')[0]
+              wineSet.add({
+                ...this.getWineExecs(wineBin),
+                lib: `${userHome}/Applications/Wineskin/${app}/Contents/SharedSupport/wine/lib`,
+                lib32: `${userHome}/Applications/Wineskin/${app}/Contents/SharedSupport/wine/lib`,
+                name: `Wineskin - ${version}`,
+                type: 'wine',
+                bin: wineBin
+              })
+            } catch (error) {
+              logError(`Error getting wine version for ${wineBin}`, {
+                prefix: LogPrefix.GlobalConfig
+              })
+            }
+          }
+        }
+      }
+    }
+    return wineSet
+  }
+
+  /**
+   * Detects CrossOver installs on Mac
    *
    * @returns Promise<Set<WineInstallation>>
    */
@@ -188,6 +261,17 @@ abstract class GlobalConfig {
     return crossover
   }
 
+  public async getMacOsWineSet(): Promise<Set<WineInstallation>> {
+    if (!isMac) {
+      return new Set<WineInstallation>()
+    }
+
+    const crossover = await this.getCrossover()
+    const wineOnMac = await this.getWineOnMac()
+    const wineskinWine = await this.getWineskinWine()
+    return new Set([...crossover, ...wineOnMac, ...wineskinWine])
+  }
+
   /**
    * Detects Wine/Proton on the user's system.
    *
@@ -196,14 +280,7 @@ abstract class GlobalConfig {
   public async getAlternativeWine(
     scanCustom = true
   ): Promise<WineInstallation[]> {
-    if (isMac) {
-      // On Mac, prioritise CX installations since Wine/Proton does not work
-      const crossover = await this.getCrossover()
-
-      if (crossover.size) {
-        return [...crossover]
-      }
-    }
+    const macOsWineSet = await this.getMacOsWineSet()
 
     if (!existsSync(`${toolsPath}/wine`)) {
       mkdirSync(`${toolsPath}/wine`, { recursive: true })
@@ -284,7 +361,13 @@ abstract class GlobalConfig {
       customWineSet = await this.getCustomWinePaths()
     }
 
-    return [...defaultWineSet, ...altWine, ...proton, ...customWineSet]
+    return [
+      ...defaultWineSet,
+      ...altWine,
+      ...proton,
+      ...customWineSet,
+      ...macOsWineSet
+    ]
   }
 
   /**
@@ -439,6 +522,13 @@ class GlobalConfigV0 extends GlobalConfig {
       winePrefix
     } as AppSettings
 
+    // TODO: Remove this after a couple of stable releases
+    // Get settings only from config-store
+    const currentConfigStore = configStore.get('settings', {}) as AppSettings
+    if (!currentConfigStore.defaultInstallPath) {
+      configStore.set('settings', settings)
+    }
+
     return settings
   }
 
@@ -467,7 +557,7 @@ class GlobalConfigV0 extends GlobalConfig {
   }
 
   public async getFactoryDefaults(): Promise<AppSettings> {
-    const { account_id } = await LegendaryUser.getUserInfo()
+    const account_id = (await LegendaryUser.getUserInfo())?.account_id
     const userName = user().username
     const defaultWine = isWindows ? {} : await this.getDefaultWine()
 
@@ -484,6 +574,7 @@ class GlobalConfigV0 extends GlobalConfig {
       checkForUpdatesOnStartup: !isFlatpak,
       customWinePaths: isWindows ? null : [],
       defaultInstallPath: installPath,
+      libraryTopSection: 'disabled',
       defaultSteamPath: getSteamCompatFolder(),
       defaultWinePrefix: defaultWinePrefix,
       language: 'en',

@@ -34,11 +34,11 @@ describe('logger/logfile.ts', () => {
     tmpDir.removeCallback()
   })
 
-  test('createNewLogFileAndClearOldOnces fails because logDir does not exist', () => {
+  test('createNewLogFileAndClearOldOnes fails because logDir does not exist', () => {
     const spyAppGetPath = jest.spyOn(app, 'getPath').mockReturnValue('invalid')
     const spyOpenSync = jest.spyOn(graceful_fs, 'openSync')
 
-    logfile.createNewLogFileAndClearOldOnces()
+    logfile.createNewLogFileAndClearOldOnes()
 
     expect(spyOpenSync).toBeCalledWith(
       expect.stringContaining('invalid/hyperplay-'),
@@ -56,7 +56,7 @@ describe('logger/logfile.ts', () => {
     )
   })
 
-  test('createNewLogFileAndClearOldOnces success', () => {
+  test('createNewLogFileAndClearOldOnes success', () => {
     jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
     jest.spyOn(configStore, 'has').mockReturnValue(true)
     jest.spyOn(configStore, 'get').mockReturnValue({
@@ -64,12 +64,14 @@ describe('logger/logfile.ts', () => {
       lastLogFile: undefined
     })
 
-    const data = logfile.createNewLogFileAndClearOldOnces()
+    const data = logfile.createNewLogFileAndClearOldOnes()
 
     expect(logError).not.toBeCalled()
     expect(data).toStrictEqual({
       currentLogFile: expect.any(String),
-      lastLogFile: 'old/log/path/file.log'
+      lastLogFile: 'old/log/path/file.log',
+      legendaryLogFile: expect.any(String),
+      gogdlLogFile: expect.any(String)
     })
   })
 
@@ -95,7 +97,7 @@ describe('logger/logfile.ts', () => {
     expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeTruthy()
     expect(graceful_fs.existsSync(yearOutdatedLogFile)).toBeTruthy()
 
-    const data = logfile.createNewLogFileAndClearOldOnces()
+    const data = logfile.createNewLogFileAndClearOldOnes()
 
     expect(logError).not.toBeCalled()
     expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeFalsy()

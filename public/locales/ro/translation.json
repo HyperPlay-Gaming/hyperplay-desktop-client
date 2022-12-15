@@ -66,7 +66,6 @@
                 "title": "A avut loc o excepție neprinsă!"
             },
             "update": {
-                "message": "A apărut o eroare la actualizare, vă rugăm să verificați jurnalele sau încercați din nou mai târziu!",
                 "title": "Eroare de actualizare"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "Scurtăturile au fost create pe Desktop și pe meniul Start",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Comenzile rapide au fost eliminate din Desktop și din meniul Start",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "Scurtături"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "DA"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "Accesați Bibliotecă",
         "login": "Autentificare",
         "sync": "Sincronizează",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Activati",
             "back": "Negru",
             "backspace": "Backspace",
-            "close_context_menu": "Închideți meniul contextual",
             "close_dialog": "Închide caseta de dialog",
             "close_keyboard": "Închideți tastatura",
-            "context_menu": "Meniul contextual",
+            "close_options": "Close Options",
             "game_details": "Detalii joc",
             "game_settings": "Setările jocului",
             "install_game": "Instalează jocul",
             "move_cursor": "Mutați cursorul",
-            "none": "Nici unul",
             "open_virtual_keyboard": "Deschideți tastatura virtuală",
+            "options": "Options",
             "play_game": "Joaca jocul",
             "scroll": "Sul",
+            "select": "Select",
             "space": "Spaţiu",
             "update_game": "Actualizați jocul"
         }
     },
     "docs": "Documentație",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "Este posibil ca serviciile online să nu funcționeze complet, deoarece serverele Epic Games sunt offline!",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Actualizare disponibila",
             "stable": "Grajd",
             "version": "Versiune eroică"
@@ -300,7 +307,9 @@
         "website": "Se încarcă site-ul web"
     },
     "login": {
-        "externalLogin": "Autentificare externă",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Nume variabilă",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Progres",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "Jocuri Recente",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Alegeți un binar GOGDL alternativ pe care să îl utilizați",
         "alt-legendary-bin": "Alegeți un Legendary Binary alternativ pe care să îl utilizați",
-        "audiofix": "Fixare Audio (Latență în PulseAudio)",
         "autodxvk": "Instalare/Actualizare automată DXVK în Prefix",
         "autosync": "Salvări de sincronizare automată",
         "autovkd3d": "Instalare/Actualizare automată VKD3D pe Prefix",
@@ -509,7 +523,9 @@
             "title": "Rulați EXE pe Prefix"
         },
         "savefolder": {
-            "placeholder": "Selectați folderul exact de salvare a jocurilor"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "Selectați folderul exact de salvare a jocurilor",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Selectează tema",
         "showfps": "Afișați FPS (DX9, 10 și 11)",
@@ -527,6 +543,7 @@
         "clear-cache": "Goliți memoria cache eroică",
         "copiedToClipboard": "Copiat în Clipboard!",
         "copyToClipboard": "Copiați toate setările în Clipboard",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "GameMode este necesar pentru ca EAC runtime să funcționeze pe Flatpak. Doriți să-l activați acum?",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "Avansat",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "General",
             "log": "Buturuga",
             "other": "Altele",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "Deconectare",
         "logout_confirmation": "Sigur doriți să vă deconectați?",
         "manageaccounts": "Gestionați Conturile",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Acțiune",
         "manager": {
-            "error": "Nu s-au putut prelua versiunile Wine/Proton de data aceasta.",
             "link": "Manager de vinuri",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Manager de vinuri",
             "unzipping": "Dezarhivare"
         },

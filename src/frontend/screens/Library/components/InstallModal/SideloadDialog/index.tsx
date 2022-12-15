@@ -1,3 +1,4 @@
+import './index.scss'
 import short from 'short-uuid'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,19 +16,18 @@ import {
 } from 'frontend/components/UI'
 import { DialogContent, DialogFooter } from 'frontend/components/UI/Dialog'
 import {
-  getAppSettings,
   getGameInfo,
   getGameSettings,
   removeSpecialcharacters,
   writeConfig
 } from 'frontend/helpers'
-import { Path } from 'frontend/types'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AvailablePlatforms } from '..'
 import fallbackImage from 'frontend/assets/fallback_card.jpg'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { ReactComponent as BrowserIcon } from 'frontend/assets/browser-icon.svg'
+import classNames from 'classnames'
 
 type Props = {
   availablePlatforms: AvailablePlatforms
@@ -56,7 +56,8 @@ export default function SideloadDialog({
   )
   const [selectedExe, setSelectedExe] = useState('')
   const [gameUrl, setGameUrl] = useState('')
-  const [imageUrl, setImageUrl] = useState('')
+  const [imageUrl, setImageUrl] = useState(fallbackImage)
+  const [searching, setSearching] = useState(false)
   const [app_name, setApp_name] = useState(appName ?? '')
   const [runningSetup, setRunningSetup] = useState(false)
   const [gameInfo, setGameInfo] = useState<Partial<GameInfo>>({})
@@ -70,12 +71,14 @@ export default function SideloadDialog({
     setTitle(value)
   }
 
-  const isLinux = platform === 'linux'
   const appPlatform = gameInfo.install?.platform || platformToInstall
 
   useEffect(() => {
     if (appName) {
       getGameInfo(appName, 'sideload').then((info) => {
+        if (!info) {
+          return
+        }
         setGameInfo(info)
         const {
           art_cover,
@@ -109,10 +112,12 @@ export default function SideloadDialog({
           appName,
           'sideload'
         )
-        setWinePrefix(appSettings.winePrefix)
+        if (appSettings?.winePrefix) {
+          setWinePrefix(appSettings.winePrefix)
+        }
         return
       } else {
-        const { defaultWinePrefix } = await getAppSettings()
+        const { defaultWinePrefix } = await window.api.requestAppSettings()
         const sugestedWinePrefix = `${defaultWinePrefix}/${title}`
         setWinePrefix(sugestedWinePrefix)
       }
@@ -120,21 +125,26 @@ export default function SideloadDialog({
     setWine()
   }, [title])
 
-  useEffect(() => {
-    setTimeout(async () => {
-      try {
-        const res = await fetch(
-          `https://steamgrid.usebottles.com/api/search/${title}`
-        )
-        if (res.status === 200) {
-          const steamGridImage = (await res.json()) as string
+  async function searchImage() {
+    setSearching(true)
+
+    try {
+      const res = await fetch(
+        `https://steamgrid.usebottles.com/api/search/${title}`
+      )
+      if (res.status === 200) {
+        const steamGridImage = (await res.json()) as string
+        if (steamGridImage && steamGridImage.startsWith('http')) {
           setImageUrl(steamGridImage)
         }
-      } catch (error) {
-        console.log('Error when getting image from SteamGridDB')
+        setSearching(false)
       }
-    }, 2000)
-  }, [title])
+    } catch (error) {
+      console.error('Error when getting image from SteamGridDB')
+      setSearching(false)
+      window.api.logError(`${error}`)
+    }
+  }
 
   async function handleInstall(): Promise<void> {
     window.api.addNewApp({
@@ -152,18 +162,18 @@ export default function SideloadDialog({
       web3,
       browserUrl: gameUrl
     })
-    const notWin = platform !== 'win32'
-    const otherPlatforms = ['linux', 'Mac']
-    const hasWine = notWin && !otherPlatforms.includes(platformToInstall)
     const gameSettings = await getGameSettings(app_name, 'sideload')
-    await writeConfig([
-      app_name,
-      {
+    if (!gameSettings) {
+      return
+    }
+    await writeConfig({
+      appName: app_name,
+      config: {
         ...gameSettings,
-        winePrefix: hasWine ? winePrefix : '',
-        wineVersion: hasWine ? wineVersion : undefined
+        winePrefix,
+        wineVersion
       }
-    ])
+    })
 
     await refreshLibrary({
       runInBackground: true,
@@ -193,7 +203,7 @@ export default function SideloadDialog({
 
   const handleRunExe = async () => {
     let exeToRun = ''
-    const { path } = await window.api.openDialog({
+    const path = await window.api.openDialog({
       buttonLabel: t('box.select.button', 'Select'),
       properties: ['openFile'],
       title: t('box.runexe.title', 'Select EXE to Run'),
@@ -204,10 +214,13 @@ export default function SideloadDialog({
       try {
         setRunningSetup(true)
         const gameSettings = await getGameSettings(app_name, 'sideload')
-        await writeConfig([
-          app_name,
-          { ...gameSettings, winePrefix, wineVersion }
-        ])
+        if (!gameSettings) {
+          return
+        }
+        await writeConfig({
+          appName: app_name,
+          config: { ...gameSettings, winePrefix, wineVersion }
+        })
         await window.api.runWineCommand({
           commandParts: [exeToRun],
           wait: true,
@@ -246,13 +259,18 @@ export default function SideloadDialog({
 
   const showSideloadExe = appPlatform !== 'Browser'
 
+  const shouldShowRunExe =
+    platform !== 'win32' &&
+    platformToInstall !== 'Mac' &&
+    platformToInstall !== 'linux'
+
   return (
     <>
       <DialogContent>
         <div className="sideloadGrid">
           <div className="imageIcons">
             <CachedImage
-              className="appImage"
+              className={classNames('appImage', { blackWhiteImage: searching })}
               src={imageUrl ? imageUrl : fallbackImage}
             />
             <span className="titleIcon">
@@ -268,6 +286,7 @@ export default function SideloadDialog({
                 'Add a title to your Game/App'
               )}
               onChange={(e) => handleTitle(e.target.value)}
+              onBlur={async () => searchImage()}
               htmlId="sideload-title"
               value={title}
               maxLength={40}
@@ -300,7 +319,7 @@ export default function SideloadDialog({
                       filters: fileFilters[platformToInstall],
                       defaultPath: winePrefix
                     })
-                    .then(({ path }: Path) => setSelectedExe(path ? path : ''))
+                    .then((path) => setSelectedExe(path ? path : ''))
                 }
               />
             )}
@@ -331,7 +350,7 @@ export default function SideloadDialog({
         </div>
       </DialogContent>
       <DialogFooter>
-        {isLinux && (
+        {shouldShowRunExe && (
           <button
             onClick={async () => handleRunExe()}
             className={`button is-secondary`}

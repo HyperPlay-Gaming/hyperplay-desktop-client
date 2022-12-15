@@ -66,7 +66,6 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "message": "更新出現問題，請檢查日誌或稍後再試！",
                 "title": "Update Error"
             },
             "wine-not-found": {
@@ -115,7 +114,9 @@
         },
         "shortcuts": {
             "message": "已建立捷徑在桌面和開始功能表內",
+            "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "將捷徑從桌面和開始功能表移除",
+            "message-remove-mac": "Shortcuts were removed from the Applications folder",
             "title": "捷徑"
         },
         "sync": {
@@ -144,6 +145,7 @@
         "yes": "是"
     },
     "button": {
+        "cancel": "Cancel",
         "go_to_library": "前往遊戲庫",
         "login": "登入",
         "sync": "同步",
@@ -152,38 +154,42 @@
     },
     "controller": {
         "hints": {
-            "activate": "Activate",
             "back": "Back",
             "backspace": "Backspace",
-            "close_context_menu": "Close context menu",
             "close_dialog": "Close dialog",
             "close_keyboard": "Close keyboard",
-            "context_menu": "Context menu",
+            "close_options": "Close Options",
             "game_details": "Game details",
             "game_settings": "Game settings",
             "install_game": "Install game",
             "move_cursor": "Move cursor",
-            "none": "None",
             "open_virtual_keyboard": "Open virtual keyboard",
+            "options": "Options",
             "play_game": "Play game",
             "scroll": "Scroll",
+            "select": "Select",
             "space": "Space",
             "update_game": "Update game"
         }
     },
     "docs": "Documentation",
-    "download": {
-        "manager": {
-            "empty": "Nothing to download.",
-            "link": "Download Manager",
-            "queue": {
-                "actions": "Action",
-                "element": "Name",
-                "platform": "Platform",
-                "store": "Store"
-            },
-            "title": "Downloads"
-        }
+    "download-manager": {
+        "install-type": {
+            "install": "Install",
+            "update": "Update"
+        },
+        "label": {
+            "disk": "Disk",
+            "speed": "Download"
+        },
+        "link": "Downloads",
+        "queue": {
+            "end-time": "Finished at",
+            "queue-time": "Added at",
+            "start-time": "Started at",
+            "type": "Type"
+        },
+        "title": "Downloads"
     },
     "epic": {
         "offline-notification-body": "因為Epic Games伺服器離線，可能無法提供完整線上服務！",
@@ -259,6 +265,7 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
+            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Update Available!",
             "stable": "Stable",
             "version": "HyperPlay Version"
@@ -300,7 +307,9 @@
         "website": "載入網站"
     },
     "login": {
-        "externalLogin": "外部登入",
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
     },
     "message": {
@@ -351,10 +360,12 @@
     },
     "offline-message": {
         "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
+        "ignore": "Ignore",
         "offline": "Offline",
-        "retry-in": "Retrying in ... {{seconds}} seconds",
+        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "Open": "",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -404,13 +415,17 @@
         "mac": "Mac",
         "win": "Windows"
     },
+    "please-wait": "Please wait...",
     "progress": "Progress",
     "queue": {
         "label": {
+            "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
+            "empty": "Nothing to download",
             "finished": "Completed",
-            "queued": "Queued"
+            "queued": "Queued",
+            "remove": "Remove from Downloads"
         }
     },
     "Recent": "最近遊玩的遊戲",
@@ -421,7 +436,6 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "選擇要使用的備選 GOGDL 二進制文件",
         "alt-legendary-bin": "選擇備選的 Legendary 二進制文件",
-        "audiofix": "音頻修覆（Pulse Audio延遲）",
         "autodxvk": "在PREFIX自動安裝並更新DXVK",
         "autosync": "自動同步存檔",
         "autovkd3d": "自動在 Prefix 中安裝/更新 VKD3D",
@@ -509,7 +523,9 @@
             "title": "在PREFIX上執行exe檔案"
         },
         "savefolder": {
-            "placeholder": "選擇存檔的保存位置"
+            "not-found": "Save folder not found, please select it manually",
+            "placeholder": "選擇存檔的保存位置",
+            "warning": "Please check twice if the path is correct"
         },
         "select_theme": "選擇主題",
         "showfps": "顯示幀數（Directx 9，10和11）",
@@ -527,6 +543,7 @@
         "clear-cache": "清除 HyperPlay 快取",
         "copiedToClipboard": "已複製到剪貼簿！",
         "copyToClipboard": "複製所有設定至剪貼簿",
+        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "需要 GameMode 才能讓 EAC runtime 在 Flatpak 上運作。你想馬上啟用它嗎？",
@@ -546,6 +563,8 @@
         },
         "navbar": {
             "advanced": "進階",
+            "games_settings": "Game Settings",
+            "games_settings_defaults": "Game Defaults",
             "general": "一般",
             "log": "Log",
             "other": "其它",
@@ -596,6 +615,7 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
+        "logging_out": "Logging out",
         "logout": "登出",
         "logout_confirmation": "您確定要登出嗎？",
         "manageaccounts": "管理帳號",
@@ -612,8 +632,8 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "error": "此次無法獲取 Wine/Proton 版本。",
             "link": "Wine 管理員",
+            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Wine 管理員",
             "unzipping": "解壓縮"
         },

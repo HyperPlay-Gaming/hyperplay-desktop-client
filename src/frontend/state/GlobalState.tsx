@@ -11,11 +11,14 @@ import {
   Runner,
   WineVersionInfo,
   UserInfo,
-  LibraryTopSectionOptions
+  InstallParams,
+  LibraryTopSectionOptions,
+  AppSettings
 } from 'common/types'
 import { Category, DialogModalOptions } from 'frontend/types'
 import { TFunction, withTranslation } from 'react-i18next'
 import {
+  getGameInfo,
   getLegendaryConfig,
   getPlatform,
   install,
@@ -37,8 +40,9 @@ import {
 import { sideloadLibrary } from 'frontend/helpers/electronStores'
 
 const storage: Storage = window.localStorage
+const globalSettings = configStore.get('settings', {}) as AppSettings
 
-const RTL_LANGUAGES = ['fa']
+const RTL_LANGUAGES = ['fa', 'ar']
 
 type T = TFunction<'gamepage'> & TFunction<'translations'>
 
@@ -67,7 +71,7 @@ interface StateProps {
   layout: string
   libraryStatus: GameStatus[]
   libraryTopSection: string
-  platform: string
+  platform: NodeJS.Platform | 'unknown'
   refreshing: boolean
   refreshingInTheBackground: boolean
   hiddenGames: HiddenGame[]
@@ -129,9 +133,8 @@ export class GlobalState extends PureComponent<Props> {
     language: this.props.i18n.language,
     layout: storage.getItem('layout') || 'grid',
     libraryStatus: [],
-    libraryTopSection:
-      storage.getItem('library_top_section') || 'recently_played',
-    platform: '',
+    libraryTopSection: globalSettings.libraryTopSection || 'disabled',
+    platform: 'unknown',
     refreshing: false,
     refreshingInTheBackground: true,
     hiddenGames:
@@ -311,7 +314,7 @@ export class GlobalState extends PureComponent<Props> {
       this.setState({
         epic: {
           library: [],
-          username: response.data.displayName
+          username: response.data?.displayName
         }
       })
 
@@ -344,7 +347,7 @@ export class GlobalState extends PureComponent<Props> {
       this.setState({
         gog: {
           library: [],
-          username: response.data.username
+          username: response.data?.username
         }
       })
 
@@ -355,13 +358,12 @@ export class GlobalState extends PureComponent<Props> {
   }
 
   gogLogout = async () => {
-    await window.api.logoutGOG().finally(() => {
-      this.setState({
-        gog: {
-          library: [],
-          username: null
-        }
-      })
+    await window.api.logoutGOG()
+    this.setState({
+      gog: {
+        library: [],
+        username: null
+      }
     })
     console.log('Logging out from gog')
     window.location.reload()
@@ -445,33 +447,23 @@ export class GlobalState extends PureComponent<Props> {
     this.setState({ refreshing: true })
     await window.api
       .refreshWineVersionInfo(fetch)
-      .then((releases) => {
+      .then(() => {
         this.setState({
-          wineVersions: releases,
           refreshing: false
         })
         return
       })
       .catch(async () => {
-        if (fetch) {
-          // try to restore the saved information
-          await window.api.refreshWineVersionInfo().then((releases) => {
-            this.setState({
-              wineVersions: releases
-            })
-          })
-        }
-
         this.setState({ refreshing: false })
         window.api.logError('Sync with upstream releases failed')
 
-        notify([
-          'Wine-Manager',
-          t(
+        notify({
+          title: 'Wine-Manager',
+          body: t(
             'notify.refresh.error',
             "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
           )
-        ])
+        })
         return
       })
   }
@@ -517,6 +509,15 @@ export class GlobalState extends PureComponent<Props> {
       newLibraryStatus.push(currentApp)
     }
 
+    if (status === 'updating') {
+      currentApp.status = 'updating'
+      // remove the item from the library to avoid duplicates then add the new status
+      newLibraryStatus = libraryStatus.filter(
+        (game) => game.appName !== appName
+      )
+      newLibraryStatus.push(currentApp)
+    }
+
     // if the app is done installing or errored
     if (['error', 'done'].includes(status)) {
       // if the app was updating, remove from the available game updates
@@ -554,58 +555,59 @@ export class GlobalState extends PureComponent<Props> {
     }
     // Deals launching from protocol. Also checks if the game is already running
     window.api.handleLaunchGame(
-      async (e: Event, appName: string, runner: Runner) => {
+      async (
+        e: Event,
+        appName: string,
+        runner: Runner
+      ): Promise<{ status: 'done' | 'error' }> => {
         const currentApp = libraryStatus.filter(
           (game) => game.appName === appName
         )[0]
         if (!currentApp) {
-          // Add finding a runner for games
-          const hasUpdate = this.state.gameUpdates?.includes(appName)
           return launch({
             appName,
             t,
             runner,
-            hasUpdate,
+            hasUpdate: false,
+            syncCloud: true,
             showDialogModal: this.handleShowDialogModal
           })
         }
+        return { status: 'error' }
       }
     )
 
     // TODO: show the install modal instead of just installing like this since it has no options to choose
-    window.api.handleInstallGame(
-      async (
-        e: Event,
-        args: { appName: string; installPath: string; runner: Runner }
-      ) => {
-        const currentApp = libraryStatus.filter(
-          (game) => game.appName === appName
-        )[0]
-        const { appName, installPath, runner } = args
-        if (!currentApp || (currentApp && currentApp.status !== 'installing')) {
-          return install({
-            appName,
-            handleGameStatus: this.handleGameStatus,
-            installPath,
-            isInstalling: false,
-            previousProgress: null,
-            progress: {
-              bytes: '0.00MB',
-              eta: '00:00:00',
-              percent: 0
-            },
-            t,
-            runner,
-            platformToInstall: 'Windows',
-            showDialogModal: this.handleShowDialogModal
-          })
+    window.api.handleInstallGame(async (e: Event, args: InstallParams) => {
+      const currentApp = libraryStatus.filter(
+        (game) => game.appName === appName
+      )[0]
+      const { appName, path, runner } = args
+      if (!currentApp || (currentApp && currentApp.status !== 'installing')) {
+        const gameInfo = await getGameInfo(appName, runner)
+        if (!gameInfo) {
+          return
         }
+        return install({
+          gameInfo,
+          installPath: path,
+          isInstalling: false,
+          previousProgress: null,
+          progress: {
+            bytes: '0.00MiB',
+            eta: '00:00:00',
+            percent: 0
+          },
+          t,
+          platformToInstall: 'Windows',
+          showDialogModal: this.handleShowDialogModal
+        })
       }
-    )
+    })
 
     window.api.handleSetGameStatus(async (e: Event, args: GameStatus) => {
       const { libraryStatus } = this.state
-      this.handleGameStatus({ ...libraryStatus, ...args })
+      return this.handleGameStatus({ ...libraryStatus, ...args })
     })
 
     window.api.handleRefreshLibrary(async (e: Event, runner: Runner) => {
@@ -670,7 +672,6 @@ export class GlobalState extends PureComponent<Props> {
       layout,
       category,
       showHidden,
-      libraryTopSection,
       showFavourites,
       sidebarCollapsed
     } = this.state
@@ -681,7 +682,6 @@ export class GlobalState extends PureComponent<Props> {
     storage.setItem('show_hidden', JSON.stringify(showHidden))
     storage.setItem('show_favorites', JSON.stringify(showFavourites))
     storage.setItem('sidebar_collapsed', JSON.stringify(sidebarCollapsed))
-    storage.setItem('library_top_section', libraryTopSection)
 
     const pendingOps = libraryStatus.filter(
       (game) => game.status !== 'playing' && game.status !== 'done'
