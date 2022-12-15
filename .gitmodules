@@ -1,0 +1,6 @@
+[submodule "src/backend/hyperplay-proxy-server"]
+	path = src/backend/hyperplay-proxy-server
+	url = https://github.com/HyperPlay-Gaming/hyperplay-proxy-server.git
+[submodule "src/backend/hyperplay-extension-helper"]
+	path = src/backend/hyperplay-extension-helper
+	url = https://github.com/HyperPlay-Gaming/hyperplay-extension-helper.git

@@ -3,6 +3,8 @@ import { MenuItemConstructorOptions } from 'electron'
 import { tmpdir } from 'os'
 import { join } from 'path'
 
+const fs = jest.createMockFromModule('fs')
+
 const appBasePath = tmpdir()
 const dialog = {
   // dialog override
@@ -66,7 +68,10 @@ class Tray {
   }
 }
 
-const ipcMain = new EventEmitter()
+const ipcMain = {
+  on: jest.fn().mockReturnThis(),
+  handle: jest.fn().mockReturnThis()
+}
 
 export {
   dialog,

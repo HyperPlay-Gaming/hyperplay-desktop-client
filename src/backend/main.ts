@@ -111,16 +111,17 @@ import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
-import { PROXY_TOPICS } from './proxy/types'
-import * as ProviderHelper from './proxy/providerHelper'
-import * as ProxyServer from './proxy/proxy'
+import { PROXY_TOPICS } from './hyperplay-proxy-server/types'
+import * as ProviderHelper from './hyperplay-proxy-server/providerHelper'
+import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
+import * as ProxyServer from './hyperplay-proxy-server/proxy'
 import {
   AccountsChangedType,
   ChainChangedType,
   ConnectionRequestRejectedType,
   WalletConnectedType,
   WalletDisconnectedType
-} from '../common/types/proxy-types'
+} from './hyperplay-proxy-server/commonProxyTypes'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
@@ -144,7 +145,13 @@ import {
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import { getDefaultSavePath } from './save_sync'
 import si from 'systeminformation'
+import {
+  initExtensionIpcHandlerWindow,
+  initExtension
+} from './hyperplay-extension-helper/ipcHandlers'
 import { initTrayIcon } from './tray_icon/tray_icon'
+
+app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
@@ -188,11 +195,13 @@ async function createWindow(): Promise<BrowserWindow> {
     }
   }
 
+  await initExtension()
+
   // Create the browser window.
   mainWindow = new BrowserWindow({
     ...windowProps,
-    minHeight: 345,
-    minWidth: 600,
+    minHeight: 740,
+    minWidth: 1040,
     show: false,
 
     webPreferences: {
@@ -203,6 +212,9 @@ async function createWindow(): Promise<BrowserWindow> {
       preload: path.join(__dirname, 'preload.js')
     }
   })
+
+  ExtensionHelper.initExtensionProvider(mainWindow)
+  initExtensionIpcHandlerWindow(mainWindow)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -255,20 +267,19 @@ async function createWindow(): Promise<BrowserWindow> {
   // }
 
   if (!app.isPackaged) {
-    if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-      import('electron-devtools-installer').then((devtools) => {
-        const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
-
-        installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
-          logWarning(['An error occurred: ', err], {
-            prefix: LogPrefix.Backend
-          })
-        })
-      })
-    }
+    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+    //   import('electron-devtools-installer').then((devtools) => {
+    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
+    //     installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
+    //       logWarning(['An error occurred: ', err], {
+    //         prefix: LogPrefix.Backend
+    //       })
+    //     })
+    //   })
+    // }
     mainWindow.loadURL('http://localhost:5173')
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(`file://${path.join(publicDir, '../build/index.html')}`)
