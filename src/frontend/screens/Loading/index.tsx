@@ -7,7 +7,7 @@ const Loading = function () {
     window.api.loadingScreenReady()
   })
 
-  return <UpdateComponentBase message="Loading" />
+  return <UpdateComponentBase />
 }
 
 export default Loading
