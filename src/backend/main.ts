@@ -467,6 +467,10 @@ if (!gotTheLock) {
 
 ipcMain.on('notify', (event, args) => notify(args))
 
+ipcMain.once('loadingScreenReady', () => {
+  logInfo('Loading Screen Ready', { prefix: LogPrefix.Backend })
+})
+
 ipcMain.once('frontendReady', () => {
   logInfo('Frontend Ready', { prefix: LogPrefix.Backend })
   handleProtocol(mainWindow, [openUrlArgument, ...process.argv])
