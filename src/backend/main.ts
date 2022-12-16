@@ -438,7 +438,7 @@ if (!gotTheLock) {
     const { startInTray } = await GlobalConfig.get().getSettings()
     const headless = isCLINoGui || startInTray
     if (!headless) {
-      mainWindow.show()
+      ipcMain.once('loadingScreenReady', () => mainWindow.show())
     }
 
     // set initial zoom level after a moment, if set in sync the value stays as 1

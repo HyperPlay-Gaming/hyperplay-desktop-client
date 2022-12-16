@@ -8,8 +8,8 @@ import { initGamepad } from './helpers/gamepad'
 import './index.scss'
 import './themes.css'
 import App from './App'
+import Loading from './screens/Loading'
 import GlobalState from './state/GlobalState'
-import { UpdateComponentBase } from './components/UI/UpdateComponent'
 import { initShortcuts } from './helpers/shortcuts'
 import { configStore } from './helpers/electronStores'
 import { initOnlineMonitor } from './helpers/onlineMonitor'
@@ -108,7 +108,7 @@ root.render(
   <React.StrictMode>
     <GlobalState>
       <I18nextProvider i18n={i18next}>
-        <Suspense fallback={<UpdateComponentBase message="Loading" />}>
+        <Suspense fallback={<Loading />}>
           <App />
         </Suspense>
       </I18nextProvider>
