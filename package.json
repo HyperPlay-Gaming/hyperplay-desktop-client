@@ -28,7 +28,8 @@
       "build/app_icon.icns",
       "build/win_icon.ico",
       "build/trayIconLight24x24.png",
-      "build/trayIconDark24x24.png"
+      "build/trayIconDark24x24.png",
+      "build/extensions"
     ],
     "protocols": [
       {
