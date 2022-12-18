@@ -14,9 +14,11 @@ import { initShortcuts } from './helpers/shortcuts'
 import { configStore } from './helpers/electronStores'
 import { initOnlineMonitor } from './helpers/onlineMonitor'
 import { defaultThemes } from './components/UI/ThemeSelector'
+import { Provider as JotaiProvider } from 'jotai'
 
 import '@fontsource/chakra-petch'
 import '@fontsource/jura'
+import StoreController from './store'
 
 initOnlineMonitor()
 
@@ -106,13 +108,16 @@ const root = createRoot(container!) // createRoot(container!) if you use TypeScr
 
 root.render(
   <React.StrictMode>
-    <GlobalState>
-      <I18nextProvider i18n={i18next}>
-        <Suspense fallback={<UpdateComponentBase message="Loading" />}>
-          <App />
-        </Suspense>
-      </I18nextProvider>
-    </GlobalState>
+    <JotaiProvider>
+      <StoreController />
+      <GlobalState>
+        <I18nextProvider i18n={i18next}>
+          <Suspense fallback={<UpdateComponentBase message="Loading" />}>
+            <App />
+          </Suspense>
+        </I18nextProvider>
+      </GlobalState>
+    </JotaiProvider>
   </React.StrictMode>
 )
 
