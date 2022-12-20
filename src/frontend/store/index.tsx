@@ -9,7 +9,7 @@ const StoreController = () => {
     async function initializableStores() {
       for await (const storeKey of storeKeys) {
         const store = (await stores[storeKey]()).default as GenericStore
-        console.log(store)
+
         await store.init?.()
       }
     }
