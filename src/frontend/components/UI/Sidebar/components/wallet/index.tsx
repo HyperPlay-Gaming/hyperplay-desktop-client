@@ -1,40 +1,40 @@
 import './index.css'
 import React from 'react'
 import classNames from 'classnames'
-import walletTextAtom from './helpers/walletTextAtom'
-import { useAtomValue } from 'jotai'
-import { addressAtom } from 'frontend/store/Wallet'
+import getWalletText from './helpers/getWalletText'
+import walletStore from 'frontend/store/WalletStore'
 import ProfilePicture from './ProfilePicture'
+import { observer } from 'mobx-react-lite'
 
 interface WalletProps {
   onClick: () => void
 }
 
-const Wallet: React.FC<WalletProps> = function (props) {
-  const walletText = useAtomValue(walletTextAtom)
-  const address = useAtomValue(addressAtom)
-
-  const isConnected = !!address
+const Wallet: React.FC<WalletProps> = observer((props) => {
+  const walletText = getWalletText(walletStore.address)
 
   return (
     <button
       onClick={props.onClick}
       className="Sidebar__item centerSidebarItem wallet"
     >
-      <ProfilePicture isConnected={isConnected} address={walletText} />
+      <ProfilePicture
+        isConnected={walletStore.isConnected}
+        address={walletStore.address}
+      />
       <span>
         <div className="walletAccountText">{walletText}</div>
         <div
           className={classNames('subtitle-sm', {
-            disconnectedStatus: !isConnected,
-            connectedStatus: isConnected
+            disconnectedStatus: !walletStore.isConnected,
+            connectedStatus: walletStore.isConnected
           })}
         >
-          {isConnected ? 'Connected' : 'Not connected'}
+          {walletStore.isConnected ? 'Connected' : 'Not connected'}
         </div>
       </span>
     </button>
   )
-}
+})
 
 export default Wallet

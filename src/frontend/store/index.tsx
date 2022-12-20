@@ -1,11 +1,23 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { GenericStore } from './types'
 
-import WalletStore from './Wallet'
+const StoreController = () => {
+  useEffect(() => {
+    const stores = import.meta.glob<{ default: GenericStore }>('./*Store.ts*')
+    const storeKeys = Object.keys(stores)
 
-const StoreController = () => (
-  <>
-    <WalletStore />
-  </>
-)
+    async function initializableStores() {
+      for await (const storeKey of storeKeys) {
+        const store = (await stores[storeKey]()).default as GenericStore
+        console.log(store)
+        await store.init?.()
+      }
+    }
+
+    initializableStores()
+  })
+
+  return <></>
+}
 
 export default StoreController
