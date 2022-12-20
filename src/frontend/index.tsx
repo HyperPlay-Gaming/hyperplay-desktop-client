@@ -1,20 +1,18 @@
 import { I18nextProvider, initReactI18next } from 'react-i18next'
 import HttpApi from 'i18next-http-backend'
-import React, { Suspense } from 'react'
+import React, { lazy, Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
 import { initGamepad } from './helpers/gamepad'
 
 import './index.scss'
 import './themes.css'
-import App from './App'
+import Loading from './screens/Loading'
 import GlobalState from './state/GlobalState'
-import { UpdateComponentBase } from './components/UI/UpdateComponent'
 import { initShortcuts } from './helpers/shortcuts'
 import { configStore } from './helpers/electronStores'
 import { initOnlineMonitor } from './helpers/onlineMonitor'
 import { defaultThemes } from './components/UI/ThemeSelector'
-import { Provider as JotaiProvider } from 'jotai'
 
 import '@fontsource/chakra-petch'
 import '@fontsource/jura'
@@ -105,19 +103,18 @@ i18next
 
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
+const App = lazy(async () => import('./App'))
 
 root.render(
   <React.StrictMode>
-    <JotaiProvider>
-      <StoreController />
-      <GlobalState>
-        <I18nextProvider i18n={i18next}>
-          <Suspense fallback={<UpdateComponentBase message="Loading" />}>
-            <App />
-          </Suspense>
-        </I18nextProvider>
-      </GlobalState>
-    </JotaiProvider>
+    <StoreController />
+    <GlobalState>
+      <I18nextProvider i18n={i18next}>
+        <Suspense fallback={<Loading />}>
+          <App />
+        </Suspense>
+      </I18nextProvider>
+    </GlobalState>
   </React.StrictMode>
 )
 
