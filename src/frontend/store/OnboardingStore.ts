@@ -3,7 +3,6 @@ import walletStore from './WalletStore'
 
 class OnboardingStore {
   isOnboardingOpen = true
-  walletStore = walletStore
 
   constructor() {
     makeAutoObservable(this)
@@ -27,7 +26,7 @@ class OnboardingStore {
       )
 
       when(
-        () => this.walletStore.isConnected,
+        () => walletStore.isConnected,
         () => resolve()
       )
     })
