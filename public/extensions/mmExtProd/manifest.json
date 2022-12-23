@@ -4,6 +4,29 @@
     "page": "background.html",
     "persistent": true
   },
+  "browser_action": {
+    "default_icon": {
+      "16": "images/icon-16.png",
+      "19": "images/icon-19.png",
+      "32": "images/icon-32.png",
+      "38": "images/icon-38.png",
+      "64": "images/icon-64.png",
+      "128": "images/icon-128.png",
+      "512": "images/icon-512.png"
+    },
+    "default_title": "MetaMask",
+    "default_popup": "popup.html"
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Alt+Shift+M",
+        "mac": "Alt+Shift+M",
+        "chromeos": "Alt+Shift+M",
+        "linux": "Alt+Shift+M"
+      }
+    }
+  },
   "content_scripts": [
     {
       "matches": [
@@ -53,14 +76,9 @@
     "https://*.infura.io/",
     "https://chainid.network/chains.json",
     "https://lattice.gridplus.io/*",
-    "activeTab",
     "webRequest",
-    "*://*.eth/",
-    "notifications",
-    "nativeMessaging",
-    "fileSystem"
+    "*://*.eth/"
   ],
-
   "short_name": "__MSG_appName__",
   "content_security_policy": "frame-ancestors 'none'; script-src 'self'; object-src 'self'",
   "externally_connectable": {
@@ -72,6 +90,5 @@
     ]
   },
   "minimum_chrome_version": "66",
-  "minimum_electron_version": "9.2.1",
   "version": "10.22.2"
 }
