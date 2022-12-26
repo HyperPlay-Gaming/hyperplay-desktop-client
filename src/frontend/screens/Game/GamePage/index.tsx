@@ -23,7 +23,13 @@ import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
 
-import { GameInfo, GameStatus, Runner, WineInstallation } from 'common/types'
+import {
+  ExtraInfo,
+  GameInfo,
+  GameStatus,
+  Runner,
+  WineInstallation
+} from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GogInstallInfo, GOGCloudSavesLocation } from 'common/types/gog'
 
@@ -72,6 +78,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [progress, previousProgress] = hasProgress(appName)
 
   const [gameInfo, setGameInfo] = useState(locationGameInfo)
+  const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [savesPath, setSavesPath] = useState('')
   const [gogSaves, setGOGSaves] = useState<GOGCloudSavesLocation[]>([])
@@ -128,6 +135,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       if (newInfo) {
         setGameInfo(newInfo)
       }
+      setExtraInfo(await window.api.getExtraInfo(appName, runner))
     }
     updateGameInfo()
   }, [status, gog.library, epic.library])
@@ -221,14 +229,13 @@ export default React.memo(function GamePage(): JSX.Element | null {
         platform: installPlatform
       },
       is_installed,
-      extra,
       developer,
       cloud_save_enabled,
       canRunOffline,
       folder_name
     }: GameInfo = gameInfo
 
-    hasRequirements = extra?.reqs?.length > 0
+    hasRequirements = (extraInfo?.reqs?.length || 0) > 0
     hasUpdate = is_installed && gameUpdates?.includes(appName)
     const appLocation = gameInfo.browserUrl
       ? false
@@ -324,7 +331,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                     appName={appName}
                     isInstalled={is_installed}
                     title={title}
-                    storeUrl={gameInfo.store_url}
+                    storeUrl={extraInfo?.storeUrl || gameInfo.store_url}
                     runner={gameInfo.runner}
                     handleUpdate={handleUpdate}
                     disableUpdate={isInstalling || isUpdating}
@@ -339,11 +346,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
               <div className="infoWrapper">
                 <h6 className="developer">{developer}</h6>
                 <div className="summary">
-                  {extra && extra.about
-                    ? extra.about.description
-                      ? extra.about.description
-                      : extra.about.longDescription
-                      ? extra.about.longDescription
+                  {extraInfo && extraInfo.about
+                    ? extraInfo.about.description
+                      ? extraInfo.about.description
+                      : extraInfo.about.longDescription
+                      ? extraInfo.about.longDescription
                       : ''
                     : ''}
                 </div>
@@ -575,7 +582,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                   <div>{t('game.requirements', 'Requirements')}</div>
                 </DialogHeader>
                 <DialogContent>
-                  <GameRequirements gameInfo={gameInfo} />
+                  <GameRequirements extraInfo={extraInfo!} />
                 </DialogContent>
               </Dialog>
             )}

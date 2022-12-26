@@ -709,8 +709,25 @@ ipcMain.handle('getGameInfo', async (event, appName, runner) => {
       return null
     }
 
-    info.extra = await game.getExtraInfo()
     return info
+  } catch (error) {
+    logError(error, { prefix: LogPrefix.Backend })
+    return null
+  }
+})
+
+ipcMain.handle('getExtraInfo', async (event, appName, runner) => {
+  if (runner === 'sideload') {
+    return null
+  }
+  // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
+  if (runner === 'legendary' && !LegendaryLibrary.get().hasGame(appName)) {
+    return null
+  }
+  try {
+    const game = getGame(appName, runner)
+    const extra = await game.getExtraInfo()
+    return extra
   } catch (error) {
     logError(error, { prefix: LogPrefix.Backend })
     return null
@@ -1048,6 +1065,30 @@ ipcMain.handle(
         body: i18next.t('notify.uninstalled.error', 'Error uninstalling')
       })
       logError(error, { prefix: LogPrefix.Backend })
+      return
+    }
+    if (shouldRemovePrefix) {
+      const { winePrefix } = await game.getSettings()
+      logInfo(`Removing prefix ${winePrefix}`, {
+        prefix: LogPrefix.Backend
+      })
+      // remove prefix if exists
+      if (existsSync(winePrefix)) {
+        rmSync(winePrefix, { recursive: true })
+      }
+    }
+    if (shouldRemoveSetting) {
+      const removeIfExists = (filename: string) => {
+        logInfo(`Removing ${filename}`, { prefix: LogPrefix.Backend })
+        const gameSettingsFile = join(gamesConfigPath, filename)
+        if (existsSync(gameSettingsFile)) {
+          rmSync(gameSettingsFile)
+        }
+      }
+
+      removeIfExists(appName.concat('.json'))
+      removeIfExists(appName.concat('.log'))
+      removeIfExists(appName.concat('-lastPlay.log'))
     }
 
     if (uninstalled) {

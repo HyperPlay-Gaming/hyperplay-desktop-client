@@ -28,7 +28,8 @@ import {
   RuntimeName,
   DMQueueElement,
   ConnectivityStatus,
-  GamepadActionArgs
+  GamepadActionArgs,
+  ExtraInfo
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
@@ -138,6 +139,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   showUpdateSetting: () => boolean
   getLatestReleases: () => Promise<Release[]>
   getGameInfo: (appName: string, runner: Runner) => Promise<GameInfo | null>
+  getExtraInfo: (appName: string, runner: Runner) => Promise<ExtraInfo | null>
   getGameSettings: (
     appName: string,
     runner: Runner
