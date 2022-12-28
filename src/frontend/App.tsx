@@ -19,6 +19,7 @@ import DialogHandler from './components/UI/DialogHandler'
 import ExtensionHandler from './ExtensionHandler'
 import onboardingStore from './store/OnboardingStore'
 import { observer } from 'mobx-react-lite'
+import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
 
 function App() {
   const { sidebarCollapsed } = useContext(ContextProvider)
@@ -31,6 +32,7 @@ function App() {
         <main className="content">
           <ExtensionHandler />
           <DialogHandler />
+          <ExternalLinkDialog />
           <Routes>
             <Route path="/" element={<Navigate replace to="/library" />} />
             <Route path="/library" element={<Library />} />

@@ -1052,12 +1052,9 @@ ipcMain.handle(
         prefix: LogPrefix.Backend
       })
       // remove setting json if exists
-      const gameSettingsFile = join(
-        heroicGamesConfigPath,
-        appName.concat('.json')
-      )
+      const gameSettingsFile = join(gamesConfigPath, appName.concat('.json'))
       if (existsSync(gameSettingsFile)) {
-        rmSync(join(heroicGamesConfigPath, appName.concat('.json')), {
+        rmSync(join(gamesConfigPath, appName.concat('.json')), {
           recursive: true
         })
       }
@@ -1066,9 +1063,9 @@ ipcMain.handle(
         prefix: LogPrefix.Backend
       })
       // remove log if exists
-      const gameLogFile = join(heroicGamesConfigPath, appName.concat('.log'))
+      const gameLogFile = join(gamesConfigPath, appName.concat('.log'))
       if (existsSync(gameLogFile)) {
-        rmSync(join(heroicGamesConfigPath, appName.concat('.log')), {
+        rmSync(join(gamesConfigPath, appName.concat('.log')), {
           recursive: true
         })
       }
