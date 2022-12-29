@@ -228,7 +228,7 @@ class GOGGame extends Game {
     status: 'done' | 'error' | 'abort'
     error?: string
   }> {
-    const { maxWorkers } = await GlobalConfig.get().getSettings()
+    const { maxWorkers } = GlobalConfig.get().getSettings()
     const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
     const withDlcs = installDlcs ? '--with-dlcs' : '--skip-dlcs'
 
@@ -798,7 +798,7 @@ class GOGGame extends Game {
    * Useful for Update and Repair
    */
   public async getCommandParameters() {
-    const { maxWorkers } = await GlobalConfig.get().getSettings()
+    const { maxWorkers } = GlobalConfig.get().getSettings()
     const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
     const gameData = this.getGameInfo()
     const logPath = join(gamesConfigPath, this.appName + '.log')
