@@ -38,6 +38,7 @@ import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { BrowserWindow } from 'electron'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
+import { sendFrontendMessage } from '../main_window'
 
 export function appLogFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
@@ -312,6 +313,12 @@ export async function removeApp({
   appName,
   shouldRemovePrefix
 }: RemoveArgs): Promise<void> {
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner: 'sideload',
+    status: 'uninstalling'
+  })
+
   const old = libraryStore.get('games', []) as SideloadGame[]
   const current = old.filter((a: SideloadGame) => a.app_name !== appName)
   libraryStore.set('games', current)
@@ -330,7 +337,13 @@ export async function removeApp({
 
   removeAppShortcuts(appName)
 
-  return logInfo('finished uninstalling', { prefix: LogPrefix.Backend })
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner: 'sideload',
+    status: 'done'
+  })
+
+  logInfo('finished uninstalling', { prefix: LogPrefix.Backend })
 }
 
 export function isNativeApp(appName: string): boolean {
