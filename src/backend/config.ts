@@ -73,8 +73,7 @@ abstract class GlobalConfig {
       } catch (error) {
         logError(
           `Config file is corrupted, please check ${configPath}`,
-
-          { prefix: LogPrefix.Backend }
+          LogPrefix.Backend
         )
         version = 'v0'
       }
@@ -104,9 +103,10 @@ abstract class GlobalConfig {
         GlobalConfig.globalInstance = new GlobalConfigV0()
         break
       default:
-        logError(`Invalid config version '${version}' requested.`, {
-          prefix: LogPrefix.GlobalConfig
-        })
+        logError(
+          `Invalid config version '${version}' requested.`,
+          LogPrefix.GlobalConfig
+        )
         break
     }
     // Try to upgrade outdated config.
@@ -114,14 +114,15 @@ abstract class GlobalConfig {
       // Upgrade done, we need to fully reload config.
       logInfo(
         `Upgraded outdated ${version} config to ${currentGlobalConfigVersion}.`,
-        { prefix: LogPrefix.GlobalConfig }
+        LogPrefix.GlobalConfig
       )
       return GlobalConfig.reload(currentGlobalConfigVersion)
     } else if (version !== currentGlobalConfigVersion) {
       // Upgrade failed.
-      logError(`Failed to upgrade outdated ${version} config.`, {
-        prefix: LogPrefix.GlobalConfig
-      })
+      logError(
+        `Failed to upgrade outdated ${version} config.`,
+        LogPrefix.GlobalConfig
+      )
     }
   }
 
@@ -221,9 +222,10 @@ abstract class GlobalConfig {
                 bin: wineBin
               })
             } catch (error) {
-              logError(`Error getting wine version for ${wineBin}`, {
-                prefix: LogPrefix.GlobalConfig
-              })
+              logError(
+                `Error getting wine version for ${wineBin}`,
+                LogPrefix.GlobalConfig
+              )
             }
           }
         }

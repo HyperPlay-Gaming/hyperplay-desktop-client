@@ -55,5 +55,5 @@ autoUpdater.on('error', (error) => {
     ),
     type: 'ERROR'
   }) */
-  logError(['failed to update', error], { prefix: LogPrefix.Backend })
+  logError(['failed to update', error], LogPrefix.Backend)
 })

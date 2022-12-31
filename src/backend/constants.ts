@@ -158,9 +158,10 @@ export async function getSteamLibraries(): Promise<string[]> {
       (path) => existsSync(path)
     )
   }
-  logDebug('Unable to load Steam Libraries, libraryfolders.vdf not found', {
-    prefix: LogPrefix.Backend
-  })
+  logDebug(
+    'Unable to load Steam Libraries, libraryfolders.vdf not found',
+    LogPrefix.Backend
+  )
   return libraries
 }
 
