@@ -203,7 +203,6 @@
         "store": "Store",
         "title": "Game Title"
     },
-    "GameSettings": "Game Settings",
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -565,7 +564,8 @@
         },
         "navbar": {
             "advanced": "Advanced",
-            "general": "",
+            "games_settings_defaults": "Game Defaults",
+            "general": "Генерал",
             "log": "Log",
             "other": "",
             "sync": "",

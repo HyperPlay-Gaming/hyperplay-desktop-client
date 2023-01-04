@@ -203,7 +203,6 @@
         "store": "Toko",
         "title": "Judul Gim"
     },
-    "GameSettings": "Pengaturan Gim",
     "generic": {
         "error": {
             "component": "Tidak ada Gim yang ditemukan - Silakan coba log keluar lalu log masuk lagi atau salah satu opsi di bawah ini"
@@ -565,8 +564,7 @@
         },
         "navbar": {
             "advanced": "Tambahan",
-            "games_settings": "Game Settings",
-            "games_settings_defaults": "Game Defaults",
+            "games_settings_defaults": "Bawaan dari Gim",
             "general": "Umum",
             "log": "Log",
             "other": "Lainnya",

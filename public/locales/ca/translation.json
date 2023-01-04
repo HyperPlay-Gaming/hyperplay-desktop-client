@@ -203,7 +203,6 @@
         "store": "Botiga",
         "title": "Títol del joc"
     },
-    "GameSettings": "Configuració del joc",
     "generic": {
         "error": {
             "component": "No s'han trobat jocs. Proveu a reiniciar la sessió o alguna de les opcions de sota."
@@ -566,8 +565,7 @@
         },
         "navbar": {
             "advanced": "Avançat",
-            "games_settings": "Game Settings",
-            "games_settings_defaults": "Game Defaults",
+            "games_settings_defaults": "Valors per defecte",
             "general": "General",
             "log": "Registre",
             "other": "Altres",

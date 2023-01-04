@@ -82,7 +82,8 @@ const GameCard = ({
     hiddenGames,
     favouriteGames,
     allTilesInColor,
-    showDialogModal
+    showDialogModal,
+    setIsSettingsModalOpen
   } = useContext(ContextProvider)
 
   const {
@@ -112,8 +113,7 @@ const GameCard = ({
   }, [appName])
 
   const [progress, previousProgress] = hasProgress(appName)
-  const { install_size: size = '0', platform: installedPlatform } =
-    gameInstallInfo || {}
+  const { install_size: size = '0', platform: installPlatform } = gameInstallInfo || {}
 
   const { status, folder } =
     libraryStatus.find((game: GameStatus) => game.appName === appName) || {}
@@ -298,11 +298,7 @@ const GameCard = ({
     )
   }, [favouriteGames, appName])
 
-  const isMac = ['osx', 'Mac']
-  const isMacNative = isMac.includes(installedPlatform ?? '')
-  const isLinuxNative = installedPlatform === 'linux'
-  const isBrowserGame = installedPlatform === 'Browser'
-  const pathname = `/settings/${runner}/${appName}/games_settings`
+  const isBrowserGame = installPlatform === 'Browser'
 
   const onUninstallClick = function () {
     setShowUninstallModal(true)
@@ -382,16 +378,7 @@ const GameCard = ({
     {
       // settings
       label: t('submenu.settings'),
-      onclick: () =>
-        navigate(pathname, {
-          state: {
-            fromGameCard: true,
-            runner,
-            hasCloudSave,
-            isLinuxNative,
-            isMacNative
-          }
-        }),
+      onclick: () => setIsSettingsModalOpen(true, 'settings', gameInfo),
       show: isInstalled && !isUninstalling
     },
     {
@@ -499,16 +486,7 @@ const GameCard = ({
                     title={`${t('submenu.settings')} (${title})`}
                     className="settingsIcon"
                     onClick={() =>
-                      navigate(pathname, {
-                        state: {
-                          fromGameCard: true,
-                          runner,
-                          hasCloudSave,
-                          isLinuxNative,
-                          isMacNative,
-                          gameInfo
-                        }
-                      })
+                      setIsSettingsModalOpen(true, 'settings', gameInfo)
                     }
                   >
                     <SettingsIcon />

@@ -20,9 +20,10 @@ import ExtensionHandler from './ExtensionHandler'
 import onboardingStore from './store/OnboardingStore'
 import { observer } from 'mobx-react-lite'
 import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
+import SettingsModal from './screens/Settings/components/SettingsModal'
 
 function App() {
-  const { sidebarCollapsed } = useContext(ContextProvider)
+  const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
@@ -33,6 +34,12 @@ function App() {
           <ExtensionHandler />
           <DialogHandler />
           <ExternalLinkDialog />
+          {isSettingsModalOpen.gameInfo && (
+            <SettingsModal
+              gameInfo={isSettingsModalOpen.gameInfo}
+              type={isSettingsModalOpen.type}
+            />
+          )}
           <Routes>
             <Route path="/" element={<Navigate replace to="/library" />} />
             <Route path="/library" element={<Library />} />

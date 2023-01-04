@@ -18,7 +18,7 @@ import {
   syncSaves,
   updateGame
 } from 'frontend/helpers'
-import { Link, NavLink, useLocation, useParams } from 'react-router-dom'
+import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
@@ -70,8 +70,16 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
-  const { libraryStatus, epic, gog, gameUpdates, platform, showDialogModal } =
-    useContext(ContextProvider)
+  const {
+    libraryStatus,
+    epic,
+    gog,
+    gameUpdates,
+    platform,
+    showDialogModal,
+    setIsSettingsModalOpen,
+    isSettingsModalOpen
+  } = useContext(ContextProvider)
 
   const { status } =
     libraryStatus.find((game) => game.appName === appName) || {}
@@ -205,7 +213,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       }
     }
     updateConfig()
-  }, [status, epic.library, gog.library, gameInfo])
+  }, [status, epic.library, gog.library, gameInfo, isSettingsModalOpen])
 
   function handleUpdate() {
     updateGame({ appName, runner, gameInfo })
@@ -254,7 +262,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
     const isMacNative = isMac.includes(installPlatform ?? '')
     const isLinuxNative = installPlatform === 'linux'
     const isNative = isWin || isMacNative || isLinuxNative
-    const pathname = `/settings/${runner}/${appName}/games_settings`
 
     const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
     const supportsWeb3 = gameInfo.web3?.supported
@@ -309,19 +316,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
               <div className="titleWrapper">
                 <h2 className="title">{title}</h2>
                 {installPlatform !== 'Browser' && (
-                  <Link
-                    to={pathname}
-                    state={{
-                      fromGameCard: false,
-                      runner,
-                      isLinuxNative: isNative,
-                      isMacNative: isNative,
-                      hasCloudSave: cloud_save_enabled
-                    }}
+                  <button
+                  onClick={() =>
+                    setIsSettingsModalOpen(true, 'settings', gameInfo)
+                  }
                     className={`settings-icon`}
                   >
                     <SettingsIcon />
-                  </Link>
+                  </button>
                 )}
                 <div className="game-actions">
                   <button className="toggle">
@@ -558,23 +560,16 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 id={runner === 'gog' ? appName : undefined}
               />
               {is_installed && (
-                <NavLink
-                  to={`/settings/${runner}/${appName}/log`}
-                  state={{
-                    fromGameCard: false,
-                    runner,
-                    isLinuxNative: isNative,
-                    isMacNative: isNative,
-                    hasCloudSave: cloud_save_enabled,
-                    gameInfo
-                  }}
+                <span
+                  onClick={() => setIsSettingsModalOpen(true, 'log', gameInfo)}
                   className="clickable reportProblem"
+                  role={'button'}
                 >
                   <>
                     {<FontAwesomeIcon icon={faTriangleExclamation} />}
                     {t('report_problem', 'Report a problem running this game')}
                   </>
-                </NavLink>
+                </span>
               )}
             </div>
 
@@ -591,6 +586,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 </DialogContent>
               </Dialog>
             )}
+            <div id="game-settings"></div>
           </>
         ) : (
           <UpdateComponent />

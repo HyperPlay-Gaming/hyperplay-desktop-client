@@ -203,7 +203,6 @@
         "store": "Negozio",
         "title": "Titolo del gioco"
     },
-    "GameSettings": "Impostazioni del gioco",
     "generic": {
         "error": {
             "component": "Nessun gioco trovato - Prova a disconnetterti e accedi di nuovo o una delle opzioni qui sotto"
@@ -565,8 +564,7 @@
             "long-log-hint": "Log truncated, last 1000 lines are shown!"
         },
         "navbar": {
-            "advanced": "Advanced",
-            "games_settings": "Game Settings",
+            "advanced": "Avanzate",
             "games_settings_defaults": "Game Defaults",
             "general": "Generale",
             "log": "Log",

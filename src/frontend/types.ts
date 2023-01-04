@@ -82,6 +82,16 @@ export interface ContextType {
   externalLinkDialogOptions: ExternalLinkDialogOptions
   handleExternalLinkDialog: (options: ExternalLinkDialogOptions) => void
   sideloadedLibrary: GameInfo[]
+  isSettingsModalOpen: {
+    value: boolean
+    gameInfo?: GameInfo | null
+    type: 'settings' | 'log'
+  }
+  setIsSettingsModalOpen: (
+    value: boolean,
+    type?: 'settings' | 'log',
+    gameInfo?: GameInfo
+  ) => void
 }
 
 export type DialogModalOptions = {

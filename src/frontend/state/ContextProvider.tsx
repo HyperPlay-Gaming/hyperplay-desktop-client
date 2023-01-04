@@ -70,7 +70,9 @@ const initialContext: ContextType = {
   showDialogModal: () => null,
   showResetDialog: () => null,
   externalLinkDialogOptions: { showDialog: false },
-  handleExternalLinkDialog: () => null
+  handleExternalLinkDialog: () => null,
+  isSettingsModalOpen: { value: false, type: 'settings' },
+  setIsSettingsModalOpen: () => null
 }
 
 export default React.createContext(initialContext)

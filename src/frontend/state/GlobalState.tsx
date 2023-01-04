@@ -94,6 +94,11 @@ interface StateProps {
   dialogModalOptions: DialogModalOptions
   externalLinkDialogOptions: ExternalLinkDialogOptions
   sideloadedLibrary: GameInfo[]
+  settingsModalOpen: {
+    value: boolean
+    type: 'settings' | 'log'
+    gameInfo?: GameInfo | null
+  }
 }
 
 export class GlobalState extends PureComponent<Props> {
@@ -172,7 +177,8 @@ export class GlobalState extends PureComponent<Props> {
     connectivity: { status: 'offline', retryIn: 0 },
     sideloadedLibrary: sideloadLibrary.get('games', []) as GameInfo[],
     dialogModalOptions: { showDialog: false },
-    externalLinkDialogOptions: { showDialog: false }
+    externalLinkDialogOptions: { showDialog: false },
+    settingsModalOpen: { value: false, type: 'settings', gameInfo: undefined }
   }
 
   setLanguage = (newLanguage: string) => {
@@ -383,6 +389,22 @@ export class GlobalState extends PureComponent<Props> {
     })
     console.log('Logging out from gog')
     window.location.reload()
+  }
+
+  handleSettingsModalOpen = (
+    value: boolean,
+    type?: 'settings' | 'log',
+    gameInfo?: GameInfo
+  ) => {
+    if (gameInfo) {
+      this.setState({
+        settingsModalOpen: { value, type, gameInfo }
+      })
+    } else {
+      this.setState({
+        settingsModalOpen: { value, gameInfo: null }
+      })
+    }
   }
 
   refresh = async (
@@ -759,7 +781,9 @@ export class GlobalState extends PureComponent<Props> {
           setSecondaryFontFamily: this.setSecondaryFontFamily,
           showDialogModal: this.handleShowDialogModal,
           showResetDialog: this.showResetDialog,
-          handleExternalLinkDialog: this.handleExternalLinkDialog
+          handleExternalLinkDialog: this.handleExternalLinkDialog,
+          isSettingsModalOpen: this.state.settingsModalOpen,
+          setIsSettingsModalOpen: this.handleSettingsModalOpen
         }}
       >
         {this.props.children}
