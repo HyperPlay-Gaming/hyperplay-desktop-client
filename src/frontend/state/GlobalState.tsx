@@ -81,6 +81,7 @@ interface StateProps {
   hiddenGames: HiddenGame[]
   showHidden: boolean
   showFavourites: boolean
+  showNonAvailable: boolean
   favouriteGames: FavouriteGame[]
   theme: string
   zoomPercent: number
@@ -146,6 +147,7 @@ export class GlobalState extends PureComponent<Props> {
       (configStore.get('games.hidden', []) as Array<HiddenGame>) || [],
     showHidden: JSON.parse(storage.getItem('show_hidden') || 'false'),
     showFavourites: JSON.parse(storage.getItem('show_favorites') || 'false'),
+    showNonAvailable: true,
     sidebarCollapsed: JSON.parse(
       storage.getItem('sidebar_collapsed') || 'false'
     ),
@@ -222,6 +224,10 @@ export class GlobalState extends PureComponent<Props> {
 
   setShowFavourites = (value: boolean) => {
     this.setState({ showFavourites: value })
+  }
+
+  setShowNonAvailable = (value: boolean) => {
+    this.setState({ showNonAvailable: value })
   }
 
   setSideBarCollapsed = (value: boolean) => {
@@ -738,6 +744,7 @@ export class GlobalState extends PureComponent<Props> {
           },
           setShowHidden: this.setShowHidden,
           setShowFavourites: this.setShowFavourites,
+          setShowNonAvailable: this.setShowNonAvailable,
           favouriteGames: {
             list: this.state.favouriteGames,
             add: this.addGameToFavourites,

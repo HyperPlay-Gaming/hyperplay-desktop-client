@@ -34,6 +34,7 @@ initGamepad()
 initShortcuts()
 
 const storage: Storage = window.localStorage
+storage.removeItem('nonAvailableGames')
 
 let languageCode: string | undefined = configStore.get('language') as string
 

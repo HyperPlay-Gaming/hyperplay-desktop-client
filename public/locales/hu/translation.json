@@ -216,12 +216,14 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
-        "ignore_hidden": "Ignore Hidden",
+        "hide_non_available_games": "Hide non-available games",
+        "ignore_hidden": "Rejtettek figyelmen kívül hagyása",
         "platform": "Platform",
-        "show_all_games": "Show all games",
-        "show_favourites_only": "Show Favourites only",
-        "show_hidden": "Show Hidden",
-        "store": "Filter Store"
+        "show_all_games": "Összes játék mutatása",
+        "show_available_games": "Show non-Available games",
+        "show_favourites_only": "Csak kedvencek mutatása",
+        "show_hidden": "Elrejtettek mutatása",
+        "store": "Áruház szűrése"
     },
     "help": {
         "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",

@@ -69,7 +69,7 @@
                 "title": "Update Error"
             },
             "wine-not-found": {
-                "invalid": "La version de Wine sélectionnée n'a pas été trouvée. Installez-le ou sélectionnez une version différente dans les paramètres du jeu{{newline}}Version: {{version}}{{newline}}Chemin: {{path}}",
+                "invalid": "La version de Wine sélectionnée n'a pas été trouvée. Installez-la ou sélectionnez une version différente dans les paramètres du jeu{{newline}}Version\u00a0: {{version}}{{newline}}Chemin\u00a0: {{path}}",
                 "message": "Aucune version de Wine n'est sélectionnée. Vérifiez les paramètres de jeu !",
                 "title": "Wine non trouvé"
             },
@@ -216,12 +216,14 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
-        "ignore_hidden": "Ignore Hidden",
-        "platform": "Plateforme",
-        "show_all_games": "Show all games",
-        "show_favourites_only": "Show Favourites only",
-        "show_hidden": "Show Hidden",
-        "store": "Filter Store"
+        "hide_non_available_games": "Hide non-available games",
+        "ignore_hidden": "Ignorer les jeux cachés",
+        "platform": "Système",
+        "show_all_games": "Afficher tous les jeux",
+        "show_available_games": "Show non-Available games",
+        "show_favourites_only": "N'afficher que les favoris",
+        "show_hidden": "Afficher les jeux cachés",
+        "store": "Filtrer le magasin"
     },
     "help": {
         "amdfsr": "Le FSR d'AMD aide à améliorer le taux de rafraîchissement en agrandissant les résolutions basses en mode plein écran. La qualité d'image augmente de 5 à 1 au prix d'une légère baisse de performance. L'activer peut améliorer les performances.",

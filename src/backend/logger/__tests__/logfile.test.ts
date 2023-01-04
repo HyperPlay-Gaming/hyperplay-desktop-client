@@ -84,6 +84,32 @@ describe('logger/logfile.ts', () => {
       // @ts-ignore replaceAll error
       `hyperplay-${date.toISOString().replaceAll(':', '_')}.log`
     )
+
+    graceful_fs.closeSync(graceful_fs.openSync(monthOutdatedLogFile, 'w'))
+
+    expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeTruthy()
+
+    const data = logfile.createNewLogFileAndClearOldOnes()
+
+    expect(logError).toBeCalledWith(
+      [
+        expect.stringContaining('Removing old logs in /tmp/'),
+        Error('unlink failed')
+      ],
+      { prefix: 'Backend', skipLogToFile: true }
+    )
+    expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeTruthy()
+  })
+
+  test('createNewLogFileAndClearOldOnes removing old logs successful', () => {
+    jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
+    const date = new Date()
+    date.setMonth(date.getMonth() - 1)
+    const monthOutdatedLogFile = join(
+      tmpDir.name,
+      // @ts-ignore replaceAll error
+      `heroic-${date.toISOString().replaceAll(':', '_')}.log`
+    )
     date.setFullYear(2021)
     const yearOutdatedLogFile = join(
       tmpDir.name,

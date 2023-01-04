@@ -51,23 +51,24 @@ import onboardingStore from 'frontend/store/OnboardingStore'
 interface Card {
   buttonClick: () => void
   hasUpdate: boolean
-  forceCard?: boolean
   isRecent: boolean
   gameInfo: GameInfo
+  isAvailable?: boolean
+  forceCard?: boolean
 }
+
+const storage: Storage = window.localStorage
 
 const GameCard = ({
   hasUpdate,
   buttonClick,
   forceCard,
   isRecent = false,
-  gameInfo: gameInfoFromProps
+  gameInfo: gameInfoFromProps,
+  isAvailable
 }: Card) => {
   const [gameInfo, setGameInfo] = useState(gameInfoFromProps)
   const [showUninstallModal, setShowUninstallModal] = useState(false)
-  const [gameAvailable, setGameAvailable] = useState(
-    gameInfoFromProps.is_installed
-  )
   const [isLaunching, setIsLaunching] = useState(false)
 
   const { t } = useTranslation('gamepage')
@@ -96,6 +97,8 @@ const GameCard = ({
     thirdPartyManagedApp
   } = gameInfoFromProps
 
+  const gameAvailable = isAvailable
+
   // if the game supports cloud saves, check the config
   const [autoSyncSaves, setAutoSyncSaves] = useState(hasCloudSave)
   useEffect(() => {
@@ -114,19 +117,6 @@ const GameCard = ({
 
   const { status, folder } =
     libraryStatus.find((game: GameStatus) => game.appName === appName) || {}
-
-  useEffect(() => {
-    const checkGameAvailable = async () => {
-      if (isInstalled) {
-        const gameAvailable = await window.api.isGameAvailable({
-          appName,
-          runner
-        })
-        setGameAvailable(gameAvailable)
-      }
-    }
-    checkGameAvailable()
-  }, [appName, status, gameInfo])
 
   useEffect(() => {
     setIsLaunching(false)
@@ -163,8 +153,6 @@ const GameCard = ({
   const installingGrayscale = isInstalling
     ? `${125 - getProgress(progress)}%`
     : '100%'
-
-  const storage: Storage = window.localStorage
 
   const imageSrc = getImageFormatting()
 

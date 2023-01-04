@@ -50,6 +50,8 @@ export interface ContextType {
   setShowHidden: (value: boolean) => void
   showFavourites: boolean
   setShowFavourites: (value: boolean) => void
+  showNonAvailable: boolean
+  setShowNonAvailable: (value: boolean) => void
   theme: string
   setTheme: (themeName: string) => void
   zoomPercent: number
