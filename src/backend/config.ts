@@ -580,7 +580,7 @@ class GlobalConfigV0 extends GlobalConfig {
       language: 'en',
       maxWorkers: 0,
       exitToTray: true,
-      minimizeOnLaunch: true,
+      minimizeOnGameLaunch: true,
       nvidiaPrime: false,
       enviromentOptions: [],
       wrapperOptions: [],
