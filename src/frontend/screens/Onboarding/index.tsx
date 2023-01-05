@@ -16,6 +16,8 @@ import Success from './success'
 import Rejected from './rejected'
 import Download from './download'
 import { BackArrow, CloseX } from 'frontend/assets/hyperplay'
+import { MetaMaskImportOptions } from 'backend/hyperplay-extension-helper/ipcHandlers'
+import ImportMetaMask from './import'
 
 interface OnboardingProps {
   disableOnboarding: () => void
@@ -25,6 +27,7 @@ interface ContentParams {
   content: ONBOARDING_CONTENT
   qrCodeSvg: string
   providerImgUrl: string
+  mmImportPaths?: MetaMaskImportOptions
 }
 
 const Onboarding: React.FC<OnboardingProps> = function (props) {
@@ -53,9 +56,23 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     })
   }
 
-  async function handleMmExtensionProviderClicked() {
-    await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
-    props.disableOnboarding()
+  async function handleMmExtensionProviderClicked(dbPath?: string | null) {
+    const hasWallet = await window.api.hasMetaMaskWallet()
+    const importOptions = await window.api.getMetaMaskImportOptions()
+
+    if (!importOptions || dbPath === null || dbPath || hasWallet) {
+      await window.api.installMetaMask(dbPath)
+
+      await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
+      props.disableOnboarding()
+
+      return
+    }
+
+    setContentParams({
+      content: ONBOARDING_CONTENT.IMPORT,
+      mmImportPaths: importOptions
+    })
   }
 
   const handleConnected: WrapRendererCallback<WalletConnectedType> = (
@@ -113,6 +130,14 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
               })
             }
             handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
+          />
+        )
+      case ONBOARDING_CONTENT.IMPORT:
+        return (
+          <ImportMetaMask
+            importOptions={contentParams.mmImportPaths!}
+            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
+            setOnboardingModalParams={setOnboardingParams}
           />
         )
       case ONBOARDING_CONTENT.SCAN:

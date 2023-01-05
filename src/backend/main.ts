@@ -145,10 +145,7 @@ import {
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import { getDefaultSavePath } from './save_sync'
 import si from 'systeminformation'
-import {
-  initExtensionIpcHandlerWindow,
-  initExtension
-} from './hyperplay-extension-helper/ipcHandlers'
+import { initExtensionIpcHandlerWindow } from './hyperplay-extension-helper/ipcHandlers'
 import { initTrayIcon } from './tray_icon/tray_icon'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
@@ -194,8 +191,6 @@ async function createWindow(): Promise<BrowserWindow> {
       windowProps.width = screenInfo.workAreaSize.width * 0.8
     }
   }
-
-  await initExtension()
 
   // Create the browser window.
   mainWindow = new BrowserWindow({

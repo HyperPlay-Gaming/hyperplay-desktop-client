@@ -1,3 +1,4 @@
+import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
 import { HowLongToBeatEntry } from 'howlongtobeat'
@@ -50,6 +51,7 @@ interface HyperPlaySyncIPCFunctions {
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
+  loadingScreenReady: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -57,7 +59,6 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   changeLanguage: (language: string) => void
   notify: (args: { title: string; body: string }) => void
   frontendReady: () => void
-  loadingScreenReady: () => void
   lock: () => void
   unlock: () => void
   quit: () => void
@@ -115,6 +116,11 @@ interface HyperPlayAsyncIPCFunctions {
   chromeTabsCreate: (
     options: chrome.tabs.CreateProperties
   ) => Promise<chrome.tabs.Tab>
+  installMetaMask: (dbPath: string | null | undefined) => Promise<void>
+  hasMetaMaskWallet: () => Promise<boolean>
+  getMetaMaskImportOptions: (
+    configDbPath?: string
+  ) => Promise<MetaMaskImportOptions | null>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
