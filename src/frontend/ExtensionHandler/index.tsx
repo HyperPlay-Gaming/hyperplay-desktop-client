@@ -1,50 +1,64 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react'
 
 const ExtensionHandler = function () {
-  async function handleRequest(_event: any, id: number, args: any) {
+  async function handleRequest(
+    event: Event,
+    id: number,
+    args: Record<string, unknown>
+  ) {
     try {
       console.log('requesting from mm browser ext = ', JSON.stringify(args))
       const value = await window.ethereum.request(args)
       window.api.returnExtensionRequest(id, value)
-    } catch (err: any) {
+    } catch (err) {
       console.log(`error during request: ${err}`)
       window.api.errorExtensionRequest(id, err)
     }
   }
 
-  useEffect(() => {
-    window.addEventListener('message', (event) => {
+  const bindEthereumListeners = function () {
+    window.addEventListener('message', (event: MessageEvent) => {
       console.log('window message received = ', JSON.stringify(event, null, 4))
     })
 
-    if (typeof window.ethereum !== 'undefined') {
-      window.ethereum.on('accountsChanged', (accounts: string[]) => {
-        window.api.extensionOnEvent('accountsChanged', accounts)
-      })
+    window.ethereum.on('accountsChanged', (accounts: string[]) => {
+      window.api.extensionOnEvent('accountsChanged', accounts)
+    })
 
-      window.ethereum.on('disconnect', (error: any) => {
-        window.api.extensionOnEvent('disconnect', error)
-      })
+    window.ethereum.on('disconnect', (error: Error) => {
+      window.api.extensionOnEvent('disconnect', error)
+    })
 
-      window.ethereum.on('connect', (connectInfo: any) => {
-        window.api.extensionOnEvent('connect', connectInfo)
-      })
+    window.ethereum.on('connect', (connectInfo: string) => {
+      window.api.extensionOnEvent('connect', connectInfo)
+    })
 
-      window.ethereum.on('chainChanged', (chainId: number) => {
-        window.api.extensionOnEvent('chainChanged', chainId)
-      })
+    window.ethereum.on('chainChanged', (chainId: number) => {
+      window.api.extensionOnEvent('chainChanged', chainId)
+    })
 
-      const removeRequestListener =
-        window.api.handleMetamaskExtensionRequests(handleRequest)
-      return () => {
-        removeRequestListener()
-      }
-    } else {
-      console.log('MetaMask is not installed!')
+    const removeRequestListener =
+      window.api.handleMetamaskExtensionRequests(handleRequest)
+    return () => {
+      removeRequestListener()
     }
-    /* eslint-disable @typescript-eslint/no-empty-function*/
-    return () => {}
+  }
+
+  useEffect(() => {
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+    let rmListeners = () => {}
+    const interval = setInterval(() => {
+      console.log('checking for metamask extension...')
+      if (typeof window.ethereum !== 'undefined') {
+        console.log('metamask extension found!')
+        rmListeners = bindEthereumListeners()
+        clearInterval(interval)
+      }
+    }, 2000)
+    return () => {
+      rmListeners()
+      clearInterval(interval)
+    }
   }, [])
 
   return <></>
