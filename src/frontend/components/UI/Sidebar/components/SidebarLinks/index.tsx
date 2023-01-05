@@ -136,6 +136,7 @@ export default function SidebarLinks() {
           <span>{t('library.label', 'Library')}</span>
         </>
       </NavLink>
+
       <h6 className="Sidebar__categoryTitle">ACCOUNTS</h6>
       {!loggedIn && (
         <NavLink

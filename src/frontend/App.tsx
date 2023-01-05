@@ -17,6 +17,7 @@ import { ControllerHints, OfflineMessage } from './components/UI'
 import DownloadManager from './screens/DownloadManager'
 import DialogHandler from './components/UI/DialogHandler'
 import ExtensionHandler from './ExtensionHandler'
+import MetaMaskHome from './screens/MetaMaskHome'
 
 function App() {
   const { sidebarCollapsed } = useContext(ContextProvider)
@@ -38,6 +39,7 @@ function App() {
             <Route path="epicstore" element={<WebView />} />
             <Route path="gogstore" element={<WebView />} />
             <Route path="wiki" element={<WebView />} />
+            <Route path="metamaskHome" element={<MetaMaskHome />} />
             <Route path="/gamepage">
               <Route path=":runner">
                 <Route path=":appName" element={<GamePage />} />

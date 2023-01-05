@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
+  faGamepad,
   faSquareCaretLeft,
   faSquareCaretRight
 } from '@fortawesome/free-solid-svg-icons'
@@ -12,6 +13,7 @@ import SidebarLinks from './components/SidebarLinks'
 import './index.css'
 import Wallet from './components/wallet'
 import { DMQueueElement } from 'common/types'
+import { NavLink } from 'react-router-dom'
 
 interface SidebarProps {
   openOnboarding: () => void
@@ -65,8 +67,21 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
         className="Sidebar__item"
         onClick={async () => window.api.showPopup()}
       >
-        <span>Open MetaMask {badgeText}</span>
+        <span>MetaMask Popup {badgeText}</span>
       </button>
+      <NavLink
+        className={({ isActive }) =>
+          classNames('Sidebar__item', { active: isActive })
+        }
+        to={'metamaskHome'}
+      >
+        <>
+          <div className="Sidebar__itemIcon">
+            <FontAwesomeIcon icon={faGamepad} title={'MetaMask Home'} />
+          </div>
+          <span>{'MetaMask Home'}</span>
+        </>
+      </NavLink>
 
       <Wallet onClick={props.openOnboarding} />
       <button
