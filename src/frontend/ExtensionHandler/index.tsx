@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 
 const ExtensionHandler = function () {
-  const [ethereumDefined, setEthereumDefined] = useState(false)
-
   async function handleRequest(
     event: Event,
     id: number,
@@ -18,53 +16,50 @@ const ExtensionHandler = function () {
     }
   }
 
-  useEffect(() => {
+  const bindEthereumListeners = function () {
     window.addEventListener('message', (event: MessageEvent) => {
       console.log('window message received = ', JSON.stringify(event, null, 4))
     })
 
-    if (typeof window.ethereum !== 'undefined') {
-      setEthereumDefined(true)
-      window.ethereum.on('accountsChanged', (accounts: string[]) => {
-        window.api.extensionOnEvent('accountsChanged', accounts)
-      })
+    window.ethereum.on('accountsChanged', (accounts: string[]) => {
+      window.api.extensionOnEvent('accountsChanged', accounts)
+    })
 
-      window.ethereum.on('disconnect', (error: Error) => {
-        window.api.extensionOnEvent('disconnect', error)
-      })
+    window.ethereum.on('disconnect', (error: Error) => {
+      window.api.extensionOnEvent('disconnect', error)
+    })
 
-      window.ethereum.on('connect', (connectInfo: string) => {
-        window.api.extensionOnEvent('connect', connectInfo)
-      })
+    window.ethereum.on('connect', (connectInfo: string) => {
+      window.api.extensionOnEvent('connect', connectInfo)
+    })
 
-      window.ethereum.on('chainChanged', (chainId: number) => {
-        window.api.extensionOnEvent('chainChanged', chainId)
-      })
+    window.ethereum.on('chainChanged', (chainId: number) => {
+      window.api.extensionOnEvent('chainChanged', chainId)
+    })
 
-      const removeRequestListener =
-        window.api.handleMetamaskExtensionRequests(handleRequest)
-      return () => {
-        removeRequestListener()
-      }
-    } else {
-      console.log('MetaMask is not installed!')
+    const removeRequestListener =
+      window.api.handleMetamaskExtensionRequests(handleRequest)
+    return () => {
+      removeRequestListener()
     }
-    /* eslint-disable @typescript-eslint/no-empty-function*/
-    return () => {}
-  }, [])
+  }
 
   useEffect(() => {
-    if (!ethereumDefined) {
-      const interval = setInterval(() => {
-        console.log('checking for metamask extension...')
-        if (typeof window.ethereum !== 'undefined') {
-          console.log('metamask extension found!')
-          setEthereumDefined(true)
-          clearInterval(interval)
-        }
-      }, 2000)
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+    let rmListeners = () => {}
+    const interval = setInterval(() => {
+      console.log('checking for metamask extension...')
+      if (typeof window.ethereum !== 'undefined') {
+        console.log('metamask extension found!')
+        rmListeners = bindEthereumListeners()
+        clearInterval(interval)
+      }
+    }, 2000)
+    return () => {
+      rmListeners()
+      clearInterval(interval)
     }
-  }, [ethereumDefined])
+  }, [])
 
   return <></>
 }
