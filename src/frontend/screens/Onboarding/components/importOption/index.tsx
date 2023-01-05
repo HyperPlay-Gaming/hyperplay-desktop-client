@@ -1,6 +1,6 @@
 import './index.css'
 import React, { useEffect, useState } from 'react'
-import { ImportableBrowsers } from 'backend/hyperplay-extension-helper/ipcHandlers'
+import { ImportableBrowsers } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 
 interface WalletOptionProps {
   title: ImportableBrowsers

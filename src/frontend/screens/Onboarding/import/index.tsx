@@ -2,7 +2,7 @@ import './index.css'
 import {
   ImportableBrowsers,
   MetaMaskImportOptions
-} from 'backend/hyperplay-extension-helper/ipcHandlers'
+} from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import React, { useEffect } from 'react'
 import ImportOption from '../components/importOption'
 import { OnboardingModalConfig } from '../types'

@@ -16,7 +16,7 @@ import Success from './success'
 import Rejected from './rejected'
 import Download from './download'
 import { BackArrow, CloseX } from 'frontend/assets/hyperplay'
-import { MetaMaskImportOptions } from 'backend/hyperplay-extension-helper/ipcHandlers'
+import { MetaMaskImportOptions } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportMetaMask from './import'
 
 interface OnboardingProps {
