@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import lottie from 'lottie-web'
 
 interface LottieProps {
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any*/
   animationData: any
   width: number
   height: number
@@ -13,6 +14,7 @@ export default function LottieWrapper({
   height
 }: LottieProps) {
   const element = useRef<HTMLDivElement>(null)
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any*/
   const lottieInstance = useRef<any>()
 
   useEffect(() => {
