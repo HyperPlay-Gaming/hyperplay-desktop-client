@@ -54,6 +54,7 @@
       "artifactName": "${productName}-${version}-Portable.${ext}"
     },
     "mac": {
+      "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "target": "dmg",
       "category": "public.app-category.games",
       "icon": "build/app_icon.icns",
