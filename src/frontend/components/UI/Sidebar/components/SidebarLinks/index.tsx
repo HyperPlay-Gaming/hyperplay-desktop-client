@@ -23,6 +23,8 @@ import './index.css'
 import QuitButton from '../QuitButton'
 import { LocationState } from 'frontend/types'
 import { HyperPlayLogoWhite } from 'frontend/assets/hyperplay'
+import animationData from 'frontend/assets/testAnimationFailing.json'
+import LottieWrapper from '../../../LottieWrapper'
 
 type PathSplit = [
   a: undefined,
@@ -111,6 +113,7 @@ export default function SidebarLinks() {
 
   return (
     <div className="SidebarLinks Sidebar__section">
+      <LottieWrapper animationData={animationData} height={400} width={400} />
       <div className="hyperplaySidebarLogoContainer">
         <HyperPlayLogoWhite
           height={64}
