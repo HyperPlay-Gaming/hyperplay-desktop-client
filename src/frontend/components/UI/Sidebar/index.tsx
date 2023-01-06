@@ -73,6 +73,19 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
         className={({ isActive }) =>
           classNames('Sidebar__item', { active: isActive })
         }
+        to={'metamaskPortfolio'}
+      >
+        <>
+          <div className="Sidebar__itemIcon">
+            <FontAwesomeIcon icon={faGamepad} title={'MetaMask Portfolio'} />
+          </div>
+          <span>{'MetaMask Portfolio'}</span>
+        </>
+      </NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          classNames('Sidebar__item', { active: isActive })
+        }
         to={'metamaskHome'}
       >
         <>
