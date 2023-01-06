@@ -65,7 +65,7 @@ export interface AppSettings extends GameSettings {
   libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number
   maxWorkers: number
-  minimizeOnLaunch: boolean
+  minimizeOnGameLaunch: boolean
   startInTray: boolean
   userInfo: UserInfo
   defaultWinePrefix: string
