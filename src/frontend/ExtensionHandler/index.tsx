@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ExtensionHandler = function () {
+  const navigate = useNavigate()
+
   async function handleRequest(
     event: Event,
     id: number,
@@ -14,6 +17,10 @@ const ExtensionHandler = function () {
       console.log(`error during request: ${err}`)
       window.api.errorExtensionRequest(id, err)
     }
+  }
+
+  async function handleOpenMMHomePage() {
+    navigate('metamaskHome')
   }
 
   const bindEthereumListeners = function () {
@@ -39,8 +46,12 @@ const ExtensionHandler = function () {
 
     const removeRequestListener =
       window.api.handleMetamaskExtensionRequests(handleRequest)
+
+    const removeOpenMetaMaskHomePageListener =
+      window.api.handleOpenMetaMaskHomePage(handleOpenMMHomePage)
     return () => {
       removeRequestListener()
+      removeOpenMetaMaskHomePageListener()
     }
   }
 
