@@ -1,3 +1,4 @@
+import { ExtensionStore } from './../../backend/hyperplay-extension-helper/store/index'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -52,6 +53,7 @@ interface HyperPlaySyncIPCFunctions {
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
   loadingScreenReady: () => void
+  onMetaMaskInstalled: (cb: () => void) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -121,6 +123,7 @@ interface HyperPlayAsyncIPCFunctions {
   getMetaMaskImportOptions: (
     configDbPath?: string
   ) => Promise<MetaMaskImportOptions | null>
+  getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

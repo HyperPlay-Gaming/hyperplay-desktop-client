@@ -18,33 +18,44 @@ const ExtensionHandler = function () {
       console.log('window message received = ', JSON.stringify(event, null, 4))
     })
 
-    if (typeof window.ethereum !== 'undefined') {
-      window.ethereum.on('accountsChanged', (accounts: string[]) => {
-        window.api.extensionOnEvent('accountsChanged', accounts)
-      })
+    let removeRequestListener: undefined | (() => void)
 
-      window.ethereum.on('disconnect', (error: any) => {
-        window.api.extensionOnEvent('disconnect', error)
-      })
-
-      window.ethereum.on('connect', (connectInfo: any) => {
-        window.api.extensionOnEvent('connect', connectInfo)
-      })
-
-      window.ethereum.on('chainChanged', (chainId: number) => {
-        window.api.extensionOnEvent('chainChanged', chainId)
-      })
-
-      const removeRequestListener =
-        window.api.handleMetamaskExtensionRequests(handleRequest)
-      return () => {
-        removeRequestListener()
+    window.api.getExtensionMetadata().then((metadata) => {
+      if (metadata.isInitialized) {
+        handleExtensionHooks()
+      } else {
+        window.api.onMetaMaskInstalled(handleExtensionHooks)
       }
-    } else {
-      console.log('MetaMask is not installed!')
+    })
+
+    function handleExtensionHooks() {
+      console.log('handleExtensionHooks executed')
+      if (typeof window.ethereum !== 'undefined') {
+        console.log('handleExtensionHooks hooked')
+        window.ethereum.on('accountsChanged', (accounts: string[]) => {
+          window.api.extensionOnEvent('accountsChanged', accounts)
+        })
+
+        window.ethereum.on('disconnect', (error: any) => {
+          window.api.extensionOnEvent('disconnect', error)
+        })
+
+        window.ethereum.on('connect', (connectInfo: any) => {
+          window.api.extensionOnEvent('connect', connectInfo)
+        })
+
+        window.ethereum.on('chainChanged', (chainId: number) => {
+          window.api.extensionOnEvent('chainChanged', chainId)
+        })
+
+        removeRequestListener =
+          window.api.handleMetamaskExtensionRequests(handleRequest)
+      } else {
+        console.log('MetaMask is not installed!')
+      }
     }
     /* eslint-disable @typescript-eslint/no-empty-function*/
-    return () => {}
+    return () => removeRequestListener && removeRequestListener()
   }, [])
 
   return <></>

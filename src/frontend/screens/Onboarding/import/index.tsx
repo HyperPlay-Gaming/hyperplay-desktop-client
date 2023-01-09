@@ -25,7 +25,7 @@ const ImportMetaMask = ({
       enableBackButton: true,
       enableCloseButton: true
     })
-  })
+  }, [])
 
   return (
     <>

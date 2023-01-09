@@ -1,3 +1,4 @@
+import { setExtensionMetadata } from './hyperplay-extension-helper/ipcHandlers/helpers'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -319,6 +320,8 @@ if (!gotTheLock) {
     handleProtocol(mainWindow, argv)
   })
   app.whenReady().then(async () => {
+    setExtensionMetadata()
+
     initOnlineMonitor()
 
     getSystemInfo().then((systemInfo) =>

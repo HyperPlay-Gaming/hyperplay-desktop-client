@@ -57,15 +57,28 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   }
 
   async function handleMmExtensionProviderClicked(dbPath?: string | null) {
-    const hasWallet = await window.api.hasMetaMaskWallet()
+    const metadata = await window.api.getExtensionMetadata()
     const importOptions = await window.api.getMetaMaskImportOptions()
+    console.log(metadata, importOptions, dbPath)
+    // if (!importOptions || dbPath === null || dbPath || metadata.hasWallet) {
 
-    if (!importOptions || dbPath === null || dbPath || hasWallet) {
+    if (
+      !metadata.hasWallet &&
+      !metadata.isInitialized &&
+      (!importOptions || dbPath === null || dbPath)
+    ) {
       await window.api.installMetaMask(dbPath)
 
       await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
       props.disableOnboarding()
 
+      return
+    }
+
+    if (metadata.isInitialized && metadata.hasWallet) {
+      await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
+
+      props.disableOnboarding()
       return
     }
 
