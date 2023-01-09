@@ -3,7 +3,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faGamepad,
   faSquareCaretLeft,
   faSquareCaretRight
 } from '@fortawesome/free-solid-svg-icons'
@@ -14,6 +13,7 @@ import './index.css'
 import Wallet from './components/wallet'
 import { DMQueueElement } from 'common/types'
 import { NavLink } from 'react-router-dom'
+import { ReactComponent as MetaMaskRoundedOutline } from 'frontend/assets/metamask-rounded-outline.svg'
 
 interface SidebarProps {
   openOnboarding: () => void
@@ -67,7 +67,12 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
         className="Sidebar__item"
         onClick={async () => window.api.showPopup()}
       >
-        <span>MetaMask Popup {badgeText}</span>
+        <>
+          <div className="Sidebar__itemIcon">
+            <MetaMaskRoundedOutline />
+          </div>
+          <span>MetaMask Popup {badgeText}</span>
+        </>
       </button>
       <NavLink
         className={({ isActive }) =>
@@ -77,7 +82,7 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
       >
         <>
           <div className="Sidebar__itemIcon">
-            <FontAwesomeIcon icon={faGamepad} title={'MetaMask Portfolio'} />
+            <MetaMaskRoundedOutline />
           </div>
           <span>{'MetaMask Portfolio'}</span>
         </>
@@ -90,7 +95,7 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
       >
         <>
           <div className="Sidebar__itemIcon">
-            <FontAwesomeIcon icon={faGamepad} title={'MetaMask Home'} />
+            <MetaMaskRoundedOutline />
           </div>
           <span>{'MetaMask Home'}</span>
         </>
