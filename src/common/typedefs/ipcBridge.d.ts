@@ -57,6 +57,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   changeLanguage: (language: string) => void
   notify: (args: { title: string; body: string }) => void
   frontendReady: () => void
+  loadingScreenReady: () => void
   lock: () => void
   unlock: () => void
   quit: () => void

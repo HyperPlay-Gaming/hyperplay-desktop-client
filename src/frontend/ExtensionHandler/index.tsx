@@ -46,7 +46,6 @@ const ExtensionHandler = function () {
 
     const removeRequestListener =
       window.api.handleMetamaskExtensionRequests(handleRequest)
-
     const removeOpenMetaMaskHomePageListener =
       window.api.handleOpenMetaMaskHomePage(handleOpenMMHomePage)
     return () => {
