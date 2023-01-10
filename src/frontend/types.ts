@@ -79,6 +79,8 @@ export interface ContextType {
   showDialogModal: (options: DialogModalOptions) => void
   showResetDialog: () => void
   sideloadedLibrary: GameInfo[]
+  showMetaMaskBrowserSidebarLinks: boolean
+  setShowMetaMaskBrowserSidebarLinks: (value: boolean) => void
 }
 
 export type DialogModalOptions = {

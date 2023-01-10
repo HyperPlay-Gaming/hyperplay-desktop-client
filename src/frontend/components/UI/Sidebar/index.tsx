@@ -21,7 +21,11 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = function (props) {
   const { t } = useTranslation()
-  const { sidebarCollapsed, setSideBarCollapsed } = useContext(ContextProvider)
+  const {
+    sidebarCollapsed,
+    setSideBarCollapsed,
+    showMetaMaskBrowserSidebarLinks
+  } = useContext(ContextProvider)
   const [currentDMElement, setCurrentDMElement] = useState<DMQueueElement>()
   const [badgeText, setBadgeText] = useState('0')
 
@@ -63,43 +67,47 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
         )}
       </div>
 
-      <button
-        className="Sidebar__item"
-        onClick={async () => window.api.showPopup()}
-      >
+      {showMetaMaskBrowserSidebarLinks ? (
         <>
-          <div className="Sidebar__itemIcon">
-            <MetaMaskRoundedOutline />
-          </div>
-          <span>MetaMask Popup {badgeText}</span>
+          <button
+            className="Sidebar__item"
+            onClick={async () => window.api.showPopup()}
+          >
+            <>
+              <div className="Sidebar__itemIcon">
+                <MetaMaskRoundedOutline />
+              </div>
+              <span>MetaMask Popup {badgeText}</span>
+            </>
+          </button>
+          <NavLink
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={'metamaskPortfolio'}
+          >
+            <>
+              <div className="Sidebar__itemIcon">
+                <MetaMaskRoundedOutline />
+              </div>
+              <span>{'MetaMask Portfolio'}</span>
+            </>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={'metamaskHome'}
+          >
+            <>
+              <div className="Sidebar__itemIcon">
+                <MetaMaskRoundedOutline />
+              </div>
+              <span>{'MetaMask Home'}</span>
+            </>
+          </NavLink>
         </>
-      </button>
-      <NavLink
-        className={({ isActive }) =>
-          classNames('Sidebar__item', { active: isActive })
-        }
-        to={'metamaskPortfolio'}
-      >
-        <>
-          <div className="Sidebar__itemIcon">
-            <MetaMaskRoundedOutline />
-          </div>
-          <span>{'MetaMask Portfolio'}</span>
-        </>
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          classNames('Sidebar__item', { active: isActive })
-        }
-        to={'metamaskHome'}
-      >
-        <>
-          <div className="Sidebar__itemIcon">
-            <MetaMaskRoundedOutline />
-          </div>
-          <span>{'MetaMask Home'}</span>
-        </>
-      </NavLink>
+      ) : null}
 
       <Wallet onClick={props.openOnboarding} />
       <button
