@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import LanguageSelector from 'frontend/components/UI/LanguageSelector'
 import { ThemeSelector } from 'frontend/components/UI/ThemeSelector'
 import {
+  AutoUpdateGames,
   CheckUpdatesOnStartup,
   CustomWineProton,
   DefaultInstallPath,
@@ -42,6 +43,8 @@ export default function GeneralSettings() {
       <EgsSettings />
 
       <CheckUpdatesOnStartup />
+
+      <AutoUpdateGames />
 
       <TraySettings />
 

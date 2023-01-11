@@ -45,31 +45,33 @@ export type Release = {
 }
 
 export interface AppSettings extends GameSettings {
-  checkUpdatesInterval: number
-  enableUpdates: boolean
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
   addSteamShortcuts: boolean
-  altLegendaryBin: string
   altGogdlBin: string
+  altLegendaryBin: string
+  autoUpdateGames: boolean
   checkForUpdatesOnStartup: boolean
+  checkUpdatesInterval: number
+  customThemesPath: string
   customWinePaths: string[]
   darkTrayIcon: boolean
   defaultInstallPath: string
   defaultSteamPath: string
+  defaultWinePrefix: string
   disableController: boolean
   discordRPC: boolean
   downloadNoHttps: boolean
   egsLinkedPath: string
+  enableUpdates: boolean
   exitToTray: boolean
+  hideChangelogsOnStartup: boolean
   libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number
   maxWorkers: number
   minimizeOnGameLaunch: boolean
   startInTray: boolean
   userInfo: UserInfo
-  defaultWinePrefix: string
-  customThemesPath: string
 }
 
 export type LibraryTopSectionOptions =
@@ -125,22 +127,23 @@ export interface GameInfo {
 export interface GameSettings {
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
-  preferSystemLibs: boolean
   autoSyncSaves: boolean
   battlEyeRuntime: boolean
+  DXVKFpsCap: string //Entered as string but used as number
   eacRuntime: boolean
+  enableDXVKFpsLimit: boolean
   enableEsync: boolean
   enableFSR: boolean
   enableFsync: boolean
-  maxSharpness?: number
+  enviromentOptions: EnviromentVariable[]
+  ignoreGameUpdates: boolean
   language: string
   launcherArgs: string
+  maxSharpness?: number
   nvidiaPrime: boolean
   offlineMode: boolean
   otherOptions?: string //deprecated
-  enviromentOptions: EnviromentVariable[]
-  wrapperOptions: WrapperVariable[]
-  savesPath: string
+  preferSystemLibs: boolean
   showFps: boolean
   showMangohud: boolean
   targetExe: string
@@ -149,6 +152,8 @@ export interface GameSettings {
   wineCrossoverBottle: string
   winePrefix: string
   wineVersion: WineInstallation
+  wrapperOptions: WrapperVariable[]
+  savesPath: string
   gogSaves?: GOGCloudSavesLocation[]
 }
 

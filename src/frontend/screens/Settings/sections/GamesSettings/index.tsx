@@ -25,7 +25,8 @@ import {
   UseDGPU,
   WinePrefix,
   WineVersionSelector,
-  WrappersTable
+  WrappersTable,
+  IgnoreGameUpdates
 } from '../../components'
 import ContextProvider from 'frontend/state/ContextProvider'
 import Tools from '../../components/Tools'
@@ -136,6 +137,8 @@ export default function GamesSettings({ useDetails = true }: Props) {
         {isLinux && <Mangohud />}
 
         <SteamRuntime />
+
+        <IgnoreGameUpdates />
 
         <OfflineMode />
 

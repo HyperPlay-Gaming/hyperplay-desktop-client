@@ -129,6 +129,10 @@ const GameCard = ({
     updateGameInfo()
   }, [status])
 
+  async function handleUpdate() {
+    return updateGame({ appName, runner, gameInfo })
+  }
+
   const grid = forceCard || layout === 'grid'
   const isInstalling = status === 'installing' || status === 'updating'
   const isUpdating = status === 'updating'
@@ -155,10 +159,6 @@ const GameCard = ({
     : '100%'
 
   const imageSrc = getImageFormatting()
-
-  async function handleUpdate() {
-    return updateGame({ appName, runner, gameInfo })
-  }
 
   function getImageFormatting() {
     const imageBase = cover
