@@ -53,7 +53,7 @@ interface HyperPlaySyncIPCFunctions {
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
   loadingScreenReady: () => void
-  onMetaMaskInstalled: (cb: () => void) => void
+  restartApp: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {

@@ -180,7 +180,7 @@
     "web3": "^1.7.5"
   },
   "scripts": {
-    "start": "vite",
+    "start": "DEV=true vite",
     "codecheck": "tsc --noEmit",
     "test": "jest",
     "testProxy": "jest proxy.test.ts",

@@ -1,3 +1,5 @@
+import './dev-reload.json'
+
 import { setExtensionMetadata } from './hyperplay-extension-helper/ipcHandlers/helpers'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
@@ -148,6 +150,7 @@ import { getDefaultSavePath } from './save_sync'
 import si from 'systeminformation'
 import { initExtensionIpcHandlerWindow } from './hyperplay-extension-helper/ipcHandlers'
 import { initTrayIcon } from './tray_icon/tray_icon'
+import fs from 'fs'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -1606,3 +1609,20 @@ ProviderHelper.passEventCallbacks(
 )
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
+
+ipcMain.on('restartApp', async () => {
+  setImmediate(() => {
+    if (process.env.DEV) {
+      console.log(__dirname)
+      const file = './src/backend/dev-reload.json'
+      const reloadCount = JSON.parse(fs.readFileSync(file, 'utf-8'))
+      fs.writeFileSync(
+        file,
+        JSON.stringify({ reloadCount: reloadCount.reloadCount + 1 })
+      )
+    } else {
+      app.relaunch()
+      app.quit()
+    }
+  })
+})
