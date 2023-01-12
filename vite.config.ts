@@ -2,8 +2,6 @@ import { defineConfig } from 'vite'
 import electron from 'vite-plugin-electron'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
-import jotaiDebugLabel from 'jotai/babel/plugin-debug-label'
-import jotaiReactRefresh from 'jotai/babel/plugin-react-refresh'
 import path from 'path'
 
 const srcAliases = ['backend', 'frontend', 'common'].map((srcFolder) => {
@@ -40,7 +38,7 @@ export default defineConfig({
     ]
   },
   plugins: [
-    react({ babel: { plugins: [jotaiDebugLabel, jotaiReactRefresh] } }),
+    react(),
     electron([
       {
         entry: 'src/backend/main.ts',

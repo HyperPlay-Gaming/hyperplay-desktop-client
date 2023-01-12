@@ -162,7 +162,6 @@
     "i18next-fs-backend": "^1.1.4",
     "i18next-http-backend": "^1.4.0",
     "ini": "^3.0.0",
-    "jotai": "^1.11.2",
     "jsdom": "^20.0.0",
     "mobx": "^6.7.0",
     "mobx-react-lite": "^3.4.0",
