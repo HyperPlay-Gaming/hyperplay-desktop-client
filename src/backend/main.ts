@@ -954,7 +954,7 @@ ipcMain.handle(
     const game = isSideloaded ? getAppInfo(appName) : extGame.getGameInfo()
     const { title } = game
 
-    const { minimizeOnLaunch } = await GlobalConfig.get().getSettings()
+    const { minimizeOnGameLaunch } = await GlobalConfig.get().getSettings()
 
     const startPlayingDate = new Date()
 
@@ -974,7 +974,7 @@ ipcMain.handle(
       status: 'playing'
     })
 
-    if (minimizeOnLaunch) {
+    if (minimizeOnGameLaunch) {
       mainWindow.hide()
     }
 

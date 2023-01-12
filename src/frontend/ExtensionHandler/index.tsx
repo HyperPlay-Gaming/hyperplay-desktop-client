@@ -1,73 +1,63 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
 import React, { useEffect } from 'react'
 
 const ExtensionHandler = function () {
-  async function handleRequest(_event: any, id: number, args: any) {
+  async function handleRequest(
+    event: Event,
+    id: number,
+    args: Record<string, unknown>
+  ) {
     try {
       console.log('requesting from mm browser ext = ', JSON.stringify(args))
       const value = await window.ethereum.request(args)
       window.api.returnExtensionRequest(id, value)
-    } catch (err: any) {
+    } catch (err) {
       console.log(`error during request: ${err}`)
       window.api.errorExtensionRequest(id, err)
     }
   }
 
-  useEffect(() => {
-    window.addEventListener('message', (event) => {
+  const bindEthereumListeners = function () {
+    window.addEventListener('message', (event: MessageEvent) => {
       console.log('window message received = ', JSON.stringify(event, null, 4))
     })
 
-    const unsubscribeFunctions: (() => void)[] = []
-
-    window.api.getExtensionMetadata().then((metadata) => {
-      if (metadata.isInitialized) {
-        handleExtensionHooks()
-      }
+    window.ethereum.on('accountsChanged', (accounts: string[]) => {
+      window.api.extensionOnEvent('accountsChanged', accounts)
     })
 
-    const handleAccountsChanged = (accounts: string[]) =>
-      window.api.extensionOnEvent('accountsChanged', accounts)
-
-    const handleDisconnect = (error: any) =>
+    window.ethereum.on('disconnect', (error: Error) => {
       window.api.extensionOnEvent('disconnect', error)
+    })
 
-    const handleConnect = (connectInfo: any) => {
+    window.ethereum.on('connect', (connectInfo: string) => {
       window.api.extensionOnEvent('connect', connectInfo)
-    }
+    })
 
-    const handleChainChanged = (chainId: number) =>
+    window.ethereum.on('chainChanged', (chainId: number) => {
       window.api.extensionOnEvent('chainChanged', chainId)
+    })
 
-    function handleExtensionHooks() {
-      if (typeof window.ethereum !== 'undefined') {
-        window.ethereum.on('accountsChanged', handleAccountsChanged)
-        window.ethereum.on('disconnect', handleDisconnect)
-        window.ethereum.on('connect', handleConnect)
-        window.ethereum.on('chainChanged', handleChainChanged)
-
-        unsubscribeFunctions.push(
-          window.api.handleMetamaskExtensionRequests(handleRequest),
-          () => {
-            // double useEffect in devMode can cause side effects if improperly cleaned up
-            window.ethereum.removeListener(
-              'accountsChanged',
-              handleAccountsChanged
-            )
-            window.ethereum.removeListener('disconnect', handleDisconnect)
-            window.ethereum.removeListener('connect', handleConnect)
-            window.ethereum.removeListener('chainChanged', handleChainChanged)
-          }
-        )
-      } else {
-        console.error('MetaMask is not installed!')
-      }
-    }
-    /* eslint-disable @typescript-eslint/no-empty-function */
+    const removeRequestListener =
+      window.api.handleMetamaskExtensionRequests(handleRequest)
     return () => {
-      unsubscribeFunctions.forEach((unsubscribe) => {
-        unsubscribe()
-      })
+      removeRequestListener()
+    }
+  }
+
+  useEffect(() => {
+    /* eslint-disable-next-line @typescript-eslint/no-empty-function */
+    let rmListeners = () => {}
+    const interval = setInterval(() => {
+      console.log('checking for metamask extension...')
+      if (typeof window.ethereum !== 'undefined') {
+        console.log('metamask extension found!')
+        rmListeners = bindEthereumListeners()
+        clearInterval(interval)
+      }
+    }, 2000)
+    return () => {
+      rmListeners()
+      clearInterval(interval)
     }
   }, [])
 

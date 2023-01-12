@@ -2026,9 +2026,9 @@
   integrity sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==
 
 "@types/node@^16.11.26":
-  version "16.11.65"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.11.65.tgz#59500b86af757d6fcabd3dec32fecb6e357d7a45"
-  integrity sha512-Vfz7wGMOr4jbQGiQHVJm8VjeQwM9Ya7mHe9LtQ264/Epf5n1KiZShOFqk++nBzw6a/ubgYdB9Od7P+MH/LjoWw==
+  version "16.18.11"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.11.tgz#cbb15c12ca7c16c85a72b6bdc4d4b01151bb3cae"
+  integrity sha512-3oJbGBUWuS6ahSnEq1eN2XrCyf4YsWI8OyCvo7c64zQJNplk3mO84t53o8lfTk+2ji59g5ycfc6qQ3fdHliHuA==
 
 "@types/node@^17.0.25":
   version "17.0.45"
@@ -4584,7 +4584,7 @@ ejs@^3.1.7:
   dependencies:
     jake "^10.8.5"
 
-electron-builder@^23.1.0:
+electron-builder@^23.6.0:
   version "23.6.0"
   resolved "https://registry.yarnpkg.com/electron-builder/-/electron-builder-23.6.0.tgz#c79050cbdce90ed96c5feb67c34e9e0a21b5331b"
   integrity sha512-y8D4zO+HXGCNxFBV/JlyhFnoQ0Y0K7/sFH+XwIbj47pqaW8S6PGYQbjoObolKBR1ddQFPt4rwp4CnwMJrW3HAw==
@@ -4665,7 +4665,7 @@ electron-updater@^5.0.1:
     semver "^7.3.5"
     typed-emitter "^2.1.0"
 
-electron@^21.2.1:
+electron@21.2.1:
   version "21.2.1"
   resolved "https://registry.yarnpkg.com/electron/-/electron-21.2.1.tgz#a6bbf4fee7ed985c739cc0d87fbef0ea4559da57"
   integrity sha512-RLuFstGpHk1wtCRm9Kd+mhLjHZ5+m83+GQ/CsVl06OT7ikCT68yXMEgPmSkgmN5WjzlorsK6H5hIk9Sf6P/7Lg==
@@ -8168,6 +8168,16 @@ mktemp@~0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/mktemp/-/mktemp-0.4.0.tgz#6d0515611c8a8c84e484aa2000129b98e981ff0b"
   integrity sha512-IXnMcJ6ZyTuhRmJSjzvHSRhlVPiN9Jwc6e59V0bEJ0ba6OBeX2L0E+mRN1QseeOF4mM+F1Rit6Nh7o+rl2Yn/A==
+
+mobx-react-lite@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-3.4.0.tgz#d59156a96889cdadad751e5e4dab95f28926dfff"
+  integrity sha512-bRuZp3C0itgLKHu/VNxi66DN/XVkQG7xtoBVWxpvC5FhAqbOCP21+nPhULjnzEqd7xBMybp6KwytdUpZKEgpIQ==
+
+mobx@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.7.0.tgz#2d805610fee1801fd015c54fd5400d2601aa3768"
+  integrity sha512-1kBLBdSNG2bA522HQdbsTvwAwYf9hq9FWxmlhX7wTsJUAI54907J+ozfGW+LoYUo06vjit748g6QH1AAGLNebw==
 
 mock-fs@^4.1.0:
   version "4.14.0"

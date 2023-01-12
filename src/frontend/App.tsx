@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 
 import './App.css'
 import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
@@ -17,17 +17,17 @@ import { ControllerHints, OfflineMessage } from './components/UI'
 import DownloadManager from './screens/DownloadManager'
 import DialogHandler from './components/UI/DialogHandler'
 import ExtensionHandler from './ExtensionHandler'
+import onboardingStore from './store/OnboardingStore'
+import { observer } from 'mobx-react-lite'
 
 function App() {
   const { sidebarCollapsed } = useContext(ContextProvider)
-
-  const [onboardingEnabled, setOnboardingEnabled] = useState(true)
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
       <HashRouter>
         <OfflineMessage />
-        <Sidebar openOnboarding={() => setOnboardingEnabled(true)} />
+        <Sidebar />
         <main className="content">
           <ExtensionHandler />
           <DialogHandler />
@@ -64,11 +64,13 @@ function App() {
           <div className="simple-keyboard"></div>
         </div>
       </HashRouter>
-      {onboardingEnabled && (
-        <Onboarding disableOnboarding={() => setOnboardingEnabled(false)} />
+      {onboardingStore.isOnboardingOpen && (
+        <Onboarding
+          disableOnboarding={() => onboardingStore.closeOnboarding()}
+        />
       )}
     </div>
   )
 }
 
-export default App
+export default observer(App)

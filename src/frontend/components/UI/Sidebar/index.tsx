@@ -7,17 +7,15 @@ import {
   faSquareCaretRight
 } from '@fortawesome/free-solid-svg-icons'
 import ContextProvider from 'frontend/state/ContextProvider'
+import onboardingStore from 'frontend/store/OnboardingStore'
 import CurrentDownload from './components/CurrentDownload'
 import SidebarLinks from './components/SidebarLinks'
 import './index.css'
 import Wallet from './components/wallet'
 import { DMQueueElement } from 'common/types'
+import { observer } from 'mobx-react-lite'
 
-interface SidebarProps {
-  openOnboarding: () => void
-}
-
-const Sidebar: React.FC<SidebarProps> = function (props) {
+const Sidebar = observer(() => {
   const { t } = useTranslation()
   const { sidebarCollapsed, setSideBarCollapsed } = useContext(ContextProvider)
   const [currentDMElement, setCurrentDMElement] = useState<DMQueueElement>()
@@ -68,7 +66,7 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
         <span>Open MetaMask {badgeText}</span>
       </button>
 
-      <Wallet onClick={props.openOnboarding} />
+      <Wallet onClick={() => onboardingStore.openOnboarding()} />
       <button
         className="collapseIcon"
         onClick={() => setSideBarCollapsed(!sidebarCollapsed)}
@@ -84,6 +82,6 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
       </button>
     </aside>
   )
-}
+})
 
 export default React.memo(Sidebar)

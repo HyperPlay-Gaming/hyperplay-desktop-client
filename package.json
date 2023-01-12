@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.2-alpha.1",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -28,7 +28,8 @@
       "build/app_icon.icns",
       "build/win_icon.ico",
       "build/trayIconLight24x24.png",
-      "build/trayIconDark24x24.png"
+      "build/trayIconDark24x24.png",
+      "build/extensions"
     ],
     "protocols": [
       {
@@ -53,6 +54,7 @@
       "artifactName": "${productName}-${version}-Portable.${ext}"
     },
     "mac": {
+      "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "target": "dmg",
       "category": "public.app-category.games",
       "icon": "build/app_icon.icns",
@@ -162,6 +164,8 @@
     "i18next-http-backend": "^1.4.0",
     "ini": "^3.0.0",
     "jsdom": "^20.0.0",
+    "mobx": "^6.7.0",
+    "mobx-react-lite": "^3.4.0",
     "plist": "^3.0.5",
     "qrcode": "^1.5.1",
     "react": "^18.2.0",
@@ -191,7 +195,7 @@
     "release:mac": "vite build && electron-builder -p always --mac",
     "release:win": "vite build && electron-builder -p always --win nsis portable",
     "dist:linux": "vite build && electron-builder --linux",
-    "dist:mac": "vite build && electron-builder --mac",
+    "dist:mac": "vite build && electron-builder --mac --x64 --arm64",
     "dist:win": "vite build && electron-builder --win",
     "lint": "eslint --cache -c .eslintrc --ext .tsx,ts ./src",
     "lint-fix": "eslint --fix -c .eslintrc --ext .tsx,ts ./src",
@@ -228,8 +232,8 @@
     "@typescript-eslint/eslint-plugin": "^5.20.0",
     "@typescript-eslint/parser": "^5.20.0",
     "@vitejs/plugin-react": "^2.2.0",
-    "electron": "^21.2.1",
-    "electron-builder": "^23.1.0",
+    "electron": "21.2.1",
+    "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.2.0",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",

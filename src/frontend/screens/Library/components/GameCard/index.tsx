@@ -44,6 +44,9 @@ import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
 import classNames from 'classnames'
 import StoreLogos from 'frontend/components/UI/StoreLogos'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
+import { observer } from 'mobx-react-lite'
+import walletStore from 'frontend/store/WalletStore'
+import onboardingStore from 'frontend/store/OnboardingStore'
 
 interface Card {
   buttonClick: () => void
@@ -554,6 +557,14 @@ const GameCard = ({
       return window.api.removeFromDMQueue(appName)
     }
 
+    if (gameInfo.web3?.supported && !walletStore.isConnected) {
+      try {
+        await onboardingStore.startOnboarding()
+      } catch (e) {
+        console.error('User denied onboarding')
+      }
+    }
+
     if (isInstalled) {
       setIsLaunching(true)
       return launch({
@@ -569,4 +580,4 @@ const GameCard = ({
   }
 }
 
-export default GameCard
+export default observer(GameCard)

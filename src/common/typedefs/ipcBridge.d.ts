@@ -119,11 +119,11 @@ interface HyperPlayAsyncIPCFunctions {
     options: chrome.tabs.CreateProperties
   ) => Promise<chrome.tabs.Tab>
   installMetaMask: (dbPath: string | null | undefined) => Promise<void>
-  hasMetaMaskWallet: () => Promise<boolean>
   getMetaMaskImportOptions: (
     configDbPath?: string
   ) => Promise<MetaMaskImportOptions | null>
   getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
+  getTabUrl: () => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
