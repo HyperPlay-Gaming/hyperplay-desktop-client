@@ -5,16 +5,16 @@ import useSetting from 'frontend/hooks/useSetting'
 
 const MinimizeOnGameLaunch = () => {
   const { t } = useTranslation()
-  const [minimizeOnLaunch, setMinimizeOnLaunch] = useSetting(
-    'minimizeOnLaunch',
+  const [minimizeOnGameLaunch, setMinimizeOnGameLaunch] = useSetting(
+    'minimizeOnGameLaunch',
     false
   )
 
   return (
     <ToggleSwitch
-      htmlId="minimizeOnLaunch"
-      value={minimizeOnLaunch}
-      handleChange={() => setMinimizeOnLaunch(!minimizeOnLaunch)}
+      htmlId="minimizeOnGameLaunchSwitch"
+      value={minimizeOnGameLaunch}
+      handleChange={() => setMinimizeOnGameLaunch(!minimizeOnGameLaunch)}
       title={t(
         'setting.minimize-on-launch',
         'Minimize HyperPlay After Game Launch'
