@@ -1,6 +1,6 @@
 import './dev-reload.json'
 
-import { setExtensionMetadata } from './hyperplay-extension-helper/ipcHandlers/helpers'
+import { setExtensionMetadata } from './hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -158,6 +158,7 @@ const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
 
 let mainWindow: BrowserWindow
+let isRestarting = false
 
 async function createWindow(): Promise<BrowserWindow> {
   configStore.set('userHome', userHome)
@@ -251,7 +252,7 @@ async function createWindow(): Promise<BrowserWindow> {
 
     const { exitToTray } = GlobalConfig.get().config
 
-    if (exitToTray) {
+    if (exitToTray && !isRestarting) {
       logInfo('Exitting to tray instead of quitting', {
         prefix: LogPrefix.Backend
       })
@@ -1611,9 +1612,10 @@ ProviderHelper.passEventCallbacks(
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 
 ipcMain.on('restartApp', async () => {
+  isRestarting = true
+
   setImmediate(() => {
     if (process.env.DEV) {
-      console.log(__dirname)
       const file = './src/backend/dev-reload.json'
       const reloadCount = JSON.parse(fs.readFileSync(file, 'utf-8'))
       fs.writeFileSync(
