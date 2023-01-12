@@ -47,6 +47,9 @@ const ExtensionHandler = function () {
   useEffect(() => {
     /* eslint-disable-next-line @typescript-eslint/no-empty-function */
     let rmListeners = () => {}
+
+    bindEthereumListeners()
+
     const interval = setInterval(() => {
       console.log('checking for metamask extension...')
       if (typeof window.ethereum !== 'undefined') {
