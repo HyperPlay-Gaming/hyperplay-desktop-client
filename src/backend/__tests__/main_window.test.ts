@@ -76,8 +76,8 @@ describe('main_window', () => {
         configStore.get = jest.fn()
       })
 
-      it('creates the new window with the given geometry', () => {
-        const window = createMainWindow()
+      it('creates the new window with the given geometry', async () => {
+        const window = await createMainWindow()
         const options = window['options']
 
         expect(configStore.has).toBeCalledWith('window-props')
@@ -93,8 +93,8 @@ describe('main_window', () => {
         configStore.has = () => false
       })
 
-      it('creates the new window with the default geometry', () => {
-        const window = createMainWindow()
+      it('creates the new window with the default geometry', async () => {
+        const window = await createMainWindow()
         const options = window['options']
 
         expect(options.height).toBe(690)
@@ -103,7 +103,7 @@ describe('main_window', () => {
         expect(options.y).toBe(0)
       })
 
-      it('ensures windows is not bigger than the screen', () => {
+      it('ensures windows is not bigger than the screen', async () => {
         // mock a smaller screen info
         const originalScreenSize = screen.getPrimaryDisplay
         screen.getPrimaryDisplay = () => {
@@ -115,7 +115,7 @@ describe('main_window', () => {
           } as Display
         }
 
-        const window = createMainWindow()
+        const window = await createMainWindow()
         const options = window['options']
 
         expect(options.height).toBe(690)

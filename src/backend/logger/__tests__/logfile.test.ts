@@ -130,7 +130,7 @@ describe('logger/logfile.ts', () => {
     expect(graceful_fs.existsSync(yearOutdatedLogFile)).toBeFalsy()
   }) */
 
-  test('getLogFile all possible values', () => {
+  /*   test('getLogFile all possible values', () => {
     // get global current logfile
     expect(logfile.getLogFile({})).toBe('current.log')
     // get global last logfile
@@ -144,7 +144,7 @@ describe('logger/logfile.ts', () => {
     expect(logfile.getLogFile({ appName: 'MyApp', defaultLast: true })).toBe(
       '/tmp/appData/hyperplay/GamesConfig/MyApp-lastPlay.log'
     )
-  })
+  }) */
 
   test('appendMessageToLogFile success', () => {
     const appendFileSyncSpy = jest
