@@ -1,6 +1,5 @@
-import { BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow, ipcMain, screen, shell } from 'electron'
 // import { Menu, Tray } from 'electron'
-import { screen, shell } from 'electron'
 import * as path from 'path'
 // import { fileUrl } from './utils/utils'
 
@@ -9,7 +8,6 @@ import * as IOverlay from 'electron-overlay'
 import * as IOVhook from 'node-ovhook'
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
-import { app } from 'electron'
 const buildDir = resolve(__dirname, '../../build')
 
 enum AppWindows {
@@ -341,7 +339,7 @@ class Application {
       this.OvHook = require('node-ovhook')
     }
 
-    ipcMain.on('inject', (event, arg) => {
+    ipcMain.on('inject', (event, arg: string) => {
       console.log(`--------------------\n try inject ${arg}`)
       for (const window of this.OvHook.getTopWindows()) {
         if (window.title.indexOf(arg) !== -1) {

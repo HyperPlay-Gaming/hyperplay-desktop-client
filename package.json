@@ -186,7 +186,7 @@
   },
   "scripts": {
     "start": "vite",
-    "startOverlay": "yarn run build-overlay-deps && call .\\overlayDeps\\copy_to_ovhook.bat && vite",
+    "buildLinkOverlayDeps": "yarn run build-overlay-deps && call .\\overlayDeps\\copy_to_ovhook.bat",
     "codecheck": "tsc --noEmit",
     "test": "jest",
     "testProxy": "jest proxy.test.ts",
