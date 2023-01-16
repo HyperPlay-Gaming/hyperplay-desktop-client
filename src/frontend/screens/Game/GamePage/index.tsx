@@ -317,9 +317,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 <h2 className="title">{title}</h2>
                 {installPlatform !== 'Browser' && (
                   <button
-                  onClick={() =>
-                    setIsSettingsModalOpen(true, 'settings', gameInfo)
-                  }
+                    onClick={() =>
+                      setIsSettingsModalOpen(true, 'settings', gameInfo)
+                    }
                     className={`settings-icon`}
                   >
                     <SettingsIcon />
