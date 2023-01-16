@@ -1,6 +1,6 @@
-import React from 'react'
-import App from './App'
+import React, { lazy } from 'react'
 import HyperplayOverlay from './HyperplayOverlay'
+const App = lazy(async () => import('./App'))
 
 const Views = {
   App: <App />,

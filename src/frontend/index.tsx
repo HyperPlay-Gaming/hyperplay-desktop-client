@@ -1,6 +1,6 @@
 import { I18nextProvider, initReactI18next } from 'react-i18next'
 import HttpApi from 'i18next-http-backend'
-import React, { lazy, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
 import { initGamepad } from './helpers/gamepad'
@@ -104,7 +104,6 @@ i18next
 
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
-const App = lazy(async () => import('./App'))
 
 root.render(
   <React.StrictMode>
