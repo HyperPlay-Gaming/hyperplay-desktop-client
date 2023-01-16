@@ -252,14 +252,14 @@
         },
         "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
         "sync": {
-            "part1": "Heroic essaie de déterminer quel est le bon dossier de sauvegarde et cela fonctionne dans la plus part des cas. Si le dossier choisi n'est pas le bon, utilisez le champ ci-dessus pour le changer.",
-            "part2": "Dans le cas où vous changez le dossier de prefix de Wine ou Proton, vous aurez besoin de revérifier ce chemin car Proton utilise un prefix différent (/pfx) et un username (steamuser). Vous pouvez simplement effacer le chemin actuel quitter la page des options pour que Heroic essaie de deviner une fois de plus le dossier avec le bon prefix.",
+            "part1": "HyperPlay essaie de déterminer quel est le bon dossier de sauvegarde et cela fonctionne dans la plus part des cas. Si le dossier choisi n'est pas le bon, utilisez le champ ci-dessus pour le changer.",
+            "part2": "Dans le cas où vous changez le dossier de prefix de Wine ou Proton, vous aurez besoin de revérifier ce chemin car Proton utilise un prefix différent (/pfx) et un username (steamuser). Vous pouvez simplement effacer le chemin actuel quitter la page des options pour que HyperPlay essaie de deviner une fois de plus le dossier avec le bon prefix.",
             "part3": "Synchronisation manuelle: Choisissez « Télécharger » pour télécharger les sauvegardes des jeux enregistrées dans le Cloud et « Téléverser » pour transférer les fichiers locaux vers le Cloud. « Forcer le téléchargement » et « Forcer le téléversement » ignoreront la version locale ou celle du Cloud.",
             "part4": "« Synchroniser automatiquement » active la synchronisation de vos sauvegardes à chaque fois que vous lancez un jeu et que vous l'arrêtez."
         },
         "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
         "wine": {
-            "part1": "Heroic recherche des versions de Wine, Proton et CrossOver dans ces dossiers:",
+            "part1": "HyperPlay recherche des versions de Wine, Proton et CrossOver dans ces dossiers:",
             "part2": "Pour d'autres emplacements, utilisez un lien symbolique vers un de ces dossiers"
         }
     },
@@ -350,7 +350,7 @@
         "moving": "Moving Game",
         "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
-            "error": "Heroic n'a pas pu récupérer les dernières versions, peut-être à cause de limitations dues à l'API de Github ! Veuillez réessayer plus tard."
+            "error": "HyperPlay n'a pas pu récupérer les dernières versions, peut-être à cause de limitations dues à l'API de Github ! Veuillez réessayer plus tard."
         },
         "uninstalled": "Désinstallé",
         "update": {
@@ -436,7 +436,7 @@
         "addgamestostartmenu": "Ajouter automatiquement les jeux au menu Démarrer",
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Choisir un binaire GOGDL alternatif à utiliser",
-        "alt-legendary-bin": "Choisir un autre exécutable Legendary (redémarrage d'Heroic nécessaire)",
+        "alt-legendary-bin": "Choisir un autre exécutable Legendary (redémarrage d'HyperPlay nécessaire)",
         "autodxvk": "Installation/Mise à jour automatique du préfix DXVK",
         "autosync": "Sauvegardes Autosync",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",

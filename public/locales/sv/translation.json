@@ -101,8 +101,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "Är du säker att du vill grundåterställa Heroic? Detta raderar alla inställningar och cachefiler men raderar inte installerade spel eller Epic inloggningsuppgifter. Portabla versioner (AppImage, WinPortable, ...) av Heroic måste startas om manuellt efteråt.",
-                "title": "Grundåterställ Heroic"
+                "message": "Är du säker att du vill grundåterställa HyperPlay? Detta raderar alla inställningar och cachefiler men raderar inte installerade spel eller Epic inloggningsuppgifter. Portabla versioner (AppImage, WinPortable, ...) av HyperPlay måste startas om manuellt efteråt.",
+                "title": "Grundåterställ HyperPlay"
             }
         },
         "runexe": {
@@ -441,7 +441,7 @@
         "autosync": "Synkronisera sparfiler automatiskt",
         "autovkd3d": "Installera/uppdatera VKD3D i prefix automatiskt",
         "change-target-exe": "Ange alternativ EXE-fil att köra",
-        "checkForUpdatesOnStartup": "Sök efter Heroic-uppdateringar vid uppstart",
+        "checkForUpdatesOnStartup": "Sök efter HyperPlay-uppdateringar vid uppstart",
         "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Sökväg till anpassade teman",
         "customWineProton": "Anpassad Wine/Proton sökväg",
