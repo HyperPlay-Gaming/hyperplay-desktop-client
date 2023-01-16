@@ -14,7 +14,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { faDiscord, faPatreon } from '@fortawesome/free-brands-svg-icons'
+import { faDiscord } from '@fortawesome/free-brands-svg-icons'
 import { openDiscordLink } from 'frontend/helpers'
 
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -39,8 +39,14 @@ export default function SidebarLinks() {
   const location = useLocation() as { pathname: string }
   const [, , runner, appName, type] = location.pathname.split('/') as PathSplit
 
-  const { epic, gog, activeController, refreshLibrary, platform, handleExternalLinkDialog } =
-    useContext(ContextProvider)
+  const {
+    epic,
+    gog,
+    activeController,
+    refreshLibrary,
+    platform,
+    handleExternalLinkDialog
+  } = useContext(ContextProvider)
 
   const isStore = location.pathname.includes('store')
   const isSettings = location.pathname.includes('settings')
