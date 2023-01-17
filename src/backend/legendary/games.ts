@@ -3,7 +3,7 @@ import {
   createAbortController,
   deleteAbortController
 } from '../utils/aborthandler/aborthandler'
-import { appendFileSync, existsSync, mkdirSync } from 'graceful-fs'
+import { appendFileSync } from 'graceful-fs'
 import axios from 'axios'
 
 import {
@@ -20,7 +20,6 @@ import { LegendaryLibrary, runLegendaryCommand } from './library'
 import { LegendaryUser } from './user'
 import { execAsync, getLegendaryBin, killPattern } from '../utils'
 import {
-  userHome,
   isMac,
   isWindows,
   installed,
@@ -726,20 +725,12 @@ class LegendaryGame extends Game {
       )
       return 'No path provided.'
     }
-    path = path.replaceAll("'", '').replaceAll('"', '')
-    const fixedPath = isWindows ? path.slice(0, -1) : path
-
-    // workaround error when no .saves folder exists
-    const legendarySavesPath = join(userHome, 'legendary', '.saves')
-    if (!existsSync(legendarySavesPath)) {
-      mkdirSync(legendarySavesPath, { recursive: true })
-    }
 
     const commandParts = [
       'sync-saves',
       arg,
       '--save-path',
-      fixedPath,
+      path,
       this.appName,
       '-y'
     ]
