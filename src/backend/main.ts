@@ -1726,8 +1726,7 @@ import './legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
 import './downloadmanager/ipc_handler'
 import './utils/ipc_handler'
-import './extra_game_info/howlongtobeat/ipc_handler'
-import './extra_game_info/pcgamingwiki/ipc_handler'
+import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 
 // sends messages to renderer process through preload.ts callbacks

@@ -625,7 +625,6 @@ export interface GameScoreInfo {
   urlid: string
 }
 export interface PCGamingWikiInfo {
-  timestampLastFetch: string
   steamID: string
   howLongToBeatID: string
   metacritic: GameScoreInfo

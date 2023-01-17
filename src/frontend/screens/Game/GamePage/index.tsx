@@ -55,7 +55,7 @@ import {
 } from 'frontend/components/UI/Dialog'
 
 import StoreLogos from 'frontend/components/UI/StoreLogos'
-import { isWindows } from 'backend/constants'
+import { WikiGameInfo } from 'frontend/components/UI/WikiGameInfo'
 
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -99,7 +99,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [winePrefix, setWinePrefix] = useState('')
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [showRequirements, setShowRequirements] = useState(false)
-  const [gameAvailable, setGameAvailable] = useState(true)
+  const [showExtraInfo, setShowExtraInfo] = useState(false)
+  const [gameAvailable, setGameAvailable] = useState(false)
 
   const isWin = platform === 'win32'
   const isSideloaded = runner === 'sideload'
@@ -338,6 +339,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                     runner={gameInfo.runner}
                     handleUpdate={handleUpdate}
                     disableUpdate={isInstalling || isUpdating}
+                    setShowExtraInfo={setShowExtraInfo}
                     onShowRequirements={
                       hasRequirements
                         ? () => setShowRequirements(true)
@@ -456,7 +458,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       <div className="col2-item italic">
                         {t(canRunOffline ? 'box.no' : 'box.yes')}
                       </div>
-                      {!isWindows && !isNative && (
+                      {!isWin && !isNative && (
                         <>
                           <div className="hp-subtitle">Wine</div>
                           <div className="col2-item italic">
@@ -554,6 +556,13 @@ export default React.memo(function GamePage(): JSX.Element | null {
                   </button>
                 )}
               </div>
+              {showExtraInfo && (
+                <WikiGameInfo
+                  setShouldShow={setShowExtraInfo}
+                  title={title}
+                  id={runner === 'gog' ? appName : undefined}
+                />
+              )}
               {is_installed && (
                 <span
                   onClick={() => setIsSettingsModalOpen(true, 'log', gameInfo)}
