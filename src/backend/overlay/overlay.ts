@@ -3,7 +3,7 @@ import { app, BrowserWindow, ipcMain, screen, shell } from 'electron'
 import * as path from 'path'
 // import { fileUrl } from './utils/utils'
 
-import * as IOverlay from 'electron-overlay'
+import * as IOverlay from '@hyperplay/electron-overlay'
 
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
@@ -35,7 +35,7 @@ class Application {
   }
 
   public startOverlay() {
-    this.Overlay = require('electron-overlay')
+    this.Overlay = require('@hyperplay/electron-overlay')
     this.Overlay!.start()
     this.Overlay!.setHotkeys([
       {

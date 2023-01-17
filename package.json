@@ -131,6 +131,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@hyperplay/electron-overlay": "C:/a_repos/0_game7/hyperplay/hyperplay-goverlay/electron-overlay",
     "@metamask/sdk": "^0.1.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
@@ -180,12 +181,10 @@
     "steam-shortcut-editor": "^3.1.1",
     "systeminformation": "^5.15.0",
     "tslib": "^2.4.0",
-    "web3": "^1.7.5",
-    "electron-overlay": "file:./overlayDeps/electron-overlay"
+    "web3": "^1.7.5"
   },
   "scripts": {
     "start": "vite",
-    "buildLinkOverlayDeps": "yarn run build-electron-overlay && call .\\overlayDeps\\copy_binary.bat",
     "codecheck": "tsc --noEmit",
     "test": "jest",
     "testProxy": "jest proxy.test.ts",
@@ -205,11 +204,7 @@
     "i18n": "i18next",
     "prepare": "husky install",
     "prettier": "prettier --check .",
-    "prettier-fix": "prettier --write .",
-    "link-electron-overlay": "cd ./overlayDeps/electron-overlay && yarn link && cd ../.. && yarn link electron-overlay",
-    "unlink-electron-overlay": "cd ./overlayDeps/electron-overlay && yarn unlink && cd ../.. && yarn unlink electron-overlay",
-    "build-electron-overlay": "cd ./overlayDeps/electron-overlay && yarn run compile && cd ../..",
-    "buildOverlayFrontend": "esbuild ./src/overlayFrontend/main.ts --outfile=./src/overlayFrontend/renderer.js"
+    "prettier-fix": "prettier --write ."
   },
   "eslintConfig": {
     "extends": [
