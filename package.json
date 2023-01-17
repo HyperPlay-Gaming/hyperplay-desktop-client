@@ -181,12 +181,11 @@
     "systeminformation": "^5.15.0",
     "tslib": "^2.4.0",
     "web3": "^1.7.5",
-    "electron-overlay": "file:./overlayDeps/electron-overlay",
-    "node-ovhook": "file:./overlayDeps/node-ovhook"
+    "electron-overlay": "file:./overlayDeps/electron-overlay"
   },
   "scripts": {
     "start": "vite",
-    "buildLinkOverlayDeps": "yarn run build-overlay-deps && call .\\overlayDeps\\copy_to_ovhook.bat",
+    "buildLinkOverlayDeps": "yarn run build-electron-overlay && call .\\overlayDeps\\copy_binary.bat",
     "codecheck": "tsc --noEmit",
     "test": "jest",
     "testProxy": "jest proxy.test.ts",
@@ -207,12 +206,9 @@
     "prepare": "husky install",
     "prettier": "prettier --check .",
     "prettier-fix": "prettier --write .",
-    "link-overlay-deps": "yarn run link-electron-overlay && yarn run link-node-ovhook",
     "link-electron-overlay": "cd ./overlayDeps/electron-overlay && yarn link && cd ../.. && yarn link electron-overlay",
-    "link-node-ovhook": "cd ./overlayDeps/node-ovhook && yarn link && cd ../.. && yarn link node-ovhook",
-    "build-overlay-deps": "yarn run build-electron-overlay && yarn run build-node-ovhook",
+    "unlink-electron-overlay": "cd ./overlayDeps/electron-overlay && yarn unlink && cd ../.. && yarn unlink electron-overlay",
     "build-electron-overlay": "cd ./overlayDeps/electron-overlay && yarn run compile && cd ../..",
-    "build-node-ovhook": "cd ./overlayDeps/node-ovhook && yarn run compile && cd ../..",
     "buildOverlayFrontend": "esbuild ./src/overlayFrontend/main.ts --outfile=./src/overlayFrontend/renderer.js"
   },
   "eslintConfig": {

@@ -5,7 +5,6 @@ import * as path from 'path'
 
 import * as IOverlay from 'electron-overlay'
 
-import * as IOVhook from 'node-ovhook'
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
 const buildDir = resolve(__dirname, '../../build')
@@ -25,8 +24,6 @@ class Application {
 
   // @ts-expect-error TODO
   private Overlay: typeof IOverlay
-  // @ts-expect-error TODO
-  private OvHook: typeof IOVhook
 
   constructor() {
     this.windows = new Map()
@@ -316,10 +313,10 @@ class Application {
     console.log(`--------------------\n try inject method ${pid}`)
     // TO DO: Find a way to listen to when window is created at pid and inject on handle that event
     await wait(5000)
-    for (const window of this.OvHook.getTopWindows()) {
+    for (const window of this.Overlay.getTopWindows()) {
       if (window.processId.toString() === pid) {
         try {
-          const injectResult = this.OvHook.injectProcess(window)
+          const injectResult = this.Overlay.injectProcess(window)
           console.log('inject result = ', JSON.stringify(injectResult, null, 4))
         } catch (e) {
           console.log('error: ', JSON.stringify(e))
@@ -335,17 +332,13 @@ class Application {
       this.createHyperplayOverlay()
     }
 
-    if (!this.OvHook) {
-      this.OvHook = require('node-ovhook')
-    }
-
     ipcMain.on('inject', (event, arg: string) => {
       console.log(`--------------------\n try inject ${arg}`)
-      for (const window of this.OvHook.getTopWindows()) {
+      for (const window of this.Overlay.getTopWindows()) {
         if (window.title.indexOf(arg) !== -1) {
           console.log('window injecting = ', JSON.stringify(window, null, 4))
           try {
-            const result = this.OvHook.injectProcess(window)
+            const result = this.Overlay.injectProcess(window)
             console.log('RESULT from INJECTING = ', result)
           } catch (e) {
             console.log('error: ', JSON.stringify(e))

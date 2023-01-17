@@ -2,7 +2,7 @@
 
 ### Overview
 
-To enable an electron app to have the ability to show its web browser window in another game process, we need to injecting a module (dll in Windows) to the game, make an IPC connection with our electron process, copy the screenshot of our electron app's browser window and render it over the game's surface.
+To enable an electron app to have the ability to show its web browser window in another game process, we need to injecting a module (dll in Windows) to the game, make an IPC connection with our electron process, copy the screenshot (i.e. bitmap) of our electron app's browser window and render it over the game's surface.
 
 Then, since we also want our injected web page can reponse to user's input, we need to intercept the game's input so that we can pass the input to out electron app and send it to the browser window.
 
@@ -12,11 +12,11 @@ Then, since we also want our injected web page can reponse to user's input, we n
 
 #### `n_overlay.dll`(`n_overlay.x64.dll` for x64)
 
-This is the most important module (a dll), it will be injected into game process so that we can communicate with a game process and draw our own stuff on game window.
+This is the most important module (a dll), it will be injected into the game process so that we can communicate with a game process and draw our own stuff on game window.
 
 #### `n_ovhelper.exe`(`n_ovhelper.x64.exe` for x64)
 
-This is a helper process which do the real dll injecting work for use.
+This is a helper process which does the real dll injecting work for use.
 
 ### hyperplay-desktop-client linked node C++ addon modules
 
@@ -49,7 +49,7 @@ so with the modules, basicly what we need to do is
 2. inject
    1. import `node-ovhook` addon (as `IOVhook` for example) to help us inject the `n_overlay.dll` module to the game process
    2. get the game process's process id and do injecting use `IOVhook.injectProcess`
-3. if everything is ok ,you should see the injected browser window in game process
+3. if everything is ok, you should see the injected browser window in game process
 
 ## feature
 

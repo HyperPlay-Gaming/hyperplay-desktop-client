@@ -710,9 +710,10 @@ async function callRunner(
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
       const dataStr = data.toString()
-      const pidPrefix = 'pid for popen process: '
-      if (dataStr.trim().startsWith(pidPrefix)) {
-        const PID = dataStr.trim().substring(pidPrefix.length)
+      const pidPrefix = 'pid for popen process:'
+      const pidPrefixStartIndex = dataStr.search(pidPrefix)
+      if (pidPrefixStartIndex >= 0) {
+        const PID = dataStr.substring(pidPrefixStartIndex + pidPrefix.length).trim()
         console.log('PID: ', PID.trim())
         //inject here
         overlayApp.inject(PID.trim())
