@@ -19,6 +19,7 @@ import DialogHandler from './components/UI/DialogHandler'
 import ExtensionHandler from './ExtensionHandler'
 import onboardingStore from './store/OnboardingStore'
 import { observer } from 'mobx-react-lite'
+import TransactionNotification from './screens/TransactionNotification'
 
 function App() {
   const { sidebarCollapsed } = useContext(ContextProvider)
@@ -64,6 +65,7 @@ function App() {
           <div className="simple-keyboard"></div>
         </div>
       </HashRouter>
+      <TransactionNotification />
       {onboardingStore.isOnboardingOpen && (
         <Onboarding
           disableOnboarding={() => onboardingStore.closeOnboarding()}

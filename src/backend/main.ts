@@ -1608,3 +1608,23 @@ ProviderHelper.passEventCallbacks(
 )
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
+
+ipcMain.on(PROXY_TOPICS.PROVIDER_REQUEST_INITIATED, (id, method) => {
+  mainWindow.webContents.send(
+    PROXY_TOPICS.PROVIDER_REQUEST_INITIATED,
+    id,
+    method
+  )
+})
+
+ipcMain.on(PROXY_TOPICS.PROVIDER_REQUEST_PENDING, (id) => {
+  mainWindow.webContents.send(PROXY_TOPICS.PROVIDER_REQUEST_PENDING, id)
+})
+
+ipcMain.on(PROXY_TOPICS.PROVIDER_REQUEST_COMPLETED, (id) => {
+  mainWindow.webContents.send(PROXY_TOPICS.PROVIDER_REQUEST_COMPLETED, id)
+})
+
+ipcMain.on(PROXY_TOPICS.PROVIDER_REQUEST_FAILED, (id) => {
+  mainWindow.webContents.send(PROXY_TOPICS.PROVIDER_REQUEST_FAILED, id)
+})

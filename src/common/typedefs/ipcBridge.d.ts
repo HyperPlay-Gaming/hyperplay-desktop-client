@@ -1,3 +1,5 @@
+import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
+import { PROXY_TOPICS } from './../../backend/hyperplay-proxy-server/types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
 import { HowLongToBeatEntry } from 'howlongtobeat'
@@ -50,6 +52,10 @@ interface HyperPlaySyncIPCFunctions {
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
+  [PROXY_TOPICS.PROVIDER_REQUEST_INITIATED]: ProxiedProviderEventInitiatedCallback
+  [PROXY_TOPICS.PROVIDER_REQUEST_PENDING]: ProxiedProviderEventCallback
+  [PROXY_TOPICS.PROVIDER_REQUEST_COMPLETED]: ProxiedProviderEventCallback
+  [PROXY_TOPICS.PROVIDER_REQUEST_FAILED]: ProxiedProviderEventCallback
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
