@@ -32,6 +32,7 @@ import classNames from 'classnames'
 type Props = {
   availablePlatforms: AvailablePlatforms
   winePrefix: string
+  crossoverBottle: string
   wineVersion: WineInstallation | undefined
   setWinePrefix: React.Dispatch<React.SetStateAction<string>>
   children: React.ReactNode
@@ -44,6 +45,7 @@ export default function SideloadDialog({
   availablePlatforms,
   backdropClick,
   winePrefix,
+  crossoverBottle,
   wineVersion,
   platformToInstall,
   setWinePrefix,
@@ -171,7 +173,8 @@ export default function SideloadDialog({
       config: {
         ...gameSettings,
         winePrefix,
-        wineVersion
+        wineVersion,
+        wineCrossoverBottle: crossoverBottle
       }
     })
 
