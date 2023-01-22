@@ -55,7 +55,6 @@ import {
 } from 'frontend/components/UI/Dialog'
 
 import StoreLogos from 'frontend/components/UI/StoreLogos'
-import GameScore from 'frontend/components/UI/GameScore'
 
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -554,10 +553,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
                   </button>
                 )}
               </div>
-              <GameScore
-                title={title}
-                id={runner === 'gog' ? appName : undefined}
-              />
               {is_installed && (
                 <span
                   onClick={() => setIsSettingsModalOpen(true, 'log', gameInfo)}

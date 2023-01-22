@@ -326,12 +326,14 @@ export default function GamesSubmenu({
               {t('game.requirements', 'Requirements')}
             </button>
           )}
-          <button
-            onClick={async () => setShowUninstallModal(true)}
-            className="link button is-text is-link is-dangerous"
-          >
-            {t('button.uninstall')}
-          </button>
+          {isInstalled && (
+            <button
+              onClick={async () => setShowUninstallModal(true)}
+              className="link button is-text is-link is-dangerous"
+            >
+              {t('button.uninstall')}
+            </button>
+          )}
         </div>
       </div>
       {showModal && (
