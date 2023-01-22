@@ -230,6 +230,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
     mainWindow.loadURL('http://localhost:5173')
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
+    Menu.setApplicationMenu(null)
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(`file://${path.join(publicDir, '../build/index.html')}`)

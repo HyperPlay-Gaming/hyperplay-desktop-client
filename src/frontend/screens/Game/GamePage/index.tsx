@@ -55,7 +55,6 @@ import {
 } from 'frontend/components/UI/Dialog'
 
 import StoreLogos from 'frontend/components/UI/StoreLogos'
-import HowLongToBeat from 'frontend/components/UI/HowLongToBeat'
 import GameScore from 'frontend/components/UI/GameScore'
 
 export default React.memo(function GamePage(): JSX.Element | null {
@@ -316,14 +315,15 @@ export default React.memo(function GamePage(): JSX.Element | null {
               <div className="titleWrapper">
                 <h2 className="title">{title}</h2>
                 {installPlatform !== 'Browser' && (
-                  <button
+                  <a
+                    role={'button'}
                     onClick={() =>
                       setIsSettingsModalOpen(true, 'settings', gameInfo)
                     }
                     className={`settings-icon`}
                   >
                     <SettingsIcon />
-                  </button>
+                  </a>
                 )}
                 <div className="game-actions">
                   <button className="toggle">
@@ -554,7 +554,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
                   </button>
                 )}
               </div>
-              <HowLongToBeat title={title} />
               <GameScore
                 title={title}
                 id={runner === 'gog' ? appName : undefined}

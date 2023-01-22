@@ -21,7 +21,9 @@
       padding-right: var(--space-sm);
 
       &:hover {
-        color: var(--primary);
+        svg {
+          fill: var(--primary);
+        }
       }
     }
 
