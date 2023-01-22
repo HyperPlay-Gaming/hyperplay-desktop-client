@@ -314,7 +314,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
             <div className="gameInfo">
               <div className="titleWrapper">
                 <h2 className="title">{title}</h2>
-                {installPlatform !== 'Browser' && (
+                {is_installed && installPlatform !== 'Browser' && (
                   <a
                     role={'button'}
                     onClick={() =>
