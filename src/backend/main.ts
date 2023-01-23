@@ -122,7 +122,7 @@ import {
   WalletConnectedType,
   WalletDisconnectedType
 } from './hyperplay-proxy-server/commonProxyTypes'
-import { Application } from './overlay/overlay'
+import { OverlayApp } from './overlay/overlay'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
@@ -151,7 +151,6 @@ import {
   initExtension
 } from './hyperplay-extension-helper/ipcHandlers'
 import { initTrayIcon } from './tray_icon/tray_icon'
-export const overlayApp = new Application()
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -218,7 +217,7 @@ async function createWindow(): Promise<BrowserWindow> {
   ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
 
-  overlayApp.start()
+  OverlayApp.start()
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(

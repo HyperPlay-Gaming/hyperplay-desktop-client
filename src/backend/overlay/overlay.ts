@@ -7,6 +7,7 @@ import * as IOverlay from '@hyperplay/electron-overlay'
 
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
+import * as ExtIpcHandler from '../hyperplay-extension-helper/ipcHandlers/index'
 const buildDir = resolve(__dirname, '../../build')
 
 enum AppWindows {
@@ -37,13 +38,13 @@ class Application {
   public startOverlay() {
     this.Overlay = require('@hyperplay/electron-overlay')
     this.Overlay!.start()
+    // hotkeys refer to windows virtual keys defined here: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
     this.Overlay!.setHotkeys([
       {
-        name: 'overlay.toggleInputIntercept',
-        keyCode: 113,
+        name: 'overlay.hotkey.toggleInputIntercept',
+        keyCode: 9,//tab
         modifiers: { ctrl: true }
-      },
-      { name: 'app.doit', keyCode: 114, modifiers: { ctrl: true } }
+      }
     ])
 
     this.Overlay!.setEventCallback((event: string, payload) => {
@@ -75,6 +76,7 @@ class Application {
         const focusWin = BrowserWindow.fromId(payload.focusWindowId)
         if (focusWin) {
           focusWin.focusOnWebView()
+          focusWin.focus()
         }
       }
     })
@@ -131,23 +133,28 @@ class Application {
     )
 
     window.on('ready-to-show', () => {
+      console.log('overlay electron browser window ready to show')
       window.focusOnWebView()
     })
 
     window.on('resize', () => {
+      console.log('overlay electron browser window resized')
       this.Overlay!.sendWindowBounds(window.id, { rect: window.getBounds() })
     })
 
     window.on('move', () => {
+      console.log('overlay electron browser window moved')
       this.Overlay!.sendWindowBounds(window.id, { rect: window.getBounds() })
     })
 
     const windowId = window.id
     window.on('closed', () => {
+      console.log('overlay electron browser window closed')
       this.Overlay!.closeWindow(windowId)
     })
 
     window.webContents.on('cursor-changed', (event, type) => {
+      console.log('overlay electron browser window cursor changed')
       let cursor
       switch (type) {
         case 'default':
@@ -194,24 +201,26 @@ class Application {
   }
 
   public createHyperplayOverlay() {
+    const isTesting = true
+    
     const options: Electron.BrowserWindowConstructorOptions = {
-      height: 400,
-      width: 800,
+      height: 800,
+      width: 1200,
       frame: false,
-      show: false,
-      transparent: true,
+      show: isTesting,
+      transparent: !isTesting,
       resizable: false,
       backgroundColor: '#00000000',
       webPreferences: {
-        offscreen: true,
+        webviewTag: true,
+        offscreen: !isTesting,
         nodeIntegration: true,
         contextIsolation: true,
-        // preload: path.join(__dirname, 'overlayPreload.js')
         preload: path.join(__dirname, 'preload.js')
       }
     }
 
-    const name = AppWindows.OVERLAY_TIP
+    const name = AppWindows.MAIN_OVERLAY
     const window = this.createWindow(name, options)
 
     window.setPosition(0, 0)
@@ -224,7 +233,7 @@ class Application {
       !app.isPackaged
         ? 'http://localhost:5173?HyperplayOverlay'
         : `file://${path.join(buildDir, './index.html?HyperplayOverlay')}`
-    ) //'index/osr.html')))
+    )
 
     this.addOverlayWindow(name, window, 10, 40)
     console.log('OSR WINDOW CREATED AND ADDED')
@@ -286,6 +295,7 @@ class Application {
     option: Electron.BrowserWindowConstructorOptions
   ) {
     const window = new BrowserWindow(option)
+    ExtIpcHandler.initOverlayWindow(window)
     this.windows.set(name, window)
     window.on('closed', () => {
       this.windows.delete(name)
@@ -332,23 +342,8 @@ class Application {
       this.createHyperplayOverlay()
     }
 
-    ipcMain.on('inject', (event, arg: string) => {
-      console.log(`--------------------\n try inject ${arg}`)
-      for (const window of this.Overlay.getTopWindows()) {
-        if (window.title.indexOf(arg) !== -1) {
-          console.log('window injecting = ', JSON.stringify(window, null, 4))
-          try {
-            const result = this.Overlay.injectProcess(window)
-            console.log('RESULT from INJECTING = ', result)
-          } catch (e) {
-            console.log('error: ', JSON.stringify(e))
-          }
-        }
-      }
-      console.log('done injecting')
-    })
-
     ipcMain.on('startIntercept', () => {
+      console.log('sending start intercept command')
       this.Overlay!.sendCommand({
         command: 'input.intercept',
         intercept: true
@@ -364,4 +359,4 @@ class Application {
   }
 }
 
-export { Application }
+export const OverlayApp = new Application()

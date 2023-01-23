@@ -1,26 +1,41 @@
 import React, { useEffect, useState } from 'react'
-import './index.css'
+import OverlayStyles from './index.module.scss'
 
 const HyperplayOverlay = function () {
   const [time, setTime] = useState(new Date())
+  const [popupUrl, setPopupUrl] = useState('')
+
+  const showWebviewPopup = async() => {
+    const mmPopupUrl = await window.api.getPopupUrl()
+    console.log('setting popup url to ', mmPopupUrl)
+    setPopupUrl(mmPopupUrl)
+  }
+
   useEffect(() => {
     const interval = setInterval(() => setTime(new Date()), 1000)
+    showWebviewPopup()
     return () => {
       clearInterval(interval)
     }
-  })
+  }, [])
+
+  /* eslint-disable react/no-unknown-property */
   return (
-    <div>
-      <div>
-        <div>{time.toLocaleTimeString()}</div>
-        <div>Ctrl + Tab to return to the game</div>
-        <div className="caption">
-          <button id="button">intercept</button>
-          <label id="label">hello hello</label>
-          <br />
-          <input type="text" />
-        </div>
+    <div className={OverlayStyles.overlayContainer}>
+      <div>{time.toLocaleTimeString()}</div>
+      <div>Ctrl + Tab to return to the game</div>
+      <div className={OverlayStyles.caption}>
+        <button id="button">intercept</button>
+        <label id="label">hello hello</label>
+        <br />
+        <input type="text" />
       </div>
+      <div className={OverlayStyles.mmPopupContainer}>
+      <webview nodeintegrationinsubframes="true"
+                webpreferences='contextIsolation=true, nodeIntegration=true' 
+                className={OverlayStyles.mmPopup} 
+                src={popupUrl}></webview>
+                </div>
     </div>
   )
 }

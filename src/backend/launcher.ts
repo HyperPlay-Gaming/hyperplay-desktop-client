@@ -49,7 +49,7 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
-import { overlayApp } from './main'
+import { OverlayApp } from './overlay/overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -716,7 +716,7 @@ async function callRunner(
         const PID = dataStr.substring(pidPrefixStartIndex + pidPrefix.length).trim()
         console.log('PID: ', PID.trim())
         //inject here
-        overlayApp.inject(PID.trim())
+        OverlayApp.inject(PID.trim())
       }
       if (options?.logFile) {
         appendFileSync(options.logFile, dataStr)
