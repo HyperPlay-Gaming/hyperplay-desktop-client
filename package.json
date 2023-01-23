@@ -178,12 +178,14 @@
     "source-map-support": "^0.5.21",
     "steam-shortcut-editor": "^3.1.1",
     "systeminformation": "^5.15.0",
-    "tslib": "^2.4.0",
-    "web3": "^1.7.5"
+    "web3": "^1.7.5",
+    "ts-prune": "^0.10.3",
+    "tslib": "^2.4.0"
   },
   "scripts": {
     "start": "vite",
     "codecheck": "tsc --noEmit",
+    "find-deadcode": "ts-prune --error",
     "test": "jest",
     "testProxy": "jest proxy.test.ts",
     "test-watch": "jest --watch --maxWorkers=25%",

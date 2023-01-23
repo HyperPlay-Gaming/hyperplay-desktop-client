@@ -5,10 +5,6 @@ import { initExtension } from './hyperplay-extension-helper/ipcHandlers'
 
 let mainWindow: BrowserWindow | null = null
 
-export const setMainWindow = (window: BrowserWindow | null = null) => {
-  mainWindow = window
-}
-
 export const getMainWindow = () => {
   return mainWindow
 }

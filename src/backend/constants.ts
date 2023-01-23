@@ -65,8 +65,6 @@ const installed = join(legendaryConfigPath, 'installed.json')
 const legendaryMetadata = join(legendaryConfigPath, 'metadata')
 const fallBackImage = 'fallback'
 const epicLoginUrl = 'https://legendary.gl/epiclogin'
-const gogLoginUrl =
-  'https://auth.gog.com/auth?client_id=46899977096215655&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&response_type=code&layout=galaxy'
 const sidInfoUrl =
   'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-To:-Epic-Alternative-Login'
 const githubURL = 'https://github.com/G7DAO/HyperPlay/releases/latest'
@@ -182,7 +180,6 @@ export {
   discordLink,
   execOptions,
   fixAsarPath,
-  getShell,
   configStore,
   configPath,
   appConfigFolder,
@@ -207,7 +204,6 @@ export {
   legendaryConfigPath,
   legendaryMetadata,
   epicLoginUrl,
-  gogLoginUrl,
   sidInfoUrl,
   supportURL,
   fallBackImage,

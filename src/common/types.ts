@@ -372,14 +372,7 @@ export interface WrapperVariable {
   args: string
 }
 
-export type AntiCheatStatus =
-  | 'Planned'
-  | 'Denied'
-  | 'Broken'
-  | 'Supported'
-  | 'Running'
-
-export type AntiCheat =
+type AntiCheat =
   | 'Arbiter'
   | 'BattlEye'
   | 'Denuvo Anti-Cheat'
@@ -501,7 +494,7 @@ interface GamepadActionArgsWithoutMetadata {
   metadata?: undefined
 }
 
-export type ElWebview = {
+type ElWebview = {
   canGoBack: () => boolean
   canGoForward: () => boolean
   goBack: () => void
@@ -553,6 +546,14 @@ export interface DMQueueElement {
   status?: 'done' | 'error' | 'abort'
 }
 
+type ProtonVerb =
+  | 'run'
+  | 'waitforexitandrun'
+  | 'runinprefix'
+  | 'destroyprefix'
+  | 'getcompatpath'
+  | 'getnativepath'
+
 export type WineCommandArgs = {
   commandParts: string[]
   wait?: boolean
@@ -584,14 +585,6 @@ export interface SideloadGame {
   browserUrl: string
   web3: Web3Features
 }
-
-export type ProtonVerb =
-  | 'run'
-  | 'waitforexitandrun'
-  | 'runinprefix'
-  | 'destroyprefix'
-  | 'getcompatpath'
-  | 'getnativepath'
 
 export interface SaveSyncArgs {
   arg: string | undefined
