@@ -597,7 +597,6 @@ export class GlobalState extends PureComponent<Props> {
             t,
             runner,
             hasUpdate: false,
-            syncCloud: true,
             showDialogModal: this.handleShowDialogModal
           })
         }

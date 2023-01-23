@@ -174,6 +174,7 @@ export interface GameStatus {
     | 'moving'
     | 'queued'
     | 'error'
+    | 'syncing-saves'
 }
 
 export type GlobalConfigVersion = 'auto' | 'v0'
