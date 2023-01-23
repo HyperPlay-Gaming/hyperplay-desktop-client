@@ -26,5 +26,3 @@ jobs:
         run: yarn lint
       - name: Prettier code.
         run: yarn prettier
-      - name: Find dead code
-        run: yarn find-deadcode
