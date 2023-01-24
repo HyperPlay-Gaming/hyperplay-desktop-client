@@ -100,7 +100,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [showRequirements, setShowRequirements] = useState(false)
   const [showExtraInfo, setShowExtraInfo] = useState(false)
-  const [gameAvailable, setGameAvailable] = useState(false)
+  const [gameAvailable, setGameAvailable] = useState(true)
 
   const isWin = platform === 'win32'
   const isSideloaded = runner === 'sideload'
@@ -123,7 +123,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
   useEffect(() => {
     const checkGameAvailable = async () => {
-      if (gameInfo.is_installed) {
+      if (gameInfo.is_installed && !isMoving) {
         const gameAvailable = await window.api.isGameAvailable({
           appName,
           runner
@@ -132,7 +132,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       }
     }
     checkGameAvailable()
-  }, [appName, status, gameInfo.is_installed])
+  }, [appName, status, gameInfo.is_installed, gameInfo.install.install_path, isMoving])
 
   useEffect(() => {
     const updateGameInfo = async () => {
@@ -143,7 +143,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       setExtraInfo(await window.api.getExtraInfo(appName, runner))
     }
     updateGameInfo()
-  }, [status, gog.library, epic.library])
+  }, [status, gog.library, epic.library, isMoving])
 
   useEffect(() => {
     const updateConfig = async () => {
@@ -628,7 +628,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     is_installed: boolean,
     notAvailable?: boolean
   ): React.ReactNode {
-    const { eta, bytes, percent } = progress
+    const { eta, bytes, percent, file } = progress
 
     if (notSupportedGame) {
       return t(
@@ -646,7 +646,16 @@ export default React.memo(function GamePage(): JSX.Element | null {
     }
 
     if (isMoving) {
-      return `${t('status.moving')}`
+      if (file && percent) {
+        return `${t(
+          'status.moving-files',
+          `Moving file '{{file}}': {{percent}} `,
+          { file, percent }
+        )}  
+        `
+      }
+
+      return `${t('status.moving', 'Moving Installation, please wait')} ...`
     }
 
     const currentProgress =
