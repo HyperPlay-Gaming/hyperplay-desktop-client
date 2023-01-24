@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import OverlayStyles from './index.module.scss'
 
+//Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
+//https://www.electronjs.org/docs/latest/api/webview-tag
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace React {
+    interface WebViewHTMLAttributes<T> extends HTMLAttributes<T> {
+      nodeintegrationinsubframes?: string
+    }
+  }
+}
+
 const HyperplayOverlay = function () {
   const [time, setTime] = useState(new Date())
   const [popupUrl, setPopupUrl] = useState('')
@@ -31,11 +42,13 @@ const HyperplayOverlay = function () {
         <input type="text" />
       </div>
       <div className={OverlayStyles.mmPopupContainer}>
-      <webview nodeintegrationinsubframes="true"
-                webpreferences='contextIsolation=true, nodeIntegration=true' 
-                className={OverlayStyles.mmPopup} 
-                src={popupUrl}></webview>
-                </div>
+        <webview 
+          nodeintegrationinsubframes="true"
+          webpreferences='contextIsolation=true, nodeIntegration=true' 
+          className={OverlayStyles.mmPopup} 
+          src={popupUrl}>
+        </webview>
+      </div>
     </div>
   )
 }
