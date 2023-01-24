@@ -37,19 +37,7 @@ export const createMainWindow = async () => {
   }
 
   if (configStore.has('window-props')) {
-    const tmpWindowProps = configStore.get(
-      'window-props',
-      {}
-    ) as Electron.Rectangle
-    if (
-      tmpWindowProps &&
-      tmpWindowProps.width &&
-      tmpWindowProps.height &&
-      tmpWindowProps.y !== undefined &&
-      tmpWindowProps.x !== undefined
-    ) {
-      windowProps = tmpWindowProps
-    }
+    windowProps = configStore.get('window-props', windowProps)
   } else {
     // make sure initial screen size is not bigger than the available screen space
     const screenInfo = screen.getPrimaryDisplay()

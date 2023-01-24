@@ -1,7 +1,6 @@
-import Store from 'electron-store'
+import { TypeCheckedStoreBackend } from 'backend/electron_store'
 
-export const howLongToBeatStore = new Store({
+export const wikiGameInfoStore = new TypeCheckedStoreBackend('wikigameinfo', {
   cwd: 'store',
-  name: 'howlongtobeat',
   clearInvalidConfig: true
 })

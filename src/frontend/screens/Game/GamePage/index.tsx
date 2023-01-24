@@ -27,6 +27,7 @@ import {
   GameInfo,
   GameStatus,
   Runner,
+  SideloadGame,
   WineInstallation
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
@@ -58,7 +59,7 @@ import StoreLogos from 'frontend/components/UI/StoreLogos'
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
-    state: { fromDM: boolean; gameInfo: GameInfo }
+    state: { fromDM: boolean; gameInfo: GameInfo | SideloadGame }
   }
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
@@ -87,9 +88,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    LegendaryInstallInfo | GogInstallInfo
-    // @ts-expect-error Same as above
-  >({})
+    LegendaryInstallInfo | GogInstallInfo | null
+  >(null)
   const [launchArguments, setLaunchArguments] = useState('')
   const [hasError, setHasError] = useState<{
     error: boolean
@@ -101,8 +101,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [gameAvailable, setGameAvailable] = useState(true)
 
   const isWin = platform === 'win32'
-  const isLinux = platform === 'linux'
-  const isMac = platform === 'darwin'
   const isSideloaded = runner === 'sideload'
 
   const isInstalling = status === 'installing'
@@ -114,7 +112,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const isUninstalling = status === 'uninstalling'
   const isSyncing = status === 'syncing-saves'
   const notAvailable = !gameAvailable && gameInfo.is_installed
-  const notSupportedGame = gameInfo.thirdPartyManagedApp === 'Origin'
+  const notSupportedGame =
+    gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
 
   const backRoute = location.state?.fromDM ? '/download-manager' : '/library'
 
@@ -147,17 +146,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
   useEffect(() => {
     const updateConfig = async () => {
       if (gameInfo) {
-        const { install, is_linux_native, is_mac_native } = gameInfo
+        const { install } = gameInfo
 
-        const installPlatform =
-          install.platform || (is_linux_native && isLinux)
-            ? 'linux'
-            : is_mac_native && isMac
-            ? 'Mac'
-            : 'Windows'
-
-        if (runner !== 'sideload' && !notSupportedGame) {
-          getInstallInfo(appName, runner, installPlatform)
+        if (runner !== 'sideload' && !notSupportedGame && install.platform) {
+          getInstallInfo(appName, runner, install.platform)
             .then((info) => {
               if (!info) {
                 throw 'Cannot get game info'
@@ -194,7 +186,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
             )
           }
 
-          if (gameInfo.cloud_save_enabled) {
+          if ('cloud_save_enabled' in gameInfo && gameInfo.cloud_save_enabled) {
             setAutoSyncSaves(autoSyncSaves)
             return
           }
@@ -208,7 +200,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
   }, [status, epic.library, gog.library, gameInfo, isSettingsModalOpen])
 
   function handleUpdate() {
-    updateGame({ appName, runner, gameInfo })
+    if (gameInfo.runner !== 'sideload')
+      updateGame({ appName, runner, gameInfo })
   }
 
   function handleModal() {
@@ -223,20 +216,30 @@ export default React.memo(function GamePage(): JSX.Element | null {
       runner,
       title,
       art_square,
-      install: {
-        install_path,
-        install_size,
-        version,
-        platform: installPlatform
-      },
+      install: { platform: installPlatform },
       is_installed,
-      developer,
-      cloud_save_enabled,
       canRunOffline,
       folder_name
-    }: GameInfo = gameInfo
+    } = gameInfo
 
-    hasRequirements = (extraInfo?.reqs?.length || 0) > 0
+    // TODO: Do this in a *somewhat* prettier way
+    let install_path: string | undefined
+    let install_size: string | undefined
+    let version: string | undefined
+    let extra: ExtraInfo | undefined
+    let developer: string | undefined
+    let cloud_save_enabled = false
+
+    if (gameInfo.runner !== 'sideload') {
+      install_path = gameInfo.install.install_path
+      install_size = gameInfo.install.install_size
+      version = gameInfo.install.version
+      extra = gameInfo.extra
+      developer = gameInfo.developer
+      cloud_save_enabled = gameInfo.cloud_save_enabled
+    }
+
+    hasRequirements = extra?.reqs ? extra.reqs.length > 0 : false
     hasUpdate = is_installed && gameUpdates?.includes(appName)
     const appLocation = gameInfo.browserUrl
       ? false
@@ -279,7 +282,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
     return (
       <div className="gameConfigContainer">
-        {showModal.show && (
+        {gameInfo.runner !== 'sideload' && showModal.show && (
           <InstallModal
             appName={showModal.game}
             runner={runner}
@@ -327,7 +330,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
                     appName={appName}
                     isInstalled={is_installed}
                     title={title}
-                    storeUrl={extraInfo?.storeUrl || gameInfo.store_url}
+                    storeUrl={
+                      extraInfo?.storeUrl ||
+                      ('store_url' in gameInfo ? gameInfo.store_url : '')
+                    }
                     runner={gameInfo.runner}
                     handleUpdate={handleUpdate}
                     disableUpdate={isInstalling || isUpdating}
@@ -570,7 +576,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                   <div>{t('game.requirements', 'Requirements')}</div>
                 </DialogHeader>
                 <DialogContent>
-                  <GameRequirements extraInfo={extraInfo!} />
+                  <GameRequirements reqs={extraInfo?.reqs} />
                 </DialogContent>
               </Dialog>
             )}
@@ -743,6 +749,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
     if (!folder) {
       return
     }
+
+    if (gameInfo.runner === 'sideload') return
 
     return install({
       gameInfo,

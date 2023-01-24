@@ -2,11 +2,12 @@ import './index.scss'
 import short from 'short-uuid'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import {
-  GameInfo,
   InstallPlatform,
-  Web3Features,
-  WineInstallation
+  SideloadGame,
+  WineInstallation,
+  Web3Features
 } from 'common/types'
 import {
   CachedImage,
@@ -62,7 +63,7 @@ export default function SideloadDialog({
   const [searching, setSearching] = useState(false)
   const [app_name, setApp_name] = useState(appName ?? '')
   const [runningSetup, setRunningSetup] = useState(false)
-  const [gameInfo, setGameInfo] = useState<Partial<GameInfo>>({})
+  const [gameInfo, setGameInfo] = useState<Partial<SideloadGame>>({})
   const [web3, setWeb3] = useState<Web3Features>({ supported: false })
   const editMode = Boolean(appName)
 
@@ -78,7 +79,7 @@ export default function SideloadDialog({
   useEffect(() => {
     if (appName) {
       getGameInfo(appName, 'sideload').then((info) => {
-        if (!info) {
+        if (!info || info.runner !== 'sideload') {
           return
         }
         setGameInfo(info)
