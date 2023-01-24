@@ -98,7 +98,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [winePrefix, setWinePrefix] = useState('')
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [showRequirements, setShowRequirements] = useState(false)
-  const [gameAvailable, setGameAvailable] = useState(false)
+  const [gameAvailable, setGameAvailable] = useState(true)
 
   const isWin = platform === 'win32'
   const isLinux = platform === 'linux'

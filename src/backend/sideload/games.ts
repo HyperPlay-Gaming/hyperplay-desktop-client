@@ -112,6 +112,11 @@ export async function removeAppShortcuts(appName: string): Promise<void> {
 
 export function isAppAvailable(appName: string): boolean {
   const { install } = getAppInfo(appName)
+
+  if (install && install.platform === 'Browser') {
+    return true
+  }
+
   if (install && install.executable) {
     return existsSync(install.executable)
   }
@@ -133,6 +138,7 @@ export async function launchApp(appName: string): Promise<boolean> {
       browserGame.loadURL(browserUrl)
       browserGame.focus()
       browserGame.setTitle(title)
+      browserGame.webContents.openDevTools()
       browserGame.on('close', () => res(true))
     })
   }
@@ -304,6 +310,10 @@ export function isNativeApp(appName: string): boolean {
     install: { platform }
   } = getAppInfo(appName)
   if (platform) {
+    if (platform === 'Browser') {
+      return true
+    }
+
     if (isWindows) {
       return true
     }
