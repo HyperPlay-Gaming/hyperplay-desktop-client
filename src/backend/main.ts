@@ -283,9 +283,7 @@ async function createWindow(): Promise<BrowserWindow> {
     // mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
-    mainWindow.loadURL(
-      `file://${path.join(publicDir, '../build/index.html')}`
-    )
+    mainWindow.loadURL(`file://${path.join(publicDir, '../build/index.html')}`)
     if (!isMac) {
       autoUpdater.checkForUpdates()
     }
