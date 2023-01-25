@@ -62,9 +62,11 @@ describe('main_window', () => {
         })
       })
 
-      it('creates the new window with the given geometry', () => {
-        const window = createMainWindow()
+      it('creates the new window with the given geometry', async () => {
+        const window = await createMainWindow()
         const options = window['options']
+
+        console.log(options)
 
         expect(options.height).toBe(600)
         expect(options.width).toBe(800)
