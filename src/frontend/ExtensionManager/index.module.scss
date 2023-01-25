@@ -1,0 +1,23 @@
+.mmContainer {
+  position: absolute;
+  left: 250px;
+  top: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  z-index: 100000;
+}
+
+.mmPopup {
+  width: 360px;
+  height: 620px;
+  position: relative;
+  display: flex;
+}
+
+.mmNotification {
+  width: 360px;
+  height: 620px;
+  position: relative;
+  display: flex;
+}

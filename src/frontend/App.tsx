@@ -17,6 +17,7 @@ import { ControllerHints, OfflineMessage } from './components/UI'
 import DownloadManager from './screens/DownloadManager'
 import DialogHandler from './components/UI/DialogHandler'
 import ExtensionHandler from './ExtensionHandler'
+import ExtensionManager from './ExtensionManager'
 import onboardingStore from './store/OnboardingStore'
 import { observer } from 'mobx-react-lite'
 
@@ -30,6 +31,7 @@ function App() {
         <Sidebar />
         <main className="content">
           <ExtensionHandler />
+          <ExtensionManager />
           <DialogHandler />
           <Routes>
             <Route path="/" element={<Navigate replace to="/library" />} />

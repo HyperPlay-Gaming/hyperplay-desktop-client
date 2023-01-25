@@ -1,3 +1,3 @@
 import { ipcRenderer } from 'electron'
 
-export const getPopupUrl = async () => ipcRenderer.invoke('getPopupUrl')
+export const getExtensionId = async () => ipcRenderer.invoke('getExtensionId')
