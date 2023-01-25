@@ -122,7 +122,7 @@ export default function GamesSettings({ useDetails = true }: Props) {
 
         {!nativeGame && <ShowFPS />}
 
-        {!isWin && !nativeGame && (
+        {isLinux && !nativeGame && (
           <>
             <PreferSystemLibs />
 
