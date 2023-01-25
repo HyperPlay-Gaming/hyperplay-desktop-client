@@ -278,13 +278,13 @@ async function createWindow(): Promise<BrowserWindow> {
     //   })
     // }
 
-    mainWindow.loadURL('http://localhost:5173?App')
+    mainWindow.loadURL('http://localhost:5173')
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(
-      `file://${path.join(publicDir, '../build/index.html?App')}`
+      `file://${path.join(publicDir, '../build/index.html')}`
     )
     if (!isMac) {
       autoUpdater.checkForUpdates()
@@ -947,7 +947,6 @@ ipcMain.on('logInfo', (e, info) =>
 
 let powerDisplayId: number | null
 
-// get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {
