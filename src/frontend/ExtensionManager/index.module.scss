@@ -9,9 +9,10 @@
 }
 
 @mixin mmWindow {
-  font-family: var(--secondary-font-family);
-  border-radius: var(--space-3xs);
-  color: var(--text-default);
+  width: 360px;
+  height: 620px;
+  position: relative;
+  display: flex;
 }
 
 .mmPopup {
