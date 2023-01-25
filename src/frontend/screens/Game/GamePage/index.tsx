@@ -55,6 +55,7 @@ import {
 } from 'frontend/components/UI/Dialog'
 
 import StoreLogos from 'frontend/components/UI/StoreLogos'
+import { isWindows } from 'backend/constants'
 
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -455,7 +456,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       <div className="col2-item italic">
                         {t(canRunOffline ? 'box.no' : 'box.yes')}
                       </div>
-                      {isLinux && !isNative && (
+                      {!isWindows && !isNative && (
                         <>
                           <div className="hp-subtitle">Wine</div>
                           <div className="col2-item italic">
