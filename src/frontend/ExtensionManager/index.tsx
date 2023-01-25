@@ -1,6 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import ExtensionManagerStyles from './index.module.scss'
 
+//Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
+//https://www.electronjs.org/docs/latest/api/webview-tag
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace React {
+    interface WebViewHTMLAttributes<T> extends HTMLAttributes<T> {
+      nodeintegrationinsubframes?: string
+    }
+  }
+}
+
 const ExtensionHandler = function () {
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
   const [showMmPopupPage, setShowMmPopupPage] = useState(false)

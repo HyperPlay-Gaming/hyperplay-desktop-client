@@ -108,7 +108,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
 }
 
 interface HyperPlayAsyncIPCFunctions {
-  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<void>
+  showPopup: (hideIfShown?: boolean) => Promise<void>
   chromeWindowsCreate: (
     options: chrome.windows.CreateData
   ) => Promise<chrome.windows.Window>

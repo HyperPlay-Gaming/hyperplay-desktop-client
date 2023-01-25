@@ -49,7 +49,6 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
-import { OverlayApp } from './overlay/overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -709,27 +708,18 @@ async function callRunner(
 
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
-      const dataStr = data.toString()
-      const pidPrefix = 'pid for popen process:'
-      const pidPrefixStartIndex = dataStr.search(pidPrefix)
-      if (pidPrefixStartIndex >= 0) {
-        const PID = dataStr.substring(pidPrefixStartIndex + pidPrefix.length).trim()
-        console.log('PID: ', PID.trim())
-        //inject here
-        OverlayApp.inject(PID.trim())
-      }
       if (options?.logFile) {
-        appendFileSync(options.logFile, dataStr)
+        appendFileSync(options.logFile, data)
       }
       if (options?.verboseLogFile) {
         appendFileSync(options.verboseLogFile, data)
       }
 
       if (options?.onOutput) {
-        options.onOutput(dataStr, child)
+        options.onOutput(data, child)
       }
 
-      stdout.push(dataStr.trim())
+      stdout.push(data.trim())
     })
 
     child.stderr.setEncoding('utf-8')
