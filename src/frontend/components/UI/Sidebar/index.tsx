@@ -13,12 +13,9 @@ import SidebarLinks from './components/SidebarLinks'
 import './index.css'
 import Wallet from './components/wallet'
 import { DMQueueElement } from 'common/types'
-<<<<<<< feat/mm_fullscreen
 import { NavLink } from 'react-router-dom'
 import { ReactComponent as MetaMaskRoundedOutline } from 'frontend/assets/metamask-rounded-outline.svg'
-=======
 import { observer } from 'mobx-react-lite'
->>>>>>> main
 
 const Sidebar = observer(() => {
   const { t } = useTranslation()

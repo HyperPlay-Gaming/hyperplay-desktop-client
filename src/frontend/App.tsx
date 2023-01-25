@@ -17,13 +17,10 @@ import { ControllerHints, OfflineMessage } from './components/UI'
 import DownloadManager from './screens/DownloadManager'
 import DialogHandler from './components/UI/DialogHandler'
 import ExtensionHandler from './ExtensionHandler'
-<<<<<<< feat/mm_fullscreen
 import MetaMaskHome from './screens/MetaMaskHome'
 import MetaMaskPortfolio from './screens/MetaMaskPortfolio'
-=======
 import onboardingStore from './store/OnboardingStore'
 import { observer } from 'mobx-react-lite'
->>>>>>> main
 
 function App() {
   const { sidebarCollapsed } = useContext(ContextProvider)
