@@ -8,16 +8,16 @@
   z-index: 100000;
 }
 
+@mixin mmWindow {
+  font-family: var(--secondary-font-family);
+  border-radius: var(--space-3xs);
+  color: var(--text-default);
+}
+
 .mmPopup {
-  width: 360px;
-  height: 620px;
-  position: relative;
-  display: flex;
+  @include mmWindow();
 }
 
 .mmNotification {
-  width: 360px;
-  height: 620px;
-  position: relative;
-  display: flex;
+  @include mmWindow();
 }
