@@ -7,19 +7,20 @@ import {
   faSquareCaretRight
 } from '@fortawesome/free-solid-svg-icons'
 import ContextProvider from 'frontend/state/ContextProvider'
+import onboardingStore from 'frontend/store/OnboardingStore'
 import CurrentDownload from './components/CurrentDownload'
 import SidebarLinks from './components/SidebarLinks'
 import './index.css'
 import Wallet from './components/wallet'
 import { DMQueueElement } from 'common/types'
+<<<<<<< feat/mm_fullscreen
 import { NavLink } from 'react-router-dom'
 import { ReactComponent as MetaMaskRoundedOutline } from 'frontend/assets/metamask-rounded-outline.svg'
+=======
+import { observer } from 'mobx-react-lite'
+>>>>>>> main
 
-interface SidebarProps {
-  openOnboarding: () => void
-}
-
-const Sidebar: React.FC<SidebarProps> = function (props) {
+const Sidebar = observer(() => {
   const { t } = useTranslation()
   const {
     sidebarCollapsed,
@@ -109,7 +110,7 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
         </>
       ) : null}
 
-      <Wallet onClick={props.openOnboarding} />
+      <Wallet onClick={() => onboardingStore.openOnboarding()} />
       <button
         className="collapseIcon"
         onClick={() => setSideBarCollapsed(!sidebarCollapsed)}
@@ -125,6 +126,6 @@ const Sidebar: React.FC<SidebarProps> = function (props) {
       </button>
     </aside>
   )
-}
+})
 
 export default React.memo(Sidebar)
