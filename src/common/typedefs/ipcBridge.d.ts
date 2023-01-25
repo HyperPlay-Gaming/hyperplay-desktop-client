@@ -50,9 +50,6 @@ interface HyperPlaySyncIPCFunctions {
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
-  inject: (arg: string) => void
-  startIntercept: () => void
-  stopIntercept: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
