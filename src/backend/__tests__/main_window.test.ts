@@ -84,8 +84,8 @@ describe('main_window', () => {
         const window = await createMainWindow()
         const options = window['options']
 
-        expect(options.height).toBe(690)
-        expect(options.width).toBe(1200)
+        expect(options.height).toBe(1024)
+        expect(options.width).toBe(1536)
         expect(options.x).toBe(0)
         expect(options.y).toBe(0)
       })
@@ -102,8 +102,8 @@ describe('main_window', () => {
         const window = await createMainWindow()
         const options = window['options']
 
-        expect(options.height).toBe(690)
-        expect(options.width).toBe(1024 * 0.8) // 80% of the workAreaSize.width
+        expect(options.height).toBe(614.4000000000001) // 80% of the workAreaSize.height
+        expect(options.width).toBe(1200) // 80% of the workAreaSize.width
         expect(options.x).toBe(0)
         expect(options.y).toBe(0)
       })
