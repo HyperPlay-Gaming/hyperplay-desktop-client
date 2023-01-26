@@ -258,6 +258,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   }) => Promise<boolean>
   toggleDXVK: (args: ToolArgs) => Promise<boolean>
   pathExists: (path: string) => Promise<boolean>
+  getExtensionId: () => Promise<string>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file
