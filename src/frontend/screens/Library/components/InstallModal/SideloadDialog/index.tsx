@@ -261,6 +261,14 @@ export default function SideloadDialog({
     return <BrowserIcon width={14} height={14} />
   }
 
+  function handleGameUrl(url: string) {
+    if (!url.startsWith('https://')) {
+      return setGameUrl(`https://${url}`)
+    }
+
+    setGameUrl(url)
+  }
+
   const showSideloadExe = appPlatform !== 'Browser'
 
   const shouldShowRunExe =
@@ -334,7 +342,7 @@ export default function SideloadDialog({
                   'sideload.placeholder.url',
                   'Paste the Game URL here'
                 )}
-                onChange={(e) => setGameUrl(e.target.value)}
+                onChange={(e) => handleGameUrl(e.target.value)}
                 htmlId="sideload-game-url"
                 value={gameInfo.browserUrl ?? gameUrl}
               />
@@ -354,7 +362,7 @@ export default function SideloadDialog({
         </div>
       </DialogContent>
       <DialogFooter>
-        {shouldShowRunExe && (
+        {shouldShowRunExe && platformToInstall !== 'Browser' && (
           <button
             onClick={async () => handleRunExe()}
             className={`button is-secondary`}
