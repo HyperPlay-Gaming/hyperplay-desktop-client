@@ -226,6 +226,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
     //     })
     //   })
     // }
+
     mainWindow.loadURL('http://localhost:5173')
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
@@ -1427,7 +1428,7 @@ ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
 ipcMain.handle(
   'changeInstallPath',
   async (event, { appName, path, runner }) => {
-    let instance = null
+    let instance: LegendaryLibrary | GOGLibrary
     switch (runner) {
       case 'legendary':
         instance = LegendaryLibrary.get()

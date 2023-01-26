@@ -117,6 +117,7 @@ interface HyperPlayAsyncIPCFunctions {
     options: chrome.tabs.CreateProperties
   ) => Promise<chrome.tabs.Tab>
   getTabUrl: () => Promise<string>
+  getExtensionId: () => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

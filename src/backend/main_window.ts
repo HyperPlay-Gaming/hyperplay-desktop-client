@@ -37,16 +37,28 @@ export const createMainWindow = async () => {
   }
 
   if (configStore.has('window-props')) {
-    windowProps = configStore.get('window-props', windowProps)
+    const tmpWindowProps = configStore.get(
+      'window-props',
+      {}
+    ) as Electron.Rectangle
+    if (
+      tmpWindowProps &&
+      tmpWindowProps.width &&
+      tmpWindowProps.height &&
+      tmpWindowProps.y !== undefined &&
+      tmpWindowProps.x !== undefined
+    ) {
+      windowProps = tmpWindowProps
+    }
   } else {
     // make sure initial screen size is not bigger than the available screen space
     const screenInfo = screen.getPrimaryDisplay()
 
-    if (screenInfo.workAreaSize.height < windowProps.height) {
+    if (screenInfo.workAreaSize.height > windowProps.height) {
       windowProps.height = screenInfo.workAreaSize.height * 0.8
     }
 
-    if (screenInfo.workAreaSize.width < windowProps.width) {
+    if (screenInfo.workAreaSize.width > windowProps.width) {
       windowProps.width = screenInfo.workAreaSize.width * 0.8
     }
   }
@@ -56,8 +68,8 @@ export const createMainWindow = async () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     ...windowProps,
-    minHeight: 740,
-    minWidth: 1040,
+    minHeight: 345,
+    minWidth: 600,
     show: false,
 
     webPreferences: {
