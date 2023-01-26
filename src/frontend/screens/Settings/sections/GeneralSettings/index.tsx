@@ -1,11 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import LanguageSelector from 'frontend/components/UI/LanguageSelector'
-import { ThemeSelector } from 'frontend/components/UI/ThemeSelector'
 import {
   AutoUpdateGames,
   CheckUpdatesOnStartup,
-  CustomWineProton,
   DefaultInstallPath,
   DefaultSteamPath,
   DisableController,
@@ -30,13 +28,9 @@ export default function GeneralSettings() {
 
       <LanguageSelector />
 
-      <ThemeSelector />
-
       <DefaultInstallPath />
 
       <WinePrefixesBasePath />
-
-      <CustomWineProton />
 
       <DefaultSteamPath />
 
