@@ -37,10 +37,9 @@ export const createMainWindow = async () => {
   }
 
   if (configStore.has('window-props')) {
-    const tmpWindowProps = configStore.get(
-      'window-props',
-      {}
-    ) as Electron.Rectangle
+    const tmpWindowProps = configStore.get('window-props', {
+      ...windowProps
+    }) as Electron.Rectangle
     if (
       tmpWindowProps &&
       tmpWindowProps.width &&
