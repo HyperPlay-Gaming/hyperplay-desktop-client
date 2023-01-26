@@ -372,7 +372,7 @@ const GameCard = ({
       // settings
       label: t('submenu.settings'),
       onclick: () => setIsSettingsModalOpen(true, 'settings', gameInfo),
-      show: isInstalled && !isUninstalling
+      show: isInstalled && !isUninstalling && !isBrowserGame
     },
     {
       // uninstall
