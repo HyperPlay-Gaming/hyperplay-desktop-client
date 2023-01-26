@@ -257,12 +257,6 @@ export default function GamesSubmenu({
                     : t('submenu.addToSteam', 'Add to Steam')}
                 </button>
               )}
-              <button
-                onClick={async () => setShowUninstallModal(true)}
-                className="link button is-text is-link"
-              >
-                {t('button.uninstall', 'Uninstall')}
-              </button>{' '}
               {!isSideloaded && (
                 <button
                   onClick={async () => handleUpdate()}
