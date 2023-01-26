@@ -30,7 +30,8 @@
       "chrome",
       "vite/client"
     ],
-    "typeRoots": ["./node-modules/@types", "src/common/typedefs"]
+    "typeRoots": ["./node-modules/@types", "src/common/typedefs"],
+    "strictPropertyInitialization": true
   },
   "include": ["src"],
   "exclude": ["vite.config.ts", "**/__tests__/**", "**/__mocks__/**"]
