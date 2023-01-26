@@ -344,7 +344,7 @@ export default function SideloadDialog({
                 )}
                 onChange={(e) => handleGameUrl(e.target.value)}
                 htmlId="sideload-game-url"
-                value={gameInfo.browserUrl ?? gameUrl}
+                value={gameUrl}
               />
             )}
             <ToggleSwitch
