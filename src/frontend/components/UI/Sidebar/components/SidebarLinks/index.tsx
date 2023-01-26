@@ -97,7 +97,9 @@ export default function SidebarLinks() {
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
       <NavLink
         className={({ isActive }) =>
-          classNames('Sidebar__item', { active: isActive })
+          classNames('Sidebar__item', {
+            active: isActive || location.pathname.includes('gamepage')
+          })
         }
         to={'/'}
         onClick={async () => handleRefresh()}
@@ -134,7 +136,9 @@ export default function SidebarLinks() {
       <div className="SidebarItemWithSubmenu">
         <NavLink
           className={({ isActive }) =>
-            classNames('Sidebar__item', { active: isActive })
+            classNames('Sidebar__item', {
+              active: isActive || location.pathname.includes('store')
+            })
           }
           to="/epicstore"
         >
@@ -186,7 +190,9 @@ export default function SidebarLinks() {
         <NavLink
           data-testid="settings"
           className={({ isActive }) =>
-            classNames('Sidebar__item', { active: isActive })
+            classNames('Sidebar__item', {
+              active: isActive || location.pathname.includes('settings')
+            })
           }
           to={{ pathname: settingsPath }}
           state={{
