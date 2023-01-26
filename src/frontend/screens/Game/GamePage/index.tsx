@@ -259,9 +259,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
     const isMacNative = isMac.includes(installPlatform ?? '')
     const isLinuxNative = installPlatform === 'linux'
     const isNative = isWin || isMacNative || isLinuxNative
+    const isBrowserGame = installPlatform === 'Browser'
 
-    const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
+    const showCloudSaveInfo =
+      cloud_save_enabled && !isLinuxNative && !isBrowserGame
     const supportsWeb3 = gameInfo.web3?.supported
+
     /*
     Other Keys:
     t('box.stopInstall.title')
@@ -312,7 +315,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
             <div className="gameInfo">
               <div className="titleWrapper">
                 <h2 className="title">{title}</h2>
-                {is_installed && installPlatform !== 'Browser' && (
+                {is_installed && !isBrowserGame && (
                   <a
                     role={'button'}
                     onClick={() =>
@@ -458,7 +461,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       <div className="col2-item italic">
                         {t(canRunOffline ? 'box.no' : 'box.yes')}
                       </div>
-                      {!isWin && !isNative && (
+                      {!isWin && !isNative && !isBrowserGame && (
                         <>
                           <div className="hp-subtitle">Wine</div>
                           <div className="col2-item italic">
