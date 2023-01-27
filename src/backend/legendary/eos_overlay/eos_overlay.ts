@@ -8,7 +8,7 @@ import { existsSync, readFileSync } from 'graceful-fs'
 import { t } from 'i18next'
 import { join } from 'path'
 
-import { toolsPath, isLinux, legendaryConfigPath } from '../../constants'
+import { toolsPath, isLinux, legendaryConfigPath, icon } from '../../constants'
 import { logError, LogPrefix, logWarning } from '../../logger/logger'
 import { runLegendaryCommand } from '../library'
 import { LegendaryGame } from '../games'
@@ -157,7 +157,8 @@ async function remove(): Promise<boolean> {
       'setting.eosOverlay.removeConfirm',
       'Are you sure you want to uninstall the EOS Overlay?'
     ),
-    buttons: [t('box.yes'), t('box.no')]
+    buttons: [t('box.yes'), t('box.no')],
+    icon: icon
   })
   if (response === 1) {
     return false
@@ -192,7 +193,8 @@ async function enable(
         'setting.eosOverlay.notInstalledMsg',
         'The EOS Overlay is not installed. Do you want to install it now?'
       ),
-      buttons: [t('box.yes'), t('box.no')]
+      buttons: [t('box.yes'), t('box.no')],
+      icon: icon
     })
     // Installing the overlay requires some frontend work, so we can't just do it in the backend alone
     return { wasEnabled: false, installNow: response === 0 }

@@ -4,6 +4,7 @@ import i18next from 'i18next'
 import { getInfo } from './utils'
 import { Runner } from 'common/types'
 import { getMainWindow, sendFrontendMessage } from './main_window'
+import { icon } from './constants'
 
 export async function handleProtocol(args: string[]) {
   const mainWindow = getMainWindow()
@@ -62,7 +63,8 @@ export async function handleProtocol(args: string[]) {
           'box.protocol.install.not_installed',
           'Is Not Installed, do you wish to Install it?'
         )}`,
-        title: title
+        title: title,
+        icon: icon
       })
       if (response === 0) {
         const { filePaths, canceled } = await dialog.showOpenDialog({

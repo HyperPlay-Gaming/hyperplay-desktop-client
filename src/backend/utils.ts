@@ -690,7 +690,8 @@ function detectVCRedist(mainWindow: BrowserWindow) {
           'box.vcruntime.notfound.message',
           'The Microsoft Visual C++ Runtimes are not installed, which are required by some games'
         ),
-        buttons: [t('box.downloadNow', 'Download now'), t('box.ok', 'Ok')]
+        buttons: [t('box.downloadNow', 'Download now'), t('box.ok', 'Ok')],
+        icon: icon
       })
 
       if (response === 0) {
@@ -700,7 +701,8 @@ function detectVCRedist(mainWindow: BrowserWindow) {
           message: t(
             'box.vcruntime.install.message',
             'The download links for the Visual C++ Runtimes have been opened. Please install both the x86 and x64 versions.'
-          )
+          ),
+          icon: icon
         })
       }
     } else {
@@ -881,7 +883,8 @@ async function ContinueWithFoundWine(
       selectedWine: selectedWine,
       foundWine: foundWine
     }),
-    buttons: [i18next.t('box.yes'), i18next.t('box.no')]
+    buttons: [i18next.t('box.yes'), i18next.t('box.no')],
+    icon: icon
   })
 
   return { response }
