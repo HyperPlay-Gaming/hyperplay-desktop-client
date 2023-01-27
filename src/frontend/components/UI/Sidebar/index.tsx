@@ -4,21 +4,23 @@ import onboardingStore from 'frontend/store/OnboardingStore'
 import SidebarLinks from './components/SidebarLinks'
 import './index.scss'
 import Wallet from './components/wallet'
-import { DMQueueElement } from 'common/types'
 import { NavLink } from 'react-router-dom'
 import { ReactComponent as MetaMaskRoundedOutline } from 'frontend/assets/metamask-rounded-outline.svg'
 import { observer } from 'mobx-react-lite'
+import ContextProvider from 'frontend/state/ContextProvider'
 
-let sidebarSize = localStorage.getItem('sidebar-width') || 240
+let sidebarSize = 240
+const localStorageSidebarWidth = localStorage.getItem('sidebar-width')
+if (localStorageSidebarWidth !== null) {
+  sidebarSize = parseInt(localStorageSidebarWidth)
+}
 const minWidth = 60
 const maxWidth = 400
 const collapsedWidth = 120
 
 const Sidebar = observer(() => {
   const sidebarEl = useRef<HTMLDivElement | null>(null)
-  const {
-    showMetaMaskBrowserSidebarLinks
-  } = useContext(ContextProvider)
+  const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
