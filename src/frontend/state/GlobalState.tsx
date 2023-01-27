@@ -88,6 +88,7 @@ interface StateProps {
   connectivity: { status: ConnectivityStatus; retryIn: number }
   dialogModalOptions: DialogModalOptions
   sideloadedLibrary: GameInfo[]
+  showMetaMaskBrowserSidebarLinks: boolean
 }
 
 export class GlobalState extends PureComponent<Props> {
@@ -164,7 +165,8 @@ export class GlobalState extends PureComponent<Props> {
     activeController: '',
     connectivity: { status: 'offline', retryIn: 0 },
     sideloadedLibrary: sideloadLibrary.get('games', []) as GameInfo[],
-    dialogModalOptions: { showDialog: false }
+    dialogModalOptions: { showDialog: false },
+    showMetaMaskBrowserSidebarLinks: false
   }
 
   setLanguage = (newLanguage: string) => {
@@ -220,6 +222,10 @@ export class GlobalState extends PureComponent<Props> {
 
   setSideBarCollapsed = (value: boolean) => {
     this.setState({ sidebarCollapsed: value })
+  }
+
+  setShowMetaMaskBrowserSidebarLinks = (value: boolean) => {
+    this.setState({ showMetaMaskBrowserSidebarLinks: value })
   }
 
   hideGame = (appNameToHide: string, appTitle: string) => {
@@ -743,7 +749,9 @@ export class GlobalState extends PureComponent<Props> {
           setPrimaryFontFamily: this.setPrimaryFontFamily,
           setSecondaryFontFamily: this.setSecondaryFontFamily,
           showDialogModal: this.handleShowDialogModal,
-          showResetDialog: this.showResetDialog
+          showResetDialog: this.showResetDialog,
+          setShowMetaMaskBrowserSidebarLinks:
+            this.setShowMetaMaskBrowserSidebarLinks
         }}
       >
         {this.props.children}
