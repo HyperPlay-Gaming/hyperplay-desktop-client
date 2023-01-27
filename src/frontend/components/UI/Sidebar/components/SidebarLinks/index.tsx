@@ -98,21 +98,23 @@ export default function SidebarLinks() {
       <NavLink
         className={({ isActive }) =>
           classNames('Sidebar__item', {
-            active: isActive || location.pathname.includes('gamepage')
+            active:
+              isActive ||
+              location.pathname.includes('gamepage') ||
+              location.pathname.includes('library')
           })
         }
+        end
         to={'/'}
         onClick={async () => handleRefresh()}
       >
-        <>
-          <div className="Sidebar__itemIcon">
-            <FontAwesomeIcon
-              icon={faGamepad}
-              title={t('library.label', 'Library')}
-            />
-          </div>
-          <span>{t('library.label', 'Library')}</span>
-        </>
+        <div className="Sidebar__itemIcon">
+          <FontAwesomeIcon
+            icon={faGamepad}
+            title={t('library.label', 'Library')}
+          />
+        </div>
+        <span>{t('library.label', 'Library')}</span>
       </NavLink>
       <h6 className="Sidebar__categoryTitle">ACCOUNTS</h6>
       {!loggedIn && (
