@@ -19,7 +19,8 @@ import {
   powerSaveBlocker,
   protocol,
   screen,
-  clipboard
+  clipboard,
+  globalShortcut
 } from 'electron'
 import 'backend/updater'
 import { autoUpdater } from 'electron-updater'
@@ -385,6 +386,12 @@ if (!gotTheLock) {
     })
 
     const mainWindow = await initializeWindow()
+
+    const devToolsAccelerator =
+      process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I'
+    globalShortcut.register(devToolsAccelerator, () => {
+      mainWindow.webContents.openDevTools()
+    })
 
     protocol.registerStringProtocol('hyperplay', (request, callback) => {
       handleProtocol([request.url])
