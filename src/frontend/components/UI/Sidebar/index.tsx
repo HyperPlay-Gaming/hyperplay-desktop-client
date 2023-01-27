@@ -1,9 +1,12 @@
 import classNames from 'classnames'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import onboardingStore from 'frontend/store/OnboardingStore'
 import SidebarLinks from './components/SidebarLinks'
 import './index.scss'
 import Wallet from './components/wallet'
+import { DMQueueElement } from 'common/types'
+import { NavLink } from 'react-router-dom'
+import { ReactComponent as MetaMaskRoundedOutline } from 'frontend/assets/metamask-rounded-outline.svg'
 import { observer } from 'mobx-react-lite'
 
 let sidebarSize = localStorage.getItem('sidebar-width') || 240
@@ -13,7 +16,9 @@ const collapsedWidth = 120
 
 const Sidebar = observer(() => {
   const sidebarEl = useRef<HTMLDivElement | null>(null)
-
+  const {
+    showMetaMaskBrowserSidebarLinks
+  } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
@@ -99,12 +104,47 @@ const Sidebar = observer(() => {
       <SidebarLinks />
       <div className="currentDownloads"></div>
 
-      <button
-        className="Sidebar__item"
-        onClick={async () => window.api.showPopup()}
-      >
-        <span>Open MetaMask {badgeText}</span>
-      </button>
+      {showMetaMaskBrowserSidebarLinks ? (
+        <>
+          <button
+            className="Sidebar__item"
+            onClick={async () => window.api.showPopup()}
+          >
+            <>
+              <div className="Sidebar__itemIcon">
+                <MetaMaskRoundedOutline />
+              </div>
+              <span>MetaMask Popup {badgeText}</span>
+            </>
+          </button>
+          <NavLink
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={'metamaskPortfolio'}
+          >
+            <>
+              <div className="Sidebar__itemIcon">
+                <MetaMaskRoundedOutline />
+              </div>
+              <span>{'MetaMask Portfolio'}</span>
+            </>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={'metamaskHome'}
+          >
+            <>
+              <div className="Sidebar__itemIcon">
+                <MetaMaskRoundedOutline />
+              </div>
+              <span>{'MetaMask Home'}</span>
+            </>
+          </NavLink>
+        </>
+      ) : null}
 
       <Wallet onClick={() => onboardingStore.openOnboarding()} />
       <div className="resizer" onMouseDown={handleDragStart} />

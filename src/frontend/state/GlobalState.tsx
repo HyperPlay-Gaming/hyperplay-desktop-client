@@ -97,6 +97,7 @@ interface StateProps {
     type: 'settings' | 'log'
     gameInfo?: GameInfo | null
   }
+  showMetaMaskBrowserSidebarLinks: boolean
 }
 
 class GlobalState extends PureComponent<Props> {
@@ -163,7 +164,8 @@ class GlobalState extends PureComponent<Props> {
     sideloadedLibrary: sideloadLibrary.get('games', []),
     dialogModalOptions: { showDialog: false },
     externalLinkDialogOptions: { showDialog: false },
-    settingsModalOpen: { value: false, type: 'settings', gameInfo: undefined }
+    settingsModalOpen: { value: false, type: 'settings', gameInfo: undefined },
+    showMetaMaskBrowserSidebarLinks: false
   }
 
   setLanguage = (newLanguage: string) => {
@@ -223,6 +225,10 @@ class GlobalState extends PureComponent<Props> {
 
   setSideBarCollapsed = (value: boolean) => {
     this.setState({ sidebarCollapsed: value })
+  }
+
+  setShowMetaMaskBrowserSidebarLinks = (value: boolean) => {
+    this.setState({ showMetaMaskBrowserSidebarLinks: value })
   }
 
   hideGame = (appNameToHide: string, appTitle: string) => {
@@ -756,7 +762,9 @@ class GlobalState extends PureComponent<Props> {
           showResetDialog: this.showResetDialog,
           handleExternalLinkDialog: this.handleExternalLinkDialog,
           isSettingsModalOpen: this.state.settingsModalOpen,
-          setIsSettingsModalOpen: this.handleSettingsModalOpen
+          setIsSettingsModalOpen: this.handleSettingsModalOpen,
+          setShowMetaMaskBrowserSidebarLinks:
+            this.setShowMetaMaskBrowserSidebarLinks
         }}
       >
         {this.props.children}

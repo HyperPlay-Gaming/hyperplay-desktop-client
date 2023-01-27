@@ -5,7 +5,7 @@ import {
   ConnectionRequestRejectedType
 } from 'backend/hyperplay-proxy-server/commonProxyTypes'
 import { PROVIDERS } from 'common/types/proxy-types'
-import React, { Reducer, useEffect, useReducer } from 'react'
+import React, { Reducer, useEffect, useReducer, useContext } from 'react'
 import './index.css'
 import Scan from './scan'
 import { ONBOARDING_CONTENT, OnboardingModalConfig } from './types'
@@ -16,6 +16,7 @@ import Success from './success'
 import Rejected from './rejected'
 import Download from './download'
 import { BackArrow, CloseX } from 'frontend/assets/hyperplay'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 interface OnboardingProps {
   disableOnboarding: () => void
@@ -37,7 +38,10 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     Reducer<ContentParams, Partial<ContentParams>>
   >((state, newState) => ({ ...state, ...newState }), contentParamsInit)
 
+  const { setShowMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+
   async function handleProviderClicked(provider: PROVIDERS) {
+    setShowMetaMaskBrowserSidebarLinks(false)
     const uris: UrisReturn = await window.api.getConnectionUris(provider)
     const qrCodeLink: IMobileRegistryEntryWithQrLink = uris.metamask
     const qrCode = qrCodeLink.qrCodeLink
@@ -54,6 +58,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   }
 
   async function handleMmExtensionProviderClicked() {
+    setShowMetaMaskBrowserSidebarLinks(true)
     await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
     props.disableOnboarding()
   }

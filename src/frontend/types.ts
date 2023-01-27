@@ -92,6 +92,8 @@ export interface ContextType {
     type?: 'settings' | 'log',
     gameInfo?: GameInfo | SideloadGame
   ) => void
+  showMetaMaskBrowserSidebarLinks: boolean
+  setShowMetaMaskBrowserSidebarLinks: (value: boolean) => void
 }
 
 export type DialogModalOptions = {
