@@ -30,6 +30,11 @@ export default React.memo(function NewLogin() {
     'Login with your platform. You can login to more than one platform at the same time.'
   )
 
+  // Track the screen view once
+  useEffect(() => {
+    window.api.trackScreen('Login');
+  }, [])
+
   useEffect(() => {
     setLoading(false)
   }, [epic, gog])

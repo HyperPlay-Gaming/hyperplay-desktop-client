@@ -36,6 +36,9 @@ import {
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
 import { PROVIDERS } from 'common/types/proxy-types'
+import { PossibleMetricPayloads } from 'backend/metrics/types'
+import { apiObject } from '@rudderstack/rudder-sdk-node'
+import { MetricsOptInStatus } from 'backend/metrics/metrics'
 
 /**
  * Some notes here:
@@ -112,6 +115,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   'set-connectivity-online': () => void
   changeTrayColor: () => void
   setSetting: (args: { appName: string; key: string; value: unknown }) => void
+  optInStatusChanged: (optInStatus: MetricsOptInStatus) => void
 }
 
 interface HyperPlayAsyncIPCFunctions {
@@ -275,6 +279,11 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   toggleDXVK: (args: ToolArgs) => Promise<boolean>
   pathExists: (path: string) => Promise<boolean>
   getExtensionId: () => Promise<string>
+  trackEvent: (payload: PossibleMetricPayloads) => Promise<void>
+  trackScreen: (name: string, properties?: apiObject) => Promise<void>
+  changeMetricsOptInStatus: (
+    newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
+  ) => Promise<void>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

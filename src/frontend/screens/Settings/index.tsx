@@ -44,6 +44,12 @@ function Settings() {
   const isLogSettings = type === 'log'
   const isAdvancedSetting = type === 'advanced' && isDefault
 
+  // Track the screen view once each time appName or type changes
+  useEffect(() => {
+    window.api.trackScreen('Settings', { appName, type });
+  }, [appName, type])
+  
+
   // Load App or game's config, only if not loaded already
   useEffect(() => {
     const getSettings = async () => {

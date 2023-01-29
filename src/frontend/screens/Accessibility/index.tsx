@@ -59,6 +59,11 @@ export default React.memo(function Accessibility() {
     setRefreshing(false)
   }
 
+  // Track the screen view once and only once
+  useEffect(() => {
+    window.api.trackScreen('Accessibility');
+  }, [])
+
   useEffect(() => {
     getFonts()
     const primaryFont = getComputedStyle(

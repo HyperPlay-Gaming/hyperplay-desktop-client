@@ -45,6 +45,11 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     })
   }, [plannendElements.length, currentElement?.params.appName])
 
+  // Track the screen view once and only once
+  useEffect(() => {
+    window.api.trackScreen('Download Manager');
+  }, [])
+
   if (refreshing) {
     return <UpdateComponent />
   }

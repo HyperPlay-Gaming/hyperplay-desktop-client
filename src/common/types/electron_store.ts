@@ -19,6 +19,7 @@ import {
 } from 'common/types'
 import { GamesDBData, GogInstallInfo, UserData } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
+import { MetricsOptInStatus } from 'backend/metrics/metrics'
 
 export interface StoreStructure {
   configStore: {
@@ -113,6 +114,9 @@ export interface StoreStructure {
   }
   wikigameinfo: {
     [title: string]: WikiInfo
+  }
+  metricsStore: {
+    'metricsOptInStatus': MetricsOptInStatus
   }
 }
 
