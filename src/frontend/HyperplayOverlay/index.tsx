@@ -13,8 +13,11 @@ declare global {
   }
 }
 
+// declare Element {
+//   setZoomFactor?: (number)=>void
+// }
+
 const HyperplayOverlay = function () {
-  const [time, setTime] = useState(new Date())
   const [extensionId, setExtensionId] = useState('')
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
 
@@ -35,32 +38,34 @@ const HyperplayOverlay = function () {
   }
 
   useEffect(() => {
-    const interval = setInterval(() => setTime(new Date()), 1000)
     getExtensionId()
     const rmAddNotifHandler = window.api.handleShowNotificationInWebview(handleShowNotification)
     const rmRemoveNotifHandler = window.api.handleRemoveNotificationInWebview(handleRemoveNotification)
+    // const rmDomReadyHandler = window.api.handleDomReady(zoomOut)
     return () => {
-      clearInterval(interval)
       rmAddNotifHandler()
       rmRemoveNotifHandler()
+      // rmDomReadyHandler()
     }
   }, [])
 
+  // const zoomOut = function(){
+  //   const popupWv = document.querySelector('#mmPopupWebview')
+  //   popupWv.setZoomFactor(0.75)
+  // }
+  
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={OverlayStyles.overlayContainer}>
-      <div>{time.toLocaleTimeString()}</div>
       <div>Ctrl + Tab to return to the game</div>
-      <div className={OverlayStyles.caption}>
-        <input type="text" />
-      </div>
       <div className={OverlayStyles.mmPopupContainer}>
-        <webview 
-          nodeintegrationinsubframes="true"
-          webpreferences='contextIsolation=true, nodeIntegration=true' 
-          className={OverlayStyles.mmPopup} 
-          src={`chrome-extension://${extensionId}/popup.html`}>
-        </webview>
+      <webview 
+        nodeintegrationinsubframes="true"
+        webpreferences='contextIsolation=true, nodeIntegration=true' 
+        className={OverlayStyles.mmPopup} 
+        src={`chrome-extension://${extensionId}/popup.html`}
+        id='mmPopupWebview'>
+      </webview>
         {showMmNotificationPage ? <webview 
           nodeintegrationinsubframes="true"
           webpreferences='contextIsolation=true, nodeIntegration=true' 

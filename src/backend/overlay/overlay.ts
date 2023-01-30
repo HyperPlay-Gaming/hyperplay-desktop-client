@@ -8,6 +8,7 @@ import * as IOverlay from '@hyperplay/electron-overlay'
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
 import * as ExtIpcHandler from '../hyperplay-extension-helper/ipcHandlers/index'
+import fs from 'fs'
 const buildDir = resolve(__dirname, '../../build')
 
 enum AppWindows {
@@ -117,17 +118,26 @@ class Application {
       dragBorderWidth: dragborder
     })
 
+    let debugCalled = true
+    setTimeout(()=>debugCalled=false, 20000)
+
     window.webContents.on(
       'paint',
       (event, dirty, image: Electron.NativeImage) => {
         if (this.markQuit) {
           return
         }
+        const scale = 1
+        if (!debugCalled){
+          debugCalled = true
+          console.log('image width = ', image.getSize(scale).width, ' image height = ', image.getSize(scale).height)
+          fs.writeFileSync('./testOverlayImage.png', image.toPNG())
+        }
         this.Overlay!.sendFrameBuffer(
           window.id,
-          image.getBitmap(),
-          image.getSize().width,
-          image.getSize().height
+          image.getBitmap({scaleFactor: scale}),
+          image.getSize(scale).width,
+          image.getSize(scale).height
         )
       }
     )
@@ -135,6 +145,10 @@ class Application {
     window.on('ready-to-show', () => {
       console.log('overlay electron browser window ready to show')
       window.focusOnWebView()
+    })
+
+    window.webContents.on('dom-ready', () => {
+      window.webContents.send('dom-ready')
     })
 
     window.on('resize', () => {
@@ -201,14 +215,14 @@ class Application {
   }
 
   public createHyperplayOverlay() {
-    const isTesting = true
+    const isTesting = false
     
     const options: Electron.BrowserWindowConstructorOptions = {
       height: 800,
-      width: 1200,
+      width: 1280,
       frame: false,
       show: isTesting,
-      transparent: !isTesting,
+      transparent: true,
       resizable: false,
       backgroundColor: '#00000000',
       webPreferences: {

@@ -978,8 +978,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@hyperplay/electron-overlay@C:/a_repos/0_game7/hyperplay/hyperplay-goverlay/electron-overlay":
+"@hyperplay/electron-overlay@0.0.0":
   version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@hyperplay/electron-overlay/-/electron-overlay-0.0.0.tgz#6e48d63614a12cedc1e6a237d15998339dbdd34c"
+  integrity sha512-agsxbZP12t1mvq2tiQc5VrOlXm41c05AhrnCNPD7NV7zQgyvgUibVk0KLb61YW8kpwT84lZNS+GjReGc73NwWQ==
   dependencies:
     node-addon-api "^4.1.0"
     node-gyp "^9.3.1"
@@ -4742,9 +4744,6 @@ electron-osx-sign@^0.6.0:
     isbinaryfile "^3.0.2"
     minimist "^1.2.0"
     plist "^3.0.1"
-
-"electron-overlay@file:./overlayDeps/electron-overlay":
-  version "0.0.0"
 
 electron-publish@23.6.0:
   version "23.6.0"
