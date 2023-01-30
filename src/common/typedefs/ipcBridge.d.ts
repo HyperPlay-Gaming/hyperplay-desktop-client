@@ -124,6 +124,7 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<MetaMaskImportOptions | null>
   getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
   getTabUrl: () => Promise<string>
+  getExtensionId: () => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

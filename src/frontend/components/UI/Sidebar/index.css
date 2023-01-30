@@ -5,7 +5,7 @@
   z-index: 10;
   display: grid;
   grid-template-rows: min-content 2fr min-content min-content;
-  grid-template-areas: 'links' 'utils' 'updates' 'version' 'wallet';
+  grid-template-areas: 'links' 'utils' 'updates' 'version' 'mmHome' 'wallet';
   grid-area: sidebar;
   height: 100%;
   padding: 0;

@@ -200,8 +200,8 @@ async function createWindow(): Promise<BrowserWindow> {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     ...windowProps,
-    minHeight: 740,
-    minWidth: 1040,
+    minHeight: 345,
+    minWidth: 600,
     show: false,
 
     webPreferences: {
@@ -277,6 +277,7 @@ async function createWindow(): Promise<BrowserWindow> {
     //     })
     //   })
     // }
+
     mainWindow.loadURL('http://localhost:5173')
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
