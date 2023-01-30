@@ -146,6 +146,7 @@
     },
     "button": {
         "cancel": "Cancel",
+        "continue": "Continue",
         "go_to_library": "Go to Library",
         "login": "Log in",
         "sync": "Sync",
@@ -197,6 +198,10 @@
     },
     "Epic Games": "Epic Games",
     "error": "Error",
+    "externalLink": {
+        "dontAskAgain": "Don't ask again",
+        "warning": "You are about to open an external link."
+    },
     "favourites": "Favourites",
     "game": {
         "status": "Status",
@@ -266,7 +271,6 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
-            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Update Available!",
             "stable": "Stable",
             "version": "HyperPlay Version"
@@ -481,7 +485,6 @@
         "FsrSharpnessStrenght": "FSR Sharpness Strength",
         "fsync": "Enable Fsync",
         "gamemode": "Use GameMode (Feral Game Mode needs to be installed)",
-        "hideChangelogsOnStartup": "Don't show changelogs on Startup",
         "ignoreGameUpdates": "Ignore game updates",
         "language": "Choose App Language",
         "library_top_option": {
@@ -581,10 +584,6 @@
         }
     },
     "Settings": "Settings",
-    "sidebar": {
-        "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
-    },
     "status": {
         "installing": "Installing",
         "logging": "Logging In...",
