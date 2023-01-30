@@ -58,13 +58,24 @@ const ExtensionHandler = function () {
     /* eslint-disable-next-line @typescript-eslint/no-empty-function */
     let rmListeners = () => {}
 
-    bindEthereumListeners()
+    const bindListeners = (): boolean => {
+      if (typeof window.ethereum !== 'undefined') {
+        rmListeners = bindEthereumListeners()
+        return true
+      }
+      return false
+    }
+
+    if (bindListeners()) {
+      return () => {
+        rmListeners()
+      }
+    }
 
     const interval = setInterval(() => {
       console.log('checking for metamask extension...')
       if (typeof window.ethereum !== 'undefined') {
-        console.log('metamask extension found!')
-        rmListeners = bindEthereumListeners()
+        bindListeners()
         clearInterval(interval)
       }
     }, 2000)
