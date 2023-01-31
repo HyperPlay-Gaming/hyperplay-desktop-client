@@ -53,7 +53,7 @@ interface HyperPlaySyncIPCFunctions {
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
   loadingScreenReady: () => void
-  restartApp: () => void
+  reloadApp: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -118,7 +118,7 @@ interface HyperPlayAsyncIPCFunctions {
   chromeTabsCreate: (
     options: chrome.tabs.CreateProperties
   ) => Promise<chrome.tabs.Tab>
-  installMetaMask: (dbPath: string | null | undefined) => Promise<void>
+  importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
   getMetaMaskImportOptions: (
     configDbPath?: string
   ) => Promise<MetaMaskImportOptions | null>

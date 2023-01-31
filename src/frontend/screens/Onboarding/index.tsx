@@ -69,7 +69,8 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
       !metadata.isInitialized &&
       (!importOptions || dbPath === null || dbPath)
     ) {
-      await window.api.installMetaMask(dbPath)
+      const success = await window.api.importMetaMask(dbPath)
+      if (!success) return
       setShowMetaMaskBrowserSidebarLinks(true)
       await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
 
@@ -155,6 +156,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
             importOptions={contentParams.mmImportPaths!}
             handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
             setOnboardingModalParams={setOnboardingParams}
+            disableOnboarding={props.disableOnboarding}
           />
         )
       case ONBOARDING_CONTENT.SCAN:
