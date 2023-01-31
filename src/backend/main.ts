@@ -1,6 +1,6 @@
 import './dev-reload.json'
 
-import { setExtensionMetadata } from './hyperplay-extension-helper/ipcHandlers/index'
+import { setExtensionMetadata } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -150,7 +150,6 @@ import { getDefaultSavePath } from './save_sync'
 import si from 'systeminformation'
 import { initExtensionIpcHandlerWindow } from './hyperplay-extension-helper/ipcHandlers'
 import { initTrayIcon } from './tray_icon/tray_icon'
-import fs from 'fs'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -158,7 +157,6 @@ const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
 
 let mainWindow: BrowserWindow
-let isRestarting = false
 
 async function createWindow(): Promise<BrowserWindow> {
   configStore.set('userHome', userHome)
@@ -252,7 +250,7 @@ async function createWindow(): Promise<BrowserWindow> {
 
     const { exitToTray } = GlobalConfig.get().config
 
-    if (exitToTray && !isRestarting) {
+    if (exitToTray) {
       logInfo('Exitting to tray instead of quitting', {
         prefix: LogPrefix.Backend
       })
@@ -266,6 +264,12 @@ async function createWindow(): Promise<BrowserWindow> {
   //   detectVCRedist(mainWindow)
   // }
 
+  loadMainWindowURL()
+
+  return mainWindow
+}
+
+const loadMainWindowURL = function () {
   if (!app.isPackaged) {
     // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
     //   import('electron-devtools-installer').then((devtools) => {
@@ -288,7 +292,6 @@ async function createWindow(): Promise<BrowserWindow> {
       autoUpdater.checkForUpdates()
     }
   }
-  return mainWindow
 }
 
 // This method will be called when Electron has finished
@@ -1612,20 +1615,6 @@ ProviderHelper.passEventCallbacks(
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 
-ipcMain.on('restartApp', async () => {
-  isRestarting = true
-
-  setImmediate(() => {
-    if (process.env.DEV) {
-      const file = './src/backend/dev-reload.json'
-      const reloadCount = JSON.parse(fs.readFileSync(file, 'utf-8'))
-      fs.writeFileSync(
-        file,
-        JSON.stringify({ reloadCount: reloadCount.reloadCount + 1 })
-      )
-    } else {
-      app.relaunch()
-      app.quit()
-    }
-  })
+ipcMain.on('reloadApp', async () => {
+  loadMainWindowURL()
 })
