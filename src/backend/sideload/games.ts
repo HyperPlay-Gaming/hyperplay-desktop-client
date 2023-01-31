@@ -15,7 +15,7 @@ import {
 } from '../constants'
 import { execAsync, killPattern, notify } from '../utils'
 import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
-import { dirname, join } from 'path'
+import path, { dirname, join } from 'path'
 import {
   appendFileSync,
   constants as FS_CONSTANTS,
@@ -38,6 +38,12 @@ import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { BrowserWindow } from 'electron'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
+import {
+  removeExtension,
+  initExtension
+} from 'backend/hyperplay-extension-helper/ipcHandlers'
+import { connectedProvider } from 'backend/hyperplay-proxy-server/providerHelper'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 export function appLogFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
@@ -139,11 +145,32 @@ export async function launchApp(appName: string): Promise<boolean> {
 
   if (browserUrl) {
     return new Promise((res) => {
-      const browserGame = new BrowserWindow({ fullscreen: true })
+      // remove extension prior to loading new browser window if metamask extension is not connected
+      // so that window ethereum for mm mobile or wallet connect exposed in preload is not overwritten
+      let removedExtension = false
+      const webPrefs: Electron.WebPreferences = {
+        contextIsolation: true
+      }
+
+      if (connectedProvider !== PROVIDERS.METAMASK_EXTENSION) {
+        removeExtension()
+        removedExtension = true
+        webPrefs.preload = path.join(__dirname, 'providerPreload.js')
+      }
+
+      const browserGame = new BrowserWindow({
+        fullscreen: true,
+        webPreferences: webPrefs
+      })
       browserGame.loadURL(browserUrl)
       browserGame.focus()
       browserGame.setTitle(title)
-      browserGame.on('close', () => res(true))
+      browserGame.on('close', () => {
+        if (removedExtension) {
+          initExtension()
+        }
+        res(true)
+      })
     })
   }
 

@@ -50,6 +50,7 @@ interface HyperPlaySyncIPCFunctions {
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
+  enableOnEvents: (topic: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -104,6 +105,11 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   changeTrayColor: () => void
 }
 
+interface RequestArguments {
+  readonly method: string
+  readonly params?: readonly unknown[] | object
+}
+
 interface HyperPlayAsyncIPCFunctions {
   showPopup: (hideIfShown?: boolean) => Promise<void>
   chromeWindowsCreate: (
@@ -117,6 +123,8 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<chrome.tabs.Tab>
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  providerRequest: (args: RequestArguments) => Promise<any>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
