@@ -61,6 +61,10 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   }
 
   async function handleMmExtensionProviderClicked(dbPath?: string | null) {
+    if (dbPath === null) {
+      window.api.createNewMetaMaskWallet()
+      return
+    }
     const metadata = await window.api.getExtensionMetadata()
     const importOptions = await window.api.getMetaMaskImportOptions()
 

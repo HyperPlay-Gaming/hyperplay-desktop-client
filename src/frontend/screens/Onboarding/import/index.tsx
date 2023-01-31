@@ -18,8 +18,7 @@ interface ImportProps {
 const ImportMetaMask = ({
   setOnboardingModalParams,
   importOptions,
-  handleMmExtensionProviderClicked,
-  disableOnboarding
+  handleMmExtensionProviderClicked
 }: ImportProps) => {
   const [err, setError] = useState('')
 
@@ -65,7 +64,11 @@ const ImportMetaMask = ({
           ))}
         </div>
         {err !== '' ? <div>{err}</div> : null}
-        <ActionButton onClick={disableOnboarding}>Skip for Now</ActionButton>
+        <ActionButton
+          onClick={async () => handleMmExtensionProviderClicked(null)}
+        >
+          Create New Wallet
+        </ActionButton>
       </div>
     </>
   )

@@ -54,6 +54,7 @@ interface HyperPlaySyncIPCFunctions {
   chromeSetBadgeText: (text: string) => void
   loadingScreenReady: () => void
   reloadApp: () => void
+  createNewMetaMaskWallet: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
