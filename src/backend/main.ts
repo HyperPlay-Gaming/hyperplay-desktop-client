@@ -1,5 +1,3 @@
-import './dev-reload.json'
-
 import { setExtensionMetadata } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
