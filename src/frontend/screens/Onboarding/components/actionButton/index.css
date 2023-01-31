@@ -1,0 +1,11 @@
+.actionButton {
+  color: var(--primary);
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 12px;
+}

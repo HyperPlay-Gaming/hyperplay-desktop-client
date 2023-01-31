@@ -4,6 +4,7 @@ import { PROVIDERS } from 'common/types/proxy-types'
 import './index.css'
 import { OnboardingModalConfig } from '../types'
 import { MMTransparent, PlusIcon, WCBlue } from 'frontend/assets/hyperplay'
+import ActionButton from '../components/actionButton'
 
 interface WelcomeProps {
   handleProviderClicked: (provider: PROVIDERS) => void
@@ -58,12 +59,9 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         onClick={() => props.downloadMetaMaskClicked()}
         isRecommended={false}
       />
-      <button
-        className="button-sm actionButton"
-        onClick={() => props.disableOnboarding()}
-      >
+      <ActionButton onClick={() => props.disableOnboarding()}>
         Skip for Now
-      </button>
+      </ActionButton>
     </div>
   )
 }

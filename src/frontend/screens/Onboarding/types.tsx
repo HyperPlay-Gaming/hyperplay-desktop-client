@@ -3,7 +3,8 @@ export enum ONBOARDING_CONTENT {
   SCAN = 'SCAN',
   REJECTED = 'REJECTED',
   SUCCESS = 'SUCCESS',
-  DOWNLOAD = 'DOWNLOAD'
+  DOWNLOAD = 'DOWNLOAD',
+  IMPORT = 'import'
 }
 
 export interface OnboardingModalConfig {

@@ -1,3 +1,4 @@
+import { setExtensionMetadata } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -145,10 +146,7 @@ import {
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import { getDefaultSavePath } from './save_sync'
 import si from 'systeminformation'
-import {
-  initExtensionIpcHandlerWindow,
-  initExtension
-} from './hyperplay-extension-helper/ipcHandlers'
+import { initExtensionIpcHandlerWindow } from './hyperplay-extension-helper/ipcHandlers'
 import { initTrayIcon } from './tray_icon/tray_icon'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
@@ -194,8 +192,6 @@ async function createWindow(): Promise<BrowserWindow> {
       windowProps.width = screenInfo.workAreaSize.width * 0.8
     }
   }
-
-  await initExtension()
 
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -266,6 +262,12 @@ async function createWindow(): Promise<BrowserWindow> {
   //   detectVCRedist(mainWindow)
   // }
 
+  loadMainWindowURL()
+
+  return mainWindow
+}
+
+const loadMainWindowURL = function () {
   if (!app.isPackaged) {
     // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
     //   import('electron-devtools-installer').then((devtools) => {
@@ -288,7 +290,6 @@ async function createWindow(): Promise<BrowserWindow> {
       autoUpdater.checkForUpdates()
     }
   }
-  return mainWindow
 }
 
 // This method will be called when Electron has finished
@@ -325,6 +326,8 @@ if (!gotTheLock) {
     handleProtocol(mainWindow, argv)
   })
   app.whenReady().then(async () => {
+    setExtensionMetadata()
+
     initOnlineMonitor()
 
     getSystemInfo().then((systemInfo) =>
@@ -1609,3 +1612,7 @@ ProviderHelper.passEventCallbacks(
 )
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
+
+ipcMain.on('reloadApp', async () => {
+  loadMainWindowURL()
+})

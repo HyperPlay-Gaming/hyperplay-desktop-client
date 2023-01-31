@@ -1,0 +1,25 @@
+.importOption {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: calc(var(--space-md) * 2);
+  padding-bottom: calc(var(--space-xs) * 2);
+
+  background: var(--background-secondary);
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.05);
+  border: transparent;
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  max-height: 112px;
+  height: 100%;
+
+  text-transform: capitalize;
+  font-weight: var(--semibold);
+}
+
+.importOptionBrowserIcon {
+  height: 32px;
+}

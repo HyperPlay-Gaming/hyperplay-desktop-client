@@ -145,6 +145,7 @@
     "axios": "^0.26.1",
     "bn.js": "^5.2.1",
     "check-disk-space": "^3.3.1",
+    "classic-level": "^1.2.0",
     "classnames": "^2.3.1",
     "crc": "^4.1.1",
     "discord-rich-presence-typescript": "^0.0.8",
