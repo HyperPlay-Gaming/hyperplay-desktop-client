@@ -210,6 +210,12 @@
     align-self: flex-start;
     margin-top: 1.2em;
     color: var(--accent);
+    cursor: pointer;
+    transition: 300ms;
+
+    &:hover {
+      color: var(--accent-overlay);
+    }
 
     & svg {
       margin-right: 0.4em;
