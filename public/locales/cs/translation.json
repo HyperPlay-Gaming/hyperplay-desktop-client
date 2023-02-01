@@ -203,7 +203,6 @@
         "store": "Obchod",
         "title": "Název hry"
     },
-    "GameSettings": "Nastavení hry",
     "generic": {
         "error": {
             "component": "Nebyly nalezeny žádné hry - zkuste se odhlásit a znovu přihlásit nebo jednu z níže uvedených možností"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignorovat skryté",
         "platform": "Platforma",
         "show_all_games": "Zobrazit všechny hry",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Zobrazit pouze oblíbené",
         "show_hidden": "Zobrazit skryté",
         "store": "Filtrovat obchod"
@@ -440,7 +441,7 @@
         "autosync": "Automaticky synchronizovat uložené soubory",
         "autovkd3d": "Automaticky Installovat/aktualizovat VKD3D na Prefixu",
         "change-target-exe": "Vyberte alternativní EXE ke spuštění",
-        "checkForUpdatesOnStartup": "Kontrolovat aktualizace Heroic při spuštění",
+        "checkForUpdatesOnStartup": "Kontrolovat aktualizace HyperPlay při spuštění",
         "crossover-version": "Verze Crossover",
         "custom_themes_path": "Vlastní cesta k motivům",
         "customWineProton": "Vlastní cesty pro Wine/Proton",
@@ -448,7 +449,7 @@
         "default-install-path": "Výchozí cesta pro instalaci",
         "default-steam-path": "Výchozí cesta služby Steam",
         "defaultWinePrefix": "Nastavit složku pro nové Prefixy Wine",
-        "disable_controller": "Zakázat navigaci v Heroic pomocí ovladače",
+        "disable_controller": "Zakázat navigaci v HyperPlay pomocí ovladače",
         "discordRPC": "Povolit Discord Rich Presence",
         "download-no-https": "Stahovat hry bez HTTPS (užitečné pro CDN, např. LanCache)",
         "egs-sync": "Synchronizovat s nainstalovanými Epic Games",
@@ -562,12 +563,13 @@
             "long-log-hint": "Log truncated, last 1000 lines are shown!"
         },
         "navbar": {
-            "advanced": "Advanced",
-            "general": "",
-            "log": "Log",
-            "other": "",
-            "sync": "",
-            "wineExt": "Wine Extensions"
+            "advanced": "Pokročilé",
+            "games_settings_defaults": "Výchozí nastavení her",
+            "general": "Obecné",
+            "log": "Protokol",
+            "other": "Ostatní",
+            "sync": "Synchronizace uložených souborů",
+            "wineExt": "Wine rozšíření"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",

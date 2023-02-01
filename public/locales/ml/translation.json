@@ -203,7 +203,6 @@
         "store": "Store",
         "title": "Game Title"
     },
-    "GameSettings": "Game Settings",
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignore Hidden",
         "platform": "പ്ലാറ്റ്ഫോം",
         "show_all_games": "Show all games",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Show Favourites only",
         "show_hidden": "Show Hidden",
         "store": "Filter Store"
@@ -271,7 +272,7 @@
             "version": "HyperPlay Version"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "ക്രമീകരണങ്ങള് താനെ സൂക്ഷിക്കപ്പെട്ടിരിക്കുന്നു",
         "version": "Wine Version"
@@ -441,7 +442,7 @@
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
         "change-target-exe": "ഓടിക്കുവാനായി പകരംവയ്ക്കാവുന്ന ഒരു EXE തിരഞ്ഞെടുക്കൂ",
         "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
+        "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "ഇഷ്ടാനുസൃതം ചേര്ത്ത വൈന്/പ്രോട്ടോണ് അറകള്",
         "darktray": "താലത്തില്(ട്രേയില്) ഇരുണ്ട ചിത്രം ഉപയോഗിക്കുക",
@@ -523,9 +524,9 @@
             "title": "ഉപസഗ്ഗ഻ത്തില് EXE ഓടിക്കുക"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "കളി സൂക്ഷിക്കാനുള്ള കൃത്യമായ സ്ഥലം നല്കൂ",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Select Theme",
         "showfps": "ചിത്രനിരക്ക് കാണിക്കൂ (DX9ലും 10ലും 11ലും)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Advanced",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "പൊതുവായവ",
             "log": "Log",

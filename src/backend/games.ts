@@ -6,11 +6,10 @@ import {
   GameInfo,
   GameSettings,
   InstallArgs,
-  ProtonVerb,
-  InstallPlatform
+  InstallPlatform,
+  WineCommandArgs
 } from 'common/types'
 
-import { BrowserWindow } from 'electron'
 import { join } from 'path'
 import { gamesConfigPath } from './constants'
 
@@ -20,7 +19,6 @@ abstract class Game {
   }
 
   abstract appName: string
-  abstract window: BrowserWindow
   abstract getExtraInfo(): Promise<ExtraInfo>
   abstract getGameInfo(installPlatform?: string): GameInfo
   abstract getInstallInfo(
@@ -33,7 +31,9 @@ abstract class Game {
   abstract addShortcuts(): Promise<void>
   abstract launch(launchArguments?: string): Promise<boolean>
   abstract stop(): Promise<void>
-  abstract moveInstall(newInstallPath: string): Promise<string>
+  abstract moveInstall(
+    newInstallPath: string
+  ): Promise<{ status: 'done' } | { status: 'error'; error: string }>
   abstract repair(): Promise<ExecResult>
   abstract forceUninstall(): Promise<void>
   abstract syncSaves(arg: string, path: string): Promise<string>
@@ -45,11 +45,7 @@ abstract class Game {
   abstract uninstall(): Promise<ExecResult>
   abstract update(): Promise<{ status: 'done' | 'error' | 'abort' }>
   abstract isNative(): boolean
-  abstract runWineCommand(
-    commandParts: string[],
-    wait?: boolean,
-    protonVerb?: ProtonVerb
-  ): Promise<ExecResult>
+  abstract runWineCommand(args: WineCommandArgs): Promise<ExecResult>
 }
 
 export { Game }

@@ -203,7 +203,6 @@
         "store": "Магазин",
         "title": "Название игры"
     },
-    "GameSettings": "Настройки игры",
     "generic": {
         "error": {
             "component": "Игры не найдены. Попробуйте выйти из системы и войти снова или один из вариантов ниже"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "Магазин GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Игнорировать скрытые",
         "platform": "Платформа",
         "show_all_games": "Показать все игры",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Показать только избранное",
         "show_hidden": "Показать скрытые",
         "store": "Магазин"
@@ -563,9 +564,8 @@
             "long-log-hint": "Журнал урезан, показаны последние 1000 строк!"
         },
         "navbar": {
-            "advanced": "Продвинутые",
-            "games_settings": "Game Settings",
-            "games_settings_defaults": "Game Defaults",
+            "advanced": "Расширенные",
+            "games_settings_defaults": "Настройки игры по умолчанию",
             "general": "Основные",
             "log": "Журнал",
             "other": "Другие",

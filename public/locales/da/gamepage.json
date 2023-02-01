@@ -149,8 +149,8 @@
     "report_problem": "Rapportér et problem med at køre dette spil",
     "cloud_save_unsupported": "Ikke understøttet",
     "not_logged_in": {
-        "epic": "Du er ikke logget ind med en Epic-konto i Heroic. Brug ikke butikssiden til at logge ind, klik i stedet på følgende knap:",
-        "gog": "Du er ikke logget ind med en GOG-konto i Heroic. Brug ikke butikssiden til at logge ind, klik i stedet på følgende knap:",
+        "epic": "Du er ikke logget ind med en Epic-konto i HyperPlay. Brug ikke butikssiden til at logge ind, klik i stedet på følgende knap:",
+        "gog": "Du er ikke logget ind med en GOG-konto i HyperPlay. Brug ikke butikssiden til at logge ind, klik i stedet på følgende knap:",
         "login": "Log ind",
         "title": "Du er ikke logget ind"
     },

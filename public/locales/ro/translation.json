@@ -203,7 +203,6 @@
         "store": "Magazin",
         "title": "Titlul jocului"
     },
-    "GameSettings": "Setările jocului",
     "generic": {
         "error": {
             "component": "Nu s-au găsit jocuri - Încercați să vă deconectați și să vă conectați din nou sau una dintre opțiunile de mai jos"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "Magazinul GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignorați Ascuns",
         "platform": "Platformă",
         "show_all_games": "Arată toate jocurile",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Afișați numai Favoritele",
         "show_hidden": "Arata ascuns",
         "store": "Magazin de filtre"
@@ -271,7 +272,7 @@
             "version": "Versiune eroică"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Setările sunt salvate automat",
         "version": "Versiune Wine"
@@ -523,9 +524,9 @@
             "title": "Rulați EXE pe Prefix"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Selectați folderul exact de salvare a jocurilor",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Selectează tema",
         "showfps": "Afișați FPS (DX9, 10 și 11)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Avansat",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "General",
             "log": "Buturuga",

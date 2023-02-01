@@ -1,6 +1,6 @@
 import './index.scss'
 
-import React, { useContext } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
 import { useTranslation } from 'react-i18next'
 import {
@@ -25,26 +25,47 @@ import {
   UseDGPU,
   WinePrefix,
   WineVersionSelector,
-  WrappersTable
+  WrappersTable,
+  IgnoreGameUpdates
 } from '../../components'
 import ContextProvider from 'frontend/state/ContextProvider'
 import Tools from '../../components/Tools'
 import SettingsContext from '../../SettingsContext'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import useSetting from 'frontend/hooks/useSetting'
+import { defaultWineVersion } from '../..'
+import Collapsible from 'frontend/components/UI/Collapsible/Collapsible'
+import SyncSaves from '../SyncSaves'
+import FooterInfo from '../FooterInfo'
 
-export default function GamesSettings() {
+type Props = {
+  useDetails?: boolean
+}
+
+export default function GamesSettings({ useDetails = true }: Props) {
   const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
-  const { isDefault, gameInfo, isMacNative, isLinuxNative } =
-    useContext(SettingsContext)
+  const { isDefault, gameInfo, isLinuxNative } = useContext(SettingsContext)
+  const [wineVersion] = useSetting('wineVersion', defaultWineVersion)
   const isLinux = platform === 'linux'
-  const isWin = platform === 'win32'
+  const isCrossover = wineVersion?.type === 'crossover'
+  const hasCloudSaves = gameInfo?.cloud_save_enabled
 
-  const nativeGame =
-    isWin ||
-    (isMacNative && gameInfo?.install.platform === 'Mac') ||
-    (isLinuxNative && gameInfo?.install.platform === 'linux')
+  const [nativeGame, setNativeGame] = useState(false)
+
+  useEffect(() => {
+    if (gameInfo) {
+      const getIsNative = async () => {
+        const isNative = await window.api.isNative({
+          appName: gameInfo?.app_name,
+          runner: gameInfo?.runner
+        })
+        setNativeGame(isNative)
+      }
+      getIsNative()
+    }
+  }, [])
 
   return (
     <>
@@ -60,46 +81,48 @@ export default function GamesSettings() {
 
       {!nativeGame && (
         <>
-          <section>
-            <h3 className="settingSubheader">
-              {isLinux ? 'Wine' : 'Wine/Crossover'}
-            </h3>
-
-            <WinePrefix />
-
+          <Collapsible
+            isOpen
+            isCollapsible={useDetails}
+            summary={isLinux ? 'Wine' : 'Wine/Crossover'}
+          >
             <WineVersionSelector />
-
+            <WinePrefix />
             <CrossoverBottle />
 
-            <Tools />
-          </section>
-
-          <section>
-            <h3 className="settingSubheader">
-              {t('settings.navbar.wineExt', 'Wine Extensions')}
-            </h3>
-            <AutoDXVK />
-            {isLinux && (
+            {!isCrossover && (
               <>
-                <AutoVKD3D />
+                <AutoDXVK />
+                {isLinux && (
+                  <>
+                    <AutoVKD3D />
 
-                <EacRuntime />
+                    <EacRuntime />
 
-                <BattlEyeRuntime />
+                    <BattlEyeRuntime />
+                  </>
+                )}
+                <Tools />
               </>
             )}
-          </section>
+          </Collapsible>
         </>
       )}
 
-      <section>
-        <h3 className="settingSubheader">{t('settings.navbar.other')}</h3>
-
+      <Collapsible
+        isOpen={nativeGame}
+        isCollapsible={useDetails}
+        summary={
+          nativeGame
+            ? t('settings.navbar.advanced', 'Advanced')
+            : t('settings.navbar.other', 'Other')
+        }
+      >
         <AlternativeExe />
 
         {!nativeGame && <ShowFPS />}
 
-        {!isWin && !nativeGame && (
+        {isLinux && !nativeGame && (
           <>
             <PreferSystemLibs />
 
@@ -123,6 +146,8 @@ export default function GamesSettings() {
 
         <SteamRuntime />
 
+        <IgnoreGameUpdates />
+
         <OfflineMode />
 
         <EnvVariablesTable />
@@ -132,7 +157,19 @@ export default function GamesSettings() {
         <LauncherArgs />
 
         <PreferedLanguage />
-      </section>
+      </Collapsible>
+
+      {hasCloudSaves && !isLinuxNative && (
+        <Collapsible
+          isOpen={false}
+          isCollapsible={useDetails}
+          summary={t('settings.navbar.sync', 'Cloud Saves Sync')}
+        >
+          <SyncSaves />
+        </Collapsible>
+      )}
+
+      <FooterInfo />
     </>
   )
 }

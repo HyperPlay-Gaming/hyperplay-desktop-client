@@ -8,12 +8,13 @@ import { existsSync, readFileSync } from 'graceful-fs'
 import { t } from 'i18next'
 import { join } from 'path'
 
-import { toolsPath, isLinux, legendaryConfigPath } from '../../constants'
+import { toolsPath, isLinux, legendaryConfigPath, icon } from '../../constants'
 import { logError, LogPrefix, logWarning } from '../../logger/logger'
 import { runLegendaryCommand } from '../library'
 import { LegendaryGame } from '../games'
 import { getGame } from '../../utils'
 import { verifyWinePrefix } from '../../launcher'
+import { sendFrontendMessage } from '../../main_window'
 
 const currentVersionPath = join(legendaryConfigPath, 'overlay_version.json')
 const installedVersionPath = join(legendaryConfigPath, 'overlay_install.json')
@@ -36,7 +37,7 @@ function getStatus(): {
   if (install_path !== defaultInstallPath) {
     logWarning(
       'EOS Overlay is not installed in default location, permission issues might arise',
-      { prefix: LogPrefix.Legendary }
+      LogPrefix.Legendary
     )
   }
 
@@ -53,7 +54,7 @@ async function getLatestVersion(): Promise<string> {
     if (!existsSync(currentVersionPath)) {
       logError(
         'EOS Overlay information not found after manual update. User is probably not logged in anymore',
-        { prefix: LogPrefix.Legendary }
+        LogPrefix.Legendary
       )
       return ''
     }
@@ -87,6 +88,12 @@ async function updateInfo() {
  * @returns The error encountered when installing, if any
  */
 async function install() {
+  sendFrontendMessage('gameStatusUpdate', {
+    appName: eosOverlayAppName,
+    runner: 'legendary',
+    status: isInstalled() ? 'updating' : 'installing'
+  })
+
   const game = LegendaryGame.get(eosOverlayAppName)
   let downloadSize = 0
   // Run download without -y to get the install size
@@ -126,6 +133,12 @@ async function install() {
 
   deleteAbortController(eosOverlayAppName)
 
+  sendFrontendMessage('gameStatusUpdate', {
+    appName: eosOverlayAppName,
+    runner: 'legendary',
+    status: 'done'
+  })
+
   return error
 }
 
@@ -144,7 +157,8 @@ async function remove(): Promise<boolean> {
       'setting.eosOverlay.removeConfirm',
       'Are you sure you want to uninstall the EOS Overlay?'
     ),
-    buttons: [t('box.yes'), t('box.no')]
+    buttons: [t('box.yes'), t('box.no')],
+    icon: icon
   })
   if (response === 1) {
     return false
@@ -179,7 +193,8 @@ async function enable(
         'setting.eosOverlay.notInstalledMsg',
         'The EOS Overlay is not installed. Do you want to install it now?'
       ),
-      buttons: [t('box.yes'), t('box.no')]
+      buttons: [t('box.yes'), t('box.no')],
+      icon: icon
     })
     // Installing the overlay requires some frontend work, so we can't just do it in the backend alone
     return { wasEnabled: false, installNow: response === 0 }

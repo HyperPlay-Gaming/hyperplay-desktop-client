@@ -34,6 +34,7 @@
         "uninstall": {
             "checkbox": "移除前缀：{{prefix}}{{newLine}}注：此操作无法撤销，并且会删除没有备份的保存文件。",
             "message": "您想要卸载该游戏吗？",
+            "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
             "title": "卸载"
         },
         "update": {
@@ -135,8 +136,8 @@
         "options": "启动选项..."
     },
     "not_logged_in": {
-        "epic": "你在 Heroic 中未登录 Epic 账户。不要使用商店页面进行登录，请点击下面的按钮：",
-        "gog": "你在 Heroic 中未登录 GOG 账户。不要使用商店页面进行登录，请点击下面的按钮：",
+        "epic": "你在 HyperPlay 中未登录 Epic 账户。不要使用商店页面进行登录，请点击下面的按钮：",
+        "gog": "你在 HyperPlay 中未登录 GOG 账户。不要使用商店页面进行登录，请点击下面的按钮：",
         "login": "登录",
         "title": "你未登录"
     },

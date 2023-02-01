@@ -203,7 +203,6 @@
         "store": "Sklep",
         "title": "Tytuł Gry"
     },
-    "GameSettings": "Ustawienia gry",
     "generic": {
         "error": {
             "component": "Nie znaleziono żadnych gier - Spróbuj wylogować i zalogować się ponownie lub postępuj zgodnie z jedną z opcji poniżej"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "Sklep GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignoruj ukryte",
         "platform": "Platforma",
         "show_all_games": "Pokaż wszystkie gry",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Pokaż tylko ulubione",
         "show_hidden": "Pokaż ukryte",
         "store": "Filtruj"
@@ -271,7 +272,7 @@
             "version": "Wersja HyperPlay"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Ustawienia są zapisywane automatycznie",
         "version": "Wersja Wine"
@@ -523,9 +524,9 @@
             "title": "Uruchom EXE w prefiksie"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Wybierz folder zapisu gier",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Wybierz Motyw",
         "showfps": "Pokaż FPS (DX9, DX10, DX11)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Zaawansowane",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Główne",
             "log": "Log",

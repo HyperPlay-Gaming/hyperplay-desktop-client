@@ -203,7 +203,6 @@
         "store": "Store",
         "title": "Game Title"
     },
-    "GameSettings": "Game Settings",
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -216,12 +215,14 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
-        "ignore_hidden": "Ignore Hidden",
+        "hide_non_available_games": "Hide non-available games",
+        "ignore_hidden": "Rejtettek figyelmen kívül hagyása",
         "platform": "Platform",
-        "show_all_games": "Show all games",
-        "show_favourites_only": "Show Favourites only",
-        "show_hidden": "Show Hidden",
-        "store": "Filter Store"
+        "show_all_games": "Összes játék mutatása",
+        "show_available_games": "Show non-Available games",
+        "show_favourites_only": "Csak kedvencek mutatása",
+        "show_hidden": "Elrejtettek mutatása",
+        "store": "Áruház szűrése"
     },
     "help": {
         "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
@@ -272,7 +273,7 @@
             "version": "HyperPlay Version"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "A beállítások automatikusan mentődnek",
         "version": "Wine verzió"
@@ -442,7 +443,7 @@
         "autovkd3d": "A VKD3D automatikus telepítése/frissítése a prefixen",
         "change-target-exe": "Válassz egy alternatív EXE fájlt a futtatáshoz",
         "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
+        "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Egyéni Wine/Proton útvonalak",
         "darktray": "Sötét tálcaikon használata",
@@ -524,9 +525,9 @@
             "title": "EXE fájl futtatása a prefixen"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Pontos játékmentési mappa kiválasztása",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Select Theme",
         "showfps": "FPS megjelenítése (DX9, 10 és 11)",
@@ -564,7 +565,6 @@
         },
         "navbar": {
             "advanced": "Advanced",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Általános",
             "log": "Napló",

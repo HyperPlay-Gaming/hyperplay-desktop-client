@@ -5,10 +5,8 @@ import {
 } from 'common/types'
 import {
   checkGameCube,
-  checkPS3,
-  checkPS5,
   checkPS3Clone1,
-  checkXbox,
+  checkStandard,
   checkN64Clone1,
   checkGenius1
 } from './gamepad_layouts'
@@ -19,7 +17,7 @@ const STICK_REPEAT_DELAY = 250
 const SCROLL_REPEAT_DELAY = 50
 
 /*
- * For more documentation, check here https://github.com/G7DAO/HyperPlay/wiki/Gamepad-Navigation
+ * For more documentation, check here https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/Gamepad-Navigation
  */
 
 let controllerIsDisabled = false
@@ -33,9 +31,9 @@ export const initGamepad = () => {
   // store the current controllers
   let controllers: number[] = []
 
-  let appIsFocused = true
-  window.addEventListener('focus', () => (appIsFocused = true))
-  window.addEventListener('blur', () => (appIsFocused = false))
+  let heroicIsFocused = true
+  window.addEventListener('focus', () => (heroicIsFocused = true))
+  window.addEventListener('blur', () => (heroicIsFocused = false))
 
   // store the status and metadata for each action
   // triggeredAt is a hash with controllerIndex as keys and a timestamp or 0 (inactive)
@@ -70,8 +68,8 @@ export const initGamepad = () => {
   ) {
     if (controllerIsDisabled) return
 
-    if (!appIsFocused) {
-      // ignore gamepad events if hyperplay is not the focused app
+    if (!heroicIsFocused) {
+      // ignore gamepad events if heroic is not the focused app
       //
       // the browser still detects the gamepad interactions even
       // if the screen is not focused when playing a game
@@ -104,7 +102,7 @@ export const initGamepad = () => {
     }
 
     if (!wasActive || shouldRepeat) {
-      console.log(`Action: ${action}`)
+      // console.log(`Action: ${action}`)
 
       // set last triggeredAt timestamp, used for repeater
       data.triggeredAt[controllerIndex] = now
@@ -244,7 +242,7 @@ export const initGamepad = () => {
     const parent = el.parentElement
     if (!parent) return false
 
-    const playButton = parent.querySelector('.playIcon') as HTMLButtonElement
+    const playButton = parent.querySelector<HTMLButtonElement>('.playIcon')
     if (playButton) playButton.click()
 
     return true
@@ -257,7 +255,7 @@ export const initGamepad = () => {
     const parent = el.parentElement
     if (!parent) return false
 
-    const installButton = parent.querySelector('.downIcon') as HTMLButtonElement
+    const installButton = parent.querySelector<HTMLButtonElement>('.downIcon')
     if (installButton) installButton.click()
 
     return true
@@ -277,9 +275,9 @@ export const initGamepad = () => {
     const dialog = el.closest('.InstallModal__dialog')
     if (!dialog) return false
 
-    const closeButton = dialog.querySelector(
+    const closeButton = dialog.querySelector<HTMLButtonElement>(
       '.Dialog__CloseButton'
-    ) as HTMLButtonElement
+    )
     if (!closeButton) return false
 
     closeButton.click()
@@ -309,19 +307,13 @@ export const initGamepad = () => {
       const controller = gamepads[index]
       if (!controller) return
 
-      logState(index)
+      // logState(index)
 
       const buttons = controller.buttons
       const axes = controller.axes
       try {
-        if (controller.id.match(/xbox|microsoft|02ea/i)) {
-          checkXbox(buttons, axes, index, checkAction)
-        } else if (controller.id.match(/gamecube|0337/i)) {
+        if (controller.id.match(/gamecube|0337/i)) {
           checkGameCube(buttons, axes, index, checkAction)
-        } else if (controller.id.match(/0ce6/i)) {
-          checkPS5(buttons, axes, index, checkAction)
-        } else if (controller.id.match(/PS3|PLAYSTATION|0268/i)) {
-          checkPS3(buttons, axes, index, checkAction)
         } else if (controller.id.match(/2563.*0523/i)) {
           checkPS3Clone1(buttons, axes, index, checkAction)
         } else if (controller.id.match(/0079.*0006/i)) {
@@ -329,10 +321,10 @@ export const initGamepad = () => {
         } else if (controller.id.match(/0583.*a009/i)) {
           checkGenius1(buttons, axes, index, checkAction)
         } else {
-          // if not specific, fallback to the xbox layout, seems
+          // if not specific, fallback to the standard layout, seems
           // to be the most common for now and if not exact it seems
           // to cover at least the left stick and the main 2 buttons
-          checkXbox(buttons, axes, index, checkAction)
+          checkStandard(buttons, axes, index, checkAction)
         }
       } catch (error) {
         console.log('Gamepad error:', error)
@@ -342,24 +334,24 @@ export const initGamepad = () => {
     requestAnimationFrame(updateStatus)
   }
 
-  function logState(index: number) {
-    const controller = navigator.getGamepads()[index]
-    if (!controller) return
+  // function logState(index: number) {
+  //   const controller = navigator.getGamepads()[index]
+  //   if (!controller) return
 
-    const buttons = controller.buttons
-    const axes = controller.axes
+  //   const buttons = controller.buttons
+  //   const axes = controller.axes
 
-    for (const button in buttons) {
-      if (buttons[button].pressed)
-        console.log(`button ${button} pressed ${buttons[button].value}`)
-    }
-    for (const axis in axes) {
-      if (axes[axis] < -0.2 && axes[axis] >= -1)
-        console.log(`axis ${axis} activated negative`)
-      if (axes[axis] > 0.2 && axes[axis] <= 1)
-        console.log(`axis ${axis} activated positive`)
-    }
-  }
+  //   for (const button in buttons) {
+  //     if (buttons[button].pressed)
+  //       console.log(`button ${button} pressed ${buttons[button].value}`)
+  //   }
+  //   for (const axis in axes) {
+  //     if (axes[axis] < -0.2 && axes[axis] >= -1)
+  //       console.log(`axis ${axis} activated negative`)
+  //     if (axes[axis] > 0.2 && axes[axis] <= 1)
+  //       console.log(`axis ${axis} activated positive`)
+  //   }
+  // }
 
   function connecthandler(e: GamepadEvent) {
     addgamepad(e.gamepad)
