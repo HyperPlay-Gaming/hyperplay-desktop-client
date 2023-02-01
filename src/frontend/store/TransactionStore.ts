@@ -1,8 +1,14 @@
 import { makeAutoObservable } from 'mobx'
-import { TransactionMap, TransactionState, Transaction } from './types'
+import {
+  TransactionMap,
+  TransactionState,
+  Transaction
+} from 'frontend/store/types'
 
 class TransactionStore {
   transactions: TransactionMap = new Map()
+  latestTxn: Transaction | null = null
+  maxId = -1
 
   constructor() {
     makeAutoObservable(this)
@@ -12,36 +18,44 @@ class TransactionStore {
 
   init() {
     window.api.handleProviderRequestInitiated((_e, id, method) => {
-      this.transactions.set(id, {
+      const txn = {
         id,
         method,
         isOpen: true,
         state: TransactionState.INITIATED
-      })
+      }
+      this.transactions.set(id, txn)
+      this.updateIfLatest(id, txn)
     })
 
     window.api.handleProviderRequestPending((_e, id) => {
-      this.transactions.set(id, {
+      const txn = {
         ...this.transactions.get(id)!,
         isOpen: true,
         state: TransactionState.PENDING
-      })
+      }
+      this.transactions.set(id, txn)
+      this.updateIfLatest(id, txn)
     })
 
     window.api.handleProviderRequestCompleted((_e, id) => {
-      this.transactions.set(id, {
+      const txn = {
         ...this.transactions.get(id)!,
         isOpen: true,
         state: TransactionState.CONFIRMED
-      })
+      }
+      this.transactions.set(id, txn)
+      this.updateIfLatest(id, txn)
     })
 
     window.api.handleProviderRequestFailed((_e, id) => {
-      this.transactions.set(id, {
+      const txn = {
         ...this.transactions.get(id)!,
         isOpen: true,
         state: TransactionState.FAILED
-      })
+      }
+      this.transactions.set(id, txn)
+      this.updateIfLatest(id, txn)
     })
   }
 
@@ -51,19 +65,24 @@ class TransactionStore {
     if (
       transaction?.state === TransactionState.FAILED ||
       transaction?.state === TransactionState.CONFIRMED
-    )
+    ) {
       this.transactions.delete(id)
-    else
-      this.transactions.set(id, {
+      this.updateIfLatest(id, null)
+    } else {
+      const txn = {
         ...transaction!,
         isOpen: false
-      })
+      }
+      this.transactions.set(id, txn)
+      this.updateIfLatest(id, txn)
+    }
   }
 
-  get firstTransaction(): Transaction | undefined {
-    const item = this.transactions.entries().next().value
-    console.log(this.transactions)
-    return item ? item[1] : undefined
+  updateIfLatest(id: number, txn: Transaction | null) {
+    if (id >= this.maxId) {
+      this.maxId = id
+      this.latestTxn = txn
+    }
   }
 }
 

@@ -2,49 +2,44 @@ import { TransactionState } from 'frontend/store/types'
 
 type ModalText = Record<string, Record<TransactionState, string>>
 
+const signatureRequestTexts = {
+  [TransactionState.INITIATED]: 'Signature request pending',
+  [TransactionState.PENDING]: '',
+  [TransactionState.FAILED]: 'Signature interrupted',
+  [TransactionState.CONFIRMED]: 'Signature submitted'
+}
+
+const txnRequestTexts = {
+  [TransactionState.INITIATED]: 'Transaction request pending',
+  [TransactionState.PENDING]: 'Transaction submitted',
+  [TransactionState.FAILED]: 'Transaction interrupted',
+  [TransactionState.CONFIRMED]: 'Transaction confirmed'
+}
+
+const chainTexts = {
+  [TransactionState.INITIATED]: 'Custom network request',
+  [TransactionState.PENDING]: '',
+  [TransactionState.FAILED]: 'Custom network canceled',
+  [TransactionState.CONFIRMED]: 'Custom network added'
+}
+
 export const TITLE: ModalText = {
-  default: {
-    [TransactionState.INITIATED]: 'Transaction request pending',
-    [TransactionState.PENDING]: 'Transaction submitted',
-    [TransactionState.FAILED]: 'Transaction interrupted',
-    [TransactionState.CONFIRMED]: 'Transaction confirmed'
-  },
-  eth_sendTransaction: {
-    [TransactionState.INITIATED]: 'Transaction request pending',
-    [TransactionState.PENDING]: 'Transaction submitted',
-    [TransactionState.FAILED]: 'Transaction interrupted',
-    [TransactionState.CONFIRMED]: 'Transaction confirmed'
-  },
-  eth_signTypedData_v3: {
-    [TransactionState.INITIATED]: 'Signature request pending',
-    [TransactionState.PENDING]: '',
-    [TransactionState.FAILED]: 'Signature interrupted',
-    [TransactionState.CONFIRMED]: 'Signature submitted'
-  },
-  eth_personalSign: {
-    [TransactionState.INITIATED]: 'Signature request pending',
-    [TransactionState.PENDING]: '',
-    [TransactionState.FAILED]: 'Signature interrupted',
-    [TransactionState.CONFIRMED]: 'Signature submitted'
-  },
+  default: txnRequestTexts,
+  eth_sendTransaction: txnRequestTexts,
+  eth_sendRawTransaction: txnRequestTexts,
+  eth_signTransaction: signatureRequestTexts,
+  eth_signTypedData_v1: signatureRequestTexts,
+  eth_signTypedData_v3: signatureRequestTexts,
+  eth_signTypedData_v4: signatureRequestTexts,
+  eth_personalSign: signatureRequestTexts,
   wallet_watchAsset: {
-    [TransactionState.INITIATED]: 'Custom token pending',
+    [TransactionState.INITIATED]: 'Add custom token request pending',
     [TransactionState.PENDING]: '',
-    [TransactionState.FAILED]: 'Custom token canceled',
+    [TransactionState.FAILED]: 'Custom token request canceled',
     [TransactionState.CONFIRMED]: 'Custom token added'
   },
-  wallet_addEthereumChain: {
-    [TransactionState.INITIATED]: 'Custom network request',
-    [TransactionState.PENDING]: '',
-    [TransactionState.FAILED]: 'Custom network canceled',
-    [TransactionState.CONFIRMED]: 'Custom network added'
-  },
-  wallet_switchEthereumChain: {
-    [TransactionState.INITIATED]: 'Custom network request',
-    [TransactionState.PENDING]: '',
-    [TransactionState.FAILED]: 'Custom network canceled',
-    [TransactionState.CONFIRMED]: 'Custom network added'
-  }
+  wallet_addEthereumChain: chainTexts,
+  wallet_switchEthereumChain: chainTexts
 }
 
 export const DESCRIPTION: Record<TransactionState, string> = {
