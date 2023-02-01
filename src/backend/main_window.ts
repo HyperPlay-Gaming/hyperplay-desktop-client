@@ -1,7 +1,6 @@
 import { BrowserWindow, screen } from 'electron'
 import path from 'path'
 import { configStore } from './constants'
-import { initExtension } from './hyperplay-extension-helper/ipcHandlers'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -28,7 +27,7 @@ export const sendFrontendMessage = (message: string, ...payload: unknown[]) => {
 }
 
 // creates the mainWindow based on the configuration
-export const createMainWindow = async () => {
+export const createMainWindow = () => {
   let windowProps: Electron.Rectangle = {
     height: 690,
     width: 1200,
@@ -61,8 +60,6 @@ export const createMainWindow = async () => {
       windowProps.width = screenInfo.workAreaSize.width * 0.8
     }
   }
-
-  await initExtension()
 
   // Create the browser window.
   mainWindow = new BrowserWindow({

@@ -183,6 +183,7 @@ export {
   configStore,
   configPath,
   appConfigFolder,
+  configFolder,
   gamesConfigPath,
   githubURL,
   iconsFolder,

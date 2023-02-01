@@ -1,3 +1,5 @@
+import { ExtensionStore } from './../../backend/hyperplay-extension-helper/store/index'
+import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
 
@@ -50,6 +52,9 @@ interface HyperPlaySyncIPCFunctions {
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
+  loadingScreenReady: () => void
+  reloadApp: () => void
+  createNewMetaMaskWallet: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -57,7 +62,6 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   changeLanguage: (language: string) => void
   notify: (args: { title: string; body: string }) => void
   frontendReady: () => void
-  loadingScreenReady: () => void
   lock: () => void
   unlock: () => void
   quit: () => void
@@ -116,6 +120,11 @@ interface HyperPlayAsyncIPCFunctions {
   chromeTabsCreate: (
     options: chrome.tabs.CreateProperties
   ) => Promise<chrome.tabs.Tab>
+  importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
+  getMetaMaskImportOptions: (
+    configDbPath?: string
+  ) => Promise<MetaMaskImportOptions | null>
+  getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>
 }

@@ -1,3 +1,4 @@
+import { setExtensionMetadata } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -161,9 +162,10 @@ app.commandLine.appendSwitch('remote-debugging-port', '9222')
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
 
+let mainWindow: BrowserWindow
 async function initializeWindow(): Promise<BrowserWindow> {
   configStore.set('userHome', userHome)
-  const mainWindow = await createMainWindow()
+  mainWindow = createMainWindow()
 
   ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
@@ -216,22 +218,25 @@ async function initializeWindow(): Promise<BrowserWindow> {
   //   detectVCRedist(mainWindow)
   // }
 
-  if (!app.isPackaged) {
-    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-    //   import('electron-devtools-installer').then((devtools) => {
-    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
-    //     installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
-    //       logWarning(['An error occurred: ', err], {
-    //         prefix: LogPrefix.Backend
-    //       })
-    //     })
-    //   })
-    // }
+  loadMainWindowURL()
 
+  return mainWindow
+}
+
+const loadMainWindowURL = function () {
+  if (!app.isPackaged) {
+    if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+      import('electron-devtools-installer').then((devtools) => {
+        const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
+
+        installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
+          logWarning(['An error occurred: ', err], LogPrefix.Backend)
+        })
+      })
+    }
     mainWindow.loadURL('http://localhost:5173')
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
-    Menu.setApplicationMenu(null)
+    mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(`file://${path.join(publicDir, '../build/index.html')}`)
@@ -287,6 +292,8 @@ if (!gotTheLock) {
     handleProtocol(argv)
   })
   app.whenReady().then(async () => {
+    setExtensionMetadata()
+
     initOnlineMonitor()
 
     getSystemInfo().then((systemInfo) =>
@@ -1796,3 +1803,7 @@ ProviderHelper.passEventCallbacks(
 )
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
+
+ipcMain.on('reloadApp', async () => {
+  loadMainWindowURL()
+})
