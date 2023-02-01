@@ -21,7 +21,7 @@ const TransactionNotification = () => {
     item.state === TransactionState.CONFIRMED ||
     item.state === TransactionState.FAILED
   ) {
-    setTimeout(() => transactionStore.closeTransaction(item.id), 2000)
+    setTimeout(() => transactionStore.closeTransaction(item.id), 5000)
   }
 
   return (
