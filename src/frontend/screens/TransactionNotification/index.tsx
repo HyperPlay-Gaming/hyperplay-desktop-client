@@ -8,9 +8,9 @@ import PhoneIcon from './components/PhoneIcon'
 import { TransactionState } from 'frontend/store/types'
 
 const TransactionNotification = () => {
-  const item = transactionStore.firstTransaction
+  const item = transactionStore.latestTxn
 
-  if (!item || !item.isOpen) return <></>
+  if (item === null || !item.isOpen) return <></>
 
   const title = TITLE[item.method]
     ? TITLE[item.method][item.state]
