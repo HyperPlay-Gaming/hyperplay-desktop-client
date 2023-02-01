@@ -115,7 +115,6 @@ import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue, addToQueue } from './downloadmanager/downloadqueue'
-import { PROXY_TOPICS } from './hyperplay-proxy-server/types'
 import * as ProviderHelper from './hyperplay-proxy-server/providerHelper'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import * as ProxyServer from './hyperplay-proxy-server/proxy'
@@ -1814,7 +1813,8 @@ ipcMain.on('providerRequestCompleted', (id) => {
 
 ipcMain.on('providerRequestFailed', (id) => {
   mainWindow.webContents.send('providerRequestFailed', id)
-  
+})
+
 ipcMain.on('reloadApp', async () => {
   loadMainWindowURL()
 })
