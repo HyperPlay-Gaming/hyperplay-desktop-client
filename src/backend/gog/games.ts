@@ -23,8 +23,8 @@ import {
   ExecResult,
   InstallArgs,
   InstalledInfo,
-  InstallPlatform,
-  WineCommandArgs
+  WineCommandArgs,
+  InstallPlatform
 } from 'common/types'
 import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
 import { gamesConfigPath, isWindows, isMac, isLinux } from '../constants'
