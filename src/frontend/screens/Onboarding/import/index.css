@@ -1,0 +1,8 @@
+.importOptionsContainer {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(224px, 1fr));
+  grid-auto-rows: 112px;
+  gap: 16px;
+  margin-top: var(--space-sm);
+  margin-bottom: calc(2 * var(--space-sm));
+}

@@ -1,6 +1,8 @@
 import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
 import { LegendaryInstallPlatform } from './types/legendary'
-import { VersionInfo } from 'heroic-wine-downloader'
+import { IpcRendererEvent } from 'electron'
+import { ChildProcess } from 'child_process'
+import { HowLongToBeatEntry } from 'howlongtobeat'
 
 export type WrapRendererCallback<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -9,8 +11,6 @@ export type WrapRendererCallback<
   e: Electron.IpcRendererEvent,
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
-import { IpcRendererEvent } from 'electron'
-import { ChildProcess } from 'child_process'
 
 export type Runner = 'legendary' | 'gog' | 'sideload'
 
@@ -45,31 +45,33 @@ export type Release = {
 }
 
 export interface AppSettings extends GameSettings {
-  checkUpdatesInterval: number
-  enableUpdates: boolean
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
   addSteamShortcuts: boolean
-  altLegendaryBin: string
   altGogdlBin: string
+  altLegendaryBin: string
+  autoUpdateGames: boolean
   checkForUpdatesOnStartup: boolean
+  checkUpdatesInterval: number
+  customThemesPath: string
   customWinePaths: string[]
   darkTrayIcon: boolean
   defaultInstallPath: string
   defaultSteamPath: string
+  defaultWinePrefix: string
   disableController: boolean
   discordRPC: boolean
   downloadNoHttps: boolean
   egsLinkedPath: string
+  enableUpdates: boolean
   exitToTray: boolean
+  hideChangelogsOnStartup: boolean
   libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number
   maxWorkers: number
   minimizeOnGameLaunch: boolean
   startInTray: boolean
   userInfo: UserInfo
-  defaultWinePrefix: string
-  customThemesPath: string
 }
 
 export type LibraryTopSectionOptions =
@@ -89,12 +91,13 @@ export type ExecResult = {
 export interface ExtraInfo {
   about: About
   reqs: Reqs[]
+  storeUrl: string
 }
 
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 
 export interface GameInfo {
-  runner: Runner
+  runner: 'legendary' | 'gog'
   store_url: string
   app_name: string
   art_cover: string
@@ -124,22 +127,23 @@ export interface GameInfo {
 export interface GameSettings {
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
-  preferSystemLibs: boolean
   autoSyncSaves: boolean
   battlEyeRuntime: boolean
+  DXVKFpsCap: string //Entered as string but used as number
   eacRuntime: boolean
+  enableDXVKFpsLimit: boolean
   enableEsync: boolean
   enableFSR: boolean
   enableFsync: boolean
-  maxSharpness?: number
+  enviromentOptions: EnviromentVariable[]
+  ignoreGameUpdates: boolean
   language: string
   launcherArgs: string
+  maxSharpness?: number
   nvidiaPrime: boolean
   offlineMode: boolean
   otherOptions?: string //deprecated
-  enviromentOptions: EnviromentVariable[]
-  wrapperOptions: WrapperVariable[]
-  savesPath: string
+  preferSystemLibs: boolean
   showFps: boolean
   showMangohud: boolean
   targetExe: string
@@ -148,26 +152,35 @@ export interface GameSettings {
   wineCrossoverBottle: string
   winePrefix: string
   wineVersion: WineInstallation
+  wrapperOptions: WrapperVariable[]
+  savesPath: string
   gogSaves?: GOGCloudSavesLocation[]
 }
+
+export type Status =
+  | 'installing'
+  | 'updating'
+  | 'launching'
+  | 'playing'
+  | 'uninstalling'
+  | 'repairing'
+  | 'done'
+  | 'canceled'
+  | 'moving'
+  | 'queued'
+  | 'error'
+  | 'syncing-saves'
+  | 'notAvailable'
+  | 'notSupportedGame'
+  | 'notInstalled'
+  | 'installed'
 
 export interface GameStatus {
   appName: string
   progress?: InstallProgress
   folder?: string
   runner?: Runner
-  status:
-    | 'installing'
-    | 'updating'
-    | 'launching'
-    | 'playing'
-    | 'uninstalling'
-    | 'repairing'
-    | 'done'
-    | 'canceled'
-    | 'moving'
-    | 'queued'
-    | 'error'
+  status: Status
 }
 
 export type GlobalConfigVersion = 'auto' | 'v0'
@@ -178,6 +191,7 @@ export interface InstallProgress {
   percent: number
   downSpeed?: number
   diskSpeed?: number
+  file?: string
 }
 export interface InstalledInfo {
   executable: string
@@ -193,7 +207,7 @@ export interface InstalledInfo {
   buildId?: string // For verifing GOG games
 }
 
-interface Reqs {
+export interface Reqs {
   minimum: string
   recommended: string
   title: string
@@ -246,25 +260,26 @@ export interface GOGLoginData {
 }
 
 export interface GOGGameInfo {
+  isGalaxyCompatible: true
   tags: string[]
   id: number
-  image: string
   availability: {
     isAvailable: boolean
-    isAvailableInAccount: boolean
+    isAvailableInAccount: true
   }
   title: string
+  image: string
   url: string
   worksOn: {
-    Windows: boolean
-    Mac: boolean
-    Linux: boolean
+    [key in 'Windows' | 'Mac' | 'Linux']: boolean
   }
   category: string
   rating: number
-  isComingSoom: boolean
-  isGame: boolean
+  isComingSoon: boolean
+  isMovie: false
+  isGame: true
   slug: string
+  updates: number
   isNew: boolean
   dlcCount: number
   releaseDate: {
@@ -275,8 +290,7 @@ export interface GOGGameInfo {
   isBaseProductMissing: boolean
   isHidingDisabled: boolean
   isInDevelopment: boolean
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  extraInfo: any[]
+  extraInfo: unknown[]
   isHidden: boolean
 }
 
@@ -365,14 +379,7 @@ export interface WrapperVariable {
   args: string
 }
 
-export type AntiCheatStatus =
-  | 'Planned'
-  | 'Denied'
-  | 'Broken'
-  | 'Supported'
-  | 'Running'
-
-export type AntiCheat =
+type AntiCheat =
   | 'Arbiter'
   | 'BattlEye'
   | 'Denuvo Anti-Cheat'
@@ -430,10 +437,12 @@ export interface Runtime {
 
 export type RuntimeName = 'eac_runtime' | 'battleye_runtime'
 
-export interface HiddenGame {
+export type RecentGame = {
   appName: string
   title: string
 }
+
+export type HiddenGame = RecentGame
 
 export type FavouriteGame = HiddenGame
 
@@ -494,7 +503,7 @@ interface GamepadActionArgsWithoutMetadata {
   metadata?: undefined
 }
 
-export type ElWebview = {
+type ElWebview = {
   canGoBack: () => boolean
   canGoForward: () => boolean
   goBack: () => void
@@ -528,15 +537,6 @@ export interface Tools {
   runner: Runner
 }
 
-export type RecentGame = {
-  appName: string
-  title: string
-}
-
-export interface UpdateParams {
-  gameInfo: GameInfo
-}
-
 export interface DMQueueElement {
   type: 'update' | 'install'
   params: InstallParams
@@ -546,9 +546,17 @@ export interface DMQueueElement {
   status?: 'done' | 'error' | 'abort'
 }
 
+type ProtonVerb =
+  | 'run'
+  | 'waitforexitandrun'
+  | 'runinprefix'
+  | 'destroyprefix'
+  | 'getcompatpath'
+  | 'getnativepath'
+
 export type WineCommandArgs = {
   commandParts: string[]
-  wait: boolean
+  wait?: boolean
   protonVerb?: ProtonVerb
   gameSettings?: GameSettings
   installFolderName?: string
@@ -562,11 +570,11 @@ export type Web3Features = {
 }
 
 export interface SideloadGame {
-  runner: Runner
+  runner: 'sideload'
   app_name: string
   art_cover: string
   art_square: string
-  is_installed: boolean
+  is_installed: true
   title: string
   install: {
     executable: string
@@ -577,14 +585,6 @@ export interface SideloadGame {
   browserUrl: string
   web3: Web3Features
 }
-
-export type ProtonVerb =
-  | 'run'
-  | 'waitforexitandrun'
-  | 'runinprefix'
-  | 'destroyprefix'
-  | 'getcompatpath'
-  | 'getnativepath'
 
 export interface SaveSyncArgs {
   arg: string | undefined
@@ -626,3 +626,91 @@ export interface ToolArgs {
 }
 
 export type StatusPromise = Promise<{ status: 'done' | 'error' }>
+
+export interface GameScoreInfo {
+  score: string
+  urlid: string
+}
+export interface PCGamingWikiInfo {
+  steamID: string
+  howLongToBeatID: string
+  metacritic: GameScoreInfo
+  opencritic: GameScoreInfo
+  igdb: GameScoreInfo
+  direct3DVersions: string[]
+}
+
+export interface AppleGamingWikiInfo {
+  crossoverRating: string
+  crossoverLink: string
+}
+
+export interface WikiInfo {
+  timestampLastFetch: string
+  pcgamingwiki: PCGamingWikiInfo | null
+  applegamingwiki: AppleGamingWikiInfo | null
+  howlongtobeat: HowLongToBeatEntry | null
+}
+
+/**
+ * Defines from where the version comes
+ */
+export type Type =
+  | 'Wine-GE'
+  | 'Proton-GE'
+  | 'Proton'
+  | 'Wine-Lutris'
+  | 'Wine-Kron4ek'
+  | 'Wine-Crossover'
+  | 'Wine-Staging-macOS'
+
+/**
+ * Interface contains information about a version
+ * - version
+ * - type (wine, proton, lutris, ge ...)
+ * - date
+ * - download link
+ * - checksum link
+ * - size (download and disk)
+ */
+export interface VersionInfo {
+  version: string
+  type: Type
+  date: string
+  download: string
+  downsize: number
+  disksize: number
+  checksum: string
+}
+
+/**
+ * Enum for the supported repositorys
+ */
+export enum Repositorys {
+  WINEGE,
+  PROTONGE,
+  PROTON,
+  WINELUTRIS,
+  WINECROSSOVER,
+  WINESTAGINGMACOS
+}
+
+/**
+ * Type for the progress callback state
+ */
+export type State = 'downloading' | 'unzipping' | 'idle'
+
+/**
+ * Interface for the information that progress callback returns
+ */
+export interface ProgressInfo {
+  percentage: number
+  avgSpeed: number
+  eta: number
+}
+
+export interface WineManagerUISettings {
+  value: string
+  type: Type
+  enabled: boolean
+}

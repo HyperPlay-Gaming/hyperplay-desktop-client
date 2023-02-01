@@ -116,12 +116,12 @@ export default function ControllerHints() {
     }
 
     // check focused element after a page change
-    setHints(document.querySelector(':focus') as HTMLElement)
+    setHints(document.querySelector<HTMLElement>(':focus'))
   }, [location])
 
   useEffect(() => {
     // set the brand for the images to use
-    if (activeController.match(/sony|0ce6|PS3|PLAYSTATION|0268|'2563.*0523/i)) {
+    if (activeController.match(/sony|054c|PS3|PLAYSTATION|0268|'2563.*0523/i)) {
       setLayout('ps')
     } else if (activeController.match(/28de.*11ff/)) {
       setLayout('steam-deck')

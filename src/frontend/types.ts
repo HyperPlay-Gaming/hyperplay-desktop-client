@@ -1,4 +1,3 @@
-import { VersionInfo } from 'heroic-wine-downloader'
 import {
   AppSettings,
   GameInfo,
@@ -8,7 +7,8 @@ import {
   DialogType,
   ButtonOptions,
   LibraryTopSectionOptions,
-  DMQueueElement
+  DMQueueElement,
+  SideloadGame
 } from 'common/types'
 
 export type Category = 'all' | 'legendary' | 'gog' | 'sideload'
@@ -24,7 +24,6 @@ export interface ContextType {
   setLanguage: (newLanguage: string) => void
   handleCategory: (value: Category) => void
   handlePlatformFilter: (value: string) => void
-  handleGameStatus: (game: GameStatus) => Promise<void>
   handleLayout: (value: string) => void
   handleSearch: (input: string) => void
   layout: string
@@ -51,19 +50,21 @@ export interface ContextType {
   setShowHidden: (value: boolean) => void
   showFavourites: boolean
   setShowFavourites: (value: boolean) => void
+  showNonAvailable: boolean
+  setShowNonAvailable: (value: boolean) => void
   theme: string
   setTheme: (themeName: string) => void
   zoomPercent: number
   setZoomPercent: (newZoomPercent: number) => void
   epic: {
     library: GameInfo[]
-    username: string | null
+    username?: string
     login: (sid: string) => Promise<string>
     logout: () => Promise<void>
   }
   gog: {
     library: GameInfo[]
-    username: string | null
+    username?: string
     login: (token: string) => Promise<string>
     logout: () => Promise<void>
   }
@@ -78,7 +79,21 @@ export interface ContextType {
   dialogModalOptions: DialogModalOptions
   showDialogModal: (options: DialogModalOptions) => void
   showResetDialog: () => void
-  sideloadedLibrary: GameInfo[]
+  externalLinkDialogOptions: ExternalLinkDialogOptions
+  handleExternalLinkDialog: (options: ExternalLinkDialogOptions) => void
+  sideloadedLibrary: SideloadGame[]
+  isSettingsModalOpen: {
+    value: boolean
+    gameInfo?: GameInfo | null
+    type: 'settings' | 'log'
+  }
+  setIsSettingsModalOpen: (
+    value: boolean,
+    type?: 'settings' | 'log',
+    gameInfo?: GameInfo | SideloadGame
+  ) => void
+  showMetaMaskBrowserSidebarLinks: boolean
+  setShowMetaMaskBrowserSidebarLinks: (value: boolean) => void
 }
 
 export type DialogModalOptions = {
@@ -89,12 +104,15 @@ export type DialogModalOptions = {
   type?: DialogType
 }
 
-export interface HiddenGame {
+export interface ExternalLinkDialogOptions {
+  showDialog: boolean
+  linkCallback?: () => void
+}
+
+interface HiddenGame {
   appName: string
   title: string
 }
-
-export type FavouriteGame = HiddenGame
 
 export interface InstallProgress {
   bytes: string
@@ -103,7 +121,7 @@ export interface InstallProgress {
   percent: number
 }
 
-export type RefreshOptions = {
+type RefreshOptions = {
   checkForUpdates?: boolean
   fullRefresh?: boolean
   library?: Runner | 'all'
@@ -111,67 +129,6 @@ export type RefreshOptions = {
 }
 
 export type SyncType = 'Download' | 'Upload' | 'Force download' | 'Force upload'
-
-export interface WineVersionInfo extends VersionInfo {
-  isInstalled: boolean
-  hasUpdate: boolean
-  installDir: string
-}
-
-export type ElWebview = {
-  canGoBack: () => boolean
-  canGoForward: () => boolean
-  goBack: () => void
-  goForward: () => void
-  reload: () => void
-  isLoading: () => boolean
-  getURL: () => string
-  copy: () => string
-  selectAll: () => void
-  findInPage: (text: string | RegExp) => void
-}
-
-export type WebviewType = HTMLWebViewElement & ElWebview
-
-export interface GamepadActionStatus {
-  [key: string]: {
-    triggeredAt: { [key: number]: number }
-    repeatDelay: false | number
-  }
-}
-
-export type AntiCheatStatus =
-  | 'Planned'
-  | 'Denied'
-  | 'Broken'
-  | 'Supported'
-  | 'Running'
-
-export type AntiCheat =
-  | 'Arbiter'
-  | 'BattlEye'
-  | 'Denuvo Anti-Cheat'
-  | 'Easy Anti-Cheat'
-  | 'EQU8'
-  | 'FACEIT'
-  | 'FairFight'
-  | 'Mail.ru Anti-Cheat'
-  | 'miHoYo Protect'
-  | 'miHoYo Protect 2'
-  | 'NEAC Protect'
-  | 'Nexon Game Security'
-  | 'nProtect GameGuard'
-  | 'PunkBuster'
-  | 'RICOCHET'
-  | 'Sabreclaw'
-  | 'Treyarch Anti-Cheat'
-  | 'UNCHEATER'
-  | 'Unknown (Custom)'
-  | 'VAC'
-  | 'Vanguard'
-  | 'Warden'
-  | 'XIGNCODE3'
-  | 'Zakynthos'
 
 declare global {
   interface Window {
@@ -182,6 +139,7 @@ declare global {
     ) => Promise<string>
     setTheme: (themeClass: string) => void
   }
+
   interface WindowEventMap {
     'controller-changed': CustomEvent<{ controllerId: string }>
   }

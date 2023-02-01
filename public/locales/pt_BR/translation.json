@@ -203,7 +203,6 @@
         "store": "Loja",
         "title": "Título do jogo"
     },
-    "GameSettings": "Configurações do jogo",
     "generic": {
         "error": {
             "component": "Nenhum jogo encontrado - Tente sair e fazer login novamente ou uma das opções abaixo"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "Loja GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignorar escondidos",
         "platform": "Plataforma",
         "show_all_games": "Mostrar todos os jogos",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Mostrar apenas favoritos",
         "show_hidden": "Mostrar escondidos",
         "store": "Filtrar loja"
@@ -268,7 +269,7 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Atualização disponível!",
             "stable": "Estável",
-            "version": "Heroic Version"
+            "version": "HyperPlay Version"
         },
         "save-sync": {
             "searching": "Trying to detect the correct save folder"
@@ -563,8 +564,7 @@
         },
         "navbar": {
             "advanced": "Avançado",
-            "games_settings": "Game Settings",
-            "games_settings_defaults": "Game Defaults",
+            "games_settings_defaults": "Padrões do Jogo",
             "general": "Config. Gerais",
             "log": "Log",
             "other": "Outros",

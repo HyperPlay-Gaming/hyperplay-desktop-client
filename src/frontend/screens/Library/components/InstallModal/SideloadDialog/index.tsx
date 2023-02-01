@@ -2,11 +2,12 @@ import './index.scss'
 import short from 'short-uuid'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import {
-  GameInfo,
   InstallPlatform,
-  Web3Features,
-  WineInstallation
+  SideloadGame,
+  WineInstallation,
+  Web3Features
 } from 'common/types'
 import {
   CachedImage,
@@ -32,6 +33,7 @@ import classNames from 'classnames'
 type Props = {
   availablePlatforms: AvailablePlatforms
   winePrefix: string
+  crossoverBottle: string
   wineVersion: WineInstallation | undefined
   setWinePrefix: React.Dispatch<React.SetStateAction<string>>
   children: React.ReactNode
@@ -44,6 +46,7 @@ export default function SideloadDialog({
   availablePlatforms,
   backdropClick,
   winePrefix,
+  crossoverBottle,
   wineVersion,
   platformToInstall,
   setWinePrefix,
@@ -60,7 +63,7 @@ export default function SideloadDialog({
   const [searching, setSearching] = useState(false)
   const [app_name, setApp_name] = useState(appName ?? '')
   const [runningSetup, setRunningSetup] = useState(false)
-  const [gameInfo, setGameInfo] = useState<Partial<GameInfo>>({})
+  const [gameInfo, setGameInfo] = useState<Partial<SideloadGame>>({})
   const [web3, setWeb3] = useState<Web3Features>({ supported: false })
   const editMode = Boolean(appName)
 
@@ -76,7 +79,7 @@ export default function SideloadDialog({
   useEffect(() => {
     if (appName) {
       getGameInfo(appName, 'sideload').then((info) => {
-        if (!info) {
+        if (!info || info.runner !== 'sideload') {
           return
         }
         setGameInfo(info)
@@ -171,7 +174,8 @@ export default function SideloadDialog({
       config: {
         ...gameSettings,
         winePrefix,
-        wineVersion
+        wineVersion,
+        wineCrossoverBottle: crossoverBottle
       }
     })
 
@@ -257,6 +261,14 @@ export default function SideloadDialog({
     return <BrowserIcon width={14} height={14} />
   }
 
+  function handleGameUrl(url: string) {
+    if (!url.startsWith('https://')) {
+      return setGameUrl(`https://${url}`)
+    }
+
+    setGameUrl(url)
+  }
+
   const showSideloadExe = appPlatform !== 'Browser'
 
   const shouldShowRunExe =
@@ -330,9 +342,9 @@ export default function SideloadDialog({
                   'sideload.placeholder.url',
                   'Paste the Game URL here'
                 )}
-                onChange={(e) => setGameUrl(e.target.value)}
+                onChange={(e) => handleGameUrl(e.target.value)}
                 htmlId="sideload-game-url"
-                value={gameInfo.browserUrl ?? gameUrl}
+                value={gameUrl}
               />
             )}
             <ToggleSwitch
@@ -350,7 +362,7 @@ export default function SideloadDialog({
         </div>
       </DialogContent>
       <DialogFooter>
-        {shouldShowRunExe && (
+        {shouldShowRunExe && platformToInstall !== 'Browser' && (
           <button
             onClick={async () => handleRunExe()}
             className={`button is-secondary`}

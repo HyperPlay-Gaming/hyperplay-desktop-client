@@ -4,6 +4,7 @@ import { GOGLoginData } from 'common/types'
 import { configStore, libraryStore } from '../gog/electronStores'
 import { errorHandler } from '../utils'
 import { isOnline } from '../online_monitor'
+import { UserData } from 'common/types/gog'
 
 const gogAuthenticateUrl =
   'https://auth.gog.com/token?client_id=46899977096215655&client_secret=9d85c43b1482497dbbce61f6e4aa173a433796eeae2ca8c5f6129f2dc4de46d9&grant_type=authorization_code&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&code='
@@ -16,48 +17,44 @@ export class GOGUser {
     // TODO: Write types for this
   ): Promise<{
     status: 'done' | 'error'
-    data?: { displayName: string; username: string }
+    data?: UserData | null
   }> {
-    logInfo('Logging using GOG credentials', { prefix: LogPrefix.Gog })
+    logInfo('Logging using GOG credentials', LogPrefix.Gog)
 
     // Gets token from GOG basaed on authorization code
     const response = await axios
       .get(gogAuthenticateUrl + code)
       .catch((error) => {
         // Handle fetching error
-        logError(['Failed to get access_token', error], {
-          prefix: LogPrefix.Gog
-        })
+        logError(['Failed to get access_token', error], LogPrefix.Gog)
         return null
       })
     if (!response?.data) {
-      logError('Failed to get access_token', { prefix: LogPrefix.Gog })
+      logError('Failed to get access_token', LogPrefix.Gog)
       return { status: 'error' }
     }
 
     const data: GOGLoginData = response.data
     data.loginTime = Date.now()
     configStore.set('credentials', data)
-    logInfo('Login Successful', { prefix: LogPrefix.Gog })
+    logInfo('Login Successful', LogPrefix.Gog)
     const userDetails = await this.getUserDetails()
     return { status: 'done', data: userDetails }
   }
 
   public static async getUserDetails() {
     if (!isOnline()) {
-      logError('Unable to get user data, HyperPlay offline', {
-        prefix: LogPrefix.Gog
-      })
+      logError('Unable to get user data, HyperPlay offline', LogPrefix.Gog)
       return null
     }
-    logInfo('Getting data about the user', { prefix: LogPrefix.Gog })
+    logInfo('Getting data about the user', LogPrefix.Gog)
     if (!this.isLoggedIn()) {
-      logWarning('User is not logged in', { prefix: LogPrefix.Gog })
+      logWarning('User is not logged in', LogPrefix.Gog)
       return
     }
     const user = await this.getCredentials()
     if (!user) {
-      logError("No credentials, can't get user data", { prefix: LogPrefix.Gog })
+      logError("No credentials, can't get user data", LogPrefix.Gog)
       return
     }
     const response = await axios
@@ -68,22 +65,20 @@ export class GOGUser {
         }
       })
       .catch((error) => {
-        logError(['Error getting user Data', error], {
-          prefix: LogPrefix.Gog
-        })
+        logError(['Error getting user Data', error], LogPrefix.Gog)
       })
 
     if (!response) {
       return
     }
 
-    const data = response.data
+    const data: UserData = response.data
 
     //Exclude email, it won't be needed
     delete data.email
 
     configStore.set('userData', data)
-    logInfo('Saved user data to config', { prefix: LogPrefix.Gog })
+    logInfo('Saved user data to config', LogPrefix.Gog)
 
     return data
   }
@@ -97,25 +92,23 @@ export class GOGUser {
       return this.refreshToken()
     }
 
-    return configStore.get('credentials', {}) as GOGLoginData
+    return configStore.get_nodefault('credentials')
   }
 
   /**
    * Refreshes token and returns new credentials
    */
   public static async refreshToken(): Promise<GOGLoginData | undefined> {
-    const user: GOGLoginData = configStore.get(
-      'credentials',
-      {}
-    ) as GOGLoginData
-    logInfo('Refreshing access_token', { prefix: LogPrefix.Gog })
+    const user = configStore.get_nodefault('credentials')
+    logInfo('Refreshing access_token', LogPrefix.Gog)
     if (user) {
       const response = await axios
         .get(`${gogRefreshTokenUrl}&refresh_token=${user.refresh_token}`)
         .catch(() => {
-          logError('Error with refreshing token, reauth required', {
-            prefix: LogPrefix.Gog
-          })
+          logError(
+            'Error with refreshing token, reauth required',
+            LogPrefix.Gog
+          )
         })
 
       if (!response) {
@@ -125,10 +118,10 @@ export class GOGUser {
       const data: GOGLoginData = response.data
       data.loginTime = Date.now()
       configStore.set('credentials', data)
-      logInfo('Token refreshed successfully', { prefix: LogPrefix.Gog })
+      logInfo('Token refreshed successfully', LogPrefix.Gog)
       return data
     } else {
-      logError('No credentials, auth required', { prefix: LogPrefix.Gog })
+      logError('No credentials, auth required', LogPrefix.Gog)
       errorHandler({
         error: 'No credentials',
         runner: 'GOG'
@@ -138,10 +131,7 @@ export class GOGUser {
   }
 
   public static isTokenExpired() {
-    const user: GOGLoginData = configStore.get(
-      'credentials',
-      null
-    ) as GOGLoginData
+    const user = configStore.get_nodefault('credentials')
     if (!user) {
       return true
     }
@@ -151,7 +141,7 @@ export class GOGUser {
   public static logout() {
     configStore.clear()
     libraryStore.clear()
-    logInfo('Logging user out', { prefix: LogPrefix.Gog })
+    logInfo('Logging user out', LogPrefix.Gog)
   }
 
   public static isLoggedIn() {

@@ -203,7 +203,6 @@
         "store": "Pood",
         "title": "Mängu pealkiri"
     },
-    "GameSettings": "Mängu seaded",
     "generic": {
         "error": {
             "component": "Mänge ei leitud - proovige uuesti sisse logida või ühte allolevatest võimalustest"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Pood",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignoreeri peidetud",
         "platform": "Platvorm",
         "show_all_games": "Näita kõiki mänge",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Näita ainult lemmikuid",
         "show_hidden": "Näita peidetud",
         "store": "Filtreeri poodi"
@@ -271,7 +272,7 @@
             "version": "HyperPlay Version"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Seaded salvestatakse automaatselt",
         "version": "Wine'i versioon"
@@ -523,9 +524,9 @@
             "title": "Käivita EXE prefiksil"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Valige täpne mängude salvestiste kaust",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Valige teema",
         "showfps": "Näita FPS-i (DX9, 10 ja 11)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Täpsem",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Üldine",
             "log": "Logi",

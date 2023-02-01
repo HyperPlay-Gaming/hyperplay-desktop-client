@@ -17,12 +17,17 @@ import { ControllerHints, OfflineMessage } from './components/UI'
 import DownloadManager from './screens/DownloadManager'
 import DialogHandler from './components/UI/DialogHandler'
 import ExtensionHandler from './ExtensionHandler'
+import MetaMaskHome from './screens/MetaMaskHome'
+import MetaMaskPortfolio from './screens/MetaMaskPortfolio'
+import ExtensionManager from './ExtensionManager'
 import onboardingStore from './store/OnboardingStore'
 import { observer } from 'mobx-react-lite'
 import TransactionNotification from './screens/TransactionNotification'
+import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
+import SettingsModal from './screens/Settings/components/SettingsModal'
 
 function App() {
-  const { sidebarCollapsed } = useContext(ContextProvider)
+  const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
@@ -31,7 +36,15 @@ function App() {
         <Sidebar />
         <main className="content">
           <ExtensionHandler />
+          <ExtensionManager />
           <DialogHandler />
+          <ExternalLinkDialog />
+          {isSettingsModalOpen.gameInfo && (
+            <SettingsModal
+              gameInfo={isSettingsModalOpen.gameInfo}
+              type={isSettingsModalOpen.type}
+            />
+          )}
           <Routes>
             <Route path="/" element={<Navigate replace to="/library" />} />
             <Route path="/library" element={<Library />} />
@@ -39,6 +52,8 @@ function App() {
             <Route path="epicstore" element={<WebView />} />
             <Route path="gogstore" element={<WebView />} />
             <Route path="wiki" element={<WebView />} />
+            <Route path="metamaskHome" element={<MetaMaskHome />} />
+            <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />} />
             <Route path="/gamepage">
               <Route path=":runner">
                 <Route path=":appName" element={<GamePage />} />

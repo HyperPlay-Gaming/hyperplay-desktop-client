@@ -1,7 +1,8 @@
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
+import { ExtensionStore } from './../../backend/hyperplay-extension-helper/store/index'
+import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
-import { HowLongToBeatEntry } from 'howlongtobeat'
 
 import {
   Runner,
@@ -29,7 +30,8 @@ import {
   RuntimeName,
   DMQueueElement,
   ConnectivityStatus,
-  GamepadActionArgs
+  GamepadActionArgs,
+  ExtraInfo
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
@@ -55,6 +57,9 @@ interface HyperPlaySyncIPCFunctions {
   providerRequestPending: ProxiedProviderEventCallback
   providerRequestCompleted: ProxiedProviderEventCallback
   providerRequestFailed: ProxiedProviderEventCallback
+  loadingScreenReady: () => void
+  reloadApp: () => void
+  createNewMetaMaskWallet: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -62,7 +67,6 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   changeLanguage: (language: string) => void
   notify: (args: { title: string; body: string }) => void
   frontendReady: () => void
-  loadingScreenReady: () => void
   lock: () => void
   unlock: () => void
   quit: () => void
@@ -107,6 +111,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   'connectivity-changed': (newStatus: ConnectivityStatus) => void
   'set-connectivity-online': () => void
   changeTrayColor: () => void
+  setSetting: (args: { appName: string; key: string; value: unknown }) => void
 }
 
 interface HyperPlayAsyncIPCFunctions {
@@ -120,8 +125,14 @@ interface HyperPlayAsyncIPCFunctions {
   chromeTabsCreate: (
     options: chrome.tabs.CreateProperties
   ) => Promise<chrome.tabs.Tab>
+  importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
+  getMetaMaskImportOptions: (
+    configDbPath?: string
+  ) => Promise<MetaMaskImportOptions | null>
+  getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
   getTabUrl: () => Promise<string>
   getConnectionUris: (providerSelection: PROVIDERS) => Promise<UrisReturn>
+  getExtensionId: () => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -143,7 +154,11 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   getPlatform: () => NodeJS.Platform
   showUpdateSetting: () => boolean
   getLatestReleases: () => Promise<Release[]>
-  getGameInfo: (appName: string, runner: Runner) => Promise<GameInfo | null>
+  getGameInfo: (
+    appName: string,
+    runner: Runner
+  ) => Promise<GameInfo | SideloadGame | null>
+  getExtraInfo: (appName: string, runner: Runner) => Promise<ExtraInfo | null>
   getGameSettings: (
     appName: string,
     runner: Runner
@@ -162,7 +177,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   }>
   authGOG: (code: string) => Promise<{
     status: 'done' | 'error'
-    data?: { displayName: string; username: string }
+    data?: UserData
   }>
   logoutLegendary: () => Promise<void>
   getAlternativeWine: () => Promise<WineInstallation[]>
@@ -181,10 +196,11 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   uninstall: (
     appName: string,
     runner: Runner,
-    shouldRemovePrefix: boolean
+    shouldRemovePrefix: boolean,
+    shoudlRemoveSetting: boolean
   ) => Promise<void>
   repair: (appName: string, runner: Runner) => Promise<void>
-  moveInstall: (args: MoveGameArgs) => StatusPromise
+  moveInstall: (args: MoveGameArgs) => Promise<void>
   importGame: (args: ImportGameArgs) => StatusPromise
   updateGame: (appName: string, runner: Runner) => StatusPromise
   changeInstallPath: (args: MoveGameArgs) => Promise<void>
@@ -245,7 +261,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   }
   getNumOfGpus: () => Promise<number>
   removeRecent: (appName: string) => Promise<void>
-  getHowLongToBeat: (title: string) => Promise<HowLongToBeatEntry | null>
+  getWikiGameInfo: (title: string, id?: string) => Promise<WikiInfo | null>
   getDefaultSavePath: (
     appName: string,
     runner: Runner,
@@ -257,6 +273,8 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: Runner
   }) => Promise<boolean>
   toggleDXVK: (args: ToolArgs) => Promise<boolean>
+  pathExists: (path: string) => Promise<boolean>
+  getExtensionId: () => Promise<string>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

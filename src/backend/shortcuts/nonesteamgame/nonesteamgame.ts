@@ -7,10 +7,9 @@ import {
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'graceful-fs'
 import { readFileSync } from 'fs-extra'
 import { join } from 'path'
-import { GameInfo } from 'common/types'
+import { GameInfo, SideloadGame } from 'common/types'
 import { ShortcutsResult } from '../types'
 import { getIcon } from '../utils'
-import { notify } from '../../utils'
 import {
   prepareImagesForSteam,
   generateShortcutId,
@@ -18,15 +17,16 @@ import {
   generateShortAppId,
   removeImagesFromSteam
 } from './steamhelper'
-import { app, BrowserWindow } from 'electron'
+import { app } from 'electron'
 import { isFlatpak, isWindows, tsStore } from '../../constants'
 import { logError, logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import i18next from 'i18next'
-import { showDialogBoxModalAuto } from '../../dialog/dialog'
-import { GlobalConfig } from '../../../backend/config'
+import { notify, showDialogBoxModalAuto } from '../../dialog/dialog'
+import { GlobalConfig } from '../../config'
+import { getMainWindow } from '../../main_window'
 
 const getSteamUserdataDir = async () => {
-  const { defaultSteamPath } = await GlobalConfig.get().getSettings()
+  const { defaultSteamPath } = GlobalConfig.get().getSettings()
   return join(defaultSteamPath.replaceAll("'", ''), 'userdata')
 }
 
@@ -35,7 +35,7 @@ const generateImage = async (
   width: number,
   height: number
 ): Promise<string> => {
-  const window = BrowserWindow.getAllWindows()[0]
+  const window = getMainWindow()
 
   if (!window) {
     return Promise.resolve('')
@@ -151,6 +151,16 @@ function writeShortcutFile(
   }
 }
 
+/** Check if key exist case insensitive
+ * @param {Object} object
+ * @param {string} key
+ * @return bool value
+ */
+function hasParameterCaseInsensitive(object: ShortcutEntry, key: string) {
+  const keyAsLowercase = key.toLowerCase()
+  return Object.keys(object).some((k) => k.toLowerCase() === keyAsLowercase)
+}
+
 /**
  * Check if the parsed object of a shortcuts.vdf is valid.
  * @param object @see Partial<ShortcutObject>
@@ -159,7 +169,7 @@ function writeShortcutFile(
 function checkIfShortcutObjectIsValid(
   object: Partial<ShortcutObject>
 ): ShortcutsResult {
-  const checkResult = { success: false, errors: [] } as ShortcutsResult
+  const checkResult: ShortcutsResult = { success: false, errors: [] }
   if (!('shortcuts' in object)) {
     checkResult.errors.push('Could not find entry "shortcuts"!')
   } else if (!Array.isArray(object.shortcuts)) {
@@ -169,7 +179,7 @@ function checkIfShortcutObjectIsValid(
     object.shortcuts.forEach((entry) => {
       const keysToCheck = ['AppName', 'Exe', 'LaunchOptions']
       keysToCheck.forEach((key: string) => {
-        if (!(key in entry) && !(key.toLowerCase() in entry)) {
+        if (!hasParameterCaseInsensitive(entry, key)) {
           checkResult.errors.push(
             `One of the game entries is missing the ${key} parameter!`
           )
@@ -202,7 +212,7 @@ function checkIfAlreadyAdded(object: Partial<ShortcutObject>, title: string) {
  * @returns boolean
  */
 async function addNonSteamGame(props: {
-  gameInfo: GameInfo
+  gameInfo: GameInfo | SideloadGame
   steamUserdataDir?: string
   bkgDataUrl?: string
   bigPicDataUrl?: string
@@ -221,7 +231,7 @@ async function addNonSteamGame(props: {
   const { folders, error } = checkSteamUserDataDir(steamUserdataDir)
 
   if (error) {
-    logError(error, { prefix: LogPrefix.Shortcuts })
+    logError(error, LogPrefix.Shortcuts)
     showErrorInFrontend({
       gameTitle: props.gameInfo.title,
       error
@@ -283,7 +293,7 @@ async function addNonSteamGame(props: {
       .catch((error) =>
         logWarning(
           [`Couldn't find a icon for ${props.gameInfo.title} with:`, error],
-          { prefix: LogPrefix.Shortcuts }
+          LogPrefix.Shortcuts
         )
       )
 
@@ -315,10 +325,11 @@ async function addNonSteamGame(props: {
     newEntry.Devkit = false
     newEntry.DevkitOverrideAppID = false
 
-    if (tsStore.has(`${props.gameInfo.app_name}.lastPlayed`)) {
-      newEntry.LastPlayTime = tsStore.get(
-        `${props.gameInfo.app_name}.lastPlayed`
-      ) as Date
+    const lastPlayed = tsStore.get_nodefault(
+      `${props.gameInfo.app_name}.lastPlayed`
+    )
+    if (lastPlayed) {
+      newEntry.LastPlayTime = new Date(lastPlayed)
     } else {
       newEntry.LastPlayTime = new Date()
     }
@@ -338,7 +349,7 @@ async function addNonSteamGame(props: {
 
   if (!added) {
     const errorMessage = errors.join('\n')
-    logError(errorMessage, { prefix: LogPrefix.Shortcuts })
+    logError(errorMessage, LogPrefix.Shortcuts)
     showErrorInFrontend({
       gameTitle: props.gameInfo.title,
       error: errorMessage
@@ -347,9 +358,10 @@ async function addNonSteamGame(props: {
   }
 
   if (errors.length === 0) {
-    logInfo(`${props.gameInfo.title} was successfully added to Steam.`, {
-      prefix: LogPrefix.Shortcuts
-    })
+    logInfo(
+      `${props.gameInfo.title} was successfully added to Steam.`,
+      LogPrefix.Shortcuts
+    )
 
     const message = i18next.t('notify.finished.add.steam.success', {
       defaultValue:
@@ -361,9 +373,9 @@ async function addNonSteamGame(props: {
   } else {
     logWarning(
       `${props.gameInfo.title} could not be added to all found Steam users.`,
-      { prefix: LogPrefix.Shortcuts }
+      LogPrefix.Shortcuts
     )
-    logError(errors.join('\n'), { prefix: LogPrefix.Shortcuts })
+    logError(errors.join('\n'), LogPrefix.Shortcuts)
 
     const message = i18next.t('notify.finished.add.steam.corrupt', {
       defaultValue:
@@ -382,7 +394,7 @@ async function addNonSteamGame(props: {
  * @returns none
  */
 async function removeNonSteamGame(props: {
-  gameInfo: GameInfo
+  gameInfo: GameInfo | SideloadGame
   steamUserdataDir?: string
 }): Promise<void> {
   const steamUserdataDir =
@@ -394,7 +406,7 @@ async function removeNonSteamGame(props: {
   // If someone changes the steam path to a invalid one
   // we just assume it is removed
   if (error) {
-    logWarning(error, { prefix: LogPrefix.Shortcuts })
+    logWarning(error, LogPrefix.Shortcuts)
     return
   }
 
@@ -454,16 +466,17 @@ async function removeNonSteamGame(props: {
     })
   }
 
-  // game was not on any steam shortcut
-  // nothing to notify
-  if (!removed) {
-    return
-  }
-
   if (errors.length === 0) {
-    logInfo(`${props.gameInfo.title} was successfully removed from Steam.`, {
-      prefix: LogPrefix.Shortcuts
-    })
+    // game was not on any steam shortcut
+    // nothing to notify
+    if (!removed) {
+      return
+    }
+
+    logInfo(
+      `${props.gameInfo.title} was successfully removed from Steam.`,
+      LogPrefix.Shortcuts
+    )
 
     const message = i18next.t('notify.finished.remove.steam.success', {
       defaultValue:
@@ -474,9 +487,9 @@ async function removeNonSteamGame(props: {
   } else {
     logWarning(
       `${props.gameInfo.title} could not be removed from all found Steam users.`,
-      { prefix: LogPrefix.Shortcuts }
+      LogPrefix.Shortcuts
     )
-    logError(errors.join('\n'), { prefix: LogPrefix.Shortcuts })
+    logError(errors.join('\n'), LogPrefix.Shortcuts)
 
     const message = i18next.t('notify.finished.remove.steam.corrupt', {
       defaultValue:
@@ -494,7 +507,7 @@ async function removeNonSteamGame(props: {
  * @returns boolean
  */
 async function isAddedToSteam(props: {
-  gameInfo: GameInfo
+  gameInfo: GameInfo | SideloadGame
   steamUserdataDir?: string
 }): Promise<boolean> {
   const steamUserdataDir =

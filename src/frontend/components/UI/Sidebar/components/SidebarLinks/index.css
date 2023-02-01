@@ -33,7 +33,7 @@
   margin-top: var(--space-md);
 }
 
-.App.collapsed .Sidebar__categoryTitle {
+.Sidebar.collapsed .Sidebar__categoryTitle {
   display: none;
 }
 
@@ -41,7 +41,7 @@
   margin: 0 auto var(--sidebar-vertical-padding);
 }
 
-.App.collapsed .hyperplaySidebarLogoContainer {
+.Sidebar.collapsed .hyperplaySidebarLogoContainer {
   margin: 0 auto;
   padding: var(--space-xs) 0;
 }
