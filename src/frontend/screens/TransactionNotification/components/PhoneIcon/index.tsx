@@ -3,7 +3,7 @@ import React from 'react'
 import {
   PhoneErrorIcon,
   PhoneCompletedIcon,
-  PhoneSubmittedIcon
+  PhoneWaitingConfimationSpinner
 } from 'frontend/assets/hyperplay'
 import { TransactionState } from 'frontend/store/types'
 import Loading from './Loading'
@@ -17,7 +17,7 @@ const PhoneIcon = ({ status }: PhoneIconProps) => {
     case TransactionState.INITIATED:
       return <Loading />
     case TransactionState.PENDING:
-      return <PhoneSubmittedIcon />
+      return <PhoneWaitingConfimationSpinner />
     case TransactionState.CONFIRMED:
       return <PhoneCompletedIcon />
     case TransactionState.FAILED:

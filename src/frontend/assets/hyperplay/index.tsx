@@ -17,6 +17,7 @@ import { ReactComponent as CyberDividerVertical } from './cyber_divider_vertical
 import { ReactComponent as PhoneCompletedIcon } from './phone_completed_icon.svg'
 import { ReactComponent as PhoneErrorIcon } from './phone_error_icon.svg'
 import { ReactComponent as PhoneSubmittedIcon } from './phone_submitted_icon.svg'
+import { ReactComponent as PhoneWaitingConfimationSpinner } from './phone_waiting_confirmation.svg'
 
 export {
   BackArrow,
@@ -37,5 +38,6 @@ export {
   CyberDividerVertical,
   PhoneCompletedIcon,
   PhoneErrorIcon,
-  PhoneSubmittedIcon
+  PhoneSubmittedIcon,
+  PhoneWaitingConfimationSpinner
 }
