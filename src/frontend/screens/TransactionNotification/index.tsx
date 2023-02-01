@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite'
 import transactionStore from 'frontend/store/TransactionStore'
 import { TITLE, DESCRIPTION } from './constants'
 import PhoneIcon from './components/PhoneIcon'
+import { TransactionState } from 'frontend/store/types'
 
 const TransactionNotification = () => {
   const item = transactionStore.firstTransaction
@@ -15,6 +16,13 @@ const TransactionNotification = () => {
     ? TITLE[item.method][item.state]
     : TITLE.default[item.state]
   const description = DESCRIPTION[item.state]
+
+  if (
+    item.state === TransactionState.CONFIRMED ||
+    item.state === TransactionState.FAILED
+  ) {
+    setTimeout(() => transactionStore.closeTransaction(item.id), 2000)
+  }
 
   return (
     <div className="blurBackground">

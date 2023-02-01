@@ -1,5 +1,9 @@
 import { makeAutoObservable } from 'mobx'
-import { TransactionMap, TransactionState, Transaction } from './types'
+import {
+  TransactionMap,
+  TransactionState,
+  Transaction
+} from 'frontend/store/types'
 
 class TransactionStore {
   transactions: TransactionMap = new Map()

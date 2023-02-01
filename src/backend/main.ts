@@ -111,7 +111,6 @@ import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
-import { PROXY_TOPICS } from './hyperplay-proxy-server/types'
 import * as ProviderHelper from './hyperplay-proxy-server/providerHelper'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import * as ProxyServer from './hyperplay-proxy-server/proxy'
@@ -1574,29 +1573,29 @@ import './recent_games/ipc_handler'
 export const walletConnected: WalletConnectedType = function (
   accounts: string[]
 ) {
-  mainWindow.webContents.send(PROXY_TOPICS.WALLET_CONNECTED, accounts)
+  mainWindow.webContents.send('walletConnected', accounts)
 }
 
 export const walletDisconnected: WalletDisconnectedType = function (
   code: number,
   reason: string
 ) {
-  mainWindow.webContents.send(PROXY_TOPICS.WALLET_DISCONNECTED, code, reason)
+  mainWindow.webContents.send('walletDisconnected', code, reason)
 }
 
 export const accountsChanged: AccountsChangedType = function (
   accounts: string[]
 ) {
-  mainWindow.webContents.send(PROXY_TOPICS.ACCOUNT_CHANGED, accounts)
+  mainWindow.webContents.send('accountChanged', accounts)
 }
 
 export const chainChanged: ChainChangedType = function (chainId: number) {
-  mainWindow.webContents.send(PROXY_TOPICS.CHAIN_CHANGED, chainId)
+  mainWindow.webContents.send('chainChanged', chainId)
 }
 
 export const connectionRequestRejected: ConnectionRequestRejectedType =
   function () {
-    mainWindow.webContents.send(PROXY_TOPICS.CONNECTION_REQUEST_REJECTED)
+    mainWindow.webContents.send('connectionRequestRejected')
   }
 
 ProviderHelper.passEventCallbacks(
@@ -1609,22 +1608,18 @@ ProviderHelper.passEventCallbacks(
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 
-ipcMain.on(PROXY_TOPICS.PROVIDER_REQUEST_INITIATED, (id, method) => {
-  mainWindow.webContents.send(
-    PROXY_TOPICS.PROVIDER_REQUEST_INITIATED,
-    id,
-    method
-  )
+ipcMain.on('providerRequestInitiated', (id, method) => {
+  mainWindow.webContents.send('providerRequestInitiated', id, method)
 })
 
-ipcMain.on(PROXY_TOPICS.PROVIDER_REQUEST_PENDING, (id) => {
-  mainWindow.webContents.send(PROXY_TOPICS.PROVIDER_REQUEST_PENDING, id)
+ipcMain.on('providerRequestPending', (id) => {
+  mainWindow.webContents.send('providerRequestPending', id)
 })
 
-ipcMain.on(PROXY_TOPICS.PROVIDER_REQUEST_COMPLETED, (id) => {
-  mainWindow.webContents.send(PROXY_TOPICS.PROVIDER_REQUEST_COMPLETED, id)
+ipcMain.on('providerRequestCompleted', (id) => {
+  mainWindow.webContents.send('providerRequestCompleted', id)
 })
 
-ipcMain.on(PROXY_TOPICS.PROVIDER_REQUEST_FAILED, (id) => {
-  mainWindow.webContents.send(PROXY_TOPICS.PROVIDER_REQUEST_FAILED, id)
+ipcMain.on('providerRequestFailed', (id) => {
+  mainWindow.webContents.send('providerRequestFailed', id)
 })
