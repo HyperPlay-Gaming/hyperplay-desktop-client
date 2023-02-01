@@ -1,3 +1,4 @@
+import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { ExtensionStore } from './../../backend/hyperplay-extension-helper/store/index'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -52,6 +53,10 @@ interface HyperPlaySyncIPCFunctions {
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
+  providerRequestInitiated: ProxiedProviderEventInitiatedCallback
+  providerRequestPending: ProxiedProviderEventCallback
+  providerRequestCompleted: ProxiedProviderEventCallback
+  providerRequestFailed: ProxiedProviderEventCallback
   loadingScreenReady: () => void
   reloadApp: () => void
   createNewMetaMaskWallet: () => void
@@ -126,6 +131,7 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<MetaMaskImportOptions | null>
   getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
   getTabUrl: () => Promise<string>
+  getConnectionUris: (providerSelection: PROVIDERS) => Promise<UrisReturn>
   getExtensionId: () => Promise<string>
 }
 
