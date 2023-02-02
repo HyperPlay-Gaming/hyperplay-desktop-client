@@ -720,7 +720,9 @@ async function callRunner(
       const pidPrefix = 'pid for popen process:'
       const pidPrefixStartIndex = dataStr.search(pidPrefix)
       if (pidPrefixStartIndex >= 0) {
-        const PID = dataStr.substring(pidPrefixStartIndex + pidPrefix.length).trim()
+        const PID = dataStr
+          .substring(pidPrefixStartIndex + pidPrefix.length)
+          .trim()
         console.log('PID: ', PID.trim())
         //inject here
         OverlayApp.inject(PID.trim())

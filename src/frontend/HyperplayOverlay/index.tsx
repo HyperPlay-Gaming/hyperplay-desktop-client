@@ -21,7 +21,7 @@ const HyperplayOverlay = function () {
   const [extensionId, setExtensionId] = useState('')
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
 
-  const getExtensionId = async() => {
+  const getExtensionId = async () => {
     const extId = await window.api.getExtensionId()
     console.log('setting extension id to ', extId)
     setExtensionId(extId)
@@ -39,8 +39,12 @@ const HyperplayOverlay = function () {
 
   useEffect(() => {
     getExtensionId()
-    const rmAddNotifHandler = window.api.handleShowNotificationInWebview(handleShowNotification)
-    const rmRemoveNotifHandler = window.api.handleRemoveNotificationInWebview(handleRemoveNotification)
+    const rmAddNotifHandler = window.api.handleShowNotificationInWebview(
+      handleShowNotification
+    )
+    const rmRemoveNotifHandler = window.api.handleRemoveNotificationInWebview(
+      handleRemoveNotification
+    )
     // const rmDomReadyHandler = window.api.handleDomReady(zoomOut)
     return () => {
       rmAddNotifHandler()
@@ -53,25 +57,27 @@ const HyperplayOverlay = function () {
   //   const popupWv = document.querySelector('#mmPopupWebview')
   //   popupWv.setZoomFactor(0.75)
   // }
-  
+
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={OverlayStyles.overlayContainer}>
       <div>Ctrl + Tab to return to the game</div>
       <div className={OverlayStyles.mmPopupContainer}>
-      <webview 
-        nodeintegrationinsubframes="true"
-        webpreferences='contextIsolation=true, nodeIntegration=true' 
-        className={OverlayStyles.mmPopup} 
-        src={`chrome-extension://${extensionId}/popup.html`}
-        id='mmPopupWebview'>
-      </webview>
-        {showMmNotificationPage ? <webview 
+        <webview
           nodeintegrationinsubframes="true"
-          webpreferences='contextIsolation=true, nodeIntegration=true' 
-          className={OverlayStyles.mmPopup} 
-          src={`chrome-extension://${extensionId}/notification.html`}>
-        </webview> : null}
+          webpreferences="contextIsolation=true, nodeIntegration=true"
+          className={OverlayStyles.mmPopup}
+          src={`chrome-extension://${extensionId}/popup.html`}
+          id="mmPopupWebview"
+        ></webview>
+        {showMmNotificationPage ? (
+          <webview
+            nodeintegrationinsubframes="true"
+            webpreferences="contextIsolation=true, nodeIntegration=true"
+            className={OverlayStyles.mmPopup}
+            src={`chrome-extension://${extensionId}/notification.html`}
+          ></webview>
+        ) : null}
       </div>
     </div>
   )

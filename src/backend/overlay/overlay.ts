@@ -43,7 +43,7 @@ class Application {
     this.Overlay!.setHotkeys([
       {
         name: 'overlay.hotkey.toggleInputIntercept',
-        keyCode: 9,//tab
+        keyCode: 9, //tab
         modifiers: { ctrl: true }
       }
     ])
@@ -119,7 +119,7 @@ class Application {
     })
 
     let debugCalled = true
-    setTimeout(()=>debugCalled=false, 20000)
+    setTimeout(() => (debugCalled = false), 20000)
 
     window.webContents.on(
       'paint',
@@ -128,14 +128,19 @@ class Application {
           return
         }
         const scale = 1
-        if (!debugCalled){
+        if (!debugCalled) {
           debugCalled = true
-          console.log('image width = ', image.getSize(scale).width, ' image height = ', image.getSize(scale).height)
+          console.log(
+            'image width = ',
+            image.getSize(scale).width,
+            ' image height = ',
+            image.getSize(scale).height
+          )
           fs.writeFileSync('./testOverlayImage.png', image.toPNG())
         }
         this.Overlay!.sendFrameBuffer(
           window.id,
-          image.getBitmap({scaleFactor: scale}),
+          image.getBitmap({ scaleFactor: scale }),
           image.getSize(scale).width,
           image.getSize(scale).height
         )
@@ -216,7 +221,7 @@ class Application {
 
   public createHyperplayOverlay() {
     const isTesting = false
-    
+
     const options: Electron.BrowserWindowConstructorOptions = {
       height: 800,
       width: 1280,
