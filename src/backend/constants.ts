@@ -170,16 +170,12 @@ const execOptions = {
   shell: getShell()
 }
 
-const defaultFolders = [
-  heroicGamesConfigPath,
-  heroicIconFolder,
-  imagesCachePath
-]
+const defaultFolders = [gamesConfigPath, iconsFolder, imagesCachePath]
 
 const necessaryFoldersByPlatform = {
   win32: [...defaultFolders],
-  linux: [...defaultFolders, heroicToolsPath],
-  darwin: [...defaultFolders, heroicToolsPath]
+  linux: [...defaultFolders, toolsPath],
+  darwin: [...defaultFolders, toolsPath]
 }
 
 export function createNecessaryFolders() {
