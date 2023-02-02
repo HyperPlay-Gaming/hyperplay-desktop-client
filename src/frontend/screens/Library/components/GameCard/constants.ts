@@ -1,5 +1,5 @@
 import { Runner } from 'common/types'
-import fallbackImage from 'frontend/assets/heroic_card.jpg'
+import fallbackImage from 'frontend/assets/fallback_card.jpg'
 
 export function getImageFormatting(cover: string, runner: Runner) {
   const imageBase = cover
