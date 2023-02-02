@@ -64,6 +64,8 @@ export const getDefaultSavePath = async (
   )
 export const getGameInfo = async (appName: string, runner: Runner) =>
   ipcRenderer.invoke('getGameInfo', appName, runner)
+export const getExtraInfo = async (appName: string, runner: Runner) =>
+  ipcRenderer.invoke('getExtraInfo', appName, runner)
 
 export const getGameSettings = async (
   appName: string,
@@ -82,12 +84,6 @@ export const runWineCommand = async (args: WineCommandArgs) =>
 
 export const runWineCommandForGame = async (args: RunWineCommandArgs) =>
   ipcRenderer.invoke('runWineCommandForGame', args)
-
-export const requestAppSettings = async () =>
-  ipcRenderer.invoke('requestSettings', 'default') as Promise<AppSettings>
-
-export const requestGameSettings = async (appName: string) =>
-  ipcRenderer.invoke('requestSettings', appName) as Promise<GameSettings>
 
 export const onConnectivityChanged = async (
   callback: ConnectivityChangedCallback

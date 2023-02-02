@@ -101,8 +101,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "Är du säker att du vill grundåterställa Heroic? Detta raderar alla inställningar och cachefiler men raderar inte installerade spel eller Epic inloggningsuppgifter. Portabla versioner (AppImage, WinPortable, ...) av Heroic måste startas om manuellt efteråt.",
-                "title": "Grundåterställ Heroic"
+                "message": "Är du säker att du vill grundåterställa HyperPlay? Detta raderar alla inställningar och cachefiler men raderar inte installerade spel eller Epic inloggningsuppgifter. Portabla versioner (AppImage, WinPortable, ...) av HyperPlay måste startas om manuellt efteråt.",
+                "title": "Grundåterställ HyperPlay"
             }
         },
         "runexe": {
@@ -203,7 +203,6 @@
         "store": "Store",
         "title": "Game Title"
     },
-    "GameSettings": "Game Settings",
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -216,10 +215,12 @@
     "GOG": "GOG",
     "gog-store": "GOG Butik",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignorera dolda",
         "platform": "Plattform",
-        "show_all_games": "Show all games",
-        "show_favourites_only": "Show Favourites only",
+        "show_all_games": "Visa alla spel",
+        "show_available_games": "Show non-Available games",
+        "show_favourites_only": "Visa endast favoriter",
         "show_hidden": "Visa dolda",
         "store": "Filter Store"
     },
@@ -440,9 +441,9 @@
         "autosync": "Synkronisera sparfiler automatiskt",
         "autovkd3d": "Installera/uppdatera VKD3D i prefix automatiskt",
         "change-target-exe": "Ange alternativ EXE-fil att köra",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
-        "custom_themes_path": "Custom Themes Path",
+        "checkForUpdatesOnStartup": "Sök efter HyperPlay-uppdateringar vid uppstart",
+        "crossover-version": "Crossover/Wine Version",
+        "custom_themes_path": "Sökväg till anpassade teman",
         "customWineProton": "Anpassad Wine/Proton sökväg",
         "darktray": "Använd mörk ikon i systemfältet",
         "default-install-path": "Standard installationssökväg",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Avancerat",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Allmänt",
             "log": "Logg",

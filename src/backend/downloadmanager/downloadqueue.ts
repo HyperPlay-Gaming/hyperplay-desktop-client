@@ -1,15 +1,16 @@
+import { TypeCheckedStoreBackend } from './../electron_store'
 import { logError, logInfo, LogPrefix } from '../logger/logger'
-import { getFileSize, getGame, getMainWindow } from '../utils'
-import Store from 'electron-store'
+import { getFileSize, getGame } from '../utils'
 import { DMQueueElement } from 'common/types'
 import { installQueueElement, updateQueueElement } from './utils'
+import { sendFrontendMessage } from '../main_window'
 
-const downloadManager = new Store({
+const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
   name: 'download-manager'
 })
 
-/* 
+/*
 #### Private ####
 */
 
@@ -18,19 +19,12 @@ type DMStatus = 'done' | 'error' | 'abort'
 let queueState: DownloadManagerState = 'idle'
 
 function getFirstQueueElement() {
-  if (downloadManager.has('queue')) {
-    const elements = downloadManager.get('queue') as DMQueueElement[]
-    return elements.at(0)
-  }
-
-  return null
+  const elements = downloadManager.get('queue', [])
+  return elements.at(0) ?? null
 }
 
 function addToFinished(element: DMQueueElement, status: DMStatus) {
-  let elements: DMQueueElement[] = []
-  if (downloadManager.has('finished')) {
-    elements = downloadManager.get('finished') as DMQueueElement[]
-  }
+  const elements = downloadManager.get('finished', [])
 
   const elementIndex = elements.findIndex(
     (el) => el.params.appName === element.params.appName
@@ -43,23 +37,23 @@ function addToFinished(element: DMQueueElement, status: DMStatus) {
   }
 
   downloadManager.set('finished', elements)
-  logInfo([element.params.appName, 'added to download manager finished.'], {
-    prefix: LogPrefix.DownloadManager
-  })
+  logInfo(
+    [element.params.appName, 'added to download manager finished.'],
+    LogPrefix.DownloadManager
+  )
 }
 
-/* 
+/*
 #### Public ####
 */
 
 async function initQueue() {
-  const window = getMainWindow()
   let element = getFirstQueueElement()
   queueState = element ? 'running' : 'idle'
 
   while (element) {
-    const queuedElements = downloadManager.get('queue') as DMQueueElement[]
-    window.webContents.send('changedDMQueueInformation', queuedElements)
+    const queuedElements = downloadManager.get('queue', [])
+    sendFrontendMessage('changedDMQueueInformation', queuedElements)
     const game = getGame(element.params.appName, element.params.runner)
     const installInfo = await game.getInstallInfo(
       element.params.platformToInstall
@@ -73,8 +67,8 @@ async function initQueue() {
 
     const { status } =
       element.type === 'install'
-        ? await installQueueElement(window, element.params)
-        : await updateQueueElement(window, element.params)
+        ? await installQueueElement(element.params)
+        : await updateQueueElement(element.params)
     element.endTime = Date.now()
     addToFinished(element, status)
     removeFromQueue(element.params.appName)
@@ -85,24 +79,21 @@ async function initQueue() {
 
 function addToQueue(element: DMQueueElement) {
   if (!element) {
-    logError('Can not add undefined element to queue!', {
-      prefix: LogPrefix.DownloadManager
-    })
+    logError(
+      'Can not add undefined element to queue!',
+      LogPrefix.DownloadManager
+    )
     return
   }
 
-  const mainWindow = getMainWindow()
-  mainWindow.webContents.send('setGameStatus', {
+  sendFrontendMessage('gameStatusUpdate', {
     appName: element.params.appName,
     runner: element.params.runner,
     folder: element.params.path,
     status: 'queued'
   })
 
-  let elements: DMQueueElement[] = []
-  if (downloadManager.has('queue')) {
-    elements = downloadManager.get('queue') as DMQueueElement[]
-  }
+  const elements = downloadManager.get('queue', [])
 
   const elementIndex = elements.findIndex(
     (el) => el.params.appName === element.params.appName
@@ -115,11 +106,12 @@ function addToQueue(element: DMQueueElement) {
   }
 
   downloadManager.set('queue', elements)
-  logInfo([element.params.appName, 'added to download manager queue.'], {
-    prefix: LogPrefix.DownloadManager
-  })
+  logInfo(
+    [element.params.gameInfo.title, ' was added to the download queue.'],
+    LogPrefix.DownloadManager
+  )
 
-  getMainWindow().webContents.send('changedDMQueueInformation', elements)
+  sendFrontendMessage('changedDMQueueInformation', elements)
 
   if (queueState === 'idle') {
     initQueue()
@@ -127,11 +119,8 @@ function addToQueue(element: DMQueueElement) {
 }
 
 function removeFromQueue(appName: string) {
-  const mainWindow = getMainWindow()
-
   if (appName && downloadManager.has('queue')) {
-    let elements: DMQueueElement[] = []
-    elements = downloadManager.get('queue') as DMQueueElement[]
+    const elements = downloadManager.get('queue', [])
     const index = elements.findIndex(
       (queueElement) => queueElement?.params.appName === appName
     )
@@ -141,40 +130,25 @@ function removeFromQueue(appName: string) {
       downloadManager.set('queue', elements)
     }
 
-    mainWindow.webContents.send('setGameStatus', {
+    sendFrontendMessage('gameStatusUpdate', {
       appName,
       status: 'done'
     })
 
-    logInfo([appName, 'removed from download manager.'], {
-      prefix: LogPrefix.DownloadManager
-    })
+    logInfo(
+      [appName, 'removed from download manager.'],
+      LogPrefix.DownloadManager
+    )
 
-    getMainWindow().webContents.send('changedDMQueueInformation', elements)
-  }
-}
-
-function clearFinished() {
-  if (downloadManager.has('finished')) {
-    downloadManager.delete('finished')
+    sendFrontendMessage('changedDMQueueInformation', elements)
   }
 }
 
 function getQueueInformation() {
-  let elements: DMQueueElement[] = []
-  let finished: DMQueueElement[] = []
-  if (downloadManager.has('queue')) {
-    elements = downloadManager.get('queue') as DMQueueElement[]
-    finished = downloadManager.get('finished') as DMQueueElement[]
-  }
+  const elements = downloadManager.get('queue', [])
+  const finished = downloadManager.get('finished', [])
 
   return { elements, finished }
 }
 
-export {
-  initQueue,
-  addToQueue,
-  removeFromQueue,
-  clearFinished,
-  getQueueInformation
-}
+export { initQueue, addToQueue, removeFromQueue, getQueueInformation }

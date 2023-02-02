@@ -3,14 +3,14 @@ import { useTranslation } from 'react-i18next'
 import ActionIcons from 'frontend/components/UI/ActionIcons'
 import { epicCategories } from 'frontend/helpers/library'
 import ContextProvider from 'frontend/state/ContextProvider'
-import { GameInfo } from 'common/types'
+import { GameInfo, SideloadGame } from 'common/types'
 import { getLibraryTitle } from '../../constants'
 import './index.css'
 
 const storage = window.localStorage
 
 type Props = {
-  list: GameInfo[]
+  list: (GameInfo | SideloadGame)[]
   sortDescending: boolean
   sortInstalled: boolean
   setSortInstalled: (value: boolean) => void
@@ -33,10 +33,10 @@ export default React.memo(function LibraryHeader({
     if (!list) {
       return 0
     }
-    const dlcCount =
-      category === 'legendary'
-        ? list.filter((lib) => lib.install.is_dlc).length
-        : 0
+    // is_dlc is only applicable when the game is from legendary, but checking anyway doesn't cause errors and enable accurate counting in the 'ALL' game tab
+    const dlcCount = list.filter(
+      (lib) => lib.runner !== 'sideload' && lib.install.is_dlc
+    ).length
 
     const total = list.length - dlcCount
     return total > 0 ? `${total}` : 0

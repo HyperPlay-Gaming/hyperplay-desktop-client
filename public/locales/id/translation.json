@@ -203,7 +203,6 @@
         "store": "Toko",
         "title": "Judul Gim"
     },
-    "GameSettings": "Pengaturan Gim",
     "generic": {
         "error": {
             "component": "Tidak ada Gim yang ditemukan - Silakan coba log keluar lalu log masuk lagi atau salah satu opsi di bawah ini"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Abaikan yang Disembunyikan",
         "platform": "Platform",
         "show_all_games": "Tampilkan semua gim",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Hanya Tampilkan Gim Favorit",
         "show_hidden": "Tampilkan yang Disembunyikan",
         "store": "Toko Filter"
@@ -268,7 +269,7 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Pembaruan Tersedia!",
             "stable": "Stabil",
-            "version": "Versi Heroic"
+            "version": "Versi HyperPlay"
         },
         "save-sync": {
             "searching": "Trying to detect the correct save folder"
@@ -563,8 +564,7 @@
         },
         "navbar": {
             "advanced": "Tambahan",
-            "games_settings": "Game Settings",
-            "games_settings_defaults": "Game Defaults",
+            "games_settings_defaults": "Bawaan dari Gim",
             "general": "Umum",
             "log": "Log",
             "other": "Lainnya",

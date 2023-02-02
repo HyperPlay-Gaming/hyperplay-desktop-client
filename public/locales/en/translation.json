@@ -29,6 +29,7 @@
         "customWine": "Select the Wine or Proton binary",
         "default-install-path": "Choose Default Install Path",
         "default-steam-path": "Steam path.",
+        "dontShowAgain": "Don't show again",
         "downloadNow": "Download now",
         "error": {
             "add": {
@@ -60,6 +61,7 @@
                 "title": "Select EXE to Run"
             },
             "launchAborted": "Launch aborted",
+            "moving": "Error Moving Game {{error}}",
             "title": "Error",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
@@ -67,11 +69,6 @@
             },
             "update": {
                 "title": "Update Error"
-            },
-            "wine-not-found": {
-                "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
-                "message": "No Wine Version Selected. Check Game Settings!",
-                "title": "Wine Not Found"
             },
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
@@ -139,13 +136,18 @@
                 "install": "Epic Servers are having major outage right now, the game cannot be installed!",
                 "update": "Epic Servers are having major outage right now, the game cannot be updated!"
             },
-            "title": "Warning"
+            "title": "Warning",
+            "wine-change": {
+                "message": "We could not find the selected wine version to launch this title ({{selectedWine}}). {{newline}} We found another one, do you want to continue launching using {{foundWine}} ?",
+                "title": "Wine not found!"
+            }
         },
         "wineprefix": "Choose Wine Prefix Folder",
         "yes": "YES"
     },
     "button": {
         "cancel": "Cancel",
+        "continue": "Continue",
         "go_to_library": "Go to Library",
         "login": "Log in",
         "sync": "Sync",
@@ -197,13 +199,16 @@
     },
     "Epic Games": "Epic Games",
     "error": "Error",
+    "externalLink": {
+        "dontAskAgain": "Don't ask again",
+        "warning": "You are about to open an external link."
+    },
     "favourites": "Favourites",
     "game": {
         "status": "Status",
         "store": "Store",
         "title": "Game Title"
     },
-    "GameSettings": "Game Settings",
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -216,9 +221,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignore Hidden",
         "platform": "Platform",
         "show_all_games": "Show all games",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Show Favourites only",
         "show_hidden": "Show Hidden",
         "store": "Filter Store"
@@ -265,13 +272,12 @@
     "info": {
         "hyperplay": {
             "beta": "Beta",
-            "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Update Available!",
             "stable": "Stable",
             "version": "HyperPlay Version"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Settings are saved automatically",
         "version": "Wine Version"
@@ -281,6 +287,7 @@
         "requirements": "System Requirements",
         "warning": "Warning",
         "wine-path": "Wine Path",
+        "wine-path-invalid": "Wine Path is invalid, please select another one.",
         "wine-prefix": {
             "title": "Wine Prefix"
         },
@@ -438,10 +445,11 @@
         "alt-legendary-bin": "Choose an Alternative Legendary Binary",
         "autodxvk": "Auto Install/Update DXVK on Prefix",
         "autosync": "Autosync Saves",
+        "autoUpdateGames": "Automatically update games",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
         "change-target-exe": "Select an alternative EXE to run",
         "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
+        "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Custom Wine/Proton Paths",
         "darktray": "Use Dark Tray Icon",
@@ -478,6 +486,7 @@
         "FsrSharpnessStrenght": "FSR Sharpness Strength",
         "fsync": "Enable Fsync",
         "gamemode": "Use GameMode (Feral Game Mode needs to be installed)",
+        "ignoreGameUpdates": "Ignore game updates",
         "language": "Choose App Language",
         "library_top_option": {
             "disabled": "Disabled",
@@ -523,9 +532,9 @@
             "title": "Run EXE on Prefix"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Select the exact save games folder",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Select Theme",
         "showfps": "Show FPS (DX9, 10 and 11)",
@@ -563,26 +572,19 @@
         },
         "navbar": {
             "advanced": "Advanced",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "General",
             "log": "Log",
             "other": "Other",
-            "sync": "Save-Sync",
-            "wineExt": "Wine Extensions"
+            "sync": "Cloud Saves Sync"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
-            "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
         }
     },
     "Settings": "Settings",
-    "sidebar": {
-        "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
-    },
     "status": {
         "installing": "Installing",
         "logging": "Logging In...",
@@ -628,6 +630,9 @@
             "openInBrowser": "Open in browser",
             "reload": "Reload page"
         }
+    },
+    "wiki_info": {
+        "not_found": "We couldn't find extra information."
     },
     "wine": {
         "actions": "Action",

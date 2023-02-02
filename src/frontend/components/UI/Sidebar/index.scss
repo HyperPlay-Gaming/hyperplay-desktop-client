@@ -1,0 +1,198 @@
+.Sidebar {
+  --sidebar-horizontal-padding: var(--space-md);
+  --sidebar-vertical-padding: var(--space-lg);
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-rows: min-content 2fr min-content min-content;
+  grid-template-areas: 'links' 'utils' 'updates' 'version' 'mmHome' 'wallet';
+  grid-area: sidebar;
+  height: 100%;
+  padding: 0;
+  font-family: var(--secondary-font-family);
+  text-align: left;
+  background: var(--navbar-background);
+  overflow: auto;
+  --sidebar-width: 350px;
+  width: var(--sidebar-width);
+  --hp-logo-sidebar-width: 64px;
+}
+
+.Sidebar.collapsed {
+  --sidebar-vertical-padding: var(--space-xs);
+  --sidebar-horizontal-padding: var(--space-lg);
+  overflow-x: hidden;
+  overflow-y: auto;
+  --hp-logo-sidebar-width: 24px;
+}
+
+.Sidebar__section {
+  display: flex;
+  width: 100%;
+  height: fit-content;
+  font-family: var(--secondary-font-family);
+  flex-direction: column;
+}
+
+.Sidebar__item {
+  display: flex;
+  width: 100%;
+  padding: var(--space-xs) var(--sidebar-horizontal-padding);
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: var(--text-md);
+  color: var(--navbar-accent);
+  transition: color 250ms;
+  text-align: start;
+  font-family: var(--primary-font-family);
+  border-radius: 0;
+}
+
+.Sidebar.collapsed .Sidebar__item {
+  padding: var(--space-xs) 0;
+}
+
+.Sidebar.collapsed .Sidebar__itemIcon {
+  margin: 0 auto;
+}
+
+.Sidebar__item:focus-visible {
+  outline: 2px solid var(--text-hover);
+  outline-offset: -2px;
+}
+
+.Sidebar__item:hover {
+  background-color: var(--navbar-active-background);
+}
+
+.Sidebar__item.active {
+  color: var(--accent);
+}
+
+.Sidebar__item.active.SidebarLinks__subItem {
+  font-weight: var(--bold);
+}
+
+.Sidebar__itemIcon {
+  box-sizing: border-box;
+  width: 24px;
+  display: inline-flex;
+  justify-content: center;
+  color: var(--accent);
+  margin-right: 10px;
+  align-items: center;
+  align-self: center;
+}
+
+.currentDownloads {
+  grid-area: utils;
+  align-self: end;
+  margin: 0 var(--space-3xs) var(--sidebar-vertical-padding)
+    var(--sidebar-horizontal-padding);
+}
+
+.divider {
+  height: 1px;
+  opacity: 0.5;
+  margin: var(--space-3xs) var(--space-xs);
+  background-color: var(--divider);
+}
+
+.appVersion {
+  grid-area: version;
+  margin: 0 var(--space-3xs) var(--sidebar-vertical-padding)
+    var(--sidebar-horizontal-padding);
+  font-size: var(--text-sm);
+}
+
+.newReleases {
+  grid-area: updates;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 0 var(--space-3xs) var(--space-sm) var(--sidebar-horizontal-padding);
+  font-size: var(--text-sm);
+}
+
+.wallet {
+  grid-area: wallet;
+  align-self: start;
+  margin-bottom: var(--sidebar-vertical-padding);
+}
+
+.newReleases > a {
+  color: var(--accent);
+  transition: 300ms;
+}
+
+.newReleases > a:hover {
+  color: var(--accent-overlay);
+}
+
+.Sidebar:hover .collapseIcon {
+  opacity: 1;
+}
+
+.Sidebar.collapsed .appVersion {
+  margin: var(--space-sm);
+  font-size: var(--text-xs);
+}
+
+.Sidebar.collapsed .divider {
+  margin: var(--space-3xs) 0;
+}
+
+.Sidebar.collapsed .Sidebar__item.active span,
+.Sidebar.collapsed .Sidebar__item > span {
+  display: none;
+}
+
+.Sidebar.collapsed .SidebarItemWithSubmenu .SidebarSubmenu {
+  display: none;
+}
+
+.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu span,
+.Sidebar.collapsed .SidebarItemWithSubmenu:focus-within .SidebarSubmenu span {
+  display: block;
+}
+
+.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu,
+.Sidebar.collapsed .SidebarItemWithSubmenu:focus-within .SidebarSubmenu {
+  display: block;
+  position: fixed;
+  left: 62px;
+  top: 66px;
+  background-color: var(--navbar-background);
+  padding: var(--space-2xs) 0;
+}
+
+.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu.settings,
+.Sidebar.collapsed
+  .SidebarItemWithSubmenu:focus-within
+  .SidebarSubmenu.settings {
+  top: 114px;
+}
+
+.Sidebar.collapsed .Sidebar__item.SidebarLinks__subItem::before {
+  display: none;
+}
+
+.Sidebar.collapsed .Sidebar__item.SidebarLinks__subItem {
+  padding: var(--space-xs) var(--sidebar-horizontal-padding);
+}
+.Sidebar.collapsed .Sidebar__item.active svg,
+.Sidebar.collapsed .Sidebar__item svg {
+  transform: scale(1.2);
+  padding: var(--space-2xs) 0;
+}
+
+.resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 100%;
+  z-index: 1;
+  cursor: col-resize;
+}

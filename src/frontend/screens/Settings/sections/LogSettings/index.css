@@ -25,13 +25,9 @@
   padding-block: 4px;
   padding-inline: 6px;
   height: 25em;
-  width: calc(90vw - var(--sidebar-width));
+  width: 100%;
   overflow: auto;
   user-select: text;
-}
-
-.setting.log-box.collapsed {
-  width: calc(90vw - var(--sidebar-width));
 }
 
 .log-error,

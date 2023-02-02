@@ -203,7 +203,6 @@
         "store": "Trgovina",
         "title": "Ime video igre"
     },
-    "GameSettings": "Postavke igre",
     "generic": {
         "error": {
             "component": "Nema pronađenih video igara - Pokušajte se odjaviti i ponovo prijaviti ili izaberite neku od opcija u nastavku"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Trgovina",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignoriši skriveno",
         "platform": "Platforma",
         "show_all_games": "Pokaži sve igre",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Pokaži samo favorite",
         "show_hidden": "Pokaži skrivene",
         "store": "Filteriši trgovinu"
@@ -271,7 +272,7 @@
             "version": "HyperPlay verzija"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Postavke se automatski spremaju",
         "version": "Verzija Wine-a"
@@ -523,9 +524,9 @@
             "title": "Pokrenite EXE na prefiksu"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Odaberite tačnu mapu za spremanje video igara",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Izaberite temu",
         "showfps": "Pokaži FPS (DX9, 10 i 11)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Napredno",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Generalno",
             "log": "Prijavite se",

@@ -6,13 +6,11 @@ const initialContext: ContextType = {
   category: 'all',
   epic: {
     library: [],
-    username: null,
     login: async () => Promise.resolve(''),
     logout: async () => Promise.resolve()
   },
   gog: {
     library: [],
-    username: null,
     login: async () => Promise.resolve(''),
     logout: async () => Promise.resolve()
   },
@@ -22,7 +20,6 @@ const initialContext: ContextType = {
   filterPlatform: 'all',
   gameUpdates: [],
   handleCategory: () => null,
-  handleGameStatus: async () => Promise.resolve(),
   handleLayout: () => null,
   handlePlatformFilter: () => null,
   handleSearch: () => null,
@@ -47,6 +44,8 @@ const initialContext: ContextType = {
   showHidden: false,
   setShowHidden: () => null,
   showFavourites: false,
+  setShowNonAvailable: () => null,
+  showNonAvailable: false,
   setShowFavourites: () => null,
   favouriteGames: {
     list: [],
@@ -67,7 +66,13 @@ const initialContext: ContextType = {
   setSecondaryFontFamily: () => null,
   dialogModalOptions: { showDialog: false },
   showDialogModal: () => null,
-  showResetDialog: () => null
+  showResetDialog: () => null,
+  externalLinkDialogOptions: { showDialog: false },
+  handleExternalLinkDialog: () => null,
+  isSettingsModalOpen: { value: false, type: 'settings' },
+  setIsSettingsModalOpen: () => null,
+  showMetaMaskBrowserSidebarLinks: false,
+  setShowMetaMaskBrowserSidebarLinks: () => null
 }
 
 export default React.createContext(initialContext)

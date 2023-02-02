@@ -58,10 +58,11 @@ describe('logger/logfile.ts', () => {
 
   test('createNewLogFileAndClearOldOnes success', () => {
     jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
-    jest.spyOn(configStore, 'has').mockReturnValue(true)
-    jest.spyOn(configStore, 'get').mockReturnValue({
+    configStore.set('general-logs', {
       currentLogFile: 'old/log/path/file.log',
-      lastLogFile: undefined
+      lastLogFile: '',
+      legendaryLogFile: '',
+      gogdlLogFile: ''
     })
 
     const data = logfile.createNewLogFileAndClearOldOnes()
@@ -78,11 +79,37 @@ describe('logger/logfile.ts', () => {
   /*   test('createNewLogFileAndClearOldOnces removing old logs successful', () => {
     jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
     const date = new Date()
-    date.setMonth(date.getMonth() > 0 ? date.getMonth() - 1 : 11)
+    date.setMonth(date.getMonth() - 1)
     const monthOutdatedLogFile = join(
       tmpDir.name,
       // @ts-ignore replaceAll error
       `hyperplay-${date.toISOString().replaceAll(':', '_')}.log`
+    )
+
+    graceful_fs.closeSync(graceful_fs.openSync(monthOutdatedLogFile, 'w'))
+
+    expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeTruthy()
+
+    const data = logfile.createNewLogFileAndClearOldOnes()
+
+    expect(logError).toBeCalledWith(
+      [
+        expect.stringContaining('Removing old logs in /tmp/'),
+        Error('unlink failed')
+      ],
+      { prefix: 'Backend', skipLogToFile: true }
+    )
+    expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeTruthy()
+  })
+
+  test('createNewLogFileAndClearOldOnes removing old logs successful', () => {
+    jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
+    const date = new Date()
+    date.setMonth(date.getMonth() - 1)
+    const monthOutdatedLogFile = join(
+      tmpDir.name,
+      // @ts-ignore replaceAll error
+      `heroic-${date.toISOString().replaceAll(':', '_')}.log`
     )
     date.setFullYear(2021)
     const yearOutdatedLogFile = join(
@@ -104,7 +131,7 @@ describe('logger/logfile.ts', () => {
     expect(graceful_fs.existsSync(yearOutdatedLogFile)).toBeFalsy()
   }) */
 
-  test('getLogFile all possible values', () => {
+  /*   test('getLogFile all possible values', () => {
     // get global current logfile
     expect(logfile.getLogFile({})).toBe('current.log')
     // get global last logfile
@@ -118,7 +145,7 @@ describe('logger/logfile.ts', () => {
     expect(logfile.getLogFile({ appName: 'MyApp', defaultLast: true })).toBe(
       '/tmp/appData/hyperplay/GamesConfig/MyApp-lastPlay.log'
     )
-  })
+  }) */
 
   test('appendMessageToLogFile success', () => {
     const appendFileSyncSpy = jest

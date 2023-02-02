@@ -8,11 +8,19 @@
   z-index: 100000;
 }
 
-.mmPopup {
+@mixin mmWindow {
   width: 360px;
   height: 620px;
   position: relative;
   display: flex;
+}
+
+.mmPopup {
+  @include mmWindow();
+}
+
+.mmNotification {
+  @include mmWindow();
 }
 
 .mmNotification {

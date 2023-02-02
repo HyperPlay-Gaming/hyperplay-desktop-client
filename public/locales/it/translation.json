@@ -203,7 +203,6 @@
         "store": "Negozio",
         "title": "Titolo del gioco"
     },
-    "GameSettings": "Impostazioni del gioco",
     "generic": {
         "error": {
             "component": "Nessun gioco trovato - Prova a disconnetterti e accedi di nuovo o una delle opzioni qui sotto"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignora nascosti",
         "platform": "Piattaforma",
         "show_all_games": "Mostra tutti i giochi",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Mostra solo i preferiti",
         "show_hidden": "Mostra nascosti",
         "store": "Filtra per negozio"
@@ -268,7 +269,7 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Aggiornamento disponibile!",
             "stable": "Stabile",
-            "version": "Heroic Version"
+            "version": "HyperPlay Version"
         },
         "save-sync": {
             "searching": "Trying to detect the correct save folder"
@@ -440,9 +441,9 @@
         "autosync": "Sincronizza automaticamente i salvataggi",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
         "change-target-exe": "Seleziona un eseguibile alternativo da avviare",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
-        "custom_themes_path": "Custom Themes Path",
+        "checkForUpdatesOnStartup": "Controlla aggiornamenti di HyperPlay all'avvio",
+        "crossover-version": "Crossover/Wine Version",
+        "custom_themes_path": "Percorso Temi Personalizzati",
         "customWineProton": "Percorsi di Wine/Proton personalizzati",
         "darktray": "Usa l'icona scura della barra delle applicazioni",
         "default-install-path": "Percorso d'installazione predefinito",
@@ -563,8 +564,7 @@
             "long-log-hint": "Log truncated, last 1000 lines are shown!"
         },
         "navbar": {
-            "advanced": "Advanced",
-            "games_settings": "Game Settings",
+            "advanced": "Avanzate",
             "games_settings_defaults": "Game Defaults",
             "general": "Generale",
             "log": "Log",

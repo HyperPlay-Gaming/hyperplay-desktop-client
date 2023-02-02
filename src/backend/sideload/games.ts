@@ -1,20 +1,9 @@
-import {
-  GameSettings,
-  GameInfo,
-  SideloadGame,
-  InstalledInfo
-} from '../../common/types'
+import { GameSettings, SideloadGame } from 'common/types'
 import { libraryStore } from './electronStores'
 import { GameConfig } from '../game_config'
-import {
-  isWindows,
-  isMac,
-  isLinux,
-  execOptions,
-  gamesConfigPath
-} from '../constants'
-import { execAsync, killPattern, notify } from '../utils'
-import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
+import { isWindows, isMac, isLinux, gamesConfigPath } from '../constants'
+import { killPattern } from '../utils'
+import { logInfo, LogPrefix, logWarning } from '../logger/logger'
 import { dirname, join } from 'path'
 import {
   appendFileSync,
@@ -35,17 +24,23 @@ import {
 import { access, chmod } from 'fs/promises'
 import { addShortcuts, removeShortcuts } from '../shortcuts/shortcuts/shortcuts'
 import shlex from 'shlex'
-import { showDialogBoxModalAuto } from '../dialog/dialog'
-import { BrowserWindow } from 'electron'
+import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
+import { sendFrontendMessage } from '../main_window'
+import { BrowserWindow } from 'electron'
 
 export function appLogFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
 }
 
-export function getAppInfo(appName: string): GameInfo {
-  const store = libraryStore.get('games', []) as GameInfo[]
-  return store.filter((app) => app.app_name === appName)[0] || {}
+export function getAppInfo(appName: string): SideloadGame {
+  const store = libraryStore.get('games', [])
+  const info = store.find((app) => app.app_name === appName)
+  if (!info) {
+    // @ts-expect-error TODO: As with LegendaryGame and GOGGame, handle this properly
+    return {}
+  }
+  return info
 }
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -93,7 +88,7 @@ export function addNewApp({
     )
   }
 
-  const current = libraryStore.get('games', []) as SideloadGame[]
+  const current = libraryStore.get('games', [])
 
   const gameIndex = current.findIndex((value) => value.app_name === app_name)
 
@@ -102,10 +97,10 @@ export function addNewApp({
     current[gameIndex] = { ...current[gameIndex], ...game }
   } else {
     current.push(game)
+    addAppShortcuts(app_name)
   }
 
   libraryStore.set('games', current)
-  addAppShortcuts(app_name)
   return
 }
 
@@ -122,6 +117,11 @@ export async function removeAppShortcuts(appName: string): Promise<void> {
 
 export function isAppAvailable(appName: string): boolean {
   const { install } = getAppInfo(appName)
+
+  if (install && install.platform === 'Browser') {
+    return true
+  }
+
   if (install && install.executable) {
     return existsSync(install.executable)
   }
@@ -139,7 +139,7 @@ export async function launchApp(appName: string): Promise<boolean> {
 
   if (browserUrl) {
     return new Promise((res) => {
-      const browserGame = new BrowserWindow({ fullscreen: true })
+      const browserGame = new BrowserWindow()
       browserGame.loadURL(browserUrl)
       browserGame.focus()
       browserGame.setTitle(title)
@@ -185,15 +185,16 @@ export async function launchApp(appName: string): Promise<boolean> {
     if (isNativeApp(appName)) {
       logInfo(
         `launching native sideloaded: ${executable} ${launcherArgs ?? ''}`,
-        { prefix: LogPrefix.Backend }
+        LogPrefix.Backend
       )
 
       try {
         await access(executable, FS_CONSTANTS.X_OK)
       } catch (error) {
-        logWarning('File not executable, changing permissions temporarilly', {
-          prefix: LogPrefix.Backend
-        })
+        logWarning(
+          'File not executable, changing permissions temporarilly',
+          LogPrefix.Backend
+        )
         // On Mac, it gives an error when changing the permissions of the file inside the app bundle. But we need it for other executables like scripts.
         if (isLinux || (isMac && !executable.endsWith('.app'))) {
           await chmod(executable, 0o775)
@@ -226,9 +227,10 @@ export async function launchApp(appName: string): Promise<boolean> {
       return true
     }
 
-    logInfo(`launching non-native sideloaded: ${executable}}`, {
-      prefix: LogPrefix.Backend
-    })
+    logInfo(
+      `launching non-native sideloaded: ${executable}}`,
+      LogPrefix.Backend
+    )
 
     if (isMac) {
       const globalSettings = await GameConfig.get('global').getSettings()
@@ -254,44 +256,6 @@ export async function launchApp(appName: string): Promise<boolean> {
   return false
 }
 
-export async function moveInstall(
-  appName: string,
-  newInstallPath: string
-): Promise<string> {
-  const {
-    install: { install_path },
-    title
-  } = getAppInfo(appName)
-
-  if (!install_path) {
-    return ''
-  }
-
-  if (isWindows) {
-    newInstallPath += '\\' + install_path.split('\\').at(-1)
-  } else {
-    newInstallPath += '/' + install_path.split('/').at(-1)
-  }
-
-  logInfo(`Moving ${title} to ${newInstallPath}`, {
-    prefix: LogPrefix.Backend
-  })
-  await execAsync(`mv -f '${install_path}' '${newInstallPath}'`, execOptions)
-    .then(() => {
-      const installedArray =
-        (libraryStore.get('installed', []) as Array<InstalledInfo>) || []
-
-      const gameIndex = installedArray.findIndex(
-        (value) => value.appName === appName
-      )
-
-      installedArray[gameIndex].install_path = newInstallPath
-      libraryStore.set('installed', installedArray)
-      logInfo(`Finished Moving ${title}`, { prefix: LogPrefix.Backend })
-    })
-    .catch((error) => logError(`${error}`, { prefix: LogPrefix.Backend }))
-  return newInstallPath
-}
 export async function stop(appName: string): Promise<void> {
   const {
     install: { executable }
@@ -312,25 +276,37 @@ export async function removeApp({
   appName,
   shouldRemovePrefix
 }: RemoveArgs): Promise<void> {
-  const old = libraryStore.get('games', []) as SideloadGame[]
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner: 'sideload',
+    status: 'uninstalling'
+  })
+
+  const old = libraryStore.get('games', [])
   const current = old.filter((a: SideloadGame) => a.app_name !== appName)
-  libraryStore.set('games', current)
 
   const { title } = getAppInfo(appName)
   const { winePrefix } = await getAppSettings(appName)
 
   if (shouldRemovePrefix) {
-    logInfo(`Removing prefix ${winePrefix}`, { prefix: LogPrefix.Backend })
+    logInfo(`Removing prefix ${winePrefix}`, LogPrefix.Backend)
     if (existsSync(winePrefix)) {
       // remove prefix if exists
       rmSync(winePrefix, { recursive: true })
     }
   }
+  libraryStore.set('games', current)
   notify({ title, body: i18next.t('notify.uninstalled') })
 
   removeAppShortcuts(appName)
 
-  return logInfo('finished uninstalling', { prefix: LogPrefix.Backend })
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    runner: 'sideload',
+    status: 'done'
+  })
+
+  logInfo('finished uninstalling', LogPrefix.Backend)
 }
 
 export function isNativeApp(appName: string): boolean {
@@ -338,6 +314,10 @@ export function isNativeApp(appName: string): boolean {
     install: { platform }
   } = getAppInfo(appName)
   if (platform) {
+    if (platform === 'Browser') {
+      return true
+    }
+
     if (isWindows) {
       return true
     }

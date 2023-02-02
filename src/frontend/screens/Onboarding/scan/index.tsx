@@ -11,7 +11,6 @@ interface ScanProps {
 }
 
 const Scan: React.FC<ScanProps> = function (props) {
-  console.log('in scan props with ', props)
   const blob = new Blob([props.qrCodeSvg], { type: 'image/svg+xml' })
   const url = URL.createObjectURL(blob)
 

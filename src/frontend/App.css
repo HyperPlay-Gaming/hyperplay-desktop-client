@@ -16,12 +16,6 @@
   /* Measurements */
 }
 
-@media screen and (max-width: 730px) {
-  * {
-    --sidebar-width: calc(var(--sidebar-width) - 1em);
-  }
-}
-
 body,
 html,
 #root,
@@ -34,23 +28,18 @@ html,
 .App {
   text-align: center;
   display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
-  grid-template-areas: 'sidebar content' 'controller controller';
-  grid-template-rows: 1fr min-content;
-  --sidebar-width: 240px;
-  --content-width: calc(100vw - var(--sidebar-width));
-  --hp-logo-sidebar-width: 64px;
+  grid-template-columns: min-content 1fr;
+  grid-template-areas: 'offline offline' 'sidebar content' 'controller controller';
+  grid-template-rows: min-content 1fr min-content;
 }
 
-.App.collapsed {
-  --sidebar-width: 68px;
-  --content-width: calc(100vw - var(--sidebar-width));
-  grid-template-columns: var(--sidebar-width) 1fr;
-  --hp-logo-sidebar-width: 24px;
+.App .Sidebar {
+  grid-area: sidebar;
 }
 
 .App .content {
   display: flex;
+  grid-area: content;
   flex-direction: column;
   height: 100%;
   overflow-y: auto;
@@ -61,16 +50,15 @@ html,
 .App .content .UpdateComponent--topLevel {
   height: 100vh;
   position: initial;
-  width: var(--content-width);
-}
-
-.App .content .UpdateComponent--topLevel.collapsed {
-  width: var(--content-width);
 }
 
 .App .controller {
   grid-area: controller;
   position: relative;
+}
+
+.App .offline-message {
+  grid-area: offline;
 }
 
 .danger {
