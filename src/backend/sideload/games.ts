@@ -1,15 +1,9 @@
 import { GameSettings, SideloadGame } from 'common/types'
 import { libraryStore } from './electronStores'
 import { GameConfig } from '../game_config'
-import {
-  isWindows,
-  isMac,
-  isLinux,
-  execOptions,
-  gamesConfigPath
-} from '../constants'
-import { execAsync, killPattern, notify } from '../utils'
-import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
+import { isWindows, isMac, isLinux, gamesConfigPath } from '../constants'
+import { killPattern } from '../utils'
+import { logInfo, LogPrefix, logWarning } from '../logger/logger'
 import path, { dirname, join } from 'path'
 import {
   appendFileSync,
