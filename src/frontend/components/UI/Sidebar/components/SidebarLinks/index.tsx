@@ -15,14 +15,15 @@ import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
-import { openDiscordLink, getGameInfo } from 'frontend/helpers'
+import { openDiscordLink } from 'frontend/helpers'
 
 import ContextProvider from 'frontend/state/ContextProvider'
-import { Runner, GameInfo } from 'common/types'
+import { Runner } from 'common/types'
 import './index.css'
 import QuitButton from '../QuitButton'
 import { LocationState } from 'frontend/types'
 import { HyperPlayLogoWhite } from 'frontend/assets/hyperplay'
+import { SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY } from 'frontend/components/UI/ExternalLinkDialog'
 
 type PathSplit = [
   a: undefined,
@@ -33,69 +34,33 @@ type PathSplit = [
 ]
 
 export default function SidebarLinks() {
-  const [gameInfo, setGameInfo] = useState<Partial<GameInfo>>({
-    cloud_save_enabled: false,
-    is_installed: false
-  })
   const { t } = useTranslation()
   const { state } = useLocation() as { state: LocationState }
   const location = useLocation() as { pathname: string }
   const [, , runner, appName, type] = location.pathname.split('/') as PathSplit
 
-  const { epic, gog, platform, activeController, refreshLibrary } =
-    useContext(ContextProvider)
+  const {
+    epic,
+    gog,
+    activeController,
+    refreshLibrary,
+    platform,
+    handleExternalLinkDialog
+  } = useContext(ContextProvider)
 
   const isStore = location.pathname.includes('store')
   const isSettings = location.pathname.includes('settings')
-  const [isDefaultSetting, setIsDefaultSetting] = useState(true)
-  // const [isNativeApp, setIsNativeApp] = useState(true)
-  const [settingsPath, setSettingsPath] = useState(
-    '/settings/app/default/general'
-  )
+  const isWin = platform === 'win32'
+
+  const settingsPath = '/settings/app/default/general'
+
   const [isFullscreen, setIsFullscreen] = useState(false)
 
-  // const isMac = platform === 'darwin'
-  const isLinux = platform === 'linux'
-  const isLinuxGame = isLinux && gameInfo.install?.platform === 'linux'
-  const notAnApp =
-    !runner ||
-    runner === 'app' ||
-    gameInfo.install?.platform === 'Browser' ||
-    !appName
-
   const loggedIn = epic.username || gog.username
-
-  const { cloud_save_enabled } = gameInfo
-
-  useEffect(() => {
-    const updateGameInfo = async () => {
-      if (notAnApp) {
-        setIsDefaultSetting(true)
-        setGameInfo({ ...gameInfo, cloud_save_enabled: false })
-        setSettingsPath('/settings/app/default/general')
-      } else {
-        const info = await getGameInfo(appName, runner)
-        if (info) {
-          setGameInfo(info)
-          if (info?.is_installed) {
-            setIsDefaultSetting(false)
-            setSettingsPath(`/settings/${runner}/${appName}/games_settings`)
-          }
-        }
-      }
-    }
-    updateGameInfo()
-  }, [location])
 
   useEffect(() => {
     window.api.isFullscreen().then((res) => setIsFullscreen(res))
   }, [])
-
-  useEffect(() => {
-    if (notAnApp) {
-      return setIsDefaultSetting(true)
-    }
-  }, [location])
 
   async function handleRefresh() {
     localStorage.setItem('scrollPosition', '0')
@@ -107,6 +72,17 @@ export default function SidebarLinks() {
       return refreshLibrary({ runInBackground: true, fullRefresh: true })
     }
     return
+  }
+
+  function handleExternalLink(linkCallback: () => void) {
+    const showExternalLinkDialog: boolean = JSON.parse(
+      localStorage.getItem(SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY) ?? 'true'
+    )
+    if (showExternalLinkDialog) {
+      handleExternalLinkDialog({ showDialog: true, linkCallback })
+    } else {
+      linkCallback()
+    }
   }
 
   return (
@@ -121,20 +97,24 @@ export default function SidebarLinks() {
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
       <NavLink
         className={({ isActive }) =>
-          classNames('Sidebar__item', { active: isActive })
+          classNames('Sidebar__item', {
+            active:
+              isActive ||
+              location.pathname.includes('gamepage') ||
+              location.pathname.includes('library')
+          })
         }
+        end
         to={'/'}
         onClick={async () => handleRefresh()}
       >
-        <>
-          <div className="Sidebar__itemIcon">
-            <FontAwesomeIcon
-              icon={faGamepad}
-              title={t('library.label', 'Library')}
-            />
-          </div>
-          <span>{t('library.label', 'Library')}</span>
-        </>
+        <div className="Sidebar__itemIcon">
+          <FontAwesomeIcon
+            icon={faGamepad}
+            title={t('library.label', 'Library')}
+          />
+        </div>
+        <span>{t('library.label', 'Library')}</span>
       </NavLink>
 
       <h6 className="Sidebar__categoryTitle">ACCOUNTS</h6>
@@ -159,7 +139,9 @@ export default function SidebarLinks() {
       <div className="SidebarItemWithSubmenu">
         <NavLink
           className={({ isActive }) =>
-            classNames('Sidebar__item', { active: isActive })
+            classNames('Sidebar__item', {
+              active: isActive || location.pathname.includes('store')
+            })
           }
           to="/epicstore"
         >
@@ -211,48 +193,34 @@ export default function SidebarLinks() {
         <NavLink
           data-testid="settings"
           className={({ isActive }) =>
-            classNames('Sidebar__item', { active: isActive })
+            classNames('Sidebar__item', {
+              active: isActive || location.pathname.includes('settings')
+            })
           }
           to={{ pathname: settingsPath }}
           state={{
-            fromGameCard: false,
-            runner: runner,
-            hasCloudSave: cloud_save_enabled,
-            gameInfo: gameInfo
+            fromGameCard: false
           }}
         >
           <>
             <div className="Sidebar__itemIcon">
-              <FontAwesomeIcon
-                icon={faSlidersH}
-                title={
-                  isDefaultSetting
-                    ? t('Settings')
-                    : t('GameSettings', 'Game Settings')
-                }
-              />
+              <FontAwesomeIcon icon={faSlidersH} title={t('Settings')} />
             </div>
-            <span>
-              {isDefaultSetting
-                ? t('Settings')
-                : t('GameSettings', 'Game Settings')}
-            </span>
+            <span>{t('Settings', 'Settings')}</span>
           </>
         </NavLink>
         {isSettings && (
           <div className="SidebarSubmenu settings">
-            {isDefaultSetting && (
-              <NavLink
-                role="link"
-                to={{ pathname: '/settings/app/default/general' }}
-                state={{ fromGameCard: false }}
-                className={classNames('Sidebar__item SidebarLinks__subItem', {
-                  ['active']: type === 'general'
-                })}
-              >
-                <span>{t('settings.navbar.general')}</span>
-              </NavLink>
-            )}
+            <NavLink
+              role="link"
+              to={{ pathname: '/settings/app/default/general' }}
+              state={{ fromGameCard: false }}
+              className={classNames('Sidebar__item SidebarLinks__subItem', {
+                ['active']: type === 'general'
+              })}
+            >
+              <span>{t('settings.navbar.general')}</span>
+            </NavLink>
             <NavLink
               role="link"
               to={`/settings/${runner}/${appName}/games_settings`}
@@ -261,45 +229,20 @@ export default function SidebarLinks() {
                 ['active']: type === 'games_settings'
               })}
             >
-              {isDefaultSetting && (
-                <span>
-                  {t(
-                    'settings.navbar.games_settings_defaults',
-                    'Game Defaults'
-                  )}
-                </span>
-              )}
-              {!isDefaultSetting && (
-                <span>
-                  {t('settings.navbar.games_settings', 'Game Settings')}
-                </span>
-              )}
+              <span>
+                {t('settings.navbar.games_settings_defaults', 'Game Defaults')}
+              </span>
             </NavLink>
-            {cloud_save_enabled && !isLinuxGame && (
-              <NavLink
-                role="link"
-                data-testid="linkSync"
-                to={`/settings/${runner}/${appName}/sync`}
-                state={{ ...state, runner: state?.runner }}
-                className={classNames('Sidebar__item SidebarLinks__subItem', {
-                  ['active']: type === 'sync'
-                })}
-              >
-                <span>{t('settings.navbar.sync')}</span>
-              </NavLink>
-            )}
-            {isDefaultSetting && (
-              <NavLink
-                role="link"
-                to={`/settings/${runner}/${appName}/advanced`}
-                state={{ ...state, runner: state?.runner }}
-                className={classNames('Sidebar__item SidebarLinks__subItem', {
-                  ['active']: type === 'advanced'
-                })}
-              >
-                <span>{t('settings.navbar.advanced', 'Advanced')}</span>
-              </NavLink>
-            )}
+            <NavLink
+              role="link"
+              to={`/settings/${runner}/${appName}/advanced`}
+              state={{ ...state, runner: state?.runner }}
+              className={classNames('Sidebar__item SidebarLinks__subItem', {
+                ['active']: type === 'advanced'
+              })}
+            >
+              <span>{t('settings.navbar.advanced', 'Advanced')}</span>
+            </NavLink>
             <NavLink
               role="link"
               to={`/settings/${runner}/${appName}/log`}
@@ -329,7 +272,7 @@ export default function SidebarLinks() {
           <span>{t('download-manager.link', 'Downloads')}</span>
         </>
       </NavLink>
-      {isLinux && (
+      {!isWin && (
         <NavLink
           className={({ isActive }) =>
             classNames('Sidebar__item', { active: isActive })
@@ -382,7 +325,10 @@ export default function SidebarLinks() {
           <span>{t('docs', 'Documentation')}</span>
         </>
       </NavLink>
-      <button className="Sidebar__item" onClick={() => openDiscordLink()}>
+      <button
+        className="Sidebar__item"
+        onClick={() => handleExternalLink(openDiscordLink)}
+      >
         <div className="Sidebar__itemIcon">
           <FontAwesomeIcon
             icon={faDiscord}

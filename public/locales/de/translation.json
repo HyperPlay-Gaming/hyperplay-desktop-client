@@ -203,7 +203,6 @@
         "store": "Store",
         "title": "Spieltitel"
     },
-    "GameSettings": "Spiel-Einstellungen",
     "generic": {
         "error": {
             "component": "Keine Spiele gefunden - Versuche dich abzumelden und erneut anzumelden, oder wähle eine der folgenden Optionen"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ausgeblendete ignorieren",
         "platform": "Plattform",
         "show_all_games": "Alle Spiele anzeigen",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Nur Favoriten anzeigen",
         "show_hidden": "Ausgeblendete anzeigen",
         "store": "Store filtern"
@@ -564,8 +565,7 @@
         },
         "navbar": {
             "advanced": "Erweitert",
-            "games_settings": "Game Settings",
-            "games_settings_defaults": "Game Defaults",
+            "games_settings_defaults": "Standardeinstellungen für Spiele",
             "general": "Allgemein",
             "log": "Log",
             "other": "Andere",

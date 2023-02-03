@@ -14,6 +14,9 @@ import { ReactComponent as WCBlue } from './walletconnect_icon_blue.svg'
 import { ReactComponent as SettingsIcon } from './settings_icon.svg'
 import { ReactComponent as BackArrowOutlinedCircled } from './back_arrow_outlined_circle.svg'
 import { ReactComponent as CyberDividerVertical } from './cyber_divider_vertical.svg'
+import { ReactComponent as PhoneCompletedIcon } from './phone_completed_icon.svg'
+import { ReactComponent as PhoneErrorIcon } from './phone_error_icon.svg'
+import { ReactComponent as PhoneWaitingConfimationSpinner } from './phone_waiting_confirmation.svg'
 
 export {
   BackArrow,
@@ -31,5 +34,8 @@ export {
   WCBlue,
   SettingsIcon,
   BackArrowOutlinedCircled,
-  CyberDividerVertical
+  CyberDividerVertical,
+  PhoneCompletedIcon,
+  PhoneErrorIcon,
+  PhoneWaitingConfimationSpinner
 }

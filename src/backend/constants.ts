@@ -1,7 +1,6 @@
 import { spawnSync } from 'child_process'
 import { homedir, platform } from 'os'
 import { join, resolve } from 'path'
-import Store from 'electron-store'
 import { parse } from '@node-steam/vdf'
 
 import { GameConfigVersion, GlobalConfigVersion } from 'common/types'
@@ -11,17 +10,18 @@ import { env } from 'process'
 import { app } from 'electron'
 import { existsSync, readFileSync } from 'graceful-fs'
 import { GlobalConfig } from './config'
+import { TypeCheckedStoreBackend } from './electron_store'
 
-const configStore = new Store({
+const configStore = new TypeCheckedStoreBackend('configStore', {
   cwd: 'store'
 })
 
-const tsStore = new Store({
+const tsStore = new TypeCheckedStoreBackend('timestampStore', {
   cwd: 'store',
   name: 'timestamp'
 })
 
-const fontsStore = new Store({
+const fontsStore = new TypeCheckedStoreBackend('fontsStore', {
   cwd: 'store',
   name: 'fonts'
 })
@@ -65,8 +65,6 @@ const installed = join(legendaryConfigPath, 'installed.json')
 const legendaryMetadata = join(legendaryConfigPath, 'metadata')
 const fallBackImage = 'fallback'
 const epicLoginUrl = 'https://legendary.gl/epiclogin'
-const gogLoginUrl =
-  'https://auth.gog.com/auth?client_id=46899977096215655&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&response_type=code&layout=galaxy'
 const sidInfoUrl =
   'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-To:-Epic-Alternative-Login'
 const githubURL = 'https://github.com/G7DAO/HyperPlay/releases/latest'
@@ -141,7 +139,7 @@ export function getSteamCompatFolder() {
 }
 
 export async function getSteamLibraries(): Promise<string[]> {
-  const { defaultSteamPath } = await GlobalConfig.get().getSettings()
+  const { defaultSteamPath } = GlobalConfig.get().getSettings()
   const path = defaultSteamPath.replaceAll("'", '')
   const vdfFile = join(path, 'steamapps', 'libraryfolders.vdf')
   const libraries = ['/usr/share/steam']
@@ -158,9 +156,10 @@ export async function getSteamLibraries(): Promise<string[]> {
       (path) => existsSync(path)
     )
   }
-  logDebug('Unable to load Steam Libraries, libraryfolders.vdf not found', {
-    prefix: LogPrefix.Backend
-  })
+  logDebug(
+    'Unable to load Steam Libraries, libraryfolders.vdf not found',
+    LogPrefix.Backend
+  )
   return libraries
 }
 
@@ -181,10 +180,10 @@ export {
   discordLink,
   execOptions,
   fixAsarPath,
-  getShell,
   configStore,
   configPath,
   appConfigFolder,
+  configFolder,
   gamesConfigPath,
   githubURL,
   iconsFolder,
@@ -206,7 +205,6 @@ export {
   legendaryConfigPath,
   legendaryMetadata,
   epicLoginUrl,
-  gogLoginUrl,
   sidInfoUrl,
   supportURL,
   fallBackImage,

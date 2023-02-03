@@ -203,7 +203,6 @@
         "store": "Denda",
         "title": "Jokoaren izenburua"
     },
-    "GameSettings": "Jokoaren ezarpenak",
     "generic": {
         "error": {
             "component": "Ez da jokorik aurkitu - Saiatu saioa amaitzen eta berriro hasten edo azpiko aukeraren bat"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG denda",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ezikusi ezkutatutakoak",
         "platform": "Plataforma",
         "show_all_games": "Erakutsi joko guztiak",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Erakutsi gogokoenak soilik",
         "show_hidden": "Erakutsi ezkutatutakoak",
         "store": "Iragazi denda"
@@ -271,7 +272,7 @@
             "version": "HyperPlay bertsioa"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Ezarpenak automatikoki gordetzen dira",
         "version": "Ardoaren Bertsioa"
@@ -523,9 +524,9 @@
             "title": "Exekutatu EXE aurrizkian"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Hautatu partidak gordetzeko karpeta zehatza",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Hautatu Gaia",
         "showfps": "Erakutsi FPS (DX9, 10 eta 11)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Aurreratua",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Orokorra",
             "log": "Erregistroa",

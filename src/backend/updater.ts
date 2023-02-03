@@ -36,7 +36,8 @@ autoUpdater.on('update-downloaded', async () => {
       'box.info.update.message-finished',
       'Do you want to restart HyperPlay now?'
     ),
-    buttons: [t('box.no'), t('box.yes')]
+    buttons: [t('box.no'), t('box.yes')],
+    icon: icon
   })
 
   if (response === 1) {
@@ -55,5 +56,5 @@ autoUpdater.on('error', (error) => {
     ),
     type: 'ERROR'
   }) */
-  logError(['failed to update', error], { prefix: LogPrefix.Backend })
+  logError(['failed to update', error], LogPrefix.Backend)
 })

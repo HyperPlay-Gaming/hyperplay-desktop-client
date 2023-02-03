@@ -16,6 +16,8 @@ import Success from './success'
 import Rejected from './rejected'
 import Download from './download'
 import { BackArrow, CloseX } from 'frontend/assets/hyperplay'
+import { MetaMaskImportOptions } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+import ImportMetaMask from './import'
 import ContextProvider from 'frontend/state/ContextProvider'
 
 interface OnboardingProps {
@@ -26,6 +28,7 @@ interface ContentParams {
   content: ONBOARDING_CONTENT
   qrCodeSvg: string
   providerImgUrl: string
+  mmImportPaths?: MetaMaskImportOptions
 }
 
 const Onboarding: React.FC<OnboardingProps> = function (props) {
@@ -57,10 +60,41 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     })
   }
 
-  async function handleMmExtensionProviderClicked() {
-    setShowMetaMaskBrowserSidebarLinks(true)
-    await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
-    props.disableOnboarding()
+  async function handleMmExtensionProviderClicked(dbPath?: string | null) {
+    if (dbPath === null) {
+      window.api.createNewMetaMaskWallet()
+      return
+    }
+    const metadata = await window.api.getExtensionMetadata()
+    const importOptions = await window.api.getMetaMaskImportOptions()
+
+    if (
+      !metadata.hasWallet &&
+      !metadata.isInitialized &&
+      (!importOptions || dbPath === null || dbPath)
+    ) {
+      const success = await window.api.importMetaMask(dbPath)
+      if (!success) return
+      setShowMetaMaskBrowserSidebarLinks(true)
+      await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
+
+      props.disableOnboarding()
+
+      return
+    }
+
+    if (metadata.isInitialized && metadata.hasWallet) {
+      setShowMetaMaskBrowserSidebarLinks(true)
+      await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
+
+      props.disableOnboarding()
+      return
+    }
+
+    setContentParams({
+      content: ONBOARDING_CONTENT.IMPORT,
+      mmImportPaths: importOptions
+    })
   }
 
   const handleConnected: WrapRendererCallback<WalletConnectedType> = (
@@ -118,6 +152,15 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
               })
             }
             handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
+          />
+        )
+      case ONBOARDING_CONTENT.IMPORT:
+        return (
+          <ImportMetaMask
+            importOptions={contentParams.mmImportPaths!}
+            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
+            setOnboardingModalParams={setOnboardingParams}
+            disableOnboarding={props.disableOnboarding}
           />
         )
       case ONBOARDING_CONTENT.SCAN:

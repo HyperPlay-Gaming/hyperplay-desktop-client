@@ -203,7 +203,6 @@
         "store": "Mağaza",
         "title": "Oyun Adı"
     },
-    "GameSettings": "Game Settings",
     "generic": {
         "error": {
             "component": "Oyun bulunamadı - Oturumu kapatıp tekrar açmayı veya aşağıdaki seçeneklerden birini deneyin"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "GOG Mağazası",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Gizlileri Yoksay",
         "platform": "Platform",
         "show_all_games": "Tüm oyunları göster",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Yalnızca Favorileri göster",
         "show_hidden": "Gizlileri Göster",
         "store": "Mağazayı Filtrele"
@@ -271,7 +272,7 @@
             "version": "HyperPlay Sürümü"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Ayarlar otomatik kaydedilir",
         "version": "Wine Sürümü"
@@ -441,7 +442,7 @@
         "autovkd3d": "Prefix'te VKD3D'yi Otomatik Kur/Güncelle",
         "change-target-exe": "Çalıştırmak için alternatif bir EXE seçin",
         "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
+        "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Özel Wine/Proton Yolları",
         "darktray": "Koyu Tepsi Simgesi Kullan",
@@ -523,9 +524,9 @@
             "title": "Exe Çalıştır"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Tam oyun kaydetme klasörünü seçin",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Tema Seç",
         "showfps": "FPS'i Göster (DX9, 10 and 11)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Gelişmiş",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Genel",
             "log": "Log",

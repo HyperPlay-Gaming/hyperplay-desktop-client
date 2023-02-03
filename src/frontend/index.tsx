@@ -34,13 +34,11 @@ initGamepad()
 initShortcuts()
 
 const storage: Storage = window.localStorage
+storage.removeItem('nonAvailableGames')
 
-let languageCode: string | undefined = configStore.get('language') as string
-
-if (!languageCode) {
-  languageCode = storage.getItem('language') || 'en'
-  configStore.set('language', languageCode)
-}
+const languageCode: string =
+  configStore.get_nodefault('language') ?? storage.getItem('language') ?? 'en'
+configStore.set('language', languageCode)
 
 i18next
   // load translation using http -> see /public/locales
@@ -50,6 +48,8 @@ i18next
   // learn more: https://github.com/i18next/i18next-browser-languageDetector
   .use(initReactI18next)
   .init({
+    returnEmptyString: false,
+    returnNull: false,
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false
@@ -139,7 +139,7 @@ window.setTheme = async (themeClass: string) => {
   document.body.className = themeClass
 }
 
-const themeClass = (configStore.get('theme') as string) || 'default'
+const themeClass = configStore.get('theme', 'default')
 window.setTheme(themeClass)
 
 // helper function to generate images for steam

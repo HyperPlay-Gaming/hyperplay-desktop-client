@@ -2,7 +2,7 @@ import './index.css'
 
 import React, { useContext, useEffect, useState } from 'react'
 
-import { GameStatus, Runner } from 'common/types'
+import { GameStatus, Runner, WikiInfo } from 'common/types'
 
 import { createNewWindow, repair } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
@@ -21,6 +21,7 @@ interface Props {
   runner: Runner
   handleUpdate: () => void
   disableUpdate: boolean
+  setShowExtraInfo: (show: boolean) => void
   onShowRequirements?: () => void
 }
 
@@ -32,15 +33,11 @@ export default function GamesSubmenu({
   runner,
   handleUpdate,
   disableUpdate,
-  onShowRequirements
+  onShowRequirements,
+  setShowExtraInfo
 }: Props) {
-  const {
-    handleGameStatus,
-    refresh,
-    platform,
-    libraryStatus,
-    showDialogModal
-  } = useContext(ContextProvider)
+  const { refresh, platform, libraryStatus, showDialogModal } =
+    useContext(ContextProvider)
   const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
 
@@ -52,10 +49,11 @@ export default function GamesSubmenu({
   const [showModal, setShowModal] = useState(false)
   const eosOverlayAppName = '98bc04bc842e4906993fd6d6644ffb8d'
   const [showUninstallModal, setShowUninstallModal] = useState(false)
+  const [protonDBurl, setProtonDBurl] = useState(
+    `https://www.protondb.com/search?q=${title}`
+  )
   const { t } = useTranslation('gamepage')
   const isSideloaded = runner === 'sideload'
-
-  const protonDBurl = `https://www.protondb.com/search?q=${title}`
 
   async function onMoveInstallYesClick() {
     const { defaultInstallPath } = await window.api.requestAppSettings()
@@ -66,9 +64,7 @@ export default function GamesSubmenu({
       defaultPath: defaultInstallPath
     })
     if (path) {
-      await handleGameStatus({ appName, runner, status: 'moving' })
       await window.api.moveInstall({ appName, path, runner })
-      await handleGameStatus({ appName, runner, status: 'done' })
     }
   }
 
@@ -111,9 +107,7 @@ export default function GamesSubmenu({
   }
 
   async function onRepairYesClick(appName: string) {
-    await handleGameStatus({ appName, runner, status: 'repairing' })
     await repair(appName, runner)
-    await handleGameStatus({ appName, runner, status: 'done' })
   }
 
   function handleRepair(appName: string) {
@@ -153,19 +147,7 @@ export default function GamesSubmenu({
       let { wasEnabled } = initialEnableResult
 
       if (installNow) {
-        await handleGameStatus({
-          appName: eosOverlayAppName,
-          runner: 'legendary',
-          status: 'installing'
-        })
-
         await window.api.installEosOverlay()
-        await handleGameStatus({
-          appName: eosOverlayAppName,
-          runner: 'legendary',
-          status: 'done'
-        })
-
         wasEnabled = (await window.api.enableEosOverlay(appName)).wasEnabled
       }
       setEosOverlayEnabled(wasEnabled)
@@ -216,6 +198,19 @@ export default function GamesSubmenu({
         .then((enabled) => setEosOverlayEnabled(enabled))
     }
   }, [isInstalled])
+
+  useEffect(() => {
+    // Get steam id and set direct proton db link
+    window.api
+      .getWikiGameInfo(title, runner === 'gog' ? appName : undefined)
+      .then((info: WikiInfo) => {
+        if (info?.pcgamingwiki?.steamID) {
+          setProtonDBurl(
+            `https://www.protondb.com/app/${info?.pcgamingwiki?.steamID}`
+          )
+        }
+      })
+  }, [title, appName])
 
   const refreshCircle = () => {
     return <CircularProgress className="link button is-text is-link" />
@@ -276,7 +271,7 @@ export default function GamesSubmenu({
                   onClick={async () => handleMoveInstall()}
                   className="link button is-text is-link"
                 >
-                  {t('submenu.move')}
+                  {t('submenu.move', 'Move Game')}
                 </button>
               )}{' '}
               {!isSideloaded && (
@@ -284,7 +279,7 @@ export default function GamesSubmenu({
                   onClick={async () => handleChangeInstall()}
                   className="link button is-text is-link"
                 >
-                  {t('submenu.change')}
+                  {t('submenu.change', 'Change Install Location')}
                 </button>
               )}{' '}
               {!isSideloaded && (
@@ -292,7 +287,7 @@ export default function GamesSubmenu({
                   onClick={async () => handleRepair(appName)}
                   className="link button is-text is-link"
                 >
-                  {t('submenu.verify')}
+                  {t('submenu.verify', 'Verify and Repair')}
                 </button>
               )}{' '}
               {isLinux &&
@@ -319,14 +314,23 @@ export default function GamesSubmenu({
               {t('submenu.store')}
             </NavLink>
           )}
-          {!isSideloaded && !isWin && (
+          {!isSideloaded && isLinux && (
             <button
               onClick={() => createNewWindow(protonDBurl)}
               className="link button is-text is-link"
             >
-              {t('submenu.protondb')}
+              {t('submenu.protondb', 'Check Compatibility')}
             </button>
           )}
+          {!isSideloaded && (
+            <button
+              onClick={() => setShowExtraInfo(true)}
+              className="link button is-text is-link"
+            >
+              {t('submenu.extraInfo', 'Extra Info')}
+            </button>
+          )}
+
           {onShowRequirements && (
             <button
               onClick={async () => onShowRequirements()}
@@ -335,12 +339,14 @@ export default function GamesSubmenu({
               {t('game.requirements', 'Requirements')}
             </button>
           )}
-          <button
-            onClick={async () => setShowUninstallModal(true)}
-            className="link button is-text is-link is-dangerous"
-          >
-            {t('button.uninstall')}
-          </button>
+          {isInstalled && (
+            <button
+              onClick={async () => setShowUninstallModal(true)}
+              className="link button is-text is-link is-dangerous"
+            >
+              {t('button.uninstall')}
+            </button>
+          )}
         </div>
       </div>
       {showModal && (

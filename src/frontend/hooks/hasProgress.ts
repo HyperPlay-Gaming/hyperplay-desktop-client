@@ -8,13 +8,12 @@ export const hasProgress = (appName: string) => {
     storage.getItem(appName) || '{}'
   ) as InstallProgress
 
-  const [progress, setProgress] = useState(
-    previousProgress ??
-      ({
-        bytes: '0.00MB',
-        eta: '00:00:00',
-        percent: 0
-      } as InstallProgress)
+  const [progress, setProgress] = useState<InstallProgress>(
+    previousProgress ?? {
+      bytes: '0.00MB',
+      eta: '00:00:00',
+      percent: 0
+    }
   )
 
   const calculatePercent = (currentProgress: InstallProgress) => {
@@ -31,7 +30,7 @@ export const hasProgress = (appName: string) => {
   }
 
   useEffect(() => {
-    const onGameStatusUpdate = async (
+    const handleProgressUpdate = async (
       _e: Electron.IpcRendererEvent,
       { appName: appWithProgress, progress: currentProgress }: GameStatus
     ) => {
@@ -42,8 +41,10 @@ export const hasProgress = (appName: string) => {
         })
       }
     }
-    const setGameStatusRemoveListener =
-      window.api.handleSetGameStatus(onGameStatusUpdate)
+    const setGameStatusRemoveListener = window.api.onProgressUpdate(
+      appName,
+      handleProgressUpdate
+    )
 
     return () => {
       setGameStatusRemoveListener()

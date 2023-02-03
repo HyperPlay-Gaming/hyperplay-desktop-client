@@ -51,11 +51,10 @@ export default React.memo(function InstallModal({
   const [winePrefix, setWinePrefix] = useState('...')
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
+  const [crossoverBottle, setCrossoverBottle] = useState('')
 
-  const [isLinuxNative, setIsLinuxNative] = useState(false)
-  const [isMacNative, setIsMacNative] = useState(false)
-  const [defaultPlatform, setDefaultPlatform] =
-    useState<InstallPlatform>('Windows')
+  const isLinuxNative = Boolean(gameInfo?.is_linux_native)
+  const isMacNative = Boolean(gameInfo?.is_mac_native)
 
   const isMac = platform === 'darwin'
   const isWin = platform === 'win32'
@@ -93,25 +92,27 @@ export default React.memo(function InstallModal({
     (p) => p.available
   )
 
-  useEffect(() => {
-    const selectedPlatform = isLinuxNative
-      ? 'linux'
-      : isMacNative
-      ? 'Mac'
-      : 'Windows'
+  const getDefaultplatform = () => {
+    if (isLinux && gameInfo?.is_linux_native) {
+      return 'linux'
+    }
 
-    setPlatformToInstall(selectedPlatform)
-    setDefaultPlatform(selectedPlatform)
-  }, [isLinuxNative, isMacNative])
+    if (isMac && gameInfo?.is_mac_native) {
+      return 'Mac'
+    }
 
-  const [platformToInstall, setPlatformToInstall] =
-    useState<InstallPlatform>(defaultPlatform)
+    return 'Windows'
+  }
+
+  const [platformToInstall, setPlatformToInstall] = useState<InstallPlatform>(
+    getDefaultplatform()
+  )
 
   const hasWine = platformToInstall === 'Windows' && !isWin
 
   useEffect(() => {
     if (hasWine) {
-      ;(async () => {
+      const getWine = async () => {
         const newWineList: WineInstallation[] =
           await window.api.getAlternativeWine()
         setWineVersionList(newWineList)
@@ -124,12 +125,13 @@ export default React.memo(function InstallModal({
             setWineVersion(undefined)
           }
         }
-      })()
+      }
+      getWine()
     }
   }, [hasWine])
 
   function platformSelection() {
-    const showPlatformSelection = availablePlatforms.length > 1
+    const showPlatformSelection = !isWin && availablePlatforms.length > 1
 
     if (!showPlatformSelection) {
       return null
@@ -145,8 +147,8 @@ export default React.memo(function InstallModal({
           setPlatformToInstall(e.target.value as InstallPlatform)
         }
       >
-        {availablePlatforms.map((p) => (
-          <option value={p.value} key={p.value}>
+        {availablePlatforms.map((p, i) => (
+          <option value={p.value} key={i}>
             {p.name}
           </option>
         ))}
@@ -165,8 +167,6 @@ export default React.memo(function InstallModal({
       >
         {showDownloadDialog ? (
           <DownloadDialog
-            setIsLinuxNative={setIsLinuxNative}
-            setIsMacNative={setIsMacNative}
             appName={appName}
             runner={runner}
             winePrefix={winePrefix}
@@ -175,6 +175,7 @@ export default React.memo(function InstallModal({
             backdropClick={backdropClick}
             platformToInstall={platformToInstall}
             gameInfo={gameInfo}
+            crossoverBottle={crossoverBottle}
           >
             {platformSelection()}
             {hasWine ? (
@@ -185,6 +186,8 @@ export default React.memo(function InstallModal({
                 title={gameInfo?.title}
                 setWinePrefix={setWinePrefix}
                 setWineVersion={setWineVersion}
+                crossoverBottle={crossoverBottle}
+                setCrossoverBottle={setCrossoverBottle}
               />
             ) : null}
           </DownloadDialog>
@@ -197,6 +200,7 @@ export default React.memo(function InstallModal({
             backdropClick={backdropClick}
             platformToInstall={platformToInstall}
             appName={appName}
+            crossoverBottle={crossoverBottle}
           >
             {platformSelection()}
             {hasWine ? (
@@ -206,6 +210,8 @@ export default React.memo(function InstallModal({
                 wineVersionList={wineVersionList}
                 setWinePrefix={setWinePrefix}
                 setWineVersion={setWineVersion}
+                crossoverBottle={crossoverBottle}
+                setCrossoverBottle={setCrossoverBottle}
               />
             ) : null}
           </SideloadDialog>

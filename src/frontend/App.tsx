@@ -22,9 +22,12 @@ import MetaMaskPortfolio from './screens/MetaMaskPortfolio'
 import ExtensionManager from './ExtensionManager'
 import onboardingStore from './store/OnboardingStore'
 import { observer } from 'mobx-react-lite'
+import TransactionNotification from './screens/TransactionNotification'
+import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
+import SettingsModal from './screens/Settings/components/SettingsModal'
 
 function App() {
-  const { sidebarCollapsed } = useContext(ContextProvider)
+  const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
@@ -35,6 +38,13 @@ function App() {
           <ExtensionHandler />
           <ExtensionManager />
           <DialogHandler />
+          <ExternalLinkDialog />
+          {isSettingsModalOpen.gameInfo && (
+            <SettingsModal
+              gameInfo={isSettingsModalOpen.gameInfo}
+              type={isSettingsModalOpen.type}
+            />
+          )}
           <Routes>
             <Route path="/" element={<Navigate replace to="/library" />} />
             <Route path="/library" element={<Library />} />
@@ -70,6 +80,7 @@ function App() {
           <div className="simple-keyboard"></div>
         </div>
       </HashRouter>
+      <TransactionNotification />
       {onboardingStore.isOnboardingOpen && (
         <Onboarding
           disableOnboarding={() => onboardingStore.closeOnboarding()}

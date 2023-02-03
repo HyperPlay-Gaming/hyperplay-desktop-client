@@ -203,7 +203,6 @@
         "store": "فروشگاه",
         "title": "عنوان بازی"
     },
-    "GameSettings": "تنظیمات بازی",
     "generic": {
         "error": {
             "component": "بازی یافت نشد - خروج از حساب و ورود مجدد را امتحان کرده یا یکی از گزینه های زیر را امتحان کنید"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "فروشگاه GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "نادیده گرفتن موارد پنهان",
         "platform": "پلتفرم",
         "show_all_games": "نمایش همه بازی ها",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "نمایش مورد علاقه ها",
         "show_hidden": "نمایش موارد پنهان",
         "store": "فیلتر فروشگاه"
@@ -271,7 +272,7 @@
             "version": "HyperPlay Version"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "تنظیمات به صورت خودکار ذخیره شدند",
         "version": "نسخه Wine"
@@ -523,9 +524,9 @@
             "title": "اجرای EXE در محل"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "انتخاب پوشه دقیق ذخیرههای بازیها",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "انتخاب تم",
         "showfps": "نمایش تعداد فریم (11 و DX9, 10)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "پیشرفته",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "عمومی",
             "log": "Log",

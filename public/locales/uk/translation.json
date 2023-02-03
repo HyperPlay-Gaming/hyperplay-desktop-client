@@ -203,7 +203,6 @@
         "store": "Крамниця",
         "title": "Назва гри"
     },
-    "GameSettings": "Налаштування гри",
     "generic": {
         "error": {
             "component": "Жодної гри не знайдено - Спробуйте вийти та увійти заново або один із варіантів нижче"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "Крамниця GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ігнорувати приховані",
         "platform": "Платформа",
         "show_all_games": "Показати всі ігри",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Показати лише вподобання",
         "show_hidden": "Показати приховані",
         "store": "Фільтрувати крамницю"
@@ -271,7 +272,7 @@
             "version": "Версія HyperPlay"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Налаштування збережено автоматично",
         "version": "Версія Wine"
@@ -441,7 +442,7 @@
         "autovkd3d": "Автоматично встановлювати/оновлювати VKD3D на префіксі",
         "change-target-exe": "Обрати для запуску альтернативний EXE файл",
         "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
+        "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Інші шляхи до Wine/Proton",
         "darktray": "Використовувати темну піктограму на панелі",
@@ -523,9 +524,9 @@
             "title": "Запустити EXE на префіксі"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Вкажіть точну теку збережень для гри",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Оберіть тему",
         "showfps": "Показувати кількість кадрів (DX9, 10 та 11)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Розширені",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Загальні",
             "log": "Журнал",

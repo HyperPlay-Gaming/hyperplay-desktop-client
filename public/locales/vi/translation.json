@@ -203,7 +203,6 @@
         "store": "Cửa hàng",
         "title": "Tựa game"
     },
-    "GameSettings": "Game Settings",
     "generic": {
         "error": {
             "component": "Không tìm thấy game - Hãy thử đăng xuất rồi đăng nhập lại hoặc một trong các cách sau"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "Cửa hàng GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Bỏ qua mục bị ẩn",
         "platform": "Nền tảng",
         "show_all_games": "Hiển thị toàn bộ game",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Chỉ hiển thị mục ưa thích",
         "show_hidden": "Hiển thị mục bị ẩn",
         "store": "Lọc cửa hàng"
@@ -271,7 +272,7 @@
             "version": "HyperPlay Version"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder"
+            "searching": "Trying to detect the correct save folder (click to cancel)"
         },
         "settings": "Cài đặt được tự đông lưu",
         "version": "Phiên bản Wine"
@@ -441,7 +442,7 @@
         "autovkd3d": "Tự động cài đặt/cập nhật DXVK trên prefix",
         "change-target-exe": "Chọn một EXE thay thế để chạy",
         "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover Version",
+        "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Đường dẫn Wine/Proton tùy chọn",
         "darktray": "Sử dụng icon tối",
@@ -523,9 +524,9 @@
             "title": "Chạy EXE trên prefix"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Chọn chính xác thư mục lưu game",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "chọn Theme",
         "showfps": "Hiển thị FPS (DX9, 10 và 11)",
@@ -563,7 +564,6 @@
         },
         "navbar": {
             "advanced": "Nâng cao",
-            "games_settings": "Game Settings",
             "games_settings_defaults": "Game Defaults",
             "general": "Tổng quan",
             "log": "Log",

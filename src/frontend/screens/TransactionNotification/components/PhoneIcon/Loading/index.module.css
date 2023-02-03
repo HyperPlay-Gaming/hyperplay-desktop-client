@@ -1,0 +1,13 @@
+.rotating {
+  animation: phoneIconRotating 1s cubic-bezier(0.63, 0.35, 0.38, 0.59) infinite;
+  transform-origin: center;
+}
+
+@keyframes phoneIconRotating {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

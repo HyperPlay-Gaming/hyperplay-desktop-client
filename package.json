@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.2-alpha.1",
+  "version": "0.0.3-alpha.1",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -145,6 +145,7 @@
     "axios": "^0.26.1",
     "bn.js": "^5.2.1",
     "check-disk-space": "^3.3.1",
+    "classic-level": "^1.2.0",
     "classnames": "^2.3.1",
     "crc": "^4.1.1",
     "discord-rich-presence-typescript": "^0.0.8",
@@ -156,7 +157,6 @@
     "fs-extra": "^10.1.0",
     "fuse.js": "^6.6.2",
     "graceful-fs": "^4.2.10",
-    "heroic-wine-downloader": "^1.2.3",
     "howlongtobeat": "^1.7.0",
     "i18next": "^21.6.16",
     "i18next-fs-backend": "^1.1.4",
@@ -179,12 +179,14 @@
     "source-map-support": "^0.5.21",
     "steam-shortcut-editor": "^3.1.1",
     "systeminformation": "^5.15.0",
-    "tslib": "^2.4.0",
-    "web3": "^1.7.5"
+    "web3": "^1.7.5",
+    "ts-prune": "^0.10.3",
+    "tslib": "^2.4.0"
   },
   "scripts": {
     "start": "vite",
     "codecheck": "tsc --noEmit",
+    "find-deadcode": "ts-prune --error",
     "test": "jest",
     "testProxy": "jest proxy.test.ts",
     "test-watch": "jest --watch --maxWorkers=25%",
@@ -247,6 +249,7 @@
     "supertest": "^6.2.4",
     "tmp": "^0.2.1",
     "ts-jest": "^28.0.7",
+    "type-fest": "^3.2.0",
     "typescript": "^4.8.4",
     "vite": "^3.2.2",
     "vite-plugin-electron": "^0.10.2",

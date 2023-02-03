@@ -9,7 +9,6 @@ import { DialogContent } from '@mui/material'
 
 import classNames from 'classnames'
 import {
-  AppSettings,
   GameInfo,
   GameStatus,
   InstallPlatform,
@@ -29,7 +28,6 @@ import {
   getProgress,
   size,
   getInstallInfo,
-  getGameInfo,
   writeConfig,
   install
 } from 'frontend/helpers'
@@ -53,9 +51,8 @@ interface Props {
   runner: Runner
   platformToInstall: InstallPlatform
   availablePlatforms: AvailablePlatforms
-  setIsLinuxNative: React.Dispatch<React.SetStateAction<boolean>>
-  setIsMacNative: React.Dispatch<React.SetStateAction<boolean>>
   winePrefix: string
+  crossoverBottle: string
   wineVersion: WineInstallation | undefined
   children: React.ReactNode
   gameInfo: GameInfo
@@ -92,7 +89,10 @@ function getUniqueKey(sdl: SelectiveDownload) {
   return sdl.tags.join(',')
 }
 
-const { defaultInstallPath } = configStore.get('settings') as AppSettings
+const userHome = configStore.get('userHome', '')
+const { defaultInstallPath = `${userHome}/Games/Heroic` } = {
+  ...configStore.get_nodefault('settings')
+}
 
 export default function DownloadDialog({
   backdropClick,
@@ -100,12 +100,11 @@ export default function DownloadDialog({
   runner,
   platformToInstall,
   availablePlatforms,
-  setIsLinuxNative,
-  setIsMacNative,
   winePrefix,
   wineVersion,
   children,
-  gameInfo
+  gameInfo,
+  crossoverBottle
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -113,8 +112,6 @@ export default function DownloadDialog({
   const { libraryStatus, platform, showDialogModal } =
     useContext(ContextProvider)
 
-  const isMac = platform === 'darwin'
-  const isLinux = platform === 'linux'
   const isWin = platform === 'win32'
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
@@ -133,6 +130,8 @@ export default function DownloadDialog({
   const [selectedSdls, setSelectedSdls] = useState<{ [key: string]: boolean }>(
     {}
   )
+  const [gettingInstallInfo, setGettingInstallInfo] = useState(false)
+
   const installFolder = gameStatus?.folder || installPath
 
   const [spaceLeft, setSpaceLeft] = useState<DiskSpaceInfo>({
@@ -186,7 +185,12 @@ export default function DownloadDialog({
       if (wineVersion) {
         writeConfig({
           appName,
-          config: { ...gameSettings, winePrefix, wineVersion }
+          config: {
+            ...gameSettings,
+            winePrefix,
+            wineVersion,
+            wineCrossoverBottle: crossoverBottle
+          }
         })
       }
     }
@@ -207,14 +211,16 @@ export default function DownloadDialog({
   }
 
   useEffect(() => {
-    const getIinstallInfo = async () => {
+    const getIinstInfo = async () => {
       try {
+        setGettingInstallInfo(true)
         const gameInstallInfo = await getInstallInfo(
           appName,
           runner,
           platformToInstall
         )
         setGameInstallInfo(gameInstallInfo)
+        setGettingInstallInfo(false)
 
         if (
           gameInstallInfo &&
@@ -231,12 +237,14 @@ export default function DownloadDialog({
         }
 
         if (platformToInstall === 'linux' && runner === 'gog') {
+          setGettingInstallInfo(true)
           const installer_languages =
-            (await window.api.getGOGLinuxInstallersLangs(appName)) as string[]
+            await window.api.getGOGLinuxInstallersLangs(appName)
           setInstallLanguages(installer_languages)
           setInstallLanguage(
             getInstallLanguage(installer_languages, i18n.languages)
           )
+          setGettingInstallInfo(false)
         }
       } catch (error) {
         showDialogModal({
@@ -249,22 +257,8 @@ export default function DownloadDialog({
         return
       }
     }
-    getIinstallInfo()
+    getIinstInfo()
   }, [appName, i18n.languages, platformToInstall])
-
-  useEffect(() => {
-    const getCacheInfo = async () => {
-      if (gameInfo) {
-        setIsLinuxNative(gameInfo.is_linux_native && isLinux)
-        setIsMacNative(gameInfo.is_mac_native && isMac)
-      } else {
-        const gameData = await getGameInfo(appName, runner)
-        setIsLinuxNative((gameData?.is_linux_native && isLinux) ?? false)
-        setIsMacNative((gameData?.is_mac_native && isMac) ?? false)
-      }
-    }
-    getCacheInfo()
-  }, [appName])
 
   useEffect(() => {
     const getSpace = async () => {
@@ -296,23 +290,6 @@ export default function DownloadDialog({
     }
     getSpace()
   }, [installPath, gameInstallInfo?.manifest?.disk_size])
-
-  useEffect(() => {
-    const getCacheInfo = async () => {
-      if (gameInfo) {
-        setIsLinuxNative(gameInfo.is_linux_native && isLinux)
-        setIsMacNative(gameInfo.is_mac_native && isMac)
-      } else {
-        const gameData = await getGameInfo(appName, runner)
-        if (!gameData) {
-          return
-        }
-        setIsLinuxNative(gameData.is_linux_native && isLinux)
-        setIsMacNative(gameData.is_mac_native && isMac)
-      }
-    }
-    getCacheInfo()
-  }, [appName])
 
   const haveDLCs =
     gameInstallInfo && gameInstallInfo?.game?.owned_dlc?.length > 0
@@ -369,7 +346,10 @@ export default function DownloadDialog({
     return t('button.no-path-selected', 'No path selected')
   }
 
-  const readyToInstall = installPath && gameInstallInfo?.manifest?.download_size
+  const readyToInstall =
+    installPath &&
+    gameInstallInfo?.manifest?.download_size &&
+    !gettingInstallInfo
 
   return (
     <>
@@ -472,7 +452,7 @@ export default function DownloadDialog({
           }
           afterInput={
             gameInstallInfo?.manifest?.download_size ? (
-              <span className="diskSpaceInfo">
+              <span className="smallInputInfo">
                 {validPath && (
                   <>
                     <span>

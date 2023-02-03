@@ -1,8 +1,9 @@
 import { ConnectivityStatus } from 'common/types'
-import { BrowserWindow, ipcMain, net } from 'electron'
+import { ipcMain, net } from 'electron'
 import { logInfo, LogPrefix } from './logger/logger'
 import axios from 'axios'
 import EventEmitter from 'node:events'
+import { sendFrontendMessage } from './main_window'
 
 let status: ConnectivityStatus
 let abortController: AbortController
@@ -10,11 +11,11 @@ let retryTimer: NodeJS.Timeout
 let retryIn = 0
 const defaultTimeBetweenRetries = 5
 let timeBetweenRetries = defaultTimeBetweenRetries
-export const connectivityEmitter = new EventEmitter()
+const connectivityEmitter = new EventEmitter()
 
 // handle setting the status, dispatch events for backend and frontend, and trigger pings
 const setStatus = (newStatus: ConnectivityStatus) => {
-  logInfo(`Connectivity: ${newStatus}`, { prefix: LogPrefix.Connection })
+  logInfo(`Connectivity: ${newStatus}`, LogPrefix.Connection)
 
   status = newStatus
 
@@ -35,24 +36,17 @@ const setStatus = (newStatus: ConnectivityStatus) => {
   }
 
   // events
-  const mainWindow = BrowserWindow.getAllWindows()[0]
-  if (mainWindow) {
-    mainWindow.webContents.send('connectivity-changed', { status, retryIn })
-  }
+  sendFrontendMessage('connectivity-changed', { status, retryIn })
   connectivityEmitter.emit(status)
 }
 
 const retry = (seconds: number) => {
   retryIn = seconds
-  // logInfo(`Retrying in: ${retryIn} seconds`, { prefix: LogPrefix.Connection })
   // dispatch event with retry countdown
-  const mainWindow = BrowserWindow.getAllWindows()[0]
-  if (mainWindow) {
-    mainWindow.webContents.send('connectivity-changed', {
-      status: 'check-online',
-      retryIn: seconds
-    })
-  }
+  sendFrontendMessage('connectivity-changed', {
+    status: 'check-online',
+    retryIn: seconds
+  })
 
   if (seconds) {
     // if still counting down, repeat
@@ -75,7 +69,7 @@ const ping = async (url: string, signal: AbortSignal) => {
 }
 
 const pingSites = () => {
-  logInfo(`Pinging external endpoints`, { prefix: LogPrefix.Connection })
+  logInfo(`Pinging external endpoints`, LogPrefix.Connection)
   abortController = new AbortController()
 
   const ping1 = ping('https://github.com', abortController.signal)
@@ -89,8 +83,8 @@ const pingSites = () => {
       timeBetweenRetries = defaultTimeBetweenRetries
     })
     .catch((error) => {
-      logInfo('All ping requests failed:', { prefix: LogPrefix.Connection })
-      logInfo(error, { prefix: LogPrefix.Connection })
+      logInfo('All ping requests failed:', LogPrefix.Connection)
+      logInfo(error, LogPrefix.Connection)
       retry(timeBetweenRetries)
       timeBetweenRetries = timeBetweenRetries + defaultTimeBetweenRetries
     })
@@ -125,12 +119,6 @@ export const initOnlineMonitor = () => {
   })
 }
 
-export const makeNetworkRequest = (callback: () => unknown) => {
-  if (isOnline()) {
-    callback()
-  }
-}
-
 export const runOnceWhenOnline = (callback: () => unknown) => {
   if (isOnline()) {
     callback()
@@ -140,8 +128,3 @@ export const runOnceWhenOnline = (callback: () => unknown) => {
 }
 
 export const isOnline = () => status === 'online'
-
-// use this function to trigger the connectivity check when detecting an external request failing
-export const checkConnectivity = () => {
-  setStatus('check-online')
-}

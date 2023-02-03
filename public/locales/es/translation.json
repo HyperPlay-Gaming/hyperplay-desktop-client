@@ -203,7 +203,6 @@
         "store": "Tienda",
         "title": "Título del juego"
     },
-    "GameSettings": "Configuración del juego",
     "generic": {
         "error": {
             "component": "No se encontraron juegos - Intenta salir e iniciar sesión nuevamente, o una de las siguientes opciones"
@@ -216,9 +215,11 @@
     "GOG": "GOG",
     "gog-store": "Tienda de GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignorar Ocultos",
         "platform": "Plataforma",
         "show_all_games": "Mostrar todos los juegos",
+        "show_available_games": "Show non-Available games",
         "show_favourites_only": "Mostrar sólo favoritos",
         "show_hidden": "Mostrar Ocultos",
         "store": "Filtrar tienda"
@@ -523,9 +524,9 @@
             "title": "Ejecutar EXE en Prefijo"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "Save folder not found, please select it manually (click to retry)",
             "placeholder": "Seleccione la carpeta exacta para guardar juegos",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Seleccionar Tema",
         "showfps": "Mostrar FPS (Cuadros Por Segundo) (DX9, 10 y 11)",
@@ -563,8 +564,7 @@
         },
         "navbar": {
             "advanced": "Avanzado",
-            "games_settings": "Game Settings",
-            "games_settings_defaults": "Game Defaults",
+            "games_settings_defaults": "Valores predeterminados del juego",
             "general": "General",
             "log": "Registro",
             "other": "Otro",
