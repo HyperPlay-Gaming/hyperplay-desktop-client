@@ -159,7 +159,6 @@ export async function launchApp(appName: string): Promise<boolean> {
       }
 
       const browserGame = new BrowserWindow({
-        fullscreen: true,
         webPreferences: webPrefs
       })
       browserGame.loadURL(browserUrl)
