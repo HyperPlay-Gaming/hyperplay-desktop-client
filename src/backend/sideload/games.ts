@@ -28,10 +28,6 @@ import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
 import { BrowserWindow } from 'electron'
-import {
-  removeExtension,
-  initExtension
-} from 'backend/hyperplay-extension-helper/ipcHandlers'
 import { connectedProvider } from 'backend/hyperplay-proxy-server/providerHelper'
 import { PROVIDERS } from 'common/types/proxy-types'
 
@@ -147,15 +143,15 @@ export async function launchApp(appName: string): Promise<boolean> {
     return new Promise((res) => {
       // remove extension prior to loading new browser window if metamask extension is not connected
       // so that window ethereum for mm mobile or wallet connect exposed in preload is not overwritten
-      let removedExtension = false
       const webPrefs: Electron.WebPreferences = {
         contextIsolation: true
       }
 
       if (connectedProvider !== PROVIDERS.METAMASK_EXTENSION) {
-        removeExtension()
-        removedExtension = true
         webPrefs.preload = path.join(__dirname, 'providerPreload.js')
+        // loading the browser game into a different persistent session allows us to keep
+        // the MetaMask extension loaded in the main window while not loaded in this one
+        webPrefs.partition = 'persist:BrowserGame'
       }
 
       const browserGame = new BrowserWindow({
@@ -165,9 +161,6 @@ export async function launchApp(appName: string): Promise<boolean> {
       browserGame.focus()
       browserGame.setTitle(title)
       browserGame.on('close', () => {
-        if (removedExtension) {
-          initExtension()
-        }
         res(true)
       })
     })
