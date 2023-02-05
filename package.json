@@ -40,7 +40,7 @@
       }
     ],
     "win": {
-      "artifactName": "HyperPlay_Setup_${version}.${ext}",
+      "artifactName": "${productName}-${version}-Setup-${arch}.${ext}",
       "icon": "build/win_icon.ico",
       "asarUnpack": [
         "build/bin/win32/legendary.exe",
@@ -51,7 +51,7 @@
       ]
     },
     "portable": {
-      "artifactName": "${productName}-${version}-Portable.${ext}"
+      "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
     },
     "mac": {
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
@@ -193,10 +193,10 @@
     "test:ci": "jest --runInBand --silent",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
     "release:linux": "vite build && electron-builder -p always --linux deb AppImage rpm pacman tar.xz",
-    "release:mac": "vite build && electron-builder -p always --mac",
-    "release:win": "vite build && electron-builder -p always --win nsis portable",
+    "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
+    "release:win": "vite build && electron-builder -p never --win nsis portable --x64 --arm64",
     "dist:linux": "vite build && electron-builder --linux",
-    "dist:mac": "vite build && electron-builder --mac --x64 --arm64",
+    "dist:mac": "vite build && electron-builder --mac",
     "dist:win": "vite build && electron-builder --win",
     "lint": "eslint --cache -c .eslintrc --ext .tsx,ts ./src",
     "lint-fix": "eslint --fix -c .eslintrc --ext .tsx,ts ./src",

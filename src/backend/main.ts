@@ -99,7 +99,8 @@ import {
   publicDir,
   wineprefixFAQ,
   hyperplaySite,
-  customThemesWikiLink
+  customThemesWikiLink,
+  createNecessaryFolders
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -163,6 +164,7 @@ const isWindows = platform() === 'win32'
 
 let mainWindow: BrowserWindow
 async function initializeWindow(): Promise<BrowserWindow> {
+  createNecessaryFolders()
   configStore.set('userHome', userHome)
   mainWindow = createMainWindow()
 

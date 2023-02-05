@@ -8,7 +8,7 @@ import { logDebug, LogPrefix } from './logger/logger'
 import { createNewLogFileAndClearOldOnes } from './logger/logfile'
 import { env } from 'process'
 import { app } from 'electron'
-import { existsSync, readFileSync } from 'graceful-fs'
+import { existsSync, mkdirSync, readFileSync } from 'graceful-fs'
 import { GlobalConfig } from './config'
 import { TypeCheckedStoreBackend } from './electron_store'
 
@@ -168,6 +168,22 @@ const MAX_BUFFER = 25 * 1024 * 1024 // 25MB should be safe enough for big instal
 const execOptions = {
   maxBuffer: MAX_BUFFER,
   shell: getShell()
+}
+
+const defaultFolders = [gamesConfigPath, iconsFolder, imagesCachePath]
+
+const necessaryFoldersByPlatform = {
+  win32: [...defaultFolders],
+  linux: [...defaultFolders, toolsPath],
+  darwin: [...defaultFolders, toolsPath]
+}
+
+export function createNecessaryFolders() {
+  necessaryFoldersByPlatform[platform()].forEach((folder: string) => {
+    if (!existsSync(folder)) {
+      mkdirSync(folder)
+    }
+  })
 }
 
 export {

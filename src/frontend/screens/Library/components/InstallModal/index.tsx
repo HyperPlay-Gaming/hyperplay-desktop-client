@@ -64,13 +64,13 @@ export default React.memo(function InstallModal({
   const platforms: AvailablePlatforms = [
     {
       name: 'Linux',
-      available: (isLinux && isSideload) || (isLinuxNative && !isMac),
+      available: isLinux && (isSideload || isLinuxNative),
       value: 'linux',
       icon: faLinux
     },
     {
       name: 'macOS',
-      available: (isMac && isSideload) || (isMacNative && !isLinux),
+      available: isMac && (isSideload || isMacNative),
       value: 'Mac',
       icon: faApple
     },
@@ -131,7 +131,7 @@ export default React.memo(function InstallModal({
   }, [hasWine])
 
   function platformSelection() {
-    const showPlatformSelection = !isWin && availablePlatforms.length > 1
+    const showPlatformSelection = availablePlatforms.length > 1
 
     if (!showPlatformSelection) {
       return null
