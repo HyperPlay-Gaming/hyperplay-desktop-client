@@ -116,7 +116,7 @@ export interface StoreStructure {
     [title: string]: WikiInfo
   }
   metricsStore: {
-    'metricsOptInStatus': MetricsOptInStatus
+    metricsOptInStatus: MetricsOptInStatus
   }
 }
 

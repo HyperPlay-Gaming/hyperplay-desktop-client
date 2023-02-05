@@ -32,7 +32,7 @@ export default React.memo(function NewLogin() {
 
   // Track the screen view once
   useEffect(() => {
-    window.api.trackScreen('Login');
+    window.api.trackScreen('Login')
   }, [])
 
   useEffect(() => {

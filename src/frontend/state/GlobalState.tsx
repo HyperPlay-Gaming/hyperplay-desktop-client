@@ -38,7 +38,7 @@ import {
   gogLibraryStore,
   libraryStore,
   wineDownloaderInfoStore,
-  metricsStore,
+  metricsStore
 } from '../helpers/electronStores'
 import { sideloadLibrary } from 'frontend/helpers/electronStores'
 import { MetricsOptInStatus } from 'backend/metrics/metrics'
@@ -169,7 +169,10 @@ class GlobalState extends PureComponent<Props> {
     externalLinkDialogOptions: { showDialog: false },
     settingsModalOpen: { value: false, type: 'settings', gameInfo: undefined },
     showMetaMaskBrowserSidebarLinks: false,
-    metricsOptInStatus: metricsStore.get('metricsOptInStatus', MetricsOptInStatus.undecided) as MetricsOptInStatus,
+    metricsOptInStatus: metricsStore.get(
+      'metricsOptInStatus',
+      MetricsOptInStatus.undecided
+    ) as MetricsOptInStatus
   }
 
   setLanguage = (newLanguage: string) => {

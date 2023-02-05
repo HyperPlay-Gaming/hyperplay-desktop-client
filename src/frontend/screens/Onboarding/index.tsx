@@ -116,11 +116,11 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     })
   }
 
-  const { content } = contentParams;
+  const { content } = contentParams
 
   // Track the screen view once each time the view changes
   useEffect(() => {
-    window.api.trackScreen('Onboarding', { view: content });
+    window.api.trackScreen('Onboarding', { view: content })
   }, [content])
 
   useEffect(() => {

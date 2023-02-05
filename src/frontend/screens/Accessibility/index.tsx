@@ -61,7 +61,7 @@ export default React.memo(function Accessibility() {
 
   // Track the screen view once and only once
   useEffect(() => {
-    window.api.trackScreen('Accessibility');
+    window.api.trackScreen('Accessibility')
   }, [])
 
   useEffect(() => {

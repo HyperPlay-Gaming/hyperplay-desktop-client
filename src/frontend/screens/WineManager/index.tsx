@@ -68,9 +68,9 @@ export default React.memo(function WineManager(): JSX.Element | null {
     setWineVersions(getWineVersions(repo.type))
   }
 
-  // Track the screen view once 
+  // Track the screen view once
   useEffect(() => {
-    window.api.trackScreen('Wine Manager');
+    window.api.trackScreen('Wine Manager')
   }, [])
 
   useEffect(() => {

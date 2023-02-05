@@ -19,5 +19,5 @@ export default {
   ...Proxy,
   ...DownloadManager,
   ...Extensions,
-  ...Metrics,
+  ...Metrics
 }

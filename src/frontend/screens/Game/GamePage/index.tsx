@@ -122,10 +122,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
   const storage: Storage = window.localStorage
 
-
   // Track the screen view once each time the appName or runner changes
   useEffect(() => {
-    window.api.trackScreen('Onboarding', { appName, runner });
+    window.api.trackScreen('Onboarding', { appName, runner })
   }, [appName, runner])
 
   useEffect(() => {

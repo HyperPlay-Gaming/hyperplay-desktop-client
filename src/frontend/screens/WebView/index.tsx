@@ -76,9 +76,9 @@ export default function WebView() {
     navigate('/login')
   }
 
-  // Track the screen view once each time the url updates 
+  // Track the screen view once each time the url updates
   useEffect(() => {
-    window.api.trackScreen('WebView', { url: startUrl, runner });
+    window.api.trackScreen('WebView', { url: startUrl, runner })
   }, [startUrl, runner])
 
   useLayoutEffect(() => {

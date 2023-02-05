@@ -115,7 +115,7 @@ export default React.memo(function Library(): JSX.Element {
 
   // Track the screen view once and only once.
   useEffect(() => {
-    window.api.trackScreen('Library');
+    window.api.trackScreen('Library')
   }, [])
 
   const backToTop = () => {
