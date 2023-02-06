@@ -60,7 +60,12 @@ class Application {
               inputEvent['x'] = Math.round(inputEvent['x'] / this.scaleFactor)
             if ('y' in inputEvent)
               inputEvent['y'] = Math.round(inputEvent['y'] / this.scaleFactor)
-            window.webContents.sendInputEvent(inputEvent)
+            try {
+              window.webContents.sendInputEvent(inputEvent)
+              window.webContents.send('proxyWebViewInput', inputEvent)
+            } catch (error) {
+              console.log(`error: `, JSON.stringify(error))
+            }
           }
         }
       } else if (event === 'graphics.fps') {
