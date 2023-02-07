@@ -13,7 +13,7 @@ declare global {
   }
 }
 
-const HyperplayOverlay = function () {
+const ExtensionOverlay = function () {
   const [extensionId, setExtensionId] = useState('')
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
 
@@ -125,4 +125,4 @@ const HyperplayOverlay = function () {
   )
 }
 
-export default HyperplayOverlay
+export default ExtensionOverlay

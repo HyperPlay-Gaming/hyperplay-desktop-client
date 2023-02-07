@@ -1,10 +1,10 @@
 import React, { lazy } from 'react'
-import HyperplayOverlay from './HyperplayOverlay'
+import ExtensionOverlay from './overlay/ExtensionOverlay'
 const App = lazy(async () => import('./App'))
 
 const Views = {
   App: <App />,
-  HyperplayOverlay: <HyperplayOverlay />
+  HyperplayOverlay: <ExtensionOverlay />
 }
 
 const ViewManager = function () {
