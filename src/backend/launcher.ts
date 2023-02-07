@@ -711,6 +711,15 @@ async function callRunner(
       signal: abortController.signal
     })
 
+    if (runner.name === 'sideload') {
+      logInfo(
+        `Process PID for sideloaded game injected: ${child.pid}`,
+        runner.logPrefix
+      )
+      if (child.pid !== undefined)
+        OverlayApp.inject({ pid: child.pid.toString() })
+    }
+
     const stdout: string[] = []
     const stderr: string[] = []
 
@@ -723,7 +732,10 @@ async function callRunner(
         const PID = dataStr
           .substring(pidPrefixStartIndex + pidPrefix.length)
           .trim()
-        console.log('PID: ', PID.trim())
+        logInfo(
+          `Process PID for Gogdl or Epic game injected: ${child.pid}`,
+          runner.logPrefix
+        )
         //inject here
         OverlayApp.inject({ pid: PID.trim() })
       }
