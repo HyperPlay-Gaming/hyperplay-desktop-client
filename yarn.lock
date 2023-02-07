@@ -978,10 +978,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@hyperplay/electron-overlay@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/electron-overlay/-/electron-overlay-0.0.0.tgz#6e48d63614a12cedc1e6a237d15998339dbdd34c"
-  integrity sha512-agsxbZP12t1mvq2tiQc5VrOlXm41c05AhrnCNPD7NV7zQgyvgUibVk0KLb61YW8kpwT84lZNS+GjReGc73NwWQ==
+"@hyperplay/electron-overlay@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@hyperplay/electron-overlay/-/electron-overlay-0.0.1.tgz#25c04044d4689d227edd5d538667661fcfa51985"
+  integrity sha512-WXZkTeQvPjR2eA0/GAY1EnCGTiRW58zEmwMb6r1YLVQ82/JDKflzt0EuWyq7VGytn8d/rzXOb3hfklXZRSRHsA==
   dependencies:
     node-addon-api "^4.1.0"
     node-gyp "^9.3.1"
