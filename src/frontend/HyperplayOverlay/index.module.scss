@@ -21,7 +21,12 @@
 
 .overlayContainer {
   position: relative;
-  height: 100%;
   width: 100%;
   overflow: scroll;
+}
+
+.overlayToggleHint {
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+  display: inline-block;
 }

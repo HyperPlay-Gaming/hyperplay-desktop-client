@@ -725,7 +725,7 @@ async function callRunner(
           .trim()
         console.log('PID: ', PID.trim())
         //inject here
-        OverlayApp.inject(PID.trim())
+        OverlayApp.inject({ pid: PID.trim() })
       }
       if (options?.logFile) {
         appendFileSync(options.logFile, dataStr)

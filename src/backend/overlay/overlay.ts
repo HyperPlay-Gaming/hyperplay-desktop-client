@@ -8,7 +8,6 @@ import * as IOverlay from '@hyperplay/electron-overlay'
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
 import * as ExtIpcHandler from '../hyperplay-extension-helper/ipcHandlers/index'
-import fs from 'fs'
 const buildDir = resolve(__dirname, '../../build')
 
 enum AppWindows {
@@ -23,6 +22,7 @@ class Application {
   private windows: Map<string, Electron.BrowserWindow>
   private tray: Electron.Tray | null
   private markQuit = false
+  private scaleFactor = 1.0
 
   // @ts-expect-error TODO
   private Overlay: typeof IOverlay
@@ -55,7 +55,19 @@ class Application {
           const inputEvent = this.Overlay!.translateInputEvent(payload)
 
           if (inputEvent) {
-            window.webContents.sendInputEvent(inputEvent)
+            if ('x' in inputEvent)
+              inputEvent['x'] = Math.round(inputEvent['x'] / this.scaleFactor)
+            if ('y' in inputEvent)
+              inputEvent['y'] = Math.round(inputEvent['y'] / this.scaleFactor)
+            try {
+              window.webContents.sendInputEvent(inputEvent)
+              window.webContents.send(
+                'proxyWebViewInput',
+                JSON.stringify(inputEvent)
+              )
+            } catch (error) {
+              console.log(`error: `, JSON.stringify(error))
+            }
           }
         }
       } else if (event === 'graphics.fps') {
@@ -93,22 +105,27 @@ class Application {
     console.log('adding window ', name, ' with id ', window.id)
     const display = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
 
+    const rect = {
+      x: window.getBounds().x,
+      y: window.getBounds().y,
+      width: Math.floor(window.getBounds().width * this.scaleFactor),
+      height: Math.floor(window.getBounds().height * this.scaleFactor)
+    }
+
     this.Overlay!.addWindow(window.id, {
       name,
       transparent,
       resizable: window.isResizable(),
       maxWidth: window.isResizable()
-        ? display.bounds.width
-        : window.getBounds().width,
+        ? display.bounds.width * this.scaleFactor
+        : rect.width,
       maxHeight: window.isResizable()
-        ? display.bounds.height
-        : window.getBounds().height,
-      minWidth: window.isResizable() ? 100 : window.getBounds().width,
-      minHeight: window.isResizable() ? 100 : window.getBounds().height,
+        ? display.bounds.height * this.scaleFactor
+        : rect.height,
+      minWidth: window.isResizable() ? 100 : rect.width,
+      minHeight: window.isResizable() ? 100 : rect.height,
       nativeHandle: window.getNativeWindowHandle().readUInt32LE(0),
-      rect: {
-        ...window.getBounds()
-      },
+      rect,
       caption: {
         left: dragborder,
         right: dragborder,
@@ -118,31 +135,18 @@ class Application {
       dragBorderWidth: dragborder
     })
 
-    let debugCalled = true
-    setTimeout(() => (debugCalled = false), 20000)
-
     window.webContents.on(
       'paint',
       (event, dirty, image: Electron.NativeImage) => {
         if (this.markQuit) {
           return
         }
-        const scale = 1
-        if (!debugCalled) {
-          debugCalled = true
-          console.log(
-            'image width = ',
-            image.getSize(scale).width,
-            ' image height = ',
-            image.getSize(scale).height
-          )
-          fs.writeFileSync('./testOverlayImage.png', image.toPNG())
-        }
+
         this.Overlay!.sendFrameBuffer(
           window.id,
-          image.getBitmap({ scaleFactor: scale }),
-          image.getSize(scale).width,
-          image.getSize(scale).height
+          image.getBitmap(),
+          image.getSize().width,
+          image.getSize().height
         )
       }
     )
@@ -158,12 +162,25 @@ class Application {
 
     window.on('resize', () => {
       console.log('overlay electron browser window resized')
-      this.Overlay!.sendWindowBounds(window.id, { rect: window.getBounds() })
+      this.Overlay!.sendWindowBounds(window.id, {
+        rect: {
+          x: window.getBounds().x,
+          y: window.getBounds().y,
+          width: Math.floor(window.getBounds().width * this.scaleFactor),
+          height: Math.floor(window.getBounds().height * this.scaleFactor)
+        }
+      })
     })
 
     window.on('move', () => {
-      console.log('overlay electron browser window moved')
-      this.Overlay!.sendWindowBounds(window.id, { rect: window.getBounds() })
+      this.Overlay!.sendWindowBounds(window.id, {
+        rect: {
+          x: window.getBounds().x,
+          y: window.getBounds().y,
+          width: Math.floor(window.getBounds().width * this.scaleFactor),
+          height: Math.floor(window.getBounds().height * this.scaleFactor)
+        }
+      })
     })
 
     const windowId = window.id
@@ -289,6 +306,12 @@ class Application {
   }
 
   public start() {
+    this.scaleFactor = screen.getDisplayNearestPoint({
+      x: 0,
+      y: 0
+    }).scaleFactor
+    console.log(`this.scaleFactor`, this.scaleFactor)
+
     this.setupIpc()
   }
 
@@ -338,12 +361,15 @@ class Application {
     return window
   }
 
-  public async inject(pid: string) {
-    console.log(`--------------------\n try inject method ${pid}`)
+  public async inject(param: { pid?: string; title?: string }) {
+    const { pid, title } = param
+    console.log(
+      `--------------------\n try inject method ${JSON.stringify(param)}`
+    )
     // TO DO: Find a way to listen to when window is created at pid and inject on handle that event
     await wait(5000)
     for (const window of this.Overlay.getTopWindows()) {
-      if (window.processId.toString() === pid) {
+      if (window.processId.toString() === pid || window.title === title) {
         try {
           const injectResult = this.Overlay.injectProcess(window)
           console.log('inject result = ', JSON.stringify(injectResult, null, 4))
