@@ -50,6 +50,7 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
+import { getMainWindow } from './main_window'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -709,6 +710,14 @@ async function callRunner(
       env: { ...process.env, ...options?.env },
       signal: abortController.signal
     })
+
+    if (runner.name === 'sideload') {
+      getMainWindow()?.webContents.send('sideload-process', {
+        appName,
+        pid: child.pid
+      })
+      logInfo(`Process PID: ${child.pid}`, runner.logPrefix)
+    }
 
     const stdout: string[] = []
     const stderr: string[] = []
