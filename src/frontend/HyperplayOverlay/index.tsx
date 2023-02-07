@@ -13,10 +13,6 @@ declare global {
   }
 }
 
-// declare Element {
-//   setZoomFactor?: (number)=>void
-// }
-
 const HyperplayOverlay = function () {
   const [extensionId, setExtensionId] = useState('')
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
@@ -37,6 +33,53 @@ const HyperplayOverlay = function () {
     setShowMmNotificationPage(false)
   }
 
+  const handleWebviewInput = async (
+    e: Electron.IpcRendererEvent,
+    inputStringified: string
+  ) => {
+    const input = JSON.parse(inputStringified) as
+      | Electron.MouseInputEvent
+      | Electron.MouseWheelInputEvent
+      | Electron.KeyboardInputEvent
+    const views = document.getElementsByTagName(
+      'webview'
+    ) as HTMLCollectionOf<Electron.WebviewTag>
+    for (let i = 0; i < views.length; i++) {
+      const view = views[i]
+
+      let newInput
+      if (
+        input.type === 'mouseMove' ||
+        input.type === 'mouseUp' ||
+        input.type === 'mouseDown'
+      ) {
+        const bounds = view.getBoundingClientRect()
+        const newX = input.x - bounds.x
+        const newY = input.y - bounds.y
+        // make sure this is still inside the bounding box
+        newInput = { ...input, x: newX, y: newY }
+        if (
+          newX >= 0 &&
+          newY >= 0 &&
+          newX <= bounds.x + bounds.width &&
+          newY <= bounds.y + bounds.height
+        ) {
+          view.sendInputEvent(newInput)
+        } else {
+          // we're outside of the web view
+          // if (input.type === 'mouseDown') {
+          //   view.executeJavaScript('document.activeElement.blur()')
+          // } else {
+          //   return
+          // }
+        }
+      } else {
+        // not the mouse, just send it over
+        view.sendInputEvent(input)
+      }
+    }
+  }
+
   useEffect(() => {
     getExtensionId()
     const rmAddNotifHandler = window.api.handleShowNotificationInWebview(
@@ -45,23 +88,22 @@ const HyperplayOverlay = function () {
     const rmRemoveNotifHandler = window.api.handleRemoveNotificationInWebview(
       handleRemoveNotification
     )
-    // const rmDomReadyHandler = window.api.handleDomReady(zoomOut)
+    const rmHandleWebviewProxyInput =
+      window.api.handleProxyWebViewInput(handleWebviewInput)
+
     return () => {
       rmAddNotifHandler()
       rmRemoveNotifHandler()
-      // rmDomReadyHandler()
+      rmHandleWebviewProxyInput()
     }
   }, [])
-
-  // const zoomOut = function(){
-  //   const popupWv = document.querySelector('#mmPopupWebview')
-  //   popupWv.setZoomFactor(0.75)
-  // }
 
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={OverlayStyles.overlayContainer}>
-      <div>Ctrl + Tab to return to the game</div>
+      <div className={OverlayStyles.overlayToggleHint}>
+        Ctrl + Tab to return to the game
+      </div>
       <div className={OverlayStyles.mmPopupContainer}>
         <webview
           nodeintegrationinsubframes="true"

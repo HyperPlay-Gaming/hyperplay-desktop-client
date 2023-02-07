@@ -3,9 +3,11 @@ import { ipcRenderer } from 'electron'
 
 export const getExtensionId = async () => ipcRenderer.invoke('getExtensionId')
 
-export const handleDomReady = (cb: WrapRendererCallback<() => void>) => {
-  ipcRenderer.on('dom-ready', cb)
+export const handleProxyWebViewInput = (
+  cb: WrapRendererCallback<(inputEvent: string) => void>
+) => {
+  ipcRenderer.on('proxyWebViewInput', cb)
   return () => {
-    ipcRenderer.removeListener('dom-ready', cb)
+    ipcRenderer.removeListener('proxyWebViewInput', cb)
   }
 }

@@ -8,7 +8,6 @@ import * as IOverlay from '@hyperplay/electron-overlay'
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
 import * as ExtIpcHandler from '../hyperplay-extension-helper/ipcHandlers/index'
-import fs from 'fs'
 const buildDir = resolve(__dirname, '../../build')
 
 enum AppWindows {
@@ -62,7 +61,10 @@ class Application {
               inputEvent['y'] = Math.round(inputEvent['y'] / this.scaleFactor)
             try {
               window.webContents.sendInputEvent(inputEvent)
-              window.webContents.send('proxyWebViewInput', inputEvent)
+              window.webContents.send(
+                'proxyWebViewInput',
+                JSON.stringify(inputEvent)
+              )
             } catch (error) {
               console.log(`error: `, JSON.stringify(error))
             }
@@ -132,9 +134,6 @@ class Application {
       },
       dragBorderWidth: dragborder
     })
-
-    let debugCalled = true
-    setTimeout(() => (debugCalled = false), 20000)
 
     window.webContents.on(
       'paint',

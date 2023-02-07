@@ -2,3 +2,14 @@ body,
 #root {
   background-color: transparent;
 }
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
