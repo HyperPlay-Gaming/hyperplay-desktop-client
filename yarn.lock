@@ -986,12 +986,11 @@
     node-addon-api "^4.1.0"
     node-gyp "^9.3.1"
 
-"@hyperplay/ui@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.0.0.tgz#e3884b67023e1b2d6c1977b899d7e160bfb1efc0"
-  integrity sha512-gAvWttvg+lNOxuO8cB5T/rDzXjmLw0R3njBZUVdvjz1E7BKq4CRPxrnmW2YBCs95hKSNHJhNT9KwlapUrfx0nQ==
+"@hyperplay/ui@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.0.3.tgz#b9d629175cab53deb188c3c39706b517af3934b7"
+  integrity sha512-1QMcTGkaPw29nFWQmP9NdOL8eh3s5wW+0n5Qf4948cTqhxupUrCaLNoDB4kEQpbAhNZvUHyF6jxLlXnmjP+X2Q==
   dependencies:
-    classnames "^2.3.2"
     tiny-swiper "^2.2.0"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
@@ -3775,7 +3774,7 @@ classic-level@^1.2.0:
     napi-macros "~2.0.0"
     node-gyp-build "^4.3.0"
 
-classnames@*, classnames@^2.2.5, classnames@^2.3.1, classnames@^2.3.2:
+classnames@*, classnames@^2.2.5, classnames@^2.3.1:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.3.2.tgz#351d813bf0137fcc6a76a16b88208d2560a0d924"
   integrity sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==

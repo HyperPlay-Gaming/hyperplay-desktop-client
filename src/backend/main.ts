@@ -21,7 +21,8 @@ import {
   protocol,
   screen,
   clipboard,
-  globalShortcut
+  globalShortcut,
+  session
 } from 'electron'
 import 'backend/updater'
 import { autoUpdater } from 'electron-updater'
@@ -241,13 +242,13 @@ const loadMainWindowURL = function () {
     //     })
     //   })
     // }
-    mainWindow.loadURL('http://localhost:5173?App')
+    mainWindow.loadURL('http://localhost:5173?view=App')
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(
-      `file://${path.join(publicDir, '../build/index.html?App')}`
+      `file://${path.join(publicDir, '../build/index.html?view=App')}`
     )
     if (!isMac) {
       autoUpdater.checkForUpdates()
@@ -301,6 +302,11 @@ if (!gotTheLock) {
     handleProtocol(argv)
   })
   app.whenReady().then(async () => {
+    const ses = session.fromPartition(
+      'persist:InPageWindowEthereumExternalWallet'
+    )
+    ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
+
     setExtensionMetadata()
 
     initOnlineMonitor()

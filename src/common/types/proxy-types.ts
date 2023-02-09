@@ -17,9 +17,9 @@ export interface UrisReturn {
 }
 
 export enum PROVIDERS {
-  METAMASK_MOBILE,
-  WALLET_CONNECT,
-  METAMASK_EXTENSION
+  METAMASK_MOBILE = 'MetaMaskMobile',
+  WALLET_CONNECT = 'WalletConnect',
+  METAMASK_EXTENSION = 'MetaMaskExtension'
 }
 
 export type AccountsChangedType = (accounts: string[]) => void

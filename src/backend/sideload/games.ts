@@ -4,7 +4,7 @@ import { GameConfig } from '../game_config'
 import { isWindows, isMac, isLinux, gamesConfigPath } from '../constants'
 import { killPattern } from '../utils'
 import { logInfo, LogPrefix, logWarning } from '../logger/logger'
-import path, { dirname, join } from 'path'
+import path, { dirname, join, resolve } from 'path'
 import {
   appendFileSync,
   constants as FS_CONSTANTS,
@@ -27,9 +27,9 @@ import shlex from 'shlex'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
-import { BrowserWindow } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import { connectedProvider } from 'backend/hyperplay-proxy-server/providerHelper'
-import { PROVIDERS } from 'common/types/proxy-types'
+const buildDir = resolve(__dirname, '../../build')
 
 export function appLogFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
@@ -141,23 +141,29 @@ export async function launchApp(appName: string): Promise<boolean> {
 
   if (browserUrl) {
     return new Promise((res) => {
-      // remove extension prior to loading new browser window if metamask extension is not connected
-      // so that window ethereum for mm mobile or wallet connect exposed in preload is not overwritten
-      const webPrefs: Electron.WebPreferences = {
-        contextIsolation: true
-      }
-
-      if (connectedProvider !== PROVIDERS.METAMASK_EXTENSION) {
-        webPrefs.preload = path.join(__dirname, 'providerPreload.js')
-        // loading the browser game into a different persistent session allows us to keep
-        // the MetaMask extension loaded in the main window while not loaded in this one
-        webPrefs.partition = 'persist:BrowserGame'
-      }
-
       const browserGame = new BrowserWindow({
-        webPreferences: webPrefs
+        webPreferences: {
+          webviewTag: true,
+          contextIsolation: true,
+          nodeIntegration: true,
+          preload: path.join(__dirname, 'preload.js')
+        }
       })
-      browserGame.loadURL(browserUrl)
+
+      browserGame.loadURL(
+        !app.isPackaged
+          ? 'http://localhost:5173?view=BrowserGame&browserUrl=' +
+              encodeURIComponent(browserUrl) +
+              '&connectedProvider=' +
+              connectedProvider
+          : `file://${path.join(
+              buildDir,
+              './index.html?view=BrowserGame&browserUrl=' +
+                encodeURIComponent(browserUrl) +
+                '&connectedProvider=' +
+                connectedProvider
+            )}`
+      )
       browserGame.focus()
       browserGame.setTitle(title)
       browserGame.on('close', () => {
