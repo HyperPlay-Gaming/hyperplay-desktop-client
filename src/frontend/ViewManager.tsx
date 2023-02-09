@@ -1,6 +1,7 @@
 import React, { lazy } from 'react'
 import ExtensionOverlay from './overlay/ExtensionOverlay'
 import BrowserGame from './browserGame'
+import { PROVIDERS } from 'common/types/proxy-types'
 const App = lazy(async () => import('./App'))
 
 const Views = {
@@ -8,15 +9,28 @@ const Views = {
   HyperplayOverlay: <ExtensionOverlay />
 }
 
-const ViewManager = function () {
-  const params = new Proxy(new URLSearchParams(window.location.search), {
-    get: (searchParams, prop) => {
-      if (typeof prop === 'string') return searchParams.get(prop)
-      return 'error prop type was symbol'
-    }
-  })
+type URLSearchParamsProxy = URLSearchParams & {
+  view?: string
+  browserUrl?: string
+  connectedProvider?: PROVIDERS
+}
 
-  if (params.view === 'BrowserGame') {
+const ViewManager = function () {
+  const params: URLSearchParamsProxy = new Proxy(
+    new URLSearchParams(window.location.search),
+    {
+      get: (searchParams, prop) => {
+        if (typeof prop === 'string') return searchParams.get(prop)
+        return 'error prop type was symbol'
+      }
+    }
+  )
+
+  if (
+    params.view === 'BrowserGame' &&
+    params.browserUrl !== undefined &&
+    params.connectedProvider !== undefined
+  ) {
     return (
       <BrowserGame
         url={params.browserUrl}
@@ -24,9 +38,12 @@ const ViewManager = function () {
       />
     )
   }
-  const view = Views[params.view]
-  if (view === null) throw new Error("View '" + params.view + "' is undefined")
 
+  // if view doesn't match a key in Views Map, throw
+  if (params.view !== undefined && !Object.hasOwn(Views, params.view))
+    throw new Error("View '" + params.view + "' is undefined")
+
+  const view = params.view !== undefined ? Views[params.view] : <></>
   return view
 }
 
