@@ -126,6 +126,7 @@ import {
   WalletConnectedType,
   WalletDisconnectedType
 } from './hyperplay-proxy-server/commonProxyTypes'
+import { OverlayApp } from './overlay/overlay'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
@@ -170,6 +171,8 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
   ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
+
+  OverlayApp.start()
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -229,18 +232,23 @@ const loadMainWindowURL = function () {
     // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
     //   import('electron-devtools-installer').then((devtools) => {
     //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
+    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+    //   import('electron-devtools-installer').then((devtools) => {
+    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
 
     //     installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
     //       logWarning(['An error occurred: ', err], LogPrefix.Backend)
     //     })
     //   })
     // }
-    mainWindow.loadURL('http://localhost:5173')
+    mainWindow.loadURL('http://localhost:5173?App')
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
-    mainWindow.loadURL(`file://${path.join(publicDir, '../build/index.html')}`)
+    mainWindow.loadURL(
+      `file://${path.join(publicDir, '../build/index.html?App')}`
+    )
     if (!isMac) {
       autoUpdater.checkForUpdates()
     }
@@ -991,6 +999,7 @@ ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
 
+// get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {

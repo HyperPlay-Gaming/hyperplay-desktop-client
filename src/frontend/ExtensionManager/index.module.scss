@@ -22,3 +22,10 @@
 .mmNotification {
   @include mmWindow();
 }
+
+.mmNotification {
+  width: 360px;
+  height: 620px;
+  position: relative;
+  display: flex;
+}

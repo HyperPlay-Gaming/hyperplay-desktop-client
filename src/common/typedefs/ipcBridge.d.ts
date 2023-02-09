@@ -53,6 +53,9 @@ interface HyperPlaySyncIPCFunctions {
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   errorExtensionRequest: (requestId: number, error: any) => void
   chromeSetBadgeText: (text: string) => void
+  inject: (arg: string) => void
+  startIntercept: () => void
+  stopIntercept: () => void
   providerRequestInitiated: ProxiedProviderEventInitiatedCallback
   providerRequestPending: ProxiedProviderEventCallback
   providerRequestCompleted: ProxiedProviderEventCallback
@@ -126,7 +129,7 @@ interface RequestArguments {
 }
 
 interface HyperPlayAsyncIPCFunctions {
-  showPopup: (hideIfShown?: boolean) => Promise<void>
+  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<void>
   chromeWindowsCreate: (
     options: chrome.windows.CreateData
   ) => Promise<chrome.windows.Window>
@@ -142,8 +145,8 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<MetaMaskImportOptions | null>
   getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
   getTabUrl: () => Promise<string>
-  getConnectionUris: (providerSelection: PROVIDERS) => Promise<UrisReturn>
   getExtensionId: () => Promise<string>
+  getConnectionUris: (providerSelection: PROVIDERS) => Promise<UrisReturn>
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   providerRequest: (args: RequestArguments) => Promise<any>
 }
