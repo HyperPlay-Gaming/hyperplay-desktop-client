@@ -27,7 +27,7 @@ import shlex from 'shlex'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
-import { app, BrowserWindow, webContents, ipcMain } from 'electron'
+import { app, BrowserWindow } from 'electron'
 const buildDir = resolve(__dirname, '../../build')
 
 export function appLogFileLocation(appName: string) {

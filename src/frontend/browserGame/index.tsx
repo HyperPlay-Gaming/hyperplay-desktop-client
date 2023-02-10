@@ -16,6 +16,8 @@ const BrowserGame = function ({ url }: BrowserGameProps) {
     window.api.getConnectedProvider().then((val) => setProvider(val))
   }, [])
 
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  const trueAsStr = 'true' as any
   /* eslint-disable react/no-unknown-property */
   return (
     <div>
@@ -32,7 +34,8 @@ const BrowserGame = function ({ url }: BrowserGameProps) {
               : undefined
           }
           webpreferences="contextIsolation=true"
-          allowpopups="true"
+          // setting = to {true} does not work :(
+          allowpopups={trueAsStr}
         />
       ) : null}
     </div>
