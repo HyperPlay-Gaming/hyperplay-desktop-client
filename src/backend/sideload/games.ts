@@ -164,15 +164,8 @@ const openNewBrowserGameWindow = async (title: string, browserUrl: string) => {
         )}`
 
     browserGame.loadURL(url)
-    browserGame.webContents.setWindowOpenHandler((details) => {
-      console.log(
-        'asking to open window with details = ',
-        JSON.stringify(details, null, 4)
-      )
-      return { action: 'allow' }
-    })
 
-    browserGame.focus()
+    setTimeout(() => browserGame.focus(), 200)
     browserGame.setTitle(title)
     browserGame.on('close', () => {
       res(true)
