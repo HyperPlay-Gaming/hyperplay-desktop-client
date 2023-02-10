@@ -1,12 +1,10 @@
 import React, { lazy } from 'react'
-import ExtensionOverlay from './overlay/ExtensionOverlay'
 import BrowserGame from './browserGame'
 import { PROVIDERS } from 'common/types/proxy-types'
 const App = lazy(async () => import('./App'))
 
 const Views = {
-  App: <App />,
-  HyperplayOverlay: <ExtensionOverlay />
+  App: <App />
 }
 
 type URLSearchParamsProxy = URLSearchParams & {

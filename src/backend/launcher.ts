@@ -50,7 +50,6 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
-import { OverlayApp } from './overlay/overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -711,46 +710,23 @@ async function callRunner(
       signal: abortController.signal
     })
 
-    if (runner.name === 'sideload') {
-      logInfo(
-        `Process PID for sideloaded game injected: ${child.pid}`,
-        runner.logPrefix
-      )
-      if (child.pid !== undefined)
-        OverlayApp.inject({ pid: child.pid.toString() })
-    }
-
     const stdout: string[] = []
     const stderr: string[] = []
 
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
-      const dataStr = data.toString()
-      const pidPrefix = 'pid for popen process:'
-      const pidPrefixStartIndex = dataStr.search(pidPrefix)
-      if (pidPrefixStartIndex >= 0) {
-        const PID = dataStr
-          .substring(pidPrefixStartIndex + pidPrefix.length)
-          .trim()
-        logInfo(
-          `Process PID for Gogdl or Epic game injected: ${child.pid}`,
-          runner.logPrefix
-        )
-        //inject here
-        OverlayApp.inject({ pid: PID.trim() })
-      }
       if (options?.logFile) {
-        appendFileSync(options.logFile, dataStr)
+        appendFileSync(options.logFile, data)
       }
       if (options?.verboseLogFile) {
         appendFileSync(options.verboseLogFile, data)
       }
 
       if (options?.onOutput) {
-        options.onOutput(dataStr, child)
+        options.onOutput(data, child)
       }
 
-      stdout.push(dataStr.trim())
+      stdout.push(data.trim())
     })
 
     child.stderr.setEncoding('utf-8')

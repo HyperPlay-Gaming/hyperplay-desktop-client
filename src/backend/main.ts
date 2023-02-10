@@ -127,7 +127,6 @@ import {
   WalletConnectedType,
   WalletDisconnectedType
 } from './hyperplay-proxy-server/commonProxyTypes'
-import { OverlayApp } from './overlay/overlay'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
@@ -172,8 +171,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
   ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
-
-  OverlayApp.start()
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -1014,7 +1011,6 @@ ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
 
-// get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {
