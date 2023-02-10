@@ -14,7 +14,7 @@ const BrowserGame = function ({ url }: BrowserGameProps) {
 
   useEffect(() => {
     window.api.getConnectedProvider().then((val) => setProvider(val))
-  })
+  }, [])
 
   /* eslint-disable react/no-unknown-property */
   return (
@@ -32,6 +32,7 @@ const BrowserGame = function ({ url }: BrowserGameProps) {
               : undefined
           }
           webpreferences="contextIsolation=true"
+          allowpopups="true"
         />
       ) : null}
     </div>
