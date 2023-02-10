@@ -129,18 +129,19 @@ export function isAppAvailable(appName: string): boolean {
   return false
 }
 
-app.on('web-contents-created', (_, contents) => {
-  // Check for a webview
-  if (contents.getType() === 'webview') {
-    contents.setWindowOpenHandler(({ url }) => {
-      const protocol = new URL(url).protocol
-      if (['https:', 'http:'].includes(protocol)) {
-        openNewBrowserGameWindow('testing', url)
-      }
-      return { action: 'deny' }
-    })
-  }
-})
+if (Object.hasOwn(app, 'on'))
+  app.on('web-contents-created', (_, contents) => {
+    // Check for a webview
+    if (contents.getType() === 'webview') {
+      contents.setWindowOpenHandler(({ url }) => {
+        const protocol = new URL(url).protocol
+        if (['https:', 'http:'].includes(protocol)) {
+          openNewBrowserGameWindow('testing', url)
+        }
+        return { action: 'deny' }
+      })
+    }
+  })
 
 const openNewBrowserGameWindow = async (title: string, browserUrl: string) => {
   return new Promise((res) => {
