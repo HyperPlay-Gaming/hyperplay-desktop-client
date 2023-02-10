@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BrowserGameStyles from './index.module.scss'
 import BrowserExtensionManager from './BrowserExtensionManager'
 import BrowserToastManager from './BrowserToastManager'
@@ -7,26 +7,33 @@ import BrowserExtensionToastManager from './BrowserExtensionToastManager'
 
 interface BrowserGameProps {
   url: string
-  provider: PROVIDERS
 }
 
-const BrowserGame = function ({ url, provider }: BrowserGameProps) {
+const BrowserGame = function ({ url }: BrowserGameProps) {
+  const [provider, setProvider] = useState('')
+
+  useEffect(() => {
+    window.api.getConnectedProvider().then((val) => setProvider(val))
+  })
+
   /* eslint-disable react/no-unknown-property */
   return (
     <div>
       <BrowserExtensionManager />
       <BrowserToastManager />
       <BrowserExtensionToastManager />
-      <webview
-        src={url}
-        className={BrowserGameStyles.browserGame}
-        partition={
-          provider !== PROVIDERS.METAMASK_EXTENSION
-            ? 'persist:InPageWindowEthereumExternalWallet'
-            : undefined
-        }
-        webpreferences="contextIsolation=true"
-      />
+      {provider !== '' ? (
+        <webview
+          src={url}
+          className={BrowserGameStyles.browserGame}
+          partition={
+            provider !== PROVIDERS.METAMASK_EXTENSION
+              ? 'persist:InPageWindowEthereumExternalWallet'
+              : undefined
+          }
+          webpreferences="contextIsolation=true"
+        />
+      ) : null}
     </div>
   )
 }

@@ -146,6 +146,7 @@ interface HyperPlayAsyncIPCFunctions {
   getConnectionUris: (providerSelection: PROVIDERS) => Promise<UrisReturn>
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   providerRequest: (args: RequestArguments) => Promise<any>
+  getConnectedProvider: () => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

@@ -28,7 +28,6 @@ import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
 import { app, BrowserWindow } from 'electron'
-import { connectedProvider } from 'backend/hyperplay-proxy-server/providerHelper'
 const buildDir = resolve(__dirname, '../../build')
 
 export function appLogFileLocation(appName: string) {
@@ -152,15 +151,11 @@ export async function launchApp(appName: string): Promise<boolean> {
 
       const url = !app.isPackaged
         ? 'http://localhost:5173?view=BrowserGame&browserUrl=' +
-          encodeURIComponent(browserUrl) +
-          '&connectedProvider=' +
-          connectedProvider
+          encodeURIComponent(browserUrl)
         : `file://${path.join(
             buildDir,
             './index.html?view=BrowserGame&browserUrl=' +
-              encodeURIComponent(browserUrl) +
-              '&connectedProvider=' +
-              connectedProvider
+              encodeURIComponent(browserUrl)
           )}`
 
       browserGame.loadURL(url)

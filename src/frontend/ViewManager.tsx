@@ -1,6 +1,5 @@
 import React, { lazy } from 'react'
 import BrowserGame from './browserGame'
-import { PROVIDERS } from 'common/types/proxy-types'
 const App = lazy(async () => import('./App'))
 
 const Views = {
@@ -10,7 +9,6 @@ const Views = {
 type URLSearchParamsProxy = URLSearchParams & {
   view?: string
   browserUrl?: string
-  connectedProvider?: PROVIDERS
 }
 
 const ViewManager = function () {
@@ -24,17 +22,8 @@ const ViewManager = function () {
     }
   )
 
-  if (
-    params.view === 'BrowserGame' &&
-    params.browserUrl !== undefined &&
-    params.connectedProvider !== undefined
-  ) {
-    return (
-      <BrowserGame
-        url={params.browserUrl}
-        provider={params.connectedProvider}
-      />
-    )
+  if (params.view === 'BrowserGame' && params.browserUrl !== undefined) {
+    return <BrowserGame url={params.browserUrl} />
   }
 
   // if view doesn't match a key in Views Map, throw
