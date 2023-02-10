@@ -1,7 +1,7 @@
 import { GameSettings, SideloadGame } from 'common/types'
 import { libraryStore } from './electronStores'
 import { GameConfig } from '../game_config'
-import { isWindows, isMac, isLinux, gamesConfigPath } from '../constants'
+import { isWindows, isMac, isLinux, gamesConfigPath, icon } from '../constants'
 import { killPattern } from '../utils'
 import { logInfo, LogPrefix, logWarning } from '../logger/logger'
 import path, { dirname, join, resolve } from 'path'
@@ -136,16 +136,19 @@ if (Object.hasOwn(app, 'on'))
       contents.setWindowOpenHandler(({ url }) => {
         const protocol = new URL(url).protocol
         if (['https:', 'http:'].includes(protocol)) {
-          openNewBrowserGameWindow('testing', url)
+          openNewBrowserGameWindow(url)
         }
         return { action: 'deny' }
       })
     }
   })
 
-const openNewBrowserGameWindow = async (title: string, browserUrl: string) => {
+const openNewBrowserGameWindow = async (
+  browserUrl: string
+): Promise<boolean> => {
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
+      icon: icon,
       webPreferences: {
         webviewTag: true,
         contextIsolation: true,
@@ -164,9 +167,7 @@ const openNewBrowserGameWindow = async (title: string, browserUrl: string) => {
         )}`
 
     browserGame.loadURL(url)
-
     setTimeout(() => browserGame.focus(), 200)
-    browserGame.setTitle(title)
     browserGame.on('close', () => {
       res(true)
     })
@@ -178,12 +179,11 @@ export async function launchApp(appName: string): Promise<boolean> {
   const {
     install: { executable },
     folder_name,
-    browserUrl,
-    title
+    browserUrl
   } = gameInfo
 
   if (browserUrl) {
-    openNewBrowserGameWindow(title, browserUrl)
+    return openNewBrowserGameWindow(browserUrl)
   }
 
   const gameSettings = await getAppSettings(appName)
