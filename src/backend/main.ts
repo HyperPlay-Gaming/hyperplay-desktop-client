@@ -1817,21 +1817,31 @@ ProviderHelper.passEventCallbacks(
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 
 ipcMain.on('providerRequestInitiated', (id, method) => {
-  mainWindow.webContents.send('providerRequestInitiated', id, method)
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.webContents.send('providerRequestInitiated', id, method)
+  }
 })
 
 ipcMain.on('providerRequestPending', (id) => {
-  mainWindow.webContents.send('providerRequestPending', id)
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.webContents.send('providerRequestPending', id)
+  }
 })
 
 ipcMain.on('providerRequestCompleted', (id) => {
-  mainWindow.webContents.send('providerRequestCompleted', id)
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.webContents.send('providerRequestCompleted', id)
+  }
 })
 
 ipcMain.on('providerRequestFailed', (id) => {
-  mainWindow.webContents.send('providerRequestFailed', id)
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.webContents.send('providerRequestFailed', id)
+  }
 })
 
 ipcMain.on('reloadApp', async () => {
-  loadMainWindowURL()
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.loadURL(win.webContents.getURL())
+  }
 })

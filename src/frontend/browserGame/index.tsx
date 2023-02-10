@@ -1,6 +1,5 @@
 import React from 'react'
 import BrowserGameStyles from './index.module.scss'
-
 import BrowserExtensionManager from './BrowserExtensionManager'
 import BrowserToastManager from './BrowserToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'

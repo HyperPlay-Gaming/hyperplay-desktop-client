@@ -150,20 +150,21 @@ export async function launchApp(appName: string): Promise<boolean> {
         }
       })
 
-      browserGame.loadURL(
-        !app.isPackaged
-          ? 'http://localhost:5173?view=BrowserGame&browserUrl=' +
+      const url = !app.isPackaged
+        ? 'http://localhost:5173?view=BrowserGame&browserUrl=' +
+          encodeURIComponent(browserUrl) +
+          '&connectedProvider=' +
+          connectedProvider
+        : `file://${path.join(
+            buildDir,
+            './index.html?view=BrowserGame&browserUrl=' +
               encodeURIComponent(browserUrl) +
               '&connectedProvider=' +
               connectedProvider
-          : `file://${path.join(
-              buildDir,
-              './index.html?view=BrowserGame&browserUrl=' +
-                encodeURIComponent(browserUrl) +
-                '&connectedProvider=' +
-                connectedProvider
-            )}`
-      )
+          )}`
+
+      browserGame.loadURL(url)
+
       browserGame.focus()
       browserGame.setTitle(title)
       browserGame.on('close', () => {
