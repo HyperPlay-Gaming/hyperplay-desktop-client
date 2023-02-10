@@ -307,6 +307,15 @@ if (!gotTheLock) {
     )
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
 
+    let overlayOpen = false
+    const openOverlayAccelerator = 'CommandOrControl+Tab'
+    globalShortcut.register(openOverlayAccelerator, () => {
+      overlayOpen = !overlayOpen
+      for (const win of BrowserWindow.getAllWindows()) {
+        win.webContents.send('updateOverlayVisibility', overlayOpen)
+      }
+    })
+
     setExtensionMetadata()
 
     initOnlineMonitor()

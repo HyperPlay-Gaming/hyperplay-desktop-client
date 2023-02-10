@@ -13,8 +13,8 @@ declare global {
 }
 
 const BrowserExtensionManager = function () {
+  const [showOverlay, setShowOverlay] = useState(false)
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
-  const [showMmPopupPage, setShowMmPopupPage] = useState(false)
   const [extensionId, setExtensionId] = useState('')
 
   const getExtensionId = async () => {
@@ -22,30 +22,65 @@ const BrowserExtensionManager = function () {
     setExtensionId(extId)
   }
 
+  const handleShowNotification = async () => {
+    setShowMmNotificationPage(true)
+  }
+
+  const handleRemoveNotification = async () => {
+    setShowMmNotificationPage(false)
+  }
+
+  function updateOverlayVisibility(
+    e: Electron.IpcRendererEvent,
+    show: boolean
+  ) {
+    setShowOverlay(show)
+  }
+
   useEffect(() => {
     getExtensionId()
+    const rmHandleUpdateOverlayVisibility =
+      window.api.handleUpdateOverlayVisibility(updateOverlayVisibility)
+
+    const rmAddNotifHandler = window.api.handleShowNotificationInWebview(
+      handleShowNotification
+    )
+    const rmRemoveNotifHandler = window.api.handleRemoveNotificationInWebview(
+      handleRemoveNotification
+    )
+
+    return () => {
+      rmHandleUpdateOverlayVisibility()
+      rmAddNotifHandler()
+      rmRemoveNotifHandler()
+    }
   }, [])
 
   /* eslint-disable react/no-unknown-property */
   return (
-    <div className={BrowserExtensionManagerStyles.mmContainer}>
-      {showMmPopupPage ? (
-        <webview
-          nodeintegrationinsubframes="true"
-          webpreferences="contextIsolation=true, nodeIntegration=true"
-          className={BrowserExtensionManagerStyles.mmPopup}
-          src={`chrome-extension://${extensionId}/popup.html`}
-        ></webview>
+    <>
+      {showOverlay ? (
+        <div className={BrowserExtensionManagerStyles.mmContainer}>
+          {!showMmNotificationPage ? (
+            <webview
+              nodeintegrationinsubframes="true"
+              webpreferences="contextIsolation=true, nodeIntegration=true"
+              className={BrowserExtensionManagerStyles.mmPopup}
+              src={`chrome-extension://${extensionId}/popup.html`}
+            ></webview>
+          ) : null}
+
+          {showMmNotificationPage ? (
+            <webview
+              nodeintegrationinsubframes="true"
+              webpreferences="contextIsolation=true, nodeIntegration=true"
+              className={BrowserExtensionManagerStyles.mmNotification}
+              src={`chrome-extension://${extensionId}/notification.html`}
+            ></webview>
+          ) : null}
+        </div>
       ) : null}
-      {showMmNotificationPage ? (
-        <webview
-          nodeintegrationinsubframes="true"
-          webpreferences="contextIsolation=true, nodeIntegration=true"
-          className={BrowserExtensionManagerStyles.mmNotification}
-          src={`chrome-extension://${extensionId}/notification.html`}
-        ></webview>
-      ) : null}
-    </div>
+    </>
   )
 }
 

@@ -5,27 +5,11 @@ import { TransactionState } from 'frontend/store/types'
 import { TransactionToast } from '@hyperplay/ui'
 import {
   TITLE,
-  DESCRIPTION
+  DESCRIPTION,
+  statusType,
+  TxnStateToStatusMap
 } from 'frontend/screens/TransactionNotification/constants'
 import { observer } from 'mobx-react-lite'
-
-// todo: import from hyperplay/ui package
-type statusType =
-  | 'pending'
-  | 'submitted'
-  | 'error'
-  | 'alert'
-  | 'success'
-  | 'error'
-type TxnStateToStatusMapType = {
-  [key in TransactionState]: statusType
-}
-const TxnStateToStatusMap: TxnStateToStatusMapType = {
-  initiated: 'pending',
-  pending: 'submitted',
-  confirmed: 'success',
-  failed: 'error'
-}
 
 const BrowserToastManager = function () {
   const item = transactionStore.latestTxn

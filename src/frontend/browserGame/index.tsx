@@ -3,6 +3,7 @@ import BrowserGameStyles from './index.module.scss'
 import BrowserExtensionManager from './BrowserExtensionManager'
 import BrowserToastManager from './BrowserToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
+import BrowserExtensionToastManager from './BrowserExtensionToastManager'
 
 interface BrowserGameProps {
   url: string
@@ -15,6 +16,7 @@ const BrowserGame = function ({ url, provider }: BrowserGameProps) {
     <div>
       <BrowserExtensionManager />
       <BrowserToastManager />
+      <BrowserExtensionToastManager />
       <webview
         src={url}
         className={BrowserGameStyles.browserGame}
