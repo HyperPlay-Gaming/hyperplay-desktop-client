@@ -73,7 +73,7 @@ const metricsStore = new Store<MetricsStore>({
  * screen.
  */
 metricsStore.onDidChange('metricsOptInStatus', (newValue) => {
-  sendFrontendMessage('optInStatusChanged', newValue as MetricsOptInStatus);
+  sendFrontendMessage('optInStatusChanged', newValue as MetricsOptInStatus)
 })
 
 /**

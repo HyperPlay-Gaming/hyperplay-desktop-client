@@ -1,11 +1,7 @@
 import { apiObject } from '@rudderstack/rudder-sdk-node'
 import { MetricsOptInStatus } from 'common/types'
 import { ipcMain } from 'electron'
-import {
-  changeMetricsOptInStatus,
-  trackEvent,
-  trackScreen
-} from './metrics'
+import { changeMetricsOptInStatus, trackEvent, trackScreen } from './metrics'
 import { PossibleMetricPayloads } from './types'
 
 ipcMain.handle(
