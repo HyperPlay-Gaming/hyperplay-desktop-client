@@ -113,6 +113,11 @@ export default React.memo(function Library(): JSX.Element {
     }
   }, [backToTopElement])
 
+  // Track the screen view once and only once.
+  useEffect(() => {
+    window.api.trackScreen('Library')
+  }, [])
+
   const backToTop = () => {
     const anchor = document.getElementById('top')
     if (anchor) {

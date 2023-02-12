@@ -68,6 +68,11 @@ export default React.memo(function WineManager(): JSX.Element | null {
     setWineVersions(getWineVersions(repo.type))
   }
 
+  // Track the screen view once
+  useEffect(() => {
+    window.api.trackScreen('Wine Manager')
+  }, [])
+
   useEffect(() => {
     const oldWineManagerSettings = configStore.get_nodefault(
       'wine-manager-settings'

@@ -113,6 +113,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   'set-connectivity-online': () => void
   changeTrayColor: () => void
   setSetting: (args: { appName: string; key: string; value: unknown }) => void
+  optInStatusChanged: (optInStatus: MetricsOptInStatus) => void
 }
 
 interface RequestArguments {
@@ -147,6 +148,11 @@ interface HyperPlayAsyncIPCFunctions {
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   providerRequest: (args: RequestArguments) => Promise<any>
   getConnectedProvider: () => Promise<string>
+  trackEvent: (payload: PossibleMetricPayloads) => Promise<void>
+  trackScreen: (name: string, properties?: apiObject) => Promise<void>
+  changeMetricsOptInStatus: (
+    newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
+  ) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

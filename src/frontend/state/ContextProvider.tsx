@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { ContextType } from 'frontend/types'
+import { MetricsOptInStatus } from 'common/types'
 
 const initialContext: ContextType = {
   category: 'all',
@@ -72,7 +73,8 @@ const initialContext: ContextType = {
   isSettingsModalOpen: { value: false, type: 'settings' },
   setIsSettingsModalOpen: () => null,
   showMetaMaskBrowserSidebarLinks: false,
-  setShowMetaMaskBrowserSidebarLinks: () => null
+  setShowMetaMaskBrowserSidebarLinks: () => null,
+  metricsOptInStatus: MetricsOptInStatus.undecided
 }
 
 export default React.createContext(initialContext)

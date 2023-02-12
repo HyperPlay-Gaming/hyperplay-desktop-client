@@ -714,3 +714,18 @@ export interface WineManagerUISettings {
   type: Type
   enabled: boolean
 }
+
+/**
+ * A user will always be in one of these three states of Metrics Opt In status:
+ * a) Opted In -- The user has chosen to participate in our metrics program
+ * b) Opted Out -- The user has explicitly asked not to participate
+ * c) Undecided -- The user has neither explicitly opted in or opted out.
+ * Functionally this is no different then Opted Out. We do not track events for
+ * undecided users. However, for the sake of knowing whether to ask the user to
+ * opt in, we should know whether or not they have decided.
+ */
+export enum MetricsOptInStatus {
+  optedIn = 'OPTED_IN',
+  optedOut = 'OPTED_OUT',
+  undecided = 'UNDECIDED'
+}
