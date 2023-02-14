@@ -15,8 +15,9 @@
     "email": "hyperplay@hyperplay.gg"
   },
   "build": {
-    "appId": "gg.hyperplay.app",
+    "appId": "gg.hyperplay.HyperPlay",
     "productName": "HyperPlay",
+    "afterSign": "sign/notarize.js",
     "files": [
       "build/**/*",
       "node_modules/**/*",
@@ -58,8 +59,6 @@
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "category": "public.app-category.games",
       "icon": "build/app_icon.icns",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
       "entitlements": "build/entitlements.mac.plist",
       "entitlementsInherit": "build/entitlements.mac.plist",
       "extendInfo": {
@@ -74,7 +73,6 @@
       ]
     },
     "dmg": {
-      "sign": true,
       "background": "public/dmg.png",
       "window": {
         "width": "600",
