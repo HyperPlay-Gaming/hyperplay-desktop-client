@@ -314,6 +314,7 @@ if (!gotTheLock) {
       for (const win of BrowserWindow.getAllWindows()) {
         win.webContents.send('updateOverlayVisibility', overlayOpen)
       }
+      OverlayApp.toggleIntercept()
     })
 
     setExtensionMetadata()

@@ -1,7 +1,5 @@
-import { app, BrowserWindow, ipcMain, screen, shell } from 'electron'
-// import { Menu, Tray } from 'electron'
+import { app, BrowserWindow, screen, shell } from 'electron'
 import * as path from 'path'
-// import { fileUrl } from './utils/utils'
 
 import * as IOverlay from '@hyperplay/electron-overlay'
 
@@ -23,6 +21,7 @@ class Application {
   private tray: Electron.Tray | null
   private markQuit = false
   private scaleFactor = 1.0
+  private inputInterceptEnabled = false
 
   // @ts-expect-error TODO
   private Overlay: typeof IOverlay
@@ -39,14 +38,6 @@ class Application {
   public startOverlay() {
     this.Overlay = require('@hyperplay/electron-overlay')
     this.Overlay!.start()
-    // hotkeys refer to windows virtual keys defined here: https://learn.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
-    this.Overlay!.setHotkeys([
-      {
-        name: 'overlay.hotkey.toggleInputIntercept',
-        keyCode: 9, //tab
-        modifiers: { ctrl: true }
-      }
-    ])
 
     this.Overlay!.setEventCallback((event: string, payload) => {
       if (event === 'game.input') {
@@ -76,9 +67,7 @@ class Application {
           window.webContents.send('fps', payload.fps)
         }
       } else if (event === 'game.hotkey.down') {
-        // if (payload.name === 'app.doit') {
-        //   this.doit()
-        // }
+        //
       } else if (event === 'game.window.focused') {
         console.log('focusWindowId', payload.focusWindowId)
 
@@ -102,7 +91,6 @@ class Application {
     captionHeight = 0,
     transparent = false
   ) {
-    console.log('adding window ', name, ' with id ', window.id)
     const display = screen.getDisplayNearestPoint(screen.getCursorScreenPoint())
 
     const rect = {
@@ -152,7 +140,6 @@ class Application {
     )
 
     window.on('ready-to-show', () => {
-      console.log('overlay electron browser window ready to show')
       window.focusOnWebView()
     })
 
@@ -161,7 +148,6 @@ class Application {
     })
 
     window.on('resize', () => {
-      console.log('overlay electron browser window resized')
       this.Overlay!.sendWindowBounds(window.id, {
         rect: {
           x: window.getBounds().x,
@@ -185,12 +171,10 @@ class Application {
 
     const windowId = window.id
     window.on('closed', () => {
-      console.log('overlay electron browser window closed')
       this.Overlay!.closeWindow(windowId)
     })
 
     window.webContents.on('cursor-changed', (event, type) => {
-      console.log('overlay electron browser window cursor changed')
       let cursor
       switch (type) {
         case 'default':
@@ -340,7 +324,6 @@ class Application {
       x: 0,
       y: 0
     }).scaleFactor
-    console.log(`this.scaleFactor`, this.scaleFactor)
 
     this.setupIpc()
   }
@@ -410,6 +393,21 @@ class Application {
     }
   }
 
+  public toggleIntercept() {
+    this.inputInterceptEnabled = !this.inputInterceptEnabled
+    if (this.inputInterceptEnabled) {
+      this.Overlay!.sendCommand({
+        command: 'input.intercept',
+        intercept: true
+      })
+    } else {
+      this.Overlay!.sendCommand({
+        command: 'input.intercept',
+        intercept: false
+      })
+    }
+  }
+
   private setupIpc() {
     if (!this.Overlay) {
       this.startOverlay()
@@ -417,21 +415,6 @@ class Application {
       this.createHyperplayOverlay()
       this.createToastOverlay()
     }
-
-    ipcMain.on('startIntercept', () => {
-      console.log('sending start intercept command')
-      this.Overlay!.sendCommand({
-        command: 'input.intercept',
-        intercept: true
-      })
-    })
-
-    ipcMain.on('stopIntercept', () => {
-      this.Overlay!.sendCommand({
-        command: 'input.intercept',
-        intercept: false
-      })
-    })
   }
 }
 
