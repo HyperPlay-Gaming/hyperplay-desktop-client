@@ -4,4 +4,4 @@ flatpak/.flatpak-builder/
 vite.config.ts
 **/__tests__/**
 **/__mocks__/**
-sign
+sign/**

@@ -6,8 +6,12 @@ on:
   workflow_dispatch:
 
 env:
-  ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
-  CSC_IDENTITY_AUTO_DISCOVERY: false
+  CSC_IDENTITY_AUTO_DISCOVERY: true
+  CSC_LINK: ${{ secrets.CSC_LINK }}
+  CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+  APPLE_ID: ${{ secrets.APPLEID }}
+  APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
+  TEAMID: ${{ secrets.TEAMID }}
 
 jobs:
   build-and-release:
@@ -29,11 +33,5 @@ jobs:
           node-version: '16'
 
       - name: Build and release app
-        env:
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-          APPLE_ID: ${{ secrets.APPLEID }}
-          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
-          TEAMID: ${{ secrets.TEAMID }}
         run: |
           yarn release:mac
