@@ -16,6 +16,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
 
       - name: Install dependencies
         run: yarn install
