@@ -4,8 +4,8 @@ body:
   - type: markdown
     attributes:
       value: |-
-        ## Important: If this is a game issue, check out [our Discord server](https://discord.gg/rHJ2uqdquK) and [our Wiki](https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/Troubleshooting) to get help instead!
-        Examples for valid issues: "Heroic doesn't open", "This button is out of place", "Heroic closes unexpectedly", "Installs get interrupted"
+        ## Important: If this is a game issue, check out [our Discord server](https://discord.gg/rHJ2uqdquK) and [our Wiki](https://github.com/hyperplay/hyperplay/wiki/Troubleshooting) to get help instead!
+        Examples for valid issues: "hyperplay doesn't open", "This button is out of place", "hyperplay closes unexpectedly", "Installs get interrupted"
   - type: textarea
     id: bug_description
     attributes:
@@ -14,7 +14,7 @@ body:
     validations:
       required: true
   - type: textarea
-    id: heroic_log
+    id: hyperplay_log
     attributes:
       label: Add logs
       description: 'Open up the "Settings" tab -> "Log" tab -> "Copy log content to clipboard" and paste it into here'
@@ -45,13 +45,27 @@ body:
     attributes:
       label: Screenshots
       description: If applicable, add screenshots to help explain your problem.
+  - type: markdown
+    attributes:
+      value: |-
+        ## Latest stable version of Hyperplay is 0.0.1. Please, update hyperplay before reporting a bug if you have an older version.
+  - type: dropdown
+    id: hyperplay_version
+    attributes:
+      label: hyperplay Version
+      options:
+        - Latest Stable
+        - Latest Beta
+        - main branch from GitHub
+    validations:
+      required: true
   - type: textarea
     id: systeminfo
     attributes:
       label: System Information
       value: |-
         - OS [e. g. "Ubuntu"]: 
-        - Heroic Version [e. g. 2.1.1]:
+        - hyperplay Version [e. g. 2.1.1]:
 
     validations:
       required: true

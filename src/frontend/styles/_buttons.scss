@@ -34,8 +34,8 @@ button {
   min-width: 130px;
 }
 
-.button:hover {
-  background: #58545d;
+.button:hover:not(:disabled):not(.is-link) {
+  box-shadow: 0px 0px 0px 3px var(--danger, var(--text-default));
 }
 
 .button.is-cta {
@@ -141,7 +141,7 @@ button {
 }
 
 .button.settings:hover {
-  background: #7c7c7c;
+  background: var(--secondary-hover);
 }
 
 .button.settings:disabled:hover,

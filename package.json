@@ -40,7 +40,7 @@
       }
     ],
     "win": {
-      "artifactName": "HyperPlay_Setup_${version}.${ext}",
+      "artifactName": "${productName}-${version}-Setup-${arch}.${ext}",
       "icon": "build/win_icon.ico",
       "asarUnpack": [
         "build/bin/win32/legendary.exe",
@@ -51,7 +51,7 @@
       ]
     },
     "portable": {
-      "artifactName": "${productName}-${version}-Portable.${ext}"
+      "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
     },
     "mac": {
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
@@ -131,6 +131,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@hyperplay/ui": "^0.0.3",
     "@hyperplay/electron-overlay": "^0.0.1",
     "@metamask/sdk": "^0.1.0",
     "@mui/icons-material": "^5.10.9",
@@ -194,10 +195,10 @@
     "test:ci": "jest --runInBand --silent",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
     "release:linux": "vite build && electron-builder -p always --linux deb AppImage rpm pacman tar.xz",
-    "release:mac": "vite build && electron-builder -p always --mac",
-    "release:win": "vite build && electron-builder -p always --win nsis portable",
+    "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
+    "release:win": "vite build && electron-builder -p never --win nsis portable --x64 --arm64",
     "dist:linux": "vite build && electron-builder --linux",
-    "dist:mac": "vite build && electron-builder --mac --x64 --arm64",
+    "dist:mac": "vite build && electron-builder --mac",
     "dist:win": "vite build && electron-builder --win",
     "lint": "eslint --cache -c .eslintrc --ext .tsx,ts ./src",
     "lint-fix": "eslint --fix -c .eslintrc --ext .tsx,ts ./src",

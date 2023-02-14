@@ -5,6 +5,8 @@ import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
 import { initGamepad } from './helpers/gamepad'
 
+// keep @hyperplay/ui/index.css before index.scss until after frontend design rework
+import '@hyperplay/ui/index.css'
 import './index.scss'
 import './themes.css'
 import Loading from './screens/Loading'

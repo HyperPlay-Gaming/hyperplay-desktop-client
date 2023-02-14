@@ -63,6 +63,7 @@ interface HyperPlaySyncIPCFunctions {
   loadingScreenReady: () => void
   reloadApp: () => void
   createNewMetaMaskWallet: () => void
+  enableOnEvents: (topic: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -117,6 +118,16 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   setSetting: (args: { appName: string; key: string; value: unknown }) => void
 }
 
+interface RequestArguments {
+  readonly method: string
+  readonly params?: readonly unknown[] | object
+}
+
+interface RequestArguments {
+  readonly method: string
+  readonly params?: readonly unknown[] | object
+}
+
 interface HyperPlayAsyncIPCFunctions {
   showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<void>
   chromeWindowsCreate: (
@@ -136,6 +147,9 @@ interface HyperPlayAsyncIPCFunctions {
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>
   getConnectionUris: (providerSelection: PROVIDERS) => Promise<UrisReturn>
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  providerRequest: (args: RequestArguments) => Promise<any>
+  getConnectedProvider: () => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
