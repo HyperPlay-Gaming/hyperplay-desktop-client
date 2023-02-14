@@ -32,5 +32,6 @@ jobs:
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
           APPLE_ID: ${{ secrets.APPLEID }}
           APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
+          TEAMID: ${{ secrets.TEAMID }}
         run: |
           yarn release:mac
