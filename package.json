@@ -15,7 +15,7 @@
     "email": "hyperplay@hyperplay.gg"
   },
   "build": {
-    "appId": "com.electron.hyperplay",
+    "appId": "gg.hyperplay.app",
     "productName": "HyperPlay",
     "files": [
       "build/**/*",
@@ -54,10 +54,17 @@
       "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
     },
     "mac": {
-      "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "target": "dmg",
+      "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "category": "public.app-category.games",
       "icon": "build/app_icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "com.apple.security.cs.allow-jit": true
+      },
       "asarUnpack": [
         "build/bin/darwin/legendary",
         "build/bin/darwin/gogdl"
@@ -67,6 +74,7 @@
       ]
     },
     "dmg": {
+      "sign": true,
       "background": "public/dmg.png",
       "window": {
         "width": "600",
@@ -179,9 +187,9 @@
     "source-map-support": "^0.5.21",
     "steam-shortcut-editor": "^3.1.1",
     "systeminformation": "^5.15.0",
-    "web3": "^1.7.5",
     "ts-prune": "^0.10.3",
-    "tslib": "^2.4.0"
+    "tslib": "^2.4.0",
+    "web3": "^1.7.5"
   },
   "scripts": {
     "start": "vite",
@@ -236,6 +244,7 @@
     "electron": "21.2.1",
     "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.2.0",
+    "electron-notarize": "^1.2.2",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",

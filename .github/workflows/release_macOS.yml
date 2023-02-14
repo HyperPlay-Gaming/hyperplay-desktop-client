@@ -1,0 +1,36 @@
+name: Build and Release macOS HP version
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  ELECTRON_BUILDER_ALLOW_UNRESOLVED_DEPENDENCIES: true
+  CSC_IDENTITY_AUTO_DISCOVERY: false
+
+jobs:
+  build-and-release:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: Build and release app
+        env:
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLEID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
+        run: |
+          yarn release:mac
