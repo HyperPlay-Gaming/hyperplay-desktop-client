@@ -2,8 +2,7 @@ name: Build and Release macOS HP version
 
 on:
   push:
-    tags:
-      - 'v*'
+    branches: [main, ci/apple_certificate]
   workflow_dispatch:
 
 env:
