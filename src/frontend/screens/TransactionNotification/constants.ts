@@ -51,3 +51,34 @@ export const DESCRIPTION: Record<TransactionState, string> = {
     'The transaction was canceled or not submitted, please try again',
   [TransactionState.CONFIRMED]: 'The transaction was successfully confirmed!'
 }
+
+// todo: import from hyperplay/ui package
+export type statusType =
+  | 'pending'
+  | 'submitted'
+  | 'error'
+  | 'alert'
+  | 'success'
+  | 'error'
+
+type TxnStateToStatusMapType = {
+  [key in TransactionState]: statusType
+}
+export const TxnStateToStatusMap: TxnStateToStatusMapType = {
+  initiated: 'pending',
+  pending: 'submitted',
+  confirmed: 'success',
+  failed: 'error'
+}
+
+interface EXTENSION_NOTIFICATION_TYPE {
+  TITLE: string
+  DESCRIPTION: string
+  STATUS: statusType
+}
+
+export const EXTENSION_NOTIFICATION: EXTENSION_NOTIFICATION_TYPE = {
+  TITLE: 'Transaction requested',
+  DESCRIPTION: 'Press Ctrl + Tab to see this transaction',
+  STATUS: 'pending'
+}

@@ -21,7 +21,8 @@ import {
   protocol,
   screen,
   clipboard,
-  globalShortcut
+  globalShortcut,
+  session
 } from 'electron'
 import 'backend/updater'
 import { autoUpdater } from 'electron-updater'
@@ -226,21 +227,26 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
 const loadMainWindowURL = function () {
   if (!app.isPackaged) {
-    if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-      import('electron-devtools-installer').then((devtools) => {
-        const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
+    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+    //   import('electron-devtools-installer').then((devtools) => {
+    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
+    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+    //   import('electron-devtools-installer').then((devtools) => {
+    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
 
-        installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
-          logWarning(['An error occurred: ', err], LogPrefix.Backend)
-        })
-      })
-    }
-    mainWindow.loadURL('http://localhost:5173')
+    //     installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
+    //       logWarning(['An error occurred: ', err], LogPrefix.Backend)
+    //     })
+    //   })
+    // }
+    mainWindow.loadURL('http://localhost:5173?view=App')
     // Open the DevTools.
-    mainWindow.webContents.openDevTools()
+    // mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
-    mainWindow.loadURL(`file://${path.join(publicDir, '../build/index.html')}`)
+    mainWindow.loadURL(
+      `file://${path.join(publicDir, '../build/index.html?view=App')}`
+    )
     if (!isMac) {
       autoUpdater.checkForUpdates()
     }
@@ -293,6 +299,20 @@ if (!gotTheLock) {
     handleProtocol(argv)
   })
   app.whenReady().then(async () => {
+    const ses = session.fromPartition(
+      'persist:InPageWindowEthereumExternalWallet'
+    )
+    ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
+
+    let overlayOpen = false
+    const openOverlayAccelerator = 'CommandOrControl+Tab'
+    globalShortcut.register(openOverlayAccelerator, () => {
+      overlayOpen = !overlayOpen
+      for (const win of BrowserWindow.getAllWindows()) {
+        win.webContents.send('updateOverlayVisibility', overlayOpen)
+      }
+    })
+
     setExtensionMetadata()
 
     initOnlineMonitor()
@@ -1802,21 +1822,31 @@ ProviderHelper.passEventCallbacks(
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 
 ipcMain.on('providerRequestInitiated', (id, method) => {
-  mainWindow.webContents.send('providerRequestInitiated', id, method)
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.webContents.send('providerRequestInitiated', id, method)
+  }
 })
 
 ipcMain.on('providerRequestPending', (id) => {
-  mainWindow.webContents.send('providerRequestPending', id)
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.webContents.send('providerRequestPending', id)
+  }
 })
 
 ipcMain.on('providerRequestCompleted', (id) => {
-  mainWindow.webContents.send('providerRequestCompleted', id)
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.webContents.send('providerRequestCompleted', id)
+  }
 })
 
 ipcMain.on('providerRequestFailed', (id) => {
-  mainWindow.webContents.send('providerRequestFailed', id)
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.webContents.send('providerRequestFailed', id)
+  }
 })
 
 ipcMain.on('reloadApp', async () => {
-  loadMainWindowURL()
+  for (const win of BrowserWindow.getAllWindows()) {
+    win.loadURL(win.webContents.getURL())
+  }
 })
