@@ -978,20 +978,20 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@hyperplay/electron-overlay@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@hyperplay/electron-overlay/-/electron-overlay-0.0.2.tgz#3ed101ae0c654cd77bab3bc5a2c528e7fae87460"
+  integrity sha512-HMy1S0Ap+fFwDBqsKEyJxEDwYSndDtVoqjp9SjQHOr/IwZUayalMjQSvjdy0Mcru3SwWmic5JMLA55dbtcbLTQ==
+  dependencies:
+    node-addon-api "^4.1.0"
+    node-gyp "^9.3.1"
+
 "@hyperplay/ui@^0.0.3":
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.0.3.tgz#b9d629175cab53deb188c3c39706b517af3934b7"
   integrity sha512-1QMcTGkaPw29nFWQmP9NdOL8eh3s5wW+0n5Qf4948cTqhxupUrCaLNoDB4kEQpbAhNZvUHyF6jxLlXnmjP+X2Q==
   dependencies:
     tiny-swiper "^2.2.0"
-
-"@hyperplay/electron-overlay@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@hyperplay/electron-overlay/-/electron-overlay-0.0.1.tgz#25c04044d4689d227edd5d538667661fcfa51985"
-  integrity sha512-WXZkTeQvPjR2eA0/GAY1EnCGTiRW58zEmwMb6r1YLVQ82/JDKflzt0EuWyq7VGytn8d/rzXOb3hfklXZRSRHsA==
-  dependencies:
-    node-addon-api "^4.1.0"
-    node-gyp "^9.3.1"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"

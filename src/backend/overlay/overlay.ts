@@ -236,6 +236,41 @@ class Application {
     })
   }
 
+  public createToastOverlay() {
+    const isTesting = false
+
+    const options: Electron.BrowserWindowConstructorOptions = {
+      height: 240,
+      width: 500,
+      frame: false,
+      show: isTesting,
+      transparent: true,
+      resizable: false,
+      backgroundColor: '#00000000',
+      webPreferences: {
+        webviewTag: true,
+        offscreen: !isTesting,
+        nodeIntegration: true,
+        contextIsolation: true,
+        preload: path.join(__dirname, 'preload.js')
+      }
+    }
+
+    const name = AppWindows.OVERLAY_TIP
+    const window = this.createWindow(name, options)
+
+    window.setPosition(0, 0)
+
+    window.loadURL(
+      !app.isPackaged
+        ? 'http://localhost:5173?view=ToastOverlay'
+        : `file://${path.join(buildDir, './index.html?view=ToastOverlay')}`
+    )
+
+    this.addOverlayWindow(name, window, 10, 40)
+    return window
+  }
+
   public createHyperplayOverlay() {
     const isTesting = false
 
@@ -261,18 +296,13 @@ class Application {
 
     window.setPosition(0, 0)
 
-    console.log(
-      'loading url from ',
-      path.join(buildDir, './index.html?HyperplayOverlay')
-    )
     window.loadURL(
       !app.isPackaged
         ? 'http://localhost:5173?view=HyperplayOverlay'
-        : `file://${path.join(buildDir, './index.html?HyperplayOverlay')}`
+        : `file://${path.join(buildDir, './index.html?view=HyperplayOverlay')}`
     )
 
     this.addOverlayWindow(name, window, 10, 40)
-    console.log('OSR WINDOW CREATED AND ADDED')
     return window
   }
 
@@ -385,6 +415,7 @@ class Application {
       this.startOverlay()
 
       this.createHyperplayOverlay()
+      this.createToastOverlay()
     }
 
     ipcMain.on('startIntercept', () => {
