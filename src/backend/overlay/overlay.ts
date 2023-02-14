@@ -267,7 +267,7 @@ class Application {
     )
     window.loadURL(
       !app.isPackaged
-        ? 'http://localhost:5173?HyperplayOverlay'
+        ? 'http://localhost:5173?view=HyperplayOverlay'
         : `file://${path.join(buildDir, './index.html?HyperplayOverlay')}`
     )
 
