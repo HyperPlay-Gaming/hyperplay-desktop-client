@@ -14,7 +14,7 @@ exports.default = async function notarizing(context) {
     appBundleId: 'gg.hyperplay.HyperPlay',
     appPath: `${appOutDir}/${appName}.app`,
     teamId: process.env.TEAMID,
-    appleId: process.env.APPLEID,
-    appleIdPassword: process.env.APPLEIDPASS,
+    appleId: process.env.APPLE_ID,
+    appleIdPassword: process.env.APPLE_APP_SPECIFIC_PASSWORD,
   });
 };
