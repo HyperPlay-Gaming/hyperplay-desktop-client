@@ -11,7 +11,11 @@ import {
 } from 'frontend/screens/TransactionNotification/constants'
 import { observer } from 'mobx-react-lite'
 
-const BrowserToastManager = function () {
+interface BrowserToastManagerProps {
+  showCloseButton?: boolean
+}
+
+const BrowserToastManager = function (props: BrowserToastManagerProps) {
   const item = transactionStore.latestTxn
   if (item === null || !item.isOpen) return <></>
 
@@ -40,6 +44,7 @@ const BrowserToastManager = function () {
         title={title}
         subtext={description}
         onClick={() => transactionStore.closeTransaction(item.id)}
+        showCloseButton={props.showCloseButton}
       />
     </div>
   )

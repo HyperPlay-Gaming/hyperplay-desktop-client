@@ -986,10 +986,10 @@
     node-addon-api "^4.1.0"
     node-gyp "^9.3.1"
 
-"@hyperplay/ui@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.0.3.tgz#b9d629175cab53deb188c3c39706b517af3934b7"
-  integrity sha512-1QMcTGkaPw29nFWQmP9NdOL8eh3s5wW+0n5Qf4948cTqhxupUrCaLNoDB4kEQpbAhNZvUHyF6jxLlXnmjP+X2Q==
+"@hyperplay/ui@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.0.5.tgz#d53b477177ad3b672311ae06dd37c77401ff094e"
+  integrity sha512-cgvAdn7+CAhrxNzhCHAdTHrEEE0hDdwnuHikXLKTtYRMI66V3g2RgKr+gjdwHFSgVYtPMVEdqK8y4wre5kb24g==
   dependencies:
     tiny-swiper "^2.2.0"
 
