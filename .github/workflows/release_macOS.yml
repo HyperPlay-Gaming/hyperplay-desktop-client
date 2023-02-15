@@ -36,3 +36,10 @@ jobs:
       - name: Build and release app
         run: |
           yarn release:mac
+
+      - name: Upload ARM64.
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-dmg-arm64
+          path: dist/HyperPlay*arm64.dmg
+          retention-days: 14
