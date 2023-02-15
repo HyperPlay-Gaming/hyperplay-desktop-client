@@ -34,7 +34,7 @@ jobs:
           node-version: '16'
 
       - name: Build artifacts.
-        run: yarn dist:mac --publish=never
+        run: yarn dist:mac --publish=never --arm64
 
       - name: Upload ARM64.
         uses: actions/upload-artifact@v3
