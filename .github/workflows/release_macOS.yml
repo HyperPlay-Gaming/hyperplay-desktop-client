@@ -33,9 +33,8 @@ jobs:
         with:
           node-version: '16'
 
-      - name: Build and release app
-        run: |
-          yarn release:mac
+      - name: Build artifacts.
+        run: yarn dist:mac --publish=never
 
       - name: Upload ARM64.
         uses: actions/upload-artifact@v3
