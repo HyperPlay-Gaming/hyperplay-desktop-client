@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.4-alpha.1",
+  "version": "1.0.0-alpha.1",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -55,7 +55,6 @@
       "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
     },
     "mac": {
-      "target": "dmg",
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "category": "public.app-category.games",
       "icon": "build/app_icon.icns",
