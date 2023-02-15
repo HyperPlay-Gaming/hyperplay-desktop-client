@@ -12,6 +12,7 @@ env:
   APPLE_ID: ${{ secrets.APPLEID }}
   APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
   TEAMID: ${{ secrets.TEAMID }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
   build-and-release:
