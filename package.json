@@ -131,7 +131,6 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@hyperplay/electron-overlay": "^0.0.5",
     "@hyperplay/ui": "^0.0.5",
     "@metamask/sdk": "^0.1.0",
     "@mui/icons-material": "^5.10.9",
@@ -159,6 +158,7 @@
     "fs-extra": "^10.1.0",
     "fuse.js": "^6.6.2",
     "graceful-fs": "^4.2.10",
+    "heroic-wine-downloader": "^1.2.3",
     "howlongtobeat": "^1.7.0",
     "i18next": "^21.6.16",
     "i18next-fs-backend": "^1.1.4",
@@ -257,5 +257,8 @@
     "vite": "^3.2.2",
     "vite-plugin-electron": "^0.10.2",
     "vite-plugin-svgr": "^2.2.2"
+  },
+  "optionalDependencies": {
+    "@hyperplay/electron-overlay": "^0.0.6"
   }
 }

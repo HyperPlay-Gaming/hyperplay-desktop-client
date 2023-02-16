@@ -1,7 +1,15 @@
 import { app, BrowserWindow, screen, shell } from 'electron'
 import * as path from 'path'
 
-import * as IOverlay from '@hyperplay/electron-overlay'
+/* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+let IOverlay: any
+try {
+  IOverlay = require('@hyperplay/electron-overlay')
+} catch (e) {
+  console.log(
+    'optional hyperplay-electron-overlay could not be imported on this OS'
+  )
+}
 
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
@@ -23,7 +31,6 @@ class Application {
   private scaleFactor = 1.0
   private inputInterceptEnabled = false
 
-  // @ts-expect-error TODO
   private Overlay: typeof IOverlay
 
   constructor() {
@@ -36,52 +43,59 @@ class Application {
   }
 
   public startOverlay() {
-    this.Overlay = require('@hyperplay/electron-overlay')
-    this.Overlay!.start()
+    try {
+      this.Overlay = require('@hyperplay/electron-overlay')
+      this.Overlay!.start()
 
-    this.Overlay!.setEventCallback((event: string, payload) => {
-      if (event === 'game.input') {
-        const window = BrowserWindow.fromId(payload.windowId)
-        if (window) {
-          const inputEvent = this.Overlay!.translateInputEvent(payload)
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+      this.Overlay!.setEventCallback((event: string, payload: any) => {
+        if (event === 'game.input') {
+          const window = BrowserWindow.fromId(payload.windowId)
+          if (window) {
+            const inputEvent = this.Overlay!.translateInputEvent(payload)
 
-          if (inputEvent) {
-            if ('x' in inputEvent)
-              inputEvent['x'] = Math.round(inputEvent['x'] / this.scaleFactor)
-            if ('y' in inputEvent)
-              inputEvent['y'] = Math.round(inputEvent['y'] / this.scaleFactor)
-            try {
-              window.webContents.sendInputEvent(inputEvent)
-              window.webContents.send(
-                'proxyWebViewInput',
-                JSON.stringify(inputEvent)
-              )
-            } catch (error) {
-              console.log(`error: `, JSON.stringify(error))
+            if (inputEvent) {
+              if ('x' in inputEvent)
+                inputEvent['x'] = Math.round(inputEvent['x'] / this.scaleFactor)
+              if ('y' in inputEvent)
+                inputEvent['y'] = Math.round(inputEvent['y'] / this.scaleFactor)
+              try {
+                window.webContents.sendInputEvent(inputEvent)
+                window.webContents.send(
+                  'proxyWebViewInput',
+                  JSON.stringify(inputEvent)
+                )
+              } catch (error) {
+                console.log(`error: `, JSON.stringify(error))
+              }
             }
           }
-        }
-      } else if (event === 'graphics.fps') {
-        const window = this.getWindow(AppWindows.STATUS_BAR)
-        if (window) {
-          window.webContents.send('fps', payload.fps)
-        }
-      } else if (event === 'game.hotkey.down') {
-        //
-      } else if (event === 'game.window.focused') {
-        console.log('focusWindowId', payload.focusWindowId)
+        } else if (event === 'graphics.fps') {
+          const window = this.getWindow(AppWindows.STATUS_BAR)
+          if (window) {
+            window.webContents.send('fps', payload.fps)
+          }
+        } else if (event === 'game.hotkey.down') {
+          //
+        } else if (event === 'game.window.focused') {
+          console.log('focusWindowId', payload.focusWindowId)
 
-        BrowserWindow.getAllWindows().forEach((window) => {
-          window.blurWebView()
-        })
+          BrowserWindow.getAllWindows().forEach((window) => {
+            window.blurWebView()
+          })
 
-        const focusWin = BrowserWindow.fromId(payload.focusWindowId)
-        if (focusWin) {
-          focusWin.focusOnWebView()
-          focusWin.focus()
+          const focusWin = BrowserWindow.fromId(payload.focusWindowId)
+          if (focusWin) {
+            focusWin.focusOnWebView()
+            focusWin.focus()
+          }
         }
-      }
-    })
+      })
+    } catch (e) {
+      console.log(
+        'optional hyperplay-electron-overlay could not be imported on this OS'
+      )
+    }
   }
 
   public addOverlayWindow(
@@ -375,6 +389,7 @@ class Application {
   }
 
   public async inject(param: { pid?: string; title?: string }) {
+    if (!this.Overlay) return
     const { pid, title } = param
     console.log(
       `--------------------\n try inject method ${JSON.stringify(param)}`
@@ -394,6 +409,7 @@ class Application {
   }
 
   public toggleIntercept() {
+    if (!this.Overlay) return
     this.inputInterceptEnabled = !this.inputInterceptEnabled
     if (this.inputInterceptEnabled) {
       this.Overlay!.sendCommand({
@@ -411,6 +427,7 @@ class Application {
   private setupIpc() {
     if (!this.Overlay) {
       this.startOverlay()
+      if (!this.Overlay) return
 
       this.createHyperplayOverlay()
       this.createToastOverlay()
