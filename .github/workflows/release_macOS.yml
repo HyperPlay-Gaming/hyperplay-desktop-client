@@ -2,7 +2,8 @@ name: Build and Release macOS HP version
 
 on:
   push:
-    branches: [main, ci/apple_certificate]
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 env:
@@ -34,11 +35,4 @@ jobs:
           node-version: '16'
 
       - name: Build artifacts.
-        run: yarn dist:mac --publish=never --arm64
-
-      - name: Upload ARM64.
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-dmg-arm64
-          path: dist/HyperPlay*arm64.dmg
-          retention-days: 14
+        run: yarn release:mac --arm64
