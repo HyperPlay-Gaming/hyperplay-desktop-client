@@ -140,8 +140,8 @@
         "removeShortcut": "Fjern genveje",
         "removeFromSteam": "Fjern fra Steam",
         "addToSteam": "Tilføj til Steam",
-        "disableEosOverlay": "Deaktiver EOS Overlay",
-        "enableEosOverlay": "Aktiver EOS Overlay"
+        "disableEosOverlay": "Deaktiver Epic Overlay",
+        "enableEosOverlay": "Aktiver Epic Overlay"
     },
     "generic": {
         "error": "Ukendt fejl"
