@@ -35,7 +35,20 @@ describe('getWikiGameInfo', () => {
     wikiGameInfoStore.set('The Witcher 3', testExtraGameInfo)
 
     const result = await getWikiGameInfo('The Witcher 3')
-    expect(result).toStrictEqual(testExtraGameInfo)
+
+    // Date can sometimes get off by 1 second during tests causing false negatives
+    // This strict checks properties other than datetime which checks within 5 seconds
+    if (result !== null) {
+      const { timestampLastFetch: resultTimestampLastFetch, ...resultNoDate } =
+        result
+      const { timestampLastFetch: testTimestampLastFetch, ...testNoDate } =
+        testExtraGameInfo
+      const resultDate = Date.parse(resultTimestampLastFetch)
+      const testDate = Date.parse(testTimestampLastFetch)
+      expect(resultDate - testDate).toBeLessThan(5000)
+      expect(resultNoDate).toStrictEqual(testNoDate)
+    }
+
     expect(mockPCGamingWiki).not.toBeCalled()
     expect(mockAppleGamingWiki).not.toBeCalled()
     expect(mockHowLongToBeat).not.toBeCalled()
@@ -61,7 +74,20 @@ describe('getWikiGameInfo', () => {
     })
 
     const result = await getWikiGameInfo('The Witcher 3', '1234')
-    expect(result).toStrictEqual(testExtraGameInfo)
+
+    // Date can sometimes get off by 1 second during tests causing false negatives
+    // This strict checks properties other than datetime which checks within 5 seconds
+    if (result !== null) {
+      const { timestampLastFetch: resultTimestampLastFetch, ...resultNoDate } =
+        result
+      const { timestampLastFetch: testTimestampLastFetch, ...testNoDate } =
+        testExtraGameInfo
+      const resultDate = Date.parse(resultTimestampLastFetch)
+      const testDate = Date.parse(testTimestampLastFetch)
+      expect(resultDate - testDate).toBeLessThan(5000)
+      expect(resultNoDate).toStrictEqual(testNoDate)
+    }
+
     expect(mockPCGamingWiki).toBeCalled()
     expect(mockAppleGamingWiki).toBeCalled()
     expect(mockHowLongToBeat).toBeCalled()

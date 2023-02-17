@@ -54,6 +54,12 @@ export default defineConfig({
             '/src/backend/hyperplay-extension-helper/extensionPreload.ts'
         ),
         vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/hyperplay-proxy-server/providerPreload.ts'
+        ),
+        vite: electronViteConfig
       }
     ]),
     svgr()

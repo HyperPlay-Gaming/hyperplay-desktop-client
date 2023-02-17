@@ -90,19 +90,19 @@ export default function AdvancedSettings() {
     if (eosOverlayInstalled && eosOverlayInstallingOrUpdating)
       return t(
         'setting.eosOverlay.updating',
-        'The EOS Overlay is being updated...'
+        'The Epic Overlay is being updated...'
       )
     if (eosOverlayInstalled && !eosOverlayInstallingOrUpdating)
-      return t('setting.eosOverlay.installed', 'The EOS Overlay is installed')
+      return t('setting.eosOverlay.installed', 'The Epic Overlay is installed')
     if (!eosOverlayInstalled && eosOverlayInstallingOrUpdating)
       return t(
         'setting.eosOverlay.installing',
-        'The EOS Overlay is being installed...'
+        'The Epic Overlay is being installed...'
       )
     if (!eosOverlayInstalled && !eosOverlayInstallingOrUpdating)
       return t(
         'setting.eosOverlay.notInstalled',
-        'The EOS Overlay is not installed'
+        'The Epic Overlay is not installed'
       )
     return ''
   }
@@ -112,7 +112,7 @@ export default function AdvancedSettings() {
     const installError = await window.api.installEosOverlay()
     setEosOverlayInstallingOrUpdating(false)
     setEosOverlayInstalled(!installError)
-    // `eos-overlay install` enables the overlay by default on Windows
+    // `Epic-overlay install` enables the overlay by default on Windows
     setEosOverlayEnabledGlobally(isWindows)
     // Update latest version info
     await checkForEosOverlayUpdates()
@@ -174,7 +174,7 @@ export default function AdvancedSettings() {
       <hr />
 
       <div className="eosSettings">
-        <h3>EOS Overlay</h3>
+        <h3>Epic Overlay</h3>
         <div>{getMainEosText()}</div>
         <br />
         {eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
