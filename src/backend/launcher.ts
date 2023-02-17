@@ -718,7 +718,6 @@ async function callRunner(
       if (options?.logFile) {
         appendFileSync(options.logFile, data)
       }
-
       if (options?.verboseLogFile) {
         appendFileSync(options.verboseLogFile, data)
       }

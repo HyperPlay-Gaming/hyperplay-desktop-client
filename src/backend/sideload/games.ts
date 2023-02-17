@@ -1,10 +1,10 @@
 import { GameSettings, SideloadGame } from 'common/types'
 import { libraryStore } from './electronStores'
 import { GameConfig } from '../game_config'
-import { isWindows, isMac, isLinux, gamesConfigPath } from '../constants'
+import { isWindows, isMac, isLinux, gamesConfigPath, icon } from '../constants'
 import { killPattern } from '../utils'
 import { logInfo, LogPrefix, logWarning } from '../logger/logger'
-import { dirname, join } from 'path'
+import path, { dirname, join, resolve } from 'path'
 import {
   appendFileSync,
   constants as FS_CONSTANTS,
@@ -27,7 +27,8 @@ import shlex from 'shlex'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
-import { BrowserWindow } from 'electron'
+import { app, BrowserWindow } from 'electron'
+const buildDir = resolve(__dirname, '../../build')
 
 export function appLogFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
@@ -128,23 +129,61 @@ export function isAppAvailable(appName: string): boolean {
   return false
 }
 
+if (Object.hasOwn(app, 'on'))
+  app.on('web-contents-created', (_, contents) => {
+    // Check for a webview
+    if (contents.getType() === 'webview') {
+      contents.setWindowOpenHandler(({ url }) => {
+        const protocol = new URL(url).protocol
+        if (['https:', 'http:'].includes(protocol)) {
+          openNewBrowserGameWindow(url)
+        }
+        return { action: 'deny' }
+      })
+    }
+  })
+
+const openNewBrowserGameWindow = async (
+  browserUrl: string
+): Promise<boolean> => {
+  return new Promise((res) => {
+    const browserGame = new BrowserWindow({
+      icon: icon,
+      webPreferences: {
+        webviewTag: true,
+        contextIsolation: true,
+        nodeIntegration: true,
+        preload: path.join(__dirname, 'preload.js')
+      }
+    })
+
+    const url = !app.isPackaged
+      ? 'http://localhost:5173?view=BrowserGame&browserUrl=' +
+        encodeURIComponent(browserUrl)
+      : `file://${path.join(
+          buildDir,
+          './index.html?view=BrowserGame&browserUrl=' +
+            encodeURIComponent(browserUrl)
+        )}`
+
+    browserGame.loadURL(url)
+    setTimeout(() => browserGame.focus(), 200)
+    browserGame.on('close', () => {
+      res(true)
+    })
+  })
+}
+
 export async function launchApp(appName: string): Promise<boolean> {
   const gameInfo = getAppInfo(appName)
   const {
     install: { executable },
     folder_name,
-    browserUrl,
-    title
+    browserUrl
   } = gameInfo
 
   if (browserUrl) {
-    return new Promise((res) => {
-      const browserGame = new BrowserWindow()
-      browserGame.loadURL(browserUrl)
-      browserGame.focus()
-      browserGame.setTitle(title)
-      browserGame.on('close', () => res(true))
-    })
+    return openNewBrowserGameWindow(browserUrl)
   }
 
   const gameSettings = await getAppSettings(appName)

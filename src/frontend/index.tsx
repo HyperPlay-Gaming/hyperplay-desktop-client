@@ -1,10 +1,12 @@
 import { I18nextProvider, initReactI18next } from 'react-i18next'
 import HttpApi from 'i18next-http-backend'
-import React, { lazy, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
 import { initGamepad } from './helpers/gamepad'
 
+// keep @hyperplay/ui/index.css before index.scss until after frontend design rework
+import '@hyperplay/ui/index.css'
 import './index.scss'
 import './themes.css'
 import Loading from './screens/Loading'
@@ -19,6 +21,7 @@ import '@fontsource/jura'
 import StoreController from './store'
 
 initOnlineMonitor()
+import ViewManager from './ViewManager'
 
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
@@ -103,7 +106,6 @@ i18next
 
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
-const App = lazy(async () => import('./App'))
 
 root.render(
   <React.StrictMode>
@@ -111,7 +113,7 @@ root.render(
     <GlobalState>
       <I18nextProvider i18n={i18next}>
         <Suspense fallback={<Loading />}>
-          <App />
+          <ViewManager />
         </Suspense>
       </I18nextProvider>
     </GlobalState>
