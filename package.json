@@ -259,6 +259,6 @@
     "vite-plugin-svgr": "^2.2.2"
   },
   "optionalDependencies": {
-    "@hyperplay/electron-overlay": "^0.0.6"
+    "@hyperplay/electron-overlay": "^0.0.7"
   }
 }
