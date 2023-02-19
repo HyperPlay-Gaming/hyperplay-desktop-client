@@ -8,7 +8,8 @@ import {
   ButtonOptions,
   LibraryTopSectionOptions,
   DMQueueElement,
-  SideloadGame
+  SideloadGame,
+  MetricsOptInStatus
 } from 'common/types'
 
 export type Category = 'all' | 'legendary' | 'gog' | 'sideload'
@@ -94,6 +95,7 @@ export interface ContextType {
   ) => void
   showMetaMaskBrowserSidebarLinks: boolean
   setShowMetaMaskBrowserSidebarLinks: (value: boolean) => void
+  metricsOptInStatus: MetricsOptInStatus
 }
 
 export type DialogModalOptions = {

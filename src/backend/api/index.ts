@@ -7,6 +7,7 @@ import * as Wine from './wine'
 import * as Proxy from '../hyperplay-proxy-server/api/proxy'
 import * as DownloadManager from './downloadmanager'
 import * as Extensions from '../hyperplay-extension-helper/api/extensions'
+import * as Metrics from './metrics'
 
 export default {
   ...Misc,
@@ -17,5 +18,6 @@ export default {
   ...Wine,
   ...Proxy,
   ...DownloadManager,
-  ...Extensions
+  ...Extensions,
+  ...Metrics
 }

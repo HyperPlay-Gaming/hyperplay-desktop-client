@@ -105,6 +105,11 @@ const downloadManagerStore = new TypeCheckedStoreFrontend('downloadManager', {
   name: 'download-manager'
 })
 
+const metricsStore = new TypeCheckedStoreFrontend('metricsStore', {
+  cwd: 'store',
+  name: 'metrics-store'
+})
+
 export {
   configStore,
   gogLibraryStore,
@@ -114,5 +119,6 @@ export {
   timestampStore,
   sideloadLibrary,
   wineDownloaderInfoStore,
-  downloadManagerStore
+  downloadManagerStore,
+  metricsStore
 }
