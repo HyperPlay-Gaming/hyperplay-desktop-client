@@ -219,6 +219,7 @@
     ]
   },
   "devDependencies": {
+    "@electron/notarize": "^1.2.3",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
@@ -241,7 +242,6 @@
     "electron": "21.2.1",
     "electron-builder": "^23.6.0",
     "electron-devtools-installer": "^3.2.0",
-    "electron-notarize": "^1.2.2",
     "eslint": "^8.13.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
