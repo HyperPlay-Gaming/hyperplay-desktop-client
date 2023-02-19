@@ -83,7 +83,10 @@ function App() {
       <TransactionNotification />
       {onboardingStore.isOnboardingOpen && (
         <Onboarding
-          disableOnboarding={() => onboardingStore.closeOnboarding()}
+          disableOnboarding={() => {
+            window.api.trackEvent({ event: 'Onboarding Skipped' })
+            onboardingStore.closeOnboarding()
+          }}
         />
       )}
     </div>

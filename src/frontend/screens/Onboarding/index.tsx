@@ -102,6 +102,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     accounts
   ) => {
     console.log('connected with accounts = ', accounts)
+    window.api.trackEvent({ event: 'Onboarding Completed' })
     setContentParams({
       content: ONBOARDING_CONTENT.SUCCESS
     })
@@ -122,6 +123,10 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   useEffect(() => {
     window.api.trackScreen('Onboarding', { view: content })
   }, [content])
+
+  useEffect(() => {
+    window.api.trackEvent({ event: 'Onboarding Started' })
+  }, [])
 
   useEffect(() => {
     const removeConnectedListener = window.api.handleConnected(handleConnected)

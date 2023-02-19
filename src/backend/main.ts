@@ -1213,6 +1213,11 @@ ipcMain.handle(
       status: 'uninstalling'
     })
 
+    trackEvent({
+      event: 'Game Uninstall Started',
+      properties: { game_name: appName, store_name: runner }
+    })
+
     const game = getGame(appName, runner)
 
     const { title } = game.getGameInfo()
@@ -1223,6 +1228,14 @@ ipcMain.handle(
       await game.uninstall()
       uninstalled = true
     } catch (error) {
+      trackEvent({
+        event: 'Game Uninstall Failed',
+        properties: {
+          game_name: appName,
+          store_name: runner,
+          error: `${error}`
+        }
+      })
       notify({
         title,
         body: i18next.t('notify.uninstalled.error', 'Error uninstalling')
@@ -1252,6 +1265,11 @@ ipcMain.handle(
         removeIfExists(appName.concat('.log'))
         removeIfExists(appName.concat('-lastPlay.log'))
       }
+
+      trackEvent({
+        event: 'Game Uninstall Success',
+        properties: { game_name: appName, store_name: runner }
+      })
 
       notify({ title, body: i18next.t('notify.uninstalled') })
       logInfo('Finished uninstalling', LogPrefix.Backend)
@@ -1782,6 +1800,7 @@ import './utils/ipc_handler'
 import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
+import { trackEvent } from './metrics/metrics'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (
