@@ -300,8 +300,8 @@ export default function GamesSubmenu({
                     onClick={handleEosOverlay}
                   >
                     {eosOverlayEnabled
-                      ? t('submenu.disableEosOverlay', 'Disable EOS Overlay')
-                      : t('submenu.enableEosOverlay', 'Enable EOS Overlay')}
+                      ? t('submenu.disableEosOverlay', 'Disable Epic Overlay')
+                      : t('submenu.enableEosOverlay', 'Enable Epic Overlay')}
                   </button>
                 ))}
             </>
