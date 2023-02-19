@@ -143,7 +143,7 @@ export default function SidebarLinks() {
               active: isActive || location.pathname.includes('store')
             })
           }
-          to="/epicstore"
+          to="/hyperplaystore"
         >
           <>
             <div className="Sidebar__itemIcon">
@@ -154,6 +154,17 @@ export default function SidebarLinks() {
         </NavLink>
         {isStore && (
           <div className="SidebarSubmenu">
+            <NavLink
+              data-testid="store"
+              className={({ isActive }) =>
+                classNames('Sidebar__item', 'SidebarLinks__subItem', {
+                  active: isActive
+                })
+              }
+              to="/hyperplaystore"
+            >
+              <span>{t('hyperplay-store', 'HyperPlay Store')}</span>
+            </NavLink>
             <NavLink
               data-testid="store"
               className={({ isActive }) =>

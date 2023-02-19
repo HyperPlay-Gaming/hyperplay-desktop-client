@@ -304,6 +304,11 @@ if (!gotTheLock) {
     )
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
 
+    const hpStoreSession = session.fromPartition('persist:hyperplaystore')
+    hpStoreSession.setPreloads([
+      path.join(__dirname, 'hyperplay_store_preload.js')
+    ])
+
     let overlayOpen = false
     const openOverlayAccelerator = 'CommandOrControl+Tab'
     globalShortcut.register(openOverlayAccelerator, () => {

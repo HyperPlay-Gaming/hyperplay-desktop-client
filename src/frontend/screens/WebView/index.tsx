@@ -41,6 +41,7 @@ export default function WebView() {
 
   const epicLoginUrl = 'https://legendary.gl/epiclogin'
 
+  const hyperplayStore = `https://www.hyperplay.xyz`
   const epicStore = `https://www.epicgames.com/store/${lang}/`
   const gogStore = `https://gog.com`
   const wikiURL = 'https://github.com/G7DAO/HyperPlay/wiki'
@@ -52,6 +53,7 @@ export default function WebView() {
   const { runner } = useParams() as { runner: Runner }
 
   const urls = {
+    '/hyperplaystore': hyperplayStore,
     '/epicstore': epicStore,
     '/gogstore': gogStore,
     '/wiki': wikiURL,
@@ -171,6 +173,9 @@ export default function WebView() {
     setShowLoginWarningFor(null)
   }
 
+  const partitionForWebview =
+    startUrl === hyperplayStore ? 'persist:hyperplaystore' : 'persist:epicstore'
+
   return (
     <div className="WebView">
       {webviewRef.current && (
@@ -184,7 +189,7 @@ export default function WebView() {
       <webview
         ref={webviewRef}
         className="WebView__webview"
-        partition="persist:epicstore"
+        partition={partitionForWebview}
         src={startUrl}
         allowpopups={trueAsStr}
         useragent="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:70.0) Gecko/20100101 Firefox/70.0"
