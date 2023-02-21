@@ -34,5 +34,5 @@
     "strictPropertyInitialization": true
   },
   "include": ["src"],
-  "exclude": ["vite.config.ts", "**/__tests__/**", "**/__mocks__/**"]
+  "exclude": ["vite.config.ts", "**/__tests__/**", "**/__mocks__/**", "sign"]
 }
