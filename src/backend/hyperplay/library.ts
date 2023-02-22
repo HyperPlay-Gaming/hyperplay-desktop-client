@@ -7,6 +7,7 @@ import { AppPlatforms, HyperPlayRelease } from 'common/types'
 import { isWindows } from 'backend/constants'
 import { spawnAsync } from 'backend/utils'
 import { download } from 'electron-dl'
+import { getAppInfo, removeApp } from 'backend/sideload/games'
 
 export async function downloadGame(
   appName: string,
@@ -89,4 +90,16 @@ async function install(
   } else {
     await spawnAsync('unzip', [dirpath, projectName])
   }
+}
+
+export function uninstall(appName: string, shouldRemovePrefix: boolean) {
+  const appInfo = getAppInfo(appName)
+  if (!appInfo) {
+    return
+  }
+  removeApp({
+    appName,
+    shouldRemovePrefix,
+    deleteFiles: appInfo.install.platform !== 'Browser'
+  })
 }

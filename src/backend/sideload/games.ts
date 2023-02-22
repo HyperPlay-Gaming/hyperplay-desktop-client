@@ -310,10 +310,12 @@ export async function stop(appName: string): Promise<void> {
 type RemoveArgs = {
   appName: string
   shouldRemovePrefix: boolean
+  deleteFiles?: boolean
 }
 export async function removeApp({
   appName,
-  shouldRemovePrefix
+  shouldRemovePrefix,
+  deleteFiles = false
 }: RemoveArgs): Promise<void> {
   sendFrontendMessage('gameStatusUpdate', {
     appName,
@@ -324,7 +326,10 @@ export async function removeApp({
   const old = libraryStore.get('games', [])
   const current = old.filter((a: SideloadGame) => a.app_name !== appName)
 
-  const { title } = getAppInfo(appName)
+  const {
+    title,
+    install: { executable }
+  } = getAppInfo(appName)
   const { winePrefix } = await getAppSettings(appName)
 
   if (shouldRemovePrefix) {
@@ -335,6 +340,11 @@ export async function removeApp({
     }
   }
   libraryStore.set('games', current)
+
+  if (deleteFiles) {
+    rmSync(dirname(executable), { recursive: true })
+  }
+
   notify({ title, body: i18next.t('notify.uninstalled') })
 
   removeAppShortcuts(appName)
