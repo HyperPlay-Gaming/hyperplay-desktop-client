@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.3-alpha.1",
+  "version": "0.0.3-alpha.2",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -15,8 +15,9 @@
     "email": "hyperplay@hyperplay.gg"
   },
   "build": {
-    "appId": "com.electron.hyperplay",
+    "appId": "gg.hyperplay.HyperPlay",
     "productName": "HyperPlay",
+    "afterSign": "sign/notarize.js",
     "files": [
       "build/**/*",
       "node_modules/**/*",
@@ -55,9 +56,13 @@
     },
     "mac": {
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
-      "target": "dmg",
       "category": "public.app-category.games",
       "icon": "build/app_icon.icns",
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "com.apple.security.cs.allow-jit": true
+      },
       "asarUnpack": [
         "build/bin/darwin/legendary",
         "build/bin/darwin/gogdl"
@@ -136,6 +141,7 @@
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
     "@node-steam/vdf": "^2.2.0",
+    "@rudderstack/rudder-sdk-node": "^2.0.0",
     "@shockpkg/icon-encoder": "^2.1.3",
     "@types/bn.js": "^5.1.1",
     "@types/express": "^4.17.13",
@@ -215,6 +221,7 @@
     ]
   },
   "devDependencies": {
+    "@electron/notarize": "^1.2.3",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",

@@ -18,6 +18,7 @@ import {
   UseDarkTrayIcon,
   WinePrefixesBasePath
 } from '../../components'
+import ParticipateInMetrics from '../../components/ParticipateInMetrics'
 
 export default function GeneralSettings() {
   const { t } = useTranslation()
@@ -37,6 +38,8 @@ export default function GeneralSettings() {
       <EgsSettings />
 
       <CheckUpdatesOnStartup />
+
+      <ParticipateInMetrics />
 
       <AutoUpdateGames />
 

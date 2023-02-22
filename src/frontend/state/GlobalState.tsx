@@ -11,7 +11,8 @@ import {
   WineVersionInfo,
   InstallParams,
   LibraryTopSectionOptions,
-  SideloadGame
+  SideloadGame,
+  MetricsOptInStatus
 } from 'common/types'
 import {
   Category,
@@ -37,6 +38,7 @@ import {
   gogInstalledGamesStore,
   gogLibraryStore,
   libraryStore,
+  metricsStore,
   wineDownloaderInfoStore
 } from '../helpers/electronStores'
 import { sideloadLibrary } from 'frontend/helpers/electronStores'
@@ -98,6 +100,7 @@ interface StateProps {
     gameInfo?: GameInfo | null
   }
   showMetaMaskBrowserSidebarLinks: boolean
+  metricsOptInStatus: MetricsOptInStatus
 }
 
 class GlobalState extends PureComponent<Props> {
@@ -165,7 +168,11 @@ class GlobalState extends PureComponent<Props> {
     dialogModalOptions: { showDialog: false },
     externalLinkDialogOptions: { showDialog: false },
     settingsModalOpen: { value: false, type: 'settings', gameInfo: undefined },
-    showMetaMaskBrowserSidebarLinks: false
+    showMetaMaskBrowserSidebarLinks: false,
+    metricsOptInStatus: metricsStore.get(
+      'metricsOptInStatus',
+      MetricsOptInStatus.undecided
+    ) as MetricsOptInStatus
   }
 
   setLanguage = (newLanguage: string) => {
@@ -668,6 +675,10 @@ class GlobalState extends PureComponent<Props> {
     // listen to custom connectivity-changed event to update state
     window.api.onConnectivityChanged((_, connectivity) => {
       this.setState({ connectivity })
+    })
+
+    window.api.onOptInStatusChange((_, metricsOptInStatus) => {
+      this.setState({ metricsOptInStatus })
     })
 
     // get the current status

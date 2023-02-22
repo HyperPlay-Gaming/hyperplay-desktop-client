@@ -15,7 +15,8 @@ import {
   SideloadGame,
   WineManagerUISettings,
   AppSettings,
-  WikiInfo
+  WikiInfo,
+  MetricsOptInStatus
 } from 'common/types'
 import { GamesDBData, GogInstallInfo, UserData } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
@@ -113,6 +114,9 @@ export interface StoreStructure {
   }
   wikigameinfo: {
     [title: string]: WikiInfo
+  }
+  metricsStore: {
+    metricsOptInStatus: MetricsOptInStatus
   }
 }
 

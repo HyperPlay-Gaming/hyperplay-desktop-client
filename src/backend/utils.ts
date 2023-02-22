@@ -489,7 +489,7 @@ function getGOGdlBin(): { dir: string; bin: string } {
     fixAsarPath(join(publicDir, 'bin', process.platform, 'gogdl'))
   )
 }
-function getFormattedOsName(): string {
+export function getFormattedOsName(): string {
   switch (process.platform) {
     case 'linux':
       return 'Linux'
