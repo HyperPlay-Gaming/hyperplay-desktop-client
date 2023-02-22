@@ -16,7 +16,8 @@ import {
   WineManagerUISettings,
   AppSettings,
   WikiInfo,
-  MetricsOptInStatus
+  MetricsOptInStatus,
+  HyperPlayRelease
 } from 'common/types'
 import { GamesDBData, GogInstallInfo, UserData } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
@@ -117,6 +118,12 @@ export interface StoreStructure {
   }
   metricsStore: {
     metricsOptInStatus: MetricsOptInStatus
+  }
+  hpLibraryStore: {
+    [key: string]: HyperPlayRelease
+  }
+  hpInstalledGamesStore: {
+    [key: string]: InstalledInfo
   }
 }
 

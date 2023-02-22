@@ -522,6 +522,7 @@ export type InstallPlatform =
   | LegendaryInstallPlatform
   | GogInstallPlatform
   | 'Browser'
+  | 'HyperPlay'
 
 export type ConnectivityChangedCallback = (
   event: IpcRendererEvent,
@@ -769,21 +770,33 @@ interface HyperPlayProjectMeta {
   networks: string[]
 }
 
+export type AppPlatforms =
+  | 'windows_amd64'
+  | 'windows_arm64'
+  | 'linux_amd64'
+  | 'linux_arm64'
+  | 'darwin_amd64'
+  | 'darwin_arm64'
+
+type PlatformInfo = {
+  external_url: string
+  name: string
+  sha256: string
+  size: number
+  version: string
+}
+
+export type ValistPlatforms = {
+  [key in AppPlatforms]: PlatformInfo
+}
+
 interface HyperPlayReleaseMeta {
   _metadata_version: string
   path: string
   name: string
   description: string
   external_url: string
-  platforms: {
-    [key: string]: {
-      external_url: string
-      name: string
-      sha256: string
-      size: number
-      version: string
-    }
-  }
+  platforms: ValistPlatforms
 }
 
 export interface HyperPlayRelease {
