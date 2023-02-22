@@ -521,8 +521,8 @@ export type WebviewType = HTMLWebViewElement & ElWebview
 export type InstallPlatform =
   | LegendaryInstallPlatform
   | GogInstallPlatform
+  | AppPlatforms
   | 'Browser'
-  | 'HyperPlay'
 
 export type ConnectivityChangedCallback = (
   event: IpcRendererEvent,
@@ -781,9 +781,7 @@ export type AppPlatforms =
 type PlatformInfo = {
   external_url: string
   name: string
-  sha256: string
-  size: number
-  version: string
+  executable: string
 }
 
 export type ValistPlatforms = {
@@ -797,6 +795,7 @@ interface HyperPlayReleaseMeta {
   description: string
   external_url: string
   platforms: ValistPlatforms
+  image: string
 }
 
 export interface HyperPlayRelease {
