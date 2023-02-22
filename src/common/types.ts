@@ -729,3 +729,75 @@ export enum MetricsOptInStatus {
   optedOut = 'OPTED_OUT',
   undecided = 'UNDECIDED'
 }
+
+// Deals with games from Valist
+
+interface GalleryItem {
+  name: string
+  type: string
+  src: string
+}
+
+interface SystemRequirements {
+  cpu: string
+  gpu: string
+  memory: string
+  disk: string
+  ram: string
+}
+
+interface WineSupport {
+  mac: boolean
+  linux: boolean
+}
+
+interface HyperPlayProjectMeta {
+  image: string
+  main_capsule: string
+  name: string
+  short_description: string
+  description: string
+  external_url: string
+  type: string
+  tags: string[]
+  gallery: GalleryItem[]
+  launch_external: boolean
+  donation_address: string
+  prompt_donation: boolean
+  systemRequirements: SystemRequirements
+  wineSupport: WineSupport
+  networks: string[]
+}
+
+interface HyperPlayReleaseMeta {
+  _metadata_version: string
+  path: string
+  name: string
+  description: string
+  external_url: string
+  platforms: {
+    [key: string]: {
+      external_url: string
+      name: string
+      sha256: string
+      size: number
+      version: string
+    }
+  }
+}
+
+export interface HyperPlayRelease {
+  _id: string
+  accountID: string
+  projectID: string
+  accountName: string
+  projectName: string
+  releaseID: string
+  releaseMetaURI: string
+  releaseName: string
+  status: string
+  timestamp: number
+  projectMetaURI: string
+  projectMeta: HyperPlayProjectMeta
+  releaseMeta: HyperPlayReleaseMeta
+}
