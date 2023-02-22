@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import BrowserExtensionManagerStyles from './index.module.scss'
+import { overlayExternalWalletConnectedMsg } from 'frontend/overlay/constants'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -16,6 +17,7 @@ const BrowserExtensionManager = function () {
   const [showOverlay, setShowOverlay] = useState(false)
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
   const [extensionId, setExtensionId] = useState('')
+  const [showMmPopupPage, setShowMmPopupPage] = useState(false)
 
   const getExtensionId = async () => {
     const extId = await window.api.getExtensionId()
@@ -37,6 +39,10 @@ const BrowserExtensionManager = function () {
     setShowOverlay(show)
   }
 
+  function handleUpdatePopup(e: Electron.IpcRendererEvent, show: boolean) {
+    setShowMmPopupPage(show)
+  }
+
   useEffect(() => {
     getExtensionId()
     const rmHandleUpdateOverlayVisibility =
@@ -49,10 +55,25 @@ const BrowserExtensionManager = function () {
       handleRemoveNotification
     )
 
+    window.api.getConnectedProvider().then((prov) => {
+      if (prov === 'MetaMaskMobile') {
+        setShowMmPopupPage(false)
+      } else if (prov === 'WalletConnect') {
+        setShowMmPopupPage(false)
+      } else {
+        //MetaMaskExtension
+        setShowMmPopupPage(true)
+      }
+    })
+
+    const rmUpdatePopupHandler =
+      window.api.handleUpdatePopupInOverlay(handleUpdatePopup)
+
     return () => {
       rmHandleUpdateOverlayVisibility()
       rmAddNotifHandler()
       rmRemoveNotifHandler()
+      rmUpdatePopupHandler()
     }
   }, [])
 
@@ -61,14 +82,16 @@ const BrowserExtensionManager = function () {
     <>
       {showOverlay ? (
         <div className={BrowserExtensionManagerStyles.mmContainer}>
-          {!showMmNotificationPage ? (
+          {showMmPopupPage && !showMmNotificationPage ? (
             <webview
               nodeintegrationinsubframes="true"
               webpreferences="contextIsolation=true, nodeIntegration=true"
               className={BrowserExtensionManagerStyles.mmPopup}
               src={`chrome-extension://${extensionId}/popup.html`}
             ></webview>
-          ) : null}
+          ) : (
+            <div>{overlayExternalWalletConnectedMsg}</div>
+          )}
 
           {showMmNotificationPage ? (
             <webview

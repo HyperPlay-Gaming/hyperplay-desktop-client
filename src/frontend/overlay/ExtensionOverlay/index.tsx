@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import OverlayStyles from './index.module.scss'
 import './index.css'
+import { overlayExternalWalletConnectedMsg } from 'frontend/overlay/constants'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -16,6 +17,7 @@ declare global {
 const ExtensionOverlay = function () {
   const [extensionId, setExtensionId] = useState('')
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
+  const [showMmPopupPage, setShowMmPopupPage] = useState(false)
 
   const getExtensionId = async () => {
     const extId = await window.api.getExtensionId()
@@ -80,6 +82,10 @@ const ExtensionOverlay = function () {
     }
   }
 
+  function handleUpdatePopup(e: Electron.IpcRendererEvent, show: boolean) {
+    setShowMmPopupPage(show)
+  }
+
   useEffect(() => {
     getExtensionId()
     const rmAddNotifHandler = window.api.handleShowNotificationInWebview(
@@ -91,10 +97,14 @@ const ExtensionOverlay = function () {
     const rmHandleWebviewProxyInput =
       window.api.handleProxyWebViewInput(handleWebviewInput)
 
+    const rmUpdatePopupHandler =
+      window.api.handleUpdatePopupInOverlay(handleUpdatePopup)
+
     return () => {
       rmAddNotifHandler()
       rmRemoveNotifHandler()
       rmHandleWebviewProxyInput()
+      rmUpdatePopupHandler()
     }
   }, [])
 
@@ -105,13 +115,19 @@ const ExtensionOverlay = function () {
         Ctrl + Tab to return to the game
       </div>
       <div className={OverlayStyles.mmPopupContainer}>
-        <webview
-          nodeintegrationinsubframes="true"
-          webpreferences="contextIsolation=true, nodeIntegration=true"
-          className={OverlayStyles.mmPopup}
-          src={`chrome-extension://${extensionId}/popup.html`}
-          id="mmPopupWebview"
-        ></webview>
+        {showMmPopupPage ? (
+          <webview
+            nodeintegrationinsubframes="true"
+            webpreferences="contextIsolation=true, nodeIntegration=true"
+            className={OverlayStyles.mmPopup}
+            src={`chrome-extension://${extensionId}/popup.html`}
+            id="mmPopupWebview"
+          ></webview>
+        ) : (
+          <div className={OverlayStyles.overlayToggleHint}>
+            {overlayExternalWalletConnectedMsg}
+          </div>
+        )}
         {showMmNotificationPage ? (
           <webview
             nodeintegrationinsubframes="true"
