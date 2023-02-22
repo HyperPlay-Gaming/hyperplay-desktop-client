@@ -1,35 +1,11 @@
-import Axios from 'axios'
-import { createWriteStream, existsSync } from 'graceful-fs'
+import { getMainWindow } from './../main_window'
+import { existsSync } from 'graceful-fs'
 
 import { libraryStore } from './electronStore'
 import { AppPlatforms } from 'common/types'
 import { isWindows } from 'backend/constants'
 import { spawnAsync } from 'backend/utils'
-
-async function downloadApp(fileUrl: string, outputLocationPath: string) {
-  const writer = createWriteStream(outputLocationPath)
-
-  return Axios({
-    method: 'get',
-    url: fileUrl,
-    responseType: 'stream'
-  }).then(async (response) => {
-    return new Promise((resolve, reject) => {
-      response.data.pipe(writer)
-      let error: unknown = null
-      writer.on('error', (err) => {
-        error = err
-        writer.close()
-        reject(err)
-      })
-      writer.on('close', () => {
-        if (!error) {
-          resolve(true)
-        }
-      })
-    })
-  })
-}
+import { download } from 'electron-dl'
 
 export async function install(
   appName: string,
@@ -47,17 +23,44 @@ export async function install(
     projectName
   } = appInfo
   const downloadUrl = platforms[platformToInstall].external_url
+  const fileName = platforms[platformToInstall].name
+  const window = getMainWindow()
 
-  await downloadApp(downloadUrl, installPath)
+  if (!window || !downloadUrl) {
+    return
+  }
 
-  if (!existsSync(installPath)) {
+  await download(window, downloadUrl, {
+    directory: installPath,
+    onProgress: (progress) => {
+      window.webContents.send('gameStatusUpdate', {
+        appName,
+        status: 'installing',
+        progress: {
+          percent: progress.percent,
+          folder: installPath
+        }
+      })
+    },
+    onCompleted: async () => {
+      window.webContents.send('gameStatusUpdate', {
+        appName,
+        status: 'done'
+      })
+      await extract(projectName, fileName)
+    }
+  })
+}
+
+async function extract(fileName: string, dirpath: string) {
+  if (!existsSync(dirpath)) {
     return
   }
 
   // extract and remove the zip file on the installPath
   if (isWindows) {
-    await spawnAsync('powershell', ['Expand-Archive', installPath, projectName])
+    await spawnAsync('powershell', ['Expand-Archive', dirpath, fileName])
   } else {
-    await spawnAsync('unzip', [installPath, projectName])
+    await spawnAsync('unzip', [dirpath, fileName])
   }
 }
