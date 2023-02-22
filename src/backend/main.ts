@@ -62,6 +62,7 @@ import {
   getSystemInfo,
   handleExit,
   resetApp,
+  resetMetaMask,
   openUrlOrFile,
   showAboutWindow,
   showItemInFolder,
@@ -766,6 +767,10 @@ ipcMain.on('clearCache', (event) => {
 
 ipcMain.on('resetApp', async () => {
   resetApp()
+})
+
+ipcMain.on('resetMetaMask', async () => {
+  resetMetaMask()
 })
 
 ipcMain.on('createNewWindow', (e, url) => {

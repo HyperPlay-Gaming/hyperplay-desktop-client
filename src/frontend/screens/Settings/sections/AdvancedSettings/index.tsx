@@ -33,7 +33,7 @@ export default function AdvancedSettings() {
     useState(false)
   const eosOverlayAppName = '98bc04bc842e4906993fd6d6644ffb8d'
 
-  const { libraryStatus, platform, refreshLibrary, showResetDialog } =
+  const { libraryStatus, platform, refreshLibrary, showResetDialog, showMetaMaskExtensionResetDialog } =
     useContext(ContextProvider)
   const { t } = useTranslation()
   const isWindows = platform === 'win32'
@@ -337,6 +337,20 @@ export default function AdvancedSettings() {
             </div>
             <span className="button-icon-text">
               {t('settings.reset-hyperplay', 'Reset HyperPlay')}
+            </span>
+          </div>
+        </button>
+        
+        <button
+          className="button is-footer is-danger"
+          onClick={showMetaMaskExtensionResetDialog}
+        >
+          <div className="button-icontext-flex">
+            <div className="button-icon-flex">
+              <DeleteOutline />
+            </div>
+            <span className="button-icon-text">
+              {t('settings.reset-metamask', 'Reset MetaMask Extension')}
             </span>
           </div>
         </button>

@@ -45,6 +45,11 @@ const legendaryConfigPath = isLinux
 const appConfigFolder = join(configFolder, 'hyperplay')
 const configPath = join(appConfigFolder, 'config.json')
 const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
+const localExtensionSettingsPath = join(
+  appConfigFolder,
+  'Local Extension Settings'
+)
+const localStorageSettingsPath = join(appConfigFolder, 'Local Storage')
 const toolsPath = join(appConfigFolder, 'tools')
 const iconsFolder = join(appConfigFolder, 'icons')
 const installPath = join(homedir(), 'Games', 'HyperPlay')
@@ -201,6 +206,8 @@ export {
   appConfigFolder,
   configFolder,
   gamesConfigPath,
+  localStorageSettingsPath,
+  localExtensionSettingsPath,
   githubURL,
   iconsFolder,
   installPath,

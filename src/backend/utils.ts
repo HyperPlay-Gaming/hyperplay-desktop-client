@@ -35,6 +35,8 @@ import {
   GITHUB_API,
   configPath,
   gamesConfigPath,
+  localExtensionSettingsPath,
+  localStorageSettingsPath,
   icon,
   isWindows,
   publicDir,
@@ -435,6 +437,18 @@ async function clearCache() {
 function resetApp() {
   const appConfigFolders = [gamesConfigPath, configPath]
   appConfigFolders.forEach((folder) => {
+    rmSync(folder, { recursive: true, force: true })
+  })
+  // wait a sec to avoid racing conditions
+  setTimeout(() => {
+    app.relaunch()
+    app.quit()
+  }, 1000)
+}
+
+function resetMetaMask() {
+  const mmConfigFolders = [localExtensionSettingsPath, localStorageSettingsPath]
+  mmConfigFolders.forEach((folder) => {
     rmSync(folder, { recursive: true, force: true })
   })
   // wait a sec to avoid racing conditions
@@ -1133,6 +1147,7 @@ export {
   removeSpecialcharacters,
   clearCache,
   resetApp,
+  resetMetaMask,
   getLegendaryBin,
   getGOGdlBin,
   formatEpicStoreUrl,

@@ -11,6 +11,7 @@ import {
 export const clearCache = (showDialog?: boolean) =>
   ipcRenderer.send('clearCache', showDialog)
 export const resetApp = () => ipcRenderer.send('resetApp')
+export const resetMetaMask = () => ipcRenderer.send('resetMetaMask')
 
 export const openWeblate = () => ipcRenderer.send('openWeblate')
 export const changeLanguage = (newLanguage: string) =>

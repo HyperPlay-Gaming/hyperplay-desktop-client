@@ -68,6 +68,7 @@ const initialContext: ContextType = {
   dialogModalOptions: { showDialog: false },
   showDialogModal: () => null,
   showResetDialog: () => null,
+  showMetaMaskExtensionResetDialog: () => null,
   externalLinkDialogOptions: { showDialog: false },
   handleExternalLinkDialog: () => null,
   isSettingsModalOpen: { value: false, type: 'settings' },
