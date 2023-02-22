@@ -11,3 +11,12 @@ export const handleProxyWebViewInput = (
     ipcRenderer.removeListener('proxyWebViewInput', cb)
   }
 }
+
+export const handleInjectionSuccess = (
+  cb: WrapRendererCallback<() => void>
+) => {
+  ipcRenderer.on('injectionSuccess', cb)
+  return () => {
+    ipcRenderer.removeListener('injectionSuccess', cb)
+  }
+}

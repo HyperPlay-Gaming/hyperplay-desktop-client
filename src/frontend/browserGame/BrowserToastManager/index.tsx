@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BrowserToastManagerStyles from './index.module.scss'
 import transactionStore from 'frontend/store/TransactionStore'
 import { TransactionState } from 'frontend/store/types'
@@ -16,6 +16,40 @@ interface BrowserToastManagerProps {
 }
 
 const BrowserToastManager = function (props: BrowserToastManagerProps) {
+  const [showInitialToast, setShowInitialToast] = useState(true)
+
+  const handleInjectionSuccess = ()=>{
+    setShowInitialToast(true)
+
+    setTimeout(() => {
+      setShowInitialToast(false)
+    }, 6000);
+  }
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setShowInitialToast(false)
+    }, 6000);
+
+    const rmHandleInjectionSuccess = window.api.handleInjectionSuccess(handleInjectionSuccess)
+
+    return ()=>{
+      rmHandleInjectionSuccess()
+    }
+  }, [])
+
+  if (showInitialToast){
+    return (<div className={BrowserToastManagerStyles.txnToast}>
+      <TransactionToast.TransactionToast
+        status={'success'}
+        title={'HyperPlay Overlay'}
+        subtext={'HyperPlay Overlay is ready! Press Ctrl+Tab to show or hide it.'}
+        onClick={() => setShowInitialToast(false)}
+        showCloseButton={props.showCloseButton}
+      />
+    </div>)
+  }
+
   const item = transactionStore.latestTxn
   if (item === null || !item.isOpen) return <></>
 

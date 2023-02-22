@@ -406,6 +406,10 @@ class Application {
         }
       }
     }
+
+    for (const win of BrowserWindow.getAllWindows()) {
+      win.webContents.send('injectionSuccess')
+    }
   }
 
   public toggleIntercept() {
