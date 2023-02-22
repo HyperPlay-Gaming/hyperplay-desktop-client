@@ -585,6 +585,9 @@ export interface SideloadGame {
   canRunOffline: boolean
   browserUrl: string
   web3: Web3Features
+  description?: string
+  systemRequirements?: SystemRequirements
+  wineSupport?: WineSupport
 }
 
 export interface SaveSyncArgs {

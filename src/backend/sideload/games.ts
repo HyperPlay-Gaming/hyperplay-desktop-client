@@ -58,7 +58,11 @@ export function addNewApp({
   art_cover,
   art_square,
   web3,
-  browserUrl
+  browserUrl,
+  is_installed = true,
+  description,
+  wineSupport,
+  systemRequirements
 }: SideloadGame): void {
   const game: SideloadGame = {
     runner: 'sideload',
@@ -70,11 +74,14 @@ export function addNewApp({
     },
     folder_name: dirname(executable),
     art_cover,
-    is_installed: true,
+    is_installed: is_installed !== undefined ? is_installed : true,
     art_square,
     canRunOffline: !browserUrl,
     browserUrl,
-    web3
+    web3,
+    description,
+    wineSupport,
+    systemRequirements
   }
 
   if (isMac && executable.endsWith('.app')) {
