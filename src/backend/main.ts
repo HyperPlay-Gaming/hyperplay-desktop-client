@@ -313,14 +313,19 @@ if (!gotTheLock) {
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
 
     let overlayOpen = false
-    const openOverlayAccelerator = 'Alt+X'
-    globalShortcut.register(openOverlayAccelerator, () => {
+    const openOverlay = () => {
       overlayOpen = !overlayOpen
       for (const win of BrowserWindow.getAllWindows()) {
         win.webContents.send('updateOverlayVisibility', overlayOpen)
       }
       OverlayApp.toggleIntercept()
-    })
+    }
+
+    // keyboards with alt and no option key can be used with mac so register both
+    const openOverlayAccelerator = 'Alt+X'
+    globalShortcut.register(openOverlayAccelerator, openOverlay)
+    const openOverlayAcceleratorMac = 'Option+X'
+    globalShortcut.register(openOverlayAcceleratorMac, openOverlay)
 
     initExtension()
 
