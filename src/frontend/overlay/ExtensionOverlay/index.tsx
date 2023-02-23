@@ -115,10 +115,11 @@ const ExtensionOverlay = function () {
         Ctrl + Tab to return to the game
       </div>
       <div className={OverlayStyles.mmPopupContainer}>
-          {!showMmPopupPage ? 
+        {!showMmPopupPage ? (
           <div className={OverlayStyles.overlayToggleHint}>
             {overlayExternalWalletConnectedMsg}
-          </div> : null}
+          </div>
+        ) : null}
         {showMmPopupPage && !showMmNotificationPage ? (
           <webview
             nodeintegrationinsubframes="true"
