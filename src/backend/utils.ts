@@ -70,7 +70,6 @@ import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { validWine } from './launcher'
-// import store from 'backend/hyperplay-extension-helper/store'
 
 const execAsync = promisify(exec)
 
