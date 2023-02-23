@@ -13,7 +13,6 @@ try {
 
 import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
-import * as ExtIpcHandler from '../hyperplay-extension-helper/ipcHandlers/index'
 const buildDir = resolve(__dirname, '../../build')
 
 enum AppWindows {
@@ -364,7 +363,6 @@ class Application {
     option: Electron.BrowserWindowConstructorOptions
   ) {
     const window = new BrowserWindow(option)
-    ExtIpcHandler.initOverlayWindow(window)
     this.windows.set(name, window)
     window.on('closed', () => {
       this.windows.delete(name)

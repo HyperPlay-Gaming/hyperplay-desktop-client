@@ -60,41 +60,39 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     })
   }
 
-  async function handleMmExtensionProviderClicked(dbPath?: string | null) {
-    if (dbPath === null) {
-      window.api.createNewMetaMaskWallet()
-      return
-    }
-    const metadata = await window.api.getExtensionMetadata()
+  async function connectMetaMaskExtension(){
+    setShowMetaMaskBrowserSidebarLinks(true)
+    await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
+    props.disableOnboarding()
+  }
+
+  async function handleMmExtensionProviderClicked() {
+    const metamaskIsInitialized = await window.api.isExtensionInitialized()
     const importOptions = await window.api.getMetaMaskImportOptions()
 
-    if (
-      !metadata.hasWallet &&
-      !metadata.isInitialized &&
-      (!importOptions || dbPath === null || dbPath)
-    ) {
+    if (metamaskIsInitialized) {
+      connectMetaMaskExtension()
+    }
+    else{
+      setContentParams({
+        content: ONBOARDING_CONTENT.IMPORT,
+        mmImportPaths: importOptions
+      })
+    }
+  }
+
+  async function handleImportMmExtensionClicked(dbPath?: string | null){
+    if (dbPath === null) {
+      window.api.createNewMetaMaskWallet()
+    }
+    else{
       const success = await window.api.importMetaMask(dbPath)
-      if (!success) return
-      setShowMetaMaskBrowserSidebarLinks(true)
-      await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
-
-      props.disableOnboarding()
-
-      return
+      if (!success) {
+        console.error('There was a problem importing MetaMask!')
+        return
+      }
+      connectMetaMaskExtension()
     }
-
-    if (metadata.isInitialized && metadata.hasWallet) {
-      setShowMetaMaskBrowserSidebarLinks(true)
-      await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
-
-      props.disableOnboarding()
-      return
-    }
-
-    setContentParams({
-      content: ONBOARDING_CONTENT.IMPORT,
-      mmImportPaths: importOptions
-    })
   }
 
   const handleConnected: WrapRendererCallback<WalletConnectedType> = (
@@ -143,29 +141,32 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     Reducer<OnboardingModalConfig, Partial<OnboardingModalConfig>>
   >((state, newState) => ({ ...state, ...newState }), onboardingParamsInit)
 
+  function getWelcomeElement(){
+    
+    return (<Welcome
+    setOnboardingModalParams={setOnboardingParams}
+    disableOnboarding={props.disableOnboarding}
+    handleProviderClicked={async (prov: PROVIDERS) =>
+      handleProviderClicked(prov)
+    }
+    downloadMetaMaskClicked={() =>
+      setContentParams({
+        content: ONBOARDING_CONTENT.DOWNLOAD
+      })
+    }
+    handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
+  />)
+  }
+
   function renderContent(param: ONBOARDING_CONTENT) {
     switch (param) {
       case ONBOARDING_CONTENT.WELCOME:
-        return (
-          <Welcome
-            setOnboardingModalParams={setOnboardingParams}
-            disableOnboarding={props.disableOnboarding}
-            handleProviderClicked={async (prov: PROVIDERS) =>
-              handleProviderClicked(prov)
-            }
-            downloadMetaMaskClicked={() =>
-              setContentParams({
-                content: ONBOARDING_CONTENT.DOWNLOAD
-              })
-            }
-            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
-          />
-        )
+        return getWelcomeElement()
       case ONBOARDING_CONTENT.IMPORT:
         return (
           <ImportMetaMask
             importOptions={contentParams.mmImportPaths!}
-            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
+            handleImportMmExtensionClicked={handleImportMmExtensionClicked}
             setOnboardingModalParams={setOnboardingParams}
             disableOnboarding={props.disableOnboarding}
           />
@@ -210,21 +211,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
           ></Download>
         )
       default:
-        return (
-          <Welcome
-            setOnboardingModalParams={setOnboardingParams}
-            disableOnboarding={props.disableOnboarding}
-            handleProviderClicked={async (prov: PROVIDERS) =>
-              handleProviderClicked(prov)
-            }
-            downloadMetaMaskClicked={() =>
-              setContentParams({
-                content: ONBOARDING_CONTENT.DOWNLOAD
-              })
-            }
-            handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
-          />
-        )
+        return getWelcomeElement()
     }
   }
   return (

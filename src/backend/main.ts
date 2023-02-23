@@ -1,4 +1,4 @@
-import { setExtensionMetadata } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
+import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -323,7 +323,7 @@ if (!gotTheLock) {
       OverlayApp.toggleIntercept()
     })
 
-    setExtensionMetadata()
+    initExtension()
 
     initOnlineMonitor()
 
