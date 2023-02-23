@@ -60,7 +60,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     })
   }
 
-  async function connectMetaMaskExtension(){
+  async function connectMetaMaskExtension() {
     setShowMetaMaskBrowserSidebarLinks(true)
     await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
     props.disableOnboarding()
@@ -72,8 +72,7 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
 
     if (metamaskIsInitialized) {
       connectMetaMaskExtension()
-    }
-    else{
+    } else {
       setContentParams({
         content: ONBOARDING_CONTENT.IMPORT,
         mmImportPaths: importOptions
@@ -81,11 +80,10 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     }
   }
 
-  async function handleImportMmExtensionClicked(dbPath?: string | null){
+  async function handleImportMmExtensionClicked(dbPath?: string | null) {
     if (dbPath === null) {
       window.api.createNewMetaMaskWallet()
-    }
-    else{
+    } else {
       const success = await window.api.importMetaMask(dbPath)
       if (!success) {
         console.error('There was a problem importing MetaMask!')
@@ -141,21 +139,22 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     Reducer<OnboardingModalConfig, Partial<OnboardingModalConfig>>
   >((state, newState) => ({ ...state, ...newState }), onboardingParamsInit)
 
-  function getWelcomeElement(){
-    
-    return (<Welcome
-    setOnboardingModalParams={setOnboardingParams}
-    disableOnboarding={props.disableOnboarding}
-    handleProviderClicked={async (prov: PROVIDERS) =>
-      handleProviderClicked(prov)
-    }
-    downloadMetaMaskClicked={() =>
-      setContentParams({
-        content: ONBOARDING_CONTENT.DOWNLOAD
-      })
-    }
-    handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
-  />)
+  function getWelcomeElement() {
+    return (
+      <Welcome
+        setOnboardingModalParams={setOnboardingParams}
+        disableOnboarding={props.disableOnboarding}
+        handleProviderClicked={async (prov: PROVIDERS) =>
+          handleProviderClicked(prov)
+        }
+        downloadMetaMaskClicked={() =>
+          setContentParams({
+            content: ONBOARDING_CONTENT.DOWNLOAD
+          })
+        }
+        handleMmExtensionProviderClicked={handleMmExtensionProviderClicked}
+      />
+    )
   }
 
   function renderContent(param: ONBOARDING_CONTENT) {
