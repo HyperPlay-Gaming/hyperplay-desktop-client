@@ -109,14 +109,15 @@ const ExtensionOverlay = function () {
     }
   }, [])
 
-  const toggleHint = t('hyperplayOverlay.desktopHotkeyHint', 'Alt + X to return to the game')
+  const toggleHint = t(
+    'hyperplayOverlay.desktopHotkeyHint',
+    'Alt + X to return to the game'
+  )
 
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={OverlayStyles.overlayContainer}>
-      <div className={OverlayStyles.overlayToggleHint}>
-        {toggleHint}
-      </div>
+      <div className={OverlayStyles.overlayToggleHint}>{toggleHint}</div>
       <div className={OverlayStyles.mmPopupContainer}>
         {!showMmPopupPage ? (
           <div className={OverlayStyles.overlayToggleHint}>

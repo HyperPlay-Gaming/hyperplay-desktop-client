@@ -47,9 +47,10 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
         <TransactionToast.TransactionToast
           status={'success'}
           title={'HyperPlay Overlay'}
-          subtext={
-            t('hyperplayOverlay.greeting', 'HyperPlay Overlay is ready! Press Alt + X to show or hide it.')
-          }
+          subtext={t(
+            'hyperplayOverlay.greeting',
+            'HyperPlay Overlay is ready! Press Alt + X to show or hide it.'
+          )}
           onClick={() => setShowInitialToast(false)}
           showCloseButton={props.showCloseButton}
         />
