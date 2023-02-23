@@ -166,6 +166,11 @@ const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
 
 let mainWindow: BrowserWindow
+let ignoreExitToTray = false
+
+ipcMain.on('ignoreExitToTray', () => {
+  ignoreExitToTray = true
+})
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
@@ -212,7 +217,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
     const { exitToTray } = GlobalConfig.get().getSettings()
 
-    if (exitToTray) {
+    if (!ignoreExitToTray && exitToTray) {
       logInfo('Exitting to tray instead of quitting', LogPrefix.Backend)
       return mainWindow.hide()
     }

@@ -62,6 +62,7 @@ interface HyperPlaySyncIPCFunctions {
   createNewMetaMaskWallet: () => void
   enableOnEvents: (topic: string) => void
   resetMetaMask: () => void
+  ignoreExitToTray: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
