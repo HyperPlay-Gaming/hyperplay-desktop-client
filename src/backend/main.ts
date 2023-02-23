@@ -313,7 +313,7 @@ if (!gotTheLock) {
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
 
     let overlayOpen = false
-    const openOverlayAccelerator = 'CommandOrControl+Tab'
+    const openOverlayAccelerator = 'Alt+X'
     globalShortcut.register(openOverlayAccelerator, () => {
       overlayOpen = !overlayOpen
       for (const win of BrowserWindow.getAllWindows()) {
