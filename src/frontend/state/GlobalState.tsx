@@ -309,7 +309,7 @@ class GlobalState extends PureComponent<Props> {
     })
   }).bind(this)
 
-  showMetaMaskExtensionResetDialog = (()=>{
+  showMetaMaskExtensionResetDialog = (() => {
     this.handleShowDialogModal({
       title: t('box.reset-metamask.question.title', 'Reset MetaMask'),
       message: t(
@@ -790,7 +790,8 @@ class GlobalState extends PureComponent<Props> {
           setIsSettingsModalOpen: this.handleSettingsModalOpen,
           setShowMetaMaskBrowserSidebarLinks:
             this.setShowMetaMaskBrowserSidebarLinks,
-          showMetaMaskExtensionResetDialog: this.showMetaMaskExtensionResetDialog
+          showMetaMaskExtensionResetDialog:
+            this.showMetaMaskExtensionResetDialog
         }}
       >
         {this.props.children}

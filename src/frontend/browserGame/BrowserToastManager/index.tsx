@@ -18,36 +18,42 @@ interface BrowserToastManagerProps {
 const BrowserToastManager = function (props: BrowserToastManagerProps) {
   const [showInitialToast, setShowInitialToast] = useState(true)
 
-  const handleInjectionSuccess = ()=>{
+  const handleInjectionSuccess = () => {
     setShowInitialToast(true)
 
     setTimeout(() => {
       setShowInitialToast(false)
-    }, 6000);
+    }, 6000)
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     setTimeout(() => {
       setShowInitialToast(false)
-    }, 6000);
+    }, 6000)
 
-    const rmHandleInjectionSuccess = window.api.handleInjectionSuccess(handleInjectionSuccess)
+    const rmHandleInjectionSuccess = window.api.handleInjectionSuccess(
+      handleInjectionSuccess
+    )
 
-    return ()=>{
+    return () => {
       rmHandleInjectionSuccess()
     }
   }, [])
 
-  if (showInitialToast){
-    return (<div className={BrowserToastManagerStyles.txnToast}>
-      <TransactionToast.TransactionToast
-        status={'success'}
-        title={'HyperPlay Overlay'}
-        subtext={'HyperPlay Overlay is ready! Press Ctrl+Tab to show or hide it.'}
-        onClick={() => setShowInitialToast(false)}
-        showCloseButton={props.showCloseButton}
-      />
-    </div>)
+  if (showInitialToast) {
+    return (
+      <div className={BrowserToastManagerStyles.txnToast}>
+        <TransactionToast.TransactionToast
+          status={'success'}
+          title={'HyperPlay Overlay'}
+          subtext={
+            'HyperPlay Overlay is ready! Press Ctrl+Tab to show or hide it.'
+          }
+          onClick={() => setShowInitialToast(false)}
+          showCloseButton={props.showCloseButton}
+        />
+      </div>
+    )
   }
 
   const item = transactionStore.latestTxn

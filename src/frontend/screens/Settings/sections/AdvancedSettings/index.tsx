@@ -33,8 +33,13 @@ export default function AdvancedSettings() {
     useState(false)
   const eosOverlayAppName = '98bc04bc842e4906993fd6d6644ffb8d'
 
-  const { libraryStatus, platform, refreshLibrary, showResetDialog, showMetaMaskExtensionResetDialog } =
-    useContext(ContextProvider)
+  const {
+    libraryStatus,
+    platform,
+    refreshLibrary,
+    showResetDialog,
+    showMetaMaskExtensionResetDialog
+  } = useContext(ContextProvider)
   const { t } = useTranslation()
   const isWindows = platform === 'win32'
 
@@ -340,7 +345,7 @@ export default function AdvancedSettings() {
             </span>
           </div>
         </button>
-        
+
         <button
           className="button is-footer is-danger"
           onClick={showMetaMaskExtensionResetDialog}
