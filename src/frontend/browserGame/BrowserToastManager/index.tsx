@@ -10,6 +10,7 @@ import {
   TxnStateToStatusMap
 } from 'frontend/screens/TransactionNotification/constants'
 import { observer } from 'mobx-react-lite'
+import { t } from 'i18next'
 
 interface BrowserToastManagerProps {
   showCloseButton?: boolean
@@ -47,7 +48,7 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
           status={'success'}
           title={'HyperPlay Overlay'}
           subtext={
-            'HyperPlay Overlay is ready! Press Alt+X to show or hide it.'
+            t('hyperplayOverlay.greeting', 'HyperPlay Overlay is ready! Press Alt + X to show or hide it.')
           }
           onClick={() => setShowInitialToast(false)}
           showCloseButton={props.showCloseButton}

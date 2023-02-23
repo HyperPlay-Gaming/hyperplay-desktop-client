@@ -269,6 +269,42 @@
             "part2": "For other places, use a symbolic link to one of these folders"
         }
     },
+    "hyperplayOverlay": {
+        "greeting": "HyperPlay Overlay is ready! Press Alt or Option + X to show or hide it.",
+        "signatureRequest": {
+            "INITIATED": "Signature request pending",
+            "FAILED": "Signature interrupted",
+            "CONFIRMED": "Signature submitted"
+        },
+        "chainRequest": {
+            "INITIATED": "Custom network request",
+            "FAILED": "Custom network canceled",
+            "CONFIRMED": "Custom network added"
+        },
+        "description": {
+            "INITIATED": "A wallet confirmation is pending in your mobile wallet",
+            "PENDING": "Waiting for blockchain confirmation. We'll let you know when it's confirmed",
+            "FAILED": "The transaction was canceled or not submitted, please try again",
+            "CONFIRMED": "The transaction was successfully confirmed!"
+        },
+        "txnRequest": {
+            "INITIATED": "Transaction request pending",
+            "PENDING": "Transaction submitted",
+            "FAILED": "Transaction interrupted",
+            "CONFIRMED": "Transaction confirmed"
+        },
+        "walletWatch": {
+            "INITIATED": "Add custom token request pending",
+            "FAILED": "Custom token request canceled",
+            "CONFIRMED": "Custom token added"
+        },
+        "extensionNotification": {
+            "TITLE": "Transaction requested",
+            "DESCRIPTION": "Press Alt or Option + X to see this transaction",
+            "STATUS": "pending"
+        },
+        "desktopHotkeyHint": "Press Alt or Option + X to return to the game"
+    },
     "info": {
         "hyperplay": {
             "beta": "Beta",

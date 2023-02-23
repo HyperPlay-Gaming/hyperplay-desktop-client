@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import OverlayStyles from './index.module.scss'
 import './index.css'
 import { overlayExternalWalletConnectedMsg } from 'frontend/overlay/constants'
+import { t } from 'i18next'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -108,11 +109,13 @@ const ExtensionOverlay = function () {
     }
   }, [])
 
+  const toggleHint = t('hyperplayOverlay.desktopHotkeyHint', 'Alt + X to return to the game')
+
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={OverlayStyles.overlayContainer}>
       <div className={OverlayStyles.overlayToggleHint}>
-        Ctrl + Tab to return to the game
+        {toggleHint}
       </div>
       <div className={OverlayStyles.mmPopupContainer}>
         {!showMmPopupPage ? (
