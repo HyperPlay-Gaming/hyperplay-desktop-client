@@ -1,4 +1,4 @@
-import { setExtensionMetadata } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
+import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -62,7 +62,6 @@ import {
   getSystemInfo,
   handleExit,
   resetApp,
-  resetMetaMask,
   openUrlOrFile,
   showAboutWindow,
   showItemInFolder,
@@ -323,7 +322,7 @@ if (!gotTheLock) {
       OverlayApp.toggleIntercept()
     })
 
-    setExtensionMetadata()
+    initExtension()
 
     initOnlineMonitor()
 
@@ -772,10 +771,6 @@ ipcMain.on('clearCache', (event) => {
 
 ipcMain.on('resetApp', async () => {
   resetApp()
-})
-
-ipcMain.on('resetMetaMask', async () => {
-  resetMetaMask()
 })
 
 ipcMain.on('createNewWindow', (e, url) => {

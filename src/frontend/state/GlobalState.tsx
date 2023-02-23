@@ -309,20 +309,6 @@ class GlobalState extends PureComponent<Props> {
     })
   }).bind(this)
 
-  showMetaMaskExtensionResetDialog = (() => {
-    this.handleShowDialogModal({
-      title: t('box.reset-metamask.question.title', 'Reset MetaMask'),
-      message: t(
-        'box.reset-metamask.question.message',
-        'Are you sure you want to reset MetaMask?'
-      ),
-      buttons: [
-        { text: t('box.yes'), onClick: window.api.resetMetaMask },
-        { text: t('box.no') }
-      ]
-    })
-  }).bind(this)
-
   handleExternalLinkDialog = (value: ExternalLinkDialogOptions) => {
     this.setState({ externalLinkDialogOptions: value })
   }
@@ -789,9 +775,7 @@ class GlobalState extends PureComponent<Props> {
           isSettingsModalOpen: this.state.settingsModalOpen,
           setIsSettingsModalOpen: this.handleSettingsModalOpen,
           setShowMetaMaskBrowserSidebarLinks:
-            this.setShowMetaMaskBrowserSidebarLinks,
-          showMetaMaskExtensionResetDialog:
-            this.showMetaMaskExtensionResetDialog
+            this.setShowMetaMaskBrowserSidebarLinks
         }}
       >
         {this.props.children}
