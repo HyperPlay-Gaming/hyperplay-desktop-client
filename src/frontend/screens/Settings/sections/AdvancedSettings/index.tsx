@@ -37,8 +37,7 @@ export default function AdvancedSettings() {
     libraryStatus,
     platform,
     refreshLibrary,
-    showResetDialog,
-    showMetaMaskExtensionResetDialog
+    showResetDialog
   } = useContext(ContextProvider)
   const { t } = useTranslation()
   const isWindows = platform === 'win32'
@@ -342,20 +341,6 @@ export default function AdvancedSettings() {
             </div>
             <span className="button-icon-text">
               {t('settings.reset-hyperplay', 'Reset HyperPlay')}
-            </span>
-          </div>
-        </button>
-
-        <button
-          className="button is-footer is-danger"
-          onClick={showMetaMaskExtensionResetDialog}
-        >
-          <div className="button-icontext-flex">
-            <div className="button-icon-flex">
-              <DeleteOutline />
-            </div>
-            <span className="button-icon-text">
-              {t('settings.reset-metamask', 'Reset MetaMask Extension')}
             </span>
           </div>
         </button>

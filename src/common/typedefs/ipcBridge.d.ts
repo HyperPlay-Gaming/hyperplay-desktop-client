@@ -60,7 +60,6 @@ interface HyperPlaySyncIPCFunctions {
   reloadApp: () => void
   createNewMetaMaskWallet: () => void
   enableOnEvents: (topic: string) => void
-  resetMetaMask: () => void
   ignoreExitToTray: () => void
 }
 

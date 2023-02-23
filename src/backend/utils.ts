@@ -42,8 +42,6 @@ import {
   GITHUB_API,
   configPath,
   gamesConfigPath,
-  localExtensionSettingsPath,
-  localStorageSettingsPath,
   icon,
   isWindows,
   publicDir,
@@ -72,6 +70,7 @@ import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { validWine } from './launcher'
+// import store from 'backend/hyperplay-extension-helper/store'
 
 const execAsync = promisify(exec)
 
@@ -444,19 +443,6 @@ async function clearCache() {
 function resetApp() {
   const appConfigFolders = [gamesConfigPath, configPath]
   appConfigFolders.forEach((folder) => {
-    rmSync(folder, { recursive: true, force: true })
-  })
-  // wait a sec to avoid racing conditions
-  setTimeout(() => {
-    ipcMain.emit('ignoreExitToTray')
-    app.relaunch()
-    app.quit()
-  }, 1000)
-}
-
-function resetMetaMask() {
-  const mmConfigFolders = [localExtensionSettingsPath, localStorageSettingsPath]
-  mmConfigFolders.forEach((folder) => {
     rmSync(folder, { recursive: true, force: true })
   })
   // wait a sec to avoid racing conditions
@@ -1156,7 +1142,6 @@ export {
   removeSpecialcharacters,
   clearCache,
   resetApp,
-  resetMetaMask,
   getLegendaryBin,
   getGOGdlBin,
   formatEpicStoreUrl,
