@@ -115,7 +115,11 @@ const ExtensionOverlay = function () {
         Ctrl + Tab to return to the game
       </div>
       <div className={OverlayStyles.mmPopupContainer}>
-        {showMmPopupPage ? (
+          {!showMmPopupPage ? 
+          <div className={OverlayStyles.overlayToggleHint}>
+            {overlayExternalWalletConnectedMsg}
+          </div> : null}
+        {showMmPopupPage && !showMmNotificationPage ? (
           <webview
             nodeintegrationinsubframes="true"
             webpreferences="contextIsolation=true, nodeIntegration=true"
@@ -123,11 +127,7 @@ const ExtensionOverlay = function () {
             src={`chrome-extension://${extensionId}/popup.html`}
             id="mmPopupWebview"
           ></webview>
-        ) : (
-          <div className={OverlayStyles.overlayToggleHint}>
-            {overlayExternalWalletConnectedMsg}
-          </div>
-        )}
+        ) : null}
         {showMmNotificationPage ? (
           <webview
             nodeintegrationinsubframes="true"

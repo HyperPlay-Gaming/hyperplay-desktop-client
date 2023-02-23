@@ -79,6 +79,7 @@ const BrowserExtensionManager = function () {
     <>
       {showOverlay ? (
         <div className={BrowserExtensionManagerStyles.mmContainer}>
+          {!showMmPopupPage ? <div className={BrowserExtensionManagerStyles.overlayToggleHint}>{overlayExternalWalletConnectedMsg}</div> : null}
           {showMmPopupPage && !showMmNotificationPage ? (
             <webview
               nodeintegrationinsubframes="true"
@@ -86,9 +87,8 @@ const BrowserExtensionManager = function () {
               className={BrowserExtensionManagerStyles.mmPopup}
               src={`chrome-extension://${extensionId}/popup.html`}
             ></webview>
-          ) : (
-            <div>{overlayExternalWalletConnectedMsg}</div>
-          )}
+          ) : 
+            null}
 
           {showMmNotificationPage ? (
             <webview
