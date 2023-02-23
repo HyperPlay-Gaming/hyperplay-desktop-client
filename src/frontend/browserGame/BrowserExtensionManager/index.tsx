@@ -56,14 +56,11 @@ const BrowserExtensionManager = function () {
     )
 
     window.api.getConnectedProvider().then((prov) => {
-      if (prov === 'MetaMaskMobile') {
-        setShowMmPopupPage(false)
-      } else if (prov === 'WalletConnect') {
-        setShowMmPopupPage(false)
-      } else {
-        //MetaMaskExtension
-        setShowMmPopupPage(true)
+      const providersWithoutPopup = ['MetaMaskMobile', 'WalletConnect']
+      if (providersWithoutPopup.includes(prov)) {
+        return setShowMmPopupPage(false)
       }
+      return setShowMmPopupPage(true)
     })
 
     const rmUpdatePopupHandler =
