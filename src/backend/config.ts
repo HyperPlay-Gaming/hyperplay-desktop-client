@@ -630,7 +630,7 @@ class GlobalConfigV0 extends GlobalConfig {
     const config = this.getSettings()
     config[key] = value
     this.config = config
-    logInfo(`Heroic: Setting ${key} to ${JSON.stringify(value)}`)
+    logInfo(`HyperPlay: Setting ${key} to ${JSON.stringify(value)}`)
     return this.flush()
   }
 

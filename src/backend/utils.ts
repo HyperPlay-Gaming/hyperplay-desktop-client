@@ -812,7 +812,7 @@ const getCurrentChangelog = async (): Promise<Release | null> => {
     return release as Release
   } catch (error) {
     logError(
-      ['Error when checking for current Heroic changelog'],
+      ['Error when checking for current HyperPlay changelog'],
       LogPrefix.Backend
     )
     return null

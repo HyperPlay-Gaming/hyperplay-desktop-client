@@ -22,7 +22,7 @@ const DefaultSteamPath = () => {
     <InfoBox text="infobox.help">
       {t(
         'help.steam_path.info',
-        'This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam.'
+        'This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam.'
       )}
     </InfoBox>
   )

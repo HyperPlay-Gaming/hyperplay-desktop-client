@@ -90,7 +90,7 @@ function getUniqueKey(sdl: SelectiveDownload) {
 }
 
 const userHome = configStore.get('userHome', '')
-const { defaultInstallPath = `${userHome}/Games/Heroic` } = {
+const { defaultInstallPath = `${userHome}/Games/HyperPlay` } = {
   ...configStore.get_nodefault('settings')
 }
 
