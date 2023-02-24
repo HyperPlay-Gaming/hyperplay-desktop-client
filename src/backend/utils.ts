@@ -16,7 +16,14 @@ import {
   SideloadGame
 } from 'common/types'
 import * as axios from 'axios'
-import { app, dialog, shell, Notification, BrowserWindow } from 'electron'
+import {
+  app,
+  dialog,
+  shell,
+  Notification,
+  BrowserWindow,
+  ipcMain
+} from 'electron'
 import {
   exec,
   ExecException,
@@ -439,6 +446,7 @@ function resetApp() {
   })
   // wait a sec to avoid racing conditions
   setTimeout(() => {
+    ipcMain.emit('ignoreExitToTray')
     app.relaunch()
     app.quit()
   }, 1000)

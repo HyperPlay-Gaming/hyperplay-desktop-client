@@ -11,14 +11,14 @@ import ActionButton from '../components/actionButton'
 interface ImportProps {
   importOptions: MetaMaskImportOptions
   setOnboardingModalParams: React.Dispatch<Partial<OnboardingModalConfig>>
-  handleMmExtensionProviderClicked: (dbPath?: null | string) => Promise<void>
+  handleImportMmExtensionClicked: (dbPath?: null | string) => Promise<void>
   disableOnboarding: () => void
 }
 
 const ImportMetaMask = ({
   setOnboardingModalParams,
   importOptions,
-  handleMmExtensionProviderClicked
+  handleImportMmExtensionClicked
 }: ImportProps) => {
   const [err, setError] = useState('')
 
@@ -28,7 +28,7 @@ const ImportMetaMask = ({
 
   const getErrorMessage = (code: string) => {
     if (code === 'LEVEL_DATABASE_NOT_OPEN') {
-      return 'Please close out of your browser and then relaunch HyperPlay to import MetaMask into HyperPlay'
+      return 'Please close out of your browser and then try to import MetaMask into HyperPlay again'
     }
     return 'There was an error during wallet import'
   }
@@ -56,7 +56,7 @@ const ImportMetaMask = ({
           {Object.keys(importOptions).map((key) => (
             <ImportOption
               onClick={async () =>
-                handleMmExtensionProviderClicked(importOptions[key])
+                handleImportMmExtensionClicked(importOptions[key])
               }
               title={key as ImportableBrowsers}
               key={key}
@@ -65,7 +65,7 @@ const ImportMetaMask = ({
         </div>
         {err !== '' ? <div>{err}</div> : null}
         <ActionButton
-          onClick={async () => handleMmExtensionProviderClicked(null)}
+          onClick={async () => handleImportMmExtensionClicked(null)}
         >
           Create New Wallet
         </ActionButton>

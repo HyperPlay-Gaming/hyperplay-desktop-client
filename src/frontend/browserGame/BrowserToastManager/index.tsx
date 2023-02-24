@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import BrowserToastManagerStyles from './index.module.scss'
 import transactionStore from 'frontend/store/TransactionStore'
 import { TransactionState } from 'frontend/store/types'
@@ -10,8 +10,54 @@ import {
   TxnStateToStatusMap
 } from 'frontend/screens/TransactionNotification/constants'
 import { observer } from 'mobx-react-lite'
+import { t } from 'i18next'
 
-const BrowserToastManager = function () {
+interface BrowserToastManagerProps {
+  showCloseButton?: boolean
+}
+
+const BrowserToastManager = function (props: BrowserToastManagerProps) {
+  const [showInitialToast, setShowInitialToast] = useState(true)
+
+  const handleInjectionSuccess = () => {
+    setShowInitialToast(true)
+
+    setTimeout(() => {
+      setShowInitialToast(false)
+    }, 6000)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowInitialToast(false)
+    }, 6000)
+
+    const rmHandleInjectionSuccess = window.api.handleInjectionSuccess(
+      handleInjectionSuccess
+    )
+
+    return () => {
+      rmHandleInjectionSuccess()
+    }
+  }, [])
+
+  if (showInitialToast) {
+    return (
+      <div className={BrowserToastManagerStyles.txnToast}>
+        <TransactionToast.TransactionToast
+          status={'success'}
+          title={'HyperPlay Overlay'}
+          subtext={t(
+            'hyperplayOverlay.greeting',
+            'HyperPlay Overlay is ready! Press Alt + X to show or hide it.'
+          )}
+          onClick={() => setShowInitialToast(false)}
+          showCloseButton={props.showCloseButton}
+        />
+      </div>
+    )
+  }
+
   const item = transactionStore.latestTxn
   if (item === null || !item.isOpen) return <></>
 
@@ -40,6 +86,7 @@ const BrowserToastManager = function () {
         title={title}
         subtext={description}
         onClick={() => transactionStore.closeTransaction(item.id)}
+        showCloseButton={props.showCloseButton}
       />
     </div>
   )

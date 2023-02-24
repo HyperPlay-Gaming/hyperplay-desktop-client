@@ -136,7 +136,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@hyperplay/ui": "^0.0.3",
+    "@hyperplay/ui": "^0.0.5",
     "@metamask/sdk": "^0.1.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
@@ -262,5 +262,8 @@
     "vite": "^3.2.2",
     "vite-plugin-electron": "^0.10.2",
     "vite-plugin-svgr": "^2.2.2"
+  },
+  "optionalDependencies": {
+    "@hyperplay/electron-overlay": "^0.0.8"
   }
 }

@@ -12,7 +12,7 @@ declare global {
   }
 }
 
-const ExtensionHandler = function () {
+const ExtensionManager = function () {
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
   const [showMmPopupPage, setShowMmPopupPage] = useState(false)
   const [extensionId, setExtensionId] = useState('')
@@ -81,4 +81,4 @@ const ExtensionHandler = function () {
   )
 }
 
-export default ExtensionHandler
+export default ExtensionManager

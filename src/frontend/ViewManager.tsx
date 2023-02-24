@@ -1,9 +1,13 @@
 import React, { lazy } from 'react'
 import BrowserGame from './browserGame'
+import ExtensionOverlay from './overlay/ExtensionOverlay'
+import ToastOverlay from './overlay/ToastOverlay'
 const App = lazy(async () => import('./App'))
 
 const Views = {
-  App: <App />
+  App: <App />,
+  HyperplayOverlay: <ExtensionOverlay />,
+  ToastOverlay: <ToastOverlay />
 }
 
 type URLSearchParamsProxy = URLSearchParams & {
