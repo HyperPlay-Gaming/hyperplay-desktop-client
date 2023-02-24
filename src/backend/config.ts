@@ -609,7 +609,7 @@ class GlobalConfigV0 extends GlobalConfig {
       defaultWinePrefix: defaultWinePrefix,
       language: 'en',
       maxWorkers: 0,
-      exitToTray: true,
+      exitToTray: false,
       minimizeOnGameLaunch: false,
       nvidiaPrime: false,
       enviromentOptions: [],
