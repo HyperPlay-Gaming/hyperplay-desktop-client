@@ -13,9 +13,9 @@ const TransactionNotification = () => {
   if (item === null || !item.isOpen) return <></>
 
   const title = TITLE[item.method]
-    ? TITLE[item.method][item.state]
-    : TITLE.default[item.state]
-  const description = DESCRIPTION[item.state]
+    ? TITLE[item.method][item.state]()
+    : TITLE.default[item.state]()
+  const description = DESCRIPTION[item.state]()
 
   if (
     item.state === TransactionState.CONFIRMED ||
