@@ -269,41 +269,48 @@
             "part2": "For other places, use a symbolic link to one of these folders"
         }
     },
+    "hyperplay": {
+        "wallet": {
+            "connected": "Connected",
+            "notConnected": "Not connected"
+        }
+    },
+    "HyperPlay": "",
     "hyperplayOverlay": {
-        "greeting": "HyperPlay Overlay is ready! Press Alt or Option + X to show or hide it.",
-        "signatureRequest": {
-            "INITIATED": "Signature request pending",
-            "FAILED": "Signature interrupted",
-            "CONFIRMED": "Signature submitted"
-        },
         "chainRequest": {
-            "INITIATED": "Custom network request",
+            "CONFIRMED": "Custom network added",
             "FAILED": "Custom network canceled",
-            "CONFIRMED": "Custom network added"
+            "INITIATED": "Custom network request"
         },
         "description": {
-            "INITIATED": "A wallet confirmation is pending in your mobile wallet",
-            "PENDING": "Waiting for blockchain confirmation. We'll let you know when it's confirmed",
+            "CONFIRMED": "The transaction was successfully confirmed!",
             "FAILED": "The transaction was canceled or not submitted, please try again",
-            "CONFIRMED": "The transaction was successfully confirmed!"
+            "INITIATED": "A wallet confirmation is pending in your mobile wallet",
+            "PENDING": "Waiting for blockchain confirmation. We'll let you know when it's confirmed"
+        },
+        "desktopHotkeyHint": "Press Alt or Option + X to return to the game",
+        "extensionNotification": {
+            "DESCRIPTION": "Press Alt or Option + X to see this transaction",
+            "STATUS": "pending",
+            "TITLE": "Transaction requested"
+        },
+        "greeting": "HyperPlay Overlay is ready! Press Alt or Option + X to show or hide it.",
+        "signatureRequest": {
+            "CONFIRMED": "Signature submitted",
+            "FAILED": "Signature interrupted",
+            "INITIATED": "Signature request pending"
         },
         "txnRequest": {
-            "INITIATED": "Transaction request pending",
-            "PENDING": "Transaction submitted",
+            "CONFIRMED": "Transaction confirmed",
             "FAILED": "Transaction interrupted",
-            "CONFIRMED": "Transaction confirmed"
+            "INITIATED": "Transaction request pending",
+            "PENDING": "Transaction submitted"
         },
         "walletWatch": {
-            "INITIATED": "Add custom token request pending",
+            "CONFIRMED": "Custom token added",
             "FAILED": "Custom token request canceled",
-            "CONFIRMED": "Custom token added"
-        },
-        "extensionNotification": {
-            "TITLE": "Transaction requested",
-            "DESCRIPTION": "Press Alt or Option + X to see this transaction",
-            "STATUS": "pending"
-        },
-        "desktopHotkeyHint": "Press Alt or Option + X to return to the game"
+            "INITIATED": "Add custom token request pending"
+        }
     },
     "info": {
         "hyperplay": {
@@ -554,6 +561,7 @@
         "maxworkers": "Maximum Number of Workers when downloading",
         "minimize-on-launch": "Minimize HyperPlay After Game Launch",
         "offlinemode": "Run Game Offline",
+        "participate-in-metrics": "Participate in metrics",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
         "primerun": {
