@@ -65,6 +65,13 @@ Download HyperPlay_Setup.x.x.x.exe or the Portable HyperPlay-x.x.x.exe file and 
 
 Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications folder.
 
+## Screenshots
+
+<img width="1427" alt="image" src="https://user-images.githubusercontent.com/26871415/221288765-41a7981c-4112-4881-a88b-c2ed08929090.png">
+<img width="1417" alt="image" src="https://user-images.githubusercontent.com/26871415/221288900-aa7c3168-d610-4598-8011-7f6c4dc4148f.png">
+<img width="1427" alt="image" src="https://user-images.githubusercontent.com/26871415/221288973-eb897dec-34fe-4edf-8c3d-32836ca59a04.png">
+
+
 ## Credits
 
 ### Those Awesome Guys: Gamepad prompts images
