@@ -256,7 +256,11 @@ const loadMainWindowURL = function () {
       `file://${path.join(publicDir, '../build/index.html?view=App')}`
     )
     if (!isMac) {
-      autoUpdater.checkForUpdates()
+      autoUpdater.checkForUpdates().then((val) => {
+        logInfo(
+          `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
+        )
+      })
     }
   }
 
