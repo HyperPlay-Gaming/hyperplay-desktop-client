@@ -23,6 +23,15 @@ export default React.memo(function StoreFilter() {
         >
           {t('All').toUpperCase()}
         </button>
+        <button
+          className={classNames('FormControl__button', {
+            active: category === 'sideload'
+          })}
+          title={'HyperPlay'}
+          onClick={() => handleCategory('sideload')}
+        >
+          {t('HyperPlay')}
+        </button>
         {isEpicLoggedin && (
           <button
             className={classNames('FormControl__button', {
@@ -45,15 +54,6 @@ export default React.memo(function StoreFilter() {
             GOG
           </button>
         )}
-        <button
-          className={classNames('FormControl__button', {
-            active: category === 'sideload'
-          })}
-          title={`${t('header.store')}: ${t('Other')}`}
-          onClick={() => handleCategory('sideload')}
-        >
-          {t('Other')}
-        </button>
       </FormControl>
     </div>
   )
