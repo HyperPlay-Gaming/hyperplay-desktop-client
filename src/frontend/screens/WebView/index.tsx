@@ -43,7 +43,7 @@ export default function WebView() {
 
   const epicStore = `https://www.epicgames.com/store/${lang}/`
   const gogStore = `https://gog.com`
-  const wikiURL = 'https://github.com/G7DAO/HyperPlay/wiki'
+  const wikiURL = 'https://docs.hyperplaygaming.com/'
   const gogEmbedRegExp = new RegExp('https://embed.gog.com/on_login_success?')
   const gogLoginUrl =
     'https://auth.gog.com/auth?client_id=46899977096215655&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&response_type=code&layout=galaxy'

@@ -28,7 +28,7 @@ const ImportMetaMask = ({
 
   const getErrorMessage = (code: string) => {
     if (code === 'LEVEL_DATABASE_NOT_OPEN') {
-      return 'Please close out of your browser and then try to import MetaMask into HyperPlay again'
+      return 'Please close your browser and then try again'
     }
     return 'There was an error during wallet import'
   }
