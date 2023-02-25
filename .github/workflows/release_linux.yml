@@ -9,12 +9,6 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-  CSC_IDENTITY_AUTO_DISCOVERY: true
-  CSC_LINK: ${{ secrets.CSC_LINK }}
-  CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-  APPLE_ID: ${{ secrets.APPLEID }}
-  APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
-  TEAMID: ${{ secrets.TEAMID }}
 
 jobs:
   draft-releases:
@@ -26,9 +20,9 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
