@@ -366,6 +366,13 @@
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
     },
+    "metamask": {
+        "sidebar": {
+            "home": "Home",
+            "popup": "Popup",
+            "portfolio": "Portfolio"
+        }
+    },
     "notify": {
         "error": {
             "move": "Error Moving the Game",

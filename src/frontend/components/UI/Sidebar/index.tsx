@@ -8,6 +8,9 @@ import { NavLink } from 'react-router-dom'
 import { ReactComponent as MetaMaskRoundedOutline } from 'frontend/assets/metamask-rounded-outline.svg'
 import { observer } from 'mobx-react-lite'
 import ContextProvider from 'frontend/state/ContextProvider'
+import { t } from 'i18next'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 let sidebarSize = 240
 const localStorageSidebarWidth = localStorage.getItem('sidebar-width')
@@ -22,6 +25,8 @@ const Sidebar = observer(() => {
   const sidebarEl = useRef<HTMLDivElement | null>(null)
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
+  const [showMetaMaskSubMenu, setShowMetaMaskSubMenu] = useState(false)
+  const [metamaskPopupIsActive, setMetamaskPopupIsActive] = useState(false)
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   function setBadgeString(err: any, text: string) {
@@ -109,42 +114,57 @@ const Sidebar = observer(() => {
       {showMetaMaskBrowserSidebarLinks ? (
         <>
           <button
-            className="Sidebar__item"
-            onClick={async () => window.api.showPopup()}
+            className={classNames('Sidebar__item', {
+              active: showMetaMaskSubMenu
+            })}
+            onClick={async () => setShowMetaMaskSubMenu(!showMetaMaskSubMenu)}
           >
-            <>
-              <div className="Sidebar__itemIcon">
-                <MetaMaskRoundedOutline />
-              </div>
-              <span>MetaMask Popup {badgeText}</span>
-            </>
+            <div className="Sidebar__itemIcon">
+              <MetaMaskRoundedOutline style={{ height: '32px' }} />
+            </div>
+            <span>MetaMask</span>
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              style={{ margin: '0 0 0 auto' }}
+            />
           </button>
-          <NavLink
-            className={({ isActive }) =>
-              classNames('Sidebar__item', { active: isActive })
-            }
-            to={'metamaskPortfolio'}
-          >
-            <>
-              <div className="Sidebar__itemIcon">
-                <MetaMaskRoundedOutline />
-              </div>
-              <span>{'MetaMask Portfolio'}</span>
-            </>
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              classNames('Sidebar__item', { active: isActive })
-            }
-            to={'metamaskHome'}
-          >
-            <>
-              <div className="Sidebar__itemIcon">
-                <MetaMaskRoundedOutline />
-              </div>
-              <span>{'MetaMask Home'}</span>
-            </>
-          </NavLink>
+          {showMetaMaskSubMenu ? (
+            <div className="SidebarSubmenu">
+              <button
+                className={classNames('Sidebar__item SidebarLinks__subItem', {
+                  active: metamaskPopupIsActive
+                })}
+                onClick={async () => {
+                  const popupIsShown = await window.api.showPopup()
+                  setMetamaskPopupIsActive(popupIsShown)
+                }}
+              >
+                <span>
+                  {t('metamask.sidebar.popup', 'Popup')} {badgeText}
+                </span>
+              </button>
+              <NavLink
+                className={({ isActive }) =>
+                  classNames('Sidebar__item SidebarLinks__subItem', {
+                    active: isActive
+                  })
+                }
+                to={'metamaskPortfolio'}
+              >
+                <span>{t('metamask.sidebar.portfolio', 'Portfolio')}</span>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  classNames('Sidebar__item SidebarLinks__subItem', {
+                    active: isActive
+                  })
+                }
+                to={'metamaskHome'}
+              >
+                <span>{t('metamask.sidebar.home', 'Home')}</span>
+              </NavLink>
+            </div>
+          ) : null}
         </>
       ) : null}
 
