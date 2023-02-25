@@ -11,6 +11,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { t } from 'i18next'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import SidbarStyles from './index.module.scss'
 
 let sidebarSize = 240
 const localStorageSidebarWidth = localStorage.getItem('sidebar-width')
@@ -120,7 +121,13 @@ const Sidebar = observer(() => {
             onClick={async () => setShowMetaMaskSubMenu(!showMetaMaskSubMenu)}
           >
             <div className="Sidebar__itemIcon">
-              <MetaMaskRoundedOutline style={{ height: '32px' }} />
+              <MetaMaskRoundedOutline
+                style={{ height: '32px', position: 'relative' }}
+              />
+
+              {badgeText !== '' && badgeText !== '0' ? (
+                <div className={SidbarStyles.badge}>{badgeText}</div>
+              ) : null}
             </div>
             <span>MetaMask</span>
             <FontAwesomeIcon
@@ -139,9 +146,7 @@ const Sidebar = observer(() => {
                   setMetamaskPopupIsActive(popupIsShown)
                 }}
               >
-                <span>
-                  {t('metamask.sidebar.popup', 'Popup')} {badgeText}
-                </span>
+                <span>{t('metamask.sidebar.popup', 'Popup')}</span>
               </button>
               <NavLink
                 className={({ isActive }) =>
