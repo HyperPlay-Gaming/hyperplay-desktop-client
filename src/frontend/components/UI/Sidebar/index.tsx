@@ -113,7 +113,7 @@ const Sidebar = observer(() => {
       <div className="currentDownloads"></div>
 
       {showMetaMaskBrowserSidebarLinks ? (
-        <>
+        <div className="SidebarItemWithSubmenu">
           <button
             className={classNames('Sidebar__item', {
               active: showMetaMaskSubMenu
@@ -170,7 +170,7 @@ const Sidebar = observer(() => {
               </NavLink>
             </div>
           ) : null}
-        </>
+        </div>
       ) : null}
 
       <Wallet onClick={() => onboardingStore.openOnboarding()} />

@@ -163,16 +163,9 @@
   display: block;
   position: fixed;
   left: 62px;
-  top: 66px;
+  transform: translate(0%, -100%);
   background-color: var(--navbar-background);
   padding: var(--space-2xs) 0;
-}
-
-.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu.settings,
-.Sidebar.collapsed
-  .SidebarItemWithSubmenu:focus-within
-  .SidebarSubmenu.settings {
-  top: 114px;
 }
 
 .Sidebar.collapsed .Sidebar__item.SidebarLinks__subItem::before {
@@ -187,6 +180,10 @@
   transform: scale(1.2);
   padding: var(--space-2xs) 0;
   fill: var(--color-neutral-50);
+}
+
+.Sidebar.collapsed .Sidebar__item svg:not(:first-child) {
+  display: none;
 }
 
 .Sidebar__item.active svg {

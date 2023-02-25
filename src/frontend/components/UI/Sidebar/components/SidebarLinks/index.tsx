@@ -86,13 +86,15 @@ export default function SidebarLinks() {
 
   return (
     <div className="SidebarLinks Sidebar__section">
-      <div className="hyperplaySidebarLogoContainer">
-        <HyperPlayLogoWhite
-          height={64}
-          width={64}
-          className="hyperplaySidebarLogo"
-        />
-      </div>
+      <NavLink to={'/'}>
+        <div className="hyperplaySidebarLogoContainer">
+          <HyperPlayLogoWhite
+            height={64}
+            width={64}
+            className="hyperplaySidebarLogo"
+          />
+        </div>
+      </NavLink>
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
       <NavLink
         className={({ isActive }) =>

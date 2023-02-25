@@ -39,6 +39,7 @@
 
 .hyperplaySidebarLogoContainer {
   margin: 0 auto var(--sidebar-vertical-padding);
+  text-align: center;
 }
 
 .Sidebar.collapsed .hyperplaySidebarLogoContainer {
