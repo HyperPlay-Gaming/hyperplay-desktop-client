@@ -179,7 +179,12 @@
 .Sidebar.collapsed .Sidebar__item svg {
   transform: scale(1.2);
   padding: var(--space-2xs) 0;
+}
+.Sidebar.collapsed .Sidebar__item.active svg {
   fill: var(--color-neutral-50);
+}
+.Sidebar.collapsed .Sidebar__item svg {
+  fill: var(--accent);
 }
 
 .Sidebar.collapsed .Sidebar__item svg:not(:first-child) {

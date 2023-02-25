@@ -137,6 +137,16 @@ const Sidebar = observer(() => {
           </button>
           {showMetaMaskSubMenu ? (
             <div className="SidebarSubmenu">
+              <NavLink
+                className={({ isActive }) =>
+                  classNames('Sidebar__item SidebarLinks__subItem', {
+                    active: isActive
+                  })
+                }
+                to={'metamaskHome'}
+              >
+                <span>{t('metamask.sidebar.home', 'Home')}</span>
+              </NavLink>
               <button
                 className={classNames('Sidebar__item SidebarLinks__subItem', {
                   active: metamaskPopupIsActive
@@ -157,16 +167,6 @@ const Sidebar = observer(() => {
                 to={'metamaskPortfolio'}
               >
                 <span>{t('metamask.sidebar.portfolio', 'Portfolio')}</span>
-              </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  classNames('Sidebar__item SidebarLinks__subItem', {
-                    active: isActive
-                  })
-                }
-                to={'metamaskHome'}
-              >
-                <span>{t('metamask.sidebar.home', 'Home')}</span>
               </NavLink>
             </div>
           ) : null}
