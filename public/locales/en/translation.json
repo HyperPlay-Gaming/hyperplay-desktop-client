@@ -291,10 +291,12 @@
         "desktopHotkeyHint": "Press Alt or Option + X to return to the game",
         "extensionNotification": {
             "DESCRIPTION": "Press Alt or Option + X to see this transaction",
-            "STATUS": "pending",
             "TITLE": "Transaction requested"
         },
-        "greeting": "HyperPlay Overlay is ready! Press Alt or Option + X to show or hide it.",
+        "greeting": {
+            "description": "HyperPlay Overlay is ready! Press Alt + X to show or hide it.",
+            "title": "HyperPlay Overlay"
+        },
         "signatureRequest": {
             "CONFIRMED": "Signature submitted",
             "FAILED": "Signature interrupted",
