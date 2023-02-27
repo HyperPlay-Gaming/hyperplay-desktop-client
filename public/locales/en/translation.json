@@ -284,7 +284,8 @@
                 "neverCollectPersonal": " collect keys, addresses, balances, hashes, or any personal information;",
                 "neverSellData": " sell data for profit. Ever!",
                 "optOut": "Always allow you to opt-out via Settings;",
-                "privacyCaption": "This data is aggregated and is therefore anonymous for the purposes of General Data Protection Regulation (EU) 2016/679. For more information in relation to our privacy practices, please see our Privacy Policy here. ",
+                "privacyCaption": "This data is aggregated and is therefore anonymous for the purposes of General Data Protection Regulation (EU) 2016/679. For more information in relation to our privacy practices, please see our ",
+                "privacyPolicyHere": "Privacy Policy here.",
                 "title": "Help Us improve HyperPlay!"
             },
             "walletSelection": {
@@ -295,6 +296,7 @@
                         "title": "Select the browser to import from"
                     },
                     "info": {
+                        "createWalletCTA": "Create a wallet",
                         "createWalletDescription": "Click in “Create a wallet” below if you do not have a wallet or want to create a new one:",
                         "digitalAssets": {
                             "details": "Wallets are used to send, receive, store, and display digital assets like tokens and NFTs.",
@@ -304,13 +306,14 @@
                             "details": "An alternative to creating new accounts and passwords on every website, just connect your wallet instead.",
                             "title": "A New Way to Log In"
                         },
+                        "skip": "Skip for now",
                         "title": "What is a wallet?"
                     },
                     "scan": {
                         "details": "Create an encrypted communication channel. Your keys will never be shared with HyperPlay.",
                         "dontHaveWallet": "Don’t have a wallet?",
                         "getMetamask": "Get MetaMask",
-                        "title": "Scan QR with Metamask Mobile"
+                        "title": "Scan QR with "
                     }
                 },
                 "title": "Wallet Connections"

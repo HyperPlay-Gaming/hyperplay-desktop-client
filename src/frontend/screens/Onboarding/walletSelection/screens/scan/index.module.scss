@@ -1,0 +1,23 @@
+.title {
+  align-self: center;
+  margin-bottom: var(--space-xs);
+}
+
+.caption {
+  color: var(--color-neutral-300);
+  margin-bottom: var(--space-lg);
+}
+
+.getWalletText {
+  color: var(--color-neutral-300);
+  margin: auto auto var(--space-sm);
+}
+
+.getWalletText > a {
+  color: var(--color-primary-200);
+}
+
+.getWalletText > a:hover {
+  color: var(--color-primary-300);
+  transition: 0.2s;
+}

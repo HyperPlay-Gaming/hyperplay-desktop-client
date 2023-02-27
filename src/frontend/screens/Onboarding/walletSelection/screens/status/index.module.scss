@@ -1,12 +1,26 @@
 .statusImg {
-  width: 150px;
-  height: 150px;
+  margin: auto;
 }
 
 .rejectedSubtext {
   margin-top: var(--space-md) 0;
 }
 
-.rejectedImgContainer {
-  margin: var(--space-lg);
+.title {
+  margin-bottom: var(--space-md);
+  align-self: center;
+}
+
+.description {
+  color: var(--color-neutral-200);
+  align-self: center;
+  text-align: center;
+}
+
+.actionButton {
+  margin: 0px auto;
+}
+.actionButton button {
+  min-width: 184px;
+  border-radius: var(--space-xs);
 }

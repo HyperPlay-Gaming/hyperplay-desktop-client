@@ -1,8 +1,22 @@
 .importOptionsContainer {
   display: grid;
-  grid-template-columns: repeat(2, minmax(224px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: 112px;
   gap: 16px;
-  margin-top: var(--space-sm);
-  margin-bottom: calc(2 * var(--space-sm));
+  margin: var(--space-sm) auto calc(2 * var(--space-sm));
+}
+
+.title {
+  align-self: center;
+  margin-bottom: var(--space-sm);
+}
+
+.description {
+  align-self: center;
+  text-align: center;
+  color: var(--color-neutral-200);
+}
+
+.errorMessage {
+  margin: 0px auto;
 }

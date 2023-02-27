@@ -10,13 +10,42 @@
   top: 15px;
   right: 15px;
 }
+.closeButton button {
+  border: none;
+}
 
-.walletOptionsContainer {
+.walletOptionsSection {
   display: flex;
   justify-content: space-between;
   flex-direction: column;
 }
 
-.walletOptionsContainer:last-child {
+.walletOptionsSection:last-child {
   margin-bottom: 0px;
+}
+
+.walletOptionsSection > svg {
+  margin-bottom: var(--space-md-fixed);
+}
+
+.walletConnectionsTitle {
+  margin-bottom: var(--space-sm);
+}
+
+.connectWalletText {
+  margin-bottom: var(--space-md);
+}
+
+.walletOptionsContainer {
+  margin-top: auto;
+}
+
+.walletOptionsContainer > button:last-child {
+  margin-bottom: 0px;
+}
+
+.detailsScreen {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }

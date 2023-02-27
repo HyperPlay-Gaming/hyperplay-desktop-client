@@ -37,13 +37,13 @@ const ImportScreen = ({
 
   return (
     <>
-      <div className="title">
+      <div className={`title ${ImportScreenStyles.title}`}>
         {t(
           'hyperplay.onboarding.walletSelection.screens.import.title',
           `Select the browser to import from`
         )}
       </div>
-      <div className="body">
+      <div className={`body ${ImportScreenStyles.description}`}>
         {t(
           'hyperplay.onboarding.walletSelection.screens.import.details',
           `By importing, your MetaMask installation and  settings will be imported into HyperPlay.`
@@ -59,9 +59,21 @@ const ImportScreen = ({
             key={key}
           />
         ))}
+        <ImportOption
+          isCreate={true}
+          title={t(
+            'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
+            `Create new MM extension wallet`
+          )}
+          onClick={async () => {
+            handleImportMmExtensionClicked(null)
+          }}
+        />
       </div>
 
-      {err !== '' ? <div>{err}</div> : null}
+      {err !== '' ? (
+        <div className={ImportScreenStyles.errorMessage}>{err}</div>
+      ) : null}
     </>
   )
 }

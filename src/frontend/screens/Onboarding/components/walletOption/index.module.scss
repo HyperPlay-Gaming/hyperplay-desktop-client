@@ -5,7 +5,7 @@
   align-items: center;
   padding: var(--space-sm);
   gap: var(--space-md);
-  margin: var(--space-sm) auto;
+  margin: var(--space-md) auto;
 
   width: calc(100%);
 
@@ -24,6 +24,11 @@
   position: relative;
   max-width: 500px;
   text-align: left;
+}
+
+.walletOption:hover {
+  background-color: var(--color-neutral-600);
+  transition: 0.4s;
 }
 
 .optionContent {
@@ -102,4 +107,8 @@ div.walletOptionIcon {
   flex-shrink: 0;
   height: 14px;
   position: relative;
+}
+
+.arrowContainer {
+  padding-right: var(--space-sm-fixed);
 }

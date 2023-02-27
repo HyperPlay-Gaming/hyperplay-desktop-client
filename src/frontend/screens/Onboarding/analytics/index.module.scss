@@ -1,6 +1,13 @@
 .buttonContainer {
   display: flex;
   flex-direction: row;
+  margin: var(--space-lg) auto;
+  gap: var(--space-xs);
+}
+
+.buttonContainer button {
+  min-width: 188px;
+  border-radius: var(--space-xs);
 }
 
 .bulletPointContainer {
@@ -8,6 +15,36 @@
   flex-direction: row;
 }
 
+.bulletPointContainer > svg {
+  padding-top: var(--space-2xs);
+  padding-right: var(--space-sm);
+  height: 13px;
+}
+
 .bulletPointContainer > body:first-word {
   color: var(--color-status-error);
+}
+
+.infoText {
+  color: var(--color-neutral-100);
+}
+
+.marginBottomLg {
+  margin-bottom: var(--space-lg);
+}
+.marginBottomSm {
+  margin-bottom: var(--space-xs);
+}
+
+.privacyCaption {
+  color: var(--color-neutral-300);
+}
+
+.privacyCaption > a {
+  color: var(--color-primary-200);
+}
+
+.privacyCaption > a:hover {
+  color: var(--color-primary-300);
+  transition: 0.2s;
 }

@@ -31,6 +31,7 @@ const InfoText = function ({ icon, title, details }: InfoTextProps) {
 interface WalletInfoScreenProps {
   skipClicked: () => void
   createWalletClicked: () => void
+  mmInitialized: boolean
 }
 
 const WalletInfoScreen = (props: WalletInfoScreenProps) => {
@@ -72,9 +73,19 @@ const WalletInfoScreen = (props: WalletInfoScreenProps) => {
       </div>
       <div className={WalletInfoStyles.actionButtonContainer}>
         <Button type="tertiary" onClick={props.skipClicked}>
-          Skip for now
+          {t(
+            'hyperplay.onboarding.walletSelection.screens.info.skip',
+            `Skip for now`
+          )}
         </Button>
-        <Button onClick={props.createWalletClicked}>Create a wallet</Button>
+        {!props.mmInitialized ? (
+          <Button onClick={props.createWalletClicked}>
+            {t(
+              'hyperplay.onboarding.walletSelection.screens.info.createWalletCTA',
+              `Create a wallet`
+            )}
+          </Button>
+        ) : null}
       </div>
     </div>
   )

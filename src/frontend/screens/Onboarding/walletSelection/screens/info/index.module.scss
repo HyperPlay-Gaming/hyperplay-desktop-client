@@ -1,7 +1,7 @@
 .walletInfoContainer {
   display: flex;
   flex-direction: row;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-xl);
 }
 
 .walletTextContainer {
@@ -17,6 +17,7 @@
 
 .actionButtonContainer Button {
   border-radius: var(--space-sm);
+  min-width: 171px;
 }
 
 .walletInfoScreen {

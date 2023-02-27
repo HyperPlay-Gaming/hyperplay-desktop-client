@@ -1,6 +1,7 @@
 import React from 'react'
 import { RejectedIcon, SuccessIcon } from 'frontend/assets/hyperplay'
-import PendingStyles from './index.module.scss'
+import StatusStyles from './index.module.scss'
+import { Button } from '@hyperplay/ui'
 
 export enum CONNECTION_STATUS {
   PENDING = 'PENDING',
@@ -12,6 +13,8 @@ interface StatusScreenProps {
   status: CONNECTION_STATUS
   actionButtonText?: string
   onActionButtonClick?: () => void
+  title: string
+  description: string
 }
 
 const StatusScreen = (props: StatusScreenProps) => {
@@ -29,12 +32,20 @@ const StatusScreen = (props: StatusScreenProps) => {
     }
   }
   return (
-    <div>
-      <div className={PendingStyles.rejectedImgContainer}>
-        <div className={PendingStyles.statusImg}></div>
-        {getIcon()}
+    <>
+      <div className={`title ${StatusStyles.title}`}>{props.title}</div>
+      <div className={`body ${StatusStyles.description}`}>
+        {props.description}
       </div>
-    </div>
+      <div className={StatusStyles.statusImg}>{getIcon()}</div>
+      <div className={StatusStyles.actionButton}>
+        {props.actionButtonText !== undefined ? (
+          <Button onClick={props.onActionButtonClick}>
+            {props.actionButtonText}
+          </Button>
+        ) : null}
+      </div>
+    </>
   )
 }
 

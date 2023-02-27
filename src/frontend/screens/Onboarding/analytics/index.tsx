@@ -21,12 +21,14 @@ const BulletPoint = ({ text, icon, color, firstWord }: BulletPointProps) => {
   return (
     <div className={AnalyticsStyle.bulletPointContainer}>
       <FontAwesomeIcon icon={icon} color={color} />
-      <body>
+      <div
+        className={`body ${AnalyticsStyle.infoText} ${AnalyticsStyle.marginBottomSm}`}
+      >
         {firstWord !== undefined ? (
           <span style={{ color }}>{firstWord}</span>
         ) : null}
         {text}
-      </body>
+      </div>
     </div>
   )
 }
@@ -70,15 +72,19 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
           `Help Us improve HyperPlay!`
         )}
       </h5>
-      <body>
+      <div
+        className={`body ${AnalyticsStyle.infoText} ${AnalyticsStyle.marginBottomLg}`}
+      >
         {t(
           'hyperplay.onboarding.analytics.body',
           `HyperPlay would like to gather usage data to better understand how our users interact with the application. This information helps us understand how you use the app and lets us make HyperPlay even better for you.`
         )}
-      </body>
-      <body>
+      </div>
+      <div
+        className={`body ${AnalyticsStyle.infoText} ${AnalyticsStyle.marginBottomSm}`}
+      >
         {t('hyperplay.onboarding.analytics.hyperplayWill', `HyperPlay will:`)}
-      </body>
+      </div>
       <CheckBulletPoint
         text={t(
           'hyperplay.onboarding.analytics.optOut',
@@ -130,11 +136,22 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
           {t('hyperplay.buttons.agree', `I agree`)}
         </Button>
       </div>
-      <div className="caption-sm">
+      <div className={`caption-sm ${AnalyticsStyle.privacyCaption}`}>
         {t(
           'hyperplay.onboarding.analytics.privacyCaption',
-          `This data is aggregated and is therefore anonymous for the purposes of General Data Protection Regulation (EU) 2016/679. For more information in relation to our privacy practices, please see our Privacy Policy here. `
+          `This data is aggregated and is therefore anonymous for the purposes of General Data Protection Regulation (EU) 2016/679. For more information in relation to our privacy practices, please see our `
         )}
+        <a
+          onClick={() =>
+            window.api.openExternalUrl('https://www.hyperplay.xyz')
+          }
+          className="button-sm"
+        >
+          {t(
+            'hyperplay.onboarding.analytics.privacyPolicyHere',
+            `Privacy Policy here.`
+          )}
+        </a>
       </div>
     </>
   )

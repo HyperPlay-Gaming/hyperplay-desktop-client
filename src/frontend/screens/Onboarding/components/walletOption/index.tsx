@@ -27,7 +27,9 @@ const WalletOption: React.FC<WalletOptionProps> = function (props) {
           </div>
         </div>
       </div>
-      <ForwardArrow className={WalletOptionStyles.walletOptionArrow} />
+      <div className={WalletOptionStyles.arrowContainer}>
+        <ForwardArrow className={WalletOptionStyles.walletOptionArrow} />
+      </div>
     </button>
   )
 }
