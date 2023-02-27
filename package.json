@@ -265,5 +265,6 @@
   },
   "optionalDependencies": {
     "@hyperplay/electron-overlay": "^0.0.8"
-  }
+  },
+  "packageManager": "yarn@1.22.19"
 }
