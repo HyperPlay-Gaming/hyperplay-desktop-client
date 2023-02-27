@@ -304,6 +304,11 @@ if (!gotTheLock) {
     )
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
 
+    const hpStoreSession = session.fromPartition('persist:hyperplaystore')
+    hpStoreSession.setPreloads([
+      path.join(__dirname, 'hyperplay_store_preload.js')
+    ])
+
     let overlayOpen = false
     const openOverlayAccelerator = 'CommandOrControl+Tab'
     globalShortcut.register(openOverlayAccelerator, () => {
@@ -643,10 +648,10 @@ ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
     case 'winecfg':
       isSideloaded
         ? runWineCommand({
-            gameSettings,
-            commandParts: ['winecfg'],
-            wait: false
-          })
+          gameSettings,
+          commandParts: ['winecfg'],
+          wait: false
+        })
         : game.runWineCommand({ commandParts: ['winecfg'] })
       break
     case 'runExe':
@@ -654,15 +659,15 @@ ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
         const workingDir = path.parse(exe).dir
         isSideloaded
           ? runWineCommand({
-              gameSettings,
-              commandParts: [exe],
-              wait: false,
-              startFolder: workingDir
-            })
+            gameSettings,
+            commandParts: [exe],
+            wait: false,
+            startFolder: workingDir
+          })
           : game.runWineCommand({
-              commandParts: [exe],
-              startFolder: workingDir
-            })
+            commandParts: [exe],
+            startFolder: workingDir
+          })
       }
       break
   }
@@ -1081,12 +1086,12 @@ ipcMain.handle(
     writeFileSync(
       logFileLocation,
       'System Info:\n' +
-        `${systemInfo}\n` +
-        '\n' +
-        `Game Settings: ${gameSettingsString}\n` +
-        '\n' +
-        `Game launched at: ${startPlayingDate}\n` +
-        '\n'
+      `${systemInfo}\n` +
+      '\n' +
+      `Game Settings: ${gameSettingsString}\n` +
+      '\n' +
+      `Game launched at: ${startPlayingDate}\n` +
+      '\n'
     )
 
     // check if isNative, if not, check if wine is valid
@@ -1666,6 +1671,8 @@ ipcMain.handle('getFonts', async (event, reload) => {
   return cachedFonts
 })
 
+
+
 ipcMain.handle(
   'runWineCommandForGame',
   async (event, { appName, commandParts, runner }) => {
@@ -1782,6 +1789,7 @@ import './utils/ipc_handler'
 import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
+import { addGame } from './hyperplay/library'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (
@@ -1850,4 +1858,8 @@ ipcMain.on('reloadApp', async () => {
   for (const win of BrowserWindow.getAllWindows()) {
     win.loadURL(win.webContents.getURL())
   }
+})
+
+ipcMain.on('addHyperplayGame', async (_e, gameId) => {
+  addGame(gameId)
 })

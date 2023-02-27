@@ -61,6 +61,7 @@ interface HyperPlaySyncIPCFunctions {
   reloadApp: () => void
   createNewMetaMaskWallet: () => void
   enableOnEvents: (topic: string) => void
+  addHyperplayGame: (gameId: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {

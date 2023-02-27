@@ -51,13 +51,19 @@ export default defineConfig({
       {
         entry: path.resolve(
           __dirname +
-            '/src/backend/hyperplay-extension-helper/extensionPreload.ts'
+          '/src/backend/hyperplay-extension-helper/extensionPreload.ts'
         ),
         vite: electronViteConfig
       },
       {
         entry: path.resolve(
           __dirname + '/src/backend/hyperplay-proxy-server/providerPreload.ts'
+        ),
+        vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/hyperplay_store_preload.ts'
         ),
         vite: electronViteConfig
       }

@@ -484,22 +484,22 @@ interface GamepadActionArgsWithMetadata {
 
 interface GamepadActionArgsWithoutMetadata {
   action:
-    | 'padUp'
-    | 'padDown'
-    | 'padLeft'
-    | 'padRight'
-    | 'leftStickUp'
-    | 'leftStickDown'
-    | 'leftStickLeft'
-    | 'leftStickRight'
-    | 'rightStickUp'
-    | 'rightStickDown'
-    | 'rightStickLeft'
-    | 'rightStickRight'
-    | 'mainAction'
-    | 'back'
-    | 'altAction'
-    | 'esc'
+  | 'padUp'
+  | 'padDown'
+  | 'padLeft'
+  | 'padRight'
+  | 'leftStickUp'
+  | 'leftStickDown'
+  | 'leftStickLeft'
+  | 'leftStickRight'
+  | 'rightStickUp'
+  | 'rightStickDown'
+  | 'rightStickLeft'
+  | 'rightStickRight'
+  | 'mainAction'
+  | 'back'
+  | 'altAction'
+  | 'esc'
   metadata?: undefined
 }
 
@@ -780,6 +780,7 @@ export type AppPlatforms =
   | 'linux_arm64'
   | 'darwin_amd64'
   | 'darwin_arm64'
+  | 'web'
 
 type PlatformInfo = {
   external_url: string
