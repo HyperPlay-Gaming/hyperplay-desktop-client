@@ -1,0 +1,24 @@
+$gradientThickness: 7px;
+$gradientBorderRadius: 16px;
+
+.qrCodeContainer {
+  position: relative;
+  padding: 0px;
+  border: 14px solid var(--background);
+  border-radius: $gradientBorderRadius - $gradientThickness;
+  background-color: var(--background);
+  overflow: hidden;
+}
+
+.borderWrap {
+  background: var(--gradient-1);
+  padding: $gradientThickness;
+  border-radius: $gradientBorderRadius;
+  background-clip: padding-box;
+  width: 250px;
+  margin: 0 auto;
+}
+
+.qrCodeImage {
+  padding: 0px;
+}

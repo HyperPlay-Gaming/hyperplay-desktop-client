@@ -1,0 +1,13 @@
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.bulletPointContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.bulletPointContainer > body:first-word {
+  color: var(--color-status-error);
+}
