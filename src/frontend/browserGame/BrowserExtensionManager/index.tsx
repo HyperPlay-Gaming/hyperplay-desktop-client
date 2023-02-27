@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import BrowserExtensionManagerStyles from './index.module.scss'
+import { overlayExternalWalletConnectedMsg } from 'frontend/overlay/constants'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -16,6 +17,7 @@ const BrowserExtensionManager = function () {
   const [showOverlay, setShowOverlay] = useState(false)
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
   const [extensionId, setExtensionId] = useState('')
+  const [showMmPopupPage, setShowMmPopupPage] = useState(false)
 
   const getExtensionId = async () => {
     const extId = await window.api.getExtensionId()
@@ -37,6 +39,10 @@ const BrowserExtensionManager = function () {
     setShowOverlay(show)
   }
 
+  function handleUpdatePopup(e: Electron.IpcRendererEvent, show: boolean) {
+    setShowMmPopupPage(show)
+  }
+
   useEffect(() => {
     getExtensionId()
     const rmHandleUpdateOverlayVisibility =
@@ -49,10 +55,22 @@ const BrowserExtensionManager = function () {
       handleRemoveNotification
     )
 
+    window.api.getConnectedProvider().then((prov) => {
+      const providersWithoutPopup = ['MetaMaskMobile', 'WalletConnect']
+      if (providersWithoutPopup.includes(prov)) {
+        return setShowMmPopupPage(false)
+      }
+      return setShowMmPopupPage(true)
+    })
+
+    const rmUpdatePopupHandler =
+      window.api.handleUpdatePopupInOverlay(handleUpdatePopup)
+
     return () => {
       rmHandleUpdateOverlayVisibility()
       rmAddNotifHandler()
       rmRemoveNotifHandler()
+      rmUpdatePopupHandler()
     }
   }, [])
 
@@ -61,7 +79,12 @@ const BrowserExtensionManager = function () {
     <>
       {showOverlay ? (
         <div className={BrowserExtensionManagerStyles.mmContainer}>
-          {!showMmNotificationPage ? (
+          {!showMmPopupPage ? (
+            <div className={BrowserExtensionManagerStyles.overlayToggleHint}>
+              {overlayExternalWalletConnectedMsg}
+            </div>
+          ) : null}
+          {showMmPopupPage && !showMmNotificationPage ? (
             <webview
               nodeintegrationinsubframes="true"
               webpreferences="contextIsolation=true, nodeIntegration=true"

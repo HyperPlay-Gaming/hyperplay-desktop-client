@@ -1,30 +1,28 @@
-.mmContainer {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  z-index: 100000;
+.caption {
+  height: 50px;
+  width: 200px;
+  background-color: rgba(255, 0, 0, 0.25);
 }
 
-@mixin mmWindow {
-  width: 360px;
-  height: 620px;
+.mmPopupContainer {
   position: relative;
+  height: 100%;
+  width: 100%;
   display: flex;
+  flex-direction: row;
 }
 
 .mmPopup {
-  @include mmWindow();
-}
-
-.mmNotification {
-  @include mmWindow();
   width: 360px;
   height: 620px;
   position: relative;
   display: flex;
+}
+
+.overlayContainer {
+  position: relative;
+  width: 100%;
+  overflow: scroll;
 }
 
 .overlayToggleHint {

@@ -269,6 +269,44 @@
             "part2": "For other places, use a symbolic link to one of these folders"
         }
     },
+    "hyperplayOverlay": {
+        "chainRequest": {
+            "CONFIRMED": "Custom network added",
+            "FAILED": "Custom network canceled",
+            "INITIATED": "Custom network request"
+        },
+        "description": {
+            "CONFIRMED": "The transaction was successfully confirmed!",
+            "FAILED": "The transaction was canceled or not submitted, please try again",
+            "INITIATED": "A wallet confirmation is pending in your mobile wallet",
+            "PENDING": "Waiting for blockchain confirmation. We'll let you know when it's confirmed"
+        },
+        "desktopHotkeyHint": "Press Alt or Option + X to return to the game",
+        "extensionNotification": {
+            "DESCRIPTION": "Press Alt or Option + X to see this transaction",
+            "TITLE": "Transaction requested"
+        },
+        "greeting": {
+            "description": "HyperPlay Overlay is ready! Press Alt + X to show or hide it.",
+            "title": "HyperPlay Overlay"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Signature submitted",
+            "FAILED": "Signature interrupted",
+            "INITIATED": "Signature request pending"
+        },
+        "txnRequest": {
+            "CONFIRMED": "Transaction confirmed",
+            "FAILED": "Transaction interrupted",
+            "INITIATED": "Transaction request pending",
+            "PENDING": "Transaction submitted"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Custom token added",
+            "FAILED": "Custom token request canceled",
+            "INITIATED": "Add custom token request pending"
+        }
+    },
     "info": {
         "hyperplay": {
             "beta": "Beta",
@@ -518,6 +556,7 @@
         "maxworkers": "Maximum Number of Workers when downloading",
         "minimize-on-launch": "Minimize HyperPlay After Game Launch",
         "offlinemode": "Run Game Offline",
+        "participate-in-metrics": "Participate in metrics",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
         "primerun": {

@@ -3,7 +3,13 @@ import BrowserToastManagerStyles from './index.module.scss'
 import { TransactionToast } from '@hyperplay/ui'
 import { EXTENSION_NOTIFICATION } from 'frontend/screens/TransactionNotification/constants'
 
-const BrowserExtensionToastManager = function () {
+interface BrowserExtensionToastManagerProps {
+  showCloseButton?: boolean
+}
+
+const BrowserExtensionToastManager = function (
+  props: BrowserExtensionToastManagerProps
+) {
   const [showMmExtensionNotifToast, setShowMmExtensionNotifToast] =
     useState(false)
 
@@ -35,9 +41,10 @@ const BrowserExtensionToastManager = function () {
       {showMmExtensionNotifToast ? (
         <TransactionToast.TransactionToast
           status={EXTENSION_NOTIFICATION.STATUS}
-          title={EXTENSION_NOTIFICATION.TITLE}
-          subtext={EXTENSION_NOTIFICATION.DESCRIPTION}
+          title={EXTENSION_NOTIFICATION.TITLE()}
+          subtext={EXTENSION_NOTIFICATION.DESCRIPTION()}
           onClick={handleRemoveNotification}
+          showCloseButton={props.showCloseButton}
         />
       ) : null}
     </div>

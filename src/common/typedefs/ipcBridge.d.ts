@@ -1,5 +1,4 @@
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
-import { ExtensionStore } from './../../backend/hyperplay-extension-helper/store/index'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -62,6 +61,7 @@ interface HyperPlaySyncIPCFunctions {
   createNewMetaMaskWallet: () => void
   enableOnEvents: (topic: string) => void
   addHyperplayGame: (gameId: string) => void
+  ignoreExitToTray: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -142,7 +142,7 @@ interface HyperPlayAsyncIPCFunctions {
   getMetaMaskImportOptions: (
     configDbPath?: string
   ) => Promise<MetaMaskImportOptions | null>
-  getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
+  isExtensionInitialized: () => Promise<boolean>
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>
   getConnectionUris: (providerSelection: PROVIDERS) => Promise<UrisReturn>
@@ -288,7 +288,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: Runner,
     alreadyDefinedGogSaves: GOGCloudSavesLocation[]
   ) => Promise<string | GOGCloudSavesLocation[]>
-  'get-connection-uris': (provider: PROVIDERS) => Promise<ConnectionURIs>
   isGameAvailable: (args: {
     appName: string
     runner: Runner

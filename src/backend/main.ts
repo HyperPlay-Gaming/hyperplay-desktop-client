@@ -1,4 +1,4 @@
-import { setExtensionMetadata } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
+import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -127,6 +127,7 @@ import {
   WalletConnectedType,
   WalletDisconnectedType
 } from './hyperplay-proxy-server/commonProxyTypes'
+import { OverlayApp } from './overlay/overlay'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
@@ -164,6 +165,11 @@ const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
 
 let mainWindow: BrowserWindow
+let ignoreExitToTray = false
+
+ipcMain.on('ignoreExitToTray', () => {
+  ignoreExitToTray = true
+})
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
@@ -171,6 +177,8 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
   ExtensionHelper.initExtensionProvider(mainWindow)
   initExtensionIpcHandlerWindow(mainWindow)
+
+  OverlayApp.start()
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -208,7 +216,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
     const { exitToTray } = GlobalConfig.get().getSettings()
 
-    if (exitToTray) {
+    if (!ignoreExitToTray && exitToTray) {
       logInfo('Exitting to tray instead of quitting', LogPrefix.Backend)
       return mainWindow.hide()
     }
@@ -310,15 +318,21 @@ if (!gotTheLock) {
     ])
 
     let overlayOpen = false
-    const openOverlayAccelerator = 'CommandOrControl+Tab'
-    globalShortcut.register(openOverlayAccelerator, () => {
+    const openOverlay = () => {
       overlayOpen = !overlayOpen
       for (const win of BrowserWindow.getAllWindows()) {
         win.webContents.send('updateOverlayVisibility', overlayOpen)
       }
-    })
+      OverlayApp.toggleIntercept()
+    }
 
-    setExtensionMetadata()
+    // keyboards with alt and no option key can be used with mac so register both
+    const openOverlayAccelerator = 'Alt+X'
+    globalShortcut.register(openOverlayAccelerator, openOverlay)
+    const openOverlayAcceleratorMac = 'Option+X'
+    globalShortcut.register(openOverlayAcceleratorMac, openOverlay)
+
+    initExtension()
 
     initOnlineMonitor()
 
@@ -1016,6 +1030,7 @@ ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
 
+// get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {

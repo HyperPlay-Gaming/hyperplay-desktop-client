@@ -2,10 +2,20 @@ name: Build
 
 on:
   push:
-    branches: [main, stable]
+    branches: [main, stable, overlay]
     tags:
       - '!v*'
   workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  CSC_IDENTITY_AUTO_DISCOVERY: true
+  CSC_LINK: ${{ secrets.CSC_LINK }}
+  CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+  APPLE_ID: ${{ secrets.APPLEID }}
+  APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
+  TEAMID: ${{ secrets.TEAMID }}
 
 jobs:
   build_windows:
@@ -24,14 +34,16 @@ jobs:
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: npm i --legacy-peer-deps
       - name: Build artifacts.
-        run: npm run dist:win portable
+        run: npm run dist:win nsis
       - name: Upload EXE.
         uses: actions/upload-artifact@v2
         with:
-          name: win-portable
+          name: win-setup
           path: dist/HyperPlay*.exe
           retention-days: 14
   build_linux:
@@ -78,6 +90,8 @@ jobs:
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn
       - name: Build artifacts.
