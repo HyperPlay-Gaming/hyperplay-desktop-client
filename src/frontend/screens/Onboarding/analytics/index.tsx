@@ -7,6 +7,8 @@ import AnalyticsStyle from './index.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faX } from '@fortawesome/free-solid-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
+import { metricsStore, onboardingStore } from 'frontend/helpers/electronStores'
+import { MetricsOptInStatus } from 'common/types'
 
 interface BulletPointProps {
   icon: IconProp
@@ -110,12 +112,20 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
       <div className={AnalyticsStyle.buttonContainer}>
         <Button
           type="tertiary"
-          onClick={() => props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)}
+          onClick={() => {
+            onboardingStore.set('completedDataPrivacy', true)
+            metricsStore.set('metricsOptInStatus', MetricsOptInStatus.optedOut)
+            props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)
+          }}
         >
           {t('hyperplay.buttons.noThanks', `No Thanks`)}
         </Button>
         <Button
-          onClick={() => props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)}
+          onClick={() => {
+            onboardingStore.set('completedDataPrivacy', true)
+            metricsStore.set('metricsOptInStatus', MetricsOptInStatus.optedIn)
+            props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)
+          }}
         >
           {t('hyperplay.buttons.agree', `I agree`)}
         </Button>

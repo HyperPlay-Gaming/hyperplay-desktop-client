@@ -4,13 +4,24 @@ import { ONBOARDING_SCREEN } from './types'
 import Welcome from './welcome'
 import Analytics from './analytics'
 import WalletSelection from './walletSelection'
+import { onboardingStore } from 'frontend/helpers/electronStores'
 
 interface OnboardingProps {
   disableOnboarding: () => void
 }
 
 const Onboarding: React.FC<OnboardingProps> = function (props) {
-  const [currentScreen, setCurrentScreen] = useState(ONBOARDING_SCREEN.WELCOME)
+  let initScreen = ONBOARDING_SCREEN.WELCOME
+
+  if (onboardingStore.get('completedEarlyAccess', false)) {
+    initScreen = ONBOARDING_SCREEN.ANALYTICS
+  }
+
+  if (onboardingStore.get('completedDataPrivacy', false)) {
+    initScreen = ONBOARDING_SCREEN.WALLET_SELECTION
+  }
+
+  const [currentScreen, setCurrentScreen] = useState(initScreen)
 
   // Track the screen view once each time the view changes
   useEffect(() => {

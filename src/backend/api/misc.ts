@@ -101,9 +101,8 @@ export const handleShowDialog = (
 }
 
 import Store from 'electron-store'
-// FUTURE WORK
+// TODO: Refactor this into the backend so in order to set nodeIntegration: false
 // here is how the store methods can be refactored
-// in order to set nodeIntegration: false
 // but converting sync methods to async propagates through frontend
 
 // export const storeNew = async (

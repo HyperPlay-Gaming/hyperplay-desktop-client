@@ -187,6 +187,10 @@ export function createNecessaryFolders() {
   })
 }
 
+const onboardLocalStore = new TypeCheckedStoreBackend('onboardingStore', {
+  cwd: 'store'
+})
+
 export {
   currentGameConfigVersion,
   currentGlobalConfigVersion,
@@ -238,5 +242,6 @@ export {
   GITHUB_API,
   wineprefixFAQ,
   hyperplaySite,
-  customThemesWikiLink
+  customThemesWikiLink,
+  onboardLocalStore
 }

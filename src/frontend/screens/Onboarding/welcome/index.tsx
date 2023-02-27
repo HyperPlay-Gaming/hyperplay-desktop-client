@@ -7,6 +7,7 @@ import { LanguageSelector } from 'frontend/components/UI'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FlagPosition } from 'frontend/components/UI/LanguageSelector'
+import { onboardingStore } from 'frontend/helpers/electronStores'
 
 interface WelcomeProps {
   setScreen: React.Dispatch<React.SetStateAction<ONBOARDING_SCREEN>>
@@ -32,7 +33,12 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         )}
       </div>
       <LanguageSelector flagPossition={FlagPosition.PREPEND} />
-      <Button onClick={() => props.setScreen(ONBOARDING_SCREEN.ANALYTICS)}>
+      <Button
+        onClick={() => {
+          onboardingStore.set('completedEarlyAccess', true)
+          props.setScreen(ONBOARDING_SCREEN.ANALYTICS)
+        }}
+      >
         {t('button.continue', 'Continue')}
         <FontAwesomeIcon icon={faArrowRight} />
       </Button>
