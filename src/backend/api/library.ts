@@ -20,8 +20,12 @@ export const uninstall = async (
   shouldRemovePrefix: boolean,
   shouldRemoveSetting: boolean
 ) => {
-  if (runner === 'sideload') {
-    return ipcRenderer.invoke('removeApp', { appName, shouldRemovePrefix })
+  if (runner === 'sideload' || runner === 'hyperplay') {
+    return ipcRenderer.invoke('removeApp', {
+      appName,
+      shouldRemovePrefix,
+      runner
+    })
   } else {
     return ipcRenderer.invoke(
       'uninstall',

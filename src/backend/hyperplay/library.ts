@@ -17,8 +17,12 @@ import { notify } from 'backend/dialog/dialog'
 import path from 'path'
 import { logInfo, LogPrefix } from 'backend/logger/logger'
 import { getAppSettings } from 'backend/sideload/games'
+import {
+  addShortcuts,
+  removeShortcuts
+} from 'backend/shortcuts/shortcuts/shortcuts'
 
-export async function addGame(appId: string) {
+export async function addGameToLibrary(appId: string) {
   const res = await axios.get<HyperPlayRelease[]>(
     `https://developers.hyperplay.xyz/api/listings?id=${appId}`
   )
@@ -216,7 +220,10 @@ export async function installHyperPlayGame({
   }
 }
 
-export async function uninstall(appName: string, shouldRemovePrefix: boolean) {
+export async function uninstallHyperPlayGame(
+  appName: string,
+  shouldRemovePrefix: boolean
+) {
   const appInfo = getGameInfo(appName)
 
   if (!appInfo || !appInfo.install.install_path) {
@@ -245,6 +252,17 @@ export async function uninstall(appName: string, shouldRemovePrefix: boolean) {
   setTimeout(() => {
     sendFrontendMessage('refreshLibrary', 'hyperplay')
   })
+}
+
+export async function addAppShortcuts(
+  appName: string,
+  fromMenu?: boolean
+): Promise<void> {
+  return addShortcuts(getGameInfo(appName), fromMenu)
+}
+
+export async function removeAppShortcuts(appName: string): Promise<void> {
+  return removeShortcuts(getGameInfo(appName))
 }
 
 const installDistributables = async (gamePath: string) => {

@@ -242,6 +242,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   removeApp: (args: {
     appName: string
     shouldRemovePrefix: boolean
+    runner: Runner
   }) => Promise<void>
   launchApp: (appName: string) => Promise<boolean>
   isNative: (args: { appName: string; runner: Runner }) => boolean
@@ -295,6 +296,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   toggleDXVK: (args: ToolArgs) => Promise<boolean>
   pathExists: (path: string) => Promise<boolean>
   getExtensionId: () => Promise<string>
+  addGameToLibrary: (appName: string) => Promise<void>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

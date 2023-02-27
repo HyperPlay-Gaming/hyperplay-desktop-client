@@ -158,6 +158,7 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
+import { addGameToLibrary, uninstallHyperPlayGame } from './hyperplay/library'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -662,10 +663,10 @@ ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
     case 'winecfg':
       isSideloaded
         ? runWineCommand({
-          gameSettings,
-          commandParts: ['winecfg'],
-          wait: false
-        })
+            gameSettings,
+            commandParts: ['winecfg'],
+            wait: false
+          })
         : game.runWineCommand({ commandParts: ['winecfg'] })
       break
     case 'runExe':
@@ -673,15 +674,15 @@ ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
         const workingDir = path.parse(exe).dir
         isSideloaded
           ? runWineCommand({
-            gameSettings,
-            commandParts: [exe],
-            wait: false,
-            startFolder: workingDir
-          })
+              gameSettings,
+              commandParts: [exe],
+              wait: false,
+              startFolder: workingDir
+            })
           : game.runWineCommand({
-            commandParts: [exe],
-            startFolder: workingDir
-          })
+              commandParts: [exe],
+              startFolder: workingDir
+            })
       }
       break
   }
@@ -1101,12 +1102,12 @@ ipcMain.handle(
     writeFileSync(
       logFileLocation,
       'System Info:\n' +
-      `${systemInfo}\n` +
-      '\n' +
-      `Game Settings: ${gameSettingsString}\n` +
-      '\n' +
-      `Game launched at: ${startPlayingDate}\n` +
-      '\n'
+        `${systemInfo}\n` +
+        '\n' +
+        `Game Settings: ${gameSettingsString}\n` +
+        '\n' +
+        `Game launched at: ${startPlayingDate}\n` +
+        '\n'
     )
 
     // check if isNative, if not, check if wine is valid
@@ -1437,7 +1438,7 @@ ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
   if (runner === 'hyperplay') {
     return { status: 'error' }
 
-    // TODO: Implement update for HP games    
+    // TODO: Implement update for HP games
   }
 
   if (!isOnline()) {
@@ -1692,8 +1693,6 @@ ipcMain.handle('getFonts', async (event, reload) => {
   return cachedFonts
 })
 
-
-
 ipcMain.handle(
   'runWineCommandForGame',
   async (event, { appName, commandParts, runner }) => {
@@ -1753,7 +1752,13 @@ ipcMain.handle('getThemeCSS', async (event, theme) => {
 
 ipcMain.on('addNewApp', (e, args) => addNewApp(args))
 
-ipcMain.handle('removeApp', async (e, args) => removeApp(args))
+ipcMain.handle('removeApp', async (e, args) => {
+  if (args.runner === 'sideload') {
+    removeApp(args)
+  } else {
+    uninstallHyperPlayGame(args.appName, args.shouldRemovePrefix)
+  }
+})
 
 ipcMain.handle('launchApp', async (e, appName) => launchApp(appName))
 
@@ -1810,7 +1815,6 @@ import './utils/ipc_handler'
 import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
-import { addGame } from './hyperplay/library'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (
@@ -1882,5 +1886,5 @@ ipcMain.on('reloadApp', async () => {
 })
 
 ipcMain.on('addHyperplayGame', async (_e, gameId) => {
-  addGame(gameId)
+  addGameToLibrary(gameId)
 })
