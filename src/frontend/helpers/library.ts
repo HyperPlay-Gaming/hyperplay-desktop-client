@@ -4,7 +4,8 @@ import {
   GameInfo,
   InstallProgress,
   Runner,
-  UpdateParams
+  UpdateParams,
+  SideloadGame
 } from 'common/types'
 
 import { TFunction } from 'react-i18next'
@@ -14,7 +15,7 @@ import { DialogModalOptions } from 'frontend/types'
 const storage: Storage = window.localStorage
 
 type InstallArgs = {
-  gameInfo: GameInfo
+  gameInfo: GameInfo | SideloadGame
   installPath: string
   isInstalling: boolean
   previousProgress: InstallProgress | null

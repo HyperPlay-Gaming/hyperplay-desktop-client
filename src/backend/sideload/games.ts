@@ -62,11 +62,10 @@ export function addNewApp({
   is_installed = true,
   description,
   wineSupport,
-  systemRequirements,
-  runner = 'sideload'
+  systemRequirements
 }: SideloadGame): void {
   const game: SideloadGame = {
-    runner,
+    runner: 'sideload',
     app_name,
     title,
     install: {

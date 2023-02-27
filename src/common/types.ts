@@ -31,7 +31,7 @@ export type LaunchParams = {
 
 interface About {
   description: string
-  longDescription: string
+  shortDescription: string
 }
 
 export type Release = {
@@ -122,6 +122,7 @@ export interface GameInfo {
   is_linux_native: boolean
   browserUrl?: string
   web3?: Web3Features
+  releaseMeta?: HyperPlayReleaseMeta
 }
 
 export interface GameSettings {
@@ -232,7 +233,7 @@ export interface WineInstallation {
 
 export interface InstallArgs {
   path: string
-  platformToInstall: InstallPlatform
+  platformToInstall: InstallPlatform | AppPlatforms
   installDlcs?: boolean
   sdlList?: string[]
   installLanguage?: string
@@ -786,6 +787,8 @@ type PlatformInfo = {
   external_url: string
   name: string
   executable: string
+  installSize: number
+  downloadSize: number
 }
 
 export type ValistPlatforms = {

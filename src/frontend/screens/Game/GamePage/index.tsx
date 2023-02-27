@@ -366,8 +366,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
                   {extraInfo && extraInfo.about
                     ? extraInfo.about.description
                       ? extraInfo.about.description
-                      : extraInfo.about.longDescription
-                      ? extraInfo.about.longDescription
+                      : extraInfo.about.shortDescription
+                      ? extraInfo.about.shortDescription
                       : ''
                     : ''}
                 </div>
