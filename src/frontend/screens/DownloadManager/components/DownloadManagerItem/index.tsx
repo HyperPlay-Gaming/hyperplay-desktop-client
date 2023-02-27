@@ -2,7 +2,7 @@ import './index.css'
 
 import React, { useContext, useEffect, useState } from 'react'
 
-import { DMQueueElement } from 'common/types'
+import { DMQueueElement, GameInfo } from 'common/types'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import { handleStopInstallation } from 'frontend/helpers/library'
@@ -31,7 +31,8 @@ function convertToTime(time: number) {
 }
 
 const DownloadManagerItem = ({ element, current }: Props) => {
-  const { epic, gog, showDialogModal } = useContext(ContextProvider)
+  const { epic, gog, showDialogModal, sideloadedLibrary } =
+    useContext(ContextProvider)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
 
@@ -45,17 +46,19 @@ const DownloadManagerItem = ({ element, current }: Props) => {
     )
   }
 
-  const library = [...epic.library, ...gog.library]
+  const library = [...epic.library, ...gog.library, ...sideloadedLibrary]
 
   const { params, addToQueueTime, endTime, type, startTime } = element
   const { appName, runner, path, gameInfo: DmGameInfo, size } = params
 
   const [gameInfo, setGameInfo] = useState(DmGameInfo)
-
   useEffect(() => {
     const getNewInfo = async () => {
-      const newInfo = await getGameInfo(appName, runner)
-      if (newInfo && newInfo.runner !== 'sideload') {
+      if (runner === 'sideload' || runner === 'hyperplay') return
+
+      const newInfo = (await getGameInfo(appName, runner)) as GameInfo
+
+      if (newInfo) {
         setGameInfo(newInfo)
       }
     }
@@ -184,11 +187,11 @@ const DownloadManagerItem = ({ element, current }: Props) => {
       <span>{translatedTypes[type]}</span>
       <span>{getStoreName(runner, t2('Other'))}</span>
       <span className="icons">
-        {
+        {runner !== 'sideload' && runner !== 'hyperplay' && (
           <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
             {mainActionIcon()}
           </SvgButton>
-        }
+        )}
       </span>
     </div>
   )

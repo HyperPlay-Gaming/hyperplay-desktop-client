@@ -38,6 +38,8 @@ async function getDefaultSavePath(
     case 'sideload':
       return ''
   }
+
+  return ''
 }
 
 async function getDefaultLegendarySavePath(appName: string): Promise<string> {

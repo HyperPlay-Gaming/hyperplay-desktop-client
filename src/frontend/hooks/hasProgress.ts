@@ -17,6 +17,7 @@ export const hasProgress = (appName: string) => {
   )
 
   const calculatePercent = (currentProgress: InstallProgress) => {
+    console.log(currentProgress)
     // current/100 * (100-stored) + stored
     if (previousProgress.percent) {
       const currentPercent = currentProgress.percent

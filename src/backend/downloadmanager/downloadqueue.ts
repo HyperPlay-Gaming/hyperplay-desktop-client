@@ -4,6 +4,7 @@ import { getFileSize, getGame } from '../utils'
 import { DMQueueElement } from 'common/types'
 import { installQueueElement, updateQueueElement } from './utils'
 import { sendFrontendMessage } from '../main_window'
+import { downloadGame } from 'backend/hyperplay/library'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
@@ -54,21 +55,28 @@ async function initQueue() {
   while (element) {
     const queuedElements = downloadManager.get('queue', [])
     sendFrontendMessage('changedDMQueueInformation', queuedElements)
-    const game = getGame(element.params.appName, element.params.runner)
-    const installInfo = await game.getInstallInfo(
-      element.params.platformToInstall
-    )
-    element.params.size = installInfo?.manifest?.download_size
-      ? getFileSize(installInfo?.manifest?.download_size)
-      : '?? MB'
+
+    if (element.params.runner === 'gog' || element.params.runner === 'legendary') {
+      const game = getGame(element.params.appName, element.params.runner)
+      const installInfo = await game.getInstallInfo(
+        element.params.platformToInstall
+      )
+      element.params.size = installInfo?.manifest?.download_size
+        ? getFileSize(installInfo?.manifest?.download_size)
+        : '?? MB'
+    } else {
+      element.params.size = '?? MB'
+    }
     element.startTime = Date.now()
     queuedElements[0] = element
     downloadManager.set('queue', queuedElements)
 
-    const { status } =
-      element.type === 'install'
-        ? await installQueueElement(element.params)
-        : await updateQueueElement(element.params)
+    const { status } = (element.params.runner === 'gog' || element.params.runner === 'legendary') && element.type === 'install'
+      ? await installQueueElement(element.params)
+      : (element.params.runner === 'gog' || element.params.runner === 'legendary') && element.type === 'update'
+        ? await updateQueueElement(element.params)
+        : (element.params.runner === 'hyperplay') ? await downloadGame(element.params.appName) : { status: 'error' as const }
+
     element.endTime = Date.now()
     addToFinished(element, status)
     removeFromQueue(element.params.appName)

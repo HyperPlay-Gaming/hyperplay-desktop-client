@@ -41,7 +41,8 @@ export default function WebView() {
 
   const epicLoginUrl = 'https://legendary.gl/epiclogin'
 
-  const hyperplayStore = 'http://localhost:3000'
+  const hyperplayStore =
+    'https://hyperplay-monorepo-store.vercel.app?isLauncher=true'
   const epicStore = `https://www.epicgames.com/store/${lang}/`
   const gogStore = `https://gog.com`
   const wikiURL = 'https://github.com/G7DAO/HyperPlay/wiki'
@@ -178,7 +179,8 @@ export default function WebView() {
     setShowLoginWarningFor(null)
   }
 
-  const partitionForWebview = startUrl === hyperplayStore ? 'persist:hyperplaystore' : 'persist:epicstore'
+  const partitionForWebview =
+    startUrl === hyperplayStore ? 'persist:hyperplaystore' : 'persist:epicstore'
 
   return (
     <div className="WebView">

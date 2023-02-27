@@ -88,6 +88,20 @@ function handleRunnersPlatforms(
   platform: InstallPlatform,
   runner: Runner
 ): InstallPlatform {
+  if (runner === 'hyperplay') {
+    const architecture = process.arch.replace('x', 'amd')
+
+    switch (platform) {
+      case 'Windows':
+        return `windows_${architecture}` as InstallPlatform
+      case 'Mac':
+        return `darwin_${architecture}` as InstallPlatform
+      case 'linux':
+        return `linux_${architecture}` as InstallPlatform
+      case 'Browser':
+        return 'web' as InstallPlatform
+    }
+  }
   if (runner === 'legendary') {
     return platform
   }
