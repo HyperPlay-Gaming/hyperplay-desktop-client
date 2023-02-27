@@ -288,10 +288,20 @@
                 "privacyPolicyHere": "Privacy Policy here.",
                 "title": "Help Us improve HyperPlay!"
             },
+            "connectAgain": "Connect again",
+            "connectionCanceled": {
+                "description": "Please confirm the connection request on your mobile wallet to proceed.",
+                "title": "Connection canceled!"
+            },
+            "connectionConnected": {
+                "description": "Your wallet is connected. You are ready to game.",
+                "title": "Wallet connected!"
+            },
             "walletSelection": {
                 "pleaseConnect": "Please connect your wallet, or download the Metamask mobile-app to get\n        started:",
                 "screens": {
                     "import": {
+                        "createNewWallet": "Create new MM extension wallet",
                         "details": "By importing, your MetaMask installation and  settings will be imported into HyperPlay.",
                         "title": "Select the browser to import from"
                     },
