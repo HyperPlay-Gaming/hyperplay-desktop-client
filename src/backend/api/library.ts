@@ -5,7 +5,8 @@ import {
   LaunchParams,
   SideloadGame,
   ImportGameArgs,
-  GameStatus
+  GameStatus,
+  AppPlatforms
 } from 'common/types'
 
 export const removeFolder = (args: [path: string, folderName: string]) =>
@@ -94,5 +95,12 @@ export const handleRecentGamesChanged = (callback: any) => {
 export const addNewApp = (args: SideloadGame) =>
   ipcRenderer.send('addNewApp', args)
 
-export const launchApp = async (appName: string): Promise<boolean> =>
-  ipcRenderer.invoke('launchApp', appName)
+export const launchApp = async (
+  appName: string,
+  runner: 'hyperplay' | 'sideload'
+): Promise<boolean> => ipcRenderer.invoke('launchApp', appName, runner)
+
+export const getHyperPlayInstallInfo = async (
+  appName: string,
+  platform: AppPlatforms
+) => ipcRenderer.invoke('getHyperPlayInstallInfo', appName, platform)

@@ -41,7 +41,10 @@ import {
   metricsStore,
   wineDownloaderInfoStore
 } from '../helpers/electronStores'
-import { sideloadLibrary } from 'frontend/helpers/electronStores'
+import {
+  sideloadLibrary,
+  hyperPlayLibraryStore
+} from 'frontend/helpers/electronStores'
 
 const storage: Storage = window.localStorage
 const globalSettings = configStore.get_nodefault('settings')
@@ -101,6 +104,7 @@ interface StateProps {
   }
   showMetaMaskBrowserSidebarLinks: boolean
   metricsOptInStatus: MetricsOptInStatus
+  hyperPlayLibrary: GameInfo[]
 }
 
 class GlobalState extends PureComponent<Props> {
@@ -165,6 +169,7 @@ class GlobalState extends PureComponent<Props> {
     activeController: '',
     connectivity: { status: 'offline', retryIn: 0 },
     sideloadedLibrary: sideloadLibrary.get('games', []),
+    hyperPlayLibrary: hyperPlayLibraryStore.get('games', []),
     dialogModalOptions: { showDialog: false },
     externalLinkDialogOptions: { showDialog: false },
     settingsModalOpen: { value: false, type: 'settings', gameInfo: undefined },

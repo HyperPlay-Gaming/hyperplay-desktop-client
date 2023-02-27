@@ -30,7 +30,9 @@ import {
   DMQueueElement,
   ConnectivityStatus,
   GamepadActionArgs,
-  ExtraInfo
+  ExtraInfo,
+  AppPlatforms,
+  PlatformInfo
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
@@ -60,7 +62,7 @@ interface HyperPlaySyncIPCFunctions {
   reloadApp: () => void
   createNewMetaMaskWallet: () => void
   enableOnEvents: (topic: string) => void
-  addHyperplayGame: (gameId: string) => void
+  addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
 }
 
@@ -154,6 +156,23 @@ interface HyperPlayAsyncIPCFunctions {
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
+  getHyperPlayGameInfo: (gameId: string) => Promise<GameInfo | null>
+  getHyperPlayInstallInfo: (
+    appName: string,
+    platform: AppPlatforms
+  ) => Promise<PlatformInfo | null>
+  addHyperplayGame: (gameId: string) => Promise<void>
+  installHyperPlayGame: (
+    gameId: string,
+    dirpath: string,
+    platformToInstall: AppPlatforms
+  ) => Promise<StatusPromise>
+  uninstallHyperplayGame: (
+    gameId: string,
+    shouldRemovePrefix: boolean,
+    shoudlRemoveSetting: boolean
+  ) => Promise<void>
+  launchHyperplayGame: (gameId: string) => Promise<StatusPromise>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -244,7 +263,10 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     shouldRemovePrefix: boolean
     runner: Runner
   }) => Promise<void>
-  launchApp: (appName: string) => Promise<boolean>
+  launchApp: (
+    appName: string,
+    runner: 'sideload' | 'hyperplay'
+  ) => Promise<boolean>
   isNative: (args: { appName: string; runner: Runner }) => boolean
   getLogContent: (args: { appName: string; defaultLast?: boolean }) => string
   installWineVersion: (

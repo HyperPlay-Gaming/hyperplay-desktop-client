@@ -30,7 +30,8 @@
       "build/win_icon.ico",
       "build/trayIconLight24x24.png",
       "build/trayIconDark24x24.png",
-      "build/extensions"
+      "build/extensions",
+      "build/hyperplay_store_preload.js"
     ],
     "protocols": [
       {

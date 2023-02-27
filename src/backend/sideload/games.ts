@@ -28,6 +28,7 @@ import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
 import { app, BrowserWindow } from 'electron'
+import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
 const buildDir = resolve(__dirname, '../../build')
 
 export function appLogFileLocation(appName: string) {
@@ -181,8 +182,22 @@ const openNewBrowserGameWindow = async (
   })
 }
 
-export async function launchApp(appName: string): Promise<boolean> {
-  const gameInfo = getAppInfo(appName)
+export async function launchApp(
+  appName: string,
+  runner: 'sideload' | 'hyperplay'
+): Promise<boolean> {
+  let gameInfo
+  if (runner === 'sideload') {
+    gameInfo = getAppInfo(appName)
+  }
+  if (runner === 'hyperplay') {
+    gameInfo = getHyperPlayGameInfo(appName)
+  }
+
+  if (!gameInfo) {
+    return false
+  }
+
   const {
     install: { executable },
     folder_name,

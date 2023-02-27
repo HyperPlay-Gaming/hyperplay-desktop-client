@@ -110,6 +110,11 @@ const metricsStore = new TypeCheckedStoreFrontend('metricsStore', {
   name: 'metrics-store'
 })
 
+const hyperPlayLibraryStore = new TypeCheckedStoreFrontend('hpLibraryStore', {
+  cwd: 'hp_store',
+  name: 'library'
+})
+
 export {
   configStore,
   gogLibraryStore,
@@ -120,5 +125,6 @@ export {
   sideloadLibrary,
   wineDownloaderInfoStore,
   downloadManagerStore,
-  metricsStore
+  metricsStore,
+  hyperPlayLibraryStore
 }

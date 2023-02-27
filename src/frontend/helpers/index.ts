@@ -1,3 +1,4 @@
+import { AppPlatforms, PlatformInfo } from './../../common/types'
 import {
   GameInfo,
   InstallProgress,
@@ -75,8 +76,14 @@ const getGameSettings = async (
 const getInstallInfo = async (
   appName: string,
   runner: Runner,
-  installPlatform: InstallPlatform
-): Promise<LegendaryInstallInfo | GogInstallInfo | null> => {
+  installPlatform: InstallPlatform | AppPlatforms
+): Promise<LegendaryInstallInfo | GogInstallInfo | PlatformInfo | null> => {
+  if (runner === 'hyperplay') {
+    return window.api.getHyperPlayInstallInfo(
+      appName,
+      installPlatform as AppPlatforms
+    )
+  }
   return window.api.getInstallInfo(
     appName,
     runner,

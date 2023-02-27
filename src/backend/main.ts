@@ -158,7 +158,13 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
-import { addGameToLibrary, uninstallHyperPlayGame } from './hyperplay/library'
+import {
+  addGameToLibrary,
+  getHyperPlayGameInfo,
+  getHyperPlayGameInstallInfo,
+  installHyperPlayGame,
+  uninstallHyperPlayGame
+} from './hyperplay/library'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -236,21 +242,18 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
 const loadMainWindowURL = function () {
   if (!app.isPackaged) {
-    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-    //   import('electron-devtools-installer').then((devtools) => {
-    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
-    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-    //   import('electron-devtools-installer').then((devtools) => {
-    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
+    if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+      import('electron-devtools-installer').then((devtools) => {
+        const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
 
-    //     installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
-    //       logWarning(['An error occurred: ', err], LogPrefix.Backend)
-    //     })
-    //   })
-    // }
+        installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
+          logWarning(['An error occurred: ', err], LogPrefix.Backend)
+        })
+      })
+    }
     mainWindow.loadURL('http://localhost:5173?view=App')
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(
@@ -805,8 +808,12 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
+  console.log('getGameInfo', appName, runner)
   if (runner === 'sideload') {
     return getAppInfo(appName)
+  }
+  if (runner === 'hyperplay') {
+    return getHyperPlayGameInfo(appName)
   }
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
   if (runner === 'legendary' && !LegendaryLibrary.get().hasGame(appName)) {
@@ -1035,7 +1042,8 @@ let powerDisplayId: number | null
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {
-    const isSideloaded = runner === 'sideload'
+    // TODO: split that into two stuff
+    const isSideloaded = runner === 'sideload' || runner === 'hyperplay'
     const extGame = getGame(appName, runner)
     const game = isSideloaded ? getAppInfo(appName) : extGame.getGameInfo()
     const gameSettings = isSideloaded
@@ -1138,7 +1146,7 @@ ipcMain.handle(
     }
 
     const command = isSideloaded
-      ? launchApp(appName)
+      ? launchApp(appName, runner)
       : extGame.launch(launchArguments)
 
     const launchResult = await command.catch((exception) => {
@@ -1760,7 +1768,9 @@ ipcMain.handle('removeApp', async (e, args) => {
   }
 })
 
-ipcMain.handle('launchApp', async (e, appName) => launchApp(appName))
+ipcMain.handle('launchApp', async (e, appName, runner) =>
+  launchApp(appName, runner)
+)
 
 ipcMain.handle('isNative', (e, { appName, runner }) => {
   if (runner === 'sideload') {
@@ -1885,6 +1895,29 @@ ipcMain.on('reloadApp', async () => {
   }
 })
 
-ipcMain.on('addHyperplayGame', async (_e, gameId) => {
+ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
+  console.log('addHyperplayGame', gameId)
   addGameToLibrary(gameId)
 })
+
+ipcMain.handle('getHyperPlayGameInfo', async (_e, gameId) => {
+  const gameInfo = getHyperPlayGameInfo(gameId)
+  if (gameInfo) {
+    return gameInfo
+  }
+  return null
+})
+
+ipcMain.handle('getHyperPlayInstallInfo', async (_e, gameId, platform) => {
+  const installInfo = getHyperPlayGameInstallInfo(gameId, platform)
+  if (installInfo) {
+    return installInfo
+  }
+  return null
+})
+
+// ipcMain.handle('installHyperPlayGame', async (_e, gameId: string,
+//   dirpath: string,
+//   platformToInstall: AppPlatforms) => {
+//   installHyperPlayGame(gameId, dirpath, platformToInstall)
+// }

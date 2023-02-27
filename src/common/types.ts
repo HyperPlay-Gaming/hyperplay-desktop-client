@@ -783,12 +783,12 @@ export type AppPlatforms =
   | 'darwin_arm64'
   | 'web'
 
-type PlatformInfo = {
+export type PlatformInfo = {
   external_url: string
   name: string
   executable: string
   installSize: number
-  downloadSize: number
+  downloadize: number
 }
 
 export type ValistPlatforms = {

@@ -51,7 +51,7 @@ export async function addGameToLibrary(appId: string) {
     title: data.projectMeta.name,
     art_cover: data.releaseMeta.image,
     art_square: data.projectMeta.main_capsule,
-    is_installed: false,
+    is_installed: Boolean(data.releaseMeta.platforms.web),
     cloud_save_enabled: false,
     namespace: '',
     developer: data.accountName,
@@ -69,10 +69,12 @@ export async function addGameToLibrary(appId: string) {
   libraryStore.set('games', [...currentLibrary, gameInfo])
 }
 
-export function getGameInfo(appName: string): GameInfo {
+export function getHyperPlayGameInfo(appName: string): GameInfo {
   const appInfo = libraryStore
-    .get('library', [])
+    .get('games', [])
     .find((app) => app.app_name === appName)
+
+  console.log('getHyperPlayGameInfo', appInfo, libraryStore.get('games', []))
 
   if (!appInfo) {
     throw new Error('App not found in library')
@@ -81,13 +83,13 @@ export function getGameInfo(appName: string): GameInfo {
   return appInfo
 }
 
-export async function downloadGame(
+async function downloadGame(
   appName: string,
   installPath: string,
   platformToInstall: AppPlatforms
 ): Promise<void> {
   try {
-    const appInfo = getGameInfo(appName)
+    const appInfo = getHyperPlayGameInfo(appName)
 
     if (!appInfo || !appInfo.releaseMeta) {
       throw new Error('App not found in library')
@@ -157,7 +159,7 @@ export async function installHyperPlayGame({
     return { status: 'error', error: 'Path does not exist' }
   }
 
-  const { title, releaseMeta } = getGameInfo(appName)
+  const { title, releaseMeta } = getHyperPlayGameInfo(appName)
 
   if (!releaseMeta) {
     return { status: 'error', error: 'Release meta not found' }
@@ -173,6 +175,20 @@ export async function installHyperPlayGame({
     const install_size = getFileSize(
       releaseMeta.platforms[platformToInstall].installSize
     )
+
+    if (isWindows) {
+      await spawnAsync('powershell', [
+        'Expand-Archive',
+        '-LiteralPath',
+        zipFile,
+        '-DestinationPath',
+        destinationPath
+      ])
+
+      await installDistributables(destinationPath)
+    } else {
+      await spawnAsync('unzip', [dirpath, title])
+    }
 
     const installedInfo: InstalledInfo = {
       install_path: destinationPath,
@@ -192,20 +208,6 @@ export async function installHyperPlayGame({
 
     libraryStore.set('games', currentLibrary)
 
-    if (isWindows) {
-      await spawnAsync('powershell', [
-        'Expand-Archive',
-        '-LiteralPath',
-        zipFile,
-        '-DestinationPath',
-        destinationPath
-      ])
-
-      await installDistributables(destinationPath)
-    } else {
-      await spawnAsync('unzip', [dirpath, title])
-    }
-
     fs.rmSync(zipFile)
 
     notify({
@@ -224,7 +226,7 @@ export async function uninstallHyperPlayGame(
   appName: string,
   shouldRemovePrefix: boolean
 ) {
-  const appInfo = getGameInfo(appName)
+  const appInfo = getHyperPlayGameInfo(appName)
 
   if (!appInfo || !appInfo.install.install_path) {
     return
@@ -258,11 +260,11 @@ export async function addAppShortcuts(
   appName: string,
   fromMenu?: boolean
 ): Promise<void> {
-  return addShortcuts(getGameInfo(appName), fromMenu)
+  return addShortcuts(getHyperPlayGameInfo(appName), fromMenu)
 }
 
 export async function removeAppShortcuts(appName: string): Promise<void> {
-  return removeShortcuts(getGameInfo(appName))
+  return removeShortcuts(getHyperPlayGameInfo(appName))
 }
 
 const installDistributables = async (gamePath: string) => {
@@ -279,23 +281,13 @@ const installDistributables = async (gamePath: string) => {
   }
 }
 
-// not sure if we need that anymore
-export const getInstallInfo = (data: HyperPlayRelease) => {
-  const installPath = GlobalConfig.get().getSettings().defaultInstallPath
-  const destinationPath = path.join(installPath, data.projectName)
-  const executable = path.join(
-    destinationPath,
-    data.releaseMeta.platforms.windows_amd64.executable
-  )
-
-  const architecture = process.arch.replace('x', 'amd')
-  const platform =
-    (isWindows ? 'windows_' : isLinux ? 'linux_' : 'darwin_') + architecture
-
-  return {
-    installPath,
-    destinationPath,
-    executable,
-    platform: platform as AppPlatforms
+export const getHyperPlayGameInstallInfo = (
+  appName: string,
+  platformToInstall: AppPlatforms
+) => {
+  const gameInfo = getHyperPlayGameInfo(appName)
+  if (!gameInfo || !gameInfo.releaseMeta) {
+    return
   }
+  return gameInfo.releaseMeta.platforms[platformToInstall]
 }

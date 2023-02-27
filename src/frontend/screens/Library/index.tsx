@@ -63,8 +63,11 @@ export default React.memo(function Library(): JSX.Element {
     showHidden,
     handleCategory,
     showFavourites: showFavouritesLibrary,
-    showNonAvailable
+    showNonAvailable,
+    hyperPlayLibrary
   } = useContext(ContextProvider)
+
+  console.log(hyperPlayLibrary)
 
   const [showModal, setShowModal] = useState<ModalState>({
     game: '',
@@ -237,7 +240,12 @@ export default React.memo(function Library(): JSX.Element {
         ? sideloadedLibrary
         : []
 
-      library = [...sideloadedApps, ...epicLibrary, ...gogLibrary]
+      library = [
+        ...hyperPlayLibrary,
+        ...sideloadedApps,
+        ...epicLibrary,
+        ...gogLibrary
+      ]
 
       if (!showNonAvailable) {
         const nonAvailbleGames = storage.getItem('nonAvailableGames') || '[]'
@@ -309,7 +317,9 @@ export default React.memo(function Library(): JSX.Element {
     showHidden,
     hiddenGames,
     showFavouritesLibrary,
-    showNonAvailable
+    showNonAvailable,
+    sideloadedLibrary,
+    hyperPlayLibrary
   ])
 
   if (!epic && !gog) {
