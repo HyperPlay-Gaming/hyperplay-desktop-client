@@ -10,9 +10,8 @@ import {
   InstalledInfo
 } from 'common/types'
 import { isWindows, isLinux } from 'backend/constants'
-import { spawnAsync } from 'backend/utils'
+import { downloadFile, getFileSize, spawnAsync } from 'backend/utils'
 import { GlobalConfig } from 'backend/config'
-import { download } from 'electron-dl'
 import axios from 'axios'
 import { notify } from 'backend/dialog/dialog'
 import path from 'path'
@@ -111,20 +110,23 @@ export async function downloadGame(
       // eslint-disable-next-line no-empty
     } catch (e) {}
 
-    await download(window, downloadUrl, {
-      directory: installPath,
-      onProgress: (progress) => {
-        console.log(progress)
+    await downloadFile(
+      downloadUrl,
+      installPath,
+      (downloadedBytes, totalBytes, progress) => {
         window.webContents.send('gameStatusUpdate', {
           appName,
           status: 'installing',
           progress: {
-            percent: progress.percent,
+            percent: progress,
             folder: installPath
           }
         })
+        console.log(
+          `Downloaded ${downloadedBytes} bytes out of ${totalBytes} (${progress}% complete)`
+        )
       }
-    })
+    )
 
     window.webContents.send('gameStatusUpdate', {
       appName,
@@ -164,11 +166,14 @@ export async function installHyperPlayGame({
     const zipFile = path.join(dirpath, gameInfo.name)
     const destinationPath = path.join(dirpath, title)
     const executable = path.join(destinationPath, gameInfo.executable)
+    const install_size = getFileSize(
+      releaseMeta.platforms[platformToInstall].installSize
+    )
 
     const installedInfo: InstalledInfo = {
       install_path: destinationPath,
       executable,
-      install_size: '1GB',
+      install_size,
       is_dlc: false,
       version: releaseMeta.name,
       platform: platformToInstall

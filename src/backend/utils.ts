@@ -15,7 +15,7 @@ import {
   GameSettings,
   SideloadGame
 } from 'common/types'
-import * as axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import {
   app,
   dialog,
@@ -31,7 +31,12 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
+import {
+  createWriteStream,
+  appendFileSync,
+  existsSync,
+  rmSync
+} from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
@@ -171,7 +176,7 @@ async function isEpicServiceOffline(
   })
 
   try {
-    const { data } = await axios.default.get(epicStatusApi)
+    const { data } = await axios.get(epicStatusApi)
 
     for (const component of data.components) {
       const { name: name, status: indicator } = component
@@ -762,7 +767,7 @@ const getLatestReleases = async (): Promise<Release[]> => {
   logInfo('Checking for new HerHyperPlayoic Updates', LogPrefix.Backend)
 
   try {
-    const { data: releases } = await axios.default.get(GITHUB_API)
+    const { data: releases } = await axios.get(GITHUB_API)
     const latestStable: Release = releases.filter(
       (rel: Release) => rel.prerelease === false
     )[0]
@@ -805,9 +810,7 @@ const getCurrentChangelog = async (): Promise<Release | null> => {
   try {
     const current = app.getVersion()
 
-    const { data: release } = await axios.default.get(
-      `${GITHUB_API}/tags/v${current}`
-    )
+    const { data: release } = await axios.get(`${GITHUB_API}/tags/v${current}`)
 
     return release as Release
   } catch (error) {
@@ -1127,6 +1130,45 @@ export async function moveOnUnix(
     }
   }
   return { status: 'done', installPath: destination }
+}
+
+export type ProgressCallback = (
+  totalBytes: number,
+  downloadedBytes: number,
+  progress: number
+) => void
+
+export async function downloadFile(
+  url: string,
+  destPath: string,
+  progressCallback?: ProgressCallback
+): Promise<void> {
+  const writer = createWriteStream(destPath)
+
+  const response: AxiosResponse = await axios({
+    url,
+    method: 'GET',
+    responseType: 'stream'
+  })
+
+  const totalLength = Number(response.headers['content-length'])
+
+  let downloadedBytes = 0
+
+  response.data.on('data', (chunk: Buffer) => {
+    downloadedBytes += chunk.length
+    const progress = Math.round((downloadedBytes / totalLength) * 100)
+    if (progressCallback) {
+      progressCallback(totalLength, downloadedBytes, progress)
+    }
+  })
+
+  response.data.pipe(writer)
+
+  return new Promise<void>((resolve, reject) => {
+    writer.on('finish', resolve)
+    writer.on('error', reject)
+  })
 }
 
 export {
