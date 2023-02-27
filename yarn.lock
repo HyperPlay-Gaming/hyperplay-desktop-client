@@ -933,15 +933,15 @@
   resolved "https://registry.yarnpkg.com/@fiahfy/packbits/-/packbits-0.0.6.tgz#d93146683fa59f476c6ccb988eb1cf9d7c16e489"
   integrity sha512-XuhF/edg+iIvXjkCWgfj6fWtRi/KrEPg2ILXj1l86EN4EssuOiPcLKgkMDr9cL8jTGtVd/MKUWW6Y0/ZVf1PGA==
 
-"@fontsource/chakra-petch@^4.5.8":
+"@fontsource/barlow@^4.5.9":
   version "4.5.9"
-  resolved "https://registry.yarnpkg.com/@fontsource/chakra-petch/-/chakra-petch-4.5.9.tgz#590b98223b5db50290f5e202887d35fd34b62063"
-  integrity sha512-53gZP08NrZdDB2zSZV5+eg51iKg+pGKCHiALbB8FTv6Gp2EDPGV39ixAhO72bJhChEbTwrH5yJ7GFYLN7S93ow==
+  resolved "https://registry.yarnpkg.com/@fontsource/barlow/-/barlow-4.5.9.tgz#e3b18084e839c1c0a5ac30f7fef6737cd720f6df"
+  integrity sha512-Nzg7bpw6raZtNdHwvLIt6ue/Gas/tpsNyf7zrRvVdV38iOrtOip2aabO3lexEyiYkKjKrlqAjEyAtTrC2XfkRg==
 
-"@fontsource/jura@^4.5.11":
-  version "4.5.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/jura/-/jura-4.5.12.tgz#1d8f3f4aadd7d0d93129a0b238cb81c16741c09b"
-  integrity sha512-ZfdpRg0Gpag6xoXgubvwC1l0q2PS7YnVsBSvsM8HXJdkUcoJ4vu4uKpOezpUj84krANsEn2FhE3uJElXi7kPrg==
+"@fontsource/rajdhani@^4.5.10":
+  version "4.5.10"
+  resolved "https://registry.yarnpkg.com/@fontsource/rajdhani/-/rajdhani-4.5.10.tgz#f87389032dcb626ee606115161eea66f41b0f4ae"
+  integrity sha512-4qsQsC4BELF8FC6UEBs5QBkek4v+/t0PYmQYtw1WDlNlq0V5mjUldMxjXzZano9/5HBihL7ztfQRPOf8WYexIQ==
 
 "@fortawesome/fontawesome-common-types@6.2.0":
   version "6.2.0"

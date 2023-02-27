@@ -16,8 +16,8 @@ import { configStore } from './helpers/electronStores'
 import { initOnlineMonitor } from './helpers/onlineMonitor'
 import { defaultThemes } from './components/UI/ThemeSelector'
 
-import '@fontsource/chakra-petch'
-import '@fontsource/jura'
+import '@fontsource/rajdhani'
+import '@fontsource/barlow'
 import StoreController from './store'
 
 initOnlineMonitor()

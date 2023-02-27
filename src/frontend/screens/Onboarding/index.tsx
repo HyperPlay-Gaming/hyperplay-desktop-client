@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import './index.css'
+import OnboardingStyles from './index.module.scss'
 import { ONBOARDING_SCREEN } from './types'
 import Welcome from './welcome'
 import Analytics from './analytics'
 import WalletSelection from './walletSelection'
 import { onboardingStore } from 'frontend/helpers/electronStores'
+import classNames from 'classnames'
 
 interface OnboardingProps {
   disableOnboarding: () => void
@@ -45,8 +46,17 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     }
   }
   return (
-    <div className="blurBackground">
-      <div className="welcomeModal">{renderContent(currentScreen)}</div>
+    <div className={OnboardingStyles.blurBackground}>
+      <div
+        className={classNames(`${OnboardingStyles.welcomeModal}`, {
+          [`${OnboardingStyles.wideModal}`]:
+            currentScreen === ONBOARDING_SCREEN.WALLET_SELECTION,
+          [`${OnboardingStyles.regularModal}`]:
+            currentScreen !== ONBOARDING_SCREEN.WALLET_SELECTION
+        })}
+      >
+        {renderContent(currentScreen)}
+      </div>
     </div>
   )
 }

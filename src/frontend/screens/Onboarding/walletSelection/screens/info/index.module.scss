@@ -1,9 +1,40 @@
 .walletInfoContainer {
   display: flex;
   flex-direction: row;
+  margin-bottom: var(--space-lg);
+}
+
+.walletTextContainer {
+  margin-left: var(--space-md);
 }
 
 .actionButtonContainer {
   display: flex;
   flex-direction: row;
+  margin-top: auto;
+  justify-content: space-around;
+}
+
+.actionButtonContainer Button {
+  border-radius: var(--space-sm);
+}
+
+.walletInfoScreen {
+  display: flex;
+  flex-direction: column;
+  // justify-content: space-between;
+  height: 100%;
+}
+
+.title {
+  align-self: center;
+  margin-bottom: var(--space-lg);
+}
+
+.caption {
+  color: var(--color-neutral-300);
+}
+
+.infoTextCaption {
+  color: var(--color-neutral-200);
 }

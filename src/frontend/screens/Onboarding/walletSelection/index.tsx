@@ -178,7 +178,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
 
   return (
     <div className={WalletSelectionStyles.welcomeContainer}>
-      <div>
+      <div className={WalletSelectionStyles.walletOptionsContainer}>
         <HyperPlayLogo />
         <div className="title">
           {t(
@@ -186,30 +186,30 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
             `Wallet Connections`
           )}
         </div>
-        <div className="content-sm text-secondary">
+        <div className="body">
           {t(
             'hyperplay.onboarding.walletSelection.pleaseConnect',
             `Please connect your wallet, or download the Metamask mobile-app to get
-        started.`
+        started:`
           )}
         </div>
         <WalletOption
           title="MetaMask Mobile"
-          subtext="Connect with MetaMask Mobile"
+          subtext="Transactions on mobile. Most secure."
           icon={<MMTransparent height={34} width={34} />}
           onClick={async () => providerClicked(PROVIDERS.METAMASK_MOBILE)}
-          isRecommended={true}
+          isRecommended={false}
         />
         <WalletOption
           title="MetaMask Extension"
-          subtext="Connect with MetaMask Extension"
+          subtext="Approve transactions in-game."
           icon={<MMTransparent height={34} width={34} />}
           onClick={handleMmExtensionProviderClicked}
           isRecommended={false}
         />
         <WalletOption
           title="WalletConnect"
-          subtext="Connect with WalletConnect"
+          subtext="Use 40+ other wallets."
           icon={<WCBlue height={34} width={34} />}
           onClick={async () => providerClicked(PROVIDERS.WALLET_CONNECT)}
           isRecommended={false}

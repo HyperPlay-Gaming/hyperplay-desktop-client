@@ -1,0 +1,22 @@
+.languageSelector {
+  margin: var(--space-lg) auto;
+}
+
+.actionButton {
+  margin: 0px auto;
+}
+.actionButton button {
+  border-radius: var(--space-xs);
+}
+
+.actionButtonArrow {
+  margin-left: var(--space-xs);
+}
+
+.welcomeBody {
+  margin-bottom: var(--space-lg);
+}
+
+.welcomeBodyText {
+  color: var(--color-neutral-100);
+}

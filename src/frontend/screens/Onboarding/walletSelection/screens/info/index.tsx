@@ -18,9 +18,11 @@ const InfoText = function ({ icon, title, details }: InfoTextProps) {
       <div>
         <img src={icon} />
       </div>
-      <div>
+      <div className={WalletInfoStyles.walletTextContainer}>
         <div className="menu">{title}</div>
-        <div className="caption-sm">{details}</div>
+        <div className={`caption-sm ${WalletInfoStyles.infoTextCaption}`}>
+          {details}
+        </div>
       </div>
     </div>
   )
@@ -33,8 +35,8 @@ interface WalletInfoScreenProps {
 
 const WalletInfoScreen = (props: WalletInfoScreenProps) => {
   return (
-    <>
-      <div className="title">
+    <div className={WalletInfoStyles.walletInfoScreen}>
+      <div className={`title ${WalletInfoStyles.title}`}>
         {t(
           'hyperplay.onboarding.walletSelection.screens.info.title',
           `What is a wallet?`
@@ -62,13 +64,19 @@ const WalletInfoScreen = (props: WalletInfoScreenProps) => {
           `An alternative to creating new accounts and passwords on every website, just connect your wallet instead.`
         )}
       />
+      <div className={`caption-sm ${WalletInfoStyles.caption}`}>
+        {t(
+          'hyperplay.onboarding.walletSelection.screens.info.createWalletDescription',
+          `Click in “Create a wallet” below if you do not have a wallet or want to create a new one:`
+        )}
+      </div>
       <div className={WalletInfoStyles.actionButtonContainer}>
         <Button type="tertiary" onClick={props.skipClicked}>
           Skip for now
         </Button>
         <Button onClick={props.createWalletClicked}>Create a wallet</Button>
       </div>
-    </>
+    </div>
   )
 }
 
