@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs'
 import { getMainWindow, sendFrontendMessage } from './../main_window'
 import { existsSync } from 'graceful-fs'
 
@@ -12,19 +12,17 @@ import { getAppInfo, removeApp, addNewApp } from 'backend/sideload/games'
 import axios from 'axios'
 import { notify } from 'backend/dialog/dialog'
 import path from 'path'
-import { addToQueue, initQueue } from 'backend/downloadmanager/downloadqueue';
+import { addToQueue, initQueue } from 'backend/downloadmanager/downloadqueue'
 
 export async function addGame(appId: string) {
-  const res = await axios.get<HyperPlayRelease[]>(`https://developers.hyperplay.xyz/api/listings?id=${appId}`)
+  const res = await axios.get<HyperPlayRelease[]>(
+    `https://developers.hyperplay.xyz/api/listings?id=${appId}`
+  )
 
   const data = res.data[0]
   libraryStore.set(data._id, data)
 
-  const {
-    installPath,
-    executable,
-    platform
-  } = getInfo(data)
+  const { installPath, executable, platform } = getInfo(data)
 
   if (data.releaseMeta.platforms.web) {
     return install(data, '', 'web')
@@ -32,7 +30,7 @@ export async function addGame(appId: string) {
 
   addNewApp({
     app_name: data._id,
-    runner: 'sideload' as const,
+    runner: 'hyperplay',
     title: data.projectMeta.name,
     art_cover: data.releaseMeta.image,
     is_installed: true as const,
@@ -85,22 +83,22 @@ export async function addGame(appId: string) {
             longDescription: data.projectMeta.description
           },
           reqs: [],
-          storeUrl: `https://store.hyperplay.xyz/game/${data.projectName}`,
+          storeUrl: `https://store.hyperplay.xyz/game/${data.projectName}`
         }
-      },
+      }
     }
   })
 
   initQueue()
 
-  sendFrontendMessage('refreshLibrary', 'sideload')
+  sendFrontendMessage('refreshLibrary', 'hyperplay')
 }
 
 export async function downloadGame(
-  appName: string,
+  appName: string
   // installPath: string,
   // platformToInstall: AppPlatforms
-): Promise<{ status: 'error' | 'done'; }> {
+): Promise<{ status: 'error' | 'done' }> {
   try {
     const appInfo = libraryStore.get_nodefault(appName)
 
@@ -122,9 +120,11 @@ export async function downloadGame(
 
     // prevent from the next download being named eg. "game (1).zip"
     try {
-      fs.rmSync(path.join(installPath, appInfo.releaseMeta.platforms[platform].name))
+      fs.rmSync(
+        path.join(installPath, appInfo.releaseMeta.platforms[platform].name)
+      )
       // eslint-disable-next-line no-empty
-    } catch (e) { }
+    } catch (e) {}
 
     await download(window, downloadUrl, {
       directory: installPath,
@@ -182,11 +182,17 @@ async function install(
     is_installed: true as const,
     art_square: art_cover,
     canRunOffline: true,
-    web3: { supported: true },
+    web3: { supported: true }
   }
 
   if (isWindows) {
-    await spawnAsync('powershell', ['Expand-Archive', '-LiteralPath', zipFile, '-DestinationPath', destinationPath])
+    await spawnAsync('powershell', [
+      'Expand-Archive',
+      '-LiteralPath',
+      zipFile,
+      '-DestinationPath',
+      destinationPath
+    ])
 
     await installDistributables(destinationPath)
   } else {
@@ -231,7 +237,6 @@ export function uninstall(appName: string, shouldRemovePrefix: boolean) {
   })
 }
 
-
 const installDistributables = async (gamePath: string) => {
   const distFolder = path.join(gamePath, 'dist')
   if (!fs.existsSync(distFolder)) {
@@ -249,10 +254,14 @@ const installDistributables = async (gamePath: string) => {
 const getInfo = (data: HyperPlayRelease) => {
   const installPath = GlobalConfig.get().getSettings().defaultInstallPath
   const destinationPath = path.join(installPath, data.projectName)
-  const executable = path.join(destinationPath, data.releaseMeta.platforms.windows_amd64.executable)
+  const executable = path.join(
+    destinationPath,
+    data.releaseMeta.platforms.windows_amd64.executable
+  )
 
   const architecture = process.arch.replace('x', 'amd')
-  const platform = (isWindows ? 'windows_' : isLinux ? 'linux_' : 'darwin_') + architecture
+  const platform =
+    (isWindows ? 'windows_' : isLinux ? 'linux_' : 'darwin_') + architecture
 
   return {
     installPath,

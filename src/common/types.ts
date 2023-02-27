@@ -484,22 +484,22 @@ interface GamepadActionArgsWithMetadata {
 
 interface GamepadActionArgsWithoutMetadata {
   action:
-  | 'padUp'
-  | 'padDown'
-  | 'padLeft'
-  | 'padRight'
-  | 'leftStickUp'
-  | 'leftStickDown'
-  | 'leftStickLeft'
-  | 'leftStickRight'
-  | 'rightStickUp'
-  | 'rightStickDown'
-  | 'rightStickLeft'
-  | 'rightStickRight'
-  | 'mainAction'
-  | 'back'
-  | 'altAction'
-  | 'esc'
+    | 'padUp'
+    | 'padDown'
+    | 'padLeft'
+    | 'padRight'
+    | 'leftStickUp'
+    | 'leftStickDown'
+    | 'leftStickLeft'
+    | 'leftStickRight'
+    | 'rightStickUp'
+    | 'rightStickDown'
+    | 'rightStickLeft'
+    | 'rightStickRight'
+    | 'mainAction'
+    | 'back'
+    | 'altAction'
+    | 'esc'
   metadata?: undefined
 }
 
@@ -571,7 +571,7 @@ export type Web3Features = {
 }
 
 export interface SideloadGame {
-  runner: 'sideload'
+  runner: Runner
   app_name: string
   art_cover: string
   art_square: string
