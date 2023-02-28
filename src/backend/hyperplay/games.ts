@@ -1,6 +1,7 @@
 import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
 import { existsSync } from 'graceful-fs'
 import { isWindows, isMac, isLinux } from '../constants'
+import { killPattern } from 'backend/utils'
 
 export const isHpGameAvailable = (appName: string) => {
   const hpGameInfo = getHyperPlayGameInfo(appName)
@@ -39,4 +40,16 @@ export function isHpGameNative(appName: string): boolean {
   }
 
   return false
+}
+
+export async function stopHpGame(appName: string): Promise<void> {
+  const {
+    install: { executable = undefined }
+  } = getHyperPlayGameInfo(appName)
+
+  if (executable) {
+    const split = executable.split('/')
+    const exe = split[split.length - 1]
+    killPattern(exe)
+  }
 }

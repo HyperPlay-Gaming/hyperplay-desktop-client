@@ -165,7 +165,11 @@ import {
   uninstallHyperPlayGame
 } from './hyperplay/library'
 
-import { isHpGameAvailable, isHpGameNative } from './hyperplay/games'
+import {
+  isHpGameAvailable,
+  isHpGameNative,
+  stopHpGame
+} from './hyperplay/games'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -1482,9 +1486,8 @@ ipcMain.handle(
 
 ipcMain.handle('kill', async (event, appName, runner) => {
   callAbortController(appName)
-  return runner === 'sideload' || runner === 'hyperplay'
-    ? stop(appName)
-    : getGame(appName, runner).stop()
+  if (runner === 'hyperplay') return stopHpGame(appName)
+  return runner === 'sideload' ? stop(appName) : getGame(appName, runner).stop()
 })
 
 ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {

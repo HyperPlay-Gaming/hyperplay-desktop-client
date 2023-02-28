@@ -25,10 +25,7 @@ import { access, chmod } from 'fs/promises'
 import { addShortcuts, removeShortcuts } from '../shortcuts/shortcuts/shortcuts'
 import shlex from 'shlex'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
-import {
-  callAbortController,
-  createAbortController
-} from '../utils/aborthandler/aborthandler'
+import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
 import { app, BrowserWindow } from 'electron'
 import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
@@ -321,8 +318,6 @@ export async function launchApp(
 }
 
 export async function stop(appName: string): Promise<void> {
-  callAbortController(appName)
-
   const {
     install: { executable = undefined }
   } = getAppInfo(appName)
