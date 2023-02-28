@@ -8,12 +8,10 @@ import {
   HyperPlayInstallInfo,
   HyperPlayRelease,
   InstalledInfo,
-  PlatformInfo,
-  ProgressInfo,
-  State
+  PlatformInfo
 } from 'common/types'
 import { isWindows } from 'backend/constants'
-import { getFileSize, spawnAsync } from 'backend/utils'
+import { downloadFileWithAxios, getFileSize, spawnAsync } from 'backend/utils'
 import axios from 'axios'
 import { notify } from 'backend/dialog/dialog'
 import path from 'path'
@@ -28,7 +26,6 @@ import {
   createAbortController,
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
-import { downloadFile } from 'backend/wine/manager/downloader/utilities'
 
 export async function addGameToLibrary(appId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -135,21 +132,24 @@ async function downloadGame(
       // eslint-disable-next-line no-empty
     } catch (e) {}
 
-    const onProgress = (state: State, progress?: ProgressInfo) => {
-      sendFrontendMessage(`progressUpdate-${appName}`, {
-        state,
-        percent: progress?.percentage
-      })
-    }
-
     try {
-      await downloadFile({
-        url: platformInfo.external_url,
-        downloadDir: `${installPath}/${platformInfo.name}`,
-        downsize: platformInfo.downloadSize,
-        onProgress,
-        abortSignal: createAbortController(appName).signal
-      })
+      await downloadFileWithAxios(
+        platformInfo.external_url,
+        `${installPath}/${platformInfo.name}`,
+        createAbortController(appName),
+        (totalBytes, downloadedBytes, progress) => {
+          window.webContents.send(`progressUpdate-${appName}`, {
+            appName,
+            status: 'installing',
+            runner: 'hyperplay',
+            progress: {
+              percent: progress,
+              bytes: downloadedBytes,
+              folder: installPath
+            }
+          })
+        }
+      )
       deleteAbortController(appName)
     } catch (error) {
       deleteAbortController(appName)
