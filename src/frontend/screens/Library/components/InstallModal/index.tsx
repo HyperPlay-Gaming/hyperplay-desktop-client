@@ -10,6 +10,7 @@ import React, { useContext, useEffect, useState } from 'react'
 
 import ContextProvider from 'frontend/state/ContextProvider'
 import {
+  AppPlatforms,
   GameInfo,
   InstallPlatform,
   Runner,
@@ -30,6 +31,24 @@ type Props = {
   backdropClick: () => void
   runner: Runner
   gameInfo?: GameInfo | null
+}
+
+function getPlatformName(platform: AppPlatforms): string {
+  switch (platform) {
+    case 'windows_amd64':
+    case 'windows_arm64':
+      return 'Windows'
+    case 'linux_amd64':
+    case 'linux_arm64':
+      return 'Linux'
+    case 'darwin_amd64':
+    case 'darwin_arm64':
+      return 'Mac'
+    case 'web':
+      return 'Browser'
+    default:
+      return 'windows_amd64'
+  }
 }
 
 export type AvailablePlatforms = {
@@ -61,28 +80,41 @@ export default React.memo(function InstallModal({
   const isLinux = platform === 'linux'
   const isSideload = runner === 'sideload'
 
+  const { releaseMeta = { platforms: {} } } = { ...gameInfo }
+  const hpPlatforms = Object.keys(releaseMeta.platforms) as AppPlatforms[]
+  const isHpGame = runner === 'hyperplay'
+
   const platforms: AvailablePlatforms = [
     {
       name: 'Linux',
-      available: isLinux && (isSideload || isLinuxNative),
+      available:
+        isLinux && isHpGame
+          ? hpPlatforms.some((p) => getPlatformName(p) === 'Linux')
+          : isSideload || isLinuxNative,
       value: 'linux',
       icon: faLinux
     },
     {
       name: 'macOS',
-      available: isMac && (isSideload || isMacNative),
+      available:
+        isMac && isHpGame
+          ? hpPlatforms.some((p) => getPlatformName(p) === 'Mac')
+          : isSideload || isMacNative,
       value: 'Mac',
       icon: faApple
     },
     {
       name: 'Windows',
-      available: true,
+      available: isHpGame
+        ? hpPlatforms.some((p) => getPlatformName(p) === 'Windows')
+        : true,
       value: 'Windows',
       icon: faWindows
     },
     {
       name: 'Browser',
-      available: isSideload,
+      available:
+        isSideload || hpPlatforms.some((p) => getPlatformName(p) === 'Browser'),
       value: 'Browser',
       icon: faChrome
     }
@@ -108,6 +140,8 @@ export default React.memo(function InstallModal({
     getDefaultplatform()
   )
 
+  console.log(platformToInstall)
+
   const hasWine = platformToInstall === 'Windows' && !isWin
 
   useEffect(() => {
@@ -131,7 +165,8 @@ export default React.memo(function InstallModal({
   }, [hasWine])
 
   function platformSelection() {
-    const showPlatformSelection = availablePlatforms.length > 1
+    const showPlatformSelection =
+      availablePlatforms.length > 1 || hpPlatforms.length > 1
 
     if (!showPlatformSelection) {
       return null

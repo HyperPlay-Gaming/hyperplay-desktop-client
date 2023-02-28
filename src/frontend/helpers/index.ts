@@ -98,24 +98,10 @@ function handleRunnersPlatforms(
   platform: InstallPlatform,
   runner: Runner
 ): InstallPlatform {
-  if (runner === 'hyperplay') {
-    // TODO: write an ipc call to get the architecure from the backend
-
-    console.log(platform)
-    switch (platform) {
-      case 'Windows':
-        return `windows_amd64` as InstallPlatform
-      case 'Mac':
-        return `darwin_arm64` as InstallPlatform
-      case 'linux':
-        return `linux_x64` as InstallPlatform
-      case 'Browser':
-        return 'web' as InstallPlatform
-    }
-  }
-  if (runner === 'legendary') {
+  if (runner === 'legendary' || runner === 'hyperplay') {
     return platform
   }
+
   switch (platform) {
     case 'Mac':
       return 'osx'

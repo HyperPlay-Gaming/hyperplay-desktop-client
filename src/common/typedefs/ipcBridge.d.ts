@@ -159,7 +159,7 @@ interface HyperPlayAsyncIPCFunctions {
   getHyperPlayGameInfo: (gameId: string) => Promise<GameInfo | null>
   getHyperPlayInstallInfo: (
     appName: string,
-    platform: AppPlatforms
+    platform: 'Windows' | 'linux' | 'Mac' | 'Browser'
   ) => Promise<HyperPlayInstallInfo | null>
   addHyperplayGame: (gameId: string) => Promise<void>
   installHyperPlayGame: (

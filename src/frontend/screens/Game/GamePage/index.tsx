@@ -23,6 +23,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
 
 import {
+  AppPlatforms,
   ExtraInfo,
   GameInfo,
   HyperPlayInstallInfo,
@@ -149,16 +150,24 @@ export default React.memo(function GamePage(): JSX.Element | null {
         const {
           install,
           is_linux_native = undefined,
-          is_mac_native = undefined
+          is_mac_native = undefined,
+          releaseMeta = undefined
         } = { ...gameInfo }
 
-        const installPlatform =
+        const hpPlatforms = releaseMeta
+          ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
+          : 'Windows'
+
+        const othersPlatforms =
           install.platform ||
           (is_linux_native && isLinux
             ? 'linux'
             : is_mac_native && isMac
             ? 'Mac'
             : 'Windows')
+
+        const installPlatform =
+          runner === 'hyperplay' ? hpPlatforms : othersPlatforms
 
         if (runner !== 'sideload' && !notSupportedGame) {
           getInstallInfo(appName, runner, installPlatform)

@@ -815,7 +815,7 @@ export type ValistPlatforms = {
   [key in AppPlatforms]: PlatformInfo
 }
 
-interface HyperPlayReleaseMeta {
+export interface HyperPlayReleaseMeta {
   _metadata_version: string
   path: string
   name: string

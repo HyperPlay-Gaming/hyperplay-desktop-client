@@ -30,6 +30,7 @@ import LibraryHeader from './components/LibraryHeader'
 import {
   epicCategories,
   gogCategories,
+  hyperPlayCategories,
   sideloadedCategories
 } from 'frontend/helpers/library'
 import RecentlyPlayed from './components/RecentlyPlayed'
@@ -66,8 +67,6 @@ export default React.memo(function Library(): JSX.Element {
     showNonAvailable,
     hyperPlayLibrary
   } = useContext(ContextProvider)
-
-  console.log(hyperPlayLibrary)
 
   const [showModal, setShowModal] = useState<ModalState>({
     game: '',
@@ -239,13 +238,11 @@ export default React.memo(function Library(): JSX.Element {
       const sideloadedApps = sideloadedCategories.includes(category)
         ? sideloadedLibrary
         : []
+      const HPLibrary = hyperPlayCategories.includes(category)
+        ? hyperPlayLibrary
+        : []
 
-      library = [
-        ...hyperPlayLibrary,
-        ...sideloadedApps,
-        ...epicLibrary,
-        ...gogLibrary
-      ]
+      library = [...HPLibrary, ...sideloadedApps, ...epicLibrary, ...gogLibrary]
 
       if (!showNonAvailable) {
         const nonAvailbleGames = storage.getItem('nonAvailableGames') || '[]'

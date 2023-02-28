@@ -25,10 +25,10 @@ export default React.memo(function StoreFilter() {
         </button>
         <button
           className={classNames('FormControl__button', {
-            active: category === 'sideload'
+            active: category === 'hyperplay'
           })}
           title={'HyperPlay'}
-          onClick={() => handleCategory('sideload')}
+          onClick={() => handleCategory('hyperplay')}
         >
           {t('HyperPlay')}
         </button>
@@ -52,6 +52,17 @@ export default React.memo(function StoreFilter() {
             onClick={() => handleCategory('gog')}
           >
             GOG
+          </button>
+        )}
+        {isGOGLoggedin && (
+          <button
+            className={classNames('FormControl__button', {
+              active: category === 'sideload'
+            })}
+            title={`${t('header.store')}: ${t('Other')}`}
+            onClick={() => handleCategory('sideload')}
+          >
+            {t('Other')}
           </button>
         )}
       </FormControl>

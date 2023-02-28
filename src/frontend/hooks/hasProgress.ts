@@ -36,6 +36,7 @@ export const hasProgress = (appName: string) => {
       { appName: appWithProgress, progress: currentProgress }: GameStatus
     ) => {
       if (appName === appWithProgress && currentProgress) {
+        console.log(currentProgress)
         setProgress({
           ...currentProgress,
           percent: calculatePercent(currentProgress)

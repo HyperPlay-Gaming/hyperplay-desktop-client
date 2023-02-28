@@ -243,7 +243,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
 const loadMainWindowURL = function () {
   if (!app.isPackaged) {
-    if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+    /* if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
       import('electron-devtools-installer').then((devtools) => {
         const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
 
@@ -252,6 +252,7 @@ const loadMainWindowURL = function () {
         })
       })
     }
+  */
     mainWindow.loadURL('http://localhost:5173?view=App')
     // Open the DevTools.
     mainWindow.webContents.openDevTools()

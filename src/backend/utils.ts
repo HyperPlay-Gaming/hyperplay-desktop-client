@@ -1147,6 +1147,7 @@ export type ProgressCallback = (
 export async function downloadFile(
   url: string,
   destPath: string,
+  abortControler: AbortController,
   progressCallback?: ProgressCallback
 ): Promise<void> {
   const writer = createWriteStream(destPath)
@@ -1154,7 +1155,11 @@ export async function downloadFile(
   const response: AxiosResponse = await axios({
     url,
     method: 'GET',
-    responseType: 'stream'
+    responseType: 'stream',
+    signal: abortControler.signal,
+    headers: {
+      'Accept-Encoding': 'gzip, deflate'
+    }
   })
 
   const totalLength = Number(response.headers['content-length'])

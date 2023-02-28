@@ -4,6 +4,7 @@ import { getFileSize, getGame } from '../utils'
 import { DMQueueElement } from 'common/types'
 import { installQueueElement, updateQueueElement } from './utils'
 import { sendFrontendMessage } from '../main_window'
+import { getHyperPlayGameInstallInfo } from 'backend/hyperplay/library'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
@@ -54,10 +55,18 @@ async function initQueue() {
   while (element) {
     const queuedElements = downloadManager.get('queue', [])
     sendFrontendMessage('changedDMQueueInformation', queuedElements)
-    const game = getGame(element.params.appName, element.params.runner)
-    const installInfo = await game.getInstallInfo(
-      element.params.platformToInstall
-    )
+    const { appName, runner, platformToInstall } = element.params
+    const isHpGame = runner === 'hyperplay'
+    let game = null
+    let installInfo = isHpGame
+      ? getHyperPlayGameInstallInfo(appName, platformToInstall)
+      : null
+
+    if (runner !== 'hyperplay') {
+      game = getGame(appName, runner)
+      installInfo = await game.getInstallInfo(platformToInstall)
+    }
+
     element.params.size = installInfo?.manifest?.download_size
       ? getFileSize(installInfo?.manifest?.download_size)
       : '?? MB'

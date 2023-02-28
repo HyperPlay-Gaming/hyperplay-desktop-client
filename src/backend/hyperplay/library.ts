@@ -1,25 +1,29 @@
-import fs, { rmSync } from 'fs'
 import { getMainWindow, sendFrontendMessage } from './../main_window'
-import { existsSync } from 'graceful-fs'
+import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 
 import { hpLibraryStore } from './electronStore'
 import {
-  AppPlatforms,
   GameInfo,
   HyperPlayRelease,
-  InstalledInfo
+  InstalledInfo,
+  PlatformInfo
 } from 'common/types'
 import { isWindows } from 'backend/constants'
 import { downloadFile, getFileSize, spawnAsync } from 'backend/utils'
 import axios from 'axios'
 import { notify } from 'backend/dialog/dialog'
 import path from 'path'
-import { logInfo, LogPrefix } from 'backend/logger/logger'
+import { logInfo, LogPrefix, logError } from 'backend/logger/logger'
 import { getAppSettings } from 'backend/sideload/games'
 import {
   addShortcuts,
   removeShortcuts
 } from 'backend/shortcuts/shortcuts/shortcuts'
+import { handleArchAndPlatform } from './utils'
+import {
+  createAbortController,
+  deleteAbortController
+} from 'backend/utils/aborthandler/aborthandler'
 
 export async function addGameToLibrary(appId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -43,7 +47,7 @@ export async function addGameToLibrary(appId: string) {
   const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
 
   const gameInfo: GameInfo = {
-    web3: { supported: true },
+    app_name: data._id,
     extra: {
       about: {
         description: data.projectMeta.description,
@@ -59,7 +63,7 @@ export async function addGameToLibrary(appId: string) {
       storeUrl: `https://store.hyperplay.xyz/game/${data.projectName}`
     },
     thirdPartyManagedApp: undefined,
-    app_name: data._id,
+    web3: { supported: true },
     runner: 'hyperplay',
     title: data.projectMeta.name,
     art_cover: data.releaseMeta.image,
@@ -102,7 +106,7 @@ export function getHyperPlayGameInfo(appName: string): GameInfo {
 async function downloadGame(
   appName: string,
   installPath: string,
-  platformToInstall: AppPlatforms
+  platformInfo: PlatformInfo
 ): Promise<void> {
   try {
     const appInfo = getHyperPlayGameInfo(appName)
@@ -111,44 +115,42 @@ async function downloadGame(
       throw new Error('App not found in library')
     }
 
-    const { releaseMeta: platforms } = appInfo
+    logInfo(`Downloading zip file`, LogPrefix.HyperPlay)
 
     // we might need a helper function to deal with the different platforms
-    const downloadUrl = platforms[platformToInstall].external_url
     const window = getMainWindow()
 
-    if (!window || !downloadUrl) {
-      throw new Error('Window or downloadUrl not found')
+    if (!window || !platformInfo.external_url) {
+      throw new Error('DownloadUrl not found')
     }
 
     // prevent from the next download being named eg. "game (1).zip"
     try {
-      fs.rmSync(
-        path.join(
-          installPath,
-          appInfo.releaseMeta.platforms[platformToInstall].name
-        )
-      )
+      rmSync(path.join(installPath, platformInfo.name))
       // eslint-disable-next-line no-empty
     } catch (e) {}
 
     await downloadFile(
-      downloadUrl,
-      installPath,
-      (downloadedBytes, totalBytes, progress) => {
-        window.webContents.send('gameStatusUpdate', {
-          appName,
-          status: 'installing',
-          progress: {
-            percent: progress,
-            folder: installPath
-          }
+      platformInfo.external_url,
+      `${installPath}/${platformInfo.name}`,
+      createAbortController(appName),
+      (totalBytes, downloadedBytes, progress) => {
+        setInterval(() => {
+          window.webContents.send(`progressUpdate-${appName}`, {
+            appName,
+            status: 'installing',
+            progress: {
+              percent: progress,
+              bytes: downloadedBytes,
+              folder: installPath
+            }
+          }),
+            1000
         })
-        console.log(
-          `Downloaded ${downloadedBytes} bytes out of ${totalBytes} (${progress}% complete)`
-        )
       }
     )
+
+    deleteAbortController(appName)
 
     window.webContents.send('gameStatusUpdate', {
       appName,
@@ -166,13 +168,13 @@ export async function installHyperPlayGame({
 }: {
   appName: string
   dirpath: string
-  platformToInstall: AppPlatforms
+  platformToInstall: 'Windows' | 'linux' | 'Mac' | 'Browser'
 }): Promise<{
   status: 'error' | 'done' | 'abort'
   error?: string | undefined
 }> {
-  if (!existsSync(dirpath) && platformToInstall !== 'web') {
-    return { status: 'error', error: 'Path does not exist' }
+  if (!existsSync(dirpath) && platformToInstall !== 'Browser') {
+    mkdirSync(dirpath, { recursive: true })
   }
 
   const { title, releaseMeta } = getHyperPlayGameInfo(appName)
@@ -181,9 +183,15 @@ export async function installHyperPlayGame({
     return { status: 'error', error: 'Release meta not found' }
   }
 
+  logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
+
   // download the zip file
   try {
-    await downloadGame(appName, dirpath, platformToInstall)
+    const platformInfo =
+      releaseMeta.platforms[
+        handleArchAndPlatform(platformToInstall, releaseMeta)
+      ]
+    await downloadGame(appName, dirpath, platformInfo)
     const gameInfo = releaseMeta.platforms[platformToInstall]
     const zipFile = path.join(dirpath, gameInfo.name)
     const destinationPath = path.join(dirpath, title)
@@ -224,7 +232,7 @@ export async function installHyperPlayGame({
 
     hpLibraryStore.set('games', currentLibrary)
 
-    fs.rmSync(zipFile)
+    rmSync(zipFile)
 
     notify({
       title,
@@ -296,11 +304,11 @@ export async function removeAppShortcuts(appName: string): Promise<void> {
 
 const installDistributables = async (gamePath: string) => {
   const distFolder = path.join(gamePath, 'dist')
-  if (!fs.existsSync(distFolder)) {
+  if (!existsSync(distFolder)) {
     return
   }
 
-  const files = fs.readdirSync(distFolder)
+  const files = readdirSync(distFolder)
   const executables = files.filter((file) => file.endsWith('.exe'))
 
   for await (const executable of executables) {
@@ -310,15 +318,37 @@ const installDistributables = async (gamePath: string) => {
 
 export const getHyperPlayGameInstallInfo = (
   appName: string,
-  platformToInstall: AppPlatforms
+  platformToInstall: 'Windows' | 'linux' | 'Mac' | 'Browser'
 ) => {
-  console.log('getHyperPlayGameInstallInfo', appName, platformToInstall)
   const gameInfo = getHyperPlayGameInfo(appName)
   if (!gameInfo || !gameInfo.releaseMeta) {
     return null
   }
-  const info = gameInfo.releaseMeta.platforms[platformToInstall]
+
+  const info =
+    gameInfo.releaseMeta.platforms[
+      handleArchAndPlatform(platformToInstall, gameInfo.releaseMeta)
+    ]
+
+  if (!info) {
+    logError(
+      `No info for ${appName} ${handleArchAndPlatform(
+        platformToInstall,
+        gameInfo.releaseMeta
+      )}`,
+      LogPrefix.Backend
+    )
+    return {}
+  }
   const download_size = info.downloadSize
   const install_size = info.installSize
-  return { game: info, manifest: { download_size, install_size } }
+  return {
+    game: info,
+    manifest: {
+      download_size,
+      install_size,
+      disk_size: install_size,
+      url: info.external_url
+    }
+  }
 }

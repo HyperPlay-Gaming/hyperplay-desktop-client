@@ -24,7 +24,8 @@ export enum LogPrefix {
   WineTricks = 'Winetricks',
   Connection = 'Connection',
   DownloadManager = 'DownloadManager',
-  ExtraGameInfo = 'ExtraGameInfo'
+  ExtraGameInfo = 'ExtraGameInfo',
+  HyperPlay = 'HyperPlay'
 }
 
 type LogInputType = unknown[] | unknown
