@@ -24,7 +24,8 @@ const collapsedWidth = 120
 
 const Sidebar = observer(() => {
   const sidebarEl = useRef<HTMLDivElement | null>(null)
-  const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+  const { showMetaMaskBrowserSidebarLinks, sidebarCollapsed } =
+    useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
   const [showMetaMaskSubMenu, setShowMetaMaskSubMenu] = useState(false)
   const [metamaskPopupIsActive, setMetamaskPopupIsActive] = useState(false)
@@ -55,6 +56,29 @@ const Sidebar = observer(() => {
     sidebarEl.current.style.setProperty('--sidebar-width', `${sidebarSize}px`)
   }, [sidebarEl])
 
+  const setSidebarWidth = (newWidth: number) => {
+    if (!sidebarEl.current) return
+
+    if (newWidth < minWidth) {
+      newWidth = minWidth
+    } else if (newWidth > maxWidth) {
+      newWidth = maxWidth
+    }
+
+    if (sidebarSize !== newWidth) {
+      sidebarSize = newWidth
+
+      if (sidebarSize < collapsedWidth) {
+        sidebarEl.current.classList.add('collapsed')
+      } else {
+        sidebarEl.current.classList.remove('collapsed')
+      }
+
+      sidebarEl.current.style.setProperty('--sidebar-width', `${newWidth}px`)
+    }
+  }
+  sidebarCollapsed ? setSidebarWidth(60) : setSidebarWidth(240)
+
   const handleDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
     let mouseDragX = e.clientX
     let dragging = true
@@ -78,26 +102,7 @@ const Sidebar = observer(() => {
     document.body.addEventListener('mousemove', onMouseMove)
 
     const dragFrame = () => {
-      if (!sidebarEl.current) return
-
-      let newWidth = mouseDragX
-      if (newWidth < minWidth) {
-        newWidth = minWidth
-      } else if (newWidth > maxWidth) {
-        newWidth = maxWidth
-      }
-
-      if (sidebarSize !== newWidth) {
-        sidebarSize = newWidth
-
-        if (sidebarSize < collapsedWidth) {
-          sidebarEl.current.classList.add('collapsed')
-        } else {
-          sidebarEl.current.classList.remove('collapsed')
-        }
-
-        sidebarEl.current.style.setProperty('--sidebar-width', `${newWidth}px`)
-      }
+      setSidebarWidth(mouseDragX)
 
       if (dragging) {
         requestAnimationFrame(dragFrame)
