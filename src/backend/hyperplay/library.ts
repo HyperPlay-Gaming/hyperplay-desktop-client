@@ -238,13 +238,26 @@ export async function installHyperPlayGame({
   }
 }
 
+const rmAppFromHyperPlayStore = (appName: string) => {
+  const currentStore = hpLibraryStore.get('games', [])
+  const newStore = currentStore.filter((game) => game.app_name !== appName)
+  hpLibraryStore.set('games', newStore)
+}
+
 export async function uninstallHyperPlayGame(
   appName: string,
   shouldRemovePrefix: boolean
 ) {
   const appInfo = getHyperPlayGameInfo(appName)
+  if (!appInfo) return
 
-  if (!appInfo || !appInfo.install.install_path) {
+  if (appInfo.install.platform === 'web') {
+    rmAppFromHyperPlayStore(appName)
+    sendFrontendMessage('refreshLibrary', 'hyperplay')
+    return
+  }
+
+  if (!appInfo.install.install_path) {
     return
   }
 
@@ -253,9 +266,7 @@ export async function uninstallHyperPlayGame(
   const gameFolder = path.join(installPath, appInfo.folder_name)
 
   rmSync(gameFolder, { recursive: true, force: true })
-  const currentStore = hpLibraryStore.get('games', [])
-  const newStore = currentStore.filter((game) => game.app_name !== appName)
-  hpLibraryStore.set('games', newStore)
+  rmAppFromHyperPlayStore(appName)
 
   if (shouldRemovePrefix) {
     const { winePrefix } = await getAppSettings(appName)
