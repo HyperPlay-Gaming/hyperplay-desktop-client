@@ -162,9 +162,10 @@ import {
   addGameToLibrary,
   getHyperPlayGameInfo,
   getHyperPlayGameInstallInfo,
-  isHpGameAvailable,
   uninstallHyperPlayGame
 } from './hyperplay/library'
+
+import { isHpGameAvailable, isHpGameNative } from './hyperplay/games'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -839,7 +840,7 @@ ipcMain.handle('getGameInfo', async (event, appName, runner) => {
 })
 
 ipcMain.handle('getExtraInfo', async (event, appName, runner) => {
-  if (runner === 'sideload') {
+  if (runner === 'sideload' || runner === 'hyperplay') {
     return null
   }
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
@@ -1049,13 +1050,22 @@ let powerDisplayId: number | null
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {
+    console.log(
+      `launching game with appName = ${appName} launchArgs = ${launchArguments} runner = ${runner}`
+    )
     // TODO: split that into two stuff
-    const isSideloaded = runner === 'sideload' || runner === 'hyperplay'
+    const isHyperPlayGame = runner === 'hyperplay'
+    const isSideloaded = runner === 'sideload'
     const extGame = getGame(appName, runner)
-    const game = isSideloaded ? getAppInfo(appName) : extGame.getGameInfo()
-    const gameSettings = isSideloaded
-      ? await getAppSettings(appName)
-      : await extGame.getSettings()
+    const game = isSideloaded
+      ? getAppInfo(appName)
+      : isHyperPlayGame
+      ? getHyperPlayGameInfo(appName)
+      : extGame.getGameInfo()
+    const gameSettings =
+      isSideloaded || isHyperPlayGame
+        ? await getAppSettings(appName)
+        : await extGame.getSettings()
     const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
 
     const { title } = game
@@ -1110,9 +1120,10 @@ ipcMain.handle(
 
     const systemInfo = await getSystemInfo()
     const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
-    const logFileLocation = isSideloaded
-      ? appLogFileLocation(appName)
-      : extGame.logFileLocation
+    const logFileLocation =
+      isSideloaded || isHyperPlayGame
+        ? appLogFileLocation(appName)
+        : extGame.logFileLocation
 
     writeFileSync(
       logFileLocation,
@@ -1125,11 +1136,17 @@ ipcMain.handle(
         '\n'
     )
 
+    let isNative = true
+    if (isSideloaded) {
+      isNative = isNativeApp(appName)
+    } else if (isHyperPlayGame) {
+      isNative = isHpGameNative(appName)
+    } else {
+      isNative = extGame.isNative()
+    }
+
     // check if isNative, if not, check if wine is valid
-    if (
-      (isSideloaded && !isNativeApp(appName)) ||
-      (!isSideloaded && !extGame.isNative())
-    ) {
+    if (!isNative) {
       const isWineOkToLaunch = await checkWineBeforeLaunch(
         appName,
         gameSettings,
@@ -1152,9 +1169,10 @@ ipcMain.handle(
       }
     }
 
-    const command = isSideloaded
-      ? launchApp(appName, runner)
-      : extGame.launch(launchArguments)
+    const command =
+      isSideloaded || isHyperPlayGame
+        ? launchApp(appName, runner)
+        : extGame.launch(launchArguments)
 
     const launchResult = await command.catch((exception) => {
       logError(exception, LogPrefix.Backend)

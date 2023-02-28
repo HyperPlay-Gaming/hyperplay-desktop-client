@@ -66,6 +66,10 @@ export async function addGameToLibrary(appId: string) {
     releaseMeta: data.releaseMeta
   }
 
+  if (isWebGame) {
+    gameInfo.browserUrl = data.releaseMeta.platforms.web.external_url
+  }
+
   const currentLibrary = hpLibraryStore.get('games', [])
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 }
@@ -293,16 +297,4 @@ export const getHyperPlayGameInstallInfo = (
   const download_size = info.downloadSize
   const install_size = info.installSize
   return { game: info, manifest: { download_size, install_size } }
-}
-
-export const isHpGameAvailable = (appName: string) => {
-  const hpGameInfo = getHyperPlayGameInfo(appName)
-  if (hpGameInfo && hpGameInfo.install.platform === 'web') {
-    return true
-  }
-
-  if (hpGameInfo.install && hpGameInfo.install.executable) {
-    return existsSync(hpGameInfo.install.executable)
-  }
-  return false
 }
