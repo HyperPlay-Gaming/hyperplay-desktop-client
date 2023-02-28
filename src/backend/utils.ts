@@ -1180,7 +1180,10 @@ export async function downloadFileWithAxios(
 
   return new Promise<void>((resolve, reject) => {
     writer.on('finish', resolve)
-    writer.on('error', reject)
+    abortControler.signal.addEventListener('abort', () => {
+      writer.close()
+      reject()
+    })
   })
 }
 
