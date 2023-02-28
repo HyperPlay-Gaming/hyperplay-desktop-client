@@ -44,7 +44,7 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
   if (showInitialToast) {
     return (
       <div className={BrowserToastManagerStyles.txnToast}>
-        <TransactionToast.TransactionToast
+        <TransactionToast
           status={'success'}
           title={t('hyperplayOverlay.greeting.title', 'HyperPlay Overlay')}
           subtext={t(
@@ -81,7 +81,7 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={BrowserToastManagerStyles.txnToast}>
-      <TransactionToast.TransactionToast
+      <TransactionToast
         status={status}
         title={title}
         subtext={description}

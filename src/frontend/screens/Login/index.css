@@ -105,7 +105,7 @@
   font-family: var(--actions-font-family);
   font-size: 18px;
   margin: 0;
-  color: var(--accent);
+  color: var(--color-neutral-50);
 }
 
 .subtitle {

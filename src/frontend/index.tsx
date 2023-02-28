@@ -6,7 +6,7 @@ import i18next from 'i18next'
 import { initGamepad } from './helpers/gamepad'
 
 // keep @hyperplay/ui/index.css before index.scss until after frontend design rework
-import '@hyperplay/ui/index.css'
+import '@hyperplay/ui/style.css'
 import './index.scss'
 import './themes.css'
 import Loading from './screens/Loading'
@@ -16,8 +16,8 @@ import { configStore } from './helpers/electronStores'
 import { initOnlineMonitor } from './helpers/onlineMonitor'
 import { defaultThemes } from './components/UI/ThemeSelector'
 
-import '@fontsource/chakra-petch'
-import '@fontsource/jura'
+import '@fontsource/rajdhani'
+import '@fontsource/barlow'
 import StoreController from './store'
 
 initOnlineMonitor()

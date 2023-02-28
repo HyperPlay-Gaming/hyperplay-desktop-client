@@ -118,6 +118,10 @@ export interface StoreStructure {
   metricsStore: {
     metricsOptInStatus: MetricsOptInStatus
   }
+  onboardingStore: {
+    completedEarlyAccess: boolean
+    completedDataPrivacy: boolean
+  }
 }
 
 export type StoreOptions<T extends Record<string, unknown>> = Store.Options<T>

@@ -1,0 +1,100 @@
+.selectFieldWrapper {
+  display: grid;
+  grid-template-areas: 'label' 'select';
+  color: var(--color-neutral-200);
+}
+
+.selectFieldWrapper select {
+  border-radius: var(--space-2xs);
+  grid-area: select;
+  width: 100%;
+  height: 40px;
+  background: var(--color-neutral-700);
+  font-family: var(--secondary-font-family), 'Noto Color Emoji';
+  font-weight: normal;
+  font-size: var(--text-md);
+  line-height: 19px;
+  color: var(--color-neutral-50);
+  text-indent: 22px;
+  border: none;
+  cursor: pointer;
+  background-image: url(/src/frontend/assets/hyperplay/down_arrow.svg);
+  background-position: calc(100% - 20px);
+  background-repeat: no-repeat;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  min-width: 100px;
+}
+
+.selectFieldWrapper.isRTL select {
+  background-position: calc(15px) calc(50% + 1px), calc(20px) calc(50% + 1px),
+    calc(40px) 50%;
+}
+
+.selectFieldWrapper label {
+  text-align: start;
+  grid-area: label;
+  align-self: center;
+  margin-bottom: var(--space-xs);
+}
+
+.selectFieldWrapper select:disabled {
+  cursor: not-allowed;
+}
+
+.selectFieldWrapper.small select {
+  width: clamp(150px, 10rem, 372px);
+}
+
+.selectFieldWrapper.smaller select {
+  width: 66px;
+  text-indent: 11px;
+}
+
+.selectFieldWrapper.small,
+.selectFieldWrapper.smaller {
+  grid-template-areas: 'select label';
+  grid-template-columns: min-content 1fr;
+}
+
+.selectFieldWrapper.small label,
+.selectFieldWrapper.smaller label {
+  margin: 0px var(--space-md);
+}
+
+.selectFieldWrapper select > option {
+  background: var(--navbar-background);
+  height: 40px;
+  color: var(--text-secondary);
+  text-indent: 22px;
+  font-size: var(--text-md);
+  border-radius: 10px;
+}
+
+.selectFieldWrapper.rightButtons {
+  grid-template: 'label label' 'select buttons';
+  grid-template-columns: auto min-content;
+  grid-column-gap: 0.5rem;
+}
+
+.selectFieldWrapper.rightButtons label {
+  grid-area: label;
+}
+
+.selectFieldWrapper.rightButtons .rightButtons {
+  grid-area: buttons;
+  align-self: center;
+}
+
+.selectFieldWrapper.isRTL option {
+  direction: rtl;
+}
+
+.selectFieldWrapper button {
+  align-self: center;
+  justify-self: center;
+}
