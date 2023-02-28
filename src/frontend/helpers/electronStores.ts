@@ -110,6 +110,11 @@ const metricsStore = new TypeCheckedStoreFrontend('metricsStore', {
   name: 'metrics-store'
 })
 
+const onboardingStore = new TypeCheckedStoreFrontend('onboardingStore', {
+  cwd: 'store',
+  name: 'onboarding-store'
+})
+
 export {
   configStore,
   gogLibraryStore,
@@ -120,5 +125,6 @@ export {
   sideloadLibrary,
   wineDownloaderInfoStore,
   downloadManagerStore,
-  metricsStore
+  metricsStore,
+  onboardingStore
 }

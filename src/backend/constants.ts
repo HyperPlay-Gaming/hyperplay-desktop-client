@@ -45,6 +45,7 @@ const legendaryConfigPath = isLinux
 const appConfigFolder = join(configFolder, 'hyperplay')
 const configPath = join(appConfigFolder, 'config.json')
 const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
+
 const toolsPath = join(appConfigFolder, 'tools')
 const iconsFolder = join(appConfigFolder, 'icons')
 const installPath = join(homedir(), 'Games', 'HyperPlay')
@@ -75,7 +76,7 @@ const wikiLink = 'https://github.com/G7DAO/HyperPlay/wiki'
 const weblateUrl =
   'https://hosted.weblate.org/projects/hyperplay-games-launcher'
 const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
-const hyperplaySite = 'https://game7.io/'
+const hyperplaySite = 'https://docs.hyperplaygaming.com/faq'
 const customThemesWikiLink =
   'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/Custom-Themes'
 
@@ -186,6 +187,10 @@ export function createNecessaryFolders() {
   })
 }
 
+const onboardLocalStore = new TypeCheckedStoreBackend('onboardingStore', {
+  cwd: 'store'
+})
+
 export {
   currentGameConfigVersion,
   currentGlobalConfigVersion,
@@ -237,5 +242,6 @@ export {
   GITHUB_API,
   wineprefixFAQ,
   hyperplaySite,
-  customThemesWikiLink
+  customThemesWikiLink,
+  onboardLocalStore
 }

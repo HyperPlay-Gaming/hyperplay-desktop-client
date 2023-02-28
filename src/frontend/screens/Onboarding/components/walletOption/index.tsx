@@ -1,4 +1,4 @@
-import './index.css'
+import WalletOptionStyles from './index.module.scss'
 import React from 'react'
 import { ForwardArrow } from 'frontend/assets/hyperplay'
 
@@ -12,17 +12,24 @@ interface WalletOptionProps {
 
 const WalletOption: React.FC<WalletOptionProps> = function (props) {
   return (
-    <button className="walletOption" onClick={() => props.onClick()}>
-      <div className="optionContent">
-        <div className="walletOptionIcon">{props.icon}</div>
-        <div className="walletOptionContent">
-          <div className="hp-subtitle walletOptionTitleText">
+    <button
+      className={WalletOptionStyles.walletOption}
+      onClick={() => props.onClick()}
+    >
+      <div className={WalletOptionStyles.optionContent}>
+        <div className={WalletOptionStyles.walletOptionIcon}>{props.icon}</div>
+        <div className={WalletOptionStyles.walletOptionContent}>
+          <div className={`menu ${WalletOptionStyles.walletOptionTitleText}`}>
             {props.title} {props.isRecommended && <span>(Recommended)</span>}
           </div>
-          <div className="content-sm walletOptionSubtext">{props.subtext}</div>
+          <div className={`caption ${WalletOptionStyles.walletOptionSubtext}`}>
+            {props.subtext}
+          </div>
         </div>
       </div>
-      <ForwardArrow className="walletOptionArrow" />
+      <div className={WalletOptionStyles.arrowContainer}>
+        <ForwardArrow className={WalletOptionStyles.walletOptionArrow} />
+      </div>
     </button>
   )
 }

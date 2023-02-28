@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ReactNode, useContext } from 'react'
 import classnames from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
-import './index.css'
+import SelectFieldStyles from './index.module.scss'
 
 interface SelectFieldProps {
   htmlId: string
@@ -30,9 +30,12 @@ const SelectField = ({
 
   return (
     <div
-      className={classnames(`selectFieldWrapper Field ${extraClass}`, {
-        isRTL
-      })}
+      className={classnames(
+        `${SelectFieldStyles.selectFieldWrapper} Field ${extraClass}`,
+        {
+          isRTL
+        }
+      )}
     >
       {label && <label htmlFor={htmlId}>{label}</label>}
       <select id={htmlId} value={value} onChange={onChange} disabled={disabled}>

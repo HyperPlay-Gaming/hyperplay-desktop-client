@@ -16,7 +16,14 @@ import {
   SideloadGame
 } from 'common/types'
 import * as axios from 'axios'
-import { app, dialog, shell, Notification, BrowserWindow } from 'electron'
+import {
+  app,
+  dialog,
+  shell,
+  Notification,
+  BrowserWindow,
+  ipcMain
+} from 'electron'
 import {
   exec,
   ExecException,
@@ -67,6 +74,8 @@ import { validWine } from './launcher'
 const execAsync = promisify(exec)
 
 const { showMessageBox } = dialog
+
+const discordRPCClientID = undefined
 
 /**
  * Compares 2 SemVer strings following "major.minor.patch".
@@ -439,6 +448,7 @@ function resetApp() {
   })
   // wait a sec to avoid racing conditions
   setTimeout(() => {
+    ipcMain.emit('ignoreExitToTray')
     app.relaunch()
     app.quit()
   }, 1000)
@@ -574,8 +584,12 @@ async function getSteamRuntime(
   return allAvailableRuntimes.pop()!
 }
 
-function constructAndUpdateRPC(gameName: string): RpcClient {
-  const client = makeClient('852942976564723722')
+function constructAndUpdateRPC(gameName: string): RpcClient | undefined {
+  if (discordRPCClientID) {
+    return undefined
+  }
+
+  const client = makeClient(discordRPCClientID)
   client.updatePresence({
     details: gameName,
     instance: true,
@@ -804,7 +818,7 @@ const getCurrentChangelog = async (): Promise<Release | null> => {
     return release as Release
   } catch (error) {
     logError(
-      ['Error when checking for current Heroic changelog'],
+      ['Error when checking for current HyperPlay changelog'],
       LogPrefix.Backend
     )
     return null

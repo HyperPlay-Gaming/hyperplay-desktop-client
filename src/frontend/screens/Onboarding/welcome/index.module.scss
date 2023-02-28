@@ -1,0 +1,39 @@
+.languageSelector {
+  margin: var(--space-lg) auto;
+}
+
+.actionButton {
+  margin: 0px auto;
+}
+.actionButton button {
+  border-radius: var(--space-xs);
+}
+
+.actionButtonArrow {
+  margin-left: var(--space-xs);
+}
+
+.welcomeBody {
+  margin-bottom: var(--space-lg);
+}
+
+.welcomeBodyTextContainer {
+  color: var(--color-neutral-100);
+}
+
+.welcomeBodyTextContainer > div {
+  margin: var(--space-md) 0px;
+}
+
+.welcomeBodyTextContainer a {
+  color: var(--color-primary-200);
+}
+
+.welcomeBodyTextContainer a:hover {
+  color: var(--color-primary-300);
+  transition: 0.2s;
+}
+
+.boldText {
+  font-weight: var(--bold);
+}

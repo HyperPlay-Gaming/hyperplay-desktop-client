@@ -1,5 +1,4 @@
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
-import { ExtensionStore } from './../../backend/hyperplay-extension-helper/store/index'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -61,6 +60,7 @@ interface HyperPlaySyncIPCFunctions {
   reloadApp: () => void
   createNewMetaMaskWallet: () => void
   enableOnEvents: (topic: string) => void
+  ignoreExitToTray: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -127,7 +127,7 @@ interface RequestArguments {
 }
 
 interface HyperPlayAsyncIPCFunctions {
-  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<void>
+  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<boolean>
   chromeWindowsCreate: (
     options: chrome.windows.CreateData
   ) => Promise<chrome.windows.Window>
@@ -141,7 +141,7 @@ interface HyperPlayAsyncIPCFunctions {
   getMetaMaskImportOptions: (
     configDbPath?: string
   ) => Promise<MetaMaskImportOptions | null>
-  getExtensionMetadata: () => Promise<ExtensionStore['extensionMetadata']>
+  isExtensionInitialized: () => Promise<boolean>
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>
   getConnectionUris: (providerSelection: PROVIDERS) => Promise<UrisReturn>
@@ -201,6 +201,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   }>
   logoutLegendary: () => Promise<void>
   getAlternativeWine: () => Promise<WineInstallation[]>
+  getLocalPeloadPath: () => Promise<string>
   readConfig: (config_class: 'library' | 'user') => Promise<GameInfo[] | string>
   requestSettings: (appName: string) => Promise<AppSettings | GameSettings>
   writeConfig: (args: { appName: string; config: Partial<AppSettings> }) => void
@@ -287,7 +288,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: Runner,
     alreadyDefinedGogSaves: GOGCloudSavesLocation[]
   ) => Promise<string | GOGCloudSavesLocation[]>
-  'get-connection-uris': (provider: PROVIDERS) => Promise<ConnectionURIs>
   isGameAvailable: (args: {
     appName: string
     runner: Runner

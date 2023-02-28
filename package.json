@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.3-alpha.1",
+  "version": "0.0.5",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -15,8 +15,9 @@
     "email": "hyperplay@hyperplay.gg"
   },
   "build": {
-    "appId": "com.electron.hyperplay",
+    "appId": "gg.hyperplay.HyperPlay",
     "productName": "HyperPlay",
+    "afterSign": "sign/notarize.js",
     "files": [
       "build/**/*",
       "node_modules/**/*",
@@ -55,9 +56,13 @@
     },
     "mac": {
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
-      "target": "dmg",
       "category": "public.app-category.games",
       "icon": "build/app_icon.icns",
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "com.apple.security.cs.allow-jit": true
+      },
       "asarUnpack": [
         "build/bin/darwin/legendary",
         "build/bin/darwin/gogdl"
@@ -124,14 +129,14 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@fontsource/chakra-petch": "^4.5.8",
-    "@fontsource/jura": "^4.5.11",
+    "@fontsource/barlow": "^4.5.9",
+    "@fontsource/rajdhani": "^4.5.10",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@hyperplay/ui": "^0.0.3",
+    "@hyperplay/ui": "0.1.0-alpha.2",
     "@metamask/sdk": "^0.1.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
@@ -160,7 +165,7 @@
     "fuse.js": "^6.6.2",
     "graceful-fs": "^4.2.10",
     "howlongtobeat": "^1.7.0",
-    "i18next": "^21.6.16",
+    "i18next": "^22.4.10",
     "i18next-fs-backend": "^1.1.4",
     "i18next-http-backend": "^1.4.0",
     "ini": "^3.0.0",
@@ -216,6 +221,7 @@
     ]
   },
   "devDependencies": {
+    "@electron/notarize": "^1.2.3",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.1.1",
@@ -256,5 +262,8 @@
     "vite": "^3.2.2",
     "vite-plugin-electron": "^0.10.2",
     "vite-plugin-svgr": "^2.2.2"
+  },
+  "optionalDependencies": {
+    "@hyperplay/electron-overlay": "^0.0.8"
   }
 }

@@ -147,7 +147,7 @@ a {
 
 .button.is-danger.is-footer {
   background: var(--status-warning);
-  color: var(--text-tertiary);
+  color: var(--text-default);
   font-weight: 700;
 }
 

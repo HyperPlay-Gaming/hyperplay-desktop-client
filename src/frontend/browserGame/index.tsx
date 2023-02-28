@@ -22,8 +22,8 @@ const BrowserGame = function ({ url }: BrowserGameProps) {
   return (
     <div>
       <BrowserExtensionManager />
-      <BrowserToastManager />
-      <BrowserExtensionToastManager />
+      <BrowserToastManager showCloseButton={true} />
+      <BrowserExtensionToastManager showCloseButton={true} />
       {provider !== '' ? (
         <webview
           src={url}

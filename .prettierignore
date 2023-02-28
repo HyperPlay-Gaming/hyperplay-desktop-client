@@ -5,3 +5,5 @@ coverage
 public/locales/
 flatpak
 extensions/
+doc
+sign/
