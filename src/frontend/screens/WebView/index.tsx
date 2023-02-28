@@ -37,8 +37,7 @@ export default function WebView() {
 
   const epicLoginUrl = 'https://legendary.gl/epiclogin'
 
-  const hyperplayStore =
-    'https://hyperplay-monorepo-store.vercel.app?isLauncher=true'
+  const hyperplayStore = 'https://hyperplay-store.vercel.app/?isLauncher=true'
   const epicStore = `https://www.epicgames.com/store/${lang}/`
   const gogStore = `https://gog.com`
   const wikiURL = 'https://docs.hyperplaygaming.com/'
