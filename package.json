@@ -8,7 +8,7 @@
   "description": "An Open Source Launcher for Web3, GOG and Epic Games",
   "repository": {
     "type": "Github",
-    "url": "https://github.com/G7DAO/HyperPlay/"
+    "url": "https://github.com/HyperPlay-Gaming/hyperplay-desktop-client"
   },
   "author": {
     "name": "HyperPlay",
@@ -199,9 +199,9 @@
     "test-watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand --silent",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
-    "release:linux": "vite build && electron-builder -p always --linux deb AppImage rpm pacman tar.xz",
+    "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
     "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
-    "release:win": "vite build && electron-builder -p never --win nsis portable --x64 --arm64",
+    "release:win": "vite build && electron-builder -p always --win nsis --x64 --arm64",
     "dist:linux": "vite build && electron-builder --linux",
     "dist:mac": "vite build && electron-builder --mac",
     "dist:win": "vite build && electron-builder --win",
