@@ -9,6 +9,20 @@ export function handleArchAndPlatform(
   releaseMeta: HyperPlayReleaseMeta
 ): AppPlatforms {
   const arch = process.arch === 'x64' ? '_amd64' : '_arm64'
+  const hpPlatforms = [
+    'windows_arm64',
+    'linux_arm64',
+    'darwin_arm64',
+    'windows_amd64',
+    'linux_amd64',
+    'darwin_amd64',
+    'web'
+  ]
+  const isHpPlatform = hpPlatforms.includes(platformToInstall)
+
+  if (isHpPlatform) {
+    return platformToInstall as AppPlatforms
+  }
 
   switch (platformToInstall) {
     case 'Windows':

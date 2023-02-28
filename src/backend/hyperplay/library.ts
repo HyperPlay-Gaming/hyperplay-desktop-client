@@ -291,14 +291,14 @@ export async function uninstallHyperPlayGame(
   })
 }
 
-export async function addAppShortcuts(
+export async function addGameShortcuts(
   appName: string,
   fromMenu?: boolean
 ): Promise<void> {
   return addShortcuts(getHyperPlayGameInfo(appName), fromMenu)
 }
 
-export async function removeAppShortcuts(appName: string): Promise<void> {
+export async function removeGameShortcuts(appName: string): Promise<void> {
   return removeShortcuts(getHyperPlayGameInfo(appName))
 }
 
@@ -325,18 +325,23 @@ export const getHyperPlayGameInstallInfo = (
     return null
   }
 
-  const standardPlatforms = ['Windows', 'linux', 'Mac', 'Browser']
-  let requestedPlatform = 'web'
-  if (standardPlatforms.includes(platformToInstall)) {
-    requestedPlatform = handleArchAndPlatform(
-      platformToInstall,
-      gameInfo.releaseMeta
-    )
-  }
+  logInfo(
+    `Getting install info for ${gameInfo.title} and ${platformToInstall}`,
+    LogPrefix.HyperPlay
+  )
+
+  const requestedPlatform = handleArchAndPlatform(
+    platformToInstall,
+    gameInfo.releaseMeta
+  )
+
   const info = gameInfo.releaseMeta.platforms[requestedPlatform]
 
   if (!info) {
-    logError(`No info for ${appName} ${requestedPlatform}`, LogPrefix.Backend)
+    logError(
+      `No info for ${appName} and ${requestedPlatform}`,
+      LogPrefix.HyperPlay
+    )
     return null
   }
   const download_size = info.downloadSize
