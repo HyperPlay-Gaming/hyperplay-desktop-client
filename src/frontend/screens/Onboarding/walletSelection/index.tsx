@@ -28,6 +28,7 @@ import { WrapRendererCallback } from 'common/types'
 import StatusScreen, { CONNECTION_STATUS } from './screens/status'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ONBOARDING_SCREEN } from '../types'
 
 enum WALLET_SELECTION_DETAILS_SCREEN {
   INFO = 'INFO',
@@ -109,11 +110,21 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     window.api
       .isExtensionInitialized()
       .then((val) => setMetamaskIsInitialized(val))
+
+    window.api.trackEvent({ event: 'Onboarding Started' })
     return () => {
       removeConnectedListener()
       removeRejectedListener()
     }
   })
+
+  // Track the details screen view once each time the view changes
+  useEffect(() => {
+    window.api.trackScreen('Onboarding', {
+      view: ONBOARDING_SCREEN.WALLET_SELECTION,
+      detailsScreen: contentParams.detailsScreen
+    })
+  }, [contentParams])
 
   async function handleImportMmExtensionClicked(dbPath?: string | null) {
     if (dbPath === null) {
@@ -133,6 +144,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     accounts
   ) => {
     console.log('connected with accounts = ', accounts)
+    window.api.trackEvent({ event: 'Onboarding Completed' })
     setContentParams({
       detailsScreen: WALLET_SELECTION_DETAILS_SCREEN.CONNECTED
     })
