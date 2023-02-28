@@ -142,15 +142,19 @@ async function downloadGame(
       })
     }
 
-    await downloadFile({
-      url: platformInfo.external_url,
-      downloadDir: `${installPath}/${platformInfo.name}`,
-      downsize: platformInfo.downloadSize,
-      onProgress,
-      abortSignal: createAbortController(appName).signal
-    })
-
-    deleteAbortController(appName)
+    try {
+      await downloadFile({
+        url: platformInfo.external_url,
+        downloadDir: `${installPath}/${platformInfo.name}`,
+        downsize: platformInfo.downloadSize,
+        onProgress,
+        abortSignal: createAbortController(appName).signal
+      })
+      deleteAbortController(appName)
+    } catch (error) {
+      deleteAbortController(appName)
+      throw error
+    }
 
     window.webContents.send('gameStatusUpdate', {
       appName,
@@ -197,49 +201,56 @@ export async function installHyperPlayGame({
     const executable = path.join(destinationPath, platformInfo.executable)
     const install_size = getFileSize(platformInfo.installSize)
 
-    if (isWindows) {
-      await spawnAsync('powershell', [
-        'Expand-Archive',
-        '-LiteralPath',
-        zipFile,
-        '-DestinationPath',
-        destinationPath
-      ])
+    try {
+      if (isWindows) {
+        await spawnAsync('powershell', [
+          'Expand-Archive',
+          '-LiteralPath',
+          zipFile,
+          '-DestinationPath',
+          destinationPath
+        ])
 
-      await installDistributables(destinationPath)
-    } else {
-      await spawnAsync('unzip', [zipFile, title])
+        await installDistributables(destinationPath)
+      } else {
+        const { code, stderr } = await spawnAsync('unzip', [zipFile, title])
+        if (code !== 0) {
+          throw new Error(stderr)
+        }
+      }
+
+      const installedInfo: InstalledInfo = {
+        install_path: destinationPath,
+        executable,
+        install_size,
+        is_dlc: false,
+        version: releaseMeta.name,
+        platform: platformToInstall
+      }
+
+      const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
+      const gameIndex = currentLibrary.findIndex(
+        (value) => value.app_name === appName
+      )
+      const currentInstalled = hpInstalledGamesStore.get('installed', [])
+      currentInstalled.push(installedInfo)
+      hpInstalledGamesStore.set('installed', currentInstalled)
+      currentLibrary[gameIndex].install = installedInfo
+      currentLibrary[gameIndex].is_installed = true
+
+      hpLibraryStore.set('games', currentLibrary)
+
+      rmSync(zipFile)
+
+      notify({
+        title,
+        body: `Installed`
+      })
+
+      sendFrontendMessage('refreshLibrary', 'hyperplay')
+    } catch (error) {
+      return { status: 'error', error: `${error}` }
     }
-
-    const installedInfo: InstalledInfo = {
-      install_path: destinationPath,
-      executable,
-      install_size,
-      is_dlc: false,
-      version: releaseMeta.name,
-      platform: platformToInstall
-    }
-
-    const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
-    const gameIndex = currentLibrary.findIndex(
-      (value) => value.app_name === appName
-    )
-    const currentInstalled = hpInstalledGamesStore.get('installed', [])
-    currentInstalled.push(installedInfo)
-    hpInstalledGamesStore.set('installed', currentInstalled)
-    currentLibrary[gameIndex].install = installedInfo
-    currentLibrary[gameIndex].is_installed = true
-
-    hpLibraryStore.set('games', currentLibrary)
-
-    rmSync(zipFile)
-
-    notify({
-      title,
-      body: `Installed`
-    })
-
-    sendFrontendMessage('refreshLibrary', 'hyperplay')
     return { status: 'done' }
   } catch (error) {
     return { status: 'error', error: `${error}` }
