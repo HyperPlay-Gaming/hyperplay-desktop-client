@@ -7,7 +7,7 @@ import AnalyticsStyle from './index.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faX } from '@fortawesome/free-solid-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
-import { metricsStore, onboardingStore } from 'frontend/helpers/electronStores'
+import { onboardingStore } from 'frontend/helpers/electronStores'
 import { MetricsOptInStatus } from 'common/types'
 
 interface BulletPointProps {
@@ -120,7 +120,7 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
           type="tertiary"
           onClick={() => {
             onboardingStore.set('completedDataPrivacy', true)
-            metricsStore.set('metricsOptInStatus', MetricsOptInStatus.optedOut)
+            window.api.changeMetricsOptInStatus(MetricsOptInStatus.optedOut)
             props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)
           }}
         >
@@ -129,7 +129,7 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
         <Button
           onClick={() => {
             onboardingStore.set('completedDataPrivacy', true)
-            metricsStore.set('metricsOptInStatus', MetricsOptInStatus.optedIn)
+            window.api.changeMetricsOptInStatus(MetricsOptInStatus.optedIn)
             props.setScreen(ONBOARDING_SCREEN.WALLET_SELECTION)
           }}
         >
