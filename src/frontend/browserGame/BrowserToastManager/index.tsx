@@ -44,11 +44,11 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
   if (showInitialToast) {
     return (
       <div className={BrowserToastManagerStyles.txnToast}>
-        <TransactionToast.TransactionToast
+        <TransactionToast
           status={'success'}
-          title={'HyperPlay Overlay'}
+          title={t('hyperplayOverlay.greeting.title', 'HyperPlay Overlay')}
           subtext={t(
-            'hyperplayOverlay.greeting',
+            'hyperplayOverlay.greeting.description',
             'HyperPlay Overlay is ready! Press Alt + X to show or hide it.'
           )}
           onClick={() => setShowInitialToast(false)}
@@ -66,9 +66,9 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
   let status: statusType = 'error'
 
   title = TITLE[item.method]
-    ? TITLE[item.method][item.state]
-    : TITLE.default[item.state]
-  description = DESCRIPTION[item.state]
+    ? TITLE[item.method][item.state]()
+    : TITLE.default[item.state]()
+  description = DESCRIPTION[item.state]()
   status = TxnStateToStatusMap[item.state]
 
   if (
@@ -81,7 +81,7 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={BrowserToastManagerStyles.txnToast}>
-      <TransactionToast.TransactionToast
+      <TransactionToast
         status={status}
         title={title}
         subtext={description}

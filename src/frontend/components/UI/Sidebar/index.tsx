@@ -8,6 +8,10 @@ import { NavLink } from 'react-router-dom'
 import { ReactComponent as MetaMaskRoundedOutline } from 'frontend/assets/metamask-rounded-outline.svg'
 import { observer } from 'mobx-react-lite'
 import ContextProvider from 'frontend/state/ContextProvider'
+import { t } from 'i18next'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import SidbarStyles from './index.module.scss'
 
 let sidebarSize = 240
 const localStorageSidebarWidth = localStorage.getItem('sidebar-width')
@@ -20,8 +24,11 @@ const collapsedWidth = 120
 
 const Sidebar = observer(() => {
   const sidebarEl = useRef<HTMLDivElement | null>(null)
-  const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+  const { showMetaMaskBrowserSidebarLinks, sidebarCollapsed } =
+    useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
+  const [showMetaMaskSubMenu, setShowMetaMaskSubMenu] = useState(false)
+  const [metamaskPopupIsActive, setMetamaskPopupIsActive] = useState(false)
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   function setBadgeString(err: any, text: string) {
@@ -49,6 +56,29 @@ const Sidebar = observer(() => {
     sidebarEl.current.style.setProperty('--sidebar-width', `${sidebarSize}px`)
   }, [sidebarEl])
 
+  const setSidebarWidth = (newWidth: number) => {
+    if (!sidebarEl.current) return
+
+    if (newWidth < minWidth) {
+      newWidth = minWidth
+    } else if (newWidth > maxWidth) {
+      newWidth = maxWidth
+    }
+
+    if (sidebarSize !== newWidth) {
+      sidebarSize = newWidth
+
+      if (sidebarSize < collapsedWidth) {
+        sidebarEl.current.classList.add('collapsed')
+      } else {
+        sidebarEl.current.classList.remove('collapsed')
+      }
+
+      sidebarEl.current.style.setProperty('--sidebar-width', `${newWidth}px`)
+    }
+  }
+  sidebarCollapsed ? setSidebarWidth(60) : setSidebarWidth(240)
+
   const handleDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
     let mouseDragX = e.clientX
     let dragging = true
@@ -65,33 +95,28 @@ const Sidebar = observer(() => {
       document.body.removeEventListener('mouseleave', finishDrag)
       dragging = false
       localStorage.setItem('sidebar-width', sidebarSize.toString())
+
+      // Re-enable pointer events on webview element
+      const webviewEl = document.querySelector(
+        'webview'
+      ) as HTMLDivElement | null
+      if (webviewEl) {
+        webviewEl.style.pointerEvents = 'auto'
+      }
     }
 
     document.body.addEventListener('mouseup', finishDrag)
     document.body.addEventListener('mouseleave', finishDrag)
     document.body.addEventListener('mousemove', onMouseMove)
 
+    // Disable pointer events on webview element
+    const webviewEl = document.querySelector('webview') as HTMLDivElement | null
+    if (webviewEl) {
+      webviewEl.style.pointerEvents = 'none'
+    }
+
     const dragFrame = () => {
-      if (!sidebarEl.current) return
-
-      let newWidth = mouseDragX
-      if (newWidth < minWidth) {
-        newWidth = minWidth
-      } else if (newWidth > maxWidth) {
-        newWidth = maxWidth
-      }
-
-      if (sidebarSize !== newWidth) {
-        sidebarSize = newWidth
-
-        if (sidebarSize < collapsedWidth) {
-          sidebarEl.current.classList.add('collapsed')
-        } else {
-          sidebarEl.current.classList.remove('collapsed')
-        }
-
-        sidebarEl.current.style.setProperty('--sidebar-width', `${newWidth}px`)
-      }
+      setSidebarWidth(mouseDragX)
 
       if (dragging) {
         requestAnimationFrame(dragFrame)
@@ -107,45 +132,64 @@ const Sidebar = observer(() => {
       <div className="currentDownloads"></div>
 
       {showMetaMaskBrowserSidebarLinks ? (
-        <>
+        <div className="SidebarItemWithSubmenu">
           <button
-            className="Sidebar__item"
-            onClick={async () => window.api.showPopup()}
+            className={classNames('Sidebar__item', {
+              active: showMetaMaskSubMenu
+            })}
+            onClick={async () => setShowMetaMaskSubMenu(!showMetaMaskSubMenu)}
           >
-            <>
-              <div className="Sidebar__itemIcon">
-                <MetaMaskRoundedOutline />
-              </div>
-              <span>MetaMask Popup {badgeText}</span>
-            </>
+            <div className="Sidebar__itemIcon">
+              <MetaMaskRoundedOutline
+                style={{ height: '32px', position: 'relative' }}
+              />
+
+              {badgeText !== '' && badgeText !== '0' ? (
+                <div className={SidbarStyles.badge}>{badgeText}</div>
+              ) : null}
+            </div>
+            <span>MetaMask</span>
+            <FontAwesomeIcon
+              icon={faAngleDown}
+              style={{ margin: '0 0 0 auto' }}
+            />
           </button>
-          <NavLink
-            className={({ isActive }) =>
-              classNames('Sidebar__item', { active: isActive })
-            }
-            to={'metamaskPortfolio'}
-          >
-            <>
-              <div className="Sidebar__itemIcon">
-                <MetaMaskRoundedOutline />
-              </div>
-              <span>{'MetaMask Portfolio'}</span>
-            </>
-          </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              classNames('Sidebar__item', { active: isActive })
-            }
-            to={'metamaskHome'}
-          >
-            <>
-              <div className="Sidebar__itemIcon">
-                <MetaMaskRoundedOutline />
-              </div>
-              <span>{'MetaMask Home'}</span>
-            </>
-          </NavLink>
-        </>
+          {showMetaMaskSubMenu ? (
+            <div className="SidebarSubmenu">
+              <NavLink
+                className={({ isActive }) =>
+                  classNames('Sidebar__item SidebarLinks__subItem', {
+                    active: isActive
+                  })
+                }
+                to={'metamaskHome'}
+              >
+                <span>{t('metamask.sidebar.home', 'Home')}</span>
+              </NavLink>
+              <button
+                className={classNames('Sidebar__item SidebarLinks__subItem', {
+                  active: metamaskPopupIsActive
+                })}
+                onClick={async () => {
+                  const popupIsShown = await window.api.showPopup()
+                  setMetamaskPopupIsActive(popupIsShown)
+                }}
+              >
+                <span>{t('metamask.sidebar.popup', 'Popup')}</span>
+              </button>
+              <NavLink
+                className={({ isActive }) =>
+                  classNames('Sidebar__item SidebarLinks__subItem', {
+                    active: isActive
+                  })
+                }
+                to={'metamaskPortfolio'}
+              >
+                <span>{t('metamask.sidebar.portfolio', 'Portfolio')}</span>
+              </NavLink>
+            </div>
+          ) : null}
+        </div>
       ) : null}
 
       <Wallet onClick={() => onboardingStore.openOnboarding()} />

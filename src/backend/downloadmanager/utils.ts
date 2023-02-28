@@ -5,6 +5,7 @@ import i18next from 'i18next'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { isOnline } from '../online_monitor'
 import { sendFrontendMessage } from '../main_window'
+import { trackEvent } from 'backend/api/metrics'
 
 async function installQueueElement(params: InstallParams): Promise<{
   status: 'done' | 'error' | 'abort'
@@ -44,6 +45,14 @@ async function installQueueElement(params: InstallParams): Promise<{
       return { status: 'error' }
     }
   }
+
+  trackEvent({
+    event: 'Game Install Started',
+    properties: {
+      game_name: appName,
+      store_name: runner
+    }
+  })
 
   sendFrontendMessage('gameStatusUpdate', {
     appName,
@@ -101,6 +110,14 @@ async function installQueueElement(params: InstallParams): Promise<{
       return { status: 'error' }
     }
 
+    trackEvent({
+      event: 'Game Install Success',
+      properties: {
+        game_name: appName,
+        store_name: runner
+      }
+    })
+
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
@@ -109,6 +126,14 @@ async function installQueueElement(params: InstallParams): Promise<{
 
     return { status }
   } catch (error) {
+    trackEvent({
+      event: 'Game Install Failed',
+      properties: {
+        game_name: appName,
+        store_name: runner,
+        error: `${error}`
+      }
+    })
     errorMessage(`${error}`)
     return { status: 'error' }
   }
@@ -156,6 +181,14 @@ async function updateQueueElement(params: InstallParams): Promise<{
     body: i18next.t('notify.update.started', 'Update Started')
   })
 
+  trackEvent({
+    event: 'Game Update Started',
+    properties: {
+      game_name: appName,
+      store_name: runner
+    }
+  })
+
   try {
     const { status } = await game.update()
 
@@ -164,8 +197,23 @@ async function updateQueueElement(params: InstallParams): Promise<{
         ['Updating of', params.appName, 'aborted!'],
         LogPrefix.DownloadManager
       )
+      trackEvent({
+        event: 'Game Update Failed',
+        properties: {
+          game_name: appName,
+          store_name: runner,
+          error: 'update aborted'
+        }
+      })
       notify({ title, body: i18next.t('notify.update.canceled') })
     } else if (status === 'done') {
+      trackEvent({
+        event: 'Game Update Success',
+        properties: {
+          game_name: appName,
+          store_name: runner
+        }
+      })
       notify({
         title,
         body: i18next.t('notify.update.finished')
@@ -178,6 +226,15 @@ async function updateQueueElement(params: InstallParams): Promise<{
     }
     return { status: 'done' }
   } catch (error) {
+    trackEvent({
+      event: 'Game Update Failed',
+      properties: {
+        game_name: appName,
+        store_name: runner,
+        error: `${error}`
+      }
+    })
+
     logError(
       ['Updating of', params.appName, 'failed with:', error],
       LogPrefix.DownloadManager

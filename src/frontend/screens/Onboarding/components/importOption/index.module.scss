@@ -1,0 +1,35 @@
+.importOption {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: calc(var(--space-md));
+  padding-bottom: calc(var(--space-xs));
+
+  background: var(--color-neutral-800);
+  border-width: 1px;
+  border-color: var(--color-neutral-600);
+  border-radius: 6px;
+  border-style: solid;
+
+  cursor: pointer;
+
+  max-height: 128px;
+  height: 100%;
+
+  text-transform: capitalize;
+  font-weight: var(--semibold);
+  max-width: 155px;
+}
+
+.importOptionBrowserIcon {
+  height: 32px;
+}
+
+.importOption:hover {
+  background-color: var(--color-neutral-600);
+}
+
+.createNewText {
+  color: var(--color-neutral-200);
+}

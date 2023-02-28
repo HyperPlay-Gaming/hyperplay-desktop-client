@@ -39,10 +39,10 @@ const BrowserExtensionToastManager = function (
   return (
     <div className={BrowserToastManagerStyles.txnToast}>
       {showMmExtensionNotifToast ? (
-        <TransactionToast.TransactionToast
+        <TransactionToast
           status={EXTENSION_NOTIFICATION.STATUS}
-          title={EXTENSION_NOTIFICATION.TITLE}
-          subtext={EXTENSION_NOTIFICATION.DESCRIPTION}
+          title={EXTENSION_NOTIFICATION.TITLE()}
+          subtext={EXTENSION_NOTIFICATION.DESCRIPTION()}
           onClick={handleRemoveNotification}
           showCloseButton={props.showCloseButton}
         />

@@ -1,14 +1,5 @@
-export enum ONBOARDING_CONTENT {
+export enum ONBOARDING_SCREEN {
   WELCOME = 'WELCOME',
-  SCAN = 'SCAN',
-  REJECTED = 'REJECTED',
-  SUCCESS = 'SUCCESS',
-  DOWNLOAD = 'DOWNLOAD',
-  IMPORT = 'import'
-}
-
-export interface OnboardingModalConfig {
-  title: string
-  enableBackButton: boolean
-  enableCloseButton: boolean
+  ANALYTICS = 'ANALYTICS',
+  WALLET_SELECTION = 'WALLET_SELECTION'
 }
