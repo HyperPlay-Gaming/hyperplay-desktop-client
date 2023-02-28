@@ -31,7 +31,7 @@ export type LaunchParams = {
 
 interface About {
   description: string
-  longDescription: string
+  shortDescription: string
 }
 
 export type Release = {
@@ -188,7 +188,7 @@ export interface InstallProgress {
   bytes: string
   eta: string
   folder?: string
-  percent: number
+  percent?: number
   downSpeed?: number
   diskSpeed?: number
   file?: string

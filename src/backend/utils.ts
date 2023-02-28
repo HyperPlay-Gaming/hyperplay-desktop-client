@@ -75,6 +75,8 @@ const execAsync = promisify(exec)
 
 const { showMessageBox } = dialog
 
+const discordRPCClientID = undefined
+
 /**
  * Compares 2 SemVer strings following "major.minor.patch".
  * Checks if target is newer than base.
@@ -582,8 +584,12 @@ async function getSteamRuntime(
   return allAvailableRuntimes.pop()!
 }
 
-function constructAndUpdateRPC(gameName: string): RpcClient {
-  const client = makeClient('852942976564723722')
+function constructAndUpdateRPC(gameName: string): RpcClient | undefined {
+  if (discordRPCClientID) {
+    return undefined
+  }
+
+  const client = makeClient(discordRPCClientID)
   client.updatePresence({
     details: gameName,
     instance: true,
