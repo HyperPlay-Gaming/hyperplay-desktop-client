@@ -22,6 +22,18 @@ import {
 } from 'backend/shortcuts/shortcuts/shortcuts'
 
 export async function addGameToLibrary(appId: string) {
+  const currentLibrary = hpLibraryStore.get('games', [])
+
+  // TODO refactor this to constant time check with a set
+  // not important for alpha release
+  const sameGameInLibrary = currentLibrary.find((val) => {
+    return val.app_name === appId
+  })
+
+  if (sameGameInLibrary !== undefined) {
+    return
+  }
+
   const res = await axios.get<HyperPlayRelease[]>(
     `https://developers.hyperplay.xyz/api/listings?id=${appId}`
   )
@@ -70,8 +82,9 @@ export async function addGameToLibrary(appId: string) {
     gameInfo.browserUrl = data.releaseMeta.platforms.web.external_url
   }
 
-  const currentLibrary = hpLibraryStore.get('games', [])
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
+
+  sendFrontendMessage('refreshLibrary')
 }
 
 export function getHyperPlayGameInfo(appName: string): GameInfo {
