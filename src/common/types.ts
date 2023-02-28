@@ -580,7 +580,7 @@ export type Web3Features = {
 }
 
 export interface SideloadGame {
-  runner: Runner
+  runner: 'sideload'
   app_name: string
   art_cover: string
   art_square: string
@@ -791,12 +791,24 @@ export type AppPlatforms =
   | 'darwin_arm64'
   | 'web'
 
+export interface DLCInfo {
+  app_name: string
+  title: string
+}
+
+export interface LaunchOption {
+  name: string
+  parameters: string
+}
+
 export type PlatformInfo = {
   external_url: string
   name: string
   executable: string
   installSize: number
   downloadSize: number
+  launch_options: Array<LaunchOption>
+  owned_dlc: Array<DLCInfo>
 }
 
 export type ValistPlatforms = {
@@ -834,5 +846,6 @@ export interface HyperPlayInstallInfo {
   manifest: {
     download_size: number
     install_size: number
+    disk_size?: number
   }
 }

@@ -1,3 +1,4 @@
+import { LaunchOption, DLCInfo } from 'common/types'
 // Types specifically for Legendary/Epic
 
 // Possible platforms for `legendary list --platform`
@@ -138,16 +139,6 @@ interface GameInstallInfo {
   platform_versions: Record<LegendaryInstallPlatform, string>
   title: string
   version: string
-}
-
-interface LaunchOption {
-  name: string
-  parameters: string
-}
-
-interface DLCInfo {
-  app_name: string
-  title: string
 }
 
 interface GameManifest {

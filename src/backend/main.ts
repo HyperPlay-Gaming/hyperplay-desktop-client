@@ -162,7 +162,6 @@ import {
   addGameToLibrary,
   getHyperPlayGameInfo,
   getHyperPlayGameInstallInfo,
-  installHyperPlayGame,
   uninstallHyperPlayGame
 } from './hyperplay/library'
 

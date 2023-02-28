@@ -11,6 +11,7 @@ import classNames from 'classnames'
 import {
   GameInfo,
   GameStatus,
+  HyperPlayInstallInfo,
   InstallPlatform,
   Runner,
   WineInstallation
@@ -115,7 +116,7 @@ export default function DownloadDialog({
   const isWin = platform === 'win32'
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    LegendaryInstallInfo | GogInstallInfo | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >(null)
   const [installLanguages, setInstallLanguages] = useState(Array<string>())
   const [installLanguage, setInstallLanguage] = useState('')

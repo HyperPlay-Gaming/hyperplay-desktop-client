@@ -693,7 +693,7 @@ export class GOGLibrary {
       art_square: fallBackImage,
       cloud_save_enabled: cloudSavesEnabledGames.includes(String(info.id)),
       extra: {
-        about: { description: description, shortDescription: '' },
+        about: { description: '', shortDescription: '' },
         reqs: [],
         storeUrl: `https://gog.com${info.url}`
       },
