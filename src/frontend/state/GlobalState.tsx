@@ -436,6 +436,7 @@ class GlobalState extends PureComponent<Props> {
     }
 
     const updatedSideload = sideloadLibrary.get('games', [])
+    const updatedHyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
 
     this.setState({
       epic: {
@@ -449,7 +450,8 @@ class GlobalState extends PureComponent<Props> {
       gameUpdates: updates,
       refreshing: false,
       refreshingInTheBackground: true,
-      sideloadedLibrary: updatedSideload
+      sideloadedLibrary: updatedSideload,
+      hyperPlayLibrary: updatedHyperPlayLibrary
     })
 
     if (currentLibraryLength !== epicLibrary.length) {
