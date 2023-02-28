@@ -29,7 +29,7 @@
 
 .Sidebar__categoryTitle {
   padding: 0 var(--sidebar-horizontal-padding);
-  color: var(--accent);
+  color: var(--color-neutral-300);
   margin-top: var(--space-md);
 }
 
