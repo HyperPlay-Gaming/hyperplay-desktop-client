@@ -22,36 +22,12 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     initScreen = ONBOARDING_SCREEN.WALLET_SELECTION
   }
 
-  const handleConnected: WrapRendererCallback<WalletConnectedType> = (
-    e,
-    accounts
-  ) => {
-    console.log('connected with accounts = ', accounts)
-    window.api.trackEvent({ event: 'Onboarding Completed' })
-    setContentParams({
-      content: ONBOARDING_CONTENT.SUCCESS
-    })
-  }
-
-  const handleRejected: WrapRendererCallback<ConnectionRequestRejectedType> = (
-    e
-  ) => {
-    console.log('rejected with ', e)
-    setContentParams({
-      content: ONBOARDING_CONTENT.REJECTED
-    })
-  }
-
-  const { content } = contentParams
+  const [currentScreen, setCurrentScreen] = useState(initScreen)
 
   // Track the screen view once each time the view changes
   useEffect(() => {
-    window.api.trackScreen('Onboarding', { view: content })
-  }, [content])
-
-  useEffect(() => {
-    window.api.trackEvent({ event: 'Onboarding Started' })
-  }, [])
+    window.api.trackScreen('Onboarding', { view: currentScreen })
+  }, [currentScreen])
 
   function getWelcomeElement() {
     return <Welcome setScreen={setCurrentScreen} />
