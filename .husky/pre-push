@@ -1,2 +1,2 @@
 #!/bin/bash
-#yarn codecheck && yarn lint 
+yarn codecheck && yarn lint 
