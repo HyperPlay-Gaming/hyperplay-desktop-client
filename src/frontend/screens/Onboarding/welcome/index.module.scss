@@ -17,6 +17,23 @@
   margin-bottom: var(--space-lg);
 }
 
-.welcomeBodyText {
+.welcomeBodyTextContainer {
   color: var(--color-neutral-100);
+}
+
+.welcomeBodyTextContainer > div {
+  margin: var(--space-md) 0px;
+}
+
+.welcomeBodyTextContainer a {
+  color: var(--color-primary-200);
+}
+
+.welcomeBodyTextContainer a:hover {
+  color: var(--color-primary-300);
+  transition: 0.2s;
+}
+
+.boldText {
+  font-weight: var(--bold);
 }

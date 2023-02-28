@@ -274,6 +274,7 @@
             "agree": "I agree",
             "noThanks": "No Thanks"
         },
+        "discordApp": "Discord",
         "misc": "Never",
         "onboarding": {
             "analytics": {
@@ -297,6 +298,7 @@
                 "description": "Your wallet is connected. You are ready to game.",
                 "title": "Wallet connected!"
             },
+            "terms": "Terms of Service.",
             "walletSelection": {
                 "pleaseConnect": "Please connect your wallet, or download the Metamask mobile-app to get\n        started:",
                 "screens": {
@@ -329,8 +331,13 @@
                 "title": "Wallet Connections"
             },
             "welcome": {
-                "body": "You're entering in a new game launcher from the future where you can carry your wallet, tokens, NFTs, and assets across the game store. \n          Note that we are in public alpha stage, and may be some bugs and unfinished features, but don't worry, we're working hard to fix them as soon as we can! \n          We'd love for you to join our HyperPlay Discord community and share your thoughts on any issues you encounter or features you'd like to see.",
-                "textCTA": "Together, let's shape the future of gaming!",
+                "text": {
+                    "bugs": "Please note that HyperPlay is a public alpha. Many features are still\n          in development, and there will be bugs.",
+                    "communityCTA_1": "We'd love your feedback and to have you join us in our",
+                    "communityCTA_2": "community. Together, let's shape the future of gaming!",
+                    "construction": "HyperPlay is under construction.",
+                    "description": "HyperPlay is a game launcher and game store aggregator from the\n          future. With HyperPlay, you can carry your wallet, tokens, and assets\n          into every game. HyperPlay supports the entire library of the Epic\n          Store, GOG, and our own HyperPlay store. By using HyperPlay, you agree\n          to our"
+                },
                 "title": "Welcome to HyperPlay Early Access!"
             }
         },

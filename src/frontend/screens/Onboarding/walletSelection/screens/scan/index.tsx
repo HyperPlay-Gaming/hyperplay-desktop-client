@@ -35,7 +35,7 @@ const ScanScreen = (props: ScanScreenProps) => {
         )}{' '}
         <a
           onClick={() =>
-            window.api.openExternalUrl('https://metamask.app.link/skAH3BaF99')
+            window.api.openExternalUrl('https://metamask.io/download/')
           }
           className="button-sm"
         >

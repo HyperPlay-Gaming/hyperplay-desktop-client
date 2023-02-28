@@ -24,21 +24,54 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
           'Welcome to HyperPlay Early Access!'
         )}
       </h5>
-      <div
-        className={`body ${WelcomeStyles.welcomeBody} ${WelcomeStyles.welcomeBodyText}`}
-      >
-        {t(
-          'hyperplay.onboarding.welcome.body',
-          `You're entering in a new game launcher from the future where you can carry your wallet, tokens, NFTs, and assets across the game store. 
-          Note that we are in public alpha stage, and may be some bugs and unfinished features, but don't worry, we're working hard to fix them as soon as we can! 
-          We'd love for you to join our HyperPlay Discord community and share your thoughts on any issues you encounter or features you'd like to see.`
-        )}
-      </div>
-      <div className={`body ${WelcomeStyles.welcomeBodyText}`}>
-        {t(
-          'hyperplay.onboarding.welcome.textCTA',
-          `Together, let's shape the future of gaming!`
-        )}
+      <div className={`body ${WelcomeStyles.welcomeBodyTextContainer}`}>
+        <div className={WelcomeStyles.boldText}>
+          {t(
+            'hyperplay.onboarding.welcome.text.construction',
+            `HyperPlay is under construction.`
+          )}
+        </div>
+        <div>
+          {t(
+            'hyperplay.onboarding.welcome.text.description',
+            `HyperPlay is a game launcher and game store aggregator from the
+          future. With HyperPlay, you can carry your wallet, tokens, and assets
+          into every game. HyperPlay supports the entire library of the Epic
+          Store, GOG, and our own HyperPlay store. By using HyperPlay, you agree
+          to our`
+          )}{' '}
+          <a
+            onClick={() =>
+              window.api.openExternalUrl(`https://www.hyperplay.xyz/terms`)
+            }
+          >
+            {t('hyperplay.onboarding.terms', `Terms of Service.`)}
+          </a>
+        </div>
+        <div>
+          {t(
+            'hyperplay.onboarding.welcome.text.bugs',
+            `Please note that HyperPlay is a public alpha. Many features are still
+          in development, and there will be bugs.`
+          )}
+        </div>
+        <div>
+          {t(
+            'hyperplay.onboarding.welcome.text.communityCTA_1',
+            `We'd love your feedback and to have you join us in our`
+          )}{' '}
+          <a
+            onClick={() =>
+              window.api.openExternalUrl(`https://discord.gg/Vx4ky6ZbAK`)
+            }
+          >
+            {t('hyperplay.discordApp', `Discord`)}
+          </a>{' '}
+          {t(
+            'hyperplay.onboarding.welcome.text.communityCTA_2',
+            `community. Together, let's shape the future of gaming!`
+          )}
+        </div>
       </div>
       <div className={WelcomeStyles.languageSelector}>
         <LanguageSelector flagPossition={FlagPosition.PREPEND} />
