@@ -1482,7 +1482,9 @@ ipcMain.handle(
 
 ipcMain.handle('kill', async (event, appName, runner) => {
   callAbortController(appName)
-  return runner === 'sideload' ? stop(appName) : getGame(appName, runner).stop()
+  return runner === 'sideload' || runner === 'hyperplay'
+    ? stop(appName)
+    : getGame(appName, runner).stop()
 })
 
 ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {

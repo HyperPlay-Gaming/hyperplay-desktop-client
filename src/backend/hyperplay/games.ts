@@ -1,4 +1,4 @@
-import { getHyperPlayGameInfo } from './library'
+import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
 import { existsSync } from 'graceful-fs'
 import { isWindows, isMac, isLinux } from '../constants'
 
