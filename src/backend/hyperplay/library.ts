@@ -1,7 +1,7 @@
 import { getMainWindow, sendFrontendMessage } from './../main_window'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 
-import { hpLibraryStore } from './electronStore'
+import { hpInstalledGamesStore, hpLibraryStore } from './electronStore'
 import {
   GameInfo,
   HyperPlayGameOS,
@@ -224,6 +224,9 @@ export async function installHyperPlayGame({
     const gameIndex = currentLibrary.findIndex(
       (value) => value.app_name === appName
     )
+    const currentInstalled = hpInstalledGamesStore.get('installed', [])
+    currentInstalled.push(installedInfo)
+    hpInstalledGamesStore.set('installed', currentInstalled)
     currentLibrary[gameIndex].install = installedInfo
     currentLibrary[gameIndex].is_installed = true
 

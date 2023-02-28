@@ -126,7 +126,7 @@ export interface StoreStructure {
     [key: string]: GameInfo[]
   }
   hpInstalledGamesStore: {
-    [key: string]: InstalledInfo
+    installed: InstalledInfo[]
   }
 }
 
