@@ -1,4 +1,4 @@
-import { HyperPlayInstallInfo } from './../types'
+import { HyperPlayGameOS, HyperPlayInstallInfo } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -159,7 +159,7 @@ interface HyperPlayAsyncIPCFunctions {
   getHyperPlayGameInfo: (gameId: string) => Promise<GameInfo | null>
   getHyperPlayInstallInfo: (
     appName: string,
-    platform: 'Windows' | 'linux' | 'Mac' | 'Browser'
+    platform: HyperPlayGameOS
   ) => Promise<HyperPlayInstallInfo | null>
   addHyperplayGame: (gameId: string) => Promise<void>
   installHyperPlayGame: (

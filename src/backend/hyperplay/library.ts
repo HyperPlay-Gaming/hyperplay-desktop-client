@@ -4,6 +4,8 @@ import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 import { hpLibraryStore } from './electronStore'
 import {
   GameInfo,
+  HyperPlayGameOS,
+  HyperPlayInstallInfo,
   HyperPlayRelease,
   InstalledInfo,
   PlatformInfo,
@@ -313,18 +315,18 @@ const installDistributables = async (gamePath: string) => {
 
 export const getHyperPlayGameInstallInfo = (
   appName: string,
-  platformToInstall: 'Windows' | 'linux' | 'Mac' | 'Browser'
-) => {
+  platformToInstall: HyperPlayGameOS
+): HyperPlayInstallInfo | null => {
   const gameInfo = getHyperPlayGameInfo(appName)
   if (!gameInfo || !gameInfo.releaseMeta) {
     return null
   }
 
   const standardPlatforms = ['Windows', 'linux', 'Mac', 'Browser']
-  let requestedPlatform = platformToInstall
-  if (standardPlatforms.includes(requestedPlatform)) {
+  let requestedPlatform = 'web'
+  if (standardPlatforms.includes(platformToInstall)) {
     requestedPlatform = handleArchAndPlatform(
-      requestedPlatform,
+      platformToInstall,
       gameInfo.releaseMeta
     )
   }
@@ -332,7 +334,7 @@ export const getHyperPlayGameInstallInfo = (
 
   if (!info) {
     logError(`No info for ${appName} ${requestedPlatform}`, LogPrefix.Backend)
-    return {}
+    return null
   }
   const download_size = info.downloadSize
   const install_size = info.installSize
