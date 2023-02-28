@@ -4,7 +4,6 @@ import {
   faStore,
   faUser,
   faUniversalAccess,
-  faUserAlt,
   faWineGlass,
   faGamepad,
   faBarsProgress
@@ -87,13 +86,15 @@ export default function SidebarLinks() {
 
   return (
     <div className="SidebarLinks Sidebar__section">
-      <div className="hyperplaySidebarLogoContainer">
-        <HyperPlayLogoWhite
-          height={64}
-          width={64}
-          className="hyperplaySidebarLogo"
-        />
-      </div>
+      <NavLink to={'/'}>
+        <div className="hyperplaySidebarLogoContainer">
+          <HyperPlayLogoWhite
+            height={64}
+            width={64}
+            className="hyperplaySidebarLogo"
+          />
+        </div>
+      </NavLink>
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
       <NavLink
         className={({ isActive }) =>
@@ -190,15 +191,6 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
-      <NavLink className="Sidebar__item" to={'/login'}>
-        <div className="Sidebar__itemIcon">
-          <FontAwesomeIcon
-            icon={faUserAlt}
-            title={t('userselector.manageaccounts', 'Manage Accounts')}
-          />
-        </div>
-        <span>{t('userselector.manageaccounts', 'Manage Accounts')}</span>
-      </NavLink>
       <h6 className="Sidebar__categoryTitle">OTHER</h6>
       <div className="SidebarItemWithSubmenu">
         <NavLink

@@ -21,6 +21,11 @@ export const uninstall = async (
   shouldRemovePrefix: boolean,
   shouldRemoveSetting: boolean
 ) => {
+  ipcRenderer.invoke('trackEvent', {
+    event: 'Game Uninstall Requested',
+    game_name: appName,
+    store_name: runner
+  })
   if (runner === 'sideload' || runner === 'hyperplay') {
     return ipcRenderer.invoke('removeApp', {
       appName,

@@ -92,7 +92,6 @@ import {
   wikiLink,
   fontsStore,
   configPath,
-  isMac,
   isSteamDeckGameMode,
   isCLIFullscreen,
   isCLINoGui,
@@ -101,7 +100,8 @@ import {
   wineprefixFAQ,
   hyperplaySite,
   customThemesWikiLink,
-  createNecessaryFolders
+  createNecessaryFolders,
+  fixAsarPath
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -259,9 +259,11 @@ const loadMainWindowURL = function () {
     mainWindow.loadURL(
       `file://${path.join(publicDir, '../build/index.html?view=App')}`
     )
-    if (!isMac) {
-      autoUpdater.checkForUpdates()
-    }
+    autoUpdater.checkForUpdates().then((val) => {
+      logInfo(
+        `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
+      )
+    })
   }
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -897,6 +899,9 @@ ipcMain.handle('login', async (event, sid) => LegendaryUser.login(sid))
 ipcMain.handle('authGOG', async (event, code) => GOGUser.login(code))
 ipcMain.handle('logoutLegendary', LegendaryUser.logout)
 ipcMain.on('logoutGOG', GOGUser.logout)
+ipcMain.handle('getLocalPeloadPath', async () => {
+  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
+})
 
 ipcMain.handle('getAlternativeWine', async () =>
   GlobalConfig.get().getAlternativeWine()
@@ -1242,6 +1247,11 @@ ipcMain.handle(
       status: 'uninstalling'
     })
 
+    trackEvent({
+      event: 'Game Uninstall Started',
+      properties: { game_name: appName, store_name: runner }
+    })
+
     const game = getGame(appName, runner)
 
     const { title } = game.getGameInfo()
@@ -1252,6 +1262,14 @@ ipcMain.handle(
       await game.uninstall()
       uninstalled = true
     } catch (error) {
+      trackEvent({
+        event: 'Game Uninstall Failed',
+        properties: {
+          game_name: appName,
+          store_name: runner,
+          error: `${error}`
+        }
+      })
       notify({
         title,
         body: i18next.t('notify.uninstalled.error', 'Error uninstalling')
@@ -1281,6 +1299,11 @@ ipcMain.handle(
         removeIfExists(appName.concat('.log'))
         removeIfExists(appName.concat('-lastPlay.log'))
       }
+
+      trackEvent({
+        event: 'Game Uninstall Success',
+        properties: { game_name: appName, store_name: runner }
+      })
 
       notify({ title, body: i18next.t('notify.uninstalled') })
       logInfo('Finished uninstalling', LogPrefix.Backend)
@@ -1825,6 +1848,7 @@ import './utils/ipc_handler'
 import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
+import { trackEvent } from './metrics/metrics'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (

@@ -130,7 +130,7 @@ interface RequestArguments {
 }
 
 interface HyperPlayAsyncIPCFunctions {
-  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<void>
+  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<boolean>
   chromeWindowsCreate: (
     options: chrome.windows.CreateData
   ) => Promise<chrome.windows.Window>
@@ -221,6 +221,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   }>
   logoutLegendary: () => Promise<void>
   getAlternativeWine: () => Promise<WineInstallation[]>
+  getLocalPeloadPath: () => Promise<string>
   readConfig: (config_class: 'library' | 'user') => Promise<GameInfo[] | string>
   requestSettings: (appName: string) => Promise<AppSettings | GameSettings>
   writeConfig: (args: { appName: string; config: Partial<AppSettings> }) => void

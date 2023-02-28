@@ -118,6 +118,10 @@ export interface StoreStructure {
   metricsStore: {
     metricsOptInStatus: MetricsOptInStatus
   }
+  onboardingStore: {
+    completedEarlyAccess: boolean
+    completedDataPrivacy: boolean
+  }
   hpLibraryStore: {
     [key: string]: GameInfo[]
   }

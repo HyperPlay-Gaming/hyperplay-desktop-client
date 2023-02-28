@@ -110,6 +110,11 @@ const metricsStore = new TypeCheckedStoreFrontend('metricsStore', {
   name: 'metrics-store'
 })
 
+const onboardingStore = new TypeCheckedStoreFrontend('onboardingStore', {
+  cwd: 'store',
+  name: 'onboarding-store'
+})
+
 const hyperPlayLibraryStore = new TypeCheckedStoreFrontend('hpLibraryStore', {
   cwd: 'hp_store',
   name: 'library'
@@ -126,5 +131,6 @@ export {
   wineDownloaderInfoStore,
   downloadManagerStore,
   metricsStore,
+  onboardingStore,
   hyperPlayLibraryStore
 }

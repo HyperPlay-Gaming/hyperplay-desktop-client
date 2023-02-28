@@ -29,7 +29,7 @@
 
 .Sidebar__categoryTitle {
   padding: 0 var(--sidebar-horizontal-padding);
-  color: var(--accent);
+  color: var(--color-neutral-300);
   margin-top: var(--space-md);
 }
 
@@ -39,6 +39,7 @@
 
 .hyperplaySidebarLogoContainer {
   margin: 0 auto var(--sidebar-vertical-padding);
+  text-align: center;
 }
 
 .Sidebar.collapsed .hyperplaySidebarLogoContainer {

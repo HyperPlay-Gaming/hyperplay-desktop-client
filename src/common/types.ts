@@ -3,6 +3,14 @@ import { LegendaryInstallPlatform } from './types/legendary'
 import { IpcRendererEvent } from 'electron'
 import { ChildProcess } from 'child_process'
 import { HowLongToBeatEntry } from 'howlongtobeat'
+import 'i18next'
+
+// fix for i18next https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false
+  }
+}
 
 export type WrapRendererCallback<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -189,7 +197,7 @@ export interface InstallProgress {
   bytes: string
   eta: string
   folder?: string
-  percent: number
+  percent?: number
   downSpeed?: number
   diskSpeed?: number
   file?: string

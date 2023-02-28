@@ -269,6 +269,84 @@
             "part2": "For other places, use a symbolic link to one of these folders"
         }
     },
+    "hyperplay": {
+        "buttons": {
+            "agree": "I agree",
+            "noThanks": "No Thanks"
+        },
+        "discordApp": "Discord",
+        "misc": "Never",
+        "onboarding": {
+            "analytics": {
+                "anonymized": "Send anonymized click & game interaction;",
+                "body": "HyperPlay would like to gather usage data to better understand how our users interact with the application. This information helps us understand how you use the app and lets us make HyperPlay even better for you.",
+                "hyperplayWill": "HyperPlay will:",
+                "neverCollectIP": " collect your full IP address;",
+                "neverCollectPersonal": " collect keys, addresses, balances, hashes, or any personal information;",
+                "neverSellData": " sell data for profit. Ever!",
+                "optOut": "Always allow you to opt-out via Settings;",
+                "privacyCaption": "This data is aggregated and is therefore anonymous for the purposes of General Data Protection Regulation (EU) 2016/679. For more information in relation to our privacy practices, please see our ",
+                "privacyPolicyHere": "Privacy Policy here.",
+                "title": "Help Us improve HyperPlay!"
+            },
+            "connectAgain": "Connect again",
+            "connectionCanceled": {
+                "description": "Please confirm the connection request on your mobile wallet to proceed.",
+                "title": "Connection canceled!"
+            },
+            "connectionConnected": {
+                "description": "Your wallet is connected. You are ready to game.",
+                "title": "Wallet connected!"
+            },
+            "terms": "Terms of Service.",
+            "walletSelection": {
+                "pleaseConnect": "Please connect your wallet, or download the Metamask mobile-app to get\n        started:",
+                "screens": {
+                    "import": {
+                        "createNewWallet": "Create new MM extension wallet",
+                        "details": "By importing, your MetaMask installation and  settings will be imported into HyperPlay.",
+                        "title": "Select the browser to import from"
+                    },
+                    "info": {
+                        "createWalletCTA": "Create a wallet",
+                        "createWalletDescription": "Click in “Create a wallet” below if you do not have a wallet or want to create a new one:",
+                        "digitalAssets": {
+                            "details": "Wallets are used to send, receive, store, and display digital assets like tokens and NFTs.",
+                            "title": "A Home for your Digital Assets"
+                        },
+                        "login": {
+                            "details": "An alternative to creating new accounts and passwords on every website, just connect your wallet instead.",
+                            "title": "A New Way to Log In"
+                        },
+                        "skip": "Skip for now",
+                        "title": "What is a wallet?"
+                    },
+                    "scan": {
+                        "details": "Create an encrypted communication channel. Your keys will never be shared with HyperPlay.",
+                        "dontHaveWallet": "Don’t have a wallet?",
+                        "getMetamask": "Get MetaMask",
+                        "title": "Scan QR with "
+                    }
+                },
+                "title": "Wallet Connections"
+            },
+            "welcome": {
+                "text": {
+                    "bugs": "Please note that HyperPlay is a public alpha. Many features are still\n          in development, and there will be bugs.",
+                    "communityCTA_1": "We'd love your feedback and to have you join us in our",
+                    "communityCTA_2": "community. Together, let's shape the future of gaming!",
+                    "construction": "HyperPlay is under construction.",
+                    "description": "HyperPlay is a game launcher and game store aggregator from the\n          future. With HyperPlay, you can carry your wallet, tokens, and assets\n          into every game. HyperPlay supports the entire library of the Epic\n          Store, GOG, and our own HyperPlay store. By using HyperPlay, you agree\n          to our"
+                },
+                "title": "Welcome to HyperPlay Early Access!"
+            }
+        },
+        "wallet": {
+            "connected": "Connected",
+            "notConnected": "Not connected"
+        }
+    },
+    "HyperPlay": "",
     "hyperplayOverlay": {
         "chainRequest": {
             "CONFIRMED": "Custom network added",
@@ -360,6 +438,13 @@
     "message": {
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
+    },
+    "metamask": {
+        "sidebar": {
+            "home": "Home",
+            "popup": "Popup",
+            "portfolio": "Portfolio"
+        }
     },
     "notify": {
         "error": {
@@ -525,7 +610,7 @@
         "fsync": "Enable Fsync",
         "gamemode": "Use GameMode (Feral Game Mode needs to be installed)",
         "ignoreGameUpdates": "Ignore game updates",
-        "language": "Choose App Language",
+        "language": "Choose Language",
         "library_top_option": {
             "disabled": "Disabled",
             "favourites": "Favourite Games",
@@ -659,7 +744,6 @@
         "logging_out": "Logging out",
         "logout": "Log out",
         "logout_confirmation": "Are you sure you want to log out?",
-        "manageaccounts": "Manage Accounts",
         "quit": "Quit"
     },
     "webview": {
