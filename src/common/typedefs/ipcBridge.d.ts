@@ -1,3 +1,4 @@
+import { HyperPlayInstallInfo } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -31,8 +32,7 @@ import {
   ConnectivityStatus,
   GamepadActionArgs,
   ExtraInfo,
-  AppPlatforms,
-  PlatformInfo
+  AppPlatforms
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
@@ -160,7 +160,7 @@ interface HyperPlayAsyncIPCFunctions {
   getHyperPlayInstallInfo: (
     appName: string,
     platform: AppPlatforms
-  ) => Promise<PlatformInfo | null>
+  ) => Promise<HyperPlayInstallInfo | null>
   addHyperplayGame: (gameId: string) => Promise<void>
   installHyperPlayGame: (
     gameId: string,

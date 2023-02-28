@@ -788,7 +788,7 @@ export type PlatformInfo = {
   name: string
   executable: string
   installSize: number
-  downloadize: number
+  downloadSize: number
 }
 
 export type ValistPlatforms = {
@@ -819,4 +819,12 @@ export interface HyperPlayRelease {
   projectMetaURI: string
   projectMeta: HyperPlayProjectMeta
   releaseMeta: HyperPlayReleaseMeta
+}
+
+export interface HyperPlayInstallInfo {
+  game: PlatformInfo
+  manifest: {
+    download_size: number
+    install_size: number
+  }
 }

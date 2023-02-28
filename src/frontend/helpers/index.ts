@@ -1,4 +1,4 @@
-import { AppPlatforms, PlatformInfo } from './../../common/types'
+import { AppPlatforms, HyperPlayInstallInfo } from './../../common/types'
 import {
   GameInfo,
   InstallProgress,
@@ -77,8 +77,11 @@ const getInstallInfo = async (
   appName: string,
   runner: Runner,
   installPlatform: InstallPlatform | AppPlatforms
-): Promise<LegendaryInstallInfo | GogInstallInfo | PlatformInfo | null> => {
+): Promise<
+  LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
+> => {
   if (runner === 'hyperplay') {
+    installPlatform = handleRunnersPlatforms(installPlatform, runner)
     return window.api.getHyperPlayInstallInfo(
       appName,
       installPlatform as AppPlatforms
@@ -96,15 +99,16 @@ function handleRunnersPlatforms(
   runner: Runner
 ): InstallPlatform {
   if (runner === 'hyperplay') {
-    const architecture = process.arch.replace('x', 'amd')
+    // TODO: write an ipc call to get the architecure from the backend
 
+    console.log(platform)
     switch (platform) {
       case 'Windows':
-        return `windows_${architecture}` as InstallPlatform
+        return `windows_amd64` as InstallPlatform
       case 'Mac':
-        return `darwin_${architecture}` as InstallPlatform
+        return `darwin_arm64` as InstallPlatform
       case 'linux':
-        return `linux_${architecture}` as InstallPlatform
+        return `linux_x64` as InstallPlatform
       case 'Browser':
         return 'web' as InstallPlatform
     }

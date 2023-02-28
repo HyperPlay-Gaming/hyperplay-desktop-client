@@ -9,9 +9,8 @@ import {
   HyperPlayRelease,
   InstalledInfo
 } from 'common/types'
-import { isWindows, isLinux } from 'backend/constants'
+import { isWindows } from 'backend/constants'
 import { downloadFile, getFileSize, spawnAsync } from 'backend/utils'
-import { GlobalConfig } from 'backend/config'
 import axios from 'axios'
 import { notify } from 'backend/dialog/dialog'
 import path from 'path'
@@ -73,8 +72,6 @@ export function getHyperPlayGameInfo(appName: string): GameInfo {
   const appInfo = libraryStore
     .get('games', [])
     .find((app) => app.app_name === appName)
-
-  console.log('getHyperPlayGameInfo', appInfo, libraryStore.get('games', []))
 
   if (!appInfo) {
     throw new Error('App not found in library')
@@ -285,9 +282,13 @@ export const getHyperPlayGameInstallInfo = (
   appName: string,
   platformToInstall: AppPlatforms
 ) => {
+  console.log('getHyperPlayGameInstallInfo', appName, platformToInstall)
   const gameInfo = getHyperPlayGameInfo(appName)
   if (!gameInfo || !gameInfo.releaseMeta) {
-    return
+    return null
   }
-  return gameInfo.releaseMeta.platforms[platformToInstall]
+  const info = gameInfo.releaseMeta.platforms[platformToInstall]
+  const download_size = info.downloadSize
+  const install_size = info.installSize
+  return { game: info, manifest: { download_size, install_size } }
 }

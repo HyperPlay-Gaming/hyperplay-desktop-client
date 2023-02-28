@@ -25,6 +25,7 @@ import { UpdateComponent, SelectField } from 'frontend/components/UI'
 import {
   ExtraInfo,
   GameInfo,
+  HyperPlayInstallInfo,
   Runner,
   SideloadGame,
   WineInstallation
@@ -89,7 +90,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    LegendaryInstallInfo | GogInstallInfo | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >(null)
   const [launchArguments, setLaunchArguments] = useState('')
   const [hasError, setHasError] = useState<{
@@ -162,6 +163,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
         if (runner !== 'sideload' && !notSupportedGame) {
           getInstallInfo(appName, runner, installPlatform)
             .then((info) => {
+              console.log(info)
               if (!info) {
                 throw 'Cannot get game info'
               }
