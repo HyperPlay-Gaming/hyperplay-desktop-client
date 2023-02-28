@@ -162,6 +162,7 @@ import {
   addGameToLibrary,
   getHyperPlayGameInfo,
   getHyperPlayGameInstallInfo,
+  isHpGameAvailable,
   uninstallHyperPlayGame
 } from './hyperplay/library'
 
@@ -796,6 +797,8 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
   const { appName, runner } = args
   if (runner === 'sideload') {
     return isAppAvailable(appName)
+  } else if (runner === 'hyperplay') {
+    return isHpGameAvailable(appName)
   }
   const info = getGame(appName, runner).getGameInfo()
   if (info && info.is_installed) {

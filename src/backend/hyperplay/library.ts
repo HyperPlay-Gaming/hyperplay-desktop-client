@@ -2,7 +2,7 @@ import fs, { rmSync } from 'fs'
 import { getMainWindow, sendFrontendMessage } from './../main_window'
 import { existsSync } from 'graceful-fs'
 
-import { libraryStore } from './electronStore'
+import { hpLibraryStore } from './electronStore'
 import {
   AppPlatforms,
   GameInfo,
@@ -27,6 +27,8 @@ export async function addGameToLibrary(appId: string) {
   )
 
   const data = res.data[0]
+
+  const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
 
   const gameInfo: GameInfo = {
     web3: { supported: true },
@@ -60,16 +62,16 @@ export async function addGameToLibrary(appId: string) {
     is_mac_native: false,
     is_linux_native: false,
     canRunOffline: false,
-    install: {},
+    install: isWebGame ? { platform: 'web' } : {},
     releaseMeta: data.releaseMeta
   }
 
-  const currentLibrary = libraryStore.get('games', [])
-  libraryStore.set('games', [...currentLibrary, gameInfo])
+  const currentLibrary = hpLibraryStore.get('games', [])
+  hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 }
 
 export function getHyperPlayGameInfo(appName: string): GameInfo {
-  const appInfo = libraryStore
+  const appInfo = hpLibraryStore
     .get('games', [])
     .find((app) => app.app_name === appName)
 
@@ -196,14 +198,14 @@ export async function installHyperPlayGame({
       platform: platformToInstall
     }
 
-    const currentLibrary = libraryStore.get('games', [])
+    const currentLibrary = hpLibraryStore.get('games', [])
     const gameIndex = currentLibrary.findIndex(
       (value) => value.app_name === appName
     )
     currentLibrary[gameIndex].install = installedInfo
     currentLibrary[gameIndex].is_installed = true
 
-    libraryStore.set('games', currentLibrary)
+    hpLibraryStore.set('games', currentLibrary)
 
     fs.rmSync(zipFile)
 
@@ -234,9 +236,9 @@ export async function uninstallHyperPlayGame(
   const gameFolder = path.join(installPath, appInfo.folder_name)
 
   rmSync(gameFolder, { recursive: true, force: true })
-  const currentStore = libraryStore.get('games', [])
+  const currentStore = hpLibraryStore.get('games', [])
   const newStore = currentStore.filter((game) => game.app_name !== appName)
-  libraryStore.set('games', newStore)
+  hpLibraryStore.set('games', newStore)
 
   if (shouldRemovePrefix) {
     const { winePrefix } = await getAppSettings(appName)
@@ -291,4 +293,16 @@ export const getHyperPlayGameInstallInfo = (
   const download_size = info.downloadSize
   const install_size = info.installSize
   return { game: info, manifest: { download_size, install_size } }
+}
+
+export const isHpGameAvailable = (appName: string) => {
+  const hpGameInfo = getHyperPlayGameInfo(appName)
+  if (hpGameInfo && hpGameInfo.install.platform === 'web') {
+    return true
+  }
+
+  if (hpGameInfo.install && hpGameInfo.install.executable) {
+    return existsSync(hpGameInfo.install.executable)
+  }
+  return false
 }
