@@ -6,10 +6,12 @@ import {
   GameInfo,
   HyperPlayRelease,
   InstalledInfo,
-  PlatformInfo
+  PlatformInfo,
+  ProgressInfo,
+  State
 } from 'common/types'
 import { isWindows } from 'backend/constants'
-import { downloadFile, getFileSize, spawnAsync } from 'backend/utils'
+import { getFileSize, spawnAsync } from 'backend/utils'
 import axios from 'axios'
 import { notify } from 'backend/dialog/dialog'
 import path from 'path'
@@ -24,6 +26,7 @@ import {
   createAbortController,
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
+import { downloadFile } from 'backend/wine/manager/downloader/utilities'
 
 export async function addGameToLibrary(appId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -130,25 +133,20 @@ async function downloadGame(
       // eslint-disable-next-line no-empty
     } catch (e) {}
 
-    await downloadFile(
-      platformInfo.external_url,
-      `${installPath}/${platformInfo.name}`,
-      createAbortController(appName),
-      (totalBytes, downloadedBytes, progress) => {
-        setInterval(() => {
-          window.webContents.send(`progressUpdate-${appName}`, {
-            appName,
-            status: 'installing',
-            progress: {
-              percent: progress,
-              bytes: downloadedBytes,
-              folder: installPath
-            }
-          }),
-            1000
-        })
-      }
-    )
+    const onProgress = (state: State, progress?: ProgressInfo) => {
+      sendFrontendMessage(`progressUpdate-${appName}`, {
+        state,
+        percent: progress?.percentage
+      })
+    }
+
+    await downloadFile({
+      url: platformInfo.external_url,
+      downloadDir: `${installPath}/${platformInfo.name}`,
+      downsize: platformInfo.downloadSize,
+      onProgress,
+      abortSignal: createAbortController(appName).signal
+    })
 
     deleteAbortController(appName)
 
@@ -192,13 +190,10 @@ export async function installHyperPlayGame({
         handleArchAndPlatform(platformToInstall, releaseMeta)
       ]
     await downloadGame(appName, dirpath, platformInfo)
-    const gameInfo = releaseMeta.platforms[platformToInstall]
-    const zipFile = path.join(dirpath, gameInfo.name)
+    const zipFile = path.join(dirpath, platformInfo.name)
     const destinationPath = path.join(dirpath, title)
-    const executable = path.join(destinationPath, gameInfo.executable)
-    const install_size = getFileSize(
-      releaseMeta.platforms[platformToInstall].installSize
-    )
+    const executable = path.join(destinationPath, platformInfo.executable)
+    const install_size = getFileSize(platformInfo.installSize)
 
     if (isWindows) {
       await spawnAsync('powershell', [
@@ -211,7 +206,7 @@ export async function installHyperPlayGame({
 
       await installDistributables(destinationPath)
     } else {
-      await spawnAsync('unzip', [dirpath, title])
+      await spawnAsync('unzip', [zipFile, title])
     }
 
     const installedInfo: InstalledInfo = {
@@ -223,7 +218,7 @@ export async function installHyperPlayGame({
       platform: platformToInstall
     }
 
-    const currentLibrary = hpLibraryStore.get('games', [])
+    const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
     const gameIndex = currentLibrary.findIndex(
       (value) => value.app_name === appName
     )
@@ -325,19 +320,18 @@ export const getHyperPlayGameInstallInfo = (
     return null
   }
 
-  const info =
-    gameInfo.releaseMeta.platforms[
-      handleArchAndPlatform(platformToInstall, gameInfo.releaseMeta)
-    ]
+  const standardPlatforms = ['Windows', 'linux', 'Mac', 'Browser']
+  let requestedPlatform = platformToInstall
+  if (standardPlatforms.includes(requestedPlatform)) {
+    requestedPlatform = handleArchAndPlatform(
+      requestedPlatform,
+      gameInfo.releaseMeta
+    )
+  }
+  const info = gameInfo.releaseMeta.platforms[requestedPlatform]
 
   if (!info) {
-    logError(
-      `No info for ${appName} ${handleArchAndPlatform(
-        platformToInstall,
-        gameInfo.releaseMeta
-      )}`,
-      LogPrefix.Backend
-    )
+    logError(`No info for ${appName} ${requestedPlatform}`, LogPrefix.Backend)
     return {}
   }
   const download_size = info.downloadSize

@@ -34,6 +34,6 @@ export function handleArchAndPlatform(
     case 'Browser':
       return 'web'
     default:
-      return 'windows_amd64'
+      return 'web'
   }
 }

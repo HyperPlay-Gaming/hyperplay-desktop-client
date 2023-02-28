@@ -17,7 +17,6 @@ export const hasProgress = (appName: string) => {
   )
 
   const calculatePercent = (currentProgress: InstallProgress) => {
-    console.log(currentProgress)
     // current/100 * (100-stored) + stored
     if (currentProgress.percent && previousProgress.percent) {
       const currentPercent = currentProgress.percent
@@ -36,7 +35,6 @@ export const hasProgress = (appName: string) => {
       { appName: appWithProgress, progress: currentProgress }: GameStatus
     ) => {
       if (appName === appWithProgress && currentProgress) {
-        console.log(currentProgress)
         setProgress({
           ...currentProgress,
           percent: calculatePercent(currentProgress)

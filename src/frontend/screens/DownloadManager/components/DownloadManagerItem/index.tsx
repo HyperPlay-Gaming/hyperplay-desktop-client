@@ -31,7 +31,7 @@ function convertToTime(time: number) {
 }
 
 const DownloadManagerItem = ({ element, current }: Props) => {
-  const { epic, gog, showDialogModal, sideloadedLibrary } =
+  const { epic, gog, showDialogModal, hyperPlayLibrary } =
     useContext(ContextProvider)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
@@ -46,7 +46,7 @@ const DownloadManagerItem = ({ element, current }: Props) => {
     )
   }
 
-  const library = [...epic.library, ...gog.library, ...sideloadedLibrary]
+  const library = [...epic.library, ...gog.library, ...hyperPlayLibrary]
 
   const { params, addToQueueTime, endTime, type, startTime } = element
   const { appName, runner, path, gameInfo: DmGameInfo, size } = params
@@ -54,8 +54,6 @@ const DownloadManagerItem = ({ element, current }: Props) => {
   const [gameInfo, setGameInfo] = useState(DmGameInfo)
   useEffect(() => {
     const getNewInfo = async () => {
-      if (runner === 'sideload' || runner === 'hyperplay') return
-
       const newInfo = (await getGameInfo(appName, runner)) as GameInfo
 
       if (newInfo) {
@@ -187,11 +185,9 @@ const DownloadManagerItem = ({ element, current }: Props) => {
       <span>{translatedTypes[type]}</span>
       <span>{getStoreName(runner, t2('Other'))}</span>
       <span className="icons">
-        {runner !== 'sideload' && runner !== 'hyperplay' && (
-          <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
-            {mainActionIcon()}
-          </SvgButton>
-        )}
+        <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
+          {mainActionIcon()}
+        </SvgButton>
       </span>
     </div>
   )

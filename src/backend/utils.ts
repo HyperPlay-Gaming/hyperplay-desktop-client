@@ -22,7 +22,8 @@ import {
   shell,
   Notification,
   BrowserWindow,
-  ipcMain
+  ipcMain,
+  session
 } from 'electron'
 import {
   exec,
@@ -40,6 +41,7 @@ import {
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
+import { download, DownloadItem } from 'electron-dl'
 
 import {
   fixAsarPath,
@@ -1144,7 +1146,7 @@ export type ProgressCallback = (
   progress: number
 ) => void
 
-export async function downloadFile(
+export async function downloadFileWithAxios(
   url: string,
   destPath: string,
   abortControler: AbortController,

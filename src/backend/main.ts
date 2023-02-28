@@ -814,7 +814,6 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
-  console.log('getGameInfo', appName, runner)
   if (runner === 'sideload') {
     return getAppInfo(appName)
   }
