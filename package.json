@@ -125,6 +125,17 @@
       "depends": [
         "curl"
       ]
+    },
+    "snap": {
+      "allowNativeWayland": true,
+      "category": "Games",
+      "synopsis": "HyperPlay allows players to carry their MetaMask or WalletConnect wallet overlaid on top of every desktop game. Game developers can request transactions or signatures with a simple REST API call that supports every wallet to manage wallet interactions seamlessly.",
+      "description": "HyperPlay allows players to carry their MetaMask or WalletConnect wallet overlaid on top of every desktop game. Game developers can request transactions or signatures with a simple REST API call that supports every wallet to manage wallet interactions seamlessly. \n You can also access your Epic and GOG games and play them using Proton or Wine that can be downloaded directly from the interface. DXVK, VKD3D and Winetricks are also included to play Windows Games.",
+      "publish": {
+        "provider": "snapStore",
+        "channels": "beta",
+        "repo": "hyperplay"
+      }
     }
   },
   "dependencies": {
@@ -201,7 +212,7 @@
     "test-watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand --silent",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
-    "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
+    "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
     "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "vite build && electron-builder -p always --win nsis",
     "dist:linux": "vite build && electron-builder --linux",
