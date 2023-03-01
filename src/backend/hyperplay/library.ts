@@ -202,9 +202,9 @@ export async function installHyperPlayGame({
         await spawnAsync('powershell', [
           'Expand-Archive',
           '-LiteralPath',
-          zipFile,
+          `'${zipFile}'`,
           '-DestinationPath',
-          destinationPath
+          `'${destinationPath}'`
         ])
 
         await installDistributables(destinationPath)
@@ -336,11 +336,6 @@ export const getHyperPlayGameInstallInfo = (
   if (!gameInfo || !gameInfo.releaseMeta) {
     return null
   }
-
-  logInfo(
-    `Getting install info for ${gameInfo.title} and ${platformToInstall}`,
-    LogPrefix.HyperPlay
-  )
 
   const requestedPlatform = handleArchAndPlatform(
     platformToInstall,
