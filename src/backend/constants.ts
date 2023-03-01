@@ -71,7 +71,7 @@ const sidInfoUrl =
 const githubURL = 'https://github.com/G7DAO/HyperPlay/releases/latest'
 const GITHUB_API = 'https://api.github.com/repos/G7DAO/HyperPlay/releases'
 const supportURL = 'https://github.com/G7DAO/HyperPlay/blob/main/Support.md'
-const discordLink = 'https://discord.gg/Vx4ky6ZbAK'
+const discordLink = 'https://discord.gg/eRVDbGUhKD'
 const wikiLink = 'https://github.com/G7DAO/HyperPlay/wiki'
 const weblateUrl =
   'https://hosted.weblate.org/projects/hyperplay-games-launcher'
