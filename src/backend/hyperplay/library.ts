@@ -1,6 +1,5 @@
 import { getMainWindow, sendFrontendMessage } from './../main_window'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
-import decompress from 'decompress'
 
 import { hpInstalledGamesStore, hpLibraryStore } from './electronStore'
 import {
@@ -220,16 +219,35 @@ export async function installHyperPlayGame({
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
-    if (!existsSync(zipFile)) {
-      await downloadGame(appName, dirpath, platformInfo)
-    }
+    await downloadGame(appName, dirpath, platformInfo)
     let executable = path.join(destinationPath, platformInfo.executable)
     const install_size = getFileSize(platformInfo.installSize)
 
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
     try {
-      await decompress(zipFile, destinationPath, {})
+      if (isWindows) {
+        await spawnAsync('powershell', [
+          'Expand-Archive',
+          '-LiteralPath',
+          `'${zipFile}'`,
+          '-DestinationPath',
+          `'${destinationPath}'`
+        ])
+
+        await installDistributables(destinationPath)
+      } else {
+        // extract the zip file and overwrite existing files
+        const { code, stderr } = await spawnAsync('unzip', [
+          '-o',
+          zipFile,
+          '-d',
+          destinationPath
+        ])
+        if (code !== 0) {
+          throw new Error(stderr)
+        }
+      }
       rmSync(zipFile)
 
       if (isWindows) {
