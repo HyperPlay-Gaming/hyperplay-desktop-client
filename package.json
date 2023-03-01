@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -30,7 +30,8 @@
       "build/win_icon.ico",
       "build/trayIconLight24x24.png",
       "build/trayIconDark24x24.png",
-      "build/extensions"
+      "build/extensions",
+      "build/hyperplay_store_preload.js"
     ],
     "protocols": [
       {
@@ -185,6 +186,7 @@
     "simple-keyboard": "^3.4.136",
     "source-map-support": "^0.5.21",
     "steam-shortcut-editor": "^3.1.1",
+    "stream": "^0.0.2",
     "systeminformation": "^5.15.0",
     "ts-prune": "^0.10.3",
     "tslib": "^2.4.0",

@@ -122,6 +122,12 @@ export interface StoreStructure {
     completedEarlyAccess: boolean
     completedDataPrivacy: boolean
   }
+  hpLibraryStore: {
+    [key: string]: GameInfo[]
+  }
+  hpInstalledGamesStore: {
+    installed: InstalledInfo[]
+  }
 }
 
 export type StoreOptions<T extends Record<string, unknown>> = Store.Options<T>

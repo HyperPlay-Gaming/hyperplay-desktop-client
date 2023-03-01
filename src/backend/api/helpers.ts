@@ -62,8 +62,10 @@ export const getDefaultSavePath = async (
     runner,
     alreadyDefinedGogSaves
   )
-export const getGameInfo = async (appName: string, runner: Runner) =>
-  ipcRenderer.invoke('getGameInfo', appName, runner)
+export const getGameInfo = async (appName: string, runner: Runner) => {
+  return ipcRenderer.invoke('getGameInfo', appName, runner)
+}
+
 export const getExtraInfo = async (appName: string, runner: Runner) =>
   ipcRenderer.invoke('getExtraInfo', appName, runner)
 

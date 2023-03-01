@@ -143,7 +143,9 @@ const Analytics: React.FC<AnalyticsProps> = function (props) {
         )}
         <a
           onClick={() =>
-            window.api.openExternalUrl('https://www.hyperplay.xyz/privacy')
+            window.api.openExternalUrl(
+              'https://www.hyperplay.xyz/privacy-policy'
+            )
           }
           className="button-sm"
         >

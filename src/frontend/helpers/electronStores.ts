@@ -115,6 +115,19 @@ const onboardingStore = new TypeCheckedStoreFrontend('onboardingStore', {
   name: 'onboarding-store'
 })
 
+const hyperPlayLibraryStore = new TypeCheckedStoreFrontend('hpLibraryStore', {
+  cwd: 'hp_store',
+  name: 'library'
+})
+
+const hpInstalledGamesStore = new TypeCheckedStoreFrontend(
+  'hpInstalledGamesStore',
+  {
+    cwd: 'hp_store',
+    name: 'installed'
+  }
+)
+
 export {
   configStore,
   gogLibraryStore,
@@ -126,5 +139,7 @@ export {
   wineDownloaderInfoStore,
   downloadManagerStore,
   metricsStore,
-  onboardingStore
+  onboardingStore,
+  hyperPlayLibraryStore,
+  hpInstalledGamesStore
 }

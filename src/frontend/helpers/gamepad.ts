@@ -31,9 +31,9 @@ export const initGamepad = () => {
   // store the current controllers
   let controllers: number[] = []
 
-  let heroicIsFocused = true
-  window.addEventListener('focus', () => (heroicIsFocused = true))
-  window.addEventListener('blur', () => (heroicIsFocused = false))
+  let hyperplayIsFocused = true
+  window.addEventListener('focus', () => (hyperplayIsFocused = true))
+  window.addEventListener('blur', () => (hyperplayIsFocused = false))
 
   // store the status and metadata for each action
   // triggeredAt is a hash with controllerIndex as keys and a timestamp or 0 (inactive)
@@ -68,8 +68,8 @@ export const initGamepad = () => {
   ) {
     if (controllerIsDisabled) return
 
-    if (!heroicIsFocused) {
-      // ignore gamepad events if heroic is not the focused app
+    if (!hyperplayIsFocused) {
+      // ignore gamepad events if hyperplay is not the focused app
       //
       // the browser still detects the gamepad interactions even
       // if the screen is not focused when playing a game

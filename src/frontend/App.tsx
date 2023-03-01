@@ -28,7 +28,6 @@ import SettingsModal from './screens/Settings/components/SettingsModal'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
-  console.log('sidebar collapsed in app = ', sidebarCollapsed)
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
@@ -50,6 +49,7 @@ function App() {
             <Route path="/" element={<Navigate replace to="/library" />} />
             <Route path="/library" element={<Library />} />
             <Route path="login" element={<Login />} />
+            <Route path="hyperplaystore" element={<WebView />} />
             <Route path="epicstore" element={<WebView />} />
             <Route path="gogstore" element={<WebView />} />
             <Route path="wiki" element={<WebView />} />

@@ -8,7 +8,8 @@ import {
   StatusPromise,
   GamepadInputEvent,
   DMQueueElement,
-  GameInfo
+  GameInfo,
+  Runner
 } from 'common/types'
 import * as path from 'path'
 import {
@@ -158,6 +159,19 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
+import {
+  addGameToLibrary,
+  getHyperPlayGameInfo,
+  getHyperPlayGameInstallInfo,
+  uninstallHyperPlayGame
+} from './hyperplay/library'
+
+import {
+  importGame,
+  isHpGameAvailable,
+  isHpGameNative,
+  stopHpGame
+} from './hyperplay/games'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -235,21 +249,19 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
 const loadMainWindowURL = function () {
   if (!app.isPackaged) {
-    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-    //   import('electron-devtools-installer').then((devtools) => {
-    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
-    // if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-    //   import('electron-devtools-installer').then((devtools) => {
-    //     const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
+    /* if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
+      import('electron-devtools-installer').then((devtools) => {
+        const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
 
-    //     installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
-    //       logWarning(['An error occurred: ', err], LogPrefix.Backend)
-    //     })
-    //   })
-    // }
+        installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
+          logWarning(['An error occurred: ', err], LogPrefix.Backend)
+        })
+      })
+    }
+  */
     mainWindow.loadURL('http://localhost:5173?view=App')
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+    mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(
@@ -313,6 +325,11 @@ if (!gotTheLock) {
       'persist:InPageWindowEthereumExternalWallet'
     )
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
+
+    const hpStoreSession = session.fromPartition('persist:hyperplaystore')
+    hpStoreSession.setPreloads([
+      path.join(__dirname, 'hyperplay_store_preload.js')
+    ])
 
     let overlayOpen = false
     const openOverlay = () => {
@@ -788,6 +805,8 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
   const { appName, runner } = args
   if (runner === 'sideload') {
     return isAppAvailable(appName)
+  } else if (runner === 'hyperplay') {
+    return isHpGameAvailable(appName)
   }
   const info = getGame(appName, runner).getGameInfo()
   if (info && info.is_installed) {
@@ -803,6 +822,9 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
   if (runner === 'sideload') {
     return getAppInfo(appName)
+  }
+  if (runner === 'hyperplay') {
+    return getHyperPlayGameInfo(appName)
   }
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
   if (runner === 'legendary' && !LegendaryLibrary.get().hasGame(appName)) {
@@ -824,7 +846,7 @@ ipcMain.handle('getGameInfo', async (event, appName, runner) => {
 })
 
 ipcMain.handle('getExtraInfo', async (event, appName, runner) => {
-  if (runner === 'sideload') {
+  if (runner === 'sideload' || runner === 'hyperplay') {
     return null
   }
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
@@ -1030,16 +1052,38 @@ ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
 
+export const isGameNative = (appName: string, runner: Runner) => {
+  const isHyperPlayGame = runner === 'hyperplay'
+  const isSideloaded = runner === 'sideload'
+  let isNative = true
+  if (isSideloaded) {
+    isNative = isNativeApp(appName)
+  } else if (isHyperPlayGame) {
+    isNative = isHpGameNative(appName)
+  } else {
+    const extGame = getGame(appName, runner)
+    isNative = extGame.isNative()
+  }
+  return isNative
+}
+
 // get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {
+    // TODO: split that into two stuff
+    const isHyperPlayGame = runner === 'hyperplay'
     const isSideloaded = runner === 'sideload'
     const extGame = getGame(appName, runner)
-    const game = isSideloaded ? getAppInfo(appName) : extGame.getGameInfo()
-    const gameSettings = isSideloaded
-      ? await getAppSettings(appName)
-      : await extGame.getSettings()
+    const game = isSideloaded
+      ? getAppInfo(appName)
+      : isHyperPlayGame
+      ? getHyperPlayGameInfo(appName)
+      : extGame.getGameInfo()
+    const gameSettings =
+      isSideloaded || isHyperPlayGame
+        ? await getAppSettings(appName)
+        : await extGame.getSettings()
     const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
 
     const { title } = game
@@ -1094,9 +1138,10 @@ ipcMain.handle(
 
     const systemInfo = await getSystemInfo()
     const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
-    const logFileLocation = isSideloaded
-      ? appLogFileLocation(appName)
-      : extGame.logFileLocation
+    const logFileLocation =
+      isSideloaded || isHyperPlayGame
+        ? appLogFileLocation(appName)
+        : extGame.logFileLocation
 
     writeFileSync(
       logFileLocation,
@@ -1109,11 +1154,10 @@ ipcMain.handle(
         '\n'
     )
 
+    const isNative = isGameNative(appName, runner)
+
     // check if isNative, if not, check if wine is valid
-    if (
-      (isSideloaded && !isNativeApp(appName)) ||
-      (!isSideloaded && !extGame.isNative())
-    ) {
+    if (!isNative) {
       const isWineOkToLaunch = await checkWineBeforeLaunch(
         appName,
         gameSettings,
@@ -1136,9 +1180,10 @@ ipcMain.handle(
       }
     }
 
-    const command = isSideloaded
-      ? launchApp(appName)
-      : extGame.launch(launchArguments)
+    const command =
+      isSideloaded || isHyperPlayGame
+        ? launchApp(appName, runner)
+        : extGame.launch(launchArguments)
 
     const launchResult = await command.catch((exception) => {
       logError(exception, LogPrefix.Backend)
@@ -1403,8 +1448,15 @@ ipcMain.handle(
       })
       return { status: 'error' }
     }
-    const game = getGame(appName, runner)
-    const { title } = game.getGameInfo()
+    let game
+    let title = ''
+    if (runner === 'hyperplay') {
+      game = getHyperPlayGameInfo(appName)
+      title = game.title
+    } else {
+      game = getGame(appName, runner)
+      title = game.getGameInfo().title
+    }
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
@@ -1421,10 +1473,15 @@ ipcMain.handle(
     }
 
     try {
-      const { abort, error } = await game.import(path, platform)
-      if (abort || error) {
-        abortMessage()
-        return { status: 'done' }
+      if (runner === 'hyperplay') {
+        importGame(appName, path, runner, platform)
+      } else {
+        // @ts-expect-error find a way of proper typing this
+        const { abort, error } = await game.import(path, platform)
+        if (abort || error) {
+          abortMessage()
+          return { status: 'done' }
+        }
       }
     } catch (error) {
       abortMessage()
@@ -1448,10 +1505,17 @@ ipcMain.handle(
 
 ipcMain.handle('kill', async (event, appName, runner) => {
   callAbortController(appName)
+  if (runner === 'hyperplay') return stopHpGame(appName)
   return runner === 'sideload' ? stop(appName) : getGame(appName, runner).stop()
 })
 
 ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
+  if (runner === 'hyperplay') {
+    return { status: 'error' }
+
+    // TODO: Implement update for HP games
+  }
+
   if (!isOnline()) {
     logWarning(
       `App offline, skipping install for game '${appName}'.`,
@@ -1763,13 +1827,24 @@ ipcMain.handle('getThemeCSS', async (event, theme) => {
 
 ipcMain.on('addNewApp', (e, args) => addNewApp(args))
 
-ipcMain.handle('removeApp', async (e, args) => removeApp(args))
+ipcMain.handle('removeApp', async (e, args) => {
+  if (args.runner === 'sideload') {
+    removeApp(args)
+  } else {
+    uninstallHyperPlayGame(args.appName, args.shouldRemovePrefix)
+  }
+})
 
-ipcMain.handle('launchApp', async (e, appName) => launchApp(appName))
+ipcMain.handle('launchApp', async (e, appName, runner) =>
+  launchApp(appName, runner)
+)
 
 ipcMain.handle('isNative', (e, { appName, runner }) => {
   if (runner === 'sideload') {
     return isNativeApp(appName)
+  }
+  if (runner === 'hyperplay') {
+    return isHpGameNative(appName)
   }
   const game = getGame(appName, runner)
   return game.isNative()
@@ -1890,3 +1965,30 @@ ipcMain.on('reloadApp', async () => {
     win.loadURL(win.webContents.getURL())
   }
 })
+
+ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
+  console.log('addHyperplayGame', gameId)
+  addGameToLibrary(gameId)
+})
+
+ipcMain.handle('getHyperPlayGameInfo', async (_e, gameId) => {
+  const gameInfo = getHyperPlayGameInfo(gameId)
+  if (gameInfo) {
+    return gameInfo
+  }
+  return null
+})
+
+ipcMain.handle('getHyperPlayInstallInfo', async (_e, gameId, platform) => {
+  const installInfo = getHyperPlayGameInstallInfo(gameId, platform)
+  if (installInfo) {
+    return installInfo
+  }
+  return null
+})
+
+// ipcMain.handle('installHyperPlayGame', async (_e, gameId: string,
+//   dirpath: string,
+//   platformToInstall: AppPlatforms) => {
+//   installHyperPlayGame(gameId, dirpath, platformToInstall)
+// }

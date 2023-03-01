@@ -5,3 +5,7 @@
   z-index: 100000;
   opacity: 90%;
 }
+
+.txnToast > div {
+  padding: var(--space-lg);
+}

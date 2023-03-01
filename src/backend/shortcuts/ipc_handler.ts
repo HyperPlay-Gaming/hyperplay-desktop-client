@@ -15,12 +15,19 @@ import {
 } from '../sideload/games'
 import { isMac } from 'backend/constants'
 import { notify } from 'backend/dialog/dialog'
+import {
+  addGameShortcuts,
+  removeGameShortcuts
+} from 'backend/hyperplay/library'
 
 ipcMain.on('addShortcut', async (event, appName, runner, fromMenu) => {
   const isSideload = runner === 'sideload'
+  const isHpGame = runner === 'hyperplay'
 
   if (isSideload) {
     addAppShortcuts(appName, fromMenu)
+  } else if (isHpGame) {
+    addGameShortcuts(appName, fromMenu)
   } else {
     const game = getGame(appName, runner)
     await game.addShortcuts(fromMenu)
@@ -58,9 +65,12 @@ ipcMain.handle('shortcutsExists', (event, appName, runner) => {
 
 ipcMain.on('removeShortcut', async (event, appName, runner) => {
   const isSideload = runner === 'sideload'
+  const isHpGame = runner === 'hyperplay'
 
   if (isSideload) {
     removeAppShortcuts(appName)
+  } else if (isHpGame) {
+    removeGameShortcuts(appName)
   } else {
     const game = getGame(appName, runner)
     await game.removeShortcuts()

@@ -11,6 +11,10 @@ button {
   @include buttonDefaultStyle();
 }
 
+main button {
+  border: none;
+}
+
 .button {
   @include buttonDefaultStyle();
   --line-height: 17px;

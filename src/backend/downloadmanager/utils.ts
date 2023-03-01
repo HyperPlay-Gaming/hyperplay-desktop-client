@@ -1,10 +1,11 @@
 import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
 import { getGame, isEpicServiceOffline } from '../utils'
-import { InstallParams } from 'common/types'
+import { AppPlatforms, InstallParams, InstallPlatform } from 'common/types'
 import i18next from 'i18next'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { isOnline } from '../online_monitor'
 import { sendFrontendMessage } from '../main_window'
+import { installHyperPlayGame } from 'backend/hyperplay/library'
 import { trackEvent } from 'backend/api/metrics'
 
 async function installQueueElement(params: InstallParams): Promise<{
@@ -46,13 +47,13 @@ async function installQueueElement(params: InstallParams): Promise<{
     }
   }
 
-  trackEvent({
+  /*  trackEvent({
     event: 'Game Install Started',
     properties: {
       game_name: appName,
       store_name: runner
     }
-  })
+  }) */
 
   sendFrontendMessage('gameStatusUpdate', {
     appName,
@@ -81,13 +82,30 @@ async function installQueueElement(params: InstallParams): Promise<{
   }
 
   try {
-    const { status, error } = await game.install({
-      path: path.replaceAll("'", ''),
-      installDlcs,
-      sdlList,
-      platformToInstall,
-      installLanguage
-    })
+    let installInstance
+
+    if (runner === 'hyperplay') {
+      const installPlatform = platformToInstall as AppPlatforms
+      installInstance = async () =>
+        installHyperPlayGame({
+          appName,
+          // @ts-expect-error TODO: Fix this
+          platformToInstall: installPlatform,
+          dirpath: path
+        })
+    } else {
+      const installPlatform = platformToInstall as InstallPlatform
+      installInstance = async () =>
+        game.install({
+          path: path.replaceAll("'", ''),
+          installDlcs,
+          sdlList,
+          platformToInstall: installPlatform,
+          installLanguage
+        })
+    }
+
+    const { status, error } = await installInstance()
 
     if (status === 'abort') {
       logWarning(

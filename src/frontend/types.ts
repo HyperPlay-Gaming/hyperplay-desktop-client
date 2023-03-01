@@ -12,7 +12,7 @@ import {
   MetricsOptInStatus
 } from 'common/types'
 
-export type Category = 'all' | 'legendary' | 'gog' | 'sideload'
+export type Category = 'all' | 'legendary' | 'gog' | 'sideload' | 'hyperplay'
 
 export interface ContextType {
   category: Category
@@ -83,6 +83,7 @@ export interface ContextType {
   externalLinkDialogOptions: ExternalLinkDialogOptions
   handleExternalLinkDialog: (options: ExternalLinkDialogOptions) => void
   sideloadedLibrary: SideloadGame[]
+  hyperPlayLibrary: GameInfo[]
   isSettingsModalOpen: {
     value: boolean
     gameInfo?: GameInfo | null

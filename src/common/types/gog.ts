@@ -1,4 +1,4 @@
-import { GOGGameInfo } from 'common/types'
+import { GOGGameInfo, LaunchOption, DLCInfo } from 'common/types'
 
 export type GogInstallPlatform = 'windows' | 'osx' | 'linux'
 
@@ -15,16 +15,6 @@ interface GameInstallInfo {
   title: string
   version: string
   buildId: string
-}
-
-interface LaunchOption {
-  name: string
-  parameters: string
-}
-
-interface DLCInfo {
-  app_name: string
-  title: string
 }
 
 interface GameManifest {

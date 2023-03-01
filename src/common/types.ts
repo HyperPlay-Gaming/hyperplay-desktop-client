@@ -20,7 +20,7 @@ export type WrapRendererCallback<
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
 
-export type Runner = 'legendary' | 'gog' | 'sideload'
+export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay'
 
 // NOTE: Do not put enum's in this module or it will break imports
 
@@ -105,7 +105,7 @@ export interface ExtraInfo {
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 
 export interface GameInfo {
-  runner: 'legendary' | 'gog'
+  runner: 'legendary' | 'gog' | 'hyperplay'
   store_url: string
   app_name: string
   art_cover: string
@@ -130,6 +130,7 @@ export interface GameInfo {
   is_linux_native: boolean
   browserUrl?: string
   web3?: Web3Features
+  releaseMeta?: HyperPlayReleaseMeta
 }
 
 export interface GameSettings {
@@ -240,7 +241,7 @@ export interface WineInstallation {
 
 export interface InstallArgs {
   path: string
-  platformToInstall: InstallPlatform
+  platformToInstall: InstallPlatform | AppPlatforms
   installDlcs?: boolean
   sdlList?: string[]
   installLanguage?: string
@@ -529,6 +530,7 @@ export type WebviewType = HTMLWebViewElement & ElWebview
 export type InstallPlatform =
   | LegendaryInstallPlatform
   | GogInstallPlatform
+  | AppPlatforms
   | 'Browser'
 
 export type ConnectivityChangedCallback = (
@@ -592,6 +594,9 @@ export interface SideloadGame {
   canRunOffline: boolean
   browserUrl: string
   web3: Web3Features
+  description?: string
+  systemRequirements?: SystemRequirements
+  wineSupport?: WineSupport
 }
 
 export interface SaveSyncArgs {
@@ -736,4 +741,114 @@ export enum MetricsOptInStatus {
   optedIn = 'OPTED_IN',
   optedOut = 'OPTED_OUT',
   undecided = 'UNDECIDED'
+}
+
+// Deals with games from Valist
+
+interface GalleryItem {
+  name: string
+  type: string
+  src: string
+}
+
+interface SystemRequirements {
+  cpu: string
+  gpu: string
+  memory: string
+  disk: string
+  ram: string
+}
+
+interface WineSupport {
+  mac: boolean
+  linux: boolean
+}
+
+interface HyperPlayProjectMeta {
+  image: string
+  main_capsule: string
+  name: string
+  short_description: string
+  description: string
+  external_url: string
+  type: string
+  tags: string[]
+  gallery: GalleryItem[]
+  launch_external: boolean
+  donation_address: string
+  prompt_donation: boolean
+  systemRequirements: SystemRequirements
+  wineSupport: WineSupport
+  networks: string[]
+}
+
+export type AppPlatforms =
+  | 'windows_amd64'
+  | 'windows_arm64'
+  | 'linux_amd64'
+  | 'linux_arm64'
+  | 'darwin_amd64'
+  | 'darwin_arm64'
+  | 'web'
+
+export interface DLCInfo {
+  app_name: string
+  title: string
+}
+
+export interface LaunchOption {
+  name: string
+  parameters: string
+}
+
+export type PlatformInfo = {
+  external_url: string
+  name: string
+  executable: string
+  installSize: number
+  downloadSize: number
+  launch_options: Array<LaunchOption>
+  owned_dlc: Array<DLCInfo>
+}
+
+export type ValistPlatforms = {
+  [key in AppPlatforms]: PlatformInfo
+}
+
+export type HyperPlayGameOS = 'Windows' | 'linux' | 'Mac' | 'Browser'
+
+export interface HyperPlayReleaseMeta {
+  _metadata_version: string
+  path: string
+  name: string
+  description: string
+  external_url: string
+  platforms: ValistPlatforms
+  image: string
+}
+
+export interface HyperPlayRelease {
+  _id: string
+  accountID: string
+  projectID: string
+  accountName: string
+  projectName: string
+  releaseID: string
+  releaseMetaURI: string
+  releaseName: string
+  status: string
+  timestamp: number
+  projectMetaURI: string
+  projectMeta: HyperPlayProjectMeta
+  releaseMeta: HyperPlayReleaseMeta
+}
+
+export interface HyperPlayInstallInfo {
+  game: PlatformInfo
+  manifest: {
+    download_size: number
+    install_size: number
+    disk_size?: number
+    url?: string
+  }
 }
