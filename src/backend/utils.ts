@@ -35,8 +35,7 @@ import {
   createWriteStream,
   appendFileSync,
   existsSync,
-  rmSync,
-  statSync
+  rmSync
 } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
@@ -76,7 +75,6 @@ import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { validWine } from './launcher'
-import { pipeline } from 'stream'
 
 const execAsync = promisify(exec)
 
@@ -1156,19 +1154,14 @@ export async function downloadFileWithAxios(
     url,
     method: 'GET',
     responseType: 'stream',
-    signal: abortController.signal,
-    headers: {
-      'Accept-Encoding': 'gzip, deflate'
-    }
+    signal: abortController.signal
   })
 
   const totalLength = Number(response.headers['content-length'])
 
   let downloadedBytes = 0
   let downloadSpeed = 0
-  let diskWriteSpeed = 0
   let prevDownloadedBytes = 0
-  let prevDiskWriteBytes = 0
   let prevTimestamp = Date.now()
 
   response.data.on('data', (chunk: Buffer) => {
@@ -1184,47 +1177,23 @@ export async function downloadFileWithAxios(
       prevTimestamp = now
     }
 
-    // Write data to file and calculate disk write speed
-    const bytesWritten = writer.write(chunk) ? 0 : 1
-    if (bytesWritten > 0) {
-      const diskWriteBytes = statSync(destPath).size
-      const diskWriteElapsed = now - prevTimestamp
-      if (diskWriteElapsed >= 1000) {
-        diskWriteSpeed =
-          ((diskWriteBytes - prevDiskWriteBytes) / diskWriteElapsed) * 1000
-        prevDiskWriteBytes = diskWriteBytes
-        prevTimestamp = now
-      }
-    }
-
     // Calculate progress and call progressCallback function (debounced)
     const progress = Math.round((downloadedBytes / totalLength) * 100)
     if (progressCallback) {
       const debouncedCallback = debounce(progressCallback, 1000)
-      debouncedCallback(
-        downloadedBytes,
-        downloadSpeed,
-        diskWriteSpeed,
-        progress
-      )
+      debouncedCallback(downloadedBytes, downloadSpeed, 0, progress)
     }
   })
 
-  response.data.on('end', () => {
-    writer.end()
+  response.data.pipe(writer)
+
+  return new Promise<void>((resolve, reject) => {
+    writer.on('finish', resolve)
+    abortController.signal.addEventListener('abort', () => {
+      writer.close()
+      reject()
+    })
   })
-
-  response.data.on('error', (err: Error) => {
-    writer.destroy(err)
-  })
-
-  abortController.signal.addEventListener('abort', () => {
-    writer.destroy()
-  })
-
-  await promisify(pipeline)(response.data, writer)
-
-  return
 }
 
 const debounce = <T extends (...args: number[]) => void>(

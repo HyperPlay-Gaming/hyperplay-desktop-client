@@ -667,7 +667,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
         ? ''
         : `${
             percent && bytes
-              ? `${percent}% [${bytes}] ${eta ? `ETA: ${eta}` : ''}`
+              ? `${percent}% [${Math.ceil(Number(bytes) / 1000000)} MB]  ${
+                  eta ? `ETA: ${eta}` : ''
+                }`
               : '...'
           }`
 

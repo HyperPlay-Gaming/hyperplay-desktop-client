@@ -214,11 +214,16 @@ export async function installHyperPlayGame({
       releaseMeta.platforms[
         handleArchAndPlatform(platformToInstall, releaseMeta)
       ]
-    await downloadGame(appName, dirpath, platformInfo)
     const zipFile = path.join(dirpath, platformInfo.name)
     const destinationPath = path.join(dirpath, title)
+    if (!existsSync(destinationPath)) {
+      mkdirSync(destinationPath, { recursive: true })
+    }
+    await downloadGame(appName, dirpath, platformInfo)
     let executable = path.join(destinationPath, platformInfo.executable)
     const install_size = getFileSize(platformInfo.installSize)
+
+    logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
     try {
       if (isWindows) {
@@ -245,6 +250,10 @@ export async function installHyperPlayGame({
       }
       rmSync(zipFile)
 
+      if (isWindows) {
+        await installDistributables(destinationPath)
+      }
+
       if (isMac && executable.endsWith('.app')) {
         const macAppExecutable = readdirSync(
           join(executable, 'Contents', 'MacOS')
@@ -255,6 +264,7 @@ export async function installHyperPlayGame({
       const binExecFullPath = getBinExecIfExists(executable)
 
       const installedInfo: InstalledInfo = {
+        appName,
         install_path: destinationPath,
         executable: binExecFullPath === '' ? executable : binExecFullPath,
         install_size,
@@ -282,7 +292,7 @@ export async function installHyperPlayGame({
 
       sendFrontendMessage('refreshLibrary', 'hyperplay')
     } catch (error) {
-      logInfo('Error while extracting game', LogPrefix.HyperPlay)
+      logInfo(`Error while extracting game ${error}`, LogPrefix.HyperPlay)
       window.webContents.send('gameStatusUpdate', {
         appName,
         runner: 'hyperplay',

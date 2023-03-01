@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -203,7 +203,7 @@
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
     "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
     "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
-    "release:win": "vite build && electron-builder -p always --win nsis --x64 --arm64",
+    "release:win": "vite build && electron-builder -p always --win nsis",
     "dist:linux": "vite build && electron-builder --linux",
     "dist:mac": "vite build && electron-builder --mac",
     "dist:win": "vite build && electron-builder --win",
