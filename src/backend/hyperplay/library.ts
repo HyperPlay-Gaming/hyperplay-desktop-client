@@ -26,6 +26,8 @@ import {
   createAbortController,
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
+import { GameConfig } from 'backend/game_config'
+import * as fs from 'fs'
 
 export async function addGameToLibrary(appId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -161,6 +163,21 @@ async function downloadGame(
   })
 }
 
+function updateAltExecutableIfUnrealGame(
+  appName: string,
+  dirpath: string,
+  execName: string
+) {
+  const binExec = path.join(
+    dirpath,
+    `./${execName}/Binaries/Win64/${execName}-Win64-Shipping.exe`
+  )
+  if (fs.existsSync(binExec)) {
+    return binExec
+  }
+  return ''
+}
+
 export async function installHyperPlayGame({
   appName,
   dirpath,
@@ -215,9 +232,15 @@ export async function installHyperPlayGame({
         }
       }
 
+      const binExecFullPath = updateAltExecutableIfUnrealGame(
+        appName,
+        path.dirname(executable),
+        path.basename(executable).split('.')[0]
+      )
+
       const installedInfo: InstalledInfo = {
         install_path: destinationPath,
-        executable,
+        executable: binExecFullPath === '' ? executable : binExecFullPath,
         install_size,
         is_dlc: false,
         version: releaseMeta.name,
