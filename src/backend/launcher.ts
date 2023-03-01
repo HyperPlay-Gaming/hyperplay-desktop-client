@@ -711,7 +711,7 @@ async function callRunner(
       signal: abortController.signal
     })
 
-    if (runner.name === 'sideload') {
+    if (runner.name === 'sideload' || runner.name === 'hyperplay') {
       logInfo(
         `Process PID for sideloaded game injected: ${child.pid}`,
         runner.logPrefix

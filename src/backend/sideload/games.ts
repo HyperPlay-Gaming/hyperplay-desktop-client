@@ -199,11 +199,19 @@ export async function launchApp(
     return false
   }
 
-  const {
-    install: { executable },
-    folder_name,
-    browserUrl
+  let {
+    install: { executable }
   } = gameInfo
+
+  const { folder_name, browserUrl } = gameInfo
+
+  const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
+  if (
+    gameSettingsOverrides.targetExe !== undefined &&
+    gameSettingsOverrides.targetExe !== ''
+  ) {
+    executable = gameSettingsOverrides.targetExe
+  }
 
   if (browserUrl) {
     return openNewBrowserGameWindow(browserUrl)
@@ -268,7 +276,7 @@ export async function launchApp(
       await callRunner(
         commandParts,
         {
-          name: 'sideload',
+          name: runner,
           logPrefix: LogPrefix.Backend,
           bin: executable,
           dir: dirname(executable)
