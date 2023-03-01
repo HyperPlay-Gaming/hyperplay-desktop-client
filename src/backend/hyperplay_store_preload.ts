@@ -1,7 +1,8 @@
 import { contextBridge, ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('api', {
-  getInfo: async () => false,
+  getInfo: async (gameId: string) =>
+    ipcRenderer.invoke('getGameInfo', gameId, 'hyperplay'),
   // returns isInstalled and updateAvailable booleans
   install: async (gameId: string) =>
     ipcRenderer.invoke('addHyperplayGame', gameId),
