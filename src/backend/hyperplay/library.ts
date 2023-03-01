@@ -264,6 +264,7 @@ export async function installHyperPlayGame({
       const binExecFullPath = getBinExecIfExists(executable)
 
       const installedInfo: InstalledInfo = {
+        appName,
         install_path: destinationPath,
         executable: binExecFullPath === '' ? executable : binExecFullPath,
         install_size,
