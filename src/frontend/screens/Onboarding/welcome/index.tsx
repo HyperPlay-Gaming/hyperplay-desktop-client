@@ -42,7 +42,9 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
           )}{' '}
           <a
             onClick={() =>
-              window.api.openExternalUrl(`https://www.hyperplay.xyz/terms`)
+              window.api.openExternalUrl(
+                `https://www.hyperplay.xyz/terms-of-service`
+              )
             }
           >
             {t('hyperplay.onboarding.terms', `Terms of Service.`)}
@@ -62,7 +64,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
           )}{' '}
           <a
             onClick={() =>
-              window.api.openExternalUrl(`https://discord.gg/Vx4ky6ZbAK`)
+              window.api.openExternalUrl(`https://discord.gg/eRVDbGUhKD`)
             }
           >
             {t('hyperplay.discordApp', `Discord`)}
