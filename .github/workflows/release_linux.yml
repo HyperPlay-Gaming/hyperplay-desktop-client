@@ -10,16 +10,18 @@ env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
+  SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_ID }}
 
 jobs:
   draft-releases:
     runs-on: ubuntu-latest
     steps:
+      - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm snapcraft
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
-          token: ${{ secrets.pat }}
+          token: ${{ secrets.pat }}ß
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:

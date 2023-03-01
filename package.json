@@ -201,7 +201,7 @@
     "test-watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand --silent",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
-    "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
+    "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
     "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "vite build && electron-builder -p always --win nsis --x64 --arm64",
     "dist:linux": "vite build && electron-builder --linux",
