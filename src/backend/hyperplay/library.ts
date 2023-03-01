@@ -110,59 +110,55 @@ async function downloadGame(
   installPath: string,
   platformInfo: PlatformInfo
 ): Promise<void> {
-  try {
-    const appInfo = getHyperPlayGameInfo(appName)
+  const appInfo = getHyperPlayGameInfo(appName)
 
-    if (!appInfo || !appInfo.releaseMeta) {
-      throw new Error('App not found in library')
-    }
-
-    logInfo(`Downloading zip file`, LogPrefix.HyperPlay)
-
-    // we might need a helper function to deal with the different platforms
-    const window = getMainWindow()
-
-    if (!window || !platformInfo.external_url) {
-      throw new Error('DownloadUrl not found')
-    }
-
-    // prevent from the next download being named eg. "game (1).zip"
-    try {
-      rmSync(path.join(installPath, platformInfo.name))
-      // eslint-disable-next-line no-empty
-    } catch (e) {}
-
-    try {
-      await downloadFileWithAxios(
-        platformInfo.external_url,
-        `${installPath}/${platformInfo.name}`,
-        createAbortController(appName),
-        (totalBytes, downloadedBytes, progress) => {
-          window.webContents.send(`progressUpdate-${appName}`, {
-            appName,
-            status: 'installing',
-            runner: 'hyperplay',
-            progress: {
-              percent: progress,
-              bytes: downloadedBytes,
-              folder: installPath
-            }
-          })
-        }
-      )
-      deleteAbortController(appName)
-    } catch (error) {
-      deleteAbortController(appName)
-      throw error
-    }
-
-    window.webContents.send('gameStatusUpdate', {
-      appName,
-      status: 'done'
-    })
-  } catch (e) {
-    console.log(e)
+  if (!appInfo || !appInfo.releaseMeta) {
+    throw new Error('App not found in library')
   }
+
+  logInfo(`Downloading zip file`, LogPrefix.HyperPlay)
+
+  // we might need a helper function to deal with the different platforms
+  const window = getMainWindow()
+
+  if (!window || !platformInfo.external_url) {
+    throw new Error('DownloadUrl not found')
+  }
+
+  // prevent from the next download being named eg. "game (1).zip"
+  try {
+    rmSync(path.join(installPath, platformInfo.name))
+    // eslint-disable-next-line no-empty
+  } catch (e) {}
+
+  try {
+    await downloadFileWithAxios(
+      platformInfo.external_url,
+      `${installPath}/${platformInfo.name}`,
+      createAbortController(appName),
+      (totalBytes, downloadedBytes, progress) => {
+        window.webContents.send(`progressUpdate-${appName}`, {
+          appName,
+          status: 'installing',
+          runner: 'hyperplay',
+          progress: {
+            percent: progress,
+            bytes: downloadedBytes,
+            folder: installPath
+          }
+        })
+      }
+    )
+    deleteAbortController(appName)
+  } catch (error) {
+    deleteAbortController(appName)
+    throw error
+  }
+
+  window.webContents.send('gameStatusUpdate', {
+    appName,
+    status: 'done'
+  })
 }
 
 export async function installHyperPlayGame({
@@ -249,11 +245,16 @@ export async function installHyperPlayGame({
 
       sendFrontendMessage('refreshLibrary', 'hyperplay')
     } catch (error) {
+      logInfo('Error while extracting game', LogPrefix.HyperPlay)
       return { status: 'error', error: `${error}` }
     }
     return { status: 'done' }
   } catch (error) {
-    return { status: 'error', error: `${error}` }
+    logInfo('Error while downloading and extracting game', LogPrefix.HyperPlay)
+    return {
+      status: 'error',
+      error: `${error}`
+    }
   }
 }
 
