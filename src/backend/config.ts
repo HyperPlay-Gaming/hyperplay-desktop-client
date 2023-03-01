@@ -169,7 +169,7 @@ abstract class GlobalConfig {
 
     const winePaths = new Set<string>()
 
-    // search for wine installed on $HOME/Library/Application Support/heroic/tools/wine
+    // search for wine installed on $HOME/Library/Application Support/hyperplay/tools/wine
     const wineToolsPath = `${toolsPath}/wine/`
     if (existsSync(wineToolsPath)) {
       readdirSync(wineToolsPath).forEach((path) => {

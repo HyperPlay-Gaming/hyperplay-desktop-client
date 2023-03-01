@@ -306,7 +306,7 @@ const getSystemInfo = async () => {
   if (systemInfoCache !== '') {
     return systemInfoCache
   }
-  const heroicVersion = getAppVersion()
+  const hyperplayVersion = getAppVersion()
   const legendaryVersion = await getLegendaryVersion()
   const gogdlVersion = await getGogdlVersion()
 
@@ -336,7 +336,7 @@ const getSystemInfo = async () => {
     ? (await execAsync('echo $XDG_SESSION_TYPE')).stdout.replaceAll('\n', '')
     : ''
 
-  systemInfoCache = `HyperPlay Version: ${heroicVersion}
+  systemInfoCache = `HyperPlay Version: ${hyperplayVersion}
 Legendary Version: ${legendaryVersion}
 GOGdl Version: ${gogdlVersion}
 OS: ${isMac ? `${codename} ${release}` : distro} KERNEL: ${kernel} ARCH: ${arch}
