@@ -1177,9 +1177,6 @@ export async function downloadFileWithAxios(
       prevTimestamp = now
     }
 
-    // Write data to file and calculate disk write speed
-    writer.write(chunk)
-
     // Calculate progress and call progressCallback function (debounced)
     const progress = Math.round((downloadedBytes / totalLength) * 100)
     if (progressCallback) {
@@ -1188,19 +1185,15 @@ export async function downloadFileWithAxios(
     }
   })
 
-  response.data.on('end', () => {
-    writer.end()
-  })
+  response.data.pipe(writer)
 
-  response.data.on('error', (err: Error) => {
-    writer.destroy(err)
+  return new Promise<void>((resolve, reject) => {
+    writer.on('finish', resolve)
+    abortController.signal.addEventListener('abort', () => {
+      writer.close()
+      reject()
+    })
   })
-
-  abortController.signal.addEventListener('abort', () => {
-    writer.destroy()
-  })
-
-  return
 }
 
 const debounce = <T extends (...args: number[]) => void>(

@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -156,6 +156,7 @@
     "classic-level": "^1.2.0",
     "classnames": "^2.3.1",
     "crc": "^4.1.1",
+    "decompress": "^4.2.1",
     "discord-rich-presence-typescript": "^0.0.8",
     "electron-store": "^8.0.1",
     "electron-updater": "^5.0.1",
@@ -230,6 +231,7 @@
     "@testing-library/user-event": "^14.1.1",
     "@types/chrome": "^0.0.200",
     "@types/classnames": "^2.3.1",
+    "@types/decompress": "^4.2.4",
     "@types/i18next-fs-backend": "^1.1.2",
     "@types/ini": "^1.3.31",
     "@types/jest": "^27.4.1",

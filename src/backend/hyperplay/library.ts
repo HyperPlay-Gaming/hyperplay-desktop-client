@@ -1,5 +1,6 @@
 import { getMainWindow, sendFrontendMessage } from './../main_window'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
+import decompress from 'decompress'
 
 import { hpInstalledGamesStore, hpLibraryStore } from './electronStore'
 import {
@@ -214,36 +215,26 @@ export async function installHyperPlayGame({
       releaseMeta.platforms[
         handleArchAndPlatform(platformToInstall, releaseMeta)
       ]
-    await downloadGame(appName, dirpath, platformInfo)
     const zipFile = path.join(dirpath, platformInfo.name)
     const destinationPath = path.join(dirpath, title)
+    if (!existsSync(destinationPath)) {
+      mkdirSync(destinationPath, { recursive: true })
+    }
+    if (!existsSync(zipFile)) {
+      await downloadGame(appName, dirpath, platformInfo)
+    }
     let executable = path.join(destinationPath, platformInfo.executable)
     const install_size = getFileSize(platformInfo.installSize)
 
-    try {
-      if (isWindows) {
-        await spawnAsync('powershell', [
-          'Expand-Archive',
-          '-LiteralPath',
-          `'${zipFile}'`,
-          '-DestinationPath',
-          `'${destinationPath}'`
-        ])
+    logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
-        await installDistributables(destinationPath)
-      } else {
-        // extract the zip file and overwrite existing files
-        const { code, stderr } = await spawnAsync('unzip', [
-          '-o',
-          zipFile,
-          '-d',
-          destinationPath
-        ])
-        if (code !== 0) {
-          throw new Error(stderr)
-        }
-      }
+    try {
+      await decompress(zipFile, destinationPath, {})
       rmSync(zipFile)
+
+      if (isWindows) {
+        await installDistributables(destinationPath)
+      }
 
       if (isMac && executable.endsWith('.app')) {
         const macAppExecutable = readdirSync(
@@ -282,7 +273,7 @@ export async function installHyperPlayGame({
 
       sendFrontendMessage('refreshLibrary', 'hyperplay')
     } catch (error) {
-      logInfo('Error while extracting game', LogPrefix.HyperPlay)
+      logInfo(`Error while extracting game ${error}`, LogPrefix.HyperPlay)
       window.webContents.send('gameStatusUpdate', {
         appName,
         runner: 'hyperplay',
