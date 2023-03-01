@@ -1,3 +1,4 @@
+import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
 import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
@@ -167,6 +168,7 @@ import {
 } from './hyperplay/library'
 
 import {
+  importGame,
   isHpGameAvailable,
   isHpGameNative,
   stopHpGame
@@ -1447,8 +1449,15 @@ ipcMain.handle(
       })
       return { status: 'error' }
     }
-    const game = getGame(appName, runner)
-    const { title } = game.getGameInfo()
+    let game
+    let title = ''
+    if (runner === 'hyperplay') {
+      game = getHyperPlayGameInfo(appName)
+      title = game.title
+    } else {
+      game = getGame(appName, runner)
+      title = game.getGameInfo().title
+    }
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
@@ -1465,10 +1474,14 @@ ipcMain.handle(
     }
 
     try {
-      const { abort, error } = await game.import(path, platform)
-      if (abort || error) {
-        abortMessage()
-        return { status: 'done' }
+      if (runner === 'hyperplay') {
+        importGame(appName, path, runner, platform)
+      } else {
+        const { abort, error } = await game.import(path, platform)
+        if (abort || error) {
+          abortMessage()
+          return { status: 'done' }
+        }
       }
     } catch (error) {
       abortMessage()
