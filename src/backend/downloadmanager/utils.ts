@@ -89,6 +89,7 @@ async function installQueueElement(params: InstallParams): Promise<{
       installInstance = async () =>
         installHyperPlayGame({
           appName,
+          // @ts-expect-error TODO: Fix this
           platformToInstall: installPlatform,
           dirpath: path
         })

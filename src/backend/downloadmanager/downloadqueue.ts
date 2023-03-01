@@ -59,11 +59,13 @@ async function initQueue() {
     const isHpGame = runner === 'hyperplay'
     let game = null
     let installInfo = isHpGame
-      ? getHyperPlayGameInstallInfo(appName, platformToInstall)
+      ? // @ts-expect-error TS wont know how to handle the type of installInfo
+        getHyperPlayGameInstallInfo(appName, platformToInstall)
       : null
 
     if (runner !== 'hyperplay') {
       game = getGame(appName, runner)
+      // @ts-expect-error TS wont know how to handle the type of installInfo
       installInfo = await game.getInstallInfo(platformToInstall)
     }
 

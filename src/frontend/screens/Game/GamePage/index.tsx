@@ -172,7 +172,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
         if (runner !== 'sideload' && !notSupportedGame) {
           getInstallInfo(appName, runner, installPlatform)
             .then((info) => {
-              console.log(info)
               if (!info) {
                 throw 'Cannot get game info'
               }

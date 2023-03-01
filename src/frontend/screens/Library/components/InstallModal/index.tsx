@@ -140,8 +140,6 @@ export default React.memo(function InstallModal({
     getDefaultplatform()
   )
 
-  console.log(platformToInstall)
-
   const hasWine = platformToInstall === 'Windows' && !isWin
 
   useEffect(() => {

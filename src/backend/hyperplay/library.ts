@@ -15,7 +15,7 @@ import { downloadFileWithAxios, getFileSize, spawnAsync } from 'backend/utils'
 import axios from 'axios'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
-import { logInfo, LogPrefix, logError } from 'backend/logger/logger'
+import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
 import { getAppSettings } from 'backend/sideload/games'
 import {
   addShortcuts,
@@ -26,8 +26,8 @@ import {
   createAbortController,
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
-import { GameConfig } from 'backend/game_config'
 import * as fs from 'fs'
+import { removeFromQueue } from 'backend/downloadmanager/downloadqueue'
 
 export async function addGameToLibrary(appId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -139,13 +139,18 @@ async function downloadGame(
       platformInfo.external_url,
       `${installPath}/${platformInfo.name}`,
       createAbortController(appName),
-      (totalBytes, downloadedBytes, progress) => {
+      (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
+        // convert downloadspeed to Mb/s
+        downloadSpeed = Math.round(downloadSpeed / 1000000)
+
         window.webContents.send(`progressUpdate-${appName}`, {
           appName,
           status: 'installing',
           runner: 'hyperplay',
           progress: {
             percent: progress,
+            diskSpeed: diskWriteSpeed,
+            downSpeed: downloadSpeed,
             bytes: downloadedBytes,
             folder: installPath
           }
@@ -153,15 +158,16 @@ async function downloadGame(
       }
     )
     deleteAbortController(appName)
+    window.webContents.send('gameStatusUpdate', {
+      appName,
+      runner: 'hyperplay',
+      status: 'done'
+    })
   } catch (error) {
     deleteAbortController(appName)
-    throw error
+    logWarning(`Download aborted ${error}`, LogPrefix.HyperPlay)
+    removeFromQueue(appName)
   }
-
-  window.webContents.send('gameStatusUpdate', {
-    appName,
-    status: 'done'
-  })
 }
 
 export function getBinExecIfExists(executable: string) {
@@ -194,8 +200,9 @@ export async function installHyperPlayGame({
   }
 
   const { title, releaseMeta } = getHyperPlayGameInfo(appName)
+  const window = getMainWindow()
 
-  if (!releaseMeta) {
+  if (!releaseMeta || !window) {
     return { status: 'error', error: 'Release meta not found' }
   }
 
@@ -276,6 +283,11 @@ export async function installHyperPlayGame({
       sendFrontendMessage('refreshLibrary', 'hyperplay')
     } catch (error) {
       logInfo('Error while extracting game', LogPrefix.HyperPlay)
+      window.webContents.send('gameStatusUpdate', {
+        appName,
+        runner: 'hyperplay',
+        status: 'done'
+      })
       return { status: 'error', error: `${error}` }
     }
     return { status: 'done' }
@@ -318,6 +330,7 @@ export async function uninstallHyperPlayGame(
   rmSync(gameFolder, { recursive: true, force: true })
 
   // only remove the game from the store if the platform is web
+  // @ts-expect-error TS wont know how to handle the type of installInfo
   if (appInfo.install.platform === 'web') {
     rmAppFromHyperPlayStore(appName)
   }

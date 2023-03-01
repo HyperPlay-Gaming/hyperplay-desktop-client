@@ -1,4 +1,3 @@
-import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
 import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
@@ -1477,6 +1476,7 @@ ipcMain.handle(
       if (runner === 'hyperplay') {
         importGame(appName, path, runner, platform)
       } else {
+        // @ts-expect-error find a way of proper typing this
         const { abort, error } = await game.import(path, platform)
         if (abort || error) {
           abortMessage()
