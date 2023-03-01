@@ -1843,6 +1843,9 @@ ipcMain.handle('isNative', (e, { appName, runner }) => {
   if (runner === 'sideload') {
     return isNativeApp(appName)
   }
+  if (runner === 'hyperplay') {
+    return isHpGameNative(appName)
+  }
   const game = getGame(appName, runner)
   return game.isNative()
 })

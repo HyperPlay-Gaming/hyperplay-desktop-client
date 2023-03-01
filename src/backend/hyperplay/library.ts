@@ -10,11 +10,11 @@ import {
   InstalledInfo,
   PlatformInfo
 } from 'common/types'
-import { isWindows } from 'backend/constants'
+import { isMac, isWindows } from 'backend/constants'
 import { downloadFileWithAxios, getFileSize, spawnAsync } from 'backend/utils'
 import axios from 'axios'
 import { notify } from 'backend/dialog/dialog'
-import path from 'path'
+import path, { join } from 'path'
 import { logInfo, LogPrefix, logError } from 'backend/logger/logger'
 import { getAppSettings } from 'backend/sideload/games'
 import {
@@ -94,6 +94,7 @@ export async function addGameToLibrary(appId: string) {
 }
 
 export function getHyperPlayGameInfo(appName: string): GameInfo {
+  logInfo(`Getting game info for ${appName}`, LogPrefix.HyperPlay)
   const appInfo = hpLibraryStore
     .get('games', [])
     .find((app) => app.app_name === appName)
@@ -194,7 +195,7 @@ export async function installHyperPlayGame({
     await downloadGame(appName, dirpath, platformInfo)
     const zipFile = path.join(dirpath, platformInfo.name)
     const destinationPath = path.join(dirpath, title)
-    const executable = path.join(destinationPath, platformInfo.executable)
+    let executable = path.join(destinationPath, platformInfo.executable)
     const install_size = getFileSize(platformInfo.installSize)
 
     try {
@@ -209,10 +210,24 @@ export async function installHyperPlayGame({
 
         await installDistributables(destinationPath)
       } else {
-        const { code, stderr } = await spawnAsync('unzip', [zipFile, title])
+        // extract the zip file and overwrite existing files
+        const { code, stderr } = await spawnAsync('unzip', [
+          '-o',
+          zipFile,
+          '-d',
+          destinationPath
+        ])
         if (code !== 0) {
           throw new Error(stderr)
         }
+      }
+      rmSync(zipFile)
+
+      if (isMac && executable.endsWith('.app')) {
+        const macAppExecutable = readdirSync(
+          join(executable, 'Contents', 'MacOS')
+        )[0]
+        executable = join(executable, 'Contents', 'MacOS', macAppExecutable)
       }
 
       const installedInfo: InstalledInfo = {
@@ -235,8 +250,6 @@ export async function installHyperPlayGame({
       currentLibrary[gameIndex].is_installed = true
 
       hpLibraryStore.set('games', currentLibrary)
-
-      rmSync(zipFile)
 
       notify({
         title,
@@ -286,7 +299,26 @@ export async function uninstallHyperPlayGame(
   const gameFolder = path.join(installPath, appInfo.folder_name)
 
   rmSync(gameFolder, { recursive: true, force: true })
-  rmAppFromHyperPlayStore(appName)
+
+  // only remove the game from the store if the platform is web
+  if (appInfo.install.platform === 'web') {
+    rmAppFromHyperPlayStore(appName)
+  }
+
+  // remove game from installed games store
+  const currentInstalled = hpInstalledGamesStore.get('installed', [])
+  const newInstalled = currentInstalled.filter(
+    (game) => game.executable !== appInfo.install.executable
+  )
+  hpInstalledGamesStore.set('installed', newInstalled)
+
+  // change is_installed to false
+  const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
+  const gameIndex = currentLibrary.findIndex(
+    (value) => value.app_name === appName
+  )
+  currentLibrary[gameIndex].is_installed = false
+  hpLibraryStore.set('games', currentLibrary)
 
   if (shouldRemovePrefix) {
     const { winePrefix } = await getAppSettings(appName)
@@ -337,6 +369,8 @@ export const getHyperPlayGameInstallInfo = (
     return null
   }
 
+  logInfo(`Getting install info for ${gameInfo.title}`, LogPrefix.HyperPlay)
+
   const requestedPlatform = handleArchAndPlatform(
     platformToInstall,
     gameInfo.releaseMeta
@@ -346,7 +380,7 @@ export const getHyperPlayGameInstallInfo = (
 
   if (!info) {
     logError(
-      `No info for ${appName} and ${requestedPlatform}`,
+      `No install info for ${appName} and ${requestedPlatform}`,
       LogPrefix.HyperPlay
     )
     return null
