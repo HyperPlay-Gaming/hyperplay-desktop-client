@@ -28,7 +28,6 @@ import SettingsModal from './screens/Settings/components/SettingsModal'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
-  console.log('sidebar collapsed in app = ', sidebarCollapsed)
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>

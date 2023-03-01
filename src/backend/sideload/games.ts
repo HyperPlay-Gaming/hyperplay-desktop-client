@@ -29,6 +29,7 @@ import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
 import { app, BrowserWindow } from 'electron'
 import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
+import { isGameNative } from 'backend/main'
 const buildDir = resolve(__dirname, '../../build')
 
 export function appLogFileLocation(appName: string) {
@@ -212,6 +213,7 @@ export async function launchApp(
   const { launcherArgs } = gameSettings
 
   if (executable) {
+    const isNative = isGameNative(appName, runner)
     const {
       success: launchPrepSuccess,
       failureReason: launchPrepFailReason,
@@ -219,7 +221,7 @@ export async function launchApp(
       mangoHudCommand,
       gameModeBin,
       steamRuntime
-    } = await prepareLaunch(gameSettings, gameInfo, isNativeApp(appName))
+    } = await prepareLaunch(gameSettings, gameInfo, isNative)
 
     const wrappers = setupWrappers(
       gameSettings,
@@ -243,7 +245,7 @@ export async function launchApp(
     const env = { ...process.env, ...setupEnvVars(gameSettings) }
 
     // Native
-    if (isNativeApp(appName)) {
+    if (isNative) {
       logInfo(
         `launching native sideloaded: ${executable} ${launcherArgs ?? ''}`,
         LogPrefix.Backend

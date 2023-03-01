@@ -8,7 +8,8 @@ import {
   StatusPromise,
   GamepadInputEvent,
   DMQueueElement,
-  GameInfo
+  GameInfo,
+  Runner
 } from 'common/types'
 import * as path from 'path'
 import {
@@ -1050,13 +1051,25 @@ ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
 
+export const isGameNative = (appName: string, runner: Runner) => {
+  const isHyperPlayGame = runner === 'hyperplay'
+  const isSideloaded = runner === 'sideload'
+  let isNative = true
+  if (isSideloaded) {
+    isNative = isNativeApp(appName)
+  } else if (isHyperPlayGame) {
+    isNative = isHpGameNative(appName)
+  } else {
+    const extGame = getGame(appName, runner)
+    isNative = extGame.isNative()
+  }
+  return isNative
+}
+
 // get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {
-    console.log(
-      `launching game with appName = ${appName} launchArgs = ${launchArguments} runner = ${runner}`
-    )
     // TODO: split that into two stuff
     const isHyperPlayGame = runner === 'hyperplay'
     const isSideloaded = runner === 'sideload'
@@ -1140,14 +1153,7 @@ ipcMain.handle(
         '\n'
     )
 
-    let isNative = true
-    if (isSideloaded) {
-      isNative = isNativeApp(appName)
-    } else if (isHyperPlayGame) {
-      isNative = isHpGameNative(appName)
-    } else {
-      isNative = extGame.isNative()
-    }
+    const isNative = isGameNative(appName, runner)
 
     // check if isNative, if not, check if wine is valid
     if (!isNative) {
