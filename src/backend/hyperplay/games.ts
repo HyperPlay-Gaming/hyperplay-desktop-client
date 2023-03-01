@@ -1,4 +1,7 @@
-import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
+import {
+  getBinExecIfExists,
+  getHyperPlayGameInfo
+} from 'backend/hyperplay/library'
 import { existsSync } from 'graceful-fs'
 import { isWindows, isMac, isLinux } from '../constants'
 import { killPattern } from 'backend/utils'
@@ -89,9 +92,11 @@ export async function importGame(
     }
   })
 
+  const executableFullPath = path.join(pathName, exec)
+  const binExec = getBinExecIfExists(executableFullPath)
   gameInLibrary.install = {
     install_path: pathName,
-    executable: path.join(pathName, exec),
+    executable: binExec === '' ? executableFullPath : binExec,
     install_size: '0 GiB',
     is_dlc: false,
     version: '-1',

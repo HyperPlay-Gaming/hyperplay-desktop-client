@@ -164,11 +164,9 @@ async function downloadGame(
   })
 }
 
-function updateAltExecutableIfUnrealGame(
-  appName: string,
-  dirpath: string,
-  execName: string
-) {
+export function getBinExecIfExists(executable: string) {
+  const dirpath = path.dirname(executable)
+  const execName = path.basename(executable).split('.')[0]
   const binExec = path.join(
     dirpath,
     `./${execName}/Binaries/Win64/${execName}-Win64-Shipping.exe`
@@ -247,11 +245,7 @@ export async function installHyperPlayGame({
         executable = join(executable, 'Contents', 'MacOS', macAppExecutable)
       }
 
-      const binExecFullPath = updateAltExecutableIfUnrealGame(
-        appName,
-        path.dirname(executable),
-        path.basename(executable).split('.')[0]
-      )
+      const binExecFullPath = getBinExecIfExists(executable)
 
       const installedInfo: InstalledInfo = {
         install_path: destinationPath,
