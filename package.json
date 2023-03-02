@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -31,7 +31,8 @@
       "build/trayIconLight24x24.png",
       "build/trayIconDark24x24.png",
       "build/extensions",
-      "build/hyperplay_store_preload.js"
+      "build/hyperplay_store_preload.js",
+      "build/webviewPreload.js"
     ],
     "protocols": [
       {
