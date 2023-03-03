@@ -91,6 +91,8 @@ jobs:
         run: yarn
       - name: Build artifacts.
         run: yarn dist:mac --publish=never
+        env:
+          NOTARIZE: false
       - name: Upload x64 build.
         uses: actions/upload-artifact@v3
         with:
