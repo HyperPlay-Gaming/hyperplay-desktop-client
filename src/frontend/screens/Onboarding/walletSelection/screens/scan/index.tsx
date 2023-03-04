@@ -2,6 +2,7 @@ import React from 'react'
 import { t } from 'i18next'
 import QrCodeGradientBorder from '../../../components/qrCodeGradientBorder'
 import ScanScreenStyles from './index.module.scss'
+import { WarningIcon } from 'frontend/assets/hyperplay'
 
 interface ScanScreenProps {
   qrCodeSvg: string
@@ -44,6 +45,15 @@ const ScanScreen = (props: ScanScreenProps) => {
             `Get MetaMask`
           )}
         </a>
+      </div>
+      <div className={`body-sm ${ScanScreenStyles.walletWarning}`}>
+        <WarningIcon height={15} fill={'var(--color-status-alert)'} />
+        <div>
+          {t(
+            'hyperplay.onboarding.walletSelection.screens.scan.updateWarning',
+            'Having issues? Make sure MetaMask is up to date.'
+          )}
+        </div>
       </div>
     </>
   )
