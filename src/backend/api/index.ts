@@ -9,6 +9,7 @@ import * as DownloadManager from './downloadmanager'
 import * as Extensions from '../hyperplay-extension-helper/api/extensions'
 import * as Overlay from '../overlay/api'
 import * as Metrics from './metrics'
+import * as HyperPlay from './hyperplay'
 
 export default {
   ...Misc,
@@ -21,5 +22,6 @@ export default {
   ...DownloadManager,
   ...Extensions,
   ...Overlay,
-  ...Metrics
+  ...Metrics,
+  ...HyperPlay
 }

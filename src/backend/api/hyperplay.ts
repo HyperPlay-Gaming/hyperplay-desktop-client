@@ -5,6 +5,3 @@ export const getHyperPlayInstallInfo = async (
   appName: string,
   platform: HyperPlayGameOS
 ) => ipcRenderer.invoke('getHyperPlayInstallInfo', appName, platform)
-
-export const checkHpGameUpdates = async (appName: string) =>
-  ipcRenderer.invoke('checkHpGameUpdates', appName)
