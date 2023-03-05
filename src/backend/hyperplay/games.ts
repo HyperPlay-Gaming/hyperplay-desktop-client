@@ -9,10 +9,16 @@ import {
   InstalledInfo,
   InstallPlatform,
   PlatformInfo,
-  Runner
+  Runner,
+  StatusPromise
 } from 'common/types'
 import { isLinux, isMac, isWindows } from 'backend/constants'
-import { downloadFileWithAxios, getFileSize, killPattern, spawnAsync } from 'backend/utils'
+import {
+  downloadFileWithAxios,
+  getFileSize,
+  killPattern,
+  spawnAsync
+} from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
@@ -467,4 +473,12 @@ export async function uninstallHyperPlayGame(
   setTimeout(() => {
     sendFrontendMessage('refreshLibrary', 'hyperplay')
   })
+}
+
+export async function updateHyperPlayGame(
+  appId: string
+): Promise<StatusPromise> {
+  logInfo(`Updating ${appId}`, LogPrefix.HyperPlay)
+  // TODO: Implement update
+  return { status: 'done' }
 }

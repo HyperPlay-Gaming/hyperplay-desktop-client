@@ -5,7 +5,11 @@ import i18next from 'i18next'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { isOnline } from '../online_monitor'
 import { sendFrontendMessage } from '../main_window'
-import { installHyperPlayGame } from 'backend/hyperplay/games'
+import {
+  getHyperPlayGameInfo,
+  installHyperPlayGame,
+  updateHyperPlayGame
+} from 'backend/hyperplay/games'
 import { trackEvent } from 'backend/api/metrics'
 
 async function installQueueElement(params: InstallParams): Promise<{
@@ -21,8 +25,12 @@ async function installQueueElement(params: InstallParams): Promise<{
     installLanguage,
     platformToInstall
   } = params
-  const game = getGame(appName, runner)
-  const { title } = game.getGameInfo()
+
+  const gameInfo =
+    runner === 'hyperplay'
+      ? getHyperPlayGameInfo(appName)
+      : getGame(appName, runner)?.getGameInfo()
+  const { title = '' } = { ...gameInfo }
 
   if (!isOnline()) {
     logWarning(
@@ -47,13 +55,13 @@ async function installQueueElement(params: InstallParams): Promise<{
     }
   }
 
-  /*  trackEvent({
+  trackEvent({
     event: 'Game Install Started',
     properties: {
       game_name: appName,
       store_name: runner
     }
-  }) */
+  })
 
   sendFrontendMessage('gameStatusUpdate', {
     appName,
@@ -95,8 +103,9 @@ async function installQueueElement(params: InstallParams): Promise<{
         })
     } else {
       const installPlatform = platformToInstall as InstallPlatform
+      const game = getGame(appName, runner)
       installInstance = async () =>
-        game.install({
+        game!.install({
           path: path.replaceAll("'", ''),
           installDlcs,
           sdlList,
@@ -162,8 +171,11 @@ async function updateQueueElement(params: InstallParams): Promise<{
   error?: string | undefined
 }> {
   const { appName, runner } = params
-  const game = getGame(appName, runner)
-  const { title } = game.getGameInfo()
+  const gameInfo =
+    runner === 'hyperplay'
+      ? getHyperPlayGameInfo(appName)
+      : getGame(appName, runner)?.getGameInfo()
+  const { title = '' } = { ...gameInfo }
 
   if (!isOnline()) {
     logWarning(
@@ -172,7 +184,6 @@ async function updateQueueElement(params: InstallParams): Promise<{
     )
     return { status: 'error' }
   }
-
   if (runner === 'legendary') {
     const epicOffline = await isEpicServiceOffline()
     if (epicOffline) {
@@ -207,8 +218,16 @@ async function updateQueueElement(params: InstallParams): Promise<{
     }
   })
 
+  let updateInstance
+
+  if (runner === 'hyperplay') {
+    updateInstance = async () => updateHyperPlayGame(appName)
+  } else {
+    updateInstance = async () => getGame(appName, runner)!.update()
+  }
+
   try {
-    const { status } = await game.update()
+    const { status } = await updateInstance()
 
     if (status === 'error') {
       logWarning(

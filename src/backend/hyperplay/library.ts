@@ -120,34 +120,33 @@ export async function refreshHPGameInfo(appId: string): Promise<void> {
 }
 
 /**
- * Checks if the game has an update
- * @param appId the id of the game
- * @returns true if the game has an update, false if not
+ * Checks for updates for all games in the library
+ * @returns string[] an array of game ids that have updates
  * @example
- * const hasUpdate = await checkHpGameUpdates('5f9b9b0b0e1c9c0001e8b0b8')
- * console.log(hasUpdate) // true
+ * const updatedGames = await checkHpGamesUpdates()
+ * console.log(updatedGames)
+ * // ['game1', 'game2']
  **/
-export async function checkHpGameUpdates(appId: string): Promise<boolean> {
-  const url = `https://developers.hyperplay.xyz/api/listings?id=${appId}`
-  const res = await axios.get<HyperPlayRelease>(url)
+export async function checkHpGamesUpdates(): Promise<string[]> {
+  const updatedGameIds: string[] = []
+  const url = `https://developers.hyperplay.xyz/api/listings`
+  const res = await axios.get<HyperPlayRelease[]>(url)
   const data = res.data
 
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
-  const gameIndex = currentLibrary.findIndex((val) => val.app_name === appId)
 
-  if (gameIndex === -1) {
-    return false
+  for (const currentInfo of currentLibrary) {
+    const gameIndex = data.findIndex((val) => val._id === currentInfo.app_name)
+    if (
+      gameIndex !== -1 &&
+      currentInfo?.releaseMeta?._metadata_version !==
+        data[gameIndex].releaseMeta._metadata_version
+    ) {
+      updatedGameIds.push(currentInfo.app_name)
+    }
   }
 
-  const currentInfo = currentLibrary[gameIndex]
-
-  if (
-    currentInfo?.releaseMeta?._metadata_version !==
-    data.releaseMeta._metadata_version
-  ) {
-    return true
-  }
-  return false
+  return updatedGameIds
 }
 
 /**
