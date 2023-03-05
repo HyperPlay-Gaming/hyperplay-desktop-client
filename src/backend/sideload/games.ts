@@ -28,7 +28,7 @@ import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
 import { app, BrowserWindow } from 'electron'
-import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
+import { getHyperPlayGameInfo } from 'backend/hyperplay/games'
 import { isGameNative } from 'backend/main'
 const buildDir = resolve(__dirname, '../../build')
 

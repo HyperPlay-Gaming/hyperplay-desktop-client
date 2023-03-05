@@ -159,18 +159,16 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
-import {
-  addGameToLibrary,
-  getHyperPlayGameInfo,
-  getHyperPlayGameInstallInfo,
-  uninstallHyperPlayGame
-} from './hyperplay/library'
+import { addGameToLibrary } from './hyperplay/library'
 
 import {
+  getHyperPlayGameInfo,
+  getHyperPlayGameInstallInfo,
   importGame,
   isHpGameAvailable,
   isHpGameNative,
-  stopHpGame
+  stopHpGame,
+  uninstallHyperPlayGame
 } from './hyperplay/games'
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')

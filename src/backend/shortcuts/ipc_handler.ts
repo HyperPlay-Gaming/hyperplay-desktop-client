@@ -15,10 +15,7 @@ import {
 } from '../sideload/games'
 import { isMac } from 'backend/constants'
 import { notify } from 'backend/dialog/dialog'
-import {
-  addGameShortcuts,
-  removeGameShortcuts
-} from 'backend/hyperplay/library'
+import { addGameShortcuts, removeGameShortcuts } from 'backend/hyperplay/games'
 
 ipcMain.on('addShortcut', async (event, appName, runner, fromMenu) => {
   const isSideload = runner === 'sideload'

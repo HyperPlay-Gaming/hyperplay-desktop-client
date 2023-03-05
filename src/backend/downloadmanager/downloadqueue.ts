@@ -4,7 +4,7 @@ import { getFileSize, getGame } from '../utils'
 import { DMQueueElement } from 'common/types'
 import { installQueueElement, updateQueueElement } from './utils'
 import { sendFrontendMessage } from '../main_window'
-import { getHyperPlayGameInstallInfo } from 'backend/hyperplay/library'
+import { getHyperPlayGameInstallInfo } from 'backend/hyperplay/games'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
