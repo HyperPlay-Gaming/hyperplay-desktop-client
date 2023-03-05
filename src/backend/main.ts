@@ -159,7 +159,7 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
-import { addGameToLibrary } from './hyperplay/library'
+import { addGameToLibrary, checkHpGamesUpdates } from './hyperplay/library'
 
 import {
   getHyperPlayGameInfo,
@@ -706,6 +706,7 @@ ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
   let epicUpdates = await LegendaryLibrary.get().listUpdateableGames()
   let gogUpdates = await GOGLibrary.get().listUpdateableGames()
+  let hpGameUpdates = await checkHpGamesUpdates()
 
   const { autoUpdateGames } = GlobalConfig.get().getSettings()
   if (autoUpdateGames) {
@@ -740,9 +741,25 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
         logInfo(`Skipping auto-update for ${gameInfo.title}`, LogPrefix.Gog)
       }
     })
+    hpGameUpdates.forEach(async (appName) => {
+      const { ignoreGameUpdates } = await getAppSettings(appName)
+      const gameInfo = getHyperPlayGameInfo(appName)
+      if (!ignoreGameUpdates) {
+        logInfo(`Auto-Updating ${gameInfo.title}`, LogPrefix.HyperPlay)
+        const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
+        addToQueue(dmQueueElement)
+        // remove from the array to avoid downloading the same game twice
+        hpGameUpdates = hpGameUpdates.filter((game) => game !== appName)
+      } else {
+        logInfo(
+          `Skipping auto-update for ${gameInfo.title}`,
+          LogPrefix.HyperPlay
+        )
+      }
+    })
   }
 
-  return [...epicUpdates, ...gogUpdates]
+  return [...epicUpdates, ...gogUpdates, ...hpGameUpdates]
 })
 
 ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
