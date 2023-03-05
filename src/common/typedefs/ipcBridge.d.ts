@@ -173,6 +173,7 @@ interface HyperPlayAsyncIPCFunctions {
     shoudlRemoveSetting: boolean
   ) => Promise<void>
   launchHyperplayGame: (gameId: string) => Promise<StatusPromise>
+  checkHpGameUpdates: (gameId: string) => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

@@ -5,8 +5,7 @@ import {
   LaunchParams,
   SideloadGame,
   ImportGameArgs,
-  GameStatus,
-  HyperPlayGameOS
+  GameStatus
 } from 'common/types'
 
 export const removeFolder = (args: [path: string, folderName: string]) =>
@@ -104,8 +103,3 @@ export const launchApp = async (
   appName: string,
   runner: 'hyperplay' | 'sideload'
 ): Promise<boolean> => ipcRenderer.invoke('launchApp', appName, runner)
-
-export const getHyperPlayInstallInfo = async (
-  appName: string,
-  platform: HyperPlayGameOS
-) => ipcRenderer.invoke('getHyperPlayInstallInfo', appName, platform)
