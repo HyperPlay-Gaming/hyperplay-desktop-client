@@ -109,8 +109,14 @@ export default function LogSettings() {
       <h3>{t('setting.log.instructions_title', 'How to report a problem?')}</h3>
       <p className="report-problem-instructions">
         {t(
-          'setting.log.instructions',
-          'Join our Discord and look for the channel that matches your operating system. Share the content of the logs displayed here, and include a clear description of the problem with any relevant information and details.'
+          'setting.log.instructions-part-01',
+          "If you encounter any issues while using HyperPlay, we have two designated areas to report your issues in our Discord Server. If you're a player, please report any problems by visiting the player-support-forum. If you are a game dev, please report any problems by visiting the dev-support-forum."
+        )}{' '}
+        <br />
+        <br />
+        {t(
+          'setting.log.instructions-part-02',
+          'To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.'
         )}
       </p>
       {isDefault && (
