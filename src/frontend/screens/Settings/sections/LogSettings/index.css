@@ -65,4 +65,5 @@
 
 .report-problem-instructions {
   text-align: left;
+  padding-bottom: var(--space-md);
 }

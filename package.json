@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -31,7 +31,8 @@
       "build/trayIconLight24x24.png",
       "build/trayIconDark24x24.png",
       "build/extensions",
-      "build/hyperplay_store_preload.js"
+      "build/hyperplay_store_preload.js",
+      "build/webviewPreload.js"
     ],
     "protocols": [
       {
@@ -216,7 +217,7 @@
     "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "vite build && electron-builder -p always --win nsis",
     "dist:linux": "vite build && electron-builder --linux",
-    "dist:mac": "vite build && electron-builder --mac",
+    "dist:mac": "export CSC_IDENTITY_AUTO_DISCOVERY=false && vite build && electron-builder --mac",
     "dist:win": "vite build && electron-builder --win",
     "lint": "eslint --cache -c .eslintrc --ext .tsx,ts ./src",
     "lint-fix": "eslint --fix -c .eslintrc --ext .tsx,ts ./src",
