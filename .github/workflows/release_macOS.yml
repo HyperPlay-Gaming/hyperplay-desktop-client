@@ -15,7 +15,6 @@ env:
   APPLE_ID: ${{ secrets.APPLEID }}
   APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLEIDPASS }}
   TEAMID: ${{ secrets.TEAMID }}
-  RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
   build-and-release:
