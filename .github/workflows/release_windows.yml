@@ -9,7 +9,6 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
-  RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
   draft-releases:

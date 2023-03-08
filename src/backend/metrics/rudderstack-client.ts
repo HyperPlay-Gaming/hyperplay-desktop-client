@@ -1,4 +1,5 @@
 import Analytics from '@rudderstack/rudder-sdk-node'
+import { app } from 'electron'
 
 /**
  * The rudderstack node client. Node client was chosen over the frontend
@@ -10,15 +11,13 @@ import Analytics from '@rudderstack/rudder-sdk-node'
  * option in Rudderstack to remove that from any records of the event which we
  * have enabled.
  */
-export const rudderstack = process.env.RUDDERSTACK_CLIENT_ID
-  ? new Analytics(process.env.RUDDERSTACK_CLIENT_ID as string, {
-      dataPlaneUrl: 'https://hyperplayvc.dataplane.rudderstack.com'
-    })
-  : {
-      track: () => {
-        // Noop, we should decide how to handle this
-      },
-      screen: () => {
-        // Noop, we should decide how to handle this
-      }
-    }
+
+const devWriteKey = '2MkE9SXQ3Jwdp6YTaR82ZVn1fKB'
+const prodWriteKey = '2L0e8tI45DDRWKEWTmaGqFsilfv'
+
+export const rudderstack = new Analytics(
+  app.isPackaged ? prodWriteKey : devWriteKey,
+  {
+    dataPlaneUrl: 'https://hyperplayvc.dataplane.rudderstack.com'
+  }
+)
