@@ -25,8 +25,17 @@ const ExtensionHandler = function () {
 
   async function handleSend(event: Event, id: number, args: unknown[]) {
     try {
-      console.log('requesting from mm browser ext = ', JSON.stringify(args))
       const value = await window.ethereum.send(...args)
+      window.api.returnExtensionRequest(id, value)
+    } catch (err) {
+      console.error(`error during send: ${err}`)
+      window.api.errorExtensionRequest(id, err)
+    }
+  }
+
+  async function handleSendAsync(event: Event, id: number, args: unknown[]) {
+    try {
+      const value = await window.ethereum.sendAsync(...args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
       console.error(`error during send: ${err}`)
@@ -61,10 +70,13 @@ const ExtensionHandler = function () {
       window.api.handleOpenMetaMaskHomePage(handleOpenMMHomePage)
     const removeSendListener =
       window.api.handleMetamaskExtensionSends(handleSend)
+    const removeSendAsyncListener =
+      window.api.handleMetamaskExtensionSendAsyncs(handleSendAsync)
     return () => {
       removeRequestListener()
       removeOpenMetaMaskHomePageListener()
       removeSendListener()
+      removeSendAsyncListener()
     }
   }
 
