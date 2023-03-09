@@ -157,7 +157,7 @@
             "broser": "BrowserURL",
             "exe": "Select Executable",
             "image": "App Image",
-            "supports-web3": "This Games has Web3 Features",
+            "supports-web3": "This Game has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
