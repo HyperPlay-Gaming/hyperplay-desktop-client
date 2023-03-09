@@ -1164,8 +1164,13 @@ export async function downloadFileWithAxios(
   let prevDownloadedBytes = 0
   let prevTimestamp = Date.now()
 
+  let writtenBytes = 0
+  let writeSpeed = 0
+  let prevWrittenBytes = 0
+
   response.data.on('data', (chunk: Buffer) => {
     downloadedBytes += chunk.length
+    writtenBytes += chunk.length
 
     // Calculate download speed
     const now = Date.now()
@@ -1174,6 +1179,8 @@ export async function downloadFileWithAxios(
       downloadSpeed =
         ((downloadedBytes - prevDownloadedBytes) / timeElapsed) * 1000
       prevDownloadedBytes = downloadedBytes
+      writeSpeed = ((writtenBytes - prevWrittenBytes) / timeElapsed) * 1000
+      prevWrittenBytes = writtenBytes
       prevTimestamp = now
     }
 
@@ -1181,14 +1188,21 @@ export async function downloadFileWithAxios(
     const progress = Math.round((downloadedBytes / totalLength) * 100)
     if (progressCallback) {
       const debouncedCallback = debounce(progressCallback, 1000)
-      debouncedCallback(downloadedBytes, downloadSpeed, 0, progress)
+      debouncedCallback(downloadedBytes, downloadSpeed, writeSpeed, progress)
     }
   })
 
   response.data.pipe(writer)
 
   return new Promise<void>((resolve, reject) => {
-    writer.on('finish', resolve)
+    writer.on('finish', () => {
+      const now = Date.now()
+      const timeElapsed = now - prevTimestamp
+      writeSpeed = ((writtenBytes - prevWrittenBytes) / timeElapsed) * 1000
+      prevWrittenBytes = writtenBytes
+      prevTimestamp = now
+      resolve()
+    })
     abortController.signal.addEventListener('abort', () => {
       writer.close()
       reject()

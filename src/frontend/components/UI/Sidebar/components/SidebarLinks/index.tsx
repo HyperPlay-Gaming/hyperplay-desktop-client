@@ -6,7 +6,8 @@ import {
   faUniversalAccess,
   faWineGlass,
   faGamepad,
-  faBarsProgress
+  faBarsProgress,
+  faUserAlt
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink, useLocation } from 'react-router-dom'
@@ -135,6 +136,17 @@ export default function SidebarLinks() {
             </div>
             <span>{t('button.login', 'Login')}</span>
           </>
+        </NavLink>
+      )}
+      {loggedIn && (
+        <NavLink className="Sidebar__item" to={'/login'}>
+          <div className="Sidebar__itemIcon">
+            <FontAwesomeIcon
+              icon={faUserAlt}
+              title={t('userselector.manageaccounts', 'Manage Accounts')}
+            />
+          </div>
+          <span>{t('userselector.manageaccounts', 'Manage Accounts')}</span>
         </NavLink>
       )}
       <div className="SidebarItemWithSubmenu">
