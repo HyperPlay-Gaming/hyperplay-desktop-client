@@ -3,7 +3,6 @@ import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
 import { icon } from './constants'
-// import { showDialogBoxModalAuto } from './dialog/dialog'
 import { logError, LogPrefix, logInfo } from './logger/logger'
 
 autoUpdater.autoDownload = false
@@ -53,17 +52,17 @@ autoUpdater.on('update-downloaded', async () => {
 })
 
 autoUpdater.on('error', async (error) => {
+  logError(['Failed to update ', error], LogPrefix.Backend)
   const { response } = await dialog.showMessageBox({
     title: t('box.error.update.title', 'Error Updating'),
     message: t(
       'box.error.update.message',
       'Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.'
     ),
-    type: 'ERROR',
+    type: 'error',
     buttons: [t('button.cancel', 'Cancel'), t('button.download', 'Download')]
   })
   if (response === 1) {
     shell.openExternal('https://www.hyperplay.xyz/downloads')
   }
-  logError(['Failed to update ', error], LogPrefix.Backend)
 })
