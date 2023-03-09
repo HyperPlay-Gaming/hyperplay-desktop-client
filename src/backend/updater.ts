@@ -52,14 +52,18 @@ autoUpdater.on('update-downloaded', async () => {
   autoUpdater.autoInstallOnAppQuit = true
 })
 
-autoUpdater.on('error', (error) => {
-  /*   showDialogBoxModalAuto({
-    title: t('box.error.update.title', 'Update Error'),
+autoUpdater.on('error', async (error) => {
+  const { response } = await dialog.showMessageBox({
+    title: t('box.error.update.title', 'Error Updating'),
     message: t(
       'box.error.update.message',
-      'Something went wrong with the update, please check the logs or try again later!'
+      'Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.'
     ),
-    type: 'ERROR'
-  }) */
-  logError(['failed to update', error], LogPrefix.Backend)
+    type: 'ERROR',
+    buttons: [t('button.cancel', 'Cancel'), t('button.download', 'Download')]
+  })
+  if (response === 1) {
+    shell.openExternal('https://www.hyperplay.xyz/downloads')
+  }
+  logError(['Failed to update ', error], LogPrefix.Backend)
 })
