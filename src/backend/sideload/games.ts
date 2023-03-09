@@ -1,42 +1,20 @@
 import { GameSettings, SideloadGame } from 'common/types'
 import { libraryStore } from './electronStores'
 import { GameConfig } from '../game_config'
-import { isWindows, isMac, isLinux, gamesConfigPath, icon } from '../constants'
+import { isWindows, isMac, isLinux, icon } from '../constants'
 import { killPattern } from '../utils'
-import { logInfo, LogPrefix, logWarning } from '../logger/logger'
+import { logInfo, LogPrefix } from '../logger/logger'
 import path, { dirname, join, resolve } from 'path'
-import {
-  appendFileSync,
-  constants as FS_CONSTANTS,
-  existsSync,
-  readdirSync,
-  rmSync
-} from 'graceful-fs'
+import { existsSync, readdirSync, rmSync } from 'graceful-fs'
 import i18next from 'i18next'
-import {
-  callRunner,
-  launchCleanup,
-  prepareLaunch,
-  runWineCommand,
-  setupEnvVars,
-  setupWrappers
-} from '../launcher'
-import { access, chmod } from 'fs/promises'
 import { addShortcuts, removeShortcuts } from '../shortcuts/shortcuts/shortcuts'
-import shlex from 'shlex'
-import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
-import { createAbortController } from '../utils/aborthandler/aborthandler'
+import { notify } from '../dialog/dialog'
 import { sendFrontendMessage } from '../main_window'
 import { app, BrowserWindow } from 'electron'
-import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
-import { isGameNative } from 'backend/main'
+import { launchGame } from 'backend/gameManagerCommon/games'
 const buildDir = resolve(__dirname, '../../build')
 
-export function appLogFileLocation(appName: string) {
-  return join(gamesConfigPath, `${appName}-lastPlay.log`)
-}
-
-export function getAppInfo(appName: string): SideloadGame {
+export function getGameInfo(appName: string): SideloadGame {
   const store = libraryStore.get('games', [])
   const info = store.find((app) => app.app_name === appName)
   if (!info) {
@@ -118,15 +96,15 @@ export async function addAppShortcuts(
   appName: string,
   fromMenu?: boolean
 ): Promise<void> {
-  return addShortcuts(getAppInfo(appName), fromMenu)
+  return addShortcuts(getGameInfo(appName), fromMenu)
 }
 
 export async function removeAppShortcuts(appName: string): Promise<void> {
-  return removeShortcuts(getAppInfo(appName))
+  return removeShortcuts(getGameInfo(appName))
 }
 
-export function isAppAvailable(appName: string): boolean {
-  const { install } = getAppInfo(appName)
+export function isGameAvailable(appName: string): boolean {
+  const { install } = getGameInfo(appName)
 
   if (install && install.platform === 'Browser') {
     return true
@@ -183,149 +161,18 @@ const openNewBrowserGameWindow = async (
   })
 }
 
-export async function launchApp(
+export async function launch(
   appName: string,
-  runner: 'sideload' | 'hyperplay'
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+  launchArguments?: string
 ): Promise<boolean> {
-  let gameInfo
-  if (runner === 'sideload') {
-    gameInfo = getAppInfo(appName)
-  }
-  if (runner === 'hyperplay') {
-    gameInfo = getHyperPlayGameInfo(appName)
-  }
-
-  if (!gameInfo) {
-    return false
-  }
-
-  let {
-    install: { executable }
-  } = gameInfo
-
-  const { folder_name, browserUrl } = gameInfo
-
-  const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
-  if (
-    gameSettingsOverrides.targetExe !== undefined &&
-    gameSettingsOverrides.targetExe !== ''
-  ) {
-    executable = gameSettingsOverrides.targetExe
-  }
-
-  if (browserUrl) {
-    return openNewBrowserGameWindow(browserUrl)
-  }
-
-  const gameSettings = await getAppSettings(appName)
-  const { launcherArgs } = gameSettings
-
-  if (executable) {
-    const isNative = isGameNative(appName, runner)
-    const {
-      success: launchPrepSuccess,
-      failureReason: launchPrepFailReason,
-      rpcClient,
-      mangoHudCommand,
-      gameModeBin,
-      steamRuntime
-    } = await prepareLaunch(gameSettings, gameInfo, isNative)
-
-    const wrappers = setupWrappers(
-      gameSettings,
-      mangoHudCommand,
-      gameModeBin,
-      steamRuntime?.length ? [...steamRuntime] : undefined
-    )
-
-    if (!launchPrepSuccess) {
-      appendFileSync(
-        appLogFileLocation(appName),
-        `Launch aborted: ${launchPrepFailReason}`
-      )
-      showDialogBoxModalAuto({
-        title: i18next.t('box.error.launchAborted', 'Launch aborted'),
-        message: launchPrepFailReason!,
-        type: 'ERROR'
-      })
-      return false
-    }
-    const env = { ...process.env, ...setupEnvVars(gameSettings) }
-
-    // Native
-    if (isNative) {
-      logInfo(
-        `launching native sideloaded: ${executable} ${launcherArgs ?? ''}`,
-        LogPrefix.Backend
-      )
-
-      try {
-        await access(executable, FS_CONSTANTS.X_OK)
-      } catch (error) {
-        logWarning(
-          'File not executable, changing permissions temporarilly',
-          LogPrefix.Backend
-        )
-        // On Mac, it gives an error when changing the permissions of the file inside the app bundle. But we need it for other executables like scripts.
-        if (isLinux || (isMac && !executable.endsWith('.app'))) {
-          await chmod(executable, 0o775)
-        }
-      }
-
-      const commandParts = shlex.split(launcherArgs ?? '')
-      await callRunner(
-        commandParts,
-        {
-          name: runner,
-          logPrefix: LogPrefix.Backend,
-          bin: executable,
-          dir: dirname(executable)
-        },
-        createAbortController(appName),
-        {
-          env,
-          wrappers,
-          logFile: appLogFileLocation(appName),
-          logMessagePrefix: LogPrefix.Backend
-        }
-      )
-
-      launchCleanup(rpcClient)
-      // TODO: check and revert to previous permissions
-      if (isLinux || (isMac && !executable.endsWith('.app'))) {
-        await chmod(executable, 0o775)
-      }
-      return true
-    }
-
-    logInfo(
-      `launching non-native sideloaded: ${executable}}`,
-      LogPrefix.Backend
-    )
-
-    await runWineCommand({
-      commandParts: [executable, launcherArgs ?? ''],
-      gameSettings,
-      wait: false,
-      startFolder: folder_name,
-      options: {
-        wrappers,
-        logFile: appLogFileLocation(appName),
-        logMessagePrefix: LogPrefix.Backend
-      }
-    })
-
-    launchCleanup(rpcClient)
-
-    return true
-  }
-  return false
+  return launchGame(appName, getGameInfo(appName), 'sideload')
 }
 
 export async function stop(appName: string): Promise<void> {
   const {
     install: { executable = undefined }
-  } = getAppInfo(appName)
+  } = getGameInfo(appName)
 
   if (executable) {
     const split = executable.split('/')
@@ -356,7 +203,7 @@ export async function removeApp({
   const {
     title,
     install: { executable }
-  } = getAppInfo(appName)
+  } = getGameInfo(appName)
   const { winePrefix } = await getAppSettings(appName)
 
   if (shouldRemovePrefix) {
@@ -388,7 +235,7 @@ export async function removeApp({
 export function isNativeApp(appName: string): boolean {
   const {
     install: { platform }
-  } = getAppInfo(appName)
+  } = getGameInfo(appName)
   if (platform) {
     if (platform === 'Browser') {
       return true

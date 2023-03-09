@@ -1,3 +1,4 @@
+import { getGameInfo } from './api/helpers'
 import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
@@ -143,7 +144,6 @@ import {
   appLogFileLocation,
   getAppInfo,
   getAppSettings,
-  isAppAvailable,
   isNativeApp,
   launchApp,
   removeApp,
@@ -161,17 +161,24 @@ import {
 } from './main_window'
 import {
   addGameToLibrary,
-  getHyperPlayGameInfo,
-  getHyperPlayGameInstallInfo,
-  uninstallHyperPlayGame
+  getHyperPlayGameInstallInfo
 } from './hyperplay/library'
 
-import {
-  importGame,
-  isHpGameAvailable,
-  isHpGameNative,
-  stopHpGame
-} from './hyperplay/games'
+import * as SideloadGameManager from './sideload/games'
+import * as HyperPlayGameManager from './hyperplay/games'
+import * as GOGGameManager from './gog/games'
+import * as LegendaryGameManager from './legendary/games'
+
+interface GameManagerMap {
+  [key: string]: GameManager
+}
+
+const gameManagerMap: GameManagerMap = {
+  hyperplay: HyperPlayGameManager,
+  sideload: SideloadGameManager,
+  gog: GOGGameManager,
+  legendary: LegendaryGameManager
+}
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
 
@@ -803,20 +810,13 @@ ipcMain.on('createNewWindow', (e, url) => {
 
 ipcMain.handle('isGameAvailable', async (e, args) => {
   const { appName, runner } = args
+  return gameManagerMap[runner].isGameAvailable(appName)
+
   if (runner === 'sideload') {
     return isAppAvailable(appName)
   } else if (runner === 'hyperplay') {
     return isHpGameAvailable(appName)
   }
-  const info = getGame(appName, runner).getGameInfo()
-  if (info && info.is_installed) {
-    if (info.install.install_path && existsSync(info.install.install_path!)) {
-      return true
-    } else {
-      return false
-    }
-  }
-  return false
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
@@ -1053,6 +1053,7 @@ ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 let powerDisplayId: number | null
 
 export const isGameNative = (appName: string, runner: Runner) => {
+  gameManagerMap[runner].isNative(appName)
   const isHyperPlayGame = runner === 'hyperplay'
   const isSideloaded = runner === 'sideload'
   let isNative = true
@@ -1448,15 +1449,8 @@ ipcMain.handle(
       })
       return { status: 'error' }
     }
-    let game
-    let title = ''
-    if (runner === 'hyperplay') {
-      game = getHyperPlayGameInfo(appName)
-      title = game.title
-    } else {
-      game = getGame(appName, runner)
-      title = game.getGameInfo().title
-    }
+
+    const title = gameManagerMap[runner].getGameInfo(appName).title
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
@@ -1474,7 +1468,7 @@ ipcMain.handle(
 
     try {
       if (runner === 'hyperplay') {
-        importGame(appName, path, runner, platform)
+        gameManagerMap[runner].importGame(appName, path, platform)
       } else {
         // @ts-expect-error find a way of proper typing this
         const { abort, error } = await game.import(path, platform)
@@ -1896,6 +1890,7 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import { trackEvent } from './metrics/metrics'
+import { GameManager } from 'common/types/game_manager'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (

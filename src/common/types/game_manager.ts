@@ -4,45 +4,58 @@ import {
   InstallPlatform,
   GameSettings,
   ExecResult,
-  InstallArgs
+  InstallArgs,
+  WineCommandArgs
 } from 'common/types'
-import { LegendaryInstallInfo } from './legendary'
-import { GogInstallInfo } from './gog'
+import { GOGCloudSavesLocation } from './gog'
 
 export interface GameManagerBase {
   getSettings: () => Promise<GameSettings>
 }
 
-interface InstallResult {
+export interface InstallResult {
   status: 'done' | 'error' | 'abort'
   error?: string
 }
 
 export interface GameManager {
-  games: {
-    getGameInfo: (appName: string) => GameInfo
-    getExtraInfo: (appName: string) => Promise<ExtraInfo>
-    getInstallInfo: (
-      appName: string,
-      installPlatform: InstallPlatform
-    ) => Promise<LegendaryInstallInfo | GogInstallInfo>
-    import: (appName: string, path: string) => Promise<ExecResult>
-    onInstallOrUpdateOutput: (
-      appName: string,
-      action: 'installing' | 'updating',
-      data: string
-    ) => void
-    getSettings: (appName: string) => Promise<GameSettings>
-    install: (appName: string, args: InstallArgs) => Promise<InstallResult>
-    isNative: (appName: string) => boolean
-    addShortcuts: (appName: string, fromMenu?: boolean) => Promise<void>
-    removeShortcuts: (appName: string) => Promise<void>
-    launch: (appName: string, launchArguments?: string) => Promise<boolean>
-    moveInstall: (
-      appName: string,
-      newInstallPath: string
-    ) => Promise<InstallResult>
-    repair: (appName: string) => Promise<ExecResult>
-    syncSaves()
-  }
+  getGameInfo: (appName: string) => GameInfo
+  getExtraInfo: (appName: string) => Promise<ExtraInfo>
+  hasUpdate: (appName: string) => Promise<boolean>
+  importGame: (
+    appName: string,
+    path: string,
+    platform: InstallPlatform
+  ) => Promise<ExecResult>
+  onInstallOrUpdateOutput: (
+    appName: string,
+    action: 'installing' | 'updating',
+    data: string,
+    totalDownloadSize: number
+  ) => void
+  install: (appName: string, args: InstallArgs) => Promise<InstallResult>
+  isNative: (appName: string) => boolean
+  addShortcuts: (appName: string, fromMenu?: boolean) => Promise<void>
+  removeShortcuts: (appName: string) => Promise<void>
+  launch: (appName: string, launchArguments?: string) => Promise<boolean>
+  moveInstall: (
+    appName: string,
+    newInstallPath: string
+  ) => Promise<InstallResult>
+  repair: (appName: string) => Promise<ExecResult>
+  syncSaves: (
+    appName: string,
+    arg: string,
+    path: string,
+    gogSaves?: GOGCloudSavesLocation[]
+  ) => Promise<string>
+  uninstall: (appName: string) => Promise<ExecResult>
+  update: (appName: string) => Promise<{ status: 'done' | 'error' }>
+  runWineCommand: (
+    appName: string,
+    { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+  ) => Promise<ExecResult>
+  forceUninstall: (appName: string) => Promise<void>
+  stop: (appName: string) => Promise<void>
+  isGameAvailable: (appName: string) => boolean
 }

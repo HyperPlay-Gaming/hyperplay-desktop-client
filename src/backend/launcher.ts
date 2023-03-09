@@ -146,14 +146,14 @@ async function prepareLaunch(
   }
 }
 
-async function prepareWineLaunch(game: LegendaryGame | GOGGame): Promise<{
+async function prepareWineLaunch(appName: string): Promise<{
   success: boolean
   failureReason?: string
   envVars?: Record<string, string>
 }> {
   const gameSettings =
-    GameConfig.get(game.appName).config ||
-    (await GameConfig.get(game.appName).getSettings())
+    GameConfig.get(appName).config ||
+    (await GameConfig.get(appName).getSettings())
 
   if (!(await validWine(gameSettings.wineVersion))) {
     const defaultWine = GlobalConfig.get().getSettings().wineVersion

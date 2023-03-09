@@ -4,7 +4,6 @@ import {
 } from '../utils/aborthandler/aborthandler'
 import { GOGLibrary, runGogdlCommand } from './library'
 import { join } from 'path'
-import { Game } from '../games'
 import { GameConfig } from '../game_config'
 import { GlobalConfig } from '../config'
 import {
@@ -38,11 +37,14 @@ import {
   launchCleanup,
   prepareLaunch,
   prepareWineLaunch,
-  runWineCommand,
+  runWineCommand as runWineCommandUtil,
   setupEnvVars,
   setupWrappers
 } from '../launcher'
-import { addShortcuts, removeShortcuts } from '../shortcuts/shortcuts/shortcuts'
+import {
+  addShortcuts as addShortcutsUtil,
+  removeShortcuts as removeShortcutsUtil
+} from '../shortcuts/shortcuts/shortcuts'
 import setup from './setup'
 import { removeNonSteamGame } from '../shortcuts/nonesteamgame/nonesteamgame'
 import shlex from 'shlex'
@@ -55,7 +57,7 @@ import { t } from 'i18next'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { sendFrontendMessage } from '../main_window'
 
-async function getExtraInfo(appName: string): Promise<ExtraInfo> {
+export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   const gameInfo = getGameInfo(appName)
   let targetPlatform: GogInstallPlatform = 'windows'
 
@@ -75,7 +77,7 @@ async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   return extra
 }
 
-function getGameInfo(appName: string): GameInfo {
+export function getGameInfo(appName: string): GameInfo {
   const info = GOGLibrary.get().getGameInfo(appName)
   if (!info) {
     logError(
@@ -137,11 +139,18 @@ async function getSettings(appName: string): Promise<GameSettings> {
   )
 }
 
-async function hasUpdate(appName: string): Promise<boolean> {
-  throw new Error('Method not implemented.')
+export async function hasUpdate(appName: string): Promise<boolean> {
+  throw new Error(
+    `hasUpdate not implemented on gog game manager for appName = ${appName}`
+  )
 }
 
-async function importGame(appName: string, path: string): Promise<ExecResult> {
+export async function importGame(
+  appName: string,
+  path: string,
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+  platform: InstallPlatform
+): Promise<ExecResult> {
   const res = await runGogdlCommand(
     ['import', path],
     createAbortController(appName),
@@ -163,7 +172,7 @@ async function importGame(appName: string, path: string): Promise<ExecResult> {
 
   try {
     await GOGLibrary.get().importGame(JSON.parse(res.stdout), path)
-    addShortcuts()
+    addShortcuts(appName)
   } catch (error) {
     logError(['Failed to import', `${appName}:`, error], LogPrefix.Gog)
   }
@@ -171,46 +180,55 @@ async function importGame(appName: string, path: string): Promise<ExecResult> {
   return res
 }
 
-function tmpProgress(): InstallProgress {
-  return {
-    bytes: '',
-    eta: '',
-    percent: undefined,
-    diskSpeed: undefined,
-    downSpeed: undefined
-  }
+interface tmpProgressMap {
+  [key: string]: InstallProgress
 }
 
-function onInstallOrUpdateOutput(
+const defaultTmpProgress = {
+  bytes: '',
+  eta: '',
+  percent: undefined,
+  diskSpeed: undefined,
+  downSpeed: undefined
+}
+const tmpProgress: tmpProgressMap = {}
+
+export function onInstallOrUpdateOutput(
+  appName: string,
   action: 'installing' | 'updating',
-  data: string
+  data: string,
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
+  totalDownloadSize = -1
 ) {
   // parse log for percent
   if (!tmpProgress.percent) {
     const percentMatch = data.match(/Progress: (\d+\.\d+) /m)
 
-    tmpProgress.percent = !Number.isNaN(Number(percentMatch?.at(1)))
+    tmpProgress[appName].percent = !Number.isNaN(Number(percentMatch?.at(1)))
       ? Number(percentMatch?.at(1))
       : undefined
   }
 
   // parse log for eta
-  if (tmpProgress.eta === '') {
+  if (tmpProgress[appName].eta === '') {
     const etaMatch = data.match(/ETA: (\d\d:\d\d:\d\d)/m)
-    tmpProgress.eta = etaMatch && etaMatch?.length >= 2 ? etaMatch[1] : ''
+    tmpProgress[appName].eta =
+      etaMatch && etaMatch?.length >= 2 ? etaMatch[1] : ''
   }
 
   // parse log for game download progress
-  if (tmpProgress.bytes === '') {
+  if (tmpProgress[appName].bytes === '') {
     const bytesMatch = data.match(/Downloaded: (\S+) MiB/m)
-    tmpProgress.bytes =
+    tmpProgress[appName].bytes =
       bytesMatch && bytesMatch?.length >= 2 ? `${bytesMatch[1]}MB` : ''
   }
 
   // parse log for download speed
   if (!tmpProgress.downSpeed) {
     const downSpeedMBytes = data.match(/Download\t- (\S+.) MiB/m)
-    tmpProgress.downSpeed = !Number.isNaN(Number(downSpeedMBytes?.at(1)))
+    tmpProgress[appName].downSpeed = !Number.isNaN(
+      Number(downSpeedMBytes?.at(1))
+    )
       ? Number(downSpeedMBytes?.at(1))
       : undefined
   }
@@ -218,22 +236,24 @@ function onInstallOrUpdateOutput(
   // parse disk write speed
   if (!tmpProgress.diskSpeed) {
     const diskSpeedMBytes = data.match(/Disk\t- (\S+.) MiB/m)
-    tmpProgress.diskSpeed = !Number.isNaN(Number(diskSpeedMBytes?.at(1)))
+    tmpProgress[appName].diskSpeed = !Number.isNaN(
+      Number(diskSpeedMBytes?.at(1))
+    )
       ? Number(diskSpeedMBytes?.at(1))
       : undefined
   }
 
   // only send to frontend if all values are updated
   if (
-    Object.values(tmpProgress).every(
+    Object.values(tmpProgress[appName]).every(
       (value) => !(value === undefined || value === '')
     )
   ) {
     logInfo(
       [
-        `Progress for ${getGameInfo().title}:`,
-        `${tmpProgress.percent}%/${tmpProgress.bytes}/${tmpProgress.eta}`.trim(),
-        `Down: ${tmpProgress.downSpeed}MB/s / Disk: ${tmpProgress.diskSpeed}MB/s`
+        `Progress for ${getGameInfo(appName).title}:`,
+        `${tmpProgress[appName].percent}%/${tmpProgress[appName].bytes}/${tmpProgress[appName].eta}`.trim(),
+        `Down: ${tmpProgress[appName].downSpeed}MB/s / Disk: ${tmpProgress[appName].diskSpeed}MB/s`
       ],
       LogPrefix.Gog
     )
@@ -242,26 +262,18 @@ function onInstallOrUpdateOutput(
       appName: appName,
       runner: 'gog',
       status: action,
-      progress: tmpProgress
+      progress: tmpProgress[appName]
     })
 
     // reset
-    tmpProgress = {
-      bytes: '',
-      eta: '',
-      percent: undefined,
-      diskSpeed: undefined,
-      downSpeed: undefined
-    }
+    tmpProgress[appName] = defaultTmpProgress
   }
 }
 
-async function install({
-  path,
-  installDlcs,
-  platformToInstall,
-  installLanguage
-}: InstallArgs): Promise<{
+export async function install(
+  appName: string,
+  { path, installDlcs, platformToInstall, installLanguage }: InstallArgs
+): Promise<{
   status: 'done' | 'error' | 'abort'
   error?: string
 }> {
@@ -300,7 +312,7 @@ async function install({
   ]
 
   const onOutput = (data: string) => {
-    onInstallOrUpdateOutput('installing', data)
+    onInstallOrUpdateOutput(appName, 'installing', data)
   }
 
   const res = await runGogdlCommand(
@@ -327,7 +339,7 @@ async function install({
   // Installation succeded
   // Save new game info to installed games store
   const installInfo = await getInstallInfo(installPlatform)
-  const gameInfo = getGameInfo()
+  const gameInfo = getGameInfo(appName)
   const isLinuxNative = installPlatform === 'linux'
   const additionalInfo = isLinuxNative
     ? await GOGLibrary.getLinuxInstallerInfo(appName)
@@ -365,12 +377,12 @@ async function install({
       )
     }
   }
-  addShortcuts()
+  addShortcuts(appName)
   return { status: 'done' }
 }
 
-function isNative(): boolean {
-  const gameInfo = getGameInfo()
+export function isNative(appName: string): boolean {
+  const gameInfo = getGameInfo(appName)
   if (isWindows) {
     return true
   }
@@ -386,17 +398,24 @@ function isNative(): boolean {
   return false
 }
 
-async function addShortcuts(fromMenu?: boolean) {
-  return addShortcuts(getGameInfo(), fromMenu)
+export async function addShortcuts(appName: string, fromMenu?: boolean) {
+  return addShortcutsUtil(getGameInfo(appName), fromMenu)
 }
 
-async function removeShortcuts() {
-  return removeShortcuts(getGameInfo())
+export async function removeShortcuts(appName: string) {
+  return removeShortcutsUtil(getGameInfo(appName))
 }
 
-async function launch(launchArguments?: string): Promise<boolean> {
-  const gameSettings = await getSettings()
-  const gameInfo = getGameInfo()
+function logFileLocation(appName: string) {
+  return join(gamesConfigPath, `${appName}-lastPlay.log`)
+}
+
+export async function launch(
+  appName: string,
+  launchArguments?: string
+): Promise<boolean> {
+  const gameSettings = await getSettings(appName)
+  const gameInfo = getGameInfo(appName)
 
   if (
     !gameInfo.install ||
@@ -422,9 +441,12 @@ async function launch(launchArguments?: string): Promise<boolean> {
     mangoHudCommand,
     gameModeBin,
     steamRuntime
-  } = await prepareLaunch(gameSettings, gameInfo, isNative())
+  } = await prepareLaunch(gameSettings, gameInfo, isNative(appName))
   if (!launchPrepSuccess) {
-    appendFileSync(logFileLocation, `Launch aborted: ${launchPrepFailReason}`)
+    appendFileSync(
+      logFileLocation(appName),
+      `Launch aborted: ${launchPrepFailReason}`
+    )
     showDialogBoxModalAuto({
       title: t('box.error.launchAborted', 'Launch aborted'),
       message: launchPrepFailReason!,
@@ -442,15 +464,15 @@ async function launch(launchArguments?: string): Promise<boolean> {
     : { ...process.env, ...setupEnvVars(gameSettings) }
   const wineFlag: string[] = []
 
-  if (!isNative()) {
+  if (!isNative(appName)) {
     const {
       success: wineLaunchPrepSuccess,
       failureReason: wineLaunchPrepFailReason,
       envVars: wineEnvVars
-    } = await prepareWineLaunch(this)
+    } = await prepareWineLaunch(appName)
     if (!wineLaunchPrepSuccess) {
       appendFileSync(
-        logFileLocation,
+        logFileLocation(appName),
         `Launch aborted: ${wineLaunchPrepFailReason}`
       )
       if (wineLaunchPrepFailReason) {
@@ -508,7 +530,7 @@ async function launch(launchArguments?: string): Promise<boolean> {
     join(...Object.values(getGOGdlBin()))
   )
   appendFileSync(
-    logFileLocation,
+    logFileLocation(appName),
     `Launch Command: ${fullCommand}\n\nGame Log:\n`
   )
 
@@ -520,7 +542,7 @@ async function launch(launchArguments?: string): Promise<boolean> {
       wrappers,
       logMessagePrefix: `Launching ${gameInfo.title}`,
       onOutput: (output: string) => {
-        appendFileSync(logFileLocation, output)
+        appendFileSync(logFileLocation(appName), output)
       }
     }
   )
@@ -540,10 +562,11 @@ async function launch(launchArguments?: string): Promise<boolean> {
   return !error
 }
 
-async function moveInstall(
+export async function moveInstall(
+  appName: string,
   newInstallPath: string
 ): Promise<{ status: 'done' } | { status: 'error'; error: string }> {
-  const gameInfo = getGameInfo()
+  const gameInfo = getGameInfo(appName)
   logInfo(`Moving ${gameInfo.title} to ${newInstallPath}`, LogPrefix.Gog)
 
   const moveImpl = isWindows ? moveOnWindows : moveOnUnix
@@ -566,9 +589,9 @@ async function moveInstall(
 /**
  * Literally installing game, since gogdl verifies files at runtime
  */
-async function repair(): Promise<ExecResult> {
+export async function repair(appName: string): Promise<ExecResult> {
   const { installPlatform, gameData, credentials, withDlcs, logPath, workers } =
-    await getCommandParameters()
+    await getCommandParameters(appName)
 
   if (!credentials) {
     return { stderr: 'Unable to repair game, no credentials', stdout: '' }
@@ -606,7 +629,8 @@ async function repair(): Promise<ExecResult> {
   return res
 }
 
-async function syncSaves(
+export async function syncSaves(
+  appName: string,
   arg: string,
   path: string,
   gogSaves?: GOGCloudSavesLocation[]
@@ -670,7 +694,7 @@ async function syncSaves(
   return fullOutput
 }
 
-async function uninstall(): Promise<ExecResult> {
+export async function uninstall(appName: string): Promise<ExecResult> {
   const array = installedGamesStore.get('installed', [])
   const index = array.findIndex((game) => game.appName === appName)
   if (index === -1) {
@@ -702,7 +726,7 @@ async function uninstall(): Promise<ExecResult> {
     logInfo(['Executing uninstall command', command.join(' ')], LogPrefix.Gog)
 
     if (!isWindows) {
-      runWineCommand({
+      runWineCommandUtil({
         gameSettings,
         commandParts: command,
         wait: true,
@@ -728,16 +752,18 @@ async function uninstall(): Promise<ExecResult> {
   }
   installedGamesStore.set('installed', array)
   GOGLibrary.get().refreshInstalled()
-  const gameInfo = getGameInfo()
-  await removeShortcuts(gameInfo)
+  const gameInfo = getGameInfo(appName)
+  await removeShortcutsUtil(gameInfo)
   syncStore.delete(appName)
   await removeNonSteamGame({ gameInfo })
   return res
 }
 
-async function update(): Promise<{ status: 'done' | 'error' }> {
+export async function update(
+  appName: string
+): Promise<{ status: 'done' | 'error' }> {
   const { installPlatform, gameData, credentials, withDlcs, logPath, workers } =
-    await getCommandParameters()
+    await getCommandParameters(appName)
   if (!installPlatform || !credentials) {
     return { status: 'error' }
   }
@@ -756,7 +782,7 @@ async function update(): Promise<{ status: 'done' | 'error' }> {
   ]
 
   const onOutput = (data: string) => {
-    onInstallOrUpdateOutput('updating', data)
+    onInstallOrUpdateOutput(appName, 'updating', data)
   }
 
   const res = await runGogdlCommand(
@@ -794,7 +820,7 @@ async function update(): Promise<{ status: 'done' | 'error' }> {
   const gameObject = installedArray[gameIndex]
 
   if (gameData.install.platform !== 'linux') {
-    const installInfo = await getInstallInfo()
+    const installInfo = await getInstallInfo(appName)
     gameObject.buildId = installInfo.game.buildId
     gameObject.version = installInfo.game.version
     gameObject.versionEtag = installInfo.manifest.versionEtag
@@ -815,10 +841,10 @@ async function update(): Promise<{ status: 'done' | 'error' }> {
  * Reads game installed data and returns proper parameters
  * Useful for Update and Repair
  */
-async function getCommandParameters() {
+async function getCommandParameters(appName: string) {
   const { maxWorkers } = GlobalConfig.get().getSettings()
   const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
-  const gameData = getGameInfo()
+  const gameData = getGameInfo(appName)
   const logPath = join(gamesConfigPath, appName + '.log')
   const credentials = await GOGUser.getCredentials()
 
@@ -841,20 +867,18 @@ async function getCommandParameters() {
   }
 }
 
-async function runWineCommand({
-  commandParts,
-  wait = false,
-  protonVerb,
-  startFolder
-}: WineCommandArgs): Promise<ExecResult> {
-  if (isNative()) {
+export async function runWineCommand(
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  if (isNative(appName)) {
     logError('runWineCommand called on native game!', LogPrefix.Gog)
     return { stdout: '', stderr: '' }
   }
-  const { folder_name } = getGameInfo()
-  const gameSettings = await getSettings()
+  const { folder_name } = getGameInfo(appName)
+  const gameSettings = await getSettings(appName)
 
-  return runWineCommand({
+  return runWineCommandUtil({
     gameSettings,
     installFolderName: folder_name,
     commandParts,
@@ -864,7 +888,7 @@ async function runWineCommand({
   })
 }
 
-async function forceUninstall(): Promise<void> {
+export async function forceUninstall(appName: string): Promise<void> {
   const installed = installedGamesStore.get('installed', [])
   const newInstalled = installed.filter((g) => g.appName !== appName)
   installedGamesStore.set('installed', newInstalled)
@@ -873,7 +897,19 @@ async function forceUninstall(): Promise<void> {
 
 // Could be removed if gogdl handles SIGKILL and SIGTERM for us
 // which is send via AbortController
-async function stop(): Promise<void> {
+export async function stop(appName: string): Promise<void> {
   const pattern = isLinux ? appName : 'gogdl'
   killPattern(pattern)
+}
+
+export function isGameAvailable(appName: string) {
+  const info = getGameInfo(appName)
+  if (info && info.is_installed) {
+    if (info.install.install_path && existsSync(info.install.install_path!)) {
+      return true
+    } else {
+      return false
+    }
+  }
+  return false
 }
