@@ -14,13 +14,33 @@ const ExtensionHandler = function () {
       const value = await window.ethereum.request(args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
-      console.log(`error during request: ${err}`)
+      console.error(`error during request: ${err}`)
       window.api.errorExtensionRequest(id, err)
     }
   }
 
   async function handleOpenMMHomePage() {
     navigate('metamaskHome')
+  }
+
+  async function handleSend(event: Event, id: number, args: unknown[]) {
+    try {
+      const value = await window.ethereum.send(...args)
+      window.api.returnExtensionRequest(id, value)
+    } catch (err) {
+      console.error(`error during send: ${err}`)
+      window.api.errorExtensionRequest(id, err)
+    }
+  }
+
+  async function handleSendAsync(event: Event, id: number, args: unknown[]) {
+    try {
+      const value = await window.ethereum.sendAsync(...args)
+      window.api.returnExtensionRequest(id, value)
+    } catch (err) {
+      console.error(`error during send: ${err}`)
+      window.api.errorExtensionRequest(id, err)
+    }
   }
 
   const bindEthereumListeners = function () {
@@ -48,9 +68,15 @@ const ExtensionHandler = function () {
       window.api.handleMetamaskExtensionRequests(handleRequest)
     const removeOpenMetaMaskHomePageListener =
       window.api.handleOpenMetaMaskHomePage(handleOpenMMHomePage)
+    const removeSendListener =
+      window.api.handleMetamaskExtensionSends(handleSend)
+    const removeSendAsyncListener =
+      window.api.handleMetamaskExtensionSendAsyncs(handleSendAsync)
     return () => {
       removeRequestListener()
       removeOpenMetaMaskHomePageListener()
+      removeSendListener()
+      removeSendAsyncListener()
     }
   }
 

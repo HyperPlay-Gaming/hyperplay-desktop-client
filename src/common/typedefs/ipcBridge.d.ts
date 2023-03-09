@@ -173,6 +173,11 @@ interface HyperPlayAsyncIPCFunctions {
     shoudlRemoveSetting: boolean
   ) => Promise<void>
   launchHyperplayGame: (gameId: string) => Promise<StatusPromise>
+  sendRequest: (args: unknown[]) => Promise<unknown>
+  sendAsyncRequest: (
+    payload: JsonRpcRequest,
+    callback: JsonRpcCallback
+  ) => Promise<unknown>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
