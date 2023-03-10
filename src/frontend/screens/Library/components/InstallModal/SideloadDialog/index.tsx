@@ -355,7 +355,7 @@ export default function SideloadDialog({
               }
               title={t(
                 'sideload.info.supports-web3',
-                'This Games has Web3 Features'
+                'This Game has Web3 Features'
               )}
             />
           </div>

@@ -178,7 +178,7 @@ export const libraryManagerMap: LibraryManagerMap = {
   legendary: LegendaryLibraryManager
 }
 
-app.commandLine.appendSwitch('remote-debugging-port', '9222')
+app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
@@ -221,7 +221,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
   mainWindow.setIcon(icon)
   app.setAppUserModelId('HyperPlay')
-  app.commandLine.appendSwitch('enable-spatial-navigation')
+  app.commandLine?.appendSwitch('enable-spatial-navigation')
 
   mainWindow.on('close', async (e) => {
     e.preventDefault()

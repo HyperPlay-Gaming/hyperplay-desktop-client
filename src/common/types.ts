@@ -4,6 +4,7 @@ import { IpcRendererEvent } from 'electron'
 import { ChildProcess } from 'child_process'
 import { HowLongToBeatEntry } from 'howlongtobeat'
 import 'i18next'
+import { JsonRpcResponse } from 'web3-core-helpers'
 
 // fix for i18next https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
 declare module 'i18next' {
@@ -835,3 +836,16 @@ export interface HyperPlayInstallInfo {
     url?: string
   }
 }
+
+export interface JsonRpcRequest {
+  id?: string | number
+  jsonrpc: '2.0'
+  method: string
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  params?: Array<any>
+}
+
+export type JsonRpcCallback = (
+  error: Error | null,
+  response?: JsonRpcResponse
+) => unknown
