@@ -186,8 +186,9 @@ async function downloadGame(
       `${installPath}/${platformInfo.name}`,
       createAbortController(appName),
       (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
-        // convert downloadspeed to Mb/s
+        // convert speed to Mb/s
         downloadSpeed = Math.round(downloadSpeed / 1000000)
+        diskWriteSpeed = Math.round(diskWriteSpeed / 1000000)
 
         window.webContents.send(`progressUpdate-${appName}`, {
           appName,
