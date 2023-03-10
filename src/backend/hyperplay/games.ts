@@ -8,7 +8,6 @@ import {
   WineCommandArgs,
   GameSettings
 } from './../../common/types'
-import { getBinExecIfExists } from 'backend/hyperplay/library'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
@@ -123,10 +122,9 @@ export async function importGame(
   })
 
   const executableFullPath = path.join(pathName, exec)
-  const binExec = getBinExecIfExists(executableFullPath)
   gameInLibrary.install = {
     install_path: pathName,
-    executable: binExec === '' ? executableFullPath : binExec,
+    executable: executableFullPath,
     install_size: '0 GiB',
     is_dlc: false,
     version: '-1',
@@ -290,12 +288,10 @@ export async function install(
         executable = join(executable, 'Contents', 'MacOS', macAppExecutable)
       }
 
-      const binExecFullPath = getBinExecIfExists(executable)
-
       const installedInfo: InstalledInfo = {
         appName,
         install_path: destinationPath,
-        executable: binExecFullPath === '' ? executable : binExecFullPath,
+        executable: executable,
         install_size,
         is_dlc: false,
         version: releaseMeta.name,

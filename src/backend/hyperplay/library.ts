@@ -9,10 +9,8 @@ import {
   InstallPlatform
 } from 'common/types'
 import axios from 'axios'
-import path from 'path'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
 import { handleArchAndPlatform } from './utils'
-import * as fs from 'fs'
 import { getGameInfo as getGamesGameInfo } from './games'
 
 export async function addGameToLibrary(appId: string) {
@@ -79,19 +77,6 @@ export async function addGameToLibrary(appId: string) {
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 
   sendFrontendMessage('refreshLibrary')
-}
-
-export function getBinExecIfExists(executable: string) {
-  const dirpath = path.dirname(executable)
-  const execName = path.basename(executable).split('.')[0]
-  const binExec = path.join(
-    dirpath,
-    `./${execName}/Binaries/Win64/${execName}-Win64-Shipping.exe`
-  )
-  if (fs.existsSync(binExec)) {
-    return binExec
-  }
-  return ''
 }
 
 export const getInstallInfo = async (
