@@ -1,4 +1,3 @@
-import { getGameInfo } from './api/helpers'
 import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
@@ -9,8 +8,7 @@ import {
   StatusPromise,
   GamepadInputEvent,
   DMQueueElement,
-  GameInfo,
-  Runner
+  GameInfo
 } from 'common/types'
 import * as path from 'path'
 import {
@@ -50,10 +48,8 @@ import checkDiskSpace from 'check-disk-space'
 import { DXVK, Winetricks } from './tools'
 import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
-import { LegendaryLibrary } from './legendary/library'
 import { LegendaryUser } from './legendary/user'
 import { GOGUser } from './gog/user'
-import { GOGLibrary } from './gog/library'
 import setup from './gog/setup'
 import {
   clearCache,
@@ -148,15 +144,17 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
-import {
-  addGameToLibrary,
-  getHyperPlayGameInstallInfo
-} from './hyperplay/library'
+import { addGameToLibrary } from './hyperplay/library'
 
-import * as SideloadGameManager from './sideload/games'
 import * as HyperPlayGameManager from './hyperplay/games'
+import * as SideloadGameManager from './sideload/games'
 import * as GOGGameManager from './gog/games'
 import * as LegendaryGameManager from './legendary/games'
+
+import * as HyperPlayLibraryManager from './hyperplay/library'
+import * as SideloadLibraryManager from './sideload/library'
+import * as GOGLibraryManager from './gog/library'
+import * as LegendaryLibraryManager from './legendary/library'
 
 interface GameManagerMap {
   [key: string]: GameManager
@@ -167,6 +165,17 @@ export const gameManagerMap: GameManagerMap = {
   sideload: SideloadGameManager,
   gog: GOGGameManager,
   legendary: LegendaryGameManager
+}
+
+interface LibraryManagerMap {
+  [key: string]: LibraryManager
+}
+
+export const libraryManagerMap: LibraryManagerMap = {
+  hyperplay: HyperPlayLibraryManager,
+  sideload: SideloadLibraryManager,
+  gog: GOGLibraryManager,
+  legendary: LegendaryLibraryManager
 }
 
 app.commandLine.appendSwitch('remote-debugging-port', '9222')
@@ -209,8 +218,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
   }, 2500)
 
   GlobalConfig.get()
-  LegendaryLibrary.get()
-  GOGLibrary.get()
 
   mainWindow.setIcon(icon)
   app.setAppUserModelId('HyperPlay')
@@ -691,8 +698,8 @@ ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 /// IPC handlers begin here.
 
 ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
-  let epicUpdates = await LegendaryLibrary.get().listUpdateableGames()
-  let gogUpdates = await GOGLibrary.get().listUpdateableGames()
+  let epicUpdates = await libraryManagerMap['legendary'].listUpdateableGames()
+  let gogUpdates = await libraryManagerMap['gog'].listUpdateableGames()
 
   const { autoUpdateGames } = GlobalConfig.get().getSettings()
   if (autoUpdateGames) {
@@ -737,7 +744,9 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
 ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
 
 // Not ready to be used safely yet.
-ipcMain.handle('updateAll', async () => LegendaryLibrary.get().updateAllGames())
+ipcMain.handle('updateAll', async () =>
+  libraryManagerMap['legendary'].updateAllGames()
+)
 
 ipcMain.handle('getMaxCpus', () => cpus().length)
 
@@ -795,7 +804,10 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
-  if (runner === 'legendary' && !LegendaryLibrary.get().hasGame(appName)) {
+  if (
+    runner === 'legendary' &&
+    !libraryManagerMap['legendary'].hasGame(appName)
+  ) {
     return null
   }
   return gameManagerMap[runner].getGameInfo(appName)
@@ -803,7 +815,10 @@ ipcMain.handle('getGameInfo', async (event, appName, runner) => {
 
 ipcMain.handle('getExtraInfo', async (event, appName, runner) => {
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
-  if (runner === 'legendary' && !LegendaryLibrary.get().hasGame(appName)) {
+  if (
+    runner === 'legendary' &&
+    !libraryManagerMap['legendary'].hasGame(appName)
+  ) {
     return null
   }
   return gameManagerMap[runner].getExtraInfo(appName)
@@ -819,16 +834,18 @@ ipcMain.handle('getGameSettings', async (event, appName, runner) => {
 })
 
 ipcMain.handle('getGOGLinuxInstallersLangs', async (event, appName) =>
-  GOGLibrary.getLinuxInstallersLanguages(appName)
+  GOGLibraryManager.getLinuxInstallersLanguages(appName)
 )
 
 ipcMain.handle(
   'getInstallInfo',
   async (event, appName, runner, installPlatform) => {
     try {
-      const info = await getGame(appName, runner).getInstallInfo(
+      const info = await libraryManagerMap[runner].getInstallInfo(
+        appName,
         installPlatform
       )
+      if (info === undefined) return null
       return info
     } catch (error) {
       logError(
@@ -861,7 +878,7 @@ ipcMain.handle('getAlternativeWine', async () =>
 
 ipcMain.handle('readConfig', async (event, config_class) => {
   if (config_class === 'library') {
-    return LegendaryLibrary.get().getGames()
+    return libraryManagerMap['legendary'].getGames()
   }
   const userInfo = await LegendaryUser.getUserInfo()
   return userInfo?.displayName ?? ''
@@ -968,22 +985,25 @@ if (existsSync(installed)) {
     // decode the JSON data. So instead of immediately calling LegendaryLibrary.get().refreshInstalled(), call it only after no writes happen
     // in a 500ms timespan
     if (watchTimeout) clearTimeout(watchTimeout)
-    watchTimeout = setTimeout(LegendaryLibrary.get().refreshInstalled, 500)
+    watchTimeout = setTimeout(
+      libraryManagerMap['legendary'].refreshInstalled,
+      500
+    )
   })
 }
 
-ipcMain.handle('refreshLibrary', async (e, fullRefresh?, library?) => {
+ipcMain.handle('refreshLibrary', async (e, fullRefresh = false, library?) => {
   switch (library) {
     case 'legendary':
-      await LegendaryLibrary.get().getGames(fullRefresh)
+      await libraryManagerMap['legendary'].getGames(fullRefresh)
       break
     case 'gog':
-      await GOGLibrary.get().sync()
+      await libraryManagerMap['gog'].refresh()
       break
     default:
       await Promise.allSettled([
-        LegendaryLibrary.get().getGames(fullRefresh),
-        GOGLibrary.get().sync()
+        libraryManagerMap['legendary'].getGames(fullRefresh),
+        libraryManagerMap['gog'].refresh()
       ])
       break
   }
@@ -1780,7 +1800,7 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import { trackEvent } from './metrics/metrics'
-import { GameManager } from 'common/types/game_manager'
+import { GameManager, LibraryManager } from 'common/types/game_manager'
 import { logFileLocation as getLogFileLocation } from './gameManagerCommon/games'
 import { addNewApp } from './sideload/library'
 
@@ -1856,16 +1876,4 @@ ipcMain.on('reloadApp', async () => {
 ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
   console.log('addHyperplayGame', gameId)
   addGameToLibrary(gameId)
-})
-
-ipcMain.handle('getHyperPlayGameInfo', async (_e, gameId) => {
-  return gameManagerMap['hyperplay'].getGameInfo(gameId)
-})
-
-ipcMain.handle('getHyperPlayInstallInfo', async (_e, gameId, platform) => {
-  const installInfo = getHyperPlayGameInstallInfo(gameId, platform)
-  if (installInfo) {
-    return installInfo
-  }
-  return null
 })

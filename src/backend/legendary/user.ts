@@ -10,7 +10,7 @@ import { userInfo, configStore } from '../constants'
 import { logError, LogPrefix } from '../logger/logger'
 import { userInfo as user } from 'os'
 import { session } from 'electron'
-import { runLegendaryCommand } from './library'
+import { runRunnerCommand as runLegendaryCommand } from './library'
 
 export class LegendaryUser {
   public static async login(

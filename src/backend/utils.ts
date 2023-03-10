@@ -52,8 +52,8 @@ import {
 } from './constants'
 import { logError, logInfo, LogPrefix, logWarning } from './logger/logger'
 import { basename, dirname, join, normalize } from 'path'
-import { runLegendaryCommand } from './legendary/library'
-import { runGogdlCommand } from './gog/library'
+import { runRunnerCommand as runLegendaryCommand } from './legendary/library'
+import { runRunnerCommand as runGogdlCommand } from './gog/library'
 import {
   gameInfoStore,
   installStore,

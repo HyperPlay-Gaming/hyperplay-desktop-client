@@ -1,9 +1,15 @@
 import { isMac } from 'backend/constants'
-import { GameInfo } from 'common/types'
+import {
+  CallRunnerOptions,
+  ExecResult,
+  GameInfo,
+  InstallPlatform
+} from 'common/types'
 import { readdirSync } from 'graceful-fs'
 import { dirname, join } from 'path'
 import { libraryStore } from './electronStores'
 import { addShortcuts } from './games'
+import { logWarning } from 'backend/logger/logger'
 
 export function addNewApp({
   app_name,
@@ -64,4 +70,72 @@ export function addNewApp({
 
   libraryStore.set('games', current)
   return
+}
+
+export async function updateAllGames() {
+  return []
+}
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export async function getGames(fullRefresh?: boolean) {
+  logWarning(`getGames not implemented on Sideload Library Manager`)
+  return []
+}
+
+export function installState(appName: string, state: boolean) {
+  logWarning(`installState not implemented on Sideload Library Manager`)
+}
+
+export async function refresh() {
+  logWarning(`refresh not implemented on Sideload Library Manager`)
+  return null
+}
+
+export function refreshInstalled() {
+  logWarning(`refreshInstalled not implemented on Sideload Library Manager`)
+}
+
+export function getGameInfo(
+  appName: string,
+  forceReload?: boolean
+): GameInfo | undefined {
+  logWarning(`getGameInfo not implemented on Sideload Library Manager`)
+  return undefined
+}
+
+export async function listUpdateableGames(): Promise<string[]> {
+  logWarning(`listUpdateableGames not implemented on Sideload Library Manager`)
+  return []
+}
+
+export async function runRunnerCommand(
+  commandParts: string[],
+  abortController: AbortController,
+  options?: CallRunnerOptions
+): Promise<ExecResult> {
+  logWarning(`runRunnerCommand not implemented on Sideload Library Manager`)
+  return { stdout: '', stderr: '' }
+}
+
+export async function changeGameInstallPath(
+  appName: string,
+  newPath: string
+): Promise<void> {
+  logWarning(
+    `changeGameInstallPath not implemented on Sideload Library Manager`
+  )
+}
+
+export async function getInstallInfo(
+  appName: string,
+  installPlatform: InstallPlatform,
+  lang?: string
+): Promise<undefined> {
+  logWarning(`getInstallInfo not implemented on Sideload Library Manager`)
+  return undefined
+}
+
+export function hasGame(appName: string) {
+  logWarning(`hasGame not implemented on Sideload Library Manager`)
+  return false
 }

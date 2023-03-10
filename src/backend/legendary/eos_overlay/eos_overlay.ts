@@ -1,3 +1,4 @@
+import { gameManagerMap } from 'backend/main'
 import {
   callAbortController,
   createAbortController,
@@ -10,11 +11,10 @@ import { join } from 'path'
 
 import { toolsPath, isLinux, legendaryConfigPath, icon } from '../../constants'
 import { logError, LogPrefix, logWarning } from '../../logger/logger'
-import { runLegendaryCommand } from '../library'
-import { LegendaryGame } from '../games'
-import { getGame } from '../../utils'
+import { runRunnerCommand as runLegendaryCommand } from '../library'
 import { verifyWinePrefix } from '../../launcher'
 import { sendFrontendMessage } from '../../main_window'
+import { setCurrentDownloadSize } from '../games'
 
 const currentVersionPath = join(legendaryConfigPath, 'overlay_version.json')
 const installedVersionPath = join(legendaryConfigPath, 'overlay_install.json')
@@ -94,7 +94,6 @@ async function install() {
     status: isInstalled() ? 'updating' : 'installing'
   })
 
-  const game = LegendaryGame.get(eosOverlayAppName)
   let downloadSize = 0
   // Run download without -y to get the install size
   await runLegendaryCommand(
@@ -117,7 +116,7 @@ async function install() {
   deleteAbortController(eosOverlayAppName)
 
   // The EOS Overlay doesn't support Ctrl-C-pausing, so it's fine to just do this
-  game.currentDownloadSize = downloadSize
+  setCurrentDownloadSize(eosOverlayAppName, downloadSize)
 
   // And now actually install it
   const { error } = await runLegendaryCommand(
@@ -126,7 +125,12 @@ async function install() {
     {
       logMessagePrefix: 'Installing EOS Overlay',
       onOutput: (output: string) => {
-        game.onInstallOrUpdateOutput('installing', downloadSize, output)
+        gameManagerMap['legendary'].onInstallOrUpdateOutput(
+          eosOverlayAppName,
+          'installing',
+          output,
+          downloadSize
+        )
       }
     }
   )
@@ -179,8 +183,7 @@ async function enable(
 ): Promise<{ wasEnabled: boolean; installNow?: boolean }> {
   let prefix = ''
   if (isLinux) {
-    const game = getGame(appName, 'legendary')
-    const gameSettings = await game.getSettings()
+    const gameSettings = await gameManagerMap['legendary'].getSettings(appName)
     await verifyWinePrefix(gameSettings)
     const { winePrefix, wineVersion } = gameSettings
     prefix =
@@ -214,8 +217,9 @@ async function enable(
 async function disable(appName: string) {
   let prefix = ''
   if (isLinux) {
-    const game = getGame(appName, 'legendary')
-    const { winePrefix, wineVersion } = await game.getSettings()
+    const { winePrefix, wineVersion } = await gameManagerMap[
+      'legendary'
+    ].getSettings(appName)
     prefix =
       wineVersion.type === 'proton' ? join(winePrefix, 'pfx') : winePrefix
   }
@@ -243,8 +247,9 @@ async function isEnabled(appName?: string) {
 
   let prefix = ''
   if (isLinux && appName) {
-    const game = getGame(appName, 'legendary')
-    const { winePrefix, wineVersion } = await game.getSettings()
+    const { winePrefix, wineVersion } = await gameManagerMap[
+      'legendary'
+    ].getSettings(appName)
     prefix =
       wineVersion.type === 'proton' ? join(winePrefix, 'pfx') : winePrefix
   }

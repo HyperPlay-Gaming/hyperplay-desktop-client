@@ -5,9 +5,12 @@ import {
   GameSettings,
   ExecResult,
   InstallArgs,
-  WineCommandArgs
+  WineCommandArgs,
+  CallRunnerOptions,
+  HyperPlayInstallInfo
 } from 'common/types'
-import { GOGCloudSavesLocation } from './gog'
+import { GOGCloudSavesLocation, GogInstallInfo } from './gog'
+import { LegendaryInstallInfo } from './legendary'
 
 export interface InstallResult {
   status: 'done' | 'error' | 'abort'
@@ -61,4 +64,28 @@ export interface GameManager {
   forceUninstall: (appName: string) => Promise<void>
   stop: (appName: string) => Promise<void>
   isGameAvailable: (appName: string) => boolean
+}
+
+export interface LibraryManager {
+  refresh: () => Promise<ExecResult | null>
+  refreshInstalled: () => void
+  getGames: (fullRefresh?: boolean) => Promise<GameInfo[]>
+  getGameInfo: (appName: string, forceReload?: boolean) => GameInfo | undefined
+  getInstallInfo: (
+    appName: string,
+    installPlatform: InstallPlatform,
+    lang?: string
+  ) => Promise<
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | undefined
+  >
+  listUpdateableGames: () => Promise<string[]>
+  updateAllGames: () => Promise<(InstallResult | null)[]>
+  changeGameInstallPath: (appName: string, newPath: string) => Promise<void>
+  installState: (appName: string, state: boolean) => void
+  runRunnerCommand: (
+    commandParts: string[],
+    abortController: AbortController,
+    options?: CallRunnerOptions
+  ) => Promise<ExecResult>
+  hasGame: (appName: string) => boolean
 }

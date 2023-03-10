@@ -11,7 +11,6 @@ import {
   WineVersionInfo,
   InstallParams,
   LibraryTopSectionOptions,
-  SideloadGame,
   MetricsOptInStatus
 } from 'common/types'
 import {
@@ -95,7 +94,7 @@ interface StateProps {
   connectivity: { status: ConnectivityStatus; retryIn: number }
   dialogModalOptions: DialogModalOptions
   externalLinkDialogOptions: ExternalLinkDialogOptions
-  sideloadedLibrary: SideloadGame[]
+  sideloadedLibrary: GameInfo[]
   settingsModalOpen: {
     value: boolean
     type: 'settings' | 'log'
@@ -399,7 +398,7 @@ class GlobalState extends PureComponent<Props> {
   handleSettingsModalOpen = (
     value: boolean,
     type?: 'settings' | 'log',
-    gameInfo?: GameInfo | SideloadGame
+    gameInfo?: GameInfo
   ) => {
     if (gameInfo) {
       this.setState({

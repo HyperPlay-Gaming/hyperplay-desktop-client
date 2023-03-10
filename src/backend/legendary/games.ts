@@ -17,9 +17,12 @@ import {
 import { GameConfig } from '../game_config'
 import { GlobalConfig } from '../config'
 import {
-  LegendaryLibrary,
-  runLegendaryCommand,
-  getInstallInfo
+  runRunnerCommand as runLegendaryCommand,
+  getInstallInfo,
+  listUpdateableGames,
+  getGameInfo as getLegLibraryGameInfo,
+  changeGameInstallPath,
+  installState
 } from './library'
 import { LegendaryUser } from './user'
 import {
@@ -73,7 +76,7 @@ export async function checkGameUpdates() {
   if (!isLoggedIn) {
     return []
   }
-  return LegendaryLibrary.get().listUpdateableGames()
+  return listUpdateableGames()
 }
 
 /**
@@ -82,7 +85,7 @@ export async function checkGameUpdates() {
  * @returns GameInfo
  */
 export function getGameInfo(appName: string): GameInfo {
-  const info = LegendaryLibrary.get().getGameInfo(appName)
+  const info = getLegLibraryGameInfo(appName)
   if (!info) {
     logError(
       [
@@ -314,7 +317,7 @@ export async function getSettings(appName: string) {
  * @returns If game has an update.
  */
 export async function hasUpdate(appName: string) {
-  const allUpdateableGames = await LegendaryLibrary.get().listUpdateableGames()
+  const allUpdateableGames = await listUpdateableGames()
   return allUpdateableGames.includes(appName)
 }
 
@@ -342,10 +345,7 @@ export async function moveInstall(
     return { status: 'error', error }
   }
 
-  await LegendaryLibrary.get().changeGameInstallPath(
-    appName,
-    moveResult.installPath
-  )
+  await changeGameInstallPath(appName, moveResult.installPath)
   return { status: 'done' }
 }
 
@@ -354,6 +354,14 @@ interface currentDownloadSizeMap {
   [key: string]: number
 }
 const currentDownloadSize: currentDownloadSizeMap = {}
+
+export function getCurrentDownloadSize(appName: string) {
+  return currentDownloadSize[appName]
+}
+
+export function setCurrentDownloadSize(appName: string, size: number) {
+  return (currentDownloadSize[appName] = size)
+}
 
 interface tmpProgressMap {
   [key: string]: InstallProgress
@@ -659,7 +667,7 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
       LogPrefix.Legendary
     )
   } else if (!res.abort) {
-    LegendaryLibrary.get().installState(appName, false)
+    installState(appName, false)
     await removeShortcutsUtil(getGameInfo(appName))
     const gameInfo = getGameInfo(appName)
     await removeNonSteamGame({ gameInfo })
@@ -821,7 +829,7 @@ export async function launch(
       success: wineLaunchPrepSuccess,
       failureReason: wineLaunchPrepFailReason,
       envVars: wineEnvVars
-    } = await prepareWineLaunch(appName)
+    } = await prepareWineLaunch('legendary', appName)
     if (!wineLaunchPrepSuccess) {
       appendFileSync(
         logFileLocation(appName),

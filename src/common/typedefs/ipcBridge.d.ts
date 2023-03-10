@@ -1,4 +1,4 @@
-import { HyperPlayGameOS, HyperPlayInstallInfo } from './../types'
+import { HyperPlayInstallInfo } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -37,6 +37,7 @@ import {
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
 import { PROVIDERS } from 'common/types/proxy-types'
+import { InstallResult } from 'common/types/game_manager'
 
 /**
  * Some notes here:
@@ -156,11 +157,6 @@ interface HyperPlayAsyncIPCFunctions {
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
-  getHyperPlayGameInfo: (gameId: string) => Promise<GameInfo | null>
-  getHyperPlayInstallInfo: (
-    appName: string,
-    platform: HyperPlayGameOS
-  ) => Promise<HyperPlayInstallInfo | null>
   addHyperplayGame: (gameId: string) => Promise<void>
   installHyperPlayGame: (
     gameId: string,
@@ -184,7 +180,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<{ stdout: string; stderr: string }>
   checkGameUpdates: () => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
-  updateAll: () => Promise<({ status: 'done' | 'error' } | null)[]>
+  updateAll: () => Promise<(InstallResult | null)[]>
   getMaxCpus: () => number
   getAppVersion: () => string
   getLegendaryVersion: () => Promise<string>
@@ -208,7 +204,9 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     appName: string,
     runner: Runner,
     installPlatform: InstallPlatform
-  ) => Promise<LegendaryInstallInfo | GogInstallInfo | null>
+  ) => Promise<
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
+  >
   getUserInfo: () => Promise<UserInfo | undefined>
   isLoggedIn: () => boolean
   login: (sid: string) => Promise<{

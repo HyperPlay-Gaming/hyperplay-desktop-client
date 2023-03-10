@@ -30,8 +30,6 @@ import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { DXVK } from './tools'
 import setup from './gog/setup'
-import { GOGGame } from './gog/games'
-import { LegendaryGame } from './legendary/games'
 import {
   CallRunnerOptions,
   GameInfo,
@@ -43,18 +41,18 @@ import {
   LaunchPreperationResult,
   RpcClient,
   WineInstallation,
-  WineCommandArgs,
-  SideloadGame
+  WineCommandArgs
 } from 'common/types'
 import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import { OverlayApp } from './overlay/overlay'
+import { gameManagerMap } from './main'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
-  gameInfo: GameInfo | SideloadGame,
+  gameInfo: GameInfo,
   isNative: boolean
 ): Promise<LaunchPreperationResult> {
   const globalSettings = GlobalConfig.get().getSettings()
@@ -146,7 +144,10 @@ async function prepareLaunch(
   }
 }
 
-async function prepareWineLaunch(appName: string): Promise<{
+async function prepareWineLaunch(
+  runner: Runner,
+  appName: string
+): Promise<{
   success: boolean
   failureReason?: string
   envVars?: Record<string, string>
@@ -204,7 +205,7 @@ async function prepareWineLaunch(appName: string): Promise<{
       ['Created/Updated Wineprefix at', gameSettings.winePrefix],
       LogPrefix.Backend
     )
-    await setup(game.appName)
+    await setup(appName)
   }
 
   // If DXVK/VKD3D installation is enabled, install it
@@ -227,7 +228,8 @@ async function prepareWineLaunch(appName: string): Promise<{
     }
   }
 
-  const { folder_name: installFolderName } = game.getGameInfo()
+  const { folder_name: installFolderName } =
+    gameManagerMap[runner].getGameInfo(appName)
   const envVars = setupWineEnvVars(gameSettings, installFolderName)
 
   return { success: true, envVars: envVars }

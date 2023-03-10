@@ -82,10 +82,6 @@ const getInstallInfo = async (
 > => {
   if (runner === 'hyperplay') {
     installPlatform = handleRunnersPlatforms(installPlatform, runner)
-    return window.api.getHyperPlayInstallInfo(
-      appName,
-      installPlatform as HyperPlayGameOS
-    )
   }
   return window.api.getInstallInfo(
     appName,

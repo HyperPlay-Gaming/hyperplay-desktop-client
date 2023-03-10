@@ -1,17 +1,19 @@
 import { sendFrontendMessage } from './../main_window'
 import { hpLibraryStore } from './electronStore'
 import {
+  CallRunnerOptions,
+  ExecResult,
   GameInfo,
-  HyperPlayGameOS,
   HyperPlayInstallInfo,
-  HyperPlayRelease
+  HyperPlayRelease,
+  InstallPlatform
 } from 'common/types'
 import axios from 'axios'
 import path from 'path'
-import { logInfo, LogPrefix, logError } from 'backend/logger/logger'
+import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
 import { handleArchAndPlatform } from './utils'
 import * as fs from 'fs'
-import { getGameInfo } from './games'
+import { getGameInfo as getGamesGameInfo } from './games'
 
 export async function addGameToLibrary(appId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -92,13 +94,13 @@ export function getBinExecIfExists(executable: string) {
   return ''
 }
 
-export const getHyperPlayGameInstallInfo = (
+export const getInstallInfo = async (
   appName: string,
-  platformToInstall: HyperPlayGameOS
-): HyperPlayInstallInfo | null => {
-  const gameInfo = getGameInfo(appName)
+  platformToInstall: InstallPlatform
+): Promise<HyperPlayInstallInfo | undefined> => {
+  const gameInfo = getGamesGameInfo(appName)
   if (!gameInfo || !gameInfo.releaseMeta) {
-    return null
+    return undefined
   }
 
   logInfo(`Getting install info for ${gameInfo.title}`, LogPrefix.HyperPlay)
@@ -115,7 +117,7 @@ export const getHyperPlayGameInstallInfo = (
       `No install info for ${appName} and ${requestedPlatform}`,
       LogPrefix.HyperPlay
     )
-    return null
+    return undefined
   }
   const download_size = info.downloadSize
   const install_size = info.installSize
@@ -128,4 +130,63 @@ export const getHyperPlayGameInstallInfo = (
       url: info.external_url
     }
   }
+}
+
+export async function updateAllGames() {
+  return []
+}
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export async function getGames(fullRefresh?: boolean) {
+  logWarning(`getGames not implemented on HyperPlay Library Manager`)
+  return []
+}
+
+export function installState(appName: string, state: boolean) {
+  logWarning(`installState not implemented on HyperPlay Library Manager`)
+}
+
+export async function refresh() {
+  logWarning(`refresh not implemented on HyperPlay Library Manager`)
+  return null
+}
+
+export function refreshInstalled() {
+  logWarning(`refreshInstalled not implemented on HyperPlay Library Manager`)
+}
+
+export function getGameInfo(
+  appName: string,
+  forceReload?: boolean
+): GameInfo | undefined {
+  logWarning(`getGameInfo not implemented on HyperPlay Library Manager`)
+  return undefined
+}
+
+export async function listUpdateableGames(): Promise<string[]> {
+  logWarning(`listUpdateableGames not implemented on HyperPlay Library Manager`)
+  return []
+}
+
+export async function runRunnerCommand(
+  commandParts: string[],
+  abortController: AbortController,
+  options?: CallRunnerOptions
+): Promise<ExecResult> {
+  logWarning(`runRunnerCommand not implemented on HyperPlay Library Manager`)
+  return { stdout: '', stderr: '' }
+}
+
+export async function changeGameInstallPath(
+  appName: string,
+  newPath: string
+): Promise<void> {
+  logWarning(
+    `changeGameInstallPath not implemented on HyperPlay Library Manager`
+  )
+}
+
+export function hasGame(appName: string) {
+  logWarning(`hasGame not implemented on HyperPlay Library Manager`)
+  return false
 }

@@ -2,7 +2,16 @@ import {
   createAbortController,
   deleteAbortController
 } from '../utils/aborthandler/aborthandler'
-import { GOGLibrary, runGogdlCommand, getInstallInfo } from './library'
+import {
+  importGame as importGogLibraryGame,
+  refreshInstalled,
+  runRunnerCommand as runGogdlCommand,
+  getInstallInfo,
+  getLinuxInstallerInfo,
+  createReqsArray,
+  getGameInfo as getGogLibraryGameInfo,
+  changeGameInstallPath
+} from './library'
 import { join } from 'path'
 import { GameConfig } from '../game_config'
 import { GlobalConfig } from '../config'
@@ -69,14 +78,14 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
 
   const extra: ExtraInfo = {
     about: gameInfo.extra?.about,
-    reqs: await GOGLibrary.get().createReqsArray(appName, targetPlatform),
+    reqs: await createReqsArray(appName, targetPlatform),
     storeUrl: gameInfo.store_url
   }
   return extra
 }
 
 export function getGameInfo(appName: string): GameInfo {
-  const info = GOGLibrary.get().getGameInfo(appName)
+  const info = getGogLibraryGameInfo(appName)
   if (!info) {
     logError(
       [
@@ -131,7 +140,7 @@ export async function importGame(
   }
 
   try {
-    await GOGLibrary.get().importGame(JSON.parse(res.stdout), path)
+    await importGogLibraryGame(JSON.parse(res.stdout), path)
     addShortcuts(appName)
   } catch (error) {
     logError(['Failed to import', `${appName}:`, error], LogPrefix.Gog)
@@ -299,10 +308,11 @@ export async function install(
   // Installation succeded
   // Save new game info to installed games store
   const installInfo = await getInstallInfo(installPlatform)
+  if (installInfo === undefined) return { status: 'error' }
   const gameInfo = getGameInfo(appName)
   const isLinuxNative = installPlatform === 'linux'
   const additionalInfo = isLinuxNative
-    ? await GOGLibrary.getLinuxInstallerInfo(appName)
+    ? await getLinuxInstallerInfo(appName)
     : null
 
   if (gameInfo.folder_name === undefined) return { status: 'error' }
@@ -322,7 +332,7 @@ export async function install(
   const array = installedGamesStore.get('installed', [])
   array.push(installedData)
   installedGamesStore.set('installed', array)
-  GOGLibrary.get().refreshInstalled()
+  refreshInstalled()
   if (isWindows) {
     logInfo('Windows os, running setup instructions on install', LogPrefix.Gog)
     try {
@@ -426,7 +436,7 @@ export async function launch(
       success: wineLaunchPrepSuccess,
       failureReason: wineLaunchPrepFailReason,
       envVars: wineEnvVars
-    } = await prepareWineLaunch(appName)
+    } = await prepareWineLaunch('gog', appName)
     if (!wineLaunchPrepSuccess) {
       appendFileSync(
         logFileLocation(appName),
@@ -539,7 +549,7 @@ export async function moveInstall(
     return { status: 'error', error }
   }
 
-  GOGLibrary.get().changeGameInstallPath(appName, moveResult.installPath)
+  changeGameInstallPath(appName, moveResult.installPath)
   return { status: 'done' }
 }
 
@@ -601,7 +611,7 @@ export async function syncSaves(
     return 'Unable to sync saves, no credentials'
   }
 
-  const gameInfo = GOGLibrary.get().getGameInfo(appName)
+  const gameInfo = getGogLibraryGameInfo(appName)
   if (!gameInfo || !gameInfo.install.platform) {
     return 'Unable to sync saves, game info not found'
   }
@@ -708,7 +718,7 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
     rmSync(object.install_path, { recursive: true })
   }
   installedGamesStore.set('installed', array)
-  GOGLibrary.get().refreshInstalled()
+  refreshInstalled()
   const gameInfo = getGameInfo(appName)
   await removeShortcutsUtil(gameInfo)
   syncStore.delete(appName)
@@ -778,19 +788,20 @@ export async function update(
 
   if (gameData.install.platform !== 'linux') {
     const installInfo = await getInstallInfo(appName)
+    if (installInfo === undefined) return { status: 'error' }
     gameObject.buildId = installInfo.game.buildId
     gameObject.version = installInfo.game.version
     gameObject.versionEtag = installInfo.manifest.versionEtag
     gameObject.install_size = getFileSize(installInfo.manifest.disk_size)
   } else {
-    const installerInfo = await GOGLibrary.getLinuxInstallerInfo(appName)
+    const installerInfo = await getLinuxInstallerInfo(appName)
     if (!installerInfo) {
       return { status: 'error' }
     }
     gameObject.version = installerInfo.version
   }
   installedGamesStore.set('installed', installedArray)
-  GOGLibrary.get().refreshInstalled()
+  refreshInstalled()
   return { status: 'done' }
 }
 
