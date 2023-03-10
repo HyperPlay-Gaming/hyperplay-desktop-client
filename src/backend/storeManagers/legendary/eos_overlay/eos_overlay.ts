@@ -3,17 +3,22 @@ import {
   callAbortController,
   createAbortController,
   deleteAbortController
-} from '../../utils/aborthandler/aborthandler'
+} from '../../../utils/aborthandler/aborthandler'
 import { dialog } from 'electron'
 import { existsSync, readFileSync } from 'graceful-fs'
 import { t } from 'i18next'
 import { join } from 'path'
 
-import { toolsPath, isLinux, legendaryConfigPath, icon } from '../../constants'
-import { logError, LogPrefix, logWarning } from '../../logger/logger'
+import {
+  toolsPath,
+  isLinux,
+  legendaryConfigPath,
+  icon
+} from '../../../constants'
+import { logError, LogPrefix, logWarning } from '../../../logger/logger'
 import { runRunnerCommand as runLegendaryCommand } from '../library'
-import { verifyWinePrefix } from '../../launcher'
-import { sendFrontendMessage } from '../../main_window'
+import { verifyWinePrefix } from '../../../launcher'
+import { sendFrontendMessage } from '../../../main_window'
 import { setCurrentDownloadSize } from '../games'
 
 const currentVersionPath = join(legendaryConfigPath, 'overlay_version.json')

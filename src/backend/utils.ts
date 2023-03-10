@@ -52,18 +52,18 @@ import {
 } from './constants'
 import { logError, logInfo, LogPrefix, logWarning } from './logger/logger'
 import { basename, dirname, join, normalize } from 'path'
-import { runRunnerCommand as runLegendaryCommand } from './legendary/library'
-import { runRunnerCommand as runGogdlCommand } from './gog/library'
+import { runRunnerCommand as runLegendaryCommand } from 'backend/storeManagers/legendary/library'
+import { runRunnerCommand as runGogdlCommand } from './storeManagers/gog/library'
 import {
   gameInfoStore,
   installStore,
   libraryStore
-} from './legendary/electronStores'
+} from 'backend/storeManagers/legendary/electronStores'
 import {
   apiInfoCache as GOGapiInfoCache,
   gogInstallInfoStore as GOGinstallInfoStore,
   libraryStore as GOGlibraryStore
-} from './gog/electronStores'
+} from './storeManagers/gog/electronStores'
 import fileSize from 'filesize'
 import makeClient from 'discord-rich-presence-typescript'
 import { notify, showDialogBoxModalAuto } from './dialog/dialog'

@@ -70,9 +70,10 @@ async function install({
       await window.api.requestAppSettings()
     const args: Electron.OpenDialogOptions = {
       buttonLabel: t('gamepage:box.choose'),
-      properties: ['openDirectory'],
+      properties: ['openFile'],
       title: t('gamepage:box.importpath'),
       defaultPath: defaultInstallPath
+      //TODO: add file filters
     }
     const path = await window.api.openDialog(args)
 
@@ -80,7 +81,12 @@ async function install({
       return
     }
 
-    return importGame({ appName, path, runner, platform: platformToInstall })
+    return window.api.importGame({
+      appName,
+      path,
+      runner,
+      platform: platformToInstall
+    })
   }
 
   if (installPath !== 'default') {
@@ -109,8 +115,6 @@ async function install({
     gameInfo
   })
 }
-
-const importGame = window.api.importGame
 
 async function handleStopInstallation(
   appName: string,

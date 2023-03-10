@@ -29,7 +29,7 @@ import {
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { DXVK } from './tools'
-import setup from './gog/setup'
+import setup from './storeManagers/gog/setup'
 import {
   CallRunnerOptions,
   GameInfo,

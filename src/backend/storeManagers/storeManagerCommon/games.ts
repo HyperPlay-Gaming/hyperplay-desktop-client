@@ -1,7 +1,7 @@
 import { GameInfo, GameSettings, Runner } from 'common/types'
-import { GameConfig } from '../game_config'
-import { isMac, isLinux, gamesConfigPath, icon } from '../constants'
-import { logInfo, LogPrefix, logWarning } from '../logger/logger'
+import { GameConfig } from '../../game_config'
+import { isMac, isLinux, gamesConfigPath, icon } from '../../constants'
+import { logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import path, { dirname, join, resolve } from 'path'
 import { appendFileSync, constants as FS_CONSTANTS } from 'graceful-fs'
 import i18next from 'i18next'
@@ -12,11 +12,11 @@ import {
   runWineCommand,
   setupEnvVars,
   setupWrappers
-} from '../launcher'
+} from '../../launcher'
 import { access, chmod } from 'fs/promises'
 import shlex from 'shlex'
-import { showDialogBoxModalAuto } from '../dialog/dialog'
-import { createAbortController } from '../utils/aborthandler/aborthandler'
+import { showDialogBoxModalAuto } from '../../dialog/dialog'
+import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from 'backend/main'
 const buildDir = resolve(__dirname, '../../build')

@@ -1,4 +1,4 @@
-import { sendFrontendMessage } from './../main_window'
+import { sendFrontendMessage } from '../../main_window'
 import axios, { AxiosError, AxiosResponse } from 'axios'
 import { GOGUser } from './user'
 import {
@@ -21,21 +21,21 @@ import {
 import { basename, join } from 'node:path'
 import { existsSync, readFileSync } from 'graceful-fs'
 
-import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
-import { getGOGdlBin, getFileSize } from '../utils'
-import { fallBackImage, gogdlLogFile } from '../constants'
+import { logError, logInfo, LogPrefix, logWarning } from '../../logger/logger'
+import { getGOGdlBin, getFileSize } from '../../utils'
+import { fallBackImage, gogdlLogFile } from '../../constants'
 import {
   apiInfoCache,
   libraryStore,
   installedGamesStore,
   gogInstallInfoStore
 } from './electronStores'
-import { callRunner } from '../launcher'
+import { callRunner } from '../../launcher'
 import {
   createAbortController,
   deleteAbortController
-} from '../utils/aborthandler/aborthandler'
-import { isOnline } from '../online_monitor'
+} from '../../utils/aborthandler/aborthandler'
+import { isOnline } from '../../online_monitor'
 
 const library: Map<string, GameInfo> = new Map()
 const installedGames: Map<string, InstalledInfo> = new Map()

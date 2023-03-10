@@ -7,7 +7,7 @@ import {
   ExecResult,
   WineCommandArgs,
   GameSettings
-} from './../../common/types'
+} from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
@@ -29,14 +29,14 @@ import {
 } from 'backend/utils/aborthandler/aborthandler'
 import { removeFromQueue } from 'backend/downloadmanager/downloadqueue'
 import { handleArchAndPlatform } from './utils'
-import { getSettings as getSettingsSideload } from 'backend/sideload/games'
+import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
 import {
   addShortcuts as addShortcutsUtil,
   removeShortcuts as removeShortcutsUtil
-} from '../shortcuts/shortcuts/shortcuts'
+} from '../../shortcuts/shortcuts/shortcuts'
 import { InstallResult, RemoveArgs } from 'common/types/game_manager'
 import { GOGCloudSavesLocation } from 'common/types/gog'
-import { launchGame } from 'backend/gameManagerCommon/games'
+import { launchGame } from 'backend/storeManagers/storeManagerCommon/games'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)

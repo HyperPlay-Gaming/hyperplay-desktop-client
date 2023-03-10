@@ -1,7 +1,7 @@
 import {
   createAbortController,
   deleteAbortController
-} from '../utils/aborthandler/aborthandler'
+} from '../../utils/aborthandler/aborthandler'
 import {
   importGame as importGogLibraryGame,
   refreshInstalled,
@@ -13,8 +13,8 @@ import {
   changeGameInstallPath
 } from './library'
 import { join } from 'path'
-import { GameConfig } from '../game_config'
-import { GlobalConfig } from '../config'
+import { GameConfig } from '../../game_config'
+import { GlobalConfig } from '../../config'
 import {
   errorHandler,
   getFileSize,
@@ -23,7 +23,7 @@ import {
   spawnAsync,
   moveOnUnix,
   moveOnWindows
-} from '../utils'
+} from '../../utils'
 import {
   ExtraInfo,
   GameInfo,
@@ -36,9 +36,9 @@ import {
   InstallProgress
 } from 'common/types'
 import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
-import { gamesConfigPath, isWindows, isMac, isLinux } from '../constants'
-import { installedGamesStore, syncStore } from '../gog/electronStores'
-import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
+import { gamesConfigPath, isWindows, isMac, isLinux } from '../../constants'
+import { installedGamesStore, syncStore } from './electronStores'
+import { logError, logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import { GOGUser } from './user'
 import {
   getRunnerCallWithoutCredentials,
@@ -49,20 +49,20 @@ import {
   runWineCommand as runWineCommandUtil,
   setupEnvVars,
   setupWrappers
-} from '../launcher'
+} from '../../launcher'
 import {
   addShortcuts as addShortcutsUtil,
   removeShortcuts as removeShortcutsUtil
-} from '../shortcuts/shortcuts/shortcuts'
+} from '../../shortcuts/shortcuts/shortcuts'
 import setup from './setup'
-import { removeNonSteamGame } from '../shortcuts/nonesteamgame/nonesteamgame'
+import { removeNonSteamGame } from '../../shortcuts/nonesteamgame/nonesteamgame'
 import shlex from 'shlex'
 import { GOGCloudSavesLocation, GogInstallPlatform } from 'common/types/gog'
 import { t } from 'i18next'
-import { showDialogBoxModalAuto } from '../dialog/dialog'
-import { sendFrontendMessage } from '../main_window'
+import { showDialogBoxModalAuto } from '../../dialog/dialog'
+import { sendFrontendMessage } from '../../main_window'
 import { RemoveArgs } from 'common/types/game_manager'
-import { logFileLocation } from 'backend/gameManagerCommon/games'
+import { logFileLocation } from 'backend/storeManagers/storeManagerCommon/games'
 
 export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   const gameInfo = getGameInfo(appName)

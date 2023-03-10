@@ -48,9 +48,9 @@ import checkDiskSpace from 'check-disk-space'
 import { DXVK, Winetricks } from './tools'
 import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
-import { LegendaryUser } from './legendary/user'
-import { GOGUser } from './gog/user'
-import setup from './gog/setup'
+import { LegendaryUser } from 'backend/storeManagers/legendary/user'
+import { GOGUser } from './storeManagers/gog/user'
+import setup from './storeManagers/gog/setup'
 import {
   clearCache,
   execAsync,
@@ -109,7 +109,7 @@ import {
   LogPrefix,
   logWarning
 } from './logger/logger'
-import { gameInfoStore } from './legendary/electronStores'
+import { gameInfoStore } from 'backend/storeManagers/legendary/electronStores'
 import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
@@ -144,17 +144,17 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
-import { addGameToLibrary } from './hyperplay/library'
+import { addGameToLibrary } from './storeManagers/hyperplay/library'
 
-import * as HyperPlayGameManager from './hyperplay/games'
-import * as SideloadGameManager from './sideload/games'
-import * as GOGGameManager from './gog/games'
-import * as LegendaryGameManager from './legendary/games'
+import * as HyperPlayGameManager from './storeManagers/hyperplay/games'
+import * as SideloadGameManager from './storeManagers/sideload/games'
+import * as GOGGameManager from './storeManagers/gog/games'
+import * as LegendaryGameManager from 'backend/storeManagers/legendary/games'
 
-import * as HyperPlayLibraryManager from './hyperplay/library'
-import * as SideloadLibraryManager from './sideload/library'
-import * as GOGLibraryManager from './gog/library'
-import * as LegendaryLibraryManager from './legendary/library'
+import * as HyperPlayLibraryManager from './storeManagers/hyperplay/library'
+import * as SideloadLibraryManager from './storeManagers/sideload/library'
+import * as GOGLibraryManager from './storeManagers/gog/library'
+import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
 
 interface GameManagerMap {
   [key: string]: GameManager
@@ -1782,7 +1782,7 @@ import './logger/ipc_handler'
 import './wine/manager/ipc_handler'
 import './shortcuts/ipc_handler'
 import './anticheat/ipc_handler'
-import './legendary/eos_overlay/ipc_handler'
+import 'backend/storeManagers/legendary/eos_overlay/ipc_handler'
 import './wine/runtimes/ipc_handler'
 import './downloadmanager/ipc_handler'
 import './utils/ipc_handler'
@@ -1791,8 +1791,8 @@ import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import { trackEvent } from './metrics/metrics'
 import { GameManager, LibraryManager } from 'common/types/game_manager'
-import { logFileLocation as getLogFileLocation } from './gameManagerCommon/games'
-import { addNewApp } from './sideload/library'
+import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
+import { addNewApp } from './storeManagers/sideload/library'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (

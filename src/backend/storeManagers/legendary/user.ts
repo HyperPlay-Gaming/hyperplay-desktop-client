@@ -1,13 +1,13 @@
 import {
   createAbortController,
   deleteAbortController
-} from '../utils/aborthandler/aborthandler'
+} from '../../utils/aborthandler/aborthandler'
 import { existsSync, readFileSync } from 'graceful-fs'
 
 import { UserInfo } from 'common/types'
-import { clearCache } from '../utils'
-import { userInfo, configStore } from '../constants'
-import { logError, LogPrefix } from '../logger/logger'
+import { clearCache } from '../../utils'
+import { userInfo, configStore } from '../../constants'
+import { logError, LogPrefix } from '../../logger/logger'
 import { userInfo as user } from 'os'
 import { session } from 'electron'
 import { runRunnerCommand as runLegendaryCommand } from './library'

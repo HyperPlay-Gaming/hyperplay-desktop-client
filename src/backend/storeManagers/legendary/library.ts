@@ -1,7 +1,7 @@
 import {
   createAbortController,
   deleteAbortController
-} from '../utils/aborthandler/aborthandler'
+} from '../../utils/aborthandler/aborthandler'
 import { existsSync, readFileSync, readdirSync } from 'graceful-fs'
 
 import {
@@ -22,24 +22,24 @@ import {
   getLegendaryBin,
   isEpicServiceOffline,
   getFileSize
-} from '../utils'
+} from '../../utils'
 import {
   fallBackImage,
   legendaryConfigPath,
   legendaryLogFile,
   legendaryMetadata
-} from '../constants'
+} from '../../constants'
 import {
   logDebug,
   logError,
   logInfo,
   LogPrefix,
   logWarning
-} from '../logger/logger'
+} from '../../logger/logger'
 import { installStore, libraryStore } from './electronStores'
-import { callRunner } from '../launcher'
+import { callRunner } from '../../launcher'
 import { dirname, join } from 'path'
-import { isOnline } from '../online_monitor'
+import { isOnline } from '../../online_monitor'
 import { update } from './games'
 
 const allGames: Set<string> = new Set()

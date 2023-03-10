@@ -1,7 +1,7 @@
 import {
   createAbortController,
   deleteAbortController
-} from '../utils/aborthandler/aborthandler'
+} from '../../utils/aborthandler/aborthandler'
 import { appendFileSync, existsSync } from 'graceful-fs'
 import axios from 'axios'
 
@@ -14,8 +14,8 @@ import {
   InstallProgress,
   WineCommandArgs
 } from 'common/types'
-import { GameConfig } from '../game_config'
-import { GlobalConfig } from '../config'
+import { GameConfig } from '../../game_config'
+import { GlobalConfig } from '../../config'
 import {
   runRunnerCommand as runLegendaryCommand,
   getInstallInfo,
@@ -30,7 +30,7 @@ import {
   killPattern,
   moveOnUnix,
   moveOnWindows
-} from '../utils'
+} from '../../utils'
 import {
   isMac,
   isWindows,
@@ -40,8 +40,8 @@ import {
   isLinux,
   isFlatpak,
   isCLINoGui
-} from '../constants'
-import { logError, logInfo, LogPrefix } from '../logger/logger'
+} from '../../constants'
+import { logError, logInfo, LogPrefix } from '../../logger/logger'
 import {
   prepareLaunch,
   prepareWineLaunch,
@@ -50,23 +50,23 @@ import {
   setupWrappers,
   launchCleanup,
   getRunnerCallWithoutCredentials
-} from '../launcher'
+} from '../../launcher'
 import {
   addShortcuts as addShortcutsUtil,
   removeShortcuts as removeShortcutsUtil
-} from '../shortcuts/shortcuts/shortcuts'
+} from '../../shortcuts/shortcuts/shortcuts'
 import { join } from 'path'
 import { gameInfoStore } from './electronStores'
-import { removeNonSteamGame } from '../shortcuts/nonesteamgame/nonesteamgame'
+import { removeNonSteamGame } from '../../shortcuts/nonesteamgame/nonesteamgame'
 import shlex from 'shlex'
 import { t } from 'i18next'
-import { isOnline } from '../online_monitor'
-import { showDialogBoxModalAuto } from '../dialog/dialog'
-import { gameAnticheatInfo } from '../anticheat/utils'
+import { isOnline } from '../../online_monitor'
+import { showDialogBoxModalAuto } from '../../dialog/dialog'
+import { gameAnticheatInfo } from '../../anticheat/utils'
 import { Catalog, Product } from 'common/types/epic-graphql'
-import { sendFrontendMessage } from '../main_window'
+import { sendFrontendMessage } from '../../main_window'
 import { RemoveArgs } from 'common/types/game_manager'
-import { logFileLocation } from 'backend/gameManagerCommon/games'
+import { logFileLocation } from 'backend/storeManagers/storeManagerCommon/games'
 
 /**
  * Alias for `LegendaryLibrary.listUpdateableGames`

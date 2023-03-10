@@ -1,4 +1,4 @@
-import { sendFrontendMessage } from './../main_window'
+import { sendFrontendMessage } from '../../main_window'
 import { hpLibraryStore } from './electronStore'
 import {
   CallRunnerOptions,

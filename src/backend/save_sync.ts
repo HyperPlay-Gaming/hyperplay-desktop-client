@@ -1,8 +1,8 @@
 import { InstalledInfo, Runner } from 'common/types'
 import { GOGCloudSavesLocation, SaveFolderVariable } from 'common/types/gog'
 import { getWinePath, setupWineEnvVars, verifyWinePrefix } from './launcher'
-import { runRunnerCommand as runLegendaryCommand } from './legendary/library'
-import { getSaveSyncLocation, readInfoFile } from './gog/library'
+import { runRunnerCommand as runLegendaryCommand } from 'backend/storeManagers/legendary/library'
+import { getSaveSyncLocation, readInfoFile } from './storeManagers/gog/library'
 import {
   logDebug,
   LogPrefix,

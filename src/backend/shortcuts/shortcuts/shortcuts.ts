@@ -19,7 +19,7 @@ import { GameInfo } from 'common/types'
 import { isMac, userHome } from '../../constants'
 import { getIcon } from '../utils'
 import { addNonSteamGame } from '../nonesteamgame/nonesteamgame'
-import * as GogLibraryManager from '../../gog/library'
+import * as GogLibraryManager from '../../storeManagers/gog/library'
 
 /**
  * Adds a desktop shortcut to $HOME/Desktop and to /usr/share/applications

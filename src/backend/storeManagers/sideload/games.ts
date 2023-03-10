@@ -8,21 +8,21 @@ import {
   WineCommandArgs
 } from 'common/types'
 import { libraryStore } from './electronStores'
-import { GameConfig } from '../game_config'
-import { isWindows, isMac, isLinux, icon } from '../constants'
-import { killPattern } from '../utils'
-import { logInfo, LogPrefix, logWarning } from '../logger/logger'
+import { GameConfig } from '../../game_config'
+import { isWindows, isMac, isLinux, icon } from '../../constants'
+import { killPattern } from '../../utils'
+import { logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import path, { dirname, resolve } from 'path'
 import { existsSync, rmSync } from 'graceful-fs'
 import i18next from 'i18next'
 import {
   addShortcuts as addShortcutsUtil,
   removeShortcuts as removeShortcutsUtil
-} from '../shortcuts/shortcuts/shortcuts'
-import { notify } from '../dialog/dialog'
-import { sendFrontendMessage } from '../main_window'
+} from '../../shortcuts/shortcuts/shortcuts'
+import { notify } from '../../dialog/dialog'
+import { sendFrontendMessage } from '../../main_window'
 import { app, BrowserWindow } from 'electron'
-import { launchGame } from 'backend/gameManagerCommon/games'
+import { launchGame } from 'backend/storeManagers/storeManagerCommon/games'
 import { GOGCloudSavesLocation } from 'common/types/gog'
 import { InstallResult, RemoveArgs } from 'common/types/game_manager'
 const buildDir = resolve(__dirname, '../../build')
