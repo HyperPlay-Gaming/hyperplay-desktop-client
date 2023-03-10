@@ -46,11 +46,10 @@ const allGames: Set<string> = new Set()
 let installedGames: Map<string, InstalledJsonMetadata> = new Map()
 const library: Map<string, GameInfo> = new Map()
 
-loadGamesInAccount()
 /**
  * Loads all of the user's games into `this.allGames`
  */
-function loadGamesInAccount() {
+export function loadGamesInAccount() {
   if (!existsSync(legendaryMetadata)) {
     return
   }

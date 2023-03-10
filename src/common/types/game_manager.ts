@@ -56,7 +56,7 @@ export interface GameManager {
     gogSaves?: GOGCloudSavesLocation[]
   ) => Promise<string>
   uninstall: (args: RemoveArgs) => Promise<ExecResult>
-  update: (appName: string) => Promise<{ status: 'done' | 'error' }>
+  update: (appName: string) => Promise<InstallResult>
   runWineCommand: (
     appName: string,
     { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs

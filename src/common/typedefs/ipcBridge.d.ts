@@ -31,8 +31,7 @@ import {
   DMQueueElement,
   ConnectivityStatus,
   GamepadActionArgs,
-  ExtraInfo,
-  AppPlatforms
+  ExtraInfo
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
@@ -158,17 +157,6 @@ interface HyperPlayAsyncIPCFunctions {
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
   addHyperplayGame: (gameId: string) => Promise<void>
-  installHyperPlayGame: (
-    gameId: string,
-    dirpath: string,
-    platformToInstall: AppPlatforms
-  ) => Promise<StatusPromise>
-  uninstallHyperplayGame: (
-    gameId: string,
-    shouldRemovePrefix: boolean,
-    shoudlRemoveSetting: boolean
-  ) => Promise<void>
-  launchHyperplayGame: (gameId: string) => Promise<StatusPromise>
   sendRequest: (args: unknown[]) => Promise<unknown>
   sendAsyncRequest: (
     payload: JsonRpcRequest,

@@ -135,6 +135,8 @@ export interface GameInfo {
   description?: string
   wineSupport?: WineSupport
   systemRequirements?: SystemRequirements
+  //used for store release versions. if remote !== local, then update
+  version?: string
 }
 
 export interface GameSettings {
@@ -622,7 +624,7 @@ export interface ToolArgs {
   action: 'backup' | 'restore'
 }
 
-export type StatusPromise = Promise<{ status: 'done' | 'error' }>
+export type StatusPromise = Promise<{ status: 'done' | 'error' | 'abort' }>
 
 export interface GameScoreInfo {
   score: string

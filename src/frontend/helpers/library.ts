@@ -170,7 +170,7 @@ const launch = async ({
   runner,
   hasUpdate,
   showDialogModal
-}: LaunchOptions): Promise<{ status: 'done' | 'error' }> => {
+}: LaunchOptions): Promise<{ status: 'done' | 'error' | 'abort' }> => {
   if (hasUpdate) {
     const { ignoreGameUpdates } = await window.api.requestGameSettings(appName)
 
@@ -183,37 +183,39 @@ const launch = async ({
     }
 
     // promisifies the showDialogModal button click callbacks
-    const launchFinished = new Promise<{ status: 'done' | 'error' }>((res) => {
-      showDialogModal({
-        message: t('gamepage:box.update.message'),
-        title: t('gamepage:box.update.title'),
-        buttons: [
-          {
-            text: t('gamepage:box.yes'),
-            onClick: async () => {
-              const gameInfo = await getGameInfo(appName, runner)
-              if (gameInfo && gameInfo.runner !== 'sideload') {
-                updateGame({ appName, runner, gameInfo })
-                res({ status: 'done' })
+    const launchFinished = new Promise<{ status: 'done' | 'error' | 'abort' }>(
+      (res) => {
+        showDialogModal({
+          message: t('gamepage:box.update.message'),
+          title: t('gamepage:box.update.title'),
+          buttons: [
+            {
+              text: t('gamepage:box.yes'),
+              onClick: async () => {
+                const gameInfo = await getGameInfo(appName, runner)
+                if (gameInfo && gameInfo.runner !== 'sideload') {
+                  updateGame({ appName, runner, gameInfo })
+                  res({ status: 'done' })
+                }
+                res({ status: 'error' })
               }
-              res({ status: 'error' })
+            },
+            {
+              text: t('box.no'),
+              onClick: async () => {
+                res(
+                  window.api.launch({
+                    appName,
+                    runner,
+                    launchArguments: '--skip-version-check'
+                  })
+                )
+              }
             }
-          },
-          {
-            text: t('box.no'),
-            onClick: async () => {
-              res(
-                window.api.launch({
-                  appName,
-                  runner,
-                  launchArguments: '--skip-version-check'
-                })
-              )
-            }
-          }
-        ]
-      })
-    })
+          ]
+        })
+      }
+    )
 
     return launchFinished
   }

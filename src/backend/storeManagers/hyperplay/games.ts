@@ -12,15 +12,10 @@ import { InstallPlatform } from 'common/types'
 import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import * as fs from 'fs'
-import { LogPrefix, logInfo, logWarning } from 'backend/logger/logger'
+import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 import { isMac, isWindows, isLinux } from 'backend/constants'
-import {
-  downloadFileWithAxios,
-  getFileSize,
-  spawnAsync,
-  killPattern
-} from 'backend/utils'
+import { downloadFileWithAxios, spawnAsync, killPattern } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
 import {
@@ -218,10 +213,7 @@ async function downloadGame(
 export async function install(
   appName: string,
   { path: dirpath, platformToInstall }: InstallArgs
-): Promise<{
-  status: 'error' | 'done' | 'abort'
-  error?: string | undefined
-}> {
+): Promise<InstallResult> {
   if (!existsSync(dirpath) && platformToInstall !== 'Browser') {
     mkdirSync(dirpath, { recursive: true })
   }
@@ -237,10 +229,8 @@ export async function install(
 
   // download the zip file
   try {
-    const platformInfo =
-      releaseMeta.platforms[
-        handleArchAndPlatform(platformToInstall, releaseMeta)
-      ]
+    const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
+    const platformInfo = releaseMeta.platforms[appPlatform]
     const zipFile = path.join(dirpath, platformInfo.name)
     const destinationPath = path.join(dirpath, title)
     if (!existsSync(destinationPath)) {
@@ -248,7 +238,6 @@ export async function install(
     }
     await downloadGame(appName, dirpath, platformInfo)
     let executable = path.join(destinationPath, platformInfo.executable)
-    const install_size = getFileSize(platformInfo.installSize)
 
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
@@ -292,10 +281,10 @@ export async function install(
         appName,
         install_path: destinationPath,
         executable: executable,
-        install_size,
+        install_size: platformInfo.installSize.toString(),
         is_dlc: false,
         version: releaseMeta.name,
-        platform: platformToInstall
+        platform: appPlatform
       }
 
       const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
@@ -354,26 +343,26 @@ const rmAppFromHyperPlayStore = (appName: string) => {
   hpLibraryStore.set('games', newStore)
 }
 
-export async function uninstallHyperPlayGame(
-  appName: string,
-  shouldRemovePrefix: boolean
-) {
+export async function uninstall({
+  appName,
+  shouldRemovePrefix
+}: RemoveArgs): Promise<ExecResult> {
   const appInfo = getGameInfo(appName)
-  if (!appInfo) return
+  if (!appInfo) return { stderr: '', stdout: '' }
 
   if (appInfo.install.platform === 'web') {
     rmAppFromHyperPlayStore(appName)
     sendFrontendMessage('refreshLibrary', 'hyperplay')
-    return
+    return { stderr: '', stdout: '' }
   }
 
   if (!appInfo.install.install_path) {
-    return
+    return { stderr: '', stdout: '' }
   }
 
   // remove game folder from install path
   const installPath = appInfo.install.install_path
-  if (appInfo.folder_name === undefined) return
+  if (appInfo.folder_name === undefined) return { stderr: '', stdout: '' }
   const gameFolder = path.join(installPath, appInfo.folder_name)
 
   rmSync(gameFolder, { recursive: true, force: true })
@@ -412,6 +401,7 @@ export async function uninstallHyperPlayGame(
   setTimeout(() => {
     sendFrontendMessage('refreshLibrary', 'hyperplay')
   })
+  return { stderr: '', stdout: '' }
 }
 
 export async function addShortcuts(
@@ -454,13 +444,32 @@ export async function hasUpdate(appName: string): Promise<boolean> {
   return false
 }
 
-export async function update(
-  appName: string
-): Promise<{ status: 'done' | 'error' }> {
-  logWarning(
-    `update not implemented on HyperPlay Game Manager. called for appName = ${appName}`
-  )
-  return { status: 'error' }
+// TODO: Refactor to only replace updated files
+export async function update(appName: string): Promise<InstallResult> {
+  const gameInfo = getGameInfo(appName)
+
+  if (gameInfo.install.platform === undefined) {
+    logError(
+      'Install platform was not found during game updated',
+      LogPrefix.Backend
+    )
+    return { status: 'error' }
+  }
+
+  if (gameInfo.install.install_path === undefined) {
+    logError(
+      'Install path was not found during game updated',
+      LogPrefix.Backend
+    )
+    return { status: 'error' }
+  }
+
+  await uninstall({ appName })
+  const installResult = await install(appName, {
+    path: gameInfo.install.install_path,
+    platformToInstall: gameInfo.install.platform
+  })
+  return installResult
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -492,13 +501,6 @@ export async function repair(appName: string): Promise<ExecResult> {
   return { stderr: '', stdout: '' }
 }
 
-export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
-  logWarning(
-    `uninstall not implemented on HyperPlay Game Manager. called for appName = ${appName}`
-  )
-  return { stderr: '', stdout: '' }
-}
-
 export async function syncSaves(
   appName: string,
   arg: string,
@@ -523,6 +525,7 @@ export async function runWineCommand(
 
 export async function forceUninstall(appName: string): Promise<void> {
   logWarning(
-    `forceUninstall not implemented on HyperPlay Game Manager. called for appName = ${appName}`
+    `forceUninstall not implemented on HyperPlay Game Manager. Calling uninstall instead called for appName = ${appName}`
   )
+  await uninstall({ appName, shouldRemovePrefix: false })
 }

@@ -67,7 +67,8 @@ export async function addGameToLibrary(appId: string) {
     is_linux_native: false,
     canRunOffline: false,
     install: isWebGame ? { platform: 'web' } : {},
-    releaseMeta: data.releaseMeta
+    releaseMeta: data.releaseMeta,
+    version: data.releaseName
   }
 
   if (isWebGame) {
@@ -148,9 +149,67 @@ export function getGameInfo(
   return undefined
 }
 
+export async function updateAllLibraryReleaseData() {
+  const allListingsResponse = await axios.get(
+    'https://developers.hyperplay.xyz/api/listings'
+  )
+  interface listingMapType {
+    [key: string]: HyperPlayRelease
+  }
+  const listingMap: listingMapType = {}
+  const allListingsRemote = allListingsResponse.data as HyperPlayRelease[]
+
+  allListingsRemote.forEach((element) => {
+    listingMap[element._id] = element
+  })
+
+  const updateableGames: string[] = []
+  const currentHpLibrary = hpLibraryStore.get('games', [])
+  currentHpLibrary.map((localReleaseData, index) => {
+    const remoteReleaseData = listingMap[localReleaseData.app_name]
+    //copy remote data to local release data in library
+    throw 'ERROR updateAllLibraryReleaseData NOT IMPLEMENTED!'
+  })
+}
+
+/* returns array of app names (i.e. _id's) for game releases that are out of date
+ * a game's app name is only returned if the game is installed
+ * since library release data is updated on each app launch
+ */
 export async function listUpdateableGames(): Promise<string[]> {
   logWarning(`listUpdateableGames not implemented on HyperPlay Library Manager`)
-  return []
+  const allListingsResponse = await axios.get(
+    'https://developers.hyperplay.xyz/api/listings'
+  )
+  interface listingMapType {
+    [key: string]: HyperPlayRelease
+  }
+  const listingMap: listingMapType = {}
+  const allListingsRemote = allListingsResponse.data as HyperPlayRelease[]
+
+  allListingsRemote.forEach((element) => {
+    listingMap[element._id] = element
+  })
+
+  const updateableGames: string[] = []
+  const currentHpLibrary = hpLibraryStore.get('games', [])
+  currentHpLibrary.map((val) => {
+    if (val.version === undefined) {
+      updateableGames.push(val.app_name)
+    }
+    if (
+      gameIsInstalled(val) &&
+      val.install.version !== listingMap[val.app_name].releaseName
+    ) {
+      updateableGames.push(val.app_name)
+    }
+  })
+
+  function gameIsInstalled(val: GameInfo) {
+    return Object.keys(val.install).length > 0
+  }
+
+  return updateableGames
 }
 
 export async function runRunnerCommand(

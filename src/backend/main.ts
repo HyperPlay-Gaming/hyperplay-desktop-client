@@ -324,6 +324,7 @@ if (!gotTheLock) {
     handleProtocol(argv)
   })
   app.whenReady().then(async () => {
+    LegendaryLibraryManager.loadGamesInAccount()
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )
@@ -393,6 +394,9 @@ if (!gotTheLock) {
       if (GOGUser.isLoggedIn()) {
         GOGUser.getUserDetails()
       }
+
+      //update metadata for all hp store games in library on launch
+      HyperPlayLibraryManager.updateAllLibraryReleaseData()
     })
 
     await i18next.use(Backend).init({
@@ -1466,7 +1470,7 @@ ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
     body: i18next.t('notify.update.started', 'Update Started')
   })
 
-  let status: 'done' | 'error' = 'error'
+  let status: 'done' | 'error' | 'abort' = 'error'
   try {
     status = (await gameManagerMap[runner].update(appName)).status
   } catch (error) {
