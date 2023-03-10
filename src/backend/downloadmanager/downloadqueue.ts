@@ -1,10 +1,10 @@
+import { libraryManagerMap } from './../main'
 import { TypeCheckedStoreBackend } from './../electron_store'
 import { logError, logInfo, LogPrefix } from '../logger/logger'
-import { getFileSize, getGame } from '../utils'
+import { getFileSize } from '../utils'
 import { DMQueueElement } from 'common/types'
 import { installQueueElement, updateQueueElement } from './utils'
 import { sendFrontendMessage } from '../main_window'
-import { getHyperPlayGameInstallInfo } from 'backend/hyperplay/library'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
@@ -56,18 +56,10 @@ async function initQueue() {
     const queuedElements = downloadManager.get('queue', [])
     sendFrontendMessage('changedDMQueueInformation', queuedElements)
     const { appName, runner, platformToInstall } = element.params
-    const isHpGame = runner === 'hyperplay'
-    let game = null
-    let installInfo = isHpGame
-      ? // @ts-expect-error TS wont know how to handle the type of installInfo
-        getHyperPlayGameInstallInfo(appName, platformToInstall)
-      : null
-
-    if (runner !== 'hyperplay') {
-      game = getGame(appName, runner)
-      // @ts-expect-error TS wont know how to handle the type of installInfo
-      installInfo = await game.getInstallInfo(platformToInstall)
-    }
+    const installInfo = await libraryManagerMap[runner].getInstallInfo(
+      appName,
+      platformToInstall
+    )
 
     element.params.size = installInfo?.manifest?.download_size
       ? getFileSize(installInfo?.manifest?.download_size)

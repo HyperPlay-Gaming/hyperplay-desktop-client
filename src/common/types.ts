@@ -799,8 +799,6 @@ export type ValistPlatforms = {
   [key in AppPlatforms]: PlatformInfo
 }
 
-export type HyperPlayGameOS = 'Windows' | 'linux' | 'Mac' | 'Browser'
-
 export interface HyperPlayReleaseMeta {
   _metadata_version: string
   path: string

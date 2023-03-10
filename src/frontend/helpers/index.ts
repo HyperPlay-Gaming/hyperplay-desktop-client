@@ -1,4 +1,4 @@
-import { HyperPlayGameOS, HyperPlayInstallInfo } from './../../common/types'
+import { HyperPlayInstallInfo } from './../../common/types'
 import {
   GameInfo,
   InstallProgress,
@@ -76,7 +76,7 @@ const getGameSettings = async (
 const getInstallInfo = async (
   appName: string,
   runner: Runner,
-  installPlatform: InstallPlatform | HyperPlayGameOS
+  installPlatform: InstallPlatform
 ): Promise<
   LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
 > => {

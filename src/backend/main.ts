@@ -1403,18 +1403,14 @@ ipcMain.handle(
     }
 
     try {
-      if (runner === 'hyperplay') {
-        gameManagerMap[runner].importGame(appName, path, platform)
-      } else {
-        const { abort, error } = await gameManagerMap[runner].importGame(
-          appName,
-          path,
-          platform
-        )
-        if (abort || error) {
-          abortMessage()
-          return { status: 'done' }
-        }
+      const { abort, error } = await gameManagerMap[runner].importGame(
+        appName,
+        path,
+        platform
+      )
+      if (abort || error) {
+        abortMessage()
+        return { status: 'done' }
       }
     } catch (error) {
       abortMessage()
@@ -1442,12 +1438,6 @@ ipcMain.handle('kill', async (event, appName, runner) => {
 })
 
 ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
-  if (runner === 'hyperplay') {
-    return { status: 'error' }
-
-    // TODO: Implement update for HP games
-  }
-
   if (!isOnline()) {
     logWarning(
       `App offline, skipping install for game '${appName}'.`,
