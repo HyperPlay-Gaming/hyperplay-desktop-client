@@ -7,7 +7,8 @@ import {
   InstalledInfo,
   GOGImportData,
   ExecResult,
-  CallRunnerOptions
+  CallRunnerOptions,
+  InstallPlatform
 } from 'common/types'
 import {
   GOGCloudSavesLocation,
@@ -36,6 +37,44 @@ import {
   deleteAbortController
 } from '../utils/aborthandler/aborthandler'
 import { isOnline } from '../online_monitor'
+
+function handleRunnersPlatforms(platform: InstallPlatform): InstallPlatform {
+  switch (platform) {
+    case 'Mac':
+      return 'osx'
+    case 'Windows':
+      return 'windows'
+    // GOG doesn't have a linux platform, so we need to get the information as windows
+    case 'linux':
+      return 'windows'
+    default:
+      return platform
+  }
+}
+
+export async function getInstallInfo(
+  appName: string,
+  installPlatform: InstallPlatform = 'windows'
+): Promise<GogInstallInfo> {
+  const info = await GOGLibrary.get().getInstallInfo(
+    appName,
+    handleRunnersPlatforms(installPlatform)
+  )
+  if (!info) {
+    logWarning(
+      [
+        'Failed to get Install Info for',
+        `${appName}`,
+        `using ${installPlatform} as platform,`,
+        'returning empty object'
+      ],
+      LogPrefix.Gog
+    )
+    // @ts-expect-error TODO: Handle this better
+    return {}
+  }
+  return info
+}
 
 export class GOGLibrary {
   private static globalInstance: GOGLibrary
@@ -316,7 +355,8 @@ export class GOGLibrary {
             game.developer = data.game.developers
               .map((dev) => dev.name)
               .join(', ')
-            game.extra.about.description = data.game.summary['*']
+            if (game.extra !== undefined && game.extra.about !== undefined)
+              game.extra.about.description = data.game.summary['*']
             changed = true
           }
         } else {

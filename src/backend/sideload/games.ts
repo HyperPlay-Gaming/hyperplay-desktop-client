@@ -1,20 +1,33 @@
-import { GameSettings, SideloadGame } from 'common/types'
+import {
+  ExecResult,
+  ExtraInfo,
+  GameInfo,
+  GameSettings,
+  InstallArgs,
+  InstallPlatform,
+  WineCommandArgs
+} from 'common/types'
 import { libraryStore } from './electronStores'
 import { GameConfig } from '../game_config'
 import { isWindows, isMac, isLinux, icon } from '../constants'
 import { killPattern } from '../utils'
-import { logInfo, LogPrefix } from '../logger/logger'
-import path, { dirname, join, resolve } from 'path'
-import { existsSync, readdirSync, rmSync } from 'graceful-fs'
+import { logInfo, LogPrefix, logWarning } from '../logger/logger'
+import path, { dirname, resolve } from 'path'
+import { existsSync, rmSync } from 'graceful-fs'
 import i18next from 'i18next'
-import { addShortcuts, removeShortcuts } from '../shortcuts/shortcuts/shortcuts'
+import {
+  addShortcuts as addShortcutsUtil,
+  removeShortcuts as removeShortcutsUtil
+} from '../shortcuts/shortcuts/shortcuts'
 import { notify } from '../dialog/dialog'
 import { sendFrontendMessage } from '../main_window'
 import { app, BrowserWindow } from 'electron'
 import { launchGame } from 'backend/gameManagerCommon/games'
+import { GOGCloudSavesLocation } from 'common/types/gog'
+import { InstallResult, RemoveArgs } from 'common/types/game_manager'
 const buildDir = resolve(__dirname, '../../build')
 
-export function getGameInfo(appName: string): SideloadGame {
+export function getGameInfo(appName: string): GameInfo {
   const store = libraryStore.get('games', [])
   const info = store.find((app) => app.app_name === appName)
   if (!info) {
@@ -24,83 +37,22 @@ export function getGameInfo(appName: string): SideloadGame {
   return info
 }
 
-export async function getAppSettings(appName: string): Promise<GameSettings> {
+export async function getSettings(appName: string): Promise<GameSettings> {
   return (
     GameConfig.get(appName).config ||
     (await GameConfig.get(appName).getSettings())
   )
 }
 
-export function addNewApp({
-  app_name,
-  title,
-  install: { executable, platform },
-  art_cover,
-  art_square,
-  web3,
-  browserUrl,
-  is_installed = true,
-  description,
-  wineSupport,
-  systemRequirements
-}: SideloadGame): void {
-  const game: SideloadGame = {
-    runner: 'sideload',
-    app_name,
-    title,
-    install: {
-      executable,
-      platform
-    },
-    folder_name: dirname(executable),
-    art_cover,
-    is_installed: is_installed !== undefined ? is_installed : true,
-    art_square,
-    canRunOffline: !browserUrl,
-    browserUrl,
-    web3,
-    description,
-    wineSupport,
-    systemRequirements
-  }
-
-  if (isMac && executable.endsWith('.app')) {
-    const macAppExecutable = readdirSync(
-      join(executable, 'Contents', 'MacOS')
-    )[0]
-    game.install.executable = join(
-      executable,
-      'Contents',
-      'MacOS',
-      macAppExecutable
-    )
-  }
-
-  const current = libraryStore.get('games', [])
-
-  const gameIndex = current.findIndex((value) => value.app_name === app_name)
-
-  // edit app in case it exists
-  if (gameIndex !== -1) {
-    current[gameIndex] = { ...current[gameIndex], ...game }
-  } else {
-    current.push(game)
-    addAppShortcuts(app_name)
-  }
-
-  libraryStore.set('games', current)
-  return
-}
-
-export async function addAppShortcuts(
+export async function addShortcuts(
   appName: string,
   fromMenu?: boolean
 ): Promise<void> {
-  return addShortcuts(getGameInfo(appName), fromMenu)
+  return addShortcutsUtil(getGameInfo(appName), fromMenu)
 }
 
-export async function removeAppShortcuts(appName: string): Promise<void> {
-  return removeShortcuts(getGameInfo(appName))
+export async function removeShortcuts(appName: string): Promise<void> {
+  return removeShortcutsUtil(getGameInfo(appName))
 }
 
 export function isGameAvailable(appName: string): boolean {
@@ -181,16 +133,11 @@ export async function stop(appName: string): Promise<void> {
   }
 }
 
-type RemoveArgs = {
-  appName: string
-  shouldRemovePrefix: boolean
-  deleteFiles?: boolean
-}
-export async function removeApp({
+export async function uninstall({
   appName,
   shouldRemovePrefix,
   deleteFiles = false
-}: RemoveArgs): Promise<void> {
+}: RemoveArgs): Promise<ExecResult> {
   sendFrontendMessage('gameStatusUpdate', {
     appName,
     runner: 'sideload',
@@ -198,13 +145,13 @@ export async function removeApp({
   })
 
   const old = libraryStore.get('games', [])
-  const current = old.filter((a: SideloadGame) => a.app_name !== appName)
+  const current = old.filter((a: GameInfo) => a.app_name !== appName)
 
   const {
     title,
     install: { executable }
   } = getGameInfo(appName)
-  const { winePrefix } = await getAppSettings(appName)
+  const { winePrefix } = await getSettings(appName)
 
   if (shouldRemovePrefix) {
     logInfo(`Removing prefix ${winePrefix}`, LogPrefix.Backend)
@@ -215,13 +162,13 @@ export async function removeApp({
   }
   libraryStore.set('games', current)
 
-  if (deleteFiles) {
+  if (deleteFiles && executable !== undefined) {
     rmSync(dirname(executable), { recursive: true })
   }
 
   notify({ title, body: i18next.t('notify.uninstalled') })
 
-  removeAppShortcuts(appName)
+  removeShortcuts(appName)
 
   sendFrontendMessage('gameStatusUpdate', {
     appName,
@@ -230,9 +177,10 @@ export async function removeApp({
   })
 
   logInfo('finished uninstalling', LogPrefix.Backend)
+  return { stderr: '', stdout: '' }
 }
 
-export function isNativeApp(appName: string): boolean {
+export function isNative(appName: string): boolean {
   const {
     install: { platform }
   } = getGameInfo(appName)
@@ -257,4 +205,106 @@ export function isNativeApp(appName: string): boolean {
   }
 
   return false
+}
+
+export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
+  logWarning(
+    `getExtraInfo not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+  return {
+    about: {
+      description: '',
+      shortDescription: ''
+    },
+    reqs: [],
+    storeUrl: ''
+  }
+}
+
+export async function hasUpdate(appName: string): Promise<boolean> {
+  logWarning(
+    `hasUpdate not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+  return false
+}
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export function onInstallOrUpdateOutput(
+  appName: string,
+  action: 'installing' | 'updating',
+  data: string,
+  totalDownloadSize: number
+) {
+  logWarning(
+    `onInstallOrUpdateOutput not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+}
+
+export async function moveInstall(
+  appName: string,
+  newInstallPath: string
+): Promise<InstallResult> {
+  logWarning(
+    `moveInstall not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+  return { status: 'error' }
+}
+
+export async function repair(appName: string): Promise<ExecResult> {
+  logWarning(
+    `repair not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+  return { stderr: '', stdout: '' }
+}
+
+export async function syncSaves(
+  appName: string,
+  arg: string,
+  path: string,
+  gogSaves?: GOGCloudSavesLocation[]
+): Promise<string> {
+  logWarning(
+    `syncSaves not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+  return ''
+}
+
+export async function runWineCommand(
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  logWarning(
+    `runWineCommand not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+  return { stderr: '', stdout: '' }
+}
+
+export async function forceUninstall(appName: string): Promise<void> {
+  logWarning(
+    `forceUninstall not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+}
+
+export async function install(
+  appName: string,
+  args: InstallArgs
+): Promise<InstallResult> {
+  logWarning(
+    `forceUninstall not implemented on Sideload Game Manager. called for appName = ${appName}`
+  )
+  return { status: 'error' }
+}
+
+export async function importGame(
+  appName: string,
+  path: string,
+  platform: InstallPlatform
+): Promise<ExecResult> {
+  return { stderr: '', stdout: '' }
+}
+
+export async function update(
+  appName: string
+): Promise<{ status: 'done' | 'error' }> {
+  return { status: 'error' }
 }

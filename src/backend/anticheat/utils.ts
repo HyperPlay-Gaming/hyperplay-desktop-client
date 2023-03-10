@@ -24,7 +24,10 @@ async function downloadAntiCheatData() {
   })
 }
 
-function gameAnticheatInfo(appNamespace: string): AntiCheatInfo | null {
+function gameAnticheatInfo(
+  appNamespace: string | undefined
+): AntiCheatInfo | null {
+  if (appNamespace === undefined) return null
   if (!isLinux) return null
 
   const data = readFileSync(anticheatDataPath)

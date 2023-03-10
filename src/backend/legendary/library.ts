@@ -16,7 +16,6 @@ import {
   GameMetadata,
   LegendaryInstallInfo
 } from 'common/types/legendary'
-import { LegendaryGame } from './games'
 import { LegendaryUser } from './user'
 import {
   formatEpicStoreUrl,
@@ -41,6 +40,13 @@ import { installStore, libraryStore } from './electronStores'
 import { callRunner } from '../launcher'
 import { dirname, join } from 'path'
 import { isOnline } from '../online_monitor'
+
+export async function getInstallInfo(
+  appName: string,
+  installPlatform: InstallPlatform
+) {
+  return LegendaryLibrary.get().getInstallInfo(appName, installPlatform)
+}
 
 /**
  * Legendary LegendaryLibrary.

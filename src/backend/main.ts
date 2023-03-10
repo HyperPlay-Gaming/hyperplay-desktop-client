@@ -71,7 +71,6 @@ import {
   getGOGdlBin,
   // detectVCRedist,
   getFileSize,
-  getGame,
   getFirstExistingParentPath,
   getLatestReleases,
   getShellPath,
@@ -139,16 +138,6 @@ import {
 } from './online_monitor'
 import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { addRecentGame } from './recent_games/recent_games'
-import {
-  addNewApp,
-  appLogFileLocation,
-  getAppInfo,
-  getAppSettings,
-  isNativeApp,
-  launchApp,
-  removeApp,
-  stop
-} from './sideload/games'
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import { getDefaultSavePath } from './save_sync'
 import si from 'systeminformation'
@@ -173,7 +162,7 @@ interface GameManagerMap {
   [key: string]: GameManager
 }
 
-const gameManagerMap: GameManagerMap = {
+export const gameManagerMap: GameManagerMap = {
   hyperplay: HyperPlayGameManager,
   sideload: SideloadGameManager,
   gog: GOGGameManager,
@@ -667,11 +656,7 @@ ipcMain.on('removeFolder', async (e, [path, folderName]) => {
 
 // Calls WineCFG or Winetricks. If is WineCFG, use the same binary as wine to launch it to dont update the prefix
 ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
-  const game = getGame(appName, runner)
-  const isSideloaded = runner === 'sideload'
-  const gameSettings = isSideloaded
-    ? await getAppSettings(appName)
-    : await game.getSettings()
+  const gameSettings = await gameManagerMap[runner].getSettings(appName)
   const { wineVersion, winePrefix } = gameSettings
   await verifyWinePrefix(gameSettings)
 
@@ -681,28 +666,21 @@ ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
       await Winetricks.run(wineVersion, winePrefix, event)
       break
     case 'winecfg':
-      isSideloaded
-        ? runWineCommand({
-            gameSettings,
-            commandParts: ['winecfg'],
-            wait: false
-          })
-        : game.runWineCommand({ commandParts: ['winecfg'] })
+      gameManagerMap[runner].runWineCommand(appName, {
+        gameSettings,
+        commandParts: ['winecfg'],
+        wait: false
+      })
       break
     case 'runExe':
       if (exe) {
         const workingDir = path.parse(exe).dir
-        isSideloaded
-          ? runWineCommand({
-              gameSettings,
-              commandParts: [exe],
-              wait: false,
-              startFolder: workingDir
-            })
-          : game.runWineCommand({
-              commandParts: [exe],
-              startFolder: workingDir
-            })
+        gameManagerMap[runner].runWineCommand(appName, {
+          gameSettings,
+          commandParts: [exe],
+          wait: false,
+          startFolder: workingDir
+        })
       }
       break
   }
@@ -719,9 +697,10 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
   const { autoUpdateGames } = GlobalConfig.get().getSettings()
   if (autoUpdateGames) {
     epicUpdates.forEach(async (appName) => {
-      const game = getGame(appName, 'legendary')
-      const { ignoreGameUpdates } = await game.getSettings()
-      const gameInfo = game.getGameInfo()
+      const { ignoreGameUpdates } = await gameManagerMap[
+        'legendary'
+      ].getSettings(appName)
+      const gameInfo = gameManagerMap['legendary'].getGameInfo(appName)
       if (!ignoreGameUpdates) {
         logInfo(`Auto-Updating ${gameInfo.title}`, LogPrefix.Legendary)
         const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
@@ -736,9 +715,10 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
       }
     })
     gogUpdates.forEach(async (appName) => {
-      const game = getGame(appName, 'gog')
-      const { ignoreGameUpdates } = await game.getSettings()
-      const gameInfo = game.getGameInfo()
+      const { ignoreGameUpdates } = await gameManagerMap['gog'].getSettings(
+        appName
+      )
+      const gameInfo = gameManagerMap['gog'].getGameInfo(appName)
       if (!ignoreGameUpdates) {
         logInfo(`Auto-Updating ${gameInfo.title}`, LogPrefix.Gog)
         const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
@@ -811,64 +791,27 @@ ipcMain.on('createNewWindow', (e, url) => {
 ipcMain.handle('isGameAvailable', async (e, args) => {
   const { appName, runner } = args
   return gameManagerMap[runner].isGameAvailable(appName)
-
-  if (runner === 'sideload') {
-    return isAppAvailable(appName)
-  } else if (runner === 'hyperplay') {
-    return isHpGameAvailable(appName)
-  }
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
-  if (runner === 'sideload') {
-    return getAppInfo(appName)
-  }
-  if (runner === 'hyperplay') {
-    return getHyperPlayGameInfo(appName)
-  }
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
   if (runner === 'legendary' && !LegendaryLibrary.get().hasGame(appName)) {
     return null
   }
-  try {
-    const game = getGame(appName, runner)
-    const info = game.getGameInfo()
-
-    if (!info.app_name) {
-      return null
-    }
-
-    return info
-  } catch (error) {
-    logError(error, LogPrefix.Backend)
-    return null
-  }
+  return gameManagerMap[runner].getGameInfo(appName)
 })
 
 ipcMain.handle('getExtraInfo', async (event, appName, runner) => {
-  if (runner === 'sideload' || runner === 'hyperplay') {
-    return null
-  }
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
   if (runner === 'legendary' && !LegendaryLibrary.get().hasGame(appName)) {
     return null
   }
-  try {
-    const game = getGame(appName, runner)
-    const extra = await game.getExtraInfo()
-    return extra
-  } catch (error) {
-    logError(error, LogPrefix.Backend)
-    return null
-  }
+  return gameManagerMap[runner].getExtraInfo(appName)
 })
 
 ipcMain.handle('getGameSettings', async (event, appName, runner) => {
   try {
-    if (runner === 'sideload') {
-      return await getAppSettings(appName)
-    }
-    return await getGame(appName, runner).getSettings()
+    return await gameManagerMap[runner].getSettings(appName)
   } catch (error) {
     logError(error, LogPrefix.Backend)
     return null
@@ -1052,39 +995,12 @@ ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
 
-export const isGameNative = (appName: string, runner: Runner) => {
-  gameManagerMap[runner].isNative(appName)
-  const isHyperPlayGame = runner === 'hyperplay'
-  const isSideloaded = runner === 'sideload'
-  let isNative = true
-  if (isSideloaded) {
-    isNative = isNativeApp(appName)
-  } else if (isHyperPlayGame) {
-    isNative = isHpGameNative(appName)
-  } else {
-    const extGame = getGame(appName, runner)
-    isNative = extGame.isNative()
-  }
-  return isNative
-}
-
 // get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
   async (event, { appName, launchArguments, runner }): StatusPromise => {
-    // TODO: split that into two stuff
-    const isHyperPlayGame = runner === 'hyperplay'
-    const isSideloaded = runner === 'sideload'
-    const extGame = getGame(appName, runner)
-    const game = isSideloaded
-      ? getAppInfo(appName)
-      : isHyperPlayGame
-      ? getHyperPlayGameInfo(appName)
-      : extGame.getGameInfo()
-    const gameSettings =
-      isSideloaded || isHyperPlayGame
-        ? await getAppSettings(appName)
-        : await extGame.getSettings()
+    const game = gameManagerMap[runner].getGameInfo(appName)
+    const gameSettings = await gameManagerMap[runner].getSettings(appName)
     const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
 
     const { title } = game
@@ -1110,7 +1026,12 @@ ipcMain.handle(
       })
       logInfo(`Downloading saves for ${title}`, LogPrefix.Backend)
       try {
-        await extGame.syncSaves('--skip-upload', savesPath, gogSaves)
+        await gameManagerMap[runner].syncSaves(
+          appName,
+          '--skip-upload',
+          savesPath,
+          gogSaves
+        )
         logInfo(`Saves for ${title} downloaded`, LogPrefix.Backend)
       } catch (error) {
         logError(
@@ -1139,10 +1060,7 @@ ipcMain.handle(
 
     const systemInfo = await getSystemInfo()
     const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
-    const logFileLocation =
-      isSideloaded || isHyperPlayGame
-        ? appLogFileLocation(appName)
-        : extGame.logFileLocation
+    const logFileLocation = getLogFileLocation(appName)
 
     writeFileSync(
       logFileLocation,
@@ -1155,7 +1073,7 @@ ipcMain.handle(
         '\n'
     )
 
-    const isNative = isGameNative(appName, runner)
+    const isNative = gameManagerMap[runner].isNative(appName)
 
     // check if isNative, if not, check if wine is valid
     if (!isNative) {
@@ -1181,10 +1099,7 @@ ipcMain.handle(
       }
     }
 
-    const command =
-      isSideloaded || isHyperPlayGame
-        ? launchApp(appName, runner)
-        : extGame.launch(launchArguments)
+    const command = gameManagerMap[runner].launch(appName, launchArguments)
 
     const launchResult = await command.catch((exception) => {
       logError(exception, LogPrefix.Backend)
@@ -1228,7 +1143,12 @@ ipcMain.handle(
 
       logInfo(`Uploading saves for ${title}`, LogPrefix.Backend)
       try {
-        await extGame.syncSaves('--skip-download', savesPath, gogSaves)
+        await gameManagerMap[runner].syncSaves(
+          appName,
+          '--skip-download',
+          savesPath,
+          gogSaves
+        )
         logInfo(`Saves uploaded for ${title}`, LogPrefix.Backend)
       } catch (error) {
         logError(
@@ -1284,14 +1204,12 @@ ipcMain.handle(
       properties: { game_name: appName, store_name: runner }
     })
 
-    const game = getGame(appName, runner)
-
-    const { title } = game.getGameInfo()
+    const { title } = gameManagerMap[runner].getGameInfo(appName)
 
     let uninstalled = false
 
     try {
-      await game.uninstall()
+      await gameManagerMap[runner].uninstall({ appName })
       uninstalled = true
     } catch (error) {
       trackEvent({
@@ -1311,7 +1229,7 @@ ipcMain.handle(
 
     if (uninstalled) {
       if (shouldRemovePrefix) {
-        const { winePrefix } = await game.getSettings()
+        const { winePrefix } = await gameManagerMap[runner].getSettings(appName)
         logInfo(`Removing prefix ${winePrefix}`, LogPrefix.Backend)
         // remove prefix if exists
         if (existsSync(winePrefix)) {
@@ -1364,11 +1282,10 @@ ipcMain.handle('repair', async (event, appName, runner) => {
     status: 'repairing'
   })
 
-  const game = getGame(appName, runner)
-  const { title } = game.getGameInfo()
+  const { title } = gameManagerMap[runner].getGameInfo(appName)
 
   try {
-    await game.repair()
+    await gameManagerMap[runner].repair(appName)
   } catch (error) {
     notify({
       title,
@@ -1395,11 +1312,10 @@ ipcMain.handle(
       status: 'moving'
     })
 
-    const game = getGame(appName, runner)
-    const { title } = game.getGameInfo()
+    const { title } = gameManagerMap[runner].getGameInfo(appName)
     notify({ title, body: i18next.t('notify.moving', 'Moving Game') })
 
-    const moveRes = await game.moveInstall(path)
+    const moveRes = await gameManagerMap[runner].moveInstall(appName, path)
     if (moveRes.status === 'error') {
       notify({
         title,
@@ -1470,8 +1386,11 @@ ipcMain.handle(
       if (runner === 'hyperplay') {
         gameManagerMap[runner].importGame(appName, path, platform)
       } else {
-        // @ts-expect-error find a way of proper typing this
-        const { abort, error } = await game.import(path, platform)
+        const { abort, error } = await gameManagerMap[runner].importGame(
+          appName,
+          path,
+          platform
+        )
         if (abort || error) {
           abortMessage()
           return { status: 'done' }
@@ -1499,8 +1418,7 @@ ipcMain.handle(
 
 ipcMain.handle('kill', async (event, appName, runner) => {
   callAbortController(appName)
-  if (runner === 'hyperplay') return stopHpGame(appName)
-  return runner === 'sideload' ? stop(appName) : getGame(appName, runner).stop()
+  return gameManagerMap[runner].stop(appName)
 })
 
 ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
@@ -1532,8 +1450,7 @@ ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
     return { status: 'error' }
   }
 
-  const game = getGame(appName, runner)
-  const { title } = game.getGameInfo()
+  const { title } = gameManagerMap[runner].getGameInfo(appName)
   notify({
     title,
     body: i18next.t('notify.update.started', 'Update Started')
@@ -1541,7 +1458,7 @@ ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
 
   let status: 'done' | 'error' = 'error'
   try {
-    status = (await game.update()).status
+    status = (await gameManagerMap[runner].update(appName)).status
   } catch (error) {
     logError(error, LogPrefix.Backend)
     notify({ title, body: i18next.t('notify.update.canceled') })
@@ -1561,19 +1478,7 @@ ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
 ipcMain.handle(
   'changeInstallPath',
   async (event, { appName, path, runner }) => {
-    let instance: LegendaryLibrary | GOGLibrary
-    switch (runner) {
-      case 'legendary':
-        instance = LegendaryLibrary.get()
-        break
-      case 'gog':
-        instance = GOGLibrary.get()
-        break
-      default:
-        logError(`Unsupported runner ${runner}`, LogPrefix.Backend)
-        return
-    }
-    instance.changeGameInstallPath(appName, path)
+    gameManagerMap[runner].moveInstall(appName, path)
     logInfo(`Finished moving ${appName} to ${path}.`, LogPrefix.Backend)
   }
 )
@@ -1614,7 +1519,7 @@ ipcMain.handle('egsSync', async (event, args) => {
 })
 
 ipcMain.handle('syncGOGSaves', async (event, gogSaves, appName, arg) =>
-  getGame(appName, 'gog').syncSaves(arg, '', gogSaves)
+  gameManagerMap['gog'].syncSaves(appName, arg, '', gogSaves)
 )
 
 ipcMain.handle(
@@ -1635,7 +1540,7 @@ ipcMain.handle(
       return 'App is offline, cannot sync saves!'
     }
 
-    const output = await getGame(appName, runner).syncSaves(arg, path)
+    const output = await gameManagerMap[runner].syncSaves(appName, arg, path)
     logInfo(output, LogPrefix.Backend)
     return output
   }
@@ -1765,11 +1670,7 @@ ipcMain.handle('getFonts', async (event, reload) => {
 ipcMain.handle(
   'runWineCommandForGame',
   async (event, { appName, commandParts, runner }) => {
-    const game = getGame(appName, runner)
-    const isSideloaded = runner === 'sideload'
-    const gameSettings = isSideloaded
-      ? await getAppSettings(appName)
-      : await game.getSettings()
+    const gameSettings = await gameManagerMap[runner].getSettings(appName)
 
     if (isWindows) {
       return execAsync(commandParts.join(' '))
@@ -1777,11 +1678,11 @@ ipcMain.handle(
     const { updated } = await verifyWinePrefix(gameSettings)
 
     if (runner === 'gog' && updated) {
-      await setup(game.appName)
+      await setup(appName)
     }
 
     // FIXME: Why are we using `runinprefix` here?
-    return game.runWineCommand({
+    return gameManagerMap[runner].runWineCommand(appName, {
       commandParts,
       wait: false,
       protonVerb: 'runinprefix'
@@ -1822,26 +1723,15 @@ ipcMain.handle('getThemeCSS', async (event, theme) => {
 ipcMain.on('addNewApp', (e, args) => addNewApp(args))
 
 ipcMain.handle('removeApp', async (e, args) => {
-  if (args.runner === 'sideload') {
-    removeApp(args)
-  } else {
-    uninstallHyperPlayGame(args.appName, args.shouldRemovePrefix)
-  }
+  gameManagerMap[args.runner].uninstall(args)
 })
 
 ipcMain.handle('launchApp', async (e, appName, runner) =>
-  launchApp(appName, runner)
+  gameManagerMap[runner].launch(appName)
 )
 
 ipcMain.handle('isNative', (e, { appName, runner }) => {
-  if (runner === 'sideload') {
-    return isNativeApp(appName)
-  }
-  if (runner === 'hyperplay') {
-    return isHpGameNative(appName)
-  }
-  const game = getGame(appName, runner)
-  return game.isNative()
+  return gameManagerMap[runner].isNative(appName)
 })
 
 function getDMElement(gameInfo: GameInfo, appName: string) {
@@ -1891,6 +1781,8 @@ import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import { trackEvent } from './metrics/metrics'
 import { GameManager } from 'common/types/game_manager'
+import { logFileLocation as getLogFileLocation } from './gameManagerCommon/games'
+import { addNewApp } from './sideload/library'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (
@@ -1967,11 +1859,7 @@ ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
 })
 
 ipcMain.handle('getHyperPlayGameInfo', async (_e, gameId) => {
-  const gameInfo = getHyperPlayGameInfo(gameId)
-  if (gameInfo) {
-    return gameInfo
-  }
-  return null
+  return gameManagerMap['hyperplay'].getGameInfo(gameId)
 })
 
 ipcMain.handle('getHyperPlayInstallInfo', async (_e, gameId, platform) => {
@@ -1981,9 +1869,3 @@ ipcMain.handle('getHyperPlayInstallInfo', async (_e, gameId, platform) => {
   }
   return null
 })
-
-// ipcMain.handle('installHyperPlayGame', async (_e, gameId: string,
-//   dirpath: string,
-//   platformToInstall: AppPlatforms) => {
-//   installHyperPlayGame(gameId, dirpath, platformToInstall)
-// }

@@ -9,16 +9,19 @@ import {
 } from 'common/types'
 import { GOGCloudSavesLocation } from './gog'
 
-export interface GameManagerBase {
-  getSettings: () => Promise<GameSettings>
-}
-
 export interface InstallResult {
   status: 'done' | 'error' | 'abort'
   error?: string
 }
 
+export type RemoveArgs = {
+  appName: string
+  shouldRemovePrefix?: boolean
+  deleteFiles?: boolean
+}
+
 export interface GameManager {
+  getSettings: (appName: string) => Promise<GameSettings>
   getGameInfo: (appName: string) => GameInfo
   getExtraInfo: (appName: string) => Promise<ExtraInfo>
   hasUpdate: (appName: string) => Promise<boolean>
@@ -49,7 +52,7 @@ export interface GameManager {
     path: string,
     gogSaves?: GOGCloudSavesLocation[]
   ) => Promise<string>
-  uninstall: (appName: string) => Promise<ExecResult>
+  uninstall: (args: RemoveArgs) => Promise<ExecResult>
   update: (appName: string) => Promise<{ status: 'done' | 'error' }>
   runWineCommand: (
     appName: string,

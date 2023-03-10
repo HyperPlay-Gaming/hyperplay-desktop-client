@@ -5,7 +5,8 @@ import {
   GameInfo,
   ExtraInfo,
   ExecResult,
-  WineCommandArgs
+  WineCommandArgs,
+  GameSettings
 } from './../../common/types'
 import { getBinExecIfExists } from 'backend/hyperplay/library'
 import { InstallPlatform } from 'common/types'
@@ -29,14 +30,18 @@ import {
 } from 'backend/utils/aborthandler/aborthandler'
 import { removeFromQueue } from 'backend/downloadmanager/downloadqueue'
 import { handleArchAndPlatform } from './utils'
-import { getAppSettings } from 'backend/sideload/games'
+import { getSettings as getSettingsSideload } from 'backend/sideload/games'
 import {
   addShortcuts as addShortcutsUtil,
   removeShortcuts as removeShortcutsUtil
 } from '../shortcuts/shortcuts/shortcuts'
-import { InstallResult } from 'common/types/game_manager'
+import { InstallResult, RemoveArgs } from 'common/types/game_manager'
 import { GOGCloudSavesLocation } from 'common/types/gog'
 import { launchGame } from 'backend/gameManagerCommon/games'
+
+export async function getSettings(appName: string): Promise<GameSettings> {
+  return getSettingsSideload(appName)
+}
 
 export const isGameAvailable = (appName: string) => {
   const hpGameInfo = getGameInfo(appName)
@@ -371,6 +376,7 @@ export async function uninstallHyperPlayGame(
 
   // remove game folder from install path
   const installPath = appInfo.install.install_path
+  if (appInfo.folder_name === undefined) return
   const gameFolder = path.join(installPath, appInfo.folder_name)
 
   rmSync(gameFolder, { recursive: true, force: true })
@@ -397,7 +403,7 @@ export async function uninstallHyperPlayGame(
   hpLibraryStore.set('games', currentLibrary)
 
   if (shouldRemovePrefix) {
-    const { winePrefix } = await getAppSettings(appName)
+    const { winePrefix } = await getSettings(appName)
 
     logInfo(`Removing prefix ${winePrefix}`, LogPrefix.Backend)
     if (existsSync(winePrefix)) {
@@ -489,7 +495,7 @@ export async function repair(appName: string): Promise<ExecResult> {
   return { stderr: '', stdout: '' }
 }
 
-export async function uninstall(appName: string): Promise<ExecResult> {
+export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
   logWarning(
     `uninstall not implemented on HyperPlay Game Manager. called for appName = ${appName}`
   )

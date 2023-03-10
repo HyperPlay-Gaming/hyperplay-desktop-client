@@ -16,7 +16,11 @@ import {
 } from 'common/types'
 import { GameConfig } from '../game_config'
 import { GlobalConfig } from '../config'
-import { LegendaryLibrary, runLegendaryCommand } from './library'
+import {
+  LegendaryLibrary,
+  runLegendaryCommand,
+  getInstallInfo
+} from './library'
 import { LegendaryUser } from './user'
 import {
   getLegendaryBin,
@@ -58,6 +62,8 @@ import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { gameAnticheatInfo } from '../anticheat/utils'
 import { Catalog, Product } from 'common/types/epic-graphql'
 import { sendFrontendMessage } from '../main_window'
+import { RemoveArgs } from 'common/types/game_manager'
+import { logFileLocation } from 'backend/gameManagerCommon/games'
 
 /**
  * Alias for `LegendaryLibrary.listUpdateableGames`
@@ -90,18 +96,6 @@ export function getGameInfo(appName: string): GameInfo {
     return {}
   }
   return info
-}
-
-/**
- * Alias for `LegendaryLibrary.getInstallInfo(this.appName)`
- *
- * @returns InstallInfo
- */
-export async function getInstallInfo(
-  appName: string,
-  installPlatform: InstallPlatform
-) {
-  return LegendaryLibrary.get().getInstallInfo(appName, installPlatform)
 }
 
 async function getProductSlug(namespace: string, title: string) {
@@ -251,25 +245,27 @@ function slugFromTitle(title: string): string {
     .replaceAll(' ', '-')
 }
 
+const emptyExtraInfo = {
+  about: {
+    description: '',
+    shortDescription: ''
+  },
+  reqs: [],
+  storeUrl: ''
+}
 /**
  * Get extra info from Epic's API.
  *
  */
 export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   const { namespace, title } = getGameInfo(appName)
+  if (namespace === undefined) return emptyExtraInfo
   const cachedExtraInfo = gameInfoStore.get_nodefault(namespace)
   if (cachedExtraInfo) {
     return cachedExtraInfo
   }
   if (!isOnline()) {
-    return {
-      about: {
-        description: '',
-        shortDescription: ''
-      },
-      reqs: [],
-      storeUrl: ''
-    }
+    return emptyExtraInfo
   }
 
   const slug = await getProductSlug(namespace, title)
@@ -644,7 +640,7 @@ export async function install(
   return { status: 'done' }
 }
 
-export async function uninstall(appName: string): Promise<ExecResult> {
+export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
   const commandParts = ['uninstall', appName, '-y']
 
   const res = await runLegendaryCommand(
@@ -1007,10 +1003,6 @@ export async function stop(appName: string) {
   // @adityaruplaha: this is kinda arbitary and I don't understand it.
   const pattern = process.platform === 'linux' ? appName : 'legendary'
   killPattern(pattern)
-}
-
-function logFileLocation(appName: string) {
-  return join(gamesConfigPath, `${appName}-lastPlay.log`)
 }
 
 export function isGameAvailable(appName: string) {

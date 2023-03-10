@@ -18,7 +18,7 @@ import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
-import { isGameNative } from 'backend/main'
+import { gameManagerMap } from 'backend/main'
 const buildDir = resolve(__dirname, '../../build')
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -28,7 +28,7 @@ export async function getAppSettings(appName: string): Promise<GameSettings> {
   )
 }
 
-export function appLogFileLocation(appName: string) {
+export function logFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
 }
 
@@ -94,7 +94,7 @@ export async function launchGame(
   const { launcherArgs } = gameSettings
 
   if (executable) {
-    const isNative = isGameNative(appName, runner)
+    const isNative = gameManagerMap[runner].isNative(appName)
     const {
       success: launchPrepSuccess,
       failureReason: launchPrepFailReason,
@@ -113,7 +113,7 @@ export async function launchGame(
 
     if (!launchPrepSuccess) {
       appendFileSync(
-        appLogFileLocation(appName),
+        logFileLocation(appName),
         `Launch aborted: ${launchPrepFailReason}`
       )
       showDialogBoxModalAuto({
@@ -158,7 +158,7 @@ export async function launchGame(
         {
           env,
           wrappers,
-          logFile: appLogFileLocation(appName),
+          logFile: logFileLocation(appName),
           logMessagePrefix: LogPrefix.Backend
         }
       )
@@ -183,7 +183,7 @@ export async function launchGame(
       startFolder: folder_name,
       options: {
         wrappers,
-        logFile: appLogFileLocation(appName),
+        logFile: logFileLocation(appName),
         logMessagePrefix: LogPrefix.Backend
       }
     })

@@ -2,7 +2,7 @@ import {
   createAbortController,
   deleteAbortController
 } from '../utils/aborthandler/aborthandler'
-import { GOGLibrary, runGogdlCommand } from './library'
+import { GOGLibrary, runGogdlCommand, getInstallInfo } from './library'
 import { join } from 'path'
 import { GameConfig } from '../game_config'
 import { GlobalConfig } from '../config'
@@ -48,14 +48,12 @@ import {
 import setup from './setup'
 import { removeNonSteamGame } from '../shortcuts/nonesteamgame/nonesteamgame'
 import shlex from 'shlex'
-import {
-  GOGCloudSavesLocation,
-  GogInstallInfo,
-  GogInstallPlatform
-} from 'common/types/gog'
+import { GOGCloudSavesLocation, GogInstallPlatform } from 'common/types/gog'
 import { t } from 'i18next'
 import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { sendFrontendMessage } from '../main_window'
+import { RemoveArgs } from 'common/types/game_manager'
+import { logFileLocation } from 'backend/gameManagerCommon/games'
 
 export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   const gameInfo = getGameInfo(appName)
@@ -70,7 +68,7 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   }
 
   const extra: ExtraInfo = {
-    about: gameInfo.extra.about,
+    about: gameInfo.extra?.about,
     reqs: await GOGLibrary.get().createReqsArray(appName, targetPlatform),
     storeUrl: gameInfo.store_url
   }
@@ -94,45 +92,7 @@ export function getGameInfo(appName: string): GameInfo {
   return info
 }
 
-function handleRunnersPlatforms(platform: InstallPlatform): InstallPlatform {
-  switch (platform) {
-    case 'Mac':
-      return 'osx'
-    case 'Windows':
-      return 'windows'
-    // GOG doesn't have a linux platform, so we need to get the information as windows
-    case 'linux':
-      return 'windows'
-    default:
-      return platform
-  }
-}
-
-async function getInstallInfo(
-  appName: string,
-  installPlatform: InstallPlatform = 'windows'
-): Promise<GogInstallInfo> {
-  const info = await GOGLibrary.get().getInstallInfo(
-    appName,
-    handleRunnersPlatforms(installPlatform)
-  )
-  if (!info) {
-    logWarning(
-      [
-        'Failed to get Install Info for',
-        `${appName}`,
-        `using ${installPlatform} as platform,`,
-        'returning empty object'
-      ],
-      LogPrefix.Gog
-    )
-    // @ts-expect-error TODO: Handle this better
-    return {}
-  }
-  return info
-}
-
-async function getSettings(appName: string): Promise<GameSettings> {
+export async function getSettings(appName: string): Promise<GameSettings> {
   return (
     GameConfig.get(appName).config ||
     (await GameConfig.get(appName).getSettings())
@@ -345,6 +305,7 @@ export async function install(
     ? await GOGLibrary.getLinuxInstallerInfo(appName)
     : null
 
+  if (gameInfo.folder_name === undefined) return { status: 'error' }
   const installedData: InstalledInfo = {
     platform: installPlatform,
     executable: '',
@@ -404,10 +365,6 @@ export async function addShortcuts(appName: string, fromMenu?: boolean) {
 
 export async function removeShortcuts(appName: string) {
   return removeShortcutsUtil(getGameInfo(appName))
-}
-
-function logFileLocation(appName: string) {
-  return join(gamesConfigPath, `${appName}-lastPlay.log`)
 }
 
 export async function launch(
@@ -694,7 +651,7 @@ export async function syncSaves(
   return fullOutput
 }
 
-export async function uninstall(appName: string): Promise<ExecResult> {
+export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
   const array = installedGamesStore.get('installed', [])
   const index = array.findIndex((game) => game.appName === appName)
   if (index === -1) {
