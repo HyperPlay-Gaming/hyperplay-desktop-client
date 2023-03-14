@@ -325,7 +325,8 @@
                         "details": "Create an encrypted communication channel. Your keys will never be shared with HyperPlay.",
                         "dontHaveWallet": "Don’t have a wallet?",
                         "getMetamask": "Get MetaMask",
-                        "title": "Scan QR with "
+                        "title": "Scan QR with ",
+                        "updateWarning": "Having issues? Make sure MetaMask is up to date."
                     }
                 },
                 "title": "Wallet Connections"
