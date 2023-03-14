@@ -17,13 +17,19 @@ export default function Anticheat({ gameInfo }: Props) {
   const [anticheatInfo, setAnticheatInfo] = useState<AntiCheatInfo | null>(null)
 
   useEffect(() => {
-    if (gameInfo.runner !== 'sideload' && gameInfo.title) {
-      window.api
-        .getAnticheatInfo(gameInfo.namespace)
-        .then((anticheatInfo: AntiCheatInfo | null) => {
-          setAnticheatInfo(anticheatInfo)
-        })
+    const antiCheatRunners = ['legendary', 'gog']
+    const shouldFetch =
+      antiCheatRunners.includes(gameInfo.runner) && gameInfo.title
+
+    if (!shouldFetch) {
+      return
     }
+    const info = gameInfo as GameInfo
+    window.api
+      .getAnticheatInfo(info.namespace)
+      .then((anticheatInfo: AntiCheatInfo | null) => {
+        setAnticheatInfo(anticheatInfo)
+      })
   }, [gameInfo])
 
   if (!anticheatInfo) {
