@@ -20,7 +20,7 @@ import ExtensionHandler from './ExtensionHandler'
 import MetaMaskHome from './screens/MetaMaskHome'
 import MetaMaskPortfolio from './screens/MetaMaskPortfolio'
 import ExtensionManager from './ExtensionManager'
-import onboardingStore from './store/OnboardingStore'
+import onboardingStore, { OnboardingStoreController } from './store/OnboardingStore'
 import { observer } from 'mobx-react-lite'
 import TransactionNotification from './screens/TransactionNotification'
 import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
@@ -82,6 +82,7 @@ function App() {
         </div>
       </HashRouter>
       <TransactionNotification />
+      <OnboardingStoreController />
       {onboardingStore.isOnboardingOpen && (
         <Onboarding
           disableOnboarding={() => {

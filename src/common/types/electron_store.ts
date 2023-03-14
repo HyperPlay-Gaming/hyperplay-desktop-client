@@ -16,7 +16,8 @@ import {
   WineManagerUISettings,
   AppSettings,
   WikiInfo,
-  MetricsOptInStatus
+  MetricsOptInStatus,
+  Web3ProviderType
 } from 'common/types'
 import { GamesDBData, GogInstallInfo, UserData } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
@@ -127,6 +128,9 @@ export interface StoreStructure {
   }
   hpInstalledGamesStore: {
     installed: InstalledInfo[]
+  }
+  providerMetadata: {
+    currentWeb3Provider: Web3ProviderType
   }
 }
 

@@ -29,6 +29,7 @@ import StatusScreen, { CONNECTION_STATUS } from './screens/status'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ONBOARDING_SCREEN } from '../types'
+import defaultProviderStore from 'frontend/store/storage/providerStore'
 
 enum WALLET_SELECTION_DETAILS_SCREEN {
   INFO = 'INFO',
@@ -127,6 +128,10 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
   }, [contentParams])
 
   async function handleImportMmExtensionClicked(dbPath?: string | null) {
+    if (dbPath !== undefined) {
+      defaultProviderStore.set('currentWeb3Provider', 'extension')
+    }
+
     if (dbPath === null) {
       window.api.createNewMetaMaskWallet()
     } else {
