@@ -440,7 +440,7 @@ class GlobalState extends PureComponent<Props> {
     const updatedSideload = sideloadLibrary.get('games', [])
     const updatedHyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
     const hiddenGames = configStore.get('games.hidden', [])
-    console.log(hiddenGames)
+
     this.setState({
       epic: {
         library: epicLibrary,
