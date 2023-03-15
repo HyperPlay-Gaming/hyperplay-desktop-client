@@ -57,7 +57,7 @@ function getGameAnticheatInfoFromLocal(
   return jsonData?.find((info: AntiCheatInfo) => {
     const namespace = info.storeIds.epic?.namespace
     if (namespace) {
-      return namespace.toLowerCase().includes(appNamespace)
+      return namespace.toLowerCase() === appNamespace
     } else {
       return false
     }
