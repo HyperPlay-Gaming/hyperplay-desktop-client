@@ -999,10 +999,6 @@ export async function updateAllGames() {
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export async function getGames(fullRefresh?: boolean) {
-  logWarning(`getGames not implemented on GOG Library Manager`)
-  return []
-}
 
 export function installState(appName: string, state: boolean) {
   logWarning(`installState not implemented on GOG Library Manager`)

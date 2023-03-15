@@ -326,7 +326,6 @@ class GlobalState extends PureComponent<Props> {
   handleSuccessfulLogin = (runner: Runner) => {
     this.handleCategory('all')
     this.refreshLibrary({
-      fullRefresh: true,
       runInBackground: false,
       library: runner
     })
@@ -465,7 +464,6 @@ class GlobalState extends PureComponent<Props> {
 
   refreshLibrary = async ({
     checkForUpdates,
-    fullRefresh,
     runInBackground = true,
     library = undefined
   }: RefreshOptions): Promise<void> => {
@@ -477,7 +475,7 @@ class GlobalState extends PureComponent<Props> {
     })
     window.api.logInfo('Refreshing Library')
     try {
-      await window.api.refreshLibrary(fullRefresh, library)
+      await window.api.refreshLibrary(library)
       return await this.refresh(library, checkForUpdates)
     } catch (error) {
       window.api.logError(`${error}`)
@@ -646,7 +644,6 @@ class GlobalState extends PureComponent<Props> {
     window.api.handleRefreshLibrary(async (e: Event, runner: Runner) => {
       this.refreshLibrary({
         checkForUpdates: false,
-        fullRefresh: true,
         runInBackground: true,
         library: runner
       })
@@ -670,7 +667,6 @@ class GlobalState extends PureComponent<Props> {
     if (legendaryUser || gogUser) {
       this.refreshLibrary({
         checkForUpdates: true,
-        fullRefresh: true,
         runInBackground: Boolean(epic.library.length)
       })
     }

@@ -66,7 +66,7 @@ export function loadGamesInAccount() {
 /**
  * Refresh games in the user's library.
  */
-export async function refresh(): Promise<ExecResult> {
+async function refreshLegendary(): Promise<ExecResult> {
   logInfo('Refreshing Epic Games...', LogPrefix.Legendary)
   const epicOffline = await isEpicServiceOffline()
   if (epicOffline) {
@@ -121,16 +121,14 @@ export function refreshInstalled() {
  * @param fullRefresh Reload from Legendary.
  * @returns Array of objects.
  */
-export async function getGames(fullRefresh = false): Promise<GameInfo[]> {
+export async function refresh(): Promise<GameInfo[]> {
   logInfo('Refreshing library...', LogPrefix.Legendary)
   const isLoggedIn = LegendaryUser.isLoggedIn()
   if (!isLoggedIn) {
     return []
   }
 
-  if (fullRefresh) {
-    refresh()
-  }
+  refreshLegendary()
   loadGamesInAccount()
   refreshInstalled()
 

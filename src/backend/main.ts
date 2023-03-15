@@ -996,20 +996,15 @@ if (existsSync(installed)) {
   })
 }
 
-ipcMain.handle('refreshLibrary', async (e, fullRefresh = false, library?) => {
-  switch (library) {
-    case 'legendary':
-      await libraryManagerMap['legendary'].getGames(fullRefresh)
-      break
-    case 'gog':
-      await libraryManagerMap['gog'].refresh()
-      break
-    default:
-      await Promise.allSettled([
-        libraryManagerMap['legendary'].getGames(fullRefresh),
-        libraryManagerMap['gog'].refresh()
-      ])
-      break
+ipcMain.handle('refreshLibrary', async (e, library?) => {
+  if (library !== undefined && library !== 'all') {
+    await libraryManagerMap[library].refresh()
+  } else {
+    const allRefreshPromises = []
+    for (const runner_i in libraryManagerMap) {
+      allRefreshPromises.push(libraryManagerMap[runner_i].refresh())
+    }
+    await Promise.allSettled(allRefreshPromises)
   }
 })
 

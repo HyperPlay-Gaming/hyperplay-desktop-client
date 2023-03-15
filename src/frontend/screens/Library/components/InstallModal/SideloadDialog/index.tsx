@@ -181,8 +181,7 @@ export default function SideloadDialog({
 
     await refreshLibrary({
       runInBackground: true,
-      checkForUpdates: true,
-      fullRefresh: true
+      checkForUpdates: true
     })
     return backdropClick()
   }

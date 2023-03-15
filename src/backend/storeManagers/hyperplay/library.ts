@@ -123,18 +123,71 @@ export async function updateAllGames() {
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-export async function getGames(fullRefresh?: boolean) {
-  logWarning(`getGames not implemented on HyperPlay Library Manager`)
-  return []
-}
 
 export function installState(appName: string, state: boolean) {
   logWarning(`installState not implemented on HyperPlay Library Manager`)
 }
 
+/**
+ * Refreshes the game info for a game
+ * @param appId the id of the game
+ * @returns void
+ **/
+export async function refreshHPGameInfo(appId: string): Promise<void> {
+  const gameIdUrl = `https://developers.hyperplay.xyz/api/listings?id=${appId}`
+  const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
+  const gameIndex = currentLibrary.findIndex((val) => val.app_name === appId)
+  if (gameIndex === -1) {
+    return
+  }
+  const currentInfo = currentLibrary[gameIndex]
+  const res = await axios.get<HyperPlayRelease>(gameIdUrl)
+  const data = res.data
+  const gameInfo: GameInfo = {
+    ...currentInfo,
+    extra: {
+      ...currentInfo.extra,
+      about: {
+        description: data.projectMeta.description,
+        shortDescription: data.projectMeta.short_description
+      },
+      reqs: [
+        {
+          minimum: JSON.stringify(data.projectMeta.systemRequirements),
+          recommended: JSON.stringify(data.projectMeta.systemRequirements),
+          title: data.projectMeta.name
+        }
+      ]
+    },
+    art_square:
+      data.projectMeta.main_capsule ||
+      data.releaseMeta.image ||
+      currentInfo.art_square,
+    art_cover:
+      data.releaseMeta.image ||
+      data.projectMeta.main_capsule ||
+      currentInfo.art_cover
+  }
+  currentLibrary[gameIndex] = gameInfo
+  return hpLibraryStore.set('games', currentLibrary)
+}
+
+/**
+ * Refreshes the entire library
+ * this is a very expensive operation
+ * and should be used sparingly
+ * it is recommended to use `refreshHPGameInfo` instead
+ * if you only want to refresh a single game
+ * this is only used when the user clicks the refresh button
+ * in the library
+ **/
 export async function refresh() {
-  logWarning(`refresh not implemented on HyperPlay Library Manager`)
-  return null
+  const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
+  const currentLibraryIds = currentLibrary.map((val) => val.app_name)
+  for (const gameId of currentLibraryIds) {
+    await refreshHPGameInfo(gameId)
+  }
+  return
 }
 
 export function refreshInstalled() {

@@ -218,10 +218,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   readConfig: (config_class: 'library' | 'user') => Promise<GameInfo[] | string>
   requestSettings: (appName: string) => Promise<AppSettings | GameSettings>
   writeConfig: (args: { appName: string; config: Partial<AppSettings> }) => void
-  refreshLibrary: (
-    fullRefresh?: boolean,
-    library?: Runner | 'all'
-  ) => Promise<void>
+  refreshLibrary: (library?: Runner | 'all') => Promise<void>
   launch: (args: LaunchParams) => StatusPromise
   openDialog: (args: OpenDialogOptions) => Promise<string | false>
   install: (
