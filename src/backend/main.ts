@@ -826,6 +826,7 @@ ipcMain.handle('getGameInfo', async (event, appName, runner) => {
   if (runner === 'hyperplay') {
     return getHyperPlayGameInfo(appName)
   }
+
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
   if (runner === 'legendary' && !LegendaryLibrary.get().hasGame(appName)) {
     return null
@@ -1992,3 +1993,18 @@ ipcMain.handle('getHyperPlayInstallInfo', async (_e, gameId, platform) => {
 //   platformToInstall: AppPlatforms) => {
 //   installHyperPlayGame(gameId, dirpath, platformToInstall)
 // }
+
+ipcMain.handle(
+  'isGameHidden',
+  async (_e, gameId) =>
+    !!configStore
+      .get('games.hidden', [])
+      .find(({ appName }) => appName === gameId)
+)
+
+ipcMain.handle('unhideGame', async (_e, gameId) => {
+  const hiddenGames = configStore.get('games.hidden', [])
+  const newHiddenGames = hiddenGames.filter(({ appName }) => appName !== gameId)
+  configStore.set('games.hidden', newHiddenGames)
+  sendFrontendMessage('refreshLibrary', true, 'hyperplay')
+})
