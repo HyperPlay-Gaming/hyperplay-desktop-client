@@ -1871,3 +1871,18 @@ ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
   console.log('addHyperplayGame', gameId)
   addGameToLibrary(gameId)
 })
+
+ipcMain.handle(
+  'isGameHidden',
+  async (_e, gameId) =>
+    !!configStore
+      .get('games.hidden', [])
+      .find(({ appName }) => appName === gameId)
+)
+
+ipcMain.handle('unhideGame', async (_e, gameId) => {
+  const hiddenGames = configStore.get('games.hidden', [])
+  const newHiddenGames = hiddenGames.filter(({ appName }) => appName !== gameId)
+  configStore.set('games.hidden', newHiddenGames)
+  sendFrontendMessage('refreshLibrary', true, 'hyperplay')
+})

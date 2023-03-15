@@ -162,6 +162,8 @@ interface HyperPlayAsyncIPCFunctions {
     payload: JsonRpcRequest,
     callback: JsonRpcCallback
   ) => Promise<unknown>
+  isGameHidden: (gameId: string) => Promise<boolean>
+  unhideGame: (gameId: string) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
