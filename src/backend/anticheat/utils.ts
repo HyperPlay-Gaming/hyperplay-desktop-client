@@ -32,7 +32,6 @@ async function downloadAntiCheatData() {
 
   runOnceWhenOnline(async () => {
     try {
-      console.log
       const getResult = await axios.default.get(
         'https://raw.githubusercontent.com/Starz0r/AreWeAntiCheatYet/HEAD/games.json'
       )
