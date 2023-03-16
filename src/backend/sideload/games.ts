@@ -203,7 +203,7 @@ export async function launchApp(
     install: { executable }
   } = gameInfo
 
-  const { folder_name, browserUrl } = gameInfo
+  const { browserUrl } = gameInfo
 
   const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
   if (
@@ -298,16 +298,13 @@ export async function launchApp(
       return true
     }
 
-    logInfo(
-      `launching non-native sideloaded: ${executable}}`,
-      LogPrefix.Backend
-    )
+    logInfo(`launching non-native sideloaded: ${executable}`, LogPrefix.Backend)
 
     await runWineCommand({
       commandParts: [executable, launcherArgs ?? ''],
       gameSettings,
       wait: false,
-      startFolder: folder_name,
+      startFolder: dirname(executable),
       options: {
         wrappers,
         logFile: appLogFileLocation(appName),
