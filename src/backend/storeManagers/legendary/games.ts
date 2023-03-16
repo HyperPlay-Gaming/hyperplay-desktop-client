@@ -378,39 +378,31 @@ export function onInstallOrUpdateOutput(
     currentDownloadSize[appName] = parseFloat(downloadSizeMatch[1])
   }
 
-  // parse log for eta
-  if (tmpProgress[appName].eta === '') {
-    const etaMatch = data.match(/ETA: (\d\d:\d\d:\d\d)/m)
-    tmpProgress[appName].eta =
-      etaMatch && etaMatch?.length >= 2 ? etaMatch[1] : ''
+  if (!Object.hasOwn(tmpProgress, appName)) {
+    tmpProgress[appName] = defaultTmpProgress
   }
+
+  // parse log for eta
+  const etaMatch = data.match(/ETA: (\d\d:\d\d:\d\d)/m)
+  tmpProgress[appName].eta =
+    etaMatch && etaMatch?.length >= 2 ? etaMatch[1] : ''
 
   // parse log for game download progress
-  if (tmpProgress[appName].bytes === '') {
-    const bytesMatch = data.match(/Downloaded: (\S+.) MiB/m)
-    tmpProgress[appName].bytes =
-      bytesMatch && bytesMatch?.length >= 2 ? `${bytesMatch[1]}MB` : ''
-  }
+  const bytesMatch = data.match(/Downloaded: (\S+.) MiB/m)
+  tmpProgress[appName].bytes =
+    bytesMatch && bytesMatch?.length >= 2 ? `${bytesMatch[1]}MB` : ''
 
   // parse log for download speed
-  if (!tmpProgress[appName].downSpeed) {
-    const downSpeedMBytes = data.match(/Download\t- (\S+.) MiB/m)
-    tmpProgress[appName].downSpeed = !Number.isNaN(
-      Number(downSpeedMBytes?.at(1))
-    )
-      ? Number(downSpeedMBytes?.at(1))
-      : undefined
-  }
+  const downSpeedMBytes = data.match(/Download\t- (\S+.) MiB/m)
+  tmpProgress[appName].downSpeed = !Number.isNaN(Number(downSpeedMBytes?.at(1)))
+    ? Number(downSpeedMBytes?.at(1))
+    : undefined
 
   // parse disk write speed
-  if (!tmpProgress[appName].diskSpeed) {
-    const diskSpeedMBytes = data.match(/Disk\t- (\S+.) MiB/m)
-    tmpProgress[appName].diskSpeed = !Number.isNaN(
-      Number(diskSpeedMBytes?.at(1))
-    )
-      ? Number(diskSpeedMBytes?.at(1))
-      : undefined
-  }
+  const diskSpeedMBytes = data.match(/Disk\t- (\S+.) MiB/m)
+  tmpProgress[appName].diskSpeed = !Number.isNaN(Number(diskSpeedMBytes?.at(1)))
+    ? Number(diskSpeedMBytes?.at(1))
+    : undefined
 
   // original is in bytes, convert to MiB with 2 decimals
   totalDownloadSize = Math.round((totalDownloadSize / 1024 / 1024) * 100) / 100
@@ -660,6 +652,7 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
     const gameInfo = getGameInfo(appName)
     await removeNonSteamGame({ gameInfo })
   }
+  sendFrontendMessage('refreshLibrary', 'legendary')
   return res
 }
 

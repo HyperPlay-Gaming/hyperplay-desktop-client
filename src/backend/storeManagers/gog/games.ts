@@ -162,48 +162,37 @@ export function onInstallOrUpdateOutput(
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   totalDownloadSize = -1
 ) {
-  // parse log for percent
-  if (!tmpProgress.percent) {
-    const percentMatch = data.match(/Progress: (\d+\.\d+) /m)
-
-    tmpProgress[appName].percent = !Number.isNaN(Number(percentMatch?.at(1)))
-      ? Number(percentMatch?.at(1))
-      : undefined
+  if (!Object.hasOwn(tmpProgress, appName)) {
+    tmpProgress[appName] = defaultTmpProgress
   }
+  // parse log for percent
+  const percentMatch = data.match(/Progress: (\d+\.\d+) /m)
+
+  tmpProgress[appName].percent = !Number.isNaN(Number(percentMatch?.at(1)))
+    ? Number(percentMatch?.at(1))
+    : undefined
 
   // parse log for eta
-  if (tmpProgress[appName].eta === '') {
-    const etaMatch = data.match(/ETA: (\d\d:\d\d:\d\d)/m)
-    tmpProgress[appName].eta =
-      etaMatch && etaMatch?.length >= 2 ? etaMatch[1] : ''
-  }
+  const etaMatch = data.match(/ETA: (\d\d:\d\d:\d\d)/m)
+  tmpProgress[appName].eta =
+    etaMatch && etaMatch?.length >= 2 ? etaMatch[1] : ''
 
   // parse log for game download progress
-  if (tmpProgress[appName].bytes === '') {
-    const bytesMatch = data.match(/Downloaded: (\S+) MiB/m)
-    tmpProgress[appName].bytes =
-      bytesMatch && bytesMatch?.length >= 2 ? `${bytesMatch[1]}MB` : ''
-  }
+  const bytesMatch = data.match(/Downloaded: (\S+) MiB/m)
+  tmpProgress[appName].bytes =
+    bytesMatch && bytesMatch?.length >= 2 ? `${bytesMatch[1]}MB` : ''
 
   // parse log for download speed
-  if (!tmpProgress.downSpeed) {
-    const downSpeedMBytes = data.match(/Download\t- (\S+.) MiB/m)
-    tmpProgress[appName].downSpeed = !Number.isNaN(
-      Number(downSpeedMBytes?.at(1))
-    )
-      ? Number(downSpeedMBytes?.at(1))
-      : undefined
-  }
+  const downSpeedMBytes = data.match(/Download\t- (\S+.) MiB/m)
+  tmpProgress[appName].downSpeed = !Number.isNaN(Number(downSpeedMBytes?.at(1)))
+    ? Number(downSpeedMBytes?.at(1))
+    : undefined
 
   // parse disk write speed
-  if (!tmpProgress.diskSpeed) {
-    const diskSpeedMBytes = data.match(/Disk\t- (\S+.) MiB/m)
-    tmpProgress[appName].diskSpeed = !Number.isNaN(
-      Number(diskSpeedMBytes?.at(1))
-    )
-      ? Number(diskSpeedMBytes?.at(1))
-      : undefined
-  }
+  const diskSpeedMBytes = data.match(/Disk\t- (\S+.) MiB/m)
+  tmpProgress[appName].diskSpeed = !Number.isNaN(Number(diskSpeedMBytes?.at(1)))
+    ? Number(diskSpeedMBytes?.at(1))
+    : undefined
 
   // only send to frontend if all values are updated
   if (
@@ -294,21 +283,36 @@ export async function install(
   }
 
   if (res.error) {
-    logError(['Failed to install', `${appName}:`, res.error], LogPrefix.Gog)
+    logError(
+      ['Failed to install GOG game ', `${appName}:`, res.error],
+      LogPrefix.Gog
+    )
     return { status: 'error', error: res.error }
   }
 
   // Installation succeded
   // Save new game info to installed games store
   const installInfo = await getInstallInfo(installPlatform)
-  if (installInfo === undefined) return { status: 'error' }
+  if (installInfo === undefined) {
+    logInfo(
+      'install info is undefined in GOG install so returning error',
+      LogPrefix.Gog
+    )
+    return { status: 'error' }
+  }
   const gameInfo = getGameInfo(appName)
   const isLinuxNative = installPlatform === 'linux'
   const additionalInfo = isLinuxNative
     ? await getLinuxInstallerInfo(appName)
     : null
 
-  if (gameInfo.folder_name === undefined) return { status: 'error' }
+  if (gameInfo.folder_name === undefined) {
+    logInfo(
+      'game info folde is undefined in GOG install so returning error',
+      LogPrefix.Gog
+    )
+    return { status: 'error' }
+  }
   const installedData: InstalledInfo = {
     platform: installPlatform,
     executable: '',
