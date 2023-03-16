@@ -1134,7 +1134,7 @@ export async function downloadFileWithAxios(
   const writer = createWriteStream(destPath)
 
   const response: AxiosResponse = await axios({
-    url,
+    url: encodeURI(url),
     method: 'GET',
     responseType: 'stream',
     signal: abortController.signal

@@ -175,6 +175,8 @@
     },
     "status": {
         "clickToUpdate": "Click to Update",
+        "downloading": "Downloading",
+        "extracting": "Extracting",
         "gameNotAvailable": "Game not available",
         "hasUpdates": "New Version Available!",
         "installed": "Installed",

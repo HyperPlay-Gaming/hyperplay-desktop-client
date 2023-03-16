@@ -189,7 +189,7 @@ export type Status =
   | 'notSupportedGame'
   | 'notInstalled'
   | 'installed'
-  | 'unzipping'
+  | 'extracting'
 
 export interface GameStatus {
   appName: string

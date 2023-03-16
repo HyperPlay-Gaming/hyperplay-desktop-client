@@ -151,7 +151,8 @@ const installDistributables = async (gamePath: string) => {
 async function downloadGame(
   appName: string,
   installPath: string,
-  platformInfo: PlatformInfo
+  platformInfo: PlatformInfo,
+  zipName: string
 ): Promise<void> {
   const appInfo = getGameInfo(appName)
 
@@ -170,14 +171,14 @@ async function downloadGame(
 
   // prevent from the next download being named eg. "game (1).zip"
   try {
-    rmSync(path.join(installPath, platformInfo.name))
+    rmSync(path.join(installPath, zipName))
     // eslint-disable-next-line no-empty
   } catch (e) {}
 
   try {
     await downloadFileWithAxios(
       platformInfo.external_url,
-      `${installPath}/${platformInfo.name}`,
+      `${installPath}/${zipName}`,
       createAbortController(appName),
       (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
         // convert speed to Mb/s
@@ -206,6 +207,10 @@ async function downloadGame(
   }
 }
 
+function sanitizeFileName(filename: string) {
+  return filename.replace(/[/\\?%*:|"<>]/g, '-')
+}
+
 export async function install(
   appName: string,
   { path: dirpath, platformToInstall }: InstallArgs
@@ -228,22 +233,22 @@ export async function install(
   try {
     const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
     const platformInfo = releaseMeta.platforms[appPlatform]
-    const zipFile = path.join(dirpath, platformInfo.name)
-    const destinationPath = path.join(dirpath, title)
+    const zipName = encodeURI(platformInfo.name)
+    const zipFile = path.join(dirpath, zipName)
+    const destinationPath = path.join(dirpath, sanitizeFileName(title))
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
-    await downloadGame(appName, dirpath, platformInfo)
+    await downloadGame(appName, dirpath, platformInfo, zipName)
     let executable = path.join(destinationPath, platformInfo.executable)
 
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
     try {
-      //unzipping...
       window.webContents.send('gameStatusUpdate', {
         appName,
         runner: 'hyperplay',
-        status: 'unzipping'
+        status: 'extracting'
       })
 
       if (isWindows) {

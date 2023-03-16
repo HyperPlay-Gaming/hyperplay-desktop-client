@@ -6,7 +6,7 @@ import i18next from 'i18next'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { isOnline } from '../online_monitor'
 import { sendFrontendMessage } from '../main_window'
-import { trackEvent } from 'backend/api/metrics'
+import { trackEvent } from 'backend/metrics/metrics'
 
 async function installQueueElement(params: InstallParams): Promise<{
   status: 'done' | 'error' | 'abort'
