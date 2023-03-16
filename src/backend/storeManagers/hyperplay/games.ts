@@ -217,7 +217,8 @@ export async function install(
     mkdirSync(dirpath, { recursive: true })
   }
 
-  const { title, releaseMeta } = getGameInfo(appName)
+  const gameInfo = getGameInfo(appName)
+  const { title, releaseMeta } = gameInfo
   const window = getMainWindow()
 
   if (!releaseMeta || !window) {
@@ -282,7 +283,7 @@ export async function install(
         executable: executable,
         install_size: platformInfo.installSize.toString(),
         is_dlc: false,
-        version: releaseMeta.name,
+        version: gameInfo.version ?? '0',
         platform: appPlatform
       }
 
@@ -434,13 +435,6 @@ export async function launch(
   launchArguments?: string
 ): Promise<boolean> {
   return launchGame(appName, getGameInfo(appName), 'hyperplay')
-}
-
-export async function hasUpdate(appName: string): Promise<boolean> {
-  logWarning(
-    `hasUpdate not implemented on HyperPlay Game Manager. called for appName = ${appName}`
-  )
-  return false
 }
 
 // TODO: Refactor to only replace updated files

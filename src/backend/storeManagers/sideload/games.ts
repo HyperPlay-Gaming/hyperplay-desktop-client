@@ -220,13 +220,6 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   }
 }
 
-export async function hasUpdate(appName: string): Promise<boolean> {
-  logWarning(
-    `hasUpdate not implemented on Sideload Game Manager. called for appName = ${appName}`
-  )
-  return false
-}
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export function onInstallOrUpdateOutput(
   appName: string,

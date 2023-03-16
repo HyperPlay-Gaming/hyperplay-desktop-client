@@ -26,7 +26,6 @@ export interface GameManager {
   getSettings: (appName: string) => Promise<GameSettings>
   getGameInfo: (appName: string) => GameInfo
   getExtraInfo: (appName: string) => Promise<ExtraInfo>
-  hasUpdate: (appName: string) => Promise<boolean>
   importGame: (
     appName: string,
     path: string,

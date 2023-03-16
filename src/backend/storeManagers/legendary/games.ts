@@ -310,16 +310,6 @@ export async function getSettings(appName: string) {
 }
 
 /**
- * Helper for `listUpdateableGames().includes(this.appName)`
- *
- * @returns If game has an update.
- */
-export async function hasUpdate(appName: string) {
-  const allUpdateableGames = await listUpdateableGames()
-  return allUpdateableGames.includes(appName)
-}
-
-/**
  * Parent folder to move app to.
  * Amends install path by adding the appropriate folder name.
  */

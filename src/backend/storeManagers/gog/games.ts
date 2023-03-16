@@ -107,12 +107,6 @@ export async function getSettings(appName: string): Promise<GameSettings> {
   )
 }
 
-export async function hasUpdate(appName: string): Promise<boolean> {
-  throw new Error(
-    `hasUpdate not implemented on gog game manager for appName = ${appName}`
-  )
-}
-
 export async function importGame(
   appName: string,
   path: string,
