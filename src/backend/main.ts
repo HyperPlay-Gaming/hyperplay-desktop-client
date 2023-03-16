@@ -8,7 +8,9 @@ import {
   StatusPromise,
   GamepadInputEvent,
   DMQueueElement,
-  GameInfo
+  GameInfo,
+  WineCommandArgs,
+  ExecResult
 } from 'common/types'
 import * as path from 'path'
 import {
@@ -107,7 +109,8 @@ import {
   logError,
   logInfo,
   LogPrefix,
-  logWarning
+  logWarning,
+  RunnerToLogPrefixMap
 } from './logger/logger'
 import { gameInfoStore } from 'backend/storeManagers/legendary/electronStores'
 import { getFonts } from 'font-list'
@@ -665,6 +668,28 @@ ipcMain.on('removeFolder', async (e, [path, folderName]) => {
   return
 })
 
+async function runWineCommandOnGame(
+  runner: string,
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  if (gameManagerMap[runner].isNative(appName)) {
+    logError('runWineCommand called on native game!', LogPrefix.Gog)
+    return { stdout: '', stderr: '' }
+  }
+  const { folder_name } = gameManagerMap[runner].getGameInfo(appName)
+  const gameSettings = await gameManagerMap[runner].getSettings(appName)
+
+  return runWineCommand({
+    gameSettings,
+    installFolderName: folder_name,
+    commandParts,
+    wait,
+    protonVerb,
+    startFolder
+  })
+}
+
 // Calls WineCFG or Winetricks. If is WineCFG, use the same binary as wine to launch it to dont update the prefix
 ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
   const gameSettings = await gameManagerMap[runner].getSettings(appName)
@@ -677,7 +702,7 @@ ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
       await Winetricks.run(wineVersion, winePrefix, event)
       break
     case 'winecfg':
-      gameManagerMap[runner].runWineCommand(appName, {
+      runWineCommandOnGame(runner, appName, {
         gameSettings,
         commandParts: ['winecfg'],
         wait: false
@@ -686,7 +711,7 @@ ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
     case 'runExe':
       if (exe) {
         const workingDir = path.parse(exe).dir
-        gameManagerMap[runner].runWineCommand(appName, {
+        runWineCommandOnGame(runner, appName, {
           gameSettings,
           commandParts: [exe],
           wait: false,
@@ -701,48 +726,38 @@ ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 
 /// IPC handlers begin here.
 
-ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
-  let epicUpdates = await libraryManagerMap['legendary'].listUpdateableGames()
-  let gogUpdates = await libraryManagerMap['gog'].listUpdateableGames()
+function autoUpdate(runner: string, gamesToUpdate: string[]) {
+  const logPrefix = RunnerToLogPrefixMap[runner]
+  gamesToUpdate.forEach(async (appName) => {
+    const { ignoreGameUpdates } = await gameManagerMap[runner].getSettings(
+      appName
+    )
+    const gameInfo = gameManagerMap[runner].getGameInfo(appName)
+    if (!ignoreGameUpdates) {
+      logInfo(`Auto-Updating ${gameInfo.title}`, logPrefix)
+      const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
+      addToQueue(dmQueueElement)
+      // remove from the array to avoid downloading the same game twice
+      gamesToUpdate = gamesToUpdate.filter((game) => game !== appName)
+    } else {
+      logInfo(`Skipping auto-update for ${gameInfo.title}`, logPrefix)
+    }
+  })
+  return gamesToUpdate
+}
 
+ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
+  let oldGames: string[] = []
   const { autoUpdateGames } = GlobalConfig.get().getSettings()
-  if (autoUpdateGames) {
-    epicUpdates.forEach(async (appName) => {
-      const { ignoreGameUpdates } = await gameManagerMap[
-        'legendary'
-      ].getSettings(appName)
-      const gameInfo = gameManagerMap['legendary'].getGameInfo(appName)
-      if (!ignoreGameUpdates) {
-        logInfo(`Auto-Updating ${gameInfo.title}`, LogPrefix.Legendary)
-        const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
-        addToQueue(dmQueueElement)
-        // remove from the array to avoid downloading the same game twice
-        epicUpdates = epicUpdates.filter((game) => game !== appName)
-      } else {
-        logInfo(
-          `Skipping auto-update for ${gameInfo.title}`,
-          LogPrefix.Legendary
-        )
-      }
-    })
-    gogUpdates.forEach(async (appName) => {
-      const { ignoreGameUpdates } = await gameManagerMap['gog'].getSettings(
-        appName
-      )
-      const gameInfo = gameManagerMap['gog'].getGameInfo(appName)
-      if (!ignoreGameUpdates) {
-        logInfo(`Auto-Updating ${gameInfo.title}`, LogPrefix.Gog)
-        const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
-        addToQueue(dmQueueElement)
-        // remove from the array to avoid downloading the same game twice
-        gogUpdates = gogUpdates.filter((game) => game !== appName)
-      } else {
-        logInfo(`Skipping auto-update for ${gameInfo.title}`, LogPrefix.Gog)
-      }
-    })
+  for (const runner in libraryManagerMap) {
+    let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
+    if (autoUpdateGames) {
+      gamesToUpdate = autoUpdate(runner, gamesToUpdate)
+    }
+    oldGames = [...oldGames, ...gamesToUpdate]
   }
 
-  return [...epicUpdates, ...gogUpdates]
+  return oldGames
 })
 
 ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
@@ -808,10 +823,7 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
-  if (
-    runner === 'legendary' &&
-    !libraryManagerMap['legendary'].hasGame(appName)
-  ) {
+  if (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName)) {
     return null
   }
   return gameManagerMap[runner].getGameInfo(appName)
@@ -819,10 +831,7 @@ ipcMain.handle('getGameInfo', async (event, appName, runner) => {
 
 ipcMain.handle('getExtraInfo', async (event, appName, runner) => {
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
-  if (
-    runner === 'legendary' &&
-    !libraryManagerMap['legendary'].hasGame(appName)
-  ) {
+  if (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName)) {
     return null
   }
   return gameManagerMap[runner].getExtraInfo(appName)
@@ -882,7 +891,8 @@ ipcMain.handle('getAlternativeWine', async () =>
 
 ipcMain.handle('readConfig', async (event, config_class) => {
   if (config_class === 'library') {
-    return libraryManagerMap['legendary'].getGames()
+    await libraryManagerMap['legendary'].refresh()
+    return LegendaryLibraryManager.getListOfGames()
   }
   const userInfo = await LegendaryUser.getUserInfo()
   return userInfo?.displayName ?? ''
@@ -1691,7 +1701,7 @@ ipcMain.handle(
     }
 
     // FIXME: Why are we using `runinprefix` here?
-    return gameManagerMap[runner].runWineCommand(appName, {
+    return runWineCommandOnGame(runner, appName, {
       commandParts,
       wait: false,
       protonVerb: 'runinprefix'

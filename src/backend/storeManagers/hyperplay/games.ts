@@ -5,7 +5,6 @@ import {
   GameInfo,
   ExtraInfo,
   ExecResult,
-  WineCommandArgs,
   GameSettings
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
@@ -511,16 +510,6 @@ export async function syncSaves(
     `syncSaves not implemented on HyperPlay Game Manager. called for appName = ${appName}`
   )
   return ''
-}
-
-export async function runWineCommand(
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  logWarning(
-    `runWineCommand not implemented on HyperPlay Game Manager. called for appName = ${appName}`
-  )
-  return { stderr: '', stdout: '' }
 }
 
 export async function forceUninstall(appName: string): Promise<void> {

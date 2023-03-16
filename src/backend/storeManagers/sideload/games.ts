@@ -4,8 +4,7 @@ import {
   GameInfo,
   GameSettings,
   InstallArgs,
-  InstallPlatform,
-  WineCommandArgs
+  InstallPlatform
 } from 'common/types'
 import { libraryStore } from './electronStores'
 import { GameConfig } from '../../game_config'
@@ -267,16 +266,6 @@ export async function syncSaves(
     `syncSaves not implemented on Sideload Game Manager. called for appName = ${appName}`
   )
   return ''
-}
-
-export async function runWineCommand(
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  logWarning(
-    `runWineCommand not implemented on Sideload Game Manager. called for appName = ${appName}`
-  )
-  return { stderr: '', stdout: '' }
 }
 
 export async function forceUninstall(appName: string): Promise<void> {

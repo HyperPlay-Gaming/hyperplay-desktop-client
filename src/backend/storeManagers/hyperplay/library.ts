@@ -172,6 +172,11 @@ export async function refreshHPGameInfo(appId: string): Promise<void> {
   return hpLibraryStore.set('games', currentLibrary)
 }
 
+const defaultExecResult = {
+  stderr: '',
+  stdout: ''
+}
+
 /**
  * Refreshes the entire library
  * this is a very expensive operation
@@ -187,7 +192,7 @@ export async function refresh() {
   for (const gameId of currentLibraryIds) {
     await refreshHPGameInfo(gameId)
   }
-  return
+  return defaultExecResult
 }
 
 export function refreshInstalled() {
@@ -281,9 +286,4 @@ export async function changeGameInstallPath(
   logWarning(
     `changeGameInstallPath not implemented on HyperPlay Library Manager`
   )
-}
-
-export function hasGame(appName: string) {
-  logWarning(`hasGame not implemented on HyperPlay Library Manager`)
-  return false
 }

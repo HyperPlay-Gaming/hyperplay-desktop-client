@@ -31,7 +31,6 @@ import {
   ExecResult,
   InstallArgs,
   InstalledInfo,
-  WineCommandArgs,
   InstallPlatform,
   InstallProgress
 } from 'common/types'
@@ -833,27 +832,6 @@ async function getCommandParameters(appName: string) {
     credentials,
     gameData
   }
-}
-
-export async function runWineCommand(
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  if (isNative(appName)) {
-    logError('runWineCommand called on native game!', LogPrefix.Gog)
-    return { stdout: '', stderr: '' }
-  }
-  const { folder_name } = getGameInfo(appName)
-  const gameSettings = await getSettings(appName)
-
-  return runWineCommandUtil({
-    gameSettings,
-    installFolderName: folder_name,
-    commandParts,
-    wait,
-    protonVerb,
-    startFolder
-  })
 }
 
 export async function forceUninstall(appName: string): Promise<void> {

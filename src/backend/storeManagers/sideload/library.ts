@@ -130,8 +130,3 @@ export async function getInstallInfo(
   logWarning(`getInstallInfo not implemented on Sideload Library Manager`)
   return undefined
 }
-
-export function hasGame(appName: string) {
-  logWarning(`hasGame not implemented on Sideload Library Manager`)
-  return false
-}

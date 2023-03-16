@@ -1003,8 +1003,3 @@ export async function updateAllGames() {
 export function installState(appName: string, state: boolean) {
   logWarning(`installState not implemented on GOG Library Manager`)
 }
-
-export function hasGame(appName: string) {
-  logWarning(`hasGame not implemented on GOG Library Manager`)
-  return false
-}

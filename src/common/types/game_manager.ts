@@ -5,7 +5,6 @@ import {
   GameSettings,
   ExecResult,
   InstallArgs,
-  WineCommandArgs,
   CallRunnerOptions,
   HyperPlayInstallInfo
 } from 'common/types'
@@ -57,10 +56,6 @@ export interface GameManager {
   ) => Promise<string>
   uninstall: (args: RemoveArgs) => Promise<ExecResult>
   update: (appName: string) => Promise<InstallResult>
-  runWineCommand: (
-    appName: string,
-    { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-  ) => Promise<ExecResult>
   forceUninstall: (appName: string) => Promise<void>
   stop: (appName: string) => Promise<void>
   isGameAvailable: (appName: string) => boolean
@@ -69,7 +64,6 @@ export interface GameManager {
 export interface LibraryManager {
   refresh: () => Promise<ExecResult | null>
   refreshInstalled: () => void
-  getGames: (fullRefresh?: boolean) => Promise<GameInfo[]>
   getGameInfo: (appName: string, forceReload?: boolean) => GameInfo | undefined
   getInstallInfo: (
     appName: string,
@@ -87,5 +81,4 @@ export interface LibraryManager {
     abortController: AbortController,
     options?: CallRunnerOptions
   ) => Promise<ExecResult>
-  hasGame: (appName: string) => boolean
 }

@@ -121,11 +121,14 @@ export function refreshInstalled() {
  * @param fullRefresh Reload from Legendary.
  * @returns Array of objects.
  */
-export async function refresh(): Promise<GameInfo[]> {
+export async function refresh(): Promise<ExecResult | null> {
   logInfo('Refreshing library...', LogPrefix.Legendary)
   const isLoggedIn = LegendaryUser.isLoggedIn()
   if (!isLoggedIn) {
-    return []
+    return {
+      stderr: 'You must be logged into Epic Games to refresh this library!',
+      stdout: ''
+    }
   }
 
   refreshLegendary()
@@ -143,7 +146,14 @@ export async function refresh(): Promise<GameInfo[]> {
     ['Game list updated, got', `${arr.length}`, 'games & DLCs'],
     LogPrefix.Legendary
   )
-  return arr
+  return {
+    stderr: '',
+    stdout: ''
+  }
+}
+
+export function getListOfGames() {
+  return libraryStore.get('library', [])
 }
 
 /**
@@ -162,7 +172,7 @@ export function getGameInfo(
       ['Requested game', appName, 'was not found in library'],
       LogPrefix.Legendary
     )
-    return
+    return undefined
   }
   // We have the game, but info wasn't loaded yet
   if (!library.has(appName) || forceReload) {

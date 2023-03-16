@@ -11,8 +11,7 @@ import {
   GameInfo,
   InstallArgs,
   InstallPlatform,
-  InstallProgress,
-  WineCommandArgs
+  InstallProgress
 } from 'common/types'
 import { GameConfig } from '../../game_config'
 import { GlobalConfig } from '../../config'
@@ -46,7 +45,6 @@ import {
   prepareLaunch,
   prepareWineLaunch,
   setupEnvVars,
-  runWineCommand as runWineCommandUtil,
   setupWrappers,
   launchCleanup,
   getRunnerCallWithoutCredentials
@@ -945,28 +943,6 @@ export async function launch(
   launchCleanup(rpcClient)
 
   return !error
-}
-
-export async function runWineCommand(
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  if (isNative(appName)) {
-    logError('runWineCommand called on native game!', LogPrefix.Legendary)
-    return { stdout: '', stderr: '' }
-  }
-
-  const { folder_name } = getGameInfo(appName)
-  const gameSettings = await getSettings(appName)
-
-  return runWineCommandUtil({
-    gameSettings,
-    installFolderName: folder_name,
-    commandParts,
-    wait,
-    protonVerb,
-    startFolder
-  })
 }
 
 export function isNative(appName: string): boolean {
