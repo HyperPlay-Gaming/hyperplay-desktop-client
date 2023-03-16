@@ -19,6 +19,8 @@ import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from 'backend/main'
+import find from 'find-process'
+import { OverlayApp } from 'backend/overlay/overlay'
 const buildDir = resolve(__dirname, '../../build')
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -60,6 +62,35 @@ const openNewBrowserGameWindow = async (
     browserGame.on('close', () => {
       res(true)
     })
+  })
+}
+
+// TODO: refactor to use hyperplay store json data
+export const appNameToProcessName = {
+  '63f8a8c7069b92b74c52d1a3': 'MoonBlasters-Win64-Shipping',
+  '63f69d82069b92b74c8c36e9': 'altiros',
+  '63efc374069b92b74cddf1d0': 'AnotherWorld-Win64-Shipping',
+  '63f42b4b069b92b74cee0ca5': 'Bionic Owls',
+  '63f6f435069b92b74cce5f1b': 'BC3', //bunny count
+  '63ed99d1636c19e6200f7631': 'Space_Hangar_FPS', //flight force
+  '63f785b3069b92b74c484f0e': 'Necrodemic-Win64-Shipping',
+  '63f8f9a8069b92b74ca32061': 'BattleRacingClient-Win64-Shipping', //tearing spaces
+  '63f7ead4069b92b74cb8b684': 'TheBornless426-Win64-Shipping',
+  '63f72cde069b92b74c01b1ca': 'PhantomGalaxies-Win64-Shipping',
+  '63ff5425069b92b74c91f67c': 'RocketMonstersUE5-Win64-Shipping',
+  '63fd0f9f069b92b74c3abe9d': 'Voxie Tactics v0.27.0'
+}
+
+async function injectProcess(appName: string) {
+  if (!Object.hasOwn(appNameToProcessName, appName)) return
+
+  find('name', appNameToProcessName[appName], true).then((val) => {
+    console.log('found this with process name = ', JSON.stringify(val, null, 4))
+    for (const process_i of val) {
+      const pidToInject = process_i.pid
+      logInfo(`Injecting pid = ${pidToInject}`, LogPrefix.HyperPlay)
+      OverlayApp.inject({ pid: pidToInject.toString() })
+    }
   })
 }
 
@@ -128,7 +159,9 @@ export async function launchGame(
     // Native
     if (isNative) {
       logInfo(
-        `launching native sideloaded: ${executable} ${launcherArgs ?? ''}`,
+        `launching native sideloaded or hyperplay store game: ${executable} ${
+          launcherArgs ?? ''
+        }`,
         LogPrefix.Backend
       )
 
@@ -146,6 +179,12 @@ export async function launchGame(
       }
 
       const commandParts = shlex.split(launcherArgs ?? '')
+
+      if (runner === 'hyperplay') {
+        //some games take a while to launch. 8 seconds seems to work well
+        setTimeout(async () => injectProcess(appName), 8000)
+      }
+
       await callRunner(
         commandParts,
         {
@@ -160,7 +199,8 @@ export async function launchGame(
           wrappers,
           logFile: logFileLocation(appName),
           logMessagePrefix: LogPrefix.Backend
-        }
+        },
+        runner === 'sideload' ? true : false
       )
 
       launchCleanup(rpcClient)

@@ -659,7 +659,8 @@ async function callRunner(
   commandParts: string[],
   runner: RunnerProps,
   abortController: AbortController,
-  options?: CallRunnerOptions
+  options?: CallRunnerOptions,
+  injectChildWithHyperPlayOverlay = false
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
@@ -713,11 +714,12 @@ async function callRunner(
       signal: abortController.signal
     })
 
-    if (runner.name === 'sideload' || runner.name === 'hyperplay') {
+    if (injectChildWithHyperPlayOverlay) {
       logInfo(
         `Process PID for sideloaded game injected: ${child.pid}`,
         runner.logPrefix
       )
+
       if (child.pid !== undefined)
         OverlayApp.inject({ pid: child.pid.toString() })
     }

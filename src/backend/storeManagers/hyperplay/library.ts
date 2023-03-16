@@ -138,7 +138,7 @@ export async function refreshHPGameInfo(appId: string): Promise<void> {
   }
   const currentInfo = currentLibrary[gameIndex]
   const res = await axios.get<HyperPlayRelease>(gameIdUrl)
-  const data = res.data
+  const data = res.data[0]
   const gameInfo: GameInfo = {
     ...currentInfo,
     extra: {
@@ -186,7 +186,14 @@ export async function refresh() {
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
   const currentLibraryIds = currentLibrary.map((val) => val.app_name)
   for (const gameId of currentLibraryIds) {
-    await refreshHPGameInfo(gameId)
+    try {
+      await refreshHPGameInfo(gameId)
+    } catch (err) {
+      logError(
+        `Could not refresh HyperPlay Game with appId = ${gameId}`,
+        LogPrefix.HyperPlay
+      )
+    }
   }
   return defaultExecResult
 }

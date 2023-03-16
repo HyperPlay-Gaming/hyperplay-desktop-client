@@ -10,7 +10,6 @@ import {
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
-import * as fs from 'fs'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 import { isMac, isWindows, isLinux } from 'backend/constants'
@@ -30,7 +29,10 @@ import {
 } from '../../shortcuts/shortcuts/shortcuts'
 import { InstallResult, RemoveArgs } from 'common/types/game_manager'
 import { GOGCloudSavesLocation } from 'common/types/gog'
-import { launchGame } from 'backend/storeManagers/storeManagerCommon/games'
+import {
+  appNameToProcessName,
+  launchGame
+} from 'backend/storeManagers/storeManagerCommon/games'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -85,8 +87,19 @@ export async function stop(appName: string): Promise<void> {
     const exe = split[split.length - 1]
     killPattern(exe)
   }
+
+  if (Object.hasOwn(appNameToProcessName, appName)) {
+    killPattern(appNameToProcessName[appName])
+  }
 }
 
+/**
+ *
+ * @param appName
+ * @param pathName exe file full path
+ * @param platform
+ * @returns
+ */
 export async function importGame(
   appName: string,
   pathName: string,
@@ -105,20 +118,9 @@ export async function importGame(
     return { stderr: '', stdout: '' }
   }
 
-  let exec = ''
-  const files = await fs.promises.readdir(pathName)
-  files.forEach((val) => {
-    const splitFile = val.split('.')
-    const extension = splitFile[splitFile.length - 1]
-    if (extension === 'exe') {
-      exec = val
-    }
-  })
-
-  const executableFullPath = path.join(pathName, exec)
   gameInLibrary.install = {
-    install_path: pathName,
-    executable: executableFullPath,
+    install_path: path.dirname(pathName),
+    executable: pathName,
     install_size: '0 GiB',
     is_dlc: false,
     version: '-1',
@@ -197,11 +199,6 @@ async function downloadGame(
       }
     )
     deleteAbortController(appName)
-    window.webContents.send('gameStatusUpdate', {
-      appName,
-      runner: 'hyperplay',
-      status: 'done'
-    })
   } catch (error) {
     deleteAbortController(appName)
     logWarning(`Download aborted ${error}`, LogPrefix.HyperPlay)
@@ -242,6 +239,13 @@ export async function install(
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
 
     try {
+      //unzipping...
+      window.webContents.send('gameStatusUpdate', {
+        appName,
+        runner: 'hyperplay',
+        status: 'unzipping'
+      })
+
       if (isWindows) {
         await spawnAsync('powershell', [
           'Expand-Archive',
@@ -325,7 +329,6 @@ export async function install(
 }
 
 export function getGameInfo(appName: string): GameInfo {
-  logInfo(`Getting game info for ${appName}`, LogPrefix.HyperPlay)
   const appInfo = hpLibraryStore
     .get('games', [])
     .find((app) => app.app_name === appName)
