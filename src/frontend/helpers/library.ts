@@ -232,11 +232,4 @@ export const gogCategories = ['all', 'gog']
 export const sideloadedCategories = ['all', 'sideload']
 export const hyperPlayCategories = ['all', 'hyperplay']
 
-export {
-  handleStopInstallation,
-  install,
-  launch,
-  repair,
-  //updateAllGames,
-  updateGame
-}
+export { handleStopInstallation, install, launch, repair, updateGame }

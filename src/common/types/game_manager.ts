@@ -71,7 +71,6 @@ export interface LibraryManager {
     LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | undefined
   >
   listUpdateableGames: () => Promise<string[]>
-  updateAllGames: () => Promise<(InstallResult | null)[]>
   changeGameInstallPath: (appName: string, newPath: string) => Promise<void>
   installState: (appName: string, state: boolean) => void
   runRunnerCommand: (

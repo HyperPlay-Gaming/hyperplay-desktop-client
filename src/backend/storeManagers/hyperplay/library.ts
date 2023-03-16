@@ -118,10 +118,6 @@ export const getInstallInfo = async (
   }
 }
 
-export async function updateAllGames() {
-  return []
-}
-
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 export function installState(appName: string, state: boolean) {

@@ -762,11 +762,6 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
 
 ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
 
-// Not ready to be used safely yet.
-ipcMain.handle('updateAll', async () =>
-  libraryManagerMap['legendary'].updateAllGames()
-)
-
 ipcMain.handle('getMaxCpus', () => cpus().length)
 
 ipcMain.handle('getAppVersion', () => app.getVersion())

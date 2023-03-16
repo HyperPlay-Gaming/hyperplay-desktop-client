@@ -36,7 +36,6 @@ import {
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
 import { PROVIDERS } from 'common/types/proxy-types'
-import { InstallResult } from 'common/types/game_manager'
 
 /**
  * Some notes here:
@@ -175,7 +174,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<{ stdout: string; stderr: string }>
   checkGameUpdates: () => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
-  updateAll: () => Promise<(InstallResult | null)[]>
   getMaxCpus: () => number
   getAppVersion: () => string
   getLegendaryVersion: () => Promise<string>
