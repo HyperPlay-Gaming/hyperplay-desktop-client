@@ -87,10 +87,6 @@ export async function refresh() {
   return null
 }
 
-export function refreshInstalled() {
-  logWarning(`refreshInstalled not implemented on Sideload Library Manager`)
-}
-
 export function getGameInfo(
   appName: string,
   forceReload?: boolean

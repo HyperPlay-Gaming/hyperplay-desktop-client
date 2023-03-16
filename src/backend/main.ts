@@ -999,10 +999,7 @@ if (existsSync(installed)) {
     // decode the JSON data. So instead of immediately calling LegendaryLibrary.get().refreshInstalled(), call it only after no writes happen
     // in a 500ms timespan
     if (watchTimeout) clearTimeout(watchTimeout)
-    watchTimeout = setTimeout(
-      libraryManagerMap['legendary'].refreshInstalled,
-      500
-    )
+    watchTimeout = setTimeout(LegendaryLibraryManager.refreshInstalled, 500)
   })
 }
 

@@ -195,10 +195,6 @@ export async function refresh() {
   return defaultExecResult
 }
 
-export function refreshInstalled() {
-  logWarning(`refreshInstalled not implemented on HyperPlay Library Manager`)
-}
-
 export function getGameInfo(
   appName: string,
   forceReload?: boolean
