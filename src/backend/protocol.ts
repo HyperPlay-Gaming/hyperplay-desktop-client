@@ -2,10 +2,11 @@ import { dialog } from 'electron'
 import { logError, logInfo, LogPrefix } from './logger/logger'
 import i18next from 'i18next'
 import { getInfo } from './utils'
-import { GameInfo, Runner, SideloadGame } from 'common/types'
+import { GameInfo, Runner } from 'common/types'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { icon } from './constants'
-import { addGameToLibrary, getHyperPlayGameInfo } from './hyperplay/library'
+import { getGameInfo } from 'backend/storeManagers/hyperplay/games'
+import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 
 type Command = 'ping' | 'launch'
 
@@ -151,7 +152,7 @@ async function handleLaunch(
 async function findGame(
   runner: Runner | undefined,
   arg: string | undefined = ''
-): Promise<GameInfo | SideloadGame | null> {
+): Promise<GameInfo | null> {
   // If the runner is specified, only search for that runner
   const runnersToSearch = runner ? [runner, 'hyperplay'] : RUNNERS
 
@@ -162,14 +163,14 @@ async function findGame(
 
     if (run === 'hyperplay') {
       try {
-        getHyperPlayGameInfo(arg)
+        getGameInfo(arg)
       } catch (error) {
         logInfo(
           `Game ${arg} not found in library. Adding it...`,
           LogPrefix.HyperPlay
         )
         await addGameToLibrary(arg)
-        return getHyperPlayGameInfo(arg)
+        return getGameInfo(arg)
       }
     }
 

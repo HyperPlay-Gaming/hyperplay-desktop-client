@@ -1,4 +1,4 @@
-import { TypeCheckedStoreBackend } from './../electron_store'
+import { TypeCheckedStoreBackend } from '../../electron_store'
 
 export const hpLibraryStore = new TypeCheckedStoreBackend('hpLibraryStore', {
   cwd: 'hp_store',

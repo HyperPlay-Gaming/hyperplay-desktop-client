@@ -11,7 +11,6 @@ import {
   WineVersionInfo,
   InstallParams,
   LibraryTopSectionOptions,
-  SideloadGame,
   MetricsOptInStatus
 } from 'common/types'
 import {
@@ -101,7 +100,7 @@ interface StateProps {
     appName: string
     runner: Runner
   }
-  sideloadedLibrary: SideloadGame[]
+  sideloadedLibrary: GameInfo[]
   settingsModalOpen: {
     value: boolean
     type: 'settings' | 'log'
@@ -339,7 +338,6 @@ class GlobalState extends PureComponent<Props> {
   handleSuccessfulLogin = (runner: Runner) => {
     this.handleCategory('all')
     this.refreshLibrary({
-      fullRefresh: true,
       runInBackground: false,
       library: runner
     })
@@ -411,7 +409,7 @@ class GlobalState extends PureComponent<Props> {
   handleSettingsModalOpen = (
     value: boolean,
     type?: 'settings' | 'log',
-    gameInfo?: GameInfo | SideloadGame
+    gameInfo?: GameInfo
   ) => {
     if (gameInfo) {
       this.setState({
@@ -478,7 +476,6 @@ class GlobalState extends PureComponent<Props> {
 
   refreshLibrary = async ({
     checkForUpdates,
-    fullRefresh,
     runInBackground = true,
     library = undefined
   }: RefreshOptions): Promise<void> => {
@@ -490,7 +487,7 @@ class GlobalState extends PureComponent<Props> {
     })
     window.api.logInfo('Refreshing Library')
     try {
-      await window.api.refreshLibrary(fullRefresh, library)
+      await window.api.refreshLibrary(library)
       return await this.refresh(library, checkForUpdates)
     } catch (error) {
       window.api.logError(`${error}`)
@@ -563,7 +560,7 @@ class GlobalState extends PureComponent<Props> {
     )
 
     // in these cases we just add the new status
-    if (['installing', 'updating', 'playing'].includes(status)) {
+    if (['installing', 'updating', 'playing', 'extracting'].includes(status)) {
       currentApp.status = status
       newLibraryStatus.push(currentApp)
       this.setState({ libraryStatus: newLibraryStatus })
@@ -607,7 +604,7 @@ class GlobalState extends PureComponent<Props> {
         e: Event,
         appName: string,
         runner: Runner
-      ): Promise<{ status: 'done' | 'error' }> => {
+      ): Promise<{ status: 'done' | 'error' | 'abort' }> => {
         const currentApp = libraryStatus.filter(
           (game) => game.appName === appName
         )[0]
@@ -653,7 +650,6 @@ class GlobalState extends PureComponent<Props> {
     window.api.handleRefreshLibrary(async (e: Event, runner: Runner) => {
       this.refreshLibrary({
         checkForUpdates: false,
-        fullRefresh: true,
         runInBackground: true,
         library: runner
       })
@@ -677,7 +673,6 @@ class GlobalState extends PureComponent<Props> {
     if (legendaryUser || gogUser) {
       this.refreshLibrary({
         checkForUpdates: true,
-        fullRefresh: true,
         runInBackground: Boolean(epic.library.length)
       })
     }

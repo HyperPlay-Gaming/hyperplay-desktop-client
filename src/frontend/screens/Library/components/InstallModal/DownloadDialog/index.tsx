@@ -91,8 +91,12 @@ function getUniqueKey(sdl: SelectiveDownload) {
 }
 
 const userHome = configStore.get('userHome', '')
-const { defaultInstallPath = `${userHome}/Games/HyperPlay` } = {
-  ...configStore.get_nodefault('settings')
+
+function getDefaultInstallPath() {
+  const { defaultInstallPath = `${userHome}/Games/HyperPlay` } = {
+    ...configStore.get_nodefault('settings')
+  }
+  return defaultInstallPath
 }
 
 export default function DownloadDialog({
@@ -121,7 +125,7 @@ export default function DownloadDialog({
   const [installLanguages, setInstallLanguages] = useState(Array<string>())
   const [installLanguage, setInstallLanguage] = useState('')
   const [installPath, setInstallPath] = useState(
-    previousProgress.folder || defaultInstallPath
+    previousProgress.folder || getDefaultInstallPath()
   )
   const gameStatus: GameStatus = libraryStatus.filter(
     (game: GameStatus) => game.appName === appName
@@ -437,7 +441,7 @@ export default function DownloadDialog({
         <TextInputWithIconField
           htmlId="setinstallpath"
           label={t('install.path', 'Select Install Path')}
-          placeholder={defaultInstallPath}
+          placeholder={getDefaultInstallPath()}
           value={installPath.replaceAll("'", '')}
           onChange={(event) => setInstallPath(event.target.value)}
           icon={<FontAwesomeIcon icon={faFolderOpen} />}
@@ -447,9 +451,9 @@ export default function DownloadDialog({
                 buttonLabel: t('box.choose'),
                 properties: ['openDirectory'],
                 title: t('install.path'),
-                defaultPath: defaultInstallPath
+                defaultPath: getDefaultInstallPath()
               })
-              .then((path) => setInstallPath(path || defaultInstallPath))
+              .then((path) => setInstallPath(path || getDefaultInstallPath()))
           }
           afterInput={
             gameInstallInfo?.manifest?.download_size ? (

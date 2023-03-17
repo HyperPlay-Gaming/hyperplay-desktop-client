@@ -11,7 +11,6 @@ try {
   )
 }
 
-import { wait } from '../../common/types/proxy-types'
 import { resolve } from 'path'
 const buildDir = resolve(__dirname, '../../build')
 
@@ -392,8 +391,7 @@ class Application {
     console.log(
       `--------------------\n try inject method ${JSON.stringify(param)}`
     )
-    // TO DO: Find a way to listen to when window is created at pid and inject on handle that event
-    await wait(5000)
+
     for (const window of this.Overlay.getTopWindows()) {
       if (window.processId.toString() === pid || window.title === title) {
         try {

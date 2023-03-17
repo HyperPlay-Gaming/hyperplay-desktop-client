@@ -3,8 +3,6 @@ import {
   deleteAbortController,
   callAllAbortControllers
 } from './utils/aborthandler/aborthandler'
-import { GOGGame } from './gog/games'
-import { LegendaryGame } from './legendary/games'
 import {
   Runner,
   WineInstallation,
@@ -12,8 +10,7 @@ import {
   SteamRuntime,
   Release,
   GameInfo,
-  GameSettings,
-  SideloadGame
+  GameSettings
 } from 'common/types'
 import axios, { AxiosResponse } from 'axios'
 import {
@@ -55,27 +52,26 @@ import {
 } from './constants'
 import { logError, logInfo, LogPrefix, logWarning } from './logger/logger'
 import { basename, dirname, join, normalize } from 'path'
-import { runLegendaryCommand } from './legendary/library'
-import { runGogdlCommand } from './gog/library'
+import { runRunnerCommand as runLegendaryCommand } from 'backend/storeManagers/legendary/library'
+import { runRunnerCommand as runGogdlCommand } from './storeManagers/gog/library'
 import {
   gameInfoStore,
   installStore,
   libraryStore
-} from './legendary/electronStores'
+} from 'backend/storeManagers/legendary/electronStores'
 import {
   apiInfoCache as GOGapiInfoCache,
   gogInstallInfoStore as GOGinstallInfoStore,
   libraryStore as GOGlibraryStore
-} from './gog/electronStores'
+} from './storeManagers/gog/electronStores'
 import fileSize from 'filesize'
 import makeClient from 'discord-rich-presence-typescript'
 import { notify, showDialogBoxModalAuto } from './dialog/dialog'
-import { getAppInfo } from './sideload/games'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { validWine } from './launcher'
-import { getHyperPlayGameInfo } from './hyperplay/library'
+import { gameManagerMap } from 'backend/storeManagers'
 
 const execAsync = promisify(exec)
 
@@ -384,8 +380,7 @@ async function errorHandler({
   if (error) {
     if (error.includes(deletedFolderMsg) && appName) {
       const runner = r.toLocaleLowerCase() as Runner
-      const game = getGame(appName, runner)
-      const { title } = game.getGameInfo()
+      const { title } = gameManagerMap[runner].getGameInfo(appName)
       const { response } = await showMessageBox({
         type: 'question',
         title,
@@ -397,7 +392,7 @@ async function errorHandler({
       })
 
       if (response === 1) {
-        return game.forceUninstall()
+        return gameManagerMap[runner].forceUninstall(appName)
       }
     }
 
@@ -743,15 +738,6 @@ function detectVCRedist(mainWindow: BrowserWindow) {
   })
 }
 
-function getGame(appName: string, runner: Runner) {
-  switch (runner) {
-    case 'legendary':
-      return LegendaryGame.get(appName)
-    default:
-      return GOGGame.get(appName)
-  }
-}
-
 function getFirstExistingParentPath(directoryPath: string): string {
   let parentDirectoryPath = directoryPath
   let parentDirectoryFound = existsSync(parentDirectoryPath)
@@ -824,15 +810,8 @@ const getCurrentChangelog = async (): Promise<Release | null> => {
   }
 }
 
-function getInfo(appName: string, runner: Runner): GameInfo | SideloadGame {
-  if (runner === 'sideload') {
-    return getAppInfo(appName)
-  }
-  if (runner === 'hyperplay') {
-    return getHyperPlayGameInfo(appName)
-  }
-  const game = getGame(appName, runner)
-  return game.getGameInfo()
+function getInfo(appName: string, runner: Runner): GameInfo {
+  return gameManagerMap[runner].getGameInfo(appName)
 }
 
 // can be removed if legendary and gogdl handle SIGTERM and SIGKILL
@@ -1155,7 +1134,7 @@ export async function downloadFileWithAxios(
   const writer = createWriteStream(destPath)
 
   const response: AxiosResponse = await axios({
-    url,
+    url: encodeURI(url),
     method: 'GET',
     responseType: 'stream',
     signal: abortController.signal
@@ -1252,7 +1231,6 @@ export {
   quoteIfNecessary,
   removeQuoteIfNecessary,
   detectVCRedist,
-  getGame,
   killPattern,
   getInfo,
   getShellPath,
