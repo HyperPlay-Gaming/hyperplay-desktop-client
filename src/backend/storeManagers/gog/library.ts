@@ -39,7 +39,6 @@ import { isOnline } from '../../online_monitor'
 
 const library: Map<string, GameInfo> = new Map()
 const installedGames: Map<string, InstalledInfo> = new Map()
-refresh()
 
 export async function getSaveSyncLocation(
   appName: string,
