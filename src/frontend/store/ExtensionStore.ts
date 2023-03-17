@@ -44,8 +44,6 @@ class ExtensionStore {
   }
 
   setIsPopupOpen(isOpen: boolean) {
-    console.log(isOpen)
-
     this.isPopupOpen = isOpen
   }
 
