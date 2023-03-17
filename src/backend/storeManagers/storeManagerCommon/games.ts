@@ -68,7 +68,7 @@ const openNewBrowserGameWindow = async (
 export function getGameProcessName(gameInfo: GameInfo): string | undefined {
   const installedPlatform = gameInfo.install.platform
   if (installedPlatform === undefined) return
-  return gameInfo.releaseMeta?.platforms[installedPlatform].processName
+  return gameInfo.releaseMeta?.platforms[installedPlatform]?.processName
 }
 
 async function injectProcess(gameInfo: GameInfo) {
