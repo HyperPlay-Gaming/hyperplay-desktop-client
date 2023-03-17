@@ -1445,8 +1445,11 @@ ipcMain.handle('updateGame', async (event, appName, runner): StatusPromise => {
 ipcMain.handle(
   'changeInstallPath',
   async (event, { appName, path, runner }) => {
-    gameManagerMap[runner].moveInstall(appName, path)
-    logInfo(`Finished moving ${appName} to ${path}.`, LogPrefix.Backend)
+    await libraryManagerMap[runner].changeGameInstallPath(appName, path)
+    logInfo(
+      `Finished changing install path of ${appName} to ${path}.`,
+      LogPrefix.Backend
+    )
   }
 )
 
