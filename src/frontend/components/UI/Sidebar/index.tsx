@@ -11,7 +11,9 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { t } from 'i18next'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import extensionStore from 'frontend/store/ExtensionStore'
 import SidbarStyles from './index.module.scss'
+import { observable } from 'mobx'
 
 let sidebarSize = 240
 const localStorageSidebarWidth = localStorage.getItem('sidebar-width')
@@ -28,7 +30,6 @@ const Sidebar = observer(() => {
     useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
   const [showMetaMaskSubMenu, setShowMetaMaskSubMenu] = useState(false)
-  const [metamaskPopupIsActive, setMetamaskPopupIsActive] = useState(false)
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   function setBadgeString(err: any, text: string) {
@@ -167,13 +168,13 @@ const Sidebar = observer(() => {
                 <span>{t('metamask.sidebar.home', 'Home')}</span>
               </NavLink>
               <button
-                className={classNames('Sidebar__item SidebarLinks__subItem', {
-                  active: metamaskPopupIsActive
-                })}
-                onClick={async () => {
-                  const popupIsShown = await window.api.showPopup()
-                  setMetamaskPopupIsActive(popupIsShown)
-                }}
+                className={classNames(
+                  'Sidebar__item SidebarLinks__subItem SidebarLinks__subItem__popup',
+                  {
+                    active: extensionStore.isPopupOpen
+                  }
+                )}
+                onClick={() => extensionStore.toggleIsPopupOpen()}
               >
                 <span>{t('metamask.sidebar.popup', 'Popup')}</span>
               </button>
@@ -198,4 +199,4 @@ const Sidebar = observer(() => {
   )
 })
 
-export default React.memo(Sidebar)
+export default React.memo(observable(Sidebar))
