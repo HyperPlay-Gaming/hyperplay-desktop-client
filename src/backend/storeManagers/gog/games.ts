@@ -706,7 +706,8 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
       ])
     }
   } else {
-    rmSync(object.install_path, { recursive: true })
+    if (existsSync(object.install_path))
+      rmSync(object.install_path, { recursive: true })
   }
   installedGamesStore.set('installed', array)
   refreshInstalled()
