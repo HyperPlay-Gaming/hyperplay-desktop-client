@@ -14,8 +14,8 @@ xl	23.04	1.44
 */
 
 @mixin typeSystem {
-  --default-primary-font-family: 'Chakra Petch', normal;
-  --default-secondary-font-family: 'Jura', normal;
+  --default-primary-font-family: 'Rajdhani', normal;
+  --default-secondary-font-family: 'Barlow', normal;
   --primary-font-family: var(--default-primary-font-family);
   --secondary-font-family: var(--default-secondary-font-family);
   --light: 300;
@@ -142,7 +142,6 @@ button,
 }
 
 .subtitle-sm,
-.caption,
 .status,
 .text--xs {
   font-size: var(--text-xs);
@@ -150,7 +149,6 @@ button,
 
 .hp-subtitle,
 .content-sm,
-h5,
 h4,
 .italic {
   font-weight: var(--medium);
@@ -159,6 +157,7 @@ h4,
 .subtitle-sm,
 .button-sm,
 .button-md,
+h5,
 h3,
 h2,
 h1 {

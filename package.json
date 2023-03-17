@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.3-alpha.2",
+  "version": "0.0.9",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -8,7 +8,7 @@
   "description": "An Open Source Launcher for Web3, GOG and Epic Games",
   "repository": {
     "type": "Github",
-    "url": "https://github.com/G7DAO/HyperPlay/"
+    "url": "https://github.com/HyperPlay-Gaming/hyperplay-desktop-client"
   },
   "author": {
     "name": "HyperPlay",
@@ -30,7 +30,9 @@
       "build/win_icon.ico",
       "build/trayIconLight24x24.png",
       "build/trayIconDark24x24.png",
-      "build/extensions"
+      "build/extensions",
+      "build/hyperplay_store_preload.js",
+      "build/webviewPreload.js"
     ],
     "protocols": [
       {
@@ -124,19 +126,30 @@
       "depends": [
         "curl"
       ]
+    },
+    "snap": {
+      "allowNativeWayland": true,
+      "category": "Games",
+      "synopsis": "HyperPlay allows players to carry their MetaMask or WalletConnect wallet overlaid on top of every desktop game. Game developers can request transactions or signatures with a simple REST API call that supports every wallet to manage wallet interactions seamlessly.",
+      "description": "HyperPlay allows players to carry their MetaMask or WalletConnect wallet overlaid on top of every desktop game. Game developers can request transactions or signatures with a simple REST API call that supports every wallet to manage wallet interactions seamlessly. \n You can also access your Epic and GOG games and play them using Proton or Wine that can be downloaded directly from the interface. DXVK, VKD3D and Winetricks are also included to play Windows Games.",
+      "publish": {
+        "provider": "snapStore",
+        "channels": "beta",
+        "repo": "hyperplay"
+      }
     }
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@fontsource/chakra-petch": "^4.5.8",
-    "@fontsource/jura": "^4.5.11",
+    "@fontsource/barlow": "^4.5.9",
+    "@fontsource/rajdhani": "^4.5.10",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-brands-svg-icons": "^6.1.1",
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@hyperplay/ui": "^0.0.5",
+    "@hyperplay/ui": "0.1.0-alpha.2",
     "@metamask/sdk": "^0.1.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
@@ -165,7 +178,7 @@
     "fuse.js": "^6.6.2",
     "graceful-fs": "^4.2.10",
     "howlongtobeat": "^1.7.0",
-    "i18next": "^21.6.16",
+    "i18next": "^22.4.10",
     "i18next-fs-backend": "^1.1.4",
     "i18next-http-backend": "^1.4.0",
     "ini": "^3.0.0",
@@ -185,6 +198,7 @@
     "simple-keyboard": "^3.4.136",
     "source-map-support": "^0.5.21",
     "steam-shortcut-editor": "^3.1.1",
+    "stream": "^0.0.2",
     "systeminformation": "^5.15.0",
     "ts-prune": "^0.10.3",
     "tslib": "^2.4.0",
@@ -199,11 +213,11 @@
     "test-watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand --silent",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
-    "release:linux": "vite build && electron-builder -p always --linux deb AppImage rpm pacman tar.xz",
+    "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
     "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
-    "release:win": "vite build && electron-builder -p never --win nsis portable --x64 --arm64",
+    "release:win": "vite build && electron-builder -p always --win nsis",
     "dist:linux": "vite build && electron-builder --linux",
-    "dist:mac": "vite build && electron-builder --mac",
+    "dist:mac": "export CSC_IDENTITY_AUTO_DISCOVERY=false && vite build && electron-builder --mac",
     "dist:win": "vite build && electron-builder --win",
     "lint": "eslint --cache -c .eslintrc --ext .tsx,ts ./src",
     "lint-fix": "eslint --fix -c .eslintrc --ext .tsx,ts ./src",

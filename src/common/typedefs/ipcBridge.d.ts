@@ -1,3 +1,4 @@
+import { HyperPlayGameOS, HyperPlayInstallInfo } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -30,7 +31,8 @@ import {
   DMQueueElement,
   ConnectivityStatus,
   GamepadActionArgs,
-  ExtraInfo
+  ExtraInfo,
+  AppPlatforms
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
@@ -60,6 +62,7 @@ interface HyperPlaySyncIPCFunctions {
   reloadApp: () => void
   createNewMetaMaskWallet: () => void
   enableOnEvents: (topic: string) => void
+  addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
 }
 
@@ -127,7 +130,7 @@ interface RequestArguments {
 }
 
 interface HyperPlayAsyncIPCFunctions {
-  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<void>
+  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<boolean>
   chromeWindowsCreate: (
     options: chrome.windows.CreateData
   ) => Promise<chrome.windows.Window>
@@ -153,6 +156,30 @@ interface HyperPlayAsyncIPCFunctions {
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
+  getHyperPlayGameInfo: (gameId: string) => Promise<GameInfo | null>
+  getHyperPlayInstallInfo: (
+    appName: string,
+    platform: HyperPlayGameOS
+  ) => Promise<HyperPlayInstallInfo | null>
+  addHyperplayGame: (gameId: string) => Promise<void>
+  installHyperPlayGame: (
+    gameId: string,
+    dirpath: string,
+    platformToInstall: AppPlatforms
+  ) => Promise<StatusPromise>
+  uninstallHyperplayGame: (
+    gameId: string,
+    shouldRemovePrefix: boolean,
+    shoudlRemoveSetting: boolean
+  ) => Promise<void>
+  launchHyperplayGame: (gameId: string) => Promise<StatusPromise>
+  sendRequest: (args: unknown[]) => Promise<unknown>
+  sendAsyncRequest: (
+    payload: JsonRpcRequest,
+    callback: JsonRpcCallback
+  ) => Promise<unknown>
+  isGameHidden: (gameId: string) => Promise<boolean>
+  unhideGame: (gameId: string) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -201,6 +228,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   }>
   logoutLegendary: () => Promise<void>
   getAlternativeWine: () => Promise<WineInstallation[]>
+  getLocalPeloadPath: () => Promise<string>
   readConfig: (config_class: 'library' | 'user') => Promise<GameInfo[] | string>
   requestSettings: (appName: string) => Promise<AppSettings | GameSettings>
   writeConfig: (args: { appName: string; config: Partial<AppSettings> }) => void
@@ -241,8 +269,12 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   removeApp: (args: {
     appName: string
     shouldRemovePrefix: boolean
+    runner: Runner
   }) => Promise<void>
-  launchApp: (appName: string) => Promise<boolean>
+  launchApp: (
+    appName: string,
+    runner: 'sideload' | 'hyperplay'
+  ) => Promise<boolean>
   isNative: (args: { appName: string; runner: Runner }) => boolean
   getLogContent: (args: { appName: string; defaultLast?: boolean }) => string
   installWineVersion: (
@@ -294,6 +326,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   toggleDXVK: (args: ToolArgs) => Promise<boolean>
   pathExists: (path: string) => Promise<boolean>
   getExtensionId: () => Promise<string>
+  addGameToLibrary: (appName: string) => Promise<void>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

@@ -123,13 +123,23 @@ export default function LanguageSelector({
 
   const renderOption = (lang: string) => {
     const flag = languageFlags[lang]
-    let label = languageLabels[lang]
-    if (flagPossition === FlagPosition.PREPEND) label = `${flag} ${label}`
-    if (flagPossition === FlagPosition.APPEND) label = `${label} ${flag}`
+    const label = languageLabels[lang]
+
+    console.log(flagPossition, label)
 
     return (
       <option key={lang} value={lang}>
-        {label}
+        {flagPossition === FlagPosition.PREPEND ? (
+          <>
+            {flag}&#160;&#160;&#160;&#160;{label}
+          </>
+        ) : null}
+        {flagPossition === FlagPosition.APPEND ? (
+          <>
+            {label} {flag}
+          </>
+        ) : null}
+        {flagPossition === FlagPosition.NONE ? <>{label}</> : null}
       </option>
     )
   }
@@ -153,7 +163,7 @@ export default function LanguageSelector({
         htmlId="languageSelector"
         onChange={(event) => handleChangeLanguage(event.target.value)}
         value={currentLanguage}
-        label={t('setting.language', 'Choose App Language')}
+        label={t('setting.language', 'Choose Language')}
         extraClass="languageSelector"
         afterSelect={afterSelect}
       >

@@ -110,6 +110,24 @@ const metricsStore = new TypeCheckedStoreFrontend('metricsStore', {
   name: 'metrics-store'
 })
 
+const onboardingStore = new TypeCheckedStoreFrontend('onboardingStore', {
+  cwd: 'store',
+  name: 'onboarding-store'
+})
+
+const hyperPlayLibraryStore = new TypeCheckedStoreFrontend('hpLibraryStore', {
+  cwd: 'hp_store',
+  name: 'library'
+})
+
+const hpInstalledGamesStore = new TypeCheckedStoreFrontend(
+  'hpInstalledGamesStore',
+  {
+    cwd: 'hp_store',
+    name: 'installed'
+  }
+)
+
 export {
   configStore,
   gogLibraryStore,
@@ -120,5 +138,8 @@ export {
   sideloadLibrary,
   wineDownloaderInfoStore,
   downloadManagerStore,
-  metricsStore
+  metricsStore,
+  onboardingStore,
+  hyperPlayLibraryStore,
+  hpInstalledGamesStore
 }

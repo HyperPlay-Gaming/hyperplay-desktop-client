@@ -60,6 +60,12 @@ export default defineConfig({
           __dirname + '/src/backend/hyperplay-proxy-server/providerPreload.ts'
         ),
         vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/hyperplay_store_preload.ts'
+        ),
+        vite: electronViteConfig
       }
     ]),
     svgr()

@@ -16,6 +16,7 @@ const initialContext: ContextType = {
     logout: async () => Promise.resolve()
   },
   sideloadedLibrary: [],
+  hyperPlayLibrary: [],
   error: false,
   filterText: '',
   filterPlatform: 'all',

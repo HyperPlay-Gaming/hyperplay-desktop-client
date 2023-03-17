@@ -21,7 +21,7 @@ test: off
 
 artifacts:
   - path: dist\HyperPlayWin.zip
-    name: Heroic_setup
+    name: hyperplay_setup
 
 deploy:
   - provider: Webhook

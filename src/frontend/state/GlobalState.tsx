@@ -39,9 +39,11 @@ import {
   gogLibraryStore,
   libraryStore,
   metricsStore,
-  wineDownloaderInfoStore
-} from '../helpers/electronStores'
-import { sideloadLibrary } from 'frontend/helpers/electronStores'
+  wineDownloaderInfoStore,
+  sideloadLibrary,
+  hpInstalledGamesStore,
+  hyperPlayLibraryStore
+} from 'frontend/helpers/electronStores'
 
 const storage: Storage = window.localStorage
 const globalSettings = configStore.get_nodefault('settings')
@@ -101,13 +103,17 @@ interface StateProps {
   }
   showMetaMaskBrowserSidebarLinks: boolean
   metricsOptInStatus: MetricsOptInStatus
+  hyperPlayLibrary: GameInfo[]
 }
 
 class GlobalState extends PureComponent<Props> {
   loadGOGLibrary = (): Array<GameInfo> => {
     const games = gogLibraryStore.get('games', [])
 
-    const installedGames = gogInstalledGamesStore.get('installed', [])
+    const installedGames = [
+      ...gogInstalledGamesStore.get('installed', []),
+      ...hpInstalledGamesStore.get('installed', [])
+    ]
     for (const igame in games) {
       for (const installedGame of installedGames) {
         if (installedGame.appName === games[igame].app_name) {
@@ -165,6 +171,7 @@ class GlobalState extends PureComponent<Props> {
     activeController: '',
     connectivity: { status: 'offline', retryIn: 0 },
     sideloadedLibrary: sideloadLibrary.get('games', []),
+    hyperPlayLibrary: hyperPlayLibraryStore.get('games', []),
     dialogModalOptions: { showDialog: false },
     externalLinkDialogOptions: { showDialog: false },
     settingsModalOpen: { value: false, type: 'settings', gameInfo: undefined },
@@ -431,6 +438,8 @@ class GlobalState extends PureComponent<Props> {
     }
 
     const updatedSideload = sideloadLibrary.get('games', [])
+    const updatedHyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
+    const hiddenGames = configStore.get('games.hidden', [])
 
     this.setState({
       epic: {
@@ -444,7 +453,9 @@ class GlobalState extends PureComponent<Props> {
       gameUpdates: updates,
       refreshing: false,
       refreshingInTheBackground: true,
-      sideloadedLibrary: updatedSideload
+      sideloadedLibrary: updatedSideload,
+      hyperPlayLibrary: updatedHyperPlayLibrary,
+      hiddenGames
     })
 
     if (currentLibraryLength !== epicLibrary.length) {

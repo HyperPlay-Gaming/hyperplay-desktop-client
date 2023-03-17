@@ -15,7 +15,7 @@ import {
   GameSettings,
   SideloadGame
 } from 'common/types'
-import * as axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import {
   app,
   dialog,
@@ -31,7 +31,12 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
+import {
+  createWriteStream,
+  appendFileSync,
+  existsSync,
+  rmSync
+} from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
@@ -74,6 +79,8 @@ import { validWine } from './launcher'
 const execAsync = promisify(exec)
 
 const { showMessageBox } = dialog
+
+const discordRPCClientID = undefined
 
 /**
  * Compares 2 SemVer strings following "major.minor.patch".
@@ -171,7 +178,7 @@ async function isEpicServiceOffline(
   })
 
   try {
-    const { data } = await axios.default.get(epicStatusApi)
+    const { data } = await axios.get(epicStatusApi)
 
     for (const component of data.components) {
       const { name: name, status: indicator } = component
@@ -235,13 +242,8 @@ const getGogdlVersion = async () => {
 
 export const getAppVersion = () => {
   const VERSION_NUMBER = app.getVersion()
-  const BETA_VERSION_NAME = 'Caesar Clown'
-  const STABLE_VERSION_NAME = 'Trafalgar Law'
-  const isBetaorAlpha =
-    VERSION_NUMBER.includes('alpha') || VERSION_NUMBER.includes('beta')
-  const VERSION_NAME = isBetaorAlpha ? BETA_VERSION_NAME : STABLE_VERSION_NAME
 
-  return `${VERSION_NUMBER} ${VERSION_NAME}`
+  return `${VERSION_NUMBER}`
 }
 
 const showAboutWindow = () => {
@@ -297,7 +299,7 @@ const getSystemInfo = async () => {
   if (systemInfoCache !== '') {
     return systemInfoCache
   }
-  const heroicVersion = getAppVersion()
+  const hyperplayVersion = getAppVersion()
   const legendaryVersion = await getLegendaryVersion()
   const gogdlVersion = await getGogdlVersion()
 
@@ -327,7 +329,7 @@ const getSystemInfo = async () => {
     ? (await execAsync('echo $XDG_SESSION_TYPE')).stdout.replaceAll('\n', '')
     : ''
 
-  systemInfoCache = `HyperPlay Version: ${heroicVersion}
+  systemInfoCache = `HyperPlay Version: ${hyperplayVersion}
 Legendary Version: ${legendaryVersion}
 GOGdl Version: ${gogdlVersion}
 OS: ${isMac ? `${codename} ${release}` : distro} KERNEL: ${kernel} ARCH: ${arch}
@@ -582,8 +584,12 @@ async function getSteamRuntime(
   return allAvailableRuntimes.pop()!
 }
 
-function constructAndUpdateRPC(gameName: string): RpcClient {
-  const client = makeClient('852942976564723722')
+function constructAndUpdateRPC(gameName: string): RpcClient | undefined {
+  if (discordRPCClientID) {
+    return undefined
+  }
+
+  const client = makeClient(discordRPCClientID)
   client.updatePresence({
     details: gameName,
     instance: true,
@@ -762,7 +768,7 @@ const getLatestReleases = async (): Promise<Release[]> => {
   logInfo('Checking for new HerHyperPlayoic Updates', LogPrefix.Backend)
 
   try {
-    const { data: releases } = await axios.default.get(GITHUB_API)
+    const { data: releases } = await axios.get(GITHUB_API)
     const latestStable: Release = releases.filter(
       (rel: Release) => rel.prerelease === false
     )[0]
@@ -805,9 +811,7 @@ const getCurrentChangelog = async (): Promise<Release | null> => {
   try {
     const current = app.getVersion()
 
-    const { data: release } = await axios.default.get(
-      `${GITHUB_API}/tags/v${current}`
-    )
+    const { data: release } = await axios.get(`${GITHUB_API}/tags/v${current}`)
 
     return release as Release
   } catch (error) {
@@ -1127,6 +1131,100 @@ export async function moveOnUnix(
     }
   }
   return { status: 'done', installPath: destination }
+}
+
+export interface ProgressCallback {
+  (
+    downloadedBytes: number,
+    downloadSpeed: number,
+    diskWriteSpeed: number,
+    progress: number
+  ): void
+}
+
+export async function downloadFileWithAxios(
+  url: string,
+  destPath: string,
+  abortController: AbortController,
+  progressCallback?: ProgressCallback
+): Promise<void> {
+  const writer = createWriteStream(destPath)
+
+  const response: AxiosResponse = await axios({
+    url,
+    method: 'GET',
+    responseType: 'stream',
+    signal: abortController.signal
+  })
+
+  const totalLength = Number(response.headers['content-length'])
+
+  let downloadedBytes = 0
+  let downloadSpeed = 0
+  let prevDownloadedBytes = 0
+  let prevTimestamp = Date.now()
+
+  let writtenBytes = 0
+  let writeSpeed = 0
+  let prevWrittenBytes = 0
+
+  response.data.on('data', (chunk: Buffer) => {
+    downloadedBytes += chunk.length
+    writtenBytes += chunk.length
+
+    // Calculate download speed
+    const now = Date.now()
+    const timeElapsed = now - prevTimestamp
+    if (timeElapsed >= 1000) {
+      downloadSpeed =
+        ((downloadedBytes - prevDownloadedBytes) / timeElapsed) * 1000
+      prevDownloadedBytes = downloadedBytes
+      writeSpeed = ((writtenBytes - prevWrittenBytes) / timeElapsed) * 1000
+      prevWrittenBytes = writtenBytes
+      prevTimestamp = now
+    }
+
+    // Calculate progress and call progressCallback function (debounced)
+    const progress = Math.round((downloadedBytes / totalLength) * 100)
+    if (progressCallback) {
+      const debouncedCallback = debounce(progressCallback, 1000)
+      debouncedCallback(downloadedBytes, downloadSpeed, writeSpeed, progress)
+    }
+  })
+
+  response.data.pipe(writer)
+
+  return new Promise<void>((resolve, reject) => {
+    writer.on('finish', () => {
+      const now = Date.now()
+      const timeElapsed = now - prevTimestamp
+      writeSpeed = ((writtenBytes - prevWrittenBytes) / timeElapsed) * 1000
+      prevWrittenBytes = writtenBytes
+      prevTimestamp = now
+      resolve()
+    })
+    abortController.signal.addEventListener('abort', () => {
+      writer.close()
+      reject()
+    })
+  })
+}
+
+const debounce = <T extends (...args: number[]) => void>(
+  func: T,
+  wait: number
+) => {
+  let timeout: ReturnType<typeof setTimeout>
+  return function (this: unknown, ...args: Parameters<T>) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const context = this
+    const later = () => {
+      timeout = null!
+      func.apply(context, args)
+    }
+    clearTimeout(timeout)
+    timeout = setTimeout(later, wait)
+  }
 }
 
 export {

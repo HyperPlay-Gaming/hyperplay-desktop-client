@@ -5,6 +5,7 @@ import getWalletText from './helpers/getWalletText'
 import walletStore from 'frontend/store/WalletStore'
 import ProfilePicture from './ProfilePicture'
 import { observer } from 'mobx-react-lite'
+import { t } from 'i18next'
 
 interface WalletProps {
   onClick: () => void
@@ -12,6 +13,9 @@ interface WalletProps {
 
 const Wallet: React.FC<WalletProps> = observer((props) => {
   const walletText = getWalletText(walletStore.address)
+
+  const connectedText = t('hyperplay.wallet.connected', 'Connected')
+  const notConnectedText = t('hyperplay.wallet.notConnected', 'Not connected')
 
   return (
     <button
@@ -30,7 +34,7 @@ const Wallet: React.FC<WalletProps> = observer((props) => {
             connectedStatus: walletStore.isConnected
           })}
         >
-          {walletStore.isConnected ? 'Connected' : 'Not connected'}
+          {walletStore.isConnected ? connectedText : notConnectedText}
         </div>
       </span>
     </button>

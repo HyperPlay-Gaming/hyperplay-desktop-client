@@ -21,7 +21,7 @@ const useSettingsContext = ({ appName, gameInfo, runner }: Props) => {
   const isMacNative = isMac && (gameInfo?.is_mac_native || false)
   const isLinuxNative = isLinux && (gameInfo?.is_linux_native || false)
 
-  // Load Heroic's or game's config, only if not loaded already
+  // Load hyperplay's or game's config, only if not loaded already
   useEffect(() => {
     const getSettings = async () => {
       const config = isDefault

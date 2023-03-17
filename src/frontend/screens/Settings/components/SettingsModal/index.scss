@@ -6,6 +6,7 @@
   max-width: 800px;
 
   .log-box {
-    width: 100%;
+    width: fit-content;
+    max-width: 80vw;
   }
 }

@@ -49,6 +49,7 @@ function App() {
             <Route path="/" element={<Navigate replace to="/library" />} />
             <Route path="/library" element={<Library />} />
             <Route path="login" element={<Login />} />
+            <Route path="hyperplaystore" element={<WebView />} />
             <Route path="epicstore" element={<WebView />} />
             <Route path="gogstore" element={<WebView />} />
             <Route path="wiki" element={<WebView />} />
@@ -83,7 +84,10 @@ function App() {
       <TransactionNotification />
       {onboardingStore.isOnboardingOpen && (
         <Onboarding
-          disableOnboarding={() => onboardingStore.closeOnboarding()}
+          disableOnboarding={() => {
+            window.api.trackEvent({ event: 'Onboarding Skipped' })
+            onboardingStore.closeOnboarding()
+          }}
         />
       )}
     </div>

@@ -69,6 +69,8 @@ export const getGOGLinuxInstallersLangs = async (appName: string) =>
   ipcRenderer.invoke('getGOGLinuxInstallersLangs', appName)
 export const getAlternativeWine = async () =>
   ipcRenderer.invoke('getAlternativeWine')
+export const getLocalPeloadPath = async () =>
+  ipcRenderer.invoke('getLocalPeloadPath')
 export const getShellPath = async (saveLocation: string) =>
   ipcRenderer.invoke('getShellPath', saveLocation)
 export const callTool = async (toolArgs: Tools) =>
@@ -101,9 +103,8 @@ export const handleShowDialog = (
 }
 
 import Store from 'electron-store'
-// FUTURE WORK
+// TODO: Refactor this into the backend so in order to set nodeIntegration: false
 // here is how the store methods can be refactored
-// in order to set nodeIntegration: false
 // but converting sync methods to async propagates through frontend
 
 // export const storeNew = async (

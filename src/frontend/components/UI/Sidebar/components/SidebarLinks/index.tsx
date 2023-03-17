@@ -4,10 +4,10 @@ import {
   faStore,
   faUser,
   faUniversalAccess,
-  faUserAlt,
   faWineGlass,
   faGamepad,
-  faBarsProgress
+  faBarsProgress,
+  faUserAlt
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink, useLocation } from 'react-router-dom'
@@ -87,13 +87,15 @@ export default function SidebarLinks() {
 
   return (
     <div className="SidebarLinks Sidebar__section">
-      <div className="hyperplaySidebarLogoContainer">
-        <HyperPlayLogoWhite
-          height={64}
-          width={64}
-          className="hyperplaySidebarLogo"
-        />
-      </div>
+      <NavLink to={'/'}>
+        <div className="hyperplaySidebarLogoContainer">
+          <HyperPlayLogoWhite
+            height={64}
+            width={64}
+            className="hyperplaySidebarLogo"
+          />
+        </div>
+      </NavLink>
       <h6 className="Sidebar__categoryTitle">GAMES</h6>
       <NavLink
         className={({ isActive }) =>
@@ -136,6 +138,17 @@ export default function SidebarLinks() {
           </>
         </NavLink>
       )}
+      {loggedIn && (
+        <NavLink className="Sidebar__item" to={'/login'}>
+          <div className="Sidebar__itemIcon">
+            <FontAwesomeIcon
+              icon={faUserAlt}
+              title={t('userselector.manageaccounts', 'Manage Accounts')}
+            />
+          </div>
+          <span>{t('userselector.manageaccounts', 'Manage Accounts')}</span>
+        </NavLink>
+      )}
       <div className="SidebarItemWithSubmenu">
         <NavLink
           className={({ isActive }) =>
@@ -143,7 +156,7 @@ export default function SidebarLinks() {
               active: isActive || location.pathname.includes('store')
             })
           }
-          to="/epicstore"
+          to="/hyperplaystore"
         >
           <>
             <div className="Sidebar__itemIcon">
@@ -154,6 +167,17 @@ export default function SidebarLinks() {
         </NavLink>
         {isStore && (
           <div className="SidebarSubmenu">
+            <NavLink
+              data-testid="store"
+              className={({ isActive }) =>
+                classNames('Sidebar__item', 'SidebarLinks__subItem', {
+                  active: isActive
+                })
+              }
+              to="/hyperplaystore"
+            >
+              <span>{t('hyperplay-store', 'HyperPlay Store')}</span>
+            </NavLink>
             <NavLink
               data-testid="store"
               className={({ isActive }) =>
@@ -179,15 +203,6 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
-      <NavLink className="Sidebar__item" to={'/login'}>
-        <div className="Sidebar__itemIcon">
-          <FontAwesomeIcon
-            icon={faUserAlt}
-            title={t('userselector.manageaccounts', 'Manage Accounts')}
-          />
-        </div>
-        <span>{t('userselector.manageaccounts', 'Manage Accounts')}</span>
-      </NavLink>
       <h6 className="Sidebar__categoryTitle">OTHER</h6>
       <div className="SidebarItemWithSubmenu">
         <NavLink

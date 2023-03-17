@@ -29,7 +29,7 @@ const BrowserGame = function ({ url }: BrowserGameProps) {
           src={url}
           className={BrowserGameStyles.browserGame}
           partition={
-            provider !== PROVIDERS.METAMASK_EXTENSION
+            provider === PROVIDERS.METAMASK_MOBILE || PROVIDERS.WALLET_CONNECT
               ? 'persist:InPageWindowEthereumExternalWallet'
               : undefined
           }

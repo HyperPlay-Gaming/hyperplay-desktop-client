@@ -1,68 +1,98 @@
-import React, { useEffect } from 'react'
-import WalletOption from '../components/walletOption'
-import { PROVIDERS } from 'common/types/proxy-types'
-import './index.css'
-import { OnboardingModalConfig } from '../types'
-import { MMTransparent, PlusIcon, WCBlue } from 'frontend/assets/hyperplay'
-import ActionButton from '../components/actionButton'
+import React from 'react'
+import { ONBOARDING_SCREEN } from '../types'
+import { t } from 'i18next'
+import { Button } from '@hyperplay/ui'
+import { HyperPlayLogo } from 'frontend/assets/hyperplay'
+import { LanguageSelector } from 'frontend/components/UI'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
+import { FlagPosition } from 'frontend/components/UI/LanguageSelector'
+import { onboardingStore } from 'frontend/helpers/electronStores'
+import WelcomeStyles from './index.module.scss'
 
 interface WelcomeProps {
-  handleProviderClicked: (provider: PROVIDERS) => void
-  disableOnboarding: () => void
-  setOnboardingModalParams: React.Dispatch<Partial<OnboardingModalConfig>>
-  downloadMetaMaskClicked: () => void
-  handleMmExtensionProviderClicked: () => void
+  setScreen: React.Dispatch<React.SetStateAction<ONBOARDING_SCREEN>>
 }
 
 const Welcome: React.FC<WelcomeProps> = function (props) {
-  useEffect(() => {
-    props.setOnboardingModalParams({
-      title: 'WELCOME TO HYPERPLAY',
-      enableBackButton: false,
-      enableCloseButton: true
-    })
-  }, [])
-  function providerClicked(prov: PROVIDERS) {
-    props.handleProviderClicked(prov)
-  }
   return (
-    <div className="welcomeContainer">
-      <div className="content-sm text-secondary">
-        Please connect your wallet, or download the Metamask mobile-app to get
-        started.
+    <>
+      <HyperPlayLogo />
+      <h5>
+        {t(
+          'hyperplay.onboarding.welcome.title',
+          'Welcome to HyperPlay Early Access!'
+        )}
+      </h5>
+      <div className={`body ${WelcomeStyles.welcomeBodyTextContainer}`}>
+        <div className={WelcomeStyles.boldText}>
+          {t(
+            'hyperplay.onboarding.welcome.text.construction',
+            `HyperPlay is under construction.`
+          )}
+        </div>
+        <div>
+          {t(
+            'hyperplay.onboarding.welcome.text.description',
+            `HyperPlay is a game launcher and game store aggregator from the
+          future. With HyperPlay, you can carry your wallet, tokens, and assets
+          into every game. HyperPlay supports the entire library of the Epic
+          Store, GOG, and our own HyperPlay store. By using HyperPlay, you agree
+          to our`
+          )}{' '}
+          <a
+            onClick={() =>
+              window.api.openExternalUrl(
+                `https://www.hyperplay.xyz/terms-of-service`
+              )
+            }
+          >
+            {t('hyperplay.onboarding.terms', `Terms of Service.`)}
+          </a>
+        </div>
+        <div>
+          {t(
+            'hyperplay.onboarding.welcome.text.bugs',
+            `Please note that HyperPlay is a public alpha. Many features are still
+          in development, and there will be bugs.`
+          )}
+        </div>
+        <div>
+          {t(
+            'hyperplay.onboarding.welcome.text.communityCTA_1',
+            `We'd love your feedback and to have you join us in our`
+          )}{' '}
+          <a
+            onClick={() =>
+              window.api.openExternalUrl(`https://discord.gg/eRVDbGUhKD`)
+            }
+          >
+            {t('hyperplay.discordApp', `Discord`)}
+          </a>{' '}
+          {t(
+            'hyperplay.onboarding.welcome.text.communityCTA_2',
+            `community. Together, let's shape the future of gaming!`
+          )}
+        </div>
       </div>
-      <WalletOption
-        title="MetaMask Mobile"
-        subtext="Connect with MetaMask Mobile"
-        icon={<MMTransparent height={34} width={34} />}
-        onClick={() => providerClicked(PROVIDERS.METAMASK_MOBILE)}
-        isRecommended={true}
-      />
-      <WalletOption
-        title="MetaMask Extension"
-        subtext="Connect with MetaMask Extension"
-        icon={<MMTransparent height={34} width={34} />}
-        onClick={props.handleMmExtensionProviderClicked}
-        isRecommended={false}
-      />
-      <WalletOption
-        title="WalletConnect"
-        subtext="Connect with WalletConnect"
-        icon={<WCBlue height={34} width={34} />}
-        onClick={() => providerClicked(PROVIDERS.WALLET_CONNECT)}
-        isRecommended={false}
-      />
-      <WalletOption
-        title="Create new wallet"
-        subtext="Download MetaMask Mobile"
-        icon={<PlusIcon height={34} width={34} />}
-        onClick={() => props.downloadMetaMaskClicked()}
-        isRecommended={false}
-      />
-      <ActionButton onClick={() => props.disableOnboarding()}>
-        Skip for Now
-      </ActionButton>
-    </div>
+      <div className={WelcomeStyles.languageSelector}>
+        <LanguageSelector flagPossition={FlagPosition.PREPEND} />
+      </div>
+      <div className={WelcomeStyles.actionButton}>
+        <Button
+          onClick={() => {
+            onboardingStore.set('completedEarlyAccess', true)
+            props.setScreen(ONBOARDING_SCREEN.ANALYTICS)
+          }}
+        >
+          {t('button.continue', 'Continue')}{' '}
+          <FontAwesomeIcon
+            icon={faArrowRight}
+            className={WelcomeStyles.actionButtonArrow}
+          />
+        </Button>
+      </div>
+    </>
   )
 }
 

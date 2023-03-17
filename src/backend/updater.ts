@@ -3,13 +3,13 @@ import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
 import { icon } from './constants'
-// import { showDialogBoxModalAuto } from './dialog/dialog'
-import { logError, LogPrefix } from './logger/logger'
+import { logError, LogPrefix, logInfo } from './logger/logger'
 
 autoUpdater.autoDownload = false
 autoUpdater.autoInstallOnAppQuit = false
 
 autoUpdater.on('update-available', async () => {
+  logInfo('App update is available')
   const { response, checkboxChecked } = await dialog.showMessageBox({
     title: t('box.info.update.title', 'HyperPlay'),
     message: t('box.info.update.message', 'There is a new Version available!'),
@@ -23,13 +23,17 @@ autoUpdater.on('update-available', async () => {
     buttons: [t('box.no'), t('box.yes')]
   })
   if (checkboxChecked) {
-    shell.openExternal('https://github.com/G7DAO/HyperPlay/releases')
+    shell.openExternal(
+      'https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases'
+    )
   }
   if (response === 1) {
     autoUpdater.downloadUpdate()
   }
 })
+
 autoUpdater.on('update-downloaded', async () => {
+  logInfo('App update is downloaded')
   const { response } = await dialog.showMessageBox({
     title: t('box.info.update.title-finished', 'Update Finished'),
     message: t(
@@ -47,14 +51,18 @@ autoUpdater.on('update-downloaded', async () => {
   autoUpdater.autoInstallOnAppQuit = true
 })
 
-autoUpdater.on('error', (error) => {
-  /*   showDialogBoxModalAuto({
-    title: t('box.error.update.title', 'Update Error'),
+autoUpdater.on('error', async (error) => {
+  logError(['Failed to update ', error], LogPrefix.Backend)
+  const { response } = await dialog.showMessageBox({
+    title: t('box.error.update.title', 'Error Updating'),
     message: t(
       'box.error.update.message',
-      'Something went wrong with the update, please check the logs or try again later!'
+      'Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.'
     ),
-    type: 'ERROR'
-  }) */
-  logError(['failed to update', error], LogPrefix.Backend)
+    type: 'error',
+    buttons: [t('button.cancel', 'Cancel'), t('button.download', 'Download')]
+  })
+  if (response === 1) {
+    shell.openExternal('https://www.hyperplay.xyz/downloads')
+  }
 })

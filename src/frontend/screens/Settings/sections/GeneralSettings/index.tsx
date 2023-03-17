@@ -7,7 +7,6 @@ import {
   DefaultInstallPath,
   DefaultSteamPath,
   DisableController,
-  DiscordRPC,
   EgsSettings,
   LibraryTopSection,
   MaxRecentGames,
@@ -50,8 +49,6 @@ export default function GeneralSettings() {
       <UseDarkTrayIcon />
 
       <Shortcuts />
-
-      <DiscordRPC />
 
       <DisableController />
 

@@ -23,8 +23,10 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
 
 import {
+  AppPlatforms,
   ExtraInfo,
   GameInfo,
+  HyperPlayInstallInfo,
   Runner,
   SideloadGame,
   WineInstallation
@@ -89,7 +91,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    LegendaryInstallInfo | GogInstallInfo | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >(null)
   const [launchArguments, setLaunchArguments] = useState('')
   const [hasError, setHasError] = useState<{
@@ -148,16 +150,24 @@ export default React.memo(function GamePage(): JSX.Element | null {
         const {
           install,
           is_linux_native = undefined,
-          is_mac_native = undefined
+          is_mac_native = undefined,
+          releaseMeta = undefined
         } = { ...gameInfo }
 
-        const installPlatform =
+        const hpPlatforms = releaseMeta
+          ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
+          : 'Windows'
+
+        const othersPlatforms =
           install.platform ||
           (is_linux_native && isLinux
             ? 'linux'
             : is_mac_native && isMac
             ? 'Mac'
             : 'Windows')
+
+        const installPlatform =
+          runner === 'hyperplay' ? hpPlatforms : othersPlatforms
 
         if (runner !== 'sideload' && !notSupportedGame) {
           getInstallInfo(appName, runner, installPlatform)
@@ -237,7 +247,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
     let install_path: string | undefined
     let install_size: string | undefined
     let version: string | undefined
-    let extra: ExtraInfo | undefined
     let developer: string | undefined
     let cloud_save_enabled = false
 
@@ -245,12 +254,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
       install_path = gameInfo.install.install_path
       install_size = gameInfo.install.install_size
       version = gameInfo.install.version
-      extra = gameInfo.extra
       developer = gameInfo.developer
       cloud_save_enabled = gameInfo.cloud_save_enabled
     }
 
-    hasRequirements = extra?.reqs ? extra.reqs.length > 0 : false
+    hasRequirements = extraInfo?.reqs ? extraInfo.reqs.length > 0 : false
     hasUpdate = is_installed && gameUpdates?.includes(appName)
     const appLocation = gameInfo.browserUrl
       ? false
@@ -270,8 +278,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     const isNative = isWin || isMacNative || isLinuxNative
     const isBrowserGame = installPlatform === 'Browser'
 
-    const showCloudSaveInfo =
-      cloud_save_enabled && !isLinuxNative && !isBrowserGame
+    const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
     const supportsWeb3 = gameInfo.web3?.supported
 
     /*
@@ -293,6 +300,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
           : t('generic.error', 'Unknown error')
       return <ErrorComponent message={message} />
     }
+
+    const description =
+      extraInfo?.about.shortDescription ||
+      extraInfo?.about.description ||
+      t('generic.noDescription', 'No description available')
 
     return (
       <div className="gameConfigContainer">
@@ -362,39 +374,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
               </div>
               <div className="infoWrapper">
                 <h6 className="developer">{developer}</h6>
-                <div className="summary">
-                  {extraInfo && extraInfo.about
-                    ? extraInfo.about.description
-                      ? extraInfo.about.description
-                      : extraInfo.about.longDescription
-                      ? extraInfo.about.longDescription
-                      : ''
-                    : ''}
-                </div>
-                {is_installed && showCloudSaveInfo && (
-                  <div
-                    style={{
-                      color: autoSyncSaves ? '#07C5EF' : ''
-                    }}
-                  >
-                    <b>{t('info.web3-supported', 'Has Web3 features')}:</b>{' '}
-                    {supportsWeb3 ? t('box.yes') : t('box.no')}
-                  </div>
-                )}
-                {is_installed && appLocation && (
-                  <>
-                    <div
-                      className="italic clickablePath"
-                      onClick={() =>
-                        install_path !== undefined
-                          ? window.api.openFolder(install_path)
-                          : {}
-                      }
-                    >
-                      {t('info.path') + ': ' + install_path}
-                    </div>
-                  </>
-                )}
+                <div className="summary">{description}</div>
                 <div className="grid-container">
                   {!is_installed && !isSideloaded && (
                     <>
@@ -412,7 +392,13 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       </div>
                     </>
                   )}
-                  {is_installed && (
+                  <div className="hp-subtitle">
+                    {t('info.web3-supported', 'Has Web3 features')}
+                  </div>
+                  <div className="col2-item italic">
+                    {supportsWeb3 ? t('box.yes') : t('box.no')}
+                  </div>
+                  {is_installed && !isBrowserGame && (
                     <>
                       {showCloudSaveInfo ? (
                         <>
@@ -470,6 +456,19 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       <div className="col2-item italic">
                         {t(canRunOffline ? 'box.no' : 'box.yes')}
                       </div>
+                      <div className="hp-subtitle">
+                        {t('info.path', 'Install Path')}
+                      </div>
+                      {is_installed && appLocation && (
+                        <div className="col2-item italic">
+                          <div
+                            className="col2-item italic"
+                            onClick={() => window.api.openFolder(appLocation)}
+                          >
+                            {appLocation}
+                          </div>
+                        </div>
+                      )}
                       {!isWin && !isNative && !isBrowserGame && (
                         <>
                           <div className="hp-subtitle">Wine</div>
@@ -478,7 +477,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                           </div>
                           <div className="hp-subtitle">Prefix:</div>
                           <div
-                            className="italic clickablePath"
+                            className="col2-item italic"
                             onClick={() => window.api.openFolder(winePrefix)}
                           >
                             {winePrefix}
@@ -487,7 +486,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       )}
                     </>
                   )}
-
                   <TimeContainer game={appName} />
                 </div>
               </div>
@@ -669,7 +667,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
         ? ''
         : `${
             percent && bytes
-              ? `${percent}% [${bytes}] ${eta ? `ETA: ${eta}` : ''}`
+              ? `${percent}% [${Math.ceil(Number(bytes) / 1000000)} MB]  ${
+                  eta ? `ETA: ${eta}` : ''
+                }`
               : '...'
           }`
 

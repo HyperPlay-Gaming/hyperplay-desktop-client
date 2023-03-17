@@ -1,5 +1,5 @@
 import React from 'react'
-import './index.scss'
+import QrCodeGradientStyles from './index.module.scss'
 
 interface QrCodeProps {
   qrUrl: string
@@ -11,9 +11,13 @@ const QrCodeGradientBorder: React.FC<QrCodeProps> = function (props) {
     margin: props.imageMargin
   }
   return (
-    <div className="borderWrap">
-      <div className="qrCodeContainer">
-        <img src={props.qrUrl} className="qrCodeImage" style={imgStyle}></img>
+    <div className={QrCodeGradientStyles.borderWrap}>
+      <div className={QrCodeGradientStyles.qrCodeContainer}>
+        <img
+          src={props.qrUrl}
+          className={QrCodeGradientStyles.qrCodeImage}
+          style={imgStyle}
+        ></img>
       </div>
     </div>
   )

@@ -28,6 +28,8 @@ import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
 import { createAbortController } from '../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../main_window'
 import { app, BrowserWindow } from 'electron'
+import { getHyperPlayGameInfo } from 'backend/hyperplay/library'
+import { isGameNative } from 'backend/main'
 const buildDir = resolve(__dirname, '../../build')
 
 export function appLogFileLocation(appName: string) {
@@ -58,7 +60,11 @@ export function addNewApp({
   art_cover,
   art_square,
   web3,
-  browserUrl
+  browserUrl,
+  is_installed = true,
+  description,
+  wineSupport,
+  systemRequirements
 }: SideloadGame): void {
   const game: SideloadGame = {
     runner: 'sideload',
@@ -70,11 +76,14 @@ export function addNewApp({
     },
     folder_name: dirname(executable),
     art_cover,
-    is_installed: true,
+    is_installed: is_installed !== undefined ? is_installed : true,
     art_square,
     canRunOffline: !browserUrl,
     browserUrl,
-    web3
+    web3,
+    description,
+    wineSupport,
+    systemRequirements
   }
 
   if (isMac && executable.endsWith('.app')) {
@@ -174,13 +183,35 @@ const openNewBrowserGameWindow = async (
   })
 }
 
-export async function launchApp(appName: string): Promise<boolean> {
-  const gameInfo = getAppInfo(appName)
-  const {
-    install: { executable },
-    folder_name,
-    browserUrl
+export async function launchApp(
+  appName: string,
+  runner: 'sideload' | 'hyperplay'
+): Promise<boolean> {
+  let gameInfo
+  if (runner === 'sideload') {
+    gameInfo = getAppInfo(appName)
+  }
+  if (runner === 'hyperplay') {
+    gameInfo = getHyperPlayGameInfo(appName)
+  }
+
+  if (!gameInfo) {
+    return false
+  }
+
+  let {
+    install: { executable }
   } = gameInfo
+
+  const { browserUrl } = gameInfo
+
+  const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
+  if (
+    gameSettingsOverrides.targetExe !== undefined &&
+    gameSettingsOverrides.targetExe !== ''
+  ) {
+    executable = gameSettingsOverrides.targetExe
+  }
 
   if (browserUrl) {
     return openNewBrowserGameWindow(browserUrl)
@@ -190,6 +221,7 @@ export async function launchApp(appName: string): Promise<boolean> {
   const { launcherArgs } = gameSettings
 
   if (executable) {
+    const isNative = isGameNative(appName, runner)
     const {
       success: launchPrepSuccess,
       failureReason: launchPrepFailReason,
@@ -197,7 +229,7 @@ export async function launchApp(appName: string): Promise<boolean> {
       mangoHudCommand,
       gameModeBin,
       steamRuntime
-    } = await prepareLaunch(gameSettings, gameInfo, isNativeApp(appName))
+    } = await prepareLaunch(gameSettings, gameInfo, isNative)
 
     const wrappers = setupWrappers(
       gameSettings,
@@ -221,7 +253,7 @@ export async function launchApp(appName: string): Promise<boolean> {
     const env = { ...process.env, ...setupEnvVars(gameSettings) }
 
     // Native
-    if (isNativeApp(appName)) {
+    if (isNative) {
       logInfo(
         `launching native sideloaded: ${executable} ${launcherArgs ?? ''}`,
         LogPrefix.Backend
@@ -244,7 +276,7 @@ export async function launchApp(appName: string): Promise<boolean> {
       await callRunner(
         commandParts,
         {
-          name: 'sideload',
+          name: runner,
           logPrefix: LogPrefix.Backend,
           bin: executable,
           dir: dirname(executable)
@@ -266,21 +298,13 @@ export async function launchApp(appName: string): Promise<boolean> {
       return true
     }
 
-    logInfo(
-      `launching non-native sideloaded: ${executable}}`,
-      LogPrefix.Backend
-    )
-
-    if (isMac) {
-      const globalSettings = await GameConfig.get('global').getSettings()
-      gameSettings.wineVersion = globalSettings.wineVersion
-    }
+    logInfo(`launching non-native sideloaded: ${executable}`, LogPrefix.Backend)
 
     await runWineCommand({
       commandParts: [executable, launcherArgs ?? ''],
       gameSettings,
       wait: false,
-      startFolder: folder_name,
+      startFolder: dirname(executable),
       options: {
         wrappers,
         logFile: appLogFileLocation(appName),
@@ -297,7 +321,7 @@ export async function launchApp(appName: string): Promise<boolean> {
 
 export async function stop(appName: string): Promise<void> {
   const {
-    install: { executable }
+    install: { executable = undefined }
   } = getAppInfo(appName)
 
   if (executable) {
@@ -310,10 +334,12 @@ export async function stop(appName: string): Promise<void> {
 type RemoveArgs = {
   appName: string
   shouldRemovePrefix: boolean
+  deleteFiles?: boolean
 }
 export async function removeApp({
   appName,
-  shouldRemovePrefix
+  shouldRemovePrefix,
+  deleteFiles = false
 }: RemoveArgs): Promise<void> {
   sendFrontendMessage('gameStatusUpdate', {
     appName,
@@ -324,7 +350,10 @@ export async function removeApp({
   const old = libraryStore.get('games', [])
   const current = old.filter((a: SideloadGame) => a.app_name !== appName)
 
-  const { title } = getAppInfo(appName)
+  const {
+    title,
+    install: { executable }
+  } = getAppInfo(appName)
   const { winePrefix } = await getAppSettings(appName)
 
   if (shouldRemovePrefix) {
@@ -335,6 +364,11 @@ export async function removeApp({
     }
   }
   libraryStore.set('games', current)
+
+  if (deleteFiles) {
+    rmSync(dirname(executable), { recursive: true })
+  }
+
   notify({ title, body: i18next.t('notify.uninstalled') })
 
   removeAppShortcuts(appName)
