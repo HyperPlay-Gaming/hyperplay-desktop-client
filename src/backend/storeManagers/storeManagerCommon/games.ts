@@ -114,7 +114,7 @@ export async function launchGame(
     install: { executable }
   } = gameInfo
 
-  const { folder_name, browserUrl } = gameInfo
+  const { browserUrl } = gameInfo
 
   const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
   if (
@@ -227,7 +227,7 @@ export async function launchGame(
       commandParts: [executable, launcherArgs ?? ''],
       gameSettings,
       wait: false,
-      startFolder: folder_name,
+      startFolder: dirname(executable),
       options: {
         wrappers,
         logFile: logFileLocation(appName),
