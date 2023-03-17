@@ -133,21 +133,10 @@ async function handleLaunch(
       icon: icon
     })
     if (response === 0) {
-      const { filePaths, canceled } = await dialog.showOpenDialog({
-        buttonLabel: i18next.t('box.choose'),
-        properties: ['openDirectory'],
-        title: i18next.t('install.path', 'Select Install Path')
+      return sendFrontendMessage('installGame', {
+        appName: app_name,
+        runner: gameRunner
       })
-      if (canceled) {
-        return
-      }
-      if (filePaths[0]) {
-        return sendFrontendMessage('installGame', {
-          appName: app_name,
-          runner: gameRunner,
-          path: filePaths[0]
-        })
-      }
     }
     if (response === 1) {
       return logInfo('Not installing game', LogPrefix.ProtocolHandler)
