@@ -78,7 +78,7 @@ export async function checkGameUpdates() {
 }
 
 /**
- * Alias for `LegendaryLibrary.getGameInfo(this.appName)`
+ * Alias for `LegendaryLibrary.getGameInfo(appName)`
  *
  * @returns GameInfo
  */
@@ -297,7 +297,7 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
 }
 
 /**
- * Alias for `GameConfig.get(this.appName).config`
+ * Alias for `GameConfig.get(appName).config`
  * If it doesn't exist, uses getSettings() instead.
  *
  * @returns GameConfig
@@ -661,7 +661,6 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
  * Does NOT check for online connectivity.
  */
 export async function repair(appName: string): Promise<ExecResult> {
-  // this.state.status = 'repairing'
   const { maxWorkers, downloadNoHttps } = GlobalConfig.get().getSettings()
   const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
   const noHttps = downloadNoHttps ? ['--no-https'] : []

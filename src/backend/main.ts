@@ -149,7 +149,12 @@ import { addGameToLibrary } from './storeManagers/hyperplay/library'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
-import { autoUpdate, gameManagerMap, libraryManagerMap } from './storeManagers'
+import {
+  autoUpdate,
+  gameManagerMap,
+  initStoreManagers,
+  libraryManagerMap
+} from './storeManagers'
 
 app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
@@ -297,7 +302,8 @@ if (!gotTheLock) {
     handleProtocol(argv)
   })
   app.whenReady().then(async () => {
-    LegendaryLibraryManager.loadGamesInAccount()
+    initStoreManagers()
+
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )

@@ -46,8 +46,13 @@ const allGames: Set<string> = new Set()
 let installedGames: Map<string, InstalledJsonMetadata> = new Map()
 const library: Map<string, GameInfo> = new Map()
 
+export async function initLegendaryLibraryManager() {
+  loadGamesInAccount()
+  await refresh()
+}
+
 /**
- * Loads all of the user's games into `this.allGames`
+ * Loads all of the user's games into `allGames`
  */
 export function loadGamesInAccount() {
   if (!existsSync(legendaryMetadata)) {
@@ -93,7 +98,7 @@ async function refreshLegendary(): Promise<ExecResult> {
 }
 
 /**
- * Refresh `this.installedGames` from file.
+ * Refresh `installedGames` from file.
  */
 export function refreshInstalled() {
   const installedJSON = join(legendaryConfigPath, 'installed.json')
@@ -160,7 +165,7 @@ export function getListOfGames() {
  * Get game info for a particular game.
  *
  * @param appName The AppName of the game you want the info of
- * @param forceReload Discards game info in `this.library` and always reads info from metadata files
+ * @param forceReload Discards game info in `library` and always reads info from metadata files
  * @returns GameInfo
  */
 export function getGameInfo(
@@ -378,10 +383,23 @@ export async function updateAllGames() {
  * @param newPath
  */
 export async function changeGameInstallPath(appName: string, newPath: string) {
-  // @ts-expect-error TODO: Verify appName is valid here
-  this.library.get(appName).install.install_path = newPath
-  // @ts-expect-error Same as above
-  this.installedGames.get(appName).install_path = newPath
+  const libraryGameInfo = library.get(appName)
+  if (libraryGameInfo) libraryGameInfo.install.install_path = newPath
+  else {
+    logWarning(
+      `library game info not found in changeGameInstallPath for ${appName}`,
+      LogPrefix.Legendary
+    )
+  }
+
+  const installedGameInfo = installedGames.get(appName)
+  if (installedGameInfo) installedGameInfo.install_path = newPath
+  else {
+    logWarning(
+      `installed game info not found in changeGameInstallPath for ${appName}`,
+      LogPrefix.Legendary
+    )
+  }
 
   const { error } = await runRunnerCommand(
     ['move', appName, dirname(newPath), '--skip-move'],
