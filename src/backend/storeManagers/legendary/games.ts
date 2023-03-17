@@ -53,7 +53,7 @@ import {
   addShortcuts as addShortcutsUtil,
   removeShortcuts as removeShortcutsUtil
 } from '../../shortcuts/shortcuts/shortcuts'
-import { join } from 'path'
+import { dirname, join } from 'path'
 import { gameInfoStore } from './electronStores'
 import { removeNonSteamGame } from '../../shortcuts/nonesteamgame/nonesteamgame'
 import shlex from 'shlex'
@@ -692,7 +692,7 @@ export async function repair(appName: string): Promise<ExecResult> {
 
 export async function importGame(
   appName: string,
-  path: string,
+  executablePath: string,
   platform: InstallPlatform
 ): Promise<ExecResult> {
   const commandParts = [
@@ -701,7 +701,7 @@ export async function importGame(
     '--platform',
     platform,
     appName,
-    path
+    dirname(executablePath)
   ]
 
   logInfo(`Importing ${appName}.`, LogPrefix.Legendary)

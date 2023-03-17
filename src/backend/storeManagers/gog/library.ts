@@ -18,7 +18,7 @@ import {
   GamesDBData,
   Library
 } from 'common/types/gog'
-import { basename, join } from 'node:path'
+import { basename, dirname, join } from 'node:path'
 import { existsSync, readFileSync } from 'graceful-fs'
 
 import { logError, logInfo, LogPrefix, logWarning } from '../../logger/logger'
@@ -582,7 +582,7 @@ export async function changeGameInstallPath(
   installedGamesStore.set('installed', installedArray)
 }
 
-export async function importGame(data: GOGImportData, path: string) {
+export async function importGame(data: GOGImportData, executablePath: string) {
   const gameInfo = await getInstallInfo(data.appName)
 
   if (!gameInfo) {
@@ -591,8 +591,8 @@ export async function importGame(data: GOGImportData, path: string) {
 
   const installInfo: InstalledInfo = {
     appName: data.appName,
-    install_path: path,
-    executable: '',
+    install_path: dirname(executablePath),
+    executable: executablePath,
     install_size: getFileSize(gameInfo.manifest?.disk_size),
     is_dlc: false,
     version: data.versionName,

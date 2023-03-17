@@ -12,7 +12,7 @@ import {
   getGameInfo as getGogLibraryGameInfo,
   changeGameInstallPath
 } from './library'
-import { join } from 'path'
+import { join, dirname } from 'path'
 import { GameConfig } from '../../game_config'
 import { GlobalConfig } from '../../config'
 import {
@@ -109,12 +109,12 @@ export async function getSettings(appName: string): Promise<GameSettings> {
 
 export async function importGame(
   appName: string,
-  path: string,
+  executablePath: string,
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   platform: InstallPlatform
 ): Promise<ExecResult> {
   const res = await runGogdlCommand(
-    ['import', path],
+    ['import', dirname(executablePath)],
     createAbortController(appName),
     {
       logMessagePrefix: `Importing ${appName}`
@@ -133,7 +133,7 @@ export async function importGame(
   }
 
   try {
-    await importGogLibraryGame(JSON.parse(res.stdout), path)
+    await importGogLibraryGame(JSON.parse(res.stdout), executablePath)
     addShortcuts(appName)
   } catch (error) {
     logError(['Failed to import', `${appName}:`, error], LogPrefix.Gog)
