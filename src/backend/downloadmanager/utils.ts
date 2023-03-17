@@ -1,4 +1,4 @@
-import { gameManagerMap } from 'backend/main'
+import { gameManagerMap } from 'backend/storeManagers'
 import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
 import { isEpicServiceOffline } from '../utils'
 import { InstallParams, InstallPlatform } from 'common/types'

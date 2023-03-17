@@ -1,4 +1,4 @@
-import { gameManagerMap } from './../main'
+import { gameManagerMap } from 'backend/storeManagers'
 import { existsSync } from 'graceful-fs'
 import { ipcMain } from 'electron'
 import i18next from 'i18next'

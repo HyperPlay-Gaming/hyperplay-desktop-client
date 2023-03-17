@@ -48,7 +48,7 @@ import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import { OverlayApp } from './overlay/overlay'
-import { gameManagerMap } from './main'
+import { gameManagerMap } from 'backend/storeManagers'
 
 async function prepareLaunch(
   gameSettings: GameSettings,

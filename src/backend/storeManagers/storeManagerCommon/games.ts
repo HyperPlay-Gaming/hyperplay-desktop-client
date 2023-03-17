@@ -18,7 +18,7 @@ import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
-import { gameManagerMap } from 'backend/main'
+import { gameManagerMap } from '../index'
 import find from 'find-process'
 import { OverlayApp } from 'backend/overlay/overlay'
 const buildDir = resolve(__dirname, '../../build')

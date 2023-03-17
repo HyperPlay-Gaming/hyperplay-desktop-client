@@ -1,4 +1,4 @@
-import { gameManagerMap } from 'backend/main'
+import { gameManagerMap } from '../../index'
 import {
   callAbortController,
   createAbortController,

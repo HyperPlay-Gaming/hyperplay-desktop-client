@@ -7,8 +7,6 @@ import {
   DiskSpaceData,
   StatusPromise,
   GamepadInputEvent,
-  DMQueueElement,
-  GameInfo,
   WineCommandArgs,
   ExecResult
 } from 'common/types'
@@ -109,14 +107,13 @@ import {
   logError,
   logInfo,
   LogPrefix,
-  logWarning,
-  RunnerToLogPrefixMap
+  logWarning
 } from './logger/logger'
 import { gameInfoStore } from 'backend/storeManagers/legendary/electronStores'
 import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
-import { initQueue, addToQueue } from './downloadmanager/downloadqueue'
+import { initQueue } from './downloadmanager/downloadqueue'
 import * as ProviderHelper from './hyperplay-proxy-server/providerHelper'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import * as ProxyServer from './hyperplay-proxy-server/proxy'
@@ -149,37 +146,10 @@ import {
 } from './main_window'
 import { addGameToLibrary } from './storeManagers/hyperplay/library'
 
-import * as HyperPlayGameManager from './storeManagers/hyperplay/games'
-import * as SideloadGameManager from './storeManagers/sideload/games'
-import * as GOGGameManager from './storeManagers/gog/games'
-import * as LegendaryGameManager from 'backend/storeManagers/legendary/games'
-
-import * as HyperPlayLibraryManager from './storeManagers/hyperplay/library'
-import * as SideloadLibraryManager from './storeManagers/sideload/library'
-import * as GOGLibraryManager from './storeManagers/gog/library'
+import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
+import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
-
-interface GameManagerMap {
-  [key: string]: GameManager
-}
-
-export const gameManagerMap: GameManagerMap = {
-  hyperplay: HyperPlayGameManager,
-  sideload: SideloadGameManager,
-  gog: GOGGameManager,
-  legendary: LegendaryGameManager
-}
-
-interface LibraryManagerMap {
-  [key: string]: LibraryManager
-}
-
-export const libraryManagerMap: LibraryManagerMap = {
-  hyperplay: HyperPlayLibraryManager,
-  sideload: SideloadLibraryManager,
-  gog: GOGLibraryManager,
-  legendary: LegendaryLibraryManager
-}
+import { autoUpdate, gameManagerMap, libraryManagerMap } from './storeManagers'
 
 app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
@@ -725,26 +695,6 @@ ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
 ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 
 /// IPC handlers begin here.
-
-function autoUpdate(runner: string, gamesToUpdate: string[]) {
-  const logPrefix = RunnerToLogPrefixMap[runner]
-  gamesToUpdate.forEach(async (appName) => {
-    const { ignoreGameUpdates } = await gameManagerMap[runner].getSettings(
-      appName
-    )
-    const gameInfo = gameManagerMap[runner].getGameInfo(appName)
-    if (!ignoreGameUpdates) {
-      logInfo(`Auto-Updating ${gameInfo.title}`, logPrefix)
-      const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
-      addToQueue(dmQueueElement)
-      // remove from the array to avoid downloading the same game twice
-      gamesToUpdate = gamesToUpdate.filter((game) => game !== appName)
-    } else {
-      logInfo(`Skipping auto-update for ${gameInfo.title}`, logPrefix)
-    }
-  })
-  return gamesToUpdate
-}
 
 ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
   let oldGames: string[] = []
@@ -1745,27 +1695,6 @@ ipcMain.handle('isNative', (e, { appName, runner }) => {
   return gameManagerMap[runner].isNative(appName)
 })
 
-function getDMElement(gameInfo: GameInfo, appName: string) {
-  const {
-    install: { install_path, platform },
-    runner
-  } = gameInfo
-  const dmQueueElement: DMQueueElement = {
-    params: {
-      appName,
-      gameInfo,
-      runner,
-      path: install_path!,
-      platformToInstall: platform!
-    },
-    type: 'update',
-    addToQueueTime: Date.now(),
-    endTime: 0,
-    startTime: 0
-  }
-  return dmQueueElement
-}
-
 ipcMain.handle('pathExists', async (e, path: string) => {
   return existsSync(path)
 })
@@ -1791,7 +1720,6 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import { trackEvent } from './metrics/metrics'
-import { GameManager, LibraryManager } from 'common/types/game_manager'
 import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
 import { addNewApp } from './storeManagers/sideload/library'
 

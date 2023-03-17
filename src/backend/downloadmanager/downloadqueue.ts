@@ -1,4 +1,4 @@
-import { libraryManagerMap } from './../main'
+import { libraryManagerMap } from 'backend/storeManagers'
 import { TypeCheckedStoreBackend } from './../electron_store'
 import { logError, logInfo, LogPrefix } from '../logger/logger'
 import { getFileSize } from '../utils'

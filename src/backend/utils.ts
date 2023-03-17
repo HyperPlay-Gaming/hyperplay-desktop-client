@@ -71,7 +71,7 @@ import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { validWine } from './launcher'
-import { gameManagerMap } from './main'
+import { gameManagerMap } from 'backend/storeManagers'
 
 const execAsync = promisify(exec)
 

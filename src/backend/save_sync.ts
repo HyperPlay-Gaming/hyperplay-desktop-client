@@ -24,7 +24,7 @@ import {
 } from './utils/aborthandler/aborthandler'
 import { legendaryConfigPath } from './constants'
 import { join } from 'path'
-import { gameManagerMap, libraryManagerMap } from './main'
+import { gameManagerMap, libraryManagerMap } from 'backend/storeManagers'
 
 async function getDefaultSavePath(
   appName: string,
