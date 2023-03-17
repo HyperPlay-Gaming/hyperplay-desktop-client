@@ -292,12 +292,9 @@ export async function install(
 
   // Installation succeded
   // Save new game info to installed games store
-  const installInfo = await getInstallInfo(installPlatform)
+  const installInfo = await getInstallInfo(appName, installPlatform)
   if (installInfo === undefined) {
-    logInfo(
-      'install info is undefined in GOG install so returning error',
-      LogPrefix.Gog
-    )
+    logError('install info is undefined in GOG install', LogPrefix.Gog)
     return { status: 'error' }
   }
   const gameInfo = getGameInfo(appName)
@@ -307,10 +304,7 @@ export async function install(
     : null
 
   if (gameInfo.folder_name === undefined) {
-    logInfo(
-      'game info folde is undefined in GOG install so returning error',
-      LogPrefix.Gog
-    )
+    logError('game info folder is undefined in GOG install', LogPrefix.Gog)
     return { status: 'error' }
   }
   const installedData: InstalledInfo = {
@@ -720,6 +714,7 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
   await removeShortcutsUtil(gameInfo)
   syncStore.delete(appName)
   await removeNonSteamGame({ gameInfo })
+  sendFrontendMessage('refreshLibrary', 'gog')
   return res
 }
 

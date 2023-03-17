@@ -39,7 +39,7 @@ import { isOnline } from '../../online_monitor'
 
 const library: Map<string, GameInfo> = new Map()
 const installedGames: Map<string, InstalledInfo> = new Map()
-refreshInstalled()
+refresh()
 
 export async function getSaveSyncLocation(
   appName: string,
@@ -401,12 +401,13 @@ export async function getInstallInfo(
 
   const credentials = await GOGUser.getCredentials()
   if (!credentials) {
-    logError('No credentials, cannot get install info')
+    logError('No credentials, cannot get install info', LogPrefix.Gog)
     return
   }
   const gameData = library.get(appName)
 
   if (!gameData) {
+    logError('Game data falsy in getInstallInfo', LogPrefix.Gog)
     return
   }
 
@@ -431,6 +432,10 @@ export async function getInstallInfo(
   deleteAbortController(appName)
 
   if (!res.stdout || res.abort) {
+    logError(
+      `stdout = ${!!res.stdout} and res.abort = ${!!res.abort} in getInstallInfo`,
+      LogPrefix.Gog
+    )
     return
   }
 
