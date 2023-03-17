@@ -75,6 +75,7 @@ import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { validWine } from './launcher'
+import { getHyperPlayGameInfo } from './hyperplay/library'
 
 const execAsync = promisify(exec)
 
@@ -826,6 +827,9 @@ const getCurrentChangelog = async (): Promise<Release | null> => {
 function getInfo(appName: string, runner: Runner): GameInfo | SideloadGame {
   if (runner === 'sideload') {
     return getAppInfo(appName)
+  }
+  if (runner === 'hyperplay') {
+    return getHyperPlayGameInfo(appName)
   }
   const game = getGame(appName, runner)
   return game.getGameInfo()
