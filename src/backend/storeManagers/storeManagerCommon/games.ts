@@ -65,33 +65,17 @@ const openNewBrowserGameWindow = async (
   })
 }
 
-// TODO: refactor to use hyperplay store json data
-export const appNameToProcessName = {
-  '63f69d82069b92b74c8c36e9': 'altiros',
-  '63efc374069b92b74cddf1d0': 'AnotherWorld-Win64-Shipping',
-  '63f42b4b069b92b74cee0ca5': 'Bionic Owls',
-  '63f7ead4069b92b74cb8b684': 'TheBornless426-Win64-Shipping',
-  '63f6f435069b92b74cce5f1b': 'BC3', //bunny count
-  '63ed99d1636c19e6200f7631': 'Space_Hangar_FPS', //flight force
-  //gridiron
-  '63f8a8c7069b92b74c52d1a3': 'MoonBlasters-Win64-Shipping',
-  '63f785b3069b92b74c484f0e': 'Necrodemic-Win64-Shipping',
-  '63f72cde069b92b74c01b1ca': 'PhantomGalaxies-Win64-Shipping',
-  '63ff5425069b92b74c91f67c': 'RocketMonstersUE5-Win64-Shipping',
-  '63fd5f31069b92b74c98d10b': 'The Sandbox', //sandbox
-  '63ecdb07636c19e6206db488': 'RWC', //smashverse
-  '63f8f9a8069b92b74ca32061': 'BattleRacingClient-Win64-Shipping', //tearing spaces
-  '63de7b0099796b87818363d6': 'TROBLauncher',
-  '63f59264069b92b74c844c0b': 'Uldor-Win64-Shipping',
-  '63fd0f9f069b92b74c3abe9d': 'Voxie Tactics v0.27.0',
-  '63f7a5b0069b92b74c60f040': 'The Wake Demo', //dungeon demo
-  '63f685cd069b92b74c6d5778': 'The Wake Demo' //pre alpha
+export function getGameProcessName(gameInfo: GameInfo): string | undefined {
+  const installedPlatform = gameInfo.install.platform
+  if (installedPlatform === undefined) return
+  return gameInfo.releaseMeta?.platforms[installedPlatform].processName
 }
 
-async function injectProcess(appName: string) {
-  if (!Object.hasOwn(appNameToProcessName, appName)) return
+async function injectProcess(gameInfo: GameInfo) {
+  const processNameToInject = getGameProcessName(gameInfo)
+  if (processNameToInject === undefined) return
 
-  find('name', appNameToProcessName[appName], true).then((val) => {
+  find('name', processNameToInject, true).then((val) => {
     console.log('found this with process name = ', JSON.stringify(val, null, 4))
     for (const process_i of val) {
       const pidToInject = process_i.pid
@@ -189,7 +173,7 @@ export async function launchGame(
 
       if (runner === 'hyperplay') {
         //some games take a while to launch. 8 seconds seems to work well
-        setTimeout(async () => injectProcess(appName), 8000)
+        setTimeout(async () => injectProcess(gameInfo), 8000)
       }
 
       await callRunner(

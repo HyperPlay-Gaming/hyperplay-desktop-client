@@ -138,7 +138,7 @@ export async function refreshHPGameInfo(appId: string): Promise<void> {
   }
   const currentInfo = currentLibrary[gameIndex]
   const res = await axios.get<HyperPlayRelease>(gameIdUrl)
-  const data = res.data[0]
+  const data = res.data[0] as HyperPlayRelease
   const gameInfo: GameInfo = {
     ...currentInfo,
     extra: {
@@ -162,7 +162,8 @@ export async function refreshHPGameInfo(appId: string): Promise<void> {
     art_cover:
       data.releaseMeta.image ||
       data.projectMeta.main_capsule ||
-      currentInfo.art_cover
+      currentInfo.art_cover,
+    releaseMeta: data.releaseMeta
   }
   currentLibrary[gameIndex] = gameInfo
   return hpLibraryStore.set('games', currentLibrary)

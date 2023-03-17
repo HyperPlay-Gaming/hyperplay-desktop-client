@@ -30,7 +30,7 @@ import {
 import { InstallResult, RemoveArgs } from 'common/types/game_manager'
 import { GOGCloudSavesLocation } from 'common/types/gog'
 import {
-  appNameToProcessName,
+  getGameProcessName,
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
 
@@ -78,9 +78,10 @@ export function isNative(appName: string): boolean {
 }
 
 export async function stop(appName: string): Promise<void> {
+  const gameInfo = getGameInfo(appName)
   const {
     install: { executable = undefined }
-  } = getGameInfo(appName)
+  } = gameInfo
 
   if (executable) {
     const split = executable.split('/')
@@ -88,8 +89,9 @@ export async function stop(appName: string): Promise<void> {
     killPattern(exe)
   }
 
-  if (Object.hasOwn(appNameToProcessName, appName)) {
-    killPattern(appNameToProcessName[appName])
+  const gameProcessName = getGameProcessName(gameInfo)
+  if (gameProcessName) {
+    killPattern(gameProcessName)
   }
 }
 

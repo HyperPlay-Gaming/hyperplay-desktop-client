@@ -796,6 +796,7 @@ export type PlatformInfo = {
   downloadSize: number
   launch_options: Array<LaunchOption>
   owned_dlc: Array<DLCInfo>
+  processName?: string
 }
 
 export type ValistPlatforms = {
