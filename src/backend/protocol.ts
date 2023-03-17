@@ -5,6 +5,7 @@ import { getInfo } from './utils'
 import { GameInfo, Runner, SideloadGame } from 'common/types'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { icon } from './constants'
+import { addGameToLibrary, getHyperPlayGameInfo } from './hyperplay/library'
 
 type Command = 'ping' | 'launch'
 
@@ -104,7 +105,7 @@ async function handleLaunch(
   arg: string | undefined,
   mainWindow?: Electron.BrowserWindow | null
 ) {
-  const game = findGame(runner, arg)
+  const game = await findGame(runner, arg)
 
   if (!game) {
     return logError(
@@ -147,16 +148,31 @@ async function handleLaunch(
   sendFrontendMessage('launchGame', arg, gameRunner)
 }
 
-function findGame(
+async function findGame(
   runner: Runner | undefined,
   arg: string | undefined = ''
-): GameInfo | SideloadGame | null {
+): Promise<GameInfo | SideloadGame | null> {
   // If the runner is specified, only search for that runner
   const runnersToSearch = runner ? [runner, 'hyperplay'] : RUNNERS
 
   // Search for the game in the runners specified in runnersToSearch and return the first one found (if any)
   for (const currentRunner of runnersToSearch) {
     const run = (currentRunner as Runner) || 'hyperplay'
+    // handle hp games that are not on the library
+
+    if (run === 'hyperplay') {
+      try {
+        getHyperPlayGameInfo(arg)
+      } catch (error) {
+        logInfo(
+          `Game ${arg} not found in library. Adding it...`,
+          LogPrefix.HyperPlay
+        )
+        await addGameToLibrary(arg)
+        return getHyperPlayGameInfo(arg)
+      }
+    }
+
     const gameInfoOrSideload = getInfo(arg, run)
     if (gameInfoOrSideload.app_name) {
       return gameInfoOrSideload
