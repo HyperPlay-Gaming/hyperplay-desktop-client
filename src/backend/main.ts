@@ -500,8 +500,11 @@ ipcMain.once('frontendReady', () => {
 
 // Maybe this can help with white screens
 process.on('uncaughtException', async (err) => {
-  logError(`${err.name}: ${err.message}`, LogPrefix.Backend)
-  showDialogBoxModalAuto({
+  logError(
+    `'Uncaught Exception occured!': ${err.name}: ${err.message}`,
+    LogPrefix.Backend
+  )
+  /*   showDialogBoxModalAuto({
     title: i18next.t(
       'box.error.uncaught-exception.title',
       'Uncaught Exception occured!'
@@ -513,7 +516,7 @@ process.on('uncaughtException', async (err) => {
       error: err
     }),
     type: 'ERROR'
-  })
+  }) */
 })
 
 let powerId: number | null
