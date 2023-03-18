@@ -22,7 +22,7 @@ html,
 .App {
   height: 100%;
   overflow: hidden;
-  background-color: var(--color-neutral-800);
+  background-color: black;
 }
 
 .App {
