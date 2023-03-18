@@ -13,7 +13,7 @@ interface ImportProps {
 }
 
 const ImportScreen = ({
-  importOptions,
+  importOptions = {},
   handleImportMmExtensionClicked
 }: ImportProps) => {
   const [err, setError] = useState('')
