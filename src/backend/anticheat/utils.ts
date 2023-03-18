@@ -63,7 +63,10 @@ function getGameAnticheatInfoFromLocal(
   })
 }
 
-function gameAnticheatInfo(appNamespace: string): AntiCheatInfo | undefined {
+function gameAnticheatInfo(
+  appNamespace: string | undefined
+): AntiCheatInfo | undefined {
+  if (!appNamespace) return undefined
   if (!isLinux) return undefined
 
   if (Object.keys(namespaceToAcInfoMap).length > 0) {
