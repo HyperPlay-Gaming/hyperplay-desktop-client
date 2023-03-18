@@ -305,6 +305,7 @@ abstract class GlobalConfig {
   public async getAlternativeWine(
     scanCustom = true
   ): Promise<WineInstallation[]> {
+    if (isWindows) return []
     if (isMac) {
       const macOsWineSet = await this.getMacOsWineSet()
       return [...macOsWineSet]

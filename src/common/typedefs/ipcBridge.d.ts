@@ -267,7 +267,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   addToSteam: (appName: string, runner: Runner) => Promise<boolean>
   removeFromSteam: (appName: string, runner: Runner) => Promise<void>
   isAddedToSteam: (appName: string, runner: Runner) => Promise<boolean>
-  getAnticheatInfo: (appNamespace: string) => AntiCheatInfo | null
+  getAnticheatInfo: (appNamespace: string) => AntiCheatInfo | undefined
   getEosOverlayStatus: () => {
     isInstalled: boolean
     version?: string

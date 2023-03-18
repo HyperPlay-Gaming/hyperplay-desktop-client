@@ -14,7 +14,9 @@ const awacyUrl = 'https://areweanticheatyet.com/'
 export default function Anticheat({ gameInfo }: Props) {
   const { t } = useTranslation()
 
-  const [anticheatInfo, setAnticheatInfo] = useState<AntiCheatInfo | null>(null)
+  const [anticheatInfo, setAnticheatInfo] = useState<AntiCheatInfo | undefined>(
+    undefined
+  )
 
   useEffect(() => {
     if (
@@ -24,7 +26,7 @@ export default function Anticheat({ gameInfo }: Props) {
     ) {
       window.api
         .getAnticheatInfo(gameInfo.namespace)
-        .then((anticheatInfo: AntiCheatInfo | null) => {
+        .then((anticheatInfo: AntiCheatInfo | undefined) => {
           setAnticheatInfo(anticheatInfo)
         })
     }
