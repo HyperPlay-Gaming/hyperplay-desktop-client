@@ -10,7 +10,7 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
-import { handleArchAndPlatform } from './utils'
+import { getHyperPlayStoreRelease, handleArchAndPlatform } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
 
 export async function addGameToLibrary(appId: string) {
@@ -77,7 +77,7 @@ export async function addGameToLibrary(appId: string) {
 
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 
-  sendFrontendMessage('refreshLibrary')
+  sendFrontendMessage('refreshLibrary', 'hyperplay')
 }
 
 export const getInstallInfo = async (
@@ -130,15 +130,13 @@ export function installState(appName: string, state: boolean) {
  * @returns void
  **/
 export async function refreshHPGameInfo(appId: string): Promise<void> {
-  const gameIdUrl = `https://developers.hyperplay.xyz/api/listings?id=${appId}`
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
   const gameIndex = currentLibrary.findIndex((val) => val.app_name === appId)
   if (gameIndex === -1) {
     return
   }
   const currentInfo = currentLibrary[gameIndex]
-  const res = await axios.get<HyperPlayRelease>(gameIdUrl)
-  const data = res.data[0] as HyperPlayRelease
+  const data = await getHyperPlayStoreRelease(appId)
   const gameInfo: GameInfo = {
     ...currentInfo,
     extra: {

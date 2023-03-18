@@ -21,7 +21,7 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import { removeFromQueue } from 'backend/downloadmanager/downloadqueue'
-import { handleArchAndPlatform } from './utils'
+import { getHyperPlayStoreRelease, handleArchAndPlatform } from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
 import {
   addShortcuts as addShortcutsUtil,
@@ -33,6 +33,7 @@ import {
   getGameProcessName,
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
+import { isOnline } from 'backend/online_monitor'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -120,12 +121,28 @@ export async function importGame(
     return { stderr: '', stdout: '' }
   }
 
+  const gameInfo = getGameInfo(appName)
+  //necessary so that injectProcess can find the process name
+  if (gameInfo.releaseMeta)
+    platform = handleArchAndPlatform(platform, gameInfo.releaseMeta)
+
+  let hpImportVersion = '-1'
+  /**
+   * TODO: Figure out a way to get release name/version of game that is already installed
+   * Currently this just sets version to the latest store release and relies on the game dev
+   * to handle if their game is launched with an old version
+   **/
+  if (isOnline()) {
+    const currentRelease = await getHyperPlayStoreRelease(appName)
+    hpImportVersion = currentRelease.releaseName
+  }
+
   gameInLibrary.install = {
     install_path: path.dirname(pathName),
     executable: pathName,
     install_size: '0 GiB',
     is_dlc: false,
-    version: '-1',
+    version: hpImportVersion,
     platform: platform
   }
 
