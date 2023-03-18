@@ -75,4 +75,4 @@ Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications fold
 
 ### Those Awesome Guys: Gamepad prompts images
 
-- URL: https://thoseawesomeguys.com/prompts/ 
+- URL: https://thoseawesomeguys.com/prompts/
