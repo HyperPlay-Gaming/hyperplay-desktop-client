@@ -28,7 +28,6 @@ import {
   GameInfo,
   HyperPlayInstallInfo,
   Runner,
-  SideloadGame,
   WineInstallation
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
@@ -62,7 +61,7 @@ import { hasStatus } from 'frontend/hooks/hasStatus'
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
-    state: { fromDM: boolean; gameInfo: GameInfo | SideloadGame }
+    state: { fromDM: boolean; gameInfo: GameInfo }
   }
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
@@ -255,7 +254,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
       install_size = gameInfo.install.install_size
       version = gameInfo.install.version
       developer = gameInfo.developer
-      cloud_save_enabled = gameInfo.cloud_save_enabled
+      cloud_save_enabled =
+        gameInfo.cloud_save_enabled !== undefined
+          ? gameInfo.cloud_save_enabled
+          : false
     }
 
     hasRequirements = extraInfo?.reqs ? extraInfo.reqs.length > 0 : false
@@ -302,8 +304,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
     }
 
     const description =
-      extraInfo?.about.shortDescription ||
-      extraInfo?.about.description ||
+      extraInfo?.about?.shortDescription ||
+      extraInfo?.about?.description ||
       t('generic.noDescription', 'No description available')
 
     return (
@@ -358,7 +360,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
                     title={title}
                     storeUrl={
                       extraInfo?.storeUrl ||
-                      ('store_url' in gameInfo ? gameInfo.store_url : '')
+                      ('store_url' in gameInfo &&
+                      gameInfo.store_url !== undefined
+                        ? gameInfo.store_url
+                        : '')
                     }
                     runner={gameInfo.runner}
                     handleUpdate={handleUpdate}

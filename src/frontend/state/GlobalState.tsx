@@ -11,7 +11,6 @@ import {
   WineVersionInfo,
   InstallParams,
   LibraryTopSectionOptions,
-  SideloadGame,
   MetricsOptInStatus
 } from 'common/types'
 import {
@@ -24,7 +23,6 @@ import {
   getGameInfo,
   getLegendaryConfig,
   getPlatform,
-  install,
   launch,
   notify
 } from '../helpers'
@@ -44,6 +42,7 @@ import {
   hpInstalledGamesStore,
   hyperPlayLibraryStore
 } from 'frontend/helpers/electronStores'
+import { InstallModal } from 'frontend/screens/Library/components'
 
 const storage: Storage = window.localStorage
 const globalSettings = configStore.get_nodefault('settings')
@@ -95,7 +94,13 @@ interface StateProps {
   connectivity: { status: ConnectivityStatus; retryIn: number }
   dialogModalOptions: DialogModalOptions
   externalLinkDialogOptions: ExternalLinkDialogOptions
-  sideloadedLibrary: SideloadGame[]
+  showInstallModal: {
+    show: boolean
+    gameInfo: GameInfo | null
+    appName: string
+    runner: Runner
+  }
+  sideloadedLibrary: GameInfo[]
   settingsModalOpen: {
     value: boolean
     type: 'settings' | 'log'
@@ -170,6 +175,12 @@ class GlobalState extends PureComponent<Props> {
     allTilesInColor: configStore.get('allTilesInColor', false),
     activeController: '',
     connectivity: { status: 'offline', retryIn: 0 },
+    showInstallModal: {
+      show: false,
+      appName: '',
+      runner: 'legendary',
+      gameInfo: null
+    },
     sideloadedLibrary: sideloadLibrary.get('games', []),
     hyperPlayLibrary: hyperPlayLibraryStore.get('games', []),
     dialogModalOptions: { showDialog: false },
@@ -327,7 +338,6 @@ class GlobalState extends PureComponent<Props> {
   handleSuccessfulLogin = (runner: Runner) => {
     this.handleCategory('all')
     this.refreshLibrary({
-      fullRefresh: true,
       runInBackground: false,
       library: runner
     })
@@ -399,7 +409,7 @@ class GlobalState extends PureComponent<Props> {
   handleSettingsModalOpen = (
     value: boolean,
     type?: 'settings' | 'log',
-    gameInfo?: GameInfo | SideloadGame
+    gameInfo?: GameInfo
   ) => {
     if (gameInfo) {
       this.setState({
@@ -466,7 +476,6 @@ class GlobalState extends PureComponent<Props> {
 
   refreshLibrary = async ({
     checkForUpdates,
-    fullRefresh,
     runInBackground = true,
     library = undefined
   }: RefreshOptions): Promise<void> => {
@@ -478,7 +487,7 @@ class GlobalState extends PureComponent<Props> {
     })
     window.api.logInfo('Refreshing Library')
     try {
-      await window.api.refreshLibrary(fullRefresh, library)
+      await window.api.refreshLibrary(library)
       return await this.refresh(library, checkForUpdates)
     } catch (error) {
       window.api.logError(`${error}`)
@@ -551,7 +560,7 @@ class GlobalState extends PureComponent<Props> {
     )
 
     // in these cases we just add the new status
-    if (['installing', 'updating', 'playing'].includes(status)) {
+    if (['installing', 'updating', 'playing', 'extracting'].includes(status)) {
       currentApp.status = status
       newLibraryStatus.push(currentApp)
       this.setState({ libraryStatus: newLibraryStatus })
@@ -595,7 +604,7 @@ class GlobalState extends PureComponent<Props> {
         e: Event,
         appName: string,
         runner: Runner
-      ): Promise<{ status: 'done' | 'error' }> => {
+      ): Promise<{ status: 'done' | 'error' | 'abort' }> => {
         const currentApp = libraryStatus.filter(
           (game) => game.appName === appName
         )[0]
@@ -617,25 +626,19 @@ class GlobalState extends PureComponent<Props> {
       const currentApp = libraryStatus.filter(
         (game) => game.appName === appName
       )[0]
-      const { appName, path, runner } = args
+      const { appName, runner } = args
       if (!currentApp || (currentApp && currentApp.status !== 'installing')) {
         const gameInfo = await getGameInfo(appName, runner)
         if (!gameInfo || gameInfo.runner === 'sideload') {
           return
         }
-        return install({
-          gameInfo,
-          installPath: path,
-          isInstalling: false,
-          previousProgress: null,
-          progress: {
-            bytes: '0.00MiB',
-            eta: '00:00:00',
-            percent: 0
-          },
-          t,
-          platformToInstall: 'Windows',
-          showDialogModal: this.handleShowDialogModal
+        return this.setState({
+          showInstallModal: {
+            show: true,
+            appName,
+            runner,
+            gameInfo
+          }
         })
       }
     })
@@ -647,7 +650,6 @@ class GlobalState extends PureComponent<Props> {
     window.api.handleRefreshLibrary(async (e: Event, runner: Runner) => {
       this.refreshLibrary({
         checkForUpdates: false,
-        fullRefresh: true,
         runInBackground: true,
         library: runner
       })
@@ -671,7 +673,6 @@ class GlobalState extends PureComponent<Props> {
     if (legendaryUser || gogUser) {
       this.refreshLibrary({
         checkForUpdates: true,
-        fullRefresh: true,
         runInBackground: Boolean(epic.library.length)
       })
     }
@@ -733,21 +734,30 @@ class GlobalState extends PureComponent<Props> {
   }
 
   render() {
-    const isRTL = RTL_LANGUAGES.includes(this.state.language)
+    const {
+      showInstallModal,
+      language,
+      epic,
+      gog,
+      favouriteGames,
+      hiddenGames,
+      settingsModalOpen
+    } = this.state
+    const isRTL = RTL_LANGUAGES.includes(language)
 
     return (
       <ContextProvider.Provider
         value={{
           ...this.state,
           epic: {
-            library: this.state.epic.library,
-            username: this.state.epic.username,
+            library: epic.library,
+            username: epic.username,
             login: this.epicLogin,
             logout: this.epicLogout
           },
           gog: {
-            library: this.state.gog.library,
-            username: this.state.gog.username,
+            library: gog.library,
+            username: gog.username,
             login: this.gogLogin,
             logout: this.gogLogout
           },
@@ -761,7 +771,7 @@ class GlobalState extends PureComponent<Props> {
           refreshLibrary: this.refreshLibrary,
           refreshWineVersionInfo: this.refreshWineVersionInfo,
           hiddenGames: {
-            list: this.state.hiddenGames,
+            list: hiddenGames,
             add: this.hideGame,
             remove: this.unhideGame
           },
@@ -769,7 +779,7 @@ class GlobalState extends PureComponent<Props> {
           setShowFavourites: this.setShowFavourites,
           setShowNonAvailable: this.setShowNonAvailable,
           favouriteGames: {
-            list: this.state.favouriteGames,
+            list: favouriteGames,
             add: this.addGameToFavourites,
             remove: this.removeGameFromFavourites
           },
@@ -783,13 +793,25 @@ class GlobalState extends PureComponent<Props> {
           showDialogModal: this.handleShowDialogModal,
           showResetDialog: this.showResetDialog,
           handleExternalLinkDialog: this.handleExternalLinkDialog,
-          isSettingsModalOpen: this.state.settingsModalOpen,
+          isSettingsModalOpen: settingsModalOpen,
           setIsSettingsModalOpen: this.handleSettingsModalOpen,
           setShowMetaMaskBrowserSidebarLinks:
             this.setShowMetaMaskBrowserSidebarLinks
         }}
       >
         {this.props.children}
+        {showInstallModal.show && (
+          <InstallModal
+            appName={showInstallModal.appName}
+            runner={showInstallModal.runner}
+            gameInfo={showInstallModal.gameInfo}
+            backdropClick={() =>
+              this.setState({
+                showInstallModal: { ...showInstallModal, show: false }
+              })
+            }
+          />
+        )}
       </ContextProvider.Provider>
     )
   }
