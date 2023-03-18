@@ -1821,5 +1821,5 @@ ipcMain.handle('unhideGame', async (_e, gameId) => {
   const hiddenGames = configStore.get('games.hidden', [])
   const newHiddenGames = hiddenGames.filter(({ appName }) => appName !== gameId)
   configStore.set('games.hidden', newHiddenGames)
-  sendFrontendMessage('refreshLibrary', true, 'hyperplay')
+  sendFrontendMessage('refreshLibrary', 'hyperplay')
 })

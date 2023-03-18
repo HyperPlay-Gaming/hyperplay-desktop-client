@@ -77,7 +77,7 @@ export async function addGameToLibrary(appId: string) {
 
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 
-  sendFrontendMessage('refreshLibrary')
+  sendFrontendMessage('refreshLibrary', 'hyperplay')
 }
 
 export const getInstallInfo = async (

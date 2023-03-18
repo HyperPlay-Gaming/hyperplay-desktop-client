@@ -13,6 +13,8 @@ import { logInfo, RunnerToLogPrefixMap } from 'backend/logger/logger'
 
 import { addToQueue } from 'backend/downloadmanager/downloadqueue'
 import { DMQueueElement, GameInfo } from 'common/types'
+import { ipcMain } from 'electron'
+import { sendFrontendMessage } from 'backend/main_window'
 interface GameManagerMap {
   [key: string]: GameManager
 }
@@ -80,3 +82,7 @@ export async function initStoreManagers() {
   await LegendaryLibraryManager.initLegendaryLibraryManager()
   await GOGLibraryManager.refresh()
 }
+
+ipcMain.once('frontendReady', async () => {
+  sendFrontendMessage('refreshLibrary', 'hyperplay')
+})

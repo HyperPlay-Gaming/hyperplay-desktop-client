@@ -649,7 +649,7 @@ class GlobalState extends PureComponent<Props> {
 
     window.api.handleRefreshLibrary(async (e: Event, runner: Runner) => {
       this.refreshLibrary({
-        checkForUpdates: false,
+        checkForUpdates: true,
         runInBackground: true,
         library: runner
       })
