@@ -1,41 +1,20 @@
-import { ReactComponent as BackArrow } from './back_arrow.svg'
-import { ReactComponent as CloseX } from './close_x.svg'
-import { ReactComponent as HyperPlayLogo } from './hyperplay_logo.svg'
-import { ReactComponent as HyperPlayLogoGreen } from './hyperplay_logo_green.svg'
-import { ReactComponent as HyperPlayLogoRed } from './hyperplay_logo_red.svg'
-import { ReactComponent as HyperPlayLogoWhite } from './hyperplay_logo_white.svg'
-import { ReactComponent as Disconnected } from './disconnected.svg'
-import { ReactComponent as ForwardArrow } from './forward_arrow.svg'
-import { ReactComponent as MMTransparent } from './mm_icon_md_transparent.svg'
-import { ReactComponent as PlusIcon } from './plus.svg'
-import { ReactComponent as RejectedIcon } from './rejected.svg'
-import { ReactComponent as SuccessIcon } from './success.svg'
-import { ReactComponent as WCBlue } from './walletconnect_icon_blue.svg'
-import { ReactComponent as SettingsIcon } from './settings_icon.svg'
-import { ReactComponent as BackArrowOutlinedCircled } from './back_arrow_outlined_circle.svg'
-import { ReactComponent as CyberDividerVertical } from './cyber_divider_vertical.svg'
-import { ReactComponent as PhoneCompletedIcon } from './phone_completed_icon.svg'
-import { ReactComponent as PhoneErrorIcon } from './phone_error_icon.svg'
-import { ReactComponent as PhoneWaitingConfimationSpinner } from './phone_waiting_confirmation.svg'
-
-export {
-  BackArrow,
-  CloseX,
-  HyperPlayLogo,
-  HyperPlayLogoGreen,
-  HyperPlayLogoWhite,
-  HyperPlayLogoRed,
-  MMTransparent,
-  ForwardArrow,
-  Disconnected,
-  PlusIcon,
-  RejectedIcon,
-  SuccessIcon,
-  WCBlue,
-  SettingsIcon,
-  BackArrowOutlinedCircled,
-  CyberDividerVertical,
-  PhoneCompletedIcon,
-  PhoneErrorIcon,
-  PhoneWaitingConfimationSpinner
-}
+export { ReactComponent as BackArrow } from './back_arrow.svg'
+export { ReactComponent as CloseX } from './close_x.svg'
+export { ReactComponent as HyperPlayLogo } from './hyperplay_logo.svg'
+export { ReactComponent as HyperPlayLogoGreen } from './hyperplay_logo_green.svg'
+export { ReactComponent as HyperPlayLogoRed } from './hyperplay_logo_red.svg'
+export { ReactComponent as HyperPlayLogoWhite } from './hyperplay_logo_white.svg'
+export { ReactComponent as Disconnected } from './disconnected.svg'
+export { ReactComponent as ForwardArrow } from './forward_arrow.svg'
+export { ReactComponent as MMTransparent } from './mm_icon_md_transparent.svg'
+export { ReactComponent as PlusIcon } from './plus.svg'
+export { ReactComponent as RejectedIcon } from './rejected.svg'
+export { ReactComponent as SuccessIcon } from './success.svg'
+export { ReactComponent as WCBlue } from './walletconnect_icon_blue.svg'
+export { ReactComponent as SettingsIcon } from './settings_icon.svg'
+export { ReactComponent as BackArrowOutlinedCircled } from './back_arrow_outlined_circle.svg'
+export { ReactComponent as CyberDividerVertical } from './cyber_divider_vertical.svg'
+export { ReactComponent as PhoneCompletedIcon } from './phone_completed_icon.svg'
+export { ReactComponent as PhoneErrorIcon } from './phone_error_icon.svg'
+export { ReactComponent as PhoneWaitingConfimationSpinner } from './phone_waiting_confirmation.svg'
+export { ReactComponent as WarningIcon } from './warning_icon.svg'

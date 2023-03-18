@@ -1,4 +1,4 @@
-import { TypeCheckedStoreBackend } from './../electron_store'
+import { TypeCheckedStoreBackend } from '../../electron_store'
 
 const installedGamesStore = new TypeCheckedStoreBackend(
   'gogInstalledGamesStore',

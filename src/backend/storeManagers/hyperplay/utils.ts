@@ -1,11 +1,11 @@
 import {
   AppPlatforms,
   HyperPlayReleaseMeta,
-  HyperPlayGameOS
+  InstallPlatform
 } from 'common/types'
 
 export function handleArchAndPlatform(
-  platformToInstall: HyperPlayGameOS,
+  platformToInstall: InstallPlatform,
   releaseMeta: HyperPlayReleaseMeta
 ): AppPlatforms {
   const arch = process.arch === 'x64' ? '_amd64' : '_arm64'

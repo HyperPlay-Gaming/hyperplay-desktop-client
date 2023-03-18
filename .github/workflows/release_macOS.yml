@@ -44,6 +44,6 @@ jobs:
         run: yarn
 
       - name: Build artifacts.
-        run: yarn release:mac --arm64
+        run: yarn release:mac
         env:
           NOTARIZE: true

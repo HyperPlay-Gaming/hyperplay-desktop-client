@@ -21,3 +21,15 @@
   color: var(--color-primary-300);
   transition: 0.2s;
 }
+
+.walletWarning {
+  color: var(--color-status-alert);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2xs-fixed);
+
+  svg path {
+    fill: var(--color-status-alert);
+  }
+}
