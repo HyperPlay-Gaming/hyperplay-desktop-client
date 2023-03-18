@@ -120,6 +120,11 @@ export async function importGame(
     return { stderr: '', stdout: '' }
   }
 
+  const gameInfo = getGameInfo(appName)
+  //necessary so that injectProcess can find the process name
+  if (gameInfo.releaseMeta)
+    platform = handleArchAndPlatform(platform, gameInfo.releaseMeta)
+
   gameInLibrary.install = {
     install_path: path.dirname(pathName),
     executable: pathName,
