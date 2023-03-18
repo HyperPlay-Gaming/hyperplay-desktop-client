@@ -3,6 +3,7 @@
   height: 100%;
   font-size: var(--text-xl);
   color: var(--text-default);
+  background-color: var(--color-neutral-800);
 }
 
 .UpdateComponent--topLevel {
