@@ -50,15 +50,16 @@ const ImportScreen = ({
         )}
       </div>
       <div className={ImportScreenStyles.importOptionsContainer}>
-        {Object.keys(importOptions).map((key) => (
-          <ImportOption
-            onClick={async () =>
-              handleImportMmExtensionClicked(importOptions[key])
-            }
-            title={key as ImportableBrowsers}
-            key={key}
-          />
-        ))}
+        {importOptions &&
+          Object.keys(importOptions).map((key) => (
+            <ImportOption
+              onClick={async () =>
+                handleImportMmExtensionClicked(importOptions[key])
+              }
+              title={key as ImportableBrowsers}
+              key={key}
+            />
+          ))}
         <ImportOption
           isCreate={true}
           title={t(
