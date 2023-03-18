@@ -64,7 +64,7 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
           )}{' '}
           <a
             onClick={() =>
-              window.api.openExternalUrl(`https://discord.gg/eRVDbGUhKD`)
+              window.api.openExternalUrl(`https://discord.gg/hyperplay`)
             }
           >
             {t('hyperplay.discordApp', `Discord`)}
