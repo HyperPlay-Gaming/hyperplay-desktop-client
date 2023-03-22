@@ -10,7 +10,7 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
-import { getHyperPlayStoreRelease, handleArchAndPlatform } from './utils'
+import { handleArchAndPlatform } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
 
 export async function addGameToLibrary(appId: string) {
@@ -126,21 +126,17 @@ export function installState(appName: string, state: boolean) {
 /**
  * Refreshes the game info for a game
  * @param appId the id of the game
+ * @param data the data used to update the GameInfo with
  * @returns void
  **/
-export async function refreshHPGameInfo(
-  appId: string,
-  suppliedData?: HyperPlayRelease[]
-): Promise<void> {
+export function refreshHPGameInfo(appId: string, data: HyperPlayRelease) {
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
   const gameIndex = currentLibrary.findIndex((val) => val.app_name === appId)
   if (gameIndex === -1) {
     return
   }
   const currentInfo = currentLibrary[gameIndex]
-  const data =
-    suppliedData?.find((val) => val._id === appId) ||
-    (await getHyperPlayStoreRelease(appId))
+
   const gameInfo: GameInfo = {
     ...currentInfo,
     extra: {
@@ -179,10 +175,6 @@ const defaultExecResult = {
 
 /**
  * Refreshes the entire library
- * this is a very expensive operation
- * and should be used sparingly
- * it is recommended to use `refreshHPGameInfo` instead
- * if you only want to refresh a single game
  * this is only used when the user clicks the refresh button
  * in the library
  **/
@@ -197,7 +189,13 @@ export async function refresh() {
 
   for (const gameId of currentLibraryIds) {
     try {
-      await refreshHPGameInfo(gameId, data)
+      const gameData = data.find((val) => val._id === gameId)
+
+      if (!gameData) {
+        throw new Error('GameId not find in API')
+      }
+
+      refreshHPGameInfo(gameId, gameData)
     } catch (err) {
       logError(
         `Could not refresh HyperPlay Game with appId = ${gameId}`,
