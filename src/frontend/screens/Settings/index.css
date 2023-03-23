@@ -31,7 +31,6 @@
 
 .settingsWrapper {
   margin-inline-end: auto;
-  max-width: 513px;
   display: flex;
   flex-direction: column;
   place-self: center;

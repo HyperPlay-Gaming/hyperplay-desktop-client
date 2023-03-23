@@ -12,7 +12,6 @@ import {
   DMQueueElement,
   GOGLoginData,
   ExtraInfo,
-  SideloadGame,
   WineManagerUISettings,
   AppSettings,
   WikiInfo,
@@ -78,7 +77,7 @@ export interface StoreStructure {
     credentials: GOGLoginData
   }
   sideloadedStore: {
-    games: SideloadGame[]
+    games: GameInfo[]
     // FIXME: Not sure if this is correct, seems like this key is only used once
     installed: InstalledInfo[]
   }

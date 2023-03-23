@@ -98,40 +98,45 @@ export type ExecResult = {
 }
 
 export interface ExtraInfo {
-  about: About
+  about?: About
   reqs: Reqs[]
-  storeUrl: string
+  storeUrl?: string
 }
 
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 
 export interface GameInfo {
-  runner: 'legendary' | 'gog' | 'hyperplay'
-  store_url: string
+  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload'
+  store_url?: string
   app_name: string
   art_cover: string
   art_logo?: string
   art_square: string
-  cloud_save_enabled: boolean
-  developer: string
-  extra: ExtraInfo
-  folder_name: string
+  cloud_save_enabled?: boolean
+  developer?: string
+  extra?: ExtraInfo
+  folder_name?: string
   install: Partial<InstalledInfo>
   is_installed: boolean
-  namespace: string
+  namespace?: string
   // NOTE: This is the save folder without any variables filled in...
-  save_folder: string
+  save_folder?: string
   // ...and this is the folder with them filled in
   save_path?: string
   gog_save_location?: GOGCloudSavesLocation[]
   title: string
   canRunOffline: boolean
-  thirdPartyManagedApp: string | undefined
-  is_mac_native: boolean
-  is_linux_native: boolean
+  thirdPartyManagedApp?: string | undefined
+  is_mac_native?: boolean
+  is_linux_native?: boolean
   browserUrl?: string
   web3?: Web3Features
   releaseMeta?: HyperPlayReleaseMeta
+  description?: string
+  wineSupport?: WineSupport
+  systemRequirements?: SystemRequirements
+  //used for store release versions. if remote !== local, then update
+  version?: string
 }
 
 export interface GameSettings {
@@ -184,6 +189,7 @@ export type Status =
   | 'notSupportedGame'
   | 'notInstalled'
   | 'installed'
+  | 'extracting'
 
 export interface GameStatus {
   appName: string
@@ -580,26 +586,6 @@ export type Web3Features = {
   supported: boolean
 }
 
-export interface SideloadGame {
-  runner: 'sideload'
-  app_name: string
-  art_cover: string
-  art_square: string
-  is_installed: true
-  title: string
-  install: {
-    executable: string
-    platform: InstallPlatform
-  }
-  folder_name?: string
-  canRunOffline: boolean
-  browserUrl: string
-  web3: Web3Features
-  description?: string
-  systemRequirements?: SystemRequirements
-  wineSupport?: WineSupport
-}
-
 export interface SaveSyncArgs {
   arg: string | undefined
   path: string
@@ -639,7 +625,7 @@ export interface ToolArgs {
   action: 'backup' | 'restore'
 }
 
-export type StatusPromise = Promise<{ status: 'done' | 'error' }>
+export type StatusPromise = Promise<{ status: 'done' | 'error' | 'abort' }>
 
 export interface GameScoreInfo {
   score: string
@@ -810,13 +796,12 @@ export type PlatformInfo = {
   downloadSize: number
   launch_options: Array<LaunchOption>
   owned_dlc: Array<DLCInfo>
+  processName?: string
 }
 
 export type ValistPlatforms = {
   [key in AppPlatforms]: PlatformInfo
 }
-
-export type HyperPlayGameOS = 'Windows' | 'linux' | 'Mac' | 'Browser'
 
 export interface HyperPlayReleaseMeta {
   _metadata_version: string

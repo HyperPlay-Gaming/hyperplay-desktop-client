@@ -7,7 +7,7 @@ import {
 import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'graceful-fs'
 import { readFileSync } from 'fs-extra'
 import { join } from 'path'
-import { GameInfo, SideloadGame } from 'common/types'
+import { GameInfo } from 'common/types'
 import { ShortcutsResult } from '../types'
 import { getIcon } from '../utils'
 import {
@@ -212,7 +212,7 @@ function checkIfAlreadyAdded(object: Partial<ShortcutObject>, title: string) {
  * @returns boolean
  */
 async function addNonSteamGame(props: {
-  gameInfo: GameInfo | SideloadGame
+  gameInfo: GameInfo
   steamUserdataDir?: string
   bkgDataUrl?: string
   bigPicDataUrl?: string
@@ -394,7 +394,7 @@ async function addNonSteamGame(props: {
  * @returns none
  */
 async function removeNonSteamGame(props: {
-  gameInfo: GameInfo | SideloadGame
+  gameInfo: GameInfo
   steamUserdataDir?: string
 }): Promise<void> {
   const steamUserdataDir =
@@ -507,7 +507,7 @@ async function removeNonSteamGame(props: {
  * @returns boolean
  */
 async function isAddedToSteam(props: {
-  gameInfo: GameInfo | SideloadGame
+  gameInfo: GameInfo
   steamUserdataDir?: string
 }): Promise<boolean> {
   const steamUserdataDir =
