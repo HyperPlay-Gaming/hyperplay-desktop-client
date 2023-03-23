@@ -193,6 +193,21 @@ class GlobalState extends PureComponent<Props> {
     ) as MetricsOptInStatus
   }
 
+  watchLibraryChanges() {
+    window.api.onLibraryChange((_e, runner, newLibrary) => {
+      console.log('library changed', runner, newLibrary)
+      if (runner === 'legendary') {
+        this.setState({ epic: { library: newLibrary } })
+      } else if (runner === 'gog') {
+        this.setState({ gog: { library: newLibrary } })
+      } else if (runner === 'sideload') {
+        this.setState({ sideloadedLibrary: newLibrary })
+      } else if (runner === 'hyperplay') {
+        this.setState({ hyperPlayLibrary: newLibrary })
+      }
+    })
+  }
+
   setLanguage = (newLanguage: string) => {
     this.setState({ language: newLanguage })
   }
@@ -592,6 +607,8 @@ class GlobalState extends PureComponent<Props> {
   }
 
   async componentDidMount() {
+    this.watchLibraryChanges()
+
     const { t } = this.props
     const { epic, gameUpdates = [], libraryStatus, category } = this.state
     const oldCategory: string = category

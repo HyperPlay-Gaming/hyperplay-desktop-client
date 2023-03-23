@@ -1,4 +1,3 @@
-import { sendFrontendMessage } from '../../main_window'
 import { hpLibraryStore } from './electronStore'
 import {
   CallRunnerOptions,
@@ -76,8 +75,6 @@ export async function addGameToLibrary(appId: string) {
   }
 
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
-
-  sendFrontendMessage('refreshLibrary', 'hyperplay')
 }
 
 export const getInstallInfo = async (

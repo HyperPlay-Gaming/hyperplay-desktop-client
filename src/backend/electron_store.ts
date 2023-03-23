@@ -50,6 +50,21 @@ export class TypeCheckedStoreBackend<
     this.store.delete(key)
   }
 
+  public onDidChange<KeyType extends string>(
+    key: KeyType,
+    callback: (
+      newVal?: UnknownGuard<Get<Structure, KeyType>>,
+      oldVal?: UnknownGuard<Get<Structure, KeyType>>
+    ) => void
+  ) {
+    this.store.onDidChange(key, (newVal, oldVal) => {
+      callback(
+        newVal as UnknownGuard<Get<Structure, KeyType>> | undefined,
+        oldVal as UnknownGuard<Get<Structure, KeyType>> | undefined
+      )
+    })
+  }
+
   public clear() {
     this.store.clear()
   }
