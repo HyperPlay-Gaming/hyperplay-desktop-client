@@ -69,7 +69,7 @@ import {
 } from 'backend/storeManagers/legendary/electronStores'
 import {
   apiInfoCache as GOGapiInfoCache,
-  gogInstallInfoStore as GOGinstallInfoStore,
+  installInfoStore as GOGinstallInfoStore,
   libraryStore as GOGlibraryStore
 } from './storeManagers/gog/electronStores'
 import fileSize from 'filesize'
