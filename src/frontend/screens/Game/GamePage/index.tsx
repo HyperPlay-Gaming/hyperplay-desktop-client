@@ -278,8 +278,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
     const isLinux = ['linux', 'linux_amd64', 'linux_arm64']
     const isMacNative = isMac.includes(installPlatform ?? '')
     const isLinuxNative = isLinux.includes(installPlatform ?? '')
-    const isNative = isWin || isMacNative || isLinuxNative
-    const isBrowserGame = installPlatform === 'Browser'
+    const isBrowserGame = gameInfo.browserUrl
+    const isNative = isWin || isMacNative || isLinuxNative || isBrowserGame
 
     const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
     const supportsWeb3 = gameInfo.web3?.supported
