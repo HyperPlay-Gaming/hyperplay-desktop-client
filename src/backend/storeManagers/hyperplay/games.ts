@@ -24,8 +24,7 @@ import { removeFromQueue } from 'backend/downloadmanager/downloadqueue'
 import {
   getHyperPlayStoreRelease,
   handleArchAndPlatform,
-  linuxPlatforms,
-  macOSPlatforms
+  handlePlatformReversed
 } from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
 import {
@@ -69,13 +68,13 @@ export function isNative(appName: string): boolean {
       return true
     }
 
-    if (isMac && macOSPlatforms.includes(platform)) {
+    const genericPlatform = handlePlatformReversed(platform)
+
+    if (isMac && genericPlatform === 'Mac') {
       return true
     }
 
-    // small hack, but needs to fix the typings
-    const plat = platform.toLowerCase()
-    if (isLinux && linuxPlatforms.includes(plat)) {
+    if (isLinux && genericPlatform === 'linux') {
       return true
     }
   }
