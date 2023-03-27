@@ -52,6 +52,9 @@ export const isGameAvailable = (appName: string) => {
 }
 
 export function isNative(appName: string): boolean {
+  const macOSPlatforms = ['darwin', 'darwin_arm64', 'darwin_amd64']
+  const linuxPlatforms = ['linux', 'linux_arm64', 'linux_amd64']
+
   const {
     install: { platform }
   } = getGameInfo(appName)
@@ -64,13 +67,13 @@ export function isNative(appName: string): boolean {
       return true
     }
 
-    if (isMac && platform === 'Mac') {
+    if (isMac && macOSPlatforms.includes(platform)) {
       return true
     }
 
     // small hack, but needs to fix the typings
     const plat = platform.toLowerCase()
-    if (isLinux && plat === 'linux') {
+    if (isLinux && linuxPlatforms.includes(plat)) {
       return true
     }
   }

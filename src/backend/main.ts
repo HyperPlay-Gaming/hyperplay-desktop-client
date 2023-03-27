@@ -985,7 +985,7 @@ ipcMain.handle(
 
     const { title } = game
 
-    const { minimizeOnGameLaunch } = await GlobalConfig.get().getSettings()
+    const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
     const startPlayingDate = new Date()
 
