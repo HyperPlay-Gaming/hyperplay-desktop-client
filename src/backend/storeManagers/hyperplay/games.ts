@@ -21,7 +21,12 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import { removeFromQueue } from 'backend/downloadmanager/downloadqueue'
-import { getHyperPlayStoreRelease, handleArchAndPlatform } from './utils'
+import {
+  getHyperPlayStoreRelease,
+  handleArchAndPlatform,
+  linuxPlatforms,
+  macOSPlatforms
+} from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
 import {
   addShortcuts as addShortcutsUtil,
@@ -52,9 +57,6 @@ export const isGameAvailable = (appName: string) => {
 }
 
 export function isNative(appName: string): boolean {
-  const macOSPlatforms = ['darwin', 'darwin_arm64', 'darwin_amd64']
-  const linuxPlatforms = ['linux', 'linux_arm64', 'linux_amd64']
-
   const {
     install: { platform }
   } = getGameInfo(appName)

@@ -64,3 +64,6 @@ export function handleArchAndPlatform(
       return 'web'
   }
 }
+
+export const macOSPlatforms = ['darwin', 'darwin_arm64', 'darwin_amd64']
+export const linuxPlatforms = ['linux', 'linux_arm64', 'linux_amd64']

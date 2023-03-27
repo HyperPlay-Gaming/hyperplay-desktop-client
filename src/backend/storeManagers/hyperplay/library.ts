@@ -33,6 +33,7 @@ export async function addGameToLibrary(appId: string) {
   const data = res.data[0]
 
   const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
+  const supportedPlatforms = Object.keys(data.releaseMeta.platforms)
 
   const gameInfo: GameInfo = {
     app_name: data._id,
@@ -63,8 +64,8 @@ export async function addGameToLibrary(appId: string) {
     store_url: `https://store.hyperplay.xyz/game/${data.projectName}`,
     folder_name: data.projectName,
     save_folder: '',
-    is_mac_native: false,
-    is_linux_native: false,
+    is_mac_native: supportedPlatforms.some((val) => val.startsWith('darwin')),
+    is_linux_native: supportedPlatforms.some((val) => val.startsWith('linux')),
     canRunOffline: false,
     install: isWebGame ? { platform: 'web' } : {},
     releaseMeta: data.releaseMeta,
