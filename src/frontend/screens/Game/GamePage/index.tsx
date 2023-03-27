@@ -274,9 +274,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
       size(Number(gameInstallInfo?.manifest?.disk_size))
     const launchOptions = gameInstallInfo?.game?.launch_options || []
 
-    const isMac = ['osx', 'Mac']
+    const isMac = ['osx', 'Mac', 'darwin_amd64', 'darwin_arm64']
+    const isLinux = ['linux', 'linux_amd64', 'linux_arm64']
     const isMacNative = isMac.includes(installPlatform ?? '')
-    const isLinuxNative = installPlatform === 'linux'
+    const isLinuxNative = isLinux.includes(installPlatform ?? '')
     const isNative = isWin || isMacNative || isLinuxNative
     const isBrowserGame = installPlatform === 'Browser'
 
