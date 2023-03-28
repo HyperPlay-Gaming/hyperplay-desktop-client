@@ -813,6 +813,13 @@ export interface HyperPlayReleaseMeta {
   image: string
 }
 
+export interface HyperPlayAccountMeta {
+  name: string
+  description: string
+  external_url: string
+  image: string
+}
+
 export interface HyperPlayRelease {
   _id: string
   accountID: string
@@ -827,6 +834,7 @@ export interface HyperPlayRelease {
   projectMetaURI: string
   projectMeta: HyperPlayProjectMeta
   releaseMeta: HyperPlayReleaseMeta
+  accountMeta: HyperPlayAccountMeta
 }
 
 export interface HyperPlayInstallInfo {

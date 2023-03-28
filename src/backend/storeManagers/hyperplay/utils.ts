@@ -8,8 +8,8 @@ import axios from 'axios'
 
 export async function getHyperPlayStoreRelease(appName: string) {
   const gameIdUrl = `https://developers.hyperplay.xyz/api/listings?id=${appName}`
-  const res = await axios.get<HyperPlayRelease>(gameIdUrl)
-  const data = res.data[0] as HyperPlayRelease
+  const res = await axios.get<HyperPlayRelease[]>(gameIdUrl)
+  const data = res.data[0]
   return data
 }
 
