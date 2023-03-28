@@ -65,6 +65,12 @@
       "extendInfo": {
         "com.apple.security.cs.allow-jit": true
       },
+      "target": {
+        "target": "default",
+        "arch": [
+          "universal"
+        ]
+      },
       "asarUnpack": [
         "build/bin/darwin/legendary",
         "build/bin/darwin/gogdl"
@@ -215,7 +221,7 @@
     "test:ci": "jest --runInBand --silent",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
     "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
-    "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
+    "release:mac": "vite build && electron-builder -p always --mac --universal",
     "release:win": "vite build && electron-builder -p always --win nsis",
     "dist:linux": "vite build && electron-builder --linux",
     "dist:mac": "export CSC_IDENTITY_AUTO_DISCOVERY=false && vite build && electron-builder --mac",
