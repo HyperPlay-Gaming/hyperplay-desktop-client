@@ -43,7 +43,7 @@
         ]
       },
       {
-        "from": "node_modules/keccak/prebuilds/darwin-${arch}",
+        "from": "node_modules/keccak",
         "to": "app/node_modules/keccak/build/Release",
         "filter": [
           "**/*"

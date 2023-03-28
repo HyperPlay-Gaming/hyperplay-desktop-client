@@ -93,15 +93,9 @@ jobs:
         run: yarn dist:mac --publish=never
         env:
           NOTARIZE: false
-      - name: Upload x64 build.
+      - name: Upload Universal build.
         uses: actions/upload-artifact@v3
         with:
-          name: mac-dmg-x64
-          path: dist/HyperPlay*x64.dmg
-          retention-days: 14
-      - name: Upload ARM64.
-        uses: actions/upload-artifact@v3
-        with:
-          name: mac-dmg-arm64
-          path: dist/HyperPlay*arm64.dmg
+          name: mac-universal
+          path: dist/HyperPlay*.dmg
           retention-days: 14
