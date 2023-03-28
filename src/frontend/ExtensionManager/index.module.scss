@@ -1,31 +1,30 @@
 .mmContainer {
+  // @include proportions;
+
   position: absolute;
-  left: 250px;
-  top: 10px;
+  right: 550px;
   display: flex;
   flex-direction: row;
   gap: 20px;
   z-index: 100000;
 }
 
-@mixin mmWindow {
-  width: 360px;
-  height: 620px;
-  position: relative;
+.mmWindow {
+  width: 357px;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 0px 0px 16px 16px;
+  position: absolute;
   display: flex;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
 }
 
-.mmPopup {
-  @include mmWindow();
-}
-
-.mmNotification {
-  @include mmWindow();
-}
-
-.mmNotification {
-  width: 360px;
-  height: 620px;
-  position: relative;
-  display: flex;
+.open {
+  pointer-events: auto;
+  opacity: 1;
+  transform: translateY(0);
 }
