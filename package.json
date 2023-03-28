@@ -57,7 +57,7 @@
       "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
     },
     "mac": {
-      "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
+      "artifactName": "${productName}-${version}-macOS.${ext}",
       "category": "public.app-category.games",
       "icon": "build/app_icon.icns",
       "entitlements": "build/entitlements.mac.plist",
@@ -74,6 +74,9 @@
       "asarUnpack": [
         "build/bin/darwin/legendary",
         "build/bin/darwin/gogdl"
+      ],
+      "extraFiles": [
+        "node_modules/keccak/build"
       ],
       "files": [
         "build/bin/darwin/*"
