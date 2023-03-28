@@ -34,6 +34,22 @@
       "build/hyperplay_store_preload.js",
       "build/webviewPreload.js"
     ],
+    "extraResources": [
+      {
+        "from": "node_modules/register-scheme",
+        "to": "app/node_modules/register-scheme/build/Release",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "node_modules/keccak/prebuilds/darwin-${arch}",
+        "to": "app/node_modules/keccak/build/Release",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
     "protocols": [
       {
         "name": "hyperplay",
@@ -74,9 +90,6 @@
       "asarUnpack": [
         "build/bin/darwin/legendary",
         "build/bin/darwin/gogdl"
-      ],
-      "extraFiles": [
-        "node_modules/keccak/build"
       ],
       "files": [
         "build/bin/darwin/*"
