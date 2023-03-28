@@ -195,7 +195,6 @@ class GlobalState extends PureComponent<Props> {
 
   watchLibraryChanges() {
     window.api.onLibraryChange((_e, runner, newLibrary) => {
-      console.log('library changed', runner, newLibrary)
       if (runner === 'legendary') {
         this.setState({ epic: { ...this.state.epic, library: newLibrary } })
       } else if (runner === 'gog') {
