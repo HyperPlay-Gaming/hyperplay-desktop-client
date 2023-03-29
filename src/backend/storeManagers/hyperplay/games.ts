@@ -12,7 +12,7 @@ import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
-import { isMac, isWindows, isLinux } from 'backend/constants'
+import { isMac, isWindows, isLinux, configFolder } from 'backend/constants'
 import { downloadFileWithAxios, spawnAsync, killPattern } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
@@ -173,9 +173,8 @@ const installDistributables = async (gamePath: string) => {
 
 async function downloadGame(
   appName: string,
-  installPath: string,
-  platformInfo: PlatformInfo,
-  zipName: string
+  downloadPath: string,
+  platformInfo: PlatformInfo
 ): Promise<void> {
   const appInfo = getGameInfo(appName)
 
@@ -183,7 +182,7 @@ async function downloadGame(
     throw new Error('App not found in library')
   }
 
-  logInfo(`Downloading zip file`, LogPrefix.HyperPlay)
+  logInfo(`Downloading zip file to ${downloadPath}`, LogPrefix.HyperPlay)
 
   // we might need a helper function to deal with the different platforms
   const window = getMainWindow()
@@ -194,14 +193,18 @@ async function downloadGame(
 
   // prevent from the next download being named eg. "game (1).zip"
   try {
-    rmSync(path.join(installPath, zipName))
+    rmSync(downloadPath)
     // eslint-disable-next-line no-empty
   } catch (e) {}
 
   try {
+    logInfo(
+      `Downloading from ${platformInfo.external_url}`,
+      LogPrefix.HyperPlay
+    )
     await downloadFileWithAxios(
       platformInfo.external_url,
-      `${installPath}/${zipName}`,
+      downloadPath,
       createAbortController(appName),
       (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
         // convert speed to Mb/s
@@ -217,7 +220,7 @@ async function downloadGame(
             diskSpeed: diskWriteSpeed,
             downSpeed: downloadSpeed,
             bytes: downloadedBytes,
-            folder: installPath
+            folder: downloadPath
           }
         })
       }
@@ -227,6 +230,7 @@ async function downloadGame(
     deleteAbortController(appName)
     logWarning(`Download aborted ${error}`, LogPrefix.HyperPlay)
     removeFromQueue(appName)
+    rmSync(downloadPath)
   }
 }
 
@@ -257,12 +261,12 @@ export async function install(
     const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
     const platformInfo = releaseMeta.platforms[appPlatform]
     const zipName = encodeURI(platformInfo.name)
-    const zipFile = path.join(dirpath, zipName)
+    const zipFile = path.join(configFolder, zipName)
     const destinationPath = path.join(dirpath, sanitizeFileName(title))
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
-    await downloadGame(appName, dirpath, platformInfo, zipName)
+    await downloadGame(appName, zipFile, platformInfo)
     let executable = path.join(destinationPath, platformInfo.executable)
 
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
@@ -293,6 +297,7 @@ export async function install(
           destinationPath
         ])
         if (code !== 0) {
+          rmSync(zipFile)
           throw new Error(stderr)
         }
       }
