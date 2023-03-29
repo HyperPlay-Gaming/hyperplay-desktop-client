@@ -33,7 +33,7 @@ export async function addGameToLibrary(appId: string) {
 
   const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
   const supportedPlatforms = Object.keys(data.releaseMeta.platforms)
-  
+
   const gameInfo: GameInfo = {
     app_name: data._id,
     extra: {
@@ -258,6 +258,9 @@ export async function listUpdateableGames(): Promise<string[]> {
   const updateableGames: string[] = []
   const currentHpLibrary = hpLibraryStore.get('games', [])
   currentHpLibrary.map((val) => {
+    if (val.install.platform === 'web') {
+      return
+    }
     if (val.version === undefined) {
       updateableGames.push(val.app_name)
     }
