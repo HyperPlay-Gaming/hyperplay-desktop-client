@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import ExtensionManagerStyles from './index.module.scss'
+import { observer } from 'mobx-react-lite'
+import extensionStore from 'frontend/store/ExtensionStore'
+import classNames from 'classnames'
+import { WebviewType } from 'common/types'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -13,72 +17,57 @@ declare global {
 }
 
 const ExtensionManager = function () {
-  const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
-  const [showMmPopupPage, setShowMmPopupPage] = useState(false)
-  const [extensionId, setExtensionId] = useState('')
-
-  const getExtensionId = async () => {
-    const extId = await window.api.getExtensionId()
-    setExtensionId(extId)
-  }
-
-  const handleShowNotification = async () => {
-    setShowMmNotificationPage(true)
-  }
-
-  const handleRemoveNotification = async () => {
-    setShowMmNotificationPage(false)
-  }
-
-  const handleShowPopup = async () => {
-    setShowMmPopupPage(true)
-  }
-
-  const handleRemovePopup = async () => {
-    setShowMmPopupPage(false)
-  }
+  const rootRef = useRef<HTMLDivElement>(null)
+  const popupRef = useRef<WebviewType>(null)
 
   useEffect(() => {
-    getExtensionId()
-    const rmAddNotifHandler = window.api.handleShowNotificationInWebview(
-      handleShowNotification
-    )
-    const rmRemoveNotifHandler = window.api.handleRemoveNotificationInWebview(
-      handleRemoveNotification
-    )
-    const rmAddPopupHandler =
-      window.api.handleShowPopupInWebview(handleShowPopup)
-    const rmRemovePopupHandler =
-      window.api.handleRemovePopupInWebview(handleRemovePopup)
-    return () => {
-      rmAddNotifHandler()
-      rmRemoveNotifHandler()
-      rmAddPopupHandler()
-      rmRemovePopupHandler()
+    const handleOutsideClick = (e: MouseEvent) => {
+      if (extensionStore.isPopupOpen) {
+        const target = e.target as HTMLElement
+
+        const isMenuItemClicked =
+          !!target.closest('.SidebarLinks__subItem__popup') ||
+          !!target.classList.contains('SidebarLinks__subItem__popup')
+
+        const isOutsideClick =
+          target.closest(`.${ExtensionManagerStyles.mmContainer}`) === null
+
+        if (isOutsideClick && !isMenuItemClicked) {
+          extensionStore.setIsPopupOpen(false)
+        }
+      }
     }
-  }, [])
+
+    window.addEventListener('click', handleOutsideClick)
+    return () => {
+      window.removeEventListener('click', handleOutsideClick)
+    }
+  })
 
   /* eslint-disable react/no-unknown-property */
   return (
-    <div className={ExtensionManagerStyles.mmContainer}>
-      {showMmPopupPage ? (
-        <webview
-          nodeintegrationinsubframes="true"
-          webpreferences="contextIsolation=true, nodeIntegration=true"
-          className={ExtensionManagerStyles.mmPopup}
-          src={`chrome-extension://${extensionId}/popup.html`}
-        ></webview>
-      ) : null}
-      {showMmNotificationPage ? (
-        <webview
-          nodeintegrationinsubframes="true"
-          webpreferences="contextIsolation=true, nodeIntegration=true"
-          className={ExtensionManagerStyles.mmNotification}
-          src={`chrome-extension://${extensionId}/notification.html`}
-        ></webview>
-      ) : null}
+    <div className={ExtensionManagerStyles.mmContainer} ref={rootRef}>
+      <webview
+        ref={popupRef}
+        nodeintegrationinsubframes="true"
+        webpreferences="contextIsolation=true, nodeIntegration=true"
+        src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
+        className={classNames(ExtensionManagerStyles.mmWindow, {
+          [ExtensionManagerStyles.open]:
+            extensionStore.isPopupOpen && !extensionStore.isNotificationOpen
+        })}
+      ></webview>
+      <webview
+        nodeintegrationinsubframes="true"
+        webpreferences="contextIsolation=true, nodeIntegration=true"
+        src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
+        className={classNames(ExtensionManagerStyles.mmWindow, {
+          [ExtensionManagerStyles.open]:
+            extensionStore.isPopupOpen && extensionStore.isNotificationOpen
+        })}
+      ></webview>
     </div>
   )
 }
 
-export default ExtensionManager
+export default observer(ExtensionManager)
