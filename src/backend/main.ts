@@ -109,7 +109,10 @@ import {
   LogPrefix,
   logWarning
 } from './logger/logger'
-import { gameInfoStore } from 'backend/storeManagers/legendary/electronStores'
+import {
+  gameInfoStore,
+  libraryStore
+} from 'backend/storeManagers/legendary/electronStores'
 import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
@@ -496,6 +499,8 @@ ipcMain.once('frontendReady', () => {
     logInfo('Starting the Download Queue', LogPrefix.Backend)
     initQueue()
   }, 5000)
+
+  watchLibraryChanges()
 })
 
 // Maybe this can help with white screens
@@ -1734,6 +1739,9 @@ import './metrics/ipc_handler'
 import { trackEvent } from './metrics/metrics'
 import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
 import { addNewApp } from './storeManagers/sideload/library'
+import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
+import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/electronStores'
+import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (
@@ -1823,3 +1831,19 @@ ipcMain.handle('unhideGame', async (_e, gameId) => {
   configStore.set('games.hidden', newHiddenGames)
   sendFrontendMessage('refreshLibrary', 'hyperplay')
 })
+
+function watchLibraryChanges() {
+  // workaround for https://github.com/sindresorhus/electron-store/issues/165
+  libraryStore.onDidChange('library', (newValue) =>
+    sendFrontendMessage('onLibraryChanged', 'legendary', newValue)
+  )
+  gogLibraryStore.onDidChange('games', (newValue) =>
+    sendFrontendMessage('onLibraryChanged', 'gog', newValue)
+  )
+  sideloadLibraryStore.onDidChange('games', (newValue) =>
+    sendFrontendMessage('onLibraryChanged', 'sideload', newValue)
+  )
+  hpLibraryStore.onDidChange('games', (newValue) =>
+    sendFrontendMessage('onLibraryChanged', 'hyperplay', newValue)
+  )
+}
