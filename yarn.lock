@@ -1021,10 +1021,10 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/proprietary-fonts/-/proprietary-fonts-0.1.0.tgz#c07cbdfdfc1129b3fa3fb046b547ecd4ea27da7a"
   integrity sha512-hDOW84KzF7EcjYYcXlaX81QEiujcfAfPV5WaeUCMFwEDRj1VXee8SSMVybOBydQG5GIzLC0Inmo9j++WkrcJ2A==
 
-"@hyperplay/ui@0.1.0-alpha.2":
-  version "0.1.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.0-alpha.2.tgz#9dd3942348c28e8f79bd28d5a87e895d05e1e15a"
-  integrity sha512-h69QvELOWMbwf2iV6OTB7/OtiVTJX/RDi7ux7hZsviocDFb1rubFAQp3lzlixbNrJtjZuurqiuKsZf1L3TFDWg==
+"@hyperplay/ui@0.1.0-alpha.18":
+  version "0.1.0-alpha.18"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.0-alpha.18.tgz#754e8bb24795196bebcc0cb37b949f46bbc5f802"
+  integrity sha512-6Dw1mIpHnNtNG5aT6QRm+eqPTNNA7GMy7TIeWsHLVOko1VlDdGMzFB5eGLICKqMhR0UtUFdbRQCMGS6w4wXcow==
   optionalDependencies:
     "@hyperplay/proprietary-fonts" "^0.1.0"
 

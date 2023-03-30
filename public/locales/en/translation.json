@@ -721,6 +721,10 @@
     },
     "store": "Epic Store",
     "stores": "Stores",
+    "sideload": {
+        "warningTitle": "Important",
+        "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Side-loading an installer that contains malware could compromise your computer and lead to theft of funds."
+    },
     "title": {
         "allGames": "All Games"
     },
