@@ -18,13 +18,13 @@
             "title": "확인 및 복구"
         },
         "runexe": {
-            "title": "Select EXE to Run"
+            "title": "실행할 EXE 선택"
         },
         "select": {
-            "button": "Select"
+            "button": "선택"
         },
         "sideload": {
-            "exe": "Select Executable"
+            "exe": "실행파일 선택"
         },
         "stopInstall": {
             "keepInstalling": "계속 설치",
@@ -32,10 +32,10 @@
             "title": "설치 중지"
         },
         "uninstall": {
-            "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
+            "checkbox": "prefix 제거: {{prefix}}{{newLine}}알림: 이 작업은 취소될 수 없으며 백업되지 않은 세이프파일 역시 삭제됩니다.",
             "message": "이 게임을 제거하시겠습니까?",
-            "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "설치 제거"
+            "settingcheckbox": "설정 및 로그 삭제{{newLine}}알림: 이 작업은 취소될 수 없습니다. 모든 설정은 초기화되며, 로그 역시 삭제됩니다.",
+            "title": "제거"
         },
         "update": {
             "message": "이 게임에 업데이트가 있습니다, 지금 업데이트하시겠습니까?",
@@ -48,28 +48,28 @@
         "add_to_favourites": "즐겨찾기에 추가",
         "cancel": "일시정지/취소",
         "continue": "계속 다운로드",
-        "finish": "Finish",
+        "finish": "완료",
         "force_update": "사용 가능한 경우 강제 업데이트",
-        "force-innstall": "Force Install",
+        "force-innstall": "강제 설치",
         "hide_game": "게임 숨김",
         "import": "게임 들여오기",
         "install": "설치",
-        "no-path-selected": "No path selected",
+        "no-path-selected": "선택된 경로 없음",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "대기열에서 제거"
         },
         "remove_from_favourites": "즐겨찾기에서 제거",
-        "remove_from_recent": "Remove From Recent",
-        "run-exe-first": "Run Installer First",
-        "running-setup": "Running Setup",
+        "remove_from_recent": "최근 목록에서 제거",
+        "run-exe-first": "설치파일 먼저 실행",
+        "running-setup": "Setup 실행중",
         "sideload": {
-            "edit": "Edit App/Game"
+            "edit": "앱/게임 수정"
         },
         "unhide_game": "게임 숨기기 해제",
         "uninstall": "설치 제거",
         "update": "업데이트"
     },
-    "cloud_save_unsupported": "Unsupported",
+    "cloud_save_unsupported": "미지원",
     "disabled": "비활성화",
     "dlc": {
         "installDlcs": "모든 DLC를 설치합니다"
@@ -77,11 +77,11 @@
     "enabled": "활성화",
     "game": {
         "downloadSize": "다운로드 크기",
-        "firstPlayed": "처음 플레이",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "firstPlayed": "최초 플레이",
+        "getting-download-size": "다운로드 크기 불러오는 중",
+        "getting-install-size": "설치 크기 불러우는 중",
         "installSize": "설치 크기",
-        "language": "Language",
+        "language": "언어",
         "lastPlayed": "마지막 플레이",
         "neverPlayed": "플레이 한 적 없음",
         "platform": "설치할 플랫폼 버전 선택",
@@ -95,13 +95,13 @@
     "generic": {
         "error": "알 수 없는 오류"
     },
-    "hours": "Hours",
+    "hours": "시간",
     "how-long-to-beat": {
-        "completionist": "Completionist",
-        "main-plus-extras": "Main + Extras",
-        "main-story": "Main Story"
+        "completionist": "올클리어",
+        "main-plus-extras": "메인 + 기타",
+        "main-story": "메인 스토리"
     },
-    "howLongToBeat": "How Long To Beat",
+    "howLongToBeat": "클리어까지 걸리는 시간",
     "info": {
         "canRunOffline": "네트워크 연결이 필요합니다",
         "installedPlatform": "설치된 플랫폼",
@@ -109,7 +109,7 @@
         "size": "크기",
         "syncsaves": "세이브 동기화",
         "version": "버전",
-        "web3-supported": "Has Web3 features"
+        "web3-supported": "웹3 지원"
     },
     "install": {
         "disk-space-left": "사용 가능한 공간",
@@ -122,11 +122,11 @@
     },
     "label": {
         "game": {
-            "third-party-game": "Third-Party Game NOT Supported"
+            "third-party-game": "서드파티 게임 미지원"
         },
         "playing": {
-            "start": "지금 실행하기",
-            "stop": "플레이 중지"
+            "start": "실행",
+            "stop": "실행중 (중지)"
         },
         "saves": {
             "syncing": "세이브 동기화 중"
@@ -136,33 +136,33 @@
         "options": "시작 옵션..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "login": "Log in",
-        "title": "You are NOT logged in"
+        "epic": "에픽 계정으로 로그인하지 않았습니다. 로그인을 위해 스토어 페이지가 아닌 아래 버튼을 눌러주세요:",
+        "gog": "GOG 계정으로 로그인하지 않았습니다. 로그인을 위해 스토어 페이지가 아닌 아래 버튼을 눌러주세요:",
+        "login": "로그인",
+        "title": "로그인하지 않았습니다."
     },
     "report_problem": "게임 실행 중에 생긴 문제를 제보하기",
     "sdl": {
         "title": "설치할 구성 요소를 선택합니다"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Wine Settings"
+        "use-default-wine-settings": "기본 Wine 세팅 사용"
     },
     "sideload": {
         "field": {
-            "title": "Title"
+            "title": "타이틀"
         },
         "info": {
-            "broser": "BrowserURL",
-            "exe": "Select Executable",
-            "image": "App Image",
-            "supports-web3": "This Game has Web3 Features",
-            "title": "Game/App Title"
+            "broser": "브라우저URL",
+            "exe": "EXE 선택",
+            "image": "앱 이미지",
+            "supports-web3": "이 게임은 웹3를 지원합니다.",
+            "title": "게임/앱 타이틀"
         },
         "placeholder": {
-            "image": "Paste an Image URL here",
-            "title": "Add a title to your Game/App",
-            "url": "Paste the Game URL here"
+            "image": "여기에 이미지 URL을 입력하세요",
+            "title": "게임/앱의 타이틀을 추가하세요",
+            "url": "여기에 게임 URL을 입력하세요"
         }
     },
     "specs": {
@@ -171,21 +171,26 @@
     },
     "status": {
         "clickToUpdate": "업데이트하려면 클릭",
-        "gameNotAvailable": "Game not available",
+        "downloading": "다운로드중",
+        "extracting": "압축해제중",
+        "gameNotAvailable": "게임 플레이 불가",
         "hasUpdates": "새 버전이 있습니다!",
         "installed": "설치됨",
-        "installing": "설치 중",
-        "moving": "설치를 이동 중 입니다, 잠시만 기다려 주세요",
-        "notinstalled": "이 게임은 설치 되지 않았습니다",
-        "notSupported": "Not supported",
-        "notSupportedGame": "Not Supported",
-        "processing": "파일을 처리 중입니다 잠시만 기다려 주십시오",
-        "queued": "Queued",
-        "reparing": "게임을 복구 중입니다, 잠시만 기다려 주세요",
-        "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
+        "installing": "설치중",
+        "moving": "설치 파일을 이동중입니다, 잠시 기다려주세요",
+        "moving-files": "파일 이동중 '{{file}}': {{percent}} ",
+        "notinstalled": "이 게임은 설치되지 않았습니다",
+        "notSupported": "미지원",
+        "notSupportedGame": "미지원",
+        "playing": "실행중",
+        "processing": "파일을 처리중입니다, 잠시 기다려주세요",
+        "queued": "대기중",
+        "reparing": "게임을 복구중입니다, 잠시 기다려주세요",
+        "syncingSaves": "세이브 동기화중",
+        "this-game-uses-third-party": "이 게임은 아직 지원하지 않는 서드파티 게임 런처를 사용합니다.",
         "totalDownloaded": "총 다운로드",
-        "uninstalling": "Uninstalling",
-        "updating": "게임 업데이트 중"
+        "uninstalling": "제거중",
+        "updating": "업데이트중"
     },
     "submenu": {
         "addShortcut": "바로가기 생성",
