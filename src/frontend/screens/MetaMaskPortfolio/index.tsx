@@ -4,6 +4,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 
 const MetaMaskPortfolio = function () {
   const { setSideBarCollapsed, sidebarCollapsed } = useContext(ContextProvider)
+  const trueAsStr = 'true' as unknown as boolean | undefined
 
   useEffect(() => {
     if (!sidebarCollapsed) {
@@ -22,6 +23,7 @@ const MetaMaskPortfolio = function () {
         <webview
           className={MetaMaskPortfolioStyles.homeWebview}
           src="https://portfolio.metamask.io/"
+          allowpopups={trueAsStr}
         />
       </div>
     </>
