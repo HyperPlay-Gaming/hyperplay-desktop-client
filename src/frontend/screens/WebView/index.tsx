@@ -14,8 +14,10 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { Runner, WebviewType } from 'common/types'
 import './index.css'
 import LoginWarning from '../Login/components/LoginWarning'
+import { observer } from 'mobx-react-lite'
+import extensionStore from 'frontend/store/ExtensionStore'
 
-export default function WebView() {
+function WebView() {
   const { i18n } = useTranslation()
   const { pathname, search } = useLocation()
   const { t } = useTranslation()
@@ -77,14 +79,13 @@ export default function WebView() {
     let mounted = true
     const fetchLocalPreloadPath = async () => {
       const path = (await window.api.getLocalPeloadPath()) as unknown
+      console.log(path)
       if (mounted) {
         setPreloadPath(path as string)
       }
     }
 
-    if (isEpicLogin) {
-      fetchLocalPreloadPath()
-    }
+    fetchLocalPreloadPath()
 
     return () => {
       mounted = false
@@ -105,6 +106,11 @@ export default function WebView() {
     if (webview && ((preloadPath && isEpicLogin) || !isEpicLogin)) {
       const onIpcMessage = async (event: unknown) => {
         const e = event as { channel: string; args: string[] }
+        console.log(e.channel, e.args)
+        if (e.channel === 'webviewClicked') {
+          extensionStore.setIsPopupOpen(false)
+        }
+
         if (e.channel === 'processEpicLoginCode') {
           try {
             setLoading({
@@ -220,3 +226,5 @@ export default function WebView() {
     </div>
   )
 }
+
+export default observer(WebView)
