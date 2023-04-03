@@ -15,11 +15,11 @@ import {
   WineManagerUISettings,
   AppSettings,
   WikiInfo,
-  MetricsOptInStatus,
-  Web3ProviderType
+  MetricsOptInStatus
 } from 'common/types'
 import { GamesDBData, GogInstallInfo, UserData } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
+import { PROVIDERS } from './proxy-types'
 
 export interface StoreStructure {
   configStore: {
@@ -129,7 +129,7 @@ export interface StoreStructure {
     installed: InstalledInfo[]
   }
   providerMetadata: {
-    currentWeb3Provider: Web3ProviderType
+    currentWeb3Provider: PROVIDERS
   }
 }
 

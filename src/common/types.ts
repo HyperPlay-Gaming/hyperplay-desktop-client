@@ -851,5 +851,3 @@ export type JsonRpcCallback = (
   error: Error | null,
   response?: JsonRpcResponse
 ) => unknown
-
-export type Web3ProviderType = 'extension' | 'walletconnect' | 'metamask_mobile'

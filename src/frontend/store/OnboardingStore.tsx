@@ -1,5 +1,4 @@
 import { ContextType } from 'frontend/types'
-import defaultProviderStore from './storage/providerStore'
 import { makeAutoObservable, when } from 'mobx'
 import walletStore from './WalletStore'
 import React, { useContext, useEffect } from 'react'
@@ -8,12 +7,9 @@ import { PROVIDERS } from 'common/types/proxy-types'
 
 class OnboardingStore {
   isOnboardingOpen = true
-  context?: ContextType
 
   constructor() {
     makeAutoObservable(this)
-
-    this.bootstrapOnboarding()
   }
 
   public openOnboarding() {
@@ -39,19 +35,12 @@ class OnboardingStore {
       )
     })
 
-  public setContext(context: ContextType) {
-    this.context = context
-  }
-
-  private async bootstrapOnboarding() {
-    await when(() => !!this.context)
-
-    const defaultProvider = defaultProviderStore.get_nodefault(
-      'currentWeb3Provider'
-    )
-
-    if (defaultProvider === 'extension') {
-      this.context!.setShowMetaMaskBrowserSidebarLinks(true)
+  public async bootstrapOnboarding(
+    context: ContextType,
+    defaultProvider?: PROVIDERS
+  ) {
+    if (defaultProvider === PROVIDERS.METAMASK_EXTENSION) {
+      context!.setShowMetaMaskBrowserSidebarLinks(true)
       await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
 
       this.closeOnboarding()
@@ -64,9 +53,16 @@ const onboardingStore = new OnboardingStore()
 export default onboardingStore
 
 export const OnboardingStoreController = () => {
-  const store = useContext(ContextProvider)
+  const context = useContext(ContextProvider)
 
-  useEffect(() => onboardingStore.setContext(store), [store])
+  async function init() {
+    const currentWeb3Provider = await window.api.getCurrentWeb3Provider()
+    onboardingStore.bootstrapOnboarding(context, currentWeb3Provider)
+  }
+
+  useEffect(() => {
+    init()
+  }, [context])
 
   return <></>
 }
