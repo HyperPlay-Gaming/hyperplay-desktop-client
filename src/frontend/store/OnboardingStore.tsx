@@ -7,6 +7,7 @@ import { PROVIDERS } from 'common/types/proxy-types'
 
 class OnboardingStore {
   isOnboardingOpen = true
+  initialized = false
 
   constructor() {
     makeAutoObservable(this)
@@ -39,6 +40,8 @@ class OnboardingStore {
     context: ContextType,
     defaultProvider?: PROVIDERS
   ) {
+    if (this.initialized) return
+    this.initialized = true
     if (defaultProvider === PROVIDERS.METAMASK_EXTENSION) {
       context!.setShowMetaMaskBrowserSidebarLinks(true)
       await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
