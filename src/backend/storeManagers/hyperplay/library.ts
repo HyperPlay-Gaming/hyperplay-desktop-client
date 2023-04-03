@@ -1,4 +1,3 @@
-import { sendFrontendMessage } from '../../main_window'
 import { hpLibraryStore } from './electronStore'
 import {
   CallRunnerOptions,
@@ -10,7 +9,7 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
-import { getHyperPlayStoreRelease, handleArchAndPlatform } from './utils'
+import { handleArchAndPlatform } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
 
 export async function addGameToLibrary(appId: string) {
@@ -33,6 +32,7 @@ export async function addGameToLibrary(appId: string) {
   const data = res.data[0]
 
   const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
+  const supportedPlatforms = Object.keys(data.releaseMeta.platforms)
 
   const gameInfo: GameInfo = {
     app_name: data._id,
@@ -54,17 +54,17 @@ export async function addGameToLibrary(appId: string) {
     web3: { supported: true },
     runner: 'hyperplay',
     title: data.projectMeta.name,
-    art_cover: data.releaseMeta.image,
-    art_square: data.projectMeta.main_capsule,
+    art_square: data.projectMeta.image || data.releaseMeta.image,
+    art_cover: data.releaseMeta.image || data.projectMeta.main_capsule,
     is_installed: Boolean(data.releaseMeta.platforms.web),
     cloud_save_enabled: false,
     namespace: '',
-    developer: data.accountName,
+    developer: data.accountMeta.name || data.accountName,
     store_url: `https://store.hyperplay.xyz/game/${data.projectName}`,
     folder_name: data.projectName,
     save_folder: '',
-    is_mac_native: false,
-    is_linux_native: false,
+    is_mac_native: supportedPlatforms.some((val) => val.startsWith('darwin')),
+    is_linux_native: supportedPlatforms.some((val) => val.startsWith('linux')),
     canRunOffline: false,
     install: isWebGame ? { platform: 'web' } : {},
     releaseMeta: data.releaseMeta,
@@ -76,8 +76,6 @@ export async function addGameToLibrary(appId: string) {
   }
 
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
-
-  sendFrontendMessage('refreshLibrary', 'hyperplay')
 }
 
 export const getInstallInfo = async (
@@ -127,16 +125,17 @@ export function installState(appName: string, state: boolean) {
 /**
  * Refreshes the game info for a game
  * @param appId the id of the game
+ * @param data the data used to update the GameInfo with
  * @returns void
  **/
-export async function refreshHPGameInfo(appId: string): Promise<void> {
+export function refreshHPGameInfo(appId: string, data: HyperPlayRelease) {
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
   const gameIndex = currentLibrary.findIndex((val) => val.app_name === appId)
   if (gameIndex === -1) {
     return
   }
   const currentInfo = currentLibrary[gameIndex]
-  const data = await getHyperPlayStoreRelease(appId)
+
   const gameInfo: GameInfo = {
     ...currentInfo,
     extra: {
@@ -154,14 +153,15 @@ export async function refreshHPGameInfo(appId: string): Promise<void> {
       ]
     },
     art_square:
-      data.projectMeta.main_capsule ||
+      data.projectMeta.image ||
       data.releaseMeta.image ||
       currentInfo.art_square,
     art_cover:
       data.releaseMeta.image ||
       data.projectMeta.main_capsule ||
       currentInfo.art_cover,
-    releaseMeta: data.releaseMeta
+    releaseMeta: data.releaseMeta,
+    developer: data.accountMeta.name || data.accountName
   }
   currentLibrary[gameIndex] = gameInfo
   return hpLibraryStore.set('games', currentLibrary)
@@ -174,19 +174,27 @@ const defaultExecResult = {
 
 /**
  * Refreshes the entire library
- * this is a very expensive operation
- * and should be used sparingly
- * it is recommended to use `refreshHPGameInfo` instead
- * if you only want to refresh a single game
  * this is only used when the user clicks the refresh button
  * in the library
  **/
 export async function refresh() {
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
   const currentLibraryIds = currentLibrary.map((val) => val.app_name)
+  const data = (
+    await axios.get<HyperPlayRelease[]>(
+      'https://developers.hyperplay.xyz/api/listings'
+    )
+  ).data
+
   for (const gameId of currentLibraryIds) {
     try {
-      await refreshHPGameInfo(gameId)
+      const gameData = data.find((val) => val._id === gameId)
+
+      if (!gameData) {
+        throw new Error('GameId not find in API')
+      }
+
+      refreshHPGameInfo(gameId, gameData)
     } catch (err) {
       logError(
         `Could not refresh HyperPlay Game with appId = ${gameId}`,
@@ -250,6 +258,9 @@ export async function listUpdateableGames(): Promise<string[]> {
   const updateableGames: string[] = []
   const currentHpLibrary = hpLibraryStore.get('games', [])
   currentHpLibrary.map((val) => {
+    if (val.install.platform === 'web') {
+      return
+    }
     if (val.version === undefined) {
       updateableGames.push(val.app_name)
     }

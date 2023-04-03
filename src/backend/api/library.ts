@@ -102,3 +102,16 @@ export const launchApp = async (
   appName: string,
   runner: 'hyperplay' | 'sideload'
 ): Promise<boolean> => ipcRenderer.invoke('launchApp', appName, runner)
+
+export const onLibraryChange = async (
+  callback: (
+    event: Electron.IpcRendererEvent,
+    runner: Runner,
+    newLibrary: GameInfo[]
+  ) => void
+) => {
+  ipcRenderer.on('onLibraryChanged', callback)
+  return () => {
+    ipcRenderer.removeListener('onLibraryChanged', callback)
+  }
+}

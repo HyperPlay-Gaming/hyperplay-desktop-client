@@ -215,6 +215,9 @@ export default React.memo(function Library(): JSX.Element {
       sideloadedLibrary.forEach((game) => {
         if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
       })
+      hyperPlayLibrary.forEach((game) => {
+        if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
+      })
     }
     return tempArray
   }, [showFavourites, favouriteGames, epic, gog])
