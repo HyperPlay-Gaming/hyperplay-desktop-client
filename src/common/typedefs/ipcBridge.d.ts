@@ -1,4 +1,4 @@
-import { HyperPlayGameOS, HyperPlayInstallInfo } from './../types'
+import { HyperPlayInstallInfo } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -31,8 +31,7 @@ import {
   DMQueueElement,
   ConnectivityStatus,
   GamepadActionArgs,
-  ExtraInfo,
-  AppPlatforms
+  ExtraInfo
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
@@ -156,23 +155,14 @@ interface HyperPlayAsyncIPCFunctions {
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
-  getHyperPlayGameInfo: (gameId: string) => Promise<GameInfo | null>
-  getHyperPlayInstallInfo: (
-    appName: string,
-    platform: HyperPlayGameOS
-  ) => Promise<HyperPlayInstallInfo | null>
   addHyperplayGame: (gameId: string) => Promise<void>
-  installHyperPlayGame: (
-    gameId: string,
-    dirpath: string,
-    platformToInstall: AppPlatforms
-  ) => Promise<StatusPromise>
-  uninstallHyperplayGame: (
-    gameId: string,
-    shouldRemovePrefix: boolean,
-    shoudlRemoveSetting: boolean
-  ) => Promise<void>
-  launchHyperplayGame: (gameId: string) => Promise<StatusPromise>
+  sendRequest: (args: unknown[]) => Promise<unknown>
+  sendAsyncRequest: (
+    payload: JsonRpcRequest,
+    callback: JsonRpcCallback
+  ) => Promise<unknown>
+  isGameHidden: (gameId: string) => Promise<boolean>
+  unhideGame: (gameId: string) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -184,7 +174,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<{ stdout: string; stderr: string }>
   checkGameUpdates: () => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
-  updateAll: () => Promise<({ status: 'done' | 'error' } | null)[]>
   getMaxCpus: () => number
   getAppVersion: () => string
   getLegendaryVersion: () => Promise<string>
@@ -208,7 +197,9 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     appName: string,
     runner: Runner,
     installPlatform: InstallPlatform
-  ) => Promise<LegendaryInstallInfo | GogInstallInfo | null>
+  ) => Promise<
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
+  >
   getUserInfo: () => Promise<UserInfo | undefined>
   isLoggedIn: () => boolean
   login: (sid: string) => Promise<{
@@ -225,10 +216,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   readConfig: (config_class: 'library' | 'user') => Promise<GameInfo[] | string>
   requestSettings: (appName: string) => Promise<AppSettings | GameSettings>
   writeConfig: (args: { appName: string; config: Partial<AppSettings> }) => void
-  refreshLibrary: (
-    fullRefresh?: boolean,
-    library?: Runner | 'all'
-  ) => Promise<void>
+  refreshLibrary: (library?: Runner | 'all') => Promise<void>
   launch: (args: LaunchParams) => StatusPromise
   openDialog: (args: OpenDialogOptions) => Promise<string | false>
   install: (
@@ -279,7 +267,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   addToSteam: (appName: string, runner: Runner) => Promise<boolean>
   removeFromSteam: (appName: string, runner: Runner) => Promise<void>
   isAddedToSteam: (appName: string, runner: Runner) => Promise<boolean>
-  getAnticheatInfo: (appNamespace: string) => AntiCheatInfo | null
+  getAnticheatInfo: (appNamespace: string) => AntiCheatInfo | undefined
   getEosOverlayStatus: () => {
     isInstalled: boolean
     version?: string

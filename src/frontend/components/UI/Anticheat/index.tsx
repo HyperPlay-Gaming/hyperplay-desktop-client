@@ -1,12 +1,12 @@
 import React, { MouseEvent, useEffect, useState } from 'react'
-import { AntiCheatInfo, GameInfo, SideloadGame } from 'common/types'
+import { AntiCheatInfo, GameInfo } from 'common/types'
 import { createNewWindow } from 'frontend/helpers'
 
 import './index.css'
 import { useTranslation } from 'react-i18next'
 
 type Props = {
-  gameInfo: GameInfo | SideloadGame
+  gameInfo: GameInfo
 }
 
 const awacyUrl = 'https://areweanticheatyet.com/'
@@ -14,13 +14,19 @@ const awacyUrl = 'https://areweanticheatyet.com/'
 export default function Anticheat({ gameInfo }: Props) {
   const { t } = useTranslation()
 
-  const [anticheatInfo, setAnticheatInfo] = useState<AntiCheatInfo | null>(null)
+  const [anticheatInfo, setAnticheatInfo] = useState<AntiCheatInfo | undefined>(
+    undefined
+  )
 
   useEffect(() => {
-    if (gameInfo.runner !== 'sideload' && gameInfo.title) {
+    if (
+      gameInfo.runner !== 'sideload' &&
+      gameInfo.title &&
+      gameInfo.namespace !== undefined
+    ) {
       window.api
         .getAnticheatInfo(gameInfo.namespace)
-        .then((anticheatInfo: AntiCheatInfo | null) => {
+        .then((anticheatInfo: AntiCheatInfo | undefined) => {
           setAnticheatInfo(anticheatInfo)
         })
     }

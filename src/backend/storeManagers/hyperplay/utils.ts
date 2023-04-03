@@ -1,11 +1,20 @@
 import {
   AppPlatforms,
+  HyperPlayRelease,
   HyperPlayReleaseMeta,
-  HyperPlayGameOS
+  InstallPlatform
 } from 'common/types'
+import axios from 'axios'
+
+export async function getHyperPlayStoreRelease(appName: string) {
+  const gameIdUrl = `https://developers.hyperplay.xyz/api/listings?id=${appName}`
+  const res = await axios.get<HyperPlayRelease[]>(gameIdUrl)
+  const data = res.data[0]
+  return data
+}
 
 export function handleArchAndPlatform(
-  platformToInstall: HyperPlayGameOS,
+  platformToInstall: InstallPlatform,
   releaseMeta: HyperPlayReleaseMeta
 ): AppPlatforms {
   const arch = process.arch === 'x64' ? '_amd64' : '_arm64'

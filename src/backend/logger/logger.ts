@@ -25,7 +25,15 @@ export enum LogPrefix {
   Connection = 'Connection',
   DownloadManager = 'DownloadManager',
   ExtraGameInfo = 'ExtraGameInfo',
-  HyperPlay = 'HyperPlay'
+  HyperPlay = 'HyperPlay',
+  Sideload = 'Sideload'
+}
+
+export const RunnerToLogPrefixMap = {
+  legendary: LogPrefix.Legendary,
+  gog: LogPrefix.Gog,
+  hyperplay: LogPrefix.HyperPlay,
+  sideload: LogPrefix.Sideload
 }
 
 type LogInputType = unknown[] | unknown

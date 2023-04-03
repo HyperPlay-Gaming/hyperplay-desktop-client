@@ -68,6 +68,7 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
+                "message": "Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.",
                 "title": "Update Error"
             },
             "winetricks": {
@@ -148,6 +149,7 @@
     "button": {
         "cancel": "Cancel",
         "continue": "Continue",
+        "download": "Download",
         "go_to_library": "Go to Library",
         "login": "Log in",
         "sync": "Sync",
@@ -325,7 +327,8 @@
                         "details": "Create an encrypted communication channel. Your keys will never be shared with HyperPlay.",
                         "dontHaveWallet": "Don’t have a wallet?",
                         "getMetamask": "Get MetaMask",
-                        "title": "Scan QR with "
+                        "title": "Scan QR with ",
+                        "updateWarning": "Having issues? Make sure MetaMask is up to date."
                     }
                 },
                 "title": "Wallet Connections"
@@ -746,6 +749,7 @@
         "logging_out": "Logging out",
         "logout": "Log out",
         "logout_confirmation": "Are you sure you want to log out?",
+        "manageaccounts": "Manage Accounts",
         "quit": "Quit"
     },
     "webview": {
