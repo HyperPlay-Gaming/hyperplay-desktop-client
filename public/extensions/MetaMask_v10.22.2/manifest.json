@@ -83,7 +83,7 @@
     "notifications"
   ],
   "short_name": "__MSG_appName__",
-  "content_security_policy": "frame-ancestors 'none'; script-src 'self'; object-src 'self'",
+  "content_security_policy": "frame-ancestors 'none'",
   "externally_connectable": {
     "matches": [
       "https://metamask.io/*"
@@ -93,5 +93,5 @@
     ]
   },
   "minimum_chrome_version": "66",
-  "version": "10.27.0"
+  "version": "10.25.0"
 }

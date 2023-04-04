@@ -316,6 +316,9 @@
   "message": {
     "message": "Mesaje"
   },
+  "metamaskDescription": {
+    "message": "MetaMask sekirize idantite pou Ethereum."
+  },
   "metamaskVersion": {
     "message": "MetaMask Vèsyon"
   },
@@ -647,6 +650,9 @@
   },
   "visitWebSite": {
     "message": "Vizite sit entènèt nou an"
+  },
+  "welcome": {
+    "message": "Byenveni nan MetaMask"
   },
   "welcomeBack": {
     "message": "Bon Retou!"

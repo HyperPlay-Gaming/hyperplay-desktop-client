@@ -62,11 +62,17 @@
   "edit": {
     "message": "Editar"
   },
+  "endOfFlowMessage9": {
+    "message": "Obtenha mais informações."
+  },
   "fast": {
     "message": "Rápido"
   },
   "forgetDevice": {
     "message": "Esquecer este dispositivo"
+  },
+  "getStarted": {
+    "message": "Começar"
   },
   "here": {
     "message": "aqui",

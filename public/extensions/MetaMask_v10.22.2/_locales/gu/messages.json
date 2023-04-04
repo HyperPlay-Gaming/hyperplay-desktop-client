@@ -68,6 +68,9 @@
   "forgetDevice": {
     "message": "આ ઉપકરણને ભૂલી જાઓ"
   },
+  "getStarted": {
+    "message": "પ્રારંભ કરો"
+  },
   "hide": {
     "message": "છુપાવો"
   },
