@@ -30,7 +30,9 @@
   "content_scripts": [
     {
       "matches": [
-        "<all_urls>"
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
       ],
       "js": [
         "disable-console.js",
@@ -76,11 +78,12 @@
     "https://chainid.network/chains.json",
     "https://lattice.gridplus.io/*",
     "activeTab",
+    "webRequest",
     "*://*.eth/",
     "notifications"
   ],
   "short_name": "__MSG_appName__",
-  "content_security_policy": "frame-ancestors 'none'",
+  "content_security_policy": "frame-ancestors 'none'; script-src 'self'; object-src 'self'",
   "externally_connectable": {
     "matches": [
       "https://metamask.io/*"
@@ -90,5 +93,5 @@
     ]
   },
   "minimum_chrome_version": "66",
-  "version": "10.25.0"
+  "version": "10.27.0"
 }
