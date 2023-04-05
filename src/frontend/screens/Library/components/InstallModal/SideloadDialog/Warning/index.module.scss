@@ -1,0 +1,18 @@
+.container {
+  padding-top: 24px;
+}
+
+.titleContainer {
+  cursor: pointer;
+  display: flex;
+  gap: var(--space-sm-fixed);
+  align-items: center;
+
+  svg path {
+    fill: var(--color-status-error);
+  }
+
+  .title {
+    color: var(--color-status-error);
+  }
+}
