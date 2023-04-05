@@ -74,9 +74,11 @@
     "clipboardWrite",
     "http://localhost:8545/",
     "https://*.infura.io/",
+    "https://*.codefi.network/",
     "https://chainid.network/chains.json",
     "https://lattice.gridplus.io/*",
     "activeTab",
+    "webRequest",
     "*://*.eth/",
     "notifications"
   ],
@@ -91,5 +93,5 @@
     ]
   },
   "minimum_chrome_version": "66",
-  "version": "10.22.2"
+  "version": "10.25.0"
 }
