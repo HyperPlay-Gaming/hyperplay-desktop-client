@@ -79,7 +79,7 @@ function WebView() {
     let mounted = true
     const fetchLocalPreloadPath = async () => {
       const path = (await window.api.getLocalPeloadPath()) as unknown
-      console.log(path)
+
       if (mounted) {
         setPreloadPath(path as string)
       }
@@ -106,7 +106,7 @@ function WebView() {
     if (webview && ((preloadPath && isEpicLogin) || !isEpicLogin)) {
       const onIpcMessage = async (event: unknown) => {
         const e = event as { channel: string; args: string[] }
-        console.log(e.channel, e.args)
+
         if (e.channel === 'webviewClicked') {
           extensionStore.setIsPopupOpen(false)
         }
