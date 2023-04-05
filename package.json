@@ -210,6 +210,7 @@
     "codecheck": "tsc --noEmit",
     "find-deadcode": "ts-prune --error",
     "test": "jest",
+    "testDownload": "jest utilsDownload.test.ts --verbose",
     "testProxy": "jest proxy.test.ts",
     "test-watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand --silent",

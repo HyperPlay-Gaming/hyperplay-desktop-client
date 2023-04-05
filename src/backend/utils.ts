@@ -1116,6 +1116,11 @@ export async function moveOnUnix(
   return { status: 'done', installPath: destination }
 }
 
+/*
+ * downloadSpeed is bytes per second
+ * diskWriteSpeed is bytes per second
+ * progress is percentage downloaded
+ */
 export interface ProgressCallback {
   (
     downloadedBytes: number,

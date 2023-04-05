@@ -501,6 +501,7 @@ ipcMain.once('frontendReady', () => {
   }, 5000)
 
   watchLibraryChanges()
+  sendFrontendMessage('refreshLibrary', 'hyperplay')
 })
 
 // Maybe this can help with white screens
