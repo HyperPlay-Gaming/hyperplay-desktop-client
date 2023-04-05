@@ -6277,6 +6277,8 @@ readers do not read off random characters that represent icons */
   --mainnet: #29b6af;
   --inherit: inherit;
   --transparent: transparent;
+  --color-network-linea-testnet-default: #000;
+  --color-network-linea-testnet-inverse: #fcfcfc;
   --qr-code-white-background: #fff;
 }
 
@@ -12850,6 +12852,12 @@ readers do not read off random characters that represent icons */
 .mm-text--color-sepolia-inverse {
   color: var(--color-network-sepolia-inverse);
 }
+.mm-text--color-lineatestnet {
+  color: var(--color-network-linea-testnet-default);
+}
+.mm-text--color-lineatestnet-inverse {
+  color: var(--color-network-linea-testnet-inverse);
+}
 .mm-text--color-localhost {
   color: var(--color-network-localhost-default);
 }
@@ -12960,7 +12968,6 @@ readers do not read off random characters that represent icons */
   height: 1em;
   max-width: 1em;
   flex: 0 0 1em;
-  display: inline-block;
   background-color: currentColor;
   mask-size: cover;
   -webkit-mask-size: cover;
@@ -12968,9 +12975,6 @@ readers do not read off random characters that represent icons */
   -webkit-mask-repeat: no-repeat;
   mask-position: center;
   -webkit-mask-position: center;
-}
-.mm-icon--size-xxs {
-  --size: 10px;
 }
 .mm-icon--size-xs {
   --size: 12px;
@@ -12987,20 +12991,14 @@ readers do not read off random characters that represent icons */
 .mm-icon--size-xl {
   --size: 32px;
 }
-.mm-icon--size-auto {
+.mm-icon--size-inherit {
   --size: 1em;
   position: relative;
   top: 0.125em;
 }
 
-.mm-label {
-  --label-opacity-disabled: 0.5;
-}
 .mm-label--html-for {
   cursor: pointer;
-}
-.mm-label--disabled {
-  opacity: var(--label-opacity-disabled);
 }
 
 .mm-tag {
@@ -13085,20 +13083,65 @@ readers do not read off random characters that represent icons */
   border-radius: 50%;
 }
 
-.mm-avatar-with-badge {
+/**
+* Mixin that renders the CSS values for badge positions and value
+*/
+.mm-badge-wrapper {
+  --badge-wrapper-position-circular: 14%;
+  --badge-wrapper-position-rectangular: 0;
   position: relative;
-  width: -moz-fit-content;
-  width: fit-content;
+  align-self: start;
 }
-.mm-avatar-with-badge__badge-wrapper--position-top {
+.mm-badge-wrapper__badge-container {
   position: absolute;
-  top: -4px;
-  left: -4px;
 }
-.mm-avatar-with-badge__badge-wrapper--position-bottom {
-  position: absolute;
-  bottom: -4px;
-  left: -4px;
+.mm-badge-wrapper__badge-container--circular-top-right {
+  top: var(--badge-wrapper-position-circular);
+  left: var(--badge-wrapper-position-circular);
+  transform: scale(1) translate(-50%, -50%);
+  transform-origin: 0% 0%;
+}
+.mm-badge-wrapper__badge-container--circular-bottom-right {
+  bottom: var(--badge-wrapper-position-circular);
+  left: var(--badge-wrapper-position-circular);
+  transform: scale(1) translate(-50%, 50%);
+  transform-origin: 0% 100%;
+}
+.mm-badge-wrapper__badge-container--circular-top-left {
+  top: var(--badge-wrapper-position-circular);
+  right: var(--badge-wrapper-position-circular);
+  transform: scale(1) translate(50%, -50%);
+  transform-origin: 100% 0%;
+}
+.mm-badge-wrapper__badge-container--circular-bottom-left {
+  bottom: var(--badge-wrapper-position-circular);
+  right: var(--badge-wrapper-position-circular);
+  transform: scale(1) translate(50%, 50%);
+  transform-origin: 100% 100%;
+}
+.mm-badge-wrapper__badge-container--rectangular-top-right {
+  top: var(--badge-wrapper-position-rectangular);
+  left: var(--badge-wrapper-position-rectangular);
+  transform: scale(1) translate(-50%, -50%);
+  transform-origin: 0% 0%;
+}
+.mm-badge-wrapper__badge-container--rectangular-bottom-right {
+  bottom: var(--badge-wrapper-position-rectangular);
+  left: var(--badge-wrapper-position-rectangular);
+  transform: scale(1) translate(-50%, 50%);
+  transform-origin: 0% 100%;
+}
+.mm-badge-wrapper__badge-container--rectangular-top-left {
+  top: var(--badge-wrapper-position-rectangular);
+  right: var(--badge-wrapper-position-rectangular);
+  transform: scale(1) translate(50%, -50%);
+  transform-origin: 100% 0%;
+}
+.mm-badge-wrapper__badge-container--rectangular-bottom-left {
+  bottom: var(--badge-wrapper-position-rectangular);
+  right: var(--badge-wrapper-position-rectangular);
+  transform: scale(1) translate(50%, 50%);
+  transform-origin: 100% 100%;
 }
 
 .mm-button-base {
@@ -13107,8 +13150,7 @@ readers do not read off random characters that represent icons */
   padding: 0;
   cursor: pointer;
   vertical-align: middle;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
 }
 .mm-button-base:active, .mm-button-base:hover {
   color: var(--color-text-default);
@@ -13128,17 +13170,6 @@ readers do not read off random characters that represent icons */
 }
 .mm-button-base--size-lg {
   height: 48px;
-}
-.mm-button-base--size-auto {
-  height: auto;
-  background-color: transparent;
-  border-radius: 0;
-  vertical-align: top;
-  font-family: inherit;
-  font-weight: inherit;
-  font-size: inherit;
-  line-height: inherit;
-  letter-spacing: inherit;
 }
 .mm-button-base--loading {
   cursor: not-allowed;
@@ -13212,6 +13243,19 @@ readers do not read off random characters that represent icons */
 .mm-button-link--type-danger.mm-button-link--disabled:hover {
   opacity: 0.3;
 }
+.mm-button-link--size-auto {
+  height: auto;
+}
+.mm-button-link--size-inherit {
+  height: auto;
+  background-color: transparent;
+  vertical-align: top;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}
 
 .mm-button-primary:hover {
   color: var(--color-primary-inverse);
@@ -13276,6 +13320,17 @@ readers do not read off random characters that represent icons */
   color: var(--color-error-default);
 }
 
+.mm-input {
+  --input-opacity-disabled: 0.5;
+  box-sizing: content-box;
+}
+.mm-input--disable-state-styles:focus, .mm-input--disable-state-styles:focus-visible {
+  outline: none;
+}
+.mm-input--disabled {
+  opacity: var(--input-opacity-disabled);
+}
+
 .mm-picker-network {
   --picker-network-height: 32px;
   max-width: -moz-fit-content;
@@ -13292,47 +13347,39 @@ readers do not read off random characters that represent icons */
   max-width: fit-content;
 }
 
-.mm-text-field-base {
-  --text-field-base-height: var(--size, 40px);
-  height: var(--text-field-base-height);
+.mm-text-field {
+  --text-field-height: var(--size, 40px);
+  height: var(--text-field-height);
   border-color: var(--color-border-default);
 }
-.mm-text-field-base--size-sm {
+.mm-text-field--size-sm {
   --size: 32px;
 }
-.mm-text-field-base--size-md {
+.mm-text-field--size-md {
   --size: 40px;
 }
-.mm-text-field-base--size-lg {
+.mm-text-field--size-lg {
   --size: 48px;
 }
-.mm-text-field-base--focused {
+.mm-text-field--focused {
   outline: 5px auto Highlight;
   outline: 5px auto -webkit-focus-ring-color;
 }
-.mm-text-field-base--error {
+.mm-text-field--error {
   border-color: var(--color-error-default);
 }
-.mm-text-field-base--disabled {
+.mm-text-field--disabled {
   opacity: 0.5;
   border-color: var(--color-border-default);
 }
-.mm-text-field-base--truncate .mm-text-field-base__input {
+.mm-text-field--truncate .mm-text-field__input {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.mm-text-field-base__input {
-  border: none;
-  height: 100%;
+.mm-text-field__input {
   width: 100%;
   flex-grow: 1;
-  box-sizing: content-box;
-  margin: 0;
-  padding: 0;
-}
-.mm-text-field-base__input:focus, .mm-text-field-base__input:focus-visible {
-  outline: none;
 }
 
 .mm-text-field-search ::-webkit-search-cancel-button {
@@ -13340,14 +13387,29 @@ readers do not read off random characters that represent icons */
 }
 
 .mm-form-text-field {
-  --help-text-opacity-disabled: 0.5;
+  --text-opacity-disabled: 0.5;
 }
+.mm-form-text-field--disabled .mm-form-text-field__label,
 .mm-form-text-field--disabled .mm-form-text-field__help-text {
-  opacity: var(--help-text-opacity-disabled);
+  opacity: var(--text-opacity-disabled);
+  cursor: default;
 }
 
-.mm-banner-base {
-  border-right: 4px solid var(--color-icon-default);
+.mm-banner-alert {
+  border-right: 4px solid var(--color-primary-default);
+}
+.mm-banner-alert--severity-danger {
+  border-right-color: var(--color-error-default);
+}
+.mm-banner-alert--severity-warning {
+  border-right-color: var(--color-warning-default);
+}
+.mm-banner-alert--severity-success {
+  border-right-color: var(--color-success-default);
+}
+
+.mm-banner-tip--logo {
+  width: 60px;
 }
 
 /** Please import your files in alphabetical order **/
@@ -13676,8 +13738,7 @@ readers do not read off random characters that represent icons */
 }
 
 .add-network__networks-container {
-  -webkit-padding-end: 24px;
-          padding-inline-end: 24px;
+  padding-inline-end: 24px;
 }
 @media screen and (max-width: calc(576px - 1px)) {
   .add-network__networks-container {
@@ -13689,33 +13750,24 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (max-width: calc(576px - 1px)) {
   .add-network__header {
-    -webkit-padding-start: 24px;
-            padding-inline-start: 24px;
-    -webkit-padding-end: 24px;
-            padding-inline-end: 24px;
+    padding-inline-start: 24px;
+    padding-inline-end: 24px;
   }
 }
 .add-network__header__subtitle {
-  -webkit-margin-start: 10px;
-          margin-inline-start: 10px;
-  -webkit-margin-end: 10px;
-          margin-inline-end: 10px;
+  margin-inline-start: 10px;
+  margin-inline-end: 10px;
 }
 @media screen and (max-width: calc(576px - 1px)) {
   .add-network__main-container {
-    -webkit-padding-start: 24px;
-            padding-inline-start: 24px;
-    -webkit-padding-end: 24px;
-            padding-inline-end: 24px;
+    padding-inline-start: 24px;
+    padding-inline-end: 24px;
   }
 }
 @media screen and (min-width: 576px) {
   .add-network__list-of-networks {
     width: 75%;
   }
-}
-.add-network__warning-icon {
-  color: var(--color-icon-muted);
 }
 .add-network__warning-tooltip {
   color: var(--color-text-alternative);
@@ -13726,17 +13778,14 @@ readers do not read off random characters that represent icons */
 }
 .add-network__add-icon {
   color: var(--color-text-alternative);
-  -webkit-margin-start: auto;
-          margin-inline-start: auto;
-  -webkit-margin-end: 0;
-          margin-inline-end: 0;
+  margin-inline-start: auto;
+  margin-inline-end: 0;
   cursor: pointer;
 }
 .add-network__add-button.button {
   color: var(--color-primary-default);
   font-size: 0.75rem;
-  -webkit-margin-start: 24px;
-          margin-inline-start: 24px;
+  margin-inline-start: 24px;
 }
 .add-network__footer {
   border-top: 1px solid var(--color-border-muted);
@@ -13745,8 +13794,7 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (max-width: calc(576px - 1px)) {
   .add-network__footer {
-    -webkit-padding-start: 24px !important;
-            padding-inline-start: 24px !important;
+    padding-inline-start: 24px !important;
   }
 }
 .add-network__footer .btn-link {
@@ -13960,8 +14008,7 @@ readers do not read off random characters that represent icons */
 }
 .advanced-gas-controls h6 {
   padding-bottom: 6px;
-  -webkit-margin-end: 6px;
-          margin-inline-end: 6px;
+  margin-inline-end: 6px;
 }
 .advanced-gas-controls path {
   fill: var(--color-icon-alternative);
@@ -14184,8 +14231,7 @@ readers do not read off random characters that represent icons */
   max-width: 100%;
 }
 .asset-list-item__token-button {
-  -webkit-padding-start: 0;
-          padding-inline-start: 0;
+  padding-inline-start: 0;
   min-width: 0;
   min-height: 0;
   text-align: start;
@@ -14205,9 +14251,6 @@ readers do not read off random characters that represent icons */
   max-width: 100%;
   display: block;
   overflow: hidden;
-}
-.asset-list-item__chevron-right {
-  color: var(--color-icon-default);
 }
 .asset-list-item .list-item__right-content {
   align-self: center;
@@ -14247,7 +14290,7 @@ readers do not read off random characters that represent icons */
   .asset-list-item:hover .asset-list-item__send-token-button, .asset-list-item:focus-within .asset-list-item__send-token-button {
     display: inline-block;
   }
-  .asset-list-item__chevron-right {
+  .asset-list-item__arrow {
     display: none;
   }
 }
@@ -14346,22 +14389,19 @@ readers do not read off random characters that represent icons */
   text-transform: uppercase;
 }
 .confirm-page-container-summary__action .info-tooltip {
-  -webkit-margin-start: 4px;
-          margin-inline-start: 4px;
+  margin-inline-start: 4px;
 }
 .confirm-page-container-summary__action .info-tooltip__tooltip-container {
   margin-bottom: -3px;
 }
 .confirm-page-container-summary__action__contract-address {
-  -webkit-margin-end: 4px;
-          margin-inline-end: 4px;
+  margin-inline-end: 4px;
 }
 .confirm-page-container-summary__action__contract-address-btn {
   background: none;
   border: none;
   padding: 0;
-  -webkit-margin-end: 4px;
-          margin-inline-end: 4px;
+  margin-inline-end: 4px;
   color: var(--color-primary-default);
 }
 .confirm-page-container-summary__nonce {
@@ -14374,37 +14414,6 @@ readers do not read off random characters that represent icons */
 .confirm-page-container-summary__icon {
   flex: 0 0 auto;
   margin-left: 8px;
-}
-.confirm-page-container-summary__title-text {
-  font-size: 2.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.confirm-page-container-summary__title-text-long {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.confirm-page-container-summary__subtitle {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 .confirm-page-container-summary--border {
   border-bottom: 1px solid var(--color-border-muted);
@@ -14427,60 +14436,11 @@ readers do not read off random characters that represent icons */
   box-sizing: border-box;
   padding: 0 24px;
 }
-.confirm-page-container-content__data {
-  padding: 16px;
-  color: var(--color-text-alternative);
-}
-.confirm-page-container-content__data > .disclosure {
-  margin-top: 0;
-}
-.confirm-page-container-content__data-box {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  background-color: var(--color-background-alternative);
-  padding: 12px;
-  word-wrap: break-word;
-  overflow-y: auto;
-}
-.confirm-page-container-content__data-box-label {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  text-transform: uppercase;
-  padding: 8px 0 12px;
-}
-.confirm-page-container-content__data-field {
-  display: flex;
-  flex-direction: row;
-}
-.confirm-page-container-content__data-field-label {
-  font-weight: 500;
-  padding-left: 16px;
-}
-.confirm-page-container-content__data-field:not(:last-child) {
-  margin-bottom: 5px;
-}
 .confirm-page-container-content__gas-fee {
   border-bottom: 1px solid var(--color-border-muted);
 }
 .confirm-page-container-content__gas-fee .advanced-gas-inputs__gas-edit-rows {
   margin-bottom: 16px;
-}
-.confirm-page-container-content__function-type {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: 500;
-  text-transform: capitalize;
-  color: var(--color-text-default);
-  padding-right: 5px;
 }
 .confirm-page-container-content__tab {
   font-size: 0.75rem;
@@ -14706,11 +14666,13 @@ readers do not read off random characters that represent icons */
   font-size: 0.75rem;
 }
 
+.confirm-data > .disclosure {
+  margin-top: 0;
+}
+
 .confirmation-warning-modal__content ul {
-  -webkit-padding-start: 1rem;
-          padding-inline-start: 1rem;
-  -webkit-margin-before: 0;
-          margin-block-start: 0;
+  padding-inline-start: 1rem;
+  margin-block-start: 0;
   list-style: disc outside;
 }
 .confirmation-warning-modal__content li {
@@ -14722,30 +14684,29 @@ readers do not read off random characters that represent icons */
 .confirmation-warning-modal__content__header__warning-icon {
   padding-top: 7px;
   margin-left: 10px;
-  color: var(--color-error-default);
 }
 .confirmation-warning-modal__footer {
   width: 100%;
   height: 100px;
 }
 
-.collectibles-items__collection {
+.nfts-items__collection {
   margin-bottom: 24px;
 }
-.collectibles-items__collection-accordion-title {
+.nfts-items__collection-accordion-title {
   cursor: pointer;
 }
-.collectibles-items__collection-wrapper {
+.nfts-items__collection-wrapper {
   background-color: transparent;
   border: 0;
   width: 100%;
 }
-.collectibles-items__collection-image {
+.nfts-items__collection-image {
   width: 32px;
   height: 32px;
   border-radius: 50%;
 }
-.collectibles-items__collection-image-alt {
+.nfts-items__collection-image-alt {
   border-radius: 50%;
   width: 32px;
   height: 32px;
@@ -14754,16 +14715,13 @@ readers do not read off random characters that represent icons */
   color: var(--color-overlay-inverse);
   text-align: center;
 }
-.collectibles-items__collection__icon-chevron {
-  color: var(--color-icon-default);
-}
-.collectibles-items__item-wrapper {
+.nfts-items__item-wrapper {
   align-self: center;
 }
-.collectibles-items__item-wrapper__card {
+.nfts-items__item-wrapper__card {
   overflow: hidden;
 }
-.collectibles-items__item {
+.nfts-items__item {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -14771,18 +14729,18 @@ readers do not read off random characters that represent icons */
   align-self: center;
   padding: 0;
 }
-.collectibles-items__item-image {
+.nfts-items__item-image {
   border-radius: 4px;
   width: 100%;
   height: 100%;
   cursor: pointer;
 }
 
-.collectibles-tab__link a {
+.nfts-tab__link a {
   padding: 4px;
   font-size: 0.875rem;
 }
-.collectibles-tab__loading {
+.nfts-tab__loading {
   display: flex;
   height: 250px;
   align-items: center;
@@ -14790,37 +14748,42 @@ readers do not read off random characters that represent icons */
   padding: 30px;
 }
 
-.collectible-details {
+.nft-details {
   padding: 0 16px;
 }
 @media screen and (min-width: 576px) {
-  .collectible-details {
+  .nft-details {
     padding: 0 24px;
   }
 }
-.collectible-details__top-section {
+.nft-details__tooltip-wrapper {
+  width: 100%;
+}
+.nft-details__top-section {
   display: flex;
   flex-direction: column;
   margin-bottom: 16px;
+  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
+  padding: 24px;
 }
 @media screen and (min-width: 576px) {
-  .collectible-details__top-section {
+  .nft-details__top-section {
     margin-bottom: 24px;
     flex-direction: row;
   }
 }
 @media screen and (min-width: 576px) {
-  .collectible-details__info {
+  .nft-details__info {
     max-width: calc( 100% - 224px - 24px );
     flex: 0 0 calc(100% - 224px - 24px);
   }
 }
-.collectible-details__card {
+.nft-details__card {
   overflow: hidden;
   margin-bottom: 16px;
 }
 @media screen and (min-width: 576px) {
-  .collectible-details__card {
+  .nft-details__card {
     margin-left: 24px;
     margin-bottom: 0;
     max-width: 224px;
@@ -14828,17 +14791,17 @@ readers do not read off random characters that represent icons */
     height: 224px;
   }
 }
-.collectible-details__image {
+.nft-details__image {
   width: 100%;
   object-fit: contain;
 }
-.collectible-details__address {
+.nft-details__address {
   overflow-wrap: break-word;
 }
-.collectible-details__contract-wrapper {
+.nft-details__contract-wrapper {
   max-width: calc(100% - 160px);
 }
-.collectible-details__contract-copy-button {
+.nft-details__contract-copy-button {
   font-size: 0.875rem;
   font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
   line-height: 140%;
@@ -14854,42 +14817,40 @@ readers do not read off random characters that represent icons */
   border: 0;
   margin-top: -4px;
 }
-.collectible-details__contract-copy-button:active {
+.nft-details__contract-copy-button:active {
   transform: scale(0.97);
 }
-.collectible-details__contract-link {
+.nft-details__contract-link {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.nft-details__image-source {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 332px;
 }
-.collectible-details__image-source {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 332px;
-}
-.collectible-details__link-title {
+.nft-details__link-title {
   flex: 0 0 160px;
   max-width: 0 0 160px;
 }
-.collectible-details__send-button {
-  -webkit-margin-end: 8px;
-          margin-inline-end: 8px;
+.nft-details__send-button {
+  margin-inline-end: 8px;
 }
 @media screen and (min-width: 576px) {
-  .collectible-details__send-button {
+  .nft-details__send-button {
     max-width: 160px;
   }
 }
 
-.collectible-default {
+.nft-default {
   background-color: var(--color-background-alternative);
   padding-top: 100%;
   position: relative;
   width: 100%;
 }
-.collectible-default__text {
+.nft-default__text {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
@@ -14900,35 +14861,29 @@ readers do not read off random characters that represent icons */
   transform: translate(50%, -50%);
   width: calc(100% - 32px);
 }
-.collectible-default--clickable {
+.nft-default--clickable {
   cursor: pointer;
 }
 
-.collectible-options__button {
-  font-size: 1rem;
-  color: var(--color-text-default);
-  background-color: inherit;
+.nft-options__button {
   padding: 2px 8px 2px 0;
 }
-.collectible-options__icon {
-  font-weight: 900;
-}
 
-.collectibles-detection-notice {
+.nfts-detection-notice {
   margin: 16px 16px 0 16px;
 }
-.collectibles-detection-notice__message {
+.nfts-detection-notice__message {
   position: relative;
   padding: 0.75rem 0.75rem 1rem 0.75rem !important;
 }
-.collectibles-detection-notice__message .collectibles-detection-notice__message__close-button {
+.nfts-detection-notice__message .nfts-detection-notice__message__close-button {
   color: var(--color-icon-default);
   background: none;
   position: absolute;
   cursor: pointer;
   left: 8px;
 }
-.collectibles-detection-notice__message a.collectibles-detection-notice__message__link {
+.nfts-detection-notice__message a.nfts-detection-notice__message__link {
   font-size: 0.75rem;
   font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
   line-height: 140%;
@@ -15088,8 +15043,7 @@ readers do not read off random characters that represent icons */
   font-weight: normal;
   padding: 0;
   width: auto;
-  -webkit-padding-start: 24px;
-          padding-inline-start: 24px;
+  padding-inline-start: 24px;
 }
 .connected-sites-list__subject-info {
   font-size: 0.75rem;
@@ -15205,33 +15159,15 @@ readers do not read off random characters that represent icons */
 }
 .custom-spending-cap #custom-spending-cap-input-value {
   color: var(--color-error-default);
-  -webkit-padding-end: 60px;
-          padding-inline-end: 60px;
+  padding-inline-end: 60px;
 }
 .custom-spending-cap #custom-spending-cap {
-  -webkit-padding-end: 60px;
-          padding-inline-end: 60px;
+  padding-inline-end: 60px;
 }
 .custom-spending-cap input[type=number]::-webkit-inner-spin-button,
 .custom-spending-cap input[type=number]:hover::-webkit-inner-spin-button {
   -webkit-appearance: none;
   display: none;
-}
-
-.deposit-popover {
-  min-width: 328px;
-  max-width: 850px;
-}
-@media screen and (min-width: 768px) {
-  .deposit-popover {
-    width: 100% !important;
-  }
-}
-.deposit-popover__on-ramp-item {
-  border-bottom: 1px solid var(--color-border-muted);
-}
-.deposit-popover__on-ramp-item:last-child {
-  border-bottom: none;
 }
 
 .edit-gas-display .actionable-message--warning, .edit-gas-display .actionable-message--error {
@@ -15306,25 +15242,20 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: normal;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   color: var(--color-primary-default);
   background: transparent;
   border: 0;
-  -webkit-padding-end: 0;
-          padding-inline-end: 0;
+  padding-inline-end: 0;
   white-space: pre;
-}
-.edit-gas-fee-button i {
-  color: var(--color-primary-default);
-  margin-left: 2px;
 }
 .edit-gas-fee-button__icon {
   font-size: 16px;
-  margin-left: 4px;
+  margin-left: 2px;
 }
 .edit-gas-fee-button__label {
   font-size: 12px;
-  margin-left: 8px;
+  margin-left: 4px;
 }
 .edit-gas-fee-button .info-tooltip {
   align-self: center;
@@ -21778,10 +21709,6 @@ readers do not read off random characters that represent icons */
   vertical-align: middle;
 }
 
-.snap-content-footer i {
-  color: var(--color-icon-muted);
-  padding-left: 4px;
-}
 .snap-content-footer .button {
   white-space: nowrap;
   overflow: hidden;
@@ -21823,12 +21750,10 @@ readers do not read off random characters that represent icons */
 }
 .snap-remove-warning__footer-button {
   height: 40px;
-  -webkit-margin-end: 24px;
-          margin-inline-end: 24px;
+  margin-inline-end: 24px;
 }
 .snap-remove-warning__footer-button:last-of-type {
-  -webkit-margin-end: 0;
-          margin-inline-end: 0;
+  margin-inline-end: 0;
 }
 
 .snap-ui-renderer__error {
@@ -22004,8 +21929,7 @@ readers do not read off random characters that represent icons */
 }
 .typography.gas-timing .info-tooltip {
   display: inline-block;
-  -webkit-margin-start: 4px;
-          margin-inline-start: 4px;
+  margin-inline-start: 4px;
 }
 .typography.gas-timing .info-tooltip path {
   fill: var(--color-error-default);
@@ -22871,36 +22795,6 @@ readers do not read off random characters that represent icons */
   margin: 0 5px;
 }
 
-.metametrics-opt-in-modal .metametrics-opt-in__main {
-  justify-content: center;
-  margin-right: 3%;
-  margin-left: 0%;
-  max-height: 75vh;
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .metametrics-opt-in-modal .metametrics-opt-in__main {
-    max-height: 100vh;
-  }
-}
-.metametrics-opt-in-modal .metametrics-opt-in__title {
-  font-size: 2.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-}
-.metametrics-opt-in-modal .metametrics-opt-in__content {
-  padding-left: 6px;
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .metametrics-opt-in-modal .metametrics-opt-in__footer {
-    margin-top: 10px;
-    justify-content: center;
-    margin-right: 2%;
-    max-height: 520px;
-  }
-}
-
 .new-account-modal {
   display: flex;
   flex-flow: column nowrap;
@@ -23151,17 +23045,13 @@ readers do not read off random characters that represent icons */
   box-shadow: none;
   background: none;
 }
-.contract-details-modal__content__contract__identicon-for-unknown-contact {
-  margin: 16px;
+
+.hold-to-reveal-modal {
+  position: relative;
 }
-.contract-details-modal__content__contract__buttons {
-  flex-grow: 1;
-}
-.contract-details-modal__content__contract__buttons__copy.btn-link {
-  padding: 0;
-}
-.contract-details-modal__content__contract__buttons__block-explorer.btn-link {
-  padding: 0;
+.hold-to-reveal-modal__close {
+  position: absolute;
+  left: 16px;
 }
 
 .modal {
@@ -23277,8 +23167,7 @@ readers do not read off random characters that represent icons */
   padding: 0 10px;
   border-radius: 4px;
   min-height: 25px;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
 }
 .network-display--disabled {
   cursor: not-allowed;
@@ -23297,9 +23186,6 @@ readers do not read off random characters that represent icons */
 }
 .network-display .chip__right-icon {
   margin-left: 4px;
-}
-.network-display__icon {
-  display: block;
 }
 .network-display--clickable {
   cursor: pointer;
@@ -23404,10 +23290,6 @@ readers do not read off random characters that represent icons */
 }
 .permission-approval-container .page-container__footer footer {
   width: 100%;
-  justify-content: space-between;
-}
-.permission-approval-container .page-container__footer footer button {
-  width: 124px;
 }
 @media screen and (max-width: calc(576px - 1px)) {
   .permission-approval-container__title {
@@ -23711,31 +23593,8 @@ ul.two-steps {
   background-color: var(--color-background-default-hover);
 }
 .selected-account__copy {
-  height: 13px;
-  display: inline-block;
-  -webkit-margin-start: 3px;
-          margin-inline-start: 3px;
-}
-
-.signature-request-footer {
   display: flex;
-  box-shadow: inset 0 1px 0 var(--color-border-muted);
-}
-.signature-request-footer button {
-  text-transform: uppercase;
-  flex: 1;
-  margin: 1rem 0.5rem;
-}
-.signature-request-footer button:first-child {
-  flex: 1 1 100%;
-  padding: 0;
-}
-.signature-request-footer button:last-child {
-  flex: 1 1 100%;
-  margin-left: 1rem;
-}
-.signature-request-footer__tooltip {
-  display: flex;
+  margin-inline-start: 3px;
 }
 
 .signature-request-header {
@@ -23814,18 +23673,25 @@ ul.two-steps {
   flex-direction: column;
   min-width: 0;
   width: 408px;
+  height: max-content;
   background-color: var(--color-background-default);
   box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
   border-radius: 8px;
 }
 @media screen and (min-width: 576px) {
   .signature-request {
-    max-height: 55vh;
+    max-height: 80vh;
     min-height: 570px;
     flex: 0 0 auto;
     margin-right: auto;
     margin-left: auto;
   }
+}
+.signature-request__reject-all-button {
+  margin-top: -15px;
+}
+.signature-request__origin {
+  margin-top: 16px;
 }
 
 .signature-request-header {
@@ -23938,6 +23804,7 @@ a.signature-request-content__verify-contract-details {
   margin-left: auto;
   margin-right: auto;
   overflow-y: auto;
+  /** @todo replace ActionableMessage or remove overwritten code. */
 }
 @media screen and (min-width: 576px) {
   .signature-request-siwe {
@@ -23950,15 +23817,20 @@ a.signature-request-content__verify-contract-details {
   }
 }
 .signature-request-siwe .signature-request-siwe__actionable-message {
-  margin: 0 16px 16px;
+  margin: 0 16px;
+  flex-direction: row;
+  align-items: initial;
 }
 .signature-request-siwe .signature-request-siwe__actionable-message .icon {
   position: absolute;
   right: 17px;
   top: 13px;
 }
-.signature-request-siwe .actionable-message--with-icon.actionable-message--with-right-button {
-  padding-right: 48px;
+.signature-request-siwe .signature-request-siwe__actionable-message .actionable-message__message {
+  padding-right: 16px;
+}
+.signature-request-siwe .signature-request-siwe__actionable-message.actionable-message--with-icon {
+  padding-right: 16px;
 }
 
 .signature-request-siwe__warning-popover .page-container__footer {
@@ -23983,8 +23855,7 @@ a.signature-request-content__verify-contract-details {
   font-style: normal;
   font-weight: normal;
   color: var(--color-text-default);
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
+  margin-inline-start: 8px;
   margin-top: 1px;
   user-select: none;
   -moz-user-select: none;
@@ -24018,7 +23889,7 @@ a.signature-request-content__verify-contract-details {
 }
 @media screen and (min-width: 576px) {
   .request-signature__container {
-    height: 620px;
+    height: 650px;
   }
 }
 .request-signature__container__reject {
@@ -24050,15 +23921,21 @@ a.signature-request-content__verify-contract-details {
   color: var(--color-default-text);
   z-index: 3;
 }
-.request-signature__account {
+.request-signature__account, .request-signature__navigation {
   width: 100%;
 }
 .request-signature__body {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-flow: column;
-  flex: 1 1 auto;
+  flex: 1 1 0;
+  min-height: 0;
+  max-width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.request-signature__body > * {
+  flex: 0 0 auto;
+  min-height: 0;
 }
 .request-signature__origin {
   display: flex;
@@ -24082,9 +23959,6 @@ a.signature-request-content__verify-contract-details {
   padding: 0 10px;
 }
 .request-signature__rows {
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
   border-top: 1px solid var(--color-border-default);
   display: flex;
   flex-flow: column;
@@ -24092,7 +23966,6 @@ a.signature-request-content__verify-contract-details {
 .request-signature__row {
   display: flex;
   flex-flow: column;
-  flex: 1 0 auto;
 }
 .request-signature__row-title {
   font-size: 1rem;
@@ -24123,38 +23996,16 @@ a.signature-request-content__verify-contract-details {
   cursor: pointer;
   text-decoration: underline;
   color: var(--color-primary-default);
-  -webkit-margin-start: 3px;
-          margin-inline-start: 3px;
-}
-.request-signature__footer {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex: 0 0 auto;
-  border-top: 1px solid var(--color-border-default);
-  padding: 1.6rem;
-}
-.request-signature__footer button {
-  width: 165px;
-}
-.request-signature__footer__cancel-button {
-  margin-left: 1.2rem;
+  margin-inline-start: 3px;
 }
 
 .signature-request-warning__content__header {
   border-bottom: 1px solid var(--color-border-muted);
+  align-items: center;
 }
 .signature-request-warning__content__header__warning-icon {
   padding-top: 7px;
   margin-left: 10px;
-  color: var(--color-error-default);
 }
 .signature-request-warning__content__account {
   border-bottom: 1px solid var(--color-border-muted);
@@ -24301,15 +24152,9 @@ a.signature-request-content__verify-contract-details {
 .tab-bar__tab__content__icon {
   display: flex;
   justify-content: center;
-  -webkit-margin-end: 16px;
-          margin-inline-end: 16px;
+  margin-inline-end: 16px;
   flex: 0 0 18px;
   color: var(--color-icon-alternative);
-}
-@media screen and (min-width: 576px) {
-  .tab-bar__tab__content__icon {
-    flex: 0 0 14px;
-  }
 }
 .tab-bar__tab__caret {
   display: none;
@@ -24317,10 +24162,8 @@ a.signature-request-content__verify-contract-details {
 @media screen and (max-width: calc(576px - 1px)) {
   .tab-bar__tab__caret {
     display: block;
-    -webkit-margin-start: auto;
-            margin-inline-start: auto;
-    -webkit-margin-end: 8px;
-            margin-inline-end: 8px;
+    margin-inline-start: auto;
+    margin-inline-end: 8px;
   }
   [dir=rtl] .tab-bar__tab__caret {
     transform: rotate(-180deg);
@@ -24423,7 +24266,6 @@ a.signature-request-content__verify-contract-details {
   height: 15px;
   margin-left: 6px;
   border-radius: 50%;
-  background: var(--color-icon-default);
   flex: 0 0 auto;
   display: flex;
   justify-content: center;
@@ -24457,10 +24299,6 @@ a.signature-request-content__verify-contract-details {
   font-weight: normal;
   cursor: pointer;
   color: var(--color-primary-default);
-}
-
-.transaction-activity-log-icon__icon {
-  color: var(--color-icon-default);
 }
 
 .transaction-breakdown-row {
@@ -24529,8 +24367,7 @@ a.signature-request-content__verify-contract-details {
   color: var(--color-primary-default);
   background: transparent;
   border: 0;
-  -webkit-padding-end: 0;
-          padding-inline-end: 0;
+  padding-inline-end: 0;
   text-transform: uppercase;
 }
 .transaction-detail-rows {
@@ -24565,8 +24402,7 @@ a.signature-request-content__verify-contract-details {
 }
 .transaction-detail-item .info-tooltip {
   display: inline-block;
-  -webkit-margin-start: 4px;
-          margin-inline-start: 4px;
+  margin-inline-start: 4px;
 }
 .transaction-detail-item .info-tooltip path {
   fill: var(--color-icon-alternative);
@@ -24753,6 +24589,12 @@ a.signature-request-content__verify-contract-details {
 .transaction-list-item__pending-actions:empty {
   padding-top: 0;
 }
+.transaction-list-item .list-item__subheading {
+  overflow: hidden;
+  max-width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .transaction-list-item .list-item__subheading > h3 {
   overflow: visible;
   display: flex;
@@ -24867,10 +24709,13 @@ a.signature-request-content__verify-contract-details {
   align-items: center;
   margin: 16px 0;
   padding: 0 16px;
-  max-width: 100%;
+  max-width: 326px;
 }
 .eth-overview__primary-container {
   display: flex;
+  max-width: inherit;
+  justify-content: center;
+  flex-wrap: wrap;
 }
 .eth-overview__primary-balance {
   font-size: 2rem;
@@ -24879,11 +24724,13 @@ a.signature-request-content__verify-contract-details {
   font-style: normal;
   font-weight: normal;
   color: var(--color-text-default);
-  width: 100%;
-  justify-content: center;
 }
 .eth-overview__cached-star {
   margin-right: 4px;
+}
+.eth-overview__portfolio-button {
+  height: inherit;
+  padding-inline-start: 16px;
 }
 .eth-overview__cached-balance, .eth-overview__cached-star {
   color: var(--color-warning-default);
@@ -24903,9 +24750,6 @@ a.signature-request-content__verify-contract-details {
   font-style: normal;
   font-weight: normal;
   color: var(--color-text-alternative);
-}
-.eth-overview__button {
-  margin-left: 24px;
 }
 .eth-overview__button:last-of-type {
   margin-left: 0;
@@ -24949,9 +24793,6 @@ a.signature-request-content__verify-contract-details {
   font-weight: normal;
   color: var(--color-text-alternative);
 }
-.token-overview__button {
-  margin-left: 24px;
-}
 .token-overview__button:last-of-type {
   margin-left: 0;
 }
@@ -24963,7 +24804,7 @@ a.signature-request-content__verify-contract-details {
 .whats-new-popup__notification, .whats-new-popup__first-notification {
   display: flex;
   flex-direction: column;
-  margin: 0 24px 24px 24px;
+  margin: 0 16px 16px 16px;
   border-bottom: 1px solid var(--color-border-muted);
   position: relative;
 }
@@ -25001,25 +24842,36 @@ a.signature-request-content__verify-contract-details {
   color: var(--color-primary-default);
   cursor: pointer;
 }
-.whats-new-popup__notification-title {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
 .whats-new-popup__intersection-observable {
   bottom: 22px;
   position: absolute;
   height: 1px;
   width: 100%;
 }
+.whats-new-popup__scroll-button {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  height: 32px;
+  width: 32px;
+  border-radius: 14px;
+  border: 1px solid var(--color-border-default);
+  background: var(--color-background-alternative);
+  color: var(--color-icon-default);
+  z-index: 201;
+  cursor: pointer;
+  opacity: 0.8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.whats-new-popup__scroll-button:hover {
+  opacity: 1;
+}
 
 @media screen and (min-width: 576px) {
   .popover-wrap.whats-new-popup__popover {
-    max-height: 600px;
+    max-height: 750px;
     width: 500px;
   }
 }
@@ -25054,8 +24906,7 @@ a.signature-request-content__verify-contract-details {
   background-color: var(--color-background-default-hover);
 }
 .copy-raw-data__icon {
-  -webkit-padding-end: 6px;
-          padding-inline-end: 6px;
+  padding-inline-end: 6px;
 }
 .copy-raw-data__label {
   color: var(--color-text-alternative);
@@ -25099,7 +24950,6 @@ a.signature-request-content__verify-contract-details {
   overflow-x: hidden;
   display: flex;
   align-items: center;
-  cursor: pointer;
 }
 .tx-insight-loading {
   display: flex;
@@ -25117,13 +24967,11 @@ a.signature-request-content__verify-contract-details {
   font-size: 14px;
   position: relative;
   margin: 12px 0 4px;
-  -webkit-padding-start: 22px;
-          padding-inline-start: 22px;
+  padding-inline-start: 22px;
   cursor: pointer;
 }
 .tx-insight > details > summary.tx-insight-title + .tx-insight-content {
-  -webkit-padding-start: 14px;
-          padding-inline-start: 14px;
+  padding-inline-start: 14px;
   padding-top: 5px;
 }
 .tx-insight-error {
@@ -25384,20 +25232,16 @@ a.signature-request-content__verify-contract-details {
 }
 
 .detected-token-ignored-popover__ignore-button {
-  -webkit-margin-end: 8px;
-          margin-inline-end: 8px;
+  margin-inline-end: 8px;
 }
 .detected-token-ignored-popover__import-button {
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
+  margin-inline-start: 8px;
 }
 .detected-token-ignored-popover--ignore .popover-header {
-  -webkit-margin-start: 85px;
-          margin-inline-start: 85px;
+  margin-inline-start: 85px;
 }
 .detected-token-ignored-popover--import .popover-header {
-  -webkit-margin-start: 50px;
-          margin-inline-start: 50px;
+  margin-inline-start: 50px;
 }
 
 .detected-token-selection-popover__ignore-button {
@@ -25417,8 +25261,7 @@ a.signature-request-content__verify-contract-details {
   border-radius: 50%;
   border: 1px solid var(--color-background-default);
   background: var(--color-background-default);
-  -webkit-margin-start: -10px;
-          margin-inline-start: -10px;
+  margin-inline-start: -10px;
   margin-top: -20px;
 }
 .network-account-balance-header__network-account__ident-icon-ethereum > span, .network-account-balance-header__network-account__ident-icon-ethereum--gray > span {
@@ -25433,10 +25276,8 @@ a.signature-request-content__verify-contract-details {
 .approve-content-card-container__card, .approve-content-card-container__card--no-border {
   border-bottom: 1px solid var(--color-border-default);
   position: relative;
-  -webkit-padding-start: 24px;
-          padding-inline-start: 24px;
-  -webkit-padding-end: 24px;
-          padding-inline-end: 24px;
+  padding-inline-start: 24px;
+  padding-inline-end: 24px;
 }
 .approve-content-card-container__card--no-border {
   border-bottom: none;
@@ -25454,14 +25295,12 @@ a.signature-request-content__verify-contract-details {
   width: 100%;
 }
 .approve-content-card-container__card-header__title--aligned {
-  -webkit-margin-start: 27px;
-          margin-inline-start: 27px;
+  margin-inline-start: 27px;
   position: absolute;
   width: auto;
 }
 .approve-content-card-container__card-content--aligned {
-  -webkit-margin-start: 42px;
-          margin-inline-start: 42px;
+  margin-inline-start: 42px;
 }
 .approve-content-card-container__transaction-details-extra-content {
   width: 100%;
@@ -25514,10 +25353,8 @@ a.signature-request-content__verify-contract-details {
   flex: 0;
   margin-top: 36px;
   width: 100%;
-  -webkit-padding-start: 15px;
-          padding-inline-start: 15px;
-  -webkit-padding-end: 17px;
-          padding-inline-end: 17px;
+  padding-inline-start: 15px;
+  padding-inline-end: 17px;
 }
 .choose-account-list__header--one-item {
   justify-content: flex-end;
@@ -25527,8 +25364,7 @@ a.signature-request-content__verify-contract-details {
 }
 .choose-account-list__select-all {
   display: flex;
-  -webkit-margin-start: 16px;
-          margin-inline-start: 16px;
+  margin-inline-start: 16px;
   align-items: center;
 }
 .choose-account-list__header-check-box {
@@ -25566,8 +25402,7 @@ a.signature-request-content__verify-contract-details {
 .choose-account-list__account__info {
   display: flex;
   flex-direction: column;
-  -webkit-margin-start: 16px;
-          margin-inline-start: 16px;
+  margin-inline-start: 16px;
   min-width: 0;
 }
 .choose-account-list__account__label {
@@ -25607,8 +25442,7 @@ a.signature-request-content__verify-contract-details {
   min-width: 0;
 }
 .choose-account-list__list-check-box {
-  -webkit-margin-end: 16px;
-          margin-inline-end: 16px;
+  margin-inline-end: 16px;
 }
 .choose-account-list__list-check-box i {
   font-size: 0.8rem;
@@ -25616,8 +25450,7 @@ a.signature-request-content__verify-contract-details {
 .choose-account-list .fa-info-circle {
   color: var(--color-icon-muted);
   cursor: pointer;
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
+  margin-inline-start: 8px;
   font-size: 0.9rem;
 }
 .choose-account-list .fa-info-circle:hover {
@@ -25674,8 +25507,7 @@ a.signature-request-content__verify-contract-details {
   background: var(--color-info-muted);
 }
 .actionable-message--with-icon {
-  -webkit-padding-start: 32px;
-          padding-inline-start: 32px;
+  padding-inline-start: 32px;
 }
 .actionable-message--with-icon.actionable-message--warning {
   justify-content: normal;
@@ -32213,12 +32045,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 0px;
 }
 .box--padding-inline-start-0 {
-  -webkit-padding-start: 0px;
-          padding-inline-start: 0px;
+  padding-inline-start: 0px;
 }
 .box--padding-inline-end-0 {
-  -webkit-padding-end: 0px;
-          padding-inline-end: 0px;
+  padding-inline-end: 0px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-0 {
@@ -32247,14 +32077,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-0 {
-    -webkit-padding-start: 0px;
-            padding-inline-start: 0px;
+    padding-inline-start: 0px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-0 {
-    -webkit-padding-end: 0px;
-            padding-inline-end: 0px;
+    padding-inline-end: 0px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -32284,14 +32112,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-0 {
-    -webkit-padding-start: 0px;
-            padding-inline-start: 0px;
+    padding-inline-start: 0px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-0 {
-    -webkit-padding-end: 0px;
-            padding-inline-end: 0px;
+    padding-inline-end: 0px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -32321,14 +32147,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-0 {
-    -webkit-padding-start: 0px;
-            padding-inline-start: 0px;
+    padding-inline-start: 0px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-0 {
-    -webkit-padding-end: 0px;
-            padding-inline-end: 0px;
+    padding-inline-end: 0px;
   }
 }
 .box--padding-top-1 {
@@ -32347,12 +32171,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 4px;
 }
 .box--padding-inline-start-1 {
-  -webkit-padding-start: 4px;
-          padding-inline-start: 4px;
+  padding-inline-start: 4px;
 }
 .box--padding-inline-end-1 {
-  -webkit-padding-end: 4px;
-          padding-inline-end: 4px;
+  padding-inline-end: 4px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-1 {
@@ -32381,14 +32203,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-1 {
-    -webkit-padding-start: 4px;
-            padding-inline-start: 4px;
+    padding-inline-start: 4px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-1 {
-    -webkit-padding-end: 4px;
-            padding-inline-end: 4px;
+    padding-inline-end: 4px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -32418,14 +32238,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-1 {
-    -webkit-padding-start: 4px;
-            padding-inline-start: 4px;
+    padding-inline-start: 4px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-1 {
-    -webkit-padding-end: 4px;
-            padding-inline-end: 4px;
+    padding-inline-end: 4px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -32455,14 +32273,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-1 {
-    -webkit-padding-start: 4px;
-            padding-inline-start: 4px;
+    padding-inline-start: 4px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-1 {
-    -webkit-padding-end: 4px;
-            padding-inline-end: 4px;
+    padding-inline-end: 4px;
   }
 }
 .box--padding-top-2 {
@@ -32481,12 +32297,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 8px;
 }
 .box--padding-inline-start-2 {
-  -webkit-padding-start: 8px;
-          padding-inline-start: 8px;
+  padding-inline-start: 8px;
 }
 .box--padding-inline-end-2 {
-  -webkit-padding-end: 8px;
-          padding-inline-end: 8px;
+  padding-inline-end: 8px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-2 {
@@ -32515,14 +32329,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-2 {
-    -webkit-padding-start: 8px;
-            padding-inline-start: 8px;
+    padding-inline-start: 8px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-2 {
-    -webkit-padding-end: 8px;
-            padding-inline-end: 8px;
+    padding-inline-end: 8px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -32552,14 +32364,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-2 {
-    -webkit-padding-start: 8px;
-            padding-inline-start: 8px;
+    padding-inline-start: 8px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-2 {
-    -webkit-padding-end: 8px;
-            padding-inline-end: 8px;
+    padding-inline-end: 8px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -32589,14 +32399,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-2 {
-    -webkit-padding-start: 8px;
-            padding-inline-start: 8px;
+    padding-inline-start: 8px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-2 {
-    -webkit-padding-end: 8px;
-            padding-inline-end: 8px;
+    padding-inline-end: 8px;
   }
 }
 .box--padding-top-3 {
@@ -32615,12 +32423,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 12px;
 }
 .box--padding-inline-start-3 {
-  -webkit-padding-start: 12px;
-          padding-inline-start: 12px;
+  padding-inline-start: 12px;
 }
 .box--padding-inline-end-3 {
-  -webkit-padding-end: 12px;
-          padding-inline-end: 12px;
+  padding-inline-end: 12px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-3 {
@@ -32649,14 +32455,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-3 {
-    -webkit-padding-start: 12px;
-            padding-inline-start: 12px;
+    padding-inline-start: 12px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-3 {
-    -webkit-padding-end: 12px;
-            padding-inline-end: 12px;
+    padding-inline-end: 12px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -32686,14 +32490,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-3 {
-    -webkit-padding-start: 12px;
-            padding-inline-start: 12px;
+    padding-inline-start: 12px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-3 {
-    -webkit-padding-end: 12px;
-            padding-inline-end: 12px;
+    padding-inline-end: 12px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -32723,14 +32525,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-3 {
-    -webkit-padding-start: 12px;
-            padding-inline-start: 12px;
+    padding-inline-start: 12px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-3 {
-    -webkit-padding-end: 12px;
-            padding-inline-end: 12px;
+    padding-inline-end: 12px;
   }
 }
 .box--padding-top-4 {
@@ -32749,12 +32549,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 16px;
 }
 .box--padding-inline-start-4 {
-  -webkit-padding-start: 16px;
-          padding-inline-start: 16px;
+  padding-inline-start: 16px;
 }
 .box--padding-inline-end-4 {
-  -webkit-padding-end: 16px;
-          padding-inline-end: 16px;
+  padding-inline-end: 16px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-4 {
@@ -32783,14 +32581,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-4 {
-    -webkit-padding-start: 16px;
-            padding-inline-start: 16px;
+    padding-inline-start: 16px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-4 {
-    -webkit-padding-end: 16px;
-            padding-inline-end: 16px;
+    padding-inline-end: 16px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -32820,14 +32616,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-4 {
-    -webkit-padding-start: 16px;
-            padding-inline-start: 16px;
+    padding-inline-start: 16px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-4 {
-    -webkit-padding-end: 16px;
-            padding-inline-end: 16px;
+    padding-inline-end: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -32857,14 +32651,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-4 {
-    -webkit-padding-start: 16px;
-            padding-inline-start: 16px;
+    padding-inline-start: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-4 {
-    -webkit-padding-end: 16px;
-            padding-inline-end: 16px;
+    padding-inline-end: 16px;
   }
 }
 .box--padding-top-5 {
@@ -32883,12 +32675,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 20px;
 }
 .box--padding-inline-start-5 {
-  -webkit-padding-start: 20px;
-          padding-inline-start: 20px;
+  padding-inline-start: 20px;
 }
 .box--padding-inline-end-5 {
-  -webkit-padding-end: 20px;
-          padding-inline-end: 20px;
+  padding-inline-end: 20px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-5 {
@@ -32917,14 +32707,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-5 {
-    -webkit-padding-start: 20px;
-            padding-inline-start: 20px;
+    padding-inline-start: 20px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-5 {
-    -webkit-padding-end: 20px;
-            padding-inline-end: 20px;
+    padding-inline-end: 20px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -32954,14 +32742,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-5 {
-    -webkit-padding-start: 20px;
-            padding-inline-start: 20px;
+    padding-inline-start: 20px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-5 {
-    -webkit-padding-end: 20px;
-            padding-inline-end: 20px;
+    padding-inline-end: 20px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -32991,14 +32777,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-5 {
-    -webkit-padding-start: 20px;
-            padding-inline-start: 20px;
+    padding-inline-start: 20px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-5 {
-    -webkit-padding-end: 20px;
-            padding-inline-end: 20px;
+    padding-inline-end: 20px;
   }
 }
 .box--padding-top-6 {
@@ -33017,12 +32801,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 24px;
 }
 .box--padding-inline-start-6 {
-  -webkit-padding-start: 24px;
-          padding-inline-start: 24px;
+  padding-inline-start: 24px;
 }
 .box--padding-inline-end-6 {
-  -webkit-padding-end: 24px;
-          padding-inline-end: 24px;
+  padding-inline-end: 24px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-6 {
@@ -33051,14 +32833,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-6 {
-    -webkit-padding-start: 24px;
-            padding-inline-start: 24px;
+    padding-inline-start: 24px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-6 {
-    -webkit-padding-end: 24px;
-            padding-inline-end: 24px;
+    padding-inline-end: 24px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -33088,14 +32868,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-6 {
-    -webkit-padding-start: 24px;
-            padding-inline-start: 24px;
+    padding-inline-start: 24px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-6 {
-    -webkit-padding-end: 24px;
-            padding-inline-end: 24px;
+    padding-inline-end: 24px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -33125,14 +32903,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-6 {
-    -webkit-padding-start: 24px;
-            padding-inline-start: 24px;
+    padding-inline-start: 24px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-6 {
-    -webkit-padding-end: 24px;
-            padding-inline-end: 24px;
+    padding-inline-end: 24px;
   }
 }
 .box--padding-top-7 {
@@ -33151,12 +32927,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 28px;
 }
 .box--padding-inline-start-7 {
-  -webkit-padding-start: 28px;
-          padding-inline-start: 28px;
+  padding-inline-start: 28px;
 }
 .box--padding-inline-end-7 {
-  -webkit-padding-end: 28px;
-          padding-inline-end: 28px;
+  padding-inline-end: 28px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-7 {
@@ -33185,14 +32959,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-7 {
-    -webkit-padding-start: 28px;
-            padding-inline-start: 28px;
+    padding-inline-start: 28px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-7 {
-    -webkit-padding-end: 28px;
-            padding-inline-end: 28px;
+    padding-inline-end: 28px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -33222,14 +32994,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-7 {
-    -webkit-padding-start: 28px;
-            padding-inline-start: 28px;
+    padding-inline-start: 28px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-7 {
-    -webkit-padding-end: 28px;
-            padding-inline-end: 28px;
+    padding-inline-end: 28px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -33259,14 +33029,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-7 {
-    -webkit-padding-start: 28px;
-            padding-inline-start: 28px;
+    padding-inline-start: 28px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-7 {
-    -webkit-padding-end: 28px;
-            padding-inline-end: 28px;
+    padding-inline-end: 28px;
   }
 }
 .box--padding-top-8 {
@@ -33285,12 +33053,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 32px;
 }
 .box--padding-inline-start-8 {
-  -webkit-padding-start: 32px;
-          padding-inline-start: 32px;
+  padding-inline-start: 32px;
 }
 .box--padding-inline-end-8 {
-  -webkit-padding-end: 32px;
-          padding-inline-end: 32px;
+  padding-inline-end: 32px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-8 {
@@ -33319,14 +33085,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-8 {
-    -webkit-padding-start: 32px;
-            padding-inline-start: 32px;
+    padding-inline-start: 32px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-8 {
-    -webkit-padding-end: 32px;
-            padding-inline-end: 32px;
+    padding-inline-end: 32px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -33356,14 +33120,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-8 {
-    -webkit-padding-start: 32px;
-            padding-inline-start: 32px;
+    padding-inline-start: 32px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-8 {
-    -webkit-padding-end: 32px;
-            padding-inline-end: 32px;
+    padding-inline-end: 32px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -33393,14 +33155,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-8 {
-    -webkit-padding-start: 32px;
-            padding-inline-start: 32px;
+    padding-inline-start: 32px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-8 {
-    -webkit-padding-end: 32px;
-            padding-inline-end: 32px;
+    padding-inline-end: 32px;
   }
 }
 .box--padding-top-9 {
@@ -33419,12 +33179,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 36px;
 }
 .box--padding-inline-start-9 {
-  -webkit-padding-start: 36px;
-          padding-inline-start: 36px;
+  padding-inline-start: 36px;
 }
 .box--padding-inline-end-9 {
-  -webkit-padding-end: 36px;
-          padding-inline-end: 36px;
+  padding-inline-end: 36px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-9 {
@@ -33453,14 +33211,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-9 {
-    -webkit-padding-start: 36px;
-            padding-inline-start: 36px;
+    padding-inline-start: 36px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-9 {
-    -webkit-padding-end: 36px;
-            padding-inline-end: 36px;
+    padding-inline-end: 36px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -33490,14 +33246,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-9 {
-    -webkit-padding-start: 36px;
-            padding-inline-start: 36px;
+    padding-inline-start: 36px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-9 {
-    -webkit-padding-end: 36px;
-            padding-inline-end: 36px;
+    padding-inline-end: 36px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -33527,14 +33281,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-9 {
-    -webkit-padding-start: 36px;
-            padding-inline-start: 36px;
+    padding-inline-start: 36px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-9 {
-    -webkit-padding-end: 36px;
-            padding-inline-end: 36px;
+    padding-inline-end: 36px;
   }
 }
 .box--padding-top-10 {
@@ -33553,12 +33305,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 40px;
 }
 .box--padding-inline-start-10 {
-  -webkit-padding-start: 40px;
-          padding-inline-start: 40px;
+  padding-inline-start: 40px;
 }
 .box--padding-inline-end-10 {
-  -webkit-padding-end: 40px;
-          padding-inline-end: 40px;
+  padding-inline-end: 40px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-10 {
@@ -33587,14 +33337,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-10 {
-    -webkit-padding-start: 40px;
-            padding-inline-start: 40px;
+    padding-inline-start: 40px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-10 {
-    -webkit-padding-end: 40px;
-            padding-inline-end: 40px;
+    padding-inline-end: 40px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -33624,14 +33372,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-10 {
-    -webkit-padding-start: 40px;
-            padding-inline-start: 40px;
+    padding-inline-start: 40px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-10 {
-    -webkit-padding-end: 40px;
-            padding-inline-end: 40px;
+    padding-inline-end: 40px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -33661,14 +33407,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-10 {
-    -webkit-padding-start: 40px;
-            padding-inline-start: 40px;
+    padding-inline-start: 40px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-10 {
-    -webkit-padding-end: 40px;
-            padding-inline-end: 40px;
+    padding-inline-end: 40px;
   }
 }
 .box--padding-top-11 {
@@ -33687,12 +33431,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 44px;
 }
 .box--padding-inline-start-11 {
-  -webkit-padding-start: 44px;
-          padding-inline-start: 44px;
+  padding-inline-start: 44px;
 }
 .box--padding-inline-end-11 {
-  -webkit-padding-end: 44px;
-          padding-inline-end: 44px;
+  padding-inline-end: 44px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-11 {
@@ -33721,14 +33463,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-11 {
-    -webkit-padding-start: 44px;
-            padding-inline-start: 44px;
+    padding-inline-start: 44px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-11 {
-    -webkit-padding-end: 44px;
-            padding-inline-end: 44px;
+    padding-inline-end: 44px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -33758,14 +33498,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-11 {
-    -webkit-padding-start: 44px;
-            padding-inline-start: 44px;
+    padding-inline-start: 44px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-11 {
-    -webkit-padding-end: 44px;
-            padding-inline-end: 44px;
+    padding-inline-end: 44px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -33795,14 +33533,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-11 {
-    -webkit-padding-start: 44px;
-            padding-inline-start: 44px;
+    padding-inline-start: 44px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-11 {
-    -webkit-padding-end: 44px;
-            padding-inline-end: 44px;
+    padding-inline-end: 44px;
   }
 }
 .box--padding-top-12 {
@@ -33821,12 +33557,10 @@ readers do not read off random characters that represent icons */
   padding-inline: 48px;
 }
 .box--padding-inline-start-12 {
-  -webkit-padding-start: 48px;
-          padding-inline-start: 48px;
+  padding-inline-start: 48px;
 }
 .box--padding-inline-end-12 {
-  -webkit-padding-end: 48px;
-          padding-inline-end: 48px;
+  padding-inline-end: 48px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-top-12 {
@@ -33855,14 +33589,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-start-12 {
-    -webkit-padding-start: 48px;
-            padding-inline-start: 48px;
+    padding-inline-start: 48px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:padding-inline-end-12 {
-    -webkit-padding-end: 48px;
-            padding-inline-end: 48px;
+    padding-inline-end: 48px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -33892,14 +33624,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-start-12 {
-    -webkit-padding-start: 48px;
-            padding-inline-start: 48px;
+    padding-inline-start: 48px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:padding-inline-end-12 {
-    -webkit-padding-end: 48px;
-            padding-inline-end: 48px;
+    padding-inline-end: 48px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -33929,14 +33659,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-start-12 {
-    -webkit-padding-start: 48px;
-            padding-inline-start: 48px;
+    padding-inline-start: 48px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:padding-inline-end-12 {
-    -webkit-padding-end: 48px;
-            padding-inline-end: 48px;
+    padding-inline-end: 48px;
   }
 }
 .box--margin-0 {
@@ -34189,12 +33917,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 0px;
 }
 .box--margin-inline-start-0 {
-  -webkit-margin-start: 0px;
-          margin-inline-start: 0px;
+  margin-inline-start: 0px;
 }
 .box--margin-inline-end-0 {
-  -webkit-margin-end: 0px;
-          margin-inline-end: 0px;
+  margin-inline-end: 0px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-0 {
@@ -34223,14 +33949,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-0 {
-    -webkit-margin-start: 0px;
-            margin-inline-start: 0px;
+    margin-inline-start: 0px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-0 {
-    -webkit-margin-end: 0px;
-            margin-inline-end: 0px;
+    margin-inline-end: 0px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -34260,14 +33984,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-0 {
-    -webkit-margin-start: 0px;
-            margin-inline-start: 0px;
+    margin-inline-start: 0px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-0 {
-    -webkit-margin-end: 0px;
-            margin-inline-end: 0px;
+    margin-inline-end: 0px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -34297,14 +34019,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-0 {
-    -webkit-margin-start: 0px;
-            margin-inline-start: 0px;
+    margin-inline-start: 0px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-0 {
-    -webkit-margin-end: 0px;
-            margin-inline-end: 0px;
+    margin-inline-end: 0px;
   }
 }
 .box--margin-top-1 {
@@ -34323,12 +34043,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 4px;
 }
 .box--margin-inline-start-1 {
-  -webkit-margin-start: 4px;
-          margin-inline-start: 4px;
+  margin-inline-start: 4px;
 }
 .box--margin-inline-end-1 {
-  -webkit-margin-end: 4px;
-          margin-inline-end: 4px;
+  margin-inline-end: 4px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-1 {
@@ -34357,14 +34075,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-1 {
-    -webkit-margin-start: 4px;
-            margin-inline-start: 4px;
+    margin-inline-start: 4px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-1 {
-    -webkit-margin-end: 4px;
-            margin-inline-end: 4px;
+    margin-inline-end: 4px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -34394,14 +34110,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-1 {
-    -webkit-margin-start: 4px;
-            margin-inline-start: 4px;
+    margin-inline-start: 4px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-1 {
-    -webkit-margin-end: 4px;
-            margin-inline-end: 4px;
+    margin-inline-end: 4px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -34431,14 +34145,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-1 {
-    -webkit-margin-start: 4px;
-            margin-inline-start: 4px;
+    margin-inline-start: 4px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-1 {
-    -webkit-margin-end: 4px;
-            margin-inline-end: 4px;
+    margin-inline-end: 4px;
   }
 }
 .box--margin-top-2 {
@@ -34457,12 +34169,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 8px;
 }
 .box--margin-inline-start-2 {
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
+  margin-inline-start: 8px;
 }
 .box--margin-inline-end-2 {
-  -webkit-margin-end: 8px;
-          margin-inline-end: 8px;
+  margin-inline-end: 8px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-2 {
@@ -34491,14 +34201,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-2 {
-    -webkit-margin-start: 8px;
-            margin-inline-start: 8px;
+    margin-inline-start: 8px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-2 {
-    -webkit-margin-end: 8px;
-            margin-inline-end: 8px;
+    margin-inline-end: 8px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -34528,14 +34236,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-2 {
-    -webkit-margin-start: 8px;
-            margin-inline-start: 8px;
+    margin-inline-start: 8px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-2 {
-    -webkit-margin-end: 8px;
-            margin-inline-end: 8px;
+    margin-inline-end: 8px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -34565,14 +34271,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-2 {
-    -webkit-margin-start: 8px;
-            margin-inline-start: 8px;
+    margin-inline-start: 8px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-2 {
-    -webkit-margin-end: 8px;
-            margin-inline-end: 8px;
+    margin-inline-end: 8px;
   }
 }
 .box--margin-top-3 {
@@ -34591,12 +34295,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 12px;
 }
 .box--margin-inline-start-3 {
-  -webkit-margin-start: 12px;
-          margin-inline-start: 12px;
+  margin-inline-start: 12px;
 }
 .box--margin-inline-end-3 {
-  -webkit-margin-end: 12px;
-          margin-inline-end: 12px;
+  margin-inline-end: 12px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-3 {
@@ -34625,14 +34327,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-3 {
-    -webkit-margin-start: 12px;
-            margin-inline-start: 12px;
+    margin-inline-start: 12px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-3 {
-    -webkit-margin-end: 12px;
-            margin-inline-end: 12px;
+    margin-inline-end: 12px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -34662,14 +34362,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-3 {
-    -webkit-margin-start: 12px;
-            margin-inline-start: 12px;
+    margin-inline-start: 12px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-3 {
-    -webkit-margin-end: 12px;
-            margin-inline-end: 12px;
+    margin-inline-end: 12px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -34699,14 +34397,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-3 {
-    -webkit-margin-start: 12px;
-            margin-inline-start: 12px;
+    margin-inline-start: 12px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-3 {
-    -webkit-margin-end: 12px;
-            margin-inline-end: 12px;
+    margin-inline-end: 12px;
   }
 }
 .box--margin-top-4 {
@@ -34725,12 +34421,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 16px;
 }
 .box--margin-inline-start-4 {
-  -webkit-margin-start: 16px;
-          margin-inline-start: 16px;
+  margin-inline-start: 16px;
 }
 .box--margin-inline-end-4 {
-  -webkit-margin-end: 16px;
-          margin-inline-end: 16px;
+  margin-inline-end: 16px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-4 {
@@ -34759,14 +34453,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-4 {
-    -webkit-margin-start: 16px;
-            margin-inline-start: 16px;
+    margin-inline-start: 16px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-4 {
-    -webkit-margin-end: 16px;
-            margin-inline-end: 16px;
+    margin-inline-end: 16px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -34796,14 +34488,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-4 {
-    -webkit-margin-start: 16px;
-            margin-inline-start: 16px;
+    margin-inline-start: 16px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-4 {
-    -webkit-margin-end: 16px;
-            margin-inline-end: 16px;
+    margin-inline-end: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -34833,14 +34523,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-4 {
-    -webkit-margin-start: 16px;
-            margin-inline-start: 16px;
+    margin-inline-start: 16px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-4 {
-    -webkit-margin-end: 16px;
-            margin-inline-end: 16px;
+    margin-inline-end: 16px;
   }
 }
 .box--margin-top-5 {
@@ -34859,12 +34547,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 20px;
 }
 .box--margin-inline-start-5 {
-  -webkit-margin-start: 20px;
-          margin-inline-start: 20px;
+  margin-inline-start: 20px;
 }
 .box--margin-inline-end-5 {
-  -webkit-margin-end: 20px;
-          margin-inline-end: 20px;
+  margin-inline-end: 20px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-5 {
@@ -34893,14 +34579,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-5 {
-    -webkit-margin-start: 20px;
-            margin-inline-start: 20px;
+    margin-inline-start: 20px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-5 {
-    -webkit-margin-end: 20px;
-            margin-inline-end: 20px;
+    margin-inline-end: 20px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -34930,14 +34614,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-5 {
-    -webkit-margin-start: 20px;
-            margin-inline-start: 20px;
+    margin-inline-start: 20px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-5 {
-    -webkit-margin-end: 20px;
-            margin-inline-end: 20px;
+    margin-inline-end: 20px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -34967,14 +34649,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-5 {
-    -webkit-margin-start: 20px;
-            margin-inline-start: 20px;
+    margin-inline-start: 20px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-5 {
-    -webkit-margin-end: 20px;
-            margin-inline-end: 20px;
+    margin-inline-end: 20px;
   }
 }
 .box--margin-top-6 {
@@ -34993,12 +34673,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 24px;
 }
 .box--margin-inline-start-6 {
-  -webkit-margin-start: 24px;
-          margin-inline-start: 24px;
+  margin-inline-start: 24px;
 }
 .box--margin-inline-end-6 {
-  -webkit-margin-end: 24px;
-          margin-inline-end: 24px;
+  margin-inline-end: 24px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-6 {
@@ -35027,14 +34705,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-6 {
-    -webkit-margin-start: 24px;
-            margin-inline-start: 24px;
+    margin-inline-start: 24px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-6 {
-    -webkit-margin-end: 24px;
-            margin-inline-end: 24px;
+    margin-inline-end: 24px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -35064,14 +34740,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-6 {
-    -webkit-margin-start: 24px;
-            margin-inline-start: 24px;
+    margin-inline-start: 24px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-6 {
-    -webkit-margin-end: 24px;
-            margin-inline-end: 24px;
+    margin-inline-end: 24px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -35101,14 +34775,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-6 {
-    -webkit-margin-start: 24px;
-            margin-inline-start: 24px;
+    margin-inline-start: 24px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-6 {
-    -webkit-margin-end: 24px;
-            margin-inline-end: 24px;
+    margin-inline-end: 24px;
   }
 }
 .box--margin-top-7 {
@@ -35127,12 +34799,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 28px;
 }
 .box--margin-inline-start-7 {
-  -webkit-margin-start: 28px;
-          margin-inline-start: 28px;
+  margin-inline-start: 28px;
 }
 .box--margin-inline-end-7 {
-  -webkit-margin-end: 28px;
-          margin-inline-end: 28px;
+  margin-inline-end: 28px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-7 {
@@ -35161,14 +34831,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-7 {
-    -webkit-margin-start: 28px;
-            margin-inline-start: 28px;
+    margin-inline-start: 28px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-7 {
-    -webkit-margin-end: 28px;
-            margin-inline-end: 28px;
+    margin-inline-end: 28px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -35198,14 +34866,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-7 {
-    -webkit-margin-start: 28px;
-            margin-inline-start: 28px;
+    margin-inline-start: 28px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-7 {
-    -webkit-margin-end: 28px;
-            margin-inline-end: 28px;
+    margin-inline-end: 28px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -35235,14 +34901,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-7 {
-    -webkit-margin-start: 28px;
-            margin-inline-start: 28px;
+    margin-inline-start: 28px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-7 {
-    -webkit-margin-end: 28px;
-            margin-inline-end: 28px;
+    margin-inline-end: 28px;
   }
 }
 .box--margin-top-8 {
@@ -35261,12 +34925,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 32px;
 }
 .box--margin-inline-start-8 {
-  -webkit-margin-start: 32px;
-          margin-inline-start: 32px;
+  margin-inline-start: 32px;
 }
 .box--margin-inline-end-8 {
-  -webkit-margin-end: 32px;
-          margin-inline-end: 32px;
+  margin-inline-end: 32px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-8 {
@@ -35295,14 +34957,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-8 {
-    -webkit-margin-start: 32px;
-            margin-inline-start: 32px;
+    margin-inline-start: 32px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-8 {
-    -webkit-margin-end: 32px;
-            margin-inline-end: 32px;
+    margin-inline-end: 32px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -35332,14 +34992,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-8 {
-    -webkit-margin-start: 32px;
-            margin-inline-start: 32px;
+    margin-inline-start: 32px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-8 {
-    -webkit-margin-end: 32px;
-            margin-inline-end: 32px;
+    margin-inline-end: 32px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -35369,14 +35027,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-8 {
-    -webkit-margin-start: 32px;
-            margin-inline-start: 32px;
+    margin-inline-start: 32px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-8 {
-    -webkit-margin-end: 32px;
-            margin-inline-end: 32px;
+    margin-inline-end: 32px;
   }
 }
 .box--margin-top-9 {
@@ -35395,12 +35051,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 36px;
 }
 .box--margin-inline-start-9 {
-  -webkit-margin-start: 36px;
-          margin-inline-start: 36px;
+  margin-inline-start: 36px;
 }
 .box--margin-inline-end-9 {
-  -webkit-margin-end: 36px;
-          margin-inline-end: 36px;
+  margin-inline-end: 36px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-9 {
@@ -35429,14 +35083,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-9 {
-    -webkit-margin-start: 36px;
-            margin-inline-start: 36px;
+    margin-inline-start: 36px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-9 {
-    -webkit-margin-end: 36px;
-            margin-inline-end: 36px;
+    margin-inline-end: 36px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -35466,14 +35118,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-9 {
-    -webkit-margin-start: 36px;
-            margin-inline-start: 36px;
+    margin-inline-start: 36px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-9 {
-    -webkit-margin-end: 36px;
-            margin-inline-end: 36px;
+    margin-inline-end: 36px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -35503,14 +35153,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-9 {
-    -webkit-margin-start: 36px;
-            margin-inline-start: 36px;
+    margin-inline-start: 36px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-9 {
-    -webkit-margin-end: 36px;
-            margin-inline-end: 36px;
+    margin-inline-end: 36px;
   }
 }
 .box--margin-top-10 {
@@ -35529,12 +35177,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 40px;
 }
 .box--margin-inline-start-10 {
-  -webkit-margin-start: 40px;
-          margin-inline-start: 40px;
+  margin-inline-start: 40px;
 }
 .box--margin-inline-end-10 {
-  -webkit-margin-end: 40px;
-          margin-inline-end: 40px;
+  margin-inline-end: 40px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-10 {
@@ -35563,14 +35209,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-10 {
-    -webkit-margin-start: 40px;
-            margin-inline-start: 40px;
+    margin-inline-start: 40px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-10 {
-    -webkit-margin-end: 40px;
-            margin-inline-end: 40px;
+    margin-inline-end: 40px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -35600,14 +35244,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-10 {
-    -webkit-margin-start: 40px;
-            margin-inline-start: 40px;
+    margin-inline-start: 40px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-10 {
-    -webkit-margin-end: 40px;
-            margin-inline-end: 40px;
+    margin-inline-end: 40px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -35637,14 +35279,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-10 {
-    -webkit-margin-start: 40px;
-            margin-inline-start: 40px;
+    margin-inline-start: 40px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-10 {
-    -webkit-margin-end: 40px;
-            margin-inline-end: 40px;
+    margin-inline-end: 40px;
   }
 }
 .box--margin-top-11 {
@@ -35663,12 +35303,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 44px;
 }
 .box--margin-inline-start-11 {
-  -webkit-margin-start: 44px;
-          margin-inline-start: 44px;
+  margin-inline-start: 44px;
 }
 .box--margin-inline-end-11 {
-  -webkit-margin-end: 44px;
-          margin-inline-end: 44px;
+  margin-inline-end: 44px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-11 {
@@ -35697,14 +35335,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-11 {
-    -webkit-margin-start: 44px;
-            margin-inline-start: 44px;
+    margin-inline-start: 44px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-11 {
-    -webkit-margin-end: 44px;
-            margin-inline-end: 44px;
+    margin-inline-end: 44px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -35734,14 +35370,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-11 {
-    -webkit-margin-start: 44px;
-            margin-inline-start: 44px;
+    margin-inline-start: 44px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-11 {
-    -webkit-margin-end: 44px;
-            margin-inline-end: 44px;
+    margin-inline-end: 44px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -35771,14 +35405,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-11 {
-    -webkit-margin-start: 44px;
-            margin-inline-start: 44px;
+    margin-inline-start: 44px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-11 {
-    -webkit-margin-end: 44px;
-            margin-inline-end: 44px;
+    margin-inline-end: 44px;
   }
 }
 .box--margin-top-12 {
@@ -35797,12 +35429,10 @@ readers do not read off random characters that represent icons */
   margin-inline: 48px;
 }
 .box--margin-inline-start-12 {
-  -webkit-margin-start: 48px;
-          margin-inline-start: 48px;
+  margin-inline-start: 48px;
 }
 .box--margin-inline-end-12 {
-  -webkit-margin-end: 48px;
-          margin-inline-end: 48px;
+  margin-inline-end: 48px;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-top-12 {
@@ -35831,14 +35461,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-12 {
-    -webkit-margin-start: 48px;
-            margin-inline-start: 48px;
+    margin-inline-start: 48px;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-12 {
-    -webkit-margin-end: 48px;
-            margin-inline-end: 48px;
+    margin-inline-end: 48px;
   }
 }
 @media screen and (min-width: 768px) {
@@ -35868,14 +35496,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-12 {
-    -webkit-margin-start: 48px;
-            margin-inline-start: 48px;
+    margin-inline-start: 48px;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-12 {
-    -webkit-margin-end: 48px;
-            margin-inline-end: 48px;
+    margin-inline-end: 48px;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -35905,14 +35531,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-12 {
-    -webkit-margin-start: 48px;
-            margin-inline-start: 48px;
+    margin-inline-start: 48px;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-12 {
-    -webkit-margin-end: 48px;
-            margin-inline-end: 48px;
+    margin-inline-end: 48px;
   }
 }
 .box--margin-auto {
@@ -35934,12 +35558,10 @@ readers do not read off random characters that represent icons */
   margin-inline: auto;
 }
 .box--margin-inline-start-auto {
-  -webkit-margin-start: auto;
-          margin-inline-start: auto;
+  margin-inline-start: auto;
 }
 .box--margin-inline-end-auto {
-  -webkit-margin-end: auto;
-          margin-inline-end: auto;
+  margin-inline-end: auto;
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-auto {
@@ -35973,14 +35595,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-start-auto {
-    -webkit-margin-start: auto;
-            margin-inline-start: auto;
+    margin-inline-start: auto;
   }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:margin-inline-end-auto {
-    -webkit-margin-end: auto;
-            margin-inline-end: auto;
+    margin-inline-end: auto;
   }
 }
 @media screen and (min-width: 768px) {
@@ -36015,14 +35635,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-start-auto {
-    -webkit-margin-start: auto;
-            margin-inline-start: auto;
+    margin-inline-start: auto;
   }
 }
 @media screen and (min-width: 768px) {
   .box--md\:margin-inline-end-auto {
-    -webkit-margin-end: auto;
-            margin-inline-end: auto;
+    margin-inline-end: auto;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -36057,14 +35675,12 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-start-auto {
-    -webkit-margin-start: auto;
-            margin-inline-start: auto;
+    margin-inline-start: auto;
   }
 }
 @media screen and (min-width: 1280px) {
   .box--lg\:margin-inline-end-auto {
-    -webkit-margin-end: auto;
-            margin-inline-end: auto;
+    margin-inline-end: auto;
   }
 }
 .box--gap-0 {
@@ -38299,6 +37915,12 @@ readers do not read off random characters that represent icons */
 .box--border-color-sepolia-inverse {
   border-color: var(--color-network-sepolia-inverse);
 }
+.box--border-color-lineatestnet {
+  border-color: var(--color-network-linea-testnet-default);
+}
+.box--border-color-lineatestnet-inverse {
+  border-color: var(--color-network-linea-testnet-inverse);
+}
 .box--border-color-localhost {
   border-color: var(--color-network-localhost-default);
 }
@@ -38519,6 +38141,16 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .box--sm\:border-color-sepolia-inverse {
     border-color: var(--color-network-sepolia-inverse);
+  }
+}
+@media screen and (min-width: 576px) {
+  .box--sm\:border-color-lineatestnet {
+    border-color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 576px) {
+  .box--sm\:border-color-lineatestnet-inverse {
+    border-color: var(--color-network-linea-testnet-inverse);
   }
 }
 @media screen and (min-width: 576px) {
@@ -38752,6 +38384,16 @@ readers do not read off random characters that represent icons */
   }
 }
 @media screen and (min-width: 768px) {
+  .box--md\:border-color-lineatestnet {
+    border-color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 768px) {
+  .box--md\:border-color-lineatestnet-inverse {
+    border-color: var(--color-network-linea-testnet-inverse);
+  }
+}
+@media screen and (min-width: 768px) {
   .box--md\:border-color-localhost {
     border-color: var(--color-network-localhost-default);
   }
@@ -38979,6 +38621,16 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .box--lg\:border-color-sepolia-inverse {
     border-color: var(--color-network-sepolia-inverse);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .box--lg\:border-color-lineatestnet {
+    border-color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .box--lg\:border-color-lineatestnet-inverse {
+    border-color: var(--color-network-linea-testnet-inverse);
   }
 }
 @media screen and (min-width: 1280px) {
@@ -40843,6 +40495,12 @@ readers do not read off random characters that represent icons */
 .box--background-color-sepolia-inverse {
   background-color: var(--color-network-sepolia-inverse);
 }
+.box--background-color-lineatestnet {
+  background-color: var(--color-network-linea-testnet-default);
+}
+.box--background-color-lineatestnet-inverse {
+  background-color: var(--color-network-linea-testnet-inverse);
+}
 .box--background-color-localhost {
   background-color: var(--color-network-localhost-default);
 }
@@ -41063,6 +40721,16 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .box--sm஬kground-color-sepolia-inverse {
     background-color: var(--color-network-sepolia-inverse);
+  }
+}
+@media screen and (min-width: 576px) {
+  .box--sm஬kground-color-lineatestnet {
+    background-color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 576px) {
+  .box--sm஬kground-color-lineatestnet-inverse {
+    background-color: var(--color-network-linea-testnet-inverse);
   }
 }
 @media screen and (min-width: 576px) {
@@ -41296,6 +40964,16 @@ readers do not read off random characters that represent icons */
   }
 }
 @media screen and (min-width: 768px) {
+  .box--md஬kground-color-lineatestnet {
+    background-color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 768px) {
+  .box--md஬kground-color-lineatestnet-inverse {
+    background-color: var(--color-network-linea-testnet-inverse);
+  }
+}
+@media screen and (min-width: 768px) {
   .box--md஬kground-color-localhost {
     background-color: var(--color-network-localhost-default);
   }
@@ -41526,6 +41204,16 @@ readers do not read off random characters that represent icons */
   }
 }
 @media screen and (min-width: 1280px) {
+  .box--lg஬kground-color-lineatestnet {
+    background-color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .box--lg஬kground-color-lineatestnet-inverse {
+    background-color: var(--color-network-linea-testnet-inverse);
+  }
+}
+@media screen and (min-width: 1280px) {
   .box--lg஬kground-color-localhost {
     background-color: var(--color-network-localhost-default);
   }
@@ -41670,6 +41358,12 @@ readers do not read off random characters that represent icons */
 }
 .box--color-sepolia-inverse {
   color: var(--color-network-sepolia-inverse);
+}
+.box--color-lineatestnet {
+  color: var(--color-network-linea-testnet-default);
+}
+.box--color-lineatestnet-inverse {
+  color: var(--color-network-linea-testnet-inverse);
 }
 .box--color-localhost {
   color: var(--color-network-localhost-default);
@@ -41891,6 +41585,16 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .box--sm\c olor-sepolia-inverse {
     color: var(--color-network-sepolia-inverse);
+  }
+}
+@media screen and (min-width: 576px) {
+  .box--sm\c olor-lineatestnet {
+    color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 576px) {
+  .box--sm\c olor-lineatestnet-inverse {
+    color: var(--color-network-linea-testnet-inverse);
   }
 }
 @media screen and (min-width: 576px) {
@@ -42124,6 +41828,16 @@ readers do not read off random characters that represent icons */
   }
 }
 @media screen and (min-width: 768px) {
+  .box--md\c olor-lineatestnet {
+    color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 768px) {
+  .box--md\c olor-lineatestnet-inverse {
+    color: var(--color-network-linea-testnet-inverse);
+  }
+}
+@media screen and (min-width: 768px) {
   .box--md\c olor-localhost {
     color: var(--color-network-localhost-default);
   }
@@ -42351,6 +42065,16 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .box--lg\c olor-sepolia-inverse {
     color: var(--color-network-sepolia-inverse);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .box--lg\c olor-lineatestnet {
+    color: var(--color-network-linea-testnet-default);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .box--lg\c olor-lineatestnet-inverse {
+    color: var(--color-network-linea-testnet-inverse);
   }
 }
 @media screen and (min-width: 1280px) {
@@ -49197,6 +48921,18 @@ readers do not read off random characters that represent icons */
 .chip--background-color-sepolia-inverse {
   background-color: var(--color-network-sepolia-inverse);
 }
+.chip--border-color-lineatestnet {
+  border-color: var(--color-network-linea-testnet-default);
+}
+.chip--background-color-lineatestnet {
+  background-color: var(--color-network-linea-testnet-default);
+}
+.chip--border-color-lineatestnet-inverse {
+  border-color: var(--color-network-linea-testnet-inverse);
+}
+.chip--background-color-lineatestnet-inverse {
+  background-color: var(--color-network-linea-testnet-inverse);
+}
 .chip--border-color-localhost {
   border-color: var(--color-network-localhost-default);
 }
@@ -55946,6 +55682,30 @@ readers do not read off random characters that represent icons */
 .color-indicator--color-sepolia-inverse .color-indicator__icon {
   color: var(--color-icon-default);
 }
+.color-indicator--color-lineatestnet {
+  border-color: var(--color-network-linea-testnet-default);
+}
+.color-indicator--color-lineatestnet.color-indicator--partial-filled .color-indicator__inner-circle {
+  background-color: var(--color-network-linea-testnet-default);
+}
+.color-indicator--color-lineatestnet.color-indicator--filled {
+  background-color: var(--color-network-linea-testnet-default);
+}
+.color-indicator--color-lineatestnet .color-indicator__icon {
+  color: var(--color-icon-default);
+}
+.color-indicator--color-lineatestnet-inverse {
+  border-color: var(--color-network-linea-testnet-inverse);
+}
+.color-indicator--color-lineatestnet-inverse.color-indicator--partial-filled .color-indicator__inner-circle {
+  background-color: var(--color-network-linea-testnet-inverse);
+}
+.color-indicator--color-lineatestnet-inverse.color-indicator--filled {
+  background-color: var(--color-network-linea-testnet-inverse);
+}
+.color-indicator--color-lineatestnet-inverse .color-indicator__icon {
+  color: var(--color-icon-default);
+}
 .color-indicator--color-localhost {
   border-color: var(--color-network-localhost-default);
 }
@@ -56120,6 +55880,12 @@ readers do not read off random characters that represent icons */
 .color-indicator--border-color-sepolia-inverse {
   border-color: var(--color-network-sepolia-inverse);
 }
+.color-indicator--border-color-lineatestnet {
+  border-color: var(--color-network-linea-testnet-default);
+}
+.color-indicator--border-color-lineatestnet-inverse {
+  border-color: var(--color-network-linea-testnet-inverse);
+}
 .color-indicator--border-color-localhost {
   border-color: var(--color-network-localhost-default);
 }
@@ -56261,11 +56027,6 @@ readers do not read off random characters that represent icons */
 .editable-label__icon-button {
   margin-right: 10px;
   right: 100%;
-  background: unset;
-}
-.editable-label__icon {
-  cursor: pointer;
-  color: var(--color-icon-default);
 }
 .editable-label__error {
   font-size: 0.75rem;
@@ -56298,68 +56059,8 @@ readers do not read off random characters that represent icons */
   align-items: center;
   padding: 8px 10px;
 }
-.error-message__icon {
-  margin-left: 8px;
-  flex: 0 0 auto;
-  color: var(--color-error-default);
-}
 .error-message__text {
   overflow: auto;
-}
-
-.export-text-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid var(--color-border-default);
-  border-radius: 4px;
-  font-weight: 400;
-}
-.export-text-container__text-container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-  border-radius: 4px;
-  background: var(--color-background-default);
-}
-.export-text-container__text {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  resize: none;
-  border: none;
-  background: var(--color-background-default);
-  text-align: center;
-}
-.export-text-container__buttons-container {
-  display: flex;
-  flex-direction: row;
-  border-top: 1px solid var(--color-border-default);
-  width: 100%;
-}
-.export-text-container__button {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  padding: 10px;
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  color: var(--color-primary-default);
-}
-.export-text-container__button--copy {
-  border-left: 1px solid var(--color-border-default);
-}
-.export-text-container__button-text {
-  padding-right: 10px;
 }
 
 .icon-border {
@@ -56378,6 +56079,7 @@ readers do not read off random characters that represent icons */
   align-items: center;
   background-color: unset;
   text-align: center;
+  width: 73px;
   font-size: 0.75rem;
   font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
   line-height: 140%;
@@ -56397,6 +56099,7 @@ readers do not read off random characters that represent icons */
   border-radius: 18px;
   margin-top: 6px;
   margin-bottom: 5px;
+  margin-inline: auto;
 }
 .icon-button--disabled {
   opacity: 0.3;
@@ -56405,20 +56108,6 @@ readers do not read off random characters that represent icons */
 
 .icon-with-fallback__fallback {
   color: var(--color-icon-alternative);
-}
-
-.icon-with-label {
-  display: flex;
-  align-items: center;
-}
-.icon-with-label__label {
-  font-size: 0.625rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin-right: 4px;
-  color: var(--color-text-alternative);
 }
 
 .info-icon {
@@ -56535,8 +56224,7 @@ readers do not read off random characters that represent icons */
 .list-item__heading button {
   background: unset;
   font-size: unset;
-  -webkit-padding-start: 0;
-          padding-inline-start: 0;
+  padding-inline-start: 0;
 }
 .list-item__heading-wrap {
   display: inline-block;
@@ -56674,13 +56362,10 @@ readers do not read off random characters that represent icons */
   align-items: center;
 }
 .loading-overlay__container {
-  position: absolute;
-  top: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  transform: translateY(-50%);
 }
 .loading-overlay__error-screen {
   display: flex;
@@ -56760,7 +56445,6 @@ readers do not read off random characters that represent icons */
 .new-network-info__wrapper .popover-header {
   padding-bottom: 1px;
 }
-.new-network-info__wrapper .fa-question-circle,
 .new-network-info__wrapper .popover-header__button {
   color: var(--color-icon-default);
 }
@@ -56918,14 +56602,8 @@ readers do not read off random characters that represent icons */
 }
 .form-field h6 {
   padding-bottom: 6px;
-  -webkit-margin-end: 6px;
-          margin-inline-end: 6px;
+  margin-inline-end: 6px;
   color: var(--color-text-default);
-}
-.form-field i {
-  color: var(--color-icon-default);
-  font-size: 0.75rem;
-  margin-bottom: 10px;
 }
 .form-field__input {
   width: 100%;
@@ -56997,6 +56675,7 @@ readers do not read off random characters that represent icons */
   justify-content: center;
   border-top: 1px solid var(--color-border-muted);
   flex: 0 0 auto;
+  width: 100%;
 }
 .page-container__footer footer {
   display: flex;
@@ -57029,6 +56708,10 @@ readers do not read off random characters that represent icons */
 }
 .page-container__footer-button:last-of-type {
   margin-left: 0;
+}
+.page-container__footer-button__cancel {
+  border-color: var(--color-primary-alternative) !important;
+  color: var(--color-primary-alternative);
 }
 .page-container__back-button {
   font-size: 1rem;
@@ -57118,7 +56801,7 @@ readers do not read off random characters that represent icons */
     margin-left: 0;
   }
   .page-container__footer-button:first-of-type {
-    margin-bottom: 0;
+    margin-left: 4px;
   }
 }
 @media screen and (max-width: calc(576px - 1px)) {
@@ -57159,45 +56842,6 @@ readers do not read off random characters that represent icons */
 }
 .popover-header {
   position: relative;
-}
-.popover-header__title {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: bold;
-  padding-bottom: 8px;
-}
-.popover-header__title h2 {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.popover-header__title h2 button {
-  margin-left: 24px;
-}
-.popover-header__title.center {
-  justify-content: center;
-}
-.popover-header__subtitle {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-}
-.popover-header__button {
-  background: none;
-  font-size: inherit;
-  padding: 0;
-  color: var(--color-icon-default);
-}
-.popover-header i {
-  cursor: pointer;
 }
 .popover-bg {
   width: 100%;
@@ -57305,15 +56949,11 @@ readers do not read off random characters that represent icons */
 .qr-code__address-container {
   display: flex;
   justify-content: center;
+  cursor: pointer;
+  align-items: center;
 }
 .qr-code__address-container__tooltip-wrapper {
   width: 100%;
-}
-.qr-code__address-container:hover {
-  cursor: pointer;
-}
-.qr-code__address-container:hover .qr-code__copy-icon__svg {
-  fill: var(--color-primary-default);
 }
 .qr-code__address {
   font-size: 0.75rem;
@@ -57326,15 +56966,6 @@ readers do not read off random characters that represent icons */
   padding: 8px 12px;
   word-break: break-all;
   text-align: center;
-}
-.qr-code__copy-icon {
-  height: 13px;
-  padding: 17px 0;
-  position: absolute;
-  left: 24px;
-}
-.qr-code__copy-icon__svg {
-  fill: var(--color-icon-default);
 }
 
 .radio-group {
@@ -57404,18 +57035,12 @@ readers do not read off random characters that represent icons */
 .review-spending-cap__heading-title__tooltip {
   width: 180px;
 }
-.review-spending-cap__heading-title__tooltip__warning-icon {
-  color: var(--color-error-default);
-}
 .review-spending-cap__heading-title__tooltip__question-icon {
   color: var(--color-icon-muted);
 }
 .review-spending-cap__heading-detail {
   flex-grow: 1;
   align-self: center;
-}
-.review-spending-cap i {
-  font-size: 0.75rem;
 }
 .review-spending-cap__value {
   word-break: break-word;
@@ -57575,8 +57200,7 @@ readers do not read off random characters that represent icons */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
+  margin-inline-start: 8px;
 }
 [dir=rtl] .sender-to-recipient--flat .sender-to-recipient__name {
   direction: ltr;
@@ -57607,8 +57231,7 @@ readers do not read off random characters that represent icons */
 }
 .show-hide-toggle__input + .show-hide-toggle__label {
   cursor: pointer;
-  -moz-user-select: none;
-       user-select: none;
+  user-select: none;
 }
 .show-hide-toggle__input:focus, .show-hide-toggle__input:focus-visible {
   outline: none;
@@ -57643,6 +57266,7 @@ readers do not read off random characters that represent icons */
 .site-origin {
   overflow: hidden;
   max-width: 100%;
+  text-overflow: ellipsis;
 }
 .site-origin .chip {
   max-width: 100%;
@@ -57696,8 +57320,7 @@ readers do not read off random characters that represent icons */
   outline: none;
 }
 .slider h6 {
-  -webkit-margin-end: 6px;
-          margin-inline-end: 6px;
+  margin-inline-end: 6px;
 }
 
 .tab button {
@@ -63969,6 +63592,13 @@ readers do not read off random characters that represent icons */
 /*
   Z-Indicies
 */
+/**
+ * @deprecated `<Typography />` has been deprecated in favour of the `<Text />` component in ./ui/components/component-library/text/text.js
+ *
+ * See storybook documentation for Text here https://metamask.github.io/metamask-storybook/?path=/docs/components-componentlibrary-text--default-story#text
+ *
+ * Help to replace `Typography` with `Text` by submitting PRs against https://github.com/MetaMask/metamask-extension/issues/17670
+ */
 .typography {
   font-size: 1rem;
   font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
@@ -64174,6 +63804,12 @@ readers do not read off random characters that represent icons */
 }
 .typography--color-sepolia-inverse {
   color: var(--color-network-sepolia-inverse);
+}
+.typography--color-lineatestnet {
+  color: var(--color-network-linea-testnet-default);
+}
+.typography--color-lineatestnet-inverse {
+  color: var(--color-network-linea-testnet-inverse);
 }
 .typography--color-localhost {
   color: var(--color-network-localhost-default);
@@ -70581,20 +70217,13 @@ readers do not read off random characters that represent icons */
 
 .disclosure {
   margin: 12px 0;
-  cursor: pointer;
   font-size: 14px;
 }
 .disclosure__summary {
   position: relative;
-  padding-right: 24px;
   padding-bottom: 10px;
   font-weight: bold;
-}
-.disclosure__summary i {
-  -webkit-margin-start: -20px;
-          margin-inline-start: -20px;
-  -webkit-margin-end: 10px;
-          margin-inline-end: 10px;
+  display: flex;
 }
 .disclosure__summary::-webkit-details-marker, .disclosure__summary::marker {
   display: none;
@@ -70632,21 +70261,6 @@ readers do not read off random characters that represent icons */
   cursor: pointer;
 }
 
-.contract-token-values__copy-address {
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
-}
-.contract-token-values__copy-address__button {
-  padding: 0;
-}
-.contract-token-values__block-explorer {
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
-}
-.contract-token-values__block-explorer__button {
-  padding: 0;
-}
-
 .nft-info__content {
   width: 100%;
 }
@@ -70663,7 +70277,7 @@ readers do not read off random characters that represent icons */
 }
 
 /** Please import your files in alphabetical order **/
-.add-collectible__close {
+.add-nft__close {
   color: var(--color-icon-default);
   background: none;
   flex: 0;
@@ -70811,11 +70425,11 @@ readers do not read off random characters that represent icons */
   align-self: flex-start;
   padding-left: 0;
 }
-.import-token__collectible-address-error-link {
+.import-token__nft-address-error-link {
   color: var(--color-primary-default);
   cursor: pointer;
 }
-.import-token__collectible-address-error-link:hover {
+.import-token__nft-address-error-link:hover {
   color: var(--color-primary-default);
 }
 
@@ -70843,22 +70457,12 @@ readers do not read off random characters that represent icons */
   color: var(--color-text-default);
   background-color: inherit;
 }
-.asset-breadcrumb__chevron {
-  font-size: 1rem;
-  padding: 0 2px 0 10px;
-}
 .asset-breadcrumb__asset {
   font-weight: bold;
 }
 
 .asset-options__button {
-  font-size: 1rem;
-  color: var(--color-text-default);
-  background-color: inherit;
   padding: 2px 8px 2px 0;
-}
-.asset-options__icon {
-  font-weight: 900;
 }
 
 .confirm-import-token {
@@ -71580,27 +71184,6 @@ readers do not read off random characters that represent icons */
 .request-decrypt-message__message-copy-tooltip {
   float: left;
 }
-.request-decrypt-message__footer {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex: 0 0 auto;
-  border-top: 1px solid var(--color-border-default);
-  padding: 1.6rem;
-}
-.request-decrypt-message__footer button {
-  width: 165px;
-}
-.request-decrypt-message__footer__cancel-button {
-  margin-left: 1.2rem;
-}
 .request-decrypt-message__visual {
   display: flex;
   flex-direction: row;
@@ -71790,27 +71373,6 @@ readers do not read off random characters that represent icons */
   padding-right: 20px;
   padding-left: 20px;
   color: var(--color-text-alternative);
-}
-.request-encryption-public-key__footer {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  flex: 0 0 auto;
-  border-top: 1px solid var(--color-border-muted);
-  padding: 1.6rem;
-}
-.request-encryption-public-key__footer button {
-  width: 165px;
-}
-.request-encryption-public-key__footer__cancel-button {
-  margin-left: 1.2rem;
 }
 .request-encryption-public-key__visual {
   display: flex;
@@ -72390,98 +71952,6 @@ readers do not read off random characters that represent icons */
   margin-left: 15px;
 }
 
-.new-account-info-link {
-  cursor: pointer;
-  text-decoration: underline;
-  color: var(--color-primary-default);
-  -webkit-margin-start: 4px;
-          margin-inline-start: 4px;
-}
-
-.new-account-import-form {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  padding: 0 30px 30px;
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .new-account-import-form {
-    padding: 0 22px 22px;
-  }
-}
-.new-account-import-form__select-section {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 29px;
-  width: 100%;
-}
-.new-account-import-form__select-label {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-muted);
-}
-.new-account-import-form__select {
-  width: 210px;
-  display: flex;
-  align-items: center;
-}
-.new-account-import-form__private-key-password-container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: 100%;
-}
-.new-account-import-form__instruction {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-muted);
-  align-self: flex-start;
-}
-.new-account-import-form__private-key {
-  display: flex;
-  flex-flow: column;
-  align-items: flex-start;
-  margin-top: 34px;
-}
-.new-account-import-form__help-link {
-  color: var(--color-primary-default);
-}
-.new-account-import-form__input-password {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  height: 54px;
-  width: 315px;
-  border: 1px solid var(--color-border-default);
-  border-radius: 4px;
-  background-color: var(--color-background-default);
-  color: var(--color-text-default);
-  margin-top: 16px;
-  padding: 0 20px;
-}
-.new-account-import-form__json {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  margin-top: 29px;
-  width: 100%;
-}
-.new-account-import-form__buttons {
-  margin-top: 39px;
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-}
-
 .new-account {
   width: 375px;
   background-color: var(--color-background-default);
@@ -72499,48 +71969,8 @@ readers do not read off random characters that represent icons */
     position: absolute;
   }
 }
-.new-account__header {
-  display: flex;
-  flex-flow: column;
-  border-bottom: 1px solid var(--color-border-muted);
-}
-.new-account__title {
-  font-size: 2rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  font-weight: 500;
-  margin-top: 22px;
-  margin-right: 29px;
-}
-.new-account__tabs {
-  margin-right: 22px;
-  display: flex;
-  margin-top: 10px;
-}
-.new-account__tabs__tab {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  height: 54px;
-  padding: 15px 10px;
-  color: var(--color-text-muted);
-  text-align: center;
-  cursor: pointer;
-}
-.new-account__tabs__tab:hover {
-  color: var(--color-text-default);
-  border-bottom: none;
-}
-.new-account__tabs__selected {
-  color: var(--color-primary-default);
-  border-bottom: 3px solid var(--color-primary-default);
-  cursor: initial;
-  pointer-events: none;
+.new-account .bottom-border-1px {
+  border-width: 0 0 1px 0;
 }
 
 .new-account-create-form {
@@ -72653,633 +72083,6 @@ readers do not read off random characters that represent icons */
   color: var(--color-primary-default);
 }
 
-.welcome-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  max-width: 442px;
-  padding: 0 18px;
-  color: var(--color-text-default);
-}
-.welcome-page__wrapper {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100%;
-  margin-top: 110px;
-}
-.welcome-page__header {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin-bottom: 22px;
-  margin-top: 50px;
-  text-align: center;
-}
-.welcome-page__description a {
-  color: var(--color-primary-default);
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .welcome-page__description {
-    font-size: 0.9rem;
-  }
-}
-.welcome-page .first-time-flow__button {
-  width: 184px;
-  font-weight: 500;
-  margin-top: 44px;
-}
-
-.select-action .app-header__logo-container {
-  width: 742px;
-  margin-top: 3%;
-}
-.select-action__body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.select-action__body-header {
-  font-size: 1.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  text-align: center;
-  margin-top: 65px;
-  color: var(--color-text-default);
-}
-.select-action__select-buttons {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-  margin-top: 40px;
-}
-.select-action__select-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 388px;
-  height: 278px;
-  border: 1px solid var(--color-border-muted);
-  box-sizing: border-box;
-  border-radius: 10px;
-  padding: 8px;
-}
-.select-action__select-button .first-time-flow__button {
-  max-width: 221px;
-  height: 44px;
-}
-.select-action__button-symbol {
-  color: var(--color-icon-muted);
-  margin-top: 41px;
-}
-.select-action__button-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 144px;
-}
-.select-action__button-text-big {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-default);
-  margin-top: 12px;
-  text-align: center;
-}
-.select-action__button-text-small {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  margin-top: 10px;
-  text-align: center;
-}
-.select-action button {
-  font-weight: 500;
-  width: 221px;
-}
-
-.confirm-seed-phrase__back-button {
-  margin-bottom: 12px;
-}
-.confirm-seed-phrase__sorted-seed-words {
-  max-width: calc(576px - 1px);
-}
-.confirm-seed-phrase__seed-word {
-  display: inline-flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 18px;
-  width: 128px;
-  height: 41px;
-  margin: 4px;
-  text-align: center;
-  border-radius: 4px;
-  cursor: move;
-}
-.confirm-seed-phrase__seed-word--sorted {
-  cursor: pointer;
-  margin: 6px;
-}
-.confirm-seed-phrase__seed-word--selected {
-  color: var(--color-overlay-inverse);
-}
-.confirm-seed-phrase__seed-word--dragging {
-  margin: 0;
-}
-.confirm-seed-phrase__seed-word--empty {
-  background-color: transparent;
-  border-color: transparent;
-  cursor: default;
-}
-.confirm-seed-phrase__seed-word--empty:hover, .confirm-seed-phrase__seed-word--empty:active {
-  background-color: transparent;
-  border-color: transparent;
-  cursor: default;
-  box-shadow: none !important;
-}
-.confirm-seed-phrase__seed-word--hidden {
-  display: none !important;
-}
-.confirm-seed-phrase__seed-word--drop-hover {
-  background-color: transparent;
-  border-color: transparent;
-  color: transparent;
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .confirm-seed-phrase__seed-word {
-    font-size: 0.875rem;
-    font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 140%;
-    font-style: normal;
-    font-weight: normal;
-    padding: 6px 18px;
-  }
-}
-.confirm-seed-phrase__selected-seed-words {
-  direction: ltr;
-  display: flex;
-  flex-flow: row wrap;
-  min-height: 161px;
-  max-width: calc(576px - 1px);
-  border: 1px solid var(--color-border-muted);
-  border-radius: 6px;
-  background-color: var(--color-background-default);
-  margin: 24px 0 36px;
-  padding: 12px;
-}
-.confirm-seed-phrase__selected-seed-words__pending-seed {
-  display: none;
-}
-.confirm-seed-phrase__selected-seed-words__selected-seed {
-  display: inline-flex;
-}
-.confirm-seed-phrase__selected-seed-words__selected-seed:hover {
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-}
-.confirm-seed-phrase__selected-seed-words--dragging .confirm-seed-phrase__selected-seed-words__pending-seed {
-  display: inline-flex;
-}
-.confirm-seed-phrase__selected-seed-words--dragging .confirm-seed-phrase__selected-seed-words__selected-seed {
-  display: none;
-}
-
-@media screen and (max-width: calc(576px - 1px)) {
-  .reveal-seed-phrase {
-    display: flex;
-    flex-direction: column;
-    width: 96%;
-    margin-right: 2%;
-    margin-left: 2%;
-  }
-}
-.reveal-seed-phrase__secret {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  border: 1px solid var(--color-border-default);
-  border-radius: 6px;
-  background-color: var(--color-background-default);
-  padding: 18px;
-  margin-top: 36px;
-  max-width: 350px;
-}
-.reveal-seed-phrase__secret-words {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  width: 310px;
-  text-align: center;
-}
-.reveal-seed-phrase__secret-words--hidden {
-  filter: blur(5px);
-}
-.reveal-seed-phrase__secret-blocker {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  height: 100%;
-  width: 100%;
-  background-color: var(--color-overlay-default);
-  display: flex;
-  flex-flow: column nowrap;
-  align-items: center;
-  justify-content: center;
-  padding: 8px 0 18px;
-  cursor: pointer;
-}
-.reveal-seed-phrase__reveal-button {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-overlay-inverse);
-  font-weight: 500;
-  text-transform: uppercase;
-  margin-top: 8px;
-  text-align: center;
-}
-.reveal-seed-phrase__export-text {
-  color: var(--color-primary-default);
-  cursor: pointer;
-  font-weight: 500;
-}
-.reveal-seed-phrase button {
-  margin-top: 0;
-}
-.reveal-seed-phrase__buttons {
-  display: flex;
-  margin-top: 10px;
-}
-.reveal-seed-phrase__buttons .first-time-flow__button:last-of-type {
-  margin-right: 10px;
-}
-
-.seed-phrase-intro__sections {
-  display: flex;
-}
-@media screen and (min-width: 576px) {
-  .seed-phrase-intro__sections {
-    flex-direction: row;
-  }
-}
-@media screen and (max-width: calc(768px - 1px)) {
-  .seed-phrase-intro__sections {
-    flex-direction: column;
-  }
-}
-.seed-phrase-intro__left {
-  flex: 3;
-  min-width: 0;
-}
-.seed-phrase-intro__right {
-  flex: 1;
-  min-width: 0;
-}
-@media screen and (max-width: calc(768px - 1px)) {
-  .seed-phrase-intro__right {
-    margin-top: 24px;
-  }
-}
-.seed-phrase-intro video {
-  border-radius: 8px;
-  width: calc(100% - 16px);
-}
-.seed-phrase-intro__copy {
-  max-width: 696px;
-}
-.seed-phrase-intro__sidebar_list {
-  list-style: disc;
-  padding-right: 20px;
-}
-
-.seed-phrase__sections {
-  display: flex;
-}
-@media screen and (min-width: 576px) {
-  .seed-phrase__sections {
-    flex-direction: row;
-  }
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .seed-phrase__sections {
-    flex-direction: column;
-  }
-}
-.seed-phrase__main {
-  flex: 3;
-  min-width: 0;
-}
-.seed-phrase__side {
-  flex: 2;
-  min-width: 0;
-}
-@media screen and (min-width: 576px) {
-  .seed-phrase__side {
-    margin-right: 81px;
-  }
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .seed-phrase__side {
-    margin-top: 24px;
-  }
-}
-.seed-phrase__side .first-time-flow__text-block {
-  color: var(--color-text-default);
-}
-
-.end-of-flow {
-  color: var(--color-text-default);
-  font-style: normal;
-}
-.end-of-flow .app-header__logo-container {
-  width: 742px;
-  margin-top: 3%;
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .end-of-flow .app-header__logo-container {
-    width: 100%;
-  }
-}
-.end-of-flow__text-1, .end-of-flow__text-3 {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: normal;
-  margin-top: 18px;
-}
-.end-of-flow__text-2 {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  font-weight: bold;
-  margin-top: 26px;
-}
-.end-of-flow__text-3 {
-  margin-top: 2px;
-  margin-bottom: 2px;
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .end-of-flow__text-3 {
-    font-size: 0.875rem;
-    font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 140%;
-    font-style: normal;
-    font-weight: normal;
-    margin-bottom: 16px;
-  }
-}
-.end-of-flow__text-4 {
-  margin-top: 26px;
-}
-.end-of-flow button {
-  width: 207px;
-}
-.end-of-flow__start-over-button {
-  width: 744px;
-}
-.end-of-flow__emoji {
-  font-size: 80px;
-  margin-top: 70px;
-}
-
-.metametrics-opt-in {
-  position: relative;
-  width: 100%;
-}
-.metametrics-opt-in a {
-  color: var(--color-primary-default);
-}
-.metametrics-opt-in__main {
-  display: flex;
-  flex-direction: column;
-  margin-right: 26.26%;
-  margin-left: 28%;
-  color: var(--color-text-default);
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .metametrics-opt-in__main {
-    justify-content: center;
-    margin-right: 2%;
-    margin-left: 0%;
-  }
-}
-.metametrics-opt-in__main .app-header__logo-container {
-  margin-top: 3%;
-}
-.metametrics-opt-in__title {
-  font-size: 2.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  position: relative;
-  margin-top: 20px;
-}
-.metametrics-opt-in__body-graphic {
-  margin-top: 25px;
-}
-.metametrics-opt-in__description {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin-top: 12px;
-}
-.metametrics-opt-in__committments {
-  display: flex;
-  flex-direction: column;
-}
-.metametrics-opt-in__content {
-  overflow-y: scroll;
-  flex: 1;
-}
-.metametrics-opt-in__row {
-  display: flex;
-  margin-top: 8px;
-}
-.metametrics-opt-in__row .fa-check {
-  margin-left: 12px;
-  color: var(--color-success-default);
-}
-.metametrics-opt-in__row .fa-times {
-  margin-left: 12px;
-  color: var(--color-error-default);
-}
-.metametrics-opt-in__bold {
-  font-weight: bold;
-}
-.metametrics-opt-in__break-row {
-  margin-top: 30px;
-}
-.metametrics-opt-in__body {
-  position: relative;
-  display: flex;
-  max-width: 730px;
-  flex-direction: column;
-}
-.metametrics-opt-in__body-text {
-  max-width: 548px;
-  margin-right: 16px;
-  margin-left: 16px;
-}
-.metametrics-opt-in__bottom-text {
-  margin-top: 10px;
-  color: var(--color-text-alternative);
-}
-.metametrics-opt-in__content {
-  overflow-y: auto;
-}
-.metametrics-opt-in__footer {
-  margin-top: 26px;
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .metametrics-opt-in__footer {
-    margin-top: 10px;
-    justify-content: center;
-    margin-right: 2%;
-    max-height: 520px;
-  }
-}
-.metametrics-opt-in__footer .page-container__footer {
-  border-top: none;
-  max-width: 535px;
-  margin-bottom: 15px;
-}
-.metametrics-opt-in__footer .page-container__footer button {
-  height: 44px;
-  min-height: 44px;
-  margin-left: 16px;
-}
-.metametrics-opt-in__footer .page-container__footer footer {
-  padding: 0;
-}
-
-.first-time-flow {
-  width: 100%;
-  background-color: var(--color-background-default);
-  display: flex;
-  justify-content: center;
-}
-@media screen and (min-width: 576px) {
-  .first-time-flow__wrapper {
-    max-width: 742px;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 2%;
-  }
-}
-.first-time-flow__wrapper .app-header__metafox-logo {
-  margin-bottom: 40px;
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .first-time-flow__wrapper .app-header__metafox-logo {
-    margin-bottom: 0;
-  }
-}
-.first-time-flow__import, .first-time-flow__form {
-  display: flex;
-  flex-direction: column;
-}
-.first-time-flow__create-back {
-  margin-bottom: 16px;
-}
-.first-time-flow__header {
-  font-size: 2.5rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  margin-bottom: 24px;
-  color: var(--color-text-default);
-}
-.first-time-flow__input {
-  max-width: 350px;
-}
-.first-time-flow__text-block {
-  margin-bottom: 24px;
-  color: var(--color-text-default);
-}
-@media screen and (max-width: calc(576px - 1px)) {
-  .first-time-flow__text-block {
-    font-size: 0.875rem;
-    font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 140%;
-    font-style: normal;
-    font-weight: normal;
-    margin-bottom: 16px;
-  }
-}
-.first-time-flow__button {
-  margin: 35px 0 14px;
-  width: 170px;
-  height: 44px;
-}
-.first-time-flow__checkbox-container {
-  display: flex;
-  align-items: center;
-  margin-top: 24px;
-}
-.first-time-flow__checkbox {
-  background: var(--color-background-default);
-  border: 1px solid var(--color-border-muted);
-  box-sizing: border-box;
-  height: 34px;
-  width: 34px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.first-time-flow__checkbox:hover {
-  border: 1.5px solid var(--color-primary-alternative);
-}
-.first-time-flow__checkbox .fa-check {
-  color: var(--color-primary-default);
-}
-.first-time-flow__checkbox-label {
-  font-size: 1.125rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-text-alternative);
-  margin-right: 18px;
-}
-.first-time-flow__link-text {
-  color: var(--color-primary-default);
-}
-
-.first-time-flow__wrapper.intro {
-  padding: 0 20px;
-}
-@media screen and (min-width: 576px) {
-  .first-time-flow__wrapper.intro {
-    max-width: 1010px;
-  }
-}
-
 .gas-display {
   overflow-y: auto;
   flex: 1;
@@ -73315,7 +72118,7 @@ readers do not read off random characters that represent icons */
     padding: 0 16px 16px 32px;
     position: fixed;
     bottom: 80px;
-    z-index: 1;
+    z-index: 1026;
   }
 }
 .gas-display__link {
@@ -73478,15 +72281,13 @@ readers do not read off random characters that represent icons */
 }
 .home__new-tokens-imported-notification {
   margin-bottom: 4px;
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
+  margin-inline-start: 8px;
   padding: 8px;
 }
 @media screen and (min-width: 576px) {
   .home__new-tokens-imported-notification {
     margin-bottom: 50px;
-    -webkit-margin-end: 8px;
-            margin-inline-end: 8px;
+    margin-inline-end: 8px;
     right: 70%;
   }
 }
@@ -73499,16 +72300,14 @@ readers do not read off random characters that represent icons */
   line-height: 140%;
   font-style: normal;
   font-weight: normal;
-  -webkit-margin-end: 12px;
-          margin-inline-end: 12px;
+  margin-inline-end: 12px;
   padding-top: 12px;
   color: var(--color-success-default);
 }
 .home__new-tokens-imported-notification-close {
   color: var(--color-icon-default);
   background: none;
-  -webkit-margin-start: 32px;
-          margin-inline-start: 32px;
+  margin-inline-start: 32px;
 }
 .home__new-network-added {
   border-radius: 10px;
@@ -73634,27 +72433,12 @@ readers do not read off random characters that represent icons */
   font-size: inherit;
 }
 
-.reveal-seed__content {
-  padding: 20px;
+.reveal-seed__tab {
+  display: flex;
+  flex: 1;
 }
-.reveal-seed__label {
-  padding-bottom: 10px;
-  font-weight: 400;
-  display: inline-block;
-}
-.reveal-seed__error {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  color: var(--color-error-default);
-  padding-top: 5px;
-}
-
-.page-container__footer-single-button {
-  width: 40%;
-  margin: 8px auto;
+.reveal-seed__active-tab {
+  color: var(--color-primary-default);
 }
 
 .permissions-connect-choose-account__title {
@@ -73825,9 +72609,6 @@ readers do not read off random characters that represent icons */
   color: var(--color-icon-default);
   font-weight: bold;
   cursor: pointer;
-}
-.permissions-connect__back i {
-  margin-left: 10px;
 }
 .permissions-connect__page-count {
   font-size: 0.75rem;
@@ -74188,8 +72969,7 @@ readers do not read off random characters that represent icons */
   margin-bottom: 15px;
 }
 .info-tab__tag {
-  -webkit-margin-start: 8px;
-          margin-inline-start: 8px;
+  margin-inline-start: 8px;
 }
 
 .alerts-tab__body {
@@ -80530,6 +79310,14 @@ readers do not read off random characters that represent icons */
   background: var(--color-network-sepolia-inverse);
   color: var(--color-primary-inverse);
 }
+.networks-tab__content__icon-with-fallback--color-lineatestnet {
+  background: var(--color-network-linea-testnet-default);
+  color: var(--color-primary-inverse);
+}
+.networks-tab__content__icon-with-fallback--color-lineatestnet-inverse {
+  background: var(--color-network-linea-testnet-inverse);
+  color: var(--color-primary-inverse);
+}
 .networks-tab__content__icon-with-fallback--color-localhost {
   background: var(--color-network-localhost-default);
   color: var(--color-primary-inverse);
@@ -80552,8 +79340,7 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .networks-tab__body {
-    -webkit-margin-end: 16px;
-            margin-inline-end: 16px;
+    margin-inline-end: 16px;
     margin-bottom: 24px;
   }
 }
@@ -80683,8 +79470,7 @@ readers do not read off random characters that represent icons */
   cursor: pointer;
 }
 .networks-tab__networks-list-name svg {
-  -webkit-margin-start: 15px;
-          margin-inline-start: 15px;
+  margin-inline-start: 15px;
   padding-top: 3px;
 }
 @media screen and (max-width: calc(576px - 1px)) {
@@ -80850,9 +79636,8 @@ readers do not read off random characters that represent icons */
   text-align: center;
 }
 .address-book__icon {
-  margin-bottom: 16px;
+  margin: 0 auto 16px auto;
   display: block;
-  color: var(--color-icon-muted);
 }
 .address-book__title {
   font-size: 1.125rem;
@@ -81061,8 +79846,7 @@ readers do not read off random characters that represent icons */
 .view-snap__subheader {
   padding: 16px 4px;
   border-bottom: 1px solid var(--color-border-muted);
-  -webkit-margin-end: 24px;
-          margin-inline-end: 24px;
+  margin-inline-end: 24px;
   height: 72px;
   align-items: center;
   display: flex;
@@ -81070,8 +79854,7 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (max-width: calc(576px - 1px)) {
   .view-snap__subheader {
-    -webkit-margin-end: 0;
-            margin-inline-end: 0;
+    margin-inline-end: 0;
     padding: 0 0 16px;
     flex-direction: column;
     align-items: center;
@@ -81081,13 +79864,11 @@ readers do not read off random characters that represent icons */
 }
 .view-snap__install-details {
   border-bottom: 1px solid var(--color-border-muted);
-  -webkit-margin-end: 24px;
-          margin-inline-end: 24px;
+  margin-inline-end: 24px;
 }
 @media screen and (max-width: calc(576px - 1px)) {
   .view-snap__install-details {
-    -webkit-margin-end: 0;
-            margin-inline-end: 0;
+    margin-inline-end: 0;
   }
 }
 .view-snap__version {
@@ -81333,8 +80114,7 @@ readers do not read off random characters that represent icons */
   color: var(--color-primary-default);
 }
 .settings-page__subheader--break {
-  -webkit-margin-start: 4px;
-          margin-inline-start: 4px;
+  margin-inline-start: 4px;
   white-space: nowrap;
   width: 100%;
   max-width: calc(100% - 125px - 85px);
@@ -81384,18 +80164,11 @@ readers do not read off random characters that represent icons */
   color: var(--color-text-default);
 }
 .settings-page__back-button {
-  display: none;
+  margin-left: 8px;
 }
-@media screen and (max-width: calc(576px - 1px)) {
-  .settings-page__back-button {
-    display: block;
-    margin-left: 8px;
-    cursor: pointer;
-  }
-  [dir=rtl] .settings-page__back-button {
-    margin: 0 8px 0 0;
-    transform: rotate(-180deg);
-  }
+[dir=rtl] .settings-page__back-button {
+  margin: 0 8px 0 0;
+  transform: rotate(-180deg);
 }
 .settings-page__content {
   display: flex;
@@ -81421,6 +80194,11 @@ readers do not read off random characters that represent icons */
     max-height: 50px;
   }
 }
+@media screen and (min-width: 576px) {
+  .settings-page__content__tabs .tab-bar__tab__caret {
+    display: none;
+  }
+}
 .settings-page__content__modules {
   overflow-y: auto;
   flex: 1 1 auto;
@@ -81444,13 +80222,6 @@ readers do not read off random characters that represent icons */
   display: flex;
   flex-direction: column;
   padding: 10px 0 20px;
-}
-.settings-page__content-row--parent {
-  padding: 10px 0 10px;
-}
-.settings-page__content-row--dependent {
-  margin-right: 48px;
-  padding: 0 0 20px;
 }
 .settings-page__content-item {
   flex: 1;
@@ -81519,7 +80290,7 @@ readers do not read off random characters that represent icons */
 }
 .settings-page__content-unordered-list {
   padding-right: 2.5rem;
-  margin-top: 2.5rem;
+  margin-top: 1rem;
   list-style: disc;
 }
 .settings-page__content-description {
@@ -83353,8 +82124,7 @@ readers do not read off random characters that represent icons */
   padding-top: 10px;
 }
 .view-quote__price-difference-warning-contents i {
-  -webkit-margin-start: 10px;
-          margin-inline-start: 10px;
+  margin-inline-start: 10px;
 }
 .view-quote__warning-wrapper {
   width: 100%;
@@ -83607,19 +82377,15 @@ readers do not read off random characters that represent icons */
 .token-allowance-container a.token-allowance-container__verify-link {
   width: -moz-fit-content;
   width: fit-content;
-  -webkit-margin-start: 96px;
-          margin-inline-start: 96px;
-  -webkit-margin-end: 96px;
-          margin-inline-end: 96px;
+  margin-inline-start: 96px;
+  margin-inline-end: 96px;
   padding: 0;
 }
 .token-allowance-container a.token-allowance-container__view-details {
   width: -moz-fit-content;
   width: fit-content;
-  -webkit-margin-start: 108px;
-          margin-inline-start: 108px;
-  -webkit-margin-end: 108px;
-          margin-inline-end: 108px;
+  margin-inline-start: 108px;
+  margin-inline-end: 108px;
 }
 .token-allowance-container__card-wrapper {
   width: 100%;
@@ -83638,8 +82404,7 @@ readers do not read off random characters that represent icons */
   float: left;
   width: 10px;
   margin-top: -17px;
-  -webkit-margin-end: -8px;
-          margin-inline-end: -8px;
+  margin-inline-end: -8px;
 }
 .token-details__closeButton::after {
   font-size: 24px;
@@ -83654,13 +82419,11 @@ readers do not read off random characters that represent icons */
 }
 .token-details__copy-icon {
   float: left;
-  -webkit-margin-start: 62px;
-          margin-inline-start: 62px;
+  margin-inline-start: 62px;
 }
 @media screen and (min-width: 576px) {
   .token-details__copy-icon {
-    -webkit-margin-start: 112px;
-            margin-inline-start: 112px;
+    margin-inline-start: 112px;
   }
 }
 .token-details__hide-token-button {
@@ -83670,8 +82433,7 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .token-details__hide-token-button {
-    -webkit-margin-start: 20px;
-            margin-inline-start: 20px;
+    margin-inline-start: 20px;
   }
 }
 
@@ -83813,10 +82575,8 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (max-width: calc(576px - 1px)) {
   .recovery-phrase__footer {
-    -webkit-margin-start: 40px;
-            margin-inline-start: 40px;
-    -webkit-margin-end: 40px;
-            margin-inline-end: 40px;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
     margin-bottom: 40px;
   }
 }
@@ -84031,8 +82791,7 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .secure-your-wallet__highlighted {
-    -webkit-margin-end: 43px;
-            margin-inline-end: 43px;
+    margin-inline-end: 43px;
   }
 }
 
@@ -84040,7 +82799,6 @@ readers do not read off random characters that represent icons */
   width: 365px;
 }
 .skip-srp-backup-popover__icon {
-  color: var(--color-error-default);
   display: block;
   margin-top: 16px;
   margin-bottom: 16px;
@@ -84090,10 +82848,8 @@ readers do not read off random characters that represent icons */
 }
 @media screen and (min-width: 576px) {
   .privacy-settings__settings {
-    -webkit-margin-start: 48px;
-            margin-inline-start: 48px;
-    -webkit-margin-end: 48px;
-            margin-inline-end: 48px;
+    margin-inline-start: 48px;
+    margin-inline-end: 48px;
   }
 }
 .privacy-settings__settings a {
@@ -84320,21 +83076,6 @@ readers do not read off random characters that represent icons */
 .onboarding-metametrics ul li > span {
   width: 90%;
 }
-.onboarding-metametrics .fa {
-  width: 16px;
-}
-.onboarding-metametrics .fa-check {
-  -webkit-margin-end: 12px;
-          margin-inline-end: 12px;
-  color: var(--color-success-default);
-  padding-top: 2px;
-}
-.onboarding-metametrics .fa-times {
-  -webkit-margin-end: 12px;
-          margin-inline-end: 12px;
-  color: var(--color-error-default);
-  padding-top: 3px;
-}
 .onboarding-metametrics__terms a {
   color: var(--color-primary-default);
 }
@@ -84502,6 +83243,116 @@ readers do not read off random characters that represent icons */
   margin-top: 6px;
 }
 
+.desktop-pairing {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  padding: 0 30px 0;
+}
+.desktop-pairing__countdown-timer {
+  background: #f2f3f4;
+  border-radius: 15.5px;
+  padding: 7px 0 7px 0;
+  margin: 0 32px 0 32px;
+  font-size: 12px;
+}
+.desktop-pairing__countdown-timer-seconds {
+  color: var(--color-primary-default);
+}
+.desktop-pairing__icon {
+  padding-top: 24px;
+}
+.desktop-pairing__title {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140.62%;
+  text-align: center;
+  color: #24292e;
+  padding-top: 24px;
+}
+.desktop-pairing__subtitle, .desktop-pairing__description {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140.62%;
+  text-align: center;
+  color: #000;
+  padding-top: 8px;
+  margin: 0 56px;
+}
+.desktop-pairing__description {
+  margin: 18px 0;
+}
+.desktop-pairing__otp {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  letter-spacing: 10px;
+  color: #000;
+}
+.desktop-pairing__buttons {
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  margin: auto;
+}
+.desktop-pairing__tooltip-wrapper {
+  width: 100%;
+}
+.desktop-pairing__clickable {
+  width: 100%;
+}
+.desktop-pairing__clickable:hover {
+  cursor: pointer;
+}
+
+.desktop-pairing-warning {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+}
+.desktop-pairing-warning__close-button {
+  z-index: 1050;
+  font-size: 24px;
+  cursor: pointer;
+}
+.desktop-pairing-warning__close-button__close::after {
+  content: "×";
+  font-size: 24px;
+  cursor: pointer;
+  position: relative;
+  float: left;
+  margin-top: -8px;
+}
+.desktop-pairing-warning__title {
+  font-weight: bold;
+  font-size: 16px;
+}
+.desktop-pairing-warning__text {
+  font-size: 0.875rem;
+}
+.desktop-pairing-warning__link {
+  color: var(--color-primary-default);
+  display: block;
+  cursor: pointer;
+  line-height: 100%;
+  font-size: 0.875rem;
+  padding: 0 0;
+}
+.desktop-pairing-warning__warning-content {
+  border-right: 5px solid var(--color-warning-default);
+  border-left: 0;
+  border-bottom: 0;
+  border-top: 0;
+  margin: 4px;
+}
+.desktop-pairing-warning__warning-content .icon {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+}
+
 .critical-error {
   padding: 1em;
   max-width: 600px;
@@ -84663,6 +83514,9 @@ readers do not read off random characters that represent icons */
 }
 .network-component.pointer.sepolia-test-network .menu-icon-circle div {
   background-color: rgba(207, 181, 240, 0.7) !important;
+}
+.network-component.pointer.linea-test-network .menu-icon-circle div {
+  background-color: rgba(0, 0, 0, 0.7) !important;
 }
 .network-component.pointer.localhost-network .menu-icon-circle div {
   background-color: rgba(3, 135, 137, 0.7) !important;
