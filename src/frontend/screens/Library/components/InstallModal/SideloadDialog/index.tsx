@@ -29,6 +29,7 @@ import fallbackImage from 'frontend/assets/fallback_card.jpg'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { ReactComponent as BrowserIcon } from 'frontend/assets/browser-icon.svg'
 import classNames from 'classnames'
+import Warning from './Warning'
 
 type Props = {
   availablePlatforms: AvailablePlatforms
@@ -290,6 +291,7 @@ export default function SideloadDialog({
             </span>
           </div>
           <div className="sideloadForm">
+            <Warning />
             <TextInputField
               label={t('sideload.info.title', 'Game/App Title')}
               placeholder={t(

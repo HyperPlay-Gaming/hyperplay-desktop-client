@@ -19,6 +19,7 @@ import {
 } from 'common/types'
 import { GamesDBData, GogInstallInfo, UserData } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
+import { PROVIDERS } from './proxy-types'
 
 export interface StoreStructure {
   configStore: {
@@ -126,6 +127,9 @@ export interface StoreStructure {
   }
   hpInstalledGamesStore: {
     installed: InstalledInfo[]
+  }
+  providerMetadata: {
+    currentWeb3Provider: PROVIDERS
   }
 }
 

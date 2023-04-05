@@ -141,6 +141,27 @@ const getStoreName = (runner: Runner, other: string) => {
   }
 }
 
+export function handlePlatformReversed(platform: string) {
+  switch (platform) {
+    case 'windows_arm64':
+      return 'Windows'
+    case 'linux_arm64':
+      return 'linux'
+    case 'darwin_arm64':
+      return 'Mac'
+    case 'windows_amd64':
+      return 'Windows'
+    case 'linux_amd64':
+      return 'linux'
+    case 'darwin_amd64':
+      return 'Mac'
+    case 'web':
+      return 'Browser'
+    default:
+      return platform
+  }
+}
+
 export {
   createNewWindow,
   getGameInfo,

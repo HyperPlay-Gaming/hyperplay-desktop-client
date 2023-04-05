@@ -163,6 +163,7 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<unknown>
   isGameHidden: (gameId: string) => Promise<boolean>
   unhideGame: (gameId: string) => Promise<void>
+  getCurrentWeb3Provider: () => Promise<PROVIDERS | undefined>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
