@@ -209,6 +209,14 @@
         "store": "Store",
         "title": "Game Title"
     },
+    "gameRelease": {
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "currentRelease": "Current Release",
+        "demo": "Demo",
+        "latest": "Latest",
+        "prototype": "Prototype"
+    },
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
