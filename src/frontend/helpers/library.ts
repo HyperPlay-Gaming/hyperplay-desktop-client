@@ -25,7 +25,7 @@ type InstallArgs = {
   sdlList?: Array<string>
   installLanguage?: string
   showDialogModal: (options: DialogModalOptions) => void
-  releaseName?: string
+  channelName?: string
 }
 
 async function install({

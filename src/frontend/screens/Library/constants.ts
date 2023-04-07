@@ -19,11 +19,11 @@ export function getLibraryTitle(
   }
 }
 
-export function translateReleaseName(
-  releaseNameEnglish: string,
+export function translateChannelName(
+  channelNameEnglish: string,
   t: TFunction<'translation'>
 ) {
-  switch (releaseNameEnglish) {
+  switch (channelNameEnglish) {
     case 'Demo':
       return t('gameRelease.demo', 'Demo')
     case 'Prototype':
@@ -37,6 +37,6 @@ export function translateReleaseName(
     case 'Latest':
       return t('gameRelease.latest', 'Latest')
     default:
-      return releaseNameEnglish
+      return channelNameEnglish
   }
 }

@@ -280,7 +280,7 @@ function getZipFileName(appName: string, platformInfo: PlatformInfo): string {
 
 export async function install(
   appName: string,
-  { path: dirpath, platformToInstall, releaseName }: InstallArgs
+  { path: dirpath, platformToInstall, channelName }: InstallArgs
 ): Promise<InstallResult> {
   if (!existsSync(dirpath) && platformToInstall !== 'Browser') {
     mkdirSync(dirpath, { recursive: true })
@@ -292,8 +292,8 @@ export async function install(
   if (!window) return { status: 'error', error: 'Window undefined' }
 
   let releaseMeta = releaseMetaDeprecated
-  if (releaseName && releases && channels) {
-    const releaseVersionSelected = channels[releaseName].version
+  if (channelName && releases && channels) {
+    const releaseVersionSelected = channels[channelName].version
     releaseMeta = releases[releaseVersionSelected]
   }
 

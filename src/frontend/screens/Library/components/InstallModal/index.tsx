@@ -25,11 +25,8 @@ import SideloadDialog from './SideloadDialog'
 import WineSelector from './WineSelector'
 import { SelectField } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
-<<<<<<< HEAD
 import { getPlatformName } from 'frontend/helpers'
-=======
-import { translateReleaseName } from 'frontend/screens/Library/constants'
->>>>>>> f2fb0b6f (add common release translations)
+import { translateChannelName } from 'frontend/screens/Library/constants'
 
 type Props = {
   appName: string
@@ -59,7 +56,7 @@ export default React.memo(function InstallModal({
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
   const [crossoverBottle, setCrossoverBottle] = useState('')
 
-  const [releaseNameToInstall, setReleaseNameToInstall] = useState('')
+  const [channelNameToInstall, setChannelNameToInstall] = useState('')
 
   const isMac = platform === 'darwin'
   const isWin = platform === 'win32'
@@ -179,13 +176,13 @@ export default React.memo(function InstallModal({
     )
   }
 
-  function releaseNameSelection() {
+  function channelNameSelection() {
     return (
       <SelectField
-        label={`${t('game.selectReleaseName', 'Select Release Name')}:`}
-        htmlId="releaseNameSelect"
-        value={releaseNameToInstall}
-        onChange={(e) => setReleaseNameToInstall(e.target.value)}
+        label={`${t('game.selectChannelName', 'Select Channel Name')}:`}
+        htmlId="channelNameSelect"
+        value={channelNameToInstall}
+        onChange={(e) => setChannelNameToInstall(e.target.value)}
       >
         {!gameInfo?.channels
           ? null
@@ -194,7 +191,7 @@ export default React.memo(function InstallModal({
               const channel_i = gameInfo.channels[p]
               return (
                 <option value={p} key={i}>
-                  {translateReleaseName(channel_i.displayName, t)}
+                  {translateChannelName(channel_i.displayName, t)}
                 </option>
               )
             })}
@@ -222,10 +219,10 @@ export default React.memo(function InstallModal({
             platformToInstall={platformToInstall}
             gameInfo={gameInfo}
             crossoverBottle={crossoverBottle}
-            releaseNameToInstall={releaseNameToInstall}
+            channelNameToInstall={channelNameToInstall}
           >
             {platformSelection()}
-            {runner === 'hyperplay' ? releaseNameSelection() : null}
+            {runner === 'hyperplay' ? channelNameSelection() : null}
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}

@@ -58,7 +58,7 @@ interface Props {
   wineVersion: WineInstallation | undefined
   children: React.ReactNode
   gameInfo: GameInfo
-  releaseNameToInstall: string
+  channelNameToInstall: string
 }
 
 type DiskSpaceInfo = {
@@ -112,7 +112,7 @@ export default function DownloadDialog({
   children,
   gameInfo,
   crossoverBottle,
-  releaseNameToInstall
+  channelNameToInstall
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -215,7 +215,7 @@ export default function DownloadDialog({
       installLanguage,
       platformToInstall,
       showDialogModal: () => backdropClick(),
-      releaseName: releaseNameToInstall
+      channelName: channelNameToInstall
     })
   }
 
