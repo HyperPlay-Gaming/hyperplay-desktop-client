@@ -92,6 +92,7 @@
         "neverPlayed": "Never",
         "platform": "Select Platform",
         "requirements": "System Requirements",
+        "selectReleaseName": "Select Release Name",
         "totalPlayed": "Time Played"
     },
     "gamecard": {
