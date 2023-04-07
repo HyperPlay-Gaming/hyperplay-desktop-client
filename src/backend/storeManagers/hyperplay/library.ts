@@ -15,6 +15,7 @@ import {
   refreshGameInfoFromHpRelease
 } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
+import testJson from './test.json'
 
 export async function addGameToLibrary(appId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -32,9 +33,11 @@ export async function addGameToLibrary(appId: string) {
     return
   }
 
-  const res = await axios.get<HyperPlayRelease[]>(
-    `https://developers.hyperplay.xyz/api/listings?id=${appId}`
-  )
+  let data = testJson as HyperPlayRelease
+  if (appId !== '63f685cd069b92b74c6d5778') {
+    const res = await axios.get<HyperPlayRelease[]>(
+      `https://developers.hyperplay.xyz/api/listings?id=${appId}`
+    )
 
   const data = res.data[0]
   const gameInfo = getGameInfoFromHpRelease(data)
@@ -66,8 +69,8 @@ export const getInstallInfo = async (
     )
     return undefined
   }
-  const download_size = info.downloadSize
-  const install_size = info.installSize
+  const download_size = parseInt(info.downloadSize)
+  const install_size = parseInt(info.installSize)
   return {
     game: info,
     manifest: {

@@ -58,6 +58,7 @@ interface Props {
   wineVersion: WineInstallation | undefined
   children: React.ReactNode
   gameInfo: GameInfo
+  releaseNameToInstall: string
 }
 
 type DiskSpaceInfo = {
@@ -110,7 +111,8 @@ export default function DownloadDialog({
   wineVersion,
   children,
   gameInfo,
-  crossoverBottle
+  crossoverBottle,
+  releaseNameToInstall
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -212,7 +214,8 @@ export default function DownloadDialog({
       installDlcs,
       installLanguage,
       platformToInstall,
-      showDialogModal: () => backdropClick()
+      showDialogModal: () => backdropClick(),
+      releaseName: releaseNameToInstall
     })
   }
 
@@ -298,7 +301,9 @@ export default function DownloadDialog({
   }, [installPath, gameInstallInfo?.manifest?.disk_size])
 
   const haveDLCs =
-    gameInstallInfo && gameInstallInfo?.game?.owned_dlc?.length > 0
+    gameInstallInfo &&
+    gameInstallInfo?.game?.owned_dlc?.length &&
+    gameInstallInfo?.game?.owned_dlc?.length > 0
   const DLCList = gameInstallInfo?.game?.owned_dlc
   const downloadSize = () => {
     if (gameInstallInfo?.manifest?.download_size) {

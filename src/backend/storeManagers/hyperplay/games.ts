@@ -280,7 +280,7 @@ function getZipFileName(appName: string, platformInfo: PlatformInfo): string {
 
 export async function install(
   appName: string,
-  { path: dirpath, platformToInstall }: InstallArgs
+  { path: dirpath, platformToInstall, releaseName }: InstallArgs
 ): Promise<InstallResult> {
   if (!existsSync(dirpath) && platformToInstall !== 'Browser') {
     mkdirSync(dirpath, { recursive: true })
@@ -289,8 +289,15 @@ export async function install(
   const gameInfo = getGameInfo(appName)
   const { title, releaseMeta, developer } = gameInfo
   const window = getMainWindow()
+  if (!window) return { status: 'error', error: 'Window undefined' }
 
-  if (!releaseMeta || !window) {
+  let releaseMeta = releaseMetaDeprecated
+  if (releaseName && releases && channels) {
+    const releaseVersionSelected = channels[releaseName].version
+    releaseMeta = releases[releaseVersionSelected]
+  }
+
+  if (!releaseMeta) {
     return { status: 'error', error: 'Release meta not found' }
   }
 

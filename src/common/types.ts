@@ -137,6 +137,9 @@ export interface GameInfo {
   systemRequirements?: SystemRequirements
   //used for store release versions. if remote !== local, then update
   version?: string
+  // key is semver string release name e.g 0.0.1, 0.0.1-demo.1, etc.
+  channels?: { [key: string]: HyperPlayActiveRelease }
+  releases?: { [key: string]: HyperPlayReleaseMeta }
 }
 
 export interface GameSettings {
@@ -254,6 +257,7 @@ export interface InstallArgs {
   installDlcs?: boolean
   sdlList?: string[]
   installLanguage?: string
+  releaseName?: string
 }
 
 export interface InstallParams extends InstallArgs {
@@ -756,7 +760,7 @@ interface WineSupport {
 
 interface HyperPlayProjectMeta {
   image: string
-  main_capsule: string
+  main_capsule?: string
   name: string
   short_description: string
   description: string
@@ -797,15 +801,15 @@ export type PlatformInfo = {
   external_url: string
   name: string
   executable: string
-  installSize: number
-  downloadSize: number
-  launch_options: Array<LaunchOption>
-  owned_dlc: Array<DLCInfo>
+  installSize: string
+  downloadSize: string
+  launch_options?: Array<LaunchOption>
+  owned_dlc?: Array<DLCInfo>
   processName?: string
 }
 
 export type ValistPlatforms = {
-  [key in AppPlatforms]: PlatformInfo
+  [key in AppPlatforms]?: PlatformInfo
 }
 
 export interface HyperPlayReleaseMeta {
@@ -825,6 +829,11 @@ export interface HyperPlayAccountMeta {
   image: string
 }
 
+export interface HyperPlayActiveRelease {
+  version: string
+  displayName: string
+}
+
 export interface HyperPlayRelease {
   _id: string
   accountID: string
@@ -840,6 +849,9 @@ export interface HyperPlayRelease {
   projectMeta: HyperPlayProjectMeta
   releaseMeta: HyperPlayReleaseMeta
   accountMeta: HyperPlayAccountMeta
+  // key is semver string release name e.g 0.0.1, 0.0.1-demo.1, etc.
+  channels: { [key: string]: HyperPlayActiveRelease }
+  releases: { [key: string]: HyperPlayReleaseMeta }
 }
 
 export interface HyperPlayInstallInfo {
