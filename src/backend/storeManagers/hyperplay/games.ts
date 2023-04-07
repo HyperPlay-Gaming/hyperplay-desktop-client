@@ -292,9 +292,10 @@ export async function install(
   if (!window) return { status: 'error', error: 'Window undefined' }
 
   let releaseMeta = releaseMetaDeprecated
+  let releaseVersion: string | undefined = undefined
   if (channelName && releases && channels) {
-    const releaseVersionSelected = channels[channelName].version
-    releaseMeta = releases[releaseVersionSelected]
+    releaseVersion = channels[channelName].version
+    releaseMeta = releases[releaseVersion]
   }
 
   if (!releaseMeta) {
@@ -351,8 +352,9 @@ export async function install(
         executable: executable,
         install_size: platformInfo.installSize.toString(),
         is_dlc: false,
-        version: gameInfo.version ?? '0',
-        platform: appPlatform
+        version: releaseVersion ? releaseVersion : gameInfo.version ?? '0',
+        platform: appPlatform,
+        channelName
       }
 
       const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
@@ -555,9 +557,12 @@ export async function update(appName: string): Promise<InstallResult> {
   }
 
   await uninstall({ appName })
+
+  //install the new version
   const installResult = await install(appName, {
     path: path.dirname(gameInfo.install.install_path),
-    platformToInstall: gameInfo.install.platform
+    platformToInstall: gameInfo.install.platform,
+    channelName: gameInfo.install.channelName
   })
   return installResult
 }

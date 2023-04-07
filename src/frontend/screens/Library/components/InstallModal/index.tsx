@@ -56,7 +56,12 @@ export default React.memo(function InstallModal({
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
   const [crossoverBottle, setCrossoverBottle] = useState('')
 
-  const [channelNameToInstall, setChannelNameToInstall] = useState('')
+  const initChannelName =
+    gameInfo?.channels && Object.keys(gameInfo?.channels).length > 0
+      ? Object.keys(gameInfo?.channels)[0]
+      : ''
+  const [channelNameToInstall, setChannelNameToInstall] =
+    useState(initChannelName)
 
   const isMac = platform === 'darwin'
   const isWin = platform === 'win32'
