@@ -47,25 +47,29 @@ const ExtensionManager = function () {
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={ExtensionManagerStyles.mmContainer} ref={rootRef}>
-      <webview
-        ref={popupRef}
-        nodeintegrationinsubframes="true"
-        webpreferences="contextIsolation=true, nodeIntegration=true"
-        src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
-        className={classNames(ExtensionManagerStyles.mmWindow, {
-          [ExtensionManagerStyles.open]:
-            extensionStore.isPopupOpen && !extensionStore.isNotificationOpen
-        })}
-      ></webview>
-      <webview
-        nodeintegrationinsubframes="true"
-        webpreferences="contextIsolation=true, nodeIntegration=true"
-        src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
-        className={classNames(ExtensionManagerStyles.mmWindow, {
-          [ExtensionManagerStyles.open]:
-            extensionStore.isPopupOpen && extensionStore.isNotificationOpen
-        })}
-      ></webview>
+      {extensionStore.isPopupOpen ? (
+        <webview
+          ref={popupRef}
+          nodeintegrationinsubframes="true"
+          webpreferences="contextIsolation=true, nodeIntegration=true"
+          src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
+          className={classNames(ExtensionManagerStyles.mmWindow, {
+            [ExtensionManagerStyles.open]:
+              extensionStore.isPopupOpen && !extensionStore.isNotificationOpen
+          })}
+        ></webview>
+      ) : null}
+      {extensionStore.isNotificationOpen ? (
+        <webview
+          nodeintegrationinsubframes="true"
+          webpreferences="contextIsolation=true, nodeIntegration=true"
+          src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
+          className={classNames(ExtensionManagerStyles.mmWindow, {
+            [ExtensionManagerStyles.open]:
+              extensionStore.isPopupOpen && extensionStore.isNotificationOpen
+          })}
+        ></webview>
+      ) : null}
     </div>
   )
 }
