@@ -19,6 +19,17 @@ declare global {
 const ExtensionManager = function () {
   const rootRef = useRef<HTMLDivElement>(null)
   const popupRef = useRef<WebviewType>(null)
+  const notificationRef = useRef<WebviewType>(null)
+
+  useEffect(() => {
+    extensionStore.isPopupOpen &&
+      !extensionStore.isNotificationOpen &&
+      popupRef.current?.reload()
+
+    extensionStore.isPopupOpen &&
+      extensionStore.isNotificationOpen &&
+      notificationRef.current?.reload()
+  }, [extensionStore.isPopupOpen, extensionStore.isNotificationOpen])
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
@@ -58,6 +69,7 @@ const ExtensionManager = function () {
         })}
       ></webview>
       <webview
+        ref={notificationRef}
         nodeintegrationinsubframes="true"
         webpreferences="contextIsolation=true, nodeIntegration=true"
         src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
