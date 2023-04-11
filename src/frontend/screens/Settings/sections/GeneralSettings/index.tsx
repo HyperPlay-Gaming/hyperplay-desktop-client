@@ -8,6 +8,7 @@ import {
   DefaultSteamPath,
   DisableController,
   EgsSettings,
+  HyperPlayAnalytics,
   LibraryTopSection,
   MaxRecentGames,
   MaxWorkers,
@@ -17,7 +18,6 @@ import {
   UseDarkTrayIcon,
   WinePrefixesBasePath
 } from '../../components'
-import ParticipateInMetrics from '../../components/ParticipateInMetrics'
 
 export default function GeneralSettings() {
   const { t } = useTranslation()
@@ -38,8 +38,6 @@ export default function GeneralSettings() {
 
       <CheckUpdatesOnStartup />
 
-      <ParticipateInMetrics />
-
       <AutoUpdateGames />
 
       <TraySettings />
@@ -51,6 +49,8 @@ export default function GeneralSettings() {
       <Shortcuts />
 
       <DisableController />
+
+      <HyperPlayAnalytics />
 
       <LibraryTopSection />
 

@@ -9,6 +9,7 @@
     },
     "add_game": "Add Game",
     "All": "All",
+    "analytics": "Analytics",
     "anticheat": {
         "anticheats": "Anticheats",
         "may_not_work": "It may not work due to denied or broken anticheat support.",
@@ -268,6 +269,8 @@
         }
     },
     "hyperplay": {
+        "analyticsOff": "Analytics is turned off",
+        "analyticsOn": "Analytics is turned on",
         "buttons": {
             "agree": "I agree",
             "noThanks": "No Thanks"
@@ -340,6 +343,8 @@
                 "title": "Welcome to HyperPlay Early Access!"
             }
         },
+        "turnAnalyticsOff": "Turn off",
+        "turnAnalyticsOn": "Turn on",
         "wallet": {
             "connected": "Connected",
             "notConnected": "Not connected"
@@ -639,7 +644,6 @@
         "maxworkers": "Maximum Number of Workers when downloading",
         "minimize-on-launch": "Minimize HyperPlay After Game Launch",
         "offlinemode": "Run Game Offline",
-        "participate-in-metrics": "Participate in metrics",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
         "primerun": {
