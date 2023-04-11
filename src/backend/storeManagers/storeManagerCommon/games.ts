@@ -20,7 +20,7 @@ import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 import find from 'find-process'
-import { OverlayApp } from 'backend/overlay/overlay'
+import * as OverlayApp from 'backend/overlay/overlay'
 const buildDir = resolve(__dirname, '../../build')
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {

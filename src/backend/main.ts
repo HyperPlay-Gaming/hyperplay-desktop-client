@@ -127,7 +127,7 @@ import {
   WalletConnectedType,
   WalletDisconnectedType
 } from './hyperplay-proxy-server/commonProxyTypes'
-import { OverlayApp } from './overlay/overlay'
+import * as OverlayApp from './overlay/overlay'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
@@ -317,20 +317,14 @@ if (!gotTheLock) {
       path.join(__dirname, 'hyperplay_store_preload.js')
     ])
 
-    let overlayOpen = false
-    const openOverlay = () => {
-      overlayOpen = !overlayOpen
-      for (const win of BrowserWindow.getAllWindows()) {
-        win.webContents.send('updateOverlayVisibility', overlayOpen)
-      }
-      OverlayApp.toggleIntercept()
-    }
-
     // keyboards with alt and no option key can be used with mac so register both
     const openOverlayAccelerator = 'Alt+X'
-    globalShortcut.register(openOverlayAccelerator, openOverlay)
+    globalShortcut.register(openOverlayAccelerator, OverlayApp.toggleIntercept)
     const openOverlayAcceleratorMac = 'Option+X'
-    globalShortcut.register(openOverlayAcceleratorMac, openOverlay)
+    globalShortcut.register(
+      openOverlayAcceleratorMac,
+      OverlayApp.toggleIntercept
+    )
 
     initExtension()
 
