@@ -214,6 +214,8 @@ export function getGameInfo(
 }
 
 export async function updateAllLibraryReleaseData() {
+  console.warn('updateAllLibraryReleaseData NOT IMPLEMENTED!')
+  return
   const allListingsResponse = await axios.get(
     'https://developers.hyperplay.xyz/api/listings'
   )
@@ -232,7 +234,6 @@ export async function updateAllLibraryReleaseData() {
   currentHpLibrary.map((localReleaseData, index) => {
     const remoteReleaseData = listingMap[localReleaseData.app_name]
     //copy remote data to local release data in library
-    throw 'ERROR updateAllLibraryReleaseData NOT IMPLEMENTED!'
   })
 }
 
