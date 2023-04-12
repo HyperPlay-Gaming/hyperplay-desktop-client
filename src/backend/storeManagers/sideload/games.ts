@@ -67,51 +67,6 @@ export function isGameAvailable(appName: string): boolean {
   return false
 }
 
-if (Object.hasOwn(app, 'on'))
-  app.on('web-contents-created', (_, contents) => {
-    // Check for a webview
-    if (contents.getType() === 'webview') {
-      contents.setWindowOpenHandler(({ url }) => {
-        const protocol = new URL(url).protocol
-        if (['https:', 'http:'].includes(protocol)) {
-          openNewBrowserGameWindow(url)
-        }
-        return { action: 'deny' }
-      })
-    }
-  })
-
-const openNewBrowserGameWindow = async (
-  browserUrl: string
-): Promise<boolean> => {
-  return new Promise((res) => {
-    const browserGame = new BrowserWindow({
-      icon: icon,
-      webPreferences: {
-        webviewTag: true,
-        contextIsolation: true,
-        nodeIntegration: true,
-        preload: path.join(__dirname, 'preload.js')
-      }
-    })
-
-    const url = !app.isPackaged
-      ? 'http://localhost:5173?view=BrowserGame&browserUrl=' +
-        encodeURIComponent(browserUrl)
-      : `file://${path.join(
-          buildDir,
-          './index.html?view=BrowserGame&browserUrl=' +
-            encodeURIComponent(browserUrl)
-        )}`
-
-    browserGame.loadURL(url)
-    setTimeout(() => browserGame.focus(), 200)
-    browserGame.on('close', () => {
-      res(true)
-    })
-  })
-}
-
 export async function launch(
   appName: string,
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
