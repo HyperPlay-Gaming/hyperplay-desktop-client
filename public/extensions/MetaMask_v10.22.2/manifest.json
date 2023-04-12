@@ -78,7 +78,6 @@
     "https://chainid.network/chains.json",
     "https://lattice.gridplus.io/*",
     "activeTab",
-    "webRequest",
     "*://*.eth/",
     "notifications"
   ],
