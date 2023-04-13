@@ -372,7 +372,7 @@ if (!gotTheLock) {
       }
 
       //update metadata for all hp store games in library on launch
-      HyperPlayLibraryManager.updateAllLibraryReleaseData()
+      HyperPlayLibraryManager.refresh()
     })
 
     await i18next.use(Backend).init({
@@ -455,8 +455,21 @@ if (!gotTheLock) {
 
     const { startInTray } = GlobalConfig.get().getSettings()
     const headless = isCLINoGui || startInTray
+    logInfo(
+      `App is starting in headless mode = ${headless} isCLINoGui = ${isCLINoGui} startInTray = ${startInTray}`,
+      LogPrefix.Backend
+    )
     if (!headless) {
       ipcMain.once('loadingScreenReady', () => mainWindow.show())
+      setTimeout(() => {
+        if (!mainWindow.isVisible()) {
+          logInfo(
+            'Frontend did not initialize after 10 seconds! Showing main window now',
+            LogPrefix.Backend
+          )
+          mainWindow.show()
+        }
+      }, 10000)
     }
 
     // set initial zoom level after a moment, if set in sync the value stays as 1

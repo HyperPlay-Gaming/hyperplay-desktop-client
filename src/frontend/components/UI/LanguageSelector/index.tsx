@@ -125,8 +125,6 @@ export default function LanguageSelector({
     const flag = languageFlags[lang]
     const label = languageLabels[lang]
 
-    console.log(flagPossition, label)
-
     return (
       <option key={lang} value={lang}>
         {flagPossition === FlagPosition.PREPEND ? (
