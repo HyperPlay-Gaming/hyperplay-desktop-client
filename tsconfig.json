@@ -26,11 +26,11 @@
     "baseUrl": "./src/",
     "types": [
       "vite-plugin-svgr/client",
-      "@types/jest",
-      "chrome",
-      "vite/client"
+      "vite/client",
+      "@types/chrome",
+      "@types/jest"
     ],
-    "typeRoots": ["./node-modules/@types", "src/common/typedefs"],
+    "typeRoots": ["./node_modules", "src/common/typedefs"],
     "strictPropertyInitialization": true
   },
   "include": ["src"],

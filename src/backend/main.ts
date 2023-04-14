@@ -140,7 +140,6 @@ import { addRecentGame } from './recent_games/recent_games'
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import { getDefaultSavePath } from './save_sync'
 import si from 'systeminformation'
-import { initExtensionIpcHandlerWindow } from './hyperplay-extension-helper/ipcHandlers'
 import { initTrayIcon } from './tray_icon/tray_icon'
 import {
   createMainWindow,
@@ -176,7 +175,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
   mainWindow = createMainWindow()
 
   ExtensionHelper.initExtensionProvider(mainWindow)
-  initExtensionIpcHandlerWindow(mainWindow)
 
   OverlayApp.start()
 
