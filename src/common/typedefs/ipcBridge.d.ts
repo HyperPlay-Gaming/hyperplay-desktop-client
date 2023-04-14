@@ -153,7 +153,7 @@ interface HyperPlayAsyncIPCFunctions {
   chromeTabsCreate: (
     options: chrome.tabs.CreateProperties
   ) => Promise<chrome.tabs.Tab>
-  chromeTabsGet: (tabId: number) => Promise<chrome.tabs.Tab>
+  chromeTabsGet: (tabId: number) => Promise<chrome.tabs.Tab | null>
   chromeTabsQuery: (
     queryInfo: chrome.tabs.QueryInfo
   ) => Promise<chrome.tabs.Tab[]>
