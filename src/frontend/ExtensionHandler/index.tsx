@@ -11,6 +11,7 @@ const ExtensionHandler = function () {
   ) {
     try {
       console.log('requesting from mm browser ext = ', JSON.stringify(args))
+      await waitForConnection()
       const value = await window.ethereum.request(args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
@@ -25,6 +26,7 @@ const ExtensionHandler = function () {
 
   async function handleSend(event: Event, id: number, args: unknown[]) {
     try {
+      await waitForConnection()
       const value = await window.ethereum.send(...args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
@@ -35,6 +37,7 @@ const ExtensionHandler = function () {
 
   async function handleSendAsync(event: Event, id: number, args: unknown[]) {
     try {
+      await waitForConnection()
       const value = await window.ethereum.sendAsync(...args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
@@ -115,3 +118,15 @@ const ExtensionHandler = function () {
 }
 
 export default ExtensionHandler
+
+async function waitForConnection(): Promise<void> {
+  const isConnected = window.ethereum.isConnected()
+
+  if (isConnected) {
+    return
+  }
+
+  return new Promise((resolve) => {
+    window.ethereum.on('connect', resolve)
+  })
+}

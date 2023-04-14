@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.0.10",
+  "version": "0.1.0",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",

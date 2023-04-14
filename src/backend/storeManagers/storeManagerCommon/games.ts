@@ -20,7 +20,7 @@ import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 import find from 'find-process'
-import { OverlayApp } from 'backend/overlay/overlay'
+import * as OverlayApp from 'backend/overlay/overlay'
 const buildDir = resolve(__dirname, '../../build')
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -34,12 +34,40 @@ export function logFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
 }
 
+const openRestrictedBrowserGameWindow = async (url: string) => {
+  const restrictedBrowserWindow = new BrowserWindow({
+    icon: icon,
+    webPreferences: {
+      webviewTag: true,
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: true
+    }
+  })
+  restrictedBrowserWindow.loadURL(url)
+}
+
+function getDomainNameFromHostName(url: URL) {
+  const domainNameParts = url.hostname.split('.')
+  if (domainNameParts.length < 3) return url.hostname
+  return domainNameParts[1] + '.' + domainNameParts[2]
+}
+
+function domainsAreEqual(url: URL, otherUrl: URL) {
+  if (url.hostname === otherUrl.hostname) return true
+  const urlDomain = getDomainNameFromHostName(url)
+  const otherUrlDomain = getDomainNameFromHostName(otherUrl)
+  if (urlDomain === otherUrlDomain) return true
+  return false
+}
+
 const openNewBrowserGameWindow = async (
   browserUrl: string
 ): Promise<boolean> => {
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
       icon: icon,
+      fullscreen: true,
       webPreferences: {
         webviewTag: true,
         contextIsolation: true,
@@ -57,10 +85,39 @@ const openNewBrowserGameWindow = async (
             encodeURIComponent(browserUrl)
         )}`
 
+    const urlParent = new URL(browserUrl)
+    const openNewBroswerGameWindowListener = (
+      ev: Electron.Event,
+      contents: Electron.WebContents
+    ) => {
+      // Check for a webview
+      if (contents.getType() === 'webview') {
+        contents.setWindowOpenHandler(({ url }) => {
+          const urlToOpen = new URL(url)
+          const protocol = urlToOpen.protocol
+
+          if (
+            ['https:', 'http:'].includes(protocol) &&
+            domainsAreEqual(urlToOpen, urlParent)
+          ) {
+            openNewBrowserGameWindow(url)
+            return { action: 'deny' }
+          }
+          openRestrictedBrowserGameWindow(url)
+          return { action: 'deny' }
+        })
+      }
+    }
+    app.on('web-contents-created', openNewBroswerGameWindowListener)
+
     browserGame.loadURL(url)
     setTimeout(() => browserGame.focus(), 200)
     browserGame.on('close', () => {
       res(true)
+      app.removeListener(
+        'web-contents-created',
+        openNewBroswerGameWindowListener
+      )
     })
   })
 }

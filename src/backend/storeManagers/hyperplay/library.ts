@@ -213,29 +213,6 @@ export function getGameInfo(
   return undefined
 }
 
-export async function updateAllLibraryReleaseData() {
-  const allListingsResponse = await axios.get(
-    'https://developers.hyperplay.xyz/api/listings'
-  )
-  interface listingMapType {
-    [key: string]: HyperPlayRelease
-  }
-  const listingMap: listingMapType = {}
-  const allListingsRemote = allListingsResponse.data as HyperPlayRelease[]
-
-  allListingsRemote.forEach((element) => {
-    listingMap[element._id] = element
-  })
-
-  const updateableGames: string[] = []
-  const currentHpLibrary = hpLibraryStore.get('games', [])
-  currentHpLibrary.map((localReleaseData, index) => {
-    const remoteReleaseData = listingMap[localReleaseData.app_name]
-    //copy remote data to local release data in library
-    throw 'ERROR updateAllLibraryReleaseData NOT IMPLEMENTED!'
-  })
-}
-
 /* returns array of app names (i.e. _id's) for game releases that are out of date
  * a game's app name is only returned if the game is installed
  * since library release data is updated on each app launch
