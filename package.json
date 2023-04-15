@@ -184,7 +184,7 @@
     "i18next-http-backend": "^1.4.0",
     "ini": "^3.0.0",
     "jsdom": "^20.0.0",
-    "mobx": "^6.7.0",
+    "mobx": "^6.9.0",
     "mobx-react-lite": "^3.4.0",
     "plist": "^3.0.5",
     "qrcode": "^1.5.1",

@@ -3,7 +3,6 @@ import ExtensionManagerStyles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
 import extensionStore from 'frontend/store/ExtensionStore'
 import classNames from 'classnames'
-import { WebviewType } from 'common/types'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -18,18 +17,6 @@ declare global {
 
 const ExtensionManager = function () {
   const rootRef = useRef<HTMLDivElement>(null)
-  const popupRef = useRef<WebviewType>(null)
-  const notificationRef = useRef<WebviewType>(null)
-
-  useEffect(() => {
-    extensionStore.isPopupOpen &&
-      !extensionStore.isNotificationOpen &&
-      popupRef.current?.reload()
-
-    extensionStore.isPopupOpen &&
-      extensionStore.isNotificationOpen &&
-      notificationRef.current?.reload()
-  }, [extensionStore.isPopupOpen, extensionStore.isNotificationOpen])
 
   useEffect(() => {
     const handleOutsideClick = (e: MouseEvent) => {
@@ -58,26 +45,28 @@ const ExtensionManager = function () {
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={ExtensionManagerStyles.mmContainer} ref={rootRef}>
-      <webview
-        ref={popupRef}
-        nodeintegrationinsubframes="true"
-        webpreferences="contextIsolation=true, nodeIntegration=true"
-        src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
-        className={classNames(ExtensionManagerStyles.mmWindow, {
-          [ExtensionManagerStyles.open]:
-            extensionStore.isPopupOpen && !extensionStore.isNotificationOpen
-        })}
-      ></webview>
-      <webview
-        ref={notificationRef}
-        nodeintegrationinsubframes="true"
-        webpreferences="contextIsolation=true, nodeIntegration=true"
-        src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
-        className={classNames(ExtensionManagerStyles.mmWindow, {
-          [ExtensionManagerStyles.open]:
-            extensionStore.isPopupOpen && extensionStore.isNotificationOpen
-        })}
-      ></webview>
+      {extensionStore.isPopupOpen ? (
+        <webview
+          nodeintegrationinsubframes="true"
+          webpreferences="contextIsolation=true, nodeIntegration=true"
+          src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
+          className={classNames(ExtensionManagerStyles.mmWindow, {
+            [ExtensionManagerStyles.open]:
+              extensionStore.isPopupOpen && !extensionStore.isNotificationOpen
+          })}
+        ></webview>
+      ) : null}
+      {extensionStore.isNotificationOpen ? (
+        <webview
+          nodeintegrationinsubframes="true"
+          webpreferences="contextIsolation=true, nodeIntegration=true"
+          src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
+          className={classNames(ExtensionManagerStyles.mmWindow, {
+            [ExtensionManagerStyles.open]:
+              extensionStore.isPopupOpen && extensionStore.isNotificationOpen
+          })}
+        ></webview>
+      ) : null}
     </div>
   )
 }
