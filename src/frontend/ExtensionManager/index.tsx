@@ -45,7 +45,7 @@ const ExtensionManager = function () {
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={ExtensionManagerStyles.mmContainer} ref={rootRef}>
-      {extensionStore.isPopupOpen ? (
+      {extensionStore.isPopupOpen && !extensionStore.isNotificationOpen ? (
         <webview
           nodeintegrationinsubframes="true"
           webpreferences="contextIsolation=true, nodeIntegration=true"
@@ -56,7 +56,7 @@ const ExtensionManager = function () {
           })}
         ></webview>
       ) : null}
-      {extensionStore.isNotificationOpen ? (
+      {extensionStore.isPopupOpen && extensionStore.isNotificationOpen ? (
         <webview
           nodeintegrationinsubframes="true"
           webpreferences="contextIsolation=true, nodeIntegration=true"

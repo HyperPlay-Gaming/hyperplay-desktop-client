@@ -129,7 +129,6 @@ interface RequestArguments {
 }
 
 interface HyperPlayAsyncIPCFunctions {
-  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<boolean>
   //chrome.windows
   chromeWindowsCreate: (
     options: chrome.windows.CreateData
