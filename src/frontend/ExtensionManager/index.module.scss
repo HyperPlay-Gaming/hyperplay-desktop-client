@@ -1,6 +1,4 @@
 .mmContainer {
-  // @include proportions;
-
   position: absolute;
   right: 550px;
   display: flex;
@@ -14,17 +12,8 @@
   height: 600px;
   overflow: hidden;
   border-radius: 0px 0px 16px 16px;
+  background: #24272a;
   position: absolute;
   display: flex;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
-}
-
-.open {
-  pointer-events: auto;
-  opacity: 1;
-  transform: translateY(0);
 }

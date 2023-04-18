@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react'
 import ExtensionManagerStyles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
 import extensionStore from 'frontend/store/ExtensionStore'
-import classNames from 'classnames'
+import { motion, AnimatePresence } from 'framer-motion'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -13,6 +13,13 @@ declare global {
       nodeintegrationinsubframes?: string
     }
   }
+}
+
+const animation = {
+  initial: { opacity: 0, transform: 'translateY(-20px)' },
+  animate: { opacity: 1, transform: 'translateY(0px)' },
+  exit: { opacity: 0, transform: 'translateY(-20px)' },
+  transition: { duration: 0.2 }
 }
 
 const ExtensionManager = function () {
@@ -45,28 +52,28 @@ const ExtensionManager = function () {
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={ExtensionManagerStyles.mmContainer} ref={rootRef}>
-      {extensionStore.isPopupOpen && !extensionStore.isNotificationOpen ? (
-        <webview
-          nodeintegrationinsubframes="true"
-          webpreferences="contextIsolation=true, nodeIntegration=true"
-          src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
-          className={classNames(ExtensionManagerStyles.mmWindow, {
-            [ExtensionManagerStyles.open]:
-              extensionStore.isPopupOpen && !extensionStore.isNotificationOpen
-          })}
-        ></webview>
-      ) : null}
-      {extensionStore.isPopupOpen && extensionStore.isNotificationOpen ? (
-        <webview
-          nodeintegrationinsubframes="true"
-          webpreferences="contextIsolation=true, nodeIntegration=true"
-          src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
-          className={classNames(ExtensionManagerStyles.mmWindow, {
-            [ExtensionManagerStyles.open]:
-              extensionStore.isPopupOpen && extensionStore.isNotificationOpen
-          })}
-        ></webview>
-      ) : null}
+      <AnimatePresence>
+        {extensionStore.isPopupOpen && !extensionStore.isNotificationOpen ? (
+          <motion.div {...animation}>
+            <webview
+              nodeintegrationinsubframes="true"
+              webpreferences="contextIsolation=true, nodeIntegration=true"
+              src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
+              className={ExtensionManagerStyles.mmWindow}
+            ></webview>
+          </motion.div>
+        ) : null}
+        {extensionStore.isPopupOpen && extensionStore.isNotificationOpen ? (
+          <motion.div {...animation}>
+            <webview
+              nodeintegrationinsubframes="true"
+              webpreferences="contextIsolation=true, nodeIntegration=true"
+              src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
+              className={ExtensionManagerStyles.mmWindow}
+            ></webview>
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
     </div>
   )
 }
