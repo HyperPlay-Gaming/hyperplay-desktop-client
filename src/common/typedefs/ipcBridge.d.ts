@@ -129,16 +129,39 @@ interface RequestArguments {
 }
 
 interface HyperPlayAsyncIPCFunctions {
-  showPopup: (hideIfShown?: boolean, showView?: boolean) => Promise<boolean>
+  //chrome.windows
   chromeWindowsCreate: (
     options: chrome.windows.CreateData
   ) => Promise<chrome.windows.Window>
-  chromeWindowsGetCurrent: () => Promise<chrome.windows.Window>
+  chromeWindowsGetCurrent: (
+    queryOptions?: chrome.windows.QueryOptions,
+    callback?: (window: chrome.windows.Window) => void
+  ) => Promise<chrome.windows.Window>
   chromeWindowsRemove: (windowId: number) => Promise<void>
-  chromeWindowsGetAll: () => Promise<chrome.windows.Window[]>
+  chromeWindowsGetAll: (
+    queryOptions?: chrome.windows.QueryOptions,
+    callback?: (window: chrome.windows.Window[]) => void
+  ) => Promise<chrome.windows.Window[]>
+  chromeWindowsUpdate: (
+    windowId: number,
+    updateInfo: chrome.windows.UpdateInfo,
+    callback?: (window: chrome.windows.Window) => void
+  ) => Promise<chrome.windows.Window>
+  chromeWindowsGet: (windowId: number) => Promise<chrome.windows.Window>
+  //chrome.tabs
   chromeTabsCreate: (
     options: chrome.tabs.CreateProperties
   ) => Promise<chrome.tabs.Tab>
+  chromeTabsGet: (tabId: number) => Promise<chrome.tabs.Tab | null>
+  chromeTabsQuery: (
+    queryInfo: chrome.tabs.QueryInfo
+  ) => Promise<chrome.tabs.Tab[]>
+  chromeTabsUpdate: (
+    tabId: number,
+    updateProperties: chrome.tabs.UpdateProperties
+  ) => Promise<chrome.tabs.Tab>
+  chromeTabsRemove: (tabIds: number | number[]) => Promise<void>
+  //
   importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
   getMetaMaskImportOptions: (
     configDbPath?: string

@@ -360,10 +360,6 @@ function createWindow(
   window.on('closed', () => {
     windows.delete(name)
   })
-  window.webContents.on('new-window', (e, url) => {
-    e.preventDefault()
-    shell.openExternal(url)
-  })
 
   if (DEBUG) {
     window.webContents.on(
