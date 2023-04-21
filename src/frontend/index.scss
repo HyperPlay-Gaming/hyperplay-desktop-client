@@ -1,8 +1,6 @@
-@use './styles/typography';
 @use './styles/colors';
 @use './styles/buttons';
 :root {
-  @include typography.typeSystem;
   @include colors.colorSystem;
 
   overflow-y: overlay;
