@@ -27,6 +27,7 @@ import { observer } from 'mobx-react-lite'
 import TransactionNotification from './screens/TransactionNotification'
 import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
 import SettingsModal from './screens/Settings/components/SettingsModal'
+import DownloadToastManager from './components/UI/DownloadToastManager'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -36,6 +37,7 @@ function App() {
       <HashRouter>
         <OfflineMessage />
         <Sidebar />
+        <DownloadToastManager />
         <main className="content">
           <ExtensionHandler />
           <ExtensionManager />
