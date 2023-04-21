@@ -73,7 +73,9 @@ export default function DownloadToastManager() {
           style={{
             backgroundColor: 'var(--color-neutral-700)',
             padding: 'var(--space-xl)',
-            border: '1px solid var(--color-stroke-01)'
+            border: '1px solid var(--color-stroke-01)',
+            borderRadius: '100%',
+            zIndex: 1000
           }}
           onClick={() => setShowDownloadToast(!showDownloadToast)}
         >

@@ -37,7 +37,6 @@ function App() {
       <HashRouter>
         <OfflineMessage />
         <Sidebar />
-        <DownloadToastManager />
         <main className="content">
           <ExtensionHandler />
           <ExtensionManager />
@@ -95,6 +94,7 @@ function App() {
           }}
         />
       )}
+      <DownloadToastManager />
     </div>
   )
 }
