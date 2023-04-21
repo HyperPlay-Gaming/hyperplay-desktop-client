@@ -1048,13 +1048,10 @@
     node-addon-api "^4.1.0"
     node-gyp "^9.3.1"
 
-"@hyperplay/ui@file:../hyperplay-ui":
-  version "0.1.0-alpha.20"
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" "^6.4.0"
-    "@fortawesome/free-regular-svg-icons" "^6.4.0"
-    "@fortawesome/free-solid-svg-icons" "^6.4.0"
-    "@fortawesome/react-fontawesome" "^0.2.0"
+"@hyperplay/ui@0.1.0-alpha.21":
+  version "0.1.0-alpha.21"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.0-alpha.21.tgz#149c5006489fed4fb2aab991ac40fa8eb4979ff5"
+  integrity sha512-2F3/ZeBc7lE9dJcsS6WLLnmgVhSQAO4cyqBpvO5dzawgUxZLoTwplZvTYW4QdPUHjYX1QdWfiE26H9/RPKmHuQ==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
