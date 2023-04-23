@@ -16,7 +16,7 @@
   overflow: auto;
   border: solid 1px var(--modal-border);
   border-radius: 10px;
-  background: var(--modal-background);
+  background: var(--color-neutral-800);
   color: var(--text-default);
   opacity: 0;
   transform: translateY(50px);
@@ -37,7 +37,6 @@
 .Dialog__headerTitle {
   flex: 100% 1 1;
   padding: var(--dialog-margin-vertical) 16px 0 var(--dialog-margin-horizontal);
-  font-size: var(--text-xl);
   margin: var(--space-lg) 0 0;
 }
 

@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from 'react'
 import { DownloadToast, Images, CircularButton } from '@hyperplay/ui'
 import { DMQueueElement, GameStatus, InstallProgress } from 'common/types'
 import { DMQueue } from 'frontend/types'
-import { handleStopInstallation } from 'frontend/helpers/library'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
 import DownloadToastManagerStyles from './index.module.scss'
 import { launch } from 'frontend/helpers'
+import StopInstallationModal from '../StopInstallationModal'
 
 const nullProgress: InstallProgress = {
   bytes: '0',
@@ -21,6 +21,7 @@ export default function DownloadToastManager() {
   const { showDialogModal } = useContext(ContextProvider)
   const { t } = useTranslation('gamepage')
   const [showPlay, setShowPlay] = useState(false)
+  const [showStopInstallModal, setShowStopInstallModal] = useState(false)
 
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
 
@@ -179,16 +180,7 @@ export default function DownloadToastManager() {
           downloadedInBytes={downloadedBytes}
           downloadSizeInBytes={downloadSizeInBytes}
           estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
-          onCancelClick={() => {
-            handleStopInstallation(
-              appName,
-              [installPath, folder_name],
-              t,
-              progress,
-              runner,
-              showDialogModal
-            )
-          }}
+          onCancelClick={() => setShowStopInstallModal(true)}
           onPauseClick={() => console.log('pause clicked')}
           onStartClick={() => console.log('start clicked')}
           onCloseClick={() => setShowDownloadToast(false)}
@@ -206,6 +198,16 @@ export default function DownloadToastManager() {
       ) : (
         downloadIcon()
       )}
+      {showStopInstallModal ? (
+        <StopInstallationModal
+          appName={appName}
+          installPath={installPath}
+          folderName={folder_name}
+          progress={progress}
+          runner={runner}
+          onClose={() => setShowStopInstallModal(false)}
+        />
+      ) : null}
     </div>
   )
 }

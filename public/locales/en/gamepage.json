@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Keep Installing",
             "message": "Do you wish to KEEP downloaded files?",
-            "title": "Stop Installation"
+            "title": "Do you want to cancel the download?"
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",

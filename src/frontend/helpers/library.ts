@@ -130,6 +130,14 @@ async function handleStopInstallation(
     buttons: [
       { text: t('gamepage:box.stopInstall.keepInstalling') },
       {
+        text: t('box.no'),
+        onClick: async () => {
+          await sendKill(appName, runner)
+          storage.removeItem(appName)
+          window.api.removeFolder([path, folderName])
+        }
+      },
+      {
         text: t('box.yes'),
         onClick: () => {
           storage.setItem(
@@ -137,14 +145,6 @@ async function handleStopInstallation(
             JSON.stringify({ ...progress, folder: path })
           )
           sendKill(appName, runner)
-        }
-      },
-      {
-        text: t('box.no'),
-        onClick: async () => {
-          await sendKill(appName, runner)
-          storage.removeItem(appName)
-          window.api.removeFolder([path, folderName])
         }
       }
     ]
