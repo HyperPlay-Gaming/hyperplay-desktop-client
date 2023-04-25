@@ -22,7 +22,7 @@
 .Accessibility .Field label,
 .InstallModal__dialog .Field label {
   cursor: default;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-xs);
   font: var(--font-secondary-regular);
   font-size: var(--text-md);
   line-height: var(--space-lg);

@@ -109,7 +109,7 @@ export default React.memo(function Accessibility() {
         </h1>
 
         <span className="rangeWrapper Field">
-          <label className={classNames({ isRTL: isRTL })}>
+          <label className={classNames({ isRTL: isRTL }, 'zoomRangeLabel')}>
             {t('accessibility.zoom', 'Zoom')} ({zoomPercent}%)
           </label>
           <input
