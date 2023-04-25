@@ -152,6 +152,7 @@ export interface DownloadToastInteraction {
   properties: {
     buttonClicked: string
   }
+  sensitiveProperties?: never
 }
 
 export type PossibleMetricPayloads =
