@@ -146,7 +146,8 @@ const DownloadManagerItem = ({ element, current }: Props) => {
   }
 
   const { title } = currentApp
-  const cover = art_cover || art_square
+  let cover = art_cover || art_square
+  if (!cover.includes('http')) cover = art_square
 
   const translatedTypes = {
     install: t2('download-manager.install-type.install', 'Install'),
