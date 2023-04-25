@@ -5,7 +5,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { DMQueueElement, GameInfo } from 'common/types'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
-import { handleStopInstallation } from 'frontend/helpers/library'
 import { getGameInfo, getStoreName } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import { hasProgress } from 'frontend/hooks/hasProgress'
@@ -13,6 +12,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { useNavigate } from 'react-router-dom'
 import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
+import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 
 type Props = {
   element?: DMQueueElement
@@ -31,10 +31,10 @@ function convertToTime(time: number) {
 }
 
 const DownloadManagerItem = ({ element, current }: Props) => {
-  const { epic, gog, showDialogModal, hyperPlayLibrary } =
-    useContext(ContextProvider)
+  const { epic, gog, hyperPlayLibrary } = useContext(ContextProvider)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
+  const [showStopInstallModal, setShowStopInstallModal] = useState(false)
 
   const navigate = useNavigate()
 
@@ -70,23 +70,6 @@ const DownloadManagerItem = ({ element, current }: Props) => {
   const finished = status === 'done'
   const canceled = status === 'error' || (status === 'abort' && !current)
 
-  const stopInstallation = async () => {
-    if (!gameInfo) {
-      return
-    }
-    const folder_name = gameInfo.folder_name
-    if (!folder_name) return
-
-    return handleStopInstallation(
-      appName,
-      [path, folder_name],
-      t,
-      progress,
-      runner,
-      showDialogModal
-    )
-  }
-
   const goToGamePage = () => {
     return navigate(`/gamepage/${runner}/${appName}`, {
       state: { fromDM: true, gameInfo: gameInfo }
@@ -100,7 +83,10 @@ const DownloadManagerItem = ({ element, current }: Props) => {
       return goToGamePage()
     }
 
-    current ? stopInstallation() : window.api.removeFromDMQueue(appName)
+    // gameInfo must be defined in order to get folder name for stop installation modal
+    current && gameInfo
+      ? setShowStopInstallModal(true)
+      : window.api.removeFromDMQueue(appName)
   }
 
   const mainActionIcon = () => {
@@ -165,31 +151,43 @@ const DownloadManagerItem = ({ element, current }: Props) => {
   const { hour, fullDate } = getTime()
 
   return (
-    <div className="downloadManagerListItem">
-      <span
-        role="button"
-        onClick={() => goToGamePage()}
-        className="downloadManagerTitleList"
-        style={{ color: getStatusColor() }}
-      >
-        {cover && <CachedImage src={cover} alt={title} />}
-        <span className="titleSize">
-          {title}
-          <span title={path}>
-            {size ?? ''}
-            {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
+    <>
+      {showStopInstallModal ? (
+        <StopInstallationModal
+          onClose={() => setShowStopInstallModal(false)}
+          installPath={path}
+          folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
+          appName={appName}
+          runner={runner}
+          progress={progress}
+        />
+      ) : null}
+      <div className="downloadManagerListItem">
+        <span
+          role="button"
+          onClick={() => goToGamePage()}
+          className="downloadManagerTitleList"
+          style={{ color: getStatusColor() }}
+        >
+          {cover && <CachedImage src={cover} alt={title} />}
+          <span className="titleSize">
+            {title}
+            <span title={path}>
+              {size ?? ''}
+              {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
+            </span>
           </span>
         </span>
-      </span>
-      <span title={fullDate}>{hour}</span>
-      <span>{translatedTypes[type]}</span>
-      <span>{getStoreName(runner, t2('Other'))}</span>
-      <span className="icons">
-        <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
-          {mainActionIcon()}
-        </SvgButton>
-      </span>
-    </div>
+        <span title={fullDate}>{hour}</span>
+        <span>{translatedTypes[type]}</span>
+        <span>{getStoreName(runner, t2('Other'))}</span>
+        <span className="icons">
+          <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
+            {mainActionIcon()}
+          </SvgButton>
+        </span>
+      </div>
+    </>
   )
 }
 
