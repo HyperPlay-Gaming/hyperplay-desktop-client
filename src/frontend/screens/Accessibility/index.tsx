@@ -185,7 +185,6 @@ export default React.memo(function Accessibility() {
           {options}
         </SelectField>
 
-        <ThemeSelector />
         <span className="setting">
           <label className={classNames('toggleWrapper', { isRTL: isRTL })}>
             <ToggleSwitch

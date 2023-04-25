@@ -40,9 +40,14 @@ const DownloadManagerItem = ({ element, current }: Props) => {
 
   if (!element) {
     return (
-      <h5 style={{ paddingTop: 'var(--space-xs' }}>
+      <h6
+        style={{
+          paddingTop: 'var(--space-xs)',
+          paddingLeft: 'var(--space-xs)'
+        }}
+      >
         {t2('queue.label.empty', 'Nothing to download')}
-      </h5>
+      </h6>
     )
   }
 
