@@ -27,6 +27,7 @@
             "exe": "Select Executable"
         },
         "stopInstall": {
+            "keepFilesMessage": "Check here if you want to keep the download files after canceling.",
             "keepInstalling": "Keep Installing",
             "message": "Do you wish to KEEP downloaded files?",
             "title": "Do you want to cancel the download?"
@@ -43,7 +44,8 @@
             "title": "Game Needs Update"
         },
         "wineprefix": "Select WinePrefix Folder",
-        "yes": "YES"
+        "yes": "YES",
+        "yesCancel": "Yes, cancel"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",

@@ -35,7 +35,12 @@ export default function StopInstallationModal(props: StopInstallProps) {
           defaultChecked={true}
           type="secondary"
         >
-          <div className="body">{t('gamepage:box.stopInstall.message')}</div>
+          <div className="body">
+            {t(
+              'gamepage:box.stopInstall.keepFilesMessage',
+              'Check here if you want to keep the download files after canceling.'
+            )}
+          </div>
         </Checkbox>
       </DialogContent>
       <DialogFooter>
@@ -70,7 +75,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
             }
           }}
         >
-          {t('box.yes')}
+          {t('box.yesCancel', 'Yes, cancel')}
         </Button>
       </DialogFooter>
     </Dialog>
