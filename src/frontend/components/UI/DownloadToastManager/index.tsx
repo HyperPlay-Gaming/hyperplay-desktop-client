@@ -116,7 +116,13 @@ export default function DownloadToastManager() {
             borderRadius: '100%',
             zIndex: 1000
           }}
-          onClick={() => setShowDownloadToast(!showDownloadToast)}
+          onClick={() => {
+            setShowDownloadToast(!showDownloadToast)
+            window.api.trackEvent({
+              event: 'DownloadToastInteraction',
+              properties: { buttonClicked: 'circularButton' }
+            })
+          }}
         >
           <Images.DownloadIcon fill="var(--color-success-400)" />
         </CircularButton>
@@ -180,11 +186,23 @@ export default function DownloadToastManager() {
           downloadedInBytes={downloadedBytes}
           downloadSizeInBytes={downloadSizeInBytes}
           estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
-          onCancelClick={() => setShowStopInstallModal(true)}
+          onCancelClick={() => {
+            setShowStopInstallModal(true)
+            window.api.trackEvent({
+              event: 'DownloadToastInteraction',
+              properties: { buttonClicked: 'cancel' }
+            })
+          }}
           onPauseClick={() => console.log('pause clicked')}
           onStartClick={() => console.log('start clicked')}
-          onCloseClick={() => setShowDownloadToast(false)}
-          onPlayClick={async () =>
+          onCloseClick={() => {
+            setShowDownloadToast(false)
+            window.api.trackEvent({
+              event: 'DownloadToastInteraction',
+              properties: { buttonClicked: 'close' }
+            })
+          }}
+          onPlayClick={async () => {
             launch({
               appName,
               t,
@@ -192,7 +210,11 @@ export default function DownloadToastManager() {
               hasUpdate: false,
               showDialogModal
             })
-          }
+            window.api.trackEvent({
+              event: 'DownloadToastInteraction',
+              properties: { buttonClicked: 'play' }
+            })
+          }}
           status={showPlay ? 'done' : 'showOnlyCancel'}
         />
       ) : (

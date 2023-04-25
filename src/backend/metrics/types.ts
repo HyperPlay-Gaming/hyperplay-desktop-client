@@ -147,6 +147,13 @@ export interface GameUninstallFailed {
   sensitiveProperties?: never
 }
 
+export interface DownloadToastInteraction {
+  event: 'DownloadToastInteraction'
+  properties: {
+    buttonClicked: string
+  }
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -166,5 +173,6 @@ export type PossibleMetricPayloads =
   | GameUninstallStarted
   | GameUninstallSuccess
   | GameUninstallFailed
+  | DownloadToastInteraction
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']
