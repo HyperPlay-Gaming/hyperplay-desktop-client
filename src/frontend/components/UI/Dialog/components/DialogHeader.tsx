@@ -8,7 +8,7 @@ interface DialogHeaderProps {
 export const DialogHeader: React.FC<DialogHeaderProps> = ({ children }) => {
   return (
     <div className="Dialog__header">
-      <h5 className="Dialog__headerTitle">{children}</h5>
+      <div className="header Dialog__headerTitle">{children}</div>
     </div>
   )
 }

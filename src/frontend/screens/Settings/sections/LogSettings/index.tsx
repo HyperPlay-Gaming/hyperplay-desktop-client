@@ -106,7 +106,9 @@ export default function LogSettings() {
 
   return (
     <>
-      <h3>{t('setting.log.instructions_title', 'How to report a problem?')}</h3>
+      <div className="title">
+        {t('setting.log.instructions_title', 'How to report a problem?')}
+      </div>
       <p className="report-problem-instructions">
         {t(
           'setting.log.instructions-part-01',

@@ -75,7 +75,7 @@
 }
 
 .Dialog__content {
-  padding: var(--dialog-gap) 0;
+  padding: var(--space-sm) 0;
 }
 
 .Dialog__footer {
