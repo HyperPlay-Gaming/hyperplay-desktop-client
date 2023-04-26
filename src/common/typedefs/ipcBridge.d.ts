@@ -1,4 +1,4 @@
-import { HyperPlayInstallInfo } from './../types'
+import { HyperPlayInstallInfo, DownloadManagerState } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -116,6 +116,9 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   changeTrayColor: () => void
   setSetting: (args: { appName: string; key: string; value: unknown }) => void
   optInStatusChanged: (optInStatus: MetricsOptInStatus) => void
+  resumeCurrentDownload: () => void
+  pauseCurrentDownload: () => void
+  cancelDownload: (removeDownloaded: boolean) => void
 }
 
 interface RequestArguments {
@@ -198,6 +201,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<{ stdout: string; stderr: string }>
   checkGameUpdates: () => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
+  updateAll: () => Promise<({ status: 'done' | 'error' | 'abort' } | null)[]>
   getMaxCpus: () => number
   getAppVersion: () => string
   getLegendaryVersion: () => Promise<string>
@@ -311,6 +315,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   getDMQueueInformation: () => {
     elements: DMQueueElement[]
     finished: DMQueueElement[]
+    state: DownloadManagerState
   }
   'get-connectivity-status': () => {
     status: ConnectivityStatus

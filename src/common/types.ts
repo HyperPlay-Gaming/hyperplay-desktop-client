@@ -554,13 +554,14 @@ export interface Tools {
   runner: Runner
 }
 
+export type DMStatus = 'done' | 'error' | 'abort' | 'paused'
 export interface DMQueueElement {
   type: 'update' | 'install'
   params: InstallParams
   addToQueueTime: number
   startTime: number
   endTime: number
-  status?: 'done' | 'error' | 'abort'
+  status?: DMStatus
 }
 
 type ProtonVerb =
@@ -859,3 +860,5 @@ export type JsonRpcCallback = (
   error: Error | null,
   response?: JsonRpcResponse
 ) => unknown
+
+export type DownloadManagerState = 'idle' | 'running' | 'paused' | 'stopped'
