@@ -1210,6 +1210,28 @@ const debounce = <T extends (...args: number[]) => void>(
   }
 }
 
+function removeFolder(path: string, folderName: string) {
+  if (path === 'default') {
+    const { defaultInstallPath } = GlobalConfig.get().getSettings()
+    const path = defaultInstallPath.replaceAll("'", '')
+    const folderToDelete = `${path}/${folderName}`
+    if (existsSync(folderToDelete)) {
+      return setTimeout(() => {
+        rmSync(folderToDelete, { recursive: true })
+      }, 5000)
+    }
+    return
+  }
+
+  const folderToDelete = `${path}/${folderName}`.replaceAll("'", '')
+  if (existsSync(folderToDelete)) {
+    return setTimeout(() => {
+      rmSync(folderToDelete, { recursive: true })
+    }, 2000)
+  }
+  return
+}
+
 export {
   errorHandler,
   execAsync,
@@ -1240,7 +1262,8 @@ export {
   getWineFromProton,
   getFileSize,
   getLegendaryVersion,
-  getGogdlVersion
+  getGogdlVersion,
+  removeFolder
 }
 
 // Exported only for testing purpose

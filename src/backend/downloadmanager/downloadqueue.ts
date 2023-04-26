@@ -1,161 +1,276 @@
-import { gameManagerMap } from 'backend/storeManagers'
-import { logError, LogPrefix, logWarning } from '../logger/logger'
-import { isEpicServiceOffline } from '../utils'
-import { DMStatus, InstallParams } from 'common/types'
-import i18next from 'i18next'
-import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
-import { isOnline } from '../online_monitor'
+import { gameManagerMap, libraryManagerMap } from 'backend/storeManagers'
+import { TypeCheckedStoreBackend } from './../electron_store'
+import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
+import { getFileSize, removeFolder } from '../utils'
+import { DMQueueElement, DMStatus, DownloadManagerState } from 'common/types'
+import { installQueueElement, updateQueueElement } from './utils'
 import { sendFrontendMessage } from '../main_window'
+import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
+import { notify } from '../dialog/dialog'
+import i18next from 'i18next'
 
-async function installQueueElement(params: InstallParams): Promise<{
-  status: DMStatus
-  error?: string | undefined
-}> {
-  const {
-    appName,
-    path,
-    installDlcs,
-    sdlList = [],
-    runner,
-    installLanguage,
-    platformToInstall
-  } = params
-  const { title } = gameManagerMap[runner].getGameInfo(appName)
+const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
+  cwd: 'store',
+  name: 'download-manager'
+})
 
-  if (!isOnline()) {
-    logWarning(
-      `App offline, skipping install for game '${title}'.`,
-      LogPrefix.Backend
-    )
-    return { status: 'error' }
+/*
+#### Private ####
+*/
+
+let queueState: DownloadManagerState = 'idle'
+let currentElement: DMQueueElement | null = null
+
+function getFirstQueueElement() {
+  const elements = downloadManager.get('queue', [])
+  return elements.at(0) ?? null
+}
+
+function isPaused(): boolean {
+  return queueState === 'paused'
+}
+
+function isIdle(): boolean {
+  return queueState === 'idle' || !currentElement
+}
+
+function isRunning(): boolean {
+  return queueState === 'running'
+}
+
+function addToFinished(element: DMQueueElement, status: DMStatus) {
+  const elements = downloadManager.get('finished', [])
+
+  const elementIndex = elements.findIndex(
+    (el) => el.params.appName === element.params.appName
+  )
+
+  if (elementIndex >= 0) {
+    elements[elementIndex] = { ...element, status: status ?? 'abort' }
+  } else {
+    elements.push({ ...element, status })
   }
 
-  if (runner === 'legendary') {
-    const epicOffline = await isEpicServiceOffline()
-    if (epicOffline) {
-      showDialogBoxModalAuto({
-        title: i18next.t('box.warning.title', 'Warning'),
-        message: i18next.t(
-          'box.warning.epic.install',
-          'Epic Servers are having major outage right now, the game cannot be installed!'
-        ),
-        type: 'ERROR'
-      })
-      return { status: 'error' }
+  downloadManager.set('finished', elements)
+  logInfo(
+    [element.params.appName, 'added to download manager finished.'],
+    LogPrefix.DownloadManager
+  )
+}
+
+/*
+#### Public ####
+*/
+
+async function initQueue() {
+  let element = getFirstQueueElement()
+
+  while (element) {
+    const queuedElements = downloadManager.get('queue', [])
+    element.startTime = Date.now()
+    queuedElements[0] = element
+    downloadManager.set('queue', queuedElements)
+
+    currentElement = element
+
+    queueState = 'running'
+    sendFrontendMessage('changedDMQueueInformation', queuedElements, queueState)
+
+    const { status } =
+      element.type === 'install'
+        ? await installQueueElement(element.params)
+        : await updateQueueElement(element.params)
+    element.endTime = Date.now()
+
+    processNotification(element, status)
+
+    if (!isPaused()) {
+      addToFinished(element, status)
+      removeFromQueue(element.params.appName)
+      element = getFirstQueueElement()
+    } else {
+      element = null
     }
+  }
+
+  queueState = 'idle'
+}
+
+async function addToQueue(element: DMQueueElement) {
+  if (!element) {
+    logError(
+      'Can not add undefined element to queue!',
+      LogPrefix.DownloadManager
+    )
+    return
   }
 
   sendFrontendMessage('gameStatusUpdate', {
-    appName,
-    runner,
-    status: 'installing',
-    folder: path
+    appName: element.params.appName,
+    runner: element.params.runner,
+    folder: element.params.path,
+    status: 'queued'
   })
 
-  notify({
-    title,
-    body: i18next.t('notify.install.startInstall', 'Installation Started')
-  })
+  const elements = downloadManager.get('queue', [])
 
-  const errorMessage = (error: string) => {
-    logError(
-      ['Installation of', params.appName, 'failed with:', error],
-      LogPrefix.DownloadManager
-    )
+  const elementIndex = elements.findIndex(
+    (el) => el.params.appName === element.params.appName
+  )
+
+  if (elementIndex >= 0) {
+    elements[elementIndex] = element
+  } else {
+    const installInfo = await libraryManagerMap[
+      element.params.runner
+    ].getInstallInfo(element.params.appName, element.params.platformToInstall)
+
+    element.params.size = installInfo?.manifest?.download_size
+      ? getFileSize(installInfo?.manifest?.download_size)
+      : '?? MB'
+    elements.push(element)
   }
 
-  try {
-    const { status, error } = await gameManagerMap[runner].install(appName, {
-      path: path.replaceAll("'", ''),
-      installDlcs,
-      sdlList,
-      platformToInstall,
-      installLanguage
-    })
+  downloadManager.set('queue', elements)
+  logInfo(
+    [element.params.gameInfo.title, ' was added to the download queue.'],
+    LogPrefix.DownloadManager
+  )
 
-    if (status === 'error') {
-      errorMessage(error ?? '')
-    }
+  sendFrontendMessage('changedDMQueueInformation', elements, queueState)
 
-    return { status }
-  } catch (error) {
-    errorMessage(`${error}`)
-    return { status: 'error' }
-  } finally {
-    sendFrontendMessage('gameStatusUpdate', {
-      appName,
-      runner,
-      status: 'done'
-    })
+  if (isIdle()) {
+    initQueue()
   }
 }
 
-async function updateQueueElement(params: InstallParams): Promise<{
-  status: DMStatus
-  error?: string | undefined
-}> {
-  const { appName, runner } = params
-  const { title } = gameManagerMap[runner].getGameInfo(appName)
+function removeFromQueue(appName: string) {
+  if (appName && downloadManager.has('queue')) {
+    const elements = downloadManager.get('queue', [])
+    const index = elements.findIndex(
+      (queueElement) => queueElement?.params.appName === appName
+    )
+    if (index !== -1) {
+      elements.splice(index, 1)
+      downloadManager.delete('queue')
+      downloadManager.set('queue', elements)
+    }
 
-  if (!isOnline()) {
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      status: 'done'
+    })
+
+    logInfo(
+      [appName, 'removed from download manager.'],
+      LogPrefix.DownloadManager
+    )
+
+    sendFrontendMessage('changedDMQueueInformation', elements, queueState)
+  }
+}
+
+function getQueueInformation() {
+  const elements = downloadManager.get('queue', [])
+  const finished = downloadManager.get('finished', [])
+
+  return { elements, finished, state: queueState }
+}
+
+function cancelCurrentDownload({ removeDownloaded = false }) {
+  if (currentElement) {
+    if (isRunning()) {
+      stopCurrentDownload()
+    }
+    removeFromQueue(currentElement.params.appName)
+
+    if (removeDownloaded) {
+      const { appName, runner } = currentElement!.params
+      const { folder_name } = gameManagerMap[runner].getGameInfo(appName)
+      if (folder_name) {
+        removeFolder(currentElement.params.path, folder_name)
+      }
+    }
+    currentElement = null
+  }
+}
+
+function pauseCurrentDownload() {
+  if (currentElement) {
+    stopCurrentDownload()
+  }
+  queueState = 'paused'
+  sendFrontendMessage(
+    'changedDMQueueInformation',
+    downloadManager.get('queue', []),
+    queueState
+  )
+}
+
+function resumeCurrentDownload() {
+  initQueue()
+}
+
+function stopCurrentDownload() {
+  const { appName, runner } = currentElement!.params
+  callAbortController(appName)
+  gameManagerMap[runner].stop(appName)
+}
+
+// notify the user based on the status of the element and the status of the queue
+function processNotification(element: DMQueueElement, status: DMStatus) {
+  const action = element.type === 'install' ? 'Installation' : 'Update'
+  const { title } = gameManagerMap[element.params.runner].getGameInfo(
+    element.params.appName
+  )
+
+  if (status === 'abort') {
+    if (isPaused()) {
+      logWarning(
+        [action, 'of', element.params.appName, 'paused!'],
+        LogPrefix.DownloadManager
+      )
+      // i18next.t('notify.update.paused', 'Update Paused')
+      // i18next.t('notify.install.paused', 'Installation Paused')
+      notify({ title, body: i18next.t(`notify.${element.type}.paused`) })
+    } else {
+      logWarning(
+        [action, 'of', element.params.appName, 'aborted!'],
+        LogPrefix.DownloadManager
+      )
+      // i18next.t('notify.update.canceled', 'Update Canceled')
+      // i18next.t('notify.install.canceled', 'Installation Canceled')
+      notify({ title, body: i18next.t(`notify.${element.type}.canceled`) })
+    }
+  } else if (status === 'error') {
     logWarning(
-      `App offline, skipping update for game '${title}'.`,
-      LogPrefix.Backend
+      [action, 'of', element.params.appName, 'failed!'],
+      LogPrefix.DownloadManager
     )
-    return { status: 'error' }
-  }
+    // i18next.t('notify.update.failed', 'Update Failed')
+    // i18next.t('notify.install.failed', 'Installation Failed')
+    notify({ title, body: i18next.t(`notify.${element.type}.failed`) })
+  } else if (status === 'done') {
+    // i18next.t('notify.update.finished', 'Update Finished')
+    // i18next.t('notify.install.finished', 'Installation Finished')
+    notify({
+      title,
+      body: i18next.t(`notify.${element.type}.finished`)
+    })
 
-  if (runner === 'legendary') {
-    const epicOffline = await isEpicServiceOffline()
-    if (epicOffline) {
-      showDialogBoxModalAuto({
-        title: i18next.t('box.warning.title', 'Warning'),
-        message: i18next.t(
-          'box.warning.epic.update',
-          'Epic Servers are having major outage right now, the game cannot be updated!'
-        ),
-        type: 'ERROR'
-      })
-      return { status: 'error' }
-    }
-  }
-
-  sendFrontendMessage('gameStatusUpdate', {
-    appName,
-    runner,
-    status: 'updating'
-  })
-
-  notify({
-    title,
-    body: i18next.t('notify.update.started', 'Update Started')
-  })
-
-  const errorMessage = (error: string) => {
-    logError(
-      ['Update of', params.appName, 'failed with:', error],
+    logInfo(
+      ['Finished', action, 'of', element.params.appName],
       LogPrefix.DownloadManager
     )
   }
-
-  try {
-    const { status } = await gameManagerMap[runner].update(appName)
-
-    if (status === 'error') {
-      errorMessage('')
-    }
-
-    return { status }
-  } catch (error) {
-    errorMessage(`${error}`)
-    return { status: 'error' }
-  } finally {
-    sendFrontendMessage('gameStatusUpdate', {
-      appName,
-      runner,
-      status: 'done'
-    })
-  }
 }
 
-export { installQueueElement, updateQueueElement }
+export {
+  initQueue,
+  addToQueue,
+  removeFromQueue,
+  getQueueInformation,
+  cancelCurrentDownload,
+  pauseCurrentDownload,
+  resumeCurrentDownload
+}

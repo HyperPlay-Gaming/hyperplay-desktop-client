@@ -9,7 +9,6 @@ import {
   LibraryTopSectionOptions,
   DMQueueElement,
   MetricsOptInStatus,
-  SideloadGame,
   DownloadManagerState
 } from 'common/types'
 
