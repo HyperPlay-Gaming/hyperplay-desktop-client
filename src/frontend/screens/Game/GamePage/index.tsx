@@ -392,7 +392,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 </div>
               </div>
               <div className="infoWrapper">
-                <h6 className="developer">{developer}</h6>
+                <div className="developer menu">{developer}</div>
                 <div className="summary">{description}</div>
                 <div className="grid-container">
                   {!is_installed && !isSideloaded && (
