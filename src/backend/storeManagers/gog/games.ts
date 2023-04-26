@@ -721,7 +721,7 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
 
 export async function update(
   appName: string
-): Promise<{ status: 'done' | 'error' }> {
+): Promise<{ status: 'done' | 'error' | 'abort' }> {
   const { installPlatform, gameData, credentials, withDlcs, logPath, workers } =
     await getCommandParameters(appName)
   if (!installPlatform || !credentials) {

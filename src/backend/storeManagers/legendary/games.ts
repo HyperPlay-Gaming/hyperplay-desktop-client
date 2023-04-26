@@ -450,7 +450,7 @@ export function onInstallOrUpdateOutput(
  */
 export async function update(
   appName: string
-): Promise<{ status: 'done' | 'error' }> {
+): Promise<{ status: 'done' | 'error' | 'abort' }> {
   sendFrontendMessage('gameStatusUpdate', {
     appName: appName,
     runner: 'legendary',
