@@ -1,11 +1,11 @@
 .SIDLoginModal {
-  display: grid;
-  place-items: center;
-  width: var(--content-width);
+  position: absolute;
+  top: 0%;
+  left: 0;
+  right: 0;
   height: 100%;
-  position: fixed;
-  top: 0px;
-  z-index: 8;
+  z-index: 6;
+  text-align: center;
 }
 
 .SIDLoginModal {
@@ -13,18 +13,21 @@
 }
 
 .backdrop {
-  display: grid;
-  place-items: center;
-  position: fixed;
-  background: var(--background-darker-80);
-  width: 100%;
+  position: absolute;
+  top: 0%;
+  left: 0;
+  right: 0;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(2px);
   z-index: 6;
 }
 
 .sid-modal {
-  position: relative;
-  display: grid;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   place-items: center;
   min-width: fit-content;
   background: var(--background-darker);
@@ -32,18 +35,18 @@
   width: 48vw;
   max-width: 560px;
   z-index: 7;
-  padding: var(--space-lg);
+  padding: var(--space-2xl);
   height: fit-content;
   min-height: 225px;
   border: solid 1px var(--background);
   overflow: auto;
   max-height: 100vh;
-  font-size: var(--text-md);
+  font-size: var(--text-lg);
 }
 
 .loginInstructions > strong {
   color: var(--text-hover);
-  font-size: var(--text-xl);
+  font-size: var(--text-4xl);
 }
 
 .loginInstructions .epicLink {
@@ -60,6 +63,10 @@
 
 .loginInstructions li {
   text-align: left;
+  margin: calc(0.5 * var(--space-xs)) 0;
+}
+.loginInstructions ol {
+  padding: 0px;
 }
 
 .sid-modal > .sid-input {
@@ -80,4 +87,15 @@
   color: var(--text-hover);
   animation: 2s refreshing;
   animation-iteration-count: infinite;
+}
+
+.sidLoginButton {
+  text-align: center;
+}
+
+div.sidLoginButton > div > button {
+  width: 100px;
+  box-sizing: none;
+  margin: 100px;
+  align-items: center;
 }

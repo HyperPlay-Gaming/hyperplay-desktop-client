@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import classNames from 'classnames'
 import { SelectField } from 'frontend/components/UI'
-import { ThemeSelector } from 'frontend/components/UI/ThemeSelector'
 import ToggleSwitch from 'frontend/components/UI/ToggleSwitch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
@@ -110,7 +109,7 @@ export default React.memo(function Accessibility() {
         </h1>
 
         <span className="rangeWrapper Field">
-          <label className={classNames({ isRTL: isRTL })}>
+          <label className={classNames({ isRTL: isRTL }, 'zoomRangeLabel')}>
             {t('accessibility.zoom', 'Zoom')} ({zoomPercent}%)
           </label>
           <input
@@ -185,7 +184,6 @@ export default React.memo(function Accessibility() {
           {options}
         </SelectField>
 
-        <ThemeSelector />
         <span className="setting">
           <label className={classNames('toggleWrapper', { isRTL: isRTL })}>
             <ToggleSwitch

@@ -96,7 +96,7 @@ export default function SidebarLinks() {
           />
         </div>
       </NavLink>
-      <h6 className="Sidebar__categoryTitle">GAMES</h6>
+      <div className="Sidebar__categoryTitle title">GAMES</div>
       <NavLink
         className={({ isActive }) =>
           classNames('Sidebar__item', {
@@ -119,7 +119,7 @@ export default function SidebarLinks() {
         <span>{t('library.label', 'Library')}</span>
       </NavLink>
 
-      <h6 className="Sidebar__categoryTitle">ACCOUNTS</h6>
+      <div className="Sidebar__categoryTitle title">ACCOUNTS</div>
       {!loggedIn && (
         <NavLink
           className={({ isActive }) =>
@@ -203,7 +203,7 @@ export default function SidebarLinks() {
           </div>
         )}
       </div>
-      <h6 className="Sidebar__categoryTitle">OTHER</h6>
+      <div className="Sidebar__categoryTitle title">OTHER</div>
       <div className="SidebarItemWithSubmenu">
         <NavLink
           data-testid="settings"
@@ -322,7 +322,7 @@ export default function SidebarLinks() {
           <span>{t('accessibility.title', 'Accessibility')}</span>
         </>
       </NavLink>
-      <h6 className="Sidebar__categoryTitle">COMMUNITY</h6>
+      <div className="Sidebar__categoryTitle title">COMMUNITY</div>
       <NavLink
         data-testid="wiki"
         className={({ isActive }) =>

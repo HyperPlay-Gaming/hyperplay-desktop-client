@@ -42,6 +42,7 @@ import walletStore from 'frontend/store/WalletStore'
 import onboardingStore from 'frontend/store/OnboardingStore'
 import { getCardStatus, getImageFormatting } from './constants'
 import { hasStatus } from 'frontend/hooks/hasStatus'
+import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 
 interface Card {
   buttonClick: () => void
@@ -63,6 +64,7 @@ const GameCard = ({
   const [gameInfo, setGameInfo] = useState<GameInfo>(gameInfoFromProps)
   const [showUninstallModal, setShowUninstallModal] = useState(false)
   const [isLaunching, setIsLaunching] = useState(false)
+  const [showStopInstallModal, setShowStopInstallModal] = useState(false)
 
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
@@ -178,7 +180,7 @@ const GameCard = ({
       return (
         <SvgButton
           className="cancelIcon"
-          onClick={async () => handlePlay(runner)}
+          onClick={async () => setShowStopInstallModal(true)}
           title={`${t('button.cancel')} (${title})`}
         >
           <StopIcon />
@@ -333,6 +335,16 @@ const GameCard = ({
 
   return (
     <div>
+      {showStopInstallModal ? (
+        <StopInstallationModal
+          onClose={() => setShowStopInstallModal(false)}
+          progress={progress}
+          installPath={folder || 'default'}
+          appName={appName}
+          runner={runner}
+          folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
+        />
+      ) : null}
       {showUninstallModal && (
         <UninstallModal
           appName={appName}

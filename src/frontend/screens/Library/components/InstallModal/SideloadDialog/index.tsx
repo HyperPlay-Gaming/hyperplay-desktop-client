@@ -30,6 +30,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { ReactComponent as BrowserIcon } from 'frontend/assets/browser-icon.svg'
 import classNames from 'classnames'
 import Warning from './Warning'
+import { Button } from '@hyperplay/ui'
 
 type Props = {
   availablePlatforms: AvailablePlatforms
@@ -364,23 +365,25 @@ export default function SideloadDialog({
       </DialogContent>
       <DialogFooter>
         {shouldShowRunExe && platformToInstall !== 'Browser' && (
-          <button
+          <Button
+            type="tertiary"
+            size="large"
             onClick={async () => handleRunExe()}
-            className={`button is-secondary`}
             disabled={runningSetup || !title.length}
           >
             {runningSetup
               ? t('button.running-setup', 'Running Setup')
               : t('button.run-exe-first', 'Run Installer First')}
-          </button>
+          </Button>
         )}
-        <button
+        <Button
+          type="secondary"
+          size="large"
           onClick={async () => handleInstall()}
-          className={`button is-primary`}
           disabled={!selectedExe.length && !gameUrl}
         >
           {t('button.finish', 'Finish')}
-        </button>
+        </Button>
       </DialogFooter>
     </>
   )

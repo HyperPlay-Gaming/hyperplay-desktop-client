@@ -1015,17 +1015,10 @@
     node-addon-api "^4.1.0"
     node-gyp "^9.3.1"
 
-"@hyperplay/proprietary-fonts@^0.1.0":
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/proprietary-fonts/-/proprietary-fonts-0.1.0.tgz#c07cbdfdfc1129b3fa3fb046b547ecd4ea27da7a"
-  integrity sha512-hDOW84KzF7EcjYYcXlaX81QEiujcfAfPV5WaeUCMFwEDRj1VXee8SSMVybOBydQG5GIzLC0Inmo9j++WkrcJ2A==
-
-"@hyperplay/ui@0.1.0-alpha.18":
-  version "0.1.0-alpha.18"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.0-alpha.18.tgz#754e8bb24795196bebcc0cb37b949f46bbc5f802"
-  integrity sha512-6Dw1mIpHnNtNG5aT6QRm+eqPTNNA7GMy7TIeWsHLVOko1VlDdGMzFB5eGLICKqMhR0UtUFdbRQCMGS6w4wXcow==
-  optionalDependencies:
-    "@hyperplay/proprietary-fonts" "^0.1.0"
+"@hyperplay/ui@0.1.0-alpha.24":
+  version "0.1.0-alpha.24"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.0-alpha.24.tgz#85ffeb694a465ef78ed99920521418c294a9d23f"
+  integrity sha512-hWf35Idxxjv+7i3X/52Sy4OKKyBX4tOidwX881lGVkZQ+HWi2KzzdQ36ZY6Hyl/RZyqBKCYThTTOVmpllp952Q==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
@@ -2274,9 +2267,9 @@
     csstype "^3.0.2"
 
 "@types/react@^18.0.24":
-  version "18.0.24"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.24.tgz#2f79ed5b27f08d05107aab45c17919754cc44c20"
-  integrity sha512-wRJWT6ouziGUy+9uX0aW4YOJxAY0bG6/AOk5AW5QSvZqI7dk6VBIbXvcVgIw/W5Jrl24f77df98GEKTJGOLx7Q==
+  version "18.2.0"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.0.tgz#15cda145354accfc09a18d2f2305f9fc099ada21"
+  integrity sha512-0FLj93y5USLHdnhIhABk83rm8XEGA7kH3cr+YUlvxoUGp1xNt/DINUMvqPxLyOQMzLmZe8i4RTHbvb8MC7NmrA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -2290,9 +2283,9 @@
     "@types/node" "*"
 
 "@types/scheduler@*":
-  version "0.16.2"
-  resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.2.tgz#1a62f89525723dde24ba1b01b092bf5df8ad4d39"
-  integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
+  version "0.16.3"
+  resolved "https://registry.yarnpkg.com/@types/scheduler/-/scheduler-0.16.3.tgz#cef09e3ec9af1d63d2a6cc5b383a737e24e6dcf5"
+  integrity sha512-5cJ8CB4yAx7BH1oMvdU0Jh9lrEXyPkar6F9G/ERswkCuvP4KQZfZkSjcMbAICCpQTN4OuZn8tz0HiKv9TGZgrQ==
 
 "@types/secp256k1@^4.0.1", "@types/secp256k1@^4.0.3":
   version "4.0.3"
@@ -4361,7 +4354,12 @@ csstype@^2.5.7:
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.21.tgz#2efb85b7cc55c80017c66a5ad7cbd931fda3a90e"
   integrity sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==
 
-csstype@^3.0.2, csstype@^3.1.1:
+csstype@^3.0.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.2.tgz#1d4bf9d572f11c14031f0436e1c10bc1f571f50b"
+  integrity sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==
+
+csstype@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.1.tgz#841b532c45c758ee546a11d5bd7b7b473c8c30b9"
   integrity sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==
