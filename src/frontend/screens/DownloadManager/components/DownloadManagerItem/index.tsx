@@ -2,11 +2,21 @@ import './index.css'
 
 import React, { useContext, useEffect, useState } from 'react'
 
-import { DMQueueElement, DownloadManagerState, GameInfo } from 'common/types'
+import {
+  DMQueueElement,
+  DownloadManagerState,
+  GameInfo,
+  HyperPlayInstallInfo
+} from 'common/types'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import { handleStopInstallation } from 'frontend/helpers/library'
-import { getGameInfo, getStoreName } from 'frontend/helpers'
+import {
+  getGameInfo,
+  getInstallInfo,
+  getStoreName,
+  size as fileSize
+} from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -14,6 +24,8 @@ import { useNavigate } from 'react-router-dom'
 import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
 import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
+import { GogInstallInfo } from 'common/types/gog'
+import { LegendaryInstallInfo } from 'common/types/legendary'
 
 type Props = {
   element?: DMQueueElement
@@ -32,9 +44,16 @@ function convertToTime(time: number) {
   return { hour, fullDate: date.toLocaleString() }
 }
 
+type InstallInfo =
+  | GogInstallInfo
+  | LegendaryInstallInfo
+  | HyperPlayInstallInfo
+  | null
+
 const DownloadManagerItem = ({ element, current, state }: Props) => {
   const { epic, gog, showDialogModal, hyperPlayLibrary } =
     useContext(ContextProvider)
+  const [installInfo, setInstallInfo] = useState<InstallInfo>(null)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
 
@@ -51,12 +70,29 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
   const library = [...epic.library, ...gog.library, ...hyperPlayLibrary]
 
   const { params, addToQueueTime, endTime, type, startTime } = element
-  const { appName, runner, path, gameInfo: DmGameInfo, size } = params
+  const {
+    appName,
+    runner,
+    path,
+    gameInfo: DmGameInfo,
+    size,
+    platformToInstall
+  } = params
 
   const [gameInfo, setGameInfo] = useState(DmGameInfo)
+
   useEffect(() => {
     const getNewInfo = async () => {
       const newInfo = (await getGameInfo(appName, runner)) as GameInfo
+
+      if (size?.includes('?') && !installInfo) {
+        const installInfo = await getInstallInfo(
+          appName,
+          runner,
+          platformToInstall
+        )
+        setInstallInfo(installInfo)
+      }
 
       if (newInfo) {
         setGameInfo(newInfo)
@@ -208,7 +244,9 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
         <span className="titleSize">
           {title}
           <span title={path}>
-            {size ?? ''}
+            {size?.includes('?')
+              ? fileSize(Number(installInfo?.manifest.download_size) || 0)
+              : size}
             {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
           </span>
         </span>
