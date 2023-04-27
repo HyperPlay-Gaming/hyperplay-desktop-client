@@ -10,11 +10,7 @@ export const install = async (args: InstallParams) => {
     endTime: 0,
     startTime: 0
   }
-  ipcRenderer.send('addToDMQueue', dmQueueElement)
-  ipcRenderer.invoke('trackEvent', {
-    event: 'Game Install Requested',
-    properties: { game_name: args.appName, store_name: args.runner }
-  })
+  ipcRenderer.invoke('addToDMQueue', dmQueueElement)
 }
 
 export const updateGame = (args: UpdateParams) => {
@@ -32,11 +28,7 @@ export const updateGame = (args: UpdateParams) => {
     startTime: 0
   }
 
-  ipcRenderer.send('addToDMQueue', dmQueueElement)
-  ipcRenderer.invoke('trackEvent', {
-    event: 'Game Update Requested',
-    properties: { game_name: args.appName, store_name: args.runner }
-  })
+  ipcRenderer.invoke('addToDMQueue', dmQueueElement)
 }
 
 export const getDMQueueInformation = async () =>

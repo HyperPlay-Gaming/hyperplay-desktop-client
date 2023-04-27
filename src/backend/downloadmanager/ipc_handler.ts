@@ -8,8 +8,8 @@ import {
   resumeCurrentDownload
 } from './downloadqueue'
 
-ipcMain.on('addToDMQueue', (e, element) => {
-  addToQueue(element)
+ipcMain.handle('addToDMQueue', async (e, element) => {
+  await addToQueue(element)
 })
 
 ipcMain.on('removeFromDMQueue', (e, appName) => {
