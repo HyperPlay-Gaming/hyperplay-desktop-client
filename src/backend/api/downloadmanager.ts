@@ -29,6 +29,11 @@ export const updateGame = (args: UpdateParams) => {
   }
 
   ipcRenderer.invoke('addToDMQueue', dmQueueElement)
+
+  ipcRenderer.invoke('trackEvent', {
+    event: 'Game Update Requested',
+    properties: { game_name: args.appName, store_name: args.runner }
+  })
 }
 
 export const getDMQueueInformation = async () =>

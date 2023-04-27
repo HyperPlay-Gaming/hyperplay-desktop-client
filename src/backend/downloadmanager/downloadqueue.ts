@@ -88,12 +88,12 @@ async function initQueue() {
       addToFinished(element, status)
       removeFromQueue(element.params.appName)
       element = getFirstQueueElement()
+      queueState = 'idle'
     } else {
+      queueState = 'paused'
       element = null
     }
   }
-
-  queueState = 'idle'
 }
 
 async function addToQueue(element: DMQueueElement) {
