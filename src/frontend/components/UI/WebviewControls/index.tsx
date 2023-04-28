@@ -78,6 +78,8 @@ export default function WebviewControls({
     [webview]
   )
 
+  if (url.includes('store.hyperplay.xyz')) return null
+
   return (
     <div className="WebviewControls">
       <div className="WebviewControls__icons">

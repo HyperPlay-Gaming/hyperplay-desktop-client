@@ -19,5 +19,10 @@
 }
 
 .disconnectedImg {
-  width: 2.125em;
+  width: 40px;
+}
+
+.walletButton {
+  display: flex;
+  gap: var(--space-xs);
 }

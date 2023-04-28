@@ -1,0 +1,59 @@
+.libraryHeader {
+  text-align: left;
+  padding: 0 var(--space-md-fixed);
+  margin: var(--space-sm) 0;
+}
+
+#backToTopArrow {
+  font-size: 3.2vh;
+}
+
+#backToTopBtn {
+  border-radius: 100%;
+  width: 5vh;
+  height: 5vh;
+  position: fixed;
+  bottom: 3%;
+  right: 0;
+  margin: var(--space-md) var(--space-xl);
+  border: 1px var(--download-button) solid;
+  background-color: var(--background);
+  color: var(--download-button);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  z-index: 9;
+  visibility: hidden;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+
+#backToTopBtn:hover {
+  background-color: var(--download-button);
+  color: var(--text-default);
+}
+
+.listing {
+  overflow-y: auto;
+  flex: 100% 1 1;
+}
+
+.libraryTopHeader {
+  display: flex;
+}
+
+.tabsList {
+  display: flex;
+  align-items: center;
+}
+
+.tabsList > *:not([type='button']) {
+  margin: 0px var(--space-md);
+}
+
+.tabsList > *:last-child:not([type='button']) {
+  margin: 0 0 0 auto;
+  display: flex;
+  gap: var(--space-md);
+}
