@@ -21,6 +21,7 @@ import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 import find from 'find-process'
 import * as OverlayApp from 'backend/overlay/overlay'
+import fs from 'node:fs'
 const buildDir = resolve(__dirname, '../../build')
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -160,7 +161,8 @@ export async function launchGame(
   const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
   if (
     gameSettingsOverrides.targetExe !== undefined &&
-    gameSettingsOverrides.targetExe !== ''
+    gameSettingsOverrides.targetExe !== '' &&
+    fs.existsSync(gameSettingsOverrides.targetExe)
   ) {
     executable = gameSettingsOverrides.targetExe
   }
