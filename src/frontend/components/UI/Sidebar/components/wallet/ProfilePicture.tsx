@@ -1,6 +1,7 @@
 import React from 'react'
 import { Disconnected } from 'frontend/assets/hyperplay'
 import Blockies from 'react-blockies'
+import styles from './index.module.scss'
 
 export interface ProfilePictureProps {
   address: string
@@ -8,18 +9,13 @@ export interface ProfilePictureProps {
 }
 
 const iconScale = 4
-const className = 'Sidebar__itemIcon'
 
 const ProfilePicture = ({ isConnected, address }: ProfilePictureProps) => {
   if (!isConnected) {
-    return <Disconnected className="Sidebar__itemIcon disconnectedImg" />
+    return <Disconnected className={styles.disconnectedImg} />
   }
 
-  const element = document.querySelector(className)
-
-  const itemIconWidth = element
-    ? (parseInt(getComputedStyle(element).width) * 34) / 24
-    : 34
+  const itemIconWidth = 40
 
   const style = {
     size: itemIconWidth / iconScale,
@@ -30,8 +26,8 @@ const ProfilePicture = ({ isConnected, address }: ProfilePictureProps) => {
   }
 
   return (
-    <div className={className}>
-      <Blockies seed={address} {...style} className="identicon" />
+    <div>
+      <Blockies seed={address} {...style} className={styles.identicon} />
     </div>
   )
 }

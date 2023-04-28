@@ -28,6 +28,7 @@ import TransactionNotification from './screens/TransactionNotification'
 import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
 import SettingsModal from './screens/Settings/components/SettingsModal'
 import DownloadToastManager from './components/UI/DownloadToastManager'
+import TopNavBar from './components/UI/TopNavBar'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -36,6 +37,7 @@ function App() {
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
       <HashRouter>
         <OfflineMessage />
+        <TopNavBar />
         <Sidebar />
         <main className="content">
           <ExtensionHandler />

@@ -1,4 +1,4 @@
-import './index.css'
+import styles from './index.module.scss'
 
 import React, {
   useContext,
@@ -10,7 +10,7 @@ import React, {
 } from 'react'
 
 import ArrowDropUp from '@mui/icons-material/ArrowDropUp'
-import { Header, UpdateComponent } from 'frontend/components/UI'
+import { UpdateComponent } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
 import Fuse from 'fuse.js'
 
@@ -25,7 +25,6 @@ import {
   Runner
 } from 'common/types'
 import ErrorComponent from 'frontend/components/UI/ErrorComponent'
-import LibraryHeader from './components/LibraryHeader'
 import {
   epicCategories,
   gogCategories,
@@ -34,8 +33,24 @@ import {
 } from 'frontend/helpers/library'
 import RecentlyPlayed from './components/RecentlyPlayed'
 import { InstallModal } from './components'
+import './index.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import classNames from 'classnames'
+import {
+  faBorderAll,
+  faList,
+  faSyncAlt
+} from '@fortawesome/free-solid-svg-icons'
+import { Button, Dropdown, Tabs, Toggle } from '@hyperplay/ui'
+import { Category } from 'frontend/types'
 
 const storage = window.localStorage
+
+const filters = [
+  { text: 'Alphabetical A-Z', id: 'alphabeticalAscending' },
+  { text: 'Favorites' },
+  { text: 'Sort by Status' }
+]
 
 type ModalState = {
   game: string
@@ -63,10 +78,13 @@ export default React.memo(function Library(): JSX.Element {
     showHidden,
     handleCategory,
     showFavourites: showFavouritesLibrary,
+    setShowFavourites,
     showNonAvailable,
-    hyperPlayLibrary
+    hyperPlayLibrary,
+    refreshLibrary
   } = useContext(ContextProvider)
 
+  const [selectedFilter, setSelectedFilter] = useState(filters[0])
   const [showModal, setShowModal] = useState<ModalState>({
     game: '',
     show: false,
@@ -222,8 +240,7 @@ export default React.memo(function Library(): JSX.Element {
     return tempArray
   }, [showFavourites, favouriteGames, epic, gog])
 
-  // select library
-  const libraryToShow = useMemo(() => {
+  function generateLibrary(category: Category) {
     let library: Array<GameInfo> = []
     if (showFavouritesLibrary) {
       library = [...favourites].filter((g) =>
@@ -302,6 +319,10 @@ export default React.memo(function Library(): JSX.Element {
       : library
 
     return [...library]
+  }
+  // select library
+  const libraryToShow = useMemo(() => {
+    return generateLibrary(category)
   }, [
     category,
     epic.library,
@@ -318,6 +339,19 @@ export default React.memo(function Library(): JSX.Element {
     hyperPlayLibrary
   ])
 
+  const numberOfGames = useMemo(() => {
+    if (!libraryToShow) {
+      return 0
+    }
+    // is_dlc is only applicable when the game is from legendary, but checking anyway doesn't cause errors and enable accurate counting in the 'ALL' game tab
+    const dlcCount = libraryToShow.filter(
+      (lib) => lib.runner !== 'sideload' && lib.install.is_dlc
+    ).length
+
+    const total = libraryToShow.length - dlcCount
+    return total > 0 ? `${total}` : 0
+  }, [libraryToShow, category])
+
   if (!epic && !gog) {
     return (
       <ErrorComponent
@@ -329,10 +363,100 @@ export default React.memo(function Library(): JSX.Element {
     )
   }
 
+  function getLibrary() {
+    if (category === 'all') {
+      return category
+    }
+
+    if (epicCategories.includes(category)) {
+      return 'legendary'
+    }
+
+    if (category === 'sideload') {
+      return 'sideload'
+    }
+
+    return 'gog'
+  }
+
   return (
     <>
-      <Header />
-      <div className="listing" ref={listing}>
+      <div className={styles.libraryTopHeader}>
+        <h3>Library</h3>
+        <span className="numberOfgames">{numberOfGames}</span>
+        <button
+          className={classNames('FormControl__button', {
+            active: refreshing
+          })}
+          title={t('generic.library.refresh', 'Refresh Library')}
+          onClick={async () =>
+            refreshLibrary({
+              checkForUpdates: true,
+              runInBackground: false,
+              library: getLibrary()
+            })
+          }
+        >
+          <FontAwesomeIcon
+            className={classNames('FormControl__segmentedFaIcon', {
+              ['fa-spin']: refreshing
+            })}
+            icon={faSyncAlt}
+          />
+        </button>
+        <button
+          className="sideloadGameButton"
+          onClick={() => handleModal('', 'sideload', null)}
+        >
+          {t('add_game', 'Add Game')}
+        </button>
+      </div>
+      <Tabs onTabChange={(val) => handleCategory(val as Category)}>
+        <Tabs.List className={styles.tabsList}>
+          <Dropdown
+            options={filters}
+            onChange={setSelectedFilter}
+            selected={selectedFilter}
+          />
+          <Tabs.Tab value="all">
+            <div className="menu">ALL</div>
+          </Tabs.Tab>
+          <Tabs.Tab value="hyperplay">
+            <div className="menu">{t('HyperPlay')}</div>
+          </Tabs.Tab>
+          <Tabs.Tab value="legendary">
+            <div className="menu">EPIC</div>
+          </Tabs.Tab>
+          <Tabs.Tab value="gog">
+            <div className="menu">GOG</div>
+          </Tabs.Tab>
+          <Tabs.Tab value="sideload">
+            <div className="menu">{t('Other')}</div>
+          </Tabs.Tab>
+          <div>
+            <Button
+              type="tertiary"
+              onClick={() => setShowFavourites(!showFavouritesLibrary)}
+            >
+              heart
+            </Button>
+          </div>
+          <Toggle>Downloaded</Toggle>
+          <div id="alignEnd">
+            <div>
+              <Button type="tertiary">
+                <FontAwesomeIcon icon={faBorderAll} />
+              </Button>
+            </div>
+            <div>
+              <Button type="tertiary">
+                <FontAwesomeIcon icon={faList} />
+              </Button>
+            </div>
+          </div>
+        </Tabs.List>
+      </Tabs>
+      <div className={styles.listing} ref={listing}>
         <span id="top" />
         {showRecentGames && (
           <RecentlyPlayed
@@ -343,7 +467,9 @@ export default React.memo(function Library(): JSX.Element {
 
         {showFavourites && !showFavouritesLibrary && (
           <>
-            <h3 className="libraryHeader">{t('favourites', 'Favourites')}</h3>
+            <h3 className={styles.libraryHeader}>
+              {t('favourites', 'Favourites')}
+            </h3>
             <GamesList
               library={favourites}
               handleGameCardClick={handleModal}
@@ -351,15 +477,6 @@ export default React.memo(function Library(): JSX.Element {
             />
           </>
         )}
-
-        <LibraryHeader
-          list={libraryToShow}
-          setSortDescending={setSortDescending}
-          setSortInstalled={setSortInstalled}
-          sortDescending={sortDescending}
-          sortInstalled={sortInstalled}
-          handleAddGameButtonClick={() => handleModal('', 'sideload', null)}
-        />
 
         {refreshing && !refreshingInTheBackground && <UpdateComponent inline />}
 

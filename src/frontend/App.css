@@ -28,8 +28,8 @@ html,
 .App {
   display: grid;
   grid-template-columns: min-content 1fr;
-  grid-template-areas: 'offline offline' 'sidebar content' 'controller controller';
-  grid-template-rows: min-content 1fr min-content;
+  grid-template-areas: 'offline offline' 'topNavBar topNavBar' 'sidebar content' 'controller controller';
+  grid-template-rows: min-content min-content 1fr min-content;
 }
 
 .App .Sidebar {
@@ -139,4 +139,19 @@ svg.disabled {
 
 .isRTL {
   direction: rtl;
+}
+
+.gameListHeader {
+  display: grid;
+  grid-template-columns: 3fr 2fr 1fr 10%;
+  justify-items: baseline;
+  margin: 0 var(--space-xl-fixed);
+  color: var(--text-default);
+  font-weight: var(--bold);
+  padding-bottom: 0.5rem;
+  font-size: var(--text-lg);
+}
+
+.gameListHeader span:last-child {
+  justify-self: center;
 }
