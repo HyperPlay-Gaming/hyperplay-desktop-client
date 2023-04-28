@@ -161,7 +161,8 @@ export function refreshHPGameInfo(appId: string, data: HyperPlayRelease) {
       data.projectMeta.main_capsule ||
       currentInfo.art_cover,
     releaseMeta: data.releaseMeta,
-    developer: data.accountMeta.name || data.accountName
+    developer: data.accountMeta.name || data.accountName,
+    version: data.releaseName
   }
   currentLibrary[gameIndex] = gameInfo
   return hpLibraryStore.set('games', currentLibrary)
