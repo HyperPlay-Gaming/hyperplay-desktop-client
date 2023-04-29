@@ -78,7 +78,11 @@ export default function WebviewControls({
     [webview]
   )
 
-  if (url.includes('store.hyperplay.xyz')) return null
+  if (
+    url.includes('store.hyperplay.xyz') ||
+    url.includes('docs.hyperplaygaming.com')
+  )
+    return null
 
   return (
     <div className="WebviewControls">

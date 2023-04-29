@@ -81,6 +81,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   showAboutWindow: () => void
   openLoginPage: () => void
   openDiscordLink: () => void
+  openTwitterLink: () => void
   openPatreonPage: () => void
   openKofiPage: () => void
   openWinePrefixFAQ: () => void

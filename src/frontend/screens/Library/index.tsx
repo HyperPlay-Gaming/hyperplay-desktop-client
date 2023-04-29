@@ -41,7 +41,7 @@ import {
   faList,
   faSyncAlt
 } from '@fortawesome/free-solid-svg-icons'
-import { Button, Dropdown, Tabs, Toggle } from '@hyperplay/ui'
+import { Button, Dropdown, Tabs, Toggle, Images } from '@hyperplay/ui'
 import { Category } from 'frontend/types'
 
 const storage = window.localStorage
@@ -411,7 +411,10 @@ export default React.memo(function Library(): JSX.Element {
           {t('add_game', 'Add Game')}
         </button>
       </div>
-      <Tabs onTabChange={(val) => handleCategory(val as Category)}>
+      <Tabs
+        onTabChange={(val) => handleCategory(val as Category)}
+        defaultValue={category}
+      >
         <Tabs.List className={styles.tabsList}>
           <Dropdown
             options={filters}
@@ -438,7 +441,7 @@ export default React.memo(function Library(): JSX.Element {
               type="tertiary"
               onClick={() => setShowFavourites(!showFavouritesLibrary)}
             >
-              heart
+              <Images.Heart fill="white" />
             </Button>
           </div>
           <Toggle>Downloaded</Toggle>
