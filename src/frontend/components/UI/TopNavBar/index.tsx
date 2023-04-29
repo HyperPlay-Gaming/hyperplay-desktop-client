@@ -2,9 +2,8 @@ import React from 'react'
 import styles from './index.module.scss'
 import { HyperPlayLogoWhite } from 'frontend/assets/hyperplay'
 import { Images } from '@hyperplay/ui'
-import Wallet from '../Sidebar/components/wallet'
-import onboardingStore from 'frontend/store/OnboardingStore'
 import SearchBar from '../SearchBar'
+import AccountDropdown from '../AccountDropdown'
 
 export default function TopNavBar() {
   return (
@@ -29,7 +28,7 @@ export default function TopNavBar() {
           <Images.MetaMask fill="white" />
         </button>
         <div style={{ width: '200px' }}>
-          <Wallet onClick={() => onboardingStore.openOnboarding()} />
+          <AccountDropdown />
         </div>
       </div>
     </div>

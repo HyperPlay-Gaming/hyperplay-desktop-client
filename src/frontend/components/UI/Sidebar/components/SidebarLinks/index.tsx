@@ -1,60 +1,27 @@
-import {
-  faBookOpen,
-  faSlidersH,
-  faStore,
-  faUser,
-  faUniversalAccess,
-  faWineGlass,
-  faBarsProgress,
-  faUserAlt
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
-import { useTranslation } from 'react-i18next'
 import { openDiscordLink } from 'frontend/helpers'
-
 import ContextProvider from 'frontend/state/ContextProvider'
-import { Runner } from 'common/types'
 import './index.css'
 import QuitButton from '../QuitButton'
-import { LocationState } from 'frontend/types'
 import { SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY } from 'frontend/components/UI/ExternalLinkDialog'
 import { Images } from '@hyperplay/ui'
 
-type PathSplit = [
-  a: undefined,
-  b: undefined,
-  runner: Runner | 'app',
-  appName: string,
-  type: string
-]
-
 export default function SidebarLinks() {
-  const { t } = useTranslation()
-  const { state } = useLocation() as { state: LocationState }
   const location = useLocation() as { pathname: string }
-  const [, , runner, appName, type] = location.pathname.split('/') as PathSplit
 
   const {
     epic,
     gog,
     activeController,
     refreshLibrary,
-    platform,
     handleExternalLinkDialog
   } = useContext(ContextProvider)
-
-  const isStore = location.pathname.includes('store')
-  const isSettings = location.pathname.includes('settings')
-  const isWin = platform === 'win32'
 
   const settingsPath = '/settings/app/default/general'
 
   const [isFullscreen, setIsFullscreen] = useState(false)
-
-  const loggedIn = epic.username || gog.username
 
   useEffect(() => {
     window.api.isFullscreen().then((res) => setIsFullscreen(res))
@@ -83,6 +50,8 @@ export default function SidebarLinks() {
     }
   }
 
+  const sidebarSvgUnselectedFill = 'var(--color-neutral-400)'
+
   return (
     <div className="SidebarLinks Sidebar__section">
       <NavLink
@@ -93,7 +62,7 @@ export default function SidebarLinks() {
         }
         to="/hyperplaystore"
       >
-        <Images.Home stroke="#FFFFFF" />
+        <Images.Home fill={sidebarSvgUnselectedFill} />
       </NavLink>
       <NavLink
         className={({ isActive }) =>
@@ -108,27 +77,16 @@ export default function SidebarLinks() {
         to={'/'}
         onClick={async () => handleRefresh()}
       >
-        <Images.Controller stroke="#FFFFFF" />
+        <Images.Controller fill={sidebarSvgUnselectedFill} />
       </NavLink>
-
-      {!loggedIn && (
-        <NavLink
-          className={({ isActive }) =>
-            classNames('Sidebar__item', { active: isActive })
-          }
-          to={'/login'}
-        >
-          <FontAwesomeIcon icon={faUser} title={t('button.login', 'Login')} />
-        </NavLink>
-      )}
-      {loggedIn && (
-        <NavLink className="Sidebar__item" to={'/login'}>
-          <FontAwesomeIcon
-            icon={faUserAlt}
-            title={t('userselector.manageaccounts', 'Manage Accounts')}
-          />
-        </NavLink>
-      )}
+      <NavLink
+        className={({ isActive }) =>
+          classNames('Sidebar__item', { active: isActive })
+        }
+        to={{ pathname: '/download-manager' }}
+      >
+        <Images.DownloadIcon fill={sidebarSvgUnselectedFill} />
+      </NavLink>
       <NavLink
         data-testid="settings"
         className={({ isActive }) =>
@@ -141,30 +99,21 @@ export default function SidebarLinks() {
           fromGameCard: false
         }}
       >
-        <Images.Settings fill="#FFFFFF" />
+        <Images.Settings fill={sidebarSvgUnselectedFill} />
       </NavLink>
 
-      <NavLink
-        className={({ isActive }) =>
-          classNames('Sidebar__item', { active: isActive })
-        }
-        to={{ pathname: '/download-manager' }}
+      <button
+        className="Sidebar__item"
+        onClick={() => handleExternalLink(openDiscordLink)}
       >
-        <Images.DownloadIcon fill="#FFFFFF" />
-      </NavLink>
-      {!isWin && (
-        <NavLink
-          className={({ isActive }) =>
-            classNames('Sidebar__item', { active: isActive })
-          }
-          to={{ pathname: '/wine-manager' }}
-        >
-          <FontAwesomeIcon
-            icon={faWineGlass}
-            title={t('wine.manager.link', 'Wine Manager')}
-          />
-        </NavLink>
-      )}
+        <Images.Discord stroke={sidebarSvgUnselectedFill} />
+      </button>
+      <button
+        className="Sidebar__item"
+        onClick={() => handleExternalLink(window.api.openTwitterLink)}
+      >
+        <Images.Twitter fill={sidebarSvgUnselectedFill} />
+      </button>
       <NavLink
         data-testid="wiki"
         className={({ isActive }) =>
@@ -172,14 +121,8 @@ export default function SidebarLinks() {
         }
         to={{ pathname: '/wiki' }}
       >
-        <FontAwesomeIcon icon={faBookOpen} title={t('docs', 'Documentation')} />
+        <Images.Page fill={sidebarSvgUnselectedFill} />
       </NavLink>
-      <button
-        className="Sidebar__item"
-        onClick={() => handleExternalLink(openDiscordLink)}
-      >
-        <Images.Discord stroke="white" />
-      </button>
       {(isFullscreen || activeController) && <QuitButton />}
     </div>
   )
