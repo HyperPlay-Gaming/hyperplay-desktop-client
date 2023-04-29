@@ -1,10 +1,9 @@
 import './index.css'
 
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 
-import { NavLink, useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 
 import ContextMenu from '../Library/components/ContextMenu'
 import SettingsContext from './SettingsContext'
@@ -20,6 +19,10 @@ import { AppSettings, WineInstallation } from 'common/types'
 import { UpdateComponent } from 'frontend/components/UI'
 import { LocationState, SettingsContextType } from 'frontend/types'
 import useSettingsContext from 'frontend/hooks/useSettingsContext'
+import { Tabs } from '@hyperplay/ui'
+import Accessibility from '../Accessibility'
+import WineManager from '../WineManager'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 export const defaultWineVersion: WineInstallation = {
   bin: '/usr/bin/wine',
@@ -32,17 +35,15 @@ function Settings() {
   const {
     state: { fromGameCard, runner, gameInfo }
   } = useLocation() as { state: LocationState }
+  const { platform } = useContext(ContextProvider)
+  const isWin = platform === 'win32'
   const [title, setTitle] = useState('')
 
   const [currentConfig, setCurrentConfig] = useState<Partial<AppSettings>>({})
 
   const { appName = '', type = '' } = useParams()
   const isDefault = appName === 'default'
-  const isGeneralSettings = type === 'general'
-  const isSyncSettings = type === 'sync'
-  const isGamesSettings = type === 'games_settings'
   const isLogSettings = type === 'log'
-  const isAdvancedSetting = type === 'advanced' && isDefault
 
   // Track the screen view once each time appName or type changes
   useEffect(() => {
@@ -111,23 +112,45 @@ function Settings() {
       <SettingsContext.Provider value={contextValues}>
         <div className="Settings">
           <div role="list" className="settingsWrapper">
-            <NavLink
-              to={returnPath}
-              role="link"
-              className="backButton"
-              state={{ gameInfo: gameInfo }}
-            >
-              <ArrowCircleLeftIcon />
-            </NavLink>
             <h1 className="headerTitle" data-testid="headerTitle">
-              {title}
+              Settings
             </h1>
-
-            {isGeneralSettings && <GeneralSettings />}
-            {isGamesSettings && <GamesSettings useDetails={false} />}
-            {isSyncSettings && <SyncSaves />}
-            {isAdvancedSetting && <AdvancedSettings />}
-            {isLogSettings && <LogSettings />}
+            <Tabs>
+              <Tabs.List>
+                <Tabs.Tab value="general">General</Tabs.Tab>
+                <Tabs.Tab value="gamesSettings">Games Settings</Tabs.Tab>
+                <Tabs.Tab value="syncSettings">Sync Settings</Tabs.Tab>
+                <Tabs.Tab value="advSettings">Advanced Settings</Tabs.Tab>
+                <Tabs.Tab value="logSettings">Log Settings</Tabs.Tab>
+                <Tabs.Tab value="accessibility">Accessibility</Tabs.Tab>
+                {!isWin ? (
+                  <Tabs.Tab value="wineManager">Wine Manager</Tabs.Tab>
+                ) : null}
+              </Tabs.List>
+              <Tabs.Panel value="general">
+                <GeneralSettings />
+              </Tabs.Panel>
+              <Tabs.Panel value="gamesSettings">
+                <GamesSettings useDetails={false} />
+              </Tabs.Panel>
+              <Tabs.Panel value="syncSettings">
+                <SyncSaves />
+              </Tabs.Panel>
+              <Tabs.Panel value="advSettings">
+                <AdvancedSettings />
+              </Tabs.Panel>
+              <Tabs.Panel value="logSettings">
+                <LogSettings />
+              </Tabs.Panel>
+              <Tabs.Panel value="accessibility">
+                <Accessibility />
+              </Tabs.Panel>
+              {!isWin ? (
+                <Tabs.Panel value="wineManager">
+                  <WineManager />
+                </Tabs.Panel>
+              ) : null}
+            </Tabs>
             <FooterInfo />
           </div>
         </div>

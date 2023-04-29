@@ -6,10 +6,8 @@ import Login from './screens/Login'
 import WebView from './screens/WebView'
 import { GamePage } from './screens/Game'
 import Library from './screens/Library'
-import WineManager from './screens/WineManager'
 import Sidebar from './components/UI/Sidebar'
 import Settings from './screens/Settings'
-import Accessibility from './screens/Accessibility'
 import ContextProvider from './state/ContextProvider'
 import classNames from 'classnames'
 import Onboarding from './screens/Onboarding'
@@ -76,9 +74,7 @@ function App() {
                 </Route>
               </Route>
             </Route>
-            <Route path="/wine-manager" element={<WineManager />} />
             <Route path="/download-manager" element={<DownloadManager />} />
-            <Route path="/accessibility" element={<Accessibility />} />
           </Routes>
         </main>
         <div className="controller">
