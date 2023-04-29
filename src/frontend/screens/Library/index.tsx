@@ -36,12 +36,15 @@ import { InstallModal } from './components'
 import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
+import { faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import {
-  faBorderAll,
-  faList,
-  faSyncAlt
-} from '@fortawesome/free-solid-svg-icons'
-import { Button, Dropdown, Tabs, Toggle, Images } from '@hyperplay/ui'
+  Button,
+  Dropdown,
+  Tabs,
+  Toggle,
+  Images,
+  Background
+} from '@hyperplay/ui'
 import { Category } from 'frontend/types'
 
 const storage = window.localStorage
@@ -381,13 +384,13 @@ export default React.memo(function Library(): JSX.Element {
 
   return (
     <>
+      <Background style={{ position: 'absolute' }}></Background>
       <div className={styles.libraryTopHeader}>
         <h3>Library</h3>
-        <span className="numberOfgames">{numberOfGames}</span>
-        <button
-          className={classNames('FormControl__button', {
-            active: refreshing
-          })}
+        <span className={`${styles.numberOfgames} title`}>{numberOfGames}</span>
+        <Button
+          className={styles.refreshButton}
+          type="tertiary"
           title={t('generic.library.refresh', 'Refresh Library')}
           onClick={async () =>
             refreshLibrary({
@@ -403,26 +406,27 @@ export default React.memo(function Library(): JSX.Element {
             })}
             icon={faSyncAlt}
           />
-        </button>
-        <button
-          className="sideloadGameButton"
+        </Button>
+        <Button
+          type="tertiary"
           onClick={() => handleModal('', 'sideload', null)}
+          leftIcon={<FontAwesomeIcon icon={faPlus} height={14} width={14} />}
         >
           {t('add_game', 'Add Game')}
-        </button>
+        </Button>
       </div>
       <Tabs
-        onTabChange={(val) => handleCategory(val as Category)}
+        onTabChange={(val: Category) => handleCategory(val)}
         defaultValue={category}
       >
-        <Tabs.List className={styles.tabsList}>
+        <Tabs.List className={styles.tabsList} type="outline">
           <Dropdown
             options={filters}
             onChange={setSelectedFilter}
             selected={selectedFilter}
           />
           <Tabs.Tab value="all">
-            <div className="menu">ALL</div>
+            <div className="menu">{t('ALL', 'ALL')}</div>
           </Tabs.Tab>
           <Tabs.Tab value="hyperplay">
             <div className="menu">{t('HyperPlay')}</div>
@@ -438,22 +442,27 @@ export default React.memo(function Library(): JSX.Element {
           </Tabs.Tab>
           <div>
             <Button
+              className={styles.heartButton}
               type="tertiary"
               onClick={() => setShowFavourites(!showFavouritesLibrary)}
             >
               <Images.Heart fill="white" />
             </Button>
           </div>
-          <Toggle>Downloaded</Toggle>
+          <Toggle>
+            <div className="body" style={{ marginRight: 'var(--space-xs)' }}>
+              {t('Downloaded', 'Downloaded')}
+            </div>
+          </Toggle>
           <div id="alignEnd">
             <div>
-              <Button type="tertiary">
-                <FontAwesomeIcon icon={faBorderAll} />
+              <Button type="tertiary" className={styles.gridListButton}>
+                <Images.Grid fill="white" height={24} width={24} />
               </Button>
             </div>
             <div>
-              <Button type="tertiary">
-                <FontAwesomeIcon icon={faList} />
+              <Button type="tertiary" className={styles.gridListButton}>
+                <Images.List fill="white" height={24} width={24} />
               </Button>
             </div>
           </div>

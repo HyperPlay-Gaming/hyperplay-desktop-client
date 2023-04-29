@@ -41,19 +41,56 @@
 
 .libraryTopHeader {
   display: flex;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-md-fixed);
+  :last-child {
+    margin: 0 0 0 auto;
+  }
+  z-index: 100;
 }
 
 .tabsList {
   display: flex;
   align-items: center;
+  margin-bottom: var(--space-xl);
 }
 
 .tabsList > *:not([type='button']) {
   margin: 0px var(--space-md);
 }
 
+.tabsList > *:first-child:not([type='button']) {
+  margin: 0px var(--space-md) 0px 0px;
+}
+
 .tabsList > *:last-child:not([type='button']) {
   margin: 0 0 0 auto;
   display: flex;
   gap: var(--space-md);
+}
+
+.numberOfgames {
+  background-color: var(--color-primary-500);
+  padding: var(--space-3xs) var(--space-xs);
+  border-radius: var(--space-xs);
+}
+
+.refreshButton {
+  padding: var(--space-xs);
+}
+
+.heartButton {
+  padding: var(--space-xs);
+  vertical-align: middle;
+}
+
+.heartButton > div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gridListButton {
+  padding: calc(0.75 * var(--space-sm));
 }
