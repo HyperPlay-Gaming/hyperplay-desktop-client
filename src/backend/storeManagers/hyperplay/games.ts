@@ -247,7 +247,7 @@ export async function install(
   }
 
   const gameInfo = getGameInfo(appName)
-  const { title, releaseMeta } = gameInfo
+  const { title, releaseMeta, developer } = gameInfo
   const window = getMainWindow()
 
   if (!releaseMeta || !window) {
@@ -262,7 +262,13 @@ export async function install(
     const platformInfo = releaseMeta.platforms[appPlatform]
     const zipName = encodeURI(platformInfo.name)
     const zipFile = path.join(configFolder, zipName)
-    const destinationPath = path.join(dirpath, sanitizeFileName(title))
+
+    // prevent naming conflicts where two developers release games with the same name
+    const sanitizedDestinationFolderName =
+      developer !== undefined
+        ? sanitizeFileName(developer) + ' - ' + sanitizeFileName(title)
+        : sanitizeFileName(title)
+    const destinationPath = path.join(dirpath, sanitizedDestinationFolderName)
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
@@ -282,9 +288,9 @@ export async function install(
         await spawnAsync('powershell', [
           'Expand-Archive',
           '-LiteralPath',
-          `'${zipFile}'`,
+          `"${zipFile}"`,
           '-DestinationPath',
-          `'${destinationPath}'`
+          `"${destinationPath}"`
         ])
 
         await installDistributables(destinationPath)
