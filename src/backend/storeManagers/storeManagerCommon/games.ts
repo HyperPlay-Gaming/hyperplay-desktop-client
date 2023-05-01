@@ -3,7 +3,11 @@ import { GameConfig } from '../../game_config'
 import { isMac, isLinux, gamesConfigPath, icon } from '../../constants'
 import { logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import path, { dirname, join, resolve } from 'path'
-import { appendFileSync, constants as FS_CONSTANTS } from 'graceful-fs'
+import {
+  appendFileSync,
+  existsSync,
+  constants as FS_CONSTANTS
+} from 'graceful-fs'
 import i18next from 'i18next'
 import {
   callRunner,
@@ -21,7 +25,6 @@ import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 import find from 'find-process'
 import * as OverlayApp from 'backend/overlay/overlay'
-import fs from 'node:fs'
 const buildDir = resolve(__dirname, '../../build')
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -162,7 +165,7 @@ export async function launchGame(
   if (
     gameSettingsOverrides.targetExe !== undefined &&
     gameSettingsOverrides.targetExe !== '' &&
-    fs.existsSync(gameSettingsOverrides.targetExe)
+    existsSync(gameSettingsOverrides.targetExe)
   ) {
     executable = gameSettingsOverrides.targetExe
   }
