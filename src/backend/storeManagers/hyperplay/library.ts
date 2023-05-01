@@ -244,6 +244,7 @@ export async function listUpdateableGames(): Promise<string[]> {
     }
     if (
       gameIsInstalled(val) &&
+      Object.hasOwn(listingMap, val.app_name) &&
       val.install.version !== listingMap[val.app_name].releaseName
     ) {
       updateableGames.push(val.app_name)
