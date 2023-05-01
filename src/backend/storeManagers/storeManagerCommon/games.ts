@@ -3,7 +3,11 @@ import { GameConfig } from '../../game_config'
 import { isMac, isLinux, gamesConfigPath, icon } from '../../constants'
 import { logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import path, { dirname, join, resolve } from 'path'
-import { appendFileSync, constants as FS_CONSTANTS } from 'graceful-fs'
+import {
+  appendFileSync,
+  existsSync,
+  constants as FS_CONSTANTS
+} from 'graceful-fs'
 import i18next from 'i18next'
 import {
   callRunner,
@@ -160,7 +164,8 @@ export async function launchGame(
   const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
   if (
     gameSettingsOverrides.targetExe !== undefined &&
-    gameSettingsOverrides.targetExe !== ''
+    gameSettingsOverrides.targetExe !== '' &&
+    existsSync(gameSettingsOverrides.targetExe)
   ) {
     executable = gameSettingsOverrides.targetExe
   }

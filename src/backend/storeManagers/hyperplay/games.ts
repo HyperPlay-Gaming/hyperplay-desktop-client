@@ -404,10 +404,7 @@ export async function uninstall({
 
   // remove game folder from install path
   const installPath = appInfo.install.install_path
-  if (appInfo.folder_name === undefined) return { stderr: '', stdout: '' }
-  const gameFolder = path.join(installPath, appInfo.folder_name)
-
-  rmSync(gameFolder, { recursive: true, force: true })
+  rmSync(installPath, { recursive: true, force: true })
 
   // only remove the game from the store if the platform is web
   // @ts-expect-error TS wont know how to handle the type of installInfo
