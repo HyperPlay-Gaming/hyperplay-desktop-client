@@ -219,7 +219,6 @@ export function getGameInfo(
  * since library release data is updated on each app launch
  */
 export async function listUpdateableGames(): Promise<string[]> {
-  logWarning(`listUpdateableGames not implemented on HyperPlay Library Manager`)
   const allListingsResponse = await axios.get(
     'https://developers.hyperplay.xyz/api/listings'
   )
@@ -236,14 +235,17 @@ export async function listUpdateableGames(): Promise<string[]> {
   const updateableGames: string[] = []
   const currentHpLibrary = hpLibraryStore.get('games', [])
   currentHpLibrary.map((val) => {
-    if (val.install.platform === 'web') {
+    if (
+      val.install.platform === 'web' ||
+      !val.is_installed ||
+      !gameIsInstalled(val)
+    ) {
       return
     }
     if (val.version === undefined) {
       updateableGames.push(val.app_name)
     }
     if (
-      gameIsInstalled(val) &&
       Object.hasOwn(listingMap, val.app_name) &&
       val.install.version !== listingMap[val.app_name].releaseName
     ) {
