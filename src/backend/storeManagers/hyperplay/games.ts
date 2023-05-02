@@ -254,7 +254,7 @@ export async function install(
     return { status: 'error', error: 'Release meta not found' }
   }
 
-  logInfo(`Installing ${title} to ${path}...`, LogPrefix.HyperPlay)
+  logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
 
   // download the zip file
   try {
