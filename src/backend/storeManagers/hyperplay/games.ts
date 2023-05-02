@@ -254,7 +254,7 @@ export async function install(
     return { status: 'error', error: 'Release meta not found' }
   }
 
-  logInfo(`Installing ${title} to ${path}...`, LogPrefix.HyperPlay)
+  logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
 
   // download the zip file
   try {
@@ -404,6 +404,7 @@ export async function uninstall({
 
   // remove game folder from install path
   const installPath = appInfo.install.install_path
+  logInfo(`Removing folder in uninstall: ${installPath}`, LogPrefix.HyperPlay)
   rmSync(installPath, { recursive: true, force: true })
 
   // only remove the game from the store if the platform is web
@@ -425,12 +426,13 @@ export async function uninstall({
     (value) => value.app_name === appName
   )
   currentLibrary[gameIndex].is_installed = false
+  currentLibrary[gameIndex].install = {}
   hpLibraryStore.set('games', currentLibrary)
 
   if (shouldRemovePrefix) {
     const { winePrefix } = await getSettings(appName)
 
-    logInfo(`Removing prefix ${winePrefix}`, LogPrefix.Backend)
+    logInfo(`Removing prefix ${winePrefix}`, LogPrefix.HyperPlay)
     if (existsSync(winePrefix)) {
       // remove prefix if exists
       rmSync(winePrefix, { recursive: true })
@@ -483,7 +485,7 @@ export async function update(appName: string): Promise<InstallResult> {
   if (gameInfo.install.platform === undefined) {
     logError(
       'Install platform was not found during game updated',
-      LogPrefix.Backend
+      LogPrefix.HyperPlay
     )
     return { status: 'error' }
   }
@@ -491,14 +493,14 @@ export async function update(appName: string): Promise<InstallResult> {
   if (gameInfo.install.install_path === undefined) {
     logError(
       'Install path was not found during game updated',
-      LogPrefix.Backend
+      LogPrefix.HyperPlay
     )
     return { status: 'error' }
   }
 
   await uninstall({ appName })
   const installResult = await install(appName, {
-    path: gameInfo.install.install_path,
+    path: path.dirname(gameInfo.install.install_path),
     platformToInstall: gameInfo.install.platform
   })
   return installResult
