@@ -219,7 +219,11 @@
     "globalSettings": "Global Settings",
     "GOG": "GOG",
     "header": {
+        "hide_non_available_games": "Hide non-available games",
+        "ignore_hidden": "Ignore Hidden",
         "platform": "Platform",
+        "show_available_games": "Show non-Available games",
+        "show_hidden": "Show Hidden",
         "store": "Filter Store"
     },
     "help": {
@@ -415,8 +419,11 @@
         }
     },
     "library": {
+        "alphabeticalAZ": "Alphabetical A-Z",
+        "alphabeticalZA": "Alphabetical Z-A",
         "label": "Library",
-        "refresh": "Refresh"
+        "refresh": "Refresh",
+        "sortByStatus": "Sort by Status"
     },
     "loading": {
         "default": "Loading",
