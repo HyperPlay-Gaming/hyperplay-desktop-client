@@ -53,77 +53,97 @@ export default function SidebarLinks() {
   const sidebarSvgUnselectedFill = 'var(--color-neutral-400)'
 
   return (
-    <div className="SidebarLinks Sidebar__section">
-      <NavLink
-        className={({ isActive }) =>
-          classNames('Sidebar__item', {
-            active: isActive || location.pathname.includes('store')
-          })
-        }
-        to="/hyperplaystore"
-      >
-        <Images.Home fill={sidebarSvgUnselectedFill} />
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          classNames('Sidebar__item', {
-            active:
-              isActive ||
-              location.pathname.includes('gamepage') ||
-              location.pathname.includes('library')
-          })
-        }
-        end
-        to={'/'}
-        onClick={async () => handleRefresh()}
-      >
-        <Images.Controller fill={sidebarSvgUnselectedFill} />
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          classNames('Sidebar__item', { active: isActive })
-        }
-        to={{ pathname: '/download-manager' }}
-      >
-        <Images.DownloadIcon fill={sidebarSvgUnselectedFill} />
-      </NavLink>
-      <NavLink
-        data-testid="settings"
-        className={({ isActive }) =>
-          classNames('Sidebar__item', {
-            active: isActive || location.pathname.includes('settings')
-          })
-        }
-        to={{ pathname: settingsPath }}
-        state={{
-          fromGameCard: false
-        }}
-      >
-        <Images.Settings fill={sidebarSvgUnselectedFill} />
-      </NavLink>
+    <>
+      <div className=" SidebarLinks Sidebar__section">
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            className={({ isActive }) =>
+              classNames('Sidebar__item', {
+                active: isActive || location.pathname.includes('store')
+              })
+            }
+            to="/hyperplaystore"
+          >
+            <Images.Home fill={sidebarSvgUnselectedFill} />
+          </NavLink>
+        </div>
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            className={({ isActive }) =>
+              classNames('Sidebar__item', {
+                active:
+                  isActive ||
+                  location.pathname.includes('gamepage') ||
+                  location.pathname.includes('library')
+              })
+            }
+            end
+            to={'/'}
+            onClick={async () => handleRefresh()}
+          >
+            <Images.Controller fill={sidebarSvgUnselectedFill} />
+          </NavLink>
+        </div>
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={{ pathname: '/download-manager' }}
+          >
+            <Images.DownloadIcon fill={sidebarSvgUnselectedFill} />
+          </NavLink>
+        </div>
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            data-testid="settings"
+            className={({ isActive }) =>
+              classNames('Sidebar__item', {
+                active: isActive || location.pathname.includes('settings')
+              })
+            }
+            to={{ pathname: settingsPath }}
+            state={{
+              fromGameCard: false
+            }}
+          >
+            <Images.Settings fill={sidebarSvgUnselectedFill} />
+          </NavLink>
+        </div>
+      </div>
 
-      <button
-        className="Sidebar__item"
-        onClick={() => handleExternalLink(openDiscordLink)}
-      >
-        <Images.Discord stroke={sidebarSvgUnselectedFill} />
-      </button>
-      <button
-        className="Sidebar__item"
-        onClick={() => handleExternalLink(window.api.openTwitterLink)}
-      >
-        <Images.Twitter fill={sidebarSvgUnselectedFill} />
-      </button>
-      <NavLink
-        data-testid="wiki"
-        className={({ isActive }) =>
-          classNames('Sidebar__item', { active: isActive })
-        }
-        to={{ pathname: '/wiki' }}
-      >
-        <Images.Page fill={sidebarSvgUnselectedFill} />
-      </NavLink>
-      {(isFullscreen || activeController) && <QuitButton />}
-    </div>
+      <div className=" SidebarLinks Sidebar__section">
+        <div className="sidebarLinkGradientWrapper">
+          <div className="Sidebar__item">
+            <button onClick={() => handleExternalLink(openDiscordLink)}>
+              <Images.Discord stroke={sidebarSvgUnselectedFill} />
+            </button>
+          </div>
+        </div>
+        <div className="sidebarLinkGradientWrapper ">
+          <div className="Sidebar__item">
+            <button
+              onClick={() => handleExternalLink(window.api.openTwitterLink)}
+            >
+              <Images.Twitter fill={sidebarSvgUnselectedFill} />
+            </button>
+          </div>
+        </div>
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            data-testid="wiki"
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={{ pathname: '/wiki' }}
+          >
+            <Images.Page fill={sidebarSvgUnselectedFill} />
+          </NavLink>
+        </div>
+        <div className="sidebarLinkGradientWrapper">
+          {(isFullscreen || activeController) && <QuitButton />}
+        </div>
+      </div>
+    </>
   )
 }
