@@ -42,10 +42,9 @@ html,
   grid-area: content;
   flex-direction: column;
   height: 100%;
-  overflow-y: auto;
+  overflow-y: hidden;
   overflow-x: hidden;
-  padding: var(--space-xl) calc(2 * var(--space-md)) calc(2 * var(--space-md))
-    0px;
+  padding: var(--space-xl) calc(2 * var(--space-md)) 0px 0px;
 }
 
 .App .content .UpdateComponent--topLevel {

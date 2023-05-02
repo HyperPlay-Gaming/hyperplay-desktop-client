@@ -49,12 +49,6 @@ import { Category } from 'frontend/types'
 
 const storage = window.localStorage
 
-const filters = [
-  { text: 'Alphabetical A-Z', id: 'alphabeticalAscending' },
-  { text: 'Favorites' },
-  { text: 'Sort by Status' }
-]
-
 type ModalState = {
   game: string
   show: boolean
@@ -84,23 +78,78 @@ export default React.memo(function Library(): JSX.Element {
     setShowFavourites,
     showNonAvailable,
     hyperPlayLibrary,
-    refreshLibrary
+    refreshLibrary,
+    setShowHidden,
+    setShowNonAvailable
   } = useContext(ContextProvider)
+  const { t } = useTranslation()
 
-  const [selectedFilter, setSelectedFilter] = useState(filters[0])
+  const defaultFilter = {
+    text: t('library.sortByStatus', 'Sort by Status'),
+    id: 'sortByInstalled'
+  }
+  const [selectedFilter, setSelectedFilter] = useState(defaultFilter)
   const [showModal, setShowModal] = useState<ModalState>({
     game: '',
     show: false,
     runner: 'legendary',
     gameInfo: null
   })
-  const [sortDescending, setSortDescending] = useState(
-    JSON.parse(storage?.getItem('sortDescending') || 'false')
-  )
-  const [sortInstalled, setSortInstalled] = useState(
-    JSON.parse(storage?.getItem('sortInstalled') || 'true')
-  )
-  const { t } = useTranslation()
+
+  const [showOnlyDownloaded, setShowOnlyDownloaded] = useState(false)
+  // this filter retains its last value and thus can be combined with other filters
+  const [sortAscending, setSortAscending] = useState(true)
+  useEffect(() => {
+    if (selectedFilter.id === 'alphabeticalAscending') {
+      setSortAscending(true)
+    } else if (selectedFilter.id === 'alphabeticalDescending') {
+      setSortAscending(false)
+    } else if (selectedFilter.id === 'showHidden') {
+      setShowHidden(true)
+    } else if (selectedFilter.id === 'ignoreHidden') {
+      setShowHidden(false)
+    } else if (selectedFilter.id === 'showNonAvailable') {
+      setShowNonAvailable(true)
+    } else if (selectedFilter.id === 'hideNonAvailable') {
+      setShowNonAvailable(false)
+    }
+  }, [selectedFilter])
+  // this filter is only true/active when selected and false/inactive otherwise
+  const sortInstalled = selectedFilter.id === 'sortByInstalled'
+  const filters = [
+    defaultFilter,
+    {
+      text: t('library.alphabeticalAZ', 'Alphabetical A-Z'),
+      id: 'alphabeticalAscending',
+      selected: sortAscending
+    },
+    {
+      text: t('library.alphabeticalZA', 'Alphabetical Z-A'),
+      id: 'alphabeticalDescending',
+      selected: !sortAscending
+    },
+    {
+      text: t('header.show_hidden', 'Show Hidden'),
+      id: 'showHidden',
+      selected: showHidden
+    },
+    {
+      text: t('header.ignore_hidden', 'Ignore Hidden'),
+      id: 'ignoreHidden',
+      selected: !showHidden
+    },
+    {
+      text: t('header.show_available_games', 'Show non-Available games'),
+      id: 'showNonAvailable',
+      selected: showNonAvailable
+    },
+    {
+      text: t('header.hide_non_available_games', 'Hide non-available games'),
+      id: 'hideNonAvailable',
+      selected: !showNonAvailable
+    }
+  ]
+
   const backToTopElement = useRef(null)
   const listing = useRef<HTMLDivElement>(null)
 
@@ -308,12 +357,15 @@ export default React.memo(function Library(): JSX.Element {
     library = library.sort((a: { title: string }, b: { title: string }) => {
       const gameA = a.title.toUpperCase().replace('THE ', '')
       const gameB = b.title.toUpperCase().replace('THE ', '')
-      return sortDescending ? (gameA > gameB ? -1 : 1) : gameA < gameB ? -1 : 1
+      return sortAscending ? (gameA < gameB ? -1 : 1) : gameA > gameB ? -1 : 1
     })
     const installed = library.filter((g) => g.is_installed)
-    const notInstalled = library.filter(
-      (g) => !g.is_installed && !installing.includes(g.app_name)
-    )
+    const notInstalled = showOnlyDownloaded
+      ? []
+      : library.filter(
+          (g) => !g.is_installed && !installing.includes(g.app_name)
+        )
+
     const installingGames = library.filter(
       (g) => !g.is_installed && installing.includes(g.app_name)
     )
@@ -332,14 +384,15 @@ export default React.memo(function Library(): JSX.Element {
     gog.library,
     filterText,
     filterPlatform,
-    sortDescending,
+    sortAscending,
     sortInstalled,
     showHidden,
     hiddenGames,
     showFavouritesLibrary,
     showNonAvailable,
     sideloadedLibrary,
-    hyperPlayLibrary
+    hyperPlayLibrary,
+    showOnlyDownloaded
   ])
 
   const numberOfGames = useMemo(() => {
@@ -455,7 +508,12 @@ export default React.memo(function Library(): JSX.Element {
               />
             </Button>
           </div>
-          <Toggle>
+          <Toggle
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+            onChange={(e: any) => {
+              setShowOnlyDownloaded(e.target.checked)
+            }}
+          >
             <div className="body" style={{ marginRight: 'var(--space-xs)' }}>
               {t('Downloaded', 'Downloaded')}
             </div>
