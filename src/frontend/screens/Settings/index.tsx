@@ -115,16 +115,30 @@ function Settings() {
             <h1 className="headerTitle" data-testid="headerTitle">
               Settings
             </h1>
-            <Tabs>
-              <Tabs.List>
-                <Tabs.Tab value="general">General</Tabs.Tab>
-                <Tabs.Tab value="gamesSettings">Games Settings</Tabs.Tab>
-                <Tabs.Tab value="syncSettings">Sync Settings</Tabs.Tab>
-                <Tabs.Tab value="advSettings">Advanced Settings</Tabs.Tab>
-                <Tabs.Tab value="logSettings">Log Settings</Tabs.Tab>
-                <Tabs.Tab value="accessibility">Accessibility</Tabs.Tab>
+            <Tabs defaultValue="general">
+              <Tabs.List style={{ marginBottom: 'var(--space-md)' }}>
+                <Tabs.Tab value="general">
+                  {t('settings.navbar.general')}
+                </Tabs.Tab>
+                <Tabs.Tab value="gamesSettings">
+                  {t('settings.gamesSettings', 'Games Settings')}
+                </Tabs.Tab>
+                <Tabs.Tab value="syncSettings">
+                  {t('settings.syncSettings', 'Sync Settings')}
+                </Tabs.Tab>
+                <Tabs.Tab value="advSettings">
+                  {t('settings.navbar.advanced')}
+                </Tabs.Tab>
+                <Tabs.Tab value="logSettings">
+                  {t('settings.navbar.log')}
+                </Tabs.Tab>
+                <Tabs.Tab value="accessibility">
+                  {t('accessibility.title')}
+                </Tabs.Tab>
                 {!isWin ? (
-                  <Tabs.Tab value="wineManager">Wine Manager</Tabs.Tab>
+                  <Tabs.Tab value="wineManager">
+                    {t('settings.wine.manager.title')}
+                  </Tabs.Tab>
                 ) : null}
               </Tabs.List>
               <Tabs.Panel value="general">
