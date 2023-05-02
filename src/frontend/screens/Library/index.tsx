@@ -43,7 +43,8 @@ import {
   Tabs,
   Toggle,
   Images,
-  Background
+  Background,
+  DropdownItemType
 } from '@hyperplay/ui'
 import { Category } from 'frontend/types'
 
@@ -84,7 +85,7 @@ export default React.memo(function Library(): JSX.Element {
   } = useContext(ContextProvider)
   const { t } = useTranslation()
 
-  const defaultFilter = {
+  const defaultFilter: DropdownItemType = {
     text: t('library.sortByStatus', 'Sort by Status'),
     id: 'sortByInstalled'
   }
