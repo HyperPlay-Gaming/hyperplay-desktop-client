@@ -7,8 +7,10 @@
         "title": "Accessibility",
         "zoom": "Zoom"
     },
+    "accounts": "accounts",
     "add_game": "Add Game",
     "All": "All",
+    "ALL": "ALL",
     "analytics": "Analytics",
     "anticheat": {
         "anticheats": "Anticheats",
@@ -148,7 +150,6 @@
         "continue": "Continue",
         "download": "Download",
         "go_to_library": "Go to Library",
-        "login": "Log in",
         "sync": "Sync",
         "syncing": "Syncing",
         "unsync": "Unsync"
@@ -173,7 +174,6 @@
             "update_game": "Update game"
         }
     },
-    "docs": "Documentation",
     "download-manager": {
         "install-type": {
             "install": "Install",
@@ -183,7 +183,6 @@
             "disk": "Disk",
             "speed": "Download"
         },
-        "link": "Downloads",
         "queue": {
             "end-time": "Finished at",
             "queue-time": "Added at",
@@ -192,6 +191,7 @@
         },
         "title": "Downloads"
     },
+    "Downloaded": "Downloaded",
     "epic": {
         "offline-notification-body": "Online services may not work fully as Epic Games servers are offline!",
         "offline-notification-title": "offline"
@@ -218,15 +218,8 @@
     },
     "globalSettings": "Global Settings",
     "GOG": "GOG",
-    "gog-store": "GOG Store",
     "header": {
-        "hide_non_available_games": "Hide non-available games",
-        "ignore_hidden": "Ignore Hidden",
         "platform": "Platform",
-        "show_all_games": "Show all games",
-        "show_available_games": "Show non-Available games",
-        "show_favourites_only": "Show Favourites only",
-        "show_hidden": "Show Hidden",
         "store": "Filter Store"
     },
     "help": {
@@ -275,6 +268,8 @@
             "agree": "I agree",
             "noThanks": "No Thanks"
         },
+        "changeWallet": "Change wallet",
+        "currentWallet": "Current wallet",
         "discordApp": "Discord",
         "misc": "Never",
         "onboarding": {
@@ -343,15 +338,18 @@
                 "title": "Welcome to HyperPlay Early Access!"
             }
         },
+        "publicAlpha": "Public Alpha",
+        "switchAccount": "Switch account",
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
+        "viewFullscreen": "View fullscreen",
+        "viewPortfolio": "View portfolio",
         "wallet": {
             "connected": "Connected",
             "notConnected": "Not connected"
         }
     },
     "HyperPlay": "",
-    "hyperplay-store": "HyperPlay Store",
     "hyperplayOverlay": {
         "chainRequest": {
             "CONFIRMED": "Custom network added",
@@ -418,14 +416,7 @@
     },
     "library": {
         "label": "Library",
-        "refresh": "Refresh",
-        "sortAscending": "Sort Ascending",
-        "sortByStatus": "Sort by Status",
-        "sortDescending": "Sort Descending",
-        "toggleLayout": {
-            "grid": "Toggle to a grid layout",
-            "list": "Toggle to a list layout"
-        }
+        "refresh": "Refresh"
     },
     "loading": {
         "default": "Loading",
@@ -440,13 +431,6 @@
     "message": {
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
-    },
-    "metamask": {
-        "sidebar": {
-            "home": "Home",
-            "popup": "Popup",
-            "portfolio": "Portfolio"
-        }
     },
     "notify": {
         "error": {
@@ -693,12 +677,12 @@
                 "title": "EAC runtime enabled"
             }
         },
+        "gamesSettings": "Games Settings",
         "log": {
             "long-log-hint": "Log truncated, last 1000 lines are shown!"
         },
         "navbar": {
             "advanced": "Advanced",
-            "games_settings_defaults": "Game Defaults",
             "general": "General",
             "log": "Log",
             "other": "Other",
@@ -708,6 +692,12 @@
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "syncSettings": "Sync Settings",
+        "wine": {
+            "manager": {
+                "title": ""
+            }
         }
     },
     "Settings": "Settings",
@@ -721,7 +711,6 @@
         "processing": "Processing files, please wait"
     },
     "store": "Epic Store",
-    "stores": "Stores",
     "title": {
         "allGames": "All Games"
     },
@@ -746,7 +735,6 @@
     },
     "Update Available!": "",
     "userselector": {
-        "discord": "Discord",
         "logging_out": "Logging out",
         "logout": "Log out",
         "logout_confirmation": "Are you sure you want to log out?",
@@ -767,7 +755,6 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "link": "Wine Manager",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Wine Manager",
             "unzipping": "Unzipping"
