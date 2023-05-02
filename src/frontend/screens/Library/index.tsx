@@ -386,7 +386,7 @@ export default React.memo(function Library(): JSX.Element {
     <>
       <Background style={{ position: 'absolute' }}></Background>
       <div className={styles.libraryTopHeader}>
-        <h3>Library</h3>
+        <h3>{t('library.label', 'Library')}</h3>
         <span className={`${styles.numberOfgames} title`}>{numberOfGames}</span>
         <Button
           className={styles.refreshButton}
@@ -446,7 +446,13 @@ export default React.memo(function Library(): JSX.Element {
               type="tertiary"
               onClick={() => setShowFavourites(!showFavouritesLibrary)}
             >
-              <Images.Heart fill="white" />
+              <Images.Heart
+                fill={
+                  showFavouritesLibrary
+                    ? 'var(--color-primary-400)'
+                    : 'var(--color-neutral-100)'
+                }
+              />
             </Button>
           </div>
           <Toggle>

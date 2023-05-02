@@ -37,6 +37,7 @@ html,
 }
 
 .App .content {
+  position: relative;
   display: flex;
   grid-area: content;
   flex-direction: column;
