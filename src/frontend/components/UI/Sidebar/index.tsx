@@ -5,7 +5,7 @@ import styles from './index.module.scss'
 
 const Sidebar = () => {
   return (
-    <aside className={styles.Sidebar}>
+    <aside className={`${styles.Sidebar}`}>
       <SidebarLinks />
     </aside>
   )

@@ -8,7 +8,6 @@
 
 .Sidebar__item {
   display: flex;
-  width: 100%;
   aspect-ratio: 1/1;
   padding: var(--space-xs) var(--sidebar-horizontal-padding);
   border: none;
@@ -19,7 +18,7 @@
   transition: color 250ms;
   text-align: start;
   font-family: var(--primary-font-family);
-  border-radius: 0;
+  border-radius: var(--space-sm);
   align-items: center;
   justify-content: center;
   font-weight: var(--semibold);
@@ -36,10 +35,25 @@
 
 .Sidebar__item.active {
   color: var(--color-neutral-100);
+  background-color: var(--color-neutral-600);
 }
 
 .Sidebar__item.active.SidebarLinks__subItem {
   font-weight: var(--bold);
+}
+
+.sidebarLinkGradientWrapper {
+  padding: 2px;
+  margin: var(--space-3xs);
+  border-radius: var(--space-sm);
+}
+
+.sidebarLinkGradientWrapper > button {
+  margin: 0 auto;
+}
+
+.sidebarLinkGradientWrapper:has(.Sidebar__item.active) {
+  background: var(--color-gradient-01-border);
 }
 
 .currentDownloads {
