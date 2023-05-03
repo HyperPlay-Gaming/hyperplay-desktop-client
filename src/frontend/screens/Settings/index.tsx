@@ -1,4 +1,4 @@
-import './index.css'
+import './index.scss'
 
 import React, { useContext, useEffect, useState } from 'react'
 
@@ -9,12 +9,7 @@ import ContextMenu from '../Library/components/ContextMenu'
 import SettingsContext from './SettingsContext'
 import LogSettings from './sections/LogSettings'
 import FooterInfo from './sections/FooterInfo'
-import {
-  GeneralSettings,
-  GamesSettings,
-  SyncSaves,
-  AdvancedSettings
-} from './sections'
+import { GeneralSettings, GamesSettings, AdvancedSettings } from './sections'
 import { AppSettings, WineInstallation } from 'common/types'
 import { UpdateComponent } from 'frontend/components/UI'
 import { LocationState, SettingsContextType } from 'frontend/types'
@@ -116,28 +111,32 @@ function Settings() {
               Settings
             </h1>
             <Tabs defaultValue="general">
-              <Tabs.List style={{ marginBottom: 'var(--space-md)' }}>
+              <Tabs.List
+                style={{ marginBottom: 'var(--space-md)' }}
+                type="outline"
+              >
                 <Tabs.Tab value="general">
-                  {t('settings.navbar.general')}
+                  <div className="menu">{t('settings.navbar.general')}</div>
                 </Tabs.Tab>
                 <Tabs.Tab value="gamesSettings">
-                  {t('settings.gamesSettings', 'Games Settings')}
-                </Tabs.Tab>
-                <Tabs.Tab value="syncSettings">
-                  {t('settings.syncSettings', 'Sync Settings')}
+                  <div className="menu">
+                    {t('settings.gamesSettings', 'Games Settings')}
+                  </div>
                 </Tabs.Tab>
                 <Tabs.Tab value="advSettings">
-                  {t('settings.navbar.advanced')}
+                  <div className="menu">{t('settings.navbar.advanced')}</div>
                 </Tabs.Tab>
                 <Tabs.Tab value="logSettings">
-                  {t('settings.navbar.log')}
+                  <div className="menu">{t('settings.navbar.log')}</div>
                 </Tabs.Tab>
                 <Tabs.Tab value="accessibility">
-                  {t('accessibility.title')}
+                  <div className="menu">{t('accessibility.title')}</div>
                 </Tabs.Tab>
                 {!isWin ? (
                   <Tabs.Tab value="wineManager">
-                    {t('settings.wine.manager.title')}
+                    <div className="menu">
+                      {t('settings.wine.manager.title')}
+                    </div>
                   </Tabs.Tab>
                 ) : null}
               </Tabs.List>
@@ -146,9 +145,6 @@ function Settings() {
               </Tabs.Panel>
               <Tabs.Panel value="gamesSettings">
                 <GamesSettings useDetails={false} />
-              </Tabs.Panel>
-              <Tabs.Panel value="syncSettings">
-                <SyncSaves />
               </Tabs.Panel>
               <Tabs.Panel value="advSettings">
                 <AdvancedSettings />

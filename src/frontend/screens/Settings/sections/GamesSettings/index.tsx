@@ -169,8 +169,6 @@ export default function GamesSettings({ useDetails = true }: Props) {
           <SyncSaves />
         </Collapsible>
       )}
-
-      <FooterInfo />
     </>
   )
 }

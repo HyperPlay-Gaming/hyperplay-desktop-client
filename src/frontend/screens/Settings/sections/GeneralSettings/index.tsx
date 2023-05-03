@@ -24,7 +24,9 @@ export default function GeneralSettings() {
 
   return (
     <>
-      <h3 className="settingSubheader">{t('settings.navbar.general')}</h3>
+      <div className="settingSubheader settingsSectionHeader">
+        {t('settings.navbar.general')}
+      </div>
 
       <LanguageSelector />
 

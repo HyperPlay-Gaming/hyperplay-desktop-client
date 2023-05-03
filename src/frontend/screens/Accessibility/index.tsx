@@ -104,9 +104,9 @@ export default React.memo(function Accessibility() {
   return (
     <div className="Accessibility">
       <div className="settingsWrapper">
-        <h1 className="headerTitle">
+        <div className="settingsSectionHeader">
           {t('accessibility.title', 'Accessibility')}
-        </h1>
+        </div>
 
         <span className="rangeWrapper Field">
           <label className={classNames({ isRTL: isRTL }, 'zoomRangeLabel')}>

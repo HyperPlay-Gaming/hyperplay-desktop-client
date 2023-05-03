@@ -1,3 +1,5 @@
+@use '@hyperplay/ui/style.css';
+
 .Settings {
   display: flex;
   flex-wrap: nowrap;
@@ -47,11 +49,6 @@
 
 .headerTitle > svg {
   margin-left: 12px;
-}
-
-.settingSubheader {
-  text-align: left;
-  margin-top: 0;
 }
 
 .settingsWrapper > .backButton {
@@ -217,4 +214,9 @@ a {
 
 .infoBox.saves-warning svg {
   padding-right: 10px;
+}
+
+.settingsSectionHeader {
+  @extend .title;
+  text-align: left;
 }
