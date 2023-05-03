@@ -42,7 +42,6 @@ import {
   Dropdown,
   Tabs,
   Toggle,
-  Images,
   Background,
   DropdownItemType,
   GenericDropdown,
