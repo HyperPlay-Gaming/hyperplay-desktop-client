@@ -25,11 +25,11 @@ export default function AccountDropdown() {
         <Menu.Label className={styles.menuLabel}>
           {t('hyperplay.currentWallet', `Current wallet`)}
         </Menu.Label>
-        <Menu.Item className={`${styles.menuItem} `}>
+        {/* <Menu.Item className={`${styles.menuItem} `}>
           <div className={`body ${styles.itemContents}`}>
             {t('hyperplay.switchAccount', `Switch account`)}
           </div>
-        </Menu.Item>
+        </Menu.Item> */}
         {showMetaMaskBrowserSidebarLinks && (
           <Menu.Item className={`${styles.menuItem} `}>
             <NavLink to={'/metamaskHome'}>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import { HyperPlayLogoWhite } from 'frontend/assets/hyperplay'
 import { Images } from '@hyperplay/ui'
@@ -14,6 +14,20 @@ const TopNavBar = observer(() => {
   const { t } = useTranslation()
 
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+  const [badgeText, setBadgeText] = useState('0')
+
+  /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+  function setBadgeString(err: any, text: string) {
+    setBadgeText(text)
+  }
+  useEffect(() => {
+    const removeHandleSetBadgeText =
+      window.api.handleSetBadgeTextInRenderer(setBadgeString)
+
+    return () => {
+      removeHandleSetBadgeText()
+    }
+  }, [])
   return (
     <div className={styles.navBar}>
       <div>
@@ -40,6 +54,9 @@ const TopNavBar = observer(() => {
             onClick={() => extensionStore.toggleIsPopupOpen()}
           >
             <Images.MetaMask fill="white" />
+            {badgeText !== '' && badgeText !== '0' ? (
+              <div className={styles.badge}>{badgeText}</div>
+            ) : null}
           </button>
         )}
         <div style={{ width: '200px' }}>
