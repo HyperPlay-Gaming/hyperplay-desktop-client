@@ -47,6 +47,10 @@ html,
   padding: var(--space-xl) calc(2 * var(--space-md)) 0px 0px;
 }
 
+.App .content:has(div.gameConfigContainer) {
+  padding: 0px;
+}
+
 .App .content .UpdateComponent--topLevel {
   height: 100vh;
   position: initial;
