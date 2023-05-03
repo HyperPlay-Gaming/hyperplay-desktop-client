@@ -540,7 +540,7 @@ export default React.memo(function Library(): JSX.Element {
             <div className="menu">{t('Other')}</div>
           </Tabs.Tab>
           <div id="alignEnd">
-            <div>
+            {/* <div>
               <Button type="tertiary" className={styles.gridListButton}>
                 <Images.Grid fill="white" height={24} width={24} />
               </Button>
@@ -549,7 +549,7 @@ export default React.memo(function Library(): JSX.Element {
               <Button type="tertiary" className={styles.gridListButton}>
                 <Images.List fill="white" height={24} width={24} />
               </Button>
-            </div>
+            </div> */}
           </div>
         </Tabs.List>
       </Tabs>
