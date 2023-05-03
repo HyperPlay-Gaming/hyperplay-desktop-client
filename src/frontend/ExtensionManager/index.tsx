@@ -25,30 +25,6 @@ const animation = {
 const ExtensionManager = function () {
   const rootRef = useRef<HTMLDivElement>(null)
 
-  // useEffect(() => {
-  //   const handleOutsideClick = (e: MouseEvent) => {
-  //     if (extensionStore.isPopupOpen) {
-  //       const target = e.target as HTMLElement
-
-  //       const isMenuItemClicked =
-  //         !!target.closest('.SidebarLinks__subItem__popup') ||
-  //         !!target.classList.contains('SidebarLinks__subItem__popup')
-
-  //       const isOutsideClick =
-  //         target.closest(`.${ExtensionManagerStyles.mmContainer}`) === null
-
-  //       if (isOutsideClick && !isMenuItemClicked) {
-  //         extensionStore.setIsPopupOpen(false)
-  //       }
-  //     }
-  //   }
-
-  //   window.addEventListener('click', handleOutsideClick)
-  //   return () => {
-  //     window.removeEventListener('click', handleOutsideClick)
-  //   }
-  // })
-
   /* eslint-disable react/no-unknown-property */
   return (
     <div className={ExtensionManagerStyles.mmContainer} ref={rootRef}>

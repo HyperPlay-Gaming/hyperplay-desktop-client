@@ -99,7 +99,8 @@ import {
   customThemesWikiLink,
   createNecessaryFolders,
   fixAsarPath,
-  twitterLink
+  twitterLink,
+  eventsToCloseMetaMaskPopupOn
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -174,6 +175,12 @@ async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
   mainWindow = createMainWindow()
+
+  mainWindow.webContents.on('input-event', (ev, inputEv) => {
+    if (eventsToCloseMetaMaskPopupOn.includes(inputEv.type)) {
+      mainWindow.webContents.send('removePopupInWebview')
+    }
+  })
 
   ExtensionHelper.initExtensionProvider(mainWindow)
 
