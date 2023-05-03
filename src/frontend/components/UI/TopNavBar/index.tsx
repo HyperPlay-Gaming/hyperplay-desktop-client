@@ -45,9 +45,6 @@ const TopNavBar = observer(() => {
       </div>
       <div>
         <SearchBar />
-        <button className={styles.iconButton}>
-          <Images.MagnifyingGlass fill="white" />
-        </button>
         {showMetaMaskBrowserSidebarLinks && (
           <button
             className={styles.iconButton}
