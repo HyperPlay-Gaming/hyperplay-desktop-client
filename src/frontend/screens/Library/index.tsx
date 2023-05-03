@@ -44,7 +44,9 @@ import {
   Toggle,
   Images,
   Background,
-  DropdownItemType
+  DropdownItemType,
+  GenericDropdown,
+  Menu
 } from '@hyperplay/ui'
 import { Category } from 'frontend/types'
 
@@ -85,11 +87,21 @@ export default React.memo(function Library(): JSX.Element {
   } = useContext(ContextProvider)
   const { t } = useTranslation()
 
-  const defaultFilter: DropdownItemType = {
-    text: t('library.sortByStatus', 'Sort by Status'),
-    id: 'sortByInstalled'
-  }
-  const [selectedFilter, setSelectedFilter] = useState(defaultFilter)
+  const filters: DropdownItemType[] = [
+    {
+      text: t('library.sortByStatus', 'Sort by Status'),
+      id: 'sortByInstalled'
+    },
+    {
+      text: t('library.alphabeticalAZ', 'Alphabetical A-Z'),
+      id: 'alphabeticalAscending'
+    },
+    {
+      text: t('library.alphabeticalZA', 'Alphabetical Z-A'),
+      id: 'alphabeticalDescending'
+    }
+  ]
+  const [selectedFilter, setSelectedFilter] = useState(filters[0])
   const [showModal, setShowModal] = useState<ModalState>({
     game: '',
     show: false,
@@ -105,51 +117,10 @@ export default React.memo(function Library(): JSX.Element {
       setSortAscending(true)
     } else if (selectedFilter.id === 'alphabeticalDescending') {
       setSortAscending(false)
-    } else if (selectedFilter.id === 'showHidden') {
-      setShowHidden(true)
-    } else if (selectedFilter.id === 'ignoreHidden') {
-      setShowHidden(false)
-    } else if (selectedFilter.id === 'showNonAvailable') {
-      setShowNonAvailable(true)
-    } else if (selectedFilter.id === 'hideNonAvailable') {
-      setShowNonAvailable(false)
     }
   }, [selectedFilter])
   // this filter is only true/active when selected and false/inactive otherwise
   const sortInstalled = selectedFilter.id === 'sortByInstalled'
-  const filters = [
-    defaultFilter,
-    {
-      text: t('library.alphabeticalAZ', 'Alphabetical A-Z'),
-      id: 'alphabeticalAscending',
-      selected: sortAscending
-    },
-    {
-      text: t('library.alphabeticalZA', 'Alphabetical Z-A'),
-      id: 'alphabeticalDescending',
-      selected: !sortAscending
-    },
-    {
-      text: t('header.show_hidden', 'Show Hidden'),
-      id: 'showHidden',
-      selected: showHidden
-    },
-    {
-      text: t('header.ignore_hidden', 'Ignore Hidden'),
-      id: 'ignoreHidden',
-      selected: !showHidden
-    },
-    {
-      text: t('header.show_available_games', 'Show non-Available games'),
-      id: 'showNonAvailable',
-      selected: showNonAvailable
-    },
-    {
-      text: t('header.hide_non_available_games', 'Hide non-available games'),
-      id: 'hideNonAvailable',
-      selected: !showNonAvailable
-    }
-  ]
 
   const backToTopElement = useRef(null)
   const listing = useRef<HTMLDivElement>(null)
@@ -436,6 +407,42 @@ export default React.memo(function Library(): JSX.Element {
     return 'gog'
   }
 
+  const data = [
+    // {
+    //   text: 'Token required',
+    //   defaultValue: false,
+    //   onChange: (checked: boolean) => {}
+    // },
+    {
+      text: 'Installed',
+      defaultValue: showOnlyDownloaded,
+      onChange: (checked: boolean) => {
+        setShowOnlyDownloaded(checked)
+      }
+    },
+    {
+      text: t('header.show_hidden', 'Show Hidden'),
+      defaultValue: showHidden,
+      onChange: (checked: boolean) => {
+        setShowHidden(checked)
+      }
+    },
+    {
+      text: t('header.show_available_games', 'Show non-available games'),
+      defaultValue: showNonAvailable,
+      onChange: (checked: boolean) => {
+        setShowNonAvailable(checked)
+      }
+    },
+    {
+      text: 'Show favorites',
+      defaultValue: showFavouritesLibrary,
+      onChange: (checked: boolean) => {
+        setShowFavourites(checked)
+      }
+    }
+  ]
+
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
@@ -474,11 +481,49 @@ export default React.memo(function Library(): JSX.Element {
         defaultValue={category}
       >
         <Tabs.List className={styles.tabsList} type="outline">
-          <Dropdown
-            options={filters}
-            onChange={setSelectedFilter}
-            selected={selectedFilter}
-          />
+          <div>
+            <Dropdown
+              options={filters}
+              onChange={setSelectedFilter}
+              selected={selectedFilter}
+              targetWidth={275}
+            />
+          </div>
+          <div>
+            <GenericDropdown
+              target={
+                <GenericDropdown.GenericButton
+                  text={'Other filters'}
+                  style={{ width: '340px' }}
+                ></GenericDropdown.GenericButton>
+              }
+            >
+              {data.map((val, index) => (
+                <Menu.Item closeMenuOnClick={false} key={`toggleItem${index}`}>
+                  <Toggle
+                    defaultChecked={val.defaultValue}
+                    labelPosition="right"
+                    onChange={
+                      //eslint-disable-next-line
+                      (e: any) => {
+                        val.onChange(e.target.checked)
+                      }
+                    }
+                  >
+                    <div
+                      className="body"
+                      style={{
+                        paddingLeft: 'var(--space-sm)',
+                        margin: 'auto 0px'
+                      }}
+                    >
+                      {val.text}
+                    </div>
+                  </Toggle>
+                </Menu.Item>
+              ))}
+            </GenericDropdown>
+          </div>
           <Tabs.Tab value="all">
             <div className="menu">{t('ALL', 'ALL')}</div>
           </Tabs.Tab>
@@ -494,31 +539,6 @@ export default React.memo(function Library(): JSX.Element {
           <Tabs.Tab value="sideload">
             <div className="menu">{t('Other')}</div>
           </Tabs.Tab>
-          <div>
-            <Button
-              className={styles.heartButton}
-              type="tertiary"
-              onClick={() => setShowFavourites(!showFavouritesLibrary)}
-            >
-              <Images.Heart
-                fill={
-                  showFavouritesLibrary
-                    ? 'var(--color-primary-400)'
-                    : 'var(--color-neutral-100)'
-                }
-              />
-            </Button>
-          </div>
-          <Toggle
-            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-            onChange={(e: any) => {
-              setShowOnlyDownloaded(e.target.checked)
-            }}
-          >
-            <div className="body" style={{ marginRight: 'var(--space-xs)' }}>
-              {t('Downloaded', 'Downloaded')}
-            </div>
-          </Toggle>
           <div id="alignEnd">
             <div>
               <Button type="tertiary" className={styles.gridListButton}>
