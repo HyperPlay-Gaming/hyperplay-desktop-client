@@ -49,6 +49,8 @@ const TopNavBar = observer(() => {
           <button
             className={styles.iconButton}
             onClick={() => extensionStore.toggleIsPopupOpen()}
+            onMouseEnter={() => extensionStore.lockPopup()}
+            onMouseLeave={() => extensionStore.unlockPopup()}
           >
             <Images.MetaMask fill="white" />
             {badgeText !== '' && badgeText !== '0' ? (
