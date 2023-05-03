@@ -191,7 +191,6 @@
         },
         "title": "Downloads"
     },
-    "Downloaded": "Downloaded",
     "epic": {
         "offline-notification-body": "Online services may not work fully as Epic Games servers are offline!",
         "offline-notification-title": "offline"
@@ -219,8 +218,6 @@
     "globalSettings": "Global Settings",
     "GOG": "GOG",
     "header": {
-        "hide_non_available_games": "Hide non-available games",
-        "ignore_hidden": "Ignore Hidden",
         "platform": "Platform",
         "show_available_games": "Show non-available games",
         "show_hidden": "Show Hidden",
@@ -343,7 +340,6 @@
             }
         },
         "publicAlpha": "Public Alpha",
-        "switchAccount": "Switch account",
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
         "viewFullscreen": "View fullscreen",
