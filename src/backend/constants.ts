@@ -80,6 +80,12 @@ const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
 const hyperplaySite = 'https://docs.hyperplaygaming.com/faq'
 const customThemesWikiLink =
   'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/Custom-Themes'
+const eventsToCloseMetaMaskPopupOn = [
+  'keyDown',
+  'keyUp',
+  'mouseDown',
+  'mouseUp'
+]
 
 /**
  * Get shell for different os
@@ -245,5 +251,6 @@ export {
   wineprefixFAQ,
   hyperplaySite,
   customThemesWikiLink,
-  onboardLocalStore
+  onboardLocalStore,
+  eventsToCloseMetaMaskPopupOn
 }
