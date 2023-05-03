@@ -26,7 +26,6 @@ html,
 }
 
 .App {
-  text-align: center;
   display: grid;
   grid-template-columns: min-content 1fr;
   grid-template-areas: 'offline offline' 'sidebar content' 'controller controller';

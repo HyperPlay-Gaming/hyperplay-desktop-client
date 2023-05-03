@@ -57,6 +57,8 @@ import {
 import StoreLogos from 'frontend/components/UI/StoreLogos'
 import { WikiGameInfo } from 'frontend/components/UI/WikiGameInfo'
 import { hasStatus } from 'frontend/hooks/hasStatus'
+import { Button } from '@hyperplay/ui'
+import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -101,6 +103,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [showRequirements, setShowRequirements] = useState(false)
   const [showExtraInfo, setShowExtraInfo] = useState(false)
+  const [showStopInstallModal, setShowStopInstallModal] = useState(false)
 
   const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
@@ -311,6 +314,16 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
     return (
       <div className="gameConfigContainer">
+        {showStopInstallModal ? (
+          <StopInstallationModal
+            onClose={() => setShowStopInstallModal(false)}
+            installPath={folder ? folder : ''}
+            progress={progress}
+            folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
+            appName={gameInfo.app_name}
+            runner={gameInfo.runner}
+          />
+        ) : null}
         {gameInfo.runner !== 'sideload' && showModal.show && (
           <InstallModal
             appName={showModal.game}
@@ -379,7 +392,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 </div>
               </div>
               <div className="infoWrapper">
-                <h6 className="developer">{developer}</h6>
+                <div className="developer menu">{developer}</div>
                 <div className="summary">{description}</div>
                 <div className="grid-container">
                   {!is_installed && !isSideloaded && (
@@ -533,20 +546,26 @@ export default React.memo(function GamePage(): JSX.Element | null {
               <Anticheat gameInfo={gameInfo} />
               <div className="buttonsWrapper">
                 {is_installed && !isQueued && (
-                  <button
+                  <Button
+                    onClick={handlePlay()}
+                    autoFocus={true}
                     disabled={
                       isReparing || isMoving || isUpdating || isUninstalling
                     }
-                    autoFocus={true}
-                    onClick={handlePlay()}
-                    className={`button ${getPlayBtnClass()}`}
+                    type={getPlayBtnClass()}
                   >
                     {getPlayLabel()}
-                  </button>
+                  </Button>
                 )}
                 {(!is_installed || isQueued) && (
-                  <button
-                    onClick={async () => handleInstall(is_installed)}
+                  <Button
+                    onClick={async () => {
+                      if (isInstalling) {
+                        setShowStopInstallModal(true)
+                        return
+                      }
+                      handleInstall(is_installed)
+                    }}
                     disabled={
                       isPlaying ||
                       isUpdating ||
@@ -556,10 +575,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       notSupportedGame
                     }
                     autoFocus={true}
-                    className={`button ${getButtonClass(is_installed)}`}
-                  >
-                    {`${getButtonLabel(is_installed)}`}
-                  </button>
+                    type={getButtonClass(is_installed)}
+                  >{`${getButtonLabel(is_installed)}`}</Button>
                 )}
               </div>
               {showExtraInfo && (
@@ -608,18 +625,18 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
   function getPlayBtnClass() {
     if (notAvailable) {
-      return 'is-tertiary'
+      return 'tertiary'
     }
     if (isQueued) {
-      return 'is-secondary'
+      return 'secondary'
     }
     if (isUpdating) {
-      return 'is-danger'
+      return 'danger'
     }
     if (isSyncing) {
-      return 'is-primary'
+      return 'primary'
     }
-    return isPlaying ? 'is-tertiary' : 'is-cta'
+    return isPlaying ? 'tertiary' : 'primary'
   }
 
   function getPlayLabel(): React.ReactNode {
@@ -720,14 +737,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
   function getButtonClass(is_installed: boolean) {
     if (isInstalling || isQueued) {
-      return 'is-danger'
+      return 'danger'
     }
 
     if (is_installed) {
-      return 'is-primary'
+      return 'primary'
     }
 
-    return 'is-cta'
+    return 'primary'
   }
 
   function getButtonLabel(is_installed: boolean) {

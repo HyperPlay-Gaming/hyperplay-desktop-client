@@ -8,7 +8,7 @@ import {
 } from 'common/types'
 
 import { TFunction } from 'react-i18next'
-import { getGameInfo, sendKill } from './index'
+import { getGameInfo } from './index'
 import { DialogModalOptions } from 'frontend/types'
 
 const storage: Storage = window.localStorage
@@ -32,15 +32,13 @@ async function install({
   gameInfo,
   installPath,
   t,
-  progress,
   isInstalling,
   previousProgress,
   setInstallPath,
   sdlList = [],
   installDlcs = false,
   installLanguage = 'en-US',
-  platformToInstall = 'Windows',
-  showDialogModal
+  platformToInstall = 'Windows'
 }: InstallArgs) {
   if (!installPath) {
     return
@@ -51,14 +49,7 @@ async function install({
     // NOTE: This can't really happen, since `folder_name` can only be undefined if we got a
     //       SideloadGame from getGameInfo, but we can't "install" sideloaded games
     if (!folder_name) return
-    return handleStopInstallation(
-      appName,
-      [installPath, folder_name],
-      t,
-      progress,
-      runner,
-      showDialogModal
-    )
+    return
   }
 
   if (is_installed) {
@@ -113,41 +104,6 @@ async function install({
     runner,
     platformToInstall,
     gameInfo
-  })
-}
-
-async function handleStopInstallation(
-  appName: string,
-  [path, folderName]: string[],
-  t: TFunction<'gamepage'>,
-  progress: InstallProgress,
-  runner: Runner,
-  showDialogModal: (options: DialogModalOptions) => void
-) {
-  showDialogModal({
-    title: t('gamepage:box.stopInstall.title'),
-    message: t('gamepage:box.stopInstall.message'),
-    buttons: [
-      { text: t('gamepage:box.stopInstall.keepInstalling') },
-      {
-        text: t('box.yes'),
-        onClick: () => {
-          storage.setItem(
-            appName,
-            JSON.stringify({ ...progress, folder: path })
-          )
-          sendKill(appName, runner)
-        }
-      },
-      {
-        text: t('box.no'),
-        onClick: async () => {
-          await sendKill(appName, runner)
-          storage.removeItem(appName)
-          window.api.removeFolder([path, folderName])
-        }
-      }
-    ]
   })
 }
 
@@ -232,4 +188,4 @@ export const gogCategories = ['all', 'gog']
 export const sideloadedCategories = ['all', 'sideload']
 export const hyperPlayCategories = ['all', 'hyperplay']
 
-export { handleStopInstallation, install, launch, repair, updateGame }
+export { install, launch, repair, updateGame }

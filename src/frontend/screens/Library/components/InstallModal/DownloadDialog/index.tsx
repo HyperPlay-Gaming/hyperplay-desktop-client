@@ -45,6 +45,7 @@ import { useTranslation } from 'react-i18next'
 import { AvailablePlatforms } from '../index'
 import { SDL_GAMES, SelectiveDownload } from '../selective_dl'
 import { configStore } from 'frontend/helpers/electronStores'
+import { Button } from '@hyperplay/ui'
 
 interface Props {
   backdropClick: () => void
@@ -544,22 +545,24 @@ export default function DownloadDialog({
         )}
       </DialogContent>
       <DialogFooter>
-        <button
+        <Button
+          type="tertiary"
+          size="large"
           onClick={async () => handleInstall('import')}
-          className={`button is-secondary outline`}
         >
           {t('button.import')}
-        </button>
-        <button
+        </Button>
+        <Button
+          type="secondary"
+          size="large"
           onClick={async () => handleInstall()}
-          className={`button is-secondary`}
           disabled={!readyToInstall}
         >
           {!readyToInstall && (
             <FontAwesomeIcon className="fa-spin-pulse" icon={faSpinner} />
           )}
           {readyToInstall && getInstallLabel()}
-        </button>
+        </Button>
       </DialogFooter>
     </>
   )

@@ -149,7 +149,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@hyperplay/ui": "0.1.0-alpha.18",
+    "@hyperplay/ui": "0.1.0-alpha.25",
     "@metamask/sdk": "^0.1.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",

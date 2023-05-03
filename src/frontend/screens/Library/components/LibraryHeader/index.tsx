@@ -69,7 +69,7 @@ export default React.memo(function LibraryHeader({
   }
 
   return (
-    <h5 className="libraryHeader">
+    <div className="libraryHeader header">
       <div className="libraryHeaderWrapper">
         <span className="libraryTitle">
           {showFavourites
@@ -91,6 +91,6 @@ export default React.memo(function LibraryHeader({
           toggleSortinstalled={() => handleSortInstalled()}
         />
       </div>
-    </h5>
+    </div>
   )
 })
