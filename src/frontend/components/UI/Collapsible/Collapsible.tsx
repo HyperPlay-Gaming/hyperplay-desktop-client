@@ -10,12 +10,12 @@ type Props = {
 const Collapsible = ({ isOpen, isCollapsible, children, summary }: Props) => {
   return isCollapsible ? (
     <details open={isOpen}>
-      <summary className="settingSubheader">{summary}</summary>
+      <summary className="settingsSectionHeader">{summary}</summary>
       {children}
     </details>
   ) : (
     <section>
-      <h3 className="settingSubheader">{summary}</h3>
+      <div className="settingsSectionHeader">{summary}</div>
       {children}
     </section>
   )

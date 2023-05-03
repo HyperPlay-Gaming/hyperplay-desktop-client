@@ -4,9 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   grid-area: sidebar;
-  height: 85.2vh;
+  height: calc(90vh - 100px);
   font-family: var(--secondary-font-family);
   background: var(--color-neutral-800);
   width: 80px;
@@ -17,6 +16,7 @@
   margin-top: var(--space-xl);
   margin-right: var(--space-xl);
   padding-bottom: var(--space-md);
+  overflow-y: auto;
 }
 
 .Sidebar > div:first-child {
