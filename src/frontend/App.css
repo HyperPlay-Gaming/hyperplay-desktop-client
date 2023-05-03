@@ -42,7 +42,7 @@ html,
   grid-area: content;
   flex-direction: column;
   height: 100%;
-  overflow-y: hidden;
+  overflow-y: auto;
   overflow-x: hidden;
   padding: var(--space-xl) calc(2 * var(--space-md)) 0px 0px;
 }

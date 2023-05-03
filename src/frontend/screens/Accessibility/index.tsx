@@ -102,7 +102,7 @@ export default React.memo(function Accessibility() {
   }, [fonts])
 
   return (
-    <div className="Accessibility Settings">
+    <div className="Accessibility">
       <div className="settingsWrapper">
         <h1 className="headerTitle">
           {t('accessibility.title', 'Accessibility')}

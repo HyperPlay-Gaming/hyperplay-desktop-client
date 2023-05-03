@@ -31,7 +31,7 @@ const LogBox: React.FC<LogBoxProps> = ({ logFileContent }) => {
           )}
         </span>
       )}
-      <span className="setting log-box">
+      <div className="setting log-box">
         {lines.map((line, key) => {
           if (line.toLowerCase().includes(' err')) {
             return (
@@ -53,7 +53,7 @@ const LogBox: React.FC<LogBoxProps> = ({ logFileContent }) => {
             )
           }
         })}
-      </span>
+      </div>
     </>
   )
 }
