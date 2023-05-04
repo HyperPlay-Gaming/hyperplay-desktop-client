@@ -105,7 +105,8 @@ class Tray {
 const ipcMain = {
   on: jest.fn().mockReturnThis(),
   handle: jest.fn().mockReturnThis(),
-  once: jest.fn().mockReturnThis()
+  once: jest.fn().mockReturnThis(),
+  emit: jest.fn().mockReturnThis()
 }
 
 export {
