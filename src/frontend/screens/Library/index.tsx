@@ -445,101 +445,107 @@ export default React.memo(function Library(): JSX.Element {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <div className={styles.libraryTopHeader}>
-        <h3>{t('library.label', 'Library')}</h3>
-        <span className={`${styles.numberOfgames} title`}>{numberOfGames}</span>
-        <Button
-          className={styles.refreshButton}
-          type="tertiary"
-          title={t('generic.library.refresh', 'Refresh Library')}
-          onClick={async () =>
-            refreshLibrary({
-              checkForUpdates: true,
-              runInBackground: false,
-              library: getLibrary()
-            })
-          }
-        >
-          <FontAwesomeIcon
-            className={classNames('FormControl__segmentedFaIcon', {
-              ['fa-spin']: refreshing
-            })}
-            icon={faSyncAlt}
-          />
-        </Button>
-        <Button
-          type="tertiary"
-          onClick={() => handleModal('', 'sideload', null)}
-          leftIcon={<FontAwesomeIcon icon={faPlus} height={14} width={14} />}
-        >
-          {t('add_game', 'Add Game')}
-        </Button>
-      </div>
-      <Tabs
-        onTabChange={(val: Category) => handleCategory(val)}
-        defaultValue={category}
-      >
-        <Tabs.List className={styles.tabsList} type="outline">
-          <div>
-            <Dropdown
-              options={filters}
-              onChange={setSelectedFilter}
-              selected={selectedFilter}
-              targetWidth={275}
+      <div className="contentContainer">
+        <div className={styles.libraryTopHeader}>
+          <h3>{t('library.label', 'Library')}</h3>
+          <span className={`${styles.numberOfgames} title`}>
+            {numberOfGames}
+          </span>
+          <Button
+            className={styles.refreshButton}
+            type="tertiary"
+            title={t('generic.library.refresh', 'Refresh Library')}
+            onClick={async () =>
+              refreshLibrary({
+                checkForUpdates: true,
+                runInBackground: false,
+                library: getLibrary()
+              })
+            }
+          >
+            <FontAwesomeIcon
+              className={classNames('FormControl__segmentedFaIcon', {
+                ['fa-spin']: refreshing
+              })}
+              icon={faSyncAlt}
             />
-          </div>
-          <div>
-            <GenericDropdown
-              target={
-                <GenericDropdown.GenericButton
-                  text={'Other filters'}
-                  style={{ width: '340px' }}
-                ></GenericDropdown.GenericButton>
-              }
-            >
-              {data.map((val, index) => (
-                <Menu.Item closeMenuOnClick={false} key={`toggleItem${index}`}>
-                  <Toggle
-                    defaultChecked={val.defaultValue}
-                    labelPosition="right"
-                    onChange={
-                      //eslint-disable-next-line
-                      (e: any) => {
-                        val.onChange(e.target.checked)
-                      }
-                    }
+          </Button>
+          <Button
+            type="tertiary"
+            onClick={() => handleModal('', 'sideload', null)}
+            leftIcon={<FontAwesomeIcon icon={faPlus} height={14} width={14} />}
+          >
+            {t('add_game', 'Add Game')}
+          </Button>
+        </div>
+        <Tabs
+          onTabChange={(val: Category) => handleCategory(val)}
+          defaultValue={category}
+        >
+          <Tabs.List className={styles.tabsList} type="outline">
+            <div>
+              <Dropdown
+                options={filters}
+                onChange={setSelectedFilter}
+                selected={selectedFilter}
+                targetWidth={275}
+              />
+            </div>
+            <div>
+              <GenericDropdown
+                target={
+                  <GenericDropdown.GenericButton
+                    text={'Other filters'}
+                    style={{ width: '340px' }}
+                  ></GenericDropdown.GenericButton>
+                }
+              >
+                {data.map((val, index) => (
+                  <Menu.Item
+                    closeMenuOnClick={false}
+                    key={`toggleItem${index}`}
                   >
-                    <div
-                      className="body"
-                      style={{
-                        paddingLeft: 'var(--space-sm)',
-                        margin: 'auto 0px'
-                      }}
+                    <Toggle
+                      defaultChecked={val.defaultValue}
+                      labelPosition="right"
+                      onChange={
+                        //eslint-disable-next-line
+                        (e: any) => {
+                          val.onChange(e.target.checked)
+                        }
+                      }
                     >
-                      {val.text}
-                    </div>
-                  </Toggle>
-                </Menu.Item>
-              ))}
-            </GenericDropdown>
-          </div>
-          <Tabs.Tab value="all">
-            <div className="menu">{t('ALL', 'ALL')}</div>
-          </Tabs.Tab>
-          <Tabs.Tab value="hyperplay">
-            <div className="menu">{t('HyperPlay')}</div>
-          </Tabs.Tab>
-          <Tabs.Tab value="legendary">
-            <div className="menu">EPIC</div>
-          </Tabs.Tab>
-          <Tabs.Tab value="gog">
-            <div className="menu">GOG</div>
-          </Tabs.Tab>
-          <Tabs.Tab value="sideload">
-            <div className="menu">{t('Other')}</div>
-          </Tabs.Tab>
-          <div id="alignEnd">
-            {/* <div>
+                      <div
+                        className="body"
+                        style={{
+                          paddingLeft: 'var(--space-sm)',
+                          margin: 'auto 0px'
+                        }}
+                      >
+                        {val.text}
+                      </div>
+                    </Toggle>
+                  </Menu.Item>
+                ))}
+              </GenericDropdown>
+            </div>
+            <Tabs.Tab value="all">
+              <div className="menu">{t('ALL', 'ALL')}</div>
+            </Tabs.Tab>
+            <Tabs.Tab value="hyperplay">
+              <div className="menu">{t('HyperPlay')}</div>
+            </Tabs.Tab>
+            <Tabs.Tab value="legendary">
+              <div className="menu">EPIC</div>
+            </Tabs.Tab>
+            <Tabs.Tab value="gog">
+              <div className="menu">GOG</div>
+            </Tabs.Tab>
+            <Tabs.Tab value="sideload">
+              <div className="menu">{t('Other')}</div>
+            </Tabs.Tab>
+            <div id="alignEnd">
+              {/* <div>
               <Button type="tertiary" className={styles.gridListButton}>
                 <Images.Grid fill="white" height={24} width={24} />
               </Button>
@@ -549,61 +555,64 @@ export default React.memo(function Library(): JSX.Element {
                 <Images.List fill="white" height={24} width={24} />
               </Button>
             </div> */}
-          </div>
-        </Tabs.List>
-      </Tabs>
-      <div className={styles.listing} ref={listing}>
-        <span id="top" />
-        {showRecentGames && (
-          <RecentlyPlayed
-            handleModal={handleModal}
-            onlyInstalled={libraryTopSection.endsWith('installed')}
-          />
-        )}
-
-        {showFavourites && !showFavouritesLibrary && (
-          <>
-            <h3 className={styles.libraryHeader}>
-              {t('favourites', 'Favourites')}
-            </h3>
-            <GamesList
-              library={favourites}
-              handleGameCardClick={handleModal}
-              isFirstLane
+            </div>
+          </Tabs.List>
+        </Tabs>
+        <div className={styles.listing} ref={listing}>
+          <span id="top" />
+          {showRecentGames && (
+            <RecentlyPlayed
+              handleModal={handleModal}
+              onlyInstalled={libraryTopSection.endsWith('installed')}
             />
-          </>
-        )}
+          )}
 
-        {refreshing && !refreshingInTheBackground && <UpdateComponent inline />}
+          {showFavourites && !showFavouritesLibrary && (
+            <>
+              <h3 className={styles.libraryHeader}>
+                {t('favourites', 'Favourites')}
+              </h3>
+              <GamesList
+                library={favourites}
+                handleGameCardClick={handleModal}
+                isFirstLane
+              />
+            </>
+          )}
 
-        {(!refreshing || refreshingInTheBackground) && (
-          <GamesList
-            library={libraryToShow}
-            layout={layout}
-            handleGameCardClick={handleModal}
+          {refreshing && !refreshingInTheBackground && (
+            <UpdateComponent inline />
+          )}
+
+          {(!refreshing || refreshingInTheBackground) && (
+            <GamesList
+              library={libraryToShow}
+              layout={layout}
+              handleGameCardClick={handleModal}
+            />
+          )}
+        </div>
+
+        <button id="backToTopBtn" onClick={backToTop} ref={backToTopElement}>
+          <ArrowDropUp id="backToTopArrow" className="material-icons" />
+        </button>
+
+        {showModal.show && (
+          <InstallModal
+            appName={showModal.game}
+            runner={showModal.runner}
+            gameInfo={showModal.gameInfo}
+            backdropClick={() =>
+              setShowModal({
+                game: '',
+                show: false,
+                runner: 'legendary',
+                gameInfo: null
+              })
+            }
           />
         )}
       </div>
-
-      <button id="backToTopBtn" onClick={backToTop} ref={backToTopElement}>
-        <ArrowDropUp id="backToTopArrow" className="material-icons" />
-      </button>
-
-      {showModal.show && (
-        <InstallModal
-          appName={showModal.game}
-          runner={showModal.runner}
-          gameInfo={showModal.gameInfo}
-          backdropClick={() =>
-            setShowModal({
-              game: '',
-              show: false,
-              runner: 'legendary',
-              gameInfo: null
-            })
-          }
-        />
-      )}
     </>
   )
 })

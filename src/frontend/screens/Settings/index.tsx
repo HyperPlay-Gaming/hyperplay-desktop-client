@@ -105,11 +105,11 @@ function Settings() {
       ]}
     >
       <SettingsContext.Provider value={contextValues}>
-        <div className="Settings">
+        <div className="Settings contentContainer">
           <div role="list" className="settingsWrapper">
-            <h1 className="headerTitle" data-testid="headerTitle">
+            <h3 className="headerTitle" data-testid="headerTitle">
               Settings
-            </h1>
+            </h3>
             <Tabs defaultValue="general">
               <Tabs.List
                 style={{ marginBottom: 'var(--space-md)' }}

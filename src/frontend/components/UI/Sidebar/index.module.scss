@@ -9,12 +9,11 @@
   font-family: var(--secondary-font-family);
   background: var(--color-neutral-800);
   width: 80px;
-  margin: 10px;
+  margin: var(--space-xl-fixed) var(--space-xl-fixed) calc(2 * var(--space-md))
+    var(--space-md);
   border-radius: var(--space-sm);
   border: 1px solid var(--color-stroke-01);
   box-shadow: -10px 0px 58px rgba(145, 35, 255, 0.2);
-  margin-top: var(--space-xl);
-  margin-right: var(--space-xl);
   padding-bottom: var(--space-md);
   overflow-y: auto;
 }
