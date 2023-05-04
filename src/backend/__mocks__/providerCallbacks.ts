@@ -18,6 +18,7 @@ export function walletDisconnected(code: number, reason: string) {
 
 export function accountsChanged(accounts: string[]) {
   console.log('renderer receives: accounts changed to ', accounts)
+  connectedResolve()
 }
 
 export function chainChanged(chainId: number) {
