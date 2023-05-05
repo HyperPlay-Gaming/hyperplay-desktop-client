@@ -31,16 +31,44 @@ export default function AccountDropdown() {
           </div>
         </Menu.Item> */}
         {showMetaMaskBrowserSidebarLinks && (
-          <Menu.Item className={`${styles.menuItem} `}>
-            <NavLink to={'/metamaskHome'}>
+          <Menu.Item
+            className={`${styles.menuItem} `}
+            id={
+              showMetaMaskBrowserSidebarLinks
+                ? 'topMenuItemWalletDropdown'
+                : undefined
+            }
+          >
+            <NavLink
+              to={'/metamaskHome'}
+              id={
+                showMetaMaskBrowserSidebarLinks
+                  ? 'topElementWalletDropdown'
+                  : undefined
+              }
+            >
               <div className={`body ${styles.itemContents}`}>
                 {t('hyperplay.viewFullscreen', `View fullscreen`)}
               </div>
             </NavLink>
           </Menu.Item>
         )}
-        <Menu.Item className={`${styles.menuItem} `}>
-          <NavLink to={'/metamaskPortfolio'}>
+        <Menu.Item
+          className={`${styles.menuItem} `}
+          id={
+            !showMetaMaskBrowserSidebarLinks
+              ? 'topMenuItemWalletDropdown'
+              : undefined
+          }
+        >
+          <NavLink
+            to={'/metamaskPortfolio'}
+            id={
+              !showMetaMaskBrowserSidebarLinks
+                ? 'topElementWalletDropdown'
+                : undefined
+            }
+          >
             <div className={`body ${styles.itemContents}`}>
               {t('hyperplay.viewPortfolio', `View portfolio`)}
             </div>

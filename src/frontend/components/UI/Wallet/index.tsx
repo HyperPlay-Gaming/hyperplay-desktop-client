@@ -22,7 +22,11 @@ const Wallet: React.FC<WalletProps> = observer((props) => {
   classNamesObject[styles.connectedStatus] = walletStore.isConnected
 
   return (
-    <button onClick={props.onClick} className={styles.walletButton}>
+    <button
+      onClick={props.onClick}
+      className={styles.walletButton}
+      id="accountWalletContainer"
+    >
       <ProfilePicture
         isConnected={walletStore.isConnected}
         address={walletStore.address}

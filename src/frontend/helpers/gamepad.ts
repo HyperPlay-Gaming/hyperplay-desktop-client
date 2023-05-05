@@ -169,6 +169,15 @@ export const initGamepad = () => {
         // we have to tell Electron to simulate key presses
         // so the spatial navigation works
         if (action !== 'leftClick' && action !== 'rightClick') {
+          if (
+            (currentElement()?.id === 'topElementWalletDropdown' ||
+              currentElement()?.id === 'topMenuItemWalletDropdown') &&
+            (action === 'padUp' || action === 'leftStickUp')
+          ) {
+            document
+              .querySelector<HTMLElement>('#accountWalletContainer')
+              ?.focus()
+          }
           window.api.gamepadAction({ action })
         } else {
           const data = metadata()
