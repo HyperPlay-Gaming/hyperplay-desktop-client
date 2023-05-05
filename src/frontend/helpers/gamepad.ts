@@ -163,6 +163,8 @@ export const initGamepad = () => {
 
       if (action === 'mainAction') {
         currentElement()?.click()
+        document.querySelector<HTMLElement>(':focus input')?.click()
+        document.querySelector<HTMLElement>(':focus a')?.click()
       } else {
         // we have to tell Electron to simulate key presses
         // so the spatial navigation works
