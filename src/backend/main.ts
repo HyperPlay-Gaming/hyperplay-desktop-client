@@ -323,7 +323,12 @@ if (!gotTheLock) {
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
-      path.join(__dirname, 'hyperplay_store_preload.js')
+      path.join(__dirname, 'hyperplay_store_preload.js'),
+      path.join(__dirname, 'webview_style_preload.js')
+    ])
+    const epicStoreSession = session.fromPartition('persist:epicstore')
+    epicStoreSession.setPreloads([
+      path.join(__dirname, 'webview_style_preload.js')
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
