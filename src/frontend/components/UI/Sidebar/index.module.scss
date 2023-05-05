@@ -21,3 +21,7 @@
 .Sidebar > div:first-child {
   margin: 0 0 auto 0;
 }
+
+.Sidebar::-webkit-scrollbar {
+  width: 0px;
+}

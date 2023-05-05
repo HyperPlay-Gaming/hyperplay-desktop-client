@@ -10,6 +10,7 @@ document.onreadystatechange = function(e)
     ::-webkit-scrollbar { \
       width: 20px; \
       height: 20px; \
+      background: transparent;\
     }\
     ::-webkit-scrollbar-thumb {\
       height: 40%;\
@@ -23,6 +24,9 @@ document.onreadystatechange = function(e)
     }\
     ::-webkit-scrollbar-corner {\
       background-color: transparent;\
+    }\
+    ::-webkit-scrollbar-track {\
+      display: none;\
     }'
 
     const styleSheet = document.createElement('style')
