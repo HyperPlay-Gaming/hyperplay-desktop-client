@@ -18,6 +18,9 @@ document.onreadystatechange = function(e)
       box-shadow: inset 0 0 10px 10px #282B34;\
       border-radius: 80px;\
     }\
+    ::-webkit-scrollbar-thumb:hover {\
+      box-shadow: inset 0 0 10px 10px #5a5e6a;\
+    }\
     ::-webkit-scrollbar-corner {\
       background-color: transparent;\
     }'
