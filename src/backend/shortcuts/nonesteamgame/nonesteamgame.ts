@@ -313,7 +313,11 @@ async function addNonSteamGame(props: {
     if (!isWindows) {
       args.push('--no-sandbox')
     }
-    args.push(`"hyperplay://launch/${props.gameInfo.app_name}"`)
+
+    const { runner, app_name } = props.gameInfo
+
+    args.push(`"hyperplay://launch/${runner}/${app_name}"`)
+
     newEntry.LaunchOptions = args.join(' ')
     if (isFlatpak) {
       newEntry.LaunchOptions = `run gg.hyperplay.hp ${newEntry.LaunchOptions}`
