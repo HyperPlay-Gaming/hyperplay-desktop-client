@@ -24,7 +24,7 @@ export default function GeneralSettings() {
 
   return (
     <>
-      <div className="settingSubheader settingsSectionHeader">
+      <div className="settingSubheader settingsSectionHeader title">
         {t('settings.navbar.general')}
       </div>
 

@@ -104,7 +104,7 @@ export default React.memo(function Accessibility() {
   return (
     <div className="Accessibility">
       <div className="settingsWrapper">
-        <div className="settingsSectionHeader">
+        <div className="settingsSectionHeader title">
           {t('accessibility.title', 'Accessibility')}
         </div>
 

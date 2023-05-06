@@ -696,7 +696,6 @@
         "saves": {
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
         },
-        "syncSettings": "Sync Settings",
         "wine": {
             "manager": {
                 "title": ""

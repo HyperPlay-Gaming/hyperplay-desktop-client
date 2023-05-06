@@ -17,6 +17,14 @@
 //   }
 // }
 
+@media screen and (max-width: 1300px) {
+  :root {
+    font-size: 14px;
+    --text-scale-ratio: 1.13;
+    --space-unit-fixed: 14px;
+  }
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

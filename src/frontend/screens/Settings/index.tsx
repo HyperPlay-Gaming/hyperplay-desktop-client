@@ -135,7 +135,7 @@ function Settings() {
                 {!isWin ? (
                   <Tabs.Tab value="wineManager">
                     <div className="menu">
-                      {t('settings.wine.manager.title')}
+                      {t('settings.wine.manager.title', 'Wine Manager')}
                     </div>
                   </Tabs.Tab>
                 ) : null}

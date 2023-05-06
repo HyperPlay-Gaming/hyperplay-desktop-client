@@ -1,4 +1,3 @@
-@use '@hyperplay/ui/style.css';
 
 .Settings {
   display: flex;
@@ -216,6 +215,5 @@ a {
 }
 
 .settingsSectionHeader {
-  @extend .title;
   text-align: left;
 }

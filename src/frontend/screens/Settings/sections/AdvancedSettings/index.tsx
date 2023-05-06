@@ -163,7 +163,7 @@ export default function AdvancedSettings() {
 
   return (
     <div>
-      <div className="settingSubheader settingsSectionHeader">
+      <div className="settingSubheader settingsSectionHeader title">
         {t('settings.navbar.advanced')}
       </div>
 
@@ -176,7 +176,7 @@ export default function AdvancedSettings() {
       <hr />
 
       <div className="eosSettings">
-        <div className="settingsSectionHeader">Epic Overlay</div>
+        <div className="settingsSectionHeader title">Epic Overlay</div>
         <div>{getMainEosText()}</div>
         <br />
         {eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
