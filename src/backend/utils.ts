@@ -12,7 +12,9 @@ import {
   GameInfo,
   GameSettings
 } from 'common/types'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
+import EasyDl from 'easydl'
+
 import {
   app,
   dialog,
@@ -28,12 +30,7 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import {
-  createWriteStream,
-  appendFileSync,
-  existsSync,
-  rmSync
-} from 'graceful-fs'
+import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
@@ -1125,88 +1122,63 @@ export interface ProgressCallback {
   ): void
 }
 
-export async function downloadFileWithAxios(
+export async function downloadFile(
   url: string,
-  destPath: string,
+  dest: string,
   abortController: AbortController,
   progressCallback?: ProgressCallback
 ): Promise<void> {
-  const writer = createWriteStream(destPath)
-
-  const response: AxiosResponse = await axios({
-    url: encodeURI(url),
-    method: 'GET',
-    responseType: 'stream',
-    signal: abortController.signal
-  })
-
-  const totalLength = Number(response.headers['content-length'])
-
-  let downloadedBytes = 0
-  let downloadSpeed = 0
-  let prevDownloadedBytes = 0
-  let prevTimestamp = Date.now()
-
-  let writtenBytes = 0
-  let writeSpeed = 0
-  let prevWrittenBytes = 0
-
-  response.data.on('data', (chunk: Buffer) => {
-    downloadedBytes += chunk.length
-    writtenBytes += chunk.length
-
-    // Calculate download speed
-    const now = Date.now()
-    const timeElapsed = now - prevTimestamp
-    if (timeElapsed >= 1000) {
-      downloadSpeed =
-        ((downloadedBytes - prevDownloadedBytes) / timeElapsed) * 1000
-      prevDownloadedBytes = downloadedBytes
-      writeSpeed = ((writtenBytes - prevWrittenBytes) / timeElapsed) * 1000
-      prevWrittenBytes = writtenBytes
-      prevTimestamp = now
-    }
-
-    // Calculate progress and call progressCallback function (debounced)
-    const progress = Math.round((downloadedBytes / totalLength) * 100)
-    if (progressCallback) {
-      const debouncedCallback = debounce(progressCallback, 1000)
-      debouncedCallback(downloadedBytes, downloadSpeed, writeSpeed, progress)
-    }
-  })
-
-  response.data.pipe(writer)
-
-  return new Promise<void>((resolve, reject) => {
-    writer.on('finish', () => {
-      const now = Date.now()
-      const timeElapsed = now - prevTimestamp
-      writeSpeed = ((writtenBytes - prevWrittenBytes) / timeElapsed) * 1000
-      prevWrittenBytes = writtenBytes
-      prevTimestamp = now
-      resolve()
+  try {
+    const dl = new EasyDl(url, dest, {
+      existBehavior: 'overwrite',
+      maxRetry: 3,
+      retryDelay: 3000,
+      reportInterval: 10000
     })
+
+    logInfo(`Downloading ${url} to ${dest} with EasyDL`, LogPrefix.HyperPlay)
+
     abortController.signal.addEventListener('abort', () => {
-      writer.close()
-      reject()
+      dl.destroy()
     })
-  })
-}
 
-const debounce = <T extends (...args: number[]) => void>(
-  func: T,
-  wait: number
-) => {
-  let timeout: ReturnType<typeof setTimeout>
-  return function (this: unknown, ...args: Parameters<T>) {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const context = this
-    const later = () => {
-      timeout = null!
-      func.apply(context, args)
+    dl.on('progress', ({ total }) => {
+      if (progressCallback) {
+        progressCallback(
+          total.bytes || 0,
+          total.speed || 0,
+          total.speed || 0,
+          total.percentage || 0
+        )
+      }
+    })
+
+    dl.on('metadata', function (metadata) {
+      console.log('[metadata]', { metadata })
+    })
+
+    dl.on('error', function (error) {
+      console.log('[error]', { error })
+      throw error
+    })
+
+    dl.on('end', function () {
+      console.log('[end]')
+    })
+
+    dl.on('close', function () {
+      console.log('[close]')
+    })
+
+    const downloaded = await dl.wait()
+    console.log('[downloaded]', downloaded)
+
+    if (!downloaded) {
+      throw new Error('Download failed')
     }
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
+  } catch (err) {
+    console.log('[error]', err)
+    throw err
   }
 }
 

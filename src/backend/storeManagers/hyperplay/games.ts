@@ -12,8 +12,9 @@ import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
+import { clean } from 'easydl/dist/utils'
 import { isMac, isWindows, isLinux, configFolder } from 'backend/constants'
-import { downloadFileWithAxios, spawnAsync, killPattern } from 'backend/utils'
+import { spawnAsync, killPattern, downloadFile } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
 import {
@@ -174,7 +175,8 @@ const installDistributables = async (gamePath: string) => {
 async function downloadGame(
   appName: string,
   downloadPath: string,
-  platformInfo: PlatformInfo
+  platformInfo: PlatformInfo,
+  removeOnAbort?: boolean
 ): Promise<void> {
   const appInfo = getGameInfo(appName)
 
@@ -191,18 +193,12 @@ async function downloadGame(
     throw new Error('DownloadUrl not found')
   }
 
-  // prevent from the next download being named eg. "game (1).zip"
-  try {
-    rmSync(downloadPath)
-    // eslint-disable-next-line no-empty
-  } catch (e) {}
-
   try {
     logInfo(
       `Downloading from ${platformInfo.external_url}`,
       LogPrefix.HyperPlay
     )
-    await downloadFileWithAxios(
+    await downloadFile(
       platformInfo.external_url,
       downloadPath,
       createAbortController(appName),
@@ -230,7 +226,9 @@ async function downloadGame(
     deleteAbortController(appName)
     logWarning(`Download aborted ${error}`, LogPrefix.HyperPlay)
     removeFromQueue(appName)
-    rmSync(downloadPath)
+    if (removeOnAbort) {
+      clean(downloadPath)
+    }
   }
 }
 
@@ -261,7 +259,13 @@ export async function install(
     const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
     const platformInfo = releaseMeta.platforms[appPlatform]
     const zipName = encodeURI(platformInfo.name)
-    const zipFile = path.join(configFolder, zipName)
+    const tempfolder = path.join(configFolder, 'hyperplay', '.temp')
+
+    if (!existsSync(tempfolder)) {
+      mkdirSync(tempfolder, { recursive: true })
+    }
+
+    const zipFile = path.join(tempfolder, zipName)
 
     // prevent naming conflicts where two developers release games with the same name
     const sanitizedDestinationFolderName =
