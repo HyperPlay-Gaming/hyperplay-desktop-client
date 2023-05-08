@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+	<id>
+		xyz.hyperplay.HyperPlay
+	</id>
+	<name>
+		HyperPlay
+	</name>
+	<summary>
+		Web3 game launcher from the future. Carry your wallet, NFTs, tokens, and achievements into every game.
+	</summary>
+	<url type="homepage">
+		https://hyperplay.xyz
+	</url>
+	<url type="bugtracker">
+		https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/issues
+	</url>
+	<url type="vcs-browser">
+		https://github.com/HyperPlay-Gaming/hyperplay-desktop-client
+	</url>
+	<metadata_license>
+		CC0-1.0
+	</metadata_license>
+	<project_license>
+		GPL-3.0
+	</project_license>
+	<description>
+		<p>
+			A web3- compatible game launcher from the future. Carry your wallet, NFTs, tokens, and achievements into every game.
+		</p>
+		<p>
+			HyperPlay allows players to carry their MetaMask or WalletConnect wallet to native or browser based games. Games can request transactions or signatures with a simple REST API call that supports every wallet to manage wallet interactions seamlessly.
+		</p>
+		<p>
+			You can also access your Epic and GOG games and play them using Proton or Wine which can be downloaded directly from the interface. DXVK, VKD3D, and Winetricks are also included to play Windows Games.
+		</p>
+		<ul>
+			<li>
+				Seamless wallet integration with MetaMask, WalletConnect, and more
+			</li>
+			<li>
+				Play Web3 native or browser games and make transactions without leaving the game
+			</li>
+			<li>
+				Have access to your MetaMask Portfolio from the app interface
+			</li>
+			<li>
+				Access Epic and GOG games as well
+			</li>
+		</ul>
+	</description>
+	<content_rating type="oars-1.1">
+		<content_attribute id="violence-cartoon">
+			moderate
+		</content_attribute>
+		<content_attribute id="violence-fantasy">
+			moderate
+		</content_attribute>
+		<content_attribute id="violence-realistic">
+			moderate
+		</content_attribute>
+		<content_attribute id="violence-bloodshed">
+			moderate
+		</content_attribute>
+		<content_attribute id="money-purchasing">
+			intense
+		</content_attribute>
+	</content_rating>
+	<launchable type="desktop-id">
+		xyz.hyperplay.HyperPlay.desktop
+	</launchable>
+	<screenshots>
+		<screenshot type="default">
+			<caption>
+				Onboarding
+			</caption>
+			<image>
+				https://user-images.githubusercontent.com/26871415/221288765-41a7981c-4112-4881-a88b-c2ed08929090.png
+			</image>
+		</screenshot>
+		<screenshot>
+			<caption>
+				Wallet Overlay
+			</caption>
+			<image>
+				https://user-images.githubusercontent.com/26871415/221288900-aa7c3168-d610-4598-8011-7f6c4dc4148f.png
+			</image>
+		</screenshot>
+		<screenshot>
+			<caption>
+				Library
+			</caption>
+			<image>
+				https://user-images.githubusercontent.com/26871415/221288973-eb897dec-34fe-4edf-8c3d-32836ca59a04.png
+			</image>
+		</screenshot>
+	</screenshots>
+	<releases>
+		<release version="${hyperplay-version}" date="${hyperplay-release-date}">
+			<description>
+				<p>
+					General
+				</p>
+				<ul>
+					<li>
+						Improved MetaMask extension UI/UX in client and overlay
+					</li>
+					<li>
+						MetaMask has been updated to the latest version
+					</li>
+					<li>
+						Show MetaMask extension in overlay on notification automatically
+					</li>
+					<li>
+						Show MetaMask extension in overlay on notification automatically
+					</li>
+				</ul>
+				<p>
+					BugFixes
+				</p>
+				<ul>
+					<li>
+						Browser games that open new windows will now have the same MetaMask overlay
+					</li>
+					<li>
+						Import exe is now import folder to fix importing games with nested directories
+					</li>
+				</ul>
+			</description>
+		</release>
+	</releases>
+</component>

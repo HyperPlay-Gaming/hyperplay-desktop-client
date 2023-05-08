@@ -247,14 +247,14 @@ export async function install(
   }
 
   const gameInfo = getGameInfo(appName)
-  const { title, releaseMeta } = gameInfo
+  const { title, releaseMeta, developer } = gameInfo
   const window = getMainWindow()
 
   if (!releaseMeta || !window) {
     return { status: 'error', error: 'Release meta not found' }
   }
 
-  logInfo(`Installing ${title} to ${path}...`, LogPrefix.HyperPlay)
+  logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
 
   // download the zip file
   try {
@@ -262,7 +262,13 @@ export async function install(
     const platformInfo = releaseMeta.platforms[appPlatform]
     const zipName = encodeURI(platformInfo.name)
     const zipFile = path.join(configFolder, zipName)
-    const destinationPath = path.join(dirpath, sanitizeFileName(title))
+
+    // prevent naming conflicts where two developers release games with the same name
+    const sanitizedDestinationFolderName =
+      developer !== undefined
+        ? sanitizeFileName(developer) + ' - ' + sanitizeFileName(title)
+        : sanitizeFileName(title)
+    const destinationPath = path.join(dirpath, sanitizedDestinationFolderName)
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
@@ -282,9 +288,9 @@ export async function install(
         await spawnAsync('powershell', [
           'Expand-Archive',
           '-LiteralPath',
-          `'${zipFile}'`,
+          `"${zipFile}"`,
           '-DestinationPath',
-          `'${destinationPath}'`
+          `"${destinationPath}"`
         ])
 
         await installDistributables(destinationPath)
@@ -398,10 +404,8 @@ export async function uninstall({
 
   // remove game folder from install path
   const installPath = appInfo.install.install_path
-  if (appInfo.folder_name === undefined) return { stderr: '', stdout: '' }
-  const gameFolder = path.join(installPath, appInfo.folder_name)
-
-  rmSync(gameFolder, { recursive: true, force: true })
+  logInfo(`Removing folder in uninstall: ${installPath}`, LogPrefix.HyperPlay)
+  rmSync(installPath, { recursive: true, force: true })
 
   // only remove the game from the store if the platform is web
   // @ts-expect-error TS wont know how to handle the type of installInfo
@@ -422,12 +426,13 @@ export async function uninstall({
     (value) => value.app_name === appName
   )
   currentLibrary[gameIndex].is_installed = false
+  currentLibrary[gameIndex].install = {}
   hpLibraryStore.set('games', currentLibrary)
 
   if (shouldRemovePrefix) {
     const { winePrefix } = await getSettings(appName)
 
-    logInfo(`Removing prefix ${winePrefix}`, LogPrefix.Backend)
+    logInfo(`Removing prefix ${winePrefix}`, LogPrefix.HyperPlay)
     if (existsSync(winePrefix)) {
       // remove prefix if exists
       rmSync(winePrefix, { recursive: true })
@@ -480,7 +485,7 @@ export async function update(appName: string): Promise<InstallResult> {
   if (gameInfo.install.platform === undefined) {
     logError(
       'Install platform was not found during game updated',
-      LogPrefix.Backend
+      LogPrefix.HyperPlay
     )
     return { status: 'error' }
   }
@@ -488,14 +493,14 @@ export async function update(appName: string): Promise<InstallResult> {
   if (gameInfo.install.install_path === undefined) {
     logError(
       'Install path was not found during game updated',
-      LogPrefix.Backend
+      LogPrefix.HyperPlay
     )
     return { status: 'error' }
   }
 
   await uninstall({ appName })
   const installResult = await install(appName, {
-    path: gameInfo.install.install_path,
+    path: path.dirname(gameInfo.install.install_path),
     platformToInstall: gameInfo.install.platform
   })
   return installResult
