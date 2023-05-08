@@ -441,24 +441,31 @@ class GlobalState extends PureComponent<Props> {
     checkUpdates = false
   ): Promise<void> => {
     console.log('refreshing')
+    const { epic, gog, gameUpdates } = this.state
 
-    const currentLibraryLength = this.state.epic.library?.length
-    let epicLibrary = libraryStore.get('library', [])
-
-    const gogLibrary = this.loadGOGLibrary()
-    if (!epicLibrary.length || !this.state.epic.library.length) {
-      window.api.logInfo('No cache found, getting data from legendary...')
-      const { library: legendaryLibrary } = await getLegendaryConfig()
-      epicLibrary = legendaryLibrary
-    }
-
-    let updates = this.state.gameUpdates
+    let updates = gameUpdates
     if (checkUpdates && library) {
       try {
         updates = await window.api.checkGameUpdates()
       } catch (error) {
         window.api.logError(`${error}`)
       }
+    }
+
+    const currentLibraryLength = epic.library?.length
+
+    let epicLibrary = libraryStore.get('library', [])
+    if (epic.username && (!epicLibrary.length || !epic.library.length)) {
+      window.api.logInfo('No cache found, getting data from legendary...')
+      const { library: legendaryLibrary } = await getLegendaryConfig()
+      epicLibrary = legendaryLibrary
+    }
+
+    let gogLibrary = this.loadGOGLibrary()
+    if (gog.username && (!gogLibrary.length || !gog.library.length)) {
+      window.api.logInfo('No cache found, getting data from gog...')
+      await window.api.refreshLibrary('gog')
+      gogLibrary = this.loadGOGLibrary()
     }
 
     const updatedSideload = sideloadLibrary.get('games', [])
@@ -468,11 +475,11 @@ class GlobalState extends PureComponent<Props> {
     this.setState({
       epic: {
         library: epicLibrary,
-        username: this.state.epic.username
+        username: epic.username
       },
       gog: {
         library: gogLibrary,
-        username: this.state.gog.username
+        username: gog.username
       },
       gameUpdates: updates,
       refreshing: false,
