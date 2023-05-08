@@ -759,6 +759,7 @@ ipcMain.handle('getLatestReleases', async () => {
 
 ipcMain.on('clearCache', (event) => {
   clearCache()
+  sendFrontendMessage('refreshLibrary')
 
   showDialogBoxModalAuto({
     event,
