@@ -82,15 +82,14 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     */
 
   return (
-    <>
-      <h4
+    <div className="contentContainer">
+      <h3
         style={{
-          padding: 'var(--space-xl) var(--space-md) 0',
           textAlign: 'left'
         }}
       >
         {t('download-manager.title', 'Downloads')}
-      </h4>
+      </h3>
       {
         <>
           <ProgressHeader
@@ -160,6 +159,6 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 })

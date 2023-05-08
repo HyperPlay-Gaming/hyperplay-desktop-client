@@ -15,6 +15,7 @@ import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
 import { ProgressDialog } from 'frontend/components/UI/ProgressDialog'
 import SettingsContext from '../../SettingsContext'
 import TextWithProgress from 'frontend/components/UI/TextWithProgress'
+import { Button } from '@hyperplay/ui'
 
 interface Props {
   gogSaves: GOGCloudSavesLocation[]
@@ -199,22 +200,21 @@ export default function GOGSyncSaves({
             extraClass="rightButtons"
             // style={{ marginRight: '12px' }}
             afterSelect={
-              <button
+              <Button
+                type={`${isSyncing ? 'primary' : 'secondary'}`}
                 data-testid="setSync"
                 onClick={async () => handleSync()}
                 disabled={
                   isSyncing || !gogSaves.every((value) => value.location.length)
                 }
-                className={`button is-small ${
-                  isSyncing ? 'is-primary' : 'settings'
-                }`}
+                style={{ marginTop: 'var(--space-xs)' }}
               >
                 {`${
                   isSyncing
                     ? t('setting.manualsync.syncing')
                     : t('setting.manualsync.sync')
                 }`}
-              </button>
+              </Button>
             }
           >
             {syncCommands.map((el, i) => (
@@ -223,6 +223,7 @@ export default function GOGSyncSaves({
               </option>
             ))}
           </SelectField>
+
           <ToggleSwitch
             htmlId="autosync"
             value={autoSyncSaves}

@@ -98,7 +98,9 @@ import {
   hyperplaySite,
   customThemesWikiLink,
   createNecessaryFolders,
-  fixAsarPath
+  fixAsarPath,
+  twitterLink,
+  eventsToCloseMetaMaskPopupOn
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -174,6 +176,12 @@ async function initializeWindow(): Promise<BrowserWindow> {
   configStore.set('userHome', userHome)
   mainWindow = createMainWindow()
 
+  mainWindow.webContents.on('input-event', (ev, inputEv) => {
+    if (eventsToCloseMetaMaskPopupOn.includes(inputEv.type)) {
+      mainWindow.webContents.send('removePopupInWebview')
+    }
+  })
+
   ExtensionHelper.initExtensionProvider(mainWindow)
 
   OverlayApp.start()
@@ -229,6 +237,11 @@ async function initializeWindow(): Promise<BrowserWindow> {
   return mainWindow
 }
 
+const devAppUrl = 'http://localhost:5173/?view=App'
+const prodAppUrl = `file://${path.join(
+  publicDir,
+  '../build/index.html?view=App'
+)}`
 const loadMainWindowURL = function () {
   if (!app.isPackaged) {
     /* if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
@@ -241,14 +254,12 @@ const loadMainWindowURL = function () {
       })
     }
   */
-    mainWindow.loadURL('http://localhost:5173?view=App')
+    mainWindow.loadURL(devAppUrl)
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
-    mainWindow.loadURL(
-      `file://${path.join(publicDir, '../build/index.html?view=App')}`
-    )
+    mainWindow.loadURL(prodAppUrl)
     autoUpdater.checkForUpdates().then((val) => {
       logInfo(
         `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
@@ -312,7 +323,12 @@ if (!gotTheLock) {
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
-      path.join(__dirname, 'hyperplay_store_preload.js')
+      path.join(__dirname, 'hyperplay_store_preload.js'),
+      path.join(__dirname, 'webview_style_preload.js')
+    ])
+    const epicStoreSession = session.fromPartition('persist:epicstore')
+    epicStoreSession.setPreloads([
+      path.join(__dirname, 'webview_style_preload.js')
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
@@ -621,6 +637,7 @@ ipcMain.on('openWeblate', async () => openUrlOrFile(weblateUrl))
 ipcMain.on('showAboutWindow', () => showAboutWindow())
 ipcMain.on('openLoginPage', async () => openUrlOrFile(epicLoginUrl))
 ipcMain.on('openDiscordLink', async () => openUrlOrFile(discordLink))
+ipcMain.on('openTwitterLink', async () => openUrlOrFile(twitterLink))
 ipcMain.on('openWinePrefixFAQ', async () => openUrlOrFile(wineprefixFAQ))
 ipcMain.on('openWebviewPage', async (event, url) => openUrlOrFile(url))
 ipcMain.on('openWikiLink', async () => openUrlOrFile(wikiLink))
@@ -1543,6 +1560,11 @@ ipcMain.handle(
 
 // Simulate keyboard and mouse actions as if the real input device is used
 ipcMain.handle('gamepadAction', async (event, args) => {
+  const senderUrl = event.sender.getURL()
+  if (!senderUrl.includes(devAppUrl) && !senderUrl.includes(prodAppUrl)) {
+    return
+  }
+
   // we can only receive gamepad events if the main window exists
   const mainWindow = getMainWindow()!
 

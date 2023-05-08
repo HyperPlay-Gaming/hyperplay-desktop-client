@@ -66,6 +66,12 @@ export default defineConfig({
           __dirname + '/src/backend/hyperplay_store_preload.ts'
         ),
         vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/webview_style_preload.ts'
+        ),
+        vite: electronViteConfig
       }
     ]),
     svgr()

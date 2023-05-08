@@ -4,6 +4,7 @@ class ExtensionStore {
   extensionId = ''
   isNotificationOpen = false
   isPopupOpen = false
+  popupIsLocked = false
 
   constructor() {
     makeAutoObservable(this)
@@ -31,7 +32,9 @@ class ExtensionStore {
     })
 
     window.api.handleRemovePopupInWebview(() => {
-      this.setIsPopupOpen(false)
+      if (!this.popupIsLocked) {
+        this.setIsPopupOpen(false)
+      }
     })
   }
 
@@ -49,6 +52,14 @@ class ExtensionStore {
 
   toggleIsPopupOpen() {
     this.setIsPopupOpen(!this.isPopupOpen)
+  }
+
+  lockPopup() {
+    this.popupIsLocked = true
+  }
+
+  unlockPopup() {
+    this.popupIsLocked = false
   }
 
   private setIsNotificationOpen(isOpen: boolean) {

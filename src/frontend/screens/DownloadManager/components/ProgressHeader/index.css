@@ -10,8 +10,7 @@
   border: solid 2px var(--input-background);
   background-color: var(--input-background);
   border-radius: 6px;
-  margin: var(--space-3xs) var(--space-lg) var(--space-md);
-  padding: 0 var(--space-md);
+  margin: var(--space-3xs) 0px var(--space-md) 0px;
 }
 
 .downloadBar {

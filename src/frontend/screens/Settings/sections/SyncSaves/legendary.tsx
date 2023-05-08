@@ -15,6 +15,7 @@ import { SyncType } from 'frontend/types'
 import { ProgressDialog } from 'frontend/components/UI/ProgressDialog'
 import SettingsContext from '../../SettingsContext'
 import TextWithProgress from 'frontend/components/UI/TextWithProgress'
+import { Button } from '@hyperplay/ui'
 
 interface Props {
   autoSyncSaves: boolean
@@ -166,20 +167,19 @@ export default function LegendarySyncSaves({
             extraClass="rightButtons"
             // style={{ marginRight: '12px' }}
             afterSelect={
-              <button
+              <Button
+                type={`${isSyncing ? 'primary' : 'secondary'}`}
                 data-testid="setSync"
                 onClick={async () => handleSync()}
                 disabled={isSyncing || !savesPath.length}
-                className={`button is-small ${
-                  isSyncing ? 'is-primary' : 'settings'
-                }`}
+                style={{ marginTop: 'var(--space-xs)' }}
               >
                 {`${
                   isSyncing
                     ? t('setting.manualsync.syncing')
                     : t('setting.manualsync.sync')
                 }`}
-              </button>
+              </Button>
             }
           >
             {syncCommands.map((el, i) => (

@@ -1,0 +1,95 @@
+.libraryHeader {
+  text-align: left;
+  padding: 0 var(--space-md-fixed);
+  margin: var(--space-sm) 0;
+}
+
+#backToTopArrow {
+  font-size: 3.2vh;
+}
+
+#backToTopBtn {
+  border-radius: 100%;
+  width: 5vh;
+  height: 5vh;
+  position: fixed;
+  bottom: 3%;
+  right: 0;
+  margin: var(--space-md) var(--space-xl);
+  border: 1px var(--download-button) solid;
+  background-color: var(--background);
+  color: var(--download-button);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  z-index: 9;
+  visibility: hidden;
+  transition: all 0.3s ease-in;
+  cursor: pointer;
+}
+
+#backToTopBtn:hover {
+  background-color: var(--download-button);
+  color: var(--text-default);
+}
+
+.listing {
+  flex: 100% 1 1;
+}
+
+.libraryTopHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--space-xl);
+  gap: var(--space-md-fixed);
+  :last-child {
+    margin: 0 0 0 auto;
+  }
+  z-index: 100;
+}
+
+.tabsList {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: var(--space-xl);
+}
+
+.tabsList > *:not([type='button']) {
+  margin: 0px var(--space-md);
+}
+
+.tabsList > *:first-child:not([type='button']) {
+  margin: 0px var(--space-md) 0px 0px;
+}
+
+.tabsList > *:last-child:not([type='button']) {
+  margin: 0 0 0 auto;
+  display: flex;
+  gap: var(--space-md);
+}
+
+.numberOfgames {
+  background-color: var(--color-primary-500);
+  padding: var(--space-3xs) var(--space-xs);
+  border-radius: var(--space-xs);
+}
+
+.refreshButton {
+  padding: var(--space-xs);
+}
+
+.heartButton {
+  padding: var(--space-xs);
+  vertical-align: middle;
+}
+
+.heartButton > div > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gridListButton {
+  padding: calc(0.75 * var(--space-sm));
+}

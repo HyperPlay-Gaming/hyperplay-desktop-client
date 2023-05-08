@@ -1,7 +1,6 @@
 import ImportOptionStyles from './index.module.scss'
 import React, { useEffect, useState } from 'react'
 import { ImportableBrowsers } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
-import classNames from 'classnames'
 
 interface WalletOptionProps {
   title: ImportableBrowsers
@@ -31,14 +30,7 @@ const ImportOption = ({
   return (
     <button className={ImportOptionStyles.importOption} onClick={onClick}>
       <img className={ImportOptionStyles.importOptionBrowserIcon} src={icon} />
-      <div
-        className={classNames(`{ImportOptionStyles.importOptionTitle}`, {
-          [`${ImportOptionStyles.createNewText}`]: isCreate,
-          'body-sm': isCreate
-        })}
-      >
-        {title}
-      </div>
+      <div className={ImportOptionStyles.importOptionTitle}>{title}</div>
     </button>
   )
 }

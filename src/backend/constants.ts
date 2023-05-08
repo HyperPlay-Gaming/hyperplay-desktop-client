@@ -72,6 +72,7 @@ const githubURL = 'https://github.com/G7DAO/HyperPlay/releases/latest'
 const GITHUB_API = 'https://api.github.com/repos/G7DAO/HyperPlay/releases'
 const supportURL = 'https://github.com/G7DAO/HyperPlay/blob/main/Support.md'
 const discordLink = 'https://discord.gg/hyperplay'
+const twitterLink = 'https://twitter.com/HyperPlayGaming'
 const wikiLink = 'https://github.com/G7DAO/HyperPlay/wiki'
 const weblateUrl =
   'https://hosted.weblate.org/projects/hyperplay-games-launcher'
@@ -79,6 +80,12 @@ const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
 const hyperplaySite = 'https://docs.hyperplaygaming.com/faq'
 const customThemesWikiLink =
   'https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/Custom-Themes'
+const eventsToCloseMetaMaskPopupOn = [
+  'keyDown',
+  'keyUp',
+  'mouseDown',
+  'mouseUp'
+]
 
 /**
  * Get shell for different os
@@ -199,6 +206,7 @@ export {
   legendaryLogFile,
   gogdlLogFile,
   discordLink,
+  twitterLink,
   execOptions,
   fixAsarPath,
   configStore,
@@ -243,5 +251,6 @@ export {
   wineprefixFAQ,
   hyperplaySite,
   customThemesWikiLink,
-  onboardLocalStore
+  onboardLocalStore,
+  eventsToCloseMetaMaskPopupOn
 }
