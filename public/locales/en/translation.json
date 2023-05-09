@@ -175,6 +175,7 @@
     },
     "docs": "Documentation",
     "download-manager": {
+        "ETA": "Estimated Time",
         "install-type": {
             "install": "Install",
             "update": "Update"
@@ -473,11 +474,11 @@
         "install": {
             "canceled": "Installation Canceled",
             "error": "Installation Failed",
-            "failed": "Installation Failed",
             "finished": "Installation Finished",
             "imported": "Game Imported",
             "paused": "Installation Paused",
-            "startInstall": "Installation Started"
+            "startInstall": "Installation Started",
+            "stopped": "Installation stopped"
         },
         "moved": "Finished Moving",
         "moving": "Moving Game",
@@ -488,10 +489,10 @@
         "uninstalled": "Uninstalled",
         "update": {
             "canceled": "Update Canceled",
-            "failed": "Update Failed",
             "finished": "Update Finished",
             "paused": "Update Paused",
-            "started": "Update Started"
+            "started": "Update Started",
+            "stopped": "Update stopped"
         }
     },
     "offline-message": {

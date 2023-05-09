@@ -237,6 +237,8 @@ function processNotification(element: DMQueueElement, status: DMStatus) {
     element.params.appName
   )
 
+  console.log('processNotification', status)
+
   if (status === 'abort') {
     if (isPaused()) {
       logWarning(
@@ -245,7 +247,7 @@ function processNotification(element: DMQueueElement, status: DMStatus) {
       )
       // i18next.t('notify.update.paused', 'Update Paused')
       // i18next.t('notify.install.paused', 'Installation Paused')
-      notify({ title, body: i18next.t(`notify.${element.type}.paused`) })
+      return notify({ title, body: i18next.t(`notify.${element.type}.paused`) })
     } else {
       logWarning(
         [action, 'of', element.params.appName, 'aborted!'],
@@ -253,17 +255,33 @@ function processNotification(element: DMQueueElement, status: DMStatus) {
       )
       // i18next.t('notify.update.canceled', 'Update Canceled')
       // i18next.t('notify.install.canceled', 'Installation Canceled')
-      notify({ title, body: i18next.t(`notify.${element.type}.canceled`) })
+      return notify({
+        title,
+        body: i18next.t(`notify.${element.type}.canceled`)
+      })
     }
   } else if (status === 'error') {
-    logWarning(
-      [action, 'of', element.params.appName, 'failed!'],
-      LogPrefix.DownloadManager
-    )
-    // i18next.t('notify.update.failed', 'Update Failed')
-    // i18next.t('notify.install.failed', 'Installation Failed')
-    notify({ title, body: i18next.t(`notify.${element.type}.failed`) })
-  } else if (status === 'done') {
+    if (isPaused()) {
+      logWarning(
+        [action, 'of', element.params.appName, 'paused!'],
+        LogPrefix.DownloadManager
+      )
+      // i18next.t('notify.update.paused', 'Update Paused')
+      // i18next.t('notify.install.paused', 'Installation Paused')
+      return notify({ title, body: i18next.t(`notify.${element.type}.paused`) })
+    } else if (isRunning()) {
+      logWarning(
+        [action, 'of', element.params.appName, 'failed!'],
+        LogPrefix.DownloadManager
+      )
+      // i18next.t('notify.update.stopped', 'Update stopped')
+      // i18next.t('notify.install.stopped', 'Installation stopped')
+      return notify({
+        title,
+        body: i18next.t(`notify.${element.type}.stopped`)
+      })
+    }
+
     // i18next.t('notify.update.finished', 'Update Finished')
     // i18next.t('notify.install.finished', 'Installation Finished')
     notify({

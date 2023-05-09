@@ -300,11 +300,9 @@ export async function install(
           destinationPath
         ])
         if (code !== 0) {
-          rmSync(zipFile)
           throw new Error(stderr)
         }
       }
-      rmSync(zipFile)
 
       if (isWindows) {
         await installDistributables(destinationPath)
