@@ -57,6 +57,12 @@ function App() {
             <Route path="gogstore" element={<WebView />} />
             <Route path="wiki" element={<WebView />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
+            <Route
+              path="metamaskSecretPhrase"
+              element={
+                <MetaMaskHome path="home.html#onboarding/import-with-recovery-phrase" />
+              }
+            />
             <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />} />
             <Route path="/gamepage">
               <Route path=":runner">
@@ -81,17 +87,17 @@ function App() {
           <ControllerHints />
           <div className="simple-keyboard"></div>
         </div>
+        <OnboardingStoreController />
+        {onboardingStore.isOnboardingOpen && (
+          <Onboarding
+            disableOnboarding={() => {
+              window.api.trackEvent({ event: 'Onboarding Skipped' })
+              onboardingStore.closeOnboarding()
+            }}
+          />
+        )}
       </HashRouter>
       <TransactionNotification />
-      <OnboardingStoreController />
-      {onboardingStore.isOnboardingOpen && (
-        <Onboarding
-          disableOnboarding={() => {
-            window.api.trackEvent({ event: 'Onboarding Skipped' })
-            onboardingStore.closeOnboarding()
-          }}
-        />
-      )}
       <DownloadToastManager />
     </div>
   )
