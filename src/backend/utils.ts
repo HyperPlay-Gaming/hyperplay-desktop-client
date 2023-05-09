@@ -1153,32 +1153,19 @@ export async function downloadFile(
       }
     })
 
-    dl.on('metadata', function (metadata) {
-      console.log('[metadata]', { metadata })
-    })
-
     dl.on('error', function (error) {
       console.log('[error]', { error })
       throw error
-    })
-
-    dl.on('end', function () {
-      console.log('[end]')
-    })
-
-    dl.on('close', function () {
-      console.log('[close]')
     })
 
     const downloaded = await dl.wait()
     console.log('[downloaded]', downloaded)
 
     if (!downloaded) {
-      throw new Error('Download failed')
+      throw new Error('Download incomplete')
     }
   } catch (err) {
-    console.log('[error]', err)
-    throw err
+    throw new Error('Download failed')
   }
 }
 

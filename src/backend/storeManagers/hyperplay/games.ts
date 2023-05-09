@@ -12,7 +12,6 @@ import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
-import { clean } from 'easydl/dist/utils'
 import { isMac, isWindows, isLinux, configFolder } from 'backend/constants'
 import { spawnAsync, killPattern, downloadFile } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
@@ -21,7 +20,6 @@ import {
   createAbortController,
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
-import { removeFromQueue } from 'backend/downloadmanager/downloadqueue'
 import {
   getHyperPlayStoreRelease,
   handleArchAndPlatform,
@@ -175,8 +173,7 @@ const installDistributables = async (gamePath: string) => {
 async function downloadGame(
   appName: string,
   downloadPath: string,
-  platformInfo: PlatformInfo,
-  removeOnAbort?: boolean
+  platformInfo: PlatformInfo
 ): Promise<void> {
   const appInfo = getGameInfo(appName)
 
@@ -224,11 +221,7 @@ async function downloadGame(
     deleteAbortController(appName)
   } catch (error) {
     deleteAbortController(appName)
-    logWarning(`Download aborted ${error}`, LogPrefix.HyperPlay)
-    removeFromQueue(appName)
-    if (removeOnAbort) {
-      clean(downloadPath)
-    }
+    logWarning(`Download stopped ${error}`, LogPrefix.HyperPlay)
   }
 }
 
