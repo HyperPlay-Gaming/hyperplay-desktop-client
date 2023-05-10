@@ -767,9 +767,9 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "link": "Wine Manager",
+            "link": "Compatibility Layer Manager",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine Manager",
+            "title": "Compatibility Layer Manager",
             "unzipping": "Unzipping"
         },
         "release": "Release Date",
