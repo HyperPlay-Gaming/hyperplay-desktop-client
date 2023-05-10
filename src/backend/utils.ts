@@ -10,7 +10,9 @@ import {
   SteamRuntime,
   Release,
   GameInfo,
-  GameSettings
+  GameSettings,
+  State,
+  ProgressInfo
 } from 'common/types'
 import axios, { AxiosResponse } from 'axios'
 import {
@@ -48,7 +50,8 @@ import {
   isWindows,
   publicDir,
   isMac,
-  configStore
+  configStore,
+  isLinux
 } from './constants'
 import { logError, logInfo, LogPrefix, logWarning } from './logger/logger'
 import { basename, dirname, join, normalize } from 'path'
@@ -72,6 +75,11 @@ import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { validWine } from './launcher'
 import { gameManagerMap } from 'backend/storeManagers'
+import {
+  installWineVersion,
+  updateWineVersionInfos,
+  wineDownloaderInfoStore
+} from './wine/manager/utils'
 
 const execAsync = promisify(exec)
 
@@ -945,6 +953,39 @@ export async function checkWineBeforeLaunch(
       const firstFoundWine = wineList[0]
 
       const isValidWine = await validWine(firstFoundWine)
+
+      if (!wineList.length || !firstFoundWine || !isValidWine) {
+        // refresh wine list
+        await updateWineVersionInfos(true)
+        // get list of wines on wineDownloaderInfoStore
+        const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
+        // use Wine-GE type if on Linux and Wine-Crossover if on Mac
+        const release = availableWine.filter(
+          (version) => version.type === (isLinux ? 'Wine-GE' : 'Wine-Crossover')
+        )[0]
+        // download the latest version
+        const onProgress = (state: State, progress?: ProgressInfo) => {
+          sendFrontendMessage('progressOfWineManager' + release.version, {
+            state,
+            progress
+          })
+        }
+        const result = await installWineVersion(
+          release,
+          onProgress,
+          createAbortController(release.version).signal
+        )
+        deleteAbortController(release.version)
+        if (result === 'success') {
+          const wineList = await GlobalConfig.get().getAlternativeWine()
+          // update the game config to use that wine
+          const firstFoundWine = wineList[0]
+          logInfo(`Changing wine version to ${firstFoundWine.name}`)
+          gameSettings.wineVersion = defaultwine
+          GameConfig.get(appName).setSetting('wineVersion', firstFoundWine)
+        }
+      }
+
       if (firstFoundWine && isValidWine) {
         const { response } = await ContinueWithFoundWine(
           gameSettings.wineVersion.name,
