@@ -37,6 +37,7 @@ import {
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
+import { clean } from 'easydl/dist/utils'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -300,9 +301,12 @@ export async function install(
           destinationPath
         ])
         if (code !== 0) {
+          rmSync(zipFile)
+          clean(zipFile)
           throw new Error(stderr)
         }
       }
+      rmSync(zipFile)
 
       if (isWindows) {
         await installDistributables(destinationPath)
