@@ -1136,7 +1136,7 @@ export async function downloadFile(
       reportInterval: 10000
     })
 
-    logInfo(`Downloading ${url} to ${dest} with EasyDL`, LogPrefix.HyperPlay)
+    logInfo(`Downloading ${url} with EasyDL`, LogPrefix.HyperPlay)
 
     abortController.signal.addEventListener('abort', () => {
       dl.destroy()
@@ -1154,17 +1154,20 @@ export async function downloadFile(
     })
 
     dl.on('error', function (error) {
-      console.log('[error]', { error })
+      logError(`Error: ${error}`, LogPrefix.Backend)
       throw error
     })
 
     const downloaded = await dl.wait()
-    console.log('[downloaded]', downloaded)
 
     if (!downloaded) {
+      logWarning(`File ${url} not downloaded`, LogPrefix.Backend)
       throw new Error('Download incomplete')
     }
+
+    logInfo(`Finished downloading ${url}`, LogPrefix.Backend)
   } catch (err) {
+    logError(`Download Failed with: ${err}`, LogPrefix.Backend)
     throw new Error('Download failed')
   }
 }
