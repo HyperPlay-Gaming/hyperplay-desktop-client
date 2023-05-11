@@ -223,6 +223,7 @@ async function downloadGame(
   } catch (error) {
     deleteAbortController(appName)
     logWarning(`Download stopped ${error}`, LogPrefix.HyperPlay)
+    throw new Error(`Download stopped ${error}`)
   }
 }
 
