@@ -354,8 +354,7 @@ export const initGamepad = () => {
   }
 
   function connecthandler(e: GamepadEvent) {
-    console.log('controller connected event')
-    console.log(e)
+    console.log('controller connected event', e)
     // Ignore Logitech's G29 Driving Force Racing Wheel
     if (e.gamepad.id.match(/046d.*c24f/i)) {
       return
