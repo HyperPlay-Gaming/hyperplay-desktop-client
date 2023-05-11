@@ -18,6 +18,8 @@ import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as SettingsIcon } from 'frontend/assets/settings-sharp.svg'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { ReactComponent as StopIconAlt } from 'frontend/assets/stop-icon-alt.svg'
+import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
+
 import {
   getGameInfo,
   getProgress,
@@ -121,6 +123,7 @@ const GameCard = ({
     isPlaying,
     notAvailable,
     isUpdating,
+    isPaused,
     haveStatus
   } = getCardStatus(status, isInstalled, layout)
 
@@ -133,6 +136,17 @@ const GameCard = ({
   }
 
   const renderIcon = () => {
+    if (isPaused) {
+      return (
+        <SvgButton
+          title={t('button.queue.continue', 'Continue Download')}
+          className="playIcon"
+          onClick={() => window.api.resumeCurrentDownload()}
+        >
+          <DownIcon />
+        </SvgButton>
+      )
+    }
     if (notSupportedGame) {
       return (
         <FontAwesomeIcon
@@ -174,15 +188,24 @@ const GameCard = ({
         </SvgButton>
       )
     }
-    if (isInstalling || isQueued) {
+    if (isInstalling) {
       return (
-        <SvgButton
-          className="cancelIcon"
-          onClick={async () => handlePlay(runner)}
-          title={`${t('button.cancel')} (${title})`}
-        >
-          <StopIcon />
-        </SvgButton>
+        <>
+          <SvgButton
+            className="settingsIcon"
+            onClick={async () => window.api.pauseCurrentDownload()}
+            title={`${t('button.pause', 'Pause')} (${title})`}
+          >
+            <PauseIcon />
+          </SvgButton>
+          <SvgButton
+            className="cancelIcon"
+            onClick={async () => handlePlay(runner)}
+            title={`${t('button.cancel')} (${title})`}
+          >
+            <StopIcon />
+          </SvgButton>
+        </>
       )
     }
     if (isInstalled) {
