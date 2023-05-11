@@ -115,6 +115,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const isMoving = status === 'moving'
   const isUninstalling = status === 'uninstalling'
   const isSyncing = status === 'syncing-saves'
+  const isPaused = status === 'paused'
   const notAvailable = !gameAvailable && gameInfo.is_installed
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
@@ -516,7 +517,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                     marginBottom: '0.5rem'
                   }}
                 >
-                  {getInstallLabel(is_installed, notAvailable)}
+                  {getInstallLabel(is_installed, notAvailable, isPaused)}
                 </p>
               </div>
               {is_installed && Boolean(launchOptions.length) && (
@@ -635,9 +636,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
   function getInstallLabel(
     is_installed: boolean,
-    notAvailable?: boolean
+    notAvailable?: boolean,
+    isPaused?: boolean
   ): React.ReactNode {
     const { eta, bytes, percent, file } = progress
+
+    if (isPaused && !is_installed) {
+      return t('status.paused', 'Paused')
+    }
 
     if (notSupportedGame) {
       return t(
@@ -734,6 +740,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
   }
 
   function getButtonLabel(is_installed: boolean) {
+    if (isPaused) {
+      return t('button.queue.continue', 'Continue Download')
+    }
     if (notSupportedGame) {
       return t('status.notSupported', 'Not supported')
     }
@@ -744,7 +753,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return t('submenu.settings')
     }
     if (isInstalling) {
-      return t('button.cancel')
+      return t('button.queue.cancel', 'Cancel Download')
     }
     return t('button.install')
   }
@@ -767,6 +776,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
   }
 
   async function handleInstall(is_installed: boolean) {
+    if (isPaused) {
+      return window.api.resumeCurrentDownload()
+    }
     if (isQueued) {
       storage.removeItem(appName)
       return window.api.removeFromDMQueue(appName)
