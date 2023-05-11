@@ -788,15 +788,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return handleModal()
     }
 
-    if (!folder) {
-      return
-    }
-
-    if (gameInfo.runner === 'sideload') return
+    if (gameInfo.runner === 'sideload' || gameInfo.is_installed) return
 
     return install({
       gameInfo,
-      installPath: folder,
+      installPath: folder || 'default',
       isInstalling,
       previousProgress,
       progress,
