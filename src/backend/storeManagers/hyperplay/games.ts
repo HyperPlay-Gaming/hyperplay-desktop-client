@@ -254,7 +254,7 @@ export async function install(
     const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
     const platformInfo = releaseMeta.platforms[appPlatform]
     const zipName = encodeURI(platformInfo.name)
-    const tempfolder = path.join(configFolder, 'hyperplay', '.temp')
+    const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
 
     if (!existsSync(tempfolder)) {
       mkdirSync(tempfolder, { recursive: true })

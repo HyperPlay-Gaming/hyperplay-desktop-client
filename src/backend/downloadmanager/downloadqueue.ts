@@ -194,7 +194,7 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
         gameManagerMap[runner].getGameInfo(appName)
 
       if (runner === 'hyperplay' && releaseMeta) {
-        const tempfolder = join(configFolder, 'hyperplay', '.temp')
+        const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
         const plat = handleArchAndPlatform(platformToInstall, releaseMeta)
         const platformInfo = releaseMeta.platforms[plat]
         const tempFiles = join(tempfolder, encodeURI(platformInfo.name))
