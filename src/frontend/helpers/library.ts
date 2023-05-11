@@ -19,7 +19,6 @@ type InstallArgs = {
   isInstalling: boolean
   previousProgress: InstallProgress | null
   progress: InstallProgress
-  setInstallPath?: (path: string) => void
   platformToInstall?: InstallPlatform
   t: TFunction<'gamepage'>
   installDlcs?: boolean
@@ -35,7 +34,6 @@ async function install({
   progress,
   isInstalling,
   previousProgress,
-  setInstallPath,
   sdlList = [],
   installDlcs = false,
   installLanguage = 'en-US',
@@ -88,16 +86,6 @@ async function install({
       runner,
       platform: platformToInstall
     })
-  }
-
-  if (installPath !== 'default') {
-    setInstallPath && setInstallPath(installPath)
-  }
-
-  if (installPath === 'default') {
-    const { defaultInstallPath }: AppSettings =
-      await window.api.requestAppSettings()
-    installPath = defaultInstallPath
   }
 
   // If the user changed the previous folder, the percentage should start from zero again.

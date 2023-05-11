@@ -417,7 +417,7 @@ export default function DownloadDialog({
                 {t('status.totalDownloaded', 'Total Downloaded')}:
               </div>
               <div className="InstallModal__sizeValue">
-                {getProgress(previousProgress)}%
+                {getProgress(previousProgress).toFixed(2)}%
               </div>
             </div>
           )}
@@ -551,7 +551,7 @@ export default function DownloadDialog({
           {t('button.import')}
         </button>
         <button
-          onClick={async () => handleInstall()}
+          onClick={async () => handleInstall(installPath)}
           className={`button is-secondary`}
           disabled={!readyToInstall}
         >

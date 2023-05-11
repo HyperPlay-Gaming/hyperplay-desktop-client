@@ -209,6 +209,7 @@ async function downloadGame(
           appName,
           status: 'installing',
           runner: 'hyperplay',
+          folder: downloadPath,
           progress: {
             percent: progress,
             diskSpeed: diskWriteSpeed,
