@@ -190,6 +190,7 @@ export type Status =
   | 'notInstalled'
   | 'installed'
   | 'extracting'
+  | 'paused'
 
 export interface GameStatus {
   appName: string
