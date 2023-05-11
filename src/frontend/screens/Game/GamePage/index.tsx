@@ -307,6 +307,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
     const description =
       extraInfo?.about?.shortDescription ||
       extraInfo?.about?.description ||
+      gameInfo.extra?.about?.shortDescription ||
+      gameInfo.extra?.about?.description ||
       t('generic.noDescription', 'No description available')
 
     return (
@@ -510,7 +512,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       is_installed || isInstalling
                         ? 'var(--success)'
                         : 'var(--danger)',
-                    fontStyle: 'italic'
+                    fontStyle: 'italic',
+                    marginBottom: '0.5rem'
                   }}
                 >
                   {getInstallLabel(is_installed, notAvailable)}
@@ -673,9 +676,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
         ? ''
         : `${
             percent && bytes
-              ? `${percent}% [${Math.ceil(Number(bytes) / 1000000)} MB]  ${
-                  eta ? `ETA: ${eta}` : ''
-                }`
+              ? `${percent.toFixed(2)}% [${(Number(bytes) / 1000000).toFixed(
+                  0
+                )} MB]  ${eta ? `ETA: ${eta}` : ''}`
               : '...'
           }`
 
