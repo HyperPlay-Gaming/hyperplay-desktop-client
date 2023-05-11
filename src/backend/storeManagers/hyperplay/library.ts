@@ -54,8 +54,9 @@ export async function addGameToLibrary(appId: string) {
     web3: { supported: true },
     runner: 'hyperplay',
     title: data.projectMeta.name,
-    art_square: data.projectMeta.image || data.releaseMeta.image,
-    art_cover: data.releaseMeta.image || data.projectMeta.main_capsule,
+    art_square: data.projectMeta.image || data.releaseMeta.image || 'fallback',
+    art_cover:
+      data.releaseMeta.image || data.projectMeta.main_capsule || 'fallback',
     is_installed: Boolean(data.releaseMeta.platforms.web),
     cloud_save_enabled: false,
     namespace: '',

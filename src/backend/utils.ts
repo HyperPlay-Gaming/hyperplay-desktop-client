@@ -70,7 +70,7 @@ import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
-import { validWine } from './launcher'
+import { runWineCommand, validWine } from './launcher'
 import { gameManagerMap } from 'backend/storeManagers'
 
 const execAsync = promisify(exec)
@@ -423,18 +423,21 @@ async function openUrlOrFile(url: string): Promise<string | void> {
   return shell.openPath(url)
 }
 
-async function clearCache() {
-  GOGapiInfoCache.clear()
-  GOGlibraryStore.clear()
-  GOGinstallInfoStore.clear()
-  installStore.clear()
-  libraryStore.clear()
-  gameInfoStore.clear()
-
-  const abortID = 'legendary-cleanup'
-  runLegendaryCommand(['cleanup'], createAbortController(abortID)).then(() =>
-    deleteAbortController(abortID)
-  )
+function clearCache(library?: 'gog' | 'legendary') {
+  if (library === 'gog' || !library) {
+    GOGapiInfoCache.clear()
+    GOGlibraryStore.clear()
+    GOGinstallInfoStore.clear()
+  }
+  if (library === 'legendary' || !library) {
+    installStore.clear()
+    libraryStore.clear()
+    gameInfoStore.clear()
+    const abortID = 'legendary-cleanup'
+    runLegendaryCommand(['cleanup'], createAbortController(abortID)).then(() =>
+      deleteAbortController(abortID)
+    )
+  }
 }
 
 function resetApp() {
@@ -828,6 +831,15 @@ function killPattern(pattern: string) {
   }
   logInfo(['Killed', pattern], LogPrefix.Backend)
   return ret
+}
+
+async function shutdownWine(gameSettings: GameSettings) {
+  await runWineCommand({
+    gameSettings,
+    commandParts: ['wineboot', '-k'],
+    wait: true,
+    protonVerb: 'waitforexitandrun'
+  })
 }
 
 const getShellPath = async (path: string): Promise<string> =>
@@ -1240,7 +1252,8 @@ export {
   getWineFromProton,
   getFileSize,
   getLegendaryVersion,
-  getGogdlVersion
+  getGogdlVersion,
+  shutdownWine
 }
 
 // Exported only for testing purpose

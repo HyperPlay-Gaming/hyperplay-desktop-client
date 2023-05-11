@@ -13,7 +13,12 @@ import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 import { isMac, isWindows, isLinux, configFolder } from 'backend/constants'
-import { downloadFileWithAxios, spawnAsync, killPattern } from 'backend/utils'
+import {
+  downloadFileWithAxios,
+  spawnAsync,
+  killPattern,
+  shutdownWine
+} from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
 import {
@@ -92,11 +97,19 @@ export async function stop(appName: string): Promise<void> {
     const split = executable.split('/')
     const exe = split[split.length - 1]
     killPattern(exe)
+    if (!isNative(appName)) {
+      const gameSettings = await getSettings(appName)
+      shutdownWine(gameSettings)
+    }
   }
 
   const gameProcessName = getGameProcessName(gameInfo)
   if (gameProcessName) {
     killPattern(gameProcessName)
+    if (!isNative(appName)) {
+      const gameSettings = await getSettings(appName)
+      shutdownWine(gameSettings)
+    }
   }
 }
 
