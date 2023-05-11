@@ -47,10 +47,11 @@ async function install({
   }
 
   const { folder_name, is_installed, app_name: appName, runner } = gameInfo
+
   if (isInstalling) {
     // NOTE: This can't really happen, since `folder_name` can only be undefined if we got a
     //       SideloadGame from getGameInfo, but we can't "install" sideloaded games
-    if (!folder_name) return
+    if (!folder_name && runner !== 'hyperplay') return
     return handleStopInstallation(
       appName,
       installPath,
