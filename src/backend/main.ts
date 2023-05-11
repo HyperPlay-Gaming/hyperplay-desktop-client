@@ -71,7 +71,8 @@ import {
   getLatestReleases,
   getShellPath,
   wait,
-  checkWineBeforeLaunch
+  checkWineBeforeLaunch,
+  downloadDefaultWine
 } from './utils'
 import {
   configStore,
@@ -191,9 +192,14 @@ async function initializeWindow(): Promise<BrowserWindow> {
     mainWindow.setFullScreen(true)
   }
 
-  setTimeout(() => {
-    DXVK.getLatest()
-    Winetricks.download()
+  setTimeout(async () => {
+    // Will download Wine if none was found
+    const availableWine = await GlobalConfig.get().getAlternativeWine()
+    Promise.all([
+      DXVK.getLatest(),
+      Winetricks.download(),
+      !availableWine.length ? downloadDefaultWine() : null
+    ])
   }, 2500)
 
   GlobalConfig.get()
