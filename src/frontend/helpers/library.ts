@@ -41,6 +41,8 @@ async function install({
   showDialogModal
 }: InstallArgs) {
   if (!installPath) {
+    console.error('installPath is undefined')
+    window.api.logError('installPath is undefined')
     return
   }
 
@@ -49,7 +51,7 @@ async function install({
   if (isInstalling) {
     // NOTE: This can't really happen, since `folder_name` can only be undefined if we got a
     //       SideloadGame from getGameInfo, but we can't "install" sideloaded games
-    if (!folder_name && runner !== 'hyperplay') return
+    if (!folder_name) return
     return handleStopInstallation(
       appName,
       installPath,

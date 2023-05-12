@@ -174,7 +174,8 @@ const installDistributables = async (gamePath: string) => {
 async function downloadGame(
   appName: string,
   downloadPath: string,
-  platformInfo: PlatformInfo
+  platformInfo: PlatformInfo,
+  destinationPath: string
 ): Promise<void> {
   const appInfo = getGameInfo(appName)
 
@@ -209,13 +210,13 @@ async function downloadGame(
           appName,
           status: 'installing',
           runner: 'hyperplay',
-          folder: downloadPath,
+          folder: destinationPath,
           progress: {
             percent: progress,
             diskSpeed: diskWriteSpeed,
             downSpeed: downloadSpeed,
             bytes: downloadedBytes,
-            folder: downloadPath
+            folder: destinationPath
           }
         })
       }
@@ -272,7 +273,7 @@ export async function install(
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
-    await downloadGame(appName, zipFile, platformInfo)
+    await downloadGame(appName, zipFile, platformInfo, destinationPath)
     let executable = path.join(destinationPath, platformInfo.executable)
 
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
@@ -281,6 +282,7 @@ export async function install(
       window.webContents.send('gameStatusUpdate', {
         appName,
         runner: 'hyperplay',
+        folder: destinationPath,
         status: 'extracting'
       })
 
@@ -354,6 +356,7 @@ export async function install(
       window.webContents.send('gameStatusUpdate', {
         appName,
         runner: 'hyperplay',
+        folder: destinationPath,
         status: 'done'
       })
       return { status: 'error', error: `${error}` }

@@ -46,13 +46,13 @@ async function installQueueElement(params: InstallParams): Promise<{
     }
   }
 
-  /*  trackEvent({
+  trackEvent({
     event: 'Game Install Started',
     properties: {
       game_name: appName,
       store_name: runner
     }
-  }) */
+  })
 
   sendFrontendMessage('gameStatusUpdate', {
     appName,
@@ -101,7 +101,8 @@ async function installQueueElement(params: InstallParams): Promise<{
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
-      status: 'done'
+      status: 'done',
+      folder: path
     })
 
     return { status }
@@ -120,7 +121,8 @@ async function installQueueElement(params: InstallParams): Promise<{
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
-      status: 'done'
+      status: 'done',
+      folder: path
     })
   }
 }
