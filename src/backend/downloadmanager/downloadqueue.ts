@@ -90,7 +90,7 @@ async function initQueue() {
 
     if (!isPaused()) {
       addToFinished(element, status)
-      removeFromQueue(element)
+      removeFromQueue(element.params.appName)
       element = getFirstQueueElement()
       queueState = 'idle'
     } else {
@@ -148,8 +148,7 @@ async function addToQueue(element: DMQueueElement) {
   }
 }
 
-function removeFromQueue(currentElement: DMQueueElement) {
-  const { appName, runner, path } = currentElement.params
+function removeFromQueue(appName: string) {
   if (appName && downloadManager.has('queue')) {
     const elements = downloadManager.get('queue', [])
     const index = elements.findIndex(
@@ -163,8 +162,8 @@ function removeFromQueue(currentElement: DMQueueElement) {
 
     sendFrontendMessage('gameStatusUpdate', {
       appName,
-      runner,
-      folder: path,
+      runner: elements[index]?.params.runner,
+      folder: elements[index]?.params.path,
       status: 'done'
     })
 
@@ -189,7 +188,7 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
     if (isRunning()) {
       stopCurrentDownload()
     }
-    removeFromQueue(currentElement)
+    removeFromQueue(currentElement.params.appName)
 
     if (removeDownloaded) {
       const { appName, runner } = currentElement!.params
