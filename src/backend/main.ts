@@ -764,6 +764,7 @@ ipcMain.handle('getLatestReleases', async () => {
 
 ipcMain.on('clearCache', (event) => {
   clearCache()
+  sendFrontendMessage('refreshLibrary')
 
   showDialogBoxModalAuto({
     event,
@@ -1093,6 +1094,12 @@ ipcMain.handle(
         return { status: 'error' }
       }
     }
+
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'playing'
+    })
 
     const command = gameManagerMap[runner].launch(appName, launchArguments)
 

@@ -2,6 +2,7 @@ import { Runner } from 'common/types'
 import fallbackImage from 'frontend/assets/fallback_card.jpg'
 
 export function getImageFormatting(cover: string, runner: Runner) {
+  if (!cover) return fallbackImage
   const imageBase = cover
   if (imageBase === 'fallback') {
     return fallbackImage

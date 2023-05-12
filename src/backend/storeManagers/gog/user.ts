@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { logError, logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import { GOGLoginData } from 'common/types'
-import { configStore, libraryStore } from './electronStores'
-import { errorHandler } from '../../utils'
+import { configStore } from './electronStores'
+import { clearCache, errorHandler } from '../../utils'
 import { isOnline } from '../../online_monitor'
 import { UserData } from 'common/types/gog'
 
@@ -139,8 +139,8 @@ export class GOGUser {
     return isExpired
   }
   public static logout() {
+    clearCache('gog')
     configStore.clear()
-    libraryStore.clear()
     logInfo('Logging user out', LogPrefix.Gog)
   }
 

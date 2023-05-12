@@ -88,18 +88,20 @@ export default React.memo(function InstallModal({
     {
       name: 'Linux',
       available:
-        isLinux && isHpGame
+        isLinux &&
+        (isHpGame
           ? hpPlatforms.some((p) => getPlatformName(p) === 'Linux')
-          : isSideload || isLinuxNative,
+          : isSideload || isLinuxNative),
       value: 'linux',
       icon: faLinux
     },
     {
       name: 'macOS',
       available:
-        isMac && isHpGame
+        isMac &&
+        (isHpGame
           ? hpPlatforms.some((p) => getPlatformName(p) === 'Mac')
-          : isSideload || isMacNative,
+          : isSideload || isMacNative),
       value: 'Mac',
       icon: faApple
     },
@@ -125,11 +127,11 @@ export default React.memo(function InstallModal({
   )
 
   const getDefaultplatform = () => {
-    if (isLinux && gameInfo?.is_linux_native) {
+    if (isLinux && (isSideload || gameInfo?.is_linux_native)) {
       return 'linux'
     }
 
-    if (isMac && gameInfo?.is_mac_native) {
+    if (isMac && (isSideload || gameInfo?.is_mac_native)) {
       return 'Mac'
     }
 
