@@ -550,7 +550,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 )}
                 {(!is_installed || isQueued) && (
                   <button
-                    onClick={async () => handleInstall(is_installed)}
+                    onClick={async () => mainAction(is_installed)}
                     disabled={
                       isPlaying ||
                       isUpdating ||
@@ -759,11 +759,13 @@ export default React.memo(function GamePage(): JSX.Element | null {
   }
 
   function handlePlay() {
+    // kill game if running
     return async () => {
       if (isPlaying || isUpdating) {
         return sendKill(appName, gameInfo.runner)
       }
 
+      // open game
       await launch({
         appName,
         t,
@@ -775,24 +777,30 @@ export default React.memo(function GamePage(): JSX.Element | null {
     }
   }
 
-  async function handleInstall(is_installed: boolean) {
+  async function mainAction(is_installed: boolean) {
+    // resume download
     if (isPaused) {
       return window.api.resumeCurrentDownload()
     }
+
+    // remove from queue
     if (isQueued) {
       storage.removeItem(appName)
       return window.api.removeFromDMQueue(appName)
     }
 
+    // open install dialog
     if (!is_installed && !isInstalling) {
       return handleModal()
     }
 
+    // ignore sideloaded games
     if (gameInfo.runner === 'sideload' || gameInfo.is_installed) return
 
+    // cancel download
     return install({
       gameInfo,
-      installPath: folder || 'default',
+      installPath: folder!,
       isInstalling,
       previousProgress,
       progress,

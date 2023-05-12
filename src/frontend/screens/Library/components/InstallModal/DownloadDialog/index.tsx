@@ -356,6 +356,10 @@ export default function DownloadDialog({
     gameInstallInfo?.manifest?.download_size &&
     !gettingInstallInfo
 
+  const showRemainingProgress =
+    (runner === 'hyperplay' && previousProgress.percent) ||
+    previousProgress.folder === installPath
+
   return (
     <>
       <DialogHeader onClose={backdropClick}>
@@ -407,7 +411,7 @@ export default function DownloadDialog({
               `${t('game.getting-install-size', 'Geting install size')}...`
             )}
           </div>
-          {previousProgress.folder === installPath && (
+          {showRemainingProgress && (
             <div className="InstallModal__size">
               <FontAwesomeIcon
                 className="InstallModal__sizeIcon"
