@@ -66,7 +66,8 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "algo deu errado com a atualização! por favor desinstale e reinstale o hyperplay novamente"
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,8 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
-            }
+            },
+            "moving": "erro ao mover o jogo {{error}}"
         },
         "info": {
             "update": {
@@ -142,7 +144,8 @@
             "title": "Warning"
         },
         "wineprefix": "Escolha a pasta com o Prefixo Wine",
-        "yes": "SIM"
+        "yes": "SIM",
+        "dontShowAgain": "não mostrar novamente"
     },
     "button": {
         "cancel": "Cancel",
@@ -639,5 +642,6 @@
         },
         "release": "Release Date",
         "size": "Size"
-    }
+    },
+    "analytics": "análise"
 }
