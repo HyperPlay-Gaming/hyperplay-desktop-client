@@ -917,7 +917,9 @@ export async function downloadDefaultWine() {
   const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
   // use Wine-GE type if on Linux and Wine-Crossover if on Mac
   const release = availableWine.filter(
-    (version) => version.type === (isLinux ? 'Wine-GE' : 'Wine-Crossover')
+    (version) =>
+      version.type === (isLinux ? 'Wine-GE' : 'Wine-Crossover') &&
+      version.version.includes('Wine-GE-Proton')
   )[0]
   // download the latest version
   const onProgress = (state: State, progress?: ProgressInfo) => {
