@@ -5,6 +5,13 @@ import { configStore } from './electronStores'
 import { clearCache, errorHandler } from '../../utils'
 import { isOnline } from '../../online_monitor'
 import { UserData } from 'common/types/gog'
+import { existsSync, unlinkSync } from 'graceful-fs'
+import { gogdlAuthConfig } from 'backend/constants'
+import {
+  createAbortController,
+  deleteAbortController
+} from 'backend/utils/aborthandler/aborthandler'
+import { runRunnerCommand } from './library'
 
 const gogAuthenticateUrl =
   'https://auth.gog.com/token?client_id=46899977096215655&client_secret=9d85c43b1482497dbbce61f6e4aa173a433796eeae2ca8c5f6129f2dc4de46d9&grant_type=authorization_code&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&code='
@@ -88,11 +95,19 @@ export class GOGUser {
    * @returns user credentials
    */
   public static async getCredentials() {
-    if (this.isTokenExpired()) {
-      return this.refreshToken()
+    if (!isOnline()) {
+      logWarning('Unable to get credentials - app is offline', {
+        prefix: LogPrefix.Gog
+      })
+      return
     }
+    const { stdout } = await runRunnerCommand(
+      ['auth'],
+      createAbortController('gogdl-get-credentials')
+    )
 
-    return configStore.get_nodefault('credentials')
+    deleteAbortController('gogdl-get-credentials')
+    return JSON.parse(stdout)
   }
 
   /**
@@ -129,18 +144,12 @@ export class GOGUser {
       return
     }
   }
-
-  public static isTokenExpired() {
-    const user = configStore.get_nodefault('credentials')
-    if (!user) {
-      return true
-    }
-    const isExpired = Date.now() >= user.loginTime + user.expires_in * 1000
-    return isExpired
-  }
   public static logout() {
     clearCache('gog')
     configStore.clear()
+    if (existsSync(gogdlAuthConfig)) {
+      unlinkSync(gogdlAuthConfig)
+    }
     logInfo('Logging user out', LogPrefix.Gog)
   }
 
