@@ -442,7 +442,7 @@ class GlobalState extends PureComponent<Props> {
     const { epic, gog, gameUpdates } = this.state
 
     let updates = gameUpdates
-    if (checkUpdates && library) {
+    if (checkUpdates) {
       try {
         updates = await window.api.checkGameUpdates()
       } catch (error) {
@@ -504,9 +504,12 @@ class GlobalState extends PureComponent<Props> {
       refreshing: true,
       refreshingInTheBackground: runInBackground
     })
-    window.api.logInfo('Refreshing Library')
+    window.api.logInfo(`Refreshing ${library} Library`)
     try {
-      await window.api.refreshLibrary(library)
+      if (!checkForUpdates || library === 'gog') {
+        await window.api.refreshLibrary(library)
+      }
+
       return await this.refresh(library, checkForUpdates)
     } catch (error) {
       window.api.logError(`${error}`)
