@@ -81,7 +81,7 @@ export default function WineSelector({
         htmlId="use-wine-defaults"
         title={t(
           'setting.use-default-wine-settings',
-          'Use Default Wine Settings'
+          'Use Default Compatibility Settings'
         )}
         value={useDefaultSettings}
         handleChange={() => setUseDefaultSettings(!useDefaultSettings)}
