@@ -2,21 +2,35 @@ import './index.css'
 
 import React, { useContext, useEffect, useState } from 'react'
 
-import { DMQueueElement, GameInfo } from 'common/types'
+import {
+  DMQueueElement,
+  DownloadManagerState,
+  GameInfo,
+  HyperPlayInstallInfo
+} from 'common/types'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import { handleStopInstallation } from 'frontend/helpers/library'
-import { getGameInfo, getStoreName } from 'frontend/helpers'
+import {
+  getGameInfo,
+  getInstallInfo,
+  getStoreName,
+  size as fileSize
+} from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useNavigate } from 'react-router-dom'
 import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
+import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
+import { GogInstallInfo } from 'common/types/gog'
+import { LegendaryInstallInfo } from 'common/types/legendary'
 
 type Props = {
   element?: DMQueueElement
   current: boolean
+  state?: DownloadManagerState
 }
 
 const options: Intl.DateTimeFormatOptions = {
@@ -30,9 +44,16 @@ function convertToTime(time: number) {
   return { hour, fullDate: date.toLocaleString() }
 }
 
-const DownloadManagerItem = ({ element, current }: Props) => {
+type InstallInfo =
+  | GogInstallInfo
+  | LegendaryInstallInfo
+  | HyperPlayInstallInfo
+  | null
+
+const DownloadManagerItem = ({ element, current, state }: Props) => {
   const { epic, gog, showDialogModal, hyperPlayLibrary } =
     useContext(ContextProvider)
+  const [installInfo, setInstallInfo] = useState<InstallInfo>(null)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
 
@@ -49,12 +70,29 @@ const DownloadManagerItem = ({ element, current }: Props) => {
   const library = [...epic.library, ...gog.library, ...hyperPlayLibrary]
 
   const { params, addToQueueTime, endTime, type, startTime } = element
-  const { appName, runner, path, gameInfo: DmGameInfo, size } = params
+  const {
+    appName,
+    runner,
+    path,
+    gameInfo: DmGameInfo,
+    size,
+    platformToInstall
+  } = params
 
   const [gameInfo, setGameInfo] = useState(DmGameInfo)
+
   useEffect(() => {
     const getNewInfo = async () => {
       const newInfo = (await getGameInfo(appName, runner)) as GameInfo
+
+      if (size?.includes('?') && !installInfo) {
+        const installInfo = await getInstallInfo(
+          appName,
+          runner,
+          platformToInstall
+        )
+        setInstallInfo(installInfo)
+      }
 
       if (newInfo) {
         setGameInfo(newInfo)
@@ -79,7 +117,7 @@ const DownloadManagerItem = ({ element, current }: Props) => {
 
     return handleStopInstallation(
       appName,
-      [path, folder_name],
+      path,
       t,
       progress,
       runner,
@@ -103,6 +141,16 @@ const DownloadManagerItem = ({ element, current }: Props) => {
     current ? stopInstallation() : window.api.removeFromDMQueue(appName)
   }
 
+  // using one element for the different states so it doesn't
+  // lose focus from the button when using a game controller
+  const handleSecondaryActionClick = () => {
+    if (state === 'paused') {
+      window.api.resumeCurrentDownload()
+    } else if (state === 'running') {
+      window.api.pauseCurrentDownload()
+    }
+  }
+
   const mainActionIcon = () => {
     if (finished) {
       return <PlayIcon />
@@ -113,6 +161,16 @@ const DownloadManagerItem = ({ element, current }: Props) => {
     }
 
     return <StopIcon />
+  }
+
+  const secondaryActionIcon = () => {
+    if (state === 'paused') {
+      return <PlayIcon className="playIcon" />
+    } else if (state === 'running') {
+      return <PauseIcon className="pauseIcon" />
+    } else {
+      return <></>
+    }
   }
 
   const getTime = () => {
@@ -134,6 +192,16 @@ const DownloadManagerItem = ({ element, current }: Props) => {
     return current
       ? t('button.cancel', 'Cancel')
       : t('queue.label.remove', 'Remove from Downloads')
+  }
+
+  const secondaryIconTitle = () => {
+    if (state === 'paused') {
+      return t('queue.label.resume', 'Resume download')
+    } else if (state === 'running') {
+      return t('queue.label.pause', 'Pause download')
+    } else {
+      return ''
+    }
   }
 
   const getStatusColor = () => {
@@ -176,7 +244,9 @@ const DownloadManagerItem = ({ element, current }: Props) => {
         <span className="titleSize">
           {title}
           <span title={path}>
-            {size ?? ''}
+            {size?.includes('?')
+              ? fileSize(Number(installInfo?.manifest.download_size) || 0)
+              : size}
             {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
           </span>
         </span>
@@ -188,6 +258,14 @@ const DownloadManagerItem = ({ element, current }: Props) => {
         <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
           {mainActionIcon()}
         </SvgButton>
+        {current && (
+          <SvgButton
+            onClick={handleSecondaryActionClick}
+            title={secondaryIconTitle()}
+          >
+            {secondaryActionIcon()}
+          </SvgButton>
+        )}
       </span>
     </div>
   )

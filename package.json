@@ -169,6 +169,7 @@
     "classnames": "^2.3.1",
     "crc": "^4.1.1",
     "discord-rich-presence-typescript": "^0.0.8",
+    "easydl": "^1.0.3",
     "electron-store": "^8.0.1",
     "electron-updater": "^5.0.1",
     "express": "^4.18.1",

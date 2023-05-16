@@ -1,4 +1,4 @@
-import { HyperPlayInstallInfo } from './../types'
+import { HyperPlayInstallInfo, DownloadManagerState } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -107,7 +107,6 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   }) => void
   addShortcut: (appName: string, runner: Runner, fromMenu: boolean) => void
   removeShortcut: (appName: string, runner: Runner) => void
-  addToDMQueue: (element: DMQueueElement) => void
   removeFromDMQueue: (appName: string) => void
   clearDMFinished: () => void
   abort: (id: string) => void
@@ -116,6 +115,9 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   changeTrayColor: () => void
   setSetting: (args: { appName: string; key: string; value: unknown }) => void
   optInStatusChanged: (optInStatus: MetricsOptInStatus) => void
+  resumeCurrentDownload: () => void
+  pauseCurrentDownload: () => void
+  cancelDownload: (removeDownloaded: boolean) => void
 }
 
 interface RequestArguments {
@@ -187,9 +189,11 @@ interface HyperPlayAsyncIPCFunctions {
   isGameHidden: (gameId: string) => Promise<boolean>
   unhideGame: (gameId: string) => Promise<void>
   getCurrentWeb3Provider: () => Promise<PROVIDERS | undefined>
+  showPopup: (hideIfShown: boolean) => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
+  addToDMQueue: (element: DMQueueElement) => Promise<void>
   kill: (appName: string, runner: Runner) => Promise<void>
   checkDiskSpace: (folder: string) => Promise<DiskSpaceData>
   callTool: (args: Tools) => Promise<void>
@@ -198,6 +202,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<{ stdout: string; stderr: string }>
   checkGameUpdates: () => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
+  updateAll: () => Promise<({ status: 'done' | 'error' | 'abort' } | null)[]>
   getMaxCpus: () => number
   getAppVersion: () => string
   getLegendaryVersion: () => Promise<string>
@@ -311,6 +316,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   getDMQueueInformation: () => {
     elements: DMQueueElement[]
     finished: DMQueueElement[]
+    state: DownloadManagerState
   }
   'get-connectivity-status': () => {
     status: ConnectivityStatus
