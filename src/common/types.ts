@@ -767,6 +767,8 @@ interface HyperPlayProjectMeta {
   systemRequirements: SystemRequirements
   wineSupport: WineSupport
   networks: string[]
+  launch_epic?: boolean
+  epic_game_url?: string
 }
 
 export type AppPlatforms =
