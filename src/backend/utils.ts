@@ -925,11 +925,22 @@ export async function downloadDefaultWine() {
   // get list of wines on wineDownloaderInfoStore
   const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
   // use Wine-GE type if on Linux and Wine-Crossover if on Mac
-  const release = availableWine.filter(
-    (version) =>
-      version.type === (isLinux ? 'Wine-GE' : 'Wine-Crossover') &&
-      version.version.includes('Wine-GE-Proton')
-  )[0]
+  const release = availableWine.filter((version) => {
+    if (isLinux) {
+      return (
+        version.type === 'Wine-GE' && version.version.includes('Wine-GE-Proton')
+      )
+    } else if (isMac) {
+      return version.type === 'Wine-Crossover'
+    }
+    return false
+  })[0]
+
+  if (!release) {
+    logError('Could not find default wine version', LogPrefix.Backend)
+    return null
+  }
+
   // download the latest version
   const onProgress = (state: State, progress?: ProgressInfo) => {
     sendFrontendMessage('progressOfWineManager' + release.version, {
@@ -944,11 +955,19 @@ export async function downloadDefaultWine() {
   )
   deleteAbortController(release.version)
   if (result === 'success') {
-    const wineList = await GlobalConfig.get().getAlternativeWine()
-    // update the game config to use that wine
-    const downloadedWine = wineList[0]
-    logInfo(`Changing wine version to ${downloadedWine.name}`)
-    GlobalConfig.get().setSetting('wineVersion', downloadedWine)
+    let downloadedWine = null
+    try {
+      const wineList = await GlobalConfig.get().getAlternativeWine()
+      // update the game config to use that wine
+      downloadedWine = wineList[0]
+      logInfo(`Changing wine version to ${downloadedWine.name}`)
+      GlobalConfig.get().setSetting('wineVersion', downloadedWine)
+    } catch (error) {
+      logError(
+        ['Error when changing wine version to default', error],
+        LogPrefix.Backend
+      )
+    }
     return downloadedWine
   }
   return null
