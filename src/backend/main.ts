@@ -1868,5 +1868,6 @@ function watchLibraryChanges() {
 }
 
 ipcMain.on('openGameInEpicStore', async (_e, url) => {
-  sendFrontendMessage('navToEpicAndOpenGame', url)
+  if (url.startsWith('https://store.epicgames.com/'))
+    sendFrontendMessage('navToEpicAndOpenGame', url)
 })
