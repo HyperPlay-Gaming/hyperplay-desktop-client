@@ -60,9 +60,21 @@ describe('backend/utils.ts', () => {
   })
 
   test('test getting epic games title from url', () => {
-    expect(utils.getTitleFromEpicStoreUrl('https://store.epicgames.com/en-US/p/fall-guys')).toEqual('fall-guys')
-    expect(utils.getTitleFromEpicStoreUrl('https://www.epicgames.com/store/product/tear-of-time-lost-memory-add761')).toEqual('tear-of-time-lost-memory-add761')
-    expect(utils.getTitleFromEpicStoreUrl('https://store.epicgames.com/en-US/p/fortnite')).toEqual('fortnite')
+    expect(
+      utils.getTitleFromEpicStoreUrl(
+        'https://store.epicgames.com/en-US/p/fall-guys'
+      )
+    ).toEqual('fall-guys')
+    expect(
+      utils.getTitleFromEpicStoreUrl(
+        'https://www.epicgames.com/store/product/tear-of-time-lost-memory-add761'
+      )
+    ).toEqual('tear-of-time-lost-memory-add761')
+    expect(
+      utils.getTitleFromEpicStoreUrl(
+        'https://store.epicgames.com/en-US/p/fortnite'
+      )
+    ).toEqual('fortnite')
   })
 
   describe('getLatestReleases', () => {
