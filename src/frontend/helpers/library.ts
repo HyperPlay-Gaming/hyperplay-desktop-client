@@ -7,8 +7,8 @@ import {
   UpdateParams
 } from 'common/types'
 
-import { TFunction } from 'react-i18next'
-import { getGameInfo, sendKill } from './index'
+import { TFunction } from 'i18next'
+import { getGameInfo } from './index'
 import { DialogModalOptions } from 'frontend/types'
 
 const storage: Storage = window.localStorage
@@ -19,7 +19,6 @@ type InstallArgs = {
   isInstalling: boolean
   previousProgress: InstallProgress | null
   progress: InstallProgress
-  setInstallPath?: (path: string) => void
   platformToInstall?: InstallPlatform
   t: TFunction<'gamepage'>
   installDlcs?: boolean
@@ -35,7 +34,6 @@ async function install({
   progress,
   isInstalling,
   previousProgress,
-  setInstallPath,
   sdlList = [],
   installDlcs = false,
   installLanguage = 'en-US',
@@ -43,17 +41,20 @@ async function install({
   showDialogModal
 }: InstallArgs) {
   if (!installPath) {
+    console.error('installPath is undefined')
+    window.api.logError('installPath is undefined')
     return
   }
 
   const { folder_name, is_installed, app_name: appName, runner } = gameInfo
+
   if (isInstalling) {
     // NOTE: This can't really happen, since `folder_name` can only be undefined if we got a
     //       SideloadGame from getGameInfo, but we can't "install" sideloaded games
     if (!folder_name) return
     return handleStopInstallation(
       appName,
-      [installPath, folder_name],
+      installPath,
       t,
       progress,
       runner,
@@ -89,16 +90,6 @@ async function install({
     })
   }
 
-  if (installPath !== 'default') {
-    setInstallPath && setInstallPath(installPath)
-  }
-
-  if (installPath === 'default') {
-    const { defaultInstallPath }: AppSettings =
-      await window.api.requestAppSettings()
-    installPath = defaultInstallPath
-  }
-
   // If the user changed the previous folder, the percentage should start from zero again.
   if (previousProgress && previousProgress.folder !== installPath) {
     storage.removeItem(appName)
@@ -118,7 +109,7 @@ async function install({
 
 async function handleStopInstallation(
   appName: string,
-  [path, folderName]: string[],
+  path: string,
   t: TFunction<'gamepage'>,
   progress: InstallProgress,
   runner: Runner,
@@ -136,15 +127,14 @@ async function handleStopInstallation(
             appName,
             JSON.stringify({ ...progress, folder: path })
           )
-          sendKill(appName, runner)
+          window.api.cancelDownload(false)
         }
       },
       {
         text: t('box.no'),
         onClick: async () => {
-          await sendKill(appName, runner)
+          window.api.cancelDownload(true)
           storage.removeItem(appName)
-          window.api.removeFolder([path, folderName])
         }
       }
     ]
@@ -207,7 +197,10 @@ const launch = async ({
                   window.api.launch({
                     appName,
                     runner,
-                    launchArguments: '--skip-version-check'
+                    launchArguments:
+                      launchArguments +
+                      ' ' +
+                      (runner === 'legendary' ? '--skip-version-check' : '')
                   })
                 )
               }

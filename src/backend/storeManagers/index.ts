@@ -12,7 +12,7 @@ import { GameManager, LibraryManager } from 'common/types/game_manager'
 import { logInfo, RunnerToLogPrefixMap } from 'backend/logger/logger'
 
 import { addToQueue } from 'backend/downloadmanager/downloadqueue'
-import { DMQueueElement, GameInfo } from 'common/types'
+import { DMQueueElement, GameInfo, Runner } from 'common/types'
 import { ipcMain } from 'electron'
 import { sendFrontendMessage } from 'backend/main_window'
 import { loadEpicHyperPlayGameInfoMap } from './hyperplay/utils'
@@ -59,7 +59,7 @@ function getDMElement(gameInfo: GameInfo, appName: string) {
   return dmQueueElement
 }
 
-export function autoUpdate(runner: string, gamesToUpdate: string[]) {
+export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
   const logPrefix = RunnerToLogPrefixMap[runner]
   gamesToUpdate.forEach(async (appName) => {
     const { ignoreGameUpdates } = await gameManagerMap[runner].getSettings(

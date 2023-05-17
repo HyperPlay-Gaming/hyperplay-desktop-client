@@ -32,6 +32,17 @@ export function hasStatus(
         libraryStatus.find((game: GameStatus) => game.appName === appName) || {}
 
       if (status) {
+        const { state } = await window.api.getDMQueueInformation()
+
+        if (state === 'paused') {
+          const label = getStatusLabel({
+            status: 'paused',
+            t,
+            runner
+          })
+          return setGameStatus({ status: 'paused', label })
+        }
+
         const label = getStatusLabel({
           status,
           t,
