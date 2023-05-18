@@ -23,10 +23,12 @@ import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
-import find from 'find-process'
-import * as OverlayApp from 'backend/overlay/overlay'
-import { trackEvent } from 'backend/metrics/metrics'
-import { hrtime } from 'process'
+// import find from 'find-process'
+// import * as OverlayApp from 'backend/overlay/overlay'
+import { backendEvents } from 'backend/backend_events'
+import { getMainWindow } from 'backend/main_window'
+import { spawnSync } from 'child_process'
+import { overlayIsShown } from 'backend/overlay/overlay'
 const buildDir = resolve(__dirname, '../../build')
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -77,10 +79,17 @@ const openNewBrowserGameWindow = async (
       fullscreen: true,
       webPreferences: {
         webviewTag: true,
-        contextIsolation: true,
-        nodeIntegration: true,
         preload: path.join(__dirname, 'preload.js')
       }
+    })
+    const overlayIsShown = isOverlayShown()
+    console.log('overlayIsShown = ', overlayIsShown)
+    browserGame.setIgnoreMouseEvents(overlayIsShown)
+    browserGame.setMinimizable(true)
+
+    const abortController = createAbortController(gameInfo.app_name)
+    abortController.signal.addEventListener('abort', () => {
+      browserGame.close()
     })
 
     const abortController = createAbortController(gameInfo.app_name)
@@ -140,6 +149,14 @@ const openNewBrowserGameWindow = async (
 
     browserGame.loadURL(url)
     setTimeout(() => browserGame.focus(), 200)
+
+    if (abortController) {
+      abortController.signal.addEventListener('abort', () => {
+        browserGame.close()
+        res(false)
+      })
+    }
+
     browserGame.on('close', () => {
       //track game closed
       const end = hrtime.bigint()
@@ -169,20 +186,6 @@ export function getGameProcessName(gameInfo: GameInfo): string | undefined {
   const installedPlatform = gameInfo.install.platform
   if (installedPlatform === undefined) return
   return gameInfo.releaseMeta?.platforms[installedPlatform]?.processName
-}
-
-async function injectProcess(gameInfo: GameInfo) {
-  const processNameToInject = getGameProcessName(gameInfo)
-  if (processNameToInject === undefined) return
-
-  find('name', processNameToInject, true).then((val) => {
-    console.log('found this with process name = ', JSON.stringify(val, null, 4))
-    for (const process_i of val) {
-      const pidToInject = process_i.pid
-      logInfo(`Injecting pid = ${pidToInject}`, LogPrefix.HyperPlay)
-      OverlayApp.inject({ pid: pidToInject.toString() })
-    }
-  })
 }
 
 export async function launchGame(
@@ -248,6 +251,10 @@ export async function launchGame(
     }
     const env = { ...process.env, ...setupEnvVars(gameSettings) }
 
+    if (runner === 'hyperplay') {
+      //some games take a while to launch. 8 seconds seems to work well
+      setTimeout(async () => openOverlay(), 8000)
+    }
     // Native
     if (isNative) {
       logInfo(
@@ -272,11 +279,6 @@ export async function launchGame(
 
       const commandParts = shlex.split(launcherArgs ?? '')
 
-      if (runner === 'hyperplay') {
-        //some games take a while to launch. 8 seconds seems to work well
-        setTimeout(async () => injectProcess(gameInfo), 8000)
-      }
-
       await callRunner(
         commandParts,
         {
@@ -292,8 +294,6 @@ export async function launchGame(
           logFile: logFileLocation(appName),
           logMessagePrefix: LogPrefix.Backend
         },
-        gameInfo,
-        true,
         runner === 'sideload' ? true : false
       )
 
@@ -302,6 +302,7 @@ export async function launchGame(
       if (isLinux || (isMac && !executable.endsWith('.app'))) {
         await chmod(executable, 0o775)
       }
+      closeOverlay()
       return true
     }
 
@@ -323,6 +324,7 @@ export async function launchGame(
     })
 
     launchCleanup(rpcClient)
+    closeOverlay()
 
     return true
   }

@@ -302,8 +302,6 @@
     "vite-plugin-electron": "^0.10.2",
     "vite-plugin-svgr": "^2.2.2"
   },
-  "optionalDependencies": {
-    "@hyperplay/electron-overlay": "^0.0.8"
-  },
+  "optionalDependencies": {},
   "packageManager": "yarn@1.22.19"
 }

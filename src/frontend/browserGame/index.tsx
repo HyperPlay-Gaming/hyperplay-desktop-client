@@ -27,8 +27,7 @@ const BrowserGame = function ({ url, appName, runner }: BrowserGameProps) {
       <BrowserExtensionManager appName={appName} runner={runner} />
       <BrowserToastManager showCloseButton={true} />
       <BrowserExtensionToastManager showCloseButton={true} />
-
-      {provider !== '' ? (
+      {provider !== '' && url !== 'ignore' ? (
         <webview
           src={url}
           className={BrowserGameStyles.browserGame}

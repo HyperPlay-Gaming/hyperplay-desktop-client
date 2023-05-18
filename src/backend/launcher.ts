@@ -54,9 +54,9 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
-import * as OverlayApp from './overlay/overlay'
 import { gameManagerMap } from 'backend/storeManagers'
 import { trackPidPlaytime } from './metrics/metrics'
+import { showInitialToast } from 'backend/hyperplay-overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -751,11 +751,6 @@ async function callRunner(
         `Process PID for sideloaded game injected: ${child.pid}`,
         runner.logPrefix
       )
-
-      if (child.pid !== undefined) {
-        OverlayApp.inject({ pid: child.pid.toString() })
-      }
-    }
 
     const stdout: string[] = []
     const stderr: string[] = []
