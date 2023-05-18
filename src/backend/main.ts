@@ -130,7 +130,6 @@ import {
   WalletConnectedType,
   WalletDisconnectedType
 } from './hyperplay-proxy-server/commonProxyTypes'
-import * as OverlayApp from './overlay/overlay'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
@@ -185,8 +184,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
   })
 
   ExtensionHelper.initExtensionProvider(mainWindow)
-
-  OverlayApp.start()
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -339,13 +336,14 @@ if (!gotTheLock) {
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
+    const toggleOverlayHandler = () => {
+      toggleOverlay()
+      backendEvents.emit('OVERLAY_TOGGLED')
+    }
     const openOverlayAccelerator = 'Alt+X'
-    globalShortcut.register(openOverlayAccelerator, OverlayApp.toggleIntercept)
+    globalShortcut.register(openOverlayAccelerator, toggleOverlayHandler)
     const openOverlayAcceleratorMac = 'Option+X'
-    globalShortcut.register(
-      openOverlayAcceleratorMac,
-      OverlayApp.toggleIntercept
-    )
+    globalShortcut.register(openOverlayAcceleratorMac, toggleOverlayHandler)
 
     initExtension()
 
@@ -1770,6 +1768,8 @@ import { addNewApp } from './storeManagers/sideload/library'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/electronStores'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
+import { backendEvents } from './backend_events'
+import { toggleOverlay } from './hyperplay-overlay'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (
