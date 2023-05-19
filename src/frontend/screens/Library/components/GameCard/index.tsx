@@ -9,13 +9,12 @@ import React, {
 } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRepeat, faBan } from '@fortawesome/free-solid-svg-icons'
+import { faBan } from '@fortawesome/free-solid-svg-icons'
 
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
-import { FavouriteGame, GameInfo, HiddenGame, Runner } from 'common/types'
-import { Link, useNavigate } from 'react-router-dom'
+import { GameInfo, HiddenGame, Runner } from 'common/types'
+import { useNavigate } from 'react-router-dom'
 import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
-import { ReactComponent as SettingsIcon } from 'frontend/assets/settings-sharp.svg'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { ReactComponent as StopIconAlt } from 'frontend/assets/stop-icon-alt.svg'
 
@@ -44,7 +43,7 @@ import onboardingStore from 'frontend/store/OnboardingStore'
 import { getCardStatus, getImageFormatting } from './constants'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
-import { GameCard as HpGameCard } from '@hyperplay/ui'
+import { GameCard as HpGameCard, GameCardState } from '@hyperplay/ui'
 
 interface Card {
   buttonClick: () => void
@@ -69,9 +68,9 @@ const GameCard = ({
   const [showUninstallModal, setShowUninstallModal] = useState(false)
   const [isLaunching, setIsLaunching] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
+  const [showSettings, setShowSettings] = useState(false)
 
   const { t } = useTranslation('gamepage')
-  const { t: t2 } = useTranslation()
 
   const navigate = useNavigate()
 
@@ -137,6 +136,29 @@ const GameCard = ({
 
   const handleRemoveFromQueue = () => {
     window.api.removeFromDMQueue(appName)
+  }
+
+  const getState = (): GameCardState => {
+    if (notSupportedGame) {
+      return 'NOT_SUPPORTED'
+    }
+    if (isUninstalling) {
+      return 'UNINSTALLING'
+    }
+    if (isQueued) {
+      return 'QUEUED'
+    }
+    if (isPlaying) {
+      return 'PLAYING'
+    }
+    if (isInstalling || isQueued) {
+      return 'INSTALLING'
+    }
+    if (isInstalled) {
+      return 'INSTALLED'
+    } else {
+      return 'NOT_INSTALLED'
+    }
   }
 
   const renderIcon = () => {
@@ -233,12 +255,6 @@ const GameCard = ({
     )
   }, [hiddenGames, appName])
 
-  // const isFavouriteGame = useMemo(() => {
-  //   return !!favouriteGames.list.find(
-  //     (favouriteGame: FavouriteGame) => favouriteGame.appName === appName
-  //   )
-  // }, [favouriteGames, appName])
-
   const isBrowserGame = installPlatform === 'Browser'
 
   const onUninstallClick = function () {
@@ -249,83 +265,83 @@ const GameCard = ({
     {
       // remove from install queue
       label: t('button.queue.remove'),
-      onclick: () => handleRemoveFromQueue(),
+      onClick: () => handleRemoveFromQueue(),
       show: isQueued && !isInstalling
     },
     {
       // stop if running
       label: t('label.playing.stop'),
-      onclick: async () => mainAction(runner),
+      onClick: async () => mainAction(runner),
       show: isPlaying
     },
     {
       // launch game
       label: t('label.playing.start'),
-      onclick: async () => mainAction(runner),
+      onClick: async () => mainAction(runner),
       show: isInstalled && !isPlaying && !isUpdating && !isQueued
     },
     {
       // update
       label: t('button.update', 'Update'),
-      onclick: async () => handleUpdate(),
+      onClick: async () => handleUpdate(),
       show: hasUpdate && !isUpdating && !isQueued
     },
     {
       // install
       label: t('button.install'),
-      onclick: () => buttonClick(),
+      onClick: () => buttonClick(),
       show: !isInstalled && !isQueued
     },
     {
       // cancel installation/update
       label: t('button.cancel'),
-      onclick: async () => mainAction(runner),
+      onClick: async () => mainAction(runner),
       show: isInstalling || isUpdating
     },
     {
       // open the game page
       label: t('button.details', 'Details'),
-      onclick: () =>
+      onClick: () =>
         navigate(`/gamepage/${runner}/${appName}`, { state: { gameInfo } }),
       show: true
     },
     {
       // hide
       label: t('button.hide_game', 'Hide Game'),
-      onclick: () => hiddenGames.add(appName, title),
+      onClick: () => hiddenGames.add(appName, title),
       show: !isHiddenGame
     },
     {
       // unhide
       label: t('button.unhide_game', 'Unhide Game'),
-      onclick: () => hiddenGames.remove(appName),
+      onClick: () => hiddenGames.remove(appName),
       show: isHiddenGame
     },
     {
       label: t('button.add_to_favourites', 'Add To Favourites'),
-      onclick: () => favouriteGames.add(appName, title),
+      onClick: () => favouriteGames.add(appName, title),
       show: !favorited
     },
     {
       label: t('button.remove_from_favourites', 'Remove From Favourites'),
-      onclick: () => favouriteGames.remove(appName),
+      onClick: () => favouriteGames.remove(appName),
       show: favorited
     },
     {
       label: t('button.remove_from_recent', 'Remove From Recent'),
-      onclick: async () => window.api.removeRecentGame(appName),
+      onClick: async () => window.api.removeRecentGame(appName),
       show: isRecent
     },
     {
       // settings
       label: t('submenu.settings'),
-      onclick: () => setIsSettingsModalOpen(true, 'settings', gameInfo),
+      onClick: () => setIsSettingsModalOpen(true, 'settings', gameInfo),
       show: isInstalled && !isUninstalling && !isBrowserGame
     },
     {
       // uninstall
       label: t('button.uninstall'),
-      onclick: onUninstallClick,
+      onClick: onUninstallClick,
       show: isInstalled && !isUpdating
     }
   ]
@@ -349,6 +365,8 @@ const GameCard = ({
   const showUpdateButton =
     hasUpdate && !isUpdating && !isQueued && !notAvailable
 
+  console.log('title ', gameInfo.title, ' state ', getState())
+
   return (
     <>
       {showStopInstallModal ? (
@@ -368,108 +386,31 @@ const GameCard = ({
           onClose={() => setShowUninstallModal(false)}
         />
       )}
-      <ContextMenu items={items}>
-        <HpGameCard
-          key={appName}
-          title={gameInfo.title}
-          imageUrl={gameInfo.art_square}
-          favorited={favorited}
-          onFavoriteClick={() => {
-            if (!favorited)
-              favouriteGames.add(gameInfo.app_name, gameInfo.title)
-            else favouriteGames.remove(gameInfo.app_name)
-          }}
-          onDownloadClick={buttonClick}
-          onRemoveFromQueueClick={() => handleRemoveFromQueue()}
-          onStopPlayingClick={async () => handlePlay(runner)}
-          onPauseClick={() => console.log('pause clicked')}
-          onPlayClick={() => console.log('play clicked')}
-          onStopDownloadClick={() => console.log('stop download clicked')}
-          state={'INSTALLED'}
-          settingsItems={[]}
-        />
-        {/* <div className={wrapperClasses}>
-          {haveStatus && <span className="gameCardStatus">{label}</span>}
-          <Link
-            to={`/gamepage/${runner}/${appName}`}
-            state={{ gameInfo }}
-            style={
-              { '--installing-effect': installingGrayscale } as CSSProperties
-            }
-          >
-            <StoreLogos runner={runner} />
-            <CachedImage
-              src={getImageFormatting(cover, runner)}
-              className={imgClasses}
-              alt="cover"
-            />
-            {logo && (
-              <CachedImage
-                alt="logo"
-                src={`${logo}?h=400&resize=1&w=300`}
-                className={logoClasses}
-              />
-            )}
-            {haveStatus && (
-              <span
-                className={classNames('gameListInfo', {
-                  active: haveStatus,
-                  installed: isInstalled
-                })}
-              >
-                {label}
-              </span>
-            )}
-            <span
-              className={classNames('gameTitle', {
-                active: haveStatus,
-                installed: isInstalled
-              })}
-            >
-              <span>{title}</span>
-            </span>
-            <span
-              className={classNames('runner', {
-                active: haveStatus,
-                installed: isInstalled
-              })}
-            >
-              {getStoreName(runner, t2('Other'))}
-            </span>
-          </Link>
-          <>
-            <span
-              className={classNames('icons', {
-                gamepad: activeController
-              })}
-            >
-              {showUpdateButton && (
-                <SvgButton
-                  className="updateIcon"
-                  title={`${t('button.update')} (${title})`}
-                  onClick={async () => handleUpdate()}
-                >
-                  <FontAwesomeIcon size={'2x'} icon={faRepeat} />
-                </SvgButton>
-              )}
-              {!isBrowserGame && isInstalled && !isUninstalling && (
-                <>
-                  <SvgButton
-                    title={`${t('submenu.settings')} (${title})`}
-                    className="settingsIcon"
-                    onClick={() =>
-                      setIsSettingsModalOpen(true, 'settings', gameInfo)
-                    }
-                  >
-                    <SettingsIcon />
-                  </SvgButton>
-                </>
-              )}
-              {renderIcon()}
-            </span>
-          </>
-        </div> */}
-      </ContextMenu>
+      <HpGameCard
+        key={appName}
+        title={gameInfo.title}
+        imageUrl={gameInfo.art_square}
+        favorited={favorited}
+        onFavoriteClick={() => {
+          if (!favorited) favouriteGames.add(gameInfo.app_name, gameInfo.title)
+          else favouriteGames.remove(gameInfo.app_name)
+        }}
+        onDownloadClick={buttonClick}
+        onRemoveFromQueueClick={() => handleRemoveFromQueue()}
+        onStopPlayingClick={async () => handlePlay(runner)}
+        onPauseClick={() => console.log('pause clicked')}
+        onPlayClick={async () => handlePlay(runner)}
+        onStopDownloadClick={async () => handlePlay(runner)}
+        state={getState()}
+        settingsItems={items.filter((val) => val.show).slice(0, 6)}
+        showSettings={showSettings}
+        onSettingsClick={() => setShowSettings(!showSettings)}
+        onContextMenu={(e) => {
+          e.preventDefault()
+          setShowSettings(!showSettings)
+        }}
+        onUpdateClick={async () => handleUpdate()}
+      />
     </>
   )
 
