@@ -1,46 +1,21 @@
 import './index.css'
 
-import React, {
-  useContext,
-  CSSProperties,
-  useMemo,
-  useState,
-  useEffect
-} from 'react'
+import React, { useContext, useMemo, useState, useEffect } from 'react'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBan } from '@fortawesome/free-solid-svg-icons'
-
-import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
 import { GameInfo, HiddenGame, Runner } from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
-import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
-import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
-import { ReactComponent as StopIconAlt } from 'frontend/assets/stop-icon-alt.svg'
 
-import {
-  getGameInfo,
-  getProgress,
-  getStoreName,
-  install,
-  launch,
-  sendKill
-} from 'frontend/helpers'
+import { getGameInfo, install, launch, sendKill } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { updateGame } from 'frontend/helpers/library'
-import { CachedImage, SvgButton } from 'frontend/components/UI'
-import ContextMenu, { Item } from '../ContextMenu'
+import { Item } from '../ContextMenu'
 import { hasProgress } from 'frontend/hooks/hasProgress'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-
-import classNames from 'classnames'
-import StoreLogos from 'frontend/components/UI/StoreLogos'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
 import { observer } from 'mobx-react-lite'
 import walletStore from 'frontend/store/WalletStore'
 import onboardingStore from 'frontend/store/OnboardingStore'
-import { getCardStatus, getImageFormatting } from './constants'
+import { getCardStatus } from './constants'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import { GameCard as HpGameCard, GameCardState } from '@hyperplay/ui'
