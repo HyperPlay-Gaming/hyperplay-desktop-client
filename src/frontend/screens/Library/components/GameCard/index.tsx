@@ -285,8 +285,11 @@ const GameCard = ({
           onStopPlayingClick={handleClickStopBubbling(async () =>
             mainAction(runner)
           )}
-          onPauseClick={handleClickStopBubbling(() =>
-            console.log('pause clicked')
+          onPauseClick={handleClickStopBubbling(
+            () => async () => window.api.pauseCurrentDownload()
+          )}
+          onResumeClick={handleClickStopBubbling(() =>
+            window.api.resumeCurrentDownload()
           )}
           onPlayClick={handleClickStopBubbling(async () => mainAction(runner))}
           onStopDownloadClick={handleClickStopBubbling(async () =>
@@ -302,6 +305,7 @@ const GameCard = ({
             setShowSettings(!showSettings)
           )}
           onUpdateClick={handleClickStopBubbling(async () => handleUpdate())}
+          progress={progress}
         />
       </Link>
     </>
