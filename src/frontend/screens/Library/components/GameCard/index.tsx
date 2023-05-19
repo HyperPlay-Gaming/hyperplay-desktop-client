@@ -9,7 +9,6 @@ import { getGameInfo, install, launch, sendKill } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { updateGame } from 'frontend/helpers/library'
-import { Item } from '../ContextMenu'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
 import { observer } from 'mobx-react-lite'
@@ -18,7 +17,11 @@ import onboardingStore from 'frontend/store/OnboardingStore'
 import { getCardStatus } from './constants'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
-import { GameCard as HpGameCard, GameCardState } from '@hyperplay/ui'
+import {
+  GameCard as HpGameCard,
+  GameCardState,
+  SettingsButtons
+} from '@hyperplay/ui'
 
 interface Card {
   buttonClick: () => void
@@ -144,100 +147,106 @@ const GameCard = ({
     setShowUninstallModal(true)
   }
 
-  const items: Item[] = [
+  const handleClickStopBubbling =
+    (callback: () => void) =>
+    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      e.preventDefault()
+      callback()
+    }
+
+  const items: SettingsButtons[] = [
     {
       // remove from install queue
       label: t('button.queue.remove'),
-      onClick: () => handleRemoveFromQueue(),
+      onClick: handleClickStopBubbling(() => handleRemoveFromQueue()),
       show: isQueued && !isInstalling
     },
     {
       // stop if running
       label: t('label.playing.stop'),
-      onClick: async () => mainAction(runner),
+      onClick: handleClickStopBubbling(async () => mainAction(runner)),
       show: isPlaying
     },
     {
       // launch game
       label: t('label.playing.start'),
-      onClick: async () => mainAction(runner),
+      onClick: handleClickStopBubbling(async () => mainAction(runner)),
       show: isInstalled && !isPlaying && !isUpdating && !isQueued
     },
     {
       // update
       label: t('button.update', 'Update'),
-      onClick: async () => handleUpdate(),
+      onClick: handleClickStopBubbling(async () => handleUpdate()),
       show: hasUpdate && !isUpdating && !isQueued
     },
     {
       // install
       label: t('button.install'),
-      onClick: () => buttonClick(),
+      onClick: handleClickStopBubbling(() => buttonClick()),
       show: !isInstalled && !isQueued
     },
     {
       // cancel installation/update
       label: t('button.cancel'),
-      onClick: async () => mainAction(runner),
+      onClick: handleClickStopBubbling(async () => mainAction(runner)),
       show: isInstalling || isUpdating
     },
     {
       // open the game page
       label: t('button.details', 'Details'),
-      onClick: () =>
-        navigate(`/gamepage/${runner}/${appName}`, { state: { gameInfo } }),
+      onClick: handleClickStopBubbling(() =>
+        navigate(`/gamepage/${runner}/${appName}`, { state: { gameInfo } })
+      ),
       show: true
     },
     {
       // hide
       label: t('button.hide_game', 'Hide Game'),
-      onClick: () => hiddenGames.add(appName, title),
+      onClick: handleClickStopBubbling(() => hiddenGames.add(appName, title)),
       show: !isHiddenGame
     },
     {
       // unhide
       label: t('button.unhide_game', 'Unhide Game'),
-      onClick: () => hiddenGames.remove(appName),
+      onClick: handleClickStopBubbling(() => hiddenGames.remove(appName)),
       show: isHiddenGame
     },
     {
-      label: t('button.add_to_favourites', 'Add To Favourites'),
-      onClick: () => favouriteGames.add(appName, title),
+      label: t('button.favorites', 'Favorite'),
+      onClick: handleClickStopBubbling(() =>
+        favouriteGames.add(appName, title)
+      ),
       show: !favorited
     },
     {
-      label: t('button.remove_from_favourites', 'Remove From Favourites'),
-      onClick: () => favouriteGames.remove(appName),
+      label: t('button.unfavorites', 'Unfavorite'),
+      onClick: handleClickStopBubbling(() => favouriteGames.remove(appName)),
       show: favorited
     },
     {
       label: t('button.remove_from_recent', 'Remove From Recent'),
-      onClick: async () => window.api.removeRecentGame(appName),
+      onClick: handleClickStopBubbling(async () =>
+        window.api.removeRecentGame(appName)
+      ),
       show: isRecent
     },
     {
       // settings
       label: t('submenu.settings'),
-      onClick: () => setIsSettingsModalOpen(true, 'settings', gameInfo),
+      onClick: handleClickStopBubbling(() =>
+        setIsSettingsModalOpen(true, 'settings', gameInfo)
+      ),
       show: isInstalled && !isUninstalling && !isBrowserGame
     },
     {
       // uninstall
       label: t('button.uninstall'),
-      onClick: onUninstallClick,
+      onClick: handleClickStopBubbling(onUninstallClick),
       show: isInstalled && !isUpdating
     }
   ]
 
   const { activeController } = useContext(ContextProvider)
-
-  const handleClickStopBubbling = (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    callback: () => void
-  ) => {
-    e.preventDefault()
-    callback()
-  }
 
   return (
     <>
@@ -264,40 +273,35 @@ const GameCard = ({
           title={gameInfo.title}
           imageUrl={gameInfo.art_square}
           favorited={favorited}
-          onFavoriteClick={(e) =>
-            handleClickStopBubbling(e, () => {
-              if (!favorited)
-                favouriteGames.add(gameInfo.app_name, gameInfo.title)
-              else favouriteGames.remove(gameInfo.app_name)
-            })
-          }
-          onDownloadClick={(e) => handleClickStopBubbling(e, buttonClick)}
-          onRemoveFromQueueClick={(e) =>
-            handleClickStopBubbling(e, handleRemoveFromQueue)
-          }
-          onStopPlayingClick={(e) =>
-            handleClickStopBubbling(e, async () => mainAction(runner))
-          }
-          onPauseClick={(e) =>
-            handleClickStopBubbling(e, () => console.log('pause clicked'))
-          }
-          onPlayClick={(e) =>
-            handleClickStopBubbling(e, async () => mainAction(runner))
-          }
-          onStopDownloadClick={(e) =>
-            handleClickStopBubbling(e, async () => mainAction(runner))
-          }
+          onFavoriteClick={handleClickStopBubbling(() => {
+            if (!favorited)
+              favouriteGames.add(gameInfo.app_name, gameInfo.title)
+            else favouriteGames.remove(gameInfo.app_name)
+          })}
+          onDownloadClick={handleClickStopBubbling(buttonClick)}
+          onRemoveFromQueueClick={handleClickStopBubbling(
+            handleRemoveFromQueue
+          )}
+          onStopPlayingClick={handleClickStopBubbling(async () =>
+            mainAction(runner)
+          )}
+          onPauseClick={handleClickStopBubbling(() =>
+            console.log('pause clicked')
+          )}
+          onPlayClick={handleClickStopBubbling(async () => mainAction(runner))}
+          onStopDownloadClick={handleClickStopBubbling(async () =>
+            mainAction(runner)
+          )}
           state={getState()}
           settingsItems={items.filter((val) => val.show).slice(0, 6)}
           showSettings={showSettings}
-          onSettingsClick={(e) =>
-            handleClickStopBubbling(e, () => setShowSettings(!showSettings))
-          }
-          onContextMenu={(e) => {
-            e.preventDefault()
+          onSettingsClick={handleClickStopBubbling(() =>
             setShowSettings(!showSettings)
-          }}
-          onUpdateClick={async () => handleUpdate()}
+          )}
+          onContextMenu={handleClickStopBubbling(() =>
+            setShowSettings(!showSettings)
+          )}
+          onUpdateClick={handleClickStopBubbling(async () => handleUpdate())}
         />
       </Link>
     </>
