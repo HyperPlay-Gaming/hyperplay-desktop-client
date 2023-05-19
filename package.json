@@ -161,6 +161,7 @@
     "@types/jsdom": "^20.0.0",
     "@types/qrcode": "^1.5.0",
     "@types/react-blockies": "^1.4.1",
+    "@types/unzipper": "^0.10.6",
     "@walletconnect/web3-provider": "^1.8.0",
     "axios": "^0.26.1",
     "bn.js": "^5.2.1",
@@ -205,6 +206,7 @@
     "systeminformation": "^5.15.0",
     "ts-prune": "^0.10.3",
     "tslib": "^2.4.0",
+    "unzipper": "^0.10.14",
     "web3": "^1.7.5"
   },
   "scripts": {
@@ -220,7 +222,7 @@
     "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "vite build && electron-builder -p always --win nsis",
     "dist:linux": "vite build && electron-builder --linux",
-    "dist:mac": "export CSC_IDENTITY_AUTO_DISCOVERY=false && vite build && electron-builder --mac",
+    "dist:mac": "vite build && electron-builder --mac",
     "dist:win": "vite build && electron-builder --win",
     "lint": "eslint --cache -c .eslintrc --ext .tsx,ts ./src",
     "lint-fix": "eslint --fix -c .eslintrc --ext .tsx,ts ./src",
