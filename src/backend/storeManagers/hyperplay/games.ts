@@ -17,7 +17,9 @@ import {
   downloadFile,
   spawnAsync,
   killPattern,
-  shutdownWine
+  shutdownWine,
+  extractZip,
+  calculateEta
 } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
@@ -215,9 +217,12 @@ async function downloadGame(
       downloadPath,
       createAbortController(appName),
       (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
-        // convert speed to Mb/s
-        downloadSpeed = Math.round(downloadSpeed / 1000000)
-        diskWriteSpeed = Math.round(diskWriteSpeed / 1000000)
+        // calculate eta
+        const eta = calculateEta(
+          downloadedBytes,
+          downloadSpeed,
+          platformInfo.downloadSize
+        )
 
         window.webContents.send(`progressUpdate-${appName}`, {
           appName,
@@ -226,10 +231,11 @@ async function downloadGame(
           folder: destinationPath,
           progress: {
             percent: progress,
-            diskSpeed: diskWriteSpeed,
-            downSpeed: downloadSpeed,
-            bytes: downloadedBytes,
-            folder: destinationPath
+            diskSpeed: diskWriteSpeed / 1000000,
+            downSpeed: downloadSpeed / 1000000,
+            bytes: downloadedBytes / 1000000,
+            folder: destinationPath,
+            eta
           }
         })
       }
@@ -264,19 +270,19 @@ export async function install(
 
   logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
 
+  const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
+  const platformInfo = releaseMeta.platforms[appPlatform]
+  const zipName = encodeURI(platformInfo.name)
+  const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
+
+  if (!existsSync(tempfolder)) {
+    mkdirSync(tempfolder, { recursive: true })
+  }
+
+  const zipFile = path.join(tempfolder, zipName)
+
   // download the zip file
   try {
-    const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
-    const platformInfo = releaseMeta.platforms[appPlatform]
-    const zipName = encodeURI(platformInfo.name)
-    const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
-
-    if (!existsSync(tempfolder)) {
-      mkdirSync(tempfolder, { recursive: true })
-    }
-
-    const zipFile = path.join(tempfolder, zipName)
-
     // prevent naming conflicts where two developers release games with the same name
     const sanitizedDestinationFolderName =
       developer !== undefined
@@ -300,33 +306,10 @@ export async function install(
       })
 
       if (isWindows) {
-        await spawnAsync('powershell', [
-          'Expand-Archive',
-          '-LiteralPath',
-          `"${zipFile}"`,
-          '-DestinationPath',
-          `"${destinationPath}"`
-        ])
-
+        await extractZip(zipFile, destinationPath)
         await installDistributables(destinationPath)
       } else {
-        // extract the zip file and overwrite existing files
-        const { code, stderr } = await spawnAsync('unzip', [
-          '-o',
-          zipFile,
-          '-d',
-          destinationPath
-        ])
-        if (code !== 0) {
-          rmSync(zipFile)
-          clean(zipFile)
-          throw new Error(stderr)
-        }
-      }
-      rmSync(zipFile)
-
-      if (isWindows) {
-        await installDistributables(destinationPath)
+        await extractZip(zipFile, destinationPath)
       }
 
       if (isMac && executable.endsWith('.app')) {
@@ -377,6 +360,8 @@ export async function install(
     return { status: 'done' }
   } catch (error) {
     logInfo('Error while downloading and extracting game', LogPrefix.HyperPlay)
+    rmSync(zipFile)
+    clean(zipFile)
     return {
       status: 'error',
       error: `${error}`
