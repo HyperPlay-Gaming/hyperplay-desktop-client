@@ -44,6 +44,7 @@ import onboardingStore from 'frontend/store/OnboardingStore'
 import { getCardStatus, getImageFormatting } from './constants'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
+import { GameCard as HpGameCard } from '@hyperplay/ui'
 
 interface Card {
   buttonClick: () => void
@@ -51,6 +52,7 @@ interface Card {
   isRecent: boolean
   gameInfo: GameInfo
   forceCard?: boolean
+  favorited: boolean
 }
 
 const storage: Storage = window.localStorage
@@ -60,6 +62,7 @@ const GameCard = ({
   buttonClick,
   forceCard,
   isRecent = false,
+  favorited,
   gameInfo: gameInfoFromProps
 }: Card) => {
   const [gameInfo, setGameInfo] = useState<GameInfo>(gameInfoFromProps)
@@ -230,11 +233,11 @@ const GameCard = ({
     )
   }, [hiddenGames, appName])
 
-  const isFavouriteGame = useMemo(() => {
-    return !!favouriteGames.list.find(
-      (favouriteGame: FavouriteGame) => favouriteGame.appName === appName
-    )
-  }, [favouriteGames, appName])
+  // const isFavouriteGame = useMemo(() => {
+  //   return !!favouriteGames.list.find(
+  //     (favouriteGame: FavouriteGame) => favouriteGame.appName === appName
+  //   )
+  // }, [favouriteGames, appName])
 
   const isBrowserGame = installPlatform === 'Browser'
 
@@ -301,12 +304,12 @@ const GameCard = ({
     {
       label: t('button.add_to_favourites', 'Add To Favourites'),
       onclick: () => favouriteGames.add(appName, title),
-      show: !isFavouriteGame
+      show: !favorited
     },
     {
       label: t('button.remove_from_favourites', 'Remove From Favourites'),
       onclick: () => favouriteGames.remove(appName),
-      show: isFavouriteGame
+      show: favorited
     },
     {
       label: t('button.remove_from_recent', 'Remove From Recent'),
@@ -347,7 +350,7 @@ const GameCard = ({
     hasUpdate && !isUpdating && !isQueued && !notAvailable
 
   return (
-    <div>
+    <>
       {showStopInstallModal ? (
         <StopInstallationModal
           onClose={() => setShowStopInstallModal(false)}
@@ -366,7 +369,26 @@ const GameCard = ({
         />
       )}
       <ContextMenu items={items}>
-        <div className={wrapperClasses}>
+        <HpGameCard
+          key={appName}
+          title={gameInfo.title}
+          imageUrl={gameInfo.art_square}
+          favorited={favorited}
+          onFavoriteClick={() => {
+            if (!favorited)
+              favouriteGames.add(gameInfo.app_name, gameInfo.title)
+            else favouriteGames.remove(gameInfo.app_name)
+          }}
+          onDownloadClick={buttonClick}
+          onRemoveFromQueueClick={() => handleRemoveFromQueue()}
+          onStopPlayingClick={async () => handlePlay(runner)}
+          onPauseClick={() => console.log('pause clicked')}
+          onPlayClick={() => console.log('play clicked')}
+          onStopDownloadClick={() => console.log('stop download clicked')}
+          state={'INSTALLED'}
+          settingsItems={[]}
+        />
+        {/* <div className={wrapperClasses}>
           {haveStatus && <span className="gameCardStatus">{label}</span>}
           <Link
             to={`/gamepage/${runner}/${appName}`}
@@ -446,9 +468,9 @@ const GameCard = ({
               {renderIcon()}
             </span>
           </>
-        </div>
+        </div> */}
       </ContextMenu>
-    </div>
+    </>
   )
 
   async function mainAction(runner: Runner) {

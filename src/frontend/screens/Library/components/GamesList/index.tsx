@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import { GameInfo, Runner } from 'common/types'
 import cx from 'classnames'
 import GameCard from '../GameCard'
@@ -29,6 +29,15 @@ const GamesList = ({
   const { gameUpdates, showNonAvailable } = useContext(ContextProvider)
   const { t } = useTranslation()
   const [gameCards, setGameCards] = useState<JSX.Element[]>([])
+  const { favouriteGames } = useContext(ContextProvider)
+
+  const favouriteGameMap = useMemo(() => {
+    const gameMap = {}
+    for (const game of favouriteGames.list) {
+      gameMap[game.appName] = game
+    }
+    return gameMap
+  }, [favouriteGames])
 
   useEffect(() => {
     let mounted = true
@@ -64,6 +73,7 @@ const GamesList = ({
             forceCard={layout === 'grid'}
             isRecent={isRecent}
             gameInfo={gameInfo}
+            favorited={favouriteGameMap[app_name]}
           />
         )
       })

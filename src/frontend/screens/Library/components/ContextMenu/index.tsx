@@ -42,7 +42,14 @@ function ContextMenu({ children, items }: Props) {
   }
 
   return (
-    <div onContextMenu={handleContextMenu} style={{ cursor: 'context-menu' }}>
+    <div
+      onContextMenu={handleContextMenu}
+      style={{
+        cursor: 'context-menu',
+        display: 'inline-block',
+        width: 'fit-content'
+      }}
+    >
       {children}
       <Menu
         open={contextMenu !== null}

@@ -8,7 +8,8 @@
 .gameList {
   color: var(--text-secondary);
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
+  /* grid auto-fill cannot use intrinsic sizing so we hardcode the px value */
+  grid-template-columns: repeat(auto-fill, 216px);
   grid-gap: 1.5rem;
   padding: 0;
   margin: var(--space-md) 0;
