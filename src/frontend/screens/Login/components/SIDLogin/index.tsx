@@ -17,31 +17,42 @@ export default function SIDLogin({ backdropClick }: Props) {
   const [input, setInput] = useState('')
   const [status, setStatus] = useState({
     loading: false,
-    message: ''
+    error: false
   })
 
-  const { loading, message } = status
+  const { loading, error } = status
 
   const handleLogin = async (sid: string) => {
+    window.api.logInfo('Called Login')
+    setStatus({
+      loading: true,
+      error: false
+    })
     await epic.login(sid).then(async (res) => {
-      setStatus({
-        loading: true,
-        message: t('status.loading', 'Loading Game list, please wait')
-      })
-      window.api.logInfo('Called Login')
       console.log(res)
       if (res === 'done') {
         await window.api.getUserInfo()
-        setStatus({ loading: false, message: '' })
+        setStatus({ loading: false, error: false })
         backdropClick()
       } else {
-        setStatus({ loading: true, message: t('status.error', 'Error') })
+        setStatus({ loading: false, error: true })
         setTimeout(() => {
-          setStatus({ ...status, loading: false })
+          setStatus({ loading: false, error: false })
         }, 2500)
       }
     })
   }
+
+  function getButtonLabel() {
+    if (loading) {
+      return t('button.loading', 'Loading')
+    } else if (error) {
+      return t('button.error', 'Error, try a different Code')
+    } else {
+      return t('button.login', 'Login')
+    }
+  }
+
   return (
     <div className="SIDLoginModal">
       <span className="backdrop" onClick={backdropClick}></span>
@@ -85,22 +96,21 @@ export default function SIDLogin({ backdropClick }: Props) {
           onAuxClick={async () => {
             const text = await window.api.clipboardReadText()
             setInput(text)
-          }} // clipboard.readText('clipboard'))}
+          }}
           onChange={(e) => setInput(e.target.value)}
         />
         {loading && (
           <p className="message">
-            {message}
-            <Autorenew className="material-icons" />{' '}
+            <Autorenew className="material-icons refreshing" />{' '}
           </p>
         )}
         <div className=".sidLoginButton">
           <Button
             onClick={async () => handleLogin(input)}
-            disabled={loading || input.length < 30}
+            disabled={loading || input.length < 30 || error}
             fixedWidth={100}
           >
-            {t('button.login', 'Login')}
+            {getButtonLabel()}
           </Button>
         </div>
       </div>

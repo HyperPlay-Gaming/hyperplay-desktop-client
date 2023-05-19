@@ -13,14 +13,18 @@ import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 import { isMac, isWindows, isLinux, configFolder } from 'backend/constants'
-import { downloadFileWithAxios, spawnAsync, killPattern } from 'backend/utils'
+import {
+  downloadFile,
+  spawnAsync,
+  killPattern,
+  shutdownWine
+} from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
 import {
   createAbortController,
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
-import { removeFromQueue } from 'backend/downloadmanager/downloadqueue'
 import {
   getHyperPlayStoreRelease,
   handleArchAndPlatform,
@@ -38,6 +42,7 @@ import {
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
+import { clean } from 'easydl/dist/utils'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -92,11 +97,19 @@ export async function stop(appName: string): Promise<void> {
     const split = executable.split('/')
     const exe = split[split.length - 1]
     killPattern(exe)
+    if (!isNative(appName)) {
+      const gameSettings = await getSettings(appName)
+      shutdownWine(gameSettings)
+    }
   }
 
   const gameProcessName = getGameProcessName(gameInfo)
   if (gameProcessName) {
     killPattern(gameProcessName)
+    if (!isNative(appName)) {
+      const gameSettings = await getSettings(appName)
+      shutdownWine(gameSettings)
+    }
   }
 }
 
@@ -174,7 +187,8 @@ const installDistributables = async (gamePath: string) => {
 async function downloadGame(
   appName: string,
   downloadPath: string,
-  platformInfo: PlatformInfo
+  platformInfo: PlatformInfo,
+  destinationPath: string
 ): Promise<void> {
   const appInfo = getGameInfo(appName)
 
@@ -191,18 +205,12 @@ async function downloadGame(
     throw new Error('DownloadUrl not found')
   }
 
-  // prevent from the next download being named eg. "game (1).zip"
-  try {
-    rmSync(downloadPath)
-    // eslint-disable-next-line no-empty
-  } catch (e) {}
-
   try {
     logInfo(
       `Downloading from ${platformInfo.external_url}`,
       LogPrefix.HyperPlay
     )
-    await downloadFileWithAxios(
+    await downloadFile(
       platformInfo.external_url,
       downloadPath,
       createAbortController(appName),
@@ -215,12 +223,13 @@ async function downloadGame(
           appName,
           status: 'installing',
           runner: 'hyperplay',
+          folder: destinationPath,
           progress: {
             percent: progress,
             diskSpeed: diskWriteSpeed,
             downSpeed: downloadSpeed,
             bytes: downloadedBytes,
-            folder: downloadPath
+            folder: destinationPath
           }
         })
       }
@@ -228,9 +237,8 @@ async function downloadGame(
     deleteAbortController(appName)
   } catch (error) {
     deleteAbortController(appName)
-    logWarning(`Download aborted ${error}`, LogPrefix.HyperPlay)
-    removeFromQueue(appName)
-    rmSync(downloadPath)
+    logWarning(`Download stopped ${error}`, LogPrefix.HyperPlay)
+    throw new Error(`Download stopped ${error}`)
   }
 }
 
@@ -261,7 +269,13 @@ export async function install(
     const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
     const platformInfo = releaseMeta.platforms[appPlatform]
     const zipName = encodeURI(platformInfo.name)
-    const zipFile = path.join(configFolder, zipName)
+    const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
+
+    if (!existsSync(tempfolder)) {
+      mkdirSync(tempfolder, { recursive: true })
+    }
+
+    const zipFile = path.join(tempfolder, zipName)
 
     // prevent naming conflicts where two developers release games with the same name
     const sanitizedDestinationFolderName =
@@ -272,7 +286,7 @@ export async function install(
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
-    await downloadGame(appName, zipFile, platformInfo)
+    await downloadGame(appName, zipFile, platformInfo, destinationPath)
     let executable = path.join(destinationPath, platformInfo.executable)
 
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
@@ -281,6 +295,7 @@ export async function install(
       window.webContents.send('gameStatusUpdate', {
         appName,
         runner: 'hyperplay',
+        folder: destinationPath,
         status: 'extracting'
       })
 
@@ -304,6 +319,7 @@ export async function install(
         ])
         if (code !== 0) {
           rmSync(zipFile)
+          clean(zipFile)
           throw new Error(stderr)
         }
       }
@@ -353,6 +369,7 @@ export async function install(
       window.webContents.send('gameStatusUpdate', {
         appName,
         runner: 'hyperplay',
+        folder: destinationPath,
         status: 'done'
       })
       return { status: 'error', error: `${error}` }

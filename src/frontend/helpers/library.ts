@@ -7,7 +7,7 @@ import {
   UpdateParams
 } from 'common/types'
 
-import { TFunction } from 'react-i18next'
+import { TFunction } from 'i18next'
 import { getGameInfo } from './index'
 import { DialogModalOptions } from 'frontend/types'
 
@@ -19,7 +19,6 @@ type InstallArgs = {
   isInstalling: boolean
   previousProgress: InstallProgress | null
   progress: InstallProgress
-  setInstallPath?: (path: string) => void
   platformToInstall?: InstallPlatform
   t: TFunction<'gamepage'>
   installDlcs?: boolean
@@ -34,17 +33,19 @@ async function install({
   t,
   isInstalling,
   previousProgress,
-  setInstallPath,
   sdlList = [],
   installDlcs = false,
   installLanguage = 'en-US',
   platformToInstall = 'Windows'
 }: InstallArgs) {
   if (!installPath) {
+    console.error('installPath is undefined')
+    window.api.logError('installPath is undefined')
     return
   }
 
   const { folder_name, is_installed, app_name: appName, runner } = gameInfo
+
   if (isInstalling) {
     // NOTE: This can't really happen, since `folder_name` can only be undefined if we got a
     //       SideloadGame from getGameInfo, but we can't "install" sideloaded games
@@ -78,16 +79,6 @@ async function install({
       runner,
       platform: platformToInstall
     })
-  }
-
-  if (installPath !== 'default') {
-    setInstallPath && setInstallPath(installPath)
-  }
-
-  if (installPath === 'default') {
-    const { defaultInstallPath }: AppSettings =
-      await window.api.requestAppSettings()
-    installPath = defaultInstallPath
   }
 
   // If the user changed the previous folder, the percentage should start from zero again.
@@ -163,7 +154,10 @@ const launch = async ({
                   window.api.launch({
                     appName,
                     runner,
-                    launchArguments: '--skip-version-check'
+                    launchArguments:
+                      launchArguments +
+                      ' ' +
+                      (runner === 'legendary' ? '--skip-version-check' : '')
                   })
                 )
               }

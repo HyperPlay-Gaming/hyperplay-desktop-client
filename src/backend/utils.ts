@@ -10,9 +10,13 @@ import {
   SteamRuntime,
   Release,
   GameInfo,
-  GameSettings
+  GameSettings,
+  State,
+  ProgressInfo
 } from 'common/types'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
+import EasyDl from 'easydl'
+
 import {
   app,
   dialog,
@@ -28,12 +32,7 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import {
-  createWriteStream,
-  appendFileSync,
-  existsSync,
-  rmSync
-} from 'graceful-fs'
+import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
@@ -48,7 +47,8 @@ import {
   isWindows,
   publicDir,
   isMac,
-  configStore
+  configStore,
+  isLinux
 } from './constants'
 import { logError, logInfo, LogPrefix, logWarning } from './logger/logger'
 import { basename, dirname, join, normalize } from 'path'
@@ -70,8 +70,13 @@ import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
-import { validWine } from './launcher'
+import { runWineCommand, validWine } from './launcher'
 import { gameManagerMap } from 'backend/storeManagers'
+import {
+  installWineVersion,
+  updateWineVersionInfos,
+  wineDownloaderInfoStore
+} from './wine/manager/utils'
 
 const execAsync = promisify(exec)
 
@@ -423,18 +428,21 @@ async function openUrlOrFile(url: string): Promise<string | void> {
   return shell.openPath(url)
 }
 
-async function clearCache() {
-  GOGapiInfoCache.clear()
-  GOGlibraryStore.clear()
-  GOGinstallInfoStore.clear()
-  installStore.clear()
-  libraryStore.clear()
-  gameInfoStore.clear()
-
-  const abortID = 'legendary-cleanup'
-  runLegendaryCommand(['cleanup'], createAbortController(abortID)).then(() =>
-    deleteAbortController(abortID)
-  )
+function clearCache(library?: 'gog' | 'legendary') {
+  if (library === 'gog' || !library) {
+    GOGapiInfoCache.clear()
+    GOGlibraryStore.clear()
+    GOGinstallInfoStore.clear()
+  }
+  if (library === 'legendary' || !library) {
+    installStore.clear()
+    libraryStore.clear()
+    gameInfoStore.clear()
+    const abortID = 'legendary-cleanup'
+    runLegendaryCommand(['cleanup'], createAbortController(abortID)).then(() =>
+      deleteAbortController(abortID)
+    )
+  }
 }
 
 function resetApp() {
@@ -830,6 +838,15 @@ function killPattern(pattern: string) {
   return ret
 }
 
+async function shutdownWine(gameSettings: GameSettings) {
+  await runWineCommand({
+    gameSettings,
+    commandParts: ['wineboot', '-k'],
+    wait: true,
+    protonVerb: 'waitforexitandrun'
+  })
+}
+
 const getShellPath = async (path: string): Promise<string> =>
   normalize((await execAsync(`echo "${path}"`)).stdout.trim())
 
@@ -902,6 +919,60 @@ async function ContinueWithFoundWine(
   return { response }
 }
 
+export async function downloadDefaultWine() {
+  // refresh wine list
+  await updateWineVersionInfos(true)
+  // get list of wines on wineDownloaderInfoStore
+  const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
+  // use Wine-GE type if on Linux and Wine-Crossover if on Mac
+  const release = availableWine.filter((version) => {
+    if (isLinux) {
+      return (
+        version.type === 'Wine-GE' && version.version.includes('Wine-GE-Proton')
+      )
+    } else if (isMac) {
+      return version.type === 'Wine-Crossover'
+    }
+    return false
+  })[0]
+
+  if (!release) {
+    logError('Could not find default wine version', LogPrefix.Backend)
+    return null
+  }
+
+  // download the latest version
+  const onProgress = (state: State, progress?: ProgressInfo) => {
+    sendFrontendMessage('progressOfWineManager' + release.version, {
+      state,
+      progress
+    })
+  }
+  const result = await installWineVersion(
+    release,
+    onProgress,
+    createAbortController(release.version).signal
+  )
+  deleteAbortController(release.version)
+  if (result === 'success') {
+    let downloadedWine = null
+    try {
+      const wineList = await GlobalConfig.get().getAlternativeWine()
+      // update the game config to use that wine
+      downloadedWine = wineList[0]
+      logInfo(`Changing wine version to ${downloadedWine.name}`)
+      GlobalConfig.get().setSetting('wineVersion', downloadedWine)
+    } catch (error) {
+      logError(
+        ['Error when changing wine version to default', error],
+        LogPrefix.Backend
+      )
+    }
+    return downloadedWine
+  }
+  return null
+}
+
 export async function checkWineBeforeLaunch(
   appName: string,
   gameSettings: GameSettings,
@@ -945,6 +1016,17 @@ export async function checkWineBeforeLaunch(
       const firstFoundWine = wineList[0]
 
       const isValidWine = await validWine(firstFoundWine)
+
+      if (!wineList.length || !firstFoundWine || !isValidWine) {
+        const firstFoundWine = await downloadDefaultWine()
+        if (firstFoundWine) {
+          logInfo(`Changing wine version to ${firstFoundWine.name}`)
+          gameSettings.wineVersion = firstFoundWine
+          GameConfig.get(appName).setSetting('wineVersion', firstFoundWine)
+          return true
+        }
+      }
+
       if (firstFoundWine && isValidWine) {
         const { response } = await ContinueWithFoundWine(
           gameSettings.wineVersion.name,
@@ -1125,89 +1207,76 @@ export interface ProgressCallback {
   ): void
 }
 
-export async function downloadFileWithAxios(
+export async function downloadFile(
   url: string,
-  destPath: string,
+  dest: string,
   abortController: AbortController,
   progressCallback?: ProgressCallback
 ): Promise<void> {
-  const writer = createWriteStream(destPath)
-
-  const response: AxiosResponse = await axios({
-    url: encodeURI(url),
-    method: 'GET',
-    responseType: 'stream',
-    signal: abortController.signal
-  })
-
-  const totalLength = Number(response.headers['content-length'])
-
-  let downloadedBytes = 0
-  let downloadSpeed = 0
-  let prevDownloadedBytes = 0
-  let prevTimestamp = Date.now()
-
-  let writtenBytes = 0
-  let writeSpeed = 0
-  let prevWrittenBytes = 0
-
-  response.data.on('data', (chunk: Buffer) => {
-    downloadedBytes += chunk.length
-    writtenBytes += chunk.length
-
-    // Calculate download speed
-    const now = Date.now()
-    const timeElapsed = now - prevTimestamp
-    if (timeElapsed >= 1000) {
-      downloadSpeed =
-        ((downloadedBytes - prevDownloadedBytes) / timeElapsed) * 1000
-      prevDownloadedBytes = downloadedBytes
-      writeSpeed = ((writtenBytes - prevWrittenBytes) / timeElapsed) * 1000
-      prevWrittenBytes = writtenBytes
-      prevTimestamp = now
-    }
-
-    // Calculate progress and call progressCallback function (debounced)
-    const progress = Math.round((downloadedBytes / totalLength) * 100)
-    if (progressCallback) {
-      const debouncedCallback = debounce(progressCallback, 1000)
-      debouncedCallback(downloadedBytes, downloadSpeed, writeSpeed, progress)
-    }
-  })
-
-  response.data.pipe(writer)
-
-  return new Promise<void>((resolve, reject) => {
-    writer.on('finish', () => {
-      const now = Date.now()
-      const timeElapsed = now - prevTimestamp
-      writeSpeed = ((writtenBytes - prevWrittenBytes) / timeElapsed) * 1000
-      prevWrittenBytes = writtenBytes
-      prevTimestamp = now
-      resolve()
+  try {
+    const dl = new EasyDl(url, dest, {
+      existBehavior: 'overwrite',
+      maxRetry: 3,
+      retryDelay: 3000,
+      reportInterval: 10000
     })
+
+    logInfo(`Downloading ${url} with EasyDL`, LogPrefix.HyperPlay)
+
     abortController.signal.addEventListener('abort', () => {
-      writer.close()
-      reject()
+      dl.destroy()
     })
-  })
+
+    dl.on('progress', ({ total }) => {
+      if (progressCallback) {
+        progressCallback(
+          total.bytes || 0,
+          total.speed || 0,
+          total.speed || 0,
+          total.percentage || 0
+        )
+      }
+    })
+
+    dl.on('error', function (error) {
+      logError(`Error: ${error}`, LogPrefix.Backend)
+      throw error
+    })
+
+    const downloaded = await dl.wait()
+
+    if (!downloaded) {
+      logWarning(`File ${url} not downloaded`, LogPrefix.Backend)
+      throw new Error('Download incomplete')
+    }
+
+    logInfo(`Finished downloading ${url}`, LogPrefix.Backend)
+  } catch (err) {
+    logError(`Download Failed with: ${err}`, LogPrefix.Backend)
+    throw new Error('Download failed')
+  }
 }
 
-const debounce = <T extends (...args: number[]) => void>(
-  func: T,
-  wait: number
-) => {
-  let timeout: ReturnType<typeof setTimeout>
-  return function (this: unknown, ...args: Parameters<T>) {
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
-    const context = this
-    const later = () => {
-      timeout = null!
-      func.apply(context, args)
+function removeFolder(path: string, folderName: string) {
+  if (path === 'default') {
+    const { defaultInstallPath } = GlobalConfig.get().getSettings()
+    const path = defaultInstallPath.replaceAll("'", '')
+    const folderToDelete = `${path}/${folderName}`
+    if (existsSync(folderToDelete)) {
+      return setTimeout(() => {
+        rmSync(folderToDelete, { recursive: true })
+      }, 5000)
     }
-    clearTimeout(timeout)
-    timeout = setTimeout(later, wait)
+    return
   }
+
+  const folderToDelete = `${path}/${folderName}`.replaceAll("'", '')
+  if (existsSync(folderToDelete)) {
+    return setTimeout(() => {
+      rmSync(folderToDelete, { recursive: true })
+    }, 2000)
+  }
+  return
 }
 
 export {
@@ -1240,7 +1309,9 @@ export {
   getWineFromProton,
   getFileSize,
   getLegendaryVersion,
-  getGogdlVersion
+  getGogdlVersion,
+  removeFolder,
+  shutdownWine
 }
 
 // Exported only for testing purpose

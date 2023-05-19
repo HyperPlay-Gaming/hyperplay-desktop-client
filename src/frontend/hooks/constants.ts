@@ -33,7 +33,8 @@ export function getStatusLabel({
     installed: `${t('gamepage:status.installed')} ${
       runner === 'sideload' ? '' : size
     }`,
-    notInstalled: t('gamepage:status.notinstalled')
+    notInstalled: t('gamepage:status.notinstalled'),
+    paused: t('gamepage:status.paused', 'Paused')
   }
 
   return statusMap[status] || t('gamepage:status.notinstalled')

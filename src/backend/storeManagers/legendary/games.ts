@@ -28,7 +28,8 @@ import {
   getLegendaryBin,
   killPattern,
   moveOnUnix,
-  moveOnWindows
+  moveOnWindows,
+  shutdownWine
 } from '../../utils'
 import {
   isMac,
@@ -355,12 +356,14 @@ interface tmpProgressMap {
   [key: string]: InstallProgress
 }
 
-const defaultTmpProgress = {
-  bytes: '',
-  eta: '',
-  percent: undefined,
-  diskSpeed: undefined,
-  downSpeed: undefined
+function defaultTmpProgres() {
+  return {
+    bytes: '',
+    eta: '',
+    percent: undefined,
+    diskSpeed: undefined,
+    downSpeed: undefined
+  }
 }
 const tmpProgress: tmpProgressMap = {}
 
@@ -379,55 +382,64 @@ export function onInstallOrUpdateOutput(
   }
 
   if (!Object.hasOwn(tmpProgress, appName)) {
-    tmpProgress[appName] = defaultTmpProgress
+    tmpProgress[appName] = defaultTmpProgres()
   }
 
+  const progress = tmpProgress[appName]
+
   // parse log for eta
-  const etaMatch = data.match(/ETA: (\d\d:\d\d:\d\d)/m)
-  tmpProgress[appName].eta =
-    etaMatch && etaMatch?.length >= 2 ? etaMatch[1] : ''
+  if (progress.eta === '') {
+    const etaMatch = data.match(/ETA: (\d\d:\d\d:\d\d)/m)
+    progress.eta = etaMatch && etaMatch?.length >= 2 ? etaMatch[1] : ''
+  }
 
   // parse log for game download progress
-  const bytesMatch = data.match(/Downloaded: (\S+.) MiB/m)
-  tmpProgress[appName].bytes =
-    bytesMatch && bytesMatch?.length >= 2 ? `${bytesMatch[1]}MB` : ''
+  if (progress.bytes === '') {
+    const bytesMatch = data.match(/Downloaded: (\S+.) MiB/m)
+    progress.bytes =
+      bytesMatch && bytesMatch?.length >= 2 ? `${bytesMatch[1]}MB` : ''
+  }
 
   // parse log for download speed
-  const downSpeedMBytes = data.match(/Download\t- (\S+.) MiB/m)
-  tmpProgress[appName].downSpeed = !Number.isNaN(Number(downSpeedMBytes?.at(1)))
-    ? Number(downSpeedMBytes?.at(1))
-    : undefined
+  if (!progress.downSpeed) {
+    const downSpeedMBytes = data.match(/Download\t- (\S+.) MiB/m)
+    progress.downSpeed = !Number.isNaN(Number(downSpeedMBytes?.at(1)))
+      ? Number(downSpeedMBytes?.at(1))
+      : undefined
+  }
 
   // parse disk write speed
-  const diskSpeedMBytes = data.match(/Disk\t- (\S+.) MiB/m)
-  tmpProgress[appName].diskSpeed = !Number.isNaN(Number(diskSpeedMBytes?.at(1)))
-    ? Number(diskSpeedMBytes?.at(1))
-    : undefined
+  if (!progress.diskSpeed) {
+    const diskSpeedMBytes = data.match(/Disk\t- (\S+.) MiB/m)
+    progress.diskSpeed = !Number.isNaN(Number(diskSpeedMBytes?.at(1)))
+      ? Number(diskSpeedMBytes?.at(1))
+      : undefined
+  }
 
   // original is in bytes, convert to MiB with 2 decimals
   totalDownloadSize = Math.round((totalDownloadSize / 1024 / 1024) * 100) / 100
 
   // calculate percentage
-  if (tmpProgress[appName].bytes !== '') {
-    const downloaded = parseFloat(tmpProgress[appName].bytes)
+  if (progress.bytes !== '') {
+    const downloaded = parseFloat(progress.bytes)
     const downloadCache = totalDownloadSize - currentDownloadSize[appName]
     const totalDownloaded = downloaded + downloadCache
     const newPercent =
       Math.round((totalDownloaded / totalDownloadSize) * 10000) / 100
-    tmpProgress[appName].percent = newPercent >= 0 ? newPercent : undefined
+    progress.percent = newPercent >= 0 ? newPercent : undefined
   }
 
   // only send to frontend if all values are updated
   if (
-    Object.values(tmpProgress[appName]).every(
+    Object.values(progress).every(
       (value) => !(value === undefined || value === '')
     )
   ) {
     logInfo(
       [
         `Progress for ${getGameInfo(appName).title}:`,
-        `${tmpProgress[appName].percent}%/${tmpProgress[appName].bytes}/${tmpProgress[appName].eta}`.trim(),
-        `Down: ${tmpProgress[appName].downSpeed}MB/s / Disk: ${tmpProgress[appName].diskSpeed}MB/s`
+        `${progress.percent}%/${progress.bytes}/${progress.eta}`.trim(),
+        `Down: ${progress.downSpeed}MB/s / Disk: ${progress.diskSpeed}MB/s`
       ],
       LogPrefix.Legendary
     )
@@ -436,11 +448,11 @@ export function onInstallOrUpdateOutput(
       appName: appName,
       runner: 'legendary',
       status: action,
-      progress: tmpProgress[appName]
+      progress: progress
     })
 
     // reset
-    tmpProgress[appName] = defaultTmpProgress
+    tmpProgress[appName] = defaultTmpProgres()
   }
 }
 
@@ -450,7 +462,7 @@ export function onInstallOrUpdateOutput(
  */
 export async function update(
   appName: string
-): Promise<{ status: 'done' | 'error' }> {
+): Promise<{ status: 'done' | 'error' | 'abort' }> {
   sendFrontendMessage('gameStatusUpdate', {
     appName: appName,
     runner: 'legendary',
@@ -962,13 +974,18 @@ export async function forceUninstall(appName: string) {
 
 // Could be removed if legendary handles SIGKILL and SIGTERM for us
 // which is send via AbortController
-export async function stop(appName: string) {
+export async function stop(appName: string, stopWine = true) {
   // until the legendary bug gets fixed, kill legendary on mac
   // not a perfect solution but it's the only choice for now
 
   // @adityaruplaha: this is kinda arbitary and I don't understand it.
   const pattern = process.platform === 'linux' ? appName : 'legendary'
   killPattern(pattern)
+
+  if (stopWine && !isNative(appName)) {
+    const gameSettings = await getSettings(appName)
+    await shutdownWine(gameSettings)
+  }
 }
 
 export function isGameAvailable(appName: string) {

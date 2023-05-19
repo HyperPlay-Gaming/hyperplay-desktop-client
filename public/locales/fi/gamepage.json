@@ -146,7 +146,7 @@
         "title": "Valitse asennettavat komponentit"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Wine Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings"
     },
     "sideload": {
         "field": {

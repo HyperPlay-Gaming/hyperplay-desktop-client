@@ -208,7 +208,7 @@ export default function WebView() {
         partition={partitionForWebview}
         src={startUrl}
         allowpopups={trueAsStr}
-        useragent="Mozilla/5.0 (Windows NT 10.0; WOW64; rv:70.0) Gecko/20100101 Firefox/70.0"
+        useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/200.0"
         {...(preloadPath ? { preload: `file://${preloadPath}` } : {})}
       />
       {showLoginWarningFor && (

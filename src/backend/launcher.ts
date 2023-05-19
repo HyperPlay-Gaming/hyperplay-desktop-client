@@ -9,7 +9,14 @@ import {
 } from 'graceful-fs'
 import { join } from 'path'
 
-import { flatPakHome, isLinux, isMac, runtimePath, userHome } from './constants'
+import {
+  defaultWinePrefix,
+  flatPakHome,
+  isLinux,
+  isMac,
+  runtimePath,
+  userHome
+} from './constants'
 import {
   constructAndUpdateRPC,
   getSteamRuntime,
@@ -282,7 +289,7 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
       ret.WINEPREFIX = winePrefix
 
       // Disable Winemenubuilder to not mess with file associations
-      const wmbDisableString = 'winemenubuilder='
+      const wmbDisableString = 'winemenubuilder.exe=d'
       // If the user already set WINEDLLOVERRIDES, append to the end
       const dllOverridesVar = gameSettings.enviromentOptions.find(
         ({ key }) => key.toLowerCase() === 'winedlloverrides'
@@ -449,7 +456,7 @@ export async function validWine(
 export async function verifyWinePrefix(
   settings: GameSettings
 ): Promise<{ res: ExecResult; updated: boolean }> {
-  const { winePrefix, wineVersion } = settings
+  const { winePrefix = defaultWinePrefix, wineVersion } = settings
 
   const isValidWine = await validWine(wineVersion)
 

@@ -8,7 +8,8 @@ import {
   StatusPromise,
   GamepadInputEvent,
   WineCommandArgs,
-  ExecResult
+  ExecResult,
+  Runner
 } from 'common/types'
 import * as path from 'path'
 import {
@@ -71,7 +72,8 @@ import {
   getLatestReleases,
   getShellPath,
   wait,
-  checkWineBeforeLaunch
+  checkWineBeforeLaunch,
+  downloadDefaultWine
 } from './utils'
 import {
   configStore,
@@ -199,9 +201,14 @@ async function initializeWindow(): Promise<BrowserWindow> {
     mainWindow.setFullScreen(true)
   }
 
-  setTimeout(() => {
-    DXVK.getLatest()
-    Winetricks.download()
+  setTimeout(async () => {
+    // Will download Wine if none was found
+    const availableWine = await GlobalConfig.get().getAlternativeWine()
+    Promise.all([
+      DXVK.getLatest(),
+      Winetricks.download(),
+      !availableWine.length ? downloadDefaultWine() : null
+    ])
   }, 2500)
 
   GlobalConfig.get()
@@ -652,7 +659,7 @@ ipcMain.on('showConfigFileInFolder', async (event, appName) => {
   return openUrlOrFile(path.join(gamesConfigPath, `${appName}.json`))
 })
 
-ipcMain.on('removeFolder', async (e, [path, folderName]) => {
+export function removeFolder(path: string, folderName: string) {
   if (path === 'default') {
     const { defaultInstallPath } = GlobalConfig.get().getSettings()
     const path = defaultInstallPath.replaceAll("'", '')
@@ -672,6 +679,10 @@ ipcMain.on('removeFolder', async (e, [path, folderName]) => {
     }, 2000)
   }
   return
+}
+
+ipcMain.on('removeFolder', async (e, [path, folderName]) => {
+  removeFolder(path, folderName)
 })
 
 async function runWineCommandOnGame(
@@ -738,7 +749,7 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
   for (const runner in libraryManagerMap) {
     let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
     if (autoUpdateGames) {
-      gamesToUpdate = autoUpdate(runner, gamesToUpdate)
+      gamesToUpdate = autoUpdate(runner as Runner, gamesToUpdate)
     }
     oldGames = [...oldGames, ...gamesToUpdate]
   }
@@ -776,6 +787,7 @@ ipcMain.handle('getLatestReleases', async () => {
 
 ipcMain.on('clearCache', (event) => {
   clearCache()
+  sendFrontendMessage('refreshLibrary')
 
   showDialogBoxModalAuto({
     event,
@@ -1105,6 +1117,12 @@ ipcMain.handle(
         return { status: 'error' }
       }
     }
+
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      runner,
+      status: 'playing'
+    })
 
     const command = gameManagerMap[runner].launch(appName, launchArguments)
 

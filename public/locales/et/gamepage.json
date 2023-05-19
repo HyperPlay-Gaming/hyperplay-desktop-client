@@ -146,7 +146,7 @@
         "title": "Valige komponendid, mida installida"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Wine Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings"
     },
     "sideload": {
         "field": {

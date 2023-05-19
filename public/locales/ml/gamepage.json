@@ -146,7 +146,7 @@
         "title": "നടുവാനുള്ള ഘടകങ്ങള് തിരഞ്ഞെടുക്കൂ"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Wine Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings"
     },
     "sideload": {
         "field": {

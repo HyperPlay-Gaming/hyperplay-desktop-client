@@ -18,6 +18,8 @@ import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as SettingsIcon } from 'frontend/assets/settings-sharp.svg'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { ReactComponent as StopIconAlt } from 'frontend/assets/stop-icon-alt.svg'
+import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
+
 import {
   getGameInfo,
   getProgress,
@@ -123,6 +125,7 @@ const GameCard = ({
     isPlaying,
     notAvailable,
     isUpdating,
+    isPaused,
     haveStatus
   } = getCardStatus(status, isInstalled, layout)
 
@@ -135,6 +138,17 @@ const GameCard = ({
   }
 
   const renderIcon = () => {
+    if (isPaused) {
+      return (
+        <SvgButton
+          title={t('button.queue.continue', 'Continue Download')}
+          className="playIcon"
+          onClick={() => window.api.resumeCurrentDownload()}
+        >
+          <DownIcon />
+        </SvgButton>
+      )
+    }
     if (notSupportedGame) {
       return (
         <FontAwesomeIcon
@@ -169,14 +183,14 @@ const GameCard = ({
       return (
         <SvgButton
           className="cancelIcon"
-          onClick={async () => handlePlay(runner)}
+          onClick={async () => mainAction(runner)}
           title={`${t('label.playing.stop')} (${title})`}
         >
           <StopIconAlt />
         </SvgButton>
       )
     }
-    if (isInstalling || isQueued) {
+    if (isInstalling) {
       return (
         <SvgButton
           className="cancelIcon"
@@ -191,7 +205,7 @@ const GameCard = ({
       return (
         <SvgButton
           className={!notAvailable ? 'playIcon' : 'notAvailableIcon'}
-          onClick={async () => handlePlay(runner)}
+          onClick={async () => mainAction(runner)}
           title={`${t('label.playing.start')} (${title})`}
           disabled={isLaunching || status === 'syncing-saves'}
         >
@@ -239,13 +253,13 @@ const GameCard = ({
     {
       // stop if running
       label: t('label.playing.stop'),
-      onclick: async () => handlePlay(runner),
+      onclick: async () => mainAction(runner),
       show: isPlaying
     },
     {
       // launch game
       label: t('label.playing.start'),
-      onclick: async () => handlePlay(runner),
+      onclick: async () => mainAction(runner),
       show: isInstalled && !isPlaying && !isUpdating && !isQueued
     },
     {
@@ -263,7 +277,7 @@ const GameCard = ({
     {
       // cancel installation/update
       label: t('button.cancel'),
-      onclick: async () => handlePlay(runner),
+      onclick: async () => mainAction(runner),
       show: isInstalling || isUpdating
     },
     {
@@ -438,11 +452,12 @@ const GameCard = ({
     </div>
   )
 
-  async function handlePlay(runner: Runner) {
+  async function mainAction(runner: Runner) {
+    // ask to install if the game is not installed
     if (!isInstalled && !isQueued && gameInfo.runner !== 'sideload') {
       return install({
         gameInfo,
-        installPath: folder || 'default',
+        installPath: folder!,
         isInstalling,
         previousProgress,
         progress,
@@ -451,15 +466,18 @@ const GameCard = ({
       })
     }
 
+    // kill the game if it's running
     if (isPlaying || isUpdating) {
       return sendKill(appName, runner)
     }
 
+    // remove the game from the queue
     if (isQueued) {
       storage.removeItem(appName)
       return window.api.removeFromDMQueue(appName)
     }
 
+    // ask to connect the wallet if its a web3 game
     if (gameInfo.web3?.supported && !walletStore.isConnected) {
       try {
         await onboardingStore.startOnboarding()
@@ -468,6 +486,7 @@ const GameCard = ({
       }
     }
 
+    // launch the game
     if (isInstalled) {
       setIsLaunching(true)
       return launch({
