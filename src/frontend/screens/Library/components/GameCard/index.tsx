@@ -18,7 +18,6 @@ import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as SettingsIcon } from 'frontend/assets/settings-sharp.svg'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { ReactComponent as StopIconAlt } from 'frontend/assets/stop-icon-alt.svg'
-import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
 
 import {
   getGameInfo,

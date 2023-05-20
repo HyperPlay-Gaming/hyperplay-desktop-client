@@ -564,11 +564,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 {(!is_installed || isQueued) && (
                   <Button
                     onClick={async () => {
-                      if (isInstalling) {
-                        setShowStopInstallModal(true)
-                        return
-                      }
-                      handleInstall(is_installed)
+                      mainAction(is_installed)
                     }}
                     disabled={
                       isPlaying ||
@@ -806,8 +802,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return window.api.removeFromDMQueue(appName)
     }
 
+    // open install modal
+    if (isInstalling) {
+      setShowStopInstallModal(true)
+      return
+    }
+
     // open install dialog
-    if (!is_installed && !isInstalling) {
+    if (!is_installed) {
       return handleModal()
     }
 
