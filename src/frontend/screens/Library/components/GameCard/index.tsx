@@ -132,7 +132,20 @@ const GameCard = ({
     if (showUpdateButton) {
       return 'NEEDS_UPDATE'
     }
+    if (isPaused) {
+      return 'PAUSED'
+    }
+    if (status === 'extracting') {
+      return 'SHOW_MESSAGE'
+    }
     return 'NOT_INSTALLED'
+  }
+
+  const getMessage = (): string | undefined => {
+    if (status === 'extracting') {
+      return 'Extracting...'
+    }
+    return undefined
   }
 
   const isHiddenGame = useMemo(() => {
@@ -294,8 +307,8 @@ const GameCard = ({
           onStopPlayingClick={handleClickStopBubbling(async () =>
             mainAction(runner)
           )}
-          onPauseClick={handleClickStopBubbling(
-            () => async () => window.api.pauseCurrentDownload()
+          onPauseClick={handleClickStopBubbling(async () =>
+            window.api.pauseCurrentDownload()
           )}
           onResumeClick={handleClickStopBubbling(() =>
             window.api.resumeCurrentDownload()
@@ -315,12 +328,17 @@ const GameCard = ({
           )}
           onUpdateClick={handleClickStopBubbling(async () => handleUpdate())}
           progress={progress}
+          message={getMessage()}
         />
       </Link>
     </>
   )
 
   async function mainAction(runner: Runner) {
+    if (isInstalling || isPaused) {
+      return setShowStopInstallModal(true)
+    }
+
     // ask to install if the game is not installed
     if (!isInstalled && !isQueued && gameInfo.runner !== 'sideload') {
       return install({
