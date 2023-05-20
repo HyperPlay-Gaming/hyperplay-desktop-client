@@ -149,12 +149,21 @@ const GameCard = ({
 
   const handleClickStopBubbling =
     (callback: () => void) =>
-    (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    (
+      e:
+        | React.MouseEvent<HTMLButtonElement, MouseEvent>
+        | React.MouseEvent<HTMLDivElement, MouseEvent>
+    ) => {
       e.preventDefault()
       callback()
     }
 
-  const items: SettingsButtons[] = [
+  interface Show {
+    show: boolean
+  }
+  type SettingsItem = SettingsButtons & Show
+
+  const items: SettingsItem[] = [
     {
       // remove from install queue
       label: t('button.queue.remove'),
