@@ -758,6 +758,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
     if (is_installed) {
       return t('submenu.settings')
     }
+    if (isExtracting) {
+      return t('status.extracting', 'Extracting files')
+    }
     if (isInstalling) {
       return t('button.queue.cancel', 'Cancel Download')
     }

@@ -1256,7 +1256,7 @@ export async function downloadFile(
           logInfo(
             `Downloaded: ${bytesToSize(bytes)} / ${bytesToSize(
               fileSize
-            )}  @${bytesToSize(speed)}/s (${percentage}%)`,
+            )}  @${bytesToSize(speed)}/s (${percentage.toFixed(2)}%)`,
             LogPrefix.HyperPlay
           )
           progressCallback(bytes, speed, writingSpeed, percentage)
