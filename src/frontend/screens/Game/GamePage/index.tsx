@@ -11,6 +11,7 @@ import {
 import {
   getGameInfo,
   getInstallInfo,
+  getPlatformName,
   getProgress,
   launch,
   sendKill,
@@ -246,14 +247,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
     // TODO: Do this in a *somewhat* prettier way
     let install_path: string | undefined
-    let install_size: string | undefined
     let version: string | undefined
     let developer: string | undefined
     let cloud_save_enabled = false
 
     if (gameInfo.runner !== 'sideload') {
       install_path = gameInfo.install.install_path
-      install_size = gameInfo.install.install_size
       version = gameInfo.install.version
       developer = gameInfo.developer
       cloud_save_enabled =
@@ -442,7 +441,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       {!isSideloaded && (
                         <>
                           <div className="hp-subtitle">{t('info.size')}</div>
-                          <div className="col2-item italic">{install_size}</div>
+                          <div className="col2-item italic">
+                            {installSize || '...'}
+                          </div>
                         </>
                       )}
                       <div className="hp-subtitle">
@@ -452,7 +453,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
                         style={{ textTransform: 'capitalize' }}
                         className="col2-item"
                       >
-                        {installPlatform === 'osx' ? 'MacOS' : installPlatform}
+                        {installPlatform === 'osx'
+                          ? 'MacOS'
+                          : getPlatformName(installPlatform || '')}
                       </div>
                       {!isSideloaded && (
                         <>
