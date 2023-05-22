@@ -116,6 +116,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const isUninstalling = status === 'uninstalling'
   const isSyncing = status === 'syncing-saves'
   const isPaused = status === 'paused'
+  const isExtracting = status === 'extracting'
   const notAvailable = !gameAvailable && gameInfo.is_installed
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
@@ -557,7 +558,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       isReparing ||
                       isMoving ||
                       isUninstalling ||
-                      notSupportedGame
+                      notSupportedGame ||
+                      isExtracting
                     }
                     autoFocus={true}
                     className={`button ${getButtonClass(is_installed)}`}
@@ -675,6 +677,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
       }
 
       return `${t('status.moving', 'Moving Installation, please wait')} ...`
+    }
+
+    if (isExtracting) {
+      return `${t('status.extracting', 'Extracting files')}...`
     }
 
     const currentProgress =
