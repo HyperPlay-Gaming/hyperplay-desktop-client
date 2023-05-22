@@ -552,8 +552,5 @@ export async function syncSaves(
 }
 
 export async function forceUninstall(appName: string): Promise<void> {
-  logWarning(
-    `forceUninstall not implemented on HyperPlay Game Manager. Calling uninstall instead called for appName = ${appName}`
-  )
   await uninstall({ appName, shouldRemovePrefix: false })
 }
