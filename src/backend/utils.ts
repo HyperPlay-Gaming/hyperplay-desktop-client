@@ -1230,12 +1230,7 @@ export async function downloadFile(
       maxRetry: 10,
       retryDelay: 1000,
       connections: 1,
-      chunkSize: (size) => {
-        if (size > 1024 * 1024 * 20) {
-          return 1024 * 1024 * 20
-        }
-        return size
-      }
+      chunkSize: 1024 * 1024 * 10
     }).start()
 
     dl.on('metadata', (metadata) => {

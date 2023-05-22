@@ -217,7 +217,6 @@ async function downloadGame(
       downloadPath,
       createAbortController(appName),
       (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
-        // calculate eta
         const eta = calculateEta(
           downloadedBytes,
           downloadSpeed,
@@ -231,9 +230,9 @@ async function downloadGame(
           folder: destinationPath,
           progress: {
             percent: progress,
-            diskSpeed: diskWriteSpeed / 1000000,
-            downSpeed: downloadSpeed / 1000000,
-            bytes: downloadedBytes / 1000000,
+            diskSpeed: diskWriteSpeed / 1024 / 1024,
+            downSpeed: downloadSpeed / 1024 / 1024,
+            bytes: downloadedBytes / 1024 / 1024,
             folder: destinationPath,
             eta
           }

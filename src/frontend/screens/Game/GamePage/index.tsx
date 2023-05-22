@@ -688,9 +688,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
         ? ''
         : `${
             percent && bytes
-              ? `${percent.toFixed(2)}% [${(Number(bytes) / 1000000).toFixed(
-                  0
-                )} MB]  ${eta ? `ETA: ${eta}` : ''}`
+              ? `${percent.toFixed(2)}% [${Number(bytes).toFixed(2)} MB]  ${
+                  eta ? `ETA: ${eta}` : ''
+                }`
               : '...'
           }`
 
