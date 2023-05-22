@@ -459,17 +459,19 @@ export async function removeShortcuts(appName: string): Promise<void> {
 }
 
 export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
-  logWarning(
-    `getExtraInfo not implemented on HyperPlay Game Manager. called for appName = ${appName}`
-  )
-  return {
-    about: {
-      description: '',
-      shortDescription: ''
-    },
-    reqs: [],
-    storeUrl: ''
+  const extraInfo = getGameInfo(appName).extra
+  if (!extraInfo) {
+    logWarning(`No extra info found for ${appName}`, LogPrefix.HyperPlay)
+    return {
+      about: {
+        description: '',
+        shortDescription: ''
+      },
+      reqs: [],
+      storeUrl: ''
+    }
   }
+  return extraInfo
 }
 
 export async function launch(
