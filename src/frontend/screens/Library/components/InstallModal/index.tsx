@@ -25,30 +25,13 @@ import SideloadDialog from './SideloadDialog'
 import WineSelector from './WineSelector'
 import { SelectField } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
+import { getPlatformName } from 'frontend/helpers'
 
 type Props = {
   appName: string
   backdropClick: () => void
   runner: Runner
   gameInfo?: GameInfo | null
-}
-
-function getPlatformName(platform: AppPlatforms): string {
-  switch (platform) {
-    case 'windows_amd64':
-    case 'windows_arm64':
-      return 'Windows'
-    case 'linux_amd64':
-    case 'linux_arm64':
-      return 'Linux'
-    case 'darwin_amd64':
-    case 'darwin_arm64':
-      return 'Mac'
-    case 'web':
-      return 'Browser'
-    default:
-      return 'windows_amd64'
-  }
 }
 
 export type AvailablePlatforms = {

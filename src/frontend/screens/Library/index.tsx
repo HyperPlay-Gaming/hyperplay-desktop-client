@@ -18,6 +18,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 
 import GamesList from './components/GamesList'
 import {
+  AppPlatforms,
   FavouriteGame,
   GameInfo,
   GameStatus,
@@ -34,6 +35,7 @@ import {
 } from 'frontend/helpers/library'
 import RecentlyPlayed from './components/RecentlyPlayed'
 import { InstallModal } from './components'
+import { getPlatformName } from 'frontend/helpers'
 
 const storage = window.localStorage
 
@@ -171,23 +173,65 @@ export default React.memo(function Library(): JSX.Element {
     switch (filter) {
       case 'win':
         return library.filter((game) => {
-          return game?.is_installed
-            ? game?.install?.platform?.toLowerCase() === 'windows'
+          const { releaseMeta = { platforms: {} } } = { ...game }
+          const hpPlatforms = Object.keys(
+            releaseMeta.platforms
+          ) as AppPlatforms[]
+          const isHpGame = game.runner === 'hyperplay'
+
+          const isLinuxNative = isHpGame
+            ? hpPlatforms.some((p) => getPlatformName(p) === 'Linux')
+            : Boolean(game?.is_linux_native)
+
+          const isMacNative = isHpGame
+            ? hpPlatforms.some((p) => getPlatformName(p) === 'Mac')
+            : Boolean(game?.is_mac_native)
+
+          const installedPlatform = game.is_installed
+            ? getPlatformName(
+                game.install.platform || 'Windows'
+              ).toLowerCase() === 'windows'
             : isMac
-            ? !game?.is_mac_native
-            : !game?.is_linux_native
+            ? !isMacNative
+            : !isLinuxNative
+
+          console.log('installedPlatform', installedPlatform)
+
+          return installedPlatform
         })
       case 'mac':
         return library.filter((game) => {
+          const { releaseMeta = { platforms: {} } } = { ...game }
+          const hpPlatforms = Object.keys(
+            releaseMeta.platforms
+          ) as AppPlatforms[]
+          const isHpGame = game.runner === 'hyperplay'
+
+          const isMacNative = isHpGame
+            ? hpPlatforms.some((p) => getPlatformName(p) === 'Mac')
+            : Boolean(game?.is_mac_native)
+
           return game?.is_installed
-            ? macArray.includes(game?.install?.platform ?? '')
-            : game?.is_mac_native
+            ? macArray.includes(getPlatformName(game.install.platform ?? 'Mac'))
+            : isMacNative
         })
       case 'linux':
         return library.filter((game) => {
+          const { releaseMeta = { platforms: {} } } = { ...game }
+          const hpPlatforms = Object.keys(
+            releaseMeta.platforms
+          ) as AppPlatforms[]
+          const isHpGame = game.runner === 'hyperplay'
+
+          const isLinuxNative = isHpGame
+            ? hpPlatforms.some((p) => getPlatformName(p) === 'Linux')
+            : Boolean(game?.is_linux_native)
+
           return game?.is_installed
-            ? game?.install?.platform === 'linux'
-            : game?.is_linux_native
+            ? getPlatformName(
+                game.install.platform ?? 'linux'
+              ).toLowerCase() === 'linux'
+            : isLinuxNative
         })
       default:
         return library
