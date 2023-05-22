@@ -1222,25 +1222,29 @@ export async function downloadFile(
 ): Promise<void> {
   let lastProgressUpdateTime = Date.now()
   let lastBytesWritten = 0
+  let fileSize = 0
 
   try {
     const dl = new EasyDl(url, dest, {
       existBehavior: 'overwrite',
-      maxRetry: 5,
+      maxRetry: 10,
       retryDelay: 1000,
-      // set chunksize to 10MB
-      chunkSize: 10 * 1024 * 1024
+      connections: 1,
+      chunkSize: (size) => {
+        if (size > 1024 * 1024 * 20) {
+          return 1024 * 1024 * 20
+        }
+        return size
+      }
     }).start()
 
-    logInfo(
-      `Downloader: Downloading ${url} with EasyDL`,
-      LogPrefix.DownloadManager
-    )
+    dl.on('metadata', (metadata) => {
+      fileSize = metadata.size
+    })
 
     abortController.signal.addEventListener('abort', () => {
       dl.destroy()
     })
-
     const throttledProgressCallback = throttle(
       (
         bytes: number,
@@ -1249,6 +1253,12 @@ export async function downloadFile(
         percentage: number
       ) => {
         if (progressCallback) {
+          logInfo(
+            `Downloaded: ${bytesToSize(bytes)} / ${bytesToSize(
+              fileSize
+            )}  @${bytesToSize(speed)}/s (${percentage}%)`,
+            LogPrefix.HyperPlay
+          )
           progressCallback(bytes, speed, writingSpeed, percentage)
         }
       },
@@ -1379,6 +1389,13 @@ function throttle<T extends (...args: any[]) => any>(
       callback(...args)
     }
   }
+}
+
+export function bytesToSize(bytes: number) {
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
+  if (bytes === 0) return '0 Byte'
+  const i = Math.floor(Math.log(bytes) / Math.log(1024))
+  return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`
 }
 
 export {
