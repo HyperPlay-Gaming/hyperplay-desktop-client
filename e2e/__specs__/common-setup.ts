@@ -66,19 +66,28 @@ export default function setup(): void {
     })
 
     hpPage = new Promise((res, rej) => {
+      const getPageTitle = async (page_i: Page) => {
+        try {
+          const title = await withTimeout(15000, page_i.title())
+          if (title === 'HyperPlay') {
+            res(page_i)
+            return true
+          }
+        } catch (err) {
+          console.log(`Error getting title: ${err}`)
+        }
+        return false
+      }
+
+      for (const windowPage of electronApp.windows()) {
+        console.log(`Window already opened with page url ${windowPage.url()}`)
+        getPageTitle(windowPage)
+      }
+
       electronApp
         .waitForEvent('window', {
           predicate: async (page_i: Page) => {
-            try {
-              const title = await withTimeout(10000, page_i.title())
-              if (title === 'HyperPlay') {
-                res(page_i)
-                return true
-              }
-            } catch (err) {
-              console.log(`Error getting title: ${err}`)
-            }
-            return false
+            return getPageTitle(page_i)
           },
           timeout: 360000
         })
