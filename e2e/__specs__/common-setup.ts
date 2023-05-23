@@ -53,7 +53,7 @@ export default function setup(): void {
 
     electronApp.on('window', async (page) => {
       const filename = page.url()?.split('/').pop()
-      console.log(`Window opened: ${filename}`)
+      console.log(`Window opened: ${filename} page url ${page.url()}`)
 
       // capture errors
       page.on('pageerror', (error) => {
@@ -66,20 +66,26 @@ export default function setup(): void {
     })
 
     hpPage = new Promise((res, rej) => {
-      electronApp.waitForEvent('window', {
-        predicate: async (page_i: Page) => {
-          try {
-            const title = await withTimeout(10000, page_i.title())
-            if (title === 'HyperPlay') {
-              res(page_i)
-              return true
+      electronApp
+        .waitForEvent('window', {
+          predicate: async (page_i: Page) => {
+            try {
+              const title = await withTimeout(10000, page_i.title())
+              if (title === 'HyperPlay') {
+                res(page_i)
+                return true
+              }
+            } catch (err) {
+              console.log(`Error getting title: ${err}`)
             }
-          } catch (err) {
-            console.log(`Error getting title: ${err}`)
-          }
-          return false
-        }
-      })
+            return false
+          },
+          timeout: 360000
+        })
+        .catch((err) => {
+          console.log(`Error during electronApp.waitForEvent(window): ${err}`)
+          rej(err)
+        })
     })
   })
 
