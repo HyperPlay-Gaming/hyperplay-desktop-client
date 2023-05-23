@@ -1,9 +1,18 @@
 import '../../src/common/types/proxy-types'
-import { test } from '@playwright/test'
+import { Page, test } from '@playwright/test'
 import { findLatestBuild, parseElectronApp } from 'electron-playwright-helpers'
 import { ElectronApplication, _electron as electron } from 'playwright'
 
 export let electronApp: ElectronApplication
+export let hpPage: Promise<Page>
+
+/* eslint-disable-next-line */
+const withTimeout = async (millis: number, promise: Promise<any>) => {
+  const timeout = new Promise((resolve, reject) =>
+    setTimeout(() => reject(`Timed out after ${millis} ms.`), millis)
+  )
+  return Promise.race([promise, timeout])
+}
 
 export default function setup(): void {
   test.beforeAll(async () => {
@@ -43,8 +52,6 @@ export default function setup(): void {
       )
 
     electronApp.on('window', async (page) => {
-      const title = await page.title()
-      console.log('Window loaded: ', title)
       const filename = page.url()?.split('/').pop()
       console.log(`Window opened: ${filename}`)
 
@@ -55,6 +62,23 @@ export default function setup(): void {
       // capture console messages
       page.on('console', (msg) => {
         console.log(msg.text())
+      })
+    })
+
+    hpPage = new Promise((res, rej) => {
+      electronApp.waitForEvent('window', {
+        predicate: async (page_i: Page) => {
+          try {
+            const title = await withTimeout(10000, page_i.title())
+            if (title === 'HyperPlay') {
+              res(page_i)
+              return true
+            }
+          } catch (err) {
+            console.log(`Error getting title: ${err}`)
+          }
+          return false
+        }
       })
     })
   })

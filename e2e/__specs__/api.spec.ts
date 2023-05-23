@@ -4,15 +4,7 @@ import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
 import { Page } from 'playwright'
 import { compareVersions } from 'compare-versions'
 import { platform as platformOS } from 'os'
-import commonSetup, { electronApp } from './common-setup'
-
-/* eslint-disable-next-line */
-const withTimeout = async (millis: number, promise: Promise<any>) => {
-  const timeout = new Promise((resolve, reject) =>
-    setTimeout(() => reject(`Timed out after ${millis} ms.`), millis)
-  )
-  return Promise.race([promise, timeout])
-}
+import commonSetup, { electronApp, hpPage } from './common-setup'
 
 test.describe('api e2e test', function () {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -22,17 +14,7 @@ test.describe('api e2e test', function () {
   let page: Page
   test('renders the first page', async () => {
     test.setTimeout(600000)
-    page = await electronApp.waitForEvent('window', {
-      predicate: async (page: Page) => {
-        try {
-          const title = await withTimeout(10000, page.title())
-          if (title === 'HyperPlay') return true
-        } catch (err) {
-          console.log(`Error getting title: ${err}`)
-        }
-        return false
-      }
-    })
+    page = await hpPage
 
     const title = await page.title()
     expect(title).toBe('HyperPlay')
