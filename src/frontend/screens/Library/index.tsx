@@ -195,8 +195,6 @@ export default React.memo(function Library(): JSX.Element {
             ? !isMacNative
             : !isLinuxNative
 
-          console.log('installedPlatform', installedPlatform)
-
           return installedPlatform
         })
       case 'mac':
