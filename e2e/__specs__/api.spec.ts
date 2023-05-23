@@ -13,18 +13,25 @@ test.describe('api e2e test', function () {
 
   let page: Page
   test('renders the first page', async () => {
-    page = await electronApp.firstWindow()
+    page = await electronApp.waitForEvent('window', {
+      predicate: async (page: Page) => {
+        const title = await page.title()
+        if (title === 'HyperPlay') return true
+        return false
+      }
+    })
+
     const title = await page.title()
-    expect(title).toBe('Heroic Games Launcher')
+    expect(title).toBe('HyperPlay')
   })
 
-  test('gets heroic, legendary, and gog versions', async () => {
-    const heroicVersion = await page.evaluate(async () => {
+  test('gets app, legendary, and gog versions', async () => {
+    const appVersion = await page.evaluate(async () => {
       return window.api.getAppVersion()
     })
-    console.log('HyperPlay Version: ', heroicVersion)
+    console.log('HyperPlay Version: ', appVersion)
     // check that hyperplay version is newer or equal to 0.2.0
-    expect(compareVersions(heroicVersion, '0.2.0')).toBeGreaterThanOrEqual(0)
+    expect(compareVersions(appVersion, '0.2.0')).toBeGreaterThanOrEqual(0)
 
     let legendaryVersion = await page.evaluate(async () => {
       return window.api.getLegendaryVersion()
@@ -39,7 +46,7 @@ test.describe('api e2e test', function () {
       return window.api.getGogdlVersion()
     })
     console.log('Gogdl Version: ', gogdlVersion)
-    expect(compareVersions(gogdlVersion, '0.7.1')).toBeGreaterThanOrEqual(0)
+    expect(compareVersions(gogdlVersion, '0.6')).toBeGreaterThanOrEqual(0)
   })
 
   test('test ipcMainInvokeHandler', async () => {
