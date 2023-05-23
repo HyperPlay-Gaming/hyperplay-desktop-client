@@ -16,6 +16,14 @@ HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, Node
       - [Other Distributions (TAR.XZ)](#other-distributions-tarxz)
     - [Windows](#windows)
     - [macOS](#macos)
+  - [Development environment](#development-environment)
+    - [Building Heroic Binaries](#building-heroic-binaries)
+    - [Building with VS Code](#building-with-vs-code)
+    - [Quickly testing/debugging Heroic on your own system](#quickly-testingdebugging-heroic-on-your-own-system)
+    - [Development Using a Container](#development-using-a-container)
+  - [Testing with Docker](#testing-with-docker)
+  - [Sponsors](#sponsors)
+  - [Screenshots](#screenshots)
   - [Credits](#credits)
 
 ## Supported Operating Systems
@@ -70,6 +78,24 @@ Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications fold
 <img width="1427" alt="image" src="https://user-images.githubusercontent.com/26871415/221288765-41a7981c-4112-4881-a88b-c2ed08929090.png">
 <img width="1417" alt="image" src="https://user-images.githubusercontent.com/26871415/221288900-aa7c3168-d610-4598-8011-7f6c4dc4148f.png">
 <img width="1427" alt="image" src="https://user-images.githubusercontent.com/26871415/221288973-eb897dec-34fe-4edf-8c3d-32836ca59a04.png">
+
+### Testing with Docker
+
+It is recommended to run end to end tests with Docker so you don't alter your local config files or have your local config files interfere with the tests.
+
+To run e2e tests on the unpackaged app running in dev mode.
+From the root of your local Heroic directory, run:
+
+```bash
+yarn test:e2e
+```
+
+To run e2e tests on the packaged app.
+From the root of your local Heroic directory, run:
+
+```bash
+yarn test:e2ePackaged
+```
 
 ## Credits
 
