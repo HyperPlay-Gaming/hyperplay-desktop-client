@@ -1,5 +1,4 @@
 import { DiskSpaceData } from '../../src/common/types'
-// import '../../common/types/proxy-types'
 import { expect, test } from '@playwright/test'
 import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
 import { Page } from 'playwright'
@@ -21,11 +20,11 @@ test.describe('api e2e test', function () {
 
   test('gets heroic, legendary, and gog versions', async () => {
     const heroicVersion = await page.evaluate(async () => {
-      return window.api.getHeroicVersion()
+      return window.api.getAppVersion()
     })
-    console.log('Heroic Version: ', heroicVersion)
-    // check that heroic version is newer or equal to 2.6.3
-    expect(compareVersions(heroicVersion, '2.6.3')).toBeGreaterThanOrEqual(0)
+    console.log('HyperPlay Version: ', heroicVersion)
+    // check that hyperplay version is newer or equal to 0.2.0
+    expect(compareVersions(heroicVersion, '0.2.0')).toBeGreaterThanOrEqual(0)
 
     let legendaryVersion = await page.evaluate(async () => {
       return window.api.getLegendaryVersion()
