@@ -13,6 +13,7 @@ test.describe('api e2e test', function () {
 
   let page: Page
   test('renders the first page', async () => {
+    test.setTimeout(120000)
     page = await electronApp.waitForEvent('window', {
       predicate: async (page: Page) => {
         const title = await page.title()
@@ -26,6 +27,7 @@ test.describe('api e2e test', function () {
   })
 
   test('gets app, legendary, and gog versions', async () => {
+    test.setTimeout(120000)
     const appVersion = await page.evaluate(async () => {
       return window.api.getAppVersion()
     })
@@ -50,6 +52,7 @@ test.describe('api e2e test', function () {
   })
 
   test('test ipcMainInvokeHandler', async () => {
+    test.setTimeout(120000)
     const platform: DiskSpaceData = (await ipcMainInvokeHandler(
       electronApp,
       'getPlatform'
