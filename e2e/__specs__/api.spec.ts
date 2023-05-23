@@ -6,6 +6,14 @@ import { compareVersions } from 'compare-versions'
 import { platform as platformOS } from 'os'
 import commonSetup, { electronApp } from './common-setup'
 
+/* eslint-disable-next-line */
+const withTimeout = async (millis: number, promise: Promise<any>) => {
+  const timeout = new Promise((resolve, reject) =>
+    setTimeout(() => reject(`Timed out after ${millis} ms.`), millis)
+  )
+  return Promise.race([promise, timeout])
+}
+
 test.describe('api e2e test', function () {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore: this is the correct usage
@@ -16,8 +24,12 @@ test.describe('api e2e test', function () {
     test.setTimeout(600000)
     page = await electronApp.waitForEvent('window', {
       predicate: async (page: Page) => {
-        const title = await page.title()
-        if (title === 'HyperPlay') return true
+        try {
+          const title = await withTimeout(10000, page.title())
+          if (title === 'HyperPlay') return true
+        } catch (err) {
+          console.log(`Error getting title: ${err}`)
+        }
         return false
       }
     })
