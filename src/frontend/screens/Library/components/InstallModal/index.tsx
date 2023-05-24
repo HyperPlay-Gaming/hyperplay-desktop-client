@@ -25,30 +25,13 @@ import SideloadDialog from './SideloadDialog'
 import WineSelector from './WineSelector'
 import { SelectField } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
+import { getPlatformName } from 'frontend/helpers'
 
 type Props = {
   appName: string
   backdropClick: () => void
   runner: Runner
   gameInfo?: GameInfo | null
-}
-
-function getPlatformName(platform: AppPlatforms): string {
-  switch (platform) {
-    case 'windows_amd64':
-    case 'windows_arm64':
-      return 'Windows'
-    case 'linux_amd64':
-    case 'linux_arm64':
-      return 'Linux'
-    case 'darwin_amd64':
-    case 'darwin_arm64':
-      return 'Mac'
-    case 'web':
-      return 'Browser'
-    default:
-      return 'windows_amd64'
-  }
 }
 
 export type AvailablePlatforms = {
@@ -72,9 +55,6 @@ export default React.memo(function InstallModal({
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
   const [crossoverBottle, setCrossoverBottle] = useState('')
 
-  const isLinuxNative = Boolean(gameInfo?.is_linux_native)
-  const isMacNative = Boolean(gameInfo?.is_mac_native)
-
   const isMac = platform === 'darwin'
   const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
@@ -84,24 +64,23 @@ export default React.memo(function InstallModal({
   const hpPlatforms = Object.keys(releaseMeta.platforms) as AppPlatforms[]
   const isHpGame = runner === 'hyperplay'
 
+  const isLinuxNative = isHpGame
+    ? hpPlatforms.some((p) => getPlatformName(p) === 'Linux')
+    : Boolean(gameInfo?.is_linux_native)
+  const isMacNative = isHpGame
+    ? hpPlatforms.some((p) => getPlatformName(p) === 'Mac')
+    : Boolean(gameInfo?.is_mac_native)
+
   const platforms: AvailablePlatforms = [
     {
       name: 'Linux',
-      available:
-        isLinux &&
-        (isHpGame
-          ? hpPlatforms.some((p) => getPlatformName(p) === 'Linux')
-          : isSideload || isLinuxNative),
+      available: (isLinux && isLinuxNative) || isSideload,
       value: 'linux',
       icon: faLinux
     },
     {
       name: 'macOS',
-      available:
-        isMac &&
-        (isHpGame
-          ? hpPlatforms.some((p) => getPlatformName(p) === 'Mac')
-          : isSideload || isMacNative),
+      available: (isMac && isMacNative) || isSideload,
       value: 'Mac',
       icon: faApple
     },
@@ -127,11 +106,11 @@ export default React.memo(function InstallModal({
   )
 
   const getDefaultplatform = () => {
-    if (isLinux && (isSideload || gameInfo?.is_linux_native)) {
+    if (isLinux && (isSideload || isLinuxNative)) {
       return 'linux'
     }
 
-    if (isMac && (isSideload || gameInfo?.is_mac_native)) {
+    if (isMac && (isSideload || isMacNative)) {
       return 'Mac'
     }
 

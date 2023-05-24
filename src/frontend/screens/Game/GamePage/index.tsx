@@ -11,6 +11,7 @@ import {
 import {
   getGameInfo,
   getInstallInfo,
+  getPlatformName,
   getProgress,
   launch,
   sendKill,
@@ -116,6 +117,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const isUninstalling = status === 'uninstalling'
   const isSyncing = status === 'syncing-saves'
   const isPaused = status === 'paused'
+  const isExtracting = status === 'extracting'
   const notAvailable = !gameAvailable && gameInfo.is_installed
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
@@ -245,14 +247,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
     // TODO: Do this in a *somewhat* prettier way
     let install_path: string | undefined
-    let install_size: string | undefined
     let version: string | undefined
     let developer: string | undefined
     let cloud_save_enabled = false
 
     if (gameInfo.runner !== 'sideload') {
       install_path = gameInfo.install.install_path
-      install_size = gameInfo.install.install_size
       version = gameInfo.install.version
       developer = gameInfo.developer
       cloud_save_enabled =
@@ -441,7 +441,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       {!isSideloaded && (
                         <>
                           <div className="hp-subtitle">{t('info.size')}</div>
-                          <div className="col2-item italic">{install_size}</div>
+                          <div className="col2-item italic">
+                            {installSize || '...'}
+                          </div>
                         </>
                       )}
                       <div className="hp-subtitle">
@@ -451,7 +453,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
                         style={{ textTransform: 'capitalize' }}
                         className="col2-item"
                       >
-                        {installPlatform === 'osx' ? 'MacOS' : installPlatform}
+                        {installPlatform === 'osx'
+                          ? 'MacOS'
+                          : getPlatformName(installPlatform || '')}
                       </div>
                       {!isSideloaded && (
                         <>
@@ -557,7 +561,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       isReparing ||
                       isMoving ||
                       isUninstalling ||
-                      notSupportedGame
+                      notSupportedGame ||
+                      isExtracting
                     }
                     autoFocus={true}
                     className={`button ${getButtonClass(is_installed)}`}
@@ -677,14 +682,18 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return `${t('status.moving', 'Moving Installation, please wait')} ...`
     }
 
+    if (isExtracting) {
+      return `${t('status.extracting', 'Extracting files')}...`
+    }
+
     const currentProgress =
       getProgress(progress) >= 99
         ? ''
         : `${
             percent && bytes
-              ? `${percent.toFixed(2)}% [${(Number(bytes) / 1000000).toFixed(
-                  0
-                )} MB]  ${eta ? `ETA: ${eta}` : ''}`
+              ? `${percent.toFixed(2)}% [${Number(bytes).toFixed(2)} MB]  ${
+                  eta ? `ETA: ${eta}` : ''
+                }`
               : '...'
           }`
 
@@ -751,6 +760,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
     }
     if (is_installed) {
       return t('submenu.settings')
+    }
+    if (isExtracting) {
+      return t('status.extracting', 'Extracting files')
     }
     if (isInstalling) {
       return t('button.queue.cancel', 'Cancel Download')

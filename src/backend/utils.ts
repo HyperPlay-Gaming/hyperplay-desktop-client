@@ -32,10 +32,17 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
+import {
+  appendFileSync,
+  createReadStream,
+  existsSync,
+  rmSync,
+  rm
+} from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
+import unzipper from 'unzipper'
 
 import {
   fixAsarPath,
@@ -77,6 +84,7 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
+import { clean } from 'easydl/dist/utils'
 
 const execAsync = promisify(exec)
 
@@ -1213,46 +1221,86 @@ export async function downloadFile(
   abortController: AbortController,
   progressCallback?: ProgressCallback
 ): Promise<void> {
+  let lastProgressUpdateTime = Date.now()
+  let lastBytesWritten = 0
+  let fileSize = 0
+
   try {
     const dl = new EasyDl(url, dest, {
       existBehavior: 'overwrite',
-      maxRetry: 3,
-      retryDelay: 3000,
-      reportInterval: 10000
-    })
+      maxRetry: 10,
+      retryDelay: 1000,
+      connections: 1,
+      chunkSize: 1024 * 1024 * 10
+    }).start()
 
-    logInfo(`Downloading ${url} with EasyDL`, LogPrefix.HyperPlay)
+    dl.on('metadata', (metadata) => {
+      fileSize = metadata.size
+    })
 
     abortController.signal.addEventListener('abort', () => {
       dl.destroy()
     })
+    const throttledProgressCallback = throttle(
+      (
+        bytes: number,
+        speed: number,
+        writingSpeed: number,
+        percentage: number
+      ) => {
+        if (progressCallback) {
+          logInfo(
+            `Downloaded: ${bytesToSize(bytes)} / ${bytesToSize(
+              fileSize
+            )}  @${bytesToSize(speed)}/s (${percentage.toFixed(2)}%)`,
+            LogPrefix.HyperPlay
+          )
+          progressCallback(bytes, speed, writingSpeed, percentage)
+        }
+      },
+      1000
+    ) // Throttle progress reporting to 1 second
 
     dl.on('progress', ({ total }) => {
-      if (progressCallback) {
-        progressCallback(
-          total.bytes || 0,
-          total.speed || 0,
-          total.speed || 0,
-          total.percentage || 0
-        )
+      const { bytes = 0, speed = 0, percentage = 0 } = total
+      const currentTime = Date.now()
+      const timeElapsed = currentTime - lastProgressUpdateTime
+
+      if (timeElapsed >= 1000) {
+        const bytesWrittenSinceLastUpdate = bytes - lastBytesWritten
+        const writingSpeed = bytesWrittenSinceLastUpdate / (timeElapsed / 1000) // Bytes per second
+
+        throttledProgressCallback(bytes, speed, writingSpeed, percentage)
+
+        lastProgressUpdateTime = currentTime
+        lastBytesWritten = bytes
       }
     })
 
     dl.on('error', function (error) {
-      logError(`Error: ${error}`, LogPrefix.Backend)
+      logError(`Downloader: Error: ${error}`, LogPrefix.DownloadManager)
       throw error
     })
 
     const downloaded = await dl.wait()
 
     if (!downloaded) {
-      logWarning(`File ${url} not downloaded`, LogPrefix.Backend)
+      logWarning(
+        `: Downloader: File ${url} not downloaded`,
+        LogPrefix.DownloadManager
+      )
       throw new Error('Download incomplete')
     }
 
-    logInfo(`Finished downloading ${url}`, LogPrefix.Backend)
+    logInfo(
+      `Downloader: Finished downloading ${url}`,
+      LogPrefix.DownloadManager
+    )
   } catch (err) {
-    logError(`Download Failed with: ${err}`, LogPrefix.Backend)
+    logError(
+      `Downloader: Download Failed with: ${err}`,
+      LogPrefix.DownloadManager
+    )
     throw new Error('Download failed')
   }
 }
@@ -1277,6 +1325,85 @@ function removeFolder(path: string, folderName: string) {
     }, 2000)
   }
   return
+}
+
+export async function extractZip(zipFile: string, destinationPath: string) {
+  return (
+    //.promise() resolves correctly when destination file is created
+    //.on('finish', resolve) resolves before the destination is created
+    createReadStream(zipFile)
+      .pipe(unzipper.Extract({ path: destinationPath }))
+      .promise()
+      .finally(() => {
+        logInfo('Cleaning temporary files...', LogPrefix.Backend)
+
+        //async rm so clean is called even if this fails
+        rm(zipFile, () => {
+          logInfo('Removed zip file')
+        })
+
+        clean(zipFile).catch((err) => {
+          logError(
+            `EasyDL could not clean ${zipFile} Error: ${err}`,
+            LogPrefix.Backend
+          )
+        })
+      })
+  )
+}
+
+export function calculateEta(
+  downloadedBytes: number,
+  downloadSpeed: number,
+  downloadSize: number,
+  lastProgressTime: number = Date.now()
+): string | null {
+  // Calculate the remaining seconds
+  const remainingBytes = downloadSize - downloadedBytes
+  const elapsedSeconds = (Date.now() - lastProgressTime) / 1000
+  const remainingSeconds = remainingBytes / downloadSpeed - elapsedSeconds
+
+  // Check if the download has completed or failed
+  if (remainingSeconds <= 0) {
+    return '00:00:00'
+  } else if (!isFinite(remainingSeconds)) {
+    return null
+  }
+
+  // Format the remaining seconds as "hh:mm:ss"
+  const eta = formatTime(Math.floor(remainingSeconds))
+  return eta
+}
+
+function formatTime(seconds: number): string {
+  const hours = Math.floor(seconds / 3600)
+  const minutes = Math.floor((seconds - hours * 3600) / 60)
+  const remainingSeconds = seconds - hours * 3600 - minutes * 60
+  return `${hours.toString().padStart(2, '0')}:${minutes
+    .toString()
+    .padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function throttle<T extends (...args: any[]) => any>(
+  callback: T,
+  limit: number
+): (...args: Parameters<T>) => void {
+  let lastCall = 0
+  return (...args: Parameters<T>) => {
+    const now = Date.now()
+    if (now - lastCall >= limit) {
+      lastCall = now
+      callback(...args)
+    }
+  }
+}
+
+export function bytesToSize(bytes: number) {
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
+  if (bytes === 0) return `0 ${sizes[0]}`
+  const i = Math.floor(Math.log(bytes) / Math.log(1024))
+  return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`
 }
 
 export {
