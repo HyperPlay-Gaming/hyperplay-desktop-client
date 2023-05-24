@@ -1220,6 +1220,18 @@ export interface ProgressCallback {
   ): void
 }
 
+/**
+ * Downloads a file from a given URL to a specified destination path.
+ * If there is cache on the CDN it will use 5 connections so the download will be faster.
+ * If there is no cache on the CDN it will use 1 connection, otherwise the download might fail to start.
+ *
+ * @param {string} url - The URL of the file to download.
+ * @param {string} dest - The destination path to save the downloaded file.
+ * @param {AbortController} abortController - The AbortController instance to cancel the download.
+ * @param {ProgressCallback} [progressCallback] - An optional callback function to track the download progress.
+ * @returns {Promise<void>} - A Promise that resolves when the download is complete.
+ * @throws {Error} - If the download fails or is incomplete.
+ */
 export async function downloadFile(
   url: string,
   dest: string,
@@ -1230,21 +1242,41 @@ export async function downloadFile(
   let lastBytesWritten = 0
   let fileSize = 0
 
+  let connections = 1
+  try {
+    const response = await axios.head(url)
+    const cdnCache = response.headers['cdn-cache']
+    const isCached = cdnCache === 'HIT' || cdnCache === 'STALE'
+    if (isCached) {
+      connections = 5
+    }
+    fileSize = parseInt(response.headers['content-length'], 10)
+  } catch (err) {
+    logError(
+      `Downloader: Failed to get headers for ${url}`,
+      LogPrefix.DownloadManager
+    )
+    throw new Error('Failed to get headers')
+  }
+
   try {
     const dl = new EasyDl(url, dest, {
       existBehavior: 'overwrite',
-      maxRetry: 10,
-      retryDelay: 1000,
-      chunkSize: 1024 * 1024 * 10
+      connections
     }).start()
-
-    dl.on('metadata', (metadata) => {
-      fileSize = metadata.size
-    })
 
     abortController.signal.addEventListener('abort', () => {
       dl.destroy()
     })
+
+    dl.on('error', (error) => {
+      logError(error, LogPrefix.HyperPlay)
+    })
+
+    dl.on('retry', (retry) => {
+      logInfo(`Retrying download: ${retry}`, LogPrefix.HyperPlay)
+    })
+
     const throttledProgressCallback = throttle(
       (
         bytes: number,
@@ -1281,16 +1313,11 @@ export async function downloadFile(
       }
     })
 
-    dl.on('error', function (error) {
-      logError(`Downloader: Error: ${error}`, LogPrefix.DownloadManager)
-      throw error
-    })
-
     const downloaded = await dl.wait()
 
     if (!downloaded) {
       logWarning(
-        `: Downloader: File ${url} not downloaded`,
+        `Downloader: Download stopped or paused`,
         LogPrefix.DownloadManager
       )
       throw new Error('Download incomplete')
