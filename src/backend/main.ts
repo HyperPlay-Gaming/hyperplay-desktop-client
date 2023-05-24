@@ -1869,3 +1869,8 @@ function watchLibraryChanges() {
     sendFrontendMessage('onLibraryChanged', 'hyperplay', newValue)
   )
 }
+
+ipcMain.on('openGameInEpicStore', async (_e, url) => {
+  if (url.startsWith('https://store.epicgames.com/'))
+    sendFrontendMessage('navToEpicAndOpenGame', url)
+})

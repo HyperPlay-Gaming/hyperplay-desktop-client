@@ -27,6 +27,7 @@ import { observer } from 'mobx-react-lite'
 import TransactionNotification from './screens/TransactionNotification'
 import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
 import SettingsModal from './screens/Settings/components/SettingsModal'
+import StoreNavHandler from './StoreNavHandler'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -41,6 +42,7 @@ function App() {
           <ExtensionManager />
           <DialogHandler />
           <ExternalLinkDialog />
+          <StoreNavHandler />
           {isSettingsModalOpen.gameInfo && (
             <SettingsModal
               gameInfo={isSettingsModalOpen.gameInfo}

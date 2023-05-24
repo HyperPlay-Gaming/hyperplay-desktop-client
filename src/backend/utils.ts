@@ -628,6 +628,11 @@ const formatEpicStoreUrl = (title: string) => {
   return `${storeUrl}${cleanTitle(title)}`
 }
 
+const getTitleFromEpicStoreUrl = (url: string) => {
+  const urlTest = new URL(url)
+  return urlTest.pathname.split('/')[3]
+}
+
 function quoteIfNecessary(stringToQuote: string) {
   const shouldQuote =
     typeof stringToQuote === 'string' &&
@@ -1437,6 +1442,7 @@ export {
   getFileSize,
   getLegendaryVersion,
   getGogdlVersion,
+  getTitleFromEpicStoreUrl,
   removeFolder,
   shutdownWine
 }

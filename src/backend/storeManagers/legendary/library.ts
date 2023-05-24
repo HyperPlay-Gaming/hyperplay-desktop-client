@@ -41,6 +41,7 @@ import { callRunner } from '../../launcher'
 import { dirname, join } from 'path'
 import { isOnline } from '../../online_monitor'
 import { update } from './games'
+import { epicTitleToHpGameInfoMap } from '../hyperplay/utils'
 
 const allGames: Set<string> = new Set()
 let installedGames: Map<string, InstalledJsonMetadata> = new Map()
@@ -534,11 +535,42 @@ function loadFile(fileName: string): boolean {
 
   const convertedSize = install_size ? getFileSize(Number(install_size)) : '0'
 
+  //check if game is also listed in hp
+  /* eslint-disable @typescript-eslint/no-unused-vars*/
+  const {
+    app_name: hp_app_name,
+    art_cover: hp_art_cover,
+    art_square: hp_art_square,
+    install: hp_install,
+    is_installed: hp_is_installed,
+    title: hp_title,
+    canRunOffline: hp_canRunOffline,
+    runner: hp_runner,
+    ...hpGameInfoToMerge
+  } = epicTitleToHpGameInfoMap[title.toLowerCase()]
+    ? epicTitleToHpGameInfoMap[title.toLowerCase()]
+    : {
+        app_name: '',
+        art_cover: '',
+        art_square: '',
+        install: {},
+        is_installed: false,
+        title: '',
+        canRunOffline: false,
+        runner: 'hyperplay'
+      }
+  /* eslint-enable @typescript-eslint/no-unused-vars*/
+
   library.set(app_name, {
     app_name,
-    art_cover: art_cover || art_square || fallBackImage,
+    art_cover: art_cover || art_square || hp_art_cover || fallBackImage,
     art_logo,
-    art_square: art_square || art_square_front || art_cover || fallBackImage,
+    art_square:
+      art_square ||
+      art_square_front ||
+      art_cover ||
+      hp_art_square ||
+      fallBackImage,
     cloud_save_enabled: Boolean(saveFolder),
     developer,
     extra: {
@@ -570,7 +602,8 @@ function loadFile(fileName: string): boolean {
     thirdPartyManagedApp,
     is_linux_native: false,
     runner: 'legendary',
-    store_url: formatEpicStoreUrl(title)
+    store_url: formatEpicStoreUrl(title),
+    ...hpGameInfoToMerge
   })
 
   return true
@@ -584,12 +617,12 @@ function loadFile(fileName: string): boolean {
 async function loadAll(): Promise<string[]> {
   if (existsSync(legendaryMetadata)) {
     const loadedFiles: string[] = []
-    allGames.forEach((appName) => {
+    for (const appName of allGames) {
       const wasLoaded = loadFile(appName + '.json')
       if (wasLoaded) {
         loadedFiles.push(appName)
       }
-    })
+    }
     return loadedFiles
   }
   return []
