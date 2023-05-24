@@ -16,14 +16,7 @@ HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, Node
       - [Other Distributions (TAR.XZ)](#other-distributions-tarxz)
     - [Windows](#windows)
     - [macOS](#macos)
-  - [Development environment](#development-environment)
-    - [Building Heroic Binaries](#building-heroic-binaries)
-    - [Building with VS Code](#building-with-vs-code)
-    - [Quickly testing/debugging Heroic on your own system](#quickly-testingdebugging-heroic-on-your-own-system)
-    - [Development Using a Container](#development-using-a-container)
   - [Testing with Docker](#testing-with-docker)
-  - [Sponsors](#sponsors)
-  - [Screenshots](#screenshots)
   - [Credits](#credits)
 
 ## Supported Operating Systems
