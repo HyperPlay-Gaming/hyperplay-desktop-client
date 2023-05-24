@@ -54,10 +54,12 @@ async function installQueueElement(params: InstallParams): Promise<{
     }
   })
 
+  const startingStatus = runner === 'hyperplay' ? 'preparing' : 'installing'
+
   sendFrontendMessage('gameStatusUpdate', {
     appName,
     runner,
-    status: 'installing',
+    status: startingStatus,
     folder: path
   })
 

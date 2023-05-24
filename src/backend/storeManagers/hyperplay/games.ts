@@ -197,6 +197,7 @@ async function downloadGame(
   destinationPath: string
 ): Promise<void> {
   const appInfo = getGameInfo(appName)
+  let downloadStarted = false
 
   if (!appInfo || !appInfo.releaseMeta) {
     throw new Error('App not found in library')
@@ -226,6 +227,16 @@ async function downloadGame(
           downloadSpeed,
           platformInfo.downloadSize
         )
+
+        if (downloadedBytes > 0 && !downloadStarted) {
+          downloadStarted = true
+          sendFrontendMessage('gameStatusUpdate', {
+            appName,
+            status: 'installing',
+            runner: 'hyperplay',
+            folder: destinationPath
+          })
+        }
 
         window.webContents.send(`progressUpdate-${appName}`, {
           appName,
