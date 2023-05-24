@@ -618,7 +618,7 @@ async function loadAll(): Promise<string[]> {
   if (existsSync(legendaryMetadata)) {
     const loadedFiles: string[] = []
     for (const appName of allGames) {
-      const wasLoaded = await loadFile(appName + '.json')
+      const wasLoaded = loadFile(appName + '.json')
       if (wasLoaded) {
         loadedFiles.push(appName)
       }
