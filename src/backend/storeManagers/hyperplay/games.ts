@@ -175,6 +175,10 @@ export async function importGame(
 const installDistributables = async (gamePath: string) => {
   const distFolder = path.join(gamePath, 'dist')
   if (!existsSync(distFolder)) {
+    logWarning(
+      `Tried to install distributables from ${distFolder} but folder does not exist!`,
+      LogPrefix.HyperPlay
+    )
     return
   }
 

@@ -36,7 +36,8 @@ import {
   appendFileSync,
   createReadStream,
   existsSync,
-  rmSync
+  rmSync,
+  rm
 } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
@@ -1327,16 +1328,28 @@ function removeFolder(path: string, folderName: string) {
 }
 
 export async function extractZip(zipFile: string, destinationPath: string) {
-  return new Promise((resolve, reject) => {
+  return (
+    //.promise() resolves correctly when destination file is created
+    //.on('finish', resolve) resolves before the destination is created
     createReadStream(zipFile)
       .pipe(unzipper.Extract({ path: destinationPath }))
-      .on('error', (err) => reject(err))
-      .on('finish', () => resolve('file unzipped'))
-  }).finally(() => {
-    logInfo('Cleaning temporary files...', LogPrefix.Backend)
-    rmSync(zipFile)
-    clean(zipFile)
-  })
+      .promise()
+      .finally(() => {
+        logInfo('Cleaning temporary files...', LogPrefix.Backend)
+
+        //async rm so clean is called even if this fails
+        rm(zipFile, () => {
+          logInfo('Removed zip file')
+        })
+
+        clean(zipFile).catch((err) => {
+          logError(
+            `EasyDL could not clean ${zipFile} Error: ${err}`,
+            LogPrefix.Backend
+          )
+        })
+      })
+  )
 }
 
 export function calculateEta(
@@ -1388,7 +1401,7 @@ function throttle<T extends (...args: any[]) => any>(
 
 export function bytesToSize(bytes: number) {
   const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-  if (bytes === 0) return '0 Byte'
+  if (bytes === 0) return `0 ${sizes[0]}`
   const i = Math.floor(Math.log(bytes) / Math.log(1024))
   return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`
 }
