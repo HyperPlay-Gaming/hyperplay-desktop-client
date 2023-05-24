@@ -118,6 +118,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const isSyncing = status === 'syncing-saves'
   const isPaused = status === 'paused'
   const isExtracting = status === 'extracting'
+  const isPreparing = status === 'preparing'
   const notAvailable = !gameAvailable && gameInfo.is_installed
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
@@ -650,6 +651,10 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return t('status.paused', 'Paused')
     }
 
+    if (isPreparing) {
+      return t('status.preparing', 'Preparing Download, please wait')
+    }
+
     if (notSupportedGame) {
       return t(
         'status.this-game-uses-third-party',
@@ -764,7 +769,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     if (isExtracting) {
       return t('status.extracting', 'Extracting files')
     }
-    if (isInstalling) {
+    if (isInstalling || isPreparing) {
       return t('button.queue.cancel', 'Cancel Download')
     }
     return t('button.install')
