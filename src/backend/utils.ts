@@ -1235,7 +1235,6 @@ export async function downloadFile(
       existBehavior: 'overwrite',
       maxRetry: 10,
       retryDelay: 1000,
-      connections: 1,
       chunkSize: 1024 * 1024 * 10
     }).start()
 
