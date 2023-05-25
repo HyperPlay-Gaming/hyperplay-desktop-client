@@ -91,7 +91,7 @@ function Settings() {
             'settings.copyToClipboard',
             'Copy All Settings to Clipboard'
           ),
-          onclick: async () =>
+          onClick: async () =>
             window.api.clipboardWriteText(
               JSON.stringify({ appName, title, ...currentConfig })
             ),
@@ -99,7 +99,7 @@ function Settings() {
         },
         {
           label: t('settings.open-config-file', 'Open Config File'),
-          onclick: () => window.api.showConfigFileInFolder(appName),
+          onClick: () => window.api.showConfigFileInFolder(appName),
           show: !isLogSettings
         }
       ]}

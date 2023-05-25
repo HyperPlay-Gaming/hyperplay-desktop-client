@@ -1215,10 +1215,10 @@
     node-addon-api "^4.1.0"
     node-gyp "^9.3.1"
 
-"@hyperplay/ui@0.1.0-alpha.29":
-  version "0.1.0-alpha.29"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.0-alpha.29.tgz#d77e727e451ec959b3835e9b6411fb8ea6fe35f2"
-  integrity sha512-COJ+4B2KG0+tzOxqFmMgj2OU2b/fsE9czJxpRirCm/UjGyjN3xLYX+hQmHVF8Y2Fxnjwm6Asa7rboGw/oyKy5g==
+"@hyperplay/ui@0.1.0-alpha.31":
+  version "0.1.0-alpha.31"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.0-alpha.31.tgz#2ae2bb7bd00b398ca8460d93abff9bd6af8aa190"
+  integrity sha512-VNbRCvY2ZnesQc59Vtr4KvpkaEPNDxTzswZ1fkeNVVQQXGpEvlErHRSWd3SntFTeTOW500WgJzB+4WivlIv5DQ==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
