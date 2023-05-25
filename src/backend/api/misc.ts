@@ -145,3 +145,12 @@ export const storeGet = (
 
 export const getWikiGameInfo = async (title: string, id?: string) =>
   ipcRenderer.invoke('getWikiGameInfo', title, id)
+
+export const handleNavToEpicAndOpen = (
+  onMessage: (e: Electron.IpcRendererEvent, url: string) => void
+): (() => void) => {
+  ipcRenderer.on('navToEpicAndOpenGame', onMessage)
+  return () => {
+    ipcRenderer.removeListener('navToEpicAndOpenGame', onMessage)
+  }
+}

@@ -50,3 +50,9 @@ input[type='range'] {
 .Accessibility h1.headerTitle {
   margin-left: 0px;
 }
+
+.rangeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

@@ -31,6 +31,7 @@ export function getCardStatus(
   const notSupportedGame = status === 'notSupportedGame'
   const syncingSaves = status === 'syncing-saves'
   const isPaused = status === 'paused'
+  const isPreparing = status === 'preparing'
 
   const haveStatus =
     isMoving ||
@@ -44,7 +45,9 @@ export function getCardStatus(
     isPlaying ||
     syncingSaves ||
     (isInstalled && layout !== 'grid') ||
-    isPaused
+    isPaused ||
+    isPreparing
+
   return {
     isInstalling,
     notSupportedGame,
@@ -54,6 +57,7 @@ export function getCardStatus(
     notAvailable,
     isUpdating,
     isPaused,
+    isPreparing,
     haveStatus
   }
 }

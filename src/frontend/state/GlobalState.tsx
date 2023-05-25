@@ -581,7 +581,11 @@ class GlobalState extends PureComponent<Props> {
     )
 
     // in these cases we just add the new status
-    if (['installing', 'updating', 'playing', 'extracting'].includes(status)) {
+    if (
+      ['installing', 'updating', 'playing', 'extracting', 'preparing'].includes(
+        status
+      )
+    ) {
       currentApp.status = status
       newLibraryStatus.push(currentApp)
       this.setState({ libraryStatus: newLibraryStatus })
