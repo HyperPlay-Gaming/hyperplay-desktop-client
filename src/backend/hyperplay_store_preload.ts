@@ -12,5 +12,7 @@ contextBridge.exposeInMainWorld('api', {
   isHidden: async (gameId: string) =>
     ipcRenderer.invoke('isGameHidden', gameId),
   unhide: async (gameId: string) => ipcRenderer.invoke('unhideGame', gameId),
-  openExternalUrl: (url: string) => ipcRenderer.send('openExternalUrl', url)
+  openExternalUrl: (url: string) => ipcRenderer.send('openExternalUrl', url),
+  openGameInEpicStore: (url: string) =>
+    ipcRenderer.send('openGameInEpicStore', url)
 })

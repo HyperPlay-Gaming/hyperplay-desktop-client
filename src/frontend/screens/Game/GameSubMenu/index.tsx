@@ -216,6 +216,8 @@ export default function GamesSubmenu({
     return <CircularProgress className="link button is-text is-link" />
   }
 
+  const isHyperPlayGame = runner === 'hyperplay'
+
   return (
     <>
       <div className="gameTools subMenuContainer">
@@ -257,7 +259,7 @@ export default function GamesSubmenu({
                     : t('submenu.addToSteam', 'Add to Steam')}
                 </button>
               )}
-              {!isSideloaded && (
+              {!isSideloaded && !isHyperPlayGame && (
                 <button
                   onClick={async () => handleUpdate()}
                   className="link button is-text is-link"
@@ -266,7 +268,7 @@ export default function GamesSubmenu({
                   {t('button.force_update', 'Force Update if Available')}
                 </button>
               )}
-              {!isSideloaded && (
+              {!isSideloaded && !isHyperPlayGame && (
                 <button
                   onClick={async () => handleMoveInstall()}
                   className="link button is-text is-link"
@@ -274,7 +276,7 @@ export default function GamesSubmenu({
                   {t('submenu.move', 'Move Game')}
                 </button>
               )}{' '}
-              {!isSideloaded && (
+              {!isSideloaded && !isHyperPlayGame && (
                 <button
                   onClick={async () => handleChangeInstall()}
                   className="link button is-text is-link"
@@ -282,7 +284,7 @@ export default function GamesSubmenu({
                   {t('submenu.change', 'Change Install Location')}
                 </button>
               )}{' '}
-              {!isSideloaded && (
+              {!isSideloaded && !isHyperPlayGame && (
                 <button
                   onClick={async () => handleRepair(appName)}
                   className="link button is-text is-link"
@@ -322,7 +324,7 @@ export default function GamesSubmenu({
               {t('submenu.protondb', 'Check Compatibility')}
             </button>
           )}
-          {!isSideloaded && (
+          {!isSideloaded && !isHyperPlayGame && (
             <button
               onClick={() => setShowExtraInfo(true)}
               className="link button is-text is-link"

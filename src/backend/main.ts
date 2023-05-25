@@ -105,7 +105,6 @@ import {
 import { handleProtocol } from './protocol'
 import {
   logChangedSetting,
-  logDebug,
   logError,
   logInfo,
   LogPrefix,
@@ -592,7 +591,6 @@ ipcMain.handle('checkDiskSpace', async (event, folder) => {
         message: `${getFileSize(free)} / ${getFileSize(diskSize)}`,
         validPath: !writeError
       }
-      logDebug(`${JSON.stringify(ret)}`, LogPrefix.Backend)
       res(ret)
     })
   })
@@ -1871,3 +1869,8 @@ function watchLibraryChanges() {
     sendFrontendMessage('onLibraryChanged', 'hyperplay', newValue)
   )
 }
+
+ipcMain.on('openGameInEpicStore', async (_e, url) => {
+  if (url.startsWith('https://store.epicgames.com/'))
+    sendFrontendMessage('navToEpicAndOpenGame', url)
+})

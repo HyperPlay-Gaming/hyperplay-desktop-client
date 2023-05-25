@@ -17,7 +17,9 @@ import {
   downloadFile,
   spawnAsync,
   killPattern,
-  shutdownWine
+  shutdownWine,
+  extractZip,
+  calculateEta
 } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
@@ -173,6 +175,10 @@ export async function importGame(
 const installDistributables = async (gamePath: string) => {
   const distFolder = path.join(gamePath, 'dist')
   if (!existsSync(distFolder)) {
+    logWarning(
+      `Tried to install distributables from ${distFolder} but folder does not exist!`,
+      LogPrefix.HyperPlay
+    )
     return
   }
 
@@ -191,6 +197,7 @@ async function downloadGame(
   destinationPath: string
 ): Promise<void> {
   const appInfo = getGameInfo(appName)
+  let downloadStarted = false
 
   if (!appInfo || !appInfo.releaseMeta) {
     throw new Error('App not found in library')
@@ -215,9 +222,21 @@ async function downloadGame(
       downloadPath,
       createAbortController(appName),
       (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
-        // convert speed to Mb/s
-        downloadSpeed = Math.round(downloadSpeed / 1000000)
-        diskWriteSpeed = Math.round(diskWriteSpeed / 1000000)
+        const eta = calculateEta(
+          downloadedBytes,
+          downloadSpeed,
+          platformInfo.downloadSize
+        )
+
+        if (downloadedBytes > 0 && !downloadStarted) {
+          downloadStarted = true
+          sendFrontendMessage('gameStatusUpdate', {
+            appName,
+            status: 'installing',
+            runner: 'hyperplay',
+            folder: destinationPath
+          })
+        }
 
         window.webContents.send(`progressUpdate-${appName}`, {
           appName,
@@ -226,10 +245,11 @@ async function downloadGame(
           folder: destinationPath,
           progress: {
             percent: progress,
-            diskSpeed: diskWriteSpeed,
-            downSpeed: downloadSpeed,
-            bytes: downloadedBytes,
-            folder: destinationPath
+            diskSpeed: diskWriteSpeed / 1024 / 1024,
+            downSpeed: downloadSpeed / 1024 / 1024,
+            bytes: downloadedBytes / 1024 / 1024,
+            folder: destinationPath,
+            eta
           }
         })
       }
@@ -264,19 +284,19 @@ export async function install(
 
   logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
 
+  const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
+  const platformInfo = releaseMeta.platforms[appPlatform]
+  const zipName = encodeURI(platformInfo.name)
+  const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
+
+  if (!existsSync(tempfolder)) {
+    mkdirSync(tempfolder, { recursive: true })
+  }
+
+  const zipFile = path.join(tempfolder, zipName)
+
   // download the zip file
   try {
-    const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
-    const platformInfo = releaseMeta.platforms[appPlatform]
-    const zipName = encodeURI(platformInfo.name)
-    const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
-
-    if (!existsSync(tempfolder)) {
-      mkdirSync(tempfolder, { recursive: true })
-    }
-
-    const zipFile = path.join(tempfolder, zipName)
-
     // prevent naming conflicts where two developers release games with the same name
     const sanitizedDestinationFolderName =
       developer !== undefined
@@ -300,33 +320,10 @@ export async function install(
       })
 
       if (isWindows) {
-        await spawnAsync('powershell', [
-          'Expand-Archive',
-          '-LiteralPath',
-          `"${zipFile}"`,
-          '-DestinationPath',
-          `"${destinationPath}"`
-        ])
-
+        await extractZip(zipFile, destinationPath)
         await installDistributables(destinationPath)
       } else {
-        // extract the zip file and overwrite existing files
-        const { code, stderr } = await spawnAsync('unzip', [
-          '-o',
-          zipFile,
-          '-d',
-          destinationPath
-        ])
-        if (code !== 0) {
-          rmSync(zipFile)
-          clean(zipFile)
-          throw new Error(stderr)
-        }
-      }
-      rmSync(zipFile)
-
-      if (isWindows) {
-        await installDistributables(destinationPath)
+        await extractZip(zipFile, destinationPath)
       }
 
       if (isMac && executable.endsWith('.app')) {
@@ -377,6 +374,8 @@ export async function install(
     return { status: 'done' }
   } catch (error) {
     logInfo('Error while downloading and extracting game', LogPrefix.HyperPlay)
+    rmSync(zipFile)
+    clean(zipFile)
     return {
       status: 'error',
       error: `${error}`
@@ -474,17 +473,19 @@ export async function removeShortcuts(appName: string): Promise<void> {
 }
 
 export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
-  logWarning(
-    `getExtraInfo not implemented on HyperPlay Game Manager. called for appName = ${appName}`
-  )
-  return {
-    about: {
-      description: '',
-      shortDescription: ''
-    },
-    reqs: [],
-    storeUrl: ''
+  const extraInfo = getGameInfo(appName).extra
+  if (!extraInfo) {
+    logWarning(`No extra info found for ${appName}`, LogPrefix.HyperPlay)
+    return {
+      about: {
+        description: '',
+        shortDescription: ''
+      },
+      reqs: [],
+      storeUrl: ''
+    }
   }
+  return extraInfo
 }
 
 export async function launch(
@@ -565,8 +566,5 @@ export async function syncSaves(
 }
 
 export async function forceUninstall(appName: string): Promise<void> {
-  logWarning(
-    `forceUninstall not implemented on HyperPlay Game Manager. Calling uninstall instead called for appName = ${appName}`
-  )
   await uninstall({ appName, shouldRemovePrefix: false })
 }
