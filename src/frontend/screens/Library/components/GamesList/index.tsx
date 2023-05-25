@@ -70,7 +70,6 @@ const GamesList = ({
               if (gameInfo.runner !== 'sideload')
                 handleGameCardClick(app_name, runner, gameInfo)
             }}
-            forceCard={layout === 'grid'}
             isRecent={isRecent}
             gameInfo={gameInfo}
             favorited={favouriteGameMap[app_name]}

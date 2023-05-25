@@ -22,13 +22,13 @@ import {
   GameCardState,
   SettingsButtons
 } from '@hyperplay/ui'
+import classNames from 'classnames'
 
 interface Card {
   buttonClick: () => void
   hasUpdate: boolean
   isRecent: boolean
   gameInfo: GameInfo
-  forceCard?: boolean
   favorited: boolean
 }
 
@@ -37,7 +37,6 @@ const storage: Storage = window.localStorage
 const GameCard = ({
   hasUpdate,
   buttonClick,
-  forceCard,
   isRecent = false,
   favorited,
   gameInfo: gameInfoFromProps
@@ -100,8 +99,7 @@ const GameCard = ({
     isPlaying,
     notAvailable,
     isUpdating,
-    isPaused,
-    haveStatus
+    isPaused
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {
@@ -289,7 +287,13 @@ const GameCard = ({
           onClose={() => setShowUninstallModal(false)}
         />
       )}
-      <Link to={`/gamepage/${runner}/${appName}`} state={{ gameInfo }}>
+      <Link
+        to={`/gamepage/${runner}/${appName}`}
+        state={{ gameInfo }}
+        className={classNames({
+          gamepad: activeController
+        })}
+      >
         <HpGameCard
           key={appName}
           title={gameInfo.title}
@@ -329,6 +333,9 @@ const GameCard = ({
           onUpdateClick={handleClickStopBubbling(async () => handleUpdate())}
           progress={progress}
           message={getMessage()}
+          actionDisabled={isLaunching}
+          alwaysShowInColor={allTilesInColor}
+          store={runner}
         />
       </Link>
     </>
