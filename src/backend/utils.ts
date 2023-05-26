@@ -16,6 +16,7 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import EasyDl from 'easydl'
+import yauzl from 'yauzl'
 
 import {
   app,
@@ -34,15 +35,15 @@ import {
 } from 'child_process'
 import {
   appendFileSync,
-  createReadStream,
   existsSync,
   rmSync,
+  mkdirSync,
+  createWriteStream,
   rm
 } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
-import unzipper from 'unzipper'
 
 import {
   fixAsarPath,
@@ -84,7 +85,6 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
-import { clean } from 'easydl/dist/utils'
 
 const execAsync = promisify(exec)
 
@@ -1244,7 +1244,7 @@ export async function downloadFile(
 
   let connections = 1
   try {
-    const response = await axios.head(url)
+    const response = await axios.head(encodeURI(url))
     const cdnCache = response.headers['cdn-cache']
     const isCached = cdnCache === 'HIT' || cdnCache === 'STALE'
     if (isCached) {
@@ -1253,7 +1253,7 @@ export async function downloadFile(
     fileSize = parseInt(response.headers['content-length'], 10)
   } catch (err) {
     logError(
-      `Downloader: Failed to get headers for ${url}`,
+      `Downloader: Failed to get headers for ${url}. \nError: ${err}`,
       LogPrefix.DownloadManager
     )
     throw new Error('Failed to get headers')
@@ -1359,28 +1359,53 @@ function removeFolder(path: string, folderName: string) {
 }
 
 export async function extractZip(zipFile: string, destinationPath: string) {
-  return (
-    //.promise() resolves correctly when destination file is created
-    //.on('finish', resolve) resolves before the destination is created
-    createReadStream(zipFile)
-      .pipe(unzipper.Extract({ path: destinationPath }))
-      .promise()
-      .finally(() => {
-        logInfo('Cleaning temporary files...', LogPrefix.Backend)
+  return new Promise<void>((resolve, reject) => {
+    yauzl.open(zipFile, { lazyEntries: true }, (err, zipfile) => {
+      if (err) {
+        reject(err)
+        return
+      }
 
-        //async rm so clean is called even if this fails
-        rm(zipFile, () => {
-          logInfo('Removed zip file')
-        })
-
-        clean(zipFile).catch((err) => {
-          logError(
-            `EasyDL could not clean ${zipFile} Error: ${err}`,
-            LogPrefix.Backend
+      zipfile.readEntry()
+      zipfile.on('entry', (entry) => {
+        if (/\/$/.test(entry.fileName)) {
+          // Directory file names end with '/'
+          mkdirSync(join(destinationPath, entry.fileName), { recursive: true })
+          zipfile.readEntry()
+        } else {
+          // Ensure parent directory exists
+          mkdirSync(
+            join(
+              destinationPath,
+              entry.fileName.split('/').slice(0, -1).join('/')
+            ),
+            { recursive: true }
           )
-        })
+
+          // Extract file
+          zipfile.openReadStream(entry, (err, readStream) => {
+            if (err) {
+              reject(err)
+              return
+            }
+
+            const writeStream = createWriteStream(
+              join(destinationPath, entry.fileName)
+            )
+            readStream.pipe(writeStream)
+            writeStream.on('close', () => {
+              zipfile.readEntry()
+            })
+          })
+        }
       })
-  )
+
+      zipfile.on('end', () => {
+        resolve()
+        rm(zipFile, console.log)
+      })
+    })
+  })
 }
 
 export function calculateEta(
