@@ -148,13 +148,17 @@ export async function refresh() {
       const gameData = data.find((val) => val._id === gameId)
 
       if (!gameData) {
+        logWarning(
+          `Could not find game with appId = ${gameId} in API, maybe this game was delisted`,
+          LogPrefix.HyperPlay
+        )
         throw new Error('GameId not find in API')
       }
 
       refreshHPGameInfo(gameId, gameData)
     } catch (err) {
       logError(
-        `Could not refresh HyperPlay Game with appId = ${gameId}`,
+        `Could not refresh HyperPlay Game with appId = ${gameId} due to ${err}}`,
         LogPrefix.HyperPlay
       )
     }
