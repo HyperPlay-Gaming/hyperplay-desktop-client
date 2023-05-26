@@ -44,6 +44,7 @@ import {
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
+import unzipper from 'unzipper'
 
 import {
   fixAsarPath,
@@ -85,6 +86,7 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
+import { clean } from 'easydl/dist/utils'
 
 const execAsync = promisify(exec)
 
@@ -1244,7 +1246,7 @@ export async function downloadFile(
 
   let connections = 1
   try {
-    const response = await axios.head(url)
+    const response = await axios.head(encodeURI(url))
     const cdnCache = response.headers['cdn-cache']
     const isCached = cdnCache === 'HIT' || cdnCache === 'STALE'
     if (isCached) {
@@ -1253,7 +1255,7 @@ export async function downloadFile(
     fileSize = parseInt(response.headers['content-length'], 10)
   } catch (err) {
     logError(
-      `Downloader: Failed to get headers for ${url}`,
+      `Downloader: Failed to get headers for ${url}. \nError: ${err}`,
       LogPrefix.DownloadManager
     )
     throw new Error('Failed to get headers')

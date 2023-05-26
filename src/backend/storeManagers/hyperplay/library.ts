@@ -22,6 +22,9 @@ export async function addGameToLibrary(appId: string) {
   })
 
   if (sameGameInLibrary !== undefined) {
+    logWarning(
+      `Cannot add game to library since game is already added to the library!`
+    )
     return
   }
 
