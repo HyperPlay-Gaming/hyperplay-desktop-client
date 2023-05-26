@@ -164,13 +164,16 @@ export default React.memo(function InstallModal({
     }
   }, [hasWine])
 
-  function platformSelection() {
-    const showPlatformSelection =
-      availablePlatforms.length > 1 || hpPlatforms.length > 1
+  useEffect(() => {
+    if (availablePlatforms.length === 1)
+      setPlatformToInstall(availablePlatforms[0].value as InstallPlatform)
+  }, [availablePlatforms])
 
-    if (!showPlatformSelection) {
+  function platformSelection() {
+    if (availablePlatforms.length <= 1) {
       return null
     }
+
     const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
     return (
       <SelectField
