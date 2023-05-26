@@ -206,8 +206,8 @@
     "systeminformation": "^5.15.0",
     "ts-prune": "^0.10.3",
     "tslib": "^2.4.0",
-    "unzipper": "^0.10.14",
-    "web3": "^1.7.5"
+    "web3": "^1.7.5",
+    "yauzl": "^2.10.0"
   },
   "scripts": {
     "start": "vite",
