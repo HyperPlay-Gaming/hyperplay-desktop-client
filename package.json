@@ -161,7 +161,6 @@
     "@types/jsdom": "^20.0.0",
     "@types/qrcode": "^1.5.0",
     "@types/react-blockies": "^1.4.1",
-    "@types/unzipper": "^0.10.6",
     "@walletconnect/web3-provider": "^1.8.0",
     "axios": "^0.26.1",
     "bn.js": "^5.2.1",
