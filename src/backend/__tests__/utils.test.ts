@@ -313,5 +313,3 @@ describe('backend/utils.ts', () => {
     })
   })
 })
-
-
