@@ -1,11 +1,13 @@
 import axios from 'axios'
 import { app } from 'electron'
+import { extractZip } from '../../backend/utils'
 import { logError } from '../logger/logger'
 import * as utils from '../utils'
 import { test_data } from './test_data/github-api-heroic-test-data.json'
 import path from 'path'
 import {
   copyFileSync,
+  createWriteStream,
   existsSync,
   readFileSync,
   rmSync,
@@ -303,5 +305,13 @@ describe('backend/utils.ts', () => {
       renameSync(testCopyZipPath, renamedZipFilePath)
       testCopyZipPath = renamedZipFilePath
     })
+
+    it('should throw an error if the zip file does not exist', async () => {
+      await expect(
+        extractZip('nonexistent.zip', destFilePath)
+      ).rejects.toThrow()
+    })
   })
 })
+
+
