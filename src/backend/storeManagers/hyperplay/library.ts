@@ -9,7 +9,7 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
-import { handleArchAndPlatform } from './utils'
+import { getGameInfoFromHpRelease, handleArchAndPlatform } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
 
 export async function addGameToLibrary(appId: string) {
@@ -22,6 +22,9 @@ export async function addGameToLibrary(appId: string) {
   })
 
   if (sameGameInLibrary !== undefined) {
+    logWarning(
+      `Cannot add game to library since game is already added to the library!`
+    )
     return
   }
 
@@ -30,52 +33,7 @@ export async function addGameToLibrary(appId: string) {
   )
 
   const data = res.data[0]
-
-  const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
-  const supportedPlatforms = Object.keys(data.releaseMeta.platforms)
-
-  const gameInfo: GameInfo = {
-    app_name: data._id,
-    extra: {
-      about: {
-        description: data.projectMeta.description,
-        shortDescription: data.projectMeta.short_description
-      },
-      reqs: [
-        {
-          minimum: JSON.stringify(data.projectMeta.systemRequirements),
-          recommended: JSON.stringify(data.projectMeta.systemRequirements),
-          title: data.projectMeta.name
-        }
-      ],
-      storeUrl: `https://store.hyperplay.xyz/game/${data.projectName}`
-    },
-    thirdPartyManagedApp: undefined,
-    web3: { supported: true },
-    runner: 'hyperplay',
-    title: data.projectMeta.name,
-    art_square: data.projectMeta.image || data.releaseMeta.image || 'fallback',
-    art_cover:
-      data.releaseMeta.image || data.projectMeta.main_capsule || 'fallback',
-    is_installed: Boolean(data.releaseMeta.platforms.web),
-    cloud_save_enabled: false,
-    namespace: '',
-    developer: data.accountMeta.name || data.accountName,
-    store_url: `https://store.hyperplay.xyz/game/${data.projectName}`,
-    folder_name: data.projectName,
-    save_folder: '',
-    is_mac_native: supportedPlatforms.some((val) => val.startsWith('darwin')),
-    is_linux_native: supportedPlatforms.some((val) => val.startsWith('linux')),
-    canRunOffline: false,
-    install: isWebGame ? { platform: 'web' } : {},
-    releaseMeta: data.releaseMeta,
-    version: data.releaseName
-  }
-
-  if (isWebGame) {
-    gameInfo.browserUrl = data.releaseMeta.platforms.web.external_url
-  }
-
+  const gameInfo = getGameInfoFromHpRelease(data)
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 }
 
@@ -193,13 +151,17 @@ export async function refresh() {
       const gameData = data.find((val) => val._id === gameId)
 
       if (!gameData) {
+        logWarning(
+          `Could not find game with appId = ${gameId} in API, maybe this game was delisted`,
+          LogPrefix.HyperPlay
+        )
         throw new Error('GameId not find in API')
       }
 
       refreshHPGameInfo(gameId, gameData)
     } catch (err) {
       logError(
-        `Could not refresh HyperPlay Game with appId = ${gameId}`,
+        `Could not refresh HyperPlay Game with appId = ${gameId} due to ${err}}`,
         LogPrefix.HyperPlay
       )
     }

@@ -16,6 +16,7 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import EasyDl from 'easydl'
+import yauzl from 'yauzl'
 
 import {
   app,
@@ -32,10 +33,18 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
+import {
+  appendFileSync,
+  existsSync,
+  rmSync,
+  mkdirSync,
+  createWriteStream,
+  rm
+} from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
+import unzipper from 'unzipper'
 
 import {
   fixAsarPath,
@@ -77,6 +86,7 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
+import { clean } from 'easydl/dist/utils'
 
 const execAsync = promisify(exec)
 
@@ -618,6 +628,11 @@ const cleanTitle = (title: string) =>
 const formatEpicStoreUrl = (title: string) => {
   const storeUrl = `https://www.epicgames.com/store/product/`
   return `${storeUrl}${cleanTitle(title)}`
+}
+
+const getTitleFromEpicStoreUrl = (url: string) => {
+  const urlTest = new URL(url)
+  return urlTest.pathname.split('/')[3]
 }
 
 function quoteIfNecessary(stringToQuote: string) {
@@ -1207,52 +1222,118 @@ export interface ProgressCallback {
   ): void
 }
 
+/**
+ * Downloads a file from a given URL to a specified destination path.
+ * If there is cache on the CDN it will use 5 connections so the download will be faster.
+ * If there is no cache on the CDN it will use 1 connection, otherwise the download might fail to start.
+ *
+ * @param {string} url - The URL of the file to download.
+ * @param {string} dest - The destination path to save the downloaded file.
+ * @param {AbortController} abortController - The AbortController instance to cancel the download.
+ * @param {ProgressCallback} [progressCallback] - An optional callback function to track the download progress.
+ * @returns {Promise<void>} - A Promise that resolves when the download is complete.
+ * @throws {Error} - If the download fails or is incomplete.
+ */
 export async function downloadFile(
   url: string,
   dest: string,
   abortController: AbortController,
   progressCallback?: ProgressCallback
 ): Promise<void> {
+  let lastProgressUpdateTime = Date.now()
+  let lastBytesWritten = 0
+  let fileSize = 0
+
+  let connections = 1
+  try {
+    const response = await axios.head(encodeURI(url))
+    const cdnCache = response.headers['cdn-cache']
+    const isCached = cdnCache === 'HIT' || cdnCache === 'STALE'
+    if (isCached) {
+      connections = 5
+    }
+    fileSize = parseInt(response.headers['content-length'], 10)
+  } catch (err) {
+    logError(
+      `Downloader: Failed to get headers for ${url}. \nError: ${err}`,
+      LogPrefix.DownloadManager
+    )
+    throw new Error('Failed to get headers')
+  }
+
   try {
     const dl = new EasyDl(url, dest, {
       existBehavior: 'overwrite',
-      maxRetry: 3,
-      retryDelay: 3000,
-      reportInterval: 10000
-    })
-
-    logInfo(`Downloading ${url} with EasyDL`, LogPrefix.HyperPlay)
+      connections
+    }).start()
 
     abortController.signal.addEventListener('abort', () => {
       dl.destroy()
     })
 
-    dl.on('progress', ({ total }) => {
-      if (progressCallback) {
-        progressCallback(
-          total.bytes || 0,
-          total.speed || 0,
-          total.speed || 0,
-          total.percentage || 0
-        )
-      }
+    dl.on('error', (error) => {
+      logError(error, LogPrefix.HyperPlay)
     })
 
-    dl.on('error', function (error) {
-      logError(`Error: ${error}`, LogPrefix.Backend)
-      throw error
+    dl.on('retry', (retry) => {
+      logInfo(`Retrying download: ${retry}`, LogPrefix.HyperPlay)
+    })
+
+    const throttledProgressCallback = throttle(
+      (
+        bytes: number,
+        speed: number,
+        writingSpeed: number,
+        percentage: number
+      ) => {
+        if (progressCallback) {
+          logInfo(
+            `Downloaded: ${bytesToSize(bytes)} / ${bytesToSize(
+              fileSize
+            )}  @${bytesToSize(speed)}/s (${percentage.toFixed(2)}%)`,
+            LogPrefix.HyperPlay
+          )
+          progressCallback(bytes, speed, writingSpeed, percentage)
+        }
+      },
+      1000
+    ) // Throttle progress reporting to 1 second
+
+    dl.on('progress', ({ total }) => {
+      const { bytes = 0, speed = 0, percentage = 0 } = total
+      const currentTime = Date.now()
+      const timeElapsed = currentTime - lastProgressUpdateTime
+
+      if (timeElapsed >= 1000) {
+        const bytesWrittenSinceLastUpdate = bytes - lastBytesWritten
+        const writingSpeed = bytesWrittenSinceLastUpdate / (timeElapsed / 1000) // Bytes per second
+
+        throttledProgressCallback(bytes, speed, writingSpeed, percentage)
+
+        lastProgressUpdateTime = currentTime
+        lastBytesWritten = bytes
+      }
     })
 
     const downloaded = await dl.wait()
 
     if (!downloaded) {
-      logWarning(`File ${url} not downloaded`, LogPrefix.Backend)
+      logWarning(
+        `Downloader: Download stopped or paused`,
+        LogPrefix.DownloadManager
+      )
       throw new Error('Download incomplete')
     }
 
-    logInfo(`Finished downloading ${url}`, LogPrefix.Backend)
+    logInfo(
+      `Downloader: Finished downloading ${url}`,
+      LogPrefix.DownloadManager
+    )
   } catch (err) {
-    logError(`Download Failed with: ${err}`, LogPrefix.Backend)
+    logError(
+      `Downloader: Download Failed with: ${err}`,
+      LogPrefix.DownloadManager
+    )
     throw new Error('Download failed')
   }
 }
@@ -1277,6 +1358,110 @@ function removeFolder(path: string, folderName: string) {
     }, 2000)
   }
   return
+}
+
+export async function extractZip(zipFile: string, destinationPath: string) {
+  return new Promise<void>((resolve, reject) => {
+    yauzl.open(zipFile, { lazyEntries: true }, (err, zipfile) => {
+      if (err) {
+        reject(err)
+        return
+      }
+
+      zipfile.readEntry()
+      zipfile.on('entry', (entry) => {
+        if (/\/$/.test(entry.fileName)) {
+          // Directory file names end with '/'
+          mkdirSync(join(destinationPath, entry.fileName), { recursive: true })
+          zipfile.readEntry()
+        } else {
+          // Ensure parent directory exists
+          mkdirSync(
+            join(
+              destinationPath,
+              entry.fileName.split('/').slice(0, -1).join('/')
+            ),
+            { recursive: true }
+          )
+
+          // Extract file
+          zipfile.openReadStream(entry, (err, readStream) => {
+            if (err) {
+              reject(err)
+              return
+            }
+
+            const writeStream = createWriteStream(
+              join(destinationPath, entry.fileName)
+            )
+            readStream.pipe(writeStream)
+            writeStream.on('close', () => {
+              zipfile.readEntry()
+            })
+          })
+        }
+      })
+
+      zipfile.on('end', () => {
+        resolve()
+        rm(zipFile, console.log)
+      })
+    })
+  })
+}
+
+export function calculateEta(
+  downloadedBytes: number,
+  downloadSpeed: number,
+  downloadSize: number,
+  lastProgressTime: number = Date.now()
+): string | null {
+  // Calculate the remaining seconds
+  const remainingBytes = downloadSize - downloadedBytes
+  const elapsedSeconds = (Date.now() - lastProgressTime) / 1000
+  const remainingSeconds = remainingBytes / downloadSpeed - elapsedSeconds
+
+  // Check if the download has completed or failed
+  if (remainingSeconds <= 0) {
+    return '00:00:00'
+  } else if (!isFinite(remainingSeconds)) {
+    return null
+  }
+
+  // Format the remaining seconds as "hh:mm:ss"
+  const eta = formatTime(Math.floor(remainingSeconds))
+  return eta
+}
+
+function formatTime(seconds: number): string {
+  const hours = Math.floor(seconds / 3600)
+  const minutes = Math.floor((seconds - hours * 3600) / 60)
+  const remainingSeconds = seconds - hours * 3600 - minutes * 60
+  return `${hours.toString().padStart(2, '0')}:${minutes
+    .toString()
+    .padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function throttle<T extends (...args: any[]) => any>(
+  callback: T,
+  limit: number
+): (...args: Parameters<T>) => void {
+  let lastCall = 0
+  return (...args: Parameters<T>) => {
+    const now = Date.now()
+    if (now - lastCall >= limit) {
+      lastCall = now
+      callback(...args)
+    }
+  }
+}
+
+export function bytesToSize(bytes: number) {
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
+  if (bytes === 0) return `0 ${sizes[0]}`
+  const i = Math.floor(Math.log(bytes) / Math.log(1024))
+  return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`
 }
 
 export {
@@ -1310,6 +1495,7 @@ export {
   getFileSize,
   getLegendaryVersion,
   getGogdlVersion,
+  getTitleFromEpicStoreUrl,
   removeFolder,
   shutdownWine
 }

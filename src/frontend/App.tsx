@@ -27,6 +27,7 @@ import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
 import SettingsModal from './screens/Settings/components/SettingsModal'
 import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
+import StoreNavHandler from './StoreNavHandler'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -42,6 +43,7 @@ function App() {
           <ExtensionManager />
           <DialogHandler />
           <ExternalLinkDialog />
+          <StoreNavHandler />
           {isSettingsModalOpen.gameInfo && (
             <SettingsModal
               gameInfo={isSettingsModalOpen.gameInfo}

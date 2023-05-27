@@ -1,10 +1,12 @@
 import {
   AppPlatforms,
+  GameInfo,
   HyperPlayRelease,
   HyperPlayReleaseMeta,
   InstallPlatform
 } from 'common/types'
 import axios from 'axios'
+import { getTitleFromEpicStoreUrl } from 'backend/utils'
 
 export async function getHyperPlayStoreRelease(appName: string) {
   const gameIdUrl = `https://developers.hyperplay.xyz/api/listings?id=${appName}`
@@ -67,17 +69,14 @@ export function handleArchAndPlatform(
 
 export function handlePlatformReversed(platform: string) {
   switch (platform) {
+    case 'windows_amd64':
     case 'windows_arm64':
       return 'Windows'
-    case 'linux_arm64':
-      return 'linux'
-    case 'darwin_arm64':
-      return 'Mac'
-    case 'windows_amd64':
-      return 'Windows'
     case 'linux_amd64':
-      return 'linux'
+    case 'linux_arm64':
+      return 'Linux'
     case 'darwin_amd64':
+    case 'darwin_arm64':
       return 'Mac'
     case 'web':
       return 'Browser'
@@ -88,3 +87,77 @@ export function handlePlatformReversed(platform: string) {
 
 export const macOSPlatforms = ['darwin', 'darwin_arm64', 'darwin_amd64']
 export const linuxPlatforms = ['linux', 'linux_arm64', 'linux_amd64']
+
+export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
+  const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
+  const supportedPlatforms = Object.keys(data.releaseMeta.platforms)
+
+  const gameInfo: GameInfo = {
+    app_name: data._id,
+    extra: {
+      about: {
+        description: data.projectMeta.description,
+        shortDescription: data.projectMeta.short_description
+      },
+      reqs: [
+        {
+          minimum: JSON.stringify(data.projectMeta.systemRequirements),
+          recommended: JSON.stringify(data.projectMeta.systemRequirements),
+          title: data.projectMeta.name
+        }
+      ],
+      storeUrl: `https://store.hyperplay.xyz/game/${data.projectName}`
+    },
+    thirdPartyManagedApp: undefined,
+    web3: { supported: true },
+    runner: 'hyperplay',
+    title: data.projectMeta.name,
+    art_square: data.projectMeta.image || data.releaseMeta.image || 'fallback',
+    art_cover:
+      data.releaseMeta.image || data.projectMeta.main_capsule || 'fallback',
+    is_installed: Boolean(data.releaseMeta.platforms.web),
+    cloud_save_enabled: false,
+    namespace: '',
+    developer: data.accountMeta.name || data.accountName,
+    store_url: `https://store.hyperplay.xyz/game/${data.projectName}`,
+    folder_name: data.projectName,
+    save_folder: '',
+    is_mac_native: supportedPlatforms.some((val) => val.startsWith('darwin')),
+    is_linux_native: supportedPlatforms.some((val) => val.startsWith('linux')),
+    canRunOffline: false,
+    install: isWebGame ? { platform: 'web' } : {},
+    releaseMeta: data.releaseMeta,
+    version: data.releaseName
+  }
+
+  if (isWebGame) {
+    gameInfo.browserUrl = data.releaseMeta.platforms.web.external_url
+  }
+  return gameInfo
+}
+
+interface EpicToHpMap {
+  [key: string]: GameInfo
+}
+export const epicTitleToHpGameInfoMap: EpicToHpMap = {}
+
+export async function loadEpicHyperPlayGameInfoMap() {
+  const res = await axios.get<HyperPlayRelease[]>(
+    `https://developers.hyperplay.xyz/api/listings`
+  )
+
+  for (const hpRelease of res.data) {
+    if (!hpRelease.projectMeta.epic_game_url) continue
+    try {
+      const epicTitle = getTitleFromEpicStoreUrl(
+        hpRelease.projectMeta.epic_game_url
+      )
+
+      epicTitleToHpGameInfoMap[epicTitle.toLowerCase()] =
+        getGameInfoFromHpRelease(hpRelease)
+    } catch (err) {
+      console.error('Error while creating epic hp map', err)
+      continue
+    }
+  }
+}

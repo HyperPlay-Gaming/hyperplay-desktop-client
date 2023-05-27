@@ -54,3 +54,9 @@ input[type='range'] {
 .zoomRangeLabel {
   display: block;
 }
+
+.rangeWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}

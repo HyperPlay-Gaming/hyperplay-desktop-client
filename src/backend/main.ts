@@ -107,7 +107,6 @@ import {
 import { handleProtocol } from './protocol'
 import {
   logChangedSetting,
-  logDebug,
   logError,
   logInfo,
   LogPrefix,
@@ -250,7 +249,7 @@ const prodAppUrl = `file://${path.join(
   '../build/index.html?view=App'
 )}`
 const loadMainWindowURL = function () {
-  if (!app.isPackaged) {
+  if (!app.isPackaged && process.env.CI !== 'e2e') {
     /* if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
       import('electron-devtools-installer').then((devtools) => {
         const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
@@ -608,7 +607,6 @@ ipcMain.handle('checkDiskSpace', async (event, folder) => {
         message: `${getFileSize(free)} / ${getFileSize(diskSize)}`,
         validPath: !writeError
       }
-      logDebug(`${JSON.stringify(ret)}`, LogPrefix.Backend)
       res(ret)
     })
   })
@@ -1893,3 +1891,8 @@ function watchLibraryChanges() {
     sendFrontendMessage('onLibraryChanged', 'hyperplay', newValue)
   )
 }
+
+ipcMain.on('openGameInEpicStore', async (_e, url) => {
+  if (url.startsWith('https://store.epicgames.com/'))
+    sendFrontendMessage('navToEpicAndOpenGame', url)
+})

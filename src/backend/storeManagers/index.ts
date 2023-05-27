@@ -15,6 +15,7 @@ import { addToQueue } from 'backend/downloadmanager/downloadqueue'
 import { DMQueueElement, GameInfo, Runner } from 'common/types'
 import { ipcMain } from 'electron'
 import { sendFrontendMessage } from 'backend/main_window'
+import { loadEpicHyperPlayGameInfoMap } from './hyperplay/utils'
 interface GameManagerMap {
   [key: string]: GameManager
 }
@@ -81,6 +82,7 @@ export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
 export async function initStoreManagers() {
   await LegendaryLibraryManager.initLegendaryLibraryManager()
   await GOGLibraryManager.refresh()
+  loadEpicHyperPlayGameInfoMap()
 }
 
 ipcMain.once('frontendReady', async () => {

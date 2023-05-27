@@ -1,10 +1,10 @@
-import { HyperPlayInstallInfo } from './../../common/types'
 import {
   GameInfo,
   InstallProgress,
   Runner,
   GameSettings,
-  InstallPlatform
+  InstallPlatform,
+  HyperPlayInstallInfo
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GogInstallInfo } from 'common/types/gog'
@@ -139,19 +139,16 @@ const getStoreName = (runner: Runner, other: string) => {
   }
 }
 
-export function handlePlatformReversed(platform: string) {
+export function getPlatformName(platform: string): string {
   switch (platform) {
+    case 'windows_amd64':
     case 'windows_arm64':
       return 'Windows'
-    case 'linux_arm64':
-      return 'linux'
-    case 'darwin_arm64':
-      return 'Mac'
-    case 'windows_amd64':
-      return 'Windows'
     case 'linux_amd64':
-      return 'linux'
+    case 'linux_arm64':
+      return 'Linux'
     case 'darwin_amd64':
+    case 'darwin_arm64':
       return 'Mac'
     case 'web':
       return 'Browser'

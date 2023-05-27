@@ -116,6 +116,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   changeTrayColor: () => void
   setSetting: (args: { appName: string; key: string; value: unknown }) => void
   optInStatusChanged: (optInStatus: MetricsOptInStatus) => void
+  openGameInEpicStore: (url: string) => void
   resumeCurrentDownload: () => void
   pauseCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
