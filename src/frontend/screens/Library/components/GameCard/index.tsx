@@ -141,7 +141,13 @@ const GameCard = ({
 
   const getMessage = (): string | undefined => {
     if (status === 'extracting') {
-      return 'Extracting...'
+      return t('hyperplay.gamecard.extracting', 'Extracting...')
+    }
+    if (isPaused) {
+      return t('hyperplay.gamecard.paused', 'Paused')
+    }
+    if (isInstalling) {
+      return t('hyperplay.gamecard.installing', 'Downloading...')
     }
     return undefined
   }
@@ -159,7 +165,7 @@ const GameCard = ({
   }
 
   const handleClickStopBubbling =
-    (callback: () => void) =>
+    (callback: () => void, isRightClick = false) =>
     (
       e:
         | React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -167,6 +173,9 @@ const GameCard = ({
     ) => {
       e.preventDefault()
       callback()
+      if (!isRightClick) {
+        setShowSettings(false)
+      }
     }
 
   interface Show {
@@ -327,8 +336,9 @@ const GameCard = ({
           onSettingsClick={handleClickStopBubbling(() =>
             setShowSettings(!showSettings)
           )}
-          onContextMenu={handleClickStopBubbling(() =>
-            setShowSettings(!showSettings)
+          onContextMenu={handleClickStopBubbling(
+            () => setShowSettings(!showSettings),
+            true
           )}
           onUpdateClick={handleClickStopBubbling(async () => handleUpdate())}
           progress={progress}
