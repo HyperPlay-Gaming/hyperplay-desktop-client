@@ -5,7 +5,7 @@ import './index.css'
 
 export interface Item {
   label: string
-  onclick: () => void
+  onClick: () => void
   show: boolean
 }
 
@@ -42,7 +42,14 @@ function ContextMenu({ children, items }: Props) {
   }
 
   return (
-    <div onContextMenu={handleContextMenu} style={{ cursor: 'context-menu' }}>
+    <div
+      onContextMenu={handleContextMenu}
+      style={{
+        cursor: 'context-menu',
+        display: 'inline-block',
+        width: 'fit-content'
+      }}
+    >
       {children}
       <Menu
         open={contextMenu !== null}
@@ -56,9 +63,9 @@ function ContextMenu({ children, items }: Props) {
         }
       >
         {items.map(
-          ({ label, onclick, show }, i) =>
+          ({ label, onClick, show }, i) =>
             show && (
-              <MenuItem key={i} onClick={() => handleClick(onclick)}>
+              <MenuItem key={i} onClick={() => handleClick(onClick)}>
                 {label}
               </MenuItem>
             )
