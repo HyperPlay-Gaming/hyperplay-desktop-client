@@ -333,8 +333,9 @@ const GameCard = ({
           state={getState()}
           settingsItems={items.filter((val) => val.show).slice(0, 6)}
           showSettings={showSettings}
-          onSettingsClick={handleClickStopBubbling(() =>
-            setShowSettings(!showSettings)
+          onSettingsClick={handleClickStopBubbling(
+            () => setShowSettings(!showSettings),
+            true
           )}
           onContextMenu={handleClickStopBubbling(
             () => setShowSettings(!showSettings),
