@@ -19,12 +19,13 @@ type InstallArgs = {
   isInstalling: boolean
   previousProgress: InstallProgress | null
   progress: InstallProgress
-  platformToInstall?: InstallPlatform
+  installDlcs?: Array<string> | boolean
   t: TFunction<'gamepage'>
-  installDlcs?: boolean
+  showDialogModal: (options: DialogModalOptions) => void
+  setInstallPath?: (path: string) => void
+  platformToInstall?: InstallPlatform
   sdlList?: Array<string>
   installLanguage?: string
-  showDialogModal: (options: DialogModalOptions) => void
   channelName?: string
 }
 

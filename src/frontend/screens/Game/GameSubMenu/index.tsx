@@ -23,6 +23,7 @@ interface Props {
   disableUpdate: boolean
   setShowExtraInfo: (show: boolean) => void
   onShowRequirements?: () => void
+  onShowDlcs?: () => void
 }
 
 export default function GamesSubmenu({
@@ -34,7 +35,8 @@ export default function GamesSubmenu({
   handleUpdate,
   disableUpdate,
   onShowRequirements,
-  setShowExtraInfo
+  setShowExtraInfo,
+  onShowDlcs
 }: Props) {
   const { refresh, platform, libraryStatus, showDialogModal } =
     useContext(ContextProvider)
@@ -217,6 +219,7 @@ export default function GamesSubmenu({
   }
 
   const isHyperPlayGame = runner === 'hyperplay'
+  const showDlcsItem = onShowDlcs && runner === 'legendary' && isInstalled
 
   return (
     <>
@@ -226,6 +229,7 @@ export default function GamesSubmenu({
             appName={appName}
             runner={runner}
             onClose={() => setShowUninstallModal(false)}
+            isDlc={false}
           />
         )}
         <div className={`submenu`}>
@@ -341,12 +345,12 @@ export default function GamesSubmenu({
               {t('game.requirements', 'Requirements')}
             </button>
           )}
-          {isInstalled && (
+          {showDlcsItem && (
             <button
-              onClick={async () => setShowUninstallModal(true)}
-              className="link button is-text is-link is-dangerous"
+              onClick={async () => onShowDlcs()}
+              className="link button is-text is-link"
             >
-              {t('button.uninstall')}
+              {t('game.dlcs', 'DLCs')}
             </button>
           )}
         </div>
