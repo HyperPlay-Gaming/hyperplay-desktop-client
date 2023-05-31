@@ -112,3 +112,7 @@ export const onLibraryChange = async (
     ipcRenderer.removeListener('onLibraryChanged', callback)
   }
 }
+export const getGameOverride = async () => ipcRenderer.invoke('getGameOverride')
+
+export const getGameSdl = async (appName: string) =>
+  ipcRenderer.invoke('getGameSdl', appName)

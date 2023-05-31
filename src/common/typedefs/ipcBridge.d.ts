@@ -33,7 +33,7 @@ import {
   GamepadActionArgs,
   ExtraInfo
 } from 'common/types'
-import { LegendaryInstallInfo } from 'common/types/legendary'
+import { LegendaryInstallInfo, SelectiveDownload } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
 import { PROVIDERS } from 'common/types/proxy-types'
 
@@ -340,6 +340,9 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   pathExists: (path: string) => Promise<boolean>
   getExtensionId: () => Promise<string>
   addGameToLibrary: (appName: string) => Promise<void>
+  getGOGLaunchOptions: (appName: string) => Promise<LaunchOption[]>
+  getGameOverride: () => Promise<GameOverride | null>
+  getGameSdl: (appName: string) => Promise<SelectiveDownload[]>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

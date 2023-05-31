@@ -113,10 +113,7 @@ import {
   LogPrefix,
   logWarning
 } from './logger/logger'
-import {
-  gameInfoStore,
-  libraryStore
-} from 'backend/storeManagers/legendary/electronStores'
+import { gameInfoStore } from 'backend/storeManagers/legendary/electronStores'
 import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
@@ -169,6 +166,13 @@ function initSentry() {
 if (metricsAreEnabled()) {
   initSentry()
 }
+
+import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
+import { addNewApp } from './storeManagers/sideload/library'
+import {
+  getGameOverride,
+  getGameSdl
+} from 'backend/storeManagers/legendary/library'
 
 app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
@@ -740,6 +744,8 @@ ipcMain.handle('getLegendaryVersion', async () => getLegendaryVersion())
 ipcMain.handle('getGogdlVersion', async () => getGogdlVersion())
 ipcMain.handle('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 ipcMain.handle('isFlatpak', () => isFlatpak)
+ipcMain.handle('getGameOverride', async () => getGameOverride())
+ipcMain.handle('getGameSdl', async (event, appName) => getGameSdl(appName))
 
 ipcMain.handle('getPlatform', () => process.platform)
 
@@ -1776,11 +1782,9 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
+
 import { metricsAreEnabled, trackEvent } from './metrics/metrics'
-import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
-import { addNewApp } from './storeManagers/sideload/library'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
-import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/electronStores'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
@@ -1864,12 +1868,6 @@ ipcMain.handle('unhideGame', async (_e, gameId) => {
 
 function watchLibraryChanges() {
   // workaround for https://github.com/sindresorhus/electron-store/issues/165
-  libraryStore.onDidChange('library', (newValue) =>
-    sendFrontendMessage('onLibraryChanged', 'legendary', newValue)
-  )
-  gogLibraryStore.onDidChange('games', (newValue) =>
-    sendFrontendMessage('onLibraryChanged', 'gog', newValue)
-  )
   sideloadLibraryStore.onDidChange('games', (newValue) =>
     sendFrontendMessage('onLibraryChanged', 'sideload', newValue)
   )
