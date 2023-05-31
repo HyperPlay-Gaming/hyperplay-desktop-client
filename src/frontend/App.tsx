@@ -51,7 +51,10 @@ function App() {
             />
           )}
           <Routes>
-            <Route path="/" element={<Navigate replace to="/library" />} />
+            <Route
+              path="/"
+              element={<Navigate replace to="/hyperplaystore" />}
+            />
             <Route path="/library" element={<Library />} />
             <Route path="login" element={<Login />} />
             <Route path="hyperplaystore" element={<WebView />} />
