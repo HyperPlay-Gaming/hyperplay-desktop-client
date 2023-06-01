@@ -54,7 +54,7 @@ const ScanScreen = (props: ScanScreenProps) => {
           style={{ width: '200px', margin: '0px auto var(--space-xs) auto' }}
           onClick={() => window.api.copyWalletConnectBaseURIToClipboard()}
         >
-          {t('hyperplay.copyBaseUri', 'Copy Base URI')}
+          {t('hyperplay.copyUrl', 'Copy URL')}
         </Button>
       ) : null}
       <div className={`body-sm ${ScanScreenStyles.walletWarning}`}>
