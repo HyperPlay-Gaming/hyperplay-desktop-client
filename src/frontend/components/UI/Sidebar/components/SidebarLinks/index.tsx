@@ -112,19 +112,23 @@ export default function SidebarLinks() {
         </div>
       </div>
 
-      <div className=" SidebarLinks Sidebar__section">
+      <div
+        className=" SidebarLinks Sidebar__section"
+        onClick={() => handleExternalLink(openDiscordLink)}
+      >
         <div className="sidebarLinkGradientWrapper">
           <div className="Sidebar__item">
-            <button onClick={() => handleExternalLink(openDiscordLink)}>
+            <button>
               <Images.Discord stroke={sidebarSvgUnselectedFill} />
             </button>
           </div>
         </div>
-        <div className="sidebarLinkGradientWrapper ">
+        <div
+          className="sidebarLinkGradientWrapper "
+          onClick={() => handleExternalLink(window.api.openTwitterLink)}
+        >
           <div className="Sidebar__item">
-            <button
-              onClick={() => handleExternalLink(window.api.openTwitterLink)}
-            >
+            <button>
               <Images.Twitter fill={sidebarSvgUnselectedFill} />
             </button>
           </div>
