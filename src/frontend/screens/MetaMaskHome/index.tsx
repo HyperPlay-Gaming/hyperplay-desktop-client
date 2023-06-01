@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import MetaMaskHomeStyles from './index.module.css'
 
-const MetaMaskHome = function () {
+interface MetaMaskHomeProps {
+  path?: string
+}
+
+const MetaMaskHome = function ({ path = 'home.html' }: MetaMaskHomeProps) {
   const [extId, setExtId] = useState('')
 
   useEffect(() => {
@@ -13,7 +17,7 @@ const MetaMaskHome = function () {
       <div className={MetaMaskHomeStyles.homeDiv}>
         <webview
           className={MetaMaskHomeStyles.homeWebview}
-          src={`chrome-extension://${extId}/home.html`}
+          src={`chrome-extension://${extId}/${path}`}
         />
       </div>
     </>

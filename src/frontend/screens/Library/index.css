@@ -1,16 +1,3 @@
-.gameList {
-  color: var(--text-secondary);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(156px, 1fr));
-  grid-gap: 1.5rem;
-  padding: 0 var(--space-md-fixed);
-  margin: var(--space-md) 0;
-}
-
-.gameList.firstLane {
-  padding: 0 var(--space-md-fixed) var(--space-md-fixed);
-}
-
 .gameListLayout {
   display: flex;
   flex-direction: column;
@@ -18,68 +5,16 @@
   min-height: 2vh;
   min-width: 80vw;
 }
-
-.gameListHeader {
+.gameList {
+  color: var(--text-secondary);
   display: grid;
-  grid-template-columns: 3fr 2fr 1fr 10%;
-  justify-items: baseline;
-  margin: 0 var(--space-xl-fixed);
-  color: var(--text-default);
-  font-weight: var(--bold);
-  padding-bottom: 0.5rem;
-  font-size: var(--text-lg);
+  /* grid auto-fill cannot use intrinsic sizing so we hardcode the px value */
+  grid-template-columns: repeat(auto-fill, 216px);
+  grid-gap: 1.5rem;
+  padding: 0;
+  margin: var(--space-md) 0;
 }
 
-.gameListHeader span:last-child {
-  justify-self: center;
-}
-
-.libraryHeader {
-  text-align: left;
-  padding: 0 var(--space-md-fixed);
-  margin: var(--space-sm) 0;
-}
-
-.libraryHeaderWrapper {
-  display: grid;
-  align-items: center;
-  margin: calc(-1 * var(--space-3xs)) 0;
-  grid-template-columns: max-content min-content;
-  grid-template-areas: 'title action';
-  justify-content: space-between;
-}
-
-#backToTopArrow {
-  font-size: 3.2vh;
-}
-
-#backToTopBtn {
-  border-radius: 100%;
-  width: 5vh;
-  height: 5vh;
-  position: fixed;
-  bottom: 3%;
-  right: 0;
-  margin: var(--space-md) var(--space-xl);
-  border: 1px var(--download-button) solid;
-  background-color: var(--background);
-  color: var(--download-button);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  align-self: flex-end;
-  z-index: 9;
-  visibility: hidden;
-  transition: all 0.3s ease-in;
-  cursor: pointer;
-}
-
-#backToTopBtn:hover {
-  background-color: var(--download-button);
-  color: var(--text-default);
-}
-
-.listing {
-  overflow-y: auto;
-  flex: 100% 1 1;
+.gameList.firstLane {
+  padding: 0 var(--space-md-fixed) var(--space-md-fixed);
 }

@@ -10,7 +10,6 @@ import {
 } from 'common/types'
 import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
-import { handleStopInstallation } from 'frontend/helpers/library'
 import {
   getGameInfo,
   getInstallInfo,
@@ -26,6 +25,7 @@ import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
 import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
 import { GogInstallInfo } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
+import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 
 type Props = {
   element?: DMQueueElement
@@ -51,19 +51,24 @@ type InstallInfo =
   | null
 
 const DownloadManagerItem = ({ element, current, state }: Props) => {
-  const { epic, gog, showDialogModal, hyperPlayLibrary } =
-    useContext(ContextProvider)
+  const { epic, gog, hyperPlayLibrary } = useContext(ContextProvider)
   const [installInfo, setInstallInfo] = useState<InstallInfo>(null)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
+  const [showStopInstallModal, setShowStopInstallModal] = useState(false)
 
   const navigate = useNavigate()
 
   if (!element) {
     return (
-      <h5 style={{ paddingTop: 'var(--space-xs' }}>
+      <h6
+        style={{
+          paddingTop: 'var(--space-xs)',
+          paddingLeft: 'var(--space-xs)'
+        }}
+      >
         {t2('queue.label.empty', 'Nothing to download')}
-      </h5>
+      </h6>
     )
   }
 
@@ -108,23 +113,6 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
   const finished = status === 'done'
   const canceled = status === 'error' || (status === 'abort' && !current)
 
-  const stopInstallation = async () => {
-    if (!gameInfo) {
-      return
-    }
-    const folder_name = gameInfo.folder_name
-    if (!folder_name) return
-
-    return handleStopInstallation(
-      appName,
-      path,
-      t,
-      progress,
-      runner,
-      showDialogModal
-    )
-  }
-
   const goToGamePage = () => {
     return navigate(`/gamepage/${runner}/${appName}`, {
       state: { fromDM: true, gameInfo: gameInfo }
@@ -138,7 +126,10 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
       return goToGamePage()
     }
 
-    current ? stopInstallation() : window.api.removeFromDMQueue(appName)
+    // gameInfo must be defined in order to get folder name for stop installation modal
+    current && gameInfo
+      ? setShowStopInstallModal(true)
+      : window.api.removeFromDMQueue(appName)
   }
 
   // using one element for the different states so it doesn't
@@ -223,7 +214,8 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
   }
 
   const { title } = currentApp
-  const cover = art_cover || art_square
+  let cover = art_cover || art_square
+  if (!cover.includes('http')) cover = art_square
 
   const translatedTypes = {
     install: t2('download-manager.install-type.install', 'Install'),
@@ -233,41 +225,53 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
   const { hour, fullDate } = getTime()
 
   return (
-    <div className="downloadManagerListItem">
-      <span
-        role="button"
-        onClick={() => goToGamePage()}
-        className="downloadManagerTitleList"
-        style={{ color: getStatusColor() }}
-      >
-        {cover && <CachedImage src={cover} alt={title} />}
-        <span className="titleSize">
-          {title}
-          <span title={path}>
-            {size?.includes('?')
-              ? fileSize(Number(installInfo?.manifest.download_size) || 0)
-              : size}
-            {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
+    <>
+      {showStopInstallModal ? (
+        <StopInstallationModal
+          onClose={() => setShowStopInstallModal(false)}
+          installPath={path}
+          folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
+          appName={appName}
+          runner={runner}
+          progress={progress}
+        />
+      ) : null}
+      <div className="downloadManagerListItem">
+        <span
+          role="button"
+          onClick={() => goToGamePage()}
+          className="downloadManagerTitleList"
+          style={{ color: getStatusColor() }}
+        >
+          {cover && <CachedImage src={cover} alt={title} />}
+          <span className="titleSize">
+            {title}
+            <span title={path}>
+              {size?.includes('?')
+                ? fileSize(Number(installInfo?.manifest.download_size) || 0)
+                : size}
+              {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
+            </span>
           </span>
         </span>
-      </span>
-      <span title={fullDate}>{hour}</span>
-      <span>{translatedTypes[type]}</span>
-      <span>{getStoreName(runner, t2('Other'))}</span>
-      <span className="icons">
-        <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
-          {mainActionIcon()}
-        </SvgButton>
-        {current && (
-          <SvgButton
-            onClick={handleSecondaryActionClick}
-            title={secondaryIconTitle()}
-          >
-            {secondaryActionIcon()}
+        <span title={fullDate}>{hour}</span>
+        <span>{translatedTypes[type]}</span>
+        <span>{getStoreName(runner, t2('Other'))}</span>
+        <span className="icons">
+          <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
+            {mainActionIcon()}
           </SvgButton>
-        )}
-      </span>
-    </div>
+          {current && (
+            <SvgButton
+              onClick={handleSecondaryActionClick}
+              title={secondaryIconTitle()}
+            >
+              {secondaryActionIcon()}
+            </SvgButton>
+          )}
+        </span>
+      </div>
+    </>
   )
 }
 

@@ -19,6 +19,7 @@ export const openSupportPage = () => ipcRenderer.send('openSupportPage')
 export const quit = () => ipcRenderer.send('quit')
 export const showAboutWindow = () => ipcRenderer.send('showAboutWindow')
 export const openDiscordLink = () => ipcRenderer.send('openDiscordLink')
+export const openTwitterLink = () => ipcRenderer.send('openTwitterLink')
 export const openWinePrefixFAQ = () => ipcRenderer.send('openWinePrefixFAQ')
 export const openCustomThemesWiki = () =>
   ipcRenderer.send('openCustomThemesWiki')

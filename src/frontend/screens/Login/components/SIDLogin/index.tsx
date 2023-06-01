@@ -5,6 +5,7 @@ import { loginPage, sidInfoPage } from 'frontend/helpers'
 import './index.css'
 import { Autorenew } from '@mui/icons-material'
 import ContextProvider from 'frontend/state/ContextProvider'
+import { Button } from '@hyperplay/ui'
 
 interface Props {
   backdropClick: () => void
@@ -103,13 +104,15 @@ export default function SIDLogin({ backdropClick }: Props) {
             <Autorenew className="material-icons refreshing" />{' '}
           </p>
         )}
-        <button
-          onClick={async () => handleLogin(input)}
-          className="button is-primary"
-          disabled={loading || input.length < 30 || error}
-        >
-          {getButtonLabel()}
-        </button>
+        <div className=".sidLoginButton">
+          <Button
+            onClick={async () => handleLogin(input)}
+            disabled={loading || input.length < 30 || error}
+            fixedWidth={100}
+          >
+            {getButtonLabel()}
+          </Button>
+        </div>
       </div>
     </div>
   )

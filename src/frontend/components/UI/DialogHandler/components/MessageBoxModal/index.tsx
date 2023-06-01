@@ -9,6 +9,8 @@ import {
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { DialogType, ButtonOptions } from 'common/types'
+import { Button } from '@hyperplay/ui'
+
 interface MessageBoxModalProps {
   title: string
   message: string
@@ -23,16 +25,17 @@ const MessageBoxModal: React.FC<MessageBoxModalProps> = function (props) {
     const allButtons = []
     for (let i = 0; i < props.buttons.length; ++i) {
       allButtons.push(
-        <button
+        <Button
+          type={i === props.buttons.length - 1 ? 'secondary' : 'tertiary'}
+          size="large"
           onClick={() => {
             props.onClose()
             props.buttons[i].onClick?.()
           }}
-          className={`button is-secondary outline`}
           key={'messageBoxModalButton_' + i.toString()}
         >
           {props.buttons[i].text}
-        </button>
+        </Button>
       )
     }
     return allButtons
@@ -67,7 +70,9 @@ const MessageBoxModal: React.FC<MessageBoxModalProps> = function (props) {
       className={classNames({ errorDialog: props.type === 'ERROR' })}
     >
       <DialogHeader onClose={props.onClose}>{props.title}</DialogHeader>
-      <DialogContent>{getContent()}</DialogContent>
+      <DialogContent className="body dialogContent">
+        {getContent()}
+      </DialogContent>
       <DialogFooter>{getButtons()}</DialogFooter>
     </Dialog>
   )

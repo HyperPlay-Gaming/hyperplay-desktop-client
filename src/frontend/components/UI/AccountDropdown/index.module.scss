@@ -1,0 +1,28 @@
+.itemContents {
+  color: var(--color-neutral-300);
+}
+
+.menuItem:hover {
+  opacity: 1;
+}
+.menuItem[data-hovered='true'] {
+  background-color: var(--color-neutral-500);
+}
+
+.menuItem[data-hovered='true'] .itemContents {
+  color: var(--color-neutral-100);
+}
+
+.menuDropdown {
+  background-color: var(--color-neutral-600);
+  border: none;
+  padding: var(--space-sm);
+}
+
+.selected {
+  color: var(--color-secondary-200);
+}
+
+.menuLabel {
+  color: var(--color-neutral-400);
+}

@@ -2,7 +2,7 @@ name: Build
 
 on:
   pull_request:
-    branches: [main]
+    branches: [main, feat/ui_overhaul]
   push:
     branches: [main]
   workflow_dispatch:

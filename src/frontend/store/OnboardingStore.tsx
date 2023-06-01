@@ -4,6 +4,7 @@ import walletStore from './WalletStore'
 import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'
+import { useLocation } from 'react-router-dom'
 
 class OnboardingStore {
   isOnboardingOpen = true
@@ -57,6 +58,7 @@ export default onboardingStore
 
 export const OnboardingStoreController = () => {
   const context = useContext(ContextProvider)
+  const { pathname } = useLocation()
 
   async function init() {
     const currentWeb3Provider = await window.api.getCurrentWeb3Provider()
@@ -64,8 +66,12 @@ export const OnboardingStoreController = () => {
   }
 
   useEffect(() => {
-    init()
-  }, [context])
+    if (pathname !== '/metamaskSecretPhrase') {
+      init()
+    } else {
+      onboardingStore.closeOnboarding()
+    }
+  }, [pathname])
 
   return <></>
 }
