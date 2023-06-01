@@ -78,7 +78,7 @@ export default function SidebarLinks() {
               })
             }
             end
-            to={'/'}
+            to={'/library'}
             onClick={async () => handleRefresh()}
           >
             <Images.Controller fill={sidebarSvgUnselectedFill} />
