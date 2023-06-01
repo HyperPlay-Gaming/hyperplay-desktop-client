@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   padding: var(--space-md) var(--space-lg);
+  z-index: 2;
 }
 
 .navBar > :first-child {
