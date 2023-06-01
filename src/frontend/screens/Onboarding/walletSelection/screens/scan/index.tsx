@@ -3,6 +3,7 @@ import { t } from 'i18next'
 import QrCodeGradientBorder from '../../../components/qrCodeGradientBorder'
 import ScanScreenStyles from './index.module.scss'
 import { WarningIcon } from 'frontend/assets/hyperplay'
+import { Button } from '@hyperplay/ui'
 
 interface ScanScreenProps {
   qrCodeSvg: string
@@ -46,6 +47,14 @@ const ScanScreen = (props: ScanScreenProps) => {
           )}
         </a>
       </div>
+      <Button
+        size="small"
+        type="secondary"
+        style={{ width: '200px', margin: '0px auto var(--space-xs) auto' }}
+        onClick={() => window.api.copyWalletConnectBaseURIToClipboard()}
+      >
+        Copy Base URI
+      </Button>
       <div className={`body-sm ${ScanScreenStyles.walletWarning}`}>
         <WarningIcon height={15} fill={'var(--color-status-alert)'} />
         <div>

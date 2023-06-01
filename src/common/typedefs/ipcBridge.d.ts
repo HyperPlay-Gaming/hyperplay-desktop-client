@@ -120,6 +120,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   resumeCurrentDownload: () => void
   pauseCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
+  copyWalletConnectBaseURIToClipboard: () => void
 }
 
 interface RequestArguments {
