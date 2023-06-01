@@ -47,14 +47,16 @@ const ScanScreen = (props: ScanScreenProps) => {
           )}
         </a>
       </div>
-      <Button
-        size="small"
-        type="secondary"
-        style={{ width: '200px', margin: '0px auto var(--space-xs) auto' }}
-        onClick={() => window.api.copyWalletConnectBaseURIToClipboard()}
-      >
-        Copy Base URI
-      </Button>
+      {!props.providerName.toLowerCase().includes('metamask') ? (
+        <Button
+          size="small"
+          type="secondary"
+          style={{ width: '200px', margin: '0px auto var(--space-xs) auto' }}
+          onClick={() => window.api.copyWalletConnectBaseURIToClipboard()}
+        >
+          {t('hyperplay.copyBaseUri', 'Copy Base URI')}
+        </Button>
+      ) : null}
       <div className={`body-sm ${ScanScreenStyles.walletWarning}`}>
         <WarningIcon height={15} fill={'var(--color-status-alert)'} />
         <div>
