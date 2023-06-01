@@ -112,11 +112,11 @@ export default function SidebarLinks() {
         </div>
       </div>
 
-      <div
-        className=" SidebarLinks Sidebar__section"
-        onClick={() => handleExternalLink(openDiscordLink)}
-      >
-        <div className="sidebarLinkGradientWrapper">
+      <div className=" SidebarLinks Sidebar__section">
+        <div
+          className="sidebarLinkGradientWrapper"
+          onClick={() => handleExternalLink(openDiscordLink)}
+        >
           <div className="Sidebar__item">
             <button>
               <Images.Discord stroke={sidebarSvgUnselectedFill} />
