@@ -79,8 +79,8 @@ export default function WebviewControls({
   )
 
   if (
-    url.includes('https://store.hyperplay.xyz') ||
-    url.includes('https://docs.hyperplaygaming.com')
+    url.startsWith('https://store.hyperplay.xyz') ||
+    url.startsWith('https://docs.hyperplaygaming.com')
   )
     return null
 
