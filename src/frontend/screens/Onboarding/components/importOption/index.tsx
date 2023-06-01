@@ -1,44 +1,46 @@
 import ImportOptionStyles from './index.module.scss'
 import React, { useEffect, useState } from 'react'
 import { ImportableBrowsers } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
-import classNames from 'classnames'
+import { Images } from '@hyperplay/ui'
 
 interface WalletOptionProps {
   title: ImportableBrowsers
   onClick: () => void
-  isCreate?: boolean
+  override?: 'create' | 'recovery'
 }
 
-const ImportOption = ({
-  title,
-  onClick,
-  isCreate = false
-}: WalletOptionProps) => {
+const ImportOption = ({ title, onClick, override }: WalletOptionProps) => {
   const [icon, setIcon] = useState('')
 
   useEffect(() => {
-    if (isCreate) {
-      import(`../../../../assets/hyperplay/plus.svg`)
-        .then((val) => setIcon(val.default))
-        .catch(() => setIcon('/src/frontend/assets/browser-icon.svg'))
-    } else {
+    if (override === undefined) {
       import(`../../../../assets/${title}-logo.svg`)
         .then((val) => setIcon(val.default))
         .catch(() => setIcon('/src/frontend/assets/browser-icon.svg'))
     }
   })
 
+  function getOverrideIcon() {
+    switch (override) {
+      case 'recovery':
+        return <Images.MetaMaskUnlock />
+      default:
+        return <Images.MetaMaskAdd />
+    }
+  }
+
   return (
     <button className={ImportOptionStyles.importOption} onClick={onClick}>
-      <img className={ImportOptionStyles.importOptionBrowserIcon} src={icon} />
-      <div
-        className={classNames(`{ImportOptionStyles.importOptionTitle}`, {
-          [`${ImportOptionStyles.createNewText}`]: isCreate,
-          'body-sm': isCreate
-        })}
-      >
-        {title}
-      </div>
+      {override !== undefined ? (
+        getOverrideIcon()
+      ) : (
+        <img
+          className={ImportOptionStyles.importOptionBrowserIcon}
+          src={icon}
+        />
+      )}
+
+      <div className={ImportOptionStyles.importOptionTitle}>{title}</div>
     </button>
   )
 }

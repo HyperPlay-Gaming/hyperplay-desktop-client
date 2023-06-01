@@ -2,20 +2,20 @@ import { faPowerOff } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { handleQuit } from 'frontend/helpers'
 
 const QuitButton: React.FC = () => {
   const { t } = useTranslation()
   return (
-    <button className="Sidebar__item" onClick={handleQuit}>
-      <div className="Sidebar__itemIcon">
+    <div className="Sidebar__item">
+      <button onClick={() => window.api.quit()}>
         <FontAwesomeIcon
           icon={faPowerOff}
           title={t('userselector.quit', 'Quit')}
+          size={'xl'}
+          color="var(--color-neutral-400)"
         />
-      </div>
-      <span>{t('userselector.quit', 'Quit')}</span>
-    </button>
+      </button>
+    </div>
   )
 }
 

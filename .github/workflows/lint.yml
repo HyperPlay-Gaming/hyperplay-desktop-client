@@ -2,7 +2,7 @@ name: Lint
 
 on:
   pull_request:
-    branches: [main, stable]
+    branches: [main, stable, feat/ui_overhaul]
   workflow_dispatch:
 
 jobs:

@@ -1,13 +1,13 @@
 .log-buttongroup {
   display: flex;
   flex-direction: row;
+  margin-bottom: var(--space-sm);
 }
 
 .log-buttons.log-choosen,
 .log-buttons.log-choosen:hover {
   color: var(--accent);
   transition: all 350ms ease-out 0s;
-  transform: scale(1.2);
 }
 
 .log-buttons {

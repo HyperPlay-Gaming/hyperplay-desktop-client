@@ -6,6 +6,7 @@ import {
   MetaMaskImportOptions
 } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportOption from 'frontend/screens/Onboarding/components/importOption'
+import { NavLink } from 'react-router-dom'
 
 interface ImportProps {
   importOptions: MetaMaskImportOptions
@@ -61,7 +62,7 @@ const ImportScreen = ({
             />
           ))}
         <ImportOption
-          isCreate={true}
+          override="create"
           title={t(
             'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
             `Create new MM extension wallet`
@@ -70,6 +71,18 @@ const ImportScreen = ({
             handleImportMmExtensionClicked(null)
           }}
         />
+        <NavLink to="/metamaskSecretPhrase">
+          <ImportOption
+            override="recovery"
+            title={t(
+              'hyperplay.onboarding.walletSelection.screens.import.useRecoveryPhrase',
+              `Access with secret recovery phrase`
+            )}
+            onClick={async () => {
+              handleImportMmExtensionClicked(null)
+            }}
+          />
+        </NavLink>
       </div>
 
       {err !== '' ? (

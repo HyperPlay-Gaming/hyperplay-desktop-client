@@ -31,14 +31,12 @@ async function install({
   gameInfo,
   installPath,
   t,
-  progress,
   isInstalling,
   previousProgress,
   sdlList = [],
   installDlcs = false,
   installLanguage = 'en-US',
-  platformToInstall = 'Windows',
-  showDialogModal
+  platformToInstall = 'Windows'
 }: InstallArgs) {
   if (!installPath) {
     console.error('installPath is undefined')
@@ -52,14 +50,7 @@ async function install({
     // NOTE: This can't really happen, since `folder_name` can only be undefined if we got a
     //       SideloadGame from getGameInfo, but we can't "install" sideloaded games
     if (!folder_name) return
-    return handleStopInstallation(
-      appName,
-      installPath,
-      t,
-      progress,
-      runner,
-      showDialogModal
-    )
+    return
   }
 
   if (is_installed) {
@@ -104,40 +95,6 @@ async function install({
     runner,
     platformToInstall,
     gameInfo
-  })
-}
-
-async function handleStopInstallation(
-  appName: string,
-  path: string,
-  t: TFunction<'gamepage'>,
-  progress: InstallProgress,
-  runner: Runner,
-  showDialogModal: (options: DialogModalOptions) => void
-) {
-  showDialogModal({
-    title: t('gamepage:box.stopInstall.title'),
-    message: t('gamepage:box.stopInstall.message'),
-    buttons: [
-      { text: t('gamepage:box.stopInstall.keepInstalling') },
-      {
-        text: t('box.yes'),
-        onClick: () => {
-          storage.setItem(
-            appName,
-            JSON.stringify({ ...progress, folder: path })
-          )
-          window.api.cancelDownload(false)
-        }
-      },
-      {
-        text: t('box.no'),
-        onClick: async () => {
-          window.api.cancelDownload(true)
-          storage.removeItem(appName)
-        }
-      }
-    ]
   })
 }
 
@@ -225,4 +182,4 @@ export const gogCategories = ['all', 'gog']
 export const sideloadedCategories = ['all', 'sideload']
 export const hyperPlayCategories = ['all', 'hyperplay']
 
-export { handleStopInstallation, install, launch, repair, updateGame }
+export { install, launch, repair, updateGame }

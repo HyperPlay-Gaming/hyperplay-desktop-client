@@ -12,6 +12,7 @@ import { LanguageSelector, UpdateComponent } from '../../components/UI'
 import { FlagPosition } from '../../components/UI/LanguageSelector'
 import SIDLogin from './components/SIDLogin'
 import ContextProvider from '../../state/ContextProvider'
+import { Background } from '@hyperplay/ui'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
@@ -63,7 +64,7 @@ export default React.memo(function NewLogin() {
           }}
         />
       )}
-      <div className="loginBackground"></div>
+      <Background style={{ position: 'absolute' }}></Background>
 
       <div className="loginContentWrapper">
         <div className="runnerList">

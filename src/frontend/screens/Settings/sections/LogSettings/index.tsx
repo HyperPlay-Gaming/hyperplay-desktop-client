@@ -31,7 +31,7 @@ const LogBox: React.FC<LogBoxProps> = ({ logFileContent }) => {
           )}
         </span>
       )}
-      <span className="setting log-box">
+      <div className="setting log-box">
         {lines.map((line, key) => {
           if (line.toLowerCase().includes(' err')) {
             return (
@@ -53,7 +53,7 @@ const LogBox: React.FC<LogBoxProps> = ({ logFileContent }) => {
             )
           }
         })}
-      </span>
+      </div>
     </>
   )
 }
@@ -106,7 +106,9 @@ export default function LogSettings() {
 
   return (
     <>
-      <h3>{t('setting.log.instructions_title', 'How to report a problem?')}</h3>
+      <div className="title">
+        {t('setting.log.instructions_title', 'How to report a problem?')}
+      </div>
       <p className="report-problem-instructions">
         {t(
           'setting.log.instructions-part-01',

@@ -37,7 +37,6 @@ import useSetting from 'frontend/hooks/useSetting'
 import { defaultWineVersion } from '../..'
 import Collapsible from 'frontend/components/UI/Collapsible/Collapsible'
 import SyncSaves from '../SyncSaves'
-import FooterInfo from '../FooterInfo'
 
 type Props = {
   useDetails?: boolean
@@ -169,8 +168,6 @@ export default function GamesSettings({ useDetails = true }: Props) {
           <SyncSaves />
         </Collapsible>
       )}
-
-      <FooterInfo />
     </>
   )
 }

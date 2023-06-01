@@ -78,6 +78,11 @@ export default function WebviewControls({
     [webview]
   )
 
+  const _url = new URL(url)
+  const allowList = ['store.hyperplay.xyz', 'docs.hyperplaygaming.com']
+
+  if (allowList.includes(_url.host)) return null
+
   return (
     <div className="WebviewControls">
       <div className="WebviewControls__icons">
