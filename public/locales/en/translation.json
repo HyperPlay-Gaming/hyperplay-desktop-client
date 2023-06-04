@@ -154,6 +154,7 @@
         "syncing": "Syncing",
         "unsync": "Unsync"
     },
+    "closeGame": "Close Game",
     "controller": {
         "hints": {
             "back": "Back",
@@ -303,7 +304,8 @@
                     "import": {
                         "createNewWallet": "Create new MM extension wallet",
                         "details": "By importing, your MetaMask installation and  settings will be imported into HyperPlay.",
-                        "title": "Select the browser to import from"
+                        "title": "Select the browser to import from",
+                        "useRecoveryPhrase": "Access with secret recovery phrase"
                     },
                     "info": {
                         "createWalletCTA": "Create a wallet",
@@ -391,9 +393,6 @@
     },
     "info": {
         "hyperplay": {
-            "beta": "Beta",
-            "newReleases": "Update Available!",
-            "stable": "Stable",
             "version": "HyperPlay Version"
         },
         "save-sync": {
@@ -765,7 +764,6 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "link": "Compatibility Layer ",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
             "title": "Compatibility Layer ",
             "unzipping": "Unzipping"
