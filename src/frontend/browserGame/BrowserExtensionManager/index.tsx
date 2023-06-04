@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import BrowserExtensionManagerStyles from './index.module.scss'
 import { overlayExternalWalletConnectedMsg } from 'frontend/overlay/constants'
+import { Button } from '@hyperplay/ui'
+import { Runner } from 'common/types'
+import { useTranslation } from 'react-i18next'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -13,11 +16,20 @@ declare global {
   }
 }
 
-const BrowserExtensionManager = function () {
+interface BrowserExtensionManagerProps {
+  appName: string
+  runner: Runner
+}
+
+const BrowserExtensionManager = function ({
+  appName,
+  runner
+}: BrowserExtensionManagerProps) {
   const [showOverlay, setShowOverlay] = useState(false)
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
   const [extensionId, setExtensionId] = useState('')
   const [showMmPopupPage, setShowMmPopupPage] = useState(false)
+  const { t } = useTranslation()
 
   const getExtensionId = async () => {
     const extId = await window.api.getExtensionId()
@@ -78,30 +90,45 @@ const BrowserExtensionManager = function () {
   return (
     <>
       {showOverlay ? (
-        <div className={BrowserExtensionManagerStyles.mmContainer}>
-          {!showMmPopupPage ? (
-            <div className={BrowserExtensionManagerStyles.overlayToggleHint}>
-              {overlayExternalWalletConnectedMsg}
-            </div>
-          ) : null}
-          {showMmPopupPage && !showMmNotificationPage ? (
-            <webview
-              nodeintegrationinsubframes="true"
-              webpreferences="contextIsolation=true, nodeIntegration=true"
-              className={BrowserExtensionManagerStyles.mmPopup}
-              src={`chrome-extension://${extensionId}/popup.html`}
-            ></webview>
-          ) : null}
+        <>
+          <div className={BrowserExtensionManagerStyles.bgFilter}></div>
+          <Button
+            onClick={async () => window.api.kill(appName, runner)}
+            style={{
+              top: 'var(--space-md)',
+              right: 'var(--space-md)',
+              position: 'absolute',
+              zIndex: 200
+            }}
+            type="primary"
+          >
+            {t('closeGame', 'Close Game')}
+          </Button>
+          <div className={BrowserExtensionManagerStyles.mmContainer}>
+            {!showMmPopupPage ? (
+              <div className={BrowserExtensionManagerStyles.overlayToggleHint}>
+                <div className="title">{overlayExternalWalletConnectedMsg}</div>
+              </div>
+            ) : null}
+            {showMmPopupPage && !showMmNotificationPage ? (
+              <webview
+                nodeintegrationinsubframes="true"
+                webpreferences="contextIsolation=true, nodeIntegration=true"
+                className={BrowserExtensionManagerStyles.mmPopup}
+                src={`chrome-extension://${extensionId}/popup.html`}
+              ></webview>
+            ) : null}
 
-          {showMmNotificationPage ? (
-            <webview
-              nodeintegrationinsubframes="true"
-              webpreferences="contextIsolation=true, nodeIntegration=true"
-              className={BrowserExtensionManagerStyles.mmNotification}
-              src={`chrome-extension://${extensionId}/notification.html`}
-            ></webview>
-          ) : null}
-        </div>
+            {showMmNotificationPage ? (
+              <webview
+                nodeintegrationinsubframes="true"
+                webpreferences="contextIsolation=true, nodeIntegration=true"
+                className={BrowserExtensionManagerStyles.mmNotification}
+                src={`chrome-extension://${extensionId}/notification.html`}
+              ></webview>
+            ) : null}
+          </div>
+        </>
       ) : null}
     </>
   )

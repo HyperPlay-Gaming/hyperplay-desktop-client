@@ -66,7 +66,9 @@ function domainsAreEqual(url: URL, otherUrl: URL) {
 }
 
 const openNewBrowserGameWindow = async (
-  browserUrl: string
+  browserUrl: string,
+  appName: string,
+  runner: Runner
 ): Promise<boolean> => {
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
@@ -81,13 +83,15 @@ const openNewBrowserGameWindow = async (
     })
 
     const url = !app.isPackaged
-      ? 'http://localhost:5173?view=BrowserGame&browserUrl=' +
-        encodeURIComponent(browserUrl)
+      ? `http://localhost:5173?view=BrowserGame&browserUrl=${encodeURIComponent(
+          browserUrl
+        )}&appName=${appName}&runner=${runner}`
       : `file://${path.join(
           buildDir,
-          './index.html?view=BrowserGame&browserUrl=' +
-            encodeURIComponent(browserUrl)
-        )}`
+          `./index.html`
+        )}?view=BrowserGame&browserUrl=${encodeURIComponent(
+          browserUrl
+        )}&appName=${appName}&runner=${runner}`
 
     const urlParent = new URL(browserUrl)
     const openNewBroswerGameWindowListener = (
@@ -104,7 +108,7 @@ const openNewBrowserGameWindow = async (
             ['https:', 'http:'].includes(protocol) &&
             domainsAreEqual(urlToOpen, urlParent)
           ) {
-            openNewBrowserGameWindow(url)
+            openNewBrowserGameWindow(url, appName, runner)
             return { action: 'deny' }
           }
           openRestrictedBrowserGameWindow(url)
@@ -171,7 +175,7 @@ export async function launchGame(
   }
 
   if (browserUrl) {
-    return openNewBrowserGameWindow(browserUrl)
+    return openNewBrowserGameWindow(browserUrl, appName, runner)
   }
 
   const gameSettings = await getAppSettings(appName)

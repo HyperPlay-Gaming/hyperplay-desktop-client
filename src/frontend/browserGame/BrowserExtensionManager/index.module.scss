@@ -28,8 +28,18 @@
 }
 
 .overlayToggleHint {
-  background-color: rgba(0, 0, 0, 0.5);
   padding: 10px;
   display: inline-block;
   white-space: pre-line;
+  max-width: 600px;
+}
+
+.bgFilter {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
 }
