@@ -165,7 +165,24 @@ export default function DownloadToastManager() {
     )
   }
 
-  const downloadedMB = Number(progress.bytes)
+  let downloadedMB = 0
+
+  if (typeof progress.bytes === 'string') {
+    if (
+      progress.bytes.includes('MB') ||
+      progress.bytes.includes('Mb') ||
+      progress.bytes.includes('mb')
+    )
+      downloadedMB = parseInt(progress.bytes)
+    else if (
+      progress.bytes.includes('GB') ||
+      progress.bytes.includes('Gb') ||
+      progress.bytes.includes('gb')
+    )
+      downloadedMB = parseInt(progress.bytes) / 1024
+  } else {
+    downloadedMB = Number(progress.bytes)
+  }
 
   const title = currentElement?.params.gameInfo.title
     ? currentElement?.params.gameInfo.title
