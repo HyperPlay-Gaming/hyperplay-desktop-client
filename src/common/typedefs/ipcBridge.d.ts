@@ -91,7 +91,6 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   openCustomThemesWiki: () => void
   openHyperplaySite: () => void
   showConfigFileInFolder: (appName: string) => void
-  removeFolder: ([path, folderName]: [string, string]) => void
   clearCache: (showDialog?: boolean) => void
   resetApp: () => void
   createNewWindow: (url: string) => void
@@ -192,6 +191,7 @@ interface HyperPlayAsyncIPCFunctions {
   unhideGame: (gameId: string) => Promise<void>
   getCurrentWeb3Provider: () => Promise<PROVIDERS | undefined>
   showPopup: (hideIfShown: boolean) => Promise<boolean>
+  removeTempDownloadFiles: (appName: string) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

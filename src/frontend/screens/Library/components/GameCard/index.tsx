@@ -2,7 +2,13 @@ import './index.css'
 
 import React, { useContext, useMemo, useState, useEffect } from 'react'
 
-import { GameInfo, HiddenGame, Runner } from 'common/types'
+import {
+  DMQueueElement,
+  DownloadManagerState,
+  GameInfo,
+  HiddenGame,
+  Runner
+} from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { getGameInfo, install, launch, sendKill } from 'frontend/helpers'
@@ -23,6 +29,7 @@ import {
   SettingsButtons
 } from '@hyperplay/ui'
 import classNames from 'classnames'
+import { DMQueue } from 'frontend/types'
 
 interface Card {
   buttonClick: () => void
@@ -46,6 +53,31 @@ const GameCard = ({
   const [isLaunching, setIsLaunching] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
+  const [dmState, setDMState] = useState<DownloadManagerState>('idle')
+  const [currentElement, setCurrentElement] = useState<DMQueueElement>()
+
+  useEffect(() => {
+    window.api.getDMQueueInformation().then(({ state }: DMQueue) => {
+      setDMState(state)
+    })
+
+    const removeHandleDMQueueInformation = window.api.handleDMQueueInformation(
+      (
+        e: Electron.IpcRendererEvent,
+        elements: DMQueueElement[],
+        state: DownloadManagerState
+      ) => {
+        if (elements) {
+          setCurrentElement(elements[0])
+          setDMState(state)
+        }
+      }
+    )
+
+    return () => {
+      removeHandleDMQueueInformation()
+    }
+  }, [])
 
   const { t } = useTranslation('gamepage')
 
@@ -124,13 +156,13 @@ const GameCard = ({
     if (isInstalling || isQueued) {
       return 'INSTALLING'
     }
-    if (isInstalled) {
-      return 'INSTALLED'
-    }
     if (showUpdateButton) {
       return 'NEEDS_UPDATE'
     }
-    if (isPaused) {
+    if (isInstalled) {
+      return 'INSTALLED'
+    }
+    if (dmState === 'paused' && currentElement?.params.appName === appName) {
       return 'PAUSED'
     }
     if (status === 'extracting') {
@@ -328,7 +360,7 @@ const GameCard = ({
           )}
           onPlayClick={handleClickStopBubbling(async () => mainAction(runner))}
           onStopDownloadClick={handleClickStopBubbling(async () =>
-            mainAction(runner)
+            setShowStopInstallModal(true)
           )}
           state={getState()}
           settingsItems={items.filter((val) => val.show).slice(0, 6)}

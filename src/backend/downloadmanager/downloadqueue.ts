@@ -25,11 +25,6 @@ const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
 let queueState: DownloadManagerState = 'idle'
 let currentElement: DMQueueElement | null = null
 
-function getFirstQueueElement() {
-  const elements = downloadManager.get('queue', [])
-  return elements.at(0) ?? null
-}
-
 function isPaused(): boolean {
   return queueState === 'paused'
 }
@@ -65,6 +60,11 @@ function addToFinished(element: DMQueueElement, status: DMStatus) {
 /*
 #### Public ####
 */
+
+function getFirstQueueElement() {
+  const elements = downloadManager.get('queue', [])
+  return elements.at(0) ?? null
+}
 
 async function initQueue() {
   let element = getFirstQueueElement()
@@ -304,5 +304,6 @@ export {
   getQueueInformation,
   cancelCurrentDownload,
   pauseCurrentDownload,
-  resumeCurrentDownload
+  resumeCurrentDownload,
+  getFirstQueueElement
 }

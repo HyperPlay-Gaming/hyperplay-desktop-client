@@ -44,7 +44,6 @@ import {
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
-import unzipper from 'unzipper'
 
 import {
   fixAsarPath,
@@ -86,7 +85,6 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
-import { clean } from 'easydl/dist/utils'
 
 const execAsync = promisify(exec)
 
@@ -1322,7 +1320,7 @@ export async function downloadFile(
         `Downloader: Download stopped or paused`,
         LogPrefix.DownloadManager
       )
-      throw new Error('Download incomplete')
+      throw new Error('Download stopped or paused')
     }
 
     logInfo(
@@ -1334,7 +1332,7 @@ export async function downloadFile(
       `Downloader: Download Failed with: ${err}`,
       LogPrefix.DownloadManager
     )
-    throw new Error('Download failed')
+    throw new Error(`Download failed with ${err}`)
   }
 }
 

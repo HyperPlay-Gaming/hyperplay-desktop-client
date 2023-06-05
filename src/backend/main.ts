@@ -154,6 +154,7 @@ import { addGameToLibrary } from './storeManagers/hyperplay/library'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
+import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import {
   autoUpdate,
   gameManagerMap,
@@ -679,8 +680,8 @@ export function removeFolder(path: string, folderName: string) {
   return
 }
 
-ipcMain.on('removeFolder', async (e, [path, folderName]) => {
-  removeFolder(path, folderName)
+ipcMain.handle('removeTempDownloadFiles', async (e, appName) => {
+  HyperPlayGameManager.removeTempDownloadFiles(appName)
 })
 
 async function runWineCommandOnGame(

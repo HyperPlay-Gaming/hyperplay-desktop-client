@@ -65,13 +65,18 @@ export default function StopInstallationModal(props: StopInstallProps) {
                 JSON.stringify({ ...props.progress, folder: props.installPath })
               )
               sendKill(props.appName, props.runner)
+              window.api.removeFromDMQueue(props.appName)
             }
             // if user does not want to keep downloaded files but still wants to cancel download
             else {
               props.onClose()
               await sendKill(props.appName, props.runner)
               storage.removeItem(props.appName)
-              window.api.removeFolder([props.installPath, props.folderName])
+              if (props.runner === 'hyperplay') {
+                //must remove temp dl files before removing from DM queue
+                await window.api.removeTempDownloadFiles(props.appName)
+              }
+              window.api.removeFromDMQueue(props.appName)
             }
           }}
         >
