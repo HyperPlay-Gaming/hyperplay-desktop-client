@@ -44,7 +44,6 @@ import {
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
-import unzipper from 'unzipper'
 
 import {
   fixAsarPath,
@@ -86,7 +85,6 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
-import { clean } from 'easydl/dist/utils'
 
 const execAsync = promisify(exec)
 
