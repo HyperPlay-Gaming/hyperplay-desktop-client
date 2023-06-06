@@ -287,7 +287,7 @@
     "ts-jest": "^28.0.7",
     "type-fest": "^3.2.0",
     "typescript": "^4.8.4",
-    "vite": "^3.2.2",
+    "vite": "^3.2.7",
     "vite-plugin-electron": "^0.10.2",
     "vite-plugin-svgr": "^2.2.2"
   },
