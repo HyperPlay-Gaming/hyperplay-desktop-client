@@ -82,6 +82,11 @@ const openNewBrowserGameWindow = async (
       }
     })
 
+    const abortController = createAbortController(appName)
+    abortController.signal.addEventListener('abort', () => {
+      browserGame.close()
+    })
+
     const url = !app.isPackaged
       ? `http://localhost:5173?view=BrowserGame&browserUrl=${encodeURIComponent(
           browserUrl

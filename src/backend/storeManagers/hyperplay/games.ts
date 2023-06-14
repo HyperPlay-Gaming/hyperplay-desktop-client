@@ -45,7 +45,6 @@ import {
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
 import { clean } from 'easydl/dist/utils'
-import { BrowserWindow } from 'electron'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -93,20 +92,8 @@ export function isNative(appName: string): boolean {
 export async function stop(appName: string): Promise<void> {
   const gameInfo = getGameInfo(appName)
   const {
-    install: { executable = undefined, platform = undefined }
+    install: { executable = undefined }
   } = gameInfo
-
-  if (platform && platform === 'web') {
-    for (const win of BrowserWindow.getAllWindows()) {
-      const browserUrl = win.webContents.getURL()
-      const browserURL = new URL(browserUrl)
-      const urlParams = new URLSearchParams(browserURL.search)
-      const gameURL = urlParams.get('browserUrl')
-      if (gameURL === gameInfo?.releaseMeta?.platforms?.web?.external_url) {
-        win.close()
-      }
-    }
-  }
 
   if (executable) {
     const split = executable.split('/')
