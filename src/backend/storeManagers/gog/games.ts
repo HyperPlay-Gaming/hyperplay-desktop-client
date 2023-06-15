@@ -10,7 +10,9 @@ import {
   getLinuxInstallerInfo,
   createReqsArray,
   getGameInfo as getGogLibraryGameInfo,
-  changeGameInstallPath
+  changeGameInstallPath,
+  getMetaResponse,
+  getGamesData
 } from './library'
 import { join } from 'path'
 import { GameConfig } from '../../game_config'
@@ -77,10 +79,13 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
     targetPlatform = 'windows'
   }
 
+  const reqs = await createReqsArray(appName, targetPlatform)
+  const storeUrl = (await getGamesData(appName))?._links.store.href
+
   const extra: ExtraInfo = {
     about: gameInfo.extra?.about,
-    reqs: await createReqsArray(appName, targetPlatform),
-    storeUrl: gameInfo.store_url
+    reqs,
+    storeUrl
   }
   return extra
 }
@@ -794,10 +799,15 @@ export async function update(
 
   if (gameData.install.platform !== 'linux') {
     const installInfo = await getInstallInfo(appName)
+    const { etag } = await getMetaResponse(
+      appName,
+      gameData.install.platform ?? 'windows',
+      installInfo?.manifest.versionEtag
+    )
     if (installInfo === undefined) return { status: 'error' }
     gameObject.buildId = installInfo.game.buildId
     gameObject.version = installInfo.game.version
-    gameObject.versionEtag = installInfo.manifest.versionEtag
+    gameObject.versionEtag = etag
     gameObject.install_size = getFileSize(installInfo.manifest.disk_size)
   } else {
     const installerInfo = await getLinuxInstallerInfo(appName)
@@ -825,9 +835,6 @@ async function getCommandParameters(appName: string) {
   const withDlcs = gameData.install.installedWithDLCs
     ? '--with-dlcs'
     : '--skip-dlcs'
-  if (GOGUser.isTokenExpired()) {
-    await GOGUser.refreshToken()
-  }
 
   const installPlatform = gameData.install.platform
 

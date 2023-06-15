@@ -125,6 +125,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const isExtracting = status === 'extracting'
   const isPreparing = status === 'preparing'
   const notAvailable = !gameAvailable && gameInfo.is_installed
+  const notInstallable =
+    gameInfo.installable !== undefined && !gameInfo.installable
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
 
@@ -197,7 +199,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
         const installPlatform =
           runner === 'hyperplay' ? hpPlatforms : othersPlatforms
 
-        if (runner !== 'sideload' && !notSupportedGame) {
+        if (runner !== 'sideload' && !notSupportedGame && !notInstallable) {
           getInstallInfo(appName, runner, installPlatform)
             .then((info) => {
               if (!info) {
@@ -721,6 +723,13 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return t('status.preparing', 'Preparing Download, please wait')
     }
 
+    if (runner === 'gog' && notInstallable) {
+      return t(
+        'status.gog-goodie',
+        "This game doesn't appear to be installable. Check downloadable content on https://gog.com/account"
+      )
+    }
+
     if (notSupportedGame) {
       return t(
         'status.this-game-uses-third-party',
@@ -822,6 +831,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
   function getButtonLabel(is_installed: boolean) {
     if (isPaused) {
       return t('button.queue.continue', 'Continue Download')
+    }
+
+    if (notInstallable) {
+      return (
+        <span className="buttonWithIcon">
+          {t('status.goodie', 'Not installable')}
+        </span>
+      )
     }
     if (notSupportedGame) {
       return t('status.notSupported', 'Not supported')

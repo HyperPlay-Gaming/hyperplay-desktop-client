@@ -346,7 +346,7 @@ export default React.memo(function Library(): JSX.Element {
     }
 
     // sort
-    library = library.sort((a: { title: string }, b: { title: string }) => {
+    library = library.sort((a, b) => {
       const gameA = a.title.toUpperCase().replace('THE ', '')
       const gameB = b.title.toUpperCase().replace('THE ', '')
       return sortAscending ? (gameA < gameB ? -1 : 1) : gameA > gameB ? -1 : 1
