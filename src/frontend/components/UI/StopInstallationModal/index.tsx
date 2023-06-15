@@ -7,7 +7,6 @@ import {
 } from 'frontend/components/UI/Dialog'
 import { useTranslation } from 'react-i18next'
 import { Button, Checkbox } from '@hyperplay/ui'
-import { sendKill } from 'frontend/helpers'
 import { InstallProgress, Runner } from 'common/types'
 const storage: Storage = window.localStorage
 
@@ -64,19 +63,13 @@ export default function StopInstallationModal(props: StopInstallProps) {
                 props.appName,
                 JSON.stringify({ ...props.progress, folder: props.installPath })
               )
-              sendKill(props.appName, props.runner)
-              window.api.removeFromDMQueue(props.appName)
+              window.api.cancelDownload(false)
             }
             // if user does not want to keep downloaded files but still wants to cancel download
             else {
               props.onClose()
-              await sendKill(props.appName, props.runner)
+              window.api.cancelDownload(true)
               storage.removeItem(props.appName)
-              if (props.runner === 'hyperplay') {
-                //must remove temp dl files before removing from DM queue
-                await window.api.removeTempDownloadFiles(props.appName)
-              }
-              window.api.removeFromDMQueue(props.appName)
             }
           }}
         >
