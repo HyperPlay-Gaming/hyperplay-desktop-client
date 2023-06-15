@@ -43,6 +43,7 @@ test.describe('hp store api tests', function () {
 
   // NOTE: if rmDownloadedFiles true, this will close the app
   const cancelDownload = async (rmDownloadedFiles: boolean) => {
+    console.log('cancelling in hp store api test')
     await page.evaluate(
       async ([rmDownloadedFiles]) => {
         //cancel download
@@ -64,7 +65,7 @@ test.describe('hp store api tests', function () {
         app.quit()
       })
 
-      await wait(6000)
+      await wait(5000)
 
       //check that downloaded files are removed
       const downloadDirSizeAfterCancel = await dirSize(tempFolder)
@@ -117,7 +118,7 @@ test.describe('hp store api tests', function () {
     )
   }
 
-  const pauseDownload = async (tempFolder: string) => {
+  const pauseDownload = async () => {
     await page.evaluate(async () => {
       console.log('pausing')
       window.api.pauseCurrentDownload()
@@ -126,6 +127,12 @@ test.describe('hp store api tests', function () {
     const downloadDirSize = await dirSize(tempFolder)
     await wait(1000)
     const downloadDirSizeAfterWait = await dirSize(tempFolder)
+    console.log(
+      'pause downloadDirSize: ',
+      downloadDirSize,
+      ' downloadDirSizeAfterWait: ',
+      downloadDirSizeAfterWait
+    )
     expect(downloadDirSize).toEqual(downloadDirSizeAfterWait)
   }
 
@@ -134,14 +141,37 @@ test.describe('hp store api tests', function () {
       console.log('resuming')
       window.api.resumeCurrentDownload()
     })
+    //check if download is actually resumed
+    const downloadDirSize = await dirSize(tempFolder)
+    await wait(1000)
+    const downloadDirSizeAfterWait = await dirSize(tempFolder)
+    console.log(
+      'resume downloadDirSize: ',
+      downloadDirSize,
+      ' downloadDirSizeAfterWait: ',
+      downloadDirSizeAfterWait
+    )
+    expect(downloadDirSize).toBeLessThan(downloadDirSizeAfterWait)
   }
 
-  test.only('hp store: download then cancel and do not keep files', async () => {
+  test('hp store: download then cancel and do not keep files', async () => {
     test.setTimeout(600000)
     page = await hpPage
 
     // download then pause
     await installPartial(appName)
+    await cancelDownload(true)
+  })
+
+  test.only('hp store: download then pause, resume, cancel and do not keep files', async () => {
+    test.setTimeout(600000)
+    page = await hpPage
+
+    // download then pause
+    await installPartial(appName)
+    await pauseDownload()
+    await resumeDownload()
+    await wait(5000)
     await cancelDownload(true)
   })
 })
