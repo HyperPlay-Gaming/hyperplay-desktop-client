@@ -41,15 +41,35 @@ test.describe('hp store api tests', function () {
     console.log('tempfolder: ', tempFolder)
   })
 
-  const cancelDownload = async () => {
-    await page.evaluate(async () => {
-      //cancel download
-      console.log('cancelling')
-      window.api.cancelDownload(true)
-      // await window.api.kill(appName, 'hyperplay')
-      // await window.api.removeTempDownloadFiles(appName)
-      // window.api.removeFromDMQueue(appName)
-    })
+  // NOTE: if rmDownloadedFiles true, this will close the app
+  const cancelDownload = async (rmDownloadedFiles: boolean) => {
+    await page.evaluate(
+      async ([rmDownloadedFiles]) => {
+        //cancel download
+        console.log('cancelling')
+        window.api.cancelDownload(rmDownloadedFiles)
+        // await window.api.kill(appName, 'hyperplay')
+        // await window.api.removeTempDownloadFiles(appName)
+        // window.api.removeFromDMQueue(appName)
+      },
+      [rmDownloadedFiles]
+    )
+
+    if (rmDownloadedFiles) {
+      console.log('waiting...')
+      await wait(10000)
+
+      //quit app because easyDL does not free all files on clean until app is closed
+      await electronApp.evaluate(async ({ app }) => {
+        app.quit()
+      })
+
+      await wait(6000)
+
+      //check that downloaded files are removed
+      const downloadDirSizeAfterCancel = await dirSize(tempFolder)
+      expect(downloadDirSizeAfterCancel).toEqual(0)
+    }
   }
 
   const installPartial = async (appName: string) => {
@@ -122,20 +142,6 @@ test.describe('hp store api tests', function () {
 
     // download then pause
     await installPartial(appName)
-    await cancelDownload()
-
-    console.log('waiting...')
-    await wait(10000)
-
-    //quit app because easyDL does not free all files on clean until app is closed
-    await electronApp.evaluate(async ({ app }) => {
-      app.quit()
-    })
-
-    await wait(6000)
-
-    //check that downloaded files are removed
-    const downloadDirSizeAfterCancel = await dirSize(tempFolder)
-    expect(downloadDirSizeAfterCancel).toEqual(0)
+    await cancelDownload(true)
   })
 })
