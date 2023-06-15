@@ -1,3 +1,4 @@
+import { existsSync } from 'graceful-fs'
 import { AppSettings, GameStatus } from '../../src/common/types'
 import { expect, test } from '@playwright/test'
 import { Page } from 'playwright'
@@ -66,9 +67,13 @@ test.describe('hp store api tests', function () {
       await wait(5000)
 
       //check that downloaded files are removed
-      const downloadDirSizeAfterCancel = await dirSize(tempFolder)
-      console.log('downloadDirSizeAfterCancel: ', downloadDirSizeAfterCancel)
-      expect(downloadDirSizeAfterCancel).toEqual(0)
+      if (existsSync(tempFolder)) {
+        const downloadDirSizeAfterCancel = await dirSize(tempFolder)
+        console.log('downloadDirSizeAfterCancel: ', downloadDirSizeAfterCancel)
+        expect(downloadDirSizeAfterCancel).toEqual(0)
+      } else {
+        console.log('temp folder does not exist after cancelling download')
+      }
     }
   }
 
