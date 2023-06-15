@@ -39,7 +39,7 @@ test.describe('hp store api tests', function () {
 
   test.beforeAll(async () => {
     page = await hpPage
-    addGameToLibrary(appName)
+    await addGameToLibrary(appName)
     const configFolder = await electronApp.evaluate(async ({ app }) => {
       // This runs in the main Electron process
       return app.getPath('appData')
