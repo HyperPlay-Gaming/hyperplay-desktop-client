@@ -7,7 +7,7 @@ export let electronApp: ElectronApplication
 export let hpPage: Promise<Page>
 
 /* eslint-disable-next-line */
-const withTimeout = async (millis: number, promise: Promise<any>) => {
+export const withTimeout = async (millis: number, promise: Promise<any>) => {
   const timeout = new Promise((resolve, reject) =>
     setTimeout(() => reject(`Timed out after ${millis} ms.`), millis)
   )
@@ -16,6 +16,7 @@ const withTimeout = async (millis: number, promise: Promise<any>) => {
 
 export const launchApp = async () => {
   process.env.CI = 'e2e'
+  process.env.MOCK_DOWNLOAD_URL = `https://drive.google.com/uc?id=1-i_0KTjpyyR09-N6zMWLzbEKRZxYjm4B&export=download&confirm=t&uuid=a9d354ac-b11b-4765-abf1-f96783f25a37`
   if (process.env.TEST_PACKAGED === 'true') {
     console.log('Testing packaged build')
     // must run yarn dist:<platform> prior to test
@@ -75,11 +76,6 @@ export const launchApp = async () => {
       return false
     }
 
-    for (const windowPage of electronApp.windows()) {
-      console.log(`Window already opened with page url ${windowPage.url()}`)
-      getPageTitle(windowPage)
-    }
-
     electronApp
       .waitForEvent('window', {
         predicate: async (page_i: Page) => {
@@ -91,6 +87,11 @@ export const launchApp = async () => {
         console.log(`Error during electronApp.waitForEvent(window): ${err}`)
         rej(err)
       })
+
+    for (const windowPage of electronApp.windows()) {
+      console.log(`Window already opened with page url ${windowPage.url()}`)
+      getPageTitle(windowPage)
+    }
   })
 }
 

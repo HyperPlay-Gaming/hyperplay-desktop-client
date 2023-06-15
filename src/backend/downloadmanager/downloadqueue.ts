@@ -8,10 +8,10 @@ import { sendFrontendMessage } from '../main_window'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
 import { notify } from '../dialog/dialog'
 import i18next from 'i18next'
+import { configFolder } from 'backend/constants'
 import { join } from 'path'
 import { rmSync } from 'graceful-fs'
 import { clean } from 'easydl/dist/utils'
-import { tmpdir } from 'os'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
@@ -196,7 +196,7 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
         gameManagerMap[runner].getGameInfo(appName)
 
       if (runner === 'hyperplay' && releaseMeta) {
-        const tempfolder = join(tmpdir(), appName)
+        const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
         logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
         clean(tempfolder).finally(() => {
           rmSync(tempfolder, { recursive: true, force: true })

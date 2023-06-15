@@ -12,7 +12,7 @@ import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync, rm } from 'graceful-fs'
-import { isMac, isWindows, isLinux } from 'backend/constants'
+import { isMac, isWindows, isLinux, configFolder } from 'backend/constants'
 import {
   downloadFile,
   spawnAsync,
@@ -46,7 +46,6 @@ import {
 import { isOnline } from 'backend/online_monitor'
 import { clean } from 'easydl/dist/utils'
 import { getFirstQueueElement } from 'backend/downloadmanager/downloadqueue'
-import { tmpdir } from 'os'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -214,9 +213,13 @@ async function downloadGame(
     throw new Error('DownloadUrl not found')
   }
 
-  logInfo(`Downloading from ${platformInfo.external_url}`, LogPrefix.HyperPlay)
+  const downloadUrl =
+    process.env.CI && process.env.MOCK_DOWNLOAD_URL && process.env.CI === 'e2e'
+      ? process.env.MOCK_DOWNLOAD_URL
+      : platformInfo.external_url
+  logInfo(`Downloading from ${downloadUrl}`, LogPrefix.HyperPlay)
   await downloadFile(
-    platformInfo.external_url,
+    downloadUrl,
     downloadPath,
     createAbortController(appName),
     (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
@@ -261,7 +264,7 @@ function sanitizeFileName(filename: string) {
 
 function getZipFileName(appName: string, platformInfo: PlatformInfo): string {
   const zipName = encodeURI(platformInfo.name)
-  const tempfolder = path.join(tmpdir(), appName)
+  const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
 
   if (!existsSync(tempfolder)) {
     mkdirSync(tempfolder, { recursive: true })
