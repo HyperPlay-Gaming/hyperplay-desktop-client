@@ -67,6 +67,7 @@ test.describe('hp store api tests', function () {
 
       //check that downloaded files are removed
       const downloadDirSizeAfterCancel = await dirSize(tempFolder)
+      console.log('downloadDirSizeAfterCancel: ', downloadDirSizeAfterCancel)
       expect(downloadDirSizeAfterCancel).toEqual(0)
     }
   }

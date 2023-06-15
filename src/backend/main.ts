@@ -792,6 +792,12 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
+  console.log(
+    'get game info handle with runner',
+    runner,
+    ' and appname',
+    appName
+  )
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
   if (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName)) {
     return null
@@ -1837,7 +1843,7 @@ ipcMain.on('reloadApp', async () => {
 
 ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
   console.log('addHyperplayGame', gameId)
-  addGameToLibrary(gameId)
+  await addGameToLibrary(gameId)
 })
 
 ipcMain.handle(
