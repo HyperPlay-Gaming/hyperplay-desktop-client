@@ -5,6 +5,7 @@ import commonSetup, { electronApp, hpPage } from './common-setup'
 import { stat, readdir } from 'fs/promises'
 import path, { join } from 'path'
 import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
+import { tmpdir } from 'os'
 
 const dirSize = async (directory) => {
   const files = await readdir(directory)
@@ -40,11 +41,7 @@ test.describe('hp store api tests', function () {
   test.beforeAll(async () => {
     page = await hpPage
     await addGameToLibrary(appName)
-    const configFolder = await electronApp.evaluate(async ({ app }) => {
-      // This runs in the main Electron process
-      return app.getPath('appData')
-    })
-    tempFolder = join(configFolder, 'hyperplay', '.temp', appName)
+    tempFolder = join(tmpdir(), appName)
     console.log('tempfolder: ', tempFolder)
   })
 
