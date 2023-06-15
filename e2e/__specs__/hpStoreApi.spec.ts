@@ -4,6 +4,7 @@ import { Page } from 'playwright'
 import commonSetup, { electronApp, hpPage } from './common-setup'
 import { stat, readdir } from 'fs/promises'
 import path, { join } from 'path'
+import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
 
 const dirSize = async (directory) => {
   const files = await readdir(directory)
@@ -32,7 +33,13 @@ test.describe('hp store api tests', function () {
   const appName = '63f8a8c7069b92b74c52d1a3'
   let tempFolder = ''
 
+  const addGameToLibrary = async (appName: string) => {
+    await ipcMainInvokeHandler(electronApp, 'addHyperplayGame', appName)
+  }
+
   test.beforeAll(async () => {
+    page = await hpPage
+    addGameToLibrary(appName)
     const configFolder = await electronApp.evaluate(async ({ app }) => {
       // This runs in the main Electron process
       return app.getPath('appData')
@@ -43,15 +50,9 @@ test.describe('hp store api tests', function () {
 
   // NOTE: if rmDownloadedFiles true, this will close the app
   const cancelDownload = async (rmDownloadedFiles: boolean) => {
-    console.log('cancelling in hp store api test')
     await page.evaluate(
       async ([rmDownloadedFiles]) => {
-        //cancel download
-        console.log('cancelling')
         window.api.cancelDownload(rmDownloadedFiles)
-        // await window.api.kill(appName, 'hyperplay')
-        // await window.api.removeTempDownloadFiles(appName)
-        // window.api.removeFromDMQueue(appName)
       },
       [rmDownloadedFiles]
     )
@@ -154,23 +155,31 @@ test.describe('hp store api tests', function () {
     expect(downloadDirSize).toBeLessThan(downloadDirSizeAfterWait)
   }
 
-  test('hp store: download then cancel and do not keep files', async () => {
+  test.only('hp store: download then cancel and do not keep files', async () => {
     test.setTimeout(600000)
-    page = await hpPage
 
     // download then pause
     await installPartial(appName)
     await cancelDownload(true)
   })
 
-  test.only('hp store: download then pause, resume, cancel and do not keep files', async () => {
+  test('hp store: download, pause, resume, cancel and do not keep files', async () => {
     test.setTimeout(600000)
-    page = await hpPage
 
     // download then pause
     await installPartial(appName)
     await pauseDownload()
     await resumeDownload()
+    await wait(5000)
+    await cancelDownload(true)
+  })
+
+  test('hp store: download, pause, cancel and do not keep files', async () => {
+    test.setTimeout(600000)
+
+    // download then pause
+    await installPartial(appName)
+    await pauseDownload()
     await wait(5000)
     await cancelDownload(true)
   })
