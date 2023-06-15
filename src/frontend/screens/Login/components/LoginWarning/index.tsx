@@ -8,6 +8,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { epicLoginPath, gogLoginPath } from '../..'
 import { NavLink } from 'react-router-dom'
+import { Button } from '@hyperplay/ui'
 
 interface LoginWarningProps {
   warnLoginForStore: null | 'epic' | 'gog'
@@ -43,12 +44,11 @@ const LoginWarning = function ({
         {t('not_logged_in.title', 'You are NOT logged in')}
       </DialogHeader>
       <DialogContent>
-        <p>{textContent}</p>
+        <div className="body">{textContent}</div>
         <NavLink
-          className="button"
           to={warnLoginForStore === 'gog' ? gogLoginPath : epicLoginPath}
         >
-          <span>{t('not_logged_in.login', 'Log in')}</span>
+          <Button type="primary">{t('not_logged_in.login', 'Log in')}</Button>
         </NavLink>
       </DialogContent>
     </Dialog>

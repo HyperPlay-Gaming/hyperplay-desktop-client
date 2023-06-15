@@ -528,7 +528,7 @@ export default React.memo(function Library(): JSX.Element {
             <div>
               <Dropdown
                 options={filters}
-                onChange={setSelectedFilter}
+                onItemChange={setSelectedFilter}
                 selected={selectedFilter}
                 targetWidth={275}
               />
