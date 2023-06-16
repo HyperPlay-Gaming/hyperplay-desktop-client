@@ -41,6 +41,7 @@ export interface GameInstallRequested {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -50,6 +51,7 @@ export interface GameInstallStarted {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -59,6 +61,7 @@ export interface GameInstallSuccess {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -69,6 +72,7 @@ export interface GameInstallFailed {
     store_name: string
     game_name: string
     error: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -78,6 +82,7 @@ export interface GameUpdateRequested {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -87,6 +92,7 @@ export interface GameUpdateStarted {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -96,6 +102,7 @@ export interface GameUpdateSuccess {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -106,6 +113,7 @@ export interface GameUpdateFailed {
     store_name: string
     game_name: string
     error: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -115,6 +123,7 @@ export interface GameUninstallRequested {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -124,6 +133,7 @@ export interface GameUninstallStarted {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -133,6 +143,7 @@ export interface GameUninstallSuccess {
   properties: {
     store_name: string
     game_name: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
@@ -143,6 +154,7 @@ export interface GameUninstallFailed {
     store_name: string
     game_name: string
     error: string
+    game_title: string
   }
   sensitiveProperties?: never
 }
