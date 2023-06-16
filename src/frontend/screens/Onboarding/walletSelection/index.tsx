@@ -66,7 +66,16 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     setShowMetaMaskBrowserSidebarLinks(false)
     const uris: UrisReturn = await window.api.getConnectionUris(provider)
     const qrCodeLink: IMobileRegistryEntryWithQrLink = uris.metamask
-    const qrCode = qrCodeLink.qrCodeLink
+    let qrCode = qrCodeLink.qrCodeLink
+
+    // use base wc: uri for wallet connect. mm deeplink breaks some wallets
+    if (provider === PROVIDERS.WALLET_CONNECT) {
+      const mmUriUrl = new URL(qrCode)
+      const urlParams = new URLSearchParams(mmUriUrl.search)
+      const uri = urlParams.get('uri')
+      qrCode = uri ? uri : qrCode
+    }
+
     const options: QRCodeToStringOptions = {
       type: 'svg',
       color: { light: '#121212', dark: '#ffffffff' }
