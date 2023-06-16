@@ -268,7 +268,6 @@ export async function launchGame(
       if (runner === 'hyperplay') {
         //some games take a while to launch. 8 seconds seems to work well
         setTimeout(async () => injectProcess(gameInfo), 8000)
-        // trackPidPlaytime(child.pid, gameInfo)
       }
 
       await callRunner(
