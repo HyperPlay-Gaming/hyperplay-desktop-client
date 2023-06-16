@@ -1510,7 +1510,7 @@ export const processIsRunning = (pid: number) => {
     return process.kill(pid, 0)
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   } catch (error: any) {
-    console.error(error)
+    console.warn(error)
     return error.code === 'EPERM'
   }
 }

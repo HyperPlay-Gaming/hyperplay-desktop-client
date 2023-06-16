@@ -860,10 +860,7 @@ export async function launch(
   // Log any launch information configured in Legendary's config.ini
   const { stdout } = await runLegendaryCommand(
     ['launch', appName, '--json', '--offline'],
-    createAbortController(appName),
-    undefined,
-    gameInfo,
-    true
+    createAbortController(appName)
   )
 
   appendFileSync(
@@ -924,7 +921,9 @@ export async function launch(
       onOutput: (output) => {
         appendFileSync(logFileLocation(appName), output)
       }
-    }
+    },
+    gameInfo,
+    true
   )
 
   deleteAbortController(appName)
