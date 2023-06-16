@@ -51,7 +51,8 @@
       ],
       "files": [
         "build/bin/win32/*"
-      ]
+      ],
+      "certificateSubjectName": "HyperPlay Labs Inc."
     },
     "portable": {
       "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
