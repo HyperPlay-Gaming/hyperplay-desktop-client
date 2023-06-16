@@ -1,3 +1,5 @@
+import { AppPlatforms, InstallPlatform } from 'common/types'
+
 export interface MetricsOptIn {
   event: 'Metrics Opt-in'
   properties?: never
@@ -42,6 +44,7 @@ export interface GameInstallRequested {
     store_name: string
     game_name: string
     game_title: string
+    platform: InstallPlatform | AppPlatforms
   }
   sensitiveProperties?: never
 }
@@ -52,6 +55,7 @@ export interface GameInstallStarted {
     store_name: string
     game_name: string
     game_title: string
+    platform: InstallPlatform | AppPlatforms
   }
   sensitiveProperties?: never
 }
@@ -62,6 +66,7 @@ export interface GameInstallSuccess {
     store_name: string
     game_name: string
     game_title: string
+    platform: InstallPlatform | AppPlatforms
   }
   sensitiveProperties?: never
 }
@@ -73,6 +78,7 @@ export interface GameInstallFailed {
     game_name: string
     error: string
     game_title: string
+    platform: InstallPlatform | AppPlatforms
   }
   sensitiveProperties?: never
 }
@@ -83,6 +89,7 @@ export interface GameUpdateRequested {
     store_name: string
     game_name: string
     game_title: string
+    platform: InstallPlatform | AppPlatforms
   }
   sensitiveProperties?: never
 }
@@ -93,6 +100,7 @@ export interface GameUpdateStarted {
     store_name: string
     game_name: string
     game_title: string
+    platform: InstallPlatform | AppPlatforms
   }
   sensitiveProperties?: never
 }
@@ -103,6 +111,7 @@ export interface GameUpdateSuccess {
     store_name: string
     game_name: string
     game_title: string
+    platform: InstallPlatform | AppPlatforms
   }
   sensitiveProperties?: never
 }
@@ -114,6 +123,7 @@ export interface GameUpdateFailed {
     game_name: string
     error: string
     game_title: string
+    platform: InstallPlatform | AppPlatforms
   }
   sensitiveProperties?: never
 }
