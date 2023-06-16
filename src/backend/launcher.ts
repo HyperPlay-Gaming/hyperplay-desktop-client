@@ -56,6 +56,7 @@ import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import * as OverlayApp from './overlay/overlay'
 import { gameManagerMap } from 'backend/storeManagers'
+import { trackPidPlaytime } from './metrics/metrics'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -667,6 +668,8 @@ async function callRunner(
   runner: RunnerProps,
   abortController: AbortController,
   options?: CallRunnerOptions,
+  gameInfo?: GameInfo,
+  shouldTrackPlaytime = false,
   injectChildWithHyperPlayOverlay = false
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
@@ -720,6 +723,8 @@ async function callRunner(
       env: { ...process.env, ...options?.env },
       signal: abortController.signal
     })
+    if (child.pid !== undefined && shouldTrackPlaytime && gameInfo)
+      trackPidPlaytime(child.pid.toString(), gameInfo)
 
     if (injectChildWithHyperPlayOverlay) {
       logInfo(
@@ -727,8 +732,9 @@ async function callRunner(
         runner.logPrefix
       )
 
-      if (child.pid !== undefined)
+      if (child.pid !== undefined) {
         OverlayApp.inject({ pid: child.pid.toString() })
+      }
     }
 
     const stdout: string[] = []
@@ -749,6 +755,9 @@ async function callRunner(
         )
         //inject here
         OverlayApp.inject({ pid: PID.trim() })
+        // track when this pid is closed
+        if (shouldTrackPlaytime && gameInfo)
+          trackPidPlaytime(PID.trim(), gameInfo)
       }
       if (options?.logFile) {
         appendFileSync(options.logFile, dataStr)

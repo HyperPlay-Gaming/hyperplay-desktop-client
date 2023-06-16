@@ -25,6 +25,8 @@ import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 import find from 'find-process'
 import * as OverlayApp from 'backend/overlay/overlay'
+import { trackEvent } from 'backend/metrics/metrics'
+import { hrtime } from 'process'
 const buildDir = resolve(__dirname, '../../build')
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
@@ -66,7 +68,8 @@ function domainsAreEqual(url: URL, otherUrl: URL) {
 }
 
 const openNewBrowserGameWindow = async (
-  browserUrl: string
+  browserUrl: string,
+  gameInfo: GameInfo
 ): Promise<boolean> => {
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
@@ -104,7 +107,7 @@ const openNewBrowserGameWindow = async (
             ['https:', 'http:'].includes(protocol) &&
             domainsAreEqual(urlToOpen, urlParent)
           ) {
-            openNewBrowserGameWindow(url)
+            openNewBrowserGameWindow(url, gameInfo)
             return { action: 'deny' }
           }
           openRestrictedBrowserGameWindow(url)
@@ -114,9 +117,38 @@ const openNewBrowserGameWindow = async (
     }
     app.on('web-contents-created', openNewBroswerGameWindowListener)
 
+    //track game launched
+    const start = hrtime.bigint()
+    const { title, app_name, runner } = gameInfo
+    trackEvent({
+      event: 'Game Launched',
+      properties: {
+        isBrowserGame: true,
+        game_name: app_name,
+        game_title: title,
+        store_name: runner,
+        browserUrl: browserUrl
+      }
+    })
+
     browserGame.loadURL(url)
     setTimeout(() => browserGame.focus(), 200)
     browserGame.on('close', () => {
+      //track game closed
+      const end = hrtime.bigint()
+      const elapsedInMs = Math.round(Number(end - start) / 10 ** 6)
+      trackEvent({
+        event: 'Game Closed',
+        properties: {
+          isBrowserGame: true,
+          game_name: app_name,
+          game_title: title,
+          store_name: runner,
+          playTimeInMs: elapsedInMs,
+          browserUrl: browserUrl
+        }
+      })
+
       res(true)
       app.removeListener(
         'web-contents-created',
@@ -171,7 +203,7 @@ export async function launchGame(
   }
 
   if (browserUrl) {
-    return openNewBrowserGameWindow(browserUrl)
+    return openNewBrowserGameWindow(browserUrl, gameInfo)
   }
 
   const gameSettings = await getAppSettings(appName)
@@ -236,6 +268,7 @@ export async function launchGame(
       if (runner === 'hyperplay') {
         //some games take a while to launch. 8 seconds seems to work well
         setTimeout(async () => injectProcess(gameInfo), 8000)
+        // trackPidPlaytime(child.pid, gameInfo)
       }
 
       await callRunner(
@@ -253,6 +286,8 @@ export async function launchGame(
           logFile: logFileLocation(appName),
           logMessagePrefix: LogPrefix.Backend
         },
+        gameInfo,
+        true,
         runner === 'sideload' ? true : false
       )
 

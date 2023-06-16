@@ -1503,3 +1503,27 @@ export {
 export const testingExportsUtils = {
   semverGt
 }
+
+// Return true if process following pid is running
+export const processIsRunning = (pid: number) => {
+  try {
+    return process.kill(pid, 0)
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  } catch (error: any) {
+    console.error(error)
+    return error.code === 'EPERM'
+  }
+}
+
+export const processIsClosed = async (pid: number) => {
+  return new Promise((resolve) => {
+    const check = () => {
+      if (!processIsRunning(pid)) {
+        resolve(true)
+      } else {
+        setTimeout(check, 1000)
+      }
+    }
+    check()
+  })
+}
