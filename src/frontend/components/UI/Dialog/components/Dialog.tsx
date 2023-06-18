@@ -60,21 +60,19 @@ export const Dialog: React.FC<DialogProps> = ({
   )
 
   return (
-    <div className="Dialog">
-      <dialog
-        className={`Dialog__element ${className}`}
-        ref={dialogRef}
-        onClick={onDialogClick}
-      >
-        {showCloseButton && (
-          <div className="Dialog__Close">
-            <button className="Dialog__CloseButton" onClick={onClose}>
-              <FontAwesomeIcon className="Dialog__CloseIcon" icon={faXmark} />
-            </button>
-          </div>
-        )}
-        {children}
-      </dialog>
-    </div>
+    <dialog
+      className={`Dialog__element ${className}`}
+      ref={dialogRef}
+      onClick={onDialogClick}
+    >
+      {showCloseButton && (
+        <div className="Dialog__Close">
+          <button className="Dialog__CloseButton" onClick={onClose}>
+            <FontAwesomeIcon className="Dialog__CloseIcon" icon={faXmark} />
+          </button>
+        </div>
+      )}
+      {children}
+    </dialog>
   )
 }

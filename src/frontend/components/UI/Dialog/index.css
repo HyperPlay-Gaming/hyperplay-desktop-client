@@ -1,12 +1,3 @@
-.Dialog {
-  padding: 0;
-  text-align: left;
-
-  --dialog-margin-horizontal: 32px;
-  --dialog-margin-vertical: 24px;
-  --dialog-gap: 24px;
-}
-
 .Dialog__element {
   top: 0;
   z-index: 8;
@@ -22,6 +13,12 @@
   transform: translateY(50px);
   transition: opacity 500ms, transform 500ms;
   max-width: min(700px, 85vw);
+
+  text-align: left;
+
+  --dialog-margin-horizontal: 32px;
+  --dialog-margin-vertical: 24px;
+  --dialog-gap: 24px;
 }
 
 .Dialog__element[open] {
