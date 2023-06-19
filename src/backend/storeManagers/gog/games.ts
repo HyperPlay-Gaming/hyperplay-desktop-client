@@ -516,7 +516,9 @@ export async function launch(
       onOutput: (output: string) => {
         appendFileSync(logFileLocation(appName), output)
       }
-    }
+    },
+    gameInfo,
+    true
   )
 
   deleteAbortController(appName)
