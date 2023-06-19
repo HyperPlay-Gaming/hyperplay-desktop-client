@@ -1222,12 +1222,12 @@ ipcMain.handle(
       status: 'uninstalling'
     })
 
+    const { title } = gameManagerMap[runner].getGameInfo(appName)
+
     trackEvent({
       event: 'Game Uninstall Started',
-      properties: { game_name: appName, store_name: runner }
+      properties: { game_name: appName, store_name: runner, game_title: title }
     })
-
-    const { title } = gameManagerMap[runner].getGameInfo(appName)
 
     let uninstalled = false
 
@@ -1240,7 +1240,8 @@ ipcMain.handle(
         properties: {
           game_name: appName,
           store_name: runner,
-          error: `${error}`
+          error: `${error}`,
+          game_title: title
         }
       })
       notify({
@@ -1275,7 +1276,11 @@ ipcMain.handle(
 
       trackEvent({
         event: 'Game Uninstall Success',
-        properties: { game_name: appName, store_name: runner }
+        properties: {
+          game_name: appName,
+          store_name: runner,
+          game_title: title
+        }
       })
 
       notify({ title, body: i18next.t('notify.uninstalled') })

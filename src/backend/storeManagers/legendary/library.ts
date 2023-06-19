@@ -638,7 +638,9 @@ export const hasGame = (appName: string) => allGames.has(appName)
 export async function runRunnerCommand(
   commandParts: string[],
   abortController: AbortController,
-  options?: CallRunnerOptions
+  options?: CallRunnerOptions,
+  gameInfo?: GameInfo,
+  shouldTrackPlaytime = false
 ): Promise<ExecResult> {
   const { dir, bin } = getLegendaryBin()
   return callRunner(
@@ -648,6 +650,8 @@ export async function runRunnerCommand(
     {
       ...options,
       verboseLogFile: legendaryLogFile
-    }
+    },
+    gameInfo,
+    shouldTrackPlaytime
   )
 }
