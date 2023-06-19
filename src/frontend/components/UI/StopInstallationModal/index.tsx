@@ -31,7 +31,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
         <Checkbox
           ref={checkbox}
           onClick={() => console.log(checkbox.current?.checked)}
-          defaultChecked={true}
+          defaultChecked={false}
           type="secondary"
         >
           <div className="body">
