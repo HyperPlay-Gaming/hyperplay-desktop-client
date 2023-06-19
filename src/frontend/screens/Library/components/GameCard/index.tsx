@@ -110,9 +110,11 @@ const GameCard = ({
   useEffect(() => {
     setIsLaunching(false)
     const updateGameInfo = async () => {
-      const newInfo = await getGameInfo(appName, runner)
-      if (newInfo) {
-        setGameInfo(newInfo)
+      if (!gameInfoFromProps) {
+        const newInfo = await getGameInfo(appName, runner)
+        if (newInfo) {
+          setGameInfo(newInfo)
+        }
       }
     }
     updateGameInfo()
