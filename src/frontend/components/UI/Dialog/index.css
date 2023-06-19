@@ -1,7 +1,7 @@
 .Dialog {
   padding: 0;
   text-align: left;
-
+  position: absolute;
   --dialog-margin-horizontal: 32px;
   --dialog-margin-vertical: 24px;
   --dialog-gap: 24px;
