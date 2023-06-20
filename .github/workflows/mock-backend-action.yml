@@ -1,0 +1,27 @@
+name: Mock Backend
+
+env:
+  GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Checkout backend mock repository.
+      uses: actions/checkout@v3
+      with:
+        submodules: 'recursive'
+        token: ${{ secrets.pat }}
+        repository: 'HyperPlay-Gaming/hyperplay-mock-backend'
+        path: './hyperplay-mock-backend'
+    - name: Setup NodeJS
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+    - name: Install modules.
+      run: yarn
+      working-directory: './hyperplay-mock-backend'
+    - name: Build and Test
+      run: yarn start
+      working-directory: './hyperplay-mock-backend'

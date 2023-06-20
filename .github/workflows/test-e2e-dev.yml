@@ -16,6 +16,8 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
+      - name: Mock Backend
+        uses: actions/mock-backend-action@v1
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -41,6 +43,8 @@ jobs:
   mac:
     runs-on: macos-latest
     steps:
+      - name: Mock Backend
+        uses: actions/mock-backend-action@v1
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -70,6 +74,8 @@ jobs:
   windows:
     runs-on: windows-latest
     steps:
+      - name: Mock Backend
+        uses: actions/mock-backend-action@v1
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:

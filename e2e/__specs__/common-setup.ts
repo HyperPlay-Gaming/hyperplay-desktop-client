@@ -16,7 +16,7 @@ export const withTimeout = async (millis: number, promise: Promise<any>) => {
 
 export const launchApp = async () => {
   process.env.CI = 'e2e'
-  process.env.MOCK_DOWNLOAD_URL = `https://drive.google.com/uc?id=1-i_0KTjpyyR09-N6zMWLzbEKRZxYjm4B&export=download&confirm=t&uuid=a9d354ac-b11b-4765-abf1-f96783f25a37`
+  process.env.MOCK_DOWNLOAD_URL = `http://127.0.0.1:8080/download/kosium`
   if (process.env.TEST_PACKAGED === 'true') {
     console.log('Testing packaged build')
     // must run yarn dist:<platform> prior to test
@@ -96,12 +96,12 @@ export const launchApp = async () => {
 }
 
 export default function setup(): void {
-  test.beforeAll(async () => {
+  test.beforeEach(async () => {
     test.setTimeout(120000)
     await launchApp()
   })
 
-  test.afterAll(async () => {
+  test.afterEach(async () => {
     await electronApp.close()
   })
 }

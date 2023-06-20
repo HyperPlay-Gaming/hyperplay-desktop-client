@@ -31,14 +31,14 @@ test.describe('hp store api tests', function () {
   commonSetup.call(this)
 
   let page: Page
-  const appName = '63f8a8c7069b92b74c52d1a3'
+  const appName = '64742e70e61cddebcbb7bd68'
   let tempFolder = ''
 
   const addGameToLibrary = async (appName: string) => {
     await ipcMainInvokeHandler(electronApp, 'addHyperplayGame', appName)
   }
 
-  test.beforeAll(async () => {
+  test.beforeEach(async () => {
     page = await hpPage
     await addGameToLibrary(appName)
     const configFolder = await electronApp.evaluate(async ({ app }) => {
@@ -147,7 +147,8 @@ test.describe('hp store api tests', function () {
     })
     //check if download is actually resumed
     const downloadDirSize = await dirSize(tempFolder)
-    await wait(1000)
+    //do not decrease this wait time. easydl downloads in chunks and compresses so it takes a while to see the size increase
+    await wait(10000)
     const downloadDirSizeAfterWait = await dirSize(tempFolder)
     console.log(
       'resume downloadDirSize: ',
@@ -158,7 +159,7 @@ test.describe('hp store api tests', function () {
     expect(downloadDirSize).toBeLessThan(downloadDirSizeAfterWait)
   }
 
-  test.only('hp store: download then cancel and do not keep files', async () => {
+  test('hp store: download then cancel and do not keep files', async () => {
     test.setTimeout(600000)
 
     // download then pause
