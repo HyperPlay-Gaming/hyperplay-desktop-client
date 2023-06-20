@@ -16,26 +16,15 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout backend mock repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
-          repository: 'HyperPlay-Gaming/hyperplay-mock-backend'
-          path: './hyperplay-mock-backend'
-      - name: Setup NodeJS
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-      - name: Install backend mock repo modules.
-        run: yarn
-        working-directory: './hyperplay-mock-backend'
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
-          path: './hp-client'
+      - name: Setup NodeJS
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -46,27 +35,12 @@ jobs:
         run: yarn
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
-        working-directory: './hp-client'
       - name: Build and Test
-        run: cd hyperplay-mock-backend & yarn start & cd - & cd hp-client & yarn test:e2e-ci
+        run: yarn test:e2e-ci
 
   mac:
     runs-on: macos-latest
     steps:
-      - name: Checkout backend mock repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
-          repository: 'HyperPlay-Gaming/hyperplay-mock-backend'
-          path: './hyperplay-mock-backend'
-      - name: Setup NodeJS
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-      - name: Install modules.
-        run: yarn
-        working-directory: './hyperplay-mock-backend'
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -87,7 +61,7 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: cd hyperplay-mock-backend & yarn start & cd .. & yarn test:e2e-ci
+        run: yarn test:e2e-ci
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
@@ -96,20 +70,6 @@ jobs:
   windows:
     runs-on: windows-latest
     steps:
-      - name: Checkout backend mock repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
-          repository: 'HyperPlay-Gaming/hyperplay-mock-backend'
-          path: './hyperplay-mock-backend'
-      - name: Setup NodeJS
-        uses: actions/setup-node@v2
-        with:
-          node-version: '18'
-      - name: Install modules.
-        run: yarn
-        working-directory: './hyperplay-mock-backend'
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -130,7 +90,7 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: cd hyperplay-mock-backend & yarn start & cd .. & yarn test:e2e-ci
+        run: yarn test:e2e-ci
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
