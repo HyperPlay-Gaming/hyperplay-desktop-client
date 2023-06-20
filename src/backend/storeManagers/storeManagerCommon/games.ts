@@ -83,7 +83,7 @@ const openNewBrowserGameWindow = async (
       }
     })
 
-    const abortController = createAbortController(appName)
+    const abortController = createAbortController(gameInfo.app_name)
     abortController.signal.addEventListener('abort', () => {
       browserGame.close()
     })
