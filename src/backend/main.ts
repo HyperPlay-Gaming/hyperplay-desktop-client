@@ -107,10 +107,12 @@ import {
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
+  initLogger,
   logChangedSetting,
   logError,
   logInfo,
   LogPrefix,
+  logsDisabled,
   logWarning
 } from './logger/logger'
 import { gameInfoStore } from 'backend/storeManagers/legendary/electronStores'
@@ -327,6 +329,8 @@ if (!gotTheLock) {
 
     initStoreManagers()
 
+    initLogger()
+
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )
@@ -388,7 +392,10 @@ if (!gotTheLock) {
       const isLoggedIn = LegendaryUser.isLoggedIn()
 
       if (!isLoggedIn) {
-        logInfo('User Not Found, removing it from Store', LogPrefix.Backend)
+        logInfo('User Not Found, removing it from Store', {
+          prefix: LogPrefix.Backend,
+          forceLog: true
+        })
         configStore.delete('userInfo')
       }
 
@@ -1086,6 +1093,13 @@ ipcMain.handle(
         `Game launched at: ${startPlayingDate}\n` +
         '\n'
     )
+
+    if (logsDisabled) {
+      appendFileSync(
+        logFileLocation,
+        'IMPORTANT: Logs are disabled. Enable logs before reporting an issue.'
+      )
+    }
 
     const isNative = gameManagerMap[runner].isNative(appName)
 

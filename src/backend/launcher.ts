@@ -31,6 +31,7 @@ import {
   logError,
   logInfo,
   LogPrefix,
+  logsDisabled,
   logWarning
 } from './logger/logger'
 import { GlobalConfig } from './config'
@@ -593,25 +594,24 @@ async function runWineCommand({
     child.stdout.setEncoding('utf-8')
     child.stderr.setEncoding('utf-8')
 
-    if (options?.logFile) {
-      logDebug(`Logging to file "${options?.logFile}"`, LogPrefix.Backend)
-    }
+    if (!logsDisabled) {
+      if (options?.logFile) {
+        logDebug(`Logging to file "${options?.logFile}"`, LogPrefix.Backend)
+      }
 
-    if (options?.logFile && existsSync(options.logFile)) {
-      writeFileSync(options.logFile, '')
-      appendFileSync(
-        options.logFile,
-        `Wine Command: WINEPREFIX=${winePrefix} ${bin} ${commandParts.join(
-          ' '
-        )}\n\nGame Log:\n`
-      )
+      if (options?.logFile && existsSync(options.logFile)) {
+        appendFileSync(
+          options.logFile,
+          `Wine Command: ${bin} ${commandParts.join(' ')}\n\nGame Log:\n`
+        )
+      }
     }
 
     const stdout: string[] = []
     const stderr: string[] = []
 
     child.stdout.on('data', (data: string) => {
-      if (options?.logFile) {
+      if (!logsDisabled && options?.logFile) {
         appendFileSync(options.logFile, data)
       }
 
@@ -623,7 +623,7 @@ async function runWineCommand({
     })
 
     child.stderr.on('data', (data: string) => {
-      if (options?.logFile) {
+      if (!logsDisabled && options?.logFile) {
         appendFileSync(options.logFile, data)
       }
 
@@ -688,24 +688,26 @@ async function callRunner(
     fullRunnerPath
   )
 
-  logInfo(
-    [(options?.logMessagePrefix ?? `Running command`) + ':', safeCommand],
-    runner.logPrefix
-  )
-
-  if (options?.logFile) {
-    logDebug(`Logging to file "${options?.logFile}"`, runner.logPrefix)
-  }
-
-  if (options?.verboseLogFile) {
-    appendFileSync(
-      options.verboseLogFile,
-      `[${new Date().toLocaleString()}] ${safeCommand}\n`
+  if (!logsDisabled) {
+    logInfo(
+      [(options?.logMessagePrefix ?? `Running command`) + ':', safeCommand],
+      runner.logPrefix
     )
-  }
 
-  if (options?.logFile && existsSync(options.logFile)) {
-    writeFileSync(options.logFile, '')
+    if (options?.logFile) {
+      logDebug(`Logging to file "${options?.logFile}"`, runner.logPrefix)
+    }
+
+    if (options?.verboseLogFile) {
+      appendFileSync(
+        options.verboseLogFile,
+        `[${new Date().toLocaleString()}] ${safeCommand}\n`
+      )
+    }
+
+    if (options?.logFile && existsSync(options.logFile)) {
+      writeFileSync(options.logFile, '')
+    }
   }
 
   // If we have wrappers (things we want to run before the command), set bin to the first wrapper
@@ -776,11 +778,14 @@ async function callRunner(
         )
           trackPidPlaytime(PID.trim(), gameInfo)
       }
-      if (options?.logFile) {
-        appendFileSync(options.logFile, dataStr)
-      }
-      if (options?.verboseLogFile) {
-        appendFileSync(options.verboseLogFile, data)
+      if (!logsDisabled) {
+        if (options?.logFile) {
+          appendFileSync(options.logFile, data)
+        }
+
+        if (options?.verboseLogFile) {
+          appendFileSync(options.verboseLogFile, data)
+        }
       }
 
       if (options?.onOutput) {
@@ -792,12 +797,14 @@ async function callRunner(
 
     child.stderr.setEncoding('utf-8')
     child.stderr.on('data', (data: string) => {
-      if (options?.logFile) {
-        appendFileSync(options.logFile, data)
-      }
+      if (!logsDisabled) {
+        if (options?.logFile) {
+          appendFileSync(options.logFile, data)
+        }
 
-      if (options?.verboseLogFile) {
-        appendFileSync(options.verboseLogFile, data)
+        if (options?.verboseLogFile) {
+          appendFileSync(options.verboseLogFile, data)
+        }
       }
 
       if (options?.onOutput) {

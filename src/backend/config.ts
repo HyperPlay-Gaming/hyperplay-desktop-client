@@ -31,6 +31,8 @@ import {
   getWineskinWine
 } from './utils/compatibility_layers'
 
+import { backendEvents } from './backend_events'
+
 /**
  * This class does config handling.
  * This can't be constructed directly. Use the static method get().
@@ -326,9 +328,15 @@ class GlobalConfigV0 extends GlobalConfig {
 
   public setSetting(key: string, value: unknown) {
     const config = this.getSettings()
+    const configStoreSettings = configStore.get_nodefault('settings') || config
+    configStore.set('settings', { ...configStoreSettings, [key]: value })
+
+    const oldValue = config[key]
     config[key] = value
     this.config = config
-    logInfo(`HyperPlay: Setting ${key} to ${JSON.stringify(value)}`)
+
+    backendEvents.emit('settingChanged', { key, oldValue, newValue: value })
+
     return this.flush()
   }
 
