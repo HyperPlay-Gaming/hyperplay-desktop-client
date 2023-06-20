@@ -2,7 +2,7 @@ name: Code check
 
 on:
   pull_request:
-    branches: [main, stable, feat/ui_overhaul]
+    branches: [main]
   workflow_dispatch:
 
 jobs:

@@ -2,9 +2,9 @@ name: Test E2E Packaged
 
 on:
   pull_request:
-    branches: [main, develop]
+    branches: [main]
   push:
-    branches: [main, develop]
+    branches: [main]
   workflow_dispatch:
 
 env:
