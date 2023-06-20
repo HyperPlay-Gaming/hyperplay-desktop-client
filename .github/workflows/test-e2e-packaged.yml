@@ -31,9 +31,6 @@ jobs:
       - name: Install modules.
         run: yarn
         working-directory: './hyperplay-mock-backend'
-      - name: Build and Test
-        run: yarn start
-        working-directory: './hyperplay-mock-backend'
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -54,7 +51,7 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: yarn test:e2ePackaged-ci
+        run: cd hyperplay-mock-backend & yarn start & cd .. & yarn test:e2ePackaged-ci
 
   mac:
     runs-on: macos-latest
@@ -73,9 +70,6 @@ jobs:
       - name: Install modules.
         run: yarn
         working-directory: './hyperplay-mock-backend'
-      - name: Build and Test
-        run: yarn start
-        working-directory: './hyperplay-mock-backend'
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -96,7 +90,7 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: yarn test:e2ePackaged-ci
+        run: cd hyperplay-mock-backend & yarn start & cd .. & yarn test:e2ePackaged-ci
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
@@ -119,9 +113,6 @@ jobs:
       - name: Install modules.
         run: yarn
         working-directory: './hyperplay-mock-backend'
-      - name: Build and Test
-        run: yarn start
-        working-directory: './hyperplay-mock-backend'
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -142,7 +133,7 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: yarn test:e2ePackaged-ci
+        run: cd hyperplay-mock-backend & yarn start & cd .. & yarn test:e2ePackaged-ci
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
