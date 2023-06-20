@@ -35,6 +35,7 @@ jobs:
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
+          path: './hp-client'
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -45,8 +46,9 @@ jobs:
         run: yarn
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+        working-directory: './hp-client'
       - name: Build and Test
-        run: ls & cd hyperplay-mock-backend & yarn start & cd - & yarn test:e2e-ci
+        run: cd hyperplay-mock-backend & yarn start & cd - & cd hp-client & yarn test:e2e-ci
 
   mac:
     runs-on: macos-latest
