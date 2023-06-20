@@ -2,6 +2,7 @@ import React, { lazy } from 'react'
 import BrowserGame from './browserGame'
 import ExtensionOverlay from './overlay/ExtensionOverlay'
 import ToastOverlay from './overlay/ToastOverlay'
+import { Runner } from 'common/types'
 const App = lazy(async () => import('./App'))
 
 const Views = {
@@ -13,6 +14,8 @@ const Views = {
 type URLSearchParamsProxy = URLSearchParams & {
   view?: string
   browserUrl?: string
+  appName?: string
+  runner?: Runner
 }
 
 const ViewManager = function () {
@@ -26,8 +29,19 @@ const ViewManager = function () {
     }
   )
 
-  if (params.view === 'BrowserGame' && params.browserUrl !== undefined) {
-    return <BrowserGame url={params.browserUrl} />
+  if (
+    params.view === 'BrowserGame' &&
+    params.browserUrl !== undefined &&
+    params.appName !== undefined &&
+    params.runner !== undefined
+  ) {
+    return (
+      <BrowserGame
+        url={params.browserUrl}
+        appName={params.appName}
+        runner={params.runner}
+      />
+    )
   }
 
   // if view doesn't match a key in Views Map, throw

@@ -83,14 +83,21 @@ const openNewBrowserGameWindow = async (
       }
     })
 
+    const abortController = createAbortController(gameInfo.app_name)
+    abortController.signal.addEventListener('abort', () => {
+      browserGame.close()
+    })
+
     const url = !app.isPackaged
-      ? 'http://localhost:5173?view=BrowserGame&browserUrl=' +
-        encodeURIComponent(browserUrl)
+      ? `http://localhost:5173?view=BrowserGame&browserUrl=${encodeURIComponent(
+          browserUrl
+        )}&appName=${gameInfo.app_name}&runner=${gameInfo.runner}`
       : `file://${path.join(
           buildDir,
-          './index.html?view=BrowserGame&browserUrl=' +
-            encodeURIComponent(browserUrl)
-        )}`
+          `./index.html`
+        )}?view=BrowserGame&browserUrl=${encodeURIComponent(
+          browserUrl
+        )}&appName=${gameInfo.app_name}&runner=${gameInfo.runner}`
 
     const urlParent = new URL(browserUrl)
     const openNewBroswerGameWindowListener = (
