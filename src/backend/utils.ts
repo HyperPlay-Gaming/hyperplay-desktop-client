@@ -17,6 +17,7 @@ import {
 import axios from 'axios'
 import EasyDl from 'easydl'
 import yauzl from 'yauzl'
+import yauzl from 'yauzl'
 
 import {
   app,
@@ -1323,6 +1324,10 @@ export async function downloadFile(
       throw new Error('Download stopped or paused')
     }
 
+    logInfo(
+      `Downloader: Finished downloading ${url}`,
+      LogPrefix.DownloadManager
+    )
     logInfo(
       `Downloader: Finished downloading ${url}`,
       LogPrefix.DownloadManager
