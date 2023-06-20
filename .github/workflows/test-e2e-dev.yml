@@ -46,7 +46,7 @@ jobs:
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test
-        run: cd ../hyperplay-desktop-client/hyperplay-desktop-client/hyperplay-mock-backend & yarn start & cd - & yarn test:e2e-ci
+        run: ls & cd hyperplay-mock-backend & yarn start & cd - & yarn test:e2e-ci
 
   mac:
     runs-on: macos-latest
