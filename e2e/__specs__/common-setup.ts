@@ -6,10 +6,18 @@ import { ElectronApplication, _electron as electron } from 'playwright'
 export let electronApp: ElectronApplication
 export let hpPage: Promise<Page>
 
-/* eslint-disable-next-line */
-export const withTimeout = async (millis: number, promise: Promise<any>) => {
+export const withTimeout = async (
+  millis: number,
+  /* eslint-disable-next-line */
+  promise: Promise<any>,
+  rejectOnTimeout = true
+) => {
   const timeout = new Promise((resolve, reject) =>
-    setTimeout(() => reject(`Timed out after ${millis} ms.`), millis)
+    setTimeout(
+      () =>
+        (rejectOnTimeout ? reject : resolve)(`Timed out after ${millis} ms.`),
+      millis
+    )
   )
   return Promise.race([promise, timeout])
 }
@@ -66,7 +74,7 @@ export const launchApp = async () => {
     const getPageTitle = async (page_i: Page) => {
       try {
         const title = await withTimeout(15000, page_i.title())
-        if (title === 'HyperPlay') {
+        if (title === 'HyperPlay' && page_i.url().includes('?view=App')) {
           res(page_i)
           return true
         }

@@ -7,6 +7,9 @@ import { stat, readdir } from 'fs/promises'
 import path, { join } from 'path'
 import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
 
+const testTimeout = 120000
+const installPartialTimeout = 25000
+
 const dirSize = async (directory) => {
   const files = await readdir(directory)
   const stats = files.map(async (file) => stat(path.join(directory, file)))
@@ -47,6 +50,14 @@ test.describe('hp store api tests', function () {
     })
     tempFolder = join(configFolder, 'hyperplay', '.temp', appName)
     console.log('tempfolder: ', tempFolder)
+  })
+
+  test.afterEach(async () => {
+    // if a test throws, the lock will prevent the test from quitting
+    if (!page.isClosed())
+      await page.evaluate(async () => {
+        window.api.unlock()
+      })
   })
 
   // NOTE: if rmDownloadedFiles true, this will close the app
@@ -91,7 +102,41 @@ test.describe('hp store api tests', function () {
 
         const gameInfo = await window.api.getGameInfo(appName, 'hyperplay')
 
-        await window.api.install({
+        const xMbDownloaded = (res, numberOfMb: number) => {
+          return async (e, status: GameStatus) => {
+            console.log(
+              'progress update for download: ',
+              JSON.stringify(status, null, 4)
+            )
+            if (
+              status.progress?.bytes &&
+              Number.parseFloat(status.progress?.bytes) > numberOfMb
+            )
+              res()
+            else {
+              if (status.progress?.bytes)
+                console.log(
+                  'not enough bytes downloaded yet ',
+                  status.progress?.bytes,
+                  ' ',
+                  Number.parseFloat(status.progress?.bytes) > numberOfMb
+                )
+            }
+          }
+        }
+
+        const gameIsPartiallyDownloaded = async () => {
+          return new Promise((resolve) => {
+            window.api.onProgressUpdate(
+              appName,
+              xMbDownloaded(resolve, 5 / 1024)
+            )
+          })
+        }
+
+        const gamePartiallYDownloadedPromise = gameIsPartiallyDownloaded()
+
+        window.api.install({
           appName,
           gameInfo,
           runner: 'hyperplay',
@@ -99,25 +144,26 @@ test.describe('hp store api tests', function () {
           platformToInstall: 'windows_amd64'
         })
 
-        const xMbDownloaded = (res, numberOfMb: number) => {
-          return async (e, status: GameStatus) => {
-            console.log(JSON.stringify(status, null, 4))
-            if (
-              status.progress?.bytes &&
-              Number.parseInt(status.progress?.bytes) > numberOfMb
+        const withTimeout = async (
+          millis: number,
+          /* eslint-disable-next-line */
+          promise: Promise<any>,
+          rejectOnTimeout = true
+        ) => {
+          const timeout = new Promise((resolve, reject) =>
+            setTimeout(
+              () =>
+                (rejectOnTimeout ? reject : resolve)(
+                  `Timed out after ${millis} ms.`
+                ),
+              millis
             )
-              res()
-          }
+          )
+          return Promise.race([promise, timeout])
         }
 
-        const gameIsPartiallyDownloaded = async () => {
-          return new Promise((resolve) => {
-            // window.api.handleGameStatus(xMbDownloaded(resolve, 10))
-            window.api.onProgressUpdate(appName, xMbDownloaded(resolve, 10))
-          })
-        }
+        await withTimeout(20000, gamePartiallYDownloadedPromise)
 
-        await gameIsPartiallyDownloaded()
         return defaultInstallPath
       },
       [appName]
@@ -128,9 +174,10 @@ test.describe('hp store api tests', function () {
     await page.evaluate(async () => {
       window.api.pauseCurrentDownload()
     })
+    await wait(8000)
     //check if download is actually paused
     const downloadDirSize = await dirSize(tempFolder)
-    await wait(1000)
+    await wait(2000)
     const downloadDirSizeAfterWait = await dirSize(tempFolder)
     console.log(
       'pause downloadDirSize: ',
@@ -148,7 +195,7 @@ test.describe('hp store api tests', function () {
     //check if download is actually resumed
     const downloadDirSize = await dirSize(tempFolder)
     //do not decrease this wait time. easydl downloads in chunks and compresses so it takes a while to see the size increase
-    await wait(10000)
+    await wait(4000)
     const downloadDirSizeAfterWait = await dirSize(tempFolder)
     console.log(
       'resume downloadDirSize: ',
@@ -160,39 +207,39 @@ test.describe('hp store api tests', function () {
   }
 
   test('hp store: download then cancel and do not keep files', async () => {
-    test.setTimeout(600000)
+    test.setTimeout(testTimeout)
 
     // download then pause
     console.log('installing')
-    await withTimeout(10000, installPartial(appName))
+    await withTimeout(installPartialTimeout, installPartial(appName), false)
     console.log('canceling')
     await cancelDownload(true)
   })
 
   test('hp store: download, pause, resume, cancel and do not keep files', async () => {
-    test.setTimeout(600000)
+    test.setTimeout(testTimeout)
 
     // download then pause
     console.log('installing')
-    await withTimeout(10000, installPartial(appName))
+    await withTimeout(installPartialTimeout, installPartial(appName), false)
     console.log('pausing')
     await pauseDownload()
     console.log('resuming')
     await resumeDownload()
-    await wait(5000)
+    await wait(4000)
     console.log('canceling')
     await cancelDownload(true)
   })
 
   test('hp store: download, pause, cancel and do not keep files', async () => {
-    test.setTimeout(600000)
+    test.setTimeout(testTimeout)
 
     // download then pause
     console.log('installing')
-    await withTimeout(10000, installPartial(appName))
+    await withTimeout(installPartialTimeout, installPartial(appName), false)
     console.log('pausing')
     await pauseDownload()
-    await wait(5000)
+    await wait(4000)
     console.log('canceling')
     await cancelDownload(true)
   })
