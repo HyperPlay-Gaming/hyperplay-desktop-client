@@ -214,7 +214,11 @@ async function downloadGame(
   }
 
   const downloadUrl =
-    process.env.CI && process.env.MOCK_DOWNLOAD_URL && process.env.CI === 'e2e'
+    process.env.CI &&
+    process.env.MOCK_DOWNLOAD_URL &&
+    process.env.CI === 'e2e' &&
+    process.env.APP_NAME_TO_MOCK &&
+    process.env.APP_NAME_TO_MOCK === appName
       ? process.env.MOCK_DOWNLOAD_URL
       : platformInfo.external_url
   logInfo(`Downloading from ${downloadUrl}`, LogPrefix.HyperPlay)

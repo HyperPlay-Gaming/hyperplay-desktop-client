@@ -22,9 +22,12 @@ export const withTimeout = async (
   return Promise.race([promise, timeout])
 }
 
+export const appNameToMock = '64742e70e61cddebcbb7bd68'
+
 export const launchApp = async () => {
   process.env.CI = 'e2e'
   process.env.MOCK_DOWNLOAD_URL = `http://127.0.0.1:8080/download/kosium`
+  process.env.APP_NAME_TO_MOCK = appNameToMock
   if (process.env.TEST_PACKAGED === 'true') {
     console.log('Testing packaged build')
     // must run yarn dist:<platform> prior to test

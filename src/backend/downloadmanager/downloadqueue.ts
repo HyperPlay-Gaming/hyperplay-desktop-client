@@ -67,6 +67,8 @@ function getFirstQueueElement() {
 }
 
 async function initQueue() {
+  if (!isIdle() && !isPaused()) return
+
   let element = getFirstQueueElement()
 
   while (element) {

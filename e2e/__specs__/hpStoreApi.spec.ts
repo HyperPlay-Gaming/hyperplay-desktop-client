@@ -2,7 +2,12 @@ import { existsSync } from 'graceful-fs'
 import { AppSettings, GameStatus } from '../../src/common/types'
 import { expect, test } from '@playwright/test'
 import { Page } from 'playwright'
-import commonSetup, { electronApp, hpPage, withTimeout } from './common-setup'
+import commonSetup, {
+  appNameToMock,
+  electronApp,
+  hpPage,
+  withTimeout
+} from './common-setup'
 import { stat, readdir } from 'fs/promises'
 import path, { join } from 'path'
 import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
@@ -34,7 +39,7 @@ test.describe('hp store api tests', function () {
   commonSetup.call(this)
 
   let page: Page
-  const appName = '64742e70e61cddebcbb7bd68'
+  const appName = appNameToMock
   let tempFolder = ''
 
   const addGameToLibrary = async (appName: string) => {
@@ -174,10 +179,10 @@ test.describe('hp store api tests', function () {
     await page.evaluate(async () => {
       window.api.pauseCurrentDownload()
     })
-    await wait(8000)
+    await wait(2000)
     //check if download is actually paused
     const downloadDirSize = await dirSize(tempFolder)
-    await wait(2000)
+    await wait(1000)
     const downloadDirSizeAfterWait = await dirSize(tempFolder)
     console.log(
       'pause downloadDirSize: ',
@@ -226,7 +231,6 @@ test.describe('hp store api tests', function () {
     await pauseDownload()
     console.log('resuming')
     await resumeDownload()
-    await wait(4000)
     console.log('canceling')
     await cancelDownload(true)
   })
@@ -239,7 +243,6 @@ test.describe('hp store api tests', function () {
     await withTimeout(installPartialTimeout, installPartial(appName), false)
     console.log('pausing')
     await pauseDownload()
-    await wait(4000)
     console.log('canceling')
     await cancelDownload(true)
   })
