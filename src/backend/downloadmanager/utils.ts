@@ -50,7 +50,9 @@ async function installQueueElement(params: InstallParams): Promise<{
     event: 'Game Install Started',
     properties: {
       game_name: appName,
-      store_name: runner
+      store_name: runner,
+      game_title: title,
+      platform: platformToInstall
     }
   })
 
@@ -96,7 +98,9 @@ async function installQueueElement(params: InstallParams): Promise<{
       event: 'Game Install Success',
       properties: {
         game_name: appName,
-        store_name: runner
+        store_name: runner,
+        game_title: title,
+        platform: platformToInstall
       }
     })
 
@@ -114,7 +118,9 @@ async function installQueueElement(params: InstallParams): Promise<{
       properties: {
         game_name: appName,
         store_name: runner,
-        error: `${error}`
+        error: `${error}`,
+        game_title: title,
+        platform: platformToInstall
       }
     })
     errorMessage(`${error}`)
@@ -174,7 +180,9 @@ async function updateQueueElement(params: InstallParams): Promise<{
     event: 'Game Update Started',
     properties: {
       game_name: appName,
-      store_name: runner
+      store_name: runner,
+      game_title: title,
+      platform: params.platformToInstall
     }
   })
   const errorMessage = (error: string) => {
@@ -194,7 +202,9 @@ async function updateQueueElement(params: InstallParams): Promise<{
         event: 'Game Update Success',
         properties: {
           game_name: appName,
-          store_name: runner
+          store_name: runner,
+          game_title: title,
+          platform: params.platformToInstall
         }
       })
     }
@@ -207,7 +217,9 @@ async function updateQueueElement(params: InstallParams): Promise<{
       properties: {
         game_name: appName,
         store_name: runner,
-        error: 'update aborted'
+        error: 'update aborted',
+        game_title: title,
+        platform: params.platformToInstall
       }
     })
     notify({ title, body: i18next.t('notify.update.canceled') })

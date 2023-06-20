@@ -154,3 +154,7 @@ export const handleNavToEpicAndOpen = (
     ipcRenderer.removeListener('navToEpicAndOpenGame', onMessage)
   }
 }
+
+export const copyWalletConnectBaseURIToClipboard = () => {
+  ipcRenderer.send('copyWalletConnectBaseURIToClipboard')
+}
