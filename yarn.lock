@@ -1106,10 +1106,10 @@
     node-addon-api "^4.1.0"
     node-gyp "^9.3.1"
 
-"@hyperplay/ui@^0.1.3":
-  version "0.1.3"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.3.tgz#ba8f38cef4c5e09a8fff311993c68f26087c2025"
-  integrity sha512-BarNBMPR1kG/G5iH+ieoKsrchFItBCvAi/A/1/0C3QwKV54UqlRJBzx6+iWAxHFFfufwwMTDqAzVMBTU6TdMkg==
+"@hyperplay/ui@^0.1.4":
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.4.tgz#303fc9c02e76df47e7a015ebf340bcec18adc775"
+  integrity sha512-8EJ0kLYkXjKVXKHw6zjfI8pp1s5KfC7rTa4ontPT6G7NmN6pgYsWtoHtwL35h6DSpKviEAHho3YydiIu7wT9Ew==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"

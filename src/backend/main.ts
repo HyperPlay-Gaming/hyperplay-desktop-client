@@ -154,6 +154,7 @@ import { addGameToLibrary } from './storeManagers/hyperplay/library'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
+import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import {
   autoUpdate,
   gameManagerMap,
@@ -657,31 +658,9 @@ ipcMain.on('showConfigFileInFolder', async (event, appName) => {
   return openUrlOrFile(path.join(gamesConfigPath, `${appName}.json`))
 })
 
-export function removeFolder(path: string, folderName: string) {
-  if (path === 'default') {
-    const { defaultInstallPath } = GlobalConfig.get().getSettings()
-    const path = defaultInstallPath.replaceAll("'", '')
-    const folderToDelete = `${path}/${folderName}`
-    if (existsSync(folderToDelete)) {
-      return setTimeout(() => {
-        rmSync(folderToDelete, { recursive: true })
-      }, 5000)
-    }
-    return
-  }
-
-  const folderToDelete = `${path}/${folderName}`.replaceAll("'", '')
-  if (existsSync(folderToDelete)) {
-    return setTimeout(() => {
-      rmSync(folderToDelete, { recursive: true })
-    }, 2000)
-  }
-  return
-}
-
-ipcMain.on('removeFolder', async (e, [path, folderName]) => {
-  removeFolder(path, folderName)
-})
+ipcMain.handle('removeTempDownloadFiles', async (e, appName) =>
+  HyperPlayGameManager.removeTempDownloadFiles(appName)
+)
 
 async function runWineCommandOnGame(
   runner: string,
@@ -1863,7 +1842,7 @@ ipcMain.on('reloadApp', async () => {
 
 ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
   console.log('addHyperplayGame', gameId)
-  addGameToLibrary(gameId)
+  await addGameToLibrary(gameId)
 })
 
 ipcMain.handle(

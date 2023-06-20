@@ -11,7 +11,7 @@ import { InstallPlatform } from 'common/types'
 import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
-import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
+import { existsSync, mkdirSync, rmSync, readdirSync, rm } from 'graceful-fs'
 import { isMac, isWindows, isLinux, configFolder } from 'backend/constants'
 import {
   downloadFile,
@@ -45,6 +45,7 @@ import {
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
 import { clean } from 'easydl/dist/utils'
+import { getFirstQueueElement } from 'backend/downloadmanager/downloadqueue'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -212,58 +213,69 @@ async function downloadGame(
     throw new Error('DownloadUrl not found')
   }
 
-  try {
-    logInfo(
-      `Downloading from ${platformInfo.external_url}`,
-      LogPrefix.HyperPlay
-    )
-    await downloadFile(
-      platformInfo.external_url,
-      downloadPath,
-      createAbortController(appName),
-      (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
-        const eta = calculateEta(
-          downloadedBytes,
-          downloadSpeed,
-          platformInfo.downloadSize
-        )
+  const downloadUrl =
+    process.env.CI &&
+    process.env.MOCK_DOWNLOAD_URL &&
+    process.env.CI === 'e2e' &&
+    process.env.APP_NAME_TO_MOCK &&
+    process.env.APP_NAME_TO_MOCK === appName
+      ? process.env.MOCK_DOWNLOAD_URL
+      : platformInfo.external_url
+  logInfo(`Downloading from ${downloadUrl}`, LogPrefix.HyperPlay)
+  await downloadFile(
+    downloadUrl,
+    downloadPath,
+    createAbortController(appName),
+    (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
+      const eta = calculateEta(
+        downloadedBytes,
+        downloadSpeed,
+        platformInfo.downloadSize
+      )
 
-        if (downloadedBytes > 0 && !downloadStarted) {
-          downloadStarted = true
-          sendFrontendMessage('gameStatusUpdate', {
-            appName,
-            status: 'installing',
-            runner: 'hyperplay',
-            folder: destinationPath
-          })
-        }
-
-        window.webContents.send(`progressUpdate-${appName}`, {
+      if (downloadedBytes > 0 && !downloadStarted) {
+        downloadStarted = true
+        sendFrontendMessage('gameStatusUpdate', {
           appName,
           status: 'installing',
           runner: 'hyperplay',
-          folder: destinationPath,
-          progress: {
-            percent: progress,
-            diskSpeed: diskWriteSpeed / 1024 / 1024,
-            downSpeed: downloadSpeed / 1024 / 1024,
-            bytes: downloadedBytes / 1024 / 1024,
-            folder: destinationPath,
-            eta
-          }
+          folder: destinationPath
         })
       }
-    )
-    deleteAbortController(appName)
-  } catch (error) {
-    deleteAbortController(appName)
-    logWarning(`Download stopped ${error}`, LogPrefix.HyperPlay)
-    throw new Error(`Download stopped ${error}`)
-  }
+
+      window.webContents.send(`progressUpdate-${appName}`, {
+        appName,
+        status: 'installing',
+        runner: 'hyperplay',
+        folder: destinationPath,
+        progress: {
+          percent: progress,
+          diskSpeed: diskWriteSpeed / 1024 / 1024,
+          downSpeed: downloadSpeed / 1024 / 1024,
+          bytes: downloadedBytes / 1024 / 1024,
+          folder: destinationPath,
+          eta
+        }
+      })
+    }
+  )
+  deleteAbortController(appName)
 }
 
 function sanitizeFileName(filename: string) {
   return filename.replace(/[/\\?%*:|"<>]/g, '-')
+}
+
+function getZipFileName(appName: string, platformInfo: PlatformInfo): string {
+  const zipName = encodeURI(platformInfo.name)
+  const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
+
+  if (!existsSync(tempfolder)) {
+    mkdirSync(tempfolder, { recursive: true })
+  }
+
+  const zipFile = path.join(tempfolder, zipName)
+  return zipFile
 }
 
 export async function install(
@@ -282,18 +294,11 @@ export async function install(
     return { status: 'error', error: 'Release meta not found' }
   }
 
-  logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
-
   const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
   const platformInfo = releaseMeta.platforms[appPlatform]
-  const zipName = encodeURI(platformInfo.name)
-  const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
 
-  if (!existsSync(tempfolder)) {
-    mkdirSync(tempfolder, { recursive: true })
-  }
-
-  const zipFile = path.join(tempfolder, zipName)
+  logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
+  const zipFile = getZipFileName(appName, platformInfo)
 
   // download the zip file
   try {
@@ -373,14 +378,40 @@ export async function install(
     }
     return { status: 'done' }
   } catch (error) {
-    logInfo('Error while downloading and extracting game', LogPrefix.HyperPlay)
-    rmSync(zipFile)
-    clean(zipFile)
+    logInfo(
+      `Error while downloading and extracting game: ${error}`,
+      LogPrefix.HyperPlay
+    )
+    if (!`${error}`.includes('Download stopped or paused')) {
+      if (existsSync(zipFile)) rmSync(zipFile)
+      clean(zipFile)
+    }
     return {
       status: 'error',
       error: `${error}`
     }
   }
+}
+
+export async function removeTempDownloadFiles(appName: string) {
+  const currentElement = getFirstQueueElement()
+  if (!currentElement || currentElement.params.appName !== appName) return
+
+  const gameInfo = getGameInfo(appName)
+  const { releaseMeta } = gameInfo
+  if (!releaseMeta) return
+  const appPlatform = handleArchAndPlatform(
+    currentElement.params.platformToInstall,
+    releaseMeta
+  )
+  const platformInfo = releaseMeta.platforms[appPlatform]
+
+  const zipFile = getZipFileName(appName, platformInfo)
+  if (existsSync(zipFile))
+    rm(zipFile, () =>
+      logInfo(`Removed zip file: ${zipFile}`, LogPrefix.HyperPlay)
+    )
+  clean(zipFile)
 }
 
 export function getGameInfo(appName: string): GameInfo {

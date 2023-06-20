@@ -1320,7 +1320,7 @@ export async function downloadFile(
         `Downloader: Download stopped or paused`,
         LogPrefix.DownloadManager
       )
-      throw new Error('Download incomplete')
+      throw new Error('Download stopped or paused')
     }
 
     logInfo(
@@ -1332,7 +1332,7 @@ export async function downloadFile(
       `Downloader: Download Failed with: ${err}`,
       LogPrefix.DownloadManager
     )
-    throw new Error('Download failed')
+    throw new Error(`Download failed with ${err}`)
   }
 }
 

@@ -4,3 +4,6 @@
 [submodule "src/backend/hyperplay-extension-helper"]
 	path = src/backend/hyperplay-extension-helper
 	url = https://github.com/HyperPlay-Gaming/hyperplay-extension-helper.git
+[submodule "e2e/__mocks__/hyperplay-mock-backend"]
+	path = e2e/__mocks__/hyperplay-mock-backend
+	url = https://github.com/HyperPlay-Gaming/hyperplay-mock-backend.git
