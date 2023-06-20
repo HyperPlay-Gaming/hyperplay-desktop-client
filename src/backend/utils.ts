@@ -1320,7 +1320,7 @@ export async function downloadFile(
         `Downloader: Download stopped or paused`,
         LogPrefix.DownloadManager
       )
-      throw new Error('Download incomplete')
+      throw new Error('Download stopped or paused')
     }
 
     logInfo(
@@ -1332,7 +1332,7 @@ export async function downloadFile(
       `Downloader: Download Failed with: ${err}`,
       LogPrefix.DownloadManager
     )
-    throw new Error('Download failed')
+    throw new Error(`Download failed with ${err}`)
   }
 }
 
@@ -1502,4 +1502,28 @@ export {
 // ts-prune-ignore-next
 export const testingExportsUtils = {
   semverGt
+}
+
+// Return true if process following pid is running
+export const processIsRunning = (pid: number) => {
+  try {
+    return process.kill(pid, 0)
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  } catch (error: any) {
+    console.warn(error)
+    return error.code === 'EPERM'
+  }
+}
+
+export const processIsClosed = async (pid: number) => {
+  return new Promise((resolve) => {
+    const check = () => {
+      if (!processIsRunning(pid)) {
+        resolve(true)
+      } else {
+        setTimeout(check, 1000)
+      }
+    }
+    check()
+  })
 }

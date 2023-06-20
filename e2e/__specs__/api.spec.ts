@@ -22,6 +22,7 @@ test.describe('api e2e test', function () {
 
   test('gets app, legendary, and gog versions', async () => {
     test.setTimeout(600000)
+    page = await hpPage
     const appVersion = await page.evaluate(async () => {
       return window.api.getAppVersion()
     })
@@ -47,6 +48,7 @@ test.describe('api e2e test', function () {
 
   test('test ipcMainInvokeHandler', async () => {
     test.setTimeout(600000)
+    page = await hpPage
     const platform: DiskSpaceData = (await ipcMainInvokeHandler(
       electronApp,
       'getPlatform'

@@ -39,15 +39,23 @@ else
     yarn vite build
 fi
 
+# mock backend server
+cd e2e/__mocks__/hyperplay-mock-backend
+yarn
+cd ../../../
+
 echo
 echo "########"
 echo "# Test #"
 echo "########"
 echo
 
+# tests must be run sequentially because two hp clients cannot be open at the same time
 if [[ "$os" == "linux" ]]
 then
-    xvfb-run -a -e /dev/stdout -s "-screen 0 1280x960x24" yarn playwright test .*.spec.ts
+    yarn playwright test .*/api.spec.ts
+    cd e2e/__mocks__/hyperplay-mock-backend && yarn start & sleep 5 && xvfb-run -a -e /dev/stdout -s "-screen 0 1280x960x24" yarn playwright test .*hpStoreApi.spec.ts
 else
-    yarn playwright test .*.spec.ts
+    yarn playwright test .*/api.spec.ts
+    cd e2e/__mocks__/hyperplay-mock-backend && yarn start & sleep 5 && yarn playwright test .*hpStoreApi.spec.ts
 fi

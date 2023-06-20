@@ -4,12 +4,15 @@ import BrowserExtensionManager from './BrowserExtensionManager'
 import BrowserToastManager from './BrowserToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
 import BrowserExtensionToastManager from './BrowserExtensionToastManager'
+import { Runner } from 'common/types'
 
 interface BrowserGameProps {
   url: string
+  appName: string
+  runner: Runner
 }
 
-const BrowserGame = function ({ url }: BrowserGameProps) {
+const BrowserGame = function ({ url, appName, runner }: BrowserGameProps) {
   const [provider, setProvider] = useState('')
 
   useEffect(() => {
@@ -21,9 +24,10 @@ const BrowserGame = function ({ url }: BrowserGameProps) {
   /* eslint-disable react/no-unknown-property */
   return (
     <div>
-      <BrowserExtensionManager />
+      <BrowserExtensionManager appName={appName} runner={runner} />
       <BrowserToastManager showCloseButton={true} />
       <BrowserExtensionToastManager showCloseButton={true} />
+
       {provider !== '' ? (
         <webview
           src={url}

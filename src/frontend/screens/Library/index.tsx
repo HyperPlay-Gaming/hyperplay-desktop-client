@@ -88,6 +88,9 @@ export default React.memo(function Library(): JSX.Element {
   } = useContext(ContextProvider)
   const { t } = useTranslation()
 
+  const isGOGLoggedin = gog.username
+  const isEpicLoggedin = epic.username
+
   const filters: DropdownItemType[] = [
     {
       text: t('library.sortByStatus', 'Sort by Status'),
@@ -528,7 +531,7 @@ export default React.memo(function Library(): JSX.Element {
             <div>
               <Dropdown
                 options={filters}
-                onChange={setSelectedFilter}
+                onItemChange={setSelectedFilter}
                 selected={selectedFilter}
                 targetWidth={275}
               />
@@ -577,12 +580,16 @@ export default React.memo(function Library(): JSX.Element {
             <Tabs.Tab value="hyperplay">
               <div className="menu">{t('HyperPlay')}</div>
             </Tabs.Tab>
-            <Tabs.Tab value="legendary">
-              <div className="menu">EPIC</div>
-            </Tabs.Tab>
-            <Tabs.Tab value="gog">
-              <div className="menu">GOG</div>
-            </Tabs.Tab>
+            {isEpicLoggedin && (
+              <Tabs.Tab value="legendary">
+                <div className="menu">EPIC</div>
+              </Tabs.Tab>
+            )}
+            {isGOGLoggedin && (
+              <Tabs.Tab value="gog">
+                <div className="menu">GOG</div>
+              </Tabs.Tab>
+            )}
             <Tabs.Tab value="sideload">
               <div className="menu">{t('Other')}</div>
             </Tabs.Tab>

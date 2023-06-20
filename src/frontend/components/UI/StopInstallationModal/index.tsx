@@ -7,7 +7,6 @@ import {
 } from 'frontend/components/UI/Dialog'
 import { useTranslation } from 'react-i18next'
 import { Button, Checkbox } from '@hyperplay/ui'
-import { sendKill } from 'frontend/helpers'
 import { InstallProgress, Runner } from 'common/types'
 const storage: Storage = window.localStorage
 
@@ -32,7 +31,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
         <Checkbox
           ref={checkbox}
           onClick={() => console.log(checkbox.current?.checked)}
-          defaultChecked={true}
+          defaultChecked={false}
           type="secondary"
         >
           <div className="body">
@@ -64,14 +63,13 @@ export default function StopInstallationModal(props: StopInstallProps) {
                 props.appName,
                 JSON.stringify({ ...props.progress, folder: props.installPath })
               )
-              sendKill(props.appName, props.runner)
+              window.api.cancelDownload(false)
             }
             // if user does not want to keep downloaded files but still wants to cancel download
             else {
               props.onClose()
-              await sendKill(props.appName, props.runner)
+              window.api.cancelDownload(true)
               storage.removeItem(props.appName)
-              window.api.removeFolder([props.installPath, props.folderName])
             }
           }}
         >
