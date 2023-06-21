@@ -12,7 +12,7 @@ const storage: Storage = window.localStorage
 
 interface StopInstallProps {
   onClose: () => void
-  installPath: string
+  installPath: string | undefined
   folderName: string
   appName: string
   runner: Runner
@@ -59,10 +59,15 @@ export default function StopInstallationModal(props: StopInstallProps) {
             // if user wants to keep downloaded files and cancel download
             if (checkbox.current && checkbox.current.checked) {
               props.onClose()
-              storage.setItem(
-                props.appName,
-                JSON.stringify({ ...props.progress, folder: props.installPath })
-              )
+
+              /* this sets the latest progress to window.localStorage so that when installing again,
+               * it will auto fill the installation modal with the previous folder install path and download progress
+               */
+              const latestProgress = {
+                ...props.progress,
+                folder: props.installPath
+              }
+              storage.setItem(props.appName, JSON.stringify(latestProgress))
               window.api.cancelDownload(false)
             }
             // if user does not want to keep downloaded files but still wants to cancel download

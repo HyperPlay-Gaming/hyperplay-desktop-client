@@ -317,7 +317,7 @@ const GameCard = ({
         <StopInstallationModal
           onClose={() => setShowStopInstallModal(false)}
           progress={progress}
-          installPath={folder || 'default'}
+          installPath={folder}
           appName={appName}
           runner={runner}
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}

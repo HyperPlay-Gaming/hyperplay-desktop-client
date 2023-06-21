@@ -321,7 +321,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
         {showStopInstallModal ? (
           <StopInstallationModal
             onClose={() => setShowStopInstallModal(false)}
-            installPath={folder ? folder : ''}
+            installPath={folder}
             progress={progress}
             folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
             appName={gameInfo.app_name}

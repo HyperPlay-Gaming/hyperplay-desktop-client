@@ -213,8 +213,6 @@ export default function DownloadToastManager() {
     return <></>
   }
   const installPath = currentElement?.params.path
-    ? currentElement?.params.path
-    : ''
 
   function getDownloadStatus(): downloadStatus {
     if (dmState === 'paused') return 'paused'
