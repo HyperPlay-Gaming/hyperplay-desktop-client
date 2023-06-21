@@ -18,13 +18,18 @@ import {
   UseDarkTrayIcon,
   WinePrefixesBasePath
 } from '../../components'
+import AppVersion from 'frontend/components/UI/AppVersion'
 
 export default function GeneralSettings() {
   const { t } = useTranslation()
 
   return (
     <>
-      <h3 className="settingSubheader">{t('settings.navbar.general')}</h3>
+      <AppVersion />
+
+      <div className="settingSubheader settingsSectionHeader title">
+        {t('settings.navbar.general')}
+      </div>
 
       <LanguageSelector />
 

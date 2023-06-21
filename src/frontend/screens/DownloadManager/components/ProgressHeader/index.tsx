@@ -47,6 +47,9 @@ export default function ProgressHeader(props: {
     setAvgDownloadSpeed([...avgSpeed])
   }, [progress, props.state])
 
+  const showDownloadBar =
+    props.state !== 'idle' && props.appName && progress.percent
+
   return (
     <>
       <div className="progressHeader">
@@ -101,7 +104,7 @@ export default function ProgressHeader(props: {
           </div>
         </div>
       </div>
-      {props.state !== 'idle' && props.appName && (
+      {showDownloadBar && (
         <div className="downloadBar">
           <div className="downloadProgressStats">
             <p className="downloadStat" color="var(--text-default)">{`${

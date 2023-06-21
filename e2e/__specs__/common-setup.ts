@@ -6,99 +6,113 @@ import { ElectronApplication, _electron as electron } from 'playwright'
 export let electronApp: ElectronApplication
 export let hpPage: Promise<Page>
 
-/* eslint-disable-next-line */
-const withTimeout = async (millis: number, promise: Promise<any>) => {
+export const withTimeout = async (
+  millis: number,
+  /* eslint-disable-next-line */
+  promise: Promise<any>,
+  rejectOnTimeout = true
+) => {
   const timeout = new Promise((resolve, reject) =>
-    setTimeout(() => reject(`Timed out after ${millis} ms.`), millis)
+    setTimeout(
+      () =>
+        (rejectOnTimeout ? reject : resolve)(`Timed out after ${millis} ms.`),
+      millis
+    )
   )
   return Promise.race([promise, timeout])
 }
 
-export default function setup(): void {
-  test.beforeAll(async () => {
-    test.setTimeout(120000)
-    process.env.CI = 'e2e'
-    if (process.env.TEST_PACKAGED === 'true') {
-      console.log('Testing packaged build')
-      // must run yarn dist:<platform> prior to test
-      const latestBuild = findLatestBuild('dist')
-      const appInfo = parseElectronApp(latestBuild)
-      console.log(
-        'app info main = ',
-        appInfo.main,
-        '\napp info exe = ',
-        appInfo.executable
-      )
+export const appNameToMock = '64742e70e61cddebcbb7bd68'
 
-      electronApp = await electron.launch({
-        args: [appInfo.main],
-        executablePath: appInfo.executable
-      })
-    } else {
-      console.log('Testing unpackaged build')
-      electronApp = await electron.launch({
-        args: ['.', '--no-sandbox']
-      })
-    }
+export const launchApp = async () => {
+  process.env.CI = 'e2e'
+  process.env.MOCK_DOWNLOAD_URL = `http://127.0.0.1:8080/download/kosium`
+  process.env.APP_NAME_TO_MOCK = appNameToMock
+  if (process.env.TEST_PACKAGED === 'true') {
+    console.log('Testing packaged build')
+    // must run yarn dist:<platform> prior to test
+    const latestBuild = findLatestBuild('dist')
+    const appInfo = parseElectronApp(latestBuild)
+    console.log(
+      'app info main = ',
+      appInfo.main,
+      '\napp info exe = ',
+      appInfo.executable
+    )
 
-    // this pipes the main process std out to test std out
-    electronApp
-      .process()
-      .stdout?.on('data', (data) => console.log(`main process stdout: ${data}`))
-    electronApp
-      .process()
-      .stderr?.on('data', (error) =>
-        console.log(`main process stderr: ${error}`)
-      )
-
-    electronApp.on('window', async (page) => {
-      const filename = page.url()?.split('/').pop()
-      console.log(`Window opened: ${filename} page url ${page.url()}`)
-
-      // capture errors
-      page.on('pageerror', (error) => {
-        console.error(error)
-      })
-      // capture console messages
-      page.on('console', (msg) => {
-        console.log(msg.text())
-      })
+    electronApp = await electron.launch({
+      args: [appInfo.main],
+      executablePath: appInfo.executable
     })
+  } else {
+    console.log('Testing unpackaged build')
+    electronApp = await electron.launch({
+      args: ['.', '--no-sandbox']
+    })
+  }
 
-    hpPage = new Promise((res, rej) => {
-      const getPageTitle = async (page_i: Page) => {
-        try {
-          const title = await withTimeout(15000, page_i.title())
-          if (title === 'HyperPlay') {
-            res(page_i)
-            return true
-          }
-        } catch (err) {
-          console.log(`Error getting title: ${err}`)
-        }
-        return false
-      }
+  // this pipes the main process std out to test std out
+  electronApp
+    .process()
+    .stdout?.on('data', (data) => console.log(`main process stdout: ${data}`))
+  electronApp
+    .process()
+    .stderr?.on('data', (error) => console.log(`main process stderr: ${error}`))
 
-      for (const windowPage of electronApp.windows()) {
-        console.log(`Window already opened with page url ${windowPage.url()}`)
-        getPageTitle(windowPage)
-      }
+  electronApp.on('window', async (page) => {
+    const filename = page.url()?.split('/').pop()
+    console.log(`Window opened: ${filename} page url ${page.url()}`)
 
-      electronApp
-        .waitForEvent('window', {
-          predicate: async (page_i: Page) => {
-            return getPageTitle(page_i)
-          },
-          timeout: 360000
-        })
-        .catch((err) => {
-          console.log(`Error during electronApp.waitForEvent(window): ${err}`)
-          rej(err)
-        })
+    // capture errors
+    page.on('pageerror', (error) => {
+      console.error(error)
+    })
+    // capture console messages
+    page.on('console', (msg) => {
+      console.log(msg.text())
     })
   })
 
-  test.afterAll(async () => {
+  hpPage = new Promise((res, rej) => {
+    const getPageTitle = async (page_i: Page) => {
+      try {
+        const title = await withTimeout(15000, page_i.title())
+        if (title === 'HyperPlay' && page_i.url().includes('?view=App')) {
+          res(page_i)
+          return true
+        }
+      } catch (err) {
+        console.log(`Error getting title: ${err}`)
+      }
+      return false
+    }
+
+    electronApp
+      .waitForEvent('window', {
+        predicate: async (page_i: Page) => {
+          return getPageTitle(page_i)
+        },
+        timeout: 360000
+      })
+      .catch((err) => {
+        console.log(`Error during electronApp.waitForEvent(window): ${err}`)
+        rej(err)
+      })
+
+    for (const windowPage of electronApp.windows()) {
+      console.log(`Window already opened with page url ${windowPage.url()}`)
+      getPageTitle(windowPage)
+    }
+  })
+}
+
+export default function setup(): void {
+  test.beforeEach(async () => {
+    test.setTimeout(120000)
+    await launchApp()
+  })
+
+  test.afterEach(async () => {
     await electronApp.close()
   })
 }

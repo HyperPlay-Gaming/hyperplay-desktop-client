@@ -81,6 +81,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   showAboutWindow: () => void
   openLoginPage: () => void
   openDiscordLink: () => void
+  openTwitterLink: () => void
   openPatreonPage: () => void
   openKofiPage: () => void
   openWinePrefixFAQ: () => void
@@ -90,7 +91,6 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   openCustomThemesWiki: () => void
   openHyperplaySite: () => void
   showConfigFileInFolder: (appName: string) => void
-  removeFolder: ([path, folderName]: [string, string]) => void
   clearCache: (showDialog?: boolean) => void
   resetApp: () => void
   createNewWindow: (url: string) => void
@@ -119,6 +119,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   resumeCurrentDownload: () => void
   pauseCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
+  copyWalletConnectBaseURIToClipboard: () => void
 }
 
 interface RequestArguments {
@@ -191,6 +192,7 @@ interface HyperPlayAsyncIPCFunctions {
   unhideGame: (gameId: string) => Promise<void>
   getCurrentWeb3Provider: () => Promise<PROVIDERS | undefined>
   showPopup: (hideIfShown: boolean) => Promise<boolean>
+  removeTempDownloadFiles: (appName: string) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

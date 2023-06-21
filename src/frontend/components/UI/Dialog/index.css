@@ -1,27 +1,24 @@
-.Dialog {
-  padding: 0;
-  text-align: left;
-
-  --dialog-margin-horizontal: 32px;
-  --dialog-margin-vertical: 24px;
-  --dialog-gap: 24px;
-}
-
 .Dialog__element {
   top: 0;
   z-index: 8;
   display: flex;
   flex-direction: column;
-  padding: 0;
+  padding: calc(var(--space-xl) * 1.67);
   overflow: auto;
-  border: solid 1px var(--modal-border);
+  border: none;
   border-radius: 10px;
-  background: var(--modal-background);
+  background: var(--color-neutral-800);
   color: var(--text-default);
   opacity: 0;
   transform: translateY(50px);
   transition: opacity 500ms, transform 500ms;
   max-width: min(700px, 85vw);
+
+  text-align: left;
+
+  --dialog-margin-horizontal: 32px;
+  --dialog-margin-vertical: 24px;
+  --dialog-gap: 24px;
 }
 
 .Dialog__element[open] {
@@ -36,9 +33,7 @@
 
 .Dialog__headerTitle {
   flex: 100% 1 1;
-  padding: var(--dialog-margin-vertical) 16px 0 var(--dialog-margin-horizontal);
-  font-size: var(--text-xl);
-  margin: var(--space-lg) 0 0;
+  margin: var(--space-xs) 0 0;
 }
 
 .Dialog__Close {
@@ -77,13 +72,11 @@
 }
 
 .Dialog__content {
-  padding: var(--dialog-gap) var(--dialog-margin-horizontal);
+  padding: var(--space-sm) 0;
 }
 
 .Dialog__footer {
   display: flex;
   gap: 16px;
   justify-content: end;
-  padding: 0 var(--dialog-margin-horizontal) var(--dialog-margin-vertical)
-    var(--dialog-margin-horizontal);
 }

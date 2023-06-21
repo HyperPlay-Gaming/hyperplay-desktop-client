@@ -31,3 +31,7 @@
   display: inline-block;
   white-space: pre-line;
 }
+
+.overlayContainer::-webkit-scrollbar {
+  display: none;
+}

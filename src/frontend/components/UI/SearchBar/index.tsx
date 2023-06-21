@@ -1,4 +1,3 @@
-import { Search } from '@mui/icons-material'
 import React, {
   useCallback,
   useContext,
@@ -13,6 +12,8 @@ import './index.css'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { GameInfo } from '../../../../common/types'
+import { Images } from '@hyperplay/ui'
+import TopNavBarStyles from '../TopNavBar/index.module.scss'
 
 function fixFilter(text: string) {
   const regex = new RegExp(/([?\\|*|+|(|)|[|]|])+/, 'g')
@@ -96,9 +97,12 @@ export default React.memo(function SearchBar() {
 
   return (
     <div className="SearchBar" data-testid="searchBar">
-      <span className="searchButton" tabIndex={-1}>
-        {<Search />}
-      </span>
+      <button
+        className={TopNavBarStyles.iconButton}
+        onClick={() => input.current?.focus()}
+      >
+        <Images.MagnifyingGlass fill="white" />
+      </button>
       <input
         ref={input}
         data-testid="searchInput"
@@ -111,7 +115,7 @@ export default React.memo(function SearchBar() {
       />
       {filterText.length > 0 && (
         <>
-          <ul className="autoComplete">
+          <ul className="autoComplete body-sm">
             {list.length > 0 &&
               list.map((title, i) => (
                 <li

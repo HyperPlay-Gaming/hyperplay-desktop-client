@@ -1,31 +1,3 @@
-.Sidebar {
-  --sidebar-horizontal-padding: var(--space-md);
-  --sidebar-vertical-padding: var(--space-lg);
-  position: relative;
-  z-index: 10;
-  display: grid;
-  grid-template-rows: min-content 2fr min-content min-content;
-  grid-template-areas: 'links' 'utils' 'updates' 'version' 'mmHome' 'wallet';
-  grid-area: sidebar;
-  height: 100%;
-  padding: 0;
-  font-family: var(--secondary-font-family);
-  text-align: left;
-  background: var(--navbar-background);
-  overflow: auto;
-  --sidebar-width: 350px;
-  width: var(--sidebar-width);
-  --hp-logo-sidebar-width: 64px;
-}
-
-.Sidebar.collapsed {
-  --sidebar-vertical-padding: var(--space-xs);
-  --sidebar-horizontal-padding: var(--space-lg);
-  overflow-x: hidden;
-  overflow-y: auto;
-  --hp-logo-sidebar-width: 24px;
-}
-
 .Sidebar__section {
   display: flex;
   width: 100%;
@@ -36,7 +8,7 @@
 
 .Sidebar__item {
   display: flex;
-  width: 100%;
+  aspect-ratio: 1/1;
   padding: var(--space-xs) var(--sidebar-horizontal-padding);
   border: none;
   background: none;
@@ -46,17 +18,10 @@
   transition: color 250ms;
   text-align: start;
   font-family: var(--primary-font-family);
-  border-radius: 0;
+  border-radius: var(--space-sm);
   align-items: center;
+  justify-content: center;
   font-weight: var(--semibold);
-}
-
-.Sidebar.collapsed .Sidebar__item {
-  padding: var(--space-xs) 0;
-}
-
-.Sidebar.collapsed .Sidebar__itemIcon {
-  margin: 0 auto;
 }
 
 .Sidebar__item:focus-visible {
@@ -69,22 +34,26 @@
 }
 
 .Sidebar__item.active {
-  color: var(--color-neutral-50);
+  color: var(--color-neutral-100);
+  background-color: var(--color-neutral-600);
 }
 
 .Sidebar__item.active.SidebarLinks__subItem {
   font-weight: var(--bold);
 }
 
-.Sidebar__itemIcon {
-  box-sizing: border-box;
-  width: 24px;
-  display: inline-flex;
-  justify-content: center;
-  margin-right: 10px;
-  align-items: center;
-  align-self: center;
-  position: relative;
+.sidebarLinkGradientWrapper {
+  padding: 2px;
+  margin: var(--space-3xs);
+  border-radius: var(--space-sm);
+}
+
+.sidebarLinkGradientWrapper > button {
+  margin: 0 auto;
+}
+
+.sidebarLinkGradientWrapper:has(.Sidebar__item.active) {
+  background: var(--color-gradient-01-border);
 }
 
 .currentDownloads {
@@ -117,12 +86,6 @@
   font-size: var(--text-sm);
 }
 
-.wallet {
-  grid-area: wallet;
-  align-self: start;
-  margin-bottom: var(--sidebar-vertical-padding);
-}
-
 .newReleases > a {
   color: var(--accent);
   transition: 300ms;
@@ -132,68 +95,8 @@
   color: var(--accent-overlay);
 }
 
-.Sidebar:hover .collapseIcon {
-  opacity: 1;
-}
-
-.Sidebar.collapsed .appVersion {
-  margin: var(--space-sm);
-  font-size: var(--text-xs);
-}
-
-.Sidebar.collapsed .divider {
-  margin: var(--space-3xs) 0;
-}
-
-.Sidebar.collapsed .Sidebar__item.active span,
-.Sidebar.collapsed .Sidebar__item > span {
-  display: none;
-}
-
-.Sidebar.collapsed .SidebarItemWithSubmenu .SidebarSubmenu {
-  display: none;
-}
-
-.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu span,
-.Sidebar.collapsed .SidebarItemWithSubmenu:focus-within .SidebarSubmenu span {
-  display: block;
-}
-
-.Sidebar.collapsed .SidebarItemWithSubmenu:hover .SidebarSubmenu,
-.Sidebar.collapsed .SidebarItemWithSubmenu:focus-within .SidebarSubmenu {
-  display: block;
-  position: fixed;
-  left: 62px;
-  transform: translate(0%, -100%);
-  background-color: var(--navbar-background);
-  padding: var(--space-2xs) 0;
-}
-
-.Sidebar.collapsed .Sidebar__item.SidebarLinks__subItem::before {
-  display: none;
-}
-
-.Sidebar.collapsed .Sidebar__item.SidebarLinks__subItem {
-  padding: var(--space-xs) var(--sidebar-horizontal-padding);
-}
-.Sidebar.collapsed .Sidebar__item.active svg,
-.Sidebar.collapsed .Sidebar__item svg {
-  transform: scale(1.2);
-  padding: var(--space-2xs) 0;
-}
-.Sidebar.collapsed .Sidebar__item.active svg {
-  fill: var(--color-neutral-50);
-}
-.Sidebar.collapsed .Sidebar__item svg {
-  fill: var(--accent);
-}
-
-.Sidebar.collapsed .Sidebar__item svg:not(:first-child) {
-  display: none;
-}
-
 .Sidebar__item.active svg {
-  fill: var(--color-neutral-50);
+  fill: var(--color-neutral-100);
 }
 
 .resizer {

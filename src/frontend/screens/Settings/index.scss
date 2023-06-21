@@ -6,7 +6,6 @@
   width: 100%;
   border-radius: 1rem;
   grid-area: content;
-  padding: var(--space-xl-fixed) var(--space-2xl-fixed);
   position: relative;
   margin-bottom: 35px;
 }
@@ -22,7 +21,7 @@
 .Accessibility .Field label,
 .InstallModal__dialog .Field label {
   cursor: default;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-xs);
   font: var(--font-secondary-regular);
   font-size: var(--text-md);
   line-height: var(--space-lg);
@@ -47,11 +46,6 @@
 
 .headerTitle > svg {
   margin-left: 12px;
-}
-
-.settingSubheader {
-  text-align: left;
-  margin-top: 0;
 }
 
 .settingsWrapper > .backButton {
@@ -217,4 +211,8 @@ a {
 
 .infoBox.saves-warning svg {
   padding-right: 10px;
+}
+
+.settingsSectionHeader {
+  text-align: left;
 }

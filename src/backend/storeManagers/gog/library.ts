@@ -984,7 +984,9 @@ export async function getLinuxInstallerInfo(appName: string): Promise<
 export async function runRunnerCommand(
   commandParts: string[],
   abortController: AbortController,
-  options?: CallRunnerOptions
+  options?: CallRunnerOptions,
+  gameInfo?: GameInfo,
+  shouldTrackPlaytime = false
 ): Promise<ExecResult> {
   const { dir, bin } = getGOGdlBin()
   return callRunner(
@@ -994,7 +996,9 @@ export async function runRunnerCommand(
     {
       ...options,
       verboseLogFile: gogdlLogFile
-    }
+    },
+    gameInfo,
+    shouldTrackPlaytime
   )
 }
 

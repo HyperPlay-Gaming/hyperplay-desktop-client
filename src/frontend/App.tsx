@@ -6,10 +6,8 @@ import Login from './screens/Login'
 import WebView from './screens/WebView'
 import { GamePage } from './screens/Game'
 import Library from './screens/Library'
-import WineManager from './screens/WineManager'
 import Sidebar from './components/UI/Sidebar'
 import Settings from './screens/Settings'
-import Accessibility from './screens/Accessibility'
 import ContextProvider from './state/ContextProvider'
 import classNames from 'classnames'
 import Onboarding from './screens/Onboarding'
@@ -27,6 +25,8 @@ import { observer } from 'mobx-react-lite'
 import TransactionNotification from './screens/TransactionNotification'
 import ExternalLinkDialog from './components/UI/ExternalLinkDialog'
 import SettingsModal from './screens/Settings/components/SettingsModal'
+import DownloadToastManager from './components/UI/DownloadToastManager'
+import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 
 function App() {
@@ -36,6 +36,7 @@ function App() {
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
       <HashRouter>
         <OfflineMessage />
+        <TopNavBar />
         <Sidebar />
         <main className="content">
           <ExtensionHandler />
@@ -50,7 +51,10 @@ function App() {
             />
           )}
           <Routes>
-            <Route path="/" element={<Navigate replace to="/library" />} />
+            <Route
+              path="/"
+              element={<Navigate replace to="/hyperplaystore" />}
+            />
             <Route path="/library" element={<Library />} />
             <Route path="login" element={<Login />} />
             <Route path="hyperplaystore" element={<WebView />} />
@@ -58,6 +62,12 @@ function App() {
             <Route path="gogstore" element={<WebView />} />
             <Route path="wiki" element={<WebView />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
+            <Route
+              path="metamaskSecretPhrase"
+              element={
+                <MetaMaskHome path="home.html#onboarding/import-with-recovery-phrase" />
+              }
+            />
             <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />} />
             <Route path="/gamepage">
               <Route path=":runner">
@@ -75,26 +85,25 @@ function App() {
                 </Route>
               </Route>
             </Route>
-            <Route path="/wine-manager" element={<WineManager />} />
             <Route path="/download-manager" element={<DownloadManager />} />
-            <Route path="/accessibility" element={<Accessibility />} />
           </Routes>
         </main>
         <div className="controller">
           <ControllerHints />
           <div className="simple-keyboard"></div>
         </div>
+        <OnboardingStoreController />
+        {onboardingStore.isOnboardingOpen && (
+          <Onboarding
+            disableOnboarding={() => {
+              window.api.trackEvent({ event: 'Onboarding Skipped' })
+              onboardingStore.closeOnboarding()
+            }}
+          />
+        )}
       </HashRouter>
       <TransactionNotification />
-      <OnboardingStoreController />
-      {onboardingStore.isOnboardingOpen && (
-        <Onboarding
-          disableOnboarding={() => {
-            window.api.trackEvent({ event: 'Onboarding Skipped' })
-            onboardingStore.closeOnboarding()
-          }}
-        />
-      )}
+      <DownloadToastManager />
     </div>
   )
 }

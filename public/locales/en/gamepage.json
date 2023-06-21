@@ -27,9 +27,10 @@
             "exe": "Select Executable"
         },
         "stopInstall": {
+            "keepFilesMessage": "Check here if you want to keep the download files after canceling.",
             "keepInstalling": "Keep Installing",
             "message": "Do you wish to KEEP downloaded files?",
-            "title": "Stop Installation"
+            "title": "Do you want to cancel the download?"
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
@@ -43,13 +44,14 @@
             "title": "Game Needs Update"
         },
         "wineprefix": "Select WinePrefix Folder",
-        "yes": "YES"
+        "yes": "YES",
+        "yesCancel": "Yes, cancel"
     },
     "button": {
-        "add_to_favourites": "Add To Favourites",
         "cancel": "Pause/Cancel",
         "continue": "Continue Download",
         "details": "Details",
+        "favorites": "Favorite",
         "finish": "Finish",
         "force_update": "Force Update if Available",
         "force-innstall": "Force Install",
@@ -58,15 +60,17 @@
         "install": "Install",
         "no-path-selected": "No path selected",
         "queue": {
+            "cancel": "Cancel Download",
+            "continue": "Continue Download",
             "remove": "Remove from Queue"
         },
-        "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
         "run-exe-first": "Run Installer First",
         "running-setup": "Running Setup",
         "sideload": {
             "edit": "Edit App/Game"
         },
+        "unfavorites": "Unfavorite",
         "unhide_game": "Unhide Game",
         "uninstall": "Uninstall",
         "update": "Update"
@@ -105,6 +109,13 @@
         "main-story": "Main Story"
     },
     "howLongToBeat": "How Long To Beat",
+    "hyperplay": {
+        "gamecard": {
+            "extracting": "Extracting...",
+            "installing": "Downloading...",
+            "paused": "Paused"
+        }
+    },
     "info": {
         "canRunOffline": "Online Required",
         "installedPlatform": "Installed Platform",
@@ -124,9 +135,6 @@
         "wineversion": "Wine version"
     },
     "label": {
-        "game": {
-            "third-party-game": "Third-Party Game NOT Supported"
-        },
         "playing": {
             "start": "Play",
             "stop": "Playing (Stop)"
@@ -186,7 +194,9 @@
         "notinstalled": "This game is not installed",
         "notSupported": "Not supported",
         "notSupportedGame": "Not Supported",
+        "paused": "Paused",
         "playing": "Playing",
+        "preparing": "Preparing Download, please wait",
         "processing": "Processing files, please wait",
         "queued": "Queued",
         "reparing": "Repairing Game, please wait",

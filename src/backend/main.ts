@@ -100,7 +100,9 @@ import {
   hyperplaySite,
   customThemesWikiLink,
   createNecessaryFolders,
-  fixAsarPath
+  fixAsarPath,
+  twitterLink,
+  eventsToCloseMetaMaskPopupOn
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -152,6 +154,7 @@ import { addGameToLibrary } from './storeManagers/hyperplay/library'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
+import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import {
   autoUpdate,
   gameManagerMap,
@@ -174,6 +177,12 @@ async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
   mainWindow = createMainWindow()
+
+  mainWindow.webContents.on('input-event', (ev, inputEv) => {
+    if (eventsToCloseMetaMaskPopupOn.includes(inputEv.type)) {
+      mainWindow.webContents.send('removePopupInWebview')
+    }
+  })
 
   ExtensionHelper.initExtensionProvider(mainWindow)
 
@@ -235,6 +244,11 @@ async function initializeWindow(): Promise<BrowserWindow> {
   return mainWindow
 }
 
+const devAppUrl = 'http://localhost:5173/?view=App'
+const prodAppUrl = `file://${path.join(
+  publicDir,
+  '../build/index.html?view=App'
+)}`
 const loadMainWindowURL = function () {
   if (!app.isPackaged && process.env.CI !== 'e2e') {
     /* if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
@@ -247,14 +261,12 @@ const loadMainWindowURL = function () {
       })
     }
   */
-    mainWindow.loadURL('http://localhost:5173?view=App')
+    mainWindow.loadURL(devAppUrl)
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
   } else {
     Menu.setApplicationMenu(null)
-    mainWindow.loadURL(
-      `file://${path.join(publicDir, '../build/index.html?view=App')}`
-    )
+    mainWindow.loadURL(prodAppUrl)
     autoUpdater.checkForUpdates().then((val) => {
       logInfo(
         `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
@@ -318,7 +330,12 @@ if (!gotTheLock) {
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
-      path.join(__dirname, 'hyperplay_store_preload.js')
+      path.join(__dirname, 'hyperplay_store_preload.js'),
+      path.join(__dirname, 'webview_style_preload.js')
+    ])
+    const epicStoreSession = session.fromPartition('persist:epicstore')
+    epicStoreSession.setPreloads([
+      path.join(__dirname, 'webview_style_preload.js')
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
@@ -626,6 +643,7 @@ ipcMain.on('openWeblate', async () => openUrlOrFile(weblateUrl))
 ipcMain.on('showAboutWindow', () => showAboutWindow())
 ipcMain.on('openLoginPage', async () => openUrlOrFile(epicLoginUrl))
 ipcMain.on('openDiscordLink', async () => openUrlOrFile(discordLink))
+ipcMain.on('openTwitterLink', async () => openUrlOrFile(twitterLink))
 ipcMain.on('openWinePrefixFAQ', async () => openUrlOrFile(wineprefixFAQ))
 ipcMain.on('openWebviewPage', async (event, url) => openUrlOrFile(url))
 ipcMain.on('openWikiLink', async () => openUrlOrFile(wikiLink))
@@ -640,31 +658,9 @@ ipcMain.on('showConfigFileInFolder', async (event, appName) => {
   return openUrlOrFile(path.join(gamesConfigPath, `${appName}.json`))
 })
 
-export function removeFolder(path: string, folderName: string) {
-  if (path === 'default') {
-    const { defaultInstallPath } = GlobalConfig.get().getSettings()
-    const path = defaultInstallPath.replaceAll("'", '')
-    const folderToDelete = `${path}/${folderName}`
-    if (existsSync(folderToDelete)) {
-      return setTimeout(() => {
-        rmSync(folderToDelete, { recursive: true })
-      }, 5000)
-    }
-    return
-  }
-
-  const folderToDelete = `${path}/${folderName}`.replaceAll("'", '')
-  if (existsSync(folderToDelete)) {
-    return setTimeout(() => {
-      rmSync(folderToDelete, { recursive: true })
-    }, 2000)
-  }
-  return
-}
-
-ipcMain.on('removeFolder', async (e, [path, folderName]) => {
-  removeFolder(path, folderName)
-})
+ipcMain.handle('removeTempDownloadFiles', async (e, appName) =>
+  HyperPlayGameManager.removeTempDownloadFiles(appName)
+)
 
 async function runWineCommandOnGame(
   runner: string,
@@ -1205,12 +1201,12 @@ ipcMain.handle(
       status: 'uninstalling'
     })
 
+    const { title } = gameManagerMap[runner].getGameInfo(appName)
+
     trackEvent({
       event: 'Game Uninstall Started',
-      properties: { game_name: appName, store_name: runner }
+      properties: { game_name: appName, store_name: runner, game_title: title }
     })
-
-    const { title } = gameManagerMap[runner].getGameInfo(appName)
 
     let uninstalled = false
 
@@ -1223,7 +1219,8 @@ ipcMain.handle(
         properties: {
           game_name: appName,
           store_name: runner,
-          error: `${error}`
+          error: `${error}`,
+          game_title: title
         }
       })
       notify({
@@ -1258,7 +1255,11 @@ ipcMain.handle(
 
       trackEvent({
         event: 'Game Uninstall Success',
-        properties: { game_name: appName, store_name: runner }
+        properties: {
+          game_name: appName,
+          store_name: runner,
+          game_title: title
+        }
       })
 
       notify({ title, body: i18next.t('notify.uninstalled') })
@@ -1559,6 +1560,11 @@ ipcMain.handle(
 
 // Simulate keyboard and mouse actions as if the real input device is used
 ipcMain.handle('gamepadAction', async (event, args) => {
+  const senderUrl = event.sender.getURL()
+  if (!senderUrl.includes(devAppUrl) && !senderUrl.includes(prodAppUrl)) {
+    return
+  }
+
   // we can only receive gamepad events if the main window exists
   const mainWindow = getMainWindow()!
 
@@ -1836,7 +1842,7 @@ ipcMain.on('reloadApp', async () => {
 
 ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
   console.log('addHyperplayGame', gameId)
-  addGameToLibrary(gameId)
+  await addGameToLibrary(gameId)
 })
 
 ipcMain.handle(

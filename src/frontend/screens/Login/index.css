@@ -5,16 +5,8 @@
   display: grid;
   width: 100%;
   height: 100%;
-}
-
-.loginBackground {
-  height: 100%;
-  width: 100%;
-  background: url('../../assets/login-background.jpg');
-  background-size: cover;
-  opacity: 0.3;
-  grid-column: 1;
-  grid-row: 1;
+  position: relative;
+  text-align: center;
 }
 
 .loginContentWrapper {

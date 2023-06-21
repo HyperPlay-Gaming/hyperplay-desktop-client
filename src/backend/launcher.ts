@@ -56,6 +56,7 @@ import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import * as OverlayApp from './overlay/overlay'
 import { gameManagerMap } from 'backend/storeManagers'
+import { trackPidPlaytime } from './metrics/metrics'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -667,6 +668,8 @@ async function callRunner(
   runner: RunnerProps,
   abortController: AbortController,
   options?: CallRunnerOptions,
+  gameInfo?: GameInfo,
+  shouldTrackPlaytime = false,
   injectChildWithHyperPlayOverlay = false
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
@@ -721,14 +724,37 @@ async function callRunner(
       signal: abortController.signal
     })
 
+    /*
+     * gogdl remains open while the game is running
+     * by tracking gogdl instead of the game, we do not need to rely on
+     * gogdl outputting the game's PID to stdout
+     *
+     * hyperplay and sideload game exes are launched directly so tracking the child process
+     * works well unless the exe launches a separate process and then closes
+     *
+     * legendary closes after launching the game so we need to track the game's PID
+     * which is outputted to stdout
+     */
+    const shouldTrackChildProcess = (runner: Runner) =>
+      runner === 'hyperplay' || runner === 'gog' || runner === 'sideload'
+
+    if (
+      gameInfo &&
+      shouldTrackChildProcess(gameInfo.runner) &&
+      child.pid !== undefined &&
+      shouldTrackPlaytime
+    )
+      trackPidPlaytime(child.pid, gameInfo)
+
     if (injectChildWithHyperPlayOverlay) {
       logInfo(
         `Process PID for sideloaded game injected: ${child.pid}`,
         runner.logPrefix
       )
 
-      if (child.pid !== undefined)
+      if (child.pid !== undefined) {
         OverlayApp.inject({ pid: child.pid.toString() })
+      }
     }
 
     const stdout: string[] = []
@@ -749,6 +775,13 @@ async function callRunner(
         )
         //inject here
         OverlayApp.inject({ pid: PID.trim() })
+        // track when this pid is closed
+        if (
+          gameInfo &&
+          !shouldTrackChildProcess(gameInfo.runner) &&
+          shouldTrackPlaytime
+        )
+          trackPidPlaytime(PID.trim(), gameInfo)
       }
       if (options?.logFile) {
         appendFileSync(options.logFile, dataStr)
