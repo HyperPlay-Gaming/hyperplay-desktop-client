@@ -88,13 +88,17 @@ export function handlePlatformReversed(platform: string) {
 export const macOSPlatforms = ['darwin', 'darwin_arm64', 'darwin_amd64']
 export const linuxPlatforms = ['linux', 'linux_arm64', 'linux_amd64']
 
-export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
-  const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
-  const supportedPlatforms = Object.keys(data.releaseMeta.platforms)
-
-  const gameInfo: GameInfo = {
-    app_name: data._id,
+/**
+ * This is called on every refresh which then overwrites local json store
+ */
+export function refreshGameInfoFromHpRelease(
+  currentInfo: GameInfo,
+  data: HyperPlayRelease
+): GameInfo {
+  return {
+    ...currentInfo,
     extra: {
+      ...currentInfo.extra,
       about: {
         description: data.projectMeta.description,
         shortDescription: data.projectMeta.short_description
@@ -108,27 +112,54 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
       ],
       storeUrl: `https://store.hyperplay.xyz/game/${data.projectName}`
     },
-    thirdPartyManagedApp: undefined,
-    web3: { supported: true },
-    runner: 'hyperplay',
-    title: data.projectMeta.name,
-    art_square: data.projectMeta.image || data.releaseMeta.image || 'fallback',
+    art_square:
+      data.projectMeta.image ||
+      data.releaseMeta.image ||
+      currentInfo.art_square,
     art_cover:
-      data.releaseMeta.image || data.projectMeta.main_capsule || 'fallback',
-    is_installed: Boolean(data.releaseMeta.platforms.web),
-    cloud_save_enabled: false,
-    namespace: '',
-    developer: data.accountMeta.name || data.accountName,
-    store_url: `https://store.hyperplay.xyz/game/${data.projectName}`,
-    folder_name: data.projectName,
-    save_folder: '',
-    is_mac_native: supportedPlatforms.some((val) => val.startsWith('darwin')),
-    is_linux_native: supportedPlatforms.some((val) => val.startsWith('linux')),
-    canRunOffline: false,
-    install: isWebGame ? { platform: 'web' } : {},
+      data.releaseMeta.image ||
+      data.projectMeta.main_capsule ||
+      currentInfo.art_cover,
     releaseMeta: data.releaseMeta,
-    version: data.releaseName
+    developer: data.accountMeta.name || data.accountName,
+    version: data.releaseName,
+    is_windows_native: Object.keys(data.releaseMeta.platforms).some((val) =>
+      val.startsWith('windows')
+    )
   }
+}
+
+/**
+ * This is called when adding game to library and not during refresh
+ */
+export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
+  const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
+  const supportedPlatforms = Object.keys(data.releaseMeta.platforms)
+
+  const gameInfo: GameInfo = refreshGameInfoFromHpRelease(
+    {
+      app_name: data._id,
+      thirdPartyManagedApp: undefined,
+      web3: { supported: true },
+      runner: 'hyperplay',
+      title: data.projectMeta.name,
+      is_installed: Boolean(data.releaseMeta.platforms.web),
+      cloud_save_enabled: false,
+      namespace: '',
+      store_url: `https://store.hyperplay.xyz/game/${data.projectName}`,
+      folder_name: data.projectName,
+      save_folder: '',
+      is_mac_native: supportedPlatforms.some((val) => val.startsWith('darwin')),
+      is_linux_native: supportedPlatforms.some((val) =>
+        val.startsWith('linux')
+      ),
+      art_square: 'fallback',
+      art_cover: 'fallback',
+      canRunOffline: false,
+      install: isWebGame ? { platform: 'web' } : {}
+    },
+    data
+  )
 
   if (isWebGame) {
     gameInfo.browserUrl = data.releaseMeta.platforms.web.external_url

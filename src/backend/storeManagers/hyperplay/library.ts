@@ -9,7 +9,11 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
-import { getGameInfoFromHpRelease, handleArchAndPlatform } from './utils'
+import {
+  getGameInfoFromHpRelease,
+  handleArchAndPlatform,
+  refreshGameInfoFromHpRelease
+} from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
 
 export async function addGameToLibrary(appId: string) {
@@ -95,34 +99,8 @@ export function refreshHPGameInfo(appId: string, data: HyperPlayRelease) {
   }
   const currentInfo = currentLibrary[gameIndex]
 
-  const gameInfo: GameInfo = {
-    ...currentInfo,
-    extra: {
-      ...currentInfo.extra,
-      about: {
-        description: data.projectMeta.description,
-        shortDescription: data.projectMeta.short_description
-      },
-      reqs: [
-        {
-          minimum: JSON.stringify(data.projectMeta.systemRequirements),
-          recommended: JSON.stringify(data.projectMeta.systemRequirements),
-          title: data.projectMeta.name
-        }
-      ]
-    },
-    art_square:
-      data.projectMeta.image ||
-      data.releaseMeta.image ||
-      currentInfo.art_square,
-    art_cover:
-      data.releaseMeta.image ||
-      data.projectMeta.main_capsule ||
-      currentInfo.art_cover,
-    releaseMeta: data.releaseMeta,
-    developer: data.accountMeta.name || data.accountName,
-    version: data.releaseName
-  }
+  const gameInfo: GameInfo = refreshGameInfoFromHpRelease(currentInfo, data)
+
   currentLibrary[gameIndex] = gameInfo
   return hpLibraryStore.set('games', currentLibrary)
 }

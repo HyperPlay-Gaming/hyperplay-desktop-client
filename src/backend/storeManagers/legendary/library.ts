@@ -561,6 +561,7 @@ function loadFile(fileName: string): boolean {
       }
   /* eslint-enable @typescript-eslint/no-unused-vars*/
 
+  const releasePlatform = releaseInfo[0].platform
   library.set(app_name, {
     app_name,
     art_cover: art_cover || art_square || hp_art_cover || fallBackImage,
@@ -592,15 +593,17 @@ function loadFile(fileName: string): boolean {
     },
     is_installed: info !== undefined,
     namespace,
-    is_mac_native: info
-      ? platform === 'Mac'
-      : releaseInfo[0].platform.includes('Mac'),
+    is_mac_native: info ? platform === 'Mac' : releasePlatform.includes('Mac'),
     save_folder: saveFolder,
     save_path,
     title,
     canRunOffline,
     thirdPartyManagedApp,
     is_linux_native: false,
+    is_windows_native: info
+      ? platform === 'Windows' || platform === 'Win32'
+      : releasePlatform.includes('Windows') ||
+        releasePlatform.includes('Win32'),
     runner: 'legendary',
     store_url: formatEpicStoreUrl(title),
     ...hpGameInfoToMerge

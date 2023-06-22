@@ -142,34 +142,18 @@ const defaultExecResult = {
   stdout: ''
 }
 
-export async function refresh(): Promise<ExecResult> {
-  if (!GOGUser.isLoggedIn()) {
-    return defaultExecResult
-  }
-  refreshInstalled()
-  for (const game of libraryStore.get('games', [])) {
-    const copyObject = { ...game }
-    if (installedGames.has(game.app_name)) {
-      copyObject.install = installedGames.get(game.app_name)!
-      copyObject.is_installed = true
-    }
-    library.set(game.app_name, copyObject)
-  }
-
-  if (!isOnline()) {
-    return defaultExecResult
-  }
-
-  // This gets games ibrary
+async function getGogLibrary(): Promise<GOGGameInfo[]> {
+  // This gets games library
   // Handles multiple pages
   const credentials = await GOGUser.getCredentials()
   if (!credentials) {
-    return defaultExecResult
+    throw 'There was an error getting gog user'
   }
   const headers = {
     Authorization: 'Bearer ' + credentials.access_token,
     'User-Agent': 'GOGGalaxyClient/2.0.45.61 (GOG Galaxy)'
   }
+
   logInfo('Getting GOG library', LogPrefix.Gog)
   const gameApiArray: GOGGameInfo[] = []
   const games: Library | null = await axios
@@ -188,8 +172,11 @@ export async function refresh(): Promise<ExecResult> {
 
   if (!games) {
     logError('There was an error Loading games library', LogPrefix.Gog)
-    return defaultExecResult
+    throw 'There was an error Loading games library'
   }
+
+  libraryStore.set('totalGames', games.totalProducts)
+  libraryStore.set('totalMovies', games.moviesCount)
 
   if (games.products.length) {
     const numberOfPages = games.totalPages
@@ -220,6 +207,34 @@ export async function refresh(): Promise<ExecResult> {
         gameApiArray.push(...pageData.products)
       }
     }
+  }
+  return gameApiArray
+}
+
+export async function refresh(): Promise<ExecResult> {
+  if (!GOGUser.isLoggedIn()) {
+    return defaultExecResult
+  }
+  refreshInstalled()
+  for (const game of libraryStore.get('games', [])) {
+    const copyObject = { ...game }
+    if (installedGames.has(game.app_name)) {
+      copyObject.install = installedGames.get(game.app_name)!
+      copyObject.is_installed = true
+    }
+    library.set(game.app_name, copyObject)
+  }
+
+  if (!isOnline()) {
+    return defaultExecResult
+  }
+
+  let gameApiArray
+  try {
+    gameApiArray = await getGogLibrary()
+  } catch (err) {
+    logError(['There was an error getting games library data'], LogPrefix.Gog)
+    return defaultExecResult
   }
 
   const gamesObjects: GameInfo[] = []
@@ -261,8 +276,6 @@ export async function refresh(): Promise<ExecResult> {
     library.set(String(game.id), copyObject)
   }
   libraryStore.set('games', gamesObjects)
-  libraryStore.set('totalGames', games.totalProducts)
-  libraryStore.set('totalMovies', games.moviesCount)
   libraryStore.set('cloud_saves_enabled', true)
   logInfo('Saved games data', LogPrefix.Gog)
 
@@ -708,6 +721,7 @@ export async function gogToUnifiedInfo(
     canRunOffline: true,
     is_mac_native: info.worksOn.Mac,
     is_linux_native: info.worksOn.Linux,
+    is_windows_native: info.worksOn.Windows,
     thirdPartyManagedApp: undefined
   }
 

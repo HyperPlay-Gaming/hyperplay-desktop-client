@@ -16,7 +16,8 @@ import {
 import {
   Category,
   DialogModalOptions,
-  ExternalLinkDialogOptions
+  ExternalLinkDialogOptions,
+  Platform
 } from 'frontend/types'
 import { TFunction, withTranslation } from 'react-i18next'
 import {
@@ -70,7 +71,7 @@ interface StateProps {
   wineVersions: WineVersionInfo[]
   error: boolean
   filterText: string
-  filterPlatform: string
+  filterPlatforms: Platform[]
   gameUpdates: string[]
   language: string
   layout: string
@@ -143,7 +144,8 @@ class GlobalState extends PureComponent<Props> {
     wineVersions: wineDownloaderInfoStore.get('wine-releases', []),
     error: false,
     filterText: '',
-    filterPlatform: 'all',
+    //empty filter array means show all platforms
+    filterPlatforms: [],
     gameUpdates: [],
     language: this.props.i18n.language,
     layout: storage.getItem('layout') || 'grid',
@@ -545,8 +547,8 @@ class GlobalState extends PureComponent<Props> {
   }
 
   handleSearch = (input: string) => this.setState({ filterText: input })
-  handlePlatformFilter = (filterPlatform: string) =>
-    this.setState({ filterPlatform })
+  handlePlatformFilters = (filterPlatforms: string[]) =>
+    this.setState({ filterPlatforms })
   handleLayout = (layout: string) => this.setState({ layout })
   handleCategory = (category: Category) => this.setState({ category })
 
@@ -790,7 +792,7 @@ class GlobalState extends PureComponent<Props> {
           },
           handleCategory: this.handleCategory,
           handleLayout: this.handleLayout,
-          handlePlatformFilter: this.handlePlatformFilter,
+          handlePlatformFilters: this.handlePlatformFilters,
           handleSearch: this.handleSearch,
           setLanguage: this.setLanguage,
           isRTL,
