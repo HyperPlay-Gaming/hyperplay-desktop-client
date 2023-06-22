@@ -1092,15 +1092,6 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@hyperplay/electron-overlay@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@hyperplay/electron-overlay/-/electron-overlay-0.0.8.tgz#8f3aead93918896ea5fc67e1fe89e7ebd8b9594d"
-  integrity sha512-hQYmLit6ZuTdvqs313jxqoZa42yKdReuOmRhYQRHBbqciFfHaLYPSDjae4WDYGBwfhYtAMq9VRPt9ZSDLKWXhA==
-  dependencies:
-    cross-spawn "^7.0.3"
-    node-addon-api "^4.1.0"
-    node-gyp "^9.3.1"
-
 "@hyperplay/ui@^0.1.4":
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.4.tgz#303fc9c02e76df47e7a015ebf340bcec18adc775"
