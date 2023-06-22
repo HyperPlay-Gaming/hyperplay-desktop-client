@@ -72,6 +72,7 @@ export default React.memo(function Library(): JSX.Element {
     favouriteGames,
     libraryTopSection,
     filterText,
+    platform,
     filterPlatforms,
     hiddenGames,
     showHidden,
@@ -455,7 +456,7 @@ export default React.memo(function Library(): JSX.Element {
     }
   }
 
-  const data = [
+  const otherFiltersData = [
     // {
     //   text: 'Token required',
     //   defaultValue: false,
@@ -495,21 +496,25 @@ export default React.memo(function Library(): JSX.Element {
       onChange: onPlatformFilterChange('win')
     },
     {
-      text: 'Linux',
-      defaultValue: filterPlatforms.includes('linux'),
-      onChange: onPlatformFilterChange('linux')
-    },
-    {
-      text: 'macOS',
-      defaultValue: filterPlatforms.includes('mac'),
-      onChange: onPlatformFilterChange('mac')
-    },
-    {
       text: 'Browser',
       defaultValue: filterPlatforms.includes('browser'),
       onChange: onPlatformFilterChange('browser')
     }
   ]
+
+  if (platform === 'linux')
+    otherFiltersData.push({
+      text: 'Linux',
+      defaultValue: filterPlatforms.includes('linux'),
+      onChange: onPlatformFilterChange('linux')
+    })
+
+  if (platform === 'darwin')
+    otherFiltersData.push({
+      text: 'macOS',
+      defaultValue: filterPlatforms.includes('mac'),
+      onChange: onPlatformFilterChange('mac')
+    })
 
   return (
     <>
@@ -569,7 +574,7 @@ export default React.memo(function Library(): JSX.Element {
                   ></GenericDropdown.GenericButton>
                 }
               >
-                {data.map((val, index) => (
+                {otherFiltersData.map((val, index) => (
                   <Menu.Item
                     closeMenuOnClick={false}
                     key={`toggleItem${index}`}
