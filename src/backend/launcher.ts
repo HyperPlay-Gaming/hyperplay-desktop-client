@@ -669,8 +669,7 @@ async function callRunner(
   abortController: AbortController,
   options?: CallRunnerOptions,
   gameInfo?: GameInfo,
-  shouldTrackPlaytime = false,
-  injectChildWithHyperPlayOverlay = false
+  shouldTrackPlaytime = false
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
@@ -746,11 +745,7 @@ async function callRunner(
     )
       trackPidPlaytime(child.pid, gameInfo)
 
-    if (injectChildWithHyperPlayOverlay) {
-      logInfo(
-        `Process PID for sideloaded game injected: ${child.pid}`,
-        runner.logPrefix
-      )
+    showInitialToast()
 
     const stdout: string[] = []
     const stderr: string[] = []
@@ -768,8 +763,7 @@ async function callRunner(
           `Process PID for Gogdl or Epic game injected: ${child.pid}`,
           runner.logPrefix
         )
-        //inject here
-        OverlayApp.inject({ pid: PID.trim() })
+
         // track when this pid is closed
         if (
           gameInfo &&

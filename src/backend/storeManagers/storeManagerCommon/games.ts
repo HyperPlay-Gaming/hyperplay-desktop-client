@@ -23,13 +23,14 @@ import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
-// import find from 'find-process'
-// import * as OverlayApp from 'backend/overlay/overlay'
-import { backendEvents } from 'backend/backend_events'
-import { getMainWindow } from 'backend/main_window'
-import { spawnSync } from 'child_process'
-import { overlayIsShown } from 'backend/overlay/overlay'
+import {
+  closeOverlay,
+  openOverlay,
+  isOverlayShown
+} from 'backend/hyperplay-overlay'
 const buildDir = resolve(__dirname, '../../build')
+import { hrtime } from 'process'
+import { trackEvent } from 'backend/metrics/metrics'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -86,11 +87,6 @@ const openNewBrowserGameWindow = async (
     console.log('overlayIsShown = ', overlayIsShown)
     browserGame.setIgnoreMouseEvents(overlayIsShown)
     browserGame.setMinimizable(true)
-
-    const abortController = createAbortController(gameInfo.app_name)
-    abortController.signal.addEventListener('abort', () => {
-      browserGame.close()
-    })
 
     const abortController = createAbortController(gameInfo.app_name)
     abortController.signal.addEventListener('abort', () => {
@@ -293,8 +289,7 @@ export async function launchGame(
           wrappers,
           logFile: logFileLocation(appName),
           logMessagePrefix: LogPrefix.Backend
-        },
-        runner === 'sideload' ? true : false
+        }
       )
 
       launchCleanup(rpcClient)
