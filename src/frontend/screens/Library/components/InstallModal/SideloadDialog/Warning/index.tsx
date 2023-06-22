@@ -8,14 +8,14 @@ const { ButtonText } = Typography
 const { WarningIcon } = Images
 
 export default function SideloadDialogWarning() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(true)
 
   return (
     <div className={styles.container}>
       {isOpen ? (
         <AlertCard
           style={{ maxWidth: 670 }}
-          onClose={() => setIsOpen(false)}
+          onClose={() => setIsOpen(!isOpen)}
           variant="danger"
           title={t('sideload.warningTitle', 'Important')}
           message={t(
@@ -24,7 +24,10 @@ export default function SideloadDialogWarning() {
           )}
         />
       ) : (
-        <div className={styles.titleContainer} onClick={() => setIsOpen(true)}>
+        <div
+          className={styles.titleContainer}
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <WarningIcon />
           <ButtonText className={styles.title}>
             {t('sideload.warningTitle', 'Important')}

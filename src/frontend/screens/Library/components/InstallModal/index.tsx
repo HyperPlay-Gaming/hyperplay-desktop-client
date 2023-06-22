@@ -74,13 +74,13 @@ export default React.memo(function InstallModal({
   const platforms: AvailablePlatforms = [
     {
       name: 'Linux',
-      available: (isLinux && isLinuxNative) || isSideload,
+      available: isLinux && (isSideload || isLinuxNative),
       value: 'linux',
       icon: faLinux
     },
     {
       name: 'macOS',
-      available: (isMac && isMacNative) || isSideload,
+      available: isMac && (isSideload || isMacNative),
       value: 'Mac',
       icon: faApple
     },
