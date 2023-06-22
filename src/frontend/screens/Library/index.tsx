@@ -18,7 +18,6 @@ import ContextProvider from 'frontend/state/ContextProvider'
 
 import GamesList from './components/GamesList'
 import {
-  AppPlatforms,
   FavouriteGame,
   GameInfo,
   GameStatus,
@@ -48,7 +47,7 @@ import {
   GenericDropdown,
   Menu
 } from '@hyperplay/ui'
-import { Category } from 'frontend/types'
+import { Category, Platform } from 'frontend/types'
 import { getPlatformName } from 'frontend/helpers'
 
 const storage = window.localStorage
@@ -73,8 +72,7 @@ export default React.memo(function Library(): JSX.Element {
     favouriteGames,
     libraryTopSection,
     filterText,
-    platform,
-    filterPlatform,
+    filterPlatforms,
     hiddenGames,
     showHidden,
     handleCategory,
@@ -84,7 +82,8 @@ export default React.memo(function Library(): JSX.Element {
     hyperPlayLibrary,
     refreshLibrary,
     setShowHidden,
-    setShowNonAvailable
+    setShowNonAvailable,
+    handlePlatformFilters
   } = useContext(ContextProvider)
   const { t } = useTranslation()
 
@@ -201,83 +200,70 @@ export default React.memo(function Library(): JSX.Element {
     }
   }, [epic.username, gog.username])
 
-  const filterByPlatform = (library: GameInfo[], filter: string) => {
+  /*
+   * For installed games, we filter on the install platform
+   * For non-installed games, we check if a build exists for the platform
+   */
+  const gameSupportsAtLeastOneFilteredPlatform = (
+    game: GameInfo,
+    platformsToInclude: Platform[]
+  ) => {
+    if (platformsToInclude.length === 0) return true
+
+    const macArray = ['osx', 'Mac']
+
+    if (platformsToInclude.includes('win')) {
+      if (game.is_installed) {
+        if (
+          game.install.platform &&
+          getPlatformName(game.install.platform).toLowerCase() === 'windows'
+        )
+          return true
+      } else {
+        if (game.is_windows_native) return true
+      }
+    }
+
+    if (platformsToInclude.includes('mac')) {
+      if (game.is_installed) {
+        if (
+          game.install.platform &&
+          macArray.includes(getPlatformName(game.install.platform))
+        )
+          return true
+      } else {
+        if (game.is_mac_native) return true
+      }
+    }
+
+    if (platformsToInclude.includes('linux')) {
+      if (game.is_installed) {
+        if (
+          game.install.platform &&
+          getPlatformName(game.install.platform).toLowerCase() === 'linux'
+        )
+          return true
+      } else {
+        if (game.is_linux_native) return true
+      }
+    }
+
+    if (game.browserUrl && platformsToInclude.includes('browser')) return true
+
+    return false
+  }
+
+  const filterByPlatform = (
+    library: GameInfo[],
+    platformsToInclude: Platform[]
+  ) => {
     if (!library) {
       return []
     }
 
-    // Epic doesn't offer Linux games, so just default to showing all games there
-    if (category === 'legendary' && platform === 'linux') {
-      return library
-    }
-
-    const macArray = ['osx', 'Mac']
-    const isMac = platform === 'darwin'
-
-    switch (filter) {
-      case 'win':
-        return library.filter((game) => {
-          const { releaseMeta = { platforms: {} } } = { ...game }
-          const hpPlatforms = Object.keys(
-            releaseMeta.platforms
-          ) as AppPlatforms[]
-          const isHpGame = game.runner === 'hyperplay'
-
-          const isLinuxNative = isHpGame
-            ? hpPlatforms.some((p) => getPlatformName(p) === 'Linux')
-            : Boolean(game?.is_linux_native)
-
-          const isMacNative = isHpGame
-            ? hpPlatforms.some((p) => getPlatformName(p) === 'Mac')
-            : Boolean(game?.is_mac_native)
-
-          const installedPlatform = game.is_installed
-            ? getPlatformName(
-                game.install.platform || 'Windows'
-              ).toLowerCase() === 'windows'
-            : isMac
-            ? !isMacNative
-            : !isLinuxNative
-
-          return installedPlatform
-        })
-      case 'mac':
-        return library.filter((game) => {
-          const { releaseMeta = { platforms: {} } } = { ...game }
-          const hpPlatforms = Object.keys(
-            releaseMeta.platforms
-          ) as AppPlatforms[]
-          const isHpGame = game.runner === 'hyperplay'
-
-          const isMacNative = isHpGame
-            ? hpPlatforms.some((p) => getPlatformName(p) === 'Mac')
-            : Boolean(game?.is_mac_native)
-
-          return game?.is_installed
-            ? macArray.includes(getPlatformName(game.install.platform ?? 'Mac'))
-            : isMacNative
-        })
-      case 'linux':
-        return library.filter((game) => {
-          const { releaseMeta = { platforms: {} } } = { ...game }
-          const hpPlatforms = Object.keys(
-            releaseMeta.platforms
-          ) as AppPlatforms[]
-          const isHpGame = game.runner === 'hyperplay'
-
-          const isLinuxNative = isHpGame
-            ? hpPlatforms.some((p) => getPlatformName(p) === 'Linux')
-            : Boolean(game?.is_linux_native)
-
-          return game?.is_installed
-            ? getPlatformName(
-                game.install.platform ?? 'linux'
-              ).toLowerCase() === 'linux'
-            : isLinuxNative
-        })
-      default:
-        return library
-    }
+    return library.filter((game) =>
+      gameSupportsAtLeastOneFilteredPlatform(game, platformsToInclude)
+    )
   }
 
   // top section
@@ -339,7 +325,7 @@ export default React.memo(function Library(): JSX.Element {
 
     // filter
     try {
-      const filteredLibrary = filterByPlatform(library, filterPlatform)
+      const filteredLibrary = filterByPlatform(library, filterPlatforms)
       const options = {
         minMatchCharLength: 1,
         threshold: 0.4,
@@ -399,7 +385,7 @@ export default React.memo(function Library(): JSX.Element {
     epic.library,
     gog.library,
     filterText,
-    filterPlatform,
+    filterPlatforms,
     sortAscending,
     sortInstalled,
     showHidden,
@@ -451,6 +437,24 @@ export default React.memo(function Library(): JSX.Element {
     return 'gog'
   }
 
+  const onPlatformFilterChange = (platform: Platform) => {
+    return (checked: boolean) => {
+      const showPlatformGames = filterPlatforms.includes(platform)
+      const newFilterPlatforms = [...filterPlatforms]
+      if (checked) {
+        if (!showPlatformGames) {
+          newFilterPlatforms.push(platform)
+          handlePlatformFilters(newFilterPlatforms)
+        }
+      } else {
+        if (showPlatformGames) {
+          newFilterPlatforms.splice(filterPlatforms.indexOf(platform), 1)
+          handlePlatformFilters(newFilterPlatforms)
+        }
+      }
+    }
+  }
+
   const data = [
     // {
     //   text: 'Token required',
@@ -484,6 +488,26 @@ export default React.memo(function Library(): JSX.Element {
       onChange: (checked: boolean) => {
         setShowFavourites(checked)
       }
+    },
+    {
+      text: 'Windows',
+      defaultValue: filterPlatforms.includes('win'),
+      onChange: onPlatformFilterChange('win')
+    },
+    {
+      text: 'Linux',
+      defaultValue: filterPlatforms.includes('linux'),
+      onChange: onPlatformFilterChange('linux')
+    },
+    {
+      text: 'macOS',
+      defaultValue: filterPlatforms.includes('mac'),
+      onChange: onPlatformFilterChange('mac')
+    },
+    {
+      text: 'Browser',
+      defaultValue: filterPlatforms.includes('browser'),
+      onChange: onPlatformFilterChange('browser')
     }
   ]
 

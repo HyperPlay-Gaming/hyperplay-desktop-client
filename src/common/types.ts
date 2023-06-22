@@ -129,6 +129,7 @@ export interface GameInfo {
   thirdPartyManagedApp?: string | undefined
   is_mac_native?: boolean
   is_linux_native?: boolean
+  is_windows_native?: boolean
   browserUrl?: string
   web3?: Web3Features
   releaseMeta?: HyperPlayReleaseMeta
