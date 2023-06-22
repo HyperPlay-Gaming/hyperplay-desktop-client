@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import BrowserExtensionManagerStyles from './index.module.scss'
 import { overlayExternalWalletConnectedMsg } from 'frontend/overlay/constants'
-import { Button, Images } from '@hyperplay/ui'
+import { Button } from '@hyperplay/ui'
 import { Runner } from 'common/types'
+import { useTranslation } from 'react-i18next'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -28,6 +29,7 @@ const BrowserExtensionManager = function ({
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
   const [extensionId, setExtensionId] = useState('')
   const [showMmPopupPage, setShowMmPopupPage] = useState(false)
+  const { t } = useTranslation()
 
   const getExtensionId = async () => {
     const extId = await window.api.getExtensionId()
@@ -99,9 +101,9 @@ const BrowserExtensionManager = function ({
               zIndex: 200
             }}
             type="secondary"
-            size="icon"
+            size="medium"
           >
-            <Images.CloseButton />
+            {t('exit_game', 'Exit Game')}
           </Button>
           <div className={BrowserExtensionManagerStyles.mmContainer}>
             {!showMmPopupPage ? (
