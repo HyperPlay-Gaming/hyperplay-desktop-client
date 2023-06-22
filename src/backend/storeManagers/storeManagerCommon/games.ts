@@ -23,11 +23,7 @@ import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
-import {
-  closeOverlay,
-  openOverlay,
-  isOverlayShown
-} from 'backend/hyperplay-overlay'
+import { isOverlayShown } from 'backend/hyperplay-overlay'
 const buildDir = resolve(__dirname, '../../build')
 import { hrtime } from 'process'
 import { trackEvent } from 'backend/metrics/metrics'
@@ -247,10 +243,6 @@ export async function launchGame(
     }
     const env = { ...process.env, ...setupEnvVars(gameSettings) }
 
-    if (runner === 'hyperplay') {
-      //some games take a while to launch. 8 seconds seems to work well
-      setTimeout(async () => openOverlay(), 8000)
-    }
     // Native
     if (isNative) {
       logInfo(
@@ -289,7 +281,8 @@ export async function launchGame(
           wrappers,
           logFile: logFileLocation(appName),
           logMessagePrefix: LogPrefix.Backend
-        }
+        },
+        gameInfo
       )
 
       launchCleanup(rpcClient)
@@ -297,7 +290,6 @@ export async function launchGame(
       if (isLinux || (isMac && !executable.endsWith('.app'))) {
         await chmod(executable, 0o775)
       }
-      closeOverlay()
       return true
     }
 
@@ -306,20 +298,22 @@ export async function launchGame(
       LogPrefix.Backend
     )
 
-    await runWineCommand({
-      commandParts: [executable, launcherArgs ?? ''],
-      gameSettings,
-      wait: false,
-      startFolder: dirname(executable),
-      options: {
-        wrappers,
-        logFile: logFileLocation(appName),
-        logMessagePrefix: LogPrefix.Backend
-      }
-    })
+    await runWineCommand(
+      {
+        commandParts: [executable, launcherArgs ?? ''],
+        gameSettings,
+        wait: false,
+        startFolder: dirname(executable),
+        options: {
+          wrappers,
+          logFile: logFileLocation(appName),
+          logMessagePrefix: LogPrefix.Backend
+        }
+      },
+      gameInfo
+    )
 
     launchCleanup(rpcClient)
-    closeOverlay()
 
     return true
   }
