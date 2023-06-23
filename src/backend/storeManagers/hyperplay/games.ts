@@ -76,9 +76,9 @@ export function isNative(appName: string): boolean {
       return true
     }
 
-    const genericPlatform = handlePlatformReversed(platform)
+    const genericPlatform = handlePlatformReversed(platform).toLowerCase()
 
-    if (isMac && genericPlatform === 'Mac') {
+    if (isMac && genericPlatform === 'mac') {
       return true
     }
 
