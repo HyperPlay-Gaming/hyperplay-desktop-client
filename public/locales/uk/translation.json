@@ -111,7 +111,7 @@
             "title": "Виберіть EXE для запуску"
         },
         "select": {
-            "button": "Обрати",
+            "button": "Вибрати",
             "exe": "Оберіть EXE"
         },
         "shortcuts": {
@@ -313,7 +313,9 @@
         "toggleLayout": {
             "grid": "Перехід до макета сітки",
             "list": "Перехід до макета зі списком"
-        }
+        },
+        "alphabeticalAZ": "За алфавітом А-Я",
+        "alphabeticalZA": "За алфавітом Я-А"
     },
     "loading": {
         "default": "Завантаження",
@@ -598,7 +600,8 @@
         "saves": {
             "label": "Save Location:",
             "warning": "Збереження у хмарі, наразі у тестовому режимі. Будь ласка збережіть ваш файл збереження у іншому місці (у разі якщо щось піде не так)"
-        }
+        },
+        "gamesSettings": "Налаштування ігор"
     },
     "Settings": "Налаштування",
     "sidebar": {
@@ -695,7 +698,8 @@
                     "import": {
                         "details": "Імпортуючи, установка і налаштування MetaMask будуть імпортовані в HyperPlay.",
                         "title": "Виберіть браузер для імпорту",
-                        "createNewWallet": "Створити новий гаманець розширення MM"
+                        "createNewWallet": "Створити новий гаманець розширення MM",
+                        "useRecoveryPhrase": "Доступ за допомогою секретної фрази відновлення"
                     },
                     "scan": {
                         "updateWarning": "Виникли проблеми? Переконайтеся, що MetaMask оновлено.",
@@ -738,11 +742,17 @@
         "discordApp": "Discord",
         "misc": "Ніколи",
         "turnAnalyticsOff": "Вимкнути",
-        "turnAnalyticsOn": "Ввімкнути",
+        "turnAnalyticsOn": "Ввімкнено",
         "wallet": {
             "connected": "Підключено",
             "notConnected": "Не підключено"
-        }
+        },
+        "changeWallet": "Змінити гаманець",
+        "viewPortfolio": "Переглянути портфоліо",
+        "copyUrl": "Копіювати URL",
+        "currentWallet": "Поточний гаманець",
+        "viewFullscreen": "На весь екран",
+        "publicAlpha": "Публічна Альфа"
     },
     "hyperplayOverlay": {
         "description": {
@@ -801,5 +811,8 @@
     },
     "wiki_info": {
         "not_found": "Ми не змогли знайти додаткової інформації."
-    }
+    },
+    "accounts": "облікові записи",
+    "ALL": "ВСІ",
+    "exit_game": "Вийти з гри"
 }
