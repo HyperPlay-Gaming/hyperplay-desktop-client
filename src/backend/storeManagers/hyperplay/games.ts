@@ -1,18 +1,24 @@
 import {
   InstallArgs,
-  PlatformInfo,
   InstalledInfo,
   GameInfo,
   ExtraInfo,
   ExecResult,
-  GameSettings
+  GameSettings,
+  PlatformConfig
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
-import { existsSync, mkdirSync, rmSync, readdirSync, rm } from 'graceful-fs'
-import { isMac, isWindows, isLinux, configFolder } from 'backend/constants'
+import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
+import {
+  isMac,
+  isWindows,
+  isLinux,
+  configFolder,
+  mainReleaseChannelName
+} from 'backend/constants'
 import {
   downloadFile,
   spawnAsync,
@@ -45,7 +51,6 @@ import {
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
 import { clean } from 'easydl/dist/utils'
-import { getFirstQueueElement } from 'backend/downloadmanager/downloadqueue'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -143,8 +148,14 @@ export async function importGame(
 
   const gameInfo = getGameInfo(appName)
   //necessary so that injectProcess can find the process name
-  if (gameInfo.releaseMeta)
-    platform = handleArchAndPlatform(platform, gameInfo.releaseMeta)
+  if (
+    gameInfo.channels &&
+    gameInfo.channels[mainReleaseChannelName].release_meta
+  )
+    platform = handleArchAndPlatform(
+      platform,
+      gameInfo.channels[mainReleaseChannelName].release_meta
+    )
 
   let hpImportVersion = '-1'
   /**
@@ -154,7 +165,8 @@ export async function importGame(
    **/
   if (isOnline()) {
     const currentRelease = await getHyperPlayStoreRelease(appName)
-    hpImportVersion = currentRelease.releaseName
+    hpImportVersion =
+      currentRelease.channels[mainReleaseChannelName].release_meta.name
   }
 
   gameInLibrary.install = {
@@ -194,15 +206,10 @@ const installDistributables = async (gamePath: string) => {
 async function downloadGame(
   appName: string,
   downloadPath: string,
-  platformInfo: PlatformInfo,
+  platformInfo: PlatformConfig,
   destinationPath: string
 ): Promise<void> {
-  const appInfo = getGameInfo(appName)
   let downloadStarted = false
-
-  if (!appInfo || !appInfo.releaseMeta) {
-    throw new Error('App not found in library')
-  }
 
   logInfo(`Downloading zip file to ${downloadPath}`, LogPrefix.HyperPlay)
 
@@ -230,7 +237,7 @@ async function downloadGame(
       const eta = calculateEta(
         downloadedBytes,
         downloadSpeed,
-        platformInfo.downloadSize
+        Number.parseInt(platformInfo.downloadSize ?? '0')
       )
 
       if (downloadedBytes > 0 && !downloadStarted) {
@@ -266,7 +273,7 @@ function sanitizeFileName(filename: string) {
   return filename.replace(/[/\\?%*:|"<>]/g, '-')
 }
 
-function getZipFileName(appName: string, platformInfo: PlatformInfo): string {
+function getZipFileName(appName: string, platformInfo: PlatformConfig): string {
   const zipName = encodeURI(platformInfo.name)
   const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
 
@@ -287,23 +294,26 @@ export async function install(
   }
 
   const gameInfo = getGameInfo(appName)
-  const { title, releaseMeta, developer } = gameInfo
+  const { title, channels, developer } = gameInfo
   const window = getMainWindow()
   if (!window) return { status: 'error', error: 'Window undefined' }
 
-  let releaseMeta = releaseMetaDeprecated
-  let releaseVersion: string | undefined = undefined
-  if (channelName && releases && channels) {
-    releaseVersion = channels[channelName].version
-    releaseMeta = releases[releaseVersion]
+  if (!channelName || !channels) {
+    return { status: 'error', error: 'Channel name not found' }
   }
 
+  const releaseMeta = channels[channelName].release_meta
   if (!releaseMeta) {
     return { status: 'error', error: 'Release meta not found' }
   }
+  const releaseVersion: string | undefined = releaseMeta.name
 
   const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
   const platformInfo = releaseMeta.platforms[appPlatform]
+
+  if (!platformInfo) {
+    return { status: 'error', error: 'Platform info not found' }
+  }
 
   logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
   const zipFile = getZipFileName(appName, platformInfo)
@@ -320,6 +330,12 @@ export async function install(
       mkdirSync(destinationPath, { recursive: true })
     }
     await downloadGame(appName, zipFile, platformInfo, destinationPath)
+    if (!platformInfo.executable) {
+      return {
+        status: 'error',
+        error: 'Executable not found during install in HyperPlay game manager'
+      }
+    }
     let executable = path.join(destinationPath, platformInfo.executable)
 
     logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
@@ -350,7 +366,7 @@ export async function install(
         appName,
         install_path: destinationPath,
         executable: executable,
-        install_size: platformInfo.installSize.toString(),
+        install_size: platformInfo.installSize ?? '0',
         is_dlc: false,
         version: releaseVersion ? releaseVersion : gameInfo.version ?? '0',
         platform: appPlatform,
@@ -400,27 +416,6 @@ export async function install(
       error: `${error}`
     }
   }
-}
-
-export async function removeTempDownloadFiles(appName: string) {
-  const currentElement = getFirstQueueElement()
-  if (!currentElement || currentElement.params.appName !== appName) return
-
-  const gameInfo = getGameInfo(appName)
-  const { releaseMeta } = gameInfo
-  if (!releaseMeta) return
-  const appPlatform = handleArchAndPlatform(
-    currentElement.params.platformToInstall,
-    releaseMeta
-  )
-  const platformInfo = releaseMeta.platforms[appPlatform]
-
-  const zipFile = getZipFileName(appName, platformInfo)
-  if (existsSync(zipFile))
-    rm(zipFile, () =>
-      logInfo(`Removed zip file: ${zipFile}`, LogPrefix.HyperPlay)
-    )
-  clean(zipFile)
 }
 
 export function getGameInfo(appName: string): GameInfo {

@@ -157,8 +157,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
           install,
           is_linux_native = undefined,
           is_mac_native = undefined,
-          releaseMeta = undefined
+          channels
         } = { ...gameInfo }
+
+        if (channels === undefined || install.channelName === undefined)
+          throw 'Cannot get channels'
+        const releaseMeta = channels[install.channelName].release_meta
 
         const hpPlatforms = releaseMeta
           ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)

@@ -146,7 +146,6 @@ import { addGameToLibrary } from './storeManagers/hyperplay/library'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
-import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import {
   autoUpdate,
   gameManagerMap,
@@ -676,10 +675,6 @@ ipcMain.on('showConfigFileInFolder', async (event, appName) => {
   return openUrlOrFile(path.join(gamesConfigPath, `${appName}.json`))
 })
 
-ipcMain.handle('removeTempDownloadFiles', async (e, appName) =>
-  HyperPlayGameManager.removeTempDownloadFiles(appName)
-)
-
 async function runWineCommandOnGame(
   runner: string,
   appName: string,
@@ -840,11 +835,12 @@ ipcMain.handle('getGOGLinuxInstallersLangs', async (event, appName) =>
 
 ipcMain.handle(
   'getInstallInfo',
-  async (event, appName, runner, installPlatform) => {
+  async (event, appName, runner, installPlatform, channelNameToInstall) => {
     try {
       const info = await libraryManagerMap[runner].getInstallInfo(
         appName,
-        installPlatform
+        installPlatform,
+        channelNameToInstall
       )
       if (info === undefined) return null
       return info
@@ -1848,9 +1844,9 @@ ipcMain.on('reloadApp', async () => {
   }
 })
 
-ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
+ipcMain.handle('addHyperplayGame', async (_e, gameId, accountId) => {
   console.log('addHyperplayGame', gameId)
-  await addGameToLibrary(gameId)
+  await addGameToLibrary(gameId, accountId)
 })
 
 ipcMain.handle(

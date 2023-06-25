@@ -2,11 +2,12 @@ import {
   AppPlatforms,
   GameInfo,
   HyperPlayRelease,
-  HyperPlayReleaseMeta,
+  ChannelReleaseMeta,
   InstallPlatform
 } from 'common/types'
 import axios from 'axios'
 import { getTitleFromEpicStoreUrl } from 'backend/utils'
+import { mainReleaseChannelName, valistListingsApiUrl } from 'backend/constants'
 
 export async function getHyperPlayStoreRelease(appName: string) {
   const gameIdUrl = `https://developers.hyperplay.xyz/api/listings?id=${appName}`
@@ -17,7 +18,7 @@ export async function getHyperPlayStoreRelease(appName: string) {
 
 export function handleArchAndPlatform(
   platformToInstall: InstallPlatform,
-  releaseMeta: HyperPlayReleaseMeta
+  releaseMeta: ChannelReleaseMeta
 ): AppPlatforms {
   const arch = process.arch === 'x64' ? '_amd64' : '_arm64'
   const hpPlatforms = [
@@ -95,37 +96,60 @@ export function refreshGameInfoFromHpRelease(
   currentInfo: GameInfo,
   data: HyperPlayRelease
 ): GameInfo {
+  const channelsMap = {}
+  data.channels.forEach(
+    (channel) => (channelsMap[channel.channel_name] = channel)
+  )
+
+  let latestVersion = currentInfo.version
+  if (currentInfo.install.channelName !== undefined) {
+    const installedChannelName = currentInfo.install.channelName
+    latestVersion = data.channels[installedChannelName].release_meta.name
+  }
+
+  let hasWindowsNativeBuild = currentInfo.is_windows_native
+  let channelNameToCheck = mainReleaseChannelName
+  if (
+    currentInfo.install.channelName !== undefined &&
+    currentInfo.channels !== undefined
+  ) {
+    channelNameToCheck = currentInfo.install.channelName
+    const channelReleaseMeta =
+      currentInfo.channels[channelNameToCheck].release_meta
+    hasWindowsNativeBuild = Object.keys(channelReleaseMeta.platforms).some(
+      (val) => val.startsWith('windows')
+    )
+  }
+
   return {
     ...currentInfo,
     extra: {
       ...currentInfo.extra,
       about: {
-        description: data.projectMeta.description,
-        shortDescription: data.projectMeta.short_description
+        description: data.project_meta.description
+          ? data.project_meta.description
+          : '',
+        shortDescription: data.project_meta.short_description
+          ? data.project_meta.short_description
+          : ''
       },
       reqs: [
         {
-          minimum: JSON.stringify(data.projectMeta.systemRequirements),
-          recommended: JSON.stringify(data.projectMeta.systemRequirements),
-          title: data.projectMeta.name
+          minimum: JSON.stringify(data.project_meta.systemRequirements),
+          recommended: JSON.stringify(data.project_meta.systemRequirements),
+          title: data.project_meta.name
+            ? data.project_meta.name
+            : data.project_name
         }
       ],
-      storeUrl: `https://store.hyperplay.xyz/game/${data.projectName}`
+      storeUrl: `https://store.hyperplay.xyz/game/${data.project_name}`
     },
-    art_square:
-      data.projectMeta.image ||
-      data.releaseMeta.image ||
-      currentInfo.art_square,
-    art_cover:
-      data.releaseMeta.image ||
-      data.projectMeta.main_capsule ||
-      currentInfo.art_cover,
-    releaseMeta: data.releaseMeta,
-    developer: data.accountMeta.name || data.accountName,
-    version: data.releaseName,
-    is_windows_native: Object.keys(data.releaseMeta.platforms).some((val) =>
-      val.startsWith('windows')
-    )
+    art_square: data.project_meta.image || currentInfo.art_square,
+    art_cover: data.project_meta.main_capsule || currentInfo.art_cover,
+    developer: data.account_meta.name || data.account_name,
+    version: latestVersion,
+    is_windows_native: hasWindowsNativeBuild,
+    channels: channelsMap
   }
 }
 
@@ -133,37 +157,46 @@ export function refreshGameInfoFromHpRelease(
  * This is called when adding game to library and not during refresh
  */
 export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
-  const isWebGame = Object.hasOwn(data.releaseMeta.platforms, 'web')
-  const supportedPlatforms = Object.keys(data.releaseMeta.platforms)
+  let is_mac_native = false
+  let is_linux_native = false
+
+  data.channels.forEach((channel) => {
+    const supportedPlatforms = Object.keys(channel.release_meta.platforms)
+
+    if (supportedPlatforms.some((val) => val.startsWith('darwin'))) {
+      is_mac_native = true
+    }
+
+    if (supportedPlatforms.some((val) => val.startsWith('linux'))) {
+      is_linux_native = true
+    }
+  })
 
   const gameInfo: GameInfo = refreshGameInfoFromHpRelease(
     {
-      app_name: data._id,
+      app_name: data.project_id,
       thirdPartyManagedApp: undefined,
       web3: { supported: true },
       runner: 'hyperplay',
-      title: data.projectMeta.name,
-      is_installed: Boolean(data.releaseMeta.platforms.web),
+      title: data.project_meta.name
+        ? data.project_meta.name
+        : data.project_name,
+      is_installed: false,
       cloud_save_enabled: false,
       namespace: '',
-      store_url: `https://store.hyperplay.xyz/game/${data.projectName}`,
-      folder_name: data.projectName,
+      store_url: `https://store.hyperplay.xyz/game/${data.project_name}`,
+      folder_name: data.project_name,
       save_folder: '',
-      is_mac_native: supportedPlatforms.some((val) => val.startsWith('darwin')),
-      is_linux_native: supportedPlatforms.some((val) =>
-        val.startsWith('linux')
-      ),
+      is_mac_native: is_mac_native,
+      is_linux_native: is_linux_native,
       art_square: 'fallback',
       art_cover: 'fallback',
       canRunOffline: false,
-      install: isWebGame ? { platform: 'web' } : {}
+      install: {}
     },
     data
   )
 
-  if (isWebGame) {
-    gameInfo.browserUrl = data.releaseMeta.platforms.web.external_url
-  }
   return gameInfo
 }
 
@@ -173,15 +206,13 @@ interface EpicToHpMap {
 export const epicTitleToHpGameInfoMap: EpicToHpMap = {}
 
 export async function loadEpicHyperPlayGameInfoMap() {
-  const res = await axios.get<HyperPlayRelease[]>(
-    `https://developers.hyperplay.xyz/api/listings`
-  )
+  const res = await axios.get<HyperPlayRelease[]>(valistListingsApiUrl)
 
   for (const hpRelease of res.data) {
-    if (!hpRelease.projectMeta.epic_game_url) continue
+    if (!hpRelease.project_meta.epic_game_url) continue
     try {
       const epicTitle = getTitleFromEpicStoreUrl(
-        hpRelease.projectMeta.epic_game_url
+        hpRelease.project_meta.epic_game_url
       )
 
       epicTitleToHpGameInfoMap[epicTitle.toLowerCase()] =

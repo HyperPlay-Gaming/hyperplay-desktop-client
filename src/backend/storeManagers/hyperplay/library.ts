@@ -15,13 +15,11 @@ import {
   refreshGameInfoFromHpRelease
 } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
-import testJson from './test.json'
+import { getValistListingApiUrl, valistListingsApiUrl } from 'backend/constants'
 
 async function getHyperPlayReleaseMap() {
   const hpStoreGameReleases = (
-    await axios.get<HyperPlayRelease[]>(
-      'https://developers.hyperplay.xyz/api/listings'
-    )
+    await axios.get<HyperPlayRelease[]>(valistListingsApiUrl)
   ).data
   interface hpStoreGameMapType {
     [key: string]: HyperPlayRelease | undefined
@@ -29,21 +27,19 @@ async function getHyperPlayReleaseMap() {
   const hpStoreGameMap: hpStoreGameMapType = {}
 
   hpStoreGameReleases.forEach((val) => {
-    hpStoreGameMap[val._id] = val
+    hpStoreGameMap[val.project_id] = val
   })
 
-  // TODO: Remove after hp store upgrades to new data structure including channels and releases
-  hpStoreGameMap['63f685cd069b92b74c6d5778'] = testJson
   return hpStoreGameMap
 }
 
-export async function addGameToLibrary(appId: string) {
+export async function addGameToLibrary(projectId: string, accountId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
 
   // TODO refactor this to constant time check with a set
   // not important for alpha release
   const sameGameInLibrary = currentLibrary.find((val) => {
-    return val.app_name === appId
+    return val.app_name === projectId
   })
 
   if (sameGameInLibrary !== undefined) {
@@ -53,13 +49,8 @@ export async function addGameToLibrary(appId: string) {
     return
   }
 
-  let data = testJson as HyperPlayRelease
-
-  // TODO: Remove after hp store upgrades to new data structure including channels and releases
-  if (appId !== '63f685cd069b92b74c6d5778') {
-    const res = await axios.get<HyperPlayRelease[]>(
-      `https://developers.hyperplay.xyz/api/listings?id=${appId}`
-    )
+  const listingUrl = getValistListingApiUrl(accountId, projectId)
+  const res = await axios.get<HyperPlayRelease[]>(listingUrl)
 
   const data = res.data[0]
   const gameInfo = getGameInfoFromHpRelease(data)
@@ -68,21 +59,40 @@ export async function addGameToLibrary(appId: string) {
 
 export const getInstallInfo = async (
   appName: string,
-  platformToInstall: InstallPlatform
+  platformToInstall: InstallPlatform,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  lang = 'en',
+  channelNameToInstall = 'main'
 ): Promise<HyperPlayInstallInfo | undefined> => {
   const gameInfo = getGamesGameInfo(appName)
-  if (!gameInfo || !gameInfo.releaseMeta) {
+
+  if (
+    gameInfo.channels === undefined ||
+    gameInfo.channels[channelNameToInstall].release_meta === undefined
+  ) {
+    console.error(
+      'Channels or Release Meta were undefined in getInstallInfo for HyperPlay Library Manager'
+    )
     return undefined
   }
+
+  const releaseMeta = gameInfo.channels[channelNameToInstall].release_meta
 
   logInfo(`Getting install info for ${gameInfo.title}`, LogPrefix.HyperPlay)
 
   const requestedPlatform = handleArchAndPlatform(
     platformToInstall,
-    gameInfo.releaseMeta
+    releaseMeta
   )
 
-  const info = gameInfo.releaseMeta.platforms[requestedPlatform]
+  const info = releaseMeta.platforms[requestedPlatform]
+
+  if (info === undefined) {
+    console.error(
+      'Info was undefined in getInstallInfo for HyperPlay Library Manager'
+    )
+    return undefined
+  }
 
   if (!info) {
     logError(
@@ -91,10 +101,14 @@ export const getInstallInfo = async (
     )
     return undefined
   }
-  const download_size = parseInt(info.downloadSize)
-  const install_size = parseInt(info.installSize)
+  const download_size = info.downloadSize ? parseInt(info.downloadSize) : 0
+  const install_size = info.installSize ? parseInt(info.installSize) : 0
   return {
-    game: info,
+    game: {
+      ...info,
+      owned_dlc: [],
+      launch_options: []
+    },
     manifest: {
       download_size,
       install_size,
@@ -147,12 +161,7 @@ export async function refresh() {
 
   for (const gameId of currentLibraryIds) {
     try {
-      let gameData = hpStoreGameMap[gameId]
-
-      // TODO: Remove after hp store upgrades to new data structure including channels and releases
-      if (gameId === '63f685cd069b92b74c6d5778') {
-        gameData = testJson
-      }
+      const gameData = hpStoreGameMap[gameId]
 
       if (!gameData) {
         logWarning(
@@ -202,8 +211,7 @@ export async function listUpdateableGames(): Promise<string[]> {
 
     if (!gameIsInstalled(val)) return
 
-    // handle the new gameinfo structure with channels and releases
-    if (val.channels && val.install.channelName) {
+    if (val.channels && val.install.channelName && val.install.platform) {
       if (!Object.hasOwn(val.channels, val.install.channelName)) {
         console.error(`
         Cannot find installed channel name in channels. 
@@ -211,14 +219,17 @@ export async function listUpdateableGames(): Promise<string[]> {
         To continue to receive game updates, uninstall and reinstall this game: ${val.title}`)
       }
       if (
-        val.install.version !== val.channels[val.install.channelName].version
+        val.install.version !==
+        val.channels[val.install.channelName].release_meta.platforms[
+          val.install.platform
+        ].name
       ) {
         updateableGames.push(val.app_name)
       }
-    }
-    // handle the case where gameinfo is still using the deprecated data structure
-    else if (val.install.version !== listingMap[val.app_name]?.releaseName) {
-      updateableGames.push(val.app_name)
+    } else {
+      console.error(
+        `Error in listUpdateableGames: val.channels ${val.channels} or val.install.channelName ${val.install.channelName} or val.install.platform ${val.install.platform} is undefined'`
+      )
     }
   })
 

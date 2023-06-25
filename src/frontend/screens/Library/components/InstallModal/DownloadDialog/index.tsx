@@ -226,7 +226,8 @@ export default function DownloadDialog({
         const gameInstallInfo = await getInstallInfo(
           appName,
           runner,
-          platformToInstall
+          platformToInstall,
+          channelNameToInstall
         )
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)

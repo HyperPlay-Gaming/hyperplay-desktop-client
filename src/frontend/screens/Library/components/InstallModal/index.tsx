@@ -59,7 +59,7 @@ export default React.memo(function InstallModal({
   const initChannelName =
     gameInfo?.channels && Object.keys(gameInfo?.channels).length > 0
       ? Object.keys(gameInfo?.channels)[0]
-      : ''
+      : 'main'
   const [channelNameToInstall, setChannelNameToInstall] =
     useState(initChannelName)
 
@@ -189,17 +189,17 @@ export default React.memo(function InstallModal({
         value={channelNameToInstall}
         onChange={(e) => setChannelNameToInstall(e.target.value)}
       >
-        {!gameInfo?.channels
-          ? null
-          : Object.keys(gameInfo.channels).map((p, i) => {
+        {gameInfo?.channels !== undefined
+          ? Object.keys(gameInfo.channels).map((p, i) => {
               if (!gameInfo.channels) return <div>error</div>
               const channel_i = gameInfo.channels[p]
               return (
                 <option value={p} key={i}>
-                  {translateChannelName(channel_i.displayName, t)}
+                  {translateChannelName(channel_i.channel_name, t)}
                 </option>
               )
-            })}
+            })
+          : null}
       </SelectField>
     )
   }
