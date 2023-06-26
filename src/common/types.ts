@@ -156,6 +156,9 @@ export interface GameInfo {
   version?: string
   // key is channel name
   channels?: { [key: string]: Channel }
+  project_name?: string
+  //data schema version
+  v?: string
 }
 
 export interface GameSettings {

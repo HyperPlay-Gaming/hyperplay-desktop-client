@@ -89,8 +89,11 @@ const eventsToCloseMetaMaskPopupOn = [
 const valistListingsApiUrl = 'https://api.valist.io/v1/listings'
 const mainReleaseChannelName = 'main'
 
-export function getValistListingApiUrl(accountId: string, projectId: string) {
-  return `${valistListingsApiUrl}/${accountId}/${projectId}`
+export function getValistListingApiUrl(
+  accountName: string,
+  projectName: string
+) {
+  return `${valistListingsApiUrl}/${accountName}/${projectName}`
 }
 
 /**

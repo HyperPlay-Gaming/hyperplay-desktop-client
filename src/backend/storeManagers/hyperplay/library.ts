@@ -33,13 +33,16 @@ async function getHyperPlayReleaseMap() {
   return hpStoreGameMap
 }
 
-export async function addGameToLibrary(projectId: string, accountId: string) {
+export async function addGameToLibrary(
+  projectName: string,
+  accountName: string
+) {
   const currentLibrary = hpLibraryStore.get('games', [])
 
   // TODO refactor this to constant time check with a set
   // not important for alpha release
   const sameGameInLibrary = currentLibrary.find((val) => {
-    return val.app_name === projectId
+    return val.app_name === projectName
   })
 
   if (sameGameInLibrary !== undefined) {
@@ -49,7 +52,7 @@ export async function addGameToLibrary(projectId: string, accountId: string) {
     return
   }
 
-  const listingUrl = getValistListingApiUrl(accountId, projectId)
+  const listingUrl = getValistListingApiUrl(accountName, projectName)
   const res = await axios.get<HyperPlayRelease[]>(listingUrl)
 
   const data = res.data[0]
@@ -65,6 +68,13 @@ export const getInstallInfo = async (
   channelNameToInstall = 'main'
 ): Promise<HyperPlayInstallInfo | undefined> => {
   const gameInfo = getGamesGameInfo(appName)
+
+  console.log(
+    'for channel = ',
+    channelNameToInstall,
+    ' game info = ',
+    JSON.stringify(gameInfo, null, 4)
+  )
 
   if (
     gameInfo.channels === undefined ||
@@ -162,6 +172,7 @@ export async function refresh() {
   for (const gameId of currentLibraryIds) {
     try {
       const gameData = hpStoreGameMap[gameId]
+      console.log('game data in refresh = ', gameData)
 
       if (!gameData) {
         logWarning(

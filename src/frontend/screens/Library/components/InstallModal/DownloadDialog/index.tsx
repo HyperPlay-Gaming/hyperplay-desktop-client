@@ -223,12 +223,17 @@ export default function DownloadDialog({
     const getIinstInfo = async () => {
       try {
         setGettingInstallInfo(true)
+        console.log(
+          'getting game install info for channel name = ',
+          channelNameToInstall
+        )
         const gameInstallInfo = await getInstallInfo(
           appName,
           runner,
           platformToInstall,
           channelNameToInstall
         )
+        console.log('got install info = ', gameInstallInfo)
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 

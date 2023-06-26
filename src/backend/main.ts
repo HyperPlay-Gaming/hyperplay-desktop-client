@@ -837,11 +837,20 @@ ipcMain.handle(
   'getInstallInfo',
   async (event, appName, runner, installPlatform, channelNameToInstall) => {
     try {
-      const info = await libraryManagerMap[runner].getInstallInfo(
+      console.log(
+        'getting install infro for',
         appName,
+        runner,
         installPlatform,
         channelNameToInstall
       )
+      const info = await libraryManagerMap[runner].getInstallInfo(
+        appName,
+        installPlatform,
+        'en-US',
+        channelNameToInstall
+      )
+      console.log('install info = ', info)
       if (info === undefined) return null
       return info
     } catch (error) {
@@ -1844,9 +1853,9 @@ ipcMain.on('reloadApp', async () => {
   }
 })
 
-ipcMain.handle('addHyperplayGame', async (_e, gameId, accountId) => {
-  console.log('addHyperplayGame', gameId)
-  await addGameToLibrary(gameId, accountId)
+ipcMain.handle('addHyperplayGame', async (_e, projectName, accountName) => {
+  console.log('addHyperplayGame', projectName, ' ', accountName)
+  await addGameToLibrary(projectName, accountName)
 })
 
 ipcMain.handle(
