@@ -88,7 +88,7 @@ const TopNavBar = observer(() => {
         )}
       </div>
       <div>
-        <SearchBar />
+        {pathname === '/library' ? <SearchBar /> : null}
         {showMetaMaskBrowserSidebarLinks && (
           <button
             className={styles.iconButton}
