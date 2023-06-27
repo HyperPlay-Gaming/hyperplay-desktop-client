@@ -24,6 +24,9 @@
       "!build/bin/*",
       "build/bin/legendary.LICENSE"
     ],
+    "extraResources": [
+      "LICENSE_ALL"
+    ],
     "asarUnpack": [
       "build/app_icon.png",
       "build/app_icon.icns",
