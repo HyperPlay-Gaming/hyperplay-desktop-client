@@ -24,6 +24,10 @@ jobs:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
       options: --privileged
     steps:
+      - name: update apt
+        run: sudo apt update -y
+      - name: install libnss
+        run: sudo apt install libnss -y
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
