@@ -1779,8 +1779,8 @@ import { addNewApp } from './storeManagers/sideload/library'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/electronStores'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
-import { backendEvents } from './backend_events'
-import { toggleOverlay } from './hyperplay-overlay'
+import { backendEvents } from 'backend/backend_events'
+import { toggleOverlay } from 'backend/hyperplay-overlay'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (
