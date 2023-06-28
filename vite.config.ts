@@ -43,7 +43,7 @@ export default defineConfig({
     electron([
       {
         entry: 'src/backend/main.ts',
-        vite: {...electronViteConfig, plugins: [bytecodePlugin()]}
+        vite: { ...electronViteConfig, plugins: [bytecodePlugin()] }
       },
       {
         entry: path.resolve(__dirname + '/src/backend/preload.ts'),
