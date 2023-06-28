@@ -22,6 +22,16 @@ import StoreController from './store'
 initOnlineMonitor()
 import ViewManager from './ViewManager'
 
+import * as Sentry from '@sentry/electron/renderer'
+import { init as reactInit } from '@sentry/react'
+import { prodSentryDsn, devSentryDsn } from 'common/constants'
+Sentry.init(
+  {
+    dsn: window.location.hostname === 'localhost' ? devSentryDsn : prodSentryDsn
+  },
+  reactInit
+)
+
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
 })
