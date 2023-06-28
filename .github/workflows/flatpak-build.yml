@@ -24,12 +24,8 @@ jobs:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
       options: --privileged
     steps:
-      - name: install libnss
-        run: sudo dnf install nss-tools -y
-      - name: install libatk
-        run: dnf install atk-devel -y
-      - name: install libatk-bridge
-        run: dnf install at-spi2-atk-devel -y
+      - name: install libnss, libatk, libatk-bridge, libcups
+        run: sudo dnf install nss-tools atk-devel at-spi2-atk-devel cups-devel -y
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
