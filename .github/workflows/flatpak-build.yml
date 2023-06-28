@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: install libnss
         run: sudo dnf install nss-tools -y
+      - name: install libatk
+        run: dnf install atk-devel -y
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
