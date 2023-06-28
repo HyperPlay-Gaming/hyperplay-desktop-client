@@ -28,6 +28,8 @@ jobs:
         run: sudo dnf install nss-tools -y
       - name: install libatk
         run: dnf install atk-devel -y
+      - name: install libatk-bridge
+        run: dnf install at-spi2-atk-devel -y
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
