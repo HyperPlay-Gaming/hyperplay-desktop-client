@@ -321,6 +321,10 @@ if (!gotTheLock) {
     handleProtocol(argv)
   })
   app.whenReady().then(async () => {
+    trackEvent({
+      event: 'HyperPlay Launched'
+    })
+
     initStoreManagers()
 
     const ses = session.fromPartition(

@@ -204,6 +204,12 @@ export interface GameClosed {
   sensitiveProperties?: never
 }
 
+export interface HyperPlayLaunched {
+  event: 'HyperPlay Launched'
+  properties?: never
+  sensitiveProperties?: never
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -226,5 +232,6 @@ export type PossibleMetricPayloads =
   | DownloadToastInteraction
   | GameLaunch
   | GameClosed
+  | HyperPlayLaunched
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']
