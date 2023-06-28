@@ -16,12 +16,21 @@ const TopNavBar = observer(() => {
 
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
-  const { pathname } = useLocation()
+  const { pathname, search } = useLocation()
   const pagesToShowStoreNavOptions = [
     '/hyperplaystore',
     '/gogstore',
-    '/epicstore'
+    '/epicstore',
+    '/store-page/'
   ]
+  const searchParams = new URLSearchParams(search)
+  const queryParam = searchParams.get('store-url')
+  let isEpicStore = false
+  if (queryParam !== null) {
+    const storeUrl = new URL(queryParam)
+    isEpicStore = storeUrl.host === 'store.epicgames.com'
+  }
+
   const showStoreNavOptions = pagesToShowStoreNavOptions.includes(pathname)
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
@@ -36,10 +45,13 @@ const TopNavBar = observer(() => {
       removeHandleSetBadgeText()
     }
   }, [])
-  function getStoreTextStyle(storePath: string) {
-    return {
-      color: pathname === storePath ? '' : 'var(--color-neutral-400)'
+  function getStoreTextStyle(storePath: string, isActive?: boolean) {
+    const inactiveStyle = { color: 'var(--color-neutral-400)' }
+    const activeStyle = { color: '' }
+    if (isActive !== undefined && isActive) {
+      return activeStyle
     }
+    return pathname === storePath ? activeStyle : inactiveStyle
   }
   return (
     <div className={styles.navBar}>
@@ -70,7 +82,7 @@ const TopNavBar = observer(() => {
               <Button
                 type="link"
                 size="small"
-                style={getStoreTextStyle('/epicstore')}
+                style={getStoreTextStyle('/epicstore', isEpicStore)}
               >
                 {t('Epic Games', 'Epic Games')}
               </Button>
@@ -88,7 +100,7 @@ const TopNavBar = observer(() => {
         )}
       </div>
       <div>
-        <SearchBar />
+        {pathname === '/library' ? <SearchBar /> : null}
         {showMetaMaskBrowserSidebarLinks && (
           <button
             className={styles.iconButton}

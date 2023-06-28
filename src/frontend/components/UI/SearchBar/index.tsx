@@ -21,8 +21,14 @@ function fixFilter(text: string) {
 }
 
 export default React.memo(function SearchBar() {
-  const { handleSearch, filterText, epic, gog, sideloadedLibrary } =
-    useContext(ContextProvider)
+  const {
+    handleSearch,
+    filterText,
+    epic,
+    gog,
+    sideloadedLibrary,
+    hyperPlayLibrary
+  } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -30,7 +36,12 @@ export default React.memo(function SearchBar() {
 
   const list = useMemo(() => {
     const library = new Set(
-      [...epic.library, ...gog.library, ...sideloadedLibrary]
+      [
+        ...epic.library,
+        ...gog.library,
+        ...sideloadedLibrary,
+        ...hyperPlayLibrary
+      ]
         .filter(Boolean)
         .map((g) => g.title)
         .sort()

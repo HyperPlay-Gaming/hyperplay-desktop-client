@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -23,6 +23,9 @@
       "node_modules/**/*",
       "!build/bin/*",
       "build/bin/legendary.LICENSE"
+    ],
+    "extraResources": [
+      "LICENSE_ALL"
     ],
     "asarUnpack": [
       "build/app_icon.png",
