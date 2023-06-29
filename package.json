@@ -98,7 +98,7 @@
     },
     "linux": {
       "category": "Game",
-      "icon": "build/app_icon.png",
+      "icon": "build/app_icon.icns",
       "description": "An Open Source Launcher for Web3, GOG and Epic Games",
       "desktop": {
         "Name": "HyperPlay",
@@ -228,7 +228,7 @@
     "test:e2e": "cross-env-shell docker compose -f e2e/docker-compose.yml run --rm --build process_all bash e2e/entrypoint.sh",
     "test:e2ePackaged": "cross-env TEST_PACKAGED=true yarn test:e2e",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
-    "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
+    "release:linux": "vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
     "release:mac": "vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "vite build && electron-builder -p always --win nsis",
     "dist:linux": "vite build && electron-builder --linux",
