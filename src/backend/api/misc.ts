@@ -146,9 +146,6 @@ export const storeGet = (
 export const storeDelete = (storeName: string, key: string) =>
   stores[storeName].delete(key)
 
-export const getWikiGameInfo = async (title: string, id?: string) =>
-  ipcRenderer.invoke('getWikiGameInfo', title, id)
-
 export const handleNavToEpicAndOpen = (
   onMessage: (e: Electron.IpcRendererEvent, url: string) => void
 ): (() => void) => {
@@ -174,3 +171,14 @@ export const handleShowHiddenQaAuthTextBox = (
     ipcRenderer.removeListener('showHiddenQaAuthTextBox', onCall)
   }
 }
+
+export const getWikiGameInfo = async (
+  title: string,
+  appName: string,
+  runner: Runner
+) => ipcRenderer.invoke('getWikiGameInfo', title, appName, runner)
+
+export const fetchPlaytimeFromServer = async (
+  runner: Runner,
+  appName: string
+) => ipcRenderer.invoke('getPlaytimeFromRunner', runner, appName)

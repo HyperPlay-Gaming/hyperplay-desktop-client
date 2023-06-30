@@ -145,6 +145,12 @@ import { addGameToLibrary } from './storeManagers/hyperplay/library'
 import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
+import {
+  getGOGPlaytime,
+  syncQueuedPlaytimeGOG,
+  updateGOGPlaytime
+} from 'backend/storeManagers/gog/games'
+import { playtimeSyncQueue } from './storeManagers/gog/electronStores'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
 import {
   autoUpdate,
@@ -407,6 +413,10 @@ if (!gotTheLock) {
       //update metadata for all hp store games in library on launch
       HyperPlayLibraryManager.refresh()
     })
+
+    // Make sure lock is not present when starting up
+    playtimeSyncQueue.delete('lock')
+    runOnceWhenOnline(syncQueuedPlaytimeGOG)
 
     await i18next.use(Backend).init({
       backend: {
@@ -1160,6 +1170,10 @@ ipcMain.handle(
       sessionPlaytime + tsStore.get(`${appName}.totalPlayed`, 0)
     tsStore.set(`${appName}.totalPlayed`, Math.floor(totalPlaytime))
 
+    if (runner === 'gog') {
+      await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
+    }
+
     await addRecentGame(game)
 
     if (autoSyncSaves && isOnline()) {
@@ -1774,6 +1788,17 @@ ipcMain.handle('isNative', (e, { appName, runner }) => {
 ipcMain.handle('pathExists', async (e, path: string) => {
   return existsSync(path)
 })
+
+ipcMain.handle(
+  'getPlaytimeFromRunner',
+  async (e, runner, appName): Promise<number | undefined> => {
+    if (runner === 'gog') {
+      return getGOGPlaytime(appName)
+    }
+
+    return
+  }
+)
 
 /*
   Other Keys that should go into translation files:

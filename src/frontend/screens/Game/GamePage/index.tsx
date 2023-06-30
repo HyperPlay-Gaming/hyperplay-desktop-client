@@ -549,7 +549,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       )}
                     </>
                   )}
-                  <TimeContainer game={appName} />
+                  <TimeContainer runner={runner} game={appName} />
                 </div>
               </div>
               <div className="gameStatus">

@@ -326,7 +326,11 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   }
   getNumOfGpus: () => Promise<number>
   removeRecent: (appName: string) => Promise<void>
-  getWikiGameInfo: (title: string, id?: string) => Promise<WikiInfo | null>
+  getWikiGameInfo: (
+    title: string,
+    id?: string,
+    runner?: Runner
+  ) => Promise<WikiInfo | null>
   getDefaultSavePath: (
     appName: string,
     runner: Runner,
@@ -343,6 +347,10 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   getGOGLaunchOptions: (appName: string) => Promise<LaunchOption[]>
   getGameOverride: () => Promise<GameOverride | null>
   getGameSdl: (appName: string) => Promise<SelectiveDownload[]>
+  getPlaytimeFromRunner: (
+    runner: Runner,
+    appName: string
+  ) => Promise<number | undefined>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file
