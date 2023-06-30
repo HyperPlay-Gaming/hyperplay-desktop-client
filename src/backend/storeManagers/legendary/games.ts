@@ -271,7 +271,7 @@ const emptyExtraInfo = {
 export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   const { namespace, title } = getGameInfo(appName)
   if (namespace === undefined) return emptyExtraInfo
-  const cachedExtraInfo = gameInfoStore.get_nodefault(namespace)
+  const cachedExtraInfo = gameInfoStore.get(namespace)
   if (cachedExtraInfo) {
     return cachedExtraInfo
   }
