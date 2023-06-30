@@ -33,16 +33,13 @@ async function getHyperPlayReleaseMap() {
   return hpStoreGameMap
 }
 
-export async function addGameToLibrary(
-  projectName: string,
-  accountName: string
-) {
+export async function addGameToLibrary(projectId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
 
   // TODO refactor this to constant time check with a set
   // not important for alpha release
   const sameGameInLibrary = currentLibrary.find((val) => {
-    return val.app_name === projectName
+    return val.app_name === projectId
   })
 
   if (sameGameInLibrary !== undefined) {

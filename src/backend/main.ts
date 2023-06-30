@@ -1853,9 +1853,9 @@ ipcMain.on('reloadApp', async () => {
   }
 })
 
-ipcMain.handle('addHyperplayGame', async (_e, projectName, accountName) => {
-  console.log('addHyperplayGame', projectName, ' ', accountName)
-  await addGameToLibrary(projectName, accountName)
+ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
+  console.log('addHyperplayGame', projectId)
+  await addGameToLibrary(projectId)
 })
 
 ipcMain.handle(

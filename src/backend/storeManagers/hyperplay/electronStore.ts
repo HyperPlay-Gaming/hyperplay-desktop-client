@@ -1,23 +1,5 @@
 import { TypeCheckedStoreBackend } from '../../electron_store'
-import { app } from 'electron'
-
-interface V1Indices {
-  projectName: string
-  accountName: string
-}
-
-const appNameToAcctProjNameMap: Record<string, V1Indices> = {
-  '63ff5425069b92b74c91f67c': {
-    projectName: 'rocketmonsters',
-    accountName: 'rocketmonsters'
-  },
-  '645d19cd6e1720d987676cf4': {
-    projectName: 'onisquest',
-    accountName: 'yokaikingdom'
-  }
-}
-
-//make a map from currently listed game app id's to project account name using developers.hyperplay.xyz/api/v1/listings and api.valist.io/listings
+import { appNameToProjectIdMap } from './legacy_listings'
 
 /*
  * migrations runs if: previous app version migrations were run on < candidate version <= new app version (version in package.json)
@@ -40,11 +22,14 @@ export const hpLibraryStore = new TypeCheckedStoreBackend('hpLibraryStore', {
 
       const newLibrary = currentLibrary.map((game) => {
         //for delisted games (games not in map) should create a new main channel and map release data to that
-
-        if (!Object.hasOwn(appNameToAcctProjNameMap, game.app_name)) return game
-        const newIndices = appNameToAcctProjNameMap[game.app_name]
-        game.app_name = newIndices.projectName
-        game.project_name = newIndices.projectName
+        if (!Object.hasOwn(appNameToProjectIdMap, game.app_name)) {
+          //game might be delisted or it was listed after the old db schema was migrated
+          //reverse the logic in convertToLegacy function on dev portal then return
+          return {
+            //
+          }
+        }
+        game.app_name = appNameToProjectIdMap[game.app_name]
         return game
       })
 
