@@ -62,6 +62,9 @@ const gogdlAuthConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
 const icon = fixAsarPath(join(publicDir, 'app_icon.png'))
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
 const iconLight = fixAsarPath(join(publicDir, 'trayIconLight24x24.png'))
+const vulkanHelperBin = fixAsarPath(
+  join(publicDir, 'bin', process.platform, 'vulkan-helper')
+)
 const installed = join(legendaryConfigPath, 'installed.json')
 const legendaryMetadata = join(legendaryConfigPath, 'metadata')
 const fallBackImage = 'fallback'
@@ -274,5 +277,6 @@ export {
   onboardLocalStore,
   eventsToCloseMetaMaskPopupOn,
   valistListingsApiUrl,
-  mainReleaseChannelName
+  mainReleaseChannelName,
+  vulkanHelperBin
 }

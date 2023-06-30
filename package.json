@@ -107,7 +107,8 @@
       "asarUnpack": [
         "build/bin/linux/legendary",
         "build/bin/linux/gogdl",
-        "build/bin/linux/wmctrl"
+        "build/bin/linux/wmctrl",
+        "build/bin/linux/vulkan-helper"
       ],
       "files": [
         "build/bin/linux/*"
@@ -211,9 +212,11 @@
     "react": "^18.2.0",
     "react-blockies": "^1.4.1",
     "react-dom": "^18.2.0",
-    "react-i18next": "^11.16.7",
-    "react-router-dom": "^6.3.0",
-    "recharts": "^2.1.14",
+    "react-i18next": "^12.2.0",
+    "react-router-dom": "^6.9.0",
+    "recharts": "^2.4.3",
+    "sanitize-filename": "^1.6.3",
+    "semver": "^7.5.1",
     "shlex": "^2.1.2",
     "short-uuid": "^4.2.0",
     "simple-keyboard": "^3.4.136",
