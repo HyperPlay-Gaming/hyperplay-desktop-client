@@ -29,7 +29,7 @@ export async function handleProtocol(args: string[]) {
     return
   }
 
-  const [command, runner, arg = '', arg1 = ''] = parseUrl(url)
+  const [command, runner, arg = ''] = parseUrl(url)
 
   logInfo(`received '${url}'`, LogPrefix.ProtocolHandler)
 
@@ -37,7 +37,7 @@ export async function handleProtocol(args: string[]) {
     case 'ping':
       return handlePing(arg)
     case 'launch':
-      await handleLaunch(runner, arg, mainWindow, arg1)
+      await handleLaunch(runner, arg, mainWindow)
       break
     default:
       return
@@ -111,10 +111,9 @@ async function handlePing(arg: string) {
 async function handleLaunch(
   runner: Runner | undefined,
   arg: string | undefined,
-  mainWindow?: Electron.BrowserWindow | null,
-  arg1?: string
+  mainWindow?: Electron.BrowserWindow | null
 ) {
-  const game = await findGame(runner, arg, arg1)
+  const game = await findGame(runner, arg)
 
   if (!game) {
     return logError(
@@ -159,8 +158,7 @@ async function handleLaunch(
 
 async function findGame(
   runner: Runner | undefined,
-  accountId = '',
-  appId = ''
+  projectId = ''
 ): Promise<GameInfo | null> {
   // If the runner is specified, only search for that runner
   const runnersToSearch = runner ? [runner, 'hyperplay'] : RUNNERS
@@ -172,18 +170,18 @@ async function findGame(
 
     if (run === 'hyperplay') {
       try {
-        getGameInfo(appId)
+        getGameInfo(projectId)
       } catch (error) {
         logInfo(
-          `Game ${appId} not found in library. Adding it...`,
+          `Game ${projectId} not found in library. Adding it...`,
           LogPrefix.HyperPlay
         )
-        await addGameToLibrary(appId, accountId)
-        return getGameInfo(appId)
+        await addGameToLibrary(projectId)
+        return getGameInfo(projectId)
       }
     }
 
-    const gameInfoOrSideload = getInfo(appId, run)
+    const gameInfoOrSideload = getInfo(projectId, run)
     if (gameInfoOrSideload.app_name) {
       return gameInfoOrSideload
     }

@@ -7,7 +7,7 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import { getTitleFromEpicStoreUrl } from 'backend/utils'
-import { mainReleaseChannelName, valistListingsApiUrl } from 'backend/constants'
+import { valistListingsApiUrl } from 'backend/constants'
 
 export async function getHyperPlayStoreRelease(appName: string) {
   const gameIdUrl = `https://developers.hyperplay.xyz/api/listings?id=${appName}`
@@ -102,33 +102,47 @@ export function refreshGameInfoFromHpRelease(
   )
 
   let latestVersion = currentInfo.version
-  if (currentInfo.install.channelName !== undefined) {
+  if (
+    currentInfo.install !== undefined &&
+    currentInfo.install.channelName !== undefined
+  ) {
     const installedChannelName = currentInfo.install.channelName
     latestVersion = data.channels[installedChannelName].release_meta.name
   }
 
-  let hasWindowsNativeBuild = currentInfo.is_windows_native
-  let channelNameToCheck = mainReleaseChannelName
-  if (
-    currentInfo.install.channelName !== undefined &&
-    currentInfo.channels !== undefined
-  ) {
-    channelNameToCheck = currentInfo.install.channelName
-    const channelReleaseMeta =
-      currentInfo.channels[channelNameToCheck].release_meta
-    hasWindowsNativeBuild = Object.keys(channelReleaseMeta.platforms).some(
-      (val) => val.startsWith('windows')
-    )
-  }
+  let hasWindowsNativeBuild = false
+  let hasMacNativeBuild = false
+  let hasLinuxNativeBuild = false
 
+  data.channels.forEach((channel) => {
+    const supportedPlatforms = Object.keys(channel.release_meta.platforms)
+
+    if (supportedPlatforms.some((val) => val.startsWith('darwin'))) {
+      hasMacNativeBuild = true
+    }
+
+    if (supportedPlatforms.some((val) => val.startsWith('linux'))) {
+      hasLinuxNativeBuild = true
+    }
+
+    if (supportedPlatforms.some((val) => val.startsWith('windows'))) {
+      hasWindowsNativeBuild = true
+    }
+  })
+
+  const newDescription = data.project_meta.description
+    ? data.project_meta.description
+    : ''
+
+  const newArtSquare = data.project_meta.image || currentInfo.art_square
+  const newArtCover = data.project_meta.main_capsule || currentInfo.art_cover
   return {
     ...currentInfo,
+    runner: 'hyperplay',
     extra: {
       ...currentInfo.extra,
       about: {
-        description: data.project_meta.description
-          ? data.project_meta.description
-          : '',
+        description: newDescription,
         shortDescription: data.project_meta.short_description
           ? data.project_meta.short_description
           : ''
@@ -144,12 +158,23 @@ export function refreshGameInfoFromHpRelease(
       ],
       storeUrl: `https://store.hyperplay.xyz/game/${data.project_name}`
     },
-    art_square: data.project_meta.image || currentInfo.art_square,
-    art_cover: data.project_meta.main_capsule || currentInfo.art_cover,
+    art_square: newArtSquare !== undefined ? newArtSquare : 'fallback',
+    art_cover: newArtCover !== undefined ? newArtCover : 'fallback',
     developer: data.account_meta.name || data.account_name,
     version: latestVersion,
     is_windows_native: hasWindowsNativeBuild,
-    channels: channelsMap
+    channels: channelsMap,
+    store_url: `https://store.hyperplay.xyz/game/${data.project_name}`,
+    wineSupport: data.project_meta.wineSupport,
+    description: newDescription,
+    v: '1',
+    project_name: data.project_name,
+    web3: { supported: true },
+    title: data.project_meta.name ? data.project_meta.name : data.project_name,
+    canRunOffline: false,
+    cloud_save_enabled: false,
+    is_mac_native: hasMacNativeBuild,
+    is_linux_native: hasLinuxNativeBuild
   }
 }
 
@@ -157,42 +182,26 @@ export function refreshGameInfoFromHpRelease(
  * This is called when adding game to library and not during refresh
  */
 export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
-  let is_mac_native = false
-  let is_linux_native = false
-
-  data.channels.forEach((channel) => {
-    const supportedPlatforms = Object.keys(channel.release_meta.platforms)
-
-    if (supportedPlatforms.some((val) => val.startsWith('darwin'))) {
-      is_mac_native = true
-    }
-
-    if (supportedPlatforms.some((val) => val.startsWith('linux'))) {
-      is_linux_native = true
-    }
-  })
-
+  // these are either values that should be set on initial add and not on every refreshed
+  // or they are required to complete the gameinfo type
+  // todo: refactor refreshGameInfoFromHpRelease to accept Partial<GameInfo>
   const gameInfo: GameInfo = refreshGameInfoFromHpRelease(
     {
+      // only set on game add
+      runner: 'hyperplay',
       app_name: data.project_id,
       thirdPartyManagedApp: undefined,
-      web3: { supported: true },
-      runner: 'hyperplay',
-      title: data.project_meta.name
-        ? data.project_meta.name
-        : data.project_name,
       is_installed: false,
       cloud_save_enabled: false,
       namespace: '',
-      store_url: `https://store.hyperplay.xyz/game/${data.project_name}`,
       folder_name: data.project_name,
       save_folder: '',
-      is_mac_native: is_mac_native,
-      is_linux_native: is_linux_native,
+      canRunOffline: false,
+      install: {},
+      //required to complete type
       art_square: 'fallback',
       art_cover: 'fallback',
-      canRunOffline: false,
-      install: {}
+      title: data.project_meta.name ? data.project_meta.name : data.project_name
     },
     data
   )

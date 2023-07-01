@@ -49,7 +49,7 @@ export async function addGameToLibrary(projectId: string) {
     return
   }
 
-  const listingUrl = getValistListingApiUrl(accountName, projectName)
+  const listingUrl = getValistListingApiUrl(projectId)
   const res = await axios.get<HyperPlayRelease[]>(listingUrl)
 
   const data = res.data[0]
