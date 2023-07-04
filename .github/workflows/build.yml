@@ -70,7 +70,7 @@ jobs:
           path: dist/hyperplay*.tar.xz
           retention-days: 14
   build_mac:
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: Checkout repository.
         uses: actions/checkout@v3
