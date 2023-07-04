@@ -5,7 +5,7 @@ const ExtensionHandler = function () {
   const navigate = useNavigate()
 
   async function handleRequest(
-    event: Event,
+    event: Electron.IpcRendererEvent,
     id: number,
     args: Record<string, unknown>
   ) {
@@ -24,7 +24,11 @@ const ExtensionHandler = function () {
     navigate('metamaskHome')
   }
 
-  async function handleSend(event: Event, id: number, args: unknown[]) {
+  async function handleSend(
+    event: Electron.IpcRendererEvent,
+    id: number,
+    args: unknown[]
+  ) {
     try {
       await waitForConnection()
       const value = await window.ethereum.send(...args)
@@ -35,7 +39,11 @@ const ExtensionHandler = function () {
     }
   }
 
-  async function handleSendAsync(event: Event, id: number, args: unknown[]) {
+  async function handleSendAsync(
+    event: Electron.IpcRendererEvent,
+    id: number,
+    args: unknown[]
+  ) {
     try {
       await waitForConnection()
       const value = await window.ethereum.sendAsync(...args)

@@ -162,6 +162,13 @@ import {
   libraryManagerMap
 } from './storeManagers'
 
+import * as Sentry from '@sentry/electron'
+import { prodSentryDsn, devSentryDsn } from 'common/constants'
+
+Sentry.init({
+  dsn: app.isPackaged ? prodSentryDsn : devSentryDsn
+})
+
 app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
 const { showOpenDialog } = dialog
