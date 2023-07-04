@@ -23,7 +23,6 @@ import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
-import { isOverlayShown } from 'backend/hyperplay-overlay'
 const buildDir = resolve(__dirname, '../../build')
 import { hrtime } from 'process'
 import { trackEvent } from 'backend/metrics/metrics'
@@ -76,13 +75,12 @@ const openNewBrowserGameWindow = async (
       fullscreen: true,
       webPreferences: {
         webviewTag: true,
+        contextIsolation: true,
         nodeIntegration: true,
         preload: path.join(__dirname, 'preload.js')
       }
     })
-    const overlayIsShown = isOverlayShown()
-    console.log('overlayIsShown = ', overlayIsShown)
-    browserGame.setIgnoreMouseEvents(overlayIsShown)
+    browserGame.setIgnoreMouseEvents(false)
     browserGame.setMinimizable(true)
 
     const abortController = createAbortController(gameInfo.app_name)
