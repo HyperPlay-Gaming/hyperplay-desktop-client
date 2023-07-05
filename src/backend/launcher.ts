@@ -58,8 +58,7 @@ import { gameManagerMap } from 'backend/storeManagers'
 import { trackPidPlaytime } from './metrics/metrics'
 import {
   closeOverlay,
-  openOverlay,
-  showInitialToast
+  openOverlay
 } from 'backend/hyperplay-overlay'
 
 async function prepareLaunch(
@@ -759,8 +758,6 @@ async function callRunner(
       shouldTrackPlaytime
     )
       trackPidPlaytime(child.pid, gameInfo)
-
-    showInitialToast()
 
     const stdout: string[] = []
     const stderr: string[] = []

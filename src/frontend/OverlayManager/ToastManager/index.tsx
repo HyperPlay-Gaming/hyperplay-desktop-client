@@ -18,26 +18,10 @@ interface BrowserToastManagerProps {
 const BrowserToastManager = function (props: BrowserToastManagerProps) {
   const [showInitialToast, setShowInitialToast] = useState(true)
 
-  const handleInjectionSuccess = () => {
-    setShowInitialToast(true)
-
-    setTimeout(() => {
-      setShowInitialToast(false)
-    }, 6000)
-  }
-
   useEffect(() => {
     setTimeout(() => {
       setShowInitialToast(false)
-    }, 6000)
-
-    const rmHandleInjectionSuccess = window.api.handleInjectionSuccess(
-      handleInjectionSuccess
-    )
-
-    return () => {
-      rmHandleInjectionSuccess()
-    }
+    }, 11000)
   }, [])
 
   if (showInitialToast) {

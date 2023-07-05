@@ -6,16 +6,18 @@ import { PROVIDERS } from 'common/types/proxy-types'
 import BrowserExtensionToastManager from './ExtensionToastManager'
 import { Runner } from 'common/types'
 
+interface RenderState {
+  showToasts: boolean
+  showExtension: boolean
+  showBrowserGame: boolean
+  showExitButton: boolean
+}
+
 interface BrowserGameProps {
   url: string
   appName: string
   runner: Runner
-  renderState: {
-    showToasts: boolean
-    showExtension: boolean
-    showBrowserGame: boolean
-    showExitButton: boolean
-  }
+  renderState: RenderState
 }
 
 const OverlayManager = function ({
@@ -41,6 +43,15 @@ const OverlayManager = function ({
     txnToastContainerStyle.bottom = 0
     txnToastContainerStyle.right = 0
     txnToastContainerStyle.top = 0
+  }
+
+  function isFullscreenOverlay(showStates: RenderState) {
+    return showStates.showToasts && showStates.showExtension && showStates.showExitButton
+  }
+
+  if (!(isFullscreenOverlay(renderState) && !renderState.showBrowserGame)){
+    style.width = '100%'
+    style.height = '100%'
   }
 
   /* eslint-disable react/no-unknown-property */
