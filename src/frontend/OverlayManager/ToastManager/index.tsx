@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import BrowserToastManagerStyles from './index.module.scss'
 import transactionStore from 'frontend/store/TransactionStore'
 import { TransactionState } from 'frontend/store/types'
 import { TransactionToast } from '@hyperplay/ui'
@@ -43,7 +42,7 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
 
   if (showInitialToast) {
     return (
-      <div className={BrowserToastManagerStyles.txnToast}>
+      <div>
         <TransactionToast
           status={'success'}
           title={t('hyperplayOverlay.greeting.title', 'HyperPlay Overlay')}
@@ -80,7 +79,7 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
 
   /* eslint-disable react/no-unknown-property */
   return (
-    <div className={BrowserToastManagerStyles.txnToast}>
+    <div>
       <TransactionToast
         status={status}
         title={title}

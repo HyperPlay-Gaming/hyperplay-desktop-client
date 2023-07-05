@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import BrowserToastManagerStyles from './index.module.scss'
 import { TransactionToast } from '@hyperplay/ui'
 import { EXTENSION_NOTIFICATION } from 'frontend/screens/TransactionNotification/constants'
 
@@ -37,7 +36,7 @@ const BrowserExtensionToastManager = function (
 
   /* eslint-disable react/no-unknown-property */
   return (
-    <div className={BrowserToastManagerStyles.txnToast}>
+    <div>
       {showMmExtensionNotifToast ? (
         <TransactionToast
           status={EXTENSION_NOTIFICATION.STATUS}
