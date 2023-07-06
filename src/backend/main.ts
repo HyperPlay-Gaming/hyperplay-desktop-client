@@ -9,7 +9,8 @@ import {
   GamepadInputEvent,
   WineCommandArgs,
   ExecResult,
-  Runner
+  Runner,
+  MetricsOptInStatus
 } from 'common/types'
 import * as path from 'path'
 import {
@@ -165,9 +166,25 @@ import {
 import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
 
-Sentry.init({
-  dsn: app.isPackaged ? prodSentryDsn : devSentryDsn
-})
+let sentryInitialized = false
+function initSentry() {
+  if (sentryInitialized) return
+  Sentry.init({
+    dsn: app.isPackaged ? prodSentryDsn : devSentryDsn
+  })
+  sentryInitialized = true
+}
+
+if (metricsAreEnabled()) {
+  initSentry()
+}
+
+backendEvents.addListener(
+  'optInStatusChanged',
+  (newValue: MetricsOptInStatus) => {
+    if (newValue === MetricsOptInStatus.optedIn) initSentry()
+  }
+)
 
 app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
@@ -1775,12 +1792,13 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
-import { trackEvent } from './metrics/metrics'
+import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
 import { addNewApp } from './storeManagers/sideload/library'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/electronStores'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
+import { backendEvents } from './backend_events'
 
 // sends messages to renderer process through preload.ts callbacks
 export const walletConnected: WalletConnectedType = function (

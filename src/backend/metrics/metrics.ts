@@ -8,6 +8,7 @@ import { rudderstack } from './rudderstack-client'
 import { PossibleMetricEventNames, PossibleMetricPayloads } from './types'
 import { hrtime } from 'process'
 import find from 'find-process'
+import { backendEvents } from 'backend/backend_events'
 
 /**
  * Our global anonymous id which is used for any events that contain data that
@@ -76,6 +77,7 @@ const metricsStore = new Store<MetricsStore>({
  */
 metricsStore.onDidChange('metricsOptInStatus', (newValue) => {
   sendFrontendMessage('optInStatusChanged', newValue as MetricsOptInStatus)
+  backendEvents.emit('optInStatusChanged', newValue as MetricsOptInStatus)
 })
 
 /**
@@ -255,4 +257,8 @@ export async function trackPidPlaytime(
   } catch (err) {
     console.error(err)
   }
+}
+
+export function metricsAreEnabled() {
+  return metricsStore.get('metricsOptInStatus') === MetricsOptInStatus.optedIn
 }
