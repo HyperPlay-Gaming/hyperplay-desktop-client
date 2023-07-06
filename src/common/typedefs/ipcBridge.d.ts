@@ -167,9 +167,7 @@ interface HyperPlayAsyncIPCFunctions {
   chromeTabsRemove: (tabIds: number | number[]) => Promise<void>
   //
   importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
-  getMetaMaskImportOptions: (
-    configDbPath?: string
-  ) => Promise<MetaMaskImportOptions | null>
+  getMetaMaskImportOptions: () => Promise<MetaMaskImportOptions>
   isExtensionInitialized: () => Promise<boolean>
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>

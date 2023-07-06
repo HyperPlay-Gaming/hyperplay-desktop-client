@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { t } from 'i18next'
 import ImportScreenStyles from './index.module.scss'
 import {
+  BrowserProfile,
   ImportableBrowsers,
   MetaMaskImportOptions
 } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportOption from 'frontend/screens/Onboarding/components/importOption'
 import { NavLink } from 'react-router-dom'
+import { Menu } from '@mantine/core'
 
 interface ImportProps {
   importOptions: MetaMaskImportOptions
@@ -52,15 +54,48 @@ const ImportScreen = ({
       </div>
       <div className={ImportScreenStyles.importOptionsContainer}>
         {importOptions &&
-          Object.keys(importOptions).map((key) => (
-            <ImportOption
-              onClick={async () =>
-                handleImportMmExtensionClicked(importOptions[key])
-              }
-              title={key as ImportableBrowsers}
-              key={key}
-            />
-          ))}
+          Object.keys(importOptions).map((browser) => {
+            return (
+              <Menu key={`menu_${browser}`} position="bottom" trigger="hover">
+                <Menu.Target>
+                  <div style={{ width: '100%', height: '100%' }}>
+                    <ImportOption
+                      onClick={async () =>
+                        handleImportMmExtensionClicked(importOptions[browser])
+                      }
+                      title={browser as ImportableBrowsers}
+                      key={browser}
+                    />
+                  </div>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  {Object.keys(importOptions[browser]).map((pkgManager) => {
+                    console.log(
+                      'mapping ',
+                      pkgManager,
+                      ' ',
+                      importOptions[browser][pkgManager]
+                    )
+                    return (
+                      <>
+                        <Menu.Label>{pkgManager}</Menu.Label>
+                        {importOptions[browser][pkgManager].map(
+                          (profile: BrowserProfile) => (
+                            <Menu.Item
+                              key={`${browser}-${pkgManager}-menu-item`}
+                            >
+                              <img src={`file:/${profile.imagePath}`} />
+                              {profile.displayName}
+                            </Menu.Item>
+                          )
+                        )}
+                      </>
+                    )
+                  })}
+                </Menu.Dropdown>
+              </Menu>
+            )
+          })}
         <ImportOption
           override="create"
           title={t(
