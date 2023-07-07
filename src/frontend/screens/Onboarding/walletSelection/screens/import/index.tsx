@@ -55,8 +55,17 @@ const ImportScreen = ({
       <div className={ImportScreenStyles.importOptionsContainer}>
         {importOptions &&
           Object.keys(importOptions).map((browser) => {
+            // if (Object.keys(importOptions[browser]).length === 0) return null
             return (
-              <Menu key={`menu_${browser}`} position="bottom" trigger="hover">
+              <Menu
+                key={`menu_${browser}`}
+                position="bottom"
+                trigger="hover"
+                classNames={{
+                  dropdown: ImportScreenStyles.importDropdownContainer,
+                  item: ImportScreenStyles.importItemContainer
+                }}
+              >
                 <Menu.Target>
                   <div style={{ width: '100%', height: '100%' }}>
                     <ImportOption
@@ -76,16 +85,30 @@ const ImportScreen = ({
                       ' ',
                       importOptions[browser][pkgManager]
                     )
+                    if (importOptions[browser][pkgManager].length === 0)
+                      return null
                     return (
                       <>
-                        <Menu.Label>{pkgManager}</Menu.Label>
+                        <Menu.Label className="title-sm">
+                          {pkgManager}
+                        </Menu.Label>
                         {importOptions[browser][pkgManager].map(
                           (profile: BrowserProfile) => (
                             <Menu.Item
-                              key={`${browser}-${pkgManager}-menu-item`}
+                              key={`${browser}-${pkgManager}-${profile.name}-menu-item`}
                             >
-                              <img src={`file:/${profile.imagePath}`} />
-                              {profile.displayName}
+                              <div
+                                className={`${ImportScreenStyles.importBrowserProfileOption} body`}
+                              >
+                                <div>
+                                  <img
+                                    src={`file://${profile.imagePath}`}
+                                    height={24}
+                                    width={24}
+                                  />
+                                </div>
+                                <div>{profile.displayName}</div>
+                              </div>
                             </Menu.Item>
                           )
                         )}

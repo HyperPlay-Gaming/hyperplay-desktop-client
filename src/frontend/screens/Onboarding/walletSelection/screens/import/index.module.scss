@@ -21,3 +21,21 @@
 .errorMessage {
   margin: 0px auto;
 }
+
+.importBrowserProfileOption {
+  padding: var(--space-sm);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-md);
+  color: var(--color-neutral-200);
+}
+
+.importDropdownContainer {
+  background-color: var(--color-neutral-600);
+  border: none;
+}
+
+.importItemContainer {
+  padding: 0px;
+}
