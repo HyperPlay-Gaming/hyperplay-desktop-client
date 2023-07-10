@@ -1,6 +1,7 @@
 import { BrowserWindow, screen } from 'electron'
 import path from 'path'
 import { configStore } from './constants'
+import { backendEvents } from './backend_events'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -75,6 +76,10 @@ export const createMainWindow = () => {
       // sandbox: false,
       preload: path.join(__dirname, 'preload.js')
     }
+  })
+
+  mainWindow.webContents.on('before-input-event', (event, input) => {
+    if (input.key === 'F11') backendEvents.emit('toggleFullscreen')
   })
 
   return mainWindow
