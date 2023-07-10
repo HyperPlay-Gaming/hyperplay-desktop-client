@@ -98,7 +98,7 @@
     },
     "linux": {
       "category": "Game",
-      "icon": "build/app_icon.png",
+      "icon": "build/app_icon.icns",
       "description": "An Open Source Launcher for Web3, GOG and Epic Games",
       "desktop": {
         "Name": "HyperPlay",
@@ -230,7 +230,7 @@
     "test:e2e": "cross-env-shell docker compose -f e2e/docker-compose.yml run --rm --build process_all bash e2e/entrypoint.sh",
     "test:e2ePackaged": "cross-env TEST_PACKAGED=true yarn test:e2e",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
-    "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
+    "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
     "release:mac": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "cross-env NODE_ENV_ELECTRON_VITE=production vite build && electron-builder -p always --win nsis",
     "dist:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder --linux",
@@ -302,8 +302,6 @@
     "vite-plugin-electron": "^0.10.2",
     "vite-plugin-svgr": "^2.2.2"
   },
-  "optionalDependencies": {
-    "@hyperplay/electron-overlay": "^0.0.8"
-  },
+  "optionalDependencies": {},
   "packageManager": "yarn@1.22.19"
 }

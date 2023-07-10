@@ -7,3 +7,6 @@
 [submodule "e2e/__mocks__/hyperplay-mock-backend"]
 	path = e2e/__mocks__/hyperplay-mock-backend
 	url = https://github.com/HyperPlay-Gaming/hyperplay-mock-backend.git
+[submodule "src/backend/hyperplay-overlay"]
+	path = src/backend/hyperplay-overlay
+	url = https://github.com/HyperPlay-Gaming/hyperplay-overlay.git
