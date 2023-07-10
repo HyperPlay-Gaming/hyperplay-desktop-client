@@ -8,7 +8,8 @@ import {
 } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportOption from 'frontend/screens/Onboarding/components/importOption'
 import { NavLink } from 'react-router-dom'
-import { Menu } from '@mantine/core'
+import { Button } from '@hyperplay/ui'
+import { Images } from '@hyperplay/ui'
 
 interface ImportProps {
   importOptions: MetaMaskImportOptions
@@ -20,6 +21,7 @@ const ImportScreen = ({
   handleImportMmExtensionClicked
 }: ImportProps) => {
   const [err, setError] = useState('')
+  const [browserSelected, setBrowserSelected] = useState('')
   const handleError = (e: Electron.IpcRendererEvent, code: string) => {
     setError(getErrorMessage(code))
   }
@@ -52,96 +54,95 @@ const ImportScreen = ({
           `By importing, your MetaMask installation and  settings will be imported into HyperPlay.`
         )}
       </div>
-      <div className={ImportScreenStyles.importOptionsContainer}>
-        {importOptions &&
-          Object.keys(importOptions).map((browser) => {
-            // if (Object.keys(importOptions[browser]).length === 0) return null
-            return (
-              <Menu
-                key={`menu_${browser}`}
-                position="bottom"
-                trigger="hover"
-                classNames={{
-                  dropdown: ImportScreenStyles.importDropdownContainer,
-                  item: ImportScreenStyles.importItemContainer
-                }}
-              >
-                <Menu.Target>
-                  <div style={{ width: '100%', height: '100%' }}>
-                    <ImportOption
-                      onClick={async () =>
-                        handleImportMmExtensionClicked(importOptions[browser])
-                      }
-                      title={browser as ImportableBrowsers}
-                      key={browser}
-                    />
-                  </div>
-                </Menu.Target>
-                <Menu.Dropdown>
-                  {Object.keys(importOptions[browser]).map((pkgManager) => {
-                    console.log(
-                      'mapping ',
-                      pkgManager,
-                      ' ',
-                      importOptions[browser][pkgManager]
-                    )
-                    if (importOptions[browser][pkgManager].length === 0)
-                      return null
-                    return (
-                      <>
-                        <Menu.Label className="title-sm">
-                          {pkgManager}
-                        </Menu.Label>
-                        {importOptions[browser][pkgManager].map(
-                          (profile: BrowserProfile) => (
-                            <Menu.Item
-                              key={`${browser}-${pkgManager}-${profile.name}-menu-item`}
-                            >
-                              <div
-                                className={`${ImportScreenStyles.importBrowserProfileOption} body`}
-                              >
-                                <div>
-                                  <img
-                                    src={`file://${profile.imagePath}`}
-                                    height={24}
-                                    width={24}
-                                  />
-                                </div>
-                                <div>{profile.displayName}</div>
-                              </div>
-                            </Menu.Item>
-                          )
-                        )}
-                      </>
-                    )
-                  })}
-                </Menu.Dropdown>
-              </Menu>
-            )
-          })}
-        <ImportOption
-          override="create"
-          title={t(
-            'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
-            `Create new MM extension wallet`
-          )}
-          onClick={async () => {
-            handleImportMmExtensionClicked(null)
-          }}
-        />
-        <NavLink to="/metamaskSecretPhrase">
+      {browserSelected === '' ? (
+        <div className={ImportScreenStyles.importOptionsContainer}>
+          {importOptions &&
+            Object.keys(importOptions).map((browser) => {
+              return (
+                <ImportOption
+                  onClick={async () => setBrowserSelected(browser)}
+                  title={browser as ImportableBrowsers}
+                  key={browser}
+                />
+              )
+            })}
           <ImportOption
-            override="recovery"
+            override="create"
             title={t(
-              'hyperplay.onboarding.walletSelection.screens.import.useRecoveryPhrase',
-              `Access with secret recovery phrase`
+              'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
+              `Create new MM extension wallet`
             )}
             onClick={async () => {
               handleImportMmExtensionClicked(null)
             }}
           />
-        </NavLink>
-      </div>
+          <NavLink to="/metamaskSecretPhrase">
+            <ImportOption
+              override="recovery"
+              title={t(
+                'hyperplay.onboarding.walletSelection.screens.import.useRecoveryPhrase',
+                `Access with secret recovery phrase`
+              )}
+              onClick={async () => {
+                handleImportMmExtensionClicked(null)
+              }}
+            />
+          </NavLink>
+        </div>
+      ) : (
+        <>
+          <div>
+            {Object.keys(importOptions[browserSelected]).map((pkgManager) => {
+              if (importOptions[browserSelected][pkgManager].length === 0)
+                return null
+              return (
+                <div className={ImportScreenStyles.packageOptionsContainer}>
+                  <div
+                    className={`caption ${ImportScreenStyles.packageManagerSubTitle}`}
+                  >
+                    {pkgManager}
+                  </div>
+                  {importOptions[browserSelected][pkgManager].map(
+                    (profile: BrowserProfile) => (
+                      <button
+                        className={`${ImportScreenStyles.importBrowserProfileOption} body`}
+                        key={`${browserSelected}-${pkgManager}-${profile.name}-menu-item`}
+                        onClick={async () =>
+                          handleImportMmExtensionClicked(
+                            importOptions[browserSelected]
+                          )
+                        }
+                      >
+                        <div className={ImportScreenStyles.profileImage}>
+                          <img src={`file://${profile.imagePath}`} />
+                        </div>
+                        <div>
+                          <div className="menu">{profile.name}</div>
+                          <div
+                            className={`caption ${ImportScreenStyles.displayName}`}
+                          >
+                            {profile.displayName}
+                          </div>
+                        </div>
+                        <div className={ImportScreenStyles.profileRightArrow}>
+                          <Images.ChevronRight width="12px" height="12px" />
+                        </div>
+                      </button>
+                    )
+                  )}
+                </div>
+              )
+            })}
+          </div>
+          <Button
+            onClick={() => setBrowserSelected('')}
+            type="tertiary"
+            className={ImportScreenStyles.goBackProfileButton}
+          >
+            Go back
+          </Button>
+        </>
+      )}
 
       {err !== '' ? (
         <div className={ImportScreenStyles.errorMessage}>{err}</div>
