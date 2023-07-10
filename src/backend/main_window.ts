@@ -78,7 +78,7 @@ export const createMainWindow = () => {
     }
   })
 
-  mainWindow.webContents.on('before-input-event', (event, input) => {
+  mainWindow.webContents?.on('before-input-event', (event, input) => {
     if (input.key === 'F11') backendEvents.emit('toggleFullscreen')
   })
 
