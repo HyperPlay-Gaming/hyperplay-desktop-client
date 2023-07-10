@@ -53,7 +53,10 @@ const OverlayManager = function ({
     )
   }
 
-  if (!(isFullscreenOverlay(renderState) && !renderState.showBrowserGame)) {
+  if (
+    !(isFullscreenOverlay(renderState) && !renderState.showBrowserGame) &&
+    url === 'ignore'
+  ) {
     style.width = '100%'
     style.height = '100%'
   }
