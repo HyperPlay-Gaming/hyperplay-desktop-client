@@ -56,10 +56,7 @@ import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import { gameManagerMap } from 'backend/storeManagers'
 import { trackPidPlaytime } from './metrics/metrics'
-import {
-  closeOverlay,
-  openOverlay
-} from 'backend/hyperplay-overlay'
+import { closeOverlay, openOverlay } from 'backend/hyperplay-overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,

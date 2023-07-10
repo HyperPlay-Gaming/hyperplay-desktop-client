@@ -46,10 +46,14 @@ const OverlayManager = function ({
   }
 
   function isFullscreenOverlay(showStates: RenderState) {
-    return showStates.showToasts && showStates.showExtension && showStates.showExitButton
+    return (
+      showStates.showToasts &&
+      showStates.showExtension &&
+      showStates.showExitButton
+    )
   }
 
-  if (!(isFullscreenOverlay(renderState) && !renderState.showBrowserGame)){
+  if (!(isFullscreenOverlay(renderState) && !renderState.showBrowserGame)) {
     style.width = '100%'
     style.height = '100%'
   }
