@@ -8,8 +8,7 @@ import {
 } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportOption from 'frontend/screens/Onboarding/components/importOption'
 import { NavLink } from 'react-router-dom'
-import { Button } from '@hyperplay/ui'
-import { Images } from '@hyperplay/ui'
+import { Button, Images } from '@hyperplay/ui'
 
 interface ImportProps {
   importOptions: MetaMaskImportOptions
@@ -96,7 +95,10 @@ const ImportScreen = ({
               if (importOptions[browserSelected][pkgManager].length === 0)
                 return null
               return (
-                <div className={ImportScreenStyles.packageOptionsContainer}>
+                <div
+                  className={ImportScreenStyles.packageOptionsContainer}
+                  key={`${pkgManager}-importOption-container`}
+                >
                   <div
                     className={`caption ${ImportScreenStyles.packageManagerSubTitle}`}
                   >
