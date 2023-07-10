@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import BrowserExtensionManagerStyles from './index.module.scss'
-import { overlayExternalWalletConnectedMsg } from 'frontend/overlay/constants'
 import { Button } from '@hyperplay/ui'
 import { Runner } from 'common/types'
 import { useTranslation } from 'react-i18next'
@@ -19,11 +18,15 @@ declare global {
 interface BrowserExtensionManagerProps {
   appName: string
   runner: Runner
+  showExtension?: boolean
+  showExitGameButton?: boolean
 }
 
 const BrowserExtensionManager = function ({
   appName,
-  runner
+  runner,
+  showExtension = true,
+  showExitGameButton = true
 }: BrowserExtensionManagerProps) {
   const [showOverlay, setShowOverlay] = useState(false)
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
@@ -86,49 +89,82 @@ const BrowserExtensionManager = function ({
     }
   }, [])
 
+  let exitGameButtonStyle = {
+    top: 'var(--space-md)',
+    right: 'var(--space-md)',
+    position: 'absolute',
+    zIndex: 200
+  } as React.CSSProperties
+
+  if (showExitGameButton && !showExtension)
+    exitGameButtonStyle = {
+      ...exitGameButtonStyle,
+      top: 0,
+      right: 0,
+      overflowY: 'hidden'
+    }
+
+  let mmContainerStyle = {} as React.CSSProperties
+  if (showExtension && !showExitGameButton) {
+    mmContainerStyle = {
+      overflowX: 'hidden',
+      overflowY: 'hidden',
+      top: 0,
+      left: 0
+    }
+  }
   /* eslint-disable react/no-unknown-property */
   return (
     <>
       {showOverlay ? (
         <>
           <div className={BrowserExtensionManagerStyles.bgFilter}></div>
-          <Button
-            onClick={async () => window.api.kill(appName, runner)}
-            style={{
-              top: 'var(--space-md)',
-              right: 'var(--space-md)',
-              position: 'absolute',
-              zIndex: 200
-            }}
-            type="secondary"
-            size="medium"
-          >
-            {t('exit_game', 'Exit Game')}
-          </Button>
-          <div className={BrowserExtensionManagerStyles.mmContainer}>
-            {!showMmPopupPage ? (
-              <div className={BrowserExtensionManagerStyles.overlayToggleHint}>
-                <div className="title">{overlayExternalWalletConnectedMsg}</div>
-              </div>
-            ) : null}
-            {showMmPopupPage && !showMmNotificationPage ? (
-              <webview
-                nodeintegrationinsubframes="true"
-                webpreferences="contextIsolation=true, nodeIntegration=true"
-                className={BrowserExtensionManagerStyles.mmPopup}
-                src={`chrome-extension://${extensionId}/popup.html`}
-              ></webview>
-            ) : null}
+          {showExitGameButton ? (
+            <Button
+              onClick={async () => window.api.kill(appName, runner)}
+              style={exitGameButtonStyle}
+              type="secondary"
+              size="medium"
+            >
+              {t('exit_game', 'Exit Game')}
+            </Button>
+          ) : null}
+          {showExtension ? (
+            <div
+              className={BrowserExtensionManagerStyles.mmContainer}
+              style={mmContainerStyle}
+            >
+              {!showMmPopupPage ? (
+                <div
+                  className={BrowserExtensionManagerStyles.overlayToggleHint}
+                >
+                  <div className="title">
+                    {t(
+                      'overlay.EXTERNAL_WALLET_CONNECTED',
+                      'You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.'
+                    )}
+                  </div>
+                </div>
+              ) : null}
+              {showMmPopupPage && !showMmNotificationPage ? (
+                <webview
+                  nodeintegrationinsubframes="true"
+                  webpreferences="contextIsolation=true, nodeIntegration=true"
+                  className={BrowserExtensionManagerStyles.mmPopup}
+                  src={`chrome-extension://${extensionId}/popup.html`}
+                ></webview>
+              ) : null}
 
-            {showMmNotificationPage ? (
-              <webview
-                nodeintegrationinsubframes="true"
-                webpreferences="contextIsolation=true, nodeIntegration=true"
-                className={BrowserExtensionManagerStyles.mmNotification}
-                src={`chrome-extension://${extensionId}/notification.html`}
-              ></webview>
-            ) : null}
-          </div>
+              {showMmNotificationPage ? (
+                <webview
+                  nodeintegrationinsubframes="true"
+                  webpreferences="contextIsolation=true, nodeIntegration=true"
+                  className={BrowserExtensionManagerStyles.mmNotification}
+                  src={`chrome-extension://${extensionId}/notification.html`}
+                ></webview>
+              ) : null}
+            </div>
+          ) : null}
         </>
       ) : null}
     </>

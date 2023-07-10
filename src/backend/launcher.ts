@@ -54,9 +54,9 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
-import * as OverlayApp from './overlay/overlay'
 import { gameManagerMap } from 'backend/storeManagers'
 import { trackPidPlaytime } from './metrics/metrics'
+import { closeOverlay, openOverlay } from 'backend/hyperplay-overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -509,16 +509,19 @@ function launchCleanup(rpcClient?: RpcClient) {
     logInfo('Stopped Discord Rich Presence', LogPrefix.Backend)
   }
 }
-async function runWineCommand({
-  gameSettings,
-  commandParts,
-  wait,
-  protonVerb = 'run',
-  installFolderName,
-  options,
-  startFolder,
-  skipPrefixCheckIKnowWhatImDoing = false
-}: WineCommandArgs): Promise<{ stderr: string; stdout: string }> {
+async function runWineCommand(
+  {
+    gameSettings,
+    commandParts,
+    wait,
+    protonVerb = 'run',
+    installFolderName,
+    options,
+    startFolder,
+    skipPrefixCheckIKnowWhatImDoing = false
+  }: WineCommandArgs,
+  gameInfo?: GameInfo
+): Promise<{ stderr: string; stdout: string }> {
   const settings = gameSettings
     ? gameSettings
     : GlobalConfig.get().getSettings()
@@ -592,6 +595,9 @@ async function runWineCommand({
     child.stdout.setEncoding('utf-8')
     child.stderr.setEncoding('utf-8')
 
+    if (gameInfo && gameInfo.runner === 'hyperplay')
+      openOverlay(gameInfo.app_name, gameInfo.runner)
+
     if (options?.logFile) {
       logDebug(`Logging to file "${options?.logFile}"`, LogPrefix.Backend)
     }
@@ -632,6 +638,7 @@ async function runWineCommand({
     })
 
     child.on('close', async () => {
+      if (gameInfo && gameInfo.runner === 'hyperplay') closeOverlay()
       const response = { stderr: stderr.join(''), stdout: stdout.join('') }
 
       if (wait && wineVersion.wineserver) {
@@ -651,6 +658,7 @@ async function runWineCommand({
     })
 
     child.on('error', (error) => {
+      if (gameInfo && gameInfo.runner === 'hyperplay') closeOverlay()
       console.log(error)
     })
   })
@@ -669,8 +677,7 @@ async function callRunner(
   abortController: AbortController,
   options?: CallRunnerOptions,
   gameInfo?: GameInfo,
-  shouldTrackPlaytime = false,
-  injectChildWithHyperPlayOverlay = false
+  shouldTrackPlaytime = false
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
@@ -724,6 +731,9 @@ async function callRunner(
       signal: abortController.signal
     })
 
+    if (gameInfo && gameInfo.runner === 'hyperplay')
+      openOverlay(gameInfo?.app_name, gameInfo.runner)
+
     /*
      * gogdl remains open while the game is running
      * by tracking gogdl instead of the game, we do not need to rely on
@@ -746,17 +756,6 @@ async function callRunner(
     )
       trackPidPlaytime(child.pid, gameInfo)
 
-    if (injectChildWithHyperPlayOverlay) {
-      logInfo(
-        `Process PID for sideloaded game injected: ${child.pid}`,
-        runner.logPrefix
-      )
-
-      if (child.pid !== undefined) {
-        OverlayApp.inject({ pid: child.pid.toString() })
-      }
-    }
-
     const stdout: string[] = []
     const stderr: string[] = []
 
@@ -773,8 +772,7 @@ async function callRunner(
           `Process PID for Gogdl or Epic game injected: ${child.pid}`,
           runner.logPrefix
         )
-        //inject here
-        OverlayApp.inject({ pid: PID.trim() })
+
         // track when this pid is closed
         if (
           gameInfo &&
@@ -815,6 +813,7 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
+      if (runner.name === 'hyperplay') closeOverlay()
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,
@@ -833,6 +832,7 @@ async function callRunner(
     })
 
     child.on('error', (error) => {
+      if (runner.name === 'hyperplay') closeOverlay()
       rej(error)
     })
   })

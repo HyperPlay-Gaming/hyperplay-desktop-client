@@ -1,1 +1,0 @@
-export const overlayExternalWalletConnectedMsg = `You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.`

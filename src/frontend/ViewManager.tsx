@@ -1,14 +1,10 @@
 import React, { lazy } from 'react'
-import BrowserGame from './browserGame'
-import ExtensionOverlay from './overlay/ExtensionOverlay'
-import ToastOverlay from './overlay/ToastOverlay'
+import OverlayManager from './OverlayManager'
 import { Runner } from 'common/types'
 const App = lazy(async () => import('./App'))
 
 const Views = {
-  App: <App />,
-  HyperplayOverlay: <ExtensionOverlay />,
-  ToastOverlay: <ToastOverlay />
+  App: <App />
 }
 
 type URLSearchParamsProxy = URLSearchParams & {
@@ -16,6 +12,10 @@ type URLSearchParamsProxy = URLSearchParams & {
   browserUrl?: string
   appName?: string
   runner?: Runner
+  showToasts?: string
+  showExtension?: string
+  showBrowserGame?: string
+  showExitButton?: string
 }
 
 const ViewManager = function () {
@@ -35,11 +35,22 @@ const ViewManager = function () {
     params.appName !== undefined &&
     params.runner !== undefined
   ) {
+    const parseShowParam = (showParam: string | undefined) =>
+      showParam !== undefined && showParam === 'false' ? false : true
+
+    // default to true if not supplied
+    const renderState = {
+      showToasts: parseShowParam(params.showToasts),
+      showExtension: parseShowParam(params.showExtension),
+      showBrowserGame: parseShowParam(params.showBrowserGame),
+      showExitButton: parseShowParam(params.showExitButton)
+    }
     return (
-      <BrowserGame
+      <OverlayManager
         url={params.browserUrl}
         appName={params.appName}
         runner={params.runner}
+        renderState={renderState}
       />
     )
   }
