@@ -21,16 +21,7 @@ import StoreController from './store'
 
 initOnlineMonitor()
 import ViewManager from './ViewManager'
-
-import * as Sentry from '@sentry/electron/renderer'
-import { init as reactInit } from '@sentry/react'
-import { prodSentryDsn, devSentryDsn } from 'common/constants'
-Sentry.init(
-  {
-    dsn: window.location.hostname === 'localhost' ? devSentryDsn : prodSentryDsn
-  },
-  reactInit
-)
+import SentryHandler from './SentryHandler'
 
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
@@ -120,11 +111,14 @@ root.render(
   <React.StrictMode>
     <StoreController />
     <GlobalState>
-      <I18nextProvider i18n={i18next}>
-        <Suspense fallback={<Loading />}>
-          <ViewManager />
-        </Suspense>
-      </I18nextProvider>
+      <>
+        <SentryHandler />
+        <I18nextProvider i18n={i18next}>
+          <Suspense fallback={<Loading />}>
+            <ViewManager />
+          </Suspense>
+        </I18nextProvider>
+      </>
     </GlobalState>
   </React.StrictMode>
 )
