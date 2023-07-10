@@ -26,6 +26,7 @@ import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { hrtime } from 'process'
 import { trackEvent } from 'backend/metrics/metrics'
+import { backendEvents } from 'backend/backend_events'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -79,6 +80,14 @@ const openNewBrowserGameWindow = async (
         nodeIntegration: true,
         preload: path.join(__dirname, 'preload.js')
       }
+    })
+
+    backendEvents.addListener('toggleFullscreen', () => {
+      if (browserGame.isDestroyed()) return
+
+      const fullscreenSize = browserGame.getSize()
+      browserGame.setFullScreen(!browserGame.isFullScreen())
+      browserGame.setSize(fullscreenSize[0], fullscreenSize[1])
     })
     browserGame.setIgnoreMouseEvents(false)
     browserGame.setMinimizable(true)
