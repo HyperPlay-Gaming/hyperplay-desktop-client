@@ -113,13 +113,14 @@ const ImportScreen = ({
                     {pkgManager}
                   </div>
                   {importOptions[browserSelected][pkgManager].map(
-                    (profile: BrowserProfile) => (
+                    (profile: BrowserProfile, index: number) => (
                       <button
                         className={`${ImportScreenStyles.importBrowserProfileOption} body`}
                         key={`${browserSelected}-${pkgManager}-${profile.name}-menu-item`}
                         onClick={async () =>
                           handleImportMmExtensionClicked(
-                            importOptions[browserSelected]
+                            importOptions[browserSelected][pkgManager][index]
+                              .path
                           )
                         }
                       >
