@@ -1,10 +1,10 @@
 import ImportOptionStyles from './index.module.scss'
 import React, { useEffect, useState } from 'react'
-import { ImportableBrowsers } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+import { ImportableBrowser } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import { Images } from '@hyperplay/ui'
 
 interface WalletOptionProps {
-  title: ImportableBrowsers
+  title: ImportableBrowser
   onClick: () => void
   override?: 'create' | 'recovery'
 }

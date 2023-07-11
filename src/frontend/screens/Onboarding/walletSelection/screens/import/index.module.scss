@@ -60,6 +60,7 @@
   padding: var(--space-md);
   gap: var(--space-sm);
   border: 1px solid var(--color-stroke-01);
+  margin: var(--space-2xs) 0;
 
   &:hover {
     border: 1px solid #626161;
@@ -68,8 +69,15 @@
   }
 }
 
+@mixin hideLongText {
+  text-overflow: ellipsis;
+  max-width: 200px;
+  overflow-x: hidden;
+}
+
 .displayName {
   color: var(--color-neutral-400);
+  @include hideLongText;
 }
 
 .profileRightArrow {
@@ -89,5 +97,78 @@
 
 .goBackProfileButton {
   max-width: 120px;
+  color: var(--color-neutral-300);
+}
+
+.manualFolderPickerContainer {
+  margin-top: var(--space-lg);
+}
+
+.folderPickerButton {
+  width: 100%;
+  text-overflow: ellipsis;
+  color: var(--color-neutral-300);
+  text-align: left;
+}
+
+.importSubtitle {
+  margin-bottom: var(--space-2xs);
+  color: var(--color-neutral-400);
+}
+
+.cantFindSubtext {
+  margin-top: var(--space-md);
+  display: inline-block;
+  > div {
+    display: inline-block;
+  }
+}
+
+@mixin actionContainer {
   margin: var(--space-md) auto;
+}
+
+.importActionContainer {
+  @include actionContainer;
+}
+
+.manualImportActionContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @include actionContainer;
+  width: 100%;
+}
+
+.manualHr {
+  border: none;
+  height: 1px;
+  background-color: var(--color-stroke-01);
+  margin: var(--space-lg) 0 0 0;
+}
+
+.profileOptionsContainer {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 240px;
+  &::-webkit-scrollbar {
+    width: 20px;
+    height: 20px;
+    background: transparent;
+  }
+}
+
+.profileName {
+  text-align: left;
+  @include hideLongText;
+}
+
+.defaultProfileImage {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > svg {
+    height: 20px;
+  }
 }

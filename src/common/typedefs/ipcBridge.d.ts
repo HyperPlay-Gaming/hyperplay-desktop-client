@@ -191,6 +191,7 @@ interface HyperPlayAsyncIPCFunctions {
   getCurrentWeb3Provider: () => Promise<PROVIDERS | undefined>
   showPopup: (hideIfShown: boolean) => Promise<boolean>
   removeTempDownloadFiles: (appName: string) => Promise<void>
+  getImportFolderPath: () => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

@@ -3,12 +3,14 @@ import { t } from 'i18next'
 import ImportScreenStyles from './index.module.scss'
 import {
   BrowserProfile,
-  ImportableBrowsers,
+  ImportableBrowser,
   MetaMaskImportOptions
 } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportOption from 'frontend/screens/Onboarding/components/importOption'
 import { NavLink } from 'react-router-dom'
 import { Button, Images } from '@hyperplay/ui'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface ImportProps {
   importOptions: MetaMaskImportOptions
@@ -21,6 +23,10 @@ const ImportScreen = ({
 }: ImportProps) => {
   const [err, setError] = useState('')
   const [browserSelected, setBrowserSelected] = useState('')
+  const [showManualImport, setShowManualImport] = useState(false)
+  const [manualImportPath, setManualImportPath] = useState(
+    '<profile>/Local Extension Settings/<metamask app id>'
+  )
   const handleError = (e: Electron.IpcRendererEvent, code: string) => {
     setError(getErrorMessage(code))
   }
@@ -38,6 +44,8 @@ const ImportScreen = ({
       rmHandleError()
     }
   }, [])
+
+  console.log('importOptions = ', importOptions)
 
   return (
     <>
@@ -60,7 +68,7 @@ const ImportScreen = ({
               return (
                 <ImportOption
                   onClick={async () => setBrowserSelected(browser)}
-                  title={browser as ImportableBrowsers}
+                  title={browser as ImportableBrowser}
                   key={browser}
                 />
               )
@@ -90,7 +98,7 @@ const ImportScreen = ({
         </div>
       ) : (
         <>
-          <div>
+          <div className={ImportScreenStyles.profileOptionsContainer}>
             {Object.keys(importOptions[browserSelected]).map((pkgManager) => {
               if (importOptions[browserSelected][pkgManager].length === 0)
                 return null
@@ -116,10 +124,29 @@ const ImportScreen = ({
                         }
                       >
                         <div className={ImportScreenStyles.profileImage}>
-                          <img src={`file://${profile.imagePath}`} />
+                          {profile.imagePath !== '' ? (
+                            <img src={`file://${profile.imagePath}`} />
+                          ) : (
+                            <div
+                              className={ImportScreenStyles.defaultProfileImage}
+                              style={{
+                                backgroundColor:
+                                  '#' +
+                                  (profile.imageBackgroundColor
+                                    ? profile.imageBackgroundColor
+                                    : '202124')
+                              }}
+                            >
+                              <FontAwesomeIcon icon={faUser} />
+                            </div>
+                          )}
                         </div>
                         <div>
-                          <div className="menu">{profile.name}</div>
+                          <div
+                            className={`menu ${ImportScreenStyles.profileName}`}
+                          >
+                            {profile.name}
+                          </div>
                           <div
                             className={`caption ${ImportScreenStyles.displayName}`}
                           >
@@ -136,13 +163,65 @@ const ImportScreen = ({
               )
             })}
           </div>
-          <Button
-            onClick={() => setBrowserSelected('')}
-            type="tertiary"
-            className={ImportScreenStyles.goBackProfileButton}
+          {showManualImport ? (
+            <>
+              <hr className={ImportScreenStyles.manualHr}></hr>
+              <div className={ImportScreenStyles.manualFolderPickerContainer}>
+                <div className={`eyebrow ${ImportScreenStyles.importSubtitle}`}>
+                  MetaMask &quot;Local Extension Settings&quot; Folder
+                </div>
+                <Button
+                  type="tertiary"
+                  onClick={async () => {
+                    const importPath = await window.api.getImportFolderPath()
+                    if (importPath === '') return
+                    setManualImportPath(importPath)
+                  }}
+                  className={ImportScreenStyles.folderPickerButton}
+                >
+                  <div className="body-sm">{manualImportPath}</div>
+                </Button>
+              </div>
+            </>
+          ) : (
+            <Button
+              type="link"
+              onClick={() => setShowManualImport(true)}
+              className={ImportScreenStyles.cantFindSubtext}
+            >
+              <div className="button-sm">
+                {t(
+                  'hyperplay.onboarding.walletSelection.screens.import.cantFindProfile',
+                  `Can't find your browser profile?`
+                )}
+              </div>
+            </Button>
+          )}
+          <div
+            className={
+              showManualImport
+                ? ImportScreenStyles.manualImportActionContainer
+                : ImportScreenStyles.importActionContainer
+            }
           >
-            Go back
-          </Button>
+            <Button
+              onClick={() => setBrowserSelected('')}
+              type="tertiary"
+              className={ImportScreenStyles.goBackProfileButton}
+            >
+              {t('webview.controls.back')}
+            </Button>
+            {showManualImport ? (
+              <Button
+                type="primary"
+                onClick={async () =>
+                  handleImportMmExtensionClicked(manualImportPath)
+                }
+              >
+                {t('button.continue')}
+              </Button>
+            ) : null}
+          </div>
         </>
       )}
 
