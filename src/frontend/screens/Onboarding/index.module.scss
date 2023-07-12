@@ -14,7 +14,7 @@
   background: var(--color-neutral-800);
   box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.4);
   border-radius: 6px;
-  z-index: 101;
+  z-index: 2100;
 
   text-align: left;
 }
@@ -43,5 +43,5 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(2px);
-  z-index: 100;
+  z-index: 2100;
 }

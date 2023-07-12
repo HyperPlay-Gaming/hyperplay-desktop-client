@@ -1,4 +1,4 @@
-import { BrowserWindow, screen } from 'electron'
+import { BrowserWindow, screen, app } from 'electron'
 import path from 'path'
 import { configStore } from './constants'
 import { backendEvents } from './backend_events'
@@ -74,7 +74,8 @@ export const createMainWindow = () => {
       contextIsolation: true,
       nodeIntegration: true,
       // sandbox: false,
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      webSecurity: app.isPackaged
     }
   })
 
