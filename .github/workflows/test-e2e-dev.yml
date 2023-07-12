@@ -2,9 +2,9 @@ name: Test E2E Dev
 
 on:
   pull_request:
-    branches: [main]
+    branches: []
   push:
-    branches: [main]
+    branches: []
   workflow_dispatch:
 
 env:

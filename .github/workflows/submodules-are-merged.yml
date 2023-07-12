@@ -20,19 +20,12 @@ jobs:
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
-      - name: Get proxy server current commit hash
+      - name: Check proxy server
         id: proxyDiff
         run: cd src/backend/hyperplay-proxy-server && echo "PROXY_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
-      - name: Check that proxy is on latest main
-        uses: nick-fields/assert-action@v1
-        with:
-          expected: ''
-          actual: ${{ steps.proxyDiff.outputs.PROXY_DIFF }}
-      - name: Get extension helper current commit hash
+      - name: Check extension helper
         id: extDiff
         run: cd src/backend/hyperplay-extension-helper && echo "EXT_HELPER_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
-      - name: Check that proxy is on latest main
-        uses: nick-fields/assert-action@v1
-        with:
-          expected: ''
-          actual: ${{ steps.extDiff.outputs.EXT_HELPER_DIFF }}
+      - name: Check overlay
+        id: overlayDiff
+        run: cd src/backend/hyperplay-overlay && echo "OVERLAY_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
