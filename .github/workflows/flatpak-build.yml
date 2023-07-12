@@ -20,6 +20,9 @@ jobs:
   flatpak:
     name: 'Flatpak Build'
     runs-on: ubuntu-latest
+    concurrency:
+      group: flatpak-${{ github.ref }}
+      cancel-in-progress: true
     container:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
       options: --privileged
