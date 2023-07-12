@@ -35,4 +35,4 @@ jobs:
         uses: nick-fields/assert-action@v1
         with:
           expected: ''
-          actual: ${{ steps.proxyDiff.outputs.EXT_HELPER_DIFF }}
+          actual: ${{ steps.extDiff.outputs.EXT_HELPER_DIFF }}
