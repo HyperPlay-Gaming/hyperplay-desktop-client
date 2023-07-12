@@ -1,0 +1,37 @@
+name: Check that submodules are merged
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: submodules-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Check proxy server
+        id: proxyDiff
+        run: cd src/backend/hyperplay-proxy-server && echo "PROXY_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Check extension helper
+        id: extDiff
+        run: cd src/backend/hyperplay-extension-helper && echo "EXT_HELPER_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Check overlay
+        id: overlayDiff
+        run: cd src/backend/hyperplay-overlay && echo "OVERLAY_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Check overlay
+        id: mockBackendDiff
+        run: cd e2e/__mocks__/hyperplay-mock-backend && echo "MOCK_BACKEND_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
