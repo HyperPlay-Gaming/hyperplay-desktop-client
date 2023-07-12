@@ -1,0 +1,38 @@
+name: Check that submodules are merged
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Get proxy server current commit hash
+        id: proxyDiff
+        run: cd src/backend/hyperplay-proxy-server && echo "PROXY_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Check that proxy is on latest main
+        uses: nick-fields/assert-action@v1
+        with:
+          expected: ''
+          actual: ${{ steps.proxyDiff.outputs.PROXY_DIFF }}
+      - name: Get extension helper current commit hash
+        id: extDiff
+        run: cd src/backend/hyperplay-extension-helper && echo "EXT_HELPER_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Check that proxy is on latest main
+        uses: nick-fields/assert-action@v1
+        with:
+          expected: ''
+          actual: ${{ steps.proxyDiff.outputs.EXT_HELPER_DIFF }}
