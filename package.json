@@ -97,8 +97,8 @@
       ]
     },
     "linux": {
+      "icon": "build/app_icon.png",
       "category": "Game",
-      "icon": "build/app_icon.icns",
       "description": "An Open Source Launcher for Web3, GOG and Epic Games",
       "desktop": {
         "Name": "HyperPlay",
@@ -239,6 +239,7 @@
     "release:mac": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "cross-env NODE_ENV_ELECTRON_VITE=production vite build && electron-builder -p always --win nsis",
     "dist:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder --linux",
+    "dist:linux:ci": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder --linux deb rpm pacman tar.xz --publish=never",
     "dist:mac": "export NODE_ENV_ELECTRON_VITE=production && export CSC_IDENTITY_AUTO_DISCOVERY=false && vite build && electron-builder --mac",
     "dist:win": "cross-env NODE_ENV_ELECTRON_VITE=production vite build && electron-builder --win",
     "build-signed:win": "vite build && electron-builder --win -c.win.certificateSubjectName=\"HyperPlay Labs Inc.\"",
