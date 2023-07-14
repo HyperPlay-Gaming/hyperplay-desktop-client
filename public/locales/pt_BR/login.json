@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Conecte-se"
+        "login": "Conecte-se",
+        "error": "Erro, tente um código diferente",
+        "loading": "Carregando"
     },
     "message": {
         "part1": "Para fazer login e instalar seus jogos, primeiro você precisa seguir as etapas abaixo:",
