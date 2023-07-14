@@ -307,7 +307,6 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
     case 'crossover':
       ret.CX_BOTTLE = wineCrossoverBottle
   }
-
   if (gameSettings.showFps) {
     // If the operating system is macOS, enable the Metal HUD
     // Otherwise, enable the DXVK FPS HUD
@@ -321,6 +320,24 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
     ret.WINE_FULLSCREEN_FSR = '1'
     ret.WINE_FULLSCREEN_FSR_STRENGTH =
       gameSettings.maxSharpness?.toString() || '2'
+  }
+  if (
+    gameSettings.showMangohud &&
+    !gameSettings.enviromentOptions.find(
+      ({ key }) => key === 'MANGOHUD_CONFIGFILE'
+    )
+  ) {
+    if (!process.env.XDG_CONFIG_HOME) {
+      ret.MANGOHUD_CONFIGFILE = join(
+        flatPakHome,
+        '.config/MangoHud/MangoHud.conf'
+      )
+    } else {
+      ret.MANGOHUD_CONFIGFILE = join(
+        process.env.XDG_CONFIG_HOME,
+        'MangoHud/MangoHud.conf'
+      )
+    }
   }
   if (gameSettings.enableEsync && wineVersion.type !== 'proton') {
     ret.WINEESYNC = '1'
