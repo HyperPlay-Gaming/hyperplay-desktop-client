@@ -1800,41 +1800,25 @@ import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
 
 // sends messages to renderer process through preload.ts callbacks
-export const walletConnected: WalletConnectedType = function (
-  accounts: string[]
-) {
+backendEvents.on('walletConnected', function (accounts: string[]) {
   getMainWindow()?.webContents.send('walletConnected', accounts)
-}
+})
 
-export const walletDisconnected: WalletDisconnectedType = function (
-  code: number,
-  reason: string
-) {
+backendEvents.on('walletDisconnected', function (code: number, reason: string) {
   getMainWindow()?.webContents.send('walletDisconnected', code, reason)
-}
+})
 
-export const accountsChanged: AccountsChangedType = function (
-  accounts: string[]
-) {
-  getMainWindow()?.webContents.send('accountChanged', accounts)
-}
+backendEvents.on('connectionRequestRejected', function () {
+  getMainWindow()?.webContents.send('connectionRequestRejected')
+})
 
-export const chainChanged: ChainChangedType = function (chainId: number) {
+backendEvents.on('chainChanged', function (chainId: number) {
   getMainWindow()?.webContents.send('chainChanged', chainId)
-}
+})
 
-export const connectionRequestRejected: ConnectionRequestRejectedType =
-  function () {
-    getMainWindow()?.webContents.send('connectionRequestRejected')
-  }
-
-ProviderHelper.passEventCallbacks(
-  accountsChanged,
-  walletConnected,
-  walletDisconnected,
-  chainChanged,
-  connectionRequestRejected
-)
+backendEvents.on('accountsChanged', function (accounts: string[]) {
+  getMainWindow()?.webContents.send('accountChanged', accounts)
+})
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 

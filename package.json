@@ -171,6 +171,7 @@
     "@types/unzipper": "^0.10.6",
     "@walletconnect/browser-utils": "^1.8.0",
     "@walletconnect/ethereum-provider": "^2.9.0",
+    "@walletconnect/modal": "^2.6.0",
     "@walletconnect/types": "^2.9.0",
     "axios": "^0.26.1",
     "bn.js": "^5.2.1",
@@ -183,6 +184,7 @@
     "easydl": "^1.0.3",
     "electron-store": "^8.0.1",
     "electron-updater": "^5.0.1",
+    "ethers": "^6.6.3",
     "express": "^4.18.1",
     "filesize": "^8.0.7",
     "find-process": "^1.4.7",
@@ -217,7 +219,6 @@
     "systeminformation": "^5.15.0",
     "ts-prune": "^0.10.3",
     "tslib": "^2.4.0",
-    "web3": "^1.7.5",
     "yauzl": "^2.10.0"
   },
   "scripts": {
