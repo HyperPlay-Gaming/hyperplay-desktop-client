@@ -16,6 +16,7 @@ import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { Runner } from 'common/types'
 import './index.css'
 import LoginWarning from '../Login/components/LoginWarning'
+import { NileLoginData } from 'common/types/nile'
 import authStore from 'frontend/store/AuthStore'
 import { observer } from 'mobx-react-lite'
 import {
@@ -24,7 +25,8 @@ import {
   GOG_LOGIN_URL,
   GOG_STORE_URL,
   HYPERPLAY_STORE_URL,
-  WIKI_URL
+  WIKI_URL,
+  AMAZON_STORE
 } from '../../constants'
 
 function urlIsHpUrl(url: string) {
@@ -36,7 +38,7 @@ function WebView() {
   const { i18n } = useTranslation()
   const { pathname, search } = useLocation()
   const { t } = useTranslation()
-  const { epic, gog, connectivity } = useContext(ContextProvider)
+  const { epic, gog, amazon, connectivity } = useContext(ContextProvider)
   const [loading, setLoading] = useState<{
     refresh: boolean
     message: string
@@ -44,6 +46,9 @@ function WebView() {
     refresh: true,
     message: t('loading.website', 'Loading Website')
   }))
+  const [amazonLoginData, setAmazonLoginData] = useState<NileLoginData | null>(
+    null
+  )
   const navigate = useNavigate()
   const webviewRef = useRef<WebviewTag>(null)
 
@@ -62,15 +67,19 @@ function WebView() {
   const trueAsStr = 'true' as unknown as boolean | undefined
   const { runner } = useParams() as { runner: Runner }
 
-  const urls = {
+  console.log(amazonLoginData)
+
+  const urls: { [pathname: string]: string } = {
     '/hyperplaystore': hyperplayStore,
     '/epicstore': epicStore,
     '/gogstore': GOG_STORE_URL,
+    '/amazonstore': AMAZON_STORE,
     '/wiki': WIKI_URL,
     '/loginEpic': EPIC_LOGIN_URL,
     '/loginGOG': GOG_LOGIN_URL,
     '/loginweb/legendary': EPIC_LOGIN_URL,
-    '/loginweb/gog': GOG_LOGIN_URL
+    '/loginweb/gog': GOG_LOGIN_URL,
+    '/loginweb/nile': amazonLoginData ? amazonLoginData.url : AMAZON_STORE
   }
 
   let startUrl = Object.prototype.hasOwnProperty.call(urls, pathname)
@@ -107,6 +116,56 @@ function WebView() {
       mounted = false
     }
   }, [])
+
+  useEffect(() => {
+    console.log(pathname)
+    if (pathname !== '/loginweb/nile') return
+    console.log('Loading amazon login data')
+
+    setLoading({
+      refresh: true,
+      message: t('status.preparing_login', 'Preparing Login...')
+    })
+    amazon
+      .getLoginData()
+      .then((data) => {
+        console.log('Amazon login data loaded', { data })
+        setAmazonLoginData(data)
+        setLoading({
+          ...loading,
+          refresh: false
+        })
+      })
+      .catch((error) => {
+        console.error('Failed to load Amazon login data', { error })
+        setLoading({
+          ...loading,
+          refresh: false
+        })
+      })
+  }, [pathname])
+
+  const handleAmazonLogin = (code: string) => {
+    if (!amazonLoginData) {
+      console.error('Could not login to Amazon because login data is missing')
+      return
+    }
+
+    setLoading({
+      refresh: true,
+      message: t('status.logging', 'Logging In...')
+    })
+    amazon
+      .login({
+        client_id: amazonLoginData.client_id,
+        code: code,
+        code_verifier: amazonLoginData.code_verifier,
+        serial: amazonLoginData.serial
+      })
+      .then(() => {
+        handleSuccessfulLogin()
+      })
+  }
 
   const handleSuccessfulLogin = () => {
     navigate('/login')
@@ -159,6 +218,15 @@ function WebView() {
               })
             }
           }
+        } else if (runner === 'nile') {
+          const pageURL = webview.getURL()
+          const parsedURL = new URL(pageURL)
+          const code = parsedURL.searchParams.get(
+            'openid.oa2.authorization_code'
+          )
+          if (code) {
+            handleAmazonLogin(code)
+          }
         }
       }
 
@@ -180,10 +248,10 @@ function WebView() {
       }
     }
     return
-  }, [webviewRef.current, preloadPath])
+  }, [webviewRef.current, preloadPath, amazonLoginData])
 
   const [showLoginWarningFor, setShowLoginWarningFor] = useState<
-    null | 'epic' | 'gog'
+    null | 'epic' | 'gog' | 'amazon'
   >(null)
 
   useEffect(() => {
@@ -195,6 +263,8 @@ function WebView() {
       !gog.username
     ) {
       setShowLoginWarningFor('gog')
+    } else if (startUrl.match(/gaming\.amazon\.com/) && !amazon.username) {
+      setShowLoginWarningFor('amazon')
     }
   }, [startUrl])
 

@@ -38,6 +38,7 @@ import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
 import { DXVK } from './tools'
 import setup from './storeManagers/gog/setup'
+import nileSetup from './storeManagers/nile/setup'
 import {
   CallRunnerOptions,
   GameInfo,
@@ -214,7 +215,12 @@ async function prepareWineLaunch(
       ['Created/Updated Wineprefix at', gameSettings.winePrefix],
       LogPrefix.Backend
     )
-    await setup(appName)
+    if (runner === 'gog') {
+      await setup(appName)
+    }
+    if (runner === 'nile') {
+      await nileSetup(appName)
+    }
   }
 
   // If DXVK/VKD3D installation is enabled, install it

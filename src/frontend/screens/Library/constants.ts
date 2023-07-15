@@ -14,6 +14,8 @@ export function getLibraryTitle(
       return t('GOG', 'GOG')
     case 'hyperplay':
       return 'HyperPlay'
+    case 'nile':
+      return t('Amazon Games', 'Amazon Games')
     default:
       return t('Other', 'Other')
   }

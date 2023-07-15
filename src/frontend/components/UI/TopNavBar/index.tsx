@@ -13,6 +13,7 @@ import { NavLink, useLocation } from 'react-router-dom'
 import {
   EPIC_STORE_URL,
   GOG_STORE_URL,
+  AMAZON_STORE,
   HYPERPLAY_STORE_URL
 } from 'frontend/constants'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
@@ -100,6 +101,15 @@ const TopNavBar = observer(() => {
                 style={getStoreTextStyle(GOG_STORE_URL)}
               >
                 {t('GOG', 'GOG')}
+              </Button>
+            </NavLink>
+            <NavLink to="/amazonstore">
+              <Button
+                type="link"
+                size="small"
+                style={getStoreTextStyle(AMAZON_STORE)}
+              >
+                {t('Amazon', 'Amazon')}
               </Button>
             </NavLink>
           </>

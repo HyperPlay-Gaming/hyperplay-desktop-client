@@ -24,7 +24,8 @@ const RUNNER_TO_STORE = {
   legendary: 'Epic',
   gog: 'GOG',
   hyperplay: 'HyperPlay',
-  sideloaded: 'Other'
+  sideloaded: 'Other',
+  nile: 'Amazon'
 }
 export default React.memo(function SearchBar() {
   const {
@@ -33,6 +34,7 @@ export default React.memo(function SearchBar() {
     epic,
     gog,
     sideloadedLibrary,
+    amazon,
     hyperPlayLibrary
   } = useContext(ContextProvider)
   const { t } = useTranslation()
@@ -45,7 +47,8 @@ export default React.memo(function SearchBar() {
       ...(epic.library ?? []),
       ...(gog.library ?? []),
       ...(sideloadedLibrary ?? []),
-      ...(hyperPlayLibrary ?? [])
+      ...(hyperPlayLibrary ?? []),
+      ...(amazon.library ?? [])
     ]
       .filter(Boolean)
       .filter((el) => {
@@ -56,6 +59,7 @@ export default React.memo(function SearchBar() {
       })
       .sort((g1, g2) => (g1.title < g2.title ? -1 : 1))
   }, [
+    amazon.library,
     epic.library,
     gog.library,
     filterText,

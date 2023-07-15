@@ -29,6 +29,7 @@
         "choose-egs-prefix": "Choose Prefix where EGS is installed",
         "choose-gogdl-binary": "Select GOGDL Binary (needs restart)",
         "choose-legendary-binary": "Select Legendary binary",
+        "choose-nile-binary": "Select Nile binary",
         "customWine": "Select the Wine or Proton binary",
         "default-install-path": "Choose Default Install Path",
         "default-steam-path": "Steam path.",
@@ -445,6 +446,7 @@
     },
     "login": {
         "alternative_method": "Alternative Login Method",
+        "amazon": "Amazon Login",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time."
@@ -550,11 +552,13 @@
     "placeholder": {
         "alt-gogdl-bin": "Using built-in GOGDL binary...",
         "alt-legendary-bin": "Using built-in Legendary binary...",
+        "alt-nile-bin": "Using built-in Nile binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix where EGS is installed",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
     },
     "please-wait": "Please wait...",
+    "prime-gaming": "Prime Gaming",
     "progress": "Progress",
     "queue": {
         "label": {
@@ -578,6 +582,7 @@
         "addgamestosteam": "Add games to Steam automatically",
         "alt-gogdl-bin": "Choose an Alternative GOGDL Binary to use",
         "alt-legendary-bin": "Choose an Alternative Legendary Binary",
+        "alt-nile-bin": "Choose an Alternative Nile Binary",
         "autodxvk": "Auto Install/Update DXVK on Prefix",
         "autosync": "Autosync Saves",
         "autoUpdateGames": "Automatically update games",
@@ -735,6 +740,7 @@
     "status": {
         "installing": "Installing",
         "logging": "Logging In...",
+        "preparing_login": "Preparing Login... ",
         "processing": "Processing files, please wait"
     },
     "store": "Epic Store",

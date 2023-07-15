@@ -51,7 +51,7 @@ type InstallInfo =
   | null
 
 const DownloadManagerItem = ({ element, current, state }: Props) => {
-  const { epic, gog, hyperPlayLibrary } = useContext(ContextProvider)
+  const { amazon, epic, gog, hyperPlayLibrary } = useContext(ContextProvider)
   const [installInfo, setInstallInfo] = useState<InstallInfo>(null)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
@@ -72,7 +72,12 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
     )
   }
 
-  const library = [...epic.library, ...gog.library, ...hyperPlayLibrary]
+  const library = [
+    ...epic.library,
+    ...gog.library,
+    ...amazon.library,
+    ...hyperPlayLibrary
+  ]
 
   const { params, addToQueueTime, endTime, type, startTime } = element
   const {

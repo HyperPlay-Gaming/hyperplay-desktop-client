@@ -61,6 +61,7 @@ import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Button } from '@hyperplay/ui'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import DLCList from 'frontend/components/UI/DLCList'
+import { NileInstallInfo } from 'common/types/nile'
 
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -94,7 +95,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
+    | LegendaryInstallInfo
+    | GogInstallInfo
+    | HyperPlayInstallInfo
+    | NileInstallInfo
+    | null
   >(null)
   const [launchArguments, setLaunchArguments] = useState('')
   const [hasError, setHasError] = useState<{

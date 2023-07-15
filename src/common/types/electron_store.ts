@@ -18,6 +18,7 @@ import {
 } from 'common/types'
 import { PROVIDERS } from './proxy-types'
 import { UserData } from 'common/types/gog'
+import { NileUserData } from './nile'
 
 export interface StoreStructure {
   configStore: {
@@ -39,6 +40,7 @@ export interface StoreStructure {
       lastLogFile: string
       legendaryLogFile: string
       gogdlLogFile: string
+      nileLogFile: string
     }
     'window-props': Electron.Rectangle
     settings: AppSettings
@@ -63,6 +65,9 @@ export interface StoreStructure {
   gogConfigStore: {
     userData: UserData
     credentials: GOGLoginData
+  }
+  nileConfigStore: {
+    userData?: NileUserData
   }
   sideloadedStore: {
     games: GameInfo[]

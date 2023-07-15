@@ -11,8 +11,15 @@ import {
   MetricsOptInStatus,
   DownloadManagerState
 } from 'common/types'
+import { NileLoginData, NileRegisterData } from 'common/types/nile'
 
-export type Category = 'all' | 'legendary' | 'gog' | 'sideload' | 'hyperplay'
+export type Category =
+  | 'all'
+  | 'legendary'
+  | 'gog'
+  | 'sideload'
+  | 'hyperplay'
+  | 'nile'
 
 export type Platform = 'win' | 'mac' | 'linux' | 'browser'
 
@@ -69,6 +76,13 @@ export interface ContextType {
     library: GameInfo[]
     username?: string
     login: (token: string) => Promise<string>
+    logout: () => Promise<void>
+  }
+  amazon: {
+    library: GameInfo[]
+    username?: string
+    getLoginData: () => Promise<NileLoginData>
+    login: (data: NileRegisterData) => Promise<string>
     logout: () => Promise<void>
   }
   allTilesInColor: boolean

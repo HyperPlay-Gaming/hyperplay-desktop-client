@@ -50,7 +50,8 @@
       "icon": "build/win_icon.ico",
       "asarUnpack": [
         "build/bin/win32/legendary.exe",
-        "build/bin/win32/gogdl.exe"
+        "build/bin/win32/gogdl.exe",
+        "build/bin/win32/nile.exe"
       ],
       "files": [
         "build/bin/win32/*"
@@ -70,7 +71,8 @@
       },
       "asarUnpack": [
         "build/bin/darwin/legendary",
-        "build/bin/darwin/gogdl"
+        "build/bin/darwin/gogdl",
+        "build/bin/darwin/nile"
       ],
       "files": [
         "build/bin/darwin/*"
@@ -108,6 +110,7 @@
         "build/bin/linux/legendary",
         "build/bin/linux/gogdl",
         "build/bin/linux/wmctrl",
+        "build/bin/linux/nile",
         "build/bin/linux/vulkan-helper"
       ],
       "files": [
@@ -207,6 +210,7 @@
     "lokijs": "^1.5.12",
     "mobx": "^6.9.0",
     "mobx-react-lite": "^3.4.0",
+    "json5": "^2.2.3",
     "plist": "^3.0.5",
     "qrcode": "^1.5.3",
     "react": "^18.2.0",
