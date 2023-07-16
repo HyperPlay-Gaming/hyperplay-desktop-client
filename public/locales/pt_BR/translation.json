@@ -1,10 +1,10 @@
 {
     "accessibility": {
-        "actions_font_family_no_default": "Ações Tipo de letra (Predefinição: ",
+        "actions_font_family_no_default": "Família da fonte da ação (padrão: ",
         "all_tiles_in_color": "Mostrar quadrados dos jogos coloridos",
-        "content_font_family_no_default": "Tipo de letra do conteúdo (Predefinição: ",
-        "fonts": "Fontees",
-        "title": "Accessibilidade",
+        "content_font_family_no_default": "Tipo de letra do conteúdo (Pradrão: ",
+        "fonts": "Fontes",
+        "title": "Acessibilidade",
         "zoom": "Zoom"
     },
     "add_game": "Adicionar jogo",
@@ -22,7 +22,7 @@
             "message": "O cache do HyperPlay foi limpo.",
             "title": "Cache limpo"
         },
-        "choose": "Escolher",
+        "choose": "Selecionar",
         "choose-egs-prefix": "Selecione o Prefixo Wine onde a EGS está instalada",
         "choose-gogdl-binary": "Selecionar binário do GOGDL (requer reinício)",
         "choose-legendary-binary": "Selecione o binário do Legendary",
@@ -41,15 +41,15 @@
                 "message": "Suas credenciais expiraram, por favor desconecte sua conta e entre novamente."
             },
             "cx-bottle-not-found": {
-                "message": "Não é posível iniciar, a garrafa CrossOver \"{{bottle_name}}\" não existe!",
-                "title": "Garrafa CrossOver não encontrada"
+                "message": "Não é posível iniciar, a pacote CrossOver \"{{bottle_name}}\" não existe!",
+                "title": "Registro Cross Over não encontrado"
             },
             "diskspace": {
                 "message": "Sem espaço suficiente disponível no disco",
                 "title": "Sem Espaço"
             },
             "dxvk": {
-                "message": "Erro ao instalar DXVK/VKD3D! Por favor, verifique sua conexão!",
+                "message": "Erro ao instalar DXVK/VKD3D! Verifique sua conexão!",
                 "title": "DXVK/VKD3D Erro"
             },
             "folder-not-found": {
@@ -57,16 +57,16 @@
             },
             "generic": {
                 "message": "",
-                "title": "Selecionar EXE para executar"
+                "title": "Selecione EXE para executar"
             },
-            "launchAborted": "Launch aborted",
+            "launchAborted": "Launch abortado",
             "title": "Erro",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Ocorreu uma exceção não capturada!"
             },
             "update": {
-                "title": "Update Error",
+                "title": "Erro de atualização",
                 "message": "Algo deu errado com a atualização! Desinstale e reinstale manualmente o Hyper Play."
             },
             "wine-not-found": {
@@ -75,7 +75,7 @@
                 "title": "Wine Não Encontrado"
             },
             "winetricks": {
-                "message": "Winetricks retornou o seguinte erro durante a execução:{{newLine}}{{error}}",
+                "message": "O Winetricks retornou o seguinte erro durante a execução:{{newLine}}{{error}}",
                 "title": "Erro do Winetricks"
             },
             "moving": "Erro ao mover o jogo {{error}}"
@@ -86,7 +86,7 @@
                 "detail": "Você deseja atualizar o HyperPlay em segundo plano?",
                 "message": "Uma nova versão está disponível!",
                 "message-finished": "Deseja reiniciar o HyperPlay agora?",
-                "title": "HyperPlay Games Launcher",
+                "title": "HyperPlay Launcher Games",
                 "title-finished": "Atualização finalizada"
             }
         },
@@ -104,15 +104,15 @@
         "reset-app": {
             "question": {
                 "message": "Você tem certeza de que deseja redefinir o HyperPlay? Isso removerá todas as configurações e o armazenamento em cache, mas não removerá seus jogos instalados ou suas credenciais Epic. As versões portáteis (AppImage, WinPortable, ...) do HyperPlay precisam ser reiniciadas manualmente depois.",
-                "title": "Reset HyperPlay"
+                "title": "Reiniciar o HyperPlay"
             }
         },
         "runexe": {
-            "title": "Selecione o EXE para executar"
+            "title": "Selecione o EXE"
         },
         "select": {
             "button": "Selecione",
-            "exe": "Selecionar EXE"
+            "exe": "Selecione o EXE"
         },
         "shortcuts": {
             "message": "Os atalhos foram criados na área de trabalho e no menu Iniciar",
@@ -124,7 +124,7 @@
         "sync": {
             "button": "Escolher",
             "error": "Caminho Inválido",
-            "title": "Selecione a pasta de saves"
+            "title": "Escolha o diretório de saves"
         },
         "vcruntime": {
             "install": {
@@ -144,10 +144,10 @@
             "title": "Aviso",
             "wine-change": {
                 "title": "Wine não encontrado!",
-                "message": "Não foi possível encontrar a versão do Wine selecionada para iniciar este título ({{selectedWine}}). {{newline}} Encontrámos outro, quer continuar a iniciar utilizando {{foundWine}} ?"
+                "message": "Não foi possível encontrar a versão do Wine selecionada para rodar este título ({{selectedWine}}). {{newline}} Encontramos outro, deseja continuar a iniciar usando {{foundWine}}? ?"
             }
         },
-        "wineprefix": "Selecione a pasta do prefixo Wine",
+        "wineprefix": "Escolha o caminho do prefixo Wine",
         "yes": "SIM",
         "dontShowAgain": "Não mostrar novamente"
     },
@@ -167,16 +167,16 @@
             "backspace": "Backspace",
             "close_dialog": "Fechar caixa de diálogo",
             "close_keyboard": "Fechar teclado",
-            "close_options": "Fechar opções",
+            "close_options": "Fechar Opções",
             "game_details": "Detalhes do jogo",
             "game_settings": "Configurações do jogo",
             "install_game": "Instalar jogo",
             "move_cursor": "Mover cursor",
             "open_virtual_keyboard": "Abrir teclado virtual",
-            "options": "Options",
-            "play_game": "Jogar um jogo",
-            "scroll": "Scroll",
-            "select": "Selecionar",
+            "options": "Opções",
+            "play_game": "Jogar jogo",
+            "scroll": "Rolagem",
+            "select": "Selecione",
             "space": "Espaço",
             "update_game": "Atualizar jogo"
         }
@@ -205,7 +205,7 @@
         "offline-notification-body": "Serviços online podem não funcionar totalmente, os servidores da Epic Games estão offline!",
         "offline-notification-title": "offline"
     },
-    "Epic Games": "Epic Games",
+    "Epic Games": "Jogos da Epic",
     "error": "Error",
     "favourites": "Favoritos",
     "game": {
@@ -256,7 +256,7 @@
             "part7": " para evitar abrir o launcher em alguns jogos, etc."
         },
         "preferSystemLibs": "Versões personalizadas do Wine (Wine-GE, Wine-Lutris) são enviadas com suas dependências de biblioteca. Ao habilitar esta opção, essas bibliotecas enviadas serão ignoradas e o Wine carregará as bibliotecas do sistema. Aviso! Podem ocorrer problemas se as dependências não forem atendidas.",
-        "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
+        "primerun": "Usar placa gráfica dedicada para renderizar o jogo em sistemas multi-GPU. Apenas necessário em computadores portáteis ou de mesa para jogos que utilizam uma GPU sem periféricos para renderização (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
             "info": "Este caminho permite que o HyperPlay determine qual versão do Proton Steam usa, para adicionar jogos não Steam ao Steam."
         },
@@ -279,13 +279,13 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Atualização disponível!",
             "stable": "Estável",
-            "version": "HyperPlay Versão"
+            "version": "Versão do HyperPlay"
         },
         "save-sync": {
             "searching": "Tentando detectar a pasta salvar correta (clique para cancelar)"
         },
         "settings": "As configurações são salvas automaticamente",
-        "version": "Versão do Wine"
+        "version": "Versão Wine"
     },
     "infobox": {
         "help": "Ajuda",
@@ -410,7 +410,7 @@
         "wrapper": {
             "args": "Argumentos",
             "arguments_example": "Exemplo de argumentos: --arg; -extra-file=\"caminho-arquivo/ com/espaços\"",
-            "exe": "Wrapper",
+            "exe": "Pacote",
             "placeHolderKey": "Novo Wrapper",
             "placeHolderValue": "Argumentos do Wrapper",
             "title": "Comando do Wrapper:"
@@ -491,7 +491,7 @@
             "remove": "Desinstalar",
             "removeConfirm": "Tem a certeza de que quer desinstalar o Epic Overlay?",
             "removeConfirmTitle": "Confirme a remoção do overlay",
-            "updateNow": "Atualizar",
+            "updateNow": "Atualização",
             "updating": "Atualizando..."
         },
         "esync": "Habilitar Esync",
@@ -554,7 +554,7 @@
         "showfps": "Exibir contador de FPS (DX9, 10 e 11)",
         "start-in-tray": "Iniciar minimizado",
         "steamruntime": "Utilizar Steam Runtime",
-        "winecrossoverbottle": "CrossOver Bottle",
+        "winecrossoverbottle": "Prefixo CrossOver",
         "wineprefix": "Pasta do prefixo Wine",
         "wineversion": "Wine Versão",
         "ignoreGameUpdates": "Ignorar atualizações do jogo",
@@ -563,7 +563,7 @@
     "settings": {
         "battlEyeRuntime": {
             "installing": "Instalando o BattlEye Runtime...",
-            "name": "BattlEye AntiCheat Runtime"
+            "name": "Tempo de execução do BattlEye AntiCheat"
         },
         "clear-cache": "Limpar cache do HyperPlay",
         "copiedToClipboard": "Copiado para a área de Transferência!",
@@ -575,7 +575,7 @@
                 "title": "GameMode necessário"
             },
             "installing": "Instalando o EAC Runtime...",
-            "name": "EasyAntiCheat Runtime"
+            "name": "Tempo de execução do EasyAntiCheat"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
@@ -625,7 +625,7 @@
         }
     },
     "tooltip": {
-        "addpath": "Adicionar",
+        "addpath": "Adicionar No Caminho",
         "removepath": "Remover"
     },
     "tray": {
@@ -648,7 +648,7 @@
     },
     "webview": {
         "controls": {
-            "back": "Volte para trás",
+            "back": "Voltar",
             "forward": "Avançar",
             "openInBrowser": "Abrir no navegador",
             "reload": "Recarregar página"
@@ -658,7 +658,7 @@
         "actions": "Ações",
         "manager": {
             "link": "Versões do Wine",
-            "not-found": "Não foram encontradas versões do Wine. Por favor, clique no ícone de actualização para tentar novamente.",
+            "not-found": "Não foram encontradas versões do Wine. Por favor, clique no ícone de atualização para tentar novamente.",
             "title": "Versões do Wine ",
             "unzipping": "Descompactando"
         },
@@ -690,7 +690,8 @@
                         "createWalletDescription": "Clique em \"Criar uma carteira\" abaixo se você não tiver uma carteira ou quiser criar uma nova:",
                         "skip": "Pular por enquanto",
                         "digitalAssets": {
-                            "details": "As carteiras são usadas para enviar, receber, armazenar e exibir ativos digitais, como tokens e NFTs."
+                            "details": "As carteiras são usadas para enviar, receber, armazenar e exibir ativos digitais, como tokens e NFTs.",
+                            "title": "Um local para seus ativos digitais"
                         },
                         "title": "O que é uma carteira?"
                     },
@@ -699,7 +700,7 @@
                         "updateWarning": "Está com problemas? Verifique se o MetaMask está atualizado.",
                         "dontHaveWallet": "Não tem carteira?",
                         "getMetamask": "Obter MetaMask",
-                        "title": "Ler QR com "
+                        "title": "Escaneie o QR com "
                     },
                     "import": {
                         "createNewWallet": "Criar nova carteira de extensão MM",
@@ -724,11 +725,12 @@
             "welcome": {
                 "text": {
                     "bugs": "Observe que o HyperPlay é um alfa público. Muitos recursos ainda estão\n           em desenvolvimento, e haverá bugs.",
-                    "communityCTA_1": "Adoraríamos o seu feedback e ter você se juntar a nós em nosso",
+                    "communityCTA_1": "Adoraríamos seu feedback e que você se juntasse a nós em nossa",
                     "communityCTA_2": "comunidade. Juntos, vamos moldar o futuro dos jogos!",
-                    "description": "O HyperPlay é um launcher de jogos e um agregador de lojas de jogos do\n          futuro. Com o HyperPlay, pode levar a sua carteira, tokens e activos\n          para todos os jogos. O HyperPlay suporta toda a biblioteca da Epic\n          Store, GOG e nossa própria loja HyperPlay. Ao usar o HyperPlay, você concorda\n          com a nossa"
+                    "description": "HyperPlay é um launcher de jogos e agregador de loja de jogos do\n          futuro. Com o HyperPlay, você pode carregar sua carteira, tokens e ativos\n          em cada jogo. HyperPlay suporta toda a biblioteca do Epic\n          Loja, GOG e nossa própria loja HyperPlay. Ao usar o HyperPlay, você concorda\n          à nossa",
+                    "construction": "O HyperPlay ainda está em desenvolvimento."
                 },
-                "title": "Bem-vindo ao HyperPlay Early Access!"
+                "title": "Bem-vindo ao acesso antecipado do HyperPlay!"
             }
         },
         "turnAnalyticsOff": "Desativar",
@@ -739,7 +741,7 @@
         "analyticsOff": "A análise está desactivada",
         "viewPortfolio": "Ver portfólio",
         "copyUrl": "Copiar URL",
-        "discordApp": "Discord",
+        "discordApp": "DISCORD",
         "misc": "Nunca",
         "analyticsOn": "A análise está ativada",
         "changeWallet": "Mudar carteira",
@@ -767,7 +769,7 @@
             "INITIATED": "Pedido de operação pendente",
             "FAILED": "Operação interrompida",
             "CONFIRMED": "Operação confirmada",
-            "PENDING": "Transação submetida"
+            "PENDING": "Transação enviada"
         },
         "description": {
             "CONFIRMED": "A transação foi confirmada com sucesso!",
@@ -790,9 +792,9 @@
             "INITIATED": "Adicionar pedido de token personalizado pendente"
         }
     },
-    "accounts": "contas",
+    "accounts": "Contas",
     "ALL": "TODOS",
-    "analytics": "Análises",
+    "analytics": "Análise",
     "externalLink": {
         "dontAskAgain": "Não pergunte novamente",
         "warning": "Você está prestes a abrir um link externo."
