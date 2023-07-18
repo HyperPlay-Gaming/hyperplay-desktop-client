@@ -17,8 +17,6 @@ import WalletImportScreen from './screens/import'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { MetaMaskImportOptions } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import {
-  UrisReturn,
-  IMobileRegistryEntryWithQrLink,
   WalletConnectedType,
   ConnectionRequestRejectedType,
   wait
@@ -64,9 +62,9 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
 
   async function providerClicked(provider: PROVIDERS) {
     setShowMetaMaskBrowserSidebarLinks(false)
-    const uris: UrisReturn = await window.api.getConnectionUris(provider)
-    const qrCodeLink: IMobileRegistryEntryWithQrLink = uris.metamask
-    let qrCode = qrCodeLink.qrCodeLink
+    const uri = await window.api.getConnectionUris(provider)
+    const universalMetaMaskLink = 'https://metamask.app.link?uri=' + uri
+    let qrCode = universalMetaMaskLink
 
     // use base wc: uri for wallet connect. mm deeplink breaks some wallets
     if (provider === PROVIDERS.WALLET_CONNECT) {

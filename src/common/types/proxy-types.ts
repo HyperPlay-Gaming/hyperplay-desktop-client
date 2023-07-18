@@ -1,19 +1,9 @@
-import WCTypes from '@walletconnect/types'
 type ApiType = typeof import('../../backend/api').default
 
 declare global {
   interface Window {
     api: ApiType
   }
-}
-
-export interface IMobileRegistryEntryWithQrLink
-  extends WCTypes.IMobileRegistryEntry {
-  qrCodeLink: string
-}
-
-export interface UrisReturn {
-  [key: string]: IMobileRegistryEntryWithQrLink
 }
 
 export enum PROVIDERS {
