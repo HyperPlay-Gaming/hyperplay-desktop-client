@@ -121,16 +121,8 @@ import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
-import * as ProviderHelper from './hyperplay-proxy-server/providerHelper'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import * as ProxyServer from './hyperplay-proxy-server/proxy'
-import {
-  AccountsChangedType,
-  ChainChangedType,
-  ConnectionRequestRejectedType,
-  WalletConnectedType,
-  WalletDisconnectedType
-} from './hyperplay-proxy-server/commonProxyTypes'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {

@@ -1,3 +1,4 @@
+import { backendEvents } from './../backend_events'
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 let connectedResolve: any
 
@@ -7,24 +8,23 @@ export const getConnectedPromise = async function () {
   })
 }
 
-export function walletConnected(accounts: string[]) {
+backendEvents.on('walletConnected', function (accounts: string[]) {
   console.log('renderer receives: connected, accts = ', accounts)
-  connectedResolve()
-}
+})
 
-export function walletDisconnected(code: number, reason: string) {
+backendEvents.on('walletDisconnected', function (code: number, reason: string) {
   console.log('renderer receives: disconnected: ', code, reason)
-}
+})
 
-export function accountsChanged(accounts: string[]) {
+backendEvents.on('connectionRequestRejected', function () {
+  console.log('renderer receives: connection request rejected ')
+})
+
+backendEvents.on('chainChanged', function (chainId: number) {
+  console.log('renderer receives: chain changed to ', chainId)
+})
+
+backendEvents.on('accountsChanged', function (accounts: string[]) {
   console.log('renderer receives: accounts changed to ', accounts)
   connectedResolve()
-}
-
-export function chainChanged(chainId: number) {
-  console.log('renderer receives: chain changed to ', chainId)
-}
-
-export function connectionRequestRejected() {
-  console.log('renderer receives: connection request rejected ')
-}
+})
