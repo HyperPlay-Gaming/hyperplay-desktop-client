@@ -10,6 +10,7 @@ export const getConnectedPromise = async function () {
 
 backendEvents.on('walletConnected', function (accounts: string[]) {
   console.log('renderer receives: connected, accts = ', accounts)
+  connectedResolve()
 })
 
 backendEvents.on('walletDisconnected', function (code: number, reason: string) {
