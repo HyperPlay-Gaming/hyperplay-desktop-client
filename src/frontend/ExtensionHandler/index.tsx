@@ -12,7 +12,7 @@ declare global {
       sendAsync: (...args: any) => any
       /*eslint-disable-next-line @typescript-eslint/no-explicit-any */
       on: (topic: string, handler: (...args: any) => void) => void
-      isConnected: ()=>boolean
+      isConnected: () => boolean
     }
   }
 }

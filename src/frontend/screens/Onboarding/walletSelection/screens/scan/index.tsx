@@ -61,11 +61,12 @@ const ScanScreen = (props: ScanScreenProps) => {
         </Button>
       ) : null}
 
-      {props.providerName.toLowerCase().includes('metamask') && oneTimePasscode !== '' ? (
+      {props.providerName.toLowerCase().includes('metamask') &&
+      oneTimePasscode !== '' ? (
         <div className={`body-sm  ${ScanScreenStyles.otp}`}>
           {t('hyperplay.otp', 'One Time Passcode')}: {oneTimePasscode}
-        </div>)
-      :null}
+        </div>
+      ) : null}
       <div className={`body-sm ${ScanScreenStyles.walletWarning}`}>
         <WarningIcon height={15} fill={'var(--color-status-alert)'} />
         <div>

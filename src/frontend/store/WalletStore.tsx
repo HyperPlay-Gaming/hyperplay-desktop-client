@@ -9,10 +9,7 @@ class WalletStore implements InitializableStore {
     makeAutoObservable(this)
   }
 
-  handleAccountsUpdated (
-    _e: Electron.IpcRendererEvent,
-    accounts: string[]
-  ) {
+  handleAccountsUpdated(_e: Electron.IpcRendererEvent, accounts: string[]) {
     this.address = accounts[0]
   }
 
@@ -25,9 +22,11 @@ class WalletStore implements InitializableStore {
 
     window.api.handleConnected(this.handleAccountsUpdated.bind(this))
 
-    window.api.metamaskOtpUpdated((_e: Electron.IpcRendererEvent, newOtp: string)=>{
-      this.otp=newOtp
-    })
+    window.api.metamaskOtpUpdated(
+      (_e: Electron.IpcRendererEvent, newOtp: string) => {
+        this.otp = newOtp
+      }
+    )
   }
 
   get isConnected() {

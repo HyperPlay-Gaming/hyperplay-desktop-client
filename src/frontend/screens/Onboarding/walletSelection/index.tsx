@@ -65,7 +65,6 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     // returns universal link for mm sdk
     const uri = await window.api.getConnectionUris(provider)
 
-
     const options: QRCodeToStringOptions = {
       type: 'svg',
       color: { light: '#121212', dark: '#ffffffff' }
