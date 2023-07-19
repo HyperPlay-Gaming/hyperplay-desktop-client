@@ -7,7 +7,6 @@ import { test_data } from './test_data/github-api-heroic-test-data.json'
 import path from 'path'
 import {
   copyFileSync,
-  createWriteStream,
   existsSync,
   readFileSync,
   rmSync,
@@ -60,6 +59,7 @@ describe('backend/utils.ts', () => {
       [{ target: 'v2.4.0-beta.1', base: '2.4.0' }, false],
       [{ target: 'v2.4.0-beta.2', base: '2.4.0-beta.1' }, true],
       [{ target: 'v2.4.0-beta.1', base: '2.4.0-beta.2' }, false],
+      /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
       [{ target: undefined as any, base: undefined as any }, false]
     ])
 

@@ -1,11 +1,8 @@
 import { join, dirname } from 'path'
-import { existsSync, readFileSync } from 'graceful-fs'
-import graceful_fs from 'graceful-fs'
+import graceful_fs, { existsSync, readFileSync } from 'graceful-fs'
 import axios from 'axios'
 import child_process from 'child_process'
 import { downloadFile, extractTarFile } from '../../util'
-// @ts-ignore: Don't know why ts complains about it.
-import { test_data } from './test_data/github-api-heroic-test-data.json'
 import { dirSync } from 'tmp'
 import { platform } from 'os'
 
@@ -21,7 +18,10 @@ afterEach(jest.restoreAllMocks)
 
 const shouldSkip = platform() !== 'linux'
 const skipMessage = 'not on linux so skipping test'
-const emptyTest = () => it('should do nothing', () => {})
+const emptyTest = () =>
+  it('should do nothing', () => {
+    console.log('running empty test')
+  })
 
 describe('downloadFile', () => {
   if (shouldSkip) {
@@ -39,11 +39,7 @@ describe('downloadFile', () => {
     jest
       .spyOn(graceful_fs, 'writeFile')
       .mockImplementation(
-        (
-          path: any,
-          data: any,
-          callback: (err: NodeJS.ErrnoException | null) => void
-        ) => {
+        (path, data, callback: (err: NodeJS.ErrnoException | null) => void) => {
           callback(null)
         }
       )
