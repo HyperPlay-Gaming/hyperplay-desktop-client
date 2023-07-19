@@ -62,24 +62,16 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
 
   async function providerClicked(provider: PROVIDERS) {
     setShowMetaMaskBrowserSidebarLinks(false)
+    // returns universal link for mm sdk
     const uri = await window.api.getConnectionUris(provider)
-    const universalMetaMaskLink = 'https://metamask.app.link?uri=' + uri
-    let qrCode = universalMetaMaskLink
 
-    // use base wc: uri for wallet connect. mm deeplink breaks some wallets
-    if (provider === PROVIDERS.WALLET_CONNECT) {
-      const mmUriUrl = new URL(qrCode)
-      const urlParams = new URLSearchParams(mmUriUrl.search)
-      const uri = urlParams.get('uri')
-      qrCode = uri ? uri : qrCode
-    }
 
     const options: QRCodeToStringOptions = {
       type: 'svg',
       color: { light: '#121212', dark: '#ffffffff' }
     }
-    const qrCodeSvgUpdated = await toString(qrCode, options)
-    console.log('qrcode svg updated = ', qrCodeSvgUpdated)
+    console.log('uri updated to ', uri)
+    const qrCodeSvgUpdated = await toString(uri, options)
     setContentParams({
       detailsScreen: WALLET_SELECTION_DETAILS_SCREEN.SCAN,
       qrCodeSvg: qrCodeSvgUpdated,
