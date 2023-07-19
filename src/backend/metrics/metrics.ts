@@ -2,13 +2,13 @@ import { apiObject } from '@rudderstack/rudder-sdk-node'
 import { sendFrontendMessage } from 'backend/main_window'
 import { GameInfo, MetricsOptInStatus } from 'common/types'
 import Store from 'electron-store'
-import web3 from 'web3'
 import { getAppVersion, getFormattedOsName, processIsClosed } from '../utils'
 import { rudderstack } from './rudderstack-client'
 import { PossibleMetricEventNames, PossibleMetricPayloads } from './types'
 import { hrtime } from 'process'
 import find from 'find-process'
 import { backendEvents } from 'backend/backend_events'
+import { ethers } from 'ethers'
 
 /**
  * Our global anonymous id which is used for any events that contain data that
@@ -98,7 +98,7 @@ const METRICS_PARTICIPATION_EVENTS = ['Metrics Opt-in', 'Metrics Opt-out']
  * @returns A random hex string
  */
 function generateRandomId() {
-  return web3.utils.randomHex(24)
+  return ethers.hexlify(ethers.randomBytes(24))
 }
 
 /**

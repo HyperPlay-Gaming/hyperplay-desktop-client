@@ -63,9 +63,9 @@ const EgsSettings = () => {
 
   function handleEgsFolder() {
     if (isLinked) {
-      return ''
+      return
     }
-    return window.api
+    window.api
       .openDialog({
         buttonLabel: t('box.choose'),
         properties: ['openDirectory'],
@@ -107,7 +107,7 @@ const EgsSettings = () => {
           }
           onIconClick={
             !egsPath.length
-              ? () => handleEgsFolder()
+              ? handleEgsFolder
               : () => (isLinked ? '' : setEgsPath(''))
           }
           afterInput={

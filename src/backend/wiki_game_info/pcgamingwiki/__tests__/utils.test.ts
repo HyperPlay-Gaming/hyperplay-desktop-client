@@ -55,7 +55,7 @@ describe('getPCGamingWikiInfo', () => {
   })
 
   test('does not find page id', async () => {
-    const mockAxios = jest.spyOn(axios, 'get').mockResolvedValueOnce({
+    jest.spyOn(axios, 'get').mockResolvedValueOnce({
       data: { cargoquery: [{ title: { pageID: undefined } }] }
     })
 

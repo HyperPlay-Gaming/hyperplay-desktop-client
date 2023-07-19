@@ -42,7 +42,9 @@ function getStringPassedToLogFile(type: logLevel, skipMessagePrefix = false) {
 
 const shouldSkip = platform() === 'win32'
 const skipMessage = 'on windows so skipping test'
-const emptyTest = it('should do nothing', () => {})
+const emptyTest = it('should do nothing', () => {
+  console.log('running empty test')
+})
 
 describe('logger/logger.ts', () => {
   if (shouldSkip) {
@@ -62,7 +64,7 @@ describe('logger/logger.ts', () => {
       .mockImplementation()
 
     interface TestCaseProps {
-      function: Function
+      function: logger.LogFunction
       spyConsole: jest.SpyInstance
     }
 
@@ -95,7 +97,7 @@ describe('logger/logger.ts', () => {
     jest.spyOn(global.console, 'log').mockImplementation()
     jest.spyOn(global.console, 'warn').mockImplementation()
 
-    const testCases = new Map<logLevel, Function>([
+    const testCases = new Map<logLevel, logger.LogFunction>([
       ['ERROR', logger.logError],
       ['INFO', logger.logInfo],
       ['WARNING', logger.logWarning],
@@ -116,7 +118,7 @@ describe('logger/logger.ts', () => {
     jest.spyOn(global.console, 'log').mockImplementation()
     jest.spyOn(global.console, 'warn').mockImplementation()
 
-    const testCases = new Map<logLevel, Function>([
+    const testCases = new Map<logLevel, logger.LogFunction>([
       ['ERROR', logger.logError],
       ['INFO', logger.logInfo],
       ['WARNING', logger.logWarning],

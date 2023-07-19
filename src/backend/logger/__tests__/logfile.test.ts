@@ -17,7 +17,9 @@ let tmpDir = {} as DirResult
 
 const shouldSkip = platform() === 'win32'
 const skipMessage = 'on windows so skipping test'
-const emptyTest = it('should do nothing', () => {})
+const emptyTest = it('should do nothing', () => {
+  console.log('running empty test')
+})
 
 describe('logger/logfile.ts', () => {
   if (shouldSkip) {
@@ -173,11 +175,9 @@ describe('logger/logfile.ts', () => {
   })
 
   test('appendMessageToLogFile fails', () => {
-    const appendFileSyncSpy = jest
-      .spyOn(graceful_fs, 'appendFileSync')
-      .mockImplementation(() => {
-        throw Error('append failed')
-      })
+    jest.spyOn(graceful_fs, 'appendFileSync').mockImplementation(() => {
+      throw Error('append failed')
+    })
 
     logfile.appendMessageToLogFile('Hello World')
     expect(logError).toBeCalledWith(

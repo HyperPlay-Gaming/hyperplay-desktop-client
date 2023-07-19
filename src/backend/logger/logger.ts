@@ -160,8 +160,6 @@ function logBase(
  * @param showDialog set true to show in frontend
  * @defaultvalue {@link LogPrefix.General}
  */
-export function logDebug(input: LogInputType, options?: LogOptions): void
-export function logDebug(input: LogInputType, prefix?: LogPrefix): void
 export function logDebug(
   input: LogInputType,
   options_or_prefix?: LogOptions | LogPrefix
@@ -177,14 +175,14 @@ export function logDebug(
  * @param showDialog set true to show in frontend
  * @defaultvalue {@link LogPrefix.General}
  */
-export function logError(input: LogInputType, options?: LogOptions): void
-export function logError(input: LogInputType, prefix?: LogPrefix): void
 export function logError(
   input: LogInputType,
   options_or_prefix?: LogOptions | LogPrefix
 ) {
   logBase(input, 'ERROR', options_or_prefix)
 }
+
+export type LogFunction = typeof logError
 
 /**
  * Log info messages
@@ -194,8 +192,6 @@ export function logError(
  * @param showDialog set true to show in frontend
  * @defaultvalue {@link LogPrefix.General}
  */
-export function logInfo(input: LogInputType, options?: LogOptions): void
-export function logInfo(input: LogInputType, prefix?: LogPrefix): void
 export function logInfo(
   input: LogInputType,
   options_or_prefix?: LogOptions | LogPrefix
@@ -211,8 +207,6 @@ export function logInfo(
  * @param showDialog set true to show in frontend
  * @defaultvalue {@link LogPrefix.General}
  */
-export function logWarning(input: LogInputType, options?: LogOptions): void
-export function logWarning(input: LogInputType, prefix?: LogPrefix): void
 export function logWarning(
   input: LogInputType,
   options_or_prefix?: LogOptions | LogPrefix

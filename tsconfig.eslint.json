@@ -2,5 +2,5 @@
   // extend your base config so you don't have to redefine your compilerOptions
   "extends": "./tsconfig.json",
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["**/__tests__/**", "**/__mocks__/**"]
+  "exclude": ["**/__mocks__/**"]
 }

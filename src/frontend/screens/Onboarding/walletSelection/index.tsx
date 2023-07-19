@@ -17,8 +17,6 @@ import WalletImportScreen from './screens/import'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { MetaMaskImportOptions } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import {
-  UrisReturn,
-  IMobileRegistryEntryWithQrLink,
   WalletConnectedType,
   ConnectionRequestRejectedType,
   wait
@@ -64,24 +62,15 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
 
   async function providerClicked(provider: PROVIDERS) {
     setShowMetaMaskBrowserSidebarLinks(false)
-    const uris: UrisReturn = await window.api.getConnectionUris(provider)
-    const qrCodeLink: IMobileRegistryEntryWithQrLink = uris.metamask
-    let qrCode = qrCodeLink.qrCodeLink
-
-    // use base wc: uri for wallet connect. mm deeplink breaks some wallets
-    if (provider === PROVIDERS.WALLET_CONNECT) {
-      const mmUriUrl = new URL(qrCode)
-      const urlParams = new URLSearchParams(mmUriUrl.search)
-      const uri = urlParams.get('uri')
-      qrCode = uri ? uri : qrCode
-    }
+    // returns universal link for mm sdk
+    const uri = await window.api.getConnectionUris(provider)
 
     const options: QRCodeToStringOptions = {
       type: 'svg',
       color: { light: '#121212', dark: '#ffffffff' }
     }
-    const qrCodeSvgUpdated = await toString(qrCode, options)
-    console.log('qrcode svg updated = ', qrCodeSvgUpdated)
+    console.log('uri updated to ', uri)
+    const qrCodeSvgUpdated = await toString(uri, options)
     setContentParams({
       detailsScreen: WALLET_SELECTION_DETAILS_SCREEN.SCAN,
       qrCodeSvg: qrCodeSvgUpdated,
