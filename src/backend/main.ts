@@ -1812,6 +1812,10 @@ backendEvents.on('accountsChanged', function (accounts: string[]) {
   getMainWindow()?.webContents.send('accountChanged', accounts)
 })
 
+backendEvents.on('metamaskOtpUpdated', function (otp: string) {
+  getMainWindow()?.webContents.send('metamaskOtpUpdated', otp)
+})
+
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 
 ipcMain.on('providerRequestInitiated', (id, method) => {

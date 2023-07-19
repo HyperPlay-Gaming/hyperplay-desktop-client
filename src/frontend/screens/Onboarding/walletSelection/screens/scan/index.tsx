@@ -4,6 +4,8 @@ import QrCodeGradientBorder from '../../../components/qrCodeGradientBorder'
 import ScanScreenStyles from './index.module.scss'
 import { WarningIcon } from 'frontend/assets/hyperplay'
 import { Button } from '@hyperplay/ui'
+import walletStore from 'frontend/store/WalletStore'
+import { observer } from 'mobx-react-lite'
 
 interface ScanScreenProps {
   qrCodeSvg: string
@@ -13,6 +15,7 @@ interface ScanScreenProps {
 const ScanScreen = (props: ScanScreenProps) => {
   const blob = new Blob([props.qrCodeSvg], { type: 'image/svg+xml' })
   const url = URL.createObjectURL(blob)
+  const oneTimePasscode = walletStore.otp
 
   return (
     <>
@@ -57,6 +60,12 @@ const ScanScreen = (props: ScanScreenProps) => {
           {t('hyperplay.copyUrl', 'Copy URL')}
         </Button>
       ) : null}
+
+      {props.providerName.toLowerCase().includes('metamask') && oneTimePasscode !== '' ? (
+        <div className={`body-sm  ${ScanScreenStyles.otp}`}>
+          {t('hyperplay.otp', 'One Time Passcode')}: {oneTimePasscode}
+        </div>)
+      :null}
       <div className={`body-sm ${ScanScreenStyles.walletWarning}`}>
         <WarningIcon height={15} fill={'var(--color-status-alert)'} />
         <div>
@@ -70,4 +79,4 @@ const ScanScreen = (props: ScanScreenProps) => {
   )
 }
 
-export default ScanScreen
+export default observer(ScanScreen)
