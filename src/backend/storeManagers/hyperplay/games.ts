@@ -418,6 +418,14 @@ export async function install(
   }
 }
 
+export function appIsInLibrary(appName: string): boolean {
+  const appInfo = hpLibraryStore
+    .get('games', [])
+    .find((app) => app.app_name === appName)
+
+  return !!appInfo
+}
+
 export function getGameInfo(appName: string): GameInfo {
   const appInfo = hpLibraryStore
     .get('games', [])

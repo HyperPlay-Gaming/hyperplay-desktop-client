@@ -50,9 +50,9 @@ export async function addGameToLibrary(projectId: string) {
   }
 
   const listingUrl = getValistListingApiUrl(projectId)
-  const res = await axios.get<HyperPlayRelease[]>(listingUrl)
+  const res = await axios.get<HyperPlayRelease>(listingUrl)
 
-  const data = res.data[0]
+  const data = res.data
   const gameInfo = getGameInfoFromHpRelease(data)
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 }
@@ -169,7 +169,6 @@ export async function refresh() {
   for (const gameId of currentLibraryIds) {
     try {
       const gameData = hpStoreGameMap[gameId]
-      console.log('game data in refresh = ', gameData)
 
       if (!gameData) {
         logWarning(

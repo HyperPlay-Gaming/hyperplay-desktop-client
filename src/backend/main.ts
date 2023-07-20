@@ -143,6 +143,7 @@ import {
 } from './main_window'
 import { addGameToLibrary } from './storeManagers/hyperplay/library'
 
+import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
@@ -802,6 +803,11 @@ ipcMain.on('createNewWindow', (e, url) => {
 ipcMain.handle('isGameAvailable', async (e, args) => {
   const { appName, runner } = args
   return gameManagerMap[runner].isGameAvailable(appName)
+})
+
+ipcMain.handle('appIsInLibrary', async (event, appName, runner) => {
+  if (runner !== 'hyperplay') return false
+  return HyperPlayGameManager.appIsInLibrary(appName)
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {

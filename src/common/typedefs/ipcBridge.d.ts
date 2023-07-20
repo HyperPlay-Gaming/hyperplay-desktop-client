@@ -192,6 +192,7 @@ interface HyperPlayAsyncIPCFunctions {
   showPopup: (hideIfShown: boolean) => Promise<boolean>
   removeTempDownloadFiles: (appName: string) => Promise<void>
   getImportFolderPath: () => Promise<string>
+  appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

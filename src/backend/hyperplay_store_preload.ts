@@ -15,5 +15,7 @@ contextBridge.exposeInMainWorld('api', {
   openExternalUrl: (url: string) => ipcRenderer.send('openExternalUrl', url),
   openGameInEpicStore: (url: string) =>
     ipcRenderer.send('openGameInEpicStore', url),
-  apiVersion: 1
+  apiVersion: 1,
+  appIsInLibrary: async (gameId: string) =>
+    ipcRenderer.invoke('appIsInLibrary', gameId, 'hyperplay')
 })
