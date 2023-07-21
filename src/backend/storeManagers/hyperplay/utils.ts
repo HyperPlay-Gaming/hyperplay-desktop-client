@@ -7,13 +7,27 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import { getTitleFromEpicStoreUrl } from 'backend/utils'
-import { valistListingsApiUrl } from 'backend/constants'
+import { getValistListingApiUrl, valistListingsApiUrl } from 'backend/constants'
 
 export async function getHyperPlayStoreRelease(appName: string) {
-  const gameIdUrl = `https://developers.hyperplay.xyz/api/listings?id=${appName}`
+  const gameIdUrl = getValistListingApiUrl(appName)
   const res = await axios.get<HyperPlayRelease[]>(gameIdUrl)
   const data = res.data[0]
   return data
+}
+
+export async function getHyperPlayReleaseMap() {
+  const hpStoreGameReleases = (
+    await axios.get<HyperPlayRelease[]>(valistListingsApiUrl)
+  ).data
+
+  const hpStoreGameMap = new Map<string, HyperPlayRelease>()
+
+  hpStoreGameReleases.forEach((val) => {
+    hpStoreGameMap.set(val.project_id, val)
+  })
+
+  return hpStoreGameMap
 }
 
 export function handleArchAndPlatform(

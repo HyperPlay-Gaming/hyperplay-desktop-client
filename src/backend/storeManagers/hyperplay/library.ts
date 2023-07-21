@@ -11,27 +11,12 @@ import axios from 'axios'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
 import {
   getGameInfoFromHpRelease,
+  getHyperPlayReleaseMap,
   handleArchAndPlatform,
   refreshGameInfoFromHpRelease
 } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
-import { getValistListingApiUrl, valistListingsApiUrl } from 'backend/constants'
-
-async function getHyperPlayReleaseMap() {
-  const hpStoreGameReleases = (
-    await axios.get<HyperPlayRelease[]>(valistListingsApiUrl)
-  ).data
-  interface hpStoreGameMapType {
-    [key: string]: HyperPlayRelease | undefined
-  }
-  const hpStoreGameMap: hpStoreGameMapType = {}
-
-  hpStoreGameReleases.forEach((val) => {
-    hpStoreGameMap[val.project_id] = val
-  })
-
-  return hpStoreGameMap
-}
+import { getValistListingApiUrl } from 'backend/constants'
 
 export async function addGameToLibrary(projectId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -125,8 +110,7 @@ export const getInstallInfo = async (
   }
 }
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export function installState(appName: string, state: boolean) {
   logWarning(`installState not implemented on HyperPlay Library Manager`)
 }
@@ -168,7 +152,7 @@ export async function refresh() {
 
   for (const gameId of currentLibraryIds) {
     try {
-      const gameData = hpStoreGameMap[gameId]
+      const gameData = hpStoreGameMap.get(gameId)
 
       if (!gameData) {
         logWarning(
@@ -190,7 +174,9 @@ export async function refresh() {
 }
 
 export function getGameInfo(
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   appName: string,
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   forceReload?: boolean
 ): GameInfo | undefined {
   logWarning(`getGameInfo not implemented on HyperPlay Library Manager`)
@@ -202,8 +188,6 @@ export function getGameInfo(
  * since library release data is updated on each app launch
  */
 export async function listUpdateableGames(): Promise<string[]> {
-  const listingMap = await getHyperPlayReleaseMap()
-
   const updateableGames: string[] = []
   const currentHpLibrary = hpLibraryStore.get('games', [])
 
@@ -247,6 +231,7 @@ export async function listUpdateableGames(): Promise<string[]> {
   return updateableGames
 }
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export async function runRunnerCommand(
   commandParts: string[],
   abortController: AbortController,
@@ -264,3 +249,4 @@ export async function changeGameInstallPath(
     `changeGameInstallPath not implemented on HyperPlay Library Manager`
   )
 }
+/* eslint-enable @typescript-eslint/no-unused-vars */
