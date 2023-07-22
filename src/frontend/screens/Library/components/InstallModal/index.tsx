@@ -68,8 +68,12 @@ export default React.memo(function InstallModal({
   const isLinux = platform === 'linux'
   const isSideload = runner === 'sideload'
 
-  const { releaseMeta = { platforms: {} } } = { ...gameInfo }
-  const hpPlatforms = Object.keys(releaseMeta.platforms) as AppPlatforms[]
+  const channelPlatforms =
+    (gameInfo !== null &&
+      gameInfo.channels !== undefined &&
+      gameInfo.channels[channelNameToInstall].release_meta.platforms) ??
+    []
+  const hpPlatforms = Object.keys(channelPlatforms) as AppPlatforms[]
   const isHpGame = runner === 'hyperplay'
 
   const isLinuxNative = isHpGame

@@ -518,12 +518,12 @@ export default function DownloadDialog({
           }
         />
         {children}
-        {(haveDLCs || haveSDL) && (
+        {haveDLCs || haveSDL ? (
           <div className="InstallModal__sectionHeader">
             {t('sdl.title', 'Select components to Install')}:
           </div>
-        )}
-        {haveSDL && (
+        ) : null}
+        {haveSDL ? (
           <div className="InstallModal__sdls">
             {sdls.map((sdl: SelectiveDownload, idx: number) => (
               <label
@@ -541,8 +541,8 @@ export default function DownloadDialog({
               </label>
             ))}
           </div>
-        )}
-        {haveDLCs && (
+        ) : null}
+        {haveDLCs ? (
           <div className="InstallModal__dlcs">
             <label className={classNames('InstallModal__toggle toggleWrapper')}>
               <ToggleSwitch
@@ -557,7 +557,7 @@ export default function DownloadDialog({
               {DLCList?.map(({ title }) => title).join(', ')}
             </div>
           </div>
-        )}
+        ) : null}
       </DialogContent>
       <DialogFooter>
         <Button

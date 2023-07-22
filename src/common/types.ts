@@ -159,6 +159,7 @@ export interface GameInfo {
   project_name?: string
   //data schema version
   v?: string
+  account_name?: string
 }
 
 export interface GameSettings {

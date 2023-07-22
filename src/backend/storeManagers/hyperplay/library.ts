@@ -51,13 +51,6 @@ export const getInstallInfo = async (
 ): Promise<HyperPlayInstallInfo | undefined> => {
   const gameInfo = getGamesGameInfo(appName)
 
-  console.log(
-    'for channel = ',
-    channelNameToInstall,
-    ' game info = ',
-    JSON.stringify(gameInfo, null, 4)
-  )
-
   if (
     gameInfo.channels === undefined ||
     gameInfo.channels[channelNameToInstall].release_meta === undefined
@@ -211,9 +204,7 @@ export async function listUpdateableGames(): Promise<string[]> {
       }
       if (
         val.install.version !==
-        val.channels[val.install.channelName].release_meta.platforms[
-          val.install.platform
-        ].name
+        val.channels[val.install.channelName].release_meta.name
       ) {
         updateableGames.push(val.app_name)
       }

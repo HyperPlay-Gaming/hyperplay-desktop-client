@@ -294,17 +294,21 @@ export async function install(
   }
 
   const gameInfo = getGameInfo(appName)
-  const { title, channels, developer } = gameInfo
+  const { title, channels } = gameInfo
   const window = getMainWindow()
   if (!window) return { status: 'error', error: 'Window undefined' }
 
-  if (!channelName || !channels) {
-    return { status: 'error', error: 'Channel name not found' }
+  if (
+    channelName === undefined ||
+    channels === undefined ||
+    !Object.hasOwn(channels, channelName)
+  ) {
+    return { status: 'error', error: `Channel name not found for ${appName}` }
   }
 
   const releaseMeta = channels[channelName].release_meta
   if (!releaseMeta) {
-    return { status: 'error', error: 'Release meta not found' }
+    return { status: 'error', error: `Release meta not found for ${appName}` }
   }
   const releaseVersion: string | undefined = releaseMeta.name
 
@@ -312,7 +316,7 @@ export async function install(
   const platformInfo = releaseMeta.platforms[appPlatform]
 
   if (!platformInfo) {
-    return { status: 'error', error: 'Platform info not found' }
+    return { status: 'error', error: `Platform info not found for ${appName}` }
   }
 
   logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
@@ -320,12 +324,23 @@ export async function install(
 
   // download the zip file
   try {
-    // prevent naming conflicts where two developers release games with the same name
-    const sanitizedDestinationFolderName =
-      developer !== undefined
-        ? sanitizeFileName(developer) + ' - ' + sanitizeFileName(title)
-        : sanitizeFileName(title)
-    const destinationPath = path.join(dirpath, sanitizedDestinationFolderName)
+    if (
+      gameInfo.account_name === undefined ||
+      gameInfo.project_name === undefined
+    ) {
+      return {
+        status: 'error',
+        error: `Account or project name is undefined for ${appName}`
+      }
+    }
+    const accountFolderName = sanitizeFileName(gameInfo.account_name)
+    const projectFolderName = sanitizeFileName(gameInfo.project_name)
+
+    const destinationPath = path.join(
+      dirpath,
+      accountFolderName,
+      projectFolderName
+    )
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }

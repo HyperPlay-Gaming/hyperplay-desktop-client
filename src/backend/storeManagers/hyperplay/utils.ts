@@ -9,10 +9,12 @@ import axios from 'axios'
 import { getTitleFromEpicStoreUrl } from 'backend/utils'
 import { getValistListingApiUrl, valistListingsApiUrl } from 'backend/constants'
 
-export async function getHyperPlayStoreRelease(appName: string) {
+export async function getHyperPlayStoreRelease(
+  appName: string
+): Promise<HyperPlayRelease> {
   const gameIdUrl = getValistListingApiUrl(appName)
-  const res = await axios.get<HyperPlayRelease[]>(gameIdUrl)
-  const data = res.data[0]
+  const res = await axios.get<HyperPlayRelease>(gameIdUrl)
+  const data = res.data
   return data
 }
 
@@ -121,7 +123,9 @@ export function refreshGameInfoFromHpRelease(
     currentInfo.install.channelName !== undefined
   ) {
     const installedChannelName = currentInfo.install.channelName
-    latestVersion = data.channels[installedChannelName].release_meta.name
+    latestVersion = data.channels.find(
+      (val) => val.channel_name === installedChannelName
+    )?.release_meta.name
   }
 
   let hasWindowsNativeBuild = false
@@ -188,7 +192,8 @@ export function refreshGameInfoFromHpRelease(
     canRunOffline: false,
     cloud_save_enabled: false,
     is_mac_native: hasMacNativeBuild,
-    is_linux_native: hasLinuxNativeBuild
+    is_linux_native: hasLinuxNativeBuild,
+    account_name: data.account_name
   }
 }
 
@@ -196,6 +201,16 @@ export function refreshGameInfoFromHpRelease(
  * This is called when adding game to library and not during refresh
  */
 export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
+  // automatically "install" browser only games with 1 channel
+  let isOnlyWeb = false
+  const platforms = data.channels[0].release_meta.platforms
+  const platformKeys = Object.keys(platforms)
+  if (
+    data.channels.length === 1 &&
+    platformKeys.length === 1 &&
+    platformKeys[0] === 'web'
+  )
+    isOnlyWeb = true
   // these are either values that should be set on initial add and not on every refreshed
   // or they are required to complete the gameinfo type
   // todo: refactor refreshGameInfoFromHpRelease to accept Partial<GameInfo>
@@ -205,17 +220,22 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
       runner: 'hyperplay',
       app_name: data.project_id,
       thirdPartyManagedApp: undefined,
-      is_installed: false,
+      is_installed: isOnlyWeb,
       cloud_save_enabled: false,
       namespace: '',
       folder_name: data.project_name,
       save_folder: '',
       canRunOffline: false,
-      install: {},
+      install: isOnlyWeb
+        ? { platform: 'web', channelName: data.channels[0].channel_name }
+        : {},
       //required to complete type
       art_square: 'fallback',
       art_cover: 'fallback',
-      title: data.project_meta.name ? data.project_meta.name : data.project_name
+      title: data.project_meta.name
+        ? data.project_meta.name
+        : data.project_name,
+      browserUrl: isOnlyWeb ? platforms['web']?.external_url : undefined
     },
     data
   )
