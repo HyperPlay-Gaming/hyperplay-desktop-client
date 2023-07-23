@@ -25,7 +25,7 @@ import i18next from 'i18next'
 import { dirname, join } from 'path'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
-import { validWine } from './launcher'
+import { runWineCommand, validWine } from './launcher'
 import { chmod } from 'fs/promises'
 import {
   any_gpu_supports_version,
@@ -203,43 +203,24 @@ export const DXVK = {
         })
       }
 
-      logInfo(`Removing ${tool} files`, LogPrefix.DXVKInstaller)
-
-      // remove the dlls from the prefix
-      await new Promise((resolve) => {
-        dlls.forEach((dll) => {
-          const dllPath = `${winePrefix}/drive_c/windows/system32/${dll}`
-          if (existsSync(`${dllPath}.bak`)) {
-            const removeDll = `rm ${dllPath}`
-            exec(removeDll)
-          }
-
-          const dllPath64 = `${winePrefix}/drive_c/windows/syswow64/${dll}`
-          if (existsSync(`${dllPath}.bak`)) {
-            const removeDll = `rm ${dllPath64}`
-            exec(removeDll)
-          }
-        })
-        resolve(true)
-      })
-
-      // run wineboot -u restore the old dlls
-      const restoreDlls = `WINEPREFIX='${winePrefix}' '${wineBin}' wineboot -u`
-      logInfo('Restoring old dlls', LogPrefix.DXVKInstaller)
-      await execAsync(restoreDlls)
+      logInfo('Removing DLL overrides', LogPrefix.DXVKInstaller)
 
       // unregister the dlls on the wine prefix
       dlls.forEach(async (dll) => {
         dll = dll.replace('.dll', '')
-        const unregisterDll = `WINEPREFIX='${winePrefix}' '${wineBin}' reg delete 'HKEY_CURRENT_USER\\Software\\Wine\\DllOverrides' /v ${dll} /f`
-        logInfo(`Unregistering ${dll}`, LogPrefix.DXVKInstaller)
-        exec(unregisterDll, (error) => {
-          if (error) {
-            logError(
-              [`Error when unregistering ${dll}`, error],
-              LogPrefix.DXVKInstaller
-            )
-          }
+        const unregisterDll = [
+          'reg',
+          'delete',
+          'HKEY_CURRENT_USER\\Software\\Wine\\DllOverrides',
+          '/v',
+          dll,
+          '/f'
+        ]
+        await runWineCommand({
+          gameSettings,
+          commandParts: unregisterDll,
+          wait: true,
+          protonVerb: 'waitforexitandrun'
         })
       })
       return true
