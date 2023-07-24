@@ -321,8 +321,10 @@ class GlobalConfigV0 extends GlobalConfig {
         name: userName
       },
       wineCrossoverBottle: 'HyperPlay',
-      winePrefix: isWindows ? defaultWine : `${userHome}/.wine`,
-      wineVersion: isWindows ? {} : defaultWine
+      winePrefix: isWindows ? '' : defaultWinePrefix,
+      wineVersion: defaultWine,
+      enableEsync: true,
+      enableFsync: true
     } as AppSettings
   }
 

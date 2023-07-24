@@ -11,7 +11,8 @@ import {
   GameInfo,
   InstallArgs,
   InstallPlatform,
-  InstallProgress
+  InstallProgress,
+  WineCommandArgs
 } from 'common/types'
 import { GameConfig } from '../../game_config'
 import { GlobalConfig } from '../../config'
@@ -48,7 +49,8 @@ import {
   setupEnvVars,
   setupWrappers,
   launchCleanup,
-  getRunnerCallWithoutCredentials
+  getRunnerCallWithoutCredentials,
+  runWineCommand as runWineCommandUtil
 } from '../../launcher'
 import {
   addShortcuts as addShortcutsUtil,
@@ -822,7 +824,16 @@ export async function launch(
   let commandEnv = isWindows
     ? process.env
     : { ...process.env, ...setupEnvVars(gameSettings) }
-  let wineFlag: string[] = []
+
+  const wrappers = setupWrappers(
+    gameSettings,
+    mangoHudCommand,
+    gameModeBin,
+    steamRuntime?.length ? [...steamRuntime] : undefined
+  )
+
+  let wineFlag: string[] = ['--wrapper', shlex.join(wrappers)]
+
   if (!isNative(appName)) {
     // -> We're using Wine/Proton on Linux or CX on Mac
     const {
@@ -858,7 +869,7 @@ export async function launch(
         ? wineExec.replaceAll("'", '')
         : wineExec
 
-    wineFlag = getWineFlags(wineBin, wineType)
+    wineFlag = [...getWineFlags(wineBin, wineType, shlex.join(wrappers))]
   }
 
   // Log any launch information configured in Legendary's config.ini
@@ -897,17 +908,10 @@ export async function launch(
     isCLINoGui ? '--skip-version-check' : '',
     ...shlex.split(gameSettings.launcherArgs ?? '')
   ]
-  const wrappers = setupWrappers(
-    gameSettings,
-    mangoHudCommand,
-    gameModeBin,
-    steamRuntime?.length ? [...steamRuntime] : undefined
-  )
 
   const fullCommand = getRunnerCallWithoutCredentials(
     commandParts,
     commandEnv,
-    wrappers,
     join(...Object.values(getLegendaryBin()))
   )
   appendFileSync(
@@ -1004,4 +1008,27 @@ export function isGameAvailable(appName: string) {
     }
   }
   return false
+}
+
+export async function runWineCommandOnGame(
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  if (isNative(appName)) {
+    logError('runWineCommand called on native game!', LogPrefix.Legendary)
+    return { stdout: '', stderr: '' }
+  }
+
+  const { folder_name, install } = getGameInfo(appName)
+  const gameSettings = await getSettings(appName)
+
+  return runWineCommandUtil({
+    gameSettings,
+    gameInstallPath: install.install_path,
+    installFolderName: folder_name,
+    commandParts,
+    wait,
+    protonVerb,
+    startFolder
+  })
 }
