@@ -92,7 +92,7 @@
         "neverPlayed": "Never",
         "platform": "Select Platform",
         "requirements": "System Requirements",
-        "selectReleaseName": "Select Release Name",
+        "selectChannelName": "Select Channel Name",
         "totalPlayed": "Time Played"
     },
     "gamecard": {

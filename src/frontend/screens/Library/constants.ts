@@ -24,18 +24,16 @@ export function translateChannelName(
   t: TFunction<'translation'>
 ) {
   switch (channelNameEnglish) {
-    case 'Demo':
+    case 'demo':
       return t('gameRelease.demo', 'Demo')
-    case 'Prototype':
+    case 'prototype':
       return t('gameRelease.prototype', 'Prototype')
-    case 'Alpha':
+    case 'alpha':
       return t('gameRelease.alpha', 'Alpha')
-    case 'Beta':
+    case 'beta':
       return t('gameRelease.beta', 'Beta')
-    case 'Current Release':
-      return t('gameRelease.currentRelease', 'Current Release')
-    case 'Latest':
-      return t('gameRelease.latest', 'Latest')
+    case 'main':
+      return t('gameRelease.main', 'Main')
     default:
       return channelNameEnglish
   }
