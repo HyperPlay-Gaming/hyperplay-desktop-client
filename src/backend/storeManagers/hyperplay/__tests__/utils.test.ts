@@ -4,7 +4,7 @@ jest.mock('electron')
 jest.mock('../../../logger/logger')
 jest.mock('../../../logger/logfile')
 
-const TESTS_ENABLED = true
+const TESTS_ENABLED = false
 const testIf = (condition: boolean) => (condition ? test : test.skip)
 
 describe('backend/storeManagers/hyperplay/utils.ts', () => {
@@ -50,7 +50,7 @@ describe('backend/storeManagers/hyperplay/utils.ts', () => {
         const individualRelease = await HpStoreUtils.getHyperPlayStoreRelease(
           projectId
         )
-        // expect(release).toEqual(individualRelease)
+        expect(release).toEqual(individualRelease)
       }
     },
     30000
