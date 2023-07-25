@@ -4,6 +4,24 @@ import { IpcRendererEvent } from 'electron'
 import { ChildProcess } from 'child_process'
 import { HowLongToBeatEntry } from 'howlongtobeat'
 import 'i18next'
+import {
+  WineSupport,
+  SystemRequirements,
+  SupportedPlatform as AppPlatforms
+} from '@valist/sdk/dist/typesShared'
+import { Channel } from '@valist/sdk/dist/typesApi'
+
+export type {
+  Listing as HyperPlayRelease,
+  ProjectMetaApi as HyperPlayProjectMeta,
+  ChannelReleaseMeta
+} from '@valist/sdk/dist/typesApi'
+export type {
+  AccountMetaInterface as HyperPlayAccountMeta,
+  PlatformsMetaInterface as ValistPlatforms,
+  SupportedPlatform as AppPlatforms,
+  PlatformConfig
+} from '@valist/sdk/dist/typesShared'
 
 // fix for i18next https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
 declare module 'i18next' {
@@ -131,12 +149,17 @@ export interface GameInfo {
   is_windows_native?: boolean
   browserUrl?: string
   web3?: Web3Features
-  releaseMeta?: HyperPlayReleaseMeta
   description?: string
   wineSupport?: WineSupport
   systemRequirements?: SystemRequirements
   //used for store release versions. if remote !== local, then update
   version?: string
+  // key is channel name
+  channels?: { [key: string]: Channel }
+  project_name?: string
+  //data schema version
+  v?: string
+  account_name?: string
 }
 
 export interface GameSettings {
@@ -223,6 +246,7 @@ export interface InstalledInfo {
   language?: string // For verifing GOG games
   versionEtag?: string // Checksum for checking GOG updates
   buildId?: string // For verifing GOG games
+  channelName?: string // HP store game channel. Channel to check updates for
 }
 
 export interface Reqs {
@@ -254,6 +278,7 @@ export interface InstallArgs {
   installDlcs?: boolean
   sdlList?: string[]
   installLanguage?: string
+  channelName?: string
 }
 
 export interface InstallParams extends InstallArgs {
@@ -733,56 +758,6 @@ export enum MetricsOptInStatus {
   undecided = 'UNDECIDED'
 }
 
-// Deals with games from Valist
-
-interface GalleryItem {
-  name: string
-  type: string
-  src: string
-}
-
-interface SystemRequirements {
-  cpu: string
-  gpu: string
-  memory: string
-  disk: string
-  ram: string
-}
-
-interface WineSupport {
-  mac: boolean
-  linux: boolean
-}
-
-interface HyperPlayProjectMeta {
-  image: string
-  main_capsule: string
-  name: string
-  short_description: string
-  description: string
-  external_url: string
-  type: string
-  tags: string[]
-  gallery: GalleryItem[]
-  launch_external: boolean
-  donation_address: string
-  prompt_donation: boolean
-  systemRequirements: SystemRequirements
-  wineSupport: WineSupport
-  networks: string[]
-  launch_epic?: boolean
-  epic_game_url?: string
-}
-
-export type AppPlatforms =
-  | 'windows_amd64'
-  | 'windows_arm64'
-  | 'linux_amd64'
-  | 'linux_arm64'
-  | 'darwin_amd64'
-  | 'darwin_arm64'
-  | 'web'
-
 export interface DLCInfo {
   app_name: string
   title: string
@@ -796,50 +771,12 @@ export interface LaunchOption {
 export type PlatformInfo = {
   external_url: string
   name: string
-  executable: string
-  installSize: number
-  downloadSize: number
-  launch_options: Array<LaunchOption>
-  owned_dlc: Array<DLCInfo>
+  executable?: string
+  installSize?: string
+  downloadSize?: string
+  launch_options?: Array<LaunchOption>
+  owned_dlc?: Array<DLCInfo>
   processName?: string
-}
-
-export type ValistPlatforms = {
-  [key in AppPlatforms]: PlatformInfo
-}
-
-export interface HyperPlayReleaseMeta {
-  _metadata_version: string
-  path: string
-  name: string
-  description: string
-  external_url: string
-  platforms: ValistPlatforms
-  image: string
-}
-
-export interface HyperPlayAccountMeta {
-  name: string
-  description: string
-  external_url: string
-  image: string
-}
-
-export interface HyperPlayRelease {
-  _id: string
-  accountID: string
-  projectID: string
-  accountName: string
-  projectName: string
-  releaseID: string
-  releaseMetaURI: string
-  releaseName: string
-  status: string
-  timestamp: number
-  projectMetaURI: string
-  projectMeta: HyperPlayProjectMeta
-  releaseMeta: HyperPlayReleaseMeta
-  accountMeta: HyperPlayAccountMeta
 }
 
 export interface HyperPlayInstallInfo {

@@ -8,9 +8,6 @@ import {
   GameInfo
 } from 'common/types'
 
-export const removeTempDownloadFiles = async (appName: string) =>
-  ipcRenderer.invoke('removeTempDownloadFiles', appName)
-
 export const openDialog = async (args: Electron.OpenDialogOptions) =>
   ipcRenderer.invoke('openDialog', args)
 

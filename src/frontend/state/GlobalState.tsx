@@ -40,7 +40,6 @@ import {
   metricsStore,
   wineDownloaderInfoStore,
   sideloadLibrary,
-  hpInstalledGamesStore,
   hyperPlayLibraryStore
 } from 'frontend/helpers/electronStores'
 import { InstallModal } from 'frontend/screens/Library/components'
@@ -116,10 +115,7 @@ class GlobalState extends PureComponent<Props> {
   loadGOGLibrary = (): Array<GameInfo> => {
     const games = gogLibraryStore.get('games', [])
 
-    const installedGames = [
-      ...gogInstalledGamesStore.get('installed', []),
-      ...hpInstalledGamesStore.get('installed', [])
-    ]
+    const installedGames = [...gogInstalledGamesStore.get('installed', [])]
     for (const igame in games) {
       for (const installedGame of installedGames) {
         if (installedGame.appName === games[igame].app_name) {

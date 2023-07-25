@@ -11,18 +11,20 @@ import axios from 'axios'
 import { logInfo, LogPrefix, logError, logWarning } from 'backend/logger/logger'
 import {
   getGameInfoFromHpRelease,
+  getHyperPlayReleaseMap,
   handleArchAndPlatform,
   refreshGameInfoFromHpRelease
 } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
+import { getValistListingApiUrl } from 'backend/constants'
 
-export async function addGameToLibrary(appId: string) {
+export async function addGameToLibrary(projectId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
 
   // TODO refactor this to constant time check with a set
   // not important for alpha release
   const sameGameInLibrary = currentLibrary.find((val) => {
-    return val.app_name === appId
+    return val.app_name === projectId
   })
 
   if (sameGameInLibrary !== undefined) {
@@ -32,32 +34,50 @@ export async function addGameToLibrary(appId: string) {
     return
   }
 
-  const res = await axios.get<HyperPlayRelease[]>(
-    `https://developers.hyperplay.xyz/api/listings?id=${appId}`
-  )
+  const listingUrl = getValistListingApiUrl(projectId)
+  const res = await axios.get<HyperPlayRelease>(listingUrl)
 
-  const data = res.data[0]
+  const data = res.data
   const gameInfo = getGameInfoFromHpRelease(data)
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 }
 
 export const getInstallInfo = async (
   appName: string,
-  platformToInstall: InstallPlatform
+  platformToInstall: InstallPlatform,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  lang = 'en',
+  channelNameToInstall = 'main'
 ): Promise<HyperPlayInstallInfo | undefined> => {
   const gameInfo = getGamesGameInfo(appName)
-  if (!gameInfo || !gameInfo.releaseMeta) {
+
+  if (
+    gameInfo.channels === undefined ||
+    gameInfo.channels[channelNameToInstall].release_meta === undefined
+  ) {
+    console.error(
+      'Channels or Release Meta were undefined in getInstallInfo for HyperPlay Library Manager'
+    )
     return undefined
   }
+
+  const releaseMeta = gameInfo.channels[channelNameToInstall].release_meta
 
   logInfo(`Getting install info for ${gameInfo.title}`, LogPrefix.HyperPlay)
 
   const requestedPlatform = handleArchAndPlatform(
     platformToInstall,
-    gameInfo.releaseMeta
+    releaseMeta
   )
 
-  const info = gameInfo.releaseMeta.platforms[requestedPlatform]
+  const info = releaseMeta.platforms[requestedPlatform]
+
+  if (info === undefined) {
+    console.error(
+      'Info was undefined in getInstallInfo for HyperPlay Library Manager'
+    )
+    return undefined
+  }
 
   if (!info) {
     logError(
@@ -66,10 +86,14 @@ export const getInstallInfo = async (
     )
     return undefined
   }
-  const download_size = info.downloadSize
-  const install_size = info.installSize
+  const download_size = info.downloadSize ? parseInt(info.downloadSize) : 0
+  const install_size = info.installSize ? parseInt(info.installSize) : 0
   return {
-    game: info,
+    game: {
+      ...info,
+      owned_dlc: [],
+      launch_options: []
+    },
     manifest: {
       download_size,
       install_size,
@@ -79,8 +103,7 @@ export const getInstallInfo = async (
   }
 }
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
+/* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 export function installState(appName: string, state: boolean) {
   logWarning(`installState not implemented on HyperPlay Library Manager`)
 }
@@ -118,15 +141,11 @@ const defaultExecResult = {
 export async function refresh() {
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
   const currentLibraryIds = currentLibrary.map((val) => val.app_name)
-  const data = (
-    await axios.get<HyperPlayRelease[]>(
-      'https://developers.hyperplay.xyz/api/listings'
-    )
-  ).data
+  const hpStoreGameMap = await getHyperPlayReleaseMap()
 
   for (const gameId of currentLibraryIds) {
     try {
-      const gameData = data.find((val) => val._id === gameId)
+      const gameData = hpStoreGameMap.get(gameId)
 
       if (!gameData) {
         logWarning(
@@ -148,7 +167,9 @@ export async function refresh() {
 }
 
 export function getGameInfo(
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   appName: string,
+  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   forceReload?: boolean
 ): GameInfo | undefined {
   logWarning(`getGameInfo not implemented on HyperPlay Library Manager`)
@@ -160,21 +181,9 @@ export function getGameInfo(
  * since library release data is updated on each app launch
  */
 export async function listUpdateableGames(): Promise<string[]> {
-  const allListingsResponse = await axios.get(
-    'https://developers.hyperplay.xyz/api/listings'
-  )
-  interface listingMapType {
-    [key: string]: HyperPlayRelease
-  }
-  const listingMap: listingMapType = {}
-  const allListingsRemote = allListingsResponse.data as HyperPlayRelease[]
-
-  allListingsRemote.forEach((element) => {
-    listingMap[element._id] = element
-  })
-
   const updateableGames: string[] = []
   const currentHpLibrary = hpLibraryStore.get('games', [])
+
   currentHpLibrary.map((val) => {
     if (
       val.install.platform === 'web' ||
@@ -183,14 +192,29 @@ export async function listUpdateableGames(): Promise<string[]> {
     ) {
       return
     }
-    if (val.version === undefined) {
-      updateableGames.push(val.app_name)
-    }
-    if (
-      Object.hasOwn(listingMap, val.app_name) &&
-      val.install.version !== listingMap[val.app_name].releaseName
-    ) {
-      updateableGames.push(val.app_name)
+
+    if (!gameIsInstalled(val)) return
+
+    if (val.channels && val.install.channelName && val.install.platform) {
+      if (!Object.hasOwn(val.channels, val.install.channelName)) {
+        console.error(`
+        Cannot find installed channel name in channels. 
+        The channel name may have been changed by the remote.
+        To continue to receive game updates, uninstall and reinstall this game: ${val.title}`)
+      }
+      if (
+        val.install.version !==
+          val.channels[val.install.channelName].release_meta.name
+            ?.toLowerCase()
+            .replaceAll(' ', '') ||
+        ''
+      ) {
+        updateableGames.push(val.app_name)
+      }
+    } else {
+      console.error(
+        `Error in listUpdateableGames: val.channels ${val.channels} or val.install.channelName ${val.install.channelName} or val.install.platform ${val.install.platform} is undefined'`
+      )
     }
   })
 
@@ -201,6 +225,7 @@ export async function listUpdateableGames(): Promise<string[]> {
   return updateableGames
 }
 
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export async function runRunnerCommand(
   commandParts: string[],
   abortController: AbortController,
@@ -218,3 +243,4 @@ export async function changeGameInstallPath(
     `changeGameInstallPath not implemented on HyperPlay Library Manager`
   )
 }
+/* eslint-enable @typescript-eslint/no-unused-vars */

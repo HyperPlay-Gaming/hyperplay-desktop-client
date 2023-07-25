@@ -184,8 +184,20 @@ const openNewBrowserGameWindow = async (
 
 export function getGameProcessName(gameInfo: GameInfo): string | undefined {
   const installedPlatform = gameInfo.install.platform
-  if (installedPlatform === undefined) return
-  return gameInfo.releaseMeta?.platforms[installedPlatform]?.processName
+  const channelName = gameInfo.install.channelName
+  if (
+    installedPlatform === undefined ||
+    channelName === undefined ||
+    gameInfo.channels === undefined
+  ) {
+    console.error(
+      `Cannot get game process name installedPlatform ${installedPlatform} or channelName ${channelName} or gameInfo.channels ${gameInfo.channels} is undefined`
+    )
+    return
+  }
+  return gameInfo.channels[channelName].release_meta.platforms[
+    installedPlatform
+  ]?.processName
 }
 
 export async function launchGame(

@@ -58,6 +58,7 @@ interface Props {
   wineVersion: WineInstallation | undefined
   children: React.ReactNode
   gameInfo: GameInfo
+  channelNameToInstall: string
 }
 
 type DiskSpaceInfo = {
@@ -110,7 +111,8 @@ export default function DownloadDialog({
   wineVersion,
   children,
   gameInfo,
-  crossoverBottle
+  crossoverBottle,
+  channelNameToInstall
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -212,7 +214,8 @@ export default function DownloadDialog({
       installDlcs,
       installLanguage,
       platformToInstall,
-      showDialogModal: () => backdropClick()
+      showDialogModal: () => backdropClick(),
+      channelName: channelNameToInstall
     })
   }
 
@@ -220,11 +223,17 @@ export default function DownloadDialog({
     const getIinstInfo = async () => {
       try {
         setGettingInstallInfo(true)
+        console.log(
+          'getting game install info for channel name = ',
+          channelNameToInstall
+        )
         const gameInstallInfo = await getInstallInfo(
           appName,
           runner,
-          platformToInstall
+          platformToInstall,
+          channelNameToInstall
         )
+        console.log('got install info = ', gameInstallInfo)
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 
@@ -298,7 +307,9 @@ export default function DownloadDialog({
   }, [installPath, gameInstallInfo?.manifest?.disk_size])
 
   const haveDLCs =
-    gameInstallInfo && gameInstallInfo?.game?.owned_dlc?.length > 0
+    gameInstallInfo &&
+    gameInstallInfo?.game?.owned_dlc?.length &&
+    gameInstallInfo?.game?.owned_dlc?.length > 0
   const DLCList = gameInstallInfo?.game?.owned_dlc
   const downloadSize = () => {
     if (gameInstallInfo?.manifest?.download_size) {
@@ -507,12 +518,12 @@ export default function DownloadDialog({
           }
         />
         {children}
-        {(haveDLCs || haveSDL) && (
+        {haveDLCs || haveSDL ? (
           <div className="InstallModal__sectionHeader">
             {t('sdl.title', 'Select components to Install')}:
           </div>
-        )}
-        {haveSDL && (
+        ) : null}
+        {haveSDL ? (
           <div className="InstallModal__sdls">
             {sdls.map((sdl: SelectiveDownload, idx: number) => (
               <label
@@ -530,8 +541,8 @@ export default function DownloadDialog({
               </label>
             ))}
           </div>
-        )}
-        {haveDLCs && (
+        ) : null}
+        {haveDLCs ? (
           <div className="InstallModal__dlcs">
             <label className={classNames('InstallModal__toggle toggleWrapper')}>
               <ToggleSwitch
@@ -546,7 +557,7 @@ export default function DownloadDialog({
               {DLCList?.map(({ title }) => title).join(', ')}
             </div>
           </div>
-        )}
+        ) : null}
       </DialogContent>
       <DialogFooter>
         <Button

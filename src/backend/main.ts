@@ -143,10 +143,10 @@ import {
 } from './main_window'
 import { addGameToLibrary } from './storeManagers/hyperplay/library'
 
+import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
-import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import {
   autoUpdate,
   gameManagerMap,
@@ -676,10 +676,6 @@ ipcMain.on('showConfigFileInFolder', async (event, appName) => {
   return openUrlOrFile(path.join(gamesConfigPath, `${appName}.json`))
 })
 
-ipcMain.handle('removeTempDownloadFiles', async (e, appName) =>
-  HyperPlayGameManager.removeTempDownloadFiles(appName)
-)
-
 async function runWineCommandOnGame(
   runner: string,
   appName: string,
@@ -809,6 +805,11 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
   return gameManagerMap[runner].isGameAvailable(appName)
 })
 
+ipcMain.handle('appIsInLibrary', async (event, appName, runner) => {
+  if (runner !== 'hyperplay') return false
+  return HyperPlayGameManager.appIsInLibrary(appName)
+})
+
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
   if (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName)) {
@@ -840,12 +841,22 @@ ipcMain.handle('getGOGLinuxInstallersLangs', async (event, appName) =>
 
 ipcMain.handle(
   'getInstallInfo',
-  async (event, appName, runner, installPlatform) => {
+  async (event, appName, runner, installPlatform, channelNameToInstall) => {
     try {
+      console.log(
+        'getting install infro for',
+        appName,
+        runner,
+        installPlatform,
+        channelNameToInstall
+      )
       const info = await libraryManagerMap[runner].getInstallInfo(
         appName,
-        installPlatform
+        installPlatform,
+        'en-US',
+        channelNameToInstall
       )
+      console.log('install info = ', info)
       if (info === undefined) return null
       return info
     } catch (error) {
@@ -1848,9 +1859,9 @@ ipcMain.on('reloadApp', async () => {
   }
 })
 
-ipcMain.handle('addHyperplayGame', async (_e, gameId) => {
-  console.log('addHyperplayGame', gameId)
-  await addGameToLibrary(gameId)
+ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
+  console.log('addHyperplayGame', projectId)
+  await addGameToLibrary(projectId)
 })
 
 ipcMain.handle(

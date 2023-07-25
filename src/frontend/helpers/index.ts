@@ -74,7 +74,8 @@ const getGameSettings = async (
 const getInstallInfo = async (
   appName: string,
   runner: Runner,
-  installPlatform: InstallPlatform
+  installPlatform: InstallPlatform,
+  channelNameToInstall?: string
 ): Promise<
   LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
 > => {
@@ -84,7 +85,8 @@ const getInstallInfo = async (
   return window.api.getInstallInfo(
     appName,
     runner,
-    handleRunnersPlatforms(installPlatform, runner)
+    handleRunnersPlatforms(installPlatform, runner),
+    channelNameToInstall
   )
 }
 

@@ -209,6 +209,13 @@
         "store": "Store",
         "title": "Game Title"
     },
+    "gameRelease": {
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Demo",
+        "main": "Main",
+        "prototype": "Prototype"
+    },
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -220,7 +227,6 @@
     "globalSettings": "Global Settings",
     "GOG": "GOG",
     "header": {
-        "platform": "Platform",
         "show_available_games": "Show non-available games",
         "show_hidden": "Show Hidden",
         "store": "Filter Store"
@@ -303,6 +309,7 @@
                 "pleaseConnect": "Please connect your wallet, or download the Metamask mobile-app to get\n        started:",
                 "screens": {
                     "import": {
+                        "cantFindProfile": "Can't find your browser profile?",
                         "createNewWallet": "Create new MM extension wallet",
                         "details": "By importing, your MetaMask installation and  settings will be imported into HyperPlay.",
                         "title": "Select the browser to import from",
@@ -343,6 +350,7 @@
                 "title": "Welcome to HyperPlay Early Access!"
             }
         },
+        "otp": "One Time Passcode",
         "publicAlpha": "Public Alpha",
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
@@ -366,7 +374,6 @@
             "INITIATED": "A wallet confirmation is pending in your mobile wallet",
             "PENDING": "Waiting for blockchain confirmation. We'll let you know when it's confirmed"
         },
-        "desktopHotkeyHint": "Press Alt or Option + X to return to the game",
         "extensionNotification": {
             "DESCRIPTION": "Press Alt or Option + X to see this transaction",
             "TITLE": "Transaction requested"
@@ -528,17 +535,15 @@
         "weblate": "Help Translate HyperPlay."
     },
     "Other": "Other",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension."
+    },
     "placeholder": {
         "alt-gogdl-bin": "Using built-in GOGDL binary...",
         "alt-legendary-bin": "Using built-in Legendary binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix where EGS is installed",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
-    },
-    "platforms": {
-        "linux": "Linux",
-        "mac": "Mac",
-        "win": "Windows"
     },
     "please-wait": "Please wait...",
     "progress": "Progress",

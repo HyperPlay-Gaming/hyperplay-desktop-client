@@ -18,3 +18,23 @@ export function getLibraryTitle(
       return t('Other', 'Other')
   }
 }
+
+export function translateChannelName(
+  channelNameEnglish: string,
+  t: TFunction<'translation'>
+) {
+  switch (channelNameEnglish) {
+    case 'demo':
+      return t('gameRelease.demo', 'Demo')
+    case 'prototype':
+      return t('gameRelease.prototype', 'Prototype')
+    case 'alpha':
+      return t('gameRelease.alpha', 'Alpha')
+    case 'beta':
+      return t('gameRelease.beta', 'Beta')
+    case 'main':
+      return t('gameRelease.main', 'Main')
+    default:
+      return channelNameEnglish
+  }
+}
