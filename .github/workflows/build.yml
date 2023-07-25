@@ -37,7 +37,7 @@ jobs:
       - name: Install modules.
         run: npm i --legacy-peer-deps
       - name: Build artifacts.
-        run: npm run dist:win nsis
+        run: npm run dist:win
       - name: Upload EXE.
         uses: actions/upload-artifact@v2
         with:
@@ -99,7 +99,7 @@ jobs:
       - name: Install modules.
         run: yarn
       - name: Build artifacts.
-        run: yarn dist:mac --x64 --arm64 --publish=never
+        run: yarn dist:mac
         env:
           NOTARIZE: false
       - name: Upload Intel build.
