@@ -120,14 +120,6 @@ const hyperPlayLibraryStore = new TypeCheckedStoreFrontend('hpLibraryStore', {
   name: 'library'
 })
 
-const hpInstalledGamesStore = new TypeCheckedStoreFrontend(
-  'hpInstalledGamesStore',
-  {
-    cwd: 'hp_store',
-    name: 'installed'
-  }
-)
-
 export {
   configStore,
   gogLibraryStore,
@@ -140,6 +132,5 @@ export {
   downloadManagerStore,
   metricsStore,
   onboardingStore,
-  hyperPlayLibraryStore,
-  hpInstalledGamesStore
+  hyperPlayLibraryStore
 }

@@ -86,6 +86,12 @@ const eventsToCloseMetaMaskPopupOn = [
   'mouseDown',
   'mouseUp'
 ]
+const valistListingsApiUrl = 'https://developers.hyperplay.xyz/api/v1/listings'
+const mainReleaseChannelName = 'main'
+
+export function getValistListingApiUrl(projectId: string) {
+  return `${valistListingsApiUrl}/${projectId}`
+}
 
 /**
  * Get shell for different os
@@ -252,5 +258,7 @@ export {
   hyperplaySite,
   customThemesWikiLink,
   onboardLocalStore,
-  eventsToCloseMetaMaskPopupOn
+  eventsToCloseMetaMaskPopupOn,
+  valistListingsApiUrl,
+  mainReleaseChannelName
 }

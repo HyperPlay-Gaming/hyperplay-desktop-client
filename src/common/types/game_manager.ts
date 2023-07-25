@@ -66,7 +66,8 @@ export interface LibraryManager {
   getInstallInfo: (
     appName: string,
     installPlatform: InstallPlatform,
-    lang?: string
+    lang?: string,
+    channelNameToInstall?: string
   ) => Promise<
     LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | undefined
   >

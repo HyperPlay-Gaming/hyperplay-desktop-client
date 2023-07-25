@@ -193,9 +193,15 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
     removeFromQueue(currentElement.params.appName)
 
     if (removeDownloaded) {
-      const { appName, runner } = currentElement!.params
-      const { folder_name, releaseMeta } =
-        gameManagerMap[runner].getGameInfo(appName)
+      const { appName, runner, gameInfo, channelName } = currentElement!.params
+      const { folder_name } = gameInfo
+      if (gameInfo.channels === undefined || channelName === undefined) {
+        console.error(
+          `Error when canceling current download channels ${gameInfo.channels} or channelName ${channelName} is undefined`
+        )
+        return
+      }
+      const releaseMeta = gameInfo.channels[channelName].release_meta
 
       if (runner === 'hyperplay' && releaseMeta) {
         const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)

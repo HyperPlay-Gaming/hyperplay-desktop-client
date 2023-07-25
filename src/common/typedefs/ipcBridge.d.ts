@@ -180,7 +180,7 @@ interface HyperPlayAsyncIPCFunctions {
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
-  addHyperplayGame: (gameId: string) => Promise<void>
+  addHyperplayGame: (gameId: string, addHyperplayGame: string) => Promise<void>
   sendRequest: (args: unknown[]) => Promise<unknown>
   sendAsyncRequest: (
     payload: JsonRpcRequest,
@@ -192,6 +192,7 @@ interface HyperPlayAsyncIPCFunctions {
   showPopup: (hideIfShown: boolean) => Promise<boolean>
   removeTempDownloadFiles: (appName: string) => Promise<void>
   getImportFolderPath: () => Promise<string>
+  appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -227,7 +228,8 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   getInstallInfo: (
     appName: string,
     runner: Runner,
-    installPlatform: InstallPlatform
+    installPlatform: InstallPlatform,
+    channelNameToInstall?: string
   ) => Promise<
     LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >

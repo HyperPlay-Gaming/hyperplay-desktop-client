@@ -18,7 +18,7 @@ const RUNNERS = ['hyperplay', 'legendary', 'gog', 'sideload']
  * @example
  * handleProtocol(['hyperplay://ping'])
  * // => 'Received ping! Arg: undefined'
- * handleProtocol(['hyperplay://launch/hyperplay/123'])
+ * handleProtocol(['hyperplay://launch/hyperplay/<account_id>/<project_id>'])
  * // => 'Received launch! Runner: hyperplay, Arg: 123'
  **/
 export async function handleProtocol(args: string[]) {
@@ -72,17 +72,24 @@ function getUrl(args: string[]): string | undefined {
  * parseUrl('hyperplay://launch/legendary/123')
  * // => ['launch', 'legendary', '123']
  **/
-function parseUrl(url: string): [Command, Runner?, string?] {
+function parseUrl(url: string): [Command, Runner?, string?, string?] {
   const [, fullCommand] = url.split('://')
 
   //check if the second param is a runner or not and adjust parts accordingly
-  const hasRunner = RUNNERS.includes(fullCommand.split('/')[1] as Runner)
+  const splitCommand = fullCommand.split('/')
+  const hasRunner = RUNNERS.includes(splitCommand[1] as Runner)
   if (hasRunner) {
-    const [command, runner, arg] = fullCommand.split('/')
-    return [command as Command, runner as Runner, arg]
+    if (splitCommand.length === 3) {
+      const [command, runner, appId] = splitCommand
+      return [command as Command, runner as Runner, appId]
+    } else {
+      // account id and project id must have been passed
+      const [command, runner, accountId, appId] = splitCommand
+      return [command as Command, runner as Runner, accountId, appId]
+    }
   } else {
-    const [command, arg] = fullCommand.split('/')
-    return [command as Command, undefined, arg]
+    const [command, appId] = splitCommand
+    return [command as Command, undefined, appId]
   }
 }
 
@@ -151,7 +158,7 @@ async function handleLaunch(
 
 async function findGame(
   runner: Runner | undefined,
-  arg: string | undefined = ''
+  projectId = ''
 ): Promise<GameInfo | null> {
   // If the runner is specified, only search for that runner
   const runnersToSearch = runner ? [runner, 'hyperplay'] : RUNNERS
@@ -163,18 +170,18 @@ async function findGame(
 
     if (run === 'hyperplay') {
       try {
-        getGameInfo(arg)
+        getGameInfo(projectId)
       } catch (error) {
         logInfo(
-          `Game ${arg} not found in library. Adding it...`,
+          `Game ${projectId} not found in library. Adding it...`,
           LogPrefix.HyperPlay
         )
-        await addGameToLibrary(arg)
-        return getGameInfo(arg)
+        await addGameToLibrary(projectId)
+        return getGameInfo(projectId)
       }
     }
 
-    const gameInfoOrSideload = getInfo(arg, run)
+    const gameInfoOrSideload = getInfo(projectId, run)
     if (gameInfoOrSideload.app_name) {
       return gameInfoOrSideload
     }
