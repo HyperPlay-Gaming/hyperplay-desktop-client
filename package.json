@@ -239,7 +239,7 @@
     "release:mac": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "cross-env NODE_ENV_ELECTRON_VITE=production vite build && electron-builder -p always --win nsis",
     "dist:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder --linux",
-    "dist:linux:ci": "DEBUG=electron-builder && FPM_DEBUG=electron-builder && yarn dist:linux deb rpm pacman --publish=never",
+    "dist:linux:ci": "export DEBUG=electron-builder && export FPM_DEBUG=electron-builder && yarn dist:linux deb rpm pacman --publish=never",
     "dist:linux:ci:flatpak": "npm run dist:linux tar.xz --publish=never",
     "dist:mac": "export NODE_ENV_ELECTRON_VITE=production && export CSC_IDENTITY_AUTO_DISCOVERY=false && vite build && electron-builder --mac --x64 --arm64 --publish=never",
     "dist:win": "cross-env NODE_ENV_ELECTRON_VITE=production vite build && electron-builder --win nsis --publish=never",
