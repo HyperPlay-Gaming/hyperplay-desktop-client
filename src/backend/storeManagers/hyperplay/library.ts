@@ -204,7 +204,10 @@ export async function listUpdateableGames(): Promise<string[]> {
       }
       if (
         val.install.version !==
-        val.channels[val.install.channelName].release_meta.name
+          val.channels[val.install.channelName].release_meta.name
+            ?.toLowerCase()
+            .replaceAll(' ', '') ||
+        ''
       ) {
         updateableGames.push(val.app_name)
       }
