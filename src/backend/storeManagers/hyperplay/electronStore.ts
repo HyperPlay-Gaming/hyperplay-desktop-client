@@ -34,28 +34,13 @@ export const hpLibraryStore = new TypeCheckedStoreBackend('hpLibraryStore', {
       }
 
       const newLibrary = currentLibrary.map((game) => {
-        if (!Object.hasOwn(appNameToProjectIdMap, game.app_name)) {
-          //game might be delisted or it was listed after the old db schema was migrated
-          //refresh will handle all fields except for install.channelName
-          //app_name is the same. this was mapped as project_id for new games and does not matter for delisted games
-          return updateGameInfo(game)
-        }
-
         //game was previously listed so we map its previous app_name to its new project_id
-        game.app_name = appNameToProjectIdMap[game.app_name]
-        updateGameInfo(game)
-        return game
+        if (Object.hasOwn(appNameToProjectIdMap, game.app_name))
+          game.app_name = appNameToProjectIdMap[game.app_name]
+        return updateGameInfo(game)
       })
 
       store.set('games', newLibrary)
     }
   }
 })
-
-export const hpInstalledGamesStore = new TypeCheckedStoreBackend(
-  'hpInstalledGamesStore',
-  {
-    cwd: 'hp_store',
-    name: 'installed'
-  }
-)

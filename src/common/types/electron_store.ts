@@ -125,9 +125,6 @@ export interface StoreStructure {
   hpLibraryStore: {
     [key: string]: GameInfo[]
   }
-  hpInstalledGamesStore: {
-    installed: InstalledInfo[]
-  }
   providerMetadata: {
     currentWeb3Provider: PROVIDERS
   }

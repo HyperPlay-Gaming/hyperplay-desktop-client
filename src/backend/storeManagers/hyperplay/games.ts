@@ -8,7 +8,7 @@ import {
   PlatformConfig
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
-import { hpLibraryStore, hpInstalledGamesStore } from './electronStore'
+import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
@@ -392,9 +392,6 @@ export async function install(
       const gameIndex = currentLibrary.findIndex(
         (value) => value.app_name === appName
       )
-      const currentInstalled = hpInstalledGamesStore.get('installed', [])
-      currentInstalled.push(installedInfo)
-      hpInstalledGamesStore.set('installed', currentInstalled)
       currentLibrary[gameIndex].install = installedInfo
       currentLibrary[gameIndex].is_installed = true
 
@@ -486,13 +483,6 @@ export async function uninstall({
   if (appInfo.install.platform === 'web') {
     rmAppFromHyperPlayStore(appName)
   }
-
-  // remove game from installed games store
-  const currentInstalled = hpInstalledGamesStore.get('installed', [])
-  const newInstalled = currentInstalled.filter(
-    (game) => game.executable !== appInfo.install.executable
-  )
-  hpInstalledGamesStore.set('installed', newInstalled)
 
   // change is_installed to false
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
