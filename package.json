@@ -224,6 +224,7 @@
     "zod": "^3.21.4"
   },
   "scripts": {
+    "setup": "yarn install && yarn allow-scripts",
     "start": "vite",
     "codecheck": "tsc --noEmit",
     "find-deadcode": "ts-prune --error",
@@ -267,6 +268,8 @@
   "devDependencies": {
     "@babel/plugin-transform-arrow-functions": "^7.22.5",
     "@electron/notarize": "^1.2.3",
+    "@lavamoat/allow-scripts": "^2.3.1",
+    "@lavamoat/preinstall-always-fail": "^1.0.0",
     "@playwright/test": "^1.32.1",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -317,5 +320,25 @@
     "xml-js": "^1.6.11"
   },
   "optionalDependencies": {},
-  "packageManager": "yarn@1.22.19"
+  "packageManager": "yarn@1.22.19",
+  "lavamoat": {
+    "allowScripts": {
+      "@fortawesome/fontawesome-svg-core": false,
+      "@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": false,
+      "@fortawesome/free-brands-svg-icons": false,
+      "@fortawesome/free-regular-svg-icons": false,
+      "@fortawesome/free-solid-svg-icons": false,
+      "@lavamoat/preinstall-always-fail": false,
+      "@metamask/sdk>eciesjs>secp256k1": true,
+      "@rudderstack/rudder-sdk-node>bull>msgpackr>msgpackr-extract": true,
+      "@testing-library/dom>aria-query>@babel/runtime-corejs3>core-js-pure": true,
+      "@valist/sdk>files-from-path>ipfs-unixfs>protobufjs": true,
+      "classic-level": true,
+      "discord-rich-presence-typescript>discord-rpc>register-scheme": true,
+      "electron": true,
+      "electron-vite>esbuild": true,
+      "playwright": true,
+      "vite>esbuild": true
+    }
+  }
 }
