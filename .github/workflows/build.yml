@@ -25,7 +25,7 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication
@@ -39,7 +39,7 @@ jobs:
       - name: Build artifacts.
         run: npm run dist:win
       - name: Upload EXE.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: win-setup
           path: dist/HyperPlay*.exe
@@ -58,7 +58,7 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication
@@ -72,7 +72,7 @@ jobs:
       - name: Build deb artifact
         run: yarn dist:linux:ci:deb
       - name: Upload deb.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: linux-deb
           path: dist/hyperplay*.deb
@@ -80,7 +80,7 @@ jobs:
       - name: Build rpm artifact
         run: yarn dist:linux:ci:rpm
       - name: Upload rpm
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: linux-rpm
           path: dist/hyperplay*.rpm
@@ -88,7 +88,7 @@ jobs:
       - name: Build pacman artifact
         run: yarn dist:linux:ci:pacman
       - name: Upload pacman
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: linux-pacman
           path: dist/hyperplay*.pacman
@@ -105,7 +105,7 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication
