@@ -34,7 +34,7 @@ export default function SidebarLinks() {
     const shouldRefresh =
       (epic.username && !epic.library.length) ||
       (gog.username && !gog.library.length) ||
-      (amazon.username && !amazon.library.length)
+      (amazon.user_id && !amazon.library.length)
     if (shouldRefresh) {
       return refreshLibrary({ runInBackground: true })
     }
