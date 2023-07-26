@@ -1,6 +1,7 @@
 {
     "button": {
-        "login": "Connexion"
+        "login": "Connexion",
+        "error": "Erreur, Essay un autre code"
     },
     "message": {
         "part1": "Afin de se connecter et d'installer vos jeux, vous devez d’abord suivre les étapes ci-dessous :",
