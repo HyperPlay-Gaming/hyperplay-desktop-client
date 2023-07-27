@@ -58,5 +58,5 @@ jobs:
           directory: xyz.hyperplay.HyperPlay
           repository: flathub/xyz.hyperplay.HyperPlay
       - name: PR to flathub repo
-        run: sleep 5 && gh pr create --title ${{ github.ref_name }} --body ${{ github.ref_name }} --base master
+        run: sleep 5 && gh pr create --title ${{ github.ref_name }} --body ${{ github.ref_name }} --base master --head ${{ github.ref_name }}
         working-directory: ./xyz.hyperplay.HyperPlay
