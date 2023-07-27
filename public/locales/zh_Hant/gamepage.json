@@ -148,10 +148,11 @@
         "options": "啟動選項..."
     },
     "not_logged_in": {
-        "epic": "您尚未在 HyperPlay 中使用 Epic 帳戶登錄。請不要使用商店頁面登錄，而是點擊以下按鈕：",
-        "gog": "您尚未使用 HyperPlay 中的 GOG 賬戶登錄。請不要使用商店頁面登錄，而是點擊以下按鈕：",
-        "login": "登入",
-        "title": "您尚未登入"
+        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
+        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
+        "login": "Log in",
+        "title": "You are NOT logged in",
+        "amazon": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:"
     },
     "report_problem": "回報執行此遊戲時出現的問題",
     "sdl": {

@@ -142,7 +142,9 @@
             "title": "Uyarı"
         },
         "wineprefix": "Wine Prefix Klasörünü Seçin",
-        "yes": "EVET"
+        "yes": "EVET",
+        "dontShowAgain": "Tekrar gösterme",
+        "choose-nile-binary": "Nil ikili dosyasını seçin"
     },
     "button": {
         "cancel": "Cancel",
@@ -308,10 +310,11 @@
         "website": "Web Sitesi Yükleniyor"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Alternatif Giriş Yöntemi",
+        "epic": "Epic Games Giriş",
+        "gog": "GOG Giriş",
+        "message": "Platformunuz ile giriş yapın. Aynı anda birden fazla platforma giriş yapabilirsiniz.",
+        "amazon": "Amazon Girişi"
     },
     "message": {
         "sync": "Eşzamanlama Tamamlandı",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "GOGDL Sürümü: ",
         "legendary-version": "Legendary Sürüm: ",
-        "weblate": "HyperPlay'i çevirmeye yardımcı ol."
+        "weblate": "HyperPlay'i çevirmeye yardımcı ol.",
+        "nile-version": "Nil Sürümü: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Yerleşik Legendary çalıştırılabilir dosyası kullanılıyor...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "EGS'nin kurulu olduğu yer",
-        "prefered_language": "2 karakterli kod (örneğin: \"en\" veya \"tr\")"
+        "prefered_language": "2 karakterli kod (örneğin: \"en\" veya \"tr\")",
+        "alt-nile-bin": "Yerleşik Nile ikili dosyası kullanılıyor..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +539,13 @@
         "steamruntime": "Steam Çalışma Zamanını Kullan",
         "winecrossoverbottle": "CrossOver Şişesi",
         "wineprefix": "WinePrefix klasörü",
-        "wineversion": "Wine Sürümü"
+        "wineversion": "Wine Sürümü",
+        "autoUpdateGames": "Oyunları otomatik olarak güncelle",
+        "ignoreGameUpdates": "Oyun güncellemelerini yoksay",
+        "disable_logs": "Günlükleri Devre Dışı Bırak",
+        "showMetalOverlay": "İstatistik Yer Paylaşımını Göster",
+        "addgamestoapplications": "Oyunları Uygulamalara otomatik olarak ekleyin",
+        "alt-nile-bin": "Alternatif Bir Nil İkilisi Seçin"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +597,8 @@
     "status": {
         "installing": "Kuruluyor",
         "logging": "Oturum Açılıyor…",
-        "processing": "Dosyalar işleniyor, lütfen bekleyin"
+        "processing": "Dosyalar işleniyor, lütfen bekleyin",
+        "preparing_login": "Giriş hazırlanıyor... "
     },
     "store": "Epic Mağazası",
     "stores": "Mağazalar",
@@ -639,5 +651,22 @@
         },
         "release": "Release Date",
         "size": "Boyut"
-    }
+    },
+    "externalLink": {
+        "warning": "Harici bir bağlantı açmak üzeresiniz.",
+        "dontAskAgain": "Bir daha sorma"
+    },
+    "wiki_info": {
+        "not_found": "Ek bilgi bulamadık."
+    },
+    "dlc": {
+        "actions": "Hareketler",
+        "installDlcs": "Tüm DLC'leri kur",
+        "noDlcFound": "DLC bulunamadı",
+        "size": "Boyut",
+        "title": "Title"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "amazon oyunları",
+    "prime-gaming": "Prime Oyun"
 }

@@ -185,8 +185,6 @@ import {
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
 
-app.commandLine?.appendSwitch('remote-debugging-port', '9222')
-
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
 
@@ -289,6 +287,7 @@ const loadMainWindowURL = function () {
     let pattern
     if (!app.isPackaged) {
       pattern = 'localhost:5173'
+      app.commandLine?.appendSwitch('remote-debugging-port', '9222')
     } else {
       pattern = publicDir
     }

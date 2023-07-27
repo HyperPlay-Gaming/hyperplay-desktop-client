@@ -149,7 +149,8 @@
         },
         "wineprefix": "Escolha a pasta com o Prefixo Wine",
         "yes": "SIM",
-        "dontShowAgain": "não mostrar novamente"
+        "dontShowAgain": "Não mostrar novamente",
+        "choose-nile-binary": "Selecione o binário do Nilo"
     },
     "button": {
         "cancel": "Cancel",
@@ -323,7 +324,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "Login da Amazon"
     },
     "message": {
         "sync": "Sync Concluído",
@@ -413,7 +415,8 @@
     "other": {
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Legendary Version: ",
-        "weblate": "Ajude a traduzir o HyperPlay."
+        "weblate": "Ajude a traduzir o HyperPlay.",
+        "nile-version": "Versão do Nilo: "
     },
     "Other": "Other",
     "placeholder": {
@@ -421,7 +424,8 @@
         "alt-legendary-bin": "Using built-in Legendary binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix onde a Epic Games está instalada",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
+        "alt-nile-bin": "Usando o binário integrado do Nilo..."
     },
     "platforms": {
         "linux": "Linux",
@@ -544,9 +548,15 @@
         "showfps": "Mostrar FPS (DX9, 10 e 11)",
         "start-in-tray": "Iniciar Minimizado",
         "steamruntime": "Use Steam Runtime",
-        "winecrossoverbottle": "Prefixo de CrossOver",
-        "wineprefix": "Pasta de prefixo do Wine",
-        "wineversion": "Versão do Wine"
+        "winecrossoverbottle": "CrossOver Bottle",
+        "wineprefix": "Prefixo Wine",
+        "wineversion": "Versão do Wine",
+        "autoUpdateGames": "Atualizar jogos automaticamente",
+        "ignoreGameUpdates": "Ignorar atualizações do jogo",
+        "disable_logs": "Desativar registros",
+        "addgamestoapplications": "Adicionar jogos a aplicativos automaticamente",
+        "showMetalOverlay": "Mostrar sobreposição de estatísticas",
+        "alt-nile-bin": "Escolha um binário alternativo do Nilo"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -598,7 +608,8 @@
     "status": {
         "installing": "Installing",
         "logging": "Logging In...",
-        "processing": "Processing files, please wait"
+        "processing": "Processing files, please wait",
+        "preparing_login": "Preparando login... "
     },
     "store": "Loja Epic",
     "stores": "Stores",
@@ -662,46 +673,11 @@
     "dlc": {
         "installDlcs": "Instalar todos os DLCs",
         "actions": "Ações",
-        "size": "Tamanho",
-        "title": "Título",
-        "noDlcFound": "Nenhum DLC encontrado"
+        "installDlcs": "Instalar todas as DLCs",
+        "noDlcFound": "Nenhum DLC encontrado",
+        "title": "Title"
     },
-    "hyperplay": {
-        "accesscodes": {
-            "success": {
-                "validation": "Sucesso! Código de acesso válido"
-            },
-            "error": {
-                "validation": "Código de Acesso Inválido"
-            }
-        },
-        "onboarding": {
-            "analytics": {
-                "anonymized": "Enviar clicks anônimos e interações com games;",
-                "body": "HyperPlay gostaria de coletar dados afim de entender como nossos usuário interagem com a aplicação. Essa informação nos ajuda a entender como o o app é utilizado e a deixar o app ainda melhor para você."
-            }
-        },
-        "buttons": {
-            "noThanks": "Não, Obrigado",
-            "agree": "Eu concordo"
-        },
-        "analyticsOff": "A análise de dados está desligada",
-        "misc": "Nunca",
-        "currentWallet": "Carteira Atual",
-        "changeWallet": "Trocar Carteira",
-        "analyticsOn": "A análise de dados está ligada",
-        "copyUrl": "Copiar URL",
-        "discordApp": "Discord"
-    },
-    "gameRelease": {
-        "prototype": "Protótipo",
-        "demo": "Demo",
-        "beta": "Beta",
-        "alpha": "Alpha",
-        "main": "Estável"
-    },
-    "dlcs": {
-        "label": "Selecione os DLCs para instalar:"
-    },
-    "exit_game": "Sair do Jogo"
+    "amazon": "Amazonas",
+    "Amazon Games": "Amazon Games",
+    "prime-gaming": "Prime Gaming"
 }

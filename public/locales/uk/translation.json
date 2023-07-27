@@ -149,7 +149,8 @@
         },
         "wineprefix": "Оберіть теку префікса Wine",
         "yes": "ТАК",
-        "dontShowAgain": "Не показувати знову"
+        "dontShowAgain": "Не показувати більше",
+        "choose-nile-binary": "Виберіть подвійний файл Nile"
     },
     "button": {
         "cancel": "Скасувати",
@@ -324,9 +325,10 @@
     },
     "login": {
         "alternative_method": "Альтернативний метод входу",
-        "epic": "Вхід в Epic Games",
-        "gog": "Вхід в GOG",
-        "message": "Увійдіть за допомогою своєї платформи. Ви можете увійти на кілька платформ одночасно."
+        "epic": "Вхід у Epic Games",
+        "gog": "Вхід у GOG",
+        "message": "Увійдіть за допомогою своєї платформи. Ви можете увійти на декілька платформ одночасно.",
+        "amazon": "Вхід на Amazon"
     },
     "message": {
         "sync": "Синхронізація завершена",
@@ -420,7 +422,8 @@
     "other": {
         "gogdl-version": "Версія GOGDL: ",
         "legendary-version": "Версія Legendary: ",
-        "weblate": "Допоможіть перекласти HyperPlay."
+        "weblate": "Допоможіть перекласти HyperPlay.",
+        "nile-version": "Версія Нілу: "
     },
     "Other": "Other",
     "placeholder": {
@@ -429,7 +432,7 @@
         "custom_themes_path": "Виберіть шлях для пошуку власних файлів CSS",
         "egs-prefix": "Префікс де встановлено EGS",
         "prefered_language": "2-значний код (приклад: \"en\" або \"uk\")",
-        "dxvkfpsvalue": "Позитивне ціле значення (наприклад, 30, 60, ...)"
+        "alt-nile-bin": "Використовуючи вбудований двійковий файл Nile..."
     },
     "platforms": {
         "linux": "Linux",
@@ -560,9 +563,10 @@
         "wineprefix": "Тека префікса Wine",
         "wineversion": "Версія Wine",
         "ignoreGameUpdates": "Ігнорувати оновлення гри",
-        "autoUpdateGames": "Автоматичне оновлення ігор",
-        "dxvkfpslimit": "Обмеження к/с (DX9, 10 та 11)",
-        "showMetalOverlay": "Показати статистику оверлею"
+        "disable_logs": "Вимкнути журнали",
+        "addgamestoapplications": "Автоматично додавайте ігри в програми",
+        "showMetalOverlay": "Показати накладення статистики",
+        "alt-nile-bin": "Виберіть альтернативний двійковий файл Nile"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -615,7 +619,8 @@
     "status": {
         "installing": "Встановлення",
         "logging": "Вхід...",
-        "processing": "Обробка файлів, будь ласка, зачекайте"
+        "processing": "Обробка файлів, будь ласка, зачекайте",
+        "preparing_login": "Підготовка до входу... "
     },
     "store": "Крамниця Epic",
     "stores": "Крамниці",
@@ -837,9 +842,11 @@
         "title": "Назва",
         "actions": "Дії",
         "installDlcs": "Встановити всі DLC",
-        "noDlcFound": "DLC не знайдено"
+        "noDlcFound": "DLC не знайдено",
+        "size": "Розмір",
+        "title": "Назва"
     },
-    "dlcs": {
-        "label": "Виберіть DLC для встановлення:"
-    }
+    "amazon": "Amazon",
+    "Amazon Games": "Ігри Amazon",
+    "prime-gaming": "Prime Gaming"
 }

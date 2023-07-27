@@ -149,7 +149,8 @@
         },
         "wineprefix": "选择 Wine Prefix 文件夹",
         "yes": "是",
-        "dontShowAgain": "不要再出现"
+        "dontShowAgain": "不再显示",
+        "choose-nile-binary": "选择尼罗河二进制文件"
     },
     "button": {
         "cancel": "取消",
@@ -325,7 +326,8 @@
         "alternative_method": "替代登录方法",
         "epic": "Epic Games 登录",
         "gog": "GOG 登录",
-        "message": "登录您的平台。您可以同时登录多个平台。"
+        "message": "平台登录。你可以同时登录超过一个平台。",
+        "amazon": "亚马逊登录"
     },
     "message": {
         "sync": "同步完成",
@@ -419,7 +421,8 @@
     "other": {
         "gogdl-version": "GOGDL 版本： ",
         "legendary-version": "Legendary 版本： ",
-        "weblate": "帮助翻译 HyperPlay。"
+        "weblate": "帮助翻译 Heroic。",
+        "nile-version": "尼罗河版本： "
     },
     "Other": "其他",
     "placeholder": {
@@ -427,7 +430,8 @@
         "alt-legendary-bin": "使用内置的 Legendary 二进制文件...",
         "custom_themes_path": "选择查找自定义 CSS 文件的路径",
         "egs-prefix": "Epic 游戏商城安装位置",
-        "prefered_language": "双字符代码 (如: \"en\" 或 \"fr\")"
+        "prefered_language": "双字符代码 (如: \"en\" 或 \"fr\")",
+        "alt-nile-bin": "使用内置 Nile 二进制文件..."
     },
     "platforms": {
         "linux": "Linux",
@@ -559,7 +563,10 @@
         "wineprefix": "WinePrefix文件夹",
         "wineversion": "Wine 版本",
         "ignoreGameUpdates": "忽略游戏更新",
-        "autoUpdateGames": "自动更新游戏"
+        "disable_logs": "禁用日志",
+        "addgamestoapplications": "自动将游戏添加到应用程序",
+        "showMetalOverlay": "显示统计数据叠加",
+        "alt-nile-bin": "选择替代尼罗河二进制"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -612,7 +619,8 @@
     "status": {
         "installing": "安装中",
         "logging": "正在登录...",
-        "processing": "处理文件中，请稍等"
+        "processing": "处理文件中，请稍等",
+        "preparing_login": "正在准备登录... "
     },
     "store": "Epic 商店",
     "stores": "商店",
@@ -814,16 +822,9 @@
     "dlc": {
         "noDlcFound": "未找到可下载内容",
         "size": "大小",
-        "title": "标题",
-        "actions": "行动",
-        "installDlcs": "安装所有可下载内容"
+        "title": "标题"
     },
-    "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "您使用外部钱包连接到 HyperPlay。\n \n 要批准 HyperPlay Overlay中的交易，您需要使用 MetaMask 扩展连接 HyperPlay。"
-    },
-    "exit_game": "退出游戏",
-    "externalLink": {
-        "dontAskAgain": "别再问了",
-        "warning": "您将打开一个外部链接。"
-    }
+    "amazon": "亚马逊",
+    "Amazon Games": "亚马逊游戏",
+    "prime-gaming": "优质游戏"
 }

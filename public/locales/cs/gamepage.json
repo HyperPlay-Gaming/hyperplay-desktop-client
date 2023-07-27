@@ -139,7 +139,8 @@
         "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "login": "Log in",
-        "title": "You are NOT logged in"
+        "title": "NEjste přihlášeni",
+        "amazon": "V HyperPlay nejste přihlášeni pomocí účtu Epic. K přihlášení nepoužívejte stránku obchodu, ale klikněte na následující tlačítko:"
     },
     "report_problem": "Nahlásit problém se spouštěním této hry",
     "sdl": {

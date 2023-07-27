@@ -136,10 +136,11 @@
         "options": "Параметры запуска..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "login": "Log in",
-        "title": "You are NOT logged in"
+        "epic": "Вы не вошли в HyperPlay с учетной записью Epic. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:",
+        "gog": "Вы не вошли в HyperPlay с учетной записью GOG. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:",
+        "login": "Войти",
+        "title": "Вы НЕ авторизованы",
+        "amazon": "Вы не вошли в HyperPlay с учетной записью Epic. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:"
     },
     "report_problem": "Сообщить о проблеме с запуском этой игры",
     "sdl": {

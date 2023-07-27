@@ -149,7 +149,8 @@
         },
         "wineprefix": "選擇 WinePrefix 資料夾",
         "yes": "是",
-        "dontShowAgain": "不再顯示"
+        "dontShowAgain": "不再顯示",
+        "choose-nile-binary": "選擇尼羅河二進製文件"
     },
     "button": {
         "cancel": "取消",
@@ -322,10 +323,11 @@
         "website": "載入網站"
     },
     "login": {
-        "alternative_method": "其他登入方法",
-        "epic": "Epic Games 登入",
-        "gog": "GOG 登入",
-        "message": "登入您的平台。您可以同時登入多個平台。"
+        "alternative_method": "Alternative Login Method",
+        "epic": "Epic Games Login",
+        "gog": "GOG Login",
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "亞馬遜登錄"
     },
     "message": {
         "sync": "完成同步",
@@ -419,7 +421,8 @@
     "other": {
         "gogdl-version": "GOGDL 版本: ",
         "legendary-version": "Legendary 版本: ",
-        "weblate": "請幫助翻譯HyperPlay啟動器。"
+        "weblate": "請幫助翻譯Heroic啟動器。",
+        "nile-version": "尼羅河版本： "
     },
     "Other": "其他",
     "placeholder": {
@@ -427,7 +430,8 @@
         "alt-legendary-bin": "使用內置的 Legendary 二進制文件...",
         "custom_themes_path": "選擇查找自定義 CSS 文件的路徑",
         "egs-prefix": "Epic Games商城安裝位置",
-        "prefered_language": "雙字元代碼 (如: \"en\" 或 \"fr\")"
+        "prefered_language": "雙字元代碼 (如: \"en\" 或 \"fr\")",
+        "alt-nile-bin": "使用內置 Nile 二進製文件..."
     },
     "platforms": {
         "linux": "Linux",
@@ -558,7 +562,11 @@
         "wineprefix": "WINEPREFIX文件夾",
         "wineversion": "Wine 版本",
         "autoUpdateGames": "自動更新遊戲",
-        "ignoreGameUpdates": "忽略遊戲更新"
+        "ignoreGameUpdates": "忽略遊戲更新",
+        "disable_logs": "禁用日誌",
+        "addgamestoapplications": "自動將遊戲新增到應用程式",
+        "showMetalOverlay": "顯示統計數據疊加",
+        "alt-nile-bin": "選擇替代尼羅河二進制"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -611,7 +619,8 @@
     "status": {
         "installing": "正在安裝",
         "logging": "正在登入...",
-        "processing": "檔案處理中，請等待"
+        "processing": "檔案處理中，請等待",
+        "preparing_login": "正在準備登錄... "
     },
     "store": "Epic 商店",
     "stores": "商店",
@@ -804,25 +813,12 @@
         "actions": "行動",
         "noDlcFound": "未找到可下載內容",
         "size": "大小",
-        "title": "標題",
-        "installDlcs": "安裝所有可下載內容"
+        "actions": "動作",
+        "installDlcs": "安裝所有DLC",
+        "noDlcFound": "未找到 DLC",
+        "title": "Title"
     },
-    "sideload": {
-        "warningTitle": "重要",
-        "warningMessage": "側載遊戲是專為開發人員和有經驗的高級用戶提供的功能。側載包含惡意軟件的安裝程序可能會危及你的電腦並導致資金被盜。"
-    },
-    "gameRelease": {
-        "beta": "Beta",
-        "main": "主要",
-        "prototype": "原型",
-        "alpha": "Alpha",
-        "demo": "演示"
-    },
-    "accounts": "賬戶",
-    "ALL": "全部",
-    "analytics": "分析",
-    "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "您使用外部錢包連接到 HyperPlay。\n \n 要批准 HyperPlay Overlay 中的交易，您需要使用 MetaMask 擴展連接 HyperPlay。"
-    },
-    "exit_game": "退出遊戲"
+    "amazon": "亞馬遜",
+    "Amazon Games": "亞馬遜遊戲",
+    "prime-gaming": "優質遊戲"
 }

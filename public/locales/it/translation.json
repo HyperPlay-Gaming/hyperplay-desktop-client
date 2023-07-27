@@ -142,7 +142,9 @@
             "title": "Attenzione"
         },
         "wineprefix": "Seleziona la cartella del prefisso di Wine",
-        "yes": "SI"
+        "yes": "SI",
+        "dontShowAgain": "Non mostrare più",
+        "choose-nile-binary": "Seleziona binario del Nilo"
     },
     "button": {
         "cancel": "Cancel",
@@ -308,10 +310,11 @@
         "website": "Caricamento sito web incorso"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Metodo di Accesso Alternativo",
+        "epic": "Accedi a Epic Games",
+        "gog": "Accedi a GOG",
+        "message": "Accedi con la tua piattaforma. Puoi effettuare l'accesso a più di una piattaforma contemporaneamente.",
+        "amazon": "Accedi ad Amazon"
     },
     "message": {
         "sync": "Sincronizzazione completata",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Versione Legendary: ",
-        "weblate": "Aiuta a tradurre HyperPlay."
+        "weblate": "Aiuta a tradurre HyperPlay.",
+        "nile-version": "Versione del Nilo: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "In uso i binari Legendary integrati...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix dove è installato EGS",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "prefered_language": "Codice di 2 caratteri (es.: \\\"en\\\" o \\\"fr\\\")",
+        "alt-nile-bin": "Usando il binario Nile integrato..."
     },
     "platforms": {
         "linux": "Linux",
@@ -535,7 +540,13 @@
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "Bottiglia CrossOver",
         "wineprefix": "Cartella del prefix di Wine",
-        "wineversion": "Versione di Wine"
+        "wineversion": "Versione di Wine",
+        "autoUpdateGames": "Aggiorna automaticamente i giochi",
+        "ignoreGameUpdates": "Ignora gli aggiornamenti del gioco",
+        "disable_logs": "Disabilita i log",
+        "addgamestoapplications": "Aggiungi giochi alle applicazioni automaticamente",
+        "showMetalOverlay": "Mostra sovrapposizione statistiche",
+        "alt-nile-bin": "Scegli un binario Nilo alternativo"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -587,7 +598,8 @@
     "status": {
         "installing": "Installazione in corso",
         "logging": "Accesso in corso...",
-        "processing": "File in elaborazione, attendere"
+        "processing": "File in elaborazione, attendere",
+        "preparing_login": "Preparazione dell'accesso... "
     },
     "store": "Epic Store",
     "stores": "Stores",
@@ -639,6 +651,23 @@
             "unzipping": "Unzipping"
         },
         "release": "Release Date",
-        "size": "Size"
-    }
+        "size": "Dimensione"
+    },
+    "externalLink": {
+        "warning": "Stai per aprire un collegamento esterno.",
+        "dontAskAgain": "Non chiedere di nuovo"
+    },
+    "wiki_info": {
+        "not_found": "Non siamo riusciti a trovare ulteriori informazioni."
+    },
+    "dlc": {
+        "actions": "Azioni",
+        "installDlcs": "Installa tutti i DLC",
+        "noDlcFound": "Nessun DLC trovato",
+        "size": "Dimensione",
+        "title": "Titolo"
+    },
+    "amazon": "Amazzonia",
+    "Amazon Games": "Giochi Amazon",
+    "prime-gaming": "Primo gioco"
 }

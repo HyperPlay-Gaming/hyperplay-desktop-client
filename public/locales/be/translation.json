@@ -141,8 +141,10 @@
             },
             "title": "Warning"
         },
-        "wineprefix": "",
-        "yes": ""
+        "wineprefix": "Аберыце папку Wine Prefix",
+        "yes": "ТАК",
+        "dontShowAgain": "Больш не паказваць",
+        "choose-nile-binary": "Выберыце двайковы файл Nile"
     },
     "button": {
         "cancel": "Cancel",
@@ -308,10 +310,11 @@
         "website": "Loading Website"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Альтэрнатыўны метад уваходу",
+        "epic": "Уваход у Epic Games",
+        "gog": "Уваход у GOG",
+        "message": "Увайдзіце са сваёй платформы. Вы можаце ўвайсці на больш чым адну платформу адначасова.",
+        "amazon": "Уваход у Amazon"
     },
     "message": {
         "sync": "",
@@ -399,17 +402,20 @@
         }
     },
     "other": {
-        "gogdl-version": "GOGDL Version: ",
-        "legendary-version": "Legendary Version: ",
-        "weblate": "Help Improve this translation."
+        "gogdl-version": "Версія GOGDL: ",
+        "legendary-version": "Версія Legendary: ",
+        "weblate": "Help Improve this translation.",
+        "nile-version": "Версія Ніла: "
     },
     "Other": "Other",
     "placeholder": {
-        "alt-gogdl-bin": "Using built-in GOGDL binary...",
-        "alt-legendary-bin": "Using built-in Legendary binary...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "alt-gogdl-bin": "Выкарыстанне ўбудаванага двайковага файла GOGDL...",
+        "alt-legendary-bin": "Выкарыстанне ўбудаванага двайковага файла Legendary...",
+        "custom_themes_path": "Выберыце шлях для пошуку карыстальніцкіх файлаў CSS",
+        "dxvkfpsvalue": "Цэлы станоўчы лік (напр. 30, 60, ...)",
+        "egs-prefix": "Прэфікс, дзе ўсталяваны EGS",
+        "prefered_language": "2-значны код (напрыклад: \"en\" ці \"fr\")",
+        "alt-nile-bin": "Выкарыстоўваючы ўбудаваны двайковы файл Nile..."
     },
     "platforms": {
         "linux": "",
@@ -528,13 +534,19 @@
             "placeholder": "Выберыце дакладную тэчку захавання гульняў",
             "warning": "Please check twice if the path is correct (click to retry)"
         },
-        "select_theme": "Select Theme",
-        "showfps": "",
-        "start-in-tray": "Start Minimized",
-        "steamruntime": "Use Steam Runtime",
-        "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "",
-        "wineversion": ""
+        "select_theme": "Выберыце тэму",
+        "showfps": "Паказаць FPS (DX9, 10 і 11)",
+        "start-in-tray": "Пачаць у згорнутым выглядзе",
+        "steamruntime": "Выкарыстоўвайце Steam Runtime",
+        "winecrossoverbottle": "Бутэлька CrossOver",
+        "wineprefix": "Тэчка WinePrefix",
+        "wineversion": "Версія Wine",
+        "autoUpdateGames": "Аўтаматычнае абнаўленне гульняў",
+        "ignoreGameUpdates": "Ігнараваць абнаўленні гульні",
+        "disable_logs": "Адключыць часопісы",
+        "addgamestoapplications": "Дадавайце гульні ў праграмы аўтаматычна",
+        "showMetalOverlay": "Паказаць накладанне статыстыкі",
+        "alt-nile-bin": "Выберыце альтэрнатыўны двайковы файл Nile"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -584,9 +596,10 @@
         "uncollapse": "Uncollapse sidebar"
     },
     "status": {
-        "installing": "Installing",
-        "logging": "Logging In...",
-        "processing": "Processing files, please wait"
+        "installing": "Ўстаноўка",
+        "logging": "Уваход...",
+        "processing": "Апрацоўка файлаў, пачакайце",
+        "preparing_login": "Падрыхтоўка ўваходу... "
     },
     "store": "Epic Store",
     "stores": "Stores",
@@ -638,6 +651,23 @@
             "unzipping": "Unzipping"
         },
         "release": "Release Date",
-        "size": "Size"
-    }
+        "size": "Памер"
+    },
+    "externalLink": {
+        "dontAskAgain": "Больш не пытайся",
+        "warning": "Вы збіраецеся адкрыць знешнюю спасылку."
+    },
+    "wiki_info": {
+        "not_found": "Мы не змаглі знайсці дадатковую інфармацыю."
+    },
+    "dlc": {
+        "actions": "Дзеянні",
+        "size": "Памер",
+        "title": "Назва",
+        "installDlcs": "Усталюйце ўсе DLC",
+        "noDlcFound": "DLC не знойдзены"
+    },
+    "amazon": "Amazon",
+    "prime-gaming": "Prime Gaming",
+    "Amazon Games": "Гульні Amazon"
 }
