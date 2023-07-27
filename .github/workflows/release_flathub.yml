@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: echo ref name.
-        run: echo "tag name ${{github.ref_name}}"
+        run: echo "tag name ${{ github.ref_name }}"
       - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm snapcraft
       - name: Checkout repository.
         uses: actions/checkout@v3
@@ -43,8 +43,11 @@ jobs:
       - name: Update flathub release
         run: yarn release:updateFlathub:ci
       - name: Branch flathub repo
-        run: cd xyz.hyperplay.HyperPlay && git checkout -b "${{ github.ref_name }}"
+        run: git checkout -b "${{ github.ref_name }}"
+        working-directory: ./xyz.hyperplay.HyperPlay
       - name: Publish flathub branch
         run: git push --set-upstream origin ${{ github.ref_name }}
+        working-directory: ./xyz.hyperplay.HyperPlay
       - name: PR to flathub repo
         run: gh pr create --title ${{ github.ref_name }} --body ${{ github.ref_name }} --base main
+        working-directory: ./xyz.hyperplay.HyperPlay
