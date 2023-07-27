@@ -9,8 +9,7 @@ import {
   GamepadInputEvent,
   WineCommandArgs,
   ExecResult,
-  Runner,
-  MetricsOptInStatus
+  Runner
 } from 'common/types'
 import * as path from 'path'
 import {
@@ -177,13 +176,6 @@ function initSentry() {
 if (metricsAreEnabled()) {
   initSentry()
 }
-
-backendEvents.addListener(
-  'optInStatusChanged',
-  (newValue: MetricsOptInStatus) => {
-    if (newValue === MetricsOptInStatus.optedIn) initSentry()
-  }
-)
 
 app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
