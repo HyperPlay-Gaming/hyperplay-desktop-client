@@ -1,0 +1,48 @@
+name: Draft Release Flathub
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+
+jobs:
+  draft-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm snapcraft
+      - name: Checkout repository.
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install modules.
+        run: yarn
+      - name: Build tar.xz
+        run: yarn dist:linux:ci:flatpak
+      - name: Checkout flathub repository.
+        run: git clone https://github.com/flathub/xyz.hyperplay.HyperPlay.git
+      - name: Export tag name.
+        run: export RELEASE_VERSION=$GITHUB_REF_NAME
+      - name: Update flathub release
+        run: yarn updateFlathub
+      - name: Branch flathub repo
+        run: cd xyz.hyperplay.HyperPlay && git checkout -b "$GITHUB_REF_NAME"
+      - name: Publish flathub branch
+        run: git push --set-upstream origin $GITHUB_REF_NAME
+      - name: PR to flathub repo
+        run: gh pr create --title $GITHUB_REF_NAME --body $GITHUB_REF_NAME --base main
