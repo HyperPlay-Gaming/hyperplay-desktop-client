@@ -42,7 +42,7 @@ Download the `hyperplay.x.x.x_amd64.deb` from the Releases section
 sudo dpkg -i hyperplay.x.x.x_amd64.deb
 ```
 
-#### Other Distributions (TAR.XZ)
+#### Other Distributions (tar.xz)
 
 Since these two distribution formats don't have a form of dependency management, make sure the `curl` command is available. You might run into weird issues if it's not.
 
