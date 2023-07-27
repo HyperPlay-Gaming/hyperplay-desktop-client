@@ -1,4 +1,4 @@
-# HyperPlay
+# HyperPlay-Test
 
 HyperPlay is an Open Source Game Launcher for Linux, Windows and macOS with Web3 features.
 It was conceived as a fork of [Heroic Games Launcher](https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher), so it keeps its features but also add new ones.
