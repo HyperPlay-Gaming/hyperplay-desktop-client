@@ -9,6 +9,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  RELEASE_VERSION: ${{ github.ref_name }}
 
 jobs:
   draft-releases:
@@ -38,14 +39,12 @@ jobs:
         run: yarn dist:linux:ci:flatpak
       - name: Checkout flathub repository.
         run: git clone https://github.com/flathub/xyz.hyperplay.HyperPlay.git
-      - name: Export tag name.
-        run: export RELEASE_VERSION=${{ github.ref_name }}
       - name: Update flathub release
-        run: yarn release:updateFlathub:ci
+        run: export RELEASE_VERSION=${{ github.ref_name }} && yarn release:updateFlathub:ci
       - name: Branch flathub repo
         run: git checkout -b "${{ github.ref_name }}"
         working-directory: ./xyz.hyperplay.HyperPlay
-      - name: Commit files
+      - name: Commit files to xyz.hyperplay.HyperPlay
         run: |
           git config --local user.email "27568879+BrettCleary@users.noreply.github.com"
           git config --local user.name "BrettCleary"
@@ -59,5 +58,5 @@ jobs:
           directory: xyz.hyperplay.HyperPlay
           repository: flathub/xyz.hyperplay.HyperPlay
       - name: PR to flathub repo
-        run: gh pr create --title ${{ github.ref_name }} --body ${{ github.ref_name }} --base main
+        run: sleep 5 && gh pr create --title ${{ github.ref_name }} --body ${{ github.ref_name }} --base master
         working-directory: ./xyz.hyperplay.HyperPlay
