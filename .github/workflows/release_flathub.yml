@@ -46,8 +46,11 @@ jobs:
         run: git checkout -b "${{ github.ref_name }}"
         working-directory: ./xyz.hyperplay.HyperPlay
       - name: Commit changes
-        run: git commit -m "changes for ${{ github.ref_name }}"
-        working-directory: ./xyz.hyperplay.HyperPlay
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: 'changes for ${{ github.ref_name }}'
+          add: '*'
+          cwd: './xyz.hyperplay.HyperPlay/'
       - name: Publish flathub branch
         uses: ad-m/github-push-action@master
         with:
