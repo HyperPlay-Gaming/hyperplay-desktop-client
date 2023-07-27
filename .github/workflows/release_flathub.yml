@@ -46,8 +46,12 @@ jobs:
         run: git checkout -b "${{ github.ref_name }}"
         working-directory: ./xyz.hyperplay.HyperPlay
       - name: Publish flathub branch
-        run: git push --set-upstream origin ${{ github.ref_name }}
-        working-directory: ./xyz.hyperplay.HyperPlay
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.WORKFLOW_TOKEN }}
+          branch: ${{ github.ref_name }}
+          directory: xyz.hyperplay.HyperPlay
+          repository: xyz.hyperplay.HyperPlay
       - name: PR to flathub repo
         run: gh pr create --title ${{ github.ref_name }} --body ${{ github.ref_name }} --base main
         working-directory: ./xyz.hyperplay.HyperPlay
