@@ -8,7 +8,9 @@ console.log('updating url in xyz.hyperplay.HyperPlay.yml')
 const ymlFilePath = './xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.yml'
 let hpYml = fs.readFileSync(ymlFilePath).toString()
 
-const releaseString = `https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/download/${process.env.RELEASE_VERSION}/hyperplay-${process.env.RELEASE_VERSION}.tar.xz`
+const releaseString = `https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/download/${
+  process.env.RELEASE_VERSION
+}/hyperplay-${process.env.RELEASE_VERSION?.substring(1)}.tar.xz`
 hpYml = hpYml.replace(
   /https:\/\/github.com\/HyperPlay-Gaming\/hyperplay-desktop-client\/releases\/download\/v.*..*..*\/hyperplay-.*..*..*.tar.xz/,
   releaseString
