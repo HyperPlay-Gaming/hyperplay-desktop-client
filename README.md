@@ -95,4 +95,3 @@ yarn test:e2ePackaged
 ### Those Awesome Guys: Gamepad prompts images
 
 - URL: https://thoseawesomeguys.com/prompts/
-_
