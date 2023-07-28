@@ -25,7 +25,7 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication
@@ -37,9 +37,9 @@ jobs:
       - name: Install modules.
         run: npm i --legacy-peer-deps
       - name: Build artifacts.
-        run: npm run dist:win nsis
+        run: npm run dist:win
       - name: Upload EXE.
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: win-setup
           path: dist/HyperPlay*.exe
@@ -50,13 +50,15 @@ jobs:
       group: build-linux-${{ github.ref }}
       cancel-in-progress: true
     steps:
+      - name: Install libarchive-tools for pacman build # Related https://github.com/electron-userland/electron-builder/issues/4181
+        run: sudo apt-get install libarchive-tools
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication
@@ -67,13 +69,29 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn
-      - name: Build artifacts.
-        run: yarn dist:linux tar.xz --publish=never
-      - name: Upload Tar.xz.
-        uses: actions/upload-artifact@v2
+      - name: Build deb artifact
+        run: yarn dist:linux:ci:deb
+      - name: Upload deb.
+        uses: actions/upload-artifact@v3
         with:
-          name: linux-appimage
-          path: dist/hyperplay*.tar.xz
+          name: linux-deb
+          path: dist/hyperplay*.deb
+          retention-days: 14
+      - name: Build rpm artifact
+        run: yarn dist:linux:ci:rpm
+      - name: Upload rpm
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-rpm
+          path: dist/hyperplay*.rpm
+          retention-days: 14
+      - name: Build pacman artifact
+        run: yarn dist:linux:ci:pacman
+      - name: Upload pacman
+        uses: actions/upload-artifact@v3
+        with:
+          name: linux-pacman
+          path: dist/hyperplay*.pacman
           retention-days: 14
   build_mac:
     runs-on: macos-13
@@ -87,7 +105,7 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication
@@ -99,7 +117,7 @@ jobs:
       - name: Install modules.
         run: yarn
       - name: Build artifacts.
-        run: yarn dist:mac --x64 --arm64 --publish=never
+        run: yarn dist:mac
         env:
           NOTARIZE: false
       - name: Upload Intel build.
