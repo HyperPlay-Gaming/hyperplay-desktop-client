@@ -1,0 +1,62 @@
+name: Draft Release Flathub
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  RELEASE_VERSION: ${{ github.ref_name }}
+
+jobs:
+  draft-releases:
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo ref name.
+        run: echo "tag name ${{ github.ref_name }}"
+      - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm snapcraft
+      - name: Checkout repository.
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install modules.
+        run: yarn
+      - name: Build tar.xz
+        run: yarn dist:linux:ci:flatpak
+      - name: Checkout flathub repository.
+        run: git clone https://github.com/flathub/xyz.hyperplay.HyperPlay.git
+      - name: Update flathub release
+        run: export RELEASE_VERSION=${{ github.ref_name }} && yarn release:updateFlathub:ci
+      - name: Branch flathub repo
+        run: git checkout -b "${{ github.ref_name }}"
+        working-directory: ./xyz.hyperplay.HyperPlay
+      - name: Commit files to xyz.hyperplay.HyperPlay
+        run: |
+          git config --local user.email "27568879+BrettCleary@users.noreply.github.com"
+          git config --local user.name "BrettCleary"
+          git commit -a -m "changes for ${{ github.ref_name }}"
+        working-directory: ./xyz.hyperplay.HyperPlay
+      - name: Push updated flathub branch
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.WORKFLOW_TOKEN }}
+          branch: ${{ github.ref_name }}
+          directory: xyz.hyperplay.HyperPlay
+          repository: flathub/xyz.hyperplay.HyperPlay
+      - name: PR to flathub repo
+        run: sleep 5 && gh pr create --title ${{ github.ref_name }} --body ${{ github.ref_name }} --base master --head ${{ github.ref_name }}
+        working-directory: ./xyz.hyperplay.HyperPlay
