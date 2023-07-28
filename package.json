@@ -312,7 +312,8 @@
     "typescript": "^4.8.4",
     "vite": "^3.2.7",
     "vite-plugin-electron": "^0.10.2",
-    "vite-plugin-svgr": "^2.2.2"
+    "vite-plugin-svgr": "^2.2.2",
+    "xml-js": "^1.6.11"
   },
   "optionalDependencies": {},
   "packageManager": "yarn@1.22.19"

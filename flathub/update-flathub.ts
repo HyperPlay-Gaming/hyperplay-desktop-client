@@ -1,5 +1,10 @@
 import * as fs from 'fs'
 import * as crypto from 'crypto'
+import * as os from 'os'
+import * as child_process from 'child_process'
+import axios from 'axios'
+import * as convert from 'xml-js'
+import { Element } from 'xml-js'
 
 console.log('tag name: ', process.env.RELEASE_VERSION)
 
@@ -16,18 +21,27 @@ hpYml = hpYml.replace(
   releaseString
 )
 
-// update hash in xyz.hyperplay.HyperPlay.yml
+// update hash in xyz.hyperplay.HyperPlay.yml from latest .tar.xz release
 console.log('updating hash in xyz.hyperplay.HyperPlay.yml')
-const tarXzFilePath = fs
-  .readdirSync('./dist')
-  .find((fileName) => fileName.endsWith('.tar.xz'))
-if (tarXzFilePath === undefined) {
-  throw 'Tar XZ could not be found!'
-}
-const outputContent = fs.readFileSync('./dist/' + tarXzFilePath)
+const { data } = await axios.get(
+  'https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest'
+)
+const tarxz = data.assets.find((asset) =>
+  asset.browser_download_url.includes('tar.xz')
+)
+const outputFile = `${os.tmpdir()}/hyperplay.tar.xz`
+child_process.spawnSync('curl', [
+  '-L',
+  tarxz.browser_download_url,
+  '-o',
+  outputFile,
+  '--create-dirs'
+])
+const outputContent = fs.readFileSync(outputFile)
 const hashSum = crypto.createHash('sha512')
 hashSum.update(outputContent)
 const sha512 = hashSum.digest('hex')
+fs.rmSync(outputFile)
 
 hpYml = hpYml.replace(/sha512: [0-9, a-f]{128}/, `sha512: ${sha512}`)
 
@@ -52,3 +66,69 @@ fs.writeFileSync(xmlFilePath, hpXml)
 console.log(
   'Finished updating flathub release! Be sure to update release notes manually before merging.'
 )
+
+// update release notes
+console.log('setting default remote repo for gh cli')
+const repoName = 'HyperPlay-Gaming/hyperplay-desktop-client'
+const releaseUploadResult = child_process.spawnSync('gh repo set-default', [
+  repoName
+])
+console.log(
+  'releaseUploadResult stdout = ',
+  releaseUploadResult.stdout?.toString()
+)
+console.log(
+  'releaseUploadResult stderr = ',
+  releaseUploadResult.stderr?.toString()
+)
+
+const releaseNotesResult = child_process.spawnSync(
+  `gh release view ${process.env.RELEASE_VERSION} --json body`
+)
+const releaseNotesStdOut = releaseNotesResult.stdout?.toString()
+console.log('releaseListResult stdout = ', releaseNotesStdOut)
+console.log(
+  'releaseListResult stderr = ',
+  releaseNotesResult.stderr?.toString()
+)
+
+const releaseNotesComponents = releaseNotesStdOut.split('\n')
+
+console.log(
+  'Finished updating flathub release! Be sure to update release notes manually before merging.'
+)
+
+const hpXmlJson = convert.xml2js(hpXml, { compact: false }) as Element
+const releaseNotesElements: Element[] = []
+
+for (const [i, releaseComponent_i] of releaseNotesComponents.entries()) {
+  //update metainfo hpXml
+  if (i === 0) continue
+  if (!releaseComponent_i.startsWith('\n*')) continue
+  if (releaseComponent_i.includes('http')) continue
+  const releaseNoteElement: Element = {
+    type: 'element',
+    name: 'li',
+    elements: [
+      {
+        type: 'text',
+        text: releaseComponent_i.slice(1) //remove the asterisk
+      }
+    ]
+  }
+  releaseNotesElements.push(releaseNoteElement)
+}
+
+const componentsTag = hpXmlJson.elements?.[0]
+const releasesTag = componentsTag?.elements?.find(
+  (val) => val.name === 'releases'
+) //.releases.release.description.ul =
+const releaseListTag = releasesTag?.elements?.[0].elements?.[0].elements?.find(
+  (val) => val.name === 'ul'
+)
+if (releaseListTag === undefined) {
+  throw 'releaseListTag ul undefined'
+}
+releaseListTag.elements = releaseNotesElements
+hpXml = convert.js2xml(hpXmlJson)
+fs.writeFileSync(xmlFilePath, hpXml)
