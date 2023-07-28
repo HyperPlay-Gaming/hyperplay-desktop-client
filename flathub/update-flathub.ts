@@ -69,7 +69,7 @@ console.log(
 
 // update release notes
 console.log('setting default remote repo for gh cli')
-const repoName = 'HyperPlay-Gaming/hyperplay-desktop-client'
+const repoName = 'BrettCleary/hyperplay-desktop-client' // 'HyperPlay-Gaming/hyperplay-desktop-client'
 const releaseUploadResult = child_process.spawnSync('gh repo set-default', [
   repoName
 ])
@@ -93,10 +93,6 @@ console.log(
 )
 
 const releaseNotesComponents = releaseNotesStdOut.split('\n')
-
-console.log(
-  'Finished updating flathub release! Be sure to update release notes manually before merging.'
-)
 
 const hpXmlJson = convert.xml2js(hpXml, { compact: false }) as Element
 const releaseNotesElements: Element[] = []
@@ -132,3 +128,7 @@ if (releaseListTag === undefined) {
 releaseListTag.elements = releaseNotesElements
 hpXml = convert.js2xml(hpXmlJson)
 fs.writeFileSync(xmlFilePath, hpXml)
+
+console.log(
+  'Finished updating flathub release! Please review and merge the flathub repo PR manually.'
+)
