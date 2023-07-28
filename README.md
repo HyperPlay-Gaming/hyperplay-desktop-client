@@ -1,4 +1,4 @@
-# HyperPlay-Test
+# HyperPlay
 
 HyperPlay is an Open Source Game Launcher for Linux, Windows and macOS with Web3 features.
 It was conceived as a fork of [Heroic Games Launcher](https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher), so it keeps its features but also add new ones.
@@ -42,7 +42,7 @@ Download the `hyperplay.x.x.x_amd64.deb` from the Releases section
 sudo dpkg -i hyperplay.x.x.x_amd64.deb
 ```
 
-#### Other Distributions (tar.xz)
+#### Other Distributions (TAR.XZ)
 
 Since these two distribution formats don't have a form of dependency management, make sure the `curl` command is available. You might run into weird issues if it's not.
 
