@@ -7,13 +7,16 @@ import * as convert from 'xml-js'
 import { Element } from 'xml-js'
 
 console.log('tag name: ', process.env.RELEASE_VERSION)
+const useTestRepo = true
+const repoOrgName = useTestRepo ? 'BrettCleary' : 'HyperPlay-Gaming'
+const repoName = repoOrgName + '/hyperplay-desktop-client'
 
 // update url in xyz.hyperplay.HyperPlay.yml
 console.log('updating url in xyz.hyperplay.HyperPlay.yml')
 const ymlFilePath = './xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.yml'
 let hpYml = fs.readFileSync(ymlFilePath).toString()
 
-const releaseString = `https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/download/${
+const releaseString = `https://github.com/${repoName}/releases/download/${
   process.env.RELEASE_VERSION
 }/hyperplay-${process.env.RELEASE_VERSION?.substring(1)}.tar.xz`
 hpYml = hpYml.replace(
@@ -24,7 +27,7 @@ hpYml = hpYml.replace(
 // update hash in xyz.hyperplay.HyperPlay.yml from latest .tar.xz release
 console.log('updating hash in xyz.hyperplay.HyperPlay.yml')
 const { data } = await axios.get(
-  'https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest'
+  `https://api.github.com/repos/${repoName}/releases/latest`
 )
 const tarxz = data.assets.find((asset) =>
   asset.browser_download_url.includes('tar.xz')
@@ -69,7 +72,6 @@ console.log(
 
 // update release notes
 console.log('setting default remote repo for gh cli')
-const repoName = 'BrettCleary/hyperplay-desktop-client' // 'HyperPlay-Gaming/hyperplay-desktop-client'
 const releaseUploadResult = child_process.spawnSync('gh repo set-default', [
   repoName
 ])
