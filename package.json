@@ -106,7 +106,8 @@
       },
       "asarUnpack": [
         "build/bin/linux/legendary",
-        "build/bin/linux/gogdl"
+        "build/bin/linux/gogdl",
+        "build/bin/linux/wmctrl"
       ],
       "files": [
         "build/bin/linux/*"
