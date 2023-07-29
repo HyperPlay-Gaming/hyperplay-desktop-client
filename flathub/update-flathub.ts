@@ -73,7 +73,9 @@ async function main() {
 
   // update release notes
   console.log('setting default remote repo for gh cli')
-  const setDefaultResult = child_process.spawnSync('gh repo set-default', [
+  const setDefaultResult = child_process.spawnSync('gh', [
+    'repo',
+    'set-default',
     repoName
   ])
   console.log('setDefaultResult stdout = ', setDefaultResult.stdout?.toString())
@@ -84,9 +86,13 @@ async function main() {
     setDefaultResult?.error
   )
 
-  const releaseNotesResult = child_process.spawnSync(
-    `gh release view ${process.env.RELEASE_VERSION} --json body`
-  )
+  const releaseNotesResult = child_process.spawnSync('gh', [
+    'release',
+    'view',
+    process.env.RELEASE_VERSION ?? 'undefined',
+    '--json',
+    'body'
+  ])
   const releaseNotesStdOut = releaseNotesResult.stdout?.toString()
   console.log('releaseListResult stdout = ', releaseNotesStdOut)
   console.log(
@@ -94,7 +100,8 @@ async function main() {
     releaseNotesResult.stderr?.toString()
   )
 
-  const releaseNotesComponents = releaseNotesStdOut.split('\n')
+  const releaseNotesJson = JSON.parse(releaseNotesStdOut)
+  const releaseNotesComponents = releaseNotesJson.body.split('\n')
 
   const hpXmlJson = convert.xml2js(hpXml, { compact: false }) as Element
   const releaseNotesElements: Element[] = []
@@ -102,7 +109,7 @@ async function main() {
   for (const [i, releaseComponent_i] of releaseNotesComponents.entries()) {
     //update metainfo hpXml
     if (i === 0) continue
-    if (!releaseComponent_i.startsWith('\n*')) continue
+    if (!releaseComponent_i.startsWith('*')) continue
     if (releaseComponent_i.includes('http')) continue
     const releaseNoteElement: Element = {
       type: 'element',
