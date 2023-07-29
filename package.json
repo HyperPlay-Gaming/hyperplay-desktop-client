@@ -236,7 +236,7 @@
     "test:e2ePackaged": "cross-env TEST_PACKAGED=true yarn test:e2e",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
     "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
-    "release:updateFlathub:ci": "tsc flathub/update-flathub.ts --skipLibCheck && node flathub/update-flathub.js",
+    "release:updateFlathub:ci": "tsc flathub/update-flathub.ts --skipLibCheck --target es2015 --moduleResolution node --module commonjs && node flathub/update-flathub.js",
     "release:mac": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "cross-env NODE_ENV_ELECTRON_VITE=production vite build && electron-builder -p always --win nsis",
     "dist:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder --linux",
