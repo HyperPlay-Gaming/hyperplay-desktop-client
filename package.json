@@ -236,7 +236,7 @@
     "test:e2ePackaged": "cross-env TEST_PACKAGED=true yarn test:e2e",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
     "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
-    "release:updateFlathub:ci": "tsc flathub/update-flathub.ts --skipLibCheck && node flathub/update-flathub.js",
+    "release:updateFlathub:ci": "tsc flathub/update-flathub.ts --skipLibCheck --target es2015 --moduleResolution node --module commonjs && node flathub/update-flathub.js",
     "release:mac": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64 --arm64",
     "release:win": "cross-env NODE_ENV_ELECTRON_VITE=production vite build && electron-builder -p always --win nsis",
     "dist:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder --linux",
@@ -312,7 +312,8 @@
     "typescript": "^4.8.4",
     "vite": "^3.2.7",
     "vite-plugin-electron": "^0.10.2",
-    "vite-plugin-svgr": "^2.2.2"
+    "vite-plugin-svgr": "^2.2.2",
+    "xml-js": "^1.6.11"
   },
   "optionalDependencies": {},
   "packageManager": "yarn@1.22.19"
