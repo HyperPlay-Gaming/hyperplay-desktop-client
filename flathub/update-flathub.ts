@@ -8,7 +8,7 @@ import { Element } from 'xml-js'
 
 async function main() {
   console.log('tag name: ', process.env.RELEASE_VERSION)
-  const useTestRepo = true
+  const useTestRepo = false
   const repoOrgName = useTestRepo ? 'BrettCleary' : 'HyperPlay-Gaming'
   const repoName = repoOrgName + '/hyperplay-desktop-client'
 
