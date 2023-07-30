@@ -3,7 +3,7 @@ import { app } from 'electron'
 import { extractZip } from '../../backend/utils'
 import { logError } from '../logger/logger'
 import * as utils from '../utils'
-import { test_data } from './test_data/github-api-heroic-test-data.json'
+import { test_data } from './test_data/github-api-hyperplay-test-data.json'
 import path from 'path'
 import {
   copyFileSync,

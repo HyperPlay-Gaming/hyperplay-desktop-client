@@ -147,7 +147,8 @@
         "title": "Sélectionnez les composants à installer"
     },
     "setting": {
-        "use-default-wine-settings": "Utiliser les paramètres de Wine par défaut"
+        "use-default-wine-settings": "Utiliser les paramètres de Wine par défaut",
+        "winecrossoverbottle": "Pont-Bouteille"
     },
     "sideload": {
         "field": {

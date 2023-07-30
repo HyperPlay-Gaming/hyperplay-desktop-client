@@ -98,7 +98,7 @@
             "message": "Kutilayotgan operatsiyalar bor, ishonchingiz komilmi?",
             "title": "Chiqish"
         },
-        "reset-heroic": {
+        "reset-hyperplay": {
             "question": {
                 "message": "Haqiqatan ham HyperPlay sozlamalarini asliga qaytarmoqchimisiz? Bu barcha Sozlamalar va keshlashni olib tashlaydi, lekin oʻrnatilgan oʻyinlaringizni yoki Epic hisob maʼlumotlarini olib tashlamaydi. HyperPlay-ning portativ versiyalari (AppImage, WinPortable, ...) keyin qo'lda qayta ishga tushirilishi kerak.",
                 "title": "Qahramonlikni tiklash"
@@ -329,7 +329,7 @@
         "disable_logs": "Jurnal fayllariga yozishning ko'p qismini o'chirish uchun ushbu katakchani ON holatiga o'tkazing (muhim ma'lumotlar har doim qayd qilinadi). Har qanday muammo haqida xabar berishdan oldin ushbu sozlamani O‘CHIRING."
     },
     "info": {
-        "heroic": {
+        "hyperplay": {
             "beta": "Beta",
             "click-to-see-changelog": "O'zgarishlar jurnalini ko'rish uchun bosing",
             "newReleases": "Yangilanish mavjud!",
@@ -421,7 +421,7 @@
         },
         "moved": "Ko‘chirish tugallandi",
         "moving": "Harakatlanuvchi o'yin",
-        "new-heroic-version": "Yangi HyperPlay versiyasi chiqdi!",
+        "new-hyperplay-version": "Yangi HyperPlay versiyasi chiqdi!",
         "refresh": {
             "error": "Relizlarni yuqori oqimdan olib bo'lmadi, ehtimol Github API cheklovlari tufayli! Keyinroq qayta urinib ko‘ring."
         },
@@ -653,7 +653,7 @@
             "sync": "Cloud Saves Sync"
         },
         "open-config-file": "Konfiguratsiya faylini oching",
-        "reset-heroic": "Qahramonlikni tiklash",
+        "reset-hyperplay": "Qahramonlikni tiklash",
         "saves": {
             "warning": "Bulutli saqlash funksiyasi beta-versiyasida, sinxronlashdan oldin saqlangan maʼlumotlarning zaxira nusxasini yarating (agar biror narsa notoʻgʻri boʻlsa)"
         }
