@@ -71,28 +71,10 @@ jobs:
         run: yarn
       - name: Build deb artifact
         run: yarn dist:linux:ci:deb
-      - name: Upload deb.
-        uses: actions/upload-artifact@v3
-        with:
-          name: linux-deb
-          path: dist/hyperplay*.deb
-          retention-days: 14
       - name: Build rpm artifact
         run: yarn dist:linux:ci:rpm
-      - name: Upload rpm
-        uses: actions/upload-artifact@v3
-        with:
-          name: linux-rpm
-          path: dist/hyperplay*.rpm
-          retention-days: 14
       - name: Build pacman artifact
         run: yarn dist:linux:ci:pacman
-      - name: Upload pacman
-        uses: actions/upload-artifact@v3
-        with:
-          name: linux-pacman
-          path: dist/hyperplay*.pacman
-          retention-days: 14
   build_mac:
     runs-on: macos-13
     concurrency:
