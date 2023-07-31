@@ -15,7 +15,6 @@ jobs:
     steps:
       - name: echo ref name.
         run: echo "tag name ${{ github.ref_name }}"
-      - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm snapcraft
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
