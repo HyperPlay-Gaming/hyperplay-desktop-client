@@ -46,14 +46,17 @@ const DLCDownloadListing: React.FC<Props> = ({
 
   return (
     <div className="InstallModal__dlcs">
-      <label className="InstallModal__toggle toggleWrapper">
-        <ToggleSwitch
-          htmlId="dlcs"
-          value={installAllDlcs}
-          handleChange={() => handleAllDlcs()}
-          title={t('dlc.installDlcs', 'Install all DLCs')}
-        />
-      </label>
+      <span>{t('dlcs.label', 'Select DLCs to install:')}</span>
+      {DLCList.length > 1 && (
+        <label className="InstallModal__toggle toggleWrapper">
+          <ToggleSwitch
+            htmlId="dlcs"
+            value={installAllDlcs}
+            handleChange={() => handleAllDlcs()}
+            title={t('dlc.installDlcs', 'Install all DLCs')}
+          />
+        </label>
+      )}
       <div className="InstallModal__dlcsList">
         {DLCList?.map(({ title, app_name }, index) => (
           <label

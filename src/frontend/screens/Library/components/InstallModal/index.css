@@ -64,7 +64,7 @@
 
 .InstallModal__dlcs,
 .InstallModal__sdls {
-  margin: 0 var(--space-md);
+  margin: var(--space-md);
 }
 
 .InstallModal__dlcsList {

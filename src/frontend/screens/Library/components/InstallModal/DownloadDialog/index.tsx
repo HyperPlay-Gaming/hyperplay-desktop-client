@@ -308,10 +308,7 @@ export default function DownloadDialog({
     getSpace()
   }, [installPath, gameInstallInfo?.manifest?.disk_size])
 
-  const haveDLCs =
-    gameInstallInfo &&
-    gameInstallInfo?.game?.owned_dlc?.length &&
-    gameInstallInfo?.game?.owned_dlc?.length > 0
+  const haveDLCs: boolean = gameInstallInfo?.game?.owned_dlc?.length !== 0
   const DLCList = gameInstallInfo?.game?.owned_dlc
 
   const downloadSize = () => {
@@ -523,11 +520,6 @@ export default function DownloadDialog({
           }
         />
         {children}
-        {haveDLCs || haveSDL ? (
-          <div className="InstallModal__sectionHeader">
-            {t('sdl.title', 'Select components to Install')}:
-          </div>
-        ) : null}
         {haveSDL ? (
           <div className="InstallModal__sdls">
             {sdls.map((sdl: SelectiveDownload, idx: number) => (
