@@ -162,13 +162,17 @@ export default React.memo(function GamePage(): JSX.Element | null {
           channels
         } = { ...gameInfo }
 
-        if (channels === undefined || install.channelName === undefined)
-          throw 'Cannot get channels'
-        const releaseMeta = channels[install.channelName].release_meta
+        let hpPlatforms: AppPlatforms = 'windows_amd64'
 
-        const hpPlatforms = releaseMeta
-          ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
-          : 'Windows'
+        if (runner === 'hyperplay') {
+          if (channels === undefined || install.channelName === undefined)
+            throw 'Cannot get channels'
+          const releaseMeta = channels[install.channelName].release_meta
+
+          hpPlatforms = releaseMeta
+            ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
+            : 'windows_amd64'
+        }
 
         const othersPlatforms =
           install.platform ||
