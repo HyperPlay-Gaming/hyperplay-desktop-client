@@ -26,7 +26,6 @@ import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { hrtime } from 'process'
 import { trackEvent } from 'backend/metrics/metrics'
-import { backendEvents } from 'backend/backend_events'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -82,13 +81,36 @@ const openNewBrowserGameWindow = async (
       }
     })
 
-    backendEvents.addListener('toggleFullscreen', () => {
+    function toggleFullscreen() {
       if (browserGame.isDestroyed()) return
 
       const fullscreenSize = browserGame.getSize()
       browserGame.setFullScreen(!browserGame.isFullScreen())
       browserGame.setSize(fullscreenSize[0], fullscreenSize[1])
-    })
+    }
+
+    function beforeInputEventHandler(
+      event: Electron.Event,
+      input: Electron.Input
+    ) {
+      logInfo(
+        `before input event in browser game window with input key = ${input.key}`,
+        LogPrefix.HyperPlay
+      )
+      if (input.key === 'F11' && input.type === 'keyDown') toggleFullscreen()
+      // this fixes DFK fullscreen toggle and ensures toggling is not called twice in dev mode
+      event.preventDefault()
+    }
+
+    function checkContentsUrlBeforeHandling(contents: Electron.WebContents) {
+      return (event: Electron.Event, input: Electron.Input) => {
+        if (contents.getURL() !== browserUrl) return
+        return beforeInputEventHandler(event, input)
+      }
+    }
+
+    browserGame.webContents?.on('before-input-event', beforeInputEventHandler)
+
     browserGame.setIgnoreMouseEvents(false)
     browserGame.setMinimizable(true)
 
@@ -115,6 +137,12 @@ const openNewBrowserGameWindow = async (
     ) => {
       // Check for a webview
       if (contents.getType() === 'webview') {
+        // this contents isn't necessarily the contents of the browser game so check first
+        contents?.on(
+          'before-input-event',
+          checkContentsUrlBeforeHandling(contents)
+        )
+
         contents.setWindowOpenHandler(({ url }) => {
           const urlToOpen = new URL(url)
           const protocol = urlToOpen.protocol
