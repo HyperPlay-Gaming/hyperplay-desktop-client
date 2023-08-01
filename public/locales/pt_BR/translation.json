@@ -147,7 +147,7 @@
                 "message": "Não foi possível encontrar a versão do Wine selecionada para rodar este título ({{selectedWine}}). {{newline}} Encontramos outro, deseja continuar a iniciar usando {{foundWine}}? ?"
             }
         },
-        "wineprefix": "Escolha o caminho do prefixo Wine",
+        "wineprefix": "Escolha o Caminho do Prefixo Wine",
         "yes": "SIM",
         "dontShowAgain": "Não mostrar novamente"
     },
@@ -285,7 +285,7 @@
             "searching": "Tentando detectar a pasta salvar correta (clique para cancelar)"
         },
         "settings": "As configurações são salvas automaticamente",
-        "version": "Versão Wine"
+        "version": "Versão do Wine"
     },
     "infobox": {
         "help": "Ajuda",
@@ -706,7 +706,8 @@
                         "createNewWallet": "Criar nova carteira de extensão MM",
                         "details": "Ao importar, a instalação e as configurações do MetaMask serão importadas para o HyperPlay.",
                         "title": "Selecione o navegador do qual importar",
-                        "useRecoveryPhrase": "Acesso com a frase secreta de recuperação"
+                        "useRecoveryPhrase": "Acesso com a frase secreta de recuperação",
+                        "cantFindProfile": "Não é possível encontrar o perfil do seu navegador?"
                     }
                 },
                 "pleaseConnect": "Conecte sua carteira ou baixe o aplicativo móvel Netmask para obter\n        iniciado:",
@@ -752,7 +753,8 @@
         "buttons": {
             "noThanks": "Não obrigado",
             "agree": "Concordo"
-        }
+        },
+        "otp": "Senha única"
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -806,5 +808,15 @@
     "sideload": {
         "warningTitle": "Importante",
         "warningMessage": "O carregamento lateral de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O carregamento lateral de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos."
+    },
+    "gameRelease": {
+        "demo": "Demo",
+        "main": "Principal",
+        "prototype": "Protótipo",
+        "beta": "Beta",
+        "alpha": "Alfa"
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Você está conectado ao HyperPlay com uma carteira externa. . \n \n Para aprovar transações na sobreposição do HyperPlay, você precisará se conectar ao HyperPlay com a extensão MetaMask.."
     }
 }
