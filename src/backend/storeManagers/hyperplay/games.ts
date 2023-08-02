@@ -54,6 +54,7 @@ import {
 import { isOnline } from 'backend/online_monitor'
 import { clean } from 'easydl/dist/utils'
 import axios from 'axios'
+import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -288,6 +289,35 @@ function getZipFileName(appName: string, platformInfo: PlatformConfig): string {
   return zipFile
 }
 
+async function getAccessCodeGatedPlatforms(
+  accessCode: string,
+  channelId: number
+): Promise<PlatformsMetaInterface> {
+  // get presigned platform info if code gated
+  const validateUrl = getValidateLicenseKeysApiUrl()
+
+  const validateResult = await axios.post<LicenseConfigValidateResult>(
+    validateUrl,
+    {
+      code: accessCode,
+      channel_id: channelId
+    }
+  )
+
+  if (validateResult.data.valid !== true)
+    throw `Access code ${accessCode} is not valid for channel id ${channelId}!`
+
+  //set platform info
+  logInfo(
+    'Updating platform info with access code gated platform info in HyperPlay Game Manager',
+    LogPrefix.HyperPlay
+  )
+  if (validateResult.data.platforms === undefined)
+    throw 'Access code gated platforms returned by the validate url were undefined'
+
+  return validateResult.data.platforms
+}
+
 export async function install(
   appName: string,
   { path: dirpath, platformToInstall, channelName, accessCode }: InstallArgs
@@ -351,28 +381,15 @@ export async function install(
 
     // get presigned platform info if code gated
     if (selectedChannel.license_config.access_codes) {
-      const validateUrl = getValidateLicenseKeysApiUrl()
-
       if (accessCode === undefined)
         throw 'Access code was undefined for an access code gated channel'
 
-      const validateResult = await axios.post<LicenseConfigValidateResult>(
-        validateUrl,
-        {
-          code: accessCode,
-          channel_id: selectedChannel.channel_id
-        }
+      const gatedPlatforms = await getAccessCodeGatedPlatforms(
+        accessCode,
+        selectedChannel.channel_id
       )
 
-      if (validateResult.data.valid !== true)
-        throw `Access code ${accessCode} is not valid for channel id ${selectedChannel.channel_id}!`
-
-      //set platform info
-      logInfo(
-        'Updating platform info with access code gated platform info in HyperPlay Game Manager',
-        LogPrefix.HyperPlay
-      )
-      platformInfo = validateResult.data.platforms[appPlatform] ?? platformInfo
+      platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
     }
 
     await downloadGame(appName, zipFile, platformInfo, destinationPath)
