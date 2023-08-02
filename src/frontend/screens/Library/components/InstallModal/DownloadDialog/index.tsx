@@ -565,14 +565,14 @@ export default function DownloadDialog({
       <DialogFooter>
         <Button
           type="tertiary"
-          size="large"
+          size="medium"
           onClick={async () => handleInstall('import')}
         >
           {t('button.import')}
         </Button>
         <Button
           type="secondary"
-          size="large"
+          size="medium"
           onClick={async () => handleInstall()}
           disabled={!readyToInstall}
         >
