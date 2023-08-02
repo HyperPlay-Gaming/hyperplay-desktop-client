@@ -175,6 +175,8 @@ export interface GameInfo {
   //data schema version
   v?: string
   account_name?: string
+  //key is channel_id, value is last access code used
+  accessCodesCache?: Record<string, string>
 }
 
 export interface GameSettings {

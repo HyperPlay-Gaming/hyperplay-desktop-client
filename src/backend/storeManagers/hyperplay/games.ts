@@ -291,9 +291,9 @@ function getZipFileName(appName: string, platformInfo: PlatformConfig): string {
 
 async function getAccessCodeGatedPlatforms(
   accessCode: string,
-  channelId: number
+  channelId: number,
+  appName: string
 ): Promise<PlatformsMetaInterface> {
-  // get presigned platform info if code gated
   const validateUrl = getValidateLicenseKeysApiUrl()
 
   const validateResult = await axios.post<LicenseConfigValidateResult>(
@@ -314,6 +314,18 @@ async function getAccessCodeGatedPlatforms(
   )
   if (validateResult.data.platforms === undefined)
     throw 'Access code gated platforms returned by the validate url were undefined'
+
+  // update local game info access key code cache
+  // this will be needed for updating the game
+  const hpGames = hpLibraryStore.get('games', [])
+  const newHpGames = hpGames.map((val) => {
+    if (val.app_name === appName) {
+      if (val.accessCodesCache === undefined) val.accessCodesCache = {}
+      val.accessCodesCache[channelId] = accessCode
+    }
+    return val
+  })
+  hpLibraryStore.set('games', newHpGames)
 
   return validateResult.data.platforms
 }
@@ -386,7 +398,8 @@ export async function install(
 
       const gatedPlatforms = await getAccessCodeGatedPlatforms(
         accessCode,
-        selectedChannel.channel_id
+        selectedChannel.channel_id,
+        appName
       )
 
       platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
@@ -614,11 +627,30 @@ export async function update(appName: string): Promise<InstallResult> {
 
   await uninstall({ appName })
 
+  let accessCode: string | undefined = undefined
+
+  // if we used an access code for this channel on last install, use it again
+  // if this fails due a different license config, game will remain in an uninstalled state
+  if (
+    gameInfo.channels !== undefined &&
+    gameInfo.install.channelName !== undefined &&
+    gameInfo.channels[gameInfo.install.channelName] !== undefined
+  ) {
+    const channelIdOfCurrentInstall =
+      gameInfo.channels[gameInfo.install.channelName].channel_id
+    if (
+      gameInfo.accessCodesCache !== undefined &&
+      Object.hasOwn(gameInfo.accessCodesCache, channelIdOfCurrentInstall)
+    )
+      accessCode = gameInfo.accessCodesCache[channelIdOfCurrentInstall]
+  }
+
   //install the new version
   const installResult = await install(appName, {
     path: path.dirname(gameInfo.install.install_path),
     platformToInstall: gameInfo.install.platform,
-    channelName: gameInfo.install.channelName
+    channelName: gameInfo.install.channelName,
+    accessCode
   })
   return installResult
 }
