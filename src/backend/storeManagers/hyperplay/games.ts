@@ -5,7 +5,8 @@ import {
   ExtraInfo,
   ExecResult,
   GameSettings,
-  PlatformConfig
+  PlatformConfig,
+  LicenseConfigValidateResult
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
@@ -17,7 +18,8 @@ import {
   isWindows,
   isLinux,
   configFolder,
-  mainReleaseChannelName
+  mainReleaseChannelName,
+  getValidateLicenseKeysApiUrl
 } from 'backend/constants'
 import {
   downloadFile,
@@ -51,6 +53,7 @@ import {
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
 import { clean } from 'easydl/dist/utils'
+import axios from 'axios'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -287,7 +290,7 @@ function getZipFileName(appName: string, platformInfo: PlatformConfig): string {
 
 export async function install(
   appName: string,
-  { path: dirpath, platformToInstall, channelName }: InstallArgs
+  { path: dirpath, platformToInstall, channelName, accessCode }: InstallArgs
 ): Promise<InstallResult> {
   if (!existsSync(dirpath) && platformToInstall !== 'Browser') {
     mkdirSync(dirpath, { recursive: true })
@@ -306,14 +309,15 @@ export async function install(
     return { status: 'error', error: `Channel name not found for ${appName}` }
   }
 
-  const releaseMeta = channels[channelName].release_meta
+  const selectedChannel = channels[channelName]
+  const releaseMeta = selectedChannel.release_meta
   if (!releaseMeta) {
     return { status: 'error', error: `Release meta not found for ${appName}` }
   }
   const releaseVersion: string | undefined = releaseMeta.name
 
   const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
-  const platformInfo = releaseMeta.platforms[appPlatform]
+  let platformInfo = releaseMeta.platforms[appPlatform]
 
   if (!platformInfo) {
     return { status: 'error', error: `Platform info not found for ${appName}` }
@@ -344,6 +348,33 @@ export async function install(
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
+
+    // get presigned platform info if code gated
+    if (selectedChannel.license_config.access_codes) {
+      const validateUrl = getValidateLicenseKeysApiUrl()
+
+      if (accessCode === undefined)
+        throw 'Access code was undefined for an access code gated channel'
+
+      const validateResult = await axios.post<LicenseConfigValidateResult>(
+        validateUrl,
+        {
+          code: accessCode,
+          channel_id: selectedChannel.channel_id
+        }
+      )
+
+      if (validateResult.data.valid !== true)
+        throw `Access code ${accessCode} is not valid for channel id ${selectedChannel.channel_id}!`
+
+      //set platform info
+      logInfo(
+        'Updating platform info with access code gated platform info in HyperPlay Game Manager',
+        LogPrefix.HyperPlay
+      )
+      platformInfo = validateResult.data.platforms[appPlatform] ?? platformInfo
+    }
+
     await downloadGame(appName, zipFile, platformInfo, destinationPath)
     if (!platformInfo.executable) {
       return {

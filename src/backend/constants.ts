@@ -88,9 +88,14 @@ const eventsToCloseMetaMaskPopupOn = [
 ]
 const valistListingsApiUrl = 'https://developers.hyperplay.xyz/api/v1/listings'
 const mainReleaseChannelName = 'main'
+const valistBaseApiUrlv1 = 'https://api.valist.io/v1'
 
 export function getValistListingApiUrl(projectId: string) {
   return `${valistListingsApiUrl}/${projectId}`
+}
+
+export function getValidateLicenseKeysApiUrl() {
+  return `${valistBaseApiUrlv1}/license_keys/validate`
 }
 
 /**

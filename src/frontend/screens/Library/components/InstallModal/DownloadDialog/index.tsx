@@ -59,6 +59,7 @@ interface Props {
   children: React.ReactNode
   gameInfo: GameInfo
   channelNameToInstall: string
+  accessCode: string
 }
 
 type DiskSpaceInfo = {
@@ -112,7 +113,8 @@ export default function DownloadDialog({
   children,
   gameInfo,
   crossoverBottle,
-  channelNameToInstall
+  channelNameToInstall,
+  accessCode
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -215,7 +217,8 @@ export default function DownloadDialog({
       installLanguage,
       platformToInstall,
       showDialogModal: () => backdropClick(),
-      channelName: channelNameToInstall
+      channelName: channelNameToInstall,
+      accessCode
     })
   }
 
