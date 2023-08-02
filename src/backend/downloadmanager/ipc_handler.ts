@@ -1,15 +1,15 @@
 import { ipcMain } from 'electron'
 import {
-  addToQueue,
   cancelCurrentDownload,
   getQueueInformation,
   pauseCurrentDownload,
   removeFromQueue,
   resumeCurrentDownload
 } from './downloadqueue'
+import addToDMQueue from './utils/addToDMQueue'
 
-ipcMain.handle('addToDMQueue', async (e, element) => {
-  await addToQueue(element)
+ipcMain.handle('addToDMQueue', async (e, args, type) => {
+  return addToDMQueue(args, type)
 })
 
 ipcMain.on('removeFromDMQueue', (e, appName) => {

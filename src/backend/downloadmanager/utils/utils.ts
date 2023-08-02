@@ -1,13 +1,12 @@
-import { logError, LogPrefix, logWarning } from '../logger/logger'
-import { isEpicServiceOffline } from '../utils'
+import { logError, LogPrefix, logWarning } from '../../logger/logger'
+import { isEpicServiceOffline } from '../../utils'
 import { DMStatus, InstallParams, InstallPlatform } from 'common/types'
 import i18next from 'i18next'
-import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
-import { isOnline } from '../online_monitor'
-import { sendFrontendMessage } from '../main_window'
+import { notify, showDialogBoxModalAuto } from '../../dialog/dialog'
+import { isOnline } from '../../online_monitor'
+import { sendFrontendMessage } from '../../main_window'
 import { trackEvent } from 'backend/metrics/metrics'
 import { gameManagerMap } from 'backend/storeManagers'
-
 async function installQueueElement(params: InstallParams): Promise<{
   status: DMStatus
   error?: string | undefined

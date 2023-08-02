@@ -3,34 +3,7 @@ import { ipcRenderer } from 'electron'
 import { DMQueueElement, InstallParams, UpdateParams } from 'common/types'
 
 export const install = async (args: InstallParams) => {
-  const dmQueueElement: DMQueueElement = {
-    params: args,
-    type: 'install',
-    addToQueueTime: Date.now(),
-    endTime: 0,
-    startTime: 0
-  }
-
-  await ipcRenderer.invoke('addToDMQueue', dmQueueElement)
-
-  // Add Dlcs to the queue
-  if (Array.isArray(args.installDlcs) && args.installDlcs.length > 0) {
-    args.installDlcs.forEach(async (dlc) => {
-      const dlcArgs: InstallParams = {
-        ...args,
-        appName: dlc,
-        installDlcs: false
-      }
-      const dlcQueueElement: DMQueueElement = {
-        params: dlcArgs,
-        type: 'install',
-        addToQueueTime: Date.now(),
-        endTime: 0,
-        startTime: 0
-      }
-      await ipcRenderer.invoke('addToDMQueue', dlcQueueElement)
-    })
-  }
+  return ipcRenderer.invoke('addToDMQueue', args, 'install')
 }
 
 export const updateGame = (args: UpdateParams) => {
@@ -40,20 +13,13 @@ export const updateGame = (args: UpdateParams) => {
     }
   } = args
 
-  const dmQueueElement: DMQueueElement = {
-    params: { ...args, path: install_path!, platformToInstall: platform! },
-    type: 'update',
-    addToQueueTime: Date.now(),
-    endTime: 0,
-    startTime: 0
+  const argsInstallParams = {
+    ...args,
+    path: install_path!,
+    platformToInstall: platform!
   }
 
-  ipcRenderer.invoke('addToDMQueue', dmQueueElement)
-
-  ipcRenderer.invoke('trackEvent', {
-    event: 'Game Update Requested',
-    properties: { game_name: args.appName, store_name: args.runner }
-  })
+  ipcRenderer.invoke('addToDMQueue', argsInstallParams, 'update')
 }
 
 export const getDMQueueInformation = async () =>

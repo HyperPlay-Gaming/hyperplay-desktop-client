@@ -196,7 +196,10 @@ interface HyperPlayAsyncIPCFunctions {
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
-  addToDMQueue: (element: DMQueueElement) => Promise<void>
+  addToDMQueue: (
+    args: InstallParams,
+    type: 'update' | 'install'
+  ) => Promise<void>
   kill: (appName: string, runner: Runner) => Promise<void>
   checkDiskSpace: (folder: string) => Promise<DiskSpaceData>
   callTool: (args: Tools) => Promise<void>
