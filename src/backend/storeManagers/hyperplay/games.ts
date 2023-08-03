@@ -324,12 +324,14 @@ export async function install(
         status: 'extracting'
       })
 
+      process.noAsar = true
       if (isWindows) {
         await extractZip(zipFile, destinationPath)
         await installDistributables(destinationPath)
       } else {
         await extractZip(zipFile, destinationPath)
       }
+      process.noAsar = false
 
       if (isMac && executable.endsWith('.app')) {
         const macAppExecutable = readdirSync(
