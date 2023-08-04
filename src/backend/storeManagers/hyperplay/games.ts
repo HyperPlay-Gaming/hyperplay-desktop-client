@@ -5,7 +5,8 @@ import {
   ExtraInfo,
   ExecResult,
   GameSettings,
-  PlatformConfig
+  PlatformConfig,
+  LicenseConfigValidateResult
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
@@ -17,7 +18,8 @@ import {
   isWindows,
   isLinux,
   configFolder,
-  mainReleaseChannelName
+  mainReleaseChannelName,
+  getValidateLicenseKeysApiUrl
 } from 'backend/constants'
 import {
   downloadFile,
@@ -51,6 +53,8 @@ import {
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
 import { clean } from 'easydl/dist/utils'
+import axios from 'axios'
+import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -285,9 +289,50 @@ function getZipFileName(appName: string, platformInfo: PlatformConfig): string {
   return zipFile
 }
 
+async function getAccessCodeGatedPlatforms(
+  accessCode: string,
+  channelId: number,
+  appName: string
+): Promise<PlatformsMetaInterface> {
+  const validateUrl = getValidateLicenseKeysApiUrl()
+
+  const validateResult = await axios.post<LicenseConfigValidateResult>(
+    validateUrl,
+    {
+      code: accessCode,
+      channel_id: channelId
+    }
+  )
+
+  if (validateResult.data.valid !== true)
+    throw `Access code ${accessCode} is not valid for channel id ${channelId}!`
+
+  //set platform info
+  logInfo(
+    'Updating platform info with access code gated platform info in HyperPlay Game Manager',
+    LogPrefix.HyperPlay
+  )
+  if (validateResult.data.platforms === undefined)
+    throw 'Access code gated platforms returned by the validate url were undefined'
+
+  // update local game info access key code cache
+  // this will be needed for updating the game
+  const hpGames = hpLibraryStore.get('games', [])
+  const newHpGames = hpGames.map((val) => {
+    if (val.app_name === appName) {
+      if (val.accessCodesCache === undefined) val.accessCodesCache = {}
+      val.accessCodesCache[channelId] = accessCode
+    }
+    return val
+  })
+  hpLibraryStore.set('games', newHpGames)
+
+  return validateResult.data.platforms
+}
+
 export async function install(
   appName: string,
-  { path: dirpath, platformToInstall, channelName }: InstallArgs
+  { path: dirpath, platformToInstall, channelName, accessCode }: InstallArgs
 ): Promise<InstallResult> {
   if (!existsSync(dirpath) && platformToInstall !== 'Browser') {
     mkdirSync(dirpath, { recursive: true })
@@ -306,14 +351,15 @@ export async function install(
     return { status: 'error', error: `Channel name not found for ${appName}` }
   }
 
-  const releaseMeta = channels[channelName].release_meta
+  const selectedChannel = channels[channelName]
+  const releaseMeta = selectedChannel.release_meta
   if (!releaseMeta) {
     return { status: 'error', error: `Release meta not found for ${appName}` }
   }
   const releaseVersion: string | undefined = releaseMeta.name
 
   const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
-  const platformInfo = releaseMeta.platforms[appPlatform]
+  let platformInfo = releaseMeta.platforms[appPlatform]
 
   if (!platformInfo) {
     return { status: 'error', error: `Platform info not found for ${appName}` }
@@ -344,6 +390,21 @@ export async function install(
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
+
+    // get presigned platform info if code gated
+    if (selectedChannel.license_config.access_codes) {
+      if (accessCode === undefined)
+        throw 'Access code was undefined for an access code gated channel'
+
+      const gatedPlatforms = await getAccessCodeGatedPlatforms(
+        accessCode,
+        selectedChannel.channel_id,
+        appName
+      )
+
+      platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
+    }
+
     await downloadGame(appName, zipFile, platformInfo, destinationPath)
     if (!platformInfo.executable) {
       return {
@@ -570,11 +631,30 @@ export async function update(appName: string): Promise<InstallResult> {
 
   await uninstall({ appName })
 
+  let accessCode: string | undefined = undefined
+
+  // if we used an access code for this channel on last install, use it again
+  // if this fails due a different license config, game will remain in an uninstalled state
+  if (
+    gameInfo.channels !== undefined &&
+    gameInfo.install.channelName !== undefined &&
+    gameInfo.channels[gameInfo.install.channelName] !== undefined
+  ) {
+    const channelIdOfCurrentInstall =
+      gameInfo.channels[gameInfo.install.channelName].channel_id
+    if (
+      gameInfo.accessCodesCache !== undefined &&
+      Object.hasOwn(gameInfo.accessCodesCache, channelIdOfCurrentInstall)
+    )
+      accessCode = gameInfo.accessCodesCache[channelIdOfCurrentInstall]
+  }
+
   //install the new version
   const installResult = await install(appName, {
     path: path.dirname(gameInfo.install.install_path),
     platformToInstall: gameInfo.install.platform,
-    channelName: gameInfo.install.channelName
+    channelName: gameInfo.install.channelName,
+    accessCode
   })
   return installResult
 }

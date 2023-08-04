@@ -26,6 +26,7 @@ type InstallArgs = {
   installLanguage?: string
   showDialogModal: (options: DialogModalOptions) => void
   channelName?: string
+  accessCode?: string
 }
 
 async function install({
@@ -38,7 +39,8 @@ async function install({
   installDlcs = false,
   installLanguage = 'en-US',
   platformToInstall = 'Windows',
-  channelName
+  channelName,
+  accessCode
 }: InstallArgs) {
   if (!installPath) {
     console.error('installPath is undefined')
@@ -97,7 +99,8 @@ async function install({
     runner,
     platformToInstall,
     gameInfo,
-    channelName
+    channelName,
+    accessCode
   })
 }
 
