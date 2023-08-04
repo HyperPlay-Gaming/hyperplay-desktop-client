@@ -235,7 +235,6 @@ export default function DownloadDialog({
           platformToInstall,
           channelNameToInstall
         )
-        console.log('got install info = ', gameInstallInfo)
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 

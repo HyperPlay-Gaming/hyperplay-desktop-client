@@ -319,6 +319,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return <ErrorComponent message={message} />
     }
 
+    const DLCs = gameInstallInfo?.game.owned_dlc ?? []
+
     const description =
       extraInfo?.about?.shortDescription ||
       extraInfo?.about?.description ||
@@ -402,7 +404,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
                         ? () => setShowRequirements(true)
                         : undefined
                     }
-                    onShowDlcs={() => setShowDlcs(true)}
+                    onShowDlcs={
+                      DLCs.length ? () => setShowDlcs(true) : undefined
+                    }
                   />
                 </div>
               </div>
@@ -638,7 +642,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 <DialogContent>
                   {gameInstallInfo ? (
                     <DLCList
-                      dlcs={gameInstallInfo?.game.owned_dlc ?? []}
+                      dlcs={DLCs}
                       runner={runner}
                       mainAppInfo={gameInfo}
                       onClose={() => setShowDlcs(false)}
