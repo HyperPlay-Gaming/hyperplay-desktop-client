@@ -363,12 +363,16 @@ export async function install(
         status: 'extracting'
       })
 
+      // disables electron's fs wrapper called when extracting .asar files
+      // which is necessary to extract electron app/game zip files
+      process.noAsar = true
       if (isWindows) {
         await extractZip(zipFile, destinationPath)
         await installDistributables(destinationPath)
       } else {
         await extractZip(zipFile, destinationPath)
       }
+      process.noAsar = false
 
       if (isMac && executable.endsWith('.app')) {
         const macAppExecutable = readdirSync(
