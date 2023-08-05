@@ -111,7 +111,7 @@
             "title": "Selecione o EXE"
         },
         "select": {
-            "button": "Selecionar",
+            "button": "Selecione",
             "exe": "Selecionar .EXE"
         },
         "shortcuts": {
@@ -535,8 +535,8 @@
         "showfps": "Mostrar FPS (DX9, 10 e 11)",
         "start-in-tray": "Iniciar Minimizado",
         "steamruntime": "Use Steam Runtime",
-        "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "Prefixo Wine",
+        "winecrossoverbottle": "Prefixo de CrossOver",
+        "wineprefix": "Pasta de prefixo do Wine",
         "wineversion": "Versão do Wine"
     },
     "settings": {
