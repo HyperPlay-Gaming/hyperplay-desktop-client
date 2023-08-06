@@ -161,6 +161,7 @@ import {
   initStoreManagers,
   libraryManagerMap
 } from './storeManagers'
+import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
 import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
@@ -1750,6 +1751,9 @@ ipcMain.handle(
     }
     if (runner === 'nile' && updated) {
       await nileSetup(appName)
+    }
+    if (runner === 'legendary' && updated) {
+      await legendarySetup(appName)
     }
 
     // FIXME: Why are we using `runinprefix` here?

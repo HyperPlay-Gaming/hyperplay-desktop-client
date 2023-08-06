@@ -57,6 +57,7 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
+import { legendarySetup } from './storeManagers/legendary/setup'
 import { gameManagerMap } from 'backend/storeManagers'
 import { trackPidPlaytime } from './metrics/metrics'
 import { closeOverlay, openOverlay } from 'backend/hyperplay-overlay'
@@ -243,6 +244,9 @@ async function prepareWineLaunch(
     }
     if (runner === 'nile') {
       await nileSetup(appName)
+    }
+    if (runner === 'legendary') {
+      await legendarySetup(appName)
     }
   }
 
