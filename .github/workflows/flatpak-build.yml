@@ -28,7 +28,7 @@ jobs:
       options: --privileged
     steps:
       - name: install libnss, libatk, libatk-bridge, libcups, libgtk-3
-        run: sudo dnf install nss-tools atk-devel at-spi2-atk-devel cups-devel gtk3-devel make -y
+        run: sudo dnf install nss-tools atk-devel at-spi2-atk-devel cups-devel gtk3-devel make gcc -y
       - name: Checkout Repo
         uses: actions/checkout@v3
         with:
