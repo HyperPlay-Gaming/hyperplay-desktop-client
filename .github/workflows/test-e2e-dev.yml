@@ -22,7 +22,7 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication
@@ -47,7 +47,7 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication
@@ -76,7 +76,7 @@ jobs:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
       - name: Setup NodeJS
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
           node-version: '18'
       - name: Reconfigure git to use HTTP authentication

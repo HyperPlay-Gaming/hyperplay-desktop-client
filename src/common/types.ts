@@ -7,7 +7,8 @@ import 'i18next'
 import {
   WineSupport,
   SystemRequirements,
-  SupportedPlatform as AppPlatforms
+  SupportedPlatform as AppPlatforms,
+  PlatformsMetaInterface
 } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 
@@ -22,6 +23,20 @@ export type {
   SupportedPlatform as AppPlatforms,
   PlatformConfig
 } from '@valist/sdk/dist/typesShared'
+
+declare module '@valist/sdk/dist/typesApi' {
+  interface Channel {
+    license_config: {
+      id: number
+      access_codes: boolean
+    }
+  }
+}
+
+export interface LicenseConfigValidateResult {
+  valid: boolean
+  platforms: PlatformsMetaInterface
+}
 
 // fix for i18next https://www.i18next.com/overview/typescript#argument-of-type-defaulttfuncreturn-is-not-assignable-to-parameter-of-type-xyz
 declare module 'i18next' {
@@ -161,6 +176,8 @@ export interface GameInfo {
   v?: string
   account_name?: string
   dlcList?: GameMetadataInner[]
+  //key is channel_id, value is last access code used
+  accessCodesCache?: Record<string, string>
 }
 
 export interface GameSettings {
@@ -279,6 +296,7 @@ export interface InstallArgs {
   sdlList?: string[]
   installLanguage?: string
   channelName?: string
+  accessCode?: string
 }
 
 export interface InstallParams extends InstallArgs {

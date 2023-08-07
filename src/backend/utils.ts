@@ -1244,7 +1244,7 @@ export async function downloadFile(
 
   let connections = 1
   try {
-    const response = await axios.head(encodeURI(url))
+    const response = await axios.head(url)
     const cdnCache = response.headers['cdn-cache']
     const isCached = cdnCache === 'HIT' || cdnCache === 'STALE'
     if (isCached) {

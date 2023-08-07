@@ -27,6 +27,7 @@ import { SelectField } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
 import { getPlatformName } from 'frontend/helpers'
 import { translateChannelName } from 'frontend/screens/Library/constants'
+import TextInputField from 'frontend/components/UI/TextInputField'
 
 type Props = {
   appName: string
@@ -55,6 +56,7 @@ export default React.memo(function InstallModal({
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
   const [crossoverBottle, setCrossoverBottle] = useState('')
+  const [accessCode, setAccessCode] = useState('')
 
   const initChannelName =
     gameInfo?.channels && Object.keys(gameInfo?.channels).length > 0
@@ -68,11 +70,9 @@ export default React.memo(function InstallModal({
   const isLinux = platform === 'linux'
   const isSideload = runner === 'sideload'
 
-  const channelPlatforms =
-    (gameInfo !== null &&
-      gameInfo.channels !== undefined &&
-      gameInfo.channels[channelNameToInstall].release_meta.platforms) ??
-    []
+  const selectedChannel = gameInfo?.channels?.[channelNameToInstall]
+
+  const channelPlatforms = selectedChannel?.release_meta.platforms ?? []
   const hpPlatforms = Object.keys(channelPlatforms) as AppPlatforms[]
   const isHpGame = runner === 'hyperplay'
 
@@ -187,24 +187,34 @@ export default React.memo(function InstallModal({
 
   function channelNameSelection() {
     return (
-      <SelectField
-        label={`${t('game.selectChannelName', 'Select Channel Name')}:`}
-        htmlId="channelNameSelect"
-        value={channelNameToInstall}
-        onChange={(e) => setChannelNameToInstall(e.target.value)}
-      >
-        {gameInfo?.channels !== undefined
-          ? Object.keys(gameInfo.channels).map((p, i) => {
-              if (!gameInfo.channels) return <div>error</div>
-              const channel_i = gameInfo.channels[p]
-              return (
-                <option value={p} key={i}>
-                  {translateChannelName(channel_i.channel_name, t)}
-                </option>
-              )
-            })
-          : null}
-      </SelectField>
+      <>
+        <SelectField
+          label={`${t('game.selectChannelName', 'Select Channel Name')}:`}
+          htmlId="channelNameSelect"
+          value={channelNameToInstall}
+          onChange={(e) => setChannelNameToInstall(e.target.value)}
+        >
+          {gameInfo?.channels !== undefined
+            ? Object.keys(gameInfo.channels).map((p, i) => {
+                if (!gameInfo.channels) return <div>error</div>
+                const channel_i = gameInfo.channels[p]
+                return (
+                  <option value={p} key={i}>
+                    {translateChannelName(channel_i.channel_name, t)}
+                  </option>
+                )
+              })
+            : null}
+        </SelectField>
+        {selectedChannel?.license_config.access_codes ? (
+          <TextInputField
+            placeholder={'Enter access code'}
+            value={accessCode}
+            onChange={(ev) => setAccessCode(ev.target.value)}
+            htmlId="access_code_input"
+          ></TextInputField>
+        ) : null}
+      </>
     )
   }
 
@@ -229,6 +239,7 @@ export default React.memo(function InstallModal({
             gameInfo={gameInfo}
             crossoverBottle={crossoverBottle}
             channelNameToInstall={channelNameToInstall}
+            accessCode={accessCode}
           >
             {platformSelection()}
             {runner === 'hyperplay' ? channelNameSelection() : null}
