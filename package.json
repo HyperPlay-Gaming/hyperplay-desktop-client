@@ -334,7 +334,7 @@
       "@testing-library/dom>aria-query>@babel/runtime-corejs3>core-js-pure": true,
       "@valist/sdk>files-from-path>ipfs-unixfs>protobufjs": true,
       "classic-level": true,
-      "discord-rich-presence-typescript>discord-rpc>register-scheme": true,
+      "discord-rich-presence-typescript>discord-rpc>register-scheme": false,
       "electron": true,
       "electron-vite>esbuild": true,
       "playwright": true,
