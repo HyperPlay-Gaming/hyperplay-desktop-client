@@ -44,6 +44,8 @@ jobs:
           ssh://git@github.com/
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: install yarn
+        run: npm install --global yarn
       - name: Install modules.
         run: yarn setup
       - name: Build artifacts.
