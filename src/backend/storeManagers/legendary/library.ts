@@ -55,6 +55,10 @@ import axios from 'axios'
 import { epicTitleToHpGameInfoMap } from '../hyperplay/utils'
 import { app } from 'electron'
 import { copySync } from 'fs-extra'
+import { LegendaryCommand } from './commands'
+import { LegendaryAppName, LegendaryPlatform, Path } from './commands/base'
+import shlex from 'shlex'
+import { Entries } from 'type-fest'
 
 const allGames: Set<string> = new Set()
 let installedGames: Map<string, InstalledJsonMetadata> = new Map()
@@ -108,7 +112,10 @@ async function refreshLegendary(): Promise<ExecResult> {
 
   const abortID = 'legendary-refresh'
   const res = await runRunnerCommand(
-    ['list', '--third-party'],
+    {
+      subcommand: 'list',
+      '--third-party': true
+    },
     createAbortController(abortID)
   )
 
@@ -222,16 +229,16 @@ export async function getInstallInfo(
   }
 
   logInfo(`Getting more details with 'legendary info'`, LogPrefix.Legendary)
-  const res = await runRunnerCommand(
-    [
-      'info',
-      appName,
-      ...(installPlatform ? ['--platform', installPlatform] : []),
-      '--json',
-      (await isEpicServiceOffline()) ? '--offline' : ''
-    ],
-    createAbortController(appName)
-  )
+  const command: LegendaryCommand = {
+    subcommand: 'info',
+    appName: LegendaryAppName.parse(appName),
+    '--json': true,
+    '--platform': LegendaryPlatform.parse(installPlatform)
+  }
+  if (await isEpicServiceOffline()) {
+    command['--offline'] = true
+  }
+  const res = await runRunnerCommand(command, createAbortController(appName))
 
   deleteAbortController(appName)
 
@@ -269,7 +276,7 @@ export async function listUpdateableGames(): Promise<string[]> {
 
   const abortID = 'legendary-check-updates'
   const res = await runRunnerCommand(
-    ['list', '--third-party'],
+    { subcommand: 'list', '--third-party': true },
     createAbortController(abortID),
     {
       logMessagePrefix: 'Checking for game updates'
@@ -433,7 +440,12 @@ export async function changeGameInstallPath(appName: string, newPath: string) {
   }
 
   const { error } = await runRunnerCommand(
-    ['move', appName, dirname(newPath), '--skip-move'],
+    {
+      subcommand: 'move',
+      appName: LegendaryAppName.parse(appName),
+      newBasePath: Path.parse(dirname(newPath)),
+      '--skip-move': true
+    },
     createAbortController(appName)
   )
 
@@ -670,7 +682,7 @@ async function loadAll(): Promise<string[]> {
 export const hasGame = (appName: string) => allGames.has(appName)
 
 export async function runRunnerCommand(
-  commandParts: string[],
+  command: LegendaryCommand,
   abortController: AbortController,
   options?: CallRunnerOptions,
   gameInfo?: GameInfo,
@@ -687,6 +699,8 @@ export async function runRunnerCommand(
     options.env = {}
   }
   options.env.XDG_CONFIG_HOME = dirname(legendaryConfigPath)
+
+  const commandParts = commandToArgsArray(command)
 
   return callRunner(
     commandParts,

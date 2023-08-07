@@ -229,9 +229,9 @@
     "stream": "^0.0.2",
     "systeminformation": "^5.21.7",
     "ts-prune": "^0.10.3",
-    "tslib": "^2.4.0",
     "yauzl": "^2.10.0",
-    "zod": "^3.22.3"
+    "zod": "^3.22.3",
+    "tslib": "^2.5.0"
   },
   "scripts": {
     "setup": "yarn install && yarn allow-scripts",

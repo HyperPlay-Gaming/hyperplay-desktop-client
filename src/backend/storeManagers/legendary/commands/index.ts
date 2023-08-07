@@ -1,4 +1,3 @@
-import { PositiveInteger } from './base'
 
 import InstallCommand from './install'
 import LaunchCommand from './launch'
@@ -12,6 +11,7 @@ import UninstallCommand from './uninstall'
 import ImportCommand from './import'
 import CleanupCommand from './cleanup'
 import AuthCommand from './auth'
+import { PositiveInteger } from './base'
 import EglSyncCommand from './egl_sync'
 
 interface BaseLegendaryCommand {

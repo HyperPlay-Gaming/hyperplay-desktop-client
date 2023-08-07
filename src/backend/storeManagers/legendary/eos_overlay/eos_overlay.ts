@@ -20,6 +20,8 @@ import { runRunnerCommand as runLegendaryCommand } from '../library'
 import { verifyWinePrefix } from '../../../launcher'
 import { sendFrontendMessage } from '../../../main_window'
 import { setCurrentDownloadSize } from '../games'
+import { Path } from '../commands/base'
+import { LegendaryCommand } from '../commands'
 
 const currentVersionPath = join(legendaryConfigPath, 'overlay_version.json')
 const installedVersionPath = join(legendaryConfigPath, 'overlay_install.json')
@@ -78,7 +80,7 @@ async function updateInfo() {
   }
 
   await runLegendaryCommand(
-    ['status'],
+    { subcommand: 'status' },
     createAbortController(eosOverlayAppName),
     {
       logMessagePrefix: 'Updating EOS Overlay information'
@@ -102,7 +104,11 @@ async function install() {
   let downloadSize = 0
   // Run download without -y to get the install size
   await runLegendaryCommand(
-    ['eos-overlay', 'install', '--path', defaultInstallPath],
+    {
+      subcommand: 'eos-overlay',
+      action: 'install',
+      '--path': Path.parse(defaultInstallPath)
+    },
     createAbortController(eosOverlayAppName),
     {
       logMessagePrefix: 'Getting EOS Overlay install size',
@@ -125,7 +131,12 @@ async function install() {
 
   // And now actually install it
   const { error } = await runLegendaryCommand(
-    ['-y', 'eos-overlay', 'install', '--path', defaultInstallPath],
+    {
+      '-y': true,
+      subcommand: 'eos-overlay',
+      action: 'install',
+      '--path': Path.parse(defaultInstallPath)
+    },
     createAbortController(eosOverlayAppName),
     {
       logMessagePrefix: 'Installing EOS Overlay',
@@ -174,7 +185,7 @@ async function remove(): Promise<boolean> {
   }
 
   await runLegendaryCommand(
-    ['-y', 'eos-overlay', 'remove'],
+    { '-y': true, subcommand: 'eos-overlay', action: 'remove' },
     createAbortController(eosOverlayAppName)
   )
 
@@ -208,11 +219,15 @@ async function enable(
     return { wasEnabled: false, installNow: response === 0 }
   }
 
-  await runLegendaryCommand(
-    ['eos-overlay', 'enable', ...(prefix ? ['--prefix', prefix] : [])],
-    createAbortController(eosOverlayAppName),
-    { logMessagePrefix: 'Enabling EOS Overlay' }
-  )
+  const command: LegendaryCommand = {
+    subcommand: 'eos-overlay',
+    action: 'enable'
+  }
+  if (prefix) command['--prefix'] = Path.parse(prefix)
+
+  await runLegendaryCommand(command, createAbortController(eosOverlayAppName), {
+    logMessagePrefix: 'Enabling EOS Overlay'
+  })
 
   deleteAbortController(eosOverlayAppName)
 
@@ -229,11 +244,15 @@ async function disable(appName: string) {
       wineVersion.type === 'proton' ? join(winePrefix, 'pfx') : winePrefix
   }
 
-  await runLegendaryCommand(
-    ['eos-overlay', 'disable', ...(prefix ? ['--prefix', prefix] : [])],
-    createAbortController(eosOverlayAppName),
-    { logMessagePrefix: 'Disabling EOS Overlay' }
-  )
+  const command: LegendaryCommand = {
+    subcommand: 'eos-overlay',
+    action: 'disable'
+  }
+  if (prefix) command['--prefix'] = Path.parse(prefix)
+
+  await runLegendaryCommand(command, createAbortController(eosOverlayAppName), {
+    logMessagePrefix: 'Disabling EOS Overlay'
+  })
 
   deleteAbortController(eosOverlayAppName)
 }
@@ -259,19 +278,21 @@ async function isEnabled(appName?: string) {
       wineVersion.type === 'proton' ? join(winePrefix, 'pfx') : winePrefix
   }
 
-  await runLegendaryCommand(
-    ['eos-overlay', 'info', ...(prefix ? ['--prefix', prefix] : [])],
-    createAbortController(eosOverlayAppName),
-    {
-      onOutput: (data: string) => {
-        if (data.includes('Overlay enabled')) {
-          enabled = data.includes('Yes')
-          callAbortController(eosOverlayAppName)
-        }
-      },
-      logMessagePrefix: 'Checking if EOS Overlay is enabled'
-    }
-  )
+  const command: LegendaryCommand = {
+    subcommand: 'eos-overlay',
+    action: 'info'
+  }
+  if (prefix) command['--prefix'] = Path.parse(prefix)
+
+  await runLegendaryCommand(command, createAbortController(eosOverlayAppName), {
+    onOutput: (data: string) => {
+      if (data.includes('Overlay enabled')) {
+        enabled = data.includes('Yes')
+        callAbortController(eosOverlayAppName)
+      }
+    },
+    logMessagePrefix: 'Checking if EOS Overlay is enabled'
+  })
 
   deleteAbortController(eosOverlayAppName)
   return enabled
