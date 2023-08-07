@@ -310,7 +310,10 @@ export default function DownloadDialog({
     getSpace()
   }, [installPath, gameInstallInfo?.manifest?.disk_size])
 
-  const haveDLCs: boolean = gameInstallInfo?.game?.owned_dlc?.length !== 0
+  const haveDLCs: boolean =
+    gameInstallInfo?.game?.owned_dlc !== undefined &&
+    gameInstallInfo.game.owned_dlc.length > 0
+
   const DLCList = gameInstallInfo?.game?.owned_dlc
 
   const downloadSize = () => {
@@ -557,7 +560,6 @@ export default function DownloadDialog({
                 handleChange={() => handleDlcs()}
                 title={t('dlc.installDlcs', 'Install all DLCs')}
               />
-              <span>{t('dlc.installDlcs', 'Install all DLCs')}:</span>
             </label>
             <div className="InstallModal__dlcsList">
               {DLCList?.map(({ title }) => title).join(', ')}
