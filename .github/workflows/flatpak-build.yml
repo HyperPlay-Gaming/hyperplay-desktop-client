@@ -45,11 +45,11 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: npm run setup:npm
+        run: yarn setup
       - name: Build artifacts.
-        run: npm run dist:linux:ci:flatpak
+        run: yarn dist:linux:ci:flatpak
       - name: Prepare Flatpak
-        run: npm run flatpak:prepare
+        run: yarn flatpak:prepare
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
