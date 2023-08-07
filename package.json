@@ -225,6 +225,7 @@
   },
   "scripts": {
     "setup": "yarn install && yarn allow-scripts",
+    "setup:npm": "npm i --legacy-peer-deps && npm run allow-scripts",
     "start": "vite",
     "codecheck": "tsc --noEmit",
     "find-deadcode": "ts-prune --error",

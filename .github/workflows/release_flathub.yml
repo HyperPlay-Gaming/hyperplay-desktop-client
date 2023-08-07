@@ -31,7 +31,7 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn
+        run: yarn setup
       - name: Checkout flathub repository.
         run: git clone https://github.com/flathub/xyz.hyperplay.HyperPlay.git
       - name: Update flathub release
