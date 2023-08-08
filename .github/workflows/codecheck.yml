@@ -26,6 +26,6 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn
+        run: yarn setup
       - name: Check Typescript syntax
         run: yarn codecheck

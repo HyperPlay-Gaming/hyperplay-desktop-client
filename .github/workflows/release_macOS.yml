@@ -41,7 +41,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn
+        run: yarn setup
 
       - name: Build artifacts.
         run: yarn release:mac

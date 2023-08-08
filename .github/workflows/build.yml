@@ -35,9 +35,9 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: npm i --legacy-peer-deps
+        run: yarn setup
       - name: Build artifacts.
-        run: npm run dist:win
+        run: yarn dist:win
       - name: Upload EXE.
         uses: actions/upload-artifact@v3
         with:
@@ -68,7 +68,7 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn
+        run: yarn setup
       - name: Build deb artifact
         run: yarn dist:linux:ci:deb
       - name: Build rpm artifact
@@ -97,7 +97,7 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn
+        run: yarn setup
       - name: Build artifacts.
         run: yarn dist:mac
         env:
