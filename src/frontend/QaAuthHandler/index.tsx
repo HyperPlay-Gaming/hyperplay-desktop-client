@@ -25,6 +25,7 @@ const QaAuthHandler = function () {
         onClick={() => {
           authStore.setAuthToken(authToken)
           setShowHiddenTextBox(false)
+          window.api.setQaToken(authToken)
         }}
       >
         Submit
