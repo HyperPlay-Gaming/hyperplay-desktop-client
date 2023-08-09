@@ -353,6 +353,14 @@ export default function GamesSubmenu({
               {t('game.dlcs', 'DLCs')}
             </button>
           )}
+          {isInstalled && (
+            <button
+              onClick={async () => setShowUninstallModal(true)}
+              className="link button is-text is-link is-dangerous"
+            >
+              {t('button.uninstall')}
+            </button>
+          )}
         </div>
       </div>
       {showModal && (
