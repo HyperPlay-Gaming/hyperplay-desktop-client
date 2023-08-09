@@ -89,14 +89,17 @@ const eventsToCloseMetaMaskPopupOn = [
 const valistListingsApiUrl = 'https://developers.hyperplay.xyz/api/v1/listings'
 const mainReleaseChannelName = 'main'
 const valistBaseApiUrlv1 = 'https://api.valist.io/v1'
-let qaToken = ''
+export let qaToken = ''
 
 export function setQaToken(token: string) {
   qaToken = token
 }
 
 export function getValistListingApiUrl(projectId: string) {
-  return `${valistListingsApiUrl}/${projectId}` + qaToken
+  return (
+    `${valistListingsApiUrl}/${projectId}` +
+    (qaToken !== '' ? '?status=pending' : '')
+  )
 }
 
 export function getValidateLicenseKeysApiUrl() {
