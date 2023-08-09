@@ -81,7 +81,7 @@ export const createMainWindow = () => {
     }
   })
 
-  mainWindow.webContents.on('before-input-event', (ev, input) => {
+  mainWindow.webContents?.on('before-input-event', (ev, input) => {
     if (
       input.type === 'keyDown' &&
       input.key === hiddenPhrase[hiddenPhraseCurrentIndex]
