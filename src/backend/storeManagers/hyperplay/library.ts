@@ -16,7 +16,7 @@ import {
   refreshGameInfoFromHpRelease
 } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
-import { getValistListingApiUrl } from 'backend/constants'
+import { getValistListingApiUrl, qaToken } from 'backend/constants'
 
 export async function addGameToLibrary(projectId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -35,7 +35,10 @@ export async function addGameToLibrary(projectId: string) {
   }
 
   const listingUrl = getValistListingApiUrl(projectId)
-  const res = await axios.get<HyperPlayRelease>(listingUrl)
+
+  const getConfig =
+    qaToken !== '' ? { headers: { Authorization: `Bearer ${qaToken}` } } : {}
+  const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
 
   const data = res.data
   const gameInfo = getGameInfoFromHpRelease(data)

@@ -28,6 +28,7 @@ import SettingsModal from './screens/Settings/components/SettingsModal'
 import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
+import QaAuthHandler from './QaAuthHandler'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -39,6 +40,7 @@ function App() {
         <TopNavBar />
         <Sidebar />
         <main className="content">
+          <QaAuthHandler />
           <ExtensionHandler />
           <ExtensionManager />
           <DialogHandler />
