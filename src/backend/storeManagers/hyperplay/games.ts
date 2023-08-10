@@ -549,11 +549,28 @@ export function getGameInfo(appName: string): GameInfo {
   return appInfo
 }
 
+const uninstallGame = (appName: string) => {
+  const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
+  const gameIndex = currentLibrary.findIndex(
+    (value) => value.app_name === appName
+  )
+  currentLibrary[gameIndex].is_installed = false
+  currentLibrary[gameIndex].install = {}
+  hpLibraryStore.set('games', currentLibrary)
+}
+
 export async function uninstall({
   appName,
   shouldRemovePrefix
 }: RemoveArgs): Promise<ExecResult> {
   const appInfo = getGameInfo(appName)
+
+  if (appInfo.install.platform === 'web') {
+    uninstallGame(appName)
+    sendFrontendMessage('refreshLibrary', 'hyperplay')
+    return { stderr: '', stdout: '' }
+  }
+
   if (!appInfo) return { stderr: '', stdout: '' }
 
   if (!appInfo.install.install_path) {
@@ -566,13 +583,7 @@ export async function uninstall({
   rmSync(installPath, { recursive: true, force: true })
 
   // change is_installed to false
-  const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
-  const gameIndex = currentLibrary.findIndex(
-    (value) => value.app_name === appName
-  )
-  currentLibrary[gameIndex].is_installed = false
-  currentLibrary[gameIndex].install = {}
-  hpLibraryStore.set('games', currentLibrary)
+  uninstallGame(appName)
 
   if (shouldRemovePrefix) {
     const { winePrefix } = await getSettings(appName)
