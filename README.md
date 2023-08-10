@@ -72,6 +72,15 @@ Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications fold
 <img width="1417" alt="image" src="https://user-images.githubusercontent.com/26871415/221288900-aa7c3168-d610-4598-8011-7f6c4dc4148f.png">
 <img width="1427" alt="image" src="https://user-images.githubusercontent.com/26871415/221288973-eb897dec-34fe-4edf-8c3d-32836ca59a04.png">
 
+### Local Development
+
+This projects uses submodules, so you need to clone it with the `--recurse-submodules` flag or run `git submodule update --init --recursive` after cloning.
+
+```bash
+yarn setup
+yarn start
+```
+
 ### Testing with Docker
 
 It is recommended to run end to end tests with Docker so you don't alter your local config files or have your local config files interfere with the tests.
