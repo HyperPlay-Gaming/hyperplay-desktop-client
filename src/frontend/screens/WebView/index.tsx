@@ -41,7 +41,7 @@ function WebView() {
 
   const hyperplayStore =
     // 'https://store.hyperplay.xyz?isLauncher=true' +
-    'https://hyperplay-store-keswfn859-hyperplay.vercel.app/?isLauncher=true' +
+    'https://hyperplay-store-j7bsg6eky-hyperplay.vercel.app/?isLauncher=true' +
     (authStore.authToken !== '' ? '&qamode=' + authStore.authToken : '')
 
   const epicStore = `https://www.epicgames.com/store/${lang}/`
