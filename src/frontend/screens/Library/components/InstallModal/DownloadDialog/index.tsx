@@ -315,7 +315,7 @@ export default function DownloadDialog({
     gameInstallInfo?.game?.owned_dlc?.length > 0
   const DLCList = gameInstallInfo?.game?.owned_dlc
   const downloadSize = () => {
-    if (gameInstallInfo?.manifest?.download_size) {
+    if (gameInstallInfo?.manifest?.download_size !== undefined) {
       if (previousProgress.folder === installPath) {
         const progress = 100 - getProgress(previousProgress)
         return size(
@@ -329,7 +329,7 @@ export default function DownloadDialog({
   }
 
   const installSize =
-    gameInstallInfo?.manifest?.disk_size &&
+    gameInstallInfo?.manifest?.disk_size !== undefined &&
     size(Number(gameInstallInfo?.manifest?.disk_size))
 
   const getLanguageName = useMemo(() => {
@@ -367,13 +367,17 @@ export default function DownloadDialog({
   }
 
   const readyToInstall =
-    installPath &&
-    gameInstallInfo?.manifest?.download_size &&
-    !gettingInstallInfo
+    gameInstallInfo?.game['name'] === 'web' ||
+    (installPath &&
+      gameInstallInfo?.manifest?.download_size &&
+      !gettingInstallInfo)
 
   const showRemainingProgress =
     (runner === 'hyperplay' && previousProgress.percent) ||
     previousProgress.folder === installPath
+
+  const fetchingGameInfo =
+    gameInstallInfo?.game['name'] === 'web' || downloadSize()
 
   return (
     <>
@@ -393,11 +397,11 @@ export default function DownloadDialog({
           <div className="InstallModal__size">
             <FontAwesomeIcon
               className={classNames('InstallModal__sizeIcon', {
-                'fa-spin-pulse': !downloadSize()
+                'fa-spin-pulse': !fetchingGameInfo
               })}
-              icon={downloadSize() ? faDownload : faSpinner}
+              icon={fetchingGameInfo ? faDownload : faSpinner}
             />
-            {downloadSize() ? (
+            {fetchingGameInfo ? (
               <>
                 <div className="InstallModal__sizeLabel">
                   {t('game.downloadSize', 'Download Size')}:
@@ -405,17 +409,17 @@ export default function DownloadDialog({
                 <div className="InstallModal__sizeValue">{downloadSize()}</div>
               </>
             ) : (
-              `${t('game.getting-download-size', 'Geting download size')}...`
+              `${t('game.getting-download-size', 'Getting download size')}...`
             )}
           </div>
           <div className="InstallModal__size">
             <FontAwesomeIcon
               className={classNames('InstallModal__sizeIcon', {
-                'fa-spin-pulse': !downloadSize()
+                'fa-spin-pulse': !fetchingGameInfo
               })}
-              icon={downloadSize() ? faHardDrive : faSpinner}
+              icon={fetchingGameInfo ? faHardDrive : faSpinner}
             />
-            {downloadSize() ? (
+            {fetchingGameInfo ? (
               <>
                 <div className="InstallModal__sizeLabel">
                   {t('game.installSize', 'Install Size')}:
@@ -423,7 +427,7 @@ export default function DownloadDialog({
                 <div className="InstallModal__sizeValue">{installSize}</div>
               </>
             ) : (
-              `${t('game.getting-install-size', 'Geting install size')}...`
+              `${t('game.getting-install-size', 'Getting install size')}...`
             )}
           </div>
           {showRemainingProgress && (

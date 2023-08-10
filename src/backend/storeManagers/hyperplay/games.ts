@@ -6,7 +6,8 @@ import {
   ExecResult,
   GameSettings,
   PlatformConfig,
-  LicenseConfigValidateResult
+  LicenseConfigValidateResult,
+  ChannelReleaseMeta
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
@@ -55,6 +56,7 @@ import { isOnline } from 'backend/online_monitor'
 import { clean } from 'easydl/dist/utils'
 import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
+import { Channel } from '@valist/sdk/dist/typesApi'
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -330,63 +332,102 @@ async function getAccessCodeGatedPlatforms(
   return validateResult.data.platforms
 }
 
-export async function install(
-  appName: string,
-  { path: dirpath, platformToInstall, channelName, accessCode }: InstallArgs
-): Promise<InstallResult> {
-  if (!existsSync(dirpath) && platformToInstall !== 'Browser') {
-    mkdirSync(dirpath, { recursive: true })
+function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
+  const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
+  const gameIndex = currentLibrary.findIndex(
+    (value) => value.app_name === appName
+  )
+  currentLibrary[gameIndex].install = installedInfo
+  currentLibrary[gameIndex].is_installed = true
+
+  hpLibraryStore.set('games', currentLibrary)
+}
+
+function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
+  if (
+    gameInfo.account_name === undefined ||
+    gameInfo.project_name === undefined
+  ) {
+    throw `Account or project name is undefined for ${gameInfo.app_name}`
   }
+  const accountFolderName = sanitizeFileName(gameInfo.account_name)
+  const projectFolderName = sanitizeFileName(gameInfo.project_name)
 
-  const gameInfo = getGameInfo(appName)
-  const { title, channels } = gameInfo
-  const window = getMainWindow()
-  if (!window) return { status: 'error', error: 'Window undefined' }
+  return path.join(dirpath, accountFolderName, projectFolderName)
+}
 
+function getReleaseMeta(
+  gameInfo: GameInfo,
+  channelName: string | undefined
+): [ChannelReleaseMeta, Channel] {
+  const { channels } = gameInfo
   if (
     channelName === undefined ||
     channels === undefined ||
     !Object.hasOwn(channels, channelName)
   ) {
-    return { status: 'error', error: `Channel name not found for ${appName}` }
+    throw `Channel name not found for ${gameInfo.app_name}`
   }
 
   const selectedChannel = channels[channelName]
   const releaseMeta = selectedChannel.release_meta
   if (!releaseMeta) {
-    return { status: 'error', error: `Release meta not found for ${appName}` }
+    throw `Release meta not found for ${gameInfo.app_name}`
   }
-  const releaseVersion: string | undefined = releaseMeta.name
+  return [releaseMeta, selectedChannel]
+}
 
-  const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
-  let platformInfo = releaseMeta.platforms[appPlatform]
-
-  if (!platformInfo) {
-    return { status: 'error', error: `Platform info not found for ${appName}` }
-  }
-
-  logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
-  const zipFile = getZipFileName(appName, platformInfo)
-
-  // download the zip file
+export async function install(
+  appName: string,
+  { path: dirpath, platformToInstall, channelName, accessCode }: InstallArgs
+): Promise<InstallResult> {
+  let zipFile = ''
   try {
-    if (
-      gameInfo.account_name === undefined ||
-      gameInfo.project_name === undefined
-    ) {
+    const gameInfo = getGameInfo(appName)
+    const { title } = gameInfo
+
+    const destinationPath = getDestinationPath(gameInfo, dirpath)
+
+    const [releaseMeta, selectedChannel] = getReleaseMeta(gameInfo, channelName)
+
+    const releaseVersion: string | undefined = releaseMeta.name
+
+    if (platformToInstall === 'Browser') {
+      const browserGameInstalledInfo: InstalledInfo = {
+        appName,
+        install_path: destinationPath,
+        executable: '',
+        install_size: '0',
+        is_dlc: false,
+        version: releaseVersion ? releaseVersion : gameInfo.version ?? '0',
+        platform: 'web',
+        channelName
+      }
+      updateInstalledInfo(appName, browserGameInstalledInfo)
+      return { status: 'done' }
+    }
+
+    if (!existsSync(dirpath)) {
+      mkdirSync(dirpath, { recursive: true })
+    }
+
+    const window = getMainWindow()
+    if (!window) return { status: 'error', error: 'Window undefined' }
+
+    const appPlatform = handleArchAndPlatform(platformToInstall, releaseMeta)
+    let platformInfo = releaseMeta.platforms[appPlatform]
+
+    if (!platformInfo) {
       return {
         status: 'error',
-        error: `Account or project name is undefined for ${appName}`
+        error: `Platform info not found for ${appName}`
       }
     }
-    const accountFolderName = sanitizeFileName(gameInfo.account_name)
-    const projectFolderName = sanitizeFileName(gameInfo.project_name)
 
-    const destinationPath = path.join(
-      dirpath,
-      accountFolderName,
-      projectFolderName
-    )
+    logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
+    zipFile = getZipFileName(appName, platformInfo)
+
+    // download the zip file
     if (!existsSync(destinationPath)) {
       mkdirSync(destinationPath, { recursive: true })
     }
@@ -453,14 +494,7 @@ export async function install(
         channelName
       }
 
-      const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
-      const gameIndex = currentLibrary.findIndex(
-        (value) => value.app_name === appName
-      )
-      currentLibrary[gameIndex].install = installedInfo
-      currentLibrary[gameIndex].is_installed = true
-
-      hpLibraryStore.set('games', currentLibrary)
+      updateInstalledInfo(appName, installedInfo)
 
       notify({
         title,
@@ -485,7 +519,7 @@ export async function install(
       LogPrefix.HyperPlay
     )
     if (!`${error}`.includes('Download stopped or paused')) {
-      if (existsSync(zipFile)) rmSync(zipFile)
+      if (zipFile !== '' && existsSync(zipFile)) rmSync(zipFile)
       clean(zipFile)
     }
     return {
@@ -515,24 +549,12 @@ export function getGameInfo(appName: string): GameInfo {
   return appInfo
 }
 
-const rmAppFromHyperPlayStore = (appName: string) => {
-  const currentStore = hpLibraryStore.get('games', [])
-  const newStore = currentStore.filter((game) => game.app_name !== appName)
-  hpLibraryStore.set('games', newStore)
-}
-
 export async function uninstall({
   appName,
   shouldRemovePrefix
 }: RemoveArgs): Promise<ExecResult> {
   const appInfo = getGameInfo(appName)
   if (!appInfo) return { stderr: '', stdout: '' }
-
-  if (appInfo.install.platform === 'web') {
-    rmAppFromHyperPlayStore(appName)
-    sendFrontendMessage('refreshLibrary', 'hyperplay')
-    return { stderr: '', stdout: '' }
-  }
 
   if (!appInfo.install.install_path) {
     return { stderr: '', stdout: '' }
@@ -542,12 +564,6 @@ export async function uninstall({
   const installPath = appInfo.install.install_path
   logInfo(`Removing folder in uninstall: ${installPath}`, LogPrefix.HyperPlay)
   rmSync(installPath, { recursive: true, force: true })
-
-  // only remove the game from the store if the platform is web
-  // @ts-expect-error TS wont know how to handle the type of installInfo
-  if (appInfo.install.platform === 'web') {
-    rmAppFromHyperPlayStore(appName)
-  }
 
   // change is_installed to false
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]

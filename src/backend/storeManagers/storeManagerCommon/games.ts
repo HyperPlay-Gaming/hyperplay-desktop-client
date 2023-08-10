@@ -240,8 +240,9 @@ export async function launchGame(
   let {
     install: { executable }
   } = gameInfo
-
-  const { browserUrl } = gameInfo
+  const {
+    install: { channelName, platform }
+  } = gameInfo
 
   const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
   if (
@@ -252,8 +253,16 @@ export async function launchGame(
     executable = gameSettingsOverrides.targetExe
   }
 
-  if (browserUrl) {
-    return openNewBrowserGameWindow(browserUrl, gameInfo)
+  let { browserUrl } = gameInfo
+  if (platform === 'web') {
+    const webGameUrl =
+      gameInfo?.channels?.[channelName ?? ''].release_meta.platforms[platform]
+        ?.external_url
+    if (webGameUrl) browserUrl = webGameUrl
+
+    if (browserUrl) return openNewBrowserGameWindow(browserUrl, gameInfo)
+
+    throw `Could not launch web game for ${appName}`
   }
 
   const gameSettings = await getAppSettings(appName)
