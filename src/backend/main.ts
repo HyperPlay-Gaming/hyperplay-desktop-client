@@ -848,7 +848,6 @@ ipcMain.handle(
         'en-US',
         channelNameToInstall
       )
-      console.log('install info = ', info)
       if (info === undefined) return null
       return info
     } catch (error) {

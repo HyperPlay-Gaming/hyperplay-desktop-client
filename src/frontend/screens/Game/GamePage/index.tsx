@@ -60,6 +60,7 @@ import { WikiGameInfo } from 'frontend/components/UI/WikiGameInfo'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Button } from '@hyperplay/ui'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
+import DLCList from 'frontend/components/UI/DLCList'
 
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -105,6 +106,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [showRequirements, setShowRequirements] = useState(false)
   const [showExtraInfo, setShowExtraInfo] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
+  const [showDlcs, setShowDlcs] = useState(false)
 
   const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
@@ -160,13 +162,17 @@ export default React.memo(function GamePage(): JSX.Element | null {
           channels
         } = { ...gameInfo }
 
-        if (channels === undefined || install.channelName === undefined)
-          throw 'Cannot get channels'
-        const releaseMeta = channels[install.channelName].release_meta
+        let hpPlatforms: AppPlatforms = 'windows_amd64'
 
-        const hpPlatforms = releaseMeta
-          ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
-          : 'Windows'
+        if (runner === 'hyperplay') {
+          if (channels === undefined || install.channelName === undefined)
+            throw 'Cannot get channels'
+          const releaseMeta = channels[install.channelName].release_meta
+
+          hpPlatforms = releaseMeta
+            ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
+            : 'windows_amd64'
+        }
 
         const othersPlatforms =
           install.platform ||
@@ -313,6 +319,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return <ErrorComponent message={message} />
     }
 
+    let DLCs = gameInstallInfo?.game.owned_dlc ?? []
+    DLCs = DLCs.filter((dlc) => dlc.app_name !== null)
+
     const description =
       extraInfo?.about?.shortDescription ||
       extraInfo?.about?.description ||
@@ -395,6 +404,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       hasRequirements
                         ? () => setShowRequirements(true)
                         : undefined
+                    }
+                    onShowDlcs={
+                      DLCs.length ? () => setShowDlcs(true) : undefined
                     }
                   />
                 </div>
@@ -620,6 +632,25 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 </DialogHeader>
                 <DialogContent>
                   <GameRequirements reqs={extraInfo?.reqs} />
+                </DialogContent>
+              </Dialog>
+            )}
+            {showDlcs && (
+              <Dialog showCloseButton onClose={() => setShowDlcs(false)}>
+                <DialogHeader onClose={() => setShowDlcs(false)}>
+                  <div>{t('game.dlcs', 'DLCs')}</div>
+                </DialogHeader>
+                <DialogContent>
+                  {gameInstallInfo ? (
+                    <DLCList
+                      dlcs={DLCs}
+                      runner={runner}
+                      mainAppInfo={gameInfo}
+                      onClose={() => setShowDlcs(false)}
+                    />
+                  ) : (
+                    <UpdateComponent inline />
+                  )}
                 </DialogContent>
               </Dialog>
             )}

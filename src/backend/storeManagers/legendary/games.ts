@@ -548,7 +548,7 @@ function getSdlList(sdlList: Array<string>) {
  */
 export async function install(
   appName: string,
-  { path, installDlcs, sdlList, platformToInstall }: InstallArgs
+  { path, sdlList, platformToInstall }: InstallArgs
 ): Promise<{
   status: 'done' | 'error' | 'abort'
   error?: string
@@ -557,7 +557,6 @@ export async function install(
   const info = await getInstallInfo(appName, platformToInstall)
   const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
   const noHttps = downloadNoHttps ? ['--no-https'] : []
-  const withDlcs = installDlcs ? '--with-dlcs' : '--skip-dlcs'
   const installSdl = sdlList?.length ? getSdlList(sdlList) : ['--skip-sdl']
 
   const logPath = join(gamesConfigPath, appName + '.log')
@@ -569,7 +568,7 @@ export async function install(
     platformToInstall,
     '--base-path',
     path,
-    withDlcs,
+    '--skip-dlcs',
     ...installSdl,
     ...workers,
     ...noHttps,
