@@ -2,7 +2,7 @@ import {
   createAbortController,
   deleteAbortController
 } from '../../utils/aborthandler/aborthandler'
-import { existsSync, readFileSync, readdirSync } from 'graceful-fs'
+import { existsSync, mkdirSync, readFileSync, readdirSync } from 'graceful-fs'
 
 import {
   GameInfo,
@@ -32,7 +32,8 @@ import {
   legendaryLogFile,
   legendaryMetadata,
   isLinux,
-  userHome
+  userHome,
+  isWindows
 } from '../../constants'
 import {
   logDebug,
@@ -766,4 +767,115 @@ export async function getGameSdl(
     )
     return []
   }
+}
+
+/**
+ * Toggles the EGL synchronization on/off based on arguments
+ * @param path_or_action On Windows: "unlink" (turn off), "windows" (turn on). On linux/mac: "unlink" (turn off), any other string (prefix path)
+ * @returns string with stdout + stderr, or error message
+ */
+export async function toggleGamesSync(path_or_action: string) {
+  if (isWindows) {
+    const egl_manifestPath =
+      'C:\\ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests'
+
+    if (!existsSync(egl_manifestPath)) {
+      mkdirSync(egl_manifestPath, { recursive: true })
+    }
+  }
+
+  const command: LegendaryCommand = {
+    subcommand: 'egl-sync',
+    '-y': true
+  }
+
+  if (path_or_action === 'unlink') {
+    command['--unlink'] = true
+  } else {
+    command['--enable-sync'] = true
+    if (!isWindows) {
+      const pathParse = Path.safeParse(path_or_action)
+      if (pathParse.success) {
+        command['--egl-wine-prefix'] = pathParse.data
+      } else {
+        return 'Error'
+      }
+    }
+  }
+
+  const { error, stderr, stdout } = await runRunnerCommand(
+    command,
+    createAbortController('toggle-sync')
+  )
+
+  deleteAbortController('toggle-sync')
+
+  if (error) {
+    logError(['Failed to toggle EGS-Sync', error], LogPrefix.Legendary)
+    return 'Error'
+  } else {
+    logInfo(`${stdout}`, LogPrefix.Legendary)
+    if (stderr.includes('ERROR') || stderr.includes('error')) {
+      logError(`${stderr}`, LogPrefix.Legendary)
+      return 'Error'
+    }
+    return `${stdout} - ${stderr}`
+  }
+}
+
+/*
+ * Converts a LegendaryCommand to a parameter list passable to Legendary
+ * @param command
+ */
+export function commandToArgsArray(command: LegendaryCommand): string[] {
+  const commandParts: string[] = []
+
+  if (command.subcommand) commandParts.push(command.subcommand)
+
+  // Some commands need special handling
+  switch (command.subcommand) {
+    case 'install':
+      commandParts.push(command.appName)
+      if (command.sdlList) {
+        commandParts.push('--install-tag=')
+        for (const sdlTag of command.sdlList)
+          commandParts.push('--install-tag', sdlTag)
+      }
+      break
+    case 'launch':
+      commandParts.push(command.appName)
+      if (command.extraArguments)
+        commandParts.push(...shlex.split(command.extraArguments))
+      break
+    case 'info':
+    case 'sync-saves':
+    case 'uninstall':
+      commandParts.push(command.appName)
+      break
+    case 'move':
+      commandParts.push(command.appName, command.newBasePath)
+      break
+    case 'eos-overlay':
+      commandParts.push(command.action)
+      break
+    case 'import':
+      commandParts.push(command.appName, command.installationDirectory)
+      break
+  }
+
+  // Append parameters (anything starting with -)
+  for (const [parameter, value] of Object.entries(
+    command
+  ) as Entries<LegendaryCommand>) {
+    if (!parameter.startsWith('-')) continue
+    if (!value) continue
+    // Boolean values (specifically `true`) have to be handled differently
+    // Parameters that have a boolean type are just signified
+    // by the parameter being present, they don't have a value.
+    // Thus, we only add the key (parameter) here, instead of the key & value
+    if (value === true) commandParts.push(parameter)
+    else commandParts.push(parameter, value.toString())
+  }
+
+  return commandParts
 }
