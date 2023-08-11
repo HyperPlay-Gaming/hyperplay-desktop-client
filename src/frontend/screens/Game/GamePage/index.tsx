@@ -319,7 +319,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return <ErrorComponent message={message} />
     }
 
-    const DLCs = gameInstallInfo?.game.owned_dlc ?? []
+    let DLCs = gameInstallInfo?.game.owned_dlc ?? []
+    DLCs = DLCs.filter((dlc) => dlc.app_name !== null)
 
     const description =
       extraInfo?.about?.shortDescription ||

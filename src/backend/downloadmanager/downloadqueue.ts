@@ -63,7 +63,12 @@ function addToFinished(element: DMQueueElement, status: DMStatus) {
 
 function getFirstQueueElement() {
   const elements = downloadManager.get('queue', [])
-  return elements.at(0) ?? null
+
+  // local db type checking would eliminate this check
+  const newElements = elements.filter((game) => game.params.appName !== null)
+  downloadManager.set('queue', newElements)
+
+  return newElements.at(0) ?? null
 }
 
 async function initQueue() {
