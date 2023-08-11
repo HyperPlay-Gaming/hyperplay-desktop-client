@@ -73,7 +73,6 @@ Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications fold
 <img width="1840" alt="Hyperplay main page" src="https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/assets/38574891/79fd613c-b3b8-4f14-a25d-25982459e63d">
 <img width="1840" alt="Hyperplay wallet signature during game" src="https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/assets/38574891/2bdf7c84-6d34-41fe-9cfb-ac87e76ce4fe">
 <img width="1840" alt="Hyperplay game detail page" src="https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/assets/38574891/35ab466c-e265-4a50-b776-de30e9bcee91">
-d34-41fe-9cfb-ac87e76ce4fe">
 
 ### Local Development
 
