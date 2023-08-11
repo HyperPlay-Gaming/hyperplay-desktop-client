@@ -68,6 +68,8 @@ export default function WebviewControls({
           return webview?.reload()
         }
         if (event === 'back') {
+          // if the user is on the first page, offset -1 will be hyperplay store
+          // and -2 will be the undefined page
           const isFirstPage = webview?.canGoToOffset(-2)
           if (!isFirstPage) return navigate('/')
           return webview?.goBack()
