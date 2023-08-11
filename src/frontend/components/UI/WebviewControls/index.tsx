@@ -9,6 +9,7 @@ import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { WebviewType } from 'common/types'
 import SvgButton from '../SvgButton'
+import { useNavigate } from 'react-router'
 import './index.css'
 
 interface WebviewControlsProps {
@@ -35,6 +36,7 @@ export default function WebviewControls({
 }: WebviewControlsProps) {
   const [url, setUrl] = React.useState(initURL)
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const [canGoBack, setCanGoBack] = useState(false)
   const [canGoForward, setCanGoForward] = useState(false)
 
@@ -66,6 +68,8 @@ export default function WebviewControls({
           return webview?.reload()
         }
         if (event === 'back') {
+          const isFirstPage = webview?.canGoToOffset(-2)
+          if (!isFirstPage) return navigate('/')
           return webview?.goBack()
         }
         if (event === 'forward') {

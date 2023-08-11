@@ -575,6 +575,7 @@ type ElWebview = {
   copy: () => string
   selectAll: () => void
   findInPage: (text: string | RegExp) => void
+  canGoToOffset: (offset: number) => boolean
 }
 
 export type WebviewType = HTMLWebViewElement & ElWebview
