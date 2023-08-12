@@ -1,6 +1,6 @@
 import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
 import { LegendaryInstallPlatform, GameMetadataInner } from './types/legendary'
-import { IpcRendererEvent } from 'electron'
+import { IpcRendererEvent, WebviewTag } from 'electron'
 import { ChildProcess } from 'child_process'
 import { HowLongToBeatEntry } from 'howlongtobeat'
 import 'i18next'
@@ -243,6 +243,7 @@ export interface GameStatus {
 }
 
 export type GlobalConfigVersion = 'auto' | 'v0'
+
 export interface InstallProgress {
   bytes: string
   eta?: string
@@ -252,6 +253,7 @@ export interface InstallProgress {
   diskSpeed?: number
   file?: string
 }
+
 export interface InstalledInfo {
   executable: string
   install_path: string
@@ -280,6 +282,7 @@ export type UserInfo = {
   displayName: string
   user: string
 }
+
 export interface WineInstallation {
   bin: string
   name: string
@@ -564,21 +567,7 @@ interface GamepadActionArgsWithoutMetadata {
   metadata?: undefined
 }
 
-type ElWebview = {
-  canGoBack: () => boolean
-  canGoForward: () => boolean
-  goBack: () => void
-  goForward: () => void
-  reload: () => void
-  isLoading: () => boolean
-  getURL: () => string
-  copy: () => string
-  selectAll: () => void
-  findInPage: (text: string | RegExp) => void
-  canGoToOffset: (offset: number) => boolean
-}
-
-export type WebviewType = HTMLWebViewElement & ElWebview
+export type WebviewType = HTMLWebViewElement & WebviewTag
 
 export type InstallPlatform =
   | LegendaryInstallPlatform
@@ -601,6 +590,7 @@ export interface Tools {
 }
 
 export type DMStatus = 'done' | 'error' | 'abort' | 'paused'
+
 export interface DMQueueElement {
   type: 'update' | 'install'
   params: InstallParams
@@ -678,6 +668,7 @@ export interface GameScoreInfo {
   score: string
   urlid: string
 }
+
 export interface PCGamingWikiInfo {
   steamID: string
   howLongToBeatID: string
