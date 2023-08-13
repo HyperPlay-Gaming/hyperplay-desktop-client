@@ -1,13 +1,13 @@
 {
     "accessibility": {
-        "actions_font_family_no_default": "Actions Font Family (Default: ",
+        "actions_font_family_no_default": "操作 字體家族（默認： ",
         "all_tiles_in_color": "對所有遊戲瓷貼上色",
-        "content_font_family_no_default": "Content Font Family (Default: ",
+        "content_font_family_no_default": "內容 字體 家族（默認： ",
         "fonts": "字型",
         "title": "無障礙設定",
         "zoom": "Zoom"
     },
-    "add_game": "Add Game",
+    "add_game": "添加遊戲",
     "All": "全部",
     "anticheat": {
         "anticheats": "反作弊",
@@ -29,7 +29,7 @@
         "customWine": "選擇已編譯的Wine或Proton",
         "default-install-path": "選擇預設安裝路徑",
         "default-steam-path": "Steam 路徑.",
-        "downloadNow": "現在下載",
+        "downloadNow": "立即下載",
         "error": {
             "add": {
                 "steam": {
@@ -57,16 +57,17 @@
             },
             "generic": {
                 "message": "",
-                "title": "Select EXE to Run"
+                "title": "選擇要運行的 EXE"
             },
-            "launchAborted": "Launch aborted",
+            "launchAborted": "啟動中止",
             "title": "錯誤",
             "uncaught-exception": {
                 "message": "A uncaught exception occured:{{newLine}}{{error}}{{newLine}}{{newLine}} Report the exception on our Github repository.",
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "更新錯誤",
+                "message": "更新出了問題！請手動卸載並重新安裝 HyperPlay。"
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -74,17 +75,18 @@
                 "title": "未找到Wine"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
-                "title": "Winetricks error"
-            }
+                "message": "Winetricks 在執行過程中出現以下錯誤：{{newLine}}{{error}}",
+                "title": "Winetricks 錯誤"
+            },
+            "moving": "移動遊戲錯誤 {{error}}"
         },
         "info": {
             "update": {
                 "changelog": "打開更新日誌",
-                "detail": "你想在背景下載更新嗎？",
+                "detail": "你想在後台下載更新嗎？",
                 "message": "目前有新版本可用！",
                 "message-finished": "你想立即重啟 HyperPlay 嗎？",
-                "title": "HyperPlay Games Launcher",
+                "title": "HyperPlay 遊戲啓動器",
                 "title-finished": "更新完成"
             }
         },
@@ -92,7 +94,7 @@
         "ok": "是",
         "protocol": {
             "install": {
-                "not_installed": "未安裝，要安裝嗎？"
+                "not_installed": "目前尚未安裝。要安裝嗎？"
             }
         },
         "quit": {
@@ -101,8 +103,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
-                "title": "Reset HyperPlay"
+                "message": "您確定要重置 HyperPlay 嗎？這將刪除所有設置和緩存，但不會刪除已安裝的遊戲或 Epic 認證。便攜版的HyperPlay需要手動重啓。",
+                "title": "重設 HyperPlay"
             }
         },
         "runexe": {
@@ -113,10 +115,10 @@
             "exe": "選擇EXE"
         },
         "shortcuts": {
-            "message": "已建立捷徑在桌面和開始功能表內",
-            "message-mac": "Shortcuts were created on the Applications folder",
+            "message": "在桌面和開始菜單上創建了捷徑",
+            "message-mac": "在 \"應用程序 \"文件夾中創建了捷徑",
             "message-remove": "將捷徑從桌面和開始功能表移除",
-            "message-remove-mac": "Shortcuts were removed from the Applications folder",
+            "message-remove-mac": "從 \"應用程序 \"文件夾中刪除了捷徑",
             "title": "捷徑"
         },
         "sync": {
@@ -139,73 +141,81 @@
                 "install": "Epic 伺服器出現大故障，無法安裝遊戲！",
                 "update": "Epic 伺服器出現大故障，無法更新遊戲！"
             },
-            "title": "警告"
+            "title": "警告",
+            "wine-change": {
+                "message": "我們無法找到啓動此標題（{{selectedWine}}）所需的選定Wine版本。{{newline}}。我們找到了另一個版本，您是否希望繼續使用 {{foundWine}} 啓動?",
+                "title": "未找到Wine！"
+            }
         },
         "wineprefix": "選擇 WinePrefix 資料夾",
-        "yes": "是"
+        "yes": "是",
+        "dontShowAgain": "不再顯示"
     },
     "button": {
-        "cancel": "Cancel",
+        "cancel": "取消",
         "go_to_library": "前往遊戲庫",
         "login": "登入",
         "sync": "同步",
         "syncing": "正在同步",
-        "unsync": "不同步"
+        "unsync": "不同步",
+        "continue": "繼續",
+        "download": "下載"
     },
     "controller": {
         "hints": {
-            "back": "Back",
-            "backspace": "Backspace",
-            "close_dialog": "Close dialog",
-            "close_keyboard": "Close keyboard",
-            "close_options": "Close Options",
-            "game_details": "Game details",
-            "game_settings": "Game settings",
-            "install_game": "Install game",
-            "move_cursor": "Move cursor",
-            "open_virtual_keyboard": "Open virtual keyboard",
-            "options": "Options",
-            "play_game": "Play game",
-            "scroll": "Scroll",
-            "select": "Select",
-            "space": "Space",
-            "update_game": "Update game"
+            "back": "返回",
+            "backspace": "退格鍵",
+            "close_dialog": "關閉對話框",
+            "close_keyboard": "關閉鍵盤",
+            "close_options": "關閉選項",
+            "game_details": "遊戲詳情",
+            "game_settings": "遊戲設置",
+            "install_game": "安裝遊戲",
+            "move_cursor": "移動遊標",
+            "open_virtual_keyboard": "打開虛擬鍵盤",
+            "options": "選項",
+            "play_game": "玩遊戲",
+            "scroll": "捲軸",
+            "select": "選擇",
+            "space": "空間",
+            "update_game": "更新遊戲"
         }
     },
-    "docs": "Documentation",
+    "docs": "文檔",
     "download-manager": {
         "install-type": {
-            "install": "Install",
-            "update": "Update"
+            "install": "安裝",
+            "update": "更新"
         },
         "label": {
-            "disk": "Disk",
-            "speed": "Download"
+            "disk": "磁盤",
+            "speed": "下載"
         },
         "link": "Downloads",
         "queue": {
-            "end-time": "Finished at",
-            "queue-time": "Added at",
-            "start-time": "Started at",
-            "type": "Type"
+            "end-time": "完結在",
+            "queue-time": "添加於",
+            "start-time": "開始於",
+            "type": "類型"
         },
-        "title": "Downloads"
+        "title": "下載",
+        "ETA": "預計時間"
     },
     "epic": {
         "offline-notification-body": "因為Epic Games伺服器離線，可能無法提供完整線上服務！",
-        "offline-notification-title": "offline"
+        "offline-notification-title": "線下"
     },
     "Epic Games": "Epic Games",
-    "error": "Error",
+    "error": "錯誤",
     "favourites": "最愛",
     "game": {
-        "status": "Status",
+        "status": "狀態",
         "store": "商店",
         "title": "遊戲名稱"
     },
     "generic": {
         "error": {
-            "component": "沒有發現遊戲 - 嘗試登入並再次登入或以下選項之一"
+            "component": "未找到遊戲 - 請嘗試登出並重新登錄或選擇以下選項之一"
         },
         "library": {
             "refresh": "重新整理遊戲庫"
@@ -219,20 +229,20 @@
         "ignore_hidden": "忽略隱藏項",
         "platform": "平台",
         "show_all_games": "顯示所有遊戲",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "顯示不可用的遊戲",
         "show_favourites_only": "僅顯示我的最愛",
         "show_hidden": "顯示隱藏項",
         "store": "過濾商店"
     },
     "help": {
         "amdfsr": "AMD FSR 通過在全螢幕模式下提高較低解析度來提高畫面幀率。影像品質從 5 提高到 1，但代價是性能稍有下降。啟用可能會提高性能。",
-        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
-        "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
-        "dxvk": "DXVK 是一個基於 Vulkan 的轉譯層，用於 DirectX 9、10和11遊戲。啟用也許會提高相容性。但可能會導致問題，特別是對老舊的 DirectX 遊戲。",
+        "custom_themes_path": "請勿使用來源不明的 CSS 文件。如有疑問，請在我們的 Discord 頻道請求審核。",
+        "custom_themes_wiki": "有關添加自定義主題的更多詳情，請查閱維基百科。單擊此處。",
+        "dxvk": "DXVK 是基於 Vulkan 的轉換層，適用於 DirectX 9、10 和 11 遊戲。啓用後可提高兼容性。可能會導致一些問題，尤其是對於較舊的 DirectX 遊戲。",
         "esync": "Esync 的目標是在 CPU 消耗很大的遊戲中減少 wineserver 的開銷。啟用可能會提高性能。",
         "fsync": "Fsync 的目標是在 CPU 開銷很大的遊戲中減少 wineserver 的開銷。啟用可能會提高受支持的 Linux 內核的性能。",
         "game_language": {
-            "fallback": "留空使用 HyperPlay 的語言。",
+            "fallback": "留空表示使用 HyperPlay 語言。",
             "in_game_config": "不是所有遊戲都支持此設定，一些遊戲有內部語言設定。",
             "valid_codes": "有效語言代碼取決於遊戲。"
         },
@@ -246,9 +256,9 @@
             "part7": " 在某些遊戲中跳過啟動器等。"
         },
         "preferSystemLibs": "自定義 Wine 版本(Wine- ge、Wine- lutris)隨它們的庫依賴項一起發布。啟用此選項，這些附帶的庫將被忽略，Wine 將加載系統庫。警告！如果不滿足依賴關系，可能會出現問題。",
-        "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
+        "primerun": "在多 GPU 系統上使用專用顯卡渲染遊戲。只有使用無頭 GPU 進行渲染的遊戲筆記本或台式機才需要（NVIDIA Optimus、AMD CrossFire）",
         "steam_path": {
-            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "該路徑可讓 HyperPlay 確定 Steam 使用哪個版本的 Proton，以便將非 Steam 遊戲添加到 Steam。"
         },
         "steamruntime": "Steam 提供的用於幫助執行 Linux 和 Windows（Proton）遊戲的自定義庫。啟用可能會提高相容性。",
         "sync": {
@@ -269,10 +279,10 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Update Available!",
             "stable": "Stable",
-            "version": "HyperPlay Version"
+            "version": "HyperPlay 版本"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder (click to cancel)"
+            "searching": "嘗試檢測正確的保存文件夾（點擊取消）"
         },
         "settings": "設定會自動保存",
         "version": "Wine 版本"
@@ -280,20 +290,22 @@
     "infobox": {
         "help": "幫助",
         "requirements": "系統要求",
-        "warning": "Warning",
+        "warning": "警告",
         "wine-path": "Wine 路徑",
         "wine-prefix": {
-            "title": "Wine Prefix"
+            "title": "Wine 前綴"
         },
         "wine-repfix": {
-            "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+            "message": "Wine 使用 WINEPREFIX 來封裝 Windows 應用程序。該前綴包含 Wine 配置文件和 C:（Windows 操作系統的主磁盤）文件層次結構的再現。在這個 C: 驅動器的副本中，儲存著你的遊戲保存文件和通過 winetricks 安裝的依賴項。"
+        },
+        "wine-path-none-found": "未找到 Wine 版本，請從兼容性管理器中下載一個版本",
+        "wine-path-invalid": "Wine 路徑無效，請選擇其他路徑。"
     },
     "install": {
         "path": "選擇安裝路徑"
     },
     "library": {
-        "label": "Library",
+        "label": "資料庫",
         "refresh": "重新整理",
         "sortAscending": "升序排列",
         "sortByStatus": "依安裝狀態排序",
@@ -301,21 +313,23 @@
         "toggleLayout": {
             "grid": "切換到網格排版",
             "list": "切換到清單排版"
-        }
+        },
+        "alphabeticalAZ": "按字母順序 A-Z",
+        "alphabeticalZA": "按字母順序排列 Z-A"
     },
     "loading": {
         "default": "載入",
         "website": "載入網站"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "其他登入方法",
+        "epic": "Epic Games 登入",
+        "gog": "GOG 登入",
+        "message": "登入您的平台。您可以同時登入多個平台。"
     },
     "message": {
-        "sync": "同步完成",
-        "unsync": "取消同步完成"
+        "sync": "完成同步",
+        "unsync": "完成取消同步"
     },
     "notify": {
         "error": {
@@ -325,15 +339,15 @@
         "finished": {
             "add": {
                 "steam": {
-                    "corrupt": "{{game}} could not be added to all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully added to Steam. A restart of Steam is required for changes to take effect.",
+                    "corrupt": "{{game}} 無法添加到所有已找到的 Steam 用戶。更多信息請查看日誌。需要重啓 Steam 才能成功更改。",
+                    "success": "{{game}} 已成功添加到 Steam。需要重新啓動 Steam 才能使更改生效。",
                     "title": "已添加到 Steam"
                 }
             },
             "remove": {
                 "steam": {
-                    "corrupt": "{{game}} could not be removed from all found Steam users. See logs for more info. A restart of Steam is required for changes to take effect.",
-                    "success": "{{game}} was successfully removed from Steam. A restart of Steam is required for changes to take effect.",
+                    "corrupt": "{{game}} 無法添加到所有已找到的 Steam 用戶。更多信息請查看日誌。需要重啓 Steam 才能成功更改。",
+                    "success": "{{game}} 已成功從 Steam 中刪除。需要重新啓動 Steam 才能成功更改。",
                     "title": "已從 Steam 移除"
                 }
             },
@@ -342,47 +356,51 @@
         "install": {
             "canceled": "已取消安裝",
             "error": "安裝失敗",
-            "finished": "安裝完成",
+            "finished": "完成安裝",
             "imported": "遊戲已導入",
-            "startInstall": "安裝開始"
+            "startInstall": "安裝開始",
+            "stopped": "安裝已停止",
+            "paused": "暫停安裝"
         },
-        "moved": "移動完成",
+        "moved": "完成移動",
         "moving": "移動遊戲中",
-        "new-hyperplay-version": "A new HyperPlay version was released!",
+        "new-hyperplay-version": "發佈了新的 HyperPlay 版本!",
         "refresh": {
-            "error": "不能從上遊獲取releases，可能是因為 Github API 的限制！請稍後再試。"
+            "error": "無法從上游獲取版本，可能是因為 Github API 的限制！稍後再試。"
         },
         "uninstalled": "已解除安裝",
         "update": {
             "canceled": "已取消更新",
             "finished": "更新完成",
-            "started": "更新開始"
+            "started": "更新開始",
+            "paused": "更新已暫停",
+            "stopped": "更新已停止"
         }
     },
     "offline-message": {
-        "hint": "We are checking the connectivity against:{{newline}}github.com,{{newline}}gog.com and{{newline}}store.epicgames.com",
-        "ignore": "Ignore",
-        "offline": "Offline",
-        "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
-        "retrying": "Retrying"
+        "hint": "我們正在檢查以下網站的連接性：{{newline}}github.com、{{newline}}gog.com、{{newline}}store.epicgames.com 和{{newline}}cloudflare-dns.com",
+        "ignore": "忽略",
+        "offline": "離線",
+        "offline-retry-in": "離線。重試時間為 {{seconds}} 秒。",
+        "retrying": "重試中"
     },
     "Open": "",
     "options": {
         "advanced": {
-            "key": "Variable Name",
-            "placeHolderKey": "NAME",
+            "key": "變量名稱",
+            "placeHolderKey": "姓名",
             "placeHolderValue": "例: Path/To/ExtraFiles",
-            "title": "Environment Variables",
+            "title": "環境變量",
             "value": "數值"
         },
         "env_variables": {
             "error": {
-                "empty_key": "Variable names can't be empty",
-                "equal_sign_in_key": "Variable names can't contain the \"=\" sign",
-                "space_in_key": "Variable names can't contain spaces"
+                "empty_key": "變量名不能為空",
+                "equal_sign_in_key": "變量名不能包含\"=\"符號",
+                "space_in_key": "變量名不能包含空格"
             },
-            "example": "Do NOT include the \"=\" sign, e.g: for a setting like \"MY_FLAG=123\", set MY_FLAG in NAME and 123 in VALUE.",
-            "info": "Set environment variables to append to the command."
+            "example": "請勿包含\"=\"符號，例如：對於 \"MY_FLAG=123 \"這樣的設置，在 NAME 中設置 MY_FLAG，在 VALUE 中設置 123。",
+            "info": "設置環境變量，將其附加到命令中。"
         },
         "gameargs": {
             "placeholder": "將啟動器參數放在這裏",
@@ -403,11 +421,11 @@
         "legendary-version": "Legendary 版本: ",
         "weblate": "請幫助翻譯HyperPlay啟動器。"
     },
-    "Other": "Other",
+    "Other": "其他",
     "placeholder": {
         "alt-gogdl-bin": "使用內置的 GOGDL 二進制文件...",
         "alt-legendary-bin": "使用內置的 Legendary 二進制文件...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
+        "custom_themes_path": "選擇查找自定義 CSS 文件的路徑",
         "egs-prefix": "Epic Games商城安裝位置",
         "prefered_language": "雙字元代碼 (如: \"en\" 或 \"fr\")"
     },
@@ -416,17 +434,19 @@
         "mac": "Mac",
         "win": "Windows"
     },
-    "please-wait": "Please wait...",
-    "progress": "Progress",
+    "please-wait": "請稍候...",
+    "progress": "進展",
     "queue": {
         "label": {
-            "canceled": "Canceled",
-            "clear": "Clear List",
-            "downloading": "Downloading",
-            "empty": "Nothing to download",
-            "finished": "Completed",
-            "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "canceled": "已取消",
+            "clear": "清除列表",
+            "downloading": "下載中",
+            "empty": "沒有文件下載",
+            "finished": "已完成",
+            "queued": "排隊等候",
+            "remove": "從下載中移除",
+            "pause": "暫停下載",
+            "resume": "恢復下載"
         }
     },
     "Recent": "最近遊玩的遊戲",
@@ -434,16 +454,16 @@
     "setting": {
         "adddesktopshortcuts": "自動添加桌面捷徑",
         "addgamestostartmenu": "自動添加捷徑到開始功能表",
-        "addgamestosteam": "Add games to Steam automatically",
+        "addgamestosteam": "自動將遊戲添加到 Steam",
         "alt-gogdl-bin": "選擇要使用的備選 GOGDL 二進制文件",
         "alt-legendary-bin": "選擇備選的 Legendary 二進制文件",
         "autodxvk": "在PREFIX自動安裝並更新DXVK",
         "autosync": "自動同步存檔",
         "autovkd3d": "自動在 Prefix 中安裝/更新 VKD3D",
         "change-target-exe": "選擇要執行的替代 EXE",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
-        "crossover-version": "Crossover/Wine Version",
-        "custom_themes_path": "Custom Themes Path",
+        "checkForUpdatesOnStartup": "啓動時檢查 HyperPlay 更新",
+        "crossover-version": "Crossover/Wine版本",
+        "custom_themes_path": "自定義主題路徑",
         "customWineProton": "自定義Wine/Proton路徑",
         "darktray": "使用暗色系統列圖示",
         "default-install-path": "預設安裝路徑",
@@ -461,7 +481,7 @@
             "currentVersion": "目前版本： {{version}}",
             "disable": "停用",
             "enable": "啟用",
-            "install": "Install",
+            "install": "安裝",
             "installed": "已安裝 Epic 內嵌介面",
             "installing": "正在安裝 Epic 內嵌介面...",
             "latestVersion": "最新版本： {{version}}",
@@ -471,7 +491,7 @@
             "remove": "解除安裝",
             "removeConfirm": "確定要現在解除安裝 Epic 內嵌介面嗎？",
             "removeConfirmTitle": "確認移除內嵌介面",
-            "updateNow": "Update",
+            "updateNow": "更新",
             "updating": "更新中..."
         },
         "esync": "啟用 Esync",
@@ -494,7 +514,9 @@
             "instructions_title": "如何回報問題？",
             "last-log": "上一個日誌",
             "no-file": "未找到日誌檔案",
-            "show-in-folder": "顯示日誌所在資料夾"
+            "show-in-folder": "顯示日誌所在資料夾",
+            "instructions-part-01": "如果您在使用 HyperPlay 時遇到任何問題，我們在 Discord 服務器中有兩個指定區域可以報告您的問題。如果您是玩家，請訪問玩家支持論壇報告任何問題。如果您是遊戲開發人員，請訪問開發人員支持論壇報告任何問題。",
+            "instructions-part-02": "為了幫助我們盡快診斷和解決問題，請提供盡可能多的信息，包括您的日誌副本。我們的支持團隊將監控這兩個渠道，並盡最大努力盡快回復您的問題。在我們努力解決您可能遇到的任何問題時，感謝您的耐心和理解。"
         },
         "mangohud": "啟用MangoHud（需要已安裝Mangohud）",
         "manualsync": {
@@ -514,8 +536,8 @@
         "preferSystemLibs": "偏好系統庫",
         "primerun": {
             "confirmation": {
-                "message": "Only one graphics card was detected in this system. Please note that this option is intended for multi-GPU systems with headless GPUs (like laptops). On single-GPU systems, the GPU is automatically used & enabling this option can cause issues. Do you really want to enable this option?",
-                "title": "Only 1 GPU detected"
+                "message": "該系統只檢測到一塊顯卡。請注意，該選項適用於配備無頭 GPU 的多 GPU 系統（如筆記本電腦）。在單 GPU 系統中，會自動使用 GPU，啓用該選項可能會導致問題。您真的想啓用該選項嗎？",
+                "title": "僅檢測到 1 個 GPU"
             },
             "description": "使用獨立顯卡"
         },
@@ -524,9 +546,9 @@
             "title": "在PREFIX上執行exe檔案"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually (click to retry)",
+            "not-found": "未找到保存文件夾，請手動選擇（點擊重試）",
             "placeholder": "選擇存檔的保存位置",
-            "warning": "Please check twice if the path is correct (click to retry)"
+            "warning": "請重覆檢查路徑是否正確（點擊重試）"
         },
         "select_theme": "選擇主題",
         "showfps": "顯示幀數（Directx 9，10和11）",
@@ -534,24 +556,26 @@
         "steamruntime": "使用 Steam 執行環境",
         "winecrossoverbottle": "CrossOver 容器",
         "wineprefix": "WINEPREFIX文件夾",
-        "wineversion": "Wine 版本"
+        "wineversion": "Wine 版本",
+        "autoUpdateGames": "自動更新遊戲",
+        "ignoreGameUpdates": "忽略遊戲更新"
     },
     "settings": {
         "battlEyeRuntime": {
             "installing": "安裝 BattlEye Runtime 中...",
-            "name": "BattlEye AntiCheat Runtime"
+            "name": "BattlEye AntiCheat 運行時"
         },
         "clear-cache": "清除 HyperPlay 快取",
         "copiedToClipboard": "已複製到剪貼簿！",
         "copyToClipboard": "複製所有設定至剪貼簿",
-        "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
+        "default_hint": "本節中的更改僅在安裝遊戲時作為默認值應用。如果要更改已安裝遊戲的設置，請使用遊戲頁面中的 \"設置 \"按鈕。",
         "eacRuntime": {
             "gameModeRequired": {
                 "message": "需要 GameMode 才能讓 EAC runtime 在 Flatpak 上運作。你想馬上啟用它嗎？",
                 "title": "需要啟用 GameMode"
             },
             "installing": "安裝 EAC Runtime 中...",
-            "name": "EasyAntiCheat Runtime"
+            "name": "EasyAntiCheat 運行時間"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
@@ -566,17 +590,18 @@
             "advanced": "進階",
             "games_settings_defaults": "Game Defaults",
             "general": "一般",
-            "log": "Log",
-            "other": "其它",
+            "log": "日誌",
+            "other": "其他",
             "sync": "存檔-同步",
             "wineExt": "Wine 擴充元件"
         },
         "open-config-file": "開啟配置檔案",
-        "reset-hyperplay": "Reset HyperPlay",
+        "reset-hyperplay": "重設 HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "雲端存檔功能處於測試階段，請在同步前備份你的存檔（以防出現問題）"
-        }
+        },
+        "gamesSettings": "遊戲設置"
     },
     "Settings": "設定",
     "sidebar": {
@@ -610,12 +635,12 @@
         "show": "顯示"
     },
     "two_col_table": {
-        "save_hint": "Changes in this table are not saved automatically. Click the + button"
+        "save_hint": "該表中的更改不會自動保存。點擊 + 按鈕"
     },
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logging_out": "Logging out",
+        "logging_out": "退出登入",
         "logout": "登出",
         "logout_confirmation": "您確定要登出嗎？",
         "manageaccounts": "管理帳號",
@@ -630,14 +655,174 @@
         }
     },
     "wine": {
-        "actions": "Action",
+        "actions": "行動",
         "manager": {
             "link": "Wine 管理員",
-            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine 管理員",
+            "not-found": "未找到Wine 版本。請點擊刷新圖標重試。",
+            "title": "兼容性層 ",
             "unzipping": "解壓縮"
         },
-        "release": "Release Date",
+        "release": "發佈日期",
         "size": "大小"
-    }
+    },
+    "hyperplay": {
+        "onboarding": {
+            "connectionConnected": {
+                "title": "錢包已連接!",
+                "description": "您的錢包已連接。您可以開始遊戲了。"
+            },
+            "walletSelection": {
+                "screens": {
+                    "scan": {
+                        "updateWarning": "有問題？確保 MetaMask 是最新版本。",
+                        "details": "創建加密通訊通道。您的密鑰絕不會與 HyperPlay 共享。",
+                        "dontHaveWallet": "沒有錢包？",
+                        "getMetamask": "獲取 Metamask",
+                        "title": "以 "
+                    },
+                    "info": {
+                        "createWalletCTA": "創建錢包",
+                        "digitalAssets": {
+                            "details": "錢包用於發送、接收、儲存和顯示代幣和 NFT 等數字資產。",
+                            "title": "數字資產之所"
+                        },
+                        "skip": "暫時跳過",
+                        "createWalletDescription": "如果您沒有錢包或想創建一個新錢包，請點擊下面的 \"創建錢包\"：",
+                        "login": {
+                            "details": "除了在每個網站上創建新賬戶和密碼外，只需連接您的錢包即可。",
+                            "title": "登入新方式"
+                        },
+                        "title": "什麼是錢包？"
+                    },
+                    "import": {
+                        "title": "選擇要從哪個瀏覽器導入",
+                        "cantFindProfile": "找不到您的瀏覽器配置文件？",
+                        "createNewWallet": "創建新的 MM 擴展錢包",
+                        "details": "通過導入，您的 MetaMask 安裝和  設置將被導入 HyperPlay。",
+                        "useRecoveryPhrase": "使用秘密恢復短語訪問"
+                    }
+                },
+                "title": "錢包連接",
+                "pleaseConnect": "請連接您的錢包，或下載 Metamask 移動應用程序開始使用\n        開始使用:"
+            },
+            "analytics": {
+                "title": "幫助我們改進 HyperPlay!",
+                "privacyPolicyHere": "點擊此處查看隱私政策。",
+                "privacyCaption": "根據《一般數據保護條例》（歐盟）2016/679 的規定，這些數據是匯總數據，因此是匿名數據。如需瞭解更多有關我們隱私保護措施的信息，請參閱我們的 ",
+                "anonymized": "發送匿名點擊和遊戲互動;",
+                "neverSellData": " 出售數據牟利。永遠不會!",
+                "optOut": "總允許您通過設置選擇退出;",
+                "body": "HyperPlay希望收集使用數據，以便更好地瞭解我們的用戶如何與應用程序互動。這些信息有助於我們瞭解您是如何使用應用程序的，並讓我們為您提供更好的HyperPlay。",
+                "hyperplayWill": "HyperPlay 將:",
+                "neverCollectIP": " 收集您的完整 IP 地址;",
+                "neverCollectPersonal": " 收集密鑰、地址、餘額、哈希值或任何個人信息;"
+            },
+            "welcome": {
+                "text": {
+                    "description": "HyperPlay 是一款來自          未來的遊戲啓動器和遊戲商店聚合器。\n未來。有了 HyperPlay，你可以帶著錢包、代幣和資產\n          進入每款遊戲。HyperPlay 支持 Epic\n          商店、GOG 和我們自己的 HyperPlay 商店的全部遊戲庫。使用HyperPlay，即表示您同意\n          同意我們的",
+                    "communityCTA_2": "社區。讓我們一起塑造遊戲的未來！",
+                    "bugs": "請注意，HyperPlay 是一個公開的 alpha 版本。許多功能仍\n          許多功能仍在開發中，可能會出現錯誤。",
+                    "communityCTA_1": "我們希望您能提供反饋意見，並加入我們的",
+                    "construction": "HyperPlay 正在建設中。"
+                },
+                "title": "歡迎來到 HyperPlay Early Access！"
+            },
+            "connectAgain": "再次連接",
+            "connectionCanceled": {
+                "description": "請在手機錢包上確認連接請求，以便繼續。",
+                "title": "連接已取消！"
+            },
+            "terms": "服務條款。"
+        },
+        "analyticsOff": "分析功能已關閉",
+        "analyticsOn": "分析功能已開啓",
+        "buttons": {
+            "agree": "我同意",
+            "noThanks": "不，謝謝"
+        },
+        "changeWallet": "更換錢包",
+        "copyUrl": "複製 URL",
+        "misc": "從不",
+        "turnAnalyticsOff": "關閉",
+        "currentWallet": "當前錢包",
+        "discordApp": "Discord",
+        "otp": "一次性密碼",
+        "publicAlpha": "公開 Alpha",
+        "turnAnalyticsOn": "開啟",
+        "viewFullscreen": "全螢幕顯示",
+        "viewPortfolio": "查看資料夾",
+        "wallet": {
+            "connected": "已連接",
+            "notConnected": "未連接"
+        }
+    },
+    "hyperplayOverlay": {
+        "chainRequest": {
+            "FAILED": "取消自定義網絡",
+            "CONFIRMED": "添加自定義網絡",
+            "INITIATED": "自定義網絡要求"
+        },
+        "description": {
+            "PENDING": "等待區塊鏈確認。確認後我們將通知您",
+            "FAILED": "交易已取消或未提交，請重試",
+            "INITIATED": "您的錢包正在等待在手機上確認",
+            "CONFIRMED": "交易已成功確認！"
+        },
+        "walletWatch": {
+            "CONFIRMED": "添加自定義代幣",
+            "FAILED": "自定義代幣請求已取消",
+            "INITIATED": "添加自定義代幣的請求待處理"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "按 Alt 或 Option + X 查看此交易",
+            "TITLE": "已要求進行交易"
+        },
+        "signatureRequest": {
+            "FAILED": "簽名中斷",
+            "CONFIRMED": "簽名已提交",
+            "INITIATED": "簽名要求待批"
+        },
+        "txnRequest": {
+            "CONFIRMED": "交易已確認",
+            "INITIATED": "交易請求待處理",
+            "PENDING": "交易已提交",
+            "FAILED": "交易中斷"
+        },
+        "greeting": {
+            "description": "HyperPlay Overlay已準備就緒！按 Alt + X 鍵顯示或隱藏。",
+            "title": "HyperPlay Overlay"
+        }
+    },
+    "externalLink": {
+        "dontAskAgain": "別再問了",
+        "warning": "您將打開一個外部鏈接。"
+    },
+    "wiki_info": {
+        "not_found": "我們找不到額外的信息。"
+    },
+    "dlc": {
+        "actions": "行動",
+        "noDlcFound": "未找到可下載內容",
+        "size": "大小",
+        "title": "標題",
+        "installDlcs": "安裝所有可下載內容"
+    },
+    "sideload": {
+        "warningTitle": "重要",
+        "warningMessage": "側載遊戲是專為開發人員和有經驗的高級用戶提供的功能。側載包含惡意軟件的安裝程序可能會危及你的電腦並導致資金被盜。"
+    },
+    "gameRelease": {
+        "beta": "Beta",
+        "main": "主要",
+        "prototype": "原型",
+        "alpha": "Alpha",
+        "demo": "演示"
+    },
+    "accounts": "賬戶",
+    "ALL": "全部",
+    "analytics": "分析",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "您使用外部錢包連接到 HyperPlay。\n \n 要批准 HyperPlay Overlay 中的交易，您需要使用 MetaMask 擴展連接 HyperPlay。"
+    },
+    "exit_game": "退出遊戲"
 }
