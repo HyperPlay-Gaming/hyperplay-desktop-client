@@ -7,15 +7,25 @@ import React, {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate, useLocation, useParams } from 'react-router'
+import { DidNavigateEvent } from 'electron'
 
 import { UpdateComponent } from 'frontend/components/UI'
 import WebviewControls from 'frontend/components/UI/WebviewControls'
 import ContextProvider from 'frontend/state/ContextProvider'
+import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { Runner, WebviewType } from 'common/types'
 import './index.css'
 import LoginWarning from '../Login/components/LoginWarning'
 import authStore from 'frontend/store/AuthStore'
 import { observer } from 'mobx-react-lite'
+import {
+  EPIC_LOGIN_URL,
+  EPIC_STORE_URL,
+  GOG_LOGIN_URL,
+  GOG_STORE_URL,
+  HYPERPLAY_STORE_URL,
+  WIKI_URL
+} from '../../constants'
 
 function WebView() {
   const { i18n } = useTranslation()
@@ -37,18 +47,12 @@ function WebView() {
     lang = 'pt-BR'
   }
 
-  const epicLoginUrl = 'https://legendary.gl/epiclogin'
-
   const hyperplayStore =
-    'https://store.hyperplay.xyz?isLauncher=true' +
+    HYPERPLAY_STORE_URL +
     (authStore.authToken !== '' ? '&qamode=' + authStore.authToken : '')
 
-  const epicStore = `https://www.epicgames.com/store/${lang}/`
-  const gogStore = `https://gog.com`
-  const wikiURL = 'https://docs.hyperplaygaming.com/'
+  const epicStore = `${EPIC_STORE_URL}/${lang}/`
   const gogEmbedRegExp = new RegExp('https://embed.gog.com/on_login_success?')
-  const gogLoginUrl =
-    'https://auth.gog.com/auth?client_id=46899977096215655&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&response_type=code&layout=galaxy'
 
   const trueAsStr = 'true' as unknown as boolean | undefined
   const { runner } = useParams() as { runner: Runner }
@@ -56,13 +60,14 @@ function WebView() {
   const urls = {
     '/hyperplaystore': hyperplayStore,
     '/epicstore': epicStore,
-    '/gogstore': gogStore,
-    '/wiki': wikiURL,
-    '/loginEpic': epicLoginUrl,
-    '/loginGOG': gogLoginUrl,
-    '/loginweb/legendary': epicLoginUrl,
-    '/loginweb/gog': gogLoginUrl
+    '/gogstore': GOG_STORE_URL,
+    '/wiki': WIKI_URL,
+    '/loginEpic': EPIC_LOGIN_URL,
+    '/loginGOG': GOG_LOGIN_URL,
+    '/loginweb/legendary': EPIC_LOGIN_URL,
+    '/loginweb/gog': GOG_LOGIN_URL
   }
+
   let startUrl = Object.prototype.hasOwnProperty.call(urls, pathname)
     ? urls[pathname]
     : ''
@@ -75,7 +80,7 @@ function WebView() {
     }
   }
 
-  const isEpicLogin = runner === 'legendary' && startUrl === epicLoginUrl
+  const isEpicLogin = runner === 'legendary' && startUrl === EPIC_LOGIN_URL
   const [preloadPath, setPreloadPath] = useState('')
 
   useEffect(() => {
@@ -186,6 +191,18 @@ function WebView() {
     }
   }, [startUrl])
 
+  useEffect(() => {
+    const handleNavigation = (event: DidNavigateEvent) => {
+      webviewNavigationStore.currentUrl = event.url
+    }
+
+    webviewRef.current?.addEventListener('did-navigate', handleNavigation)
+
+    return () => {
+      webviewRef.current?.removeEventListener('did-navigate', handleNavigation)
+    }
+  }, [webviewRef])
+
   const onLoginWarningClosed = () => {
     setShowLoginWarningFor(null)
   }
@@ -195,7 +212,9 @@ function WebView() {
   }
 
   const partitionForWebview =
-    startUrl === hyperplayStore ? 'persist:hyperplaystore' : 'persist:epicstore'
+    startUrl === HYPERPLAY_STORE_URL
+      ? 'persist:hyperplaystore'
+      : 'persist:epicstore'
 
   return (
     <div className="WebView">
