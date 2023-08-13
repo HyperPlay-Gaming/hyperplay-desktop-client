@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import styles from './index.module.scss'
 import { HyperPlayLogoWhite } from 'frontend/assets/hyperplay'
 import { Button, Images } from '@hyperplay/ui'
+
 import SearchBar from '../SearchBar'
 import AccountDropdown from '../AccountDropdown'
 import extensionStore from 'frontend/store/ExtensionStore'

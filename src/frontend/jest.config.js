@@ -1,7 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { compilerOptions } = require('../../tsconfig')
 
-module.exports = {
+/** @type {import('jest').Config} */
+const config = {
+  rootDir: '../..',
   displayName: 'Frontend',
 
   moduleDirectories: ['node_modules', '<rootDir>'],
@@ -9,8 +11,6 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
   testPathIgnorePatterns: ['./node_modules/'],
   resetMocks: true,
-
-  rootDir: '../..',
 
   // The root of your source code, typically /src
   // `<rootDir>` is a token Jest substitutes
@@ -20,8 +20,13 @@ module.exports = {
   // Jest transformations -- this adds support for TypeScript
   // using ts-jest
   transform: {
-    '^.+\\.tsx?$': 'ts-jest'
+    '^.+\\.tsx?$': 'ts-jest',
+    '.+\\.(css|styl|less|sass|scss|png|jpg|svg|ttf|woff|woff2)$':
+      'jest-transform-stub'
   },
 
+  testEnvironment: 'jsdom',
   modulePaths: [compilerOptions.baseUrl]
 }
+
+module.exports = config
