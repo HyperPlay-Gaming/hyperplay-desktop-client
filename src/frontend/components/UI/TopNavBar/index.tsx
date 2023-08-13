@@ -10,26 +10,26 @@ import { observable } from 'mobx'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { NavLink, useLocation } from 'react-router-dom'
+import {
+  EPIC_STORE_URL,
+  GOG_STORE_URL,
+  HYPERPLAY_STORE_URL
+} from 'frontend/constants'
+import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
+import { extractMainDomain } from '../../../helpers/extract-main-domain'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
 
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
-  const { pathname, search } = useLocation()
+  const { pathname } = useLocation()
   const pagesToShowStoreNavOptions = [
     '/hyperplaystore',
     '/gogstore',
     '/epicstore',
     '/store-page/'
   ]
-  const searchParams = new URLSearchParams(search)
-  const queryParam = searchParams.get('store-url')
-  let isEpicStore = false
-  if (queryParam !== null) {
-    const storeUrl = new URL(queryParam)
-    isEpicStore = storeUrl.host === 'store.epicgames.com'
-  }
 
   const showStoreNavOptions = pagesToShowStoreNavOptions.includes(pathname)
 
@@ -37,6 +37,7 @@ const TopNavBar = observer(() => {
   function setBadgeString(err: any, text: string) {
     setBadgeText(text)
   }
+
   useEffect(() => {
     const removeHandleSetBadgeText =
       window.api.handleSetBadgeTextInRenderer(setBadgeString)
@@ -45,14 +46,18 @@ const TopNavBar = observer(() => {
       removeHandleSetBadgeText()
     }
   }, [])
-  function getStoreTextStyle(storePath: string, isActive?: boolean) {
+
+  function getStoreTextStyle(viewURL: string) {
     const inactiveStyle = { color: 'var(--color-neutral-400)' }
     const activeStyle = { color: '' }
-    if (isActive !== undefined && isActive) {
-      return activeStyle
-    }
-    return pathname === storePath ? activeStyle : inactiveStyle
+    const viewURLMainDomain = extractMainDomain(viewURL)
+    const currentURLMainDomain = extractMainDomain(
+      webviewNavigationStore.currentUrl
+    )
+    const isActive = viewURLMainDomain === currentURLMainDomain
+    return isActive ? activeStyle : inactiveStyle
   }
+
   return (
     <div className={styles.navBar}>
       <div>
@@ -73,7 +78,7 @@ const TopNavBar = observer(() => {
               <Button
                 type="link"
                 size="small"
-                style={getStoreTextStyle('/hyperplaystore')}
+                style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
               >
                 HyperPlay
               </Button>
@@ -82,7 +87,7 @@ const TopNavBar = observer(() => {
               <Button
                 type="link"
                 size="small"
-                style={getStoreTextStyle('/epicstore', isEpicStore)}
+                style={getStoreTextStyle(EPIC_STORE_URL)}
               >
                 {t('Epic Games', 'Epic Games')}
               </Button>
@@ -91,7 +96,7 @@ const TopNavBar = observer(() => {
               <Button
                 type="link"
                 size="small"
-                style={getStoreTextStyle('/gogstore')}
+                style={getStoreTextStyle(GOG_STORE_URL)}
               >
                 {t('GOG', 'GOG')}
               </Button>
