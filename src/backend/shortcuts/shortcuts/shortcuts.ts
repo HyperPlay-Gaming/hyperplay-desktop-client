@@ -29,6 +29,9 @@ import * as GogLibraryManager from '../../storeManagers/gog/library'
  * @public
  */
 async function addShortcuts(gameInfo: GameInfo, fromMenu?: boolean) {
+  if (gameInfo.install.is_dlc) {
+    return
+  }
   logInfo(`Adding shortcuts for ${gameInfo.title}`, LogPrefix.Backend)
   const { addDesktopShortcuts, addStartMenuShortcuts, addSteamShortcuts } =
     GlobalConfig.get().getSettings()
@@ -114,6 +117,10 @@ Categories=Game;
  * @public
  */
 async function removeShortcuts(gameInfo: GameInfo) {
+  if (gameInfo.install.is_dlc) {
+    return
+  }
+
   const [desktopFile, menuFile] = shortcutFiles(gameInfo.title)
 
   if (desktopFile) {
@@ -161,7 +168,11 @@ function shortcutFiles(gameTitle: string) {
 }
 
 async function generateMacOsApp(gameInfo: GameInfo) {
-  const { title, app_name, runner } = gameInfo
+  const { title, app_name, runner, install } = gameInfo
+
+  if (install.is_dlc) {
+    return
+  }
 
   logInfo('Generating macOS shortcut', LogPrefix.Backend)
 

@@ -1,5 +1,5 @@
 import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
-import { LegendaryInstallPlatform } from './types/legendary'
+import { LegendaryInstallPlatform, GameMetadataInner } from './types/legendary'
 import { IpcRendererEvent } from 'electron'
 import { ChildProcess } from 'child_process'
 import { HowLongToBeatEntry } from 'howlongtobeat'
@@ -175,6 +175,7 @@ export interface GameInfo {
   //data schema version
   v?: string
   account_name?: string
+  dlcList?: GameMetadataInner[]
   //key is channel_id, value is last access code used
   accessCodesCache?: Record<string, string>
 }
@@ -285,14 +286,13 @@ export interface WineInstallation {
   type: 'wine' | 'proton' | 'crossover'
   lib?: string
   lib32?: string
-  wineboot?: string
   wineserver?: string
 }
 
 export interface InstallArgs {
   path: string
-  platformToInstall: InstallPlatform | AppPlatforms
-  installDlcs?: boolean
+  platformToInstall: InstallPlatform
+  installDlcs?: Array<string> | boolean
   sdlList?: string[]
   installLanguage?: string
   channelName?: string

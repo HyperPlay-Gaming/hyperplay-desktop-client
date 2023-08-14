@@ -1,4 +1,4 @@
-import { LaunchOption, DLCInfo } from 'common/types'
+import { LaunchOption } from 'common/types'
 // Types specifically for Legendary/Epic
 
 // Possible platforms for `legendary list --platform`
@@ -46,7 +46,7 @@ interface AssetInfo {
   namespace: string
 }
 
-interface GameMetadataInner {
+export interface GameMetadataInner {
   // TODO: So far every age gating has been {}
   ageGatings: Record<string, unknown>
   applicationId: string
@@ -139,6 +139,12 @@ interface GameInstallInfo {
   platform_versions: Record<LegendaryInstallPlatform, string>
   title: string
   version: string
+}
+
+export interface DLCInfo {
+  app_name: string
+  title: string
+  is_installed?: boolean
 }
 
 interface GameManifest {

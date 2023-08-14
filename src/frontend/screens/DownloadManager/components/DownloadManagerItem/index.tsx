@@ -106,7 +106,11 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
     getNewInfo()
   }, [element])
 
-  const { art_cover, art_square } = gameInfo || {}
+  const {
+    art_cover,
+    art_square,
+    install: { is_dlc }
+  } = gameInfo || {}
 
   const [progress] = hasProgress(appName)
   const { status } = element
@@ -114,6 +118,9 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
   const canceled = status === 'error' || (status === 'abort' && !current)
 
   const goToGamePage = () => {
+    if (is_dlc) {
+      return
+    }
     return navigate(`/gamepage/${runner}/${appName}`, {
       state: { fromDM: true, gameInfo: gameInfo }
     })
@@ -144,7 +151,10 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
 
   const mainActionIcon = () => {
     if (finished) {
-      return <PlayIcon />
+      if (is_dlc) {
+        return <>-</>
+      }
+      return <PlayIcon className="playIcon" />
     }
 
     if (canceled) {
@@ -241,7 +251,10 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
           role="button"
           onClick={() => goToGamePage()}
           className="downloadManagerTitleList"
-          style={{ color: getStatusColor() }}
+          style={{
+            color: getStatusColor(),
+            cursor: is_dlc ? 'default' : 'pointer'
+          }}
         >
           {cover && <CachedImage src={cover} alt={title} />}
           <span className="titleSize">

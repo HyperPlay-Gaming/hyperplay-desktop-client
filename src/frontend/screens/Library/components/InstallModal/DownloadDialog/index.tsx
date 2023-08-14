@@ -46,6 +46,7 @@ import { AvailablePlatforms } from '../index'
 import { SDL_GAMES, SelectiveDownload } from '../selective_dl'
 import { configStore } from 'frontend/helpers/electronStores'
 import { Button } from '@hyperplay/ui'
+import DLCDownloadListing from './DLCDownloadListing'
 
 interface Props {
   backdropClick: () => void
@@ -136,7 +137,8 @@ export default function DownloadDialog({
     (game: GameStatus) => game.appName === appName
   )[0]
 
-  const [installDlcs, setInstallDlcs] = useState(false)
+  const [dlcsToInstall, setDlcsToInstall] = useState<string[]>([])
+  const [installAllDlcs, setInstallAllDlcs] = useState(false)
   const [selectedSdls, setSelectedSdls] = useState<{ [key: string]: boolean }>(
     {}
   )
@@ -182,7 +184,7 @@ export default function DownloadDialog({
   )
 
   function handleDlcs() {
-    setInstallDlcs(!installDlcs)
+    setInstallAllDlcs(!installAllDlcs)
   }
 
   async function handleInstall(path?: string) {
@@ -213,7 +215,7 @@ export default function DownloadDialog({
       progress: previousProgress,
       t,
       sdlList,
-      installDlcs,
+      installDlcs: runner === 'gog' ? installAllDlcs : dlcsToInstall,
       installLanguage,
       platformToInstall,
       showDialogModal: () => backdropClick(),
@@ -236,7 +238,6 @@ export default function DownloadDialog({
           platformToInstall,
           channelNameToInstall
         )
-        console.log('got install info = ', gameInstallInfo)
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 
@@ -309,10 +310,10 @@ export default function DownloadDialog({
     getSpace()
   }, [installPath, gameInstallInfo?.manifest?.disk_size])
 
-  const haveDLCs =
-    gameInstallInfo &&
-    gameInstallInfo?.game?.owned_dlc?.length &&
-    gameInstallInfo?.game?.owned_dlc?.length > 0
+  const haveDLCs: boolean =
+    gameInstallInfo?.game?.owned_dlc !== undefined &&
+    gameInstallInfo.game.owned_dlc.length > 0
+
   const DLCList = gameInstallInfo?.game?.owned_dlc
   const gameDownloadSize = gameInstallInfo?.manifest?.download_size
   const downloadSize = () => {
@@ -376,6 +377,12 @@ export default function DownloadDialog({
   const showRemainingProgress =
     (runner === 'hyperplay' && previousProgress.percent) ||
     previousProgress.folder === installPath
+  const showDlcSelector =
+    runner === 'legendary' && DLCList && DLCList?.length > 0
+
+  const doneFetchingGameInfo = isWebGame || downloadSize()
+
+  const showInstallandDownloadSizes = !isWebGame
 
   const doneFetchingGameInfo = isWebGame || downloadSize()
 
@@ -531,11 +538,6 @@ export default function DownloadDialog({
           }
         />
         {children}
-        {haveDLCs || haveSDL ? (
-          <div className="InstallModal__sectionHeader">
-            {t('sdl.title', 'Select components to Install')}:
-          </div>
-        ) : null}
         {haveSDL ? (
           <div className="InstallModal__sdls">
             {sdls.map((sdl: SelectiveDownload, idx: number) => (
@@ -555,22 +557,28 @@ export default function DownloadDialog({
             ))}
           </div>
         ) : null}
-        {haveDLCs ? (
+        {showDlcSelector && (
+          <DLCDownloadListing
+            DLCList={DLCList}
+            dlcsToInstall={dlcsToInstall}
+            setDlcsToInstall={setDlcsToInstall}
+          />
+        )}
+        {haveDLCs && runner === 'gog' && (
           <div className="InstallModal__dlcs">
             <label className={classNames('InstallModal__toggle toggleWrapper')}>
               <ToggleSwitch
                 htmlId="dlcs"
-                value={installDlcs}
+                value={installAllDlcs}
                 handleChange={() => handleDlcs()}
                 title={t('dlc.installDlcs', 'Install all DLCs')}
               />
-              <span>{t('dlc.installDlcs', 'Install all DLCs')}:</span>
             </label>
             <div className="InstallModal__dlcsList">
               {DLCList?.map(({ title }) => title).join(', ')}
             </div>
           </div>
-        ) : null}
+        )}
       </DialogContent>
       <DialogFooter>
         <Button
