@@ -377,7 +377,7 @@ export default function DownloadDialog({
     (runner === 'hyperplay' && previousProgress.percent) ||
     previousProgress.folder === installPath
 
-  const fetchingGameInfo = isWebGame || downloadSize()
+  const doneFetchingGameInfo = isWebGame || downloadSize()
 
   const showInstallandDownloadSizes = !isWebGame
 
@@ -400,11 +400,11 @@ export default function DownloadDialog({
             <div className="InstallModal__size">
               <FontAwesomeIcon
                 className={classNames('InstallModal__sizeIcon', {
-                  'fa-spin-pulse': !fetchingGameInfo
+                  'fa-spin-pulse': !doneFetchingGameInfo
                 })}
-                icon={fetchingGameInfo ? faDownload : faSpinner}
+                icon={doneFetchingGameInfo ? faDownload : faSpinner}
               />
-              {fetchingGameInfo ? (
+              {doneFetchingGameInfo ? (
                 <>
                   <div className="InstallModal__sizeLabel">
                     {t('game.downloadSize', 'Download Size')}:
@@ -420,11 +420,11 @@ export default function DownloadDialog({
             <div className="InstallModal__size">
               <FontAwesomeIcon
                 className={classNames('InstallModal__sizeIcon', {
-                  'fa-spin-pulse': !fetchingGameInfo
+                  'fa-spin-pulse': !doneFetchingGameInfo
                 })}
-                icon={fetchingGameInfo ? faHardDrive : faSpinner}
+                icon={doneFetchingGameInfo ? faHardDrive : faSpinner}
               />
-              {fetchingGameInfo ? (
+              {doneFetchingGameInfo ? (
                 <>
                   <div className="InstallModal__sizeLabel">
                     {t('game.installSize', 'Install Size')}:
