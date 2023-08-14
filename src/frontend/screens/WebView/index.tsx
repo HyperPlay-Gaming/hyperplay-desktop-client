@@ -66,7 +66,11 @@ export default function WebView() {
     const searchParams = new URLSearchParams(search)
     const queryParam = searchParams.get('store-url')
     if (queryParam) {
-      startUrl = queryParam
+      startUrl =
+        queryParam +
+        (queryParam.startsWith('https://store.hyperplay.xyz')
+          ? '?isLauncher=true'
+          : '')
     }
   }
 
