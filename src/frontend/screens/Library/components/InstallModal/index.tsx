@@ -58,8 +58,10 @@ export default React.memo(function InstallModal({
   const [crossoverBottle, setCrossoverBottle] = useState('')
   const [accessCode, setAccessCode] = useState('')
 
+  const numberOfChannels =
+    (gameInfo?.channels && Object.keys(gameInfo?.channels).length) ?? 0
   const initChannelName =
-    gameInfo?.channels && Object.keys(gameInfo?.channels).length > 0
+    gameInfo?.channels && numberOfChannels > 0
       ? Object.keys(gameInfo?.channels)[0]
       : 'main'
   const [channelNameToInstall, setChannelNameToInstall] =
@@ -242,7 +244,9 @@ export default React.memo(function InstallModal({
             accessCode={accessCode}
           >
             {platformSelection()}
-            {runner === 'hyperplay' ? channelNameSelection() : null}
+            {runner === 'hyperplay' && numberOfChannels > 1
+              ? channelNameSelection()
+              : null}
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}
