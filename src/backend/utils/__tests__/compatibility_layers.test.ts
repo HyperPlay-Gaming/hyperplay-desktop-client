@@ -1,4 +1,3 @@
-import { describe } from 'node:test'
 import {
   getDefaultWine,
   getWineExecs,
@@ -32,7 +31,7 @@ describe('getDefaultWine', () => {
     // spy on the execSync calling which wine and returning /usr/bin/wine
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const execSync = jest.spyOn(require('child_process'), 'execSync')
-    execSync.mockImplementation((command: any) => {
+    execSync.mockImplementation((command: unknown) => {
       if (command === 'which wine') {
         return '/usr/bin/wine\n'
       } else if (command === 'wine --version') {
