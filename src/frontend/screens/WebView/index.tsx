@@ -40,8 +40,7 @@ function WebView() {
   const epicLoginUrl = 'https://legendary.gl/epiclogin'
 
   const hyperplayStore =
-    // 'https://store.hyperplay.xyz?isLauncher=true' +
-    'https://hyperplay-store-j7bsg6eky-hyperplay.vercel.app/?isLauncher=true' +
+    'https://store.hyperplay.xyz?isLauncher=true' +
     (authStore.authToken !== '' ? '&qamode=' + authStore.authToken : '')
 
   const epicStore = `https://www.epicgames.com/store/${lang}/`
