@@ -171,10 +171,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
           throw 'Cannot get channels'
         const releaseMeta = channels?.[channelName].release_meta
 
-          hpPlatforms = releaseMeta
-            ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
-            : 'windows_amd64'
-        }
+        const hpPlatforms = releaseMeta
+          ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
+          : 'Windows'
 
         const othersPlatforms =
           install.platform ||

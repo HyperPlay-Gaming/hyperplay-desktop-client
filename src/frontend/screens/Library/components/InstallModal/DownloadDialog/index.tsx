@@ -384,10 +384,6 @@ export default function DownloadDialog({
 
   const showInstallandDownloadSizes = !isWebGame
 
-  const doneFetchingGameInfo = isWebGame || downloadSize()
-
-  const showInstallandDownloadSizes = !isWebGame
-
   return (
     <>
       <DialogHeader onClose={backdropClick}>
