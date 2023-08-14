@@ -346,20 +346,17 @@ export async function launchGame(
       LogPrefix.Backend
     )
 
-    await runWineCommand(
-      {
-        commandParts: [executable, launcherArgs ?? ''],
-        gameSettings,
-        wait: false,
-        startFolder: dirname(executable),
-        options: {
-          wrappers,
-          logFile: logFileLocation(appName),
-          logMessagePrefix: LogPrefix.Backend
-        }
-      },
-      gameInfo
-    )
+    await runWineCommand({
+      commandParts: [executable, launcherArgs ?? ''],
+      gameSettings,
+      wait: false,
+      startFolder: dirname(executable),
+      options: {
+        wrappers,
+        logFile: logFileLocation(appName),
+        logMessagePrefix: LogPrefix.Backend
+      }
+    })
 
     launchCleanup(rpcClient)
 
