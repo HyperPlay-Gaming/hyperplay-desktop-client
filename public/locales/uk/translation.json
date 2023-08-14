@@ -826,5 +826,12 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Ви підключені до HyperPlay за допомогою зовнішнього гаманця.\n\nДля затвердження транзакцій в оверлеї HyperPlay вам потрібно буде підключитися до HyperPlay з розширенням MetaMask."
+    },
+    "dlc": {
+        "size": "Розмір",
+        "title": "Назва",
+        "actions": "Дії",
+        "installDlcs": "Встановити всі DLC",
+        "noDlcFound": "DLC не знайдено"
     }
 }

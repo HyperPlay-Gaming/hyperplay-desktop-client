@@ -640,5 +640,8 @@
         },
         "release": "发布日期",
         "size": "大小"
-    }
+    },
+    "analytics": "分析",
+    "accounts": "账户",
+    "ALL": "所有"
 }
