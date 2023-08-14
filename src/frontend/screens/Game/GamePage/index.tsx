@@ -160,9 +160,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
           channels
         } = { ...gameInfo }
 
-        if (channels === undefined || install.channelName === undefined)
+        const channelName = install.channelName ?? 'main'
+
+        if (
+          runner === 'hyperplay' &&
+          (channels === undefined || !Object.hasOwn(channels, channelName))
+        )
           throw 'Cannot get channels'
-        const releaseMeta = channels[install.channelName].release_meta
+        const releaseMeta = channels?.[channelName].release_meta
 
         const hpPlatforms = releaseMeta
           ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
@@ -405,18 +410,26 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 <div className="grid-container">
                   {!is_installed && !isSideloaded && (
                     <>
-                      <div className="hp-subtitle">
-                        {t('game.downloadSize', 'Download Size')}
-                      </div>
-                      <div className="col2-item italic">
-                        {downloadSize ?? '...'}
-                      </div>
-                      <div className="hp-subtitle">
-                        {t('game.installSize', 'Install Size')}
-                      </div>
-                      <div className="col2-item italic">
-                        {installSize ?? '...'}
-                      </div>
+                      {downloadSize !== 0 ? (
+                        <>
+                          <div className="hp-subtitle">
+                            {t('game.downloadSize', 'Download Size')}
+                          </div>
+                          <div className="col2-item italic">
+                            {downloadSize ?? '...'}
+                          </div>
+                        </>
+                      ) : null}
+                      {installSize !== 0 ? (
+                        <>
+                          <div className="hp-subtitle">
+                            {t('game.installSize', 'Install Size')}
+                          </div>
+                          <div className="col2-item italic">
+                            {installSize ?? '...'}
+                          </div>
+                        </>
+                      ) : null}
                     </>
                   )}
                   <div className="hp-subtitle">
