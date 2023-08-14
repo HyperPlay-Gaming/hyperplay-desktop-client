@@ -15,6 +15,11 @@ import { Runner, WebviewType } from 'common/types'
 import './index.css'
 import LoginWarning from '../Login/components/LoginWarning'
 
+function urlIsHpUrl(url: string) {
+  const urlToTest = new URL(url)
+  return urlToTest.hostname === 'store.hyperplay.xyz'
+}
+
 export default function WebView() {
   const { i18n } = useTranslation()
   const { pathname, search } = useLocation()
@@ -66,11 +71,9 @@ export default function WebView() {
     const searchParams = new URLSearchParams(search)
     const queryParam = searchParams.get('store-url')
     if (queryParam) {
-      startUrl =
-        queryParam +
-        (queryParam.startsWith('https://store.hyperplay.xyz')
-          ? '?isLauncher=true'
-          : '')
+      const queryParamAppends = urlIsHpUrl(queryParam) ? '?isLauncher=true' : ''
+
+      startUrl = queryParam + queryParamAppends
     }
   }
 
@@ -193,8 +196,9 @@ export default function WebView() {
     return <></>
   }
 
-  const partitionForWebview =
-    startUrl === hyperplayStore ? 'persist:hyperplaystore' : 'persist:epicstore'
+  const partitionForWebview = urlIsHpUrl(startUrl)
+    ? 'persist:hyperplaystore'
+    : 'persist:epicstore'
 
   return (
     <div className="WebView">
