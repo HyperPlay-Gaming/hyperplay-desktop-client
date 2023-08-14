@@ -63,6 +63,7 @@ interface HyperPlaySyncIPCFunctions {
   enableOnEvents: (topic: string) => void
   addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
+  setQaToken: (qaToken: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {

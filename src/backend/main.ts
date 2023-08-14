@@ -102,7 +102,8 @@ import {
   createNecessaryFolders,
   fixAsarPath,
   twitterLink,
-  eventsToCloseMetaMaskPopupOn
+  eventsToCloseMetaMaskPopupOn,
+  setQaToken
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -1889,4 +1890,8 @@ function watchLibraryChanges() {
 ipcMain.on('openGameInEpicStore', async (_e, url) => {
   if (url.startsWith('https://store.epicgames.com/'))
     sendFrontendMessage('navToEpicAndOpenGame', url)
+})
+
+ipcMain.on('setQaToken', (_e, qaToken) => {
+  setQaToken(qaToken)
 })
