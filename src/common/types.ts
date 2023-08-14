@@ -625,6 +625,7 @@ export type WineCommandArgs = {
   installFolderName?: string
   options?: CallRunnerOptions
   startFolder?: string
+  gameInstallPath?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
 }
 
