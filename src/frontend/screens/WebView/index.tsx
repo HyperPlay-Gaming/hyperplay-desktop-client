@@ -14,13 +14,15 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { Runner, WebviewType } from 'common/types'
 import './index.css'
 import LoginWarning from '../Login/components/LoginWarning'
+import authStore from 'frontend/store/AuthStore'
+import { observer } from 'mobx-react-lite'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
   return urlToTest.hostname === 'store.hyperplay.xyz'
 }
 
-export default function WebView() {
+function WebView() {
   const { i18n } = useTranslation()
   const { pathname, search } = useLocation()
   const { t } = useTranslation()
@@ -42,7 +44,10 @@ export default function WebView() {
 
   const epicLoginUrl = 'https://legendary.gl/epiclogin'
 
-  const hyperplayStore = 'https://store.hyperplay.xyz?isLauncher=true'
+  const hyperplayStore =
+    'https://store.hyperplay.xyz?isLauncher=true' +
+    (authStore.authToken !== '' ? '&qamode=' + authStore.authToken : '')
+
   const epicStore = `https://www.epicgames.com/store/${lang}/`
   const gogStore = `https://gog.com`
   const wikiURL = 'https://docs.hyperplaygaming.com/'
@@ -228,3 +233,5 @@ export default function WebView() {
     </div>
   )
 }
+
+export default observer(WebView)

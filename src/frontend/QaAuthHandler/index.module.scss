@@ -1,0 +1,14 @@
+.textBox {
+  position: absolute;
+  left: 50vw;
+  top: 50vh;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  padding: var(--space-sm);
+  border-radius: var(--space-sm);
+  background-color: var(--color-neutral-500);
+  z-index: 100000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
