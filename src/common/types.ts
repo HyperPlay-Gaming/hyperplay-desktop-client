@@ -567,8 +567,6 @@ interface GamepadActionArgsWithoutMetadata {
   metadata?: undefined
 }
 
-export type WebviewType = HTMLWebViewElement & WebviewTag
-
 export type InstallPlatform =
   | LegendaryInstallPlatform
   | GogInstallPlatform
