@@ -171,9 +171,20 @@ export default React.memo(function GamePage(): JSX.Element | null {
           throw 'Cannot get channels'
         const releaseMeta = channels?.[channelName].release_meta
 
-        const hpPlatforms = releaseMeta
-          ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
-          : 'Windows'
+        let hpPlatforms: AppPlatforms = 'windows_amd64'
+        if (releaseMeta) {
+          const releasePlatformKeys = Object.keys(
+            releaseMeta.platforms
+          ) as AppPlatforms[]
+
+          const releasePlatformToInstall = releasePlatformKeys.find(
+            (val) => val === install.platform
+          )
+
+          if (releasePlatformToInstall) hpPlatforms = releasePlatformToInstall
+          else if (releasePlatformKeys.length > 0)
+            hpPlatforms = releasePlatformKeys[0]
+        }
 
         const othersPlatforms =
           install.platform ||
@@ -477,14 +488,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
                           </div>
                         </>
                       )}
-                      {!isSideloaded && (
+                      {!isSideloaded && installSize ? (
                         <>
                           <div className="hp-subtitle">{t('info.size')}</div>
-                          <div className="col2-item italic">
-                            {installSize || '...'}
-                          </div>
+                          <div className="col2-item italic">{installSize}</div>
                         </>
-                      )}
+                      ) : null}
                       <div className="hp-subtitle">
                         {t('info.installedPlatform', 'Installed Platform')}:
                       </div>
