@@ -9,6 +9,7 @@ import { DialogContent } from '@mui/material'
 
 import classNames from 'classnames'
 import {
+  AvailablePlatforms,
   GameInfo,
   GameStatus,
   HyperPlayInstallInfo,
@@ -42,7 +43,6 @@ import React, {
   useState
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AvailablePlatforms } from '../index'
 import { SDL_GAMES, SelectiveDownload } from '../selective_dl'
 import { configStore } from 'frontend/helpers/electronStores'
 import { Button } from '@hyperplay/ui'
