@@ -1,10 +1,9 @@
-import { InitializableStore } from './types'
 import { makeAutoObservable } from 'mobx'
 
-export class WebviewNavigationStore implements InitializableStore {
+export class WebviewNavigationStore {
   private url = ''
 
-  init() {
+  constructor() {
     makeAutoObservable(this)
   }
 
