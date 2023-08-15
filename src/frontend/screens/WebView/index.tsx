@@ -193,7 +193,7 @@ function WebView() {
 
   useEffect(() => {
     const handleNavigation = (event: DidNavigateEvent) => {
-      webviewNavigationStore.currentUrl = event.url
+      webviewNavigationStore.setCurrentUrl(event.url)
     }
 
     webviewRef.current?.addEventListener('did-navigate', handleNavigation)

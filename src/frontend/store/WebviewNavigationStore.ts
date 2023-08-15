@@ -2,10 +2,18 @@ import { InitializableStore } from './types'
 import { makeAutoObservable } from 'mobx'
 
 export class WebviewNavigationStore implements InitializableStore {
-  currentUrl = ''
+  private url = ''
 
   init() {
     makeAutoObservable(this)
+  }
+
+  get currentUrl() {
+    return this.url
+  }
+
+  setCurrentUrl(url: string) {
+    this.url = url
   }
 }
 
