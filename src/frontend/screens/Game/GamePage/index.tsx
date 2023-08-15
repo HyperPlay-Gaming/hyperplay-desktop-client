@@ -162,16 +162,28 @@ export default React.memo(function GamePage(): JSX.Element | null {
           channels
         } = { ...gameInfo }
 
+        const channelName = install.channelName ?? 'main'
+
+        if (
+          runner === 'hyperplay' &&
+          (channels === undefined || !Object.hasOwn(channels, channelName))
+        )
+          throw 'Cannot get channels'
+        const releaseMeta = channels?.[channelName].release_meta
+
         let hpPlatforms: AppPlatforms = 'windows_amd64'
+        if (releaseMeta) {
+          const releasePlatformKeys = Object.keys(
+            releaseMeta.platforms
+          ) as AppPlatforms[]
 
-        if (runner === 'hyperplay') {
-          if (channels === undefined || install.channelName === undefined)
-            throw 'Cannot get channels'
-          const releaseMeta = channels[install.channelName].release_meta
+          const releasePlatformToInstall = releasePlatformKeys.find(
+            (val) => val === install.platform
+          )
 
-          hpPlatforms = releaseMeta
-            ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
-            : 'windows_amd64'
+          if (releasePlatformToInstall) hpPlatforms = releasePlatformToInstall
+          else if (releasePlatformKeys.length > 0)
+            hpPlatforms = releasePlatformKeys[0]
         }
 
         const othersPlatforms =
@@ -417,18 +429,26 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 <div className="grid-container">
                   {!is_installed && !isSideloaded && (
                     <>
-                      <div className="hp-subtitle">
-                        {t('game.downloadSize', 'Download Size')}
-                      </div>
-                      <div className="col2-item italic">
-                        {downloadSize ?? '...'}
-                      </div>
-                      <div className="hp-subtitle">
-                        {t('game.installSize', 'Install Size')}
-                      </div>
-                      <div className="col2-item italic">
-                        {installSize ?? '...'}
-                      </div>
+                      {downloadSize !== 0 ? (
+                        <>
+                          <div className="hp-subtitle">
+                            {t('game.downloadSize', 'Download Size')}
+                          </div>
+                          <div className="col2-item italic">
+                            {downloadSize ?? '...'}
+                          </div>
+                        </>
+                      ) : null}
+                      {installSize !== 0 ? (
+                        <>
+                          <div className="hp-subtitle">
+                            {t('game.installSize', 'Install Size')}
+                          </div>
+                          <div className="col2-item italic">
+                            {installSize ?? '...'}
+                          </div>
+                        </>
+                      ) : null}
                     </>
                   )}
                   <div className="hp-subtitle">
@@ -468,14 +488,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
                           </div>
                         </>
                       )}
-                      {!isSideloaded && (
+                      {!isSideloaded && installSize ? (
                         <>
                           <div className="hp-subtitle">{t('info.size')}</div>
-                          <div className="col2-item italic">
-                            {installSize || '...'}
-                          </div>
+                          <div className="col2-item italic">{installSize}</div>
                         </>
-                      )}
+                      ) : null}
                       <div className="hp-subtitle">
                         {t('info.installedPlatform', 'Installed Platform')}:
                       </div>

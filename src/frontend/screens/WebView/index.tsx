@@ -27,6 +27,11 @@ import {
   WIKI_URL
 } from '../../constants'
 
+function urlIsHpUrl(url: string) {
+  const urlToTest = new URL(url)
+  return urlToTest.hostname === 'store.hyperplay.xyz'
+}
+
 function WebView() {
   const { i18n } = useTranslation()
   const { pathname, search } = useLocation()
@@ -76,7 +81,9 @@ function WebView() {
     const searchParams = new URLSearchParams(search)
     const queryParam = searchParams.get('store-url')
     if (queryParam) {
-      startUrl = queryParam
+      const queryParamAppends = urlIsHpUrl(queryParam) ? '?isLauncher=true' : ''
+
+      startUrl = queryParam + queryParamAppends
     }
   }
 
@@ -211,10 +218,9 @@ function WebView() {
     return <></>
   }
 
-  const partitionForWebview =
-    startUrl === HYPERPLAY_STORE_URL
-      ? 'persist:hyperplaystore'
-      : 'persist:epicstore'
+  const partitionForWebview = urlIsHpUrl(startUrl)
+    ? 'persist:hyperplaystore'
+    : 'persist:epicstore'
 
   return (
     <div className="WebView">

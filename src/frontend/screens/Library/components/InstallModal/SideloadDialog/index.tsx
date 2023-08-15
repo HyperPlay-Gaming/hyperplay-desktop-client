@@ -7,7 +7,8 @@ import {
   InstallPlatform,
   WineInstallation,
   Web3Features,
-  GameInfo
+  GameInfo,
+  AvailablePlatforms
 } from 'common/types'
 import {
   CachedImage,
@@ -24,7 +25,6 @@ import {
 } from 'frontend/helpers'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AvailablePlatforms } from '..'
 import fallbackImage from 'frontend/assets/fallback_card.jpg'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { ReactComponent as BrowserIcon } from 'frontend/assets/browser-icon.svg'

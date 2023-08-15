@@ -11,6 +11,7 @@ import {
   PlatformsMetaInterface
 } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 export type {
   Listing as HyperPlayRelease,
@@ -804,3 +805,10 @@ export type JsonRpcCallback = (
 ) => unknown
 
 export type DownloadManagerState = 'idle' | 'running' | 'paused' | 'stopped'
+
+export type AvailablePlatforms = {
+  name: string
+  available: boolean
+  value: string
+  icon: IconDefinition
+}[]
