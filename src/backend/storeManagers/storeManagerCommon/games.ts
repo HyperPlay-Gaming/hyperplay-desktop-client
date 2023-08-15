@@ -255,9 +255,17 @@ export async function launchGame(
 
   let { browserUrl } = gameInfo
   if (platform === 'web') {
-    const webGameUrl =
-      gameInfo?.channels?.[channelName ?? ''].release_meta.platforms[platform]
-        ?.external_url
+    let webGameUrl
+
+    if (
+      gameInfo?.channels &&
+      channelName &&
+      Object.hasOwn(gameInfo.channels, channelName)
+    )
+      webGameUrl =
+        gameInfo.channels[channelName].release_meta.platforms[platform]
+          ?.external_url
+
     if (webGameUrl) browserUrl = webGameUrl
 
     if (browserUrl) return openNewBrowserGameWindow(browserUrl, gameInfo)
