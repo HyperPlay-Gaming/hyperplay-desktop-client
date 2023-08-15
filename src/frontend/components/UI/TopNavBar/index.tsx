@@ -48,12 +48,13 @@ const TopNavBar = observer(() => {
   }, [])
 
   function getStoreTextStyle(viewURL: string) {
+    const { currentUrl } = webviewNavigationStore
     const inactiveStyle = { color: 'var(--color-neutral-400)' }
     const activeStyle = { color: '' }
+    // initial value of currentUrl is ''
+    if (!currentUrl) return inactiveStyle
     const viewURLMainDomain = extractMainDomain(viewURL)
-    const currentURLMainDomain = extractMainDomain(
-      webviewNavigationStore.currentUrl
-    )
+    const currentURLMainDomain = extractMainDomain(currentUrl)
     const isActive = viewURLMainDomain === currentURLMainDomain
     return isActive ? activeStyle : inactiveStyle
   }
