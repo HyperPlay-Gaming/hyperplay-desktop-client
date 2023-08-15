@@ -29,87 +29,99 @@
         "stopInstall": {
             "keepInstalling": "繼續安裝",
             "message": "要保留已下載的檔案嗎？",
-            "title": "停止安裝"
+            "title": "您想取消下載嗎？",
+            "keepFilesMessage": "如果您想在取消後保留下載文件，請在此處打勾。"
         },
         "uninstall": {
-            "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
+            "checkbox": "刪除號碼： {{prefix}}{{newLine}}注意：此操作無法撤銷，而且還會刪除未備份的保存文件。",
             "message": "你希望將這個遊戲解除安裝嗎？",
-            "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "解除安裝"
+            "settingcheckbox": "清除設置並刪除日誌{{newLine}}注意：此操作無法撤銷。任何修改的設置都將被遺忘，日誌也將被刪除。",
+            "title": "解除安裝",
+            "dlc": "您想卸載此可下載內容嗎？",
+            "prefix_warning": "該遊戲的 Wine 號碼是默認號碼。如果您真的想刪除它，必須手動刪除。"
         },
         "update": {
             "message": "此遊戲有更新，你希望現在更新嗎？",
             "title": "遊戲需要更新"
         },
         "wineprefix": "選擇 WinePrefix 資料夾",
-        "yes": "是"
+        "yes": "是",
+        "yesCancel": "是，取消"
     },
     "button": {
         "add_to_favourites": "加入我的最愛",
         "cancel": "暫停/取消",
         "continue": "繼續下載",
-        "finish": "Finish",
-        "force_update": "如果可用則強制更新",
-        "force-innstall": "Force Install",
+        "finish": "完成",
+        "force_update": "如果可用，強制更新",
+        "force-innstall": "強制安裝",
         "hide_game": "隱藏遊戲",
         "import": "導入",
         "install": "安裝",
-        "no-path-selected": "No path selected",
+        "no-path-selected": "未選擇路徑",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "從隊列中移除",
+            "cancel": "取消下載",
+            "continue": "繼續下載"
         },
         "remove_from_favourites": "自我的最愛移除",
-        "remove_from_recent": "Remove From Recent",
-        "run-exe-first": "Run Installer First",
-        "running-setup": "Running Setup",
+        "remove_from_recent": "從最近刪除",
+        "run-exe-first": "先運行安裝程序",
+        "running-setup": "運行裝置",
         "sideload": {
-            "edit": "Edit App/Game"
+            "edit": "編輯應用程序/遊戲"
         },
         "unhide_game": "取消隱藏遊戲",
         "uninstall": "解除安裝",
-        "update": "更新"
+        "update": "更新",
+        "details": "詳細信息",
+        "favorites": "最愛",
+        "unfavorites": "不喜歡"
     },
-    "cloud_save_unsupported": "Unsupported",
+    "cloud_save_unsupported": "不支持",
     "disabled": "已禁用",
     "dlc": {
-        "installDlcs": "安裝所有DLC"
+        "installDlcs": "安裝所有可下載內容"
     },
     "enabled": "已啟用",
     "game": {
         "downloadSize": "下載大小",
         "firstPlayed": "首次遊玩",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "正獲取下載大小",
+        "getting-install-size": "正獲取安裝大小",
         "installSize": "安裝大小",
         "language": "語言",
         "lastPlayed": "上次遊玩",
         "neverPlayed": "從未遊玩",
         "platform": "選擇要安裝的平台版本",
         "requirements": "系統需求",
-        "totalPlayed": "遊玩時間"
+        "totalPlayed": "遊玩時間",
+        "dlcs": "可下載內容",
+        "selectChannelName": "選擇頻道名稱"
     },
     "gamecard": {
         "moving": "移動中",
         "repairing": "修復中"
     },
     "generic": {
-        "error": "未知的錯誤"
+        "error": "未知的錯誤",
+        "noDescription": "沒有可用描述"
     },
-    "hours": "Hours",
+    "hours": "小時",
     "how-long-to-beat": {
-        "completionist": "Completionist",
-        "main-plus-extras": "Main + Extras",
-        "main-story": "Main Story"
+        "completionist": "完成者",
+        "main-plus-extras": "主要 + 額外",
+        "main-story": "主要故事"
     },
-    "howLongToBeat": "How Long To Beat",
+    "howLongToBeat": "多久可以打倒",
     "info": {
-        "canRunOffline": "需要連線至網路",
+        "canRunOffline": "需要在線上",
         "installedPlatform": "已安裝平台",
         "path": "安裝路徑",
         "size": "大小",
         "syncsaves": "同步存檔",
         "version": "版本",
-        "web3-supported": "Has Web3 features"
+        "web3-supported": "具有 Web3 特色"
     },
     "install": {
         "disk-space-left": "可用空間",
@@ -136,33 +148,34 @@
         "options": "啟動選項..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "login": "Log in",
-        "title": "You are NOT logged in"
+        "epic": "您尚未在 HyperPlay 中使用 Epic 帳戶登錄。請不要使用商店頁面登錄，而是點擊以下按鈕：",
+        "gog": "您尚未使用 HyperPlay 中的 GOG 賬戶登錄。請不要使用商店頁面登錄，而是點擊以下按鈕：",
+        "login": "登入",
+        "title": "您尚未登入"
     },
     "report_problem": "回報執行此遊戲時出現的問題",
     "sdl": {
         "title": "選擇要安裝的元件"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "使用默認兼容性設定",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
-            "title": "Title"
+            "title": "標題"
         },
         "info": {
-            "broser": "BrowserURL",
-            "exe": "Select Executable",
-            "image": "App Image",
-            "supports-web3": "This Game has Web3 Features",
-            "title": "Game/App Title"
+            "broser": "瀏覽器網址",
+            "exe": "選擇可執行文件",
+            "image": "應用程序圖像",
+            "supports-web3": "這遊戲具有 Web3 特色",
+            "title": "遊戲/應用程序標題"
         },
         "placeholder": {
-            "image": "Paste an Image URL here",
-            "title": "Add a title to your Game/App",
-            "url": "Paste the Game URL here"
+            "image": "在此處粘貼圖片 URL",
+            "title": "為您的遊戲/應用程序添加標題",
+            "url": "在此處粘貼遊戲 URL"
         }
     },
     "specs": {
@@ -171,21 +184,28 @@
     },
     "status": {
         "clickToUpdate": "點擊更新",
-        "gameNotAvailable": "Game not available",
+        "gameNotAvailable": "遊戲不可用",
         "hasUpdates": "新版本可用！",
         "installed": "已安裝",
         "installing": "正在安裝",
         "moving": "正在移動，請稍等",
         "notinstalled": "未安裝此遊戲",
-        "notSupported": "Not supported",
-        "notSupportedGame": "Not Supported",
+        "notSupported": "不支持",
+        "notSupportedGame": "不支持",
         "processing": "檔案處理中，請等待",
-        "queued": "Queued",
+        "queued": "已排隊等候",
         "reparing": "遊戲修復中，請稍等",
-        "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
+        "this-game-uses-third-party": "該遊戲使用第三方啓動器，目前尚未獲得支持",
         "totalDownloaded": "總共已下載",
-        "uninstalling": "Uninstalling",
-        "updating": "遊戲更新中"
+        "uninstalling": "卸載",
+        "updating": "遊戲更新中",
+        "downloading": "下載中",
+        "paused": "已暫停",
+        "preparing": "準備下載，請稍候",
+        "extracting": "提取中",
+        "moving-files": "移動文件\"{{file}}\"： {{percent}} ",
+        "playing": "遊玩中",
+        "syncingSaves": "同步存檔"
     },
     "submenu": {
         "addShortcut": "添加捷徑",
@@ -199,6 +219,14 @@
         "removeShortcut": "移除捷徑",
         "settings": "設定",
         "store": "商店頁面",
-        "verify": "驗證並修復遊戲文件"
+        "verify": "驗證並修復遊戲文件",
+        "extraInfo": "更多信息"
+    },
+    "hyperplay": {
+        "gamecard": {
+            "installing": "下載中...",
+            "paused": "已暫停",
+            "extracting": "提取..."
+        }
     }
 }
