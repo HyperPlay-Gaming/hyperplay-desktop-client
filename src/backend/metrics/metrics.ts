@@ -189,7 +189,9 @@ export const trackScreen = async (name: string, properties?: apiObject) => {
 function ensureUniqueMetricsId() {
   const currentId = metricsStore.get('metricsId')
   const status = metricsStore.get('metricsOptInStatus')
-  if (currentId === ANONYMOUS_ID && status === MetricsOptInStatus.optedIn) {
+  const isCorrectId = /0x[0-9,a-f, A-F]{48}/
+
+  if (!isCorrectId.test(currentId) && status === MetricsOptInStatus.optedIn) {
     metricsStore.set('metricsId', generateRandomId())
     trackEvent({
       event: 'Metrics Error Correction'
