@@ -26,7 +26,7 @@ describe('extractMainDomain', () => {
   })
 
   it('return null when url is invalid', () => {
-    jest.spyOn(console, 'error').mockImplementationOnce(jest.fn)
+    jest.spyOn(console, 'warn').mockImplementationOnce(jest.fn)
     const url = 'invalid url'
     const mainDomain = extractMainDomain(url)
     expect(mainDomain).toEqual(null)

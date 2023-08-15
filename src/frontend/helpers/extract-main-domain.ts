@@ -9,7 +9,7 @@ export function extractMainDomain(url: string) {
 
     return domain
   } catch (e) {
-    console.error(e)
+    console.warn(e)
     return null
   }
 }
