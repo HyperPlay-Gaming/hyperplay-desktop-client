@@ -181,6 +181,26 @@ export const trackScreen = async (name: string, properties?: apiObject) => {
   }
 }
 
+/**
+ * In the event there was a failure generating the random metrics id on initial opt-in,
+ * this will correct the state by generating a new random id.
+ * A metrics event will be sent so that we can see how many users were affected.
+ */
+function ensureUniqueMetricsId() {
+  const currentId = metricsStore.get('metricsId')
+  const status = metricsStore.get('metricsOptInStatus')
+  const isCorrectId = /0x[0-9,a-f, A-F]{48}/
+
+  if (!isCorrectId.test(currentId) && status === MetricsOptInStatus.optedIn) {
+    metricsStore.set('metricsId', generateRandomId())
+    trackEvent({
+      event: 'Metrics Error Correction'
+    })
+  }
+}
+
+ensureUniqueMetricsId()
+
 export const changeMetricsOptInStatus = async (
   newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
 ): Promise<void> => {
