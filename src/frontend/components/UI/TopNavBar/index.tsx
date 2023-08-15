@@ -28,7 +28,7 @@ const TopNavBar = observer(() => {
     '/hyperplaystore',
     '/gogstore',
     '/epicstore',
-    '/store-page/'
+    '/store-page'
   ]
 
   const showStoreNavOptions = pagesToShowStoreNavOptions.includes(pathname)
