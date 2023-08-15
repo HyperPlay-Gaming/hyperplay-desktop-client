@@ -17,6 +17,11 @@ import LoginWarning from '../Login/components/LoginWarning'
 import authStore from 'frontend/store/AuthStore'
 import { observer } from 'mobx-react-lite'
 
+function urlIsHpUrl(url: string) {
+  const urlToTest = new URL(url)
+  return urlToTest.hostname === 'store.hyperplay.xyz'
+}
+
 function WebView() {
   const { i18n } = useTranslation()
   const { pathname, search } = useLocation()
@@ -71,7 +76,9 @@ function WebView() {
     const searchParams = new URLSearchParams(search)
     const queryParam = searchParams.get('store-url')
     if (queryParam) {
-      startUrl = queryParam
+      const queryParamAppends = urlIsHpUrl(queryParam) ? '?isLauncher=true' : ''
+
+      startUrl = queryParam + queryParamAppends
     }
   }
 
@@ -194,8 +201,9 @@ function WebView() {
     return <></>
   }
 
-  const partitionForWebview =
-    startUrl === hyperplayStore ? 'persist:hyperplaystore' : 'persist:epicstore'
+  const partitionForWebview = urlIsHpUrl(startUrl)
+    ? 'persist:hyperplaystore'
+    : 'persist:epicstore'
 
   return (
     <div className="WebView">

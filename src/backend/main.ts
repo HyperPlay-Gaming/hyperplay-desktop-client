@@ -836,13 +836,6 @@ ipcMain.handle(
   'getInstallInfo',
   async (event, appName, runner, installPlatform, channelNameToInstall) => {
     try {
-      console.log(
-        'getting install infro for',
-        appName,
-        runner,
-        installPlatform,
-        channelNameToInstall
-      )
       const info = await libraryManagerMap[runner].getInstallInfo(
         appName,
         installPlatform,
