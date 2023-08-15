@@ -5,3 +5,5 @@ export const GOG_STORE_URL = `https://gog.com`
 export const WIKI_URL = 'https://docs.hyperplaygaming.com/'
 export const GOG_LOGIN_URL =
   'https://auth.gog.com/auth?client_id=46899977096215655&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&response_type=code&layout=galaxy'
+
+export const GOG_EMBED_URL = 'https://embed.gog.com/on_login_success?'

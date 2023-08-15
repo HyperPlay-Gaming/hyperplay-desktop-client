@@ -21,6 +21,7 @@ import { observer } from 'mobx-react-lite'
 import {
   EPIC_LOGIN_URL,
   EPIC_STORE_URL,
+  GOG_EMBED_URL,
   GOG_LOGIN_URL,
   GOG_STORE_URL,
   HYPERPLAY_STORE_URL,
@@ -52,7 +53,7 @@ function WebView() {
     (authStore.authToken !== '' ? '&qamode=' + authStore.authToken : '')
 
   const epicStore = `${EPIC_STORE_URL}/${lang}/`
-  const gogEmbedRegExp = new RegExp('https://embed.gog.com/on_login_success?')
+  const gogEmbedRegExp = new RegExp(GOG_EMBED_URL)
 
   const trueAsStr = 'true' as unknown as boolean | undefined
   const { runner } = useParams() as { runner: Runner }
