@@ -554,7 +554,7 @@
         "showfps": "顯示幀數（Directx 9，10和11）",
         "start-in-tray": "啟動時最小化",
         "steamruntime": "使用 Steam 執行環境",
-        "winecrossoverbottle": "CrossOver 容器",
+        "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "WINEPREFIX文件夾",
         "wineversion": "Wine 版本",
         "autoUpdateGames": "自動更新遊戲",
