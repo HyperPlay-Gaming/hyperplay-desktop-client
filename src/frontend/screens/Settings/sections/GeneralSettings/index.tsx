@@ -19,6 +19,7 @@ import {
   WinePrefixesBasePath
 } from '../../components'
 import AppVersion from 'frontend/components/UI/AppVersion'
+import { Button } from '@hyperplay/ui'
 
 export default function GeneralSettings() {
   const { t } = useTranslation()
@@ -62,6 +63,10 @@ export default function GeneralSettings() {
       <MaxRecentGames />
 
       <MaxWorkers />
+
+      <Button onClick={() => window.api.downloadRdiff()}>
+        Download rdiff
+      </Button>
     </>
   )
 }
