@@ -20,6 +20,7 @@ import {
 } from '../../components'
 import AppVersion from 'frontend/components/UI/AppVersion'
 import { Button } from '@hyperplay/ui'
+import { Group } from '@mantine/core'
 
 export default function GeneralSettings() {
   const { t } = useTranslation()
@@ -64,9 +65,14 @@ export default function GeneralSettings() {
 
       <MaxWorkers />
 
-      <Button onClick={() => window.api.downloadRdiff()}>
-        Download rdiff
-      </Button>
+      <Group>
+        <Button onClick={() => window.api.downloadRdiff()}>
+          Download rdiff
+        </Button>
+        <Button onClick={() => window.api.applyPatch()}>
+          Apply Patch
+        </Button>
+      </Group>
     </>
   )
 }
