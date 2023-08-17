@@ -1075,12 +1075,12 @@ ipcMain.handle(
     writeFileSync(
       logFileLocation,
       'System Info:\n' +
-        `${systemInfo}\n` +
-        '\n' +
-        `Game Settings: ${gameSettingsString}\n` +
-        '\n' +
-        `Game launched at: ${startPlayingDate}\n` +
-        '\n'
+      `${systemInfo}\n` +
+      '\n' +
+      `Game Settings: ${gameSettingsString}\n` +
+      '\n' +
+      `Game launched at: ${startPlayingDate}\n` +
+      '\n'
     )
 
     const isNative = gameManagerMap[runner].isNative(appName)
@@ -1786,6 +1786,7 @@ import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/elect
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
+import { downloadRdiffForCurrentOS } from './patcher'
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
@@ -1888,3 +1889,7 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
 })
+
+ipcMain.on('downloadRdiff', () => {
+  downloadRdiffForCurrentOS();
+});
