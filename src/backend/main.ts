@@ -1786,7 +1786,7 @@ import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/elect
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
-import { downloadRdiffForCurrentOS } from './patcher'
+import { applyRdiffPatch, downloadRdiffForCurrentOS } from './patcher'
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
@@ -1892,4 +1892,8 @@ ipcMain.on('setQaToken', (_e, qaToken) => {
 
 ipcMain.on('downloadRdiff', () => {
   downloadRdiffForCurrentOS();
+});
+
+ipcMain.on('applyPatch', () => {
+  applyRdiffPatch('original-game.zip', 'patch.diff', 'game.zip');
 });

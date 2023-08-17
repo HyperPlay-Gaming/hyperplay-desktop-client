@@ -1,13 +1,8 @@
-import { app, ipcRenderer } from 'electron';
+import { ipcRenderer } from 'electron';
 import axios from 'axios';
 import path, { join } from 'path';
 import { chmod, createWriteStream } from 'fs';
-
-export function getBasePath() {
-  const configFolder = app.getPath('appData')
-  const baseRdiffPath = join(configFolder, 'hyperplay', 'tools')
-  return baseRdiffPath;
-}
+import { getBasePath } from './rdiffPaths';
 
 export async function downloadRdiffForCurrentOS(): Promise<string> {
   console.log('Selecting rdiff binary');
@@ -19,7 +14,7 @@ export async function downloadRdiffForCurrentOS(): Promise<string> {
       binaryName = 'windows/amd64/rdiff.exe';
       break;
     case 'darwin':
-      binaryName = 'darwin/amd64/rdiff';
+      binaryName = 'darwin/arm64/rdiff';
       break;
     case 'linux':
       binaryName = 'linux/amd64/rdiff';
@@ -28,7 +23,7 @@ export async function downloadRdiffForCurrentOS(): Promise<string> {
       throw new Error('Unsupported platform');
   }
 
-  const baseRdiffPath = await getBasePath();
+  const baseRdiffPath = getBasePath();
   const downloadURL = `${baseURL}${binaryName}`;
   const targetPath = join(baseRdiffPath, path.basename(binaryName));
   const writer = createWriteStream(targetPath);
@@ -69,20 +64,8 @@ const setExecutable = (targetPath: string) => {
   return targetPath;
 };
 
-export function getRdiffPathForCurrentOS(): string {
-  const baseRdiffPath = getBasePath();
-  switch (process.platform) {
-    case 'win32':
-      return join(baseRdiffPath, 'rdiff.exe');
-    case 'darwin':
-      return join(baseRdiffPath, 'rdiff');
-    case 'linux':
-      return join(baseRdiffPath, 'rdiff');
-    default:
-      throw new Error('Unsupported platform');
-  }
-}
-
 export const downloadRdiff = () =>
   ipcRenderer.send('downloadRdiff');
 
+export const applyPatch = () =>
+  ipcRenderer.send('applyPatch');

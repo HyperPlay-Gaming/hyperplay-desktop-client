@@ -122,6 +122,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   cancelDownload: (removeDownloaded: boolean) => void
   copyWalletConnectBaseURIToClipboard: () => void
   downloadRdiff: () => void
+  applyPatch: () => void
 }
 
 interface RequestArguments {
