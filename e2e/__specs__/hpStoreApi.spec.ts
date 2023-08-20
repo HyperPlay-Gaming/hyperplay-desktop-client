@@ -1,11 +1,10 @@
 import { existsSync } from 'graceful-fs'
 import { AppSettings, GameStatus } from '../../src/common/types'
 import { expect, test } from '@playwright/test'
-import { Page } from 'playwright'
 import commonSetup, {
   appNameToMock,
   electronApp,
-  hpPage,
+  hpPage as page,
   withTimeout
 } from './common-setup'
 import { stat, readdir } from 'fs/promises'
@@ -38,7 +37,6 @@ test.describe('hp store api tests', function () {
   // @ts-ignore: this is the correct usage
   commonSetup.call(this)
 
-  let page: Page
   const appName = appNameToMock
   let tempFolder = ''
 
@@ -47,7 +45,6 @@ test.describe('hp store api tests', function () {
   }
 
   test.beforeEach(async () => {
-    page = await hpPage
     await addGameToLibrary(appName)
     const configFolder = await electronApp.evaluate(async ({ app }) => {
       // This runs in the main Electron process
@@ -55,6 +52,7 @@ test.describe('hp store api tests', function () {
     })
     tempFolder = join(configFolder, 'hyperplay', '.temp', appName)
     console.log('tempfolder: ', tempFolder)
+    test.setTimeout(testTimeout)
   })
 
   test.afterEach(async () => {
@@ -213,8 +211,6 @@ test.describe('hp store api tests', function () {
   }
 
   test('hp store: download then cancel and do not keep files', async () => {
-    test.setTimeout(testTimeout)
-
     // download then pause
     console.log('installing')
     await withTimeout(installPartialTimeout, installPartial(appName), false)
@@ -223,8 +219,6 @@ test.describe('hp store api tests', function () {
   })
 
   test('hp store: download, pause, resume, cancel and do not keep files', async () => {
-    test.setTimeout(testTimeout)
-
     // download then pause
     console.log('installing')
     await withTimeout(installPartialTimeout, installPartial(appName), false)
@@ -237,8 +231,6 @@ test.describe('hp store api tests', function () {
   })
 
   test('hp store: download, pause, cancel and do not keep files', async () => {
-    test.setTimeout(testTimeout)
-
     // download then pause
     console.log('installing')
     await withTimeout(installPartialTimeout, installPartial(appName), false)
