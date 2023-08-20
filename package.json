@@ -257,7 +257,8 @@
     "i18n": "i18next",
     "prepare": "husky install",
     "prettier": "prettier --check .",
-    "prettier-fix": "prettier --write ."
+    "prettier-fix": "prettier --write .",
+    "check:MetaMaskLatest": "tsc cicd/checkMetaMaskIsLatest.ts --skipLibCheck --target es2015 --moduleResolution node --module commonjs && node cicd/checkMetaMaskIsLatest.js"
   },
   "eslintConfig": {
     "extends": [
