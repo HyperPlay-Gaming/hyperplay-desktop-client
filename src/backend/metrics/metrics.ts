@@ -47,7 +47,7 @@ interface MetricsStore {
  *
  * 2. A randomized hex that is *not* a ethereum address or seeded with any info
  * derived from the user. It is truly random and can be seen in this file. We
- * use web3.js's randomHex to create it. This id is used when we are working
+ * use ethers' randomBytes function to create it. This id is used when we are working
  * with data that cannot make a connection between our user's random ID and any
  * property they own. It will allow us to get an accurate count of our users
  * and provid us with crucial information on how to improve the experience for
@@ -207,6 +207,7 @@ export const changeMetricsOptInStatus = async (
   const currentId = metricsStore.get('metricsId')
   const oldStatus = metricsStore.get('metricsOptInStatus')
   metricsStore.set('metricsOptInStatus', newStatus)
+  console.log('new status = ', newStatus, ' oldStatus = ', oldStatus)
   // Only process this as a new Opt In if the user wasn't previously optedIn
   if (
     newStatus === MetricsOptInStatus.optedIn &&
