@@ -146,7 +146,8 @@ test.describe('hp store api tests', function () {
           gameInfo,
           runner: 'hyperplay',
           path: defaultInstallPath,
-          platformToInstall: 'windows_amd64'
+          platformToInstall: 'windows_amd64',
+          channelName: 'main'
         })
 
         const withTimeout = async (
@@ -200,7 +201,7 @@ test.describe('hp store api tests', function () {
     //check if download is actually resumed
     const downloadDirSize = await dirSize(tempFolder)
     //do not decrease this wait time. easydl downloads in chunks and compresses so it takes a while to see the size increase
-    await wait(4000)
+    await wait(10000)
     const downloadDirSizeAfterWait = await dirSize(tempFolder)
     console.log(
       'resume downloadDirSize: ',
