@@ -9,7 +9,7 @@ env:
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
 
 jobs:
-  draft-releases:
+  check-metamask-is-latest:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository.
