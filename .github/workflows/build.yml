@@ -35,7 +35,7 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: yarn install --network-timeout 600000 && yarn allow-scripts
       - name: Build artifacts.
         run: yarn dist:win
       - name: Upload EXE.
