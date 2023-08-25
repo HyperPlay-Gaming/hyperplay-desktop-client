@@ -35,6 +35,7 @@ yarn setup
 if [[ "$TEST_PACKAGED" == "true" ]]
 then
     if [$os == "mac"]
+    then
         yarn dist:mac:x64
     else
         yarn dist:$os
