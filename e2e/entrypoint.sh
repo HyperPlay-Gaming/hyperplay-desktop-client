@@ -39,6 +39,7 @@ then
         yarn dist:mac:x64
     else
         yarn dist:$os
+    fi
 else
     yarn vite build
 fi
