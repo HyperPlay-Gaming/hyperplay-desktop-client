@@ -35,7 +35,7 @@ yarn setup
 # build
 if [[ "$TEST_PACKAGED" == "true" ]]
 then
-    if [[ "$os" == "mac"]]
+    if [[ "$os" == "mac" ]]
     then
         echo "Running yarn dist:mac:x64"
         yarn dist:mac:x64
