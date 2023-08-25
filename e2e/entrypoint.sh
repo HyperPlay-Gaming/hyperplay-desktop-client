@@ -29,12 +29,15 @@ then
     os="mac"
 fi
 
-yarn
+yarn setup
 
 # build
 if [[ "$TEST_PACKAGED" == "true" ]]
 then
-    yarn dist:$os
+    if [$os == "mac"]
+        yarn dist:mac:x64
+    else
+        yarn dist:$os
 else
     yarn vite build
 fi

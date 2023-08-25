@@ -13,8 +13,11 @@ env:
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
-  linux:
+  linux-dev:
     runs-on: ubuntu-latest
+    concurrency:
+      group: e2e-dev-linux-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout repository.
         uses: actions/checkout@v3
@@ -38,8 +41,11 @@ jobs:
       - name: Build and Test
         run: yarn test:e2e-ci
 
-  mac:
+  mac-dev:
     runs-on: macos-13
+    concurrency:
+      group: e2e-dev-mac-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout repository.
         uses: actions/checkout@v3
@@ -67,8 +73,11 @@ jobs:
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: false
 
-  windows:
+  windows-dev:
     runs-on: windows-latest
+    concurrency:
+      group: e2e-dev-win-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout repository.
         uses: actions/checkout@v3
