@@ -2,9 +2,9 @@ name: Test E2E Packaged
 
 on:
   pull_request:
-    branches: [none]
+    branches: [main]
   push:
-    branches: [none]
+    branches: [main]
   workflow_dispatch:
 
 env:
@@ -14,8 +14,11 @@ env:
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
-  linux:
+  linux-packaged:
     runs-on: ubuntu-latest
+    concurrency:
+      group: e2e-packaged-linux-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout repository.
         uses: actions/checkout@v3
@@ -39,8 +42,11 @@ jobs:
       - name: Build and Test
         run: yarn test:e2ePackaged-ci
 
-  mac:
-    runs-on: macos-latest
+  mac-packaged:
+    runs-on: macos-13
+    concurrency:
+      group: e2e-packaged-mac-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout repository.
         uses: actions/checkout@v3
@@ -68,8 +74,11 @@ jobs:
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           CSC_IDENTITY_AUTO_DISCOVERY: false
 
-  windows:
+  windows-packaged:
     runs-on: windows-latest
+    concurrency:
+      group: e2e-packaged-win-${{ github.ref }}
+      cancel-in-progress: true
     steps:
       - name: Checkout repository.
         uses: actions/checkout@v3
@@ -87,7 +96,7 @@ jobs:
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn setup
+        run: yarn install --network-timeout 600000 && yarn allow-scripts
         env:
           PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
       - name: Build and Test

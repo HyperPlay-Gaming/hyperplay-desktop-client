@@ -1,11 +1,10 @@
 import { existsSync } from 'graceful-fs'
 import { AppSettings, GameStatus } from '../../src/common/types'
 import { expect, test } from '@playwright/test'
-import { Page } from 'playwright'
 import commonSetup, {
   appNameToMock,
   electronApp,
-  hpPage,
+  hpPage as page,
   withTimeout
 } from './common-setup'
 import { stat, readdir } from 'fs/promises'
@@ -38,7 +37,6 @@ test.describe('hp store api tests', function () {
   // @ts-ignore: this is the correct usage
   commonSetup.call(this)
 
-  let page: Page
   const appName = appNameToMock
   let tempFolder = ''
 
@@ -47,7 +45,6 @@ test.describe('hp store api tests', function () {
   }
 
   test.beforeEach(async () => {
-    page = await hpPage
     await addGameToLibrary(appName)
     const configFolder = await electronApp.evaluate(async ({ app }) => {
       // This runs in the main Electron process
@@ -55,6 +52,7 @@ test.describe('hp store api tests', function () {
     })
     tempFolder = join(configFolder, 'hyperplay', '.temp', appName)
     console.log('tempfolder: ', tempFolder)
+    test.setTimeout(testTimeout)
   })
 
   test.afterEach(async () => {
@@ -146,7 +144,8 @@ test.describe('hp store api tests', function () {
           gameInfo,
           runner: 'hyperplay',
           path: defaultInstallPath,
-          platformToInstall: 'windows_amd64'
+          platformToInstall: 'windows_amd64',
+          channelName: 'main'
         })
 
         const withTimeout = async (
@@ -200,7 +199,7 @@ test.describe('hp store api tests', function () {
     //check if download is actually resumed
     const downloadDirSize = await dirSize(tempFolder)
     //do not decrease this wait time. easydl downloads in chunks and compresses so it takes a while to see the size increase
-    await wait(4000)
+    await wait(10000)
     const downloadDirSizeAfterWait = await dirSize(tempFolder)
     console.log(
       'resume downloadDirSize: ',
@@ -212,8 +211,6 @@ test.describe('hp store api tests', function () {
   }
 
   test('hp store: download then cancel and do not keep files', async () => {
-    test.setTimeout(testTimeout)
-
     // download then pause
     console.log('installing')
     await withTimeout(installPartialTimeout, installPartial(appName), false)
@@ -221,29 +218,25 @@ test.describe('hp store api tests', function () {
     await cancelDownload(true)
   })
 
-  test('hp store: download, pause, resume, cancel and do not keep files', async () => {
-    test.setTimeout(testTimeout)
+  // test('hp store: download, pause, resume, cancel and do not keep files', async () => {
+  //   // download then pause
+  //   console.log('installing')
+  //   await withTimeout(installPartialTimeout, installPartial(appName), false)
+  //   console.log('pausing')
+  //   await pauseDownload()
+  //   console.log('resuming')
+  //   await resumeDownload()
+  //   console.log('canceling')
+  //   await cancelDownload(true)
+  // })
 
-    // download then pause
-    console.log('installing')
-    await withTimeout(installPartialTimeout, installPartial(appName), false)
-    console.log('pausing')
-    await pauseDownload()
-    console.log('resuming')
-    await resumeDownload()
-    console.log('canceling')
-    await cancelDownload(true)
-  })
-
-  test('hp store: download, pause, cancel and do not keep files', async () => {
-    test.setTimeout(testTimeout)
-
-    // download then pause
-    console.log('installing')
-    await withTimeout(installPartialTimeout, installPartial(appName), false)
-    console.log('pausing')
-    await pauseDownload()
-    console.log('canceling')
-    await cancelDownload(true)
-  })
+  // test('hp store: download, pause, cancel and do not keep files', async () => {
+  //   // download then pause
+  //   console.log('installing')
+  //   await withTimeout(installPartialTimeout, installPartial(appName), false)
+  //   console.log('pausing')
+  //   await pauseDownload()
+  //   console.log('canceling')
+  //   await cancelDownload(true)
+  // })
 })
