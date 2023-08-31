@@ -13,7 +13,7 @@ interface ChannelNameSelectionProps {
 export default function ChannelNameSelection({
   channelNameToInstall,
   setChannelNameToInstall,
-  gameInfo,
+  gameInfo
 }: ChannelNameSelectionProps) {
   const { t } = useTranslation('gamepage')
   return (
