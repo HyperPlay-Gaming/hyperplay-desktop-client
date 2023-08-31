@@ -108,7 +108,6 @@ export default function SIDLogin({ backdropClick }: Props) {
           <Button
             onClick={async () => handleLogin(input)}
             disabled={loading || input.length < 30 || error}
-            fixedWidth={100}
           >
             {getButtonLabel()}
           </Button>
