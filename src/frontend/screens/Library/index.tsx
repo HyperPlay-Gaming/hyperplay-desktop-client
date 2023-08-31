@@ -37,16 +37,7 @@ import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import { faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
-import {
-  Button,
-  Dropdown,
-  Tabs,
-  Toggle,
-  Background,
-  DropdownItemType,
-  GenericDropdown,
-  Menu
-} from '@hyperplay/ui'
+import { Button, Background, DropdownItemType } from '@hyperplay/ui'
 import { Category, Platform } from 'frontend/types'
 import { getPlatformName } from 'frontend/helpers'
 import { LibraryTopBar } from './components/LibraryTopBar'
@@ -553,7 +544,12 @@ export default React.memo(function Library(): JSX.Element {
             {t('add_game', 'Add Game')}
           </Button>
         </div>
-        <LibraryTopBar handleCategory={handleCategory} category={category} filters={filters} setSelectedFilter={setSelectedFilter} selectedFilter={selectedFilter} otherFiltersData={otherFiltersData} isEpicLoggedin={isEpicLoggedin} isGOGLoggedin={isGOGLoggedin}/>
+        <LibraryTopBar
+          filters={filters}
+          setSelectedFilter={setSelectedFilter}
+          selectedFilter={selectedFilter}
+          otherFiltersData={otherFiltersData}
+        />
         <div className={styles.listing} ref={listing}>
           <span id="top" />
           {showRecentGames && (
