@@ -59,10 +59,13 @@ function App() {
             />
             <Route path="/library" element={<Library />} />
             <Route path="login" element={<Login />} />
-            <Route path="hyperplaystore" element={<WebView />} />
-            <Route path="epicstore" element={<WebView />} />
-            <Route path="gogstore" element={<WebView />} />
-            <Route path="wiki" element={<WebView />} />
+            <Route
+              path="hyperplaystore"
+              element={<WebView key="hyperplaystore" />}
+            />
+            <Route path="epicstore" element={<WebView key="epicstore" />} />
+            <Route path="gogstore" element={<WebView key="gogstore" />} />
+            <Route path="wiki" element={<WebView key="wiki" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
             <Route
               path="metamaskSecretPhrase"
@@ -76,9 +79,9 @@ function App() {
                 <Route path=":appName" element={<GamePage />} />
               </Route>
             </Route>
-            <Route path="/store-page" element={<WebView />} />
+            <Route path="/store-page" element={<WebView key="store-page" />} />
             <Route path="loginweb">
-              <Route path=":runner" element={<WebView />} />
+              <Route path=":runner" element={<WebView key="loginweb" />} />
             </Route>
             <Route path="settings">
               <Route path=":runner">
