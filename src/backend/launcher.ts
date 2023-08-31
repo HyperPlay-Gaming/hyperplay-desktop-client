@@ -280,7 +280,8 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
   // Add WINEPREFIX / STEAM_COMPAT_DATA_PATH / CX_BOTTLE
   const steamInstallPath = join(flatPakHome, '.steam', 'steam')
   switch (wineVersion.type) {
-    case 'wine': {
+    case 'wine':
+    case 'toolkit': {
       ret.WINEPREFIX = winePrefix
 
       // Disable Winemenubuilder to not mess with file associations
@@ -594,7 +595,9 @@ async function runWineCommand({
       writeFileSync(options.logFile, '')
       appendFileSync(
         options.logFile,
-        `Wine Command: ${bin} ${commandParts.join(' ')}\n\nGame Log:\n`
+        `Wine Command: WINEPREFIX=${winePrefix} ${bin} ${commandParts.join(
+          ' '
+        )}\n\nGame Log:\n`
       )
     }
 
