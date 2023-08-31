@@ -308,7 +308,13 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
   }
 
   if (gameSettings.showFps) {
-    isMac ? (ret.MTL_HUD_ENABLED = '1') : (ret.DXVK_HUD = 'fps')
+    // If the operating system is macOS, enable the Metal HUD
+    // Otherwise, enable the DXVK FPS HUD
+    if (isMac) {
+      ret.MTL_HUD_ENABLED = '1'
+    } else {
+      ret.DXVK_HUD = 'fps'
+    }
   }
   if (gameSettings.enableFSR) {
     ret.WINE_FULLSCREEN_FSR = '1'
