@@ -80,9 +80,6 @@ export default React.memo(function Library(): JSX.Element {
   } = useContext(ContextProvider)
   const { t } = useTranslation()
 
-  const isGOGLoggedin = gog.username
-  const isEpicLoggedin = epic.username
-
   const filters: DropdownItemType[] = [
     {
       text: t('library.sortByStatus', 'Sort by Status'),

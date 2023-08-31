@@ -1,4 +1,4 @@
-import styles from '../../index.module.scss'
+import styles from './index.module.scss'
 
 import React, { useContext } from 'react'
 
@@ -67,7 +67,7 @@ export function LibraryTopBar({
             options={filters}
             onItemChange={setSelectedFilter}
             selected={selectedFilter}
-            targetWidth={275}
+            targetWidth={'275'}
           />
         </div>
         <div>
@@ -75,7 +75,7 @@ export function LibraryTopBar({
             target={
               <GenericDropdown.GenericButton
                 text={'Other filters'}
-                style={{ width: '340px' }}
+                className={styles.dropdownButton}
               ></GenericDropdown.GenericButton>
             }
           >
@@ -84,12 +84,9 @@ export function LibraryTopBar({
                 <Toggle
                   defaultChecked={val.defaultValue}
                   labelPosition="right"
-                  onChange={
-                    //eslint-disable-next-line
-                    (e: any) => {
-                      val.onChange(e.target.checked)
-                    }
-                  }
+                  onChange={(e) => {
+                    val.onChange(e.target.checked)
+                  }}
                 >
                   <div
                     className="body"

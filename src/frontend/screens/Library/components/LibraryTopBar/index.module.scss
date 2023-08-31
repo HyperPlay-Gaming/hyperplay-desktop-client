@@ -1,0 +1,27 @@
+.tabsList {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: var(--space-xl);
+}
+
+.tabsList > *:not([type='button']) {
+  margin: 0px var(--space-md);
+}
+
+.tabsList > *:first-child:not([type='button']) {
+  margin: 0px var(--space-md) 0px 0px;
+}
+
+.tabsList > *:last-child:not([type='button']) {
+  margin: 0 0 0 auto;
+  display: flex;
+  gap: var(--space-md);
+}
+
+.gridListButton {
+  padding: calc(0.75 * var(--space-sm));
+}
+
+.dropdownButton {
+  width: 340px;
+}
