@@ -2,20 +2,19 @@
   display: flex;
   align-items: stretch;
   margin-bottom: var(--space-xl);
+
+  > * {
+    margin: var(--space-xs) 0px;
+  }
 }
 
-.tabsList > *:not([type='button']) {
-  margin: 0px var(--space-md);
-}
+.sortByDropdown {
+  margin-left: var(--space-lg);
+  margin-right: var(--space-lg);
 
-.tabsList > *:first-child:not([type='button']) {
-  margin: 0px var(--space-md) 0px 0px;
-}
-
-.tabsList > *:last-child:not([type='button']) {
-  margin: 0 0 0 auto;
-  display: flex;
-  gap: var(--space-md);
+  > div > button {
+    width: 220px;
+  }
 }
 
 .gridListButton {

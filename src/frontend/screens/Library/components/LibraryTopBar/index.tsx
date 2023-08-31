@@ -62,12 +62,18 @@ export function LibraryTopBar({
         <Tabs.Tab value="sideload">
           <div className="menu">{t('Other')}</div>
         </Tabs.Tab>
-        <div>
+        <div className={styles.sortByDropdown}>
           <Dropdown
             options={filters}
             onItemChange={setSelectedFilter}
             selected={selectedFilter}
             targetWidth={'275'}
+            dropdownButtonDivProps={{
+              className: 'body-sm'
+            }}
+            classNames={{ item: 'body-sm' }}
+            styles={{ dropdown: { gap: '0px' } }}
+            menuItemsGap="0px"
           />
         </div>
         <div>
@@ -76,11 +82,17 @@ export function LibraryTopBar({
               <GenericDropdown.GenericButton
                 text={'Other filters'}
                 className={styles.dropdownButton}
+                divProps={{ className: 'body-sm' }}
               ></GenericDropdown.GenericButton>
             }
+            menuItemsGap="0px"
           >
             {otherFiltersData.map((val, index) => (
-              <Menu.Item closeMenuOnClick={false} key={`toggleItem${index}`}>
+              <Menu.Item
+                closeMenuOnClick={false}
+                key={`toggleItem${index}`}
+                style={{ padding: 'var(--space-sm)' }}
+              >
                 <Toggle
                   defaultChecked={val.defaultValue}
                   labelPosition="right"
@@ -89,7 +101,7 @@ export function LibraryTopBar({
                   }}
                 >
                   <div
-                    className="body"
+                    className="body-sm"
                     style={{
                       paddingLeft: 'var(--space-sm)',
                       margin: 'auto 0px'
