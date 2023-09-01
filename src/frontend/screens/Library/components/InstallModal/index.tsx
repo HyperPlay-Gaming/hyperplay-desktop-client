@@ -26,6 +26,7 @@ import WineSelector from './WineSelector'
 import { getPlatformName } from 'frontend/helpers'
 import PlatformSelection from 'frontend/components/UI/PlatformSelection'
 import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
+import TextInputField from 'frontend/components/UI/TextInputField'
 
 type Props = {
   appName: string
@@ -188,9 +189,16 @@ export default React.memo(function InstallModal({
                 channelNameToInstall={channelNameToInstall}
                 setChannelNameToInstall={setChannelNameToInstall}
                 gameInfo={gameInfo}
-                accessCode={accessCode}
-                setAccessCode={setAccessCode}
               />
+            ) : null}
+            {runner === 'hyperplay' &&
+            selectedChannel?.license_config.access_codes ? (
+              <TextInputField
+                placeholder={'Enter access code'}
+                value={accessCode}
+                onChange={(ev) => setAccessCode(ev.target.value)}
+                htmlId="access_code_input"
+              ></TextInputField>
             ) : null}
             {hasWine ? (
               <WineSelector
