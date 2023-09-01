@@ -39,7 +39,8 @@ import {
 import {
   getHyperPlayStoreRelease,
   handleArchAndPlatform,
-  handlePlatformReversed
+  handlePlatformReversed,
+  sanitizeVersion
 } from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
 import {
@@ -390,7 +391,9 @@ export async function install(
 
     const [releaseMeta, selectedChannel] = getReleaseMeta(gameInfo, channelName)
 
-    const releaseVersion: string | undefined = releaseMeta.name
+    
+    const releaseVersion: string | undefined = sanitizeVersion(releaseMeta.name)
+    const gameInfoVersion = gameInfo.version ? sanitizeVersion(gameInfo.version) : ''
 
     if (platformToInstall === 'Browser') {
       const browserGameInstalledInfo: InstalledInfo = {
@@ -399,7 +402,7 @@ export async function install(
         executable: '',
         install_size: '0',
         is_dlc: false,
-        version: releaseVersion ? releaseVersion : gameInfo.version ?? '0',
+        version: releaseVersion ? releaseVersion : gameInfoVersion ?? '0',
         platform: 'web',
         channelName
       }
@@ -489,7 +492,7 @@ export async function install(
         executable: executable,
         install_size: platformInfo.installSize ?? '0',
         is_dlc: false,
-        version: releaseVersion ? releaseVersion : gameInfo.version ?? '0',
+        version: releaseVersion ? releaseVersion : gameInfoVersion ?? '0',
         platform: appPlatform,
         channelName
       }
