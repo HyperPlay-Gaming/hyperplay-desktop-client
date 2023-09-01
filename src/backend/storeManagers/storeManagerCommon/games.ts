@@ -93,13 +93,11 @@ const openNewBrowserGameWindow = async (
       event: Electron.Event,
       input: Electron.Input
     ) {
-      logInfo(
-        `before input event in browser game window with input key = ${input.key}`,
-        LogPrefix.HyperPlay
-      )
-      if (input.key === 'F11' && input.type === 'keyDown') toggleFullscreen()
-      // this fixes DFK fullscreen toggle and ensures toggling is not called twice in dev mode
-      event.preventDefault()
+      if (input.key === 'F11' && input.type === 'keyDown') {
+        toggleFullscreen()
+        // this fixes DFK fullscreen toggle and ensures toggling is not called twice in dev mode
+        event.preventDefault()
+      }
     }
 
     function checkContentsUrlBeforeHandling(contents: Electron.WebContents) {
