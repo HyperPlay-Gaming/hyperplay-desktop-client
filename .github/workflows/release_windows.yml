@@ -45,3 +45,56 @@ jobs:
           NOTARIZE: true
       - name: Upload build file to Signpath
         run: Submit-SigningRequest -InputArtifactPath dist/HyperPlay*.exe -ProjectSlug HyperPlay_Win_x64 -SigningPolicySlug Release_Signing -ArtifactConfigurationSlug initial -OrganizationId ${{secrets.SIGNPATH_ORG_ID}} -CIUserToken ${{ secrets.SIGNPATH_TOKEN }}
+
+      - name: Download signed artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: HyperPlay*.exe
+          path: signed
+      - name: Update latest.yml
+        run: |
+          $artifactPath = Get-ChildItem -Path signed -Filter HyperPlay*.exe
+          $sha512 = Get-FileHash -Path $artifactPath -Algorithm SHA512 | Select-Object -ExpandProperty Hash
+          $size = (Get-Item $artifactPath).Length
+          $latestYml = Get-Content -Path build/latest.yml -Raw | ConvertFrom-Yaml
+          $latestYml.files[0].sha512 = $sha512
+          $latestYml.files[0].size = $size
+          $latestYml | ConvertTo-Yaml -Depth 100 | Set-Content -Path signed/latest.yml
+
+      - name: Create draft release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        with:
+          release_name: 'HyperPlay 0.6.0'
+          tag_name: '0.6.0'
+          draft: true
+          prerelease: false
+          body: |
+            ## Changes
+            - Added support for Windows 11
+            - Fixed bugs and improved performance
+          commitish: ${{ github.ref }}
+
+      - name: Upload release asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: signed/HyperPlay*.exe
+          asset_name: HyperPlay*.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload release asset
+        id: upload-latest-yml
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: signed/latest.yml
+          asset_name: latest.yml
+          asset_content_type: application/octet-stream
