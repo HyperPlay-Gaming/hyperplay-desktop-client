@@ -391,9 +391,10 @@ export async function install(
 
     const [releaseMeta, selectedChannel] = getReleaseMeta(gameInfo, channelName)
 
-    
     const releaseVersion: string | undefined = sanitizeVersion(releaseMeta.name)
-    const gameInfoVersion = gameInfo.version ? sanitizeVersion(gameInfo.version) : ''
+    const gameInfoVersion = gameInfo.version
+      ? sanitizeVersion(gameInfo.version)
+      : ''
 
     if (platformToInstall === 'Browser') {
       const browserGameInstalledInfo: InstalledInfo = {

@@ -208,9 +208,11 @@ export async function listUpdateableGames(): Promise<string[]> {
       }
       if (
         // games installed before 0.5.0 used gameInfo.version for install.version
-        // so for backwards compatibility we remove spaces and lower case channel release meta name here 
+        // so for backwards compatibility we remove spaces and lower case channel release meta name here
         val.install.version !==
-        sanitizeVersion(val.channels[val.install.channelName].release_meta.name) ||
+          sanitizeVersion(
+            val.channels[val.install.channelName].release_meta.name
+          ) ||
         ''
       ) {
         updateableGames.push(val.app_name)
