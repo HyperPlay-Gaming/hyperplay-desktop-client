@@ -391,10 +391,12 @@ export async function install(
 
     const [releaseMeta, selectedChannel] = getReleaseMeta(gameInfo, channelName)
 
-    const releaseVersion: string | undefined = sanitizeVersion(releaseMeta.name)
+    const releaseVersion: string = sanitizeVersion(releaseMeta.name)
     const gameInfoVersion = gameInfo.version
       ? sanitizeVersion(gameInfo.version)
       : ''
+
+    const installVersion = releaseVersion ?? gameInfoVersion ?? '0'
 
     if (platformToInstall === 'Browser') {
       const browserGameInstalledInfo: InstalledInfo = {
@@ -403,7 +405,7 @@ export async function install(
         executable: '',
         install_size: '0',
         is_dlc: false,
-        version: releaseVersion ? releaseVersion : gameInfoVersion ?? '0',
+        version: installVersion,
         platform: 'web',
         channelName
       }
@@ -493,7 +495,7 @@ export async function install(
         executable: executable,
         install_size: platformInfo.installSize ?? '0',
         is_dlc: false,
-        version: releaseVersion ? releaseVersion : gameInfoVersion ?? '0',
+        version: installVersion,
         platform: appPlatform,
         channelName
       }
