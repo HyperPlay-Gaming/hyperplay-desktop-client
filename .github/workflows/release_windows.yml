@@ -1,8 +1,9 @@
 name: Draft Release Windows
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    tags:
+      - 'v*'
   workflow_dispatch:
 
 env:
@@ -40,8 +41,6 @@ jobs:
 
       - name: Build artifacts.
         run: yarn dist:win
-        env:
-          NOTARIZE: true
       - name: Upload build file to Signpath
         run: Submit-SigningRequest -InputArtifactPath dist/HyperPlay*.exe -ProjectSlug HyperPlay_Win_x64 -SigningPolicySlug Release_Signing -ArtifactConfigurationSlug initial -OrganizationId ${{secrets.SIGNPATH_ORG_ID}} -CIUserToken ${{ secrets.SIGNPATH_TOKEN }}
 
@@ -66,15 +65,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         with:
-          release_name: 'HyperPlay 0.6.0'
-          tag_name: '0.6.0'
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
-          body: |
-            ## Changes
-            - Added support for Windows 11
-            - Fixed bugs and improved performance
-          commitish: ${{ github.ref }}
 
       - name: Upload release asset
         id: upload-release-asset
