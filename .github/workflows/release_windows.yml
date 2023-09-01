@@ -36,7 +36,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn setup
+        run: yarn install --network-timeout 600000 && yarn allow-scripts
 
       - name: Build artifacts.
         run: yarn dist:win
