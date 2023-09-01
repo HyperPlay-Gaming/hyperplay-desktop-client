@@ -49,26 +49,6 @@
   z-index: 100;
 }
 
-.tabsList {
-  display: flex;
-  align-items: stretch;
-  margin-bottom: var(--space-xl);
-}
-
-.tabsList > *:not([type='button']) {
-  margin: 0px var(--space-md);
-}
-
-.tabsList > *:first-child:not([type='button']) {
-  margin: 0px var(--space-md) 0px 0px;
-}
-
-.tabsList > *:last-child:not([type='button']) {
-  margin: 0 0 0 auto;
-  display: flex;
-  gap: var(--space-md);
-}
-
 .numberOfgames {
   background-color: var(--color-primary-500);
   padding: var(--space-3xs) var(--space-xs);
@@ -88,8 +68,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.gridListButton {
-  padding: calc(0.75 * var(--space-sm));
 }

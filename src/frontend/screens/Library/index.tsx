@@ -37,18 +37,10 @@ import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import { faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
-import {
-  Button,
-  Dropdown,
-  Tabs,
-  Toggle,
-  Background,
-  DropdownItemType,
-  GenericDropdown,
-  Menu
-} from '@hyperplay/ui'
+import { Button, Background, DropdownItemType } from '@hyperplay/ui'
 import { Category, Platform } from 'frontend/types'
 import { getPlatformName } from 'frontend/helpers'
+import { LibraryTopBar } from './components/LibraryTopBar'
 
 const storage = window.localStorage
 
@@ -87,9 +79,6 @@ export default React.memo(function Library(): JSX.Element {
     handlePlatformFilters
   } = useContext(ContextProvider)
   const { t } = useTranslation()
-
-  const isGOGLoggedin = gog.username
-  const isEpicLoggedin = epic.username
 
   const filters: DropdownItemType[] = [
     {
@@ -552,90 +541,12 @@ export default React.memo(function Library(): JSX.Element {
             {t('add_game', 'Add Game')}
           </Button>
         </div>
-        <Tabs
-          onTabChange={(val: Category) => handleCategory(val)}
-          defaultValue={category}
-        >
-          <Tabs.List className={styles.tabsList} type="outline">
-            <div>
-              <Dropdown
-                options={filters}
-                onItemChange={setSelectedFilter}
-                selected={selectedFilter}
-                targetWidth={275}
-              />
-            </div>
-            <div>
-              <GenericDropdown
-                target={
-                  <GenericDropdown.GenericButton
-                    text={'Other filters'}
-                    style={{ width: '340px' }}
-                  ></GenericDropdown.GenericButton>
-                }
-              >
-                {otherFiltersData.map((val, index) => (
-                  <Menu.Item
-                    closeMenuOnClick={false}
-                    key={`toggleItem${index}`}
-                  >
-                    <Toggle
-                      defaultChecked={val.defaultValue}
-                      labelPosition="right"
-                      onChange={
-                        //eslint-disable-next-line
-                        (e: any) => {
-                          val.onChange(e.target.checked)
-                        }
-                      }
-                    >
-                      <div
-                        className="body"
-                        style={{
-                          paddingLeft: 'var(--space-sm)',
-                          margin: 'auto 0px'
-                        }}
-                      >
-                        {val.text}
-                      </div>
-                    </Toggle>
-                  </Menu.Item>
-                ))}
-              </GenericDropdown>
-            </div>
-            <Tabs.Tab value="all">
-              <div className="menu">{t('ALL', 'ALL')}</div>
-            </Tabs.Tab>
-            <Tabs.Tab value="hyperplay">
-              <div className="menu">{t('HyperPlay')}</div>
-            </Tabs.Tab>
-            {isEpicLoggedin && (
-              <Tabs.Tab value="legendary">
-                <div className="menu">EPIC</div>
-              </Tabs.Tab>
-            )}
-            {isGOGLoggedin && (
-              <Tabs.Tab value="gog">
-                <div className="menu">GOG</div>
-              </Tabs.Tab>
-            )}
-            <Tabs.Tab value="sideload">
-              <div className="menu">{t('Other')}</div>
-            </Tabs.Tab>
-            <div id="alignEnd">
-              {/* <div>
-              <Button type="tertiary" className={styles.gridListButton}>
-                <Images.Grid fill="white" height={24} width={24} />
-              </Button>
-            </div>
-            <div>
-              <Button type="tertiary" className={styles.gridListButton}>
-                <Images.List fill="white" height={24} width={24} />
-              </Button>
-            </div> */}
-            </div>
-          </Tabs.List>
-        </Tabs>
+        <LibraryTopBar
+          filters={filters}
+          setSelectedFilter={setSelectedFilter}
+          selectedFilter={selectedFilter}
+          otherFiltersData={otherFiltersData}
+        />
         <div className={styles.listing} ref={listing}>
           <span id="top" />
           {showRecentGames && (
