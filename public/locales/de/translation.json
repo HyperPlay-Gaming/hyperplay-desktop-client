@@ -7,7 +7,7 @@
         "title": "Barrierefreiheit",
         "zoom": "Zoom"
     },
-    "add_game": "Add Game",
+    "add_game": "Spiel hinzufügen",
     "All": "Alle",
     "anticheat": {
         "anticheats": "Anticheat-Systeme",
@@ -640,5 +640,8 @@
         },
         "release": "Veröffentlichungsdatum",
         "size": "Größe"
-    }
+    },
+    "analytics": "Analytik",
+    "accounts": "Konten",
+    "ALL": "ALLE"
 }
