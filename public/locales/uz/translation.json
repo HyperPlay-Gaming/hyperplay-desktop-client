@@ -44,7 +44,7 @@
             "launchAborted": "Ishga tushirish bekor qilindi",
             "moving": "O‘yinni ko‘chirishda xatolik {{error}}",
             "ubisoft-connect": {
-                "message": "O'yin prefiksida Ubisoft Connect-ni o'rnatib bo'lmadi. Uni qo'lda o'rnatish uchun https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac manzilidagi wiki sahifamizni tekshiring.",
+                "message": "O'yin prefiksida Ubisoft Connect-ni o'rnatib bo'lmadi. Uni qo'lda o'rnatish uchun https://github.com/HyperPlay-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac manzilidagi wiki sahifamizni tekshiring.",
                 "title": "Ubisoft Connect"
             },
             "uncaught-exception": {

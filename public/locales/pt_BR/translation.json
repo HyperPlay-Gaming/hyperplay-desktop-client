@@ -159,8 +159,7 @@
         "sync": "Sincronizar",
         "syncing": "Sincronizando",
         "unsync": "Dessincronizar",
-        "continue": "Continua",
-        "download": "Download"
+        "continue": "Continuar"
     },
     "controller": {
         "hints": {
@@ -461,7 +460,7 @@
         "addgamestosteam": "Adicionar jogos ao Steam automaticamente",
         "alt-gogdl-bin": "Escolha um binário do GOGDL alternativo para usar",
         "alt-legendary-bin": "Escolha um binário alternativo do Legendary",
-        "autodxvk": "Instalar/atualizar o DXVK automaticamente no prefixo",
+        "autodxvk": "Auto Instalar/atualizar o DXVK automaticamente no prefixo",
         "autosync": "Sincronizar saves automaticamente",
         "autovkd3d": "Instalar/Atualizar VKD3D automaticamente no prefixo",
         "change-target-exe": "Selecione um EXE alternativo para executar",
@@ -565,7 +564,8 @@
         "disable_logs": "Desativar registros",
         "addgamestoapplications": "Adicionar jogos a aplicativos automaticamente",
         "showMetalOverlay": "Mostrar sobreposição de estatísticas",
-        "alt-nile-bin": "Escolha um binário alternativo do Nilo"
+        "alt-nile-bin": "Escolha um binário alternativo do Nilo",
+        "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo"
     },
     "settings": {
         "battlEyeRuntime": {
