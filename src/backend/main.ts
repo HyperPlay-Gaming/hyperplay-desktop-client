@@ -932,12 +932,20 @@ ipcMain.handle('requestSettings', async (event, appName) => {
   return mapOtherSettings(config)
 })
 
-ipcMain.handle('toggleDXVK', async (event, { winePrefix, winePath, action }) =>
-  DXVK.installRemove(winePrefix, winePath, 'dxvk', action)
+ipcMain.handle('toggleDXVK', async (event, { appName, action }) =>
+  GameConfig.get(appName)
+    .getSettings()
+    .then(async (gameSettings) =>
+      DXVK.installRemove(gameSettings, 'dxvk', action)
+    )
 )
 
-ipcMain.on('toggleVKD3D', (event, { winePrefix, winePath, action }) => {
-  DXVK.installRemove(winePrefix, winePath, 'vkd3d', action)
+ipcMain.on('toggleVKD3D', (event, { appName, action }) => {
+  GameConfig.get(appName)
+    .getSettings()
+    .then((gameSettings) => {
+      DXVK.installRemove(gameSettings, 'vkd3d', action)
+    })
 })
 
 ipcMain.handle('writeConfig', (event, { appName, config }) => {

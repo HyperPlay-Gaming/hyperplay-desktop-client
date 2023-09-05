@@ -266,3 +266,7 @@ export async function loadEpicHyperPlayGameInfoMap() {
     }
   }
 }
+
+export function sanitizeVersion(ver: string) {
+  return ver.toLowerCase().replaceAll(' ', '')
+}
