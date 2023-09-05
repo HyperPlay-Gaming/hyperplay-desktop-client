@@ -46,7 +46,7 @@
       }
     ],
     "win": {
-      "artifactName": "${productName}-${version}-Setup-${arch}.${ext}",
+      "artifactName": "${productName}-Setup.${ext}",
       "icon": "build/win_icon.ico",
       "asarUnpack": [
         "build/bin/win32/legendary.exe",

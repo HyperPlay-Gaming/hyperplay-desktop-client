@@ -47,7 +47,7 @@ jobs:
 
       - name: Upload build file to Signpath
         run: Submit-SigningRequest `
-          -InputArtifactPath "dist/HyperPlay*.exe" `
+          -InputArtifactPath "dist/HyperPlay-Setup.exe" `
           -CIUserToken  ${{ secrets.SIGNPATH_TOKEN }}`
           -OrganizationId ${{ secrets.SIGNPATH_ORG_ID }} `
           -ProjectSlug "HyperPlay_Win_x64" `
@@ -57,10 +57,10 @@ jobs:
 
       - name: Update latest.yml
         run: |
-          $artifactPath = Get-ChildItem -Path signed -Filter HyperPlay*.exe
+          $artifactPath = Get-ChildItem -Path signed -Filter HyperPlay-Setup.exe
           $sha512 = Get-FileHash -Path $artifactPath -Algorithm SHA512 | Select-Object -ExpandProperty Hash
           $size = (Get-Item $artifactPath).Length
-          $latestYml = Get-Content -Path build/latest.yml -Raw | ConvertFrom-Yaml
+          $latestYml = Get-Content -Path build\latest.yml -Raw | ConvertFrom-Yaml
           $latestYml.files[0].sha512 = $sha512
           $latestYml.files[0].size = $size
           $latestYml | ConvertTo-Yaml -Depth 100 | Set-Content -Path signed\latest.yml
@@ -83,8 +83,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: signed\HyperPlay*.exe
-          asset_name: HyperPlay*.exe
+          asset_path: signed\HyperPlay.exe
+          asset_name: HyperPlay.exe
           asset_content_type: application/octet-stream
 
       - name: Upload release asset
