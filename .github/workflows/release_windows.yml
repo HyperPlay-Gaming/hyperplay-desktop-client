@@ -73,15 +73,19 @@ jobs:
           -OutputArtifactPath "signed/HyperPlay-Setup.exe" `
           -WaitForCompletion
 
+      - name: Install powershell-yaml
+        run: Install-Module -Name powershell-yaml -Force
+
       - name: Update latest.yml
         run: |
           $artifactPath = Get-ChildItem -Path signed -Filter HyperPlay-Setup.exe
           $sha512 = Get-FileHash -Path $artifactPath -Algorithm SHA512 | Select-Object -ExpandProperty Hash
           $size = (Get-Item $artifactPath).Length
-          $latestYml = Get-Content -Path build/latest.yml -Raw | ConvertFrom-Yaml
+          $latestYml = Get-Content -Path dist/latest.yml -Raw | ConvertFrom-Yaml
+          $latestYml.sha512 = $sha512
           $latestYml.files[0].sha512 = $sha512
           $latestYml.files[0].size = $size
-          $latestYml | ConvertTo-Yaml -Depth 100 | Set-Content -Path signed/latest.yml
+          $latestYml | ConvertTo-Yaml | Set-Content -Path signed/latest.yml
 
       - name: Create draft release
         id: create_release
