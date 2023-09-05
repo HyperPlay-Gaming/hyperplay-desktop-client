@@ -9,6 +9,7 @@ on:
 env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  NODE_OPTIONS: '--max_old_space_size=8128'
 
 jobs:
   build-and-release:
