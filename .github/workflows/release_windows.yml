@@ -48,12 +48,12 @@ jobs:
 
       - name: Upload build file to Signpath
         run: Submit-SigningRequest `
-          -InputArtifactPath "dist/HyperPlay-Setup.exe" `
+          -InputArtifactPath dist\HyperPlay-Setup.exe `
           -CIUserToken  ${{ secrets.SIGNPATH_TOKEN }}`
           -OrganizationId ${{ secrets.SIGNPATH_ORG_ID }} `
           -ProjectSlug "HyperPlay_Win_x64" `
           -SigningPolicySlug "Release_Signing" `
-          -OutputArtifactPath "signed" `
+          -OutputArtifactPath "signed\HyperPlay-Setup.exe" `
           -WaitForCompletion
 
       - name: Update latest.yml
@@ -84,8 +84,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: signed\HyperPlay.exe
-          asset_name: HyperPlay.exe
+          asset_path: signed\HyperPlay-Setup.exe
+          asset_name: HyperPlay-Setup.exe
           asset_content_type: application/octet-stream
 
       - name: Upload release asset
