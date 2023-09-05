@@ -37,6 +37,7 @@ import useSetting from 'frontend/hooks/useSetting'
 import { defaultWineVersion } from '../..'
 import Collapsible from 'frontend/components/UI/Collapsible/Collapsible'
 import SyncSaves from '../SyncSaves'
+import EnableDXVKFpsLimit from '../../components/EnableDXVKFpsLimit'
 
 type Props = {
   useDetails?: boolean
@@ -48,6 +49,7 @@ export default function GamesSettings({ useDetails = true }: Props) {
   const { isDefault, gameInfo } = useContext(SettingsContext)
   const [wineVersion] = useSetting('wineVersion', defaultWineVersion)
   const isLinux = platform === 'linux'
+  const isWin = platform === 'win32'
   const isCrossover = wineVersion?.type === 'crossover'
   const hasCloudSaves =
     gameInfo?.cloud_save_enabled && gameInfo.install.platform !== 'linux'
@@ -120,17 +122,19 @@ export default function GamesSettings({ useDetails = true }: Props) {
       >
         <AlternativeExe />
 
-        {!nativeGame && <ShowFPS />}
+        <ShowFPS />
 
-        {isLinux && !nativeGame && (
+        {!nativeGame && <EnableDXVKFpsLimit />}
+
+        {!isWin && !nativeGame && (
           <>
-            <PreferSystemLibs />
-
             <EnableEsync />
 
             {isLinux && (
               <>
                 <EnableFsync />
+
+                <PreferSystemLibs />
 
                 <EnableFSR />
 
