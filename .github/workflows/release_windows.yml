@@ -38,6 +38,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'yarn'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -48,7 +49,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
       - name: Install dependencies
-        run: yarn install --network-timeout 600000 && yarn allow-scripts
+        run: yarn install  --frozen-lockfile --network-timeout 600000 && yarn allow-scripts
 
       - name: Cache artifacts
         uses: actions/cache@v2
