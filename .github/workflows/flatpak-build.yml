@@ -27,6 +27,8 @@ jobs:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
       options: --privileged
     steps:
+      - name: Install Yarn
+        run: sudo npm install -g yarn
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
