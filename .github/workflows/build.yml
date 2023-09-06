@@ -11,7 +11,6 @@ env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
-  NODE_OPTIONS: '--max_old_space_size=8196'
 
 jobs:
   build_windows:
@@ -20,23 +19,24 @@ jobs:
       group: build-windows-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: $GITHUB_ENV
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn install --frozen-lockfile --network-timeout 600000 && yarn allow-scripts
+        run: yarn install --network-timeout 600000 && yarn allow-scripts
       - name: Build artifacts.
         run: yarn dist:win
       - name: Upload EXE.
@@ -51,16 +51,6 @@ jobs:
       group: build-linux-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: $GITHUB_ENV
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: Install libarchive-tools for pacman build # Related https://github.com/electron-userland/electron-builder/issues/4181
         run: sudo apt-get install libarchive-tools
       - name: Checkout repository.
@@ -68,8 +58,19 @@ jobs:
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn install --frozen-lockfile --network-timeout 600000 && yarn allow-scripts
+        run: yarn setup
       - name: Build deb artifact
         run: yarn dist:linux:ci:deb
       - name: Build rpm artifact
@@ -82,23 +83,24 @@ jobs:
       group: build-mac-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: $GITHUB_ENV
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
-        run: yarn install --frozen-lockfile --network-timeout 600000 && yarn allow-scripts
+        run: yarn setup
       - name: Build artifacts.
         run: yarn dist:mac
         env:
