@@ -18,7 +18,7 @@ jobs:
           token: ${{ secrets.pat }}
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: yarn cache dir
+        run: echo "dir=$(yarn cache dir)
 
       - uses: actions/cache@v3
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
