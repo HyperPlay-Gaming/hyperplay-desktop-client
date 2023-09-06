@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
+  submodules-are-merged:
     runs-on: ubuntu-latest
     concurrency:
       group: submodules-${{ github.ref }}
