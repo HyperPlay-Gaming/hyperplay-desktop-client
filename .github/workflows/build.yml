@@ -77,6 +77,12 @@ jobs:
         run: yarn dist:linux:ci:rpm
       - name: Build pacman artifact
         run: yarn dist:linux:ci:pacman
+      - name: Save node modules cache
+        if: always()
+        uses: actions/cache@v3
+        with:
+          path: $GITHUB_ENV.env.dir
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
   build_mac:
     runs-on: macos-13
     concurrency:
@@ -117,3 +123,9 @@ jobs:
           name: mac-dmg-M1-M2
           path: dist/HyperPlay*arm64.dmg
           retention-days: 14
+      - name: Save node modules cache
+        if: always()
+        uses: actions/cache@v3
+        with:
+          path: $GITHUB_ENV.env.dir
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}

@@ -43,3 +43,9 @@ jobs:
         if: steps.yarn-cache.outputs.cache-hit != 'true'
       - name: Check Typescript syntax
         run: yarn codecheck
+      - name: Save node modules cache
+        if: always()
+        uses: actions/cache@v3
+        with:
+          path: $GITHUB_ENV.env.dir
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}

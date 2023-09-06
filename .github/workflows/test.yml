@@ -19,7 +19,7 @@ jobs:
       - uses: actions/cache@v3
         id: yarn-cache
         with:
-          path: path: $GITHUB_ENV.env.dir
+          path: $GITHUB_ENV.env.dir
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
 
@@ -47,3 +47,9 @@ jobs:
 
       - name: Test
         run: yarn test:ci
+      - name: Save node modules cache
+        if: always()
+        uses: actions/cache@v3
+        with:
+          path: $GITHUB_ENV.env.dir
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
