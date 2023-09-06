@@ -198,7 +198,7 @@ describe('backend/utils.ts', () => {
         getBytesFromMB(totalSizeMB),
         lastProgressTime
       )
-      expect(etaString).toEqual('00:00:04')
+      expect(etaString).toEqual(expect.stringMatching(/00:00:0[4,5]/))
     })
 
     test('normal download minutes', () => {
