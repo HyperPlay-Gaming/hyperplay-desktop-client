@@ -38,15 +38,14 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
-          cache: 'yarn'
-      - name: Install Yarn
-        run: npm install -g yarn
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: install yarn
+        run: npm install --global yarn
       - name: Install modules.
         run: yarn setup
       - name: Build artifacts.
