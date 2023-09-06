@@ -81,7 +81,7 @@ jobs:
         if: always()
         uses: actions/cache@v3
         with:
-          path: $GITHUB_ENV.env.dir
+          path: ${{ env.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
   build_mac:
     runs-on: macos-13
@@ -127,5 +127,5 @@ jobs:
         if: always()
         uses: actions/cache@v3
         with:
-          path: $GITHUB_ENV.env.dir
+          path: ${{ env.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
