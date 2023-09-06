@@ -103,7 +103,7 @@ jobs:
     steps:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
+        run: echo "dir=$(yarn cache dir)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
       - uses: actions/cache@v3
         id: yarn-cache
         with:
