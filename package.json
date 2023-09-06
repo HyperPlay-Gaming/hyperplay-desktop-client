@@ -232,7 +232,7 @@
     "codecheck": "tsc --noEmit",
     "find-deadcode": "ts-prune --error",
     "test": "jest",
-    "testProxy": "jest proxy.test.ts",
+    "testProxy": "ENABLE_PROXY_TESTS=true && jest proxy.test.ts",
     "test-watch": "jest --watch --maxWorkers=25%",
     "test:ci": "jest --runInBand --silent",
     "test:e2e-ci": "cross-env-shell bash e2e/entrypoint.sh",
