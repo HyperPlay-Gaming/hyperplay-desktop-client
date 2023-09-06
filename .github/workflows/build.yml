@@ -29,16 +29,6 @@ jobs:
         with:
           node-version: '18'
           cache: 'yarn'
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-      - uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: ${{ env.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -87,12 +77,6 @@ jobs:
         run: yarn dist:linux:ci:rpm
       - name: Build pacman artifact
         run: yarn dist:linux:ci:pacman
-      - name: Save node modules cache
-        if: always()
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
   build_mac:
     runs-on: macos-13
     concurrency:
@@ -133,9 +117,3 @@ jobs:
           name: mac-dmg-M1-M2
           path: dist/HyperPlay*arm64.dmg
           retention-days: 14
-      - name: Save node modules cache
-        if: always()
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}

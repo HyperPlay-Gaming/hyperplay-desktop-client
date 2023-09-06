@@ -38,7 +38,6 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn setup
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
       - name: Check Typescript syntax
         run: yarn codecheck
       - name: Save node modules cache
