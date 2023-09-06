@@ -27,6 +27,11 @@ jobs:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-22.08
       options: --privileged
     steps:
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
       - name: Install Yarn
         run: sudo npm install -g yarn
       - name: Get yarn cache directory path
@@ -48,11 +53,6 @@ jobs:
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
-      - name: Setup NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'yarn'
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
