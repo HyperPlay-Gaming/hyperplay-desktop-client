@@ -12,17 +12,6 @@ jobs:
       group: test-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
-
-      - uses: actions/cache@v3
-        id: yarn-cache
-        with:
-          path: ${{ env.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: ${{ runner.os }}-yarn-
-
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -47,9 +36,3 @@ jobs:
 
       - name: Test
         run: yarn test:ci
-      - name: Save node modules cache
-        if: always()
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}

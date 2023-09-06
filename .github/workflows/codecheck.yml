@@ -16,16 +16,6 @@ jobs:
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
-      - uses: actions/cache@v3
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ env.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
@@ -40,9 +30,3 @@ jobs:
         run: yarn setup
       - name: Check Typescript syntax
         run: yarn codecheck
-      - name: Save node modules cache
-        if: always()
-        uses: actions/cache@v3
-        with:
-          path: ${{ env.dir}}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
