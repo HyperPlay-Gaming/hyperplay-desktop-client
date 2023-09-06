@@ -14,12 +14,12 @@ jobs:
     steps:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $GITHUB_ENV
+        run: echo "dir=$(yarn cache dir)" >> $CACHE_DIR
 
       - uses: actions/cache@v3
         id: yarn-cache
         with:
-          path: $GITHUB_ENV
+          path: $CACHE_DIR
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
 
@@ -32,6 +32,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'yarn'
 
       - name: Reconfigure git to use HTTP authentication
         run: >
