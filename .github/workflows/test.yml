@@ -14,12 +14,12 @@ jobs:
     steps:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "dir=$(yarn cache dir)" >> $CACHE_DIR
+        run: echo "dir=$(yarn cache dir)" >> $YARN_CACHE_DIR
 
       - uses: actions/cache@v3
         id: yarn-cache
         with:
-          path: $CACHE_DIR
+          path: $YARN_CACHE_DIR
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: ${{ runner.os }}-yarn-
 
