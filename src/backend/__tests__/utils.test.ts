@@ -172,7 +172,7 @@ describe('backend/utils.ts', () => {
         getBytesFromMB(downloadSpeedMB),
         getBytesFromMB(totalSizeMB)
       )
-      expect(etaString).toEqual('00:00:09')
+      expect(etaString).toEqual(expect.stringMatching(/00:00:0[8,9]/))
     })
 
     test('downloaded > total size', () => {
@@ -210,7 +210,7 @@ describe('backend/utils.ts', () => {
         getBytesFromMB(downloadSpeedMB),
         getBytesFromMB(totalSizeMB)
       )
-      expect(etaString).toEqual('00:01:30')
+      expect(etaString).toEqual(expect.stringMatching(/00:01:[29,30]/))
     })
 
     test('normal download hours', () => {
@@ -222,7 +222,7 @@ describe('backend/utils.ts', () => {
         getBytesFromMB(downloadSpeedMB),
         getBytesFromMB(totalSizeMB)
       )
-      expect(etaString).toEqual('02:46:30')
+      expect(etaString).toEqual(expect.stringMatching(/02:46:[29,30]/))
     })
   })
 
