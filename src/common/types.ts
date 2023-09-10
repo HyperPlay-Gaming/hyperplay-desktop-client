@@ -87,6 +87,10 @@ export type Release = {
   id: number
 }
 
+export type ExperimentalFeatures = {
+  enableNewShinyFeature: boolean // remove this when adding a real experimental feature
+}
+
 export interface AppSettings extends GameSettings {
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
@@ -109,6 +113,7 @@ export interface AppSettings extends GameSettings {
   egsLinkedPath: string
   enableUpdates: boolean
   exitToTray: boolean
+  experimentalFeatures: ExperimentalFeatures
   hideChangelogsOnStartup: boolean
   libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number
