@@ -17,16 +17,22 @@ jobs:
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
+
       - uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
+          cache: 'yarn'
+
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
+
       - name: Authenticate with private NPM package
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
       - name: Install modules.
         run: yarn setup
+
       - name: Test
         run: yarn test:ci
