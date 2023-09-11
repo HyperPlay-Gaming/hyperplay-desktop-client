@@ -1,0 +1,122 @@
+name: Draft Release Windows
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  NODE_OPTIONS: '--max_old_space_size=8128'
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            .npm
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install SignPath module
+        run: Install-Module -Name SignPath -Force
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+
+      - name: Install dependencies
+        run: yarn install  --frozen-lockfile --network-timeout 600000 && yarn allow-scripts
+
+      - name: Cache artifacts
+        uses: actions/cache@v2
+        with:
+          path: |
+            dist
+            signed
+          key: ${{ runner.os }}-artifacts-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-artifacts-
+
+      - name: Build artifacts.
+        run: yarn dist:win
+
+      - name: Upload build file to Signpath
+        run: Submit-SigningRequest `
+          -InputArtifactPath ./dist/HyperPlay-Setup.exe `
+          -CIUserToken  "${{ secrets.SIGNPATH_TOKEN }}"`
+          -OrganizationId "${{ secrets.SIGNPATH_ORG_ID }}" `
+          -ProjectSlug "HyperPlay_Win_x64" `
+          -SigningPolicySlug "Release_Signing" `
+          -OutputArtifactPath "signed/HyperPlay-Setup.exe" `
+          -WaitForCompletion
+
+      - name: Install powershell-yaml
+        run: Install-Module -Name powershell-yaml -Force
+
+      - name: Update latest.yml
+        run: |
+          $artifactPath = Get-ChildItem -Path signed -Filter HyperPlay-Setup.exe
+          $sha512 = Get-FileHash -Path $artifactPath -Algorithm SHA512 | Select-Object -ExpandProperty Hash
+          $size = (Get-Item $artifactPath).Length
+          $latestYml = Get-Content -Path dist/latest.yml -Raw | ConvertFrom-Yaml
+          $latestYml.sha512 = $sha512
+          $latestYml.files[0].sha512 = $sha512
+          $latestYml.files[0].size = $size
+          $latestYml | ConvertTo-Yaml | Set-Content -Path signed/latest.yml
+
+      - name: Create draft release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: true
+          prerelease: false
+
+      - name: Upload release asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: signed/HyperPlay-Setup.exe
+          asset_name: HyperPlay-Setup.exe
+          asset_content_type: application/octet-stream
+
+      - name: Upload release asset
+        id: upload-latest-yml
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: signed/latest.yml
+          asset_name: latest.yml
+          asset_content_type: application/octet-stream
