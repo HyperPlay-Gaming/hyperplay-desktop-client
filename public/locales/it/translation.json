@@ -7,7 +7,7 @@
         "title": "Accessibilità",
         "zoom": "Zoom"
     },
-    "add_game": "Add Game",
+    "add_game": "Aggiungi Un Gioco",
     "All": "Tutto",
     "anticheat": {
         "anticheats": "Anticheat",
@@ -26,7 +26,7 @@
         "choose-egs-prefix": "Scegli il prefix dove EGS è installato",
         "choose-gogdl-binary": "Seleziona il binario GOGDL (riavvio necessario)",
         "choose-legendary-binary": "Seleziona binari Legendary",
-        "customWine": "Scegli fra il binario Wine o Proton",
+        "customWine": "Scegli il binario Wine o Proton",
         "default-install-path": "Seleziona il percorso d'installazione predefinito",
         "default-steam-path": "Percorso Steam.",
         "downloadNow": "Scarica ora",
@@ -45,7 +45,7 @@
                 "title": "Bottiglia CrossOver non trovata"
             },
             "diskspace": {
-                "message": "Spazio su disco insufficiente",
+                "message": "Spazio disponibile su disco insufficiente",
                 "title": "Spazio insufficiente"
             },
             "dxvk": {
@@ -56,8 +56,8 @@
                 "title": "La cartella del gioco sembra essere stata eliminata, rimuovere il gioco dall'elenco delle installazioni?"
             },
             "generic": {
-                "message": "",
-                "title": "Select EXE to Run"
+                "message": "messaggio di errore generico",
+                "title": "Scegli file EXE da Eseguire"
             },
             "launchAborted": "Launch aborted",
             "title": "Errore",
@@ -74,8 +74,16 @@
                 "title": "Wine non trovato"
             },
             "winetricks": {
-                "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
-                "title": "Winetricks error"
+                "message": "Winetricks ha restituito il seguente errore durante l'esecuzione:{{newLine}}{{error}}",
+                "title": "Errore di Winetricks"
+            },
+            "moving": "Errore durante lo spostamento del gioco {{error}}",
+            "ubisoft-connect": {
+                "message": "Installazione di Ubisoft Connect nel prefix del gioco non riuscita. Controlla la nostra pagina wiki su https://github.com/HyperPlay-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac per installarlo manualmente.",
+                "title": "Ubisoft Connect"
+            },
+            "legendary": {
+                "generic": "C'è stato un errore! Prova a uscire e accedere al tuo account Epic. {{newline}} {{error}}"
             }
         },
         "info": {
@@ -139,12 +147,22 @@
                 "install": "I server Epic stanno subendo un'interruzione importante in questo momento, il gioco non può essere installato!",
                 "update": "I server Epic stanno subendo un'interruzione importante in questo momento, il gioco non può essere aggiornato!"
             },
-            "title": "Attenzione"
+            "title": "Attenzione",
+            "wine-change": {
+                "message": "Non siamo riusciti a trovare la versione Wine selezionata per lanciare questo titolo ({{selectedWine}}). {{newline}} Ne abbiamo trovato un altro, vuoi continuare l'avvio utilizzando {{foundWine}} ?",
+                "title": "Wine non trovato!"
+            },
+            "sideload": {
+                "confirmExit": {
+                    "title": "Sei sicuro di voler uscire?",
+                    "message": "I progressi non salvati potrebbero essere persi"
+                }
+            }
         },
         "wineprefix": "Seleziona la cartella del prefisso di Wine",
         "yes": "SI",
         "dontShowAgain": "Non mostrare più",
-        "choose-nile-binary": "Seleziona binario del Nilo"
+        "choose-nile-binary": "Seleziona binario di Nile"
     },
     "button": {
         "cancel": "Cancel",
@@ -215,7 +233,7 @@
     },
     "globalSettings": "Impostazioni globali",
     "GOG": "GOG",
-    "gog-store": "GOG Store",
+    "gog-store": "Negozio GOG",
     "header": {
         "hide_non_available_games": "Hide non-available games",
         "ignore_hidden": "Ignora nascosti",
@@ -263,7 +281,9 @@
         "wine": {
             "part1": "HyperPlay cercherà possibili versioni di Wine, Proton, e CrossOver nelle seguenti cartelle:",
             "part2": "Per altre posizioni, utilizza un link simbolico ad una di queste cartelle"
-        }
+        },
+        "disable_logs": "Attiva questa casella di controllo per disabilitare la maggior parte delle scritture sui file di registro (le informazioni critiche vengono sempre registrate). Assicurati di disattivare questa impostazione prima di segnalare qualsiasi problema.",
+        "dxvknvapi": "DXVK-NVAPI è un'implementazione di NVAPI che utilizza DXVK e la versione linux di NVAPI, permette l'utilizzo del DLSS sulle GPU Nvidia."
     },
     "info": {
         "hyperplay": {
@@ -271,7 +291,7 @@
             "click-to-see-changelog": "Click to see changelog",
             "newReleases": "Aggiornamento disponibile!",
             "stable": "Stabile",
-            "version": "HyperPlay Version"
+            "version": "Versione HyperPlay"
         },
         "save-sync": {
             "searching": "Trying to detect the correct save folder"
@@ -288,8 +308,10 @@
             "title": "Wine Prefix"
         },
         "wine-repfix": {
-            "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+            "message": "Wine utilizza quello che viene chiamato WINEPREFIX per incapsulare le applicazioni di Windows. Questo prefisso contiene i file di configurazione di Wine e una riproduzione della gerarchia di C: (il disco principale di un sistema operativo Windows). I tuoi salvataggi e le dependencies installate attraverso Winetricks sono contenute in questa riproduzione del disco C:."
+        },
+        "wine-path-invalid": "Il percorso di Wine non è valido, selezionane un altro.",
+        "wine-path-none-found": "Non è stata trovata alcuna versione di Wine, scaricane una da Wine Manager"
     },
     "install": {
         "path": "Seleziona percorso di installazione"
@@ -314,7 +336,8 @@
         "epic": "Accedi a Epic Games",
         "gog": "Accedi a GOG",
         "message": "Accedi con la tua piattaforma. Puoi effettuare l'accesso a più di una piattaforma contemporaneamente.",
-        "amazon": "Accedi ad Amazon"
+        "amazon": "Accedi ad Amazon",
+        "old-mac": "La tua versione di macOS è {{version}}. Per accedere è necessario macOS 12 o superiore."
     },
     "message": {
         "sync": "Sincronizzazione completata",
@@ -405,7 +428,7 @@
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Versione Legendary: ",
         "weblate": "Aiuta a tradurre HyperPlay.",
-        "nile-version": "Versione del Nilo: "
+        "nile-version": "Versione di Nile: "
     },
     "Other": "Other",
     "placeholder": {
@@ -425,13 +448,15 @@
     "progress": "Progress",
     "queue": {
         "label": {
-            "canceled": "Canceled",
-            "clear": "Clear List",
-            "downloading": "Downloading",
-            "empty": "Nothing to download",
-            "finished": "Completed",
-            "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "canceled": "Annullato",
+            "clear": "Cancella Lista",
+            "downloading": "Scaricamento",
+            "empty": "Niente da scaricare",
+            "finished": "Completato",
+            "queued": "In coda",
+            "remove": "Rimuovi dai Download",
+            "pause": "Metti in pausa il download",
+            "resume": "Riprendi il download"
         }
     },
     "Recent": "Giocato di recente",
@@ -468,15 +493,15 @@
             "disable": "Disable",
             "enable": "Enable",
             "install": "Install",
-            "installed": "The Epic Overlay is installed",
-            "installing": "The Epic Overlay is being installed...",
-            "latestVersion": "Latest Version: {{version}}",
-            "notInstalled": "The Epic Overlay is not installed",
-            "notInstalledMsg": "The Epic Overlay is not installed. Do you want to install it now?",
-            "notInstalledTitle": "Overlay not installed",
-            "remove": "Uninstall",
-            "removeConfirm": "Are you sure you want to uninstall the Epic Overlay?",
-            "removeConfirmTitle": "Confirm overlay removal",
+            "installed": "EOS Overlay è installato",
+            "installing": "L'installazione dell'EOS Overlay è in corso...",
+            "latestVersion": "Ultima Versione: {{version}}",
+            "notInstalled": "L'EOS Overlay non è installato",
+            "notInstalledMsg": "L'EOS Overlay non è installato. Vuoi installarlo ora?",
+            "notInstalledTitle": "Overlay non installato",
+            "remove": "Disinstalla",
+            "removeConfirm": "Sei sicuro di voler disinstallare l'Overlay EOS?",
+            "removeConfirmTitle": "Conferma la rimozione dell'overlay",
             "updateNow": "Update",
             "updating": "Updating..."
         },
@@ -494,13 +519,13 @@
         },
         "library_top_section": "Library Top Section",
         "log": {
-            "copy-to-clipboard": "Copy log content to clipboard",
-            "current-log": "Current Log",
-            "instructions": "If you encounter any issues while using HyperPlay, we have two designated areas to report your issues in our Discord Server. If you're a player, please report any problems by visiting the player-support-forum. If you are a game dev, please report any problems by visiting the dev-support-forum.{{newLine}} {{newLine}} To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.{{newLine}}",
-            "instructions_title": "How to report a problem?",
-            "last-log": "Last Log",
-            "no-file": "No log file found",
-            "show-in-folder": "Show log file in folder"
+            "copy-to-clipboard": "Copia il contenuto dei log negli appunti",
+            "current-log": "Accesso corrente",
+            "instructions": "Unisciti al nostro Discord e cerca la sezione \"#-support\". Leggi il messaggio fissato \"Read Me First | Frequently Asked Questions\" e segui le istruzioni per condividere il contenuto dei log e una chiara descrizione dei problemi che stai riscontrando.",
+            "instructions_title": "Come segnalare un problema?",
+            "last-log": "Ultimo accesso",
+            "no-file": "Nessun log file trovato",
+            "show-in-folder": "Mostra il log file nella cartella"
         },
         "mangohud": "Abilita Mangohud (Mangohud necessita di essere installato)",
         "manualsync": {
@@ -530,9 +555,9 @@
             "title": "Avvia l'EXE nel prefix"
         },
         "savefolder": {
-            "not-found": "Save folder not found, please select it manually",
+            "not-found": "La cartella dei salvataggi non è stata trovata, per favore selezionala manualmente (clicca qui per riprovare)",
             "placeholder": "Seleziona l'esatta cartella dei salvataggi dei giochi",
-            "warning": "Please check twice if the path is correct"
+            "warning": "Per favore assicurati che il percorso sia corretto (clicca qui per riprovare)"
         },
         "select_theme": "Select Theme",
         "showfps": "Mostra FPS (DX9, 10 e 11)",
@@ -544,14 +569,15 @@
         "autoUpdateGames": "Aggiorna automaticamente i giochi",
         "ignoreGameUpdates": "Ignora gli aggiornamenti del gioco",
         "disable_logs": "Disabilita i log",
-        "addgamestoapplications": "Aggiungi giochi alle applicazioni automaticamente",
-        "showMetalOverlay": "Mostra sovrapposizione statistiche",
-        "alt-nile-bin": "Scegli un binario Nilo alternativo"
+        "addgamestoapplications": "Aggiungi giochi alla lista applicazioni automaticamente",
+        "showMetalOverlay": "Mostra Overlay Statistiche",
+        "alt-nile-bin": "Scegli un binario Nile alternativo",
+        "autodxvknvapi": "Installa/Aggiorna automaticamente DXVK/VKD3D sul Prefix"
     },
     "settings": {
         "battlEyeRuntime": {
-            "installing": "Installing BattlEye Runtime...",
-            "name": "BattlEye AntiCheat Runtime"
+            "installing": "Installando BattlEye Runtime...",
+            "name": "Runtime AntiCheat BattlEye"
         },
         "clear-cache": "Pulisci cache HyperPlay",
         "copiedToClipboard": "Copiato negli appunti!",
@@ -562,8 +588,8 @@
                 "message": "GameMode is required for the EAC runtime to work on Flatpak. Do you want to enable it now?",
                 "title": "GameMode required"
             },
-            "installing": "Installing EAC Runtime...",
-            "name": "EasyAntiCheat Runtime"
+            "installing": "Installando EAC Runtime...",
+            "name": "Runtime EasyAntiCheat"
         },
         "gameMode": {
             "eacRuntimeEnabled": {
@@ -630,13 +656,15 @@
         "discord": "Discord",
         "logging_out": "Logging out",
         "logout": "Disconnetti",
-        "logout_confirmation": "Sei sicuro di voler uscire?",
-        "manageaccounts": "Manage Accounts",
-        "quit": "Esci"
+        "logout_confirmation": "Sei sicuro di voler uscire dall'account?",
+        "manageaccounts": "Gestione Account",
+        "quit": "Esci",
+        "cancel": "Annulla",
+        "quitMessage": "Sei sicuro di voler uscire?"
     },
     "webview": {
         "controls": {
-            "back": "Indietro",
+            "back": "Torna indietro",
             "forward": "Avanti",
             "openInBrowser": "Apri nel browser",
             "reload": "Ricarica pagina"
@@ -667,7 +695,7 @@
         "size": "Dimensione",
         "title": "Titolo"
     },
-    "amazon": "Amazzonia",
+    "amazon": "Amazon",
     "Amazon Games": "Giochi Amazon",
-    "prime-gaming": "Primo gioco"
+    "prime-gaming": "Prime Gaming"
 }

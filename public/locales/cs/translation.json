@@ -548,7 +548,11 @@
         "disable_logs": "Zakázat protokoly",
         "addgamestoapplications": "Přidávejte hry do aplikací automaticky",
         "showMetalOverlay": "Zobrazit překryvnou statistiku",
-        "alt-nile-bin": "Vyberte alternativní binární soubor Nilu"
+        "alt-nile-bin": "Vyberte alternativní binární soubor Nile",
+        "autodxvknvapi": "Automaticky instalovat/aktualizovat DXVK/VKD3D na prefixu",
+        "experimental_features": {
+            "enableNewShinyFeature": "Nová skvělá funkce"
+        }
     },
     "settings": {
         "battlEyeRuntime": {
@@ -587,8 +591,11 @@
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
-            "label": "Save Location:",
-            "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+            "label": "Umístění pro ukládání:",
+            "warning": "Funkce Cloud Saves je v Beta verzi, před synchronizací si prosím uložená data zálohujte (pro případ, že by se něco pokazilo)"
+        },
+        "experimental_features": {
+            "title": "Experimentální funkce"
         }
     },
     "Settings": "",
