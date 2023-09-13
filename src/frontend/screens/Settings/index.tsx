@@ -9,7 +9,12 @@ import ContextMenu from '../Library/components/ContextMenu'
 import SettingsContext from './SettingsContext'
 import LogSettings from './sections/LogSettings'
 import FooterInfo from './sections/FooterInfo'
-import { GeneralSettings, GamesSettings, AdvancedSettings } from './sections'
+import {
+  GeneralSettings,
+  GamesSettings,
+  AdvancedSettings,
+  SystemInfo
+} from './sections'
 import { AppSettings, WineInstallation } from 'common/types'
 import { UpdateComponent } from 'frontend/components/UI'
 import { LocationState, SettingsContextType } from 'frontend/types'
@@ -156,6 +161,9 @@ function Settings() {
               </Tabs.Panel>
               <Tabs.Panel value="advSettings">
                 <AdvancedSettings />
+              </Tabs.Panel>
+              <Tabs.Panel value="systeminfo">
+                <SystemInfo />
               </Tabs.Panel>
               <Tabs.Panel value="logSettings">
                 <LogSettings />

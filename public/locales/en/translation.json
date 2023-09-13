@@ -17,7 +17,7 @@
     "add_game": "Add Game",
     "All": "All",
     "ALL": "ALL",
-    "amazon": "",
+    "amazon": "Amazon",
     "Amazon": "Amazon",
     "Amazon Games": "Amazon Games",
     "analytics": "Analytics",
@@ -31,7 +31,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "HyperPlay cache cleared.",
+            "message": "Heroic cache cleared.",
             "title": "Cache cleared"
         },
         "choose": "Choose",
@@ -69,18 +69,18 @@
                 "title": "Game folder appears to be deleted, do you want to remove the game from the installed list?"
             },
             "generic": {
-                "message": "",
+                "message": "generic error message",
                 "title": "Select EXE to Run"
             },
             "launchAborted": "Launch aborted",
             "moving": "Error Moving Game {{error}}",
             "title": "Error",
             "ubisoft-connect": {
-                "message": "Installation of Ubisoft Connect in the game prefix failed. Check our wiki page at https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac to install it maunally.",
+                "message": "Installation of Ubisoft Connect in the game prefix failed. Check our wiki page at https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac to install it manually.",
                 "title": "Ubisoft Connect"
             },
             "update": {
-                "message": "Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.",
+                "message": "Something went wrong with the update, please check the logs or try again later!",
                 "title": "Update Error"
             },
             "winetricks": {
@@ -93,8 +93,8 @@
                 "changelog": "Open changelog",
                 "detail": "Do you want to download the update in the background?",
                 "message": "There is a new Version available!",
-                "message-finished": "Do you want to restart HyperPlay now?",
-                "title": "HyperPlay Games Launcher",
+                "message-finished": "Do you want to restart Heroic now?",
+                "title": "Heroic Games Launcher",
                 "title-finished": "Update Finished"
             }
         },
@@ -111,7 +111,7 @@
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
                 "title": "Reset HyperPlay"
             }
         },
@@ -136,7 +136,7 @@
             "title": "Shortcuts"
         },
         "sync": {
-            "button": "Choose",
+            "button": "",
             "error": "Invalid Path",
             "title": "Choose the saves directory"
         },
@@ -175,9 +175,9 @@
         "continue": "Continue",
         "download": "Download",
         "go_to_library": "Go to Library",
-        "sync": "Sync",
-        "syncing": "Syncing",
-        "unsync": "Unsync"
+        "sync": "",
+        "syncing": "",
+        "unsync": ""
     },
     "controller": {
         "hints": {
@@ -210,7 +210,7 @@
         "label": "Select DLCs to install:"
     },
     "download-manager": {
-        "ETA": "Estimated Time",
+        "ETA": "Estimated time",
         "install-type": {
             "install": "Install",
             "update": "Update"
@@ -251,6 +251,13 @@
         "main": "Main",
         "prototype": "Prototype"
     },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "",
+            "single": ""
+        },
+        "title": "Game Updates Available"
+    },
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -262,7 +269,7 @@
     "globalSettings": "Global Settings",
     "GOG": "GOG",
     "header": {
-        "show_available_games": "Show non-available games",
+        "show_available_games": "Show non-Available games",
         "show_hidden": "Show Hidden",
         "store": "Filter Store"
     },
@@ -277,7 +284,7 @@
         "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
         "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
         "game_language": {
-            "fallback": "Leave blank to use HyperPlay's language.",
+            "fallback": "Leave blank to use Heroic's language.",
             "in_game_config": "Not all games support this configuration, some have in-game language setting.",
             "valid_codes": "Valid language codes are game-dependant."
         },
@@ -293,18 +300,18 @@
         "preferSystemLibs": "Custom Wine versions (Wine-GE, Wine-Lutris) are shipped with their library dependencies. By enabling this option, these shipped libraries will be ignored and Wine will load system libraries instead. Warning! Issues may occur if dependencies are not met.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "This path lets HyperPlay determine what version of Proton Steam uses, for adding non-Steam games to Steam."
+            "info": "This path lets Heroic determine what version of Proton Steam uses, for adding non-Steam games to Steam."
         },
         "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
         "sync": {
-            "part1": "HyperPlay tries to guess the right save folder and this will work on the majority of cases. In case the folder is wrong, use the override box to change it.",
-            "part2": "In case you change the prefix folder for Wine or Proton, you will need to check the path again since Proton uses a different prefix (/pfx) and username (steamuser). So you can simple erase the current path get out of the sync settings page and get back again for HyperPlay to guess the folder one more time with the right prefix.",
+            "part1": "Heroic tries to guess the right save folder and this will work on the majority of cases. In case the folder is wrong, use the override box to change it.",
+            "part2": "In case you change the prefix folder for Wine or Proton, you will need to check the path again since Proton uses a different prefix (/pfx) and username (steamuser). So you can simple erase the current path get out of the sync settings page and get back again for Heroic to guess the folder one more time with the right prefix.",
             "part3": "Manual Sync: Choose Download to download the games saves stored on the Cloud. Upload to upload the local ones to the cloud. Force Download and Force Upload will ignore the version that is locally or on the cloud.",
             "part4": "Sync Saves Automatically will sync the saves every time you Start a Game and after finishing playing."
         },
         "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
         "wine": {
-            "part1": "HyperPlay searches for versions of Wine, Proton, and CrossOver in the following folders:",
+            "part1": "Heroic searches for versions of Wine, Proton, and CrossOver in the following folders:",
             "part2": "For other places, use a symbolic link to one of these folders"
         }
     },
@@ -490,7 +497,7 @@
         "warning": "Warning",
         "wine-path": "Wine Path",
         "wine-path-invalid": "Wine Path is invalid, please select another one.",
-        "wine-path-none-found": "No Wine version was found, download one from the Compatibility Manager",
+        "wine-path-none-found": "No Wine version was found, download one from the Wine Manager",
         "wine-prefix": {
             "title": "Wine Prefix"
         },
@@ -572,7 +579,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Open",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -607,7 +614,7 @@
     "other": {
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Legendary Version: ",
-        "weblate": "Help Translate HyperPlay."
+        "weblate": "Help translate Heroic."
     },
     "Other": "Other",
     "overlay": {
@@ -654,7 +661,7 @@
         "autoUpdateGames": "Automatically update games",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
         "change-target-exe": "Select an alternative EXE to run",
-        "checkForUpdatesOnStartup": "Check for HyperPlay Updates on Startup",
+        "checkForUpdatesOnStartup": "Check for Heroic Updates on Startup",
         "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Custom Wine/Proton Paths",
@@ -662,7 +669,7 @@
         "default-install-path": "Default Installation Path",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable Hyperplay navigation using controller",
+        "disable_controller": "Disable Heroic navigation using controller",
         "disable_logs": "Disable Logs",
         "discordRPC": "Enable Discord Rich Presence",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
@@ -677,14 +684,14 @@
             "disable": "Disable",
             "enable": "Enable",
             "install": "Install",
-            "installed": "The Epic Overlay is installed",
-            "installing": "The Epic Overlay is being installed...",
+            "installed": "The EOS Overlay is installed",
+            "installing": "The EOS Overlay is being installed...",
             "latestVersion": "Latest Version: {{version}}",
-            "notInstalled": "The Epic Overlay is not installed",
-            "notInstalledMsg": "The Epic Overlay is not installed. Do you want to install it now?",
+            "notInstalled": "The EOS Overlay is not installed",
+            "notInstalledMsg": "The EOS Overlay is not installed. Do you want to install it now?",
             "notInstalledTitle": "Overlay not installed",
             "remove": "Uninstall",
-            "removeConfirm": "Are you sure you want to uninstall the Epic Overlay?",
+            "removeConfirm": "Are you sure you want to uninstall the EOS Overlay?",
             "removeConfirmTitle": "Confirm overlay removal",
             "updateNow": "Update",
             "updating": "Updating..."
@@ -698,7 +705,7 @@
         "fsync": "Enable Fsync",
         "gamemode": "Use GameMode (Feral Game Mode needs to be installed)",
         "ignoreGameUpdates": "Ignore game updates",
-        "language": "Choose Language",
+        "language": "Choose App Language",
         "library_top_option": {
             "disabled": "Disabled",
             "favourites": "Favourite Games",
@@ -728,7 +735,7 @@
         },
         "maxRecentGames": "Played Recently to Show",
         "maxworkers": "Maximum Number of Workers when downloading",
-        "minimize-on-launch": "Minimize HyperPlay After Game Launch",
+        "minimize-on-launch": "Minimize Heroic After Game Launch",
         "offlinemode": "Run Game Offline",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
@@ -763,7 +770,7 @@
             "installing": "Installing BattlEye Runtime...",
             "name": "BattlEye AntiCheat Runtime"
         },
-        "clear-cache": "Clear HyperPlay Cache",
+        "clear-cache": "Clear Heroic Cache",
         "copiedToClipboard": "Copied to Clipboard!",
         "copyToClipboard": "Copy All Settings to Clipboard",
         "default_hint": "Changes in this section only apply as default values when installing games. If you want to change the settings of an already installed game, use the Settings button in the game page.",
@@ -794,7 +801,8 @@
             "general": "General",
             "log": "Log",
             "other": "Other",
-            "sync": "Cloud Saves Sync"
+            "sync": "Cloud Saves Sync",
+            "systemInformation": "System Information"
         },
         "open-config-file": "Open Config File",
         "reset-extension": "Reset Extension",
@@ -802,9 +810,31 @@
         "saves": {
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
         },
+        "systemInformation": {
+            "copyToClipboard": "Copy to clipboard",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "gpuDriver": "Driver: {{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "heroicVersion": "Heroic: {{heroicVersion}}",
+            "legendaryVersion": "Legendary: {{legendaryVersion}}",
+            "memory": "Memory:",
+            "memoryStats": "{{percentUsed}}% used ({{usedGib}} / {{totalGib}}",
+            "nileVersion": "Nile: {{nileVersion}}",
+            "os": "Operating System:",
+            "osNameFlatpak": "{{osName}} (inside Flatpak)",
+            "osVersion": "Version {{versionNumber}}",
+            "showDetailed": "Show detailed system specifications",
+            "software": "Software:",
+            "steamDeck": "Steam Deck",
+            "systemModel": "System Model:",
+            "systemSpecifications": "System Specifications:"
+        },
         "wine": {
             "manager": {
-                "title": ""
+                "title": "Wine Manager"
             }
         }
     },
@@ -872,17 +902,10 @@
         "actions": "Action",
         "manager": {
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Compatibility Layer ",
+            "title": "Wine Manager",
             "unzipping": "Unzipping"
         },
         "release": "Release Date",
         "size": "Size"
-    },
-    "gameUpdateNotifications": {
-        "title": "Game Updates Available",
-        "body": {
-            "single": "There is an update ready for {{gameName}}.",
-            "multiple": "{{gameName}} and other games are ready to update."
-        }
     }
 }

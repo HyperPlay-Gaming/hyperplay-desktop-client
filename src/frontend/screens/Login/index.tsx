@@ -16,6 +16,7 @@ import { Background, Images } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import { useAwaited } from '../../hooks/useAwaited'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
@@ -38,6 +39,22 @@ export default React.memo(function NewLogin() {
   )
   const flags = useFlags()
   const ENABLE_AMAZON_STORE = flags.amazonStore
+
+  const systemInfo = useAwaited(window.api.systemInfo.get)
+
+  let oldMac = false
+  let oldMacMessage = ''
+  if (systemInfo?.OS.platform === 'darwin') {
+    const version = parseInt(systemInfo.OS.version.split('.')[0])
+    if (version < 12) {
+      oldMac = true
+      oldMacMessage = t(
+        'login.old-mac',
+        'Your macOS version is {{version}}. macOS 12 or newer is required to log in.',
+        { version: systemInfo.OS.version }
+      )
+    }
+  }
 
   const loginMessage = t(
     'login.message',
@@ -101,7 +118,8 @@ export default React.memo(function NewLogin() {
           </div>
 
           <p className="runnerMessage">{loginMessage}</p>
-
+          {oldMac && <p className="disabledMessage">{oldMacMessage}</p>}
+          
           <div className="runnerGroup">
             <Runner
               class="epic"

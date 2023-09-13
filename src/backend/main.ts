@@ -51,9 +51,7 @@ import { NileUser } from './storeManagers/nile/user'
 import setup from './storeManagers/gog/setup'
 import nileSetup from './storeManagers/nile/setup'
 import {
-  checkWineBeforeLaunch,
   clearCache,
-  downloadDefaultWine,
   execAsync,
   getGOGdlBin,
   getGogdlVersion,
@@ -61,18 +59,19 @@ import {
   getLegendaryVersion,
   getNileVersion,
   getPlatformName,
-  getShellPath,
   getStoreName,
-  getSystemInfo,
-  handleExit,
   isEpicServiceOffline,
+  handleExit,
   checkRosettaInstall,
   openUrlOrFile,
   resetApp,
   setGPTKDefaultOnMacOS,
   showAboutWindow,
   showItemInFolder,
-  wait
+  wait,
+  getShellPath,
+  checkWineBeforeLaunch,
+  downloadDefaultWine
 } from './utils'
 import {
   configPath,
@@ -132,7 +131,6 @@ import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { addRecentGame } from './recent_games/recent_games'
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import { getDefaultSavePath } from './save_sync'
-import si from 'systeminformation'
 import { initTrayIcon } from './tray_icon/tray_icon'
 import {
   createMainWindow,
@@ -140,6 +138,8 @@ import {
   sendFrontendMessage
 } from './main_window'
 import { addGameToLibrary } from './storeManagers/hyperplay/library'
+
+import * as si from 'systeminformation'
 
 import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
@@ -217,6 +217,7 @@ import { uuid } from 'short-uuid'
 import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
 import { runWineCommandOnGame } from 'backend/storeManagers/hyperplay/games'
+import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
 
 let ldMainClient: LDElectron.LDElectronMainClient
 
@@ -1179,11 +1180,13 @@ ipcMain.handle(
       powerDisplayId = powerSaveBlocker.start('prevent-display-sleep')
     }
 
-    const systemInfo = await getSystemInfo()
-    const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
     const logFileLocation = getLogFileLocation(appName)
 
-    writeFileSync(
+    const systemInfo = await getSystemInfo().then(formatSystemInfo)
+    writeFileSync(logFileLocation, 'System Info:\n' + `${systemInfo}\n` + '\n')
+
+    const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
+    appendFileSync(
       logFileLocation,
       'System Info:\n' +
         `${systemInfo}\n` +
@@ -1987,3 +1990,8 @@ ipcMain.on('openAuthModalIfAppReloads', () => {
 ipcMain.on('killOverlay', () => {
   closeOverlay()
 })
+/*
+ * INSERT OTHER IPC HANDLERS HERE
+ */
+
+import './storeManagers/legendary/eos_overlay/ipc_handler'

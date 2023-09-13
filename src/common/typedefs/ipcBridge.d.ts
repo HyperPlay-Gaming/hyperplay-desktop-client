@@ -49,6 +49,7 @@ import {
 } from 'common/types/nile'
 import { ToastKey } from 'frontend/store/types'
 import { AuthSession } from '../types/auth'
+import type { SystemInformation } from 'backend/utils/systeminfo'
 
 /**
  * Some notes here:
@@ -143,6 +144,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   openGameInEpicStore: (url: string) => void
   resumeCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
+  copySystemInfoToClipboard: () => void
   cancelExtraction: (appName: string) => void
   copyWalletConnectBaseURIToClipboard: () => void
   closeAuthModal: () => void
@@ -396,7 +398,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     status: ConnectivityStatus
     retryIn: number
   }
-  getNumOfGpus: () => Promise<number>
+  getSystemInfo: (cache?: boolean) => Promise<SystemInformation>
   removeRecent: (appName: string) => Promise<void>
   getWikiGameInfo: (
     title: string,

@@ -1,5 +1,6 @@
 import { AppSettings, GameSettings } from 'common/types'
 import { ipcRenderer } from 'electron'
+import type { SystemInformation } from '../utils/systeminfo'
 
 export const requestAppSettings = async () =>
   ipcRenderer.invoke('requestSettings', 'default') as Promise<AppSettings>
@@ -47,3 +48,8 @@ export const getNumOfGpus = async (): Promise<number> =>
 
 export const updateAutoLaunch = async () =>
   ipcRenderer.invoke('updateAutoLaunch')
+export const systemInfo = {
+  get: async (cache?: boolean): Promise<SystemInformation> =>
+    ipcRenderer.invoke('getSystemInfo', cache),
+  copyToClipboard: (): void => ipcRenderer.send('copySystemInfoToClipboard')
+}
