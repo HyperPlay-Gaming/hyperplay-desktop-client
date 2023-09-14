@@ -257,16 +257,6 @@ const prodAppUrl = `file://${path.join(
 )}`
 const loadMainWindowURL = function () {
   if (!app.isPackaged && process.env.CI !== 'e2e') {
-    /* if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-      import('electron-devtools-installer').then((devtools) => {
-        const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
-
-        installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
-          logWarning(['An error occurred: ', err], LogPrefix.Backend)
-        })
-      })
-    }
-  */
     mainWindow.loadURL(devAppUrl)
     // Open the DevTools.
     mainWindow.webContents.openDevTools()

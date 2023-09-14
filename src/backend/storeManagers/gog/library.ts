@@ -29,7 +29,7 @@ import {
   apiInfoCache,
   libraryStore,
   installedGamesStore,
-  gogInstallInfoStore
+  installInfoStore as gogInstallInfoStore
 } from './electronStores'
 import { callRunner } from '../../launcher'
 import {
