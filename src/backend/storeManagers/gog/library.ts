@@ -45,6 +45,7 @@ import {
 } from '../../utils/aborthandler/aborthandler'
 import { isOnline } from '../../online_monitor'
 import i18next from 'i18next'
+import { app } from 'electron'
 
 const library: Map<string, GameInfo> = new Map()
 const installedGames: Map<string, InstalledInfo> = new Map()
@@ -974,8 +975,9 @@ export async function runRunnerCommand(
   shouldTrackPlaytime = false
 ): Promise<ExecResult> {
   const { dir, bin } = getGOGdlBin()
+  const authConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
   return callRunner(
-    commandParts,
+    ['--auth-config-path', authConfig, ...commandParts],
     { name: 'gog', logPrefix: LogPrefix.Gog, bin, dir },
     abortController,
     {
