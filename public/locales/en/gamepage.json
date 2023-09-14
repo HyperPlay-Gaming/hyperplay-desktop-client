@@ -65,6 +65,7 @@
             "continue": "Continue Download",
             "remove": "Remove from Queue"
         },
+        "remove_from_library": "Remove",
         "remove_from_recent": "Remove From Recent",
         "run-exe-first": "Run Installer First",
         "running-setup": "Running Setup",
@@ -156,9 +157,6 @@
         "title": "You are NOT logged in"
     },
     "report_problem": "Report a problem running this game",
-    "sdl": {
-        "title": "Select components to Install"
-    },
     "setting": {
         "use-default-wine-settings": "Use Default Compatibility Settings",
         "winecrossoverbottle": "CrossOver Bottle"

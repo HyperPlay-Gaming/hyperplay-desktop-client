@@ -112,3 +112,7 @@ export const onLibraryChange = async (
     ipcRenderer.removeListener('onLibraryChanged', callback)
   }
 }
+
+export const removeFromLibrary = async (appName: string) => {
+  ipcRenderer.send('removeFromLibrary', appName)
+}

@@ -64,6 +64,7 @@ interface HyperPlaySyncIPCFunctions {
   addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
   setQaToken: (qaToken: string) => void
+  removeFromLibrary: (appName: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
