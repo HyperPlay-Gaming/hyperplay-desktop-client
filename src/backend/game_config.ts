@@ -251,7 +251,7 @@ class GameConfigV0 extends GameConfig {
       showMangohud,
       targetExe,
       useGameMode,
-      useSteamRuntime: wineVersion.type === 'proton',
+      useSteamRuntime: wineVersion.type === 'proton' ? true : useSteamRuntime,
       language: '' // we want to fallback to '' always here, fallback lang for games should be ''
     } as GameSettings
 
