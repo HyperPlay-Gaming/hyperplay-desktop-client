@@ -93,13 +93,11 @@ const openNewBrowserGameWindow = async (
       event: Electron.Event,
       input: Electron.Input
     ) {
-      logInfo(
-        `before input event in browser game window with input key = ${input.key}`,
-        LogPrefix.HyperPlay
-      )
-      if (input.key === 'F11' && input.type === 'keyDown') toggleFullscreen()
-      // this fixes DFK fullscreen toggle and ensures toggling is not called twice in dev mode
-      event.preventDefault()
+      if (input.key === 'F11' && input.type === 'keyDown') {
+        toggleFullscreen()
+        // this fixes DFK fullscreen toggle and ensures toggling is not called twice in dev mode
+        event.preventDefault()
+      }
     }
 
     function checkContentsUrlBeforeHandling(contents: Electron.WebContents) {
@@ -240,8 +238,9 @@ export async function launchGame(
   let {
     install: { executable }
   } = gameInfo
-
-  const { browserUrl } = gameInfo
+  const {
+    install: { channelName, platform }
+  } = gameInfo
 
   const gameSettingsOverrides = await GameConfig.get(appName).getSettings()
   if (
@@ -252,8 +251,24 @@ export async function launchGame(
     executable = gameSettingsOverrides.targetExe
   }
 
-  if (browserUrl) {
-    return openNewBrowserGameWindow(browserUrl, gameInfo)
+  let { browserUrl } = gameInfo
+  if (platform === 'web') {
+    let webGameUrl
+
+    if (
+      gameInfo?.channels &&
+      channelName &&
+      Object.hasOwn(gameInfo.channels, channelName)
+    )
+      webGameUrl =
+        gameInfo.channels[channelName].release_meta.platforms[platform]
+          ?.external_url
+
+    if (webGameUrl) browserUrl = webGameUrl
+
+    if (browserUrl) return openNewBrowserGameWindow(browserUrl, gameInfo)
+
+    throw `Could not launch web game for ${appName}`
   }
 
   const gameSettings = await getAppSettings(appName)
@@ -346,20 +361,17 @@ export async function launchGame(
       LogPrefix.Backend
     )
 
-    await runWineCommand(
-      {
-        commandParts: [executable, launcherArgs ?? ''],
-        gameSettings,
-        wait: false,
-        startFolder: dirname(executable),
-        options: {
-          wrappers,
-          logFile: logFileLocation(appName),
-          logMessagePrefix: LogPrefix.Backend
-        }
-      },
-      gameInfo
-    )
+    await runWineCommand({
+      commandParts: [executable, launcherArgs ?? ''],
+      gameSettings,
+      wait: false,
+      startFolder: dirname(executable),
+      options: {
+        wrappers,
+        logFile: logFileLocation(appName),
+        logMessagePrefix: LogPrefix.Backend
+      }
+    })
 
     launchCleanup(rpcClient)
 

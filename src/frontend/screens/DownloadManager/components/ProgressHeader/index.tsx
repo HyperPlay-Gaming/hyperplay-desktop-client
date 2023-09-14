@@ -109,7 +109,7 @@ export default function ProgressHeader(props: {
           <div className="downloadProgressStats">
             <p className="downloadStat" color="var(--text-default)">{`${
               progress.percent?.toFixed(2) ?? 0
-            }% [${Number(progress.bytes || '0').toFixed(2) ?? ''} MB] `}</p>
+            }% [${progress.bytes ?? ''}] `}</p>
           </div>
           <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
             <Box sx={{ width: '100%', mr: 1 }}>

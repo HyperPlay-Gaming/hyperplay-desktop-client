@@ -33,12 +33,26 @@ export const hpLibraryStore = new TypeCheckedStoreBackend('hpLibraryStore', {
         return game
       }
 
-      const newLibrary = currentLibrary.map((game) => {
-        //game was previously listed so we map its previous app_name to its new project_id
-        if (Object.hasOwn(appNameToProjectIdMap, game.app_name))
-          game.app_name = appNameToProjectIdMap[game.app_name]
-        return updateGameInfo(game)
-      })
+      const newLibrary = currentLibrary
+        .filter((game) => {
+          // remove the game info with the old app id if a game info exists with the new app id
+          const newProjectId = appNameToProjectIdMap[game.app_name]
+          if (newProjectId === undefined) return true
+          const newGameInfoExists =
+            currentLibrary.findIndex((val) => val.app_name === newProjectId) >=
+            0
+          if (newGameInfoExists) {
+            return false
+          }
+
+          return true
+        })
+        .map((game) => {
+          //game was previously listed so we map its previous app_name to its new project_id
+          if (Object.hasOwn(appNameToProjectIdMap, game.app_name))
+            game.app_name = appNameToProjectIdMap[game.app_name]
+          return updateGameInfo(game)
+        })
 
       store.set('games', newLibrary)
     }

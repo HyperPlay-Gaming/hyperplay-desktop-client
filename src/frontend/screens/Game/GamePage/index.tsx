@@ -60,6 +60,7 @@ import { WikiGameInfo } from 'frontend/components/UI/WikiGameInfo'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Button } from '@hyperplay/ui'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
+import DLCList from 'frontend/components/UI/DLCList'
 
 export default React.memo(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -105,6 +106,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [showRequirements, setShowRequirements] = useState(false)
   const [showExtraInfo, setShowExtraInfo] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
+  const [showDlcs, setShowDlcs] = useState(false)
 
   const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
@@ -160,13 +162,29 @@ export default React.memo(function GamePage(): JSX.Element | null {
           channels
         } = { ...gameInfo }
 
-        if (channels === undefined || install.channelName === undefined)
-          throw 'Cannot get channels'
-        const releaseMeta = channels[install.channelName].release_meta
+        const channelName = install.channelName ?? 'main'
 
-        const hpPlatforms = releaseMeta
-          ? (Object.keys(releaseMeta.platforms)[0] as AppPlatforms)
-          : 'Windows'
+        if (
+          runner === 'hyperplay' &&
+          (channels === undefined || !Object.hasOwn(channels, channelName))
+        )
+          throw 'Cannot get channels'
+        const releaseMeta = channels?.[channelName].release_meta
+
+        let hpPlatforms: AppPlatforms = 'windows_amd64'
+        if (releaseMeta) {
+          const releasePlatformKeys = Object.keys(
+            releaseMeta.platforms
+          ) as AppPlatforms[]
+
+          const releasePlatformToInstall = releasePlatformKeys.find(
+            (val) => val === install.platform
+          )
+
+          if (releasePlatformToInstall) hpPlatforms = releasePlatformToInstall
+          else if (releasePlatformKeys.length > 0)
+            hpPlatforms = releasePlatformKeys[0]
+        }
 
         const othersPlatforms =
           install.platform ||
@@ -313,6 +331,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
       return <ErrorComponent message={message} />
     }
 
+    let DLCs = gameInstallInfo?.game.owned_dlc ?? []
+    DLCs = DLCs.filter((dlc) => dlc.app_name !== null)
+
     const description =
       extraInfo?.about?.shortDescription ||
       extraInfo?.about?.description ||
@@ -396,6 +417,9 @@ export default React.memo(function GamePage(): JSX.Element | null {
                         ? () => setShowRequirements(true)
                         : undefined
                     }
+                    onShowDlcs={
+                      DLCs.length ? () => setShowDlcs(true) : undefined
+                    }
                   />
                 </div>
               </div>
@@ -405,18 +429,26 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 <div className="grid-container">
                   {!is_installed && !isSideloaded && (
                     <>
-                      <div className="hp-subtitle">
-                        {t('game.downloadSize', 'Download Size')}
-                      </div>
-                      <div className="col2-item italic">
-                        {downloadSize ?? '...'}
-                      </div>
-                      <div className="hp-subtitle">
-                        {t('game.installSize', 'Install Size')}
-                      </div>
-                      <div className="col2-item italic">
-                        {installSize ?? '...'}
-                      </div>
+                      {downloadSize !== 0 ? (
+                        <>
+                          <div className="hp-subtitle">
+                            {t('game.downloadSize', 'Download Size')}
+                          </div>
+                          <div className="col2-item italic">
+                            {downloadSize ?? '...'}
+                          </div>
+                        </>
+                      ) : null}
+                      {installSize !== 0 ? (
+                        <>
+                          <div className="hp-subtitle">
+                            {t('game.installSize', 'Install Size')}
+                          </div>
+                          <div className="col2-item italic">
+                            {installSize ?? '...'}
+                          </div>
+                        </>
+                      ) : null}
                     </>
                   )}
                   <div className="hp-subtitle">
@@ -456,14 +488,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
                           </div>
                         </>
                       )}
-                      {!isSideloaded && (
+                      {!isSideloaded && installSize ? (
                         <>
                           <div className="hp-subtitle">{t('info.size')}</div>
-                          <div className="col2-item italic">
-                            {installSize || '...'}
-                          </div>
+                          <div className="col2-item italic">{installSize}</div>
                         </>
-                      )}
+                      ) : null}
                       <div className="hp-subtitle">
                         {t('info.installedPlatform', 'Installed Platform')}:
                       </div>
@@ -620,6 +650,25 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 </DialogHeader>
                 <DialogContent>
                   <GameRequirements reqs={extraInfo?.reqs} />
+                </DialogContent>
+              </Dialog>
+            )}
+            {showDlcs && (
+              <Dialog showCloseButton onClose={() => setShowDlcs(false)}>
+                <DialogHeader onClose={() => setShowDlcs(false)}>
+                  <div>{t('game.dlcs', 'DLCs')}</div>
+                </DialogHeader>
+                <DialogContent>
+                  {gameInstallInfo ? (
+                    <DLCList
+                      dlcs={DLCs}
+                      runner={runner}
+                      mainAppInfo={gameInfo}
+                      onClose={() => setShowDlcs(false)}
+                    />
+                  ) : (
+                    <UpdateComponent inline />
+                  )}
                 </DialogContent>
               </Dialog>
             )}

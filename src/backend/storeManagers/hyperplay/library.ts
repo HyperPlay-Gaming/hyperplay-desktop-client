@@ -13,10 +13,11 @@ import {
   getGameInfoFromHpRelease,
   getHyperPlayReleaseMap,
   handleArchAndPlatform,
+  sanitizeVersion,
   refreshGameInfoFromHpRelease
 } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
-import { getValistListingApiUrl } from 'backend/constants'
+import { getValistListingApiUrl, qaToken } from 'backend/constants'
 
 export async function addGameToLibrary(projectId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -35,7 +36,10 @@ export async function addGameToLibrary(projectId: string) {
   }
 
   const listingUrl = getValistListingApiUrl(projectId)
-  const res = await axios.get<HyperPlayRelease>(listingUrl)
+
+  const getConfig =
+    qaToken !== '' ? { headers: { Authorization: `Bearer ${qaToken}` } } : {}
+  const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
 
   const data = res.data
   const gameInfo = getGameInfoFromHpRelease(data)
@@ -203,11 +207,12 @@ export async function listUpdateableGames(): Promise<string[]> {
         To continue to receive game updates, uninstall and reinstall this game: ${val.title}`)
       }
       if (
+        // games installed before 0.5.0 used gameInfo.version for install.version
+        // so for backwards compatibility we remove spaces and lower case channel release meta name here
         val.install.version !==
-          val.channels[val.install.channelName].release_meta.name
-            ?.toLowerCase()
-            .replaceAll(' ', '') ||
-        ''
+        sanitizeVersion(
+          val.channels[val.install.channelName].release_meta.name || ''
+        )
       ) {
         updateableGames.push(val.app_name)
       }

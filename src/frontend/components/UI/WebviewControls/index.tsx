@@ -5,14 +5,14 @@ import {
   Replay
 } from '@mui/icons-material'
 import cx from 'classnames'
+import { WebviewTag } from 'electron'
 import React, { SyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { WebviewType } from 'common/types'
 import SvgButton from '../SvgButton'
 import './index.css'
 
 interface WebviewControlsProps {
-  webview: WebviewType | null
+  webview: WebviewTag | null
   initURL: string
   openInBrowser: boolean
 }

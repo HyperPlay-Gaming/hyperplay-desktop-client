@@ -9,6 +9,7 @@ import { DialogContent } from '@mui/material'
 
 import classNames from 'classnames'
 import {
+  AvailablePlatforms,
   GameInfo,
   GameStatus,
   HyperPlayInstallInfo,
@@ -42,10 +43,10 @@ import React, {
   useState
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { AvailablePlatforms } from '../index'
 import { SDL_GAMES, SelectiveDownload } from '../selective_dl'
 import { configStore } from 'frontend/helpers/electronStores'
 import { Button } from '@hyperplay/ui'
+import DLCDownloadListing from './DLCDownloadListing'
 
 interface Props {
   backdropClick: () => void
@@ -136,7 +137,8 @@ export default function DownloadDialog({
     (game: GameStatus) => game.appName === appName
   )[0]
 
-  const [installDlcs, setInstallDlcs] = useState(false)
+  const [dlcsToInstall, setDlcsToInstall] = useState<string[]>([])
+  const [installAllDlcs, setInstallAllDlcs] = useState(false)
   const [selectedSdls, setSelectedSdls] = useState<{ [key: string]: boolean }>(
     {}
   )
@@ -182,7 +184,7 @@ export default function DownloadDialog({
   )
 
   function handleDlcs() {
-    setInstallDlcs(!installDlcs)
+    setInstallAllDlcs(!installAllDlcs)
   }
 
   async function handleInstall(path?: string) {
@@ -213,7 +215,7 @@ export default function DownloadDialog({
       progress: previousProgress,
       t,
       sdlList,
-      installDlcs,
+      installDlcs: runner === 'gog' ? installAllDlcs : dlcsToInstall,
       installLanguage,
       platformToInstall,
       showDialogModal: () => backdropClick(),
@@ -236,7 +238,6 @@ export default function DownloadDialog({
           platformToInstall,
           channelNameToInstall
         )
-        console.log('got install info = ', gameInstallInfo)
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 
@@ -309,13 +310,14 @@ export default function DownloadDialog({
     getSpace()
   }, [installPath, gameInstallInfo?.manifest?.disk_size])
 
-  const haveDLCs =
-    gameInstallInfo &&
-    gameInstallInfo?.game?.owned_dlc?.length &&
-    gameInstallInfo?.game?.owned_dlc?.length > 0
+  const haveDLCs: boolean =
+    gameInstallInfo?.game?.owned_dlc !== undefined &&
+    gameInstallInfo.game.owned_dlc.length > 0
+
   const DLCList = gameInstallInfo?.game?.owned_dlc
+  const gameDownloadSize = gameInstallInfo?.manifest?.download_size
   const downloadSize = () => {
-    if (gameInstallInfo?.manifest?.download_size) {
+    if (gameDownloadSize !== undefined && gameInstallInfo !== null) {
       if (previousProgress.folder === installPath) {
         const progress = 100 - getProgress(previousProgress)
         return size(
@@ -323,13 +325,13 @@ export default function DownloadDialog({
         )
       }
 
-      return size(Number(gameInstallInfo?.manifest?.download_size))
+      return size(Number(gameDownloadSize))
     }
     return ''
   }
 
   const installSize =
-    gameInstallInfo?.manifest?.disk_size &&
+    gameInstallInfo?.manifest?.disk_size !== undefined &&
     size(Number(gameInstallInfo?.manifest?.disk_size))
 
   const getLanguageName = useMemo(() => {
@@ -366,14 +368,21 @@ export default function DownloadDialog({
     return t('button.no-path-selected', 'No path selected')
   }
 
-  const readyToInstall =
-    installPath &&
-    gameInstallInfo?.manifest?.download_size &&
-    !gettingInstallInfo
+  const isWebGame = gameInstallInfo?.game['name'] === 'web'
+  const nativeGameIsReadyToInstall =
+    installPath && gameDownloadSize && !gettingInstallInfo
+
+  const readyToInstall = isWebGame || nativeGameIsReadyToInstall
 
   const showRemainingProgress =
     (runner === 'hyperplay' && previousProgress.percent) ||
     previousProgress.folder === installPath
+  const showDlcSelector =
+    runner === 'legendary' && DLCList && DLCList?.length > 0
+
+  const doneFetchingGameInfo = isWebGame || downloadSize()
+
+  const showInstallandDownloadSizes = !isWebGame
 
   return (
     <>
@@ -389,58 +398,62 @@ export default function DownloadDialog({
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
       <DialogContent>
-        <div className="InstallModal__sizes">
-          <div className="InstallModal__size">
-            <FontAwesomeIcon
-              className={classNames('InstallModal__sizeIcon', {
-                'fa-spin-pulse': !downloadSize()
-              })}
-              icon={downloadSize() ? faDownload : faSpinner}
-            />
-            {downloadSize() ? (
-              <>
-                <div className="InstallModal__sizeLabel">
-                  {t('game.downloadSize', 'Download Size')}:
-                </div>
-                <div className="InstallModal__sizeValue">{downloadSize()}</div>
-              </>
-            ) : (
-              `${t('game.getting-download-size', 'Geting download size')}...`
-            )}
-          </div>
-          <div className="InstallModal__size">
-            <FontAwesomeIcon
-              className={classNames('InstallModal__sizeIcon', {
-                'fa-spin-pulse': !downloadSize()
-              })}
-              icon={downloadSize() ? faHardDrive : faSpinner}
-            />
-            {downloadSize() ? (
-              <>
-                <div className="InstallModal__sizeLabel">
-                  {t('game.installSize', 'Install Size')}:
-                </div>
-                <div className="InstallModal__sizeValue">{installSize}</div>
-              </>
-            ) : (
-              `${t('game.getting-install-size', 'Geting install size')}...`
-            )}
-          </div>
-          {showRemainingProgress && (
+        {showInstallandDownloadSizes ? (
+          <div className="InstallModal__sizes">
             <div className="InstallModal__size">
               <FontAwesomeIcon
-                className="InstallModal__sizeIcon"
-                icon={faSpinner}
+                className={classNames('InstallModal__sizeIcon', {
+                  'fa-spin-pulse': !doneFetchingGameInfo
+                })}
+                icon={doneFetchingGameInfo ? faDownload : faSpinner}
               />
-              <div className="InstallModal__sizeLabel">
-                {t('status.totalDownloaded', 'Total Downloaded')}:
-              </div>
-              <div className="InstallModal__sizeValue">
-                {getProgress(previousProgress).toFixed(2)}%
-              </div>
+              {doneFetchingGameInfo ? (
+                <>
+                  <div className="InstallModal__sizeLabel">
+                    {t('game.downloadSize', 'Download Size')}:
+                  </div>
+                  <div className="InstallModal__sizeValue">
+                    {downloadSize()}
+                  </div>
+                </>
+              ) : (
+                `${t('game.getting-download-size', 'Getting download size')}...`
+              )}
             </div>
-          )}
-        </div>
+            <div className="InstallModal__size">
+              <FontAwesomeIcon
+                className={classNames('InstallModal__sizeIcon', {
+                  'fa-spin-pulse': !doneFetchingGameInfo
+                })}
+                icon={doneFetchingGameInfo ? faHardDrive : faSpinner}
+              />
+              {doneFetchingGameInfo ? (
+                <>
+                  <div className="InstallModal__sizeLabel">
+                    {t('game.installSize', 'Install Size')}:
+                  </div>
+                  <div className="InstallModal__sizeValue">{installSize}</div>
+                </>
+              ) : (
+                `${t('game.getting-install-size', 'Getting install size')}...`
+              )}
+            </div>
+            {showRemainingProgress && (
+              <div className="InstallModal__size">
+                <FontAwesomeIcon
+                  className="InstallModal__sizeIcon"
+                  icon={faSpinner}
+                />
+                <div className="InstallModal__sizeLabel">
+                  {t('status.totalDownloaded', 'Total Downloaded')}:
+                </div>
+                <div className="InstallModal__sizeValue">
+                  {getProgress(previousProgress).toFixed(2)}%
+                </div>
+              </div>
+            )}
+          </div>
+        ) : null}
         {installLanguages && installLanguages?.length > 1 && (
           <SelectField
             label={`${t('game.language', 'Language')}:`}
@@ -475,7 +488,7 @@ export default function DownloadDialog({
               .then((path) => setInstallPath(path || getDefaultInstallPath()))
           }
           afterInput={
-            gameInstallInfo?.manifest?.download_size ? (
+            gameDownloadSize ? (
               <span className="smallInputInfo">
                 {validPath && (
                   <>
@@ -521,11 +534,6 @@ export default function DownloadDialog({
           }
         />
         {children}
-        {haveDLCs || haveSDL ? (
-          <div className="InstallModal__sectionHeader">
-            {t('sdl.title', 'Select components to Install')}:
-          </div>
-        ) : null}
         {haveSDL ? (
           <div className="InstallModal__sdls">
             {sdls.map((sdl: SelectiveDownload, idx: number) => (
@@ -545,22 +553,28 @@ export default function DownloadDialog({
             ))}
           </div>
         ) : null}
-        {haveDLCs ? (
+        {showDlcSelector && (
+          <DLCDownloadListing
+            DLCList={DLCList}
+            dlcsToInstall={dlcsToInstall}
+            setDlcsToInstall={setDlcsToInstall}
+          />
+        )}
+        {haveDLCs && runner === 'gog' && (
           <div className="InstallModal__dlcs">
             <label className={classNames('InstallModal__toggle toggleWrapper')}>
               <ToggleSwitch
                 htmlId="dlcs"
-                value={installDlcs}
+                value={installAllDlcs}
                 handleChange={() => handleDlcs()}
                 title={t('dlc.installDlcs', 'Install all DLCs')}
               />
-              <span>{t('dlc.installDlcs', 'Install all DLCs')}:</span>
             </label>
             <div className="InstallModal__dlcsList">
               {DLCList?.map(({ title }) => title).join(', ')}
             </div>
           </div>
-        ) : null}
+        )}
       </DialogContent>
       <DialogFooter>
         <Button

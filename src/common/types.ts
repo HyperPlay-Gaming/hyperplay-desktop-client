@@ -1,5 +1,5 @@
 import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
-import { LegendaryInstallPlatform } from './types/legendary'
+import { LegendaryInstallPlatform, GameMetadataInner } from './types/legendary'
 import { IpcRendererEvent } from 'electron'
 import { ChildProcess } from 'child_process'
 import { HowLongToBeatEntry } from 'howlongtobeat'
@@ -11,6 +11,7 @@ import {
   PlatformsMetaInterface
 } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
+import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 export type {
   Listing as HyperPlayRelease,
@@ -175,6 +176,7 @@ export interface GameInfo {
   //data schema version
   v?: string
   account_name?: string
+  dlcList?: GameMetadataInner[]
   //key is channel_id, value is last access code used
   accessCodesCache?: Record<string, string>
 }
@@ -242,6 +244,7 @@ export interface GameStatus {
 }
 
 export type GlobalConfigVersion = 'auto' | 'v0'
+
 export interface InstallProgress {
   bytes: string
   eta?: string
@@ -251,6 +254,7 @@ export interface InstallProgress {
   diskSpeed?: number
   file?: string
 }
+
 export interface InstalledInfo {
   executable: string
   install_path: string
@@ -279,20 +283,20 @@ export type UserInfo = {
   displayName: string
   user: string
 }
+
 export interface WineInstallation {
   bin: string
   name: string
-  type: 'wine' | 'proton' | 'crossover'
+  type: 'wine' | 'proton' | 'crossover' | 'toolkit'
   lib?: string
   lib32?: string
-  wineboot?: string
   wineserver?: string
 }
 
 export interface InstallArgs {
   path: string
-  platformToInstall: InstallPlatform | AppPlatforms
-  installDlcs?: boolean
+  platformToInstall: InstallPlatform
+  installDlcs?: Array<string> | boolean
   sdlList?: string[]
   installLanguage?: string
   channelName?: string
@@ -564,21 +568,6 @@ interface GamepadActionArgsWithoutMetadata {
   metadata?: undefined
 }
 
-type ElWebview = {
-  canGoBack: () => boolean
-  canGoForward: () => boolean
-  goBack: () => void
-  goForward: () => void
-  reload: () => void
-  isLoading: () => boolean
-  getURL: () => string
-  copy: () => string
-  selectAll: () => void
-  findInPage: (text: string | RegExp) => void
-}
-
-export type WebviewType = HTMLWebViewElement & ElWebview
-
 export type InstallPlatform =
   | LegendaryInstallPlatform
   | GogInstallPlatform
@@ -600,6 +589,7 @@ export interface Tools {
 }
 
 export type DMStatus = 'done' | 'error' | 'abort' | 'paused'
+
 export interface DMQueueElement {
   type: 'update' | 'install'
   params: InstallParams
@@ -625,6 +615,7 @@ export type WineCommandArgs = {
   installFolderName?: string
   options?: CallRunnerOptions
   startFolder?: string
+  gameInstallPath?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
 }
 
@@ -666,8 +657,7 @@ export interface DiskSpaceData {
 }
 
 export interface ToolArgs {
-  winePrefix: string
-  winePath: string
+  appName: string
   action: 'backup' | 'restore'
 }
 
@@ -677,6 +667,7 @@ export interface GameScoreInfo {
   score: string
   urlid: string
 }
+
 export interface PCGamingWikiInfo {
   steamID: string
   howLongToBeatID: string
@@ -814,3 +805,10 @@ export type JsonRpcCallback = (
 ) => unknown
 
 export type DownloadManagerState = 'idle' | 'running' | 'paused' | 'stopped'
+
+export type AvailablePlatforms = {
+  name: string
+  available: boolean
+  value: string
+  icon: IconDefinition
+}[]

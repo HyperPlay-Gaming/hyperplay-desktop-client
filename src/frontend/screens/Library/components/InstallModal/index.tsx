@@ -4,13 +4,13 @@ import {
   faWindows,
   faChrome
 } from '@fortawesome/free-brands-svg-icons'
-import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 
 import React, { useContext, useEffect, useState } from 'react'
 
 import ContextProvider from 'frontend/state/ContextProvider'
 import {
   AppPlatforms,
+  AvailablePlatforms,
   GameInfo,
   InstallPlatform,
   Runner,
@@ -23,10 +23,9 @@ import './index.css'
 import DownloadDialog from './DownloadDialog'
 import SideloadDialog from './SideloadDialog'
 import WineSelector from './WineSelector'
-import { SelectField } from 'frontend/components/UI'
-import { useTranslation } from 'react-i18next'
 import { getPlatformName } from 'frontend/helpers'
-import { translateChannelName } from 'frontend/screens/Library/constants'
+import PlatformSelection from 'frontend/components/UI/PlatformSelection'
+import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
 import TextInputField from 'frontend/components/UI/TextInputField'
 
 type Props = {
@@ -36,13 +35,6 @@ type Props = {
   gameInfo?: GameInfo | null
 }
 
-export type AvailablePlatforms = {
-  name: string
-  available: boolean
-  value: string
-  icon: IconDefinition
-}[]
-
 export default React.memo(function InstallModal({
   appName,
   backdropClick,
@@ -50,7 +42,6 @@ export default React.memo(function InstallModal({
   gameInfo = null
 }: Props) {
   const { platform } = useContext(ContextProvider)
-  const { t } = useTranslation('gamepage')
 
   const [winePrefix, setWinePrefix] = useState('...')
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
@@ -58,8 +49,10 @@ export default React.memo(function InstallModal({
   const [crossoverBottle, setCrossoverBottle] = useState('')
   const [accessCode, setAccessCode] = useState('')
 
+  const numberOfChannels =
+    (gameInfo?.channels && Object.keys(gameInfo?.channels).length) ?? 0
   const initChannelName =
-    gameInfo?.channels && Object.keys(gameInfo?.channels).length > 0
+    gameInfo?.channels && numberOfChannels > 0
       ? Object.keys(gameInfo?.channels)[0]
       : 'main'
   const [channelNameToInstall, setChannelNameToInstall] =
@@ -160,65 +153,9 @@ export default React.memo(function InstallModal({
       setPlatformToInstall(availablePlatforms[0].value as InstallPlatform)
   }, [availablePlatforms])
 
-  function platformSelection() {
-    if (availablePlatforms.length <= 1) {
-      return null
-    }
-
-    const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
-    return (
-      <SelectField
-        label={`${t('game.platform', 'Select Platform')}:`}
-        htmlId="platformPick"
-        value={platformToInstall}
-        disabled={disabledPlatformSelection}
-        onChange={(e) =>
-          setPlatformToInstall(e.target.value as InstallPlatform)
-        }
-      >
-        {availablePlatforms.map((p, i) => (
-          <option value={p.value} key={i}>
-            {p.name}
-          </option>
-        ))}
-      </SelectField>
-    )
-  }
-
-  function channelNameSelection() {
-    return (
-      <>
-        <SelectField
-          label={`${t('game.selectChannelName', 'Select Channel Name')}:`}
-          htmlId="channelNameSelect"
-          value={channelNameToInstall}
-          onChange={(e) => setChannelNameToInstall(e.target.value)}
-        >
-          {gameInfo?.channels !== undefined
-            ? Object.keys(gameInfo.channels).map((p, i) => {
-                if (!gameInfo.channels) return <div>error</div>
-                const channel_i = gameInfo.channels[p]
-                return (
-                  <option value={p} key={i}>
-                    {translateChannelName(channel_i.channel_name, t)}
-                  </option>
-                )
-              })
-            : null}
-        </SelectField>
-        {selectedChannel?.license_config.access_codes ? (
-          <TextInputField
-            placeholder={'Enter access code'}
-            value={accessCode}
-            onChange={(ev) => setAccessCode(ev.target.value)}
-            htmlId="access_code_input"
-          ></TextInputField>
-        ) : null}
-      </>
-    )
-  }
-
   const showDownloadDialog = !isSideload && gameInfo
+
+  const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
 
   return (
     <div className="InstallModal">
@@ -241,8 +178,28 @@ export default React.memo(function InstallModal({
             channelNameToInstall={channelNameToInstall}
             accessCode={accessCode}
           >
-            {platformSelection()}
-            {runner === 'hyperplay' ? channelNameSelection() : null}
+            <PlatformSelection
+              disabled={disabledPlatformSelection}
+              availablePlatforms={availablePlatforms}
+              platformToInstall={platformToInstall}
+              setPlatformToInstall={setPlatformToInstall}
+            />
+            {runner === 'hyperplay' && numberOfChannels > 1 ? (
+              <ChannelNameSelection
+                channelNameToInstall={channelNameToInstall}
+                setChannelNameToInstall={setChannelNameToInstall}
+                gameInfo={gameInfo}
+              />
+            ) : null}
+            {runner === 'hyperplay' &&
+            selectedChannel?.license_config.access_codes ? (
+              <TextInputField
+                placeholder={'Enter access code'}
+                value={accessCode}
+                onChange={(ev) => setAccessCode(ev.target.value)}
+                htmlId="access_code_input"
+              ></TextInputField>
+            ) : null}
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}
@@ -267,7 +224,12 @@ export default React.memo(function InstallModal({
             appName={appName}
             crossoverBottle={crossoverBottle}
           >
-            {platformSelection()}
+            <PlatformSelection
+              disabled={disabledPlatformSelection}
+              availablePlatforms={availablePlatforms}
+              platformToInstall={platformToInstall}
+              setPlatformToInstall={setPlatformToInstall}
+            />
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}

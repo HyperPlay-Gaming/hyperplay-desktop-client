@@ -161,3 +161,16 @@ export const handleNavToEpicAndOpen = (
 export const copyWalletConnectBaseURIToClipboard = () => {
   ipcRenderer.send('copyWalletConnectBaseURIToClipboard')
 }
+
+export const setQaToken = (token: string) => {
+  ipcRenderer.send('setQaToken', token)
+}
+
+export const handleShowHiddenQaAuthTextBox = (
+  onCall: () => void
+): (() => void) => {
+  ipcRenderer.on('showHiddenQaAuthTextBox', onCall)
+  return () => {
+    ipcRenderer.removeListener('showHiddenQaAuthTextBox', onCall)
+  }
+}

@@ -66,6 +66,7 @@ import { Catalog, Product } from 'common/types/epic-graphql'
 import { sendFrontendMessage } from '../../main_window'
 import { RemoveArgs } from 'common/types/game_manager'
 import { logFileLocation } from 'backend/storeManagers/storeManagerCommon/games'
+import { getWineFlags } from 'backend/utils/compatibility_layers'
 
 /**
  * Alias for `LegendaryLibrary.listUpdateableGames`
@@ -548,7 +549,7 @@ function getSdlList(sdlList: Array<string>) {
  */
 export async function install(
   appName: string,
-  { path, installDlcs, sdlList, platformToInstall }: InstallArgs
+  { path, sdlList, platformToInstall }: InstallArgs
 ): Promise<{
   status: 'done' | 'error' | 'abort'
   error?: string
@@ -557,7 +558,6 @@ export async function install(
   const info = await getInstallInfo(appName, platformToInstall)
   const workers = maxWorkers ? ['--max-workers', `${maxWorkers}`] : []
   const noHttps = downloadNoHttps ? ['--no-https'] : []
-  const withDlcs = installDlcs ? '--with-dlcs' : '--skip-dlcs'
   const installSdl = sdlList?.length ? getSdlList(sdlList) : ['--skip-sdl']
 
   const logPath = join(gamesConfigPath, appName + '.log')
@@ -569,7 +569,7 @@ export async function install(
     platformToInstall,
     '--base-path',
     path,
-    withDlcs,
+    '--skip-dlcs',
     ...installSdl,
     ...workers,
     ...noHttps,
@@ -814,7 +814,7 @@ export async function launch(
   let commandEnv = isWindows
     ? process.env
     : { ...process.env, ...setupEnvVars(gameSettings) }
-  const wineFlag: string[] = []
+  let wineFlag: string[] = []
   if (!isNative(appName)) {
     // -> We're using Wine/Proton on Linux or CX on Mac
     const {
@@ -850,11 +850,7 @@ export async function launch(
         ? wineExec.replaceAll("'", '')
         : wineExec
 
-    wineFlag.push(
-      ...(wineType === 'proton'
-        ? ['--no-wine', '--wrapper', `'${wineBin}' run`]
-        : ['--wine', wineBin])
-    )
+    wineFlag = [...getWineFlags(wineBin, gameSettings, wineType)]
   }
 
   // Log any launch information configured in Legendary's config.ini

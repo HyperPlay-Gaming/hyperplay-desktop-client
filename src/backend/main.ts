@@ -102,7 +102,8 @@ import {
   createNecessaryFolders,
   fixAsarPath,
   twitterLink,
-  eventsToCloseMetaMaskPopupOn
+  eventsToCloseMetaMaskPopupOn,
+  setQaToken
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -835,20 +836,12 @@ ipcMain.handle(
   'getInstallInfo',
   async (event, appName, runner, installPlatform, channelNameToInstall) => {
     try {
-      console.log(
-        'getting install infro for',
-        appName,
-        runner,
-        installPlatform,
-        channelNameToInstall
-      )
       const info = await libraryManagerMap[runner].getInstallInfo(
         appName,
         installPlatform,
         'en-US',
         channelNameToInstall
       )
-      console.log('install info = ', info)
       if (info === undefined) return null
       return info
     } catch (error) {
@@ -939,12 +932,20 @@ ipcMain.handle('requestSettings', async (event, appName) => {
   return mapOtherSettings(config)
 })
 
-ipcMain.handle('toggleDXVK', async (event, { winePrefix, winePath, action }) =>
-  DXVK.installRemove(winePrefix, winePath, 'dxvk', action)
+ipcMain.handle('toggleDXVK', async (event, { appName, action }) =>
+  GameConfig.get(appName)
+    .getSettings()
+    .then(async (gameSettings) =>
+      DXVK.installRemove(gameSettings, 'dxvk', action)
+    )
 )
 
-ipcMain.on('toggleVKD3D', (event, { winePrefix, winePath, action }) => {
-  DXVK.installRemove(winePrefix, winePath, 'vkd3d', action)
+ipcMain.on('toggleVKD3D', (event, { appName, action }) => {
+  GameConfig.get(appName)
+    .getSettings()
+    .then((gameSettings) => {
+      DXVK.installRemove(gameSettings, 'vkd3d', action)
+    })
 })
 
 ipcMain.handle('writeConfig', (event, { appName, config }) => {
@@ -1890,4 +1891,8 @@ function watchLibraryChanges() {
 ipcMain.on('openGameInEpicStore', async (_e, url) => {
   if (url.startsWith('https://store.epicgames.com/'))
     sendFrontendMessage('navToEpicAndOpenGame', url)
+})
+
+ipcMain.on('setQaToken', (_e, qaToken) => {
+  setQaToken(qaToken)
 })

@@ -1,0 +1,26 @@
+.tabsList {
+  display: flex;
+  align-items: stretch;
+  margin-bottom: var(--space-xl);
+
+  > * {
+    margin: var(--space-xs) 0px;
+  }
+}
+
+.sortByDropdown {
+  margin-left: var(--space-lg);
+  margin-right: var(--space-lg);
+
+  > div > button {
+    width: 220px;
+  }
+}
+
+.gridListButton {
+  padding: calc(0.75 * var(--space-sm));
+}
+
+.dropdownButton {
+  width: 340px;
+}

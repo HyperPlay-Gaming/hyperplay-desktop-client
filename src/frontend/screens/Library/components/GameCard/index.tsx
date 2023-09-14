@@ -327,6 +327,7 @@ const GameCard = ({
         <UninstallModal
           appName={appName}
           runner={runner}
+          isDlc={Boolean(gameInfo.install.is_dlc)}
           onClose={() => setShowUninstallModal(false)}
         />
       )}

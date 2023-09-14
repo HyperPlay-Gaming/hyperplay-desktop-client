@@ -63,6 +63,7 @@ interface HyperPlaySyncIPCFunctions {
   enableOnEvents: (topic: string) => void
   addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
+  setQaToken: (qaToken: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -215,10 +216,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   getPlatform: () => NodeJS.Platform
   showUpdateSetting: () => boolean
   getLatestReleases: () => Promise<Release[]>
-  getGameInfo: (
-    appName: string,
-    runner: Runner
-  ) => Promise<GameInfo | SideloadGame | null>
+  getGameInfo: (appName: string, runner: Runner) => Promise<GameInfo | null>
   getExtraInfo: (appName: string, runner: Runner) => Promise<ExtraInfo | null>
   getGameSettings: (
     appName: string,

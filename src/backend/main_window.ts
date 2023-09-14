@@ -26,6 +26,9 @@ export const sendFrontendMessage = (message: string, ...payload: unknown[]) => {
   return true
 }
 
+const hiddenPhrase = 'superhyper123'
+let hiddenPhraseCurrentIndex = 0
+
 // creates the mainWindow based on the configuration
 export const createMainWindow = () => {
   let windowProps: Electron.Rectangle = {
@@ -75,6 +78,19 @@ export const createMainWindow = () => {
       // sandbox: false,
       preload: path.join(__dirname, 'preload.js'),
       webSecurity: app.isPackaged
+    }
+  })
+
+  mainWindow.webContents?.on('before-input-event', (ev, input) => {
+    if (
+      input.type === 'keyDown' &&
+      input.key === hiddenPhrase[hiddenPhraseCurrentIndex]
+    ) {
+      ++hiddenPhraseCurrentIndex
+      if (hiddenPhraseCurrentIndex === hiddenPhrase.length) {
+        hiddenPhraseCurrentIndex = 0
+        mainWindow?.webContents.send('showHiddenQaAuthTextBox')
+      }
     }
   })
 

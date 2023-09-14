@@ -12,6 +12,12 @@ export interface MetricsOptOut {
   sensitiveProperties?: never
 }
 
+export interface MetricsErrorCorrection {
+  event: 'Metrics Error Correction'
+  properties?: never
+  sensitiveProperties?: never
+}
+
 export interface GameStoreConnectionStarted {
   event: 'Game Store Connection Started'
   properties?: {
@@ -213,6 +219,7 @@ export interface HyperPlayLaunched {
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
+  | MetricsErrorCorrection
   | GameStoreConnectionStarted
   | OnboardingStarted
   | OnboardingSkipped

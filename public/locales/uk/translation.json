@@ -699,7 +699,8 @@
                         "details": "Імпортуючи, установка і налаштування MetaMask будуть імпортовані в HyperPlay.",
                         "title": "Виберіть браузер для імпорту",
                         "createNewWallet": "Створити новий гаманець розширення MM",
-                        "useRecoveryPhrase": "Доступ за допомогою секретної фрази відновлення"
+                        "useRecoveryPhrase": "Доступ за допомогою секретної фрази відновлення",
+                        "cantFindProfile": "Не можете знайти свій профіль браузера?"
                     },
                     "scan": {
                         "updateWarning": "Виникли проблеми? Переконайтеся, що MetaMask оновлено.",
@@ -752,7 +753,8 @@
         "copyUrl": "Копіювати URL",
         "currentWallet": "Поточний гаманець",
         "viewFullscreen": "На весь екран",
-        "publicAlpha": "Публічна Альфа"
+        "publicAlpha": "Публічна Альфа",
+        "otp": "Одноразовий пароль"
     },
     "hyperplayOverlay": {
         "description": {
@@ -814,5 +816,22 @@
     },
     "accounts": "облікові записи",
     "ALL": "ВСІ",
-    "exit_game": "Вийти з гри"
+    "exit_game": "Вийти з гри",
+    "gameRelease": {
+        "demo": "Демо",
+        "beta": "Бета",
+        "main": "Головний",
+        "prototype": "Прототип",
+        "alpha": "Альфа"
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Ви підключені до HyperPlay за допомогою зовнішнього гаманця.\n\nДля затвердження транзакцій в оверлеї HyperPlay вам потрібно буде підключитися до HyperPlay з розширенням MetaMask."
+    },
+    "dlc": {
+        "size": "Розмір",
+        "title": "Назва",
+        "actions": "Дії",
+        "installDlcs": "Встановити всі DLC",
+        "noDlcFound": "DLC не знайдено"
+    }
 }
