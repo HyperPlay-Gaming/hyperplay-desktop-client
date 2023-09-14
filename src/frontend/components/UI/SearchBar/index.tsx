@@ -20,6 +20,12 @@ function fixFilter(text: string) {
   return text.replaceAll(regex, '')
 }
 
+const RUNNER_TO_STORE = {
+  legendary: 'Epic',
+  gog: 'GOG',
+  hyperplay: 'HyperPlay',
+  sideloaded: 'Other'
+}
 export default React.memo(function SearchBar() {
   const {
     handleSearch,
@@ -35,21 +41,27 @@ export default React.memo(function SearchBar() {
   const input = useRef<HTMLInputElement>(null)
 
   const list = useMemo(() => {
-    const library = new Set(
-      [
-        ...epic.library,
-        ...gog.library,
-        ...sideloadedLibrary,
-        ...hyperPlayLibrary
-      ]
-        .filter(Boolean)
-        .map((g) => g.title)
-        .sort()
-    )
-    return [...library].filter((i) =>
-      new RegExp(fixFilter(filterText), 'i').test(i)
-    )
-  }, [epic.library, gog.library, filterText])
+    return [
+      ...(epic.library ?? []),
+      ...(gog.library ?? []),
+      ...(sideloadedLibrary ?? []),
+      ...(hyperPlayLibrary ?? [])
+    ]
+      .filter(Boolean)
+      .filter((el) => {
+        return (
+          !el.install.is_dlc &&
+          new RegExp(fixFilter(filterText), 'i').test(el.title)
+        )
+      })
+      .sort((g1, g2) => (g1.title < g2.title ? -1 : 1))
+  }, [
+    epic.library,
+    gog.library,
+    filterText,
+    sideloadedLibrary,
+    hyperPlayLibrary
+  ])
 
   // we have to use an event listener instead of the react
   // onChange callback so it works with the virtual keyboard
@@ -76,12 +88,10 @@ export default React.memo(function SearchBar() {
     }
   }, [input])
 
-  const handleClick = (title: string) => {
+  const handleClick = (game: GameInfo) => {
     handleSearch('')
     if (input.current) {
       input.current.value = ''
-
-      const game: GameInfo | undefined = getGameInfoByAppTitle(title)
 
       if (game !== undefined) {
         navigate(`/gamepage/${game.runner}/${game.app_name}`, {
@@ -89,21 +99,6 @@ export default React.memo(function SearchBar() {
         })
       }
     }
-  }
-
-  const getGameInfoByAppTitle = (title: string) => {
-    return (
-      getGameInfoByAppTitleAndLibrary(epic.library, title) ||
-      getGameInfoByAppTitleAndLibrary(gog.library, title) ||
-      getGameInfoByAppTitleAndLibrary(sideloadedLibrary, title)
-    )
-  }
-
-  const getGameInfoByAppTitleAndLibrary = (
-    library: GameInfo[],
-    title: string
-  ) => {
-    return library.filter((g: GameInfo) => g.title === title).at(0)
   }
 
   return (
@@ -128,12 +123,10 @@ export default React.memo(function SearchBar() {
         <>
           <ul className="autoComplete body-sm">
             {list.length > 0 &&
-              list.map((title, i) => (
-                <li
-                  onClick={(e) => handleClick(e.currentTarget.innerText)}
-                  key={i}
-                >
-                  {title}
+              list.map((game) => (
+                <li onClick={() => handleClick(game)} key={game.app_name}>
+                  {game.title}{' '}
+                  <span>({RUNNER_TO_STORE[game.runner] || game.runner})</span>
                 </li>
               ))}
           </ul>
