@@ -128,6 +128,11 @@ export interface StoreStructure {
   providerMetadata: {
     currentWeb3Provider: PROVIDERS
   }
+  hpExtensionStore: {
+    metamask: {
+      installedVersion: string
+    }
+  }
 }
 
 export type StoreOptions<T extends Record<string, unknown>> = Store.Options<T>

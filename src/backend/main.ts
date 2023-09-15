@@ -122,6 +122,7 @@ import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
+import * as MetaMaskUpdater from './hyperplay-extension-helper/metamaskUpdater'
 import * as ProxyServer from './hyperplay-proxy-server/proxy'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
@@ -358,6 +359,7 @@ if (!gotTheLock) {
     const openOverlayAcceleratorMac = 'Option+X'
     globalShortcut.register(openOverlayAcceleratorMac, toggleOverlayHandler)
 
+    await MetaMaskUpdater.updateMetaMaskToLatest()
     initExtension()
 
     initOnlineMonitor()
