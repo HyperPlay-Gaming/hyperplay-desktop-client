@@ -142,7 +142,8 @@
             "title": "Warnung"
         },
         "wineprefix": "Wine Prefix Ordner auswählen",
-        "yes": "JA"
+        "yes": "JA",
+        "dontShowAgain": "Nicht mehr anzeigen"
     },
     "button": {
         "cancel": "Abbrechen",
