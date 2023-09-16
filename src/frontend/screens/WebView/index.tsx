@@ -67,8 +67,6 @@ function WebView() {
   const trueAsStr = 'true' as unknown as boolean | undefined
   const { runner } = useParams() as { runner: Runner }
 
-  console.log(amazonLoginData)
-
   const urls: { [pathname: string]: string } = {
     '/hyperplaystore': hyperplayStore,
     '/epicstore': epicStore,
@@ -118,7 +116,6 @@ function WebView() {
   }, [])
 
   useEffect(() => {
-    console.log(pathname)
     if (pathname !== '/loginweb/nile') return
     console.log('Loading amazon login data')
 
@@ -129,7 +126,6 @@ function WebView() {
     amazon
       .getLoginData()
       .then((data) => {
-        console.log('Amazon login data loaded', { data })
         setAmazonLoginData(data)
         setLoading({
           ...loading,
