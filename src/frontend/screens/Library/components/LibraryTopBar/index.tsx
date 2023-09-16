@@ -33,10 +33,13 @@ export function LibraryTopBar({
   otherFiltersData
 }: LibraryTopBarInterface): JSX.Element {
   const { t } = useTranslation()
-  const { epic, gog, handleCategory, category } = useContext(ContextProvider)
+  const { epic, gog, amazon, handleCategory, category } =
+    useContext(ContextProvider)
 
   const isGOGLoggedin = gog.username
   const isEpicLoggedin = epic.username
+  const isAmazonLoggedin = amazon.username
+
   return (
     <Tabs
       onTabChange={(val: Category) => handleCategory(val)}
@@ -57,6 +60,11 @@ export function LibraryTopBar({
         {isGOGLoggedin && (
           <Tabs.Tab value="gog">
             <div className="menu">GOG</div>
+          </Tabs.Tab>
+        )}
+        {isAmazonLoggedin && (
+          <Tabs.Tab value="amazon">
+            <div className="menu">Amazon</div>
           </Tabs.Tab>
         )}
         <Tabs.Tab value="sideload">
