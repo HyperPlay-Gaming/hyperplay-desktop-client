@@ -29,6 +29,7 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import Auth from './screens/Auth'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -64,6 +65,7 @@ function App() {
               element={<WebView key="hyperplaystore" />}
             />
             <Route path="epicstore" element={<WebView key="epicstore" />} />
+            <Route path="auth" element={<Auth />} />
             <Route path="gogstore" element={<WebView key="gogstore" />} />
             <Route path="wiki" element={<WebView key="wiki" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
