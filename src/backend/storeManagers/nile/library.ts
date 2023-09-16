@@ -166,6 +166,10 @@ export async function listUpdateableGames(): Promise<string[]> {
   )
   deleteAbortController(abortID)
 
+  if (!output) {
+    return []
+  }
+
   const updates: string[] = JSON.parse(output)
   if (updates.length) {
     logInfo(['Found', `${updates.length}`, 'games to update'], LogPrefix.Nile)
