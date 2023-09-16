@@ -556,7 +556,7 @@ function getNileBin(): { dir: string; bin: string } {
   )
 }
 
-function getFormattedOsName(): string {
+export function getFormattedOsName(): string {
   switch (process.platform) {
     case 'linux':
       return 'Linux'
