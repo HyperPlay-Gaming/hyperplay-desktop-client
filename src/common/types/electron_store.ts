@@ -65,6 +65,7 @@ export interface StoreStructure {
   gogConfigStore: {
     userData: UserData
     credentials: GOGLoginData
+    isLoggedIn: boolean
   }
   nileConfigStore: {
     userData?: NileUserData

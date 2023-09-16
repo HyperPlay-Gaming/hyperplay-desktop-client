@@ -3,7 +3,6 @@ import { removeSpecialcharacters } from '../utils'
 import { WikiInfo } from 'common/types'
 import { logError, logInfo, LogPrefix } from '../logger/logger'
 import { getInfoFromAppleGamingWiki } from './applegamingwiki/utils'
-import { getHowLongToBeat } from './howlongtobeat/utils'
 import { getInfoFromPCGamingWiki } from './pcgamingwiki/utils'
 import { isMac } from '../constants'
 

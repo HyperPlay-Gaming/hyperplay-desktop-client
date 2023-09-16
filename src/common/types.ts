@@ -325,6 +325,7 @@ export interface GOGLoginData {
   refresh_token: string
   user_id: string
   loginTime: number
+  error?: boolean
 }
 
 export interface GOGImportData {
@@ -585,7 +586,6 @@ export type WineCommandArgs = {
   installFolderName?: string
   options?: CallRunnerOptions
   startFolder?: string
-  gameInstallPath?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
 }
 
