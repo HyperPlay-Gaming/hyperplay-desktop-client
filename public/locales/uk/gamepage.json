@@ -18,90 +18,103 @@
             "title": "Перевірити і відновити"
         },
         "runexe": {
-            "title": "Select EXE to Run"
+            "title": "Виберіть EXE для запуску"
         },
         "select": {
-            "button": "Select"
+            "button": "Вибрати"
         },
         "sideload": {
-            "exe": "Select Executable"
+            "exe": "Виберіть виконуваний файл"
         },
         "stopInstall": {
             "keepInstalling": "Продовжити встановлення",
             "message": "Бажаєте ЗАЛИШИТИ завантажені файли?",
-            "title": "Зупинити встановлення"
+            "title": "Хочете скасувати завантаження?",
+            "keepFilesMessage": "Позначте тут, якщо ви хочете зберегти завантажені файли після скасування."
         },
         "uninstall": {
-            "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
+            "checkbox": "Видалити префікс: {{prefix}} {{newLine}} Примітка: Це не може бути скасовано, а також видалить файли збереження.",
             "message": "Бажаєте видалити цю гру?",
-            "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Видалити"
+            "settingcheckbox": "Видалити налаштування та журнал{{newLine}} Примітка: Це не можна скасувати. Будь-які змінені налаштування будуть забуті, а журнал буде видалено.",
+            "title": "Видалити",
+            "prefix_warning": "Префікс Wine для цієї гри встановлено за замовчуванням. Якщо ви дійсно хочете його видалити, вам доведеться зробити це вручну.",
+            "dlc": "Видалити це DLC?"
         },
         "update": {
             "message": "Доступне оновлення до цієї гри. Оновити зараз?",
             "title": "Гра потребує оновлення"
         },
         "wineprefix": "Оберіть теку префікса Wine",
-        "yes": "ТАК"
+        "yes": "ТАК",
+        "yesCancel": "Так, скасувати"
     },
     "button": {
         "add_to_favourites": "Додати до вподобань",
         "cancel": "Призупинити/Скасувати",
         "continue": "Продовжити завантаження",
-        "finish": "Finish",
-        "force_update": "Force Update if Available",
-        "force-innstall": "Force Install",
+        "finish": "Завершити",
+        "force_update": "Примусове оновлення, якщо доступне",
+        "force-innstall": "Примусове встановлення",
         "hide_game": "Приховати гру",
         "import": "Імпортувати гру",
         "install": "Встановити",
-        "no-path-selected": "No path selected",
+        "no-path-selected": "Шлях не вибрано",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Видалити з черги",
+            "continue": "Продовжити завантаження",
+            "cancel": "Скасувати завантаження"
         },
         "remove_from_favourites": "Видалити зі вподобань",
-        "remove_from_recent": "Remove From Recent",
-        "run-exe-first": "Run Installer First",
-        "running-setup": "Running Setup",
+        "remove_from_recent": "Видалити з Останніх",
+        "run-exe-first": "Спочатку запустіть встановлювач",
+        "running-setup": "Запуск встановлення",
         "sideload": {
-            "edit": "Edit App/Game"
+            "edit": "Редагувати застосунок/гру"
         },
         "unhide_game": "Показати гру",
         "uninstall": "Видалити",
-        "update": "Оновити"
+        "update": "Оновити",
+        "details": "Подробиці",
+        "remove_from_library": "Вилучити",
+        "favorites": "Улюблене",
+        "unfavorites": "Видалити з улюбленого"
     },
-    "cloud_save_unsupported": "Unsupported",
+    "cloud_save_unsupported": "Не підтримується",
     "disabled": "Вимкнено",
     "dlc": {
         "installDlcs": "Встановити всі DLC"
     },
-    "enabled": "Увімкнено",
+    "enabled": "Ввімкнено",
     "game": {
         "downloadSize": "Розмір завантаження",
         "firstPlayed": "Вперше зіграно",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Отримання розміру завантаження",
+        "getting-install-size": "Отримання розміру встановлення",
         "installSize": "Розмір встановлення",
         "language": "Мова",
         "lastPlayed": "Востаннє зіграно",
         "neverPlayed": "Ніколи",
         "platform": "Оберіть версію платформи для встановлення",
         "requirements": "Системні вимоги",
-        "totalPlayed": "Зіграно часу"
+        "totalPlayed": "Зіграно часу",
+        "dlcs": "DLCs",
+        "selectChannelName": "Виберіть назву каналу"
     },
     "gamecard": {
         "moving": "Переміщую",
         "repairing": "Відновлюю"
     },
     "generic": {
-        "error": "Невідома помилка"
+        "error": "Невідома помилка",
+        "noDescription": "Немає опису"
     },
-    "hours": "Hours",
+    "hours": "Годин",
     "how-long-to-beat": {
-        "completionist": "Completionist",
-        "main-plus-extras": "Main + Extras",
-        "main-story": "Main Story"
+        "completionist": "Завершальний етап",
+        "main-plus-extras": "Головна + Додаткова",
+        "main-story": "Основна історія"
     },
-    "howLongToBeat": "How Long To Beat",
+    "howLongToBeat": "Скільки часу потрібно",
     "info": {
         "canRunOffline": "Чи потрібно бути в мережі",
         "installedPlatform": "Встановлена версія для ОС",
@@ -109,7 +122,7 @@
         "size": "Розмір",
         "syncsaves": "Синхронізувати збереження",
         "version": "Версія",
-        "web3-supported": "Has Web3 features"
+        "web3-supported": "Має функції Web3"
     },
     "install": {
         "disk-space-left": "Доступний простір",
@@ -136,33 +149,34 @@
         "options": "Параметри запуску..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
+        "epic": "Ви не ввійшли в обліковий запис Epic у HyperPlay. Не використовуйте сторінку магазину для входу, натомість натисніть наступну кнопку:",
+        "gog": "Ви не ввійшли за допомогою облікового запису GOG у HyperPlay. Не використовуйте сторінку магазину для входу, замість цього натисніть наступну кнопку:",
         "login": "Log in",
-        "title": "You are NOT logged in"
+        "title": "Ви НЕ ввійшли в систему"
     },
     "report_problem": "Повідомити про проблему запуску цієї гри",
     "sdl": {
         "title": "Оберіть компоненти для встановлення"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Використовувати стандартні налаштувань сумісності",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
-            "title": "Title"
+            "title": "Назва"
         },
         "info": {
-            "broser": "BrowserURL",
-            "exe": "Select Executable",
-            "image": "App Image",
+            "broser": "URL браузера",
+            "exe": "Виберіть виконуваний файл",
+            "image": "Зображення застосунку",
             "supports-web3": "This Game has Web3 Features",
-            "title": "Game/App Title"
+            "title": "Назва гри/застосунку"
         },
         "placeholder": {
-            "image": "Paste an Image URL here",
-            "title": "Add a title to your Game/App",
-            "url": "Paste the Game URL here"
+            "image": "Вставте URL-адресу зображення сюди",
+            "title": "Додайте назву до своєї гри/застосунку",
+            "url": "Вставте сюди URL-адресу гри"
         }
     },
     "specs": {
@@ -171,34 +185,49 @@
     },
     "status": {
         "clickToUpdate": "Клацніть для оновлення",
-        "gameNotAvailable": "Game not available",
+        "gameNotAvailable": "Гра недоступна",
         "hasUpdates": "Доступна нова версія!",
         "installed": "Встановлено",
         "installing": "Встановлення",
         "moving": "Переміщую встановлення, будь ласка зачекайте",
         "notinstalled": "Гра не встановлена",
-        "notSupported": "Not supported",
-        "notSupportedGame": "Not Supported",
+        "notSupported": "Не підтримується",
+        "notSupportedGame": "Не підтримується",
         "processing": "Обробка файлів, будь ласка, зачекайте",
-        "queued": "Queued",
+        "queued": "У черзі",
         "reparing": "Відновлюю гру, будь ласка зачекайте",
-        "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
+        "this-game-uses-third-party": "Ця гра використовує сторонній лаунчер і поки що не підтримується",
         "totalDownloaded": "Всього завантажено",
-        "uninstalling": "Uninstalling",
-        "updating": "Оновлюю гру"
+        "uninstalling": "Видалення",
+        "updating": "Оновлюю гру",
+        "syncingSaves": "Синхронізація збережень",
+        "paused": "Призупинено",
+        "preparing": "Підготовка завантаження, зачекайте",
+        "moving-files": "Переміщення файлу '{{file}}': {{percent}} ",
+        "playing": "Запущено",
+        "downloading": "Завантаження",
+        "extracting": "Витягування"
     },
     "submenu": {
         "addShortcut": "Додати ярлик",
-        "addToSteam": "Add to Steam",
+        "addToSteam": "Додати в Steam",
         "change": "Змінити шлях встановлення",
-        "disableEosOverlay": "Disable Epic Overlay",
-        "enableEosOverlay": "Enable Epic Overlay",
+        "disableEosOverlay": "Вимкнути оверлей Epic",
+        "enableEosOverlay": "Ввімкнути оверлей Epic",
         "move": "Перенести гру",
         "protondb": "Перевірити сумісність",
-        "removeFromSteam": "Remove from Steam",
-        "removeShortcut": "Remove shortcuts",
+        "removeFromSteam": "Видалити зі Steam",
+        "removeShortcut": "Видалити ярлики",
         "settings": "Налаштування",
         "store": "Сторінка в крамниці",
-        "verify": "Перевірити і відновити"
+        "verify": "Перевірити і відновити",
+        "extraInfo": "Додаткова інформація"
+    },
+    "hyperplay": {
+        "gamecard": {
+            "paused": "Призупинено",
+            "extracting": "Витягування...",
+            "installing": "Завантаження..."
+        }
     }
 }
