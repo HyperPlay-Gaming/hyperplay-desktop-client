@@ -271,7 +271,8 @@
         "wine": {
             "part1": "HyperPlay шукає версії Wine, Proton, і CrossOver в цих теках:",
             "part2": "Для інших місць, скористайтесь символьною ланкою на одну з цих тек"
-        }
+        },
+        "dxvkfpslimit": "Встановлює обмеження частоти кадрів для ігор DXVK"
     },
     "info": {
         "hyperplay": {
@@ -427,7 +428,8 @@
         "alt-legendary-bin": "Використання вбудованого двійкового до Legendary...",
         "custom_themes_path": "Виберіть шлях для пошуку власних файлів CSS",
         "egs-prefix": "Префікс де встановлено EGS",
-        "prefered_language": "2-значний код (приклад: \"en\" або \"uk\")"
+        "prefered_language": "2-значний код (приклад: \"en\" або \"uk\")",
+        "dxvkfpsvalue": "Позитивне ціле значення (наприклад, 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -558,7 +560,9 @@
         "wineprefix": "Тека префікса Wine",
         "wineversion": "Версія Wine",
         "ignoreGameUpdates": "Ігнорувати оновлення гри",
-        "autoUpdateGames": "Автоматичне оновлення ігор"
+        "autoUpdateGames": "Автоматичне оновлення ігор",
+        "dxvkfpslimit": "Обмеження к/с (DX9, 10 та 11)",
+        "showMetalOverlay": "Показати статистику оверлею"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -833,5 +837,8 @@
         "actions": "Дії",
         "installDlcs": "Встановити всі DLC",
         "noDlcFound": "DLC не знайдено"
+    },
+    "dlcs": {
+        "label": "Виберіть DLC для встановлення:"
     }
 }
