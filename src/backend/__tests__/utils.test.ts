@@ -11,7 +11,8 @@ import {
   readFileSync,
   rmSync,
   rmdirSync,
-  renameSync
+  renameSync,
+  readlinkSync
 } from 'graceful-fs'
 
 jest.mock('electron')
@@ -282,6 +283,14 @@ describe('backend/utils.ts', () => {
       const testMessage = readFileSync(testTxtFilePath).toString()
       console.log('unzipped file contents: ', testMessage)
       expect(testMessage).toEqual('this is a test message')
+
+      const symlinkPath = path.resolve(destFilePath, './subfolder/test.txt')
+      console.log('checking symlink path ', symlinkPath)
+      expect(existsSync(symlinkPath)).toBe(true)
+
+      const symlinkMessage = readlinkSync(symlinkPath).toString()
+      console.log('symlink contents: ', symlinkMessage)
+      expect(symlinkMessage).toEqual('../test.txt')
 
       //extract deletes the zip file used to extract async so we wait and then check
       await utils.wait(100)
