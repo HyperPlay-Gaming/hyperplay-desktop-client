@@ -12,7 +12,8 @@ import {
   rmSync,
   rmdirSync,
   renameSync,
-  readlinkSync
+  readlinkSync,
+  readdirSync
 } from 'graceful-fs'
 
 jest.mock('electron')
@@ -271,20 +272,9 @@ describe('backend/utils.ts', () => {
       destFilePath = path.resolve('./src/backend/__mocks__/test')
     })
 
-    afterEach(async () => {
-      const extractPromise = utils.extractZip(testCopyZipPath, destFilePath)
-      await extractPromise
-      expect(extractPromise).resolves
-
-      const testTxtFilePath = path.resolve(destFilePath, './test.txt')
-      console.log('checking dest file path ', testTxtFilePath)
-      expect(existsSync(testTxtFilePath)).toBe(true)
-
-      const testMessage = readFileSync(testTxtFilePath).toString()
-      console.log('unzipped file contents: ', testMessage)
-      expect(testMessage).toEqual('this is a test message')
-
-      const symlinkPath = path.resolve(destFilePath, './subfolder/test.txt')
+    function checkSymlinks() {
+      const subfolderPath = path.resolve(destFilePath, './test/subfolder')
+      const symlinkPath = path.join(subfolderPath, './test.txt')
       console.log('checking symlink path ', symlinkPath)
       expect(existsSync(symlinkPath)).toBe(true)
 
@@ -292,13 +282,35 @@ describe('backend/utils.ts', () => {
       console.log('symlink contents: ', symlinkMessage)
       expect(symlinkMessage).toEqual('../test.txt')
 
+      const files = readdirSync(subfolderPath, {
+        encoding: 'utf8',
+        withFileTypes: true
+      })
+      expect(files.length).toEqual(1)
+      expect(files[0].isSymbolicLink()).toBe(true)
+    }
+
+    afterEach(async () => {
+      const extractPromise = utils.extractZip(testCopyZipPath, destFilePath)
+      await extractPromise
+      expect(extractPromise).resolves
+
+      const testTxtFilePath = path.resolve(destFilePath, './test/test.txt')
+      console.log('checking dest file path ', testTxtFilePath)
+      expect(existsSync(testTxtFilePath)).toBe(true)
+
+      const testMessage = readFileSync(testTxtFilePath).toString()
+      console.log('unzipped file contents: ', testMessage)
+      expect(testMessage).toEqual('this is a test message')
+
+      checkSymlinks()
+
       //extract deletes the zip file used to extract async so we wait and then check
       await utils.wait(100)
       expect(existsSync(testCopyZipPath)).toBe(false)
 
       //clean up test
-      rmSync(testTxtFilePath)
-      rmdirSync(destFilePath)
+      rmSync(destFilePath, { force: true, recursive: true })
       expect(existsSync(testTxtFilePath)).toBe(false)
       expect(existsSync(destFilePath)).toBe(false)
     })
