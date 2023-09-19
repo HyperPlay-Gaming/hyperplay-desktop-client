@@ -279,7 +279,9 @@ describe('backend/utils.ts', () => {
 
       const symlinkMessage = readlinkSync(symlinkPath).toString()
       console.log('symlink contents: ', symlinkMessage)
-      expect(symlinkMessage === '../test.txt' || symlinkMessage === '..\\test.txt').toBeTruthy()
+      expect(
+        symlinkMessage === '../test.txt' || symlinkMessage === '..\\test.txt'
+      ).toBeTruthy()
 
       const files = readdirSync(subfolderPath, {
         encoding: 'utf8',
