@@ -41,7 +41,7 @@ import {
   createWriteStream,
   symlink,
   chmod,
-  rm,
+  rm
 } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
@@ -1369,7 +1369,10 @@ function removeFolder(path: string, folderName: string) {
   return
 }
 
-export async function extractZip(zipFile: string, destinationPath: string): Promise<void> {
+export async function extractZip(
+  zipFile: string,
+  destinationPath: string
+): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     yauzl.open(zipFile, { lazyEntries: true }, (err, zipfile) => {
       if (err) {
@@ -1379,9 +1382,10 @@ export async function extractZip(zipFile: string, destinationPath: string): Prom
 
       zipfile.readEntry()
       zipfile.on('entry', (entry) => {
-        const isSymlink = (entry.externalFileAttributes >> 16 & 0xF000) === 0xA000
+        const isSymlink =
+          ((entry.externalFileAttributes >> 16) & 0xf000) === 0xa000
         const outputPath = join(destinationPath, entry.fileName)
-        const originalMode = (entry.externalFileAttributes >> 16) & 0xFFFF
+        const originalMode = (entry.externalFileAttributes >> 16) & 0xffff
 
         if (/\/$/.test(entry.fileName)) {
           mkdirSync(outputPath, { mode: originalMode, recursive: true })
@@ -1397,7 +1401,7 @@ export async function extractZip(zipFile: string, destinationPath: string): Prom
             let linkTarget = ''
             readStream.on('data', (chunk) => (linkTarget += chunk))
             readStream.on('end', () => {
-              symlink(linkTarget, outputPath, err => {
+              symlink(linkTarget, outputPath, (err) => {
                 if (err) {
                   reject(err)
                   return
