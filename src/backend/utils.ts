@@ -1383,7 +1383,7 @@ export async function extractZip(
       zipfile.readEntry()
       zipfile.on('entry', (entry) => {
         const isSymlink =
-          ((entry.externalFileAttributes >> 16) & 0xf000) === 0xa000
+          ((entry.externalFileAttributes >> 16) & 0o170000) === 0o120000
         const outputPath = join(destinationPath, entry.fileName)
 
         if (/\/$/.test(entry.fileName)) {
