@@ -55,7 +55,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "__MSG_appDescription__",
+  "description": "other build from git id: 40d47ae8",
   "icons": {
     "16": "images/icon-16.png",
     "19": "images/icon-19.png",
@@ -67,7 +67,7 @@
     "512": "images/icon-512.png"
   },
   "manifest_version": 2,
-  "name": "__MSG_appName__",
+  "name": "MetaMask Main lavamoat snow",
   "permissions": [
     "storage",
     "unlimitedStorage",
@@ -82,7 +82,7 @@
     "notifications"
   ],
   "short_name": "__MSG_appName__",
-  "content_security_policy": "frame-ancestors 'none'; script-src 'self'; object-src 'self'",
+  "content_security_policy": "frame-ancestors 'none'; script-src 'self' 'wasm-unsafe-eval'; object-src 'self'",
   "externally_connectable": {
     "matches": [
       "https://metamask.io/*"
@@ -92,5 +92,5 @@
     ]
   },
   "minimum_chrome_version": "80",
-  "version": "10.28.2"
+  "version": "11.0.0"
 }
