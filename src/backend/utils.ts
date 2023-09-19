@@ -40,7 +40,6 @@ import {
   mkdirSync,
   createWriteStream,
   symlink,
-  chmod,
   rm
 } from 'graceful-fs'
 import { promisify } from 'util'
