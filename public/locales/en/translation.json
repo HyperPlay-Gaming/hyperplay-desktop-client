@@ -379,6 +379,7 @@
             "FAILED": "Custom network canceled",
             "INITIATED": "Custom network request"
         },
+        "closeOverlay": "Press Alt or Option + X to close the overlay",
         "description": {
             "CONFIRMED": "The transaction was successfully confirmed!",
             "FAILED": "The transaction was canceled or not submitted, please try again",

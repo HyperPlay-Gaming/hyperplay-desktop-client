@@ -119,6 +119,7 @@ const BrowserExtensionManager = function ({
       {showOverlay ? (
         <>
           <div className={BrowserExtensionManagerStyles.bgFilter}></div>
+          <div className={`${BrowserExtensionManagerStyles.closeOverlayText} title`}>{t('hyperplayOverlay.closeOverlay', 'Press Alt or Option + X to close the overlay')}</div>
           {showExitGameButton ? (
             <Button
               onClick={async () => window.api.kill(appName, runner)}
