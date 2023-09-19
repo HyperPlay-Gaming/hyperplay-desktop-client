@@ -12,7 +12,7 @@ jobs:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
     concurrency:
-      group: test-${{ github.ref }}
+      group: test-${{ github.ref }}-${{ matrix.os }}
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
