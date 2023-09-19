@@ -277,7 +277,7 @@
     "@playwright/test": "^1.32.1",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.1.1",
+    "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.1.1",
     "@types/chrome": "^0.0.231",
     "@types/classnames": "^2.3.1",

@@ -58,6 +58,8 @@ export default React.memo(function Library(): JSX.Element {
   } = useContext(ContextProvider)
   const { t } = useTranslation()
 
+  //only show epic or gog if the user is logged in with epic.username && or gog.username && check
+
   const filters: DropdownItemType[] = [
     {
       text: t('library.sortByStatus', 'Sort by Status'),

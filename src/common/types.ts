@@ -511,6 +511,12 @@ export type HiddenGame = RecentGame
 
 export type FavouriteGame = HiddenGame
 
+export interface GameCollection {
+  list: HiddenGame[]
+  add: (appNameToAdd: string, appTitle: string) => void
+  remove: (appNameToRemove: string) => void
+}
+
 export type RefreshOptions = {
   checkForUpdates?: boolean
   fullRefresh?: boolean

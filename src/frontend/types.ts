@@ -19,7 +19,6 @@ export type Platform = 'win' | 'mac' | 'linux' | 'browser'
 export interface ContextType {
   category: Category
   error: boolean
-  filterText: string
   filterPlatforms: Platform[]
   gameUpdates: string[]
   isRTL: boolean
@@ -39,22 +38,6 @@ export interface ContextType {
   refreshWineVersionInfo: (fetch: boolean) => void
   refreshing: boolean
   refreshingInTheBackground: boolean
-  hiddenGames: {
-    list: HiddenGame[]
-    add: (appNameToHide: string, appTitle: string) => void
-    remove: (appNameToUnhide: string) => void
-  }
-  favouriteGames: {
-    list: HiddenGame[]
-    add: (appNameToAdd: string, appTitle: string) => void
-    remove: (appNameToRemove: string) => void
-  }
-  showHidden: boolean
-  setShowHidden: (value: boolean) => void
-  showFavourites: boolean
-  setShowFavourites: (value: boolean) => void
-  showNonAvailable: boolean
-  setShowNonAvailable: (value: boolean) => void
   theme: string
   setTheme: (themeName: string) => void
   zoomPercent: number

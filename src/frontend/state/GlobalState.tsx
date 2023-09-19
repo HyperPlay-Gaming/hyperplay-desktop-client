@@ -100,7 +100,6 @@ interface StateProps {
     appName: string
     runner: Runner
   }
-  sideloadedLibrary: GameInfo[]
   settingsModalOpen: {
     value: boolean
     type: 'settings' | 'log'
@@ -112,29 +111,13 @@ interface StateProps {
 }
 
 class GlobalState extends PureComponent<Props> {
-  loadGOGLibrary = (): Array<GameInfo> => {
-    const games = gogLibraryStore.get('games', [])
-
-    const installedGames = [...gogInstalledGamesStore.get('installed', [])]
-    for (const igame in games) {
-      for (const installedGame of installedGames) {
-        if (installedGame.appName === games[igame].app_name) {
-          games[igame].install = installedGame
-          games[igame].is_installed = true
-        }
-      }
-    }
-
-    return games
-  }
+  loadGOGLibrary = (): Array<GameInfo> => 
   state: StateProps = {
     category: (storage.getItem('category') as Category) || 'legendary',
     epic: {
-      library: libraryStore.get('library', []),
       username: configStore.get_nodefault('userInfo.displayName')
     },
     gog: {
-      library: this.loadGOGLibrary(),
       username: gogConfigStore.get_nodefault('userData.username')
     },
     wineVersions: wineDownloaderInfoStore.get('wine-releases', []),
@@ -179,8 +162,6 @@ class GlobalState extends PureComponent<Props> {
       runner: 'legendary',
       gameInfo: null
     },
-    sideloadedLibrary: sideloadLibrary.get('games', []),
-    hyperPlayLibrary: hyperPlayLibraryStore.get('games', []),
     dialogModalOptions: { showDialog: false },
     externalLinkDialogOptions: { showDialog: false },
     settingsModalOpen: { value: false, type: 'settings', gameInfo: undefined },
@@ -189,20 +170,6 @@ class GlobalState extends PureComponent<Props> {
       'metricsOptInStatus',
       MetricsOptInStatus.undecided
     ) as MetricsOptInStatus
-  }
-
-  watchLibraryChanges() {
-    window.api.onLibraryChange((_e, runner, newLibrary) => {
-      if (runner === 'legendary') {
-        this.setState({ epic: { ...this.state.epic, library: newLibrary } })
-      } else if (runner === 'gog') {
-        this.setState({ gog: { ...this.state.gog, library: newLibrary } })
-      } else if (runner === 'sideload') {
-        this.setState({ sideloadedLibrary: newLibrary })
-      } else if (runner === 'hyperplay') {
-        this.setState({ hyperPlayLibrary: newLibrary })
-      }
-    })
   }
 
   setLanguage = (newLanguage: string) => {
@@ -466,7 +433,6 @@ class GlobalState extends PureComponent<Props> {
       gogLibrary = this.loadGOGLibrary()
     }
 
-    const updatedSideload = sideloadLibrary.get('games', [])
     const updatedHyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
     const hiddenGames = configStore.get('games.hidden', [])
 
@@ -482,7 +448,6 @@ class GlobalState extends PureComponent<Props> {
       gameUpdates: updates,
       refreshing: false,
       refreshingInTheBackground: true,
-      sideloadedLibrary: updatedSideload,
       hyperPlayLibrary: updatedHyperPlayLibrary,
       hiddenGames
     })
