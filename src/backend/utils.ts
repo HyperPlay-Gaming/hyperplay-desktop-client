@@ -1385,10 +1385,9 @@ export async function extractZip(
         const isSymlink =
           ((entry.externalFileAttributes >> 16) & 0xf000) === 0xa000
         const outputPath = join(destinationPath, entry.fileName)
-        const originalMode = (entry.externalFileAttributes >> 16) & 0xffff
 
         if (/\/$/.test(entry.fileName)) {
-          mkdirSync(outputPath, { mode: originalMode, recursive: true })
+          mkdirSync(outputPath, { recursive: true })
           zipfile.readEntry()
         } else if (isSymlink) {
           rm(outputPath, console.log)
@@ -1420,15 +1419,8 @@ export async function extractZip(
 
             const writeStream = createWriteStream(outputPath)
             readStream.pipe(writeStream)
-
             writeStream.on('close', () => {
-              chmod(outputPath, originalMode, (err) => {
-                if (err) {
-                  reject(err)
-                  return
-                }
-                zipfile.readEntry()
-              })
+              zipfile.readEntry()
             })
           })
         }
