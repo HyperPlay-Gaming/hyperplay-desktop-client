@@ -598,7 +598,6 @@ async function runWineCommand({
     }
 
     if (options?.logFile && existsSync(options.logFile)) {
-      writeFileSync(options.logFile, '')
       appendFileSync(
         options.logFile,
         `Wine Command: WINEPREFIX=${winePrefix} ${bin} ${commandParts.join(
