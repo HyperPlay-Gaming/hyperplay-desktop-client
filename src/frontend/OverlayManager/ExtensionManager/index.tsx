@@ -21,13 +21,15 @@ interface BrowserExtensionManagerProps {
   runner: Runner
   showExtension?: boolean
   showExitGameButton?: boolean
+  showHintText?: boolean
 }
 
 const BrowserExtensionManager = function ({
   appName,
   runner,
   showExtension = true,
-  showExitGameButton = true
+  showExitGameButton = true,
+  showHintText = true
 }: BrowserExtensionManagerProps) {
   const { platform } = useContext(ContextProvider)
   const isMac = platform === 'darwin'
@@ -125,15 +127,17 @@ const BrowserExtensionManager = function ({
           <div
             className={`${BrowserExtensionManagerStyles.closeOverlayText} title`}
           >
-            {isMac
-              ? t(
-                  'hyperplayOverlay.mac.closeOverlay',
-                  'Press Option + X to close the overlay'
-                )
-              : t(
-                  'hyperplayOverlay.standard.closeOverlay',
-                  'Press Alt + X to close the overlay'
-                )}
+            {showHintText
+              ? isMac
+                ? t(
+                    'hyperplayOverlay.mac.closeOverlay',
+                    'Press Option + X to close the overlay'
+                  )
+                : t(
+                    'hyperplayOverlay.standard.closeOverlay',
+                    'Press Alt + X to close the overlay'
+                  )
+              : null}
           </div>
           {showExitGameButton ? (
             <Button
