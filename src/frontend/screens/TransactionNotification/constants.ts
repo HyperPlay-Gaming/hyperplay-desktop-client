@@ -116,15 +116,10 @@ export const EXTENSION_NOTIFICATION: EXTENSION_NOTIFICATION_TYPE = {
   TITLE: () =>
     t('hyperplayOverlay.extensionNotification.TITLE', 'Transaction requested'),
   DESCRIPTION: (isMac: boolean) => {
-    return isMac
-      ? t(
-          'hyperplayOverlay.mac.closeOverlay',
-          'Press Option + X to close the overlay'
-        )
-      : t(
-          'hyperplayOverlay.standard.closeOverlay',
-          'Press Alt + X to close the overlay'
-        )
+    return t('hyperplayOverlay.extensionNotification.DESCRIPTION', {
+      defaultValue: 'Press {{overlayKeyMod}} + X to see this transaction',
+      overlayKeyMod: isMac ? 'Option' : 'Alt'
+    })
   },
 
   STATUS: 'pending'

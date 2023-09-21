@@ -128,15 +128,11 @@ const BrowserExtensionManager = function ({
             className={`${BrowserExtensionManagerStyles.closeOverlayText} title`}
           >
             {showHintText
-              ? isMac
-                ? t(
-                    'hyperplayOverlay.mac.closeOverlay',
-                    'Press Option + X to close the overlay'
-                  )
-                : t(
-                    'hyperplayOverlay.standard.closeOverlay',
-                    'Press Alt + X to close the overlay'
-                  )
+              ? t('hyperplayOverlay.closeOverlay', {
+                  defaultValue:
+                    'Press {{overlayKeyMod}} + X to close the overlay',
+                  overlayKeyMod: isMac ? 'Option' : 'Alt'
+                })
               : null}
           </div>
           {showExitGameButton ? (
