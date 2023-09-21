@@ -43,3 +43,11 @@
   right: 0;
   z-index: 2;
 }
+
+.closeOverlayText {
+  position: absolute;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}

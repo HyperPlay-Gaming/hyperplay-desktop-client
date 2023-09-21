@@ -379,6 +379,7 @@
             "FAILED": "Custom network canceled",
             "INITIATED": "Custom network request"
         },
+        "closeOverlay": "Press {{overlayKeyMod}} + X to close the overlay",
         "description": {
             "CONFIRMED": "The transaction was successfully confirmed!",
             "FAILED": "The transaction was canceled or not submitted, please try again",
@@ -386,11 +387,11 @@
             "PENDING": "Waiting for blockchain confirmation. We'll let you know when it's confirmed"
         },
         "extensionNotification": {
-            "DESCRIPTION": "Press Alt or Option + X to see this transaction",
+            "DESCRIPTION": "Press {{overlayKeyMod}} + X to see this transaction",
             "TITLE": "Transaction requested"
         },
         "greeting": {
-            "description": "HyperPlay Overlay is ready! Press Alt + X to show or hide it.",
+            "description": "HyperPlay Overlay is ready! Press {{overlayKeyMod}} + X to show or hide it.",
             "title": "HyperPlay Overlay"
         },
         "signatureRequest": {

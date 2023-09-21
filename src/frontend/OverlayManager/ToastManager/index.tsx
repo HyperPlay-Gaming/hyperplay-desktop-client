@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import transactionStore from 'frontend/store/TransactionStore'
 import { TransactionState } from 'frontend/store/types'
 import { TransactionToast } from '@hyperplay/ui'
@@ -10,6 +10,7 @@ import {
 } from 'frontend/screens/TransactionNotification/constants'
 import { observer } from 'mobx-react-lite'
 import { t } from 'i18next'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 interface BrowserToastManagerProps {
   showCloseButton?: boolean
@@ -17,6 +18,8 @@ interface BrowserToastManagerProps {
 
 const BrowserToastManager = function (props: BrowserToastManagerProps) {
   const [showInitialToast, setShowInitialToast] = useState(true)
+  const { platform } = useContext(ContextProvider)
+  const isMac = platform === 'darwin'
 
   useEffect(() => {
     setTimeout(() => {
@@ -30,10 +33,11 @@ const BrowserToastManager = function (props: BrowserToastManagerProps) {
         <TransactionToast
           status={'success'}
           title={t('hyperplayOverlay.greeting.title', 'HyperPlay Overlay')}
-          subtext={t(
-            'hyperplayOverlay.greeting.description',
-            'HyperPlay Overlay is ready! Press Alt + X to show or hide it.'
-          )}
+          subtext={t('hyperplayOverlay.greeting.description', {
+            defaultValue:
+              'HyperPlay Overlay is ready! Press {{overlayKeyMod}} + X to show or hide it.',
+            overlayKeyMod: isMac ? 'Option' : 'Alt'
+          })}
           onClick={() => setShowInitialToast(false)}
           showCloseButton={props.showCloseButton}
         />
