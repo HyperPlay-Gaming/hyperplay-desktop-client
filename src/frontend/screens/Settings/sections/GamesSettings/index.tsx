@@ -69,6 +69,9 @@ export default function GamesSettings({ useDetails = true }: Props) {
     }
   }, [])
 
+  const isSettingsPage = !gameInfo
+  const showCrossPlatformOptions = (isSettingsPage && !isWin) || (!isSettingsPage && !nativeGame)
+
   return (
     <>
       {isDefault && (
@@ -81,7 +84,7 @@ export default function GamesSettings({ useDetails = true }: Props) {
         </p>
       )}
 
-      {!nativeGame && (
+      {showCrossPlatformOptions && (
         <>
           <Collapsible
             isOpen
@@ -115,18 +118,18 @@ export default function GamesSettings({ useDetails = true }: Props) {
         isOpen={nativeGame}
         isCollapsible={useDetails}
         summary={
-          nativeGame
-            ? t('settings.navbar.advanced', 'Advanced')
-            : t('settings.navbar.other', 'Other')
+          showCrossPlatformOptions
+            ? t('settings.navbar.other', 'Other')
+            : t('settings.navbar.advanced', 'Advanced')
         }
       >
         <AlternativeExe />
 
         <ShowFPS />
 
-        {!nativeGame && <EnableDXVKFpsLimit />}
+        {showCrossPlatformOptions && <EnableDXVKFpsLimit />}
 
-        {!isWin && !nativeGame && (
+        {showCrossPlatformOptions && (
           <>
             <EnableEsync />
 
