@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import BrowserExtensionManagerStyles from './index.module.scss'
 import { Button } from '@hyperplay/ui'
 import { Runner } from 'common/types'
 import { useTranslation } from 'react-i18next'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -28,6 +29,8 @@ const BrowserExtensionManager = function ({
   showExtension = true,
   showExitGameButton = true
 }: BrowserExtensionManagerProps) {
+  const { platform } = useContext(ContextProvider)
+  const isMac = platform === 'darwin'
   const [showOverlay, setShowOverlay] = useState(false)
   const [showMmNotificationPage, setShowMmNotificationPage] = useState(false)
   const [extensionId, setExtensionId] = useState('')
@@ -122,10 +125,15 @@ const BrowserExtensionManager = function ({
           <div
             className={`${BrowserExtensionManagerStyles.closeOverlayText} title`}
           >
-            {t(
-              'hyperplayOverlay.closeOverlay',
-              'Press Alt or Option + X to close the overlay'
-            )}
+            {isMac
+              ? t(
+                  'hyperplayOverlay.mac.closeOverlay',
+                  'Press Option + X to close the overlay'
+                )
+              : t(
+                  'hyperplayOverlay.standard.closeOverlay',
+                  'Press Alt + X to close the overlay'
+                )}
           </div>
           {showExitGameButton ? (
             <Button

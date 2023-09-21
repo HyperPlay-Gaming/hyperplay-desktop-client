@@ -108,17 +108,24 @@ export const TxnStateToStatusMap: TxnStateToStatusMapType = {
 
 interface EXTENSION_NOTIFICATION_TYPE {
   TITLE: () => string
-  DESCRIPTION: () => string
+  DESCRIPTION: (isMac: boolean) => string
   STATUS: statusType
 }
 
 export const EXTENSION_NOTIFICATION: EXTENSION_NOTIFICATION_TYPE = {
   TITLE: () =>
     t('hyperplayOverlay.extensionNotification.TITLE', 'Transaction requested'),
-  DESCRIPTION: () =>
-    t(
-      'hyperplayOverlay.extensionNotification.DESCRIPTION',
-      'Press Alt + X to see this transaction'
-    ),
+  DESCRIPTION: (isMac: boolean) => {
+    return isMac
+      ? t(
+          'hyperplayOverlay.mac.closeOverlay',
+          'Press Option + X to close the overlay'
+        )
+      : t(
+          'hyperplayOverlay.standard.closeOverlay',
+          'Press Alt + X to close the overlay'
+        )
+  },
+
   STATUS: 'pending'
 }
