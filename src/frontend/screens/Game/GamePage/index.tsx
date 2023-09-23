@@ -61,8 +61,10 @@ import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Button } from '@hyperplay/ui'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import DLCList from 'frontend/components/UI/DLCList'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
 
-export default React.memo(function GamePage(): JSX.Element | null {
+export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
     state: { fromDM: boolean; gameInfo: GameInfo }
@@ -150,7 +152,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       setExtraInfo(await window.api.getExtraInfo(appName, runner))
     }
     updateGameInfo()
-  }, [status, gog.library, epic.library, isMoving])
+  }, [status, libraryState.gogLibrary, libraryState.epicLibrary, isMoving])
 
   useEffect(() => {
     const updateConfig = async () => {
@@ -246,7 +248,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       }
     }
     updateConfig()
-  }, [status, epic.library, gog.library, gameInfo, isSettingsModalOpen])
+  }, [status, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen])
 
   function handleUpdate() {
     if (gameInfo.runner !== 'sideload')

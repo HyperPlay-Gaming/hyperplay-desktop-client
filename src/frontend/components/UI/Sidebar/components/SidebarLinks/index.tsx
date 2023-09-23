@@ -7,8 +7,10 @@ import './index.css'
 import QuitButton from '../QuitButton'
 import { SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY } from 'frontend/components/UI/ExternalLinkDialog'
 import { Images } from '@hyperplay/ui'
+import libraryState from 'frontend/state/libraryState'
+import { observer } from 'mobx-react-lite'
 
-export default function SidebarLinks() {
+export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
 
   const {
@@ -31,8 +33,8 @@ export default function SidebarLinks() {
     localStorage.setItem('scrollPosition', '0')
 
     const shouldRefresh =
-      (epic.username && !epic.library.length) ||
-      (gog.username && !gog.library.length)
+      (epic.username && !libraryState.epicLibrary.length) ||
+      (gog.username && !libraryState.gogLibrary.length)
     if (shouldRefresh) {
       return refreshLibrary({ runInBackground: true })
     }
@@ -150,4 +152,4 @@ export default function SidebarLinks() {
       </div>
     </>
   )
-}
+})

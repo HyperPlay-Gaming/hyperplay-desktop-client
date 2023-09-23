@@ -3,13 +3,19 @@ import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import FormControl from 'frontend/components/UI/FormControl'
 import ContextProvider from 'frontend/state/ContextProvider'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
+import { Category } from 'frontend/types'
 
-export default React.memo(function StoreFilter() {
-  const { category, handleCategory, gog, epic } = useContext(ContextProvider)
+export default observer(function StoreFilter() {
+  const { gog, epic } = useContext(ContextProvider)
   const { t } = useTranslation()
 
   const isGOGLoggedin = gog.username
   const isEpicLoggedin = epic.username
+  const category = libraryState.category
+  const handleCategory = (category: Category) =>
+    (libraryState.category = category)
 
   return (
     <div className="storeFilter">
@@ -17,7 +23,7 @@ export default React.memo(function StoreFilter() {
         <button
           onClick={() => handleCategory('all')}
           className={classNames('FormControl__button', {
-            active: category === 'all'
+            active: libraryState.category === 'all'
           })}
           title={`${t('header.store', 'Filter Store')}: ${t('All')}`}
         >

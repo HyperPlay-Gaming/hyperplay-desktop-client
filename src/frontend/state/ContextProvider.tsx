@@ -4,26 +4,17 @@ import { ContextType } from 'frontend/types'
 import { MetricsOptInStatus } from 'common/types'
 
 const initialContext: ContextType = {
-  category: 'all',
   epic: {
-    library: [],
     login: async () => Promise.resolve(''),
     logout: async () => Promise.resolve()
   },
   gog: {
-    library: [],
     login: async () => Promise.resolve(''),
     logout: async () => Promise.resolve()
   },
-  sideloadedLibrary: [],
-  hyperPlayLibrary: [],
   error: false,
-  filterText: '',
-  filterPlatforms: [],
   gameUpdates: [],
-  handleCategory: () => null,
   handleLayout: () => null,
-  handlePlatformFilters: () => null,
   handleSearch: () => null,
   layout: 'grid',
   libraryStatus: [],
@@ -38,22 +29,6 @@ const initialContext: ContextType = {
   isRTL: false,
   language: 'en',
   setLanguage: () => null,
-  hiddenGames: {
-    list: [],
-    add: () => null,
-    remove: () => null
-  },
-  showHidden: false,
-  setShowHidden: () => null,
-  showFavourites: false,
-  setShowNonAvailable: () => null,
-  showNonAvailable: false,
-  setShowFavourites: () => null,
-  favouriteGames: {
-    list: [],
-    add: () => null,
-    remove: () => null
-  },
   theme: 'default',
   setTheme: () => null,
   zoomPercent: 100,

@@ -17,15 +17,11 @@ export type Category = 'all' | 'legendary' | 'gog' | 'sideload' | 'hyperplay'
 export type Platform = 'win' | 'mac' | 'linux' | 'browser'
 
 export interface ContextType {
-  category: Category
   error: boolean
-  filterPlatforms: Platform[]
   gameUpdates: string[]
   isRTL: boolean
   language: string
   setLanguage: (newLanguage: string) => void
-  handleCategory: (value: Category) => void
-  handlePlatformFilters: (value: string[]) => void
   handleLayout: (value: string) => void
   handleSearch: (input: string) => void
   layout: string
@@ -43,13 +39,11 @@ export interface ContextType {
   zoomPercent: number
   setZoomPercent: (newZoomPercent: number) => void
   epic: {
-    library: GameInfo[]
     username?: string
     login: (sid: string) => Promise<string>
     logout: () => Promise<void>
   }
   gog: {
-    library: GameInfo[]
     username?: string
     login: (token: string) => Promise<string>
     logout: () => Promise<void>
@@ -67,8 +61,6 @@ export interface ContextType {
   showResetDialog: () => void
   externalLinkDialogOptions: ExternalLinkDialogOptions
   handleExternalLinkDialog: (options: ExternalLinkDialogOptions) => void
-  sideloadedLibrary: GameInfo[]
-  hyperPlayLibrary: GameInfo[]
   isSettingsModalOpen: {
     value: boolean
     gameInfo?: GameInfo | null

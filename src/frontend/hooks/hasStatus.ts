@@ -4,12 +4,14 @@ import { GameInfo, GameStatus, Status } from 'common/types'
 import { hasProgress } from './hasProgress'
 import { useTranslation } from 'react-i18next'
 import { getStatusLabel, handleNonAvailableGames } from './constants'
+import libraryState from 'frontend/state/libraryState'
 
-export function hasStatus(
+// the consuming code needs to be wrapped in observer when using this hook
+export const hasStatus = (
   appName: string,
   gameInfo: GameInfo,
   gameSize?: string
-) {
+) => {
   const { libraryStatus, epic, gog } = React.useContext(ContextProvider)
   const [progress] = hasProgress(appName)
   const { t } = useTranslation('gamepage')
@@ -92,8 +94,8 @@ export function hasStatus(
   }, [
     libraryStatus,
     appName,
-    epic.library,
-    gog.library,
+    libraryState.epicLibrary,
+    libraryState.gogLibrary,
     is_installed,
     progress.percent
   ])

@@ -30,6 +30,7 @@ import {
 } from '@hyperplay/ui'
 import classNames from 'classnames'
 import { DMQueue } from 'frontend/types'
+import libraryState from 'frontend/state/libraryState'
 
 interface Card {
   buttonClick: () => void
@@ -83,14 +84,8 @@ const GameCard = ({
 
   const navigate = useNavigate()
 
-  const {
-    layout,
-    hiddenGames,
-    favouriteGames,
-    allTilesInColor,
-    showDialogModal,
-    setIsSettingsModalOpen
-  } = useContext(ContextProvider)
+  const { layout, allTilesInColor, showDialogModal, setIsSettingsModalOpen } =
+    useContext(ContextProvider)
 
   const {
     title,
@@ -187,10 +182,10 @@ const GameCard = ({
   }
 
   const isHiddenGame = useMemo(() => {
-    return !!hiddenGames.list.find(
+    return !!libraryState.hiddenGames?.list.find(
       (hiddenGame: HiddenGame) => hiddenGame.appName === appName
     )
-  }, [hiddenGames, appName])
+  }, [libraryState.hiddenGames, appName])
 
   const isBrowserGame = installPlatform === 'Browser'
 
@@ -269,25 +264,31 @@ const GameCard = ({
     {
       // hide
       label: t('button.hide_game', 'Hide Game'),
-      onClick: handleClickStopBubbling(() => hiddenGames.add(appName, title)),
+      onClick: handleClickStopBubbling(() =>
+        libraryState.hiddenGames?.add(appName, title)
+      ),
       show: !isHiddenGame
     },
     {
       // unhide
       label: t('button.unhide_game', 'Unhide Game'),
-      onClick: handleClickStopBubbling(() => hiddenGames.remove(appName)),
+      onClick: handleClickStopBubbling(() =>
+        libraryState.hiddenGames?.remove(appName)
+      ),
       show: isHiddenGame
     },
     {
       label: t('button.favorites', 'Favorite'),
       onClick: handleClickStopBubbling(() =>
-        favouriteGames.add(appName, title)
+        libraryState.favouriteGames?.add(appName, title)
       ),
       show: !favorited
     },
     {
       label: t('button.unfavorites', 'Unfavorite'),
-      onClick: handleClickStopBubbling(() => favouriteGames.remove(appName)),
+      onClick: handleClickStopBubbling(() =>
+        libraryState.favouriteGames?.remove(appName)
+      ),
       show: favorited
     },
     {
@@ -356,8 +357,11 @@ const GameCard = ({
           favorited={favorited}
           onFavoriteClick={handleClickStopBubbling(() => {
             if (!favorited)
-              favouriteGames.add(gameInfo.app_name, gameInfo.title)
-            else favouriteGames.remove(gameInfo.app_name)
+              libraryState.favouriteGames?.add(
+                gameInfo.app_name,
+                gameInfo.title
+              )
+            else libraryState.favouriteGames?.remove(gameInfo.app_name)
           })}
           onDownloadClick={handleClickStopBubbling(buttonClick)}
           onRemoveFromQueueClick={handleClickStopBubbling(

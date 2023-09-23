@@ -315,6 +315,20 @@ class LibraryState {
   get sortInstalled() {
     return this.selectedFilter?.id === 'sortByInstalled'
   }
+
+  get numberOfGames() {
+    if (!this.library) {
+      return 0
+    }
+
+    // is_dlc is only applicable when the game is from legendary, but checking anyway doesn't cause errors and enable accurate counting in the 'ALL' game tab
+    const dlcCount = this.library.filter(
+      (lib) => lib.runner !== 'sideload' && lib.install.is_dlc
+    ).length
+
+    const total = this.library.length - dlcCount
+    return total > 0 ? `${total}` : 0
+  }
 }
 
 export default new LibraryState()

@@ -14,21 +14,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { GameInfo } from '../../../../common/types'
 import { Images } from '@hyperplay/ui'
 import TopNavBarStyles from '../TopNavBar/index.module.scss'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
 
 function fixFilter(text: string) {
   const regex = new RegExp(/([?\\|*|+|(|)|[|]|])+/, 'g')
   return text.replaceAll(regex, '')
 }
 
-export default React.memo(function SearchBar() {
-  const {
-    handleSearch,
-    filterText,
-    epic,
-    gog,
-    sideloadedLibrary,
-    hyperPlayLibrary
-  } = useContext(ContextProvider)
+export default observer(function SearchBar() {
+  const { handleSearch, epic, gog } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -37,26 +32,30 @@ export default React.memo(function SearchBar() {
   const list = useMemo(() => {
     const library = new Set(
       [
-        ...epic.library,
-        ...gog.library,
-        ...sideloadedLibrary,
-        ...hyperPlayLibrary
+        ...libraryState.epicLibrary,
+        ...libraryState.gogLibrary,
+        ...libraryState.sideloadedLibrary,
+        ...libraryState.hyperPlayLibrary
       ]
         .filter(Boolean)
         .map((g) => g.title)
         .sort()
     )
     return [...library].filter((i) =>
-      new RegExp(fixFilter(filterText), 'i').test(i)
+      new RegExp(fixFilter(libraryState.filterText), 'i').test(i)
     )
-  }, [epic.library, gog.library, filterText])
+  }, [
+    libraryState.epicLibrary,
+    libraryState.gogLibrary,
+    libraryState.filterText
+  ])
 
   // we have to use an event listener instead of the react
   // onChange callback so it works with the virtual keyboard
   useEffect(() => {
     if (input.current) {
       const element = input.current
-      element.value = filterText
+      element.value = libraryState.filterText
       const handler = () => {
         handleSearch(element.value)
       }
@@ -93,9 +92,9 @@ export default React.memo(function SearchBar() {
 
   const getGameInfoByAppTitle = (title: string) => {
     return (
-      getGameInfoByAppTitleAndLibrary(epic.library, title) ||
-      getGameInfoByAppTitleAndLibrary(gog.library, title) ||
-      getGameInfoByAppTitleAndLibrary(sideloadedLibrary, title)
+      getGameInfoByAppTitleAndLibrary(libraryState.epicLibrary, title) ||
+      getGameInfoByAppTitleAndLibrary(libraryState.gogLibrary, title) ||
+      getGameInfoByAppTitleAndLibrary(libraryState.sideloadedLibrary, title)
     )
   }
 
@@ -124,7 +123,7 @@ export default React.memo(function SearchBar() {
         id="search"
         className="searchBarInput"
       />
-      {filterText.length > 0 && (
+      {libraryState.filterText.length > 0 && (
         <>
           <ul className="autoComplete body-sm">
             {list.length > 0 &&

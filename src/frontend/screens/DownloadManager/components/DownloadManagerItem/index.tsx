@@ -26,6 +26,8 @@ import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
 import { GogInstallInfo } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
 
 type Props = {
   element?: DMQueueElement
@@ -50,8 +52,7 @@ type InstallInfo =
   | HyperPlayInstallInfo
   | null
 
-const DownloadManagerItem = ({ element, current, state }: Props) => {
-  const { epic, gog, hyperPlayLibrary } = useContext(ContextProvider)
+const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const [installInfo, setInstallInfo] = useState<InstallInfo>(null)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
@@ -72,7 +73,11 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
     )
   }
 
-  const library = [...epic.library, ...gog.library, ...hyperPlayLibrary]
+  const library = [
+    ...libraryState.epicLibrary,
+    ...libraryState.gogLibrary,
+    ...libraryState.hyperPlayLibrary
+  ]
 
   const { params, addToQueueTime, endTime, type, startTime } = element
   const {
@@ -286,6 +291,6 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
       </div>
     </>
   )
-}
+})
 
 export default DownloadManagerItem
