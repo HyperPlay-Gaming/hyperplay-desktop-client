@@ -202,6 +202,7 @@
     "i18next-fs-backend": "^1.1.4",
     "i18next-http-backend": "^1.4.0",
     "ini": "^3.0.0",
+    "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^20.0.0",
     "lokijs": "^1.5.12",
     "mobx": "^6.9.0",

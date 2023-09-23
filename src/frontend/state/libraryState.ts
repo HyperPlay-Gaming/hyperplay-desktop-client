@@ -24,13 +24,12 @@ import {
   sideloadedCategories
 } from 'frontend/helpers/library'
 
-const storage = window.localStorage
-
 class LibraryState {
   epicLibrary: GameInfo[] = []
   gogLibrary: GameInfo[] = []
   sideloadedLibrary: GameInfo[] = []
   hyperPlayLibrary: GameInfo[] = []
+  nonAvailbleGames: GameInfo[] = []
   filterPlatforms: Platform[] = []
   category: Category = 'all'
   private gameStatuses: GameStatus[] = []
@@ -44,7 +43,7 @@ class LibraryState {
   selectedFilter: DropdownItemType | undefined
   showOnlyDownloaded = false
   showHidden = false
-  showNonAvailable = false
+  showNonAvailable = true
   filterText = ''
 
   constructor() {
@@ -222,10 +221,12 @@ class LibraryState {
       library = [...HPLibrary, ...sideloadedApps, ...epicLibrary, ...gogLibrary]
 
       if (!this.showNonAvailable) {
-        const nonAvailbleGames = storage.getItem('nonAvailableGames') || '[]'
-        const nonAvailbleGamesArray = JSON.parse(nonAvailbleGames)
+        // TODO: refactor to linear algo with non available game map
         library = library.filter(
-          (game) => !nonAvailbleGamesArray.includes(game.app_name)
+          (game) =>
+            this.nonAvailbleGames.findIndex(
+              (val) => val.app_name === game.app_name
+            ) === -1
         )
       }
     }
@@ -277,6 +278,7 @@ class LibraryState {
         ? -1
         : 1
     })
+    console.log('4 library in get library = ', JSON.stringify(library, null, 4))
     const installed = library.filter((g) => g.is_installed)
     const notInstalled = this.showOnlyDownloaded
       ? []

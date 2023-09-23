@@ -18,13 +18,7 @@ import {
   ExternalLinkDialogOptions
 } from 'frontend/types'
 import { TFunction, withTranslation } from 'react-i18next'
-import {
-  getGameInfo,
-  getLegendaryConfig,
-  getPlatform,
-  launch,
-  notify
-} from '../helpers'
+import { getGameInfo, getLegendaryConfig, launch, notify } from '../helpers'
 import { i18n, t } from 'i18next'
 
 import ContextProvider from './ContextProvider'
@@ -625,7 +619,7 @@ class GlobalState extends PureComponent<Props> {
 
     const legendaryUser = configStore.has('userInfo')
     const gogUser = gogConfigStore.has('userData')
-    const platform = await getPlatform()
+    const platform = await window.api.getPlatform()
 
     if (legendaryUser) {
       await window.api.getUserInfo()

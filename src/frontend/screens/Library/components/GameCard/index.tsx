@@ -11,7 +11,7 @@ import {
 } from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { getGameInfo, install, launch, sendKill } from 'frontend/helpers'
+import { getGameInfo, install, launch } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { updateGame } from 'frontend/helpers/library'
@@ -422,7 +422,7 @@ const GameCard = ({
 
     // kill the game if it's running
     if (isPlaying || isUpdating) {
-      return sendKill(appName, runner)
+      return window.api.kill(appName, runner)
     }
 
     // remove the game from the queue

@@ -11,24 +11,11 @@ import { GogInstallInfo } from 'common/types/gog'
 
 import { install, launch, repair, updateGame } from './library'
 import fileSize from 'filesize'
-const readFile = window.api.readConfig
-
-const writeConfig = window.api.writeConfig
 
 const notify = (args: { title: string; body: string }) =>
   window.api.notify(args)
 
-const loginPage = window.api.openLoginPage
-
-const getPlatform = window.api.getPlatform
-
-const sidInfoPage = window.api.openSidInfoPage
-
-const openDiscordLink = window.api.openDiscordLink
-
 export const size = fileSize.partial({ base: 2 })
-
-const sendKill = window.api.kill
 
 const syncSaves = async (
   savesPath: string,
@@ -50,8 +37,10 @@ const getLegendaryConfig = async (): Promise<{
   user: string
 }> => {
   // TODO: I'd say we should refactor this to be two different IPC calls, makes type annotations easier
-  const library: GameInfo[] = (await readFile('library')) as GameInfo[]
-  const user: string = (await readFile('user')) as string
+  const library: GameInfo[] = (await window.api.readConfig(
+    'library'
+  )) as GameInfo[]
+  const user: string = (await window.api.readConfig('user')) as string
 
   if (!user) {
     return { library: [], user: '' }
@@ -165,19 +154,13 @@ export {
   getGameSettings,
   getInstallInfo,
   getLegendaryConfig,
-  getPlatform,
   getProgress,
   install,
   launch,
-  loginPage,
   notify,
-  openDiscordLink,
   repair,
-  sendKill,
-  sidInfoPage,
   syncSaves,
   updateGame,
-  writeConfig,
   removeSpecialcharacters,
   getStoreName
 }

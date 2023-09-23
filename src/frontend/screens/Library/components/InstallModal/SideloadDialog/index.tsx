@@ -20,8 +20,7 @@ import { DialogContent, DialogFooter } from 'frontend/components/UI/Dialog'
 import {
   getGameInfo,
   getGameSettings,
-  removeSpecialcharacters,
-  writeConfig
+  removeSpecialcharacters
 } from 'frontend/helpers'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -176,7 +175,7 @@ export default function SideloadDialog({
     if (!gameSettings) {
       return
     }
-    await writeConfig({
+    await window.api.writeConfig({
       appName: app_name,
       config: {
         ...gameSettings,
@@ -227,7 +226,7 @@ export default function SideloadDialog({
         if (!gameSettings) {
           return
         }
-        await writeConfig({
+        await window.api.writeConfig({
           appName: app_name,
           config: { ...gameSettings, winePrefix, wineVersion }
         })

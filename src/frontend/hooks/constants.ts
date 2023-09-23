@@ -1,4 +1,5 @@
 import { Runner, Status } from 'common/types'
+import libraryState from 'frontend/state/libraryState'
 import { TFunction } from 'react-i18next'
 
 type StatusArgs = {
@@ -54,18 +55,12 @@ export async function handleNonAvailableGames(appName: string, runner: Runner) {
   if (!gameAvailable) {
     if (!nonAvailbleGamesArray.includes(appName)) {
       nonAvailbleGamesArray.push(appName)
-      storage.setItem(
-        'nonAvailableGames',
-        JSON.stringify(nonAvailbleGamesArray)
-      )
+      libraryState.nonAvailbleGames = nonAvailbleGamesArray
     }
   } else {
     if (nonAvailbleGamesArray.includes(appName)) {
       nonAvailbleGamesArray.splice(nonAvailbleGamesArray.indexOf(appName), 1)
-      storage.setItem(
-        'nonAvailableGames',
-        JSON.stringify(nonAvailbleGamesArray)
-      )
+      libraryState.nonAvailbleGames = nonAvailbleGamesArray
     }
   }
   return gameAvailable

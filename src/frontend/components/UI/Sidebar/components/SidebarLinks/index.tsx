@@ -1,7 +1,6 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
-import { openDiscordLink } from 'frontend/helpers'
 import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
 import QuitButton from '../QuitButton'
@@ -117,7 +116,7 @@ export default observer(function SidebarLinks() {
       <div className=" SidebarLinks Sidebar__section">
         <div
           className="sidebarLinkGradientWrapper"
-          onClick={() => handleExternalLink(openDiscordLink)}
+          onClick={() => handleExternalLink(window.api.openDiscordLink)}
         >
           <div className="Sidebar__item">
             <button>

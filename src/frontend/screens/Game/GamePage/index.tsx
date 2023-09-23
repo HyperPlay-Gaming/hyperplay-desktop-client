@@ -14,7 +14,6 @@ import {
   getPlatformName,
   getProgress,
   launch,
-  sendKill,
   size,
   updateGame
 } from 'frontend/helpers'
@@ -845,7 +844,7 @@ export default observer(function GamePage(): JSX.Element | null {
     // kill game if running
     return async () => {
       if (isPlaying || isUpdating) {
-        return sendKill(appName, gameInfo.runner)
+        return window.api.kill(appName, gameInfo.runner)
       }
 
       // open game
