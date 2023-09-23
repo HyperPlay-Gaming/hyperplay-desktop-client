@@ -2,7 +2,6 @@ import styles from './index.module.scss'
 import React, {
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
   useLayoutEffect

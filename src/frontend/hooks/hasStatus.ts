@@ -12,7 +12,7 @@ export const hasStatus = (
   gameInfo: GameInfo,
   gameSize?: string
 ) => {
-  const { libraryStatus, epic, gog } = React.useContext(ContextProvider)
+  const { libraryStatus } = React.useContext(ContextProvider)
   const [progress] = hasProgress(appName)
   const { t } = useTranslation('gamepage')
 

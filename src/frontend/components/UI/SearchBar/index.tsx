@@ -23,7 +23,7 @@ function fixFilter(text: string) {
 }
 
 export default observer(function SearchBar() {
-  const { handleSearch, epic, gog } = useContext(ContextProvider)
+  const { handleSearch } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
 

@@ -89,11 +89,6 @@ export interface ExternalLinkDialogOptions {
   linkCallback?: () => void
 }
 
-interface HiddenGame {
-  appName: string
-  title: string
-}
-
 export interface InstallProgress {
   bytes: string
   eta: string

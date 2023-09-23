@@ -77,8 +77,6 @@ export default observer(function GamePage(): JSX.Element | null {
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
   const {
-    epic,
-    gog,
     gameUpdates,
     platform,
     showDialogModal,
