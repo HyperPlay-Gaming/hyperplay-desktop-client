@@ -79,7 +79,12 @@ const ExtensionHandler = function () {
       window.api.extensionOnEvent('accountsChanged', accounts)
     })
 
-    window.ethereum.on('disconnect', (error: Error) => {
+    window.ethereum.on('disconnect', (error: any) => {
+      // Relevant issue https://github.com/MetaMask/metamask-extension/issues/13375
+      if (error.code === 1013) {
+        console.log('MetaMask disconnected from chain. Reconnecting...')
+        return
+      }
       window.api.extensionOnEvent('disconnect', error)
     })
 
