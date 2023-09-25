@@ -9,7 +9,7 @@ const url =
 const Auth = () => {
   const webviewRef = useRef<WebviewTag>(null)
   return (
-    <ModalAnimation isOpen={true} onClose={() => {}}>
+    <ModalAnimation isOpen={true} onClose={() => console.log('close')}>
       <webview
         ref={webviewRef}
         src={url}
