@@ -79,6 +79,7 @@ const ExtensionHandler = function () {
       window.api.extensionOnEvent('accountsChanged', accounts)
     })
 
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     window.ethereum.on('disconnect', (error: any) => {
       // Relevant issue https://github.com/MetaMask/metamask-extension/issues/13375
       if (error.code === 1013) {
