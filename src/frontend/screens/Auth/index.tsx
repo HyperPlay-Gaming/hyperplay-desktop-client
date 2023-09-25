@@ -1,29 +1,24 @@
 import React, { useRef } from 'react'
 import { WebviewTag } from 'electron'
-import WebviewControls from '../../components/UI/WebviewControls'
+import styles from './index.module.scss'
+import { ModalAnimation } from '@hyperplay/ui'
 
-const url = 'http://localhost:3001/signin'
+const url =
+  'https://hyperplay-dev-git-feature-unified-auth-ui-valist.vercel.app/signin'
 
 const Auth = () => {
   const webviewRef = useRef<WebviewTag>(null)
   return (
-    <div className="WebView">
-      {webviewRef.current && (
-        <WebviewControls
-          webview={webviewRef.current}
-          initURL={url}
-          openInBrowser={false}
-        />
-      )}
+    <ModalAnimation isOpen={true} onClose={() => {}}>
       <webview
         ref={webviewRef}
         src={url}
-        className="WebView__webview"
+        className={styles.webview}
         partition="persist:InPageWindowEthereumExternalWallet"
         allowpopups={'true' as unknown as boolean | undefined}
-        useragent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/200.0"
+        useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15"
       />
-    </div>
+    </ModalAnimation>
   )
 }
 

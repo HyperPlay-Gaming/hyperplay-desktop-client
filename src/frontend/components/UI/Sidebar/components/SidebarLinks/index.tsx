@@ -110,6 +110,28 @@ export default function SidebarLinks() {
             <Images.Settings fill={sidebarSvgUnselectedFill} />
           </NavLink>
         </div>
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            data-testid="wiki"
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={{ pathname: '/auth' }}
+          >
+            Sign In
+          </NavLink>
+        </div>
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            data-testid="wiki"
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={{ pathname: '/auth-session' }}
+          >
+            Session
+          </NavLink>
+        </div>
       </div>
 
       <div className=" SidebarLinks Sidebar__section">

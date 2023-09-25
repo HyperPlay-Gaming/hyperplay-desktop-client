@@ -30,6 +30,7 @@ import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
 import Auth from './screens/Auth'
+import AuthSession from './screens/Session'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -66,6 +67,7 @@ function App() {
             />
             <Route path="epicstore" element={<WebView key="epicstore" />} />
             <Route path="auth" element={<Auth />} />
+            <Route path="auth-session" element={<AuthSession />} />
             <Route path="gogstore" element={<WebView key="gogstore" />} />
             <Route path="wiki" element={<WebView key="wiki" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />

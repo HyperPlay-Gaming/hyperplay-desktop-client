@@ -26,6 +26,7 @@ import {
   HYPERPLAY_STORE_URL,
   WIKI_URL
 } from '../../constants'
+import Auth from '../Auth'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -214,6 +215,14 @@ function WebView() {
     setShowLoginWarningFor(null)
   }
 
+  useEffect(() => {
+    async function load() {
+      const path = (await window.api.getLocalPeloadPath()) as unknown
+      console.log({ path })
+    }
+    load()
+  }, [])
+
   if (!preloadPath && isEpicLogin) {
     return <></>
   }
@@ -222,8 +231,11 @@ function WebView() {
     ? 'persist:hyperplaystore'
     : 'persist:epicstore'
 
+  console.log({ preloadPath })
+
   return (
     <div className="WebView">
+      <Auth />
       {webviewRef.current && (
         <WebviewControls
           webview={webviewRef.current}
