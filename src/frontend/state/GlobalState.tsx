@@ -19,7 +19,7 @@ import {
   ExternalLinkDialogOptions,
   Platform
 } from 'frontend/types'
-import { TFunction, withTranslation } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import {
   getGameInfo,
   getLegendaryConfig,
@@ -27,7 +27,7 @@ import {
   launch,
   notify
 } from '../helpers'
-import { i18n, t } from 'i18next'
+import { TFunction, i18n, t } from 'i18next'
 
 import ContextProvider from './ContextProvider'
 

@@ -26,6 +26,7 @@ import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
 import { GogInstallInfo } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
+import { NileInstallInfo } from 'common/types/nile'
 
 type Props = {
   element?: DMQueueElement
@@ -48,6 +49,7 @@ type InstallInfo =
   | GogInstallInfo
   | LegendaryInstallInfo
   | HyperPlayInstallInfo
+  | NileInstallInfo
   | null
 
 const DownloadManagerItem = ({ element, current, state }: Props) => {

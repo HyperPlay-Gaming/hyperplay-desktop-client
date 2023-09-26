@@ -1,4 +1,4 @@
-import { WikiInfo } from 'common/types'
+import { Runner, WikiInfo } from 'common/types'
 import React, { useContext, useEffect, useState } from 'react'
 import GameScore from './components/GameScore'
 import HowLongToBeat from './components/HowLongToBeat'
@@ -12,25 +12,28 @@ import { useTranslation } from 'react-i18next'
 interface Props {
   title: string
   setShouldShow: (value: boolean) => void
-  id?: string
+  runner: Runner
+  appName: string
 }
 
-export function WikiGameInfo({ title, id, setShouldShow }: Props) {
+export function WikiGameInfo({ title, appName, runner, setShouldShow }: Props) {
   const [wikiGameInfo, setWikiGameInfo] = useState<WikiInfo | null>(null)
   const { platform } = useContext(ContextProvider)
   const isMac = platform === 'darwin'
   const { t } = useTranslation()
 
   useEffect(() => {
-    window.api.getWikiGameInfo(title, id).then((info: WikiInfo) => {
-      if (
-        info &&
-        (info.applegamingwiki || info.howlongtobeat || info.pcgamingwiki)
-      ) {
-        setWikiGameInfo(info)
-      }
-    })
-  }, [title, id])
+    window.api
+      .getWikiGameInfo(title, appName, runner)
+      .then((info: WikiInfo) => {
+        if (
+          info &&
+          (info.applegamingwiki || info.howlongtobeat || info.pcgamingwiki)
+        ) {
+          setWikiGameInfo(info)
+        }
+      })
+  }, [title, appName])
 
   return (
     <div className="wikigameinfoWrapper">

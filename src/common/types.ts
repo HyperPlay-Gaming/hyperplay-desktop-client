@@ -647,6 +647,10 @@ export interface PCGamingWikiInfo {
   direct3DVersions: string[]
 }
 
+export interface GamesDBInfo {
+  steamID: string
+}
+
 export interface AppleGamingWikiInfo {
   crossoverRating: string
   crossoverLink: string
