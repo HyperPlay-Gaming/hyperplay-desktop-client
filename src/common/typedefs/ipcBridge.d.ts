@@ -237,7 +237,11 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     installPlatform: InstallPlatform,
     channelNameToInstall?: string
   ) => Promise<
-    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | NileInstallInfo | null
+    | LegendaryInstallInfo
+    | GogInstallInfo
+    | HyperPlayInstallInfo
+    | NileInstallInfo
+    | null
   >
   getUserInfo: () => Promise<UserInfo | undefined>
   getAmazonUserInfo: () => Promise<NileUserData | undefined>
