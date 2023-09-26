@@ -113,6 +113,7 @@ export default observer(function Library(): JSX.Element {
   // Track the screen view once and only once.
   useEffect(() => {
     window.api.trackScreen('Library')
+    libraryState.selectedFilter = filters[0]
   }, [])
 
   const backToTop = () => {
@@ -140,8 +141,7 @@ export default observer(function Library(): JSX.Element {
     }
   }, [epic.username, gog.username])
 
-  // top section
-  const showRecentGames = libraryTopSection.startsWith('recently_played')
+  const showRecentGames = libraryState.showRecentGames
 
   if (!epic && !gog) {
     return (
@@ -276,7 +276,8 @@ export default observer(function Library(): JSX.Element {
           setSelectedFilter={(filter) => {
             libraryState.selectedFilter = filter as itemType
           }}
-          selectedFilter={libraryState.selectedFilter ?? { text: 'filter' }}
+          // the default for library state if selectedFilter undefined is alphabetical ascending
+          selectedFilter={libraryState.selectedFilter ?? filters[1]}
           otherFiltersData={otherFiltersData}
         />
         <div className={styles.listing} ref={listing}>

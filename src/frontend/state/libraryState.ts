@@ -30,29 +30,42 @@ class LibraryState {
   sideloadedLibrary: GameInfo[] = []
   hyperPlayLibrary: GameInfo[] = []
   nonAvailbleGames: GameInfo[] = []
-  filterPlatforms: Platform[] = []
-  category: Category = 'all'
   private gameStatuses: GameStatus[] = []
+
   // cache list of games being installed
   installing: string[] = []
-  showRecentGames = false
-  showFavouritesLibrary = false
   libraryTopSection = ''
   favouriteGames: GameCollection | undefined
   hiddenGames: GameCollection | undefined
+  filterText = ''
+
+  // store
+  category: Category = 'all'
+
+  // filters
   selectedFilter: DropdownItemType | undefined
+
+  // toggles
+  // only shows favorites and hides the others
+  showFavouritesLibrary = false
   showOnlyDownloaded = false
+  // show hidden games along with the others
   showHidden = false
   showNonAvailable = true
-  filterText = ''
+  filterPlatforms: Platform[] = []
 
   constructor() {
     makeAutoObservable(this)
   }
 
   init() {
+    console.log('\n \n XXXXX library State INIT  \n \n XXXXX')
     this.refresh()
     this.watchLibraryChanges()
+    this.selectedFilter = {
+      text: 'Sort by Status 2',
+      id: 'sortByInstalled'
+    }
   }
 
   watchLibraryChanges() {
@@ -278,14 +291,15 @@ class LibraryState {
         ? -1
         : 1
     })
-    console.log('4 library in get library = ', JSON.stringify(library, null, 4))
-    const installed = library.filter((g) => g.is_installed)
-    const notInstalled = this.showOnlyDownloaded
-      ? []
-      : library.filter(
-          (g) => !g.is_installed && !this.installing.includes(g.app_name)
-        )
 
+    if (this.showOnlyDownloaded)
+      library = library.filter((val) => val.is_installed)
+
+    // sort by installed status filter
+    const installed = library.filter((g) => g.is_installed)
+    const notInstalled = library.filter(
+      (g) => !g.is_installed && !this.installing.includes(g.app_name)
+    )
     const installingGames = library.filter(
       (g) => !g.is_installed && this.installing.includes(g.app_name)
     )
@@ -331,6 +345,32 @@ class LibraryState {
     const total = this.library.length - dlcCount
     return total > 0 ? `${total}` : 0
   }
+
+  // top section
+  get showRecentGames() {
+    return this.libraryTopSection.startsWith('recently_played')
+  }
 }
 
-export default new LibraryState()
+const libraryState = new LibraryState()
+export default libraryState
+
+export function resetLibraryState() {
+  libraryState.epicLibrary = []
+  libraryState.gogLibrary = []
+  libraryState.sideloadedLibrary = []
+  libraryState.hyperPlayLibrary = []
+  libraryState.nonAvailbleGames = []
+  libraryState.installing = []
+  libraryState.libraryTopSection = ''
+  libraryState.favouriteGames = undefined
+  libraryState.hiddenGames = undefined
+  libraryState.filterText = ''
+  libraryState.category = 'all'
+  libraryState.selectedFilter = undefined
+  libraryState.showFavouritesLibrary = false
+  libraryState.showOnlyDownloaded = false
+  libraryState.showHidden = false
+  libraryState.showNonAvailable = true
+  libraryState.filterPlatforms = []
+}
