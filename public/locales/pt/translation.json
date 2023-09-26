@@ -643,5 +643,7 @@
         "release": "Release Date",
         "size": "Size"
     },
-    "analytics": "análise"
+    "analytics": "análise",
+    "accounts": "contas",
+    "ALL": "TUDO"
 }
