@@ -138,8 +138,12 @@ describe('libraryState.ts', () => {
 
     libraryState.favouriteGames = {
       list: [{ appName: 'c', title: 'c' }],
-      add: (a: string, b: string) => {},
-      remove: (a: string) => {}
+      add: () => {
+        console.log('add')
+      },
+      remove: () => {
+        console.log('remove')
+      }
     }
     expect(libraryState.library.length).toBe(2)
 
@@ -162,8 +166,12 @@ describe('libraryState.ts', () => {
     expect(libraryState.library[0].app_name).toBe('b')
     libraryState.hiddenGames = {
       list: [{ appName: 'b', title: 'b' }],
-      add: (a: string, b: string) => {},
-      remove: (a: string) => {}
+      add: () => {
+        console.log('add')
+      },
+      remove: () => {
+        console.log('remove')
+      }
     }
     expect(libraryState.library.length).toBe(1)
     expect(libraryState.library[0].app_name).toBe('c')
