@@ -59,7 +59,6 @@ class LibraryState {
   }
 
   init() {
-    console.log('\n \n XXXXX library State INIT  \n \n XXXXX')
     this.refresh()
     this.watchLibraryChanges()
     this.selectedFilter = {

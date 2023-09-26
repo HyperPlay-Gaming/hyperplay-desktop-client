@@ -7,7 +7,6 @@ const StoreController = () => {
       './*Store.ts*',
       '../state/*State.ts'
     ])
-    console.log('storecontroller stores ', stores)
     const storeKeys = Object.keys(stores)
 
     async function initializableStores() {
