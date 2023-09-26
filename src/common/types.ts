@@ -2,7 +2,6 @@ import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
 import { LegendaryInstallPlatform, GameMetadataInner } from './types/legendary'
 import { IpcRendererEvent } from 'electron'
 import { ChildProcess } from 'child_process'
-import { HowLongToBeatEntry } from 'howlongtobeat'
 import 'i18next'
 import {
   WineSupport,
@@ -640,7 +639,6 @@ export interface GameScoreInfo {
 
 export interface PCGamingWikiInfo {
   steamID: string
-  howLongToBeatID: string
   metacritic: GameScoreInfo
   opencritic: GameScoreInfo
   igdb: GameScoreInfo
@@ -660,7 +658,6 @@ export interface WikiInfo {
   timestampLastFetch: string
   pcgamingwiki: PCGamingWikiInfo | null
   applegamingwiki: AppleGamingWikiInfo | null
-  howlongtobeat: HowLongToBeatEntry | null
 }
 
 /**

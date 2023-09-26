@@ -1,7 +1,6 @@
 import { Runner, WikiInfo } from 'common/types'
 import React, { useContext, useEffect, useState } from 'react'
 import GameScore from './components/GameScore'
-import HowLongToBeat from './components/HowLongToBeat'
 import Crossover from './components/Crossover'
 import './index.scss'
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -26,10 +25,7 @@ export function WikiGameInfo({ title, appName, runner, setShouldShow }: Props) {
     window.api
       .getWikiGameInfo(title, appName, runner)
       .then((info: WikiInfo) => {
-        if (
-          info &&
-          (info.applegamingwiki || info.howlongtobeat || info.pcgamingwiki)
-        ) {
+        if (info && (info.applegamingwiki || info.pcgamingwiki)) {
           setWikiGameInfo(info)
         }
       })
@@ -52,9 +48,6 @@ export function WikiGameInfo({ title, appName, runner, setShouldShow }: Props) {
           )}
           {isMac && wikiGameInfo?.applegamingwiki && (
             <Crossover info={wikiGameInfo.applegamingwiki} title={title} />
-          )}
-          {wikiGameInfo?.howlongtobeat && (
-            <HowLongToBeat info={wikiGameInfo.howlongtobeat} />
           )}
         </DialogContent>
       </Dialog>

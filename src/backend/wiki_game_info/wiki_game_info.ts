@@ -45,8 +45,7 @@ export async function getWikiGameInfo(
     const wikiGameInfo = {
       timestampLastFetch: Date(),
       pcgamingwiki,
-      applegamingwiki,
-      howlongtobeat: null
+      applegamingwiki
     }
 
     wikiGameInfoStore.set(title, wikiGameInfo)
