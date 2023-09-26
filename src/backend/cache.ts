@@ -74,7 +74,9 @@ export default class CacheStore<ValueType, KeyType extends string = string> {
     this.current_store.delete(`__timestamp.${key}`)
   }
 
-  public clear = () => this.current_store?.clear()
+  public clear() {
+    return this.current_store?.clear()
+  }
 
   public has(key: string) {
     return this.current_store.has(key)
