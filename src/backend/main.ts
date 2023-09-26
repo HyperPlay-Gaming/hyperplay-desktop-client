@@ -594,7 +594,7 @@ ipcMain.on('unlock', () => {
     unlinkSync(join(gamesConfigPath, 'lock'))
     if (powerId) {
       logInfo('Stopping Power Saver Blocker', LogPrefix.Backend)
-      return powerSaveBlocker.stop(powerId)
+      powerSaveBlocker.stop(powerId)
     }
   }
 })
@@ -1331,6 +1331,10 @@ ipcMain.handle(
   }
 )
 
+ipcMain.on('removeFromLibrary', (event, appName) => {
+  HyperPlayLibraryManager.removeFromLibrary(appName)
+})
+
 ipcMain.handle('repair', async (event, appName, runner) => {
   if (!isOnline()) {
     logWarning(
@@ -1900,7 +1904,6 @@ ipcMain.on('reloadApp', async () => {
 })
 
 ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
-  console.log('addHyperplayGame', projectId)
   await addGameToLibrary(projectId)
 })
 

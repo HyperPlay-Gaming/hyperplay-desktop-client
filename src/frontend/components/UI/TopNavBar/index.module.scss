@@ -1,5 +1,5 @@
 .navBar {
-  height: 80px;
+  height: var(--top-navbar-height);
   background-color: var(--color-neutral-700);
   width: 100%;
   grid-column: 1 / -1;

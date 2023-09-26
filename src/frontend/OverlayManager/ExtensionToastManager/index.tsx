@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { TransactionToast } from '@hyperplay/ui'
 import { EXTENSION_NOTIFICATION } from 'frontend/screens/TransactionNotification/constants'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 interface BrowserExtensionToastManagerProps {
   showCloseButton?: boolean
@@ -9,6 +10,8 @@ interface BrowserExtensionToastManagerProps {
 const BrowserExtensionToastManager = function (
   props: BrowserExtensionToastManagerProps
 ) {
+  const { platform } = useContext(ContextProvider)
+  const isMac = platform === 'darwin'
   const [showMmExtensionNotifToast, setShowMmExtensionNotifToast] =
     useState(false)
 
@@ -41,7 +44,7 @@ const BrowserExtensionToastManager = function (
         <TransactionToast
           status={EXTENSION_NOTIFICATION.STATUS}
           title={EXTENSION_NOTIFICATION.TITLE()}
-          subtext={EXTENSION_NOTIFICATION.DESCRIPTION()}
+          subtext={EXTENSION_NOTIFICATION.DESCRIPTION(isMac)}
           onClick={handleRemoveNotification}
           showCloseButton={props.showCloseButton}
         />

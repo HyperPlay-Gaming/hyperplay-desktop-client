@@ -16,6 +16,7 @@ type URLSearchParamsProxy = URLSearchParams & {
   showExtension?: string
   showBrowserGame?: string
   showExitButton?: string
+  showHintText?: string
 }
 
 const ViewManager = function () {
@@ -43,7 +44,8 @@ const ViewManager = function () {
       showToasts: parseShowParam(params.showToasts),
       showExtension: parseShowParam(params.showExtension),
       showBrowserGame: parseShowParam(params.showBrowserGame),
-      showExitButton: parseShowParam(params.showExitButton)
+      showExitButton: parseShowParam(params.showExitButton),
+      showHintText: parseShowParam(params.showHintText)
     }
     return (
       <OverlayManager

@@ -14,13 +14,14 @@ const SteamRuntime = () => {
   const { platform } = useContext(ContextProvider)
   const isLinux = platform === 'linux'
   const isWin = platform === 'win32'
-  const [useSteamRuntime, setUseSteamRuntime] = useSetting(
-    'useSteamRuntime',
-    false
-  )
   const [wineVersion] = useSetting('wineVersion', defaultWineVersion)
 
   const isProton = !isWin && wineVersion?.type === 'proton'
+
+  const [useSteamRuntime, setUseSteamRuntime] = useSetting(
+    'useSteamRuntime',
+    isProton
+  )
 
   const showSteamRuntime = isLinuxNative || isProton
 

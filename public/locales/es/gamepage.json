@@ -29,20 +29,24 @@
         "stopInstall": {
             "keepInstalling": "Seguir instalando",
             "message": "¿Deseas MANTENER los archivos descargados?",
-            "title": "Detener la instalación"
+            "title": "¿Quieres cancelar la descarga?",
+            "keepFilesMessage": "Marque aquí si desea conservar los archivos de la descarga después de cancelar."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "¿Quieres desinstalar este juego?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Desinstalar"
+            "title": "Desinstalar",
+            "prefix_warning": "El prefijo Wine para este juego es el prefijo por defecto. Si realmente quieres borrarlo, tienes que hacerlo manualmente.",
+            "dlc": "¿Quieres desinstalar este DLC?"
         },
         "update": {
             "message": "Este juego tiene una actualización. ¿Quieres aplicarla ahora?",
             "title": "El juego necesita una actualización"
         },
         "wineprefix": "Elija la carpeta con el Prefijo de Wine",
-        "yes": "SÍ"
+        "yes": "SÍ",
+        "yesCancel": "Sí, cancelar"
     },
     "button": {
         "add_to_favourites": "Agregar a Favoritos",
@@ -56,7 +60,9 @@
         "install": "Instalar",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "continue": "Continuar la descarga",
+            "cancel": "Cancelar la descarga"
         },
         "remove_from_favourites": "Remover de Favoritos",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +73,11 @@
         },
         "unhide_game": "Desocultar Juego",
         "uninstall": "Desinstalar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "details": "Detalles",
+        "remove_from_library": "Quitar",
+        "favorites": "Favorito",
+        "unfavorites": "No favorito"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Deshabilitado",
@@ -78,22 +88,25 @@
     "game": {
         "downloadSize": "Tamaño de Descarga",
         "firstPlayed": "Jugado por Primera Vez",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Obtener el tamaño de la descarga",
+        "getting-install-size": "Obtener el tamaño de la instalación",
         "installSize": "Tamaño de Instalación",
         "language": "Lenguaje",
         "lastPlayed": "Jugado por Última Vez",
         "neverPlayed": "Nunca",
         "platform": "Seleccionar la Version de la Plataforma para Instalar",
         "requirements": "Requerimientos del Sistema",
-        "totalPlayed": "Tiempo Jugado"
+        "totalPlayed": "Tiempo Jugado",
+        "dlcs": "DLCs",
+        "selectChannelName": "Selecciona el nombre del canal"
     },
     "gamecard": {
         "moving": "Moviendo",
         "repairing": "Reparando"
     },
     "generic": {
-        "error": "Error desconocido"
+        "error": "Error desconocido",
+        "noDescription": "Ninguna descripción disponible"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -146,7 +159,8 @@
         "title": "Elija componentes a instalar"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -185,7 +199,14 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total descargado",
         "uninstalling": "Uninstalling",
-        "updating": "Actualización de juego"
+        "updating": "Actualización de juego",
+        "syncingSaves": "Sincronizar las partidas guardadas",
+        "paused": "Pausado",
+        "preparing": "Preparando la descarga, por favor espera",
+        "moving-files": "Moviendo el archivo '{{file}}': {{percent}} ",
+        "playing": "Reproduciendo",
+        "downloading": "Descargando",
+        "extracting": "Extrayendo"
     },
     "submenu": {
         "addShortcut": "Añadir acceso directo",
@@ -199,6 +220,14 @@
         "removeShortcut": "Eliminar accesos directos",
         "settings": "Ajustes",
         "store": "Página de la tienda",
-        "verify": "Verificar y reparar"
+        "verify": "Verificar y reparar",
+        "extraInfo": "Información adicional"
+    },
+    "hyperplay": {
+        "gamecard": {
+            "paused": "Pausado",
+            "extracting": "Extrayendo...",
+            "installing": "Descargando..."
+        }
     }
 }

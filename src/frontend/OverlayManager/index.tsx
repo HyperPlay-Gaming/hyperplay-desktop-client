@@ -11,6 +11,7 @@ interface RenderState {
   showExtension: boolean
   showBrowserGame: boolean
   showExitButton: boolean
+  showHintText: boolean
 }
 
 interface BrowserGameProps {
@@ -82,6 +83,7 @@ const OverlayManager = function ({
         runner={runner}
         showExtension={renderState.showExtension}
         showExitGameButton={renderState.showExitButton}
+        showHintText={renderState.showHintText}
       />
       {provider !== '' && url !== 'ignore' && renderState.showBrowserGame ? (
         <webview

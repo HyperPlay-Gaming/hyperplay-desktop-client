@@ -230,6 +230,14 @@ export async function listUpdateableGames(): Promise<string[]> {
   return updateableGames
 }
 
+export function removeFromLibrary(appName: string) {
+  const currentHpLibrary = hpLibraryStore.get('games', [])
+  const newHpLibrary = currentHpLibrary.filter(
+    (val) => val.app_name !== appName
+  )
+  hpLibraryStore.set('games', newHpLibrary)
+}
+
 /* eslint-disable @typescript-eslint/no-unused-vars */
 export async function runRunnerCommand(
   commandParts: string[],
