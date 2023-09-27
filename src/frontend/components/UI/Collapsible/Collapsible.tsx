@@ -14,10 +14,10 @@ const Collapsible = ({ isOpen, isCollapsible, children, summary }: Props) => {
       {children}
     </details>
   ) : (
-    <section>
+    <div>
       <div className="settingsSectionHeader title">{summary}</div>
       {children}
-    </section>
+    </div>
   )
 }
 
