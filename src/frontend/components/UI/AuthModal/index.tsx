@@ -2,10 +2,12 @@ import React, { useEffect, useRef } from 'react'
 import styles from './index.module.scss'
 import { ModalAnimation } from '@hyperplay/ui'
 import { WebviewTag } from 'electron'
+import { observer } from 'mobx-react-lite'
+import authModalState from '../../../state/authModalState'
 
 const url = 'http://localhost:3001/signin'
 
-const Auth = () => {
+const AuthModal = () => {
   const webviewRef = useRef<WebviewTag>(null)
 
   useEffect(() => {
@@ -13,12 +15,11 @@ const Auth = () => {
     if (!webview) return
 
     const handleIpcMessage = (event: Electron.IpcMessageEvent) => {
-      console.log('Received IPC message:', event.channel, event.args)
-      // Add more debugging information if needed
+      if (event.channel !== 'closeAuthModal') return
+      authModalState.closeModal()
     }
 
     const handleDomReady = () => {
-      console.log('DOM is ready. Adding IPC message handler.')
       webview.addEventListener('ipc-message', handleIpcMessage)
     }
 
@@ -32,7 +33,10 @@ const Auth = () => {
   }, [])
 
   return (
-    <ModalAnimation isOpen={true} onClose={() => console.log('close')}>
+    <ModalAnimation
+      isOpen={authModalState.isOpen}
+      onClose={() => authModalState.closeModal()}
+    >
       <webview
         ref={webviewRef}
         src={url}
@@ -45,4 +49,4 @@ const Auth = () => {
   )
 }
 
-export default Auth
+export default observer(AuthModal)

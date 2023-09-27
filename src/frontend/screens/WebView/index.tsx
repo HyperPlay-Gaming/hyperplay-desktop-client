@@ -6,7 +6,7 @@ import React, {
   useState
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useLocation, useParams } from 'react-router'
+import { useLocation, useNavigate, useParams } from 'react-router'
 import { DidNavigateEvent, WebviewTag } from 'electron'
 
 import { UpdateComponent } from 'frontend/components/UI'
@@ -26,7 +26,6 @@ import {
   HYPERPLAY_STORE_URL,
   WIKI_URL
 } from '../../constants'
-import Auth from '../Auth'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -231,11 +230,8 @@ function WebView() {
     ? 'persist:hyperplaystore'
     : 'persist:epicstore'
 
-  console.log({ preloadPath })
-
   return (
     <div className="WebView">
-      <Auth />
       {webviewRef.current && (
         <WebviewControls
           webview={webviewRef.current}

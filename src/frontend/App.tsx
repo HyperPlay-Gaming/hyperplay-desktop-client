@@ -29,7 +29,7 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
-import Auth from './screens/Auth'
+import AuthModal from './components/UI/AuthModal'
 import AuthSession from './screens/Session'
 
 function App() {
@@ -41,6 +41,7 @@ function App() {
         <OfflineMessage />
         <TopNavBar />
         <Sidebar />
+        <AuthModal />
         <main className="content">
           <QaAuthHandler />
           <ExtensionHandler />
@@ -66,7 +67,6 @@ function App() {
               element={<WebView key="hyperplaystore" />}
             />
             <Route path="epicstore" element={<WebView key="epicstore" />} />
-            <Route path="auth" element={<Auth />} />
             <Route path="auth-session" element={<AuthSession />} />
             <Route path="gogstore" element={<WebView key="gogstore" />} />
             <Route path="wiki" element={<WebView key="wiki" />} />
