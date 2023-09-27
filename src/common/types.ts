@@ -12,6 +12,7 @@ import {
 } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { DropdownItemType } from '@hyperplay/ui'
 
 export type {
   Listing as HyperPlayRelease,
@@ -818,3 +819,11 @@ export type AvailablePlatforms = {
   value: string
   icon: IconDefinition
 }[]
+
+export type Filter =
+  | 'alphabeticalAscending'
+  | 'alphabeticalDescending'
+  | 'sortByInstalled'
+export interface FilterItem extends DropdownItemType {
+  id?: Filter
+}

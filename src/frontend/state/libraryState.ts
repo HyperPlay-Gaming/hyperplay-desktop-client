@@ -1,5 +1,6 @@
 import {
   FavouriteGame,
+  FilterItem,
   GameCollection,
   GameInfo,
   GameStatus,
@@ -8,7 +9,6 @@ import {
 import { Category, Platform } from 'frontend/types'
 import { makeAutoObservable } from 'mobx'
 import { getPlatformName } from 'frontend/helpers'
-import { DropdownItemType } from '@hyperplay/ui'
 import Fuse from 'fuse.js'
 import {
   gogInstalledGamesStore,
@@ -43,7 +43,7 @@ class LibraryState {
   category: Category = 'all'
 
   // filters
-  selectedFilter: DropdownItemType | undefined
+  selectedFilter: FilterItem | undefined
 
   // toggles
   // only shows favorites and hides the others
@@ -62,7 +62,7 @@ class LibraryState {
     this.refresh()
     this.watchLibraryChanges()
     this.selectedFilter = {
-      text: 'Sort by Status 2',
+      text: 'Sort by Status',
       id: 'sortByInstalled'
     }
   }

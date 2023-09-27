@@ -11,7 +11,7 @@ import { UpdateComponent } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import GamesList from './components/GamesList'
-import { GameInfo, Runner } from 'common/types'
+import { FilterItem, GameInfo, Runner } from 'common/types'
 import ErrorComponent from 'frontend/components/UI/ErrorComponent'
 import RecentlyPlayed from './components/RecentlyPlayed'
 import { InstallModal } from './components'
@@ -19,13 +19,12 @@ import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import { faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
-import { Button, Background, DropdownItemType } from '@hyperplay/ui'
+import { Button, Background } from '@hyperplay/ui'
 import { Platform } from 'frontend/types'
 import { LibraryTopBar } from './components/LibraryTopBar'
 import libraryState from '../../state/libraryState'
 import { observer } from 'mobx-react-lite'
 import { epicCategories, gogCategories } from 'frontend/helpers/library'
-import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 
 const storage = window.localStorage
 
@@ -54,7 +53,7 @@ export default observer(function Library(): JSX.Element {
 
   //only show epic or gog if the user is logged in with epic.username && or gog.username && check
 
-  const filters: DropdownItemType[] = [
+  const filters: FilterItem[] = [
     {
       text: t('library.sortByStatus', 'Sort by Status'),
       id: 'sortByInstalled'
@@ -274,7 +273,7 @@ export default observer(function Library(): JSX.Element {
         <LibraryTopBar
           filters={filters}
           setSelectedFilter={(filter) => {
-            libraryState.selectedFilter = filter as itemType
+            libraryState.selectedFilter = filter as FilterItem
           }}
           // the default for library state if selectedFilter undefined is alphabetical ascending
           selectedFilter={libraryState.selectedFilter ?? filters[1]}
