@@ -29,7 +29,7 @@ class LibraryState {
   gogLibrary: GameInfo[] = []
   sideloadedLibrary: GameInfo[] = []
   hyperPlayLibrary: GameInfo[] = []
-  nonAvailbleGames: GameInfo[] = []
+  nonavailableGames: GameInfo[] = []
   private gameStatuses: GameStatus[] = []
 
   // cache list of games being installed
@@ -236,7 +236,7 @@ class LibraryState {
         // TODO: refactor to linear algo with non available game map
         library = library.filter(
           (game) =>
-            this.nonAvailbleGames.findIndex(
+            this.nonavailableGames.findIndex(
               (val) => val.app_name === game.app_name
             ) === -1
         )
@@ -359,7 +359,7 @@ export function resetLibraryState() {
   libraryState.gogLibrary = []
   libraryState.sideloadedLibrary = []
   libraryState.hyperPlayLibrary = []
-  libraryState.nonAvailbleGames = []
+  libraryState.nonavailableGames = []
   libraryState.installing = []
   libraryState.libraryTopSection = ''
   libraryState.favouriteGames = undefined
