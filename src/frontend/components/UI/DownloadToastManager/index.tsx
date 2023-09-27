@@ -13,6 +13,8 @@ import DownloadToastManagerStyles from './index.module.scss'
 import { launch } from 'frontend/helpers'
 import StopInstallationModal from '../StopInstallationModal'
 import { downloadStatus } from '@hyperplay/ui/dist/components/DownloadToast'
+import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
+import { useGetDmState } from 'frontend/hooks/useGetDmState'
 
 const nullProgress: InstallProgress = {
   bytes: '0',
@@ -29,44 +31,21 @@ export default function DownloadToastManager() {
   const [showPlay, setShowPlay] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
 
+  const appName = currentElement?.params.gameInfo.app_name
+    ? currentElement?.params.gameInfo.app_name
+    : ''
+  const gameInfo = currentElement?.params.gameInfo
+  const { statusText: downloadStatusText, status } = useGetDownloadStatusText(
+    appName,
+    gameInfo
+  )
+
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
 
-  const [dmState, setDMState] = useState<DownloadManagerState>('idle')
+  const dmState = useGetDmState()
 
   useEffect(() => {
-    window.api.getDMQueueInformation().then(({ state }: DMQueue) => {
-      setDMState(state)
-    })
-
-    const removeHandleDMQueueInformation = window.api.handleDMQueueInformation(
-      (
-        e: Electron.IpcRendererEvent,
-        elements: DMQueueElement[],
-        state: DownloadManagerState
-      ) => {
-        if (elements) {
-          setDMState(state)
-        }
-      }
-    )
-
-    return () => {
-      removeHandleDMQueueInformation()
-    }
-  }, [])
-
-  useEffect(() => {
-    // if download queue finishes, show toast in done state with play button for 10 seconds
-    // if the last progress data point is < 99, then it will not show the done state
-    // technically if < 100, we shouldn't show in order to handle the cancelled download case
-    // but legendary sends progress updates infrequently and this gives margin of error for % calc
-    // TODO: receive a reason from download manager as to why the previous download was removed
-    // whether it was cancelled or the download finished
-    if (
-      latestElement === undefined &&
-      progress.percent &&
-      progress.percent > 99
-    ) {
+    if (latestElement === undefined && status === 'installed') {
       setShowPlay(true)
       // after 10 seconds remove and reset the toast
       showPlayTimeout = setTimeout(() => {
@@ -198,11 +177,7 @@ export default function DownloadToastManager() {
     : ''
   if (!imgUrl.includes('http'))
     imgUrl = currentElement.params.gameInfo.art_square
-  const appName = currentElement?.params.gameInfo.app_name
-    ? currentElement?.params.gameInfo.app_name
-    : ''
 
-  const gameInfo = currentElement?.params.gameInfo
   if (gameInfo === undefined) {
     console.error('game info was undefined in download toast manager')
     return <></>
@@ -226,7 +201,11 @@ export default function DownloadToastManager() {
         <DownloadToast
           imgUrl={imgUrl}
           gameTitle={title}
-          downloadedInBytes={downloadedMB * 1024 * 1024}
+          downloadedInBytes={
+            status === 'extracting'
+              ? downloadSizeInMB * 1024 * 1024
+              : downloadedMB * 1024 * 1024
+          }
           downloadSizeInBytes={downloadSizeInMB * 1024 * 1024}
           estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
           onCancelClick={() => {
@@ -259,6 +238,7 @@ export default function DownloadToastManager() {
             })
           }}
           status={getDownloadStatus()}
+          statusText={downloadStatusText ?? 'Downloading 2'}
         />
       ) : (
         downloadIcon()
