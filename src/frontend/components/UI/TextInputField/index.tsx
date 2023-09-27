@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FocusEvent, ReactNode, useContext } from 'react'
-import classnames from 'classnames'
+import { default as cn } from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
 
@@ -16,6 +16,7 @@ interface TextInputFieldProps {
   warning?: ReactNode
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void
   maxLength?: number
+  isError?: boolean
 }
 
 const TextInputField = ({
@@ -30,13 +31,14 @@ const TextInputField = ({
   afterInput,
   warning,
   onBlur,
-  maxLength
+  maxLength,
+  isError
 }: TextInputFieldProps) => {
   const { isRTL } = useContext(ContextProvider)
 
   return (
     <div
-      className={classnames(`textInputFieldWrapper Field ${extraClass}`, {
+      className={cn(`textInputFieldWrapper Field ${extraClass}`, {
         isRTL
       })}
     >
@@ -51,6 +53,7 @@ const TextInputField = ({
         placeholder={placeholder}
         onBlur={onBlur}
         maxLength={maxLength}
+        className={isError ? 'inputFieldError' : ''}
       />
       {value && warning}
       {afterInput}

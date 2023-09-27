@@ -52,6 +52,7 @@ export default React.memo(function InstallModal({
   const [accessCode, setAccessCode] = useState('')
   const [accessCodeVerified, setAccessCodeVerified] = useState(false)
   const [errorText, setErrorText] = useState('')
+  const [successText, setSuccessText] = useState('')
   const { t } = useTranslation()
 
   const numberOfChannels =
@@ -173,7 +174,14 @@ export default React.memo(function InstallModal({
 
         if (result.valid) {
           setErrorText('')
+          setSuccessText(
+            t(
+              'hyperplay.accesscodes.success.validation',
+              'Success! Access code is valid'
+            )
+          )
         } else {
+          setSuccessText('')
           setErrorText(
             t(
               'hyperplay.accesscodes.error.validation',
@@ -185,12 +193,21 @@ export default React.memo(function InstallModal({
     }
 
     if (channelRequiresAccessCode) validateAccessCode()
-    else setErrorText('')
+    else {
+      setErrorText('')
+      setSuccessText('')
+    }
   }, [selectedChannel, accessCode])
 
   const showDownloadDialog = !isSideload && gameInfo
 
   const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
+
+  const enableCTAButton =
+    !channelRequiresAccessCode ||
+    (channelRequiresAccessCode && accessCodeVerified)
+
+  console.log('errorText ', errorText)
 
   return (
     <div className="InstallModal">
@@ -212,10 +229,7 @@ export default React.memo(function InstallModal({
             crossoverBottle={crossoverBottle}
             channelNameToInstall={channelNameToInstall}
             accessCode={accessCode}
-            showCTAButton={
-              !channelRequiresAccessCode ||
-              (channelRequiresAccessCode && accessCodeVerified)
-            }
+            enableCTAButton={enableCTAButton}
           >
             <PlatformSelection
               disabled={disabledPlatformSelection}
@@ -236,10 +250,16 @@ export default React.memo(function InstallModal({
                 value={accessCode}
                 onChange={(ev) => setAccessCode(ev.target.value)}
                 htmlId="access_code_input"
+                isError={!!errorText}
               ></TextInputField>
             ) : null}
             {errorText && (
               <div className={`caption ${styles.errorText}`}>{errorText}</div>
+            )}
+            {successText && (
+              <div className={`caption ${styles.successText}`}>
+                {successText}
+              </div>
             )}
             {hasWine ? (
               <WineSelector
