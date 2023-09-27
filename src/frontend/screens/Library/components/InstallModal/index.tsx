@@ -27,6 +27,8 @@ import { getPlatformName } from 'frontend/helpers'
 import PlatformSelection from 'frontend/components/UI/PlatformSelection'
 import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
 import TextInputField from 'frontend/components/UI/TextInputField'
+import { useTranslation } from 'react-i18next'
+import styles from './index.module.scss'
 
 type Props = {
   appName: string
@@ -48,6 +50,9 @@ export default React.memo(function InstallModal({
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
   const [crossoverBottle, setCrossoverBottle] = useState('')
   const [accessCode, setAccessCode] = useState('')
+  const [accessCodeVerified, setAccessCodeVerified] = useState(false)
+  const [errorText, setErrorText] = useState('')
+  const { t } = useTranslation()
 
   const numberOfChannels =
     (gameInfo?.channels && Object.keys(gameInfo?.channels).length) ?? 0
@@ -153,9 +158,37 @@ export default React.memo(function InstallModal({
       setPlatformToInstall(availablePlatforms[0].value as InstallPlatform)
   }, [availablePlatforms])
 
+  useEffect(() => {
+    async function validateAccessCode() {
+      if (accessCode && selectedChannel?.channel_id !== undefined) {
+        const result = await window.api.checkHyperPlayAccessCode(
+          selectedChannel?.channel_id,
+          accessCode
+        )
+
+        setAccessCodeVerified(result.valid)
+
+        if (result.valid) {
+          setErrorText('')
+        } else {
+          setErrorText(
+            t(
+              'hyperplay.accesscodes.error.validation',
+              'Access code is invalid'
+            )
+          )
+        }
+      }
+    }
+
+    validateAccessCode()
+  }, [selectedChannel, accessCode])
+
   const showDownloadDialog = !isSideload && gameInfo
 
   const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
+  const channelRequiresAccessCode =
+    !!selectedChannel?.license_config.access_codes
 
   return (
     <div className="InstallModal">
@@ -177,6 +210,10 @@ export default React.memo(function InstallModal({
             crossoverBottle={crossoverBottle}
             channelNameToInstall={channelNameToInstall}
             accessCode={accessCode}
+            showCTAButton={
+              !channelRequiresAccessCode ||
+              (channelRequiresAccessCode && accessCodeVerified)
+            }
           >
             <PlatformSelection
               disabled={disabledPlatformSelection}
@@ -191,8 +228,7 @@ export default React.memo(function InstallModal({
                 gameInfo={gameInfo}
               />
             ) : null}
-            {runner === 'hyperplay' &&
-            selectedChannel?.license_config.access_codes ? (
+            {runner === 'hyperplay' && channelRequiresAccessCode ? (
               <TextInputField
                 placeholder={'Enter access code'}
                 value={accessCode}
@@ -200,6 +236,9 @@ export default React.memo(function InstallModal({
                 htmlId="access_code_input"
               ></TextInputField>
             ) : null}
+            {errorText && (
+              <div className={`caption ${styles.errorText}`}>{errorText}</div>
+            )}
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}

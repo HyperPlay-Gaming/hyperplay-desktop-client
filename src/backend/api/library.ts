@@ -116,3 +116,10 @@ export const onLibraryChange = async (
 export const removeFromLibrary = async (appName: string) => {
   ipcRenderer.send('removeFromLibrary', appName)
 }
+
+export const checkHyperPlayAccessCode = async (
+  channelId: number,
+  accessCode: string
+) => {
+  return ipcRenderer.invoke('checkHyperPlayAccessCode', channelId, accessCode)
+}

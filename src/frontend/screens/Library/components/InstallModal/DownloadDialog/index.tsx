@@ -61,6 +61,7 @@ interface Props {
   gameInfo: GameInfo
   channelNameToInstall: string
   accessCode: string
+  showCTAButton: boolean
 }
 
 type DiskSpaceInfo = {
@@ -115,7 +116,8 @@ export default function DownloadDialog({
   gameInfo,
   crossoverBottle,
   channelNameToInstall,
-  accessCode
+  accessCode,
+  showCTAButton
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -584,17 +586,19 @@ export default function DownloadDialog({
         >
           {t('button.import')}
         </Button>
-        <Button
-          type="secondary"
-          size="medium"
-          onClick={async () => handleInstall()}
-          disabled={!readyToInstall}
-        >
-          {!readyToInstall && (
-            <FontAwesomeIcon className="fa-spin-pulse" icon={faSpinner} />
-          )}
-          {readyToInstall && getInstallLabel()}
-        </Button>
+        {showCTAButton && (
+          <Button
+            type="secondary"
+            size="medium"
+            onClick={async () => handleInstall()}
+            disabled={!readyToInstall}
+          >
+            {!readyToInstall && (
+              <FontAwesomeIcon className="fa-spin-pulse" icon={faSpinner} />
+            )}
+            {readyToInstall && getInstallLabel()}
+          </Button>
+        )}
       </DialogFooter>
     </>
   )
