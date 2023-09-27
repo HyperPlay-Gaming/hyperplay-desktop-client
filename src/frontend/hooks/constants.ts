@@ -43,8 +43,8 @@ export function getStatusLabel({
 }
 
 const storage = window.localStorage
-const nonavailableGames = storage.getItem('nonAvailableGames') || '[]'
-const nonavailableGamesArray = JSON.parse(nonavailableGames)
+const nonAvailableGames = storage.getItem('nonAvailableGames') || '[]'
+const nonAvailableGamesArray = JSON.parse(nonAvailableGames)
 
 export async function handleNonAvailableGames(appName: string, runner: Runner) {
   const gameAvailable = await window.api.isGameAvailable({
@@ -53,14 +53,14 @@ export async function handleNonAvailableGames(appName: string, runner: Runner) {
   })
 
   if (!gameAvailable) {
-    if (!nonavailableGamesArray.includes(appName)) {
-      nonavailableGamesArray.push(appName)
-      libraryState.nonavailableGames = nonavailableGamesArray
+    if (!nonAvailableGamesArray.includes(appName)) {
+      nonAvailableGamesArray.push(appName)
+      libraryState.nonAvailableGames = nonAvailableGamesArray
     }
   } else {
-    if (nonavailableGamesArray.includes(appName)) {
-      nonavailableGamesArray.splice(nonavailableGamesArray.indexOf(appName), 1)
-      libraryState.nonavailableGames = nonavailableGamesArray
+    if (nonAvailableGamesArray.includes(appName)) {
+      nonAvailableGamesArray.splice(nonAvailableGamesArray.indexOf(appName), 1)
+      libraryState.nonAvailableGames = nonAvailableGamesArray
     }
   }
   return gameAvailable

@@ -212,7 +212,7 @@ describe('libraryState.ts', () => {
       getDummyGameInfo({ title: 'c', is_installed: true, runner: 'gog' })
     ]
 
-    libraryState.nonavailableGames = [game_b]
+    libraryState.nonAvailableGames = [game_b]
 
     expect(libraryState.library.length).toBe(2)
     expect(libraryState.library[0].app_name).toBe('b')

@@ -29,7 +29,7 @@ class LibraryState {
   gogLibrary: GameInfo[] = []
   sideloadedLibrary: GameInfo[] = []
   hyperPlayLibrary: GameInfo[] = []
-  nonavailableGames: GameInfo[] = []
+  nonAvailableGames: GameInfo[] = []
   private gameStatuses: GameStatus[] = []
 
   // cache list of games being installed
@@ -229,13 +229,10 @@ class LibraryState {
       library = [...HPLibrary, ...sideloadedApps, ...epicLibrary, ...gogLibrary]
 
       if (!this.showNonAvailable) {
-        // TODO: refactor to linear algo with non available game map
-        library = library.filter(
-          (game) =>
-            this.nonavailableGames.findIndex(
-              (val) => val.app_name === game.app_name
-            ) === -1
+        const nonAvailableAppNames = Object.fromEntries(
+          this.nonAvailableGames.map((game) => [game.app_name, true])
         )
+        library = library.filter((game) => !nonAvailableAppNames[game.app_name])
       }
     }
 
@@ -355,7 +352,7 @@ export function resetLibraryState() {
   libraryState.gogLibrary = []
   libraryState.sideloadedLibrary = []
   libraryState.hyperPlayLibrary = []
-  libraryState.nonavailableGames = []
+  libraryState.nonAvailableGames = []
   libraryState.installing = []
   libraryState.libraryTopSection = ''
   libraryState.favouriteGames = undefined
