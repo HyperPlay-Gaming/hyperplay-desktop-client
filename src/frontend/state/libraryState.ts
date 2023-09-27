@@ -275,13 +275,13 @@ class LibraryState {
     library = library.sort((a: { title: string }, b: { title: string }) => {
       const gameA = a.title.toUpperCase().replace('THE ', '')
       const gameB = b.title.toUpperCase().replace('THE ', '')
-      return this.sortAscending
-        ? gameA < gameB
-          ? -1
-          : 1
-        : gameA > gameB
-        ? -1
-        : 1
+      if (this.sortAscending) {
+        if (gameA < gameB) return -1
+        else return 1
+      } else {
+        if (gameA > gameB) return -1
+        else return 1
+      }
     })
 
     if (this.showOnlyDownloaded)
