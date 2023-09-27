@@ -25,6 +25,7 @@ import {
 import classNames from 'classnames'
 import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
+import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
 
 interface Card {
   buttonClick: () => void
@@ -75,6 +76,8 @@ const GameCard = ({
   }
 
   const { status, folder } = hasStatus(appName, gameInfo, size)
+  const { statusText: downloadStatusText, status: downloadStatus } =
+    useGetDownloadStatusText(appName, gameInfo)
 
   useEffect(() => {
     setIsLaunching(false)
@@ -137,20 +140,11 @@ const GameCard = ({
     return 'NOT_INSTALLED'
   }
 
-  const getMessage = (): string | undefined => {
-    if (status === 'extracting') {
-      return t('hyperplay.gamecard.extracting', 'Extracting...')
-    }
-    if (isPaused) {
-      return t('hyperplay.gamecard.paused', 'Paused')
-    }
-    if (isInstalling) {
-      return t('hyperplay.gamecard.installing', 'Downloading...')
-    }
-    return undefined
-  }
-
-  const isHiddenGame = libraryState.isGameHidden(appName)
+  const isHiddenGame = useMemo(() => {
+    return !!hiddenGames.list.find(
+      (hiddenGame: HiddenGame) => hiddenGame.appName === appName
+    )
+  }, [hiddenGames, appName])
 
   const isBrowserGame = installPlatform === 'Browser'
 
@@ -290,6 +284,10 @@ const GameCard = ({
 
   const { activeController } = useContext(ContextProvider)
 
+  if (downloadStatus === 'extracting') {
+    progress.percent = 100
+  }
+
   return (
     <>
       {showStopInstallModal ? (
@@ -361,7 +359,7 @@ const GameCard = ({
             updateGame(gameInfo)
           )}
           progress={progress}
-          message={getMessage()}
+          message={downloadStatusText}
           actionDisabled={isLaunching}
           alwaysShowInColor={allTilesInColor}
           store={runner}
