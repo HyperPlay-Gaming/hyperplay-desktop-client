@@ -164,7 +164,7 @@ export default React.memo(function InstallModal({
 
   useEffect(() => {
     async function validateAccessCode() {
-      if (accessCode && selectedChannel?.channel_id !== undefined) {
+      if (selectedChannel?.channel_id !== undefined) {
         const result = await window.api.checkHyperPlayAccessCode(
           selectedChannel?.channel_id,
           accessCode
@@ -192,10 +192,11 @@ export default React.memo(function InstallModal({
       }
     }
 
-    if (channelRequiresAccessCode) validateAccessCode()
+    if (accessCode && channelRequiresAccessCode) validateAccessCode()
     else {
       setErrorText('')
       setSuccessText('')
+      setAccessCodeVerified(false)
     }
   }, [selectedChannel, accessCode])
 
@@ -206,8 +207,6 @@ export default React.memo(function InstallModal({
   const enableCTAButton =
     !channelRequiresAccessCode ||
     (channelRequiresAccessCode && accessCodeVerified)
-
-  console.log('errorText ', errorText)
 
   return (
     <div className="InstallModal">
