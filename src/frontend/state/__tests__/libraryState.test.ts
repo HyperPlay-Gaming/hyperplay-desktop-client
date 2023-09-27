@@ -8,8 +8,28 @@ Object.defineProperty(window, 'api', {
   }
 })
 
-import libraryState, { resetLibraryState } from '../libraryState'
+import libraryState from '../libraryState'
 import { Filter, GameInfo } from '../../../common/types'
+
+function resetLibraryState() {
+  libraryState.epicLibrary = []
+  libraryState.gogLibrary = []
+  libraryState.sideloadedLibrary = []
+  libraryState.hyperPlayLibrary = []
+  libraryState.nonAvailableGames = []
+  libraryState.installing = []
+  libraryState.libraryTopSection = ''
+  libraryState.favouriteGames = undefined
+  libraryState.hiddenGames = undefined
+  libraryState.filterText = ''
+  libraryState.category = 'all'
+  libraryState.selectedFilter = undefined
+  libraryState.showFavouritesLibrary = false
+  libraryState.showOnlyDownloaded = false
+  libraryState.showHidden = false
+  libraryState.showNonAvailable = true
+  libraryState.filterPlatforms = []
+}
 
 function getDummyGameInfo(props: Partial<GameInfo>) {
   return {

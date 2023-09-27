@@ -344,25 +344,4 @@ class LibraryState {
   }
 }
 
-const libraryState = new LibraryState()
-export default libraryState
-
-export function resetLibraryState() {
-  libraryState.epicLibrary = []
-  libraryState.gogLibrary = []
-  libraryState.sideloadedLibrary = []
-  libraryState.hyperPlayLibrary = []
-  libraryState.nonAvailableGames = []
-  libraryState.installing = []
-  libraryState.libraryTopSection = ''
-  libraryState.favouriteGames = undefined
-  libraryState.hiddenGames = undefined
-  libraryState.filterText = ''
-  libraryState.category = 'all'
-  libraryState.selectedFilter = undefined
-  libraryState.showFavouritesLibrary = false
-  libraryState.showOnlyDownloaded = false
-  libraryState.showHidden = false
-  libraryState.showNonAvailable = true
-  libraryState.filterPlatforms = []
-}
+export default new LibraryState()
