@@ -70,7 +70,9 @@ export default function GamesSettings({ useDetails = true }: Props) {
   }, [])
 
   const isSettingsPage = !gameInfo
-  const showCrossPlatformOptions = (isSettingsPage && !isWin) || (!isSettingsPage && !nativeGame)
+  // GamesSettings is shown on both the settings page and the game card's settings
+  const showCrossPlatformOptions =
+    (isSettingsPage && !isWin) || (!isSettingsPage && !nativeGame)
 
   return (
     <>
