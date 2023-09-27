@@ -9,7 +9,7 @@ Object.defineProperty(window, 'api', {
 })
 
 import libraryState, { resetLibraryState } from '../libraryState'
-import { GameInfo } from '../../../common/types'
+import { Filter, GameInfo } from '../../../common/types'
 
 function getDummyGameInfo(props: Partial<GameInfo>) {
   return {
@@ -25,7 +25,7 @@ function getDummyGameInfo(props: Partial<GameInfo>) {
   } as GameInfo
 }
 
-const FILTER_IDS = {
+const FILTER_IDS: Record<string, Filter> = {
   ALPHA_ASC: 'alphabeticalAscending',
   ALPHA_DES: 'alphabeticalDescending',
   SORT_INSTALLED: 'sortByInstalled'

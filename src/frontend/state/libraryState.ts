@@ -179,10 +179,6 @@ class LibraryState {
   }
 
   filterByPlatform(library: GameInfo[], platformsToInclude: Platform[]) {
-    if (!library) {
-      return []
-    }
-
     return library.filter((game) =>
       this.gameSupportsAtLeastOneFilteredPlatform(game, platformsToInclude)
     )
