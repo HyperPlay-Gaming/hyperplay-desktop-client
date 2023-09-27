@@ -158,6 +158,9 @@ export default React.memo(function InstallModal({
       setPlatformToInstall(availablePlatforms[0].value as InstallPlatform)
   }, [availablePlatforms])
 
+  const channelRequiresAccessCode =
+    !!selectedChannel?.license_config.access_codes
+
   useEffect(() => {
     async function validateAccessCode() {
       if (accessCode && selectedChannel?.channel_id !== undefined) {
@@ -181,14 +184,13 @@ export default React.memo(function InstallModal({
       }
     }
 
-    validateAccessCode()
+    if (channelRequiresAccessCode) validateAccessCode()
+    else setErrorText('')
   }, [selectedChannel, accessCode])
 
   const showDownloadDialog = !isSideload && gameInfo
 
   const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
-  const channelRequiresAccessCode =
-    !!selectedChannel?.license_config.access_codes
 
   return (
     <div className="InstallModal">
