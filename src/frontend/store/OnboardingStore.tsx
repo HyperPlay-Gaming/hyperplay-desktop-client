@@ -15,6 +15,7 @@ class OnboardingStore {
   }
 
   public openOnboarding() {
+    console.log('open onboarding called in onboarding store')
     this.isOnboardingOpen = true
   }
 

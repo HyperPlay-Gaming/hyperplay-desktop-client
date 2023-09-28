@@ -34,6 +34,7 @@ import { ENABLE_AMAZON_STORE } from './constants'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
+  console.log('rendering app')
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>

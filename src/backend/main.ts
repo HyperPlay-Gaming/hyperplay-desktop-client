@@ -164,6 +164,10 @@ import {
 
 import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
+import {
+  installExtension,
+  REACT_DEVELOPER_TOOLS
+} from 'electron-extension-installer'
 
 let sentryInitialized = false
 function initSentry() {
@@ -272,7 +276,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
   //   detectVCRedist(mainWindow)
   // }
 
-  loadMainWindowURL()
+  await loadMainWindowURL()
 
   return mainWindow
 }
@@ -282,8 +286,15 @@ const prodAppUrl = `file://${path.join(
   publicDir,
   '../build/index.html?view=App'
 )}`
-const loadMainWindowURL = function () {
+const loadMainWindowURL = async function () {
   if (!app.isPackaged && process.env.CI !== 'e2e') {
+    console.log('installing react developer tools extension')
+    await installExtension(REACT_DEVELOPER_TOOLS)
+      .then((name) => console.log(`Added extension: ${name}`))
+      .catch((err: string) => {
+        logWarning(['An error occurred: ', err], LogPrefix.Backend)
+      })
+
     mainWindow.loadURL(devAppUrl)
     // Open the DevTools.
     mainWindow.webContents.openDevTools()

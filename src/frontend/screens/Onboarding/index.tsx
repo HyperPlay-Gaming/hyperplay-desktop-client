@@ -22,11 +22,18 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
     initScreen = ONBOARDING_SCREEN.WALLET_SELECTION
   }
 
+  console.log('onboaridng render ', initScreen)
+
   const [currentScreen, setCurrentScreen] = useState(initScreen)
 
   // Track the screen view once each time the view changes
   useEffect(() => {
     window.api.trackScreen('Onboarding', { view: currentScreen })
+
+    if (currentScreen === ONBOARDING_SCREEN.WALLET_SELECTION) {
+      window.api.trackEvent({ event: 'Onboarding Started' })
+      console.log('onboarding started event ', currentScreen)
+    }
   }, [currentScreen])
 
   function getWelcomeElement() {

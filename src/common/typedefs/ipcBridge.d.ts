@@ -66,7 +66,7 @@ interface HyperPlaySyncIPCFunctions {
   providerRequestFailed: ProxiedProviderEventCallback
   loadingScreenReady: () => void
   reloadApp: () => void
-  createNewMetaMaskWallet: () => void
+  createNewMetaMaskWallet: (mmInitMethod: MetaMaskInitMethod) => void
   enableOnEvents: (topic: string) => void
   addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
@@ -181,7 +181,11 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<chrome.tabs.Tab>
   chromeTabsRemove: (tabIds: number | number[]) => Promise<void>
   //
-  importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
+  importMetaMask: (
+    mmInitMethod: MetaMaskInitMethod,
+    dbPath?: string | null,
+    browser?: ImportableBrowser
+  ) => Promise<boolean>
   getMetaMaskImportOptions: () => Promise<MetaMaskImportOptions>
   isExtensionInitialized: () => Promise<boolean>
   getTabUrl: () => Promise<string>

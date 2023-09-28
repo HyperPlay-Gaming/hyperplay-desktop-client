@@ -15,7 +15,11 @@ import WalletInfoScreen from './screens/info'
 import WalletScanScreen from './screens/scan'
 import WalletImportScreen from './screens/import'
 import ContextProvider from 'frontend/state/ContextProvider'
-import { MetaMaskImportOptions } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+import {
+  ImportableBrowser,
+  MetaMaskImportOptions,
+  MetaMaskInitMethod
+} from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import {
   WalletConnectedType,
   ConnectionRequestRejectedType,
@@ -79,6 +83,11 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
           ? 'MetaMask Mobile'
           : 'Wallet Connect'
     })
+
+    window.api.trackEvent({
+      event: 'Onboarding Provider Clicked',
+      properties: { provider }
+    })
   }
 
   async function connectMetaMaskExtension() {
@@ -109,7 +118,6 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       .isExtensionInitialized()
       .then((val) => setMetamaskIsInitialized(val))
 
-    window.api.trackEvent({ event: 'Onboarding Started' })
     return () => {
       removeConnectedListener()
       removeRejectedListener()
@@ -124,11 +132,19 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     })
   }, [contentParams])
 
-  async function handleImportMmExtensionClicked(dbPath?: string | null) {
-    if (dbPath === null) {
-      window.api.createNewMetaMaskWallet()
+  async function handleImportMmExtensionClicked(
+    mmInitMethod: MetaMaskInitMethod,
+    dbPath?: string,
+    browser?: ImportableBrowser
+  ) {
+    if (mmInitMethod === 'CREATE' || mmInitMethod === 'SECRET_PHRASE') {
+      window.api.createNewMetaMaskWallet(mmInitMethod)
     } else {
-      const success = await window.api.importMetaMask(dbPath)
+      const success = await window.api.importMetaMask(
+        mmInitMethod,
+        dbPath ?? null,
+        browser
+      )
       if (!success) {
         console.error('There was a problem importing MetaMask!')
         return
@@ -167,7 +183,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
           <WalletInfoScreen
             skipClicked={props.disableOnboarding}
             createWalletClicked={async () =>
-              handleImportMmExtensionClicked(null)
+              handleImportMmExtensionClicked('CREATE')
             }
             mmInitialized={metamaskIsInitialized}
           />
@@ -226,7 +242,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
           <WalletInfoScreen
             skipClicked={props.disableOnboarding}
             createWalletClicked={async () =>
-              handleImportMmExtensionClicked(null)
+              handleImportMmExtensionClicked('CREATE')
             }
             mmInitialized={metamaskIsInitialized}
           />

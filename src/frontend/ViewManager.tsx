@@ -35,6 +35,7 @@ const ViewManager = function () {
     throw new Error("View '" + params.view + "' is undefined")
 
   const view = params.view !== undefined ? Views[params.view] : <></>
+  console.log('returning view from view manager for ', params.view)
   return view
 }
 

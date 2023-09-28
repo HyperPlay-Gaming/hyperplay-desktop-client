@@ -4,7 +4,8 @@ import ImportScreenStyles from './index.module.scss'
 import {
   BrowserProfile,
   ImportableBrowser,
-  MetaMaskImportOptions
+  MetaMaskImportOptions,
+  MetaMaskInitMethod
 } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportOption from 'frontend/screens/Onboarding/components/importOption'
 import { NavLink } from 'react-router-dom'
@@ -14,15 +15,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface ImportProps {
   importOptions: MetaMaskImportOptions
-  handleImportMmExtensionClicked: (dbPath?: null | string) => Promise<void>
+  handleImportMmExtensionClicked: (
+    mmInitMethod: MetaMaskInitMethod,
+    dbPath?: string,
+    browser?: ImportableBrowser
+  ) => Promise<void>
 }
 
-const ImportScreen = ({
+const WalletImportScreen = ({
   importOptions = {},
   handleImportMmExtensionClicked
 }: ImportProps) => {
   const [err, setError] = useState('')
-  const [browserSelected, setBrowserSelected] = useState('')
+  const [browserSelected, setBrowserSelected] =
+    useState<ImportableBrowser | null>(null)
   const [showManualImport, setShowManualImport] = useState(false)
   const [manualImportPath, setManualImportPath] = useState(
     '<profile>/Local Extension Settings/<metamask app id>'
@@ -45,8 +51,6 @@ const ImportScreen = ({
     }
   }, [])
 
-  console.log('importOptions = ', importOptions)
-
   return (
     <>
       <div className={`title ${ImportScreenStyles.title}`}>
@@ -61,18 +65,22 @@ const ImportScreen = ({
           `By importing, your MetaMask installation and  settings will be imported into HyperPlay.`
         )}
       </div>
-      {browserSelected === '' ? (
+      {browserSelected === null ||
+      importOptions[browserSelected] === undefined ? (
         <div className={ImportScreenStyles.importOptionsContainer}>
-          {importOptions &&
-            Object.keys(importOptions).map((browser) => {
-              return (
-                <ImportOption
-                  onClick={async () => setBrowserSelected(browser)}
-                  title={browser as ImportableBrowser}
-                  key={browser}
-                />
-              )
-            })}
+          {importOptions !== undefined
+            ? Object.keys(importOptions).map((browser) => {
+                const importableBrowser =
+                  browser as unknown as ImportableBrowser
+                return (
+                  <ImportOption
+                    onClick={async () => setBrowserSelected(importableBrowser)}
+                    title={importableBrowser}
+                    key={importableBrowser}
+                  />
+                )
+              })
+            : null}
           <ImportOption
             override="create"
             title={t(
@@ -80,7 +88,7 @@ const ImportScreen = ({
               `Create new MM extension wallet`
             )}
             onClick={async () => {
-              handleImportMmExtensionClicked(null)
+              handleImportMmExtensionClicked('CREATE')
             }}
           />
           <NavLink to="/metamaskSecretPhrase">
@@ -91,79 +99,90 @@ const ImportScreen = ({
                 `Access with secret recovery phrase`
               )}
               onClick={async () => {
-                handleImportMmExtensionClicked(null)
+                handleImportMmExtensionClicked('SECRET_PHRASE')
               }}
             />
           </NavLink>
         </div>
       ) : (
         <>
-          <div className={ImportScreenStyles.profileOptionsContainer}>
-            {Object.keys(importOptions[browserSelected]).map((pkgManager) => {
-              if (importOptions[browserSelected][pkgManager].length === 0)
-                return null
-              return (
-                <div
-                  className={ImportScreenStyles.packageOptionsContainer}
-                  key={`${pkgManager}-importOption-container`}
-                >
-                  <div
-                    className={`caption ${ImportScreenStyles.packageManagerSubTitle}`}
-                  >
-                    {pkgManager}
-                  </div>
-                  {importOptions[browserSelected][pkgManager].map(
-                    (profile: BrowserProfile, index: number) => (
-                      <button
-                        className={`${ImportScreenStyles.importBrowserProfileOption} body`}
-                        key={`${browserSelected}-${pkgManager}-${profile.name}-menu-item`}
-                        onClick={async () =>
-                          handleImportMmExtensionClicked(
-                            importOptions[browserSelected][pkgManager][index]
-                              .path
-                          )
-                        }
+          {
+            <div className={ImportScreenStyles.profileOptionsContainer}>
+              {Object.keys(importOptions[browserSelected]!).map(
+                (pkgManager) => {
+                  if (importOptions[browserSelected]![pkgManager].length === 0)
+                    return null
+                  return (
+                    <div
+                      className={ImportScreenStyles.packageOptionsContainer}
+                      key={`${pkgManager}-importOption-container`}
+                    >
+                      <div
+                        className={`caption ${ImportScreenStyles.packageManagerSubTitle}`}
                       >
-                        <div className={ImportScreenStyles.profileImage}>
-                          {profile.imagePath !== '' ? (
-                            <img src={`file://${profile.imagePath}`} />
-                          ) : (
-                            <div
-                              className={ImportScreenStyles.defaultProfileImage}
-                              style={{
-                                backgroundColor:
-                                  '#' +
-                                  (profile.imageBackgroundColor
-                                    ? profile.imageBackgroundColor
-                                    : '202124')
-                              }}
-                            >
-                              <FontAwesomeIcon icon={faUser} />
+                        {pkgManager}
+                      </div>
+                      {importOptions[browserSelected]![pkgManager].map(
+                        (profile: BrowserProfile, index: number) => (
+                          <button
+                            className={`${ImportScreenStyles.importBrowserProfileOption} body`}
+                            key={`${browserSelected}-${pkgManager}-${profile.name}-menu-item`}
+                            onClick={async () =>
+                              handleImportMmExtensionClicked(
+                                'IMPORT',
+                                importOptions[browserSelected]![pkgManager][
+                                  index
+                                ].path,
+                                browserSelected
+                              )
+                            }
+                          >
+                            <div className={ImportScreenStyles.profileImage}>
+                              {profile.imagePath !== '' ? (
+                                <img src={`file://${profile.imagePath}`} />
+                              ) : (
+                                <div
+                                  className={
+                                    ImportScreenStyles.defaultProfileImage
+                                  }
+                                  style={{
+                                    backgroundColor:
+                                      '#' +
+                                      (profile.imageBackgroundColor
+                                        ? profile.imageBackgroundColor
+                                        : '202124')
+                                  }}
+                                >
+                                  <FontAwesomeIcon icon={faUser} />
+                                </div>
+                              )}
                             </div>
-                          )}
-                        </div>
-                        <div>
-                          <div
-                            className={`menu ${ImportScreenStyles.profileName}`}
-                          >
-                            {profile.name}
-                          </div>
-                          <div
-                            className={`caption ${ImportScreenStyles.displayName}`}
-                          >
-                            {profile.displayName}
-                          </div>
-                        </div>
-                        <div className={ImportScreenStyles.profileRightArrow}>
-                          <Images.ChevronRight width="12px" height="12px" />
-                        </div>
-                      </button>
-                    )
-                  )}
-                </div>
-              )
-            })}
-          </div>
+                            <div>
+                              <div
+                                className={`menu ${ImportScreenStyles.profileName}`}
+                              >
+                                {profile.name}
+                              </div>
+                              <div
+                                className={`caption ${ImportScreenStyles.displayName}`}
+                              >
+                                {profile.displayName}
+                              </div>
+                            </div>
+                            <div
+                              className={ImportScreenStyles.profileRightArrow}
+                            >
+                              <Images.ChevronRight width="12px" height="12px" />
+                            </div>
+                          </button>
+                        )
+                      )}
+                    </div>
+                  )
+                }
+              )}
+            </div>
+          }
           {showManualImport ? (
             <>
               <hr className={ImportScreenStyles.manualHr}></hr>
@@ -198,31 +217,36 @@ const ImportScreen = ({
               </div>
             </Button>
           )}
-          <div
-            className={
-              showManualImport
-                ? ImportScreenStyles.manualImportActionContainer
-                : ImportScreenStyles.importActionContainer
-            }
-          >
-            <Button
-              onClick={() => setBrowserSelected('')}
-              type="tertiary"
-              className={ImportScreenStyles.goBackProfileButton}
+          {
+            <div
+              className={
+                showManualImport
+                  ? ImportScreenStyles.manualImportActionContainer
+                  : ImportScreenStyles.importActionContainer
+              }
             >
-              {t('webview.controls.back')}
-            </Button>
-            {showManualImport ? (
               <Button
-                type="primary"
-                onClick={async () =>
-                  handleImportMmExtensionClicked(manualImportPath)
-                }
+                onClick={() => setBrowserSelected(null)}
+                type="tertiary"
+                className={ImportScreenStyles.goBackProfileButton}
               >
-                {t('button.continue')}
+                {t('webview.controls.back')}
               </Button>
-            ) : null}
-          </div>
+              {showManualImport ? (
+                <Button
+                  type="primary"
+                  onClick={async () =>
+                    handleImportMmExtensionClicked(
+                      'MANUAL_IMPORT',
+                      manualImportPath
+                    )
+                  }
+                >
+                  {t('button.continue')}
+                </Button>
+              ) : null}
+            </div>
+          }
         </>
       )}
 
@@ -233,4 +257,4 @@ const ImportScreen = ({
   )
 }
 
-export default ImportScreen
+export default WalletImportScreen
