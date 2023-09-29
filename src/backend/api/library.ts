@@ -119,6 +119,11 @@ export const onLibraryChange = async (
 
 export const getGameOverride = async () => ipcRenderer.invoke('getGameOverride')
 
+/**
+ * Get List of Selective Download Tags for games that supports it (e.g. Fortnite, FallOut New Vegas) on Epic Games
+ * @param appName string
+ * @returns
+ */
 export const getGameSdl = async (appName: string) =>
   ipcRenderer.invoke('getGameSdl', appName)
 

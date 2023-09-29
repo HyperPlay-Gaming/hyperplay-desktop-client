@@ -713,6 +713,11 @@ export async function getGameOverride(): Promise<GameOverride> {
   }
 }
 
+/**
+ * Get List of Selective Download Tags for games that supports it (e.g. Fortnite, FallOut New Vegas) on Epic Games
+ * @param appName string
+ * @returns
+ */
 export async function getGameSdl(
   appName: string
 ): Promise<SelectiveDownload[]> {

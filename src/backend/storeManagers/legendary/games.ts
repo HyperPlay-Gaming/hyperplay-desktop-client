@@ -545,6 +545,11 @@ export async function removeShortcuts(appName: string) {
   return removeShortcutsUtil(getGameInfo(appName))
 }
 
+/**
+ * Get List of Selective Download Tags for games that supports it (e.g. Fortnite, FallOut New Vegas) on Epic Games
+ * @param sdlList
+ * @returns
+ */
 function getSdlList(sdlList: Array<string>) {
   return [
     // Legendary needs an empty tag for it to download the other needed files

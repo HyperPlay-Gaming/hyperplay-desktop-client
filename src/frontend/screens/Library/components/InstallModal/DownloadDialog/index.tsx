@@ -287,6 +287,7 @@ export default function DownloadDialog({
   }, [appName, i18n.languages, platformToInstall])
 
   useEffect(() => {
+    // Get List of Selective Downloads if available for Epic Games
     const getGameSdl = async () => {
       if (runner === 'legendary') {
         const { sdl_config } = await window.api.getGameOverride()
