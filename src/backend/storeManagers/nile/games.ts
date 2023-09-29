@@ -37,7 +37,7 @@ import {
   setupEnvVars,
   setupWrappers
 } from 'backend/launcher'
-import { appendFileSync, existsSync } from 'graceful-fs'
+import { appendFileSync, existsSync, rmdir } from 'graceful-fs'
 import { logFileLocation } from 'backend/storeManagers/storeManagerCommon/games'
 import { showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import { t } from 'i18next'
@@ -523,6 +523,19 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
     await removeShortcutsUtil(gameInfo)
     await removeNonSteamGame({ gameInfo })
     installState(appName, false)
+    rmdir(gameInfo.install.install_path!, { recursive: true }, (err) => {
+      if (err) {
+        logError(
+          [
+            'Failed to remove',
+            `${appName} from`,
+            gameInfo.install.install_path,
+            err
+          ],
+          LogPrefix.Nile
+        )
+      }
+    })
   }
   sendFrontendMessage('refreshLibrary', 'nile')
   return res
