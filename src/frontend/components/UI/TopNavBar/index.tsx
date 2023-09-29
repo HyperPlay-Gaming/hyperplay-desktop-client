@@ -29,6 +29,7 @@ const TopNavBar = observer(() => {
     '/hyperplaystore',
     '/gogstore',
     '/epicstore',
+    '/amazonstore',
     '/store-page'
   ]
 
