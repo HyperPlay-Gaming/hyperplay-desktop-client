@@ -48,7 +48,13 @@ const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
 const toolsPath = join(appConfigFolder, 'tools')
 const iconsFolder = join(appConfigFolder, 'icons')
 const installPath = join(homedir(), 'Games', 'HyperPlay')
-const defaultWinePrefix = join(homedir(), 'Games', 'HyperPlay', 'Prefixes')
+const defaultWinePrefix = join(
+  homedir(),
+  'Games',
+  'HyperPlay',
+  'Prefixes',
+  'default'
+)
 const anticheatDataPath = join(appConfigFolder, 'areweanticheatyet.json')
 const nileConfigPath = join(appFolder, 'nile_config', 'nile')
 const runtimePath = join(toolsPath, 'runtimes')
