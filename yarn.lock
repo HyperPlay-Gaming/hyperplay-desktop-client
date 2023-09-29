@@ -1648,10 +1648,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@hyperplay/ui@^0.1.14":
-  version "0.1.14"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.14.tgz#3af3752766978060063cbdb69aaa2b93ca14c16e"
-  integrity sha512-c5VcCFSDgk0VxtFHGxy5PG3KuajXTgZHKLQLK7erm3eXlM+/auZH5Yr72NXIcrLCBBJmMMY+fa0ZNmC494GZnA==
+"@hyperplay/ui@^0.1.19-auth-0.5":
+  version "0.1.19-auth-0.5"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.19-auth-0.5.tgz#956b6bc5d02dd76304a9cadefe20a46449b9351c"
+  integrity sha512-c6IADLd6IsU5paeIdRnxFiMgMh1CdabAX9B7/Z6VUAzTuDgqJMOSUZCTy6MJHvIhyVD9cCXCFHfkHKUiXwvqGA==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"

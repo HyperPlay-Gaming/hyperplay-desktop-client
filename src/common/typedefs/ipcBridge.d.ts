@@ -1,4 +1,9 @@
-import { HyperPlayInstallInfo, DownloadManagerState } from './../types'
+import {
+  HyperPlayInstallInfo,
+  DownloadManagerState,
+  AchievementStore,
+  Achievement
+} from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -195,6 +200,7 @@ interface HyperPlayAsyncIPCFunctions {
   removeTempDownloadFiles: (appName: string) => Promise<void>
   getImportFolderPath: () => Promise<string>
   appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
+  getAchievements: (store: AchievementStore) => Promise<Achievement[]>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

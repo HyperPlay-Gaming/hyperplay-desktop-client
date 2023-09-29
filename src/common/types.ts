@@ -812,3 +812,22 @@ export type AvailablePlatforms = {
   value: string
   icon: IconDefinition
 }[]
+
+export type AchievementStore = 'hyperplay' | 'steam' | 'epic'
+
+export interface Achievement {
+  apiname: string
+  achieved: number
+  unlocktime: number
+  name: string
+  defaultvalue: number
+  displayName: string
+  hidden: number
+  description: string
+  icon: string
+  icongray: string
+  iconName: string
+  gameId: number
+  gameName: string
+  gameIconURL: string
+}

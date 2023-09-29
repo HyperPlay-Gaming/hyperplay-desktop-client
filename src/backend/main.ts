@@ -1794,6 +1794,7 @@ import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/elect
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
+import 'backend/hyperplay-achievements'
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
