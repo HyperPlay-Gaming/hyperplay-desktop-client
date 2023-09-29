@@ -24,7 +24,7 @@ export class NileUser {
     deleteAbortController('nile-auth')
     const output: NileLoginData = JSON.parse(stdout)
 
-    logInfo(['Register data is:', output], LogPrefix.Nile)
+    logInfo(['Register data is:'], LogPrefix.Nile)
     return output
   }
 

@@ -123,22 +123,25 @@ function WebView() {
       refresh: true,
       message: t('status.preparing_login', 'Preparing Login...')
     })
-    amazon
-      .getLoginData()
-      .then((data) => {
-        setAmazonLoginData(data)
-        setLoading({
-          ...loading,
-          refresh: false
+    const getAmazonLoginData = async () => {
+      await amazon
+        .getLoginData()
+        .then((data) => {
+          setAmazonLoginData(data)
+          setLoading({
+            ...loading,
+            refresh: false
+          })
         })
-      })
-      .catch((error) => {
-        console.error('Failed to load Amazon login data', { error })
-        setLoading({
-          ...loading,
-          refresh: false
+        .catch((error) => {
+          console.error('Failed to load Amazon login data', { error })
+          setLoading({
+            ...loading,
+            refresh: false
+          })
         })
-      })
+    }
+    getAmazonLoginData()
   }, [pathname])
 
   const handleAmazonLogin = (code: string) => {
@@ -251,17 +254,23 @@ function WebView() {
   >(null)
 
   useEffect(() => {
-    if (startUrl.match(/epicgames\.com/) && !epic.username) {
-      setShowLoginWarningFor('epic')
-    } else if (
-      startUrl.match(/gog\.com/) &&
-      !startUrl.match(/auth\.gog\.com/) &&
-      !gog.username
-    ) {
-      setShowLoginWarningFor('gog')
-    } else if (startUrl.match(/gaming\.amazon\.com/) && !amazon.user_id) {
-      setShowLoginWarningFor('amazon')
-    }
+    const timeoutId = setTimeout(() => {
+      if (startUrl.match(/epicgames\.com/) && !epic.username) {
+        setShowLoginWarningFor('epic')
+      } else if (
+        startUrl.match(/gog\.com/) &&
+        !startUrl.match(/auth\.gog\.com/) &&
+        !gog.username
+      ) {
+        setShowLoginWarningFor('gog')
+      } else if (startUrl === AMAZON_STORE && !amazon.user_id) {
+        setShowLoginWarningFor('amazon')
+      } else {
+        setShowLoginWarningFor(null)
+      }
+    }, 3000)
+
+    return () => clearTimeout(timeoutId)
   }, [startUrl])
 
   useEffect(() => {
