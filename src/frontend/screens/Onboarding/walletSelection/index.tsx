@@ -48,7 +48,7 @@ interface ContentParams {
 }
 
 interface WalletSelectionProps {
-  disableOnboarding: () => void
+  disableOnboarding: (skipped?: boolean) => void
 }
 
 const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
@@ -73,7 +73,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       type: 'svg',
       color: { light: '#121212', dark: '#ffffffff' }
     }
-    console.log('uri updated to ', uri)
+
     const qrCodeSvgUpdated = await toString(uri, options)
     setContentParams({
       detailsScreen: WALLET_SELECTION_DETAILS_SCREEN.SCAN,
@@ -93,7 +93,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
   async function connectMetaMaskExtension() {
     setShowMetaMaskBrowserSidebarLinks(true)
     await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
-    props.disableOnboarding()
+    props.disableOnboarding(false)
   }
 
   async function handleMmExtensionProviderClicked() {
@@ -107,6 +107,11 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
         mmImportPaths: importOptions
       })
     }
+
+    window.api.trackEvent({
+      event: 'Onboarding Provider Clicked',
+      properties: { provider: PROVIDERS.METAMASK_EXTENSION }
+    })
   }
 
   useEffect(() => {
@@ -158,12 +163,11 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     accounts
   ) => {
     console.log('connected with accounts = ', accounts)
-    window.api.trackEvent({ event: 'Onboarding Completed' })
     setContentParams({
       detailsScreen: WALLET_SELECTION_DETAILS_SCREEN.CONNECTED
     })
     wait(4000).then(() => {
-      props.disableOnboarding()
+      props.disableOnboarding(false)
     })
   }
 
@@ -297,7 +301,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
         {getDetailsScreen(contentParams.detailsScreen)}
       </div>
       <div className={WalletSelectionStyles.closeButton}>
-        <button onClick={props.disableOnboarding}>
+        <button onClick={() => props.disableOnboarding(true)}>
           <FontAwesomeIcon icon={faXmark} color="var(--color-neutral-300)" />
         </button>
       </div>

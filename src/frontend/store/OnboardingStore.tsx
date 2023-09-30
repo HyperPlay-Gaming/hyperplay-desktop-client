@@ -9,6 +9,7 @@ import WalletState from '../state/WalletState'
 class OnboardingStore {
   isOnboardingOpen = true
   initialized = false
+  shouldReportNextConnectionEvent = false
 
   constructor() {
     makeAutoObservable(this)

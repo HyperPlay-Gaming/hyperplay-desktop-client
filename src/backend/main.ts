@@ -1874,9 +1874,12 @@ import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
 
 // sends messages to renderer process through preload.ts callbacks
-backendEvents.on('walletConnected', function (accounts: string[]) {
-  getMainWindow()?.webContents.send('walletConnected', accounts)
-})
+backendEvents.on(
+  'walletConnected',
+  function (accounts: string[], provider: PROVIDERS) {
+    getMainWindow()?.webContents.send('walletConnected', accounts, provider)
+  }
+)
 
 backendEvents.on('walletDisconnected', function (code: number, reason: string) {
   getMainWindow()?.webContents.send('walletDisconnected', code, reason)
@@ -1896,6 +1899,10 @@ backendEvents.on(
     getMainWindow()?.webContents.send('accountChanged', accounts, provider)
   }
 )
+
+backendEvents.on('metamaskOtpUpdated', function (otp: string) {
+  getMainWindow()?.webContents.send('metamaskOtpUpdated', otp)
+})
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 

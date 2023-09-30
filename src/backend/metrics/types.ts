@@ -51,9 +51,11 @@ export interface OnboardingProviderClicked {
   sensitiveProperties?: never
 }
 
-export interface OnboardingCompleted {
-  event: 'Onboarding Completed'
-  properties?: never
+export interface WalletConnected {
+  event: 'Wallet Connected'
+  properties?: {
+    provider: PROVIDERS
+  }
   sensitiveProperties?: never
 }
 
@@ -246,7 +248,7 @@ export type PossibleMetricPayloads =
   | OnboardingStarted
   | OnboardingProviderClicked
   | OnboardingSkipped
-  | OnboardingCompleted
+  | WalletConnected
   | MetaMaskInitialized
   | GameInstallRequested
   | GameInstallStarted

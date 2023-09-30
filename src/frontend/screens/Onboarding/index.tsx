@@ -8,7 +8,7 @@ import { onboardingStore } from 'frontend/helpers/electronStores'
 import classNames from 'classnames'
 
 interface OnboardingProps {
-  disableOnboarding: () => void
+  disableOnboarding: (skipped?: boolean) => void
 }
 
 const Onboarding: React.FC<OnboardingProps> = function (props) {
@@ -21,8 +21,6 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   if (onboardingStore.get('completedDataPrivacy', false)) {
     initScreen = ONBOARDING_SCREEN.WALLET_SELECTION
   }
-
-  console.log('onboaridng render ', initScreen)
 
   const [currentScreen, setCurrentScreen] = useState(initScreen)
 

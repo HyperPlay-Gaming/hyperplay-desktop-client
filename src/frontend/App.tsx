@@ -112,8 +112,13 @@ function App() {
         <OnboardingStoreController />
         {onboardingStore.isOnboardingOpen && (
           <Onboarding
-            disableOnboarding={() => {
-              window.api.trackEvent({ event: 'Onboarding Skipped' })
+            disableOnboarding={(skipped = true) => {
+              if (skipped)
+                window.api.trackEvent({ event: 'Onboarding Skipped' })
+              else {
+                // a wallet connection method was chosen so we will report if it successfully connects
+                onboardingStore.shouldReportNextConnectionEvent = true
+              }
               onboardingStore.closeOnboarding()
             }}
           />
