@@ -26,11 +26,12 @@ import {
   wait
 } from 'backend/hyperplay-proxy-server/commonProxyTypes'
 import { toString, QRCodeToStringOptions } from 'qrcode'
-import { WrapRendererCallback } from 'common/types'
+import { WalletOnboardCloseReason, WrapRendererCallback } from 'common/types'
 import StatusScreen, { CONNECTION_STATUS } from './screens/status'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ONBOARDING_SCREEN } from '../types'
+import onboardingStore from 'frontend/store/OnboardingStore'
 
 enum WALLET_SELECTION_DETAILS_SCREEN {
   INFO = 'INFO',
@@ -48,7 +49,7 @@ interface ContentParams {
 }
 
 interface WalletSelectionProps {
-  disableOnboarding: (skipped?: boolean) => void
+  disableOnboarding: (disableReason: WalletOnboardCloseReason) => void
 }
 
 const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
@@ -66,6 +67,9 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
 
   async function providerClicked(provider: PROVIDERS) {
     setShowMetaMaskBrowserSidebarLinks(false)
+
+    // user is attempting to connect via mm mobile or wc. this will track if connection succeeds
+    onboardingStore.shouldReportNextConnectionEvent = true
     // returns universal link for mm sdk
     const uri = await window.api.getConnectionUris(provider)
 
@@ -93,7 +97,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
   async function connectMetaMaskExtension() {
     setShowMetaMaskBrowserSidebarLinks(true)
     await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
-    props.disableOnboarding(false)
+    props.disableOnboarding('requestedMetaMaskConnection')
   }
 
   async function handleMmExtensionProviderClicked() {
@@ -158,16 +162,12 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     }
   }
 
-  const handleConnected: WrapRendererCallback<WalletConnectedType> = (
-    e,
-    accounts
-  ) => {
-    console.log('connected with accounts = ', accounts)
+  const handleConnected: WrapRendererCallback<WalletConnectedType> = () => {
     setContentParams({
       detailsScreen: WALLET_SELECTION_DETAILS_SCREEN.CONNECTED
     })
     wait(4000).then(() => {
-      props.disableOnboarding(false)
+      props.disableOnboarding('connected')
     })
   }
 
@@ -185,7 +185,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       case WALLET_SELECTION_DETAILS_SCREEN.INFO:
         return (
           <WalletInfoScreen
-            skipClicked={props.disableOnboarding}
+            skipClicked={() => props.disableOnboarding('skipped')}
             createWalletClicked={async () =>
               handleImportMmExtensionClicked('CREATE')
             }
@@ -244,7 +244,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       default:
         return (
           <WalletInfoScreen
-            skipClicked={props.disableOnboarding}
+            skipClicked={() => props.disableOnboarding('skipped')}
             createWalletClicked={async () =>
               handleImportMmExtensionClicked('CREATE')
             }
@@ -301,7 +301,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
         {getDetailsScreen(contentParams.detailsScreen)}
       </div>
       <div className={WalletSelectionStyles.closeButton}>
-        <button onClick={() => props.disableOnboarding(true)}>
+        <button onClick={() => props.disableOnboarding('skipped')}>
           <FontAwesomeIcon icon={faXmark} color="var(--color-neutral-300)" />
         </button>
       </div>

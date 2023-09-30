@@ -6,9 +6,10 @@ import Analytics from './analytics'
 import WalletSelection from './walletSelection'
 import { onboardingStore } from 'frontend/helpers/electronStores'
 import classNames from 'classnames'
+import { WalletOnboardCloseReason } from 'common/types'
 
 interface OnboardingProps {
-  disableOnboarding: (skipped?: boolean) => void
+  disableOnboarding: (disableReason: WalletOnboardCloseReason) => void
 }
 
 const Onboarding: React.FC<OnboardingProps> = function (props) {
@@ -30,7 +31,6 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
 
     if (currentScreen === ONBOARDING_SCREEN.WALLET_SELECTION) {
       window.api.trackEvent({ event: 'Onboarding Started' })
-      console.log('onboarding started event ', currentScreen)
     }
   }, [currentScreen])
 
@@ -66,4 +66,4 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   )
 }
 
-export default Onboarding
+export default React.memo(Onboarding)

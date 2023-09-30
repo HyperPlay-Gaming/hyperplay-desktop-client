@@ -29,6 +29,7 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
 import { ENABLE_AMAZON_STORE } from './constants'
 
@@ -112,12 +113,13 @@ function App() {
         <OnboardingStoreController />
         {onboardingStore.isOnboardingOpen && (
           <Onboarding
-            disableOnboarding={(skipped = true) => {
-              if (skipped)
+            disableOnboarding={(disableReason: WalletOnboardCloseReason) => {
+              if (disableReason === 'skipped')
                 window.api.trackEvent({ event: 'Onboarding Skipped' })
-              else {
+              else if (disableReason === 'requestedMetaMaskConnection') {
                 // a wallet connection method was chosen so we will report if it successfully connects
                 onboardingStore.shouldReportNextConnectionEvent = true
+                console.log('set onboarding store should report to true ')
               }
               onboardingStore.closeOnboarding()
             }}

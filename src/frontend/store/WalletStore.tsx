@@ -19,6 +19,7 @@ class WalletStore implements InitializableStore {
     this.address = accounts[0]
 
     if (onboardingStore.shouldReportNextConnectionEvent) {
+      console.log('tracking wallet connected')
       onboardingStore.shouldReportNextConnectionEvent = false
       window.api.trackEvent({
         event: 'Wallet Connected',

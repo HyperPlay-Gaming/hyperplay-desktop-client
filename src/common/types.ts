@@ -796,6 +796,11 @@ export type AvailablePlatforms = {
   icon: IconDefinition
 }[]
 
+export type WalletOnboardCloseReason =
+  | 'skipped'
+  | 'connected'
+  | 'requestedMetaMaskConnection'
+
 export type Filter =
   | 'alphabeticalAscending'
   | 'alphabeticalDescending'
