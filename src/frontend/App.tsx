@@ -29,6 +29,7 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import AuthModal from './components/UI/AuthModal'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -45,6 +46,7 @@ function App() {
           <ExtensionManager />
           <DialogHandler />
           <ExternalLinkDialog />
+          <AuthModal />
           <StoreNavHandler />
           {isSettingsModalOpen.gameInfo && (
             <SettingsModal
