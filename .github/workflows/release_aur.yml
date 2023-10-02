@@ -32,7 +32,7 @@ jobs:
         run: |
           set -x
           latest_version=$(curl -s https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest | jq -r .tag_name)
-          wget https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest/download/hyperplay-${latest_version}.pacman -O hyperplay.pacman
+          wget https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/download/${latest_version}/hyperplay-${latest_version}.pacman -O hyperplay.pacman
           set +x
         if: ${{ success() }}
 
