@@ -67,7 +67,28 @@ jobs:
       - name: Generate .SRCINFO
         run: |
           set -x
-          su nobody -c "makepkg --printsrcinfo > .SRCINFO"
+          pkgver=$(grep '^pkgver=' PKGBUILD | cut -d= -f2)
+          pkgrel=$(grep '^pkgrel=' PKGBUILD | cut -d= -f2)
+          source=$(grep '^source=' PKGBUILD | cut -d= -f2 | sed "s/ //g")  # Remove spaces
+          md5sums=$(grep '^md5sums=' PKGBUILD | cut -d= -f2 | sed "s/ //g")  # Remove spaces
+
+          cat <<EOF > .SRCINFO
+          pkgbase = hyperplay
+          pkgdesc = An open source Web3 gaming platform
+          pkgver = $pkgver
+          pkgrel = $pkgrel
+          url = https://github.com/HyperPlay-Gaming/hyperplay-desktop-client
+          arch = x86_64
+          license = GPL3
+          depends = fuse2
+          depends = gawk
+          noextract = hyperplay-$pkgver.pacman
+          options = !strip
+          source = https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/download/v$pkgver/hyperplay-$pkgver.pacman
+          md5sums = $md5sums
+
+          pkgname = hyperplay
+          EOF
           set +x
         working-directory: hyperplay
         if: ${{ success() }}
