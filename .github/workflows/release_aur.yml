@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Install Dependencies
         run: |
-          pacman -Syu --noconfirm base-devel wget jq openssh
+          pacman -Syu --noconfirm base-devel wget jq openssh git
 
       - name: Set up SSH
         run: |
