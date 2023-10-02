@@ -40,7 +40,7 @@ jobs:
       - name: Clone AUR Repository
         run: |
           set -x
-          git clone https://aur.archlinux.org/hyperplay.git
+          git clone ssh://aur@aur.archlinux.org/hyperplay.git 
           cd hyperplay
           set +x
         if: ${{ success() }}
@@ -89,6 +89,8 @@ jobs:
 
           pkgname = hyperplay
           EOF
+          cat .SRCINFO
+          cat PKGBUILD
           set +x
         working-directory: hyperplay
         if: ${{ success() }}
