@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-      image: archlinux/base
+      image: archlinux
 
     steps:
       - name: Install Dependencies
