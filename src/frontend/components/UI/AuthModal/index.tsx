@@ -4,19 +4,34 @@ import { ModalAnimation } from '@hyperplay/ui'
 import { WebviewTag } from 'electron'
 import { observer } from 'mobx-react-lite'
 import authModalState from '../../../state/authModalState'
+import { ethers } from 'ethers'
 
 const url = 'http://localhost:3001/signin'
 
 const AuthModal = () => {
   const webviewRef = useRef<WebviewTag>(null)
 
+  const handleAccountNotConnected = async () => {
+    console.log('account not connected. requesting connection.')
+    const provider = new ethers.BrowserProvider(window.ethereum)
+    await provider.getSigner()
+  }
+
   useEffect(() => {
     const webview = webviewRef.current
     if (!webview) return
 
-    const handleIpcMessage = (event: Electron.IpcMessageEvent) => {
-      if (event.channel !== 'closeAuthModal') return
-      authModalState.closeModal()
+    const handleIpcMessage = async (event: Electron.IpcMessageEvent) => {
+      switch (event.channel) {
+        case 'closeAuthModal':
+          authModalState.closeModal()
+          break
+        case 'auth:accountNotConnected':
+          await handleAccountNotConnected()
+          break
+        default:
+          break
+      }
     }
 
     const handleDomReady = () => {
