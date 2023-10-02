@@ -87,6 +87,22 @@ export default function SidebarLinks() {
         <div className="sidebarLinkGradientWrapper">
           <NavLink
             className={({ isActive }) =>
+              classNames('Sidebar__item', {
+                active:
+                  isActive ||
+                  location.pathname.includes('achievements')
+              })
+            }
+            end
+            to={'/achievements'}
+            onClick={async () => handleRefresh()}
+          >
+            <Images.TrophyOutline fill={sidebarSvgUnselectedFill} />
+          </NavLink>
+        </div>
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            className={({ isActive }) =>
               classNames('Sidebar__item', { active: isActive })
             }
             to={{ pathname: '/download-manager' }}

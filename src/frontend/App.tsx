@@ -6,6 +6,7 @@ import Login from './screens/Login'
 import WebView from './screens/WebView'
 import { GamePage } from './screens/Game'
 import Library from './screens/Library'
+import Achievements from './screens/Achievements'
 import Sidebar from './components/UI/Sidebar'
 import Settings from './screens/Settings'
 import ContextProvider from './state/ContextProvider'
@@ -58,6 +59,7 @@ function App() {
               element={<Navigate replace to="/hyperplaystore" />}
             />
             <Route path="/library" element={<Library />} />
+            <Route path="/achievements" element={<Achievements />} />
             <Route path="login" element={<Login />} />
             <Route
               path="hyperplaystore"
