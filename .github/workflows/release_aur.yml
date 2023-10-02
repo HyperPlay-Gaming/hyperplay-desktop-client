@@ -31,9 +31,9 @@ jobs:
           set -x
           mkdir -p ~/.ssh
           echo "${{ secrets.AUR_SSH_PRIVATE }}" > ~/.ssh/id_rsa
-          echo "StrictHostKeyChecking no" > ~/.ssh/config
-          chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -t rsa aur.archlinux.org >> ~/.ssh/known_hosts
+          cat ~/.ssh/known_hosts
+          cat ~/.ssh/id_rsa
           git clone ssh://aur@aur.archlinux.org/hyperplay.git 
           cd hyperplay
           set +x
