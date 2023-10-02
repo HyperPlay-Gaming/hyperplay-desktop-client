@@ -7,6 +7,7 @@ import './index.css'
 import QuitButton from '../QuitButton'
 import { SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY } from 'frontend/components/UI/ExternalLinkDialog'
 import { Images } from '@hyperplay/ui'
+import authModalState from '../../../../../state/authModalState'
 
 export default function SidebarLinks() {
   const location = useLocation() as { pathname: string }
@@ -108,6 +109,23 @@ export default function SidebarLinks() {
             }}
           >
             <Images.Settings fill={sidebarSvgUnselectedFill} />
+          </NavLink>
+        </div>
+        <div
+          className="sidebarLinkGradientWrapper"
+          onClick={() => authModalState.openModal()}
+        >
+          Sign In
+        </div>
+        <div className="sidebarLinkGradientWrapper">
+          <NavLink
+            data-testid="wiki"
+            className={({ isActive }) =>
+              classNames('Sidebar__item', { active: isActive })
+            }
+            to={{ pathname: '/auth-session' }}
+          >
+            Session
           </NavLink>
         </div>
       </div>

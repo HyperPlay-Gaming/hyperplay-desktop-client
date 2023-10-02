@@ -84,88 +84,90 @@ function Settings() {
   }
 
   return (
-    <ContextMenu
-      items={[
-        {
-          label: t(
-            'settings.copyToClipboard',
-            'Copy All Settings to Clipboard'
-          ),
-          onClick: async () =>
-            window.api.clipboardWriteText(
-              JSON.stringify({ appName, title, ...currentConfig })
+    <>
+      <ContextMenu
+        items={[
+          {
+            label: t(
+              'settings.copyToClipboard',
+              'Copy All Settings to Clipboard'
             ),
-          show: !isLogSettings
-        },
-        {
-          label: t('settings.open-config-file', 'Open Config File'),
-          onClick: () => window.api.showConfigFileInFolder(appName),
-          show: !isLogSettings
-        }
-      ]}
-    >
-      <SettingsContext.Provider value={contextValues}>
-        <div className="Settings contentContainer">
-          <div role="list" className="settingsWrapper">
-            <h3 className="headerTitle" data-testid="headerTitle">
-              Settings
-            </h3>
-            <Tabs defaultValue="general">
-              <Tabs.List
-                style={{ marginBottom: 'var(--space-md)' }}
-                type="outline"
-              >
-                <Tabs.Tab value="general">
-                  <div className="menu">{t('settings.navbar.general')}</div>
-                </Tabs.Tab>
-                <Tabs.Tab value="gamesSettings">
-                  <div className="menu">
-                    {t('settings.gamesSettings', 'Games Settings')}
-                  </div>
-                </Tabs.Tab>
-                <Tabs.Tab value="advSettings">
-                  <div className="menu">{t('settings.navbar.advanced')}</div>
-                </Tabs.Tab>
-                <Tabs.Tab value="logSettings">
-                  <div className="menu">{t('settings.navbar.log')}</div>
-                </Tabs.Tab>
-                <Tabs.Tab value="accessibility">
-                  <div className="menu">{t('accessibility.title')}</div>
-                </Tabs.Tab>
-                {!isWin ? (
-                  <Tabs.Tab value="wineManager">
+            onClick: async () =>
+              window.api.clipboardWriteText(
+                JSON.stringify({ appName, title, ...currentConfig })
+              ),
+            show: !isLogSettings
+          },
+          {
+            label: t('settings.open-config-file', 'Open Config File'),
+            onClick: () => window.api.showConfigFileInFolder(appName),
+            show: !isLogSettings
+          }
+        ]}
+      >
+        <SettingsContext.Provider value={contextValues}>
+          <div className="Settings contentContainer">
+            <div role="list" className="settingsWrapper">
+              <h3 className="headerTitle" data-testid="headerTitle">
+                Settings
+              </h3>
+              <Tabs defaultValue="general">
+                <Tabs.List
+                  style={{ marginBottom: 'var(--space-md)' }}
+                  type="outline"
+                >
+                  <Tabs.Tab value="general">
+                    <div className="menu">{t('settings.navbar.general')}</div>
+                  </Tabs.Tab>
+                  <Tabs.Tab value="gamesSettings">
                     <div className="menu">
-                      {t('settings.wine.manager.title', 'Wine Manager')}
+                      {t('settings.gamesSettings', 'Games Settings')}
                     </div>
                   </Tabs.Tab>
-                ) : null}
-              </Tabs.List>
-              <Tabs.Panel value="general">
-                <GeneralSettings />
-              </Tabs.Panel>
-              <Tabs.Panel value="gamesSettings">
-                <GamesSettings useDetails={false} />
-              </Tabs.Panel>
-              <Tabs.Panel value="advSettings">
-                <AdvancedSettings />
-              </Tabs.Panel>
-              <Tabs.Panel value="logSettings">
-                <LogSettings />
-              </Tabs.Panel>
-              <Tabs.Panel value="accessibility">
-                <Accessibility />
-              </Tabs.Panel>
-              {!isWin ? (
-                <Tabs.Panel value="wineManager">
-                  <WineManager />
+                  <Tabs.Tab value="advSettings">
+                    <div className="menu">{t('settings.navbar.advanced')}</div>
+                  </Tabs.Tab>
+                  <Tabs.Tab value="logSettings">
+                    <div className="menu">{t('settings.navbar.log')}</div>
+                  </Tabs.Tab>
+                  <Tabs.Tab value="accessibility">
+                    <div className="menu">{t('accessibility.title')}</div>
+                  </Tabs.Tab>
+                  {!isWin ? (
+                    <Tabs.Tab value="wineManager">
+                      <div className="menu">
+                        {t('settings.wine.manager.title', 'Wine Manager')}
+                      </div>
+                    </Tabs.Tab>
+                  ) : null}
+                </Tabs.List>
+                <Tabs.Panel value="general">
+                  <GeneralSettings />
                 </Tabs.Panel>
-              ) : null}
-            </Tabs>
-            <FooterInfo />
+                <Tabs.Panel value="gamesSettings">
+                  <GamesSettings useDetails={false} />
+                </Tabs.Panel>
+                <Tabs.Panel value="advSettings">
+                  <AdvancedSettings />
+                </Tabs.Panel>
+                <Tabs.Panel value="logSettings">
+                  <LogSettings />
+                </Tabs.Panel>
+                <Tabs.Panel value="accessibility">
+                  <Accessibility />
+                </Tabs.Panel>
+                {!isWin ? (
+                  <Tabs.Panel value="wineManager">
+                    <WineManager />
+                  </Tabs.Panel>
+                ) : null}
+              </Tabs>
+              <FooterInfo />
+            </div>
           </div>
-        </div>
-      </SettingsContext.Provider>
-    </ContextMenu>
+        </SettingsContext.Provider>
+      </ContextMenu>
+    </>
   )
 }
 

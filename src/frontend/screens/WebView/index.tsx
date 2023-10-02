@@ -6,7 +6,7 @@ import React, {
   useState
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useLocation, useParams } from 'react-router'
+import { useLocation, useNavigate, useParams } from 'react-router'
 import { DidNavigateEvent, WebviewTag } from 'electron'
 
 import { UpdateComponent } from 'frontend/components/UI'
@@ -213,6 +213,14 @@ function WebView() {
   const onLoginWarningClosed = () => {
     setShowLoginWarningFor(null)
   }
+
+  useEffect(() => {
+    async function load() {
+      const path = (await window.api.getLocalPeloadPath()) as unknown
+      console.log({ path })
+    }
+    load()
+  }, [])
 
   if (!preloadPath && isEpicLogin) {
     return <></>
