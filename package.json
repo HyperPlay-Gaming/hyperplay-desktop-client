@@ -35,6 +35,7 @@
       "build/trayIconDark24x24.png",
       "build/extensions",
       "build/hyperplay_store_preload.js",
+      "build/transparent_body_preload.js",
       "build/webviewPreload.js"
     ],
     "protocols": [
