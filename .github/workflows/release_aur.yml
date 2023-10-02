@@ -47,6 +47,16 @@ jobs:
       - name: Update PKGBUILD
         run: |
           set -x
+          current_version=$(grep '^pkgver=' PKGBUILD | cut -d'=' -f2)
+          current_pkgrel=$(grep '^pkgrel=' PKGBUILD | cut -d'=' -f2)
+
+          if [ "$current_version" == "${latest_version:1}" ]; then
+            new_pkgrel=$((current_pkgrel + 1))
+          else
+            new_pkgrel=1
+          fi
+
+          sed -i "s/pkgrel=.*/pkgrel=${new_pkgrel}/" PKGBUILD
           sed -i "s/pkgver=.*/pkgver=${latest_version:1}/" PKGBUILD
           sed -i 's/md5sums=()/md5sums=('$(md5sum ../hyperplay.pacman | cut -d' ' -f1)')/' PKGBUILD
           set +x
