@@ -67,7 +67,7 @@ jobs:
       - name: Generate .SRCINFO
         run: |
           set -x
-          makepkg --printsrcinfo > .SRCINFO
+          su nobody -c "makepkg --printsrcinfo > .SRCINFO"
           set +x
         working-directory: hyperplay
         if: ${{ success() }}
