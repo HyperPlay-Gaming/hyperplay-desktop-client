@@ -64,6 +64,7 @@ interface HyperPlaySyncIPCFunctions {
   addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
   setQaToken: (qaToken: string) => void
+  removeFromLibrary: (appName: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -144,9 +145,9 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<chrome.windows.Window>
   chromeWindowsRemove: (windowId: number) => Promise<void>
   chromeWindowsGetAll: (
-    queryOptions?: chrome.windows.QueryOptions,
+    queryOptions?: string,
     callback?: (window: chrome.windows.Window[]) => void
-  ) => Promise<chrome.windows.Window[]>
+  ) => Promise<string>
   chromeWindowsUpdate: (
     windowId: number,
     updateInfo: chrome.windows.UpdateInfo,

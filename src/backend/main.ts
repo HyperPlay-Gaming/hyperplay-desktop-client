@@ -349,14 +349,10 @@ if (!gotTheLock) {
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
-    const toggleOverlayHandler = () => {
-      toggleOverlay()
-      backendEvents.emit('OVERLAY_TOGGLED')
-    }
     const openOverlayAccelerator = 'Alt+X'
-    globalShortcut.register(openOverlayAccelerator, toggleOverlayHandler)
+    globalShortcut.register(openOverlayAccelerator, toggleOverlay)
     const openOverlayAcceleratorMac = 'Option+X'
-    globalShortcut.register(openOverlayAcceleratorMac, toggleOverlayHandler)
+    globalShortcut.register(openOverlayAcceleratorMac, toggleOverlay)
 
     initExtension()
 
@@ -580,7 +576,7 @@ ipcMain.on('unlock', () => {
     unlinkSync(join(gamesConfigPath, 'lock'))
     if (powerId) {
       logInfo('Stopping Power Saver Blocker', LogPrefix.Backend)
-      return powerSaveBlocker.stop(powerId)
+      powerSaveBlocker.stop(powerId)
     }
   }
 })
@@ -1296,6 +1292,10 @@ ipcMain.handle(
   }
 )
 
+ipcMain.on('removeFromLibrary', (event, appName) => {
+  HyperPlayLibraryManager.removeFromLibrary(appName)
+})
+
 ipcMain.handle('repair', async (event, appName, runner) => {
   if (!isOnline()) {
     logWarning(
@@ -1853,7 +1853,6 @@ ipcMain.on('reloadApp', async () => {
 })
 
 ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
-  console.log('addHyperplayGame', projectId)
   await addGameToLibrary(projectId)
 })
 

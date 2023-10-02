@@ -181,7 +181,9 @@
         "size": "Size",
         "title": "Title"
     },
-    "docs": "Documentation",
+    "dlcs": {
+        "label": "Select DLCs to install:"
+    },
     "download-manager": {
         "ETA": "Estimated Time",
         "install-type": {
@@ -244,6 +246,7 @@
         "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
         "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
         "dxvk": "DXVK is a Vulkan-based translational layer for DirectX 9, 10 and 11 games. Enabling may improve compatibility. Might cause issues especially for older DirectX games.",
+        "dxvkfpslimit": "Sets a frame rate cap for DXVK games",
         "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
         "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
         "game_language": {
@@ -376,6 +379,7 @@
             "FAILED": "Custom network canceled",
             "INITIATED": "Custom network request"
         },
+        "closeOverlay": "Press {{overlayKeyMod}} + X to close the overlay",
         "description": {
             "CONFIRMED": "The transaction was successfully confirmed!",
             "FAILED": "The transaction was canceled or not submitted, please try again",
@@ -383,11 +387,11 @@
             "PENDING": "Waiting for blockchain confirmation. We'll let you know when it's confirmed"
         },
         "extensionNotification": {
-            "DESCRIPTION": "Press Alt or Option + X to see this transaction",
+            "DESCRIPTION": "Press {{overlayKeyMod}} + X to see this transaction",
             "TITLE": "Transaction requested"
         },
         "greeting": {
-            "description": "HyperPlay Overlay is ready! Press Alt + X to show or hide it.",
+            "description": "HyperPlay Overlay is ready! Press {{overlayKeyMod}} + X to show or hide it.",
             "title": "HyperPlay Overlay"
         },
         "signatureRequest": {
@@ -550,6 +554,7 @@
         "alt-gogdl-bin": "Using built-in GOGDL binary...",
         "alt-legendary-bin": "Using built-in Legendary binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
+        "dxvkfpsvalue": "Positive integer value (e.g. 30, 60, ...)",
         "egs-prefix": "Prefix where EGS is installed",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
     },
@@ -592,6 +597,7 @@
         "disable_controller": "Disable HyperPlay navigation using controller",
         "discordRPC": "Enable Discord Rich Presence",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
+        "dxvkfpslimit": "Limit FPS (DX9, 10 and 11)",
         "egs-sync": "Sync with Installed Epic Games",
         "enableFSRHack": "Enable FSR Hack (Wine version needs to support it)",
         "eosOverlay": {
