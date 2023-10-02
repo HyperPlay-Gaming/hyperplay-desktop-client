@@ -5,16 +5,31 @@ import { WebviewTag } from 'electron'
 import { observer } from 'mobx-react-lite'
 import authModalState from '../../../state/authModalState'
 import { ethers } from 'ethers'
+import extensionStore from '../../../store/ExtensionStore'
 
 const url = 'http://localhost:3001/signin'
+
+const METAMASK_ALREADY_PROVIDED_ERROR_CODE = -32002
+
+const isTooManyRequestsError = (error: string) => {
+  return error.includes(METAMASK_ALREADY_PROVIDED_ERROR_CODE.toString())
+}
 
 const AuthModal = () => {
   const webviewRef = useRef<WebviewTag>(null)
 
   const handleAccountNotConnected = async () => {
-    console.log('account not connected. requesting connection.')
-    const provider = new ethers.BrowserProvider(window.ethereum)
-    await provider.getSigner()
+    // try to trigger metamask popup to connect account
+    try {
+      const provider = new ethers.BrowserProvider(window.ethereum)
+      await provider.getSigner()
+    } catch (e) {
+      // if it fails, open the popup manually. Since there are already requests
+      // in the queue, this will trigger the connect account popup
+      if (isTooManyRequestsError(String(e))) {
+        extensionStore.setIsPopupOpen(true)
+      }
+    }
   }
 
   useEffect(() => {
@@ -27,6 +42,7 @@ const AuthModal = () => {
           authModalState.closeModal()
           break
         case 'auth:accountNotConnected':
+          // TODO: try to resume flow after connecting account
           await handleAccountNotConnected()
           break
         default:
