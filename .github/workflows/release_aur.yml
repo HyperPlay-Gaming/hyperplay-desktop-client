@@ -1,0 +1,73 @@
+name: Update AUR
+
+on:
+  release:
+    types:
+      - published
+
+jobs:
+  update-aur:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux/base
+
+    steps:
+      - name: Install Dependencies
+        run: |
+          pacman -Syu --noconfirm base-devel wget jq
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.AUR_SSH_PRIVATE }}" > ~/.ssh/id_rsa
+          echo "StrictHostKeyChecking no" > ~/.ssh/config
+          chmod 600 ~/.ssh/id_rsa
+
+      - name: Add SSH Host Key to Known Hosts
+        run: |
+          ssh-keyscan aur.archlinux.org >> ~/.ssh/known_hosts
+
+      - name: Download Package
+        run: |
+          set -x
+          latest_version=$(curl -s https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest | jq -r .tag_name)
+          wget https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest/download/hyperplay-${latest_version}.pacman -O hyperplay.pacman
+          set +x
+        if: ${{ success() }}
+
+      - name: Clone AUR Repository
+        run: |
+          set -x
+          git clone https://aur.archlinux.org/hyperplay.git
+          cd hyperplay
+          set +x
+        if: ${{ success() }}
+
+      - name: Update PKGBUILD
+        run: |
+          set -x
+          sed -i "s/pkgver=.*/pkgver=${latest_version:1}/" PKGBUILD
+          sed -i 's/md5sums=()/md5sums=('$(md5sum ../hyperplay.pacman | cut -d' ' -f1)')/' PKGBUILD
+          set +x
+        if: ${{ success() }}
+
+      - name: Generate .SRCINFO
+        run: |
+          set -x
+          makepkg --printsrcinfo > .SRCINFO
+          set +x
+        if: ${{ success() }}
+
+      - name: Commit and Push
+        run: |
+          set -x
+          git config --global user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git add PKGBUILD .SRCINFO
+          git commit -m "New Release ${latest_version}"
+          git push origin master
+          set +x
+        if: ${{ success() }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
