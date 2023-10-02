@@ -122,6 +122,8 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   pauseCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
   copyWalletConnectBaseURIToClipboard: () => void
+  closeAuthModal: () => void
+  'auth:accountNotConnected': () => void
 }
 
 interface RequestArguments {
@@ -369,6 +371,14 @@ declare namespace Electron {
 
   class IpcRenderer extends EventEmitter {
     public send: <
+      Name extends keyof SyncIPCFunctions,
+      Definition extends SyncIPCFunctions[Name]
+    >(
+      name: Name,
+      ...args: Parameters<Definition>
+    ) => void
+
+    public sendToHost: <
       Name extends keyof SyncIPCFunctions,
       Definition extends SyncIPCFunctions[Name]
     >(
