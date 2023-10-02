@@ -1,6 +1,12 @@
 import React, { useMemo, useState } from 'react'
 
-import { Background, AchievementsInfo, AchievementSummaryTable, StoreRow , Images } from '@hyperplay/ui'
+import {
+  Background,
+  AchievementsInfo,
+  AchievementSummaryTable,
+  StoreRow,
+  Images
+} from '@hyperplay/ui'
 import { Flex, Grid } from '@mantine/core'
 
 import styles from './index.module.css'
@@ -71,13 +77,23 @@ export default React.memo(function Achievements(): JSX.Element {
       <div className={`contentContainer ${styles.fullHeight}`}>
         <Grid className={`${styles.gridItems}`}>
           <Grid.Col span={4}>
-            <Flex direction="column" gap="8px" className={`${styles.fullHeight}`}>
-              <AchievementsInfo newAchievementsValue={'1,337'} mintedValue={'4/1,000'} gamesValue={'7'} />
+            <Flex
+              direction="column"
+              gap="8px"
+              className={`${styles.fullHeight}`}
+            >
+              <AchievementsInfo
+                newAchievementsValue={'1,337'}
+                mintedValue={'4/1,000'}
+                gamesValue={'7'}
+              />
               <div className={`${styles.storeCard} ${styles.fullHeight}`}>
-                <div className={`${styles.storeTitle}`}>
-                  My Stores
-                </div>
-                <Flex direction="column" gap="4px" className={`${styles.fullHeight}`}>
+                <div className={`${styles.storeTitle}`}>My Stores</div>
+                <Flex
+                  direction="column"
+                  gap="4px"
+                  className={`${styles.fullHeight}`}
+                >
                   <StoreRow store="hyperplay" secondaryText="10 Games">
                     <Images.Eye />
                   </StoreRow>
@@ -89,9 +105,12 @@ export default React.memo(function Achievements(): JSX.Element {
                   </StoreRow>
                 </Flex>
               </div>
-              </Flex>
+            </Flex>
           </Grid.Col>
-          <Grid.Col span={8} className={`${styles.fullHeight} ${styles.achievementTable}`}>
+          <Grid.Col
+            span={8}
+            className={`${styles.fullHeight} ${styles.achievementTable}`}
+          >
             <AchievementSummaryTable
               games={filteredGames}
               sortProps={{

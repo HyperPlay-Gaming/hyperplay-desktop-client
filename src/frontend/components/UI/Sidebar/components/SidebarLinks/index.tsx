@@ -88,9 +88,7 @@ export default function SidebarLinks() {
           <NavLink
             className={({ isActive }) =>
               classNames('Sidebar__item', {
-                active:
-                  isActive ||
-                  location.pathname.includes('achievements')
+                active: isActive || location.pathname.includes('achievements')
               })
             }
             end
