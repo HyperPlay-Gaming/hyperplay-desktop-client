@@ -10,6 +10,7 @@ import {
 import { Flex, Grid } from '@mantine/core'
 
 import styles from './index.module.css'
+import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 
 // TODO Remove - Fake Data For Now
 const games = [
@@ -19,8 +20,7 @@ const games = [
     title: 'Diablo II',
     mintedAchievementsCount: 5,
     mintableAchievementsCount: 10,
-    state: 'default',
-
+    state: 'default' as StatusIconState,
     totalAchievementsCount: 30
   },
   {
@@ -30,8 +30,7 @@ const games = [
     mintedAchievementsCount: 5,
     mintableAchievementsCount: 10,
     totalAchievementsCount: 30,
-    state: 'default',
-
+    state: 'default' as StatusIconState,
     ctaProps: { disabled: true }
   },
   {
@@ -41,7 +40,7 @@ const games = [
     mintedAchievementsCount: 5,
     mintableAchievementsCount: 10,
     totalAchievementsCount: 30,
-    state: 'active'
+    state: 'active' as StatusIconState
   },
   {
     id: '4',
@@ -51,7 +50,7 @@ const games = [
     mintableAchievementsCount: 10,
     totalAchievementsCount: 30,
     isNewAchievement: true,
-    state: 'default'
+    state: 'default' as StatusIconState
   }
 ]
 
