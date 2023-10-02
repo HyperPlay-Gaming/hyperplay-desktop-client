@@ -61,6 +61,7 @@ jobs:
           sed -i "s/pkgver=.*/pkgver=${latest_version:1}/" PKGBUILD
           sed -i 's/md5sums=()/md5sums=('$(md5sum ../hyperplay.pacman | cut -d' ' -f1)')/' PKGBUILD
           set +x
+        working-directory: hyperplay
         if: ${{ success() }}
 
       - name: Generate .SRCINFO
@@ -68,6 +69,7 @@ jobs:
           set -x
           makepkg --printsrcinfo > .SRCINFO
           set +x
+        working-directory: hyperplay
         if: ${{ success() }}
 
       - name: Commit and Push
@@ -79,6 +81,7 @@ jobs:
           git commit -m "New Release ${latest_version}"
           git push origin master
           set +x
+        working-directory: hyperplay
         if: ${{ success() }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
