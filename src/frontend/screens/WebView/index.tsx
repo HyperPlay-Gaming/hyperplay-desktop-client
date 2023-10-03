@@ -27,16 +27,14 @@ import {
   WIKI_URL
 } from '../../constants'
 import { METAMASK_SNAPS_URL } from 'common/constants'
-import { domainsAreEqual } from 'common/utils'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
   return urlToTest.hostname === 'store.hyperplay.xyz'
 }
 
-function shouldInjectProvider(url: URL) {
-  const snapsUrl = new URL(METAMASK_SNAPS_URL)
-  return domainsAreEqual(snapsUrl, url)
+function shouldInjectProvider(url: string) {
+  return url === METAMASK_SNAPS_URL
 }
 
 function WebView() {
@@ -229,7 +227,7 @@ function WebView() {
   let partitionForWebview = 'persist:epicstore'
 
   if (urlIsHpUrl(startUrl)) partitionForWebview = 'persist:hyperplaystore'
-  else if (shouldInjectProvider(new URL(startUrl)))
+  else if (shouldInjectProvider(startUrl))
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 
   return (

@@ -1,21 +1,8 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import MetaMaskPortfolioStyles from './index.module.css'
-import ContextProvider from 'frontend/state/ContextProvider'
 
 const MetaMaskPortfolio = function () {
-  const { setSideBarCollapsed, sidebarCollapsed } = useContext(ContextProvider)
   const trueAsStr = 'true' as unknown as boolean | undefined
-
-  useEffect(() => {
-    if (!sidebarCollapsed) {
-      setSideBarCollapsed(true)
-    }
-    return () => {
-      if (sidebarCollapsed) {
-        setSideBarCollapsed(false)
-      }
-    }
-  })
 
   return (
     <>
