@@ -1,9 +1,8 @@
 name: Update AUR
 
 on:
-  pull_request:
-    branches: [main]
-  workflow_dispatch:
+  release:
+    types: [published]
 
 jobs:
   update-aur:
