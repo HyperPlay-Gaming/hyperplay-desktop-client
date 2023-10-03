@@ -57,7 +57,10 @@ export default function AccountDropdown() {
               to={'/metamaskHome'}
             ></NavigationMenuItem>
             <NavigationMenuItem
-              label={t('hyperplay.viewFullscreenSnaps', `View Snaps`)}
+              label={t('hyperplay.viewItem', {
+                defaultValue: 'View {{item}}',
+                item: 'Snaps'
+              })}
               to={'/metamaskSnaps'}
             ></NavigationMenuItem>
           </>
