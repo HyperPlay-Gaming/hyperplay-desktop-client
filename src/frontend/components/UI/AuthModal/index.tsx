@@ -6,7 +6,9 @@ import { observer } from 'mobx-react-lite'
 import authModalState from '../../../state/authModalState'
 import { ethers } from 'ethers'
 import extensionStore from '../../../store/ExtensionStore'
+import onboardingStore from '../../../store/OnboardingStore'
 
+// TODO: replace this with dev portal preview URL when it's ready
 const url = 'http://localhost:3001/signin'
 
 const METAMASK_ALREADY_PROVIDED_ERROR_CODE = -32002
@@ -19,12 +21,19 @@ const AuthModal = () => {
   const webviewRef = useRef<WebviewTag>(null)
 
   const handleAccountNotConnected = async () => {
+    const currentProvider = await window.api.getCurrentWeb3Provider()
+
+    if (!currentProvider) {
+      onboardingStore.openOnboarding()
+      return
+    }
+
     // try to trigger metamask popup to connect account
     try {
       const provider = new ethers.BrowserProvider(window.ethereum)
       await provider.getSigner()
     } catch (e) {
-      // if it fails, open the popup manually. Since there are already requests
+      // if it fails, open the popup manually and since there are already requests
       // in the queue, this will trigger the connect account popup
       if (isTooManyRequestsError(String(e))) {
         extensionStore.setIsPopupOpen(true)
