@@ -13,12 +13,13 @@ import { FlagPosition } from '../../components/UI/LanguageSelector'
 import SIDLogin from './components/SIDLogin'
 import ContextProvider from '../../state/ContextProvider'
 import { Background } from '@hyperplay/ui'
+import libraryState from 'frontend/state/libraryState'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
 
 export default React.memo(function NewLogin() {
-  const { epic, gog, refreshLibrary } = useContext(ContextProvider)
+  const { epic, gog } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
@@ -46,7 +47,7 @@ export default React.memo(function NewLogin() {
   }, [epic.username, gog.username, t])
 
   async function handleLibraryClick() {
-    await refreshLibrary({ runInBackground: false })
+    await libraryState.refreshLibrary({ runInBackground: false })
     navigate('/library')
   }
 

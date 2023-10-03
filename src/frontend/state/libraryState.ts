@@ -4,18 +4,21 @@ import {
   GameCollection,
   GameInfo,
   GameStatus,
-  HiddenGame
+  HiddenGame,
+  RefreshOptions,
+  Runner
 } from 'common/types'
 import { Category, Platform } from 'frontend/types'
 import { makeAutoObservable } from 'mobx'
-import { getPlatformName } from 'frontend/helpers'
+import { getPlatformName, getLegendaryConfig } from 'frontend/helpers'
 import Fuse from 'fuse.js'
 import {
   gogInstalledGamesStore,
   gogLibraryStore,
   libraryStore,
   sideloadLibrary,
-  hyperPlayLibraryStore
+  hyperPlayLibraryStore,
+  configStore
 } from 'frontend/helpers/electronStores'
 import {
   epicCategories,
@@ -23,6 +26,24 @@ import {
   hyperPlayCategories,
   sideloadedCategories
 } from 'frontend/helpers/library'
+import storeAuthState from './storeAuthState'
+
+const globalSettings = configStore.get_nodefault('settings')
+
+export class GameCollectionClass implements GameCollection {
+  list: HiddenGame[] = []
+
+  constructor() {
+    makeAutoObservable(this)
+  }
+
+  add(appNameToAdd: string, appTitle: string) {
+    this.list.push({ appName: appNameToAdd, title: appTitle })
+  }
+  remove(appNameToRemove: string) {
+    this.list = this.list.filter((val) => val.appName !== appNameToRemove)
+  }
+}
 
 class LibraryState {
   epicLibrary: GameInfo[] = []
@@ -30,13 +51,15 @@ class LibraryState {
   sideloadedLibrary: GameInfo[] = []
   hyperPlayLibrary: GameInfo[] = []
   nonAvailableGames: GameInfo[] = []
+  // array of appName's for games that need updating
+  gameUpdates: string[] = []
   private gameStatuses: GameStatus[] = []
 
   // cache list of games being installed
   installing: string[] = []
-  libraryTopSection = ''
-  favouriteGames: GameCollection | undefined
-  hiddenGames: GameCollection | undefined
+  libraryTopSection = globalSettings?.libraryTopSection || 'disabled'
+  favouriteGames: GameCollection = new GameCollectionClass()
+  hiddenGames: GameCollection = new GameCollectionClass()
   filterText = ''
 
   // store
@@ -53,6 +76,10 @@ class LibraryState {
   showHidden = false
   showNonAvailable = true
   filterPlatforms: Platform[] = []
+
+  // misc
+  refreshing = false
+  refreshingInTheBackground = false
 
   constructor() {
     makeAutoObservable(this)
@@ -81,7 +108,62 @@ class LibraryState {
     })
   }
 
-  refresh() {
+  async refresh(library?: Runner | 'all', checkUpdates = false): Promise<void> {
+    if (checkUpdates && library) {
+      try {
+        this.gameUpdates = await window.api.checkGameUpdates()
+      } catch (error) {
+        window.api.logError(`${error}`)
+      }
+    }
+
+    this.epicLibrary = libraryStore.get('library', [])
+    if (
+      storeAuthState.epic.username &&
+      (!this.epicLibrary.length || !this.epicLibrary.length)
+    ) {
+      window.api.logInfo('No cache found, getting data from legendary...')
+      const { library: legendaryLibrary } = await getLegendaryConfig()
+      this.epicLibrary = legendaryLibrary
+    }
+
+    this.refreshGogLibrary()
+    if (
+      storeAuthState.gog.username &&
+      (!this.gogLibrary.length || !this.gogLibrary.length)
+    ) {
+      window.api.logInfo('No cache found, getting data from gog...')
+      await window.api.refreshLibrary('gog')
+      this.refreshGogLibrary()
+    }
+
+    this.hyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
+    this.hiddenGames.list = configStore.get('games.hidden', [])
+
+    this.refreshing = false
+    this.refreshingInTheBackground = true
+  }
+
+  refreshLibrary = async ({
+    checkForUpdates,
+    runInBackground = true,
+    library = undefined
+  }: RefreshOptions): Promise<void> => {
+    if (this.refreshing) return
+
+    this.refreshing = true
+    this.refreshingInTheBackground = runInBackground
+
+    window.api.logInfo('Refreshing Library')
+    try {
+      await window.api.refreshLibrary(library)
+      return await this.refresh(library, checkForUpdates)
+    } catch (error) {
+      window.api.logError(`${error}`)
+    }
+  }
+
+  refreshAllStoresFromJson() {
     this.refreshEpicLibrary()
     this.refreshGogLibrary()
     this.refreshSideloadedLibrary()

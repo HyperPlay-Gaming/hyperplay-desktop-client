@@ -6,7 +6,6 @@ import {
   ConnectivityStatus,
   DialogType,
   ButtonOptions,
-  LibraryTopSectionOptions,
   DMQueueElement,
   MetricsOptInStatus,
   DownloadManagerState
@@ -18,22 +17,14 @@ export type Platform = 'win' | 'mac' | 'linux' | 'browser'
 
 export interface ContextType {
   error: boolean
-  gameUpdates: string[]
   isRTL: boolean
   language: string
   setLanguage: (newLanguage: string) => void
   handleLayout: (value: string) => void
-  handleSearch: (input: string) => void
   layout: string
   libraryStatus: GameStatus[]
-  libraryTopSection: string
-  handleLibraryTopSection: (value: LibraryTopSectionOptions) => void
   platform: NodeJS.Platform | 'unknown'
-  refresh: (library: Runner, checkUpdates?: boolean) => Promise<void>
-  refreshLibrary: (options: RefreshOptions) => Promise<void>
   refreshWineVersionInfo: (fetch: boolean) => void
-  refreshing: boolean
-  refreshingInTheBackground: boolean
   theme: string
   setTheme: (themeName: string) => void
   zoomPercent: number
@@ -94,13 +85,6 @@ export interface InstallProgress {
   eta: string
   folder?: string
   percent: number
-}
-
-type RefreshOptions = {
-  checkForUpdates?: boolean
-  fullRefresh?: boolean
-  library?: Runner | 'all'
-  runInBackground?: boolean
 }
 
 export type SyncType = 'Download' | 'Upload' | 'Force download' | 'Force upload'

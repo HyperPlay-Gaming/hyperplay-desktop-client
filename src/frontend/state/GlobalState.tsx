@@ -4,7 +4,6 @@ import {
   ConnectivityStatus,
   GameInfo,
   GameStatus,
-  RefreshOptions,
   Runner,
   WineVersionInfo,
   InstallParams,
@@ -18,7 +17,7 @@ import {
   ExternalLinkDialogOptions
 } from 'frontend/types'
 import { TFunction, withTranslation } from 'react-i18next'
-import { getGameInfo, getLegendaryConfig, launch, notify } from '../helpers'
+import { getGameInfo, launch, notify } from '../helpers'
 import { i18n, t } from 'i18next'
 
 import ContextProvider from './ContextProvider'
@@ -26,16 +25,13 @@ import ContextProvider from './ContextProvider'
 import {
   configStore,
   gogConfigStore,
-  libraryStore,
   metricsStore,
-  wineDownloaderInfoStore,
-  hyperPlayLibraryStore
+  wineDownloaderInfoStore
 } from 'frontend/helpers/electronStores'
 import { InstallModal } from 'frontend/screens/Library/components'
 import libraryState from 'frontend/state/libraryState'
 
 const storage: Storage = window.localStorage
-const globalSettings = configStore.get_nodefault('settings')
 
 const RTL_LANGUAGES = ['fa', 'ar']
 
@@ -57,11 +53,9 @@ interface StateProps {
   }
   wineVersions: WineVersionInfo[]
   error: boolean
-  gameUpdates: string[]
   language: string
   layout: string
   libraryStatus: GameStatus[]
-  libraryTopSection: string
   platform: NodeJS.Platform | 'unknown'
   refreshing: boolean
   refreshingInTheBackground: boolean
@@ -101,12 +95,9 @@ class GlobalState extends PureComponent<Props> {
     },
     wineVersions: wineDownloaderInfoStore.get('wine-releases', []),
     error: false,
-    //empty filter array means show all platforms
-    gameUpdates: [],
     language: this.props.i18n.language,
     layout: storage.getItem('layout') || 'grid',
     libraryStatus: [],
-    libraryTopSection: globalSettings?.libraryTopSection || 'disabled',
     platform: 'unknown',
     refreshing: false,
     refreshingInTheBackground: true,
@@ -284,7 +275,7 @@ class GlobalState extends PureComponent<Props> {
 
   handleSuccessfulLogin = (runner: Runner) => {
     libraryState.category = 'all'
-    this.refreshLibrary({
+    libraryState.refreshLibrary({
       runInBackground: false,
       library: runner
     })
@@ -369,86 +360,6 @@ class GlobalState extends PureComponent<Props> {
     }
   }
 
-  refresh = async (
-    library?: Runner | 'all',
-    checkUpdates = false
-  ): Promise<void> => {
-    console.log('refreshing')
-    const { epic, gog, gameUpdates } = this.state
-
-    let updates = gameUpdates
-    if (checkUpdates && library) {
-      try {
-        updates = await window.api.checkGameUpdates()
-      } catch (error) {
-        window.api.logError(`${error}`)
-      }
-    }
-
-    const currentLibraryLength = libraryState.epicLibrary?.length
-
-    libraryState.epicLibrary = libraryStore.get('library', [])
-    if (
-      epic.username &&
-      (!libraryState.epicLibrary.length || !libraryState.epicLibrary.length)
-    ) {
-      window.api.logInfo('No cache found, getting data from legendary...')
-      const { library: legendaryLibrary } = await getLegendaryConfig()
-      libraryState.epicLibrary = legendaryLibrary
-    }
-
-    libraryState.refreshGogLibrary()
-    if (
-      gog.username &&
-      (!libraryState.gogLibrary.length || !libraryState.gogLibrary.length)
-    ) {
-      window.api.logInfo('No cache found, getting data from gog...')
-      await window.api.refreshLibrary('gog')
-      libraryState.refreshGogLibrary()
-    }
-
-    libraryState.hyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
-    const hiddenGames = configStore.get('games.hidden', [])
-
-    this.setState({
-      epic: {
-        username: epic.username
-      },
-      gog: {
-        username: gog.username
-      },
-      gameUpdates: updates,
-      refreshing: false,
-      refreshingInTheBackground: true,
-      hiddenGames
-    })
-
-    if (currentLibraryLength !== libraryState.epicLibrary.length) {
-      window.api.logInfo('Force Update')
-      this.forceUpdate()
-    }
-  }
-
-  refreshLibrary = async ({
-    checkForUpdates,
-    runInBackground = true,
-    library = undefined
-  }: RefreshOptions): Promise<void> => {
-    if (this.state.refreshing) return
-
-    this.setState({
-      refreshing: true,
-      refreshingInTheBackground: runInBackground
-    })
-    window.api.logInfo('Refreshing Library')
-    try {
-      await window.api.refreshLibrary(library)
-      return await this.refresh(library, checkForUpdates)
-    } catch (error) {
-      window.api.logError(`${error}`)
-    }
-  }
-
   refreshWineVersionInfo = async (fetch: boolean): Promise<void> => {
     if (this.state.platform === 'win32') {
       return
@@ -478,7 +389,6 @@ class GlobalState extends PureComponent<Props> {
       })
   }
 
-  handleSearch = (input: string) => this.setState({ filterText: input })
   handleLayout = (layout: string) => this.setState({ layout })
 
   handleGameStatus = async ({
@@ -488,7 +398,7 @@ class GlobalState extends PureComponent<Props> {
     progress,
     runner
   }: GameStatus) => {
-    const { libraryStatus, gameUpdates } = this.state
+    const { libraryStatus } = this.state
     const currentApp = libraryStatus.find((game) => game.appName === appName)
 
     // add app to libraryStatus if it was not present
@@ -526,30 +436,31 @@ class GlobalState extends PureComponent<Props> {
     if (['error', 'done'].includes(status)) {
       // also remove from updates if it was updating
       if (currentApp.status === 'updating') {
-        const updatedGamesUpdates = gameUpdates.filter(
+        const updatedGamesUpdates = libraryState.gameUpdates.filter(
           (game) => game !== appName
         )
         // This avoids calling legendary again before the previous process is killed when canceling
-        this.refreshLibrary({
+        libraryState.refreshLibrary({
           checkForUpdates: true,
           runInBackground: true,
           library: runner
         })
 
+        libraryState.gameUpdates = updatedGamesUpdates
+
         return this.setState({
-          gameUpdates: updatedGamesUpdates,
           libraryStatus: newLibraryStatus
         })
       }
 
-      this.refreshLibrary({ runInBackground: true, library: runner })
+      libraryState.refreshLibrary({ runInBackground: true, library: runner })
       this.setState({ libraryStatus: newLibraryStatus })
     }
   }
 
   async componentDidMount() {
     const { t } = this.props
-    const { gameUpdates = [], libraryStatus, category } = this.state
+    const { libraryStatus, category } = this.state
     const oldCategory: string = category
     if (oldCategory === 'epic') {
       libraryState.category = 'all'
@@ -609,7 +520,7 @@ class GlobalState extends PureComponent<Props> {
 
     window.api.handleRefreshLibrary(
       async (e: Electron.IpcRendererEvent, runner: Runner) => {
-        this.refreshLibrary({
+        libraryState.refreshLibrary({
           checkForUpdates: true,
           runInBackground: true,
           library: runner
@@ -625,7 +536,7 @@ class GlobalState extends PureComponent<Props> {
       await window.api.getUserInfo()
     }
 
-    if (!gameUpdates.length) {
+    if (!libraryState.gameUpdates.length) {
       const storedGameUpdates = JSON.parse(storage.getItem('updates') || '[]')
       this.setState({ gameUpdates: storedGameUpdates })
     }
@@ -633,7 +544,7 @@ class GlobalState extends PureComponent<Props> {
     this.setState({ platform })
 
     if (legendaryUser || gogUser) {
-      this.refreshLibrary({
+      libraryState.refreshLibrary({
         checkForUpdates: true,
         runInBackground: Boolean(libraryState.epicLibrary.length)
       })
@@ -667,11 +578,11 @@ class GlobalState extends PureComponent<Props> {
   }
 
   componentDidUpdate() {
-    const { gameUpdates, libraryStatus, layout, sidebarCollapsed } = this.state
+    const { libraryStatus, layout, sidebarCollapsed } = this.state
 
     storage.setItem('category', libraryState.category)
     storage.setItem('layout', layout)
-    storage.setItem('updates', JSON.stringify(gameUpdates))
+    storage.setItem('updates', JSON.stringify(libraryState.gameUpdates))
     storage.setItem('show_hidden', JSON.stringify(libraryState.showHidden))
     storage.setItem(
       'show_favorites',
@@ -708,13 +619,9 @@ class GlobalState extends PureComponent<Props> {
         logout: this.gogLogout
       },
       handleLayout: this.handleLayout,
-      handleSearch: this.handleSearch,
       setLanguage: this.setLanguage,
       isRTL,
-      refresh: this.refresh,
-      refreshLibrary: this.refreshLibrary,
       refreshWineVersionInfo: this.refreshWineVersionInfo,
-      handleLibraryTopSection: this.handleLibraryTopSection,
       setTheme: this.setTheme,
       setZoomPercent: this.setZoomPercent,
       setAllTilesInColor: this.setAllTilesInColor,

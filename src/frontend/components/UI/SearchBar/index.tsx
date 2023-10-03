@@ -1,13 +1,6 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef
-} from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -23,7 +16,6 @@ function fixFilter(text: string) {
 }
 
 export default observer(function SearchBar() {
-  const { handleSearch } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -57,7 +49,7 @@ export default observer(function SearchBar() {
       const element = input.current
       element.value = libraryState.filterText
       const handler = () => {
-        handleSearch(element.value)
+        libraryState.filterText = element.value
       }
       element.addEventListener('input', handler)
       return () => {
@@ -68,7 +60,7 @@ export default observer(function SearchBar() {
   }, [input])
 
   const onClear = useCallback(() => {
-    handleSearch('')
+    libraryState.filterText = ''
     if (input.current) {
       input.current.value = ''
       input.current.focus()
@@ -76,7 +68,7 @@ export default observer(function SearchBar() {
   }, [input])
 
   const handleClick = (title: string) => {
-    handleSearch('')
+    libraryState.filterText = ''
     if (input.current) {
       input.current.value = ''
 

@@ -4,11 +4,12 @@ Object.defineProperty(window, 'api', {
   writable: true,
   value: {
     install: jest.fn(),
-    storeNew: jest.fn()
+    storeNew: jest.fn(),
+    storeGet: jest.fn()
   }
 })
 
-import libraryState from '../libraryState'
+import libraryState, { GameCollectionClass } from '../libraryState'
 import { Filter, GameInfo } from '../../../common/types'
 
 function resetLibraryState() {
@@ -18,9 +19,9 @@ function resetLibraryState() {
   libraryState.hyperPlayLibrary = []
   libraryState.nonAvailableGames = []
   libraryState.installing = []
-  libraryState.libraryTopSection = ''
-  libraryState.favouriteGames = undefined
-  libraryState.hiddenGames = undefined
+  libraryState.libraryTopSection = 'disabled'
+  libraryState.favouriteGames = new GameCollectionClass()
+  libraryState.hiddenGames = new GameCollectionClass()
   libraryState.filterText = ''
   libraryState.category = 'all'
   libraryState.selectedFilter = undefined
@@ -315,9 +316,9 @@ describe('libraryState.ts', () => {
 
   test('show recent games', async () => {
     expect(libraryState.showRecentGames).toBe(false)
-    libraryState.libraryTopSection = 'recently_played something else'
+    libraryState.libraryTopSection = 'recently_played_installed'
     expect(libraryState.showRecentGames).toBe(true)
-    libraryState.libraryTopSection = ''
+    libraryState.libraryTopSection = 'disabled'
     expect(libraryState.showRecentGames).toBe(false)
   })
 })

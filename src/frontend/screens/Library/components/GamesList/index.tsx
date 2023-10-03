@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import { GameInfo, Runner } from 'common/types'
 import cx from 'classnames'
 import GameCard from '../GameCard'
-import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
@@ -29,78 +28,54 @@ const GamesList = observer(
     onlyInstalled = false,
     isRecent = false
   }: Props): JSX.Element => {
-    const { gameUpdates } = useContext(ContextProvider)
     const { t } = useTranslation()
-    const [gameCards, setGameCards] = useState<JSX.Element[]>([])
 
-    const favouriteGameMap = useMemo(() => {
-      const gameMap = {}
-      if (libraryState.favouriteGames?.list !== undefined)
-        for (const game of libraryState.favouriteGames.list) {
-          gameMap[game.appName] = game
+    console.log('rerendering gameslist', libraryState.favouriteGames.list)
+    const favouriteGameMap = {}
+    for (const game of libraryState.favouriteGames.list) {
+      favouriteGameMap[game.appName] = game
+    }
+    console.log('rerendering favouriteGameMap', favouriteGameMap)
+
+    if (!library.length) {
+      return <></>
+    }
+    const gameCards = library
+      .filter((gameInfo) => {
+        const { is_installed } = gameInfo
+        let is_dlc = false
+        if (gameInfo.runner !== 'sideload') {
+          is_dlc = gameInfo.install.is_dlc ?? false
         }
-      return gameMap
-    }, [libraryState.favouriteGames])
 
-    useEffect(() => {
-      let mounted = true
-
-      const createGameCards = async () => {
-        if (!library.length) {
-          return
+        if (is_dlc) {
+          return false
         }
-        const resolvedLibrary = library.map(async (gameInfo) => {
-          const { app_name, is_installed, runner } = gameInfo
-
-          let is_dlc = false
-          if (gameInfo.runner !== 'sideload') {
-            is_dlc = gameInfo.install.is_dlc ?? false
-          }
-
-          if (is_dlc) {
-            return null
-          }
-          if (!is_installed && onlyInstalled) {
-            return null
-          }
-
-          const hasUpdate = is_installed && gameUpdates?.includes(app_name)
-          return (
-            <GameCard
-              key={app_name}
-              hasUpdate={hasUpdate}
-              buttonClick={() => {
-                if (gameInfo.runner !== 'sideload')
-                  handleGameCardClick(app_name, runner, gameInfo)
-              }}
-              isRecent={isRecent}
-              gameInfo={gameInfo}
-              favorited={favouriteGameMap[app_name]}
-            />
-          )
-        })
-        const gameCardElements = (await Promise.all(
-          resolvedLibrary
-        )) as JSX.Element[]
-
-        if (mounted) {
-          setGameCards(gameCardElements)
+        if (!is_installed && onlyInstalled) {
+          return false
         }
-      }
 
-      createGameCards()
+        return true
+      })
+      .map((gameInfo) => {
+        const { app_name, is_installed, runner } = gameInfo
 
-      return () => {
-        mounted = false
-      }
-    }, [
-      library,
-      onlyInstalled,
-      layout,
-      gameUpdates,
-      isRecent,
-      libraryState.showNonAvailable
-    ])
+        const hasUpdate =
+          is_installed && libraryState.gameUpdates?.includes(app_name)
+        return (
+          <GameCard
+            key={app_name}
+            hasUpdate={hasUpdate}
+            buttonClick={() => {
+              if (gameInfo.runner !== 'sideload')
+                handleGameCardClick(app_name, runner, gameInfo)
+            }}
+            isRecent={isRecent}
+            gameInfo={gameInfo}
+            favorited={favouriteGameMap[app_name]}
+          />
+        )
+      })
 
     return (
       <div

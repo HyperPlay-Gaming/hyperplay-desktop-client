@@ -76,7 +76,6 @@ export default observer(function GamePage(): JSX.Element | null {
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
   const {
-    gameUpdates,
     platform,
     showDialogModal,
     setIsSettingsModalOpen,
@@ -287,7 +286,7 @@ export default observer(function GamePage(): JSX.Element | null {
     }
 
     hasRequirements = extraInfo?.reqs ? extraInfo.reqs.length > 0 : false
-    hasUpdate = is_installed && gameUpdates?.includes(appName)
+    hasUpdate = is_installed && libraryState.gameUpdates?.includes(appName)
     const appLocation = gameInfo.browserUrl
       ? false
       : install_path || folder_name

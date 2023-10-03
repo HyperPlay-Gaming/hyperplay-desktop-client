@@ -36,16 +36,7 @@ type ModalState = {
 }
 
 export default observer(function Library(): JSX.Element {
-  const {
-    layout,
-    refreshing,
-    refreshingInTheBackground,
-    epic,
-    gog,
-    libraryTopSection,
-    platform,
-    refreshLibrary
-  } = useContext(ContextProvider)
+  const { layout, epic, gog, platform } = useContext(ContextProvider)
   const { t } = useTranslation()
 
   const libraryToShow = libraryState.library
@@ -248,7 +239,7 @@ export default observer(function Library(): JSX.Element {
             type="tertiary"
             title={t('generic.library.refresh', 'Refresh Library')}
             onClick={async () =>
-              refreshLibrary({
+              libraryState.refreshLibrary({
                 checkForUpdates: true,
                 runInBackground: false,
                 library: libraryState.category
@@ -257,7 +248,7 @@ export default observer(function Library(): JSX.Element {
           >
             <FontAwesomeIcon
               className={classNames('FormControl__segmentedFaIcon', {
-                ['fa-spin']: refreshing
+                ['fa-spin']: libraryState.refreshing
               })}
               icon={faSyncAlt}
             />
@@ -284,7 +275,9 @@ export default observer(function Library(): JSX.Element {
           {showRecentGames && (
             <RecentlyPlayed
               handleModal={handleModal}
-              onlyInstalled={libraryTopSection.endsWith('installed')}
+              onlyInstalled={libraryState.libraryTopSection.endsWith(
+                'installed'
+              )}
             />
           )}
 
@@ -301,11 +294,13 @@ export default observer(function Library(): JSX.Element {
             </>
           )}
 
-          {refreshing && !refreshingInTheBackground && (
-            <UpdateComponent inline />
-          )}
+          {libraryState.refreshing &&
+            !libraryState.refreshingInTheBackground && (
+              <UpdateComponent inline />
+            )}
 
-          {(!refreshing || refreshingInTheBackground) && (
+          {(!libraryState.refreshing ||
+            libraryState.refreshingInTheBackground) && (
             <GamesList
               library={libraryToShow}
               layout={layout}
