@@ -30,12 +30,10 @@ const GamesList = observer(
   }: Props): JSX.Element => {
     const { t } = useTranslation()
 
-    console.log('rerendering gameslist', libraryState.favouriteGames.list)
     const favouriteGameMap = {}
     for (const game of libraryState.favouriteGames.list) {
       favouriteGameMap[game.appName] = game
     }
-    console.log('rerendering favouriteGameMap', favouriteGameMap)
 
     if (!library.length) {
       return <></>

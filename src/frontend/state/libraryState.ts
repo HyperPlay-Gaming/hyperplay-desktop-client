@@ -424,6 +424,13 @@ class LibraryState {
   get showRecentGames() {
     return this.libraryTopSection.startsWith('recently_played')
   }
+
+  // TODO: refactor hiddenGames to use a map
+  isGameHidden(appName: string) {
+    return !!this.hiddenGames?.list.find(
+      (hiddenGame: HiddenGame) => hiddenGame.appName === appName
+    )
+  }
 }
 
 export default new LibraryState()

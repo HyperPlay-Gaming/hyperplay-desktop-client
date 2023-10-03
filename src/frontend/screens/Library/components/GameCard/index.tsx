@@ -1,12 +1,11 @@
 import './index.css'
 
-import React, { useContext, useMemo, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
 import {
   DMQueueElement,
   DownloadManagerState,
   GameInfo,
-  HiddenGame,
   Runner
 } from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
@@ -181,11 +180,7 @@ const GameCard = ({
     return undefined
   }
 
-  const isHiddenGame = useMemo(() => {
-    return !!libraryState.hiddenGames?.list.find(
-      (hiddenGame: HiddenGame) => hiddenGame.appName === appName
-    )
-  }, [libraryState.hiddenGames, appName])
+  const isHiddenGame = libraryState.isGameHidden(appName)
 
   const isBrowserGame = installPlatform === 'Browser'
 
