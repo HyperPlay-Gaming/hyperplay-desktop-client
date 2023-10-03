@@ -15,7 +15,7 @@ jobs:
     steps:
       - name: Install Dependencies
         run: |
-          pacman -Syu --noconfirm base-devel wget jq openssh git
+          pacman -Syu --noconfirm base-devel wget jq
 
       - name: Download Package
         run: |
@@ -26,79 +26,55 @@ jobs:
           set +x
         if: ${{ success() }}
 
-      - name: Clone AUR Repository
-        run: |
-          set -x
-          mkdir -p ~/.ssh
-          echo "${{ secrets.AUR_SSH_PRIVATE }}" > ~/.ssh/id_rsa
-          ssh-keyscan -t rsa aur.archlinux.org >> ~/.ssh/known_hosts
-          cat ~/.ssh/known_hosts
-          cat ~/.ssh/id_rsa
-          git clone ssh://aur@aur.archlinux.org/hyperplay.git 
-          cd hyperplay
-          set +x
-        if: ${{ success() }}
-
       - name: Update PKGBUILD
         run: |
           set -x
-          current_version=$(grep '^pkgver=' PKGBUILD | cut -d'=' -f2)
-          current_pkgrel=$(grep '^pkgrel=' PKGBUILD | cut -d'=' -f2)
+          latest_version=$(curl -s https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest | jq -r .tag_name)
+          pkgver=${latest_version#v}
+          pkgrel=1
+          url="https://github.com/HyperPlay-Gaming/hyperplay-desktop-client"
+          _filename=hyperplay-${pkgver}.pacman
+          source=("$url/releases/download/$latest_version/$_filename")
+          md5sums=($(md5sum hyperplay.pacman | cut -d' ' -f1))
 
-          if [ "$current_version" == "${latest_version:1}" ]; then
-            new_pkgrel=$((current_pkgrel + 1))
-          else
-            new_pkgrel=1
-          fi
+          cat <<EOF > PKGBUILD
+          # Maintainer: flaviofearn <flavioislima@gmail.com>
+          # Maintainer: blingus <brett@hyperplay.xyz>
 
-          sed -i "s/pkgrel=.*/pkgrel=${new_pkgrel}/" PKGBUILD
-          sed -i "s/pkgver=.*/pkgver=${latest_version:1}/" PKGBUILD
-          sed -i 's/md5sums=()/md5sums=('$(md5sum ../hyperplay.pacman | cut -d' ' -f1)')/' PKGBUILD
-          set +x
-        working-directory: hyperplay
-        if: ${{ success() }}
+          pkgname=hyperplay
+          pkgver=$pkgver
+          pkgrel=$pkgrel
+          pkgdesc="An open source Web3 gaming platform."
+          arch=('x86_64')
+          url="$url"
+          license=('GPL3')
+          depends=('gawk')
+          _filename=$_filename
+          source=("$source")
+          noextract=("$_filename")
+          md5sums=(${md5sums[@]})
+          options=(!strip)
 
-      - name: Generate .SRCINFO
-        run: |
-          set -x
-          pkgver=$(grep '^pkgver=' PKGBUILD | cut -d= -f2)
-          pkgrel=$(grep '^pkgrel=' PKGBUILD | cut -d= -f2)
-          source=$(grep '^source=' PKGBUILD | cut -d= -f2 | sed "s/ //g")  # Remove spaces
-          md5sums=$(grep '^md5sums=' PKGBUILD | cut -d= -f2 | sed "s/ //g")  # Remove spaces
+          package() {
+            tar -xJv -C "\$pkgdir" -f "\$srcdir/\$_filename" usr opt
+            mkdir "\$pkgdir/usr/bin"
+            ln -s "/opt/HyperPlay/hyperplay" "\$pkgdir/usr/bin/hyperplay"
+          }
 
-          cat <<EOF > .SRCINFO
-          pkgbase = hyperplay
-          pkgdesc = An open source Web3 gaming platform
-          pkgver = $pkgver
-          pkgrel = $pkgrel
-          url = https://github.com/HyperPlay-Gaming/hyperplay-desktop-client
-          arch = x86_64
-          license = GPL3
-          depends = fuse2
-          depends = gawk
-          noextract = hyperplay-$pkgver.pacman
-          options = !strip
-          source = https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/download/v$pkgver/hyperplay-$pkgver.pacman
-          md5sums = $md5sums
+          # vim:set ts=2 sw=2 et: syntax=sh
 
-          pkgname = hyperplay
           EOF
-          cat .SRCINFO
           cat PKGBUILD
-          set +x
-        working-directory: hyperplay
+              set +x
         if: ${{ success() }}
 
-      - name: Commit and Push
-        run: |
-          set -x
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git add PKGBUILD .SRCINFO
-          git commit -m "New Release ${latest_version}"
-          git push origin master
-          set +x
-        working-directory: hyperplay
-        if: ${{ success() }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish AUR package
+        uses: KSXGitHub/github-actions-deploy-aur@v2
+        with:
+          pkgname: hyperplay
+          pkgbuild: ./PKGBUILD
+          commit_username: ${{ secrets.AUR_USERNAME }}
+          commit_email: ${{ secrets.AUR_EMAIL }}
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE }}
+          commit_message: Update AUR package
+          ssh_keyscan_types: rsa,dsa,ecdsa,ed25519
