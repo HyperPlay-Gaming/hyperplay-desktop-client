@@ -67,7 +67,6 @@ const AuthModal = () => {
     webview.addEventListener('dom-ready', handleDomReady)
 
     return () => {
-      console.log('Cleaning up event listeners.')
       webview.removeEventListener('dom-ready', handleDomReady)
       webview.removeEventListener('ipc-message', handleIpcMessage)
     }
