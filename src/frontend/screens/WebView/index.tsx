@@ -232,8 +232,6 @@ function WebView() {
   else if (shouldInjectProvider(new URL(startUrl)))
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 
-  console.log('partition for webview = ', partitionForWebview, startUrl)
-
   return (
     <div className="WebView">
       {webviewRef.current && (

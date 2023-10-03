@@ -786,7 +786,6 @@ ipcMain.on('resetApp', async () => {
 })
 
 ipcMain.on('createNewWindow', (e, url) => {
-  console.log(`ipcMain.on('createNewWindow'`)
   new BrowserWindow({ height: 700, width: 1200 }).loadURL(url)
 })
 

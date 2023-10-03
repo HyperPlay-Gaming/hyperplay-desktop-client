@@ -40,7 +40,6 @@ export function logFileLocation(appName: string) {
 }
 
 const openRestrictedBrowserGameWindow = async (url: string) => {
-  console.log('openRestrictedBrowserGameWindow')
   const restrictedBrowserWindow = new BrowserWindow({
     icon: icon,
     webPreferences: {
@@ -58,7 +57,6 @@ const openNewBrowserGameWindow = async (
   gameInfo: GameInfo
 ): Promise<boolean> => {
   return new Promise((res) => {
-    console.log('openNewBrowserGameWindow')
     const browserGame = new BrowserWindow({
       icon: icon,
       fullscreen: true,
