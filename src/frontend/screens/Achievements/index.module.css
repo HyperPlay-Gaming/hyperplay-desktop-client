@@ -12,15 +12,11 @@
 }
 
 .storeTitle {
-  font-size: 1.5em;
-  margin-bottom: var(--space-xl-fixed);
+  font-size: var(--text-2xl);
+  color: var(--color-neutral-400);
+  margin-bottom: var(--space-lg);
 }
 
 .fullHeight {
   min-height: 100%;
-}
-
-.achievementTable > div:first-child {
-  height: 100%;
-  border-radius: var(--space-md);
 }
