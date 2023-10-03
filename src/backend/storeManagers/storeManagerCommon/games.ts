@@ -26,6 +26,7 @@ import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { hrtime } from 'process'
 import { trackEvent } from 'backend/metrics/metrics'
+import { domainsAreEqual } from 'common/utils'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -39,6 +40,7 @@ export function logFileLocation(appName: string) {
 }
 
 const openRestrictedBrowserGameWindow = async (url: string) => {
+  console.log('openRestrictedBrowserGameWindow')
   const restrictedBrowserWindow = new BrowserWindow({
     icon: icon,
     webPreferences: {
@@ -51,25 +53,12 @@ const openRestrictedBrowserGameWindow = async (url: string) => {
   restrictedBrowserWindow.loadURL(url)
 }
 
-function getDomainNameFromHostName(url: URL) {
-  const domainNameParts = url.hostname.split('.')
-  if (domainNameParts.length < 3) return url.hostname
-  return domainNameParts[1] + '.' + domainNameParts[2]
-}
-
-function domainsAreEqual(url: URL, otherUrl: URL) {
-  if (url.hostname === otherUrl.hostname) return true
-  const urlDomain = getDomainNameFromHostName(url)
-  const otherUrlDomain = getDomainNameFromHostName(otherUrl)
-  if (urlDomain === otherUrlDomain) return true
-  return false
-}
-
 const openNewBrowserGameWindow = async (
   browserUrl: string,
   gameInfo: GameInfo
 ): Promise<boolean> => {
   return new Promise((res) => {
+    console.log('openNewBrowserGameWindow')
     const browserGame = new BrowserWindow({
       icon: icon,
       fullscreen: true,

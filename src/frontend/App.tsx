@@ -68,6 +68,10 @@ function App() {
             <Route path="wiki" element={<WebView key="wiki" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
             <Route
+              path="metamaskSnaps"
+              element={<WebView key="metamaskSnaps" />}
+            />
+            <Route
               path="metamaskSecretPhrase"
               element={
                 <MetaMaskHome path="home.html#onboarding/import-with-recovery-phrase" />
