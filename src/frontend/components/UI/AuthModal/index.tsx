@@ -33,8 +33,9 @@ const AuthModal = () => {
       const provider = new ethers.BrowserProvider(window.ethereum)
       await provider.getSigner()
     } catch (e) {
-      // if it fails, open the popup manually and since there are already requests
-      // in the queue, this will trigger the connect account popup
+      // if it fails, open the popup manually
+      // since there are already requests in the queue, this will resume
+      // the connection flow after the user unlocks metamask
       if (isTooManyRequestsError(String(e))) {
         extensionStore.setIsPopupOpen(true)
       }
