@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 
 import {
   Background,
@@ -11,9 +11,10 @@ import { Flex, Grid } from '@mantine/core'
 
 import styles from './index.module.css'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
+import { Game } from '@hyperplay/ui/dist/components/AchievementSummaryTable'
 
 // TODO Remove - Fake Data For Now
-const games = [
+const gamesDefault = [
   {
     id: '1',
     image: 'https://i.imgur.com/Cij5vdL.png',
@@ -56,19 +57,56 @@ const games = [
 
 type AchievementFilter = 'all' | 'new' | 'minted'
 
+// TODO: Remove - When api paginates
+function paginate(array: Game[], page: number, perPage: number) {
+  const start = (page - 1) * perPage;
+  const end = start + perPage;
+  return array.slice(start, end);
+}
+const pageSize = 12
+
 export default React.memo(function Achievements(): JSX.Element {
   const achievementsSortOptions = [{ text: 'Alphabetically' }]
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
   const [activeFilter, setActiveFilter] = useState<AchievementFilter>('all')
+  const [achievementsData, setAchievementData] = useState<{ currentPage: number; totalPages: number; games: Game[] }>({ currentPage: 0, totalPages: 0, games: [] })
+
   const filteredGames = useMemo(() => {
     if (activeFilter === 'minted') {
-      return games.filter((game) => game.state === 'active')
+      return achievementsData.games.filter((game) => game.state === 'active')
     }
     if (activeFilter === 'new') {
-      return games.filter((game) => game.isNewAchievement)
+      return achievementsData.games.filter((game) => game.isNewAchievement)
     }
-    return games
-  }, [activeFilter])
+    return achievementsData.games
+  }, [activeFilter, achievementsData])
+
+  useEffect(() => {
+    const getAchievements = async () => {
+      const achievementApiData = await window.api.getAchievements('hyperplay')
+      const firstPage = paginate(achievementApiData.data, 1, pageSize) as Game[]
+      const totalPages = Math.ceil(achievementApiData.data.length / pageSize)
+      setAchievementData({ currentPage: 1, totalPages, games: firstPage })
+    }
+
+    getAchievements()
+  }, [])
+
+  const handleNextPage = useCallback(async () => {
+    const achievementApiData = await window.api.getAchievements('hyperplay')
+    const totalPages = Math.ceil(achievementApiData.data.length / pageSize)
+    const nextPage = achievementsData.currentPage + 1
+    const data = paginate(achievementApiData.data, nextPage, 12)
+    setAchievementData({ currentPage: nextPage, totalPages, games: data })
+  }, [achievementsData])
+
+  const handlePrevPage = useCallback(async () => {
+    const achievementApiData = await window.api.getAchievements('hyperplay')
+    const totalPages = Math.ceil(achievementApiData.data.length / pageSize)
+    const previousPage = achievementsData.currentPage - 1
+    const data = paginate(achievementApiData.data, previousPage, 12)
+    setAchievementData({ currentPage: previousPage, totalPages, games: data })
+  }, [achievementsData])
 
   return (
     <>
@@ -111,17 +149,17 @@ export default React.memo(function Achievements(): JSX.Element {
             className={`${styles.fullHeight} ${styles.achievementTable}`}
           >
             <AchievementSummaryTable
-              games={filteredGames}
+              games={filteredGames.map(game => ({ id: game.gameId, title: game.gameName, image: game.icon, state: 'disabled', ctaProps: { onClick: () => console.log('click') } }))}
               sortProps={{
                 options: achievementsSortOptions,
                 selected: selectedSort,
                 onItemChange: setSelectedSort
               }}
               paginationProps={{
-                currentPage: 1,
-                totalPages: 3,
-                handleNextPage: () => console.log('next page'),
-                handlePrevPage: () => console.log('prev page')
+                currentPage: achievementsData.currentPage,
+                totalPages: achievementsData.totalPages,
+                handleNextPage,
+                handlePrevPage,
               }}
               filterProps={{
                 activeFilter,
