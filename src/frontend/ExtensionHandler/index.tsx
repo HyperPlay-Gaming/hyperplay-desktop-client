@@ -44,6 +44,10 @@ const ExtensionHandler = function () {
     navigate('metamaskSnaps')
   }
 
+  async function handleOpenMMPortfolioPage() {
+    navigate('metamaskPortfolio')
+  }
+
   async function handleSend(
     event: Electron.IpcRendererEvent,
     id: number,
@@ -111,6 +115,8 @@ const ExtensionHandler = function () {
       window.api.handleMetamaskExtensionSendAsyncs(handleSendAsync)
     const removeOpenMetaMaskSnapsPageListener =
       window.api.handleOpenMetaMaskSnapsPage(handleOpenMMSnapsPage)
+    const removeOpenMetaMaskPortfolioPageListener =
+      window.api.handleOpenMetaMaskPortfolioPage(handleOpenMMPortfolioPage)
 
     return () => {
       removeRequestListener()
@@ -118,6 +124,7 @@ const ExtensionHandler = function () {
       removeSendListener()
       removeSendAsyncListener()
       removeOpenMetaMaskSnapsPageListener()
+      removeOpenMetaMaskPortfolioPageListener()
     }
   }
 
