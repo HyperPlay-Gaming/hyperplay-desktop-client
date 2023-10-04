@@ -81,7 +81,7 @@ function WebView() {
     '/loginEpic': EPIC_LOGIN_URL,
     '/loginGOG': GOG_LOGIN_URL,
     '/loginweb/legendary': EPIC_LOGIN_URL,
-    '/loginweb/gog': GOG_LOGIN_URL
+    '/loginweb/gog': GOG_LOGIN_URL,
     '/loginweb/nile': amazonLoginData ? amazonLoginData.url : AMAZON_STORE,
     '/metamaskSnaps': METAMASK_SNAPS_URL
   }
