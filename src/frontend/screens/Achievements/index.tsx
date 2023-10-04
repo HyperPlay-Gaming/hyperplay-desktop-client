@@ -11,16 +11,29 @@ import {
 import { Flex, Grid } from '@mantine/core'
 
 import styles from './index.module.css'
-import { AchievementFilter, AchievementSort, SummaryAchievement } from 'common/types'
+import {
+  AchievementFilter,
+  AchievementSort,
+  SummaryAchievement
+} from 'common/types'
 
 const pageSize = 12
-const achievementsSortOptions = [{ text: 'Alphabetically (ASC)', value: 'ALPHA_A_TO_Z' }, { text: 'Alphabetically (DES)', value: 'ALPHA_Z_TO_A' }] as { text: string; value: AchievementSort }[]
+const achievementsSortOptions = [
+  { text: 'Alphabetically (ASC)', value: 'ALPHA_A_TO_Z' },
+  { text: 'Alphabetically (DES)', value: 'ALPHA_Z_TO_A' }
+] as { text: string; value: AchievementSort }[]
 
 export default React.memo(function Achievements(): JSX.Element {
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
   const [activeFilter, setActiveFilter] = useState<AchievementFilter>('ALL')
-  const [achievementsData, setAchievementData] = useState<{ currentPage: number; totalPages: number; games: SummaryAchievement[] }>({ currentPage: 0, totalPages: 0, games: [] })
-  const [achievementsToBeMinted, setAchievementsToBeMinted] = useState<string[]>([])
+  const [achievementsData, setAchievementData] = useState<{
+    currentPage: number
+    totalPages: number
+    games: SummaryAchievement[]
+  }>({ currentPage: 0, totalPages: 0, games: [] })
+  const [achievementsToBeMinted, setAchievementsToBeMinted] = useState<
+    string[]
+  >([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const filteredGames = useMemo(() => {
@@ -35,7 +48,14 @@ export default React.memo(function Achievements(): JSX.Element {
 
   useEffect(() => {
     const getAchievements = async () => {
-      const { data, totalPages, currentPage } = await window.api.getSummaryAchievements({ store: 'steam', filter: activeFilter, sort: selectedSort.value, page: 1, pageSize })
+      const { data, totalPages, currentPage } =
+        await window.api.getSummaryAchievements({
+          store: 'steam',
+          filter: activeFilter,
+          sort: selectedSort.value,
+          page: 1,
+          pageSize
+        })
       setAchievementData({ currentPage, totalPages, games: data })
     }
 
@@ -44,23 +64,42 @@ export default React.memo(function Achievements(): JSX.Element {
 
   const handleNextPage = useCallback(async () => {
     const nextPage = achievementsData.currentPage + 1
-    const { data, totalPages, currentPage } = await window.api.getSummaryAchievements({ store: 'steam', filter: activeFilter, sort: selectedSort.value, page: nextPage, pageSize })
+    const { data, totalPages, currentPage } =
+      await window.api.getSummaryAchievements({
+        store: 'steam',
+        filter: activeFilter,
+        sort: selectedSort.value,
+        page: nextPage,
+        pageSize
+      })
     setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData])
 
   const handlePrevPage = useCallback(async () => {
     const prevPage = achievementsData.currentPage - 1
-    const { data, totalPages, currentPage } = await window.api.getSummaryAchievements({ store: 'steam', filter: activeFilter, sort: selectedSort.value, page: prevPage, pageSize })
+    const { data, totalPages, currentPage } =
+      await window.api.getSummaryAchievements({
+        store: 'steam',
+        filter: activeFilter,
+        sort: selectedSort.value,
+        page: prevPage,
+        pageSize
+      })
     setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData])
 
-  const handleAdd = useCallback((id: string) => {
-    if (achievementsToBeMinted.includes(id)) {
-      setAchievementsToBeMinted((state) => state.filter((item) => item !== id))
-    } else {
-      setAchievementsToBeMinted((state) => ([...state, id]))
-    }
-  }, [achievementsToBeMinted])
+  const handleAdd = useCallback(
+    (id: string) => {
+      if (achievementsToBeMinted.includes(id)) {
+        setAchievementsToBeMinted((state) =>
+          state.filter((item) => item !== id)
+        )
+      } else {
+        setAchievementsToBeMinted((state) => [...state, id])
+      }
+    },
+    [achievementsToBeMinted]
+  )
 
   const handleMint = useCallback(() => {
     setIsLoading(true)
@@ -116,17 +155,16 @@ export default React.memo(function Achievements(): JSX.Element {
               </div>
             </Flex>
           </Grid.Col>
-          <Grid.Col
-            span={8}
-            className={`${styles.fullHeight}`}
-          >
+          <Grid.Col span={8} className={`${styles.fullHeight}`}>
             <AchievementSummaryTable
               games={filteredGames.map((game, index) => {
                 // TODO: remove when there is a real id
                 const id = `${game.gameName}-${index}`
-                const state = achievementsToBeMinted.includes(id) ? 'active' : 'default'
+                const state = achievementsToBeMinted.includes(id)
+                  ? 'active'
+                  : 'default'
 
-                return ({
+                return {
                   id,
                   title: game.gameName,
                   image: game.icon,
@@ -139,13 +177,15 @@ export default React.memo(function Achievements(): JSX.Element {
                     onClick: () => handleAdd(id),
                     disabled: isDisabled
                   }
-                })
+                }
               })}
               sortProps={{
                 options: achievementsSortOptions,
                 selected: selectedSort,
                 onItemChange: (sortOption) => {
-                  const chosenItem = achievementsSortOptions.find((option) => option.text === sortOption.text)
+                  const chosenItem = achievementsSortOptions.find(
+                    (option) => option.text === sortOption.text
+                  )
                   if (chosenItem) setSelectedSort(chosenItem)
                 }
               }}
@@ -153,7 +193,7 @@ export default React.memo(function Achievements(): JSX.Element {
                 currentPage: achievementsData.currentPage,
                 totalPages: achievementsData.totalPages,
                 handleNextPage,
-                handlePrevPage,
+                handlePrevPage
               }}
               filterProps={{
                 activeFilter: filter,
@@ -165,7 +205,7 @@ export default React.memo(function Achievements(): JSX.Element {
               }}
               mintButtonProps={{
                 onClick: handleMint,
-                disabled: isDisabled ?? achievementsToBeMinted.length === 0,
+                disabled: isDisabled ?? achievementsToBeMinted.length === 0
               }}
             />
           </Grid.Col>
