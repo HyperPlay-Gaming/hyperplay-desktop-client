@@ -131,10 +131,11 @@ export default React.memo(function Achievements(): JSX.Element {
     const getAchievements = async () => {
       // TODO: Remove - When api returns the correct data format
       // const achievementApiData = await window.api.getAchievements('hyperplay') as { data: AchievementData[] }
+      // const test = await window.api.getSummaryAchievements({ store: 'steam', filter: 'ALL', sort: 'ALPHA_A_TO_Z', page: 0 })
       const achievementApiData = { data: testData }
       const { data } = achievementApiData 
       const totalPages = Math.ceil(data.length / pageSize)
-      setAchievementData({ currentPage: 1, totalPages, games: paginate(data, 1, pageSize) })
+      setAchievementData({ currentPage: 0, totalPages, games: paginate(data, 1, pageSize) })
     }
 
     getAchievements()
