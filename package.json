@@ -97,7 +97,6 @@
       ]
     },
     "linux": {
-      "icon": "build/app_icon.png",
       "category": "Game",
       "description": "An Open Source Launcher for Web3, GOG and Epic Games",
       "desktop": {
