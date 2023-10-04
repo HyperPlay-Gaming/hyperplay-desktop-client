@@ -36,16 +36,6 @@ export default React.memo(function Achievements(): JSX.Element {
   >([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const filteredGames = useMemo(() => {
-    if (activeFilter === 'MINTED') {
-      return achievementsData.games.filter((game) => game.isMinted)
-    }
-    if (activeFilter === 'NEW') {
-      return achievementsData.games.filter((game) => game.isNewAchievement)
-    }
-    return achievementsData.games
-  }, [activeFilter, achievementsData])
-
   useEffect(() => {
     const getAchievements = async () => {
       const { data, totalPages, currentPage } =
@@ -73,7 +63,7 @@ export default React.memo(function Achievements(): JSX.Element {
         pageSize
       })
     setAchievementData({ currentPage, totalPages, games: data })
-  }, [achievementsData])
+  }, [achievementsData, activeFilter, selectedSort])
 
   const handlePrevPage = useCallback(async () => {
     const prevPage = achievementsData.currentPage - 1
@@ -86,7 +76,7 @@ export default React.memo(function Achievements(): JSX.Element {
         pageSize
       })
     setAchievementData({ currentPage, totalPages, games: data })
-  }, [achievementsData])
+  }, [achievementsData, activeFilter, selectedSort])
 
   const handleAdd = useCallback(
     (id: string) => {
@@ -157,7 +147,7 @@ export default React.memo(function Achievements(): JSX.Element {
           </Grid.Col>
           <Grid.Col span={8} className={`${styles.fullHeight}`}>
             <AchievementSummaryTable
-              games={filteredGames.map((game, index) => {
+              games={achievementsData.games.map((game, index) => {
                 // TODO: remove when there is a real id
                 const id = `${game.gameName}-${index}`
                 const state = achievementsToBeMinted.includes(id)
@@ -182,11 +172,23 @@ export default React.memo(function Achievements(): JSX.Element {
               sortProps={{
                 options: achievementsSortOptions,
                 selected: selectedSort,
-                onItemChange: (sortOption) => {
+                onItemChange: async (sortOption) => {
                   const chosenItem = achievementsSortOptions.find(
                     (option) => option.text === sortOption.text
                   )
-                  if (chosenItem) setSelectedSort(chosenItem)
+
+                  if (chosenItem) {
+                    const { data, totalPages, currentPage } =
+                      await window.api.getSummaryAchievements({
+                        store: 'steam',
+                        filter: activeFilter,
+                        sort: chosenItem.value,
+                        page: 1,
+                        pageSize
+                      })
+                    setSelectedSort(chosenItem)
+                    setAchievementData({ currentPage, totalPages, games: data })
+                  }
                 }
               }}
               paginationProps={{
@@ -197,10 +199,21 @@ export default React.memo(function Achievements(): JSX.Element {
               }}
               filterProps={{
                 activeFilter: filter,
-                setActiveFilter: (filter) => {
-                  if (filter === 'new') return setActiveFilter('NEW')
-                  if (filter === 'minted') return setActiveFilter('MINTED')
-                  return setActiveFilter('ALL')
+                setActiveFilter: async (filter) => {
+                  let newFilter = 'ALL' as AchievementFilter
+                  if (filter === 'new') newFilter = 'NEW'
+                  if (filter === 'minted') newFilter = 'MINTED'
+
+                  const { data, totalPages, currentPage } =
+                    await window.api.getSummaryAchievements({
+                      store: 'steam',
+                      filter: newFilter,
+                      sort: selectedSort.value,
+                      page: 1,
+                      pageSize
+                    })
+                  setActiveFilter(newFilter)
+                  setAchievementData({ currentPage, totalPages, games: data })
                 }
               }}
               mintButtonProps={{
