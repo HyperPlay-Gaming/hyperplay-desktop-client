@@ -1,5 +1,5 @@
 import React, { ChangeEvent, FocusEvent, ReactNode, useContext } from 'react'
-import { default as cn } from 'classnames'
+import classnames from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
 
@@ -38,7 +38,7 @@ const TextInputField = ({
 
   return (
     <div
-      className={cn(`textInputFieldWrapper Field ${extraClass}`, {
+      className={classnames(`textInputFieldWrapper Field ${extraClass}`, {
         isRTL
       })}
     >
