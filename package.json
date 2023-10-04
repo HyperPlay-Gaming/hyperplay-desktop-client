@@ -141,7 +141,7 @@
       "description": "HyperPlay allows players to carry their MetaMask or WalletConnect wallet overlaid on top of every desktop game. Game developers can request transactions or signatures with a simple REST API call that supports every wallet to manage wallet interactions seamlessly. \n You can also access your Epic and GOG games and play them using Proton or Wine that can be downloaded directly from the interface. DXVK, VKD3D and Winetricks are also included to play Windows Games.",
       "publish": {
         "provider": "snapStore",
-        "channels": "beta",
+        "channels": "stable",
         "repo": "hyperplay"
       }
     }
@@ -246,7 +246,7 @@
     "test:e2e": "cross-env-shell docker compose -f e2e/docker-compose.yml run --rm --build process_all bash e2e/entrypoint.sh",
     "test:e2ePackaged": "cross-env TEST_PACKAGED=true yarn test:e2e",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
-    "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
+    "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
     "release:updateFlathub:ci": "tsc flathub/update-flathub.ts --skipLibCheck --target es2015 --moduleResolution node --module commonjs && node flathub/update-flathub.js",
     "release:mac": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64 --arm64",
     "dist:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder --linux",

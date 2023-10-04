@@ -1,0 +1,79 @@
+name: Update AUR
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-aur:
+    runs-on: ubuntu-latest
+
+    container:
+      image: archlinux
+
+    steps:
+      - name: Install Dependencies
+        run: |
+          pacman -Syu --noconfirm wget jq
+
+      - name: Download Package
+        run: |
+          set -x
+          latest_version=$(curl -s https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest | jq -r .tag_name)
+          version_without_v=$(echo $latest_version | cut -c 2-)
+          wget https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/releases/download/${latest_version}/hyperplay-${version_without_v}.pacman -O hyperplay.pacman
+          set +x
+        if: ${{ success() }}
+
+      - name: Update PKGBUILD
+        run: |
+          set -x
+          latest_version=$(curl -s https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases/latest | jq -r .tag_name)
+          pkgver=${latest_version#v}
+          pkgrel=1
+          url="https://github.com/HyperPlay-Gaming/hyperplay-desktop-client"
+          _filename=hyperplay-${pkgver}.pacman
+          source=("$url/releases/download/$latest_version/$_filename")
+          md5sums=($(md5sum hyperplay.pacman | cut -d' ' -f1))
+
+          cat <<EOF > PKGBUILD
+          # Maintainer: flaviofearn <flavioislima@gmail.com>
+          # Maintainer: blingus <brett@hyperplay.xyz>
+
+          pkgname=hyperplay
+          pkgver=$pkgver
+          pkgrel=$pkgrel
+          pkgdesc="An open source Web3 gaming platform."
+          arch=('x86_64')
+          url="$url"
+          license=('GPL3')
+          depends=('gawk')
+          _filename=$_filename
+          source=("$source")
+          noextract=("$_filename")
+          md5sums=(${md5sums[@]})
+          options=(!strip)
+
+          package() {
+            tar -xJv -C "\$pkgdir" -f "\$srcdir/\$_filename" usr opt
+            mkdir "\$pkgdir/usr/bin"
+            ln -s "/opt/HyperPlay/hyperplay" "\$pkgdir/usr/bin/hyperplay"
+          }
+
+          # vim:set ts=2 sw=2 et: syntax=sh
+
+          EOF
+          cat PKGBUILD
+              set +x
+        if: ${{ success() }}
+
+      - name: Publish AUR package
+        uses: KSXGitHub/github-actions-deploy-aur@v2
+        with:
+          pkgname: hyperplay
+          pkgbuild: ./PKGBUILD
+          commit_username: ${{ secrets.AUR_USERNAME }}
+          commit_email: ${{ secrets.AUR_EMAIL }}
+          ssh_private_key: ${{ secrets.AUR_SSH_PRIVATE }}
+          commit_message: Update AUR package
+          ssh_keyscan_types: rsa,dsa,ecdsa,ed25519
