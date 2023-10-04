@@ -128,6 +128,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   cancelDownload: (removeDownloaded: boolean) => void
   copyWalletConnectBaseURIToClipboard: () => void
   closeAuthModal: () => void
+  'auth:accountConnected': () => void
   'auth:accountNotConnected': () => void
 }
 

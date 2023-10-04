@@ -7,6 +7,9 @@ contextBridge.exposeInMainWorld('authApi', {
   reportAccountNotConnected: () => {
     ipcRenderer.sendToHost('auth:accountNotConnected')
   },
+  reportAccountConnected: () => {
+    ipcRenderer.sendToHost('auth:accountConnected')
+  },
   openExternalUrl: (url: string) => {
     ipcRenderer.send('openExternalUrl', url)
   }
