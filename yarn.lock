@@ -3470,9 +3470,9 @@
   integrity sha512-w+tIMs3rq2afQdsPJlODhoUEKzFP1ayaoyl1CcnwtIlsVe7K7bA1NGm4s3PraqTLlXnbIN84zuBlxBWo1u9BLw==
 
 "@types/node@^18.11.18":
-  version "18.18.0"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.18.0.tgz#bd19d5133a6e5e2d0152ec079ac27c120e7f1763"
-  integrity sha512-3xA4X31gHT1F1l38ATDIL9GpRLdwVhnEFC8Uikv5ZLlXATwrCYyPq7ZWHxzxc3J/30SUiwiYT+bQe0/XvKlWbw==
+  version "18.18.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.18.3.tgz#e5188135fc2909b46530c798ef49be65083be3fd"
+  integrity sha512-0OVfGupTl3NBFr8+iXpfZ8NR7jfFO+P1Q+IO/q0wbo02wYkP5gy36phojeYWpLQ6WAMjl+VfmqUk2YbUfp0irA==
 
 "@types/parse-json@^4.0.0":
   version "4.0.0"
@@ -3585,9 +3585,9 @@
     csstype "^3.0.2"
 
 "@types/responselike@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@types/responselike/-/responselike-1.0.0.tgz#251f4fe7d154d2bad125abe1b429b23afd262e29"
-  integrity sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@types/responselike/-/responselike-1.0.1.tgz#1dd57e54509b3b95c7958e52709567077019d65d"
+  integrity sha512-TiGnitEDxj2X0j+98Eqk5lv/Cij8oHd32bU4D/Yw6AOq7vvTk0gSD2GPj0G/HkvhMoVsdlhYF4yqqlyPBTM6Sg==
   dependencies:
     "@types/node" "*"
 
@@ -5936,11 +5936,6 @@ eastasianwidth@^0.2.0:
   resolved "https://registry.yarnpkg.com/eastasianwidth/-/eastasianwidth-0.2.0.tgz#696ce2ec0aa0e6ea93a397ffcf24aa7840c827cb"
   integrity sha512-I88TYZWc9XiYHRQ4/3c5rjjfgkjhLyW2luGIheGERbNQ6OY7yTybanSpDXZa8y7VUP9YmDcYa+eyq4ca7iLqWA==
 
-easydl@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/easydl/-/easydl-1.0.3.tgz#361302c4c194397349704f2783e21b7752d83caa"
-  integrity sha512-sKBNYCecrPkrE4UmpVv70l1wqs7qqACjT5ftRVqlJiZeZcN0IC+vNoWFVJioNcDVR7TQWj9RhqMg+bUHOMBfkg==
-
 eciesjs@^0.3.15, eciesjs@^0.3.16:
   version "0.3.17"
   resolved "https://registry.yarnpkg.com/eciesjs/-/eciesjs-0.3.17.tgz#367b2b442c2e394f734a9f3b9a45ec7c3d144d9f"
@@ -6047,9 +6042,9 @@ electron-vite@^1.0.23:
     picocolors "^1.0.0"
 
 electron@^27.0.0-beta.8:
-  version "27.0.0-beta.8"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-27.0.0-beta.8.tgz#3b9c253073e48576b3f0f20a0f84f2d9340de19e"
-  integrity sha512-aVO29/8AJN1OVH3Gj61hnAdBbh3nhvVDU6fpQUU+DFrh79yow82vQ2SwyGRgIQQygnj0wK2wGbHXFsOANxaVGg==
+  version "27.0.0-beta.9"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-27.0.0-beta.9.tgz#9afcdb86f9db98ddabcce9f0ac9acdc053090141"
+  integrity sha512-4h78B843eYU2oh2yMjrwYtl5aVMiFdpurIwtoZvXpfTwyuKiEOQaylmLbi4+sPg1rCmqW/VLv9hfVlOqHDNj/Q==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^18.11.18"
@@ -7538,6 +7533,11 @@ hosted-git-info@^4.1.0:
   dependencies:
     lru-cache "^6.0.0"
 
+hp-easydl@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/hp-easydl/-/hp-easydl-1.1.0.tgz#491d76f1685b99d957d5971775e47a55a8ee060b"
+  integrity sha512-g9bfvr62Td2dueYp9TpazUoF2ELju1J0OVQdOuQvWxynuZ4+YjERdPn2HfQkCiaaYd7gMoPF/UsUT4Vlhwf8yQ==
+
 html-encoding-sniffer@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/html-encoding-sniffer/-/html-encoding-sniffer-3.0.0.tgz#2cb1a8cf0db52414776e5b2a7a04d5dd98158de9"
@@ -8932,6 +8932,16 @@ jsonfile@^6.0.1:
   dependencies:
     array-includes "^3.1.5"
     object.assign "^4.1.3"
+
+jszip@^3.1.0:
+  version "3.10.1"
+  resolved "https://registry.yarnpkg.com/jszip/-/jszip-3.10.1.tgz#34aee70eb18ea1faec2f589208a157d1feb091c2"
+  integrity sha512-xXDvecyTpGLrqFrvkrUSoxxfJI5AH7U8zxxtVclpsUtMCq4JQ290LY8AW5c7Ggnr/Y/oK+bQMbqK2qmtk3pN4g==
+  dependencies:
+    lie "~3.3.0"
+    pako "~1.0.2"
+    readable-stream "~2.3.6"
+    setimmediate "^1.0.5"
 
 keyv@^4.0.0:
   version "4.5.3"

@@ -24,7 +24,7 @@ const animation = {
 
 const ExtensionManager = function () {
   const rootRef = useRef<HTMLDivElement>(null)
-  const trueAsStr = 'true' as unknown as boolean | undefined
+  const trueAsStr = 'false' as unknown as boolean | undefined
 
   /* eslint-disable react/no-unknown-property */
   return (

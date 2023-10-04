@@ -15,7 +15,7 @@ import {
   ProgressInfo
 } from 'common/types'
 import axios from 'axios'
-import EasyDl from 'easydl'
+import EasyDl from 'hp-easydl'
 import yauzl from 'yauzl'
 
 import {

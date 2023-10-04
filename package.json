@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -99,7 +99,6 @@
       ]
     },
     "linux": {
-      "icon": "build/app_icon.png",
       "category": "Game",
       "description": "An Open Source Launcher for Web3, GOG and Epic Games",
       "desktop": {
@@ -187,7 +186,6 @@
     "compare-versions": "^6.0.0-rc.1",
     "crc": "^4.1.1",
     "discord-rich-presence-typescript": "^0.0.8",
-    "easydl": "^1.0.3",
     "electron-store": "^8.0.1",
     "electron-updater": "^5.0.1",
     "embla-carousel-autoplay": "^8.0.0-rc12",
@@ -201,6 +199,7 @@
     "fs-extra": "^10.1.0",
     "fuse.js": "^6.6.2",
     "graceful-fs": "^4.2.10",
+    "hp-easydl": "^1.1.0",
     "i18next": "^22.4.10",
     "i18next-fs-backend": "^1.1.4",
     "i18next-http-backend": "^1.4.0",

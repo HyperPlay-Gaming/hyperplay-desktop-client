@@ -28,10 +28,15 @@ import {
   WIKI_URL,
   AMAZON_STORE
 } from '../../constants'
+import { METAMASK_SNAPS_URL } from 'common/constants'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
   return urlToTest.hostname === 'store.hyperplay.xyz'
+}
+
+function shouldInjectProvider(url: string) {
+  return url === METAMASK_SNAPS_URL
 }
 
 function WebView() {
@@ -76,8 +81,9 @@ function WebView() {
     '/loginEpic': EPIC_LOGIN_URL,
     '/loginGOG': GOG_LOGIN_URL,
     '/loginweb/legendary': EPIC_LOGIN_URL,
-    '/loginweb/gog': GOG_LOGIN_URL,
-    '/loginweb/nile': amazonLoginData ? amazonLoginData.url : AMAZON_STORE
+    '/loginweb/gog': GOG_LOGIN_URL
+    '/loginweb/nile': amazonLoginData ? amazonLoginData.url : AMAZON_STORE,
+    '/metamaskSnaps': METAMASK_SNAPS_URL
   }
 
   let startUrl = Object.prototype.hasOwnProperty.call(urls, pathname)
@@ -293,9 +299,11 @@ function WebView() {
     return <></>
   }
 
-  const partitionForWebview = urlIsHpUrl(startUrl)
-    ? 'persist:hyperplaystore'
-    : 'persist:epicstore'
+  let partitionForWebview = 'persist:epicstore'
+
+  if (urlIsHpUrl(startUrl)) partitionForWebview = 'persist:hyperplaystore'
+  else if (shouldInjectProvider(startUrl))
+    partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 
   return (
     <div className="WebView">

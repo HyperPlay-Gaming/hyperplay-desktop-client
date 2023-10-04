@@ -31157,14 +31157,15 @@ a.mm-button-base:hover {
   color: var(--color-icon-default);
 }
 .connected-accounts-permissions__list {
-  padding-top: 8px;
+  padding-block: 8px;
+  height: 100%;
+  overflow: auto;
 }
 .connected-accounts-permissions__list-item {
   display: flex;
 }
 .connected-accounts-permissions__list-container {
   max-height: 0;
-  overflow: hidden;
   height: auto;
   transition: max-height 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -81702,6 +81703,10 @@ readers do not read off random characters that represent icons */
   color: var(--color-primary-alternative);
 }
 
+.connected-accounts__footer {
+  overflow: hidden;
+  margin-bottom: 8px;
+}
 .connected-accounts__footer a,
 .connected-accounts__footer a:hover {
   font-size: 0.875rem;
@@ -90707,7 +90712,7 @@ readers do not read off random characters that represent icons */
 }
 .view-snap .connected-sites-list__content-row {
   border-top: none;
-  padding: 0;
+  padding: 0 0 8px 0;
 }
 .view-snap .connected-sites-list__content-row .view-snap .connected-sites-list__content-row-link-button {
   padding: 0;
