@@ -831,3 +831,22 @@ export interface Achievement {
   gameName: string
   gameIconURL: string
 }
+
+export interface SummaryAchievement extends Achievement {
+  totalAchievementCount: number
+  mintedAchievementCount: number
+  mintableAchievementsCount: number
+  isNewAchievement: boolean
+  isMinted: boolean
+}
+
+export type AcheivementSort = 'ALPHA_A_TO_Z' | 'ALPHA_Z_TO_A' | 'SORT_BY_STATUS'
+
+export type AchievementFilter = 'ALL' | 'NEW' | 'MINTED'
+
+export interface GetAchievementsOptions {
+  store: AchievementStore
+  filter: AchievementFilter
+  sort: AcheivementSort
+  page: number
+}
