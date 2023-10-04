@@ -51,6 +51,9 @@ const AuthModal = () => {
         case 'closeAuthModal':
           authModalState.closeModal()
           break
+        case 'auth:accountConnected':
+          authModalState.closeModal()
+          break
         case 'auth:accountNotConnected':
           // TODO: try to resume flow after connecting account
           await handleAccountNotConnected()
