@@ -840,13 +840,14 @@ export interface SummaryAchievement extends Achievement {
   isMinted: boolean
 }
 
-export type AcheivementSort = 'ALPHA_A_TO_Z' | 'ALPHA_Z_TO_A' | 'SORT_BY_STATUS'
+export type AchievementSort = 'ALPHA_A_TO_Z' | 'ALPHA_Z_TO_A' | 'SORT_BY_STATUS'
 
 export type AchievementFilter = 'ALL' | 'NEW' | 'MINTED'
 
 export interface GetAchievementsOptions {
   store: AchievementStore
   filter: AchievementFilter
-  sort: AcheivementSort
+  sort: AchievementSort
   page: number
+  pageSize: number
 }

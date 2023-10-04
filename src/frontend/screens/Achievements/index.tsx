@@ -11,154 +11,47 @@ import {
 import { Flex, Grid } from '@mantine/core'
 
 import styles from './index.module.css'
-import { Achievement } from 'common/types'
-import { AchievementFilter } from '@hyperplay/ui/dist/components/AchievementSummaryTable'
-
-// TODO: Remove - When api has all the data
-type AchievementData = Achievement & { id: string; mintedAchievementsCount: number; mintableAchievementsCount: number; totalAchievementsCount: number }
-
-// TODO: Remove - When api paginates
-function paginate(array: AchievementData[], page: number, perPage: number) {
-  const start = (page - 1) * perPage;
-  const end = start + perPage;
-  return array.slice(start, end);
-}
+import { AchievementFilter, AchievementSort, SummaryAchievement } from 'common/types'
 
 const pageSize = 12
-
-const testData = [
-  {
-    achieved: 1,
-    apiname: 'ACHIEVEMENT_CASTLE_OF_DOUBT',
-    defaultvalue: 0,
-    description: 'Lose an unfinished Castle that is at least 95% complete.',
-    displayName: 'Castle of Doubt',
-    gameIconURL: 'e2b5a7beb58136b892e517cb93ae08b36065363c',
-    gameId: 813780,
-    gameName: 'Age of Empires II: Definitive Edition',
-    hidden: 0,
-    icon: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/813780/904a7a952309aacaf63168d1c018f8f6dd814926.jpg',
-    iconName: 'Castle of Doubt',
-    icongray: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/813780/212553af5507838878a54d03a1282303c532d3ce.jpg',
-    name: 'ACHIEVEMENT_CASTLE_OF_DOUBT',
-    id: 'id-1',
-    unlocktime: 1628474277,
-    mintableAchievementsCount: 40,
-    mintedAchievementsCount: 20,
-    totalAchievementsCount: 50,
-  },
-  {
-    achieved: 1,
-    apiname: 'ACHIEVEMENT_CASTLE_OF_DOUBT',
-    defaultvalue: 0,
-    description: 'Lose an unfinished Castle that is at least 95% complete.',
-    displayName: 'Castle of Doubt',
-    gameIconURL: 'e2b5a7beb58136b892e517cb93ae08b36065363c',
-    gameId: 813780,
-    gameName: 'Age of Empires II: Definitive Edition',
-    hidden: 0,
-    icon: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/813780/904a7a952309aacaf63168d1c018f8f6dd814926.jpg',
-    iconName: 'Castle of Doubt',
-    icongray: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/813780/212553af5507838878a54d03a1282303c532d3ce.jpg',
-    name: 'ACHIEVEMENT_CASTLE_OF_DOUBT',
-    id: 'id-2',
-    unlocktime: 1628474277,
-    mintableAchievementsCount: 40,
-    mintedAchievementsCount: 20,
-    totalAchievementsCount: 50,
-  },
-  {
-    achieved: 1,
-    apiname: 'ACHIEVEMENT_CASTLE_OF_DOUBT',
-    defaultvalue: 0,
-    description: 'Lose an unfinished Castle that is at least 95% complete.',
-    displayName: 'Castle of Doubt',
-    gameIconURL: 'e2b5a7beb58136b892e517cb93ae08b36065363c',
-    gameId: 813780,
-    gameName: 'Age of Empires II: Definitive Edition',
-    hidden: 0,
-    icon: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/813780/904a7a952309aacaf63168d1c018f8f6dd814926.jpg',
-    iconName: 'Castle of Doubt',
-    icongray: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/813780/212553af5507838878a54d03a1282303c532d3ce.jpg',
-    name: 'ACHIEVEMENT_CASTLE_OF_DOUBT',
-    id: 'id-3',
-    unlocktime: 1628474277,
-    mintableAchievementsCount: 40,
-    mintedAchievementsCount: 20,
-    totalAchievementsCount: 50,
-  },
-  {
-    achieved: 1,
-    apiname: 'ACHIEVEMENT_CASTLE_OF_DOUBT',
-    defaultvalue: 0,
-    description: 'Lose an unfinished Castle that is at least 95% complete.',
-    displayName: 'Castle of Doubt',
-    gameIconURL: 'e2b5a7beb58136b892e517cb93ae08b36065363c',
-    gameId: 813780,
-    gameName: 'Age of Empires II: Definitive Edition',
-    hidden: 0,
-    icon: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/813780/904a7a952309aacaf63168d1c018f8f6dd814926.jpg',
-    iconName: 'Castle of Doubt',
-    icongray: 'https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/813780/212553af5507838878a54d03a1282303c532d3ce.jpg',
-    name: 'ACHIEVEMENT_CASTLE_OF_DOUBT',
-    id: 'id-4',
-    unlocktime: 1628474277,
-    mintableAchievementsCount: 40,
-    mintedAchievementsCount: 20,
-    totalAchievementsCount: 50,
-  }
-]
+const achievementsSortOptions = [{ text: 'Alphabetically (ASC)', value: 'ALPHA_A_TO_Z' }, { text: 'Alphabetically (DES)', value: 'ALPHA_Z_TO_A' }] as { text: string; value: AchievementSort }[]
 
 export default React.memo(function Achievements(): JSX.Element {
-  const achievementsSortOptions = [{ text: 'Alphabetically' }]
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
-  const [activeFilter, setActiveFilter] = useState<AchievementFilter>('all')
-  const [achievementsData, setAchievementData] = useState<{ currentPage: number; totalPages: number; games: AchievementData[] }>({ currentPage: 0, totalPages: 0, games: [] })
+  const [activeFilter, setActiveFilter] = useState<AchievementFilter>('ALL')
+  const [achievementsData, setAchievementData] = useState<{ currentPage: number; totalPages: number; games: SummaryAchievement[] }>({ currentPage: 0, totalPages: 0, games: [] })
   const [achievementsToBeMinted, setAchievementsToBeMinted] = useState<string[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const filteredGames = useMemo(() => {
-    if (activeFilter === 'minted') {
-      return achievementsData.games.filter((game) => game.mintedAchievementsCount > 0)
+    if (activeFilter === 'MINTED') {
+      return achievementsData.games.filter((game) => game.isMinted)
     }
-    if (activeFilter === 'new') {
-      return achievementsData.games.filter((game) => game.mintedAchievementsCount === 0)
+    if (activeFilter === 'NEW') {
+      return achievementsData.games.filter((game) => game.isNewAchievement)
     }
     return achievementsData.games
   }, [activeFilter, achievementsData])
 
   useEffect(() => {
     const getAchievements = async () => {
-      // TODO: Remove - When api returns the correct data format
-      // const achievementApiData = await window.api.getAchievements('hyperplay') as { data: AchievementData[] }
-      // const test = await window.api.getSummaryAchievements({ store: 'steam', filter: 'ALL', sort: 'ALPHA_A_TO_Z', page: 0 })
-      const achievementApiData = { data: testData }
-      const { data } = achievementApiData 
-      const totalPages = Math.ceil(data.length / pageSize)
-      setAchievementData({ currentPage: 0, totalPages, games: paginate(data, 1, pageSize) })
+      const { data, totalPages, currentPage } = await window.api.getSummaryAchievements({ store: 'steam', filter: activeFilter, sort: selectedSort.value, page: 1, pageSize })
+      setAchievementData({ currentPage, totalPages, games: data })
     }
 
     getAchievements()
   }, [])
 
   const handleNextPage = useCallback(async () => {
-    // TODO: Remove - When api returns the correct data format
-    // const achievementApiData = await window.api.getAchievements('hyperplay') as { data: AchievementData[] }
-    const achievementApiData = { data: testData }
-    const { data } = achievementApiData 
-    const totalPages = Math.ceil(data.length / pageSize)
     const nextPage = achievementsData.currentPage + 1
-    setAchievementData({ currentPage: nextPage, totalPages, games: paginate(data, nextPage, 12) })
+    const { data, totalPages, currentPage } = await window.api.getSummaryAchievements({ store: 'steam', filter: activeFilter, sort: selectedSort.value, page: nextPage, pageSize })
+    setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData])
 
   const handlePrevPage = useCallback(async () => {
-    // TODO: Remove - When api returns the correct data format
-    // const achievementApiData = await window.api.getAchievements('hyperplay') as { data: AchievementData[] }
-    const achievementApiData = { data: testData }
-    const { data } = achievementApiData 
-    const totalPages = Math.ceil(data.length / pageSize)
-    const previousPage = achievementsData.currentPage - 1
-    setAchievementData({ currentPage: previousPage, totalPages, games: paginate(data, previousPage, 12) })
+    const prevPage = achievementsData.currentPage - 1
+    const { data, totalPages, currentPage } = await window.api.getSummaryAchievements({ store: 'steam', filter: activeFilter, sort: selectedSort.value, page: prevPage, pageSize })
+    setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData])
 
   const handleAdd = useCallback((id: string) => {
@@ -180,6 +73,12 @@ export default React.memo(function Achievements(): JSX.Element {
   const isDisabled = useMemo(() => {
     return !walletStore.isConnected || isLoading
   }, [isLoading, walletStore.isConnected])
+
+  const filter = useMemo(() => {
+    if (activeFilter === 'NEW') return 'new'
+    if (activeFilter === 'MINTED') return 'minted'
+    return 'all'
+  }, [activeFilter])
 
   return (
     <>
@@ -222,20 +121,22 @@ export default React.memo(function Achievements(): JSX.Element {
             className={`${styles.fullHeight}`}
           >
             <AchievementSummaryTable
-              games={filteredGames.map((game) => {
-                const state = achievementsToBeMinted.includes(game.id) ? 'active' : 'default'
+              games={filteredGames.map((game, index) => {
+                // TODO: remove when there is a real id
+                const id = `${game.gameName}-${index}`
+                const state = achievementsToBeMinted.includes(id) ? 'active' : 'default'
 
                 return ({
-                  id: game.id,
+                  id,
                   title: game.gameName,
                   image: game.icon,
                   mintableAchievementsCount: game.mintableAchievementsCount,
-                  mintedAchievementsCount: game.mintedAchievementsCount,
-                  totalAchievementsCount: game.totalAchievementsCount,
-                  isNewAchievement: game.mintableAchievementsCount === 0,
+                  mintedAchievementsCount: game.mintedAchievementCount,
+                  totalAchievementsCount: game.totalAchievementCount,
+                  isNewAchievement: game.isNewAchievement,
                   state: walletStore.isConnected ? 'disabled' : state,
                   ctaProps: {
-                    onClick: () => handleAdd(game.id),
+                    onClick: () => handleAdd(id),
                     disabled: isDisabled
                   }
                 })
@@ -243,7 +144,10 @@ export default React.memo(function Achievements(): JSX.Element {
               sortProps={{
                 options: achievementsSortOptions,
                 selected: selectedSort,
-                onItemChange: setSelectedSort
+                onItemChange: (sortOption) => {
+                  const chosenItem = achievementsSortOptions.find((option) => option.text === sortOption.text)
+                  if (chosenItem) setSelectedSort(chosenItem)
+                }
               }}
               paginationProps={{
                 currentPage: achievementsData.currentPage,
@@ -252,8 +156,12 @@ export default React.memo(function Achievements(): JSX.Element {
                 handlePrevPage,
               }}
               filterProps={{
-                activeFilter,
-                setActiveFilter
+                activeFilter: filter,
+                setActiveFilter: (filter) => {
+                  if (filter === 'new') return setActiveFilter('NEW')
+                  if (filter === 'minted') return setActiveFilter('MINTED')
+                  return setActiveFilter('ALL')
+                }
               }}
               mintButtonProps={{
                 onClick: handleMint,

@@ -1,7 +1,8 @@
 import {
   HyperPlayInstallInfo,
   DownloadManagerState,
-  Achievement
+  Achievement,
+  SummaryAchievement
 } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
@@ -199,9 +200,11 @@ interface HyperPlayAsyncIPCFunctions {
   removeTempDownloadFiles: (appName: string) => Promise<void>
   getImportFolderPath: () => Promise<string>
   appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
-  getSummaryAchievements: (
-    options: GetAchievementsOptions
-  ) => Promise<Achievement[]>
+  getSummaryAchievements: (options: GetAchievementsOptions) => Promise<{
+    data: SummaryAchievement[]
+    currentPage: number
+    totalPages: number
+  }>
   getIndividualAchievements: (gameId: number) => Promise<Achievement[]>
 }
 
