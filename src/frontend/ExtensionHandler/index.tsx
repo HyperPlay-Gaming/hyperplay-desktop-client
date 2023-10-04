@@ -44,8 +44,11 @@ const ExtensionHandler = function () {
     navigate('metamaskSnaps')
   }
 
-  async function handleOpenMMPortfolioPage() {
-    navigate('metamaskPortfolio')
+  async function handleOpenMMPortfolioPage(
+    event: Electron.IpcRendererEvent,
+    pathname: string
+  ) {
+    navigate('metamaskPortfolio' + pathname)
   }
 
   async function handleSend(

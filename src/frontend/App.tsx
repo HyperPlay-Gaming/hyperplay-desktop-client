@@ -77,7 +77,9 @@ function App() {
                 <MetaMaskHome path="home.html#onboarding/import-with-recovery-phrase" />
               }
             />
-            <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />} />
+            <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
+              <Route path=":page" element={<MetaMaskPortfolio />} />
+            </Route>
             <Route path="/gamepage">
               <Route path=":runner">
                 <Route path=":appName" element={<GamePage />} />
