@@ -68,12 +68,18 @@ function App() {
             <Route path="wiki" element={<WebView key="wiki" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
             <Route
+              path="metamaskSnaps"
+              element={<WebView key="metamaskSnaps" />}
+            />
+            <Route
               path="metamaskSecretPhrase"
               element={
                 <MetaMaskHome path="home.html#onboarding/import-with-recovery-phrase" />
               }
             />
-            <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />} />
+            <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
+              <Route path=":page" element={<MetaMaskPortfolio />} />
+            </Route>
             <Route path="/gamepage">
               <Route path=":runner">
                 <Route path=":appName" element={<GamePage />} />

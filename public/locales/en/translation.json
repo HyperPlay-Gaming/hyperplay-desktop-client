@@ -374,6 +374,7 @@
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
         "viewFullscreen": "View fullscreen",
+        "viewItem": "View {{item}}",
         "viewPortfolio": "View portfolio",
         "wallet": {
             "connected": "Connected",
