@@ -789,7 +789,10 @@ async function callRunner(
       signal: abortController.signal
     })
 
-    if (gameInfo && gameInfo.runner === 'hyperplay')
+    if (
+      gameInfo &&
+      (gameInfo.runner === 'hyperplay' || gameInfo.runner === 'sideload')
+    )
       openOverlay(gameInfo?.app_name, gameInfo.runner)
 
     /*
