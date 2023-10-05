@@ -128,6 +128,7 @@ import Store from 'electron-store'
 interface StoreMap {
   [key: string]: Store
 }
+
 const stores: StoreMap = {}
 
 export const storeNew = function (
@@ -188,3 +189,12 @@ export const fetchPlaytimeFromServer = async (
   runner: Runner,
   appName: string
 ) => ipcRenderer.invoke('getPlaytimeFromRunner', runner, appName)
+
+export const handleQaModeActivated = (
+  onChange: (e: Electron.IpcRendererEvent) => void
+) => {
+  ipcRenderer.on('qaModeActive', onChange)
+  return () => {
+    ipcRenderer.removeListener('qaModeActive', onChange)
+  }
+}

@@ -166,6 +166,7 @@ import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
 
 let sentryInitialized = false
+
 function initSentry() {
   if (sentryInitialized) return
   Sentry.init({
@@ -196,6 +197,7 @@ let ignoreExitToTray = false
 ipcMain.on('ignoreExitToTray', () => {
   ignoreExitToTray = true
 })
+
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
@@ -1949,4 +1951,5 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
+  if (qaToken.length > 0) sendFrontendMessage('qaModeActive')
 })
