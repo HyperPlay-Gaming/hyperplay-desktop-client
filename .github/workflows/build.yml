@@ -44,7 +44,7 @@ jobs:
         with:
           name: win-setup
           path: dist/HyperPlay*.exe
-          retention-days: 14
+          retention-days: 7
   build_linux:
     runs-on: ubuntu-latest
     concurrency:
@@ -77,7 +77,7 @@ jobs:
         run: yarn dist:linux:ci:rpm
       - name: Build pacman artifact
         run: yarn dist:linux:ci:pacman
-  build_mac:
+  build_mac_x64:
     runs-on: macos-13
     concurrency:
       group: build-mac-${{ github.ref }}
@@ -102,18 +102,46 @@ jobs:
       - name: Install modules.
         run: yarn setup
       - name: Build artifacts.
-        run: yarn dist:mac
+        run: yarn dist:mac:x64
         env:
           NOTARIZE: false
       - name: Upload Intel build.
         uses: actions/upload-artifact@v3
         with:
-          name: mac-dmg-Intel
+          name: mac-dmg-x64
           path: dist/HyperPlay*x64.dmg
-          retention-days: 14
+          retention-days: 7
+  build_mac_arm64:
+    runs-on: macos-latest-xlarge
+    concurrency:
+      group: build-mac-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install modules.
+        run: yarn setup
+      - name: Build artifacts.
+        run: yarn dist:mac:arm64
+        env:
+          NOTARIZE: false
       - name: Upload M1/M2.
         uses: actions/upload-artifact@v3
         with:
-          name: mac-dmg-M1-M2
+          name: mac-dmg-arm64
           path: dist/HyperPlay*arm64.dmg
-          retention-days: 14
+          retention-days: 7
