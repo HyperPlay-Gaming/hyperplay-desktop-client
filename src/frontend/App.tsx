@@ -31,6 +31,7 @@ import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
 import AchievementsLayout from './screens/Achievements/AchievementsLayout'
+import GameAchievementDetails from './screens/Achievements/GameAchievementDetails'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -69,6 +70,10 @@ function App() {
               }
             >
               <Route index element={<Achievements />} />
+              <Route
+                path="/achievements/:id"
+                element={<GameAchievementDetails />}
+              />
             </Route>
             <Route path="login" element={<Login />} />
             <Route

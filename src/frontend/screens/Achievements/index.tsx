@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import walletStore from 'frontend/store/WalletStore'
 
-import { AchievementSummaryTable } from '@hyperplay/ui'
+import { AchievementCard, AchievementSummaryTable } from '@hyperplay/ui'
 import {
   AchievementFilter,
   AchievementSort,
   SummaryAchievement
 } from 'common/types'
+import { NavLink } from 'react-router-dom'
+import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 
 const pageSize = 12
 const achievementsSortOptions = [
@@ -101,78 +103,88 @@ export default React.memo(function Achievements(): JSX.Element {
   }, [activeFilter])
 
   return (
-    <AchievementSummaryTable
-      games={achievementsData.games.map((game, index) => {
-        // TODO: remove when there is a real id
-        const id = `${game.gameName}-${index}`
-        const state = achievementsToBeMinted.includes(id) ? 'active' : 'default'
+    <>
+      <AchievementSummaryTable
+        games={achievementsData.games.map((game, index) => {
+          // TODO: remove when there is a real id
+          const id = `${game.gameName}-${index}`
+          const state = walletStore.isConnected
+            ? 'disabled'
+            : achievementsToBeMinted.includes(id)
+            ? 'active'
+            : 'default'
 
-        return {
-          id,
-          title: game.gameName,
-          image: game.icon,
-          mintableAchievementsCount: game.mintableAchievementsCount,
-          mintedAchievementsCount: game.mintedAchievementCount,
-          totalAchievementsCount: game.totalAchievementCount,
-          isNewAchievement: game.isNewAchievement,
-          state: walletStore.isConnected ? 'disabled' : state,
-          ctaProps: {
-            onClick: () => handleAdd(id),
-            disabled: isDisabled
-          }
-        }
-      })}
-      sortProps={{
-        options: achievementsSortOptions,
-        selected: selectedSort,
-        onItemChange: async (sortOption) => {
-          const chosenItem = achievementsSortOptions.find(
-            (option) => option.text === sortOption.text
+          return (
+            <NavLink key={id} to={`/achievements/${game.gameId}`}>
+              <AchievementCard
+                id={id}
+                title={game.gameName}
+                image={game.icon}
+                mintableAchievementsCount={game.mintableAchievementsCount}
+                mintedAchievementsCount={game.mintedAchievementCount}
+                totalAchievementsCount={game.totalAchievementCount}
+                isNewAchievement={game.isNewAchievement}
+                state={state as StatusIconState}
+                ctaProps={{
+                  onClick: () => handleAdd(id),
+                  disabled: isDisabled
+                }}
+              />
+            </NavLink>
           )
+        })}
+        sortProps={{
+          options: achievementsSortOptions,
+          selected: selectedSort,
+          onItemChange: async (sortOption) => {
+            const chosenItem = achievementsSortOptions.find(
+              (option) => option.text === sortOption.text
+            )
 
-          if (chosenItem) {
+            if (chosenItem) {
+              const { data, totalPages, currentPage } =
+                await window.api.getSummaryAchievements({
+                  store: 'steam',
+                  filter: activeFilter,
+                  sort: chosenItem.value,
+                  page: 1,
+                  pageSize
+                })
+              setSelectedSort(chosenItem)
+              setAchievementData({ currentPage, totalPages, games: data })
+            }
+          }
+        }}
+        paginationProps={{
+          currentPage: achievementsData.currentPage,
+          totalPages: achievementsData.totalPages,
+          handleNextPage,
+          handlePrevPage
+        }}
+        filterProps={{
+          activeFilter: filter,
+          setActiveFilter: async (filter) => {
+            let newFilter = 'ALL' as AchievementFilter
+            if (filter === 'new') newFilter = 'NEW'
+            if (filter === 'minted') newFilter = 'MINTED'
+
             const { data, totalPages, currentPage } =
               await window.api.getSummaryAchievements({
                 store: 'steam',
-                filter: activeFilter,
-                sort: chosenItem.value,
+                filter: newFilter,
+                sort: selectedSort.value,
                 page: 1,
                 pageSize
               })
-            setSelectedSort(chosenItem)
+            setActiveFilter(newFilter)
             setAchievementData({ currentPage, totalPages, games: data })
           }
-        }
-      }}
-      paginationProps={{
-        currentPage: achievementsData.currentPage,
-        totalPages: achievementsData.totalPages,
-        handleNextPage,
-        handlePrevPage
-      }}
-      filterProps={{
-        activeFilter: filter,
-        setActiveFilter: async (filter) => {
-          let newFilter = 'ALL' as AchievementFilter
-          if (filter === 'new') newFilter = 'NEW'
-          if (filter === 'minted') newFilter = 'MINTED'
-
-          const { data, totalPages, currentPage } =
-            await window.api.getSummaryAchievements({
-              store: 'steam',
-              filter: newFilter,
-              sort: selectedSort.value,
-              page: 1,
-              pageSize
-            })
-          setActiveFilter(newFilter)
-          setAchievementData({ currentPage, totalPages, games: data })
-        }
-      }}
-      mintButtonProps={{
-        onClick: handleMint,
-        disabled: isDisabled ?? achievementsToBeMinted.length === 0
-      }}
-    />
+        }}
+        mintButtonProps={{
+          onClick: handleMint,
+          disabled: isDisabled ?? achievementsToBeMinted.length === 0
+        }}
+      />
+    </>
   )
 })
