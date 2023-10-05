@@ -357,9 +357,13 @@ if (!gotTheLock) {
 
     // keyboards with alt and no option key can be used with mac so register both
     const openOverlayAccelerator = 'Alt+X'
-    globalShortcut.register(openOverlayAccelerator, toggleOverlay)
+    globalShortcut.register(openOverlayAccelerator, async () =>
+      toggleOverlay({})
+    )
     const openOverlayAcceleratorMac = 'Option+X'
-    globalShortcut.register(openOverlayAcceleratorMac, toggleOverlay)
+    globalShortcut.register(openOverlayAcceleratorMac, async () =>
+      toggleOverlay({})
+    )
 
     initExtension()
 
