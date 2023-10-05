@@ -80,7 +80,7 @@ jobs:
   build_mac_x64:
     runs-on: macos-13
     concurrency:
-      group: build-mac-${{ github.ref }}
+      group: build-mac-x64-${{ github.ref }}
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
@@ -114,7 +114,7 @@ jobs:
   build_mac_arm64:
     runs-on: macos-latest-xlarge
     concurrency:
-      group: build-mac-${{ github.ref }}
+      group: build-mac-arm64-${{ github.ref }}
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
