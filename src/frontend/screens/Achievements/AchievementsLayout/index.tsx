@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect, useState } from 'react'
 
 import { Background, AchievementsInfo, StoreRow, Images } from '@hyperplay/ui'
 import { Flex, Grid } from '@mantine/core'
@@ -8,6 +8,20 @@ import styles from './index.module.css'
 export default React.memo(function AchievementsLayout({
   children
 }: PropsWithChildren): JSX.Element {
+  const [stats, setStats] = useState({     totalNewAchievements: 0,
+    totalMintedAchievements: 0,
+    totalAchievements: 0,
+    totalGames: 0})
+
+  useEffect(() => {
+    const getStats = async () => {
+      const stats = await window.api.getAchievementsStats('steam')
+      setStats(stats)
+    }
+
+    getStats()
+  }, [])
+
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
@@ -20,9 +34,9 @@ export default React.memo(function AchievementsLayout({
               className={`${styles.fullHeight}`}
             >
               <AchievementsInfo
-                newAchievementsValue={'1,337'}
-                mintedValue={'4/1,000'}
-                gamesValue={'7'}
+                newAchievementsValue={`${stats.totalNewAchievements}`}
+                mintedValue={`${stats.totalMintedAchievements}/${stats.totalAchievements} `}
+                gamesValue={`${stats.totalGames}`}
               />
               <div className={`${styles.storeCard} ${styles.fullHeight}`}>
                 <div className={`${styles.storeTitle}`}>My Stores</div>

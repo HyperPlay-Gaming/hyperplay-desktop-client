@@ -868,3 +868,9 @@ export interface GetIndividualAchievementsOptions {
   page: number
   pageSize: number
 }
+export interface AchievementsStats {
+  newAchievements: number
+  mintedAchievements: number
+  totalAchievements: number
+  totalGames: number
+}

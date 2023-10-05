@@ -213,6 +213,7 @@ interface HyperPlayAsyncIPCFunctions {
     totalPages: number
   }>
   getGame: (gameId: number) => Promise<Game>
+  getAchievementsStats: (store: AchievementStore) => Promise<AchievementsStats>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
