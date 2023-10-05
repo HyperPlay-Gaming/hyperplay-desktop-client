@@ -28,13 +28,21 @@ elif [[ "$OSTYPE" == *"darwin"* ]]
 then
     os="mac"
 fi
+echo "OS is $os"
 
-yarn
+yarn setup
 
 # build
 if [[ "$TEST_PACKAGED" == "true" ]]
 then
-    yarn dist:$os
+    if [[ "$os" == "mac" ]]
+    then
+        echo "Running yarn dist:mac:x64"
+        yarn dist:mac:x64
+    else
+        echo "Running yarn dist:$os"
+        yarn dist:$os
+    fi
 else
     yarn vite build
 fi

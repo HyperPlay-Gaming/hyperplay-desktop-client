@@ -1,4 +1,4 @@
-import { WineInstallation } from 'common/types'
+import { GameSettings, WineInstallation } from 'common/types'
 import axios from 'axios'
 import {
   existsSync,
@@ -130,11 +130,20 @@ export const DXVK = {
   },
 
   installRemove: async (
-    prefix: string,
-    winePath: string,
+    gameSettings: GameSettings,
     tool: 'dxvk' | 'vkd3d' | 'dxvk-macOS',
     action: 'backup' | 'restore'
   ): Promise<boolean> => {
+    if (gameSettings.wineVersion.bin.includes('toolkit')) {
+      // we don't want to install dxvk on the toolkit prefix since it breaks Apple's implementation
+      logWarning(
+        'Skipping DXVK install on Game Porting Toolkit prefix!',
+        LogPrefix.DXVKInstaller
+      )
+      return true
+    }
+
+    const prefix = gameSettings.winePrefix
     const winePrefix = prefix.replace('~', userHome)
     const isValidPrefix = existsSync(`${winePrefix}/.update-timestamp`)
 
@@ -150,7 +159,7 @@ export const DXVK = {
     tool = isMac ? 'dxvk-macOS' : tool
 
     // remove the last part of the path since we need the folder only
-    const wineBin = winePath.replace("'", '')
+    const wineBin = gameSettings.wineVersion.bin
 
     if (!existsSync(`${toolsPath}/${tool}/latest_${tool}`)) {
       logWarning('dxvk not found!', LogPrefix.DXVKInstaller)

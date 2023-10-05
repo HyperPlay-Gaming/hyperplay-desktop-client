@@ -219,20 +219,10 @@ async function prepareWineLaunch(
   // If DXVK/VKD3D installation is enabled, install it
   if (gameSettings.wineVersion.type === 'wine') {
     if (gameSettings.autoInstallDxvk) {
-      await DXVK.installRemove(
-        gameSettings.winePrefix,
-        gameSettings.wineVersion.bin,
-        'dxvk',
-        'backup'
-      )
+      await DXVK.installRemove(gameSettings, 'dxvk', 'backup')
     }
     if (gameSettings.autoInstallVkd3d) {
-      await DXVK.installRemove(
-        gameSettings.winePrefix,
-        gameSettings.wineVersion.bin,
-        'vkd3d',
-        'backup'
-      )
+      await DXVK.installRemove(gameSettings, 'vkd3d', 'backup')
     }
   }
 
@@ -254,6 +244,10 @@ function setupEnvVars(gameSettings: GameSettings) {
     ret.DRI_PRIME = '1'
     ret.__NV_PRIME_RENDER_OFFLOAD = '1'
     ret.__GLX_VENDOR_LIBRARY_NAME = 'nvidia'
+  }
+
+  if (isMac && gameSettings.showFps) {
+    ret.MTL_HUD_ENABLED = '1'
   }
 
   if (gameSettings.enviromentOptions) {
@@ -286,7 +280,8 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
   // Add WINEPREFIX / STEAM_COMPAT_DATA_PATH / CX_BOTTLE
   const steamInstallPath = join(flatPakHome, '.steam', 'steam')
   switch (wineVersion.type) {
-    case 'wine': {
+    case 'wine':
+    case 'toolkit': {
       ret.WINEPREFIX = winePrefix
 
       // Disable Winemenubuilder to not mess with file associations
@@ -313,7 +308,13 @@ function setupWineEnvVars(gameSettings: GameSettings, gameId = '0') {
   }
 
   if (gameSettings.showFps) {
-    ret.DXVK_HUD = 'fps'
+    // If the operating system is macOS, enable the Metal HUD
+    // Otherwise, enable the DXVK FPS HUD
+    if (isMac) {
+      ret.MTL_HUD_ENABLED = '1'
+    } else {
+      ret.DXVK_HUD = 'fps'
+    }
   }
   if (gameSettings.enableFSR) {
     ret.WINE_FULLSCREEN_FSR = '1'
@@ -509,19 +510,16 @@ function launchCleanup(rpcClient?: RpcClient) {
     logInfo('Stopped Discord Rich Presence', LogPrefix.Backend)
   }
 }
-async function runWineCommand(
-  {
-    gameSettings,
-    commandParts,
-    wait,
-    protonVerb = 'run',
-    installFolderName,
-    options,
-    startFolder,
-    skipPrefixCheckIKnowWhatImDoing = false
-  }: WineCommandArgs,
-  gameInfo?: GameInfo
-): Promise<{ stderr: string; stdout: string }> {
+async function runWineCommand({
+  gameSettings,
+  commandParts,
+  wait,
+  protonVerb = 'run',
+  installFolderName,
+  options,
+  startFolder,
+  skipPrefixCheckIKnowWhatImDoing = false
+}: WineCommandArgs): Promise<{ stderr: string; stdout: string }> {
   const settings = gameSettings
     ? gameSettings
     : GlobalConfig.get().getSettings()
@@ -595,18 +593,16 @@ async function runWineCommand(
     child.stdout.setEncoding('utf-8')
     child.stderr.setEncoding('utf-8')
 
-    if (gameInfo && gameInfo.runner === 'hyperplay')
-      openOverlay(gameInfo.app_name, gameInfo.runner)
-
     if (options?.logFile) {
       logDebug(`Logging to file "${options?.logFile}"`, LogPrefix.Backend)
     }
 
     if (options?.logFile && existsSync(options.logFile)) {
-      writeFileSync(options.logFile, '')
       appendFileSync(
         options.logFile,
-        `Wine Command: ${bin} ${commandParts.join(' ')}\n\nGame Log:\n`
+        `Wine Command: WINEPREFIX=${winePrefix} ${bin} ${commandParts.join(
+          ' '
+        )}\n\nGame Log:\n`
       )
     }
 
@@ -638,7 +634,6 @@ async function runWineCommand(
     })
 
     child.on('close', async () => {
-      if (gameInfo && gameInfo.runner === 'hyperplay') closeOverlay()
       const response = { stderr: stderr.join(''), stdout: stdout.join('') }
 
       if (wait && wineVersion.wineserver) {
@@ -658,7 +653,6 @@ async function runWineCommand(
     })
 
     child.on('error', (error) => {
-      if (gameInfo && gameInfo.runner === 'hyperplay') closeOverlay()
       console.log(error)
     })
   })

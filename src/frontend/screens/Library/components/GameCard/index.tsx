@@ -198,6 +198,10 @@ const GameCard = ({
     setShowUninstallModal(true)
   }
 
+  const onRemoveFromLibraryClick = function () {
+    window.api.removeFromLibrary(gameInfo.app_name)
+  }
+
   const handleClickStopBubbling =
     (callback: () => void, isRightClick = false) =>
     (
@@ -306,6 +310,13 @@ const GameCard = ({
       label: t('button.uninstall'),
       onClick: handleClickStopBubbling(onUninstallClick),
       show: isInstalled && !isUpdating
+    },
+    {
+      // remove from library
+      label: t('button.remove_from_library', 'Remove'),
+      onClick: handleClickStopBubbling(onRemoveFromLibraryClick),
+      show:
+        !isInstalled && !isUpdating && !isInstalling && runner === 'hyperplay'
     }
   ]
 

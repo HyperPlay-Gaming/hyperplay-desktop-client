@@ -24,6 +24,7 @@ const animation = {
 
 const ExtensionManager = function () {
   const rootRef = useRef<HTMLDivElement>(null)
+  const trueAsStr = 'false' as unknown as boolean | undefined
 
   /* eslint-disable react/no-unknown-property */
   return (
@@ -36,6 +37,7 @@ const ExtensionManager = function () {
               webpreferences="contextIsolation=true, nodeIntegration=true"
               src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
               className={ExtensionManagerStyles.mmWindow}
+              allowpopups={trueAsStr}
             ></webview>
           </motion.div>
         ) : null}
@@ -46,6 +48,7 @@ const ExtensionManager = function () {
               webpreferences="contextIsolation=true, nodeIntegration=true"
               src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
               className={ExtensionManagerStyles.mmWindow}
+              allowpopups={trueAsStr}
             ></webview>
           </motion.div>
         ) : null}

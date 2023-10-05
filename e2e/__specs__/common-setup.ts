@@ -4,7 +4,7 @@ import { findLatestBuild, parseElectronApp } from 'electron-playwright-helpers'
 import { ElectronApplication, _electron as electron } from 'playwright'
 
 export let electronApp: ElectronApplication
-export let hpPage: Promise<Page>
+export let hpPage: Page
 
 export const withTimeout = async (
   millis: number,
@@ -22,7 +22,8 @@ export const withTimeout = async (
   return Promise.race([promise, timeout])
 }
 
-export const appNameToMock = '64742e70e61cddebcbb7bd68'
+export const appNameToMock =
+  '0xb5b77decf0bbeb40a2b9c5c85efc9e4dd72985fc9080733857bd7c2afc702f43'
 
 export const launchApp = async () => {
   process.env.CI = 'e2e'
@@ -73,8 +74,8 @@ export const launchApp = async () => {
     })
   })
 
-  hpPage = new Promise((res, rej) => {
-    const getPageTitle = async (page_i: Page) => {
+  const hpPagePromise = new Promise<Page>((res, rej) => {
+    async function getPageTitle(page_i: Page) {
       try {
         const title = await withTimeout(15000, page_i.title())
         if (title === 'HyperPlay' && page_i.url().includes('?view=App')) {
@@ -104,6 +105,14 @@ export const launchApp = async () => {
       getPageTitle(windowPage)
     }
   })
+
+  console.log('Waiting for HyperPlay window to open...')
+  hpPage = await hpPagePromise
+  console.log('Waiting for electron app to be ready...')
+  await electronApp.evaluate(async ({ app }) => {
+    await app.whenReady()
+  })
+  console.log('Electron app is ready for testing!')
 }
 
 export default function setup(): void {

@@ -15,7 +15,7 @@ import {
   ProgressInfo
 } from 'common/types'
 import axios from 'axios'
-import EasyDl from 'easydl'
+import EasyDl from 'hp-easydl'
 import yauzl from 'yauzl'
 
 import {
@@ -369,6 +369,8 @@ async function errorHandler({
   const plat = r === 'legendary' ? 'Legendary (Epic Games)' : r
   const deletedFolderMsg = 'appears to be deleted'
   const otherErrorMessages = ['No saved credentials', 'No credentials']
+  // this message appears on macOS when no Crossover was found in the system but its a false alarm
+  const ignoreCrossoverMessage = 'IndexError: list index out of range'
 
   if (logPath) {
     execAsync(`tail "${logPath}" | grep 'disk space'`)
@@ -391,6 +393,9 @@ async function errorHandler({
       })
   }
   if (error) {
+    if (error.includes(ignoreCrossoverMessage)) {
+      return
+    }
     if (error.includes(deletedFolderMsg) && appName) {
       const runner = r.toLocaleLowerCase() as Runner
       const { title } = gameManagerMap[runner].getGameInfo(appName)

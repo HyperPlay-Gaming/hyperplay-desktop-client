@@ -349,14 +349,10 @@ if (!gotTheLock) {
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
-    const toggleOverlayHandler = () => {
-      toggleOverlay()
-      backendEvents.emit('OVERLAY_TOGGLED')
-    }
     const openOverlayAccelerator = 'Alt+X'
-    globalShortcut.register(openOverlayAccelerator, toggleOverlayHandler)
+    globalShortcut.register(openOverlayAccelerator, toggleOverlay)
     const openOverlayAcceleratorMac = 'Option+X'
-    globalShortcut.register(openOverlayAcceleratorMac, toggleOverlayHandler)
+    globalShortcut.register(openOverlayAcceleratorMac, toggleOverlay)
 
     initExtension()
 
@@ -580,7 +576,7 @@ ipcMain.on('unlock', () => {
     unlinkSync(join(gamesConfigPath, 'lock'))
     if (powerId) {
       logInfo('Stopping Power Saver Blocker', LogPrefix.Backend)
-      return powerSaveBlocker.stop(powerId)
+      powerSaveBlocker.stop(powerId)
     }
   }
 })
@@ -932,12 +928,20 @@ ipcMain.handle('requestSettings', async (event, appName) => {
   return mapOtherSettings(config)
 })
 
-ipcMain.handle('toggleDXVK', async (event, { winePrefix, winePath, action }) =>
-  DXVK.installRemove(winePrefix, winePath, 'dxvk', action)
+ipcMain.handle('toggleDXVK', async (event, { appName, action }) =>
+  GameConfig.get(appName)
+    .getSettings()
+    .then(async (gameSettings) =>
+      DXVK.installRemove(gameSettings, 'dxvk', action)
+    )
 )
 
-ipcMain.on('toggleVKD3D', (event, { winePrefix, winePath, action }) => {
-  DXVK.installRemove(winePrefix, winePath, 'vkd3d', action)
+ipcMain.on('toggleVKD3D', (event, { appName, action }) => {
+  GameConfig.get(appName)
+    .getSettings()
+    .then((gameSettings) => {
+      DXVK.installRemove(gameSettings, 'vkd3d', action)
+    })
 })
 
 ipcMain.handle('writeConfig', (event, { appName, config }) => {
@@ -1287,6 +1291,10 @@ ipcMain.handle(
     })
   }
 )
+
+ipcMain.on('removeFromLibrary', (event, appName) => {
+  HyperPlayLibraryManager.removeFromLibrary(appName)
+})
 
 ipcMain.handle('repair', async (event, appName, runner) => {
   if (!isOnline()) {
@@ -1846,7 +1854,6 @@ ipcMain.on('reloadApp', async () => {
 })
 
 ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
-  console.log('addHyperplayGame', projectId)
   await addGameToLibrary(projectId)
 })
 

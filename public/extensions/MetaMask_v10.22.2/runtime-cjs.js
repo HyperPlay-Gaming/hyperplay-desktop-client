@@ -1,20 +1,31 @@
 // DO NOT EDIT! THIS FILE IS GENERATED FROM "runtime-cjs-template.js" BY RUNNING "builder-runtime.js"
 
+// eslint-disable-next-line no-extra-semi
 ;(function() {
+  function getGlobalRef () {
+    if (typeof globalThis !== 'undefined') {
+      return globalThis
+    }
+    const globalRef = typeof self !== 'undefined' ? self : (typeof global !== 'undefined' ? global : undefined)
+    if (typeof globalRef !== 'undefined') {
+      console.error('LavaMoat - Deprecation Warning: global reference is expected as `globalThis`')
+    }
+  }
 
-  // identify the globalRef
-  const globalRef = (typeof globalThis !== 'undefined') ? globalThis : (typeof self !== 'undefined') ? self : (typeof global !== 'undefined') ? global : undefined
+  const globalRef = getGlobalRef()
+
   if (!globalRef) {
-    throw new Error('Lavamoat - unable to identify globalRef')
+    throw new Error('Lavamoat - globalThis not defined')
   }
 
   // polyfill globalThis
-  if (globalRef && !globalRef.globalThis) {
+  if (globalRef.globalThis !== globalRef) {
     globalRef.globalThis = globalRef
   }
-
   // polyfill node/browserify's globalRef
-  globalThis.global = globalThis
+  if (globalRef.global !== globalRef) {
+    globalRef.global = globalRef
+  }
 
   const {strictScopeTerminator} = // define strict-scope-terminator
 (function(){
@@ -34,18 +45,18 @@
 //   globalThis,
 //   immutableObject,
 // } from './commons.js';
-const { freeze, create, getOwnPropertyDescriptors } = Object;
-const immutableObject = freeze(create(null));
+const { freeze, create, getOwnPropertyDescriptors } = Object
+const immutableObject = freeze(create(null))
 
 // import { assert } from './error/assert.js';
 const assert = {
   fail: (msg) => {
-    throw new Error(msg);
-  }
+    throw new Error(msg)
+  },
 }
 
 // const { details: d, quote: q } = assert;
-const d = (strings, args) => strings.join() + args.join();
+const d = (strings, args) => strings.join() + args.join()
 const q = (arg) => arg
 
 /**
@@ -59,40 +70,39 @@ const alwaysThrowHandler = new Proxy(
   immutableObject,
   freeze({
     get(_shadow, prop) {
-      // eslint-disable-next-line @endo/no-polymorphic-call
       assert.fail(
         d`Please report unexpected scope handler trap: ${q(String(prop))}`,
-      );
+      )
     },
   }),
-);
+)
 
-/*
- * scopeProxyHandlerProperties
+/**
  * scopeTerminatorHandler manages a strictScopeTerminator Proxy which serves as
  * the final scope boundary that will always return "undefined" in order
  * to prevent access to "start compartment globals".
+ * @type {ProxyHandler}
  */
 const scopeProxyHandlerProperties = {
   get(_shadow, _prop) {
-    return undefined;
+    return undefined
   },
 
   set(_shadow, prop, _value) {
     // We should only hit this if the has() hook returned true matches the v8
     // ReferenceError message "Uncaught ReferenceError: xyz is not defined"
-    throw new ReferenceError(`${String(prop)} is not defined`);
+    throw new ReferenceError(`${String(prop)} is not defined`)
   },
 
   has(_shadow, prop) {
     // we must at least return true for all properties on the realm globalThis
-    return prop in globalThis;
+    return prop in globalThis
   },
 
   // note: this is likely a bug of safari
   // https://bugs.webkit.org/show_bug.cgi?id=195534
   getPrototypeOf() {
-    return null;
+    return null
   },
 
   // Chip has seen this happen single stepping under the Chrome/v8 debugger.
@@ -100,15 +110,14 @@ const scopeProxyHandlerProperties = {
   // TODO report as bug to v8 or Chrome, and record issue link here.
   getOwnPropertyDescriptor(_target, prop) {
     // Coerce with `String` in case prop is a symbol.
-    const quotedProp = q(String(prop));
-    // eslint-disable-next-line @endo/no-polymorphic-call
+    const quotedProp = q(String(prop))
     console.warn(
       `getOwnPropertyDescriptor trap on scopeTerminatorHandler for ${quotedProp}`,
       new TypeError().stack,
-    );
-    return undefined;
+    )
+    return undefined
   },
-};
+}
 
 // The scope handler's prototype is a proxy that throws if any trap other
 // than get/set/has are run (like getOwnPropertyDescriptors, apply,
@@ -118,12 +127,12 @@ const strictScopeTerminatorHandler = freeze(
     alwaysThrowHandler,
     getOwnPropertyDescriptors(scopeProxyHandlerProperties),
   ),
-);
+)
 
 const strictScopeTerminator = new Proxy(
   immutableObject,
   strictScopeTerminatorHandler,
-);
+)
 
 module.exports = {
   alwaysThrowHandler,
@@ -146,13 +155,14 @@ module.exports = {
     runModule: Object.freeze(runModule),
   })
 
-  Object.defineProperty(globalThis, 'LavaPack', {value: LavaPack})
+  Object.defineProperty(globalRef, 'LavaPack', {value: LavaPack})
 
   function loadPolicy () {
     throw new Error('runtime-cjs: unable to enforce policy')
   }
 
   // it is called by the modules collection that will be appended to this file
+  // eslint-disable-next-line no-unused-vars
   function loadBundle (newModules, entryPoints, bundlePolicy) {
     // ignore bundlePolicy as we wont be enforcing it
     // verify + load in each module
@@ -183,7 +193,7 @@ module.exports = {
     const moduleObject = { exports: {} }
     const evalKit = {
       scopeTerminator: strictScopeTerminator,
-      globalThis,
+      globalThis: globalRef,
     }
     moduleCache.set(moduleId, moduleObject)
     const moduleData = moduleRegistry.get(moduleId)

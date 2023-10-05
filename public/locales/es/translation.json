@@ -532,7 +532,7 @@
         "showfps": "Mostrar FPS (Cuadros Por Segundo) (DX9, 10 y 11)",
         "start-in-tray": "Iniciar minimizado",
         "steamruntime": "Usar Steam Runtime",
-        "winecrossoverbottle": "Botella de CrossOver",
+        "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "Carpeta de Prefijo de Wine",
         "wineversion": "Versión de Wine"
     },

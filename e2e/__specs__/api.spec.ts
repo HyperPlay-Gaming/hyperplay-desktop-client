@@ -1,28 +1,25 @@
-import { DiskSpaceData } from '../../src/common/types'
 import { expect, test } from '@playwright/test'
 import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
-import { Page } from 'playwright'
 import { compareVersions } from 'compare-versions'
 import { platform as platformOS } from 'os'
-import commonSetup, { electronApp, hpPage } from './common-setup'
+import commonSetup, { electronApp, hpPage as page } from './common-setup'
 
 test.describe('api e2e test', function () {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore: this is the correct usage
   commonSetup.call(this)
 
-  let page: Page
-  test('renders the first page', async () => {
+  test.beforeEach(async () => {
     test.setTimeout(600000)
-    page = await hpPage
+  })
 
+  // let page: Page
+  test('renders the first page', async () => {
     const title = await page.title()
     expect(title).toBe('HyperPlay')
   })
 
   test('gets app, legendary, and gog versions', async () => {
-    test.setTimeout(600000)
-    page = await hpPage
     const appVersion = await page.evaluate(async () => {
       return window.api.getAppVersion()
     })
@@ -47,12 +44,10 @@ test.describe('api e2e test', function () {
   })
 
   test('test ipcMainInvokeHandler', async () => {
-    test.setTimeout(600000)
-    page = await hpPage
-    const platform: DiskSpaceData = (await ipcMainInvokeHandler(
+    const platform: NodeJS.Platform = (await ipcMainInvokeHandler(
       electronApp,
       'getPlatform'
-    )) as DiskSpaceData
+    )) as NodeJS.Platform
     console.log('Platform: ', platform)
     expect(platform).toEqual(platformOS())
   })

@@ -39,7 +39,8 @@ import {
 import {
   getHyperPlayStoreRelease,
   handleArchAndPlatform,
-  handlePlatformReversed
+  handlePlatformReversed,
+  sanitizeVersion
 } from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
 import {
@@ -53,7 +54,7 @@ import {
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
-import { clean } from 'easydl/dist/utils'
+import { clean } from 'hp-easydl/dist/utils'
 import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
@@ -390,7 +391,12 @@ export async function install(
 
     const [releaseMeta, selectedChannel] = getReleaseMeta(gameInfo, channelName)
 
-    const releaseVersion: string | undefined = releaseMeta.name
+    const releaseVersion: string = sanitizeVersion(releaseMeta.name)
+    const gameInfoVersion = gameInfo.version
+      ? sanitizeVersion(gameInfo.version)
+      : ''
+
+    const installVersion = releaseVersion ?? gameInfoVersion ?? '0'
 
     if (platformToInstall === 'Browser') {
       const browserGameInstalledInfo: InstalledInfo = {
@@ -399,7 +405,7 @@ export async function install(
         executable: '',
         install_size: '0',
         is_dlc: false,
-        version: releaseVersion ? releaseVersion : gameInfo.version ?? '0',
+        version: installVersion,
         platform: 'web',
         channelName
       }
@@ -489,7 +495,7 @@ export async function install(
         executable: executable,
         install_size: platformInfo.installSize ?? '0',
         is_dlc: false,
-        version: releaseVersion ? releaseVersion : gameInfo.version ?? '0',
+        version: installVersion,
         platform: appPlatform,
         channelName
       }

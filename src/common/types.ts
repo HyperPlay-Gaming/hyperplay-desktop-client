@@ -287,7 +287,7 @@ export type UserInfo = {
 export interface WineInstallation {
   bin: string
   name: string
-  type: 'wine' | 'proton' | 'crossover'
+  type: 'wine' | 'proton' | 'crossover' | 'toolkit'
   lib?: string
   lib32?: string
   wineserver?: string
@@ -615,6 +615,7 @@ export type WineCommandArgs = {
   installFolderName?: string
   options?: CallRunnerOptions
   startFolder?: string
+  gameInstallPath?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
 }
 
@@ -656,8 +657,7 @@ export interface DiskSpaceData {
 }
 
 export interface ToolArgs {
-  winePrefix: string
-  winePath: string
+  appName: string
   action: 'backup' | 'restore'
 }
 

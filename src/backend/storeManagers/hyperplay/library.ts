@@ -13,6 +13,7 @@ import {
   getGameInfoFromHpRelease,
   getHyperPlayReleaseMap,
   handleArchAndPlatform,
+  sanitizeVersion,
   refreshGameInfoFromHpRelease
 } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
@@ -206,11 +207,12 @@ export async function listUpdateableGames(): Promise<string[]> {
         To continue to receive game updates, uninstall and reinstall this game: ${val.title}`)
       }
       if (
+        // games installed before 0.5.0 used gameInfo.version for install.version
+        // so for backwards compatibility we remove spaces and lower case channel release meta name here
         val.install.version !==
-          val.channels[val.install.channelName].release_meta.name
-            ?.toLowerCase()
-            .replaceAll(' ', '') ||
-        ''
+        sanitizeVersion(
+          val.channels[val.install.channelName].release_meta.name || ''
+        )
       ) {
         updateableGames.push(val.app_name)
       }
@@ -226,6 +228,14 @@ export async function listUpdateableGames(): Promise<string[]> {
   }
 
   return updateableGames
+}
+
+export function removeFromLibrary(appName: string) {
+  const currentHpLibrary = hpLibraryStore.get('games', [])
+  const newHpLibrary = currentHpLibrary.filter(
+    (val) => val.app_name !== appName
+  )
+  hpLibraryStore.set('games', newHpLibrary)
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */

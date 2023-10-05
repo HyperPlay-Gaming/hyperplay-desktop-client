@@ -7,6 +7,31 @@ import onboardingStore from 'frontend/store/OnboardingStore'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 
+function NavigationMenuItem({ label, to }: { label: string; to: string }) {
+  const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+  return (
+    <Menu.Item
+      className={styles.menuItem}
+      id={
+        showMetaMaskBrowserSidebarLinks
+          ? 'topMenuItemWalletDropdown'
+          : undefined
+      }
+    >
+      <NavLink
+        to={to}
+        id={
+          showMetaMaskBrowserSidebarLinks
+            ? 'topElementWalletDropdown'
+            : undefined
+        }
+      >
+        <div className={`body ${styles.itemContents}`}>{label}</div>
+      </NavLink>
+    </Menu.Item>
+  )
+}
+
 export default function AccountDropdown() {
   const { t } = useTranslation()
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
@@ -25,33 +50,20 @@ export default function AccountDropdown() {
         <Menu.Label className={styles.menuLabel}>
           {t('hyperplay.currentWallet', `Current wallet`)}
         </Menu.Label>
-        {/* <Menu.Item className={`${styles.menuItem} `}>
-          <div className={`body ${styles.itemContents}`}>
-            {t('hyperplay.switchAccount', `Switch account`)}
-          </div>
-        </Menu.Item> */}
         {showMetaMaskBrowserSidebarLinks && (
-          <Menu.Item
-            className={`${styles.menuItem} `}
-            id={
-              showMetaMaskBrowserSidebarLinks
-                ? 'topMenuItemWalletDropdown'
-                : undefined
-            }
-          >
-            <NavLink
+          <>
+            <NavigationMenuItem
+              label={t('hyperplay.viewFullscreen', `View fullscreen`)}
               to={'/metamaskHome'}
-              id={
-                showMetaMaskBrowserSidebarLinks
-                  ? 'topElementWalletDropdown'
-                  : undefined
-              }
-            >
-              <div className={`body ${styles.itemContents}`}>
-                {t('hyperplay.viewFullscreen', `View fullscreen`)}
-              </div>
-            </NavLink>
-          </Menu.Item>
+            ></NavigationMenuItem>
+            <NavigationMenuItem
+              label={t('hyperplay.viewItem', {
+                defaultValue: 'View {{item}}',
+                item: 'Snaps'
+              })}
+              to={'/metamaskSnaps'}
+            ></NavigationMenuItem>
+          </>
         )}
         <Menu.Item
           className={`${styles.menuItem} `}

@@ -1,11 +1,11 @@
 .mmContainer {
-  position: absolute;
+  position: fixed;
   right: 357px;
   display: flex;
   flex-direction: row;
   gap: 20px;
   z-index: 100000;
-  top: 0px;
+  top: var(--top-navbar-height);
 }
 
 .mmWindow {
