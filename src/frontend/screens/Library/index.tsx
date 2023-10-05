@@ -441,6 +441,10 @@ export default React.memo(function Library(): JSX.Element {
       return 'sideload'
     }
 
+    if (amazonCategories.includes(category)) {
+      return 'nile'
+    }
+
     return 'gog'
   }
 
@@ -535,13 +539,14 @@ export default React.memo(function Library(): JSX.Element {
             className={styles.refreshButton}
             type="tertiary"
             title={t('generic.library.refresh', 'Refresh Library')}
-            onClick={async () =>
+            onClick={async () => {
+              console.log('refreshing library ', getLibrary())
               refreshLibrary({
                 checkForUpdates: true,
                 runInBackground: false,
                 library: getLibrary()
               })
-            }
+            }}
           >
             <FontAwesomeIcon
               className={classNames('FormControl__segmentedFaIcon', {
