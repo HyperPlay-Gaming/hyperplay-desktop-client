@@ -205,7 +205,14 @@ interface HyperPlayAsyncIPCFunctions {
     currentPage: number
     totalPages: number
   }>
-  getIndividualAchievements: (gameId: number) => Promise<Achievement[]>
+  getIndividualAchievements: (
+    options: GetIndividualAchievementsOptions
+  ) => Promise<{
+    data: Achievement[]
+    currentPage: number
+    totalPages: number
+  }>
+  getGame: (gameId: number) => Promise<Game>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

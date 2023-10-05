@@ -1,3 +1,4 @@
+import { getIndividualAchievements } from './../backend/hyperplay-achievements/api'
 import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
 import { LegendaryInstallPlatform, GameMetadataInner } from './types/legendary'
 import { IpcRendererEvent } from 'electron'
@@ -847,6 +848,22 @@ export type AchievementFilter = 'ALL' | 'NEW' | 'MINTED'
 export interface GetAchievementsOptions {
   store: AchievementStore
   filter: AchievementFilter
+  sort: AchievementSort
+  page: number
+  pageSize: number
+}
+
+export interface Game {
+  id: number
+  name: string
+  tags: string[]
+  totalAchievementCount: number
+  mintedAchievementCount: number
+  mintableAchievementsCount: number
+}
+
+export interface GetIndividualAchievementsOptions {
+  gameId: number
   sort: AchievementSort
   page: number
   pageSize: number

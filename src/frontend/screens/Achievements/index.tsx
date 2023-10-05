@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 
 const pageSize = 12
-const achievementsSortOptions = [
+export const achievementsSortOptions = [
   { text: 'Alphabetically (ASC)', value: 'ALPHA_A_TO_Z' },
   { text: 'Alphabetically (DES)', value: 'ALPHA_Z_TO_A' }
 ] as { text: string; value: AchievementSort }[]

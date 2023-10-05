@@ -1,72 +1,86 @@
-import React, { useEffect } from 'react'
+import { GameAchievements } from '@hyperplay/ui'
+import { Achievement, Game } from 'common/types'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { achievementsSortOptions } from '..'
+
+const pageSize = 6
+
+function isTimestampInPast(unixTimestamp: number) {
+  const currentTime = new Date().getTime();
+  const timestampInMilliseconds = unixTimestamp * 1000; // Convert to milliseconds
+
+  return timestampInMilliseconds < currentTime;
+}
+
 
 export default React.memo(function GameAchievementDetails(): JSX.Element {
   const { id } = useParams()
+  const [game, setGame] = useState<Game>()
+  const [achievementsData, setAchievementData] = useState<{data: Achievement[]; currentPage: number; totalPages: number }>({ data: [], currentPage: 0, totalPages: 0 })
+  const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
+
   useEffect(() => {
     const getAchievements = async () => {
-      const test = await window.api.getIndividualAchievements(Number(id))
-      console.log(test)
+      const gameData = await window.api.getGame(Number(id))
+      setGame(gameData)
+
+      const achievements = await window.api.getIndividualAchievements({ gameId: Number(id), sort: selectedSort.value, page: 1, pageSize })
+      setAchievementData(achievements)
     }
 
     getAchievements()
   }, [])
 
+  const handleNextPage = useCallback(async () => {
+    const nextPage = achievementsData.currentPage + 1
+    const achievements = await window.api.getIndividualAchievements({ gameId: Number(id), sort: selectedSort.value, page: nextPage, pageSize })
+    setAchievementData(achievements)
+  }, [achievementsData, selectedSort])
+
+  const handlePrevPage = useCallback(async () => {
+    const prevPage = achievementsData.currentPage - 1
+    const achievements = await window.api.getIndividualAchievements({ gameId: Number(id), sort: selectedSort.value, page: prevPage, pageSize })
+    setAchievementData(achievements)
+  }, [achievementsData, selectedSort])
+
+  if (!game) return <></>
+
   return (
-    <>{id}</>
-    // <GameAchievements
-    //   achievementNavProps={{
-    //     freeMints: 10,
-    //     basketAmount: 0
-    //   }}
-    //   game={{
-    //     title: 'Title of game',
-    //     tags: ['VR', 'Gore', 'Action', 'Simulation', 'Violent', 'Indie']
-    //   }}
-    //   mintedAchievementsCount={5}
-    //   totalAchievementsCount={30}
-    //   mintableAchievementsCount={15}
-    //   achievements={[
-    //     {
-    //       id: '1',
-    //       title: 'Achievement 1',
-    //       description: 'With an image',
-    //       image: 'https://i.imgur.com/Cij5vdL.png',
-    //       isLocked: false
-    //     },
-    //     {
-    //       id: '2',
-    //       title: 'Achievement 2',
-    //       description: 'Without an image',
-    //       image: 'brokenImage',
-    //       isLocked: true
-    //     },
-    //     {
-    //       id: '3',
-    //       title: 'Achievement 3',
-    //       description: 'Without an image',
-    //       image: 'brokenImage',
-    //       isLocked: true
-    //     },
-    //     {
-    //       id: '4',
-    //       title: 'Achievement 4',
-    //       description: 'Without an image',
-    //       image: 'brokenImage',
-    //       isLocked: true
-    //     }
-    //   ]}
-    //   sortProps={{
-    //     options: achievementsSortOptions,
-    //     selected: selectedSort,
-    //     onItemChange: setSelectedSort
-    //   }}
-    //   paginationProps={{
-    //     currentPage: 1,
-    //     totalPages: 3,
-    //     handleNextPage: () => console.log('next page'),
-    //     handlePrevPage: () => console.log('prev page')
-    //   }}
-    // />
+    <GameAchievements
+      achievementNavProps={{
+        freeMints: 10,
+        basketAmount: 0
+      }}
+      game={{
+        title: game.name,
+        tags: game.tags
+      }}
+      mintedAchievementsCount={game.mintedAchievementCount}
+      totalAchievementsCount={game.totalAchievementCount}
+      mintableAchievementsCount={game.mintableAchievementsCount}
+      achievements={achievementsData.data.map(achievement => ({ id: '', title: achievement.displayName, description: achievement.description, image: achievement.icon, isLocked: !isTimestampInPast(achievement.unlocktime) }))}
+      sortProps={{
+        options: achievementsSortOptions,
+        selected: selectedSort,
+        onItemChange: async (sortOption) => {
+          const chosenItem = achievementsSortOptions.find(
+            (option) => option.text === sortOption.text
+          )
+
+          if (chosenItem) {
+            const { data, totalPages, currentPage } = await window.api.getIndividualAchievements({ gameId: Number(id), sort: chosenItem.value, page: 1, pageSize })
+            setSelectedSort(chosenItem)
+            setAchievementData({ currentPage, totalPages, data })
+          }
+        }
+      }}
+      paginationProps={{
+        currentPage: achievementsData.currentPage,
+        totalPages: achievementsData.totalPages,
+        handleNextPage,
+        handlePrevPage
+      }}
+    />
   )
 })
