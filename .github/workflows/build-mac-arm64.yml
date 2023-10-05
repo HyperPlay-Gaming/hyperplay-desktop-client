@@ -3,6 +3,7 @@ name: Build
 on:
   pull_request:
     branches: [main]
+    types: [review_requested]
   workflow_dispatch:
 
 env:
