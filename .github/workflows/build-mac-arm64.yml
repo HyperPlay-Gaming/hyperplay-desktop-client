@@ -1,9 +1,6 @@
 name: Build mac arm64
 
 on:
-  pull_request:
-    branches: [main]
-    types: [review_requested]
   workflow_dispatch:
 
 env:
@@ -14,7 +11,6 @@ env:
 jobs:
   release-mac-arm64:
     runs-on: macos-latest-xlarge
-    if: ${{ github.event.requested_reviewer.name == 'nyghtstalker'}}
 
     steps:
       - name: Checkout code
