@@ -9,6 +9,7 @@ import {
 } from 'common/types'
 import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
+import { useMintAchievements } from './MintAchievements'
 
 const pageSize = 12
 export const achievementsSortOptions = [
@@ -24,10 +25,9 @@ export default React.memo(function Achievements(): JSX.Element {
     totalPages: number
     games: SummaryAchievement[]
   }>({ currentPage: 0, totalPages: 0, games: [] })
-  const [achievementsToBeMinted, setAchievementsToBeMinted] = useState<
-    string[]
-  >([])
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  const [freeMints, setFreeMints] = useState(0)
+
+  const { achievementsToBeMinted, toggleAchievement, isLoading, handleMint } = useMintAchievements()
 
   useEffect(() => {
     const getAchievements = async () => {
@@ -40,6 +40,9 @@ export default React.memo(function Achievements(): JSX.Element {
           pageSize
         })
       setAchievementData({ currentPage, totalPages, games: data })
+
+      const freeMintsData = await window.api.getFreeMints()
+      setFreeMints(freeMintsData)
     }
 
     getAchievements()
@@ -70,27 +73,6 @@ export default React.memo(function Achievements(): JSX.Element {
       })
     setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData, activeFilter, selectedSort])
-
-  const handleAdd = useCallback(
-    (id: string) => {
-      if (achievementsToBeMinted.includes(id)) {
-        setAchievementsToBeMinted((state) =>
-          state.filter((item) => item !== id)
-        )
-      } else {
-        setAchievementsToBeMinted((state) => [...state, id])
-      }
-    },
-    [achievementsToBeMinted]
-  )
-
-  const handleMint = useCallback(() => {
-    setIsLoading(true)
-    setTimeout(() => {
-      setIsLoading(false)
-      setAchievementsToBeMinted([])
-    }, 3000)
-  }, [achievementsToBeMinted])
 
   const isDisabled = useMemo(() => {
     return !walletStore.isConnected || isLoading
@@ -126,7 +108,10 @@ export default React.memo(function Achievements(): JSX.Element {
                 isNewAchievement={game.isNewAchievement}
                 state={state as StatusIconState}
                 ctaProps={{
-                  onClick: () => handleAdd(id),
+                  onClick: (e) => {
+                    e.preventDefault()
+                    toggleAchievement(id)
+                  },
                   disabled: isDisabled
                 }}
               />
@@ -183,6 +168,10 @@ export default React.memo(function Achievements(): JSX.Element {
         mintButtonProps={{
           onClick: handleMint,
           disabled: isDisabled ?? achievementsToBeMinted.length === 0
+        }}
+        achievementNavProps={{
+          freeMints,
+          basketAmount: achievementsToBeMinted.length
         }}
       />
     </>

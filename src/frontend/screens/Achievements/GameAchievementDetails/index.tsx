@@ -1,8 +1,10 @@
 import { GameAchievements } from '@hyperplay/ui'
 import { Achievement, Game } from 'common/types'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
+import { useMintAchievements } from '../MintAchievements'
+import walletStore from 'frontend/store/WalletStore'
 
 const pageSize = 6
 
@@ -22,6 +24,8 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
     totalPages: number
   }>({ data: [], currentPage: 0, totalPages: 0 })
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
+  const [freeMints, setFreeMints] = useState(0)
+  const { achievementsToBeMinted, handleMint, isLoading } = useMintAchievements()
 
   useEffect(() => {
     const getAchievements = async () => {
@@ -35,6 +39,9 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
         pageSize
       })
       setAchievementData(achievements)
+
+      const freeMintsData = await window.api.getFreeMints()
+      setFreeMints(freeMintsData)
     }
 
     getAchievements()
@@ -62,13 +69,17 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
     setAchievementData(achievements)
   }, [achievementsData, selectedSort])
 
+  const isDisabled = useMemo(() => {
+    return !walletStore.isConnected || isLoading
+  }, [isLoading, walletStore.isConnected])
+
   if (!game) return <></>
 
   return (
     <GameAchievements
       achievementNavProps={{
-        freeMints: 10,
-        basketAmount: 0
+        freeMints,
+        basketAmount: achievementsToBeMinted.length
       }}
       game={{
         title: game.name,
@@ -111,6 +122,10 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
         totalPages: achievementsData.totalPages,
         handleNextPage,
         handlePrevPage
+      }}
+      mintButtonProps={{
+        onClick: handleMint,
+        disabled: isDisabled ?? achievementsToBeMinted.length === 0
       }}
     />
   )

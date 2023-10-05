@@ -4,6 +4,7 @@ import { Background, AchievementsInfo, StoreRow, Images } from '@hyperplay/ui'
 import { Flex, Grid } from '@mantine/core'
 
 import styles from './index.module.css'
+import { MintAchievementsProvider } from '../MintAchievements'
 
 export default React.memo(function AchievementsLayout({
   children
@@ -25,7 +26,7 @@ export default React.memo(function AchievementsLayout({
   }, [])
 
   return (
-    <>
+    <MintAchievementsProvider>
       <Background style={{ position: 'absolute' }}></Background>
       <div className={`contentContainer ${styles.fullHeight}`}>
         <Grid className={`${styles.gridItems}`}>
@@ -65,6 +66,6 @@ export default React.memo(function AchievementsLayout({
           </Grid.Col>
         </Grid>
       </div>
-    </>
+    </MintAchievementsProvider>
   )
 })
