@@ -7,17 +7,20 @@ import { achievementsSortOptions } from '..'
 const pageSize = 6
 
 function isTimestampInPast(unixTimestamp: number) {
-  const currentTime = new Date().getTime();
-  const timestampInMilliseconds = unixTimestamp * 1000; // Convert to milliseconds
+  const currentTime = new Date().getTime()
+  const timestampInMilliseconds = unixTimestamp * 1000 // Convert to milliseconds
 
-  return timestampInMilliseconds < currentTime;
+  return timestampInMilliseconds < currentTime
 }
-
 
 export default React.memo(function GameAchievementDetails(): JSX.Element {
   const { id } = useParams()
   const [game, setGame] = useState<Game>()
-  const [achievementsData, setAchievementData] = useState<{data: Achievement[]; currentPage: number; totalPages: number }>({ data: [], currentPage: 0, totalPages: 0 })
+  const [achievementsData, setAchievementData] = useState<{
+    data: Achievement[]
+    currentPage: number
+    totalPages: number
+  }>({ data: [], currentPage: 0, totalPages: 0 })
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
 
   useEffect(() => {
@@ -25,7 +28,12 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
       const gameData = await window.api.getGame(Number(id))
       setGame(gameData)
 
-      const achievements = await window.api.getIndividualAchievements({ gameId: Number(id), sort: selectedSort.value, page: 1, pageSize })
+      const achievements = await window.api.getIndividualAchievements({
+        gameId: Number(id),
+        sort: selectedSort.value,
+        page: 1,
+        pageSize
+      })
       setAchievementData(achievements)
     }
 
@@ -34,13 +42,23 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
 
   const handleNextPage = useCallback(async () => {
     const nextPage = achievementsData.currentPage + 1
-    const achievements = await window.api.getIndividualAchievements({ gameId: Number(id), sort: selectedSort.value, page: nextPage, pageSize })
+    const achievements = await window.api.getIndividualAchievements({
+      gameId: Number(id),
+      sort: selectedSort.value,
+      page: nextPage,
+      pageSize
+    })
     setAchievementData(achievements)
   }, [achievementsData, selectedSort])
 
   const handlePrevPage = useCallback(async () => {
     const prevPage = achievementsData.currentPage - 1
-    const achievements = await window.api.getIndividualAchievements({ gameId: Number(id), sort: selectedSort.value, page: prevPage, pageSize })
+    const achievements = await window.api.getIndividualAchievements({
+      gameId: Number(id),
+      sort: selectedSort.value,
+      page: prevPage,
+      pageSize
+    })
     setAchievementData(achievements)
   }, [achievementsData, selectedSort])
 
@@ -59,7 +77,14 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
       mintedAchievementsCount={game.mintedAchievementCount}
       totalAchievementsCount={game.totalAchievementCount}
       mintableAchievementsCount={game.mintableAchievementsCount}
-      achievements={achievementsData.data.map(achievement => ({ id: '', title: achievement.displayName, description: achievement.description, image: achievement.icon, isLocked: !isTimestampInPast(achievement.unlocktime) }))}
+      achievements={achievementsData.data.map((achievement, index) => ({
+        // TODO: remove when there is a real id
+        id: `${index}`,
+        title: achievement.displayName,
+        description: achievement.description,
+        image: achievement.icon,
+        isLocked: !isTimestampInPast(achievement.unlocktime)
+      }))}
       sortProps={{
         options: achievementsSortOptions,
         selected: selectedSort,
@@ -69,7 +94,13 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
           )
 
           if (chosenItem) {
-            const { data, totalPages, currentPage } = await window.api.getIndividualAchievements({ gameId: Number(id), sort: chosenItem.value, page: 1, pageSize })
+            const { data, totalPages, currentPage } =
+              await window.api.getIndividualAchievements({
+                gameId: Number(id),
+                sort: chosenItem.value,
+                page: 1,
+                pageSize
+              })
             setSelectedSort(chosenItem)
             setAchievementData({ currentPage, totalPages, data })
           }

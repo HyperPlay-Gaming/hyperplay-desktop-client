@@ -8,10 +8,12 @@ import styles from './index.module.css'
 export default React.memo(function AchievementsLayout({
   children
 }: PropsWithChildren): JSX.Element {
-  const [stats, setStats] = useState({     totalNewAchievements: 0,
+  const [stats, setStats] = useState({
+    totalNewAchievements: 0,
     totalMintedAchievements: 0,
     totalAchievements: 0,
-    totalGames: 0})
+    totalGames: 0
+  })
 
   useEffect(() => {
     const getStats = async () => {
