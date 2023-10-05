@@ -1,4 +1,3 @@
-import { getIndividualAchievements } from './../backend/hyperplay-achievements/api'
 import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
 import { LegendaryInstallPlatform, GameMetadataInner } from './types/legendary'
 import { IpcRendererEvent } from 'electron'
