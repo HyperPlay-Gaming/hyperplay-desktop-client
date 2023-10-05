@@ -25,7 +25,8 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
   }>({ data: [], currentPage: 0, totalPages: 0 })
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
   const [freeMints, setFreeMints] = useState(0)
-  const { achievementsToBeMinted, handleMint, isLoading } = useMintAchievements()
+  const { achievementsToBeMinted, handleMint, isLoading } =
+    useMintAchievements()
 
   useEffect(() => {
     const getAchievements = async () => {

@@ -1,23 +1,36 @@
-import React, { createContext, useContext, ReactNode, useState, useMemo, useCallback } from 'react';
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useState,
+  useMemo,
+  useCallback
+} from 'react'
 
 // Define the context type
 interface MintAchievementsType {
-  achievementsToBeMinted: string[]; // Define the type of your context value
-  toggleAchievement: (id: string) => void;
-  handleMint: () => void;
-  isLoading: boolean;
+  achievementsToBeMinted: string[] // Define the type of your context value
+  toggleAchievement: (id: string) => void
+  handleMint: () => void
+  isLoading: boolean
 }
 
 // Create the context with an initial value
-const MintAchievements = createContext<MintAchievementsType | undefined>(undefined);
+const MintAchievements = createContext<MintAchievementsType | undefined>(
+  undefined
+)
 
 // Define a provider component
 interface MintAchievementsProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
-const MintAchievementsProvider: React.FC<MintAchievementsProviderProps> = ({ children }) => {
-  const [achievementsToBeMinted, setAchievementsToBeMinted] = useState<string[]>([])
+const MintAchievementsProvider: React.FC<MintAchievementsProviderProps> = ({
+  children
+}) => {
+  const [achievementsToBeMinted, setAchievementsToBeMinted] = useState<
+    string[]
+  >([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const toggleAchievement = useCallback(
@@ -50,18 +63,20 @@ const MintAchievementsProvider: React.FC<MintAchievementsProviderProps> = ({ chi
     <MintAchievements.Provider value={value}>
       {children}
     </MintAchievements.Provider>
-  );
-};
+  )
+}
 
 // Define a custom hook to access the context value
 const useMintAchievements = () => {
-  const context = useContext(MintAchievements);
+  const context = useContext(MintAchievements)
 
   if (context === undefined) {
-    throw new Error('useMintAchievements must be used within a MintAchievementsProvider');
+    throw new Error(
+      'useMintAchievements must be used within a MintAchievementsProvider'
+    )
   }
 
-  return context;
-};
+  return context
+}
 
-export { MintAchievementsProvider, useMintAchievements };
+export { MintAchievementsProvider, useMintAchievements }

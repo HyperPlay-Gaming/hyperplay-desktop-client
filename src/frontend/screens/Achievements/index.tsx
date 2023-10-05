@@ -27,7 +27,8 @@ export default React.memo(function Achievements(): JSX.Element {
   }>({ currentPage: 0, totalPages: 0, games: [] })
   const [freeMints, setFreeMints] = useState(0)
 
-  const { achievementsToBeMinted, toggleAchievement, isLoading, handleMint } = useMintAchievements()
+  const { achievementsToBeMinted, toggleAchievement, isLoading, handleMint } =
+    useMintAchievements()
 
   useEffect(() => {
     const getAchievements = async () => {
