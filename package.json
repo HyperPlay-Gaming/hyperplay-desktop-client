@@ -50,7 +50,8 @@
       "icon": "build/win_icon.ico",
       "asarUnpack": [
         "build/bin/win32/legendary.exe",
-        "build/bin/win32/gogdl.exe"
+        "build/bin/win32/gogdl.exe",
+        "build/bin/win32/nile.exe"
       ],
       "files": [
         "build/bin/win32/*"
@@ -70,7 +71,8 @@
       },
       "asarUnpack": [
         "build/bin/darwin/legendary",
-        "build/bin/darwin/gogdl"
+        "build/bin/darwin/gogdl",
+        "build/bin/darwin/nile"
       ],
       "files": [
         "build/bin/darwin/*"
@@ -106,7 +108,9 @@
       "asarUnpack": [
         "build/bin/linux/legendary",
         "build/bin/linux/gogdl",
-        "build/bin/linux/wmctrl"
+        "build/bin/linux/wmctrl",
+        "build/bin/linux/nile",
+        "build/bin/linux/vulkan-helper"
       ],
       "files": [
         "build/bin/linux/*"
@@ -152,7 +156,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@hyperplay/ui": "^0.1.14",
+    "@hyperplay/ui": "^0.1.18",
     "@mantine/carousel": "^6.0.19",
     "@mantine/core": "^6.0.19",
     "@mantine/hooks": "^6.0.19",
@@ -195,13 +199,13 @@
     "fs-extra": "^10.1.0",
     "fuse.js": "^6.6.2",
     "graceful-fs": "^4.2.10",
-    "howlongtobeat": "^1.7.0",
     "hp-easydl": "^1.1.0",
     "i18next": "^22.4.10",
     "i18next-fs-backend": "^1.1.4",
     "i18next-http-backend": "^1.4.0",
     "ini": "^3.0.0",
     "jsdom": "^20.0.0",
+    "json5": "^2.2.3",
     "lokijs": "^1.5.12",
     "mobx": "^6.9.0",
     "mobx-react-lite": "^3.4.0",
@@ -210,9 +214,11 @@
     "react": "^18.2.0",
     "react-blockies": "^1.4.1",
     "react-dom": "^18.2.0",
-    "react-i18next": "^11.16.7",
-    "react-router-dom": "^6.3.0",
-    "recharts": "^2.1.14",
+    "react-i18next": "^12.2.0",
+    "react-router-dom": "^6.9.0",
+    "recharts": "^2.4.3",
+    "sanitize-filename": "^1.6.3",
+    "semver": "^7.5.1",
     "shlex": "^2.1.2",
     "short-uuid": "^4.2.0",
     "simple-keyboard": "^3.4.136",
@@ -228,6 +234,7 @@
   "scripts": {
     "setup": "yarn install && yarn allow-scripts",
     "start": "vite",
+    "debug:react": "react-devtools",
     "codecheck": "tsc --noEmit",
     "find-deadcode": "ts-prune --error",
     "test": "jest",
@@ -241,7 +248,8 @@
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
     "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
     "release:updateFlathub:ci": "tsc flathub/update-flathub.ts --skipLibCheck --target es2015 --moduleResolution node --module commonjs && node flathub/update-flathub.js",
-    "release:mac": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64 --arm64",
+    "release:mac:x64": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64",
+    "release:mac:arm64": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --arm64",
     "dist:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder --linux",
     "dist:linux:ci:deb": "yarn dist:linux deb --publish=never",
     "dist:linux:ci:rpm": "yarn dist:linux rpm --publish=never",
@@ -249,7 +257,7 @@
     "dist:linux:ci:flatpak": "npm run dist:linux tar.xz --publish=never",
     "dist:mac:base": "export NODE_ENV_ELECTRON_VITE=production && export CSC_IDENTITY_AUTO_DISCOVERY=false && vite build && electron-builder --mac",
     "dist:mac:x64": "yarn dist:mac:base --x64 --publish=never",
-    "dist:mac": "yarn dist:mac:base --x64 --arm64 --publish=never",
+    "dist:mac:arm64": "yarn dist:mac:base --arm64 --publish=never",
     "dist:win": "cross-env NODE_ENV_ELECTRON_VITE=production vite build && electron-builder --win nsis --publish=never",
     "build-signed:win": "vite build && electron-builder --win -c.win.certificateSubjectName=\"HyperPlay Labs Inc.\"",
     "lint": "eslint --cache -c .eslintrc --ext .tsx,ts ./src",
@@ -298,7 +306,6 @@
     "cross-env": "^7.0.3",
     "electron": "^27.0.0-beta.8",
     "electron-builder": "^24.6.3",
-    "electron-devtools-installer": "^3.2.0",
     "electron-playwright-helpers": "^1.6.0",
     "electron-vite": "^1.0.23",
     "eslint": "^8.13.0",

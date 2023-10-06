@@ -10,7 +10,7 @@ import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 
 type Command = 'ping' | 'launch'
 
-const RUNNERS = ['hyperplay', 'legendary', 'gog', 'sideload']
+const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
 
 /**
  * Handles a protocol request
@@ -107,6 +107,8 @@ async function handlePing(arg: string) {
  * // => 'Received launch! Runner: hyperplay, Arg: 123'
  * handleLaunch('legendary', '123')
  * // => 'Received launch! Runner: legendary, Arg: 123'
+ * handleLaunch('nile', '123')
+ * // => 'Received launch! Runner: nile, Arg: 123'
  **/
 async function handleLaunch(
   runner: Runner | undefined,
@@ -156,6 +158,19 @@ async function handleLaunch(
   sendFrontendMessage('launchGame', arg, gameRunner)
 }
 
+/**
+ * Finds a game in the runners specified in runnersToSearch
+ * @param runner The runner to search for the game
+ * @param arg The game to search
+ * @returns The game info if found, null otherwise
+ * @example
+ * findGame('gog', '123')
+ * // => { app_name: '123', title: '123', is_installed: true, runner: 'gog' ...}
+ * findGame('legendary', '123')
+ * // => { app_name: '123', title: '123', is_installed: true, runner: 'legendary' ...}
+ * findGame('nile', '123')
+ * // => { app_name: '123', title: '123', is_installed: true, runner: 'nile' ...}
+ **/
 async function findGame(
   runner: Runner | undefined,
   projectId = ''

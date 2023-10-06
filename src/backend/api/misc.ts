@@ -7,6 +7,7 @@ import {
   ButtonOptions,
   GamepadActionArgs
 } from 'common/types'
+import { NileRegisterData } from 'common/types/nile'
 
 export const clearCache = (showDialog?: boolean) =>
   ipcRenderer.send('clearCache', showDialog)
@@ -40,6 +41,11 @@ export const logoutLegendary = async () => ipcRenderer.invoke('logoutLegendary')
 export const authGOG = async (token: string) =>
   ipcRenderer.invoke('authGOG', token)
 export const logoutGOG = () => ipcRenderer.send('logoutGOG')
+export const getAmazonLoginData = async () =>
+  ipcRenderer.invoke('getAmazonLoginData')
+export const authAmazon = async (data: NileRegisterData) =>
+  ipcRenderer.invoke('authAmazon', data)
+export const logoutAmazon = async () => ipcRenderer.invoke('logoutAmazon')
 export const checkGameUpdates = async () =>
   ipcRenderer.invoke('checkGameUpdates')
 export const refreshLibrary = async (library?: Runner | 'all') =>
@@ -143,8 +149,8 @@ export const storeGet = (
   defaultValue?: unknown
 ) => stores[storeName].get(key, defaultValue)
 
-export const getWikiGameInfo = async (title: string, id?: string) =>
-  ipcRenderer.invoke('getWikiGameInfo', title, id)
+export const storeDelete = (storeName: string, key: string) =>
+  stores[storeName].delete(key)
 
 export const handleNavToEpicAndOpen = (
   onMessage: (e: Electron.IpcRendererEvent, url: string) => void
@@ -171,3 +177,14 @@ export const handleShowHiddenQaAuthTextBox = (
     ipcRenderer.removeListener('showHiddenQaAuthTextBox', onCall)
   }
 }
+
+export const getWikiGameInfo = async (
+  title: string,
+  appName: string,
+  runner: Runner
+) => ipcRenderer.invoke('getWikiGameInfo', title, appName, runner)
+
+export const fetchPlaytimeFromServer = async (
+  runner: Runner,
+  appName: string
+) => ipcRenderer.invoke('getPlaytimeFromRunner', runner, appName)

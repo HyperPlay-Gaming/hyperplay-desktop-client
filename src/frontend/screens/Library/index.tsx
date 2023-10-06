@@ -26,6 +26,7 @@ import {
 } from 'common/types'
 import ErrorComponent from 'frontend/components/UI/ErrorComponent'
 import {
+  amazonCategories,
   epicCategories,
   gogCategories,
   hyperPlayCategories,
@@ -60,6 +61,7 @@ export default React.memo(function Library(): JSX.Element {
     category,
     epic,
     gog,
+    amazon,
     sideloadedLibrary,
     favouriteGames,
     libraryTopSection,
@@ -188,7 +190,10 @@ export default React.memo(function Library(): JSX.Element {
     if (gogCategories.includes(category) && !gog.username) {
       handleCategory('all')
     }
-  }, [epic.username, gog.username])
+    if (amazonCategories.includes(category) && !amazon.user_id) {
+      handleCategory('all')
+    }
+  }, [epic.username, gog.username, amazon.username])
 
   /*
    * For installed games, we filter on the install platform
@@ -280,6 +285,9 @@ export default React.memo(function Library(): JSX.Element {
       hyperPlayLibrary.forEach((game) => {
         if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
       })
+      amazon.library.forEach((game) => {
+        if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
+      })
     }
     return tempArray
   }, [showFavourites, favouriteGames, epic, gog])
@@ -293,6 +301,7 @@ export default React.memo(function Library(): JSX.Element {
     } else {
       const isEpic = epic.username && epicCategories.includes(category)
       const isGog = gog.username && gogCategories.includes(category)
+      const isAmazon = amazon.user_id && amazonCategories.includes(category)
       const epicLibrary = isEpic ? epic.library : []
       const gogLibrary = isGog ? gog.library : []
       const sideloadedApps = sideloadedCategories.includes(category)
@@ -301,8 +310,15 @@ export default React.memo(function Library(): JSX.Element {
       const HPLibrary = hyperPlayCategories.includes(category)
         ? hyperPlayLibrary
         : []
+      const amazonLibrary = isAmazon ? amazon.library : []
 
-      library = [...HPLibrary, ...sideloadedApps, ...epicLibrary, ...gogLibrary]
+      library = [
+        ...HPLibrary,
+        ...sideloadedApps,
+        ...epicLibrary,
+        ...gogLibrary,
+        ...amazonLibrary
+      ]
 
       if (!showNonAvailable) {
         const nonAvailbleGames = storage.getItem('nonAvailableGames') || '[]'
@@ -346,7 +362,7 @@ export default React.memo(function Library(): JSX.Element {
     }
 
     // sort
-    library = library.sort((a: { title: string }, b: { title: string }) => {
+    library = library.sort((a, b) => {
       const gameA = a.title.toUpperCase().replace('THE ', '')
       const gameB = b.title.toUpperCase().replace('THE ', '')
       return sortAscending ? (gameA < gameB ? -1 : 1) : gameA > gameB ? -1 : 1
@@ -374,6 +390,7 @@ export default React.memo(function Library(): JSX.Element {
     category,
     epic.library,
     gog.library,
+    amazon.library,
     filterText,
     filterPlatforms,
     sortAscending,
@@ -400,7 +417,7 @@ export default React.memo(function Library(): JSX.Element {
     return total > 0 ? `${total}` : 0
   }, [libraryToShow, category])
 
-  if (!epic && !gog) {
+  if (!epic && !gog && !amazon) {
     return (
       <ErrorComponent
         message={t(
@@ -422,6 +439,10 @@ export default React.memo(function Library(): JSX.Element {
 
     if (category === 'sideload') {
       return 'sideload'
+    }
+
+    if (amazonCategories.includes(category)) {
+      return 'nile'
     }
 
     return 'gog'
@@ -518,13 +539,14 @@ export default React.memo(function Library(): JSX.Element {
             className={styles.refreshButton}
             type="tertiary"
             title={t('generic.library.refresh', 'Refresh Library')}
-            onClick={async () =>
+            onClick={async () => {
+              console.log('refreshing library ', getLibrary())
               refreshLibrary({
                 checkForUpdates: true,
                 runInBackground: false,
                 library: getLibrary()
               })
-            }
+            }}
           >
             <FontAwesomeIcon
               className={classNames('FormControl__segmentedFaIcon', {
