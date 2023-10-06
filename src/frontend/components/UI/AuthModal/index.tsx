@@ -9,8 +9,7 @@ import extensionStore from '../../../store/ExtensionStore'
 import onboardingStore from '../../../store/OnboardingStore'
 
 // TODO: replace this with dev portal prod URL when it's ready
-const url =
-  'https://hyperplay-dev-git-feature-unified-auth-ui-valist.vercel.app/signin'
+const url = 'http://localhost:3001/signin'
 
 const METAMASK_ALREADY_PROVIDED_ERROR_CODE = -32002
 
@@ -53,6 +52,7 @@ const AuthModal = () => {
           authModalState.closeModal()
           break
         case 'auth:accountConnected':
+          alert('account connected')
           authModalState.closeModal()
           break
         case 'auth:accountNotConnected':
