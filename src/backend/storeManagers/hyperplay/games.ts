@@ -173,7 +173,7 @@ export async function importGame(
   if (isOnline()) {
     const currentRelease = await getHyperPlayStoreRelease(appName)
     hpImportVersion =
-      currentRelease.channels[mainReleaseChannelName].release_meta.name
+      currentRelease.channels[mainReleaseChannelName]?.release_meta?.name
   }
 
   gameInLibrary.install = {

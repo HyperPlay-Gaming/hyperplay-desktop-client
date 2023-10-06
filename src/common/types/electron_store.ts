@@ -2,7 +2,6 @@ import Store from 'electron-store'
 import { Get } from 'type-fest'
 
 import {
-  GameInfo,
   WineVersionInfo,
   InstalledInfo,
   UserInfo,
@@ -11,15 +10,15 @@ import {
   FavouriteGame,
   DMQueueElement,
   GOGLoginData,
-  ExtraInfo,
   WineManagerUISettings,
   AppSettings,
   WikiInfo,
+  GameInfo,
   MetricsOptInStatus
 } from 'common/types'
-import { GamesDBData, GogInstallInfo, UserData } from 'common/types/gog'
-import { LegendaryInstallInfo } from 'common/types/legendary'
 import { PROVIDERS } from './proxy-types'
+import { UserData } from 'common/types/gog'
+import { NileUserData } from './nile'
 
 export interface StoreStructure {
   configStore: {
@@ -41,26 +40,17 @@ export interface StoreStructure {
       lastLogFile: string
       legendaryLogFile: string
       gogdlLogFile: string
+      nileLogFile: string
     }
     'window-props': Electron.Rectangle
     settings: AppSettings
     skipVcRuntime: boolean
-  }
-  libraryStore: {
-    library: GameInfo[]
-    games: GameInfo[]
   }
   wineDownloaderInfoStore: {
     'wine-releases': WineVersionInfo[]
   }
   gogInstalledGamesStore: {
     installed: InstalledInfo[]
-  }
-  gogLibraryStore: {
-    games: GameInfo[]
-    totalGames: number
-    totalMovies: number
-    cloud_saves_enabled: boolean
   }
   timestampStore: {
     [K: string]: {
@@ -75,6 +65,10 @@ export interface StoreStructure {
   gogConfigStore: {
     userData: UserData
     credentials: GOGLoginData
+    isLoggedIn: boolean
+  }
+  nileConfigStore: {
+    userData?: NileUserData
   }
   sideloadedStore: {
     games: GameInfo[]
@@ -85,28 +79,10 @@ export interface StoreStructure {
     queue: DMQueueElement[]
     finished: DMQueueElement[]
   }
-  gogApiInfoCache: {
-    [appName: string]: {
-      isUpdated: boolean
-      data: GamesDBData
-    }
-  }
   gogSyncStore: {
     [appName: string]: {
       [saveName: string]: string
     }
-  }
-  gogInstallInfo: {
-    [appName_platform: string]: GogInstallInfo
-  }
-  legendaryInstallInfo: {
-    [appName: string]: LegendaryInstallInfo
-  }
-  legendaryLibrary: {
-    library: GameInfo[]
-  }
-  legendaryGameInfo: {
-    [namespace: string]: ExtraInfo
   }
   wineManagerConfigStore: {
     'wine-manager-settings': WineManagerUISettings[]

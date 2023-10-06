@@ -2,7 +2,6 @@ import { GOGCloudSavesLocation, GogInstallPlatform } from './types/gog'
 import { LegendaryInstallPlatform, GameMetadataInner } from './types/legendary'
 import { IpcRendererEvent } from 'electron'
 import { ChildProcess } from 'child_process'
-import { HowLongToBeatEntry } from 'howlongtobeat'
 import 'i18next'
 import {
   WineSupport,
@@ -12,6 +11,7 @@ import {
 } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { NileInstallPlatform } from './types/nile'
 
 export type {
   Listing as HyperPlayRelease,
@@ -54,7 +54,7 @@ export type WrapRendererCallback<
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
 
-export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay'
+export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay' | 'nile'
 
 // NOTE: Do not put enum's in this module or it will break imports
 
@@ -102,6 +102,7 @@ export interface AppSettings extends GameSettings {
   defaultSteamPath: string
   defaultWinePrefix: string
   disableController: boolean
+  disableLogs: boolean
   discordRPC: boolean
   downloadNoHttps: boolean
   egsLinkedPath: string
@@ -139,7 +140,7 @@ export interface ExtraInfo {
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 
 export interface GameInfo {
-  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload'
+  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload' | 'nile'
   store_url?: string
   app_name: string
   art_cover: string
@@ -150,6 +151,7 @@ export interface GameInfo {
   extra?: ExtraInfo
   folder_name?: string
   install: Partial<InstalledInfo>
+  installable?: boolean
   is_installed: boolean
   namespace?: string
   // NOTE: This is the save folder without any variables filled in...
@@ -322,41 +324,7 @@ export interface GOGLoginData {
   refresh_token: string
   user_id: string
   loginTime: number
-}
-
-export interface GOGGameInfo {
-  isGalaxyCompatible: true
-  tags: string[]
-  id: number
-  availability: {
-    isAvailable: boolean
-    isAvailableInAccount: true
-  }
-  title: string
-  image: string
-  url: string
-  worksOn: {
-    [key in 'Windows' | 'Mac' | 'Linux']: boolean
-  }
-  category: string
-  rating: number
-  isComingSoon: boolean
-  isMovie: false
-  isGame: true
-  slug: string
-  updates: number
-  isNew: boolean
-  dlcCount: number
-  releaseDate: {
-    date: string
-    timezone_type: number
-    timezone: string
-  }
-  isBaseProductMissing: boolean
-  isHidingDisabled: boolean
-  isInDevelopment: boolean
-  extraInfo: unknown[]
-  isHidden: boolean
+  error?: boolean
 }
 
 export interface GOGImportData {
@@ -405,7 +373,7 @@ interface GamepadInputEventMouse {
 
 export interface SteamRuntime {
   path: string
-  type: 'soldier' | 'scout'
+  type: 'sniper' | 'scout' | 'soldier'
   args: string[]
 }
 
@@ -572,6 +540,7 @@ export type InstallPlatform =
   | LegendaryInstallPlatform
   | GogInstallPlatform
   | AppPlatforms
+  | NileInstallPlatform
   | 'Browser'
 
 export type ConnectivityChangedCallback = (
@@ -612,10 +581,10 @@ export type WineCommandArgs = {
   wait?: boolean
   protonVerb?: ProtonVerb
   gameSettings?: GameSettings
+  gameInstallPath?: string
   installFolderName?: string
   options?: CallRunnerOptions
   startFolder?: string
-  gameInstallPath?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
 }
 
@@ -670,11 +639,14 @@ export interface GameScoreInfo {
 
 export interface PCGamingWikiInfo {
   steamID: string
-  howLongToBeatID: string
   metacritic: GameScoreInfo
   opencritic: GameScoreInfo
   igdb: GameScoreInfo
   direct3DVersions: string[]
+}
+
+export interface GamesDBInfo {
+  steamID: string
 }
 
 export interface AppleGamingWikiInfo {
@@ -686,7 +658,6 @@ export interface WikiInfo {
   timestampLastFetch: string
   pcgamingwiki: PCGamingWikiInfo | null
   applegamingwiki: AppleGamingWikiInfo | null
-  howlongtobeat: HowLongToBeatEntry | null
 }
 
 /**

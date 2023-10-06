@@ -1,18 +1,45 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
 import { timestampStore } from 'frontend/helpers/electronStores'
 
 import './index.css'
+import { Runner } from 'common/types'
 
 type Props = {
+  runner: Runner
   game: string
 }
 
-function TimeContainer({ game }: Props) {
+function TimeContainer({ runner, game }: Props) {
   const { t } = useTranslation('gamepage')
-  const tsInfo = timestampStore.get_nodefault(game)
+  const [tsInfo, setTsInfo] = useState(timestampStore.get_nodefault(game))
+  useEffect(() => {
+    async function fetchPlaytime() {
+      const playTime = await window.api.fetchPlaytimeFromServer(runner, game)
+      if (!playTime) {
+        return
+      }
+      if (tsInfo?.totalPlayed) {
+        if (tsInfo.totalPlayed < playTime) {
+          const newObject = { ...tsInfo, totalPlayed: playTime }
+          timestampStore.set(game, newObject)
+          setTsInfo(newObject)
+        }
+      } else {
+        const newObject = {
+          firstPlayed: '',
+          lastPlayed: '',
+          totalPlayed: playTime
+        }
+        timestampStore.set(game, newObject)
+        setTsInfo(newObject)
+      }
+    }
+
+    fetchPlaytime()
+  }, [])
 
   if (!tsInfo) {
     return (
@@ -37,7 +64,9 @@ function TimeContainer({ game }: Props) {
     minute: 'numeric',
     second: 'numeric'
   }
-  const firstPlayed = new Date(tsInfo.firstPlayed)
+  const firstPlayed = tsInfo.firstPlayed
+    ? new Date(tsInfo.firstPlayed)
+    : undefined
   const firstDate = new Intl.DateTimeFormat(undefined, options).format(
     firstPlayed
   )

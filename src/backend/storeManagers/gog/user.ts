@@ -1,15 +1,17 @@
 import axios from 'axios'
+import { writeFileSync, existsSync, unlinkSync } from 'graceful-fs'
 import { logError, logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import { GOGLoginData } from 'common/types'
 import { configStore } from './electronStores'
-import { clearCache, errorHandler } from '../../utils'
 import { isOnline } from '../../online_monitor'
 import { UserData } from 'common/types/gog'
-
-const gogAuthenticateUrl =
-  'https://auth.gog.com/token?client_id=46899977096215655&client_secret=9d85c43b1482497dbbce61f6e4aa173a433796eeae2ca8c5f6129f2dc4de46d9&grant_type=authorization_code&redirect_uri=https%3A%2F%2Fembed.gog.com%2Fon_login_success%3Forigin%3Dclient&code='
-const gogRefreshTokenUrl =
-  'https://auth.gog.com/token?client_id=46899977096215655&client_secret=9d85c43b1482497dbbce61f6e4aa173a433796eeae2ca8c5f6129f2dc4de46d9&grant_type=refresh_token'
+import { runRunnerCommand } from './library'
+import {
+  createAbortController,
+  deleteAbortController
+} from 'backend/utils/aborthandler/aborthandler'
+import { gogdlAuthConfig } from 'backend/constants'
+import { clearCache } from 'backend/utils'
 
 export class GOGUser {
   static async login(
@@ -17,44 +19,48 @@ export class GOGUser {
     // TODO: Write types for this
   ): Promise<{
     status: 'done' | 'error'
-    data?: UserData | null
+    data?: UserData
   }> {
     logInfo('Logging using GOG credentials', LogPrefix.Gog)
 
     // Gets token from GOG basaed on authorization code
-    const response = await axios
-      .get(gogAuthenticateUrl + code)
-      .catch((error) => {
-        // Handle fetching error
-        logError(['Failed to get access_token', error], LogPrefix.Gog)
-        return null
-      })
-    if (!response?.data) {
-      logError('Failed to get access_token', LogPrefix.Gog)
+    const { stdout } = await runRunnerCommand(
+      ['auth', '--code', code],
+      createAbortController('gogdl-auth')
+    )
+
+    try {
+      const data: GOGLoginData = JSON.parse(stdout.trim())
+      if (data?.error) {
+        return { status: 'error' }
+      }
+    } catch (err) {
+      logError(
+        `GOG login failed to parse std output from gogdl. stdout: ${stdout.trim()}`,
+        LogPrefix.Gog
+      )
       return { status: 'error' }
     }
-
-    const data: GOGLoginData = response.data
-    data.loginTime = Date.now()
-    configStore.set('credentials', data)
+    deleteAbortController('gogdl-auth')
     logInfo('Login Successful', LogPrefix.Gog)
+    configStore.set('isLoggedIn', true)
     const userDetails = await this.getUserDetails()
     return { status: 'done', data: userDetails }
   }
 
   public static async getUserDetails() {
     if (!isOnline()) {
-      logError('Unable to get user data, HyperPlay offline', LogPrefix.Gog)
-      return null
+      logError('Unable to login information, Heroic offline', LogPrefix.Gog)
+      return
     }
-    logInfo('Getting data about the user', LogPrefix.Gog)
+    logInfo('Checking if login is valid', LogPrefix.Gog)
     if (!this.isLoggedIn()) {
       logWarning('User is not logged in', LogPrefix.Gog)
       return
     }
     const user = await this.getCredentials()
     if (!user) {
-      logError("No credentials, can't get user data", LogPrefix.Gog)
+      logError("No credentials, can't get login information", LogPrefix.Gog)
       return
     }
     const response = await axios
@@ -65,7 +71,7 @@ export class GOGUser {
         }
       })
       .catch((error) => {
-        logError(['Error getting user Data', error], LogPrefix.Gog)
+        logError(['Error getting login information', error], LogPrefix.Gog)
       })
 
     if (!response) {
@@ -78,7 +84,7 @@ export class GOGUser {
     delete data.email
 
     configStore.set('userData', data)
-    logInfo('Saved user data to config', LogPrefix.Gog)
+    logInfo('Saved username to config file', LogPrefix.Gog)
 
     return data
   }
@@ -88,63 +94,51 @@ export class GOGUser {
    * @returns user credentials
    */
   public static async getCredentials() {
-    if (this.isTokenExpired()) {
-      return this.refreshToken()
-    }
-
-    return configStore.get_nodefault('credentials')
-  }
-
-  /**
-   * Refreshes token and returns new credentials
-   */
-  public static async refreshToken(): Promise<GOGLoginData | undefined> {
-    const user = configStore.get_nodefault('credentials')
-    logInfo('Refreshing access_token', LogPrefix.Gog)
-    if (user) {
-      const response = await axios
-        .get(`${gogRefreshTokenUrl}&refresh_token=${user.refresh_token}`)
-        .catch(() => {
-          logError(
-            'Error with refreshing token, reauth required',
-            LogPrefix.Gog
-          )
-        })
-
-      if (!response) {
-        return
-      }
-
-      const data: GOGLoginData = response.data
-      data.loginTime = Date.now()
-      configStore.set('credentials', data)
-      logInfo('Token refreshed successfully', LogPrefix.Gog)
-      return data
-    } else {
-      logError('No credentials, auth required', LogPrefix.Gog)
-      errorHandler({
-        error: 'No credentials',
-        runner: 'GOG'
+    if (!isOnline()) {
+      logWarning('Unable to get credentials - app is offline', {
+        prefix: LogPrefix.Gog
       })
       return
     }
+    const { stdout } = await runRunnerCommand(
+      ['auth'],
+      createAbortController('gogdl-get-credentials')
+    )
+
+    deleteAbortController('gogdl-get-credentials')
+    return JSON.parse(stdout)
   }
 
-  public static isTokenExpired() {
-    const user = configStore.get_nodefault('credentials')
-    if (!user) {
-      return true
+  /**
+   * Migrates existing authorization config to one supported by gogdl
+   */
+  public static migrateCredentialsConfig() {
+    if (!configStore.has('credentials')) {
+      return
     }
-    const isExpired = Date.now() >= user.loginTime + user.expires_in * 1000
-    return isExpired
+
+    const credentials = configStore.get_nodefault('credentials')
+    if (credentials?.loginTime)
+      credentials.loginTime = credentials?.loginTime / 1000
+
+    writeFileSync(
+      gogdlAuthConfig,
+      JSON.stringify({ '46899977096215655': credentials })
+    )
+    configStore.delete('credentials')
+    configStore.set('isLoggedIn', true)
   }
+
   public static logout() {
     clearCache('gog')
     configStore.clear()
+    if (existsSync(gogdlAuthConfig)) {
+      unlinkSync(gogdlAuthConfig)
+    }
     logInfo('Logging user out', LogPrefix.Gog)
   }
 
   public static isLoggedIn() {
-    return configStore.has('credentials')
+    return configStore.get_nodefault('isLoggedIn') || false
   }
 }
