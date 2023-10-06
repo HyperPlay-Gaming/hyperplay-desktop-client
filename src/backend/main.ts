@@ -153,6 +153,7 @@ import {
   initStoreManagers,
   libraryManagerMap
 } from './storeManagers'
+import { downloadIPDTForOS } from '@hyperplay/patcher';
 
 import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
@@ -1794,7 +1795,8 @@ import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/elect
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
-import { applyRdiffPatch, downloadRdiffForCurrentOS } from './patcher'
+import { getBasePath } from './patcher'
+
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
@@ -1897,10 +1899,11 @@ ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
 })
 
-ipcMain.on('downloadRdiff', () => {
-  downloadRdiffForCurrentOS();
+ipcMain.on('downloadIPDT', () => {
+  const binPath = getBasePath()
+  downloadIPDTForOS(binPath)
 });
 
 ipcMain.on('applyPatch', () => {
-  applyRdiffPatch('original-game.zip', 'patch.diff', 'game.zip');
+  console.log('testing patch')
 });
