@@ -66,7 +66,8 @@
                 "title": "¡Ocurrió un error!"
             },
             "update": {
-                "title": "Error al actualizar"
+                "title": "Error al actualizar",
+                "message": "¡Algo ha ido mal con la actualización! Por favor, desinstala manualmente y vuelve a instalar HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,8 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
-            }
+            },
+            "moving": "Error al Mover el Juego {{error}}"
         },
         "info": {
             "update": {
@@ -139,10 +141,14 @@
                 "install": "Los servidores de Epic están teniendo una gran interrupción en este momento. ¡El juego no se puede instalar!",
                 "update": "Los servidores de Epic están teniendo una gran interrupción en este momento. ¡El juego no se puede actualizar!"
             },
-            "title": "Advertencia"
+            "title": "Advertencia",
+            "wine-change": {
+                "message": "No hemos podido encontrar la versión de vino seleccionada para ejecutar este título ({{selectedWine}}). {{newline}} Hemos encontrado otra, ¿deseas continuar utilizando {{foundWine}}?"
+            }
         },
         "wineprefix": "Elige la ruta del prefijo de Wine",
-        "yes": "SÍ"
+        "yes": "SÍ",
+        "dontShowAgain": "No volver a mostrar"
     },
     "button": {
         "cancel": "Cancel",
@@ -534,7 +540,8 @@
         "steamruntime": "Usar Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "Carpeta de Prefijo de Wine",
-        "wineversion": "Versión de Wine"
+        "wineversion": "Versión de Wine",
+        "disable_logs": "Desactivar los registros"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +593,8 @@
     "status": {
         "installing": "Instalando",
         "logging": "Iniciando sesión…",
-        "processing": "Procesando los archivos, por favor espere"
+        "processing": "Procesando los archivos, por favor espere",
+        "preparing_login": "Preparando el inicio de sesión... "
     },
     "store": "Tienda de Epic",
     "stores": "Tiendas",
@@ -639,5 +647,10 @@
         },
         "release": "Fecha de lanzamiento",
         "size": "Tamaño"
-    }
+    },
+    "accounts": "cuentas",
+    "Amazon": "Amazon",
+    "ALL": "TODO",
+    "analytics": "Análisis",
+    "Amazon Games": "Amazon Games"
 }
