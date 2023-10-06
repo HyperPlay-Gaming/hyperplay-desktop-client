@@ -9,7 +9,7 @@ import ContextMenu from '../Library/components/ContextMenu'
 import SettingsContext from './SettingsContext'
 import LogSettings from './sections/LogSettings'
 import FooterInfo from './sections/FooterInfo'
-import { GeneralSettings, GamesSettings, AdvancedSettings } from './sections'
+import { GeneralSettings, GamesSettings, AdvancedSettings, PatcherSettings } from './sections'
 import { AppSettings, WineInstallation } from 'common/types'
 import { UpdateComponent } from 'frontend/components/UI'
 import { LocationState, SettingsContextType } from 'frontend/types'
@@ -132,6 +132,9 @@ function Settings() {
                 <Tabs.Tab value="accessibility">
                   <div className="menu">{t('accessibility.title')}</div>
                 </Tabs.Tab>
+                <Tabs.Tab value="patcher">
+                  <div className="menu">{'Patcher'}</div>
+                </Tabs.Tab>
                 {!isWin ? (
                   <Tabs.Tab value="wineManager">
                     <div className="menu">
@@ -154,6 +157,9 @@ function Settings() {
               </Tabs.Panel>
               <Tabs.Panel value="accessibility">
                 <Accessibility />
+              </Tabs.Panel>
+              <Tabs.Panel value="patcher">
+                <PatcherSettings />
               </Tabs.Panel>
               {!isWin ? (
                 <Tabs.Panel value="wineManager">
