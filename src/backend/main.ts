@@ -1615,6 +1615,13 @@ ipcMain.handle(
   }
 )
 
+ipcMain.handle(
+  'checkHyperPlayAccessCode',
+  async (_e, channelId: number, accessCode: string) => {
+    return HyperPlayGameManager.validateAccessCode(accessCode, channelId)
+  }
+)
+
 // Simulate keyboard and mouse actions as if the real input device is used
 ipcMain.handle('gamepadAction', async (event, args) => {
   const senderUrl = event.sender.getURL()

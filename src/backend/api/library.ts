@@ -130,3 +130,10 @@ export const getGameSdl = async (appName: string) =>
 export const removeFromLibrary = async (appName: string) => {
   ipcRenderer.send('removeFromLibrary', appName)
 }
+
+export const checkHyperPlayAccessCode = async (
+  channelId: number,
+  accessCode: string
+) => {
+  return ipcRenderer.invoke('checkHyperPlayAccessCode', channelId, accessCode)
+}

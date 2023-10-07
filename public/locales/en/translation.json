@@ -286,6 +286,14 @@
         }
     },
     "hyperplay": {
+        "accesscodes": {
+            "error": {
+                "validation": "Access code is invalid"
+            },
+            "success": {
+                "validation": "Success! Access code is valid"
+            }
+        },
         "analyticsOff": "Analytics is turned off",
         "analyticsOn": "Analytics is turned on",
         "buttons": {

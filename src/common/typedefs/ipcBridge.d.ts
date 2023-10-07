@@ -201,6 +201,10 @@ interface HyperPlayAsyncIPCFunctions {
   removeTempDownloadFiles: (appName: string) => Promise<void>
   getImportFolderPath: () => Promise<string>
   appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
+  checkHyperPlayAccessCode: (
+    channelId: number,
+    accessCode: string
+  ) => Promise<LicenseConfigValidateResult>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
