@@ -18,9 +18,11 @@ import {
   libraryStore,
   sideloadLibrary,
   hyperPlayLibraryStore,
-  configStore
+  configStore,
+  nileLibraryStore
 } from 'frontend/helpers/electronStores'
 import {
+  amazonCategories,
   epicCategories,
   gogCategories,
   hyperPlayCategories,
@@ -50,6 +52,7 @@ class LibraryState {
   gogLibrary: GameInfo[] = []
   sideloadedLibrary: GameInfo[] = []
   hyperPlayLibrary: GameInfo[] = []
+  amazonLibrary: GameInfo[] = []
   nonAvailableGames: GameInfo[] = []
   // array of appName's for games that need updating
   gameUpdates: string[] = []
@@ -137,11 +140,32 @@ class LibraryState {
       this.refreshGogLibrary()
     }
 
+    this.refreshAmazonLibrary()
+    if (
+      storeAuthState.amazon.user_id &&
+      (!this.amazonLibrary.length || !this.amazonLibrary.length)
+    ) {
+      window.api.logInfo('No cache found, getting data from nile...')
+      await window.api.refreshLibrary('nile')
+      this.refreshAmazonLibrary()
+    }
+
     this.hyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
     this.hiddenGames.list = configStore.get('games.hidden', [])
 
     this.refreshing = false
     this.refreshingInTheBackground = true
+  }
+
+  refreshSelectedLibrary = async ({
+    checkForUpdates,
+    runInBackground = true
+  }: RefreshOptions): Promise<void> => {
+    return this.refreshLibrary({
+      checkForUpdates,
+      runInBackground,
+      library: this.category
+    })
   }
 
   refreshLibrary = async ({
@@ -154,7 +178,7 @@ class LibraryState {
     this.refreshing = true
     this.refreshingInTheBackground = runInBackground
 
-    window.api.logInfo('Refreshing Library')
+    window.api.logInfo(`Refreshing ${library} Library`)
     try {
       await window.api.refreshLibrary(library)
       return await this.refresh(library, checkForUpdates)
@@ -196,6 +220,10 @@ class LibraryState {
 
   refreshSideloadedLibrary() {
     this.sideloadedLibrary = sideloadLibrary.get('games', [])
+  }
+
+  refreshAmazonLibrary() {
+    this.amazonLibrary = nileLibraryStore.get('library', [])
   }
 
   setGameStatuses(newGameStatuses: GameStatus[]) {
@@ -285,6 +313,9 @@ class LibraryState {
       this.hyperPlayLibrary.forEach((game) => {
         if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
       })
+      this.amazonLibrary.forEach((game) => {
+        if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
+      })
     }
     return tempArray
   }
@@ -299,6 +330,7 @@ class LibraryState {
     } else {
       const isEpic = epicCategories.includes(this.category)
       const isGog = gogCategories.includes(this.category)
+      const isAmazon = amazonCategories.includes(this.category)
       const epicLibrary = isEpic ? this.epicLibrary : []
       const gogLibrary = isGog ? this.gogLibrary : []
       const sideloadedApps = sideloadedCategories.includes(this.category)
@@ -307,8 +339,15 @@ class LibraryState {
       const HPLibrary = hyperPlayCategories.includes(this.category)
         ? this.hyperPlayLibrary
         : []
+      const amazonLibrary = isAmazon ? this.amazonLibrary : []
 
-      library = [...HPLibrary, ...sideloadedApps, ...epicLibrary, ...gogLibrary]
+      library = [
+        ...HPLibrary,
+        ...sideloadedApps,
+        ...epicLibrary,
+        ...gogLibrary,
+        ...amazonLibrary
+      ]
 
       if (!this.showNonAvailable) {
         const nonAvailableAppNames = Object.fromEntries(

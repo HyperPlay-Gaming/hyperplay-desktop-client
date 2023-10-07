@@ -1,5 +1,5 @@
 import './index.scss'
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next'
 import { Runner } from 'common/types'
 import ToggleSwitch from '../ToggleSwitch'
 import { useNavigate, useLocation } from 'react-router-dom'
-import libraryState from 'frontend/state/libraryState'
 
 interface UninstallModalProps {
   appName: string

@@ -37,19 +37,14 @@ export interface ContextType {
   zoomPercent: number
   setZoomPercent: (newZoomPercent: number) => void
   epic: {
-    username?: string
     login: (sid: string) => Promise<string>
     logout: () => Promise<void>
   }
   gog: {
-    username?: string
     login: (token: string) => Promise<string>
     logout: () => Promise<void>
   }
   amazon: {
-    library: GameInfo[]
-    user_id?: string
-    username?: string
     getLoginData: () => Promise<NileLoginData>
     login: (data: NileRegisterData) => Promise<string>
     logout: () => Promise<void>

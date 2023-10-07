@@ -8,11 +8,12 @@ import { SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY } from 'frontend/components/UI/Ex
 import { Images } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import { observer } from 'mobx-react-lite'
+import storeAuthState from 'frontend/state/storeAuthState'
 
 export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
 
-  const { epic, gog, amazon, activeController, handleExternalLinkDialog } =
+  const { activeController, handleExternalLinkDialog } =
     useContext(ContextProvider)
 
   const settingsPath = '/settings/app/default/general'
@@ -27,9 +28,9 @@ export default observer(function SidebarLinks() {
     localStorage.setItem('scrollPosition', '0')
 
     const shouldRefresh =
-      (epic.username && !libraryState.epicLibrary.length) ||
-      (gog.username && !libraryState.gogLibrary.length) ||
-      (amazon.user_id && !amazon.library.length)
+      (storeAuthState.epic.username && !libraryState.epicLibrary.length) ||
+      (storeAuthState.gog.username && !libraryState.gogLibrary.length) ||
+      (storeAuthState.amazon.user_id && !libraryState.amazonLibrary.length)
     if (shouldRefresh) {
       return libraryState.refreshLibrary({ runInBackground: true })
     }

@@ -27,13 +27,13 @@ import {
   gogConfigStore,
   metricsStore,
   nileConfigStore,
-  nileLibraryStore,
   wineDownloaderInfoStore
 } from 'frontend/helpers/electronStores'
 import { InstallModal } from 'frontend/screens/Library/components'
 import { IpcRendererEvent } from 'electron/renderer'
 import { NileRegisterData } from 'common/types/nile'
 import libraryState from 'frontend/state/libraryState'
+import storeAuthState from './storeAuthState'
 
 const storage: Storage = window.localStorage
 
@@ -49,17 +49,6 @@ interface Props {
 
 interface StateProps {
   category: Category
-  epic: {
-    username?: string
-  }
-  gog: {
-    username?: string
-  }
-  amazon: {
-    library: GameInfo[]
-    user_id?: string
-    username?: string
-  }
   wineVersions: WineVersionInfo[]
   error: boolean
   language: string
@@ -96,17 +85,6 @@ interface StateProps {
 class GlobalState extends PureComponent<Props> {
   state: StateProps = {
     category: (storage.getItem('category') as Category) || 'legendary',
-    epic: {
-      username: configStore.get_nodefault('userInfo.displayName')
-    },
-    gog: {
-      username: gogConfigStore.get_nodefault('userData.username')
-    },
-    amazon: {
-      library: this.loadAmazonLibrary(),
-      user_id: nileConfigStore.get_nodefault('userData.user_id'),
-      username: nileConfigStore.get_nodefault('userData.name')
-    },
     wineVersions: wineDownloaderInfoStore.get('wine-releases', []),
     error: false,
     language: this.props.i18n.language,
@@ -300,12 +278,8 @@ class GlobalState extends PureComponent<Props> {
     const response = await window.api.login(sid)
 
     if (response.status === 'done') {
-      this.setState({
-        epic: {
-          library: [],
-          username: response.data?.displayName
-        }
-      })
+      libraryState.epicLibrary = []
+      storeAuthState.epic.username = response.data?.displayName ?? ''
 
       this.handleSuccessfulLogin('legendary')
     }
@@ -316,12 +290,8 @@ class GlobalState extends PureComponent<Props> {
   epicLogout = async () => {
     this.setState({ refreshing: true })
     await window.api.logoutLegendary().finally(() => {
-      this.setState({
-        epic: {
-          library: [],
-          username: null
-        }
-      })
+      libraryState.epicLibrary = []
+      storeAuthState.epic.username = ''
     })
     console.log('Logging out from epic')
     this.setState({ refreshing: false })
@@ -333,12 +303,8 @@ class GlobalState extends PureComponent<Props> {
     const response = await window.api.authGOG(token)
 
     if (response.status === 'done') {
-      this.setState({
-        gog: {
-          library: [],
-          username: response.data?.username
-        }
-      })
+      libraryState.gogLibrary = []
+      storeAuthState.gog.username = response.data?.username ?? ''
 
       this.handleSuccessfulLogin('gog')
     }
@@ -348,12 +314,8 @@ class GlobalState extends PureComponent<Props> {
 
   gogLogout = async () => {
     await window.api.logoutGOG()
-    this.setState({
-      gog: {
-        library: [],
-        username: null
-      }
-    })
+    libraryState.epicLibrary = []
+    storeAuthState.epic.username = ''
     console.log('Logging out from gog')
     window.location.reload()
   }
@@ -363,13 +325,9 @@ class GlobalState extends PureComponent<Props> {
     const response = await window.api.authAmazon(data)
 
     if (response.status === 'done') {
-      this.setState({
-        amazon: {
-          library: [],
-          user_id: response.user?.user_id,
-          username: response.user?.name
-        }
-      })
+      libraryState.amazonLibrary = []
+      storeAuthState.amazon.user_id = response.user?.user_id ?? ''
+      storeAuthState.amazon.username = response.user?.name ?? ''
 
       this.handleSuccessfulLogin('nile')
     }
@@ -579,7 +537,7 @@ class GlobalState extends PureComponent<Props> {
     window.api.handleGamePush((e: IpcRendererEvent, args: GameInfo) => {
       if (!args.app_name) return
       if (args.runner === 'gog') {
-        const library = [...this.state.gog.library]
+        const library = [...libraryState.gogLibrary]
         const index = library.findIndex(
           (game) => game.app_name === args.app_name
         )
@@ -589,7 +547,7 @@ class GlobalState extends PureComponent<Props> {
         this.setState({
           gog: {
             library: [...library, args],
-            username: this.state.gog.username
+            username: storeAuthState.gog.username
           }
         })
       }
@@ -678,19 +636,16 @@ class GlobalState extends PureComponent<Props> {
   }
 
   render() {
-    const { showInstallModal, language, epic, gog, settingsModalOpen, amazon } =
-      this.state
+    const { showInstallModal, language, settingsModalOpen } = this.state
     const isRTL = RTL_LANGUAGES.includes(language)
 
     const contextValue: ContextType = {
       ...this.state,
       epic: {
-        username: epic.username,
         login: this.epicLogin,
         logout: this.epicLogout
       },
       gog: {
-        username: gog.username,
         login: this.gogLogin,
         logout: this.gogLogout
       },

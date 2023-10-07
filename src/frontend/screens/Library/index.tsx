@@ -16,9 +16,7 @@ import ErrorComponent from 'frontend/components/UI/ErrorComponent'
 import {
   amazonCategories,
   epicCategories,
-  gogCategories,
-  hyperPlayCategories,
-  sideloadedCategories
+  gogCategories
 } from 'frontend/helpers/library'
 import RecentlyPlayed from './components/RecentlyPlayed'
 import { InstallModal } from './components'
@@ -31,6 +29,7 @@ import { Platform } from 'frontend/types'
 import { LibraryTopBar } from './components/LibraryTopBar'
 import libraryState from '../../state/libraryState'
 import { observer } from 'mobx-react-lite'
+import storeAuthState from 'frontend/state/storeAuthState'
 
 const storage = window.localStorage
 
@@ -127,18 +126,25 @@ export default observer(function Library(): JSX.Element {
     setShowModal({ game: appName, show: true, runner, gameInfo })
   }
 
-  useEffect(() => {
-    // This code avoids getting stuck on a empty library after logout of the current selected store
-    if (epicCategories.includes(libraryState.category) && !epic.username) {
-      libraryState.category = 'all'
-    }
-    if (gogCategories.includes(libraryState.category) && !gog.username) {
-      libraryState.category = 'all'
-    }
-    if (amazonCategories.includes(libraryState.category) && !amazon.user_id) {
-      libraryState.category = 'all'
-    }
-  }, [epic.username, gog.username, amazon.username])
+  // This code avoids getting stuck on a empty library after logout of the current selected store
+  if (
+    epicCategories.includes(libraryState.category) &&
+    !storeAuthState.epic.username
+  ) {
+    libraryState.category = 'all'
+  }
+  if (
+    gogCategories.includes(libraryState.category) &&
+    !storeAuthState.gog.username
+  ) {
+    libraryState.category = 'all'
+  }
+  if (
+    amazonCategories.includes(libraryState.category) &&
+    !storeAuthState.amazon.user_id
+  ) {
+    libraryState.category = 'all'
+  }
 
   const showRecentGames = libraryState.showRecentGames
 
@@ -248,10 +254,9 @@ export default observer(function Library(): JSX.Element {
             type="tertiary"
             title={t('generic.library.refresh', 'Refresh Library')}
             onClick={async () =>
-              libraryState.refreshLibrary({
+              libraryState.refreshSelectedLibrary({
                 checkForUpdates: true,
-                runInBackground: false,
-                library: libraryState.category
+                runInBackground: false
               })
             }
           >

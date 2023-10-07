@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 
-import React, { useContext } from 'react'
+import React from 'react'
 
 import { useTranslation } from 'react-i18next'
 
@@ -13,9 +13,9 @@ import {
   Menu
 } from '@hyperplay/ui'
 import { Category } from 'frontend/types'
-import ContextProvider from 'frontend/state/ContextProvider'
 import { observer } from 'mobx-react-lite'
 import libraryState from '../../../../state/libraryState'
+import storeAuthState from 'frontend/state/storeAuthState'
 
 export interface LibraryTopBarInterface {
   filters: DropdownItemType[]
@@ -36,12 +36,11 @@ export const LibraryTopBar = observer(
     otherFiltersData
   }: LibraryTopBarInterface): JSX.Element => {
     const { t } = useTranslation()
-    const { epic, gog, amazon } = useContext(ContextProvider)
     const category = libraryState.category
 
-    const isGOGLoggedin = gog.username
-    const isEpicLoggedin = epic.username
-    const isAmazonLoggedin = amazon.username
+    const isGOGLoggedin = storeAuthState.gog.username
+    const isEpicLoggedin = storeAuthState.epic.username
+    const isAmazonLoggedin = storeAuthState.amazon.username
 
     return (
       <Tabs
@@ -66,7 +65,7 @@ export const LibraryTopBar = observer(
             </Tabs.Tab>
           )}
           {isAmazonLoggedin && (
-            <Tabs.Tab value="amazon">
+            <Tabs.Tab value="nile">
               <div className="menu">Amazon</div>
             </Tabs.Tab>
           )}

@@ -15,6 +15,14 @@ function fixFilter(text: string) {
   return text.replaceAll(regex, '')
 }
 
+const RUNNER_TO_STORE = {
+  legendary: 'Epic',
+  gog: 'GOG',
+  hyperplay: 'HyperPlay',
+  sideloaded: 'Other',
+  nile: 'Amazon'
+}
+
 export default observer(function SearchBar() {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -23,17 +31,17 @@ export default observer(function SearchBar() {
 
   const list = useMemo(() => {
     return [
-        ...libraryState.epicLibrary,
-        ...libraryState.gogLibrary,
-        ...libraryState.sideloadedLibrary,
-        ...libraryState.hyperPlayLibrary,
-        ...libraryState.amazonLibrary
-      ]
+      ...libraryState.epicLibrary,
+      ...libraryState.gogLibrary,
+      ...libraryState.sideloadedLibrary,
+      ...libraryState.hyperPlayLibrary,
+      ...libraryState.amazonLibrary
+    ]
       .filter(Boolean)
       .filter((el) => {
         return (
           !el.install.is_dlc &&
-          new RegExp(fixFilter(filterText), 'i').test(el.title)
+          new RegExp(fixFilter(libraryState.filterText), 'i').test(el.title)
         )
       })
       .sort((g1, g2) => (g1.title < g2.title ? -1 : 1))
@@ -70,7 +78,7 @@ export default observer(function SearchBar() {
     }
   }, [input])
 
-  const handleClick = (game: GameInfo)) => {
+  const handleClick = (game: GameInfo) => {
     libraryState.filterText = ''
     if (input.current) {
       input.current.value = ''
@@ -81,21 +89,6 @@ export default observer(function SearchBar() {
         })
       }
     }
-  }
-
-  const getGameInfoByAppTitle = (title: string) => {
-    return (
-      getGameInfoByAppTitleAndLibrary(libraryState.epicLibrary, title) ||
-      getGameInfoByAppTitleAndLibrary(libraryState.gogLibrary, title) ||
-      getGameInfoByAppTitleAndLibrary(libraryState.sideloadedLibrary, title)
-    )
-  }
-
-  const getGameInfoByAppTitleAndLibrary = (
-    library: GameInfo[],
-    title: string
-  ) => {
-    return library.filter((g: GameInfo) => g.title === title).at(0)
   }
 
   return (
