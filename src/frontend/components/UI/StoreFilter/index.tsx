@@ -8,11 +8,12 @@ import libraryState from 'frontend/state/libraryState'
 import { Category } from 'frontend/types'
 
 export default observer(function StoreFilter() {
-  const { gog, epic } = useContext(ContextProvider)
+  const { gog, epic, amazon } = useContext(ContextProvider)
   const { t } = useTranslation()
 
   const isGOGLoggedin = gog.username
   const isEpicLoggedin = epic.username
+  const isAmazonLoggedin = amazon.user_id
   const category = libraryState.category
   const handleCategory = (category: Category) =>
     (libraryState.category = category)
@@ -71,6 +72,26 @@ export default observer(function StoreFilter() {
             {t('Other')}
           </button>
         )}
+        {isAmazonLoggedin && (
+          <button
+            className={classNames('FormControl__button', {
+              active: category === 'nile'
+            })}
+            title={`${t('header.store')}: ${t('amazon')}`}
+            onClick={() => handleCategory('nile')}
+          >
+            AMAZON
+          </button>
+        )}
+        <button
+          className={classNames('FormControl__button', {
+            active: category === 'sideload'
+          })}
+          title={`${t('header.store')}: ${t('Other')}`}
+          onClick={() => handleCategory('sideload')}
+        >
+          {t('Other')}
+        </button>
       </FormControl>
     </div>
   )

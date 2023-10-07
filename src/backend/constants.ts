@@ -39,9 +39,8 @@ const currentGlobalConfigVersion: GlobalConfigVersion = 'v0'
 const flatPakHome = env.XDG_DATA_HOME?.replace('/data', '') || homedir()
 const userHome = homedir()
 const configFolder = app.getPath('appData')
-const legendaryConfigPath = isLinux
-  ? join(configFolder, 'legendary')
-  : join(userHome, '.config', 'legendary')
+const appFolder = join(configFolder, 'hyperplay')
+const legendaryConfigPath = join(appFolder, 'legendaryConfig', 'legendary')
 const appConfigFolder = join(configFolder, 'hyperplay')
 const configPath = join(appConfigFolder, 'config.json')
 const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
@@ -49,21 +48,40 @@ const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
 const toolsPath = join(appConfigFolder, 'tools')
 const iconsFolder = join(appConfigFolder, 'icons')
 const installPath = join(homedir(), 'Games', 'HyperPlay')
-const defaultWinePrefix = join(homedir(), 'Games', 'HyperPlay', 'Prefixes')
+const defaultWinePrefix = join(
+  homedir(),
+  'Games',
+  'HyperPlay',
+  'Prefixes',
+  'default'
+)
 const anticheatDataPath = join(appConfigFolder, 'areweanticheatyet.json')
+const nileConfigPath = join(appFolder, 'nile_config', 'nile')
 const runtimePath = join(toolsPath, 'runtimes')
 const userInfo = join(legendaryConfigPath, 'user.json')
 const imagesCachePath = join(appConfigFolder, 'images-cache')
 
-const { currentLogFile, lastLogFile, legendaryLogFile, gogdlLogFile } =
-  createNewLogFileAndClearOldOnes()
+const {
+  currentLogFile,
+  lastLogFile,
+  legendaryLogFile,
+  gogdlLogFile,
+  nileLogFile
+} = createNewLogFileAndClearOldOnes()
 
 const publicDir = resolve(__dirname, '..', app.isPackaged ? '' : '../public')
+const gogdlAuthConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
 const icon = fixAsarPath(join(publicDir, 'app_icon.png'))
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
 const iconLight = fixAsarPath(join(publicDir, 'trayIconLight24x24.png'))
+const vulkanHelperBin = fixAsarPath(
+  join(publicDir, 'bin', process.platform, 'vulkan-helper')
+)
 const installed = join(legendaryConfigPath, 'installed.json')
 const legendaryMetadata = join(legendaryConfigPath, 'metadata')
+const nileInstalled = join(nileConfigPath, 'installed.json')
+const nileLibrary = join(nileConfigPath, 'library.json')
+const nileUserData = join(nileConfigPath, 'user.json')
 const fallBackImage = 'fallback'
 const epicLoginUrl = 'https://legendary.gl/epiclogin'
 const sidInfoUrl =
@@ -224,6 +242,7 @@ export {
   lastLogFile,
   legendaryLogFile,
   gogdlLogFile,
+  nileLogFile,
   discordLink,
   twitterLink,
   execOptions,
@@ -267,11 +286,17 @@ export {
   isCLINoGui,
   publicDir,
   GITHUB_API,
+  gogdlAuthConfig,
   wineprefixFAQ,
   hyperplaySite,
   customThemesWikiLink,
   onboardLocalStore,
   eventsToCloseMetaMaskPopupOn,
   valistListingsApiUrl,
-  mainReleaseChannelName
+  mainReleaseChannelName,
+  vulkanHelperBin,
+  nileConfigPath,
+  nileInstalled,
+  nileLibrary,
+  nileUserData
 }

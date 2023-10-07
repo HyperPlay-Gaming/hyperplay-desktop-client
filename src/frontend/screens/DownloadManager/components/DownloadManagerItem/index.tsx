@@ -27,6 +27,7 @@ import { LegendaryInstallInfo } from 'common/types/legendary'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
+import { NileInstallInfo } from 'common/types/nile'
 
 type Props = {
   element?: DMQueueElement
@@ -49,6 +50,7 @@ type InstallInfo =
   | GogInstallInfo
   | LegendaryInstallInfo
   | HyperPlayInstallInfo
+  | NileInstallInfo
   | null
 
 const DownloadManagerItem = observer(({ element, current, state }: Props) => {
@@ -75,7 +77,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const library = [
     ...libraryState.epicLibrary,
     ...libraryState.gogLibrary,
-    ...libraryState.hyperPlayLibrary
+    ...libraryState.hyperPlayLibrary,
+    ...libraryState.amazonLibrary
   ]
 
   const { params, addToQueueTime, endTime, type, startTime } = element

@@ -11,7 +11,7 @@ import i18next from 'i18next'
 import { configFolder } from 'backend/constants'
 import { join } from 'path'
 import { rmSync } from 'graceful-fs'
-import { clean } from 'easydl/dist/utils'
+import { clean } from 'hp-easydl/dist/utils'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',

@@ -65,15 +65,22 @@ function App() {
             />
             <Route path="epicstore" element={<WebView key="epicstore" />} />
             <Route path="gogstore" element={<WebView key="gogstore" />} />
+            <Route path="amazonstore" element={<WebView />} />
             <Route path="wiki" element={<WebView key="wiki" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
+            <Route
+              path="metamaskSnaps"
+              element={<WebView key="metamaskSnaps" />}
+            />
             <Route
               path="metamaskSecretPhrase"
               element={
                 <MetaMaskHome path="home.html#onboarding/import-with-recovery-phrase" />
               }
             />
-            <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />} />
+            <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
+              <Route path=":page" element={<MetaMaskPortfolio />} />
+            </Route>
             <Route path="/gamepage">
               <Route path=":runner">
                 <Route path=":appName" element={<GamePage />} />

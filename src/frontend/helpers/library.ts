@@ -188,5 +188,6 @@ export const epicCategories = ['all', 'legendary', 'epic']
 export const gogCategories = ['all', 'gog']
 export const sideloadedCategories = ['all', 'sideload']
 export const hyperPlayCategories = ['all', 'hyperplay']
+export const amazonCategories = ['all', 'nile', 'amazon']
 
 export { install, launch, repair, updateGame }

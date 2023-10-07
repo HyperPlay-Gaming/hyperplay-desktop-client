@@ -16,6 +16,7 @@ interface TextInputFieldProps {
   warning?: ReactNode
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void
   maxLength?: number
+  isError?: boolean
 }
 
 const TextInputField = ({
@@ -30,7 +31,8 @@ const TextInputField = ({
   afterInput,
   warning,
   onBlur,
-  maxLength
+  maxLength,
+  isError
 }: TextInputFieldProps) => {
   const { isRTL } = useContext(ContextProvider)
 
@@ -51,6 +53,7 @@ const TextInputField = ({
         placeholder={placeholder}
         onBlur={onBlur}
         maxLength={maxLength}
+        className={isError ? 'inputFieldError' : ''}
       />
       {value && warning}
       {afterInput}

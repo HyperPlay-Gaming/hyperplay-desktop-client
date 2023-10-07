@@ -205,7 +205,7 @@ export default function GamesSubmenu({
   useEffect(() => {
     // Get steam id and set direct proton db link
     window.api
-      .getWikiGameInfo(title, runner === 'gog' ? appName : undefined)
+      .getWikiGameInfo(title, appName, runner)
       .then((info: WikiInfo) => {
         if (info?.pcgamingwiki?.steamID) {
           setProtonDBurl(
@@ -313,7 +313,7 @@ export default function GamesSubmenu({
                 ))}
             </>
           )}
-          {!isSideloaded && (
+          {!isSideloaded && storeUrl && (
             <NavLink
               className="link button is-text is-link"
               to={`/store-page?store-url=${storeUrl}`}

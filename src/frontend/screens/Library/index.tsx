@@ -13,6 +13,13 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import GamesList from './components/GamesList'
 import { FilterItem, GameInfo, Runner } from 'common/types'
 import ErrorComponent from 'frontend/components/UI/ErrorComponent'
+import {
+  amazonCategories,
+  epicCategories,
+  gogCategories,
+  hyperPlayCategories,
+  sideloadedCategories
+} from 'frontend/helpers/library'
 import RecentlyPlayed from './components/RecentlyPlayed'
 import { InstallModal } from './components'
 import './index.css'
@@ -24,7 +31,6 @@ import { Platform } from 'frontend/types'
 import { LibraryTopBar } from './components/LibraryTopBar'
 import libraryState from '../../state/libraryState'
 import { observer } from 'mobx-react-lite'
-import { epicCategories, gogCategories } from 'frontend/helpers/library'
 
 const storage = window.localStorage
 
@@ -36,7 +42,7 @@ type ModalState = {
 }
 
 export default observer(function Library(): JSX.Element {
-  const { layout, epic, gog, platform } = useContext(ContextProvider)
+  const { layout, epic, gog, platform, amazon } = useContext(ContextProvider)
   const { t } = useTranslation()
 
   const libraryToShow = libraryState.library
@@ -129,11 +135,14 @@ export default observer(function Library(): JSX.Element {
     if (gogCategories.includes(libraryState.category) && !gog.username) {
       libraryState.category = 'all'
     }
-  }, [epic.username, gog.username])
+    if (amazonCategories.includes(libraryState.category) && !amazon.user_id) {
+      libraryState.category = 'all'
+    }
+  }, [epic.username, gog.username, amazon.username])
 
   const showRecentGames = libraryState.showRecentGames
 
-  if (!epic && !gog) {
+  if (!epic && !gog && !amazon) {
     return (
       <ErrorComponent
         message={t(

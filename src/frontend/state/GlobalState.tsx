@@ -16,9 +16,9 @@ import {
   DialogModalOptions,
   ExternalLinkDialogOptions
 } from 'frontend/types'
-import { TFunction, withTranslation } from 'react-i18next'
+import { withTranslation } from 'react-i18next'
 import { getGameInfo, launch, notify } from '../helpers'
-import { i18n, t } from 'i18next'
+import { TFunction, i18n, t } from 'i18next'
 
 import ContextProvider from './ContextProvider'
 
@@ -26,9 +26,13 @@ import {
   configStore,
   gogConfigStore,
   metricsStore,
+  nileConfigStore,
+  nileLibraryStore,
   wineDownloaderInfoStore
 } from 'frontend/helpers/electronStores'
 import { InstallModal } from 'frontend/screens/Library/components'
+import { IpcRendererEvent } from 'electron/renderer'
+import { NileRegisterData } from 'common/types/nile'
 import libraryState from 'frontend/state/libraryState'
 
 const storage: Storage = window.localStorage
@@ -49,6 +53,11 @@ interface StateProps {
     username?: string
   }
   gog: {
+    username?: string
+  }
+  amazon: {
+    library: GameInfo[]
+    user_id?: string
     username?: string
   }
   wineVersions: WineVersionInfo[]
@@ -92,6 +101,11 @@ class GlobalState extends PureComponent<Props> {
     },
     gog: {
       username: gogConfigStore.get_nodefault('userData.username')
+    },
+    amazon: {
+      library: this.loadAmazonLibrary(),
+      user_id: nileConfigStore.get_nodefault('userData.user_id'),
+      username: nileConfigStore.get_nodefault('userData.name')
     },
     wineVersions: wineDownloaderInfoStore.get('wine-releases', []),
     error: false,
@@ -344,6 +358,40 @@ class GlobalState extends PureComponent<Props> {
     window.location.reload()
   }
 
+  amazonLogin = async (data: NileRegisterData) => {
+    console.log('logging amazon')
+    const response = await window.api.authAmazon(data)
+
+    if (response.status === 'done') {
+      this.setState({
+        amazon: {
+          library: [],
+          user_id: response.user?.user_id,
+          username: response.user?.name
+        }
+      })
+
+      this.handleSuccessfulLogin('nile')
+    }
+
+    return response.status
+  }
+
+  amazonLogout = async () => {
+    await window.api.logoutAmazon()
+    this.setState({
+      amazon: {
+        library: [],
+        user_id: null,
+        username: null
+      }
+    })
+    console.log('Logging out from amazon')
+    window.location.reload()
+  }
+
+  getAmazonLoginData = async () => window.api.getAmazonLoginData()
+
   handleSettingsModalOpen = (
     value: boolean,
     type?: 'settings' | 'log',
@@ -528,12 +576,40 @@ class GlobalState extends PureComponent<Props> {
       }
     )
 
+    window.api.handleGamePush((e: IpcRendererEvent, args: GameInfo) => {
+      if (!args.app_name) return
+      if (args.runner === 'gog') {
+        const library = [...this.state.gog.library]
+        const index = library.findIndex(
+          (game) => game.app_name === args.app_name
+        )
+        if (index !== -1) {
+          library.splice(index, 1)
+        }
+        this.setState({
+          gog: {
+            library: [...library, args],
+            username: this.state.gog.username
+          }
+        })
+      }
+    })
+
     const legendaryUser = configStore.has('userInfo')
     const gogUser = gogConfigStore.has('userData')
+    const amazonUser = nileConfigStore.has('userData')
     const platform = await window.api.getPlatform()
 
     if (legendaryUser) {
       await window.api.getUserInfo()
+    }
+
+    if (amazonUser) {
+      await window.api.getAmazonUserInfo()
+    }
+
+    if (amazonUser) {
+      await window.api.getAmazonUserInfo()
     }
 
     if (!libraryState.gameUpdates.length) {
@@ -543,7 +619,7 @@ class GlobalState extends PureComponent<Props> {
 
     this.setState({ platform })
 
-    if (legendaryUser || gogUser) {
+    if (legendaryUser || gogUser || amazonUser) {
       libraryState.refreshLibrary({
         checkForUpdates: true,
         runInBackground: Boolean(libraryState.epicLibrary.length)
@@ -602,7 +678,7 @@ class GlobalState extends PureComponent<Props> {
   }
 
   render() {
-    const { showInstallModal, language, epic, gog, settingsModalOpen } =
+    const { showInstallModal, language, epic, gog, settingsModalOpen, amazon } =
       this.state
     const isRTL = RTL_LANGUAGES.includes(language)
 
@@ -617,6 +693,11 @@ class GlobalState extends PureComponent<Props> {
         username: gog.username,
         login: this.gogLogin,
         logout: this.gogLogout
+      },
+      amazon: {
+        getLoginData: this.getAmazonLoginData,
+        login: this.amazonLogin,
+        logout: this.amazonLogout
       },
       handleLayout: this.handleLayout,
       setLanguage: this.setLanguage,

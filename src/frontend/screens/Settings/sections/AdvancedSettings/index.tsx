@@ -15,7 +15,12 @@ import classNames from 'classnames'
 import SettingsContext from '../../SettingsContext'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { GameStatus } from 'common/types'
-import { AltGOGdlBin, AltLegendaryBin, DownloadNoHTTPS } from '../../components'
+import {
+  AltGOGdlBin,
+  AltLegendaryBin,
+  DisableLogs,
+  DownloadNoHTTPS
+} from '../../components'
 import libraryState from 'frontend/state/libraryState'
 
 export default function AdvancedSettings() {
@@ -173,6 +178,8 @@ export default function AdvancedSettings() {
       <AltGOGdlBin />
 
       <DownloadNoHTTPS />
+
+      <DisableLogs />
 
       <hr />
 

@@ -22,24 +22,27 @@ export default observer(function SearchBar() {
   const input = useRef<HTMLInputElement>(null)
 
   const list = useMemo(() => {
-    const library = new Set(
-      [
+    return [
         ...libraryState.epicLibrary,
         ...libraryState.gogLibrary,
         ...libraryState.sideloadedLibrary,
-        ...libraryState.hyperPlayLibrary
+        ...libraryState.hyperPlayLibrary,
+        ...libraryState.amazonLibrary
       ]
-        .filter(Boolean)
-        .map((g) => g.title)
-        .sort()
-    )
-    return [...library].filter((i) =>
-      new RegExp(fixFilter(libraryState.filterText), 'i').test(i)
-    )
+      .filter(Boolean)
+      .filter((el) => {
+        return (
+          !el.install.is_dlc &&
+          new RegExp(fixFilter(filterText), 'i').test(el.title)
+        )
+      })
+      .sort((g1, g2) => (g1.title < g2.title ? -1 : 1))
   }, [
     libraryState.epicLibrary,
     libraryState.gogLibrary,
-    libraryState.filterText
+    libraryState.filterText,
+    libraryState.sideloadedLibrary,
+    libraryState.amazonLibrary
   ])
 
   // we have to use an event listener instead of the react
@@ -67,12 +70,10 @@ export default observer(function SearchBar() {
     }
   }, [input])
 
-  const handleClick = (title: string) => {
+  const handleClick = (game: GameInfo)) => {
     libraryState.filterText = ''
     if (input.current) {
       input.current.value = ''
-
-      const game: GameInfo | undefined = getGameInfoByAppTitle(title)
 
       if (game !== undefined) {
         navigate(`/gamepage/${game.runner}/${game.app_name}`, {
@@ -119,12 +120,10 @@ export default observer(function SearchBar() {
         <>
           <ul className="autoComplete body-sm">
             {list.length > 0 &&
-              list.map((title, i) => (
-                <li
-                  onClick={(e) => handleClick(e.currentTarget.innerText)}
-                  key={i}
-                >
-                  {title}
+              list.map((game) => (
+                <li onClick={() => handleClick(game)} key={game.app_name}>
+                  {game.title}{' '}
+                  <span>({RUNNER_TO_STORE[game.runner] || game.runner})</span>
                 </li>
               ))}
           </ul>

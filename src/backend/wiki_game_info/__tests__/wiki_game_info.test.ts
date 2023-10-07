@@ -1,4 +1,3 @@
-import { HowLongToBeatEntry } from 'howlongtobeat'
 import {
   AppleGamingWikiInfo,
   WikiInfo,
@@ -8,7 +7,6 @@ import { wikiGameInfoStore } from '../electronStore'
 import { getWikiGameInfo } from '../wiki_game_info'
 import * as PCGamingWiki from '../pcgamingwiki/utils'
 import * as AppleGamingWiki from '../applegamingwiki/utils'
-import * as HowLongToBeat from '../howlongtobeat/utils'
 import { logError } from '../../logger/logger'
 
 jest.mock('electron-store')
@@ -28,9 +26,6 @@ describe('getWikiGameInfo', () => {
     const mockAppleGamingWiki = jest
       .spyOn(AppleGamingWiki, 'getInfoFromAppleGamingWiki')
       .mockResolvedValue(testAppleGamingWikiInfo)
-    const mockHowLongToBeat = jest
-      .spyOn(HowLongToBeat, 'getHowLongToBeat')
-      .mockResolvedValue(testHowLongToBeat)
 
     wikiGameInfoStore.set('The Witcher 3', testExtraGameInfo)
 
@@ -51,7 +46,6 @@ describe('getWikiGameInfo', () => {
 
     expect(mockPCGamingWiki).not.toBeCalled()
     expect(mockAppleGamingWiki).not.toBeCalled()
-    expect(mockHowLongToBeat).not.toBeCalled()
   })
 
   test('cached data outdated', async () => {
@@ -64,9 +58,6 @@ describe('getWikiGameInfo', () => {
     const mockAppleGamingWiki = jest
       .spyOn(AppleGamingWiki, 'getInfoFromAppleGamingWiki')
       .mockResolvedValue(testAppleGamingWikiInfo)
-    const mockHowLongToBeat = jest
-      .spyOn(HowLongToBeat, 'getHowLongToBeat')
-      .mockResolvedValue(testHowLongToBeat)
 
     wikiGameInfoStore.set('The Witcher 3', {
       ...testExtraGameInfo,
@@ -90,7 +81,6 @@ describe('getWikiGameInfo', () => {
 
     expect(mockPCGamingWiki).toBeCalled()
     expect(mockAppleGamingWiki).toBeCalled()
-    expect(mockHowLongToBeat).toBeCalled()
   })
 
   test('catches throws', async () => {
@@ -112,21 +102,6 @@ describe('getWikiGameInfo', () => {
   })
 })
 
-const testHowLongToBeat = {
-  id: '1234',
-  name: 'The Witcher 3',
-  description: 'Game',
-  platforms: ['PC'],
-  imageUrl: 'image/url',
-  timeLabels: [['TimeLabels']],
-  gameplayMain: 100,
-  gameplayMainExtra: 150,
-  gameplayCompletionist: 200,
-  similarity: 1234,
-  searchTerm: 'term',
-  playableOn: ['steam']
-} as HowLongToBeatEntry
-
 const testAppleGamingWikiInfo = {
   crossoverRating: 'perfect',
   crossoverLink: 'the-witcher-3-wild-hunt'
@@ -146,13 +121,11 @@ const testPCGamingWikiInfo = {
     score: '40',
     urlid: 'the-witcher-3-wild-hunt'
   },
-  howLongToBeatID: '10101',
   direct3DVersions: ['11', '12']
 } as PCGamingWikiInfo
 
 const testExtraGameInfo = {
   timestampLastFetch: Date(),
   pcgamingwiki: testPCGamingWikiInfo,
-  applegamingwiki: testAppleGamingWikiInfo,
-  howlongtobeat: testHowLongToBeat
+  applegamingwiki: testAppleGamingWikiInfo
 } as WikiInfo

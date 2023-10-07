@@ -83,6 +83,10 @@ export const handleRefreshLibrary = (
   callback: (event: Electron.IpcRendererEvent, runner: Runner) => void
 ) => ipcRenderer.on('refreshLibrary', callback)
 
+export const handleGamePush = (
+  callback: (event: Electron.IpcRendererEvent, game: GameInfo) => void
+) => ipcRenderer.on('pushGameToLibrary', callback)
+
 export const removeRecentGame = async (appName: string) =>
   ipcRenderer.invoke('removeRecent', appName)
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -113,6 +117,23 @@ export const onLibraryChange = async (
   }
 }
 
+export const getGameOverride = async () => ipcRenderer.invoke('getGameOverride')
+
+/**
+ * Get List of Selective Download Tags for games that supports it (e.g. Fortnite, FallOut New Vegas) on Epic Games
+ * @param appName string
+ * @returns
+ */
+export const getGameSdl = async (appName: string) =>
+  ipcRenderer.invoke('getGameSdl', appName)
+
 export const removeFromLibrary = async (appName: string) => {
   ipcRenderer.send('removeFromLibrary', appName)
+}
+
+export const checkHyperPlayAccessCode = async (
+  channelId: number,
+  accessCode: string
+) => {
+  return ipcRenderer.invoke('checkHyperPlayAccessCode', channelId, accessCode)
 }

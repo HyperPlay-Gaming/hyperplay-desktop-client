@@ -1,5 +1,5 @@
 import './index.scss'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
   Dialog,
   DialogContent,
@@ -9,7 +9,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { Runner } from 'common/types'
 import ToggleSwitch from '../ToggleSwitch'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import libraryState from 'frontend/state/libraryState'
 
 interface UninstallModalProps {
@@ -33,6 +33,7 @@ const UninstallModal: React.FC<UninstallModalProps> = function ({
   const { t } = useTranslation('gamepage')
   const [showUninstallModal, setShowUninstallModal] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
 
   const checkIfIsNative = async () => {
     // This assumes native games are installed should be changed in the future
@@ -48,7 +49,7 @@ const UninstallModal: React.FC<UninstallModalProps> = function ({
     })
     setIsNative(isNative)
 
-    if (!isNative || isDlc) {
+    if (isDlc) {
       return
     }
 
@@ -86,11 +87,10 @@ const UninstallModal: React.FC<UninstallModalProps> = function ({
       deletePrefixChecked,
       deleteSettingsChecked
     )
-    if (runner === 'sideload') {
-      navigate('/')
+    if (runner === 'sideload' && location.pathname.match(/gamepage/)) {
+      navigate('/#library')
     }
     storage.removeItem(appName)
-    libraryState.refreshLibrary({ fullRefresh: true, checkForUpdates: false })
   }
 
   const showWineCheckbox = !isNative && !isDlc

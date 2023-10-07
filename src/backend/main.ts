@@ -51,7 +51,9 @@ import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
 import { GOGUser } from './storeManagers/gog/user'
+import { NileUser } from './storeManagers/nile/user'
 import setup from './storeManagers/gog/setup'
+import nileSetup from './storeManagers/nile/setup'
 import {
   clearCache,
   execAsync,
@@ -73,7 +75,8 @@ import {
   getShellPath,
   wait,
   checkWineBeforeLaunch,
-  downloadDefaultWine
+  downloadDefaultWine,
+  getNileVersion
 } from './utils'
 import {
   configStore,
@@ -107,16 +110,15 @@ import {
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
+  initLogger,
   logChangedSetting,
   logError,
   logInfo,
   LogPrefix,
+  logsDisabled,
   logWarning
 } from './logger/logger'
-import {
-  gameInfoStore,
-  libraryStore
-} from 'backend/storeManagers/legendary/electronStores'
+import { gameInfoStore } from 'backend/storeManagers/legendary/electronStores'
 import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
@@ -146,6 +148,12 @@ import { addGameToLibrary } from './storeManagers/hyperplay/library'
 import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
+import {
+  getGOGPlaytime,
+  syncQueuedPlaytimeGOG,
+  updateGOGPlaytime
+} from 'backend/storeManagers/gog/games'
+import { playtimeSyncQueue } from './storeManagers/gog/electronStores'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
 import {
   autoUpdate,
@@ -169,6 +177,13 @@ function initSentry() {
 if (metricsAreEnabled()) {
   initSentry()
 }
+
+import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
+import { addNewApp } from './storeManagers/sideload/library'
+import {
+  getGameOverride,
+  getGameSdl
+} from 'backend/storeManagers/legendary/library'
 
 app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
@@ -257,16 +272,6 @@ const prodAppUrl = `file://${path.join(
 )}`
 const loadMainWindowURL = function () {
   if (!app.isPackaged && process.env.CI !== 'e2e') {
-    /* if (!process.env.HEROIC_NO_REACT_DEVTOOLS) {
-      import('electron-devtools-installer').then((devtools) => {
-        const { default: installExtension, REACT_DEVELOPER_TOOLS } = devtools
-
-        installExtension(REACT_DEVELOPER_TOOLS).catch((err: string) => {
-          logWarning(['An error occurred: ', err], LogPrefix.Backend)
-        })
-      })
-    }
-  */
     mainWindow.loadURL(devAppUrl)
     // Open the DevTools.
     mainWindow.webContents.openDevTools()
@@ -333,6 +338,8 @@ if (!gotTheLock) {
 
     initStoreManagers()
 
+    initLogger()
+
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )
@@ -390,7 +397,10 @@ if (!gotTheLock) {
       const isLoggedIn = LegendaryUser.isLoggedIn()
 
       if (!isLoggedIn) {
-        logInfo('User Not Found, removing it from Store', LogPrefix.Backend)
+        logInfo('User Not Found, removing it from Store', {
+          prefix: LogPrefix.Backend,
+          forceLog: true
+        })
         configStore.delete('userInfo')
       }
 
@@ -402,6 +412,10 @@ if (!gotTheLock) {
       //update metadata for all hp store games in library on launch
       HyperPlayLibraryManager.refresh()
     })
+
+    // Make sure lock is not present when starting up
+    playtimeSyncQueue.delete('lock')
+    runOnceWhenOnline(syncQueuedPlaytimeGOG)
 
     await i18next.use(Backend).init({
       backend: {
@@ -674,12 +688,13 @@ async function runWineCommandOnGame(
     logError('runWineCommand called on native game!', LogPrefix.Gog)
     return { stdout: '', stderr: '' }
   }
-  const { folder_name } = gameManagerMap[runner].getGameInfo(appName)
+  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
   const gameSettings = await gameManagerMap[runner].getSettings(appName)
 
   return runWineCommand({
     gameSettings,
     installFolderName: folder_name,
+    gameInstallPath: install.install_path,
     commandParts,
     wait,
     protonVerb,
@@ -744,8 +759,11 @@ ipcMain.handle('getMaxCpus', () => cpus().length)
 ipcMain.handle('getAppVersion', () => app.getVersion())
 ipcMain.handle('getLegendaryVersion', async () => getLegendaryVersion())
 ipcMain.handle('getGogdlVersion', async () => getGogdlVersion())
+ipcMain.handle('getNileVersion', getNileVersion)
 ipcMain.handle('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 ipcMain.handle('isFlatpak', () => isFlatpak)
+ipcMain.handle('getGameOverride', async () => getGameOverride())
+ipcMain.handle('getGameSdl', async (event, appName) => getGameSdl(appName))
 
 ipcMain.handle('getPlatform', () => process.platform)
 
@@ -854,6 +872,8 @@ ipcMain.handle('getUserInfo', async () => {
   return LegendaryUser.getUserInfo()
 })
 
+ipcMain.handle('getAmazonUserInfo', async () => NileUser.getUserData())
+
 // Checks if the user have logged in with Legendary already
 ipcMain.handle('isLoggedIn', LegendaryUser.isLoggedIn)
 
@@ -864,6 +884,10 @@ ipcMain.on('logoutGOG', GOGUser.logout)
 ipcMain.handle('getLocalPeloadPath', async () => {
   return fixAsarPath(join(publicDir, 'webviewPreload.js'))
 })
+
+ipcMain.handle('getAmazonLoginData', NileUser.getLoginData)
+ipcMain.handle('authAmazon', async (event, data) => NileUser.login(data))
+ipcMain.handle('logoutAmazon', NileUser.logout)
 
 ipcMain.handle('getAlternativeWine', async () =>
   GlobalConfig.get().getAlternativeWine()
@@ -1087,6 +1111,13 @@ ipcMain.handle(
         '\n'
     )
 
+    if (logsDisabled) {
+      appendFileSync(
+        logFileLocation,
+        'IMPORTANT: Logs are disabled. Enable logs before reporting an issue.'
+      )
+    }
+
     const isNative = gameManagerMap[runner].isNative(appName)
 
     // check if isNative, if not, check if wine is valid
@@ -1145,6 +1176,10 @@ ipcMain.handle(
     const totalPlaytime =
       sessionPlaytime + tsStore.get(`${appName}.totalPlayed`, 0)
     tsStore.set(`${appName}.totalPlayed`, Math.floor(totalPlaytime))
+
+    if (runner === 'gog') {
+      await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
+    }
 
     await addRecentGame(game)
 
@@ -1580,6 +1615,13 @@ ipcMain.handle(
   }
 )
 
+ipcMain.handle(
+  'checkHyperPlayAccessCode',
+  async (_e, channelId: number, accessCode: string) => {
+    return HyperPlayGameManager.validateAccessCode(accessCode, channelId)
+  }
+)
+
 // Simulate keyboard and mouse actions as if the real input device is used
 ipcMain.handle('gamepadAction', async (event, args) => {
   const senderUrl = event.sender.getURL()
@@ -1707,6 +1749,9 @@ ipcMain.handle(
     if (runner === 'gog' && updated) {
       await setup(appName)
     }
+    if (runner === 'nile' && updated) {
+      await nileSetup(appName)
+    }
 
     // FIXME: Why are we using `runinprefix` here?
     return runWineCommandOnGame(runner, appName, {
@@ -1765,6 +1810,17 @@ ipcMain.handle('pathExists', async (e, path: string) => {
   return existsSync(path)
 })
 
+ipcMain.handle(
+  'getPlaytimeFromRunner',
+  async (e, runner, appName): Promise<number | undefined> => {
+    if (runner === 'gog') {
+      return getGOGPlaytime(appName)
+    }
+
+    return
+  }
+)
+
 /*
   Other Keys that should go into translation files:
   t('box.error.generic.title')
@@ -1786,11 +1842,9 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
+
 import { metricsAreEnabled, trackEvent } from './metrics/metrics'
-import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
-import { addNewApp } from './storeManagers/sideload/library'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
-import { libraryStore as gogLibraryStore } from 'backend/storeManagers/gog/electronStores'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
@@ -1873,12 +1927,6 @@ ipcMain.handle('unhideGame', async (_e, gameId) => {
 
 function watchLibraryChanges() {
   // workaround for https://github.com/sindresorhus/electron-store/issues/165
-  libraryStore.onDidChange('library', (newValue) =>
-    sendFrontendMessage('onLibraryChanged', 'legendary', newValue)
-  )
-  gogLibraryStore.onDidChange('games', (newValue) =>
-    sendFrontendMessage('onLibraryChanged', 'gog', newValue)
-  )
   sideloadLibraryStore.onDidChange('games', (newValue) =>
     sendFrontendMessage('onLibraryChanged', 'sideload', newValue)
   )

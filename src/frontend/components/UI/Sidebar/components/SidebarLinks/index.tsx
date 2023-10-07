@@ -12,7 +12,7 @@ import { observer } from 'mobx-react-lite'
 export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
 
-  const { epic, gog, activeController, handleExternalLinkDialog } =
+  const { epic, gog, amazon, activeController, handleExternalLinkDialog } =
     useContext(ContextProvider)
 
   const settingsPath = '/settings/app/default/general'
@@ -28,7 +28,8 @@ export default observer(function SidebarLinks() {
 
     const shouldRefresh =
       (epic.username && !libraryState.epicLibrary.length) ||
-      (gog.username && !libraryState.gogLibrary.length)
+      (gog.username && !libraryState.gogLibrary.length) ||
+      (amazon.user_id && !amazon.library.length)
     if (shouldRefresh) {
       return libraryState.refreshLibrary({ runInBackground: true })
     }

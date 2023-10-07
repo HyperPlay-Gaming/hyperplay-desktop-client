@@ -18,7 +18,7 @@ import {
   WineInstallation
 } from 'common/types'
 import { GogInstallInfo } from 'common/types/gog'
-import { LegendaryInstallInfo } from 'common/types/legendary'
+import { LegendaryInstallInfo, SelectiveDownload } from 'common/types/legendary'
 import {
   SelectField,
   TextInputWithIconField,
@@ -37,10 +37,10 @@ import React, {
   useState
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { SDL_GAMES, SelectiveDownload } from '../selective_dl'
 import { configStore } from 'frontend/helpers/electronStores'
 import { Button } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
+import { NileInstallInfo } from 'common/types/nile'
 
 interface Props {
   backdropClick: () => void
@@ -55,6 +55,7 @@ interface Props {
   gameInfo: GameInfo
   channelNameToInstall: string
   accessCode: string
+  enableCTAButton: boolean
 }
 
 type DiskSpaceInfo = {
@@ -85,7 +86,10 @@ function getInstallLanguage(
 }
 
 function getUniqueKey(sdl: SelectiveDownload) {
-  return sdl.tags.join(',')
+  if (sdl.tags) {
+    return sdl.tags.join(',')
+  }
+  return ''
 }
 
 const userHome = configStore.get('userHome', '')
@@ -109,7 +113,8 @@ export default function DownloadDialog({
   gameInfo,
   crossoverBottle,
   channelNameToInstall,
-  accessCode
+  accessCode,
+  enableCTAButton
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -120,7 +125,11 @@ export default function DownloadDialog({
   const isWin = platform === 'win32'
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
+    | LegendaryInstallInfo
+    | GogInstallInfo
+    | HyperPlayInstallInfo
+    | NileInstallInfo
+    | null
   >(null)
   const [installLanguages, setInstallLanguages] = useState(Array<string>())
   const [installLanguage, setInstallLanguage] = useState('')
@@ -133,6 +142,7 @@ export default function DownloadDialog({
 
   const [dlcsToInstall, setDlcsToInstall] = useState<string[]>([])
   const [installAllDlcs, setInstallAllDlcs] = useState(false)
+  const [sdls, setSdls] = useState<SelectiveDownload[]>([])
   const [selectedSdls, setSelectedSdls] = useState<{ [key: string]: boolean }>(
     {}
   )
@@ -150,14 +160,13 @@ export default function DownloadDialog({
   const { i18n, t } = useTranslation('gamepage')
   const { t: tr } = useTranslation()
 
-  const sdls: SelectiveDownload[] | undefined = SDL_GAMES[appName]
-  const haveSDL = Array.isArray(sdls) && sdls.length !== 0
+  const haveSDL = sdls.length > 0
 
   const sdlList = useMemo(() => {
     const list = []
-    if (sdls) {
+    if (haveSDL) {
       for (const sdl of sdls) {
-        if (sdl.mandatory || selectedSdls[getUniqueKey(sdl)]) {
+        if (sdl.required || selectedSdls[getUniqueKey(sdl)]) {
           if (Array.isArray(sdl.tags)) {
             list.push(...sdl.tags)
           }
@@ -272,6 +281,22 @@ export default function DownloadDialog({
     }
     getIinstInfo()
   }, [appName, i18n.languages, platformToInstall])
+
+  useEffect(() => {
+    // Get List of Selective Downloads if available for Epic Games
+    const getGameSdl = async () => {
+      if (runner === 'legendary') {
+        const { sdl_config } = await window.api.getGameOverride()
+        if (sdl_config && sdl_config[appName]) {
+          const sdl = await window.api.getGameSdl(appName)
+          if (sdl.length > 0) {
+            setSdls(sdl)
+          }
+        }
+      }
+    }
+    getGameSdl()
+  }, [appName, runner])
 
   useEffect(() => {
     const getSpace = async () => {
@@ -538,11 +563,11 @@ export default function DownloadDialog({
                 <ToggleSwitch
                   htmlId={`sdls-${idx}`}
                   title={sdl.name}
-                  value={!!sdl.mandatory || !!selectedSdls[getUniqueKey(sdl)]}
-                  disabled={sdl.mandatory}
+                  extraClass="InstallModal__toggle--sdl"
+                  value={!!sdl.required || !!selectedSdls[getUniqueKey(sdl)]}
+                  disabled={sdl.required}
                   handleChange={(e) => handleSdl(sdl, e.target.checked)}
                 />
-                <span>{sdl.name}</span>
               </label>
             ))}
           </div>
@@ -582,7 +607,7 @@ export default function DownloadDialog({
           type="secondary"
           size="medium"
           onClick={async () => handleInstall()}
-          disabled={!readyToInstall}
+          disabled={!readyToInstall || !enableCTAButton}
         >
           {!readyToInstall && (
             <FontAwesomeIcon className="fa-spin-pulse" icon={faSpinner} />

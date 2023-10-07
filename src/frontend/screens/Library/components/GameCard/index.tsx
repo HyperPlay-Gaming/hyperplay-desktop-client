@@ -94,6 +94,9 @@ const GameCard = ({
     install: gameInstallInfo
   } = { ...gameInfoFromProps }
 
+  const isInstallable =
+    gameInfo.installable === undefined || gameInfo.installable // If it's undefined we assume it's installable
+
   const [progress, previousProgress] = hasProgress(appName)
   const { install_size: size = '0', platform: installPlatform } = {
     ...gameInstallInfo
@@ -240,7 +243,7 @@ const GameCard = ({
       // install
       label: t('button.install'),
       onClick: handleClickStopBubbling(() => buttonClick()),
-      show: !isInstalled && !isQueued
+      show: !isInstalled && !isQueued && isInstallable
     },
     {
       // cancel installation/update
