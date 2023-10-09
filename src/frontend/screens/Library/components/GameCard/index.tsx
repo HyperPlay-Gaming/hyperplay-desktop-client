@@ -346,7 +346,7 @@ const GameCard = ({
       )}
       <Link
         to={`/gamepage/${runner}/${appName}`}
-        state={{ gameInfo }}
+        state={{ gameInfo: JSON.parse(JSON.stringify(gameInfo)) }}
         className={classNames({
           gamepad: activeController
         })}
