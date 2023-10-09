@@ -254,9 +254,12 @@ const GameCard = ({
     {
       // open the game page
       label: t('button.details', 'Details'),
-      onClick: handleClickStopBubbling(() =>
-        navigate(`/gamepage/${runner}/${appName}`, { state: { gameInfo } })
-      ),
+      onClick: handleClickStopBubbling(() => {
+        const gameInfoDeepClone = JSON.parse(JSON.stringify(gameInfo))
+        navigate(`/gamepage/${runner}/${appName}`, {
+          state: { gameInfo: gameInfoDeepClone }
+        })
+      }),
       show: true
     },
     {
