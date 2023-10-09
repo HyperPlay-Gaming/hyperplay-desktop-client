@@ -213,7 +213,6 @@ interface HyperPlayAsyncIPCFunctions {
     totalPages: number
   }>
   getAchievementsStats: (store: AchievementStore) => Promise<AchievementsStats>
-  getFreeMints: () => Promise<number>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

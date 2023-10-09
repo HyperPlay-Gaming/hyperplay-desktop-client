@@ -865,4 +865,5 @@ export interface AchievementsStats {
   mintedAchievements: number
   totalAchievements: number
   totalGames: number
+  freeMints: number
 }

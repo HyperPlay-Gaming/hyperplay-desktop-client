@@ -49,8 +49,9 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
       })
       setAchievementData(achievements)
 
-      const freeMintsData = await window.api.getFreeMints()
-      setFreeMints(freeMintsData)
+      const stats = await window.api.getAchievementsStats('steam')
+
+      setFreeMints(stats.freeMints)
     }
 
     getAchievements()
