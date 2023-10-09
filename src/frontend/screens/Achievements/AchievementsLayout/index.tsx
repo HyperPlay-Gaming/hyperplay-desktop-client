@@ -14,7 +14,7 @@ export default React.memo(function AchievementsLayout({
     totalMintedAchievements: 0,
     totalAchievements: 0,
     totalGames: 0,
-    freeMints: 0
+    numFreeMints: 0
   })
 
   useEffect(() => {

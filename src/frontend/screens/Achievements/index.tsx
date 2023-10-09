@@ -43,7 +43,7 @@ export default React.memo(function Achievements(): JSX.Element {
       setAchievementData({ currentPage, totalPages, games: data })
 
       const stats = await window.api.getAchievementsStats('steam')
-      setFreeMints(stats.freeMints)
+      setFreeMints(stats.numFreeMints)
     }
 
     getAchievements()
