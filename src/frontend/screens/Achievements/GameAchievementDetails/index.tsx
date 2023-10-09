@@ -1,5 +1,5 @@
 import { GameAchievements } from '@hyperplay/ui'
-import { Achievement, Game } from 'common/types'
+import { Achievement, SummaryAchievement } from 'common/types'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
@@ -17,12 +17,13 @@ function isTimestampInPast(unixTimestamp: number) {
 
 export default React.memo(function GameAchievementDetails(): JSX.Element {
   const { id } = useParams()
-  const [game, setGame] = useState<Game>()
+  const [summaryAchievement, setSummaryAchievement] = useState<SummaryAchievement>()
   const [achievementsData, setAchievementData] = useState<{
     data: Achievement[]
     currentPage: number
     totalPages: number
   }>({ data: [], currentPage: 0, totalPages: 0 })
+  
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
   const [freeMints, setFreeMints] = useState(0)
   const { achievementsToBeMinted, handleMint, isLoading } =
@@ -30,8 +31,15 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
 
   useEffect(() => {
     const getAchievements = async () => {
-      const gameData = await window.api.getGame(Number(id))
-      setGame(gameData)
+      const { data } =
+        await window.api.getSummaryAchievements({
+          store: 'steam',
+          filter: 'ALL',
+          sort: 'ALPHA_A_TO_Z',
+          page: 1,
+          pageSize: 1
+        })
+      setSummaryAchievement(data[0])
 
       const achievements = await window.api.getIndividualAchievements({
         gameId: Number(id),
@@ -74,7 +82,7 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
     return !walletStore.isConnected || isLoading
   }, [isLoading, walletStore.isConnected])
 
-  if (!game) return <></>
+  if (!summaryAchievement) return <></>
 
   return (
     <GameAchievements
@@ -83,12 +91,12 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
         basketAmount: achievementsToBeMinted.length
       }}
       game={{
-        title: game.name,
-        tags: game.tags
+        title: summaryAchievement.name,
+        tags: summaryAchievement.tags ?? []
       }}
-      mintedAchievementsCount={game.mintedAchievementCount}
-      totalAchievementsCount={game.totalAchievementCount}
-      mintableAchievementsCount={game.mintableAchievementsCount}
+      mintedAchievementsCount={summaryAchievement.mintedAchievementCount}
+      totalAchievementsCount={summaryAchievement.totalAchievementCount}
+      mintableAchievementsCount={summaryAchievement.mintableAchievementsCount}
       achievements={achievementsData.data.map((achievement, index) => ({
         // TODO: remove when there is a real id
         id: `${index}`,

@@ -816,6 +816,7 @@ export type AvailablePlatforms = {
 export type AchievementStore = 'hyperplay' | 'steam' | 'epic'
 
 export interface Achievement {
+  id: number
   apiname: string
   achieved: number
   unlocktime: number
@@ -838,6 +839,7 @@ export interface SummaryAchievement extends Achievement {
   mintableAchievementsCount: number
   isNewAchievement: boolean
   isMinted: boolean
+  tags: string[]
 }
 
 export type AchievementSort = 'ALPHA_A_TO_Z' | 'ALPHA_Z_TO_A' | 'SORT_BY_STATUS'
@@ -850,15 +852,6 @@ export interface GetAchievementsOptions {
   sort: AchievementSort
   page: number
   pageSize: number
-}
-
-export interface Game {
-  id: number
-  name: string
-  tags: string[]
-  totalAchievementCount: number
-  mintedAchievementCount: number
-  mintableAchievementsCount: number
 }
 
 export interface GetIndividualAchievementsOptions {
