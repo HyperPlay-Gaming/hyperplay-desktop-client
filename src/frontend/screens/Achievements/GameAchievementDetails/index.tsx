@@ -17,13 +17,14 @@ function isTimestampInPast(unixTimestamp: number) {
 
 export default React.memo(function GameAchievementDetails(): JSX.Element {
   const { id } = useParams()
-  const [summaryAchievement, setSummaryAchievement] = useState<SummaryAchievement>()
+  const [summaryAchievement, setSummaryAchievement] =
+    useState<SummaryAchievement>()
   const [achievementsData, setAchievementData] = useState<{
     data: Achievement[]
     currentPage: number
     totalPages: number
   }>({ data: [], currentPage: 0, totalPages: 0 })
-  
+
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
   const [freeMints, setFreeMints] = useState(0)
   const { achievementsToBeMinted, handleMint, isLoading } =
@@ -31,14 +32,13 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
 
   useEffect(() => {
     const getAchievements = async () => {
-      const { data } =
-        await window.api.getSummaryAchievements({
-          store: 'steam',
-          filter: 'ALL',
-          sort: 'ALPHA_A_TO_Z',
-          page: 1,
-          pageSize: 1
-        })
+      const { data } = await window.api.getSummaryAchievements({
+        store: 'steam',
+        filter: 'ALL',
+        sort: 'ALPHA_A_TO_Z',
+        page: 1,
+        pageSize: 1
+      })
       setSummaryAchievement(data[0])
 
       const achievements = await window.api.getIndividualAchievements({
