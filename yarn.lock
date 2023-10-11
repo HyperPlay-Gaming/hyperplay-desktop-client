@@ -1688,10 +1688,10 @@
   dependencies:
     axios "^1.4.0"
 
-"@hyperplay/ui@^0.1.21":
-  version "0.1.21"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.21.tgz#235c6567c49a37a15ec9ea012f2ea12fa5a96690"
-  integrity sha512-+BngEguUyGYhQJjHVbQZV1Lawo2kGmBP6At6hKPKp0HW1sPuFkeZtKKtAP9VzV1zcsUVIbdY8n5BqDQB/aKckQ==
+"@hyperplay/ui@^0.1.22":
+  version "0.1.22"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.22.tgz#c498020a32b04572b05c0397c69d7e2cccb7c6ab"
+  integrity sha512-+PkD92OwRT9Y8PtPGyHqAdlDkNXbT51AqjGiQQWRc5z2T8qxS2ic1cQan9Kl5BvpDIG/QhPeMPJyXSwA7L0cfQ==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
