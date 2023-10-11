@@ -9,7 +9,7 @@ import {
 } from 'common/types'
 import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
-import { useMintAchievements } from './MintAchievements'
+import { useMintAchievements } from './MintAchievementsContext'
 
 const pageSize = 12
 export const achievementsSortOptions = [
@@ -27,8 +27,15 @@ export default React.memo(function Achievements(): JSX.Element {
   }>({ currentPage: 0, totalPages: 0, games: [] })
   const [freeMints, setFreeMints] = useState(0)
 
-  const { achievementsToBeMinted, toggleAchievement, isLoading, handleMint } =
-    useMintAchievements()
+  const {
+    achievementsToBeMinted,
+    toggleAchievementToBeMinted,
+    isLoading,
+    handleMint,
+    handleUpdate,
+    achievementsToBeUpdated,
+    toggleAchievementToBeUpdated
+  } = useMintAchievements()
 
   useEffect(() => {
     const getAchievements = async () => {
@@ -88,13 +95,15 @@ export default React.memo(function Achievements(): JSX.Element {
   return (
     <>
       <AchievementSummaryTable
-        games={achievementsData.games.map((game, index) => {
-          // TODO: remove when there is a real id
-          const id = `${game.gameName}-${index}`
-          const state = walletStore.isConnected
+        games={achievementsData.games.map((game) => {
+          const id = String(game.gameId)
+          const state = !walletStore.isConnected
             ? 'disabled'
-            : achievementsToBeMinted.includes(id)
+            : achievementsToBeMinted.includes(id) ||
+              achievementsToBeUpdated.includes(id)
             ? 'active'
+            : game.isNewAchievement
+            ? 'update'
             : 'default'
 
           return (
@@ -111,7 +120,11 @@ export default React.memo(function Achievements(): JSX.Element {
                 ctaProps={{
                   onClick: (e) => {
                     e.preventDefault()
-                    toggleAchievement(id)
+                    if (game.isNewAchievement) {
+                      toggleAchievementToBeUpdated(id)
+                    } else {
+                      toggleAchievementToBeMinted(id)
+                    }
                   },
                   disabled: isDisabled
                 }}
@@ -168,11 +181,18 @@ export default React.memo(function Achievements(): JSX.Element {
         }}
         mintButtonProps={{
           onClick: handleMint,
-          disabled: isDisabled ?? achievementsToBeMinted.length === 0
+          disabled: isDisabled ?? achievementsToBeMinted.length === 0,
+          totalToMint: achievementsToBeMinted.length
+        }}
+        updateButtonProps={{
+          onClick: handleUpdate,
+          disabled: isDisabled ?? achievementsToBeUpdated.length === 0,
+          totalToUpdate: achievementsToBeUpdated.length
         }}
         achievementNavProps={{
           freeMints,
-          basketAmount: achievementsToBeMinted.length
+          basketAmount:
+            achievementsToBeMinted.length + achievementsToBeUpdated.length
         }}
       />
     </>

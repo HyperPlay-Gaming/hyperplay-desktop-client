@@ -3,7 +3,7 @@ import { Achievement, SummaryAchievement } from 'common/types'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
-import { useMintAchievements } from '../MintAchievements'
+import { useMintAchievements } from '../MintAchievementsContext'
 import walletStore from 'frontend/store/WalletStore'
 
 const pageSize = 6

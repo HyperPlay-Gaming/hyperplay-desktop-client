@@ -10,8 +10,11 @@ import React, {
 // Define the context type
 interface MintAchievementsType {
   achievementsToBeMinted: string[] // Define the type of your context value
-  toggleAchievement: (id: string) => void
+  achievementsToBeUpdated: string[] // Define the type of your context value
+  toggleAchievementToBeMinted: (id: string) => void
+  toggleAchievementToBeUpdated: (id: string) => void
   handleMint: () => void
+  handleUpdate: () => void
   isLoading: boolean
 }
 
@@ -31,11 +34,13 @@ const MintAchievementsProvider: React.FC<MintAchievementsProviderProps> = ({
   const [achievementsToBeMinted, setAchievementsToBeMinted] = useState<
     string[]
   >([])
+  const [achievementsToBeUpdated, setAchievementsToBeUpdated] = useState<
+    string[]
+  >([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
 
-  const toggleAchievement = useCallback(
+  const toggleAchievementToBeMinted = useCallback(
     (id: string) => {
-      console.log('toggleAchievement', id)
       if (achievementsToBeMinted.includes(id)) {
         setAchievementsToBeMinted((state) =>
           state.filter((item) => item !== id)
@@ -47,6 +52,19 @@ const MintAchievementsProvider: React.FC<MintAchievementsProviderProps> = ({
     [achievementsToBeMinted]
   )
 
+  const toggleAchievementToBeUpdated = useCallback(
+    (id: string) => {
+      if (achievementsToBeUpdated.includes(id)) {
+        setAchievementsToBeUpdated((state) =>
+          state.filter((item) => item !== id)
+        )
+      } else {
+        setAchievementsToBeUpdated((state) => [...state, id])
+      }
+    },
+    [achievementsToBeUpdated]
+  )
+
   const handleMint = useCallback(() => {
     setIsLoading(true)
     setTimeout(() => {
@@ -55,9 +73,33 @@ const MintAchievementsProvider: React.FC<MintAchievementsProviderProps> = ({
     }, 3000)
   }, [achievementsToBeMinted])
 
+  const handleUpdate = useCallback(() => {
+    setIsLoading(true)
+    setTimeout(() => {
+      setIsLoading(false)
+      setAchievementsToBeUpdated([])
+    }, 3000)
+  }, [achievementsToBeUpdated])
+
   const value = useMemo(() => {
-    return { achievementsToBeMinted, toggleAchievement, handleMint, isLoading }
-  }, [achievementsToBeMinted, toggleAchievement, handleMint, isLoading])
+    return {
+      achievementsToBeMinted,
+      toggleAchievementToBeMinted,
+      handleMint,
+      isLoading,
+      toggleAchievementToBeUpdated,
+      handleUpdate,
+      achievementsToBeUpdated
+    }
+  }, [
+    achievementsToBeMinted,
+    toggleAchievementToBeMinted,
+    handleMint,
+    isLoading,
+    toggleAchievementToBeUpdated,
+    handleUpdate,
+    achievementsToBeUpdated
+  ])
 
   return (
     <MintAchievements.Provider value={value}>

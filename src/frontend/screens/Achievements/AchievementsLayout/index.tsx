@@ -4,7 +4,7 @@ import { Background, AchievementsInfo, StoreRow, Images } from '@hyperplay/ui'
 import { Flex, Grid } from '@mantine/core'
 
 import styles from './index.module.css'
-import { MintAchievementsProvider } from '../MintAchievements'
+import { MintAchievementsProvider } from '../MintAchievementsContext'
 
 export default React.memo(function AchievementsLayout({
   children
