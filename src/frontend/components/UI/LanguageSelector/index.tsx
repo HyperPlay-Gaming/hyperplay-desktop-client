@@ -55,8 +55,8 @@ const languageLabels: { [key: string]: string } = {
   tr: 'Türkçe',
   uk: 'украї́нська мо́ва',
   vi: 'tiếng Việt',
-  zh_Hans: '简化字',
-  zh_Hant: '漢語'
+  zh_Hans: '简体中文',
+  zh_Hant: '正體字'
 }
 
 const languageFlags: { [key: string]: string } = {

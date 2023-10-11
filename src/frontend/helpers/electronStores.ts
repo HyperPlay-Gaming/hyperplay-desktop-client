@@ -7,6 +7,7 @@ import {
   TypeCheckedStore,
   UnknownGuard
 } from 'common/types/electron_store'
+import { GameInfo } from 'common/types'
 
 export class TypeCheckedStoreFrontend<
   Name extends ValidStoreName,
@@ -49,8 +50,8 @@ export class TypeCheckedStoreFrontend<
     window.api.storeSet(this.storeName, key, value)
   }
 
-  public delete() {
-    throw new Error('Not implemented for TypeCheckedStoreFrontend')
+  public delete<KeyType extends string>(key: KeyType) {
+    window.api.storeDelete(this.storeName, key)
   }
 
   public clear() {
@@ -58,14 +59,66 @@ export class TypeCheckedStoreFrontend<
   }
 }
 
+class CacheStore<ValueType, KeyType extends string = string> {
+  private readonly storeName: string
+  private readonly lifespan: number | null
+
+  /**
+   * Creates a new cache store
+   * @param filename
+   * @param max_value_lifespan How long an individual entry in the store will
+   *                           be cached (in minutes)
+   */
+  constructor(filename: string, max_value_lifespan: number | null = 60 * 6) {
+    this.storeName = filename
+    window.api.storeNew(filename, {
+      cwd: 'store_cache',
+      name: filename,
+      clearInvalidConfig: true
+    })
+    this.lifespan = max_value_lifespan
+  }
+
+  public get(key: KeyType): ValueType | undefined
+  public get(key: KeyType, fallback: ValueType): ValueType
+  public get(key: KeyType, fallback?: ValueType) {
+    if (!window.api.storeHas(this.storeName, key)) {
+      return fallback
+    }
+
+    const lastUpdateTimestamp = window.api.storeGet(
+      this.storeName,
+      `__timestamp.${key}`
+    ) as string | undefined
+    if (!lastUpdateTimestamp) {
+      return fallback
+    }
+    const updateDate = new Date(lastUpdateTimestamp)
+    const msSinceUpdate = Date.now() - updateDate.getTime()
+    const minutesSinceUpdate = msSinceUpdate / 1000 / 60
+    if (this.lifespan && minutesSinceUpdate > this.lifespan) {
+      window.api.storeDelete(this.storeName, key)
+      window.api.storeDelete(this.storeName, `__timestamp.${key}`)
+      return
+    }
+
+    return window.api.storeGet(this.storeName, key) as ValueType
+  }
+
+  public set(key: KeyType, value: ValueType) {
+    window.api.storeSet(this.storeName, key, value)
+    window.api.storeSet(this.storeName, `__timestamp.${key}`, Date())
+  }
+}
+
 const configStore = new TypeCheckedStoreFrontend('configStore', {
   cwd: 'store'
 })
 
-const libraryStore = new TypeCheckedStoreFrontend('libraryStore', {
-  cwd: 'lib-cache',
-  name: 'library'
-})
+const libraryStore = new CacheStore<GameInfo[], 'library'>(
+  'legendary_library',
+  null
+)
 
 const wineDownloaderInfoStore = new TypeCheckedStoreFrontend(
   'wineDownloaderInfoStore',
@@ -75,10 +128,7 @@ const wineDownloaderInfoStore = new TypeCheckedStoreFrontend(
   }
 )
 
-const gogLibraryStore = new TypeCheckedStoreFrontend('gogLibraryStore', {
-  cwd: 'gog_store',
-  name: 'library'
-})
+const gogLibraryStore = new CacheStore<GameInfo[], 'games'>('gog_library', null)
 const gogInstalledGamesStore = new TypeCheckedStoreFrontend(
   'gogInstalledGamesStore',
   {
@@ -88,6 +138,14 @@ const gogInstalledGamesStore = new TypeCheckedStoreFrontend(
 )
 const gogConfigStore = new TypeCheckedStoreFrontend('gogConfigStore', {
   cwd: 'gog_store'
+})
+
+const nileLibraryStore = new CacheStore<GameInfo[], 'library'>(
+  'nile_library',
+  null
+)
+const nileConfigStore = new TypeCheckedStoreFrontend('nileConfigStore', {
+  cwd: 'nile_store'
 })
 
 const timestampStore = new TypeCheckedStoreFrontend('timestampStore', {
@@ -132,5 +190,7 @@ export {
   downloadManagerStore,
   metricsStore,
   onboardingStore,
-  hyperPlayLibraryStore
+  hyperPlayLibraryStore,
+  nileLibraryStore,
+  nileConfigStore
 }

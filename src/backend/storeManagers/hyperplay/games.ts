@@ -54,7 +54,7 @@ import {
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
-import { clean } from 'easydl/dist/utils'
+import { clean } from 'hp-easydl/dist/utils'
 import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
@@ -173,7 +173,7 @@ export async function importGame(
   if (isOnline()) {
     const currentRelease = await getHyperPlayStoreRelease(appName)
     hpImportVersion =
-      currentRelease.channels[mainReleaseChannelName].release_meta.name
+      currentRelease.channels[mainReleaseChannelName]?.release_meta?.name
   }
 
   gameInLibrary.install = {
@@ -292,11 +292,10 @@ function getZipFileName(appName: string, platformInfo: PlatformConfig): string {
   return zipFile
 }
 
-async function getAccessCodeGatedPlatforms(
+export async function validateAccessCode(
   accessCode: string,
-  channelId: number,
-  appName: string
-): Promise<PlatformsMetaInterface> {
+  channelId: number
+) {
   const validateUrl = getValidateLicenseKeysApiUrl()
 
   const validateResult = await axios.post<LicenseConfigValidateResult>(
@@ -306,8 +305,17 @@ async function getAccessCodeGatedPlatforms(
       channel_id: channelId
     }
   )
+  return validateResult.data
+}
 
-  if (validateResult.data.valid !== true)
+async function getAccessCodeGatedPlatforms(
+  accessCode: string,
+  channelId: number,
+  appName: string
+): Promise<PlatformsMetaInterface> {
+  const validateResult = await validateAccessCode(accessCode, channelId)
+
+  if (validateResult.valid !== true)
     throw `Access code ${accessCode} is not valid for channel id ${channelId}!`
 
   //set platform info
@@ -315,7 +323,7 @@ async function getAccessCodeGatedPlatforms(
     'Updating platform info with access code gated platform info in HyperPlay Game Manager',
     LogPrefix.HyperPlay
   )
-  if (validateResult.data.platforms === undefined)
+  if (validateResult.platforms === undefined)
     throw 'Access code gated platforms returned by the validate url were undefined'
 
   // update local game info access key code cache
@@ -330,7 +338,7 @@ async function getAccessCodeGatedPlatforms(
   })
   hpLibraryStore.set('games', newHpGames)
 
-  return validateResult.data.platforms
+  return validateResult.platforms
 }
 
 function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {

@@ -11,7 +11,8 @@ import {
   GameInfo,
   InstallArgs,
   InstallPlatform,
-  InstallProgress
+  InstallProgress,
+  WineCommandArgs
 } from 'common/types'
 import { GameConfig } from '../../game_config'
 import { GlobalConfig } from '../../config'
@@ -41,14 +42,15 @@ import {
   isFlatpak,
   isCLINoGui
 } from '../../constants'
-import { logError, logInfo, LogPrefix } from '../../logger/logger'
+import { logError, logInfo, LogPrefix, logsDisabled } from '../../logger/logger'
 import {
   prepareLaunch,
   prepareWineLaunch,
   setupEnvVars,
   setupWrappers,
   launchCleanup,
-  getRunnerCallWithoutCredentials
+  getRunnerCallWithoutCredentials,
+  runWineCommand as runWineCommandUtil
 } from '../../launcher'
 import {
   addShortcuts as addShortcutsUtil,
@@ -95,8 +97,16 @@ export function getGameInfo(appName: string): GameInfo {
       ],
       LogPrefix.Legendary
     )
-    // @ts-expect-error TODO: Handle this better
-    return {}
+    return {
+      app_name: '',
+      runner: 'legendary',
+      art_cover: '',
+      art_square: '',
+      install: {},
+      is_installed: false,
+      title: '',
+      canRunOffline: false
+    }
   }
   return info
 }
@@ -263,7 +273,7 @@ const emptyExtraInfo = {
 export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   const { namespace, title } = getGameInfo(appName)
   if (namespace === undefined) return emptyExtraInfo
-  const cachedExtraInfo = gameInfoStore.get_nodefault(namespace)
+  const cachedExtraInfo = gameInfoStore.get(namespace)
   if (cachedExtraInfo) {
     return cachedExtraInfo
   }
@@ -535,6 +545,11 @@ export async function removeShortcuts(appName: string) {
   return removeShortcutsUtil(getGameInfo(appName))
 }
 
+/**
+ * Get List of Selective Download Tags for games that supports it (e.g. Fortnite, FallOut New Vegas) on Epic Games
+ * @param sdlList
+ * @returns
+ */
 function getSdlList(sdlList: Array<string>) {
   return [
     // Legendary needs an empty tag for it to download the other needed files
@@ -814,7 +829,18 @@ export async function launch(
   let commandEnv = isWindows
     ? process.env
     : { ...process.env, ...setupEnvVars(gameSettings) }
-  let wineFlag: string[] = []
+
+  const wrappers = setupWrappers(
+    gameSettings,
+    mangoHudCommand,
+    gameModeBin,
+    steamRuntime?.length ? [...steamRuntime] : undefined
+  )
+
+  let wineFlag: string[] = wrappers.length
+    ? ['--wrapper', shlex.join(wrappers)]
+    : []
+
   if (!isNative(appName)) {
     // -> We're using Wine/Proton on Linux or CX on Mac
     const {
@@ -850,7 +876,7 @@ export async function launch(
         ? wineExec.replaceAll("'", '')
         : wineExec
 
-    wineFlag = [...getWineFlags(wineBin, gameSettings, wineType)]
+    wineFlag = [...getWineFlags(wineBin, wineType, shlex.join(wrappers))]
   }
 
   // Log any launch information configured in Legendary's config.ini
@@ -889,17 +915,10 @@ export async function launch(
     isCLINoGui ? '--skip-version-check' : '',
     ...shlex.split(gameSettings.launcherArgs ?? '')
   ]
-  const wrappers = setupWrappers(
-    gameSettings,
-    mangoHudCommand,
-    gameModeBin,
-    steamRuntime?.length ? [...steamRuntime] : undefined
-  )
 
   const fullCommand = getRunnerCallWithoutCredentials(
     commandParts,
     commandEnv,
-    wrappers,
     join(...Object.values(getLegendaryBin()))
   )
   appendFileSync(
@@ -915,7 +934,7 @@ export async function launch(
       wrappers: wrappers,
       logMessagePrefix: `Launching ${gameInfo.title}`,
       onOutput: (output) => {
-        appendFileSync(logFileLocation(appName), output)
+        if (!logsDisabled) appendFileSync(logFileLocation(appName), output)
       }
     },
     gameInfo,
@@ -996,4 +1015,27 @@ export function isGameAvailable(appName: string) {
     }
   }
   return false
+}
+
+export async function runWineCommandOnGame(
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  if (isNative(appName)) {
+    logError('runWineCommand called on native game!', LogPrefix.Legendary)
+    return { stdout: '', stderr: '' }
+  }
+
+  const { folder_name, install } = getGameInfo(appName)
+  const gameSettings = await getSettings(appName)
+
+  return runWineCommandUtil({
+    gameSettings,
+    gameInstallPath: install.install_path,
+    installFolderName: folder_name,
+    commandParts,
+    wait,
+    protonVerb,
+    startFolder
+  })
 }

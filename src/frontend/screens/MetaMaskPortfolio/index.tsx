@@ -1,28 +1,17 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import MetaMaskPortfolioStyles from './index.module.css'
-import ContextProvider from 'frontend/state/ContextProvider'
+import { useParams } from 'react-router-dom'
 
 const MetaMaskPortfolio = function () {
-  const { setSideBarCollapsed, sidebarCollapsed } = useContext(ContextProvider)
   const trueAsStr = 'true' as unknown as boolean | undefined
-
-  useEffect(() => {
-    if (!sidebarCollapsed) {
-      setSideBarCollapsed(true)
-    }
-    return () => {
-      if (sidebarCollapsed) {
-        setSideBarCollapsed(false)
-      }
-    }
-  })
+  const { page = '' } = useParams() as { page: string }
 
   return (
     <>
       <div className={MetaMaskPortfolioStyles.homeDiv}>
         <webview
           className={MetaMaskPortfolioStyles.homeWebview}
-          src="https://portfolio.metamask.io/"
+          src={`https://portfolio.metamask.io/${page}`}
           allowpopups={trueAsStr}
         />
       </div>

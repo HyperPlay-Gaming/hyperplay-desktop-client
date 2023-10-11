@@ -12,7 +12,6 @@ import { AppSettings } from 'common/types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { Backspace } from '@mui/icons-material'
-import { writeConfig } from 'frontend/helpers'
 
 export const defaultThemes = {
   classic: 'Classic',
@@ -47,7 +46,7 @@ export const ThemeSelector = () => {
 
     const newAppConfig = { ...appConfig, customThemesPath: path }
     setThemesPath(path)
-    await writeConfig({ appName: 'default', config: newAppConfig })
+    await window.api.writeConfig({ appName: 'default', config: newAppConfig })
     setAppConfig(newAppConfig)
     loadThemes()
   }

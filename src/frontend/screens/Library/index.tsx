@@ -1,35 +1,22 @@
 import styles from './index.module.scss'
-
 import React, {
   useContext,
   useEffect,
-  useMemo,
   useRef,
   useState,
   useLayoutEffect
 } from 'react'
-
 import ArrowDropUp from '@mui/icons-material/ArrowDropUp'
 import { UpdateComponent } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
-import Fuse from 'fuse.js'
-
 import ContextProvider from 'frontend/state/ContextProvider'
-
 import GamesList from './components/GamesList'
-import {
-  FavouriteGame,
-  GameInfo,
-  GameStatus,
-  HiddenGame,
-  Runner
-} from 'common/types'
+import { FilterItem, GameInfo, Runner } from 'common/types'
 import ErrorComponent from 'frontend/components/UI/ErrorComponent'
 import {
+  amazonCategories,
   epicCategories,
-  gogCategories,
-  hyperPlayCategories,
-  sideloadedCategories
+  gogCategories
 } from 'frontend/helpers/library'
 import RecentlyPlayed from './components/RecentlyPlayed'
 import { InstallModal } from './components'
@@ -37,10 +24,12 @@ import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
 import { faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
-import { Button, Background, DropdownItemType } from '@hyperplay/ui'
-import { Category, Platform } from 'frontend/types'
-import { getPlatformName } from 'frontend/helpers'
+import { Button, Background } from '@hyperplay/ui'
+import { Platform } from 'frontend/types'
 import { LibraryTopBar } from './components/LibraryTopBar'
+import libraryState from '../../state/libraryState'
+import { observer } from 'mobx-react-lite'
+import storeAuthState from 'frontend/state/storeAuthState'
 
 const storage = window.localStorage
 
@@ -51,36 +40,16 @@ type ModalState = {
   gameInfo: GameInfo | null
 }
 
-export default React.memo(function Library(): JSX.Element {
-  const {
-    layout,
-    libraryStatus,
-    refreshing,
-    refreshingInTheBackground,
-    category,
-    epic,
-    gog,
-    sideloadedLibrary,
-    favouriteGames,
-    libraryTopSection,
-    filterText,
-    platform,
-    filterPlatforms,
-    hiddenGames,
-    showHidden,
-    handleCategory,
-    showFavourites: showFavouritesLibrary,
-    setShowFavourites,
-    showNonAvailable,
-    hyperPlayLibrary,
-    refreshLibrary,
-    setShowHidden,
-    setShowNonAvailable,
-    handlePlatformFilters
-  } = useContext(ContextProvider)
+export default observer(function Library(): JSX.Element {
+  const { layout, epic, gog, platform, amazon } = useContext(ContextProvider)
   const { t } = useTranslation()
 
-  const filters: DropdownItemType[] = [
+  const libraryToShow = libraryState.library
+  const numberOfGames = libraryState.numberOfGames
+
+  //only show epic or gog if the user is logged in with epic.username && or gog.username && check
+
+  const filters: FilterItem[] = [
     {
       text: t('library.sortByStatus', 'Sort by Status'),
       id: 'sortByInstalled'
@@ -94,26 +63,13 @@ export default React.memo(function Library(): JSX.Element {
       id: 'alphabeticalDescending'
     }
   ]
-  const [selectedFilter, setSelectedFilter] = useState(filters[0])
+
   const [showModal, setShowModal] = useState<ModalState>({
     game: '',
     show: false,
     runner: 'legendary',
     gameInfo: null
   })
-
-  const [showOnlyDownloaded, setShowOnlyDownloaded] = useState(false)
-  // this filter retains its last value and thus can be combined with other filters
-  const [sortAscending, setSortAscending] = useState(true)
-  useEffect(() => {
-    if (selectedFilter.id === 'alphabeticalAscending') {
-      setSortAscending(true)
-    } else if (selectedFilter.id === 'alphabeticalDescending') {
-      setSortAscending(false)
-    }
-  }, [selectedFilter])
-  // this filter is only true/active when selected and false/inactive otherwise
-  const sortInstalled = selectedFilter.id === 'sortByInstalled'
 
   const backToTopElement = useRef(null)
   const listing = useRef<HTMLDivElement>(null)
@@ -152,6 +108,7 @@ export default React.memo(function Library(): JSX.Element {
   // Track the screen view once and only once.
   useEffect(() => {
     window.api.trackScreen('Library')
+    libraryState.selectedFilter = filters[0]
   }, [])
 
   const backToTop = () => {
@@ -169,238 +126,29 @@ export default React.memo(function Library(): JSX.Element {
     setShowModal({ game: appName, show: true, runner, gameInfo })
   }
 
-  // cache list of games being installed
-  const [installing, setInstalling] = useState<string[]>([])
-
-  useEffect(() => {
-    const newInstalling = libraryStatus
-      .filter((st: GameStatus) => st.status === 'installing')
-      .map((st: GameStatus) => st.appName)
-
-    setInstalling(newInstalling)
-  }, [libraryStatus])
-
-  useEffect(() => {
-    // This code avoids getting stuck on a empty library after logout of the current selected store
-    if (epicCategories.includes(category) && !epic.username) {
-      handleCategory('all')
-    }
-    if (gogCategories.includes(category) && !gog.username) {
-      handleCategory('all')
-    }
-  }, [epic.username, gog.username])
-
-  /*
-   * For installed games, we filter on the install platform
-   * For non-installed games, we check if a build exists for the platform
-   */
-  const gameSupportsAtLeastOneFilteredPlatform = (
-    game: GameInfo,
-    platformsToInclude: Platform[]
-  ) => {
-    if (platformsToInclude.length === 0) return true
-
-    const macArray = ['osx', 'Mac']
-
-    if (platformsToInclude.includes('win')) {
-      if (game.is_installed) {
-        if (
-          game.install.platform &&
-          getPlatformName(game.install.platform).toLowerCase() === 'windows'
-        )
-          return true
-      } else {
-        if (game.is_windows_native) return true
-      }
-    }
-
-    if (platformsToInclude.includes('mac')) {
-      if (game.is_installed) {
-        if (
-          game.install.platform &&
-          macArray.includes(getPlatformName(game.install.platform))
-        )
-          return true
-      } else {
-        if (game.is_mac_native) return true
-      }
-    }
-
-    if (platformsToInclude.includes('linux')) {
-      if (game.is_installed) {
-        if (
-          game.install.platform &&
-          getPlatformName(game.install.platform).toLowerCase() === 'linux'
-        )
-          return true
-      } else {
-        if (game.is_linux_native) return true
-      }
-    }
-
-    if (game.browserUrl && platformsToInclude.includes('browser')) return true
-
-    return false
+  // This code avoids getting stuck on a empty library after logout of the current selected store
+  if (
+    epicCategories.includes(libraryState.category) &&
+    !storeAuthState.epic.username
+  ) {
+    libraryState.category = 'all'
+  }
+  if (
+    gogCategories.includes(libraryState.category) &&
+    !storeAuthState.gog.username
+  ) {
+    libraryState.category = 'all'
+  }
+  if (
+    amazonCategories.includes(libraryState.category) &&
+    !storeAuthState.amazon.user_id
+  ) {
+    libraryState.category = 'all'
   }
 
-  const filterByPlatform = (
-    library: GameInfo[],
-    platformsToInclude: Platform[]
-  ) => {
-    if (!library) {
-      return []
-    }
+  const showRecentGames = libraryState.showRecentGames
 
-    return library.filter((game) =>
-      gameSupportsAtLeastOneFilteredPlatform(game, platformsToInclude)
-    )
-  }
-
-  // top section
-  const showRecentGames = libraryTopSection.startsWith('recently_played')
-
-  const showFavourites =
-    libraryTopSection === 'favourites' && !!favouriteGames.list.length
-
-  const favourites = useMemo(() => {
-    const tempArray: GameInfo[] = []
-    if (showFavourites || showFavouritesLibrary) {
-      const favouriteAppNames = favouriteGames.list.map(
-        (favourite: FavouriteGame) => favourite.appName
-      )
-      epic.library.forEach((game) => {
-        if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
-      })
-      gog.library.forEach((game) => {
-        if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
-      })
-      sideloadedLibrary.forEach((game) => {
-        if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
-      })
-      hyperPlayLibrary.forEach((game) => {
-        if (favouriteAppNames.includes(game.app_name)) tempArray.push(game)
-      })
-    }
-    return tempArray
-  }, [showFavourites, favouriteGames, epic, gog])
-
-  function generateLibrary(category: Category) {
-    let library: Array<GameInfo> = []
-    if (showFavouritesLibrary) {
-      library = [...favourites].filter((g) =>
-        category === 'all' ? g : g.runner === category
-      )
-    } else {
-      const isEpic = epic.username && epicCategories.includes(category)
-      const isGog = gog.username && gogCategories.includes(category)
-      const epicLibrary = isEpic ? epic.library : []
-      const gogLibrary = isGog ? gog.library : []
-      const sideloadedApps = sideloadedCategories.includes(category)
-        ? sideloadedLibrary
-        : []
-      const HPLibrary = hyperPlayCategories.includes(category)
-        ? hyperPlayLibrary
-        : []
-
-      library = [...HPLibrary, ...sideloadedApps, ...epicLibrary, ...gogLibrary]
-
-      if (!showNonAvailable) {
-        const nonAvailbleGames = storage.getItem('nonAvailableGames') || '[]'
-        const nonAvailbleGamesArray = JSON.parse(nonAvailbleGames)
-        library = library.filter(
-          (game) => !nonAvailbleGamesArray.includes(game.app_name)
-        )
-      }
-    }
-
-    // filter
-    try {
-      const filteredLibrary = filterByPlatform(library, filterPlatforms)
-      const options = {
-        minMatchCharLength: 1,
-        threshold: 0.4,
-        useExtendedSearch: true,
-        keys: ['title']
-      }
-      const fuse = new Fuse(filteredLibrary, options)
-
-      if (filterText) {
-        const fuzzySearch = fuse.search(filterText).map((g) => g.item)
-        library = fuzzySearch
-      } else {
-        library = filteredLibrary
-      }
-    } catch (error) {
-      console.log(error)
-    }
-
-    // hide hidden
-    const hiddenGamesAppNames = hiddenGames.list.map(
-      (hidden: HiddenGame) => hidden?.appName
-    )
-
-    if (!showHidden) {
-      library = library.filter(
-        (game) => !hiddenGamesAppNames.includes(game?.app_name)
-      )
-    }
-
-    // sort
-    library = library.sort((a: { title: string }, b: { title: string }) => {
-      const gameA = a.title.toUpperCase().replace('THE ', '')
-      const gameB = b.title.toUpperCase().replace('THE ', '')
-      return sortAscending ? (gameA < gameB ? -1 : 1) : gameA > gameB ? -1 : 1
-    })
-    const installed = library.filter((g) => g.is_installed)
-    const notInstalled = showOnlyDownloaded
-      ? []
-      : library.filter(
-          (g) => !g.is_installed && !installing.includes(g.app_name)
-        )
-
-    const installingGames = library.filter(
-      (g) => !g.is_installed && installing.includes(g.app_name)
-    )
-    library = sortInstalled
-      ? [...installed, ...installingGames, ...notInstalled]
-      : library
-
-    return [...library]
-  }
-  // select library
-  const libraryToShow = useMemo(() => {
-    return generateLibrary(category)
-  }, [
-    category,
-    epic.library,
-    gog.library,
-    filterText,
-    filterPlatforms,
-    sortAscending,
-    sortInstalled,
-    showHidden,
-    hiddenGames,
-    showFavouritesLibrary,
-    showNonAvailable,
-    sideloadedLibrary,
-    hyperPlayLibrary,
-    showOnlyDownloaded
-  ])
-
-  const numberOfGames = useMemo(() => {
-    if (!libraryToShow) {
-      return 0
-    }
-    // is_dlc is only applicable when the game is from legendary, but checking anyway doesn't cause errors and enable accurate counting in the 'ALL' game tab
-    const dlcCount = libraryToShow.filter(
-      (lib) => lib.runner !== 'sideload' && lib.install.is_dlc
-    ).length
-
-    const total = libraryToShow.length - dlcCount
-    return total > 0 ? `${total}` : 0
-  }, [libraryToShow, category])
-
-  if (!epic && !gog) {
+  if (!epic && !gog && !amazon) {
     return (
       <ErrorComponent
         message={t(
@@ -411,35 +159,22 @@ export default React.memo(function Library(): JSX.Element {
     )
   }
 
-  function getLibrary() {
-    if (category === 'all') {
-      return category
-    }
-
-    if (epicCategories.includes(category)) {
-      return 'legendary'
-    }
-
-    if (category === 'sideload') {
-      return 'sideload'
-    }
-
-    return 'gog'
-  }
-
   const onPlatformFilterChange = (platform: Platform) => {
     return (checked: boolean) => {
-      const showPlatformGames = filterPlatforms.includes(platform)
-      const newFilterPlatforms = [...filterPlatforms]
+      const showPlatformGames = libraryState.filterPlatforms.includes(platform)
+      const newFilterPlatforms = [...libraryState.filterPlatforms]
       if (checked) {
         if (!showPlatformGames) {
           newFilterPlatforms.push(platform)
-          handlePlatformFilters(newFilterPlatforms)
+          libraryState.filterPlatforms = newFilterPlatforms
         }
       } else {
         if (showPlatformGames) {
-          newFilterPlatforms.splice(filterPlatforms.indexOf(platform), 1)
-          handlePlatformFilters(newFilterPlatforms)
+          newFilterPlatforms.splice(
+            libraryState.filterPlatforms.indexOf(platform),
+            1
+          )
+          libraryState.filterPlatforms = newFilterPlatforms
         }
       }
     }
@@ -453,40 +188,40 @@ export default React.memo(function Library(): JSX.Element {
     // },
     {
       text: 'Installed',
-      defaultValue: showOnlyDownloaded,
+      defaultValue: libraryState.showOnlyDownloaded,
       onChange: (checked: boolean) => {
-        setShowOnlyDownloaded(checked)
+        libraryState.showOnlyDownloaded = checked
       }
     },
     {
       text: t('header.show_hidden', 'Show Hidden'),
-      defaultValue: showHidden,
+      defaultValue: libraryState.showHidden,
       onChange: (checked: boolean) => {
-        setShowHidden(checked)
+        libraryState.showHidden = checked
       }
     },
     {
       text: t('header.show_available_games', 'Show non-available games'),
-      defaultValue: showNonAvailable,
+      defaultValue: libraryState.showNonAvailable,
       onChange: (checked: boolean) => {
-        setShowNonAvailable(checked)
+        libraryState.showNonAvailable = checked
       }
     },
     {
       text: 'Show favorites',
-      defaultValue: showFavouritesLibrary,
+      defaultValue: libraryState.showFavouritesLibrary,
       onChange: (checked: boolean) => {
-        setShowFavourites(checked)
+        libraryState.showFavouritesLibrary = checked
       }
     },
     {
       text: 'Windows',
-      defaultValue: filterPlatforms.includes('win'),
+      defaultValue: libraryState.filterPlatforms.includes('win'),
       onChange: onPlatformFilterChange('win')
     },
     {
       text: 'Browser',
-      defaultValue: filterPlatforms.includes('browser'),
+      defaultValue: libraryState.filterPlatforms.includes('browser'),
       onChange: onPlatformFilterChange('browser')
     }
   ]
@@ -494,14 +229,14 @@ export default React.memo(function Library(): JSX.Element {
   if (platform === 'linux')
     otherFiltersData.push({
       text: 'Linux',
-      defaultValue: filterPlatforms.includes('linux'),
+      defaultValue: libraryState.filterPlatforms.includes('linux'),
       onChange: onPlatformFilterChange('linux')
     })
 
   if (platform === 'darwin')
     otherFiltersData.push({
       text: 'macOS',
-      defaultValue: filterPlatforms.includes('mac'),
+      defaultValue: libraryState.filterPlatforms.includes('mac'),
       onChange: onPlatformFilterChange('mac')
     })
 
@@ -519,16 +254,15 @@ export default React.memo(function Library(): JSX.Element {
             type="tertiary"
             title={t('generic.library.refresh', 'Refresh Library')}
             onClick={async () =>
-              refreshLibrary({
+              libraryState.refreshSelectedLibrary({
                 checkForUpdates: true,
-                runInBackground: false,
-                library: getLibrary()
+                runInBackground: false
               })
             }
           >
             <FontAwesomeIcon
               className={classNames('FormControl__segmentedFaIcon', {
-                ['fa-spin']: refreshing
+                ['fa-spin']: libraryState.refreshing
               })}
               icon={faSyncAlt}
             />
@@ -543,8 +277,11 @@ export default React.memo(function Library(): JSX.Element {
         </div>
         <LibraryTopBar
           filters={filters}
-          setSelectedFilter={setSelectedFilter}
-          selectedFilter={selectedFilter}
+          setSelectedFilter={(filter) => {
+            libraryState.selectedFilter = filter as FilterItem
+          }}
+          // the default for library state if selectedFilter undefined is alphabetical ascending
+          selectedFilter={libraryState.selectedFilter ?? filters[1]}
           otherFiltersData={otherFiltersData}
         />
         <div className={styles.listing} ref={listing}>
@@ -552,28 +289,32 @@ export default React.memo(function Library(): JSX.Element {
           {showRecentGames && (
             <RecentlyPlayed
               handleModal={handleModal}
-              onlyInstalled={libraryTopSection.endsWith('installed')}
+              onlyInstalled={libraryState.libraryTopSection.endsWith(
+                'installed'
+              )}
             />
           )}
 
-          {showFavourites && !showFavouritesLibrary && (
+          {libraryState.showFavourites && !libraryState.showFavouritesLibrary && (
             <>
               <h3 className={styles.libraryHeader}>
                 {t('favourites', 'Favourites')}
               </h3>
               <GamesList
-                library={favourites}
+                library={libraryState.favourites}
                 handleGameCardClick={handleModal}
                 isFirstLane
               />
             </>
           )}
 
-          {refreshing && !refreshingInTheBackground && (
-            <UpdateComponent inline />
-          )}
+          {libraryState.refreshing &&
+            !libraryState.refreshingInTheBackground && (
+              <UpdateComponent inline />
+            )}
 
-          {(!refreshing || refreshingInTheBackground) && (
+          {(!libraryState.refreshing ||
+            libraryState.refreshingInTheBackground) && (
             <GamesList
               library={libraryToShow}
               layout={layout}

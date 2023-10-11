@@ -6,13 +6,13 @@ import SearchBar from '../SearchBar'
 import AccountDropdown from '../AccountDropdown'
 import extensionStore from 'frontend/store/ExtensionStore'
 import { observer } from 'mobx-react-lite'
-import { observable } from 'mobx'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { NavLink, useLocation } from 'react-router-dom'
 import {
   EPIC_STORE_URL,
   GOG_STORE_URL,
+  AMAZON_STORE,
   HYPERPLAY_STORE_URL
 } from 'frontend/constants'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
@@ -28,6 +28,7 @@ const TopNavBar = observer(() => {
     '/hyperplaystore',
     '/gogstore',
     '/epicstore',
+    '/amazonstore',
     '/store-page'
   ]
 
@@ -102,6 +103,15 @@ const TopNavBar = observer(() => {
                 {t('GOG', 'GOG')}
               </Button>
             </NavLink>
+            <NavLink to="/amazonstore">
+              <Button
+                type="link"
+                size="small"
+                style={getStoreTextStyle(AMAZON_STORE)}
+              >
+                {t('Amazon', 'Amazon')}
+              </Button>
+            </NavLink>
           </>
         )}
       </div>
@@ -128,4 +138,4 @@ const TopNavBar = observer(() => {
   )
 })
 
-export default React.memo(observable(TopNavBar))
+export default TopNavBar

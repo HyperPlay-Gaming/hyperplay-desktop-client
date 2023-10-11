@@ -335,12 +335,17 @@
   display: grid;
   grid-template-columns: auto auto;
   margin-top: var(--space-xl);
+
+  > .col2-item {
+    padding-left: var(--space-md);
+  }
 }
 
 .grid-container > div {
   border-bottom: 1px white solid;
   margin-bottom: var(--space-sm);
   padding-bottom: var(--space-2xs);
+  min-width: 200px;
 }
 
 .clickablePath {
@@ -352,4 +357,7 @@
 
 .col2-item {
   color: var(--primary-50);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

@@ -14,7 +14,6 @@ import {
   getPlatformName,
   getProgress,
   launch,
-  sendKill,
   size,
   updateGame
 } from 'frontend/helpers'
@@ -61,8 +60,11 @@ import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Button } from '@hyperplay/ui'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import DLCList from 'frontend/components/UI/DLCList'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
+import { NileInstallInfo } from 'common/types/nile'
 
-export default React.memo(function GamePage(): JSX.Element | null {
+export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
     state: { fromDM: boolean; gameInfo: GameInfo }
@@ -75,13 +77,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
   const {
-    epic,
-    gog,
-    gameUpdates,
     platform,
     showDialogModal,
     setIsSettingsModalOpen,
-    isSettingsModalOpen
+    isSettingsModalOpen,
+    connectivity
   } = useContext(ContextProvider)
 
   const [gameInfo, setGameInfo] = useState(locationGameInfo)
@@ -94,7 +94,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
+    | LegendaryInstallInfo
+    | GogInstallInfo
+    | HyperPlayInstallInfo
+    | NileInstallInfo
+    | null
   >(null)
   const [launchArguments, setLaunchArguments] = useState('')
   const [hasError, setHasError] = useState<{
@@ -125,8 +129,11 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const isExtracting = status === 'extracting'
   const isPreparing = status === 'preparing'
   const notAvailable = !gameAvailable && gameInfo.is_installed
+  const notInstallable =
+    gameInfo.installable !== undefined && !gameInfo.installable
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
+  const isOffline = connectivity.status !== 'online'
 
   const backRoute = location.state?.fromDM ? '/download-manager' : '/library'
 
@@ -150,7 +157,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       setExtraInfo(await window.api.getExtraInfo(appName, runner))
     }
     updateGameInfo()
-  }, [status, gog.library, epic.library, isMoving])
+  }, [status, libraryState.gogLibrary, libraryState.epicLibrary, isMoving])
 
   useEffect(() => {
     const updateConfig = async () => {
@@ -197,7 +204,12 @@ export default React.memo(function GamePage(): JSX.Element | null {
         const installPlatform =
           runner === 'hyperplay' ? hpPlatforms : othersPlatforms
 
-        if (runner !== 'sideload' && !notSupportedGame) {
+        if (
+          runner !== 'sideload' &&
+          !notSupportedGame &&
+          !notInstallable &&
+          !isOffline
+        ) {
           getInstallInfo(appName, runner, installPlatform)
             .then((info) => {
               if (!info) {
@@ -246,7 +258,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       }
     }
     updateConfig()
-  }, [status, epic.library, gog.library, gameInfo, isSettingsModalOpen])
+  }, [status, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
 
   function handleUpdate() {
     if (gameInfo.runner !== 'sideload')
@@ -288,7 +300,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     }
 
     hasRequirements = extraInfo?.reqs ? extraInfo.reqs.length > 0 : false
-    hasUpdate = is_installed && gameUpdates?.includes(appName)
+    hasUpdate = is_installed && libraryState.gameUpdates?.includes(appName)
     const appLocation = gameInfo.browserUrl
       ? false
       : install_path || folder_name
@@ -547,7 +559,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
                       )}
                     </>
                   )}
-                  <TimeContainer game={appName} />
+                  <TimeContainer runner={runner} game={appName} />
                 </div>
               </div>
               <div className="gameStatus">
@@ -623,7 +635,8 @@ export default React.memo(function GamePage(): JSX.Element | null {
                 <WikiGameInfo
                   setShouldShow={setShowExtraInfo}
                   title={title}
-                  id={runner === 'gog' ? appName : undefined}
+                  appName={appName}
+                  runner={runner}
                 />
               )}
               {is_installed && (
@@ -719,6 +732,13 @@ export default React.memo(function GamePage(): JSX.Element | null {
 
     if (isPreparing) {
       return t('status.preparing', 'Preparing Download, please wait')
+    }
+
+    if (runner === 'gog' && notInstallable) {
+      return t(
+        'status.gog-goodie',
+        "This game doesn't appear to be installable. Check downloadable content on https://gog.com/account"
+      )
     }
 
     if (notSupportedGame) {
@@ -823,6 +843,14 @@ export default React.memo(function GamePage(): JSX.Element | null {
     if (isPaused) {
       return t('button.queue.continue', 'Continue Download')
     }
+
+    if (notInstallable) {
+      return (
+        <span className="buttonWithIcon">
+          {t('status.goodie', 'Not installable')}
+        </span>
+      )
+    }
     if (notSupportedGame) {
       return t('status.notSupported', 'Not supported')
     }
@@ -845,7 +873,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     // kill game if running
     return async () => {
       if (isPlaying || isUpdating) {
-        return sendKill(appName, gameInfo.runner)
+        return window.api.kill(appName, gameInfo.runner)
       }
 
       // open game

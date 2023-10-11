@@ -6,69 +6,47 @@ import {
   ConnectivityStatus,
   DialogType,
   ButtonOptions,
-  LibraryTopSectionOptions,
   DMQueueElement,
   MetricsOptInStatus,
   DownloadManagerState
 } from 'common/types'
+import { NileLoginData, NileRegisterData } from 'common/types/nile'
 
-export type Category = 'all' | 'legendary' | 'gog' | 'sideload' | 'hyperplay'
+export type Category =
+  | 'all'
+  | 'legendary'
+  | 'gog'
+  | 'sideload'
+  | 'hyperplay'
+  | 'nile'
 
 export type Platform = 'win' | 'mac' | 'linux' | 'browser'
 
 export interface ContextType {
-  category: Category
   error: boolean
-  filterText: string
-  filterPlatforms: Platform[]
-  gameUpdates: string[]
   isRTL: boolean
   language: string
   setLanguage: (newLanguage: string) => void
-  handleCategory: (value: Category) => void
-  handlePlatformFilters: (value: string[]) => void
   handleLayout: (value: string) => void
-  handleSearch: (input: string) => void
   layout: string
   libraryStatus: GameStatus[]
-  libraryTopSection: string
-  handleLibraryTopSection: (value: LibraryTopSectionOptions) => void
   platform: NodeJS.Platform | 'unknown'
-  refresh: (library: Runner, checkUpdates?: boolean) => Promise<void>
-  refreshLibrary: (options: RefreshOptions) => Promise<void>
   refreshWineVersionInfo: (fetch: boolean) => void
-  refreshing: boolean
-  refreshingInTheBackground: boolean
-  hiddenGames: {
-    list: HiddenGame[]
-    add: (appNameToHide: string, appTitle: string) => void
-    remove: (appNameToUnhide: string) => void
-  }
-  favouriteGames: {
-    list: HiddenGame[]
-    add: (appNameToAdd: string, appTitle: string) => void
-    remove: (appNameToRemove: string) => void
-  }
-  showHidden: boolean
-  setShowHidden: (value: boolean) => void
-  showFavourites: boolean
-  setShowFavourites: (value: boolean) => void
-  showNonAvailable: boolean
-  setShowNonAvailable: (value: boolean) => void
   theme: string
   setTheme: (themeName: string) => void
   zoomPercent: number
   setZoomPercent: (newZoomPercent: number) => void
   epic: {
-    library: GameInfo[]
-    username?: string
     login: (sid: string) => Promise<string>
     logout: () => Promise<void>
   }
   gog: {
-    library: GameInfo[]
-    username?: string
     login: (token: string) => Promise<string>
+    logout: () => Promise<void>
+  }
+  amazon: {
+    getLoginData: () => Promise<NileLoginData>
+    login: (data: NileRegisterData) => Promise<string>
     logout: () => Promise<void>
   }
   allTilesInColor: boolean
@@ -84,8 +62,6 @@ export interface ContextType {
   showResetDialog: () => void
   externalLinkDialogOptions: ExternalLinkDialogOptions
   handleExternalLinkDialog: (options: ExternalLinkDialogOptions) => void
-  sideloadedLibrary: GameInfo[]
-  hyperPlayLibrary: GameInfo[]
   isSettingsModalOpen: {
     value: boolean
     gameInfo?: GameInfo | null
@@ -114,23 +90,11 @@ export interface ExternalLinkDialogOptions {
   linkCallback?: () => void
 }
 
-interface HiddenGame {
-  appName: string
-  title: string
-}
-
 export interface InstallProgress {
   bytes: string
   eta: string
   folder?: string
   percent: number
-}
-
-type RefreshOptions = {
-  checkForUpdates?: boolean
-  fullRefresh?: boolean
-  library?: Runner | 'all'
-  runInBackground?: boolean
 }
 
 export type SyncType = 'Download' | 'Upload' | 'Force download' | 'Force upload'

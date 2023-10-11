@@ -20,8 +20,7 @@ import { DialogContent, DialogFooter } from 'frontend/components/UI/Dialog'
 import {
   getGameInfo,
   getGameSettings,
-  removeSpecialcharacters,
-  writeConfig
+  removeSpecialcharacters
 } from 'frontend/helpers'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -32,6 +31,7 @@ import classNames from 'classnames'
 import Warning from './Warning'
 import { Button } from '@hyperplay/ui'
 import axios from 'axios'
+import libraryState from 'frontend/state/libraryState'
 
 type Props = {
   availablePlatforms: AvailablePlatforms
@@ -70,7 +70,7 @@ export default function SideloadDialog({
   const [web3, setWeb3] = useState<Web3Features>({ supported: false })
   const editMode = Boolean(appName)
 
-  const { refreshLibrary, platform } = useContext(ContextProvider)
+  const { platform } = useContext(ContextProvider)
 
   function handleTitle(value: string) {
     value = removeSpecialcharacters(value)
@@ -176,7 +176,7 @@ export default function SideloadDialog({
     if (!gameSettings) {
       return
     }
-    await writeConfig({
+    await window.api.writeConfig({
       appName: app_name,
       config: {
         ...gameSettings,
@@ -186,7 +186,7 @@ export default function SideloadDialog({
       }
     })
 
-    await refreshLibrary({
+    await libraryState.refreshLibrary({
       runInBackground: true,
       checkForUpdates: true
     })
@@ -227,7 +227,7 @@ export default function SideloadDialog({
         if (!gameSettings) {
           return
         }
-        await writeConfig({
+        await window.api.writeConfig({
           appName: app_name,
           config: { ...gameSettings, winePrefix, wineVersion }
         })

@@ -13,6 +13,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { WineVersionInfo, Type, WineManagerUISettings } from 'common/types'
+import libraryState from 'frontend/state/libraryState'
 
 const WineItem = lazy(
   async () => import('frontend/screens/WineManager/components/WineItem')
@@ -24,8 +25,7 @@ const configStore = new TypeCheckedStoreFrontend('wineManagerConfigStore', {
 
 export default React.memo(function WineManager(): JSX.Element | null {
   const { t } = useTranslation()
-  const { refreshWineVersionInfo, refreshing, platform } =
-    useContext(ContextProvider)
+  const { refreshWineVersionInfo, platform } = useContext(ContextProvider)
   const isLinux = platform === 'linux'
 
   const winege: WineManagerUISettings = {
@@ -142,8 +142,8 @@ export default React.memo(function WineManager(): JSX.Element | null {
               <span>{t('wine.size', 'Size')}</span>
               <span>{t('wine.actions', 'Action')}</span>
             </div>
-            {refreshing && <UpdateComponent />}
-            {!refreshing &&
+            {libraryState.refreshing && <UpdateComponent />}
+            {!libraryState.refreshing &&
               !!wineVersions.length &&
               wineVersions.map((release) => {
                 return <WineItem key={release.version} {...release} />

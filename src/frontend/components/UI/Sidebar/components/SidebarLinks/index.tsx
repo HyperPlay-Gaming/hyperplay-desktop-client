@@ -1,23 +1,20 @@
 import { NavLink, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import React, { useContext, useEffect, useState } from 'react'
-import { openDiscordLink } from 'frontend/helpers'
 import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
 import QuitButton from '../QuitButton'
 import { SHOW_EXTERNAL_LINK_DIALOG_STORAGE_KEY } from 'frontend/components/UI/ExternalLinkDialog'
 import { Images } from '@hyperplay/ui'
+import libraryState from 'frontend/state/libraryState'
+import { observer } from 'mobx-react-lite'
+import storeAuthState from 'frontend/state/storeAuthState'
 
-export default function SidebarLinks() {
+export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
 
-  const {
-    epic,
-    gog,
-    activeController,
-    refreshLibrary,
-    handleExternalLinkDialog
-  } = useContext(ContextProvider)
+  const { activeController, handleExternalLinkDialog } =
+    useContext(ContextProvider)
 
   const settingsPath = '/settings/app/default/general'
 
@@ -31,10 +28,11 @@ export default function SidebarLinks() {
     localStorage.setItem('scrollPosition', '0')
 
     const shouldRefresh =
-      (epic.username && !epic.library.length) ||
-      (gog.username && !gog.library.length)
+      (storeAuthState.epic.username && !libraryState.epicLibrary.length) ||
+      (storeAuthState.gog.username && !libraryState.gogLibrary.length) ||
+      (storeAuthState.amazon.user_id && !libraryState.amazonLibrary.length)
     if (shouldRefresh) {
-      return refreshLibrary({ runInBackground: true })
+      return libraryState.refreshLibrary({ runInBackground: true })
     }
     return
   }
@@ -129,7 +127,7 @@ export default function SidebarLinks() {
       <div className=" SidebarLinks Sidebar__section">
         <div
           className="sidebarLinkGradientWrapper"
-          onClick={() => handleExternalLink(openDiscordLink)}
+          onClick={() => handleExternalLink(window.api.openDiscordLink)}
         >
           <div className="Sidebar__item">
             <button>
@@ -164,4 +162,4 @@ export default function SidebarLinks() {
       </div>
     </>
   )
-}
+})

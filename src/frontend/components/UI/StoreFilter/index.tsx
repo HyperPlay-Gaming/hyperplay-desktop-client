@@ -1,15 +1,21 @@
 import classNames from 'classnames'
-import React, { useContext } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import FormControl from 'frontend/components/UI/FormControl'
-import ContextProvider from 'frontend/state/ContextProvider'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
+import { Category } from 'frontend/types'
+import storeAuthState from 'frontend/state/storeAuthState'
 
-export default React.memo(function StoreFilter() {
-  const { category, handleCategory, gog, epic } = useContext(ContextProvider)
+export default observer(function StoreFilter() {
   const { t } = useTranslation()
 
-  const isGOGLoggedin = gog.username
-  const isEpicLoggedin = epic.username
+  const isGOGLoggedin = storeAuthState.gog.username
+  const isEpicLoggedin = storeAuthState.epic.username
+  const isAmazonLoggedin = storeAuthState.amazon.user_id
+  const category = libraryState.category
+  const handleCategory = (category: Category) =>
+    (libraryState.category = category)
 
   return (
     <div className="storeFilter">
@@ -17,7 +23,7 @@ export default React.memo(function StoreFilter() {
         <button
           onClick={() => handleCategory('all')}
           className={classNames('FormControl__button', {
-            active: category === 'all'
+            active: libraryState.category === 'all'
           })}
           title={`${t('header.store', 'Filter Store')}: ${t('All')}`}
         >
@@ -65,6 +71,26 @@ export default React.memo(function StoreFilter() {
             {t('Other')}
           </button>
         )}
+        {isAmazonLoggedin && (
+          <button
+            className={classNames('FormControl__button', {
+              active: category === 'nile'
+            })}
+            title={`${t('header.store')}: ${t('amazon')}`}
+            onClick={() => handleCategory('nile')}
+          >
+            AMAZON
+          </button>
+        )}
+        <button
+          className={classNames('FormControl__button', {
+            active: category === 'sideload'
+          })}
+          title={`${t('header.store')}: ${t('Other')}`}
+          onClick={() => handleCategory('sideload')}
+        >
+          {t('Other')}
+        </button>
       </FormControl>
     </div>
   )

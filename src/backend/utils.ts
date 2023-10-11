@@ -15,7 +15,7 @@ import {
   ProgressInfo
 } from 'common/types'
 import axios from 'axios'
-import EasyDl from 'easydl'
+import EasyDl from 'hp-easydl'
 import yauzl from 'yauzl'
 
 import {
@@ -58,10 +58,17 @@ import {
   configStore,
   isLinux
 } from './constants'
-import { logError, logInfo, LogPrefix, logWarning } from './logger/logger'
+import {
+  logError,
+  logInfo,
+  LogPrefix,
+  logsDisabled,
+  logWarning
+} from './logger/logger'
 import { basename, dirname, join, normalize } from 'path'
 import { runRunnerCommand as runLegendaryCommand } from 'backend/storeManagers/legendary/library'
 import { runRunnerCommand as runGogdlCommand } from './storeManagers/gog/library'
+import { runRunnerCommand as runNileCommand } from './storeManagers/nile/library'
 import {
   gameInfoStore,
   installStore,
@@ -69,10 +76,15 @@ import {
 } from 'backend/storeManagers/legendary/electronStores'
 import {
   apiInfoCache as GOGapiInfoCache,
-  gogInstallInfoStore as GOGinstallInfoStore,
+  installInfoStore as GOGinstallInfoStore,
   libraryStore as GOGlibraryStore
 } from './storeManagers/gog/electronStores'
 import fileSize from 'filesize'
+import {
+  installStore as nileInstallStore,
+  libraryStore as nileLibraryStore
+} from './storeManagers/nile/electronStores'
+
 import makeClient from 'discord-rich-presence-typescript'
 import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
@@ -256,6 +268,20 @@ export const getAppVersion = () => {
   return `${VERSION_NUMBER}`
 }
 
+const getNileVersion = async () => {
+  const abortID = 'nile-version'
+  const { stdout, error } = await runNileCommand(
+    ['--version'],
+    createAbortController(abortID)
+  )
+  deleteAbortController(abortID)
+
+  if (error) {
+    return 'invalid'
+  }
+  return stdout
+}
+
 const showAboutWindow = () => {
   app.setAboutPanelOptions({
     applicationName: 'HyperPlay',
@@ -312,6 +338,7 @@ const getSystemInfo = async () => {
   const hyperplayVersion = getAppVersion()
   const legendaryVersion = await getLegendaryVersion()
   const gogdlVersion = await getGogdlVersion()
+  const nileVersion = await getNileVersion()
 
   // get CPU and RAM info
   const { manufacturer, brand, speed, governor } = await si.cpu()
@@ -342,6 +369,8 @@ const getSystemInfo = async () => {
   systemInfoCache = `HyperPlay Version: ${hyperplayVersion}
 Legendary Version: ${legendaryVersion}
 GOGdl Version: ${gogdlVersion}
+Nile Version: ${nileVersion}
+
 OS: ${isMac ? `${codename} ${release}` : distro} KERNEL: ${kernel} ARCH: ${arch}
 CPU: ${manufacturer} ${brand} @${speed} ${
     governor ? `GOVERNOR: ${governor}` : ''
@@ -429,6 +458,8 @@ async function errorHandler({
   }
 }
 
+// If you ever modify this range of characters, please also add them to nile
+// source as this function is used to determine how game directory will be named
 function removeSpecialcharacters(text: string): string {
   const regexp = new RegExp(/[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/, 'gi')
   return text.replaceAll(regexp, '')
@@ -441,7 +472,7 @@ async function openUrlOrFile(url: string): Promise<string | void> {
   return shell.openPath(url)
 }
 
-function clearCache(library?: 'gog' | 'legendary') {
+function clearCache(library?: 'gog' | 'legendary' | 'nile') {
   if (library === 'gog' || !library) {
     GOGapiInfoCache.clear()
     GOGlibraryStore.clear()
@@ -455,6 +486,10 @@ function clearCache(library?: 'gog' | 'legendary') {
     runLegendaryCommand(['cleanup'], createAbortController(abortID)).then(() =>
       deleteAbortController(abortID)
     )
+  }
+  if (library === 'nile' || !library) {
+    nileInstallStore.clear()
+    nileLibraryStore.clear()
   }
 }
 
@@ -516,6 +551,13 @@ function getGOGdlBin(): { dir: string; bin: string } {
     fixAsarPath(join(publicDir, 'bin', process.platform, 'gogdl'))
   )
 }
+
+function getNileBin(): { dir: string; bin: string } {
+  return splitPathAndName(
+    fixAsarPath(join(publicDir, 'bin', process.platform, 'nile'))
+  )
+}
+
 export function getFormattedOsName(): string {
   switch (process.platform) {
     case 'linux':
@@ -558,10 +600,15 @@ async function searchForExecutableOnPath(executable: string): Promise<string> {
   }
 }
 async function getSteamRuntime(
-  requestedType: 'scout' | 'soldier'
+  requestedType: SteamRuntime['type']
 ): Promise<SteamRuntime> {
   const steamLibraries = await getSteamLibraries()
   const runtimeTypes: SteamRuntime[] = [
+    {
+      path: 'steamapps/common/SteamLinuxRuntime_sniper/run',
+      type: 'sniper',
+      args: ['--']
+    },
     {
       path: 'steamapps/common/SteamLinuxRuntime_soldier/run',
       type: 'soldier',
@@ -1001,15 +1048,17 @@ export async function checkWineBeforeLaunch(
   if (wineIsValid) {
     return true
   } else {
-    logError(
-      `Wine version ${gameSettings.wineVersion.name} is not valid, trying another one.`,
-      LogPrefix.Backend
-    )
+    if (!logsDisabled) {
+      logError(
+        `Wine version ${gameSettings.wineVersion.name} is not valid, trying another one.`,
+        LogPrefix.Backend
+      )
 
-    appendFileSync(
-      logFileLocation,
-      `Wine version ${gameSettings.wineVersion.name} is not valid, trying another one.`
-    )
+      appendFileSync(
+        logFileLocation,
+        `Wine version ${gameSettings.wineVersion.name} is not valid, trying another one.`
+      )
+    }
 
     // check if the default wine is valid now
     const { wineVersion: defaultwine } = GlobalConfig.get().getSettings()
@@ -1345,6 +1394,26 @@ export async function downloadFile(
   }
 }
 
+// helper object for an array with a length limit
+// this is used when calling system processes to not store the complete output in memory
+//
+// the `limit` is the number of messages, it doesn't mean it will be exactly `limit` lines since a message can be multi-line
+const memoryLog = (limit = 50) => {
+  const lines: string[] = []
+
+  return {
+    push: (newLine: string) => {
+      lines.unshift(newLine)
+      if (lines.length > limit) {
+        lines.length = limit
+      }
+    },
+    join: (separator = '') => {
+      return lines.reverse().join(separator)
+    }
+  }
+}
+
 function removeFolder(path: string, folderName: string) {
   if (path === 'default') {
     const { defaultInstallPath } = GlobalConfig.get().getSettings()
@@ -1485,6 +1554,7 @@ export {
   resetApp,
   getLegendaryBin,
   getGOGdlBin,
+  getNileBin,
   formatEpicStoreUrl,
   searchForExecutableOnPath,
   getSteamRuntime,
@@ -1504,7 +1574,9 @@ export {
   getGogdlVersion,
   getTitleFromEpicStoreUrl,
   removeFolder,
-  shutdownWine
+  shutdownWine,
+  getNileVersion,
+  memoryLog
 }
 
 // Exported only for testing purpose

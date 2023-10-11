@@ -58,7 +58,9 @@ export default function WineSelector({
       }
 
       if (useDefaultSettings) {
-        setWinePrefix(defaultPrefix)
+        setWinePrefix(
+          defaultPrefix.replace('default', removeSpecialcharacters(title))
+        )
         setWineVersion(wineVersion)
         setCrossoverBottle(defaultBottle)
       } else {
