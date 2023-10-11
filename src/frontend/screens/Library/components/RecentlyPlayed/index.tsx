@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import ContextProvider from 'frontend/state/ContextProvider'
 import { GameInfo, Runner } from 'common/types'
 import GamesList from '../GamesList'
 import { configStore } from 'frontend/helpers/electronStores'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
 
 interface Props {
   handleModal: (appName: string, runner: Runner, gameInfo: GameInfo) => void
@@ -32,59 +33,57 @@ function getRecentGames(
   return games
 }
 
-export default React.memo(function RecentlyPlayed({
-  handleModal,
-  onlyInstalled
-}: Props) {
-  const { t } = useTranslation()
-  const { epic, gog, sideloadedLibrary, amazon } = useContext(ContextProvider)
-  const [recentGames, setRecentGames] = useState<GameInfo[]>([])
+export default React.memo(
+  observer(function RecentlyPlayed({ handleModal, onlyInstalled }: Props) {
+    const { t } = useTranslation()
+    const [recentGames, setRecentGames] = useState<GameInfo[]>([])
 
-  const loadRecentGames = async () => {
-    const { maxRecentGames } = await window.api.requestAppSettings()
-    const newRecentGames = getRecentGames(
-      [
-        ...epic.library,
-        ...gog.library,
-        ...sideloadedLibrary,
-        ...amazon.library
-      ],
-      maxRecentGames,
-      onlyInstalled
-    )
+    const loadRecentGames = async () => {
+      const { maxRecentGames } = await window.api.requestAppSettings()
+      const newRecentGames = getRecentGames(
+        [
+          ...libraryState.epicLibrary,
+          ...libraryState.gogLibrary,
+          ...libraryState.sideloadedLibrary,
+          ...libraryState.amazonLibrary
+        ],
+        maxRecentGames,
+        onlyInstalled
+      )
 
-    setRecentGames(newRecentGames)
-  }
+      setRecentGames(newRecentGames)
+    }
 
-  useEffect(() => {
-    loadRecentGames()
-
-    const onRecentGamesUpdated = () => {
+    useEffect(() => {
       loadRecentGames()
+
+      const onRecentGamesUpdated = () => {
+        loadRecentGames()
+      }
+
+      const recentGamesChangedRemoveListener =
+        window.api.handleRecentGamesChanged(onRecentGamesUpdated)
+
+      return () => {
+        recentGamesChangedRemoveListener()
+      }
+    }, [libraryState.epicLibrary, libraryState.gogLibrary, libraryState.sideloadedLibrary, libraryState.amazonLibrary])
+
+    if (!recentGames.length) {
+      return null
     }
 
-    const recentGamesChangedRemoveListener =
-      window.api.handleRecentGamesChanged(onRecentGamesUpdated)
-
-    return () => {
-      recentGamesChangedRemoveListener()
-    }
-  }, [epic.library, gog.library, amazon.library, sideloadedLibrary])
-
-  if (!recentGames.length) {
-    return null
-  }
-
-  return (
-    <>
-      <h5 className="libraryHeader">{t('Recent', 'Played Recently')}</h5>
-      <GamesList
-        library={recentGames}
-        isFirstLane
-        handleGameCardClick={handleModal}
-        onlyInstalled={onlyInstalled}
-        isRecent={true}
-      />
-    </>
-  )
-})
+    return (
+      <>
+        <h5 className="libraryHeader">{t('Recent', 'Played Recently')}</h5>
+        <GamesList
+          library={recentGames}
+          isFirstLane
+          handleGameCardClick={handleModal}
+          onlyInstalled={onlyInstalled}
+          isRecent={true}
+        />
+      </>
+    )
+  })
+)

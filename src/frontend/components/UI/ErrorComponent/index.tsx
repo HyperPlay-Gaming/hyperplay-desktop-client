@@ -6,10 +6,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { CleaningServicesOutlined, DeleteOutline } from '@mui/icons-material'
 import './index.css'
 import ContextProvider from 'frontend/state/ContextProvider'
+import libraryState from 'frontend/state/libraryState'
 
 export default function ErrorComponent({ message }: { message: string }) {
   const { t } = useTranslation()
-  const { refreshLibrary, showResetDialog } = useContext(ContextProvider)
+  const { showResetDialog } = useContext(ContextProvider)
 
   return (
     <div className="errorComponent">
@@ -19,7 +20,7 @@ export default function ErrorComponent({ message }: { message: string }) {
         <button
           className="button is-footer"
           onClick={async () =>
-            refreshLibrary({
+            libraryState.refreshLibrary({
               checkForUpdates: true,
               runInBackground: false
             })

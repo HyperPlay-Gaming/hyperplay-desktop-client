@@ -14,7 +14,6 @@ import {
   getPlatformName,
   getProgress,
   launch,
-  sendKill,
   size,
   updateGame
 } from 'frontend/helpers'
@@ -61,9 +60,11 @@ import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Button } from '@hyperplay/ui'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import DLCList from 'frontend/components/UI/DLCList'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
 
-export default React.memo(function GamePage(): JSX.Element | null {
+export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
     state: { fromDM: boolean; gameInfo: GameInfo }
@@ -76,9 +77,6 @@ export default React.memo(function GamePage(): JSX.Element | null {
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
   const {
-    epic,
-    gog,
-    gameUpdates,
     platform,
     showDialogModal,
     setIsSettingsModalOpen,
@@ -159,7 +157,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       setExtraInfo(await window.api.getExtraInfo(appName, runner))
     }
     updateGameInfo()
-  }, [status, gog.library, epic.library, isMoving])
+  }, [status, libraryState.gogLibrary, libraryState.epicLibrary, isMoving])
 
   useEffect(() => {
     const updateConfig = async () => {
@@ -260,7 +258,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
       }
     }
     updateConfig()
-  }, [status, epic.library, gog.library, gameInfo, isSettingsModalOpen, isOffline])
+  }, [status, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
 
   function handleUpdate() {
     if (gameInfo.runner !== 'sideload')
@@ -302,7 +300,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     }
 
     hasRequirements = extraInfo?.reqs ? extraInfo.reqs.length > 0 : false
-    hasUpdate = is_installed && gameUpdates?.includes(appName)
+    hasUpdate = is_installed && libraryState.gameUpdates?.includes(appName)
     const appLocation = gameInfo.browserUrl
       ? false
       : install_path || folder_name
@@ -875,7 +873,7 @@ export default React.memo(function GamePage(): JSX.Element | null {
     // kill game if running
     return async () => {
       if (isPlaying || isUpdating) {
-        return sendKill(appName, gameInfo.runner)
+        return window.api.kill(appName, gameInfo.runner)
       }
 
       // open game

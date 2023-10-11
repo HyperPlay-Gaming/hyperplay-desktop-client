@@ -12,6 +12,7 @@ import { NavLink } from 'react-router-dom'
 import { InstallModal } from 'frontend/screens/Library/components'
 import { CircularProgress } from '@mui/material'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
+import libraryState from 'frontend/state/libraryState'
 
 interface Props {
   appName: string
@@ -38,7 +39,7 @@ export default function GamesSubmenu({
   setShowExtraInfo,
   onShowDlcs
 }: Props) {
-  const { refresh, platform, libraryStatus, showDialogModal } =
+  const { platform, libraryStatus, showDialogModal } =
     useContext(ContextProvider)
   const isWin = platform === 'win32'
   const isLinux = platform === 'linux'
@@ -92,7 +93,7 @@ export default function GamesSubmenu({
     })
     if (path) {
       await window.api.changeInstallPath({ appName, path, runner })
-      await refresh(runner)
+      await libraryState.refresh(runner)
     }
   }
 

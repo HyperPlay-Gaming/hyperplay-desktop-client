@@ -6,7 +6,6 @@ import SearchBar from '../SearchBar'
 import AccountDropdown from '../AccountDropdown'
 import extensionStore from 'frontend/store/ExtensionStore'
 import { observer } from 'mobx-react-lite'
-import { observable } from 'mobx'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { NavLink, useLocation } from 'react-router-dom'
@@ -139,4 +138,4 @@ const TopNavBar = observer(() => {
   )
 })
 
-export default React.memo(observable(TopNavBar))
+export default TopNavBar

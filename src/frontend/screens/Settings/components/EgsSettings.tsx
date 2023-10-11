@@ -12,12 +12,12 @@ import {
   TextInputWithIconField,
   ToggleSwitch
 } from 'frontend/components/UI'
+import libraryState from 'frontend/state/libraryState'
 
 const EgsSettings = () => {
   const { t } = useTranslation()
   const [isSyncing, setIsSyncing] = useState(false)
-  const { platform, refreshLibrary, showDialogModal } =
-    useContext(ContextProvider)
+  const { platform, showDialogModal } = useContext(ContextProvider)
   const [egsPath, setEgsPath] = useSetting('egsLinkedPath', '')
   const isLinked = Boolean(egsPath.length)
   const isWindows = platform === 'win32'
@@ -33,7 +33,7 @@ const EgsSettings = () => {
         })
         setEgsPath('')
         setIsSyncing(false)
-        refreshLibrary({ runInBackground: false })
+        libraryState.refreshLibrary({ runInBackground: false })
       })
     }
 
@@ -57,7 +57,7 @@ const EgsSettings = () => {
 
       setIsSyncing(false)
       setEgsPath(isWindows ? 'windows' : egsPath)
-      refreshLibrary({ runInBackground: false })
+      libraryState.refreshLibrary({ runInBackground: false })
     })
   }
 

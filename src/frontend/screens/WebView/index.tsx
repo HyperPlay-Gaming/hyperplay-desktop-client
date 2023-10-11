@@ -29,6 +29,7 @@ import {
   AMAZON_STORE
 } from '../../constants'
 import { METAMASK_SNAPS_URL } from 'common/constants'
+import storeAuthState from 'frontend/state/storeAuthState'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -261,15 +262,15 @@ function WebView() {
 
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      if (startUrl.match(/epicgames\.com/) && !epic.username) {
+      if (startUrl.match(/epicgames\.com/) && !storeAuthState.epic.username) {
         setShowLoginWarningFor('epic')
       } else if (
         startUrl.match(/gog\.com/) &&
         !startUrl.match(/auth\.gog\.com/) &&
-        !gog.username
+        !storeAuthState.gog.username
       ) {
         setShowLoginWarningFor('gog')
-      } else if (startUrl === AMAZON_STORE && !amazon.user_id) {
+      } else if (startUrl === AMAZON_STORE && !storeAuthState.amazon.user_id) {
         setShowLoginWarningFor('amazon')
       } else {
         setShowLoginWarningFor(null)

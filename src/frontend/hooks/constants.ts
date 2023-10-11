@@ -1,4 +1,5 @@
 import { Runner, Status } from 'common/types'
+import libraryState from 'frontend/state/libraryState'
 import { TFunction } from 'i18next'
 
 type StatusArgs = {
@@ -42,8 +43,8 @@ export function getStatusLabel({
 }
 
 const storage = window.localStorage
-const nonAvailbleGames = storage.getItem('nonAvailableGames') || '[]'
-const nonAvailbleGamesArray = JSON.parse(nonAvailbleGames)
+const nonAvailableGames = storage.getItem('nonAvailableGames') || '[]'
+const nonAvailableGamesArray = JSON.parse(nonAvailableGames)
 
 export async function handleNonAvailableGames(appName: string, runner: Runner) {
   const gameAvailable = await window.api.isGameAvailable({
@@ -52,20 +53,14 @@ export async function handleNonAvailableGames(appName: string, runner: Runner) {
   })
 
   if (!gameAvailable) {
-    if (!nonAvailbleGamesArray.includes(appName)) {
-      nonAvailbleGamesArray.push(appName)
-      storage.setItem(
-        'nonAvailableGames',
-        JSON.stringify(nonAvailbleGamesArray)
-      )
+    if (!nonAvailableGamesArray.includes(appName)) {
+      nonAvailableGamesArray.push(appName)
+      libraryState.nonAvailableGames = nonAvailableGamesArray
     }
   } else {
-    if (nonAvailbleGamesArray.includes(appName)) {
-      nonAvailbleGamesArray.splice(nonAvailbleGamesArray.indexOf(appName), 1)
-      storage.setItem(
-        'nonAvailableGames',
-        JSON.stringify(nonAvailbleGamesArray)
-      )
+    if (nonAvailableGamesArray.includes(appName)) {
+      nonAvailableGamesArray.splice(nonAvailableGamesArray.indexOf(appName), 1)
+      libraryState.nonAvailableGames = nonAvailableGamesArray
     }
   }
   return gameAvailable

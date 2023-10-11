@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import Info from '@mui/icons-material/Info'
 import { useTranslation } from 'react-i18next'
-import { loginPage, sidInfoPage } from 'frontend/helpers'
 import './index.css'
 import { Autorenew } from '@mui/icons-material'
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -68,11 +67,17 @@ export default function SIDLogin({ backdropClick }: Props) {
           <ol>
             <li>
               {`${t('message.part2')} `}
-              <span onClick={() => loginPage()} className="epicLink">
+              <span
+                onClick={() => window.api.openLoginPage()}
+                className="epicLink"
+              >
                 {t('message.part3')}
               </span>
               {`${t('message.part4')} `}
-              <span onClick={() => sidInfoPage()} className="sid">
+              <span
+                onClick={() => window.api.openSidInfoPage()}
+                className="sid"
+              >
                 {`${t('message.part5')}`}
                 <Info
                   style={{ marginLeft: '4px' }}
@@ -82,7 +87,10 @@ export default function SIDLogin({ backdropClick }: Props) {
             </li>
             <li>
               {`${t('message.part6')} `}
-              <span onClick={() => sidInfoPage()} className="sid">
+              <span
+                onClick={() => window.api.openSidInfoPage()}
+                className="sid"
+              >
                 {`${t('message.part7')}`}
               </span>
               {` ${t('message.part8')}`}

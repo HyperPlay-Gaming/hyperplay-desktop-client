@@ -14,21 +14,27 @@ import { FlagPosition } from '../../components/UI/LanguageSelector'
 import SIDLogin from './components/SIDLogin'
 import ContextProvider from '../../state/ContextProvider'
 import { Background } from '@hyperplay/ui'
+import libraryState from 'frontend/state/libraryState'
+import storeAuthState from 'frontend/state/storeAuthState'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
 export const amazonLoginPath = '/loginweb/nile'
 
 export default React.memo(function NewLogin() {
-  const { epic, gog, amazon, refreshLibrary } = useContext(ContextProvider)
+  const { epic, gog, amazon } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   const [showSidLogin, setShowSidLogin] = useState(false)
-  const [isEpicLoggedIn, setIsEpicLoggedIn] = useState(Boolean(epic.username))
-  const [isGogLoggedIn, setIsGogLoggedIn] = useState(Boolean(gog.username))
+  const [isEpicLoggedIn, setIsEpicLoggedIn] = useState(
+    Boolean(storeAuthState.epic.username)
+  )
+  const [isGogLoggedIn, setIsGogLoggedIn] = useState(
+    Boolean(storeAuthState.gog.username)
+  )
   const [isAmazonLoggedIn, setIsAmazonLoggedIn] = useState(
-    Boolean(amazon.user_id)
+    Boolean(storeAuthState.amazon.user_id)
   )
 
   const loginMessage = t(
@@ -46,13 +52,13 @@ export default React.memo(function NewLogin() {
   }, [epic, gog])
 
   useEffect(() => {
-    setIsEpicLoggedIn(Boolean(epic.username))
-    setIsGogLoggedIn(Boolean(gog.username))
-    setIsAmazonLoggedIn(Boolean(amazon.user_id))
-  }, [epic.username, gog.username, amazon.user_id, t])
+    setIsEpicLoggedIn(Boolean(storeAuthState.epic.username))
+    setIsGogLoggedIn(Boolean(storeAuthState.gog.username))
+    setIsAmazonLoggedIn(Boolean(storeAuthState.amazon.user_id))
+  }, [storeAuthState.epic.username, storeAuthState.gog.username, storeAuthState.amazon.user_id, t])
 
   async function handleLibraryClick() {
-    await refreshLibrary({ runInBackground: false })
+    await libraryState.refreshLibrary({ runInBackground: false })
     navigate('/library')
   }
 
@@ -97,7 +103,7 @@ export default React.memo(function NewLogin() {
               loginUrl={epicLoginPath}
               icon={() => <EpicLogo />}
               isLoggedIn={isEpicLoggedIn}
-              user={epic.username}
+              user={storeAuthState.epic.username}
               logoutAction={epic.logout}
               alternativeLoginAction={() => {
                 setShowSidLogin(true)
@@ -108,7 +114,7 @@ export default React.memo(function NewLogin() {
               icon={() => <GOGLogo />}
               loginUrl={gogLoginPath}
               isLoggedIn={isGogLoggedIn}
-              user={gog.username}
+              user={storeAuthState.gog.username}
               logoutAction={gog.logout}
             />
             <Runner
@@ -116,7 +122,7 @@ export default React.memo(function NewLogin() {
               icon={() => <AmazonLogo />}
               loginUrl={amazonLoginPath}
               isLoggedIn={isAmazonLoggedIn}
-              user={amazon.username || 'Unknown'}
+              user={storeAuthState.amazon.username || 'Unknown'}
               logoutAction={amazon.logout}
             />
           </div>

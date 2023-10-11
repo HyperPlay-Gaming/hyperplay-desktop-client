@@ -99,7 +99,7 @@ async function install({
     installLanguage,
     runner,
     platformToInstall,
-    gameInfo,
+    gameInfo: JSON.parse(JSON.stringify(gameInfo)),
     channelName,
     accessCode
   })

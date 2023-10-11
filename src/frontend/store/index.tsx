@@ -3,7 +3,10 @@ import { GenericStore } from './types'
 
 const StoreController = () => {
   useEffect(() => {
-    const stores = import.meta.glob<{ default: GenericStore }>('./*Store.ts*')
+    const stores = import.meta.glob<{ default: GenericStore }>([
+      './*Store.ts*',
+      '../state/*State.ts'
+    ])
     const storeKeys = Object.keys(stores)
 
     async function initializableStores() {

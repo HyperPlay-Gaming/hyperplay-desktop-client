@@ -12,6 +12,7 @@ import {
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { NileInstallPlatform } from './types/nile'
+import { DropdownItemType } from '@hyperplay/ui'
 
 export type {
   Listing as HyperPlayRelease,
@@ -479,6 +480,12 @@ export type HiddenGame = RecentGame
 
 export type FavouriteGame = HiddenGame
 
+export interface GameCollection {
+  list: HiddenGame[]
+  add: (appNameToAdd: string, appTitle: string) => void
+  remove: (appNameToRemove: string) => void
+}
+
 export type RefreshOptions = {
   checkForUpdates?: boolean
   fullRefresh?: boolean
@@ -783,3 +790,11 @@ export type AvailablePlatforms = {
   value: string
   icon: IconDefinition
 }[]
+
+export type Filter =
+  | 'alphabeticalAscending'
+  | 'alphabeticalDescending'
+  | 'sortByInstalled'
+export interface FilterItem extends DropdownItemType {
+  id?: Filter
+}

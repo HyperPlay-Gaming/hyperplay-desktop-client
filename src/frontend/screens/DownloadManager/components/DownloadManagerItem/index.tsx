@@ -1,6 +1,6 @@
 import './index.css'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import {
   DMQueueElement,
@@ -18,7 +18,6 @@ import {
 } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import { hasProgress } from 'frontend/hooks/hasProgress'
-import ContextProvider from 'frontend/state/ContextProvider'
 import { useNavigate } from 'react-router-dom'
 import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
@@ -26,6 +25,8 @@ import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
 import { GogInstallInfo } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
 
 type Props = {
@@ -52,8 +53,7 @@ type InstallInfo =
   | NileInstallInfo
   | null
 
-const DownloadManagerItem = ({ element, current, state }: Props) => {
-  const { amazon, epic, gog, hyperPlayLibrary } = useContext(ContextProvider)
+const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const [installInfo, setInstallInfo] = useState<InstallInfo>(null)
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation('translation')
@@ -75,10 +75,10 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
   }
 
   const library = [
-    ...epic.library,
-    ...gog.library,
-    ...amazon.library,
-    ...hyperPlayLibrary
+    ...libraryState.epicLibrary,
+    ...libraryState.gogLibrary,
+    ...libraryState.hyperPlayLibrary,
+    ...libraryState.amazonLibrary
   ]
 
   const { params, addToQueueTime, endTime, type, startTime } = element
@@ -293,6 +293,6 @@ const DownloadManagerItem = ({ element, current, state }: Props) => {
       </div>
     </>
   )
-}
+})
 
 export default DownloadManagerItem

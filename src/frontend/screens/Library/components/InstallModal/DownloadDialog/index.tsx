@@ -26,13 +26,7 @@ import {
 } from 'frontend/components/UI'
 import Anticheat from 'frontend/components/UI/Anticheat'
 import { DialogHeader, DialogFooter } from 'frontend/components/UI/Dialog'
-import {
-  getProgress,
-  size,
-  getInstallInfo,
-  writeConfig,
-  install
-} from 'frontend/helpers'
+import { getProgress, size, getInstallInfo, install } from 'frontend/helpers'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { InstallProgress } from 'frontend/types'
 import React, {
@@ -204,7 +198,7 @@ export default function DownloadDialog({
       const gameSettings = await window.api.requestGameSettings(appName)
 
       if (wineVersion) {
-        writeConfig({
+        window.api.writeConfig({
           appName,
           config: {
             ...gameSettings,

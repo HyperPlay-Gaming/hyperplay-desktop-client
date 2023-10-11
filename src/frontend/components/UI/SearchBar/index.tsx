@@ -1,19 +1,14 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef
-} from 'react'
+import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { GameInfo } from '../../../../common/types'
 import { Images } from '@hyperplay/ui'
 import TopNavBarStyles from '../TopNavBar/index.module.scss'
+import { observer } from 'mobx-react-lite'
+import libraryState from 'frontend/state/libraryState'
 
 function fixFilter(text: string) {
   const regex = new RegExp(/([?\\|*|+|(|)|[|]|])+/, 'g')
@@ -27,16 +22,8 @@ const RUNNER_TO_STORE = {
   sideloaded: 'Other',
   nile: 'Amazon'
 }
-export default React.memo(function SearchBar() {
-  const {
-    handleSearch,
-    filterText,
-    epic,
-    gog,
-    sideloadedLibrary,
-    amazon,
-    hyperPlayLibrary
-  } = useContext(ContextProvider)
+
+export default observer(function SearchBar() {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -44,27 +31,26 @@ export default React.memo(function SearchBar() {
 
   const list = useMemo(() => {
     return [
-      ...(epic.library ?? []),
-      ...(gog.library ?? []),
-      ...(sideloadedLibrary ?? []),
-      ...(hyperPlayLibrary ?? []),
-      ...(amazon.library ?? [])
+      ...libraryState.epicLibrary,
+      ...libraryState.gogLibrary,
+      ...libraryState.sideloadedLibrary,
+      ...libraryState.hyperPlayLibrary,
+      ...libraryState.amazonLibrary
     ]
       .filter(Boolean)
       .filter((el) => {
         return (
           !el.install.is_dlc &&
-          new RegExp(fixFilter(filterText), 'i').test(el.title)
+          new RegExp(fixFilter(libraryState.filterText), 'i').test(el.title)
         )
       })
       .sort((g1, g2) => (g1.title < g2.title ? -1 : 1))
   }, [
-    amazon.library,
-    epic.library,
-    gog.library,
-    filterText,
-    sideloadedLibrary,
-    hyperPlayLibrary
+    libraryState.epicLibrary,
+    libraryState.gogLibrary,
+    libraryState.filterText,
+    libraryState.sideloadedLibrary,
+    libraryState.amazonLibrary
   ])
 
   // we have to use an event listener instead of the react
@@ -72,9 +58,9 @@ export default React.memo(function SearchBar() {
   useEffect(() => {
     if (input.current) {
       const element = input.current
-      element.value = filterText
+      element.value = libraryState.filterText
       const handler = () => {
-        handleSearch(element.value)
+        libraryState.filterText = element.value
       }
       element.addEventListener('input', handler)
       return () => {
@@ -85,7 +71,7 @@ export default React.memo(function SearchBar() {
   }, [input])
 
   const onClear = useCallback(() => {
-    handleSearch('')
+    libraryState.filterText = ''
     if (input.current) {
       input.current.value = ''
       input.current.focus()
@@ -93,7 +79,7 @@ export default React.memo(function SearchBar() {
   }, [input])
 
   const handleClick = (game: GameInfo) => {
-    handleSearch('')
+    libraryState.filterText = ''
     if (input.current) {
       input.current.value = ''
 
@@ -123,7 +109,7 @@ export default React.memo(function SearchBar() {
         id="search"
         className="searchBarInput"
       />
-      {filterText.length > 0 && (
+      {libraryState.filterText.length > 0 && (
         <>
           <ul className="autoComplete body-sm">
             {list.length > 0 &&

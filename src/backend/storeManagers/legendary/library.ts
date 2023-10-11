@@ -294,14 +294,23 @@ export async function listUpdateableGames(): Promise<string[]> {
   const installedJsonFile = join(legendaryConfigPath, 'installed.json')
   let installedJson: Record<string, InstalledJsonMetadata> = {}
   try {
-    installedJson = JSON.parse(
-      readFileSync(installedJsonFile, { encoding: 'utf-8' })
-    )
+    if (existsSync(installedJsonFile)) {
+      installedJson = JSON.parse(
+        readFileSync(installedJsonFile, { encoding: 'utf-8' })
+      )
+    } else {
+      logInfo(
+        `File does not exist: ${installedJsonFile} Disregard this error if no Epic games are installed`,
+        LogPrefix.Legendary
+      )
+      return []
+    }
   } catch (error) {
     logWarning(
       ['Failed to parse games from', installedJsonFile, 'with:', error],
       LogPrefix.Legendary
     )
+    return []
   }
 
   // First go through all our installed games and store their versions...

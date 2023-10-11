@@ -21,6 +21,7 @@ import {
   DisableLogs,
   DownloadNoHTTPS
 } from '../../components'
+import libraryState from 'frontend/state/libraryState'
 
 export default function AdvancedSettings() {
   const { config } = useContext(SettingsContext)
@@ -38,7 +39,7 @@ export default function AdvancedSettings() {
     useState(false)
   const eosOverlayAppName = '98bc04bc842e4906993fd6d6644ffb8d'
 
-  const { libraryStatus, platform, refreshLibrary, showResetDialog } =
+  const { libraryStatus, platform, showResetDialog } =
     useContext(ContextProvider)
   const { t } = useTranslation()
   const isWindows = platform === 'win32'
@@ -163,7 +164,7 @@ export default function AdvancedSettings() {
     const storage: Storage = window.localStorage
     storage.removeItem('updates')
     window.api.clearCache(true)
-    return refreshLibrary({ runInBackground: true })
+    return libraryState.refreshLibrary({ runInBackground: true })
   }
 
   return (
