@@ -27,8 +27,13 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
 
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
   const [freeMints, setFreeMints] = useState(0)
-  const { achievementsToBeMinted, handleMint, isLoading } =
-    useMintAchievements()
+  const {
+    achievementsToBeMinted,
+    isLoading,
+    handleMint,
+    handleUpdate,
+    achievementsToBeUpdated
+  } = useMintAchievements()
 
   useEffect(() => {
     const getAchievements = async () => {
@@ -135,7 +140,13 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
       }}
       mintButtonProps={{
         onClick: handleMint,
-        disabled: isDisabled ?? achievementsToBeMinted.length === 0
+        disabled: isDisabled ?? achievementsToBeMinted.length === 0,
+        totalToMint: achievementsToBeMinted.length
+      }}
+      updateButtonProps={{
+        onClick: handleUpdate,
+        disabled: isDisabled ?? achievementsToBeUpdated.length === 0,
+        totalToUpdate: achievementsToBeUpdated.length
       }}
     />
   )
