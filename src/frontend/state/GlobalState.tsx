@@ -34,6 +34,7 @@ import { IpcRendererEvent } from 'electron/renderer'
 import { NileRegisterData } from 'common/types/nile'
 import libraryState from 'frontend/state/libraryState'
 import storeAuthState from './storeAuthState'
+import DeviceState from './DeviceState'
 
 const storage: Storage = window.localStorage
 
@@ -54,7 +55,6 @@ interface StateProps {
   language: string
   layout: string
   libraryStatus: GameStatus[]
-  platform: NodeJS.Platform | 'unknown'
   refreshing: boolean
   refreshingInTheBackground: boolean
   theme: string
@@ -90,7 +90,6 @@ class GlobalState extends PureComponent<Props> {
     language: this.props.i18n.language,
     layout: storage.getItem('layout') || 'grid',
     libraryStatus: [],
-    platform: 'unknown',
     refreshing: false,
     refreshingInTheBackground: true,
     sidebarCollapsed: JSON.parse(
@@ -367,7 +366,7 @@ class GlobalState extends PureComponent<Props> {
   }
 
   refreshWineVersionInfo = async (fetch: boolean): Promise<void> => {
-    if (this.state.platform === 'win32') {
+    if (DeviceState.platform === 'win32') {
       return
     }
     window.api.logInfo('Refreshing wine downloader releases')
@@ -556,7 +555,6 @@ class GlobalState extends PureComponent<Props> {
     const legendaryUser = configStore.has('userInfo')
     const gogUser = gogConfigStore.has('userData')
     const amazonUser = nileConfigStore.has('userData')
-    const platform = await window.api.getPlatform()
 
     if (legendaryUser) {
       await window.api.getUserInfo()
@@ -574,8 +572,6 @@ class GlobalState extends PureComponent<Props> {
       const storedGameUpdates = JSON.parse(storage.getItem('updates') || '[]')
       this.setState({ gameUpdates: storedGameUpdates })
     }
-
-    this.setState({ platform })
 
     if (legendaryUser || gogUser || amazonUser) {
       libraryState.refreshLibrary({

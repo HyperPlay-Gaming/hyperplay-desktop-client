@@ -1,6 +1,6 @@
 import { ContextType } from 'frontend/types'
 import { makeAutoObservable, when } from 'mobx'
-import walletStore from './WalletStore'
+import walletStore from './WalletState'
 import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'

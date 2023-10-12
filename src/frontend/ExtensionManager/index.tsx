@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import ExtensionManagerStyles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
-import extensionStore from 'frontend/store/ExtensionStore'
+import extensionState from 'frontend/state/ExtensionState'
 import { motion, AnimatePresence } from 'framer-motion'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
@@ -30,23 +30,23 @@ const ExtensionManager = function () {
   return (
     <div className={ExtensionManagerStyles.mmContainer} ref={rootRef}>
       <AnimatePresence>
-        {extensionStore.isPopupOpen && !extensionStore.isNotificationOpen ? (
+        {extensionState.isPopupOpen ? (
           <motion.div {...animation}>
             <webview
               nodeintegrationinsubframes="true"
               webpreferences="contextIsolation=true, nodeIntegration=true"
-              src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
+              src={`chrome-extension://${extensionState.extensionId}/popup.html`}
               className={ExtensionManagerStyles.mmWindow}
               allowpopups={trueAsStr}
             ></webview>
           </motion.div>
         ) : null}
-        {extensionStore.isPopupOpen && extensionStore.isNotificationOpen ? (
+        {extensionState.isNotificationOpen ? (
           <motion.div {...animation}>
             <webview
               nodeintegrationinsubframes="true"
               webpreferences="contextIsolation=true, nodeIntegration=true"
-              src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
+              src={`chrome-extension://${extensionState.extensionId}/notification.html`}
               className={ExtensionManagerStyles.mmWindow}
               allowpopups={trueAsStr}
             ></webview>

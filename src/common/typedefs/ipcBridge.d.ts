@@ -182,7 +182,7 @@ interface HyperPlayAsyncIPCFunctions {
   getConnectionUris: (providerSelection: PROVIDERS) => Promise<string>
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   providerRequest: (args: RequestArguments) => Promise<any>
-  getConnectedProvider: () => Promise<string>
+  getConnectedProvider: () => Promise<PROVIDERS>
   trackEvent: (payload: PossibleMetricPayloads) => Promise<void>
   trackScreen: (name: string, properties?: apiObject) => Promise<void>
   changeMetricsOptInStatus: (

@@ -1,4 +1,9 @@
-import { GameInfo, GameSettings, Runner } from 'common/types'
+import {
+  GameInfo,
+  GameSettings,
+  OverlayRenderState,
+  Runner
+} from 'common/types'
 import { GameConfig } from '../../game_config'
 import { isMac, isLinux, gamesConfigPath, icon } from '../../constants'
 import { logInfo, LogPrefix, logWarning } from '../../logger/logger'
@@ -162,6 +167,16 @@ const openNewBrowserGameWindow = async (
 
     browserGame.loadURL(url)
     setTimeout(() => browserGame.focus(), 200)
+
+    // const renderState: OverlayRenderState = {
+    //   showToasts: overlayWindowSettings.showToasts,
+    //   showBrowserGame: overlayWindowSettings.showBrowserGame,
+    //   browserGameUrl: '',
+    //   showHintText: overlayWindowSettings.showHintText,
+    //   showExitGameButton: overlayWindowSettings.showExitButton,
+    //   showExtension: overlayWindowSettings.showExtension
+    // }
+    // newOverlay.webContents.send('updateOverlayRenderState', renderState)
 
     if (abortController) {
       abortController.signal.addEventListener('abort', () => {

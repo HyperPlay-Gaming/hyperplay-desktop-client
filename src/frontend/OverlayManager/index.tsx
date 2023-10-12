@@ -1,37 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import BrowserGameStyles from './index.module.scss'
-import BrowserExtensionManager from './ExtensionManager'
-import BrowserToastManager from './ToastManager'
+import ToastManager from './ToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
-import BrowserExtensionToastManager from './ExtensionToastManager'
 import { Runner } from 'common/types'
-
-interface RenderState {
-  showToasts: boolean
-  showExtension: boolean
-  showBrowserGame: boolean
-  showExitButton: boolean
-  showHintText: boolean
-}
+import { observer } from 'mobx-react-lite'
+import OverlayState from 'frontend/state/OverlayState'
+import WalletState from 'frontend/state/WalletState'
+import { t } from 'i18next'
+import { Button } from '@hyperplay/ui'
+import DeviceState from 'frontend/state/DeviceState'
+import ExtensionManager from 'frontend/ExtensionManager'
 
 interface BrowserGameProps {
-  url: string
   appName: string
   runner: Runner
-  renderState: RenderState
 }
 
-const OverlayManager = function ({
-  url,
-  appName,
-  runner,
-  renderState
-}: BrowserGameProps) {
-  const [provider, setProvider] = useState('')
-
-  useEffect(() => {
-    window.api.getConnectedProvider().then((val) => setProvider(val))
-  }, [])
+const OverlayManager = function ({ appName, runner }: BrowserGameProps) {
+  const renderState = OverlayState.state
+  const url = OverlayState.state.browserGameUrl
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const trueAsStr = 'true' as any
@@ -46,21 +33,28 @@ const OverlayManager = function ({
     txnToastContainerStyle.top = 0
   }
 
-  function isFullscreenOverlay(showStates: RenderState) {
-    return (
-      showStates.showToasts &&
-      showStates.showExtension &&
-      showStates.showExitButton
-    )
-  }
-
   if (
-    !(isFullscreenOverlay(renderState) && !renderState.showBrowserGame) &&
+    !(OverlayState.isFullscreenOverlay && !renderState.showBrowserGame) &&
     url === 'ignore'
   ) {
     style.width = '100%'
     style.height = '100%'
   }
+
+  let exitGameButtonStyle = {
+    top: 'var(--space-md)',
+    right: 'var(--space-md)',
+    position: 'absolute',
+    zIndex: 200
+  } as React.CSSProperties
+
+  if (renderState.showExitGameButton && !renderState.showExtension)
+    exitGameButtonStyle = {
+      ...exitGameButtonStyle,
+      top: 0,
+      right: 0,
+      overflowY: 'hidden'
+    }
 
   /* eslint-disable react/no-unknown-property */
   return (
@@ -74,23 +68,47 @@ const OverlayManager = function ({
           className={BrowserGameStyles.txnToastContainer}
           style={txnToastContainerStyle}
         >
-          <BrowserToastManager showCloseButton={true} />
-          <BrowserExtensionToastManager showCloseButton={true} />
+          <ToastManager />
         </div>
       ) : null}
-      <BrowserExtensionManager
-        appName={appName}
-        runner={runner}
-        showExtension={renderState.showExtension}
-        showExitGameButton={renderState.showExitButton}
-        showHintText={renderState.showHintText}
-      />
-      {provider !== '' && url !== 'ignore' && renderState.showBrowserGame ? (
+      <div className={BrowserGameStyles.bgFilter}></div>
+      <div className={`${BrowserGameStyles.closeOverlayText} title`}>
+        {renderState.showHintText
+          ? t('hyperplayOverlay.closeOverlay', {
+              defaultValue: 'Press {{overlayKeyMod}} + X to close the overlay',
+              overlayKeyMod: DeviceState.isMac ? 'Option' : 'Alt'
+            })
+          : null}
+      </div>
+      {renderState.showExitGameButton ? (
+        <Button
+          onClick={async () => window.api.kill(appName, runner)}
+          style={exitGameButtonStyle}
+          type="secondary"
+          size="medium"
+        >
+          {t('exit_game', 'Exit Game')}
+        </Button>
+      ) : null}
+      {!renderState.showExtension ? (
+        <div className={BrowserGameStyles.overlayToggleHint}>
+          <div className="title">
+            {t(
+              'overlay.EXTERNAL_WALLET_CONNECTED',
+              'You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.'
+            )}
+          </div>
+        </div>
+      ) : (
+        <ExtensionManager />
+      )}
+      {url !== 'ignore' && renderState.showBrowserGame ? (
         <webview
           src={url}
           className={BrowserGameStyles.browserGame}
           partition={
-            provider === PROVIDERS.METAMASK_MOBILE || PROVIDERS.WALLET_CONNECT
+            WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
+            PROVIDERS.WALLET_CONNECT
               ? 'persist:InPageWindowEthereumExternalWallet'
               : undefined
           }
@@ -103,4 +121,4 @@ const OverlayManager = function ({
   )
 }
 
-export default OverlayManager
+export default observer(OverlayManager)

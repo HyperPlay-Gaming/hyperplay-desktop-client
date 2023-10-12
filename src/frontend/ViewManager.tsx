@@ -9,14 +9,8 @@ const Views = {
 
 type URLSearchParamsProxy = URLSearchParams & {
   view?: string
-  browserUrl?: string
   appName?: string
   runner?: Runner
-  showToasts?: string
-  showExtension?: string
-  showBrowserGame?: string
-  showExitButton?: string
-  showHintText?: string
 }
 
 const ViewManager = function () {
@@ -30,30 +24,9 @@ const ViewManager = function () {
     }
   )
 
-  if (
-    params.view === 'BrowserGame' &&
-    params.browserUrl !== undefined &&
-    params.appName !== undefined &&
-    params.runner !== undefined
-  ) {
-    const parseShowParam = (showParam: string | undefined) =>
-      showParam !== undefined && showParam === 'false' ? false : true
-
-    // default to true if not supplied
-    const renderState = {
-      showToasts: parseShowParam(params.showToasts),
-      showExtension: parseShowParam(params.showExtension),
-      showBrowserGame: parseShowParam(params.showBrowserGame),
-      showExitButton: parseShowParam(params.showExitButton),
-      showHintText: parseShowParam(params.showHintText)
-    }
+  if (params.appName !== undefined && params.runner !== undefined) {
     return (
-      <OverlayManager
-        url={params.browserUrl}
-        appName={params.appName}
-        runner={params.runner}
-        renderState={renderState}
-      />
+      <OverlayManager appName={params.appName ?? ''} runner={params.runner} />
     )
   }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import classNames from 'classnames'
 import getWalletText from './helpers/getWalletText'
-import walletStore from 'frontend/store/WalletStore'
+import walletStore from 'frontend/store/WalletState'
 import ProfilePicture from './ProfilePicture'
 import { observer } from 'mobx-react-lite'
 import { t } from 'i18next'

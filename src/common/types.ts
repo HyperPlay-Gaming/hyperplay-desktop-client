@@ -798,3 +798,12 @@ export type Filter =
 export interface FilterItem extends DropdownItemType {
   id?: Filter
 }
+
+export interface OverlayRenderState {
+  showToasts: boolean
+  showBrowserGame: boolean
+  browserGameUrl: string
+  showHintText: boolean
+  showExitGameButton: boolean
+  showExtension: boolean
+}

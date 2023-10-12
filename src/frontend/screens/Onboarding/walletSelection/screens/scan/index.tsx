@@ -4,7 +4,7 @@ import QrCodeGradientBorder from '../../../components/qrCodeGradientBorder'
 import ScanScreenStyles from './index.module.scss'
 import { WarningIcon } from 'frontend/assets/hyperplay'
 import { Button } from '@hyperplay/ui'
-import walletStore from 'frontend/store/WalletStore'
+import walletStore from 'frontend/store/WalletState'
 import { observer } from 'mobx-react-lite'
 
 interface ScanScreenProps {
