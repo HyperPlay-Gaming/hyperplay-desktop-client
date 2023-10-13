@@ -696,6 +696,7 @@
         "showfps": "Show FPS (DX9, 10 and 11)",
         "showMetalOverlay": "Show Stats Overlay",
         "start-in-tray": "Start Minimized",
+        "steamId": "Steam ID",
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "WinePrefix folder",
@@ -733,7 +734,8 @@
             "general": "General",
             "log": "Log",
             "other": "Other",
-            "sync": "Cloud Saves Sync"
+            "sync": "Cloud Saves Sync",
+            "accounts": "Accounts"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
@@ -758,6 +760,9 @@
         "processing": "Processing files, please wait"
     },
     "store": "Epic Store",
+    "stores": {
+        "title": "Stores"
+    },
     "title": {
         "allGames": "All Games"
     },

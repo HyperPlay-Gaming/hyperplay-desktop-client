@@ -18,6 +18,7 @@ import { Tabs } from '@hyperplay/ui'
 import Accessibility from '../Accessibility'
 import WineManager from '../WineManager'
 import ContextProvider from 'frontend/state/ContextProvider'
+import AccountSettings from './sections/AccountSettings'
 
 export const defaultWineVersion: WineInstallation = {
   bin: '/usr/bin/wine',
@@ -132,6 +133,9 @@ function Settings() {
                 <Tabs.Tab value="accessibility">
                   <div className="menu">{t('accessibility.title')}</div>
                 </Tabs.Tab>
+                <Tabs.Tab value="accounts">
+                  <div className="menu capitalize">{t('accounts')}</div>
+                </Tabs.Tab>
                 {!isWin ? (
                   <Tabs.Tab value="wineManager">
                     <div className="menu">
@@ -154,6 +158,9 @@ function Settings() {
               </Tabs.Panel>
               <Tabs.Panel value="accessibility">
                 <Accessibility />
+              </Tabs.Panel>
+              <Tabs.Panel value="accounts">
+                <AccountSettings />
               </Tabs.Panel>
               {!isWin ? (
                 <Tabs.Panel value="wineManager">

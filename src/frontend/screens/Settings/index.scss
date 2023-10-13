@@ -61,7 +61,7 @@
 
 .save {
   cursor: default;
-  margin: var(--space-md) 0 0 var(--space-md);
+  margin: var(--space-md) 0 0 0;
   padding-block-end: var(--space-xs);
   display: flex;
   align-items: center;
@@ -215,4 +215,8 @@ a {
 
 .settingsSectionHeader {
   text-align: left;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }

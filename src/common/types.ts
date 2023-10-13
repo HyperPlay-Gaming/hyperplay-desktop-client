@@ -116,6 +116,7 @@ export interface AppSettings extends GameSettings {
   minimizeOnGameLaunch: boolean
   startInTray: boolean
   userInfo: UserInfo
+  steamId: string
 }
 
 export type LibraryTopSectionOptions =
