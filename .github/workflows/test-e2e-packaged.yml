@@ -111,7 +111,7 @@ jobs:
   windows-10-packaged:
     runs-on: windows-2019
     concurrency:
-      group: e2e-packaged-win-${{ github.ref }}
+      group: e2e-packaged-win-10-${{ github.ref }}
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
