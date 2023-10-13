@@ -40,8 +40,11 @@ Object.defineProperty(window, 'api', {
 import ExtensionState from '../ExtensionState'
 
 describe('ExtensionState.ts', () => {
-  test('should show notification and hide popup then hide all', async () => {
+  beforeEach(() => {
     ExtensionState.init()
+  })
+
+  test('should show notification and hide popup then hide all', async () => {
     showNotificationInWebview()
 
     expect(ExtensionState.isPopupOpen).toBe(false)
@@ -57,12 +60,10 @@ describe('ExtensionState.ts', () => {
   })
 
   test('should have the correct extension id', async () => {
-    ExtensionState.init()
     expect(ExtensionState.extensionId).toBe(testExtensionId)
   })
 
   test('should show notification then remove it', async () => {
-    ExtensionState.init()
     showNotificationInWebview()
 
     expect(ExtensionState.isPopupOpen).toBe(false)
@@ -76,7 +77,6 @@ describe('ExtensionState.ts', () => {
   })
 
   test('should show popup then remove it', async () => {
-    ExtensionState.init()
     showPopupInWebview()
 
     expect(ExtensionState.isPopupOpen).toBe(true)
@@ -89,7 +89,6 @@ describe('ExtensionState.ts', () => {
   })
 
   test('should show popup then lock and fail to remove it, then unlock and remove', async () => {
-    ExtensionState.init()
     showPopupInWebview()
     ExtensionState.lockPopup()
 
