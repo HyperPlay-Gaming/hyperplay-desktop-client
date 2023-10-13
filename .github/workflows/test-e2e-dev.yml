@@ -106,3 +106,35 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
           GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+
+  windows-10-dev:
+    runs-on: windows-2019
+    concurrency:
+      group: e2e-dev-win-10-${{ github.ref }}
+      cancel-in-progress: true
+    steps:
+      - name: Checkout repository.
+        uses: actions/checkout@v3
+        with:
+          submodules: 'recursive'
+          token: ${{ secrets.pat }}
+      - name: Setup NodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'yarn'
+      - name: Reconfigure git to use HTTP authentication
+        run: >
+          git config --global url."https://github.com/".insteadOf
+          ssh://git@github.com/
+      - name: Authenticate with private NPM package
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
+      - name: Install modules.
+        run: yarn install --network-timeout 600000 && yarn allow-scripts
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+      - name: Build and Test
+        run: yarn test:e2e-ci
+        env:
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
