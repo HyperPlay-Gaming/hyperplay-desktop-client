@@ -16,29 +16,12 @@ interface BrowserGameProps {
   runner: Runner
 }
 
-const OverlayManager = function ({ appName, runner }: BrowserGameProps) {
-  const renderState = OverlayState.state
-  const url = OverlayState.state.browserGameUrl
-
-  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-  const trueAsStr = 'true' as any
-  const style = {
-    '--body-background': '#999999'
-  } as React.CSSProperties
-
+const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
   const txnToastContainerStyle = {} as React.CSSProperties
-  if (renderState.showToasts && !renderState.showExtension) {
+  if (OverlayState.showToasts && !OverlayState.showExtension) {
     txnToastContainerStyle.bottom = 0
     txnToastContainerStyle.right = 0
     txnToastContainerStyle.top = 0
-  }
-
-  if (
-    !(OverlayState.isFullscreenOverlay && !renderState.showBrowserGame) &&
-    url === 'ignore'
-  ) {
-    style.width = '100%'
-    style.height = '100%'
   }
 
   let exitGameButtonStyle = {
@@ -48,7 +31,7 @@ const OverlayManager = function ({ appName, runner }: BrowserGameProps) {
     zIndex: 200
   } as React.CSSProperties
 
-  if (renderState.showExitGameButton && !renderState.showExtension)
+  if (OverlayState.showExitGameButton && !OverlayState.showExtension)
     exitGameButtonStyle = {
       ...exitGameButtonStyle,
       top: 0,
@@ -56,14 +39,9 @@ const OverlayManager = function ({ appName, runner }: BrowserGameProps) {
       overflowY: 'hidden'
     }
 
-  /* eslint-disable react/no-unknown-property */
   return (
-    <div
-      className={BrowserGameStyles.overlayContainer}
-      style={style}
-      id="overlay-manager"
-    >
-      {renderState.showToasts ? (
+    <>
+      {OverlayState.showToasts ? (
         <div
           className={BrowserGameStyles.txnToastContainer}
           style={txnToastContainerStyle}
@@ -72,15 +50,15 @@ const OverlayManager = function ({ appName, runner }: BrowserGameProps) {
         </div>
       ) : null}
       <div className={BrowserGameStyles.bgFilter}></div>
-      <div className={`${BrowserGameStyles.closeOverlayText} title`}>
-        {renderState.showHintText
-          ? t('hyperplayOverlay.closeOverlay', {
-              defaultValue: 'Press {{overlayKeyMod}} + X to close the overlay',
-              overlayKeyMod: DeviceState.isMac ? 'Option' : 'Alt'
-            })
-          : null}
-      </div>
-      {renderState.showExitGameButton ? (
+      {OverlayState.showHintText ? (
+        <div className={`${BrowserGameStyles.closeOverlayText} title`}>
+          {t('hyperplayOverlay.closeOverlay', {
+            defaultValue: 'Press {{overlayKeyMod}} + X to close the overlay',
+            overlayKeyMod: DeviceState.isMac ? 'Option' : 'Alt'
+          })}
+        </div>
+      ) : null}
+      {OverlayState.showExitGameButton ? (
         <Button
           onClick={async () => window.api.kill(appName, runner)}
           style={exitGameButtonStyle}
@@ -90,7 +68,9 @@ const OverlayManager = function ({ appName, runner }: BrowserGameProps) {
           {t('exit_game', 'Exit Game')}
         </Button>
       ) : null}
-      {!renderState.showExtension ? (
+      {OverlayState.showExtension ? (
+        <ExtensionManager />
+      ) : (
         <div className={BrowserGameStyles.overlayToggleHint}>
           <div className="title">
             {t(
@@ -99,10 +79,43 @@ const OverlayManager = function ({ appName, runner }: BrowserGameProps) {
             )}
           </div>
         </div>
-      ) : (
-        <ExtensionManager />
       )}
-      {url !== 'ignore' && renderState.showBrowserGame ? (
+    </>
+  )
+})
+
+const OverlayManager = observer(function ({
+  appName,
+  runner
+}: BrowserGameProps) {
+  const url = OverlayState.browserGameUrl
+  console.log('rendering overlay manager with url ', url)
+
+  /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+  const trueAsStr = 'true' as any
+  const style = {
+    '--body-background': '#999999'
+  } as React.CSSProperties
+
+  if (
+    !(OverlayState.isFullscreenOverlay && !OverlayState.showBrowserGame) &&
+    url === 'ignore'
+  ) {
+    style.width = '100%'
+    style.height = '100%'
+  }
+
+  /* eslint-disable react/no-unknown-property */
+  return (
+    <div
+      className={BrowserGameStyles.overlayContainer}
+      style={style}
+      id="overlay-manager"
+    >
+      {OverlayState.showOverlay ? (
+        <Overlay appName={appName} runner={runner} />
+      ) : null}
+      {url !== 'ignore' && OverlayState.showBrowserGame ? (
         <webview
           src={url}
           className={BrowserGameStyles.browserGame}
@@ -119,6 +132,6 @@ const OverlayManager = function ({ appName, runner }: BrowserGameProps) {
       ) : null}
     </div>
   )
-}
+})
 
-export default observer(OverlayManager)
+export default OverlayManager

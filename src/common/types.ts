@@ -806,4 +806,5 @@ export interface OverlayRenderState {
   showHintText: boolean
   showExitGameButton: boolean
   showExtension: boolean
+  showBackgroundTint: boolean
 }

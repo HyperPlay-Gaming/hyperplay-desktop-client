@@ -26,12 +26,14 @@ import { access, chmod } from 'fs/promises'
 import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { hrtime } from 'process'
 import { trackEvent } from 'backend/metrics/metrics'
 import { domainsAreEqual } from 'common/utils'
+import { connectedProvider } from 'backend/hyperplay-proxy-server/providerHelper'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -166,17 +168,24 @@ const openNewBrowserGameWindow = async (
     })
 
     browserGame.loadURL(url)
-    setTimeout(() => browserGame.focus(), 200)
 
-    // const renderState: OverlayRenderState = {
-    //   showToasts: overlayWindowSettings.showToasts,
-    //   showBrowserGame: overlayWindowSettings.showBrowserGame,
-    //   browserGameUrl: '',
-    //   showHintText: overlayWindowSettings.showHintText,
-    //   showExitGameButton: overlayWindowSettings.showExitButton,
-    //   showExtension: overlayWindowSettings.showExtension
-    // }
-    // newOverlay.webContents.send('updateOverlayRenderState', renderState)
+    ipcMain.once('overlayReady', () => {
+      console.log(
+        'overlay is ready so sending overlay render state for browser game'
+      )
+      const renderState: OverlayRenderState = {
+        showToasts: true,
+        showBrowserGame: true,
+        browserGameUrl: browserUrl,
+        showHintText: true,
+        showExitGameButton: true,
+        showExtension: connectedProvider === PROVIDERS.METAMASK_EXTENSION,
+        showBackgroundTint: true
+      }
+      browserGame.webContents.send('updateOverlayRenderState', renderState)
+    })
+
+    setTimeout(() => browserGame.focus(), 200)
 
     if (abortController) {
       abortController.signal.addEventListener('abort', () => {

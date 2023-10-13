@@ -1,10 +1,11 @@
 import { ContextType } from 'frontend/types'
 import { makeAutoObservable, when } from 'mobx'
-import walletStore from './WalletState'
+import walletStore from '../state/WalletState'
 import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { useLocation } from 'react-router-dom'
+import WalletState from '../state/WalletState'
 
 class OnboardingStore {
   isOnboardingOpen = true
@@ -63,6 +64,9 @@ export const OnboardingStoreController = () => {
   async function init() {
     const currentWeb3Provider = await window.api.getCurrentWeb3Provider()
     onboardingStore.bootstrapOnboarding(context, currentWeb3Provider)
+    if (currentWeb3Provider) {
+      WalletState.provider = currentWeb3Provider
+    }
   }
 
   useEffect(() => {

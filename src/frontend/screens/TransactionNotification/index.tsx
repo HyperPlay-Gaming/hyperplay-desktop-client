@@ -2,13 +2,20 @@ import React from 'react'
 import styles from './index.module.css'
 
 import { observer } from 'mobx-react-lite'
-import transactionStore from 'frontend/state/TransactionState'
+import transactionState from 'frontend/state/TransactionState'
 import PhoneIcon from './components/PhoneIcon'
+import WalletState from 'frontend/state/WalletState'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 const TransactionNotification = () => {
-  const item = transactionStore.latestToast
+  const item = transactionState.latestToast
 
-  if (item === null || !item.isOpen) return <></>
+  if (
+    item === null ||
+    !item.isOpen ||
+    WalletState.provider === PROVIDERS.METAMASK_EXTENSION
+  )
+    return <></>
 
   const title = item.title
   const description = item.subtext

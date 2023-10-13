@@ -24,7 +24,7 @@ const ViewManager = function () {
     }
   )
 
-  if (params.appName !== undefined && params.runner !== undefined) {
+  if (params.appName && params.runner) {
     return (
       <OverlayManager appName={params.appName ?? ''} runner={params.runner} />
     )

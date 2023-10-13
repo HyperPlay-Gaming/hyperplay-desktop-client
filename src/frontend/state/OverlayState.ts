@@ -1,41 +1,77 @@
 import { OverlayRenderState } from 'common/types'
-import { makeAutoObservable } from 'mobx'
+import { PROVIDERS } from 'common/types/proxy-types'
+import { autorun, makeAutoObservable } from 'mobx'
+import WalletState from './WalletState'
 
 class OverlayState {
-  state: OverlayRenderState = {
-    showToasts: false,
-    showBrowserGame: false,
-    browserGameUrl: '',
-    showHintText: false,
-    showExitGameButton: false,
-    showExtension: false
-  }
+  showToasts = false
+  showBrowserGame = false
+  browserGameUrl = ''
+  showHintText = false
+  showExitGameButton = false
+  showExtension = false
+  showBackgroundTint = false
+
+  showOverlay = false
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  get url() {
+    return this.browserGameUrl
   }
 
   handleUpdateOverlayRenderState(
     event: Electron.IpcRendererEvent,
     renderState: OverlayRenderState
   ) {
-    this.state = renderState
+    Object.assign(this, renderState)
+  }
+
+  updateOverlayVisibility(show: boolean) {
+    this.showOverlay = show
+  }
+
+  handleUpdateOverlayVisibility(
+    event: Electron.IpcRendererEvent,
+    show: boolean
+  ) {
+    this.updateOverlayVisibility(show)
   }
 
   init() {
     console.log('init overlay state')
     window.api.handleUpdateOverlayRenderState(
-      this.handleUpdateOverlayRenderState
+      this.handleUpdateOverlayRenderState.bind(this)
     )
+    window.api.handleUpdateOverlayVisibility(
+      this.handleUpdateOverlayVisibility.bind(this)
+    )
+    window.api.overlayReady()
   }
 
   get isFullscreenOverlay() {
-    return (
-      this.state.showToasts &&
-      this.state.showExtension &&
-      this.state.showExitGameButton
-    )
+    return this.showToasts && this.showExtension && this.showExitGameButton
   }
 }
 
-export default new OverlayState()
+const overlayState = new OverlayState()
+export default overlayState
+
+autorun(() => {
+  switch (WalletState.provider) {
+    case PROVIDERS.METAMASK_EXTENSION:
+      overlayState.showExtension = true
+      break
+    case PROVIDERS.WALLET_CONNECT:
+      overlayState.showExtension = false
+      break
+    case PROVIDERS.METAMASK_MOBILE:
+      overlayState.showExtension = false
+      break
+    case PROVIDERS.UNCONNECTED:
+      overlayState.showExtension = false
+      break
+  }
+})

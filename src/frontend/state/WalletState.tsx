@@ -23,8 +23,6 @@ class WalletState implements InitializableStore {
   }
 
   init() {
-    window.api.getConnectedProvider().then((val) => (this.provider = val))
-
     window.api.handleAccountsChanged(this.handleAccountsUpdated.bind(this))
 
     window.api.handleDisconnected(() => {
