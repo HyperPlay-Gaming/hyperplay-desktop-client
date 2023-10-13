@@ -201,8 +201,9 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
     }
     removeFromQueue(currentElement.params.appName)
 
-    if (removeDownloaded) {
-      const { appName, runner, gameInfo, channelName } = currentElement!.params
+    const { runner } = currentElement!.params
+    if (runner === 'hyperplay' && removeDownloaded) {
+      const { appName, gameInfo, channelName } = currentElement!.params
       const { folder_name } = gameInfo
       if (gameInfo.channels === undefined || channelName === undefined) {
         console.error(
@@ -212,7 +213,7 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
       }
       const releaseMeta = gameInfo.channels[channelName].release_meta
 
-      if (runner === 'hyperplay' && releaseMeta) {
+      if (releaseMeta) {
         const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
         logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
         callAbortController(appName)
