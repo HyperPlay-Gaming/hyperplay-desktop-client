@@ -222,6 +222,31 @@ function registerListener(
   session.on('will-download', listener)
 }
 
+export async function waitForItemToDownload(
+  item: DownloadItem
+): Promise<boolean> {
+  return new Promise((res, rej) => {
+    item.on('done', (event, state) => {
+      if (state === 'cancelled') {
+        rej(new CancelError())
+      } else if (state === 'interrupted') {
+        // const message = pupa(errorMessage, {
+        //   filename: path.basename(filePath)
+        // })
+        rej(new Error('interrupted'))
+      } else if (state === 'completed') {
+        const savePath = item.getSavePath()
+
+        if (process.platform === 'darwin') {
+          app.dock.downloadFinished(savePath)
+        }
+
+        res(true)
+      }
+    })
+  })
+}
+
 /*
  * Returns DownloadItem that can be used to pause, cancel, etc. while the download is in progress
  * Handle the onCompleted callback to determine when the download finishes

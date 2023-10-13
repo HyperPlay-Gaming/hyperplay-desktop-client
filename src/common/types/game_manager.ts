@@ -60,7 +60,6 @@ export interface GameManager {
   stop: (appName: string) => Promise<void>
   isGameAvailable: (appName: string) => boolean
   pause: (appName: string) => Promise<void>
-  resume: (appName: string) => Promise<void>
 }
 
 export interface LibraryManager {

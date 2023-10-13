@@ -59,6 +59,7 @@ import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem } from 'electron'
+import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 
 const inProgressDownloadsMap: Map<string, DownloadItem> = new Map()
 
@@ -137,14 +138,6 @@ export async function pause(appName: string): Promise<void> {
     throw `Tried to pause download for ${appName} that is not in progress!`
   }
   dl.pause()
-}
-
-export async function resume(appName: string): Promise<void> {
-  const dl = inProgressDownloadsMap.get(appName)
-  if (dl === undefined) {
-    throw `Tried to resume download for ${appName} that is not in progress!`
-  }
-  dl.resume()
 }
 
 /**
@@ -252,6 +245,12 @@ async function downloadGame(
       throw new Error('DownloadUrl not found')
     }
 
+    function cleanUpDownload() {
+      inProgressDownloadsMap.delete(appName)
+      deleteAbortController(appName)
+      rmSync(directory, { recursive: true, force: true })
+    }
+
     const downloadUrl =
       process.env.CI &&
       process.env.MOCK_DOWNLOAD_URL &&
@@ -271,14 +270,6 @@ async function downloadGame(
           downloadedBytes,
           downloadSpeed,
           Number.parseInt(platformInfo.downloadSize ?? '0')
-        )
-        console.log(
-          'calculated eta from ',
-          downloadedBytes,
-          ' speed ',
-          downloadSpeed,
-          ' to be ',
-          eta
         )
 
         if (downloadedBytes > 0 && !downloadStarted) {
@@ -307,13 +298,11 @@ async function downloadGame(
         })
       },
       () => {
-        inProgressDownloadsMap.delete(appName)
-        deleteAbortController(appName)
+        cleanUpDownload()
         res()
       },
       () => {
-        inProgressDownloadsMap.delete(appName)
-        deleteAbortController(appName)
+        cleanUpDownload()
         rej()
       }
     )
@@ -434,10 +423,27 @@ function getReleaseMeta(
   return [releaseMeta, selectedChannel]
 }
 
+async function resumeIfPaused(appName: string): Promise<boolean> {
+  const isPaused = inProgressDownloadsMap.has(appName)
+  if (isPaused) {
+    const item = inProgressDownloadsMap.get(appName)
+    if (item === undefined) {
+      return false
+    }
+    item.resume()
+    const success = await waitForItemToDownload(item) // inProgressDownloadsMap.get(appName)?.on
+    return success
+  }
+  return isPaused
+}
+
 export async function install(
   appName: string,
   { path: dirpath, platformToInstall, channelName, accessCode }: InstallArgs
 ): Promise<InstallResult> {
+  if (await resumeIfPaused(appName)) {
+    return { status: 'done' }
+  }
   let { directory, fileName } = { directory: '', fileName: '' }
   try {
     const gameInfo = getGameInfo(appName)
@@ -708,6 +714,9 @@ export async function launch(
 
 // TODO: Refactor to only replace updated files
 export async function update(appName: string): Promise<InstallResult> {
+  if (await resumeIfPaused(appName)) {
+    return { status: 'done' }
+  }
   const gameInfo = getGameInfo(appName)
 
   if (gameInfo.install.platform === undefined) {
