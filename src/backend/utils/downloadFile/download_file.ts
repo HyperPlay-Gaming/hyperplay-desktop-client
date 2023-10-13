@@ -32,7 +32,9 @@ const majorElectronVersion = () => {
   return Number.parseInt(version[0], 10)
 }
 
-const getWindowFromBrowserView = (webContents: WebContents) => {
+const getWindowFromBrowserView = (
+  webContents: WebContents
+): BrowserWindow | undefined => {
   for (const currentWindow of BrowserWindow.getAllWindows()) {
     for (const currentBrowserView of currentWindow.getBrowserViews()) {
       if (currentBrowserView.webContents.id === webContents.id) {
@@ -40,6 +42,7 @@ const getWindowFromBrowserView = (webContents: WebContents) => {
       }
     }
   }
+  return
 }
 
 const getWindowFromWebContents = (webContents: WebContents) => {
