@@ -33,6 +33,7 @@ import {
 import { notify } from 'backend/dialog/dialog'
 import path, { join } from 'path'
 import {
+  callAbortController,
   createAbortController,
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
@@ -54,10 +55,12 @@ import {
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
 import { isOnline } from 'backend/online_monitor'
-import { clean } from 'hp-easydl/dist/utils'
 import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
+import { DownloadItem } from 'electron'
+
+const inProgressDownloadsMap: Map<string, DownloadItem> = new Map()
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -126,6 +129,22 @@ export async function stop(appName: string): Promise<void> {
       shutdownWine(gameSettings)
     }
   }
+}
+
+export async function pause(appName: string): Promise<void> {
+  const dl = inProgressDownloadsMap.get(appName)
+  if (dl === undefined) {
+    throw `Tried to pause download for ${appName} that is not in progress!`
+  }
+  dl.pause()
+}
+
+export async function resume(appName: string): Promise<void> {
+  const dl = inProgressDownloadsMap.get(appName)
+  if (dl === undefined) {
+    throw `Tried to resume download for ${appName} that is not in progress!`
+  }
+  dl.resume()
 }
 
 /**
@@ -212,75 +231,105 @@ const installDistributables = async (gamePath: string) => {
 
 async function downloadGame(
   appName: string,
-  downloadPath: string,
+  directory: string,
+  fileName: string,
   platformInfo: PlatformConfig,
   destinationPath: string
 ): Promise<void> {
-  let downloadStarted = false
+  /* eslint-disable-next-line no-async-promise-executor */
+  return new Promise(async (res, rej) => {
+    let downloadStarted = false
 
-  logInfo(`Downloading zip file to ${downloadPath}`, LogPrefix.HyperPlay)
+    logInfo(
+      `Downloading zip file to directory ${directory} filename ${fileName}`,
+      LogPrefix.HyperPlay
+    )
 
-  // we might need a helper function to deal with the different platforms
-  const window = getMainWindow()
+    // we might need a helper function to deal with the different platforms
+    const window = getMainWindow()
 
-  if (!window || !platformInfo.external_url) {
-    throw new Error('DownloadUrl not found')
-  }
+    if (!window || !platformInfo.external_url) {
+      throw new Error('DownloadUrl not found')
+    }
 
-  const downloadUrl =
-    process.env.CI &&
-    process.env.MOCK_DOWNLOAD_URL &&
-    process.env.CI === 'e2e' &&
-    process.env.APP_NAME_TO_MOCK &&
-    process.env.APP_NAME_TO_MOCK === appName
-      ? process.env.MOCK_DOWNLOAD_URL
-      : platformInfo.external_url
-  logInfo(`Downloading from ${downloadUrl}`, LogPrefix.HyperPlay)
-  await downloadFile(
-    downloadUrl,
-    downloadPath,
-    createAbortController(appName),
-    (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
-      const eta = calculateEta(
-        downloadedBytes,
-        downloadSpeed,
-        Number.parseInt(platformInfo.downloadSize ?? '0')
-      )
+    const downloadUrl =
+      process.env.CI &&
+      process.env.MOCK_DOWNLOAD_URL &&
+      process.env.CI === 'e2e' &&
+      process.env.APP_NAME_TO_MOCK &&
+      process.env.APP_NAME_TO_MOCK === appName
+        ? process.env.MOCK_DOWNLOAD_URL
+        : platformInfo.external_url
+    logInfo(`Downloading from ${downloadUrl}`, LogPrefix.HyperPlay)
+    const item = await downloadFile(
+      downloadUrl,
+      directory,
+      fileName,
+      createAbortController(appName),
+      (downloadedBytes, downloadSpeed, diskWriteSpeed, progress) => {
+        const eta = calculateEta(
+          downloadedBytes,
+          downloadSpeed,
+          Number.parseInt(platformInfo.downloadSize ?? '0')
+        )
+        console.log(
+          'calculated eta from ',
+          downloadedBytes,
+          ' speed ',
+          downloadSpeed,
+          ' to be ',
+          eta
+        )
 
-      if (downloadedBytes > 0 && !downloadStarted) {
-        downloadStarted = true
-        sendFrontendMessage('gameStatusUpdate', {
+        if (downloadedBytes > 0 && !downloadStarted) {
+          downloadStarted = true
+          sendFrontendMessage('gameStatusUpdate', {
+            appName,
+            status: 'installing',
+            runner: 'hyperplay',
+            folder: destinationPath
+          })
+        }
+
+        window.webContents.send(`progressUpdate-${appName}`, {
           appName,
           status: 'installing',
           runner: 'hyperplay',
-          folder: destinationPath
-        })
-      }
-
-      window.webContents.send(`progressUpdate-${appName}`, {
-        appName,
-        status: 'installing',
-        runner: 'hyperplay',
-        folder: destinationPath,
-        progress: {
-          percent: progress,
-          diskSpeed: diskWriteSpeed / 1024 / 1024,
-          downSpeed: downloadSpeed / 1024 / 1024,
-          bytes: downloadedBytes / 1024 / 1024,
           folder: destinationPath,
-          eta
-        }
-      })
-    }
-  )
-  deleteAbortController(appName)
+          progress: {
+            percent: progress,
+            diskSpeed: diskWriteSpeed / 1024 / 1024,
+            downSpeed: downloadSpeed / 1024 / 1024,
+            bytes: downloadedBytes / 1024 / 1024,
+            folder: destinationPath,
+            eta
+          }
+        })
+      },
+      () => {
+        inProgressDownloadsMap.delete(appName)
+        deleteAbortController(appName)
+        res()
+      },
+      () => {
+        inProgressDownloadsMap.delete(appName)
+        deleteAbortController(appName)
+        rej()
+      }
+    )
+
+    inProgressDownloadsMap.set(appName, item)
+  })
 }
 
 function sanitizeFileName(filename: string) {
   return filename.replace(/[/\\?%*:|"<>]/g, '-')
 }
 
-function getZipFileName(appName: string, platformInfo: PlatformConfig): string {
+function getZipFileName(
+  appName: string,
+  platformInfo: PlatformConfig
+): { directory: string; filename: string } {
   const zipName = encodeURI(platformInfo.name)
   const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
 
@@ -288,8 +337,7 @@ function getZipFileName(appName: string, platformInfo: PlatformConfig): string {
     mkdirSync(tempfolder, { recursive: true })
   }
 
-  const zipFile = path.join(tempfolder, zipName)
-  return zipFile
+  return { directory: tempfolder, filename: zipName }
 }
 
 export async function validateAccessCode(
@@ -390,7 +438,7 @@ export async function install(
   appName: string,
   { path: dirpath, platformToInstall, channelName, accessCode }: InstallArgs
 ): Promise<InstallResult> {
-  let zipFile = ''
+  let { directory, fileName } = { directory: '', fileName: '' }
   try {
     const gameInfo = getGameInfo(appName)
     const { title } = gameInfo
@@ -439,7 +487,10 @@ export async function install(
     }
 
     logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
-    zipFile = getZipFileName(appName, platformInfo)
+    const zipPathInfo = getZipFileName(appName, platformInfo)
+    directory = zipPathInfo.directory
+    fileName = zipPathInfo.filename
+    const zipFile = path.join(directory, fileName)
 
     // download the zip file
     if (!existsSync(destinationPath)) {
@@ -460,7 +511,13 @@ export async function install(
       platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
     }
 
-    await downloadGame(appName, zipFile, platformInfo, destinationPath)
+    await downloadGame(
+      appName,
+      directory,
+      fileName,
+      platformInfo,
+      destinationPath
+    )
     if (!platformInfo.executable) {
       return {
         status: 'error',
@@ -533,8 +590,7 @@ export async function install(
       LogPrefix.HyperPlay
     )
     if (!`${error}`.includes('Download stopped or paused')) {
-      if (zipFile !== '' && existsSync(zipFile)) rmSync(zipFile)
-      clean(zipFile)
+      callAbortController(appName)
     }
     return {
       status: 'error',
