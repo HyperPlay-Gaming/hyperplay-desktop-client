@@ -10,8 +10,6 @@ import {
   shell
 } from 'electron'
 import path from 'path'
-import * as unusedFilename from 'unused-filename'
-import pupa from 'pupa'
 import mime from 'mime'
 import { Options } from './types'
 
@@ -113,13 +111,9 @@ function registerListener(
         ? filename
         : getFilenameFromMime(filename, item.getMimeType())
 
-      filePath = options.overwrite
-        ? path.join(directory, name)
-        : unusedFilename.unusedFilenameSync(path.join(directory, name))
+      // overwrite by default
+      filePath = path.join(directory, name)
     }
-
-    const errorMessage =
-      options.errorMessage || 'The download of {filename} was interrupted'
 
     if (options.saveAs) {
       item.setSaveDialogOptions({
@@ -189,9 +183,9 @@ function registerListener(
         }
         callback(new CancelError())
       } else if (state === 'interrupted') {
-        const message = pupa(errorMessage, {
-          filename: path.basename(filePath)
-        })
+        const message =
+          options.errorMessage ||
+          `The download of ${path.basename(filePath)} was interrupted`
         callback(new Error(message))
       } else if (state === 'completed') {
         const savePath = item.getSavePath()
@@ -233,10 +227,7 @@ export async function waitForItemToDownload(
       if (state === 'cancelled') {
         rej(new CancelError())
       } else if (state === 'interrupted') {
-        // const message = pupa(errorMessage, {
-        //   filename: path.basename(filePath)
-        // })
-        rej(new Error('interrupted'))
+        rej(new Error(`interrupted`))
       } else if (state === 'completed') {
         const savePath = item.getSavePath()
 

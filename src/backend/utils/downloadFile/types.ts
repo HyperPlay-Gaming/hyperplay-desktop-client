@@ -110,15 +110,6 @@ export interface Options {
   readonly showProgressBar?: boolean
 
   /**
-          Allow downloaded files to overwrite files with the same name in the directory they are saved to.
-  
-          The default behavior is to append a number to the filename.
-  
-          @default false
-          */
-  readonly overwrite?: boolean
-
-  /**
           Customize the save dialog.
   
           If `defaultPath` is not explicity defined, a default value is assigned based on the file path.

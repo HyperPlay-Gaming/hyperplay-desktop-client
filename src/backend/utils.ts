@@ -1359,8 +1359,7 @@ export async function downloadFile(
         if (onCancel !== undefined) {
           onCancel(item)
         }
-      },
-      overwrite: true
+      }
     })
 
     abortController.signal.addEventListener('abort', () => {
