@@ -176,9 +176,9 @@ test.describe('hp store api tests', function () {
 
   const pauseDownload = async () => {
     await page.evaluate(async () => {
-      window.api.pauseCurrentDownload()
+      return window.api.pauseCurrentDownload()
     })
-    await wait(2000)
+
     //check if download is actually paused
     const downloadDirSize = await dirSize(tempFolder)
     await wait(1000)

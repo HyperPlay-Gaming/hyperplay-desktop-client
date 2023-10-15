@@ -225,10 +225,10 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
   }
 }
 
-function pauseCurrentDownload() {
+async function pauseCurrentDownload() {
   if (currentElement) {
     const { appName, runner } = currentElement!.params
-    gameManagerMap[runner].pause(appName)
+    await gameManagerMap[runner].pause(appName)
   }
   queueState = 'paused'
   sendFrontendMessage(
