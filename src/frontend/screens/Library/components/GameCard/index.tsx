@@ -152,7 +152,10 @@ const GameCard = ({
     if (isPlaying) {
       return 'PLAYING'
     }
-    if (isInstalling || isQueued) {
+    if (
+      isQueued ||
+      (dmState === 'running' && currentElement?.params.appName === appName)
+    ) {
       return 'INSTALLING'
     }
     if (showUpdateButton) {

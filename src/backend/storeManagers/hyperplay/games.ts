@@ -235,6 +235,9 @@ async function downloadGame(
   platformInfo: PlatformConfig,
   destinationPath: string
 ): Promise<void> {
+  if (await resumeIfPaused(appName)) {
+    return
+  }
   /* eslint-disable-next-line no-async-promise-executor */
   return new Promise(async (res, rej) => {
     let downloadStarted = false
