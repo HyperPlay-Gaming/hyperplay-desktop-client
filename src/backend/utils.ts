@@ -1366,15 +1366,6 @@ export async function downloadFile(
       item.cancel()
     })
 
-    logInfo(
-      `Downloader: Finished downloading ${url}`,
-      LogPrefix.DownloadManager
-    )
-    logInfo(
-      `Downloader: Finished downloading ${url}`,
-      LogPrefix.DownloadManager
-    )
-
     return item
   } catch (err) {
     logError(
