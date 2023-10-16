@@ -228,6 +228,21 @@ function cleanUpDownload(appName: string, directory: string) {
   rmSync(directory, { recursive: true, force: true })
 }
 
+function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
+  const is_ci =
+    process.env.CI &&
+    process.env.MOCK_DOWNLOAD_URL &&
+    process.env.CI === 'e2e' &&
+    process.env.APP_NAME_TO_MOCK &&
+    process.env.APP_NAME_TO_MOCK === appName
+
+  const downloadUrl = is_ci
+    ? process.env.MOCK_DOWNLOAD_URL
+    : platformInfo.external_url
+
+  return downloadUrl
+}
+
 async function downloadGame(
   appName: string,
   directory: string,
@@ -254,16 +269,7 @@ async function downloadGame(
       throw new Error('DownloadUrl not found')
     }
 
-    const is_ci =
-      process.env.CI &&
-      process.env.MOCK_DOWNLOAD_URL &&
-      process.env.CI === 'e2e' &&
-      process.env.APP_NAME_TO_MOCK &&
-      process.env.APP_NAME_TO_MOCK === appName
-
-    const downloadUrl = is_ci
-      ? process.env.MOCK_DOWNLOAD_URL
-      : platformInfo.external_url
+    const downloadUrl = getDownloadUrl(platformInfo, appName)
 
     if (!downloadUrl) {
       throw `Download url is invalid. Value: ${downloadUrl}`
@@ -314,7 +320,11 @@ async function downloadGame(
     }
 
     function onCancel() {
-      cleanUpDownload(appName, directory)
+      try {
+        cleanUpDownload(appName, directory)
+      } catch (err) {
+        rej(err)
+      }
       rej()
     }
 

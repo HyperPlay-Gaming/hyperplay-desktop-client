@@ -227,7 +227,7 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
 
 async function pauseCurrentDownload() {
   if (currentElement) {
-    const { appName, runner } = currentElement!.params
+    const { appName, runner } = currentElement.params
     await gameManagerMap[runner].pause(appName)
   }
   queueState = 'paused'
