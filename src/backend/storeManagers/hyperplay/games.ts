@@ -243,6 +243,10 @@ function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
   return downloadUrl
 }
 
+function roundToTenth(x: number) {
+  return Math.round(x * 10) / 10
+}
+
 async function downloadGame(
   appName: string,
   directory: string,
@@ -305,10 +309,10 @@ async function downloadGame(
         runner: 'hyperplay',
         folder: destinationPath,
         progress: {
-          percent: progress,
-          diskSpeed: diskWriteSpeed / 1024 / 1024,
-          downSpeed: downloadSpeed / 1024 / 1024,
-          bytes: downloadedBytes / 1024 / 1024,
+          percent: roundToTenth(progress),
+          diskSpeed: roundToTenth(diskWriteSpeed / 1024 / 1024),
+          downSpeed: roundToTenth(downloadSpeed / 1024 / 1024),
+          bytes: roundToTenth(downloadedBytes / 1024 / 1024),
           folder: destinationPath,
           eta
         }
