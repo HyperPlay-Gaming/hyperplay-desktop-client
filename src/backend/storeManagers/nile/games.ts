@@ -599,6 +599,10 @@ export async function stop(appName: string, stopWine = true) {
   }
 }
 
+export async function pause(appName: string) {
+  return stop(appName)
+}
+
 export function isGameAvailable(appName: string): boolean {
   const info = getGameInfo(appName)
   return Boolean(
