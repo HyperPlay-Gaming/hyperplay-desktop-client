@@ -8,8 +8,6 @@ class ExtensionState {
 
   constructor() {
     makeAutoObservable(this)
-
-    this.init()
   }
 
   init() {

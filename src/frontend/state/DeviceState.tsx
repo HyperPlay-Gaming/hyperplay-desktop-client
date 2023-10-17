@@ -5,8 +5,6 @@ class DeviceState {
 
   constructor() {
     makeAutoObservable(this)
-
-    this.init()
   }
 
   async init() {

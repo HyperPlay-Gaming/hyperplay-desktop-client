@@ -19,11 +19,17 @@ export type Transaction = {
   id: number
   method: string
   state: TRANSACTION_STATE
-  isOpen: boolean
 }
 
 export type TransactionMap = Map<number, Transaction>
 
+export interface ToastKey {
+  type: 'initial' | 'transaction' | 'extension_notfication'
+  txnId?: number
+  txnState?: TRANSACTION_STATE
+}
+
 export interface Toast extends TransactionToastProps {
   isOpen: boolean
+  key: ToastKey
 }
