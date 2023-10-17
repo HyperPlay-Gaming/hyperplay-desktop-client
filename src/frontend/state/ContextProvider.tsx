@@ -27,6 +27,7 @@ const initialContext: ContextType = {
   handleLayout: () => null,
   layout: 'grid',
   libraryStatus: [],
+  platform: 'unknown',
   refreshWineVersionInfo: async () => Promise.resolve(),
   isRTL: false,
   language: 'en',

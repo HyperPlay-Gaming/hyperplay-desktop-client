@@ -30,6 +30,7 @@ export interface ContextType {
   handleLayout: (value: string) => void
   layout: string
   libraryStatus: GameStatus[]
+  platform: NodeJS.Platform | 'unknown'
   refreshWineVersionInfo: (fetch: boolean) => void
   theme: string
   setTheme: (themeName: string) => void

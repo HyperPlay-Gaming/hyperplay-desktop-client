@@ -29,6 +29,7 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import { DeviceStateController } from './state/DeviceState'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -116,6 +117,7 @@ function App() {
       </HashRouter>
       <TransactionNotification />
       <DownloadToastManager />
+      <DeviceStateController />
     </div>
   )
 }
