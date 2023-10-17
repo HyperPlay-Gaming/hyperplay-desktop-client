@@ -5,7 +5,11 @@ import {
   ProxiedProviderEventCallback
 } from '../../../backend/hyperplay-proxy-server/providers/types'
 import TransactionState from '../TransactionState'
-import { TxnStateToStatusMap } from '../../../frontend/screens/TransactionNotification/constants'
+import ExtensionState from '../ExtensionState'
+import {
+  EXTENSION_NOTIFICATION,
+  TxnStateToStatusMap
+} from '../../../frontend/screens/TransactionNotification/constants'
 /* eslint-disable @typescript-eslint/no-empty-function */
 
 import i18next from 'i18next'
@@ -49,13 +53,23 @@ function handleProviderRequestFailed(cb: () => void) {
   providerRequestFailed = cb
 }
 
+let showNotificationInWebview = () => {}
+function handleShowNotificationInWebview(cb: () => void) {
+  showNotificationInWebview = cb
+}
+
 Object.defineProperty(window, 'api', {
   writable: true,
   value: {
     handleProviderRequestInitiated,
     handleProviderRequestPending,
     handleProviderRequestCompleted,
-    handleProviderRequestFailed
+    handleProviderRequestFailed,
+    handleShowNotificationInWebview,
+    getExtensionId: jest.fn(),
+    handleRemoveNotificationInWebview: jest.fn(),
+    handleShowPopupInWebview: jest.fn(),
+    handleRemovePopupInWebview: jest.fn()
   }
 })
 
@@ -71,6 +85,7 @@ describe('TransactionState.ts', () => {
   beforeEach(() => {
     TransactionState.reset()
     TransactionState.init()
+    ExtensionState.init()
   })
   test('should show txn initiated toast', async () => {
     providerRequestInitiated({}, 1, 'default')
@@ -163,6 +178,19 @@ describe('TransactionState.ts', () => {
         translations_en.hyperplayOverlay.description.FAILED
       )
       expect(toast.status).toBe(TxnStateToStatusMap.failed)
+      expect(toast.isOpen).toBe(true)
+    }
+  })
+
+  test('should show extension notification toast', async () => {
+    showNotificationInWebview()
+
+    const toast = TransactionState.latestToast
+    expect(toast !== null).toBe(true)
+    if (toast !== null) {
+      expect(toast.title).toBe(EXTENSION_NOTIFICATION.TITLE())
+      expect(toast.subtext).toBe(EXTENSION_NOTIFICATION.DESCRIPTION(false))
+      expect(toast.status).toBe(EXTENSION_NOTIFICATION.STATUS)
       expect(toast.isOpen).toBe(true)
     }
   })
