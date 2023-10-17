@@ -223,6 +223,7 @@ interface HyperPlayAsyncIPCFunctions {
     channelId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
+  shouldShowAchievements: () => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
