@@ -88,7 +88,7 @@ export default React.memo(function Achievements(): JSX.Element {
     }
 
     getAchievements()
-  }, [])
+  }, [store, playerStoreId, walletStore.address])
 
   const handleNextPage = useCallback(async () => {
     const nextPage = achievementsData.currentPage + 1

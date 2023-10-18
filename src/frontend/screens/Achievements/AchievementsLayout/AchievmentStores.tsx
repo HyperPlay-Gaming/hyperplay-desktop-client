@@ -8,7 +8,7 @@ import { useAchievementStore } from '../AchievementStoreContext'
 import classNames from 'classnames'
 
 export const AchievementStores = () => {
-  const { store } = useAchievementStore()
+  const { store, setStore } = useAchievementStore()
 
   return (
     <div className={`${styles.storeCard} ${styles.fullHeight}`}>
@@ -20,17 +20,23 @@ export const AchievementStores = () => {
       >
         <div className={classNames(store === 'HYPERPLAY' ? '' : styles.notActive)}>
           <StoreRow store="hyperplay" secondaryText="0 Games">
-            <Images.Eye />
+            <button onClick={() => setStore('HYPERPLAY')}>
+              <Images.Eye />
+            </button>
           </StoreRow>
         </div>
         <div className={classNames(store === 'STEAM' ? '' : styles.notActive)}>
           <StoreRow store="steam" secondaryText="10 Games">
-            <Images.Eye />
+            <button onClick={() => setStore('STEAM')}>
+              <Images.Eye />
+            </button>
           </StoreRow>
         </div>
         <div className={classNames(store === 'EPIC' ? '' : styles.notActive)}>
           <StoreRow store="epic" secondaryText="0 Games">
-            <p>Link Store</p>
+            <button onClick={() => setStore('EPIC')}>
+              <p>Link Store</p>
+            </button>
           </StoreRow>
         </div>
       </Flex>

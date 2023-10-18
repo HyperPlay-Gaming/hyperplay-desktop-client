@@ -1,16 +1,18 @@
 import useSetting from 'frontend/hooks/useSetting'
-import React, { createContext, useContext, ReactNode, useMemo } from 'react'
+import React, { createContext, useContext, ReactNode, useMemo, useState } from 'react'
 
 import { AchievementStore as StoreType } from '../../../../common/types'
 
 interface AchievementStoreType {
   store: StoreType
   playerStoreId: string
+  setStore: React.Dispatch<React.SetStateAction<StoreType>>
 }
 
 const AchievementStore = createContext<AchievementStoreType>({
   store: 'STEAM',
-  playerStoreId: ''
+  playerStoreId: '',
+  setStore: () => { console.log('not nested in achievement context') }
 })
 
 interface AchievementStoreProviderProps {
@@ -20,14 +22,16 @@ interface AchievementStoreProviderProps {
 const AchievementStoreProvider: React.FC<AchievementStoreProviderProps> = ({
   children
 }) => {
+  const [store, setStore] = useState<StoreType>('STEAM')
   const [steamId] = useSetting('steamId', '')
 
   const value = useMemo(() => {
     return {
-      store: 'STEAM' as StoreType,
-      playerStoreId: steamId
+      store,
+      playerStoreId: store === 'STEAM' ? steamId : '',
+      setStore
     }
-  }, [steamId])
+  }, [steamId, store])
 
   return (
     <AchievementStore.Provider value={value}>
