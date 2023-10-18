@@ -8,6 +8,7 @@ import TransactionState from '../TransactionState'
 import ExtensionState from '../ExtensionState'
 import {
   EXTENSION_NOTIFICATION,
+  INITIAL_TOAST,
   TxnStateToStatusMap
 } from '../../../frontend/screens/TransactionNotification/constants'
 /* eslint-disable @typescript-eslint/no-empty-function */
@@ -58,6 +59,11 @@ function handleShowNotificationInWebview(cb: () => void) {
   showNotificationInWebview = cb
 }
 
+let showInitialToast = () => {}
+function handleShowInitialToast(cb: () => void) {
+  showInitialToast = cb
+}
+
 Object.defineProperty(window, 'api', {
   writable: true,
   value: {
@@ -69,7 +75,8 @@ Object.defineProperty(window, 'api', {
     getExtensionId: jest.fn(),
     handleRemoveNotificationInWebview: jest.fn(),
     handleShowPopupInWebview: jest.fn(),
-    handleRemovePopupInWebview: jest.fn()
+    handleRemovePopupInWebview: jest.fn(),
+    handleShowInitialToast
   }
 })
 
@@ -192,6 +199,22 @@ describe('TransactionState.ts', () => {
       expect(toast.subtext).toBe(EXTENSION_NOTIFICATION.DESCRIPTION(false))
       expect(toast.status).toBe(EXTENSION_NOTIFICATION.STATUS)
       expect(toast.isOpen).toBe(true)
+    }
+  })
+
+  test('should show initial toast then hide after delay', async () => {
+    TransactionState.INITIAL_TOAST_DELAY_MS = 100
+    showInitialToast()
+
+    const toast = TransactionState.latestToast
+    expect(toast !== null).toBe(true)
+    if (toast !== null) {
+      expect(toast.title).toBe(INITIAL_TOAST.TITLE())
+      expect(toast.subtext).toBe(INITIAL_TOAST.DESCRIPTION(false))
+      expect(toast.status).toBe(INITIAL_TOAST.STATUS)
+      expect(toast.isOpen).toBe(true)
+      await wait(150)
+      expect(TransactionState.latestToast?.isOpen).toBe(false)
     }
   })
 })

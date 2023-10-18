@@ -106,13 +106,13 @@ export const TxnStateToStatusMap: TxnStateToStatusMapType = {
   failed: 'error'
 }
 
-interface EXTENSION_NOTIFICATION_TYPE {
+interface NOTIFICATION_TYPE {
   TITLE: () => string
   DESCRIPTION: (isMac: boolean) => string
   STATUS: statusType
 }
 
-export const EXTENSION_NOTIFICATION: EXTENSION_NOTIFICATION_TYPE = {
+export const EXTENSION_NOTIFICATION: NOTIFICATION_TYPE = {
   TITLE: () =>
     t('hyperplayOverlay.extensionNotification.TITLE', 'Transaction requested'),
   DESCRIPTION: (isMac: boolean) => {
@@ -121,6 +121,17 @@ export const EXTENSION_NOTIFICATION: EXTENSION_NOTIFICATION_TYPE = {
       overlayKeyMod: isMac ? 'Option' : 'Alt'
     })
   },
-
   STATUS: 'pending'
+}
+
+export const INITIAL_TOAST: NOTIFICATION_TYPE = {
+  TITLE: () => t('hyperplayOverlay.greeting.title', 'HyperPlay Overlay'),
+  DESCRIPTION: (isMac: boolean) => {
+    return t('hyperplayOverlay.greeting.description', {
+      defaultValue:
+        'HyperPlay Overlay is ready! Press {{overlayKeyMod}} + X to show or hide it.',
+      overlayKeyMod: isMac ? 'Option' : 'Alt'
+    })
+  },
+  STATUS: 'success'
 }
