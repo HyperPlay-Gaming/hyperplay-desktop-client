@@ -12,6 +12,7 @@ import storeAuthState from 'frontend/state/storeAuthState'
 
 export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
+  const [showAchievements, setShowAchievements] = useState<boolean>(false)
 
   const { activeController, handleExternalLinkDialog } =
     useContext(ContextProvider)
@@ -22,6 +23,13 @@ export default observer(function SidebarLinks() {
 
   useEffect(() => {
     window.api.isFullscreen().then((res) => setIsFullscreen(res))
+
+    const shouldShowAchievements = async () => {
+      const shouldShow = await window.api.shouldShowAchievements()
+      setShowAchievements(shouldShow)
+    }
+
+    shouldShowAchievements()
   }, [])
 
   async function handleRefresh() {
@@ -82,20 +90,22 @@ export default observer(function SidebarLinks() {
             <Images.Controller fill={sidebarSvgUnselectedFill} />
           </NavLink>
         </div>
-        <div className="sidebarLinkGradientWrapper">
-          <NavLink
-            className={({ isActive }) =>
-              classNames('Sidebar__item', {
-                active: isActive || location.pathname.includes('achievements')
-              })
-            }
-            end
-            to={'/achievements'}
-            onClick={async () => handleRefresh()}
-          >
-            <Images.TrophyOutline fill={sidebarSvgUnselectedFill} />
-          </NavLink>
-        </div>
+        {showAchievements && (
+          <div className="sidebarLinkGradientWrapper">
+            <NavLink
+              className={({ isActive }) =>
+                classNames('Sidebar__item', {
+                  active: isActive || location.pathname.includes('achievements')
+                })
+              }
+              end
+              to={'/achievements'}
+              onClick={async () => handleRefresh()}
+            >
+              <Images.TrophyOutline fill={sidebarSvgUnselectedFill} />
+            </NavLink>
+          </div>
+        )}
         <div className="sidebarLinkGradientWrapper">
           <NavLink
             className={({ isActive }) =>

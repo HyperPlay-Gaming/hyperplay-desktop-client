@@ -113,7 +113,7 @@ export default React.memo(function Achievements(): JSX.Element {
     if (activeFilter === 'MINTED') return 'minted'
     return 'all'
   }, [activeFilter])
-  console.log(achievementsData, 'dats')
+
   return (
     <>
       <AchievementSummaryTable
