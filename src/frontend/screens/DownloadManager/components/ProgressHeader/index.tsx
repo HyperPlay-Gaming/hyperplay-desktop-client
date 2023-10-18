@@ -108,7 +108,7 @@ export default function ProgressHeader(props: {
         <div className="downloadBar">
           <div className="downloadProgressStats">
             <p className="downloadStat" color="var(--text-default)">{`${
-              progress.percent?.toFixed(2) ?? 0
+              progress.percent?.toFixed(1) ?? 0
             }% [${progress.bytes ?? ''}] `}</p>
           </div>
           <Box sx={{ display: 'flex', alignItems: 'baseline' }}>
