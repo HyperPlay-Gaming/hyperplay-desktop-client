@@ -90,6 +90,10 @@ export async function stop(appName: string): Promise<void> {
   }
 }
 
+export async function pause(appName: string) {
+  return stop(appName)
+}
+
 export async function uninstall({
   appName,
   shouldRemovePrefix,

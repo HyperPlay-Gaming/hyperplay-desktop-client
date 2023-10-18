@@ -63,6 +63,7 @@ import DLCList from 'frontend/components/UI/DLCList'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
+import DMQueueState from 'frontend/state/DMQueueState'
 
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -117,7 +118,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const isMac = platform === 'darwin'
   const isSideloaded = runner === 'sideload'
 
-  const isInstalling = status === 'installing'
+  const isInstalling = DMQueueState.isInstalling(appName)
   const isPlaying = status === 'playing'
   const isUpdating = status === 'updating'
   const isQueued = status === 'queued'
@@ -125,7 +126,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const isMoving = status === 'moving'
   const isUninstalling = status === 'uninstalling'
   const isSyncing = status === 'syncing-saves'
-  const isPaused = status === 'paused'
+  const isPaused = DMQueueState.isPaused(appName)
   const isExtracting = status === 'extracting'
   const isPreparing = status === 'preparing'
   const notAvailable = !gameAvailable && gameInfo.is_installed
