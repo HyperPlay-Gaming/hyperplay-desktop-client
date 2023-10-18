@@ -105,7 +105,7 @@ export default React.memo(function Achievements(): JSX.Element {
   }, [achievementsData, activeFilter, selectedSort])
 
   const isDisabled = useMemo(() => {
-    return !walletStore.isConnected || isLoading
+    return isLoading || !walletStore.isConnected
   }, [isLoading, walletStore.isConnected])
 
   const filter = useMemo(() => {
@@ -113,18 +113,19 @@ export default React.memo(function Achievements(): JSX.Element {
     if (activeFilter === 'MINTED') return 'minted'
     return 'all'
   }, [activeFilter])
-
+  console.log(achievementsData, 'dats')
   return (
     <>
       <AchievementSummaryTable
         games={achievementsData.games.map((game) => {
           const id = String(game.gameId)
+          const isUpdate = game.isNewAchievement && game.mintedAchievementCount > 0
           const state = !walletStore.isConnected
             ? 'disabled'
             : achievementsToBeMinted.includes(id) ||
               achievementsToBeUpdated.includes(id)
             ? 'active'
-            : game.isNewAchievement
+            : isUpdate
             ? 'update'
             : 'default'
 
@@ -142,7 +143,7 @@ export default React.memo(function Achievements(): JSX.Element {
                 ctaProps={{
                   onClick: (e) => {
                     e.preventDefault()
-                    if (game.isNewAchievement) {
+                    if (isUpdate) {
                       toggleAchievementToBeUpdated(id)
                     } else {
                       toggleAchievementToBeMinted(id)
@@ -213,12 +214,12 @@ export default React.memo(function Achievements(): JSX.Element {
         }}
         mintButtonProps={{
           onClick: handleMint,
-          disabled: isDisabled ?? achievementsToBeMinted.length === 0,
+          disabled: achievementsToBeMinted.length === 0 ?? isDisabled,
           totalToMint: achievementsToBeMinted.length
         }}
         updateButtonProps={{
           onClick: handleUpdate,
-          disabled: isDisabled ?? achievementsToBeUpdated.length === 0,
+          disabled: achievementsToBeUpdated.length === 0 ?? isDisabled,
           totalToUpdate: achievementsToBeUpdated.length
         }}
         achievementNavProps={{

@@ -104,7 +104,7 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
   }, [achievementsData, selectedSort])
 
   const isDisabled = useMemo(() => {
-    return !walletStore.isConnected || isLoading
+    return isLoading || !walletStore.isConnected
   }, [isLoading, walletStore.isConnected])
 
   if (!summaryAchievement) return <></>
@@ -162,12 +162,12 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
       }}
       mintButtonProps={{
         onClick: handleMint,
-        disabled: isDisabled ?? achievementsToBeMinted.length === 0,
+        disabled: achievementsToBeMinted.length === 0 ?? isDisabled,
         totalToMint: achievementsToBeMinted.length
       }}
       updateButtonProps={{
         onClick: handleUpdate,
-        disabled: isDisabled ?? achievementsToBeUpdated.length === 0,
+        disabled: achievementsToBeUpdated.length === 0 ?? isDisabled,
         totalToUpdate: achievementsToBeUpdated.length
       }}
       progressKeyProps={{
