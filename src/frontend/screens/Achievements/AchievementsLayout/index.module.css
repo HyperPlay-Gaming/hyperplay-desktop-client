@@ -20,3 +20,7 @@
 .fullHeight {
   height: 100%;
 }
+
+.notActive {
+  opacity: 0.5;
+}
