@@ -5,7 +5,6 @@ import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { useLocation } from 'react-router-dom'
-import WalletState from '../state/WalletState'
 
 class OnboardingStore {
   isOnboardingOpen = true
