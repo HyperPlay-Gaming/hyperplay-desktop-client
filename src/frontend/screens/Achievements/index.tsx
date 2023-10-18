@@ -119,7 +119,8 @@ export default React.memo(function Achievements(): JSX.Element {
       <AchievementSummaryTable
         games={achievementsData.games.map((game) => {
           const id = String(game.gameId)
-          const isUpdate = game.isNewAchievement && game.mintedAchievementCount > 0
+          const isUpdate =
+            game.isNewAchievement && game.mintedAchievementCount > 0
           const state = !walletStore.isConnected
             ? 'disabled'
             : achievementsToBeMinted.includes(id) ||
