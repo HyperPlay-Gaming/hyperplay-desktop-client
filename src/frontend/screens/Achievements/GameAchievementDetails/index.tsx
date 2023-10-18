@@ -5,6 +5,8 @@ import { useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
 import { useMintAchievements } from '../MintAchievementsContext'
 import walletStore from 'frontend/store/WalletStore'
+import { useTranslation } from 'react-i18next'
+import { useAchievementStore } from '../AchievementStoreContext'
 
 const pageSize = 6
 
@@ -16,6 +18,7 @@ function isTimestampInPast(unixTimestamp: number) {
 }
 
 export default React.memo(function GameAchievementDetails(): JSX.Element {
+  const { t } = useTranslation()
   const { id } = useParams()
   const [summaryAchievement, setSummaryAchievement] =
     useState<SummaryAchievement>()
@@ -34,27 +37,37 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
     handleUpdate,
     achievementsToBeUpdated
   } = useMintAchievements()
+  const { store, playerStoreId } = useAchievementStore()
 
   useEffect(() => {
     const getAchievements = async () => {
       const { data } = await window.api.getSummaryAchievements({
-        store: 'steam',
+        store,
         filter: 'ALL',
         sort: 'ALPHA_A_TO_Z',
         page: 1,
-        pageSize: 1
+        pageSize: 1,
+        playerStoreId,
+        playerAddress: walletStore.address
       })
       setSummaryAchievement(data[0])
 
       const achievements = await window.api.getIndividualAchievements({
         gameId: Number(id),
+        store,
         sort: selectedSort.value,
         page: 1,
-        pageSize
+        pageSize,
+        playerStoreId,
+        playerAddress: walletStore.address
       })
       setAchievementData(achievements)
 
-      const stats = await window.api.getAchievementsStats('steam')
+      const stats = await window.api.getAchievementsStats({
+        store,
+        playerStoreId,
+        playerAddress: walletStore.address
+      })
 
       setFreeMints(stats.numFreeMints)
     }
@@ -66,9 +79,12 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
     const nextPage = achievementsData.currentPage + 1
     const achievements = await window.api.getIndividualAchievements({
       gameId: Number(id),
+      store,
       sort: selectedSort.value,
       page: nextPage,
-      pageSize
+      pageSize,
+      playerStoreId,
+      playerAddress: walletStore.address
     })
     setAchievementData(achievements)
   }, [achievementsData, selectedSort])
@@ -77,9 +93,12 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
     const prevPage = achievementsData.currentPage - 1
     const achievements = await window.api.getIndividualAchievements({
       gameId: Number(id),
+      store,
       sort: selectedSort.value,
       page: prevPage,
-      pageSize
+      pageSize,
+      playerStoreId,
+      playerAddress: walletStore.address
     })
     setAchievementData(achievements)
   }, [achievementsData, selectedSort])
@@ -97,7 +116,7 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
         basketAmount: achievementsToBeMinted.length
       }}
       game={{
-        title: summaryAchievement.name,
+        title: summaryAchievement.gameName,
         tags: summaryAchievement.tags ?? []
       }}
       mintedAchievementsCount={summaryAchievement.mintedAchievementCount}
@@ -123,9 +142,12 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
             const { data, totalPages, currentPage } =
               await window.api.getIndividualAchievements({
                 gameId: Number(id),
+                store,
                 sort: chosenItem.value,
                 page: 1,
-                pageSize
+                pageSize,
+                playerStoreId,
+                playerAddress: walletStore.address
               })
             setSelectedSort(chosenItem)
             setAchievementData({ currentPage, totalPages, data })
@@ -147,6 +169,12 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
         onClick: handleUpdate,
         disabled: isDisabled ?? achievementsToBeUpdated.length === 0,
         totalToUpdate: achievementsToBeUpdated.length
+      }}
+      progressKeyProps={{
+        i18n: {
+          mintedLabel: t('achievements.progress.minted'),
+          notMintedLabel: t('achievements.progress.notMinted')
+        }
       }}
     />
   )

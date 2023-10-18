@@ -71,7 +71,7 @@ function Settings() {
       returnPath = '/library'
     }
   }
-
+  console.log({ gameInfo }, { runner }, { appName })
   // create setting context functions
   const contextValues: SettingsContextType | null = useSettingsContext({
     appName,

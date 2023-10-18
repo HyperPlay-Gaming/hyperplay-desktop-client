@@ -10,6 +10,8 @@ import {
 import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 import { useMintAchievements } from './MintAchievementsContext'
+import { useTranslation } from 'react-i18next'
+import { useAchievementStore } from './AchievementStoreContext'
 
 const pageSize = 12
 export const achievementsSortOptions = [
@@ -18,6 +20,8 @@ export const achievementsSortOptions = [
 ] as { text: string; value: AchievementSort }[]
 
 export default React.memo(function Achievements(): JSX.Element {
+  const { t } = useTranslation()
+
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
   const [activeFilter, setActiveFilter] = useState<AchievementFilter>('ALL')
   const [achievementsData, setAchievementData] = useState<{
@@ -26,6 +30,8 @@ export default React.memo(function Achievements(): JSX.Element {
     games: SummaryAchievement[]
   }>({ currentPage: 0, totalPages: 0, games: [] })
   const [freeMints, setFreeMints] = useState(0)
+
+  const { store, playerStoreId } = useAchievementStore()
 
   const {
     achievementsToBeMinted,
@@ -39,17 +45,29 @@ export default React.memo(function Achievements(): JSX.Element {
 
   useEffect(() => {
     const getAchievements = async () => {
+      window.api.syncAchievements({
+        store,
+        playerStoreId,
+        playerAddress: walletStore.address
+      })
       const { data, totalPages, currentPage } =
         await window.api.getSummaryAchievements({
-          store: 'steam',
+          store,
           filter: activeFilter,
           sort: selectedSort.value,
           page: 1,
-          pageSize
+          pageSize,
+          playerStoreId,
+          playerAddress: walletStore.address
         })
+
       setAchievementData({ currentPage, totalPages, games: data })
 
-      const stats = await window.api.getAchievementsStats('steam')
+      const stats = await window.api.getAchievementsStats({
+        store,
+        playerStoreId,
+        playerAddress: walletStore.address
+      })
       setFreeMints(stats.numFreeMints)
     }
 
@@ -60,11 +78,13 @@ export default React.memo(function Achievements(): JSX.Element {
     const nextPage = achievementsData.currentPage + 1
     const { data, totalPages, currentPage } =
       await window.api.getSummaryAchievements({
-        store: 'steam',
+        store,
         filter: activeFilter,
         sort: selectedSort.value,
         page: nextPage,
-        pageSize
+        pageSize,
+        playerStoreId,
+        playerAddress: walletStore.address
       })
     setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData, activeFilter, selectedSort])
@@ -73,11 +93,13 @@ export default React.memo(function Achievements(): JSX.Element {
     const prevPage = achievementsData.currentPage - 1
     const { data, totalPages, currentPage } =
       await window.api.getSummaryAchievements({
-        store: 'steam',
+        store,
         filter: activeFilter,
         sort: selectedSort.value,
         page: prevPage,
-        pageSize
+        pageSize,
+        playerStoreId,
+        playerAddress: walletStore.address
       })
     setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData, activeFilter, selectedSort])
@@ -111,7 +133,7 @@ export default React.memo(function Achievements(): JSX.Element {
               <AchievementCard
                 id={id}
                 title={game.gameName}
-                image={game.icon}
+                image={game.gameImageURL}
                 mintableAchievementsCount={game.mintableAchievementsCount}
                 mintedAchievementsCount={game.mintedAchievementCount}
                 totalAchievementsCount={game.totalAchievementCount}
@@ -128,6 +150,12 @@ export default React.memo(function Achievements(): JSX.Element {
                   },
                   disabled: isDisabled
                 }}
+                progressKeyProps={{
+                  i18n: {
+                    mintedLabel: t('achievements.progress.minted'),
+                    notMintedLabel: t('achievements.progress.notMinted')
+                  }
+                }}
               />
             </NavLink>
           )
@@ -143,11 +171,13 @@ export default React.memo(function Achievements(): JSX.Element {
             if (chosenItem) {
               const { data, totalPages, currentPage } =
                 await window.api.getSummaryAchievements({
-                  store: 'steam',
+                  store,
                   filter: activeFilter,
                   sort: chosenItem.value,
                   page: 1,
-                  pageSize
+                  pageSize,
+                  playerStoreId,
+                  playerAddress: walletStore.address
                 })
               setSelectedSort(chosenItem)
               setAchievementData({ currentPage, totalPages, games: data })
@@ -169,11 +199,13 @@ export default React.memo(function Achievements(): JSX.Element {
 
             const { data, totalPages, currentPage } =
               await window.api.getSummaryAchievements({
-                store: 'steam',
+                store,
                 filter: newFilter,
                 sort: selectedSort.value,
                 page: 1,
-                pageSize
+                pageSize,
+                playerStoreId,
+                playerAddress: walletStore.address
               })
             setActiveFilter(newFilter)
             setAchievementData({ currentPage, totalPages, games: data })

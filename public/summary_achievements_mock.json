@@ -14,11 +14,14 @@
     "gameId": 730,
     "gameName": "Counter-Strike: Global Offensive",
     "gameIconURL": "69f7ebe2735c366c65c0b33dae00e12dc40edbe4",
-    "totalAchievementCount": 161,
-    "mintedAchievementCount": 22,
-    "mintableAchievementsCount": 105,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": true
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ACHIEVEMENT_31",
@@ -35,11 +38,14 @@
     "gameId": 230410,
     "gameName": "Warframe",
     "gameIconURL": "22064646470f4c53388ba87774c7ac10f0a91ffa",
-    "totalAchievementCount": 36,
-    "mintedAchievementCount": 7,
-    "mintableAchievementsCount": 17,
-    "isNewAchievement": true,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ACH_MATCHES_SCOUT",
@@ -56,11 +62,14 @@
     "gameId": 375230,
     "gameName": "Warhammer 40,000: Eternal Crusade",
     "gameIconURL": "dcda2a72282ae7a28004962fe3059f23ab902740",
-    "totalAchievementCount": 10,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 2,
-    "isNewAchievement": true,
-    "isMinted": true
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "GOAL_ID_1215",
@@ -77,11 +86,14 @@
     "gameId": 444090,
     "gameName": "Paladins",
     "gameIconURL": "1565119c17f532338a0645b98e69e1fc1df0c29e",
-    "totalAchievementCount": 3,
-    "mintedAchievementCount": 3,
-    "mintableAchievementsCount": 3,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": true
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "Quest_39",
@@ -97,11 +109,11 @@
     "gameId": 489520,
     "gameName": "Minion Masters",
     "gameIconURL": "ad87d123224d786a413a6021ddaf9257e26c0a28",
-    "totalAchievementCount": 0,
-    "mintedAchievementCount": 0,
-    "mintableAchievementsCount": 0,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": true
+    "isMinted": false
   },
   {
     "apiname": "GLOBAL_GNOME_ALONE",
@@ -118,9 +130,9 @@
     "gameId": 546560,
     "gameName": "Half-Life: Alyx",
     "gameIconURL": "225032ac2ad1aca8f5fd98baa2b9daf1eebea5ca",
-    "totalAchievementCount": 0,
-    "mintedAchievementCount": 0,
-    "mintableAchievementsCount": 0,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
     "isMinted": false
   },
@@ -139,11 +151,14 @@
     "gameId": 550650,
     "gameName": "Black Squad",
     "gameIconURL": "213a736d8c5b75998b671de25e6621d1e7bc122a",
-    "totalAchievementCount": 33,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 6,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": false
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ACHIVE017",
@@ -160,11 +175,14 @@
     "gameId": 578080,
     "gameName": "PUBG: BATTLEGROUNDS",
     "gameIconURL": "609f27278aa70697c13bf99f32c5a0248c381f9d",
-    "totalAchievementCount": 21,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 4,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": true
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "qc_victory",
@@ -181,11 +199,14 @@
     "gameId": 611500,
     "gameName": "Quake Champions",
     "gameIconURL": "539032fb1e8b41d0a48ff11bf63bfe7918ace24c",
-    "totalAchievementCount": 1,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 1,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": true,
-    "isMinted": true
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "1",
@@ -202,11 +223,14 @@
     "gameId": 677620,
     "gameName": "Splitgate",
     "gameIconURL": "03e452b180ff77986c3957819bde4c69448a2d0f",
-    "totalAchievementCount": 7,
-    "mintedAchievementCount": 7,
-    "mintableAchievementsCount": 7,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": true,
-    "isMinted": false
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ach_story_1",
@@ -222,10 +246,10 @@
     "gameId": 680420,
     "gameName": "OUTRIDERS",
     "gameIconURL": "35088a2e2cbca86852288051fb34eac760577f83",
-    "totalAchievementCount": 0,
-    "mintedAchievementCount": 0,
-    "mintableAchievementsCount": 0,
-    "isNewAchievement": false,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": true,
     "isMinted": true
   },
   {
@@ -243,11 +267,14 @@
     "gameId": 681660,
     "gameName": "Bless Online",
     "gameIconURL": "9dc17a36db36a4994933e169d868817bd7e9b2c7",
-    "totalAchievementCount": 18,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 1,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": true
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "founder_achievement",
@@ -264,11 +291,14 @@
     "gameId": 714010,
     "gameName": "Aimlabs",
     "gameIconURL": "15347de11efc127539c388e585af9e92d10d5189",
-    "totalAchievementCount": 86,
-    "mintedAchievementCount": 19,
-    "mintableAchievementsCount": 52,
-    "isNewAchievement": true,
-    "isMinted": true
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "mcvs_winmatch1",
@@ -285,11 +315,14 @@
     "gameId": 723780,
     "gameName": "Modern Combat Versus",
     "gameIconURL": "943d0ba62609ff0afeccc22863402b5c68e1cfdb",
-    "totalAchievementCount": 39,
-    "mintedAchievementCount": 6,
-    "mintableAchievementsCount": 13,
-    "isNewAchievement": true,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ACH_ENTER_ELYSIUM",
@@ -306,11 +339,11 @@
     "gameId": 760160,
     "gameName": "Vampire: The Masquerade - Bloodhunt",
     "gameIconURL": "08e7dfced6c1d534ec5d580a3a177427c7250a60",
-    "totalAchievementCount": 0,
-    "mintedAchievementCount": 0,
-    "mintableAchievementsCount": 0,
-    "isNewAchievement": false,
-    "isMinted": true
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": true,
+    "isMinted": false
   },
   {
     "apiname": "ACHIEVEMENT_CASTLE_OF_DOUBT",
@@ -327,10 +360,10 @@
     "gameId": 813780,
     "gameName": "Age of Empires II: Definitive Edition",
     "gameIconURL": "e2b5a7beb58136b892e517cb93ae08b36065363c",
-    "totalAchievementCount": 0,
-    "mintedAchievementCount": 0,
-    "mintableAchievementsCount": 0,
-    "isNewAchievement": false,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": true,
     "isMinted": false
   },
   {
@@ -348,11 +381,11 @@
     "gameId": 813820,
     "gameName": "Realm Royale Reforged",
     "gameIconURL": "068664cf452a9f2388cf1ccf1f239fc967ff9629",
-    "totalAchievementCount": 0,
-    "mintedAchievementCount": 0,
-    "mintableAchievementsCount": 0,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": true,
-    "isMinted": false
+    "isMinted": true
   },
   {
     "apiname": "kz1",
@@ -369,11 +402,14 @@
     "gameId": 844870,
     "gameName": "KurtzPel",
     "gameIconURL": "2947d156a2633c9a5c092d2a14890bc56a342b70",
-    "totalAchievementCount": 2,
-    "mintedAchievementCount": 2,
-    "mintableAchievementsCount": 2,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": true
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "Goal_ID_01",
@@ -390,11 +426,14 @@
     "gameId": 872200,
     "gameName": "Rogue Company",
     "gameIconURL": "ec36ff029402b9cf4e1f7829f293fd12a71e6ce1",
-    "totalAchievementCount": 300,
-    "mintedAchievementCount": 11,
-    "mintableAchievementsCount": 15,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": true,
-    "isMinted": false
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "NEW_ACHIEVEMENT_1_1",
@@ -410,11 +449,14 @@
     "gameId": 883710,
     "gameName": "Resident Evil 2",
     "gameIconURL": "86ef2fdebeced746313994ccf2d7afb1f2887bf0",
-    "totalAchievementCount": 32,
-    "mintedAchievementCount": 3,
-    "mintableAchievementsCount": 11,
-    "isNewAchievement": true,
-    "isMinted": true
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "NEW_ACHIEVEMENT_1_0",
@@ -431,11 +473,14 @@
     "gameId": 961440,
     "gameName": "Resident Evil 2 \"1-Shot Demo\"",
     "gameIconURL": "280cc7bf9e12785e84dc84b9db2c6e44adfa2aad",
-    "totalAchievementCount": 136,
-    "mintedAchievementCount": 4,
-    "mintableAchievementsCount": 5,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": true,
-    "isMinted": true
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "PFA_1",
@@ -451,11 +496,14 @@
     "gameId": 990080,
     "gameName": "Hogwarts Legacy",
     "gameIconURL": "a9ecb94f249768d0ee5ccecbffe8d8c06d9bed59",
-    "totalAchievementCount": 7,
-    "mintedAchievementCount": 7,
-    "mintableAchievementsCount": 7,
-    "isNewAchievement": true,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ACH_1",
@@ -472,11 +520,14 @@
     "gameId": 1085660,
     "gameName": "Destiny 2",
     "gameIconURL": "fce050d63f0a2f8eb51b603c7f30bfca2a301549",
-    "totalAchievementCount": 2,
-    "mintedAchievementCount": 2,
-    "mintableAchievementsCount": 2,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": false
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "TheFool",
@@ -492,11 +543,14 @@
     "gameId": 1091500,
     "gameName": "Cyberpunk 2077",
     "gameIconURL": "15ba5f5437473a1b4d628b3b87223e84f4cfdf38",
-    "totalAchievementCount": 29,
-    "mintedAchievementCount": 9,
-    "mintableAchievementsCount": 10,
-    "isNewAchievement": false,
-    "isMinted": true
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": true,
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ACH_READY_TO_BECOME_AG",
@@ -513,11 +567,14 @@
     "gameId": 1100990,
     "gameName": "Aimbeast",
     "gameIconURL": "d5291ebcf5991fab2d04a51dfa1f1a2ac1c94c4e",
-    "totalAchievementCount": 19,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 2,
-    "isNewAchievement": false,
-    "isMinted": true
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": true,
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "FISFORFAILURE",
@@ -534,11 +591,11 @@
     "gameId": 1126320,
     "gameName": "Being a DIK",
     "gameIconURL": "803bc76fc71f3d3a488fc351bef58a840ee4bd1e",
-    "totalAchievementCount": 0,
-    "mintedAchievementCount": 0,
-    "mintableAchievementsCount": 0,
-    "isNewAchievement": false,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": true,
+    "isMinted": true
   },
   {
     "apiname": "1",
@@ -554,11 +611,14 @@
     "gameId": 1196590,
     "gameName": "Resident Evil Village",
     "gameIconURL": "d97fb0681f9517c65a9d7ba9dd7e63f775375645",
-    "totalAchievementCount": 23,
-    "mintedAchievementCount": 23,
-    "mintableAchievementsCount": 23,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": false
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "NEW_ACHIEVEMENT_3_15",
@@ -575,11 +635,14 @@
     "gameId": 1240440,
     "gameName": "Halo Infinite",
     "gameIconURL": "ec684b943169d675439f6cdf64fa2f2aa90d9821",
-    "totalAchievementCount": 6,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 6,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": true
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ACHIEVEMENT_1",
@@ -596,11 +659,14 @@
     "gameId": 1364780,
     "gameName": "Street Fighter™ 6",
     "gameIconURL": "5e1421a150aaded0c7c175bc6f6843eab9a4d27d",
-    "totalAchievementCount": 15,
-    "mintedAchievementCount": 5,
-    "mintableAchievementsCount": 7,
-    "isNewAchievement": true,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "jp.konami.masterduel.ach.001",
@@ -617,11 +683,14 @@
     "gameId": 1449850,
     "gameName": "Yu-Gi-Oh!  Master Duel",
     "gameIconURL": "2cd45ee5b6c31445216a980cf40fdb10a1587b7f",
-    "totalAchievementCount": 17,
-    "mintedAchievementCount": 0,
-    "mintableAchievementsCount": 2,
-    "isNewAchievement": true,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "A001_",
@@ -638,11 +707,14 @@
     "gameId": 1466860,
     "gameName": "Age of Empires IV: Anniversary Edition",
     "gameIconURL": "503acf3ef0503e24af6b5336012a1f585a2f955e",
-    "totalAchievementCount": 10,
-    "mintedAchievementCount": 5,
-    "mintableAchievementsCount": 7,
-    "isNewAchievement": false,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": true,
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "2010007",
@@ -659,11 +731,14 @@
     "gameId": 1599340,
     "gameName": "Lost Ark",
     "gameIconURL": "4e4ef2862189e1f1d3052125fb1ed6cb42bcaaf8",
-    "totalAchievementCount": 61,
-    "mintedAchievementCount": 61,
-    "mintableAchievementsCount": 61,
-    "isNewAchievement": true,
-    "isMinted": true
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": true,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "War06",
@@ -680,11 +755,14 @@
     "gameId": 1675900,
     "gameName": "Warlander",
     "gameIconURL": "9bc63957995b5210dea55b07db9053005719926c",
-    "totalAchievementCount": 4,
-    "mintedAchievementCount": 4,
-    "mintableAchievementsCount": 4,
-    "isNewAchievement": false,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": true,
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "クインティプルキル",
@@ -701,11 +779,14 @@
     "gameId": 1816670,
     "gameName": "GUNDAM EVOLUTION",
     "gameIconURL": "4fb2015d970fe8faebecc10e249a9a1922afddfe",
-    "totalAchievementCount": 3,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 2,
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
     "isNewAchievement": false,
-    "isMinted": true
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   },
   {
     "apiname": "ACH16",
@@ -721,10 +802,13 @@
     "gameId": 1888160,
     "gameName": "ARMORED CORE™ VI FIRES OF RUBICON™",
     "gameIconURL": "961383bce3239632856e2e58dbf5d1893f05d808",
-    "totalAchievementCount": 2,
-    "mintedAchievementCount": 1,
-    "mintableAchievementsCount": 2,
-    "isNewAchievement": true,
-    "isMinted": false
+    "totalAchievements": 0,
+    "mintedAchievements": 0,
+    "mintableAchievements": 0,
+    "isNewAchievement": false,
+    "isMinted": false,
+    "totalAchievementsCount": null,
+    "mintableAchievementsCount": null,
+    "mintedAchievementsCount": null
   }
 ]

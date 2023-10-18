@@ -7,7 +7,6 @@ import React, {
   useCallback
 } from 'react'
 
-// Define the context type
 interface MintAchievementsType {
   achievementsToBeMinted: string[] // Define the type of your context value
   achievementsToBeUpdated: string[] // Define the type of your context value
@@ -18,12 +17,10 @@ interface MintAchievementsType {
   isLoading: boolean
 }
 
-// Create the context with an initial value
 const MintAchievements = createContext<MintAchievementsType | undefined>(
   undefined
 )
 
-// Define a provider component
 interface MintAchievementsProviderProps {
   children: ReactNode
 }
@@ -108,7 +105,6 @@ const MintAchievementsProvider: React.FC<MintAchievementsProviderProps> = ({
   )
 }
 
-// Define a custom hook to access the context value
 const useMintAchievements = () => {
   const context = useContext(MintAchievements)
 

@@ -792,10 +792,10 @@ export type AvailablePlatforms = {
   icon: IconDefinition
 }[]
 
-export type AchievementStore = 'hyperplay' | 'steam' | 'epic'
+export type AchievementStore = 'HYPERPLAY' | 'STEAM' | 'EPIC'
 
 export interface Achievement {
-  id: number
+  id: string
   apiname: string
   achieved: number
   unlocktime: number
@@ -809,7 +809,7 @@ export interface Achievement {
   iconName: string
   gameId: number
   gameName: string
-  gameIconURL: string
+  gameImageURL: string
 }
 
 export interface SummaryAchievement extends Achievement {
@@ -825,7 +825,19 @@ export type AchievementSort = 'ALPHA_A_TO_Z' | 'ALPHA_Z_TO_A' | 'SORT_BY_STATUS'
 
 export type AchievementFilter = 'ALL' | 'NEW' | 'MINTED'
 
-export interface GetAchievementsOptions {
+export interface PlayerOptions {
+  playerStoreId: string
+  playerAddress: string
+}
+export interface GetAchievementsStatsOptions extends PlayerOptions {
+  store: AchievementStore
+}
+
+export interface SyncAchievementsOptions extends PlayerOptions {
+  store: AchievementStore
+}
+
+export interface GetAchievementsOptions extends PlayerOptions {
   store: AchievementStore
   filter: AchievementFilter
   sort: AchievementSort
@@ -833,11 +845,12 @@ export interface GetAchievementsOptions {
   pageSize: number
 }
 
-export interface GetIndividualAchievementsOptions {
+export interface GetIndividualAchievementsOptions extends PlayerOptions {
   gameId: number
   sort: AchievementSort
   page: number
   pageSize: number
+  store: AchievementStore
 }
 export interface AchievementsStats {
   newAchievements: number
