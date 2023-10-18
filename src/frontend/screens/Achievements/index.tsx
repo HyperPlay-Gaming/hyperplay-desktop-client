@@ -43,6 +43,29 @@ export default React.memo(function Achievements(): JSX.Element {
     toggleAchievementToBeUpdated
   } = useMintAchievements()
 
+  const fetchAchievements = useCallback(
+    async ({
+      page,
+      sort,
+      filter
+    }: {
+      page: number
+      sort?: AchievementSort
+      filter?: AchievementFilter
+    }) => {
+      return window.api.getSummaryAchievements({
+        store,
+        filter: filter ?? activeFilter,
+        sort: sort ?? selectedSort.value,
+        page,
+        pageSize,
+        playerStoreId,
+        playerAddress: walletStore.address
+      })
+    },
+    [store, activeFilter, selectedSort, playerStoreId, walletStore.address]
+  )
+
   useEffect(() => {
     const getAchievements = async () => {
       window.api.syncAchievements({
@@ -50,16 +73,9 @@ export default React.memo(function Achievements(): JSX.Element {
         playerStoreId,
         playerAddress: walletStore.address
       })
-      const { data, totalPages, currentPage } =
-        await window.api.getSummaryAchievements({
-          store,
-          filter: activeFilter,
-          sort: selectedSort.value,
-          page: 1,
-          pageSize,
-          playerStoreId,
-          playerAddress: walletStore.address
-        })
+      const { data, totalPages, currentPage } = await fetchAchievements({
+        page: 1
+      })
 
       setAchievementData({ currentPage, totalPages, games: data })
 
@@ -76,31 +92,19 @@ export default React.memo(function Achievements(): JSX.Element {
 
   const handleNextPage = useCallback(async () => {
     const nextPage = achievementsData.currentPage + 1
-    const { data, totalPages, currentPage } =
-      await window.api.getSummaryAchievements({
-        store,
-        filter: activeFilter,
-        sort: selectedSort.value,
-        page: nextPage,
-        pageSize,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
+    const { data, totalPages, currentPage } = await fetchAchievements({
+      page: nextPage
+    })
+
     setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData, activeFilter, selectedSort])
 
   const handlePrevPage = useCallback(async () => {
     const prevPage = achievementsData.currentPage - 1
-    const { data, totalPages, currentPage } =
-      await window.api.getSummaryAchievements({
-        store,
-        filter: activeFilter,
-        sort: selectedSort.value,
-        page: prevPage,
-        pageSize,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
+    const { data, totalPages, currentPage } = await fetchAchievements({
+      page: prevPage
+    })
+
     setAchievementData({ currentPage, totalPages, games: data })
   }, [achievementsData, activeFilter, selectedSort])
 
@@ -108,7 +112,7 @@ export default React.memo(function Achievements(): JSX.Element {
     return isLoading || !walletStore.isConnected
   }, [isLoading, walletStore.isConnected])
 
-  const filter = useMemo(() => {
+  const filterMap = useMemo(() => {
     if (activeFilter === 'NEW') return 'new'
     if (activeFilter === 'MINTED') return 'minted'
     return 'all'
@@ -171,16 +175,10 @@ export default React.memo(function Achievements(): JSX.Element {
             )
 
             if (chosenItem) {
-              const { data, totalPages, currentPage } =
-                await window.api.getSummaryAchievements({
-                  store,
-                  filter: activeFilter,
-                  sort: chosenItem.value,
-                  page: 1,
-                  pageSize,
-                  playerStoreId,
-                  playerAddress: walletStore.address
-                })
+              const { data, totalPages, currentPage } = await fetchAchievements(
+                { page: 1, sort: chosenItem.value }
+              )
+
               setSelectedSort(chosenItem)
               setAchievementData({ currentPage, totalPages, games: data })
             }
@@ -193,22 +191,17 @@ export default React.memo(function Achievements(): JSX.Element {
           handlePrevPage
         }}
         filterProps={{
-          activeFilter: filter,
+          activeFilter: filterMap,
           setActiveFilter: async (filter) => {
             let newFilter = 'ALL' as AchievementFilter
             if (filter === 'new') newFilter = 'NEW'
             if (filter === 'minted') newFilter = 'MINTED'
 
-            const { data, totalPages, currentPage } =
-              await window.api.getSummaryAchievements({
-                store,
-                filter: newFilter,
-                sort: selectedSort.value,
-                page: 1,
-                pageSize,
-                playerStoreId,
-                playerAddress: walletStore.address
-              })
+            const { data, totalPages, currentPage } = await fetchAchievements({
+              page: 1,
+              filter: newFilter
+            })
+
             setActiveFilter(newFilter)
             setAchievementData({ currentPage, totalPages, games: data })
           }

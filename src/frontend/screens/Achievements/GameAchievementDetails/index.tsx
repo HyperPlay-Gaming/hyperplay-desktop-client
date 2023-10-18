@@ -1,5 +1,5 @@
 import { GameAchievements } from '@hyperplay/ui'
-import { Achievement, SummaryAchievement } from 'common/types'
+import { Achievement, AchievementSort, SummaryAchievement } from 'common/types'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
@@ -39,6 +39,21 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
   } = useMintAchievements()
   const { store, playerStoreId } = useAchievementStore()
 
+  const fetchAchievements = useCallback(
+    async ({ page, sort }: { page: number; sort?: AchievementSort }) => {
+      return window.api.getIndividualAchievements({
+        gameId: Number(id),
+        store,
+        sort: sort ?? selectedSort.value,
+        page,
+        pageSize,
+        playerStoreId,
+        playerAddress: walletStore.address
+      })
+    },
+    [store, selectedSort, playerStoreId, walletStore.address, id]
+  )
+
   useEffect(() => {
     const getAchievements = async () => {
       const { data } = await window.api.getSummaryAchievements({
@@ -52,15 +67,7 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
       })
       setSummaryAchievement(data[0])
 
-      const achievements = await window.api.getIndividualAchievements({
-        gameId: Number(id),
-        store,
-        sort: selectedSort.value,
-        page: 1,
-        pageSize,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
+      const achievements = await fetchAchievements({ page: 1 })
       setAchievementData(achievements)
 
       const stats = await window.api.getAchievementsStats({
@@ -77,29 +84,13 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
 
   const handleNextPage = useCallback(async () => {
     const nextPage = achievementsData.currentPage + 1
-    const achievements = await window.api.getIndividualAchievements({
-      gameId: Number(id),
-      store,
-      sort: selectedSort.value,
-      page: nextPage,
-      pageSize,
-      playerStoreId,
-      playerAddress: walletStore.address
-    })
+    const achievements = await fetchAchievements({ page: nextPage })
     setAchievementData(achievements)
   }, [achievementsData, selectedSort])
 
   const handlePrevPage = useCallback(async () => {
     const prevPage = achievementsData.currentPage - 1
-    const achievements = await window.api.getIndividualAchievements({
-      gameId: Number(id),
-      store,
-      sort: selectedSort.value,
-      page: prevPage,
-      pageSize,
-      playerStoreId,
-      playerAddress: walletStore.address
-    })
+    const achievements = await fetchAchievements({ page: prevPage })
     setAchievementData(achievements)
   }, [achievementsData, selectedSort])
 
@@ -122,9 +113,8 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
       mintedAchievementsCount={summaryAchievement.mintedAchievementCount}
       totalAchievementsCount={summaryAchievement.totalAchievementCount}
       mintableAchievementsCount={summaryAchievement.mintableAchievementsCount}
-      achievements={achievementsData.data.map((achievement, index) => ({
-        // TODO: remove when there is a real id
-        id: `${index}`,
+      achievements={achievementsData.data.map((achievement) => ({
+        id: achievement.id,
         title: achievement.displayName,
         description: achievement.description,
         image: achievement.icon,
@@ -139,16 +129,11 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
           )
 
           if (chosenItem) {
-            const { data, totalPages, currentPage } =
-              await window.api.getIndividualAchievements({
-                gameId: Number(id),
-                store,
-                sort: chosenItem.value,
-                page: 1,
-                pageSize,
-                playerStoreId,
-                playerAddress: walletStore.address
-              })
+            const { data, totalPages, currentPage } = await fetchAchievements({
+              page: 1,
+              sort: chosenItem.value
+            })
+
             setSelectedSort(chosenItem)
             setAchievementData({ currentPage, totalPages, data })
           }

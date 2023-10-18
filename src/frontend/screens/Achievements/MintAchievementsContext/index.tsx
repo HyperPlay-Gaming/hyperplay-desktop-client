@@ -8,8 +8,8 @@ import React, {
 } from 'react'
 
 interface MintAchievementsType {
-  achievementsToBeMinted: string[] // Define the type of your context value
-  achievementsToBeUpdated: string[] // Define the type of your context value
+  achievementsToBeMinted: string[]
+  achievementsToBeUpdated: string[]
   toggleAchievementToBeMinted: (id: string) => void
   toggleAchievementToBeUpdated: (id: string) => void
   handleMint: () => void
