@@ -74,6 +74,7 @@ const AuthModal = () => {
 
     const qaModeListenerCleanup = window.api.handleQaModeActivated(() => {
       authState.activateQaMode()
+      authState.openSignInModal()
     })
 
     return () => {
