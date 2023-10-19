@@ -652,5 +652,8 @@
     "Amazon": "Amazon",
     "ALL": "TODO",
     "analytics": "Análisis",
-    "Amazon Games": "Amazon Games"
+    "Amazon Games": "Amazon Games",
+    "dlc": {
+        "installDlcs": "Instalar todos los DLC"
+    }
 }
