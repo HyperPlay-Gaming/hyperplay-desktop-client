@@ -1,5 +1,11 @@
 import useSetting from 'frontend/hooks/useSetting'
-import React, { createContext, useContext, ReactNode, useMemo, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  ReactNode,
+  useMemo,
+  useState
+} from 'react'
 
 import { AchievementStore as StoreType } from '../../../../common/types'
 
@@ -12,7 +18,9 @@ interface AchievementStoreType {
 const AchievementStore = createContext<AchievementStoreType>({
   store: 'STEAM',
   playerStoreId: '',
-  setStore: () => { console.log('not nested in achievement context') }
+  setStore: () => {
+    console.log('not nested in achievement context')
+  }
 })
 
 interface AchievementStoreProviderProps {

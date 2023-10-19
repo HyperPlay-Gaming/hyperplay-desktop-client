@@ -5,8 +5,8 @@ import { useAchievementStore } from '../AchievementStoreContext'
 
 export const AchievementsStats = () => {
   const [stats, setStats] = useState({
-    totalNewAchievements: 0,
-    totalMintedAchievements: 0,
+    newAchievements: 0,
+    mintedAchievements: 0,
     totalAchievements: 0,
     totalGames: 0,
     numFreeMints: 0
@@ -28,8 +28,8 @@ export const AchievementsStats = () => {
 
   return (
     <AchievementsInfo
-      newAchievementsValue={`${stats.totalNewAchievements}`}
-      mintedValue={`${stats.totalMintedAchievements}/${stats.totalAchievements} `}
+      newAchievementsValue={`${stats.newAchievements}`}
+      mintedValue={`${stats.mintedAchievements}/${stats.totalAchievements} `}
       gamesValue={`${stats.totalGames}`}
     />
   )
