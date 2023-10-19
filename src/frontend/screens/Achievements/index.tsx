@@ -67,11 +67,6 @@ export default React.memo(function Achievements(): JSX.Element {
 
   useEffect(() => {
     const getAchievements = async () => {
-      window.api.syncAchievements({
-        store,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
       const { data, totalPages, currentPage } = await fetchAchievements({
         page: 1
       })
