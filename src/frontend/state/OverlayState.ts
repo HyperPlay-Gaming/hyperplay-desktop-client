@@ -1,6 +1,6 @@
 import { OverlayRenderState } from 'common/types'
 import { PROVIDERS } from 'common/types/proxy-types'
-import { autorun, makeAutoObservable } from 'mobx'
+import { reaction, makeAutoObservable } from 'mobx'
 import WalletState from './WalletState'
 
 class OverlayState {
@@ -41,7 +41,6 @@ class OverlayState {
   }
 
   init() {
-    console.log('init overlay state')
     window.api.handleUpdateOverlayRenderState(
       this.handleUpdateOverlayRenderState.bind(this)
     )
@@ -59,19 +58,22 @@ class OverlayState {
 const overlayState = new OverlayState()
 export default overlayState
 
-autorun(() => {
-  switch (WalletState.provider) {
-    case PROVIDERS.METAMASK_EXTENSION:
-      overlayState.showExtension = true
-      break
-    case PROVIDERS.WALLET_CONNECT:
-      overlayState.showExtension = false
-      break
-    case PROVIDERS.METAMASK_MOBILE:
-      overlayState.showExtension = false
-      break
-    case PROVIDERS.UNCONNECTED:
-      overlayState.showExtension = false
-      break
+reaction(
+  () => WalletState.provider,
+  () => {
+    switch (WalletState.provider) {
+      case PROVIDERS.METAMASK_EXTENSION:
+        overlayState.showExtension = true
+        break
+      case PROVIDERS.WALLET_CONNECT:
+        overlayState.showExtension = false
+        break
+      case PROVIDERS.METAMASK_MOBILE:
+        overlayState.showExtension = false
+        break
+      case PROVIDERS.UNCONNECTED:
+        overlayState.showExtension = false
+        break
+    }
   }
-})
+)

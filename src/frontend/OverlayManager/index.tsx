@@ -10,6 +10,7 @@ import { t } from 'i18next'
 import { Button } from '@hyperplay/ui'
 import DeviceState from 'frontend/state/DeviceState'
 import ExtensionManager from 'frontend/ExtensionManager'
+import TransactionState from 'frontend/state/TransactionState'
 
 interface BrowserGameProps {
   appName: string
@@ -31,13 +32,14 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
     zIndex: 200
   } as React.CSSProperties
 
-  if (OverlayState.showExitGameButton && !OverlayState.showExtension)
+  if (OverlayState.showExitGameButton && !OverlayState.showExtension) {
     exitGameButtonStyle = {
       ...exitGameButtonStyle,
       top: 0,
       right: 0,
       overflowY: 'hidden'
     }
+  }
 
   return (
     <>
@@ -49,36 +51,42 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
           <ToastManager />
         </div>
       ) : null}
-      <div className={BrowserGameStyles.bgFilter}></div>
-      {OverlayState.showHintText ? (
-        <div className={`${BrowserGameStyles.closeOverlayText} title`}>
-          {t('hyperplayOverlay.closeOverlay', {
-            defaultValue: 'Press {{overlayKeyMod}} + X to close the overlay',
-            overlayKeyMod: DeviceState.isMac ? 'Option' : 'Alt'
-          })}
-        </div>
-      ) : null}
-      {OverlayState.showExitGameButton ? (
-        <Button
-          onClick={async () => window.api.kill(appName, runner)}
-          style={exitGameButtonStyle}
-          type="secondary"
-          size="medium"
-        >
-          {t('exit_game', 'Exit Game')}
-        </Button>
-      ) : null}
-      {OverlayState.showExtension ? (
-        <ExtensionManager />
-      ) : (
-        <div className={BrowserGameStyles.overlayToggleHint}>
-          <div className="title">
-            {t(
-              'overlay.EXTERNAL_WALLET_CONNECTED',
-              'You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.'
-            )}
-          </div>
-        </div>
+
+      {TransactionState.isInitialToastShown ? null : (
+        <>
+          <div className={BrowserGameStyles.bgFilter}></div>
+          {OverlayState.showHintText ? (
+            <div className={`${BrowserGameStyles.closeOverlayText} title`}>
+              {t('hyperplayOverlay.closeOverlay', {
+                defaultValue:
+                  'Press {{overlayKeyMod}} + X to close the overlay',
+                overlayKeyMod: DeviceState.isMac ? 'Option' : 'Alt'
+              })}
+            </div>
+          ) : null}
+          {OverlayState.showExitGameButton ? (
+            <Button
+              onClick={async () => window.api.kill(appName, runner)}
+              style={exitGameButtonStyle}
+              type="secondary"
+              size="medium"
+            >
+              {t('exit_game', 'Exit Game')}
+            </Button>
+          ) : null}
+          {OverlayState.showExtension ? (
+            <ExtensionManager />
+          ) : (
+            <div className={BrowserGameStyles.overlayToggleHint}>
+              <div className="title">
+                {t(
+                  'overlay.EXTERNAL_WALLET_CONNECTED',
+                  'You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.'
+                )}
+              </div>
+            </div>
+          )}
+        </>
       )}
     </>
   )
@@ -89,7 +97,6 @@ const OverlayManager = observer(function ({
   runner
 }: BrowserGameProps) {
   const url = OverlayState.browserGameUrl
-  console.log('rendering overlay manager with url ', url)
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const trueAsStr = 'true' as any

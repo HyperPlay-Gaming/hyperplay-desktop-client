@@ -12,7 +12,7 @@ const BrowserToastManager = function () {
       status={item.status}
       title={item.title}
       subtext={item.subtext}
-      onClick={item.onClick}
+      onClick={() => item.onClick()}
       showCloseButton={true}
     />
   )

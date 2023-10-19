@@ -26,7 +26,7 @@ const TransactionNotification = () => {
         <h6 className={styles.title}>{title}</h6>
         <p className="content-sm text-secondary">{description}</p>
         <PhoneIcon status={item.status} />
-        <button className={styles.actionButton} onClick={item.onClick}>
+        <button className={styles.actionButton} onClick={() => item.onClick()}>
           Close
         </button>
       </div>

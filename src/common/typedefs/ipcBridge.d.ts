@@ -72,6 +72,7 @@ interface HyperPlaySyncIPCFunctions {
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
   overlayReady: () => void
+  updateOverlayWindow: (state: OverlayWindowState) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {

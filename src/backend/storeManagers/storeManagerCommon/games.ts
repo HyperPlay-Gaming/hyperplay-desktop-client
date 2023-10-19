@@ -183,6 +183,7 @@ const openNewBrowserGameWindow = async (
         showBackgroundTint: true
       }
       browserGame.webContents.send('updateOverlayRenderState', renderState)
+      browserGame.webContents.send('showInitialToast')
     })
 
     setTimeout(() => browserGame.focus(), 200)

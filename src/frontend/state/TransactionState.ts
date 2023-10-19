@@ -16,6 +16,7 @@ import {
   INITIAL_TOAST
 } from 'frontend/screens/TransactionNotification/constants'
 import DeviceState from './DeviceState'
+import overlayState from './OverlayState'
 
 class TransactionState {
   /*
@@ -29,11 +30,13 @@ class TransactionState {
   recentToasts: Toast[] = []
 
   // txn id for mm mobile and wallet connect wallets
-  #maxId = -1
+  private maxId = -1
 
   TXN_CONFIRMED_DELAY_MS = 5000
 
   INITIAL_TOAST_DELAY_MS = 11000
+
+  initialTimeout: NodeJS.Timeout | undefined
 
   // PUBLIC FUNCTIONS
 
@@ -52,7 +55,7 @@ class TransactionState {
         method,
         state: TRANSACTION_STATE.INITIATED
       }
-      this.#addTransactionAndUpdateId(id, txn)
+      this.addTransactionAndUpdateId(id, txn)
     })
 
     window.api.handleProviderRequestPending((_e, id) => {
@@ -60,7 +63,7 @@ class TransactionState {
         ...this.transactions.get(id)!,
         state: TRANSACTION_STATE.PENDING
       }
-      this.#addTransactionAndUpdateId(id, txn)
+      this.addTransactionAndUpdateId(id, txn)
     })
 
     window.api.handleProviderRequestCompleted((_e, id) => {
@@ -68,7 +71,7 @@ class TransactionState {
         ...this.transactions.get(id)!,
         state: TRANSACTION_STATE.CONFIRMED
       }
-      this.#addTransactionAndUpdateId(id, txn)
+      this.addTransactionAndUpdateId(id, txn)
     })
 
     window.api.handleProviderRequestFailed((_e, id) => {
@@ -76,14 +79,15 @@ class TransactionState {
         ...this.transactions.get(id)!,
         state: TRANSACTION_STATE.FAILED
       }
-      this.#addTransactionAndUpdateId(id, txn)
+      this.addTransactionAndUpdateId(id, txn)
     })
 
-    window.api.handleShowInitialToast(this.#handleShowInitialToast.bind(this))
+    window.api.handleShowInitialToast(this.handleShowInitialToast.bind(this))
+    window.api.handleOverlayToggled(this.handleOverlayToggled.bind(this))
   }
 
   reset() {
-    this.#maxId = -1
+    this.maxId = -1
     this.transactions.clear()
     this.recentToasts = []
     this.TXN_CONFIRMED_DELAY_MS = 5000
@@ -91,19 +95,13 @@ class TransactionState {
   }
 
   closeToast(key: ToastKey) {
-    const transaction = this.#removeTxnIfFinished(key)
+    const transaction = this.removeTxnIfFinished(key)
 
     if (transaction !== undefined && key.txnId !== undefined) {
       this.transactions.set(key.txnId, transaction)
     }
 
     this.recentToasts = this.recentToasts.map((val) => {
-      console.log(
-        'comparing ',
-        JSON.stringify(val, null, 4),
-        ' and ',
-        JSON.stringify(key, null, 4)
-      )
       if (
         val.key.txnId === key.txnId &&
         val.key.type === key.type &&
@@ -116,7 +114,6 @@ class TransactionState {
   }
 
   get latestToast(): Toast | null {
-    console.log(' latest toast ', JSON.stringify(this, null, 4))
     const lastToast = this.recentToasts.at(-1)
     if (lastToast === undefined) {
       return null
@@ -124,14 +121,33 @@ class TransactionState {
     return lastToast
   }
 
-  // PRIVATE FUNCTIONS
-
-  #removeTransaction(id: number) {
-    this.transactions.delete(id)
-    this.#updateMaxId(id)
+  get isInitialToastShown(): boolean {
+    return (
+      this.latestToast?.isOpen === true &&
+      this.latestToast.key.type === 'initial'
+    )
   }
 
-  #removeTxnIfFinished(key: ToastKey) {
+  // PRIVATE FUNCTIONS
+
+  private handleOverlayToggled(
+    event: Electron.IpcRendererEvent,
+    overlayShown: boolean
+  ) {
+    // if user toggles overlay, use that state and clear the initial toast timeout to update it
+    if (this.initialTimeout) {
+      clearTimeout(this.initialTimeout)
+    }
+
+    this.updateOverlayWindow(overlayShown)
+  }
+
+  private removeTransaction(id: number) {
+    this.transactions.delete(id)
+    this.updateMaxId(id)
+  }
+
+  private removeTxnIfFinished(key: ToastKey) {
     if (key.txnId === undefined) {
       return
     }
@@ -145,30 +161,30 @@ class TransactionState {
       transaction.state === TRANSACTION_STATE.FAILED ||
       transaction.state === TRANSACTION_STATE.CONFIRMED
     if (txnIsFinished) {
-      this.#removeTransaction(key.txnId)
+      this.removeTransaction(key.txnId)
     }
     return transaction
   }
 
-  #updateMaxId(id: number) {
-    if (id >= this.#maxId) {
-      this.#maxId = id
+  private updateMaxId(id: number) {
+    if (id >= this.maxId) {
+      this.maxId = id
     }
   }
 
-  #addTransactionAndUpdateId(id: number, txn: Transaction) {
+  private addTransactionAndUpdateId(id: number, txn: Transaction) {
     this.transactions.set(id, txn)
-    this.#updateMaxId(id)
-    if (id === this.#maxId) {
-      this.#addTransaction(txn)
+    this.updateMaxId(id)
+    if (id === this.maxId) {
+      this.addTransaction(txn)
     }
   }
 
   /*
    * Called to show initial toast and MetaMask extension toast
    */
-  #addTransaction(txn: Transaction) {
-    this.recentToasts.push(this.#getToastFromTransaction(txn))
+  private addTransaction(txn: Transaction) {
+    this.recentToasts.push(this.getToastFromTransaction(txn))
     if (
       txn.state === TRANSACTION_STATE.CONFIRMED ||
       txn.state === TRANSACTION_STATE.FAILED
@@ -185,7 +201,7 @@ class TransactionState {
     }
   }
 
-  #getToastFromTransaction(txn: Transaction): Toast {
+  private getToastFromTransaction(txn: Transaction): Toast {
     const title = TITLE[txn.method]
       ? TITLE[txn.method][txn.state]()
       : TITLE.default[txn.state]()
@@ -210,7 +226,18 @@ class TransactionState {
     return toast
   }
 
-  #handleShowInitialToast() {
+  private shouldShowOverlayAfterInitialToast() {
+    let shouldShow = false
+    for (const toast of this.recentToasts) {
+      if (toast.isOpen) {
+        shouldShow = true
+        break
+      }
+    }
+    return shouldShow
+  }
+
+  private handleShowInitialToast() {
     const initialToastKey: ToastKey = {
       type: 'initial'
     }
@@ -227,10 +254,30 @@ class TransactionState {
 
     this.recentToasts.push(initialToast)
 
-    setTimeout(
-      () => this.closeToast(initialToastKey),
-      this.INITIAL_TOAST_DELAY_MS
-    )
+    this.initialTimeout = setTimeout(() => {
+      this.closeToast(initialToastKey)
+
+      // don't toggle overlay window state if browser game
+      if (overlayState.showBrowserGame) {
+        return
+      }
+
+      this.updateOverlayWindow(this.shouldShowOverlayAfterInitialToast())
+    }, this.INITIAL_TOAST_DELAY_MS)
+  }
+
+  private updateOverlayWindow(showOverlay: boolean) {
+    if (showOverlay) {
+      window.api.updateOverlayWindow({
+        ignoreInput: false,
+        state: 'show'
+      })
+    } else {
+      window.api.updateOverlayWindow({
+        ignoreInput: true,
+        state: 'hide'
+      })
+    }
   }
 }
 const transactionState = new TransactionState()
