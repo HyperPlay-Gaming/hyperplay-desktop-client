@@ -22,7 +22,7 @@ const AuthModal = () => {
   const webviewRef = useRef<WebviewTag>(null)
 
   const handleAccountNotConnected = async () => {
-    const currentProvider = await window.api.getCurrentWeb3Provider()
+    const currentProvider = await window.api.getConnectedProvider()
 
     if (!currentProvider) {
       onboardingStore.openOnboarding()
