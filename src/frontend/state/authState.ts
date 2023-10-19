@@ -1,40 +1,40 @@
 import { makeAutoObservable } from 'mobx'
 
 class AuthState {
-  #qaModeActive = false
-  #singInModalOpen = true
-  #signedIn = false
+  private qaModeActive = false
+  private singInModalOpen = true
+  private signedIn = false
 
   constructor() {
     makeAutoObservable(this)
   }
 
   get isSingInModalOpen() {
-    return this.#singInModalOpen
+    return this.singInModalOpen
   }
 
   get isSignedIn() {
-    return this.#signedIn
+    return this.signedIn
   }
 
   get isQaModeActive() {
-    return this.#qaModeActive
+    return this.qaModeActive
   }
 
   openSignInModal() {
-    this.#singInModalOpen = true
+    this.singInModalOpen = true
   }
 
   closeSignInModal() {
-    this.#singInModalOpen = false
+    this.singInModalOpen = false
   }
 
   activateQaMode() {
-    this.#qaModeActive = true
+    this.qaModeActive = true
   }
 
   setSignedIn() {
-    this.#signedIn = true
+    this.signedIn = true
   }
 }
 
