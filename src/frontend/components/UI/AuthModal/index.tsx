@@ -24,7 +24,7 @@ const AuthModal = () => {
   const handleAccountNotConnected = async () => {
     const currentProvider = await window.api.getConnectedProvider()
 
-    if (!currentProvider) {
+    if (currentProvider === 'Unconnected') {
       onboardingStore.openOnboarding()
       return
     }
