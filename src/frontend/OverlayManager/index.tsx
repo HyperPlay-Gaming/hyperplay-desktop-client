@@ -30,7 +30,7 @@ const OverlayManager = function ({
   const [provider, setProvider] = useState('')
 
   useEffect(() => {
-    window.api.getConnectedProvider().then((val) => setProvider(val))
+    window.api.getConnectedProvider().then((val) => setProvider(val.toString()))
   }, [])
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

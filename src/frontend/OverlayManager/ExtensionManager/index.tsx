@@ -77,7 +77,7 @@ const BrowserExtensionManager = function ({
 
     window.api.getConnectedProvider().then((prov) => {
       const providersWithoutPopup = ['MetaMaskExtension']
-      if (providersWithoutPopup.includes(prov)) {
+      if (providersWithoutPopup.includes(prov.toString())) {
         return setShowMmPopupPage(true)
       }
       return setShowMmPopupPage(false)
