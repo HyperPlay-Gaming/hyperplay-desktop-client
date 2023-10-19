@@ -29,9 +29,8 @@ export default React.memo(function Achievements(): JSX.Element {
     totalPages: number
     games: SummaryAchievement[]
   }>({ currentPage: 0, totalPages: 0, games: [] })
-  const [freeMints, setFreeMints] = useState(0)
 
-  const { store, playerStoreId } = useAchievementStore()
+  const { store, playerStoreId, numFreeMints } = useAchievementStore()
 
   const {
     achievementsToBeMinted,
@@ -78,13 +77,6 @@ export default React.memo(function Achievements(): JSX.Element {
       })
 
       setAchievementData({ currentPage, totalPages, games: data })
-
-      const stats = await window.api.getAchievementsStats({
-        store,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
-      setFreeMints(stats.numFreeMints)
     }
 
     getAchievements()
@@ -217,7 +209,7 @@ export default React.memo(function Achievements(): JSX.Element {
           totalToUpdate: achievementsToBeUpdated.length
         }}
         achievementNavProps={{
-          freeMints,
+          freeMints: numFreeMints,
           basketAmount:
             achievementsToBeMinted.length + achievementsToBeUpdated.length
         }}

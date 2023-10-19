@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import { StoreRow, Images } from '@hyperplay/ui'
 import { Flex } from '@mantine/core'
@@ -6,23 +6,9 @@ import { Flex } from '@mantine/core'
 import styles from './index.module.css'
 import { useAchievementStore } from '../AchievementStoreContext'
 import classNames from 'classnames'
-import walletStore from 'frontend/store/WalletStore'
 
 export const AchievementStores = () => {
-  const { store, setStore, playerStoreId } = useAchievementStore()
-  const [totalGames, setTotalGames] = useState(0)
-
-  useEffect(() => {
-    const getStats = async () => {
-      const stats = await window.api.getAchievementsStats({
-        store,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
-      setTotalGames(stats.totalGames)
-    }
-    getStats()
-  }, [])
+  const { store, setStore, totalGames } = useAchievementStore()
 
   const activeSecondaryText = `${totalGames} Games`
   const isSteam = store === 'STEAM'

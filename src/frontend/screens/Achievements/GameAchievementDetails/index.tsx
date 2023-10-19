@@ -29,7 +29,7 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
   }>({ data: [], currentPage: 0, totalPages: 0 })
 
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
-  const [freeMints, setFreeMints] = useState(0)
+
   const {
     achievementsToBeMinted,
     isLoading,
@@ -37,7 +37,7 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
     handleUpdate,
     achievementsToBeUpdated
   } = useMintAchievements()
-  const { store, playerStoreId } = useAchievementStore()
+  const { store, playerStoreId, numFreeMints } = useAchievementStore()
 
   const fetchAchievements = useCallback(
     async ({ page, sort }: { page: number; sort?: AchievementSort }) => {
@@ -69,14 +69,6 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
 
       const achievements = await fetchAchievements({ page: 1 })
       setAchievementData(achievements)
-
-      const stats = await window.api.getAchievementsStats({
-        store,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
-
-      setFreeMints(stats.numFreeMints)
     }
 
     getAchievements()
@@ -103,7 +95,7 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
   return (
     <GameAchievements
       achievementNavProps={{
-        freeMints,
+        freeMints: numFreeMints,
         basketAmount: achievementsToBeMinted.length
       }}
       game={{
