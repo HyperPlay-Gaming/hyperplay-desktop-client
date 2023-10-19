@@ -3,7 +3,7 @@ import styles from './index.module.scss'
 import { ModalAnimation } from '@hyperplay/ui'
 import { WebviewTag } from 'electron'
 import { observer } from 'mobx-react-lite'
-import authModalState from '../../../state/authModalState'
+import authState from '../../../state/authState'
 import { ethers } from 'ethers'
 import extensionStore from '../../../store/ExtensionStore'
 import onboardingStore from '../../../store/OnboardingStore'
@@ -50,11 +50,12 @@ const AuthModal = () => {
     const handleIpcMessage = async (event: Electron.IpcMessageEvent) => {
       switch (event.channel) {
         case 'closeAuthModal':
-          authModalState.closeModal()
+          authState.closeSignInModal()
           break
         case 'auth:accountConnected':
           alert('account connected')
-          authModalState.closeModal()
+          authState.setSignedIn()
+          authState.closeSignInModal()
           break
         case 'auth:accountNotConnected':
           // TODO: try to resume flow after connecting account
@@ -72,7 +73,7 @@ const AuthModal = () => {
     webview.addEventListener('dom-ready', handleDomReady)
 
     const qaModeListenerCleanup = window.api.handleQaModeActivated(() => {
-      authModalState.activateQaMode()
+      authState.activateQaMode()
     })
 
     return () => {
@@ -84,8 +85,8 @@ const AuthModal = () => {
 
   return (
     <ModalAnimation
-      isOpen={authModalState.isOpen && authModalState.isQaModeActive}
-      onClose={() => authModalState.closeModal()}
+      isOpen={authState.isSingInModalOpen && authState.isQaModeActive}
+      onClose={() => authState.closeSignInModal()}
     >
       <webview
         ref={webviewRef}
