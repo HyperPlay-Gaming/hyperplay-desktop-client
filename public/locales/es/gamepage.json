@@ -18,13 +18,13 @@
             "title": "Verificar y reparar"
         },
         "runexe": {
-            "title": "Select EXE to Run"
+            "title": "Seleccione EXE para ejecutar"
         },
         "select": {
-            "button": "Select"
+            "button": "Seleccionar"
         },
         "sideload": {
-            "exe": "Select Executable"
+            "exe": "Seleccione el ejecutable"
         },
         "stopInstall": {
             "keepInstalling": "Seguir instalando",
@@ -33,9 +33,9 @@
             "keepFilesMessage": "Marque aquí si desea conservar los archivos de la descarga después de cancelar."
         },
         "uninstall": {
-            "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
+            "checkbox": "Eliminar prefijo: {{prefix}}{{newLine}}Nota: Esto no se puede deshacer y también eliminará los archivos guardados y sin copia de seguridad.",
             "message": "¿Quieres desinstalar este juego?",
-            "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
+            "settingcheckbox": "Borrar la configuración y eliminar el registro{{newLine}}Nota: Esto no se puede deshacer. Cualquier configuración modificada será olvidada y el registro será eliminado.",
             "title": "Desinstalar",
             "prefix_warning": "El prefijo Wine para este juego es el prefijo por defecto. Si realmente quieres borrarlo, tienes que hacerlo manualmente.",
             "dlc": "¿Quieres desinstalar este DLC?"
@@ -52,24 +52,24 @@
         "add_to_favourites": "Agregar a Favoritos",
         "cancel": "Pausar/Cancelar",
         "continue": "Seguir descargando",
-        "finish": "Finish",
+        "finish": "Terminar",
         "force_update": "Comprobar si hay una actualización e instalarla",
-        "force-innstall": "Force Install",
+        "force-innstall": "Forzar la instalación",
         "hide_game": "Ocultar Juego",
         "import": "Importar juego",
         "install": "Instalar",
-        "no-path-selected": "No path selected",
+        "no-path-selected": "Ninguna ruta seleccionada",
         "queue": {
-            "remove": "Remove from Queue",
+            "remove": "Quitar de la cola",
             "continue": "Continuar la descarga",
             "cancel": "Cancelar la descarga"
         },
         "remove_from_favourites": "Remover de Favoritos",
-        "remove_from_recent": "Remove From Recent",
-        "run-exe-first": "Run Installer First",
-        "running-setup": "Running Setup",
+        "remove_from_recent": "Quitar de recientes",
+        "run-exe-first": "Ejecutar primero el instalador",
+        "running-setup": "Se está ejecutando la configuración",
         "sideload": {
-            "edit": "Edit App/Game"
+            "edit": "Editar la aplicación/el juego"
         },
         "unhide_game": "Desocultar Juego",
         "uninstall": "Desinstalar",
@@ -79,10 +79,10 @@
         "favorites": "Favorito",
         "unfavorites": "No favorito"
     },
-    "cloud_save_unsupported": "Unsupported",
+    "cloud_save_unsupported": "No compatible",
     "disabled": "Deshabilitado",
     "dlc": {
-        "installDlcs": "Instalar todos los DLCs"
+        "installDlcs": "Instalar todos los DLC"
     },
     "enabled": "Habilitado",
     "game": {
@@ -122,7 +122,7 @@
         "size": "Tamaño",
         "syncsaves": "Sincronizar guardados",
         "version": "Versión",
-        "web3-supported": "Has Web3 features"
+        "web3-supported": "Tiene funciones Web3"
     },
     "install": {
         "disk-space-left": "Espacio disponible",
@@ -149,35 +149,35 @@
         "options": "Opciones de Arranque..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
+        "epic": "No has iniciado sesión con una cuenta de Epic en HyperPlay. No utilices la página de la tienda para iniciar sesión, haz clic en el siguiente botón:",
+        "gog": "No has iniciado sesión con una cuenta de GOG en HyperPlay. No utilices la página de la tienda para iniciar sesión, haz clic en el siguiente botón:",
         "login": "Log in",
-        "title": "You are NOT logged in",
-        "amazon": "No has iniciado sesión con una cuenta de Amazon en Heroic. No utilices la página de la tienda para iniciar sesión, haz clic en el siguiente botón en su lugar:"
+        "title": "No has iniciado sesión",
+        "amazon": "No has iniciado sesión con una cuenta de Amazon en Hyperplay. No utilices la página de la tienda para iniciar sesión, haz clic en el siguiente botón en su lugar:"
     },
     "report_problem": "Reportar un problema ejecutando este juego",
     "sdl": {
         "title": "Elija componentes a instalar"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "use-default-wine-settings": "Utilizar la configuración de compatibilidad por defecto",
         "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
-            "title": "Title"
+            "title": "Título"
         },
         "info": {
-            "broser": "BrowserURL",
-            "exe": "Select Executable",
-            "image": "App Image",
+            "broser": "Dirección URL del navegador",
+            "exe": "Seleccionar el ejecutable",
+            "image": "Imagen de la aplicación",
             "supports-web3": "This Game has Web3 Features",
-            "title": "Game/App Title"
+            "title": "Título del juego o la aplicación"
         },
         "placeholder": {
-            "image": "Paste an Image URL here",
-            "title": "Add a title to your Game/App",
-            "url": "Paste the Game URL here"
+            "image": "Pegar aquí una dirección URL de la imagen",
+            "title": "Añade un título a tu juego o a tu aplicación",
+            "url": "Pegar aquí la dirección URL del juego"
         }
     },
     "specs": {
@@ -186,20 +186,20 @@
     },
     "status": {
         "clickToUpdate": "Clic para actualizar",
-        "gameNotAvailable": "Game not available",
+        "gameNotAvailable": "El juego no está disponible",
         "hasUpdates": "¡Nueva versión disponible!",
         "installed": "Instalado",
         "installing": "Instalando",
         "moving": "Moviendo la instalación, por favor espere",
         "notinstalled": "Este juego no está instalado",
-        "notSupported": "Not supported",
-        "notSupportedGame": "Not Supported",
+        "notSupported": "No compatible",
+        "notSupportedGame": "No compatible",
         "processing": "Procesando los archivos, por favor espere",
-        "queued": "Queued",
+        "queued": "En cola",
         "reparing": "Reparando el juego, por favor espere",
-        "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
+        "this-game-uses-third-party": "Este juego utiliza un lanzador de terceros y aún no es compatible",
         "totalDownloaded": "Total descargado",
-        "uninstalling": "Uninstalling",
+        "uninstalling": "Desinstalando",
         "updating": "Actualización de juego",
         "syncingSaves": "Sincronizar las partidas guardadas",
         "paused": "Pausado",
