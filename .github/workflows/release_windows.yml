@@ -91,8 +91,19 @@ jobs:
           $latestYml.files[0].size = $size
           $latestYml | ConvertTo-Yaml | Set-Content -Path signed/latest.yml
 
+      - name: Check if release exists
+        id: check_release
+        run: |
+          RELEASE=$(curl --silent --show-error --header 'Authorization: token ${{ secrets.WORKFLOW_TOKEN }}' https://api.github.com/repos/${{ github.repository }}/releases/tags/${{ github.ref }})
+          if [[ "$RELEASE" == *"Not Found"* ]]; then
+            echo "::set-output name=exists::false"
+          else
+            echo "::set-output name=exists::true"
+          fi
+
       - name: Create draft release
         id: create_release
+        if: steps.check_release.outputs.exists == 'false'
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
@@ -102,8 +113,13 @@ jobs:
           draft: true
           prerelease: false
 
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.3.2
+
       - name: Get artifact name
         id: get_artifact_name
+        if: steps.check_release.outputs.exists == 'true'
         run: |
           echo "::set-output name=artifact_name::$(Get-ChildItem -Path signed -Filter "HyperPlay*.exe" | Select-Object -ExpandProperty Name)"
 
@@ -113,8 +129,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: signed/*.exe
+          upload_url: ${{ steps.check_release.outputs.exists == 'true' && steps.get_release.outputs.upload_url || steps.create_release.outputs.upload_url}}
+          asset_path: signed/${{ steps.get_artifact_name.outputs.artifact_name }}
           asset_name: ${{ steps.get_artifact_name.outputs.artifact_name }}
           asset_content_type: application/octet-stream
 
