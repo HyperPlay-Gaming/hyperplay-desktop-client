@@ -65,23 +65,26 @@ jobs:
         run: yarn dist:win
 
       - name: Upload build file to Signpath
-        run: Submit-SigningRequest `
-          -InputArtifactPath ./dist/HyperPlay-Setup.exe `
-          -CIUserToken  "${{ secrets.SIGNPATH_TOKEN }}"`
-          -OrganizationId "${{ secrets.SIGNPATH_ORG_ID }}" `
-          -ProjectSlug "HyperPlay_Win_x64" `
-          -SigningPolicySlug "Release_Signing" `
-          -OutputArtifactPath "signed/HyperPlay-Setup.exe" `
-          -WaitForCompletion
+        run: |
+          $exePath = Get-ChildItem -Path ./dist -Filter "HyperPlay*.exe" | Select-Object -ExpandProperty FullName
+          $exeName = Get-ChildItem -Path ./dist -Filter "HyperPlay*.exe" | Select-Object -ExpandProperty Name
+          Submit-SigningRequest `
+            -InputArtifactPath $exePath `
+            -CIUserToken  "${{ secrets.SIGNPATH_TOKEN }}"`
+            -OrganizationId "${{ secrets.SIGNPATH_ORG_ID }}" `
+            -ProjectSlug "HyperPlay_Win_x64" `
+            -SigningPolicySlug "Release_Signing" `
+            -OutputArtifactPath "signed/$exeName" `
+            -WaitForCompletion
 
       - name: Install powershell-yaml
         run: Install-Module -Name powershell-yaml -Force
 
       - name: Update latest.yml
         run: |
-          $artifactPath = Get-ChildItem -Path signed -Filter HyperPlay-Setup.exe
-          $sha512 = Get-FileHash -Path $artifactPath -Algorithm SHA512 | Select-Object -ExpandProperty Hash
-          $size = (Get-Item $artifactPath).Length
+          $exePath = Get-ChildItem -Path signed -Filter "HyperPlay*.exe" | Select-Object -ExpandProperty FullName
+          $sha512 = Get-FileHash -Path $exePath -Algorithm SHA512 | Select-Object -ExpandProperty Hash
+          $size = (Get-Item $exePath).Length
           $latestYml = Get-Content -Path dist/latest.yml -Raw | ConvertFrom-Yaml
           $latestYml.sha512 = $sha512
           $latestYml.files[0].sha512 = $sha512
