@@ -808,3 +808,5 @@ export interface OverlayRenderState {
   showExtension: boolean
   showBackgroundTint: boolean
 }
+
+export type OverlayAction = 'ON' | 'OFF' | 'TOGGLE'

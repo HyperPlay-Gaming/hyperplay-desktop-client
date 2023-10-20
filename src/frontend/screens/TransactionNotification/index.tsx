@@ -13,7 +13,8 @@ const TransactionNotification = () => {
   if (
     item === null ||
     !item.isOpen ||
-    WalletState.provider === PROVIDERS.METAMASK_EXTENSION
+    WalletState.provider === PROVIDERS.METAMASK_EXTENSION ||
+    WalletState.provider === PROVIDERS.UNCONNECTED
   )
     return <></>
 

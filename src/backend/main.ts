@@ -1880,30 +1880,6 @@ backendEvents.on('metamaskOtpUpdated', function (otp: string) {
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 
-ipcMain.on('providerRequestInitiated', (id, method) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestInitiated', id, method)
-  }
-})
-
-ipcMain.on('providerRequestPending', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestPending', id)
-  }
-})
-
-ipcMain.on('providerRequestCompleted', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestCompleted', id)
-  }
-})
-
-ipcMain.on('providerRequestFailed', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestFailed', id)
-  }
-})
-
 ipcMain.on('reloadApp', async () => {
   for (const win of BrowserWindow.getAllWindows()) {
     win.loadURL(win.webContents.getURL())

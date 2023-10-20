@@ -5,6 +5,10 @@ import { observer } from 'mobx-react-lite'
 
 const BrowserToastManager = function () {
   const item = transactionState.latestToast
+  console.log(
+    'latest toast in browser toast manager is ',
+    JSON.stringify(item, null, 4)
+  )
   if (item === null || !item.isOpen) return <></>
 
   return (

@@ -34,6 +34,10 @@ import { trackEvent } from 'backend/metrics/metrics'
 import { domainsAreEqual } from 'common/utils'
 import { connectedProvider } from 'backend/hyperplay-proxy-server/providerHelper'
 import { PROVIDERS } from 'common/types/proxy-types'
+import {
+  controlWindow,
+  getWindowOverlayModel
+} from 'backend/hyperplay-overlay/model'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -169,6 +173,8 @@ const openNewBrowserGameWindow = async (
 
     browserGame.loadURL(url)
 
+    controlWindow(browserGame.id)
+
     ipcMain.once('overlayReady', () => {
       console.log(
         'overlay is ready so sending overlay render state for browser game'
@@ -182,8 +188,9 @@ const openNewBrowserGameWindow = async (
         showExtension: connectedProvider === PROVIDERS.METAMASK_EXTENSION,
         showBackgroundTint: true
       }
-      browserGame.webContents.send('updateOverlayRenderState', renderState)
-      browserGame.webContents.send('showInitialToast')
+      const overlayModel = getWindowOverlayModel(browserGame.id)
+      overlayModel?.overlayState.updateOverlayRenderState(renderState)
+      overlayModel?.transactionState.showInitialToast()
     })
 
     setTimeout(() => browserGame.focus(), 200)
