@@ -842,5 +842,6 @@
     "dlcs": {
         "label": "Виберіть DLC для встановлення:"
     },
-    "Amazon": "Amazon"
+    "Amazon": "Amazon",
+    "Amazon Games": "Ігри Amazon"
 }
