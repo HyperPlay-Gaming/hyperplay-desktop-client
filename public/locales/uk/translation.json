@@ -565,7 +565,8 @@
         "autoUpdateGames": "Автоматичне оновлення ігор",
         "dxvkfpslimit": "Обмеження к/с (DX9, 10 та 11)",
         "showMetalOverlay": "Показати статистику оверлею",
-        "addgamestoapplications": "Автоматично додавати ігри до Applications"
+        "addgamestoapplications": "Автоматично додавати ігри до Applications",
+        "disable_logs": "Вимкнути журнали"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -618,7 +619,8 @@
     "status": {
         "installing": "Встановлення",
         "logging": "Вхід...",
-        "processing": "Обробка файлів, будь ласка, зачекайте"
+        "processing": "Обробка файлів, будь ласка, зачекайте",
+        "preparing_login": "Підготовка Логін. "
     },
     "store": "Крамниця Epic",
     "stores": "Крамниці",
