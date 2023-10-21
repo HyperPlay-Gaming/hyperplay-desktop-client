@@ -1,6 +1,7 @@
+import { ExtensionStateInterface } from 'common/state/interfaces'
 import { makeAutoObservable } from 'mobx'
 
-class ExtensionState {
+class ExtensionState implements ExtensionStateInterface {
   extensionId = ''
   popupIsLocked = false
 

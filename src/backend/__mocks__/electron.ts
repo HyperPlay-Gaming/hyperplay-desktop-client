@@ -37,12 +37,25 @@ class Notification {
   }
 }
 
+class WebContents {
+  emitter: EventEmitter = new EventEmitter()
+  send(topic: string, ...args: any[]): any {
+    this.emitter.emit(topic, ...args)
+  }
+}
+
 class BrowserWindow {
   static windows: BrowserWindow[] = []
   options: BrowserWindowConstructorOptions = {}
+  static maxWindowId = 0
+  id: number = -1
+  webContents: WebContents = new WebContents()
 
   constructor(options: BrowserWindowConstructorOptions) {
     this.options = options
+    this.id = BrowserWindow.maxWindowId
+    BrowserWindow.maxWindowId += 1
+    BrowserWindow.windows.push(this)
   }
 
   static getAllWindows() {
@@ -55,6 +68,10 @@ class BrowserWindow {
 
   public getOptions() {
     return this.options
+  }
+
+  static fromId(id: number): BrowserWindow | undefined {
+    return BrowserWindow.windows.find((val) => val.id === id)
   }
 }
 

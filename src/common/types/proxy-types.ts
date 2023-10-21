@@ -29,5 +29,5 @@ export async function wait(ms: number) {
 
 export interface OverlayWindowState {
   ignoreInput: boolean
-  state?: 'show' | 'hide'
+  state?: 'show' | 'hide' | null
 }

@@ -810,3 +810,8 @@ export interface OverlayRenderState {
 }
 
 export type OverlayAction = 'ON' | 'OFF' | 'TOGGLE'
+
+export interface RunnerBin {
+  dir: string
+  bin: string
+}
