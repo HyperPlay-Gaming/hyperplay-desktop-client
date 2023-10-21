@@ -1,9 +1,13 @@
 import { makeAutoObservable } from 'mobx'
-import { TRANSACTION_STATE } from 'frontend/store/types'
+import { Transaction } from 'frontend/store/types'
+import { OverlayWindowState } from 'common/types/proxy-types'
 
 class TransactionState {
-  // PUBLIC FUNCTIONS
+  isInitialToastShown = false
+  latestToast: Transaction | undefined
+  overlayWindowState: OverlayWindowState | undefined
 
+  // PUBLIC FUNCTIONS
   constructor() {
     makeAutoObservable(this)
   }
@@ -13,41 +17,39 @@ class TransactionState {
      * The assumption is that a request is always initiated before
      * pending, completed, or failed
      */
-    window.api.handleProviderRequestInitiated((_e, id, method) => {
-      const txn = {
-        id,
-        method,
-        state: TRANSACTION_STATE.INITIATED
-      }
-      this.addTransactionAndUpdateId(id, txn)
-    })
+    window.api.handleStateUpdate.transaction.isInitialToastShown(
+      this.handleIsInitialToastShown.bind(this)
+    )
 
-    window.api.handleProviderRequestPending((_e, id) => {
-      const txn = {
-        ...this.transactions.get(id)!,
-        state: TRANSACTION_STATE.PENDING
-      }
-      this.addTransactionAndUpdateId(id, txn)
-    })
+    window.api.handleStateUpdate.transaction.latestToast(
+      this.handleLatestToast.bind(this)
+    )
 
-    window.api.handleProviderRequestCompleted((_e, id) => {
-      const txn = {
-        ...this.transactions.get(id)!,
-        state: TRANSACTION_STATE.CONFIRMED
-      }
-      this.addTransactionAndUpdateId(id, txn)
-    })
+    window.api.handleStateUpdate.transaction.overlayWindowState(
+      this.handleOverlayWindowState.bind(this)
+    )
+  }
 
-    window.api.handleProviderRequestFailed((_e, id) => {
-      const txn = {
-        ...this.transactions.get(id)!,
-        state: TRANSACTION_STATE.FAILED
-      }
-      this.addTransactionAndUpdateId(id, txn)
-    })
+  private handleIsInitialToastShown(
+    e: Electron.IpcRendererEvent,
+    isInitialToastShown: boolean
+  ) {
+    this.isInitialToastShown = isInitialToastShown
+  }
 
-    window.api.handleShowInitialToast(this.handleShowInitialToast.bind(this))
+  private handleLatestToast(
+    e: Electron.IpcRendererEvent,
+    latestToast: Transaction
+  ) {
+    this.latestToast = latestToast
+  }
+
+  private handleOverlayWindowState(
+    e: Electron.IpcRendererEvent,
+    overlayWindowState: OverlayWindowState
+  ) {
+    this.overlayWindowState = overlayWindowState
   }
 }
-const transactionState = new TransactionState()
-export default transactionState
+
+export default new TransactionState()

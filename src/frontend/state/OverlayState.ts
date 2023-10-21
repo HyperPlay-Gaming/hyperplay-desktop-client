@@ -12,6 +12,8 @@ class OverlayState {
 
   showOverlay = false
 
+  isFullscreenOverlay = false
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -20,27 +22,28 @@ class OverlayState {
     return this.browserGameUrl
   }
 
-  handleUpdateOverlayRenderState(
+  private handleUpdateOverlayRenderState(
     event: Electron.IpcRendererEvent,
     renderState: OverlayRenderState
   ) {
     Object.assign(this, renderState)
   }
 
-  init() {
-    window.api.handleUpdateOverlayRenderState(
-      this.handleUpdateOverlayRenderState.bind(this)
-    )
-    window.api.handleUpdateOverlayVisibility(
-      this.handleUpdateOverlayVisibility.bind(this)
-    )
-    window.api.overlayReady()
+  private handleUpdateOverlayIsFullscreenOverlay(
+    event: Electron.IpcRendererEvent,
+    isFullscreenOverlay: boolean
+  ) {
+    this.isFullscreenOverlay = isFullscreenOverlay
   }
 
-  get isFullscreenOverlay() {
-    return this.showToasts && this.showExtension && this.showExitGameButton
+  init() {
+    window.api.handleStateUpdate.overlay.renderState(
+      this.handleUpdateOverlayRenderState.bind(this)
+    )
+    window.api.handleStateUpdate.overlay.isFullscreenOverlay(
+      this.handleUpdateOverlayIsFullscreenOverlay.bind(this)
+    )
   }
 }
 
-const overlayState = new OverlayState()
-export default overlayState
+export default new OverlayState()

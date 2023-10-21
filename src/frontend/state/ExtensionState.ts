@@ -4,6 +4,9 @@ class ExtensionState {
   extensionId = ''
   popupIsLocked = false
 
+  isPopupOpen = false
+  isNotificationOpen = false
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -16,24 +19,34 @@ class ExtensionState {
      * otherwise you'll get the following warning
      * Since strict-mode is enabled, changing (observed) observable values without using an action is not allowed.
      */
-    window.api.handleShowNotificationInWebview(
-      this.handleShowNotificationInWebview.bind(this)
+    window.api.handleStateUpdate.extension.isPopupOpen(
+      this.handleIsPopupOpen.bind(this)
     )
-    window.api.handleShowPopupInWebview(
-      this.handleShowPopupInWebview.bind(this)
+    window.api.handleStateUpdate.extension.isNotificationOpen(
+      this.handleIsNotificationOpen.bind(this)
     )
   }
 
-  async fetchExtensionId() {
+  private handleIsPopupOpen(
+    e: Electron.IpcRendererEvent,
+    isPopupOpen: boolean
+  ) {
+    this.isPopupOpen = isPopupOpen
+  }
+
+  private handleIsNotificationOpen(
+    e: Electron.IpcRendererEvent,
+    isNotificationOpen: boolean
+  ) {
+    this.isNotificationOpen = isNotificationOpen
+  }
+
+  private async fetchExtensionId() {
     const extensionId = await window.api.getExtensionId()
 
     this.extensionId = extensionId
 
     return extensionId
-  }
-
-  toggleIsPopupOpen() {
-    this.isMetaMaskPopupWindowOpen = !this.isMetaMaskPopupWindowOpen
   }
 
   lockPopup() {
@@ -42,16 +55,6 @@ class ExtensionState {
 
   unlockPopup() {
     this.popupIsLocked = false
-  }
-
-  get isPopupOpen(): boolean {
-    return (
-    )
-  }
-
-  get isNotificationOpen(): boolean {
-    return (
-    )
   }
 }
 
