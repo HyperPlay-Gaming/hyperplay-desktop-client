@@ -1,14 +1,17 @@
+import { OverlayStateInterface } from 'common/state/interfaces'
 import { OverlayRenderState } from 'common/types'
 import { makeAutoObservable } from 'mobx'
 
-class OverlayState {
-  showToasts = false
-  showBrowserGame = false
-  browserGameUrl = ''
-  showHintText = false
-  showExitGameButton = false
-  showExtension = false
-  showBackgroundTint = false
+class OverlayState implements OverlayStateInterface {
+  renderState: OverlayRenderState = {
+    showToasts: false,
+    showBrowserGame: false,
+    browserGameUrl: '',
+    showHintText: false,
+    showExitGameButton: false,
+    showExtension: false,
+    showBackgroundTint: false
+  }
 
   showOverlay = false
 
@@ -19,7 +22,7 @@ class OverlayState {
   }
 
   get url() {
-    return this.browserGameUrl
+    return this.renderState.browserGameUrl
   }
 
   private handleUpdateOverlayRenderState(

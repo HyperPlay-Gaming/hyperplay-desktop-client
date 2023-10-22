@@ -1,10 +1,11 @@
 import { makeAutoObservable } from 'mobx'
-import { Transaction } from 'frontend/store/types'
+import { Toast } from 'frontend/store/types'
 import { OverlayWindowState } from 'common/types/proxy-types'
+import { TransactionStateInterface } from 'common/state/interfaces'
 
-class TransactionState {
+class TransactionState implements TransactionStateInterface {
   isInitialToastShown = false
-  latestToast: Transaction | undefined
+  latestToast: Toast | null = null
   overlayWindowState: OverlayWindowState | undefined
 
   // PUBLIC FUNCTIONS
@@ -37,10 +38,7 @@ class TransactionState {
     this.isInitialToastShown = isInitialToastShown
   }
 
-  private handleLatestToast(
-    e: Electron.IpcRendererEvent,
-    latestToast: Transaction
-  ) {
+  private handleLatestToast(e: Electron.IpcRendererEvent, latestToast: Toast) {
     this.latestToast = latestToast
   }
 
