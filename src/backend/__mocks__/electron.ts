@@ -42,6 +42,9 @@ class WebContents {
   send(topic: string, ...args: any[]): any {
     this.emitter.emit(topic, ...args)
   }
+  on(topic: string, cb: (...args: any[]) => void): any {
+    this.emitter.on(topic, cb)
+  }
 }
 
 class BrowserWindow {
