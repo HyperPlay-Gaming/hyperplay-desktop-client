@@ -15,6 +15,6 @@ export interface TransactionStateInterface {
 
 export interface OverlayStateInterface {
   renderState: OverlayRenderState
-  showOverlay: boolean
+  showOverlay: boolean | null
   isFullscreenOverlay: boolean
 }
