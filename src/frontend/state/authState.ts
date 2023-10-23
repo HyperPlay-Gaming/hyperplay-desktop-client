@@ -4,9 +4,14 @@ class AuthState {
   private qaModeActive = false
   private singInModalOpen = true
   private signedIn = false
+  private pendingSignatureRequest = false
 
   constructor() {
     makeAutoObservable(this)
+  }
+
+  get hasPendingSignatureRequest() {
+    return this.pendingSignatureRequest
   }
 
   get isSingInModalOpen() {
@@ -35,6 +40,10 @@ class AuthState {
 
   setSignedIn() {
     this.signedIn = true
+  }
+
+  setPendingSignatureRequest(pending: boolean) {
+    this.pendingSignatureRequest = pending
   }
 }
 
