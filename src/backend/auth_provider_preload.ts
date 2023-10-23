@@ -14,3 +14,7 @@ contextBridge.exposeInMainWorld('authApi', {
     ipcRenderer.send('openExternalUrl', url)
   }
 })
+
+ipcRenderer.on('auth:retryWalletConnection', () => {
+  window.dispatchEvent(new CustomEvent('auth:retryWalletConnection'))
+})

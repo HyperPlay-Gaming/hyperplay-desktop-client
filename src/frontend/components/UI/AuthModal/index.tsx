@@ -7,6 +7,7 @@ import authState from '../../../state/authState'
 import { ethers } from 'ethers'
 import extensionStore from '../../../store/ExtensionStore'
 import onboardingStore from '../../../store/OnboardingStore'
+import walletStore from '../../../store/WalletStore'
 
 // TODO: replace this with dev portal prod URL when it's ready
 const url =
@@ -21,11 +22,19 @@ const isTooManyRequestsError = (error: string) => {
 const AuthModal = () => {
   const webviewRef = useRef<WebviewTag>(null)
 
+  const sendRetryConnectionMessage = () => {
+    const webview = webviewRef.current
+    if (!webview) return
+    authState.setPendingSignatureRequest(false)
+    webview.send('auth:retryWalletConnection')
+  }
+
   const handleAccountNotConnected = async () => {
     const currentProvider = await window.api.getConnectedProvider()
 
     if (currentProvider === 'Unconnected') {
       onboardingStore.openOnboarding()
+      authState.setPendingSignatureRequest(true)
       return
     }
 
@@ -38,6 +47,7 @@ const AuthModal = () => {
       // since there are already requests in the queue, this will resume
       // the connection flow after the user unlocks metamask
       if (isTooManyRequestsError(String(e))) {
+        authState.setPendingSignatureRequest(true)
         extensionStore.setIsPopupOpen(true)
       }
     }
@@ -58,7 +68,6 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountNotConnected':
-          // TODO: try to resume flow after connecting account
           await handleAccountNotConnected()
           break
         default:
@@ -83,6 +92,12 @@ const AuthModal = () => {
       webview.removeEventListener('ipc-message', handleIpcMessage)
     }
   }, [])
+
+  useEffect(() => {
+    if (walletStore.isConnected && authState.hasPendingSignatureRequest) {
+      sendRetryConnectionMessage()
+    }
+  }, [walletStore.isConnected, authState.hasPendingSignatureRequest])
 
   return (
     <ModalAnimation
