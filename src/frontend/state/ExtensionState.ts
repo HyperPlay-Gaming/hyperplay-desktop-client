@@ -57,6 +57,10 @@ class ExtensionState implements ExtensionStateInterface {
   unlockPopup() {
     this.popupIsLocked = false
   }
+
+  toggleIsPopupOpen() {
+    window.api.toggleIsPopupOpen()
+  }
 }
 
 const extensionState = new ExtensionState()

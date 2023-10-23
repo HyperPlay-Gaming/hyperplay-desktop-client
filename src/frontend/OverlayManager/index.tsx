@@ -19,7 +19,10 @@ interface BrowserGameProps {
 
 const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
   const txnToastContainerStyle = {} as React.CSSProperties
-  if (OverlayState.showToasts && !OverlayState.showExtension) {
+  if (
+    OverlayState.renderState.showToasts &&
+    !OverlayState.renderState.showExtension
+  ) {
     txnToastContainerStyle.bottom = 0
     txnToastContainerStyle.right = 0
     txnToastContainerStyle.top = 0
@@ -32,7 +35,10 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
     zIndex: 200
   } as React.CSSProperties
 
-  if (OverlayState.showExitGameButton && !OverlayState.showExtension) {
+  if (
+    OverlayState.renderState.showExitGameButton &&
+    !OverlayState.renderState.showExtension
+  ) {
     exitGameButtonStyle = {
       ...exitGameButtonStyle,
       top: 0,
@@ -41,11 +47,11 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
     }
   }
 
-  console.log('show toasts ', OverlayState.showToasts)
+  console.log('show toasts ', OverlayState.renderState.showToasts)
 
   return (
     <>
-      {OverlayState.showToasts ? (
+      {OverlayState.renderState.showToasts ? (
         <div
           className={BrowserGameStyles.txnToastContainer}
           style={txnToastContainerStyle}
@@ -57,7 +63,7 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
       {TransactionState.isInitialToastShown ? null : (
         <>
           <div className={BrowserGameStyles.bgFilter}></div>
-          {OverlayState.showHintText ? (
+          {OverlayState.renderState.showHintText ? (
             <div className={`${BrowserGameStyles.closeOverlayText} title`}>
               {t('hyperplayOverlay.closeOverlay', {
                 defaultValue:
@@ -66,7 +72,7 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
               })}
             </div>
           ) : null}
-          {OverlayState.showExitGameButton ? (
+          {OverlayState.renderState.showExitGameButton ? (
             <Button
               onClick={async () => window.api.kill(appName, runner)}
               style={exitGameButtonStyle}
@@ -96,7 +102,7 @@ const OverlayManager = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
-  const url = OverlayState.browserGameUrl
+  const url = OverlayState.renderState.browserGameUrl
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   const trueAsStr = 'true' as any
@@ -105,7 +111,10 @@ const OverlayManager = observer(function ({
   } as React.CSSProperties
 
   if (
-    !(OverlayState.isFullscreenOverlay && !OverlayState.showBrowserGame) &&
+    !(
+      OverlayState.isFullscreenOverlay &&
+      !OverlayState.renderState.showBrowserGame
+    ) &&
     url === 'ignore'
   ) {
     style.width = '100%'
@@ -122,7 +131,7 @@ const OverlayManager = observer(function ({
       {OverlayState.showOverlay ? (
         <Overlay appName={appName} runner={runner} />
       ) : null}
-      {url !== 'ignore' && OverlayState.showBrowserGame ? (
+      {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
         <webview
           src={url}
           className={BrowserGameStyles.browserGame}

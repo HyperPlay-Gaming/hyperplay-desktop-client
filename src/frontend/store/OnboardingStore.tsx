@@ -1,5 +1,5 @@
 import { ContextType } from 'frontend/types'
-import { makeAutoObservable, runInAction, when } from 'mobx'
+import { makeAutoObservable, when } from 'mobx'
 import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'

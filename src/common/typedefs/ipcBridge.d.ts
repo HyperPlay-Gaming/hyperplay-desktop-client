@@ -73,6 +73,7 @@ interface HyperPlaySyncIPCFunctions {
   removeFromLibrary: (appName: string) => void
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
+  toggleIsPopupOpen: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
