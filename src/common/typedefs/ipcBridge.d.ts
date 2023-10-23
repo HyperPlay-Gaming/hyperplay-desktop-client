@@ -42,6 +42,7 @@ import {
   NileRegisterData,
   NileUserData
 } from 'common/types/nile'
+import { ToastKey } from 'frontend/store/types'
 
 /**
  * Some notes here:
@@ -74,6 +75,7 @@ interface HyperPlaySyncIPCFunctions {
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
   toggleIsPopupOpen: () => void
+  toastCloseOnClick: (key: ToastKey) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {

@@ -34,10 +34,8 @@ import { trackEvent } from 'backend/metrics/metrics'
 import { domainsAreEqual } from 'common/utils'
 import { connectedProvider } from 'backend/hyperplay-proxy-server/providerHelper'
 import { PROVIDERS } from 'common/types/proxy-types'
-import {
-  controlWindow,
-  getWindowOverlayModel
-} from 'backend/hyperplay-overlay/model'
+import { controlWindow } from 'backend/hyperplay-overlay/model'
+import { initOverlayRenderState } from 'backend/hyperplay-overlay'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -173,24 +171,24 @@ const openNewBrowserGameWindow = async (
 
     browserGame.loadURL(url)
 
-    controlWindow(browserGame.id)
+    controlWindow(browserGame.webContents.id)
 
+    const renderState: OverlayRenderState = {
+      showToasts: true,
+      showBrowserGame: true,
+      browserGameUrl: browserUrl,
+      showHintText: true,
+      showExitGameButton: true,
+      showExtension: connectedProvider === PROVIDERS.METAMASK_EXTENSION,
+      showBackgroundTint: true
+    }
+    /*
+     * The overlay state wil only handle the update render state event
+     * after init() has been called on it. This can be some time after
+     * window launch, so we send an overlay ready event when it's ready.
+     */
     ipcMain.once('overlayReady', () => {
-      console.log(
-        'overlay is ready so sending overlay render state for browser game'
-      )
-      const renderState: OverlayRenderState = {
-        showToasts: true,
-        showBrowserGame: true,
-        browserGameUrl: browserUrl,
-        showHintText: true,
-        showExitGameButton: true,
-        showExtension: connectedProvider === PROVIDERS.METAMASK_EXTENSION,
-        showBackgroundTint: true
-      }
-      const overlayModel = getWindowOverlayModel(browserGame.id)
-      overlayModel?.overlayState.updateOverlayRenderState(renderState)
-      overlayModel?.transactionState.showInitialToast()
+      initOverlayRenderState(browserGame.webContents.id, renderState)
     })
 
     setTimeout(() => browserGame.focus(), 200)

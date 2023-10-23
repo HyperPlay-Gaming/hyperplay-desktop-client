@@ -18,7 +18,15 @@ class OverlayState implements OverlayStateInterface {
   isFullscreenOverlay = false
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(
+      this,
+      {},
+      {
+        deep: true,
+        proxy: false,
+        name: 'OverlayState'
+      }
+    )
   }
 
   get url() {
@@ -29,7 +37,7 @@ class OverlayState implements OverlayStateInterface {
     event: Electron.IpcRendererEvent,
     renderState: OverlayRenderState
   ) {
-    Object.assign(this, renderState)
+    Object.assign(this.renderState, renderState)
   }
 
   private handleUpdateOverlayIsFullscreenOverlay(
@@ -39,6 +47,13 @@ class OverlayState implements OverlayStateInterface {
     this.isFullscreenOverlay = isFullscreenOverlay
   }
 
+  private handleUpdateOverlayShowOverlay(
+    event: Electron.IpcRendererEvent,
+    showOverlay: boolean
+  ) {
+    this.showOverlay = showOverlay
+  }
+
   init() {
     window.api.handleStateUpdate.overlay.renderState(
       this.handleUpdateOverlayRenderState.bind(this)
@@ -46,6 +61,12 @@ class OverlayState implements OverlayStateInterface {
     window.api.handleStateUpdate.overlay.isFullscreenOverlay(
       this.handleUpdateOverlayIsFullscreenOverlay.bind(this)
     )
+    window.api.handleStateUpdate.overlay.showOverlay(
+      this.handleUpdateOverlayShowOverlay.bind(this)
+    )
+
+    // This indicates the overlay state is ready to receive update overlay render state events
+    window.api.overlayReady()
   }
 }
 

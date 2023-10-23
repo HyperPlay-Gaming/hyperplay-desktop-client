@@ -1,12 +1,10 @@
 import { makeAutoObservable } from 'mobx'
 import { Toast } from 'frontend/store/types'
-import { OverlayWindowState } from 'common/types/proxy-types'
 import { TransactionStateInterface } from 'common/state/interfaces'
 
 class TransactionState implements TransactionStateInterface {
   isInitialToastShown = false
   latestToast: Toast | null = null
-  overlayWindowState: OverlayWindowState | undefined
 
   // PUBLIC FUNCTIONS
   constructor() {
@@ -25,10 +23,6 @@ class TransactionState implements TransactionStateInterface {
     window.api.handleStateUpdate.transaction.latestToast(
       this.handleLatestToast.bind(this)
     )
-
-    window.api.handleStateUpdate.transaction.overlayWindowState(
-      this.handleOverlayWindowState.bind(this)
-    )
   }
 
   private handleIsInitialToastShown(
@@ -40,13 +34,8 @@ class TransactionState implements TransactionStateInterface {
 
   private handleLatestToast(e: Electron.IpcRendererEvent, latestToast: Toast) {
     this.latestToast = latestToast
-  }
-
-  private handleOverlayWindowState(
-    e: Electron.IpcRendererEvent,
-    overlayWindowState: OverlayWindowState
-  ) {
-    this.overlayWindowState = overlayWindowState
+    this.latestToast.onClick = () =>
+      window.api.toastCloseOnClick(latestToast.key)
   }
 }
 

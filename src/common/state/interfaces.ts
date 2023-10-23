@@ -1,5 +1,4 @@
 import { OverlayRenderState } from 'common/types'
-import { OverlayWindowState } from 'common/types/proxy-types'
 import { Toast } from 'frontend/store/types'
 
 export interface ExtensionStateInterface {
@@ -10,7 +9,6 @@ export interface ExtensionStateInterface {
 export interface TransactionStateInterface {
   isInitialToastShown: boolean
   latestToast: Toast | null
-  overlayWindowState: OverlayWindowState | undefined
 }
 
 export interface OverlayStateInterface {
