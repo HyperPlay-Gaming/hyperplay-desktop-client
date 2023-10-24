@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { GameInfo } from 'common/types'
 import { getMessage } from 'frontend/screens/Library/constants'
 import { getCardStatus } from 'frontend/screens/Library/components/GameCard/constants'

@@ -1,8 +1,8 @@
 import './index.css'
 
-import React, { useContext, useState, useEffect, useMemo } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 
-import { GameInfo, HiddenGame, Runner } from 'common/types'
+import { GameInfo, Runner } from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { getGameInfo, install, launch } from 'frontend/helpers'
@@ -58,7 +58,6 @@ const GameCard = ({
 
   const {
     layout,
-    hiddenGames,
     allTilesInColor,
     showDialogModal,
     setIsSettingsModalOpen
@@ -145,12 +144,7 @@ const GameCard = ({
     return 'NOT_INSTALLED'
   }
 
-  const isHiddenGame = useMemo(() => {
-    return !!hiddenGames.list.find(
-      (hiddenGame: HiddenGame) => hiddenGame.appName === appName
-    )
-  }, [hiddenGames, appName])
-
+  const isHiddenGame = libraryState.isGameHidden(appName)
   const isBrowserGame = installPlatform === 'Browser'
 
   const onUninstallClick = function () {
