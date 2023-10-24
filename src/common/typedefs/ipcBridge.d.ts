@@ -211,6 +211,11 @@ interface HyperPlayAsyncIPCFunctions {
     channelId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
+  get_wallet_state_address: () => Promise<string>
+  get_wallet_state_isConnected: () => Promise<boolean>
+  get_wallet_state_provider: () => Promise<PROVIDERS>
+  get_wallet_state_otp: () => Promise<string>
+  get_extension_state_isPopupOpen: () => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

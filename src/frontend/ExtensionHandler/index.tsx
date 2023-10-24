@@ -82,8 +82,9 @@ const ExtensionHandler = function () {
   }
 
   const bindEthereumListeners = function () {
+    /* eslint-disable-next-line */
     window.addEventListener('message', (event: MessageEvent) => {
-      console.log('window message received = ', JSON.stringify(event, null, 4))
+      // console.log('window message received = ', JSON.stringify(event, null, 4))
     })
 
     window.ethereum.on('accountsChanged', (accounts: string[]) => {

@@ -4,14 +4,14 @@ import { makeAutoObservable } from 'mobx'
 class ExtensionState implements ExtensionStateInterface {
   extensionId = ''
 
-  isPopupOpen = false
+  isPopupOpen = true
   isNotificationOpen = false
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  init() {
+  async init() {
     this.fetchExtensionId()
 
     /*
@@ -25,6 +25,9 @@ class ExtensionState implements ExtensionStateInterface {
     window.api.handleStateUpdate.extension.isNotificationOpen(
       this.handleIsNotificationOpen.bind(this)
     )
+
+    this.isPopupOpen =
+      await window.api.initialState.extensionState.isPopupOpen()
   }
 
   private handleIsPopupOpen(

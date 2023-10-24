@@ -6,40 +6,29 @@ class WalletState implements InitializableStore {
   address = ''
   otp = ''
   provider: PROVIDERS = PROVIDERS.UNCONNECTED
+  isConnected = false
 
   constructor() {
     makeAutoObservable(this)
   }
 
-  handleAccountsUpdated(
-    _e: Electron.IpcRendererEvent,
-    accounts: string[],
-    provider?: PROVIDERS
-  ) {
-    this.address = accounts[0]
-    if (provider) {
-      this.provider = provider
-    }
-  }
+  async init() {
+    //get initial state
+    this.address = await window.api.initialState.walletState.address()
+    this.provider = await window.api.initialState.walletState.provider()
+    this.isConnected = await window.api.initialState.walletState.isConnected()
+    this.otp = await window.api.initialState.walletState.otp()
 
-  init() {
-    window.api.handleAccountsChanged(this.handleAccountsUpdated.bind(this))
-
-    window.api.handleDisconnected(() => {
-      this.address = ''
+    //listen to state changes
+    window.api.handleStateUpdate.walletState.address((ev, val) => {
+      this.address = val
     })
-
-    window.api.handleConnected(this.handleAccountsUpdated.bind(this))
-
-    window.api.metamaskOtpUpdated(
-      (_e: Electron.IpcRendererEvent, newOtp: string) => {
-        this.otp = newOtp
-      }
-    )
-  }
-
-  get isConnected() {
-    return !!this.address
+    window.api.handleStateUpdate.walletState.isConnected((ev, val) => {
+      this.isConnected = val
+    })
+    window.api.handleStateUpdate.walletState.provider((ev, val) => {
+      this.provider = val
+    })
   }
 }
 
