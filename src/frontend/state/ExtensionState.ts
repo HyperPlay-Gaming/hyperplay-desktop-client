@@ -3,7 +3,6 @@ import { makeAutoObservable } from 'mobx'
 
 class ExtensionState implements ExtensionStateInterface {
   extensionId = ''
-  popupIsLocked = false
 
   isPopupOpen = false
   isNotificationOpen = false
@@ -51,11 +50,11 @@ class ExtensionState implements ExtensionStateInterface {
   }
 
   lockPopup() {
-    this.popupIsLocked = true
+    window.api.lockPopup(true)
   }
 
   unlockPopup() {
-    this.popupIsLocked = false
+    window.api.lockPopup(false)
   }
 
   toggleIsPopupOpen() {
