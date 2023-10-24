@@ -156,6 +156,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
+    "@hyperplay/ui": "^0.1.27",
     "@mantine/carousel": "^6.0.19",
     "@mantine/core": "^6.0.19",
     "@mantine/hooks": "^6.0.19",
