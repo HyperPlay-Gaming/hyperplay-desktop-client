@@ -171,7 +171,7 @@ const openNewBrowserGameWindow = async (
 
     browserGame.loadURL(url)
 
-    controlWindow(browserGame.webContents.id, true)
+    controlWindow(browserGame.webContents.id, true, true)
 
     const renderState: OverlayRenderState = {
       showToasts: true,

@@ -82,7 +82,7 @@ export const createMainWindow = () => {
     }
   })
 
-  controlWindow(mainWindow.webContents.id, false)
+  controlWindow(mainWindow.webContents.id, false, false)
 
   mainWindow.webContents?.on('before-input-event', (ev, input) => {
     if (
