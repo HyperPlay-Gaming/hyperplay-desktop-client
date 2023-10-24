@@ -56,12 +56,8 @@ const GameCard = ({
 
   const navigate = useNavigate()
 
-  const {
-    layout,
-    allTilesInColor,
-    showDialogModal,
-    setIsSettingsModalOpen
-  } = useContext(ContextProvider)
+  const { layout, allTilesInColor, showDialogModal, setIsSettingsModalOpen } =
+    useContext(ContextProvider)
 
   const {
     title,
