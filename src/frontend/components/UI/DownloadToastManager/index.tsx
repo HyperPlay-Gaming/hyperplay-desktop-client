@@ -1,11 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DownloadToast, Images, CircularButton } from '@hyperplay/ui'
-import {
-  DMQueueElement,
-  DownloadManagerState,
-  GameStatus,
-  InstallProgress
-} from 'common/types'
+import { DMQueueElement, GameStatus, InstallProgress } from 'common/types'
 import { DMQueue } from 'frontend/types'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
