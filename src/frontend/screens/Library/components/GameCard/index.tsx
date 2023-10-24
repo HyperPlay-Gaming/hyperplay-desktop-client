@@ -1,8 +1,8 @@
 import './index.css'
 
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useEffect, useMemo } from 'react'
 
-import { GameInfo, Runner } from 'common/types'
+import { GameInfo, HiddenGame, Runner } from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { getGameInfo, install, launch } from 'frontend/helpers'
@@ -23,9 +23,9 @@ import {
   SettingsButtons
 } from '@hyperplay/ui'
 import classNames from 'classnames'
+import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
 import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
-import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
 
 interface Card {
   buttonClick: () => void
@@ -56,8 +56,13 @@ const GameCard = ({
 
   const navigate = useNavigate()
 
-  const { layout, allTilesInColor, showDialogModal, setIsSettingsModalOpen } =
-    useContext(ContextProvider)
+  const {
+    layout,
+    hiddenGames,
+    allTilesInColor,
+    showDialogModal,
+    setIsSettingsModalOpen
+  } = useContext(ContextProvider)
 
   const {
     title,
