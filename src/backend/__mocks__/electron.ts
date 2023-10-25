@@ -38,12 +38,31 @@ class Notification {
 }
 
 class WebContents {
+  static contents: WebContents[] = []
+  static maxContentsId = 0
+  id: number = -1
+
+  constructor() {
+    this.id = WebContents.maxContentsId
+    WebContents.maxContentsId += 1
+    WebContents.contents.push(this)
+  }
+
   emitter: EventEmitter = new EventEmitter()
   send(topic: string, ...args: any[]): any {
     this.emitter.emit(topic, ...args)
   }
   on(topic: string, cb: (...args: any[]) => void): any {
     this.emitter.on(topic, cb)
+  }
+  static fromId(id: number): WebContents | undefined {
+    return WebContents.contents.find((val) => val.id === id)
+  }
+}
+
+export const webContents = {
+  fromId(id: number): WebContents | undefined {
+    return WebContents.fromId(id)
   }
 }
 
@@ -75,6 +94,10 @@ class BrowserWindow {
 
   static fromId(id: number): BrowserWindow | undefined {
     return BrowserWindow.windows.find((val) => val.id === id)
+  }
+
+  static fromWebContents(wc: WebContents) {
+    return BrowserWindow.windows.find((val) => val.webContents.id === wc.id)
   }
 }
 
@@ -134,6 +157,7 @@ export {
   app,
   Notification,
   BrowserWindow,
+  WebContents,
   Menu,
   nativeImage,
   Tray,
