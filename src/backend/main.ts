@@ -203,7 +203,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
   mainWindow.webContents.on('input-event', (ev, inputEv) => {
     if (eventsToCloseMetaMaskPopupOn.includes(inputEv.type)) {
-      backendEvents.emit('removePopupInWebview')
+      backendEvents.emit('removePopup')
     }
   })
 
