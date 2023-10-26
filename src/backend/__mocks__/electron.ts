@@ -58,6 +58,10 @@ class WebContents {
   static fromId(id: number): WebContents | undefined {
     return WebContents.contents.find((val) => val.id === id)
   }
+
+  isDestroyed() {
+    return false
+  }
 }
 
 export const webContents = {
@@ -98,6 +102,10 @@ class BrowserWindow {
 
   static fromWebContents(wc: WebContents) {
     return BrowserWindow.windows.find((val) => val.webContents.id === wc.id)
+  }
+
+  isDestroyed() {
+    return false
   }
 }
 
