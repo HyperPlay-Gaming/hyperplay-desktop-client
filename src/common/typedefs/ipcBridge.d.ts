@@ -71,6 +71,7 @@ interface HyperPlaySyncIPCFunctions {
   ignoreExitToTray: () => void
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
+  openAuthModalIfAppReloads: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {

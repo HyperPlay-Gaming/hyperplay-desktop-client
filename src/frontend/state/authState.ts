@@ -1,21 +1,26 @@
+import { onboardingStore } from 'frontend/helpers/electronStores'
 import { makeAutoObservable } from 'mobx'
 
 class AuthState {
   private qaModeActive = false
-  private singInModalOpen = true
+  private signInModalOpen = false
   private signedIn = false
   private pendingSignatureRequest = false
 
   constructor() {
     makeAutoObservable(this)
+    this.signInModalOpen = onboardingStore.get(
+      'openAuthModalIfAppReloads',
+      false
+    )
   }
 
   get hasPendingSignatureRequest() {
     return this.pendingSignatureRequest
   }
 
-  get isSingInModalOpen() {
-    return this.singInModalOpen
+  get isSignInModalOpen() {
+    return this.signInModalOpen
   }
 
   get isSignedIn() {
@@ -27,11 +32,11 @@ class AuthState {
   }
 
   openSignInModal() {
-    this.singInModalOpen = true
+    this.signInModalOpen = true
   }
 
   closeSignInModal() {
-    this.singInModalOpen = false
+    this.signInModalOpen = false
   }
 
   activateQaMode() {

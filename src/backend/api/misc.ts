@@ -198,3 +198,7 @@ export const handleQaModeActivated = (
     ipcRenderer.removeListener('qaModeActive', onChange)
   }
 }
+
+export const openAuthModalIfAppReloads = () => {
+  ipcRenderer.send('openAuthModalIfAppReloads')
+}

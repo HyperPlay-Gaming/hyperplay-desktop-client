@@ -33,6 +33,7 @@ const AuthModal = () => {
     const currentProvider = await window.api.getConnectedProvider()
 
     if (currentProvider === 'Unconnected') {
+      window.api.openAuthModalIfAppReloads()
       onboardingStore.openOnboarding()
       authState.setPendingSignatureRequest(true)
       return
@@ -101,7 +102,7 @@ const AuthModal = () => {
 
   return (
     <ModalAnimation
-      isOpen={authState.isSingInModalOpen && authState.isQaModeActive}
+      isOpen={authState.isSignInModalOpen}
       onClose={() => authState.closeSignInModal()}
     >
       <webview
