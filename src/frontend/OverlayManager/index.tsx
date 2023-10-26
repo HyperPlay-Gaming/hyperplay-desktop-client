@@ -47,7 +47,9 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
     }
   }
 
-  console.log('show toasts ', OverlayState.renderState.showToasts)
+  const shouldShowExtension =
+    WalletState.provider === PROVIDERS.METAMASK_EXTENSION &&
+    OverlayState.renderState.showExtension
 
   return (
     <>
@@ -82,16 +84,17 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
               {t('exit_game', 'Exit Game')}
             </Button>
           ) : null}
-          {WalletState.provider === PROVIDERS.METAMASK_EXTENSION ? (
+          {shouldShowExtension ? (
             <ExtensionManager />
-          ) : (
+          ) : OverlayState.renderState.showHintText &&
+            OverlayState.title !== 'HyperPlay Hint Text' ? (
             <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
               {t(
                 'overlay.EXTERNAL_WALLET_CONNECTED',
                 'You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.'
               )}
             </div>
-          )}
+          ) : null}
         </>
       )}
     </>

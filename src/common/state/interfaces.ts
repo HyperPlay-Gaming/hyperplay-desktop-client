@@ -15,4 +15,5 @@ export interface OverlayStateInterface {
   renderState: OverlayRenderState
   showOverlay: boolean | null
   isFullscreenOverlay: boolean
+  title: string
 }
