@@ -2,12 +2,7 @@ import './index.css'
 
 import React, { useContext, useState, useEffect } from 'react'
 
-import {
-  DMQueueElement,
-  DownloadManagerState,
-  GameInfo,
-  Runner
-} from 'common/types'
+import { GameInfo, Runner } from 'common/types'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { getGameInfo, install, launch } from 'frontend/helpers'
@@ -28,8 +23,8 @@ import {
   SettingsButtons
 } from '@hyperplay/ui'
 import classNames from 'classnames'
-import { DMQueue } from 'frontend/types'
 import libraryState from 'frontend/state/libraryState'
+import DMQueueState from 'frontend/state/DMQueueState'
 
 interface Card {
   buttonClick: () => void
@@ -53,31 +48,6 @@ const GameCard = ({
   const [isLaunching, setIsLaunching] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
   const [showSettings, setShowSettings] = useState(false)
-  const [dmState, setDMState] = useState<DownloadManagerState>('idle')
-  const [currentElement, setCurrentElement] = useState<DMQueueElement>()
-
-  useEffect(() => {
-    window.api.getDMQueueInformation().then(({ state }: DMQueue) => {
-      setDMState(state)
-    })
-
-    const removeHandleDMQueueInformation = window.api.handleDMQueueInformation(
-      (
-        e: Electron.IpcRendererEvent,
-        elements: DMQueueElement[],
-        state: DownloadManagerState
-      ) => {
-        if (elements) {
-          setCurrentElement(elements[0])
-          setDMState(state)
-        }
-      }
-    )
-
-    return () => {
-      removeHandleDMQueueInformation()
-    }
-  }, [])
 
   const { t } = useTranslation('gamepage')
 
@@ -152,7 +122,7 @@ const GameCard = ({
     if (isPlaying) {
       return 'PLAYING'
     }
-    if (isInstalling || isQueued) {
+    if (isQueued || DMQueueState.isInstalling(appName)) {
       return 'INSTALLING'
     }
     if (showUpdateButton) {
@@ -161,7 +131,7 @@ const GameCard = ({
     if (isInstalled) {
       return 'INSTALLED'
     }
-    if (dmState === 'paused' && currentElement?.params.appName === appName) {
+    if (DMQueueState.isPaused(appName)) {
       return 'PAUSED'
     }
     if (status === 'extracting') {

@@ -13,7 +13,8 @@ import {
   EPIC_STORE_URL,
   GOG_STORE_URL,
   AMAZON_STORE,
-  HYPERPLAY_STORE_URL
+  HYPERPLAY_STORE_URL,
+  ENABLE_AMAZON_STORE
 } from 'frontend/constants'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
@@ -103,15 +104,17 @@ const TopNavBar = observer(() => {
                 {t('GOG', 'GOG')}
               </Button>
             </NavLink>
-            <NavLink to="/amazonstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(AMAZON_STORE)}
-              >
-                {t('Amazon', 'Amazon')}
-              </Button>
-            </NavLink>
+            {ENABLE_AMAZON_STORE ? (
+              <NavLink to="/amazonstore">
+                <Button
+                  type="link"
+                  size="small"
+                  style={getStoreTextStyle(AMAZON_STORE)}
+                >
+                  {t('Amazon', 'Amazon')}
+                </Button>
+              </NavLink>
+            ) : null}
           </>
         )}
       </div>

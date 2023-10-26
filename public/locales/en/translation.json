@@ -609,7 +609,7 @@
         "default-install-path": "Default Installation Path",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable Heroic navigation using controller",
+        "disable_controller": "Disable Hyperplay navigation using controller",
         "disable_logs": "Disable Logs",
         "discordRPC": "Enable Discord Rich Presence",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",

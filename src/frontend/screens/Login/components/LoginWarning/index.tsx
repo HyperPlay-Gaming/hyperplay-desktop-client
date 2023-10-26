@@ -42,7 +42,7 @@ const LoginWarning = function ({
   } else if (warnLoginForStore === 'amazon') {
     textContent = t(
       'not_logged_in.amazon',
-      "You are not logged in with an Amazon account in Heroic. Don't use the store page to login, click the following button instead:"
+      "You are not logged in with an Amazon account in Hyperplay. Don't use the store page to login, click the following button instead:"
     )
     loginPath = amazonLoginPath
   }

@@ -236,7 +236,7 @@ export default function DownloadToastManager() {
               properties: { buttonClicked: 'cancel' }
             })
           }}
-          onPauseClick={() => window.api.pauseCurrentDownload()}
+          onPauseClick={async () => window.api.pauseCurrentDownload()}
           onStartClick={() => window.api.resumeCurrentDownload()}
           onCloseClick={() => {
             setShowDownloadToast(false)

@@ -176,9 +176,9 @@ test.describe('hp store api tests', function () {
 
   const pauseDownload = async () => {
     await page.evaluate(async () => {
-      window.api.pauseCurrentDownload()
+      return window.api.pauseCurrentDownload()
     })
-    await wait(2000)
+
     //check if download is actually paused
     const downloadDirSize = await dirSize(tempFolder)
     await wait(1000)
@@ -218,25 +218,25 @@ test.describe('hp store api tests', function () {
     await cancelDownload(true)
   })
 
-  // test('hp store: download, pause, resume, cancel and do not keep files', async () => {
-  //   // download then pause
-  //   console.log('installing')
-  //   await withTimeout(installPartialTimeout, installPartial(appName), false)
-  //   console.log('pausing')
-  //   await pauseDownload()
-  //   console.log('resuming')
-  //   await resumeDownload()
-  //   console.log('canceling')
-  //   await cancelDownload(true)
-  // })
+  test('hp store: download, pause, resume, cancel and do not keep files', async () => {
+    // download then pause
+    console.log('installing')
+    await withTimeout(installPartialTimeout, installPartial(appName), false)
+    console.log('pausing')
+    await pauseDownload()
+    console.log('resuming')
+    await resumeDownload()
+    console.log('canceling')
+    await cancelDownload(true)
+  })
 
-  // test('hp store: download, pause, cancel and do not keep files', async () => {
-  //   // download then pause
-  //   console.log('installing')
-  //   await withTimeout(installPartialTimeout, installPartial(appName), false)
-  //   console.log('pausing')
-  //   await pauseDownload()
-  //   console.log('canceling')
-  //   await cancelDownload(true)
-  // })
+  test('hp store: download, pause, cancel and do not keep files', async () => {
+    // download then pause
+    console.log('installing')
+    await withTimeout(installPartialTimeout, installPartial(appName), false)
+    console.log('pausing')
+    await pauseDownload()
+    console.log('canceling')
+    await cancelDownload(true)
+  })
 })

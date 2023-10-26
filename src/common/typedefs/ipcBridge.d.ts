@@ -131,7 +131,6 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   optInStatusChanged: (optInStatus: MetricsOptInStatus) => void
   openGameInEpicStore: (url: string) => void
   resumeCurrentDownload: () => void
-  pauseCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
   copyWalletConnectBaseURIToClipboard: () => void
 }
@@ -385,6 +384,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     appName: string
   ) => Promise<number | undefined>
   getAmazonLoginData: () => Promise<NileLoginData>
+  pauseCurrentDownload: () => Promise<void>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

@@ -16,6 +16,7 @@ import { Category } from 'frontend/types'
 import { observer } from 'mobx-react-lite'
 import libraryState from '../../../../state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
+import { ENABLE_AMAZON_STORE } from 'frontend/constants'
 
 export interface LibraryTopBarInterface {
   filters: DropdownItemType[]
@@ -54,21 +55,21 @@ export const LibraryTopBar = observer(
           <Tabs.Tab value="hyperplay">
             <div className="menu">{t('HyperPlay')}</div>
           </Tabs.Tab>
-          {isEpicLoggedin && (
+          {isEpicLoggedin ? (
             <Tabs.Tab value="legendary">
               <div className="menu">EPIC</div>
             </Tabs.Tab>
-          )}
-          {isGOGLoggedin && (
+          ) : null}
+          {isGOGLoggedin ? (
             <Tabs.Tab value="gog">
               <div className="menu">GOG</div>
             </Tabs.Tab>
-          )}
-          {isAmazonLoggedin && (
+          ) : null}
+          {isAmazonLoggedin && ENABLE_AMAZON_STORE ? (
             <Tabs.Tab value="nile">
               <div className="menu">Amazon</div>
             </Tabs.Tab>
-          )}
+          ) : null}
           <Tabs.Tab value="sideload">
             <div className="menu">{t('Other')}</div>
           </Tabs.Tab>

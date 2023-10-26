@@ -79,7 +79,7 @@ export default function WebviewControls({
   )
 
   const _url = new URL(url)
-  const allowList = ['store.hyperplay.xyz', 'docs.hyperplaygaming.com']
+  const allowList = ['store.hyperplay.xyz', 'docs.hyperplay.xyz']
 
   if (allowList.includes(_url.host)) return null
 
