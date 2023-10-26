@@ -106,7 +106,8 @@ import {
   fixAsarPath,
   twitterLink,
   eventsToCloseMetaMaskPopupOn,
-  setQaToken
+  setQaToken,
+  onboardLocalStore
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -1952,4 +1953,8 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
   if (qaToken.length > 0) sendFrontendMessage('qaModeActive')
+})
+
+ipcMain.on('openAuthModalIfAppReloads', () => {
+  onboardLocalStore.set('openAuthModalIfAppReloads', true)
 })

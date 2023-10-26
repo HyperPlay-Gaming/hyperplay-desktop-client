@@ -232,7 +232,8 @@ export function createNecessaryFolders() {
 }
 
 const onboardLocalStore = new TypeCheckedStoreBackend('onboardingStore', {
-  cwd: 'store'
+  cwd: 'store',
+  name: 'onboarding-store'
 })
 
 export {
