@@ -677,7 +677,7 @@ export async function runRunnerCommand(
 ): Promise<ExecResult> {
   const { dir, bin } = getLegendaryBin()
 
-  // Set XDG_CONFIG_HOME to a custom, Heroic-specific location so user-made
+  // Set XDG_CONFIG_HOME to a custom, HyperPlay-specific location so user-made
   // changes to Legendary's main config file don't affect us
   if (!options) {
     options = {}
