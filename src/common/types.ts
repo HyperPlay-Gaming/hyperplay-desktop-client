@@ -815,3 +815,5 @@ export interface RunnerBin {
   dir: string
   bin: string
 }
+
+export type OverlayType = 'native' | 'browser' | 'mainWindow'
