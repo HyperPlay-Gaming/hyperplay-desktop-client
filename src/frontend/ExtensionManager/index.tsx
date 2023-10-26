@@ -36,7 +36,8 @@ const ExtensionManager = function () {
     // document.documentElement.style.setProperty('--top-navbar-height', `0px`)
   } else if (
     OverlayState.title === 'HyperPlay Extension Overlay' ||
-    OverlayState.title === 'HyperPlay Browser Game'
+    OverlayState.title === 'HyperPlay Browser Game' ||
+    OverlayState.title === 'HyperPlay Web Game'
   ) {
     mmContainerStyle.left = 20
     mmContainerStyle.right = 'unset'
