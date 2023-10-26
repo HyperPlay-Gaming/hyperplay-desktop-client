@@ -26,7 +26,7 @@ import { access, chmod } from 'fs/promises'
 import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
-import { app, BrowserWindow, ipcMain } from 'electron'
+import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { hrtime } from 'process'
@@ -187,8 +187,12 @@ const openNewBrowserGameWindow = async (
      * after init() has been called on it. This can be some time after
      * window launch, so we send an overlay ready event when it's ready.
      */
-    ipcMain.once('overlayReady', () => {
-      initOverlayRenderState(browserGame.webContents.id, renderState)
+    browserGame.webContents.ipc.once('overlayReady', () => {
+      initOverlayRenderState(
+        browserGame.webContents.id,
+        renderState,
+        'HyperPlay Web Game'
+      )
     })
 
     setTimeout(() => browserGame.focus(), 200)
