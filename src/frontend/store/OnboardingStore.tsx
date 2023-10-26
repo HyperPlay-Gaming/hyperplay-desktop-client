@@ -5,6 +5,7 @@ import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { useLocation } from 'react-router-dom'
+import ExtensionHandlerState from 'frontend/state/ExtensionHandlerState'
 
 class OnboardingStore {
   isOnboardingOpen = true
@@ -50,6 +51,18 @@ class OnboardingStore {
       this.closeOnboarding()
     }
   }
+
+  public async bootstrapOnboardingWhenListenersBound(
+    context: ContextType,
+    defaultProvider?: PROVIDERS
+  ) {
+    when(
+      () => ExtensionHandlerState.ethereumListenersBound,
+      () => {
+        this.bootstrapOnboarding(context, defaultProvider)
+      }
+    )
+  }
 }
 
 const onboardingStore = new OnboardingStore()
@@ -62,7 +75,10 @@ export const OnboardingStoreController = () => {
 
   async function init() {
     const currentWeb3Provider = await window.api.getCurrentWeb3Provider()
-    onboardingStore.bootstrapOnboarding(context, currentWeb3Provider)
+    onboardingStore.bootstrapOnboardingWhenListenersBound(
+      context,
+      currentWeb3Provider
+    )
   }
 
   useEffect(() => {
