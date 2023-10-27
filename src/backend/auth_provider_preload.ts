@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer } from 'electron'
+import { DEV_PORTAL_URL } from '../common/constants'
 
 contextBridge.exposeInMainWorld('authApi', {
   closeAuthModal: () => {
@@ -10,8 +11,8 @@ contextBridge.exposeInMainWorld('authApi', {
   reportAccountConnected: () => {
     ipcRenderer.sendToHost('auth:accountConnected')
   },
-  openExternalUrl: (url: string) => {
-    ipcRenderer.send('openExternalUrl', url)
+  openProviderOAuthLink: (provider: string) => {
+    ipcRenderer.send('openExternalUrl', `${DEV_PORTAL_URL}/oauth/${provider}`)
   }
 })
 

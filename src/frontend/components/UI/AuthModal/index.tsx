@@ -8,10 +8,9 @@ import { ethers } from 'ethers'
 import extensionStore from '../../../store/ExtensionStore'
 import onboardingStore from '../../../store/OnboardingStore'
 import walletStore from '../../../store/WalletStore'
+import { DEV_PORTAL_URL } from 'common/constants'
 
-// TODO: replace this with dev portal prod URL when it's ready
-const url =
-  'https://hyperplay-dev-git-feature-unified-auth-ui-valist.vercel.app/signin'
+const url = `${DEV_PORTAL_URL}/signin`
 
 const METAMASK_ALREADY_PROVIDED_ERROR_CODE = -32002
 
@@ -64,7 +63,7 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
-          alert('account connected')
+          alert('wallet connection completed :D')
           authState.setSignedIn()
           authState.closeSignInModal()
           break
@@ -87,8 +86,15 @@ const AuthModal = () => {
       authState.openSignInModal()
     })
 
+    const oAuthCompletedCleanup = window.api.handleOAuthCompleted(() => {
+      alert('oauth connection completed :D')
+      authState.setSignedIn()
+      authState.closeSignInModal()
+    })
+
     return () => {
       qaModeListenerCleanup()
+      oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
       webview.removeEventListener('ipc-message', handleIpcMessage)
     }

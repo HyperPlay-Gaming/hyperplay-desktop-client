@@ -8,7 +8,7 @@ import { icon } from './constants'
 import { getGameInfo } from 'backend/storeManagers/hyperplay/games'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 
-type Command = 'ping' | 'launch'
+type Command = 'ping' | 'launch' | 'oauth-completed' | 'email-verified'
 
 const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
 
@@ -38,6 +38,12 @@ export async function handleProtocol(args: string[]) {
       return handlePing(arg)
     case 'launch':
       await handleLaunch(runner, arg, mainWindow)
+      break
+    case 'oauth-completed':
+      sendFrontendMessage('oauthCompleted')
+      break
+    case 'email-verified':
+      sendFrontendMessage('emailVerified')
       break
     default:
       return

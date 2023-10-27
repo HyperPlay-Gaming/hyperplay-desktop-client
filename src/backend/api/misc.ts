@@ -199,6 +199,24 @@ export const handleQaModeActivated = (
   }
 }
 
+export const handleOAuthCompleted = (
+  onMessage: (e: Electron.IpcRendererEvent) => void
+): (() => void) => {
+  ipcRenderer.on('oauthCompleted', onMessage)
+  return () => {
+    ipcRenderer.removeListener('oauthCompleted', onMessage)
+  }
+}
+
+export const handleEmailConfirmed = (
+  onMessage: (e: Electron.IpcRendererEvent) => void
+): (() => void) => {
+  ipcRenderer.on('emailVerified', onMessage)
+  return () => {
+    ipcRenderer.removeListener('emailVerified', onMessage)
+  }
+}
+
 export const openAuthModalIfAppReloads = () => {
   ipcRenderer.send('openAuthModalIfAppReloads')
 }
