@@ -34,6 +34,7 @@ export default function DownloadToastManager() {
     appName,
     gameInfo
   )
+  const isExtracting = status === 'extracting'
 
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
 
@@ -109,6 +110,12 @@ export default function DownloadToastManager() {
     }
   }, [currentElement])
 
+  useEffect(() => {
+    if (isExtracting) {
+      setProgress(nullProgress) // reset progress to 0
+    }
+  }, [isExtracting])
+
   if (currentElement === undefined) {
     console.debug('no downloads active in download toast manager')
     return <></>
@@ -158,18 +165,19 @@ export default function DownloadToastManager() {
     downloadedMB = Number(progress.bytes)
   }
 
-  const title = currentElement?.params.gameInfo.title
-    ? currentElement?.params.gameInfo.title
-    : 'Game'
-  const downloadSizeInMB = progress.percent
-    ? (downloadedMB / progress.percent) * 100
-    : 0
-  const estimatedCompletionTimeInMs = progress.downSpeed
-    ? (downloadSizeInMB / progress.downSpeed) * 1000
-    : 0
-  let imgUrl = currentElement?.params.gameInfo.art_cover
-    ? currentElement?.params.gameInfo.art_cover
-    : ''
+const title = currentElement?.params.gameInfo.title
+  ? currentElement?.params.gameInfo.title
+  : 'Game'
+const downloadSizeInMB = progress.percent
+  ? (downloadedMB / progress.percent) * 100
+  : 0
+const estimatedCompletionTimeInMs = progress.downSpeed
+  ? (downloadSizeInMB / progress.downSpeed) * 1000
+  : 0
+let imgUrl = currentElement?.params.gameInfo.art_cover
+  ? currentElement?.params.gameInfo.art_cover
+  : ''
+
   if (!imgUrl.includes('http'))
     imgUrl = currentElement.params.gameInfo.art_square
 
@@ -190,18 +198,18 @@ export default function DownloadToastManager() {
     return 'inProgress'
   }
 
+const adjustedDownloadedInBytes = downloadedMB * 1024 * 1024;
+const adjustedDownloadSizeInBytes = downloadSizeInMB * 1024 * 1024;
+
   return (
     <div className={DownloadToastManagerStyles.downloadManagerContainer}>
       {showDownloadToast ? (
         <DownloadToast
           imgUrl={imgUrl}
           gameTitle={title}
-          downloadedInBytes={
-            status === 'extracting'
-              ? downloadSizeInMB * 1024 * 1024
-              : downloadedMB * 1024 * 1024
-          }
-          downloadSizeInBytes={downloadSizeInMB * 1024 * 1024}
+downloadedInBytes = { adjustedDownloadedInBytes }
+downloadSizeInBytes = { adjustedDownloadSizeInBytes }
+
           estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
           onCancelClick={() => {
             setShowStopInstallModal(true)
