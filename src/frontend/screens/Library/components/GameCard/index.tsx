@@ -283,10 +283,6 @@ const GameCard = ({
 
   const { activeController } = useContext(ContextProvider)
 
-  if (downloadStatus === 'extracting') {
-    progress.percent = 100
-  }
-
   return (
     <>
       {showStopInstallModal ? (
