@@ -19,11 +19,8 @@ interface BrowserGameProps {
 
 const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
   const txnToastContainerStyle = {} as React.CSSProperties
-  if (
-    OverlayState.renderState.showToasts &&
-    !OverlayState.renderState.showExtension
-  ) {
-    txnToastContainerStyle.bottom = 0
+  if (OverlayState.title === 'HyperPlay Toasts') {
+    txnToastContainerStyle.bottom = 'unset'
     txnToastContainerStyle.right = 0
     txnToastContainerStyle.top = 0
   }
