@@ -1,18 +1,7 @@
 import axios from 'axios'
 import { app } from 'electron'
-import { extractZip } from '../../backend/utils'
-import { logError } from '../logger/logger'
 import * as utils from '../utils'
 import { test_data } from './test_data/github-api-heroic-test-data.json'
-import path from 'path'
-import {
-  copyFileSync,
-  existsSync,
-  readFileSync,
-  rmSync,
-  rmdirSync,
-  renameSync
-} from 'graceful-fs'
 
 jest.mock('electron')
 jest.mock('../logger/logger')
@@ -255,61 +244,6 @@ describe('backend/utils.ts', () => {
       expect(utils.bytesToSize(1024 * 1024 * 1029 * 44000)).toEqual('43.18 TB')
       expect(utils.bytesToSize(1025 * 1024 * 2056 * 21010)).toEqual('41.24 TB')
       expect(utils.bytesToSize(2059 * 1024 * 3045 * 4000)).toEqual('23.36 TB')
-    })
-  })
-
-  describe('extractZip', () => {
-    let testCopyZipPath: string
-    let destFilePath: string
-
-    beforeEach(() => {
-      const testZipPath = path.resolve('./src/backend/__mocks__/test.zip')
-      //copy zip because extract will delete it
-      testCopyZipPath = path.resolve('./src/backend/__mocks__/test2.zip')
-      copyFileSync(testZipPath, testCopyZipPath)
-      destFilePath = path.resolve('./src/backend/__mocks__/test')
-    })
-
-    afterEach(async () => {
-      const extractPromise = utils.extractZip(testCopyZipPath, destFilePath)
-      await extractPromise
-      expect(extractPromise).resolves
-
-      const testTxtFilePath = path.resolve(destFilePath, './test.txt')
-      console.log('checking dest file path ', testTxtFilePath)
-      expect(existsSync(testTxtFilePath)).toBe(true)
-
-      const testMessage = readFileSync(testTxtFilePath).toString()
-      console.log('unzipped file contents: ', testMessage)
-      expect(testMessage).toEqual('this is a test message')
-
-      //extract deletes the zip file used to extract async so we wait and then check
-      await utils.wait(100)
-      expect(existsSync(testCopyZipPath)).toBe(false)
-
-      //clean up test
-      rmSync(testTxtFilePath)
-      rmdirSync(destFilePath)
-      expect(existsSync(testTxtFilePath)).toBe(false)
-      expect(existsSync(destFilePath)).toBe(false)
-    })
-
-    test('extract a normal test zip', async () => {
-      console.log('extracting test.zip')
-    })
-
-    test('extract a test zip with non ascii characters', async () => {
-      const renamedZipFilePath = path.resolve(
-        './src/backend/__mocks__/谷���新道ひばりヶ�.zip'
-      )
-      renameSync(testCopyZipPath, renamedZipFilePath)
-      testCopyZipPath = renamedZipFilePath
-    })
-
-    it('should throw an error if the zip file does not exist', async () => {
-      await expect(
-        extractZip('nonexistent.zip', destFilePath)
-      ).rejects.toThrow()
     })
   })
 })

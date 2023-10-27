@@ -43,6 +43,7 @@ import {
   createWriteStream,
   rm
 } from 'graceful-fs'
+import { EventEmitter } from 'events';
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
@@ -1418,55 +1419,6 @@ function removeFolder(path: string, folderName: string) {
   return
 }
 
-export async function extractZip(zipFile: string, destinationPath: string) {
-  return new Promise<void>((resolve, reject) => {
-    yauzl.open(zipFile, { lazyEntries: true }, (err, zipfile) => {
-      if (err) {
-        reject(err)
-        return
-      }
-
-      zipfile.readEntry()
-      zipfile.on('entry', (entry) => {
-        if (/\/$/.test(entry.fileName)) {
-          // Directory file names end with '/'
-          mkdirSync(join(destinationPath, entry.fileName), { recursive: true })
-          zipfile.readEntry()
-        } else {
-          // Ensure parent directory exists
-          mkdirSync(
-            join(
-              destinationPath,
-              entry.fileName.split('/').slice(0, -1).join('/')
-            ),
-            { recursive: true }
-          )
-
-          // Extract file
-          zipfile.openReadStream(entry, (err, readStream) => {
-            if (err) {
-              reject(err)
-              return
-            }
-
-            const writeStream = createWriteStream(
-              join(destinationPath, entry.fileName)
-            )
-            readStream.pipe(writeStream)
-            writeStream.on('close', () => {
-              zipfile.readEntry()
-            })
-          })
-        }
-      })
-
-      zipfile.on('end', () => {
-        resolve()
-        rm(zipFile, console.log)
-      })
-    })
-  })
-}
 
 export function calculateEta(
   downloadedBytes: number,
