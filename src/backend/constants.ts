@@ -74,6 +74,7 @@ const gogdlAuthConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
 const icon = fixAsarPath(join(publicDir, 'app_icon.png'))
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
 const iconLight = fixAsarPath(join(publicDir, 'trayIconLight24x24.png'))
+const downloadGamesJson = fixAsarPath(join(publicDir, 'downloadGames.json'))
 const vulkanHelperBin = fixAsarPath(
   join(publicDir, 'bin', process.platform, 'vulkan-helper')
 )
@@ -298,5 +299,6 @@ export {
   nileConfigPath,
   nileInstalled,
   nileLibrary,
-  nileUserData
+  nileUserData,
+  downloadGamesJson
 }
