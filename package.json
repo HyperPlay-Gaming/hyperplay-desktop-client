@@ -35,7 +35,8 @@
       "build/trayIconDark24x24.png",
       "build/extensions",
       "build/hyperplay_store_preload.js",
-      "build/webviewPreload.js"
+      "build/webviewPreload.js",
+      "build/downloadGames.json"
     ],
     "protocols": [
       {

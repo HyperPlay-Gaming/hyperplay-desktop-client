@@ -106,7 +106,9 @@ import {
   fixAsarPath,
   twitterLink,
   eventsToCloseMetaMaskPopupOn,
-  setQaToken
+  setQaToken,
+  installPath,
+  downloadGamesJson
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -542,6 +544,20 @@ if (!gotTheLock) {
     downloadAntiCheatData()
 
     initTrayIcon(mainWindow)
+
+    const gamesToDownload = JSON.parse(readFileSync(downloadGamesJson, 'utf-8'))
+    const rootGameDir = installPath
+
+    for (const gameToDownload of gamesToDownload) {
+      const projId = gameToDownload.projectId
+      logInfo(`installing project id: , ${projId}`, LogPrefix.HyperPlay)
+      await addGameToLibrary(projId)
+      await HyperPlayGameManager.install(projId, {
+        path: gameToDownload.installPath ?? path.join(rootGameDir, projId),
+        platformToInstall: gameToDownload.platform ?? 'windows_amd64',
+        channelName: gameToDownload.channelName ?? 'main'
+      })
+    }
 
     return
   })
