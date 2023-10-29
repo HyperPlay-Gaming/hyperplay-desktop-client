@@ -1,7 +1,7 @@
 import { EventEmitter } from 'node:events'
 import { Readable } from 'node:stream';
 import { open, ZipFile } from 'yauzl'
-import { mkdirSync, createWriteStream, rm } from 'graceful-fs'
+import { mkdirSync, createWriteStream, rmSync } from 'graceful-fs'
 import { join } from 'path'
 
 export interface ExtractZipProgressResponse {
@@ -20,29 +20,25 @@ export interface ExtractZipProgressResponse {
  * @extends {EventEmitter}
  */
 export class ExtractZipService extends EventEmitter {
-  private readStream: Readable | null = null;
+  private readStream: Readable | null = null
   private canceled = false
-  private paused = false;
-
   private totalSize = 0
   private processedSize = 0
   private startTime = Date.now()
   private lastUpdateTime = Date.now()
   private dataDelay = 1000
 
-  private extractionPromise: Promise<boolean | void> | null = null;
-  private resolveExtraction: ((value: boolean) => void) | null = () => null;
-  private rejectExtraction: ((reason: Error) => void) | null = () => null;
+  private zipFileInstance: ZipFile | null = null;
+  private extractionPromise: Promise<boolean | void> | null = null
+  private resolveExtraction: ((value: boolean) => void) | null = () => null
+  private rejectExtraction: ((reason: Error) => void) | null = () => null
 
   /**
    * Creates an instance of ExtractZipService.
    * @param {string} zipFile - The path to the ZIP file.
    * @param {string} destinationPath - The path where the extracted files should be saved.
    */
-  constructor(
-    private zipFile: string,
-    private destinationPath: string,
-  ) {
+  constructor(private zipFile: string, private destinationPath: string) {
     super()
   }
 
@@ -51,11 +47,15 @@ export class ExtractZipService extends EventEmitter {
    * @returns {boolean} - True if the extraction was canceled, false otherwise.
    */
   get isCanceled(): boolean {
-    return this.canceled;
+    return this.canceled
   }
 
+  /**
+   * Get if is paused or not
+   * @returns {boolean} - Current state
+   */
   get isPaused(): boolean {
-    return this.readStream?.isPaused() || false;
+    return this.readStream?.isPaused() || false
   }
 
   /**
@@ -63,7 +63,7 @@ export class ExtractZipService extends EventEmitter {
    * @returns {string} - The path to the ZIP file.
    */
   get source(): string {
-    return this.zipFile;
+    return this.zipFile
   }
 
   /**
@@ -71,34 +71,50 @@ export class ExtractZipService extends EventEmitter {
    * @returns {string} - The destination path.
    */
   get destination(): string {
-    return this.destinationPath;
+    return this.destinationPath
   }
 
-
+  /**
+   * Pause the extraction process.
+   * @returns {void}
+   */
   public pause(): void {
     if (!this.isPaused) {
-      this.readStream?.pause();
+      this.readStream?.pause()
     }
   }
 
+  /**
+   * Resume the extraction process.
+   * @returns {Promise<boolean | void>}
+   */
   public async resume(): Promise<boolean | void> {
     if (!this.extractionPromise) {
-      throw new Error('Extraction has not started or has already completed.');
+      throw new Error('Extraction has not started or has already completed.')
     }
 
     if (this.isPaused) {
-      this.readStream?.resume();
+      this.readStream?.resume()
     }
 
-    return this.extractionPromise;
+    return this.extractionPromise
   }
 
   /**
    * Cancels the extraction process.
+   * @returns {void}
    */
   public cancel() {
     this.canceled = true
-    this.readStream?.destroy();
+    this.readStream?.unpipe();
+
+    this.readStream?.destroy(new Error('Extraction canceled'))
+
+    if (this.zipFileInstance && this.zipFileInstance.isOpen) {
+      this.zipFileInstance.close();
+    }
+    
+    this.onCancel()
   }
 
   /**
@@ -129,7 +145,7 @@ export class ExtractZipService extends EventEmitter {
    */
   private onData(chunkLength: number) {
     if (this.canceled) {
-      return;
+      return
     }
 
     this.processedSize += chunkLength
@@ -148,10 +164,27 @@ export class ExtractZipService extends EventEmitter {
    * @private
    */
   private onEnd() {
-    if (!this.canceled) {
-      this.emit('end', this.computeProgress())
-      rm(this.zipFile, console.log)
+    if (this.isCanceled) {
+      return
     }
+
+    this.emit('end', this.computeProgress())
+
+    rmSync(this.source, { recursive: true, force: true });
+
+    this.removeAllListeners()
+  }
+
+  /**
+   * Handles cancel events during extraction.
+   * @private
+   */
+  private onCancel() {
+    this.emit('canceled')
+
+    rmSync(this.source, { recursive: true, force: true });
+
+    this.removeAllListeners()
   }
 
   /**
@@ -161,6 +194,10 @@ export class ExtractZipService extends EventEmitter {
    */
   private onError(error: Error) {
     this.emit('error', error)
+
+    rmSync(this.source, { recursive: true, force: true });
+
+    this.removeAllListeners()
   }
 
   /**
@@ -169,18 +206,19 @@ export class ExtractZipService extends EventEmitter {
    */
   async extract() {
     this.extractionPromise = new Promise<boolean | void>((resolve, reject) => {
-      this.resolveExtraction = resolve;
-      this.rejectExtraction = reject;
+      this.resolveExtraction = resolve
+      this.rejectExtraction = reject
 
-      open(this.zipFile, { lazyEntries: true }, (err, file: ZipFile) => {
-        if (err && this.rejectExtraction) {
-          this.rejectExtraction(err)
+      open(this.zipFile, { lazyEntries: true, autoClose: true }, (err, file: ZipFile) => {
+        if (err) {
+          this.rejectExtraction?.(err)
           return
         }
 
         this.totalSize = file.fileSize
 
         file.readEntry()
+        file.emit('end')
 
         file.on('entry', (entry) => {
           if (this.canceled) {
@@ -210,7 +248,8 @@ export class ExtractZipService extends EventEmitter {
                 return
               }
 
-              this.readStream = readStream;
+              this.zipFileInstance = file;
+              this.readStream = readStream
               const writeStream = createWriteStream(
                 join(this.destinationPath, entry.fileName)
               )
@@ -219,6 +258,11 @@ export class ExtractZipService extends EventEmitter {
                 this.onData(chunk.length)
               })
               writeStream.on('close', () => {
+                if (this.isCanceled) {
+                  file.emit('end')
+
+                  return
+                }
                 file.readEntry()
               })
             })
@@ -226,32 +270,35 @@ export class ExtractZipService extends EventEmitter {
         })
 
         file.once('end', () => {
-          if (!this.canceled) {
-            file.close()
-            this.onEnd()
+          if (this.isCanceled) {
+            this.rejectExtraction?.(new Error('Extraction was canceled'))
+
+            return
           }
 
-          if (this.resolveExtraction) {
-            this.resolveExtraction(true)
-          }
+          this.onEnd()
+
+          this.resolveExtraction?.(true)
         })
+
+        file.once('error', (error) => {
+          this.onError(error);
+        });
       })
     }).catch((error) => {
-      this.onError(error);
+      this.onError(error)
     })
     try {
-      return await this.extractionPromise;
+      return await this.extractionPromise
     } catch (error: unknown) {
-      if (this.rejectExtraction) {
-        this.rejectExtraction(error as Error);
-      }
+      this.rejectExtraction?.(error as Error)
     } finally {
-      this.extractionPromise = null;
-      this.resolveExtraction = null;
-      this.rejectExtraction = null;
-      this.removeAllListeners();
+      this.zipFileInstance = null;
+      this.extractionPromise = null
+      this.resolveExtraction = null
+      this.rejectExtraction = null
     }
 
-    return false;
+    return false
   }
 }
