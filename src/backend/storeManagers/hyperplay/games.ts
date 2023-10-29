@@ -63,6 +63,7 @@ import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
+import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 
 const inProgressDownloadsMap: Map<string, DownloadItem> = new Map()
 const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
@@ -494,9 +495,23 @@ async function resumeIfPaused(appName: string): Promise<boolean> {
 }
 
 export async function cancelExtraction(appName: string) {
-  const extractZipService = inProgressExtractionsMap.get(appName)
-  if (extractZipService) {
-    extractZipService.cancel()
+  logInfo(
+    `cancelExtraction: Extraction will be canceled and downloaded zip will be removed`,
+    LogPrefix.HyperPlay
+  )
+
+  try {
+    process.noAsar = false
+
+    const extractZipService = inProgressExtractionsMap.get(appName)
+    if (extractZipService) {
+      extractZipService.cancel()
+    }
+  } catch (error: unknown) {
+    logInfo(
+      `cancelExtraction: Error while canceling the operation ${(error as Error).message} `,
+      LogPrefix.HyperPlay
+    )
   }
 }
 
@@ -578,6 +593,22 @@ export async function install(
 
       platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
     }
+
+    // Reset the download progress
+    window.webContents.send(`progressUpdate-${appName}`, {
+      appName,
+      runner: 'hyperplay',
+      folder: destinationPath,
+      status: 'done',
+      progress: {
+        folder: destinationPath,
+        percent: 0,
+        diskSpeed: 0,
+        downSpeed: 0,
+        bytes: 0,
+        eta: null
+      }
+    })
 
     await downloadGame(
       appName,
@@ -668,12 +699,11 @@ export async function install(
           totalSize,
           processedSize
         }: ExtractZipProgressResponse) => {
-          extractService.removeAllListeners()
-
           logInfo(
             `Extracting End: ${progressPercentage}% Speed: ${speed} B/s | Total size ${totalSize} and ${processedSize}`,
             LogPrefix.HyperPlay
           )
+
           const currentProgress = calculateProgress(
             processedSize,
             totalSize,
@@ -736,14 +766,65 @@ export async function install(
           sendFrontendMessage('refreshLibrary', 'hyperplay')
         }
       )
-      extractService.on('error', (error: Error) => {
+      extractService.once('error', (error: Error) => {
         logError(`Extracting Error ${error.message}`, LogPrefix.HyperPlay)
+        
+        cancelQueueExtraction()
+        callAbortController(appName)
+
+        cleanUpDownload(appName, directory)
+
+        sendFrontendMessage('refreshLibrary', 'hyperplay')
 
         throw error
+      })
+      extractService.once('canceled', () => {
+        logInfo(
+          `Canceled Extracting: Cancellation completed on ${appName} - Destination ${destinationPath}`,
+          LogPrefix.HyperPlay
+        )
+
+        process.noAsar = false
+
+        cancelQueueExtraction()
+        callAbortController(appName)
+
+        sendFrontendMessage('gameStatusUpdate', {
+          appName,
+          status: 'done',
+          runner: 'hyperplay',
+          folder: destinationPath
+        })
+
+        window.webContents.send(`progressUpdate-${appName}`, {
+          appName,
+          runner: 'hyperplay',
+          folder: destinationPath,
+          status: 'done',
+          progress: {
+            folder: destinationPath,
+            percent: 0,
+            diskSpeed: 0,
+            downSpeed: 0,
+            bytes: 0,
+            eta: null
+          }
+        })
+    
+        notify({
+          title,
+          body: 'Installation Stopped'
+        })
+
+        cleanUpDownload(appName, directory)
+
+        sendFrontendMessage('refreshLibrary', 'hyperplay')
       })
 
       await extractService.extract()
     } catch (error) {
+      process.noAsar = false
+      
       logInfo(`Error while extracting game ${error}`, LogPrefix.HyperPlay)
       window.webContents.send('gameStatusUpdate', {
         appName,
@@ -755,6 +836,8 @@ export async function install(
     }
     return { status: 'done' }
   } catch (error) {
+    process.noAsar = false
+
     logInfo(
       `Error while downloading and extracting game: ${error}`,
       LogPrefix.HyperPlay
