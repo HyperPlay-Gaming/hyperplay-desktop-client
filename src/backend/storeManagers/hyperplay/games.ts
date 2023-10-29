@@ -509,7 +509,9 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${(error as Error).message} `,
+      `cancelExtraction: Error while canceling the operation ${
+        (error as Error).message
+      } `,
       LogPrefix.HyperPlay
     )
   }
@@ -665,7 +667,7 @@ export async function install(
     try {
       const extractService = new ExtractZipService(zipFile, destinationPath)
 
-      inProgressExtractionsMap.set(appName, extractService);
+      inProgressExtractionsMap.set(appName, extractService)
 
       extractService.on(
         'progress',
@@ -776,7 +778,7 @@ export async function install(
       )
       extractService.once('error', (error: Error) => {
         logError(`Extracting Error ${error.message}`, LogPrefix.HyperPlay)
-        
+
         cancelQueueExtraction()
         callAbortController(appName)
 
@@ -818,7 +820,7 @@ export async function install(
             eta: null
           }
         })
-    
+
         notify({
           title,
           body: 'Installation Stopped'
@@ -832,7 +834,7 @@ export async function install(
       await extractService.extract()
     } catch (error) {
       process.noAsar = false
-      
+
       logInfo(`Error while extracting game ${error}`, LogPrefix.HyperPlay)
       window.webContents.send('gameStatusUpdate', {
         appName,

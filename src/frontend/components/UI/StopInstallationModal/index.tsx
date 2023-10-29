@@ -16,7 +16,7 @@ interface StopInstallProps {
   folderName: string
   gameInfo: GameInfo
   progress: InstallProgress
-  status: string
+  status?: string
 }
 
 export default function StopInstallationModal(props: StopInstallProps) {
@@ -77,7 +77,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
               if (isExtracting) {
                 window.api.cancelExtraction(app_name)
 
-                return 
+                return
               }
 
               window.api.cancelDownload(false)

@@ -1,5 +1,5 @@
 import { EventEmitter } from 'node:events'
-import { Readable } from 'node:stream';
+import { Readable } from 'node:stream'
 import { open, ZipFile } from 'yauzl'
 import { mkdirSync, createWriteStream, rmSync } from 'graceful-fs'
 import { join } from 'path'
@@ -28,7 +28,7 @@ export class ExtractZipService extends EventEmitter {
   private lastUpdateTime = Date.now()
   private dataDelay = 1000
 
-  private zipFileInstance: ZipFile | null = null;
+  private zipFileInstance: ZipFile | null = null
   private extractionPromise: Promise<boolean | void> | null = null
   private resolveExtraction: ((value: boolean) => void) | null = () => null
   private rejectExtraction: ((reason: Error) => void) | null = () => null
@@ -106,14 +106,14 @@ export class ExtractZipService extends EventEmitter {
    */
   public cancel() {
     this.canceled = true
-    this.readStream?.unpipe();
+    this.readStream?.unpipe()
 
     this.readStream?.destroy(new Error('Extraction canceled'))
 
     if (this.zipFileInstance && this.zipFileInstance.isOpen) {
-      this.zipFileInstance.close();
+      this.zipFileInstance.close()
     }
-    
+
     this.onCancel()
   }
 
@@ -170,7 +170,7 @@ export class ExtractZipService extends EventEmitter {
 
     this.emit('end', this.computeProgress())
 
-    rmSync(this.source, { recursive: true, force: true });
+    rmSync(this.source, { recursive: true, force: true })
 
     this.removeAllListeners()
   }
@@ -182,7 +182,7 @@ export class ExtractZipService extends EventEmitter {
   private onCancel() {
     this.emit('canceled')
 
-    rmSync(this.source, { recursive: true, force: true });
+    rmSync(this.source, { recursive: true, force: true })
 
     this.removeAllListeners()
   }
@@ -195,7 +195,7 @@ export class ExtractZipService extends EventEmitter {
   private onError(error: Error) {
     this.emit('error', error)
 
-    rmSync(this.source, { recursive: true, force: true });
+    rmSync(this.source, { recursive: true, force: true })
 
     this.removeAllListeners()
   }
@@ -209,82 +209,86 @@ export class ExtractZipService extends EventEmitter {
       this.resolveExtraction = resolve
       this.rejectExtraction = reject
 
-      open(this.zipFile, { lazyEntries: true, autoClose: true }, (err, file: ZipFile) => {
-        if (err) {
-          this.rejectExtraction?.(err)
-          return
-        }
-
-        this.totalSize = file.fileSize
-
-        file.readEntry()
-        file.emit('end')
-
-        file.on('entry', (entry) => {
-          if (this.canceled) {
-            file.close()
+      open(
+        this.zipFile,
+        { lazyEntries: true, autoClose: true },
+        (err, file: ZipFile) => {
+          if (err) {
+            this.rejectExtraction?.(err)
             return
           }
 
-          if (/\/$/.test(entry.fileName)) {
-            // Directory file names end with '/'
-            mkdirSync(join(this.destinationPath, entry.fileName), {
-              recursive: true
-            })
-            file.readEntry()
-          } else {
-            // Ensure parent directory exists
-            mkdirSync(
-              join(
-                this.destinationPath,
-                entry.fileName.split('/').slice(0, -1).join('/')
-              ),
-              { recursive: true }
-            )
+          this.totalSize = file.fileSize
 
-            file.openReadStream(entry, (err, readStream) => {
-              if (err && this.rejectExtraction) {
-                this.rejectExtraction(err)
-                return
-              }
+          file.readEntry()
+          file.emit('end')
 
-              this.zipFileInstance = file;
-              this.readStream = readStream
-              const writeStream = createWriteStream(
-                join(this.destinationPath, entry.fileName)
-              )
-              readStream.pipe(writeStream)
-              readStream.on('data', (chunk) => {
-                this.onData(chunk.length)
+          file.on('entry', (entry) => {
+            if (this.canceled) {
+              file.close()
+              return
+            }
+
+            if (/\/$/.test(entry.fileName)) {
+              // Directory file names end with '/'
+              mkdirSync(join(this.destinationPath, entry.fileName), {
+                recursive: true
               })
-              writeStream.on('close', () => {
-                if (this.isCanceled) {
-                  file.emit('end')
+              file.readEntry()
+            } else {
+              // Ensure parent directory exists
+              mkdirSync(
+                join(
+                  this.destinationPath,
+                  entry.fileName.split('/').slice(0, -1).join('/')
+                ),
+                { recursive: true }
+              )
 
+              file.openReadStream(entry, (err, readStream) => {
+                if (err && this.rejectExtraction) {
+                  this.rejectExtraction(err)
                   return
                 }
-                file.readEntry()
+
+                this.zipFileInstance = file
+                this.readStream = readStream
+                const writeStream = createWriteStream(
+                  join(this.destinationPath, entry.fileName)
+                )
+                readStream.pipe(writeStream)
+                readStream.on('data', (chunk) => {
+                  this.onData(chunk.length)
+                })
+                writeStream.on('close', () => {
+                  if (this.isCanceled) {
+                    file.emit('end')
+
+                    return
+                  }
+                  file.readEntry()
+                })
               })
-            })
-          }
-        })
+            }
+          })
 
-        file.once('end', () => {
-          if (this.isCanceled) {
-            this.rejectExtraction?.(new Error('Extraction was canceled'))
+          file.once('end', () => {
+            if (this.isCanceled) {
+              this.rejectExtraction?.(new Error('Extraction was canceled'))
 
-            return
-          }
+              return
+            }
 
-          this.onEnd()
+            this.onEnd()
 
-          this.resolveExtraction?.(true)
-        })
+            this.resolveExtraction?.(true)
+          })
 
-        file.once('error', (error) => {
-          this.onError(error);
-        });
-      })
+          file.once('error', (error) => {
+            this.onError(error)
+          })
+        }
+      )
     }).catch((error) => {
       this.onError(error)
     })
@@ -293,7 +297,7 @@ export class ExtractZipService extends EventEmitter {
     } catch (error: unknown) {
       this.rejectExtraction?.(error as Error)
     } finally {
-      this.zipFileInstance = null;
+      this.zipFileInstance = null
       this.extractionPromise = null
       this.resolveExtraction = null
       this.rejectExtraction = null

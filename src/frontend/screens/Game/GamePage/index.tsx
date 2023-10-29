@@ -358,6 +358,7 @@ export default observer(function GamePage(): JSX.Element | null {
             progress={progress}
             folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
             gameInfo={gameInfo}
+            status={status}
           />
         ) : null}
         {gameInfo.runner !== 'sideload' && showModal.show && (

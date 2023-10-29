@@ -14,7 +14,6 @@ import {
   ProgressInfo
 } from 'common/types'
 import axios from 'axios'
-import yauzl from 'yauzl'
 import download from 'backend/utils/downloadFile/download_file'
 import { File, Progress } from 'backend/utils/downloadFile/types'
 
@@ -38,11 +37,7 @@ import {
   appendFileSync,
   existsSync,
   rmSync,
-  mkdirSync,
-  createWriteStream,
-  rm
 } from 'graceful-fs'
-import { EventEmitter } from 'events';
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
@@ -1363,7 +1358,6 @@ function removeFolder(path: string, folderName: string) {
   }
   return
 }
-
 
 export function calculateEta(
   downloadedBytes: number,
