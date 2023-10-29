@@ -75,8 +75,8 @@ const GameCard = ({
     ...gameInstallInfo
   }
 
-  const { status, folder } = hasStatus(appName, gameInfo, size)
-  const { statusText: downloadStatusText, status: downloadStatus } =
+  const { status = '', folder } = hasStatus(appName, gameInfo, size)
+  const { statusText: downloadStatusText } =
     useGetDownloadStatusText(appName, gameInfo)
 
   useEffect(() => {
@@ -100,7 +100,8 @@ const GameCard = ({
     isPlaying,
     notAvailable,
     isUpdating,
-    isPaused
+    isPaused,
+    isExtracting,
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {
@@ -288,6 +289,7 @@ const GameCard = ({
           installPath={folder}
           gameInfo={gameInfo}
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
+          status={status}
         />
       ) : null}
       {showUninstallModal && (
@@ -332,9 +334,7 @@ const GameCard = ({
             window.api.resumeCurrentDownload()
           )}
           onPlayClick={handleClickStopBubbling(async () => mainAction(runner))}
-          onStopDownloadClick={handleClickStopBubbling(async () =>
-            setShowStopInstallModal(true)
-          )}
+          onStopDownloadClick={handleClickStopBubbling(async () => setShowStopInstallModal(true))}
           state={getState()}
           settingsItems={items.filter((val) => val.show).slice(0, 6)}
           showSettings={showSettings}

@@ -249,6 +249,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           installPath={path}
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
           gameInfo={gameInfo}
+          runner={runner}
+          status={status || ''}
           progress={progress}
         />
       ) : null}

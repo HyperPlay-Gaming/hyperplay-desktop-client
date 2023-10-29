@@ -16,6 +16,7 @@ interface StopInstallProps {
   folderName: string
   gameInfo: GameInfo
   progress: InstallProgress
+  status: string
 }
 
 export default function StopInstallationModal(props: StopInstallProps) {
@@ -23,6 +24,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
   const checkbox = useRef<HTMLInputElement>(null)
 
   const { runner, title, app_name } = props.gameInfo
+  const isExtracting = props.status === 'extracting';
 
   return (
     <Dialog onClose={props.onClose} showCloseButton>
@@ -58,6 +60,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
           type="secondary"
           size="large"
           onClick={async () => {
+            console.log('isExtracting', isExtracting)
             // if user wants to keep downloaded files and cancel download
             if (checkbox.current && checkbox.current.checked) {
               props.onClose()
@@ -70,13 +73,25 @@ export default function StopInstallationModal(props: StopInstallProps) {
                 folder: props.installPath
               }
               storage.setItem(app_name, JSON.stringify(latestProgress))
+
+              if (isExtracting) {
+                window.api.cancelExtraction(app_name)
+
+                return 
+              }
+
               window.api.cancelDownload(false)
             }
             // if user does not want to keep downloaded files but still wants to cancel download
             else {
               props.onClose()
-              window.api.cancelDownload(true)
-              storage.removeItem(app_name)
+
+              if (isExtracting) {
+                window.api.cancelExtraction(app_name)
+              } else {
+                window.api.cancelDownload(true)
+              }
+
               window.api.trackEvent({
                 event: 'Game Install Canceled',
                 properties: {
@@ -85,6 +100,8 @@ export default function StopInstallationModal(props: StopInstallProps) {
                   game_name: app_name
                 }
               })
+
+              storage.removeItem(app_name)
             }
           }}
         >
