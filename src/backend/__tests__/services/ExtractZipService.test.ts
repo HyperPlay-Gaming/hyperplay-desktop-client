@@ -26,10 +26,13 @@ jest.mock('graceful-fs', () => ({
         streamCallback(new Array(500).fill(0))
       } else if (event === 'error') {
         streamCallback(new Error('Error'))
+      } else if (event === 'end') {
+        streamCallback()
       }
     })
   }),
   rm: jest.fn(),
+  rmSync: jest.fn(),
   copyFileSync: jest.fn()
 }))
 
@@ -43,6 +46,8 @@ const yauzlMockupLib = (
   const stream = {
     _read: () => null,
     pipe: jest.fn((args) => args),
+    unpipe:  jest.fn(),
+    destroy:  jest.fn(),
     on: jest.fn(
       (
         event: string,
@@ -54,6 +59,8 @@ const yauzlMockupLib = (
           streamCallback(new Array(500).fill(0))
         } else if (event === 'error') {
           streamCallback(new Error('Error'))
+        } else if (event === 'end') {
+          streamCallback()
         }
       }
     )
@@ -63,8 +70,11 @@ const yauzlMockupLib = (
     fileSize,
     readEntry: jest.fn(),
     close: jest.fn(),
+    isOpen: true,
     once: jest.fn((event, streamCallback) => {
       if (event === 'end') {
+        streamCallback()
+      } else if (event === 'error') {
         streamCallback()
       }
     }),
@@ -79,9 +89,9 @@ const yauzlMockupLib = (
     openReadStream: jest.fn((entry, openReadStreamCallback) => {
       openReadStreamCallback(error, stream)
     })
-  }
+  };
 
-  ;(yauzl.open as jest.Mock).mockImplementation(
+  (yauzl.open as jest.Mock).mockImplementation(
     (_path, _options, yauzlOpenCallback) => {
       yauzlOpenCallback(error, mockZipFile)
     }
@@ -162,7 +172,7 @@ describe('ExtractZipService', () => {
     expect(progressListener).not.toHaveBeenCalled()
   })
 
-  it('should have the state as canceled once is canceled', async () => {
+  it('should have the state as canceled once is canceled', () => {
     extractZipService.extract()
     extractZipService.cancel()
 
