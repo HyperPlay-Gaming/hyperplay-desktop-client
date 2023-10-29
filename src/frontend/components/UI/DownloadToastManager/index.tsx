@@ -165,18 +165,18 @@ export default function DownloadToastManager() {
     downloadedMB = Number(progress.bytes)
   }
 
-const title = currentElement?.params.gameInfo.title
-  ? currentElement?.params.gameInfo.title
-  : 'Game'
-const downloadSizeInMB = progress.percent
-  ? (downloadedMB / progress.percent) * 100
-  : 0
-const estimatedCompletionTimeInMs = progress.downSpeed
-  ? (downloadSizeInMB / progress.downSpeed) * 1000
-  : 0
-let imgUrl = currentElement?.params.gameInfo.art_cover
-  ? currentElement?.params.gameInfo.art_cover
-  : ''
+  const title = currentElement?.params.gameInfo.title
+    ? currentElement?.params.gameInfo.title
+    : 'Game'
+  const downloadSizeInMB = progress.percent
+    ? (downloadedMB / progress.percent) * 100
+    : 0
+  const estimatedCompletionTimeInMs = progress.downSpeed
+    ? (downloadSizeInMB / progress.downSpeed) * 1000
+    : 0
+  let imgUrl = currentElement?.params.gameInfo.art_cover
+    ? currentElement?.params.gameInfo.art_cover
+    : ''
 
   if (!imgUrl.includes('http'))
     imgUrl = currentElement.params.gameInfo.art_square
@@ -198,8 +198,8 @@ let imgUrl = currentElement?.params.gameInfo.art_cover
     return 'inProgress'
   }
 
-const adjustedDownloadedInBytes = downloadedMB * 1024 * 1024;
-const adjustedDownloadSizeInBytes = downloadSizeInMB * 1024 * 1024;
+  const adjustedDownloadedInBytes = downloadedMB * 1024 * 1024
+  const adjustedDownloadSizeInBytes = downloadSizeInMB * 1024 * 1024
 
   return (
     <div className={DownloadToastManagerStyles.downloadManagerContainer}>
@@ -207,9 +207,8 @@ const adjustedDownloadSizeInBytes = downloadSizeInMB * 1024 * 1024;
         <DownloadToast
           imgUrl={imgUrl}
           gameTitle={title}
-downloadedInBytes = { adjustedDownloadedInBytes }
-downloadSizeInBytes = { adjustedDownloadSizeInBytes }
-
+          downloadedInBytes={adjustedDownloadedInBytes}
+          downloadSizeInBytes={adjustedDownloadSizeInBytes}
           estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
           onCancelClick={() => {
             setShowStopInstallModal(true)

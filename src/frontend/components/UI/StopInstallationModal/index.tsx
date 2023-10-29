@@ -17,13 +17,13 @@ interface StopInstallProps {
   appName: string
   runner: Runner
   progress: InstallProgress
-  status: string
+  status?: string
 }
 
 export default function StopInstallationModal(props: StopInstallProps) {
   const { t } = useTranslation('gamepage')
   const checkbox = useRef<HTMLInputElement>(null)
-  const isExtracting = props.status === 'extracting';
+  const isExtracting = props.status === 'extracting'
 
   return (
     <Dialog onClose={props.onClose} showCloseButton>
@@ -76,7 +76,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
               if (isExtracting) {
                 window.api.cancelExtraction(props.appName)
 
-                return 
+                return
               }
 
               window.api.cancelDownload(false)

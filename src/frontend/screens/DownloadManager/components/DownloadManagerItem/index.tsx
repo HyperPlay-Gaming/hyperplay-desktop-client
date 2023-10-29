@@ -250,7 +250,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
           appName={appName}
           runner={runner}
-          status={status || ''}
+          status={status}
           progress={progress}
         />
       ) : null}
