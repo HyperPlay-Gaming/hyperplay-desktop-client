@@ -253,6 +253,7 @@ downloadSizeInBytes = { adjustedDownloadSizeInBytes }
           folderName={folder_name}
           progress={progress}
           runner={runner}
+          status={status}
           onClose={() => setShowStopInstallModal(false)}
         />
       ) : null}
