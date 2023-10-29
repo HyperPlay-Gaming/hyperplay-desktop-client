@@ -17,11 +17,14 @@ interface StopInstallProps {
   appName: string
   runner: Runner
   progress: InstallProgress
+  status: string
 }
 
 export default function StopInstallationModal(props: StopInstallProps) {
   const { t } = useTranslation('gamepage')
   const checkbox = useRef<HTMLInputElement>(null)
+  const isExtracting = props.status === 'extracting';
+
   return (
     <Dialog onClose={props.onClose} showCloseButton>
       <DialogHeader onClose={props.onClose}>
@@ -56,6 +59,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
           type="secondary"
           size="large"
           onClick={async () => {
+            console.log('isExtracting', isExtracting)
             // if user wants to keep downloaded files and cancel download
             if (checkbox.current && checkbox.current.checked) {
               props.onClose()
@@ -68,12 +72,25 @@ export default function StopInstallationModal(props: StopInstallProps) {
                 folder: props.installPath
               }
               storage.setItem(props.appName, JSON.stringify(latestProgress))
+
+              if (isExtracting) {
+                window.api.cancelExtraction(props.appName)
+
+                return 
+              }
+
               window.api.cancelDownload(false)
             }
             // if user does not want to keep downloaded files but still wants to cancel download
             else {
               props.onClose()
-              window.api.cancelDownload(true)
+
+              if (isExtracting) {
+                window.api.cancelExtraction(props.appName)
+              } else {
+                window.api.cancelDownload(true)
+              }
+
               storage.removeItem(props.appName)
             }
           }}
