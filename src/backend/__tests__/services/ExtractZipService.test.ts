@@ -162,7 +162,7 @@ describe('ExtractZipService', () => {
     expect(progressListener).not.toHaveBeenCalled()
   })
 
-  it('should have the state as cancelled once is cancelled', async () => {
+  it('should have the state as canceled once is canceled', async () => {
     extractZipService.extract()
     extractZipService.cancel()
 
