@@ -252,6 +252,7 @@ downloadSizeInBytes = { adjustedDownloadSizeInBytes }
           folderName={folder_name}
           progress={progress}
           gameInfo={gameInfo}
+          status={status}
           onClose={() => setShowStopInstallModal(false)}
         />
       ) : null}
