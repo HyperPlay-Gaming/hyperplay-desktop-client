@@ -2,6 +2,7 @@ import axios from 'axios'
 import { app } from 'electron'
 import * as utils from '../utils'
 import { test_data } from './test_data/github-api-heroic-test-data.json'
+import { logError } from '../logger/logger'
 
 jest.mock('electron')
 jest.mock('../logger/logger')
