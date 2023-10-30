@@ -22,6 +22,7 @@ export interface ExtractZipProgressResponse {
 export class ExtractZipService extends EventEmitter {
   private readStream: Readable | null = null
   private canceled = false
+  private paused = false
   private totalSize = 0
   private processedSize = 0
   private startTime = Date.now()
@@ -55,7 +56,7 @@ export class ExtractZipService extends EventEmitter {
    * @returns {boolean} - Current state
    */
   get isPaused(): boolean {
-    return this.readStream?.isPaused() || false
+    return this.paused;
   }
 
   /**
@@ -75,12 +76,24 @@ export class ExtractZipService extends EventEmitter {
   }
 
   /**
+   * Check if can progress
+   * @returns {boolean}
+   */
+  private get canProgress(): boolean {
+    return !(this.canceled || this.paused)
+  }
+
+  /**
    * Pause the extraction process.
    * @returns {void}
    */
   public pause(): void {
     if (!this.isPaused) {
+      this.paused = true;
+
       this.readStream?.pause()
+
+      this.emit('paused', this.computeProgress())
     }
   }
 
@@ -94,8 +107,12 @@ export class ExtractZipService extends EventEmitter {
     }
 
     if (this.isPaused) {
+      this.paused = false;
+
       this.readStream?.resume()
     }
+
+    this.emit('resumed', this.computeProgress())
 
     return this.extractionPromise
   }
@@ -105,19 +122,25 @@ export class ExtractZipService extends EventEmitter {
    * @returns {void}
    */
   public cancel() {
+    if (!this.zipFileInstance?.isOpen) {
+      throw new Error('Extraction has not started or has already completed.')
+    }
+
     this.canceled = true
 
-    if (this.readStream) {
-      this.readStream.unpipe()
+    this.readStream?.unpipe()
 
-      this.readStream.destroy(new Error('Extraction canceled'))
-    }
+    this.readStream?.destroy(new Error('Extraction canceled'))
 
     if (this.zipFileInstance && this.zipFileInstance.isOpen) {
       this.zipFileInstance.close()
     }
 
-    this.onCancel()
+    this.emit('canceled')
+
+    rmSync(this.source, { recursive: true, force: true })
+
+    this.removeAllListeners()
   }
 
   /**
@@ -147,7 +170,7 @@ export class ExtractZipService extends EventEmitter {
    * @param {number} chunkLength - The length of the data chunk being processed.
    */
   private onData(chunkLength: number) {
-    if (this.isCanceled) {
+    if (!this.canProgress) {
       return
     }
 
@@ -171,19 +194,7 @@ export class ExtractZipService extends EventEmitter {
       return
     }
 
-    this.emit('end', this.computeProgress())
-
-    rmSync(this.source, { recursive: true, force: true })
-
-    this.removeAllListeners()
-  }
-
-  /**
-   * Handles cancel events during extraction.
-   * @private
-   */
-  private onCancel() {
-    this.emit('canceled')
+    this.emit('finished', this.computeProgress())
 
     rmSync(this.source, { recursive: true, force: true })
 
@@ -205,7 +216,7 @@ export class ExtractZipService extends EventEmitter {
 
   /**
    * Extracts the ZIP file to the specified destination.
-   * @returns {Promise<void>} - A promise that resolves when the extraction is complete.
+   * @returns {Promise<boolean | void>} - A promise that resolves when the extraction is complete.
    */
   async extract() {
     this.extractionPromise = new Promise<boolean | void>((resolve, reject) => {
@@ -225,7 +236,6 @@ export class ExtractZipService extends EventEmitter {
           this.totalSize = file.fileSize
 
           this.zipFileInstance.readEntry()
-          //this.zipFileInstance.emit('end')
 
           this.zipFileInstance.on('entry', (entry) => {
             if (this.isCanceled) {
@@ -265,8 +275,6 @@ export class ExtractZipService extends EventEmitter {
                 })
                 writeStream.once('close', () => {
                   if (this.isCanceled) {
-                    this.zipFileInstance?.emit('end')
-
                     return
                   }
                   this.zipFileInstance?.readEntry()
@@ -277,8 +285,6 @@ export class ExtractZipService extends EventEmitter {
 
           this.zipFileInstance.once('end', () => {
             if (this.isCanceled) {
-              this.rejectExtraction?.(new Error('Extraction was canceled'))
-
               return
             }
 
