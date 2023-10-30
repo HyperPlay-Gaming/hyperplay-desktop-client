@@ -32,6 +32,7 @@ import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
 import AchievementsLayout from './screens/Achievements/AchievementsLayout'
 import GameAchievementDetails from './screens/Achievements/GameAchievementDetails'
+import { ENABLE_AMAZON_STORE } from './constants'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
@@ -82,7 +83,9 @@ function App() {
             />
             <Route path="epicstore" element={<WebView key="epicstore" />} />
             <Route path="gogstore" element={<WebView key="gogstore" />} />
-            <Route path="amazonstore" element={<WebView />} />
+            {ENABLE_AMAZON_STORE ? (
+              <Route path="amazonstore" element={<WebView />} />
+            ) : null}
             <Route path="wiki" element={<WebView key="wiki" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
             <Route

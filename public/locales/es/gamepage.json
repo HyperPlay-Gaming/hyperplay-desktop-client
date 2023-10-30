@@ -152,7 +152,8 @@
         "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "login": "Log in",
-        "title": "You are NOT logged in"
+        "title": "You are NOT logged in",
+        "amazon": "No has iniciado sesión con una cuenta de Amazon en Heroic. No utilices la página de la tienda para iniciar sesión, haz clic en el siguiente botón en su lugar:"
     },
     "report_problem": "Reportar un problema ejecutando este juego",
     "sdl": {
@@ -206,7 +207,9 @@
         "moving-files": "Moviendo el archivo '{{file}}': {{percent}} ",
         "playing": "Reproduciendo",
         "downloading": "Descargando",
-        "extracting": "Extrayendo"
+        "extracting": "Extrayendo",
+        "gog-goodie": "Este juego no parece ser instalable. Comprueba el contenido descargable en https://gog.com/account",
+        "goodie": "No se puede instalar"
     },
     "submenu": {
         "addShortcut": "Añadir acceso directo",

@@ -89,7 +89,7 @@ export function initLogger() {
   // listen to the settingChanged event, log change and enable/disable logging if needed
   backendEvents.on('settingChanged', ({ key, oldValue, newValue }) => {
     logInfo(
-      `Heroic: Setting ${key} to ${JSON.stringify(
+      `Hyperplay: Setting ${key} to ${JSON.stringify(
         newValue
       )} (previous value: ${JSON.stringify(oldValue)})`,
       { forceLog: true }

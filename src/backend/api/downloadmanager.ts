@@ -81,5 +81,5 @@ export const cancelDownload = (removeDownloaded: boolean) =>
 export const resumeCurrentDownload = () =>
   ipcRenderer.send('resumeCurrentDownload')
 
-export const pauseCurrentDownload = () =>
-  ipcRenderer.send('pauseCurrentDownload')
+export const pauseCurrentDownload = async () =>
+  ipcRenderer.invoke('pauseCurrentDownload')
