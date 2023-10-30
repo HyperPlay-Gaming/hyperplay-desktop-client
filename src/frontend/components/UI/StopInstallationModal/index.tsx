@@ -59,7 +59,6 @@ export default function StopInstallationModal(props: StopInstallProps) {
           type="secondary"
           size="large"
           onClick={async () => {
-            console.log('isExtracting', isExtracting)
             // if user wants to keep downloaded files and cancel download
             if (checkbox.current && checkbox.current.checked) {
               props.onClose()
