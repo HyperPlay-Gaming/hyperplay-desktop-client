@@ -625,8 +625,7 @@ export default observer(function GamePage(): JSX.Element | null {
                       isReparing ||
                       isMoving ||
                       isUninstalling ||
-                      notSupportedGame ||
-                      isExtracting
+                      notSupportedGame
                     }
                     autoFocus={true}
                     type={getButtonClass(is_installed)}
@@ -775,10 +774,6 @@ export default observer(function GamePage(): JSX.Element | null {
       return `${t('status.moving', 'Moving Installation, please wait')} ...`
     }
 
-    if (isExtracting) {
-      return `${t('status.extracting', 'Extracting files')}...`
-    }
-
     const currentProgress =
       getProgress(progress) >= 99
         ? ''
@@ -798,6 +793,10 @@ export default observer(function GamePage(): JSX.Element | null {
         return `${t('status.reparing')}: ${percent} [${bytes}]`
       }
       return `${t('status.updating')} ${currentProgress}`
+    }
+
+    if (isExtracting) {
+      return `${t('status.extracting')} ${currentProgress}`
     }
 
     if (!isUpdating && isInstalling) {
@@ -863,7 +862,7 @@ export default observer(function GamePage(): JSX.Element | null {
       return t('submenu.settings')
     }
     if (isExtracting) {
-      return t('status.extracting', 'Extracting files')
+      return t('status.extracting.cancel', 'Cancel Extraction')
     }
     if (isInstalling || isPreparing) {
       return t('button.queue.cancel', 'Cancel Download')
@@ -906,6 +905,11 @@ export default observer(function GamePage(): JSX.Element | null {
     if (isInstalling) {
       setShowStopInstallModal(true)
       return
+    }
+
+    if (isExtracting) {
+      storage.removeItem(appName)
+      return window.api.cancelExtraction(appName);
     }
 
     // open install dialog
