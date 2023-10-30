@@ -694,7 +694,7 @@ export async function install(
         }
       )
       extractService.once(
-        'end',
+        'finished',
         async ({
           progressPercentage,
           speed,
