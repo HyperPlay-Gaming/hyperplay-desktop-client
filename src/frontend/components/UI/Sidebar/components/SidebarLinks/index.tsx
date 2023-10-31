@@ -9,10 +9,10 @@ import { Images } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import { observer } from 'mobx-react-lite'
 import storeAuthState from 'frontend/state/storeAuthState'
+import AchievementStoreState from 'frontend/state/AchievementStoreState'
 
 export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
-  const [showAchievements, setShowAchievements] = useState<boolean>(false)
 
   const { activeController, handleExternalLinkDialog } =
     useContext(ContextProvider)
@@ -23,13 +23,6 @@ export default observer(function SidebarLinks() {
 
   useEffect(() => {
     window.api.isFullscreen().then((res) => setIsFullscreen(res))
-
-    const shouldShowAchievements = async () => {
-      const shouldShow = await window.api.shouldShowAchievements()
-      setShowAchievements(shouldShow)
-    }
-
-    shouldShowAchievements()
   }, [])
 
   async function handleRefresh() {
@@ -90,7 +83,7 @@ export default observer(function SidebarLinks() {
             <Images.Controller fill={sidebarSvgUnselectedFill} />
           </NavLink>
         </div>
-        {showAchievements && (
+        {AchievementStoreState.showAchievements && (
           <div className="sidebarLinkGradientWrapper">
             <NavLink
               className={({ isActive }) =>

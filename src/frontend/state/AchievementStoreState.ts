@@ -30,6 +30,8 @@ class AchievementStoreState {
     totalPages: 0,
     currentPage: 0
   }
+  // Achievements Feature Flag
+  showAchievements = false
 
   constructor() {
     makeAutoObservable(this)
@@ -37,6 +39,9 @@ class AchievementStoreState {
 
   init() {
     this.syncAchievements(this.store)
+    window.api
+      .shouldShowAchievements()
+      .then((res) => (this.showAchievements = res))
   }
 
   getAchievementsStats = () => {
