@@ -35,7 +35,9 @@ const AchievementStore = createContext<AchievementStoreType>({
   totalAchievements: 0,
   totalGames: 0,
   numFreeMints: 0,
-  syncAchievements: () => { return }
+  syncAchievements: () => {
+    return
+  }
 })
 
 interface AchievementStoreProviderProps {
@@ -59,13 +61,16 @@ const AchievementStoreProvider: React.FC<AchievementStoreProviderProps> = ({
     return store === 'STEAM' ? steamId : ''
   }, [store, steamId])
 
-  const syncAchievements = useCallback((store: StoreType) => {
-    window.api.syncAchievements({
-      store,
-      playerStoreId,
-      playerAddress: walletStore.address
-    })
-  }, [playerStoreId, walletStore.address])
+  const syncAchievements = useCallback(
+    (store: StoreType) => {
+      window.api.syncAchievements({
+        store,
+        playerStoreId,
+        playerAddress: walletStore.address
+      })
+    },
+    [playerStoreId, walletStore.address]
+  )
 
   useEffect(() => {
     const getAchievements = async () => {

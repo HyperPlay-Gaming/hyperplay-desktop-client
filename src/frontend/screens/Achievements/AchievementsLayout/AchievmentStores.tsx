@@ -8,7 +8,8 @@ import { useAchievementStore } from '../AchievementStoreContext'
 import classNames from 'classnames'
 
 export const AchievementStores = () => {
-  const { store, setStore, totalGames, syncAchievements } = useAchievementStore()
+  const { store, setStore, totalGames, syncAchievements } =
+    useAchievementStore()
 
   const activeSecondaryText = `${totalGames} Games`
   const isSteam = store === 'STEAM'
@@ -23,7 +24,11 @@ export const AchievementStores = () => {
             secondaryText={isSteam ? activeSecondaryText : '0 Games'}
           >
             <div>
-              <button onClick={() => { if (isSteam) setStore('STEAM') }}>
+              <button
+                onClick={() => {
+                  if (isSteam) setStore('STEAM')
+                }}
+              >
                 {isSteam ? <Images.Eye /> : <Images.EyeOff />}
               </button>
               <button onClick={() => syncAchievements('STEAM')}>
