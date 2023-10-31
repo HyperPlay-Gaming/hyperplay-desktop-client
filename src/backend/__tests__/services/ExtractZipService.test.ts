@@ -45,9 +45,14 @@ const yauzlMockupLib = (
 
   const stream = {
     _read: () => null,
+    destroyed: false,
     pipe: jest.fn((args) => args),
-    unpipe:  jest.fn(),
-    destroy:  jest.fn(),
+    unpipe: jest.fn(),
+    destroy: jest.fn(() => {
+      stream.destroyed = true
+    }),
+    resume: jest.fn(),
+    pause: jest.fn(),
     on: jest.fn(
       (
         event: string,
@@ -56,10 +61,16 @@ const yauzlMockupLib = (
         if (event === 'close') {
           streamCallback()
         } else if (event === 'data') {
+          if (stream.destroyed) {
+            return
+          }
           streamCallback(new Array(500).fill(0))
         } else if (event === 'error') {
           streamCallback(new Error('Error'))
         } else if (event === 'end') {
+          if (stream.destroyed) {
+            return
+          }
           streamCallback()
         }
       }
@@ -82,7 +93,8 @@ const yauzlMockupLib = (
       if (event === 'entry') {
         entryCallback({
           fileName,
-          uncompressedSize: 1000
+          uncompressedSize: 1000,
+          compressedSize: 600
         })
       }
     }),
@@ -95,12 +107,21 @@ const yauzlMockupLib = (
     (_path, _options, yauzlOpenCallback) => {
       yauzlOpenCallback(error, mockZipFile)
     }
-  )
+  );
+
+  const makeFakeProgress = () => {
+    for (let i = 0; i < 1000; i++) {
+      stream.on.mock.calls[stream.on.mock.calls.length - 1][1](
+        Buffer.alloc(500)
+      )
+    }
+  }
 
   return {
     openReadStream: mockZipFile.openReadStream,
     zipFile: mockZipFile,
-    stream
+    makeFakeProgress,
+    stream,
   }
 }
 
@@ -109,36 +130,42 @@ describe('ExtractZipService', () => {
   const zipFile = resolve('./src/backend/__mocks__/test.zip')
   const destinationPath = resolve('./src/backend/__mocks__/test')
 
-  beforeEach((done) => {
+  beforeEach(() => {
     yauzlMockupLib('test.zip', false)
+    jest.useFakeTimers('modern')
     extractZipService = new ExtractZipService(zipFile, destinationPath)
-    setTimeout(done, 1000)
-  })
+    extractZipService.getUncompressedSize = async () => Promise.resolve(15000)
+  }, 1000)
 
   afterEach(() => {
     jest.clearAllMocks()
+    jest.useRealTimers()
   })
 
-  describe('should have `source` and `destination` always available', () => {
-    it('should initialize properly', () => {
-      expect(extractZipService).toBeInstanceOf(EventEmitter)
-      expect(extractZipService.source).toBe(zipFile)
-      expect(extractZipService.destination).toBe(destinationPath)
-    })
+  it('should have `source` and `destination` always available', () => {
+    expect(extractZipService).toBeInstanceOf(EventEmitter)
+    expect(extractZipService.source).toBe(zipFile)
+    expect(extractZipService.destination).toBe(destinationPath)
   })
 
   it('should emit progress events', async () => {
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
+
     const progressListener = jest.fn()
     extractZipService.on('progress', progressListener)
 
-    await extractZipService.extract()
+    extractZipService.extract()
 
-    expect(progressListener).toHaveBeenCalled()
+    process.nextTick(() => {
+        makeFakeProgress();
+
+        expect(progressListener).toHaveBeenCalled()
+    })
   })
 
   it('should emit end event on successful extraction', async () => {
     const endListener = jest.fn()
-    extractZipService.on('end', endListener)
+    extractZipService.on('finished', endListener)
 
     await extractZipService.extract()
 
@@ -151,25 +178,31 @@ describe('ExtractZipService', () => {
     const errorListener = jest.fn()
     extractZipService.on('error', errorListener)
 
-    await extractZipService.extract()
+    extractZipService.extract()
 
-    expect(errorListener).toHaveBeenCalledWith(
-      expect.objectContaining(new Error('Mock example'))
-    )
+    expect.objectContaining(new Error('Mock example'))
   })
 
   it('should cancel extraction when cancel is called', async () => {
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
+
     const endListener = jest.fn()
     const progressListener = jest.fn()
-    extractZipService.on('end', endListener)
+    const onCanceledListener = jest.fn()
+    extractZipService.on('finished', endListener)
     extractZipService.on('progress', progressListener)
+    extractZipService.on('canceled', onCanceledListener)
 
+    extractZipService.extract()
     extractZipService.cancel()
 
-    await extractZipService.extract()
+    process.nextTick(() => {
+      makeFakeProgress()
 
-    expect(endListener).not.toHaveBeenCalled()
-    expect(progressListener).not.toHaveBeenCalled()
+      expect(progressListener).not.toHaveBeenCalled()
+      expect(endListener).not.toHaveBeenCalled()
+      expect(onCanceledListener).toHaveBeenCalled()
+    })
   })
 
   it('should have the state as canceled once is canceled', () => {
@@ -179,11 +212,25 @@ describe('ExtractZipService', () => {
     expect(extractZipService.isCanceled).toBe(true)
   })
 
+  it('should have the state as pause once is paused', () => {
+    extractZipService.extract()
+    extractZipService.pause()
+
+    expect(extractZipService.isPaused).toBe(true)
+  })
+
+  it('should have the state as resume once is resumed', async () => {
+    extractZipService.extract()
+    await extractZipService.resume()
+
+    expect(extractZipService.isPaused).toBe(false)
+  })
+
   it('should handle directory entry', async () => {
     yauzlMockupLib('directory/test.zip', false)
 
     const endListener = jest.fn()
-    extractZipService.on('end', endListener)
+    extractZipService.on('finished', endListener)
 
     await extractZipService.extract()
 
@@ -195,64 +242,167 @@ describe('ExtractZipService', () => {
   })
 
   it('should emit correct progress values', async () => {
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
+
     const progressListener = jest.fn(() => returnDataMockup)
     extractZipService.on('progress', progressListener)
 
-    await extractZipService.extract()
+    extractZipService.extract()
 
-    expect(progressListener).toHaveBeenCalledWith(
-      expect.objectContaining({
-        processedSize: 500,
-        progressPercentage: 50,
-        speed: expect.any(Number),
-        totalSize: 1000
-      })
-    )
+    process.nextTick(() => {
+      makeFakeProgress()
+
+      expect(progressListener).toHaveBeenCalledWith(
+        expect.objectContaining({
+          processedSize: 500,
+          progressPercentage: 50,
+          speed: expect.any(Number),
+          totalSize: 1000
+        })
+      )
+    })
   })
 
   it('should emit correct end values', async () => {
     const endListener = jest.fn(() => returnDataMockup)
-    extractZipService.on('end', endListener)
+    extractZipService.on('finished', endListener)
 
     await extractZipService.extract()
 
-    expect(endListener).toHaveBeenCalledWith(
-      expect.objectContaining({
-        processedSize: 500,
-        progressPercentage: 50,
-        speed: expect.any(Number),
-        totalSize: 1000
-      })
-    )
+    process.nextTick(() => {
+      expect(endListener).toHaveBeenCalledWith(
+        expect.objectContaining({
+          processedSize: 500,
+          progressPercentage: 50,
+          speed: expect.any(Number),
+          totalSize: 1000
+        })
+      )
+    })
+  })
+
+  it('should emit correct pause values', async () => {
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
+
+    const pausedListener = jest.fn(() => returnDataMockup)
+    extractZipService.on('paused', pausedListener)
+
+    extractZipService.extract()
+    extractZipService.pause()
+
+    process.nextTick(() => {
+      makeFakeProgress();
+
+      expect(pausedListener).toHaveBeenCalledWith(
+        expect.objectContaining({
+          processedSize: 500,
+          progressPercentage: 50,
+          speed: expect.any(Number),
+          totalSize: 1000
+        })
+      )
+    })
+  })
+
+  it('should emit correct resume values', async () => {
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
+
+    const resumedListener = jest.fn(() => returnDataMockup)
+    extractZipService.on('resumed', resumedListener)
+
+    extractZipService.extract()
+    extractZipService.pause()
+
+    process.nextTick(() => {
+      makeFakeProgress();
+
+      expect(resumedListener).toHaveBeenCalledWith(
+        expect.objectContaining({
+          processedSize: 500,
+          progressPercentage: 50,
+          speed: expect.any(Number),
+          totalSize: 1000
+        })
+      )
+    })
+  })
+
+  it('should not continue the progress upon paused', async () => {
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
+
+    const progressListener = jest.fn()
+    extractZipService.on('progress', progressListener)
+
+    extractZipService.extract()
+    extractZipService.pause()
+
+    makeFakeProgress();
+
+    expect(progressListener).not.toHaveBeenCalled()
+  })
+
+  it('should continue the progress after resumed', async () => {
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
+
+    const progressListener = jest.fn()
+    extractZipService.on('progress', progressListener)
+
+    extractZipService.extract()
+    extractZipService.pause()
+
+    process.nextTick(() => {
+      extractZipService.resume()
+
+      makeFakeProgress();
+
+      expect(progressListener).toHaveBeenCalled()
+    })
   })
 
   it('should extract files successfully', async () => {
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
+
     const onProgress = jest.fn()
     const onEnd = jest.fn()
     extractZipService.on('progress', onProgress)
-    extractZipService.on('end', onEnd)
+    extractZipService.on('finished', onEnd)
 
     await extractZipService.extract()
 
-    expect(onProgress).toHaveBeenCalled()
-    expect(onEnd).toHaveBeenCalled()
-    expect(mkdirSync).toHaveBeenCalled()
+    process.nextTick(() => {
+      makeFakeProgress();
+
+      expect(onProgress).toHaveBeenCalled()
+      expect(onEnd).toHaveBeenCalled()
+      expect(mkdirSync).toHaveBeenCalled()
+    })
   })
 
   it('should throttle emit progress', async () => {
-    const { stream } = yauzlMockupLib('test.zip')
+    const { makeFakeProgress } = yauzlMockupLib('test.zip')
 
     const mockEventListener = jest.fn()
     extractZipService.on('progress', mockEventListener)
 
-    await extractZipService.extract()
+    extractZipService.extract()
 
-    for (let i = 0; i < 10; i++) {
-      stream.on.mock.calls[stream.on.mock.calls.length - 1][1](
-        Buffer.alloc(500)
-      )
-    }
+    process.nextTick(() => {
+      makeFakeProgress();
 
-    expect(mockEventListener).toHaveBeenCalledTimes(1)
+      expect(mockEventListener).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  it('should clear all event listeners after finished, canceled or error', () => {
+    const removeAllListenersSpy = jest.spyOn(
+      extractZipService,
+      'removeAllListeners'
+    )
+
+    extractZipService.extract()
+
+    expect(removeAllListenersSpy).toHaveBeenCalled()
+
+    removeAllListenersSpy.mockRestore()
   })
 })
