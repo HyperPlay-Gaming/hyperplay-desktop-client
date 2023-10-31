@@ -101,6 +101,19 @@ function getDefaultInstallPath() {
   return defaultInstallPath
 }
 
+/**
+ * Temporary we will need to have this information pre-computed and attached the manifest.
+ * @return {number} - Total size uncompressed estimated based on platform (windows: zip, winrar 60-80%, mac: zip 70-90%, linux: 60-80% )
+ */
+const estimateUncompressedSize = (platform: string, compressedSize: number) => {
+    const baseEstimate = compressedSize * 2;
+    const gapPercentage = platform === 'osx' ? 0.05 : 0.1;
+
+    const gap = baseEstimate * gapPercentage;
+  
+    return baseEstimate + gap;
+}
+
 export default function DownloadDialog({
   backdropClick,
   appName,
@@ -159,6 +172,8 @@ export default function DownloadDialog({
 
   const { i18n, t } = useTranslation('gamepage')
   const { t: tr } = useTranslation()
+  
+  const uncompressedSize = estimateUncompressedSize(platformToInstall, gameInstallInfo?.manifest?.disk_size || 0)
 
   const haveSDL = sdls.length > 0
 
@@ -300,21 +315,19 @@ export default function DownloadDialog({
 
   useEffect(() => {
     const getSpace = async () => {
-      const { message, free, validPath } = await window.api.checkDiskSpace(
-        installPath
-      )
+      const { message, free, validPath } = await window.api.checkDiskSpace(installPath)
       if (gameInstallInfo?.manifest?.disk_size) {
-        let notEnoughDiskSpace = free < gameInstallInfo.manifest.disk_size
+        let notEnoughDiskSpace = free < uncompressedSize
         let spaceLeftAfter = size(
-          free - Number(gameInstallInfo.manifest.disk_size)
+          free - Number(uncompressedSize)
         )
         if (previousProgress.folder === installPath) {
           const progress = 100 - getProgress(previousProgress)
           notEnoughDiskSpace =
-            free < (progress / 100) * Number(gameInstallInfo.manifest.disk_size)
+            free < (progress / 100) * Number(uncompressedSize)
 
           spaceLeftAfter = size(
-            free - (progress / 100) * Number(gameInstallInfo.manifest.disk_size)
+            free - (progress / 100) * Number(uncompressedSize)
           )
         }
 
@@ -327,7 +340,7 @@ export default function DownloadDialog({
       }
     }
     getSpace()
-  }, [installPath, gameInstallInfo?.manifest?.disk_size])
+  }, [installPath, uncompressedSize, gameInstallInfo?.manifest?.disk_size])
 
   const haveDLCs: boolean =
     gameInstallInfo?.game?.owned_dlc !== undefined &&
@@ -351,7 +364,7 @@ export default function DownloadDialog({
 
   const installSize =
     gameInstallInfo?.manifest?.disk_size !== undefined &&
-    size(Number(gameInstallInfo?.manifest?.disk_size))
+    size(uncompressedSize)
 
   const getLanguageName = useMemo(() => {
     return (language: string) => {
