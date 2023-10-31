@@ -92,8 +92,12 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     platformToInstall
   } = params
 
-  const [gameInfo, setGameInfo] = useState(DmGameInfo);
-  const { status: gameProgressStatus = '' } = hasStatus(appName, DmGameInfo, (size || '0'));
+  const [gameInfo, setGameInfo] = useState(DmGameInfo)
+  const { status: gameProgressStatus = '' } = hasStatus(
+    appName,
+    DmGameInfo,
+    size || '0'
+  )
 
   useEffect(() => {
     const getNewInfo = async () => {
@@ -113,7 +117,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       }
     }
     getNewInfo()
-  }, [element]);
+  }, [element])
 
   const {
     art_cover,
@@ -121,11 +125,11 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     install: { is_dlc }
   } = gameInfo || {}
 
-  const [progress] = hasProgress(appName);
-  const { status } = element;
-  const finished = status === 'done';
-  const canceled = status === 'error' || (status === 'abort' && !current);
-  const isExtracting = gameProgressStatus === 'extracting';
+  const [progress] = hasProgress(appName)
+  const { status } = element
+  const finished = status === 'done'
+  const canceled = status === 'error' || (status === 'abort' && !current)
+  const isExtracting = gameProgressStatus === 'extracting'
 
   const goToGamePage = () => {
     if (is_dlc) {
@@ -181,7 +185,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       return <PauseIcon className="pauseIcon" />
     }
 
-    return <></>;
+    return <></>
   }
 
   const getTime = () => {

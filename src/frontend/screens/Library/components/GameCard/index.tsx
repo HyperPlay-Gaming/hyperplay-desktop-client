@@ -106,7 +106,7 @@ const GameCard = ({
     notAvailable,
     isUpdating,
     isPaused,
-    isExtracting,
+    isExtracting
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {

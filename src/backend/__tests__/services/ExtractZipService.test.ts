@@ -101,13 +101,13 @@ const yauzlMockupLib = (
     openReadStream: jest.fn((entry, openReadStreamCallback) => {
       openReadStreamCallback(error, stream)
     })
-  };
+  }
 
-  (yauzl.open as jest.Mock).mockImplementation(
+  ;(yauzl.open as jest.Mock).mockImplementation(
     (_path, _options, yauzlOpenCallback) => {
       yauzlOpenCallback(error, mockZipFile)
     }
-  );
+  )
 
   const makeFakeProgress = () => {
     for (let i = 0; i < 1000; i++) {
@@ -121,7 +121,7 @@ const yauzlMockupLib = (
     openReadStream: mockZipFile.openReadStream,
     zipFile: mockZipFile,
     makeFakeProgress,
-    stream,
+    stream
   }
 }
 
@@ -157,9 +157,9 @@ describe('ExtractZipService', () => {
     extractZipService.extract()
 
     process.nextTick(() => {
-        makeFakeProgress();
+      makeFakeProgress()
 
-        expect(progressListener).toHaveBeenCalled()
+      expect(progressListener).toHaveBeenCalled()
     })
   })
 
@@ -291,7 +291,7 @@ describe('ExtractZipService', () => {
     extractZipService.pause()
 
     process.nextTick(() => {
-      makeFakeProgress();
+      makeFakeProgress()
 
       expect(pausedListener).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -314,7 +314,7 @@ describe('ExtractZipService', () => {
     extractZipService.pause()
 
     process.nextTick(() => {
-      makeFakeProgress();
+      makeFakeProgress()
 
       expect(resumedListener).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -336,7 +336,7 @@ describe('ExtractZipService', () => {
     extractZipService.extract()
     extractZipService.pause()
 
-    makeFakeProgress();
+    makeFakeProgress()
 
     expect(progressListener).not.toHaveBeenCalled()
   })
@@ -353,7 +353,7 @@ describe('ExtractZipService', () => {
     process.nextTick(() => {
       extractZipService.resume()
 
-      makeFakeProgress();
+      makeFakeProgress()
 
       expect(progressListener).toHaveBeenCalled()
     })
@@ -370,7 +370,7 @@ describe('ExtractZipService', () => {
     await extractZipService.extract()
 
     process.nextTick(() => {
-      makeFakeProgress();
+      makeFakeProgress()
 
       expect(onProgress).toHaveBeenCalled()
       expect(onEnd).toHaveBeenCalled()
@@ -387,7 +387,7 @@ describe('ExtractZipService', () => {
     extractZipService.extract()
 
     process.nextTick(() => {
-      makeFakeProgress();
+      makeFakeProgress()
 
       expect(mockEventListener).toHaveBeenCalledTimes(1)
     })

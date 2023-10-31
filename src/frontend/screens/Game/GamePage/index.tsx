@@ -909,7 +909,7 @@ export default observer(function GamePage(): JSX.Element | null {
 
     if (isExtracting) {
       storage.removeItem(appName)
-      return window.api.cancelExtraction(appName);
+      return window.api.cancelExtraction(appName)
     }
 
     // open install dialog
