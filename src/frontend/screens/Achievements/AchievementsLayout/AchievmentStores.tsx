@@ -9,6 +9,7 @@ import classNames from 'classnames'
 import { observer } from 'mobx-react-lite'
 import AchievementStoreState from 'frontend/state/AchievementStoreState'
 import useSetting from 'frontend/hooks/useSetting'
+import walletStore from 'frontend/store/WalletStore'
 
 export const AchievementStores = observer(() => {
   const [steamId] = useSetting('steamId', '')
@@ -24,7 +25,7 @@ export const AchievementStores = observer(() => {
     setPlayerStoreId(steamId)
     getAchievementsStats()
     syncAchievements('STEAM')
-  }, [steamId])
+  }, [steamId, walletStore.address])
 
   const activeSecondaryText = `${totalGames} Games`
   const isSteam = store === 'STEAM'
