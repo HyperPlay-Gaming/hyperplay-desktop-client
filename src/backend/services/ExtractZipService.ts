@@ -31,9 +31,8 @@ export class ExtractZipService extends EventEmitter {
 
   private zipFileInstance: ZipFile | null = null
   private extractionPromise: Promise<boolean | void> | null = null
-  private resolveExtraction: ((value: boolean) => void) | null = () => null
-  private rejectExtraction: ((reason: Error | unknown) => void) | null = () =>
-    null
+  private resolveExtraction: ((value: boolean) => void) | null = null
+  private rejectExtraction: ((reason: Error | unknown) => void) | null = null
 
   /**
    * Creates an instance of ExtractZipService.
@@ -42,6 +41,9 @@ export class ExtractZipService extends EventEmitter {
    */
   constructor(private zipFile: string, private destinationPath: string) {
     super()
+
+    this.resolveExtraction = () => null
+    this.rejectExtraction = () => null
   }
 
   /**
