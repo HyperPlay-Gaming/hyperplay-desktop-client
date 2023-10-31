@@ -34,18 +34,38 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const summaryAchievement = AchievementStoreState.summaryAchievements.data[0]
 
   useEffect(() => {
-    AchievementStoreState.getSummaryAchievements({ page: 1, pageSize, sort: selectedSort.value, filter: 'ALL' })
-    AchievementStoreState.getIndividualAchievements({ gameId: id as string, page: 1, pageSize, sort: selectedSort.value })
+    AchievementStoreState.getSummaryAchievements({
+      page: 1,
+      pageSize,
+      sort: selectedSort.value,
+      filter: 'ALL'
+    })
+    AchievementStoreState.getIndividualAchievements({
+      gameId: id as string,
+      page: 1,
+      pageSize,
+      sort: selectedSort.value
+    })
   }, [])
 
   const handleNextPage = () => {
     const nextPage = individualAchievements.currentPage + 1
-    AchievementStoreState.getIndividualAchievements({ gameId: id as string, page: nextPage, pageSize, sort: selectedSort.value })
+    AchievementStoreState.getIndividualAchievements({
+      gameId: id as string,
+      page: nextPage,
+      pageSize,
+      sort: selectedSort.value
+    })
   }
 
   const handlePrevPage = () => {
     const prevPage = individualAchievements.currentPage - 1
-    AchievementStoreState.getIndividualAchievements({ gameId: id as string, page: prevPage, pageSize, sort: selectedSort.value })
+    AchievementStoreState.getIndividualAchievements({
+      gameId: id as string,
+      page: prevPage,
+      pageSize,
+      sort: selectedSort.value
+    })
   }
 
   const isDisabled = isLoading || !walletStore.isConnected
@@ -81,7 +101,12 @@ export default observer(function GameAchievementDetails(): JSX.Element {
           )
 
           if (chosenItem) {
-            AchievementStoreState.getIndividualAchievements({ gameId: id as string, page: 1, pageSize, sort: chosenItem.value })
+            AchievementStoreState.getIndividualAchievements({
+              gameId: id as string,
+              page: 1,
+              pageSize,
+              sort: chosenItem.value
+            })
 
             setSelectedSort(chosenItem)
           }

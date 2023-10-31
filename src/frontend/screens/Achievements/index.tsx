@@ -2,10 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import walletStore from 'frontend/store/WalletStore'
 
 import { AchievementCard, AchievementSummaryTable } from '@hyperplay/ui'
-import {
-  AchievementFilter,
-  AchievementSort,
-} from 'common/types'
+import { AchievementFilter, AchievementSort } from 'common/types'
 import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 import { useTranslation } from 'react-i18next'
@@ -41,17 +38,32 @@ export default observer(function Achievements(): JSX.Element {
   const achievementsData = AchievementStoreState.summaryAchievements
 
   useEffect(() => {
-    AchievementStoreState.getSummaryAchievements({ page: 1, pageSize, filter: activeFilter, sort: selectedSort.value })
+    AchievementStoreState.getSummaryAchievements({
+      page: 1,
+      pageSize,
+      filter: activeFilter,
+      sort: selectedSort.value
+    })
   }, [store, playerStoreId, walletStore.address])
 
   const handleNextPage = () => {
     const nextPage = achievementsData.currentPage + 1
-    AchievementStoreState.getSummaryAchievements({ page: nextPage, pageSize, filter: activeFilter, sort: selectedSort.value })
+    AchievementStoreState.getSummaryAchievements({
+      page: nextPage,
+      pageSize,
+      filter: activeFilter,
+      sort: selectedSort.value
+    })
   }
 
   const handlePrevPage = () => {
     const prevPage = achievementsData.currentPage - 1
-    AchievementStoreState.getSummaryAchievements({ page: prevPage, pageSize, filter: activeFilter, sort: selectedSort.value })
+    AchievementStoreState.getSummaryAchievements({
+      page: prevPage,
+      pageSize,
+      filter: activeFilter,
+      sort: selectedSort.value
+    })
   }
 
   const isDisabled = isLoading || !walletStore.isConnected
@@ -119,7 +131,12 @@ export default observer(function Achievements(): JSX.Element {
             )
 
             if (chosenItem) {
-              AchievementStoreState.getSummaryAchievements({ page: 1, pageSize, filter: activeFilter, sort: chosenItem.value })
+              AchievementStoreState.getSummaryAchievements({
+                page: 1,
+                pageSize,
+                filter: activeFilter,
+                sort: chosenItem.value
+              })
 
               setSelectedSort(chosenItem)
             }
@@ -138,7 +155,12 @@ export default observer(function Achievements(): JSX.Element {
             if (filter === 'new') newFilter = 'NEW'
             if (filter === 'minted') newFilter = 'MINTED'
 
-            AchievementStoreState.getSummaryAchievements({ page: 1, pageSize, filter: newFilter, sort: selectedSort.value })
+            AchievementStoreState.getSummaryAchievements({
+              page: 1,
+              pageSize,
+              filter: newFilter,
+              sort: selectedSort.value
+            })
 
             setActiveFilter(newFilter)
           }
