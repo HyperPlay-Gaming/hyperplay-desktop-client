@@ -193,6 +193,7 @@ export default function DownloadToastManager() {
   const installPath = currentElement?.params.path
 
   function getDownloadStatus(): downloadStatus {
+    if (isExtracting) return 'inExtraction'
     if (dmState === 'paused') return 'paused'
     if (showPlay) return 'done'
     return 'inProgress'
