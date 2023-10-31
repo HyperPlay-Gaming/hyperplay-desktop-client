@@ -9,7 +9,7 @@ import libraryState from 'frontend/state/libraryState'
 // the consuming code needs to be wrapped in observer when using this hook
 export const hasStatus = (
   appName: string,
-  gameInfo: GameInfo | undefined,
+  gameInfo?: GameInfo,
   gameSize?: string
 ) => {
   const { libraryStatus } = React.useContext(ContextProvider)

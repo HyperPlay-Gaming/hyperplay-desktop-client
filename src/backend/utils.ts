@@ -33,11 +33,7 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import {
-  appendFileSync,
-  existsSync,
-  rmSync,
-} from 'graceful-fs'
+import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
