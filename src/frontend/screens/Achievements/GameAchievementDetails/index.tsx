@@ -3,10 +3,11 @@ import { Achievement, AchievementSort, SummaryAchievement } from 'common/types'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
-import { useMintAchievements } from '../MintAchievementsContext'
 import walletStore from 'frontend/store/WalletStore'
 import { useTranslation } from 'react-i18next'
-import { useAchievementStore } from '../AchievementStoreContext'
+import { observer } from 'mobx-react-lite'
+import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import MintAchievementsState from 'frontend/state/MintAchievementsState'
 
 const pageSize = 6
 
@@ -17,7 +18,7 @@ function isTimestampInPast(unixTimestamp: number) {
   return timestampInMilliseconds < currentTime
 }
 
-export default React.memo(function GameAchievementDetails(): JSX.Element {
+export default observer(function GameAchievementDetails(): JSX.Element {
   const { t } = useTranslation()
   const { id } = useParams()
   const [summaryAchievement, setSummaryAchievement] =
@@ -30,14 +31,15 @@ export default React.memo(function GameAchievementDetails(): JSX.Element {
 
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
 
-  const {
-    achievementsToBeMinted,
-    isLoading,
-    handleMint,
-    handleUpdate,
-    achievementsToBeUpdated
-  } = useMintAchievements()
-  const { store, playerStoreId, numFreeMints } = useAchievementStore()
+  const achievementsToBeMinted = MintAchievementsState.achievementsToBeMinted
+  const isLoading = MintAchievementsState.isLoading
+  const handleMint = MintAchievementsState.handleMint
+  const handleUpdate = MintAchievementsState.handleUpdate
+  const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
+
+  const store = AchievementStoreState.store
+  const playerStoreId = AchievementStoreState.playerStoreId
+  const numFreeMints = AchievementStoreState.numFreeMints
 
   const fetchAchievements = useCallback(
     async ({ page, sort }: { page: number; sort?: AchievementSort }) => {

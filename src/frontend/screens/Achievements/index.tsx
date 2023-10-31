@@ -9,9 +9,10 @@ import {
 } from 'common/types'
 import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
-import { useMintAchievements } from './MintAchievementsContext'
 import { useTranslation } from 'react-i18next'
-import { useAchievementStore } from './AchievementStoreContext'
+import { observer } from 'mobx-react-lite'
+import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import MintAchievementsState from 'frontend/state/MintAchievementsState'
 
 const pageSize = 12
 export const achievementsSortOptions = [
@@ -19,7 +20,7 @@ export const achievementsSortOptions = [
   { text: 'Alphabetically (DES)', value: 'ALPHA_Z_TO_A' }
 ] as { text: string; value: AchievementSort }[]
 
-export default React.memo(function Achievements(): JSX.Element {
+export default observer(function Achievements(): JSX.Element {
   const { t } = useTranslation()
 
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
@@ -30,17 +31,19 @@ export default React.memo(function Achievements(): JSX.Element {
     games: SummaryAchievement[]
   }>({ currentPage: 0, totalPages: 0, games: [] })
 
-  const { store, playerStoreId, numFreeMints } = useAchievementStore()
+  const store = AchievementStoreState.store
+  const playerStoreId = AchievementStoreState.playerStoreId
+  const numFreeMints = AchievementStoreState.numFreeMints
 
-  const {
-    achievementsToBeMinted,
-    toggleAchievementToBeMinted,
-    isLoading,
-    handleMint,
-    handleUpdate,
-    achievementsToBeUpdated,
-    toggleAchievementToBeUpdated
-  } = useMintAchievements()
+  const achievementsToBeMinted = MintAchievementsState.achievementsToBeMinted
+  const toggleAchievementToBeMinted =
+    MintAchievementsState.toggleAchievementToBeMinted
+  const isLoading = MintAchievementsState.isLoading
+  const handleMint = MintAchievementsState.handleMint
+  const handleUpdate = MintAchievementsState.handleUpdate
+  const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
+  const toggleAchievementToBeUpdated =
+    MintAchievementsState.toggleAchievementToBeUpdated
 
   const fetchAchievements = useCallback(
     async ({
@@ -195,12 +198,12 @@ export default React.memo(function Achievements(): JSX.Element {
         }}
         mintButtonProps={{
           onClick: handleMint,
-          disabled: achievementsToBeMinted.length === 0 ?? isDisabled,
+          disabled: isDisabled || achievementsToBeMinted.length === 0,
           totalToMint: achievementsToBeMinted.length
         }}
         updateButtonProps={{
           onClick: handleUpdate,
-          disabled: achievementsToBeUpdated.length === 0 ?? isDisabled,
+          disabled: isDisabled || achievementsToBeUpdated.length === 0,
           totalToUpdate: achievementsToBeUpdated.length
         }}
         achievementNavProps={{

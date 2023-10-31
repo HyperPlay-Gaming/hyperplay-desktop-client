@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import { StoreRow, Images } from '@hyperplay/ui'
 import { Flex } from '@mantine/core'
 
 import styles from './index.module.css'
-import { useAchievementStore } from '../AchievementStoreContext'
-import classNames from 'classnames'
 
-export const AchievementStores = () => {
-  const { store, setStore, totalGames, syncAchievements } =
-    useAchievementStore()
+import classNames from 'classnames'
+import { observer } from 'mobx-react-lite'
+import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import useSetting from 'frontend/hooks/useSetting'
+
+export const AchievementStores = observer(() => {
+  const [steamId] = useSetting('steamId', '')
+
+  const store = AchievementStoreState.store
+  const totalGames = AchievementStoreState.totalGames
+  const setStore = AchievementStoreState.setStore
+  const syncAchievements = AchievementStoreState.syncAchievements
+  const setPlayerStoreId = AchievementStoreState.setPlayerStoreId
+  const getAchievementsStats = AchievementStoreState.getAchievementsStats
+
+  useEffect(() => {
+    setPlayerStoreId(steamId)
+    getAchievementsStats()
+  }, [steamId])
 
   const activeSecondaryText = `${totalGames} Games`
   const isSteam = store === 'STEAM'
@@ -40,4 +54,4 @@ export const AchievementStores = () => {
       </Flex>
     </div>
   )
-}
+})

@@ -4,11 +4,9 @@ import { Background } from '@hyperplay/ui'
 import { Flex, Grid } from '@mantine/core'
 
 import styles from './index.module.css'
-import { MintAchievementsProvider } from '../MintAchievementsContext'
 import { AchievementsStats } from './AchievementsStats'
 import useSettingsContext from 'frontend/hooks/useSettingsContext'
 import SettingsContext from 'frontend/screens/Settings/SettingsContext'
-import { AchievementStoreProvider } from '../AchievementStoreContext'
 import { AchievementStores } from './AchievmentStores'
 
 export default React.memo(function AchievementsLayout({
@@ -26,28 +24,24 @@ export default React.memo(function AchievementsLayout({
 
   return (
     <SettingsContext.Provider value={contextValues}>
-      <AchievementStoreProvider>
-        <MintAchievementsProvider>
-          <Background style={{ position: 'absolute' }}></Background>
-          <div className={`contentContainer ${styles.fullHeight}`}>
-            <Grid className={`${styles.gridItems}`}>
-              <Grid.Col span={4}>
-                <Flex
-                  direction="column"
-                  gap="16px"
-                  className={`${styles.fullHeight}`}
-                >
-                  <AchievementsStats />
-                  <AchievementStores />
-                </Flex>
-              </Grid.Col>
-              <Grid.Col span={8} className={`${styles.fullHeight}`}>
-                {children}
-              </Grid.Col>
-            </Grid>
-          </div>
-        </MintAchievementsProvider>
-      </AchievementStoreProvider>
+      <Background style={{ position: 'absolute' }}></Background>
+      <div className={`contentContainer ${styles.fullHeight}`}>
+        <Grid className={`${styles.gridItems}`}>
+          <Grid.Col span={4}>
+            <Flex
+              direction="column"
+              gap="16px"
+              className={`${styles.fullHeight}`}
+            >
+              <AchievementsStats />
+              <AchievementStores />
+            </Flex>
+          </Grid.Col>
+          <Grid.Col span={8} className={`${styles.fullHeight}`}>
+            {children}
+          </Grid.Col>
+        </Grid>
+      </div>
     </SettingsContext.Provider>
   )
 })
