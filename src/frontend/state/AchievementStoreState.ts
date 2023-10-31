@@ -1,15 +1,28 @@
 import { makeAutoObservable } from 'mobx'
 import walletStore from 'frontend/store/WalletStore'
-import type { AchievementStore, AchievementsStats } from 'common/types'
+import type {
+  AchievementFilter,
+  AchievementSort,
+  AchievementStore,
+  AchievementsStats,
+  SummaryAchievement
+} from 'common/types'
 
 class AchievementStoreState {
   store = 'STEAM' as AchievementStore
   playerStoreId = '76561199276514967'
+  // Stats
   newAchievements = 0
   totalAchievements = 0
   totalGames = 0
   mintedAchievements = 0
   numFreeMints = 0
+  // Summary Achievements
+  summaryAchievements = {
+    data: [] as SummaryAchievement[],
+    totalPages: 0,
+    currentPage: 0
+  }
 
   constructor() {
     makeAutoObservable(this)
@@ -27,6 +40,29 @@ class AchievementStoreState {
         playerAddress: walletStore.address
       })
       .then(this.setStats.bind(this))
+  }
+
+  getSummaryAchievements = async ({
+    page,
+    pageSize,
+    filter,
+    sort
+  }: {
+    page: number
+    pageSize: number
+    filter: AchievementFilter
+    sort: AchievementSort
+  }) => {
+    const summaryAchievements = await window.api.getSummaryAchievements({
+      store: this.store,
+      filter,
+      sort,
+      page,
+      pageSize,
+      playerStoreId: this.playerStoreId,
+      playerAddress: walletStore.address
+    })
+    this.summaryAchievements = summaryAchievements
   }
 
   syncAchievements = (store: AchievementStore) => {

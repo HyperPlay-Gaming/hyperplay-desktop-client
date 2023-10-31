@@ -1,11 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import walletStore from 'frontend/store/WalletStore'
 
 import { AchievementCard, AchievementSummaryTable } from '@hyperplay/ui'
 import {
   AchievementFilter,
   AchievementSort,
-  SummaryAchievement
 } from 'common/types'
 import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
@@ -25,11 +24,6 @@ export default observer(function Achievements(): JSX.Element {
 
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
   const [activeFilter, setActiveFilter] = useState<AchievementFilter>('ALL')
-  const [achievementsData, setAchievementData] = useState<{
-    currentPage: number
-    totalPages: number
-    games: SummaryAchievement[]
-  }>({ currentPage: 0, totalPages: 0, games: [] })
 
   const store = AchievementStoreState.store
   const playerStoreId = AchievementStoreState.playerStoreId
@@ -44,63 +38,23 @@ export default observer(function Achievements(): JSX.Element {
   const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
   const toggleAchievementToBeUpdated =
     MintAchievementsState.toggleAchievementToBeUpdated
-
-  const fetchAchievements = useCallback(
-    async ({
-      page,
-      sort,
-      filter
-    }: {
-      page: number
-      sort?: AchievementSort
-      filter?: AchievementFilter
-    }) => {
-      return window.api.getSummaryAchievements({
-        store,
-        filter: filter ?? activeFilter,
-        sort: sort ?? selectedSort.value,
-        page,
-        pageSize,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
-    },
-    [store, activeFilter, selectedSort, playerStoreId, walletStore.address]
-  )
+  const achievementsData = AchievementStoreState.summaryAchievements
 
   useEffect(() => {
-    const getAchievements = async () => {
-      const { data, totalPages, currentPage } = await fetchAchievements({
-        page: 1
-      })
-
-      setAchievementData({ currentPage, totalPages, games: data })
-    }
-
-    getAchievements()
+    AchievementStoreState.getSummaryAchievements({ page: 1, pageSize, filter: activeFilter, sort: selectedSort.value })
   }, [store, playerStoreId, walletStore.address])
 
-  const handleNextPage = useCallback(async () => {
+  const handleNextPage = () => {
     const nextPage = achievementsData.currentPage + 1
-    const { data, totalPages, currentPage } = await fetchAchievements({
-      page: nextPage
-    })
+    AchievementStoreState.getSummaryAchievements({ page: nextPage, pageSize, filter: activeFilter, sort: selectedSort.value })
+  }
 
-    setAchievementData({ currentPage, totalPages, games: data })
-  }, [achievementsData, activeFilter, selectedSort])
-
-  const handlePrevPage = useCallback(async () => {
+  const handlePrevPage = () => {
     const prevPage = achievementsData.currentPage - 1
-    const { data, totalPages, currentPage } = await fetchAchievements({
-      page: prevPage
-    })
+    AchievementStoreState.getSummaryAchievements({ page: prevPage, pageSize, filter: activeFilter, sort: selectedSort.value })
+  }
 
-    setAchievementData({ currentPage, totalPages, games: data })
-  }, [achievementsData, activeFilter, selectedSort])
-
-  const isDisabled = useMemo(() => {
-    return isLoading || !walletStore.isConnected
-  }, [isLoading, walletStore.isConnected])
+  const isDisabled = isLoading || !walletStore.isConnected
 
   const filterMap = useMemo(() => {
     if (activeFilter === 'NEW') return 'new'
@@ -111,7 +65,7 @@ export default observer(function Achievements(): JSX.Element {
   return (
     <>
       <AchievementSummaryTable
-        games={achievementsData.games.map((game) => {
+        games={achievementsData.data.map((game) => {
           const id = String(game.gameId)
           const isUpdate =
             game.isNewAchievement && game.mintedAchievementCount > 0
@@ -165,12 +119,9 @@ export default observer(function Achievements(): JSX.Element {
             )
 
             if (chosenItem) {
-              const { data, totalPages, currentPage } = await fetchAchievements(
-                { page: 1, sort: chosenItem.value }
-              )
+              AchievementStoreState.getSummaryAchievements({ page: 1, pageSize, filter: activeFilter, sort: chosenItem.value })
 
               setSelectedSort(chosenItem)
-              setAchievementData({ currentPage, totalPages, games: data })
             }
           }
         }}
@@ -187,13 +138,9 @@ export default observer(function Achievements(): JSX.Element {
             if (filter === 'new') newFilter = 'NEW'
             if (filter === 'minted') newFilter = 'MINTED'
 
-            const { data, totalPages, currentPage } = await fetchAchievements({
-              page: 1,
-              filter: newFilter
-            })
+            AchievementStoreState.getSummaryAchievements({ page: 1, pageSize, filter: newFilter, sort: selectedSort.value })
 
             setActiveFilter(newFilter)
-            setAchievementData({ currentPage, totalPages, games: data })
           }
         }}
         mintButtonProps={{
