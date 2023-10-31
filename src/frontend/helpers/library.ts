@@ -157,6 +157,26 @@ const launch = async ({
             {
               text: t('box.no'),
               onClick: async () => {
+                if (runner === 'hyperplay') {
+                  return showDialogModal({
+                    message: t(
+                      'gamepage:box.update.hyperplay-message',
+                      'This game needs to be updated before it can be launched.'
+                    ),
+                    title: t(
+                      'gamepage:box.update.hyperplay-title',
+                      'Update Required'
+                    ),
+                    buttons: [
+                      {
+                        text: t('gamepage:box.update.close', 'Close'),
+                        onClick: async () => {
+                          res({ status: 'abort' })
+                        }
+                      }
+                    ]
+                  })
+                }
                 res(
                   window.api.launch({
                     appName,
