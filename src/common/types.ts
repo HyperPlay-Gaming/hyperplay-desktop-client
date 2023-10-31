@@ -828,17 +828,10 @@ export type AchievementFilter = 'ALL' | 'NEW' | 'MINTED'
 export interface PlayerOptions {
   playerStoreId: string
   playerAddress: string
-}
-export interface GetAchievementsStatsOptions extends PlayerOptions {
-  store: AchievementStore
-}
-
-export interface SyncAchievementsOptions extends PlayerOptions {
   store: AchievementStore
 }
 
 export interface GetAchievementsOptions extends PlayerOptions {
-  store: AchievementStore
   filter: AchievementFilter
   sort: AchievementSort
   page: number
@@ -850,7 +843,6 @@ export interface GetIndividualAchievementsOptions extends PlayerOptions {
   sort: AchievementSort
   page: number
   pageSize: number
-  store: AchievementStore
 }
 export interface AchievementsStats {
   newAchievements: number
