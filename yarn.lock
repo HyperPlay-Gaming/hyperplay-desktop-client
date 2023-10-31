@@ -1668,17 +1668,10 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@hyperplay/chains@^0.0.2":
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/@hyperplay/chains/-/chains-0.0.2.tgz#329aabdd30d5f1c25233fcb342840624fff235d1"
-  integrity sha512-yex3/IOnmxtM1N0uU20cceVKUDAjAGFO0LKNxH45Nn+bbOaVgXJCsXqEk3NfVLGk08X71fSDzRCcX2UCSUwEmA==
-  dependencies:
-    axios "^1.4.0"
-
-"@hyperplay/ui@^0.1.27":
-  version "0.1.27"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.27.tgz#f7bd511ca6cbd946c117fd1ed59446e988aff726"
-  integrity sha512-rCkFP2L/+P5IhlMsaEOCxedgOjQ9Mk+8YZ2GUjQeeNpyMezQLMFRVOzHP59EEc0BjX2uE2zvEr7H15vMifCSDQ==
+"@hyperplay/ui@^0.1.32":
+  version "0.1.32"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-0.1.32.tgz#f06b84ace3c159c89478bdb16b6b7d8cb9ef90ec"
+  integrity sha512-v5APsXJEvn/Pyw5GJiNKPW2gPJPrxWykg4QcgyLlsFhMHHleshoqoAWW5Xm7wlc8m7fHWfiFlqW9ZG8AfrSTGg==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"

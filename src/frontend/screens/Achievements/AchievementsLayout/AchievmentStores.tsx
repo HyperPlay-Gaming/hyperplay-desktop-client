@@ -23,6 +23,7 @@ export const AchievementStores = observer(() => {
   useEffect(() => {
     setPlayerStoreId(steamId)
     getAchievementsStats()
+    syncAchievements('STEAM')
   }, [steamId])
 
   const activeSecondaryText = `${totalGames} Games`
