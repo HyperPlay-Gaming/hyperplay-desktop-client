@@ -106,6 +106,7 @@ const GameCard = ({
     notAvailable,
     isUpdating,
     isPaused,
+    isExtracting,
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {
@@ -120,6 +121,9 @@ const GameCard = ({
     }
     if (isUninstalling) {
       return 'UNINSTALLING'
+    }
+    if (isExtracting) {
+      return 'EXTRACTING'
     }
     if (isQueued) {
       return 'QUEUED'
@@ -366,7 +370,7 @@ const GameCard = ({
   )
 
   async function mainAction(runner: Runner) {
-    if (isInstalling || isPaused) {
+    if (isInstalling || isExtracting || isPaused) {
       return setShowStopInstallModal(true)
     }
 
