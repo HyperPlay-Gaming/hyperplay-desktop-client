@@ -1,6 +1,6 @@
 import { EventEmitter } from 'node:events'
 import { Readable } from 'node:stream'
-import { open, ZipFile } from 'yauzl'
+import { open, ZipFile, Entry } from 'yauzl'
 import { mkdirSync, createWriteStream, rmSync } from 'graceful-fs'
 import { join } from 'path'
 
@@ -32,7 +32,8 @@ export class ExtractZipService extends EventEmitter {
   private zipFileInstance: ZipFile | null = null
   private extractionPromise: Promise<boolean | void> | null = null
   private resolveExtraction: ((value: boolean) => void) | null = () => null
-  private rejectExtraction: ((reason: Error) => void) | null = () => null
+  private rejectExtraction: ((reason: Error | unknown) => void) | null = () =>
+    null
 
   /**
    * Creates an instance of ExtractZipService.
@@ -56,7 +57,7 @@ export class ExtractZipService extends EventEmitter {
    * @returns {boolean} - Current state
    */
   get isPaused(): boolean {
-    return this.paused;
+    return this.paused
   }
 
   /**
@@ -89,7 +90,7 @@ export class ExtractZipService extends EventEmitter {
    */
   public pause(): void {
     if (!this.isPaused) {
-      this.paused = true;
+      this.paused = true
 
       this.readStream?.pause()
 
@@ -107,7 +108,7 @@ export class ExtractZipService extends EventEmitter {
     }
 
     if (this.isPaused) {
-      this.paused = false;
+      this.paused = false
 
       this.readStream?.resume()
     }
@@ -215,6 +216,46 @@ export class ExtractZipService extends EventEmitter {
   }
 
   /**
+   * Get uncompressed size
+   * @param {string} - The zipfile to check the sizeof
+   * @returns {Promise<number>} - The total uncompressed size
+   */
+  async getUncompressedSize(zipFile: string): Promise<number> {
+    return new Promise<number>((resolve, reject) => {
+      let totalUncompressedSize = 0
+
+      open(
+        zipFile,
+        { lazyEntries: true, autoClose: true },
+        (err, file: ZipFile) => {
+          if (err) {
+            reject(err)
+            return
+          }
+
+          file.readEntry()
+          file.on('entry', (entry: Entry) => {
+            if (!/\/$/.test(entry.fileName)) {
+              totalUncompressedSize += entry.uncompressedSize
+            }
+
+            file.readEntry()
+          })
+
+          file.on('end', () => {
+            resolve(totalUncompressedSize)
+          })
+
+          file.on('error', (err: Error) => {
+            this.onError(err)
+            resolve(0)
+          })
+        }
+      )
+    }).catch(() => 0)
+  }
+
+  /**
    * Extracts the ZIP file to the specified destination.
    * @returns {Promise<boolean | void>} - A promise that resolves when the extraction is complete.
    */
@@ -233,11 +274,10 @@ export class ExtractZipService extends EventEmitter {
           }
 
           this.zipFileInstance = file
-          this.totalSize = file.fileSize
 
           this.zipFileInstance.readEntry()
 
-          this.zipFileInstance.on('entry', (entry) => {
+          this.zipFileInstance.on('entry', (entry: Entry) => {
             if (this.isCanceled) {
               this.zipFileInstance?.close()
               return
@@ -298,16 +338,15 @@ export class ExtractZipService extends EventEmitter {
       )
     }).catch(this.onError.bind(this))
     try {
+      this.totalSize = await this.getUncompressedSize(this.zipFile)
       return await this.extractionPromise
-    } catch (error: unknown) {
-      this.rejectExtraction?.(error as Error)
+    } catch (error) {
+      this.rejectExtraction?.(error)
     } finally {
       this.zipFileInstance = null
       this.extractionPromise = null
       this.resolveExtraction = null
       this.rejectExtraction = null
     }
-
-    return false
   }
 }
