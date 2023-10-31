@@ -1,6 +1,5 @@
 import { GameAchievements } from '@hyperplay/ui'
-import { Achievement, AchievementSort, SummaryAchievement } from 'common/types'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
 import walletStore from 'frontend/store/WalletStore'
@@ -21,13 +20,6 @@ function isTimestampInPast(unixTimestamp: number) {
 export default observer(function GameAchievementDetails(): JSX.Element {
   const { t } = useTranslation()
   const { id } = useParams()
-  const [summaryAchievement, setSummaryAchievement] =
-    useState<SummaryAchievement>()
-  const [achievementsData, setAchievementData] = useState<{
-    data: Achievement[]
-    currentPage: number
-    totalPages: number
-  }>({ data: [], currentPage: 0, totalPages: 0 })
 
   const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
 
@@ -37,60 +29,26 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const handleUpdate = MintAchievementsState.handleUpdate
   const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
 
-  const store = AchievementStoreState.store
-  const playerStoreId = AchievementStoreState.playerStoreId
   const numFreeMints = AchievementStoreState.numFreeMints
-
-  const fetchAchievements = useCallback(
-    async ({ page, sort }: { page: number; sort?: AchievementSort }) => {
-      return window.api.getIndividualAchievements({
-        gameId: Number(id),
-        store,
-        sort: sort ?? selectedSort.value,
-        page,
-        pageSize,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
-    },
-    [store, selectedSort, playerStoreId, walletStore.address, id]
-  )
+  const individualAchievements = AchievementStoreState.individualAchievements
+  const summaryAchievement = AchievementStoreState.summaryAchievements.data[0]
 
   useEffect(() => {
-    const getAchievements = async () => {
-      const { data } = await window.api.getSummaryAchievements({
-        store,
-        filter: 'ALL',
-        sort: 'ALPHA_A_TO_Z',
-        page: 1,
-        pageSize: 1,
-        playerStoreId,
-        playerAddress: walletStore.address
-      })
-      setSummaryAchievement(data[0])
-
-      const achievements = await fetchAchievements({ page: 1 })
-      setAchievementData(achievements)
-    }
-
-    getAchievements()
+    AchievementStoreState.getSummaryAchievements({ page: 1, pageSize, sort: selectedSort.value, filter: 'ALL' })
+    AchievementStoreState.getIndividualAchievements({ gameId: id as string, page: 1, pageSize, sort: selectedSort.value })
   }, [])
 
-  const handleNextPage = useCallback(async () => {
-    const nextPage = achievementsData.currentPage + 1
-    const achievements = await fetchAchievements({ page: nextPage })
-    setAchievementData(achievements)
-  }, [achievementsData, selectedSort])
+  const handleNextPage = () => {
+    const nextPage = individualAchievements.currentPage + 1
+    AchievementStoreState.getIndividualAchievements({ gameId: id as string, page: nextPage, pageSize, sort: selectedSort.value })
+  }
 
-  const handlePrevPage = useCallback(async () => {
-    const prevPage = achievementsData.currentPage - 1
-    const achievements = await fetchAchievements({ page: prevPage })
-    setAchievementData(achievements)
-  }, [achievementsData, selectedSort])
+  const handlePrevPage = () => {
+    const prevPage = individualAchievements.currentPage - 1
+    AchievementStoreState.getIndividualAchievements({ gameId: id as string, page: prevPage, pageSize, sort: selectedSort.value })
+  }
 
-  const isDisabled = useMemo(() => {
-    return isLoading || !walletStore.isConnected
-  }, [isLoading, walletStore.isConnected])
+  const isDisabled = isLoading || !walletStore.isConnected
 
   if (!summaryAchievement) return <></>
 
@@ -107,7 +65,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
       mintedAchievementsCount={summaryAchievement.mintedAchievementCount}
       totalAchievementsCount={summaryAchievement.totalAchievementCount}
       mintableAchievementsCount={summaryAchievement.mintableAchievementsCount}
-      achievements={achievementsData.data.map((achievement) => ({
+      achievements={individualAchievements.data.map((achievement) => ({
         id: achievement.id,
         title: achievement.displayName,
         description: achievement.description,
@@ -123,19 +81,15 @@ export default observer(function GameAchievementDetails(): JSX.Element {
           )
 
           if (chosenItem) {
-            const { data, totalPages, currentPage } = await fetchAchievements({
-              page: 1,
-              sort: chosenItem.value
-            })
+            AchievementStoreState.getIndividualAchievements({ gameId: id as string, page: 1, pageSize, sort: chosenItem.value })
 
             setSelectedSort(chosenItem)
-            setAchievementData({ currentPage, totalPages, data })
           }
         }
       }}
       paginationProps={{
-        currentPage: achievementsData.currentPage,
-        totalPages: achievementsData.totalPages,
+        currentPage: individualAchievements.currentPage,
+        totalPages: individualAchievements.totalPages,
         handleNextPage,
         handlePrevPage
       }}

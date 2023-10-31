@@ -1,6 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import walletStore from 'frontend/store/WalletStore'
 import type {
+  Achievement,
   AchievementFilter,
   AchievementSort,
   AchievementStore,
@@ -23,6 +24,12 @@ class AchievementStoreState {
     totalPages: 0,
     currentPage: 0
   }
+  // Individual Achievements
+  individualAchievements = {
+    data: [] as Achievement[],
+    totalPages: 0,
+    currentPage: 0
+  }
 
   constructor() {
     makeAutoObservable(this)
@@ -40,6 +47,29 @@ class AchievementStoreState {
         playerAddress: walletStore.address
       })
       .then(this.setStats.bind(this))
+  }
+
+  getIndividualAchievements = async ({
+    gameId,
+    page,
+    pageSize,
+    sort
+  }: {
+    gameId: string
+    page: number
+    pageSize: number
+    sort: AchievementSort
+  }) => {
+    const individualAchievements = await window.api.getIndividualAchievements({
+      gameId: Number(gameId),
+      store: this.store,
+      sort,
+      page,
+      pageSize,
+      playerStoreId: this.playerStoreId,
+      playerAddress: walletStore.address
+    })
+    this.individualAchievements = individualAchievements
   }
 
   getSummaryAchievements = async ({
@@ -62,6 +92,7 @@ class AchievementStoreState {
       playerStoreId: this.playerStoreId,
       playerAddress: walletStore.address
     })
+
     this.summaryAchievements = summaryAchievements
   }
 
