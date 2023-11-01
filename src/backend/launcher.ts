@@ -789,11 +789,12 @@ async function callRunner(
       signal: abortController.signal
     })
 
-    if (
+    const shouldOpenOverlay =
       gameInfo &&
-      (gameInfo.runner === 'hyperplay' || gameInfo.runner === 'sideload')
-    )
-      openOverlay(gameInfo?.app_name, gameInfo.runner)
+      (gameInfo.runner === 'hyperplay' ||
+        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
+
+    if (shouldOpenOverlay) openOverlay(gameInfo?.app_name, gameInfo.runner)
 
     /*
      * gogdl remains open while the game is running
@@ -879,7 +880,7 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
-      if (runner.name === 'hyperplay') closeOverlay()
+      if (shouldOpenOverlay) closeOverlay()
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,
@@ -898,7 +899,7 @@ async function callRunner(
     })
 
     child.on('error', (error) => {
-      if (runner.name === 'hyperplay') closeOverlay()
+      if (shouldOpenOverlay) closeOverlay()
       rej(error)
     })
   })
