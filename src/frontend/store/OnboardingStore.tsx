@@ -63,12 +63,6 @@ export const OnboardingStoreController = () => {
   async function init() {
     const currentWeb3Provider = await window.api.getCurrentWeb3Provider()
     onboardingStore.bootstrapOnboarding(context, currentWeb3Provider)
-    // this will cause transaction notification modal to show for mm ext if mmm/wc were the last wallets used
-    // runInAction(() => {
-    //   if (currentWeb3Provider) {
-    //     WalletState.provider = currentWeb3Provider
-    //   }
-    // })
   }
 
   useEffect(() => {
