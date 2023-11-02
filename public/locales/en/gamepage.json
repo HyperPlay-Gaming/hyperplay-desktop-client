@@ -41,9 +41,6 @@
             "title": "Uninstall"
         },
         "update": {
-            "close": "Close",
-            "hyperplay-message": "This game needs to be updated before it can be launched.",
-            "hyperplay-title": "Update Required",
             "message": "This game has an update, apply update now?",
             "title": "Game Needs Update"
         },
@@ -137,7 +134,8 @@
     "label": {
         "playing": {
             "start": "Play",
-            "stop": "Playing (Stop)"
+            "stop": "Playing (Stop)",
+            "update": "Update"
         },
         "saves": {
             "syncing": "Syncing Saves"
@@ -180,13 +178,11 @@
         "recommended": "Recommended"
     },
     "status": {
-        "clickToUpdate": "Click to Update",
         "downloading": "Downloading",
         "extracting": "Extracting",
         "gameNotAvailable": "Game not available",
         "gog-goodie": "This game doesn't appear to be installable. Check downloadable content on https://gog.com/account",
         "goodie": "Not installable",
-        "hasUpdates": "New Version Available!",
         "installed": "Installed",
         "installing": "Installing",
         "moving": "Moving Installation, please wait",

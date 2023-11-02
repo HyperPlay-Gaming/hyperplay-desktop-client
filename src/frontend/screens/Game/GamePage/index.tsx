@@ -700,7 +700,7 @@ export default observer(function GamePage(): JSX.Element | null {
     if (notAvailable) {
       return 'tertiary'
     }
-    if (isQueued) {
+    if (isQueued || hasUpdate) {
       return 'secondary'
     }
     if (isUpdating) {
@@ -713,6 +713,10 @@ export default observer(function GamePage(): JSX.Element | null {
   }
 
   function getPlayLabel(): React.ReactNode {
+    if (hasUpdate) {
+      return t('label.playing.update', 'Update')
+    }
+
     if (isSyncing) {
       return t('label.saves.syncing')
     }
@@ -811,14 +815,7 @@ export default observer(function GamePage(): JSX.Element | null {
     }
 
     if (hasUpdate) {
-      return (
-        <span onClick={async () => handleUpdate()} className="updateText">
-          {`${t('status.installed')} - ${t(
-            'status.hasUpdates',
-            'New Version Available!'
-          )} (${t('status.clickToUpdate', 'Click to Update')})`}
-        </span>
-      )
+      return null
     }
 
     if (is_installed) {
@@ -871,6 +868,12 @@ export default observer(function GamePage(): JSX.Element | null {
   }
 
   function handlePlay() {
+    if (hasUpdate) {
+      return async () => {
+        await updateGame({ appName, runner, gameInfo })
+      }
+    }
+
     // kill game if running
     return async () => {
       if (isPlaying || isUpdating) {
