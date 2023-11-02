@@ -13,6 +13,7 @@ import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
 
 const testTimeout = 120000
 const installPartialTimeout = 25000
+const installFullTimeout = 25000
 
 const dirSize = async (directory) => {
   const files = await readdir(directory)
@@ -94,6 +95,34 @@ test.describe('hp store api tests', function () {
     }
   }
 
+  const cancelExtraction = async (appName: string) => {
+    await page.evaluate(
+      async ([appName]) => {
+        window.api.cancelExtraction(appName)
+      },
+      [appName]
+    )
+
+    console.log('extraction waiting...')
+    await wait(1000)
+
+    //quit app because easyDL does not free all files on clean until app is closed
+    await electronApp.evaluate(async ({ app }) => {
+      app.quit()
+    })
+
+    await wait(5000)
+
+    //check that downloaded files are removed
+    if (existsSync(tempFolder)) {
+      const downloadDirSizeAfterCancel = await dirSize(tempFolder)
+      console.log('extraction downloadDirSizeAfterCancel: ', downloadDirSizeAfterCancel)
+      expect(downloadDirSizeAfterCancel).toEqual(0)
+    } else {
+      console.log('temp folder does not exist after cancelling extraction')
+    }
+  }
+
   const installPartial = async (appName: string) => {
     // download then pause
     await page.evaluate(
@@ -107,23 +136,34 @@ test.describe('hp store api tests', function () {
 
         const xMbDownloaded = (res, numberOfMb: number) => {
           return async (e, status: GameStatus) => {
-            console.log(
-              'progress update for download: ',
-              JSON.stringify(status, null, 4)
-            )
-            if (
-              status.progress?.bytes &&
-              Number.parseFloat(status.progress?.bytes) > numberOfMb
-            )
+            if (status.progress?.percent === 100 && ['done'].includes(status.status)){
+              console.log(
+                'downloaded successfully ',
+                JSON.stringify(status, null, 4)
+              )
               res()
-            else {
-              if (status.progress?.bytes)
-                console.log(
-                  'not enough bytes downloaded yet ',
-                  status.progress?.bytes,
-                  ' ',
-                  Number.parseFloat(status.progress?.bytes) > numberOfMb
-                )
+              return;
+            }
+
+            if (['preparing', 'extracting', 'installing', 'paused'].includes(status.status)) {
+              console.log(
+                'progress update for download: ',
+                JSON.stringify(status, null, 4)
+              )
+              if (
+                status.progress?.bytes &&
+                Number.parseFloat(status.progress?.bytes) > numberOfMb
+              )
+                res()
+              else {
+                if (status.progress?.bytes)
+                  console.log(
+                    'not enough bytes downloaded yet ',
+                    status.progress?.bytes,
+                    ' ',
+                    Number.parseFloat(status.progress?.bytes) > numberOfMb
+                  )
+              }
             }
           }
         }
@@ -174,6 +214,78 @@ test.describe('hp store api tests', function () {
     )
   }
 
+  
+  const installFull = async (appName: string, onCompleteDownload: () => unknown, onCancelExtraction: () => unknown) => {
+    // download then pause
+    await page.evaluate(
+      async ([appName]) => {
+        const { defaultInstallPath }: AppSettings =
+          await window.api.requestAppSettings()
+
+        let previousStatus = '';
+        let isCanceled = false;
+
+        console.log('default install path = ' + defaultInstallPath)
+
+        const gameInfo = await window.api.getGameInfo(appName, 'hyperplay')
+
+        window.api.onProgressUpdate(
+          appName,
+          async (e, status: GameStatus) => {
+            console.log('status.status', status.status)
+            if (['done'].includes(status.status)){
+              console.log(
+                'downloaded successfully ',
+                JSON.stringify(status, null, 4)
+              )
+
+              if (previousStatus === 'installing') {
+                console.log('check if download complete')
+                onCompleteDownload()
+              }
+            }
+
+            if (['error'].includes(status.status)){
+              console.log(
+                'downloaded failed ',
+                JSON.stringify(status, null, 4)
+              )
+            }
+
+            if (['preparing', 'extracting', 'installing', 'paused'].includes(status.status)) {
+              console.log(
+                'progress update for download: ',
+                JSON.stringify(status, null, 4)
+              )
+            }
+
+            if (['extracting'].includes(status.status) && !isCanceled) {
+              if ((status?.progress?.percent || 0) > 50 ) {
+                isCanceled = true;
+                console.log('cancel extraction')
+                onCancelExtraction();
+              }
+            }
+
+            previousStatus = status.status;
+          }
+        )
+        
+        window.api.install({
+          appName,
+          gameInfo,
+          runner: 'hyperplay',
+          path: defaultInstallPath,
+          platformToInstall: 'windows_amd64',
+          channelName: 'main'
+        })
+
+        return defaultInstallPath
+      },
+      [appName]
+    )
+  }
+
   const pauseDownload = async () => {
     await page.evaluate(async () => {
       return window.api.pauseCurrentDownload()
@@ -210,6 +322,17 @@ test.describe('hp store api tests', function () {
     expect(downloadDirSize).toBeLessThan(downloadDirSizeAfterWait)
   }
 
+  
+  const checkIfDownloaded = async () => {
+    //check if download is actually paused
+    const downloadDirSize = await dirSize(tempFolder)
+    console.log(
+      'downloaded file downloadDirSize: ',
+      downloadDirSize,
+    )
+    expect(downloadDirSize).toEqual(5603)
+  }
+
   test('hp store: download then cancel and do not keep files', async () => {
     // download then pause
     console.log('installing')
@@ -238,5 +361,20 @@ test.describe('hp store api tests', function () {
     await pauseDownload()
     console.log('canceling')
     await cancelDownload(true)
+  })
+
+  test('hp store: cancel extraction and do not keep files', async () => {
+    console.log('installing')
+    const onCompleteDownload = async () => {
+      await checkIfDownloaded();
+
+      return null;
+    }
+    const onCancelExtraction = async () => {
+      await cancelExtraction(appName)
+
+      return null;
+    }
+    await withTimeout(installFullTimeout, installFull(appName, onCompleteDownload, onCancelExtraction), false)
   })
 })
