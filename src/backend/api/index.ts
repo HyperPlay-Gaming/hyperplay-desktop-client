@@ -9,6 +9,7 @@ import * as DownloadManager from './downloadmanager'
 import * as Extensions from '../hyperplay-extension-helper/api/extensions'
 import * as Metrics from './metrics'
 import * as Overlay from 'backend/hyperplay-overlay/api'
+import * as Rdiff from 'backend/patcher';
 
 export default {
   ...Misc,
@@ -21,5 +22,6 @@ export default {
   ...DownloadManager,
   ...Extensions,
   ...Metrics,
-  ...Overlay
+  ...Overlay,
+  ...Rdiff,
 }

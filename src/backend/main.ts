@@ -161,6 +161,7 @@ import {
   initStoreManagers,
   libraryManagerMap
 } from './storeManagers'
+import { downloadIPDTForOS } from '@hyperplay/patcher';
 
 import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
@@ -1103,12 +1104,12 @@ ipcMain.handle(
     writeFileSync(
       logFileLocation,
       'System Info:\n' +
-        `${systemInfo}\n` +
-        '\n' +
-        `Game Settings: ${gameSettingsString}\n` +
-        '\n' +
-        `Game launched at: ${startPlayingDate}\n` +
-        '\n'
+      `${systemInfo}\n` +
+      '\n' +
+      `Game Settings: ${gameSettingsString}\n` +
+      '\n' +
+      `Game launched at: ${startPlayingDate}\n` +
+      '\n'
     )
 
     if (logsDisabled) {
@@ -1848,6 +1849,8 @@ import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
+import { getBasePath } from './patcher'
+
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
@@ -1943,3 +1946,12 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
 })
+
+ipcMain.on('downloadIPDT', () => {
+  const binPath = getBasePath()
+  downloadIPDTForOS(binPath)
+});
+
+ipcMain.on('applyPatch', () => {
+  console.log('testing patch')
+});
