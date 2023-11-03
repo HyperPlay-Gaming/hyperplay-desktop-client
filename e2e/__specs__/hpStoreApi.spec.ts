@@ -9,7 +9,10 @@ import commonSetup, {
 } from './common-setup'
 import { stat, readdir } from 'fs/promises'
 import path, { join } from 'path'
-import { ipcMainInvokeHandler, ipcRendererSend } from 'electron-playwright-helpers'
+import {
+  ipcMainInvokeHandler,
+  ipcRendererSend
+} from 'electron-playwright-helpers'
 
 const testTimeout = 22000000
 const installPartialTimeout = 25000
@@ -229,32 +232,31 @@ test.describe('hp store api tests', function () {
     )
   }
 
-  const waitForStatus = async (statusToWaitFor) => {  
-    let status: GameStatus;
+  const waitForStatus = async (statusToWaitFor) => {
+    let status: GameStatus
     do {
       status = await page.evaluate(async ([appName]) => {
-          return new Promise((resolve) => {
-            window.api.onProgressUpdate(appName, (_event, args) => {
-              resolve(args);
-            });
-          });
-        }, appName);
+        return new Promise((resolve) => {
+          window.api.onProgressUpdate(appName, (_event, args) => {
+            resolve(args)
+          })
+        })
+      }, appName)
 
+      if (status.status === statusToWaitFor) {
+        return status
+      }
 
-        if (status.status === statusToWaitFor) {
-          return status;
-        }
-    
-        // Wait for a second before trying again
-        await wait(1000);
-      } while (status.status !== statusToWaitFor);
-  };
+      // Wait for a second before trying again
+      await wait(1000)
+    } while (status.status !== statusToWaitFor)
+  }
 
-  const installFull = async (
-    appName: string,
-  ) => {
-    await page.evaluate(async ([appName]) => {
-        const { defaultInstallPath }: AppSettings = await window.api.requestAppSettings()
+  const installFull = async (appName: string) => {
+    await page.evaluate(
+      async ([appName]) => {
+        const { defaultInstallPath }: AppSettings =
+          await window.api.requestAppSettings()
 
         console.log('[installFull] defaultInstallPath ' + defaultInstallPath)
 
@@ -270,7 +272,9 @@ test.describe('hp store api tests', function () {
           platformToInstall: 'windows_amd64',
           channelName: 'main'
         })
-    }, [appName]);
+      },
+      [appName]
+    )
   }
 
   const pauseDownload = async () => {
@@ -348,36 +352,38 @@ test.describe('hp store api tests', function () {
 
   test('hp store: cancel extraction and do not keep files', async () => {
     console.log('installing')
-    try { 
+    try {
       installFull(appName)
-      
+
       // Wait for the 'installing' status
-      const installingArgs = await waitForStatus('installing');
+      const installingArgs = await waitForStatus('installing')
       console.log('installingArgs', installingArgs)
       // Test logic related to 'installing' status
-      expect(installingArgs).toBeDefined();
-      expect(installingArgs?.status).toBe('installing');
+      expect(installingArgs).toBeDefined()
+      expect(installingArgs?.status).toBe('installing')
 
       // Wait for the 'extracting' status
-      const extractingArgs = await waitForStatus('extracting');
+      const extractingArgs = await waitForStatus('extracting')
       console.log('extractingArgs', extractingArgs)
       // Test logic related to 'extracting' status
-      expect(extractingArgs).toBeDefined();
-      expect(extractingArgs?.status).toBe('extracting');
+      expect(extractingArgs).toBeDefined()
+      expect(extractingArgs?.status).toBe('extracting')
 
       // If the status is 'extracting', cancel the extraction
       if (extractingArgs?.status === 'extracting') {
-        await cancelExtraction(appName);
+        await cancelExtraction(appName)
       }
       // Wait for the 'done' status
-      const doneArgs = await waitForStatus('done');
+      const doneArgs = await waitForStatus('done')
       console.log('doneArgs', doneArgs)
       // Test logic related to 'done' status
-      expect(doneArgs).toBeDefined();
-      expect(doneArgs?.status).toBe('done');
-
-    } catch(error) {
-      console.error('test: error - hp store: cancel extraction and do not keep files', error)
+      expect(doneArgs).toBeDefined()
+      expect(doneArgs?.status).toBe('done')
+    } catch (error) {
+      console.error(
+        'test: error - hp store: cancel extraction and do not keep files',
+        error
+      )
     }
   })
 })
