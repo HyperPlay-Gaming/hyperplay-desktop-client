@@ -527,8 +527,8 @@ export async function install(
     updateOnly = false
   }: InstallArgs
 ): Promise<InstallResult> {
-  const wasPaused = await resumeIfPaused(appName);
-  
+  const wasPaused = await resumeIfPaused(appName)
+
   let { directory, fileName } = { directory: '', fileName: '' }
   try {
     const gameInfo = getGameInfo(appName)
@@ -598,7 +598,7 @@ export async function install(
       const zipPathInfo = getZipFileName(appName, platformInfo)
       directory = zipPathInfo.directory
       fileName = zipPathInfo.filename
-  
+
       // download the zip file
       if (!existsSync(destinationPath)) {
         mkdirSync(destinationPath, { recursive: true })
@@ -635,7 +635,7 @@ export async function install(
         error: 'Executable not found during install in HyperPlay game manager'
       }
     }
-    
+
     return await extract(appName, {
       appPlatform,
       gameInfo,
@@ -664,21 +664,21 @@ export async function install(
 interface Extract {
   platformInfo?: PlatformConfig
   destinationPath: string
-  gameInfo: GameInfo, 
-  installVersion: string, 
-  appPlatform: InstalledInfo['platform'],
+  gameInfo: GameInfo
+  installVersion: string
+  appPlatform: InstalledInfo['platform']
   channelName: string | undefined
 }
 
 export async function extract(
   appName: string,
-  { 
-    platformInfo, 
-    destinationPath, 
-    gameInfo, 
-    installVersion, 
+  {
+    platformInfo,
+    destinationPath,
+    gameInfo,
+    installVersion,
     appPlatform,
-    channelName 
+    channelName
   }: Extract
 ): Promise<InstallResult> {
   let { directory, fileName } = { directory: '', fileName: '' }
@@ -693,7 +693,7 @@ export async function extract(
       }
     }
 
-    const { title } = gameInfo;
+    const { title } = gameInfo
     const zipPathInfo = getZipFileName(appName, platformInfo)
     directory = zipPathInfo.directory
     fileName = zipPathInfo.filename
@@ -725,7 +725,6 @@ export async function extract(
       }
     }
 
-    
     let executable = path.join(destinationPath, platformInfo.executable)
 
     const zipFile = path.join(directory, fileName)
@@ -869,7 +868,7 @@ export async function extract(
           sendFrontendMessage('refreshLibrary', 'hyperplay')
 
           resolve({
-            status: 'done',
+            status: 'done'
           })
         }
       )
@@ -884,7 +883,7 @@ export async function extract(
         sendFrontendMessage('refreshLibrary', 'hyperplay')
 
         resolve({
-          status: 'error',
+          status: 'error'
         })
       })
       extractService.once('canceled', () => {
@@ -930,13 +929,13 @@ export async function extract(
         sendFrontendMessage('refreshLibrary', 'hyperplay')
 
         resolve({
-          status: 'abort',
+          status: 'abort'
         })
       })
 
-      extractService.extract().then();
-    });
-  } catch (error: unknown){
+      extractService.extract().then()
+    })
+  } catch (error: unknown) {
     process.noAsar = false
 
     logInfo(`Error while extracting game ${error}`, LogPrefix.HyperPlay)
