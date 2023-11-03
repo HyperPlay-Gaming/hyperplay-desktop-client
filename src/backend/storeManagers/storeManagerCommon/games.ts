@@ -74,7 +74,8 @@ const openNewBrowserGameWindow = async (
         contextIsolation: true,
         nodeIntegration: true,
         preload: path.join(__dirname, 'preload.js')
-      }
+      },
+      show: false
     })
 
     function toggleFullscreen() {
@@ -170,6 +171,9 @@ const openNewBrowserGameWindow = async (
     })
 
     browserGame.loadURL(url)
+    // this is electron's suggested way to prevent visual flash
+    // https://github.com/electron/electron/blob/main/docs/api/browser-window.md#using-the-ready-to-show-event
+    browserGame.on('ready-to-show', () => browserGame.show())
 
     controlWindow(browserGame.webContents.id, 'browser')
 
