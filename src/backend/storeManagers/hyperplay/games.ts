@@ -17,7 +17,7 @@ import {
   ExtractZipService,
   ExtractZipProgressResponse
 } from 'backend/services/ExtractZipService'
-import { existsSync, mkdirSync, rmSync, readdirSync, rm } from 'graceful-fs'
+import { existsSync, mkdirSync, rmSync, readdirSync, rmdirSync } from 'graceful-fs'
 import {
   isMac,
   isWindows,
@@ -231,7 +231,7 @@ function cleanUpDownload(appName: string, directory: string) {
   inProgressDownloadsMap.delete(appName)
   inProgressExtractionsMap.delete(appName)
   deleteAbortController(appName)
-  rm(directory, console.log)
+  rmdirSync(directory, { recursive: true })
 }
 
 function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
