@@ -64,6 +64,8 @@ import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
 import DMQueueState from 'frontend/state/DMQueueState'
+import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
+
 
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -139,6 +141,11 @@ export default observer(function GamePage(): JSX.Element | null {
   const backRoute = location.state?.fromDM ? '/download-manager' : '/library'
 
   const storage: Storage = window.localStorage
+
+const uncompressedSize = useEstimatedUncompressedSize(
+  platform,
+  gameInstallInfo?.manifest?.disk_size || 0
+)
 
   // Track the screen view once each time the appName, gameInfo or runner changes
   useEffect(() => {
@@ -304,9 +311,8 @@ export default observer(function GamePage(): JSX.Element | null {
     const downloadSize =
       gameInstallInfo?.manifest?.download_size &&
       size(Number(gameInstallInfo?.manifest?.download_size))
-    const installSize =
-      gameInstallInfo?.manifest?.disk_size &&
-      size(Number(gameInstallInfo?.manifest?.disk_size))
+    const installSize = uncompressedSize && size(uncompressedSize)
+
     const launchOptions = gameInstallInfo?.game?.launch_options || []
 
     const isMac = ['osx', 'Mac', 'darwin_amd64', 'darwin_arm64']

@@ -22,7 +22,6 @@ import {
   mkdirSync,
   rmSync,
   readdirSync,
-  rmdirSync
 } from 'graceful-fs'
 import {
   isMac,
@@ -237,7 +236,7 @@ function cleanUpDownload(appName: string, directory: string) {
   inProgressDownloadsMap.delete(appName)
   inProgressExtractionsMap.delete(appName)
   deleteAbortController(appName)
-  rmdirSync(directory, { recursive: true })
+  rmSync(directory, { recursive: true, force: true })
 }
 
 function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
