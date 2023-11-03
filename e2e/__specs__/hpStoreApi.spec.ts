@@ -9,9 +9,7 @@ import commonSetup, {
 } from './common-setup'
 import { stat, readdir } from 'fs/promises'
 import path, { join } from 'path'
-import {
-  ipcMainInvokeHandler,
-} from 'electron-playwright-helpers'
+import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
 
 const installPartialTimeout = 25000
 const installFullTimeout = 20000000

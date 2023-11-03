@@ -66,7 +66,6 @@ import { NileInstallInfo } from 'common/types/nile'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 
-
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
@@ -142,10 +141,10 @@ export default observer(function GamePage(): JSX.Element | null {
 
   const storage: Storage = window.localStorage
 
-const uncompressedSize = useEstimatedUncompressedSize(
-  platform,
-  gameInstallInfo?.manifest?.disk_size || 0
-)
+  const uncompressedSize = useEstimatedUncompressedSize(
+    platform,
+    gameInstallInfo?.manifest?.disk_size || 0
+  )
 
   // Track the screen view once each time the appName, gameInfo or runner changes
   useEffect(() => {

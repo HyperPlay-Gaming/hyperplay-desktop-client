@@ -17,12 +17,7 @@ import {
   ExtractZipService,
   ExtractZipProgressResponse
 } from 'backend/services/ExtractZipService'
-import {
-  existsSync,
-  mkdirSync,
-  rmSync,
-  readdirSync,
-} from 'graceful-fs'
+import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 import {
   isMac,
   isWindows,
