@@ -15,8 +15,9 @@ import {
   ProgressInfo
 } from 'common/types'
 import axios from 'axios'
-import EasyDl from 'hp-easydl'
 import yauzl from 'yauzl'
+import download from 'backend/utils/downloadFile/download_file'
+import { File, Progress } from 'backend/utils/downloadFile/types'
 
 import {
   app,
@@ -24,7 +25,8 @@ import {
   shell,
   Notification,
   BrowserWindow,
-  ipcMain
+  ipcMain,
+  DownloadItem
 } from 'electron'
 import {
   exec,
@@ -1288,103 +1290,83 @@ export interface ProgressCallback {
  */
 export async function downloadFile(
   url: string,
-  dest: string,
+  directory: string,
+  fileName: string,
   abortController: AbortController,
-  progressCallback?: ProgressCallback
-): Promise<void> {
+  progressCallback?: ProgressCallback,
+  onCompleted?: (file: File) => void,
+  onCancel?: (item: DownloadItem) => void
+): Promise<DownloadItem> {
   let lastProgressUpdateTime = Date.now()
   let lastBytesWritten = 0
-  let fileSize = 0
 
-  let connections = 1
-  try {
-    const response = await axios.head(url)
-    const cdnCache = response.headers['cdn-cache']
-    const isCached = cdnCache === 'HIT' || cdnCache === 'STALE'
-    if (isCached) {
-      connections = 5
+  function handleProgress({
+    percent: downloadFraction,
+    transferredBytes,
+    totalBytes: totalDownloadSizeInBytes
+  }: Progress) {
+    const percentage = downloadFraction * 100
+    const currentTime = Date.now()
+    const timeElapsed = currentTime - lastProgressUpdateTime
+
+    // Throttle progress reporting to 1 second
+    if (timeElapsed >= 1000) {
+      const bytesWrittenSinceLastUpdate = transferredBytes - lastBytesWritten
+      const writingSpeed = bytesWrittenSinceLastUpdate / (timeElapsed / 1000) // Bytes per second
+
+      logInfo(
+        `Downloaded: ${bytesToSize(transferredBytes)} / ${bytesToSize(
+          totalDownloadSizeInBytes
+        )}  @${bytesToSize(writingSpeed)}/s (${percentage.toFixed(2)}%)`,
+        LogPrefix.HyperPlay
+      )
+
+      if (progressCallback) {
+        progressCallback(
+          transferredBytes,
+          writingSpeed,
+          writingSpeed,
+          percentage
+        )
+      }
+
+      lastProgressUpdateTime = currentTime
+      lastBytesWritten = transferredBytes
     }
-    fileSize = parseInt(response.headers['content-length'], 10)
-  } catch (err) {
-    logError(
-      `Downloader: Failed to get headers for ${url}. \nError: ${err}`,
-      LogPrefix.DownloadManager
-    )
-    throw new Error('Failed to get headers')
   }
 
   try {
-    const dl = new EasyDl(url, dest, {
-      existBehavior: 'overwrite',
-      connections
-    }).start()
+    const mainWindow = getMainWindow()
+    if (mainWindow === null) {
+      throw 'Main window not initialized!'
+    }
 
-    abortController.signal.addEventListener('abort', () => {
-      dl.destroy()
-    })
-
-    dl.on('error', (error) => {
-      logError(error, LogPrefix.HyperPlay)
-    })
-
-    dl.on('retry', (retry) => {
-      logInfo(`Retrying download: ${retry}`, LogPrefix.HyperPlay)
-    })
-
-    const throttledProgressCallback = throttle(
-      (
-        bytes: number,
-        speed: number,
-        writingSpeed: number,
-        percentage: number
-      ) => {
-        if (progressCallback) {
-          logInfo(
-            `Downloaded: ${bytesToSize(bytes)} / ${bytesToSize(
-              fileSize
-            )}  @${bytesToSize(speed)}/s (${percentage.toFixed(2)}%)`,
-            LogPrefix.HyperPlay
-          )
-          progressCallback(bytes, speed, writingSpeed, percentage)
+    const item = await download(mainWindow, url, {
+      directory: directory,
+      filename: fileName,
+      onStarted: (item) => {
+        logInfo(`Started downloading ${item.getFilename()}`, LogPrefix.Backend)
+      },
+      onProgress: handleProgress,
+      onCompleted: (file) => {
+        logInfo(`Download completed ${file.filename}`, LogPrefix.Backend)
+        if (onCompleted !== undefined) {
+          onCompleted(file)
         }
       },
-      1000
-    ) // Throttle progress reporting to 1 second
-
-    dl.on('progress', ({ total }) => {
-      const { bytes = 0, speed = 0, percentage = 0 } = total
-      const currentTime = Date.now()
-      const timeElapsed = currentTime - lastProgressUpdateTime
-
-      if (timeElapsed >= 1000) {
-        const bytesWrittenSinceLastUpdate = bytes - lastBytesWritten
-        const writingSpeed = bytesWrittenSinceLastUpdate / (timeElapsed / 1000) // Bytes per second
-
-        throttledProgressCallback(bytes, speed, writingSpeed, percentage)
-
-        lastProgressUpdateTime = currentTime
-        lastBytesWritten = bytes
+      onCancel: (item) => {
+        logInfo(`Canceled ${item.getFilename()}`, LogPrefix.Backend)
+        if (onCancel !== undefined) {
+          onCancel(item)
+        }
       }
     })
 
-    const downloaded = await dl.wait()
+    abortController.signal.addEventListener('abort', () => {
+      item.cancel()
+    })
 
-    if (!downloaded) {
-      logWarning(
-        `Downloader: Download stopped or paused`,
-        LogPrefix.DownloadManager
-      )
-      throw new Error('Download stopped or paused')
-    }
-
-    logInfo(
-      `Downloader: Finished downloading ${url}`,
-      LogPrefix.DownloadManager
-    )
-    logInfo(
-      `Downloader: Finished downloading ${url}`,
-      LogPrefix.DownloadManager
-    )
+    return item
   } catch (err) {
     logError(
       `Downloader: Download Failed with: ${err}`,
@@ -1516,21 +1498,6 @@ function formatTime(seconds: number): string {
   return `${hours.toString().padStart(2, '0')}:${minutes
     .toString()
     .padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function throttle<T extends (...args: any[]) => any>(
-  callback: T,
-  limit: number
-): (...args: Parameters<T>) => void {
-  let lastCall = 0
-  return (...args: Parameters<T>) => {
-    const now = Date.now()
-    if (now - lastCall >= limit) {
-      lastCall = now
-      callback(...args)
-    }
-  }
 }
 
 export function bytesToSize(bytes: number) {

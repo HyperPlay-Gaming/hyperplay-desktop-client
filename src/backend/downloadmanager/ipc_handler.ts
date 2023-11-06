@@ -20,9 +20,7 @@ ipcMain.on('resumeCurrentDownload', () => {
   resumeCurrentDownload()
 })
 
-ipcMain.on('pauseCurrentDownload', () => {
-  pauseCurrentDownload()
-})
+ipcMain.handle('pauseCurrentDownload', async () => pauseCurrentDownload())
 
 ipcMain.on('cancelDownload', (e, removeDownloaded) => {
   cancelCurrentDownload({ removeDownloaded })

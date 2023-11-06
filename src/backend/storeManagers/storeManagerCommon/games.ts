@@ -239,7 +239,7 @@ export async function launchGame(
   }
 
   let { browserUrl } = gameInfo
-  if (platform === 'web') {
+  if (platform === 'web' || platform === 'Browser') {
     let webGameUrl
 
     if (

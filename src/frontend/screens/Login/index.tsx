@@ -16,6 +16,7 @@ import ContextProvider from '../../state/ContextProvider'
 import { Background } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
+import { ENABLE_AMAZON_STORE } from 'frontend/constants'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
@@ -117,14 +118,16 @@ export default React.memo(function NewLogin() {
               user={storeAuthState.gog.username}
               logoutAction={gog.logout}
             />
-            <Runner
-              class="nile"
-              icon={() => <AmazonLogo />}
-              loginUrl={amazonLoginPath}
-              isLoggedIn={isAmazonLoggedIn}
-              user={storeAuthState.amazon.username || 'Unknown'}
-              logoutAction={amazon.logout}
-            />
+            {ENABLE_AMAZON_STORE ? (
+              <Runner
+                class="nile"
+                icon={() => <AmazonLogo />}
+                loginUrl={amazonLoginPath}
+                isLoggedIn={isAmazonLoggedIn}
+                user={storeAuthState.amazon.username || 'Unknown'}
+                logoutAction={amazon.logout}
+              />
+            ) : null}
           </div>
           <button
             onClick={async () => handleLibraryClick()}

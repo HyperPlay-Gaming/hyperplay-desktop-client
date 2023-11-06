@@ -141,7 +141,11 @@
                 "install": "Epic Servers are having major outage right now, the game cannot be installed!",
                 "update": "Epic Servers are having major outage right now, the game cannot be updated!"
             },
-            "title": "Warning"
+            "title": "Warning",
+            "wine-change": {
+                "message": "Não foi possível encontrar a versão selecionada do Wine ({{selectedWine}}. {{newline}} Encontramos outra versão, deseja continuar usando {{foundWine}} ?",
+                "title": "Wine não encontrado!"
+            }
         },
         "wineprefix": "Escolha a pasta com o Prefixo Wine",
         "yes": "SIM",
@@ -153,7 +157,9 @@
         "login": "Entrar",
         "sync": "Sincronizar",
         "syncing": "Sincronizando",
-        "unsync": "Dessincronizar"
+        "unsync": "Dessincronizar",
+        "download": "Download",
+        "continue": "Continuar"
     },
     "controller": {
         "hints": {
@@ -192,7 +198,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Tempo Estimado"
     },
     "epic": {
         "offline-notification-body": "Serviços online talvez não funcionem completamente enquanto os servidores Epic Games estão offline!",
@@ -264,7 +271,9 @@
         "wine": {
             "part1": "HyperPlay procura versões de Wine, Proton e CrossOver nas seguintes pastas:",
             "part2": "Para outros lugares, crie um link simbólico até uma dessas pastas"
-        }
+        },
+        "disable_logs": "Habilitar essa opção faz com que a maioria dos registros (informações críticas) sejam desabilitadas. Desabilite essa opção antes de reportar erros no app.",
+        "dxvkfpslimit": "Limita o número de quadros em jogos que usam DXVK"
     },
     "info": {
         "hyperplay": {
@@ -645,5 +654,54 @@
     },
     "analytics": "análise",
     "accounts": "contas",
-    "ALL": "TUDO"
+    "ALL": "TUDO",
+    "externalLink": {
+        "dontAskAgain": "Não perguntar novamente",
+        "warning": "Isso abrirá um link externo."
+    },
+    "dlc": {
+        "installDlcs": "Instalar todos os DLCs",
+        "actions": "Ações",
+        "size": "Tamanho",
+        "title": "Título",
+        "noDlcFound": "Nenhum DLC encontrado"
+    },
+    "hyperplay": {
+        "accesscodes": {
+            "success": {
+                "validation": "Sucesso! Código de acesso válido"
+            },
+            "error": {
+                "validation": "Código de Acesso Inválido"
+            }
+        },
+        "onboarding": {
+            "analytics": {
+                "anonymized": "Enviar clicks anônimos e interações com games;",
+                "body": "HyperPlay gostaria de coletar dados afim de entender como nossos usuário interagem com a aplicação. Essa informação nos ajuda a entender como o o app é utilizado e a deixar o app ainda melhor para você."
+            }
+        },
+        "buttons": {
+            "noThanks": "Não, Obrigado",
+            "agree": "Eu concordo"
+        },
+        "analyticsOff": "A análise de dados está desligada",
+        "misc": "Nunca",
+        "currentWallet": "Carteira Atual",
+        "changeWallet": "Trocar Carteira",
+        "analyticsOn": "A análise de dados está ligada",
+        "copyUrl": "Copiar URL",
+        "discordApp": "Discord"
+    },
+    "gameRelease": {
+        "prototype": "Protótipo",
+        "demo": "Demo",
+        "beta": "Beta",
+        "alpha": "Alpha",
+        "main": "Estável"
+    },
+    "dlcs": {
+        "label": "Selecione os DLCs para instalar:"
+    },
+    "exit_game": "Sair do Jogo"
 }

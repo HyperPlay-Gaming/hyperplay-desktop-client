@@ -10,8 +10,6 @@ import { notify } from '../dialog/dialog'
 import i18next from 'i18next'
 import { configFolder } from 'backend/constants'
 import { join } from 'path'
-import { rmSync } from 'graceful-fs'
-import { clean } from 'hp-easydl/dist/utils'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
@@ -203,8 +201,9 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
     }
     removeFromQueue(currentElement.params.appName)
 
-    if (removeDownloaded) {
-      const { appName, runner, gameInfo, channelName } = currentElement!.params
+    const { runner } = currentElement!.params
+    if (runner === 'hyperplay' && removeDownloaded) {
+      const { appName, gameInfo, channelName } = currentElement!.params
       const { folder_name } = gameInfo
       if (gameInfo.channels === undefined || channelName === undefined) {
         console.error(
@@ -214,12 +213,10 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
       }
       const releaseMeta = gameInfo.channels[channelName].release_meta
 
-      if (runner === 'hyperplay' && releaseMeta) {
+      if (releaseMeta) {
         const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
         logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
-        clean(tempfolder).finally(() => {
-          rmSync(tempfolder, { recursive: true, force: true })
-        })
+        callAbortController(appName)
       } else if (folder_name) {
         removeFolder(currentElement.params.path, folder_name)
       }
@@ -228,9 +225,10 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
   }
 }
 
-function pauseCurrentDownload() {
+async function pauseCurrentDownload() {
   if (currentElement) {
-    stopCurrentDownload()
+    const { appName, runner } = currentElement.params
+    await gameManagerMap[runner].pause(appName)
   }
   queueState = 'paused'
   sendFrontendMessage(
