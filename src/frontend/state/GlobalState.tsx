@@ -481,12 +481,15 @@ class GlobalState extends PureComponent<Props> {
         const currentApp = libraryStatus.filter(
           (game) => game.appName === appName
         )[0]
+
+        const hasUpdate = libraryState.gameUpdates.includes(appName)
+
         if (!currentApp) {
           return launch({
             appName,
             t,
             runner,
-            hasUpdate: false,
+            hasUpdate,
             showDialogModal: this.handleShowDialogModal
           })
         }
