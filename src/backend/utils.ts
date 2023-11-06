@@ -12,8 +12,7 @@ import {
   GameInfo,
   GameSettings,
   State,
-  ProgressInfo,
-  InstallPlatform
+  ProgressInfo
 } from 'common/types'
 import axios from 'axios'
 import yauzl from 'yauzl'
@@ -1577,37 +1576,46 @@ export const processIsClosed = async (pid: number) => {
   })
 }
 
-export const getStoreName = (runner: Runner) => {
-  switch (runner) {
-    case 'legendary':
-      return 'Epic Games'
-    case 'gog':
-      return 'GOG'
-    case 'nile':
-      return 'Amazon Games'
-    case 'hyperplay':
-      return 'HyperPlay'
-    case 'sideload':
-      return 'Sideloaded'
-  }
+type RunnerStore = {
+  [key in Runner]:
+    | 'Epic Games'
+    | 'GOG'
+    | 'Amazon Games'
+    | 'HyperPlay'
+    | 'Sideloaded'
 }
 
-export function getPlatformName(
-  platform: InstallPlatform
-): 'Windows' | 'Linux' | 'Mac' | 'Browser' | 'Unknown' {
-  switch (platform) {
-    case 'windows_amd64':
-    case 'windows_arm64':
-      return 'Windows'
-    case 'linux_amd64':
-    case 'linux_arm64':
-      return 'Linux'
-    case 'darwin_amd64':
-    case 'darwin_arm64':
-      return 'Mac'
-    case 'web':
-      return 'Browser'
-    default:
-      return 'Unknown'
-  }
+const runnerStore: RunnerStore = {
+  legendary: 'Epic Games',
+  gog: 'GOG',
+  nile: 'Amazon Games',
+  hyperplay: 'HyperPlay',
+  sideload: 'Sideloaded'
+}
+
+export const getStoreName = (runner: Runner) => {
+  return runnerStore[runner] || 'Unknown'
+}
+
+type PlatformName =
+  | 'Windows'
+  | 'Linux'
+  | 'Mac'
+  | 'Browser'
+  | 'Android'
+  | 'Unknown'
+
+const platformMap: Record<string, PlatformName> = {
+  windows_amd64: 'Windows',
+  windows_arm64: 'Windows',
+  linux_amd64: 'Linux',
+  linux_arm64: 'Linux',
+  darwin_amd64: 'Mac',
+  darwin_arm64: 'Mac',
+  web: 'Browser',
+  android_arm64: 'Android'
+}
+
+export function getPlatformName(platform: string): PlatformName {
+  return platformMap[platform] || 'Unknown'
 }
