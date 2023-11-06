@@ -772,8 +772,6 @@ export async function update(appName: string): Promise<InstallResult> {
     return { status: 'error' }
   }
 
-  await uninstall({ appName })
-
   let accessCode: string | undefined = undefined
 
   // if we used an access code for this channel on last install, use it again
