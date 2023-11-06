@@ -196,6 +196,18 @@ let ignoreExitToTray = false
 ipcMain.on('ignoreExitToTray', () => {
   ignoreExitToTray = true
 })
+
+ipcMain.on('focusWindow', () => {
+  const mainWindow = getMainWindow()
+
+  if (!mainWindow) {
+    return
+  }
+
+  mainWindow.show()
+  mainWindow?.focus()
+})
+
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
@@ -1086,9 +1098,6 @@ ipcMain.handle(
     })
 
     const mainWindow = getMainWindow()
-    if (minimizeOnGameLaunch) {
-      mainWindow?.hide()
-    }
 
     // Prevent display from sleep
     if (!powerDisplayId) {
@@ -1149,6 +1158,10 @@ ipcMain.handle(
       runner,
       status: 'playing'
     })
+
+    if (minimizeOnGameLaunch) {
+      mainWindow?.hide()
+    }
 
     const command = gameManagerMap[runner].launch(appName, launchArguments)
 

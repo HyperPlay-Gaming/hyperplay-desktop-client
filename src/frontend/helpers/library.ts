@@ -128,13 +128,16 @@ const launch = async ({
   if (hasUpdate) {
     const { ignoreGameUpdates } = await window.api.requestGameSettings(appName)
 
-    if (ignoreGameUpdates) {
+    if (ignoreGameUpdates && runner !== 'hyperplay') {
       return window.api.launch({
         appName,
         runner,
         launchArguments: runner === 'legendary' ? '--skip-version-check' : ''
       })
     }
+
+    // focus the window if minimized or hidden
+    window.api.focusWindow()
 
     // promisifies the showDialogModal button click callbacks
     const launchFinished = new Promise<{ status: 'done' | 'error' | 'abort' }>(
@@ -157,6 +160,9 @@ const launch = async ({
             {
               text: t('box.no'),
               onClick: async () => {
+                if (runner === 'hyperplay') {
+                  return
+                }
                 res(
                   window.api.launch({
                     appName,
