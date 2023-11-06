@@ -76,7 +76,9 @@ import {
   wait,
   checkWineBeforeLaunch,
   downloadDefaultWine,
-  getNileVersion
+  getNileVersion,
+  getStoreName,
+  getPlatformName
 } from './utils'
 import {
   configStore,
@@ -1041,7 +1043,7 @@ ipcMain.handle(
     const gameSettings = await gameManagerMap[runner].getSettings(appName)
     const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
 
-    const { title } = game
+    const { title, app_name, browserUrl, install } = game
 
     const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
@@ -1055,6 +1057,17 @@ ipcMain.handle(
     }
 
     logInfo(`Launching ${title} (${game.app_name})`, LogPrefix.Backend)
+    trackEvent({
+      event: 'Game Launched',
+      properties: {
+        game_name: app_name,
+        isBrowserGame: browserUrl !== undefined,
+        game_title: title,
+        store_name: getStoreName(runner),
+        browserUrl: browserUrl ?? undefined,
+        platform: getPlatformName(install.platform!)
+      }
+    })
 
     if (autoSyncSaves && isOnline()) {
       sendFrontendMessage('gameStatusUpdate', {
@@ -1217,6 +1230,19 @@ ipcMain.handle(
       appName,
       runner,
       status: 'done'
+    })
+
+    trackEvent({
+      event: 'Game Closed',
+      properties: {
+        game_name: app_name,
+        isBrowserGame: browserUrl !== undefined,
+        game_title: title,
+        store_name: getStoreName(runner),
+        browserUrl: browserUrl ?? undefined,
+        platform: getPlatformName(install.platform!),
+        playTimeInMs: sessionPlaytime * 60 * 1000
+      }
     })
 
     // Exit if we've been launched without UI

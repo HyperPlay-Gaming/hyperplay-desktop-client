@@ -1,3 +1,4 @@
+import { getPlatformName, getStoreName } from 'backend/utils'
 import { AppPlatforms, InstallPlatform, Runner } from 'common/types'
 
 export interface MetricsOptIn {
@@ -188,7 +189,8 @@ export interface GameLaunch {
   properties: {
     isBrowserGame: boolean
     game_name: string
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
+    platform: ReturnType<typeof getPlatformName>
     game_title: string
     browserUrl?: string
     processName?: string
@@ -201,11 +203,12 @@ export interface GameClosed {
   properties: {
     isBrowserGame: boolean
     game_name: string
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_title: string
     playTimeInMs: number
     browserUrl?: string
     processName?: string
+    platform: ReturnType<typeof getPlatformName>
   }
   sensitiveProperties?: never
 }

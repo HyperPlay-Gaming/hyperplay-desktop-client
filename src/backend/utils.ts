@@ -12,7 +12,8 @@ import {
   GameInfo,
   GameSettings,
   State,
-  ProgressInfo
+  ProgressInfo,
+  InstallPlatform
 } from 'common/types'
 import axios from 'axios'
 import yauzl from 'yauzl'
@@ -1574,4 +1575,39 @@ export const processIsClosed = async (pid: number) => {
     }
     check()
   })
+}
+
+export const getStoreName = (runner: Runner) => {
+  switch (runner) {
+    case 'legendary':
+      return 'Epic Games'
+    case 'gog':
+      return 'GOG'
+    case 'nile':
+      return 'Amazon Games'
+    case 'hyperplay':
+      return 'HyperPlay'
+    case 'sideload':
+      return 'Sideloaded'
+  }
+}
+
+export function getPlatformName(
+  platform: InstallPlatform
+): 'Windows' | 'Linux' | 'Mac' | 'Browser' | 'Unknown' {
+  switch (platform) {
+    case 'windows_amd64':
+    case 'windows_arm64':
+      return 'Windows'
+    case 'linux_amd64':
+    case 'linux_arm64':
+      return 'Linux'
+    case 'darwin_amd64':
+    case 'darwin_arm64':
+      return 'Mac'
+    case 'web':
+      return 'Browser'
+    default:
+      return 'Unknown'
+  }
 }

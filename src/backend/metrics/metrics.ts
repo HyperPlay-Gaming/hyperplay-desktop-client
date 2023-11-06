@@ -2,7 +2,13 @@ import { apiObject } from '@rudderstack/rudder-sdk-node'
 import { sendFrontendMessage } from 'backend/main_window'
 import { GameInfo, MetricsOptInStatus } from 'common/types'
 import Store from 'electron-store'
-import { getAppVersion, getFormattedOsName, processIsClosed } from '../utils'
+import {
+  getAppVersion,
+  getFormattedOsName,
+  getPlatformName,
+  getStoreName,
+  processIsClosed
+} from '../utils'
 import { rudderstack } from './rudderstack-client'
 import { PossibleMetricEventNames, PossibleMetricPayloads } from './types'
 import { hrtime } from 'process'
@@ -246,11 +252,12 @@ export async function trackPidPlaytime(
       trackEvent({
         event: 'Game Launched',
         properties: {
-          isBrowserGame: false,
+          isBrowserGame: gameInfo.browserUrl !== undefined,
           game_name: gameInfo.app_name,
           game_title: gameInfo.title,
-          store_name: gameInfo.runner,
-          processName: processInfo.name
+          store_name: getStoreName(gameInfo.runner),
+          processName: processInfo.name,
+          platform: getPlatformName(gameInfo.install.platform!)
         }
       })
     }
@@ -265,11 +272,12 @@ export async function trackPidPlaytime(
       trackEvent({
         event: 'Game Closed',
         properties: {
-          isBrowserGame: false,
+          isBrowserGame: gameInfo.browserUrl !== undefined,
           game_name: gameInfo.app_name,
           game_title: gameInfo.title,
-          store_name: gameInfo.runner,
+          store_name: getStoreName(gameInfo.runner),
           processName: processInfo.name,
+          platform: getPlatformName(gameInfo.install.platform!),
           playTimeInMs: elapsedInMs
         }
       })
