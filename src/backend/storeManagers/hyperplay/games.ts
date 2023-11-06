@@ -790,9 +790,12 @@ export async function update(appName: string): Promise<InstallResult> {
       accessCode = gameInfo.accessCodesCache[channelIdOfCurrentInstall]
   }
 
+  // two folders up from install path
+  const mainGameFolder = path.join(gameInfo.install.install_path, '../..')
+
   //install the new version
   const installResult = await install(appName, {
-    path: path.dirname(gameInfo.install.install_path),
+    path: mainGameFolder,
     platformToInstall: gameInfo.install.platform,
     channelName: gameInfo.install.channelName,
     accessCode
