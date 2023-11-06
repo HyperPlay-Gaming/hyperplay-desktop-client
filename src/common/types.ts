@@ -68,7 +68,7 @@ export interface ButtonOptions {
 
 export type LaunchParams = {
   appName: string
-  launchArguments: string
+  hasUpdate: boolean
   runner: Runner
 }
 

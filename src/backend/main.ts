@@ -187,7 +187,7 @@ import {
 
 app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
-const { showOpenDialog } = dialog
+const { showOpenDialog, showMessageBox } = dialog
 const isWindows = platform() === 'win32'
 
 let mainWindow: BrowserWindow
@@ -1036,10 +1036,11 @@ let powerDisplayId: number | null
 // get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
-  async (event, { appName, launchArguments, runner }): StatusPromise => {
+  async (event, { appName, runner, hasUpdate }): StatusPromise => {
     const game = gameManagerMap[runner].getGameInfo(appName)
     const gameSettings = await gameManagerMap[runner].getSettings(appName)
     const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
+    let skipUpdateArgument = ''
 
     const { title } = game
 
@@ -1052,6 +1053,40 @@ ipcMain.handle(
         `${game.app_name}.firstPlayed`,
         startPlayingDate.toISOString()
       )
+    }
+
+    if (hasUpdate && !gameSettings.ignoreGameUpdates) {
+      const { response } = await showMessageBox({
+        message: i18next.t(
+          'gamepage:box.update.message',
+          'Update available for {{title}}',
+          { title }
+        ),
+        type: 'question',
+        buttons: [
+          i18next.t('gamepage:box.yes', 'Yes'),
+          i18next.t('box.no', 'No')
+        ]
+      })
+
+      if (response === 0) {
+        updateGame({
+          appName,
+          runner,
+          gameInfo: game
+        })
+
+        return { status: 'done' }
+      }
+
+      if (response === 1) {
+        if (runner === 'hyperplay') {
+          return { status: 'done' }
+        }
+        if (runner === 'legendary') {
+          skipUpdateArgument = '--skip-version-check'
+        }
+      }
     }
 
     logInfo(`Launching ${title} (${game.app_name})`, LogPrefix.Backend)
@@ -1150,7 +1185,7 @@ ipcMain.handle(
       status: 'playing'
     })
 
-    const command = gameManagerMap[runner].launch(appName, launchArguments)
+    const command = gameManagerMap[runner].launch(appName, skipUpdateArgument)
 
     const launchResult = await command.catch((exception) => {
       logError(exception, LogPrefix.Backend)
@@ -1848,6 +1883,7 @@ import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
 import { toggleOverlay } from 'backend/hyperplay-overlay'
+import { updateGame } from './api/downloadmanager'
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
