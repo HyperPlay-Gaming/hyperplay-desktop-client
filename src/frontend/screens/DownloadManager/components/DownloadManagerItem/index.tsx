@@ -248,8 +248,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           onClose={() => setShowStopInstallModal(false)}
           installPath={path}
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
-          appName={appName}
-          runner={runner}
+          gameInfo={gameInfo}
           progress={progress}
         />
       ) : null}

@@ -7,21 +7,24 @@ import {
 } from 'frontend/components/UI/Dialog'
 import { useTranslation } from 'react-i18next'
 import { Button, Checkbox } from '@hyperplay/ui'
-import { InstallProgress, Runner } from 'common/types'
+import { GameInfo, InstallProgress } from 'common/types'
+import { trackDownloadStatusChange } from 'frontend/screens/DownloadManager/helpers'
 const storage: Storage = window.localStorage
 
 interface StopInstallProps {
   onClose: () => void
   installPath: string | undefined
   folderName: string
-  appName: string
-  runner: Runner
+  gameInfo: GameInfo
   progress: InstallProgress
 }
 
 export default function StopInstallationModal(props: StopInstallProps) {
   const { t } = useTranslation('gamepage')
   const checkbox = useRef<HTMLInputElement>(null)
+
+  const { runner, title, app_name } = props.gameInfo
+
   return (
     <Dialog onClose={props.onClose} showCloseButton>
       <DialogHeader onClose={props.onClose}>
@@ -67,14 +70,28 @@ export default function StopInstallationModal(props: StopInstallProps) {
                 ...props.progress,
                 folder: props.installPath
               }
-              storage.setItem(props.appName, JSON.stringify(latestProgress))
+              storage.setItem(app_name, JSON.stringify(latestProgress))
               window.api.cancelDownload(false)
+              trackDownloadStatusChange({
+                event: 'Game Install Paused',
+                properties: {
+                  store_name: runner,
+                  game_title: title
+                }
+              })
             }
             // if user does not want to keep downloaded files but still wants to cancel download
             else {
               props.onClose()
               window.api.cancelDownload(true)
-              storage.removeItem(props.appName)
+              storage.removeItem(app_name)
+              trackDownloadStatusChange({
+                event: 'Game Install Canceled',
+                properties: {
+                  store_name: runner,
+                  game_title: title
+                }
+              })
             }
           }}
         >
