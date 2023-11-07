@@ -13,6 +13,7 @@ import DownloadToastManagerStyles from './index.module.scss'
 import { launch } from 'frontend/helpers'
 import StopInstallationModal from '../StopInstallationModal'
 import { downloadStatus } from '@hyperplay/ui/dist/components/DownloadToast'
+import { trackDownloadStatusChange } from 'frontend/screens/DownloadManager/helpers'
 
 const nullProgress: InstallProgress = {
   bytes: '0',
@@ -220,6 +221,28 @@ export default function DownloadToastManager() {
     return 'inProgress'
   }
 
+  function handlePauseDownload() {
+    trackDownloadStatusChange({
+      event: 'Game Install Paused',
+      properties: {
+        store_name: runner,
+        game_title: title
+      }
+    })
+    window.api.pauseCurrentDownload()
+  }
+
+  function handleResumeDownload() {
+    trackDownloadStatusChange({
+      event: 'Game Install Resumed',
+      properties: {
+        store_name: runner,
+        game_title: title
+      }
+    })
+    window.api.resumeCurrentDownload()
+  }
+
   return (
     <div className={DownloadToastManagerStyles.downloadManagerContainer}>
       {showDownloadToast ? (
@@ -236,8 +259,8 @@ export default function DownloadToastManager() {
               properties: { buttonClicked: 'cancel' }
             })
           }}
-          onPauseClick={async () => window.api.pauseCurrentDownload()}
-          onStartClick={() => window.api.resumeCurrentDownload()}
+          onPauseClick={async () => handlePauseDownload()}
+          onStartClick={() => handleResumeDownload()}
           onCloseClick={() => {
             setShowDownloadToast(false)
             window.api.trackEvent({
