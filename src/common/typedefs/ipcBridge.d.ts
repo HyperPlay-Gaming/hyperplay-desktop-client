@@ -9,7 +9,6 @@ import {
   DiskSpaceData,
   Tools,
   WineCommandArgs,
-  Release,
   GameInfo,
   GameSettings,
   InstallPlatform,
@@ -226,7 +225,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   isFlatpak: () => boolean
   getPlatform: () => NodeJS.Platform
   showUpdateSetting: () => boolean
-  getLatestReleases: () => Promise<Release[]>
   getGameInfo: (appName: string, runner: Runner) => Promise<GameInfo | null>
   getExtraInfo: (appName: string, runner: Runner) => Promise<ExtraInfo | null>
   getGameSettings: (

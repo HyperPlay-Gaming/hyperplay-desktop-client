@@ -70,7 +70,6 @@ import {
   // detectVCRedist,
   getFileSize,
   getFirstExistingParentPath,
-  getLatestReleases,
   getShellPath,
   wait,
   checkWineBeforeLaunch,
@@ -771,15 +770,6 @@ ipcMain.handle('showUpdateSetting', () => !isFlatpak)
 ipcMain.handle('getNumOfGpus', async (): Promise<number> => {
   const { controllers } = await si.graphics()
   return controllers.length
-})
-
-ipcMain.handle('getLatestReleases', async () => {
-  const { checkForUpdatesOnStartup } = GlobalConfig.get().getSettings()
-  if (checkForUpdatesOnStartup) {
-    return getLatestReleases()
-  } else {
-    return []
-  }
 })
 
 ipcMain.on('clearCache', (event) => {

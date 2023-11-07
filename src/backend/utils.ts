@@ -8,7 +8,6 @@ import {
   WineInstallation,
   RpcClient,
   SteamRuntime,
-  Release,
   GameInfo,
   GameSettings,
   State,
@@ -50,7 +49,6 @@ import si from 'systeminformation'
 import {
   fixAsarPath,
   getSteamLibraries,
-  GITHUB_API,
   configPath,
   gamesConfigPath,
   icon,
@@ -88,7 +86,7 @@ import {
 } from './storeManagers/nile/electronStores'
 
 import makeClient from 'discord-rich-presence-typescript'
-import { notify, showDialogBoxModalAuto } from './dialog/dialog'
+import { showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
@@ -826,66 +824,6 @@ function getFirstExistingParentPath(directoryPath: string): string {
   return parentDirectoryPath !== '.' ? parentDirectoryPath : ''
 }
 
-const getLatestReleases = async (): Promise<Release[]> => {
-  const newReleases: Release[] = []
-  logInfo('Checking for new HerHyperPlayoic Updates', LogPrefix.Backend)
-
-  try {
-    const { data: releases } = await axios.get(GITHUB_API)
-    const latestStable: Release = releases.filter(
-      (rel: Release) => rel.prerelease === false
-    )[0]
-    const latestBeta: Release = releases.filter(
-      (rel: Release) => rel.prerelease === true
-    )[0]
-
-    const current = app.getVersion()
-
-    const thereIsNewStable = semverGt(latestStable.tag_name, current)
-    const thereIsNewBeta = semverGt(latestBeta.tag_name, current)
-
-    if (thereIsNewStable) {
-      newReleases.push({ ...latestStable, type: 'stable' })
-    }
-    if (thereIsNewBeta) {
-      newReleases.push({ ...latestBeta, type: 'beta' })
-    }
-
-    if (newReleases.length) {
-      notify({
-        title: t('Update Available!'),
-        body: t(
-          'notify.new-hyperplay-version',
-          'A new HyperPlay version was released!'
-        )
-      })
-    }
-
-    return newReleases
-  } catch (error) {
-    logError(['Error when checking for updates', error], LogPrefix.Backend)
-    return []
-  }
-}
-
-const getCurrentChangelog = async (): Promise<Release | null> => {
-  logInfo('Checking for current version changelog', LogPrefix.Backend)
-
-  try {
-    const current = app.getVersion()
-
-    const { data: release } = await axios.get(`${GITHUB_API}/tags/v${current}`)
-
-    return release as Release
-  } catch (error) {
-    logError(
-      ['Error when checking for current HyperPlay changelog'],
-      LogPrefix.Backend
-    )
-    return null
-  }
-}
-
 function getInfo(appName: string, runner: Runner): GameInfo {
   return gameManagerMap[runner].getGameInfo(appName)
 }
@@ -1517,7 +1455,6 @@ export function bytesToSize(bytes: number) {
 export {
   errorHandler,
   execAsync,
-  getCurrentChangelog,
   handleExit,
   isEpicServiceOffline,
   openUrlOrFile,
@@ -1540,7 +1477,6 @@ export {
   getInfo,
   getShellPath,
   getFirstExistingParentPath,
-  getLatestReleases,
   getSystemInfo,
   getWineFromProton,
   getFileSize,

@@ -77,16 +77,6 @@ interface About {
   shortDescription: string
 }
 
-export type Release = {
-  type: 'stable' | 'beta'
-  html_url: string
-  name: string
-  tag_name: string
-  published_at: string
-  prerelease: boolean
-  id: number
-}
-
 export type ExperimentalFeatures = {
   enableNewShinyFeature: boolean // remove this when adding a real experimental feature
 }
