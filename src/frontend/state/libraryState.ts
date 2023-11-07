@@ -150,6 +150,8 @@ class LibraryState {
       this.refreshAmazonLibrary()
     }
 
+    this.refreshSideloadedLibrary()
+
     this.hyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
     this.hiddenGames.list = configStore.get('games.hidden', [])
 
