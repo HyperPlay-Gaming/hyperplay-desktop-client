@@ -11,9 +11,17 @@ export interface TransactionStateInterface {
   latestToast: Toast | null
 }
 
+export type OverlayMode =
+  | 'HyperPlay Extension'
+  | 'HyperPlay Exit Game'
+  | 'HyperPlay Toasts'
+  | 'HyperPlay Hint Text'
+  | 'HyperPlay Browser Game'
+  | 'HyperPlay Extension Overlay'
+
 export interface OverlayStateInterface {
   renderState: OverlayRenderState
   showOverlay: boolean | null
   isFullscreenOverlay: boolean
-  title: string
+  title: OverlayMode
 }
