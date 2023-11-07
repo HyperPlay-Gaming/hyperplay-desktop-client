@@ -28,6 +28,7 @@ import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
+import { trackDownloadStatusChange } from '../../helpers'
 
 type Props = {
   element?: DMQueueElement
@@ -151,8 +152,22 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const handleSecondaryActionClick = () => {
     if (state === 'paused') {
       window.api.resumeCurrentDownload()
+      trackDownloadStatusChange({
+        event: 'Game Install Resumed',
+        properties: {
+          store_name: runner,
+          game_title: gameInfo.title
+        }
+      })
     } else if (state === 'running') {
       window.api.pauseCurrentDownload()
+      trackDownloadStatusChange({
+        event: 'Game Install Paused',
+        properties: {
+          store_name: runner,
+          game_title: gameInfo.title
+        }
+      })
     }
   }
 

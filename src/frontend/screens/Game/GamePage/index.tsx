@@ -64,6 +64,7 @@ import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
 import DMQueueState from 'frontend/state/DMQueueState'
+import { trackDownloadStatusChange } from 'frontend/screens/DownloadManager/helpers'
 
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -889,8 +890,17 @@ export default observer(function GamePage(): JSX.Element | null {
   }
 
   async function mainAction(is_installed: boolean) {
+    // TODO: Add a way to pause download from the game page
+
     // resume download
     if (isPaused) {
+      trackDownloadStatusChange({
+        event: 'Game Install Resumed',
+        properties: {
+          store_name: runner,
+          game_title: gameInfo.title
+        }
+      })
       return window.api.resumeCurrentDownload()
     }
 
