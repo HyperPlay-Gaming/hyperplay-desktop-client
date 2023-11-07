@@ -88,9 +88,10 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
       )
     }
 
-    let extensionManager = <ExtensionManager />
-    if (
-      !shouldShowExtension &&
+    let extensionManager = null
+    if (shouldShowExtension) {
+      extensionManager = <ExtensionManager />
+    } else if (
       OverlayState.renderState.showHintText &&
       OverlayState.title !== 'HyperPlay Hint Text'
     ) {
