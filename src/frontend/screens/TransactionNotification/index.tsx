@@ -15,8 +15,9 @@ const TransactionNotification = () => {
     !item.isOpen ||
     WalletState.provider === PROVIDERS.METAMASK_EXTENSION ||
     WalletState.provider === PROVIDERS.UNCONNECTED
-  )
+  ) {
     return <></>
+  }
 
   const title = item.title
   const description = item.subtext
