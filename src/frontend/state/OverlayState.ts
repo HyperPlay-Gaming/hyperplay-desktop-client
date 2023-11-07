@@ -1,4 +1,4 @@
-import { OverlayStateInterface } from 'common/state/interfaces'
+import { OverlayMode, OverlayStateInterface } from 'common/state/interfaces'
 import { OverlayRenderState } from 'common/types'
 import { makeAutoObservable } from 'mobx'
 
@@ -17,7 +17,7 @@ class OverlayState implements OverlayStateInterface {
 
   isFullscreenOverlay = false
 
-  title = null
+  title: OverlayMode | null = null
 
   constructor() {
     makeAutoObservable(
@@ -58,7 +58,7 @@ class OverlayState implements OverlayStateInterface {
 
   private handleUpdateOverlayTitle(
     event: Electron.IpcRendererEvent,
-    title: string
+    title: OverlayMode
   ) {
     this.title = title
   }
