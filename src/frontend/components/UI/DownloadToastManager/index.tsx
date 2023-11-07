@@ -26,7 +26,7 @@ export default function DownloadToastManager() {
   const [showPlay, setShowPlay] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
 
-  const appName = currentElement?.params?.gameInfo?.app_name ?? '';
+  const appName = currentElement?.params?.gameInfo?.app_name ?? ''
   const gameInfo = currentElement?.params.gameInfo
   const { statusText: downloadStatusText, status } = useGetDownloadStatusText(
     appName,

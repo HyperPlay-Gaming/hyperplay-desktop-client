@@ -244,10 +244,10 @@ test.describe('hp store api tests', function () {
               appName,
               () => {
                 return async (_e, status: GameStatus) => {
-                    if (status.status === statusToWaitFor) {
-                      removeEventListener()
-                      resolve(status)
-                    }
+                  if (status.status === statusToWaitFor) {
+                    removeEventListener()
+                    resolve(status)
+                  }
                 }
               }
             )
@@ -268,7 +268,7 @@ test.describe('hp store api tests', function () {
       [appName, statusToWaitFor]
     )
 
-    return evaluated;
+    return evaluated
   }
 
   const pauseDownload = async () => {

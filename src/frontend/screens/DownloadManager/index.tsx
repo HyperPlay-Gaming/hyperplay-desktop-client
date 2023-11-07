@@ -18,7 +18,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
   const [currentElement, setCurrentElement] = useState<DMQueueElement>()
   const [finishedElem, setFinishedElem] = useState<DMQueueElement[]>()
 
-  const appName = currentElement?.params?.appName ?? '';
+  const appName = currentElement?.params?.appName ?? ''
 
   useEffect(() => {
     setRefreshing(true)
@@ -94,10 +94,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
       </h3>
       {
         <>
-          <ProgressHeader
-            state={state}
-            appName={appName}
-          />
+          <ProgressHeader state={state} appName={appName} />
           {currentElement && (
             <div className="downloadManager">
               <div
