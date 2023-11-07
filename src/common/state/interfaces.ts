@@ -18,6 +18,7 @@ export type OverlayMode =
   | 'HyperPlay Hint Text'
   | 'HyperPlay Browser Game'
   | 'HyperPlay Extension Overlay'
+  | null
 
 export interface OverlayStateInterface {
   renderState: OverlayRenderState

@@ -17,7 +17,7 @@ class OverlayState implements OverlayStateInterface {
 
   isFullscreenOverlay = false
 
-  title = ''
+  title = null
 
   constructor() {
     makeAutoObservable(
