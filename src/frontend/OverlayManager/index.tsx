@@ -78,7 +78,11 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
     if (OverlayState.renderState.showExitGameButton) {
       exitGameButton = (
         <Button
-          onClick={async () => window.api.kill(appName, runner)}
+          onClick={async () => {
+            // mac can take ~5 seconds to close the wine process, so we close the overlay instantly
+            window.api.killOverlay()
+            window.api.kill(appName, runner)
+          }}
           style={exitGameButtonStyle}
           type="secondary"
           size="medium"

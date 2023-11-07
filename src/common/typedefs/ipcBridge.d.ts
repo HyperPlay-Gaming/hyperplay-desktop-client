@@ -77,6 +77,7 @@ interface HyperPlaySyncIPCFunctions {
   toggleIsPopupOpen: () => void
   toastCloseOnClick: (key: ToastKey) => void
   lockPopup: (lock: boolean) => void
+  killOverlay: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {

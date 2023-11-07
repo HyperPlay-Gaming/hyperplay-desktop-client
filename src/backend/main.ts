@@ -1847,7 +1847,7 @@ import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
-import { toggleOverlay } from 'backend/hyperplay-overlay'
+import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
 
 // sends messages to renderer process through preload.ts callbacks
@@ -1918,4 +1918,8 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
+})
+
+ipcMain.on('killOverlay', () => {
+  closeOverlay()
 })
