@@ -386,6 +386,11 @@ export async function launchGame(
       LogPrefix.Backend
     )
 
+    const shouldOpenOverlay =
+      gameInfo &&
+      (gameInfo.runner === 'hyperplay' ||
+        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
+
     await runWineCommand({
       commandParts: [executable, launcherArgs ?? ''],
       gameSettings,
@@ -395,6 +400,11 @@ export async function launchGame(
         wrappers,
         logFile: logFileLocation(appName),
         logMessagePrefix: LogPrefix.Backend
+      },
+      overlayInfo: {
+        showOverlay: !!shouldOpenOverlay,
+        runner: gameInfo.runner,
+        appName: gameInfo.app_name
       }
     })
 

@@ -593,6 +593,11 @@ export type WineCommandArgs = {
   options?: CallRunnerOptions
   startFolder?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
+  overlayInfo?: {
+    showOverlay: boolean
+    appName: string
+    runner: Runner
+  }
 }
 
 export type Web3Features = {

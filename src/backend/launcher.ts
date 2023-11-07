@@ -577,7 +577,8 @@ async function runWineCommand({
   installFolderName,
   options,
   startFolder,
-  skipPrefixCheckIKnowWhatImDoing = false
+  skipPrefixCheckIKnowWhatImDoing = false,
+  overlayInfo
 }: WineCommandArgs): Promise<{ stderr: string; stdout: string }> {
   const settings = gameSettings
     ? gameSettings
@@ -652,6 +653,11 @@ async function runWineCommand({
     child.stdout.setEncoding('utf-8')
     child.stderr.setEncoding('utf-8')
 
+    if (overlayInfo) {
+      const { showOverlay, appName, runner } = overlayInfo
+      if (showOverlay) openOverlay(appName, runner)
+    }
+
     if (!logsDisabled) {
       if (options?.logFile) {
         logDebug(`Logging to file "${options?.logFile}"`, LogPrefix.Backend)
@@ -710,11 +716,21 @@ async function runWineCommand({
         })
       }
 
+      if (overlayInfo) {
+        const { showOverlay } = overlayInfo
+        if (showOverlay) closeOverlay()
+      }
+
       res(response)
     })
 
     child.on('error', (error) => {
       console.log(error)
+
+      if (overlayInfo) {
+        const { showOverlay } = overlayInfo
+        if (showOverlay) closeOverlay()
+      }
     })
   })
 }
