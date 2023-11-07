@@ -197,7 +197,7 @@ ipcMain.on('ignoreExitToTray', () => {
   ignoreExitToTray = true
 })
 
-ipcMain.on('focusWindow', () => {
+ipcMain.on('focusMainWindow', () => {
   const mainWindow = getMainWindow()
 
   if (!mainWindow) {
@@ -1098,6 +1098,9 @@ ipcMain.handle(
     })
 
     const mainWindow = getMainWindow()
+    if (minimizeOnGameLaunch) {
+      mainWindow?.hide()
+    }
 
     // Prevent display from sleep
     if (!powerDisplayId) {
@@ -1158,10 +1161,6 @@ ipcMain.handle(
       runner,
       status: 'playing'
     })
-
-    if (minimizeOnGameLaunch) {
-      mainWindow?.hide()
-    }
 
     const command = gameManagerMap[runner].launch(appName, launchArguments)
 

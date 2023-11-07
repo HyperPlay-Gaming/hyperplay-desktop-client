@@ -137,7 +137,7 @@ const launch = async ({
     }
 
     // focus the window if minimized or hidden
-    window.api.focusWindow()
+    window.api.focusMainWindow()
 
     // promisifies the showDialogModal button click callbacks
     const launchFinished = new Promise<{ status: 'done' | 'error' | 'abort' }>(
@@ -161,8 +161,23 @@ const launch = async ({
               text: t('box.no'),
               onClick: async () => {
                 if (runner === 'hyperplay') {
-                  return
+                  return showDialogModal({
+                    message: t(
+                      'gamepage:box.update.message-cancel',
+                      'It is not possible to play this game without updating'
+                    ),
+                    title: t('gamepage:box.update.title'),
+                    buttons: [
+                      {
+                        text: t('box.ok'),
+                        onClick: async () => {
+                          res({ status: 'abort' })
+                        }
+                      }
+                    ]
+                  })
                 }
+
                 res(
                   window.api.launch({
                     appName,
