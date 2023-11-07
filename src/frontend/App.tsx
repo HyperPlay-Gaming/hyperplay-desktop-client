@@ -29,6 +29,7 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import { DeviceStateController } from './state/DeviceState'
 import { ENABLE_AMAZON_STORE } from './constants'
 
 function App() {
@@ -119,6 +120,7 @@ function App() {
       </HashRouter>
       <TransactionNotification />
       <DownloadToastManager />
+      <DeviceStateController />
     </div>
   )
 }
