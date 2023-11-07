@@ -48,52 +48,76 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
     WalletState.provider === PROVIDERS.METAMASK_EXTENSION &&
     OverlayState.renderState.showExtension
 
+  let toastManager = null
+  if (OverlayState.renderState.showToasts) {
+    toastManager = (
+      <div
+        className={BrowserGameStyles.txnToastContainer}
+        style={txnToastContainerStyle}
+      >
+        <ToastManager />
+      </div>
+    )
+  }
+
+  let overlayItems = null
+  if (!TransactionState.isInitialToastShown) {
+    let hintText = null
+    if (OverlayState.renderState.showHintText) {
+      hintText = (
+        <div className={`${BrowserGameStyles.closeOverlayText} title`}>
+          {t('hyperplayOverlay.closeOverlay', {
+            defaultValue: 'Press {{overlayKeyMod}} + X to close the overlay',
+            overlayKeyMod: DeviceState.isMac ? 'Option' : 'Alt'
+          })}
+        </div>
+      )
+    }
+
+    let exitGameButton = null
+    if (OverlayState.renderState.showExitGameButton) {
+      exitGameButton = (
+        <Button
+          onClick={async () => window.api.kill(appName, runner)}
+          style={exitGameButtonStyle}
+          type="secondary"
+          size="medium"
+        >
+          {t('exit_game', 'Exit Game')}
+        </Button>
+      )
+    }
+
+    let extensionManager = <ExtensionManager />
+    if (
+      !shouldShowExtension &&
+      OverlayState.renderState.showHintText &&
+      OverlayState.title !== 'HyperPlay Hint Text'
+    ) {
+      extensionManager = (
+        <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
+          {t(
+            'overlay.EXTERNAL_WALLET_CONNECTED',
+            'You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.'
+          )}
+        </div>
+      )
+    }
+
+    overlayItems = (
+      <>
+        <div className={BrowserGameStyles.bgFilter}></div>
+        {hintText}
+        {exitGameButton}
+        {extensionManager}
+      </>
+    )
+  }
+
   return (
     <>
-      {OverlayState.renderState.showToasts ? (
-        <div
-          className={BrowserGameStyles.txnToastContainer}
-          style={txnToastContainerStyle}
-        >
-          <ToastManager />
-        </div>
-      ) : null}
-
-      {TransactionState.isInitialToastShown ? null : (
-        <>
-          <div className={BrowserGameStyles.bgFilter}></div>
-          {OverlayState.renderState.showHintText ? (
-            <div className={`${BrowserGameStyles.closeOverlayText} title`}>
-              {t('hyperplayOverlay.closeOverlay', {
-                defaultValue:
-                  'Press {{overlayKeyMod}} + X to close the overlay',
-                overlayKeyMod: DeviceState.isMac ? 'Option' : 'Alt'
-              })}
-            </div>
-          ) : null}
-          {OverlayState.renderState.showExitGameButton ? (
-            <Button
-              onClick={async () => window.api.kill(appName, runner)}
-              style={exitGameButtonStyle}
-              type="secondary"
-              size="medium"
-            >
-              {t('exit_game', 'Exit Game')}
-            </Button>
-          ) : null}
-          {shouldShowExtension ? (
-            <ExtensionManager />
-          ) : OverlayState.renderState.showHintText &&
-            OverlayState.title !== 'HyperPlay Hint Text' ? (
-            <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
-              {t(
-                'overlay.EXTERNAL_WALLET_CONNECTED',
-                'You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.'
-              )}
-            </div>
-          ) : null}
-        </>
-      )}
+      {toastManager}
+      {overlayItems}
     </>
   )
 })
