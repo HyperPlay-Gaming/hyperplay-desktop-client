@@ -25,7 +25,6 @@ import {
 import classNames from 'classnames'
 import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
-import { trackDownloadStatusChange } from 'frontend/screens/DownloadManager/helpers'
 
 interface Card {
   buttonClick: () => void
@@ -293,30 +292,6 @@ const GameCard = ({
     }
   ]
 
-  function handlePauseDownload() {
-    window.api.pauseCurrentDownload()
-    trackDownloadStatusChange({
-      event: 'Game Install Paused',
-      properties: {
-        store_name: runner,
-        game_title: gameInfo.title,
-        game_name: gameInfo.app_name
-      }
-    })
-  }
-
-  function handleResumeDownload() {
-    window.api.resumeCurrentDownload()
-    trackDownloadStatusChange({
-      event: 'Game Install Resumed',
-      properties: {
-        store_name: runner,
-        game_title: gameInfo.title,
-        game_name: gameInfo.app_name
-      }
-    })
-  }
-
   const { activeController } = useContext(ContextProvider)
 
   return (
@@ -366,9 +341,11 @@ const GameCard = ({
             mainAction(runner)
           )}
           onPauseClick={handleClickStopBubbling(async () =>
-            handlePauseDownload()
+            window.api.pauseCurrentDownload()
           )}
-          onResumeClick={handleClickStopBubbling(() => handleResumeDownload())}
+          onResumeClick={handleClickStopBubbling(() =>
+            window.api.resumeCurrentDownload()
+          )}
           onPlayClick={handleClickStopBubbling(async () => mainAction(runner))}
           onStopDownloadClick={handleClickStopBubbling(async () =>
             setShowStopInstallModal(true)

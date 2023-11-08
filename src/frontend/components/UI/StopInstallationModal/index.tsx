@@ -8,7 +8,6 @@ import {
 import { useTranslation } from 'react-i18next'
 import { Button, Checkbox } from '@hyperplay/ui'
 import { GameInfo, InstallProgress } from 'common/types'
-import { trackDownloadStatusChange } from 'frontend/screens/DownloadManager/helpers'
 const storage: Storage = window.localStorage
 
 interface StopInstallProps {
@@ -72,21 +71,13 @@ export default function StopInstallationModal(props: StopInstallProps) {
               }
               storage.setItem(app_name, JSON.stringify(latestProgress))
               window.api.cancelDownload(false)
-              trackDownloadStatusChange({
-                event: 'Game Install Paused',
-                properties: {
-                  store_name: runner,
-                  game_title: title,
-                  game_name: app_name
-                }
-              })
             }
             // if user does not want to keep downloaded files but still wants to cancel download
             else {
               props.onClose()
               window.api.cancelDownload(true)
               storage.removeItem(app_name)
-              trackDownloadStatusChange({
+              window.api.trackEvent({
                 event: 'Game Install Canceled',
                 properties: {
                   store_name: runner,
