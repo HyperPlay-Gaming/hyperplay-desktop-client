@@ -5,7 +5,7 @@ export const useEstimatedUncompressedSize = (
   downloadSize: number
 ) => {
   if (compressedSize !== downloadSize) {
-    return compressedSize;
+    return compressedSize
   }
 
   const baseEstimate = compressedSize * 2

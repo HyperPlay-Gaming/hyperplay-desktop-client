@@ -22,8 +22,8 @@ export interface ExtractZipProgressResponse {
  */
 export class ExtractZipService extends EventEmitter {
   #readStream: Readable | null = null
-  #zipFile = '';
-  #destinationPath = '';
+  #zipFile = ''
+  #destinationPath = ''
   #canceled = false
   #paused = false
   #totalSize = 0
@@ -45,8 +45,8 @@ export class ExtractZipService extends EventEmitter {
   constructor(zipFile: string, destinationPath: string) {
     super()
 
-    this.#zipFile = zipFile;
-    this.#destinationPath = destinationPath;
+    this.#zipFile = zipFile
+    this.#destinationPath = destinationPath
     this.#resolveExtraction = () => null
     this.#rejectExtraction = () => null
   }
@@ -306,27 +306,30 @@ export class ExtractZipService extends EventEmitter {
                 { recursive: true }
               )
 
-              this.#zipFileInstance?.openReadStream(entry, (err: unknown, readStream: Readable) => {
-                if (err && this.#rejectExtraction) {
-                  this.#rejectExtraction(err)
-                  return
-                }
-
-                this.#readStream = readStream
-                const writeStream = createWriteStream(
-                  join(this.#destinationPath, entry.fileName)
-                )
-                this.#readStream.pipe(writeStream)
-                this.#readStream.on('data', (chunk: unknown[]) => {
-                  this.#onData(chunk.length)
-                })
-                writeStream.once('close', () => {
-                  if (this.isCanceled) {
+              this.#zipFileInstance?.openReadStream(
+                entry,
+                (err: unknown, readStream: Readable) => {
+                  if (err && this.#rejectExtraction) {
+                    this.#rejectExtraction(err)
                     return
                   }
-                  this.#zipFileInstance?.readEntry()
-                })
-              })
+
+                  this.#readStream = readStream
+                  const writeStream = createWriteStream(
+                    join(this.#destinationPath, entry.fileName)
+                  )
+                  this.#readStream.pipe(writeStream)
+                  this.#readStream.on('data', (chunk: unknown[]) => {
+                    this.#onData(chunk.length)
+                  })
+                  writeStream.once('close', () => {
+                    if (this.isCanceled) {
+                      return
+                    }
+                    this.#zipFileInstance?.readEntry()
+                  })
+                }
+              )
             }
           })
 
@@ -349,7 +352,7 @@ export class ExtractZipService extends EventEmitter {
       return await this.#extractionPromise
     } catch (error) {
       this.#rejectExtraction?.(error)
-      captureException(error);
+      captureException(error)
     } finally {
       this.#zipFileInstance = null
       this.#extractionPromise = null

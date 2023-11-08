@@ -5,16 +5,16 @@ import { getCardStatus } from 'frontend/screens/Library/components/GameCard/cons
 import { hasStatus } from './hasStatus'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
-import { useGetDmState } from './useGetDmState'
+import { ContextType } from 'frontend/types'
+import DMQueueState from 'frontend/state/DMQueueState'
 
 export function useGetDownloadStatusText(
   appName: string,
   gameInfo: GameInfo | undefined
 ) {
-  const dmState = useGetDmState()
   const { status } = hasStatus(appName, gameInfo)
   const { t } = useTranslation('gamepage')
-  const { layout } = useContext(ContextProvider)
+  const { layout } = useContext<ContextType>(ContextProvider)
   const { isInstalling } = getCardStatus(
     status,
     !!gameInfo?.is_installed,
@@ -25,7 +25,7 @@ export function useGetDownloadStatusText(
     if (status === 'extracting') {
       return 'extracting'
     }
-    if (dmState === 'paused') {
+    if (DMQueueState.isPaused(appName)) {
       return 'paused'
     }
     if (isInstalling) {

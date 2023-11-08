@@ -9,7 +9,7 @@ import { launch } from 'frontend/helpers'
 import StopInstallationModal from '../StopInstallationModal'
 import { downloadStatus } from '@hyperplay/ui/dist/components/DownloadToast'
 import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
-import { useGetDmState } from 'frontend/hooks/useGetDmState'
+import DMQueueState from 'frontend/state/DMQueueState'
 
 const nullProgress: InstallProgress = {
   bytes: '0',
@@ -35,8 +35,6 @@ export default function DownloadToastManager() {
   const isExtracting = status === 'extracting'
 
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
-
-  const dmState = useGetDmState()
 
   useEffect(() => {
     if (latestElement === undefined && status === 'installed') {
@@ -192,7 +190,7 @@ export default function DownloadToastManager() {
 
   function getDownloadStatus(): downloadStatus {
     if (isExtracting) return 'inExtraction'
-    if (dmState === 'paused') return 'paused'
+    if (DMQueueState.isPaused(appName)) return 'paused'
     if (showPlay) return 'done'
     return 'inProgress'
   }
@@ -239,7 +237,7 @@ export default function DownloadToastManager() {
             })
           }}
           status={getDownloadStatus()}
-          statusText={downloadStatusText ?? 'Downloading 2'}
+          statusText={downloadStatusText ?? 'Downloading'}
         />
       ) : (
         downloadIcon()
