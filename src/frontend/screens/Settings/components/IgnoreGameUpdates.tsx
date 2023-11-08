@@ -6,14 +6,14 @@ import SettingsContext from '../SettingsContext'
 
 const IgnoreGameUpdates = () => {
   const { t } = useTranslation()
-  const { isDefault, gameInfo } = useContext(SettingsContext)
+  const { isDefault } = useContext(SettingsContext)
 
   const [ignoreGameUpdates, setIgnoreGameUpdates] = useSetting(
     'ignoreGameUpdates',
     false
   )
 
-  if (isDefault || gameInfo?.runner === 'hyperplay') {
+  if (isDefault) {
     return <></>
   }
 
