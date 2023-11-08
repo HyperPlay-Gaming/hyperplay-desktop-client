@@ -1600,7 +1600,7 @@ export const getStoreName = (runner: Runner) => {
 type PlatformName =
   | 'Windows'
   | 'Linux'
-  | 'Mac'
+  | 'macOS'
   | 'Browser'
   | 'Android'
   | 'Unknown'
@@ -1610,8 +1610,8 @@ const platformMap: Record<string, PlatformName> = {
   windows_arm64: 'Windows',
   linux_amd64: 'Linux',
   linux_arm64: 'Linux',
-  darwin_amd64: 'Mac',
-  darwin_arm64: 'Mac',
+  darwin_amd64: 'macOS',
+  darwin_arm64: 'macOS',
   web: 'Browser',
   android_arm64: 'Android'
 }
