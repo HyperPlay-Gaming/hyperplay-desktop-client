@@ -41,6 +41,7 @@ import {
   NileRegisterData,
   NileUserData
 } from 'common/types/nile'
+import { ToastKey } from 'frontend/store/types'
 
 /**
  * Some notes here:
@@ -70,6 +71,12 @@ interface HyperPlaySyncIPCFunctions {
   ignoreExitToTray: () => void
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
+  overlayReady: () => void
+  updateOverlayWindow: (state: OverlayWindowState) => void
+  toggleIsPopupOpen: () => void
+  toastCloseOnClick: (key: ToastKey) => void
+  lockPopup: (lock: boolean) => void
+  killOverlay: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -180,7 +187,7 @@ interface HyperPlayAsyncIPCFunctions {
   getConnectionUris: (providerSelection: PROVIDERS) => Promise<string>
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   providerRequest: (args: RequestArguments) => Promise<any>
-  getConnectedProvider: () => Promise<string>
+  getConnectedProvider: () => Promise<PROVIDERS>
   trackEvent: (payload: PossibleMetricPayloads) => Promise<void>
   trackScreen: (name: string, properties?: apiObject) => Promise<void>
   changeMetricsOptInStatus: (
@@ -203,6 +210,11 @@ interface HyperPlayAsyncIPCFunctions {
     channelId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
+  get_wallet_state_address: () => Promise<string>
+  get_wallet_state_isConnected: () => Promise<boolean>
+  get_wallet_state_provider: () => Promise<PROVIDERS>
+  get_wallet_state_otp: () => Promise<string>
+  get_extension_state_isPopupOpen: () => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

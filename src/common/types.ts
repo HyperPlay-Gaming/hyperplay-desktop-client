@@ -589,6 +589,11 @@ export type WineCommandArgs = {
   options?: CallRunnerOptions
   startFolder?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
+  overlayInfo?: {
+    showOverlay: boolean
+    appName: string
+    runner: Runner
+  }
 }
 
 export type Web3Features = {
@@ -794,3 +799,22 @@ export type Filter =
 export interface FilterItem extends DropdownItemType {
   id?: Filter
 }
+
+export interface OverlayRenderState {
+  showToasts: boolean
+  showBrowserGame: boolean
+  browserGameUrl: string
+  showHintText: boolean
+  showExitGameButton: boolean
+  showExtension: boolean
+  showBackgroundTint: boolean
+}
+
+export type OverlayAction = 'ON' | 'OFF' | 'TOGGLE'
+
+export interface RunnerBin {
+  dir: string
+  bin: string
+}
+
+export type OverlayType = 'native' | 'browser' | 'mainWindow'
