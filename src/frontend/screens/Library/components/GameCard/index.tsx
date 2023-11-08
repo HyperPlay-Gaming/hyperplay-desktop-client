@@ -299,7 +299,8 @@ const GameCard = ({
       event: 'Game Install Paused',
       properties: {
         store_name: runner,
-        game_title: gameInfo.title
+        game_title: gameInfo.title,
+        game_name: gameInfo.app_name
       }
     })
   }
@@ -310,7 +311,8 @@ const GameCard = ({
       event: 'Game Install Resumed',
       properties: {
         store_name: runner,
-        game_title: gameInfo.title
+        game_title: gameInfo.title,
+        game_name: gameInfo.app_name
       }
     })
   }

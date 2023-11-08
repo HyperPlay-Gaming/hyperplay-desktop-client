@@ -76,7 +76,8 @@ export default function StopInstallationModal(props: StopInstallProps) {
                 event: 'Game Install Paused',
                 properties: {
                   store_name: runner,
-                  game_title: title
+                  game_title: title,
+                  game_name: app_name
                 }
               })
             }
@@ -89,7 +90,8 @@ export default function StopInstallationModal(props: StopInstallProps) {
                 event: 'Game Install Canceled',
                 properties: {
                   store_name: runner,
-                  game_title: title
+                  game_title: title,
+                  game_name: app_name
                 }
               })
             }

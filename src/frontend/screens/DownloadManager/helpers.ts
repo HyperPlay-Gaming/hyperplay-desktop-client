@@ -8,6 +8,7 @@ type TrackArgs = {
   properties: {
     game_title: string
     store_name: Runner
+    game_name: string
   }
 }
 

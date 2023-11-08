@@ -898,7 +898,8 @@ export default observer(function GamePage(): JSX.Element | null {
         event: 'Game Install Resumed',
         properties: {
           store_name: runner,
-          game_title: gameInfo.title
+          game_title: gameInfo.title,
+          game_name: appName
         }
       })
       return window.api.resumeCurrentDownload()

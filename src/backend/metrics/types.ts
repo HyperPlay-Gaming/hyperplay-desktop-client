@@ -94,6 +94,7 @@ export interface GameInstallCanceled {
   properties: {
     store_name: Runner
     game_title: string
+    game_name: string
   }
   sensitiveProperties?: never
 }
@@ -103,6 +104,7 @@ export interface GameInstallPaused {
   properties: {
     store_name: Runner
     game_title: string
+    game_name: string
   }
   sensitiveProperties?: never
 }
@@ -112,6 +114,7 @@ export interface GameInstallResumed {
   properties: {
     store_name: Runner
     game_title: string
+    game_name: string
   }
   sensitiveProperties?: never
 }
