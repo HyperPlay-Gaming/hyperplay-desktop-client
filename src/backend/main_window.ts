@@ -1,6 +1,7 @@
 import { BrowserWindow, screen, app } from 'electron'
 import path from 'path'
 import { configStore } from './constants'
+import { controlWindow } from './hyperplay-overlay/model'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -80,6 +81,8 @@ export const createMainWindow = () => {
       webSecurity: app.isPackaged
     }
   })
+
+  controlWindow(mainWindow.webContents.id, 'mainWindow')
 
   mainWindow.webContents?.on('before-input-event', (ev, input) => {
     if (

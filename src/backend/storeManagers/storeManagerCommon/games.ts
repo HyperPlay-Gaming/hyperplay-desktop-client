@@ -1,4 +1,9 @@
-import { GameInfo, GameSettings, Runner } from 'common/types'
+import {
+  GameInfo,
+  GameSettings,
+  OverlayRenderState,
+  Runner
+} from 'common/types'
 import { GameConfig } from '../../game_config'
 import { isMac, isLinux, gamesConfigPath, icon } from '../../constants'
 import { logInfo, LogPrefix, logWarning } from '../../logger/logger'
@@ -25,6 +30,10 @@ import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { domainsAreEqual } from 'common/utils'
+import { connectedProvider } from 'backend/hyperplay-proxy-server/providerState'
+import { PROVIDERS } from 'common/types/proxy-types'
+import { controlWindow } from 'backend/hyperplay-overlay/model'
+import { initOverlayRenderState } from 'backend/hyperplay-overlay'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -63,7 +72,8 @@ const openNewBrowserGameWindow = async (
         contextIsolation: true,
         nodeIntegration: true,
         preload: path.join(__dirname, 'preload.js')
-      }
+      },
+      show: false
     })
 
     function toggleFullscreen() {
@@ -145,6 +155,34 @@ const openNewBrowserGameWindow = async (
     app.on('web-contents-created', openNewBroswerGameWindowListener)
 
     browserGame.loadURL(url)
+    // this is electron's suggested way to prevent visual flash
+    // https://github.com/electron/electron/blob/main/docs/api/browser-window.md#using-the-ready-to-show-event
+    browserGame.on('ready-to-show', () => browserGame.show())
+
+    controlWindow(browserGame.webContents.id, 'browser')
+
+    const renderState: OverlayRenderState = {
+      showToasts: true,
+      showBrowserGame: true,
+      browserGameUrl: browserUrl,
+      showHintText: true,
+      showExitGameButton: true,
+      showExtension: connectedProvider === PROVIDERS.METAMASK_EXTENSION,
+      showBackgroundTint: true
+    }
+    /*
+     * The overlay state wil only handle the update render state event
+     * after init() has been called on it. This can be some time after
+     * window launch, so we send an overlay ready event when it's ready.
+     */
+    browserGame.webContents.ipc.once('overlayReady', () => {
+      initOverlayRenderState(
+        browserGame.webContents.id,
+        renderState,
+        'HyperPlay Web Game'
+      )
+    })
+
     setTimeout(() => browserGame.focus(), 200)
 
     if (abortController) {
@@ -317,6 +355,11 @@ export async function launchGame(
       LogPrefix.Backend
     )
 
+    const shouldOpenOverlay =
+      gameInfo &&
+      (gameInfo.runner === 'hyperplay' ||
+        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
+
     await runWineCommand({
       commandParts: [executable, launcherArgs ?? ''],
       gameSettings,
@@ -326,6 +369,11 @@ export async function launchGame(
         wrappers,
         logFile: logFileLocation(appName),
         logMessagePrefix: LogPrefix.Backend
+      },
+      overlayInfo: {
+        showOverlay: !!shouldOpenOverlay,
+        runner: gameInfo.runner,
+        appName: gameInfo.app_name
       }
     })
 

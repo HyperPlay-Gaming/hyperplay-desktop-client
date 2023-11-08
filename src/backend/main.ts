@@ -205,7 +205,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
   mainWindow.webContents.on('input-event', (ev, inputEv) => {
     if (eventsToCloseMetaMaskPopupOn.includes(inputEv.type)) {
-      mainWindow.webContents.send('removePopupInWebview')
+      backendEvents.emit('removePopup')
     }
   })
 
@@ -1873,7 +1873,8 @@ import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
-import { toggleOverlay } from 'backend/hyperplay-overlay'
+import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
@@ -1892,39 +1893,14 @@ backendEvents.on('chainChanged', function (chainId: number) {
   getMainWindow()?.webContents.send('chainChanged', chainId)
 })
 
-backendEvents.on('accountsChanged', function (accounts: string[]) {
-  getMainWindow()?.webContents.send('accountChanged', accounts)
-})
-
-backendEvents.on('metamaskOtpUpdated', function (otp: string) {
-  getMainWindow()?.webContents.send('metamaskOtpUpdated', otp)
-})
+backendEvents.on(
+  'accountsChanged',
+  function (accounts: string[], provider: PROVIDERS) {
+    getMainWindow()?.webContents.send('accountChanged', accounts, provider)
+  }
+)
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
-
-ipcMain.on('providerRequestInitiated', (id, method) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestInitiated', id, method)
-  }
-})
-
-ipcMain.on('providerRequestPending', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestPending', id)
-  }
-})
-
-ipcMain.on('providerRequestCompleted', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestCompleted', id)
-  }
-})
-
-ipcMain.on('providerRequestFailed', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestFailed', id)
-  }
-})
 
 ipcMain.on('reloadApp', async () => {
   for (const win of BrowserWindow.getAllWindows()) {
@@ -1968,4 +1944,8 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
+})
+
+ipcMain.on('killOverlay', () => {
+  closeOverlay()
 })
