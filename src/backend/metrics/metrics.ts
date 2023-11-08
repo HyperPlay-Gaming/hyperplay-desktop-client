@@ -252,7 +252,7 @@ export async function trackPidPlaytime(
       trackEvent({
         event: 'Game Launched',
         properties: {
-          isBrowserGame: gameInfo.browserUrl !== undefined,
+          isBrowserGame: false,
           game_name: gameInfo.app_name,
           game_title: gameInfo.title,
           store_name: getStoreName(gameInfo.runner),
@@ -272,7 +272,7 @@ export async function trackPidPlaytime(
       trackEvent({
         event: 'Game Closed',
         properties: {
-          isBrowserGame: gameInfo.browserUrl !== undefined,
+          isBrowserGame: false,
           game_name: gameInfo.app_name,
           game_title: gameInfo.title,
           store_name: getStoreName(gameInfo.runner),
