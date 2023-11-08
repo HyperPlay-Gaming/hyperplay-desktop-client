@@ -577,7 +577,8 @@ async function runWineCommand({
   installFolderName,
   options,
   startFolder,
-  skipPrefixCheckIKnowWhatImDoing = false
+  skipPrefixCheckIKnowWhatImDoing = false,
+  overlayInfo
 }: WineCommandArgs): Promise<{ stderr: string; stdout: string }> {
   const settings = gameSettings
     ? gameSettings
@@ -652,6 +653,11 @@ async function runWineCommand({
     child.stdout.setEncoding('utf-8')
     child.stderr.setEncoding('utf-8')
 
+    if (overlayInfo) {
+      const { showOverlay, appName, runner } = overlayInfo
+      if (showOverlay) openOverlay(appName, runner)
+    }
+
     if (!logsDisabled) {
       if (options?.logFile) {
         logDebug(`Logging to file "${options?.logFile}"`, LogPrefix.Backend)
@@ -710,11 +716,21 @@ async function runWineCommand({
         })
       }
 
+      if (overlayInfo) {
+        const { showOverlay } = overlayInfo
+        if (showOverlay) closeOverlay()
+      }
+
       res(response)
     })
 
     child.on('error', (error) => {
       console.log(error)
+
+      if (overlayInfo) {
+        const { showOverlay } = overlayInfo
+        if (showOverlay) closeOverlay()
+      }
     })
   })
 }
@@ -789,8 +805,12 @@ async function callRunner(
       signal: abortController.signal
     })
 
-    if (gameInfo && gameInfo.runner === 'hyperplay')
-      openOverlay(gameInfo?.app_name, gameInfo.runner)
+    const shouldOpenOverlay =
+      gameInfo &&
+      (gameInfo.runner === 'hyperplay' ||
+        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
+
+    if (shouldOpenOverlay) openOverlay(gameInfo?.app_name, gameInfo.runner)
 
     /*
      * gogdl remains open while the game is running
@@ -876,7 +896,7 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
-      if (runner.name === 'hyperplay') closeOverlay()
+      if (shouldOpenOverlay) closeOverlay()
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,
@@ -895,7 +915,7 @@ async function callRunner(
     })
 
     child.on('error', (error) => {
-      if (runner.name === 'hyperplay') closeOverlay()
+      if (shouldOpenOverlay) closeOverlay()
       rej(error)
     })
   })
