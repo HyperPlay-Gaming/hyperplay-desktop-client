@@ -1,4 +1,5 @@
 import { backendEvents } from './../backend_events'
+import { PROVIDERS } from '../../common/types/proxy-types'
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 let connectedResolve: any
 
@@ -25,7 +26,10 @@ backendEvents.on('chainChanged', function (chainId: number) {
   console.log('renderer receives: chain changed to ', chainId)
 })
 
-backendEvents.on('accountsChanged', function (accounts: string[]) {
-  console.log('renderer receives: accounts changed to ', accounts)
-  connectedResolve()
-})
+backendEvents.on(
+  'accountsChanged',
+  function (accounts: string[], provider: PROVIDERS) {
+    console.log('renderer receives: accounts changed to ', accounts, provider)
+    connectedResolve()
+  }
+)
