@@ -14,9 +14,6 @@ const returnDataMockup = {
 jest.mock('yauzl', () => ({
   open: jest.fn()
 }))
-jest.mock('@sentry/electron', () => ({
-  captureException: jest.fn()
-}))
 jest.mock('graceful-fs', () => ({
   mkdirSync: jest.fn(),
   createWriteStream: () => ({
@@ -38,7 +35,6 @@ jest.mock('graceful-fs', () => ({
   rmSync: jest.fn(),
   copyFileSync: jest.fn()
 }))
-
 const yauzlMockupLib = (
   fileName = 'test.zip',
   withError?: boolean,
