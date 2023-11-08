@@ -132,11 +132,6 @@ async function installQueueElement(params: InstallParams): Promise<{
   }
 
   function trackFailedInstall(error: unknown) {
-    // undefined or 'Error' means the user aborted the install process
-    if (!error || error === 'Error') {
-      return
-    }
-
     trackEvent({
       event: 'Game Install Failed',
       properties: {
