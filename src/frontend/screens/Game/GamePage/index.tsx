@@ -143,7 +143,8 @@ export default observer(function GamePage(): JSX.Element | null {
 
   const uncompressedSize = useEstimatedUncompressedSize(
     platform,
-    gameInstallInfo?.manifest?.disk_size || 0
+    gameInstallInfo?.manifest?.disk_size || 0,
+    gameInstallInfo?.manifest?.download_size || 0
   )
 
   // Track the screen view once each time the appName, gameInfo or runner changes

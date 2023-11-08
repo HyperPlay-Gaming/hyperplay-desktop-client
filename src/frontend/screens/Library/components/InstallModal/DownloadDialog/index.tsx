@@ -163,7 +163,8 @@ export default function DownloadDialog({
 
   const uncompressedSize = useEstimatedUncompressedSize(
     platformToInstall,
-    gameInstallInfo?.manifest?.disk_size || 0
+    gameInstallInfo?.manifest?.disk_size || 0,
+    gameInstallInfo?.manifest?.download_size || 0
   )
 
   const haveSDL = sdls.length > 0
