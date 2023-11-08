@@ -14,6 +14,9 @@ const returnDataMockup = {
 jest.mock('yauzl', () => ({
   open: jest.fn()
 }))
+jest.mock('@sentry/electron', () => ({
+  captureException: jest.fn()
+}))
 jest.mock('graceful-fs', () => ({
   mkdirSync: jest.fn(),
   createWriteStream: () => ({
