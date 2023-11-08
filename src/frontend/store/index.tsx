@@ -5,7 +5,7 @@ const StoreController = () => {
   useEffect(() => {
     const stores = import.meta.glob<{ default: GenericStore }>([
       './*Store.ts*',
-      '../state/*State.ts'
+      '../state/*State.ts*'
     ])
     const storeKeys = Object.keys(stores)
 
