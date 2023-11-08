@@ -1,8 +1,9 @@
 import React, { useRef } from 'react'
 import ExtensionManagerStyles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
-import extensionStore from 'frontend/store/ExtensionStore'
+import extensionState from 'frontend/state/ExtensionState'
 import { motion, AnimatePresence } from 'framer-motion'
+import OverlayState from 'frontend/state/OverlayState'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -26,27 +27,47 @@ const ExtensionManager = function () {
   const rootRef = useRef<HTMLDivElement>(null)
   const trueAsStr = 'false' as unknown as boolean | undefined
 
+  const mmContainerStyle = {} as React.CSSProperties
+
+  if (OverlayState.title === 'HyperPlay Extension') {
+    mmContainerStyle.left = 0
+    mmContainerStyle.right = 'unset'
+    mmContainerStyle.top = 0
+  } else if (
+    OverlayState.title === 'HyperPlay Extension Overlay' ||
+    OverlayState.title === 'HyperPlay Browser Game' ||
+    OverlayState.title === 'HyperPlay Web Game'
+  ) {
+    mmContainerStyle.left = 20
+    mmContainerStyle.right = 'unset'
+    mmContainerStyle.top = 20
+  }
+
   /* eslint-disable react/no-unknown-property */
   return (
-    <div className={ExtensionManagerStyles.mmContainer} ref={rootRef}>
+    <div
+      className={ExtensionManagerStyles.mmContainer}
+      ref={rootRef}
+      style={mmContainerStyle}
+    >
       <AnimatePresence>
-        {extensionStore.isPopupOpen && !extensionStore.isNotificationOpen ? (
+        {extensionState.isPopupOpen ? (
           <motion.div {...animation}>
             <webview
               nodeintegrationinsubframes="true"
               webpreferences="contextIsolation=true, nodeIntegration=true"
-              src={`chrome-extension://${extensionStore.extensionId}/popup.html`}
+              src={`chrome-extension://${extensionState.extensionId}/popup.html`}
               className={ExtensionManagerStyles.mmWindow}
               allowpopups={trueAsStr}
             ></webview>
           </motion.div>
         ) : null}
-        {extensionStore.isPopupOpen && extensionStore.isNotificationOpen ? (
+        {extensionState.isNotificationOpen ? (
           <motion.div {...animation}>
             <webview
               nodeintegrationinsubframes="true"
               webpreferences="contextIsolation=true, nodeIntegration=true"
-              src={`chrome-extension://${extensionStore.extensionId}/notification.html`}
+              src={`chrome-extension://${extensionState.extensionId}/notification.html`}
               className={ExtensionManagerStyles.mmWindow}
               allowpopups={trueAsStr}
             ></webview>
