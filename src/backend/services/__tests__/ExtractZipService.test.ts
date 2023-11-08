@@ -2,7 +2,7 @@ import { EventEmitter } from 'node:events'
 import yauzl from 'yauzl'
 import { resolve } from 'path'
 import { mkdirSync } from 'graceful-fs'
-import { ExtractZipService } from '../../services/ExtractZipService'
+import { ExtractZipService } from '../ExtractZipService'
 
 const returnDataMockup = {
   progressPercentage: 0,
