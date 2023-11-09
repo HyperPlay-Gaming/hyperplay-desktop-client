@@ -1065,7 +1065,8 @@ ipcMain.handle(
         game_title: title,
         store_name: getStoreName(runner),
         browserUrl: browserUrl ?? undefined,
-        platform: getPlatformName(install.platform!)
+        platform: getPlatformName(install.platform!),
+        platform_arch: install.platform!
       }
     })
 
@@ -1241,7 +1242,8 @@ ipcMain.handle(
         store_name: getStoreName(runner),
         browserUrl: browserUrl ?? undefined,
         platform: getPlatformName(install.platform!),
-        playTimeInMs: sessionPlaytime * 60 * 1000
+        playTimeInMs: sessionPlaytime * 60 * 1000,
+        platform_arch: install.platform!
       }
     })
 
@@ -1280,11 +1282,20 @@ ipcMain.handle(
       status: 'uninstalling'
     })
 
-    const { title } = gameManagerMap[runner].getGameInfo(appName)
+    const {
+      title,
+      install: { platform }
+    } = gameManagerMap[runner].getGameInfo(appName)
 
     trackEvent({
       event: 'Game Uninstall Started',
-      properties: { game_name: appName, store_name: runner, game_title: title }
+      properties: {
+        game_name: appName,
+        store_name: getStoreName(runner),
+        game_title: title,
+        platform_arch: platform!,
+        platform: getPlatformName(platform!)
+      }
     })
 
     let uninstalled = false
@@ -1297,9 +1308,11 @@ ipcMain.handle(
         event: 'Game Uninstall Failed',
         properties: {
           game_name: appName,
-          store_name: runner,
+          store_name: getStoreName(runner),
           error: `${error}`,
-          game_title: title
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
         }
       })
       notify({
@@ -1336,8 +1349,10 @@ ipcMain.handle(
         event: 'Game Uninstall Success',
         properties: {
           game_name: appName,
-          store_name: runner,
-          game_title: title
+          store_name: getStoreName(runner),
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
         }
       })
 
