@@ -169,7 +169,7 @@ const launch = async ({
                     title: t('gamepage:box.update.title'),
                     buttons: [
                       {
-                        text: t('box.ok'),
+                        text: t('gamepage:box.ok', 'OK'),
                         onClick: async () => {
                           res({ status: 'abort' })
                         }
