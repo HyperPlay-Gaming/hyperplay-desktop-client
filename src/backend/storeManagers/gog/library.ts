@@ -971,7 +971,8 @@ export async function runRunnerCommand(
   commandParts: string[],
   abortController: AbortController,
   options?: CallRunnerOptions,
-  gameInfo?: GameInfo
+  gameInfo?: GameInfo,
+  shouldTrackPlaytime = false
 ): Promise<ExecResult> {
   const { dir, bin } = getGOGdlBin()
   const authConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
@@ -983,7 +984,8 @@ export async function runRunnerCommand(
       ...options,
       verboseLogFile: gogdlLogFile
     },
-    gameInfo
+    gameInfo,
+    shouldTrackPlaytime
   )
 }
 

@@ -58,6 +58,7 @@ import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import { gameManagerMap } from 'backend/storeManagers'
+import { trackPidPlaytime } from './metrics/metrics'
 import { closeOverlay, openOverlay } from 'backend/hyperplay-overlay'
 import * as VDF from '@node-steam/vdf'
 import { readFileSync } from 'fs'
@@ -748,7 +749,8 @@ async function callRunner(
   runner: RunnerProps,
   abortController: AbortController,
   options?: CallRunnerOptions,
-  gameInfo?: GameInfo
+  gameInfo?: GameInfo,
+  shouldTrackPlaytime = false
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
@@ -810,12 +812,53 @@ async function callRunner(
 
     if (shouldOpenOverlay) openOverlay(gameInfo?.app_name, gameInfo.runner)
 
+    /*
+     * gogdl remains open while the game is running
+     * by tracking gogdl instead of the game, we do not need to rely on
+     * gogdl outputting the game's PID to stdout
+     *
+     * hyperplay and sideload game exes are launched directly so tracking the child process
+     * works well unless the exe launches a separate process and then closes
+     *
+     * legendary closes after launching the game so we need to track the game's PID
+     * which is outputted to stdout
+     */
+    const shouldTrackChildProcess = (runner: Runner) =>
+      runner === 'hyperplay' || runner === 'gog' || runner === 'sideload'
+
+    if (
+      gameInfo &&
+      shouldTrackChildProcess(gameInfo.runner) &&
+      child.pid !== undefined &&
+      shouldTrackPlaytime
+    )
+      trackPidPlaytime(child.pid, gameInfo)
+
     const stdout: string[] = []
     const stderr: string[] = []
 
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
       const dataStr = data.toString()
+      const pidPrefix = 'pid for popen process:'
+      const pidPrefixStartIndex = dataStr.search(pidPrefix)
+      if (pidPrefixStartIndex >= 0) {
+        const PID = dataStr
+          .substring(pidPrefixStartIndex + pidPrefix.length)
+          .trim()
+        logInfo(
+          `Process PID for Gogdl or Epic game injected: ${child.pid}`,
+          runner.logPrefix
+        )
+
+        // track when this pid is closed
+        if (
+          gameInfo &&
+          !shouldTrackChildProcess(gameInfo.runner) &&
+          shouldTrackPlaytime
+        )
+          trackPidPlaytime(PID.trim(), gameInfo)
+      }
       if (!logsDisabled) {
         if (options?.logFile) {
           appendFileSync(options.logFile, data)
