@@ -1,6 +1,6 @@
 import './index.scss'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
@@ -17,7 +17,7 @@ import useSettingsContext from 'frontend/hooks/useSettingsContext'
 import { Tabs } from '@hyperplay/ui'
 import Accessibility from '../Accessibility'
 import WineManager from '../WineManager'
-import ContextProvider from 'frontend/state/ContextProvider'
+import DeviceState from 'frontend/state/DeviceState'
 
 export const defaultWineVersion: WineInstallation = {
   bin: '/usr/bin/wine',
@@ -30,8 +30,7 @@ function Settings() {
   const {
     state: { fromGameCard, runner, gameInfo }
   } = useLocation() as { state: LocationState }
-  const { platform } = useContext(ContextProvider)
-  const isWin = platform === 'win32'
+  const isWin = DeviceState.isWin
   const [title, setTitle] = useState('')
 
   const [currentConfig, setCurrentConfig] = useState<Partial<AppSettings>>({})

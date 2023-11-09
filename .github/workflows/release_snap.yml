@@ -1,20 +1,19 @@
-name: Draft Release Linux
+name: Update SNAP
 
 on:
-  push:
-    tags:
-      - 'v*'
-  workflow_dispatch:
+  release:
+    types: [published]
 
 env:
   GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
   GH_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+  SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_ID }}
 
 jobs:
-  draft-releases:
+  update-snap:
     runs-on: ubuntu-latest
     steps:
-      - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm
+      - run: sudo apt-get install --no-install-recommends -y snapcraft
       - name: Checkout repository.
         uses: actions/checkout@v3
         with:
@@ -33,5 +32,5 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn setup
-      - name: Build artifacts.
-        run: yarn run release:linux
+      - name: Update package on Snap Store
+        run: yarn run dist:linux snap --publish always
