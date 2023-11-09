@@ -5,24 +5,25 @@ import {
   PhoneCompletedIcon,
   PhoneWaitingConfimationSpinner
 } from 'frontend/assets/hyperplay'
-import { TransactionState } from 'frontend/store/types'
 import Loading from './Loading'
+import { statusType } from '@hyperplay/ui/dist/components/TransactionToasts'
 
 interface PhoneIconProps {
-  status: TransactionState
+  status: statusType
 }
 
 const PhoneIcon = ({ status }: PhoneIconProps) => {
   switch (status) {
-    case TransactionState.INITIATED:
+    case 'submitted':
       return <Loading />
-    case TransactionState.PENDING:
+    case 'pending':
       return <PhoneWaitingConfimationSpinner />
-    case TransactionState.CONFIRMED:
+    case 'success':
       return <PhoneCompletedIcon />
-    case TransactionState.FAILED:
+    case 'error':
       return <PhoneErrorIcon />
   }
+  return <PhoneErrorIcon />
 }
 
 export default PhoneIcon
