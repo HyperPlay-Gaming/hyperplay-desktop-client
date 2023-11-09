@@ -198,6 +198,18 @@ let ignoreExitToTray = false
 ipcMain.on('ignoreExitToTray', () => {
   ignoreExitToTray = true
 })
+
+ipcMain.on('focusMainWindow', () => {
+  const mainWindow = getMainWindow()
+
+  if (!mainWindow) {
+    return
+  }
+
+  mainWindow.show()
+  mainWindow?.focus()
+})
+
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
