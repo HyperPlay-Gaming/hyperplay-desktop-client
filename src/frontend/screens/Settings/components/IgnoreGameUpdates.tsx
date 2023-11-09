@@ -6,7 +6,7 @@ import SettingsContext from '../SettingsContext'
 
 const IgnoreGameUpdates = () => {
   const { t } = useTranslation()
-  const { isDefault, gameInfo } = useContext(SettingsContext)
+  const { isDefault } = useContext(SettingsContext)
 
   const [ignoreGameUpdates, setIgnoreGameUpdates] = useSetting(
     'ignoreGameUpdates',
