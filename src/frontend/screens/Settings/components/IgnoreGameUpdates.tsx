@@ -13,7 +13,7 @@ const IgnoreGameUpdates = () => {
     false
   )
 
-  if (isDefault || gameInfo?.runner === 'hyperplay') {
+  if (isDefault) {
     return <></>
   }
 
