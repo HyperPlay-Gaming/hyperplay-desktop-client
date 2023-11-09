@@ -1,18 +1,10 @@
 import { apiObject } from '@rudderstack/rudder-sdk-node'
 import { sendFrontendMessage } from 'backend/main_window'
-import { GameInfo, MetricsOptInStatus } from 'common/types'
+import { MetricsOptInStatus } from 'common/types'
 import Store from 'electron-store'
-import {
-  getAppVersion,
-  getFormattedOsName,
-  getPlatformName,
-  getStoreName,
-  processIsClosed
-} from '../utils'
+import { getAppVersion, getFormattedOsName } from '../utils'
 import { rudderstack } from './rudderstack-client'
 import { PossibleMetricEventNames, PossibleMetricPayloads } from './types'
-import { hrtime } from 'process'
-import find from 'find-process'
 import { backendEvents } from 'backend/backend_events'
 import { ethers } from 'ethers'
 
@@ -234,56 +226,6 @@ export const changeMetricsOptInStatus = async (
     trackEvent({
       event: 'Metrics Opt-out'
     })
-  }
-}
-
-export async function trackPidPlaytime(
-  pid: string | number,
-  gameInfo: GameInfo
-) {
-  try {
-    const start = hrtime.bigint()
-    const processInfoArr = await find('pid', pid)
-    if (processInfoArr.length === 0) {
-      console.log('No process info found with pid', pid)
-      return
-    }
-    for (const processInfo of processInfoArr) {
-      trackEvent({
-        event: 'Game Launched',
-        properties: {
-          isBrowserGame: false,
-          game_name: gameInfo.app_name,
-          game_title: gameInfo.title,
-          store_name: getStoreName(gameInfo.runner),
-          processName: processInfo.name,
-          platform: getPlatformName(gameInfo.install.platform!)
-        }
-      })
-    }
-
-    // wait for process to close
-    const pidNum = typeof pid === 'number' ? pid : Number.parseInt(pid)
-    await processIsClosed(pidNum)
-
-    const end = hrtime.bigint()
-    const elapsedInMs = Math.round(Number(end - start) / 10 ** 6)
-    for (const processInfo of processInfoArr) {
-      trackEvent({
-        event: 'Game Closed',
-        properties: {
-          isBrowserGame: false,
-          game_name: gameInfo.app_name,
-          game_title: gameInfo.title,
-          store_name: getStoreName(gameInfo.runner),
-          processName: processInfo.name,
-          platform: getPlatformName(gameInfo.install.platform!),
-          playTimeInMs: elapsedInMs
-        }
-      })
-    }
-  } catch (err) {
-    console.error(err)
   }
 }
 
