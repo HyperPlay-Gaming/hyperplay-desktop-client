@@ -31,7 +31,6 @@ import StatusScreen, { CONNECTION_STATUS } from './screens/status'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ONBOARDING_SCREEN } from '../types'
-import onboardingStore from 'frontend/store/OnboardingStore'
 
 enum WALLET_SELECTION_DETAILS_SCREEN {
   INFO = 'INFO',
@@ -67,9 +66,6 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
 
   async function providerClicked(provider: PROVIDERS) {
     setShowMetaMaskBrowserSidebarLinks(false)
-
-    // user is attempting to connect via mm mobile or wc. this will track if connection succeeds
-    onboardingStore.shouldReportNextConnectionEvent = true
     // returns universal link for mm sdk
     const uri = await window.api.getConnectionUris(provider)
 

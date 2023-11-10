@@ -9,14 +9,12 @@ import WalletState from '../state/WalletState'
 class OnboardingStore {
   isOnboardingOpen = true
   initialized = false
-  shouldReportNextConnectionEvent = false
 
   constructor() {
     makeAutoObservable(this)
   }
 
   public openOnboarding() {
-    console.log('open onboarding called in onboarding store')
     this.isOnboardingOpen = true
   }
 

@@ -114,12 +114,8 @@ function App() {
         {onboardingStore.isOnboardingOpen && (
           <Onboarding
             disableOnboarding={(disableReason: WalletOnboardCloseReason) => {
-              if (disableReason === 'skipped')
+              if (disableReason === 'skipped') {
                 window.api.trackEvent({ event: 'Onboarding Skipped' })
-              else if (disableReason === 'requestedMetaMaskConnection') {
-                // a wallet connection method was chosen so we will report if it successfully connects
-                onboardingStore.shouldReportNextConnectionEvent = true
-                console.log('set onboarding store should report to true ')
               }
               onboardingStore.closeOnboarding()
             }}
