@@ -135,7 +135,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       view: ONBOARDING_SCREEN.WALLET_SELECTION,
       detailsScreen: contentParams.detailsScreen
     })
-  }, [contentParams])
+  }, [contentParams.detailsScreen])
 
   async function handleImportMmExtensionClicked(
     mmInitMethod: MetaMaskInitMethod,

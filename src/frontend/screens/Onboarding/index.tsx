@@ -66,4 +66,4 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   )
 }
 
-export default React.memo(Onboarding)
+export default Onboarding
