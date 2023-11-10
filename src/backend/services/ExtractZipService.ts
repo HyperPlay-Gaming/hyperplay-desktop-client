@@ -1,7 +1,7 @@
 import { EventEmitter } from 'node:events'
 import { Readable } from 'node:stream'
 import { open, ZipFile, Entry } from 'yauzl'
-import { mkdirSync, createWriteStream, rmSync } from 'graceful-fs'
+import { mkdirSync, createWriteStream, rmSync, existsSync } from 'graceful-fs'
 import { captureException } from '@sentry/electron'
 import { join } from 'path'
 
@@ -14,6 +14,12 @@ export interface ExtractZipProgressResponse {
   totalSize: number
   /** Size of the ZIP content processed so far in bytes. */
   processedSize: number
+}
+
+enum ExtractionValidation {
+  NOT_EXIST = 'NOT_EXIST',
+  INVALID_FILE_NAME_ASCII = 'INVALID_FILE_NAME_ASCII',
+  VALID = 'VALID'
 }
 
 /**
@@ -89,6 +95,20 @@ export class ExtractZipService extends EventEmitter {
    */
   get #canProgress(): boolean {
     return !(this.#canceled || this.#paused)
+  }
+
+  get #isValid(): ExtractionValidation {
+    const isExisting = existsSync(this.#zipFile)
+
+    if (!isExisting) {
+      return ExtractionValidation.NOT_EXIST
+    }
+
+    if (/^[\\x00-\\x7F]+$/.test(this.#zipFile)) {
+      return ExtractionValidation.INVALID_FILE_NAME_ASCII
+    }
+
+    return ExtractionValidation.VALID
   }
 
   /**
@@ -215,6 +235,11 @@ export class ExtractZipService extends EventEmitter {
    * @param {Error} error - The error that occurred.
    */
   #onError(error: Error) {
+    if (!error) {
+      return;
+    }
+
+    console.log('error', error)
     this.emit('error', error)
 
     rmSync(this.source, { recursive: true, force: true })
@@ -270,6 +295,17 @@ export class ExtractZipService extends EventEmitter {
     this.#extractionPromise = new Promise<boolean>((resolve, reject) => {
       this.#resolveExtraction = resolve
       this.#rejectExtraction = reject
+
+      switch (this.#isValid) {
+        case ExtractionValidation.NOT_EXIST:
+          this.#rejectExtraction(new Error('Zip file not found'))
+          return
+        case ExtractionValidation.INVALID_FILE_NAME_ASCII:
+          this.#rejectExtraction(new Error('Zip file name contain ascii'))
+          return
+        default:
+          break
+      }
 
       open(
         this.#zipFile,
@@ -351,7 +387,8 @@ export class ExtractZipService extends EventEmitter {
       this.#totalSize = await this.getUncompressedSize(this.#zipFile)
       return await this.#extractionPromise
     } catch (error) {
-      this.#rejectExtraction?.(error)
+      console.log('error', error)
+      this.#onError(error as Error)
       captureException(error)
     } finally {
       this.#zipFileInstance = null

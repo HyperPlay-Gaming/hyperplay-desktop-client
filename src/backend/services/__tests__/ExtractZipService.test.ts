@@ -1,7 +1,7 @@
 import { EventEmitter } from 'node:events'
 import yauzl from 'yauzl'
 import { resolve } from 'path'
-import { mkdirSync } from 'graceful-fs'
+import { mkdirSync, existsSync } from 'graceful-fs'
 import { ExtractZipService } from '../ExtractZipService'
 
 const returnDataMockup = {
@@ -10,11 +10,14 @@ const returnDataMockup = {
   totalSize: 1000,
   processedSize: 500
 }
-
 jest.mock('yauzl', () => ({
   open: jest.fn()
 }))
+jest.mock('@sentry/electron', () => ({
+  captureException: jest.fn()
+}))
 jest.mock('graceful-fs', () => ({
+  ...jest.requireActual('graceful-fs'),
   mkdirSync: jest.fn(),
   createWriteStream: () => ({
     pipe: jest.fn((writeStream) => writeStream),
@@ -173,13 +176,17 @@ describe('ExtractZipService', () => {
 
   it('should emit error event on extraction failure', async () => {
     yauzlMockupLib('test.zip', true)
+    const error = 'Mock example'
+    const mockEventListener = jest.fn()
+    extractZipService.on('error', mockEventListener)
 
-    const errorListener = jest.fn()
-    extractZipService.on('error', errorListener)
 
-    extractZipService.extract()
-
-    expect.objectContaining(new Error('Mock example'))
+    process.nextTick(async () => {
+      await expect(
+        extractZipService.extract()).rejects.toThrow(error)
+      expect(mockEventListener).toHaveBeenCalled()
+      expect(mockEventListener).toHaveBeenCalledWith(error)
+    })
   })
 
   it('should cancel extraction when cancel is called', async () => {
@@ -403,5 +410,34 @@ describe('ExtractZipService', () => {
     expect(removeAllListenersSpy).toHaveBeenCalled()
 
     removeAllListenersSpy.mockRestore()
+  })
+
+  it('Should fail validation if the zip file does not exist for extracting', async () => {
+    const error = 'Zip file not found'
+    const service = new ExtractZipService('noneexisting.zip', destinationPath)
+    const mockEventListener = jest.fn()
+    service.on('error', mockEventListener)
+
+    process.nextTick(async () => {
+      await expect(service.extract()).rejects.toThrow(error)
+      expect(mockEventListener).toHaveBeenCalled()
+      expect(mockEventListener).toHaveBeenCalledWith(error)
+    })
+  })
+
+  it('Should fail validation if ascii is part of the file name for extracting', async () => {
+    const error = 'Zip file name contain ascii'
+    const service = new ExtractZipService(
+      '谷���新道ひばりヶ�.zip',
+      destinationPath
+    )
+    const mockEventListener = jest.fn()
+    service.on('error', mockEventListener)
+
+    process.nextTick(async () => {
+      await expect(service.extract()).rejects.toThrow(error)
+      expect(mockEventListener).toHaveBeenCalled()
+      expect(mockEventListener).toHaveBeenCalledWith(error)
+    })
   })
 })
