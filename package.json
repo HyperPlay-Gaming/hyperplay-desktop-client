@@ -160,7 +160,7 @@
     "@mantine/carousel": "^6.0.19",
     "@mantine/core": "^6.0.19",
     "@mantine/hooks": "^6.0.19",
-    "@metamask/sdk": "^0.5.3",
+    "@metamask/sdk": "^0.12.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
     "@node-steam/vdf": "^2.2.0",
