@@ -131,7 +131,9 @@
             },
             "title": "Advarsel"
         },
-        "default-steam-path": "Dampvej."
+        "default-steam-path": "Dampvej.",
+        "dontShowAgain": "Vis ikke igen",
+        "choose-nile-binary": "Vælg Nile binær"
     },
     "All": "Alle",
     "accessibility": {
@@ -159,7 +161,8 @@
     "status": {
         "installing": "Installerer",
         "processing": "Behandler filerne, vent venligst",
-        "logging": "Logger ind..."
+        "logging": "Logger ind...",
+        "preparing_login": "Forbereder login... "
     },
     "Assets": "Aktiver",
     "infobox": {
@@ -360,7 +363,14 @@
         "checkForUpdatesOnStartup": "Søg efter heroiske opdateringer ved opstart",
         "addgamestosteam": "Tilføj spil til Steam automatisk",
         "custom_themes_path": "Sti til brugerdefinerede temaer",
-        "hideChangelogsOnStartup": "Vis ikke ændringslogs ved opstart"
+        "hideChangelogsOnStartup": "Vis ikke ændringslogs ved opstart",
+        "dxvkfpslimit": "Begræns FPS (DX9, 10 og 11)",
+        "autoUpdateGames": "Opdater spil automatisk",
+        "ignoreGameUpdates": "Ignorer spilopdateringer",
+        "disable_logs": "Deaktiver logfiler",
+        "addgamestoapplications": "Føj spil til applikationer automatisk",
+        "showMetalOverlay": "Vis statistikoverlejring",
+        "alt-nile-bin": "Vælg en alternativ Nile Binær"
     },
     "wine": {
         "manager": {
@@ -505,7 +515,8 @@
     "other": {
         "gogdl-version": "GOGDL-version: ",
         "legendary-version": "Legendarisk version: ",
-        "weblate": "Hjælp med at oversætte HyperPlay."
+        "weblate": "Hjælp med at oversætte HyperPlay.",
+        "nile-version": "Nile version: "
     },
     "platforms": {
         "win": "Windows",
@@ -564,13 +575,21 @@
     "globalSettings": "Globale indstillinger",
     "GOG": "GOG",
     "login": {
-        "externalLogin": "Eksternt login"
+        "externalLogin": "Eksternt login",
+        "alternative_method": "Alternativ login-metode",
+        "epic": "Epic Games Login",
+        "gog": "GOG login",
+        "message": "Log ind med din platform. Du kan logge ind på mere end én platform på samme tid.",
+        "amazon": "Amazon login"
     },
     "placeholder": {
         "prefered_language": "2-tegn kode (dvs.: \"en\" eller \"fr\")",
         "alt-gogdl-bin": "Brug af indbygget GOGDL binær...",
         "alt-legendary-bin": "Bruger indbygget Legendary binær...",
-        "egs-prefix": "Præfiks hvor EGS er installeret"
+        "egs-prefix": "Præfiks hvor EGS er installeret",
+        "custom_themes_path": "Vælg stien for at søge efter tilpassede CSS-filer",
+        "dxvkfpsvalue": "Positiv heltalsværdi (f.eks. 30, 60, ...)",
+        "alt-nile-bin": "Brug af indbygget Nile binær..."
     },
     "search": "Søg efter spil",
     "store": "Episk butik",
@@ -642,6 +661,30 @@
             "start-time": "Startede kl",
             "type": "Type"
         },
-        "title": "Downloads"
-    }
+        "title": "Downloads",
+        "ETA": "Estimeret tid"
+    },
+    "please-wait": "Vent venligst...",
+    "label": {
+        "loading": "Indlæser"
+    },
+    "externalLink": {
+        "warning": "Du er ved at åbne et eksternt link.",
+        "dontAskAgain": "Spørg ikke igen"
+    },
+    "wiki_info": {
+        "not_found": "Vi kunne ikke finde yderligere information."
+    },
+    "Open": "Åben",
+    "Update Available!": "Opdatering tilgængelig!",
+    "dlc": {
+        "actions": "Handlinger",
+        "installDlcs": "Installer alle DLC'er",
+        "noDlcFound": "Ingen DLC'er fundet",
+        "title": "Titel",
+        "size": "Størrelse"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "Amazon spil",
+    "prime-gaming": "Prime Gaming"
 }

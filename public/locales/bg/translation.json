@@ -142,12 +142,14 @@
             "title": "Внимание"
         },
         "wineprefix": "Изберете папка за префикс на Wine",
-        "yes": "ДА"
+        "yes": "ДА",
+        "dontShowAgain": "Да не се показва отново",
+        "choose-nile-binary": "Изберете изпълнимия файл на Nile"
     },
     "button": {
         "cancel": "Cancel",
         "go_to_library": "Към библиотеката",
-        "login": "Влизане",
+        "login": "Вписване",
         "sync": "Синхронизиране",
         "syncing": "Синхронизиране",
         "unsync": "Десинхронизиране"
@@ -308,10 +310,11 @@
         "website": "Зареждане на уеб сайта"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Друг вариант за вписване",
+        "epic": "Вписване в Epic Games",
+        "gog": "Вписване в GOG",
+        "message": "Впишете се в избраната система. Може да сте вписан(а) едновременно в няколко системи.",
+        "amazon": "Вписване в Amazon"
     },
     "message": {
         "sync": "Синхронизацията е завършена",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "Версия на GOGDL: ",
         "legendary-version": "Версия на Legendary: ",
-        "weblate": "Помогнете за превода на HyperPlay."
+        "weblate": "Помогнете за превода на HyperPlay.",
+        "nile-version": "Версия на Nile: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,15 +413,16 @@
         "alt-legendary-bin": "Използване на вградения изпълним файл на Legendary…",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Префикс, където е инсталиран EGS",
-        "prefered_language": "Код съставен от 2 знака (например: „en“ или „fr“)"
+        "prefered_language": "Код съставен от 2 знака (например: „en“ или „fr“)",
+        "alt-nile-bin": "Използване на вградения изпълним файл на Nile…"
     },
     "platforms": {
         "linux": "Линукс",
         "mac": "Мак",
         "win": "Уиндоус"
     },
-    "please-wait": "Please wait...",
-    "progress": "Progress",
+    "please-wait": "Моля, изчакайте…",
+    "progress": "Напредък",
     "queue": {
         "label": {
             "canceled": "Canceled",
@@ -534,7 +539,17 @@
         "steamruntime": "Използване на средата за изпълнение на Steam",
         "winecrossoverbottle": "Бутилка CrossOver",
         "wineprefix": "Папка за префикс на Wine",
-        "wineversion": "Версия на Wine"
+        "wineversion": "Версия на Wine",
+        "autoUpdateGames": "Автоматично обновяване на игрите",
+        "ignoreGameUpdates": "Пренебрегване на обновленията на играта",
+        "disable_logs": "Деактивиране на регистрационни файлове",
+        "addgamestoapplications": "Автоматично добавяне на игрите към приложенията",
+        "showMetalOverlay": "Показване на слой със статистики",
+        "alt-nile-bin": "Избиране на алтернативен изпълним файл на Nile",
+        "autodxvknvapi": "Автоматично инсталиране/обновяване на DXVK/VKD3D в префикса",
+        "experimental_features": {
+            "enableNewShinyFeature": "Нова функционалност"
+        }
     },
     "settings": {
         "battlEyeRuntime": {
@@ -576,6 +591,9 @@
         "saves": {
             "label": "Save Location:",
             "warning": "Функционалността за съхраняване на запазените игри в облака е в състояние на Бета. Направете резервно копие на запазените си игри, преди да синхронизирате (в случай, че нещо се обърка)"
+        },
+        "experimental_features": {
+            "title": "Експериментални функционалности"
         }
     },
     "Settings": "Настройки",
@@ -586,7 +604,8 @@
     "status": {
         "installing": "Инсталиране",
         "logging": "Влизане…",
-        "processing": "Файловете се обработват, изчакайте"
+        "processing": "Файловете се обработват… моля, изчакайте",
+        "preparing_login": "Подготовка за вписване… "
     },
     "store": "Мазагин на Epic",
     "stores": "Магазини",
@@ -639,5 +658,22 @@
         },
         "release": "Дата на изданието",
         "size": "Размер"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Не ме питайте повече",
+        "warning": "На път сте да отворите външна връзка."
+    },
+    "wiki_info": {
+        "not_found": "Не успяхме да открием допълнителна информация."
+    },
+    "dlc": {
+        "title": "Заглавие",
+        "noDlcFound": "Няма намерени сваляеми съдържания",
+        "actions": "Действия",
+        "installDlcs": "Инсталиране на всички сваляеми съдържания",
+        "size": "Размер"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "Игри от Amazon",
+    "prime-gaming": "Prime Gaming"
 }

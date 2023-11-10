@@ -142,7 +142,9 @@
             "title": "Προειδοποίηση"
         },
         "wineprefix": "Διαλέξτε τον φάκελο Προθέματος Wine",
-        "yes": "ΝΑΙ"
+        "yes": "ΝΑΙ",
+        "dontShowAgain": "Μην εμφανιστείτε ξανά",
+        "choose-nile-binary": "Επιλέξτε Nile binary"
     },
     "button": {
         "cancel": "Cancel",
@@ -311,7 +313,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "Είσοδος Amazon"
     },
     "message": {
         "sync": "Ο συγχρονισμός ολοκληρώθηκε",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "Έκδοση GOGDL: ",
         "legendary-version": "Έκδοση Legendary: ",
-        "weblate": "Βοηθήστε να μεταφραστεί το HyperPlay."
+        "weblate": "Βοηθήστε να μεταφραστεί το HyperPlay.",
+        "nile-version": "Έκδοση Nile: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Χρήση ενσωματωμένου δυαδικού αρχείου Legendary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Πρόθημα διαδρομής εγκατάστασης EGS",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
+        "alt-nile-bin": "Χρησιμοποιώντας το ενσωματωμένο δυαδικό σύστημα Nile..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +539,13 @@
         "steamruntime": "Χρήση Steam Runtime",
         "winecrossoverbottle": "CrossOver Περιβάλλον",
         "wineprefix": "Φάκελος Προθημάτων Wine",
-        "wineversion": "Έκδοση Wine"
+        "wineversion": "Έκδοση Wine",
+        "autoUpdateGames": "Αυτόματη ενημέρωση παιχνιδιών",
+        "ignoreGameUpdates": "Αγνοήστε τις ενημερώσεις του παιχνιδιού",
+        "disable_logs": "Απενεργοποίηση αρχείων καταγραφής",
+        "addgamestoapplications": "Προσθέστε αυτόματα παιχνίδια στις Εφαρμογές",
+        "showMetalOverlay": "Εμφάνιση επικάλυψης στατιστικών",
+        "alt-nile-bin": "Επιλέξτε ένα εναλλακτικό δυαδικό αρχείο Nile"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +597,8 @@
     "status": {
         "installing": "Εγκατάσταση",
         "logging": "Σύνδεση...",
-        "processing": "Επεξεργασία αρχείων, παρακαλώ περιμένετε"
+        "processing": "Επεξεργασία αρχείων, παρακαλώ περιμένετε",
+        "preparing_login": "Προετοιμασία σύνδεσης... "
     },
     "store": "Κατάστημα Epic",
     "stores": "Καταστήματα",
@@ -639,5 +651,22 @@
         },
         "release": "Ημερομηνία κυκλοφορίας",
         "size": "Μέγεθος"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Μην ξαναρωτήσεις",
+        "warning": "Πρόκειται να ανοίξετε έναν εξωτερικό σύνδεσμο."
+    },
+    "wiki_info": {
+        "not_found": "Δεν μπορέσαμε να βρούμε επιπλέον πληροφορίες."
+    },
+    "dlc": {
+        "size": "Μέγεθος",
+        "actions": "Ενέργειες",
+        "installDlcs": "Εγκατάσταση όλων των DLCs",
+        "noDlcFound": "Δεν βρέθηκαν DLC",
+        "title": "Title"
+    },
+    "amazon": "Αμαζόνα",
+    "Amazon Games": "Παιχνίδια Amazon",
+    "prime-gaming": "Prime Gaming"
 }

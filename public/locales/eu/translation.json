@@ -141,8 +141,10 @@
             },
             "title": "Oharra"
         },
-        "wineprefix": "Aukeratu Wine-Prefix karpeta",
-        "yes": "BAI"
+        "wineprefix": "Aukeratu Wine Prefix karpeta",
+        "yes": "BAI",
+        "dontShowAgain": "Ez erakutsi berriro",
+        "choose-nile-binary": "Hautatu Nile bitarra"
     },
     "button": {
         "cancel": "Cancel",
@@ -309,9 +311,10 @@
     },
     "login": {
         "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "epic": "Hasi Epic Games saioa",
+        "gog": "Hasi GOG saioa",
+        "message": "Hasi saioa zure plataformetan. Saioa behin baino gehiagotan batera has dezakezu.",
+        "amazon": "Amazon-en saioa"
     },
     "message": {
         "sync": "Sinkronizazioa amaituta",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "GOGDL bertsioa: ",
         "legendary-version": "Bertsio mitikoa: ",
-        "weblate": "Lagundu HyperPlay itzultzen."
+        "weblate": "Lagundu HyperPlay itzultzen.",
+        "nile-version": "Nile bertsioa: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Kondairazko bitar integratua erabiltzen...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "EGS instalatuta dagoen aurrizkia",
-        "prefered_language": "2 karaktere kodea (hau da: \"en\" edo \"fr\")"
+        "prefered_language": "2 karaktere kodea (hau da: \"en\" edo \"fr\")",
+        "alt-nile-bin": "Nile bitarra integratua erabiltzen..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +539,13 @@
         "steamruntime": "Erabili Steam Runtime",
         "winecrossoverbottle": "CrossOver botila",
         "wineprefix": "WinePrefix karpeta",
-        "wineversion": "Ardoaren Bertsioa"
+        "wineversion": "Ardoaren Bertsioa",
+        "autoUpdateGames": "Eguneratu jokoak automatikoki",
+        "ignoreGameUpdates": "Ez ikusi jokoaren eguneraketak",
+        "disable_logs": "Desgaitu erregistroak",
+        "addgamestoapplications": "Gehitu automatikoki jokoak aplikazioetan",
+        "showMetalOverlay": "Erakutsi estatistikak gainjartzea",
+        "alt-nile-bin": "Aukeratu Nile Binary alternatibo bat"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +597,8 @@
     "status": {
         "installing": "Instalatzen",
         "logging": "Saioa hasi...",
-        "processing": "Fitxategiak prozesatzen, itxaron mesedez"
+        "processing": "Fitxategiak prozesatzen, itxaron mesedez",
+        "preparing_login": "Saioa hasteko prestatzen... "
     },
     "store": "Denda epikoa",
     "stores": "Dendak",
@@ -639,5 +651,22 @@
         },
         "release": "Argitaratze data",
         "size": "Tamaina"
-    }
+    },
+    "externalLink": {
+        "warning": "Kanpoko esteka bat irekitzera zoaz.",
+        "dontAskAgain": "Ez galdetu berriro"
+    },
+    "wiki_info": {
+        "not_found": "Ezin izan dugu informazio gehigarririk aurkitu."
+    },
+    "dlc": {
+        "actions": "Ekintzak",
+        "installDlcs": "Instalatu DLC guztiak",
+        "noDlcFound": "Ez da DLCrik aurkitu",
+        "size": "Tamaina",
+        "title": "Title"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "Amazon Jokoak",
+    "prime-gaming": "Prime Gaming"
 }

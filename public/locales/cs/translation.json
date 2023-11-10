@@ -142,7 +142,9 @@
             "title": "Varování"
         },
         "wineprefix": "Vyberte složku WinePrefix",
-        "yes": "ANO"
+        "yes": "ANO",
+        "dontShowAgain": "Znovu nezobrazovat",
+        "choose-nile-binary": "Vyberte binární Nil"
     },
     "button": {
         "cancel": "Zrušit",
@@ -261,7 +263,9 @@
         "wine": {
             "part1": "HyperPlay hledá verze Wine, Proton a CrossOver v následujících složkách:",
             "part2": "Pro jiná místa použijte symbolický odkaz na jednu z těchto složek"
-        }
+        },
+        "disable_logs": "Zapnutím tohoto políčka zakážete většinu zápisů do souborů protokolu (kritické informace jsou vždy protokolovány). Před nahlášením jakéhokoli problému nezapomeňte toto nastavení vypnout.",
+        "dxvknvapi": "DXVK-NVAPI je implementace NVAPI postavená na DXVK a nativním NVAPI Linuxu, umožňuje použití DLSS na grafických kartách Nvidia."
     },
     "info": {
         "hyperplay": {
@@ -308,10 +312,11 @@
         "website": "Načítání webu"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Alternativní způsob přihlášení",
+        "epic": "Přihlášení s Epic Games",
+        "gog": "Přihlášení s GOG",
+        "message": "Přihlaste se pomocí své platformy. Můžete se přihlásit k více platformám najednou.",
+        "amazon": "Přihlášení na Amazon"
     },
     "message": {
         "sync": "Synchronizace dokončena",
@@ -401,7 +406,8 @@
     "other": {
         "gogdl-version": "Verze GOGDL: ",
         "legendary-version": "Verze Legenary: ",
-        "weblate": "Pomozte s překladem HyperPlay."
+        "weblate": "Pomozte s překladem HyperPlay.",
+        "nile-version": "Verze Nile: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +415,8 @@
         "alt-legendary-bin": "Pomocí vestavěného Legendary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix kde je nainstalován EGS",
-        "prefered_language": "2znakový kód (tj.: \"en\" nebo \"fr\")"
+        "prefered_language": "2znakový kód (tj.: \"en\" nebo \"fr\")",
+        "alt-nile-bin": "Pomocí vestavěného nilského binárního..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,8 +541,18 @@
         "start-in-tray": "Start Minimized",
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "",
-        "wineversion": ""
+        "wineprefix": "Složka WinePrefix",
+        "wineversion": "Verze Wine",
+        "autoUpdateGames": "Automaticky aktualizovat hry",
+        "ignoreGameUpdates": "Ignorovat aktualizace hry",
+        "disable_logs": "Zakázat protokoly",
+        "addgamestoapplications": "Přidávejte hry do aplikací automaticky",
+        "showMetalOverlay": "Zobrazit překryvnou statistiku",
+        "alt-nile-bin": "Vyberte alternativní binární soubor Nile",
+        "autodxvknvapi": "Automaticky instalovat/aktualizovat DXVK/VKD3D na prefixu",
+        "experimental_features": {
+            "enableNewShinyFeature": "Nová skvělá funkce"
+        }
     },
     "settings": {
         "battlEyeRuntime": {
@@ -574,8 +591,11 @@
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
-            "label": "Save Location:",
-            "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+            "label": "Umístění pro ukládání:",
+            "warning": "Funkce Cloud Saves je v Beta verzi, před synchronizací si prosím uložená data zálohujte (pro případ, že by se něco pokazilo)"
+        },
+        "experimental_features": {
+            "title": "Experimentální funkce"
         }
     },
     "Settings": "",
@@ -584,9 +604,10 @@
         "uncollapse": "Uncollapse sidebar"
     },
     "status": {
-        "installing": "Installing",
-        "logging": "Logging In...",
-        "processing": "Processing files, please wait"
+        "installing": "Instaluji",
+        "logging": "Přihlašování...",
+        "processing": "Zpracovávám soubory, čekejte prosím",
+        "preparing_login": "Příprava přihlášení... "
     },
     "store": "Epic Store",
     "stores": "Stores",
@@ -638,6 +659,23 @@
             "unzipping": "Rozbalování"
         },
         "release": "Release Date",
-        "size": "Size"
-    }
+        "size": "Velikost"
+    },
+    "externalLink": {
+        "dontAskAgain": "Už se neptat",
+        "warning": "Chystáte se otevřít externí odkaz."
+    },
+    "wiki_info": {
+        "not_found": "Další informace jsme nenašli."
+    },
+    "dlc": {
+        "noDlcFound": "Nebyly nalezeny žádné DLC",
+        "size": "Velikost",
+        "installDlcs": "Instalovat všechna DLC",
+        "title": "Název",
+        "actions": "Akce"
+    },
+    "amazon": "Amazonka",
+    "prime-gaming": "Prime Gaming",
+    "Amazon Games": "Amazon hry"
 }
