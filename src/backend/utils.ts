@@ -1575,3 +1575,47 @@ export const processIsClosed = async (pid: number) => {
     check()
   })
 }
+
+type RunnerStore = {
+  [key in Runner]:
+    | 'Epic Games'
+    | 'GOG'
+    | 'Amazon Games'
+    | 'HyperPlay'
+    | 'Sideloaded'
+}
+
+const runnerStore: RunnerStore = {
+  legendary: 'Epic Games',
+  gog: 'GOG',
+  nile: 'Amazon Games',
+  hyperplay: 'HyperPlay',
+  sideload: 'Sideloaded'
+}
+
+export const getStoreName = (runner: Runner) => {
+  return runnerStore[runner] || 'Unknown'
+}
+
+type PlatformName =
+  | 'Windows'
+  | 'Linux'
+  | 'macOS'
+  | 'Browser'
+  | 'Android'
+  | 'Unknown'
+
+const platformMap: Record<string, PlatformName> = {
+  windows_amd64: 'Windows',
+  windows_arm64: 'Windows',
+  linux_amd64: 'Linux',
+  linux_arm64: 'Linux',
+  darwin_amd64: 'macOS',
+  darwin_arm64: 'macOS',
+  web: 'Browser',
+  android_arm64: 'Android'
+}
+
+export function getPlatformName(platform: string): PlatformName {
+  return platformMap[platform] || 'Unknown'
+}
