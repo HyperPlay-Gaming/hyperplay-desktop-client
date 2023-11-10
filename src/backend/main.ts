@@ -74,7 +74,9 @@ import {
   wait,
   checkWineBeforeLaunch,
   downloadDefaultWine,
-  getNileVersion
+  getNileVersion,
+  getStoreName,
+  getPlatformName
 } from './utils'
 import {
   configStore,
@@ -193,6 +195,18 @@ let ignoreExitToTray = false
 ipcMain.on('ignoreExitToTray', () => {
   ignoreExitToTray = true
 })
+
+ipcMain.on('focusMainWindow', () => {
+  const mainWindow = getMainWindow()
+
+  if (!mainWindow) {
+    return
+  }
+
+  mainWindow.show()
+  mainWindow?.focus()
+})
+
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
@@ -1038,7 +1052,7 @@ ipcMain.handle(
     const gameSettings = await gameManagerMap[runner].getSettings(appName)
     const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
 
-    const { title } = game
+    const { title, app_name, browserUrl, install } = game
 
     const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
@@ -1052,6 +1066,18 @@ ipcMain.handle(
     }
 
     logInfo(`Launching ${title} (${game.app_name})`, LogPrefix.Backend)
+    trackEvent({
+      event: 'Game Launched',
+      properties: {
+        game_name: app_name,
+        isBrowserGame: browserUrl !== undefined,
+        game_title: title,
+        store_name: getStoreName(runner),
+        browserUrl: browserUrl ?? undefined,
+        platform: getPlatformName(install.platform!),
+        platform_arch: install.platform!
+      }
+    })
 
     if (autoSyncSaves && isOnline()) {
       sendFrontendMessage('gameStatusUpdate', {
@@ -1216,6 +1242,20 @@ ipcMain.handle(
       status: 'done'
     })
 
+    trackEvent({
+      event: 'Game Closed',
+      properties: {
+        game_name: app_name,
+        isBrowserGame: browserUrl !== undefined,
+        game_title: title,
+        store_name: getStoreName(runner),
+        browserUrl: browserUrl ?? undefined,
+        platform: getPlatformName(install.platform!),
+        playTimeInMs: sessionPlaytime * 60 * 1000,
+        platform_arch: install.platform!
+      }
+    })
+
     // Exit if we've been launched without UI
     if (isCLINoGui) {
       app.exit()
@@ -1251,11 +1291,20 @@ ipcMain.handle(
       status: 'uninstalling'
     })
 
-    const { title } = gameManagerMap[runner].getGameInfo(appName)
+    const {
+      title,
+      install: { platform }
+    } = gameManagerMap[runner].getGameInfo(appName)
 
     trackEvent({
       event: 'Game Uninstall Started',
-      properties: { game_name: appName, store_name: runner, game_title: title }
+      properties: {
+        game_name: appName,
+        store_name: getStoreName(runner),
+        game_title: title,
+        platform_arch: platform!,
+        platform: getPlatformName(platform!)
+      }
     })
 
     let uninstalled = false
@@ -1268,9 +1317,11 @@ ipcMain.handle(
         event: 'Game Uninstall Failed',
         properties: {
           game_name: appName,
-          store_name: runner,
+          store_name: getStoreName(runner),
           error: `${error}`,
-          game_title: title
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
         }
       })
       notify({
@@ -1307,8 +1358,10 @@ ipcMain.handle(
         event: 'Game Uninstall Success',
         properties: {
           game_name: appName,
-          store_name: runner,
-          game_title: title
+          store_name: getStoreName(runner),
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
         }
       })
 

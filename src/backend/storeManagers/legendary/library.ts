@@ -685,8 +685,7 @@ export async function runRunnerCommand(
   command: LegendaryCommand,
   abortController: AbortController,
   options?: CallRunnerOptions,
-  gameInfo?: GameInfo,
-  shouldTrackPlaytime = false
+  gameInfo?: GameInfo
 ): Promise<ExecResult> {
   const { dir, bin } = getLegendaryBin()
 
@@ -710,8 +709,7 @@ export async function runRunnerCommand(
       ...options,
       verboseLogFile: legendaryLogFile
     },
-    gameInfo,
-    shouldTrackPlaytime
+    gameInfo
   )
 }
 

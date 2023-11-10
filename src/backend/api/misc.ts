@@ -104,6 +104,8 @@ export const handleShowDialog = (
   }
 }
 
+export const focusMainWindow = () => ipcRenderer.send('focusMainWindow')
+
 import Store from 'electron-store'
 // TODO: Refactor this into the backend so in order to set nodeIntegration: false
 // here is how the store methods can be refactored

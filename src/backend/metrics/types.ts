@@ -1,3 +1,4 @@
+import { getPlatformName, getStoreName } from 'backend/utils'
 import { AppPlatforms, InstallPlatform, Runner } from 'common/types'
 
 export interface MetricsOptIn {
@@ -58,10 +59,11 @@ export interface GameInstallRequested {
 export interface GameInstallStarted {
   event: 'Game Install Started'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     game_title: string
-    platform: InstallPlatform | AppPlatforms
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
@@ -69,10 +71,11 @@ export interface GameInstallStarted {
 export interface GameInstallSuccess {
   event: 'Game Install Success'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     game_title: string
-    platform: InstallPlatform | AppPlatforms
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
@@ -80,15 +83,17 @@ export interface GameInstallSuccess {
 export interface GameInstallFailed {
   event: 'Game Install Failed'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     error: string
     game_title: string
-    platform: InstallPlatform | AppPlatforms
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
 
+// TODO: remove
 export interface GameUpdateRequested {
   event: 'Game Update Requested'
   properties: {
@@ -103,10 +108,11 @@ export interface GameUpdateRequested {
 export interface GameUpdateStarted {
   event: 'Game Update Started'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     game_title: string
-    platform: InstallPlatform | AppPlatforms
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
@@ -114,10 +120,11 @@ export interface GameUpdateStarted {
 export interface GameUpdateSuccess {
   event: 'Game Update Success'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     game_title: string
-    platform: InstallPlatform | AppPlatforms
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
@@ -125,11 +132,12 @@ export interface GameUpdateSuccess {
 export interface GameUpdateFailed {
   event: 'Game Update Failed'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     error: string
     game_title: string
-    platform: InstallPlatform | AppPlatforms
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
@@ -147,9 +155,11 @@ export interface GameUninstallRequested {
 export interface GameUninstallStarted {
   event: 'Game Uninstall Started'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     game_title: string
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
@@ -157,9 +167,11 @@ export interface GameUninstallStarted {
 export interface GameUninstallSuccess {
   event: 'Game Uninstall Success'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     game_title: string
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
@@ -167,10 +179,12 @@ export interface GameUninstallSuccess {
 export interface GameUninstallFailed {
   event: 'Game Uninstall Failed'
   properties: {
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_name: string
     error: string
     game_title: string
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
   }
   sensitiveProperties?: never
 }
@@ -188,7 +202,9 @@ export interface GameLaunch {
   properties: {
     isBrowserGame: boolean
     game_name: string
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
+    platform: ReturnType<typeof getPlatformName>
+    platform_arch: InstallPlatform
     game_title: string
     browserUrl?: string
     processName?: string
@@ -201,11 +217,13 @@ export interface GameClosed {
   properties: {
     isBrowserGame: boolean
     game_name: string
-    store_name: Runner
+    store_name: ReturnType<typeof getStoreName>
     game_title: string
     playTimeInMs: number
+    platform_arch: InstallPlatform
     browserUrl?: string
     processName?: string
+    platform: ReturnType<typeof getPlatformName>
   }
   sensitiveProperties?: never
 }
