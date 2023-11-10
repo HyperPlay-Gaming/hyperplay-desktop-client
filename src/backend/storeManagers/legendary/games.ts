@@ -937,8 +937,7 @@ export async function launch(
         if (!logsDisabled) appendFileSync(logFileLocation(appName), output)
       }
     },
-    gameInfo,
-    true
+    gameInfo
   )
 
   deleteAbortController(appName)
