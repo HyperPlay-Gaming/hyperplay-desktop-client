@@ -1886,10 +1886,6 @@ backendEvents.on(
   }
 )
 
-backendEvents.on('metamaskOtpUpdated', function (otp: string) {
-  getMainWindow()?.webContents.send('metamaskOtpUpdated', otp)
-})
-
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
 
 ipcMain.on('reloadApp', async () => {
