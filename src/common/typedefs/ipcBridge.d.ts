@@ -180,7 +180,6 @@ interface HyperPlayAsyncIPCFunctions {
     updateProperties: chrome.tabs.UpdateProperties
   ) => Promise<chrome.tabs.Tab>
   chromeTabsRemove: (tabIds: number | number[]) => Promise<void>
-  //
   importMetaMask: (
     mmInitMethod: MetaMaskInitMethod,
     dbPath?: string | null,
