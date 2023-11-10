@@ -128,13 +128,16 @@ const launch = async ({
   if (hasUpdate) {
     const { ignoreGameUpdates } = await window.api.requestGameSettings(appName)
 
-    if (ignoreGameUpdates) {
+    if (ignoreGameUpdates && runner !== 'hyperplay') {
       return window.api.launch({
         appName,
         runner,
         launchArguments: runner === 'legendary' ? '--skip-version-check' : ''
       })
     }
+
+    // focus the window if minimized or hidden
+    window.api.focusMainWindow()
 
     // promisifies the showDialogModal button click callbacks
     const launchFinished = new Promise<{ status: 'done' | 'error' | 'abort' }>(
@@ -157,6 +160,24 @@ const launch = async ({
             {
               text: t('box.no'),
               onClick: async () => {
+                if (runner === 'hyperplay') {
+                  return showDialogModal({
+                    message: t(
+                      'gamepage:box.update.message-cancel',
+                      'It is not possible to play this game without updating'
+                    ),
+                    title: t('gamepage:box.update.title'),
+                    buttons: [
+                      {
+                        text: t('gamepage:box.ok', 'OK'),
+                        onClick: async () => {
+                          res({ status: 'abort' })
+                        }
+                      }
+                    ]
+                  })
+                }
+
                 res(
                   window.api.launch({
                     appName,
