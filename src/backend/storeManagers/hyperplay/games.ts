@@ -64,8 +64,20 @@ import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
+import { captureException } from '@sentry/electron'
 
-const inProgressDownloadsMap: Map<string, DownloadItem> = new Map()
+
+interface ProgressDownloadingItem {
+  DownloadItem: DownloadItem,
+  platformInfo?: PlatformConfig
+  destinationPath: string
+  gameInfo: GameInfo
+  installVersion: string
+  appPlatform: InstalledInfo['platform']
+  channelName: string | undefined
+}
+
+const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
 const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
 
 export async function getSettings(appName: string): Promise<GameSettings> {
@@ -139,10 +151,10 @@ export async function stop(appName: string): Promise<void> {
 
 export async function pause(appName: string): Promise<void> {
   const dl = inProgressDownloadsMap.get(appName)
-  if (dl === undefined) {
+  if (dl === undefined || dl.DownloadItem === undefined) {
     throw `Tried to pause download for ${appName} that is not in progress!`
   }
-  dl.pause()
+  dl.DownloadItem.pause()
 }
 
 /**
@@ -258,7 +270,11 @@ async function downloadGame(
   directory: string,
   fileName: string,
   platformInfo: PlatformConfig,
-  destinationPath: string
+  destinationPath: string,
+  gameInfo: GameInfo,
+  installVersion: string,
+  appPlatform: InstalledInfo['platform'],
+  channelName?: string
 ): Promise<void> {
   if (await resumeIfPaused(appName)) {
     return
@@ -346,7 +362,15 @@ async function downloadGame(
       onCancel
     )
 
-    inProgressDownloadsMap.set(appName, item)
+    inProgressDownloadsMap.set(appName, {
+      DownloadItem: item,
+      appPlatform,
+      gameInfo,
+      destinationPath,
+      platformInfo,
+      installVersion,
+      channelName
+    })
   })
 }
 
@@ -480,17 +504,33 @@ function getReleaseMeta(
   return [releaseMeta, selectedChannel]
 }
 
-async function resumeIfPaused(appName: string): Promise<boolean> {
+async function resumeIfPaused(appName: string): Promise<InstallResult | boolean> {
   const isPaused = inProgressDownloadsMap.has(appName)
+
   if (isPaused) {
     const item = inProgressDownloadsMap.get(appName)
-    if (item === undefined) {
+    if (item === undefined || item.DownloadItem === undefined) {
       return false
     }
-    item.resume()
-    const success = await waitForItemToDownload(item) // inProgressDownloadsMap.get(appName)?.on
-    return success
+
+    item.DownloadItem.resume()
+
+    if (await waitForItemToDownload(item.DownloadItem)) {
+      await extract(appName, {
+        appPlatform: item.appPlatform,
+        gameInfo: item.gameInfo,
+        destinationPath: item.destinationPath,
+        platformInfo: item.platformInfo,
+        installVersion: item.installVersion,
+        channelName: item.channelName,
+      })
+
+      return true;
+    }
+
+    return false
   }
+
   return isPaused
 }
 
@@ -527,7 +567,9 @@ export async function install(
     updateOnly = false
   }: InstallArgs
 ): Promise<InstallResult> {
-  const wasPaused = await resumeIfPaused(appName)
+  if (await resumeIfPaused(appName)) {
+    return { status: 'done' };
+  }
 
   let { directory, fileName } = { directory: '', fileName: '' }
   try {
@@ -547,7 +589,7 @@ export async function install(
 
     const installVersion = releaseVersion ?? gameInfoVersion ?? '0'
 
-    if (platformToInstall === 'Browser' && !wasPaused) {
+    if (platformToInstall === 'Browser') {
       const browserGameInstalledInfo: InstalledInfo = {
         appName,
         install_path: destinationPath,
@@ -589,45 +631,47 @@ export async function install(
       platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
     }
 
-    if (!wasPaused) {
-      if (!existsSync(dirpath)) {
-        mkdirSync(dirpath, { recursive: true })
-      }
-
-      logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
-      const zipPathInfo = getZipFileName(appName, platformInfo)
-      directory = zipPathInfo.directory
-      fileName = zipPathInfo.filename
-
-      // download the zip file
-      if (!existsSync(destinationPath)) {
-        mkdirSync(destinationPath, { recursive: true })
-      }
-
-      // Reset the download progress
-      window.webContents.send(`progressUpdate-${appName}`, {
-        appName,
-        runner: 'hyperplay',
-        folder: destinationPath,
-        status: 'done',
-        progress: {
-          folder: destinationPath,
-          percent: 0,
-          diskSpeed: 0,
-          downSpeed: 0,
-          bytes: 0,
-          eta: null
-        }
-      })
-
-      await downloadGame(
-        appName,
-        directory,
-        fileName,
-        platformInfo,
-        destinationPath
-      )
+    if (!existsSync(dirpath)) {
+      mkdirSync(dirpath, { recursive: true })
     }
+
+    logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
+    const zipPathInfo = getZipFileName(appName, platformInfo)
+    directory = zipPathInfo.directory
+    fileName = zipPathInfo.filename
+
+    // download the zip file
+    if (!existsSync(destinationPath)) {
+      mkdirSync(destinationPath, { recursive: true })
+    }
+
+    // Reset the download progress
+    window.webContents.send(`progressUpdate-${appName}`, {
+      appName,
+      runner: 'hyperplay',
+      folder: destinationPath,
+      status: 'done',
+      progress: {
+        folder: destinationPath,
+        percent: 0,
+        diskSpeed: 0,
+        downSpeed: 0,
+        bytes: 0,
+        eta: null
+      }
+    })
+
+    await downloadGame(
+      appName,
+      directory,
+      fileName,
+      platformInfo,
+      destinationPath,
+      gameInfo,
+      installVersion,
+      appPlatform,
+      channelName
+    )
 
     if (!platformInfo.executable) {
       return {
@@ -654,6 +698,7 @@ export async function install(
     if (!`${error}`.includes('Download stopped or paused')) {
       callAbortController(appName)
     }
+
     return {
       status: 'error',
       error: `${error}`
@@ -946,6 +991,8 @@ export async function extract(
       folder: destinationPath,
       status: 'done'
     })
+
+    captureException(error);
   }
 
   return { status: 'error' }
