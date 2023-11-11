@@ -169,6 +169,7 @@ import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
 
 let sentryInitialized = false
+
 function initSentry() {
   if (sentryInitialized) return
   Sentry.init({
@@ -549,14 +550,20 @@ if (!gotTheLock) {
     const rootGameDir = installPath
 
     for (const gameToDownload of gamesToDownload) {
-      const projId = gameToDownload.projectId
-      logInfo(`installing project id: , ${projId}`, LogPrefix.HyperPlay)
-      await addGameToLibrary(projId)
-      await HyperPlayGameManager.install(projId, {
-        path: gameToDownload.installPath ?? path.join(rootGameDir, projId),
-        platformToInstall: gameToDownload.platform ?? 'windows_amd64',
-        channelName: gameToDownload.channelName ?? 'main'
-      })
+      try {
+        const projId = gameToDownload.projectId
+        logInfo(`installing project id: , ${projId}`, LogPrefix.HyperPlay)
+        await addGameToLibrary(projId)
+        await HyperPlayGameManager.install(projId, {
+          path: gameToDownload.installPath ?? path.join(rootGameDir, projId),
+          platformToInstall: gameToDownload.platform ?? 'windows_amd64',
+          channelName: gameToDownload.channelName ?? 'main'
+        })
+      } catch (e) {
+        logError(`Failed to install game ${gameToDownload.projectId}: ${e}`, {
+          prefix: LogPrefix.HyperPlay
+        })
+      }
     }
 
     return
