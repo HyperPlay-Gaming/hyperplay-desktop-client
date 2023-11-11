@@ -142,7 +142,9 @@
             "title": "Avertizare"
         },
         "wineprefix": "Alegeți dosarul Wine Prefix",
-        "yes": "DA"
+        "yes": "DA",
+        "dontShowAgain": "Nu mai arăta",
+        "choose-nile-binary": "Selectați binarul Nil"
     },
     "button": {
         "cancel": "Cancel",
@@ -311,7 +313,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "Conectare Amazon"
     },
     "message": {
         "sync": "Sincronizare Completă",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "Versiunea GOGDL: ",
         "legendary-version": "Versiune Legendary: ",
-        "weblate": "Ajută la traducerea HyperPlay."
+        "weblate": "Ajută la traducerea HyperPlay.",
+        "nile-version": "Versiunea Nile: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Folosind binarul Legendary încorporat...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefixul unde este instalat EGS",
-        "prefered_language": "Cod de 2 caractere (adică: „en” sau „fr”)"
+        "prefered_language": "Cod de 2 caractere (adică: „en” sau „fr”)",
+        "alt-nile-bin": "Folosind binarul Nile încorporat..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +539,13 @@
         "steamruntime": "Utilizați Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "dosar WinePrefix",
-        "wineversion": "Versiune Wine"
+        "wineversion": "Versiune Wine",
+        "autoUpdateGames": "Actualizați automat jocurile",
+        "ignoreGameUpdates": "Ignora actualizările jocului",
+        "disable_logs": "Dezactivați jurnalele",
+        "addgamestoapplications": "Adăugați automat jocuri la Aplicații",
+        "showMetalOverlay": "Afișați statistici suprapuse",
+        "alt-nile-bin": "Alegeți un binar alternativ pentru Nil"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +597,8 @@
     "status": {
         "installing": "Se Instalează",
         "logging": "Autentificare...",
-        "processing": "Se procesează fișierele, așteptați"
+        "processing": "Se procesează fișierele, așteptați",
+        "preparing_login": "Se pregătește autentificare... "
     },
     "store": "Magazin",
     "stores": "Magazine",
@@ -639,5 +651,22 @@
         },
         "release": "Data de lansare",
         "size": "Mărime"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Nu mai întreba",
+        "warning": "Sunteți pe cale să deschideți un link extern."
+    },
+    "wiki_info": {
+        "not_found": "Nu am putut găsi informații suplimentare."
+    },
+    "dlc": {
+        "actions": "Acțiuni",
+        "installDlcs": "Instalați toate DLC-urile",
+        "noDlcFound": "Nu s-au găsit DLC",
+        "size": "Mărime",
+        "title": "Title"
+    },
+    "amazon": "Amazon",
+    "prime-gaming": "Prime Gaming",
+    "Amazon Games": "Jocuri Amazon"
 }

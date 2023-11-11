@@ -118,7 +118,13 @@
         "path-not-writtable": "Увага: шлях можа быць недаступным для запісу.",
         "space-after-install": "Пасля ўстаноўкі",
         "wineprefix": "WinePrefix",
-        "wineversion": "Вінная версія"
+        "wineversion": "Вінная версія",
+        "anticheat-warning": {
+            "cancel": "Не",
+            "message": "Падтрымка антычыта перарваная ці немагчымая. Гульня не будзе працаваць. Вы ўсё роўна хочаце яго ўсталяваць?",
+            "install": "Так (я разумею, што гэта не спрацуе)",
+            "title": "Антычыць перапынены/адхілены"
+        }
     },
     "label": {
         "game": {
@@ -139,7 +145,8 @@
         "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "login": "Log in",
-        "title": "You are NOT logged in"
+        "title": "Вы НЕ ўвайшлі ў сістэму",
+        "amazon": "Вы не ўвайшлі ў сістэму з уліковым запісам Epic у HyperPlay. Не выкарыстоўвайце старонку крамы для ўваходу, націсніце замест гэтага наступную кнопку:"
     },
     "report_problem": "Паведаміць аб праблеме запуску гэтай гульні",
     "sdl": {

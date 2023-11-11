@@ -141,8 +141,10 @@
             },
             "title": "Warning"
         },
-        "wineprefix": "Wineプレフィックスフォルダを選択します",
-        "yes": "はい"
+        "wineprefix": "Wine環境フォルダを選択",
+        "yes": "はい",
+        "dontShowAgain": "次回から確認しない",
+        "choose-nile-binary": "ナイル川バイナリを選択"
     },
     "button": {
         "cancel": "Cancel",
@@ -308,10 +310,11 @@
         "website": "Loading Website"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "別のログイン方法",
+        "epic": "Epic Gamesログイン",
+        "gog": "GOGログイン",
+        "message": "お使いのプラットフォームにログインします。同時に複数のプラットフォームにログインすることができます。",
+        "amazon": "アマゾンログイン"
     },
     "message": {
         "sync": "同期が完了しました",
@@ -399,17 +402,20 @@
         }
     },
     "other": {
-        "gogdl-version": "GOGDL Version: ",
-        "legendary-version": "Legendary Version: ",
-        "weblate": "HyperPlayの翻訳を手伝ってください。"
+        "gogdl-version": "GOGDLバージョン: ",
+        "legendary-version": "Legendaryバージョン: ",
+        "weblate": "HyperPlayの翻訳に協力",
+        "nile-version": "ナイルバージョン: "
     },
     "Other": "Other",
     "placeholder": {
-        "alt-gogdl-bin": "Using built-in GOGDL binary...",
-        "alt-legendary-bin": "Using built-in Legendary binary...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "EGSがインストールされているプレフィックス",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "alt-gogdl-bin": "内蔵GOGDLバイナリを使用中…",
+        "alt-legendary-bin": "内蔵Legendaryバイナリを使用中…",
+        "custom_themes_path": "カスタムCSSファイルを探索するパスを選択してください",
+        "dxvkfpsvalue": "正の整数値（例: 30、60、…）",
+        "egs-prefix": "EGSがインストールされている環境",
+        "prefered_language": "2文字のコード（“en”や“fr”など）",
+        "alt-nile-bin": "組み込みの Nile バイナリを使用しています..."
     },
     "platforms": {
         "linux": "Linux",
@@ -531,10 +537,16 @@
         "select_theme": "Select Theme",
         "showfps": "FPSを表示（DX9、10、11）",
         "start-in-tray": "最小化を開始",
-        "steamruntime": "Use Steam Runtime",
-        "winecrossoverbottle": "CrossOver ボトル",
-        "wineprefix": "Wineプレフィックスフォルダー",
-        "wineversion": "Wineバージョン"
+        "steamruntime": "Steamランタイムを使用",
+        "winecrossoverbottle": "CrossOverボトル",
+        "wineprefix": "Wine環境フォルダ",
+        "wineversion": "Wineバージョン",
+        "autoUpdateGames": "ゲームを自動アップデート",
+        "ignoreGameUpdates": "ゲームのアップデートを無視",
+        "disable_logs": "ログを無効にする",
+        "addgamestoapplications": "ゲームをアプリケーションに自動的に追加する",
+        "showMetalOverlay": "統計オーバーレイを表示",
+        "alt-nile-bin": "代替の Nile バイナリを選択する"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -584,9 +596,10 @@
         "uncollapse": "Uncollapse sidebar"
     },
     "status": {
-        "installing": "Installing",
-        "logging": "Logging In...",
-        "processing": "Processing files, please wait"
+        "installing": "インストール中",
+        "logging": "ログイン中…",
+        "processing": "ファイルを処理中。しばらくお待ちください",
+        "preparing_login": "ログインを準備しています... "
     },
     "store": "ストア",
     "stores": "Stores",
@@ -639,5 +652,8 @@
         },
         "release": "Release Date",
         "size": "Size"
-    }
+    },
+    "Amazon Games": "アマゾンゲーム",
+    "amazon": "アマゾン",
+    "prime-gaming": "プライムゲーミング"
 }

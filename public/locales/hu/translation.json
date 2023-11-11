@@ -142,7 +142,9 @@
             "title": "Figyelmeztetés"
         },
         "wineprefix": "Wine prefix mappa kiválasztása",
-        "yes": "IGEN"
+        "yes": "IGEN",
+        "dontShowAgain": "Ne mutasd újra",
+        "choose-nile-binary": "Válassza a Nílus bináris elemet"
     },
     "button": {
         "cancel": "Cancel",
@@ -312,7 +314,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "Amazon bejelentkezés"
     },
     "message": {
         "sync": "Szinkronizálás befejezve",
@@ -402,7 +405,8 @@
     "other": {
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Legendary verzió: ",
-        "weblate": "Segíts lefordítani a HyperPlay-ot."
+        "weblate": "Segíts lefordítani a HyperPlay-ot.",
+        "nile-version": "Nile verzió: "
     },
     "Other": "Other",
     "placeholder": {
@@ -410,7 +414,8 @@
         "alt-legendary-bin": "Beépített Legendary bináris használata...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix ahol telepítve van az EGS",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
+        "alt-nile-bin": "A beépített Nile bináris használata..."
     },
     "platforms": {
         "linux": "Linux",
@@ -535,7 +540,13 @@
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver palack",
         "wineprefix": "Wine prefix mappa",
-        "wineversion": "Wine verzió"
+        "wineversion": "Wine verzió",
+        "ignoreGameUpdates": "Figyelmen kívül hagyja a játékfrissítéseket",
+        "autoUpdateGames": "Játékok automatikus frissítése",
+        "disable_logs": "Naplók letiltása",
+        "showMetalOverlay": "Statisztika fedvény megjelenítése",
+        "addgamestoapplications": "Adjon hozzá játékokat automatikusan az Alkalmazásokhoz",
+        "alt-nile-bin": "Válasszon egy alternatív nílusi binárist"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -587,7 +598,8 @@
     "status": {
         "installing": "Telepítés",
         "logging": "Bejelentkezés...",
-        "processing": "Fájlok feldolgozása, kérlek várj"
+        "processing": "Fájlok feldolgozása, kérlek várj",
+        "preparing_login": "Bejelentkezés előkészítése... "
     },
     "store": "Epic Store",
     "stores": "Stores",
@@ -639,6 +651,23 @@
             "unzipping": "Kicsomagolás"
         },
         "release": "Release Date",
-        "size": "Size"
-    }
+        "size": "Méret"
+    },
+    "externalLink": {
+        "dontAskAgain": "Ne kérdezz többet",
+        "warning": "Egy külső hivatkozás megnyitására készül."
+    },
+    "wiki_info": {
+        "not_found": "Nem találtunk további információt."
+    },
+    "dlc": {
+        "actions": "Akciók",
+        "installDlcs": "Összes DLC telepítése",
+        "noDlcFound": "Nem található DLC",
+        "size": "Méret",
+        "title": "Cím"
+    },
+    "amazon": "amazon",
+    "Amazon Games": "Amazon Games",
+    "prime-gaming": "Prime Gaming"
 }

@@ -20,8 +20,6 @@ export const changeLanguage = (newLanguage: string) =>
 export const openExternalUrl = (url: string) =>
   ipcRenderer.send('openExternalUrl', url)
 export const getAppVersion = async () => ipcRenderer.invoke('getAppVersion')
-export const getLatestReleases = async () =>
-  ipcRenderer.invoke('getLatestReleases')
 
 export const openPatreonPage = () => ipcRenderer.send('openPatreonPage')
 export const openKofiPage = () => ipcRenderer.send('openKofiPage')
