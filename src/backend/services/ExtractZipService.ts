@@ -236,7 +236,7 @@ export class ExtractZipService extends EventEmitter {
    */
   #onError(error: Error) {
     if (!error) {
-      return;
+      return
     }
 
     console.log('error', error)

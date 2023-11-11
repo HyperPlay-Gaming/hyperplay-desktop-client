@@ -1,7 +1,7 @@
 import { EventEmitter } from 'node:events'
 import yauzl from 'yauzl'
 import { resolve } from 'path'
-import { mkdirSync, existsSync } from 'graceful-fs'
+import { mkdirSync } from 'graceful-fs'
 import { ExtractZipService } from '../ExtractZipService'
 
 const returnDataMockup = {
@@ -180,10 +180,8 @@ describe('ExtractZipService', () => {
     const mockEventListener = jest.fn()
     extractZipService.on('error', mockEventListener)
 
-
     process.nextTick(async () => {
-      await expect(
-        extractZipService.extract()).rejects.toThrow(error)
+      await expect(extractZipService.extract()).rejects.toThrow(error)
       expect(mockEventListener).toHaveBeenCalled()
       expect(mockEventListener).toHaveBeenCalledWith(error)
     })

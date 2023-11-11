@@ -66,9 +66,8 @@ import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 
-
 interface ProgressDownloadingItem {
-  DownloadItem: DownloadItem,
+  DownloadItem: DownloadItem
   platformInfo?: PlatformConfig
   destinationPath: string
   gameInfo: GameInfo
@@ -504,7 +503,9 @@ function getReleaseMeta(
   return [releaseMeta, selectedChannel]
 }
 
-async function resumeIfPaused(appName: string): Promise<InstallResult | boolean> {
+async function resumeIfPaused(
+  appName: string
+): Promise<InstallResult | boolean> {
   const isPaused = inProgressDownloadsMap.has(appName)
 
   if (isPaused) {
@@ -522,10 +523,10 @@ async function resumeIfPaused(appName: string): Promise<InstallResult | boolean>
         destinationPath: item.destinationPath,
         platformInfo: item.platformInfo,
         installVersion: item.installVersion,
-        channelName: item.channelName,
+        channelName: item.channelName
       })
 
-      return true;
+      return true
     }
 
     return false
@@ -568,7 +569,7 @@ export async function install(
   }: InstallArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
-    return { status: 'done' };
+    return { status: 'done' }
   }
 
   let { directory, fileName } = { directory: '', fileName: '' }
@@ -992,7 +993,7 @@ export async function extract(
       status: 'done'
     })
 
-    captureException(error);
+    captureException(error)
   }
 
   return { status: 'error' }
