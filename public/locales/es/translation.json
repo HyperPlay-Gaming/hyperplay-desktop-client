@@ -91,7 +91,7 @@
             }
         },
         "no": "NO",
-        "ok": "De acuerdo",
+        "ok": "DE ACUERDO",
         "protocol": {
             "install": {
                 "not_installed": "No está instalado actualmente. ¿Quieres instalarlo?"
@@ -667,13 +667,11 @@
         "release": "Fecha de lanzamiento",
         "size": "Tamaño"
     },
-    "externalLink": {
-        "dontAskAgain": "no vuelvas a preguntar",
-        "warning": "Está a punto de abrir un enlace externo."
-    },
-    "wiki_info": {
-        "not_found": "No pudimos encontrar información adicional."
-    },
+    "accounts": "cuentas",
+    "Amazon": "Amazon",
+    "ALL": "TODO",
+    "analytics": "Análisis",
+    "Amazon Games": "Amazon Games",
     "dlc": {
         "actions": "Acciones",
         "installDlcs": "Instalar todos los DLC",
@@ -681,7 +679,11 @@
         "size": "Tamaño",
         "title": "Título"
     },
-    "prime-gaming": "primer juego",
-    "amazon": "Amazonas",
-    "Amazon Games": "Juegos de Amazonas"
+    "externalLink": {
+        "dontAskAgain": "no vuelvas a preguntar",
+        "warning": "Está a punto de abrir un enlace externo."
+    },
+    "wiki_info": {
+        "not_found": "No pudimos encontrar información adicional."
+    }
 }
