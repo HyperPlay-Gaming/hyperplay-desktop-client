@@ -93,7 +93,37 @@ export interface GameInstallFailed {
   sensitiveProperties?: never
 }
 
-// TODO: remove
+export interface GameInstallCanceled {
+  event: 'Game Install Canceled'
+  properties: {
+    store_name: Runner
+    game_title: string
+    game_name: string
+  }
+  sensitiveProperties?: never
+}
+
+export interface GameInstallPaused {
+  event: 'Game Install Paused'
+  properties: {
+    store_name: Runner
+    game_title: string
+    game_name: string
+  }
+  sensitiveProperties?: never
+}
+
+export interface GameInstallResumed {
+  event: 'Game Install Resumed'
+  properties: {
+    store_name: Runner
+    game_title: string
+    game_name: string
+  }
+  sensitiveProperties?: never
+}
+
+// TODO: remove (?)
 export interface GameUpdateRequested {
   event: 'Game Update Requested'
   properties: {
@@ -257,6 +287,9 @@ export type PossibleMetricPayloads =
   | DownloadToastInteraction
   | GameLaunch
   | GameClosed
+  | GameInstallCanceled
+  | GameInstallPaused
+  | GameInstallResumed
   | HyperPlayLaunched
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']
