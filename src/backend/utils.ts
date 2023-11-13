@@ -40,6 +40,7 @@ import {
   rmSync,
   mkdirSync,
   createWriteStream,
+  symlink,
   rm
 } from 'graceful-fs'
 import { promisify } from 'util'
@@ -1363,7 +1364,10 @@ function removeFolder(path: string, folderName: string) {
   return
 }
 
-export async function extractZip(zipFile: string, destinationPath: string) {
+export async function extractZip(
+  zipFile: string,
+  destinationPath: string
+): Promise<void> {
   return new Promise<void>((resolve, reject) => {
     yauzl.open(zipFile, { lazyEntries: true }, (err, zipfile) => {
       if (err) {
@@ -1373,30 +1377,42 @@ export async function extractZip(zipFile: string, destinationPath: string) {
 
       zipfile.readEntry()
       zipfile.on('entry', (entry) => {
-        if (/\/$/.test(entry.fileName)) {
-          // Directory file names end with '/'
-          mkdirSync(join(destinationPath, entry.fileName), { recursive: true })
-          zipfile.readEntry()
-        } else {
-          // Ensure parent directory exists
-          mkdirSync(
-            join(
-              destinationPath,
-              entry.fileName.split('/').slice(0, -1).join('/')
-            ),
-            { recursive: true }
-          )
+        const isSymlink =
+          ((entry.externalFileAttributes >> 16) & 0o170000) === 0o120000
+        const outputPath = join(destinationPath, entry.fileName)
 
-          // Extract file
+        if (/\/$/.test(entry.fileName)) {
+          mkdirSync(outputPath, { recursive: true })
+          zipfile.readEntry()
+        } else if (isSymlink) {
+          rm(outputPath, console.log)
           zipfile.openReadStream(entry, (err, readStream) => {
             if (err) {
               reject(err)
               return
             }
 
-            const writeStream = createWriteStream(
-              join(destinationPath, entry.fileName)
-            )
+            let linkTarget = ''
+            readStream.on('data', (chunk) => (linkTarget += chunk))
+            readStream.on('end', () => {
+              symlink(linkTarget, outputPath, (err) => {
+                if (err) {
+                  reject(err)
+                  return
+                }
+                zipfile.readEntry()
+              })
+            })
+          })
+        } else {
+          mkdirSync(dirname(outputPath), { recursive: true })
+          zipfile.openReadStream(entry, (err, readStream) => {
+            if (err) {
+              reject(err)
+              return
+            }
+
+            const writeStream = createWriteStream(outputPath)
             readStream.pipe(writeStream)
             writeStream.on('close', () => {
               zipfile.readEntry()
