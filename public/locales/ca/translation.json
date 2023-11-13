@@ -142,7 +142,9 @@
             "title": "Atenció"
         },
         "wineprefix": "Tria la carpeta del WinePrefix",
-        "yes": "SÍ"
+        "yes": "SÍ",
+        "dontShowAgain": "No tornis a mostrar",
+        "choose-nile-binary": "Seleccioneu el binari del Nil"
     },
     "button": {
         "cancel": "Cancel·la",
@@ -262,7 +264,9 @@
         "wine": {
             "part1": "L'HyperPlay cerca les versions del Wine, Proton i CrossOver als directoris següents:",
             "part2": "Per a altres llocs, utilitza un enllaç simbòlic (symlink) a algun d'aquests directoris"
-        }
+        },
+        "disable_logs": "Activeu aquesta casella de selecció per desactivar la majoria de les escriptures als fitxers de registre (la informació crítica sempre es registra). Assegureu-vos de desactivar aquesta configuració abans d'informar de qualsevol problema.",
+        "dxvknvapi": "DXVK-NVAPI és una implementació de NVAPI construïda sobre DXVK i Linux natiu NVAPI. Permet l'ús de DLSS en les GPU de Nvidia."
     },
     "info": {
         "hyperplay": {
@@ -309,10 +313,12 @@
         "website": "S'està carregant el lloc web"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Mètode d'inici de sessió alternatiu",
+        "epic": "Inici de sessió a l'Epic Games",
+        "gog": "Inici de sessió al GOG",
+        "message": "Inicia la sessió. Pots iniciar sessió a més d'una plataforma alhora.",
+        "amazon": "Inici de sessió d'Amazon",
+        "old-mac": "La vostra versió del macOS és {{version}}. Cal el macOS 12 o posterior per a iniciar la sessió."
     },
     "message": {
         "sync": "S'ha completat la sincronització",
@@ -402,7 +408,8 @@
     "other": {
         "gogdl-version": "Versió del GOGDL: ",
         "legendary-version": "Versió del Legendary: ",
-        "weblate": "Ajuda a traduir l'HyperPlay."
+        "weblate": "Ajuda a traduir l'HyperPlay.",
+        "nile-version": "Versió Nile: "
     },
     "Other": "Other",
     "placeholder": {
@@ -410,7 +417,8 @@
         "alt-legendary-bin": "S'està utilitzant el binari integrat del Legendary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix on l'EGS està instal·lat",
-        "prefered_language": "Codi de dos caràcters, com ara «en», «fr» o «ca»"
+        "prefered_language": "Codi de dos caràcters, com ara «en», «fr» o «ca»",
+        "alt-nile-bin": "S'està utilitzant el binari integrat del Nil..."
     },
     "platforms": {
         "linux": "Linux",
@@ -535,7 +543,14 @@
         "steamruntime": "Usa el Runtime de l'Steam",
         "winecrossoverbottle": "Ampolla CrossOver",
         "wineprefix": "Directori WinePrefix",
-        "wineversion": "Versió del Wine"
+        "wineversion": "Versió del Wine",
+        "autoUpdateGames": "Actualitza els jocs automàticament",
+        "ignoreGameUpdates": "Ignora les actualitzacions del joc",
+        "disable_logs": "Desactiva els registres",
+        "showMetalOverlay": "Mostra la superposició d'estadístiques",
+        "addgamestoapplications": "Afegeix jocs a Aplicacions automàticament",
+        "alt-nile-bin": "Trieu un binari alternatiu del Nil",
+        "autodxvknvapi": "Instal·la/Actualitza el DXVK-NVAPI al prefix automàticament"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -587,7 +602,8 @@
     "status": {
         "installing": "S'està instal·lant...",
         "logging": "S'està iniciant la sessió...",
-        "processing": "S'està processant els fitxers. Espereu."
+        "processing": "S'estan processant els fitxers, espera",
+        "preparing_login": "S'està preparant l'inici de sessió... "
     },
     "store": "Botiga de l'Epic",
     "stores": "Botigues",
@@ -640,5 +656,22 @@
         },
         "release": "Release Date",
         "size": "Mida"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "No ho tornis a preguntar",
+        "warning": "Estàs a punt d'obrir un enllaç extern."
+    },
+    "wiki_info": {
+        "not_found": "No hem pogut trobar informació addicional."
+    },
+    "dlc": {
+        "actions": "Accions",
+        "installDlcs": "Instal·la tots els DLCs",
+        "noDlcFound": "No s'han trobat DLC",
+        "size": "Mida",
+        "title": "Títol"
+    },
+    "prime-gaming": "Prime Gaming",
+    "amazon": "Amazon",
+    "Amazon Games": "Jocs d'Amazon"
 }

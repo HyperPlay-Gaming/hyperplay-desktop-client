@@ -14,6 +14,8 @@ import { existsSync, mkdirSync, readFileSync, readdirSync } from 'graceful-fs'
 import { homedir } from 'os'
 import { dirname, join } from 'path'
 import { PlistObject, parse as plistParse } from 'plist'
+import LaunchCommand from '../storeManagers/legendary/commands/launch'
+import { NonEmptyString, Path } from '../storeManagers/legendary/commands/base'
 
 /**
  * Loads the default wine installation path and version.
@@ -206,7 +208,7 @@ export async function getWineOnMac(): Promise<Set<WineInstallation>> {
 
   const winePaths = new Set<string>()
 
-  // search for wine installed on $HOME/Library/Application Support/heroic/tools/wine
+  // search for wine installed on $HOME/Library/Application Support/hyperplay/tools/wine
   const wineToolsPath = `${toolsPath}/wine/`
   if (existsSync(wineToolsPath)) {
     readdirSync(wineToolsPath).forEach((path) => {
@@ -372,18 +374,55 @@ export async function getGamingPortingToolkitWine(): Promise<
   return gamingPortingToolkitWine
 }
 
+export type AllowedWineFlags = Pick<
+  LaunchCommand,
+  '--wine' | '--wrapper' | '--no-wine'
+>
+
+/**
+ * Returns a LegendaryCommand with the required flags to use a specified Wine version
+ * @param wineBin The full path to the Wine binary (`wine`/`wine64`/`proton`)
+ * @param wineType The type of the Wine version
+ * @param wrapper Any wrappers to be used, may be `''`
+ */
 export function getWineFlags(
   wineBin: string,
   wineType: WineInstallation['type'],
   wrapper: string
-) {
+): AllowedWineFlags {
+  let partialCommand: AllowedWineFlags = {}
   switch (wineType) {
     case 'wine':
     case 'toolkit':
-      return ['--wine', wineBin, ...(wrapper ? ['--wrapper', wrapper] : [])]
+      partialCommand = { '--wine': Path.parse(wineBin) }
+      if (wrapper) partialCommand['--wrapper'] = NonEmptyString.parse(wrapper)
+      break
     case 'proton':
-      return ['--no-wine', '--wrapper', `${wrapper} '${wineBin}' run`]
+      partialCommand = {
+        '--no-wine': true,
+        '--wrapper': NonEmptyString.parse(`${wrapper} '${wineBin}' run`)
+      }
+      break
     default:
-      return []
+      break
   }
+  return partialCommand
+}
+
+/**
+ * Like {@link getWineFlags}, but returns a `string[]` with the flags instead
+ */
+export function getWineFlagsArray(
+  wineBin: string,
+  wineType: WineInstallation['type'],
+  wrapper: string
+): string[] {
+  const partialCommand = getWineFlags(wineBin, wineType, wrapper)
+
+  const commandArray: string[] = []
+  for (const [key, value] of Object.entries(partialCommand)) {
+    if (value === true) commandArray.push(key)
+    else commandArray.push(key, value)
+  }
+  return commandArray
 }

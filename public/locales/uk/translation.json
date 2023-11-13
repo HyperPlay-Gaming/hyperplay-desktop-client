@@ -149,7 +149,8 @@
         },
         "wineprefix": "Оберіть теку префікса Wine",
         "yes": "ТАК",
-        "dontShowAgain": "Не показувати знову"
+        "dontShowAgain": "Не показувати більше",
+        "choose-nile-binary": "Виберіть подвійний файл Nile"
     },
     "button": {
         "cancel": "Скасувати",
@@ -273,7 +274,8 @@
             "part2": "Для інших місць, скористайтесь символьною ланкою на одну з цих тек"
         },
         "dxvkfpslimit": "Встановлює обмеження частоти кадрів для ігор DXVK",
-        "disable_logs": "УВІМКНІТЬ цей прапорець, щоб вимкнути більшість записів до файлів журналу (важлива інформація завжди записується до журналу). Обов'язково ВИМКНІТЬ цей параметр, перш ніж повідомляти про будь-яку проблему."
+        "disable_logs": "УВІМКНІТЬ цей прапорець, щоб вимкнути більшість записів до файлів журналу (важлива інформація завжди записується до журналу). Обов'язково ВИМКНІТЬ цей параметр, перш ніж повідомляти про будь-яку проблему.",
+        "dxvknvapi": "DXVK-NVAPI - це реалізація NVAPI, побудована на основі DXVK та власне NVAPI Linux, що дозволяє використовувати DLSS на графічних процесорах Nvidia."
     },
     "info": {
         "hyperplay": {
@@ -328,7 +330,8 @@
         "epic": "Вхід в Epic Games",
         "gog": "Вхід в GOG",
         "message": "Увійдіть за допомогою своєї платформи. Ви можете увійти на кілька платформ одночасно.",
-        "amazon": "Вхід до Amazon"
+        "amazon": "Вхід до Amazon",
+        "old-mac": "Ваша версія macOS — {{version}}. Для входу в систему потрібна macOS 12 або новіша."
     },
     "message": {
         "sync": "Синхронізація завершена",
@@ -422,7 +425,8 @@
     "other": {
         "gogdl-version": "Версія GOGDL: ",
         "legendary-version": "Версія Legendary: ",
-        "weblate": "Допоможіть перекласти HyperPlay."
+        "weblate": "Допоможіть перекласти HyperPlay.",
+        "nile-version": "Версія Нілу: "
     },
     "Other": "Other",
     "placeholder": {
@@ -431,7 +435,7 @@
         "custom_themes_path": "Виберіть шлях для пошуку власних файлів CSS",
         "egs-prefix": "Префікс де встановлено EGS",
         "prefered_language": "2-значний код (приклад: \"en\" або \"uk\")",
-        "dxvkfpsvalue": "Позитивне ціле значення (наприклад, 30, 60, ...)"
+        "alt-nile-bin": "Використовуючи вбудований двійковий файл Nile..."
     },
     "platforms": {
         "linux": "Linux",
@@ -566,7 +570,8 @@
         "dxvkfpslimit": "Обмеження к/с (DX9, 10 та 11)",
         "showMetalOverlay": "Показати статистику оверлею",
         "addgamestoapplications": "Автоматично додавати ігри до Applications",
-        "disable_logs": "Вимкнути журнали"
+        "disable_logs": "Вимкнути журнали",
+        "alt-nile-bin": "Виберіть альтернативний двійковий файл Nile"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -649,8 +654,8 @@
     "Update Available!": "",
     "userselector": {
         "discord": "Discord",
-        "logging_out": "Вихід із системи",
-        "logout": "Вийти",
+        "logging_out": "Виходимо",
+        "logout": "Вийти з облікого запису",
         "logout_confirmation": "Точно бажаєте вийти?",
         "manageaccounts": "Облікові записи",
         "quit": "Закрити"
@@ -851,11 +856,14 @@
         "title": "Назва",
         "actions": "Дії",
         "installDlcs": "Встановити всі DLC",
-        "noDlcFound": "DLC не знайдено"
+        "noDlcFound": "DLC не знайдено",
+        "size": "Розмір",
+        "title": "Назва"
     },
     "dlcs": {
         "label": "Виберіть DLC для встановлення:"
     },
     "Amazon": "Amazon",
-    "Amazon Games": "Amazon Ігри"
+    "Amazon Games": "Amazon Ігри",
+    "prime-gaming": "Prime Gaming"
 }

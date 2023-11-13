@@ -97,7 +97,7 @@
         },
         "quit": {
             "message": "Есть незавершенные операции. Вы уверены?",
-            "title": "Выйти"
+            "title": "Выход"
         },
         "reset-app": {
             "question": {
@@ -142,7 +142,9 @@
             "title": "Предупреждение"
         },
         "wineprefix": "Выбрать папку префикса Wine",
-        "yes": "ДА"
+        "yes": "ДА",
+        "dontShowAgain": "Больше не показывать",
+        "choose-nile-binary": "Выберите двоичный файл Нила"
     },
     "button": {
         "cancel": "Отмена",
@@ -261,7 +263,9 @@
         "wine": {
             "part1": "HyperPlay ищет версии Wine, Proton и CrossOver в следующих папках:",
             "part2": "Для других мест используйте символическую ссылку на одну из этих папок"
-        }
+        },
+        "disable_logs": "Установите этот флажок в положение ON, чтобы отключить большую часть операций записи в файлы журналов (критическая информация всегда регистрируется). Не забудьте отключить этот параметр, прежде чем сообщать о какой-либо проблеме.",
+        "dxvknvapi": "DXVK-NVAPI — это реализация NVAPI, построенная на основе DXVK и собственного NVAPI Linux, она позволяет использовать DLSS на видеокартах Nvidia."
     },
     "info": {
         "hyperplay": {
@@ -308,10 +312,12 @@
         "website": "Загрузка веб-сайта"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Альтернативный способ входа",
+        "epic": "Вход в Epic Games",
+        "gog": "Вход в GOG",
+        "message": "Войдите с помощью своей платформы. Вы можете войти одновременно в несколько платформ.",
+        "amazon": "Амазон Войти",
+        "old-mac": "Ваша версия macOS: {{version}}. Для входа требуется macOS 12 или новее."
     },
     "message": {
         "sync": "Синхронизация завершена",
@@ -401,7 +407,8 @@
     "other": {
         "gogdl-version": "Версия GOGDL : ",
         "legendary-version": "Версия Legendary: ",
-        "weblate": "Помогите перевести HyperPlay."
+        "weblate": "Помогите перевести HyperPlay.",
+        "nile-version": "Версия Нила: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +416,8 @@
         "alt-legendary-bin": "Используется встроенный Legendary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Префикс куда установлен EGS",
-        "prefered_language": "2-значный код (например: \"en\" или \"fr\")"
+        "prefered_language": "2-значный код (например: \"en\" или \"fr\")",
+        "alt-nile-bin": "Использование встроенного двоичного файла Nile..."
     },
     "platforms": {
         "linux": "Linux",
@@ -535,7 +543,13 @@
         "steamruntime": "Использовать среду выполнения Steam",
         "winecrossoverbottle": "Бутылка CrossOver",
         "wineprefix": "Папка префикса Wine",
-        "wineversion": "Версия Wine"
+        "wineversion": "Версия Wine",
+        "autoUpdateGames": "Автоматическое обновление игр",
+        "ignoreGameUpdates": "Игнорировать обновления игры",
+        "disable_logs": "Отключить журналы",
+        "addgamestoapplications": "Добавляйте игры в приложения автоматически",
+        "showMetalOverlay": "Показать наложение статистики",
+        "alt-nile-bin": "Выберите альтернативный двоичный файл Nile"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -587,7 +601,8 @@
     "status": {
         "installing": "Установка",
         "logging": "Вход…",
-        "processing": "Обработка файлов, подождите"
+        "processing": "Обработка файлов, подождите",
+        "preparing_login": "Подготовка входа... "
     },
     "store": "Магазин Epic",
     "stores": "Магазины",
@@ -640,5 +655,22 @@
         },
         "release": "Дата выхода",
         "size": "Размер"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Больше не спрашивать",
+        "warning": "Вы собираетесь открыть внешнюю ссылку."
+    },
+    "wiki_info": {
+        "not_found": "Мы не смогли найти дополнительную информацию."
+    },
+    "dlc": {
+        "actions": "Действия",
+        "installDlcs": "Установить все DLC",
+        "noDlcFound": "DLC не найдено",
+        "title": "Название",
+        "size": "Размер"
+    },
+    "amazon": "Амазонка",
+    "Amazon Games": "Амазонские игры",
+    "prime-gaming": "Прайм Гейминг"
 }

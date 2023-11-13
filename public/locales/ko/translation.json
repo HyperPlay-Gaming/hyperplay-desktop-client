@@ -142,7 +142,9 @@
             "title": "경고"
         },
         "wineprefix": "WinePrefix 폴더 선택",
-        "yes": "예"
+        "yes": "예",
+        "dontShowAgain": "다시 표시하지 않음",
+        "choose-nile-binary": "나일 바이너리 선택"
     },
     "button": {
         "cancel": "Cancel",
@@ -311,7 +313,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "아마존 로그인"
     },
     "message": {
         "sync": "동기화 완료",
@@ -401,15 +404,18 @@
     "other": {
         "gogdl-version": "GOGDL 버전: ",
         "legendary-version": "Legendary 버전: ",
-        "weblate": "Heroric 번역을 도와주세요."
+        "weblate": "Heroric 번역을 도와주세요.",
+        "nile-version": "나일 버전: "
     },
     "Other": "Other",
     "placeholder": {
         "alt-gogdl-bin": "내장된 GOGDL 바이너리 파일 사용...",
         "alt-legendary-bin": "내장된 Legendary 바이너리 파일 사용...",
         "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "Epic Games Store가 설치된 위치의 접두사",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "dxvkfpsvalue": "Positive integer value (e.g. 30, 60, ...)",
+        "egs-prefix": "Epic Games Store 설치 경로",
+        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
+        "alt-nile-bin": "내장 Nile 바이너리 사용..."
     },
     "platforms": {
         "linux": "Linux",
@@ -533,8 +539,14 @@
         "start-in-tray": "최소화로 시작",
         "steamruntime": "Steam 런타임 사용",
         "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "Wine 접두사 폴더",
-        "wineversion": "Wine 버전"
+        "wineprefix": "Wine 설치 경로 폴더",
+        "wineversion": "Wine 버전",
+        "autoUpdateGames": "게임 자동 업데이트",
+        "ignoreGameUpdates": "게임 업데이트 무시",
+        "disable_logs": "로그 비활성화",
+        "addgamestoapplications": "응용 프로그램에 자동으로 게임 추가",
+        "showMetalOverlay": "통계 오버레이 표시",
+        "alt-nile-bin": "대체 Nile 바이너리 선택"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +598,8 @@
     "status": {
         "installing": "설치 중",
         "logging": "로그인 중…",
-        "processing": "파일을 처리 중입니다 잠시만 기다려 주십시오"
+        "processing": "파일을 처리 중입니다 잠시만 기다려 주십시오",
+        "preparing_login": "로그인 준비 중... "
     },
     "store": "Epic Store",
     "stores": "Stores",
@@ -639,5 +652,22 @@
         },
         "release": "Release Date",
         "size": "Size"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "다시 묻지 않음",
+        "warning": "외부 링크를 열려고 합니다."
+    },
+    "wiki_info": {
+        "not_found": "추가 정보를 찾을 수 없습니다."
+    },
+    "dlc": {
+        "actions": "동작",
+        "installDlcs": "모든 DLC를 설치합니다",
+        "noDlcFound": "DLC를 찾을 수 없습니다.",
+        "size": "Size",
+        "title": "Title"
+    },
+    "amazon": "아마존",
+    "Amazon Games": "아마존 게임",
+    "prime-gaming": "프라임 게이밍"
 }
