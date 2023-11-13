@@ -11,20 +11,24 @@ export default function ImportAndCreateOptions({
   handleImportMmExtensionClicked,
   setBrowserSelected
 }: ImportAndCreateOptionsProps) {
+  let importableBrowserOptions = null
+
+  if (importOptions !== undefined) {
+    importableBrowserOptions = Object.keys(importOptions).map((browser) => {
+      const importableBrowser = browser as unknown as ImportableBrowser
+      return (
+        <ImportOption
+          onClick={async () => setBrowserSelected(importableBrowser)}
+          title={importableBrowser}
+          key={importableBrowser}
+        />
+      )
+    })
+  }
+
   return (
     <div className={styles.importOptionsContainer}>
-      {importOptions !== undefined
-        ? Object.keys(importOptions).map((browser) => {
-            const importableBrowser = browser as unknown as ImportableBrowser
-            return (
-              <ImportOption
-                onClick={async () => setBrowserSelected(importableBrowser)}
-                title={importableBrowser}
-                key={importableBrowser}
-              />
-            )
-          })
-        : null}
+      {importableBrowserOptions}
       <ImportOption
         override="create"
         title={t(
