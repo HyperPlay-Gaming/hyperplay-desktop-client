@@ -24,7 +24,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
   const checkbox = useRef<HTMLInputElement>(null)
 
   const { runner, title, app_name } = props.gameInfo
-  const isExtracting = props.status === 'extracting';
+  const isExtracting = props.status === 'extracting'
 
   return (
     <Dialog onClose={props.onClose} showCloseButton>
