@@ -143,7 +143,8 @@
             },
             "title": "Advertencia",
             "wine-change": {
-                "message": "No hemos podido encontrar la versión de vino seleccionada para ejecutar este título ({{selectedWine}}). {{newline}} Hemos encontrado otra, ¿deseas continuar utilizando {{foundWine}}?"
+                "message": "No hemos podido encontrar la versión de vino seleccionada para ejecutar este título ({{selectedWine}}). {{newline}} Hemos encontrado otra, ¿deseas continuar utilizando {{foundWine}}?",
+                "title": "¡Wine no encontrado!"
             }
         },
         "wineprefix": "Elige la ruta del prefijo de Wine",
@@ -157,7 +158,9 @@
         "login": "Iniciar sesión",
         "sync": "Sincronizar",
         "syncing": "Sincronizando",
-        "unsync": "Desincronizar"
+        "unsync": "Desincronizar",
+        "download": "Descargar",
+        "continue": "Continuar"
     },
     "controller": {
         "hints": {
@@ -196,7 +199,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Duración estimada"
     },
     "epic": {
         "offline-notification-body": "¡Puede que algunos servicios no funcionen correctamente si no estás conectado a los servidores de Epic Games!",
@@ -226,7 +230,7 @@
         "ignore_hidden": "Ignorar Ocultos",
         "platform": "Plataforma",
         "show_all_games": "Mostrar todos los juegos",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Mostrar los juegos no disponibles",
         "show_favourites_only": "Mostrar sólo favoritos",
         "show_hidden": "Mostrar Ocultos",
         "store": "Filtrar tienda"
@@ -270,7 +274,8 @@
             "part2": "Para otros lugares, use un enlace simbólico a una de estas carpetas"
         },
         "disable_logs": "Active esta casilla de verificación para desactivar la mayoría de las escrituras en los archivos de registro (la información crítica siempre se registra). Asegúrese de DESACTIVAR esta configuración antes de informar cualquier problema.",
-        "dxvknvapi": "DXVK-NVAPI es una implementación de NVAPI construida sobre DXVK y la NVAPI nativa de Linux, que permite el uso de DLSS en GPUs Nvidia."
+        "dxvknvapi": "DXVK-NVAPI es una implementación de NVAPI construida sobre DXVK y la NVAPI nativa de Linux, que permite el uso de DLSS en GPUs Nvidia.",
+        "dxvkfpslimit": "Establece un límite de fps para los juegos DXVK"
     },
     "info": {
         "hyperplay": {
@@ -296,7 +301,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-none-found": "No se ha encontrado ninguna versión de Wine, descargue una desde el gestor de compatibilidad",
+        "wine-path-invalid": "La ruta de Wine no es válida, por favor seleccione otra."
     },
     "install": {
         "path": "Seleccione la ruta de instalación"
@@ -310,7 +317,9 @@
         "toggleLayout": {
             "grid": "Cambiar a vista de grilla",
             "list": "Cambiar a vista de lista"
-        }
+        },
+        "alphabeticalAZ": "Orden alfabético de la A a la Z",
+        "alphabeticalZA": "Orden alfabético de la Z a la A"
     },
     "loading": {
         "default": "Cargando",
@@ -355,7 +364,9 @@
             "error": "Error en la instalación",
             "finished": "Instalación terminada",
             "imported": "Juego importado",
-            "startInstall": "Instalación iniciada"
+            "startInstall": "Instalación iniciada",
+            "stopped": "Instalación detenida",
+            "paused": "Instalación en pausa"
         },
         "moved": "Movimiento terminado",
         "moving": "Moviendo juego",
@@ -367,7 +378,9 @@
         "update": {
             "canceled": "Actualización cancelada",
             "finished": "Actualización terminada",
-            "started": "Actualización iniciada"
+            "started": "Actualización iniciada",
+            "paused": "Actualización pausada",
+            "stopped": "Actualización detenida"
         }
     },
     "offline-message": {
@@ -422,7 +435,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefijo donde está instalado EGS",
         "prefered_language": "Código de 2 caracteres (ej: \"en\" o \"fr\")",
-        "alt-nile-bin": "Usando el binario integrado Nile..."
+        "alt-nile-bin": "Usando el binario integrado Nile...",
+        "dxvkfpsvalue": "Valor entero positivo (por ejemplo, 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -439,7 +453,9 @@
             "empty": "Nothing to download",
             "finished": "Completado",
             "queued": "Encolado",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Descarga el currículum",
+            "pause": "Pausar la descarga"
         }
     },
     "Recent": "Jugado recientemente",
@@ -462,7 +478,7 @@
         "default-install-path": "Ruta de instalación predeterminada",
         "default-steam-path": "Ruta de Steam por defecto",
         "defaultWinePrefix": "Establecer carpeta para nuevos prefijos de Wine",
-        "disable_controller": "Desactivar la navegación de HyperPlay mediante un gamepad",
+        "disable_controller": "Desactivar la navegación Hyperplay con el mando",
         "discordRPC": "Activar Discord Rich Presence",
         "download-no-https": "Descargar juegos sin HTTPS (útil para CDNs, ej: LanCache)",
         "egs-sync": "Sincronizar con juegos EGS",
@@ -507,7 +523,9 @@
             "instructions_title": "¿Cómo reportar un problema?",
             "last-log": "Último registro",
             "no-file": "No se ha encontrado ningún archivo de registro",
-            "show-in-folder": "Mostrar el archivo de registro en la carpeta"
+            "show-in-folder": "Mostrar el archivo de registro en la carpeta",
+            "instructions-part-02": "Para ayudarnos a diagnosticar y solucionar el problema lo antes posible, facilítenos toda la información posible, incluida una copia de sus registros. Nuestro equipo de soporte supervisará ambos canales y hará todo lo posible para responder a su problema lo antes posible. Gracias por su paciencia y comprensión mientras trabajamos para resolver cualquier problema que pueda encontrar.",
+            "instructions-part-01": "Si encuentras algún problema mientras usas HyperPlay, tenemos dos áreas designadas para informar de tus problemas en nuestro servidor de Discord. Si eres un jugador, por favor reporta cualquier problema visitando el foro de soporte al jugador. Si eres un desarrollador de juegos, por favor informa de cualquier problema visitando el foro de soporte para desarrolladores."
         },
         "mangohud": "Habilitar Mangohud (es necesario instalar Mangohud)",
         "manualsync": {
@@ -557,7 +575,8 @@
         "autodxvknvapi": "Autoinstalar/actualizar DXVK en el Prefix",
         "experimental_features": {
             "enableNewShinyFeature": "Una nueva función brillante"
-        }
+        },
+        "dxvkfpslimit": "Limitar los FPS (DX9, 10 y 11)"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -602,7 +621,8 @@
         },
         "experimental_features": {
             "title": "Funciones experimentales"
-        }
+        },
+        "gamesSettings": "Configuración de los juegos"
     },
     "Settings": "Ajustes",
     "sidebar": {
@@ -661,7 +681,7 @@
         "manager": {
             "link": "Gestor de Wine",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Gestor de Wine",
+            "title": "Compatibilidad ",
             "unzipping": "Descomprimiendo"
         },
         "release": "Fecha de lanzamiento",
@@ -685,5 +705,161 @@
     },
     "wiki_info": {
         "not_found": "No pudimos encontrar información adicional."
-    }
+    },
+    "hyperplay": {
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "useRecoveryPhrase": "Acceso con una frase secreta de recuperación",
+                        "details": "Al importar, su instalación de MetaMask y    La configuración se importará a HyperPlay.",
+                        "cantFindProfile": "¿No encuentra el perfil de su navegador?",
+                        "title": "Seleccione el navegador desde el que desea importar",
+                        "createNewWallet": "Crear un nuevo monedero con la extensión MM"
+                    },
+                    "scan": {
+                        "title": "Escanea el código QR con ",
+                        "getMetamask": "Obtener MetaMask",
+                        "details": "Crea un canal de comunicación encriptado. Tus claves nunca se compartirán con HyperPlay.",
+                        "dontHaveWallet": "¿No tienes una cartera?",
+                        "updateWarning": "¿Tienes problemas? Asegúrate de que MetaMask está actualizado."
+                    },
+                    "info": {
+                        "digitalAssets": {
+                            "title": "Un hogar para sus activos digitales",
+                            "details": "Los monederos se utilizan para enviar, recibir, almacenar y mostrar activos digitales como fichas y NFT."
+                        },
+                        "title": "¿Qué es una cartera?",
+                        "createWalletCTA": "Crear un monedero",
+                        "skip": "Omitir por ahora",
+                        "login": {
+                            "details": "Una alternativa a la creación de nuevas cuentas y contraseñas en cada página web, basta con conectar tu monedero en su lugar.",
+                            "title": "Una nueva forma de iniciar sesión"
+                        },
+                        "createWalletDescription": "Haga clic en \"Crear un monedero\" más abajo si no tiene un monedero o desea crear uno nuevo:"
+                    }
+                },
+                "title": "Conexiones de la cartera",
+                "pleaseConnect": "Por favor, conecte su monedero o descargue la aplicación móvil Metamask para\n        empezar:"
+            },
+            "analytics": {
+                "privacyCaption": "Estos datos son agregados y, por tanto, anónimos a efectos del Reglamento General de Protección de Datos (UE) 2016/679. Para obtener más información en relación con nuestras prácticas de privacidad, consulte nuestro ",
+                "anonymized": "Envíe de forma anónima la interacción de los clics y los juegos;",
+                "title": "¡Ayúdenos a mejorar HyperPlay!",
+                "neverCollectIP": " recoger su dirección IP completa;",
+                "neverSellData": " vender los datos con fines lucrativos. ¡Nunca!",
+                "privacyPolicyHere": "Política de privacidad aquí.",
+                "optOut": "Permitirle siempre darse de baja a través de la configuración;",
+                "hyperplayWill": "HyperPlay hará:",
+                "neverCollectPersonal": " recopilar claves, direcciones, saldos, hashes o cualquier información personal;",
+                "body": "HyperPlay desea recopilar datos de uso para comprender mejor cómo interactúan nuestros usuarios con la aplicación. Esta información nos ayuda a entender cómo utiliza la aplicación y nos permite hacer HyperPlay aún mejor para usted."
+            },
+            "welcome": {
+                "title": "¡Bienvenido a HyperPlay Early Access!",
+                "text": {
+                    "bugs": "Por favor, tenga en cuenta que HyperPlay es una versión alfa pública. Muchas características todavía están\n          Muchas funciones aún están en desarrollo y es posible que se produzcan errores.",
+                    "description": "HyperPlay es un lanzador de juegos y un agregador de tiendas de juegos para el\n          futuro. Con HyperPlay, puedes llevar tu cartera, tokens y activos\n          en cada juego. HyperPlay es compatible con toda la biblioteca de Epic\n          Store, GOG y nuestra propia tienda HyperPlay. Al utilizar HyperPlay, aceptas\n          para nuestro",
+                    "construction": "HyperPlay está en fase de desarrollo.",
+                    "communityCTA_2": "comunidad. Juntos, ¡demos forma al futuro de los juegos!",
+                    "communityCTA_1": "Nos encantaría recibir sus comentarios y que se uniera a nosotros a nuestra"
+                }
+            },
+            "terms": "Condiciones del servicio.",
+            "connectionCanceled": {
+                "description": "Por favor, confirme la solicitud de conexión a su monedero móvil para continuar.",
+                "title": "¡Conexión cancelada!"
+            },
+            "connectionConnected": {
+                "title": "¡Cartera conectada!",
+                "description": "Su cartera está conectada. Estás listo para jugar."
+            },
+            "connectAgain": "Conéctate de nuevo"
+        },
+        "accesscodes": {
+            "success": {
+                "validation": "¡Éxito! El código de acceso es válido"
+            },
+            "error": {
+                "validation": "Código de acceso no válido"
+            }
+        },
+        "buttons": {
+            "noThanks": "No, gracias",
+            "agree": "Estoy de acuerdo"
+        },
+        "turnAnalyticsOn": "Encender",
+        "viewFullscreen": "Ver a pantalla completa",
+        "otp": "Contraseña única",
+        "analyticsOff": "El análisis está desactivado",
+        "publicAlpha": "Versión Alfa pública",
+        "misc": "Nunca",
+        "wallet": {
+            "notConnected": "No conectado",
+            "connected": "Conectado"
+        },
+        "viewPortfolio": "Ver el portafolios",
+        "currentWallet": "Cartera actual",
+        "turnAnalyticsOff": "Apagar",
+        "changeWallet": "Cambiar la cartera",
+        "analyticsOn": "El análisis está activado",
+        "copyUrl": "Copiar la dirección URL",
+        "discordApp": "Discord",
+        "viewItem": "Ver {{item}}"
+    },
+    "hyperplayOverlay": {
+        "chainRequest": {
+            "INITIATED": "Requisitos de una red personalizada",
+            "FAILED": "Red personalizada cancelada",
+            "CONFIRMED": "Se ha añadido una red personalizada"
+        },
+        "description": {
+            "FAILED": "La transacción se ha cancelado o no se ha enviado, por favor inténtelo de nuevo",
+            "INITIATED": "Una petición de monedero está pendiente en su monedero móvil",
+            "CONFIRMED": "¡La transacción se ha confirmado correctamente!",
+            "PENDING": "A la espera de la confirmación de la cadena de bloques. Te avisaremos cuando se confirme"
+        },
+        "walletWatch": {
+            "FAILED": "Solicitud de un token personalizado cancelado",
+            "CONFIRMED": "Se ha añadido un token personalizado",
+            "INITIATED": "Solicitud para agregar un token personalizado pendiente"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "Pulse {{overlayKeyMod}} + X para ver esta transacción",
+            "TITLE": "Transacción solicitada"
+        },
+        "greeting": {
+            "title": "Superposición de HyperPlay",
+            "description": "¡La superposición de HyperPlay está lista! Pulsa {{overlayKeyMod}} + X para mostrarla u ocultarla."
+        },
+        "txnRequest": {
+            "INITIATED": "Solicitud de la transacción pendiente",
+            "FAILED": "Transacción interrumpida",
+            "PENDING": "Transacción enviada",
+            "CONFIRMED": "Transacción confirmada"
+        },
+        "signatureRequest": {
+            "FAILED": "Firma interrumpida",
+            "CONFIRMED": "Firma enviada",
+            "INITIATED": "Solicitud de la firma en trámite"
+        },
+        "closeOverlay": "Pulsa {{overlayKeyMod}} + X para cerrar la superposición"
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo. \n \n Para aprobar las transacciones en la superposición de HyperPlay, deberá conectarse a HyperPlay con la extensión MetaMask."
+    },
+    "sideload": {
+        "warningTitle": "Importante",
+        "warningMessage": "La descarga de un juego es una función diseñada para desarrolladores y usuarios avanzados. Además, descargar un instalador que contenga malware puede comprometer su ordenador y provocar el robo de los fondos."
+    },
+    "gameRelease": {
+        "prototype": "Prototipo",
+        "demo": "Demostración",
+        "beta": "Beta",
+        "alpha": "Alpha",
+        "main": "Principal"
+    },
+    "dlcs": {
+        "label": "Selecciona los DLCs que quieras instalar:"
+    },
+    "exit_game": "Salir del juego"
 }
