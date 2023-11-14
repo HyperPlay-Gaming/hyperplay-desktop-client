@@ -89,7 +89,9 @@ const WalletDropdown: React.FC = observer(() => {
           onClick={() => onboardingStore.openOnboarding()}
         >
           <div className={`body ${styles.itemContents}`}>
-            {t('hyperplay.changeWallet', `Change wallet`)}
+            {showWalletLinks
+              ? t('hyperplay.changeWallet', `Change wallet`)
+              : t('hyperplay.connectWallet', `Connect wallet`)}
           </div>
         </Menu.Item>
         <Menu.Label className={styles.menuLabel}>
