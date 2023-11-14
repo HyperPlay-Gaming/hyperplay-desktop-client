@@ -1,30 +1,31 @@
 import { Menu } from '@mantine/core'
-import React, { useContext } from 'react'
+import React from 'react'
+import walletStore from 'frontend/state/WalletState'
+import { observer } from 'mobx-react-lite'
+
 import Wallet from 'frontend/components/UI/Wallet'
 import styles from './index.module.scss'
 import { NavLink } from 'react-router-dom'
 import onboardingStore from 'frontend/store/OnboardingStore'
 import { useTranslation } from 'react-i18next'
-import ContextProvider from 'frontend/state/ContextProvider'
 
-function NavigationMenuItem({ label, to }: { label: string; to: string }) {
-  const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+function NavigationMenuItem({
+  label,
+  to,
+  showWalletLinks
+}: {
+  label: string
+  to: string
+  showWalletLinks: boolean
+}) {
   return (
     <Menu.Item
       className={styles.menuItem}
-      id={
-        showMetaMaskBrowserSidebarLinks
-          ? 'topMenuItemWalletDropdown'
-          : undefined
-      }
+      id={showWalletLinks ? 'topMenuItemWalletDropdown' : undefined}
     >
       <NavLink
         to={to}
-        id={
-          showMetaMaskBrowserSidebarLinks
-            ? 'topElementWalletDropdown'
-            : undefined
-        }
+        id={showWalletLinks ? 'topElementWalletDropdown' : undefined}
       >
         <div className={`body ${styles.itemContents}`}>{label}</div>
       </NavLink>
@@ -32,9 +33,10 @@ function NavigationMenuItem({ label, to }: { label: string; to: string }) {
   )
 }
 
-export default function AccountDropdown() {
+const WalletDropdown: React.FC = observer(() => {
   const { t } = useTranslation()
-  const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+  const showWalletLinks = walletStore.isConnected
+
   return (
     <Menu position="bottom" trigger="hover">
       <Menu.Target>
@@ -50,42 +52,38 @@ export default function AccountDropdown() {
         <Menu.Label className={styles.menuLabel}>
           {t('hyperplay.currentWallet', `Current wallet`)}
         </Menu.Label>
-        {showMetaMaskBrowserSidebarLinks && (
+        {showWalletLinks && (
           <>
             <NavigationMenuItem
               label={t('hyperplay.viewFullscreen', `View fullscreen`)}
               to={'/metamaskHome'}
+              showWalletLinks={showWalletLinks}
             ></NavigationMenuItem>
             <NavigationMenuItem
               label={t('hyperplay.viewItem', {
                 defaultValue: 'View {{item}}',
                 item: 'Snaps'
               })}
+              showWalletLinks={showWalletLinks}
               to={'/metamaskSnaps'}
             ></NavigationMenuItem>
           </>
         )}
-        <Menu.Item
-          className={`${styles.menuItem} `}
-          id={
-            !showMetaMaskBrowserSidebarLinks
-              ? 'topMenuItemWalletDropdown'
-              : undefined
-          }
-        >
-          <NavLink
-            to={'/metamaskPortfolio'}
-            id={
-              !showMetaMaskBrowserSidebarLinks
-                ? 'topElementWalletDropdown'
-                : undefined
-            }
+        {showWalletLinks && (
+          <Menu.Item
+            className={`${styles.menuItem} `}
+            id={!showWalletLinks ? 'topMenuItemWalletDropdown' : undefined}
           >
-            <div className={`body ${styles.itemContents}`}>
-              {t('hyperplay.viewPortfolio', `View portfolio`)}
-            </div>
-          </NavLink>
-        </Menu.Item>
+            <NavLink
+              to={'/metamaskPortfolio'}
+              id={!showWalletLinks ? 'topElementWalletDropdown' : undefined}
+            >
+              <div className={`body ${styles.itemContents}`}>
+                {t('hyperplay.viewPortfolio', `View portfolio`)}
+              </div>
+            </NavLink>
+          </Menu.Item>
+        )}
         <Menu.Item
           className={`${styles.menuItem} `}
           onClick={() => onboardingStore.openOnboarding()}
@@ -107,4 +105,6 @@ export default function AccountDropdown() {
       </Menu.Dropdown>
     </Menu>
   )
-}
+})
+
+export default WalletDropdown
