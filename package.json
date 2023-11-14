@@ -353,7 +353,9 @@
       "electron": true,
       "electron-vite>esbuild": true,
       "playwright": true,
-      "vite>esbuild": true
+      "vite>esbuild": true,
+      "$root$": true,
+      "postinstall-postinstall": true
     }
   }
 }
