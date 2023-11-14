@@ -108,7 +108,7 @@ const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
 
 root.render(
-  <React.StrictMode>
+  <>
     <StoreController />
     <GlobalState>
       <>
@@ -120,7 +120,7 @@ root.render(
         </I18nextProvider>
       </>
     </GlobalState>
-  </React.StrictMode>
+  </>
 )
 
 // helper function to set the theme class and load custom css if needed
