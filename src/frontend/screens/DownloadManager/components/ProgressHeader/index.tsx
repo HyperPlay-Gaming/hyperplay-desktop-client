@@ -50,6 +50,8 @@ export default function ProgressHeader(props: {
   const showDownloadBar =
     props.state !== 'idle' && props.appName && progress.percent
 
+  console.log('showDownloadBar', showDownloadBar, props.state, props)
+
   return (
     <>
       <div className="progressHeader">

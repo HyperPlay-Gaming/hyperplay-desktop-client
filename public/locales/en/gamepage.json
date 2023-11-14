@@ -182,7 +182,8 @@
     "status": {
         "downloading": "Downloading",
         "extracting": {
-            "cancel": "Cancel Extraction"
+            "cancel": "Cancel Extraction",
+            "progress": "Extracting"
         },
         "gameNotAvailable": "Game not available",
         "gog-goodie": "This game doesn't appear to be installable. Check downloadable content on https://gog.com/account",

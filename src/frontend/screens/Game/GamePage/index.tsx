@@ -800,7 +800,7 @@ export default observer(function GamePage(): JSX.Element | null {
     }
 
     if (isExtracting) {
-      return `${t('status.extracting')} ${currentProgress}`
+      return `${t('status.extracting.progress')} ${currentProgress}`
     }
 
     if (!isUpdating && isInstalling) {
