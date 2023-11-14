@@ -1,5 +1,5 @@
 import { logError, LogPrefix, logWarning } from '../logger/logger'
-import { isEpicServiceOffline } from '../utils'
+import { getPlatformName, getStoreName, isEpicServiceOffline } from '../utils'
 import { DMStatus, InstallParams, InstallPlatform } from 'common/types'
 import i18next from 'i18next'
 import { notify, showDialogBoxModalAuto } from '../dialog/dialog'
@@ -52,9 +52,10 @@ async function installQueueElement(params: InstallParams): Promise<{
     event: 'Game Install Started',
     properties: {
       game_name: appName,
-      store_name: runner,
+      store_name: getStoreName(runner),
       game_title: title,
-      platform: platformToInstall
+      platform: getPlatformName(platformToInstall),
+      platform_arch: platformToInstall
     }
   })
 
@@ -110,9 +111,10 @@ async function installQueueElement(params: InstallParams): Promise<{
         event: 'Game Install Success',
         properties: {
           game_name: appName,
-          store_name: runner,
+          store_name: getStoreName(runner),
           game_title: title,
-          platform: platformToInstall
+          platform: getPlatformName(platformToInstall),
+          platform_arch: platformToInstall
         }
       })
     else trackFailedInstall(`${error}`)
@@ -136,10 +138,11 @@ async function installQueueElement(params: InstallParams): Promise<{
       event: 'Game Install Failed',
       properties: {
         game_name: appName,
-        store_name: runner,
+        store_name: getStoreName(runner),
         error: `${error}`,
         game_title: title,
-        platform: platformToInstall
+        platform: getPlatformName(platformToInstall),
+        platform_arch: platformToInstall
       }
     })
   }
@@ -190,9 +193,10 @@ async function updateQueueElement(params: InstallParams): Promise<{
     event: 'Game Update Started',
     properties: {
       game_name: appName,
-      store_name: runner,
+      store_name: getStoreName(runner),
       game_title: title,
-      platform: params.platformToInstall
+      platform: getPlatformName(params.platformToInstall),
+      platform_arch: params.platformToInstall
     }
   })
   const errorMessage = (error: string) => {
@@ -212,9 +216,10 @@ async function updateQueueElement(params: InstallParams): Promise<{
         event: 'Game Update Success',
         properties: {
           game_name: appName,
-          store_name: runner,
+          store_name: getStoreName(runner),
           game_title: title,
-          platform: params.platformToInstall
+          platform: getPlatformName(params.platformToInstall),
+          platform_arch: params.platformToInstall
         }
       })
     }
@@ -226,10 +231,11 @@ async function updateQueueElement(params: InstallParams): Promise<{
       event: 'Game Update Failed',
       properties: {
         game_name: appName,
-        store_name: runner,
+        store_name: getStoreName(runner),
         error: 'update aborted',
         game_title: title,
-        platform: params.platformToInstall
+        platform: getPlatformName(params.platformToInstall),
+        platform_arch: params.platformToInstall
       }
     })
     notify({ title, body: i18next.t('notify.update.canceled') })

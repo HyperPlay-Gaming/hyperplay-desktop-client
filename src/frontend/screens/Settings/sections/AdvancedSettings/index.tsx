@@ -19,7 +19,8 @@ import {
   AltGOGdlBin,
   AltLegendaryBin,
   DisableLogs,
-  DownloadNoHTTPS
+  DownloadNoHTTPS,
+  ExperimentalFeatures
 } from '../../components'
 import libraryState from 'frontend/state/libraryState'
 
@@ -295,6 +296,8 @@ export default function AdvancedSettings() {
           )}
         </div>
         <br />
+        <hr />
+        <ExperimentalFeatures />
         <hr />
       </div>
       <div className="footerFlex">

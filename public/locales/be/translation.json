@@ -141,8 +141,10 @@
             },
             "title": "Warning"
         },
-        "wineprefix": "",
-        "yes": ""
+        "wineprefix": "Абярыце тэчку з прэфіксам Wine",
+        "yes": "ТАК",
+        "dontShowAgain": "Больш не паказваць",
+        "choose-nile-binary": "Выберыце двайковы файл Nile"
     },
     "button": {
         "cancel": "Cancel",
@@ -215,14 +217,14 @@
     "GOG": "GOG",
     "gog-store": "GOG Store",
     "header": {
-        "hide_non_available_games": "Hide non-available games",
-        "ignore_hidden": "Ignore Hidden",
-        "platform": "",
-        "show_all_games": "Show all games",
-        "show_available_games": "Show non-Available games",
-        "show_favourites_only": "Show Favourites only",
-        "show_hidden": "Show Hidden",
-        "store": "Filter Store"
+        "hide_non_available_games": "Схаваць недаступныя гульні",
+        "ignore_hidden": "Ігнараваць схаванае",
+        "platform": "Platform",
+        "show_all_games": "Паказаць усе гульні",
+        "show_available_games": "Паказаць недаступныя гульні",
+        "show_favourites_only": "Паказаць толькі абранае",
+        "show_hidden": "Паказаць схаванае",
+        "store": "Адфільтраваць краму"
     },
     "help": {
         "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
@@ -259,48 +261,54 @@
         },
         "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
         "wine": {
-            "part1": "",
-            "part2": ""
-        }
+            "part1": "HyperPlay шукае версіі Wine, Proton і CrossOver у наступных папках:",
+            "part2": "Для іншых месцаў выкарыстоўвайце сімвалічную спасылку на адну з гэтых тэчак"
+        },
+        "disable_logs": "Уключыце гэты сцяжок, каб адключыць большасць запісаў у файлы журналаў (крытычная інфармацыя заўсёды рэгіструецца). Не забудзьцеся ВЫКЛЮЧЫЦЬ гэту наладу, перш чым паведамляць аб любой праблеме.",
+        "dxvknvapi": "DXVK-NVAPI – гэта рэалізацыя NVAPI, пабудаваная на аснове DXVK і ўласнага NVAPI Linux, яна дазваляе выкарыстоўваць DLSS на відэакартах Nvidia."
     },
     "info": {
         "hyperplay": {
             "beta": "Beta",
-            "click-to-see-changelog": "Click to see changelog",
-            "newReleases": "Update Available!",
-            "stable": "Stable",
+            "click-to-see-changelog": "Націсніце, каб убачыць журнал змяненняў",
+            "newReleases": "Абнаўленне даступна!",
+            "stable": "Стабільны",
             "version": "HyperPlay Version"
         },
         "save-sync": {
-            "searching": "Trying to detect the correct save folder (click to cancel)"
+            "searching": "Спроба вызначыць правільную тэчку захавання (націсніце, каб адмяніць)"
         },
-        "settings": "",
-        "version": "Wine Version"
+        "settings": "Налады захоўваюцца аўтаматычна",
+        "version": "Версія Wine"
     },
     "infobox": {
-        "help": "",
-        "requirements": "",
-        "warning": "Warning",
-        "wine-path": "Wine Path",
+        "help": "Даведка",
+        "requirements": "Сістэмныя патрабаванні",
+        "warning": "Папярэджанне",
+        "wine-path": "Шлях Wine",
         "wine-prefix": {
-            "title": "Wine Prefix"
+            "title": "Прэфікс Wine"
         },
         "wine-repfix": {
-            "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+            "message": "Wine выкарыстоўвае тое, што называецца WINEPREFIX для інкапсуляцыі прыкладанняў Windows. Гэты прэфікс змяшчае файлы канфігурацыі Wine і прайграванне іерархіі файлаў C: (асноўнага дыска ў АС Windows). У гэтай копіі дыска C: захоўваюцца файлы захавання гульні і залежнасці, усталяваныя праз winetricks."
+        },
+        "wine-path-invalid": "Wine Path несапраўдны, абярыце іншы.",
+        "wine-path-none-found": "Версія Wine не знойдзена, спампуйце яе з Wine Manager"
     },
     "install": {
-        "path": "Select Install Path"
+        "path": "Выберыце шлях усталявання"
+    },
+    "label": {
+        "loading": "Загрузка"
     },
     "library": {
-        "label": "Library",
         "refresh": "Refresh Library",
-        "sortAscending": "Sort Ascending",
-        "sortByStatus": "Sort by Status",
-        "sortDescending": "Sort Descending",
+        "sortAscending": "Сартаваць па ўзрастанні",
+        "sortByStatus": "Сартаваць па статусе",
+        "sortDescending": "Сартаваць па змяншэнні",
         "toggleLayout": {
-            "grid": "Toggle to a grid layout",
-            "list": "Toggle to a list layout"
+            "grid": "Пераключыцца на макет сеткі",
+            "list": "Пераключыцца на макет спісу"
         }
     },
     "loading": {
@@ -308,10 +316,12 @@
         "website": "Loading Website"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Альтэрнатыўны метад уваходу",
+        "epic": "Уваход у Epic Games",
+        "gog": "Уваход у GOG",
+        "message": "Увайдзіце са сваёй платформы. Вы можаце ўвайсці на больш чым адну платформу адначасова.",
+        "amazon": "Уваход у Amazon",
+        "old-mac": "Ваша версія macOS: {{version}}. Для ўваходу патрабуецца macOS 12 або навей."
     },
     "message": {
         "sync": "",
@@ -399,17 +409,20 @@
         }
     },
     "other": {
-        "gogdl-version": "GOGDL Version: ",
-        "legendary-version": "Legendary Version: ",
-        "weblate": "Help Improve this translation."
+        "gogdl-version": "Версія GOGDL: ",
+        "legendary-version": "Версія Legendary: ",
+        "weblate": "Help Improve this translation.",
+        "nile-version": "Версія Ніла: "
     },
     "Other": "Other",
     "placeholder": {
-        "alt-gogdl-bin": "Using built-in GOGDL binary...",
-        "alt-legendary-bin": "Using built-in Legendary binary...",
-        "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "alt-gogdl-bin": "Выкарыстанне ўбудаванага двайковага файла GOGDL...",
+        "alt-legendary-bin": "Выкарыстанне ўбудаванага двайковага файла Legendary...",
+        "custom_themes_path": "Выберыце шлях для пошуку карыстальніцкіх файлаў CSS",
+        "dxvkfpsvalue": "Цэлы станоўчы лік (напр. 30, 60, ...)",
+        "egs-prefix": "Прэфікс, дзе ўсталяваны EGS",
+        "prefered_language": "2-значны код (напрыклад: \"en\" ці \"fr\")",
+        "alt-nile-bin": "Выкарыстоўваючы ўбудаваны двайковы файл Nile..."
     },
     "platforms": {
         "linux": "",
@@ -528,13 +541,19 @@
             "placeholder": "Выберыце дакладную тэчку захавання гульняў",
             "warning": "Please check twice if the path is correct (click to retry)"
         },
-        "select_theme": "Select Theme",
-        "showfps": "",
-        "start-in-tray": "Start Minimized",
-        "steamruntime": "Use Steam Runtime",
-        "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "",
-        "wineversion": ""
+        "select_theme": "Выберыце тэму",
+        "showfps": "Паказаць FPS (DX9, 10 і 11)",
+        "start-in-tray": "Пачаць у згорнутым выглядзе",
+        "steamruntime": "Выкарыстоўвайце Steam Runtime",
+        "winecrossoverbottle": "Бутэлька CrossOver",
+        "wineprefix": "Тэчка WinePrefix",
+        "wineversion": "Версія Wine",
+        "autoUpdateGames": "Аўтаматычнае абнаўленне гульняў",
+        "ignoreGameUpdates": "Ігнараваць абнаўленні гульні",
+        "disable_logs": "Адключыць часопісы",
+        "addgamestoapplications": "Дадавайце гульні ў праграмы аўтаматычна",
+        "showMetalOverlay": "Паказаць накладанне статыстыкі",
+        "alt-nile-bin": "Выберыце альтэрнатыўны двайковы файл Nile"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -584,9 +603,10 @@
         "uncollapse": "Uncollapse sidebar"
     },
     "status": {
-        "installing": "Installing",
-        "logging": "Logging In...",
-        "processing": "Processing files, please wait"
+        "installing": "Ўстаноўка",
+        "logging": "Уваход...",
+        "processing": "Апрацоўка файлаў, пачакайце",
+        "preparing_login": "Падрыхтоўка ўваходу... "
     },
     "store": "Epic Store",
     "stores": "Stores",
@@ -632,12 +652,29 @@
     "wine": {
         "actions": "Action",
         "manager": {
-            "link": "Compatibility Layer ",
-            "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Compatibility Layer",
-            "unzipping": "Unzipping"
+            "link": "Менеджэр Wine",
+            "not-found": "Версіі Wine не знойдзены. Націсніце на значок абнаўлення, каб паўтарыць спробу.",
+            "title": "Менеджэр Wine",
+            "unzipping": "Распакоўка"
         },
         "release": "Release Date",
-        "size": "Size"
-    }
+        "size": "Памер"
+    },
+    "externalLink": {
+        "dontAskAgain": "Больш не пытайся",
+        "warning": "Вы збіраецеся адкрыць знешнюю спасылку."
+    },
+    "wiki_info": {
+        "not_found": "Мы не змаглі знайсці дадатковую інфармацыю."
+    },
+    "dlc": {
+        "actions": "Дзеянні",
+        "size": "Памер",
+        "title": "Назва",
+        "installDlcs": "Усталюйце ўсе DLC",
+        "noDlcFound": "DLC не знойдзены"
+    },
+    "amazon": "Amazon",
+    "prime-gaming": "Prime Gaming",
+    "Amazon Games": "Гульні Amazon"
 }

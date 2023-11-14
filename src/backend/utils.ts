@@ -8,7 +8,6 @@ import {
   WineInstallation,
   RpcClient,
   SteamRuntime,
-  Release,
   GameInfo,
   GameSettings,
   State,
@@ -50,7 +49,6 @@ import si from 'systeminformation'
 import {
   fixAsarPath,
   getSteamLibraries,
-  GITHUB_API,
   configPath,
   gamesConfigPath,
   icon,
@@ -88,7 +86,7 @@ import {
 } from './storeManagers/nile/electronStores'
 
 import makeClient from 'discord-rich-presence-typescript'
-import { notify, showDialogBoxModalAuto } from './dialog/dialog'
+import { showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
@@ -231,7 +229,7 @@ async function isEpicServiceOffline(
 const getLegendaryVersion = async () => {
   const abortID = 'legendary-version'
   const { stdout, error, abort } = await runLegendaryCommand(
-    ['--version'],
+    { subcommand: undefined, '--version': true },
     createAbortController(abortID)
   )
 
@@ -485,9 +483,10 @@ function clearCache(library?: 'gog' | 'legendary' | 'nile') {
     libraryStore.clear()
     gameInfoStore.clear()
     const abortID = 'legendary-cleanup'
-    runLegendaryCommand(['cleanup'], createAbortController(abortID)).then(() =>
-      deleteAbortController(abortID)
-    )
+    runLegendaryCommand(
+      { subcommand: 'cleanup' },
+      createAbortController(abortID)
+    ).then(() => deleteAbortController(abortID))
   }
   if (library === 'nile' || !library) {
     nileInstallStore.clear()
@@ -825,66 +824,6 @@ function getFirstExistingParentPath(directoryPath: string): string {
   return parentDirectoryPath !== '.' ? parentDirectoryPath : ''
 }
 
-const getLatestReleases = async (): Promise<Release[]> => {
-  const newReleases: Release[] = []
-  logInfo('Checking for new HerHyperPlayoic Updates', LogPrefix.Backend)
-
-  try {
-    const { data: releases } = await axios.get(GITHUB_API)
-    const latestStable: Release = releases.filter(
-      (rel: Release) => rel.prerelease === false
-    )[0]
-    const latestBeta: Release = releases.filter(
-      (rel: Release) => rel.prerelease === true
-    )[0]
-
-    const current = app.getVersion()
-
-    const thereIsNewStable = semverGt(latestStable.tag_name, current)
-    const thereIsNewBeta = semverGt(latestBeta.tag_name, current)
-
-    if (thereIsNewStable) {
-      newReleases.push({ ...latestStable, type: 'stable' })
-    }
-    if (thereIsNewBeta) {
-      newReleases.push({ ...latestBeta, type: 'beta' })
-    }
-
-    if (newReleases.length) {
-      notify({
-        title: t('Update Available!'),
-        body: t(
-          'notify.new-hyperplay-version',
-          'A new HyperPlay version was released!'
-        )
-      })
-    }
-
-    return newReleases
-  } catch (error) {
-    logError(['Error when checking for updates', error], LogPrefix.Backend)
-    return []
-  }
-}
-
-const getCurrentChangelog = async (): Promise<Release | null> => {
-  logInfo('Checking for current version changelog', LogPrefix.Backend)
-
-  try {
-    const current = app.getVersion()
-
-    const { data: release } = await axios.get(`${GITHUB_API}/tags/v${current}`)
-
-    return release as Release
-  } catch (error) {
-    logError(
-      ['Error when checking for current HyperPlay changelog'],
-      LogPrefix.Backend
-    )
-    return null
-  }
-}
-
 function getInfo(appName: string, runner: Runner): GameInfo {
   return gameManagerMap[runner].getGameInfo(appName)
 }
@@ -906,12 +845,18 @@ function killPattern(pattern: string) {
 }
 
 async function shutdownWine(gameSettings: GameSettings) {
-  await runWineCommand({
-    gameSettings,
-    commandParts: ['wineboot', '-k'],
-    wait: true,
-    protonVerb: 'waitforexitandrun'
-  })
+  if (gameSettings.wineVersion.wineserver) {
+    spawnSync(gameSettings.wineVersion.wineserver, ['-k'], {
+      env: { WINEPREFIX: gameSettings.winePrefix }
+    })
+  } else {
+    await runWineCommand({
+      gameSettings,
+      commandParts: ['wineboot', '-k'],
+      wait: true,
+      protonVerb: 'waitforexitandrun'
+    })
+  }
 }
 
 const getShellPath = async (path: string): Promise<string> =>
@@ -1510,7 +1455,6 @@ export function bytesToSize(bytes: number) {
 export {
   errorHandler,
   execAsync,
-  getCurrentChangelog,
   handleExit,
   isEpicServiceOffline,
   openUrlOrFile,
@@ -1533,7 +1477,6 @@ export {
   getInfo,
   getShellPath,
   getFirstExistingParentPath,
-  getLatestReleases,
   getSystemInfo,
   getWineFromProton,
   getFileSize,
@@ -1574,4 +1517,48 @@ export const processIsClosed = async (pid: number) => {
     }
     check()
   })
+}
+
+type RunnerStore = {
+  [key in Runner]:
+    | 'Epic Games'
+    | 'GOG'
+    | 'Amazon Games'
+    | 'HyperPlay'
+    | 'Sideloaded'
+}
+
+const runnerStore: RunnerStore = {
+  legendary: 'Epic Games',
+  gog: 'GOG',
+  nile: 'Amazon Games',
+  hyperplay: 'HyperPlay',
+  sideload: 'Sideloaded'
+}
+
+export const getStoreName = (runner: Runner) => {
+  return runnerStore[runner] || 'Unknown'
+}
+
+type PlatformName =
+  | 'Windows'
+  | 'Linux'
+  | 'macOS'
+  | 'Browser'
+  | 'Android'
+  | 'Unknown'
+
+const platformMap: Record<string, PlatformName> = {
+  windows_amd64: 'Windows',
+  windows_arm64: 'Windows',
+  linux_amd64: 'Linux',
+  linux_arm64: 'Linux',
+  darwin_amd64: 'macOS',
+  darwin_arm64: 'macOS',
+  web: 'Browser',
+  android_arm64: 'Android'
+}
+
+export function getPlatformName(platform: string): PlatformName {
+  return platformMap[platform] || 'Unknown'
 }

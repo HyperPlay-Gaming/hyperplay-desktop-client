@@ -33,7 +33,6 @@ import {
   appendFileSync,
   constants,
   existsSync,
-  mkdirSync,
   rmSync,
   unlinkSync,
   watch,
@@ -71,12 +70,13 @@ import {
   // detectVCRedist,
   getFileSize,
   getFirstExistingParentPath,
-  getLatestReleases,
   getShellPath,
   wait,
   checkWineBeforeLaunch,
   downloadDefaultWine,
-  getNileVersion
+  getNileVersion,
+  getStoreName,
+  getPlatformName
 } from './utils'
 import {
   configStore,
@@ -161,6 +161,7 @@ import {
   initStoreManagers,
   libraryManagerMap
 } from './storeManagers'
+import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
 import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
@@ -184,8 +185,6 @@ import {
   getGameOverride,
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
-
-app.commandLine?.appendSwitch('remote-debugging-port', '9222')
 
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
@@ -301,6 +300,7 @@ const loadMainWindowURL = function () {
     let pattern
     if (!app.isPackaged) {
       pattern = 'localhost:5173'
+      app.commandLine?.appendSwitch('remote-debugging-port', '9222')
     } else {
       pattern = publicDir
     }
@@ -786,15 +786,6 @@ ipcMain.handle('getNumOfGpus', async (): Promise<number> => {
   return controllers.length
 })
 
-ipcMain.handle('getLatestReleases', async () => {
-  const { checkForUpdatesOnStartup } = GlobalConfig.get().getSettings()
-  if (checkForUpdatesOnStartup) {
-    return getLatestReleases()
-  } else {
-    return []
-  }
-})
-
 ipcMain.on('clearCache', (event) => {
   clearCache()
   sendFrontendMessage('refreshLibrary')
@@ -972,6 +963,14 @@ ipcMain.handle('toggleDXVK', async (event, { appName, action }) =>
     )
 )
 
+ipcMain.handle('toggleDXVKNVAPI', async (event, { appName, action }) =>
+  GameConfig.get(appName)
+    .getSettings()
+    .then(async (gameSettings) =>
+      DXVK.installRemove(gameSettings, 'dxvk-nvapi', action)
+    )
+)
+
 ipcMain.on('toggleVKD3D', (event, { appName, action }) => {
   GameConfig.get(appName)
     .getSettings()
@@ -1053,7 +1052,7 @@ ipcMain.handle(
     const gameSettings = await gameManagerMap[runner].getSettings(appName)
     const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
 
-    const { title } = game
+    const { title, app_name, browserUrl, install } = game
 
     const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
@@ -1067,6 +1066,18 @@ ipcMain.handle(
     }
 
     logInfo(`Launching ${title} (${game.app_name})`, LogPrefix.Backend)
+    trackEvent({
+      event: 'Game Launched',
+      properties: {
+        game_name: app_name,
+        isBrowserGame: browserUrl !== undefined,
+        game_title: title,
+        store_name: getStoreName(runner),
+        browserUrl: browserUrl ?? undefined,
+        platform: getPlatformName(install.platform!),
+        platform_arch: install.platform!
+      }
+    })
 
     if (autoSyncSaves && isOnline()) {
       sendFrontendMessage('gameStatusUpdate', {
@@ -1231,6 +1242,20 @@ ipcMain.handle(
       status: 'done'
     })
 
+    trackEvent({
+      event: 'Game Closed',
+      properties: {
+        game_name: app_name,
+        isBrowserGame: browserUrl !== undefined,
+        game_title: title,
+        store_name: getStoreName(runner),
+        browserUrl: browserUrl ?? undefined,
+        platform: getPlatformName(install.platform!),
+        playTimeInMs: sessionPlaytime * 60 * 1000,
+        platform_arch: install.platform!
+      }
+    })
+
     // Exit if we've been launched without UI
     if (isCLINoGui) {
       app.exit()
@@ -1266,11 +1291,20 @@ ipcMain.handle(
       status: 'uninstalling'
     })
 
-    const { title } = gameManagerMap[runner].getGameInfo(appName)
+    const {
+      title,
+      install: { platform }
+    } = gameManagerMap[runner].getGameInfo(appName)
 
     trackEvent({
       event: 'Game Uninstall Started',
-      properties: { game_name: appName, store_name: runner, game_title: title }
+      properties: {
+        game_name: appName,
+        store_name: getStoreName(runner),
+        game_title: title,
+        platform_arch: platform!,
+        platform: getPlatformName(platform!)
+      }
     })
 
     let uninstalled = false
@@ -1283,9 +1317,11 @@ ipcMain.handle(
         event: 'Game Uninstall Failed',
         properties: {
           game_name: appName,
-          store_name: runner,
+          store_name: getStoreName(runner),
           error: `${error}`,
-          game_title: title
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
         }
       })
       notify({
@@ -1322,8 +1358,10 @@ ipcMain.handle(
         event: 'Game Uninstall Success',
         properties: {
           game_name: appName,
-          store_name: runner,
-          game_title: title
+          store_name: getStoreName(runner),
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
         }
       })
 
@@ -1553,38 +1591,7 @@ ipcMain.handle(
 )
 
 ipcMain.handle('egsSync', async (event, args) => {
-  if (isWindows) {
-    const egl_manifestPath =
-      'C:\\ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests'
-
-    if (!existsSync(egl_manifestPath)) {
-      mkdirSync(egl_manifestPath, { recursive: true })
-    }
-  }
-
-  const linkArgs = isWindows
-    ? `--enable-sync`
-    : `--enable-sync --egl-wine-prefix ${args}`
-  const unlinkArgs = `--unlink`
-  const isLink = args !== 'unlink'
-  const command = isLink ? linkArgs : unlinkArgs
-  const { bin, dir } = getLegendaryBin()
-  const legendary = path.join(dir, bin)
-
-  try {
-    const { stderr, stdout } = await execAsync(
-      `${legendary} egl-sync ${command} -y`
-    )
-    logInfo(`${stdout}`, LogPrefix.Legendary)
-    if (stderr.includes('ERROR')) {
-      logError(`${stderr}`, LogPrefix.Legendary)
-      return 'Error'
-    }
-    return `${stdout} - ${stderr}`
-  } catch (error) {
-    logError(error, LogPrefix.Legendary)
-    return 'Error'
-  }
+  return LegendaryLibraryManager.toggleGamesSync(args)
 })
 
 ipcMain.handle('syncGOGSaves', async (event, gogSaves, appName, arg) =>
@@ -1763,6 +1770,9 @@ ipcMain.handle(
     }
     if (runner === 'nile' && updated) {
       await nileSetup(appName)
+    }
+    if (runner === 'legendary' && updated) {
+      await legendarySetup(appName)
     }
 
     // FIXME: Why are we using `runinprefix` here?

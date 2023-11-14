@@ -113,7 +113,7 @@ describe('logger/logfile.ts', () => {
     const monthOutdatedLogFile = join(
       tmpDir.name,
       // @ts-ignore replaceAll error
-      `heroic-${date.toISOString().replaceAll(':', '_')}.log`
+      `hyperplay-${date.toISOString().replaceAll(':', '_')}.log`
     )
     date.setFullYear(2021)
     const yearOutdatedLogFile = join(
