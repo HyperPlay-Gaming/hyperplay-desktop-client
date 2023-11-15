@@ -261,11 +261,6 @@ export default observer(function GamePage(): JSX.Element | null {
     updateConfig()
   }, [status, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
 
-  function handleUpdate() {
-    if (gameInfo.runner !== 'sideload')
-      updateGame({ appName, runner, gameInfo })
-  }
-
   function handleModal() {
     setShowModal({ game: appName, show: true })
   }
@@ -421,7 +416,7 @@ export default observer(function GamePage(): JSX.Element | null {
                         : '')
                     }
                     runner={gameInfo.runner}
-                    handleUpdate={handleUpdate}
+                    handleUpdate={async () => updateGame(gameInfo)}
                     disableUpdate={isInstalling || isUpdating}
                     setShowExtraInfo={setShowExtraInfo}
                     onShowRequirements={
@@ -869,7 +864,7 @@ export default observer(function GamePage(): JSX.Element | null {
   function handlePlay() {
     if (hasUpdate) {
       return async () => {
-        await updateGame({ appName, runner, gameInfo })
+        await updateGame(gameInfo)
       }
     }
 

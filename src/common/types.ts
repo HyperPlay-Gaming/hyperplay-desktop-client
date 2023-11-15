@@ -300,6 +300,7 @@ export interface InstallArgs {
   installLanguage?: string
   channelName?: string
   accessCode?: string
+  updateOnly?: boolean
 }
 
 export interface InstallParams extends InstallArgs {
