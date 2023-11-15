@@ -12,7 +12,7 @@ import { updateGame } from 'frontend/helpers/library'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
 import { observer } from 'mobx-react-lite'
-import walletStore from 'frontend/store/WalletStore'
+import walletStore from 'frontend/state/WalletState'
 import onboardingStore from 'frontend/store/OnboardingStore'
 import { getCardStatus } from './constants'
 import { hasStatus } from 'frontend/hooks/hasStatus'
@@ -43,7 +43,9 @@ const GameCard = ({
   favorited,
   gameInfo: gameInfoFromProps
 }: Card) => {
-  const [gameInfo, setGameInfo] = useState<GameInfo>(gameInfoFromProps)
+  const [gameInfo, setGameInfo] = useState<GameInfo>(
+    JSON.parse(JSON.stringify(gameInfoFromProps))
+  )
   const [showUninstallModal, setShowUninstallModal] = useState(false)
   const [isLaunching, setIsLaunching] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
@@ -86,11 +88,6 @@ const GameCard = ({
     }
     updateGameInfo()
   }, [status])
-
-  async function handleUpdate() {
-    if (gameInfo.runner !== 'sideload')
-      updateGame({ appName, runner, gameInfo })
-  }
 
   const {
     isInstalling,
@@ -206,7 +203,7 @@ const GameCard = ({
     {
       // update
       label: t('button.update', 'Update'),
-      onClick: handleClickStopBubbling(async () => handleUpdate()),
+      onClick: handleClickStopBubbling(async () => updateGame(gameInfo)),
       show: hasUpdate && !isUpdating && !isQueued
     },
     {
@@ -225,9 +222,8 @@ const GameCard = ({
       // open the game page
       label: t('button.details', 'Details'),
       onClick: handleClickStopBubbling(() => {
-        const gameInfoDeepClone = JSON.parse(JSON.stringify(gameInfo))
         navigate(`/gamepage/${runner}/${appName}`, {
-          state: { gameInfo: gameInfoDeepClone }
+          state: { gameInfo }
         })
       }),
       show: true
@@ -301,8 +297,7 @@ const GameCard = ({
           onClose={() => setShowStopInstallModal(false)}
           progress={progress}
           installPath={folder}
-          appName={appName}
-          runner={runner}
+          gameInfo={gameInfo}
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
         />
       ) : null}
@@ -316,7 +311,7 @@ const GameCard = ({
       )}
       <Link
         to={`/gamepage/${runner}/${appName}`}
-        state={{ gameInfo: JSON.parse(JSON.stringify(gameInfo)) }}
+        state={{ gameInfo }}
         className={classNames({
           gamepad: activeController
         })}
@@ -362,7 +357,9 @@ const GameCard = ({
             () => setShowSettings(!showSettings),
             true
           )}
-          onUpdateClick={handleClickStopBubbling(async () => handleUpdate())}
+          onUpdateClick={handleClickStopBubbling(async () =>
+            updateGame(gameInfo)
+          )}
           progress={progress}
           message={getMessage()}
           actionDisabled={isLaunching}

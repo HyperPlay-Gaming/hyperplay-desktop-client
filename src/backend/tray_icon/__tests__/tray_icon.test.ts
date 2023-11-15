@@ -5,9 +5,13 @@ import { GlobalConfig } from '../../config'
 import { RecentGame } from '../../../common/types'
 import { configStore } from '../../constants'
 import { wait } from '../../utils'
+import i18next from 'i18next'
+import translations_en from '../../../../public/locales/en/translation.json'
 
 jest.mock('../../logger/logfile')
 jest.mock('../../config')
+
+i18next.init({ resources: { en: { translations_en } } })
 
 describe('TrayIcon', () => {
   const mainWindow = new BrowserWindow()
@@ -38,7 +42,7 @@ describe('TrayIcon', () => {
 
         expect(menu).toContainEqual({
           accelerator: 'Ctrl+R',
-          label: 'tray.reload',
+          label: translations_en.tray.reload,
           click: expect.any(Function)
         })
 
@@ -46,7 +50,7 @@ describe('TrayIcon', () => {
 
         expect(menu).toContainEqual({
           accelerator: 'Cmd+R',
-          label: 'tray.reload',
+          label: translations_en.tray.reload,
           click: expect.any(Function)
         })
       })

@@ -3,8 +3,7 @@ import {
   AppSettings,
   GameInfo,
   InstallProgress,
-  Runner,
-  UpdateParams
+  Runner
 } from 'common/types'
 
 import { TFunction } from 'i18next'
@@ -128,13 +127,16 @@ const launch = async ({
   if (hasUpdate) {
     const { ignoreGameUpdates } = await window.api.requestGameSettings(appName)
 
-    if (ignoreGameUpdates) {
+    if (ignoreGameUpdates && runner !== 'hyperplay') {
       return window.api.launch({
         appName,
         runner,
         launchArguments: runner === 'legendary' ? '--skip-version-check' : ''
       })
     }
+
+    // focus the window if minimized or hidden
+    window.api.focusMainWindow()
 
     // promisifies the showDialogModal button click callbacks
     const launchFinished = new Promise<{ status: 'done' | 'error' | 'abort' }>(
@@ -148,7 +150,7 @@ const launch = async ({
               onClick: async () => {
                 const gameInfo = await getGameInfo(appName, runner)
                 if (gameInfo && gameInfo.runner !== 'sideload') {
-                  updateGame({ appName, runner, gameInfo })
+                  updateGame(gameInfo)
                   res({ status: 'done' })
                 }
                 res({ status: 'error' })
@@ -157,6 +159,24 @@ const launch = async ({
             {
               text: t('box.no'),
               onClick: async () => {
+                if (runner === 'hyperplay') {
+                  return showDialogModal({
+                    message: t(
+                      'gamepage:box.update.message-cancel',
+                      'It is not possible to play this game without updating'
+                    ),
+                    title: t('gamepage:box.update.title'),
+                    buttons: [
+                      {
+                        text: t('gamepage:box.ok', 'OK'),
+                        onClick: async () => {
+                          res({ status: 'abort' })
+                        }
+                      }
+                    ]
+                  })
+                }
+
                 res(
                   window.api.launch({
                     appName,
@@ -180,8 +200,8 @@ const launch = async ({
   return window.api.launch({ appName, launchArguments, runner })
 }
 
-const updateGame = async (args: UpdateParams) => {
-  return window.api.updateGame(args)
+const updateGame = async (gameInfo: GameInfo) => {
+  return window.api.updateGame(gameInfo)
 }
 
 export const epicCategories = ['all', 'legendary', 'epic']

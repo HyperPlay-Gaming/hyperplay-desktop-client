@@ -20,8 +20,6 @@ export const changeLanguage = (newLanguage: string) =>
 export const openExternalUrl = (url: string) =>
   ipcRenderer.send('openExternalUrl', url)
 export const getAppVersion = async () => ipcRenderer.invoke('getAppVersion')
-export const getLatestReleases = async () =>
-  ipcRenderer.invoke('getLatestReleases')
 
 export const openPatreonPage = () => ipcRenderer.send('openPatreonPage')
 export const openKofiPage = () => ipcRenderer.send('openKofiPage')
@@ -105,6 +103,8 @@ export const handleShowDialog = (
     ipcRenderer.removeListener('showDialog', onMessage)
   }
 }
+
+export const focusMainWindow = () => ipcRenderer.send('focusMainWindow')
 
 import Store from 'electron-store'
 // TODO: Refactor this into the backend so in order to set nodeIntegration: false

@@ -32,6 +32,8 @@ import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
 import AchievementsLayout from './screens/Achievements/AchievementsLayout'
 import GameAchievementDetails from './screens/Achievements/GameAchievementDetails'
+import { WalletOnboardCloseReason } from 'common/types'
+import { DeviceStateController } from './state/DeviceState'
 import { ENABLE_AMAZON_STORE } from './constants'
 
 function App() {
@@ -127,8 +129,10 @@ function App() {
         <OnboardingStoreController />
         {onboardingStore.isOnboardingOpen && (
           <Onboarding
-            disableOnboarding={() => {
-              window.api.trackEvent({ event: 'Onboarding Skipped' })
+            disableOnboarding={(disableReason: WalletOnboardCloseReason) => {
+              if (disableReason === 'skipped') {
+                window.api.trackEvent({ event: 'Onboarding Skipped' })
+              }
               onboardingStore.closeOnboarding()
             }}
           />
@@ -136,6 +140,7 @@ function App() {
       </HashRouter>
       <TransactionNotification />
       <DownloadToastManager />
+      <DeviceStateController />
     </div>
   )
 }

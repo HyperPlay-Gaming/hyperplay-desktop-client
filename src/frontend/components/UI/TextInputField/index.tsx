@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FocusEvent, ReactNode, useContext } from 'react'
 import classnames from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
-import './index.css'
+import './index.scss'
 
 interface TextInputFieldProps {
   htmlId: string

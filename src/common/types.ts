@@ -77,14 +77,8 @@ interface About {
   shortDescription: string
 }
 
-export type Release = {
-  type: 'stable' | 'beta'
-  html_url: string
-  name: string
-  tag_name: string
-  published_at: string
-  prerelease: boolean
-  id: number
+export type ExperimentalFeatures = {
+  enableNewShinyFeature: boolean // remove this when adding a real experimental feature
 }
 
 export interface AppSettings extends GameSettings {
@@ -109,6 +103,7 @@ export interface AppSettings extends GameSettings {
   egsLinkedPath: string
   enableUpdates: boolean
   exitToTray: boolean
+  experimentalFeatures: ExperimentalFeatures
   hideChangelogsOnStartup: boolean
   libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number
@@ -188,6 +183,7 @@ export interface GameInfo {
 export interface GameSettings {
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
+  autoInstallDxvkNvapi: boolean
   autoSyncSaves: boolean
   battlEyeRuntime: boolean
   DXVKFpsCap: string //Entered as string but used as number
@@ -305,6 +301,7 @@ export interface InstallArgs {
   installLanguage?: string
   channelName?: string
   accessCode?: string
+  updateOnly?: boolean
 }
 
 export interface InstallParams extends InstallArgs {
@@ -594,6 +591,11 @@ export type WineCommandArgs = {
   options?: CallRunnerOptions
   startFolder?: string
   skipPrefixCheckIKnowWhatImDoing?: boolean
+  overlayInfo?: {
+    showOverlay: boolean
+    appName: string
+    runner: Runner
+  }
 }
 
 export type Web3Features = {
@@ -852,6 +854,11 @@ export interface AchievementsStats {
   numFreeMints: number
 }
 
+export type WalletOnboardCloseReason =
+  | 'skipped'
+  | 'connected'
+  | 'requestedMetaMaskConnection'
+
 export type Filter =
   | 'alphabeticalAscending'
   | 'alphabeticalDescending'
@@ -859,3 +866,22 @@ export type Filter =
 export interface FilterItem extends DropdownItemType {
   id?: Filter
 }
+
+export interface OverlayRenderState {
+  showToasts: boolean
+  showBrowserGame: boolean
+  browserGameUrl: string
+  showHintText: boolean
+  showExitGameButton: boolean
+  showExtension: boolean
+  showBackgroundTint: boolean
+}
+
+export type OverlayAction = 'ON' | 'OFF' | 'TOGGLE'
+
+export interface RunnerBin {
+  dir: string
+  bin: string
+}
+
+export type OverlayType = 'native' | 'browser' | 'mainWindow'

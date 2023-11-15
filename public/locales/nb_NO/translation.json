@@ -142,7 +142,9 @@
             "title": "Advarsel"
         },
         "wineprefix": "Velg mappe for Wine-prefiks",
-        "yes": "Ja"
+        "yes": "Ja",
+        "dontShowAgain": "Ikke vis igjen",
+        "choose-nile-binary": "Velg Nile binær"
     },
     "button": {
         "cancel": "Cancel",
@@ -311,7 +313,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "Amazon-pålogging"
     },
     "message": {
         "sync": "Synkronisering fullført",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "GOGDL-versjon: ",
         "legendary-version": "Legendarisk versjon: ",
-        "weblate": "Hjelp til å oversette HyperPlay."
+        "weblate": "Hjelp til å oversette HyperPlay.",
+        "nile-version": "Nile versjon: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Bruker innebygd Legendary binær...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefiks der EGS er installert",
-        "prefered_language": "2-tegnskode (dvs.: \"en\" eller \"fr\")"
+        "prefered_language": "2-tegnskode (dvs.: \"en\" eller \"fr\")",
+        "alt-nile-bin": "Bruker innebygd Nile binær..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +539,13 @@
         "steamruntime": "Bruk Steam Runtime",
         "winecrossoverbottle": "CrossOver flaske",
         "wineprefix": "WinePrefix-mappen",
-        "wineversion": "Vinversjon"
+        "wineversion": "Vinversjon",
+        "autoUpdateGames": "Oppdater spill automatisk",
+        "ignoreGameUpdates": "Ignorer spilloppdateringer",
+        "disable_logs": "Deaktiver logger",
+        "showMetalOverlay": "Vis statistikkoverlegg",
+        "addgamestoapplications": "Legg spill til applikasjoner automatisk",
+        "alt-nile-bin": "Velg en alternativ Nile Binær"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +597,8 @@
     "status": {
         "installing": "Installerer",
         "logging": "Logger inn...",
-        "processing": "Behandler filer, vennligst vent"
+        "processing": "Behandler filer, vennligst vent",
+        "preparing_login": "Forbereder pålogging... "
     },
     "store": "Episk butikk",
     "stores": "Butikker",
@@ -639,5 +651,22 @@
         },
         "release": "Utgivelsesdato",
         "size": "Størrelse"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Ikke spør igjen",
+        "warning": "Du er i ferd med å åpne en ekstern lenke."
+    },
+    "wiki_info": {
+        "not_found": "Vi kunne ikke finne ekstra informasjon."
+    },
+    "dlc": {
+        "actions": "Handlinger",
+        "installDlcs": "Installer alle DLC-er",
+        "noDlcFound": "Ingen DLC-er funnet",
+        "size": "Størrelse",
+        "title": "Title"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "Amazon-spill",
+    "prime-gaming": "Prime Gaming"
 }

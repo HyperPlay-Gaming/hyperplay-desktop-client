@@ -57,11 +57,13 @@ import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
+import { legendarySetup } from './storeManagers/legendary/setup'
 import { gameManagerMap } from 'backend/storeManagers'
-import { trackPidPlaytime } from './metrics/metrics'
 import { closeOverlay, openOverlay } from 'backend/hyperplay-overlay'
 import * as VDF from '@node-steam/vdf'
 import { readFileSync } from 'fs'
+import { LegendaryCommand } from './storeManagers/legendary/commands'
+import { commandToArgsArray } from './storeManagers/legendary/library'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -244,12 +246,18 @@ async function prepareWineLaunch(
     if (runner === 'nile') {
       await nileSetup(appName)
     }
+    if (runner === 'legendary') {
+      await legendarySetup(appName)
+    }
   }
 
   // If DXVK/VKD3D installation is enabled, install it
   if (gameSettings.wineVersion.type === 'wine') {
     if (gameSettings.autoInstallDxvk) {
       await DXVK.installRemove(gameSettings, 'dxvk', 'backup')
+    }
+    if (gameSettings.autoInstallDxvkNvapi) {
+      await DXVK.installRemove(gameSettings, 'dxvk-nvapi', 'backup')
     }
     if (gameSettings.autoInstallVkd3d) {
       await DXVK.installRemove(gameSettings, 'vkd3d', 'backup')
@@ -314,6 +322,8 @@ function setupWineEnvVars(
   const { wineVersion, winePrefix, wineCrossoverBottle } = gameSettings
 
   const ret: Record<string, string> = {}
+
+  ret.DOTNET_BUNDLE_EXTRACT_BASE_DIR = ''
 
   // Add WINEPREFIX / STEAM_COMPAT_DATA_PATH / CX_BOTTLE
   const steamInstallPath = join(flatPakHome, '.steam', 'steam')
@@ -390,6 +400,14 @@ function setupWineEnvVars(
   }
   if (!gameSettings.enableFsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_FSYNC = '1'
+  }
+  if (gameSettings.autoInstallDxvkNvapi && wineVersion.type === 'proton') {
+    ret.PROTON_ENABLE_NVAPI = '1'
+    ret.DXVK_NVAPI_ALLOW_OTHER_DRIVERS = '1'
+  }
+  if (gameSettings.autoInstallDxvkNvapi && wineVersion.type === 'wine') {
+    ret.DXVK_ENABLE_NVAPI = '1'
+    ret.DXVK_NVAPI_ALLOW_OTHER_DRIVERS = '1'
   }
   if (gameSettings.eacRuntime) {
     ret.PROTON_EAC_RUNTIME = join(runtimePath, 'eac_runtime')
@@ -577,7 +595,8 @@ async function runWineCommand({
   installFolderName,
   options,
   startFolder,
-  skipPrefixCheckIKnowWhatImDoing = false
+  skipPrefixCheckIKnowWhatImDoing = false,
+  overlayInfo
 }: WineCommandArgs): Promise<{ stderr: string; stdout: string }> {
   const settings = gameSettings
     ? gameSettings
@@ -652,6 +671,11 @@ async function runWineCommand({
     child.stdout.setEncoding('utf-8')
     child.stderr.setEncoding('utf-8')
 
+    if (overlayInfo) {
+      const { showOverlay, appName, runner } = overlayInfo
+      if (showOverlay) openOverlay(appName, runner)
+    }
+
     if (!logsDisabled) {
       if (options?.logFile) {
         logDebug(`Logging to file "${options?.logFile}"`, LogPrefix.Backend)
@@ -710,11 +734,21 @@ async function runWineCommand({
         })
       }
 
+      if (overlayInfo) {
+        const { showOverlay } = overlayInfo
+        if (showOverlay) closeOverlay()
+      }
+
       res(response)
     })
 
     child.on('error', (error) => {
       console.log(error)
+
+      if (overlayInfo) {
+        const { showOverlay } = overlayInfo
+        if (showOverlay) closeOverlay()
+      }
     })
   })
 }
@@ -733,8 +767,7 @@ async function callRunner(
   runner: RunnerProps,
   abortController: AbortController,
   options?: CallRunnerOptions,
-  gameInfo?: GameInfo,
-  shouldTrackPlaytime = false
+  gameInfo?: GameInfo
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
@@ -782,37 +815,19 @@ async function callRunner(
     return currentPromise
   }
 
-  const promise = new Promise<ExecResult>((res, rej) => {
+  let promise = new Promise<ExecResult>((res, rej) => {
     const child = spawn(bin, commandParts, {
       cwd: runner.dir,
       env: { ...process.env, ...options?.env },
       signal: abortController.signal
     })
 
-    if (gameInfo && gameInfo.runner === 'hyperplay')
-      openOverlay(gameInfo?.app_name, gameInfo.runner)
-
-    /*
-     * gogdl remains open while the game is running
-     * by tracking gogdl instead of the game, we do not need to rely on
-     * gogdl outputting the game's PID to stdout
-     *
-     * hyperplay and sideload game exes are launched directly so tracking the child process
-     * works well unless the exe launches a separate process and then closes
-     *
-     * legendary closes after launching the game so we need to track the game's PID
-     * which is outputted to stdout
-     */
-    const shouldTrackChildProcess = (runner: Runner) =>
-      runner === 'hyperplay' || runner === 'gog' || runner === 'sideload'
-
-    if (
+    const shouldOpenOverlay =
       gameInfo &&
-      shouldTrackChildProcess(gameInfo.runner) &&
-      child.pid !== undefined &&
-      shouldTrackPlaytime
-    )
-      trackPidPlaytime(child.pid, gameInfo)
+      (gameInfo.runner === 'hyperplay' ||
+        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
+
+    if (shouldOpenOverlay) openOverlay(gameInfo?.app_name, gameInfo.runner)
 
     const stdout: string[] = []
     const stderr: string[] = []
@@ -820,25 +835,6 @@ async function callRunner(
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
       const dataStr = data.toString()
-      const pidPrefix = 'pid for popen process:'
-      const pidPrefixStartIndex = dataStr.search(pidPrefix)
-      if (pidPrefixStartIndex >= 0) {
-        const PID = dataStr
-          .substring(pidPrefixStartIndex + pidPrefix.length)
-          .trim()
-        logInfo(
-          `Process PID for Gogdl or Epic game injected: ${child.pid}`,
-          runner.logPrefix
-        )
-
-        // track when this pid is closed
-        if (
-          gameInfo &&
-          !shouldTrackChildProcess(gameInfo.runner) &&
-          shouldTrackPlaytime
-        )
-          trackPidPlaytime(PID.trim(), gameInfo)
-      }
       if (!logsDisabled) {
         if (options?.logFile) {
           appendFileSync(options.logFile, data)
@@ -876,7 +872,7 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
-      if (runner.name === 'hyperplay') closeOverlay()
+      if (shouldOpenOverlay) closeOverlay()
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,
@@ -895,15 +891,12 @@ async function callRunner(
     })
 
     child.on('error', (error) => {
-      if (runner.name === 'hyperplay') closeOverlay()
+      if (shouldOpenOverlay) closeOverlay()
       rej(error)
     })
   })
 
-  // keep track of which commands are running
-  commandsRunning[key] = promise
-
-  promise
+  promise = promise
     .then(({ stdout, stderr }) => {
       return { stdout, stderr, fullCommand: safeCommand }
     })
@@ -942,12 +935,15 @@ async function callRunner(
       delete commandsRunning[key]
     })
 
+  // keep track of which commands are running
+  commandsRunning[key] = promise
+
   return promise
 }
 
 /**
  * Generates a formatted, safe command that can be logged
- * @param commandParts The runner command that's executed, e. g. install, list, etc.
+ * @param command The runner command that's executed, e.g. install, list, etc.
  * Note that this will be modified, so pass a copy of your actual command parts
  * @param env Enviroment variables to use
  * @param wrappers Wrappers to use (gamemode, steam runtime, etc.)
@@ -955,18 +951,20 @@ async function callRunner(
  * @returns
  */
 function getRunnerCallWithoutCredentials(
-  commandParts: string[],
+  command: string[] | LegendaryCommand,
   env: Record<string, string> | NodeJS.ProcessEnv = {},
   runnerPath: string
 ): string {
-  const modifiedCommandParts = [...commandParts]
+  if (!Array.isArray(command)) command = commandToArgsArray(command)
+
+  const modifiedCommand = [...command]
   // Redact sensitive arguments (Authorization Code for Legendary, token for GOGDL)
   for (const sensitiveArg of ['--code', '--token']) {
-    const sensitiveArgIndex = modifiedCommandParts.indexOf(sensitiveArg)
+    const sensitiveArgIndex = modifiedCommand.indexOf(sensitiveArg)
     if (sensitiveArgIndex === -1) {
       continue
     }
-    modifiedCommandParts[sensitiveArgIndex + 1] = '<redacted>'
+    modifiedCommand[sensitiveArgIndex + 1] = '<redacted>'
   }
 
   const formattedEnvVars: string[] = []
@@ -980,12 +978,10 @@ function getRunnerCallWithoutCredentials(
     formattedEnvVars.push(`${key}=${quoteIfNecessary(value ?? '')}`)
   }
 
-  commandParts = commandParts.filter(Boolean)
-
   return [
     ...formattedEnvVars,
     quoteIfNecessary(runnerPath),
-    ...modifiedCommandParts.map(quoteIfNecessary)
+    ...modifiedCommand.map(quoteIfNecessary)
   ].join(' ')
 }
 

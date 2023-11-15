@@ -265,11 +265,10 @@ export default function DownloadToastManager() {
       )}
       {showStopInstallModal ? (
         <StopInstallationModal
-          appName={appName}
           installPath={installPath}
           folderName={folder_name}
           progress={progress}
-          runner={runner}
+          gameInfo={gameInfo}
           onClose={() => setShowStopInstallModal(false)}
         />
       ) : null}

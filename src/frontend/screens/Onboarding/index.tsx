@@ -6,9 +6,10 @@ import Analytics from './analytics'
 import WalletSelection from './walletSelection'
 import { onboardingStore } from 'frontend/helpers/electronStores'
 import classNames from 'classnames'
+import { WalletOnboardCloseReason } from 'common/types'
 
 interface OnboardingProps {
-  disableOnboarding: () => void
+  disableOnboarding: (disableReason: WalletOnboardCloseReason) => void
 }
 
 const Onboarding: React.FC<OnboardingProps> = function (props) {
@@ -27,6 +28,10 @@ const Onboarding: React.FC<OnboardingProps> = function (props) {
   // Track the screen view once each time the view changes
   useEffect(() => {
     window.api.trackScreen('Onboarding', { view: currentScreen })
+
+    if (currentScreen === ONBOARDING_SCREEN.WALLET_SELECTION) {
+      window.api.trackEvent({ event: 'Onboarding Started' })
+    }
   }, [currentScreen])
 
   function getWelcomeElement() {

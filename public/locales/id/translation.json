@@ -142,7 +142,9 @@
             "title": "Peringatan"
         },
         "wineprefix": "Pilih Folder Prefiks Wine",
-        "yes": "YA"
+        "yes": "YA",
+        "dontShowAgain": "Jangan tampilkan lagi",
+        "choose-nile-binary": "Pilih biner Nil"
     },
     "button": {
         "cancel": "Cancel",
@@ -308,10 +310,11 @@
         "website": "Memuat Situs Web"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Metode Masuk Alternatif",
+        "epic": "Masuk Epic Games",
+        "gog": "Masuk GOG",
+        "message": "Masuk dengan platform anda. Anda dapat masuk ke lebih dari satu platform secara bersamaan.",
+        "amazon": "Login Amazon"
     },
     "message": {
         "sync": "Sinkronisasi Selesai",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "Versi GOGDL: ",
         "legendary-version": "Versi Legendary: ",
-        "weblate": "Bantu kami untuk menerjemahkan HyperPlay."
+        "weblate": "Bantu kami untuk menerjemahkan HyperPlay.",
+        "nile-version": "Versi Nil: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Menggunakan Legendary binary bawaan...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefiks di mana EGS dipasang",
-        "prefered_language": "Kode 2 karakter (contohnya: \"en\" atau \"fr\")"
+        "prefered_language": "Kode 2 karakter (contohnya: \"en\" atau \"fr\")",
+        "alt-nile-bin": "Menggunakan biner Nil bawaan ..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +539,13 @@
         "steamruntime": "Gunakan Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "Folder Prefiks Wine",
-        "wineversion": "Versi Wine"
+        "wineversion": "Versi Wine",
+        "autoUpdateGames": "Perbarui gim secara otomatis",
+        "ignoreGameUpdates": "Abaikan pembaruan gim",
+        "disable_logs": "Nonaktifkan Log",
+        "addgamestoapplications": "Tambahkan gim ke Aplikasi secara otomatis",
+        "showMetalOverlay": "Tampilkan Hamparan Statistik",
+        "alt-nile-bin": "Pilih Biner Nil Alternatif"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +597,8 @@
     "status": {
         "installing": "Memasang",
         "logging": "Log Masuk...",
-        "processing": "Memproses berkas, harap tunggu"
+        "processing": "Memproses berkas, harap tunggu",
+        "preparing_login": "Mempersiapkan Masuk... "
     },
     "store": "Epic Store",
     "stores": "Toko",
@@ -639,5 +651,22 @@
         },
         "release": "Release Date",
         "size": "Ukuran"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Jangan tanyakan lagi",
+        "warning": "Anda akan membuka tautan eksternal."
+    },
+    "wiki_info": {
+        "not_found": "Kami tidak dapat menemukan informasi tambahan."
+    },
+    "dlc": {
+        "size": "Ukuran",
+        "title": "Judul",
+        "actions": "Tindakan",
+        "installDlcs": "Pasang semua DLC",
+        "noDlcFound": "Tidak ada DLC yang ditemukan"
+    },
+    "amazon": "Amazon",
+    "prime-gaming": "Game Perdana",
+    "Amazon Games": "Game Amazon"
 }

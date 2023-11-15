@@ -10,6 +10,7 @@ import { notify } from '../dialog/dialog'
 import i18next from 'i18next'
 import { configFolder } from 'backend/constants'
 import { join } from 'path'
+import { trackEvent } from 'backend/metrics/metrics'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
@@ -236,9 +237,28 @@ async function pauseCurrentDownload() {
     downloadManager.get('queue', []),
     queueState
   )
+
+  const {
+    appName,
+    runner,
+    gameInfo: { title }
+  } = currentElement!.params
+  trackEvent({
+    event: 'Game Install Paused',
+    properties: { store_name: runner, game_title: title, game_name: appName }
+  })
 }
 
 function resumeCurrentDownload() {
+  const {
+    appName,
+    runner,
+    gameInfo: { title }
+  } = currentElement!.params
+  trackEvent({
+    event: 'Game Install Resumed',
+    properties: { store_name: runner, game_title: title, game_name: appName }
+  })
   initQueue()
 }
 

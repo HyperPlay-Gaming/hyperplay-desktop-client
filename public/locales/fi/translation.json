@@ -142,7 +142,9 @@
             "title": "Varoitus"
         },
         "wineprefix": "Valitse Wine Prefix kansio",
-        "yes": "KYLLÄ"
+        "yes": "KYLLÄ",
+        "dontShowAgain": "Älä näytä uudelleen",
+        "choose-nile-binary": "Valitse Niilin binaari"
     },
     "button": {
         "cancel": "Cancel",
@@ -311,7 +313,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "Amazon kirjautuminen"
     },
     "message": {
         "sync": "Synkronointi valmis",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "GOGDL-versio: ",
         "legendary-version": "Legendaarinen versio: ",
-        "weblate": "Auta kääntämään HyperPlay."
+        "weblate": "Auta kääntämään HyperPlay.",
+        "nile-version": "Niilin versio: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Käytetään sisäänrakennettua legendaarista binääriä...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefiksi johon EGS on asennettu",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
+        "alt-nile-bin": "Käyttämällä sisäänrakennettua Niilin binaarista..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +539,13 @@
         "steamruntime": "Käytä Steam Runtimea",
         "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "WinePrefixin kansio",
-        "wineversion": "Winen versio"
+        "wineversion": "Winen versio",
+        "autoUpdateGames": "Päivitä pelit automaattisesti",
+        "ignoreGameUpdates": "Ohita pelipäivitykset",
+        "disable_logs": "Poista lokit käytöstä",
+        "addgamestoapplications": "Lisää pelejä automaattisesti sovelluksiin",
+        "showMetalOverlay": "Näytä tilastojen peittokuva",
+        "alt-nile-bin": "Valitse vaihtoehtoinen Niilin binaari"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +597,8 @@
     "status": {
         "installing": "Installing",
         "logging": "Kirjaudutaan sisään...",
-        "processing": "Processing files, please wait"
+        "processing": "Käsitellään tiedostoja, odota hetki",
+        "preparing_login": "Valmistellaan kirjautumista... "
     },
     "store": "Epic-kauppa",
     "stores": "Kaupat",
@@ -639,5 +651,22 @@
         },
         "release": "Release Date",
         "size": "Size"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Älä kysy uudelleen",
+        "warning": "Olet avaamassa ulkoista linkkiä."
+    },
+    "wiki_info": {
+        "not_found": "Emme löytäneet lisätietoja."
+    },
+    "dlc": {
+        "actions": "Toiminnot",
+        "installDlcs": "Asenna kaikki ladattava sisältö",
+        "noDlcFound": "DLC:itä ei löytynyt",
+        "size": "Size",
+        "title": "Title"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "Amazon pelit",
+    "prime-gaming": "Prime Gaming"
 }

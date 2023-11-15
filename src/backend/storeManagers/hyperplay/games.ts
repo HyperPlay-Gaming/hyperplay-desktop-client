@@ -474,7 +474,13 @@ async function resumeIfPaused(appName: string): Promise<boolean> {
 
 export async function install(
   appName: string,
-  { path: dirpath, platformToInstall, channelName, accessCode }: InstallArgs
+  {
+    path: dirpath,
+    platformToInstall,
+    channelName,
+    accessCode,
+    updateOnly = false
+  }: InstallArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
     return { status: 'done' }
@@ -484,7 +490,9 @@ export async function install(
     const gameInfo = getGameInfo(appName)
     const { title } = gameInfo
 
-    const destinationPath = getDestinationPath(gameInfo, dirpath)
+    const destinationPath = updateOnly
+      ? dirpath
+      : getDestinationPath(gameInfo, dirpath)
 
     const [releaseMeta, selectedChannel] = getReleaseMeta(gameInfo, channelName)
 
@@ -772,8 +780,6 @@ export async function update(appName: string): Promise<InstallResult> {
     return { status: 'error' }
   }
 
-  await uninstall({ appName })
-
   let accessCode: string | undefined = undefined
 
   // if we used an access code for this channel on last install, use it again
@@ -794,10 +800,11 @@ export async function update(appName: string): Promise<InstallResult> {
 
   //install the new version
   const installResult = await install(appName, {
-    path: path.dirname(gameInfo.install.install_path),
+    path: gameInfo.install.install_path,
     platformToInstall: gameInfo.install.platform,
     channelName: gameInfo.install.channelName,
-    accessCode
+    accessCode,
+    updateOnly: true
   })
   return installResult
 }
