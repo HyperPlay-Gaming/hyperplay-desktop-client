@@ -3,8 +3,7 @@ import {
   AppSettings,
   GameInfo,
   InstallProgress,
-  Runner,
-  UpdateParams
+  Runner
 } from 'common/types'
 
 import { TFunction } from 'i18next'
@@ -151,7 +150,7 @@ const launch = async ({
               onClick: async () => {
                 const gameInfo = await getGameInfo(appName, runner)
                 if (gameInfo && gameInfo.runner !== 'sideload') {
-                  updateGame({ appName, runner, gameInfo })
+                  updateGame(gameInfo)
                   res({ status: 'done' })
                 }
                 res({ status: 'error' })
@@ -201,8 +200,8 @@ const launch = async ({
   return window.api.launch({ appName, launchArguments, runner })
 }
 
-const updateGame = async (args: UpdateParams) => {
-  return window.api.updateGame(args)
+const updateGame = async (gameInfo: GameInfo) => {
+  return window.api.updateGame(gameInfo)
 }
 
 export const epicCategories = ['all', 'legendary', 'epic']

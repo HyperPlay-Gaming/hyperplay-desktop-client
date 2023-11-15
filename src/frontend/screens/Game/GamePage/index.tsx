@@ -261,11 +261,6 @@ export default observer(function GamePage(): JSX.Element | null {
     updateConfig()
   }, [status, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
 
-  function handleUpdate() {
-    if (gameInfo.runner !== 'sideload')
-      updateGame({ appName, runner, gameInfo })
-  }
-
   function handleModal() {
     setShowModal({ game: appName, show: true })
   }
@@ -422,7 +417,7 @@ export default observer(function GamePage(): JSX.Element | null {
                         : '')
                     }
                     runner={gameInfo.runner}
-                    handleUpdate={handleUpdate}
+                    handleUpdate={async () => updateGame(gameInfo)}
                     disableUpdate={isInstalling || isUpdating}
                     setShowExtraInfo={setShowExtraInfo}
                     onShowRequirements={
@@ -812,7 +807,7 @@ export default observer(function GamePage(): JSX.Element | null {
 
     if (hasUpdate) {
       return (
-        <span onClick={async () => handleUpdate()} className="updateText">
+        <span onClick={async () => updateGame(gameInfo)} className="updateText">
           {`${t('status.installed')} - ${t(
             'status.hasUpdates',
             'New Version Available!'
