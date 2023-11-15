@@ -8,6 +8,7 @@ import {
   ButtonOptions,
   DMQueueElement,
   MetricsOptInStatus,
+  ExperimentalFeatures,
   DownloadManagerState
 } from 'common/types'
 import { NileLoginData, NileRegisterData } from 'common/types/nile'
@@ -75,6 +76,8 @@ export interface ContextType {
   showMetaMaskBrowserSidebarLinks: boolean
   setShowMetaMaskBrowserSidebarLinks: (value: boolean) => void
   metricsOptInStatus: MetricsOptInStatus
+  experimentalFeatures: ExperimentalFeatures
+  handleExperimentalFeatures: (newSetting: ExperimentalFeatures) => void
 }
 
 export type DialogModalOptions = {

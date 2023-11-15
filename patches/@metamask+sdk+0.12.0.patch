@@ -1,0 +1,40 @@
+diff --git a/node_modules/@metamask/sdk/dist/browser/es/src/index.d.ts b/node_modules/@metamask/sdk/dist/browser/es/src/index.d.ts
+index 431737f..25e4f92 100644
+--- a/node_modules/@metamask/sdk/dist/browser/es/src/index.d.ts
++++ b/node_modules/@metamask/sdk/dist/browser/es/src/index.d.ts
+@@ -5,15 +5,6 @@ import { MetaMaskSDK, MetaMaskSDKOptions } from './sdk';
+ import { RPC_URLS_MAP } from './services/MetaMaskSDK/InitializerManager/setupReadOnlyRPCProviders';
+ import { PROVIDER_UPDATE_TYPE } from './types/ProviderUpdateType';
+ import type { SDKLoggingOptions } from './types/SDKLoggingOptions';
+-declare global {
+-    interface Window {
+-        ReactNativeWebView?: WebView;
+-        sdkProvider: SDKProvider;
+-        ethereum?: SDKProvider;
+-        extension: unknown;
+-        MSStream: unknown;
+-    }
+-}
+ export { CommunicationLayerPreference, ConnectionStatus, DEFAULT_SERVER_URL, EventType, MessageType, RPC_URLS_MAP, MetaMaskSDK, PROVIDER_UPDATE_TYPE, PlatformType, SDKProvider, };
+ export type { MetaMaskSDKOptions, SDKLoggingOptions, ServiceStatus };
+ export default MetaMaskSDK;
+diff --git a/node_modules/@metamask/sdk/dist/node/es/src/index.d.ts b/node_modules/@metamask/sdk/dist/node/es/src/index.d.ts
+index 431737f..25e4f92 100644
+--- a/node_modules/@metamask/sdk/dist/node/es/src/index.d.ts
++++ b/node_modules/@metamask/sdk/dist/node/es/src/index.d.ts
+@@ -5,15 +5,6 @@ import { MetaMaskSDK, MetaMaskSDKOptions } from './sdk';
+ import { RPC_URLS_MAP } from './services/MetaMaskSDK/InitializerManager/setupReadOnlyRPCProviders';
+ import { PROVIDER_UPDATE_TYPE } from './types/ProviderUpdateType';
+ import type { SDKLoggingOptions } from './types/SDKLoggingOptions';
+-declare global {
+-    interface Window {
+-        ReactNativeWebView?: WebView;
+-        sdkProvider: SDKProvider;
+-        ethereum?: SDKProvider;
+-        extension: unknown;
+-        MSStream: unknown;
+-    }
+-}
+ export { CommunicationLayerPreference, ConnectionStatus, DEFAULT_SERVER_URL, EventType, MessageType, RPC_URLS_MAP, MetaMaskSDK, PROVIDER_UPDATE_TYPE, PlatformType, SDKProvider, };
+ export type { MetaMaskSDKOptions, SDKLoggingOptions, ServiceStatus };
+ export default MetaMaskSDK;

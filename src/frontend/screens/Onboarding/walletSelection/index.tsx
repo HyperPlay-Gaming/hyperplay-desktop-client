@@ -15,14 +15,18 @@ import WalletInfoScreen from './screens/info'
 import WalletScanScreen from './screens/scan'
 import WalletImportScreen from './screens/import'
 import ContextProvider from 'frontend/state/ContextProvider'
-import { MetaMaskImportOptions } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+import {
+  ImportableBrowser,
+  MetaMaskImportOptions,
+  MetaMaskInitMethod
+} from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import {
   WalletConnectedType,
   ConnectionRequestRejectedType,
   wait
 } from 'backend/hyperplay-proxy-server/commonProxyTypes'
 import { toString, QRCodeToStringOptions } from 'qrcode'
-import { WrapRendererCallback } from 'common/types'
+import { WalletOnboardCloseReason, WrapRendererCallback } from 'common/types'
 import StatusScreen, { CONNECTION_STATUS } from './screens/status'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -44,7 +48,7 @@ interface ContentParams {
 }
 
 interface WalletSelectionProps {
-  disableOnboarding: () => void
+  disableOnboarding: (disableReason: WalletOnboardCloseReason) => void
 }
 
 const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
@@ -69,7 +73,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       type: 'svg',
       color: { light: '#121212', dark: '#ffffffff' }
     }
-    console.log('uri updated to ', uri)
+
     const qrCodeSvgUpdated = await toString(uri, options)
     setContentParams({
       detailsScreen: WALLET_SELECTION_DETAILS_SCREEN.SCAN,
@@ -79,12 +83,17 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
           ? 'MetaMask Mobile'
           : 'Wallet Connect'
     })
+
+    window.api.trackEvent({
+      event: 'Onboarding Provider Clicked',
+      properties: { provider }
+    })
   }
 
   async function connectMetaMaskExtension() {
     setShowMetaMaskBrowserSidebarLinks(true)
     await window.api.getConnectionUris(PROVIDERS.METAMASK_EXTENSION)
-    props.disableOnboarding()
+    props.disableOnboarding('requestedMetaMaskConnection')
   }
 
   async function handleMmExtensionProviderClicked() {
@@ -98,6 +107,11 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
         mmImportPaths: importOptions
       })
     }
+
+    window.api.trackEvent({
+      event: 'Onboarding Provider Clicked',
+      properties: { provider: PROVIDERS.METAMASK_EXTENSION }
+    })
   }
 
   useEffect(() => {
@@ -109,7 +123,6 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       .isExtensionInitialized()
       .then((val) => setMetamaskIsInitialized(val))
 
-    window.api.trackEvent({ event: 'Onboarding Started' })
     return () => {
       removeConnectedListener()
       removeRejectedListener()
@@ -122,13 +135,21 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       view: ONBOARDING_SCREEN.WALLET_SELECTION,
       detailsScreen: contentParams.detailsScreen
     })
-  }, [contentParams])
+  }, [contentParams.detailsScreen])
 
-  async function handleImportMmExtensionClicked(dbPath?: string | null) {
-    if (dbPath === null) {
-      window.api.createNewMetaMaskWallet()
+  async function handleImportMmExtensionClicked(
+    mmInitMethod: MetaMaskInitMethod,
+    dbPath?: string,
+    browser?: ImportableBrowser
+  ) {
+    if (mmInitMethod === 'CREATE' || mmInitMethod === 'SECRET_PHRASE') {
+      window.api.createNewMetaMaskWallet(mmInitMethod)
     } else {
-      const success = await window.api.importMetaMask(dbPath)
+      const success = await window.api.importMetaMask(
+        mmInitMethod,
+        dbPath ?? null,
+        browser
+      )
       if (!success) {
         console.error('There was a problem importing MetaMask!')
         return
@@ -137,17 +158,12 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     }
   }
 
-  const handleConnected: WrapRendererCallback<WalletConnectedType> = (
-    e,
-    accounts
-  ) => {
-    console.log('connected with accounts = ', accounts)
-    window.api.trackEvent({ event: 'Onboarding Completed' })
+  const handleConnected: WrapRendererCallback<WalletConnectedType> = () => {
     setContentParams({
       detailsScreen: WALLET_SELECTION_DETAILS_SCREEN.CONNECTED
     })
     wait(4000).then(() => {
-      props.disableOnboarding()
+      props.disableOnboarding('connected')
     })
   }
 
@@ -165,9 +181,9 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       case WALLET_SELECTION_DETAILS_SCREEN.INFO:
         return (
           <WalletInfoScreen
-            skipClicked={props.disableOnboarding}
+            skipClicked={() => props.disableOnboarding('skipped')}
             createWalletClicked={async () =>
-              handleImportMmExtensionClicked(null)
+              handleImportMmExtensionClicked('CREATE')
             }
             mmInitialized={metamaskIsInitialized}
           />
@@ -224,9 +240,9 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
       default:
         return (
           <WalletInfoScreen
-            skipClicked={props.disableOnboarding}
+            skipClicked={() => props.disableOnboarding('skipped')}
             createWalletClicked={async () =>
-              handleImportMmExtensionClicked(null)
+              handleImportMmExtensionClicked('CREATE')
             }
             mmInitialized={metamaskIsInitialized}
           />
@@ -281,7 +297,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
         {getDetailsScreen(contentParams.detailsScreen)}
       </div>
       <div className={WalletSelectionStyles.closeButton}>
-        <button onClick={props.disableOnboarding}>
+        <button onClick={() => props.disableOnboarding('skipped')}>
           <FontAwesomeIcon icon={faXmark} color="var(--color-neutral-300)" />
         </button>
       </div>

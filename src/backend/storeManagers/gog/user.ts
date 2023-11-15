@@ -50,7 +50,7 @@ export class GOGUser {
 
   public static async getUserDetails() {
     if (!isOnline()) {
-      logError('Unable to login information, Heroic offline', LogPrefix.Gog)
+      logError('Unable to login information, HyperPlay offline', LogPrefix.Gog)
       return
     }
     logInfo('Checking if login is valid', LogPrefix.Gog)

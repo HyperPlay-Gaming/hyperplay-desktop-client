@@ -142,7 +142,9 @@
             "title": "Varning"
         },
         "wineprefix": "Ange Wine-prefix mapp",
-        "yes": "Ja"
+        "yes": "Ja",
+        "dontShowAgain": "Visa inte igen",
+        "choose-nile-binary": "Välj Nile binär"
     },
     "button": {
         "cancel": "Cancel",
@@ -261,7 +263,9 @@
         "wine": {
             "part1": "HyperPlay söker efter Wine, Proton och CrossOver i dessa mappar:",
             "part2": "För övriga platser, använd symbolisk länk till en av dessa mappar"
-        }
+        },
+        "disable_logs": "Slå den här kryssrutan PÅ för att inaktivera de flesta skrivningar till loggfiler (kritisk information loggas alltid). Se till att stänga AV den här inställningen innan du rapporterar något problem.",
+        "dxvknvapi": "DXVK-NVAPI är en implementering av NVAPI byggt ovanpå DXVK och Linux-native NVAPI, det tillåter användning av DLSS på Nvidia GPU:er."
     },
     "info": {
         "hyperplay": {
@@ -308,10 +312,12 @@
         "website": "Laddar websida"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "Alternativ inloggningsmetod",
+        "epic": "Epic Games inloggning",
+        "gog": "GOG inloggning",
+        "message": "Logga in på önskad plattform. Du kan vara inloggad på fler än en plattform samtidigt.",
+        "amazon": "Amazon logga in",
+        "old-mac": "Din macOS version är {{version}}. macOS 12 eller senare krävs för att logga in."
     },
     "message": {
         "sync": "Synkronisering slutförd",
@@ -401,7 +407,8 @@
     "other": {
         "gogdl-version": "GOGDL version: ",
         "legendary-version": "Legendary version: ",
-        "weblate": "Bidra till översättning av HyperPlay."
+        "weblate": "Bidra till översättning av HyperPlay.",
+        "nile-version": "Nile version: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +416,8 @@
         "alt-legendary-bin": "Använder inbyggd Legendary version...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix för befintlig EGS installation",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "prefered_language": "Tvåställig bokstavskod (t.ex: \"en\" eller \"fr\")",
+        "alt-nile-bin": "Använder inbyggd Nile binär..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +542,13 @@
         "steamruntime": "Använd Steam Runtime",
         "winecrossoverbottle": "CrossOver prefix",
         "wineprefix": "Wine-prefix mapp",
-        "wineversion": "Wine version"
+        "wineversion": "Wine version",
+        "ignoreGameUpdates": "Ignorera speluppdateringar",
+        "autoUpdateGames": "Uppdatera spel automatiskt",
+        "disable_logs": "Inaktivera loggar",
+        "addgamestoapplications": "Lägg till spel till applikationer automatiskt",
+        "showMetalOverlay": "Visa statistiköverlägg",
+        "alt-nile-bin": "Välj en alternativ Nile Binär"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +600,8 @@
     "status": {
         "installing": "Installing",
         "logging": "Loggar in...",
-        "processing": "Processing files, please wait"
+        "processing": "Hanterar filer, vänligen vänta",
+        "preparing_login": "Förbereder inloggning... "
     },
     "store": "Epic Butik",
     "stores": "Butiker",
@@ -637,7 +652,24 @@
             "title": "Wine hanterare",
             "unzipping": "Packar upp"
         },
-        "release": "Release Date",
-        "size": "Size"
-    }
+        "release": "Utgivningsdatum",
+        "size": "Storlek"
+    },
+    "externalLink": {
+        "warning": "Du är på väg att öppna en extern länk.",
+        "dontAskAgain": "Fråga inte igen"
+    },
+    "wiki_info": {
+        "not_found": "Hittade ej någon extra information."
+    },
+    "dlc": {
+        "actions": "Handlingar",
+        "installDlcs": "Installera alla DLC",
+        "noDlcFound": "Inga DLC:er hittades",
+        "size": "Storlek",
+        "title": "Titel"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "Amazon spel",
+    "prime-gaming": "Prime Gaming"
 }

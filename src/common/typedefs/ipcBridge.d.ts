@@ -9,7 +9,6 @@ import {
   DiskSpaceData,
   Tools,
   WineCommandArgs,
-  Release,
   GameInfo,
   GameSettings,
   InstallPlatform,
@@ -66,7 +65,7 @@ interface HyperPlaySyncIPCFunctions {
   providerRequestFailed: ProxiedProviderEventCallback
   loadingScreenReady: () => void
   reloadApp: () => void
-  createNewMetaMaskWallet: () => void
+  createNewMetaMaskWallet: (mmInitMethod: MetaMaskInitMethod) => void
   enableOnEvents: (topic: string) => void
   addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
@@ -180,13 +179,19 @@ interface HyperPlayAsyncIPCFunctions {
     updateProperties: chrome.tabs.UpdateProperties
   ) => Promise<chrome.tabs.Tab>
   chromeTabsRemove: (tabIds: number | number[]) => Promise<void>
-  //
-  importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
+  importMetaMask: (
+    mmInitMethod: MetaMaskInitMethod,
+    dbPath?: string | null,
+    browser?: ImportableBrowser
+  ) => Promise<boolean>
   getMetaMaskImportOptions: () => Promise<MetaMaskImportOptions>
   isExtensionInitialized: () => Promise<boolean>
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>
-  getConnectionUris: (providerSelection: PROVIDERS) => Promise<string>
+  getConnectionUris: (
+    providerSelection: PROVIDERS,
+    isBootstrapping?: boolean
+  ) => Promise<string>
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   providerRequest: (args: RequestArguments) => Promise<any>
   getConnectedProvider: () => Promise<PROVIDERS>
@@ -239,7 +244,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   isFlatpak: () => boolean
   getPlatform: () => NodeJS.Platform
   showUpdateSetting: () => boolean
-  getLatestReleases: () => Promise<Release[]>
   getGameInfo: (appName: string, runner: Runner) => Promise<GameInfo | null>
   getExtraInfo: (appName: string, runner: Runner) => Promise<ExtraInfo | null>
   getGameSettings: (
@@ -375,6 +379,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: Runner
   }) => Promise<boolean>
   toggleDXVK: (args: ToolArgs) => Promise<boolean>
+  toggleDXVKNVAPI: (args: ToolArgs) => Promise<boolean>
   pathExists: (path: string) => Promise<boolean>
   getExtensionId: () => Promise<string>
   addGameToLibrary: (appName: string) => Promise<void>

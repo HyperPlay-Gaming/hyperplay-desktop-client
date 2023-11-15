@@ -69,6 +69,10 @@
             "launchAborted": "Launch aborted",
             "moving": "Error Moving Game {{error}}",
             "title": "Error",
+            "ubisoft-connect": {
+                "message": "Installation of Ubisoft Connect in the game prefix failed. Check our wiki page at https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac to install it maunally.",
+                "title": "Ubisoft Connect"
+            },
             "update": {
                 "message": "Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.",
                 "title": "Update Error"
@@ -251,6 +255,7 @@
         "disable_logs": "Toggle this checkbox ON to disable most of the writes to log files (critical information is always logged). Make sure to turn OFF this setting before reporting any issue.",
         "dxvk": "DXVK is a Vulkan-based translational layer for DirectX 9, 10 and 11 games. Enabling may improve compatibility. Might cause issues especially for older DirectX games.",
         "dxvkfpslimit": "Sets a frame rate cap for DXVK games",
+        "dxvknvapi": "DXVK-NVAPI is an implementation of NVAPI built on top of DXVK and the linux native NVAPI, it allows for the usage of DLSS on Nvidia GPUs.",
         "esync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance.",
         "fsync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels.",
         "game_language": {
@@ -296,6 +301,10 @@
         },
         "analyticsOff": "Analytics is turned off",
         "analyticsOn": "Analytics is turned on",
+        "browserImport": {
+            "appId": "App Id",
+            "profile": "Profile"
+        },
         "buttons": {
             "agree": "I agree",
             "noThanks": "No Thanks"
@@ -304,6 +313,7 @@
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
         "discordApp": "Discord",
+        "folder": "Folder",
         "misc": "Never",
         "onboarding": {
             "analytics": {
@@ -503,7 +513,6 @@
         },
         "moved": "Finished Moving",
         "moving": "Moving Game",
-        "new-hyperplay-version": "A new HyperPlay version was released!",
         "refresh": {
             "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
         },
@@ -597,6 +606,7 @@
         "alt-gogdl-bin": "Choose an Alternative GOGDL Binary to use",
         "alt-legendary-bin": "Choose an Alternative Legendary Binary",
         "autodxvk": "Auto Install/Update DXVK on Prefix",
+        "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix",
         "autosync": "Autosync Saves",
         "autoUpdateGames": "Automatically update games",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
@@ -638,6 +648,9 @@
         },
         "esync": "Enable Esync",
         "exit-to-tray": "Exit to System Tray",
+        "experimental_features": {
+            "enableNewShinyFeature": "New shiny feature"
+        },
         "FsrSharpnessStrenght": "FSR Sharpness Strength",
         "fsync": "Enable Fsync",
         "gamemode": "Use GameMode (Feral Game Mode needs to be installed)",
@@ -718,6 +731,9 @@
             "installing": "Installing EAC Runtime...",
             "name": "EasyAntiCheat Runtime"
         },
+        "experimental_features": {
+            "title": "Experimental Features"
+        },
         "gameMode": {
             "eacRuntimeEnabled": {
                 "message": "The EAC runtime is enabled, which won't function correctly without GameMode. Do you want to disable the EAC Runtime and GameMode?",
@@ -780,7 +796,6 @@
     "two_col_table": {
         "save_hint": "Changes in this table are not saved automatically. Click the + button"
     },
-    "Update Available!": "",
     "userselector": {
         "logging_out": "Logging out",
         "logout": "Log out",
