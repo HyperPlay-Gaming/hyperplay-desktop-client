@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import walletStore from 'frontend/store/WalletStore'
+import walletState from 'frontend/state/WalletState'
 
 import { AchievementCard, AchievementSummaryTable } from '@hyperplay/ui'
 import { AchievementFilter, AchievementSort } from 'common/types'
@@ -44,7 +44,7 @@ export default observer(function Achievements(): JSX.Element {
       filter: activeFilter,
       sort: selectedSort.value
     })
-  }, [store, playerStoreId, walletStore.address])
+  }, [store, playerStoreId, walletState.address])
 
   const handleNextPage = () => {
     const nextPage = achievementsData.currentPage + 1
@@ -66,7 +66,7 @@ export default observer(function Achievements(): JSX.Element {
     })
   }
 
-  const isDisabled = isLoading || !walletStore.isConnected
+  const isDisabled = isLoading || !walletState.isConnected
 
   const filterMap = useMemo(() => {
     if (activeFilter === 'NEW') return 'new'
@@ -81,7 +81,7 @@ export default observer(function Achievements(): JSX.Element {
           const id = String(game.gameId)
           const isUpdate =
             game.isNewAchievement && game.mintedAchievementCount > 0
-          const state = !walletStore.isConnected
+          const state = !walletState.isConnected
             ? 'disabled'
             : achievementsToBeMinted.includes(id) ||
               achievementsToBeUpdated.includes(id)

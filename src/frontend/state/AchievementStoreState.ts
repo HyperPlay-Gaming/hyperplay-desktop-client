@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import walletStore from 'frontend/store/WalletStore'
+import walletState from 'frontend/state/WalletState'
 import type {
   Achievement,
   AchievementFilter,
@@ -48,7 +48,7 @@ class AchievementStoreState {
       .getAchievementsStats({
         store: this.store,
         playerStoreId: this.playerStoreId,
-        playerAddress: walletStore.address
+        playerAddress: walletState.address
       })
       .then(this.setStats.bind(this))
   }
@@ -71,7 +71,7 @@ class AchievementStoreState {
       page,
       pageSize,
       playerStoreId: this.playerStoreId,
-      playerAddress: walletStore.address
+      playerAddress: walletState.address
     })
     this.individualAchievements = individualAchievements
   }
@@ -94,7 +94,7 @@ class AchievementStoreState {
       page,
       pageSize,
       playerStoreId: this.playerStoreId,
-      playerAddress: walletStore.address
+      playerAddress: walletState.address
     })
 
     this.summaryAchievements = summaryAchievements
@@ -104,7 +104,7 @@ class AchievementStoreState {
     window.api.syncAchievements({
       store,
       playerStoreId: this.playerStoreId,
-      playerAddress: walletStore.address
+      playerAddress: walletState.address
     })
   }
 

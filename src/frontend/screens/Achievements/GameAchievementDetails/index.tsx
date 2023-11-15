@@ -2,7 +2,7 @@ import { GameAchievements } from '@hyperplay/ui'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
-import walletStore from 'frontend/store/WalletStore'
+import walletState from 'frontend/state/WalletState'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import AchievementStoreState from 'frontend/state/AchievementStoreState'
@@ -68,7 +68,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
     })
   }
 
-  const isDisabled = isLoading || !walletStore.isConnected
+  const isDisabled = isLoading || !walletState.isConnected
 
   if (!summaryAchievement) return <></>
 
