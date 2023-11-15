@@ -8,7 +8,7 @@ export default function AccountSettings() {
   return (
     <>
       <div className="settingSubheader settingsSectionHeader title">
-        {t('settings.navbar.accounts')}
+        {t('settings.navbar.accounts', 'Accounts')}
       </div>
 
       <SteamId />

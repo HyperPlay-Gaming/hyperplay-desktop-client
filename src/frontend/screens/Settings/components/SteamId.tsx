@@ -15,7 +15,7 @@ const SteamId = () => {
 
   return (
     <TextInput
-      label={t('setting.steamId')}
+      label={t('setting.steamId', 'Steam ID')}
       value={steamId?.replaceAll("'", '')}
       placeholder={steamId}
       onChange={(event) => setInstallPath(event.target.value)}

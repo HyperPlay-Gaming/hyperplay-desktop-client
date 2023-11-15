@@ -114,8 +114,11 @@ export default observer(function Achievements(): JSX.Element {
                 }}
                 progressKeyProps={{
                   i18n: {
-                    mintedLabel: t('achievements.progress.minted'),
-                    notMintedLabel: t('achievements.progress.notMinted')
+                    mintedLabel: t('achievements.progress.minted', 'on chain'),
+                    notMintedLabel: t(
+                      'achievements.progress.notMinted',
+                      'off chain'
+                    )
                   }
                 }}
               />
