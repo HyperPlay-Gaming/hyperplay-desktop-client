@@ -18,6 +18,7 @@ import { DMQueueElement, GameInfo, Runner } from 'common/types'
 import { ipcMain } from 'electron'
 import { sendFrontendMessage } from 'backend/main_window'
 import { loadEpicHyperPlayGameInfoMap } from './hyperplay/utils'
+import { isGameAvailable } from 'backend/api/helpers'
 interface GameManagerMap {
   [key: string]: GameManager
 }
@@ -70,6 +71,13 @@ export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
       appName
     )
     const gameInfo = gameManagerMap[runner].getGameInfo(appName)
+    const gameAvailable = await isGameAvailable({ appName, runner })
+
+    if (!gameAvailable) {
+      logInfo(`Skipping auto-update for ${gameInfo.title}`, logPrefix)
+      return
+    }
+
     if (!ignoreGameUpdates) {
       logInfo(`Auto-Updating ${gameInfo.title}`, logPrefix)
       const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)

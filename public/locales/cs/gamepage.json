@@ -118,7 +118,13 @@
         "path-not-writtable": "Varování: na cestu možná nelze zapisovat.",
         "space-after-install": "Po instalaci",
         "wineprefix": "WinePrefix",
-        "wineversion": "Verze Wine"
+        "wineversion": "Verze Wine",
+        "anticheat-warning": {
+            "cancel": "Ne",
+            "message": "Podpora anticheatu je rozbitá nebo zakázaná. Hra nebude fungovat. Chcete jej přesto nainstalovat?",
+            "install": "Ano (chápu, že to nebude fungovat)",
+            "title": "Rozbitý/zakázaný anticheat"
+        }
     },
     "label": {
         "game": {
@@ -139,7 +145,8 @@
         "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
         "login": "Log in",
-        "title": "You are NOT logged in"
+        "title": "NEjste přihlášeni",
+        "amazon": "V HyperPlay nejste přihlášeni pomocí účtu Amazon. K přihlášení nepoužívejte stránku obchodu, ale klikněte na následující tlačítko:"
     },
     "report_problem": "Nahlásit problém se spouštěním této hry",
     "sdl": {

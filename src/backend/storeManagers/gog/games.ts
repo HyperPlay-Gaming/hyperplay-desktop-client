@@ -82,7 +82,7 @@ import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { sendFrontendMessage } from '../../main_window'
 import { RemoveArgs } from 'common/types/game_manager'
 import { logFileLocation } from 'backend/storeManagers/storeManagerCommon/games'
-import { getWineFlags } from 'backend/utils/compatibility_layers'
+import { getWineFlagsArray } from 'backend/utils/compatibility_layers'
 import axios, { AxiosError } from 'axios'
 import { isOnline, runOnceWhenOnline } from 'backend/online_monitor'
 
@@ -513,7 +513,7 @@ export async function launch(
         ? wineExec.replaceAll("'", '')
         : wineExec
 
-    wineFlag = [...getWineFlags(wineBin, wineType, shlex.join(wrappers))]
+    wineFlag = getWineFlagsArray(wineBin, wineType, shlex.join(wrappers))
   }
 
   const commandParts = [
@@ -549,8 +549,7 @@ export async function launch(
         if (!logsDisabled) appendFileSync(logFileLocation(appName), output)
       }
     },
-    gameInfo,
-    true
+    gameInfo
   )
 
   deleteAbortController(appName)
@@ -732,7 +731,7 @@ export async function uninstall({ appName }: RemoveArgs): Promise<ExecResult> {
     logInfo(['Executing uninstall command', command.join(' ')], LogPrefix.Gog)
 
     if (!isWindows) {
-      runWineCommandUtil({
+      await runWineCommandUtil({
         gameSettings,
         commandParts: command,
         wait: true,

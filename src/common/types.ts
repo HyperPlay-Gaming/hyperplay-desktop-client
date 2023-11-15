@@ -77,14 +77,8 @@ interface About {
   shortDescription: string
 }
 
-export type Release = {
-  type: 'stable' | 'beta'
-  html_url: string
-  name: string
-  tag_name: string
-  published_at: string
-  prerelease: boolean
-  id: number
+export type ExperimentalFeatures = {
+  enableNewShinyFeature: boolean // remove this when adding a real experimental feature
 }
 
 export interface AppSettings extends GameSettings {
@@ -109,6 +103,7 @@ export interface AppSettings extends GameSettings {
   egsLinkedPath: string
   enableUpdates: boolean
   exitToTray: boolean
+  experimentalFeatures: ExperimentalFeatures
   hideChangelogsOnStartup: boolean
   libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number
@@ -187,6 +182,7 @@ export interface GameInfo {
 export interface GameSettings {
   autoInstallDxvk: boolean
   autoInstallVkd3d: boolean
+  autoInstallDxvkNvapi: boolean
   autoSyncSaves: boolean
   battlEyeRuntime: boolean
   DXVKFpsCap: string //Entered as string but used as number
@@ -795,6 +791,11 @@ export type AvailablePlatforms = {
   value: string
   icon: IconDefinition
 }[]
+
+export type WalletOnboardCloseReason =
+  | 'skipped'
+  | 'connected'
+  | 'requestedMetaMaskConnection'
 
 export type Filter =
   | 'alphabeticalAscending'

@@ -118,7 +118,13 @@
         "path-not-writtable": "Предупреждение: путь может быть недоступен для записи.",
         "space-after-install": "После установки",
         "wineprefix": "Префикс Wine",
-        "wineversion": "Версия Wine"
+        "wineversion": "Версия Wine",
+        "anticheat-warning": {
+            "cancel": "Нет",
+            "message": "Поддержка античита прервана или невозможна. Игра не будет работать. Вы всё равно хотите его установить?",
+            "install": "Да (я понимаю, что это не сработает)",
+            "title": "Античит прерван/отклонён"
+        }
     },
     "label": {
         "game": {
@@ -136,10 +142,11 @@
         "options": "Параметры запуска..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "login": "Log in",
-        "title": "You are NOT logged in"
+        "epic": "Вы не вошли в HyperPlay с учетной записью Epic. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:",
+        "gog": "Вы не вошли в HyperPlay с учетной записью GOG. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:",
+        "login": "Войти",
+        "title": "Вы НЕ авторизованы",
+        "amazon": "Вы не вошли в HyperPlay с учетной записью Epic. Не используйте страницу магазина для входа, вместо этого нажмите следующую кнопку:"
     },
     "report_problem": "Сообщить о проблеме с запуском этой игры",
     "sdl": {
@@ -184,8 +191,17 @@
         "reparing": "Восстановление игры. Пожалуйста, подождите",
         "this-game-uses-third-party": "Эта игра использует сторонний лаунчер и пока не поддерживается",
         "totalDownloaded": "Всего загружено",
-        "uninstalling": "Uninstalling",
-        "updating": "Обновление игры"
+        "uninstalling": "Удаление",
+        "updating": "Обновление игры",
+        "playing": "Игра",
+        "moving-files": "Перемещение файла '{{file}}': {{percent}} ",
+        "syncingSaves": "Синхронизация сохранений",
+        "launching": "Запуск",
+        "ubisoft": "Установка Ubisoft",
+        "downloading": "Загрузка",
+        "extracting": "Извлечение",
+        "gog-goodie": "Кажется, эту игру нельзя установить. Проверьте загружаемый контент на https://gog.com/account",
+        "goodie": "Не устанавливается"
     },
     "submenu": {
         "addShortcut": "Создать ярлык",

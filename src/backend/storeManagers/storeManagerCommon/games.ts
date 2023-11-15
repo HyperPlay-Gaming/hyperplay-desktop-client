@@ -29,8 +29,6 @@ import { createAbortController } from '../../utils/aborthandler/aborthandler'
 import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
-import { hrtime } from 'process'
-import { trackEvent } from 'backend/metrics/metrics'
 import { domainsAreEqual } from 'common/utils'
 import { connectedProvider } from 'backend/hyperplay-proxy-server/providerState'
 import { PROVIDERS } from 'common/types/proxy-types'
@@ -156,20 +154,6 @@ const openNewBrowserGameWindow = async (
     }
     app.on('web-contents-created', openNewBroswerGameWindowListener)
 
-    //track game launched
-    const start = hrtime.bigint()
-    const { title, app_name, runner } = gameInfo
-    trackEvent({
-      event: 'Game Launched',
-      properties: {
-        isBrowserGame: true,
-        game_name: app_name,
-        game_title: title,
-        store_name: runner,
-        browserUrl: browserUrl
-      }
-    })
-
     browserGame.loadURL(url)
     // this is electron's suggested way to prevent visual flash
     // https://github.com/electron/electron/blob/main/docs/api/browser-window.md#using-the-ready-to-show-event
@@ -209,21 +193,6 @@ const openNewBrowserGameWindow = async (
     }
 
     browserGame.on('close', () => {
-      //track game closed
-      const end = hrtime.bigint()
-      const elapsedInMs = Math.round(Number(end - start) / 10 ** 6)
-      trackEvent({
-        event: 'Game Closed',
-        properties: {
-          isBrowserGame: true,
-          game_name: app_name,
-          game_title: title,
-          store_name: runner,
-          playTimeInMs: elapsedInMs,
-          browserUrl: browserUrl
-        }
-      })
-
       res(true)
       app.removeListener(
         'web-contents-created',

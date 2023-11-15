@@ -1,0 +1,62 @@
+@use '../../mixins';
+
+.profileOptionsContainer {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  max-height: 240px;
+  @include mixins.showScrollbar;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.manualHr {
+  border: none;
+  height: 1px;
+  background-color: var(--color-stroke-01);
+  margin: var(--space-lg) 0 0 0;
+}
+.manualFolderPickerContainer {
+  margin-top: var(--space-lg);
+}
+
+.folderPickerButton {
+  width: 100%;
+  text-overflow: ellipsis;
+  color: var(--color-neutral-300);
+  text-align: left;
+}
+
+.importSubtitle {
+  margin-bottom: var(--space-2xs);
+  color: var(--color-neutral-400);
+}
+
+.cantFindSubtext {
+  margin-top: var(--space-md);
+  display: inline-block;
+  > div {
+    display: inline-block;
+  }
+}
+
+@mixin actionContainer {
+  margin: var(--space-md) auto;
+}
+
+.manualImportActionContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  @include actionContainer;
+  width: 100%;
+}
+
+.importActionContainer {
+  @include actionContainer;
+}
+
+.goBackProfileButton {
+  max-width: 120px;
+  color: var(--color-neutral-300);
+}

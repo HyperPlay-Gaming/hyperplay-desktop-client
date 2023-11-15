@@ -5,7 +5,6 @@ import {
   GameSettings,
   ExecResult,
   InstallArgs,
-  CallRunnerOptions,
   HyperPlayInstallInfo
 } from 'common/types'
 import { GOGCloudSavesLocation, GogInstallInfo } from './gog'
@@ -80,9 +79,4 @@ export interface LibraryManager {
   listUpdateableGames: () => Promise<string[]>
   changeGameInstallPath: (appName: string, newPath: string) => Promise<void>
   installState: (appName: string, state: boolean) => void
-  runRunnerCommand: (
-    commandParts: string[],
-    abortController: AbortController,
-    options?: CallRunnerOptions
-  ) => Promise<ExecResult>
 }
