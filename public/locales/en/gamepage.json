@@ -180,6 +180,7 @@
         "recommended": "Recommended"
     },
     "status": {
+        "clickToUpdate": "Click to Update",
         "downloading": "Downloading",
         "extracting": {
             "cancel": "Cancel Extraction",
@@ -188,6 +189,7 @@
         "gameNotAvailable": "Game not available",
         "gog-goodie": "This game doesn't appear to be installable. Check downloadable content on https://gog.com/account",
         "goodie": "Not installable",
+        "hasUpdates": "New Version Available!",
         "installed": "Installed",
         "installing": "Installing",
         "moving": "Moving Installation, please wait",
