@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Images } from '@hyperplay/ui'
 import { faUser } from '@fortawesome/free-solid-svg-icons'
 import styles from './index.module.scss'
+import { DEFAULT_BROWSER_PROFILE_IMPORT_COLOR } from 'frontend/constants'
 
 export function BrowserPackageManagerImportOption({
   importOptions,
@@ -14,6 +15,11 @@ export function BrowserPackageManagerImportOption({
 }: BrowserPackageManagerImportOptionProps) {
   const browserProfilesToImportFrom =
     importOptions[browserSelected]![pkgManager]
+  function getProfileBgColor(profile: BrowserProfile) {
+    return (
+      '#' + profile.imageBackgroundColor ?? DEFAULT_BROWSER_PROFILE_IMPORT_COLOR
+    )
+  }
   return (
     <div className={styles.packageOptionsContainer}>
       <div className={`caption ${styles.packageManagerSubTitle}`}>
@@ -39,11 +45,7 @@ export function BrowserPackageManagerImportOption({
                 <div
                   className={styles.defaultProfileImage}
                   style={{
-                    backgroundColor:
-                      '#' +
-                      (profile.imageBackgroundColor
-                        ? profile.imageBackgroundColor
-                        : '202124')
+                    backgroundColor: getProfileBgColor(profile)
                   }}
                 >
                   <FontAwesomeIcon icon={faUser} />
