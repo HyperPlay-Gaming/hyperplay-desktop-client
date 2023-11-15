@@ -44,3 +44,5 @@ vite-plugin-electron.log
 
 flathub/update-flathub.js
 xyz.hyperplay.HyperPlay
+
+.sdk-comm

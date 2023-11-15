@@ -160,7 +160,7 @@
     "@mantine/carousel": "^6.0.19",
     "@mantine/core": "^6.0.19",
     "@mantine/hooks": "^6.0.19",
-    "@metamask/sdk": "^0.5.3",
+    "@metamask/sdk": "^0.12.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
     "@node-steam/vdf": "^2.2.0",
@@ -211,7 +211,9 @@
     "mime": "^3.0.0",
     "mobx": "^6.9.0",
     "mobx-react-lite": "^3.4.0",
+    "patch-package": "^8.0.0",
     "plist": "^3.0.5",
+    "postinstall-postinstall": "^2.1.0",
     "qrcode": "^1.5.3",
     "react": "^18.2.0",
     "react-blockies": "^1.4.1",
@@ -268,6 +270,7 @@
     "flatpak:prepare": "node ./flatpak/prepareFlatpak.js",
     "flatpak:prepare-release": "node ./flatpak/prepareFlatpak.js release",
     "i18n": "i18next",
+    "postinstall": "patch-package",
     "prepare": "husky install",
     "prettier": "prettier --check .",
     "prettier-fix": "prettier --write ."
@@ -350,7 +353,9 @@
       "electron": true,
       "electron-vite>esbuild": true,
       "playwright": true,
-      "vite>esbuild": true
+      "vite>esbuild": true,
+      "$root$": true,
+      "postinstall-postinstall": true
     }
   }
 }
