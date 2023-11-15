@@ -3,7 +3,7 @@ import { BrowsersAndManualImportOptionsProps } from '../../types'
 import { BrowserPackageManagerImportOption } from '../BrowserPackageManagerImportOptions'
 import { Button } from '@hyperplay/ui'
 import styles from './index.module.scss'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 export function BrowsersAndManualImportOptions({
   importOptions,
@@ -12,9 +12,17 @@ export function BrowsersAndManualImportOptions({
   setBrowserSelected
 }: BrowsersAndManualImportOptionsProps) {
   const [showManualImport, setShowManualImport] = useState(false)
+  const { t } = useTranslation()
+  const profileString = t('hyperplay.browserImport.profile', 'Profile')
+  const appIdString = t('hyperplay.browserImport.appId', 'App Id')
   const [manualImportPath, setManualImportPath] = useState(
-    '<profile>/Local Extension Settings/<metamask app id>'
+    `<${profileString}>/Local Extension Settings/<MetaMask ${appIdString}>`
   )
+
+  const importSubtitle = `MetaMask "Local Extension Settings" ${t(
+    'hyperplay.folder',
+    'Folder'
+  )}`
 
   function getPackageManagersForBrowser() {
     return Object.keys(importOptions[browserSelected]!)
@@ -25,8 +33,9 @@ export function BrowsersAndManualImportOptions({
       {
         <div className={styles.profileOptionsContainer}>
           {getPackageManagersForBrowser().map((pkgManager) => {
-            if (importOptions[browserSelected]![pkgManager].length === 0)
+            if (importOptions[browserSelected]![pkgManager].length === 0) {
               return null
+            }
             return (
               <BrowserPackageManagerImportOption
                 importOptions={importOptions}
@@ -44,7 +53,7 @@ export function BrowsersAndManualImportOptions({
           <hr className={styles.manualHr}></hr>
           <div className={styles.manualFolderPickerContainer}>
             <div className={`eyebrow ${styles.importSubtitle}`}>
-              MetaMask &quot;Local Extension Settings&quot; Folder
+              {importSubtitle}
             </div>
             <Button
               type="tertiary"
