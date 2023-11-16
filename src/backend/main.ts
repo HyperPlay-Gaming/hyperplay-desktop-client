@@ -186,7 +186,9 @@ import {
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
 
-app.commandLine?.appendSwitch('remote-debugging-port', '9222')
+if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
+  app.commandLine?.appendSwitch('remote-debugging-port', '9222')
+}
 
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
