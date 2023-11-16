@@ -6,9 +6,9 @@ import { ExtractZipService } from '../ExtractZipService'
 
 const returnDataMockup = {
   progressPercentage: 0,
-  speed: 0,
-  totalSize: 1000,
-  processedSize: 500
+  speedInMbPerSec: 0,
+  totalSizeInBytes: 1000,
+  processedSizeInBytes: 500,
 }
 jest.mock('yauzl', () => ({
   open: jest.fn()
@@ -258,10 +258,10 @@ describe('ExtractZipService', () => {
 
       expect(progressListener).toHaveBeenCalledWith(
         expect.objectContaining({
-          processedSize: 500,
           progressPercentage: 50,
-          speed: expect.any(Number),
-          totalSize: 1000
+          speedInMbPerSec: expect.any(Number),
+          totalSizeInBytes: 1000,
+          processedSizeInBytes: 500,
         })
       )
     })
@@ -276,10 +276,10 @@ describe('ExtractZipService', () => {
     process.nextTick(() => {
       expect(endListener).toHaveBeenCalledWith(
         expect.objectContaining({
-          processedSize: 500,
           progressPercentage: 50,
-          speed: expect.any(Number),
-          totalSize: 1000
+          speedInMbPerSec: expect.any(Number),
+          totalSizeInBytes: 1000,
+          processedSizeInBytes: 500,
         })
       )
     })
@@ -299,10 +299,10 @@ describe('ExtractZipService', () => {
 
       expect(pausedListener).toHaveBeenCalledWith(
         expect.objectContaining({
-          processedSize: 500,
           progressPercentage: 50,
-          speed: expect.any(Number),
-          totalSize: 1000
+          speedInMbPerSec: expect.any(Number),
+          totalSizeInBytes: 1000,
+          processedSizeInBytes: 500,
         })
       )
     })
@@ -322,10 +322,10 @@ describe('ExtractZipService', () => {
 
       expect(resumedListener).toHaveBeenCalledWith(
         expect.objectContaining({
-          processedSize: 500,
           progressPercentage: 50,
-          speed: expect.any(Number),
-          totalSize: 1000
+          speedInMbPerSec: expect.any(Number),
+          totalSizeInBytes: 1000,
+          processedSizeInBytes: 500,
         })
       )
     })

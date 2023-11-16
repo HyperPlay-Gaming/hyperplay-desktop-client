@@ -810,20 +810,20 @@ export async function extract(
       extractService.on(
         'progress',
         ({
-          processedSize,
-          totalSize,
-          speed,
+          processedSizeInBytes,
+          totalSizeInBytes,
+          speedInMbPerSec,
           progressPercentage
         }: ExtractZipProgressResponse) => {
           logInfo(
-            `Extracting Progress: ${progressPercentage}% Speed: ${speed} B/s | Total size ${totalSize} and ${processedSize}`,
+            `Extracting Progress: ${progressPercentage}% Speed: ${speedInMbPerSec} B/s | Total size ${totalSizeInBytes} and ${processedSizeInBytes}`,
             LogPrefix.HyperPlay
           )
           const currentProgress = calculateProgress(
-            processedSize,
-            totalSize,
-            speed,
-            speed,
+            processedSizeInBytes,
+            totalSizeInBytes,
+            speedInMbPerSec,
+            speedInMbPerSec,
             progressPercentage
           )
 
@@ -843,20 +843,20 @@ export async function extract(
         'finished',
         async ({
           progressPercentage,
-          speed,
-          totalSize,
-          processedSize
+          totalSizeInBytes,
+          speedInMbPerSec,
+          processedSizeInBytes
         }: ExtractZipProgressResponse) => {
           logInfo(
-            `Extracting End: ${progressPercentage}% Speed: ${speed} B/s | Total size ${totalSize} and ${processedSize}`,
+            `Extracting End: ${progressPercentage}% Speed: ${speedInMbPerSec} B/s | Total size ${totalSizeInBytes} and ${processedSizeInBytes}`,
             LogPrefix.HyperPlay
           )
 
           const currentProgress = calculateProgress(
-            processedSize,
-            totalSize,
-            speed,
-            speed,
+            processedSizeInBytes,
+            totalSizeInBytes,
+            speedInMbPerSec,
+            speedInMbPerSec,
             progressPercentage
           )
 

@@ -9,11 +9,11 @@ export interface ExtractZipProgressResponse {
   /** Percentage of extraction progress. */
   progressPercentage: number
   /** Speed of extraction in bytes per second. */
-  speed: number
+  speedInMbPerSec: number
   /** Total size of the ZIP file in bytes. */
-  totalSize: number
+  totalSizeInBytes: number
   /** Size of the ZIP content processed so far in bytes. */
-  processedSize: number
+  processedSizeInBytes: number
 }
 
 enum ExtractionValidation {
@@ -32,14 +32,14 @@ export class ExtractZipService extends EventEmitter {
   #destinationPath = ''
   #canceled = false
   #paused = false
-  #totalSize = 0
-  #processedSize = 0
+  #totalSizeInBytes = 0
+  #processedSizeInBytes = 0
   #startTime = Date.now()
   #lastUpdateTime = Date.now()
   #dataDelay = 1000
 
   #zipFileInstance: ZipFile | null = null
-  #extractionPromise: Promise<boolean | void> | null = null
+  #extractionPromise: Promise<boolean> | null = null
   #resolveExtraction: ((value: boolean) => void) | null = null
   #rejectExtraction: ((reason: Error | unknown) => void) | null = null
 
@@ -179,16 +179,16 @@ export class ExtractZipService extends EventEmitter {
   #computeProgress(): ExtractZipProgressResponse {
     const progressPercentage = Math.min(
       100,
-      (this.#processedSize / this.#totalSize) * 100
+      (this.#processedSizeInBytes / this.#totalSizeInBytes) * 100
     )
-    const elapsedTime = (Date.now() - this.#startTime) / 1000
-    const speed = this.#processedSize / elapsedTime
+    const elapsedTimeInSeconds = (Date.now() - this.#startTime) / 1000
+    const speedInMbPerSec = this.#processedSizeInBytes / elapsedTimeInSeconds
 
     return {
       progressPercentage,
-      speed,
-      totalSize: this.#totalSize,
-      processedSize: this.#processedSize
+      speedInMbPerSec,
+      totalSizeInBytes: this.#totalSizeInBytes,
+      processedSizeInBytes: this.#processedSizeInBytes
     }
   }
 
@@ -202,7 +202,7 @@ export class ExtractZipService extends EventEmitter {
       return
     }
 
-    this.#processedSize += chunkLength
+    this.#processedSizeInBytes += chunkLength
     const currentTime = Date.now()
 
     // Make always sure to have a delay, unless it will be too much spam + performance issues eventually,
@@ -287,21 +287,24 @@ export class ExtractZipService extends EventEmitter {
     }).catch(() => 0)
   }
 
+
   /**
-   * Extracts the ZIP file to the specified destination.
-   * @returns {Promise<boolean | void>} - A promise that resolves when the extraction is complete.
+   * Initialize the extraction methods.
+   * @returns {Promise<void>}
    */
-  async extract() {
+  async #initializeExtraction() {
     this.#extractionPromise = new Promise<boolean>((resolve, reject) => {
       this.#resolveExtraction = resolve
       this.#rejectExtraction = reject
 
       switch (this.#isValid) {
         case ExtractionValidation.NOT_EXIST:
-          this.#rejectExtraction(new Error('Zip file not found'))
+          this.#onError(new Error('Zip file not found'))
+          this.#rejectExtraction(false)
           return
         case ExtractionValidation.INVALID_FILE_NAME_ASCII:
-          this.#rejectExtraction(new Error('Zip file name contain ascii'))
+          this.#onError(new Error('Zip file name contain ascii'))
+          this.#rejectExtraction(false)
           return
         default:
           break
@@ -310,9 +313,11 @@ export class ExtractZipService extends EventEmitter {
       open(
         this.#zipFile,
         { lazyEntries: true, autoClose: true },
-        (err: unknown, file: ZipFile) => {
+        (err: Error | null, file: ZipFile) => {
           if (err) {
-            this.#rejectExtraction?.(err)
+            this.#onError(err)
+            this.#rejectExtraction?.(false)
+
             return
           }
 
@@ -344,9 +349,11 @@ export class ExtractZipService extends EventEmitter {
 
               this.#zipFileInstance?.openReadStream(
                 entry,
-                (err: unknown, readStream: Readable) => {
-                  if (err && this.#rejectExtraction) {
-                    this.#rejectExtraction(err)
+                (err: Error | null, readStream: Readable) => {
+                  if (err) {
+                    this.#onError(err)
+                    this.#rejectExtraction?.(false)
+
                     return
                   }
 
@@ -379,17 +386,30 @@ export class ExtractZipService extends EventEmitter {
             this.#resolveExtraction?.(true)
           })
 
-          this.#zipFileInstance.once('error', this.#onError.bind(this))
+          this.#zipFileInstance.once('error', (error: Error) => {
+            this.#onError(error)
+            this.#rejectExtraction?.(false)
+          })
         }
       )
-    }).catch(this.#onError.bind(this))
+    })
+  }
+
+  /**
+   * Extracts the ZIP file to the specified destination.
+   * @returns {Promise<boolean>} - A promise that resolves when the extraction is complete.
+   */
+  async extract() {
+    this.#initializeExtraction()
+
     try {
-      this.#totalSize = await this.getUncompressedSize(this.#zipFile)
+      this.#totalSizeInBytes = await this.getUncompressedSize(this.#zipFile)
       return await this.#extractionPromise
     } catch (error) {
-      console.log('error', error)
       this.#onError(error as Error)
       captureException(error)
+
+      return false
     } finally {
       this.#zipFileInstance = null
       this.#extractionPromise = null
