@@ -287,7 +287,6 @@ export class ExtractZipService extends EventEmitter {
     }).catch(() => 0)
   }
 
-
   /**
    * Initialize the extraction methods.
    * @returns {Promise<void>}

@@ -8,7 +8,7 @@ const returnDataMockup = {
   progressPercentage: 0,
   speedInMbPerSec: 0,
   totalSizeInBytes: 1000,
-  processedSizeInBytes: 500,
+  processedSizeInBytes: 500
 }
 jest.mock('yauzl', () => ({
   open: jest.fn()
@@ -261,7 +261,7 @@ describe('ExtractZipService', () => {
           progressPercentage: 50,
           speedInMbPerSec: expect.any(Number),
           totalSizeInBytes: 1000,
-          processedSizeInBytes: 500,
+          processedSizeInBytes: 500
         })
       )
     })
@@ -279,7 +279,7 @@ describe('ExtractZipService', () => {
           progressPercentage: 50,
           speedInMbPerSec: expect.any(Number),
           totalSizeInBytes: 1000,
-          processedSizeInBytes: 500,
+          processedSizeInBytes: 500
         })
       )
     })
@@ -302,7 +302,7 @@ describe('ExtractZipService', () => {
           progressPercentage: 50,
           speedInMbPerSec: expect.any(Number),
           totalSizeInBytes: 1000,
-          processedSizeInBytes: 500,
+          processedSizeInBytes: 500
         })
       )
     })
@@ -325,7 +325,7 @@ describe('ExtractZipService', () => {
           progressPercentage: 50,
           speedInMbPerSec: expect.any(Number),
           totalSizeInBytes: 1000,
-          processedSizeInBytes: 500,
+          processedSizeInBytes: 500
         })
       )
     })
