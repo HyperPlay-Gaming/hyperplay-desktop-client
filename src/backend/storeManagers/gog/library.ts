@@ -874,7 +874,7 @@ export async function getGamesdbData(
 
   const response = await axios
     .get<GamesDBData>(url, { headers: headers })
-    .catch((error: AxiosError) => {
+    .catch((error: AxiosError<{ error_description: string }>) => {
       logError(
         [
           `Was not able to get GamesDB data for ${game_id}`,
@@ -922,7 +922,7 @@ export async function getProductApi(
     url.searchParams.set('expand', expand.join(','))
   }
 
-  const headers: AxiosRequestHeaders = {}
+  const headers: AxiosRequestHeaders = {} as AxiosRequestHeaders
   if (access_token) {
     headers.Authorization = `Bearer ${access_token}`
   }
