@@ -6,7 +6,7 @@ import { ExtractZipService } from '../ExtractZipService'
 
 const returnDataMockup = {
   progressPercentage: 0,
-  speedInMbPerSec: 0,
+  speedInBytesPerSec: 0,
   totalSizeInBytes: 1000,
   processedSizeInBytes: 500
 }
@@ -259,7 +259,7 @@ describe('ExtractZipService', () => {
       expect(progressListener).toHaveBeenCalledWith(
         expect.objectContaining({
           progressPercentage: 50,
-          speedInMbPerSec: expect.any(Number),
+          speedInBytesPerSec: expect.any(Number),
           totalSizeInBytes: 1000,
           processedSizeInBytes: 500
         })
@@ -277,7 +277,7 @@ describe('ExtractZipService', () => {
       expect(endListener).toHaveBeenCalledWith(
         expect.objectContaining({
           progressPercentage: 50,
-          speedInMbPerSec: expect.any(Number),
+          speedInBytesPerSec: expect.any(Number),
           totalSizeInBytes: 1000,
           processedSizeInBytes: 500
         })
@@ -300,7 +300,7 @@ describe('ExtractZipService', () => {
       expect(pausedListener).toHaveBeenCalledWith(
         expect.objectContaining({
           progressPercentage: 50,
-          speedInMbPerSec: expect.any(Number),
+          speedInBytesPerSec: expect.any(Number),
           totalSizeInBytes: 1000,
           processedSizeInBytes: 500
         })
@@ -323,7 +323,7 @@ describe('ExtractZipService', () => {
       expect(resumedListener).toHaveBeenCalledWith(
         expect.objectContaining({
           progressPercentage: 50,
-          speedInMbPerSec: expect.any(Number),
+          speedInBytesPerSec: expect.any(Number),
           totalSizeInBytes: 1000,
           processedSizeInBytes: 500
         })

@@ -9,7 +9,7 @@ export interface ExtractZipProgressResponse {
   /** Percentage of extraction progress. */
   progressPercentage: number
   /** Speed of extraction in bytes per second. */
-  speedInMbPerSec: number
+  speedInBytesPerSec: number
   /** Total size of the ZIP file in bytes. */
   totalSizeInBytes: number
   /** Size of the ZIP content processed so far in bytes. */
@@ -182,11 +182,11 @@ export class ExtractZipService extends EventEmitter {
       (this.#processedSizeInBytes / this.#totalSizeInBytes) * 100
     )
     const elapsedTimeInSeconds = (Date.now() - this.#startTime) / 1000
-    const speedInMbPerSec = this.#processedSizeInBytes / elapsedTimeInSeconds
+    const speedInBytesPerSec = this.#processedSizeInBytes / elapsedTimeInSeconds
 
     return {
       progressPercentage,
-      speedInMbPerSec,
+      speedInBytesPerSec,
       totalSizeInBytes: this.#totalSizeInBytes,
       processedSizeInBytes: this.#processedSizeInBytes
     }
