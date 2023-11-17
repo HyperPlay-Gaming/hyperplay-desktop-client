@@ -1,5 +1,5 @@
 import { sendFrontendMessage } from '../../main_window'
-import axios, { AxiosError, AxiosRequestHeaders, AxiosResponse } from 'axios'
+import axios, { AxiosError, AxiosResponse } from 'axios'
 import { GOGUser } from './user'
 import {
   GameInfo,
@@ -680,6 +680,7 @@ export async function gogToUnifiedInfo(
 
   return object
 }
+
 /**
  * Fetches data from gog about game
  * https://api.gog.com/v2/games
@@ -701,6 +702,7 @@ export async function getGamesData(appName: string, lang?: string) {
 
   return response.data
 }
+
 /**
  * Creates Array based on returned from API
  * If no recommended data is present it just stays empty
@@ -874,7 +876,7 @@ export async function getGamesdbData(
 
   const response = await axios
     .get<GamesDBData>(url, { headers: headers })
-    .catch((error: AxiosError) => {
+    .catch((error: AxiosError<{ error_description: string }>) => {
       logError(
         [
           `Was not able to get GamesDB data for ${game_id}`,
@@ -922,9 +924,9 @@ export async function getProductApi(
     url.searchParams.set('expand', expand.join(','))
   }
 
-  const headers: AxiosRequestHeaders = {}
+  const headers = {}
   if (access_token) {
-    headers.Authorization = `Bearer ${access_token}`
+    headers['Authorization'] = `Bearer ${access_token}`
   }
 
   // `https://api.gog.com/products/${appName}?locale=${language}${expandString}`
