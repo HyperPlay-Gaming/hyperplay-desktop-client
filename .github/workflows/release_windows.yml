@@ -87,7 +87,7 @@ jobs:
           $size = (Get-Item $exePath).Length
           $latestYml = Get-Content -Path dist/latest.yml -Raw | ConvertFrom-Yaml
           $latestYml.sha512 = $sha512.ToLower()
-          $latestYml.files[0].sha512 = $sha512
+          $latestYml.files[0].sha512 = $sha512.ToLower()
           $latestYml.files[0].size = $size
           $latestYml | ConvertTo-Yaml | Set-Content -Path signed/latest.yml
 
