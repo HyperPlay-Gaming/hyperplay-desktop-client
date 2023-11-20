@@ -510,7 +510,7 @@ async function resumeIfPaused(
 
   if (isPaused) {
     const item = inProgressDownloadsMap.get(appName)
-    if (item === undefined || item.DownloadItem === undefined) {
+    if (!item?.DownloadItem) {
       return false
     }
 
