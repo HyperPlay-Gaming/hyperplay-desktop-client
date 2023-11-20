@@ -150,7 +150,7 @@ export async function stop(appName: string): Promise<void> {
 
 export async function pause(appName: string): Promise<void> {
   const dl = inProgressDownloadsMap.get(appName)
-  if (dl === undefined || dl.DownloadItem === undefined) {
+  if (!dl?.DownloadItem) {
     throw `Tried to pause download for ${appName} that is not in progress!`
   }
   dl.DownloadItem.pause()
