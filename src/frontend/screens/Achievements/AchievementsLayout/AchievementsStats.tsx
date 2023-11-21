@@ -1,13 +1,13 @@
 import { AchievementsInfo } from '@hyperplay/ui'
 import React from 'react'
 import { observer } from 'mobx-react-lite'
-import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import AchievementState from 'frontend/state/AchievementState'
 
 export const AchievementsStats = observer(() => {
-  const newAchievements = AchievementStoreState.newAchievements
-  const mintedAchievements = AchievementStoreState.mintedAchievements
-  const totalAchievements = AchievementStoreState.totalAchievements
-  const totalGames = AchievementStoreState.totalGames
+  const newAchievements = AchievementState.newAchievements
+  const mintedAchievements = AchievementState.mintedAchievements
+  const totalAchievements = AchievementState.totalAchievements
+  const totalGames = AchievementState.totalGames
 
   return (
     <AchievementsInfo

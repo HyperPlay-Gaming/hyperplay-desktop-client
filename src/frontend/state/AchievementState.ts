@@ -9,7 +9,7 @@ import type {
   SummaryAchievement
 } from 'common/types'
 
-class AchievementStoreState {
+class AchievementState {
   store = 'STEAM' as AchievementStore
   playerStoreId = '76561199276514967'
   // Stats
@@ -125,4 +125,4 @@ class AchievementStoreState {
   }
 }
 
-export default new AchievementStoreState()
+export default new AchievementState()

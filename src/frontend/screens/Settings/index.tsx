@@ -19,7 +19,7 @@ import Accessibility from '../Accessibility'
 import WineManager from '../WineManager'
 import AccountSettings from './sections/AccountSettings'
 import { observer } from 'mobx-react-lite'
-import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import AchievementState from 'frontend/state/AchievementState'
 import DeviceState from 'frontend/state/DeviceState'
 
 export const defaultWineVersion: WineInstallation = {
@@ -160,7 +160,7 @@ function Settings() {
               <Tabs.Panel value="accessibility">
                 <Accessibility />
               </Tabs.Panel>
-              {AchievementStoreState.showAchievements && (
+              {AchievementState.showAchievements && (
                 <Tabs.Panel value="accounts">
                   <AccountSettings />
                 </Tabs.Panel>

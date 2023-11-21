@@ -7,19 +7,19 @@ import styles from './index.module.css'
 
 import classNames from 'classnames'
 import { observer } from 'mobx-react-lite'
-import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import AchievementState from 'frontend/state/AchievementState'
 import useSetting from 'frontend/hooks/useSetting'
 import walletState from 'frontend/state/WalletState'
 
 export const AchievementStores = observer(() => {
   const [steamId] = useSetting('steamId', '')
 
-  const store = AchievementStoreState.store
-  const totalGames = AchievementStoreState.totalGames
-  const setStore = AchievementStoreState.setStore
-  const syncAchievements = AchievementStoreState.syncAchievements
-  const setPlayerStoreId = AchievementStoreState.setPlayerStoreId
-  const getAchievementsStats = AchievementStoreState.getAchievementsStats
+  const store = AchievementState.store
+  const totalGames = AchievementState.totalGames
+  const setStore = AchievementState.setStore
+  const syncAchievements = AchievementState.syncAchievements
+  const setPlayerStoreId = AchievementState.setPlayerStoreId
+  const getAchievementsStats = AchievementState.getAchievementsStats
 
   useEffect(() => {
     setPlayerStoreId(steamId)

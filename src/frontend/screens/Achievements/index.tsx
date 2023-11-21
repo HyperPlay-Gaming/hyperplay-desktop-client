@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import AchievementStoreState from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
 
 const pageSize = 12
@@ -93,6 +93,7 @@ export default observer(function Achievements(): JSX.Element {
           return (
             <NavLink key={id} to={`/achievements/${game.gameId}`}>
               <AchievementCard
+                showStatusIcon={false}
                 id={id}
                 title={game.gameName}
                 image={game.gameImageURL}

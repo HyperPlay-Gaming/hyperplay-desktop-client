@@ -9,7 +9,7 @@ import { Images } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import { observer } from 'mobx-react-lite'
 import storeAuthState from 'frontend/state/storeAuthState'
-import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import AchievementState from 'frontend/state/AchievementState'
 
 export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
@@ -83,7 +83,7 @@ export default observer(function SidebarLinks() {
             <Images.Controller fill={sidebarSvgUnselectedFill} />
           </NavLink>
         </div>
-        {AchievementStoreState.showAchievements && (
+        {AchievementState.showAchievements && (
           <div className="sidebarLinkGradientWrapper">
             <NavLink
               className={({ isActive }) =>

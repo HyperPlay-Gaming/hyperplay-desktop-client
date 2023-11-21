@@ -5,7 +5,7 @@ import { achievementsSortOptions } from '..'
 import walletState from 'frontend/state/WalletState'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import AchievementStoreState from 'frontend/state/AchievementStoreState'
+import AchievementState from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
 
 const pageSize = 6
@@ -29,18 +29,18 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const handleUpdate = MintAchievementsState.handleUpdate
   const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
 
-  const numFreeMints = AchievementStoreState.numFreeMints
-  const individualAchievements = AchievementStoreState.individualAchievements
-  const summaryAchievement = AchievementStoreState.summaryAchievements.data[0]
+  const numFreeMints = AchievementState.numFreeMints
+  const individualAchievements = AchievementState.individualAchievements
+  const summaryAchievement = AchievementState.summaryAchievements.data[0]
 
   useEffect(() => {
-    AchievementStoreState.getSummaryAchievements({
+    AchievementState.getSummaryAchievements({
       page: 1,
       pageSize,
       sort: selectedSort.value,
       filter: 'ALL'
     })
-    AchievementStoreState.getIndividualAchievements({
+    AchievementState.getIndividualAchievements({
       gameId: id as string,
       page: 1,
       pageSize,
@@ -50,7 +50,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
 
   const handleNextPage = () => {
     const nextPage = individualAchievements.currentPage + 1
-    AchievementStoreState.getIndividualAchievements({
+    AchievementState.getIndividualAchievements({
       gameId: id as string,
       page: nextPage,
       pageSize,
@@ -60,7 +60,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
 
   const handlePrevPage = () => {
     const prevPage = individualAchievements.currentPage - 1
-    AchievementStoreState.getIndividualAchievements({
+    AchievementState.getIndividualAchievements({
       gameId: id as string,
       page: prevPage,
       pageSize,
@@ -101,7 +101,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
           )
 
           if (chosenItem) {
-            AchievementStoreState.getIndividualAchievements({
+            AchievementState.getIndividualAchievements({
               gameId: id as string,
               page: 1,
               pageSize,
