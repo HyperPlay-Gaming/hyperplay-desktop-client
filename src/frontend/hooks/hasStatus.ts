@@ -9,7 +9,7 @@ import libraryState from 'frontend/state/libraryState'
 // the consuming code needs to be wrapped in observer when using this hook
 export const hasStatus = (
   appName: string,
-  gameInfo: GameInfo,
+  gameInfo?: GameInfo,
   gameSize?: string
 ) => {
   const { libraryStatus } = React.useContext(ContextProvider)
@@ -25,7 +25,7 @@ export const hasStatus = (
   const {
     thirdPartyManagedApp = undefined,
     is_installed,
-    runner
+    runner = 'hyperplay'
   } = { ...gameInfo }
 
   React.useEffect(() => {

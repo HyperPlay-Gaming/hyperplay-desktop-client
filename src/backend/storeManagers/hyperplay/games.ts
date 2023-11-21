@@ -13,6 +13,10 @@ import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
+import {
+  ExtractZipService,
+  ExtractZipProgressResponse
+} from 'backend/services/ExtractZipService'
 import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 import {
   isMac,
@@ -27,7 +31,6 @@ import {
   spawnAsync,
   killPattern,
   shutdownWine,
-  extractZip,
   calculateEta
 } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
@@ -60,8 +63,21 @@ import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
+import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
+import { captureException } from '@sentry/electron'
 
-const inProgressDownloadsMap: Map<string, DownloadItem> = new Map()
+interface ProgressDownloadingItem {
+  DownloadItem: DownloadItem
+  platformInfo?: PlatformConfig
+  destinationPath: string
+  gameInfo: GameInfo
+  installVersion: string
+  appPlatform: InstalledInfo['platform']
+  channelName: string | undefined
+}
+
+const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
+const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -134,10 +150,10 @@ export async function stop(appName: string): Promise<void> {
 
 export async function pause(appName: string): Promise<void> {
   const dl = inProgressDownloadsMap.get(appName)
-  if (dl === undefined) {
+  if (!dl?.DownloadItem) {
     throw `Tried to pause download for ${appName} that is not in progress!`
   }
-  dl.pause()
+  dl.DownloadItem.pause()
 }
 
 /**
@@ -224,6 +240,7 @@ const installDistributables = async (gamePath: string) => {
 
 function cleanUpDownload(appName: string, directory: string) {
   inProgressDownloadsMap.delete(appName)
+  inProgressExtractionsMap.delete(appName)
   deleteAbortController(appName)
   rmSync(directory, { recursive: true, force: true })
 }
@@ -252,7 +269,11 @@ async function downloadGame(
   directory: string,
   fileName: string,
   platformInfo: PlatformConfig,
-  destinationPath: string
+  destinationPath: string,
+  gameInfo: GameInfo,
+  installVersion: string,
+  appPlatform: InstalledInfo['platform'],
+  channelName?: string
 ): Promise<void> {
   if (await resumeIfPaused(appName)) {
     return
@@ -287,10 +308,12 @@ async function downloadGame(
       diskWriteSpeed: number,
       progress: number
     ) {
-      const eta = calculateEta(
+      const currentProgress = calculateProgress(
         downloadedBytes,
+        Number.parseInt(platformInfo.downloadSize ?? '0'),
         downloadSpeed,
-        Number.parseInt(platformInfo.downloadSize ?? '0')
+        diskWriteSpeed,
+        progress
       )
 
       if (downloadedBytes > 0 && !downloadStarted) {
@@ -309,12 +332,8 @@ async function downloadGame(
         runner: 'hyperplay',
         folder: destinationPath,
         progress: {
-          percent: roundToTenth(progress),
-          diskSpeed: roundToTenth(diskWriteSpeed / 1024 / 1024),
-          downSpeed: roundToTenth(downloadSpeed / 1024 / 1024),
-          bytes: roundToTenth(downloadedBytes / 1024 / 1024),
           folder: destinationPath,
-          eta
+          ...currentProgress
         }
       })
     }
@@ -342,8 +361,34 @@ async function downloadGame(
       onCancel
     )
 
-    inProgressDownloadsMap.set(appName, item)
+    inProgressDownloadsMap.set(appName, {
+      DownloadItem: item,
+      appPlatform,
+      gameInfo,
+      destinationPath,
+      platformInfo,
+      installVersion,
+      channelName
+    })
   })
+}
+
+function calculateProgress(
+  downloadedBytes: number,
+  downloadSize: number,
+  downloadSpeed: number,
+  diskWriteSpeed: number,
+  progress: number
+) {
+  const eta = calculateEta(downloadedBytes, downloadSpeed, downloadSize)
+
+  return {
+    percent: roundToTenth(progress),
+    diskSpeed: roundToTenth(diskWriteSpeed / 1024 / 1024),
+    downSpeed: roundToTenth(downloadSpeed / 1024 / 1024),
+    bytes: roundToTenth(downloadedBytes / 1024 / 1024),
+    eta
+  }
 }
 
 function sanitizeFileName(filename: string) {
@@ -458,18 +503,59 @@ function getReleaseMeta(
   return [releaseMeta, selectedChannel]
 }
 
-async function resumeIfPaused(appName: string): Promise<boolean> {
+async function resumeIfPaused(
+  appName: string
+): Promise<InstallResult | boolean> {
   const isPaused = inProgressDownloadsMap.has(appName)
+
   if (isPaused) {
     const item = inProgressDownloadsMap.get(appName)
-    if (item === undefined) {
+    if (!item?.DownloadItem) {
       return false
     }
-    item.resume()
-    const success = await waitForItemToDownload(item) // inProgressDownloadsMap.get(appName)?.on
-    return success
+
+    item.DownloadItem.resume()
+
+    if (await waitForItemToDownload(item.DownloadItem)) {
+      await extract(appName, {
+        appPlatform: item.appPlatform,
+        gameInfo: item.gameInfo,
+        destinationPath: item.destinationPath,
+        platformInfo: item.platformInfo,
+        installVersion: item.installVersion,
+        channelName: item.channelName
+      })
+
+      return true
+    }
+
+    return false
   }
+
   return isPaused
+}
+
+export async function cancelExtraction(appName: string) {
+  logInfo(
+    `cancelExtraction: Extraction will be canceled and downloaded zip will be removed`,
+    LogPrefix.HyperPlay
+  )
+
+  try {
+    process.noAsar = false
+
+    const extractZipService = inProgressExtractionsMap.get(appName)
+    if (extractZipService) {
+      extractZipService.cancel()
+    }
+  } catch (error: unknown) {
+    logInfo(
+      `cancelExtraction: Error while canceling the operation ${
+        (error as Error).message
+      } `,
+      LogPrefix.HyperPlay
+    )
+  }
 }
 
 export async function install(
@@ -485,6 +571,7 @@ export async function install(
   if (await resumeIfPaused(appName)) {
     return { status: 'done' }
   }
+
   let { directory, fileName } = { directory: '', fileName: '' }
   try {
     const gameInfo = getGameInfo(appName)
@@ -518,10 +605,6 @@ export async function install(
       return { status: 'done' }
     }
 
-    if (!existsSync(dirpath)) {
-      mkdirSync(dirpath, { recursive: true })
-    }
-
     const window = getMainWindow()
     if (!window) return { status: 'error', error: 'Window undefined' }
 
@@ -533,16 +616,6 @@ export async function install(
         status: 'error',
         error: `Platform info not found for ${appName}`
       }
-    }
-
-    logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
-    const zipPathInfo = getZipFileName(appName, platformInfo)
-    directory = zipPathInfo.directory
-    fileName = zipPathInfo.filename
-
-    // download the zip file
-    if (!existsSync(destinationPath)) {
-      mkdirSync(destinationPath, { recursive: true })
     }
 
     // get presigned platform info if code gated
@@ -559,83 +632,66 @@ export async function install(
       platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
     }
 
+    if (!existsSync(dirpath)) {
+      mkdirSync(dirpath, { recursive: true })
+    }
+
+    logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
+    const zipPathInfo = getZipFileName(appName, platformInfo)
+    directory = zipPathInfo.directory
+    fileName = zipPathInfo.filename
+
+    // download the zip file
+    if (!existsSync(destinationPath)) {
+      mkdirSync(destinationPath, { recursive: true })
+    }
+
+    // Reset the download progress
+    window.webContents.send(`progressUpdate-${appName}`, {
+      appName,
+      runner: 'hyperplay',
+      folder: destinationPath,
+      status: 'done',
+      progress: {
+        folder: destinationPath,
+        percent: 0,
+        diskSpeed: 0,
+        downSpeed: 0,
+        bytes: 0,
+        eta: null
+      }
+    })
+
     await downloadGame(
       appName,
       directory,
       fileName,
       platformInfo,
-      destinationPath
+      destinationPath,
+      gameInfo,
+      installVersion,
+      appPlatform,
+      channelName
     )
+
     if (!platformInfo.executable) {
       return {
         status: 'error',
         error: 'Executable not found during install in HyperPlay game manager'
       }
     }
-    let executable = path.join(destinationPath, platformInfo.executable)
 
-    const zipFile = path.join(directory, fileName)
-    logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
-
-    try {
-      window.webContents.send('gameStatusUpdate', {
-        appName,
-        runner: 'hyperplay',
-        folder: destinationPath,
-        status: 'extracting'
-      })
-
-      // disables electron's fs wrapper called when extracting .asar files
-      // which is necessary to extract electron app/game zip files
-      process.noAsar = true
-      if (isWindows) {
-        await extractZip(zipFile, destinationPath)
-        await installDistributables(destinationPath)
-      } else {
-        await extractZip(zipFile, destinationPath)
-      }
-      process.noAsar = false
-
-      if (isMac && executable.endsWith('.app')) {
-        const macAppExecutable = readdirSync(
-          join(executable, 'Contents', 'MacOS')
-        )[0]
-        executable = join(executable, 'Contents', 'MacOS', macAppExecutable)
-      }
-
-      const installedInfo: InstalledInfo = {
-        appName,
-        install_path: destinationPath,
-        executable: executable,
-        install_size: platformInfo.installSize ?? '0',
-        is_dlc: false,
-        version: installVersion,
-        platform: appPlatform,
-        channelName
-      }
-
-      updateInstalledInfo(appName, installedInfo)
-
-      notify({
-        title,
-        body: `Installed`
-      })
-
-      cleanUpDownload(appName, directory)
-
-      sendFrontendMessage('refreshLibrary', 'hyperplay')
-    } catch (error) {
-      logInfo(`Error while extracting game ${error}`, LogPrefix.HyperPlay)
-      window.webContents.send('gameStatusUpdate', {
-        appName,
-        runner: 'hyperplay',
-        folder: destinationPath,
-        status: 'done'
-      })
-      return { status: 'error', error: `${error}` }
-    }
-    return { status: 'done' }
+    return await extract(appName, {
+      appPlatform,
+      gameInfo,
+      destinationPath,
+      platformInfo,
+      installVersion,
+      channelName
+    })
   } catch (error) {
+    process.noAsar = false
+
     logInfo(
       `Error while downloading and extracting game: ${error}`,
       LogPrefix.HyperPlay
@@ -643,11 +699,304 @@ export async function install(
     if (!`${error}`.includes('Download stopped or paused')) {
       callAbortController(appName)
     }
+
     return {
       status: 'error',
       error: `${error}`
     }
   }
+}
+
+interface Extract {
+  platformInfo?: PlatformConfig
+  destinationPath: string
+  gameInfo: GameInfo
+  installVersion: string
+  appPlatform: InstalledInfo['platform']
+  channelName: string | undefined
+}
+
+export async function extract(
+  appName: string,
+  {
+    platformInfo,
+    destinationPath,
+    gameInfo,
+    installVersion,
+    appPlatform,
+    channelName
+  }: Extract
+): Promise<InstallResult> {
+  let { directory, fileName } = { directory: '', fileName: '' }
+  const window = getMainWindow()
+  if (!window) return { status: 'error', error: 'Window undefined' }
+
+  try {
+    if (!platformInfo) {
+      return {
+        status: 'error',
+        error: `Extracting: Platform info not found for ${appName}`
+      }
+    }
+
+    const { title } = gameInfo
+    const zipPathInfo = getZipFileName(appName, platformInfo)
+    directory = zipPathInfo.directory
+    fileName = zipPathInfo.filename
+
+    // download the zip file
+    if (!existsSync(destinationPath)) {
+      mkdirSync(destinationPath, { recursive: true })
+    }
+    // Reset the download progress
+    window.webContents.send(`progressUpdate-${appName}`, {
+      appName,
+      runner: 'hyperplay',
+      folder: destinationPath,
+      status: 'done',
+      progress: {
+        folder: destinationPath,
+        percent: 0,
+        diskSpeed: 0,
+        downSpeed: 0,
+        bytes: 0,
+        eta: null
+      }
+    })
+
+    if (!platformInfo.executable) {
+      return {
+        status: 'error',
+        error: 'Executable not found during install in HyperPlay game manager'
+      }
+    }
+
+    let executable = path.join(destinationPath, platformInfo.executable)
+
+    const zipFile = path.join(directory, fileName)
+    logInfo(`Extracting ${zipFile} to ${destinationPath}`, LogPrefix.HyperPlay)
+
+    // disables electron's fs wrapper called when extracting .asar files
+    // which is necessary to extract electron app/game zip files
+    process.noAsar = true
+
+    sendFrontendMessage('gameStatusUpdate', {
+      appName,
+      status: 'extracting',
+      runner: 'hyperplay',
+      folder: destinationPath
+    })
+
+    window.webContents.send(`progressUpdate-${appName}`, {
+      appName,
+      runner: 'hyperplay',
+      folder: destinationPath,
+      status: 'extracting',
+      progress: {
+        folder: destinationPath,
+        percent: 0,
+        diskSpeed: 0,
+        downSpeed: 0,
+        bytes: 0,
+        eta: null
+      }
+    })
+
+    const extractService = new ExtractZipService(zipFile, destinationPath)
+
+    inProgressExtractionsMap.set(appName, extractService)
+
+    return await new Promise<InstallResult>((resolve) => {
+      extractService.on(
+        'progress',
+        ({
+          processedSizeInBytes,
+          totalSizeInBytes,
+          speedInBytesPerSec,
+          progressPercentage
+        }: ExtractZipProgressResponse) => {
+          logInfo(
+            `Extracting Progress: ${progressPercentage}% Speed: ${speedInBytesPerSec} B/s | Total size ${totalSizeInBytes} and ${processedSizeInBytes}`,
+            LogPrefix.HyperPlay
+          )
+          const currentProgress = calculateProgress(
+            processedSizeInBytes,
+            totalSizeInBytes,
+            speedInBytesPerSec,
+            speedInBytesPerSec,
+            progressPercentage
+          )
+
+          window.webContents.send(`progressUpdate-${appName}`, {
+            appName,
+            runner: 'hyperplay',
+            folder: destinationPath,
+            status: 'extracting',
+            progress: {
+              folder: destinationPath,
+              ...currentProgress
+            }
+          })
+        }
+      )
+      extractService.once(
+        'finished',
+        async ({
+          progressPercentage,
+          totalSizeInBytes,
+          speedInBytesPerSec,
+          processedSizeInBytes
+        }: ExtractZipProgressResponse) => {
+          logInfo(
+            `Extracting End: ${progressPercentage}% Speed: ${speedInBytesPerSec} B/s | Total size ${totalSizeInBytes} and ${processedSizeInBytes}`,
+            LogPrefix.HyperPlay
+          )
+
+          const currentProgress = calculateProgress(
+            processedSizeInBytes,
+            totalSizeInBytes,
+            speedInBytesPerSec,
+            speedInBytesPerSec,
+            progressPercentage
+          )
+
+          window.webContents.send(`progressUpdate-${appName}`, {
+            appName,
+            runner: 'hyperplay',
+            folder: destinationPath,
+            status: 'extracting',
+            progress: {
+              folder: destinationPath,
+              ...currentProgress
+            }
+          })
+
+          window.webContents.send('gameStatusUpdate', {
+            appName,
+            runner: 'hyperplay',
+            folder: destinationPath,
+            status: 'extracting'
+          })
+
+          if (isWindows) {
+            await installDistributables(destinationPath)
+          }
+
+          process.noAsar = false
+
+          if (isMac && executable.endsWith('.app')) {
+            const macAppExecutable = readdirSync(
+              join(executable, 'Contents', 'MacOS')
+            )[0]
+            executable = join(executable, 'Contents', 'MacOS', macAppExecutable)
+          }
+
+          const installedInfo: InstalledInfo = {
+            appName,
+            install_path: destinationPath,
+            executable: executable,
+            install_size: platformInfo?.installSize ?? '0',
+            is_dlc: false,
+            version: installVersion,
+            platform: appPlatform,
+            channelName
+          }
+
+          updateInstalledInfo(appName, installedInfo)
+
+          notify({
+            title,
+            body: `Installed`
+          })
+
+          cleanUpDownload(appName, directory)
+
+          sendFrontendMessage('refreshLibrary', 'hyperplay')
+
+          resolve({
+            status: 'done'
+          })
+        }
+      )
+      extractService.once('error', (error: Error) => {
+        logError(`Extracting Error ${error.message}`, LogPrefix.HyperPlay)
+
+        cancelQueueExtraction()
+        callAbortController(appName)
+
+        cleanUpDownload(appName, directory)
+
+        sendFrontendMessage('refreshLibrary', 'hyperplay')
+
+        resolve({
+          status: 'error'
+        })
+      })
+      extractService.once('canceled', () => {
+        logInfo(
+          `Canceled Extracting: Cancellation completed on ${appName} - Destination ${destinationPath}`,
+          LogPrefix.HyperPlay
+        )
+
+        process.noAsar = false
+
+        cancelQueueExtraction()
+        callAbortController(appName)
+
+        sendFrontendMessage('gameStatusUpdate', {
+          appName,
+          status: 'done',
+          runner: 'hyperplay',
+          folder: destinationPath
+        })
+
+        window.webContents.send(`progressUpdate-${appName}`, {
+          appName,
+          runner: 'hyperplay',
+          folder: destinationPath,
+          status: 'done',
+          progress: {
+            folder: destinationPath,
+            percent: 0,
+            diskSpeed: 0,
+            downSpeed: 0,
+            bytes: 0,
+            eta: null
+          }
+        })
+
+        notify({
+          title,
+          body: 'Installation Stopped'
+        })
+
+        cleanUpDownload(appName, directory)
+
+        sendFrontendMessage('refreshLibrary', 'hyperplay')
+
+        resolve({
+          status: 'abort'
+        })
+      })
+
+      extractService.extract().then()
+    })
+  } catch (error: unknown) {
+    process.noAsar = false
+
+    logInfo(`Error while extracting game ${error}`, LogPrefix.HyperPlay)
+
+    window.webContents.send('gameStatusUpdate', {
+      appName,
+      runner: 'hyperplay',
+      folder: destinationPath,
+      status: 'done'
+    })
+
+    captureException(error)
+  }
+
+  return { status: 'error' }
 }
 
 export function appIsInLibrary(appName: string): boolean {
