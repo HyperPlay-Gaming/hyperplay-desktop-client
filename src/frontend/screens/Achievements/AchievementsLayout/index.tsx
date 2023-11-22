@@ -31,7 +31,7 @@ export default React.memo(function AchievementsLayout({
             <Flex
               direction="column"
               gap="16px"
-              className={`${styles.fullHeight}`}
+              className={styles.statsAndStoresContainer}
             >
               <AchievementsStats />
               <AchievementStores />

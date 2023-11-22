@@ -31,7 +31,7 @@ export const AchievementStores = observer(() => {
   const isSteam = store === 'STEAM'
 
   return (
-    <div className={`${styles.storeCard} ${styles.fullHeight}`}>
+    <div className={`${styles.storeCard}`}>
       <div className={`${styles.storeTitle}`}>My Stores</div>
       <Flex direction="column" gap="4px" className={`${styles.fullHeight}`}>
         <div className={classNames(isSteam ? '' : styles.notActive)}>

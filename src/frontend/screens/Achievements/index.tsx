@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite'
 import AchievementStoreState from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
 
-const pageSize = 12
+const pageSize = 100
 export const achievementsSortOptions = [
   { text: 'Alphabetically (ASC)', value: 'ALPHA_A_TO_Z' },
   { text: 'Alphabetically (DES)', value: 'ALPHA_Z_TO_A' }
