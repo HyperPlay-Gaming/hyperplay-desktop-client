@@ -73,11 +73,11 @@ const WalletDropdown: React.FC = observer(() => {
             ></NavigationMenuItem>
           </>
         )}
-        {showWalletConnectedLinks && (
+        {showMetaMaskExtensionLinks && (
           <Menu.Item
             className={`${styles.menuItem} `}
             id={
-              !showWalletConnectedLinks
+              !showMetaMaskExtensionLinks
                 ? 'topMenuItemWalletDropdown'
                 : undefined
             }
@@ -85,7 +85,7 @@ const WalletDropdown: React.FC = observer(() => {
             <NavLink
               to={'/metamaskPortfolio'}
               id={
-                !showWalletConnectedLinks
+                !showMetaMaskExtensionLinks
                   ? 'topElementWalletDropdown'
                   : undefined
               }
@@ -101,7 +101,7 @@ const WalletDropdown: React.FC = observer(() => {
           onClick={() => onboardingStore.openOnboarding()}
         >
           <div className={`body ${styles.itemContents}`}>
-            {showMetaMaskExtensionLinks
+            {showWalletConnectedLinks
               ? t('hyperplay.changeWallet', `Change wallet`)
               : t('hyperplay.connectWallet', `Connect wallet`)}
           </div>
