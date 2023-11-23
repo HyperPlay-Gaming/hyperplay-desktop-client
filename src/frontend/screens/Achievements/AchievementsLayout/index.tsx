@@ -25,7 +25,7 @@ export default React.memo(function AchievementsLayout({
   return (
     <SettingsContext.Provider value={contextValues}>
       <Background style={{ position: 'absolute' }}></Background>
-      <div className={`contentContainer ${styles.fullHeight}`}>
+      <div className={`contentContainer ${styles.achievementsContainer}`}>
         <Grid className={`${styles.gridItems}`}>
           <Grid.Col span={4}>
             <Flex

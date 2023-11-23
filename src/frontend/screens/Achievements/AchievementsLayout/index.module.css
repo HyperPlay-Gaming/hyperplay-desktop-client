@@ -29,3 +29,8 @@
 .statsAndStoresContainer {
   height: 100%;
 }
+
+.achievementsContainer {
+  flex: 1;
+  max-height: 100%;
+}
