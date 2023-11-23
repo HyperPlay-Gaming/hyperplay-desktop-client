@@ -301,6 +301,10 @@
         },
         "analyticsOff": "Analytics is turned off",
         "analyticsOn": "Analytics is turned on",
+        "browserImport": {
+            "appId": "App Id",
+            "profile": "Profile"
+        },
         "buttons": {
             "agree": "I agree",
             "noThanks": "No Thanks"
@@ -310,6 +314,13 @@
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
         "discordApp": "Discord",
+        "folder": "Folder",
+        "gamecard": {
+            "extracting": "Extracting...",
+            "installed": "Ready to play",
+            "installing": "Downloading...",
+            "paused": "Paused"
+        },
         "misc": "Never",
         "onboarding": {
             "analytics": {

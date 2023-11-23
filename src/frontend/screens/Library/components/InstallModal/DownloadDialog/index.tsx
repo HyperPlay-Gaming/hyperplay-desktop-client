@@ -41,6 +41,7 @@ import { configStore } from 'frontend/helpers/electronStores'
 import { Button } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
+import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 
 interface Props {
   backdropClick: () => void
@@ -159,6 +160,12 @@ export default function DownloadDialog({
 
   const { i18n, t } = useTranslation('gamepage')
   const { t: tr } = useTranslation()
+
+  const uncompressedSize = useEstimatedUncompressedSize(
+    platformToInstall,
+    gameInstallInfo?.manifest?.disk_size || 0,
+    gameInstallInfo?.manifest?.download_size || 0
+  )
 
   const haveSDL = sdls.length > 0
 
@@ -304,17 +311,15 @@ export default function DownloadDialog({
         installPath
       )
       if (gameInstallInfo?.manifest?.disk_size) {
-        let notEnoughDiskSpace = free < gameInstallInfo.manifest.disk_size
-        let spaceLeftAfter = size(
-          free - Number(gameInstallInfo.manifest.disk_size)
-        )
+        let notEnoughDiskSpace = free < uncompressedSize
+        let spaceLeftAfter = size(free - Number(uncompressedSize))
         if (previousProgress.folder === installPath) {
           const progress = 100 - getProgress(previousProgress)
           notEnoughDiskSpace =
-            free < (progress / 100) * Number(gameInstallInfo.manifest.disk_size)
+            free < (progress / 100) * Number(uncompressedSize)
 
           spaceLeftAfter = size(
-            free - (progress / 100) * Number(gameInstallInfo.manifest.disk_size)
+            free - (progress / 100) * Number(uncompressedSize)
           )
         }
 
@@ -327,7 +332,7 @@ export default function DownloadDialog({
       }
     }
     getSpace()
-  }, [installPath, gameInstallInfo?.manifest?.disk_size])
+  }, [installPath, uncompressedSize, gameInstallInfo?.manifest?.disk_size])
 
   const haveDLCs: boolean =
     gameInstallInfo?.game?.owned_dlc !== undefined &&
@@ -349,9 +354,7 @@ export default function DownloadDialog({
     return ''
   }
 
-  const installSize =
-    gameInstallInfo?.manifest?.disk_size !== undefined &&
-    size(Number(gameInstallInfo?.manifest?.disk_size))
+  const installSize = uncompressedSize && size(uncompressedSize)
 
   const getLanguageName = useMemo(() => {
     return (language: string) => {

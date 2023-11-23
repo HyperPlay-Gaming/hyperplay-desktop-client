@@ -14,7 +14,6 @@ import {
   ProgressInfo
 } from 'common/types'
 import axios from 'axios'
-import yauzl from 'yauzl'
 import download from 'backend/utils/downloadFile/download_file'
 import { File, Progress } from 'backend/utils/downloadFile/types'
 
@@ -34,14 +33,7 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import {
-  appendFileSync,
-  existsSync,
-  rmSync,
-  mkdirSync,
-  createWriteStream,
-  rm
-} from 'graceful-fs'
+import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 import si from 'systeminformation'
@@ -1361,56 +1353,6 @@ function removeFolder(path: string, folderName: string) {
     }, 2000)
   }
   return
-}
-
-export async function extractZip(zipFile: string, destinationPath: string) {
-  return new Promise<void>((resolve, reject) => {
-    yauzl.open(zipFile, { lazyEntries: true }, (err, zipfile) => {
-      if (err) {
-        reject(err)
-        return
-      }
-
-      zipfile.readEntry()
-      zipfile.on('entry', (entry) => {
-        if (/\/$/.test(entry.fileName)) {
-          // Directory file names end with '/'
-          mkdirSync(join(destinationPath, entry.fileName), { recursive: true })
-          zipfile.readEntry()
-        } else {
-          // Ensure parent directory exists
-          mkdirSync(
-            join(
-              destinationPath,
-              entry.fileName.split('/').slice(0, -1).join('/')
-            ),
-            { recursive: true }
-          )
-
-          // Extract file
-          zipfile.openReadStream(entry, (err, readStream) => {
-            if (err) {
-              reject(err)
-              return
-            }
-
-            const writeStream = createWriteStream(
-              join(destinationPath, entry.fileName)
-            )
-            readStream.pipe(writeStream)
-            writeStream.on('close', () => {
-              zipfile.readEntry()
-            })
-          })
-        }
-      })
-
-      zipfile.on('end', () => {
-        resolve()
-        rm(zipFile, console.log)
-      })
-    })
-  })
 }
 
 export function calculateEta(

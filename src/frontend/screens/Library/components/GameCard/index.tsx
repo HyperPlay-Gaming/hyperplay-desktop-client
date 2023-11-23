@@ -23,6 +23,7 @@ import {
   SettingsButtons
 } from '@hyperplay/ui'
 import classNames from 'classnames'
+import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
 import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
 
@@ -43,7 +44,9 @@ const GameCard = ({
   favorited,
   gameInfo: gameInfoFromProps
 }: Card) => {
-  const [gameInfo, setGameInfo] = useState<GameInfo>(gameInfoFromProps)
+  const [gameInfo, setGameInfo] = useState<GameInfo>(
+    JSON.parse(JSON.stringify(gameInfoFromProps))
+  )
   const [showUninstallModal, setShowUninstallModal] = useState(false)
   const [isLaunching, setIsLaunching] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
@@ -72,7 +75,11 @@ const GameCard = ({
     ...gameInstallInfo
   }
 
-  const { status, folder } = hasStatus(appName, gameInfo, size)
+  const { status = '', folder } = hasStatus(appName, gameInfo, size)
+  const { statusText: downloadStatusText } = useGetDownloadStatusText(
+    appName,
+    gameInfo
+  )
 
   useEffect(() => {
     setIsLaunching(false)
@@ -87,11 +94,6 @@ const GameCard = ({
     updateGameInfo()
   }, [status])
 
-  async function handleUpdate() {
-    if (gameInfo.runner !== 'sideload')
-      updateGame({ appName, runner, gameInfo })
-  }
-
   const {
     isInstalling,
     notSupportedGame,
@@ -100,7 +102,8 @@ const GameCard = ({
     isPlaying,
     notAvailable,
     isUpdating,
-    isPaused
+    isPaused,
+    isExtracting
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {
@@ -115,6 +118,9 @@ const GameCard = ({
     }
     if (isUninstalling) {
       return 'UNINSTALLING'
+    }
+    if (isExtracting) {
+      return 'EXTRACTING'
     }
     if (isQueued) {
       return 'QUEUED'
@@ -140,21 +146,7 @@ const GameCard = ({
     return 'NOT_INSTALLED'
   }
 
-  const getMessage = (): string | undefined => {
-    if (status === 'extracting') {
-      return t('hyperplay.gamecard.extracting', 'Extracting...')
-    }
-    if (isPaused) {
-      return t('hyperplay.gamecard.paused', 'Paused')
-    }
-    if (isInstalling) {
-      return t('hyperplay.gamecard.installing', 'Downloading...')
-    }
-    return undefined
-  }
-
   const isHiddenGame = libraryState.isGameHidden(appName)
-
   const isBrowserGame = installPlatform === 'Browser'
 
   const onUninstallClick = function () {
@@ -206,7 +198,7 @@ const GameCard = ({
     {
       // update
       label: t('button.update', 'Update'),
-      onClick: handleClickStopBubbling(async () => handleUpdate()),
+      onClick: handleClickStopBubbling(async () => updateGame(gameInfo)),
       show: hasUpdate && !isUpdating && !isQueued
     },
     {
@@ -225,9 +217,8 @@ const GameCard = ({
       // open the game page
       label: t('button.details', 'Details'),
       onClick: handleClickStopBubbling(() => {
-        const gameInfoDeepClone = JSON.parse(JSON.stringify(gameInfo))
         navigate(`/gamepage/${runner}/${appName}`, {
-          state: { gameInfo: gameInfoDeepClone }
+          state: { gameInfo }
         })
       }),
       show: true
@@ -303,6 +294,7 @@ const GameCard = ({
           installPath={folder}
           gameInfo={gameInfo}
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
+          status={status}
         />
       ) : null}
       {showUninstallModal && (
@@ -315,7 +307,7 @@ const GameCard = ({
       )}
       <Link
         to={`/gamepage/${runner}/${appName}`}
-        state={{ gameInfo: JSON.parse(JSON.stringify(gameInfo)) }}
+        state={{ gameInfo }}
         className={classNames({
           gamepad: activeController
         })}
@@ -361,9 +353,11 @@ const GameCard = ({
             () => setShowSettings(!showSettings),
             true
           )}
-          onUpdateClick={handleClickStopBubbling(async () => handleUpdate())}
+          onUpdateClick={handleClickStopBubbling(async () =>
+            updateGame(gameInfo)
+          )}
           progress={progress}
-          message={getMessage()}
+          message={downloadStatusText}
           actionDisabled={isLaunching}
           alwaysShowInColor={allTilesInColor}
           store={runner}
@@ -373,7 +367,7 @@ const GameCard = ({
   )
 
   async function mainAction(runner: Runner) {
-    if (isInstalling || isPaused) {
+    if (isInstalling || isExtracting || isPaused) {
       return setShowStopInstallModal(true)
     }
 

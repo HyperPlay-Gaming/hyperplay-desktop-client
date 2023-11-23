@@ -29,6 +29,7 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
 import { ENABLE_AMAZON_STORE } from './constants'
 
@@ -111,8 +112,10 @@ function App() {
         <OnboardingStoreController />
         {onboardingStore.isOnboardingOpen && (
           <Onboarding
-            disableOnboarding={() => {
-              window.api.trackEvent({ event: 'Onboarding Skipped' })
+            disableOnboarding={(disableReason: WalletOnboardCloseReason) => {
+              if (disableReason === 'skipped') {
+                window.api.trackEvent({ event: 'Onboarding Skipped' })
+              }
               onboardingStore.closeOnboarding()
             }}
           />
