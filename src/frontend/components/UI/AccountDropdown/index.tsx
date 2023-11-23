@@ -1,6 +1,6 @@
 import { Menu } from '@mantine/core'
 import React from 'react'
-import walletStore from 'frontend/state/WalletState'
+import walletState from 'frontend/state/WalletState'
 import { observer } from 'mobx-react-lite'
 
 import Wallet from 'frontend/components/UI/Wallet'
@@ -8,24 +8,25 @@ import styles from './index.module.scss'
 import { NavLink } from 'react-router-dom'
 import onboardingStore from 'frontend/store/OnboardingStore'
 import { useTranslation } from 'react-i18next'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 function NavigationMenuItem({
   label,
   to,
-  showWalletLinks
+  showMetaMaskExtensionLinks
 }: {
   label: string
   to: string
-  showWalletLinks: boolean
+  showMetaMaskExtensionLinks: boolean
 }) {
   return (
     <Menu.Item
       className={styles.menuItem}
-      id={showWalletLinks ? 'topMenuItemWalletDropdown' : undefined}
+      id={showMetaMaskExtensionLinks ? 'topMenuItemWalletDropdown' : undefined}
     >
       <NavLink
         to={to}
-        id={showWalletLinks ? 'topElementWalletDropdown' : undefined}
+        id={showMetaMaskExtensionLinks ? 'topElementWalletDropdown' : undefined}
       >
         <div className={`body ${styles.itemContents}`}>{label}</div>
       </NavLink>
@@ -35,7 +36,10 @@ function NavigationMenuItem({
 
 const WalletDropdown: React.FC = observer(() => {
   const { t } = useTranslation()
-  const showWalletLinks = walletStore.isConnected
+  const showWalletConnectedLinks = walletState.isConnected
+  const showMetaMaskExtensionLinks =
+    walletState.isConnected &&
+    walletState.provider === PROVIDERS.METAMASK_EXTENSION
 
   return (
     <Menu position="bottom" trigger="hover">
@@ -52,31 +56,39 @@ const WalletDropdown: React.FC = observer(() => {
         <Menu.Label className={styles.menuLabel}>
           {t('hyperplay.currentWallet', `Current wallet`)}
         </Menu.Label>
-        {showWalletLinks && (
+        {showMetaMaskExtensionLinks && (
           <>
             <NavigationMenuItem
               label={t('hyperplay.viewFullscreen', `View fullscreen`)}
               to={'/metamaskHome'}
-              showWalletLinks={showWalletLinks}
+              showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
             ></NavigationMenuItem>
             <NavigationMenuItem
               label={t('hyperplay.viewItem', {
                 defaultValue: 'View {{item}}',
                 item: 'Snaps'
               })}
-              showWalletLinks={showWalletLinks}
+              showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
               to={'/metamaskSnaps'}
             ></NavigationMenuItem>
           </>
         )}
-        {showWalletLinks && (
+        {showWalletConnectedLinks && (
           <Menu.Item
             className={`${styles.menuItem} `}
-            id={!showWalletLinks ? 'topMenuItemWalletDropdown' : undefined}
+            id={
+              !showWalletConnectedLinks
+                ? 'topMenuItemWalletDropdown'
+                : undefined
+            }
           >
             <NavLink
               to={'/metamaskPortfolio'}
-              id={!showWalletLinks ? 'topElementWalletDropdown' : undefined}
+              id={
+                !showWalletConnectedLinks
+                  ? 'topElementWalletDropdown'
+                  : undefined
+              }
             >
               <div className={`body ${styles.itemContents}`}>
                 {t('hyperplay.viewPortfolio', `View portfolio`)}
@@ -89,7 +101,7 @@ const WalletDropdown: React.FC = observer(() => {
           onClick={() => onboardingStore.openOnboarding()}
         >
           <div className={`body ${styles.itemContents}`}>
-            {showWalletLinks
+            {showMetaMaskExtensionLinks
               ? t('hyperplay.changeWallet', `Change wallet`)
               : t('hyperplay.connectWallet', `Connect wallet`)}
           </div>
