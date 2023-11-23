@@ -1,6 +1,6 @@
 import { GameAchievements } from '@hyperplay/ui'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { achievementsSortOptions } from '..'
 import walletState from 'frontend/state/WalletState'
 import { useTranslation } from 'react-i18next'
@@ -32,6 +32,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const numFreeMints = AchievementState.numFreeMints
   const individualAchievements = AchievementState.individualAchievements
   const summaryAchievement = AchievementState.summaryAchievements.data[0]
+  const navigate = useNavigate()
 
   useEffect(() => {
     AchievementState.getSummaryAchievements({
@@ -48,24 +49,8 @@ export default observer(function GameAchievementDetails(): JSX.Element {
     })
   }, [])
 
-  const handleNextPage = () => {
-    const nextPage = individualAchievements.currentPage + 1
-    AchievementState.getIndividualAchievements({
-      gameId: id as string,
-      page: nextPage,
-      pageSize,
-      sort: selectedSort.value
-    })
-  }
-
   const handlePrevPage = () => {
-    const prevPage = individualAchievements.currentPage - 1
-    AchievementState.getIndividualAchievements({
-      gameId: id as string,
-      page: prevPage,
-      pageSize,
-      sort: selectedSort.value
-    })
+    navigate('/achievements')
   }
 
   const isDisabled = isLoading || !walletState.isConnected
@@ -115,7 +100,6 @@ export default observer(function GameAchievementDetails(): JSX.Element {
       paginationProps={{
         currentPage: individualAchievements.currentPage,
         totalPages: individualAchievements.totalPages,
-        handleNextPage,
         handlePrevPage
       }}
       mintButtonProps={{
