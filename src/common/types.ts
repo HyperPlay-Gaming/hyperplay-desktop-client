@@ -31,6 +31,7 @@ declare module '@valist/sdk/dist/typesApi' {
     license_config: {
       id: number
       access_codes: boolean
+      tokens: boolean
     }
   }
 }
@@ -521,22 +522,22 @@ interface GamepadActionArgsWithMetadata {
 
 interface GamepadActionArgsWithoutMetadata {
   action:
-    | 'padUp'
-    | 'padDown'
-    | 'padLeft'
-    | 'padRight'
-    | 'leftStickUp'
-    | 'leftStickDown'
-    | 'leftStickLeft'
-    | 'leftStickRight'
-    | 'rightStickUp'
-    | 'rightStickDown'
-    | 'rightStickLeft'
-    | 'rightStickRight'
-    | 'mainAction'
-    | 'back'
-    | 'altAction'
-    | 'esc'
+  | 'padUp'
+  | 'padDown'
+  | 'padLeft'
+  | 'padRight'
+  | 'leftStickUp'
+  | 'leftStickDown'
+  | 'leftStickLeft'
+  | 'leftStickRight'
+  | 'rightStickUp'
+  | 'rightStickDown'
+  | 'rightStickLeft'
+  | 'rightStickRight'
+  | 'mainAction'
+  | 'back'
+  | 'altAction'
+  | 'esc'
   metadata?: undefined
 }
 
