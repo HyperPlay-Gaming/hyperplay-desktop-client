@@ -13,6 +13,7 @@ const MetaMaskPortfolio = function () {
           className={MetaMaskPortfolioStyles.homeWebview}
           src={`https://portfolio.metamask.io/${page}`}
           allowpopups={trueAsStr}
+          partition={'persist:InPageWindowEthereumExternalWallet'}
         />
       </div>
     </>

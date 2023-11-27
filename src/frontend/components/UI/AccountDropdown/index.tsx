@@ -73,11 +73,11 @@ const WalletDropdown: React.FC = observer(() => {
             ></NavigationMenuItem>
           </>
         )}
-        {showMetaMaskExtensionLinks && (
+        {showWalletConnectedLinks && (
           <Menu.Item
             className={`${styles.menuItem} `}
             id={
-              !showMetaMaskExtensionLinks
+              !showWalletConnectedLinks
                 ? 'topMenuItemWalletDropdown'
                 : undefined
             }
@@ -85,7 +85,7 @@ const WalletDropdown: React.FC = observer(() => {
             <NavLink
               to={'/metamaskPortfolio'}
               id={
-                !showMetaMaskExtensionLinks
+                !showWalletConnectedLinks
                   ? 'topElementWalletDropdown'
                   : undefined
               }
