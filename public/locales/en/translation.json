@@ -314,6 +314,12 @@
         "currentWallet": "Current wallet",
         "discordApp": "Discord",
         "folder": "Folder",
+        "gamecard": {
+            "extracting": "Extracting...",
+            "installed": "Ready to play",
+            "installing": "Downloading...",
+            "paused": "Paused"
+        },
         "misc": "Never",
         "onboarding": {
             "analytics": {

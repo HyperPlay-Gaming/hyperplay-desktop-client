@@ -132,6 +132,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   openGameInEpicStore: (url: string) => void
   resumeCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
+  cancelExtraction: (appName: string) => void
   copyWalletConnectBaseURIToClipboard: () => void
   focusMainWindow: () => void
 }

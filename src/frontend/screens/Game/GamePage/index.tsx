@@ -64,6 +64,7 @@ import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
 import DMQueueState from 'frontend/state/DMQueueState'
+import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -139,6 +140,12 @@ export default observer(function GamePage(): JSX.Element | null {
   const backRoute = location.state?.fromDM ? '/download-manager' : '/library'
 
   const storage: Storage = window.localStorage
+
+  const uncompressedSize = useEstimatedUncompressedSize(
+    platform,
+    gameInstallInfo?.manifest?.disk_size || 0,
+    gameInstallInfo?.manifest?.download_size || 0
+  )
 
   // Track the screen view once each time the appName, gameInfo or runner changes
   useEffect(() => {
@@ -304,9 +311,8 @@ export default observer(function GamePage(): JSX.Element | null {
     const downloadSize =
       gameInstallInfo?.manifest?.download_size &&
       size(Number(gameInstallInfo?.manifest?.download_size))
-    const installSize =
-      gameInstallInfo?.manifest?.disk_size &&
-      size(Number(gameInstallInfo?.manifest?.disk_size))
+    const installSize = uncompressedSize && size(uncompressedSize)
+
     const launchOptions = gameInstallInfo?.game?.launch_options || []
 
     const isMac = ['osx', 'Mac', 'darwin_amd64', 'darwin_arm64']
@@ -358,6 +364,7 @@ export default observer(function GamePage(): JSX.Element | null {
             progress={progress}
             folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
             gameInfo={gameInfo}
+            status={status}
           />
         ) : null}
         {gameInfo.runner !== 'sideload' && showModal.show && (
@@ -618,8 +625,7 @@ export default observer(function GamePage(): JSX.Element | null {
                       isReparing ||
                       isMoving ||
                       isUninstalling ||
-                      notSupportedGame ||
-                      isExtracting
+                      notSupportedGame
                     }
                     autoFocus={true}
                     type={getButtonClass(is_installed)}
@@ -772,10 +778,6 @@ export default observer(function GamePage(): JSX.Element | null {
       return `${t('status.moving', 'Moving Installation, please wait')} ...`
     }
 
-    if (isExtracting) {
-      return `${t('status.extracting', 'Extracting files')}...`
-    }
-
     const currentProgress =
       getProgress(progress) >= 99
         ? ''
@@ -795,6 +797,10 @@ export default observer(function GamePage(): JSX.Element | null {
         return `${t('status.reparing')}: ${percent} [${bytes}]`
       }
       return `${t('status.updating')} ${currentProgress}`
+    }
+
+    if (isExtracting) {
+      return `${t('status.extracting.progress')} ${currentProgress}`
     }
 
     if (!isUpdating && isInstalling) {
@@ -853,7 +859,7 @@ export default observer(function GamePage(): JSX.Element | null {
       return t('submenu.settings')
     }
     if (isExtracting) {
-      return t('status.extracting', 'Extracting files')
+      return t('status.extracting.cancel', 'Cancel Extraction')
     }
     if (isInstalling || isPreparing) {
       return t('button.queue.cancel', 'Cancel Download')
@@ -904,6 +910,11 @@ export default observer(function GamePage(): JSX.Element | null {
     if (isInstalling) {
       setShowStopInstallModal(true)
       return
+    }
+
+    if (isExtracting) {
+      storage.removeItem(appName)
+      return window.api.cancelExtraction(appName)
     }
 
     // open install dialog
