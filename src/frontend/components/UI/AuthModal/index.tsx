@@ -5,9 +5,9 @@ import { WebviewTag } from 'electron'
 import { observer } from 'mobx-react-lite'
 import authState from '../../../state/authState'
 import { ethers } from 'ethers'
-import extensionStore from '../../../store/ExtensionStore'
-import onboardingStore from '../../../store/OnboardingStore'
-import walletStore from '../../../store/WalletStore'
+import extensionState from '../../../state/ExtensionState'
+import onboardingState from '../../../store/OnboardingStore'
+import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
 
 const url = `${DEV_PORTAL_URL}/signin`
@@ -33,7 +33,7 @@ const AuthModal = () => {
 
     if (currentProvider === 'Unconnected') {
       window.api.openAuthModalIfAppReloads()
-      onboardingStore.openOnboarding()
+      onboardingState.openOnboarding()
       authState.setPendingSignatureRequest(true)
       return
     }
@@ -48,7 +48,7 @@ const AuthModal = () => {
       // the connection flow after the user unlocks metamask
       if (isTooManyRequestsError(String(e))) {
         authState.setPendingSignatureRequest(true)
-        extensionStore.setIsPopupOpen(true)
+        extensionState.isPopupOpen = true
       }
     }
   }
@@ -99,10 +99,10 @@ const AuthModal = () => {
   }, [])
 
   useEffect(() => {
-    if (walletStore.isConnected && authState.hasPendingSignatureRequest) {
+    if (walletState.isConnected && authState.hasPendingSignatureRequest) {
       sendRetryConnectionMessage()
     }
-  }, [walletStore.isConnected, authState.hasPendingSignatureRequest])
+  }, [walletState.isConnected, authState.hasPendingSignatureRequest])
 
   return (
     <ModalAnimation
