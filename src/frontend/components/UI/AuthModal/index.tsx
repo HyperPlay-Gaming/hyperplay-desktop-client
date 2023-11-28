@@ -85,7 +85,6 @@ const AuthModal = () => {
     })
 
     const oAuthCompletedCleanup = window.api.handleOAuthCompleted(() => {
-      alert('oauth connection completed :D')
       authState.setSignedIn()
       authState.closeSignInModal()
     })
@@ -97,6 +96,17 @@ const AuthModal = () => {
       webview.removeEventListener('ipc-message', handleIpcMessage)
     }
   }, [])
+
+  /**
+   * Without reload, user gets stuck on email verified page even after
+   * auth modal close and reopen.
+   */
+  useEffect(() => {
+    if (!authState.isSignInModalOpen) {
+      return
+    }
+    webviewRef.current?.reload()
+  }, [authState.isSignInModalOpen])
 
   useEffect(() => {
     if (walletState.isConnected && authState.hasPendingSignatureRequest) {
