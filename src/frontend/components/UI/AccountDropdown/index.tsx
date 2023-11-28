@@ -6,6 +6,8 @@ import { NavLink } from 'react-router-dom'
 import onboardingStore from 'frontend/store/OnboardingStore'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
+import authState from 'frontend/state/authState'
+import { observer } from 'mobx-react-lite'
 
 function NavigationMenuItem({ label, to }: { label: string; to: string }) {
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
@@ -32,7 +34,7 @@ function NavigationMenuItem({ label, to }: { label: string; to: string }) {
   )
 }
 
-export default function AccountDropdown() {
+function AccountDropdown() {
   const { t } = useTranslation()
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   return (
@@ -87,7 +89,7 @@ export default function AccountDropdown() {
           </NavLink>
         </Menu.Item>
         <Menu.Item
-          className={`${styles.menuItem} `}
+          className={styles.menuItem}
           onClick={() => onboardingStore.openOnboarding()}
         >
           <div className={`body ${styles.itemContents}`}>
@@ -97,14 +99,27 @@ export default function AccountDropdown() {
         <Menu.Label className={styles.menuLabel}>
           Epic/GoG {t('accounts', `accounts`)}
         </Menu.Label>
-        <Menu.Item className={`${styles.menuItem} `}>
+        <Menu.Item className={styles.menuItem}>
           <NavLink to={'/login'}>
             <div className={`body ${styles.itemContents}`}>
-              {t('userselector.manageaccounts', `Manage accounts`)}
+              {t('userselector.manageStore', `Manage stores`)}
             </div>
           </NavLink>
+        </Menu.Item>
+        <Menu.Label className={styles.menuLabel}>
+          HyperPlay {t('accounts', `accounts`)}
+        </Menu.Label>
+        <Menu.Item
+          onClick={() => authState.openSignInModal()}
+          className={styles.menuItem}
+        >
+          <div className={`body ${styles.itemContents}`}>
+            {t('userselector.manageaccounts', `Manage accounts`)}
+          </div>
         </Menu.Item>
       </Menu.Dropdown>
     </Menu>
   )
 }
+
+export default observer(AccountDropdown)
