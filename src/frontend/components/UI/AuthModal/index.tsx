@@ -63,7 +63,6 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
-          alert('wallet connection completed :D')
           authState.setSignedIn()
           authState.closeSignInModal()
           break
@@ -83,7 +82,6 @@ const AuthModal = () => {
 
     const qaModeListenerCleanup = window.api.handleQaModeActivated(() => {
       authState.activateQaMode()
-      authState.openSignInModal()
     })
 
     const oAuthCompletedCleanup = window.api.handleOAuthCompleted(() => {
