@@ -162,6 +162,8 @@ export default React.memo(function InstallModal({
   const channelRequiresAccessCode =
     !!selectedChannel?.license_config.access_codes
 
+  const channelRequiresToken = !!selectedChannel?.license_config.tokens
+
   useEffect(() => {
     async function validateAccessCode() {
       if (selectedChannel?.channel_id !== undefined) {
@@ -229,6 +231,8 @@ export default React.memo(function InstallModal({
             channelNameToInstall={channelNameToInstall}
             accessCode={accessCode}
             enableCTAButton={enableCTAButton}
+            requiresToken={channelRequiresToken}
+            requiresAccessCode={channelRequiresAccessCode}
           >
             <PlatformSelection
               disabled={disabledPlatformSelection}

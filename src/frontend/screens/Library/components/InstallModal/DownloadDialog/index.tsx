@@ -38,10 +38,14 @@ import React, {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { configStore } from 'frontend/helpers/electronStores'
-import { Button } from '@hyperplay/ui'
+import { AlertCard, Button } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
+import { ethers } from 'ethers'
+import { valistBaseApiUrlv1 } from 'common/constants'
+import axios from 'axios'
+import { SiweMessage } from 'siwe'
 
 interface Props {
   backdropClick: () => void
@@ -57,6 +61,8 @@ interface Props {
   channelNameToInstall: string
   accessCode: string
   enableCTAButton: boolean
+  requiresAccessCode: boolean
+  requiresToken: boolean
 }
 
 type DiskSpaceInfo = {
@@ -115,13 +121,17 @@ export default function DownloadDialog({
   crossoverBottle,
   channelNameToInstall,
   accessCode,
-  enableCTAButton
+  enableCTAButton,
+  // requiresAccessCode,
+  requiresToken
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
   ) as InstallProgress
   const { libraryStatus, platform, showDialogModal } =
     useContext(ContextProvider)
+
+  console.log({ requiresToken })
 
   const isWin = platform === 'win32'
 
@@ -378,6 +388,10 @@ export default function DownloadDialog({
   const title = gameInfo?.title
 
   function getInstallLabel() {
+    if (requiresToken) {
+      return 'Sign and Install'
+    }
+
     if (installPath) {
       if (notEnoughDiskSpace) {
         return t('button.force-innstall', 'Force Install')
@@ -394,7 +408,9 @@ export default function DownloadDialog({
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
 
-  const readyToInstall = isWebGame || nativeGameIsReadyToInstall
+  const readyToInstall =
+    isWebGame || nativeGameIsReadyToInstall || requiresToken
+  console.log({ readyToInstall })
 
   const showRemainingProgress =
     (runner === 'hyperplay' && previousProgress.percent) ||
@@ -420,6 +436,16 @@ export default function DownloadDialog({
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
       <DialogContent>
+        {requiresToken ? (
+          <AlertCard
+            title={
+              'Please purchase to proceed or ensure that NFT is in the current wallet.'
+            }
+            message={''}
+            actionText={'Buy NFT'}
+            variant={'warning'}
+          />
+        ) : null}
         {showInstallandDownloadSizes ? (
           <div className="InstallModal__sizes">
             <div className="InstallModal__size">
@@ -609,7 +635,9 @@ export default function DownloadDialog({
         <Button
           type="secondary"
           size="medium"
-          onClick={async () => handleInstall()}
+          onClick={
+            requiresToken ? signWithMetamask : async () => handleInstall()
+          }
           disabled={!readyToInstall || !enableCTAButton}
         >
           {!readyToInstall && (
@@ -620,4 +648,49 @@ export default function DownloadDialog({
       </DialogFooter>
     </>
   )
+}
+
+async function signWithMetamask() {
+  console.log('Hello world')
+  if (!window.ethereum) return
+  const provider = new ethers.BrowserProvider(window.ethereum)
+  const signer = await provider.getSigner()
+  const address = await signer.getAddress()
+
+  const domain = window.location.host
+  const origin = window.location.origin
+
+  const statementRes = await axios.get(
+    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
+  )
+  const statement = String(statementRes?.data)
+
+  const siweMessage = new SiweMessage({
+    domain,
+    address,
+    statement,
+    uri: origin,
+    version: '1',
+    chainId: 1
+  })
+  const message = siweMessage.prepareMessage()
+  const signature = await signer.signMessage(message)
+
+  let validateRes
+  try {
+    validateRes = await axios.post(
+      valistBaseApiUrlv1 + 'license_contracts/validate',
+      {
+        message,
+        signature,
+        address,
+        channel_id: 1
+      }
+    )
+  } catch (err) {
+    alert(err)
+  }
+  const data = validateRes?.data
+  alert('response: ' + JSON.stringify(data))
+  return data
 }
