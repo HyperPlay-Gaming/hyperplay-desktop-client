@@ -58,12 +58,16 @@ class OnboardingStore {
     context: ContextType,
     defaultProvider?: PROVIDERS
   ) {
-    when(
-      () => ExtensionHandlerState.ethereumListenersBound,
-      () => {
-        this.bootstrapOnboarding(context, defaultProvider)
-      }
-    )
+    if (defaultProvider === PROVIDERS.METAMASK_EXTENSION) {
+      when(
+        () => ExtensionHandlerState.ethereumListenersBound,
+        () => {
+          this.bootstrapOnboarding(context, defaultProvider)
+        }
+      )
+    } else {
+      this.bootstrapOnboarding(context, defaultProvider)
+    }
   }
 }
 
