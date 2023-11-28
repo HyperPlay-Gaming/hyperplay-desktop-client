@@ -6,6 +6,7 @@ class AuthState {
   private signInModalOpen = false
   private signedIn = false
   private pendingSignatureRequest = false
+  authToken = ''
 
   constructor() {
     makeAutoObservable(this)

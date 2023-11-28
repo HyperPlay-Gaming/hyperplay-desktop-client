@@ -17,7 +17,7 @@ import { Runner } from 'common/types'
 import './index.css'
 import LoginWarning from '../Login/components/LoginWarning'
 import { NileLoginData } from 'common/types/nile'
-import authStore from 'frontend/store/AuthStore'
+import authState from 'frontend/state/authState'
 import { observer } from 'mobx-react-lite'
 import {
   EPIC_LOGIN_URL,
@@ -65,7 +65,7 @@ function WebView() {
 
   const hyperplayStore =
     HYPERPLAY_STORE_URL +
-    (authStore.authToken !== '' ? '&qamode=' + authStore.authToken : '')
+    (authState.authToken !== '' ? '&qamode=' + authState.authToken : '')
 
   const epicStore = `${EPIC_STORE_URL}/${lang}/`
   const gogEmbedRegExp = new RegExp('https://embed.gog.com/on_login_success?')
