@@ -38,7 +38,7 @@ function AccountDropdown() {
   const { t } = useTranslation()
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   return (
-    <Menu position="bottom" trigger="hover">
+    <Menu position="bottom" trigger="hover" zIndex={100001}>
       <Menu.Target>
         <div>
           <Wallet
