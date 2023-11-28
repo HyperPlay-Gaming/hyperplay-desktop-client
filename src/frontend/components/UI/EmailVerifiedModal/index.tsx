@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { EmailVerified, ModalAnimation } from '@hyperplay/ui'
+import authState from 'frontend/state/authState'
 
 const EmailVerifiedModal = () => {
   const [open, setOpen] = useState(false)
-  const close = () => setOpen(false)
+  const close = () => {
+    setOpen(false)
+    authState.closeSignInModal()
+  }
 
   useEffect(() => {
     const emailConfirmedCleanup = window.api.handleEmailConfirmed(() => {
