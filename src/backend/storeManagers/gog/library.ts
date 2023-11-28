@@ -191,7 +191,13 @@ export async function refresh(): Promise<ExecResult> {
       ).catch(() => ({
         data: null
       }))
-      const product = await getProductApi(game.external_id).catch(() => null)
+
+      const product = await getProductApi(
+        game.external_id,
+        [],
+        credentials.access_token
+      ).catch(() => null)
+
       if (!data) {
         await new Promise((resolve) => setTimeout(resolve, 2000))
         retries -= 1
@@ -623,7 +629,14 @@ export async function gogToUnifiedInfo(
   info: GamesDBData | undefined,
   galaxyProductInfo: ProductsEndpointData | undefined
 ): Promise<GameInfo> {
-  if (!info || info.type !== 'game' || !info.game.visible_in_library) {
+  if (
+    !info ||
+    info.type === 'dlc' ||
+    !info.game.visible_in_library ||
+    (galaxyProductInfo &&
+      !galaxyProductInfo.is_installable &&
+      galaxyProductInfo.game_type !== 'game')
+  ) {
     // @ts-expect-error TODO: Handle this somehow
     return {}
   }
@@ -667,6 +680,7 @@ export async function gogToUnifiedInfo(
 
   return object
 }
+
 /**
  * Fetches data from gog about game
  * https://api.gog.com/v2/games
@@ -688,6 +702,7 @@ export async function getGamesData(appName: string, lang?: string) {
 
   return response.data
 }
+
 /**
  * Creates Array based on returned from API
  * If no recommended data is present it just stays empty
@@ -861,7 +876,7 @@ export async function getGamesdbData(
 
   const response = await axios
     .get<GamesDBData>(url, { headers: headers })
-    .catch((error: AxiosError) => {
+    .catch((error: AxiosError<{ error_description: string }>) => {
       logError(
         [
           `Was not able to get GamesDB data for ${game_id}`,
@@ -898,7 +913,8 @@ export async function getGamesdbData(
  */
 export async function getProductApi(
   appName: string,
-  expand?: string[]
+  expand?: string[],
+  access_token?: string
 ): Promise<AxiosResponse<ProductsEndpointData> | null> {
   expand = expand ?? []
   const language = i18next.language
@@ -907,9 +923,15 @@ export async function getProductApi(
   if (expand.length > 0) {
     url.searchParams.set('expand', expand.join(','))
   }
+
+  const headers = {}
+  if (access_token) {
+    headers['Authorization'] = `Bearer ${access_token}`
+  }
+
   // `https://api.gog.com/products/${appName}?locale=${language}${expandString}`
   const response = await axios
-    .get<ProductsEndpointData>(url.toString())
+    .get<ProductsEndpointData>(url.toString(), { headers })
     .catch(() => null)
 
   return response
@@ -971,8 +993,7 @@ export async function runRunnerCommand(
   commandParts: string[],
   abortController: AbortController,
   options?: CallRunnerOptions,
-  gameInfo?: GameInfo,
-  shouldTrackPlaytime = false
+  gameInfo?: GameInfo
 ): Promise<ExecResult> {
   const { dir, bin } = getGOGdlBin()
   const authConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
@@ -984,8 +1005,7 @@ export async function runRunnerCommand(
       ...options,
       verboseLogFile: gogdlLogFile
     },
-    gameInfo,
-    shouldTrackPlaytime
+    gameInfo
   )
 }
 

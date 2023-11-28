@@ -40,3 +40,19 @@ export function translateChannelName(
       return channelNameEnglish
   }
 }
+
+export function getMessage(
+  t: TFunction<'translation'>,
+  status: 'extracting' | 'paused' | 'installing' | 'installed'
+): string | undefined {
+  switch (status) {
+    case 'extracting':
+      return t('hyperplay.gamecard.extracting', 'Extracting...')
+    case 'paused':
+      return t('hyperplay.gamecard.paused', 'Paused')
+    case 'installing':
+      return t('hyperplay.gamecard.installing', 'Downloading...')
+    case 'installed':
+      return t('hyperplay.gamecard.installed', 'Ready to play')
+  }
+}

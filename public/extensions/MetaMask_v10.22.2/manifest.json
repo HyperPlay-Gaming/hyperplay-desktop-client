@@ -55,7 +55,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: cde2143a",
+  "description": "other build from git id: 05dc1f5c",
   "icons": {
     "16": "images/icon-16.png",
     "19": "images/icon-19.png",
@@ -92,5 +92,5 @@
     ]
   },
   "minimum_chrome_version": "80",
-  "version": "11.1.1"
+  "version": "11.5.0"
 }

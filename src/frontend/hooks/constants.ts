@@ -27,7 +27,7 @@ export function getStatusLabel({
     installing: `${t('gamepage:status.downloading', 'Downloading')} ${Math.ceil(
       percent || 0
     )}%`,
-    extracting: t('gamepage:status.extracting', 'Extracting'),
+    extracting: t('gamepage:status.extracting.progress', 'Extracting'),
     'syncing-saves': t('gamepage:status.syncingSaves', 'Syncing Saves'),
     moving: t('gamepage:gamecard.moving', 'Moving'),
     repairing: t('gamepage:gamecard.repairing', 'Repairing'),

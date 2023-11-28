@@ -106,7 +106,7 @@
             }
         },
         "runexe": {
-            "title": "Selecteer EXE on te lanceren"
+            "title": "Selecteer EXE om uit te voeren"
         },
         "select": {
             "button": "Selecteer",
@@ -142,7 +142,9 @@
             "title": "Warning"
         },
         "wineprefix": "Selecteer een Wine Prefix Folder",
-        "yes": "JA"
+        "yes": "JA",
+        "dontShowAgain": "Niet meer laten zien",
+        "choose-nile-binary": "Selecteer Nijl binair"
     },
     "button": {
         "cancel": "Cancel",
@@ -311,7 +313,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "Amazon-login"
     },
     "message": {
         "sync": "Synchronisatie compleet",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Legendary Versie: ",
-        "weblate": "Help met het vertalen van HyperPlay."
+        "weblate": "Help met het vertalen van HyperPlay.",
+        "nile-version": "Nijlversie: "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Gebruik built-in Legendary binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix waar EGS is geïnstalleerd",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
+        "alt-nile-bin": "Gebruik van ingebouwde Nijl binaire..."
     },
     "platforms": {
         "linux": "Linux",
@@ -534,7 +539,13 @@
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "WinePrefix map",
-        "wineversion": "Wine versie"
+        "wineversion": "Wine versie",
+        "autoUpdateGames": "Games automatisch bijwerken",
+        "ignoreGameUpdates": "Negeer game-updates",
+        "disable_logs": "Logboeken uitschakelen",
+        "addgamestoapplications": "Voeg automatisch games toe aan applicaties",
+        "showMetalOverlay": "Statistieken-overlay weergeven",
+        "alt-nile-bin": "Kies een alternatief Nijlbinair getal"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -584,9 +595,10 @@
         "uncollapse": "Uncollapse sidebar"
     },
     "status": {
-        "installing": "Installing",
+        "installing": "Installeren",
         "logging": "Logging In...",
-        "processing": "Processing files, please wait"
+        "processing": "Processing files, please wait",
+        "preparing_login": "Inloggen voorbereiden... "
     },
     "store": "Winkel",
     "stores": "Stores",
@@ -639,5 +651,22 @@
         },
         "release": "Release Date",
         "size": "Size"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Vraag het niet nog een keer",
+        "warning": "U staat op het punt een externe link te openen."
+    },
+    "wiki_info": {
+        "not_found": "We konden geen extra informatie vinden."
+    },
+    "dlc": {
+        "actions": "Acties",
+        "noDlcFound": "Geen DLC's gevonden",
+        "installDlcs": "Installeer alle DLC's",
+        "size": "Size",
+        "title": "Title"
+    },
+    "Amazon Games": "Amazon-spellen",
+    "amazon": "Amazone",
+    "prime-gaming": "Prime-gaming"
 }

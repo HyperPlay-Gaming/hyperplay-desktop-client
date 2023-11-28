@@ -115,9 +115,9 @@ export const launchApp = async () => {
   console.log('Electron app is ready for testing!')
 }
 
-export default function setup(): void {
+export default function setup(timeout = 120000): void {
   test.beforeEach(async () => {
-    test.setTimeout(120000)
+    test.setTimeout(timeout)
     await launchApp()
   })
 

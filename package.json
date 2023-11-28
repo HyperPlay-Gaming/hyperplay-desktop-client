@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.8.1",
+  "version": "0.9.0",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -47,7 +47,7 @@
       }
     ],
     "win": {
-      "artifactName": "${productName}-Setup.${ext}",
+      "artifactName": "${productName}-${version}-Setup-${arch}.${ext}",
       "icon": "build/win_icon.ico",
       "asarUnpack": [
         "build/bin/win32/legendary.exe",
@@ -157,11 +157,11 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@hyperplay/ui": "^0.1.27",
+    "@hyperplay/ui": "^0.1.33",
     "@mantine/carousel": "^6.0.19",
     "@mantine/core": "^6.0.19",
     "@mantine/hooks": "^6.0.19",
-    "@metamask/sdk": "^0.5.3",
+    "@metamask/sdk": "^0.12.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
     "@node-steam/vdf": "^2.2.0",
@@ -212,7 +212,9 @@
     "mime": "^3.0.0",
     "mobx": "^6.9.0",
     "mobx-react-lite": "^3.4.0",
+    "patch-package": "^8.0.0",
     "plist": "^3.0.5",
+    "postinstall-postinstall": "^2.1.0",
     "qrcode": "^1.5.3",
     "react": "^18.2.0",
     "react-blockies": "^1.4.1",
@@ -230,7 +232,7 @@
     "stream": "^0.0.2",
     "systeminformation": "^5.21.7",
     "ts-prune": "^0.10.3",
-    "tslib": "^2.4.0",
+    "tslib": "^2.5.0",
     "yauzl": "^2.10.0",
     "zod": "^3.22.3"
   },
@@ -249,7 +251,7 @@
     "test:e2e": "cross-env-shell docker compose -f e2e/docker-compose.yml run --rm --build process_all bash e2e/entrypoint.sh",
     "test:e2ePackaged": "cross-env TEST_PACKAGED=true yarn test:e2e",
     "manualTestProxyJest": "jest mmExtIntegration.test.ts",
-    "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz snap",
+    "release:linux": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --linux deb rpm pacman tar.xz",
     "release:updateFlathub:ci": "tsc flathub/update-flathub.ts --skipLibCheck --target es2015 --moduleResolution node --module commonjs && node flathub/update-flathub.js",
     "release:mac:x64": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --x64",
     "release:mac:arm64": "export NODE_ENV_ELECTRON_VITE=production && vite build && electron-builder -p always --mac --arm64",
@@ -269,6 +271,7 @@
     "flatpak:prepare": "node ./flatpak/prepareFlatpak.js",
     "flatpak:prepare-release": "node ./flatpak/prepareFlatpak.js release",
     "i18n": "i18next",
+    "postinstall": "patch-package",
     "prepare": "husky install",
     "prettier": "prettier --check .",
     "prettier-fix": "prettier --write ."
@@ -307,7 +310,7 @@
     "@valist/sdk": "^2.9.1",
     "@vitejs/plugin-react": "^2.2.0",
     "cross-env": "^7.0.3",
-    "electron": "^27.0.0-beta.8",
+    "electron": "^27.0.2",
     "electron-builder": "^24.6.3",
     "electron-playwright-helpers": "^1.6.0",
     "electron-vite": "^1.0.23",
@@ -351,7 +354,9 @@
       "electron": true,
       "electron-vite>esbuild": true,
       "playwright": true,
-      "vite>esbuild": true
+      "vite>esbuild": true,
+      "$root$": true,
+      "postinstall-postinstall": true
     }
   }
 }

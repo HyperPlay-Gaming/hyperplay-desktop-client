@@ -10,6 +10,7 @@ import { notify } from '../dialog/dialog'
 import i18next from 'i18next'
 import { configFolder } from 'backend/constants'
 import { join } from 'path'
+import { trackEvent } from 'backend/metrics/metrics'
 
 const downloadManager = new TypeCheckedStoreBackend('downloadManager', {
   cwd: 'store',
@@ -188,6 +189,23 @@ function getQueueInformation() {
   return { elements, finished, state: queueState }
 }
 
+function cancelQueueExtraction() {
+  if (currentElement) {
+    if (Array.isArray(currentElement.params.installDlcs)) {
+      const dlcsToRemove = currentElement.params.installDlcs
+      for (const dlc of dlcsToRemove) {
+        removeFromQueue(dlc)
+      }
+    }
+    if (isRunning()) {
+      stopCurrentDownload()
+    }
+    removeFromQueue(currentElement.params.appName)
+
+    currentElement = null
+  }
+}
+
 function cancelCurrentDownload({ removeDownloaded = false }) {
   if (currentElement) {
     if (Array.isArray(currentElement.params.installDlcs)) {
@@ -236,9 +254,28 @@ async function pauseCurrentDownload() {
     downloadManager.get('queue', []),
     queueState
   )
+
+  const {
+    appName,
+    runner,
+    gameInfo: { title }
+  } = currentElement!.params
+  trackEvent({
+    event: 'Game Install Paused',
+    properties: { store_name: runner, game_title: title, game_name: appName }
+  })
 }
 
 function resumeCurrentDownload() {
+  const {
+    appName,
+    runner,
+    gameInfo: { title }
+  } = currentElement!.params
+  trackEvent({
+    event: 'Game Install Resumed',
+    properties: { store_name: runner, game_title: title, game_name: appName }
+  })
   initQueue()
 }
 
@@ -254,8 +291,6 @@ function processNotification(element: DMQueueElement, status: DMStatus) {
   const { title } = gameManagerMap[element.params.runner].getGameInfo(
     element.params.appName
   )
-
-  console.log('processNotification', status)
 
   if (status === 'abort') {
     if (isPaused()) {
@@ -320,6 +355,7 @@ export {
   removeFromQueue,
   getQueueInformation,
   cancelCurrentDownload,
+  cancelQueueExtraction,
   pauseCurrentDownload,
   resumeCurrentDownload,
   getFirstQueueElement

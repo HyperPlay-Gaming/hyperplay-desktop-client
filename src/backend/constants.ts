@@ -60,6 +60,11 @@ const nileConfigPath = join(appFolder, 'nile_config', 'nile')
 const runtimePath = join(toolsPath, 'runtimes')
 const userInfo = join(legendaryConfigPath, 'user.json')
 const imagesCachePath = join(appConfigFolder, 'images-cache')
+const cachedUbisoftInstallerPath = join(
+  appFolder,
+  'tools',
+  'UbisoftConnectInstaller.exe'
+)
 
 const {
   currentLogFile,
@@ -299,5 +304,6 @@ export {
   nileConfigPath,
   nileInstalled,
   nileLibrary,
-  nileUserData
+  nileUserData,
+  cachedUbisoftInstallerPath
 }

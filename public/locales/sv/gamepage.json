@@ -118,7 +118,13 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "Wine-prefix",
-        "wineversion": "Wine-version"
+        "wineversion": "Wine-version",
+        "anticheat-warning": {
+            "cancel": "Nej",
+            "message": "Antifusk stödet är trasigt eller nekat. Spelet kommer inte att fungera. Vill du installera det ändå?",
+            "install": "Ja (jag förstår att det inte kommer att fungera)",
+            "title": "Antifusk trasigt/nekat"
+        }
     },
     "label": {
         "game": {
@@ -136,10 +142,11 @@
         "options": "Startalternativ..."
     },
     "not_logged_in": {
-        "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "gog": "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:",
-        "login": "Log in",
-        "title": "You are NOT logged in"
+        "epic": "Du är ej inloggad med Epic-konto i HyperPlay. Använd inte Butiksidan för att logga in, klicka denna knapp istället:",
+        "gog": "Du är ej inloggad med GOG-konto i HyperPlay. Använd inte Butiksidan för att logga in, klicka denna knapp istället:",
+        "login": "Logga in",
+        "title": "Du är ej inloggad!",
+        "amazon": "Du är ej inloggad med Epic-konto i HyperPlay. Använd inte Butiksidan för att logga in, klicka denna knapp istället:"
     },
     "report_problem": "Rapportera problem med spelet",
     "sdl": {

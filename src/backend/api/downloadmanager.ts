@@ -1,6 +1,6 @@
-import { DownloadManagerState } from './../../common/types'
+import { DownloadManagerState, GameInfo } from './../../common/types'
 import { ipcRenderer } from 'electron'
-import { DMQueueElement, InstallParams, UpdateParams } from 'common/types'
+import { DMQueueElement, InstallParams } from 'common/types'
 
 export const install = async (args: InstallParams) => {
   const dmQueueElement: DMQueueElement = {
@@ -33,15 +33,21 @@ export const install = async (args: InstallParams) => {
   }
 }
 
-export const updateGame = (args: UpdateParams) => {
+export const updateGame = (gameInfo: GameInfo) => {
   const {
-    gameInfo: {
-      install: { platform, install_path }
-    }
-  } = args
+    app_name: appName,
+    runner,
+    install: { install_path, platform }
+  } = gameInfo
 
   const dmQueueElement: DMQueueElement = {
-    params: { ...args, path: install_path!, platformToInstall: platform! },
+    params: {
+      gameInfo,
+      appName,
+      runner,
+      path: install_path!,
+      platformToInstall: platform!
+    },
     type: 'update',
     addToQueueTime: Date.now(),
     endTime: 0,
@@ -52,7 +58,7 @@ export const updateGame = (args: UpdateParams) => {
 
   ipcRenderer.invoke('trackEvent', {
     event: 'Game Update Requested',
-    properties: { game_name: args.appName, store_name: args.runner }
+    properties: { game_name: appName, store_name: runner }
   })
 }
 
@@ -77,6 +83,9 @@ export const handleDMQueueInformation = (
 
 export const cancelDownload = (removeDownloaded: boolean) =>
   ipcRenderer.send('cancelDownload', removeDownloaded)
+
+export const cancelExtraction = (appName: string) =>
+  ipcRenderer.send('cancelExtraction', appName)
 
 export const resumeCurrentDownload = () =>
   ipcRenderer.send('resumeCurrentDownload')

@@ -41,8 +41,8 @@
                 "message": "Vos informations d'identification ont expiré, veuillez vous reconnecter."
             },
             "cx-bottle-not-found": {
-                "message": "The CrossOver bottle \"{{bottle_name}}\" does not exist, can't launch!",
-                "title": "CrossOver bottle not found"
+                "message": "Le Pont-Bouteille \"{{bottle_name}}\" n'existe pas, impossible de lancer !",
+                "title": "Pont-Bouteille introuvable"
             },
             "diskspace": {
                 "message": "Espace disque nécessaire insuffisant",
@@ -141,8 +141,10 @@
             },
             "title": "Warning"
         },
-        "wineprefix": "Choisir le dossier de préfixe Wine",
-        "yes": "OUI"
+        "wineprefix": "Choisir le dossier des préfixes Wine",
+        "yes": "OUI",
+        "dontShowAgain": "Ne plus afficher",
+        "choose-nile-binary": "Sélectionnez le binaire du Nil"
     },
     "button": {
         "cancel": "Annuler",
@@ -308,10 +310,11 @@
         "website": "Chargement du site internet"
     },
     "login": {
-        "alternative_method": "Alternative Login Method",
-        "epic": "Epic Games Login",
-        "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "alternative_method": "- Méthode de connexion alternative",
+        "epic": "Connexion à Epic Games",
+        "gog": "Connexion à GOG",
+        "message": "Connectez-vous à votre plateforme. Vous pouvez vous connecter à plus d'une plateforme à la fois.",
+        "amazon": "Connexion à Amazon"
     },
     "message": {
         "sync": "Synchronisation Complète",
@@ -401,7 +404,8 @@
     "other": {
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Version de Legendary : ",
-        "weblate": "Aidez à traduire HyperPlay."
+        "weblate": "Aidez à traduire HyperPlay.",
+        "nile-version": "Version Nil : "
     },
     "Other": "Other",
     "placeholder": {
@@ -409,7 +413,8 @@
         "alt-legendary-bin": "Utilisation du binaire Legendary intégré...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix où EGS est installé",
-        "prefered_language": "2-char code (exemple: \"en\" ou \"fr\")"
+        "prefered_language": "2-char code (exemple : \"en\" ou \"fr\")",
+        "alt-nile-bin": "Utilisation du binaire Nile intégré..."
     },
     "platforms": {
         "linux": "Linux",
@@ -532,9 +537,15 @@
         "showfps": "Afficher les FPS (DX9, 10 et 11)",
         "start-in-tray": "Réduire au démarrage",
         "steamruntime": "Utiliser le runtime Steam",
-        "winecrossoverbottle": "CrossOver Bottle",
+        "winecrossoverbottle": "Pont-Bouteille",
         "wineprefix": "Dossier WinePrefix",
-        "wineversion": "Version de Wine"
+        "wineversion": "Version de Wine",
+        "autoUpdateGames": "Mettre les jeux à jour automatiquement",
+        "ignoreGameUpdates": "Ignorer les mises à jour du jeu",
+        "disable_logs": "Désactiver les journaux",
+        "showMetalOverlay": "Afficher la superposition des statistiques",
+        "addgamestoapplications": "Ajouter automatiquement des jeux aux applications",
+        "alt-nile-bin": "Choisissez un binaire alternatif du Nil"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +597,8 @@
     "status": {
         "installing": "Installing",
         "logging": "Connexion en cours...",
-        "processing": "Processing files, please wait"
+        "processing": "Traitement des fichiers, veuillez patienter",
+        "preparing_login": "Préparation de la connexion... "
     },
     "store": "Boutique Epic",
     "stores": "Stores",
@@ -637,7 +649,24 @@
             "title": "Gestion de Wine",
             "unzipping": "Décompression"
         },
-        "release": "Release Date",
-        "size": "Size"
-    }
+        "release": "Date de sortie",
+        "size": "Taille"
+    },
+    "externalLink": {
+        "dontAskAgain": "Ne plus me le demander",
+        "warning": "Vous êtes sur le point d'ouvrir un lien externe."
+    },
+    "wiki_info": {
+        "not_found": "Nous n'avons pas trouvé d'informations supplémentaires."
+    },
+    "dlc": {
+        "actions": "Actions",
+        "installDlcs": "Installer tous les DLCs",
+        "noDlcFound": "Aucun DLC trouvé",
+        "size": "Taille",
+        "title": "Titre"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "Jeux Amazon",
+    "prime-gaming": "Premier jeu"
 }

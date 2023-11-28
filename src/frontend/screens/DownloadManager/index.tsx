@@ -18,6 +18,8 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
   const [currentElement, setCurrentElement] = useState<DMQueueElement>()
   const [finishedElem, setFinishedElem] = useState<DMQueueElement[]>()
 
+  const appName = currentElement?.params?.appName ?? ''
+
   useEffect(() => {
     setRefreshing(true)
     window.api.getDMQueueInformation().then(({ elements, state }: DMQueue) => {
@@ -50,7 +52,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     window.api.getDMQueueInformation().then(({ finished }: DMQueue) => {
       setFinishedElem(finished)
     })
-  }, [plannendElements.length, currentElement?.params.appName])
+  }, [plannendElements.length, appName])
 
   // Track the screen view once and only once
   useEffect(() => {
@@ -92,10 +94,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
       </h3>
       {
         <>
-          <ProgressHeader
-            state={state}
-            appName={currentElement?.params?.appName ?? ''}
-          />
+          <ProgressHeader state={state} appName={appName} />
           {currentElement && (
             <div className="downloadManager">
               <div

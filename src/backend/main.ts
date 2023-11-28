@@ -33,7 +33,6 @@ import {
   appendFileSync,
   constants,
   existsSync,
-  mkdirSync,
   rmSync,
   unlinkSync,
   watch,
@@ -71,12 +70,13 @@ import {
   // detectVCRedist,
   getFileSize,
   getFirstExistingParentPath,
-  getLatestReleases,
   getShellPath,
   wait,
   checkWineBeforeLaunch,
   downloadDefaultWine,
-  getNileVersion
+  getNileVersion,
+  getStoreName,
+  getPlatformName
 } from './utils'
 import {
   configStore,
@@ -162,6 +162,7 @@ import {
   initStoreManagers,
   libraryManagerMap
 } from './storeManagers'
+import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
 import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
@@ -187,7 +188,9 @@ import {
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
 
-app.commandLine?.appendSwitch('remote-debugging-port', '9222')
+if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
+  app.commandLine?.appendSwitch('remote-debugging-port', '9222')
+}
 
 const { showOpenDialog } = dialog
 const isWindows = platform() === 'win32'
@@ -199,6 +202,17 @@ ipcMain.on('ignoreExitToTray', () => {
   ignoreExitToTray = true
 })
 
+ipcMain.on('focusMainWindow', () => {
+  const mainWindow = getMainWindow()
+
+  if (!mainWindow) {
+    return
+  }
+
+  mainWindow.show()
+  mainWindow?.focus()
+})
+
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
@@ -206,7 +220,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
   mainWindow.webContents.on('input-event', (ev, inputEv) => {
     if (eventsToCloseMetaMaskPopupOn.includes(inputEv.type)) {
-      mainWindow.webContents.send('removePopupInWebview')
+      backendEvents.emit('removePopup')
     }
   })
 
@@ -784,15 +798,6 @@ ipcMain.handle('getNumOfGpus', async (): Promise<number> => {
   return controllers.length
 })
 
-ipcMain.handle('getLatestReleases', async () => {
-  const { checkForUpdatesOnStartup } = GlobalConfig.get().getSettings()
-  if (checkForUpdatesOnStartup) {
-    return getLatestReleases()
-  } else {
-    return []
-  }
-})
-
 ipcMain.on('clearCache', (event) => {
   clearCache()
   sendFrontendMessage('refreshLibrary')
@@ -970,6 +975,14 @@ ipcMain.handle('toggleDXVK', async (event, { appName, action }) =>
     )
 )
 
+ipcMain.handle('toggleDXVKNVAPI', async (event, { appName, action }) =>
+  GameConfig.get(appName)
+    .getSettings()
+    .then(async (gameSettings) =>
+      DXVK.installRemove(gameSettings, 'dxvk-nvapi', action)
+    )
+)
+
 ipcMain.on('toggleVKD3D', (event, { appName, action }) => {
   GameConfig.get(appName)
     .getSettings()
@@ -1051,7 +1064,7 @@ ipcMain.handle(
     const gameSettings = await gameManagerMap[runner].getSettings(appName)
     const { autoSyncSaves, savesPath, gogSaves = [] } = gameSettings
 
-    const { title } = game
+    const { title, app_name, browserUrl, install } = game
 
     const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
@@ -1065,6 +1078,18 @@ ipcMain.handle(
     }
 
     logInfo(`Launching ${title} (${game.app_name})`, LogPrefix.Backend)
+    trackEvent({
+      event: 'Game Launched',
+      properties: {
+        game_name: app_name,
+        isBrowserGame: browserUrl !== undefined,
+        game_title: title,
+        store_name: getStoreName(runner),
+        browserUrl: browserUrl ?? undefined,
+        platform: getPlatformName(install.platform!),
+        platform_arch: install.platform!
+      }
+    })
 
     if (autoSyncSaves && isOnline()) {
       sendFrontendMessage('gameStatusUpdate', {
@@ -1229,6 +1254,20 @@ ipcMain.handle(
       status: 'done'
     })
 
+    trackEvent({
+      event: 'Game Closed',
+      properties: {
+        game_name: app_name,
+        isBrowserGame: browserUrl !== undefined,
+        game_title: title,
+        store_name: getStoreName(runner),
+        browserUrl: browserUrl ?? undefined,
+        platform: getPlatformName(install.platform!),
+        playTimeInMs: sessionPlaytime * 60 * 1000,
+        platform_arch: install.platform!
+      }
+    })
+
     // Exit if we've been launched without UI
     if (isCLINoGui) {
       app.exit()
@@ -1264,11 +1303,20 @@ ipcMain.handle(
       status: 'uninstalling'
     })
 
-    const { title } = gameManagerMap[runner].getGameInfo(appName)
+    const {
+      title,
+      install: { platform }
+    } = gameManagerMap[runner].getGameInfo(appName)
 
     trackEvent({
       event: 'Game Uninstall Started',
-      properties: { game_name: appName, store_name: runner, game_title: title }
+      properties: {
+        game_name: appName,
+        store_name: getStoreName(runner),
+        game_title: title,
+        platform_arch: platform!,
+        platform: getPlatformName(platform!)
+      }
     })
 
     let uninstalled = false
@@ -1281,9 +1329,11 @@ ipcMain.handle(
         event: 'Game Uninstall Failed',
         properties: {
           game_name: appName,
-          store_name: runner,
+          store_name: getStoreName(runner),
           error: `${error}`,
-          game_title: title
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
         }
       })
       notify({
@@ -1320,8 +1370,10 @@ ipcMain.handle(
         event: 'Game Uninstall Success',
         properties: {
           game_name: appName,
-          store_name: runner,
-          game_title: title
+          store_name: getStoreName(runner),
+          game_title: title,
+          platform_arch: platform!,
+          platform: getPlatformName(platform!)
         }
       })
 
@@ -1551,38 +1603,7 @@ ipcMain.handle(
 )
 
 ipcMain.handle('egsSync', async (event, args) => {
-  if (isWindows) {
-    const egl_manifestPath =
-      'C:\\ProgramData\\Epic\\EpicGamesLauncher\\Data\\Manifests'
-
-    if (!existsSync(egl_manifestPath)) {
-      mkdirSync(egl_manifestPath, { recursive: true })
-    }
-  }
-
-  const linkArgs = isWindows
-    ? `--enable-sync`
-    : `--enable-sync --egl-wine-prefix ${args}`
-  const unlinkArgs = `--unlink`
-  const isLink = args !== 'unlink'
-  const command = isLink ? linkArgs : unlinkArgs
-  const { bin, dir } = getLegendaryBin()
-  const legendary = path.join(dir, bin)
-
-  try {
-    const { stderr, stdout } = await execAsync(
-      `${legendary} egl-sync ${command} -y`
-    )
-    logInfo(`${stdout}`, LogPrefix.Legendary)
-    if (stderr.includes('ERROR')) {
-      logError(`${stderr}`, LogPrefix.Legendary)
-      return 'Error'
-    }
-    return `${stdout} - ${stderr}`
-  } catch (error) {
-    logError(error, LogPrefix.Legendary)
-    return 'Error'
-  }
+  return LegendaryLibraryManager.toggleGamesSync(args)
 })
 
 ipcMain.handle('syncGOGSaves', async (event, gogSaves, appName, arg) =>
@@ -1762,6 +1783,9 @@ ipcMain.handle(
     if (runner === 'nile' && updated) {
       await nileSetup(appName)
     }
+    if (runner === 'legendary' && updated) {
+      await legendarySetup(appName)
+    }
 
     // FIXME: Why are we using `runinprefix` here?
     return runWineCommandOnGame(runner, appName, {
@@ -1857,7 +1881,8 @@ import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
-import { toggleOverlay } from 'backend/hyperplay-overlay'
+import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
@@ -1876,39 +1901,14 @@ backendEvents.on('chainChanged', function (chainId: number) {
   getMainWindow()?.webContents.send('chainChanged', chainId)
 })
 
-backendEvents.on('accountsChanged', function (accounts: string[]) {
-  getMainWindow()?.webContents.send('accountChanged', accounts)
-})
-
-backendEvents.on('metamaskOtpUpdated', function (otp: string) {
-  getMainWindow()?.webContents.send('metamaskOtpUpdated', otp)
-})
+backendEvents.on(
+  'accountsChanged',
+  function (accounts: string[], provider: PROVIDERS) {
+    getMainWindow()?.webContents.send('accountChanged', accounts, provider)
+  }
+)
 
 ipcMain.on('openHyperplaySite', async () => openUrlOrFile(hyperplaySite))
-
-ipcMain.on('providerRequestInitiated', (id, method) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestInitiated', id, method)
-  }
-})
-
-ipcMain.on('providerRequestPending', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestPending', id)
-  }
-})
-
-ipcMain.on('providerRequestCompleted', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestCompleted', id)
-  }
-})
-
-ipcMain.on('providerRequestFailed', (id) => {
-  for (const win of BrowserWindow.getAllWindows()) {
-    win.webContents.send('providerRequestFailed', id)
-  }
-})
 
 ipcMain.on('reloadApp', async () => {
   for (const win of BrowserWindow.getAllWindows()) {
@@ -1957,4 +1957,8 @@ ipcMain.on('setQaToken', (_e, qaToken) => {
 
 ipcMain.on('openAuthModalIfAppReloads', () => {
   onboardLocalStore.set('openAuthModalIfAppReloads', true)
+})
+
+ipcMain.on('killOverlay', () => {
+  closeOverlay()
 })

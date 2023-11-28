@@ -141,8 +141,10 @@
             },
             "title": "Warning"
         },
-        "wineprefix": "",
-        "yes": ""
+        "wineprefix": "Vyberte Priečinok predpony vína",
+        "yes": "ÁNO",
+        "dontShowAgain": "Už nezobrazovať",
+        "choose-nile-binary": "Vyberte binárny Níl"
     },
     "button": {
         "cancel": "Cancel",
@@ -311,7 +313,8 @@
         "alternative_method": "Alternative Login Method",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "amazon": "Prihlásenie na Amazon"
     },
     "message": {
         "sync": "",
@@ -401,15 +404,18 @@
     "other": {
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Legendary Version: ",
-        "weblate": "Help Improve this translation."
+        "weblate": "Help Improve this translation.",
+        "nile-version": "Nílska verzia: "
     },
     "Other": "Other",
     "placeholder": {
         "alt-gogdl-bin": "Using built-in GOGDL binary...",
         "alt-legendary-bin": "Using built-in Legendary binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
-        "egs-prefix": "",
-        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
+        "dxvkfpsvalue": "Positive integer value (e.g. 30, 60, ...)",
+        "egs-prefix": "Predpona, kde je nainštalovaný EGS",
+        "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
+        "alt-nile-bin": "Pomocou vstavaného binárneho systému Níl..."
     },
     "platforms": {
         "linux": "",
@@ -533,8 +539,14 @@
         "start-in-tray": "Start Minimized",
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "",
-        "wineversion": ""
+        "wineprefix": "Priečinok WinePrefix",
+        "wineversion": "Wine Version",
+        "autoUpdateGames": "Automaticky aktualizovať hry",
+        "ignoreGameUpdates": "Ignorovať aktualizácie hry",
+        "disable_logs": "Zakázať denníky",
+        "addgamestoapplications": "Automaticky pridávajte hry do aplikácií",
+        "showMetalOverlay": "Zobraziť prekrytie štatistík",
+        "alt-nile-bin": "Vyberte si alternatívny binárny súbor Níl"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +598,8 @@
     "status": {
         "installing": "Installing",
         "logging": "Logging In...",
-        "processing": "Processing files, please wait"
+        "processing": "Processing files, please wait",
+        "preparing_login": "Pripravuje sa prihlásenie... "
     },
     "store": "Epic Store",
     "stores": "Stores",
@@ -639,5 +652,22 @@
         },
         "release": "Release Date",
         "size": "Size"
-    }
+    },
+    "externalLink": {
+        "dontAskAgain": "Už sa nepýtaj",
+        "warning": "Chystáte sa otvoriť externý odkaz."
+    },
+    "wiki_info": {
+        "not_found": "Nepodarilo sa nám nájsť ďalšie informácie."
+    },
+    "dlc": {
+        "actions": "Akcie",
+        "installDlcs": "Nainštalujte všetky DLC",
+        "noDlcFound": "Nenašli sa žiadne DLC",
+        "size": "Veľkosť",
+        "title": "Title"
+    },
+    "amazon": "Amazon",
+    "Amazon Games": "Amazon Games",
+    "prime-gaming": "Prime Gaming"
 }
