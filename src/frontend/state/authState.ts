@@ -13,6 +13,7 @@ class AuthState {
       'openAuthModalIfAppReloads',
       false
     )
+    onboardingStore.set('openAuthModalIfAppReloads', false)
   }
 
   get hasPendingSignatureRequest() {
