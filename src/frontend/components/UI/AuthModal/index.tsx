@@ -114,6 +114,29 @@ const AuthModal = () => {
     }
   }, [walletState.isConnected, authState.hasPendingSignatureRequest])
 
+  function emailConfirmed(
+    _e: Electron.IpcRendererEvent,
+    emailConfirmUrl: string
+  ) {
+    console.log(
+      'handling email confirmation and navigating to ',
+      emailConfirmUrl
+    )
+    webviewRef.current?.loadURL(emailConfirmUrl)
+    authState.openSignInModal()
+
+    setTimeout(() => webviewRef.current?.loadURL(url), 5000)
+  }
+
+  useEffect(() => {
+    const rmHandleEmailConfirmationNavigation =
+      window.api.handleEmailConfirmationNavigation(emailConfirmed)
+
+    return () => {
+      rmHandleEmailConfirmationNavigation()
+    }
+  }, [])
+
   return (
     <ModalAnimation
       isOpen={authState.isSignInModalOpen}

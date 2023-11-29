@@ -5,7 +5,8 @@ import {
   Tools,
   DialogType,
   ButtonOptions,
-  GamepadActionArgs
+  GamepadActionArgs,
+  WrapRendererCallback
 } from 'common/types'
 import { NileRegisterData } from 'common/types/nile'
 
@@ -219,4 +220,13 @@ export const handleEmailConfirmed = (
 
 export const openAuthModalIfAppReloads = () => {
   ipcRenderer.send('openAuthModalIfAppReloads')
+}
+
+export const handleEmailConfirmationNavigation = (
+  cb: WrapRendererCallback<(url: string) => void>
+): (() => void) => {
+  ipcRenderer.on('emailConfirmation', cb)
+  return () => {
+    ipcRenderer.removeListener('emailConfirmation', cb)
+  }
 }

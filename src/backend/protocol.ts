@@ -8,7 +8,12 @@ import { icon } from './constants'
 import { getGameInfo } from 'backend/storeManagers/hyperplay/games'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 
-type Command = 'ping' | 'launch' | 'oauth-completed' | 'email-verified'
+type Command =
+  | 'ping'
+  | 'launch'
+  | 'oauth-completed'
+  | 'email-verified'
+  | 'email-confirmation'
 
 const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
 
@@ -22,6 +27,7 @@ const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
  * // => 'Received launch! Runner: hyperplay, Arg: 123'
  **/
 export async function handleProtocol(args: string[]) {
+  logInfo(`handling ${JSON.stringify(args)}`, LogPrefix.HyperPlay)
   const mainWindow = getMainWindow()
 
   const url = getUrl(args)
@@ -32,6 +38,9 @@ export async function handleProtocol(args: string[]) {
   const [command, runner, arg = ''] = parseUrl(url)
 
   logInfo(`received '${url}'`, LogPrefix.ProtocolHandler)
+
+  const emailConfirmationUrl = decodeURIComponent(arg)
+  logInfo(`emailConfirmationUrl ${emailConfirmationUrl}`, LogPrefix.HyperPlay)
 
   switch (command) {
     case 'ping':
@@ -44,6 +53,9 @@ export async function handleProtocol(args: string[]) {
       break
     case 'email-verified':
       sendFrontendMessage('emailVerified')
+      break
+    case 'email-confirmation':
+      sendFrontendMessage('emailConfirmation', emailConfirmationUrl)
       break
     default:
       return
@@ -78,7 +90,7 @@ function getUrl(args: string[]): string | undefined {
  * parseUrl('hyperplay://launch/legendary/123')
  * // => ['launch', 'legendary', '123']
  **/
-function parseUrl(url: string): [Command, Runner?, string?, string?] {
+export function parseUrl(url: string): [Command, Runner?, string?, string?] {
   const [, fullCommand] = url.split('://')
 
   //check if the second param is a runner or not and adjust parts accordingly
