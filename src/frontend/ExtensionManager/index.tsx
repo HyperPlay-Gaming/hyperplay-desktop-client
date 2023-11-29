@@ -24,7 +24,7 @@ const animation = {
 }
 
 const ExtensionManager = function () {
-  const rootRef = useRef<HTMLDivElement>(null)
+  const rootRef = useRef<HTMLDialogElement | null>(null)
   const trueAsStr = 'false' as unknown as boolean | undefined
 
   const mmContainerStyle = {} as React.CSSProperties
@@ -42,10 +42,15 @@ const ExtensionManager = function () {
     mmContainerStyle.right = 'unset'
     mmContainerStyle.top = 20
   }
+  if (extensionState.isPopupOpen || extensionState.isNotificationOpen) {
+    rootRef.current?.showModal()
+  } else {
+    rootRef.current?.close()
+  }
 
   /* eslint-disable react/no-unknown-property */
   return (
-    <div
+    <dialog
       className={ExtensionManagerStyles.mmContainer}
       ref={rootRef}
       style={mmContainerStyle}
@@ -74,7 +79,7 @@ const ExtensionManager = function () {
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </div>
+    </dialog>
   )
 }
 

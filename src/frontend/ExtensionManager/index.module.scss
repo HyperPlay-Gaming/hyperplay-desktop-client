@@ -1,11 +1,21 @@
 .mmContainer {
   position: fixed;
-  right: 357px;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
   display: flex;
   flex-direction: row;
   gap: 20px;
   z-index: 100000;
   top: var(--top-navbar-height);
+  background-color: transparent;
+  border: none;
+  > div {
+    top: var(--top-navbar-height);
+    position: fixed;
+    right: 0px;
+  }
 }
 
 .mmWindow {
@@ -14,7 +24,6 @@
   overflow: hidden;
   border-radius: 0px 0px 16px 16px;
   background: #24272a;
-  position: absolute;
   display: flex;
   box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
 }
