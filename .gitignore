@@ -37,6 +37,8 @@ flatpak/build
 vite-plugin-electron.log
 .tool-versions
 .env
+# This could be required if you need to add your own .nmprc token for copy it inside a container
+.npmrc
 
 # Yarn Berry support
 # these can be reconfigured if we ever want to adopt yarn berry
@@ -44,3 +46,5 @@ vite-plugin-electron.log
 
 flathub/update-flathub.js
 xyz.hyperplay.HyperPlay
+
+.sdk-comm

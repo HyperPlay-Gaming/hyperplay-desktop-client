@@ -300,6 +300,7 @@ export interface InstallArgs {
   installLanguage?: string
   channelName?: string
   accessCode?: string
+  updateOnly?: boolean
 }
 
 export interface InstallParams extends InstallArgs {
@@ -791,6 +792,11 @@ export type AvailablePlatforms = {
   value: string
   icon: IconDefinition
 }[]
+
+export type WalletOnboardCloseReason =
+  | 'skipped'
+  | 'connected'
+  | 'requestedMetaMaskConnection'
 
 export type Filter =
   | 'alphabeticalAscending'

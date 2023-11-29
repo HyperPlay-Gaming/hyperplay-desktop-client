@@ -1,11 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DownloadToast, Images, CircularButton } from '@hyperplay/ui'
-import {
-  DMQueueElement,
-  DownloadManagerState,
-  GameStatus,
-  InstallProgress
-} from 'common/types'
+import { DMQueueElement, GameStatus, InstallProgress } from 'common/types'
 import { DMQueue } from 'frontend/types'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
@@ -13,6 +8,8 @@ import DownloadToastManagerStyles from './index.module.scss'
 import { launch } from 'frontend/helpers'
 import StopInstallationModal from '../StopInstallationModal'
 import { downloadStatus } from '@hyperplay/ui/dist/components/DownloadToast'
+import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
+import DMQueueState from 'frontend/state/DMQueueState'
 
 const nullProgress: InstallProgress = {
   bytes: '0',
@@ -29,44 +26,18 @@ export default function DownloadToastManager() {
   const [showPlay, setShowPlay] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
 
+  const appName = currentElement?.params?.gameInfo?.app_name ?? ''
+  const gameInfo = currentElement?.params.gameInfo
+  const { statusText: downloadStatusText, status } = useGetDownloadStatusText(
+    appName,
+    gameInfo
+  )
+  const isExtracting = status === 'extracting'
+
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
 
-  const [dmState, setDMState] = useState<DownloadManagerState>('idle')
-
   useEffect(() => {
-    window.api.getDMQueueInformation().then(({ state }: DMQueue) => {
-      setDMState(state)
-    })
-
-    const removeHandleDMQueueInformation = window.api.handleDMQueueInformation(
-      (
-        e: Electron.IpcRendererEvent,
-        elements: DMQueueElement[],
-        state: DownloadManagerState
-      ) => {
-        if (elements) {
-          setDMState(state)
-        }
-      }
-    )
-
-    return () => {
-      removeHandleDMQueueInformation()
-    }
-  }, [])
-
-  useEffect(() => {
-    // if download queue finishes, show toast in done state with play button for 10 seconds
-    // if the last progress data point is < 99, then it will not show the done state
-    // technically if < 100, we shouldn't show in order to handle the cancelled download case
-    // but legendary sends progress updates infrequently and this gives margin of error for % calc
-    // TODO: receive a reason from download manager as to why the previous download was removed
-    // whether it was cancelled or the download finished
-    if (
-      latestElement === undefined &&
-      progress.percent &&
-      progress.percent > 99
-    ) {
+    if (latestElement === undefined && status === 'installed') {
       setShowPlay(true)
       // after 10 seconds remove and reset the toast
       showPlayTimeout = setTimeout(() => {
@@ -135,6 +106,12 @@ export default function DownloadToastManager() {
     }
   }, [currentElement])
 
+  useEffect(() => {
+    if (isExtracting) {
+      setProgress(nullProgress) // reset progress to 0
+    }
+  }, [isExtracting])
+
   if (currentElement === undefined) {
     console.debug('no downloads active in download toast manager')
     return <></>
@@ -196,13 +173,10 @@ export default function DownloadToastManager() {
   let imgUrl = currentElement?.params.gameInfo.art_cover
     ? currentElement?.params.gameInfo.art_cover
     : ''
+
   if (!imgUrl.includes('http'))
     imgUrl = currentElement.params.gameInfo.art_square
-  const appName = currentElement?.params.gameInfo.app_name
-    ? currentElement?.params.gameInfo.app_name
-    : ''
 
-  const gameInfo = currentElement?.params.gameInfo
   if (gameInfo === undefined) {
     console.error('game info was undefined in download toast manager')
     return <></>
@@ -215,10 +189,14 @@ export default function DownloadToastManager() {
   const installPath = currentElement?.params.path
 
   function getDownloadStatus(): downloadStatus {
-    if (dmState === 'paused') return 'paused'
+    if (isExtracting) return 'inExtraction'
+    if (DMQueueState.isPaused(appName)) return 'paused'
     if (showPlay) return 'done'
     return 'inProgress'
   }
+
+  const adjustedDownloadedInBytes = downloadedMB * 1024 * 1024
+  const adjustedDownloadSizeInBytes = downloadSizeInMB * 1024 * 1024
 
   return (
     <div className={DownloadToastManagerStyles.downloadManagerContainer}>
@@ -226,8 +204,8 @@ export default function DownloadToastManager() {
         <DownloadToast
           imgUrl={imgUrl}
           gameTitle={title}
-          downloadedInBytes={downloadedMB * 1024 * 1024}
-          downloadSizeInBytes={downloadSizeInMB * 1024 * 1024}
+          downloadedInBytes={adjustedDownloadedInBytes}
+          downloadSizeInBytes={adjustedDownloadSizeInBytes}
           estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
           onCancelClick={() => {
             setShowStopInstallModal(true)
@@ -259,6 +237,7 @@ export default function DownloadToastManager() {
             })
           }}
           status={getDownloadStatus()}
+          statusText={downloadStatusText ?? 'Downloading'}
         />
       ) : (
         downloadIcon()
@@ -269,6 +248,7 @@ export default function DownloadToastManager() {
           folderName={folder_name}
           progress={progress}
           gameInfo={gameInfo}
+          status={status}
           onClose={() => setShowStopInstallModal(false)}
         />
       ) : null}

@@ -189,6 +189,23 @@ function getQueueInformation() {
   return { elements, finished, state: queueState }
 }
 
+function cancelQueueExtraction() {
+  if (currentElement) {
+    if (Array.isArray(currentElement.params.installDlcs)) {
+      const dlcsToRemove = currentElement.params.installDlcs
+      for (const dlc of dlcsToRemove) {
+        removeFromQueue(dlc)
+      }
+    }
+    if (isRunning()) {
+      stopCurrentDownload()
+    }
+    removeFromQueue(currentElement.params.appName)
+
+    currentElement = null
+  }
+}
+
 function cancelCurrentDownload({ removeDownloaded = false }) {
   if (currentElement) {
     if (Array.isArray(currentElement.params.installDlcs)) {
@@ -275,8 +292,6 @@ function processNotification(element: DMQueueElement, status: DMStatus) {
     element.params.appName
   )
 
-  console.log('processNotification', status)
-
   if (status === 'abort') {
     if (isPaused()) {
       logWarning(
@@ -340,6 +355,7 @@ export {
   removeFromQueue,
   getQueueInformation,
   cancelCurrentDownload,
+  cancelQueueExtraction,
   pauseCurrentDownload,
   resumeCurrentDownload,
   getFirstQueueElement

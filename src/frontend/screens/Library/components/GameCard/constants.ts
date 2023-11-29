@@ -32,6 +32,7 @@ export function getCardStatus(
   const syncingSaves = status === 'syncing-saves'
   const isPaused = status === 'paused'
   const isPreparing = status === 'preparing'
+  const isExtracting = status === 'extracting'
 
   const haveStatus =
     isMoving ||
@@ -58,6 +59,7 @@ export function getCardStatus(
     isUpdating,
     isPaused,
     isPreparing,
+    isExtracting,
     haveStatus
   }
 }

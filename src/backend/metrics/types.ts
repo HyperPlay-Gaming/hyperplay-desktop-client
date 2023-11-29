@@ -1,5 +1,10 @@
+import {
+  ImportableBrowser,
+  MetaMaskInitMethod
+} from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import { getPlatformName, getStoreName } from 'backend/utils'
 import { AppPlatforms, InstallPlatform, Runner } from 'common/types'
+import { PROVIDERS } from 'common/types/proxy-types'
 
 export interface MetricsOptIn {
   event: 'Metrics Opt-in'
@@ -39,9 +44,28 @@ export interface OnboardingSkipped {
   sensitiveProperties?: never
 }
 
-export interface OnboardingCompleted {
-  event: 'Onboarding Completed'
-  properties?: never
+export interface OnboardingProviderClicked {
+  event: 'Onboarding Provider Clicked'
+  properties: {
+    provider: PROVIDERS
+  }
+  sensitiveProperties?: never
+}
+
+export interface WalletConnected {
+  event: 'Wallet Connected'
+  properties?: {
+    provider: PROVIDERS
+  }
+  sensitiveProperties?: never
+}
+
+export interface MetaMaskInitialized {
+  event: 'MetaMask Initialized'
+  properties?: {
+    initMethod: MetaMaskInitMethod
+    browser?: ImportableBrowser
+  }
   sensitiveProperties?: never
 }
 
@@ -270,8 +294,10 @@ export type PossibleMetricPayloads =
   | MetricsErrorCorrection
   | GameStoreConnectionStarted
   | OnboardingStarted
+  | OnboardingProviderClicked
   | OnboardingSkipped
-  | OnboardingCompleted
+  | WalletConnected
+  | MetaMaskInitialized
   | GameInstallRequested
   | GameInstallStarted
   | GameInstallSuccess

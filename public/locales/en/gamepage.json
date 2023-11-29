@@ -136,7 +136,8 @@
     "label": {
         "playing": {
             "start": "Play",
-            "stop": "Playing (Stop)"
+            "stop": "Playing (Stop)",
+            "update": "Update"
         },
         "saves": {
             "syncing": "Syncing Saves"
@@ -181,7 +182,10 @@
     "status": {
         "clickToUpdate": "Click to Update",
         "downloading": "Downloading",
-        "extracting": "Extracting",
+        "extracting": {
+            "cancel": "Cancel Extraction",
+            "progress": "Extracting"
+        },
         "gameNotAvailable": "Game not available",
         "gog-goodie": "This game doesn't appear to be installable. Check downloadable content on https://gog.com/account",
         "goodie": "Not installable",

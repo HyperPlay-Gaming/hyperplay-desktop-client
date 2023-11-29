@@ -29,6 +29,9 @@ class WalletState implements InitializableStore {
     window.api.handleStateUpdate.walletState.provider((ev, val) => {
       this.provider = val
     })
+    window.api.handleStateUpdate.walletState.otp((ev, val) => {
+      this.otp = val
+    })
   }
 }
 

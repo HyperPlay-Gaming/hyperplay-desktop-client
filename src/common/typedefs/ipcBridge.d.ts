@@ -65,7 +65,7 @@ interface HyperPlaySyncIPCFunctions {
   providerRequestFailed: ProxiedProviderEventCallback
   loadingScreenReady: () => void
   reloadApp: () => void
-  createNewMetaMaskWallet: () => void
+  createNewMetaMaskWallet: (mmInitMethod: MetaMaskInitMethod) => void
   enableOnEvents: (topic: string) => void
   addHyperPlayShortcut: (gameId: string) => void
   ignoreExitToTray: () => void
@@ -132,6 +132,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   openGameInEpicStore: (url: string) => void
   resumeCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
+  cancelExtraction: (appName: string) => void
   copyWalletConnectBaseURIToClipboard: () => void
   focusMainWindow: () => void
 }
@@ -179,13 +180,19 @@ interface HyperPlayAsyncIPCFunctions {
     updateProperties: chrome.tabs.UpdateProperties
   ) => Promise<chrome.tabs.Tab>
   chromeTabsRemove: (tabIds: number | number[]) => Promise<void>
-  //
-  importMetaMask: (dbPath: string | null | undefined) => Promise<boolean>
+  importMetaMask: (
+    mmInitMethod: MetaMaskInitMethod,
+    dbPath?: string | null,
+    browser?: ImportableBrowser
+  ) => Promise<boolean>
   getMetaMaskImportOptions: () => Promise<MetaMaskImportOptions>
   isExtensionInitialized: () => Promise<boolean>
   getTabUrl: () => Promise<string>
   getExtensionId: () => Promise<string>
-  getConnectionUris: (providerSelection: PROVIDERS) => Promise<string>
+  getConnectionUris: (
+    providerSelection: PROVIDERS,
+    isBootstrapping?: boolean
+  ) => Promise<string>
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   providerRequest: (args: RequestArguments) => Promise<any>
   getConnectedProvider: () => Promise<PROVIDERS>
