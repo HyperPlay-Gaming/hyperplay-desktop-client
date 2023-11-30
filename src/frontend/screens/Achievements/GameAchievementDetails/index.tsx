@@ -1,11 +1,12 @@
 import { GameAchievements } from '@hyperplay/ui'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { achievementsSortOptions } from '..'
 import walletState from 'frontend/state/WalletState'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import AchievementState from 'frontend/state/AchievementState'
+import AchievementState, {
+  ACHIVEMENT_SORT_OPTIONS
+} from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
 
 const pageSize = 6
@@ -21,7 +22,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const { t } = useTranslation()
   const { id } = useParams()
 
-  const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
+  const [selectedSort, setSelectedSort] = useState(ACHIVEMENT_SORT_OPTIONS[0])
 
   const achievementsToBeMinted = MintAchievementsState.achievementsToBeMinted
   const isLoading = MintAchievementsState.isLoading
@@ -31,16 +32,11 @@ export default observer(function GameAchievementDetails(): JSX.Element {
 
   const numFreeMints = AchievementState.numFreeMints
   const individualAchievements = AchievementState.individualAchievements
-  const summaryAchievement = AchievementState.summaryAchievements.data[0]
+  // TODO: get the game id from the path param and find it in achievement state summaries
+  const summaryAchievement = AchievementState.summaryAchievementsToDisplay![0]
   const navigate = useNavigate()
 
   useEffect(() => {
-    AchievementState.getSummaryAchievements({
-      page: 1,
-      pageSize,
-      sort: selectedSort.value,
-      filter: 'ALL'
-    })
     AchievementState.getIndividualAchievements({
       gameId: id as string,
       page: 1,
@@ -78,10 +74,10 @@ export default observer(function GameAchievementDetails(): JSX.Element {
         isLocked: !isTimestampInPast(achievement.unlocktime)
       }))}
       sortProps={{
-        options: achievementsSortOptions,
+        options: ACHIVEMENT_SORT_OPTIONS,
         selected: selectedSort,
         onItemChange: async (sortOption) => {
-          const chosenItem = achievementsSortOptions.find(
+          const chosenItem = ACHIVEMENT_SORT_OPTIONS.find(
             (option) => option.text === sortOption.text
           )
 
@@ -98,9 +94,12 @@ export default observer(function GameAchievementDetails(): JSX.Element {
         }
       }}
       paginationProps={{
-        currentPage: individualAchievements.currentPage,
-        totalPages: individualAchievements.totalPages,
-        handlePrevPage
+        currentPage: 0,
+        totalPages: 0,
+        handlePrevPage,
+        handleNextPage: () => {
+          console.log('next page')
+        }
       }}
       mintButtonProps={{
         onClick: handleMint,

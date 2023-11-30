@@ -220,7 +220,6 @@ interface HyperPlayAsyncIPCFunctions {
   appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
   getSummaryAchievements: (options: GetAchievementsOptions) => Promise<{
     data: SummaryAchievement[]
-    currentPage: number
     totalPages: number
   }>
   getIndividualAchievements: (

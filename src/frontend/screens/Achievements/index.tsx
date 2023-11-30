@@ -1,30 +1,19 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React from 'react'
 import walletState from 'frontend/state/WalletState'
-
 import { AchievementCard, AchievementSummaryTable } from '@hyperplay/ui'
-import { AchievementFilter, AchievementSort } from 'common/types'
 import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
-import AchievementStoreState from 'frontend/state/AchievementState'
+import AchievementState, {
+  ACHIVEMENT_SORT_OPTIONS
+} from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
-
-const pageSize = 100
-export const achievementsSortOptions = [
-  { text: 'Alphabetically (ASC)', value: 'ALPHA_A_TO_Z' },
-  { text: 'Alphabetically (DES)', value: 'ALPHA_Z_TO_A' }
-] as { text: string; value: AchievementSort }[]
 
 export default observer(function Achievements(): JSX.Element {
   const { t } = useTranslation()
 
-  const [selectedSort, setSelectedSort] = useState(achievementsSortOptions[0])
-  const [activeFilter, setActiveFilter] = useState<AchievementFilter>('ALL')
-
-  const store = AchievementStoreState.store
-  const playerStoreId = AchievementStoreState.playerStoreId
-  const numFreeMints = AchievementStoreState.numFreeMints
+  const numFreeMints = AchievementState.numFreeMints
 
   const achievementsToBeMinted = MintAchievementsState.achievementsToBeMinted
   const toggleAchievementToBeMinted =
@@ -35,138 +24,101 @@ export default observer(function Achievements(): JSX.Element {
   const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
   const toggleAchievementToBeUpdated =
     MintAchievementsState.toggleAchievementToBeUpdated
-  const achievementsData = AchievementStoreState.summaryAchievements
-
-  useEffect(() => {
-    AchievementStoreState.getSummaryAchievements({
-      page: 1,
-      pageSize,
-      filter: activeFilter,
-      sort: selectedSort.value
-    })
-  }, [store, playerStoreId, walletState.address])
-
-  const handleNextPage = () => {
-    const nextPage = achievementsData.currentPage + 1
-    AchievementStoreState.getSummaryAchievements({
-      page: nextPage,
-      pageSize,
-      filter: activeFilter,
-      sort: selectedSort.value
-    })
-  }
-
-  const handlePrevPage = () => {
-    const prevPage = achievementsData.currentPage - 1
-    AchievementStoreState.getSummaryAchievements({
-      page: prevPage,
-      pageSize,
-      filter: activeFilter,
-      sort: selectedSort.value
-    })
-  }
 
   const isDisabled = isLoading || !walletState.isConnected
 
-  const filterMap = useMemo(() => {
-    if (activeFilter === 'NEW') return 'new'
-    if (activeFilter === 'MINTED') return 'minted'
-    return 'all'
-  }, [activeFilter])
+  if (AchievementState.summaryAchievementsToDisplay === undefined) {
+    AchievementState.fetchMoreSummaryAchievements()
+  }
 
   return (
     <>
       <AchievementSummaryTable
-        games={achievementsData.data.map((game) => {
-          const id = String(game.gameId)
-          const isUpdate =
-            game.isNewAchievement && game.mintedAchievementCount > 0
-          const state = !walletState.isConnected
-            ? 'disabled'
-            : achievementsToBeMinted.includes(id) ||
-              achievementsToBeUpdated.includes(id)
-            ? 'active'
-            : isUpdate
-            ? 'update'
-            : 'default'
+        games={
+          AchievementState.summaryAchievementsToDisplay
+            ? AchievementState.summaryAchievementsToDisplay.map((game) => {
+                const id = String(game.gameId)
+                const isUpdate =
+                  game.isNewAchievement && game.mintedAchievementCount > 0
+                const state = !walletState.isConnected
+                  ? 'disabled'
+                  : achievementsToBeMinted.includes(id) ||
+                    achievementsToBeUpdated.includes(id)
+                  ? 'active'
+                  : isUpdate
+                  ? 'update'
+                  : 'default'
 
-          return (
-            <NavLink key={id} to={`/achievements/${game.gameId}`}>
-              <AchievementCard
-                showStatusIcon={false}
-                id={id}
-                title={game.gameName}
-                image={game.gameImageURL}
-                mintableAchievementsCount={game.mintableAchievementsCount}
-                mintedAchievementsCount={game.mintedAchievementCount}
-                totalAchievementsCount={game.totalAchievementCount}
-                isNewAchievement={game.isNewAchievement}
-                state={state as StatusIconState}
-                ctaProps={{
-                  onClick: (e) => {
-                    e.preventDefault()
-                    if (isUpdate) {
-                      toggleAchievementToBeUpdated(id)
-                    } else {
-                      toggleAchievementToBeMinted(id)
-                    }
-                  },
-                  disabled: isDisabled
-                }}
-                progressKeyProps={{
-                  i18n: {
-                    mintedLabel: t('achievements.progress.minted', 'on chain'),
-                    notMintedLabel: t(
-                      'achievements.progress.notMinted',
-                      'off chain'
-                    )
-                  }
-                }}
-              />
-            </NavLink>
-          )
-        })}
+                return (
+                  <NavLink key={id} to={`/achievements/${game.gameId}`}>
+                    <AchievementCard
+                      showStatusIcon={false}
+                      id={id}
+                      title={game.gameName}
+                      image={game.gameImageURL}
+                      mintableAchievementsCount={game.mintableAchievementsCount}
+                      mintedAchievementsCount={game.mintedAchievementCount}
+                      totalAchievementsCount={game.totalAchievementCount}
+                      isNewAchievement={game.isNewAchievement}
+                      state={state as StatusIconState}
+                      ctaProps={{
+                        onClick: (e) => {
+                          e.preventDefault()
+                          if (isUpdate) {
+                            toggleAchievementToBeUpdated(id)
+                          } else {
+                            toggleAchievementToBeMinted(id)
+                          }
+                        },
+                        disabled: isDisabled
+                      }}
+                      progressKeyProps={{
+                        i18n: {
+                          mintedLabel: t(
+                            'achievements.progress.minted',
+                            'on chain'
+                          ),
+                          notMintedLabel: t(
+                            'achievements.progress.notMinted',
+                            'off chain'
+                          )
+                        }
+                      }}
+                    />
+                  </NavLink>
+                )
+              })
+            : []
+        }
         sortProps={{
-          options: achievementsSortOptions,
-          selected: selectedSort,
+          options: ACHIVEMENT_SORT_OPTIONS,
+          selected: AchievementState.currentSort,
           onItemChange: async (sortOption) => {
-            const chosenItem = achievementsSortOptions.find(
+            const chosenItem = ACHIVEMENT_SORT_OPTIONS.find(
               (option) => option.text === sortOption.text
             )
 
             if (chosenItem) {
-              AchievementStoreState.getSummaryAchievements({
-                page: 1,
-                pageSize,
-                filter: activeFilter,
-                sort: chosenItem.value
-              })
-
-              setSelectedSort(chosenItem)
+              AchievementState.setSort(chosenItem)
             }
           }
         }}
         paginationProps={{
-          currentPage: achievementsData.currentPage,
-          totalPages: achievementsData.totalPages,
-          handleNextPage,
-          handlePrevPage
+          currentPage: 0,
+          totalPages: 0,
+          handleNextPage: () => {
+            console.log('handling next page')
+          },
+          handlePrevPage: () => {
+            console.log('handling previous page')
+          }
         }}
         filterProps={{
-          activeFilter: filterMap,
-          setActiveFilter: async (filter) => {
-            let newFilter = 'ALL' as AchievementFilter
-            if (filter === 'new') newFilter = 'NEW'
-            if (filter === 'minted') newFilter = 'MINTED'
-
-            AchievementStoreState.getSummaryAchievements({
-              page: 1,
-              pageSize,
-              filter: newFilter,
-              sort: selectedSort.value
-            })
-
-            setActiveFilter(newFilter)
+          activeFilter: AchievementState.filterDisplayName,
+          setActiveFilter: async (filterDisplayName) => {
+            const filter =
+              AchievementState.getFilterNameFromDisplayName(filterDisplayName)
+            AchievementState.setFilter(filter)
           }
         }}
         mintButtonProps={{
@@ -183,6 +135,9 @@ export default observer(function Achievements(): JSX.Element {
           freeMints: numFreeMints,
           basketAmount:
             achievementsToBeMinted.length + achievementsToBeUpdated.length
+        }}
+        fetchNextPage={() => {
+          AchievementState.fetchMoreSummaryAchievements()
         }}
       />
     </>

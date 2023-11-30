@@ -837,7 +837,7 @@ export interface GetAchievementsOptions extends PlayerOptions {
   filter: AchievementFilter
   sort: AchievementSort
   page: number
-  pageSize: number
+  pageSize?: number
 }
 
 export interface GetIndividualAchievementsOptions extends PlayerOptions {
