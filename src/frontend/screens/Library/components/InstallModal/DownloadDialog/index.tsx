@@ -42,10 +42,6 @@ import { AlertCard, Button } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
-import { ethers } from 'ethers'
-import { valistBaseApiUrlv1 } from 'common/constants'
-import axios from 'axios'
-import { SiweMessage } from 'siwe'
 
 interface Props {
   backdropClick: () => void
@@ -59,9 +55,9 @@ interface Props {
   children: React.ReactNode
   gameInfo: GameInfo
   channelNameToInstall: string
+  channelId?: number,
   accessCode: string
   enableCTAButton: boolean
-  requiresAccessCode: boolean
   requiresToken: boolean
 }
 
@@ -122,7 +118,6 @@ export default function DownloadDialog({
   channelNameToInstall,
   accessCode,
   enableCTAButton,
-  // requiresAccessCode,
   requiresToken
 }: Props) {
   const previousProgress = JSON.parse(
@@ -240,7 +235,7 @@ export default function DownloadDialog({
       platformToInstall,
       showDialogModal: () => backdropClick(),
       channelName: channelNameToInstall,
-      accessCode
+      accessCode,
     })
   }
 
@@ -410,7 +405,6 @@ export default function DownloadDialog({
 
   const readyToInstall =
     isWebGame || nativeGameIsReadyToInstall || requiresToken
-  console.log({ readyToInstall })
 
   const showRemainingProgress =
     (runner === 'hyperplay' && previousProgress.percent) ||
@@ -437,14 +431,16 @@ export default function DownloadDialog({
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
       <DialogContent>
         {requiresToken ? (
-          <AlertCard
-            title={
-              'Please purchase to proceed or ensure that NFT is in the current wallet.'
-            }
-            message={''}
-            actionText={'Buy NFT'}
-            variant={'warning'}
-          />
+          <div style={{ maxWidth: 500, overflow: 'hidden' }}>
+            <AlertCard
+              title={
+                'Please purchase to proceed or ensure that NFT is in the current wallet.'
+              }
+              message={''}
+              actionText={'Buy NFT'}
+              variant={'warning'}
+            />
+          </div>
         ) : null}
         {showInstallandDownloadSizes ? (
           <div className="InstallModal__sizes">
@@ -635,9 +631,7 @@ export default function DownloadDialog({
         <Button
           type="secondary"
           size="medium"
-          onClick={
-            requiresToken ? signWithMetamask : async () => handleInstall()
-          }
+          onClick={async () => handleInstall()}
           disabled={!readyToInstall || !enableCTAButton}
         >
           {!readyToInstall && (
@@ -648,49 +642,4 @@ export default function DownloadDialog({
       </DialogFooter>
     </>
   )
-}
-
-async function signWithMetamask() {
-  console.log('Hello world')
-  if (!window.ethereum) return
-  const provider = new ethers.BrowserProvider(window.ethereum)
-  const signer = await provider.getSigner()
-  const address = await signer.getAddress()
-
-  const domain = window.location.host
-  const origin = window.location.origin
-
-  const statementRes = await axios.get(
-    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
-  )
-  const statement = String(statementRes?.data)
-
-  const siweMessage = new SiweMessage({
-    domain,
-    address,
-    statement,
-    uri: origin,
-    version: '1',
-    chainId: 1
-  })
-  const message = siweMessage.prepareMessage()
-  const signature = await signer.signMessage(message)
-
-  let validateRes
-  try {
-    validateRes = await axios.post(
-      valistBaseApiUrlv1 + 'license_contracts/validate',
-      {
-        message,
-        signature,
-        address,
-        channel_id: 1
-      }
-    )
-  } catch (err) {
-    alert(err)
-  }
-  const data = validateRes?.data
-  alert('response: ' + JSON.stringify(data))
-  return data
 }

@@ -229,10 +229,10 @@ export default React.memo(function InstallModal({
             gameInfo={gameInfo}
             crossoverBottle={crossoverBottle}
             channelNameToInstall={channelNameToInstall}
+            channelId={selectedChannel?.channel_id}
             accessCode={accessCode}
             enableCTAButton={enableCTAButton}
             requiresToken={channelRequiresToken}
-            requiresAccessCode={channelRequiresAccessCode}
           >
             <PlatformSelection
               disabled={disabledPlatformSelection}
