@@ -7,7 +7,8 @@ import {
   GameSettings,
   PlatformConfig,
   LicenseConfigValidateResult,
-  ChannelReleaseMeta
+  ChannelReleaseMeta,
+  SiweValues
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
@@ -461,39 +462,24 @@ async function getAccessCodeGatedPlatforms(
   return validateResult.platforms
 }
 
-async function getTokenGatedPlatforms(channel_id: number): Promise<PlatformsMetaInterface> {
-  if (!window.ethereum) throw 'Window.ethereum provider not found'
-  const provider = new ethers.BrowserProvider(window.ethereum)
-  const signer = await provider.getSigner()
-  const address = await signer.getAddress()
+async function getTokenGatedPlatforms(
+  channel_id: number,
+  siweValues: SiweValues
+): Promise<PlatformsMetaInterface> {
+  const { address, message, signature } = siweValues
 
-  const domain = window.location.host
-  const origin = window.location.origin
-
-  const statementRes = await axios.get(
-    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
-  )
-  const statement = String(statementRes?.data)
-
-  const siweMessage = new SiweMessage({
-    domain,
-    address,
-    statement,
-    uri: origin,
-    version: '1',
-    chainId: 1
-  })
-  const message = siweMessage.prepareMessage()
-  const signature = await signer.signMessage(message)
-
-  const validateResult = (await axios.post<LicenseConfigValidateResult>(valistBaseApiUrlv1 + '/license_contracts/validate',
-    {
-      message,
-      signature,
-      address,
-      channel_id,
-    }
-  )).data;
+  console.log({ address })
+  const validateResult = (
+    await axios.post<LicenseConfigValidateResult>(
+      valistBaseApiUrlv1 + '/license_contracts/validate',
+      {
+        message,
+        signature,
+        address,
+        channel_id
+      }
+    )
+  ).data
 
   if (validateResult.valid !== true)
     throw `Address code ${address} is not valid for channel id ${channel_id}!`
@@ -596,7 +582,8 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${(error as Error).message
+      `cancelExtraction: Error while canceling the operation ${
+        (error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -610,7 +597,8 @@ export async function install(
     platformToInstall,
     channelName,
     accessCode,
-    updateOnly = false
+    updateOnly = false,
+    siweValues
   }: InstallArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
@@ -664,12 +652,16 @@ export async function install(
     }
 
     if (selectedChannel.license_config.tokens) {
+      console.log('I got here to token gating!')
+      if (!siweValues?.address) throw 'No address found'
       const gatedPlatforms = await getTokenGatedPlatforms(
         selectedChannel.channel_id,
+        siweValues
       )
 
       platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
-    } else if (selectedChannel.license_config.access_codes) { // get presigned platform info if code gated
+    } else if (selectedChannel.license_config.access_codes) {
+      // get presigned platform info if code gated
       if (accessCode === undefined)
         throw 'Access code was undefined for an access code gated channel'
 

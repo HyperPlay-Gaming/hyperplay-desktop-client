@@ -302,6 +302,7 @@ export interface InstallArgs {
   channelName?: string
   accessCode?: string
   updateOnly?: boolean
+  siweValues?: SiweValues
 }
 
 export interface InstallParams extends InstallArgs {
@@ -539,6 +540,12 @@ interface GamepadActionArgsWithoutMetadata {
     | 'altAction'
     | 'esc'
   metadata?: undefined
+}
+
+export type SiweValues = {
+  address: string
+  message: string
+  signature: string
 }
 
 export type InstallPlatform =

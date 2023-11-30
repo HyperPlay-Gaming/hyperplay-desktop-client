@@ -3,7 +3,8 @@ import {
   AppSettings,
   GameInfo,
   InstallProgress,
-  Runner
+  Runner,
+  SiweValues
 } from 'common/types'
 
 import { TFunction } from 'i18next'
@@ -27,6 +28,7 @@ type InstallArgs = {
   installLanguage?: string
   channelName?: string
   accessCode?: string
+  siweValues?: SiweValues
 }
 
 async function install({
@@ -40,7 +42,8 @@ async function install({
   installLanguage = 'en-US',
   platformToInstall = 'Windows',
   channelName,
-  accessCode
+  accessCode,
+  siweValues
 }: InstallArgs) {
   if (!installPath) {
     console.error('installPath is undefined')
@@ -90,6 +93,9 @@ async function install({
     storage.removeItem(appName)
   }
 
+  console.log('hello')
+  console.log({ siweValues })
+
   return window.api.install({
     appName,
     path: installPath,
@@ -100,7 +106,8 @@ async function install({
     platformToInstall,
     gameInfo: JSON.parse(JSON.stringify(gameInfo)),
     channelName,
-    accessCode
+    accessCode,
+    siweValues
   })
 }
 
