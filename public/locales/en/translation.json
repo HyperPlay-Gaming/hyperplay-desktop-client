@@ -310,6 +310,7 @@
             "noThanks": "No Thanks"
         },
         "changeWallet": "Change wallet",
+        "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
         "discordApp": "Discord",

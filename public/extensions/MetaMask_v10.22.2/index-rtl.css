@@ -6309,14 +6309,27 @@ body {
 
 html {
   min-height: 500px;
+  /*
+    Until we get the user's preference from React state,
+    assume the user is in dark mode, because the default
+    theme is system preference
+  */
 }
-
-.mouse-user-styles button:focus,
-.mouse-user-styles input:focus,
-.mouse-user-styles textarea:focus,
-.mouse-user-styles .unit-input__input,
-.mouse-user-styles .currency-display__input {
-  outline: none;
+@media screen and (max-width: calc(576px - 1px)) {
+  html:not([data-theme]) {
+    background-color: var(--color-background-default);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme]) {
+    color: var(--brand-colors-white-white000);
+    background-color: var(--brand-colors-grey-grey900);
+  }
+}
+@media screen and (prefers-color-scheme: dark) and (max-width: calc(576px - 1px)) {
+  html:not([data-theme]) {
+    background-color: var(--brand-colors-grey-grey800);
+  }
 }
 
 /*
@@ -6337,10 +6350,12 @@ html {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+html[data-theme] #app-content {
   background: var(--color-background-alternative);
 }
 @media screen and (max-width: calc(576px - 1px)) {
-  #app-content {
+  html[data-theme] #app-content {
     background-color: var(--color-background-default);
   }
 }
@@ -6353,19 +6368,6 @@ a {
 
 a:hover {
   color: var(--color-primary-alternative);
-}
-
-input.large-input,
-textarea.large-input {
-  padding: 8px;
-}
-
-input.large-input {
-  height: 36px;
-}
-
-.allcaps {
-  text-transform: uppercase;
 }
 
 .input-label {
@@ -20135,11 +20137,26 @@ readers do not read off random characters that represent icons */
 .mm-box--width-full {
   width: 100%;
 }
+.mm-box--min-width-full {
+  min-width: 100%;
+}
 .mm-box--height-full {
   height: 100%;
 }
+.mm-box--width-0 {
+  width: 0;
+}
+.mm-box--min-width-0 {
+  min-width: 0;
+}
+.mm-box--height-0 {
+  height: 0;
+}
 .mm-box--width-1\/2 {
   width: 50%;
+}
+.mm-box--min-width-1\/2 {
+  min-width: 50%;
 }
 .mm-box--height-1\/2 {
   height: 50%;
@@ -20147,11 +20164,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-1\/3 {
   width: 33.333333%;
 }
+.mm-box--min-width-1\/3 {
+  min-width: 33.333333%;
+}
 .mm-box--height-1\/3 {
   height: 33.333333%;
 }
 .mm-box--width-2\/3 {
   width: 66.666667%;
+}
+.mm-box--min-width-2\/3 {
+  min-width: 66.666667%;
 }
 .mm-box--height-2\/3 {
   height: 66.666667%;
@@ -20159,11 +20182,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-1\/4 {
   width: 25%;
 }
+.mm-box--min-width-1\/4 {
+  min-width: 25%;
+}
 .mm-box--height-1\/4 {
   height: 25%;
 }
 .mm-box--width-2\/4 {
   width: 50%;
+}
+.mm-box--min-width-2\/4 {
+  min-width: 50%;
 }
 .mm-box--height-2\/4 {
   height: 50%;
@@ -20171,11 +20200,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-3\/4 {
   width: 75%;
 }
+.mm-box--min-width-3\/4 {
+  min-width: 75%;
+}
 .mm-box--height-3\/4 {
   height: 75%;
 }
 .mm-box--width-1\/5 {
   width: 20%;
+}
+.mm-box--min-width-1\/5 {
+  min-width: 20%;
 }
 .mm-box--height-1\/5 {
   height: 20%;
@@ -20183,11 +20218,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-2\/5 {
   width: 40%;
 }
+.mm-box--min-width-2\/5 {
+  min-width: 40%;
+}
 .mm-box--height-2\/5 {
   height: 40%;
 }
 .mm-box--width-3\/5 {
   width: 60%;
+}
+.mm-box--min-width-3\/5 {
+  min-width: 60%;
 }
 .mm-box--height-3\/5 {
   height: 60%;
@@ -20195,11 +20236,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-4\/5 {
   width: 80%;
 }
+.mm-box--min-width-4\/5 {
+  min-width: 80%;
+}
 .mm-box--height-4\/5 {
   height: 80%;
 }
 .mm-box--width-1\/6 {
   width: 16.666667%;
+}
+.mm-box--min-width-1\/6 {
+  min-width: 16.666667%;
 }
 .mm-box--height-1\/6 {
   height: 16.666667%;
@@ -20207,11 +20254,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-2\/6 {
   width: 33.333333%;
 }
+.mm-box--min-width-2\/6 {
+  min-width: 33.333333%;
+}
 .mm-box--height-2\/6 {
   height: 33.333333%;
 }
 .mm-box--width-3\/6 {
   width: 50%;
+}
+.mm-box--min-width-3\/6 {
+  min-width: 50%;
 }
 .mm-box--height-3\/6 {
   height: 50%;
@@ -20219,11 +20272,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-4\/6 {
   width: 66.666667%;
 }
+.mm-box--min-width-4\/6 {
+  min-width: 66.666667%;
+}
 .mm-box--height-4\/6 {
   height: 66.666667%;
 }
 .mm-box--width-5\/6 {
   width: 83.333333%;
+}
+.mm-box--min-width-5\/6 {
+  min-width: 83.333333%;
 }
 .mm-box--height-5\/6 {
   height: 83.333333%;
@@ -20231,11 +20290,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-1\/12 {
   width: 8.333333%;
 }
+.mm-box--min-width-1\/12 {
+  min-width: 8.333333%;
+}
 .mm-box--height-1\/12 {
   height: 8.333333%;
 }
 .mm-box--width-2\/12 {
   width: 16.666667%;
+}
+.mm-box--min-width-2\/12 {
+  min-width: 16.666667%;
 }
 .mm-box--height-2\/12 {
   height: 16.666667%;
@@ -20243,11 +20308,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-3\/12 {
   width: 25%;
 }
+.mm-box--min-width-3\/12 {
+  min-width: 25%;
+}
 .mm-box--height-3\/12 {
   height: 25%;
 }
 .mm-box--width-4\/12 {
   width: 33.333333%;
+}
+.mm-box--min-width-4\/12 {
+  min-width: 33.333333%;
 }
 .mm-box--height-4\/12 {
   height: 33.333333%;
@@ -20255,11 +20326,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-5\/12 {
   width: 41.666667%;
 }
+.mm-box--min-width-5\/12 {
+  min-width: 41.666667%;
+}
 .mm-box--height-5\/12 {
   height: 41.666667%;
 }
 .mm-box--width-6\/12 {
   width: 50%;
+}
+.mm-box--min-width-6\/12 {
+  min-width: 50%;
 }
 .mm-box--height-6\/12 {
   height: 50%;
@@ -20267,11 +20344,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-7\/12 {
   width: 58.333333%;
 }
+.mm-box--min-width-7\/12 {
+  min-width: 58.333333%;
+}
 .mm-box--height-7\/12 {
   height: 58.333333%;
 }
 .mm-box--width-8\/12 {
   width: 66.666667%;
+}
+.mm-box--min-width-8\/12 {
+  min-width: 66.666667%;
 }
 .mm-box--height-8\/12 {
   height: 66.666667%;
@@ -20279,11 +20362,17 @@ readers do not read off random characters that represent icons */
 .mm-box--width-9\/12 {
   width: 75%;
 }
+.mm-box--min-width-9\/12 {
+  min-width: 75%;
+}
 .mm-box--height-9\/12 {
   height: 75%;
 }
 .mm-box--width-10\/12 {
   width: 83.333333%;
+}
+.mm-box--min-width-10\/12 {
+  min-width: 83.333333%;
 }
 .mm-box--height-10\/12 {
   height: 83.333333%;
@@ -20291,12 +20380,29 @@ readers do not read off random characters that represent icons */
 .mm-box--width-11\/12 {
   width: 91.666667%;
 }
+.mm-box--min-width-11\/12 {
+  min-width: 91.666667%;
+}
 .mm-box--height-11\/12 {
   height: 91.666667%;
 }
 @media screen and (min-width: 576px) {
+  .mm-box--sm\:width-0 {
+    width: 0;
+  }
+  .mm-box--sm\:min-width-0 {
+    min-width: 0;
+  }
+  .mm-box--sm\:height-0 {
+    height: 0;
+  }
+}
+@media screen and (min-width: 576px) {
   .mm-box--sm\:width-1\/2 {
     width: 50%;
+  }
+  .mm-box--sm\:min-width-1\/2 {
+    min-width: 50%;
   }
   .mm-box--sm\:height-1\/2 {
     height: 50%;
@@ -20306,6 +20412,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-1\/3 {
     width: 33.333333%;
   }
+  .mm-box--sm\:min-width-1\/3 {
+    min-width: 33.333333%;
+  }
   .mm-box--sm\:height-1\/3 {
     height: 33.333333%;
   }
@@ -20313,6 +20422,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-2\/3 {
     width: 66.666667%;
+  }
+  .mm-box--sm\:min-width-2\/3 {
+    min-width: 66.666667%;
   }
   .mm-box--sm\:height-2\/3 {
     height: 66.666667%;
@@ -20322,6 +20434,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-1\/4 {
     width: 25%;
   }
+  .mm-box--sm\:min-width-1\/4 {
+    min-width: 25%;
+  }
   .mm-box--sm\:height-1\/4 {
     height: 25%;
   }
@@ -20329,6 +20444,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-2\/4 {
     width: 50%;
+  }
+  .mm-box--sm\:min-width-2\/4 {
+    min-width: 50%;
   }
   .mm-box--sm\:height-2\/4 {
     height: 50%;
@@ -20338,6 +20456,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-3\/4 {
     width: 75%;
   }
+  .mm-box--sm\:min-width-3\/4 {
+    min-width: 75%;
+  }
   .mm-box--sm\:height-3\/4 {
     height: 75%;
   }
@@ -20345,6 +20466,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-1\/5 {
     width: 20%;
+  }
+  .mm-box--sm\:min-width-1\/5 {
+    min-width: 20%;
   }
   .mm-box--sm\:height-1\/5 {
     height: 20%;
@@ -20354,6 +20478,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-2\/5 {
     width: 40%;
   }
+  .mm-box--sm\:min-width-2\/5 {
+    min-width: 40%;
+  }
   .mm-box--sm\:height-2\/5 {
     height: 40%;
   }
@@ -20361,6 +20488,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-3\/5 {
     width: 60%;
+  }
+  .mm-box--sm\:min-width-3\/5 {
+    min-width: 60%;
   }
   .mm-box--sm\:height-3\/5 {
     height: 60%;
@@ -20370,6 +20500,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-4\/5 {
     width: 80%;
   }
+  .mm-box--sm\:min-width-4\/5 {
+    min-width: 80%;
+  }
   .mm-box--sm\:height-4\/5 {
     height: 80%;
   }
@@ -20377,6 +20510,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-1\/6 {
     width: 16.666667%;
+  }
+  .mm-box--sm\:min-width-1\/6 {
+    min-width: 16.666667%;
   }
   .mm-box--sm\:height-1\/6 {
     height: 16.666667%;
@@ -20386,6 +20522,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-2\/6 {
     width: 33.333333%;
   }
+  .mm-box--sm\:min-width-2\/6 {
+    min-width: 33.333333%;
+  }
   .mm-box--sm\:height-2\/6 {
     height: 33.333333%;
   }
@@ -20393,6 +20532,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-3\/6 {
     width: 50%;
+  }
+  .mm-box--sm\:min-width-3\/6 {
+    min-width: 50%;
   }
   .mm-box--sm\:height-3\/6 {
     height: 50%;
@@ -20402,6 +20544,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-4\/6 {
     width: 66.666667%;
   }
+  .mm-box--sm\:min-width-4\/6 {
+    min-width: 66.666667%;
+  }
   .mm-box--sm\:height-4\/6 {
     height: 66.666667%;
   }
@@ -20409,6 +20554,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-5\/6 {
     width: 83.333333%;
+  }
+  .mm-box--sm\:min-width-5\/6 {
+    min-width: 83.333333%;
   }
   .mm-box--sm\:height-5\/6 {
     height: 83.333333%;
@@ -20418,6 +20566,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-1\/12 {
     width: 8.333333%;
   }
+  .mm-box--sm\:min-width-1\/12 {
+    min-width: 8.333333%;
+  }
   .mm-box--sm\:height-1\/12 {
     height: 8.333333%;
   }
@@ -20425,6 +20576,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-2\/12 {
     width: 16.666667%;
+  }
+  .mm-box--sm\:min-width-2\/12 {
+    min-width: 16.666667%;
   }
   .mm-box--sm\:height-2\/12 {
     height: 16.666667%;
@@ -20434,6 +20588,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-3\/12 {
     width: 25%;
   }
+  .mm-box--sm\:min-width-3\/12 {
+    min-width: 25%;
+  }
   .mm-box--sm\:height-3\/12 {
     height: 25%;
   }
@@ -20441,6 +20598,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-4\/12 {
     width: 33.333333%;
+  }
+  .mm-box--sm\:min-width-4\/12 {
+    min-width: 33.333333%;
   }
   .mm-box--sm\:height-4\/12 {
     height: 33.333333%;
@@ -20450,6 +20610,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-5\/12 {
     width: 41.666667%;
   }
+  .mm-box--sm\:min-width-5\/12 {
+    min-width: 41.666667%;
+  }
   .mm-box--sm\:height-5\/12 {
     height: 41.666667%;
   }
@@ -20457,6 +20620,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-6\/12 {
     width: 50%;
+  }
+  .mm-box--sm\:min-width-6\/12 {
+    min-width: 50%;
   }
   .mm-box--sm\:height-6\/12 {
     height: 50%;
@@ -20466,6 +20632,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-7\/12 {
     width: 58.333333%;
   }
+  .mm-box--sm\:min-width-7\/12 {
+    min-width: 58.333333%;
+  }
   .mm-box--sm\:height-7\/12 {
     height: 58.333333%;
   }
@@ -20473,6 +20642,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-8\/12 {
     width: 66.666667%;
+  }
+  .mm-box--sm\:min-width-8\/12 {
+    min-width: 66.666667%;
   }
   .mm-box--sm\:height-8\/12 {
     height: 66.666667%;
@@ -20482,6 +20654,9 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-9\/12 {
     width: 75%;
   }
+  .mm-box--sm\:min-width-9\/12 {
+    min-width: 75%;
+  }
   .mm-box--sm\:height-9\/12 {
     height: 75%;
   }
@@ -20489,6 +20664,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 576px) {
   .mm-box--sm\:width-10\/12 {
     width: 83.333333%;
+  }
+  .mm-box--sm\:min-width-10\/12 {
+    min-width: 83.333333%;
   }
   .mm-box--sm\:height-10\/12 {
     height: 83.333333%;
@@ -20498,13 +20676,30 @@ readers do not read off random characters that represent icons */
   .mm-box--sm\:width-11\/12 {
     width: 91.666667%;
   }
+  .mm-box--sm\:min-width-11\/12 {
+    min-width: 91.666667%;
+  }
   .mm-box--sm\:height-11\/12 {
     height: 91.666667%;
   }
 }
 @media screen and (min-width: 768px) {
+  .mm-box--md\:width-0 {
+    width: 0;
+  }
+  .mm-box--md\:min-width-0 {
+    min-width: 0;
+  }
+  .mm-box--md\:height-0 {
+    height: 0;
+  }
+}
+@media screen and (min-width: 768px) {
   .mm-box--md\:width-1\/2 {
     width: 50%;
+  }
+  .mm-box--md\:min-width-1\/2 {
+    min-width: 50%;
   }
   .mm-box--md\:height-1\/2 {
     height: 50%;
@@ -20514,6 +20709,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-1\/3 {
     width: 33.333333%;
   }
+  .mm-box--md\:min-width-1\/3 {
+    min-width: 33.333333%;
+  }
   .mm-box--md\:height-1\/3 {
     height: 33.333333%;
   }
@@ -20521,6 +20719,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-2\/3 {
     width: 66.666667%;
+  }
+  .mm-box--md\:min-width-2\/3 {
+    min-width: 66.666667%;
   }
   .mm-box--md\:height-2\/3 {
     height: 66.666667%;
@@ -20530,6 +20731,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-1\/4 {
     width: 25%;
   }
+  .mm-box--md\:min-width-1\/4 {
+    min-width: 25%;
+  }
   .mm-box--md\:height-1\/4 {
     height: 25%;
   }
@@ -20537,6 +20741,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-2\/4 {
     width: 50%;
+  }
+  .mm-box--md\:min-width-2\/4 {
+    min-width: 50%;
   }
   .mm-box--md\:height-2\/4 {
     height: 50%;
@@ -20546,6 +20753,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-3\/4 {
     width: 75%;
   }
+  .mm-box--md\:min-width-3\/4 {
+    min-width: 75%;
+  }
   .mm-box--md\:height-3\/4 {
     height: 75%;
   }
@@ -20553,6 +20763,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-1\/5 {
     width: 20%;
+  }
+  .mm-box--md\:min-width-1\/5 {
+    min-width: 20%;
   }
   .mm-box--md\:height-1\/5 {
     height: 20%;
@@ -20562,6 +20775,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-2\/5 {
     width: 40%;
   }
+  .mm-box--md\:min-width-2\/5 {
+    min-width: 40%;
+  }
   .mm-box--md\:height-2\/5 {
     height: 40%;
   }
@@ -20569,6 +20785,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-3\/5 {
     width: 60%;
+  }
+  .mm-box--md\:min-width-3\/5 {
+    min-width: 60%;
   }
   .mm-box--md\:height-3\/5 {
     height: 60%;
@@ -20578,6 +20797,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-4\/5 {
     width: 80%;
   }
+  .mm-box--md\:min-width-4\/5 {
+    min-width: 80%;
+  }
   .mm-box--md\:height-4\/5 {
     height: 80%;
   }
@@ -20585,6 +20807,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-1\/6 {
     width: 16.666667%;
+  }
+  .mm-box--md\:min-width-1\/6 {
+    min-width: 16.666667%;
   }
   .mm-box--md\:height-1\/6 {
     height: 16.666667%;
@@ -20594,6 +20819,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-2\/6 {
     width: 33.333333%;
   }
+  .mm-box--md\:min-width-2\/6 {
+    min-width: 33.333333%;
+  }
   .mm-box--md\:height-2\/6 {
     height: 33.333333%;
   }
@@ -20601,6 +20829,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-3\/6 {
     width: 50%;
+  }
+  .mm-box--md\:min-width-3\/6 {
+    min-width: 50%;
   }
   .mm-box--md\:height-3\/6 {
     height: 50%;
@@ -20610,6 +20841,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-4\/6 {
     width: 66.666667%;
   }
+  .mm-box--md\:min-width-4\/6 {
+    min-width: 66.666667%;
+  }
   .mm-box--md\:height-4\/6 {
     height: 66.666667%;
   }
@@ -20617,6 +20851,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-5\/6 {
     width: 83.333333%;
+  }
+  .mm-box--md\:min-width-5\/6 {
+    min-width: 83.333333%;
   }
   .mm-box--md\:height-5\/6 {
     height: 83.333333%;
@@ -20626,6 +20863,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-1\/12 {
     width: 8.333333%;
   }
+  .mm-box--md\:min-width-1\/12 {
+    min-width: 8.333333%;
+  }
   .mm-box--md\:height-1\/12 {
     height: 8.333333%;
   }
@@ -20633,6 +20873,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-2\/12 {
     width: 16.666667%;
+  }
+  .mm-box--md\:min-width-2\/12 {
+    min-width: 16.666667%;
   }
   .mm-box--md\:height-2\/12 {
     height: 16.666667%;
@@ -20642,6 +20885,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-3\/12 {
     width: 25%;
   }
+  .mm-box--md\:min-width-3\/12 {
+    min-width: 25%;
+  }
   .mm-box--md\:height-3\/12 {
     height: 25%;
   }
@@ -20649,6 +20895,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-4\/12 {
     width: 33.333333%;
+  }
+  .mm-box--md\:min-width-4\/12 {
+    min-width: 33.333333%;
   }
   .mm-box--md\:height-4\/12 {
     height: 33.333333%;
@@ -20658,6 +20907,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-5\/12 {
     width: 41.666667%;
   }
+  .mm-box--md\:min-width-5\/12 {
+    min-width: 41.666667%;
+  }
   .mm-box--md\:height-5\/12 {
     height: 41.666667%;
   }
@@ -20665,6 +20917,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-6\/12 {
     width: 50%;
+  }
+  .mm-box--md\:min-width-6\/12 {
+    min-width: 50%;
   }
   .mm-box--md\:height-6\/12 {
     height: 50%;
@@ -20674,6 +20929,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-7\/12 {
     width: 58.333333%;
   }
+  .mm-box--md\:min-width-7\/12 {
+    min-width: 58.333333%;
+  }
   .mm-box--md\:height-7\/12 {
     height: 58.333333%;
   }
@@ -20681,6 +20939,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-8\/12 {
     width: 66.666667%;
+  }
+  .mm-box--md\:min-width-8\/12 {
+    min-width: 66.666667%;
   }
   .mm-box--md\:height-8\/12 {
     height: 66.666667%;
@@ -20690,6 +20951,9 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-9\/12 {
     width: 75%;
   }
+  .mm-box--md\:min-width-9\/12 {
+    min-width: 75%;
+  }
   .mm-box--md\:height-9\/12 {
     height: 75%;
   }
@@ -20697,6 +20961,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 768px) {
   .mm-box--md\:width-10\/12 {
     width: 83.333333%;
+  }
+  .mm-box--md\:min-width-10\/12 {
+    min-width: 83.333333%;
   }
   .mm-box--md\:height-10\/12 {
     height: 83.333333%;
@@ -20706,13 +20973,30 @@ readers do not read off random characters that represent icons */
   .mm-box--md\:width-11\/12 {
     width: 91.666667%;
   }
+  .mm-box--md\:min-width-11\/12 {
+    min-width: 91.666667%;
+  }
   .mm-box--md\:height-11\/12 {
     height: 91.666667%;
   }
 }
 @media screen and (min-width: 1280px) {
+  .mm-box--lg\:width-0 {
+    width: 0;
+  }
+  .mm-box--lg\:min-width-0 {
+    min-width: 0;
+  }
+  .mm-box--lg\:height-0 {
+    height: 0;
+  }
+}
+@media screen and (min-width: 1280px) {
   .mm-box--lg\:width-1\/2 {
     width: 50%;
+  }
+  .mm-box--lg\:min-width-1\/2 {
+    min-width: 50%;
   }
   .mm-box--lg\:height-1\/2 {
     height: 50%;
@@ -20722,6 +21006,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-1\/3 {
     width: 33.333333%;
   }
+  .mm-box--lg\:min-width-1\/3 {
+    min-width: 33.333333%;
+  }
   .mm-box--lg\:height-1\/3 {
     height: 33.333333%;
   }
@@ -20729,6 +21016,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-2\/3 {
     width: 66.666667%;
+  }
+  .mm-box--lg\:min-width-2\/3 {
+    min-width: 66.666667%;
   }
   .mm-box--lg\:height-2\/3 {
     height: 66.666667%;
@@ -20738,6 +21028,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-1\/4 {
     width: 25%;
   }
+  .mm-box--lg\:min-width-1\/4 {
+    min-width: 25%;
+  }
   .mm-box--lg\:height-1\/4 {
     height: 25%;
   }
@@ -20745,6 +21038,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-2\/4 {
     width: 50%;
+  }
+  .mm-box--lg\:min-width-2\/4 {
+    min-width: 50%;
   }
   .mm-box--lg\:height-2\/4 {
     height: 50%;
@@ -20754,6 +21050,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-3\/4 {
     width: 75%;
   }
+  .mm-box--lg\:min-width-3\/4 {
+    min-width: 75%;
+  }
   .mm-box--lg\:height-3\/4 {
     height: 75%;
   }
@@ -20761,6 +21060,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-1\/5 {
     width: 20%;
+  }
+  .mm-box--lg\:min-width-1\/5 {
+    min-width: 20%;
   }
   .mm-box--lg\:height-1\/5 {
     height: 20%;
@@ -20770,6 +21072,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-2\/5 {
     width: 40%;
   }
+  .mm-box--lg\:min-width-2\/5 {
+    min-width: 40%;
+  }
   .mm-box--lg\:height-2\/5 {
     height: 40%;
   }
@@ -20777,6 +21082,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-3\/5 {
     width: 60%;
+  }
+  .mm-box--lg\:min-width-3\/5 {
+    min-width: 60%;
   }
   .mm-box--lg\:height-3\/5 {
     height: 60%;
@@ -20786,6 +21094,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-4\/5 {
     width: 80%;
   }
+  .mm-box--lg\:min-width-4\/5 {
+    min-width: 80%;
+  }
   .mm-box--lg\:height-4\/5 {
     height: 80%;
   }
@@ -20793,6 +21104,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-1\/6 {
     width: 16.666667%;
+  }
+  .mm-box--lg\:min-width-1\/6 {
+    min-width: 16.666667%;
   }
   .mm-box--lg\:height-1\/6 {
     height: 16.666667%;
@@ -20802,6 +21116,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-2\/6 {
     width: 33.333333%;
   }
+  .mm-box--lg\:min-width-2\/6 {
+    min-width: 33.333333%;
+  }
   .mm-box--lg\:height-2\/6 {
     height: 33.333333%;
   }
@@ -20809,6 +21126,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-3\/6 {
     width: 50%;
+  }
+  .mm-box--lg\:min-width-3\/6 {
+    min-width: 50%;
   }
   .mm-box--lg\:height-3\/6 {
     height: 50%;
@@ -20818,6 +21138,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-4\/6 {
     width: 66.666667%;
   }
+  .mm-box--lg\:min-width-4\/6 {
+    min-width: 66.666667%;
+  }
   .mm-box--lg\:height-4\/6 {
     height: 66.666667%;
   }
@@ -20825,6 +21148,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-5\/6 {
     width: 83.333333%;
+  }
+  .mm-box--lg\:min-width-5\/6 {
+    min-width: 83.333333%;
   }
   .mm-box--lg\:height-5\/6 {
     height: 83.333333%;
@@ -20834,6 +21160,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-1\/12 {
     width: 8.333333%;
   }
+  .mm-box--lg\:min-width-1\/12 {
+    min-width: 8.333333%;
+  }
   .mm-box--lg\:height-1\/12 {
     height: 8.333333%;
   }
@@ -20841,6 +21170,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-2\/12 {
     width: 16.666667%;
+  }
+  .mm-box--lg\:min-width-2\/12 {
+    min-width: 16.666667%;
   }
   .mm-box--lg\:height-2\/12 {
     height: 16.666667%;
@@ -20850,6 +21182,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-3\/12 {
     width: 25%;
   }
+  .mm-box--lg\:min-width-3\/12 {
+    min-width: 25%;
+  }
   .mm-box--lg\:height-3\/12 {
     height: 25%;
   }
@@ -20857,6 +21192,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-4\/12 {
     width: 33.333333%;
+  }
+  .mm-box--lg\:min-width-4\/12 {
+    min-width: 33.333333%;
   }
   .mm-box--lg\:height-4\/12 {
     height: 33.333333%;
@@ -20866,6 +21204,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-5\/12 {
     width: 41.666667%;
   }
+  .mm-box--lg\:min-width-5\/12 {
+    min-width: 41.666667%;
+  }
   .mm-box--lg\:height-5\/12 {
     height: 41.666667%;
   }
@@ -20873,6 +21214,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-6\/12 {
     width: 50%;
+  }
+  .mm-box--lg\:min-width-6\/12 {
+    min-width: 50%;
   }
   .mm-box--lg\:height-6\/12 {
     height: 50%;
@@ -20882,6 +21226,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-7\/12 {
     width: 58.333333%;
   }
+  .mm-box--lg\:min-width-7\/12 {
+    min-width: 58.333333%;
+  }
   .mm-box--lg\:height-7\/12 {
     height: 58.333333%;
   }
@@ -20889,6 +21236,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-8\/12 {
     width: 66.666667%;
+  }
+  .mm-box--lg\:min-width-8\/12 {
+    min-width: 66.666667%;
   }
   .mm-box--lg\:height-8\/12 {
     height: 66.666667%;
@@ -20898,6 +21248,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-9\/12 {
     width: 75%;
   }
+  .mm-box--lg\:min-width-9\/12 {
+    min-width: 75%;
+  }
   .mm-box--lg\:height-9\/12 {
     height: 75%;
   }
@@ -20906,6 +21259,9 @@ readers do not read off random characters that represent icons */
   .mm-box--lg\:width-10\/12 {
     width: 83.333333%;
   }
+  .mm-box--lg\:min-width-10\/12 {
+    min-width: 83.333333%;
+  }
   .mm-box--lg\:height-10\/12 {
     height: 83.333333%;
   }
@@ -20913,6 +21269,9 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-11\/12 {
     width: 91.666667%;
+  }
+  .mm-box--lg\:min-width-11\/12 {
+    min-width: 91.666667%;
   }
   .mm-box--lg\:height-11\/12 {
     height: 91.666667%;
@@ -20931,6 +21290,21 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-full {
     width: 100%;
+  }
+}
+@media screen and (min-width: 576px) {
+  .mm-box--sm\:min-width-full {
+    min-width: 100%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .mm-box--md\:min-width-full {
+    min-width: 100%;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .mm-box--lg\:min-width-full {
+    min-width: 100%;
   }
 }
 @media screen and (min-width: 576px) {
@@ -20984,6 +21358,24 @@ readers do not read off random characters that represent icons */
     width: 100vw;
   }
 }
+.mm-box--min-width-screen {
+  min-width: 100vw;
+}
+@media screen and (min-width: 576px) {
+  .mm-box--sm\:min-width-screen {
+    min-width: 100vw;
+  }
+}
+@media screen and (min-width: 768px) {
+  .mm-box--md\:min-width-screen {
+    min-width: 100vw;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .mm-box--lg\:min-width-screen {
+    min-width: 100vw;
+  }
+}
 .mm-box--height-max {
   height: max-content;
 }
@@ -21006,18 +21398,36 @@ readers do not read off random characters that represent icons */
   width: max-content;
 }
 @media screen and (min-width: 576px) {
-  .mm-box--sm\:height-max {
-    height: max-content;
+  .mm-box--sm\:width-max {
+    width: max-content;
   }
 }
 @media screen and (min-width: 768px) {
-  .mm-box--md\:height-max {
-    height: max-content;
+  .mm-box--md\:width-max {
+    width: max-content;
   }
 }
 @media screen and (min-width: 1280px) {
-  .mm-box--lg\:height-max {
-    height: max-content;
+  .mm-box--lg\:width-max {
+    width: max-content;
+  }
+}
+.mm-box--min-width-max {
+  min-width: max-content;
+}
+@media screen and (min-width: 576px) {
+  .mm-box--sm\:min-width-max {
+    min-width: max-content;
+  }
+}
+@media screen and (min-width: 768px) {
+  .mm-box--md\:min-width-max {
+    min-width: max-content;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .mm-box--lg\:min-width-max {
+    min-width: max-content;
   }
 }
 .mm-box--height-min {
@@ -21054,6 +21464,24 @@ readers do not read off random characters that represent icons */
 @media screen and (min-width: 1280px) {
   .mm-box--lg\:width-min {
     width: min-content;
+  }
+}
+.mm-box--min-width-min {
+  min-width: min-content;
+}
+@media screen and (min-width: 576px) {
+  .mm-box--sm\:min-width-min {
+    min-width: min-content;
+  }
+}
+@media screen and (min-width: 768px) {
+  .mm-box--md\:min-width-min {
+    min-width: min-content;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .mm-box--lg\:min-width-min {
+    min-width: min-content;
   }
 }
 .mm-box--text-align-left {
@@ -29834,11 +30262,9 @@ a.mm-button-base:hover {
 
 .mm-picker-network {
   --picker-network-height: 32px;
-  max-width: -moz-fit-content;
-  max-width: fit-content;
   height: var(--picker-network-height);
 }
-.mm-picker-network:active {
+.mm-picker-network:not([disabled]):active {
   background-color: var(--color-background-default-hover);
 }
 
@@ -30360,7 +30786,7 @@ a.mm-button-base:hover {
 }
 
 .unconnected-account-alert__content {
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 .unconnected-account-alert__footer {
   flex-direction: column;
@@ -30399,7 +30825,7 @@ a.mm-button-base:hover {
 }
 .unconnected-account-alert__checkbox {
   margin-left: 8px;
-  padding-top: 1px;
+  margin-top: -2px;
 }
 .unconnected-account-alert__checkbox-label {
   font-size: 0.75rem;
@@ -30411,6 +30837,7 @@ a.mm-button-base:hover {
   margin-top: auto;
   margin-bottom: auto;
   color: var(--color-text-alternative);
+  align-items: center;
 }
 .unconnected-account-alert__checkbox-label-tooltip {
   margin-right: 8px;
@@ -30786,6 +31213,10 @@ a.mm-button-base:hover {
 .confirm-data > .disclosure {
   margin-top: 0;
 }
+.confirm-data_alert-snaps {
+  font-size: var(--typography-l-body-sm-font-size);
+  vertical-align: baseline;
+}
 
 .confirmation-warning-modal__content ul {
   padding-inline-start: 1rem;
@@ -31052,53 +31483,9 @@ a.mm-button-base:hover {
   flex-direction: column;
   align-items: center;
 }
-.connected-accounts-list__identicon {
-  margin-left: 8px;
-}
-.connected-accounts-list__account-name {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: inline;
-  font-weight: bold;
-}
-.connected-accounts-list .connected-accounts-list__account-status-link, .connected-accounts-list .connected-accounts-list__account-status {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  padding-top: 4px;
-}
-.connected-accounts-list__account-status {
-  display: inline;
-  color: var(--color-text-alternative);
-}
-.connected-accounts-list__account-status-link {
-  display: block;
-}
-.connected-accounts-list__account-status-link, .connected-accounts-list__account-status-link:hover {
-  color: var(--color-primary-default);
-  cursor: pointer;
-}
 .connected-accounts-list__row {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
-  padding: 16px 24px;
-  border-top: 1px solid var(--color-border-muted);
-}
-.connected-accounts-list__row--highlight {
-  background-color: var(--color-warning-muted);
-  border: 1px solid var(--color-warning-default);
-  box-sizing: border-box;
-  padding: 16px;
-  margin-bottom: 16px;
-  width: calc(100% - 16px);
+  word-break: break-word;
 }
 .connected-accounts-list__row-content {
   display: flex;
@@ -31117,42 +31504,6 @@ a.mm-button-base:hover {
   padding: 0;
 }
 
-.connected-accounts-permissions {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  flex-direction: column;
-  color: var(--color-text-alternative);
-}
-.connected-accounts-permissions strong {
-  font-weight: bold;
-}
-.connected-accounts-permissions p + p {
-  padding-top: 8px;
-}
-.connected-accounts-permissions__header {
-  font-size: 0.875rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  color: var(--color-text-default);
-}
-.connected-accounts-permissions__header button {
-  font-size: 1rem;
-  background: none;
-  padding: 0;
-  margin-right: 8px;
-  color: var(--color-icon-default);
-}
 .connected-accounts-permissions__list {
   padding-block: 8px;
   height: 100%;
@@ -31181,7 +31532,6 @@ a.mm-button-base:hover {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  border-top: 1px solid var(--color-border-muted);
   padding: 16px 24px;
 }
 .connected-sites-list__content-row .connected-sites-list__content-row-link-button {
@@ -31556,6 +31906,10 @@ a.mm-button-base:hover {
   text-align: right;
 }
 
+.edit-gas-popover__edit-gas-display {
+  position: relative;
+}
+
 .experimental-area {
   color: var(--color-flask-default);
   margin: auto;
@@ -31685,11 +32039,11 @@ a.mm-button-base:hover {
   overflow: hidden;
 }
 
-.snap-settings-card__inner-wrapper {
+.snap-list-item {
   cursor: pointer;
 }
-.snap-settings-card__caret {
-  cursor: pointer;
+.snap-list-item:hover {
+  background: var(--color-background-default-hover);
 }
 
 .copyable__icon {
@@ -32757,11 +33111,17 @@ a.mm-button-base:hover {
   margin-bottom: 8px;
 }
 
+.home-notification-wrapper--show-first {
+  /* accommodates for the home "Wallet" / "Connections" footer */
+}
 .home-notification-wrapper--show-first > div {
   position: fixed;
   bottom: 8px;
   left: 8px;
   visibility: hidden;
+}
+.home-notification-wrapper--show-first.home-notification-wrapper--multichain > div {
+  bottom: 88px;
 }
 .home-notification-wrapper--show-first > div:first-of-type {
   visibility: visible;
@@ -32804,6 +33164,10 @@ a.mm-button-base:hover {
 }
 .network-display--clickable {
   cursor: pointer;
+}
+
+.network-toggle-wrapper__overflow-container {
+  overflow: hidden;
 }
 
 .permission-approval-container.page-container {
@@ -33281,6 +33645,9 @@ ul.two-steps {
   cursor: pointer;
 }
 
+.signature-request-data__node {
+  align-items: center;
+}
 .signature-request-data__node__value {
   white-space: pre-line;
   overflow: hidden;
@@ -34903,6 +35270,51 @@ a.signature-request-content__verify-contract-details {
 .transaction-alerts .security-provider-banner-message {
   margin-right: 0;
   margin-left: 0;
+}
+
+.name {
+  border-radius: 36px;
+  padding: 6px 9px 6px 9px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  max-width: 100%;
+}
+.name__missing {
+  background-color: var(--color-warning-muted);
+}
+.name__saved {
+  background-color: var(--color-info-muted);
+}
+.name__missing .name__icon {
+  color: var(--color-warning-default);
+}
+.name__saved .name__icon {
+  color: var(--color-info-default);
+}
+.name__value, .name__name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.name__value {
+  color: var(--color-warning-default);
+}
+.name__name {
+  color: var(--color-info-default);
+}
+
+.name-details__display-name {
+  width: 100%;
+}
+.name-details__line {
+  margin-right: -16px;
+  margin-left: -16px;
+  margin-bottom: 12px;
+}
+.name-details__address .mm-text-field {
+  padding-left: 5px;
 }
 
 .interactive-replacement-token-notification {
@@ -49022,6 +49434,12 @@ readers do not read off random characters that represent icons */
 .box--height-full {
   height: 100%;
 }
+.box--width-0 {
+  width: 0;
+}
+.box--height-0 {
+  height: 0;
+}
 .box--width-1\/2 {
   width: 50%;
 }
@@ -49177,6 +49595,14 @@ readers do not read off random characters that represent icons */
 }
 .box--height-11\/12 {
   height: 91.666667%;
+}
+@media screen and (min-width: 576px) {
+  .box--sm\:width-0 {
+    width: 0;
+  }
+  .box--sm\:height-0 {
+    height: 0;
+  }
 }
 @media screen and (min-width: 576px) {
   .box--sm\:width-1\/2 {
@@ -49387,6 +49813,14 @@ readers do not read off random characters that represent icons */
   }
 }
 @media screen and (min-width: 768px) {
+  .box--md\:width-0 {
+    width: 0;
+  }
+  .box--md\:height-0 {
+    height: 0;
+  }
+}
+@media screen and (min-width: 768px) {
   .box--md\:width-1\/2 {
     width: 50%;
   }
@@ -49592,6 +50026,14 @@ readers do not read off random characters that represent icons */
   }
   .box--md\:height-11\/12 {
     height: 91.666667%;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .box--lg\:width-0 {
+    width: 0;
+  }
+  .box--lg\:height-0 {
+    height: 0;
   }
 }
 @media screen and (min-width: 1280px) {
@@ -65826,7 +66268,7 @@ readers do not read off random characters that represent icons */
   opacity: 0.3;
   cursor: auto;
 }
-.icon-button__label {
+.icon-button__label-large {
   width: 60px;
 }
 
@@ -67091,6 +67533,46 @@ readers do not read off random characters that represent icons */
   z-index: 2;
 }
 
+.transaction-insight-dropdown .dropdown__select, .transaction-insight-dropdown-wrapper::before {
+  padding: 8px 4px 0 20px;
+}
+
+.transaction-insight-dropdown select, .transaction-insight-dropdown-wrapper::before {
+  font-size: 0.75rem;
+  overflow: hidden !important;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.transaction-insight-dropdown-wrapper::before {
+  content: attr(title);
+  visibility: hidden;
+  pointer-events: none;
+  display: inline-block;
+  max-width: 150px;
+}
+
+.transaction-insight-dropdown {
+  cursor: pointer;
+}
+.transaction-insight-dropdown,
+.transaction-insight-dropdown select {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+.transaction-insight-dropdown select {
+  border: none;
+  cursor: pointer;
+}
+.transaction-insight-dropdown select:focus {
+  outline: none;
+}
+.transaction-insight-dropdown .dropdown__icon-caret-down {
+  left: 4px;
+  cursor: pointer;
+}
 .MuiInput-input,
 .MuiInputBase-input {
   color: var(--color-text-default) !important;
@@ -80040,6 +80522,58 @@ readers do not read off random characters that represent icons */
   color: var(--color-icon-alternative);
 }
 
+.form-combo-field {
+  width: 100%;
+}
+.form-combo-field ::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background: var(--color-icon-muted);
+}
+.form-combo-field ::-webkit-scrollbar {
+  width: 0;
+}
+.form-combo-field__value > div {
+  outline: 0;
+  width: 100%;
+}
+.form-combo-field__value-dropdown-visible > div {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-combo-field__dropdown {
+  border: 1px solid var(--color-border-default);
+  border-top-width: 0;
+  position: absolute;
+  overflow-y: scroll;
+  z-index: 1;
+  background-color: var(--color-background-default);
+}
+.form-combo-field__dropdown__scroll::-webkit-scrollbar {
+  width: 8px;
+}
+.form-combo-field__option {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 16px 10px 16px;
+  line-height: normal;
+  font-weight: normal;
+}
+.form-combo-field__option:hover {
+  background-color: var(--color-background-default-hover);
+}
+.form-combo-field__option-primary {
+  padding-bottom: 4px;
+}
+.form-combo-field__option-secondary {
+  color: var(--color-text-alternative);
+  font-size: 12px;
+}
+.form-combo-field__option-primary, .form-combo-field__option-secondary {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 /**
 * Please import your styles in order of atomicity.
 * The most atomic styles should be imported first.
@@ -80114,6 +80648,14 @@ readers do not read off random characters that represent icons */
 * This will help improve specificity and reduce the chance of
 * unintended overrides.
 **/
+.multichain-page-content {
+  overflow: auto;
+}
+
+.multichain-send-page {
+  width: 408px;
+}
+
 .multichain-address-copy-button__address--wrap {
   word-break: break-word;
   min-height: 32px;
@@ -80199,7 +80741,7 @@ readers do not read off random characters that represent icons */
   overflow: auto;
 }
 
-.multichain-account-picker:hover, .multichain-account-picker:focus {
+.multichain-account-picker:not([disabled]):hover, .multichain-account-picker:not([disabled]):focus {
   box-shadow: none;
   background: var(--color-background-default-hover);
 }
@@ -80225,9 +80767,37 @@ readers do not read off random characters that represent icons */
 .app-footer {
   bottom: 0;
   position: sticky;
+  z-index: 55;
+  min-height: 64px;
+  flex-flow: column nowrap;
 }
-.app-footer__button {
-  cursor: pointer;
+.app-footer__contents {
+  height: 64px;
+  box-shadow: var(--shadow-size-md) var(--color-shadow-default);
+}
+@media screen and (max-width: calc(576px - 1px)) {
+  .app-footer__contents {
+    height: 100%;
+  }
+}
+@media screen and (min-width: 576px) {
+  .app-footer__contents {
+    width: 85vw;
+    margin-bottom: 10vh;
+  }
+}
+@media screen and (min-width: 768px) {
+  .app-footer__contents {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .app-footer__contents {
+    width: 62vw;
+  }
+}
+.app-footer__actions-button:hover, .app-footer__actions-button:focus {
+  background-color: var(--color-primary-default);
 }
 
 .multichain-app-header {
@@ -80262,9 +80832,6 @@ readers do not read off random characters that represent icons */
 }
 .multichain-app-header__contents__network-picker {
   max-width: 250px;
-}
-.multichain-app-header__contents--avatar-network p {
-  display: none;
 }
 .multichain-app-header__contents__container {
   width: -moz-fit-content;
@@ -80544,6 +81111,23 @@ readers do not read off random characters that represent icons */
 
 .select-action-modal-item:hover, .select-action-modal-item:focus-within {
   background-color: var(--color-background-default-hover);
+}
+
+.asset-list-conversion-button {
+  min-width: 157px;
+  height: 56px;
+  flex-grow: 1;
+}
+.asset-list-conversion-button__contents {
+  flex-grow: 1;
+}
+.asset-list-conversion-button__contents__button-wrapper {
+  background: var(--brand-colors-white-white000);
+  width: 24px;
+  height: 24px;
+}
+.asset-list-conversion-button__contents__text {
+  color: var(--brand-colors-white-white000);
 }
 
 /** Please import your files in alphabetical order **/
@@ -82591,6 +83175,22 @@ readers do not read off random characters that represent icons */
   }
 }
 
+.snap-account-subtitle {
+  text-align: center;
+}
+@media screen and (min-width: 576px) {
+  .snap-account-subtitle {
+    padding-right: 48px;
+    padding-left: 48px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .snap-account-subtitle {
+    padding-right: 48px;
+    padding-left: 48px;
+  }
+}
+
 .snap-account-cards {
   grid-template-columns: repeat(3, 1fr);
 }
@@ -82600,6 +83200,29 @@ readers do not read off random characters that represent icons */
   -webkit-background-clip: text;
           background-clip: text;
   color: transparent;
+}
+
+.snap-account-footer {
+  padding-top: 140px;
+}
+
+.legal-disclaimer {
+  padding-right: 48px;
+  padding-left: 48px;
+}
+
+.legal-disclaimer-element {
+  padding-top: 30px;
+  white-space: pre-line;
+}
+
+.feedback-link {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.configure-button:hover > * {
+  color: var(--color-primary-inverse);
 }
 
 .notifications {
@@ -90646,82 +91269,6 @@ readers do not read off random characters that represent icons */
   }
 }
 
-.snap-list-tab {
-  width: 100%;
-  height: 100%;
-}
-.snap-list-tab__wrapper {
-  max-width: 475px;
-}
-@media screen and (min-width: 576px) {
-  .snap-list-tab__body {
-    padding: 12px;
-  }
-}
-.snap-list-tab .snap-list-tab__container--no-snaps_inner {
-  max-width: 164px;
-}
-.snap-list-tab .snap-list-tab__no-snaps_icon {
-  font-size: 48px;
-}
-
-.view-snap {
-  max-width: 475px;
-}
-.view-snap__description__wrapper {
-  position: relative;
-  overflow: hidden;
-  max-height: 5.5rem;
-}
-@media screen and (min-width: 768px) {
-  .view-snap__description__wrapper {
-    max-height: 6rem;
-  }
-}
-.view-snap__description__wrapper.open {
-  max-height: none;
-}
-.view-snap__description__more-button {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: unset;
-  padding: 0;
-  padding-right: 32px;
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, var(--color-background-default) 33%);
-}
-.view-snap__permissions .permission-cell {
-  margin: 0;
-}
-.view-snap .connected-sites-list__content-row {
-  border-top: none;
-  padding: 0 0 8px 0;
-}
-.view-snap .connected-sites-list__content-row .view-snap .connected-sites-list__content-row-link-button {
-  padding: 0;
-  padding-inline-start: 0;
-  color: var(--color-error-default);
-  font-size: 14px;
-}
-.view-snap .connected-sites-list__content-row a {
-  font-size: 14px;
-  color: var(--color-error-default);
-}
-.view-snap .connected-sites-list__content-row a:hover {
-  color: var(--color-error-alternative);
-}
-.view-snap .connected-sites-list__subject-info a.btn-link {
-  font-size: 14px;
-  color: var(--color-error-default);
-}
-.view-snap .connected-sites-list__subject-icon {
-  flex-shrink: 0;
-}
-.view-snap .connected-sites-list__subject-name {
-  font-size: 14px;
-  color: var(--color-primary-default);
-}
-
 .settings-page {
   position: relative;
   background: var(--color-background-default);
@@ -91096,6 +91643,139 @@ readers do not read off random characters that represent icons */
 }
 [dir=rtl] .settings-page .toggle-button {
   justify-content: flex-end;
+}
+
+.snaps {
+  width: 100%;
+  flex-flow: column nowrap;
+}
+@media screen and (max-width: calc(576px - 1px)) {
+  .snaps {
+    height: 100%;
+  }
+}
+@media screen and (min-width: 576px) {
+  .snaps {
+    width: 85vw;
+  }
+}
+@media screen and (min-width: 768px) {
+  .snaps {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .snaps {
+    width: 62vw;
+  }
+}
+.snaps__content {
+  padding: 0;
+}
+@media screen and (min-width: 768px) {
+  .snaps__content__list__wrapper {
+    margin-top: 24px;
+    margin-right: 24px;
+    margin-left: 24px;
+  }
+}
+.snaps__content__list__container--no-snaps_inner {
+  max-width: 164px;
+  align-self: flex-end;
+}
+.snaps__content__list__no-snaps_icon {
+  font-size: 48px;
+}
+.snaps__content__list__container--no-snaps_banner-tip {
+  max-width: 390px;
+}
+
+.snap-view {
+  width: 100%;
+  flex-flow: column nowrap;
+}
+@media screen and (max-width: calc(576px - 1px)) {
+  .snap-view {
+    height: 100%;
+  }
+}
+@media screen and (min-width: 576px) {
+  .snap-view {
+    width: 85vw;
+  }
+}
+@media screen and (min-width: 768px) {
+  .snap-view {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .snap-view {
+    width: 62vw;
+  }
+}
+.snap-view__content {
+  padding: 32px;
+}
+@media screen and (max-width: calc(576px - 1px)) {
+  .snap-view__content {
+    padding: 16px;
+  }
+}
+.snap-view__content__description__wrapper {
+  position: relative;
+  overflow: hidden;
+  max-height: 5.5rem;
+}
+@media screen and (min-width: 768px) {
+  .snap-view__content__description__wrapper {
+    max-height: 6rem;
+  }
+}
+.snap-view__content__description__wrapper.open {
+  max-height: none;
+}
+.snap-view__content__description__more-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: unset;
+  padding: 0;
+  padding-right: 32px;
+  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, var(--color-background-default) 33%);
+}
+.snap-view__content__permissions .permission-cell {
+  margin: 0;
+}
+.snap-view__content .connected-sites-list__content-row {
+  border-top: none;
+  padding: 0 0 8px 0;
+}
+.snap-view__content .connected-sites-list__content-row .snap-view__content .connected-sites-list__content-row-link-button {
+  padding: 0;
+  padding-inline-start: 0;
+  color: var(--color-error-default);
+  font-size: 14px;
+}
+.snap-view__content .connected-sites-list__content-row a {
+  font-size: 14px;
+  color: var(--color-error-default);
+}
+.snap-view__content .connected-sites-list__content-row a:hover {
+  color: var(--color-error-alternative);
+}
+.snap-view__content .connected-sites-list__subject-info a.btn-link {
+  font-size: 14px;
+  color: var(--color-error-default);
+}
+.snap-view__content .connected-sites-list__subject-icon {
+  flex-shrink: 0;
+}
+.snap-view__content .connected-sites-list__subject-name {
+  font-size: 14px;
+}
+.snap-view__content__remove-button .mm-box--color-error-default, .snap-view__content__remove-button:hover .mm-box--color-error-default {
+  color: inherit;
 }
 
 .awaiting-swap {
@@ -94013,7 +94693,6 @@ readers do not read off random characters that represent icons */
 
   .main-container {
     width: 85vw;
-    margin-bottom: 10vh;
     min-height: 90vh;
     box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
   }
@@ -94186,16 +94865,6 @@ readers do not read off random characters that represent icons */
 }
 .send-screen-input-wrapper .fa-bolt {
   padding-left: 4px;
-}
-.send-screen-input-wrapper .large-input {
-  font-size: 1rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  border: 1px solid var(--color-border-default);
-  border-radius: 4px;
-  margin: 4px 0 20px;
 }
 .send-screen-input-wrapper .send-screen-gas-input {
   border: 1px solid transparent;
