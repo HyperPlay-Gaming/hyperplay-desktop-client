@@ -93,6 +93,8 @@ function getUrl(args: string[]): string | undefined {
 export function parseUrl(url: string): [Command, Runner?, string?, string?] {
   const [, fullCommand] = url.split('://')
 
+  const urlObject = new URL(url)
+
   //check if the second param is a runner or not and adjust parts accordingly
   const splitCommand = fullCommand.split('/')
   const hasRunner = RUNNERS.includes(splitCommand[1] as Runner)
@@ -105,6 +107,9 @@ export function parseUrl(url: string): [Command, Runner?, string?, string?] {
       const [command, runner, accountId, appId] = splitCommand
       return [command as Command, runner as Runner, accountId, appId]
     }
+  } else if (splitCommand[0].startsWith('email-confirmation')) {
+    const emailConfirmUrl = urlObject.searchParams.get('url')
+    return [splitCommand[0] as Command, undefined, emailConfirmUrl ?? undefined]
   } else {
     const [command, appId] = splitCommand
     return [command as Command, undefined, appId]

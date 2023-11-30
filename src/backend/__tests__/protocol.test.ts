@@ -9,7 +9,20 @@ describe('backend/protocol.ts', () => {
   test('email confirmation url is parsed', () => {
     const emailConfirmationUrl = 'https://www.npmjs.com/'
     const url =
-      'hyperplay://email-confirmation/' +
+      'hyperplay://email-confirmation?url=' +
+      encodeURIComponent(emailConfirmationUrl)
+
+    /* eslint-disable-next-line @typescript-eslint/no-unused-vars*/
+    const [command, runner, arg = ''] = parseUrl(url)
+
+    const decodedEmailConfirmationUrl = decodeURIComponent(arg)
+    expect(decodedEmailConfirmationUrl).toEqual(emailConfirmationUrl)
+  })
+
+  test('email confirmation url with trailing / is parsed', () => {
+    const emailConfirmationUrl = 'https://www.npmjs.com/'
+    const url =
+      'hyperplay://email-confirmation/?url=' +
       encodeURIComponent(emailConfirmationUrl)
 
     /* eslint-disable-next-line @typescript-eslint/no-unused-vars*/
