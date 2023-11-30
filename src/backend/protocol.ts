@@ -27,7 +27,6 @@ const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
  * // => 'Received launch! Runner: hyperplay, Arg: 123'
  **/
 export async function handleProtocol(args: string[]) {
-  logInfo(`handling ${JSON.stringify(args)}`, LogPrefix.HyperPlay)
   const mainWindow = getMainWindow()
 
   const url = getUrl(args)
@@ -40,7 +39,6 @@ export async function handleProtocol(args: string[]) {
   logInfo(`received '${url}'`, LogPrefix.ProtocolHandler)
 
   const emailConfirmationUrl = decodeURIComponent(arg)
-  logInfo(`emailConfirmationUrl ${emailConfirmationUrl}`, LogPrefix.HyperPlay)
 
   switch (command) {
     case 'ping':

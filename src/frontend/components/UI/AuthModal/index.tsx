@@ -108,10 +108,9 @@ const AuthModal = () => {
     /**
      * On import app reload this will fail as it tries to reload an unmounted webview
      */
-    try{
+    try {
       webviewRef.current?.reload()
-    }
-    catch(err){
+    } catch (err) {
       console.error(err)
     }
   }, [authState.isSignInModalOpen])
@@ -126,10 +125,6 @@ const AuthModal = () => {
     _e: Electron.IpcRendererEvent,
     emailConfirmUrl: string
   ) {
-    console.log(
-      'handling email confirmation and navigating to ',
-      emailConfirmUrl
-    )
     webviewRef.current?.loadURL(emailConfirmUrl)
     authState.openSignInModal()
 
