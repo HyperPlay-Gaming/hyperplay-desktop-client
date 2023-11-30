@@ -57,6 +57,8 @@ class AchievementState {
 
   fetching = false
 
+  syncing = false
+
   constructor() {
     makeAutoObservable(this)
   }
@@ -181,16 +183,21 @@ class AchievementState {
     this.initGameSummaryKey()
   }
 
-  syncAchievements = (store: AchievementStore) => {
+  async syncAchievements(store: AchievementStore) {
     if (!this.playerStoreId) {
-      console.error('player store id is not set!')
+      console.error('Player store id is not set!')
       return
     }
-    window.api.syncAchievements({
+    if (this.syncing) {
+      return
+    }
+    this.syncing = true
+    await window.api.syncAchievements({
       store,
       playerStoreId: this.playerStoreId,
       playerAddress: walletState.address
     })
+    this.syncing = false
   }
 
   setStats = (state: AchievementsStats) => {

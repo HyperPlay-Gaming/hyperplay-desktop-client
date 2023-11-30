@@ -34,3 +34,16 @@
   flex: 1;
   max-height: 100%;
 }
+
+.refreshing {
+  animation: refreshing 1.5s infinite;
+}
+
+@keyframes refreshing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

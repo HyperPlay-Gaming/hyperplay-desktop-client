@@ -47,8 +47,14 @@ export const AchievementStores = observer(() => {
               >
                 {isSteam ? <Images.Eye /> : <Images.EyeOff />}
               </button>
-              <button onClick={() => syncAchievements('STEAM')}>
-                <Images.Refresh />
+              <button onClick={async () => syncAchievements('STEAM')}>
+                <Images.Refresh
+                  className={
+                    AchievementState.syncing || AchievementState.fetching
+                      ? styles.refreshing
+                      : ''
+                  }
+                />
               </button>
             </div>
           </StoreRow>
