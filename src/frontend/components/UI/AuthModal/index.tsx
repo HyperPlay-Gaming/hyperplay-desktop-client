@@ -105,7 +105,15 @@ const AuthModal = () => {
     if (!authState.isSignInModalOpen) {
       return
     }
-    webviewRef.current?.reload()
+    /**
+     * On import app reload this will fail as it tries to reload an unmounted webview
+     */
+    try{
+      webviewRef.current?.reload()
+    }
+    catch(err){
+      console.error(err)
+    }
   }, [authState.isSignInModalOpen])
 
   useEffect(() => {
