@@ -819,7 +819,8 @@
             "paused": "Pausado",
             "extracting": "Extrayendo...",
             "installing": "Descargando..."
-        }
+        },
+        "connectWallet": "Conectar monedero"
     },
     "hyperplayOverlay": {
         "chainRequest": {
