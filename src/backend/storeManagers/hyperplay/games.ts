@@ -65,6 +65,9 @@ import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
+import { ethers } from 'ethers'
+import { valistBaseApiUrlv1 } from 'common/constants'
+import { SiweMessage } from 'siwe'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -458,6 +461,49 @@ async function getAccessCodeGatedPlatforms(
   return validateResult.platforms
 }
 
+async function getTokenGatedPlatforms(channel_id: number): Promise<PlatformsMetaInterface> {
+  if (!window.ethereum) throw 'Window.ethereum provider not found'
+  const provider = new ethers.BrowserProvider(window.ethereum)
+  const signer = await provider.getSigner()
+  const address = await signer.getAddress()
+
+  const domain = window.location.host
+  const origin = window.location.origin
+
+  const statementRes = await axios.get(
+    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
+  )
+  const statement = String(statementRes?.data)
+
+  const siweMessage = new SiweMessage({
+    domain,
+    address,
+    statement,
+    uri: origin,
+    version: '1',
+    chainId: 1
+  })
+  const message = siweMessage.prepareMessage()
+  const signature = await signer.signMessage(message)
+
+  const validateResult = (await axios.post<LicenseConfigValidateResult>(valistBaseApiUrlv1 + '/license_contracts/validate',
+    {
+      message,
+      signature,
+      address,
+      channel_id,
+    }
+  )).data;
+
+  if (validateResult.valid !== true)
+    throw `Address code ${address} is not valid for channel id ${channel_id}!`
+
+  if (validateResult.platforms === undefined)
+    throw 'Token gated platforms returned by the validate url were undefined'
+
+  return validateResult.platforms
+}
+
 function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
   const gameIndex = currentLibrary.findIndex(
@@ -550,8 +596,7 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${
-        (error as Error).message
+      `cancelExtraction: Error while canceling the operation ${(error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -618,8 +663,13 @@ export async function install(
       }
     }
 
-    // get presigned platform info if code gated
-    if (selectedChannel.license_config.access_codes) {
+    if (selectedChannel.license_config.tokens) {
+      const gatedPlatforms = await getTokenGatedPlatforms(
+        selectedChannel.channel_id,
+      )
+
+      platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
+    } else if (selectedChannel.license_config.access_codes) { // get presigned platform info if code gated
       if (accessCode === undefined)
         throw 'Access code was undefined for an access code gated channel'
 
