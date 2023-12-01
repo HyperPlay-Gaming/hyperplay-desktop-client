@@ -40,13 +40,15 @@ export const AchievementStores = observer(() => {
             secondaryText={isSteam ? activeSecondaryText : '0 Games'}
           >
             <div>
-              <button
-                onClick={() => {
-                  if (isSteam) setStore('STEAM')
-                }}
-              >
-                {isSteam ? <Images.Eye /> : <Images.EyeOff />}
-              </button>
+              {AchievementState.storesEnabled.length > 1 ? (
+                <button
+                  onClick={() => {
+                    if (isSteam) setStore('STEAM')
+                  }}
+                >
+                  {isSteam ? <Images.Eye /> : <Images.EyeOff />}
+                </button>
+              ) : null}
               <button onClick={async () => syncAchievements('STEAM')}>
                 <Images.Refresh
                   className={

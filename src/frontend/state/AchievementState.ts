@@ -42,6 +42,11 @@ export const ACHIEVEMENT_SORT_OPTIONS = [
 ] as AchievementSortOption[]
 
 class AchievementState {
+  /**
+   * feature flag for enabled stores
+   */
+  storesEnabled = ['STEAM']
+
   store = 'STEAM' as AchievementStore
   playerStoreId = ''
 
