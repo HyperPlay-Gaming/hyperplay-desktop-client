@@ -1,13 +1,14 @@
 import { GameAchievements } from '@hyperplay/ui'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import walletState from 'frontend/state/WalletState'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import AchievementState, {
-  ACHIVEMENT_SORT_OPTIONS
+  ACHIEVEMENT_SORT_OPTIONS
 } from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
+import Loading from 'frontend/screens/Loading'
 
 const pageSize = 6
 
@@ -22,8 +23,6 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const { t } = useTranslation()
   const { id } = useParams()
 
-  const [selectedSort, setSelectedSort] = useState(ACHIVEMENT_SORT_OPTIONS[0])
-
   const achievementsToBeMinted = MintAchievementsState.achievementsToBeMinted
   const isLoading = MintAchievementsState.isLoading
   const handleMint = MintAchievementsState.handleMint
@@ -31,20 +30,23 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
 
   const numFreeMints = AchievementState.numFreeMints
-  const individualAchievements = AchievementState.individualAchievements
-  // TODO: get the game id from the path param and find it in achievement state summaries
-  const summaryAchievement = AchievementState.summaryAchievementsToDisplay![0]
-  const navigate = useNavigate()
+  const individualAchievements = AchievementState.individualAchievementsForGame(
+    id ?? '0'
+  )
+
+  const summaryAchievement = AchievementState.getSummaryAchievement(
+    id as string
+  )
 
   useEffect(() => {
-    AchievementState.getIndividualAchievements({
+    AchievementState.fetchIndividualAchievements({
       gameId: id as string,
       page: 1,
-      pageSize,
-      sort: selectedSort.value
+      pageSize
     })
   }, [])
 
+  const navigate = useNavigate()
   const handlePrevPage = () => {
     navigate('/achievements')
   }
@@ -53,7 +55,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
 
   if (!summaryAchievement) return <></>
 
-  return (
+  return individualAchievements !== undefined ? (
     <GameAchievements
       achievementNavProps={{
         freeMints: numFreeMints,
@@ -74,22 +76,20 @@ export default observer(function GameAchievementDetails(): JSX.Element {
         isLocked: !isTimestampInPast(achievement.unlocktime)
       }))}
       sortProps={{
-        options: ACHIVEMENT_SORT_OPTIONS,
-        selected: selectedSort,
+        options: ACHIEVEMENT_SORT_OPTIONS,
+        selected: AchievementState.currentIndividualSort,
         onItemChange: async (sortOption) => {
-          const chosenItem = ACHIVEMENT_SORT_OPTIONS.find(
+          const chosenItem = ACHIEVEMENT_SORT_OPTIONS.find(
             (option) => option.text === sortOption.text
           )
 
           if (chosenItem) {
-            AchievementState.getIndividualAchievements({
+            AchievementState.currentIndividualSort = chosenItem
+            AchievementState.fetchIndividualAchievements({
               gameId: id as string,
               page: 1,
-              pageSize,
-              sort: chosenItem.value
+              pageSize
             })
-
-            setSelectedSort(chosenItem)
           }
         }
       }}
@@ -118,5 +118,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
         }
       }}
     />
+  ) : (
+    <Loading />
   )
 })

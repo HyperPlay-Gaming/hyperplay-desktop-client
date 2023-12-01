@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import walletState from 'frontend/state/WalletState'
 import type {
   Achievement,
@@ -18,6 +18,7 @@ interface AchievementData {
 interface AchievementRequestKey {
   filter: AchievementFilter
   sort: AchievementSort
+  store: AchievementStore
 }
 
 interface AchievementSortOption {
@@ -25,7 +26,17 @@ interface AchievementSortOption {
   value: AchievementSort
 }
 
-export const ACHIVEMENT_SORT_OPTIONS = [
+interface IndividualAchievementKey {
+  gameId: string
+  sort: AchievementSort
+  store: AchievementStore
+}
+
+interface IndividualAchievementData {
+  data: Achievement[]
+}
+
+export const ACHIEVEMENT_SORT_OPTIONS = [
   { text: 'Alphabetically (ASC)', value: 'ALPHA_A_TO_Z' },
   { text: 'Alphabetically (DES)', value: 'ALPHA_Z_TO_A' }
 ] as AchievementSortOption[]
@@ -44,13 +55,12 @@ class AchievementState {
   // Summary Achievements
   summaryAchievements = new Map<string, AchievementData>()
   currentFilter: AchievementFilter = 'ALL'
-  currentSort: AchievementSortOption = ACHIVEMENT_SORT_OPTIONS[0]
+  currentSort: AchievementSortOption = ACHIEVEMENT_SORT_OPTIONS[0]
+  currentStore: AchievementStore = 'STEAM'
 
   // Individual Achievements
-  individualAchievements = {
-    data: [] as Achievement[],
-    totalPages: 0
-  }
+  individualAchievements = new Map<string, IndividualAchievementData>()
+  currentIndividualSort: AchievementSortOption = ACHIEVEMENT_SORT_OPTIONS[0]
 
   // Achievements Feature Flag
   showAchievements = false
@@ -60,7 +70,15 @@ class AchievementState {
   syncing = false
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(
+      this,
+      {},
+      {
+        deep: true,
+        proxy: false,
+        name: 'AchievementState'
+      }
+    )
   }
 
   init() {
@@ -79,30 +97,54 @@ class AchievementState {
       .then(this.setStats.bind(this))
   }
 
-  getIndividualAchievements = async ({
+  individualAchievementsKey(gameId: string) {
+    const key: IndividualAchievementKey = {
+      gameId,
+      store: this.currentStore,
+      sort: this.currentIndividualSort.value
+    }
+    const keyString = JSON.stringify(key)
+    return keyString
+  }
+
+  async fetchIndividualAchievements({
     gameId,
     page,
-    pageSize,
-    sort
+    pageSize
   }: {
     gameId: string
     page: number
     pageSize: number
-    sort: AchievementSort
-  }) => {
+  }) {
+    const keyString = this.individualAchievementsKey(gameId)
+
+    /**
+     * Check cache for hit
+     */
+    if (this.individualAchievements.has(keyString)) {
+      return this.individualAchievements.get(keyString)?.data
+    }
+
     const individualAchievements = await window.api.getIndividualAchievements({
       gameId: Number(gameId),
       store: this.store,
-      sort,
+      sort: this.currentIndividualSort.value,
       page,
       pageSize,
       playerStoreId: this.playerStoreId,
       playerAddress: walletState.address
     })
-    this.individualAchievements = individualAchievements
+
+    this.individualAchievements.set(keyString, individualAchievements)
+    return individualAchievements.data
   }
 
-  async fetchMoreSummaryAchievements() {
+  individualAchievementsForGame(gameId: string) {
+    const keyString = this.individualAchievementsKey(gameId)
+    return this.individualAchievements.get(keyString)
+  }
+
+  fetchMoreSummaryAchievements = async () => {
     if (this.fetching) {
       return
     }
@@ -110,7 +152,7 @@ class AchievementState {
       console.error('player store id is not set!')
       return
     }
-    this.fetching = true
+    this.setFetching(true)
     const pagesFetched = this.currentSummaryAchievements?.pagesFetched
     const totalPages = this.currentSummaryAchievements?.totalPages
     const alreadyFetchedAllPages =
@@ -118,13 +160,10 @@ class AchievementState {
       totalPages !== undefined &&
       pagesFetched >= totalPages
     if (alreadyFetchedAllPages) {
-      this.fetching = false
+      this.setFetching(false)
       return
     }
-    const requestKey: AchievementRequestKey = {
-      filter: this.currentFilter,
-      sort: this.currentSort.value
-    }
+    const requestKey = this.currentSummaryKey
 
     const nextPageOfSummaryAchievements =
       await window.api.getSummaryAchievements({
@@ -149,14 +188,29 @@ class AchievementState {
         totalPages: nextPageOfSummaryAchievements.totalPages
       })
     }
-    this.fetching = false
+    this.setFetching(false)
+  }
+
+  /**
+   * Necessary since strict-mode is enabled in mobx
+   */
+  setFetching = (val: boolean) => {
+    runInAction(() => {
+      this.fetching = val
+    })
+  }
+
+  private get currentSummaryKey() {
+    const requestKey: AchievementRequestKey = {
+      filter: this.currentFilter,
+      sort: this.currentSort.value,
+      store: this.currentStore
+    }
+    return requestKey
   }
 
   get currentSummaryAchievements() {
-    const key = {
-      filter: this.currentFilter,
-      sort: this.currentSort.value
-    }
+    const key = this.currentSummaryKey
     return this.summaryAchievements.get(JSON.stringify(key))
   }
 
@@ -183,7 +237,7 @@ class AchievementState {
     this.initGameSummaryKey()
   }
 
-  async syncAchievements(store: AchievementStore) {
+  syncAchievements = async (store: AchievementStore) => {
     if (!this.playerStoreId) {
       console.error('Player store id is not set!')
       return
@@ -191,13 +245,26 @@ class AchievementState {
     if (this.syncing) {
       return
     }
-    this.syncing = true
-    await window.api.syncAchievements({
-      store,
-      playerStoreId: this.playerStoreId,
-      playerAddress: walletState.address
+    this.setSyncing(true)
+    try {
+      await window.api.syncAchievements({
+        store,
+        playerStoreId: this.playerStoreId,
+        playerAddress: walletState.address
+      })
+    } catch (err) {
+      console.error(err)
+    }
+    this.setSyncing(false)
+  }
+
+  /**
+   * Necessary since strict-mode is enabled in mobx
+   */
+  setSyncing = (val: boolean) => {
+    runInAction(() => {
+      this.syncing = val
     })
-    this.syncing = false
   }
 
   setStats = (state: AchievementsStats) => {
@@ -228,6 +295,12 @@ class AchievementState {
     if (displayName === 'new') newFilter = 'NEW'
     if (displayName === 'minted') newFilter = 'MINTED'
     return newFilter
+  }
+
+  getSummaryAchievement(id: string) {
+    return this.summaryAchievementsToDisplay?.find(
+      (val) => val.gameId.toString() === id
+    )
   }
 }
 

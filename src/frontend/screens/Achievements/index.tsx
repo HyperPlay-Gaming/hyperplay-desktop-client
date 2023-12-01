@@ -6,7 +6,7 @@ import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/c
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import AchievementState, {
-  ACHIVEMENT_SORT_OPTIONS
+  ACHIEVEMENT_SORT_OPTIONS
 } from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
 
@@ -91,10 +91,10 @@ export default observer(function Achievements(): JSX.Element {
             : []
         }
         sortProps={{
-          options: ACHIVEMENT_SORT_OPTIONS,
+          options: ACHIEVEMENT_SORT_OPTIONS,
           selected: AchievementState.currentSort,
           onItemChange: async (sortOption) => {
-            const chosenItem = ACHIVEMENT_SORT_OPTIONS.find(
+            const chosenItem = ACHIEVEMENT_SORT_OPTIONS.find(
               (option) => option.text === sortOption.text
             )
 
