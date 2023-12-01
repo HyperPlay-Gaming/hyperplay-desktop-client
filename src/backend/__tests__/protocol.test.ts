@@ -17,6 +17,8 @@ describe('backend/protocol.ts', () => {
 
     const decodedEmailConfirmationUrl = decodeURIComponent(arg)
     expect(decodedEmailConfirmationUrl).toEqual(emailConfirmationUrl)
+
+    expect(command).toEqual('email-confirmation')
   })
 
   test('email confirmation url with trailing / is parsed', () => {
@@ -30,5 +32,7 @@ describe('backend/protocol.ts', () => {
 
     const decodedEmailConfirmationUrl = decodeURIComponent(arg)
     expect(decodedEmailConfirmationUrl).toEqual(emailConfirmationUrl)
+
+    expect(command).toEqual('email-confirmation')
   })
 })

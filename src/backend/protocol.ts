@@ -36,7 +36,7 @@ export async function handleProtocol(args: string[]) {
 
   const [command, runner, arg = ''] = parseUrl(url)
 
-  logInfo(`received '${url}'`, LogPrefix.ProtocolHandler)
+  logInfo(`received ${url}`, LogPrefix.ProtocolHandler)
 
   const emailConfirmationUrl = decodeURIComponent(arg)
 
@@ -107,7 +107,7 @@ export function parseUrl(url: string): [Command, Runner?, string?, string?] {
     }
   } else if (splitCommand[0].startsWith('email-confirmation')) {
     const emailConfirmUrl = urlObject.searchParams.get('url')
-    return [splitCommand[0] as Command, undefined, emailConfirmUrl ?? undefined]
+    return ['email-confirmation', undefined, emailConfirmUrl ?? undefined]
   } else {
     const [command, appId] = splitCommand
     return [command as Command, undefined, appId]
