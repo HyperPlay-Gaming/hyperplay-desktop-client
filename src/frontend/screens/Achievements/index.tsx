@@ -31,6 +31,14 @@ export default observer(function Achievements(): JSX.Element {
     AchievementState.fetchMoreSummaryAchievements()
   }
 
+  const tabs = [
+    { value: 'all', label: 'All' },
+    { value: 'new', label: 'New' }
+  ]
+  if (AchievementState.mintedAchievements > 0) {
+    tabs.push({ value: 'minted', label: 'Minted' })
+  }
+
   return (
     <>
       <AchievementSummaryTable
@@ -104,8 +112,6 @@ export default observer(function Achievements(): JSX.Element {
           }
         }}
         paginationProps={{
-          currentPage: 0,
-          totalPages: 0,
           handleNextPage: () => {
             console.log('handling next page')
           },
@@ -142,6 +148,7 @@ export default observer(function Achievements(): JSX.Element {
         isPageLoading={
           AchievementState.summaryAchievementsToDisplay === undefined
         }
+        tabs={tabs}
       />
     </>
   )
