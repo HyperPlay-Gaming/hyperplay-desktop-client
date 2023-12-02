@@ -139,6 +139,9 @@ export default observer(function Achievements(): JSX.Element {
         fetchNextPage={() => {
           AchievementState.fetchMoreSummaryAchievements()
         }}
+        isPageLoading={
+          AchievementState.summaryAchievementsToDisplay === undefined
+        }
       />
     </>
   )

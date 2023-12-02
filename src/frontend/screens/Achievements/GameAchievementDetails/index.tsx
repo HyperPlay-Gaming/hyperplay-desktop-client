@@ -8,7 +8,6 @@ import AchievementState, {
   ACHIEVEMENT_SORT_OPTIONS
 } from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
-import Loading from 'frontend/screens/Loading'
 
 const pageSize = 6
 
@@ -55,7 +54,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
 
   if (!summaryAchievement) return <></>
 
-  return individualAchievements !== undefined ? (
+  return (
     <GameAchievements
       achievementNavProps={{
         freeMints: numFreeMints,
@@ -68,7 +67,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
       mintedAchievementsCount={summaryAchievement.mintedAchievementCount}
       totalAchievementsCount={summaryAchievement.totalAchievementCount}
       mintableAchievementsCount={summaryAchievement.mintableAchievementsCount}
-      achievements={individualAchievements.data.map((achievement) => ({
+      achievements={individualAchievements?.data.map((achievement) => ({
         id: achievement.id,
         title: achievement.displayName,
         description: achievement.description,
@@ -117,8 +116,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
           notMintedLabel: t('achievements.progress.notMinted', 'off chain')
         }
       }}
+      loadingAchievements={individualAchievements === undefined}
     />
-  ) : (
-    <Loading />
   )
 })
