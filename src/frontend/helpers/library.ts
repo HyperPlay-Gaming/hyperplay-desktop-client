@@ -225,27 +225,10 @@ export const amazonCategories = ['all', 'nile', 'amazon']
 export { install, launch, repair, updateGame }
 
 export async function signSiweMessage(): Promise<SiweValues> {
-  if (!window.ethereum) throw 'Window.ethereum provider not found'
-  const provider = new ethers.BrowserProvider(window.ethereum)
-  const signer = await provider.getSigner()
+  const signer = await getSigner()
   const address = await signer.getAddress()
 
-  const domain = window.location.host
-  const origin = window.location.origin
-
-  const statementRes = await axios.get(
-    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
-  )
-  const statement = String(statementRes?.data)
-
-  const siweMessage = new SiweMessage({
-    domain,
-    address,
-    statement,
-    uri: origin,
-    version: '1',
-    chainId: 1
-  })
+  const siweMessage = await createSiweMessage(address)
   const message = siweMessage.prepareMessage()
   const signature = await signer.signMessage(message)
 
@@ -254,4 +237,31 @@ export async function signSiweMessage(): Promise<SiweValues> {
     signature,
     address
   }
+}
+
+export async function getSigner(): Promise<ethers.Signer> {
+  if (!window.ethereum) throw new Error('Ethereum provider not found')
+  const provider = new ethers.BrowserProvider(window.ethereum)
+  return provider.getSigner()
+}
+
+export async function createSiweMessage(
+  signerAddress: string
+): Promise<SiweMessage> {
+  const domain = window.location.host
+  const origin = window.location.origin
+
+  const statementRes = await axios.get(
+    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
+  )
+  const statement = String(statementRes?.data)
+
+  return new SiweMessage({
+    domain,
+    address: signerAddress,
+    statement,
+    uri: origin,
+    version: '1',
+    chainId: 1
+  })
 }
