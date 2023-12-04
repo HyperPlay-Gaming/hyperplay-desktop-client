@@ -22,7 +22,7 @@ async function installQueueElement(params: InstallParams): Promise<{
     platformToInstall,
     channelName,
     accessCode,
-    siweValues,
+    siweValues
   } = params
   const { title } = gameManagerMap[runner].getGameInfo(appName)
 
@@ -92,7 +92,7 @@ async function installQueueElement(params: InstallParams): Promise<{
         installLanguage,
         channelName,
         accessCode,
-        siweValues,
+        siweValues
       })
 
     const { status, error } = await installInstance()
@@ -209,7 +209,9 @@ async function updateQueueElement(params: InstallParams): Promise<{
   }
 
   try {
-    const { status } = await gameManagerMap[runner].update(appName, { siweValues })
+    const { status } = await gameManagerMap[runner].update(appName, {
+      siweValues
+    })
 
     if (status === 'error') {
       errorMessage('')

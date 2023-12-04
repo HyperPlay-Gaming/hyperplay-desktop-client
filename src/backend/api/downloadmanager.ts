@@ -8,7 +8,7 @@ export const install = async (args: InstallParams) => {
     type: 'install',
     addToQueueTime: Date.now(),
     endTime: 0,
-    startTime: 0,
+    startTime: 0
   }
 
   await ipcRenderer.invoke('addToDMQueue', dmQueueElement)
@@ -26,7 +26,7 @@ export const install = async (args: InstallParams) => {
         type: 'install',
         addToQueueTime: Date.now(),
         endTime: 0,
-        startTime: 0,
+        startTime: 0
       }
       await ipcRenderer.invoke('addToDMQueue', dlcQueueElement)
     })
@@ -38,7 +38,7 @@ export const updateGame = (gameInfo: GameInfo) => {
     app_name: appName,
     runner,
     install: { install_path, platform },
-    siweValues,
+    siweValues
   } = gameInfo
 
   const dmQueueElement: DMQueueElement = {
@@ -48,7 +48,7 @@ export const updateGame = (gameInfo: GameInfo) => {
       runner,
       path: install_path!,
       platformToInstall: platform!,
-      siweValues,
+      siweValues
     },
     type: 'update',
     addToQueueTime: Date.now(),

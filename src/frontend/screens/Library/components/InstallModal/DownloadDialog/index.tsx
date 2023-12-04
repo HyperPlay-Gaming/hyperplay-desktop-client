@@ -439,7 +439,9 @@ export default function DownloadDialog({
           <div style={{ maxWidth: 500, overflow: 'hidden' }}>
             <AlertCard
               title=""
-              message={'Please purchase to proceed or ensure that NFT is in the current wallet.'}
+              message={
+                'Please purchase to proceed or ensure that NFT is in the current wallet.'
+              }
               actionText={'Buy NFT'}
               variant={'warning'}
             />
