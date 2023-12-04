@@ -47,3 +47,10 @@
     transform: rotate(360deg);
   }
 }
+
+.syncingContainer {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-sm);
+  align-items: center;
+}

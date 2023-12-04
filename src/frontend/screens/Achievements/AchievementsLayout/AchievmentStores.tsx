@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import { StoreRow, Images } from '@hyperplay/ui'
+import { StoreRow, Images, Button } from '@hyperplay/ui'
 import { Flex } from '@mantine/core'
 
 import styles from './index.module.css'
@@ -10,9 +10,11 @@ import { observer } from 'mobx-react-lite'
 import AchievementState from 'frontend/state/AchievementState'
 import useSetting from 'frontend/hooks/useSetting'
 import walletState from 'frontend/state/WalletState'
+import { useTranslation } from 'react-i18next'
 
 export const AchievementStores = observer(() => {
   const [steamId] = useSetting('steamId', '')
+  const { t } = useTranslation()
 
   const store = AchievementState.store
   const totalGames = AchievementState.totalGames
@@ -49,11 +51,26 @@ export const AchievementStores = observer(() => {
                   {isSteam ? <Images.Eye /> : <Images.EyeOff />}
                 </button>
               ) : null}
-              <button onClick={async () => syncAchievements('STEAM')}>
-                <Images.Refresh
-                  className={AchievementState.syncing ? styles.refreshing : ''}
-                />
-              </button>
+              {AchievementState.syncing ? (
+                <div className={styles.syncingContainer}>
+                  <div className="body">
+                    {t('hyperplay.syncing', 'Syncing...')}
+                  </div>
+                  <Images.Refresh
+                    className={
+                      AchievementState.syncing ? styles.refreshing : ''
+                    }
+                  />
+                </div>
+              ) : (
+                <Button
+                  type={'secondary'}
+                  size={'small'}
+                  onClick={async () => syncAchievements('STEAM')}
+                >
+                  {t('hyperplay.Sync', 'Sync')}
+                </Button>
+              )}
             </div>
           </StoreRow>
         </div>
