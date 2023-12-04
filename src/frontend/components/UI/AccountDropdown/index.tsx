@@ -1,32 +1,33 @@
 import { Menu } from '@mantine/core'
-import React, { useContext } from 'react'
+import React from 'react'
+import walletState from 'frontend/state/WalletState'
+import { observer } from 'mobx-react-lite'
+
 import Wallet from 'frontend/components/UI/Wallet'
 import styles from './index.module.scss'
 import { NavLink } from 'react-router-dom'
 import onboardingStore from 'frontend/store/OnboardingStore'
 import { useTranslation } from 'react-i18next'
-import ContextProvider from 'frontend/state/ContextProvider'
+import { PROVIDERS } from 'common/types/proxy-types'
 import authState from 'frontend/state/authState'
-import { observer } from 'mobx-react-lite'
 
-function NavigationMenuItem({ label, to }: { label: string; to: string }) {
-  const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+function NavigationMenuItem({
+  label,
+  to,
+  showMetaMaskExtensionLinks
+}: {
+  label: string
+  to: string
+  showMetaMaskExtensionLinks: boolean
+}) {
   return (
     <Menu.Item
       className={styles.menuItem}
-      id={
-        showMetaMaskBrowserSidebarLinks
-          ? 'topMenuItemWalletDropdown'
-          : undefined
-      }
+      id={showMetaMaskExtensionLinks ? 'topMenuItemWalletDropdown' : undefined}
     >
       <NavLink
         to={to}
-        id={
-          showMetaMaskBrowserSidebarLinks
-            ? 'topElementWalletDropdown'
-            : undefined
-        }
+        id={showMetaMaskExtensionLinks ? 'topElementWalletDropdown' : undefined}
       >
         <div className={`body ${styles.itemContents}`}>{label}</div>
       </NavLink>
@@ -34,9 +35,13 @@ function NavigationMenuItem({ label, to }: { label: string; to: string }) {
   )
 }
 
-function AccountDropdown() {
+const WalletDropdown: React.FC = observer(() => {
   const { t } = useTranslation()
-  const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
+  const showWalletConnectedLinks = walletState.isConnected
+  const showMetaMaskExtensionLinks =
+    walletState.isConnected &&
+    walletState.provider === PROVIDERS.METAMASK_EXTENSION
+
   return (
     <Menu position="bottom" trigger="hover" zIndex={100001}>
       <Menu.Target>
@@ -52,48 +57,54 @@ function AccountDropdown() {
         <Menu.Label className={styles.menuLabel}>
           {t('hyperplay.currentWallet', `Current wallet`)}
         </Menu.Label>
-        {showMetaMaskBrowserSidebarLinks && (
+        {showMetaMaskExtensionLinks && (
           <>
             <NavigationMenuItem
               label={t('hyperplay.viewFullscreen', `View fullscreen`)}
               to={'/metamaskHome'}
+              showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
             ></NavigationMenuItem>
             <NavigationMenuItem
               label={t('hyperplay.viewItem', {
                 defaultValue: 'View {{item}}',
                 item: 'Snaps'
               })}
+              showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
               to={'/metamaskSnaps'}
             ></NavigationMenuItem>
           </>
         )}
-        <Menu.Item
-          className={`${styles.menuItem} `}
-          id={
-            !showMetaMaskBrowserSidebarLinks
-              ? 'topMenuItemWalletDropdown'
-              : undefined
-          }
-        >
-          <NavLink
-            to={'/metamaskPortfolio'}
+        {showWalletConnectedLinks && (
+          <Menu.Item
+            className={`${styles.menuItem} `}
             id={
-              !showMetaMaskBrowserSidebarLinks
-                ? 'topElementWalletDropdown'
+              !showWalletConnectedLinks
+                ? 'topMenuItemWalletDropdown'
                 : undefined
             }
           >
-            <div className={`body ${styles.itemContents}`}>
-              {t('hyperplay.viewPortfolio', `View portfolio`)}
-            </div>
-          </NavLink>
-        </Menu.Item>
+            <NavLink
+              to={'/metamaskPortfolio'}
+              id={
+                !showWalletConnectedLinks
+                  ? 'topElementWalletDropdown'
+                  : undefined
+              }
+            >
+              <div className={`body ${styles.itemContents}`}>
+                {t('hyperplay.viewPortfolio', `View portfolio`)}
+              </div>
+            </NavLink>
+          </Menu.Item>
+        )}
         <Menu.Item
           className={styles.menuItem}
           onClick={() => onboardingStore.openOnboarding()}
         >
           <div className={`body ${styles.itemContents}`}>
-            {t('hyperplay.changeWallet', `Change wallet`)}
+            {showWalletConnectedLinks
+              ? t('hyperplay.changeWallet', `Change wallet`)
+              : t('hyperplay.connectWallet', `Connect wallet`)}
           </div>
         </Menu.Item>
         <Menu.Label className={styles.menuLabel}>
@@ -120,6 +131,6 @@ function AccountDropdown() {
       </Menu.Dropdown>
     </Menu>
   )
-}
+})
 
-export default observer(AccountDropdown)
+export default WalletDropdown;
