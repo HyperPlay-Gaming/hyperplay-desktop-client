@@ -127,8 +127,6 @@ export default function DownloadDialog({
   const { libraryStatus, platform, showDialogModal } =
     useContext(ContextProvider)
 
-  console.log({ requiresToken })
-
   const isWin = platform === 'win32'
 
   const [gameInstallInfo, setGameInstallInfo] = useState<

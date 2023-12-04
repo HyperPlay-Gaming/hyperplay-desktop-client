@@ -467,10 +467,9 @@ async function getTokenGatedPlatforms(
 ): Promise<PlatformsMetaInterface> {
   const { address, message, signature } = siweValues
 
-  console.log({ address })
   const validateResult = (
     await axios.post<LicenseConfigValidateResult>(
-      valistBaseApiUrlv1 + '/license_contracts/validate',
+      `${valistBaseApiUrlv1}/license_contracts/validate`,
       {
         message,
         signature,
@@ -581,8 +580,7 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${
-        (error as Error).message
+      `cancelExtraction: Error while canceling the operation ${(error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
