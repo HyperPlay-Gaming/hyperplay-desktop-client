@@ -15,7 +15,6 @@ import {
   HyperPlayInstallInfo,
   InstallPlatform,
   Runner,
-  SiweValues,
   WineInstallation
 } from 'common/types'
 import { GogInstallInfo } from 'common/types/gog'
@@ -43,10 +42,7 @@ import { AlertCard, Button } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
-import { ethers } from 'ethers'
-import axios from 'axios'
-import { SiweMessage } from 'siwe'
-import { valistBaseApiUrlv1 } from 'common/constants'
+import { signSiweMessage } from 'frontend/helpers/library'
 
 interface Props {
   backdropClick: () => void
@@ -442,10 +438,8 @@ export default function DownloadDialog({
         {requiresToken ? (
           <div style={{ maxWidth: 500, overflow: 'hidden' }}>
             <AlertCard
-              title={
-                'Please purchase to proceed or ensure that NFT is in the current wallet.'
-              }
-              message={''}
+              title=""
+              message={'Please purchase to proceed or ensure that NFT is in the current wallet.'}
               actionText={'Buy NFT'}
               variant={'warning'}
             />
@@ -651,36 +645,4 @@ export default function DownloadDialog({
       </DialogFooter>
     </>
   )
-}
-
-async function signSiweMessage(): Promise<SiweValues> {
-  if (!window.ethereum) throw 'Window.ethereum provider not found'
-  const provider = new ethers.BrowserProvider(window.ethereum)
-  const signer = await provider.getSigner()
-  const address = await signer.getAddress()
-
-  const domain = window.location.host
-  const origin = window.location.origin
-
-  const statementRes = await axios.get(
-    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
-  )
-  const statement = String(statementRes?.data)
-
-  const siweMessage = new SiweMessage({
-    domain,
-    address,
-    statement,
-    uri: origin,
-    version: '1',
-    chainId: 1
-  })
-  const message = siweMessage.prepareMessage()
-  const signature = await signer.signMessage(message)
-
-  return {
-    message,
-    signature,
-    address
-  }
 }

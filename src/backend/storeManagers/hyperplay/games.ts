@@ -8,7 +8,8 @@ import {
   PlatformConfig,
   LicenseConfigValidateResult,
   ChannelReleaseMeta,
-  SiweValues
+  SiweValues,
+  UpdateArgs
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
@@ -66,9 +67,7 @@ import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
-import { ethers } from 'ethers'
 import { valistBaseApiUrlv1 } from 'common/constants'
-import { SiweMessage } from 'siwe'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -582,8 +581,7 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${
-        (error as Error).message
+      `cancelExtraction: Error while canceling the operation ${(error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1149,7 +1147,7 @@ export async function launch(
 }
 
 // TODO: Refactor to only replace updated files
-export async function update(appName: string): Promise<InstallResult> {
+export async function update(appName: string, args?: UpdateArgs): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
     return { status: 'done' }
   }
@@ -1195,7 +1193,8 @@ export async function update(appName: string): Promise<InstallResult> {
     platformToInstall: gameInfo.install.platform,
     channelName: gameInfo.install.channelName,
     accessCode,
-    updateOnly: true
+    updateOnly: true,
+    siweValues: args?.siweValues,
   })
   return installResult
 }

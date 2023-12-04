@@ -5,7 +5,8 @@ import {
   GameSettings,
   ExecResult,
   InstallArgs,
-  HyperPlayInstallInfo
+  HyperPlayInstallInfo,
+  UpdateArgs
 } from 'common/types'
 import { GOGCloudSavesLocation, GogInstallInfo } from './gog'
 import { LegendaryInstallInfo } from './legendary'
@@ -54,7 +55,7 @@ export interface GameManager {
     gogSaves?: GOGCloudSavesLocation[]
   ) => Promise<string>
   uninstall: (args: RemoveArgs) => Promise<ExecResult>
-  update: (appName: string) => Promise<InstallResult>
+  update: (appName: string, args?: UpdateArgs) => Promise<InstallResult>
   forceUninstall: (appName: string) => Promise<void>
   stop: (appName: string) => Promise<void>
   isGameAvailable: (appName: string) => boolean

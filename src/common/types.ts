@@ -178,6 +178,7 @@ export interface GameInfo {
   dlcList?: GameMetadataInner[]
   //key is channel_id, value is last access code used
   accessCodesCache?: Record<string, string>
+  siweValues?: SiweValues
 }
 
 export interface GameSettings {
@@ -310,6 +311,10 @@ export interface InstallParams extends InstallArgs {
   gameInfo: GameInfo
   runner: Runner
   size?: string
+}
+
+export interface UpdateArgs {
+  siweValues?: SiweValues
 }
 
 export interface UpdateParams {
@@ -523,22 +528,22 @@ interface GamepadActionArgsWithMetadata {
 
 interface GamepadActionArgsWithoutMetadata {
   action:
-    | 'padUp'
-    | 'padDown'
-    | 'padLeft'
-    | 'padRight'
-    | 'leftStickUp'
-    | 'leftStickDown'
-    | 'leftStickLeft'
-    | 'leftStickRight'
-    | 'rightStickUp'
-    | 'rightStickDown'
-    | 'rightStickLeft'
-    | 'rightStickRight'
-    | 'mainAction'
-    | 'back'
-    | 'altAction'
-    | 'esc'
+  | 'padUp'
+  | 'padDown'
+  | 'padLeft'
+  | 'padRight'
+  | 'leftStickUp'
+  | 'leftStickDown'
+  | 'leftStickLeft'
+  | 'leftStickRight'
+  | 'rightStickUp'
+  | 'rightStickDown'
+  | 'rightStickLeft'
+  | 'rightStickRight'
+  | 'mainAction'
+  | 'back'
+  | 'altAction'
+  | 'esc'
   metadata?: undefined
 }
 

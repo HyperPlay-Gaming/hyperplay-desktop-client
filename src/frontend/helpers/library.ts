@@ -10,6 +10,10 @@ import {
 import { TFunction } from 'i18next'
 import { getGameInfo } from './index'
 import { DialogModalOptions } from 'frontend/types'
+import { SiweMessage } from 'siwe'
+import { valistBaseApiUrlv1 } from 'common/constants'
+import { ethers } from 'ethers'
+import axios from 'axios'
 
 const storage: Storage = window.localStorage
 
@@ -208,7 +212,8 @@ const launch = async ({
 }
 
 const updateGame = async (gameInfo: GameInfo) => {
-  return window.api.updateGame(gameInfo)
+  const siweValues = await signSiweMessage()
+  return window.api.updateGame({ ...gameInfo, siweValues })
 }
 
 export const epicCategories = ['all', 'legendary', 'epic']
@@ -218,3 +223,35 @@ export const hyperPlayCategories = ['all', 'hyperplay']
 export const amazonCategories = ['all', 'nile', 'amazon']
 
 export { install, launch, repair, updateGame }
+
+export async function signSiweMessage(): Promise<SiweValues> {
+  if (!window.ethereum) throw 'Window.ethereum provider not found'
+  const provider = new ethers.BrowserProvider(window.ethereum)
+  const signer = await provider.getSigner()
+  const address = await signer.getAddress()
+
+  const domain = window.location.host
+  const origin = window.location.origin
+
+  const statementRes = await axios.get(
+    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
+  )
+  const statement = String(statementRes?.data)
+
+  const siweMessage = new SiweMessage({
+    domain,
+    address,
+    statement,
+    uri: origin,
+    version: '1',
+    chainId: 1
+  })
+  const message = siweMessage.prepareMessage()
+  const signature = await signer.signMessage(message)
+
+  return {
+    message,
+    signature,
+    address
+  }
+}
