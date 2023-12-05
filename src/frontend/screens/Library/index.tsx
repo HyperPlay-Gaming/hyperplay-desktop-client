@@ -231,7 +231,7 @@ export default observer(function Library(): JSX.Element {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <div className="contentContainer" ref={listing}>
+      <div className="Library contentContainer" ref={listing}>
         <div className={styles.libraryTopHeader}>
           <h3>{t('library.label', 'Library')}</h3>
           <span className={`${styles.numberOfgames} title`}>
