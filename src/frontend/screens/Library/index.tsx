@@ -231,7 +231,7 @@ export default observer(function Library(): JSX.Element {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <div className="contentContainer">
+      <div className="contentContainer" ref={listing}>
         <div className={styles.libraryTopHeader}>
           <h3>{t('library.label', 'Library')}</h3>
           <span className={`${styles.numberOfgames} title`}>
@@ -272,7 +272,7 @@ export default observer(function Library(): JSX.Element {
           selectedFilter={libraryState.selectedFilter ?? filters[1]}
           otherFiltersData={otherFiltersData}
         />
-        <div className={styles.listing} ref={listing}>
+        <div className={styles.listing}>
           <span id="top" />
           {showRecentGames && (
             <RecentlyPlayed
