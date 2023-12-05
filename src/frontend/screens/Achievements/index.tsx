@@ -157,6 +157,7 @@ export default observer(function Achievements(): JSX.Element {
             `It looks like we couldn't find any games in your Steam account at the moment. Just a quick reminder to double-check that your game details are set to public. This way, we can access your achievements and provide you with the best experience.`
           )
         }}
+        gamesAdded={[]}
       />
     </>
   )

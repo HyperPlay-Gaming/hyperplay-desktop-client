@@ -58,7 +58,17 @@ export default observer(function GameAchievementDetails(): JSX.Element {
     <GameAchievements
       achievementNavProps={{
         freeMints: numFreeMints,
-        basketAmount: achievementsToBeMinted.length
+        basketAmount: achievementsToBeMinted.length,
+        showGameAddButton: false,
+        gamesAdded: [],
+        addThisGameText: t(
+          'hyperplay.achievements.addThisGame',
+          'Add this game'
+        ),
+        gamesToMintLabelText: t(
+          'hyperplay.achievements.gamesToMint',
+          'Games to mint'
+        )
       }}
       game={{
         title: summaryAchievement.gameName,
@@ -93,8 +103,6 @@ export default observer(function GameAchievementDetails(): JSX.Element {
         }
       }}
       paginationProps={{
-        currentPage: 0,
-        totalPages: 0,
         handlePrevPage,
         handleNextPage: () => {
           console.log('next page')
@@ -117,6 +125,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
         }
       }}
       loadingAchievements={individualAchievements === undefined}
+      gameCardImage={summaryAchievement.gameImageURL}
     />
   )
 })
