@@ -133,4 +133,4 @@ const WalletDropdown: React.FC = observer(() => {
   )
 })
 
-export default WalletDropdown;
+export default WalletDropdown
