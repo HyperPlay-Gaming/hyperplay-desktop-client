@@ -39,9 +39,15 @@ export default observer(function Achievements(): JSX.Element {
     tabs.push({ value: 'minted', label: 'Minted' })
   }
 
+  const imagesToPreload =
+    AchievementState?.summaryAchievementsToDisplay?.map(
+      (game) => game.gameImageURL
+    ) ?? []
+
   return (
     <>
       <AchievementSummaryTable
+        imagesToPreload={imagesToPreload}
         games={
           AchievementState.summaryAchievementsToDisplay
             ? AchievementState.summaryAchievementsToDisplay.map((game) => {
@@ -140,7 +146,8 @@ export default observer(function Achievements(): JSX.Element {
         achievementNavProps={{
           freeMints: numFreeMints,
           basketAmount:
-            achievementsToBeMinted.length + achievementsToBeUpdated.length
+            achievementsToBeMinted.length + achievementsToBeUpdated.length,
+          gamesAdded: []
         }}
         fetchNextPage={() => {
           AchievementState.fetchMoreSummaryAchievements()
@@ -157,7 +164,6 @@ export default observer(function Achievements(): JSX.Element {
             `It looks like we couldn't find any games in your Steam account at the moment. Just a quick reminder to double-check that your game details are set to public. This way, we can access your achievements and provide you with the best experience.`
           )
         }}
-        gamesAdded={[]}
       />
     </>
   )
