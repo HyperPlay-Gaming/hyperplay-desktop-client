@@ -75,6 +75,7 @@ interface HyperPlaySyncIPCFunctions {
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
   toggleIsPopupOpen: () => void
+  showPopup: () => void
   toastCloseOnClick: (key: ToastKey) => void
   lockPopup: (lock: boolean) => void
   killOverlay: () => void

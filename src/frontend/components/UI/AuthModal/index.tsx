@@ -48,7 +48,7 @@ const AuthModal = () => {
       // the connection flow after the user unlocks metamask
       if (isTooManyRequestsError(String(e))) {
         authState.setPendingSignatureRequest(true)
-        extensionState.isPopupOpen = true
+        extensionState.showPopup()
       }
     }
   }
