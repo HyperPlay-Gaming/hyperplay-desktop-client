@@ -166,7 +166,7 @@ svg.disabled {
   overflow-y: scroll;
 }
 
-.contentContainer::-webkit-scrollbar {
+.contentContainer:is(.Library)::-webkit-scrollbar {
   width: 0;
   background: transparent;
 }
