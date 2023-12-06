@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styles from './index.module.scss'
-import { Button, ModalAnimation } from '@hyperplay/ui'
+import { ModalAnimation } from '@hyperplay/ui'
 import { WebviewTag } from 'electron'
 import { observer } from 'mobx-react-lite'
 import authState from '../../../state/authState'
