@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import styles from './index.module.scss'
-import { ModalAnimation } from '@hyperplay/ui'
+import { Button, ModalAnimation } from '@hyperplay/ui'
 import { WebviewTag } from 'electron'
 import { observer } from 'mobx-react-lite'
 import authState from '../../../state/authState'
@@ -10,7 +10,7 @@ import onboardingState from '../../../store/OnboardingStore'
 import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
 
-const url = `${DEV_PORTAL_URL}/signin`
+const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
 const METAMASK_ALREADY_PROVIDED_ERROR_CODE = -32002
 
