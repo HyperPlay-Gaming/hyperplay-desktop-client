@@ -16,11 +16,13 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const { t } = useTranslation()
   const { id } = useParams()
 
-  const achievementsToBeMinted = MintAchievementsState.achievementsToBeMinted
-  const isLoading = MintAchievementsState.isLoading
-  const handleMint = MintAchievementsState.handleMint
-  const handleUpdate = MintAchievementsState.handleUpdate
-  const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
+  const {
+    achievementsToBeMinted,
+    achievementsToBeUpdated,
+    isLoading,
+    handleMint,
+    handleUpdate
+  } = MintAchievementsState
 
   const numFreeMints = AchievementState.numFreeMints
   const individualAchievements = AchievementState.individualAchievementsForGame(
