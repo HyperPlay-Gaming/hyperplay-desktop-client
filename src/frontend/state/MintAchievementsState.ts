@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 
 class MintAchievementsState {
   achievementsToBeMinted = [] as string[]
@@ -29,21 +29,19 @@ class MintAchievementsState {
     }
   }
 
-  handleMint = () => {
+  testLoad = (ms: number) => {
     this.isLoading = true
     setTimeout(() => {
-      this.isLoading = false
-      this.achievementsToBeMinted = []
-    }, 3000)
+      runInAction(() => {
+        this.isLoading = false
+        this.achievementsToBeMinted = []
+      })
+    }, ms)
   }
 
-  handleUpdate = () => {
-    this.isLoading = true
-    setTimeout(() => {
-      this.isLoading = false
-      this.achievementsToBeUpdated = []
-    }, 3000)
-  }
+  handleMint = () => this.testLoad(3000)
+
+  handleUpdate = () => this.testLoad(3000)
 }
 
 export default new MintAchievementsState()
