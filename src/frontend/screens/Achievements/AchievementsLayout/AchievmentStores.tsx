@@ -16,12 +16,14 @@ export const AchievementStores = observer(() => {
   const [steamId] = useSetting('steamId', '')
   const { t } = useTranslation()
 
-  const store = AchievementState.store
-  const totalGames = AchievementState.totalGames
-  const setStore = AchievementState.setStore
-  const syncAchievements = AchievementState.syncAchievements
-  const setPlayerStoreId = AchievementState.setPlayerStoreId
-  const getAchievementsStats = AchievementState.getAchievementsStats
+  const {
+    store,
+    totalGames,
+    setStore,
+    syncAchievements,
+    setPlayerStoreId,
+    getAchievementsStats
+  } = AchievementState
 
   useEffect(() => {
     setPlayerStoreId(steamId)
