@@ -7,7 +7,7 @@ import styles from './index.module.css'
 import { AchievementsStats } from './AchievementsStats'
 import useSettingsContext from 'frontend/hooks/useSettingsContext'
 import SettingsContext from 'frontend/screens/Settings/SettingsContext'
-import { AchievementStores } from './AchievmentStores'
+import { AchievementStores } from './AchievementStores'
 
 export default React.memo(function AchievementsLayout({
   children
