@@ -34,6 +34,10 @@ export const AchievementStores = observer(() => {
   const activeSecondaryText = `${totalGames} Games`
   const isSteam = store === 'STEAM'
 
+  async function handleSyncClicked() {
+    syncAchievements('STEAM')
+  }
+
   return (
     <div className={`${styles.storeCard}`}>
       <div className={`${styles.storeTitle}`}>My Stores</div>
@@ -68,7 +72,7 @@ export const AchievementStores = observer(() => {
                 <Button
                   type={'secondary'}
                   size={'small'}
-                  onClick={async () => syncAchievements('STEAM')}
+                  onClick={handleSyncClicked}
                 >
                   {t('hyperplay.Sync', 'Sync')}
                 </Button>
