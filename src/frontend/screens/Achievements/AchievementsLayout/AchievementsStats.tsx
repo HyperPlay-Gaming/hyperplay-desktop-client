@@ -4,10 +4,8 @@ import { observer } from 'mobx-react-lite'
 import AchievementState from 'frontend/state/AchievementState'
 
 export const AchievementsStats = observer(() => {
-  const newAchievements = AchievementState.newAchievements
-  const mintedAchievements = AchievementState.mintedAchievements
-  const totalAchievements = AchievementState.totalAchievements
-  const totalGames = AchievementState.totalGames
+  const { newAchievements, mintedAchievements, totalAchievements, totalGames } =
+    AchievementState
 
   return (
     <AchievementsInfo
