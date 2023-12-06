@@ -1,4 +1,4 @@
-import { GameAchievements } from '@hyperplay/ui'
+import { GameAchievements, DropdownItemType } from '@hyperplay/ui'
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import walletState from 'frontend/state/WalletState'
@@ -50,6 +50,21 @@ export default observer(function GameAchievementDetails(): JSX.Element {
 
   if (!summaryAchievement) return <></>
 
+  async function sortUpdated(sortOption: DropdownItemType) {
+    const chosenItem = ACHIEVEMENT_SORT_OPTIONS.find(
+      (option) => option.text === sortOption.text
+    )
+
+    if (chosenItem) {
+      AchievementState.currentIndividualSort = chosenItem
+      AchievementState.fetchIndividualAchievements({
+        gameId: id as string,
+        page: 1,
+        pageSize
+      })
+    }
+  }
+
   return (
     <GameAchievements
       achievementNavProps={{
@@ -83,20 +98,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
       sortProps={{
         options: ACHIEVEMENT_SORT_OPTIONS,
         selected: AchievementState.currentIndividualSort,
-        onItemChange: async (sortOption) => {
-          const chosenItem = ACHIEVEMENT_SORT_OPTIONS.find(
-            (option) => option.text === sortOption.text
-          )
-
-          if (chosenItem) {
-            AchievementState.currentIndividualSort = chosenItem
-            AchievementState.fetchIndividualAchievements({
-              gameId: id as string,
-              page: 1,
-              pageSize
-            })
-          }
-        }
+        onItemChange: sortUpdated
       }}
       paginationProps={{
         handlePrevPage,
