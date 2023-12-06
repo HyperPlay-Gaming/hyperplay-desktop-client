@@ -8,15 +8,9 @@ import AchievementState, {
   ACHIEVEMENT_SORT_OPTIONS
 } from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
+import { isTimestampInPast } from 'frontend/helpers/achievementUtils'
 
-const pageSize = 6
-
-function isTimestampInPast(unixTimestamp: number) {
-  const currentTime = new Date().getTime()
-  const timestampInMilliseconds = unixTimestamp * 1000 // Convert to milliseconds
-
-  return timestampInMilliseconds < currentTime
-}
+const pageSize = 100
 
 export default observer(function GameAchievementDetails(): JSX.Element {
   const { t } = useTranslation()
