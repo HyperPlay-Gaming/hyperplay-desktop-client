@@ -28,7 +28,7 @@ const ExtensionHandler = function () {
     try {
       console.log('requesting from mm browser ext = ', JSON.stringify(args))
       await waitForConnection()
-      const value = await window.ethereum.request(args)
+      const value = await window.ethereum?.request(args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
       console.error(`error during request: ${err}`)
@@ -58,7 +58,9 @@ const ExtensionHandler = function () {
   ) {
     try {
       await waitForConnection()
-      const value = await window.ethereum.send(...args)
+      /* eslint-disable-next-line */
+      //@ts-ignore
+      const value = await window.ethereum?.send(...args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
       console.error(`error during send: ${err}`)
@@ -73,7 +75,10 @@ const ExtensionHandler = function () {
   ) {
     try {
       await waitForConnection()
-      const value = await window.ethereum.sendAsync(...args)
+
+      /* eslint-disable-next-line */
+      //@ts-ignore
+      const value = await window.ethereum?.sendAsync(...args)
       window.api.returnExtensionRequest(id, value)
     } catch (err) {
       console.error(`error during send: ${err}`)
@@ -82,12 +87,14 @@ const ExtensionHandler = function () {
   }
 
   const bindEthereumListeners = function () {
-    window.ethereum.on('accountsChanged', (accounts: string[]) => {
+    /* eslint-disable-next-line */
+    //@ts-ignore
+    window.ethereum?.on('accountsChanged', (accounts: string[]) => {
       window.api.extensionOnEvent('accountsChanged', accounts)
     })
 
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
-    window.ethereum.on('disconnect', (error: any) => {
+    window.ethereum?.on('disconnect', (error: any) => {
       // Relevant issue https://github.com/MetaMask/metamask-extension/issues/13375
       if (error.code === 1013) {
         console.log('MetaMask disconnected from chain. Reconnecting...')
@@ -96,11 +103,15 @@ const ExtensionHandler = function () {
       window.api.extensionOnEvent('disconnect', error)
     })
 
-    window.ethereum.on('connect', (connectInfo: string) => {
+    /* eslint-disable-next-line */
+    //@ts-ignore
+    window.ethereum?.on('connect', (connectInfo: string) => {
       window.api.extensionOnEvent('connect', connectInfo)
     })
 
-    window.ethereum.on('chainChanged', (chainId: number) => {
+    /* eslint-disable-next-line */
+    //@ts-ignore
+    window.ethereum?.on('chainChanged', (chainId: number) => {
       window.api.extensionOnEvent('chainChanged', chainId)
     })
 
@@ -164,13 +175,13 @@ const ExtensionHandler = function () {
 export default ExtensionHandler
 
 async function waitForConnection(): Promise<void> {
-  const isConnected = window.ethereum.isConnected()
+  const isConnected = window.ethereum?.isConnected()
 
   if (isConnected) {
     return
   }
 
   return new Promise((resolve) => {
-    window.ethereum.on('connect', resolve)
+    window.ethereum?.on('connect', () => resolve())
   })
 }
