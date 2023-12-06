@@ -4,11 +4,15 @@ import useSetting from 'frontend/hooks/useSetting'
 import { configStore } from 'frontend/helpers/electronStores'
 import { TextInput } from '@hyperplay/ui'
 
+/**
+ * Used only for testing.
+ * TODO: replace with auth system session's steam id
+ */
 const SteamId = () => {
   const { t } = useTranslation()
   const [steamId, setSteamId] = useSetting('steamId', '')
 
-  function setInstallPath(path: string) {
+  function setSteamIdWrapper(path: string) {
     setSteamId(path)
     configStore.set('settings.steamId', path)
   }
@@ -16,9 +20,12 @@ const SteamId = () => {
   return (
     <TextInput
       label={t('setting.steamId', 'Steam ID')}
-      value={steamId?.replaceAll("'", '')}
+      value={steamId}
       placeholder={steamId}
-      onChange={(event) => setInstallPath(event.target.value)}
+      /* eslint-disable-next-line */
+      onChange={(event: any) =>
+        setSteamIdWrapper(event.target.value?.replaceAll("'", ''))
+      }
     />
   )
 }
