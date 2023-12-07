@@ -4,6 +4,7 @@ import React, { useContext, useEffect } from 'react'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { useLocation } from 'react-router-dom'
+import ExtensionHandlerState from 'frontend/state/ExtensionHandlerState'
 import WalletState from '../state/WalletState'
 
 class OnboardingStore {
@@ -52,6 +53,22 @@ class OnboardingStore {
       this.openOnboarding()
     }
   }
+
+  public async bootstrapOnboardingWhenListenersBound(
+    context: ContextType,
+    defaultProvider?: PROVIDERS
+  ) {
+    if (defaultProvider === PROVIDERS.METAMASK_EXTENSION) {
+      when(
+        () => ExtensionHandlerState.ethereumListenersBound,
+        () => {
+          this.bootstrapOnboarding(context, defaultProvider)
+        }
+      )
+    } else {
+      this.bootstrapOnboarding(context, defaultProvider)
+    }
+  }
 }
 
 const onboardingStore = new OnboardingStore()
@@ -64,7 +81,10 @@ export const OnboardingStoreController = () => {
 
   async function init() {
     const currentWeb3Provider = await window.api.getCurrentWeb3Provider()
-    onboardingStore.bootstrapOnboarding(context, currentWeb3Provider)
+    onboardingStore.bootstrapOnboardingWhenListenersBound(
+      context,
+      currentWeb3Provider
+    )
   }
 
   useEffect(() => {

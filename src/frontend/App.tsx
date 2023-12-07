@@ -29,6 +29,8 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import AuthModal from './components/UI/AuthModal'
+import EmailVerifiedModal from './components/UI/EmailVerifiedModal'
 import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
 import { ENABLE_AMAZON_STORE } from './constants'
@@ -48,6 +50,8 @@ function App() {
           <ExtensionManager />
           <DialogHandler />
           <ExternalLinkDialog />
+          <AuthModal />
+          <EmailVerifiedModal />
           <StoreNavHandler />
           {isSettingsModalOpen.gameInfo && (
             <SettingsModal

@@ -106,7 +106,8 @@ import {
   fixAsarPath,
   twitterLink,
   eventsToCloseMetaMaskPopupOn,
-  setQaToken
+  setQaToken,
+  onboardLocalStore
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -167,6 +168,7 @@ import * as Sentry from '@sentry/electron'
 import { prodSentryDsn, devSentryDsn } from 'common/constants'
 
 let sentryInitialized = false
+
 function initSentry() {
   if (sentryInitialized) return
   Sentry.init({
@@ -359,6 +361,13 @@ if (!gotTheLock) {
       'persist:InPageWindowEthereumExternalWallet'
     )
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
+
+    const authSession = session.fromPartition('persist:auth')
+    authSession.setPreloads([
+      path.join(__dirname, 'providerPreload.js'),
+      path.join(__dirname, 'transparent_body_preload.js'),
+      path.join(__dirname, 'auth_provider_preload.js')
+    ])
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
@@ -1943,6 +1952,11 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
+  if (qaToken.length > 0) sendFrontendMessage('qaModeActive')
+})
+
+ipcMain.on('openAuthModalIfAppReloads', () => {
+  onboardLocalStore.set('openAuthModalIfAppReloads', true)
 })
 
 ipcMain.on('killOverlay', () => {
