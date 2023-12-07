@@ -398,7 +398,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<number | undefined>
   getAmazonLoginData: () => Promise<NileLoginData>
   pauseCurrentDownload: () => Promise<void>
-  completeHyperPlayQuest: () => Promise<void>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file
