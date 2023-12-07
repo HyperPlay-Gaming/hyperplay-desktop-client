@@ -1,0 +1,10 @@
+diff --git a/node_modules/isomorphic-fetch/fetch-npm-browserify.js b/node_modules/isomorphic-fetch/fetch-npm-browserify.js
+index 7f16e23..bb08dbd 100644
+--- a/node_modules/isomorphic-fetch/fetch-npm-browserify.js
++++ b/node_modules/isomorphic-fetch/fetch-npm-browserify.js
+@@ -3,4 +3,4 @@
+ //
+ // Return that as the export for use in Webpack, Browserify etc.
+ require('whatwg-fetch');
+-module.exports = self.fetch.bind(self);
++module.exports = globalThis.fetch.bind(globalThis);

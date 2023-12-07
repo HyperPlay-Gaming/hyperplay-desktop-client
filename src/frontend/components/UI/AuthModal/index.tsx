@@ -128,7 +128,7 @@ const AuthModal = () => {
     webviewRef.current?.loadURL(emailConfirmUrl)
     authState.openSignInModal()
 
-    setTimeout(() => webviewRef.current?.loadURL(url), 5000)
+    setTimeout(async () => webviewRef.current?.loadURL(url), 5000)
   }
 
   useEffect(() => {
