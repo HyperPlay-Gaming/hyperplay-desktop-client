@@ -1963,7 +1963,7 @@ ipcMain.on('killOverlay', () => {
   closeOverlay()
 })
 
-ipcMain.handle('completeHyperplayQuest', async () => {
+ipcMain.handle('completeHyperPlayQuest', async () => {
   const authSession = session.fromPartition('persist:auth')
 
   const cookies = await authSession.cookies.get({

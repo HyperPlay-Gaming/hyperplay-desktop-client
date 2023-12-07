@@ -231,5 +231,5 @@ export const handleEmailConfirmationNavigation = (
   }
 }
 
-export const completeHyperplayQuest = async () =>
-  ipcRenderer.invoke('completeHyperplayQuest')
+export const completeHyperPlayQuest = async () =>
+  ipcRenderer.invoke('completeHyperPlayQuest')
