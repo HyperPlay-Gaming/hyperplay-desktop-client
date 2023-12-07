@@ -255,7 +255,6 @@ async function completeHyperPlayQuest() {
 
   if (!response.ok) {
     const error = await response.json()
-    console.log({ error })
     logError(
       `Failed to complete summon task: ${
         error?.message ?? response.statusText
