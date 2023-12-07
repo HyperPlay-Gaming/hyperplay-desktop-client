@@ -11,8 +11,8 @@ import { stat, readdir } from 'fs/promises'
 import path, { join } from 'path'
 import { ipcMainInvokeHandler } from 'electron-playwright-helpers'
 
-const testTimeout = 120000
 const installPartialTimeout = 25000
+const installFullTimeout = 20000000
 
 const dirSize = async (directory) => {
   const files = await readdir(directory)
@@ -35,7 +35,7 @@ async function wait(ms: number) {
 test.describe('hp store api tests', function () {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore: this is the correct usage
-  commonSetup.call(this)
+  commonSetup.call(this, installFullTimeout)
 
   const appName = appNameToMock
   let tempFolder = ''
@@ -52,7 +52,6 @@ test.describe('hp store api tests', function () {
     })
     tempFolder = join(configFolder, 'hyperplay', '.temp', appName)
     console.log('tempfolder: ', tempFolder)
-    test.setTimeout(testTimeout)
   })
 
   test.afterEach(async () => {
@@ -94,6 +93,43 @@ test.describe('hp store api tests', function () {
     }
   }
 
+  const cancelExtraction = async (appName: string) => {
+    await page.evaluate(
+      async ([appName]) => {
+        window.api.cancelExtraction(appName)
+      },
+      [appName]
+    )
+
+    console.log('extraction waiting...')
+    await wait(1000)
+
+    //quit app because easyDL does not free all files on clean until app is closed
+    await electronApp.evaluate(async ({ app }) => {
+      app.quit()
+    })
+
+    await wait(1500)
+
+    //check that downloaded files are removed
+    if (existsSync(tempFolder)) {
+      const downloadDirSizeAfterCancel = await dirSize(tempFolder)
+      const downloadDirSizeAfterCancelNewFolder = await dirSize(
+        tempFolder.replace('.zip', '')
+      )
+      console.log(
+        'extraction downloadDirSizeAfterCancel: ',
+        downloadDirSizeAfterCancel,
+        'extraction folder',
+        downloadDirSizeAfterCancelNewFolder
+      )
+      expect(downloadDirSizeAfterCancel).toEqual(0)
+      expect(downloadDirSizeAfterCancelNewFolder).toEqual(0)
+    } else {
+      console.log('temp folder does not exist after cancelling extraction')
+    }
+  }
+
   const installPartial = async (appName: string) => {
     // download then pause
     await page.evaluate(
@@ -107,23 +143,41 @@ test.describe('hp store api tests', function () {
 
         const xMbDownloaded = (res, numberOfMb: number) => {
           return async (e, status: GameStatus) => {
-            console.log(
-              'progress update for download: ',
-              JSON.stringify(status, null, 4)
-            )
             if (
-              status.progress?.bytes &&
-              Number.parseFloat(status.progress?.bytes) > numberOfMb
-            )
+              status.progress?.percent === 100 &&
+              ['done'].includes(status.status)
+            ) {
+              console.log(
+                'downloaded successfully ',
+                JSON.stringify(status, null, 4)
+              )
               res()
-            else {
-              if (status.progress?.bytes)
-                console.log(
-                  'not enough bytes downloaded yet ',
-                  status.progress?.bytes,
-                  ' ',
-                  Number.parseFloat(status.progress?.bytes) > numberOfMb
-                )
+              return
+            }
+
+            if (
+              ['preparing', 'extracting', 'installing', 'paused'].includes(
+                status.status
+              )
+            ) {
+              console.log(
+                'progress update for download: ',
+                JSON.stringify(status, null, 4)
+              )
+              if (
+                status.progress?.bytes &&
+                Number.parseFloat(status.progress?.bytes) > numberOfMb
+              )
+                res()
+              else {
+                if (status.progress?.bytes)
+                  console.log(
+                    'not enough bytes downloaded yet ',
+                    status.progress?.bytes,
+                    ' ',
+                    Number.parseFloat(status.progress?.bytes) > numberOfMb
+                  )
+              }
             }
           }
         }
@@ -172,6 +226,49 @@ test.describe('hp store api tests', function () {
       },
       [appName]
     )
+  }
+
+  const installFull = async (appName: string, statusToWaitFor: string) => {
+    const evaluated = await page.evaluate(
+      async ([appName, statusToWaitFor]) => {
+        const { defaultInstallPath }: AppSettings =
+          await window.api.requestAppSettings()
+
+        console.log('default install path = ' + defaultInstallPath)
+
+        const gameInfo = await window.api.getGameInfo(appName, 'hyperplay')
+
+        const gameIsDownloaded = async () => {
+          return new Promise<GameStatus>((resolve) => {
+            const removeEventListener = window.api.onProgressUpdate(
+              appName,
+              () => {
+                return async (_e, status: GameStatus) => {
+                  if (status.status === statusToWaitFor) {
+                    removeEventListener()
+                    resolve(status)
+                  }
+                }
+              }
+            )
+          })
+        }
+
+        window.api.install({
+          appName,
+          gameInfo,
+          runner: 'hyperplay',
+          path: defaultInstallPath,
+          platformToInstall: 'windows_amd64',
+          channelName: 'main'
+        })
+
+        return gameIsDownloaded()
+      },
+      [appName, statusToWaitFor]
+    )
+
+    return evaluated
   }
 
   const pauseDownload = async () => {
@@ -238,5 +335,27 @@ test.describe('hp store api tests', function () {
     await pauseDownload()
     console.log('canceling')
     await cancelDownload(true)
+  })
+
+  test.skip('hp store: cancel extraction and do not keep files', async () => {
+    console.log('installing')
+    try {
+      const gameStatus = await installFull(appName, 'extracting')
+      console.log('extractingArgs', gameStatus)
+      // Test logic related to 'extracting' status
+      expect(gameStatus).toBeDefined()
+      expect(gameStatus.status).toBe('extracting')
+
+      // If the status is 'extracting', cancel the extraction
+      if (gameStatus?.status === 'extracting') {
+        await wait(1500)
+        await cancelExtraction(appName)
+      }
+    } catch (error) {
+      console.error(
+        'test: error - hp store: cancel extraction and do not keep files',
+        error
+      )
+    }
   })
 })

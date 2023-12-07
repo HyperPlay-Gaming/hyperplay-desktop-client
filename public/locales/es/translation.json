@@ -78,7 +78,11 @@
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
             },
-            "moving": "Error al Mover el Juego {{error}}"
+            "moving": "Error al Mover el Juego {{error}}",
+            "ubisoft-connect": {
+                "message": "La instalación de Ubisoft Connect en el prefijo del juego ha fallado. Consulte nuestra página wiki en https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para instalarlo maunally.",
+                "title": "Ubisoft Connect"
+            }
         },
         "info": {
             "update": {
@@ -804,7 +808,12 @@
         "analyticsOn": "El análisis está activado",
         "copyUrl": "Copiar la dirección URL",
         "discordApp": "Discord",
-        "viewItem": "Ver {{item}}"
+        "viewItem": "Ver {{item}}",
+        "folder": "Carpeta",
+        "browserImport": {
+            "profile": "Perfil",
+            "appId": "Id de la aplicación"
+        }
     },
     "hyperplayOverlay": {
         "chainRequest": {

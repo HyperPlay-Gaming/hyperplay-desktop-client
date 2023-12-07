@@ -28,6 +28,7 @@ import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
+import { hasStatus } from 'frontend/hooks/hasStatus'
 
 type Props = {
   element?: DMQueueElement
@@ -92,6 +93,11 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   } = params
 
   const [gameInfo, setGameInfo] = useState(DmGameInfo)
+  const { status: gameProgressStatus = '' } = hasStatus(
+    appName,
+    DmGameInfo,
+    size || '0'
+  )
 
   useEffect(() => {
     const getNewInfo = async () => {
@@ -123,6 +129,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const { status } = element
   const finished = status === 'done'
   const canceled = status === 'error' || (status === 'abort' && !current)
+  const isExtracting = gameProgressStatus === 'extracting'
 
   const goToGamePage = () => {
     if (is_dlc) {
@@ -176,9 +183,9 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       return <PlayIcon className="playIcon" />
     } else if (state === 'running') {
       return <PauseIcon className="pauseIcon" />
-    } else {
-      return <></>
     }
+
+    return <></>
   }
 
   const getTime = () => {
@@ -249,6 +256,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           installPath={path}
           folderName={gameInfo.folder_name ? gameInfo.folder_name : ''}
           gameInfo={gameInfo}
+          status={status || ''}
           progress={progress}
         />
       ) : null}
@@ -280,7 +288,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
             {mainActionIcon()}
           </SvgButton>
-          {current && (
+          {current && !isExtracting && (
             <SvgButton
               onClick={handleSecondaryActionClick}
               title={secondaryIconTitle()}

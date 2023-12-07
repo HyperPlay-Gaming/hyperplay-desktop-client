@@ -8,12 +8,6 @@
         "zoom": "Zoom"
     },
     "accounts": "accounts",
-    "achievements": {
-        "progress": {
-            "minted": "on chain",
-            "notMinted": "off chain"
-        }
-    },
     "add_game": "Add Game",
     "All": "All",
     "ALL": "ALL",
@@ -316,10 +310,17 @@
             "noThanks": "No Thanks"
         },
         "changeWallet": "Change wallet",
+        "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
         "discordApp": "Discord",
         "folder": "Folder",
+        "gamecard": {
+            "extracting": "Extracting...",
+            "installed": "Ready to play",
+            "installing": "Downloading...",
+            "paused": "Paused"
+        },
         "misc": "Never",
         "onboarding": {
             "analytics": {
@@ -715,7 +716,6 @@
         "showfps": "Show FPS (DX9, 10 and 11)",
         "showMetalOverlay": "Show Stats Overlay",
         "start-in-tray": "Start Minimized",
-        "steamId": "Steam ID",
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "WinePrefix folder",
@@ -752,7 +752,6 @@
             "long-log-hint": "Log truncated, last 1000 lines are shown!"
         },
         "navbar": {
-            "accounts": "Accounts",
             "advanced": "Advanced",
             "general": "General",
             "log": "Log",
