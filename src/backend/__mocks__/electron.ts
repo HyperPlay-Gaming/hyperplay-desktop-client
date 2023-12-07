@@ -157,7 +157,8 @@ const ipcMain = {
   on: jest.fn().mockReturnThis(),
   handle: jest.fn().mockReturnThis(),
   once: jest.fn().mockReturnThis(),
-  emit: jest.fn().mockReturnThis()
+  emit: jest.fn().mockReturnThis(),
+  prependListener: jest.fn().mockReturnThis()
 }
 
 export {

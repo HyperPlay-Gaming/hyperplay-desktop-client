@@ -97,6 +97,7 @@ export interface StoreStructure {
   onboardingStore: {
     completedEarlyAccess: boolean
     completedDataPrivacy: boolean
+    openAuthModalIfAppReloads: boolean
   }
   hpLibraryStore: {
     [key: string]: GameInfo[]

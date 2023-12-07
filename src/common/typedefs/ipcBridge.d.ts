@@ -76,9 +76,11 @@ interface HyperPlaySyncIPCFunctions {
   ignoreExitToTray: () => void
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
+  openAuthModalIfAppReloads: () => void
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
   toggleIsPopupOpen: () => void
+  showPopup: () => void
   toastCloseOnClick: (key: ToastKey) => void
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
@@ -139,6 +141,9 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   cancelDownload: (removeDownloaded: boolean) => void
   cancelExtraction: (appName: string) => void
   copyWalletConnectBaseURIToClipboard: () => void
+  closeAuthModal: () => void
+  'auth:accountConnected': () => void
+  'auth:accountNotConnected': () => void
   focusMainWindow: () => void
 }
 
@@ -440,6 +445,14 @@ declare namespace Electron {
 
   class IpcRenderer extends EventEmitter {
     public send: <
+      Name extends keyof SyncIPCFunctions,
+      Definition extends SyncIPCFunctions[Name]
+    >(
+      name: Name,
+      ...args: Parameters<Definition>
+    ) => void
+
+    public sendToHost: <
       Name extends keyof SyncIPCFunctions,
       Definition extends SyncIPCFunctions[Name]
     >(
