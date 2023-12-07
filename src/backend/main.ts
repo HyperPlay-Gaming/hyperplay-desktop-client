@@ -2006,5 +2006,3 @@ ipcMain.on('openAuthModalIfAppReloads', () => {
 ipcMain.on('killOverlay', () => {
   closeOverlay()
 })
-
-ipcMain.handle('completeHyperPlayQuest', completeHyperPlayQuest)
