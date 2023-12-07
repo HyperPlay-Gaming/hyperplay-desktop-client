@@ -3,26 +3,27 @@ import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
   AppSettings,
-  GameSettings,
   DiskSpaceData,
-  StatusPromise,
-  GamepadInputEvent,
-  WineCommandArgs,
   ExecResult,
-  Runner
+  GamepadInputEvent,
+  GameSettings,
+  Runner,
+  StatusPromise,
+  WineCommandArgs
 } from 'common/types'
 import * as path from 'path'
+import { join } from 'path'
 import {
-  BrowserWindow,
-  Menu,
   app,
+  BrowserWindow,
+  clipboard,
   dialog,
+  globalShortcut,
   ipcMain,
+  Menu,
   powerSaveBlocker,
   protocol,
   screen,
-  clipboard,
-  globalShortcut,
   session
 } from 'electron'
 import 'backend/updater'
@@ -33,17 +34,16 @@ import {
   appendFileSync,
   constants,
   existsSync,
+  readdirSync,
+  readFileSync,
   rmSync,
   unlinkSync,
   watch,
-  writeFileSync,
-  readdirSync,
-  readFileSync
+  writeFileSync
 } from 'graceful-fs'
 
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
-import { join } from 'path'
 import checkDiskSpace from 'check-disk-space'
 import { DXVK, Winetricks } from './tools'
 import { GameConfig } from './game_config'
@@ -54,60 +54,59 @@ import { NileUser } from './storeManagers/nile/user'
 import setup from './storeManagers/gog/setup'
 import nileSetup from './storeManagers/nile/setup'
 import {
+  checkWineBeforeLaunch,
   clearCache,
+  downloadDefaultWine,
   execAsync,
-  isEpicServiceOffline,
-  getLegendaryVersion,
-  getGogdlVersion,
-  getSystemInfo,
-  handleExit,
-  resetApp,
-  openUrlOrFile,
-  showAboutWindow,
-  showItemInFolder,
-  getLegendaryBin,
-  getGOGdlBin,
-  // detectVCRedist,
   getFileSize,
   getFirstExistingParentPath,
-  getShellPath,
-  wait,
-  checkWineBeforeLaunch,
-  downloadDefaultWine,
+  getGOGdlBin,
+  getGogdlVersion,
+  getLegendaryBin,
+  getLegendaryVersion,
   getNileVersion,
+  getPlatformName,
+  getShellPath,
   getStoreName,
-  getPlatformName
+  getSystemInfo,
+  handleExit,
+  isEpicServiceOffline,
+  openUrlOrFile,
+  resetApp,
+  showAboutWindow,
+  showItemInFolder,
+  wait
 } from './utils'
 import {
+  configPath,
   configStore,
+  createNecessaryFolders,
+  customThemesWikiLink,
   discordLink,
+  epicLoginUrl,
+  eventsToCloseMetaMaskPopupOn,
+  fixAsarPath,
+  fontsStore,
   gamesConfigPath,
   githubURL,
-  userHome,
+  hyperplaySite,
   icon,
   installed,
-  epicLoginUrl,
-  sidInfoUrl,
-  supportURL,
-  tsStore,
-  weblateUrl,
-  wikiLink,
-  fontsStore,
-  configPath,
-  isSteamDeckGameMode,
   isCLIFullscreen,
   isCLINoGui,
   isFlatpak,
+  isSteamDeckGameMode,
+  onboardLocalStore,
   publicDir,
-  wineprefixFAQ,
-  hyperplaySite,
-  customThemesWikiLink,
-  createNecessaryFolders,
-  fixAsarPath,
-  twitterLink,
-  eventsToCloseMetaMaskPopupOn,
   setQaToken,
-  onboardLocalStore
+  sidInfoUrl,
+  supportURL,
+  tsStore,
+  twitterLink,
+  userHome,
+  weblateUrl,
+  wikiLink,
+  wineprefixFAQ
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -126,8 +125,6 @@ import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import * as ProxyServer from './hyperplay-proxy-server/proxy'
-
-ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
   initOnlineMonitor,
   isOnline,
@@ -157,6 +154,10 @@ import {
 import { playtimeSyncQueue } from './storeManagers/gog/electronStores'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
 import {
+  getGameOverride,
+  getGameSdl
+} from 'backend/storeManagers/legendary/library'
+import {
   autoUpdate,
   gameManagerMap,
   initStoreManagers,
@@ -165,7 +166,33 @@ import {
 import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
 import * as Sentry from '@sentry/electron'
-import { prodSentryDsn, devSentryDsn, DEV_PORTAL_URL } from 'common/constants'
+import { DEV_PORTAL_URL, devSentryDsn, prodSentryDsn } from 'common/constants'
+import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
+import { addNewApp } from './storeManagers/sideload/library'
+/*
+ * INSERT OTHER IPC HANDLERS HERE
+ */
+import './logger/ipc_handler'
+import './wine/manager/ipc_handler'
+import './shortcuts/ipc_handler'
+import './anticheat/ipc_handler'
+import 'backend/storeManagers/legendary/eos_overlay/ipc_handler'
+import './wine/runtimes/ipc_handler'
+import './downloadmanager/ipc_handler'
+import './utils/ipc_handler'
+import './wiki_game_info/ipc_handler'
+import './recent_games/ipc_handler'
+import './metrics/ipc_handler'
+import 'backend/hyperplay-extension-helper/usbHandler'
+
+import { metricsAreEnabled, trackEvent } from './metrics/metrics'
+import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
+import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
+import { backendEvents } from 'backend/backend_events'
+import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
+import { PROVIDERS } from 'common/types/proxy-types'
+
+ProxyServer.serverStarted.then(() => console.log('Server started'))
 
 let sentryInitialized = false
 
@@ -180,13 +207,6 @@ function initSentry() {
 if (metricsAreEnabled()) {
   initSentry()
 }
-
-import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
-import { addNewApp } from './storeManagers/sideload/library'
-import {
-  getGameOverride,
-  getGameSdl
-} from 'backend/storeManagers/legendary/library'
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
@@ -212,6 +232,50 @@ ipcMain.on('focusMainWindow', () => {
   mainWindow.show()
   mainWindow?.focus()
 })
+
+async function completeHyperPlayQuest() {
+  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
+
+  const authSession = session.fromPartition('persist:auth')
+
+  const cookies = await authSession.cookies.get({
+    url: DEV_PORTAL_URL
+  })
+
+  const cookieString = cookies
+    .map((cookie) => `${cookie.name}=${cookie.value}`)
+    .join('; ')
+
+  const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
+    method: 'POST',
+    headers: {
+      Cookie: cookieString
+    }
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    console.log({ error })
+    logError(
+      `Failed to complete summon task: ${
+        error?.message ?? response.statusText
+      }`,
+      LogPrefix.Backend
+    )
+    return
+  }
+
+  const data = (await response.json()) as { status: number; message: string }
+
+  if (data.status !== 0) {
+    logInfo(`Completed HyperPlay Summon task`, LogPrefix.Backend)
+  } else {
+    logError(
+      `Failed to complete summon task: ${data?.message}`,
+      LogPrefix.Backend
+    )
+  }
+}
 
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
@@ -1091,6 +1155,9 @@ ipcMain.handle(
       }
     })
 
+    // purposefully not awaiting this
+    completeHyperPlayQuest()
+
     if (autoSyncSaves && isOnline()) {
       sendFrontendMessage('gameStatusUpdate', {
         appName,
@@ -1861,29 +1928,6 @@ ipcMain.handle(
   t('box.error.generic.message')
  */
 
-/*
- * INSERT OTHER IPC HANDLERS HERE
- */
-import './logger/ipc_handler'
-import './wine/manager/ipc_handler'
-import './shortcuts/ipc_handler'
-import './anticheat/ipc_handler'
-import 'backend/storeManagers/legendary/eos_overlay/ipc_handler'
-import './wine/runtimes/ipc_handler'
-import './downloadmanager/ipc_handler'
-import './utils/ipc_handler'
-import './wiki_game_info/ipc_handler'
-import './recent_games/ipc_handler'
-import './metrics/ipc_handler'
-import 'backend/hyperplay-extension-helper/usbHandler'
-
-import { metricsAreEnabled, trackEvent } from './metrics/metrics'
-import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
-import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
-import { backendEvents } from 'backend/backend_events'
-import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
-import { PROVIDERS } from 'common/types/proxy-types'
-
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
   getMainWindow()?.webContents.send('walletConnected', accounts)
@@ -1963,26 +2007,4 @@ ipcMain.on('killOverlay', () => {
   closeOverlay()
 })
 
-ipcMain.handle('completeHyperPlayQuest', async () => {
-  const authSession = session.fromPartition('persist:auth')
-
-  const cookies = await authSession.cookies.get({
-    url: DEV_PORTAL_URL
-  })
-
-  const cookieString = cookies
-    .map((cookie) => `${cookie.name}=${cookie.value}`)
-    .join('; ')
-
-  const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
-    method: 'POST',
-    headers: {
-      Cookie: cookieString
-    }
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    throw new Error(`Failed to complete summon task: ${error}`)
-  }
-})
+ipcMain.handle('completeHyperPlayQuest', completeHyperPlayQuest)
