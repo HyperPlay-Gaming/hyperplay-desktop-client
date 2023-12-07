@@ -3,6 +3,7 @@ import HttpApi from 'i18next-http-backend'
 import React, { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
+import { HyperPlayDesignProvider } from '@hyperplay/ui'
 import { initGamepad } from './helpers/gamepad'
 
 // keep @hyperplay/ui/index.css before index.scss until after frontend design rework
@@ -120,12 +121,14 @@ const renderApp = async () => {
       <StoreController />
       <LDProvider>
         <GlobalState>
-          <SentryHandler />
-          <I18nextProvider i18n={i18next}>
-            <Suspense fallback={<Loading />}>
-              <ViewManager />
-            </Suspense>
-          </I18nextProvider>
+          <HyperPlayDesignProvider>
+            <SentryHandler />
+            <I18nextProvider i18n={i18next}>
+              <Suspense fallback={<Loading />}>
+                <ViewManager />
+              </Suspense>
+            </I18nextProvider>
+          </HyperPlayDesignProvider>
         </GlobalState>
       </LDProvider>
     </React.StrictMode>
