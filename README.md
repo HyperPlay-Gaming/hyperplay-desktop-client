@@ -1,10 +1,5 @@
 # HyperPlay
 
-HyperPlay is an Open Source Game Launcher for Linux, Windows and macOS with Web3 features.
-It was conceived as a fork of [Heroic Games Launcher](https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher), so it keeps its features but also add new ones.
-Right now it supports launching games from the Epic Games Store using [Legendary](https://github.com/derrod/legendary) and GOG Games using [gogdl](https://github.com/App-Games-Launcher/heroic-gogdl).
-HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, NodeJS, and Electron.
-
 ## Index
 
 - [HyperPlay](#hyperplay)
@@ -21,13 +16,13 @@ HyperPlay is built with Web3 and Web2 Technologies like: TypeScript, React, Node
 
 ## Supported Operating Systems
 
+- Windows 8+ (might work on Win7 if you have the latest PowerShell but we do not give support for it)
 - Linux:
   - Ubuntu 20.04LTS or newer
   - Fedora 33 or newer
   - Arch Linux (Manjaro and Garuda as well)
   - HyperPlay will still work on most distros but we do not give official support for them. So do not open Issues here in these cases, instead, open a Discussion or try our Discord.
 - SteamOS (downloading using Discover only)
-- Windows 8+ (might work on Win7 if you have the latest PowerShell but we do not give support for it)
 - macOS 10.15 or higher
 
 ## Installation

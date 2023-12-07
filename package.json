@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "private": true,
   "main": "build/electron/main.js",
   "homepage": "./",
@@ -35,6 +35,7 @@
       "build/trayIconDark24x24.png",
       "build/extensions",
       "build/hyperplay_store_preload.js",
+      "build/transparent_body_preload.js",
       "build/webviewPreload.js"
     ],
     "protocols": [
@@ -163,6 +164,7 @@
     "@metamask/sdk": "^0.12.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
+    "@mysten/sui.js": "^0.45.1",
     "@node-steam/vdf": "^2.2.0",
     "@rudderstack/rudder-sdk-node": "^2.0.3",
     "@sentry/electron": "^4.6.0",
@@ -304,8 +306,8 @@
     "@types/supertest": "^2.0.12",
     "@types/tmp": "^0.2.3",
     "@types/ws": "^8.5.5",
-    "@typescript-eslint/eslint-plugin": "^5.20.0",
-    "@typescript-eslint/parser": "^5.20.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.2",
+    "@typescript-eslint/parser": "^6.13.2",
     "@valist/sdk": "^2.9.1",
     "@vitejs/plugin-react": "^2.2.0",
     "cross-env": "^7.0.3",
@@ -328,7 +330,7 @@
     "tmp": "^0.2.1",
     "ts-jest": "^29.1.1",
     "type-fest": "^3.2.0",
-    "typescript": "^4.8.4",
+    "typescript": "^5.3.2",
     "vite": "^3.2.7",
     "vite-plugin-electron": "^0.10.2",
     "vite-plugin-svgr": "^2.2.2",

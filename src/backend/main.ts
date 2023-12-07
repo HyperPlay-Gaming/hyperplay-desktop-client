@@ -106,7 +106,8 @@ import {
   fixAsarPath,
   twitterLink,
   eventsToCloseMetaMaskPopupOn,
-  setQaToken
+  setQaToken,
+  onboardLocalStore
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -164,9 +165,10 @@ import {
 import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
 import * as Sentry from '@sentry/electron'
-import { prodSentryDsn, devSentryDsn } from 'common/constants'
+import { prodSentryDsn, devSentryDsn, DEV_PORTAL_URL } from 'common/constants'
 
 let sentryInitialized = false
+
 function initSentry() {
   if (sentryInitialized) return
   Sentry.init({
@@ -359,6 +361,13 @@ if (!gotTheLock) {
       'persist:InPageWindowEthereumExternalWallet'
     )
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
+
+    const authSession = session.fromPartition('persist:auth')
+    authSession.setPreloads([
+      path.join(__dirname, 'providerPreload.js'),
+      path.join(__dirname, 'transparent_body_preload.js'),
+      path.join(__dirname, 'auth_provider_preload.js')
+    ])
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
@@ -1943,8 +1952,37 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
+  if (qaToken.length > 0) sendFrontendMessage('qaModeActive')
+})
+
+ipcMain.on('openAuthModalIfAppReloads', () => {
+  onboardLocalStore.set('openAuthModalIfAppReloads', true)
 })
 
 ipcMain.on('killOverlay', () => {
   closeOverlay()
+})
+
+ipcMain.handle('completeHyperPlayQuest', async () => {
+  const authSession = session.fromPartition('persist:auth')
+
+  const cookies = await authSession.cookies.get({
+    url: DEV_PORTAL_URL
+  })
+
+  const cookieString = cookies
+    .map((cookie) => `${cookie.name}=${cookie.value}`)
+    .join('; ')
+
+  const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
+    method: 'POST',
+    headers: {
+      Cookie: cookieString
+    }
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(`Failed to complete summon task: ${error}`)
+  }
 })

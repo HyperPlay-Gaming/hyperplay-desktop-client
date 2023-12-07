@@ -154,7 +154,6 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
         console.error('There was a problem importing MetaMask!')
         return
       }
-      connectMetaMaskExtension()
     }
   }
 

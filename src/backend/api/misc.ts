@@ -5,7 +5,8 @@ import {
   Tools,
   DialogType,
   ButtonOptions,
-  GamepadActionArgs
+  GamepadActionArgs,
+  WrapRendererCallback
 } from 'common/types'
 import { NileRegisterData } from 'common/types/nile'
 
@@ -128,6 +129,7 @@ import Store from 'electron-store'
 interface StoreMap {
   [key: string]: Store
 }
+
 const stores: StoreMap = {}
 
 export const storeNew = function (
@@ -188,3 +190,46 @@ export const fetchPlaytimeFromServer = async (
   runner: Runner,
   appName: string
 ) => ipcRenderer.invoke('getPlaytimeFromRunner', runner, appName)
+
+export const handleQaModeActivated = (
+  onChange: (e: Electron.IpcRendererEvent) => void
+) => {
+  ipcRenderer.on('qaModeActive', onChange)
+  return () => {
+    ipcRenderer.removeListener('qaModeActive', onChange)
+  }
+}
+
+export const handleOAuthCompleted = (
+  onMessage: (e: Electron.IpcRendererEvent) => void
+): (() => void) => {
+  ipcRenderer.on('oauthCompleted', onMessage)
+  return () => {
+    ipcRenderer.removeListener('oauthCompleted', onMessage)
+  }
+}
+
+export const handleEmailConfirmed = (
+  onMessage: (e: Electron.IpcRendererEvent) => void
+): (() => void) => {
+  ipcRenderer.on('emailVerified', onMessage)
+  return () => {
+    ipcRenderer.removeListener('emailVerified', onMessage)
+  }
+}
+
+export const openAuthModalIfAppReloads = () => {
+  ipcRenderer.send('openAuthModalIfAppReloads')
+}
+
+export const handleEmailConfirmationNavigation = (
+  cb: WrapRendererCallback<(url: string) => void>
+): (() => void) => {
+  ipcRenderer.on('emailConfirmation', cb)
+  return () => {
+    ipcRenderer.removeListener('emailConfirmation', cb)
+  }
+}
+
+export const completeHyperPlayQuest = async () =>
+  ipcRenderer.invoke('completeHyperPlayQuest')

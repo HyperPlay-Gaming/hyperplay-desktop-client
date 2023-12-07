@@ -8,7 +8,12 @@ import { icon } from './constants'
 import { getGameInfo } from 'backend/storeManagers/hyperplay/games'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 
-type Command = 'ping' | 'launch'
+type Command =
+  | 'ping'
+  | 'launch'
+  | 'oauth-completed'
+  | 'email-verified'
+  | 'email-confirmation'
 
 const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
 
@@ -31,13 +36,24 @@ export async function handleProtocol(args: string[]) {
 
   const [command, runner, arg = ''] = parseUrl(url)
 
-  logInfo(`received '${url}'`, LogPrefix.ProtocolHandler)
+  logInfo(`received ${url}`, LogPrefix.ProtocolHandler)
+
+  const emailConfirmationUrl = decodeURIComponent(arg)
 
   switch (command) {
     case 'ping':
       return handlePing(arg)
     case 'launch':
       await handleLaunch(runner, arg, mainWindow)
+      break
+    case 'oauth-completed':
+      sendFrontendMessage('oauthCompleted')
+      break
+    case 'email-verified':
+      sendFrontendMessage('emailVerified')
+      break
+    case 'email-confirmation':
+      sendFrontendMessage('emailConfirmation', emailConfirmationUrl)
       break
     default:
       return
@@ -72,8 +88,10 @@ function getUrl(args: string[]): string | undefined {
  * parseUrl('hyperplay://launch/legendary/123')
  * // => ['launch', 'legendary', '123']
  **/
-function parseUrl(url: string): [Command, Runner?, string?, string?] {
+export function parseUrl(url: string): [Command, Runner?, string?, string?] {
   const [, fullCommand] = url.split('://')
+
+  const urlObject = new URL(url)
 
   //check if the second param is a runner or not and adjust parts accordingly
   const splitCommand = fullCommand.split('/')
@@ -87,6 +105,9 @@ function parseUrl(url: string): [Command, Runner?, string?, string?] {
       const [command, runner, accountId, appId] = splitCommand
       return [command as Command, runner as Runner, accountId, appId]
     }
+  } else if (splitCommand[0].startsWith('email-confirmation')) {
+    const emailConfirmUrl = urlObject.searchParams.get('url')
+    return ['email-confirmation', undefined, emailConfirmUrl ?? undefined]
   } else {
     const [command, appId] = splitCommand
     return [command as Command, undefined, appId]
