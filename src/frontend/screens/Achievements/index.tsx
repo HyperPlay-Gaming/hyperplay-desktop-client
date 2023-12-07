@@ -147,7 +147,8 @@ export default observer(function Achievements(): JSX.Element {
           freeMints: numFreeMints,
           basketAmount:
             achievementsToBeMinted.length + achievementsToBeUpdated.length,
-          gamesAdded: []
+          gamesAdded: [],
+          showGameAddButton: false
         }}
         fetchNextPage={() => {
           AchievementState.fetchMoreSummaryAchievements()

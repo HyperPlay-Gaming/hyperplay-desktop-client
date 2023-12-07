@@ -72,29 +72,32 @@ export default observer(function GameAchievementDetails(): JSX.Element {
         basketAmount: achievementsToBeMinted.length,
         showGameAddButton: false,
         gamesAdded: [],
-        addThisGameText: t(
-          'hyperplay.achievements.addThisGame',
-          'Add this game'
-        ),
-        gamesToMintLabelText: t(
-          'hyperplay.achievements.gamesToMint',
-          'Games to mint'
-        )
+        i18n: {
+          addThisGameText: t(
+            'hyperplay.achievements.addThisGame',
+            'Add this game'
+          ),
+          gamesToMintLabelText: t(
+            'hyperplay.achievements.gamesToMint',
+            'Games to mint'
+          )
+        }
       }}
       game={{
-        title: summaryAchievement.gameName,
-        tags: summaryAchievement.tags ?? []
+        title: summaryAchievement.gameName
       }}
       mintedAchievementsCount={summaryAchievement.mintedAchievementCount}
       totalAchievementsCount={summaryAchievement.totalAchievementCount}
       mintableAchievementsCount={summaryAchievement.mintableAchievementsCount}
-      achievements={individualAchievements?.data.map((achievement) => ({
-        id: achievement.id,
-        title: achievement.displayName,
-        description: achievement.description,
-        image: achievement.icon,
-        isLocked: !isTimestampInPast(achievement.unlocktime)
-      }))}
+      achievements={
+        individualAchievements?.data.map((achievement) => ({
+          id: achievement.id,
+          title: achievement.displayName,
+          description: achievement.description,
+          image: achievement.icon,
+          isLocked: !isTimestampInPast(achievement.unlocktime)
+        })) ?? []
+      }
       sortProps={{
         options: ACHIEVEMENT_SORT_OPTIONS,
         selected: AchievementState.currentIndividualSort,
