@@ -160,3 +160,13 @@ svg.disabled {
   padding: var(--space-xl-fixed) var(--space-xl-fixed) 0px 0px;
   z-index: 3;
 }
+
+.contentContainer:is(.Library) {
+  max-height: 100vh;
+  overflow-y: scroll;
+}
+
+.contentContainer:is(.Library)::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
