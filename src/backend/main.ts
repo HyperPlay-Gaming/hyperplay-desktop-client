@@ -233,7 +233,6 @@ ipcMain.on('focusMainWindow', () => {
   mainWindow?.focus()
 })
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function completeHyperPlayQuest() {
   logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
 
@@ -1156,7 +1155,7 @@ ipcMain.handle(
     })
 
     // purposefully not awaiting this
-    // completeHyperPlayQuest()
+    completeHyperPlayQuest()
 
     if (autoSyncSaves && isOnline()) {
       sendFrontendMessage('gameStatusUpdate', {
