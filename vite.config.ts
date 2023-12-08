@@ -13,7 +13,12 @@ const srcAliases = ['backend', 'frontend', 'common'].map((srcFolder) => {
 })
 
 const electronViteConfig = {
-  build: { outDir: 'build/electron' },
+  build: { outDir: 'build/electron', target: 'es2020' },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020'
+    }
+  },
   resolve: {
     alias: [
       {

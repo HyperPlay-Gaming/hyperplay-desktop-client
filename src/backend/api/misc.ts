@@ -230,3 +230,6 @@ export const handleEmailConfirmationNavigation = (
     ipcRenderer.removeListener('emailConfirmation', cb)
   }
 }
+
+export const completeHyperPlayQuest = async () =>
+  ipcRenderer.invoke('completeHyperPlayQuest')
