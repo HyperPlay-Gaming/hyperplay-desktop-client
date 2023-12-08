@@ -233,6 +233,7 @@ ipcMain.on('focusMainWindow', () => {
   mainWindow?.focus()
 })
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function completeHyperPlayQuest() {
   logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
 
