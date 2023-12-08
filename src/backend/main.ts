@@ -1155,7 +1155,7 @@ ipcMain.handle(
     })
 
     // purposefully not awaiting this
-    completeHyperPlayQuest()
+    // completeHyperPlayQuest()
 
     if (autoSyncSaves && isOnline()) {
       sendFrontendMessage('gameStatusUpdate', {
