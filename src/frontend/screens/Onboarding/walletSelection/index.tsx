@@ -8,7 +8,8 @@ import React, {
 import WalletOption from '../components/walletOption'
 import { PROVIDERS } from 'common/types/proxy-types'
 // import './index.css'
-import { MMTransparent, WCBlue, HyperPlayLogo } from 'frontend/assets/hyperplay'
+import { MMTransparent, WCBlue } from 'frontend/assets/hyperplay'
+import { Images } from '@hyperplay/ui'
 import { t } from 'i18next'
 import WalletSelectionStyles from './index.module.scss'
 import WalletInfoScreen from './screens/info'
@@ -252,7 +253,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
   return (
     <div className={WalletSelectionStyles.welcomeContainer}>
       <div className={WalletSelectionStyles.walletOptionsSection}>
-        <HyperPlayLogo />
+        <Images.HyperPlayLogoColored className={WalletSelectionStyles.hpLogo} />
         <div
           className={`title ${WalletSelectionStyles.walletConnectionsTitle}`}
         >
