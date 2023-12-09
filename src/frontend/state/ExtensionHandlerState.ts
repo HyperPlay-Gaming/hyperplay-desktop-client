@@ -1,3 +1,5 @@
+import { makeAutoObservable, runInAction } from 'mobx'
+
 class ExtensionHandlerState {
   navigateTo: string | null = null
 
@@ -21,7 +23,9 @@ class ExtensionHandlerState {
   }
 
   async handleOpenMMHomePage() {
-    this.navigateTo = 'metamaskHome'
+    runInAction(() => {
+      this.navigateTo = 'metamaskHome'
+    })
   }
 
   async handleOpenMMSnapsPage() {
@@ -153,6 +157,7 @@ class ExtensionHandlerState {
   }
 
   constructor() {
+    makeAutoObservable(this)
     const bindListeners = (): boolean => {
       if (typeof window.ethereum !== 'undefined') {
         console.log('binding ehtereum listeners')

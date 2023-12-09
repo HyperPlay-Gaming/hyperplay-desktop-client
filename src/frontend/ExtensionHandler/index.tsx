@@ -24,6 +24,7 @@ const ExtensionHandler = observer(function () {
 
   if (ExtensionHandlerState.navigateTo !== null) {
     navigate(ExtensionHandlerState.navigateTo)
+    ExtensionHandlerState.navigateTo = null
   }
 
   return <></>
