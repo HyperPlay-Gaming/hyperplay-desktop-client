@@ -12,6 +12,7 @@ import { MMTransparent, WCBlue } from 'frontend/assets/hyperplay'
 import { Images } from '@hyperplay/ui'
 import { t } from 'i18next'
 import WalletSelectionStyles from './index.module.scss'
+import OnboardingStyles from '../index.module.scss'
 import WalletInfoScreen from './screens/info'
 import WalletScanScreen from './screens/scan'
 import WalletImportScreen from './screens/import'
@@ -253,7 +254,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
   return (
     <div className={WalletSelectionStyles.welcomeContainer}>
       <div className={WalletSelectionStyles.walletOptionsSection}>
-        <Images.HyperPlayLogoColored className={WalletSelectionStyles.hpLogo} />
+        <Images.HyperPlayLogoColored className={OnboardingStyles.hpLogo} />
         <div
           className={`title ${WalletSelectionStyles.walletConnectionsTitle}`}
         >
