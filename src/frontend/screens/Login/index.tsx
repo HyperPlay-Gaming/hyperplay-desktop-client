@@ -6,14 +6,13 @@ import { useNavigate } from 'react-router'
 
 import { ReactComponent as EpicLogo } from 'frontend/assets/epic-logo.svg'
 import { ReactComponent as GOGLogo } from 'frontend/assets/gog-logo.svg'
-import { ReactComponent as HyperPlayLogo } from 'frontend/assets/hyperplay/hyperplay_logo.svg'
 import { ReactComponent as AmazonLogo } from 'frontend/assets/amazon-logo.svg'
 
 import { LanguageSelector, UpdateComponent } from '../../components/UI'
 import { FlagPosition } from '../../components/UI/LanguageSelector'
 import SIDLogin from './components/SIDLogin'
 import ContextProvider from '../../state/ContextProvider'
-import { Background } from '@hyperplay/ui'
+import { Background, Images } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
 import { ENABLE_AMAZON_STORE } from 'frontend/constants'
@@ -82,7 +81,7 @@ export default React.memo(function NewLogin() {
       <div className="loginContentWrapper">
         <div className="runnerList">
           <div className="runnerHeader">
-            <HyperPlayLogo className="runnerHeaderIcon" />
+            <Images.HyperPlayLogoColored className="runnerHeaderIcon" />
             <div className="runnerHeaderText">
               <h1 className="title">HyperPlay</h1>
               <h2 className="subtitle">Games Launcher</h2>
