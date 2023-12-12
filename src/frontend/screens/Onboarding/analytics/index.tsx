@@ -1,14 +1,14 @@
 import React from 'react'
 import { ONBOARDING_SCREEN } from '../types'
 import { t } from 'i18next'
-import { HyperPlayLogo } from 'frontend/assets/hyperplay'
-import { Button } from '@hyperplay/ui'
+import { Button, Images } from '@hyperplay/ui'
 import AnalyticsStyle from './index.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faX } from '@fortawesome/free-solid-svg-icons'
 import { IconProp } from '@fortawesome/fontawesome-svg-core'
 import { onboardingStore } from 'frontend/helpers/electronStores'
 import { MetricsOptInStatus } from 'common/types'
+import OnboardingStyles from '../index.module.scss'
 
 interface BulletPointProps {
   icon: IconProp
@@ -65,7 +65,7 @@ interface AnalyticsProps {
 const Analytics: React.FC<AnalyticsProps> = function (props) {
   return (
     <>
-      <HyperPlayLogo />
+      <Images.HyperPlayLogoColored className={OnboardingStyles.hpLogo} />
       <h5>
         {t(
           'hyperplay.onboarding.analytics.title',
