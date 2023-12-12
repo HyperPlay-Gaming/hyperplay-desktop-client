@@ -264,16 +264,7 @@ async function completeHyperPlayQuest() {
     return
   }
 
-  const data = (await response.json()) as { status: number; message: string }
-
-  if (data.status !== 0) {
-    logInfo(`Completed HyperPlay Summon task`, LogPrefix.Backend)
-  } else {
-    logError(
-      `Failed to complete summon task: ${data?.message}`,
-      LogPrefix.Backend
-    )
-  }
+  logInfo(`Completed HyperPlay Summon task`, LogPrefix.Backend)
 }
 
 async function initializeWindow(): Promise<BrowserWindow> {
