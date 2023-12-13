@@ -4,7 +4,7 @@
 setTimeout(() => {
   // eslint-disable-next-line spaced-comment
   const scriptsToLoad = [
-    ...["./snow.js","./use-snow.js","./globalthis.js","./sentry-install.js","./runtime-lavamoat.js","./lockdown-more.js","./policy-load.js","./common-0.js","./common-1.js","./common-2.js","./common-3.js","./common-4.js","./common-5.js","./common-6.js","./ui-0.js","./ui-1.js","./ui-2.js","./ui-3.js","./ui-4.js","./ui-5.js","./ui-6.js","./ui-7.js","./ui-8.js","./ui-9.js","./ui-10.js","./ui-11.js","./ui-12.js"]
+    ...["./snow.js","./use-snow.js","./globalthis.js","./sentry-install.js","./runtime-lavamoat.js","./lockdown-more.js","./policy-load.js","./common-0.js","./common-1.js","./common-2.js","./common-3.js","./common-4.js","./common-5.js","./common-6.js","./common-7.js","./ui-0.js","./ui-1.js","./ui-2.js","./ui-3.js","./ui-4.js","./ui-5.js","./ui-6.js","./ui-7.js","./ui-8.js","./ui-9.js","./ui-10.js","./ui-11.js"]
   ];
 
   const loadScript = (src) => {
