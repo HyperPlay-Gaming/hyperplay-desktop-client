@@ -14,6 +14,10 @@ interface TextInputWithIconFieldProps {
   disabled?: boolean
   extraClass?: string
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void
+  inputProps?: React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
 }
 
 const TextInputWithIconField = (props: TextInputWithIconFieldProps) => {

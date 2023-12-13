@@ -17,6 +17,10 @@ interface TextInputFieldProps {
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void
   maxLength?: number
   isError?: boolean
+  inputProps?: React.DetailedHTMLProps<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+  >
 }
 
 const TextInputField = ({
@@ -32,9 +36,11 @@ const TextInputField = ({
   warning,
   onBlur,
   maxLength,
-  isError
+  isError,
+  inputProps
 }: TextInputFieldProps) => {
   const { isRTL } = useContext(ContextProvider)
+  const { className: inputPropsClassName, ...restInputProps } = inputProps ?? {}
 
   return (
     <div
@@ -53,7 +59,11 @@ const TextInputField = ({
         placeholder={placeholder}
         onBlur={onBlur}
         maxLength={maxLength}
-        className={isError ? 'inputFieldError' : ''}
+        className={classnames(
+          isError ? 'inputFieldError' : '',
+          inputPropsClassName
+        )}
+        {...restInputProps}
       />
       {value && warning}
       {afterInput}

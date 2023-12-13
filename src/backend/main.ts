@@ -44,7 +44,9 @@ import {
 
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
-import checkDiskSpace from 'check-disk-space'
+// import checkDiskSpace, {
+//   getFirstExistingParentPath
+// } from '@hyperplay/check-disk-space'
 import { DXVK, Winetricks } from './tools'
 import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
@@ -59,7 +61,6 @@ import {
   downloadDefaultWine,
   execAsync,
   getFileSize,
-  getFirstExistingParentPath,
   getGOGdlBin,
   getGogdlVersion,
   getLegendaryBin,
@@ -680,42 +681,56 @@ ipcMain.on('unlock', () => {
 })
 
 ipcMain.handle('checkDiskSpace', async (event, folder) => {
-  const parent = getFirstExistingParentPath(folder)
-  return new Promise<DiskSpaceData>((res) => {
-    access(parent, constants.W_OK, async (writeError) => {
-      const { free, size: diskSize } = await checkDiskSpace(folder).catch(
-        (checkSpaceError) => {
-          logError(
-            [
-              'Failed to check disk space for',
-              `"${folder}":`,
-              checkSpaceError.stack ?? `${checkSpaceError}`
-            ],
-            LogPrefix.Backend
-          )
-          return { free: 0, size: 0 }
-        }
-      )
-      if (writeError) {
-        logWarning(
-          [
-            'Cannot write to',
-            `"${folder}":`,
-            writeError.stack ?? `${writeError}`
-          ],
-          LogPrefix.Backend
-        )
-      }
+  return {
+    free: 0,
+    diskSize: 0,
+    message: 'Path does not exist',
+    validPath: false
+  }
+  // const parent = getFirstExistingParentPath(folder)
+  // if (!parent) {
+  //   return {
+  //     free: 0,
+  //     diskSize: 0,
+  //     message: 'Path does not exist',
+  //     validPath: false
+  //   }
+  // }
+  // return new Promise<DiskSpaceData>((res) => {
+  //   access(parent, constants.W_OK, async (writeError) => {
+  //     const { free, size: diskSize } = await checkDiskSpace(folder).catch(
+  //       (checkSpaceError) => {
+  //         logError(
+  //           [
+  //             'Failed to check disk space for',
+  //             `"${folder}":`,
+  //             checkSpaceError.stack ?? `${checkSpaceError}`
+  //           ],
+  //           LogPrefix.Backend
+  //         )
+  //         return { free: 0, size: 0 }
+  //       }
+  //     )
+  //     if (writeError) {
+  //       logWarning(
+  //         [
+  //           'Cannot write to',
+  //           `"${folder}":`,
+  //           writeError.stack ?? `${writeError}`
+  //         ],
+  //         LogPrefix.Backend
+  //       )
+  //     }
 
-      const ret = {
-        free,
-        diskSize,
-        message: `${getFileSize(free)} / ${getFileSize(diskSize)}`,
-        validPath: !writeError
-      }
-      res(ret)
-    })
-  })
+  //     const ret = {
+  //       free,
+  //       diskSize,
+  //       message: `${getFileSize(free)} / ${getFileSize(diskSize)}`,
+  //       validPath: !writeError
+  //     }
+  //     res(ret)
+  //   })
+  // })
 })
 
 ipcMain.on('quit', async () => handleExit())

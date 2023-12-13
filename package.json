@@ -183,7 +183,6 @@
     "@walletconnect/types": "^2.9.0",
     "axios": "^0.26.1",
     "bn.js": "^5.2.1",
-    "check-disk-space": "^3.3.1",
     "classic-level": "1.2.0",
     "classnames": "^2.3.1",
     "compare-versions": "^6.0.0-rc.1",

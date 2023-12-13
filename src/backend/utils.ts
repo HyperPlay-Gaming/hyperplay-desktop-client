@@ -804,18 +804,6 @@ function detectVCRedist(mainWindow: BrowserWindow) {
   })
 }
 
-function getFirstExistingParentPath(directoryPath: string): string {
-  let parentDirectoryPath = directoryPath
-  let parentDirectoryFound = existsSync(parentDirectoryPath)
-
-  while (!parentDirectoryFound) {
-    parentDirectoryPath = normalize(parentDirectoryPath + '/..')
-    parentDirectoryFound = existsSync(parentDirectoryPath)
-  }
-
-  return parentDirectoryPath !== '.' ? parentDirectoryPath : ''
-}
-
 function getInfo(appName: string, runner: Runner): GameInfo {
   return gameManagerMap[runner].getGameInfo(appName)
 }
@@ -1418,7 +1406,6 @@ export {
   killPattern,
   getInfo,
   getShellPath,
-  getFirstExistingParentPath,
   getSystemInfo,
   getWineFromProton,
   getFileSize,
