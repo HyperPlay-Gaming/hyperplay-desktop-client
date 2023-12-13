@@ -13,7 +13,12 @@ const srcAliases = ['backend', 'frontend', 'common'].map((srcFolder) => {
 })
 
 const electronViteConfig = {
-  build: { outDir: 'build/electron' },
+  build: { outDir: 'build/electron', target: 'es2020' },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020'
+    }
+  },
   resolve: {
     alias: [
       {
@@ -71,6 +76,18 @@ export default defineConfig({
       {
         entry: path.resolve(
           __dirname + '/src/backend/webview_style_preload.ts'
+        ),
+        vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/transparent_body_preload.ts'
+        ),
+        vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/auth_provider_preload.ts'
         ),
         vite: electronViteConfig
       }

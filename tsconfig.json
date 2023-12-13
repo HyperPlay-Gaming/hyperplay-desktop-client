@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "module": "esnext",
-    "target": "es2017",
+    "target": "es2020",
     "lib": ["esnext", "dom", "dom.iterable"],
     "sourceMap": true,
     "jsx": "react-jsx",
@@ -14,6 +14,7 @@
     "noImplicitAny": true,
     "importHelpers": true,
     "strictNullChecks": true,
+    "ignoreDeprecations": "5.0",
     "suppressImplicitAnyIndexErrors": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -34,5 +35,11 @@
     "strictPropertyInitialization": true
   },
   "include": ["src"],
-  "exclude": ["vite.config.ts", "**/__tests__/**", "**/__mocks__/**", "sign"]
+  "exclude": [
+    "vite.config.ts",
+    "**/__tests__/**",
+    "**/__mocks__/**",
+    "sign",
+    "./node_modules/@mysten"
+  ]
 }
