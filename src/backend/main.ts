@@ -197,6 +197,7 @@ ProxyServer.serverStarted.then(() => console.log('Server started'))
 let sentryInitialized = false
 
 function initSentry() {
+  console.log('test')
   if (sentryInitialized) return
   Sentry.init({
     dsn: app.isPackaged ? prodSentryDsn : devSentryDsn
