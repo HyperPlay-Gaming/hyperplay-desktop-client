@@ -2,4 +2,4 @@ export const ldOptions = {
   streaming: true
 }
 
-export const LDEnvironmentId = process.env.LD_ENVIRONMENT_ID
+export const LDEnvironmentId = import.meta.env.VITE_LD_ENVIRONMENT_ID

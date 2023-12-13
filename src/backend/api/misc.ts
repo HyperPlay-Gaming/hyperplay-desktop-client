@@ -188,3 +188,5 @@ export const fetchPlaytimeFromServer = async (
   runner: Runner,
   appName: string
 ) => ipcRenderer.invoke('getPlaytimeFromRunner', runner, appName)
+
+export const getLDEnvConfig = async () => ipcRenderer.invoke('getLDEnvConfig')

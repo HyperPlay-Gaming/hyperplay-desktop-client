@@ -489,7 +489,7 @@ if (!gotTheLock) {
       ]
     })
 
-    let ldUser = currentConfigStore?.ldUser
+    let ldUser = GlobalConfig.get().getSettings().ldUser
 
     if (!ldUser) {
       logInfo('No LaunchDarkly user found, creating new one.')
@@ -501,7 +501,7 @@ if (!gotTheLock) {
     }
 
     ldMainClient = LDElectron.initializeInMain(
-      LDEnvironmentId!,
+      LDEnvironmentId,
       ldUser,
       ldOptions
     )
@@ -803,6 +803,11 @@ ipcMain.handle('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 ipcMain.handle('isFlatpak', () => isFlatpak)
 ipcMain.handle('getGameOverride', async () => getGameOverride())
 ipcMain.handle('getGameSdl', async (event, appName) => getGameSdl(appName))
+
+ipcMain.handle('getLDEnvConfig', async () => {
+  const ldUser = GlobalConfig.get().getSettings().ldUser
+  return { envId: LDEnvironmentId, ldUser }
+})
 
 ipcMain.handle('getPlatform', () => process.platform)
 

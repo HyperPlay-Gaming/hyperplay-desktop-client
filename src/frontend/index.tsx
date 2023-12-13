@@ -108,10 +108,10 @@ i18next
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
 
-const ldUser = configStore.get_nodefault('ldUser')
+const ldConfig = await window.api.getLDEnvConfig()
 const LDProvider = await asyncWithLDProvider({
-  clientSideID: process.env.LD_ENVIRONMENT_ID!,
-  context: ldUser
+  clientSideID: ldConfig?.envId,
+  context: ldConfig?.ldUser
 })
 
 root.render(
