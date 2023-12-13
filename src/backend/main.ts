@@ -41,6 +41,7 @@ import {
   readFileSync
 } from 'graceful-fs'
 
+import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
 import { join } from 'path'
@@ -185,6 +186,8 @@ import {
   getGameOverride,
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
+
+let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
@@ -484,6 +487,27 @@ if (!gotTheLock) {
         'zh_Hans',
         'zh_Hant'
       ]
+    })
+
+    let ldUser = currentConfigStore?.ldUser
+
+    if (!ldUser) {
+      logInfo('No LaunchDarkly user found, creating new one.')
+      ldUser = {
+        kind: 'user',
+        key: uuid()
+      }
+      configStore.set('settings.ldUser', ldUser)
+    }
+
+    ldMainClient = LDElectron.initializeInMain(
+      LDEnvironmentId!,
+      ldUser,
+      ldOptions
+    )
+
+    ldMainClient.on('ready', () => {
+      logInfo('LaunchDarkly client initialized', LogPrefix.Backend)
     })
 
     const mainWindow = await initializeWindow()
@@ -1874,6 +1898,8 @@ import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/side
 import { backendEvents } from 'backend/backend_events'
 import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
+import { LDEnvironmentId, ldOptions } from './ldconstants'
+import { uuid } from 'short-uuid'
 
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
