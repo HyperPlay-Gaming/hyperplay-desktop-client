@@ -16,7 +16,7 @@ import { Category } from 'frontend/types'
 import { observer } from 'mobx-react-lite'
 import libraryState from '../../../../state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
-import { ENABLE_AMAZON_STORE } from 'frontend/constants'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export interface LibraryTopBarInterface {
   filters: DropdownItemType[]
@@ -37,6 +37,8 @@ export const LibraryTopBar = observer(
     otherFiltersData
   }: LibraryTopBarInterface): JSX.Element => {
     const { t } = useTranslation()
+    const flags = useFlags()
+    const ENABLE_AMAZON_STORE = flags.amazonStore
     const category = libraryState.category
 
     const isGOGLoggedin = storeAuthState.gog.username

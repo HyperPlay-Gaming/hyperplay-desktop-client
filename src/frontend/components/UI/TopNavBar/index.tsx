@@ -13,14 +13,16 @@ import {
   EPIC_STORE_URL,
   GOG_STORE_URL,
   AMAZON_STORE,
-  HYPERPLAY_STORE_URL,
-  ENABLE_AMAZON_STORE
+  HYPERPLAY_STORE_URL
 } from 'frontend/constants'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
+  const flags = useFlags()
+  const ENABLE_AMAZON_STORE = flags.amazonStore
 
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
