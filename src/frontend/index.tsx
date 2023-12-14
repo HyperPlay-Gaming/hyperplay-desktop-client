@@ -22,7 +22,7 @@ import StoreController from './store'
 initOnlineMonitor()
 import ViewManager from './ViewManager'
 import SentryHandler from './SentryHandler'
-import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk'
+import LDProvider from './state/LDProvider'
 
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
@@ -107,12 +107,6 @@ i18next
 
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
-
-const ldConfig = await window.api.getLDEnvConfig()
-const LDProvider = await asyncWithLDProvider({
-  clientSideID: ldConfig?.envId,
-  context: ldConfig?.ldUser
-})
 
 root.render(
   <React.StrictMode>
