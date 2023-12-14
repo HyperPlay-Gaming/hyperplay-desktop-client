@@ -8,7 +8,7 @@ import AchievementState, {
   ACHIEVEMENT_SORT_OPTIONS
 } from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
-import { isTimestampInPast } from 'frontend/helpers/achievementUtils'
+import { isTimestampInPast } from 'common/utils'
 
 const pageSize = 100
 
