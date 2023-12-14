@@ -22,7 +22,7 @@ import StoreController from './store'
 initOnlineMonitor()
 import ViewManager from './ViewManager'
 import SentryHandler from './SentryHandler'
-import LDProvider from './state/LDProvider'
+import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk'
 
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
@@ -108,23 +108,31 @@ i18next
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
 
-root.render(
-  <React.StrictMode>
-    <StoreController />
-    <LDProvider>
-      <GlobalState>
-        <>
+const renderApp = async () => {
+  const ldConfig = await window.api.getLDEnvConfig()
+  const LDProvider = await asyncWithLDProvider({
+    clientSideID: ldConfig.envId,
+    context: ldConfig.ldUser
+  })
+
+  root.render(
+    <React.StrictMode>
+      <StoreController />
+      <LDProvider>
+        <GlobalState>
           <SentryHandler />
           <I18nextProvider i18n={i18next}>
             <Suspense fallback={<Loading />}>
               <ViewManager />
             </Suspense>
           </I18nextProvider>
-        </>
-      </GlobalState>
-    </LDProvider>
-  </React.StrictMode>
-)
+        </GlobalState>
+      </LDProvider>
+    </React.StrictMode>
+  )
+}
+
+renderApp()
 
 // helper function to set the theme class and load custom css if needed
 window.setTheme = async (themeClass: string) => {
