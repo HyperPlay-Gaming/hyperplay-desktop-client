@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Oturum Aç"
+        "login": "Oturum Aç",
+        "loading": "Yükleniyor",
+        "error": "Hata, farklı bir kod deneyin"
     },
     "message": {
         "part1": "Oturum açabilmeniz ve oyunlarınızı kurabilmeniz için öncelikle aşağıdaki adımları uygulamanız gerekiyor:",

@@ -2,7 +2,8 @@ import {
   HyperPlayInstallInfo,
   DownloadManagerState,
   Achievement,
-  SummaryAchievement
+  SummaryAchievement,
+  LDEnv
 } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
@@ -247,6 +248,7 @@ interface HyperPlayAsyncIPCFunctions {
   get_wallet_state_provider: () => Promise<PROVIDERS>
   get_wallet_state_otp: () => Promise<string>
   get_extension_state_isPopupOpen: () => Promise<boolean>
+  getLDEnvConfig: () => Promise<LDEnv>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -417,7 +419,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<number | undefined>
   getAmazonLoginData: () => Promise<NileLoginData>
   pauseCurrentDownload: () => Promise<void>
-  completeHyperPlayQuest: () => Promise<void>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

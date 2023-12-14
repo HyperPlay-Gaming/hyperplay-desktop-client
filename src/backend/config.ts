@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'graceful-fs'
 import { userInfo as user } from 'os'
+import { uuid } from 'short-uuid'
 
 import {
   AppSettings,
@@ -325,7 +326,11 @@ class GlobalConfigV0 extends GlobalConfig {
       winePrefix: isWindows ? '' : defaultWinePrefix,
       wineVersion: defaultWine,
       enableEsync: true,
-      enableFsync: true
+      enableFsync: true,
+      ldUser: {
+        kind: 'user',
+        key: uuid()
+      }
     } as AppSettings
   }
 

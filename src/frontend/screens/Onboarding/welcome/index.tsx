@@ -1,14 +1,14 @@
 import React from 'react'
 import { ONBOARDING_SCREEN } from '../types'
 import { t } from 'i18next'
-import { Button } from '@hyperplay/ui'
-import { HyperPlayLogo } from 'frontend/assets/hyperplay'
+import { Button, Images } from '@hyperplay/ui'
 import { LanguageSelector } from 'frontend/components/UI'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 import { FlagPosition } from 'frontend/components/UI/LanguageSelector'
 import { onboardingStore } from 'frontend/helpers/electronStores'
 import WelcomeStyles from './index.module.scss'
+import OnboardingStyles from '../index.module.scss'
 
 interface WelcomeProps {
   setScreen: React.Dispatch<React.SetStateAction<ONBOARDING_SCREEN>>
@@ -17,7 +17,7 @@ interface WelcomeProps {
 const Welcome: React.FC<WelcomeProps> = function (props) {
   return (
     <>
-      <HyperPlayLogo />
+      <Images.HyperPlayLogoColored className={OnboardingStyles.hpLogo} />
       <h5>
         {t(
           'hyperplay.onboarding.welcome.title',

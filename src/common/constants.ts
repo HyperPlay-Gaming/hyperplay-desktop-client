@@ -8,5 +8,4 @@ export const METAMASK_SNAPS_URL = 'https://snaps.metamask.io/'
 export const METAMASK_SNAPS_EXTERNAL_URL = 'https://metamask.io/snaps/'
 export const METAMASK_PORTFOLIO_URL = 'https://portfolio.metamask.io/'
 
-export const DEV_PORTAL_URL =
-  'https://hyperplay-dev-git-feature-unified-auth-ui-valist.vercel.app/'
+export const DEV_PORTAL_URL = 'https://developers.hyperplay.xyz/'

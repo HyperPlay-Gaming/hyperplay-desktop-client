@@ -36,10 +36,12 @@ import AuthModal from './components/UI/AuthModal'
 import EmailVerifiedModal from './components/UI/EmailVerifiedModal'
 import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
-import { ENABLE_AMAZON_STORE } from './constants'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
+  const flags = useFlags()
+  const ENABLE_AMAZON_STORE = flags.amazonStore
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>

@@ -191,6 +191,8 @@ export const fetchPlaytimeFromServer = async (
   appName: string
 ) => ipcRenderer.invoke('getPlaytimeFromRunner', runner, appName)
 
+export const getLDEnvConfig = async () => ipcRenderer.invoke('getLDEnvConfig')
+
 export const handleQaModeActivated = (
   onChange: (e: Electron.IpcRendererEvent) => void
 ) => {
@@ -230,6 +232,3 @@ export const handleEmailConfirmationNavigation = (
     ipcRenderer.removeListener('emailConfirmation', cb)
   }
 }
-
-export const completeHyperPlayQuest = async () =>
-  ipcRenderer.invoke('completeHyperPlayQuest')

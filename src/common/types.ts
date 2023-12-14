@@ -81,6 +81,16 @@ export type ExperimentalFeatures = {
   enableNewShinyFeature: boolean // remove this when adding a real experimental feature
 }
 
+export type LDUser = {
+  kind: string
+  key: string
+}
+
+export type LDEnv = {
+  envId: string
+  ldUser: LDUser
+}
+
 export interface AppSettings extends GameSettings {
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
@@ -112,6 +122,7 @@ export interface AppSettings extends GameSettings {
   startInTray: boolean
   userInfo: UserInfo
   steamId: string
+  ldUser: LDUser
 }
 
 export type LibraryTopSectionOptions =

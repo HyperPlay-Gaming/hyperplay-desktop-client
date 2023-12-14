@@ -147,7 +147,8 @@
         },
         "playing": {
             "start": "Jugar",
-            "stop": "Detener"
+            "stop": "Detener",
+            "update": "Actualizar"
         },
         "saves": {
             "syncing": "Sincronizando guardados"
@@ -215,7 +216,10 @@
         "moving-files": "Moviendo el archivo '{{file}}': {{percent}} ",
         "playing": "Reproduciendo",
         "downloading": "Descargando",
-        "extracting": "Extrayendo",
+        "extracting": {
+            "cancel": "Cancelar la extracción",
+            "progress": "Extrayendo"
+        },
         "gog-goodie": "Este juego no parece ser instalable. Comprueba el contenido descargable en https://gog.com/account",
         "goodie": "No se puede instalar"
     },
