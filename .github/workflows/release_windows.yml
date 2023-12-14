@@ -51,8 +51,8 @@ jobs:
       - name: Install dependencies
         run: yarn install  --frozen-lockfile --network-timeout 600000 && yarn allow-scripts
 
-      - name: setup env production file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
+      - name: Setup ld env production file
+        uses: ./utils/ld_env_prod
 
       - name: Cache artifacts
         uses: actions/cache@v2

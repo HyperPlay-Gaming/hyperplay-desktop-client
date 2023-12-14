@@ -1,0 +1,7 @@
+name: Setup LD Env Prod
+description: Add LD Env Prod file with Client ID
+runs:
+  using: 'composite'
+  steps:
+    - name: setup env production file
+      run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production

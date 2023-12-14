@@ -37,8 +37,8 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn install --network-timeout 600000 && yarn allow-scripts
-      - name: setup env file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
+      - name: Setup ld env file
+        uses: ./utils/ld_env_test
       - name: Build artifacts.
         run: yarn dist:win
       - name: Upload EXE.
