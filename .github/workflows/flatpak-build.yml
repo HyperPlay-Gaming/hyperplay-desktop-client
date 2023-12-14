@@ -54,8 +54,6 @@ jobs:
         run: yarn dist:linux:ci:flatpak
       - name: Prepare Flatpak
         run: yarn flatpak:prepare
-      - name: setup env file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
       - name: Build Flatpak
         uses: flatpak/flatpak-github-actions/flatpak-builder@v6
         with:
