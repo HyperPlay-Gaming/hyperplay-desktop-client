@@ -182,6 +182,8 @@ import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
 
+import './ipcHandlers'
+
 import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
@@ -878,11 +880,6 @@ ipcMain.handle('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 ipcMain.handle('isFlatpak', () => isFlatpak)
 ipcMain.handle('getGameOverride', async () => getGameOverride())
 ipcMain.handle('getGameSdl', async (event, appName) => getGameSdl(appName))
-
-ipcMain.handle('getLDEnvConfig', async () => {
-  const ldUser = GlobalConfig.get().getSettings().ldUser
-  return { envId: LDEnvironmentId, ldUser }
-})
 
 ipcMain.handle('getPlatform', () => process.platform)
 
