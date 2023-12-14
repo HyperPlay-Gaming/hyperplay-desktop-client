@@ -78,7 +78,7 @@ export default observer(function SidebarLinks() {
             }
             end
             to={'/library'}
-            onClick={async () => handleRefresh()}
+            onClick={handleRefresh}
           >
             <Images.Controller fill={sidebarSvgUnselectedFill} />
           </NavLink>
@@ -93,7 +93,7 @@ export default observer(function SidebarLinks() {
               }
               end
               to={'/achievements'}
-              onClick={async () => handleRefresh()}
+              onClick={handleRefresh}
             >
               <Images.TrophyOutline fill={sidebarSvgUnselectedFill} />
             </NavLink>
