@@ -46,8 +46,8 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: install yarn
         run: npm install --global yarn
-      - name: Setup ld env file
-        uses: ./.github/actions/ld_env_test
+      - name: setup env production file
+        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
       - name: Install modules.
         run: yarn setup
       - name: Build artifacts.

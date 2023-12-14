@@ -36,8 +36,8 @@ jobs:
       - name: Install dependencies
         run: yarn setup
 
-      - name: Setup ld env file
-        uses: ./.github/actions/ld_env_test
+      - name: setup env production file
+        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
 
       - name: Build artifacts.
         run: yarn release:mac:arm64

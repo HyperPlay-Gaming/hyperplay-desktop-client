@@ -33,7 +33,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn setup
-      - name: Setup ld env production file
-        uses: ./.github/actions/ld_env_prod
+      - name: setup env production file
+        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
       - name: Build artifacts.
         run: yarn run release:linux
