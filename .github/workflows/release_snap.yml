@@ -33,6 +33,6 @@ jobs:
       - name: Install modules.
         run: yarn setup
       - name: Setup ld env production file
-        uses: ./utils/ld_env_prod
+        uses: ./.github/actions/ld_env_prod
       - name: Update package on Snap Store
         run: yarn run dist:linux snap --publish always

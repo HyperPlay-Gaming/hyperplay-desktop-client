@@ -47,7 +47,7 @@ jobs:
       - name: install yarn
         run: npm install --global yarn
       - name: Setup ld env file
-        uses: ./utils/ld_env_test
+        uses: ./.github/actions/ld_env_test
       - name: Install modules.
         run: yarn setup
       - name: Build artifacts.

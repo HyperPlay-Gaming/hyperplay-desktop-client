@@ -52,7 +52,7 @@ jobs:
         run: yarn install  --frozen-lockfile --network-timeout 600000 && yarn allow-scripts
 
       - name: Setup ld env production file
-        uses: ./utils/ld_env_prod
+        uses: ./.github/actions/ld_env_prod
 
       - name: Cache artifacts
         uses: actions/cache@v2

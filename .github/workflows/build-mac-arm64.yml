@@ -37,7 +37,7 @@ jobs:
         run: yarn setup
 
       - name: Setup ld env file
-        uses: ./utils/ld_env_test
+        uses: ./.github/actions/ld_env_test
 
       - name: Build artifacts.
         run: yarn release:mac:arm64
