@@ -42,6 +42,7 @@ import {
   writeFileSync
 } from 'graceful-fs'
 
+import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
 import checkDiskSpace from 'check-disk-space'
@@ -153,10 +154,7 @@ import {
 } from 'backend/storeManagers/gog/games'
 import { playtimeSyncQueue } from './storeManagers/gog/electronStores'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
-import {
-  getGameOverride,
-  getGameSdl
-} from 'backend/storeManagers/legendary/library'
+
 import {
   autoUpdate,
   gameManagerMap,
@@ -167,8 +165,7 @@ import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
 import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL, devSentryDsn, prodSentryDsn } from 'common/constants'
-import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
-import { addNewApp } from './storeManagers/sideload/library'
+
 /*
  * INSERT OTHER IPC HANDLERS HERE
  */
@@ -184,6 +181,8 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
+
+import './ipcHandlers'
 
 import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
@@ -207,6 +206,17 @@ function initSentry() {
 if (metricsAreEnabled()) {
   initSentry()
 }
+
+import { logFileLocation as getLogFileLocation } from './storeManagers/storeManagerCommon/games'
+import { addNewApp } from './storeManagers/sideload/library'
+import {
+  getGameOverride,
+  getGameSdl
+} from 'backend/storeManagers/legendary/library'
+import { uuid } from 'short-uuid'
+import { LDEnvironmentId, ldOptions } from './ldconstants'
+
+let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
@@ -549,6 +559,27 @@ if (!gotTheLock) {
       ]
     })
 
+    let ldUser = GlobalConfig.get().getSettings().ldUser
+
+    if (!ldUser) {
+      logInfo('No LaunchDarkly user found, creating new one.')
+      ldUser = {
+        kind: 'user',
+        key: uuid()
+      }
+      configStore.set('settings.ldUser', ldUser)
+    }
+
+    ldMainClient = LDElectron.initializeInMain(
+      LDEnvironmentId,
+      ldUser,
+      ldOptions
+    )
+
+    ldMainClient.on('ready', () => {
+      logInfo('LaunchDarkly client initialized', LogPrefix.Backend)
+    })
+
     const mainWindow = await initializeWindow()
 
     if (!app.isPackaged) {
@@ -619,6 +650,7 @@ ipcMain.once('loadingScreenReady', () => {
   logInfo('Loading Screen Ready', LogPrefix.Backend)
 })
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 let resolveFrontendReady = () => {}
 export const frontendReady = new Promise<void>((res) => {
   resolveFrontendReady = res

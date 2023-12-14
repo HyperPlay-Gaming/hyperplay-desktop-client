@@ -1,4 +1,4 @@
-import { HyperPlayInstallInfo, DownloadManagerState } from './../types'
+import { HyperPlayInstallInfo, DownloadManagerState, LDEnv } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -228,6 +228,7 @@ interface HyperPlayAsyncIPCFunctions {
   get_wallet_state_provider: () => Promise<PROVIDERS>
   get_wallet_state_otp: () => Promise<string>
   get_extension_state_isPopupOpen: () => Promise<boolean>
+  getLDEnvConfig: () => Promise<LDEnv>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

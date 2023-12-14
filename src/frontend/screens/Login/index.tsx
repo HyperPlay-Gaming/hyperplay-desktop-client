@@ -15,7 +15,7 @@ import ContextProvider from '../../state/ContextProvider'
 import { Background, Images } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
-import { ENABLE_AMAZON_STORE } from 'frontend/constants'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
@@ -36,6 +36,8 @@ export default React.memo(function NewLogin() {
   const [isAmazonLoggedIn, setIsAmazonLoggedIn] = useState(
     Boolean(storeAuthState.amazon.user_id)
   )
+  const flags = useFlags()
+  const ENABLE_AMAZON_STORE = flags.amazonStore
 
   const loginMessage = t(
     'login.message',

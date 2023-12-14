@@ -209,6 +209,8 @@
     "jest-environment-jsdom": "^29.7.0",
     "jsdom": "^20.0.0",
     "json5": "^2.2.3",
+    "launchdarkly-electron-client-sdk": "^1.7.0",
+    "launchdarkly-react-client-sdk": "^3.0.9",
     "lokijs": "^1.5.12",
     "mime": "^3.0.0",
     "mobx": "^6.9.0",
