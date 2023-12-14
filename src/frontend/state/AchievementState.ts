@@ -92,14 +92,17 @@ class AchievementState {
       .then((res) => (this.showAchievements = res))
   }
 
-  getAchievementsStats = () => {
-    window.api
-      .getAchievementsStats({
+  getAchievementsStats = async () => {
+    try {
+      const stats = await window.api.getAchievementsStats({
         store: this.store,
         playerStoreId: this.playerStoreId,
         playerAddress: walletState.address
       })
-      .then(this.setStats.bind(this))
+      this.setStats(stats)
+    } catch (err) {
+      console.error(`Error while getting achievement stats ${err}`)
+    }
   }
 
   individualAchievementsKey(gameId: string) {
