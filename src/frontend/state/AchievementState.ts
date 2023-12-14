@@ -208,13 +208,12 @@ class AchievementState {
     })
   }
 
-  private get currentSummaryKey() {
-    const requestKey: AchievementRequestKey = {
+  private get currentSummaryKey(): AchievementRequestKey {
+    return {
       filter: this.currentFilter,
       sort: this.currentSort.value,
       store: this.currentStore
     }
-    return requestKey
   }
 
   get currentSummaryAchievements() {
