@@ -4,7 +4,7 @@ import {
   getWineFlags,
   getWineLibs
 } from '../compatibility_layers'
-import { mkdirSync } from 'graceful-fs'
+import { mkdirSync } from 'fs'
 import { dirname, join } from 'path'
 import { tmpdir } from 'os'
 import {
@@ -12,9 +12,12 @@ import {
   Path
 } from '../../storeManagers/legendary/commands/base'
 
-jest.mock('../../logger/logfile')
+import { describe, expect, it, test } from 'vitest'
+console.log('hello from compatability layers test')
 
 describe('getDefaultWine', () => {
+  test('do nothing', () => {})
+
   if (process.env.GITHUB_ACTIONS) {
     test('return wine not found', () => {
       const expected = {

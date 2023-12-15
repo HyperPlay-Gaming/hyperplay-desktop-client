@@ -1,13 +1,14 @@
 import { StoreOptions } from './../../common/types/electron_store'
 import tmp from 'tmp'
 import { join } from 'path'
+import { vi } from 'vitest'
 
-const OriginalStore = jest.requireActual('electron-store')
+const OriginalStore = await vi.importActual('electron-store')
 const tmpStoreRootDirectory = tmp.dirSync({ unsafeCleanup: true })
 
 export default class Store<
   T extends Record<string, any> = Record<string, unknown>
-> extends OriginalStore<T> {
+> {
   constructor(options?: StoreOptions<T>) {
     if (options) {
       if (options.cwd) {
@@ -20,6 +21,6 @@ export default class Store<
         cwd: tmpStoreRootDirectory.name
       }
     }
-    super(options)
+    // super(options)
   }
 }

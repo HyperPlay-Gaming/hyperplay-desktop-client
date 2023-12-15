@@ -1,7 +1,7 @@
-const logfile = jest.requireActual('../logfile')
+import { vi } from 'vitest'
+const logfile = await vi.importActual('../logfile')
+console.log('mocking logfile')
+export const createNewLogFileAndClearOldOnes = vi.fn().mockReturnValue('')
+export const appendMessageToLogFile = vi.fn()
 
-logfile.createNewLogFileAndClearOldOnes = jest.fn().mockReturnValue('')
-logfile.appendMessageToLogFile = jest.fn()
-
-module.exports = logfile
-export {}
+export default logfile

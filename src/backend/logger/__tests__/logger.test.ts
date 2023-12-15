@@ -2,9 +2,10 @@ import * as logger from '../logger'
 import { appendMessageToLogFile } from '../logfile'
 import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { platform } from 'os'
+import { vi, it } from 'vitest'
 
-jest.mock('../logfile')
-jest.mock('../../dialog/dialog')
+vi.mock('../logfile')
+vi.mock('../../dialog/dialog')
 
 const testData = [
   1234,
@@ -52,20 +53,22 @@ describe('logger/logger.ts', () => {
     emptyTest
     return
   }
-  afterEach(jest.restoreAllMocks)
+  afterEach(vi.restoreAllMocks)
 
   test('log invokes console', () => {
-    const spyConsoleError = jest
+    const spyConsoleError = vi
       .spyOn(global.console, 'error')
-      .mockImplementation()
-    const spyConsoleLog = jest.spyOn(global.console, 'log').mockImplementation()
-    const spyConsoleWarn = jest
+      .mockImplementation(global.console.error)
+    const spyConsoleLog = vi
+      .spyOn(global.console, 'log')
+      .mockImplementation(global.console.log)
+    const spyConsoleWarn = vi
       .spyOn(global.console, 'warn')
-      .mockImplementation()
+      .mockImplementation(global.console.warn)
 
     interface TestCaseProps {
       function: logger.LogFunction
-      spyConsole: jest.SpyInstance
+      spyConsole: any
     }
 
     const testCases = new Map<logLevel, TestCaseProps>([
@@ -93,9 +96,9 @@ describe('logger/logger.ts', () => {
   })
 
   test('log appends to log file', () => {
-    jest.spyOn(global.console, 'error').mockImplementation()
-    jest.spyOn(global.console, 'log').mockImplementation()
-    jest.spyOn(global.console, 'warn').mockImplementation()
+    vi.spyOn(global.console, 'error').mockImplementation(global.console.error)
+    vi.spyOn(global.console, 'log').mockImplementation(global.console.log)
+    vi.spyOn(global.console, 'warn').mockImplementation(global.console.warn)
 
     const testCases = new Map<logLevel, logger.LogFunction>([
       ['ERROR', logger.logError],
@@ -114,9 +117,9 @@ describe('logger/logger.ts', () => {
   })
 
   test('log can be shown as dialog', () => {
-    jest.spyOn(global.console, 'error').mockImplementation()
-    jest.spyOn(global.console, 'log').mockImplementation()
-    jest.spyOn(global.console, 'warn').mockImplementation()
+    vi.spyOn(global.console, 'error').mockImplementation(global.console.error)
+    vi.spyOn(global.console, 'log').mockImplementation(global.console.log)
+    vi.spyOn(global.console, 'warn').mockImplementation(global.console.warn)
 
     const testCases = new Map<logLevel, logger.LogFunction>([
       ['ERROR', logger.logError],
@@ -141,7 +144,11 @@ describe('logger/logger.ts', () => {
   })
 
   test('log undefined variable works', () => {
-    const spyConsoleLog = jest.spyOn(global.console, 'log').mockImplementation()
+    vi.spyOn(global.console, 'error').mockImplementation(global.console.error)
+    const spyConsoleLog = vi
+      .spyOn(global.console, 'log')
+      .mockImplementation(global.console.log)
+    vi.spyOn(global.console, 'warn').mockImplementation(global.console.warn)
 
     logger.logInfo(undefined, logger.LogPrefix.Backend)
 

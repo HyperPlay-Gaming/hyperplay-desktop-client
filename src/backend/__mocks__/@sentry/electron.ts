@@ -1,3 +1,5 @@
+import { vi } from 'vitest'
+
 export default {
-  captureException: jest.fn()
+  captureException: vi.fn()
 }

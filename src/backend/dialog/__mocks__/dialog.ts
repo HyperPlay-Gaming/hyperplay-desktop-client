@@ -1,7 +1,8 @@
-const dialog = jest.requireActual('../dialog')
+import { vi } from 'vitest'
 
-dialog.showDialogBoxModalAuto = jest.fn()
-dialog.notify = jest.fn()
+const dialog = vi.importActual('../dialog')
 
-module.exports = dialog
-export {}
+dialog.showDialogBoxModalAuto = vi.fn()
+dialog.notify = vi.fn()
+
+export default dialog
