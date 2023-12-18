@@ -9,6 +9,7 @@ import AchievementState, {
 } from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
 import { isTimestampInPast } from 'common/utils'
+import { getAchievementNavTranslations } from '../utils'
 
 const pageSize = 100
 
@@ -72,17 +73,7 @@ export default observer(function GameAchievementDetails(): JSX.Element {
         basketAmount: achievementsToBeMinted.length,
         showGameAddButton: false,
         gamesAdded: [],
-        i18n: {
-          addThisGameText: t(
-            'hyperplay.achievements.addThisGame',
-            'Add this game'
-          ),
-          gamesToMintLabelText: t(
-            'hyperplay.achievements.gamesToMint',
-            'Games to mint'
-          ),
-          freeMintsLabel: t('hyperplay.achievements.freeMints', 'Free Mints')
-        }
+        i18n: getAchievementNavTranslations(t)
       }}
       game={{
         title: summaryAchievement.gameName

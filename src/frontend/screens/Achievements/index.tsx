@@ -9,6 +9,7 @@ import AchievementState, {
   ACHIEVEMENT_SORT_OPTIONS
 } from 'frontend/state/AchievementState'
 import MintAchievementsState from 'frontend/state/MintAchievementsState'
+import { getAchievementNavTranslations } from './utils'
 
 export default observer(function Achievements(): JSX.Element {
   const { t } = useTranslation()
@@ -153,7 +154,8 @@ export default observer(function Achievements(): JSX.Element {
           basketAmount:
             achievementsToBeMinted.length + achievementsToBeUpdated.length,
           gamesAdded: [],
-          showGameAddButton: false
+          showGameAddButton: false,
+          i18n: getAchievementNavTranslations(t)
         }}
         fetchNextPage={() => {
           AchievementState.fetchMoreSummaryAchievements()
