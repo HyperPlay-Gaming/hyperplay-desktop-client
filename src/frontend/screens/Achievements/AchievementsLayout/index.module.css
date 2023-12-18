@@ -1,0 +1,56 @@
+.gridItems {
+  height: 100%;
+}
+
+.storeCard {
+  flex-grow: 1;
+  gap: var(--space-2lg);
+  width: 100%;
+  border-radius: var(--space-md);
+  background: var(--color-neutral-800);
+  padding: var(--space-2lg);
+  flex: 1;
+}
+
+.storeTitle {
+  font-size: var(--text-2xl);
+  color: var(--color-neutral-400);
+  margin-bottom: var(--space-lg);
+}
+
+.fullHeight {
+  max-height: 100%;
+}
+
+.notActive {
+  opacity: 0.5;
+}
+
+.statsAndStoresContainer {
+  height: 100%;
+}
+
+.achievementsContainer {
+  flex: 1;
+  max-height: 100%;
+}
+
+.refreshing {
+  animation: refreshing 1.5s infinite;
+}
+
+@keyframes refreshing {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.syncingContainer {
+  display: flex;
+  flex-direction: row;
+  gap: var(--space-sm);
+  align-items: center;
+}
