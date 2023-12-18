@@ -54,14 +54,19 @@ export default observer(function Achievements(): JSX.Element {
                 const id = String(game.gameId)
                 const isUpdate =
                   game.isNewAchievement && game.mintedAchievementCount > 0
-                const state = !walletState.isConnected
-                  ? 'disabled'
-                  : achievementsToBeMinted.includes(id) ||
-                    achievementsToBeUpdated.includes(id)
-                  ? 'active'
-                  : isUpdate
-                  ? 'update'
-                  : 'default'
+
+                let state = 'default'
+
+                if (!walletState.isConnected) {
+                  state = 'disabled'
+                } else if (
+                  achievementsToBeMinted.includes(id) ||
+                  achievementsToBeUpdated.includes(id)
+                ) {
+                  state = 'active'
+                } else if (isUpdate) {
+                  state = 'update'
+                }
 
                 return (
                   <NavLink key={id} to={`/achievements/${game.gameId}`}>
