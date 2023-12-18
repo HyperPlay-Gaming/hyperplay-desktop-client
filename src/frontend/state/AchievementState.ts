@@ -48,7 +48,7 @@ class AchievementState {
   storesEnabled = ['STEAM']
 
   store = 'STEAM' as AchievementStore
-  playerStoreId = ''
+  private playerStoreId = ''
 
   // Stats
   newAchievements = 0
@@ -288,6 +288,11 @@ class AchievementState {
 
   setPlayerStoreId = (playerStoreId: string) => {
     this.playerStoreId = playerStoreId
+    this.summaryAchievements.clear()
+  }
+
+  get getPlayerStoreId() {
+    return this.playerStoreId
   }
 
   get filterDisplayName() {
