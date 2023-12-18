@@ -80,7 +80,8 @@ export default observer(function GameAchievementDetails(): JSX.Element {
           gamesToMintLabelText: t(
             'hyperplay.achievements.gamesToMint',
             'Games to mint'
-          )
+          ),
+          freeMintsLabel: t('hyperplay.achievements.freeMints', 'Free Mints')
         }
       }}
       game={{
