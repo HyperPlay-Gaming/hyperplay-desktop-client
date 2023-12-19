@@ -122,7 +122,7 @@ export default function DownloadDialog({
   accessCode,
   enableCTAButton,
   requiresToken,
-  marketplaceUrl,
+  marketplaceUrl
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'

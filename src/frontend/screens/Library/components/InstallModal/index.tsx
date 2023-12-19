@@ -72,7 +72,7 @@ export default React.memo(function InstallModal({
   const selectedChannel = gameInfo?.channels?.[channelNameToInstall]
 
   const channelPlatforms = selectedChannel?.release_meta.platforms ?? []
-  const listingMarketplaceUrl = '';
+  const listingMarketplaceUrl = ''
   const hpPlatforms = Object.keys(channelPlatforms) as AppPlatforms[]
   const isHpGame = runner === 'hyperplay'
 
