@@ -43,6 +43,7 @@ import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import { signSiweMessage } from 'frontend/helpers/library'
+import { Anchor } from '@mantine/core'
 
 interface Props {
   backdropClick: () => void
@@ -58,6 +59,7 @@ interface Props {
   channelNameToInstall: string
   channelId?: number
   accessCode: string
+  marketplaceUrl?: string
   enableCTAButton: boolean
   requiresToken: boolean
 }
@@ -119,7 +121,8 @@ export default function DownloadDialog({
   channelNameToInstall,
   accessCode,
   enableCTAButton,
-  requiresToken
+  requiresToken,
+  marketplaceUrl,
 }: Props) {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -435,14 +438,16 @@ export default function DownloadDialog({
       <DialogContent>
         {requiresToken ? (
           <div style={{ maxWidth: 500, overflow: 'hidden' }}>
-            <AlertCard
-              title=""
-              message={
-                'Please purchase to proceed or ensure that NFT is in the current wallet.'
-              }
-              actionText={'Buy NFT'}
-              variant={'warning'}
-            />
+            <Anchor href={marketplaceUrl}>
+              <AlertCard
+                title=""
+                message={
+                  'Please purchase to proceed or ensure that NFT is in the current wallet.'
+                }
+                actionText={'Buy NFT'}
+                variant={'warning'}
+              />
+            </Anchor>
           </div>
         ) : null}
         {showInstallandDownloadSizes ? (
