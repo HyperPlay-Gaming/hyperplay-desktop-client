@@ -17,6 +17,9 @@ import useSettingsContext from 'frontend/hooks/useSettingsContext'
 import { Tabs } from '@hyperplay/ui'
 import Accessibility from '../Accessibility'
 import WineManager from '../WineManager'
+import AccountSettings from './sections/AccountSettings'
+import { observer } from 'mobx-react-lite'
+import AchievementState from 'frontend/state/AchievementState'
 import DeviceState from 'frontend/state/DeviceState'
 
 export const defaultWineVersion: WineInstallation = {
@@ -131,6 +134,9 @@ function Settings() {
                 <Tabs.Tab value="accessibility">
                   <div className="menu">{t('accessibility.title')}</div>
                 </Tabs.Tab>
+                <Tabs.Tab value="accounts">
+                  <div className="menu capitalize">{t('accounts')}</div>
+                </Tabs.Tab>
                 {!isWin ? (
                   <Tabs.Tab value="wineManager">
                     <div className="menu">
@@ -154,6 +160,11 @@ function Settings() {
               <Tabs.Panel value="accessibility">
                 <Accessibility />
               </Tabs.Panel>
+              {AchievementState.showAchievements && (
+                <Tabs.Panel value="accounts">
+                  <AccountSettings />
+                </Tabs.Panel>
+              )}
               {!isWin ? (
                 <Tabs.Panel value="wineManager">
                   <WineManager />
@@ -168,4 +179,4 @@ function Settings() {
   )
 }
 
-export default React.memo(Settings)
+export default observer(Settings)

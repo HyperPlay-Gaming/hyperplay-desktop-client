@@ -21,7 +21,7 @@ const EmailVerifiedModal = () => {
 
   return (
     <ModalAnimation isOpen={open} onClose={close}>
-      <EmailVerified onContinue={close} onClose={close} />
+      <EmailVerified onContinue={close} />
     </ModalAnimation>
   )
 }

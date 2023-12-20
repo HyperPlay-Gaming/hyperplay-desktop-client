@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 
 import './App.css'
-import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
 import Login from './screens/Login'
 import WebView from './screens/WebView'
 import { GamePage } from './screens/Game'
 import Library from './screens/Library'
+import Achievements from './screens/Achievements'
 import Sidebar from './components/UI/Sidebar'
 import Settings from './screens/Settings'
 import ContextProvider from './state/ContextProvider'
@@ -29,6 +30,8 @@ import DownloadToastManager from './components/UI/DownloadToastManager'
 import TopNavBar from './components/UI/TopNavBar'
 import StoreNavHandler from './StoreNavHandler'
 import QaAuthHandler from './QaAuthHandler'
+import AchievementsLayout from './screens/Achievements/AchievementsLayout'
+import GameAchievementDetails from './screens/Achievements/GameAchievementDetails'
 import AuthModal from './components/UI/AuthModal'
 import EmailVerifiedModal from './components/UI/EmailVerifiedModal'
 import { WalletOnboardCloseReason } from 'common/types'
@@ -67,6 +70,20 @@ function App() {
               element={<Navigate replace to="/hyperplaystore" />}
             />
             <Route path="/library" element={<Library />} />
+            <Route
+              path="/achievements"
+              element={
+                <AchievementsLayout>
+                  <Outlet />
+                </AchievementsLayout>
+              }
+            >
+              <Route index element={<Achievements />} />
+              <Route
+                path="/achievements/:id"
+                element={<GameAchievementDetails />}
+              />
+            </Route>
             <Route path="login" element={<Login />} />
             <Route
               path="hyperplaystore"

@@ -1,4 +1,10 @@
-import { HyperPlayInstallInfo, DownloadManagerState, LDEnv } from './../types'
+import {
+  HyperPlayInstallInfo,
+  DownloadManagerState,
+  Achievement,
+  SummaryAchievement,
+  LDEnv
+} from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -219,10 +225,24 @@ interface HyperPlayAsyncIPCFunctions {
   removeTempDownloadFiles: (appName: string) => Promise<void>
   getImportFolderPath: () => Promise<string>
   appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
+  getSummaryAchievements: (options: GetAchievementsOptions) => Promise<{
+    data: SummaryAchievement[]
+    totalPages: number
+  }>
+  getIndividualAchievements: (
+    options: GetIndividualAchievementsOptions
+  ) => Promise<{
+    data: Achievement[]
+    currentPage: number
+    totalPages: number
+  }>
+  getAchievementsStats: (options: PlayerOptions) => Promise<AchievementsStats>
+  syncAchievements: (options: PlayerOptions) => Promise<void>
   checkHyperPlayAccessCode: (
     channelId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
+  shouldShowAchievements: () => Promise<boolean>
   get_wallet_state_address: () => Promise<string>
   get_wallet_state_isConnected: () => Promise<boolean>
   get_wallet_state_provider: () => Promise<PROVIDERS>

@@ -183,6 +183,7 @@ import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/side
 import { backendEvents } from 'backend/backend_events'
 import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
+import 'backend/hyperplay-achievements'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 
