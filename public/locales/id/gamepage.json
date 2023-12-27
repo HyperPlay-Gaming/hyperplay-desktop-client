@@ -29,20 +29,26 @@
         "stopInstall": {
             "keepInstalling": "Tetap Memasang",
             "message": "Apakah Anda ingin MENYIMPAN berkas yang diunduh?",
-            "title": "Hentikan Pemasangan"
+            "title": "Apakah Anda ingin membatalkan pengunduhan?",
+            "keepFilesMessage": "Centang ini jika Anda ingin menyimpan file unduhan setelah membatalkannya."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Apakah Anda ingin mencopot pemasangan gim ini?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Copot Pemasangan"
+            "title": "Copot Pemasangan",
+            "prefix_warning": "Awalan Wine untuk game ini adalah awalan default. Jika Anda benar-benar ingin menghapusnya, Anda harus melakukannya secara manual.",
+            "dlc": "Apakah Anda ingin menghapus DLC ini?"
         },
         "update": {
             "message": "Gim ini memiliki pembaruan, terapkan pembaruan sekarang?",
-            "title": "Gim Perlu Diperbarui"
+            "title": "Gim Perlu Diperbarui",
+            "message-cancel": "Tidak mungkin memainkan game ini tanpa memperbarui"
         },
         "wineprefix": "Pilih Folder Prefiks Wine",
-        "yes": "YA"
+        "yes": "YA",
+        "yesCancel": "Ya, batalkan",
+        "ok": "Oke"
     },
     "button": {
         "add_to_favourites": "Tambahkan Ke Favorit",
@@ -56,7 +62,9 @@
         "install": "Pasang",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "continue": "Lanjutkan unduhan",
+            "cancel": "Batalkan unduhan"
         },
         "remove_from_favourites": "Hapus Dari Favorit",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +75,10 @@
         },
         "unhide_game": "Tampilkan Gim yang Disembunyikan",
         "uninstall": "Copot",
-        "update": "Perbarui"
+        "update": "Perbarui",
+        "details": "Rincian",
+        "remove_from_library": "Hapus",
+        "favorites": "Favorit"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Dinonaktifkan",
