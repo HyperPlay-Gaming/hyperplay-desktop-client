@@ -820,7 +820,11 @@
             "extracting": "Extrayendo...",
             "installing": "Descargando..."
         },
-        "connectWallet": "Conectar monedero"
+        "connectWallet": "Conectar monedero",
+        "achievements": {
+            "freeMints": "Minteo gratis",
+            "addThisGame": "Añadir este juego"
+        }
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -877,5 +881,11 @@
     "dlcs": {
         "label": "Selecciona los DLCs que quieras instalar:"
     },
-    "exit_game": "Salir del juego"
+    "exit_game": "Salir del juego",
+    "achievements": {
+        "progress": {
+            "minted": "Activar cadena",
+            "notMinted": "Apagar cadena"
+        }
+    }
 }
