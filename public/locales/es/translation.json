@@ -580,7 +580,8 @@
         "experimental_features": {
             "enableNewShinyFeature": "Una nueva función brillante"
         },
-        "dxvkfpslimit": "Limitar los FPS (DX9, 10 y 11)"
+        "dxvkfpslimit": "Limitar los FPS (DX9, 10 y 11)",
+        "steamId": "ID de Steam"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -615,7 +616,8 @@
             "log": "Registro",
             "other": "Otro",
             "sync": "Guardar-Sincronización",
-            "wineExt": "Extensiones de Wine"
+            "wineExt": "Extensiones de Wine",
+            "accounts": "Cuentas"
         },
         "open-config-file": "Abrir archivo de configuración",
         "reset-hyperplay": "Restablecer HyperPlay",
@@ -670,7 +672,8 @@
         "logout": "Cerrar sesión",
         "logout_confirmation": "¿Estás seguro de que quieres cerrar la sesión?",
         "manageaccounts": "Gestionar cuentas",
-        "quit": "Salir"
+        "quit": "Salir",
+        "manageStore": "Gestionar las tiendas"
     },
     "webview": {
         "controls": {
@@ -823,8 +826,15 @@
         "connectWallet": "Conectar monedero",
         "achievements": {
             "freeMints": "Minteo gratis",
-            "addThisGame": "Añadir este juego"
-        }
+            "addThisGame": "Añadir este juego",
+            "noAchievements": {
+                "oops": "¡Vaya!",
+                "doubleCheckMessage": "Parece que no hemos podido encontrar ningún juego en tu cuenta de Steam por el momento. Solo un recordatorio rápido para que compruebes que los detalles de tu juego están configurados como públicos. De esta forma, podremos acceder a tus logros y ofrecerte la mejor experiencia."
+            },
+            "gamesToMint": "Juegos para acuñar"
+        },
+        "Sync": "Sincronizar",
+        "syncing": "Sincronizando..."
     },
     "hyperplayOverlay": {
         "chainRequest": {
