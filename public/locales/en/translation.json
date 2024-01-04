@@ -8,6 +8,12 @@
         "zoom": "Zoom"
     },
     "accounts": "accounts",
+    "achievements": {
+        "progress": {
+            "minted": "on chain",
+            "notMinted": "off chain"
+        }
+    },
     "add_game": "Add Game",
     "All": "All",
     "ALL": "ALL",
@@ -299,6 +305,15 @@
                 "validation": "Success! Access code is valid"
             }
         },
+        "achievements": {
+            "addThisGame": "Add this game",
+            "freeMints": "Free Mints",
+            "gamesToMint": "Games to mint",
+            "noAchievements": {
+                "doubleCheckMessage": "It looks like we couldn't find any games in your Steam account at the moment. Just a quick reminder to double-check that your game details are set to public. This way, we can access your achievements and provide you with the best experience.",
+                "oops": "Oops!"
+            }
+        },
         "analyticsOff": "Analytics is turned off",
         "analyticsOn": "Analytics is turned on",
         "browserImport": {
@@ -392,6 +407,8 @@
         },
         "otp": "One Time Passcode",
         "publicAlpha": "Public Alpha",
+        "Sync": "Sync",
+        "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
         "viewFullscreen": "View fullscreen",
@@ -716,6 +733,7 @@
         "showfps": "Show FPS (DX9, 10 and 11)",
         "showMetalOverlay": "Show Stats Overlay",
         "start-in-tray": "Start Minimized",
+        "steamId": "Steam ID",
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
         "wineprefix": "WinePrefix folder",
@@ -752,6 +770,7 @@
             "long-log-hint": "Log truncated, last 1000 lines are shown!"
         },
         "navbar": {
+            "accounts": "Accounts",
             "advanced": "Advanced",
             "general": "General",
             "log": "Log",
@@ -808,6 +827,7 @@
         "logout": "Log out",
         "logout_confirmation": "Are you sure you want to log out?",
         "manageaccounts": "Manage Accounts",
+        "manageStore": "Manage stores",
         "quit": "Quit"
     },
     "webview": {

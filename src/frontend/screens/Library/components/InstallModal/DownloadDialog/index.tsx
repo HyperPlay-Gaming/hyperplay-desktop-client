@@ -42,6 +42,7 @@ import { Button } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
+import styles from './index.module.scss'
 
 interface Props {
   backdropClick: () => void
@@ -499,6 +500,7 @@ export default function DownloadDialog({
           value={installPath.replaceAll("'", '')}
           onChange={(event) => setInstallPath(event.target.value)}
           icon={<FontAwesomeIcon icon={faFolderOpen} />}
+          inputProps={{ readOnly: true, className: styles.folderTextInput }}
           onIconClick={async () =>
             window.api
               .openDialog({

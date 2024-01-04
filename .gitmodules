@@ -10,3 +10,6 @@
 [submodule "src/backend/hyperplay-overlay"]
 	path = src/backend/hyperplay-overlay
 	url = https://github.com/HyperPlay-Gaming/hyperplay-overlay.git
+[submodule "src/backend/hyperplay-achievements"]
+	path = src/backend/hyperplay-achievements
+	url = git@github.com:HyperPlay-Gaming/hyperplay-achievements.git
