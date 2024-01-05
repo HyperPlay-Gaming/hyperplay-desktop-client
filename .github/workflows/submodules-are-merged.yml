@@ -29,6 +29,9 @@ jobs:
       - name: Check overlay
         id: overlayDiff
         run: cd src/backend/hyperplay-overlay && echo "OVERLAY_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
-      - name: Check overlay
+      - name: Check mock backend
         id: mockBackendDiff
         run: cd e2e/__mocks__/hyperplay-mock-backend && echo "MOCK_BACKEND_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
+      - name: Check achievements
+        id: achievementsDiff
+        run: cd src/backend/hyperplay-achievements && echo "MOCK_BACKEND_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
