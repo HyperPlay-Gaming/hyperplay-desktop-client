@@ -355,12 +355,13 @@ export async function getGamingPortingToolkitWine(): Promise<
     try {
       const { stdout: out } = await execAsync(`'${wineBin}' --version`)
       const version = out.split('\n')[0]
+      const GPTKWineDir = join(dirname(wineBin), '..')
       gamingPortingToolkitWine.add({
         ...getWineExecs(wineBin),
         name: `GPTK Wine (DX11/DX12 Only) - ${version}`,
         type: 'toolkit',
-        lib: `${dirname(wineBin)}/../lib`,
-        lib32: `${dirname(wineBin)}/../lib`,
+        lib: join(GPTKWineDir, 'lib'),
+        lib32: join(GPTKWineDir, 'lib'),
         bin: wineBin
       })
     } catch (error) {
@@ -396,14 +397,15 @@ export async function getWhisky(): Promise<Set<WineInstallation>> {
           readFileSync(infoFilePath, 'utf-8')
         ) as PlistObject
         const version = info['CFBundleShortVersionString'] || ''
-        const whiskyWineBin = `${userHome}/Library/Application Support/com.isaacmarovitz.Whisky/Libraries/Wine/bin/wine64`
+        const whiskeyWineDir = `${userHome}/Library/Application Support/com.isaacmarovitz.Whisky/Libraries/Wine`
+        const whiskyWineBin = `${whiskeyWineDir}/bin/wine64`
 
         whisky.add({
           bin: whiskyWineBin,
           name: `Whisky - ${version}`,
           type: `toolkit`,
-          lib: `${dirname(whiskyWineBin)}/../lib`,
-          lib32: `${dirname(whiskyWineBin)}/../lib`,
+          lib: join(whiskeyWineDir, 'lib'),
+          lib32: join(whiskeyWineDir, 'lib'),
           ...getWineExecs(whiskyWineBin)
         })
       }
