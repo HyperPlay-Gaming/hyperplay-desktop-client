@@ -85,6 +85,16 @@ async function updateWineVersionInfos(
   return releases
 }
 
+function getInstallDir(release: WineVersionInfo): string {
+  if (release?.type?.includes('Wine')) {
+    return `${toolsPath}/wine`
+  } else if (release.type.includes('Toolkit')) {
+    return `${toolsPath}/game-porting-toolkit`
+  } else {
+    return `${toolsPath}/proton`
+  }
+}
+
 async function installWineVersion(
   release: WineVersionInfo,
   onProgress: (state: State, progress?: ProgressInfo) => void,
@@ -109,11 +119,7 @@ async function installWineVersion(
     LogPrefix.WineDownloader
   )
 
-  const installDir = release?.type?.includes('Wine')
-    ? `${toolsPath}/wine`
-    : release.type.includes('Toolkit')
-    ? `${toolsPath}/game-porting-toolkit`
-    : `${toolsPath}/proton`
+  const installDir = getInstallDir(release)
 
   try {
     const response = await installVersion({
