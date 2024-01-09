@@ -36,7 +36,11 @@ async function updateWineVersionInfos(
   if (fetch) {
     logInfo('Fetching upstream information...', LogPrefix.WineDownloader)
     const repositorys = isMac
-      ? [Repositorys.WINECROSSOVER, Repositorys.WINESTAGINGMACOS]
+      ? [
+          Repositorys.WINECROSSOVER,
+          Repositorys.WINESTAGINGMACOS,
+          Repositorys.GPTK
+        ]
       : [Repositorys.WINEGE, Repositorys.PROTONGE]
     await getAvailableVersions({
       repositorys,
@@ -96,6 +100,10 @@ async function installWineVersion(
     mkdirSync(`${toolsPath}/proton`, { recursive: true })
   }
 
+  if (isMac && !existsSync(`${toolsPath}/game-porting-toolkit`)) {
+    mkdirSync(`${toolsPath}/game-porting-toolkit`, { recursive: true })
+  }
+
   logInfo(
     `Start installation of wine version ${release.version}`,
     LogPrefix.WineDownloader
@@ -103,6 +111,8 @@ async function installWineVersion(
 
   const installDir = release?.type?.includes('Wine')
     ? `${toolsPath}/wine`
+    : release.type.includes('Toolkit')
+    ? `${toolsPath}/game-porting-toolkit`
     : `${toolsPath}/proton`
 
   try {

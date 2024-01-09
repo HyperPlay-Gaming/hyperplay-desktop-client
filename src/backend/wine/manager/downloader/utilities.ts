@@ -33,6 +33,8 @@ async function fetchReleases({
           const release_data = {} as VersionInfo
           release_data.version = type.includes('Wine')
             ? `Wine-${release.tag_name}`
+            : type.includes('Toolkit')
+            ? `${release.tag_name}`
             : `Proton-${release.tag_name}`
           release_data.type = type
           release_data.date = release.published_at.split('T')[0]
