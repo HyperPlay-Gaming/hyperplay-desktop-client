@@ -3,7 +3,8 @@ import {
   DownloadManagerState,
   Achievement,
   SummaryAchievement,
-  LDEnv
+  LDEnv,
+  AuthSession
 } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
@@ -419,6 +420,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<number | undefined>
   getAmazonLoginData: () => Promise<NileLoginData>
   pauseCurrentDownload: () => Promise<void>
+  getAuthSession: () => Promise<AuthSession | null>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

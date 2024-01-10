@@ -24,7 +24,8 @@ import {
   Notification,
   BrowserWindow,
   ipcMain,
-  DownloadItem
+  DownloadItem,
+  Session
 } from 'electron'
 import {
   exec,
@@ -89,6 +90,7 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
+import { DEV_PORTAL_URL } from '../common/constants'
 
 const execAsync = promisify(exec)
 

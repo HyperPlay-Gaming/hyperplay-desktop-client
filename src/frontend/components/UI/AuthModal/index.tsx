@@ -9,6 +9,8 @@ import extensionState from '../../../state/ExtensionState'
 import onboardingState from '../../../store/OnboardingStore'
 import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
+import useAuthSession from '../../../hooks/useAuthSession'
+import { useQueryClient } from 'react-query'
 
 const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
@@ -19,7 +21,11 @@ const isTooManyRequestsError = (error: string) => {
 }
 
 const AuthModal = () => {
+  const queryClient = useQueryClient()
+  const { data: authSession, error } = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
+
+  console.log({ authSession })
 
   const sendRetryConnectionMessage = () => {
     const webview = webviewRef.current
@@ -29,6 +35,7 @@ const AuthModal = () => {
   }
 
   const handleAccountNotConnected = async () => {
+    if (!window.ethereum) return
     const currentProvider = await window.api.getConnectedProvider()
 
     if (currentProvider === 'Unconnected') {
@@ -63,8 +70,8 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
-          authState.setSignedIn()
           authState.closeSignInModal()
+          await queryClient.invalidateQueries('authSession')
           break
         case 'auth:accountNotConnected':
           await handleAccountNotConnected()
@@ -80,10 +87,6 @@ const AuthModal = () => {
 
     webview.addEventListener('dom-ready', handleDomReady)
 
-    const qaModeListenerCleanup = window.api.handleQaModeActivated(() => {
-      authState.activateQaMode()
-    })
-
     const oAuthCompletedCleanup = window.api.handleOAuthDeepLink(
       (_e: Electron.IpcRendererEvent, code: string) => {
         const otpUrl = `${DEV_PORTAL_URL}/otp/${code}`
@@ -93,7 +96,6 @@ const AuthModal = () => {
     )
 
     return () => {
-      qaModeListenerCleanup()
       oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
       webview.removeEventListener('ipc-message', handleIpcMessage)

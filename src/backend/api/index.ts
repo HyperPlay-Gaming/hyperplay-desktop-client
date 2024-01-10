@@ -10,8 +10,10 @@ import * as Extensions from '../hyperplay-extension-helper/api/extensions'
 import * as Metrics from './metrics'
 import * as Overlay from 'backend/hyperplay-overlay/api'
 import * as Achievements from 'backend/hyperplay-achievements/api'
+import * as Auth from './auth'
 
 export default {
+  ...Auth,
   ...Misc,
   ...Helpers,
   ...Library,

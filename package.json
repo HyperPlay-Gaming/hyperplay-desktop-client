@@ -223,6 +223,7 @@
     "react-blockies": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
+    "react-query": "^3.39.3",
     "react-router-dom": "^6.9.0",
     "recharts": "^2.4.3",
     "sanitize-filename": "^1.6.3",
