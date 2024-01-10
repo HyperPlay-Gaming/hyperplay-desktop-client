@@ -22,7 +22,7 @@ const isTooManyRequestsError = (error: string) => {
 
 const AuthModal = () => {
   const queryClient = useQueryClient()
-  const { data: authSession, error } = useAuthSession()
+  const { data: authSession } = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
 
   console.log({ authSession })

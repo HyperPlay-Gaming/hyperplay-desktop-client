@@ -1,17 +1,17 @@
 import {
+  callAllAbortControllers,
   createAbortController,
-  deleteAbortController,
-  callAllAbortControllers
+  deleteAbortController
 } from './utils/aborthandler/aborthandler'
 import {
-  Runner,
-  WineInstallation,
-  RpcClient,
-  SteamRuntime,
   GameInfo,
   GameSettings,
+  ProgressInfo,
+  RpcClient,
+  Runner,
   State,
-  ProgressInfo
+  SteamRuntime,
+  WineInstallation
 } from 'common/types'
 import axios from 'axios'
 import download from 'backend/utils/downloadFile/download_file'
@@ -19,13 +19,12 @@ import { File, Progress } from 'backend/utils/downloadFile/types'
 
 import {
   app,
-  dialog,
-  shell,
-  Notification,
   BrowserWindow,
-  ipcMain,
+  dialog,
   DownloadItem,
-  Session
+  ipcMain,
+  Notification,
+  shell
 } from 'electron'
 import {
   exec,
@@ -40,16 +39,16 @@ import i18next, { t } from 'i18next'
 import si from 'systeminformation'
 
 import {
-  fixAsarPath,
-  getSteamLibraries,
   configPath,
-  gamesConfigPath,
-  icon,
-  isWindows,
-  publicDir,
-  isMac,
   configStore,
-  isLinux
+  fixAsarPath,
+  gamesConfigPath,
+  getSteamLibraries,
+  icon,
+  isLinux,
+  isMac,
+  isWindows,
+  publicDir
 } from './constants'
 import {
   logError,
@@ -90,7 +89,6 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
-import { DEV_PORTAL_URL } from '../common/constants'
 
 const execAsync = promisify(exec)
 
