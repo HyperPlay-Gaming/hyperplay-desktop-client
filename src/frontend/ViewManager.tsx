@@ -24,7 +24,7 @@ const ViewManager = function () {
     }
   )
 
-  if (params.appName && params.runner) {
+  if (params.view === 'BrowserGame' && params.appName && params.runner) {
     return (
       <OverlayManager appName={params.appName ?? ''} runner={params.runner} />
     )
