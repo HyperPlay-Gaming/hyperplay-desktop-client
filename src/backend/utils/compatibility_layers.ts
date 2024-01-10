@@ -406,7 +406,6 @@ export async function getSystemGamingPortingToolkitWine(): Promise<
       const { stdout: out } = await execAsync(`'${wineBin}' --version`)
       const version = out.split('\n')[0]
       const GPTKDIR = join(dirname(wineBin), '..')
-
       systemGPTK.add({
         ...getWineExecs(wineBin),
         name: `GPTK System (DX11/DX12 Only) - ${version}`,
@@ -424,6 +423,46 @@ export async function getSystemGamingPortingToolkitWine(): Promise<
   }
 
   return systemGPTK
+}
+
+/**
+ * Detects Whisky installs on Mac
+ *
+ * @returns Promise<Set<WineInstallation>>
+ */
+export async function getWhisky(): Promise<Set<WineInstallation>> {
+  const whisky = new Set<WineInstallation>()
+
+  if (!isMac) {
+    return whisky
+  }
+
+  await execAsync(
+    'mdfind kMDItemCFBundleIdentifier = "com.isaacmarovitz.Whisky"'
+  ).then(async ({ stdout }) => {
+    stdout.split('\n').forEach((whiskyMacPath) => {
+      const infoFilePath = join(whiskyMacPath, 'Contents/Info.plist')
+      if (whiskyMacPath && existsSync(infoFilePath)) {
+        const info = plistParse(
+          readFileSync(infoFilePath, 'utf-8')
+        ) as PlistObject
+        const version = info['CFBundleShortVersionString'] || ''
+        const whiskeyWineDir = `${userHome}/Library/Application Support/com.isaacmarovitz.Whisky/Libraries/Wine`
+        const whiskyWineBin = `${whiskeyWineDir}/bin/wine64`
+
+        whisky.add({
+          bin: whiskyWineBin,
+          name: `Whisky - ${version}`,
+          type: `toolkit`,
+          lib: join(whiskeyWineDir, 'lib'),
+          lib32: join(whiskeyWineDir, 'lib'),
+          ...getWineExecs(whiskyWineBin)
+        })
+      }
+    })
+  })
+
+  return whisky
 }
 
 export type AllowedWineFlags = Pick<
@@ -454,6 +493,12 @@ export function getWineFlags(
         '--no-wine': true,
         '--wrapper': NonEmptyString.parse(`${wrapper} '${wineBin}' run`)
       }
+      break
+    case 'crossover':
+      partialCommand = {
+        '--wine': Path.parse(wineBin)
+      }
+      if (wrapper) partialCommand['--wrapper'] = NonEmptyString.parse(wrapper)
       break
     default:
       break
