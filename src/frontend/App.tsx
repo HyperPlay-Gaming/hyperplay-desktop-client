@@ -39,9 +39,12 @@ import { DeviceStateController } from './state/DeviceState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 
 function App() {
-  const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
+  const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
+    useContext(ContextProvider)
   const flags = useFlags()
   const ENABLE_AMAZON_STORE = flags.amazonStore
+  const isOffline = connectivity.status !== 'online'
+  const firstDestination = isOffline ? '/library' : '/hyperplaystore'
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
@@ -67,7 +70,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Navigate replace to="/hyperplaystore" />}
+              element={<Navigate replace to={firstDestination} />}
             />
             <Route path="/library" element={<Library />} />
             <Route
