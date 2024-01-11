@@ -321,8 +321,11 @@ export default observer(function GamePage(): JSX.Element | null {
     const isLinuxNative = isLinux.includes(installPlatform ?? '')
     const isBrowserGame = gameInfo.browserUrl
     const isNative = isWin || isMacNative || isLinuxNative || isBrowserGame
+    const isHyperPlayGame = runner === 'hyperplay'
 
-    const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
+    const showCloudSaveInfo =
+      is_installed && !isBrowserGame && !isHyperPlayGame && !isSideloaded
+    const isCloudSaveSupported = cloud_save_enabled && !isLinuxNative
     const supportsWeb3 = gameInfo.web3?.supported
 
     /*
@@ -471,9 +474,9 @@ export default observer(function GamePage(): JSX.Element | null {
                   <div className="col2-item italic">
                     {supportsWeb3 ? t('box.yes') : t('box.no')}
                   </div>
-                  {is_installed && !isBrowserGame && (
+                  {showCloudSaveInfo && (
                     <>
-                      {showCloudSaveInfo ? (
+                      {isCloudSaveSupported ? (
                         <>
                           <div className="hp-subtitle">
                             {t('info.syncsaves')}
