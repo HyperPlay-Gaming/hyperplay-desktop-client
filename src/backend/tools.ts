@@ -146,12 +146,16 @@ export const DXVK = {
     tool: 'dxvk' | 'dxvk-nvapi' | 'vkd3d' | 'dxvk-macOS',
     action: 'backup' | 'restore'
   ): Promise<boolean> => {
-    if (gameSettings.wineVersion.bin.includes('toolkit')) {
+    if (gameSettings.wineVersion.type === 'toolkit') {
       // we don't want to install dxvk on the toolkit prefix since it breaks Apple's implementation
       logWarning(
         'Skipping DXVK install on Game Porting Toolkit prefix!',
         LogPrefix.DXVKInstaller
       )
+      return true
+    }
+
+    if (isMac && tool !== 'dxvk') {
       return true
     }
 

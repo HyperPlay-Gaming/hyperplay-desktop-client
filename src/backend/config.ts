@@ -19,7 +19,8 @@ import {
   isMac,
   isWindows,
   getSteamCompatFolder,
-  configStore
+  configStore,
+  isLinux
 } from './constants'
 
 import { logError, logInfo, LogPrefix } from './logger/logger'
@@ -28,6 +29,7 @@ import {
   getDefaultWine,
   getGamingPortingToolkitWine,
   getLinuxWineSet,
+  getWhisky,
   getWineOnMac,
   getWineskinWine
 } from './utils/compatibility_layers'
@@ -139,13 +141,15 @@ abstract class GlobalConfig {
     const crossover = await getCrossover()
     const wineOnMac = await getWineOnMac()
     const wineskinWine = await getWineskinWine()
+    const whiskyWine = await getWhisky()
     const gamingPortingToolkitWine = await getGamingPortingToolkitWine()
 
     return new Set([
       ...gamingPortingToolkitWine,
       ...crossover,
       ...wineOnMac,
-      ...wineskinWine
+      ...wineskinWine,
+      ...whiskyWine
     ])
   }
 
@@ -297,8 +301,8 @@ class GlobalConfigV0 extends GlobalConfig {
       enableUpdates: false,
       addDesktopShortcuts: false,
       addStartMenuShortcuts: false,
-      autoInstallDxvk: true,
-      autoInstallVkd3d: true,
+      autoInstallDxvk: isLinux,
+      autoInstallVkd3d: isLinux,
       autoInstallDxvkNvapi: false,
       addSteamShortcuts: false,
       preferSystemLibs: false,
