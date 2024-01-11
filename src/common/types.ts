@@ -692,6 +692,7 @@ export type Type =
   | 'Wine-Kron4ek'
   | 'Wine-Crossover'
   | 'Wine-Staging-macOS'
+  | 'Game-Porting-Toolkit'
 
 /**
  * Interface contains information about a version
@@ -721,7 +722,8 @@ export enum Repositorys {
   PROTON,
   WINELUTRIS,
   WINECROSSOVER,
-  WINESTAGINGMACOS
+  WINESTAGINGMACOS,
+  GPTK
 }
 
 /**

@@ -14,7 +14,8 @@ import {
   PROTON_URL,
   WINELUTRIS_URL,
   WINECROSSOVER_URL,
-  WINESTAGINGMACOS_URL
+  WINESTAGINGMACOS_URL,
+  GPTK_URL
 } from './constants'
 import { VersionInfo, Repositorys, State, ProgressInfo } from 'common/types'
 import {
@@ -131,6 +132,21 @@ async function getAvailableVersions({
           })
         break
       }
+      case Repositorys.GPTK: {
+        await fetchReleases({
+          url: GPTK_URL,
+          type: 'Game-Porting-Toolkit',
+          count: count
+        })
+          .then((fetchedReleases: VersionInfo[]) => {
+            releases.push(...fetchedReleases)
+          })
+          .catch((error: Error) => {
+            throw error
+          })
+        break
+      }
+
       default: {
         console.warn(
           `Unknown and not supported repository key passed! Skip fetch for ${repo}`
