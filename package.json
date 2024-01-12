@@ -359,7 +359,8 @@
       "playwright": true,
       "vite>esbuild": true,
       "$root$": true,
-      "postinstall-postinstall": true
+      "postinstall-postinstall": true,
+      "@rudderstack/rudder-sdk-node": true
     }
   }
 }
