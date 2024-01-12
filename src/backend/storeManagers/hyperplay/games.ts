@@ -41,6 +41,7 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import {
+  alternativeUnzip,
   getHyperPlayStoreRelease,
   handleArchAndPlatform,
   handlePlatformReversed,
@@ -681,14 +682,36 @@ export async function install(
       }
     }
 
-    return await extract(appName, {
+    /*     return await extract(appName, {
       appPlatform,
       gameInfo,
       destinationPath,
       platformInfo,
       installVersion,
       channelName
-    })
+    }) */
+
+    await alternativeUnzip(
+      join(zipPathInfo.directory, zipPathInfo.filename),
+      destinationPath
+    )
+
+    const installedInfo: InstalledInfo = {
+      appName,
+      install_path: destinationPath,
+      executable: path.join(destinationPath, platformInfo.executable),
+      install_size: platformInfo?.installSize ?? '0',
+      is_dlc: false,
+      version: installVersion,
+      platform: appPlatform,
+      channelName
+    }
+
+    updateInstalledInfo(appName, installedInfo)
+
+    return {
+      status: 'done'
+    }
   } catch (error) {
     process.noAsar = false
 
@@ -718,14 +741,7 @@ interface Extract {
 
 export async function extract(
   appName: string,
-  {
-    platformInfo,
-    destinationPath,
-    gameInfo,
-    installVersion,
-    appPlatform,
-    channelName
-  }: Extract
+  { platformInfo, destinationPath, gameInfo }: Extract
 ): Promise<InstallResult> {
   let { directory, fileName } = { directory: '', fileName: '' }
   const window = getMainWindow()
@@ -890,19 +906,6 @@ export async function extract(
             )[0]
             executable = join(executable, 'Contents', 'MacOS', macAppExecutable)
           }
-
-          const installedInfo: InstalledInfo = {
-            appName,
-            install_path: destinationPath,
-            executable: executable,
-            install_size: platformInfo?.installSize ?? '0',
-            is_dlc: false,
-            version: installVersion,
-            platform: appPlatform,
-            channelName
-          }
-
-          updateInstalledInfo(appName, installedInfo)
 
           notify({
             title,
