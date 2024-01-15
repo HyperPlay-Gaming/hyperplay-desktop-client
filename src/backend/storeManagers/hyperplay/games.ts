@@ -22,7 +22,6 @@ import {
   mkdirSync,
   rmSync,
   readdirSync,
-  unlinkSync,
   writeFileSync
 } from 'graceful-fs'
 import {
@@ -1219,16 +1218,15 @@ export async function forceUninstall(appName: string): Promise<void> {
 }
 
 function writeManifestFile(installedInfo: Partial<InstalledInfo>) {
+  if (!installedInfo.install_path) {
+    return
+  }
+
   const manifestPath = path.join(
     path.dirname(installedInfo.install_path!),
     'manifest.json'
   )
   const manifest = JSON.stringify(installedInfo, null, 2)
 
-  // delete manifest if exists
-  if (existsSync(manifestPath)) {
-    unlinkSync(manifestPath)
-  }
-
-  return writeFileSync(manifestPath, manifest)
+  return writeFileSync(manifestPath, manifest, { encoding: 'utf8', flag: 'w' })
 }
