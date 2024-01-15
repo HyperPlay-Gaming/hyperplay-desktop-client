@@ -17,7 +17,14 @@ import {
   ExtractZipService,
   ExtractZipProgressResponse
 } from 'backend/services/ExtractZipService'
-import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
+import {
+  existsSync,
+  mkdirSync,
+  rmSync,
+  readdirSync,
+  unlinkSync,
+  writeFileSync
+} from 'graceful-fs'
 import {
   isMac,
   isWindows,
@@ -467,6 +474,8 @@ function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
   currentLibrary[gameIndex].is_installed = true
 
   hpLibraryStore.set('games', currentLibrary)
+
+  writeManifestFile(installedInfo)
 }
 
 function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
@@ -1012,6 +1021,12 @@ export function getGameInfo(appName: string): GameInfo {
     .get('games', [])
     .find((app) => app.app_name === appName)
 
+  // TODO: remove this in the future, it is only needed for games downloaded from v0.10 and below
+  // write manifest file
+  if (appInfo?.is_installed && appInfo.install) {
+    writeManifestFile(appInfo.install)
+  }
+
   if (!appInfo) {
     throw new Error('App not found in library')
   }
@@ -1201,4 +1216,19 @@ export async function syncSaves(
 
 export async function forceUninstall(appName: string): Promise<void> {
   await uninstall({ appName, shouldRemovePrefix: false })
+}
+
+function writeManifestFile(installedInfo: Partial<InstalledInfo>) {
+  const manifestPath = path.join(
+    path.dirname(installedInfo.install_path!),
+    'manifest.json'
+  )
+  const manifest = JSON.stringify(installedInfo, null, 2)
+
+  // delete manifest if exists
+  if (existsSync(manifestPath)) {
+    unlinkSync(manifestPath)
+  }
+
+  return writeFileSync(manifestPath, manifest)
 }
