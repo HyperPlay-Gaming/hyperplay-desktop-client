@@ -60,7 +60,10 @@ export default React.memo(function NewLogin() {
   }, [storeAuthState.epic.username, storeAuthState.gog.username, storeAuthState.amazon.user_id, t])
 
   async function handleLibraryClick() {
-    await libraryState.refreshLibrary({ runInBackground: false })
+    await libraryState.refreshLibrary({
+      runInBackground: false,
+      checkForUpdates: false
+    })
     navigate('/library')
   }
 

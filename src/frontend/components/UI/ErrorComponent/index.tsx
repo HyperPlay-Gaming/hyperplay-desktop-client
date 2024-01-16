@@ -21,7 +21,6 @@ export default function ErrorComponent({ message }: { message: string }) {
           className="button is-footer"
           onClick={async () =>
             libraryState.refreshLibrary({
-              checkForUpdates: true,
               runInBackground: false
             })
           }
