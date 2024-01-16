@@ -11,7 +11,7 @@ import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 type Command =
   | 'ping'
   | 'launch'
-  | 'oauth-completed'
+  | 'otp-deeplink'
   | 'email-verified'
   | 'email-confirmation'
 
@@ -38,22 +38,20 @@ export async function handleProtocol(args: string[]) {
 
   logInfo(`received ${url}`, LogPrefix.ProtocolHandler)
 
-  const emailConfirmationUrl = decodeURIComponent(arg)
-
   switch (command) {
     case 'ping':
       return handlePing(arg)
     case 'launch':
       await handleLaunch(runner, arg, mainWindow)
       break
-    case 'oauth-completed':
-      sendFrontendMessage('oauthCompleted')
+    case 'otp-deeplink':
+      sendFrontendMessage('oauthDeeplink', new URL(url).searchParams.get('otp'))
       break
     case 'email-verified':
       sendFrontendMessage('emailVerified')
       break
     case 'email-confirmation':
-      sendFrontendMessage('emailConfirmation', emailConfirmationUrl)
+      sendFrontendMessage('emailConfirmation', decodeURIComponent(arg))
       break
     default:
       return
@@ -93,7 +91,7 @@ export function parseUrl(url: string): [Command, Runner?, string?, string?] {
 
   const urlObject = new URL(url)
 
-  //check if the second param is a runner or not and adjust parts accordingly
+  // TODO: https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/issues/654
   const splitCommand = fullCommand.split('/')
   const hasRunner = RUNNERS.includes(splitCommand[1] as Runner)
   if (hasRunner) {
@@ -108,6 +106,12 @@ export function parseUrl(url: string): [Command, Runner?, string?, string?] {
   } else if (splitCommand[0].startsWith('email-confirmation')) {
     const emailConfirmUrl = urlObject.searchParams.get('url')
     return ['email-confirmation', undefined, emailConfirmUrl ?? undefined]
+  } else if (splitCommand[0].startsWith('otp-deeplink')) {
+    return [
+      'otp-deeplink',
+      undefined,
+      urlObject.searchParams.get('otp') ?? undefined
+    ]
   } else {
     const [command, appId] = splitCommand
     return [command as Command, undefined, appId]
