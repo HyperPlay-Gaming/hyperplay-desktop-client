@@ -209,6 +209,7 @@ import {
 } from 'backend/storeManagers/legendary/library'
 import { uuid } from 'short-uuid'
 import { LDEnvironmentId, ldOptions } from './ldconstants'
+import getPartitionCookies from './utils/get_partition_cookies'
 
 let ldMainClient: LDElectron.LDElectronMainClient
 
@@ -239,16 +240,7 @@ ipcMain.on('focusMainWindow', () => {
 
 async function completeHyperPlayQuest() {
   logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
-
-  const authSession = session.fromPartition('persist:auth')
-
-  const cookies = await authSession.cookies.get({
-    url: DEV_PORTAL_URL
-  })
-
-  const cookieString = cookies
-    .map((cookie) => `${cookie.name}=${cookie.value}`)
-    .join('; ')
+  const cookieString = await getPartitionCookies('persist:auth')
 
   const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
     method: 'POST',

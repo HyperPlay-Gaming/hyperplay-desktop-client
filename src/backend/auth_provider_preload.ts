@@ -11,6 +11,9 @@ contextBridge.exposeInMainWorld('authApi', {
   reportAccountConnected: () => {
     ipcRenderer.sendToHost('auth:accountConnected')
   },
+  reportOtpFinished: () => {
+    ipcRenderer.sendToHost('auth:otpFinished')
+  },
   openProviderOAuthLink: (provider: string) => {
     ipcRenderer.send('openExternalUrl', `${DEV_PORTAL_URL}/oauth/${provider}`)
   }

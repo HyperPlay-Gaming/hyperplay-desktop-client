@@ -9,6 +9,8 @@ import extensionState from '../../../state/ExtensionState'
 import onboardingState from '../../../store/OnboardingStore'
 import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
+import { useQueryClient } from 'react-query'
+import useAuthSession from '../../../hooks/useAuthSession'
 
 const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
@@ -19,7 +21,22 @@ const isTooManyRequestsError = (error: string) => {
 }
 
 const AuthModal = () => {
+  const queryClient = useQueryClient()
+  const { data: authSession } = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
+
+  console.log({ authSession })
+
+  const emailConfirmed = async (
+    _e: Electron.IpcRendererEvent,
+    emailConfirmUrl: string
+  ) => {
+    await queryClient.invalidateQueries('authSession')
+    setTimeout(async () => {
+      await webviewRef.current?.loadURL(emailConfirmUrl)
+      await queryClient.invalidateQueries('authSession')
+    }, 5000)
+  }
 
   const sendRetryConnectionMessage = () => {
     const webview = webviewRef.current
@@ -29,6 +46,7 @@ const AuthModal = () => {
   }
 
   const handleAccountNotConnected = async () => {
+    if (!window.ethereum) return
     const currentProvider = await window.api.getConnectedProvider()
 
     if (currentProvider === 'Unconnected') {
@@ -65,6 +83,11 @@ const AuthModal = () => {
         case 'auth:accountConnected':
           authState.setSignedIn()
           authState.closeSignInModal()
+          await queryClient.invalidateQueries('authSession')
+          break
+        case 'auth:otpFinished':
+          console.log('otp finished')
+          await queryClient.invalidateQueries('authSession')
           break
         case 'auth:accountNotConnected':
           await handleAccountNotConnected()
@@ -85,13 +108,16 @@ const AuthModal = () => {
     })
 
     const oAuthCompletedCleanup = window.api.handleOAuthDeepLink(
-      (_e: Electron.IpcRendererEvent, code: string) => {
-        const otpUrl = `${DEV_PORTAL_URL}/otp/${code}`
-        webviewRef.current?.loadURL(otpUrl)
+      async (_e: Electron.IpcRendererEvent, code: string) => {
+        webviewRef.current?.loadURL(`${DEV_PORTAL_URL}/otp/${code}`)
       }
     )
 
+    const rmHandleEmailConfirmationNavigation =
+      window.api.handleEmailConfirmationNavigation(emailConfirmed)
+
     return () => {
+      rmHandleEmailConfirmationNavigation()
       qaModeListenerCleanup()
       oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
@@ -122,25 +148,6 @@ const AuthModal = () => {
       sendRetryConnectionMessage()
     }
   }, [walletState.isConnected, authState.hasPendingSignatureRequest])
-
-  function emailConfirmed(
-    _e: Electron.IpcRendererEvent,
-    emailConfirmUrl: string
-  ) {
-    webviewRef.current?.loadURL(emailConfirmUrl)
-    authState.openSignInModal()
-
-    setTimeout(async () => webviewRef.current?.loadURL(url), 5000)
-  }
-
-  useEffect(() => {
-    const rmHandleEmailConfirmationNavigation =
-      window.api.handleEmailConfirmationNavigation(emailConfirmed)
-
-    return () => {
-      rmHandleEmailConfirmationNavigation()
-    }
-  }, [])
 
   return (
     <ModalAnimation

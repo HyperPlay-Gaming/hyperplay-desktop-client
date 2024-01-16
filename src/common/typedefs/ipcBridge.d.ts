@@ -48,6 +48,7 @@ import {
   NileUserData
 } from 'common/types/nile'
 import { ToastKey } from 'frontend/store/types'
+import { AuthSession } from '../types/auth'
 
 /**
  * Some notes here:
@@ -145,6 +146,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   closeAuthModal: () => void
   'auth:accountConnected': () => void
   'auth:accountNotConnected': () => void
+  'auth:otpFinished': () => void
   focusMainWindow: () => void
 }
 
@@ -249,6 +251,7 @@ interface HyperPlayAsyncIPCFunctions {
   get_wallet_state_otp: () => Promise<string>
   get_extension_state_isPopupOpen: () => Promise<boolean>
   getLDEnvConfig: () => Promise<LDEnv>
+  getAuthSession: () => Promise<AuthSession | null>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
