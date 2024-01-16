@@ -1,5 +1,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'graceful-fs'
 import { userInfo as user } from 'os'
+import { uuid } from 'short-uuid'
 
 import {
   AppSettings,
@@ -18,15 +19,18 @@ import {
   isMac,
   isWindows,
   getSteamCompatFolder,
-  configStore
+  configStore,
+  isLinux
 } from './constants'
 
 import { logError, logInfo, LogPrefix } from './logger/logger'
 import {
   getCrossover,
   getDefaultWine,
+  getSystemGamingPortingToolkitWine,
   getGamingPortingToolkitWine,
   getLinuxWineSet,
+  getWhisky,
   getWineOnMac,
   getWineskinWine
 } from './utils/compatibility_layers'
@@ -135,16 +139,20 @@ abstract class GlobalConfig {
       return new Set<WineInstallation>()
     }
 
+    const getGPTKWine = await getGamingPortingToolkitWine()
+    const getSystemGPTK = await getSystemGamingPortingToolkitWine()
     const crossover = await getCrossover()
     const wineOnMac = await getWineOnMac()
     const wineskinWine = await getWineskinWine()
-    const gamingPortingToolkitWine = await getGamingPortingToolkitWine()
+    const whiskyWine = await getWhisky()
 
     return new Set([
-      ...gamingPortingToolkitWine,
+      ...getGPTKWine,
+      ...getSystemGPTK,
       ...crossover,
       ...wineOnMac,
-      ...wineskinWine
+      ...wineskinWine,
+      ...whiskyWine
     ])
   }
 
@@ -296,8 +304,8 @@ class GlobalConfigV0 extends GlobalConfig {
       enableUpdates: false,
       addDesktopShortcuts: false,
       addStartMenuShortcuts: false,
-      autoInstallDxvk: true,
-      autoInstallVkd3d: true,
+      autoInstallDxvk: isLinux,
+      autoInstallVkd3d: isLinux,
       autoInstallDxvkNvapi: false,
       addSteamShortcuts: false,
       preferSystemLibs: false,
@@ -325,7 +333,11 @@ class GlobalConfigV0 extends GlobalConfig {
       winePrefix: isWindows ? '' : defaultWinePrefix,
       wineVersion: defaultWine,
       enableEsync: true,
-      enableFsync: true
+      enableFsync: true,
+      ldUser: {
+        kind: 'user',
+        key: uuid()
+      }
     } as AppSettings
   }
 

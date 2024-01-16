@@ -78,32 +78,20 @@ export default observer(function Library(): JSX.Element {
   useLayoutEffect(() => {
     const scrollPosition = parseInt(storage?.getItem('scrollPosition') || '0')
 
-    if (listing.current !== null && scrollPosition > 0) {
-      listing.current.scrollTo(0, scrollPosition)
+    const storeScrollPosition = () => {
+      storage?.setItem(
+        'scrollPosition',
+        listing.current?.scrollTop.toString() || '0'
+      )
     }
-    return () => {
-      if (listing.current !== null) {
-        storage?.setItem('scrollPosition', listing.current.scrollTop.toString())
-      }
-    }
-  }, [listing])
 
-  // bind back to top button
-  useEffect(() => {
-    if (backToTopElement.current) {
-      const listing = document.querySelector('.listing')
-      if (listing) {
-        listing.addEventListener('scroll', () => {
-          const btn = document.getElementById('backToTopBtn')
-          const topSpan = document.getElementById('top')
-          if (btn && topSpan) {
-            btn.style.visibility =
-              listing.scrollTop > 450 ? 'visible' : 'hidden'
-          }
-        })
-      }
+    listing.current?.addEventListener('scroll', storeScrollPosition)
+    listing.current?.scrollTo(0, scrollPosition || 0)
+
+    return () => {
+      listing.current?.removeEventListener('scroll', storeScrollPosition)
     }
-  }, [backToTopElement])
+  }, [listing.current])
 
   // Track the screen view once and only once.
   useEffect(() => {
@@ -243,7 +231,7 @@ export default observer(function Library(): JSX.Element {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <div className="contentContainer">
+      <div className="Library contentContainer" ref={listing}>
         <div className={styles.libraryTopHeader}>
           <h3>{t('library.label', 'Library')}</h3>
           <span className={`${styles.numberOfgames} title`}>
@@ -284,7 +272,7 @@ export default observer(function Library(): JSX.Element {
           selectedFilter={libraryState.selectedFilter ?? filters[1]}
           otherFiltersData={otherFiltersData}
         />
-        <div className={styles.listing} ref={listing}>
+        <div className={styles.listing}>
           <span id="top" />
           {showRecentGames && (
             <RecentlyPlayed

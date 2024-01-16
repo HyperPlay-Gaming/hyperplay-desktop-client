@@ -3,48 +3,44 @@ import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
   AppSettings,
-  GameSettings,
-  DiskSpaceData,
-  StatusPromise,
-  GamepadInputEvent,
-  WineCommandArgs,
   ExecResult,
-  Runner
+  GamepadInputEvent,
+  GameSettings,
+  Runner,
+  StatusPromise,
+  WineCommandArgs
 } from 'common/types'
 import * as path from 'path'
+import { join } from 'path'
 import {
-  BrowserWindow,
-  Menu,
   app,
+  BrowserWindow,
+  clipboard,
   dialog,
+  globalShortcut,
   ipcMain,
+  Menu,
   powerSaveBlocker,
   protocol,
   screen,
-  clipboard,
-  globalShortcut,
   session
 } from 'electron'
 import 'backend/updater'
 import { autoUpdater } from 'electron-updater'
 import { cpus, platform } from 'os'
 import {
-  access,
   appendFileSync,
-  constants,
   existsSync,
+  readdirSync,
+  readFileSync,
   rmSync,
   unlinkSync,
   watch,
-  writeFileSync,
-  readdirSync,
-  readFileSync
+  writeFileSync
 } from 'graceful-fs'
-
+import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
-import { join } from 'path'
-import checkDiskSpace from 'check-disk-space'
 import { DXVK, Winetricks } from './tools'
 import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
@@ -54,59 +50,57 @@ import { NileUser } from './storeManagers/nile/user'
 import setup from './storeManagers/gog/setup'
 import nileSetup from './storeManagers/nile/setup'
 import {
+  checkWineBeforeLaunch,
   clearCache,
+  downloadDefaultWine,
   execAsync,
-  isEpicServiceOffline,
-  getLegendaryVersion,
+  getGOGdlBin,
   getGogdlVersion,
+  getLegendaryBin,
+  getLegendaryVersion,
+  getNileVersion,
+  getPlatformName,
+  getShellPath,
+  getStoreName,
   getSystemInfo,
   handleExit,
-  resetApp,
+  isEpicServiceOffline,
   openUrlOrFile,
+  resetApp,
   showAboutWindow,
   showItemInFolder,
-  getLegendaryBin,
-  getGOGdlBin,
-  // detectVCRedist,
-  getFileSize,
-  getFirstExistingParentPath,
-  getShellPath,
-  wait,
-  checkWineBeforeLaunch,
-  downloadDefaultWine,
-  getNileVersion,
-  getStoreName,
-  getPlatformName
+  wait
 } from './utils'
 import {
+  configPath,
   configStore,
+  createNecessaryFolders,
+  customThemesWikiLink,
   discordLink,
+  epicLoginUrl,
+  eventsToCloseMetaMaskPopupOn,
+  fixAsarPath,
+  fontsStore,
   gamesConfigPath,
   githubURL,
-  userHome,
+  hyperplaySite,
   icon,
   installed,
-  epicLoginUrl,
-  sidInfoUrl,
-  supportURL,
-  tsStore,
-  weblateUrl,
-  wikiLink,
-  fontsStore,
-  configPath,
-  isSteamDeckGameMode,
   isCLIFullscreen,
   isCLINoGui,
   isFlatpak,
+  isSteamDeckGameMode,
+  onboardLocalStore,
   publicDir,
-  wineprefixFAQ,
-  hyperplaySite,
-  customThemesWikiLink,
-  createNecessaryFolders,
-  fixAsarPath,
+  setQaToken,
+  sidInfoUrl,
+  supportURL,
+  tsStore,
   twitterLink,
-  eventsToCloseMetaMaskPopupOn,
-  setQaToken
+  userHome,
+  weblateUrl,
+  wikiLink,
+  wineprefixFAQ
 } from './constants'
 import { handleProtocol } from './protocol'
 import {
@@ -125,8 +119,6 @@ import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import * as ProxyServer from './hyperplay-proxy-server/proxy'
-
-ProxyServer.serverStarted.then(() => console.log('Server started'))
 import {
   initOnlineMonitor,
   isOnline,
@@ -155,6 +147,7 @@ import {
 } from 'backend/storeManagers/gog/games'
 import { playtimeSyncQueue } from './storeManagers/gog/electronStores'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
+
 import {
   autoUpdate,
   gameManagerMap,
@@ -164,9 +157,38 @@ import {
 import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
 import * as Sentry from '@sentry/electron'
-import { prodSentryDsn, devSentryDsn } from 'common/constants'
+import { DEV_PORTAL_URL, devSentryDsn, prodSentryDsn } from 'common/constants'
+
+/*
+ * INSERT OTHER IPC HANDLERS HERE
+ */
+import './logger/ipc_handler'
+import './wine/manager/ipc_handler'
+import './shortcuts/ipc_handler'
+import './anticheat/ipc_handler'
+import 'backend/storeManagers/legendary/eos_overlay/ipc_handler'
+import './wine/runtimes/ipc_handler'
+import './downloadmanager/ipc_handler'
+import './utils/ipc_handler'
+import './wiki_game_info/ipc_handler'
+import './recent_games/ipc_handler'
+import './metrics/ipc_handler'
+import 'backend/hyperplay-extension-helper/usbHandler'
+
+import './ipcHandlers'
+
+import { metricsAreEnabled, trackEvent } from './metrics/metrics'
+import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
+import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
+import { backendEvents } from 'backend/backend_events'
+import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
+import { PROVIDERS } from 'common/types/proxy-types'
+import 'backend/hyperplay-achievements'
+
+ProxyServer.serverStarted.then(() => console.log('Server started'))
 
 let sentryInitialized = false
+
 function initSentry() {
   if (sentryInitialized) return
   Sentry.init({
@@ -185,6 +207,10 @@ import {
   getGameOverride,
   getGameSdl
 } from 'backend/storeManagers/legendary/library'
+import { uuid } from 'short-uuid'
+import { LDEnvironmentId, ldOptions } from './ldconstants'
+
+let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
@@ -210,6 +236,40 @@ ipcMain.on('focusMainWindow', () => {
   mainWindow.show()
   mainWindow?.focus()
 })
+
+async function completeHyperPlayQuest() {
+  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
+
+  const authSession = session.fromPartition('persist:auth')
+
+  const cookies = await authSession.cookies.get({
+    url: DEV_PORTAL_URL
+  })
+
+  const cookieString = cookies
+    .map((cookie) => `${cookie.name}=${cookie.value}`)
+    .join('; ')
+
+  const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
+    method: 'POST',
+    headers: {
+      Cookie: cookieString
+    }
+  })
+
+  if (!response.ok) {
+    const error = await response.json()
+    logError(
+      `Failed to complete summon task: ${
+        error?.message ?? response.statusText
+      }`,
+      LogPrefix.Backend
+    )
+    return
+  }
+
+  logInfo(`Completed HyperPlay Summon task`, LogPrefix.Backend)
+}
 
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
@@ -360,6 +420,13 @@ if (!gotTheLock) {
     )
     ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
 
+    const authSession = session.fromPartition('persist:auth')
+    authSession.setPreloads([
+      path.join(__dirname, 'providerPreload.js'),
+      path.join(__dirname, 'transparent_body_preload.js'),
+      path.join(__dirname, 'auth_provider_preload.js')
+    ])
+
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
       path.join(__dirname, 'hyperplay_store_preload.js'),
@@ -486,6 +553,27 @@ if (!gotTheLock) {
       ]
     })
 
+    let ldUser = GlobalConfig.get().getSettings().ldUser
+
+    if (!ldUser) {
+      logInfo('No LaunchDarkly user found, creating new one.')
+      ldUser = {
+        kind: 'user',
+        key: uuid()
+      }
+      configStore.set('settings.ldUser', ldUser)
+    }
+
+    ldMainClient = LDElectron.initializeInMain(
+      LDEnvironmentId,
+      ldUser,
+      ldOptions
+    )
+
+    ldMainClient.on('ready', () => {
+      logInfo('LaunchDarkly client initialized', LogPrefix.Backend)
+    })
+
     const mainWindow = await initializeWindow()
 
     if (!app.isPackaged) {
@@ -556,6 +644,12 @@ ipcMain.once('loadingScreenReady', () => {
   logInfo('Loading Screen Ready', LogPrefix.Backend)
 })
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+let resolveFrontendReady = () => {}
+export const frontendReady = new Promise<void>((res) => {
+  resolveFrontendReady = res
+})
+
 ipcMain.once('frontendReady', () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
   handleProtocol([openUrlArgument, ...process.argv])
@@ -565,6 +659,7 @@ ipcMain.once('frontendReady', () => {
   }, 5000)
 
   watchLibraryChanges()
+  resolveFrontendReady()
 })
 
 // Maybe this can help with white screens
@@ -608,45 +703,6 @@ ipcMain.on('unlock', () => {
       powerSaveBlocker.stop(powerId)
     }
   }
-})
-
-ipcMain.handle('checkDiskSpace', async (event, folder) => {
-  const parent = getFirstExistingParentPath(folder)
-  return new Promise<DiskSpaceData>((res) => {
-    access(parent, constants.W_OK, async (writeError) => {
-      const { free, size: diskSize } = await checkDiskSpace(folder).catch(
-        (checkSpaceError) => {
-          logError(
-            [
-              'Failed to check disk space for',
-              `"${folder}":`,
-              checkSpaceError.stack ?? `${checkSpaceError}`
-            ],
-            LogPrefix.Backend
-          )
-          return { free: 0, size: 0 }
-        }
-      )
-      if (writeError) {
-        logWarning(
-          [
-            'Cannot write to',
-            `"${folder}":`,
-            writeError.stack ?? `${writeError}`
-          ],
-          LogPrefix.Backend
-        )
-      }
-
-      const ret = {
-        free,
-        diskSize,
-        message: `${getFileSize(free)} / ${getFileSize(diskSize)}`,
-        validPath: !writeError
-      }
-      res(ret)
-    })
-  })
 })
 
 ipcMain.on('quit', async () => handleExit())
@@ -1081,6 +1137,9 @@ ipcMain.handle(
         platform_arch: install.platform!
       }
     })
+
+    // purposefully not awaiting this
+    completeHyperPlayQuest()
 
     if (autoSyncSaves && isOnline()) {
       sendFrontendMessage('gameStatusUpdate', {
@@ -1852,29 +1911,6 @@ ipcMain.handle(
   t('box.error.generic.message')
  */
 
-/*
- * INSERT OTHER IPC HANDLERS HERE
- */
-import './logger/ipc_handler'
-import './wine/manager/ipc_handler'
-import './shortcuts/ipc_handler'
-import './anticheat/ipc_handler'
-import 'backend/storeManagers/legendary/eos_overlay/ipc_handler'
-import './wine/runtimes/ipc_handler'
-import './downloadmanager/ipc_handler'
-import './utils/ipc_handler'
-import './wiki_game_info/ipc_handler'
-import './recent_games/ipc_handler'
-import './metrics/ipc_handler'
-import 'backend/hyperplay-extension-helper/usbHandler'
-
-import { metricsAreEnabled, trackEvent } from './metrics/metrics'
-import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
-import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
-import { backendEvents } from 'backend/backend_events'
-import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
-import { PROVIDERS } from 'common/types/proxy-types'
-
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
   getMainWindow()?.webContents.send('walletConnected', accounts)
@@ -1943,6 +1979,11 @@ ipcMain.on('openGameInEpicStore', async (_e, url) => {
 
 ipcMain.on('setQaToken', (_e, qaToken) => {
   setQaToken(qaToken)
+  if (qaToken.length > 0) sendFrontendMessage('qaModeActive')
+})
+
+ipcMain.on('openAuthModalIfAppReloads', () => {
+  onboardLocalStore.set('openAuthModalIfAppReloads', true)
 })
 
 ipcMain.on('killOverlay', () => {

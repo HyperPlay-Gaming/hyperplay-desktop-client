@@ -134,7 +134,7 @@ describe('ExtractZipService', () => {
 
   beforeEach(() => {
     yauzlMockupLib('test.zip', false)
-    jest.useFakeTimers('modern')
+    jest.useFakeTimers()
     extractZipService = new ExtractZipService(zipFile, destinationPath)
     extractZipService.getUncompressedSize = async () => Promise.resolve(15000)
   }, 1000)

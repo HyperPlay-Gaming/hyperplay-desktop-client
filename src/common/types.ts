@@ -82,6 +82,16 @@ export type ExperimentalFeatures = {
   enableNewShinyFeature: boolean // remove this when adding a real experimental feature
 }
 
+export type LDUser = {
+  kind: string
+  key: string
+}
+
+export type LDEnv = {
+  envId: string
+  ldUser: LDUser
+}
+
 export interface AppSettings extends GameSettings {
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
@@ -112,6 +122,8 @@ export interface AppSettings extends GameSettings {
   minimizeOnGameLaunch: boolean
   startInTray: boolean
   userInfo: UserInfo
+  steamId: string
+  ldUser: LDUser
 }
 
 export type LibraryTopSectionOptions =
@@ -693,6 +705,7 @@ export type Type =
   | 'Wine-Kron4ek'
   | 'Wine-Crossover'
   | 'Wine-Staging-macOS'
+  | 'Game-Porting-Toolkit'
 
 /**
  * Interface contains information about a version
@@ -722,7 +735,8 @@ export enum Repositorys {
   PROTON,
   WINELUTRIS,
   WINECROSSOVER,
-  WINESTAGINGMACOS
+  WINESTAGINGMACOS,
+  GPTK
 }
 
 /**
@@ -805,6 +819,66 @@ export type AvailablePlatforms = {
   value: string
   icon: IconDefinition
 }[]
+
+export type AchievementStore = 'HYPERPLAY' | 'STEAM' | 'EPIC'
+
+export interface Achievement {
+  id: string
+  apiname: string
+  achieved: number
+  unlocktime: number
+  name: string
+  defaultvalue: number
+  displayName: string
+  hidden: number
+  description: string
+  icon: string
+  icongray: string
+  iconName: string
+  gameId: number
+  gameName: string
+  gameImageURL: string
+}
+
+export interface SummaryAchievement extends Achievement {
+  totalAchievementCount: number
+  mintedAchievementCount: number
+  mintableAchievementsCount: number
+  isNewAchievement: boolean
+  isMinted: boolean
+  tags: string[]
+}
+
+export type AchievementSort = 'ALPHA_A_TO_Z' | 'ALPHA_Z_TO_A' | 'SORT_BY_STATUS'
+
+export type AchievementFilter = 'ALL' | 'NEW' | 'MINTED'
+
+export interface PlayerOptions {
+  playerStoreId: string
+  playerAddress: string
+  store: AchievementStore
+}
+
+export interface GetAchievementsOptions extends PlayerOptions {
+  filter: AchievementFilter
+  sort: AchievementSort
+  page: number
+  pageSize?: number
+}
+
+export interface GetIndividualAchievementsOptions extends PlayerOptions {
+  gameId: number
+  sort: AchievementSort
+  page: number
+  pageSize: number
+}
+export interface AchievementsStats {
+  newAchievements: number
+  mintedAchievements: number
+  totalAchievements: number
+  totalGames: number
+  numFreeMints: number
+}
 
 export type WalletOnboardCloseReason =
   | 'skipped'

@@ -1,6 +1,5 @@
 export { ReactComponent as BackArrow } from './back_arrow.svg'
 export { ReactComponent as CloseX } from './close_x.svg'
-export { ReactComponent as HyperPlayLogo } from './hyperplay_logo.svg'
 export { ReactComponent as HyperPlayLogoGreen } from './hyperplay_logo_green.svg'
 export { ReactComponent as HyperPlayLogoRed } from './hyperplay_logo_red.svg'
 export { ReactComponent as HyperPlayLogoWhite } from './hyperplay_logo_white.svg'

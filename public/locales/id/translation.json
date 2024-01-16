@@ -76,7 +76,8 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
-            }
+            },
+            "moving": "Error ketika memindahkan Game {{error}}"
         },
         "info": {
             "update": {
@@ -89,7 +90,7 @@
             }
         },
         "no": "TIDAK",
-        "ok": "OKE",
+        "ok": "Oke",
         "protocol": {
             "install": {
                 "not_installed": "Saat ini tidak dipasang. Pasang?"
@@ -668,5 +669,9 @@
     },
     "amazon": "Amazon",
     "prime-gaming": "Game Perdana",
-    "Amazon Games": "Game Amazon"
+    "Amazon Games": "Game Amazon",
+    "accounts": "akun",
+    "Amazon": "Amazon",
+    "ALL": "SEMUA",
+    "analytics": "Analitik"
 }

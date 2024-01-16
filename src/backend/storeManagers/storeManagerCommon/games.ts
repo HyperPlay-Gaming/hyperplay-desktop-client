@@ -113,15 +113,13 @@ const openNewBrowserGameWindow = async (
     })
 
     const url = !app.isPackaged
-      ? `http://localhost:5173?view=BrowserGame&browserUrl=${encodeURIComponent(
-          browserUrl
-        )}&appName=${gameInfo.app_name}&runner=${gameInfo.runner}`
+      ? `http://localhost:5173?view=BrowserGame&appName=${gameInfo.app_name}&runner=${gameInfo.runner}`
       : `file://${path.join(
           buildDir,
           `./index.html`
-        )}?view=BrowserGame&browserUrl=${encodeURIComponent(
-          browserUrl
-        )}&appName=${gameInfo.app_name}&runner=${gameInfo.runner}`
+        )}?view=BrowserGame&appName=${gameInfo.app_name}&runner=${
+          gameInfo.runner
+        }`
 
     const urlParent = new URL(browserUrl)
     const openNewBroswerGameWindowListener = (

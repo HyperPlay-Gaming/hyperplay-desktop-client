@@ -1,4 +1,10 @@
-import { HyperPlayInstallInfo, DownloadManagerState } from './../types'
+import {
+  HyperPlayInstallInfo,
+  DownloadManagerState,
+  Achievement,
+  SummaryAchievement,
+  LDEnv
+} from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
@@ -71,9 +77,11 @@ interface HyperPlaySyncIPCFunctions {
   ignoreExitToTray: () => void
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
+  openAuthModalIfAppReloads: () => void
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
   toggleIsPopupOpen: () => void
+  showPopup: () => void
   toastCloseOnClick: (key: ToastKey) => void
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
@@ -134,6 +142,9 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   cancelDownload: (removeDownloaded: boolean) => void
   cancelExtraction: (appName: string) => void
   copyWalletConnectBaseURIToClipboard: () => void
+  closeAuthModal: () => void
+  'auth:accountConnected': () => void
+  'auth:accountNotConnected': () => void
   focusMainWindow: () => void
 }
 
@@ -214,15 +225,30 @@ interface HyperPlayAsyncIPCFunctions {
   removeTempDownloadFiles: (appName: string) => Promise<void>
   getImportFolderPath: () => Promise<string>
   appIsInLibrary: (appName: string, runner: Runner) => Promise<boolean>
+  getSummaryAchievements: (options: GetAchievementsOptions) => Promise<{
+    data: SummaryAchievement[]
+    totalPages: number
+  }>
+  getIndividualAchievements: (
+    options: GetIndividualAchievementsOptions
+  ) => Promise<{
+    data: Achievement[]
+    currentPage: number
+    totalPages: number
+  }>
+  getAchievementsStats: (options: PlayerOptions) => Promise<AchievementsStats>
+  syncAchievements: (options: PlayerOptions) => Promise<void>
   checkHyperPlayAccessCode: (
     channelId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
+  shouldShowAchievements: () => Promise<boolean>
   get_wallet_state_address: () => Promise<string>
   get_wallet_state_isConnected: () => Promise<boolean>
   get_wallet_state_provider: () => Promise<PROVIDERS>
   get_wallet_state_otp: () => Promise<string>
   get_extension_state_isPopupOpen: () => Promise<boolean>
+  getLDEnvConfig: () => Promise<LDEnv>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -421,6 +447,14 @@ declare namespace Electron {
 
   class IpcRenderer extends EventEmitter {
     public send: <
+      Name extends keyof SyncIPCFunctions,
+      Definition extends SyncIPCFunctions[Name]
+    >(
+      name: Name,
+      ...args: Parameters<Definition>
+    ) => void
+
+    public sendToHost: <
       Name extends keyof SyncIPCFunctions,
       Definition extends SyncIPCFunctions[Name]
     >(

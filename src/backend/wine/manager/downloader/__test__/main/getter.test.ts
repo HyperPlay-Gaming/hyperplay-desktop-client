@@ -66,6 +66,8 @@ describe('Main - GetAvailableVersions', () => {
     axios.default.get = jest.fn()
     console.warn = jest.fn()
 
+    /* eslint-disable-next-line */
+    //@ts-ignore
     await getAvailableVersions({ repositorys: [-1] })
       .then((releases: VersionInfo[]) => {
         expect(releases).toStrictEqual([])

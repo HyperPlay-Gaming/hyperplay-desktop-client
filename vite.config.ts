@@ -12,16 +12,23 @@ const srcAliases = ['backend', 'frontend', 'common'].map((srcFolder) => {
   }
 })
 
+const aliases = [
+  {
+    find: '~@fontsource',
+    replacement: path.resolve(__dirname, 'node_modules/@fontsource')
+  },
+  ...srcAliases
+]
+
 const electronViteConfig = {
-  build: { outDir: 'build/electron' },
+  build: { outDir: 'build/electron', target: 'es2020' },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2020'
+    }
+  },
   resolve: {
-    alias: [
-      {
-        find: '~@fontsource',
-        replacement: path.resolve(__dirname, 'node_modules/@fontsource')
-      },
-      ...srcAliases
-    ]
+    alias: aliases
   }
 }
 
@@ -30,20 +37,36 @@ export default defineConfig({
     outDir: 'build'
   },
   resolve: {
-    alias: [
-      {
-        find: '~@fontsource',
-        replacement: path.resolve(__dirname, 'node_modules/@fontsource')
-      },
-      ...srcAliases
-    ]
+    alias: aliases
   },
   plugins: [
     react(),
     electron([
       {
         entry: 'src/backend/main.ts',
-        vite: { ...electronViteConfig, plugins: [bytecodePlugin()] }
+        vite: {
+          ...electronViteConfig,
+          plugins: [bytecodePlugin()],
+          resolve: {
+            alias: [
+              {
+                find: 'axios',
+                replacement: path.resolve(
+                  __dirname,
+                  'node_modules/axios/dist/node/axios.cjs'
+                )
+              },
+              {
+                find: 'form-data',
+                replacement: path.resolve(
+                  __dirname,
+                  'node_modules/form-data/lib/form_data.js'
+                )
+              },
+              ...aliases
+            ]
+          }
+        }
       },
       {
         entry: path.resolve(__dirname + '/src/backend/preload.ts'),
@@ -71,6 +94,18 @@ export default defineConfig({
       {
         entry: path.resolve(
           __dirname + '/src/backend/webview_style_preload.ts'
+        ),
+        vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/transparent_body_preload.ts'
+        ),
+        vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/auth_provider_preload.ts'
         ),
         vite: electronViteConfig
       }

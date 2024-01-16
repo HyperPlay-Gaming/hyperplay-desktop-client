@@ -9,3 +9,4 @@ export const METAMASK_SNAPS_EXTERNAL_URL = 'https://metamask.io/snaps/'
 export const METAMASK_PORTFOLIO_URL = 'https://portfolio.metamask.io/'
 
 export const valistBaseApiUrlv1 = 'https://api.valist.io/v1'
+export const DEV_PORTAL_URL = 'https://developers.hyperplay.xyz/'
