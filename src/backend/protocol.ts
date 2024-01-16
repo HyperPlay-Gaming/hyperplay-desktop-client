@@ -91,9 +91,7 @@ export function parseUrl(url: string): [Command, Runner?, string?, string?] {
 
   const urlObject = new URL(url)
 
-  // TODO: make this function more dynamic, ideally only get the command and
-  // handle the params in a different function
-  //check if the second param is a runner or not and adjust parts accordingly
+  // TODO: https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/issues/654
   const splitCommand = fullCommand.split('/')
   const hasRunner = RUNNERS.includes(splitCommand[1] as Runner)
   if (hasRunner) {
