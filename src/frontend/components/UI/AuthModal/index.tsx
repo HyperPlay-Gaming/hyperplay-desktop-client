@@ -88,7 +88,6 @@ const AuthModal = () => {
       (_e: Electron.IpcRendererEvent, code: string) => {
         const otpUrl = `${DEV_PORTAL_URL}/otp/${code}`
         webviewRef.current?.loadURL(otpUrl)
-        authState.openSignInModal()
       }
     )
 
