@@ -43,7 +43,7 @@ export const AchievementStores = observer(() => {
   useEffect(() => {
     const steamId = authSession?.linkedAccounts.get('steam')
     if (isLoading || !steamId) return
-    setPlayerStoreId('76561198010998728')
+    setPlayerStoreId(steamId)
     getAchievementsStats()
     // syncAchievements('STEAM')
   }, [isLoading, authSession, walletState.address])
