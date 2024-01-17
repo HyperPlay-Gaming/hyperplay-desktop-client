@@ -228,10 +228,6 @@ type DistArgs = {
 
 // for Windows games only
 const installDistributables = async ({ gamePath, appName }: DistArgs) => {
-  if (!isWindows || isLinux || (isMac && isNative(appName))) {
-    return
-  }
-
   const window = getMainWindow()
 
   window?.webContents.send(`progressUpdate-${appName}`, {
@@ -259,7 +255,7 @@ const installDistributables = async ({ gamePath, appName }: DistArgs) => {
   }
 
   for await (const executable of executables) {
-    logInfo(`Running distributable ${executable}`, LogPrefix.HyperPlay)
+    logInfo(`Installing distributable ${executable}`, LogPrefix.HyperPlay)
     if (!isWindows && !isNative(appName)) {
       return runWineCommandOnGame('hyperplay', appName, {
         commandParts: [executable, '/quiet'],
@@ -311,7 +307,7 @@ const findExecutables = async (folderPath: string): Promise<string[]> => {
       )
       executables = executables.concat(subFolderExecutables)
     } else if (file.name.endsWith('.exe')) {
-      logInfo(`Found executable ${file.name}`, LogPrefix.HyperPlay)
+      logInfo(`Found distributable ${file.name}`, LogPrefix.HyperPlay)
       executables.push(path.join(folderPath, file.name))
     }
   }
@@ -771,10 +767,14 @@ export async function install(
       channelName
     })
 
-    await installDistributables({
-      gamePath: destinationPath,
-      appName
-    })
+    if (platformToInstall === 'Windows') {
+      logInfo(`Looking for  distributables for ${appName}`, LogPrefix.HyperPlay)
+
+      await installDistributables({
+        gamePath: destinationPath,
+        appName
+      })
+    }
     return { status: 'done' }
   } catch (error) {
     process.noAsar = false
