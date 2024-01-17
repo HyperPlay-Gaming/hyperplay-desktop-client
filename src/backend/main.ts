@@ -750,7 +750,7 @@ ipcMain.on('showConfigFileInFolder', async (event, appName) => {
   return openUrlOrFile(path.join(gamesConfigPath, `${appName}.json`))
 })
 
-async function runWineCommandOnGame(
+export async function runWineCommandOnGame(
   runner: string,
   appName: string,
   { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
