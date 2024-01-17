@@ -8,7 +8,7 @@ ipcMain.handle('getAuthSession', async () => {
   const cookieString = await getPartitionCookies('persist:auth')
 
   const response = await fetch(`${DEV_PORTAL_URL}/api/auth/session`, {
-    method: 'POST',
+    method: 'GET',
     headers: {
       Cookie: cookieString
     }

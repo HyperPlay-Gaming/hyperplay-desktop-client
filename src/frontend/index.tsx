@@ -23,6 +23,7 @@ initOnlineMonitor()
 import ViewManager from './ViewManager'
 import SentryHandler from './SentryHandler'
 import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
@@ -105,6 +106,7 @@ i18next
     ]
   })
 
+const queryClient = new QueryClient()
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
 
@@ -118,16 +120,18 @@ const renderApp = async () => {
   root.render(
     <React.StrictMode>
       <StoreController />
-      <LDProvider>
-        <GlobalState>
-          <SentryHandler />
-          <I18nextProvider i18n={i18next}>
-            <Suspense fallback={<Loading />}>
-              <ViewManager />
-            </Suspense>
-          </I18nextProvider>
-        </GlobalState>
-      </LDProvider>
+      <QueryClientProvider client={queryClient}>
+        <LDProvider>
+          <GlobalState>
+            <SentryHandler />
+            <I18nextProvider i18n={i18next}>
+              <Suspense fallback={<Loading />}>
+                <ViewManager />
+              </Suspense>
+            </I18nextProvider>
+          </GlobalState>
+        </LDProvider>
+      </QueryClientProvider>
     </React.StrictMode>
   )
 }
