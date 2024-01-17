@@ -34,7 +34,7 @@ import {
   calculateEta
 } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
-import path, { join } from 'path'
+import path, { dirname, join } from 'path'
 import {
   callAbortController,
   createAbortController,
@@ -65,6 +65,7 @@ import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
+import { runWineCommandOnGame } from 'backend/main'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -220,22 +221,81 @@ export async function importGame(
   return { stderr: '', stdout: '' }
 }
 
-const installDistributables = async (gamePath: string) => {
-  const distFolder = path.join(gamePath, 'dist')
-  if (!existsSync(distFolder)) {
-    logWarning(
-      `Tried to install distributables from ${distFolder} but folder does not exist!`,
-      LogPrefix.HyperPlay
-    )
-    return
-  }
+type DistArgs = {
+  gamePath: string
+  appName: string
+}
 
-  const files = readdirSync(distFolder)
-  const executables = files.filter((file) => file.endsWith('.exe'))
+// for Windows games only
+const installDistributables = async ({ gamePath, appName }: DistArgs) => {
+  const possibleFolders = ['dist', 'redist', 'Dist', 'Redist']
+  let executables: string[] = []
+
+  for (const folder of possibleFolders) {
+    executables = executables.concat(
+      await findFolderAndExecutables(gamePath, folder)
+    )
+  }
 
   for await (const executable of executables) {
-    await spawnAsync(path.join(gamePath, 'dist', executable), [])
+    logInfo(`Running distributable ${executable}`, LogPrefix.HyperPlay)
+    if (!isWindows && !isNative(appName)) {
+      return runWineCommandOnGame('hyperplay', appName, {
+        commandParts: [executable, '/quiet'],
+        wait: false,
+        startFolder: dirname(executable)
+      })
+    }
+    return spawnAsync(executable, ['/quiet'])
   }
+  return
+}
+
+const findFolderAndExecutables = async (
+  basePath: string,
+  folderName: string
+): Promise<string[]> => {
+  let executables: string[] = []
+  if (!existsSync(basePath)) {
+    return executables
+  }
+
+  const entries = readdirSync(basePath, { withFileTypes: true })
+
+  for (const entry of entries) {
+    const entryPath = path.join(basePath, entry.name)
+    if (entry.isDirectory()) {
+      if (entry.name === folderName) {
+        executables = executables.concat(await findExecutables(entryPath))
+      } else {
+        executables = executables.concat(
+          await findFolderAndExecutables(entryPath, folderName)
+        )
+      }
+    }
+  }
+
+  return executables
+}
+
+const findExecutables = async (folderPath: string): Promise<string[]> => {
+  let executables: string[] = []
+  const files = readdirSync(folderPath, { withFileTypes: true })
+  logInfo(`Searching for executables in ${folderPath}`, LogPrefix.HyperPlay)
+
+  for (const file of files) {
+    if (file.isDirectory()) {
+      const subFolderExecutables = await findExecutables(
+        path.join(folderPath, file.name)
+      )
+      executables = executables.concat(subFolderExecutables)
+    } else if (file.name.endsWith('.exe')) {
+      logInfo(`Found executable ${file.name}`, LogPrefix.HyperPlay)
+      executables.push(path.join(folderPath, file.name))
+    }
+  }
+
+  return executables
 }
 
 function cleanUpDownload(appName: string, directory: string) {
@@ -681,7 +741,7 @@ export async function install(
       }
     }
 
-    return await extract(appName, {
+    await extract(appName, {
       appPlatform,
       gameInfo,
       destinationPath,
@@ -689,6 +749,12 @@ export async function install(
       installVersion,
       channelName
     })
+
+    await installDistributables({
+      gamePath: destinationPath,
+      appName
+    })
+    return { status: 'done' }
   } catch (error) {
     process.noAsar = false
 
@@ -877,10 +943,6 @@ export async function extract(
             folder: destinationPath,
             status: 'extracting'
           })
-
-          if (isWindows) {
-            await installDistributables(destinationPath)
-          }
 
           process.noAsar = false
 
