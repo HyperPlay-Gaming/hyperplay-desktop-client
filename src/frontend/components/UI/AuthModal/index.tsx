@@ -84,10 +84,12 @@ const AuthModal = () => {
       authState.activateQaMode()
     })
 
-    const oAuthCompletedCleanup = window.api.handleOAuthCompleted(() => {
-      authState.setSignedIn()
-      authState.closeSignInModal()
-    })
+    const oAuthCompletedCleanup = window.api.handleOAuthDeepLink(
+      (_e: Electron.IpcRendererEvent, code: string) => {
+        const otpUrl = `${DEV_PORTAL_URL}/otp/${code}`
+        webviewRef.current?.loadURL(otpUrl)
+      }
+    )
 
     return () => {
       qaModeListenerCleanup()
