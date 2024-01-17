@@ -228,6 +228,27 @@ type DistArgs = {
 
 // for Windows games only
 const installDistributables = async ({ gamePath, appName }: DistArgs) => {
+  if (!isWindows || isLinux || (isMac && isNative(appName))) {
+    return
+  }
+
+  const window = getMainWindow()
+
+  window?.webContents.send(`progressUpdate-${appName}`, {
+    appName,
+    runner: 'hyperplay',
+    folder: gamePath,
+    status: 'preparing',
+    progress: {
+      folder: gamePath,
+      percent: 0,
+      diskSpeed: 0,
+      downSpeed: 0,
+      bytes: 0,
+      eta: null
+    }
+  })
+
   const possibleFolders = ['dist', 'redist', 'Dist', 'Redist']
   let executables: string[] = []
 
