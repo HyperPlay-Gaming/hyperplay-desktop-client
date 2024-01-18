@@ -474,9 +474,9 @@ export default observer(function GamePage(): JSX.Element | null {
                   <div className="col2-item italic">
                     {supportsWeb3 ? t('box.yes') : t('box.no')}
                   </div>
-                  {showCloudSaveInfo && (
+                  {is_installed && !isBrowserGame && (
                     <>
-                      {isCloudSaveSupported ? (
+                      {showCloudSaveInfo && (
                         <>
                           <div className="hp-subtitle">
                             {t('info.syncsaves')}
@@ -487,21 +487,10 @@ export default observer(function GamePage(): JSX.Element | null {
                             }}
                             className="col2-item italic"
                           >
-                            {autoSyncSaves ? t('enabled') : t('disabled')}
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="hp-subtitle">
-                            {t('info.syncsaves')}:
-                          </div>
-                          <div
-                            style={{
-                              color: '#F45460'
-                            }}
-                            className="col2-item italic"
-                          >
-                            {t('cloud_save_unsupported', 'Unsupported')}
+                            {!isCloudSaveSupported &&
+                              t('cloud_save_unsupported', 'Unsupported')}
+                            {isCloudSaveSupported &&
+                              (autoSyncSaves ? t('enabled') : t('disabled'))}
                           </div>
                         </>
                       )}
