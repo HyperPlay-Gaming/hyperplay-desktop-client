@@ -44,7 +44,7 @@ export const AchievementStores = observer(() => {
     if (isLoading || !steamId) return
     setPlayerStoreId(steamId)
     getAchievementsStats()
-    // syncAchievements('STEAM') // this is failing at the moment
+    syncAchievements('STEAM')
   }, [isLoading, authSession, walletState.address])
 
   useEffect(() => {
