@@ -17,7 +17,6 @@ import AchievementState from 'frontend/state/AchievementState'
 import walletState from 'frontend/state/WalletState'
 import { useTranslation } from 'react-i18next'
 import useAuthSession from '../../../hooks/useAuthSession'
-import { DEV_PORTAL_URL } from '../../../../common/constants'
 
 export const AchievementStores = observer(() => {
   const { t } = useTranslation()
@@ -76,9 +75,7 @@ export const AchievementStores = observer(() => {
             }}
             open={true}
             onClose={() => setShowLinkDialog(true)}
-            onConnectTap={() =>
-              window.api.openExternalUrl(`${DEV_PORTAL_URL}/oauth/steam`)
-            }
+            onConnectTap={() => window.api.signInWithProvider('steam')}
           />
         )}
       </ModalAnimation>
