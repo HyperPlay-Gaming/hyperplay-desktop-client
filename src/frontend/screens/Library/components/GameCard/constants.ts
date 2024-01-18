@@ -33,6 +33,7 @@ export function getCardStatus(
   const isPaused = status === 'paused'
   const isPreparing = status === 'preparing'
   const isExtracting = status === 'extracting'
+  const isInstallingDistributables = status === 'distributables'
 
   const haveStatus =
     isMoving ||
@@ -47,7 +48,8 @@ export function getCardStatus(
     syncingSaves ||
     (isInstalled && layout !== 'grid') ||
     isPaused ||
-    isPreparing
+    isPreparing ||
+    isInstallingDistributables
 
   return {
     isInstalling,
@@ -60,6 +62,7 @@ export function getCardStatus(
     isPaused,
     isPreparing,
     isExtracting,
-    haveStatus
+    haveStatus,
+    isInstallingDistributables
   }
 }

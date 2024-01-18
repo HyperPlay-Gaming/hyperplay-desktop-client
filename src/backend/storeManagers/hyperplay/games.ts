@@ -228,21 +228,11 @@ type DistArgs = {
 
 // for Windows games only
 const installDistributables = async ({ gamePath, appName }: DistArgs) => {
-  const window = getMainWindow()
-
-  window?.webContents.send(`progressUpdate-${appName}`, {
+  sendFrontendMessage('gameStatusUpdate', {
     appName,
+    status: 'distributables',
     runner: 'hyperplay',
-    folder: gamePath,
-    status: 'preparing',
-    progress: {
-      folder: gamePath,
-      percent: 0,
-      diskSpeed: 0,
-      downSpeed: 0,
-      bytes: 0,
-      eta: null
-    }
+    folder: gamePath
   })
 
   const possibleFolders = ['dist', 'redist', 'Dist', 'Redist']
@@ -769,7 +759,6 @@ export async function install(
 
     if (platformToInstall === 'Windows') {
       logInfo(`Looking for  distributables for ${appName}`, LogPrefix.HyperPlay)
-
       await installDistributables({
         gamePath: destinationPath,
         appName

@@ -129,6 +129,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const isSyncing = status === 'syncing-saves'
   const isPaused = DMQueueState.isPaused(appName)
   const isExtracting = status === 'extracting'
+  const isInstallingDistributable = status === 'distributables'
   const isPreparing = status === 'preparing'
   const notAvailable = !gameAvailable && gameInfo.is_installed
   const notInstallable =
@@ -797,6 +798,10 @@ export default observer(function GamePage(): JSX.Element | null {
         return `${t('status.reparing')}: ${percent} [${bytes}]`
       }
       return `${t('status.updating')} ${currentProgress}`
+    }
+
+    if (isInstallingDistributable) {
+      return `${t('status.installing.distributable')}`
     }
 
     if (isExtracting) {

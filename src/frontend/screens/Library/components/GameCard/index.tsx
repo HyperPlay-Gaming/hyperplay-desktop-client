@@ -103,7 +103,9 @@ const GameCard = ({
     notAvailable,
     isUpdating,
     isPaused,
-    isExtracting
+    isExtracting,
+    isPreparing,
+    isInstallingDistributables
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {
@@ -115,6 +117,12 @@ const GameCard = ({
       hasUpdate && !isUpdating && !isQueued && !notAvailable
     if (notSupportedGame) {
       return 'NOT_SUPPORTED'
+    }
+    if (isInstallingDistributables) {
+      return 'INSTALLING_DISTRIBUTABLES'
+    }
+    if (isPreparing) {
+      return 'PREPARING'
     }
     if (isUninstalling) {
       return 'UNINSTALLING'
