@@ -33,7 +33,10 @@ export default observer(function SidebarLinks() {
       (storeAuthState.gog.username && !libraryState.gogLibrary.length) ||
       (storeAuthState.amazon.user_id && !libraryState.amazonLibrary.length)
     if (shouldRefresh) {
-      return libraryState.refreshLibrary({ runInBackground: true })
+      return libraryState.refreshLibrary({
+        runInBackground: true,
+        checkForUpdates: false
+      })
     }
     return
   }

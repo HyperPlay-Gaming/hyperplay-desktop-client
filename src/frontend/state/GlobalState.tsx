@@ -279,6 +279,7 @@ class GlobalState extends PureComponent<Props> {
     libraryState.category = 'all'
     libraryState.refreshLibrary({
       runInBackground: false,
+      checkForUpdates: false,
       library: runner
     })
   }
@@ -457,7 +458,6 @@ class GlobalState extends PureComponent<Props> {
         )
         // This avoids calling legendary again before the previous process is killed when canceling
         libraryState.refreshLibrary({
-          checkForUpdates: true,
           runInBackground: true,
           library: runner
         })
@@ -469,7 +469,11 @@ class GlobalState extends PureComponent<Props> {
         })
       }
 
-      libraryState.refreshLibrary({ runInBackground: true, library: runner })
+      libraryState.refreshLibrary({
+        runInBackground: true,
+        library: runner,
+        checkForUpdates: false
+      })
       this.setState({ libraryStatus: newLibraryStatus })
     }
   }
@@ -540,7 +544,6 @@ class GlobalState extends PureComponent<Props> {
     window.api.handleRefreshLibrary(
       async (e: Electron.IpcRendererEvent, runner: Runner) => {
         libraryState.refreshLibrary({
-          checkForUpdates: true,
           runInBackground: true,
           library: runner
         })
@@ -592,7 +595,6 @@ class GlobalState extends PureComponent<Props> {
 
     if (legendaryUser || gogUser || amazonUser) {
       libraryState.refreshLibrary({
-        checkForUpdates: true,
         runInBackground: Boolean(libraryState.epicLibrary.length)
       })
     }
