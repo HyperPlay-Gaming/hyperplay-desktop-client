@@ -923,7 +923,7 @@ export async function downloadDefaultWine() {
         version.type === 'Wine-GE' && version.version.includes('Wine-GE-Proton')
       )
     } else if (isMac) {
-      return version.type === 'Wine-Crossover'
+      return version.type === 'Game-Porting-Toolkit'
     }
     return false
   })[0]
