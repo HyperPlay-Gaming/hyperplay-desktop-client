@@ -650,7 +650,6 @@ export async function install(
     }
 
     if (selectedChannel.license_config.tokens) {
-      console.log('I got here to token gating!')
       if (!siweValues?.address) throw 'No address found'
       const gatedPlatforms = await getTokenGatedPlatforms(
         selectedChannel.channel_id,

@@ -97,9 +97,6 @@ async function install({
     storage.removeItem(appName)
   }
 
-  console.log('hello')
-  console.log({ siweValues })
-
   return window.api.install({
     appName,
     path: installPath,
