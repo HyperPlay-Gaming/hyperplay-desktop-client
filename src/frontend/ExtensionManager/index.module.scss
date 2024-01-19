@@ -11,7 +11,7 @@
   top: var(--top-navbar-height);
   background-color: transparent;
   border: none;
-  > div {
+  > div.mmWindowContainer {
     top: var(--top-navbar-height);
     position: fixed;
     right: 0px;

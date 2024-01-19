@@ -57,7 +57,10 @@ const ExtensionManager = function () {
     >
       <AnimatePresence>
         {extensionState.isPopupOpen ? (
-          <motion.div {...animation}>
+          <motion.div
+            {...animation}
+            className={ExtensionManagerStyles.mmWindowContainer}
+          >
             <webview
               nodeintegrationinsubframes="true"
               webpreferences="contextIsolation=true, nodeIntegration=true"
@@ -68,7 +71,10 @@ const ExtensionManager = function () {
           </motion.div>
         ) : null}
         {extensionState.isNotificationOpen ? (
-          <motion.div {...animation}>
+          <motion.div
+            {...animation}
+            className={ExtensionManagerStyles.mmWindowContainer}
+          >
             <webview
               nodeintegrationinsubframes="true"
               webpreferences="contextIsolation=true, nodeIntegration=true"
