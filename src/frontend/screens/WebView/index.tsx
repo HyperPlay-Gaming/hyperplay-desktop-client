@@ -292,6 +292,13 @@ function WebView() {
     }
   }, [webviewRef])
 
+  useEffect(() => {
+    const isOffline = connectivity.status !== 'online'
+    if (isOffline) {
+      navigate('/library')
+    }
+  }, [connectivity.status])
+
   const onLoginWarningClosed = () => {
     setShowLoginWarningFor(null)
   }
@@ -305,22 +312,6 @@ function WebView() {
   if (urlIsHpUrl(startUrl)) partitionForWebview = 'persist:hyperplaystore'
   else if (shouldInjectProvider(startUrl))
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
-
-  if (connectivity.status !== 'online') {
-    return (
-      <span className="WebView offline">
-        <span className="WebView__offline">
-          {t(
-            'webview.offline',
-            'App is Offline, could not load the Games Store'
-          )}
-        </span>
-        <a onClick={() => navigate('/library')} className="LibraryLink">
-          {t('webview.goToLibrary', 'Go to the Library')}
-        </a>
-      </span>
-    )
-  }
 
   return (
     <div className="WebView">

@@ -10,11 +10,13 @@ import libraryState from 'frontend/state/libraryState'
 import { observer } from 'mobx-react-lite'
 import storeAuthState from 'frontend/state/storeAuthState'
 import AchievementState from 'frontend/state/AchievementState'
+import { useTranslation } from 'react-i18next'
 
 export default observer(function SidebarLinks() {
   const location = useLocation() as { pathname: string }
+  const { t } = useTranslation()
 
-  const { activeController, handleExternalLinkDialog } =
+  const { activeController, handleExternalLinkDialog, connectivity } =
     useContext(ContextProvider)
 
   const settingsPath = '/settings/app/default/general'
@@ -50,6 +52,7 @@ export default observer(function SidebarLinks() {
   }
 
   const sidebarSvgUnselectedFill = 'var(--color-neutral-400)'
+  const isOffline = connectivity.status !== 'online'
 
   return (
     <>
@@ -58,10 +61,18 @@ export default observer(function SidebarLinks() {
           <NavLink
             className={({ isActive }) =>
               classNames('Sidebar__item', {
-                active: isActive || location.pathname.includes('store')
+                active:
+                  (isActive && !isOffline) ||
+                  location.pathname.includes('store'),
+                disabled: isOffline
               })
             }
-            to="/hyperplaystore"
+            to={isOffline ? '/library' : '/hyperplaystore'}
+            title={
+              isOffline
+                ? t('Please connect to the internet to access the stores')
+                : ''
+            }
           >
             <Images.Home fill={sidebarSvgUnselectedFill} />
           </NavLink>

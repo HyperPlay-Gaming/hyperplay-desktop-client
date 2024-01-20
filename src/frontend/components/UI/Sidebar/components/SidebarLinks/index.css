@@ -50,3 +50,9 @@
 .hyperplaySidebarLogo {
   width: var(--hp-logo-sidebar-width);
 }
+
+.Sidebar__item.active.disabled,
+.Sidebar__item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
