@@ -202,12 +202,12 @@ export const handleQaModeActivated = (
   }
 }
 
-export const handleOAuthCompleted = (
-  onMessage: (e: Electron.IpcRendererEvent) => void
+export const handleOAuthDeepLink = (
+  cb: WrapRendererCallback<(otp: string) => void>
 ): (() => void) => {
-  ipcRenderer.on('oauthCompleted', onMessage)
+  ipcRenderer.on('oauthDeeplink', cb)
   return () => {
-    ipcRenderer.removeListener('oauthCompleted', onMessage)
+    ipcRenderer.removeListener('oauthDeeplink', cb)
   }
 }
 
