@@ -111,8 +111,8 @@ class LibraryState {
     })
   }
 
-  async refresh(library?: Runner | 'all', checkUpdates = false): Promise<void> {
-    if (checkUpdates && library) {
+  async refresh(library?: Runner | 'all', checkUpdates = true): Promise<void> {
+    if (checkUpdates) {
       try {
         this.gameUpdates = await window.api.checkGameUpdates()
       } catch (error) {
@@ -160,7 +160,7 @@ class LibraryState {
   }
 
   refreshSelectedLibrary = async ({
-    checkForUpdates,
+    checkForUpdates = true,
     runInBackground = true
   }: RefreshOptions): Promise<void> => {
     return this.refreshLibrary({
@@ -171,7 +171,7 @@ class LibraryState {
   }
 
   refreshLibrary = async ({
-    checkForUpdates,
+    checkForUpdates = true,
     runInBackground = true,
     library = undefined
   }: RefreshOptions): Promise<void> => {
