@@ -35,21 +35,3 @@
   align-self: center;
   padding: var(--space-xl);
 }
-
-.WebView.offline {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  font-size: var(--text-2xl);
-
-  .LibraryLink {
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-}
