@@ -5,7 +5,10 @@ import { LogPrefix } from '../logger/logger'
 import { AuthSession } from '../../common/types/auth'
 
 ipcMain.handle('getAuthSession', async () => {
-  const cookieString = await getPartitionCookies('persist:auth')
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
 
   const response = await fetch(`${DEV_PORTAL_URL}/api/auth/session`, {
     method: 'GET',

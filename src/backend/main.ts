@@ -240,7 +240,10 @@ ipcMain.on('focusMainWindow', () => {
 
 async function completeHyperPlayQuest() {
   logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
-  const cookieString = await getPartitionCookies('persist:auth')
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
 
   const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
     method: 'POST',
