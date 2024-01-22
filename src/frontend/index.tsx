@@ -3,7 +3,6 @@ import HttpApi from 'i18next-http-backend'
 import React, { Suspense } from 'react'
 import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
-import { HyperPlayDesignProvider } from '@hyperplay/ui'
 import { initGamepad } from './helpers/gamepad'
 
 // keep @hyperplay/ui/index.css before index.scss until after frontend design rework
@@ -19,11 +18,12 @@ import { defaultThemes } from './components/UI/ThemeSelector'
 import '@fontsource/rajdhani'
 import '@fontsource/barlow'
 import StoreController from './store'
-
-initOnlineMonitor()
 import ViewManager from './ViewManager'
 import SentryHandler from './SentryHandler'
 import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk'
+import { MantineProvider } from '@mantine/core'
+
+initOnlineMonitor()
 
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
@@ -120,16 +120,16 @@ const renderApp = async () => {
     <React.StrictMode>
       <StoreController />
       <LDProvider>
-        <GlobalState>
-          <HyperPlayDesignProvider>
+        <MantineProvider>
+          <GlobalState>
             <SentryHandler />
             <I18nextProvider i18n={i18next}>
               <Suspense fallback={<Loading />}>
                 <ViewManager />
               </Suspense>
             </I18nextProvider>
-          </HyperPlayDesignProvider>
-        </GlobalState>
+          </GlobalState>
+        </MantineProvider>
       </LDProvider>
     </React.StrictMode>
   )
