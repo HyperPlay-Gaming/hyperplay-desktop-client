@@ -120,7 +120,6 @@ class LibraryState {
       }
     }
 
-
     this.hyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
 
     this.epicLibrary = libraryStore.get('library', [])
