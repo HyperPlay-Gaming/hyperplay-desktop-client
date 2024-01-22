@@ -17,13 +17,7 @@ import {
   ExtractZipService,
   ExtractZipProgressResponse
 } from 'backend/services/ExtractZipService'
-import {
-  existsSync,
-  mkdirSync,
-  rmSync,
-  readdirSync,
-  writeFileSync
-} from 'graceful-fs'
+import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
 import {
   isMac,
   isWindows,
@@ -71,6 +65,7 @@ import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
+import Store from 'electron-store'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1221,12 +1216,10 @@ function writeManifestFile(installedInfo: Partial<InstalledInfo>) {
   if (!installedInfo.install_path) {
     return
   }
+  const store = new Store({
+    cwd: installedInfo.install_path,
+    name: installedInfo.appName
+  })
 
-  const manifestPath = path.join(
-    path.dirname(installedInfo.install_path!),
-    'manifest.json'
-  )
-  const manifest = JSON.stringify(installedInfo, null, 2)
-
-  return writeFileSync(manifestPath, manifest, { encoding: 'utf8', flag: 'w' })
+  return store.set('manifest', installedInfo)
 }
