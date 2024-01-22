@@ -6,17 +6,18 @@ import { useTranslation } from 'react-i18next'
 
 import {
   Dropdown,
-  Tabs,
   Toggle,
   DropdownItemType,
   GenericDropdown,
-  Menu
+  Menu,
+  getTabsClassNames
 } from '@hyperplay/ui'
 import { Category } from 'frontend/types'
 import { observer } from 'mobx-react-lite'
 import libraryState from '../../../../state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import { Tabs } from '@mantine/core'
 
 export interface LibraryTopBarInterface {
   filters: DropdownItemType[]
@@ -47,10 +48,18 @@ export const LibraryTopBar = observer(
 
     return (
       <Tabs
-        onTabChange={(val: Category) => (libraryState.category = val)}
+        onChange={(val) => {
+          if (val !== null) {
+            libraryState.category = val as Category
+          }
+        }}
         defaultValue={category}
+        classNames={getTabsClassNames(
+          { list: styles.tabsList },
+          { list: 'outline' }
+        )}
       >
-        <Tabs.List className={styles.tabsList} type="outline">
+        <Tabs.List>
           <Tabs.Tab value="all">
             <div className="menu">{t('ALL', 'ALL')}</div>
           </Tabs.Tab>
