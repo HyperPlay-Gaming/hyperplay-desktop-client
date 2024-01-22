@@ -321,8 +321,11 @@ export default observer(function GamePage(): JSX.Element | null {
     const isLinuxNative = isLinux.includes(installPlatform ?? '')
     const isBrowserGame = gameInfo.browserUrl
     const isNative = isWin || isMacNative || isLinuxNative || isBrowserGame
+    const isHyperPlayGame = runner === 'hyperplay'
 
-    const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
+    const showCloudSaveInfo =
+      is_installed && !isBrowserGame && !isHyperPlayGame && !isSideloaded
+    const isCloudSaveSupported = cloud_save_enabled && !isLinuxNative
     const supportsWeb3 = gameInfo.web3?.supported
 
     /*
@@ -473,7 +476,7 @@ export default observer(function GamePage(): JSX.Element | null {
                   </div>
                   {is_installed && !isBrowserGame && (
                     <>
-                      {showCloudSaveInfo ? (
+                      {showCloudSaveInfo && (
                         <>
                           <div className="hp-subtitle">
                             {t('info.syncsaves')}
@@ -484,21 +487,10 @@ export default observer(function GamePage(): JSX.Element | null {
                             }}
                             className="col2-item italic"
                           >
-                            {autoSyncSaves ? t('enabled') : t('disabled')}
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="hp-subtitle">
-                            {t('info.syncsaves')}:
-                          </div>
-                          <div
-                            style={{
-                              color: '#F45460'
-                            }}
-                            className="col2-item italic"
-                          >
-                            {t('cloud_save_unsupported', 'Unsupported')}
+                            {!isCloudSaveSupported &&
+                              t('cloud_save_unsupported', 'Unsupported')}
+                            {isCloudSaveSupported &&
+                              (autoSyncSaves ? t('enabled') : t('disabled'))}
                           </div>
                         </>
                       )}
