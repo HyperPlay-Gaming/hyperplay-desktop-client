@@ -22,7 +22,7 @@ export const uninstall = async (
     game_name: appName,
     store_name: runner
   })
-  if (runner === 'sideload' || runner === 'hyperplay') {
+  if (runner === 'sideload') {
     return ipcRenderer.invoke('removeApp', {
       appName,
       shouldRemovePrefix,

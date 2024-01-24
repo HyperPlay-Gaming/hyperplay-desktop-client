@@ -266,7 +266,7 @@ export default observer(function GamePage(): JSX.Element | null {
       }
     }
     updateConfig()
-  }, [status, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
+  }, [status, libraryState.hyperPlayLibrary, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
 
   function handleModal() {
     setShowModal({ game: appName, show: true })
