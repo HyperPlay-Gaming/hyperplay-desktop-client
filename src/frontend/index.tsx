@@ -1,3 +1,4 @@
+import { HyperPlayDesignProvider } from '@hyperplay/ui'
 import { I18nextProvider, initReactI18next } from 'react-i18next'
 import HttpApi from 'i18next-http-backend'
 import React, { Suspense } from 'react'
@@ -21,7 +22,6 @@ import StoreController from './store'
 import ViewManager from './ViewManager'
 import SentryHandler from './SentryHandler'
 import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk'
-import { MantineProvider } from '@mantine/core'
 
 initOnlineMonitor()
 
@@ -120,7 +120,7 @@ const renderApp = async () => {
     <React.StrictMode>
       <StoreController />
       <LDProvider>
-        <MantineProvider>
+        <HyperPlayDesignProvider>
           <GlobalState>
             <SentryHandler />
             <I18nextProvider i18n={i18next}>
@@ -129,7 +129,7 @@ const renderApp = async () => {
               </Suspense>
             </I18nextProvider>
           </GlobalState>
-        </MantineProvider>
+        </HyperPlayDesignProvider>
       </LDProvider>
     </React.StrictMode>
   )
