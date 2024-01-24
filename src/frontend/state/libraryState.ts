@@ -120,6 +120,8 @@ class LibraryState {
       }
     }
 
+    this.hyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
+
     this.epicLibrary = libraryStore.get('library', [])
     if (
       storeAuthState.epic.username &&
@@ -152,7 +154,6 @@ class LibraryState {
 
     this.refreshSideloadedLibrary()
 
-    this.hyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
     this.hiddenGames.list = configStore.get('games.hidden', [])
 
     this.refreshing = false
