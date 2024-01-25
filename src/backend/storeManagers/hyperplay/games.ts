@@ -9,7 +9,6 @@ import {
   LicenseConfigValidateResult,
   ChannelReleaseMeta
 } from '../../../common/types'
-import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
@@ -17,13 +16,18 @@ import {
   ExtractZipService,
   ExtractZipProgressResponse
 } from 'backend/services/ExtractZipService'
-import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
+import {
+  existsSync,
+  mkdirSync,
+  rmSync,
+  readdirSync,
+  readFileSync
+} from 'graceful-fs'
 import {
   isMac,
   isWindows,
   isLinux,
   configFolder,
-  mainReleaseChannelName,
   getValidateLicenseKeysApiUrl
 } from 'backend/constants'
 import {
@@ -41,7 +45,6 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import {
-  getHyperPlayStoreRelease,
   handleArchAndPlatform,
   handlePlatformReversed,
   sanitizeVersion
@@ -57,7 +60,6 @@ import {
   getGameProcessName,
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
-import { isOnline } from 'backend/online_monitor'
 import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
@@ -157,6 +159,26 @@ export async function pause(appName: string): Promise<void> {
   dl.DownloadItem.pause()
 }
 
+// check for valid json file inside the folder before importing
+// if none was found, check the first folder inside the folder
+// return the path to the folder with a valid json file
+// if none was found return empty string
+// this is necessary because we do not know which folder the user has selected, the main folder or the game folder
+const isValidGameFolder = (appName: string, folderPath: string): string => {
+  const files = readdirSync(folderPath)
+  if (files.includes(`${appName}.json`)) {
+    return folderPath
+  }
+  if (isValidGameFolder(appName, path.join(folderPath, files[0]))) {
+    return path.join(folderPath, files[0])
+  }
+  return ''
+}
+
+type HyperPlayManifest = {
+  manifest: InstalledInfo
+}
+
 /**
  *
  * @param appName
@@ -166,13 +188,24 @@ export async function pause(appName: string): Promise<void> {
  */
 export async function importGame(
   appName: string,
-  pathName: string,
-  platform: InstallPlatform
+  pathName: string
 ): Promise<ExecResult> {
+  pathName = isValidGameFolder(appName, pathName)
+  if (!pathName) {
+    logError(
+      'Not a valid game folder, import not possible',
+      LogPrefix.HyperPlay
+    )
+    return { stderr: '', stdout: '' }
+  }
+
+  // read the json file and get the game info
+  const installInfo: HyperPlayManifest = JSON.parse(
+    readFileSync(path.join(pathName, `${appName}.json`), 'utf8')
+  )
+
   const currentLibrary = hpLibraryStore.get('games', [])
 
-  // TODO refactor this to constant time check with a set
-  // not important for alpha release
   const gameInLibrary = currentLibrary.find((val) => {
     return val.app_name === appName
   })
@@ -182,36 +215,15 @@ export async function importGame(
     return { stderr: '', stdout: '' }
   }
 
-  const gameInfo = getGameInfo(appName)
-  //necessary so that injectProcess can find the process name
-  if (
-    gameInfo.channels &&
-    gameInfo.channels[mainReleaseChannelName].release_meta
-  )
-    platform = handleArchAndPlatform(
-      platform,
-      gameInfo.channels[mainReleaseChannelName].release_meta
-    )
-
-  let hpImportVersion = '-1'
-  /**
-   * TODO: Figure out a way to get release name/version of game that is already installed
-   * Currently this just sets version to the latest store release and relies on the game dev
-   * to handle if their game is launched with an old version
-   **/
-  if (isOnline()) {
-    const currentRelease = await getHyperPlayStoreRelease(appName)
-    hpImportVersion =
-      currentRelease.channels[mainReleaseChannelName]?.release_meta?.name
-  }
-
+  const mainExe = installInfo.manifest.executable.split('/').at(-1) ?? ''
   gameInLibrary.install = {
-    install_path: path.dirname(pathName),
-    executable: pathName,
-    install_size: '0 GiB',
+    install_path: pathName,
+    executable: path.join(pathName, mainExe),
+    install_size: installInfo.manifest.install_size ?? '0',
     is_dlc: false,
-    version: hpImportVersion,
-    platform: platform
+    version: installInfo.manifest.version,
+    platform: installInfo.manifest.platform,
+    channelName: installInfo.manifest.channelName
   }
 
   gameInLibrary.is_installed = true
