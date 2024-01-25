@@ -26,6 +26,7 @@ import classNames from 'classnames'
 import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
 import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
+import authState from 'frontend/state/authState'
 
 interface Card {
   buttonClick: () => void
@@ -112,7 +113,7 @@ const GameCard = ({
 
   const getState = (): GameCardState => {
     const showUpdateButton =
-      hasUpdate && !isUpdating && !isQueued && !notAvailable
+      hasUpdate && !isUpdating && !isQueued && !notAvailable && !authState.isQaModeActive
     if (notSupportedGame) {
       return 'NOT_SUPPORTED'
     }
@@ -199,7 +200,7 @@ const GameCard = ({
       // update
       label: t('button.update', 'Update'),
       onClick: handleClickStopBubbling(async () => updateGame(gameInfo)),
-      show: hasUpdate && !isUpdating && !isQueued
+      show: hasUpdate && !isUpdating && !isQueued && !notAvailable && !authState.isQaModeActive
     },
     {
       // install

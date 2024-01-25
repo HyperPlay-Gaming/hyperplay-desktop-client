@@ -65,6 +65,7 @@ import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
+import authState from 'frontend/state/authState'
 
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -705,7 +706,7 @@ export default observer(function GamePage(): JSX.Element | null {
   }
 
   function getPlayLabel(): React.ReactNode {
-    if (hasUpdate) {
+    if (hasUpdate && !authState.isQaModeActive) {
       return t('label.playing.update', 'Update')
     }
 
@@ -860,7 +861,9 @@ export default observer(function GamePage(): JSX.Element | null {
   }
 
   function handlePlay() {
-    if (hasUpdate) {
+    const isQAMode = authState.isQaModeActive
+
+    if (hasUpdate && !isQAMode) {
       return async () => {
         await updateGame(gameInfo)
       }
