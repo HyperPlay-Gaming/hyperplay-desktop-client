@@ -693,7 +693,7 @@ export default observer(function GamePage(): JSX.Element | null {
     if (notAvailable) {
       return 'tertiary'
     }
-    if (isQueued || hasUpdate) {
+    if (isQueued || (hasUpdate && !authState.isQaModeActive)) {
       return 'secondary'
     }
     if (isUpdating) {
