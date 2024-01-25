@@ -113,7 +113,11 @@ const GameCard = ({
 
   const getState = (): GameCardState => {
     const showUpdateButton =
-      hasUpdate && !isUpdating && !isQueued && !notAvailable && !authState.isQaModeActive
+      hasUpdate &&
+      !isUpdating &&
+      !isQueued &&
+      !notAvailable &&
+      !authState.isQaModeActive
     if (notSupportedGame) {
       return 'NOT_SUPPORTED'
     }
@@ -200,7 +204,12 @@ const GameCard = ({
       // update
       label: t('button.update', 'Update'),
       onClick: handleClickStopBubbling(async () => updateGame(gameInfo)),
-      show: hasUpdate && !isUpdating && !isQueued && !notAvailable && !authState.isQaModeActive
+      show:
+        hasUpdate &&
+        !isUpdating &&
+        !isQueued &&
+        !notAvailable &&
+        !authState.isQaModeActive
     },
     {
       // install
