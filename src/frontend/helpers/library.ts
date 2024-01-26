@@ -14,6 +14,7 @@ import { SiweMessage } from 'siwe'
 import { valistBaseApiUrlv1 } from 'common/constants'
 import { ethers } from 'ethers'
 import axios from 'axios'
+import authState from 'frontend/state/authState'
 
 const storage: Storage = window.localStorage
 
@@ -132,7 +133,7 @@ const launch = async ({
   hasUpdate,
   showDialogModal
 }: LaunchOptions): Promise<{ status: 'done' | 'error' | 'abort' }> => {
-  if (hasUpdate) {
+  if (hasUpdate && !authState.isQaModeActive) {
     const { ignoreGameUpdates } = await window.api.requestGameSettings(appName)
 
     if (ignoreGameUpdates && runner !== 'hyperplay') {
