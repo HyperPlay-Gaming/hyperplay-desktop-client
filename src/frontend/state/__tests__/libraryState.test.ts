@@ -5,7 +5,8 @@ Object.defineProperty(window, 'api', {
   value: {
     install: jest.fn(),
     storeNew: jest.fn(),
-    storeGet: jest.fn()
+    storeGet: jest.fn(),
+    storeSet: jest.fn()
   }
 })
 
