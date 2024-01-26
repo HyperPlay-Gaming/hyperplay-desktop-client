@@ -246,8 +246,10 @@ export async function getSigner(): Promise<ethers.Signer> {
 export async function createSiweMessage(
   signerAddress: string
 ): Promise<SiweMessage> {
-  const domain = window.location.host
-  const origin = window.location.origin
+  const domain = window.location.host ? window.location.host : 'hyperplay'
+  const origin = window.location.origin.startsWith('file://')
+    ? 'file://hyperplay'
+    : window.location.origin
 
   const statementRes = await axios.get(
     valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
