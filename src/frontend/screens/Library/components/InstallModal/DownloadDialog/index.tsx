@@ -43,7 +43,6 @@ import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import { signSiweMessage } from 'frontend/helpers/library'
-import { Anchor } from '@mantine/core'
 import styles from './index.module.scss'
 
 interface Props {
@@ -125,6 +124,7 @@ export default function DownloadDialog({
   requiresToken,
   marketplaceUrl
 }: Props) {
+  const [showAlert, setShowAlert] = useState(true)
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
   ) as InstallProgress
@@ -439,7 +439,7 @@ export default function DownloadDialog({
       <DialogContent>
         {requiresToken ? (
           <div style={{ maxWidth: 500, overflow: 'hidden' }}>
-            <Anchor href={marketplaceUrl}>
+            {showAlert ? (
               <AlertCard
                 title=""
                 message={
@@ -447,8 +447,17 @@ export default function DownloadDialog({
                 }
                 actionText={'Buy NFT'}
                 variant={'warning'}
+                onClose={() => setShowAlert(false)}
+                onActionClick={() =>
+                  marketplaceUrl
+                    ? window.api.openExternalUrl(marketplaceUrl)
+                    : console.log(
+                        'marketplace url is invalid: ',
+                        marketplaceUrl
+                      )
+                }
               />
-            </Anchor>
+            ) : null}
           </div>
         ) : null}
         {showInstallandDownloadSizes ? (

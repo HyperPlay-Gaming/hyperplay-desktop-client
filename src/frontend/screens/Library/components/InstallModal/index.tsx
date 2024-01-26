@@ -72,7 +72,22 @@ export default React.memo(function InstallModal({
   const selectedChannel = gameInfo?.channels?.[channelNameToInstall]
 
   const channelPlatforms = selectedChannel?.release_meta.platforms ?? []
-  const listingMarketplaceUrl = ''
+  let listingMarketplaceUrl = ''
+
+  /*
+   * This just returns the first token's marketplace url
+   * TODO: return the licensing config info from /listings endpoint,
+   * so we can link to the gating token's marketplace URL
+   */
+  if (
+    gameInfo &&
+    gameInfo.networks &&
+    gameInfo.networks.length > 0 &&
+    gameInfo.networks[0].marketplace_urls &&
+    gameInfo.networks[0].marketplace_urls[0]
+  ) {
+    listingMarketplaceUrl = gameInfo.networks[0].marketplace_urls[0]
+  }
   const hpPlatforms = Object.keys(channelPlatforms) as AppPlatforms[]
   const isHpGame = runner === 'hyperplay'
 

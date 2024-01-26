@@ -9,7 +9,7 @@ import {
   SupportedPlatform as AppPlatforms,
   PlatformsMetaInterface
 } from '@valist/sdk/dist/typesShared'
-import { Channel } from '@valist/sdk/dist/typesApi'
+import { Channel, ContractMetadata } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { NileInstallPlatform } from './types/nile'
 import { DropdownItemType } from '@hyperplay/ui'
@@ -191,6 +191,7 @@ export interface GameInfo {
   //key is channel_id, value is last access code used
   accessCodesCache?: Record<string, string>
   siweValues?: SiweValues
+  networks?: ContractMetadata[]
 }
 
 export interface GameSettings {

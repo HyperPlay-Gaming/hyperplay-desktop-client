@@ -167,8 +167,8 @@ export function refreshGameInfoFromHpRelease(
       },
       reqs: [
         {
-          minimum: JSON.stringify(data.project_meta.systemRequirements),
-          recommended: JSON.stringify(data.project_meta.systemRequirements),
+          minimum: JSON.stringify(data.project_meta.system_requirements),
+          recommended: JSON.stringify(data.project_meta.system_requirements),
           title: data.project_meta.name
             ? data.project_meta.name
             : data.project_name
@@ -183,7 +183,7 @@ export function refreshGameInfoFromHpRelease(
     is_windows_native: hasWindowsNativeBuild,
     channels: channelsMap,
     store_url: `https://store.hyperplay.xyz/game/${data.project_name}`,
-    wineSupport: data.project_meta.wineSupport,
+    wineSupport: data.project_meta.wine_support,
     description: newDescription,
     v: '1',
     project_name: data.project_name,
@@ -193,7 +193,8 @@ export function refreshGameInfoFromHpRelease(
     cloud_save_enabled: false,
     is_mac_native: hasMacNativeBuild,
     is_linux_native: hasLinuxNativeBuild,
-    account_name: data.account_name
+    account_name: data.account_name,
+    networks: data.project_meta.networks
   }
 }
 
