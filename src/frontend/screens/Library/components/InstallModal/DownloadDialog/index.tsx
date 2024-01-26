@@ -38,10 +38,11 @@ import React, {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { configStore } from 'frontend/helpers/electronStores'
-import { Button } from '@hyperplay/ui'
+import { AlertCard, Button } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
+import { signSiweMessage } from 'frontend/helpers/library'
 import styles from './index.module.scss'
 
 interface Props {
@@ -56,8 +57,11 @@ interface Props {
   children: React.ReactNode
   gameInfo: GameInfo
   channelNameToInstall: string
+  channelId?: number
   accessCode: string
+  marketplaceUrl?: string
   enableCTAButton: boolean
+  requiresToken: boolean
 }
 
 type DiskSpaceInfo = {
@@ -116,8 +120,11 @@ export default function DownloadDialog({
   crossoverBottle,
   channelNameToInstall,
   accessCode,
-  enableCTAButton
+  enableCTAButton,
+  requiresToken,
+  marketplaceUrl
 }: Props) {
+  const [showAlert, setShowAlert] = useState(true)
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
   ) as InstallProgress
@@ -199,8 +206,11 @@ export default function DownloadDialog({
   }
 
   async function handleInstall(path?: string) {
+    let siweValues
+    if (requiresToken) {
+      siweValues = await signSiweMessage()
+    }
     backdropClick()
-
     // Write Default game config with prefix on linux
     if (!isWin) {
       const gameSettings = await window.api.requestGameSettings(appName)
@@ -231,7 +241,8 @@ export default function DownloadDialog({
       platformToInstall,
       showDialogModal: () => backdropClick(),
       channelName: channelNameToInstall,
-      accessCode
+      accessCode,
+      siweValues
     })
   }
 
@@ -379,6 +390,10 @@ export default function DownloadDialog({
   const title = gameInfo?.title
 
   function getInstallLabel() {
+    if (requiresToken) {
+      return 'Sign and Install'
+    }
+
     if (installPath) {
       if (notEnoughDiskSpace) {
         return t('button.force-innstall', 'Force Install')
@@ -395,7 +410,8 @@ export default function DownloadDialog({
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
 
-  const readyToInstall = isWebGame || nativeGameIsReadyToInstall
+  const readyToInstall =
+    isWebGame || nativeGameIsReadyToInstall || requiresToken
 
   const showRemainingProgress =
     (runner === 'hyperplay' && previousProgress.percent) ||
@@ -421,6 +437,29 @@ export default function DownloadDialog({
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
       <DialogContent>
+        {requiresToken ? (
+          <div style={{ maxWidth: 500, overflow: 'hidden' }}>
+            {showAlert ? (
+              <AlertCard
+                title=""
+                message={
+                  'Please purchase to proceed or ensure that NFT is in the current wallet.'
+                }
+                actionText={'Buy NFT'}
+                variant={'warning'}
+                onClose={() => setShowAlert(false)}
+                onActionClick={() =>
+                  marketplaceUrl
+                    ? window.api.openExternalUrl(marketplaceUrl)
+                    : console.log(
+                        'marketplace url is invalid: ',
+                        marketplaceUrl
+                      )
+                }
+              />
+            ) : null}
+          </div>
+        ) : null}
         {showInstallandDownloadSizes ? (
           <div className="InstallModal__sizes">
             <div className="InstallModal__size">

@@ -7,7 +7,9 @@ import {
   GameSettings,
   PlatformConfig,
   LicenseConfigValidateResult,
-  ChannelReleaseMeta
+  ChannelReleaseMeta,
+  SiweValues,
+  UpdateArgs
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
@@ -65,6 +67,7 @@ import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
+import { valistBaseApiUrlv1 } from 'common/constants'
 import Store from 'electron-store'
 
 interface ProgressDownloadingItem {
@@ -459,6 +462,33 @@ async function getAccessCodeGatedPlatforms(
   return validateResult.platforms
 }
 
+async function getTokenGatedPlatforms(
+  channel_id: number,
+  siweValues: SiweValues
+): Promise<PlatformsMetaInterface> {
+  const { address, message, signature } = siweValues
+
+  const validateResult = (
+    await axios.post<LicenseConfigValidateResult>(
+      `${valistBaseApiUrlv1}/license_contracts/validate`,
+      {
+        message,
+        signature,
+        address,
+        channel_id
+      }
+    )
+  ).data
+
+  if (validateResult.valid !== true)
+    throw `Address code ${address} is not valid for channel id ${channel_id}!`
+
+  if (validateResult.platforms === undefined)
+    throw 'Token gated platforms returned by the validate url were undefined'
+
+  return validateResult.platforms
+}
+
 function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
   const currentLibrary = hpLibraryStore.get('games', []) as GameInfo[]
   const gameIndex = currentLibrary.findIndex(
@@ -568,7 +598,8 @@ export async function install(
     platformToInstall,
     channelName,
     accessCode,
-    updateOnly = false
+    updateOnly = false,
+    siweValues
   }: InstallArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
@@ -621,8 +652,16 @@ export async function install(
       }
     }
 
-    // get presigned platform info if code gated
-    if (selectedChannel.license_config.access_codes) {
+    if (selectedChannel.license_config.tokens) {
+      if (!siweValues?.address) throw 'No address found'
+      const gatedPlatforms = await getTokenGatedPlatforms(
+        selectedChannel.channel_id,
+        siweValues
+      )
+
+      platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
+    } else if (selectedChannel.license_config.access_codes) {
+      // get presigned platform info if code gated
       if (accessCode === undefined)
         throw 'Access code was undefined for an access code gated channel'
 
@@ -1116,7 +1155,10 @@ export async function launch(
 }
 
 // TODO: Refactor to only replace updated files
-export async function update(appName: string): Promise<InstallResult> {
+export async function update(
+  appName: string,
+  args?: UpdateArgs
+): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
     return { status: 'done' }
   }
@@ -1162,7 +1204,8 @@ export async function update(appName: string): Promise<InstallResult> {
     platformToInstall: gameInfo.install.platform,
     channelName: gameInfo.install.channelName,
     accessCode,
-    updateOnly: true
+    updateOnly: true,
+    siweValues: args?.siweValues
   })
   return installResult
 }
