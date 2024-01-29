@@ -1,3 +1,4 @@
+import * as Auth from './auth'
 import * as Misc from './misc'
 import * as Helpers from './helpers'
 import * as Library from './library'
@@ -12,6 +13,7 @@ import * as Overlay from 'backend/hyperplay-overlay/api'
 import * as Achievements from 'backend/hyperplay-achievements/api'
 
 export default {
+  ...Auth,
   ...Misc,
   ...Helpers,
   ...Library,
