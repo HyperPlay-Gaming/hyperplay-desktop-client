@@ -21,7 +21,8 @@ import {
   mkdirSync,
   rmSync,
   readdirSync,
-  readFileSync
+  readFileSync,
+  statSync
 } from 'graceful-fs'
 import {
   isMac,
@@ -37,7 +38,7 @@ import {
   shutdownWine,
   calculateEta
 } from 'backend/utils'
-import { notify } from 'backend/dialog/dialog'
+import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { join } from 'path'
 import {
   callAbortController,
@@ -68,6 +69,7 @@ import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 import Store from 'electron-store'
+import i18next from 'i18next'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -165,13 +167,23 @@ export async function pause(appName: string): Promise<void> {
 // if none was found return empty string
 // this is necessary because we do not know which folder the user has selected, the main folder or the game folder
 const isValidGameFolder = (appName: string, folderPath: string): string => {
-  const files = readdirSync(folderPath)
-  if (files.includes(`${appName}.json`)) {
+  const subFolders = readdirSync(folderPath)
+
+  if (subFolders.includes(`${appName}.json`)) {
     return folderPath
   }
-  if (isValidGameFolder(appName, path.join(folderPath, files[0]))) {
-    return path.join(folderPath, files[0])
+
+  // in case the selected folder is a dev folder with multiple games
+  for (const subFolder of subFolders) {
+    // check if it is a folder or a file, if it is a file, skip it
+    const subFolderStats = statSync(path.join(folderPath, subFolder))
+    if (subFolderStats.isDirectory()) {
+      if (isValidGameFolder(appName, path.join(folderPath, subFolder))) {
+        return path.join(folderPath, subFolder)
+      }
+    }
   }
+
   return ''
 }
 
@@ -196,7 +208,17 @@ export async function importGame(
       'Not a valid game folder, import not possible',
       LogPrefix.HyperPlay
     )
-    return { stderr: '', stdout: '' }
+
+    showDialogBoxModalAuto({
+      title: i18next.t('importGameErrorTitle', 'Import Game Error'),
+      message: i18next.t(
+        'importGameErrorMessage',
+        'Not a valid game folder, importing game is not possible'
+      ),
+      type: 'ERROR'
+    })
+
+    throw Error('Not a valid game folder, import not possible')
   }
 
   // read the json file and get the game info
@@ -215,10 +237,32 @@ export async function importGame(
     return { stderr: '', stdout: '' }
   }
 
-  const mainExe = installInfo.manifest.executable.split('/').at(-1) ?? ''
+  const gameInfo = getGameInfo(appName)
+  const channel = gameInfo.channels![
+    installInfo.manifest.channelName!
+  ] as Channel
+  const mainExe =
+    channel.release_meta.platforms[installInfo.manifest.platform].executable
+  const executable = path.join(pathName, mainExe)
+
+  if (!existsSync(executable)) {
+    logError(`Executable ${executable} does not exist!`, LogPrefix.HyperPlay)
+
+    showDialogBoxModalAuto({
+      title: i18next.t('importGameErrorTitle', 'Import Game Error'),
+      message: i18next.t(
+        'importGameErrorMessageExecutable',
+        'Game Executable not found, importing game is not possible'
+      ),
+      type: 'ERROR'
+    })
+
+    throw Error(`Executable ${executable} does not exist!`)
+  }
+
   gameInLibrary.install = {
     install_path: pathName,
-    executable: path.join(pathName, mainExe),
+    executable,
     install_size: installInfo.manifest.install_size ?? '0',
     is_dlc: false,
     version: installInfo.manifest.version,
@@ -230,6 +274,10 @@ export async function importGame(
   hpLibraryStore.set('games', currentLibrary)
 
   sendFrontendMessage('refreshLibrary')
+
+  // delete current manifest file
+  rmSync(path.join(pathName, `${appName}.json`))
+  writeManifestFile(appName, gameInLibrary.install)
   return { stderr: '', stdout: '' }
 }
 
@@ -481,7 +529,7 @@ function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
 
   hpLibraryStore.set('games', currentLibrary)
 
-  writeManifestFile(installedInfo)
+  writeManifestFile(appName, installedInfo)
 }
 
 function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
@@ -1030,7 +1078,7 @@ export function getGameInfo(appName: string): GameInfo {
   // TODO: remove this in the future, it is only needed for games downloaded from v0.10 and below
   // write manifest file
   if (appInfo?.is_installed && appInfo.install) {
-    writeManifestFile(appInfo.install)
+    writeManifestFile(appName, appInfo.install)
   }
 
   if (!appInfo) {
@@ -1224,13 +1272,16 @@ export async function forceUninstall(appName: string): Promise<void> {
   await uninstall({ appName, shouldRemovePrefix: false })
 }
 
-function writeManifestFile(installedInfo: Partial<InstalledInfo>) {
+function writeManifestFile(
+  appName: string,
+  installedInfo: Partial<InstalledInfo>
+) {
   if (!installedInfo.install_path) {
     return
   }
   const store = new Store({
     cwd: installedInfo.install_path,
-    name: installedInfo.appName
+    name: appName
   })
 
   return store.set('manifest', installedInfo)
