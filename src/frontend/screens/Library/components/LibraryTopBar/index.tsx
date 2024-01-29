@@ -10,6 +10,7 @@ import {
   DropdownItemType,
   GenericDropdown,
   Menu,
+  Tabs,
   getTabsClassNames
 } from '@hyperplay/ui'
 import { Category } from 'frontend/types'
@@ -17,7 +18,6 @@ import { observer } from 'mobx-react-lite'
 import libraryState from '../../../../state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-import { Tabs } from '@mantine/core'
 
 export interface LibraryTopBarInterface {
   filters: DropdownItemType[]

@@ -20,8 +20,7 @@ import AccountSettings from './sections/AccountSettings'
 import { observer } from 'mobx-react-lite'
 import AchievementState from 'frontend/state/AchievementState'
 import DeviceState from 'frontend/state/DeviceState'
-import { Tabs } from '@mantine/core'
-import { getTabsClassNames } from '@hyperplay/ui'
+import { Tabs, getTabsClassNames } from '@hyperplay/ui'
 
 export const defaultWineVersion: WineInstallation = {
   bin: '/usr/bin/wine',

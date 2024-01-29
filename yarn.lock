@@ -1737,10 +1737,10 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
 
-"@hyperplay/ui@^1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.0.3.tgz#f8b0dc85de2f972ee7321026d99ec9e8e5e1326c"
-  integrity sha512-qv3ppU+SnFX5R/j3PAKldF6MMl0c9xyXLhhPRkBa25NoSjtlOl43aHNt3gdZRQPGOM4wlze+tP7vFCPAYJ3h0A==
+"@hyperplay/ui@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.0.5.tgz#ed407c5c0cc904fd740427a0d89de35581f0ebeb"
+  integrity sha512-MerO53gdQbklUibkw/wzGB8UFcHQvf8BdzDwGZ7j3MPAJ/pewinipGIArgoA/+mMR7taWXH0eQ0LOSnHMfP6JA==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
@@ -3203,6 +3203,19 @@
   integrity sha512-4BAffykYOgO+5nzBWYwE3W90sBgLJoUPRWWcL8wlyiM8IB8ipJz3UMJ9KXQd1RKQXpKp8Tutn80HZtWsu2u76w==
   dependencies:
     defer-to-connect "^2.0.0"
+
+"@tabler/icons-react@^2.46.0":
+  version "2.46.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-2.46.0.tgz#a24cf737687a18cdf1b0e1189ef69462e82dbd89"
+  integrity sha512-X8MRxuslIOFqMjAo+GvUZDpjlOwNYNJTuOsHXf/NBvVI6ygqUf0FUNsDLLA5fQ6k6KtRwxMlgGB+eR8ZG1UP0g==
+  dependencies:
+    "@tabler/icons" "2.46.0"
+    prop-types "^15.7.2"
+
+"@tabler/icons@2.46.0":
+  version "2.46.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.46.0.tgz#e629df8901b799372914c694000cc2ea3d45bb6b"
+  integrity sha512-Q5G8Pj5IO+Uhc6pszpu5/hGYY018JwEzzvmuqr+gKJtfIvAHA3umpwUilMRLEy89p+WCP+YsDhicMhfBCCv1qA==
 
 "@testing-library/dom@^7.31.0":
   version "7.31.2"
