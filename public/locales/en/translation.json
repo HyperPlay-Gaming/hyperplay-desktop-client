@@ -458,6 +458,9 @@
             "INITIATED": "Add custom token request pending"
         }
     },
+    "importGameErrorMessage": "Not a valid game folder, importing game is not possible",
+    "importGameErrorMessageExecutable": "Game Executable not found, importing game is not possible",
+    "importGameErrorTitle": "Import Game Error",
     "info": {
         "hyperplay": {
             "version": "HyperPlay Version"
