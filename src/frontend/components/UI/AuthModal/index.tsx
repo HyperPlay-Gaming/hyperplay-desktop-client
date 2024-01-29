@@ -81,6 +81,10 @@ const AuthModal = () => {
 
     webview.addEventListener('dom-ready', handleDomReady)
 
+    const qaModeListenerCleanup = window.api.handleQaModeActivated(() => {
+      authState.activateQaMode()
+    })
+
     const oAuthCompletedCleanup = window.api.handleOAuthDeepLink(
       async (_e: Electron.IpcRendererEvent, code: string) => {
         webviewRef.current?.loadURL(`${DEV_PORTAL_URL}/otp/${code}`)
@@ -91,6 +95,7 @@ const AuthModal = () => {
       window.api.handleEmailConfirmationNavigation(emailConfirmed)
 
     return () => {
+      qaModeListenerCleanup()
       rmHandleEmailConfirmationNavigation()
       oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
