@@ -25,10 +25,6 @@ class AuthState {
     return this.signInModalOpen
   }
 
-  get isSignedIn() {
-    return this.signedIn
-  }
-
   get isQaModeActive() {
     return this.qaModeActive
   }
@@ -43,10 +39,6 @@ class AuthState {
 
   activateQaMode() {
     this.qaModeActive = true
-  }
-
-  setSignedIn() {
-    this.signedIn = true
   }
 
   setPendingSignatureRequest(pending: boolean) {
