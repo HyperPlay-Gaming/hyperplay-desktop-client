@@ -2122,7 +2122,7 @@
     lodash "^4.17.15"
     tmp-promise "^3.0.2"
 
-"@mantine/carousel@^7.4.2":
+"@mantine/carousel@7.4.2":
   version "7.4.2"
   resolved "https://registry.yarnpkg.com/@mantine/carousel/-/carousel-7.4.2.tgz#f8af8fc4d9c50092925d2f523ac78cd1634f879d"
   integrity sha512-PWb7hdj9HTYC+IXkHjSZJhz1r0ARUHcjdL2JVraGA3/dpdWPNWICWgJq8U2LRHYqAUtkc5YauItiwa8uKc0Jww==
@@ -2139,10 +2139,10 @@
     react-textarea-autosize "8.5.3"
     type-fest "^3.13.1"
 
-"@mantine/dropzone@^7.4.2":
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/@mantine/dropzone/-/dropzone-7.5.0.tgz#95437a2b4471e8108377c3fbc79859b33e268492"
-  integrity sha512-vjYwVrdRiCK0TpPPYliUMNIeCrOhWiFwP6DlmO0Wnb8X+GpyW2+cuWCxdpcFQHZZGzbNUT3QB8ulIAuwFP9jKw==
+"@mantine/dropzone@7.4.2":
+  version "7.4.2"
+  resolved "https://registry.yarnpkg.com/@mantine/dropzone/-/dropzone-7.4.2.tgz#2ebe743570e5a10429e7da700e84308b62705351"
+  integrity sha512-4JrJCaONPxeKQro5fzjNR/QcZDB7O95xh441nY2z6bcVIXQ/YJGkTqXNnbQifZ4Kh96bpAWNURx0hKVW+FGsOQ==
   dependencies:
     react-dropzone-esm "15.0.1"
 
