@@ -41,8 +41,10 @@ type ModalState = {
 }
 
 export default observer(function Library(): JSX.Element {
-  const { layout, epic, gog, platform, amazon } = useContext(ContextProvider)
+  const { layout, epic, gog, platform, amazon, connectivity } =
+    useContext(ContextProvider)
   const { t } = useTranslation()
+  const isOffline = connectivity.status !== 'online'
 
   const libraryToShow = libraryState.library
   const numberOfGames = libraryState.numberOfGames
@@ -241,6 +243,7 @@ export default observer(function Library(): JSX.Element {
             className={styles.refreshButton}
             type="tertiary"
             title={t('generic.library.refresh', 'Refresh Library')}
+            disabled={isOffline}
             onClick={async () =>
               libraryState.refreshSelectedLibrary({
                 checkForUpdates: true,
