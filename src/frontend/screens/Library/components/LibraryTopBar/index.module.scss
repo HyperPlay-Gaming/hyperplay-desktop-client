@@ -11,10 +11,6 @@
 .sortByDropdown {
   margin-left: var(--space-lg);
   margin-right: var(--space-lg);
-
-  > div > button {
-    width: 220px;
-  }
 }
 
 .gridListButton {
@@ -22,5 +18,11 @@
 }
 
 .dropdownButton {
+  height: 100%;
   width: 340px;
+}
+
+.statusDropdown {
+  height: 100%;
+  width: 220px;
 }

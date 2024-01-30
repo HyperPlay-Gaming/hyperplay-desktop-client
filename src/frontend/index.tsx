@@ -6,7 +6,11 @@ import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
 import { initGamepad } from './helpers/gamepad'
 
+import '@mantine/carousel/styles.css'
+import '@mantine/core/styles.css'
+
 // keep @hyperplay/ui/index.css before index.scss until after frontend design rework
+// import HyperPlay styles after mantine to override their defaults with our design system
 import '@hyperplay/ui/style.css'
 import './index.scss'
 import Loading from './screens/Loading'
