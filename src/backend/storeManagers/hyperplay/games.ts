@@ -65,6 +65,7 @@ import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
+import Store from 'electron-store'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -467,6 +468,8 @@ function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
   currentLibrary[gameIndex].is_installed = true
 
   hpLibraryStore.set('games', currentLibrary)
+
+  writeManifestFile(installedInfo)
 }
 
 function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
@@ -1012,6 +1015,12 @@ export function getGameInfo(appName: string): GameInfo {
     .get('games', [])
     .find((app) => app.app_name === appName)
 
+  // TODO: remove this in the future, it is only needed for games downloaded from v0.10 and below
+  // write manifest file
+  if (appInfo?.is_installed && appInfo.install) {
+    writeManifestFile(appInfo.install)
+  }
+
   if (!appInfo) {
     throw new Error('App not found in library')
   }
@@ -1201,4 +1210,16 @@ export async function syncSaves(
 
 export async function forceUninstall(appName: string): Promise<void> {
   await uninstall({ appName, shouldRemovePrefix: false })
+}
+
+function writeManifestFile(installedInfo: Partial<InstalledInfo>) {
+  if (!installedInfo.install_path) {
+    return
+  }
+  const store = new Store({
+    cwd: installedInfo.install_path,
+    name: installedInfo.appName
+  })
+
+  return store.set('manifest', installedInfo)
 }

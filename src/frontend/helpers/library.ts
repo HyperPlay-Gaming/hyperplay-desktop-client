@@ -9,6 +9,7 @@ import {
 import { TFunction } from 'i18next'
 import { getGameInfo } from './index'
 import { DialogModalOptions } from 'frontend/types'
+import authState from 'frontend/state/authState'
 
 const storage: Storage = window.localStorage
 
@@ -124,7 +125,7 @@ const launch = async ({
   hasUpdate,
   showDialogModal
 }: LaunchOptions): Promise<{ status: 'done' | 'error' | 'abort' }> => {
-  if (hasUpdate) {
+  if (hasUpdate && !authState.isQaModeActive) {
     const { ignoreGameUpdates } = await window.api.requestGameSettings(appName)
 
     if (ignoreGameUpdates && runner !== 'hyperplay') {

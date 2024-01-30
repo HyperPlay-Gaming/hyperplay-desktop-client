@@ -9,6 +9,7 @@ import extensionState from '../../../state/ExtensionState'
 import onboardingState from '../../../store/OnboardingStore'
 import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
+import { useQueryClient } from 'react-query'
 
 const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
@@ -19,6 +20,7 @@ const isTooManyRequestsError = (error: string) => {
 }
 
 const AuthModal = () => {
+  const queryClient = useQueryClient()
   const webviewRef = useRef<WebviewTag>(null)
 
   const sendRetryConnectionMessage = () => {
@@ -63,8 +65,7 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
-          authState.setSignedIn()
-          authState.closeSignInModal()
+          await queryClient.invalidateQueries('authSession')
           break
         case 'auth:accountNotConnected':
           await handleAccountNotConnected()
@@ -85,14 +86,17 @@ const AuthModal = () => {
     })
 
     const oAuthCompletedCleanup = window.api.handleOAuthDeepLink(
-      (_e: Electron.IpcRendererEvent, code: string) => {
-        const otpUrl = `${DEV_PORTAL_URL}/otp/${code}`
-        webviewRef.current?.loadURL(otpUrl)
+      async (_e: Electron.IpcRendererEvent, code: string) => {
+        webviewRef.current?.loadURL(`${DEV_PORTAL_URL}/otp/${code}`)
       }
     )
 
+    const rmHandleEmailConfirmationNavigation =
+      window.api.handleEmailConfirmationNavigation(emailConfirmed)
+
     return () => {
       qaModeListenerCleanup()
+      rmHandleEmailConfirmationNavigation()
       oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
       webview.removeEventListener('ipc-message', handleIpcMessage)
@@ -117,12 +121,6 @@ const AuthModal = () => {
     }
   }, [authState.isSignInModalOpen])
 
-  useEffect(() => {
-    if (walletState.isConnected && authState.hasPendingSignatureRequest) {
-      sendRetryConnectionMessage()
-    }
-  }, [walletState.isConnected, authState.hasPendingSignatureRequest])
-
   function emailConfirmed(
     _e: Electron.IpcRendererEvent,
     emailConfirmUrl: string
@@ -141,6 +139,12 @@ const AuthModal = () => {
       rmHandleEmailConfirmationNavigation()
     }
   }, [])
+
+  useEffect(() => {
+    if (walletState.isConnected && authState.hasPendingSignatureRequest) {
+      sendRetryConnectionMessage()
+    }
+  }, [walletState.isConnected, authState.hasPendingSignatureRequest])
 
   return (
     <ModalAnimation
