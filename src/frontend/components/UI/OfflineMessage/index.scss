@@ -1,9 +1,10 @@
 .offline-message {
-  background: var(--accent-overlay);
+  background: var(--color-neutral-800);
   padding: 0.5rem;
-  color: var(--text-tertiary);
+  color: var(--text-warning);
   display: grid;
   position: relative;
+  z-index: 100003;
 
   span,
   button {
@@ -12,7 +13,7 @@
   }
 
   button {
-    background: var(--accent-overlay);
+    background: var(--color-neutral-800);
     border: transparent;
     &.hint-hover {
       justify-self: flex-end;
@@ -29,8 +30,7 @@
     top: 100%;
     right: 0px;
     width: 400px;
-    z-index: 100;
-    background: var(--accent-overlay);
+    background: var(--color-neutral-800);
     padding: 1rem;
     border: transparent;
   }
