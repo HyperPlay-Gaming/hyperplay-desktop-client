@@ -93,15 +93,15 @@ export const LibraryTopBar = observer(
               dropdownButtonDivProps={{
                 className: 'body-sm'
               }}
-              dropdownButtonProps={{
-                className: styles.statusDropdown
+              containerProps={{
+                className: styles.dropdownContainer
               }}
               classNames={{ item: 'body-sm' }}
               styles={{ dropdown: { gap: '0px' } }}
               menuItemsGap="0px"
             />
           </div>
-          <div>
+          <div className={styles.dropdownContainer}>
             <GenericDropdown
               target={
                 <GenericDropdown.GenericButton
@@ -110,6 +110,9 @@ export const LibraryTopBar = observer(
                   divProps={{ className: 'body-sm' }}
                 ></GenericDropdown.GenericButton>
               }
+              containerProps={{
+                className: styles.dropdownContainer
+              }}
               menuItemsGap="0px"
             >
               {otherFiltersData.map((val, index) => (

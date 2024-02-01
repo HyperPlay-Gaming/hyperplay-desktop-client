@@ -9,6 +9,7 @@
 }
 
 .sortByDropdown {
+  display: flex;
   margin-left: var(--space-lg);
   margin-right: var(--space-lg);
 }
@@ -18,11 +19,9 @@
 }
 
 .dropdownButton {
-  height: 100%;
   width: 340px;
 }
 
-.statusDropdown {
-  height: 100%;
-  width: 220px;
+.dropdownContainer {
+  display: flex;
 }
