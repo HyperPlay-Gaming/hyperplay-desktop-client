@@ -2129,15 +2129,15 @@
     lodash "^4.17.15"
     tmp-promise "^3.0.2"
 
-"@mantine/carousel@7.4.2":
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/@mantine/carousel/-/carousel-7.4.2.tgz#f8af8fc4d9c50092925d2f523ac78cd1634f879d"
-  integrity sha512-PWb7hdj9HTYC+IXkHjSZJhz1r0ARUHcjdL2JVraGA3/dpdWPNWICWgJq8U2LRHYqAUtkc5YauItiwa8uKc0Jww==
+"@mantine/carousel@^7.5.1":
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/@mantine/carousel/-/carousel-7.5.1.tgz#644c45e35b4cc6b9dbf1cbaaa3ab643503995fa7"
+  integrity sha512-ddCPdikpeZv5vB+QUaGfTjiAPWbVQIZ8q0pGh3UWrylvDRbwnbb7B84qcyjYLDexlwuFVTUGURhRZYrf51LjjQ==
 
-"@mantine/core@7.4.2":
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.4.2.tgz#661f1faf4ea67b87312f0e3a8e92a77c2cbf213d"
-  integrity sha512-kXmq7NjSd1AsOIzqPwQhA7SeZS9hrbARRqhRwr4LLR3NKps9hLmVto441DnpHH/D27eL9gGLSl4GRIdogjX6mg==
+"@mantine/core@^7.5.1":
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/@mantine/core/-/core-7.5.1.tgz#1f65d1ae27063b0f54c55390b2415fbd0466cdc0"
+  integrity sha512-V7apuQuRubqxTRXb1uxOM43K7tkLRzpbb1ONJ/sj8QRp/26bShkdYp7EVuSKyrQ8DQ5EGYyBBGyzBOQARh41gA==
   dependencies:
     "@floating-ui/react" "^0.24.8"
     clsx "2.0.0"
@@ -2146,17 +2146,17 @@
     react-textarea-autosize "8.5.3"
     type-fest "^3.13.1"
 
-"@mantine/dropzone@7.4.2":
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/@mantine/dropzone/-/dropzone-7.4.2.tgz#2ebe743570e5a10429e7da700e84308b62705351"
-  integrity sha512-4JrJCaONPxeKQro5fzjNR/QcZDB7O95xh441nY2z6bcVIXQ/YJGkTqXNnbQifZ4Kh96bpAWNURx0hKVW+FGsOQ==
+"@mantine/dropzone@^7.5.1":
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/@mantine/dropzone/-/dropzone-7.5.1.tgz#f84718c2b0cbf063a7e300d16aa3006db6855233"
+  integrity sha512-pUQt7EwhDkTWbj4OLCbsvbkbp1vCXS6nGm8Y4pTrca1vR9S4+hilR6oULEY0UbQgHq+hfsWKDtnlhLkf45tJXA==
   dependencies:
     react-dropzone-esm "15.0.1"
 
-"@mantine/hooks@7.4.2":
-  version "7.4.2"
-  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.4.2.tgz#ca4d57961ef22ed1815874b95940c2cc2034564d"
-  integrity sha512-tNtn/SNOtSmjLQmIk4S5nsTJjV84Oj0AUYRrAN78HHw3bfWp6bdWbgYPtPEH9e6iFJfdxiX0hrLfWqROalAsbQ==
+"@mantine/hooks@^7.5.1":
+  version "7.5.1"
+  resolved "https://registry.yarnpkg.com/@mantine/hooks/-/hooks-7.5.1.tgz#c95855e9bfcffca26a22f21389ff6c3157113758"
+  integrity sha512-LfrEOkX8U2KbkYAU5BMA7FPbMva/TSd65c45W35wHSx3iqYMsoPN9+Ll1zc/HT0XNFp73jGet9cU7VREbAl0/A==
 
 "@metamask/object-multiplex@^1.1.0":
   version "1.3.0"
