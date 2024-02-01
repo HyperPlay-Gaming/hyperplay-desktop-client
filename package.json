@@ -362,13 +362,7 @@
       "vite>esbuild": true,
       "$root$": true,
       "postinstall-postinstall": true,
-      "@rudderstack/rudder-sdk-node": true,
-      "@hyperplay/ui>@fortawesome/fontawesome-svg-core": true,
-      "@hyperplay/ui>@fortawesome/fontawesome-svg-core>@fortawesome/fontawesome-common-types": true,
-      "@hyperplay/ui>@fortawesome/free-brands-svg-icons": true,
-      "@hyperplay/ui>@fortawesome/free-regular-svg-icons": true,
-      "@hyperplay/ui>@fortawesome/free-solid-svg-icons": true,
-      "@hyperplay/ui>@valist/sdk>files-from-path>ipfs-unixfs>protobufjs": true
+      "@rudderstack/rudder-sdk-node": true
     }
   }
 }
