@@ -89,7 +89,7 @@ export const LibraryTopBar = observer(
               options={filters}
               onItemChange={setSelectedFilter}
               selected={selectedFilter}
-              targetWidth={'275'}
+              targetWidth={275}
               dropdownButtonDivProps={{
                 className: 'body-sm'
               }}
