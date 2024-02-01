@@ -4,11 +4,16 @@ import { t } from 'i18next'
 
 import { icon } from './constants'
 import { logError, LogPrefix, logInfo } from './logger/logger'
+import { isOnline } from './online_monitor'
 
 autoUpdater.autoDownload = false
 autoUpdater.autoInstallOnAppQuit = false
 
 autoUpdater.on('update-available', async () => {
+  if (!isOnline()) {
+    return
+  }
+
   logInfo('App update is available')
   const { response, checkboxChecked } = await dialog.showMessageBox({
     title: t('box.info.update.title', 'HyperPlay'),
@@ -33,6 +38,10 @@ autoUpdater.on('update-available', async () => {
 })
 
 autoUpdater.on('update-downloaded', async () => {
+  if (!isOnline()) {
+    return
+  }
+
   logInfo('App update is downloaded')
   const { response } = await dialog.showMessageBox({
     title: t('box.info.update.title-finished', 'Update Finished'),
@@ -52,6 +61,10 @@ autoUpdater.on('update-downloaded', async () => {
 })
 
 autoUpdater.on('error', async (error) => {
+  if (!isOnline()) {
+    return
+  }
+
   logError(['Failed to update ', error], LogPrefix.Backend)
   const { response } = await dialog.showMessageBox({
     title: t('box.error.update.title', 'Error Updating'),

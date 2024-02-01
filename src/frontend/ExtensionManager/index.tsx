@@ -1,9 +1,10 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import ExtensionManagerStyles from './index.module.scss'
 import { observer } from 'mobx-react-lite'
 import extensionState from 'frontend/state/ExtensionState'
 import { motion, AnimatePresence } from 'framer-motion'
 import OverlayState from 'frontend/state/OverlayState'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -25,6 +26,8 @@ const animation = {
 
 const ExtensionManager = function () {
   const rootRef = useRef<HTMLDivElement>(null)
+  const { connectivity } = useContext(ContextProvider)
+  const isOffline = connectivity.status !== 'online'
   const trueAsStr = 'false' as unknown as boolean | undefined
 
   const mmContainerStyle = {} as React.CSSProperties
@@ -41,6 +44,8 @@ const ExtensionManager = function () {
     mmContainerStyle.left = 20
     mmContainerStyle.right = 'unset'
     mmContainerStyle.top = 20
+  } else if (isOffline) {
+    mmContainerStyle.top = 115
   }
 
   /* eslint-disable react/no-unknown-property */
