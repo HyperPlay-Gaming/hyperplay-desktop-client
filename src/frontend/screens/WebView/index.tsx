@@ -292,6 +292,13 @@ function WebView() {
     }
   }, [webviewRef])
 
+  useEffect(() => {
+    const isOffline = connectivity.status !== 'online'
+    if (isOffline) {
+      navigate('/library')
+    }
+  }, [connectivity.status])
+
   const onLoginWarningClosed = () => {
     setShowLoginWarningFor(null)
   }

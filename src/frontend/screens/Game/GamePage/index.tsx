@@ -65,6 +65,7 @@ import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
+import authState from 'frontend/state/authState'
 
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
@@ -267,7 +268,7 @@ export default observer(function GamePage(): JSX.Element | null {
       }
     }
     updateConfig()
-  }, [status, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
+  }, [status, libraryState.hyperPlayLibrary, libraryState.epicLibrary, libraryState.gogLibrary, gameInfo, isSettingsModalOpen, isOffline])
 
   function handleModal() {
     setShowModal({ game: appName, show: true })
@@ -322,8 +323,11 @@ export default observer(function GamePage(): JSX.Element | null {
     const isLinuxNative = isLinux.includes(installPlatform ?? '')
     const isBrowserGame = gameInfo.browserUrl
     const isNative = isWin || isMacNative || isLinuxNative || isBrowserGame
+    const isHyperPlayGame = runner === 'hyperplay'
 
-    const showCloudSaveInfo = cloud_save_enabled && !isLinuxNative
+    const showCloudSaveInfo =
+      is_installed && !isBrowserGame && !isHyperPlayGame && !isSideloaded
+    const isCloudSaveSupported = cloud_save_enabled && !isLinuxNative
     const supportsWeb3 = gameInfo.web3?.supported
 
     /*
@@ -474,7 +478,7 @@ export default observer(function GamePage(): JSX.Element | null {
                   </div>
                   {is_installed && !isBrowserGame && (
                     <>
-                      {showCloudSaveInfo ? (
+                      {showCloudSaveInfo && (
                         <>
                           <div className="hp-subtitle">
                             {t('info.syncsaves')}
@@ -485,21 +489,10 @@ export default observer(function GamePage(): JSX.Element | null {
                             }}
                             className="col2-item italic"
                           >
-                            {autoSyncSaves ? t('enabled') : t('disabled')}
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className="hp-subtitle">
-                            {t('info.syncsaves')}:
-                          </div>
-                          <div
-                            style={{
-                              color: '#F45460'
-                            }}
-                            className="col2-item italic"
-                          >
-                            {t('cloud_save_unsupported', 'Unsupported')}
+                            {!isCloudSaveSupported &&
+                              t('cloud_save_unsupported', 'Unsupported')}
+                            {isCloudSaveSupported &&
+                              (autoSyncSaves ? t('enabled') : t('disabled'))}
                           </div>
                         </>
                       )}
@@ -701,7 +694,7 @@ export default observer(function GamePage(): JSX.Element | null {
     if (notAvailable) {
       return 'tertiary'
     }
-    if (isQueued || hasUpdate) {
+    if (isQueued || (hasUpdate && !authState.isQaModeActive)) {
       return 'secondary'
     }
     if (isUpdating) {
@@ -714,7 +707,7 @@ export default observer(function GamePage(): JSX.Element | null {
   }
 
   function getPlayLabel(): React.ReactNode {
-    if (hasUpdate) {
+    if (hasUpdate && !authState.isQaModeActive) {
       return t('label.playing.update', 'Update')
     }
 
@@ -873,7 +866,9 @@ export default observer(function GamePage(): JSX.Element | null {
   }
 
   function handlePlay() {
-    if (hasUpdate) {
+    const isQAMode = authState.isQaModeActive
+
+    if (hasUpdate && !isQAMode) {
       return async () => {
         await updateGame(gameInfo)
       }
