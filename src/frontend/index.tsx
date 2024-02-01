@@ -127,16 +127,16 @@ const renderApp = async () => {
       <StoreController />
       <QueryClientProvider client={queryClient}>
         <LDProvider>
-          <HyperPlayDesignProvider>
-          <GlobalState>
-            <SentryHandler />
-            <I18nextProvider i18n={i18next}>
-              <Suspense fallback={<Loading />}>
-                <ViewManager />
-              </Suspense>
-            </I18nextProvider>
-          </GlobalState>
-        </HyperPlayDesignProvider>
+          <HyperPlayDesignProvider forceColorScheme="dark">
+            <GlobalState>
+              <SentryHandler />
+              <I18nextProvider i18n={i18next}>
+                <Suspense fallback={<Loading />}>
+                  <ViewManager />
+                </Suspense>
+              </I18nextProvider>
+            </GlobalState>
+          </HyperPlayDesignProvider>
         </LDProvider>
       </QueryClientProvider>
     </React.StrictMode>
