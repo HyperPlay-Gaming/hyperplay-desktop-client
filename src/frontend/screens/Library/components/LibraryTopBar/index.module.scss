@@ -9,12 +9,9 @@
 }
 
 .sortByDropdown {
+  display: flex;
   margin-left: var(--space-lg);
   margin-right: var(--space-lg);
-
-  > div > button {
-    width: 220px;
-  }
 }
 
 .gridListButton {
@@ -23,4 +20,8 @@
 
 .dropdownButton {
   width: 340px;
+}
+
+.dropdownContainer {
+  display: flex;
 }
