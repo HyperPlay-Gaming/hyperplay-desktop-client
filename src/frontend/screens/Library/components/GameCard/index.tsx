@@ -124,7 +124,7 @@ const GameCard = ({
       return 'NOT_SUPPORTED'
     }
     if (isInstallingDistributables) {
-      return 'INSTALLING_DISTRIBUTABLES'
+      return 'DOWNLOADING_DISTRIBUTABLES'
     }
     if (isPreparing) {
       return 'PREPARING'
