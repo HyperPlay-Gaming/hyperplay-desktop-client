@@ -85,58 +85,17 @@ const AuthModal = () => {
       authState.activateQaMode()
     })
 
-    const oAuthCompletedCleanup = window.api.handleOAuthDeepLink(
+    const oAuthCompletedCleanup = window.api.handleOtpDeepLink(
       async (_e: Electron.IpcRendererEvent, code: string) => {
         webviewRef.current?.loadURL(`${DEV_PORTAL_URL}/otp/${code}`)
       }
     )
 
-    const rmHandleEmailConfirmationNavigation =
-      window.api.handleEmailConfirmationNavigation(emailConfirmed)
-
     return () => {
       qaModeListenerCleanup()
-      rmHandleEmailConfirmationNavigation()
       oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
       webview.removeEventListener('ipc-message', handleIpcMessage)
-    }
-  }, [])
-
-  /**
-   * Without reload, user gets stuck on email verified page even after
-   * auth modal close and reopen.
-   */
-  useEffect(() => {
-    if (!authState.isSignInModalOpen) {
-      return
-    }
-    /**
-     * On import app reload this will fail as it tries to reload an unmounted webview
-     */
-    try {
-      webviewRef.current?.reload()
-    } catch (err) {
-      console.error(err)
-    }
-  }, [authState.isSignInModalOpen])
-
-  function emailConfirmed(
-    _e: Electron.IpcRendererEvent,
-    emailConfirmUrl: string
-  ) {
-    webviewRef.current?.loadURL(emailConfirmUrl)
-    authState.openSignInModal()
-
-    setTimeout(async () => webviewRef.current?.loadURL(url), 5000)
-  }
-
-  useEffect(() => {
-    const rmHandleEmailConfirmationNavigation =
-      window.api.handleEmailConfirmationNavigation(emailConfirmed)
-
-    return () => {
-      rmHandleEmailConfirmationNavigation()
     }
   }, [])
 

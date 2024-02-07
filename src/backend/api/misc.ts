@@ -202,33 +202,15 @@ export const handleQaModeActivated = (
   }
 }
 
-export const handleOAuthDeepLink = (
+export const handleOtpDeepLink = (
   cb: WrapRendererCallback<(otp: string) => void>
 ): (() => void) => {
-  ipcRenderer.on('oauthDeeplink', cb)
+  ipcRenderer.on('otpDeeplink', cb)
   return () => {
-    ipcRenderer.removeListener('oauthDeeplink', cb)
-  }
-}
-
-export const handleEmailConfirmed = (
-  onMessage: (e: Electron.IpcRendererEvent) => void
-): (() => void) => {
-  ipcRenderer.on('emailVerified', onMessage)
-  return () => {
-    ipcRenderer.removeListener('emailVerified', onMessage)
+    ipcRenderer.removeListener('otpDeeplink', cb)
   }
 }
 
 export const openAuthModalIfAppReloads = () => {
   ipcRenderer.send('openAuthModalIfAppReloads')
-}
-
-export const handleEmailConfirmationNavigation = (
-  cb: WrapRendererCallback<(url: string) => void>
-): (() => void) => {
-  ipcRenderer.on('emailConfirmation', cb)
-  return () => {
-    ipcRenderer.removeListener('emailConfirmation', cb)
-  }
 }

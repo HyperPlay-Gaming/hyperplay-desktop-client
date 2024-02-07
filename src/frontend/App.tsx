@@ -33,7 +33,6 @@ import QaAuthHandler from './QaAuthHandler'
 import AchievementsLayout from './screens/Achievements/AchievementsLayout'
 import GameAchievementDetails from './screens/Achievements/GameAchievementDetails'
 import AuthModal from './components/UI/AuthModal'
-import EmailVerifiedModal from './components/UI/EmailVerifiedModal'
 import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
@@ -59,7 +58,6 @@ function App() {
           <DialogHandler />
           <ExternalLinkDialog />
           <AuthModal />
-          <EmailVerifiedModal />
           <StoreNavHandler />
           {isSettingsModalOpen.gameInfo && (
             <SettingsModal
