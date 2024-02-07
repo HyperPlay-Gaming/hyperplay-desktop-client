@@ -43,7 +43,7 @@ const WalletDropdown: React.FC = observer(() => {
     walletState.provider === PROVIDERS.METAMASK_EXTENSION
 
   return (
-    <Menu position="bottom" trigger="hover" zIndex={100001}>
+    <Menu position="bottom-end" trigger="hover" zIndex={100001}>
       <Menu.Target>
         <div>
           <Wallet

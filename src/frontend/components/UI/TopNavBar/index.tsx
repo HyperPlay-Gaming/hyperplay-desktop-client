@@ -135,9 +135,7 @@ const TopNavBar = observer(() => {
             ) : null}
           </button>
         )}
-        <div style={{ width: '200px' }}>
-          <AccountDropdown />
-        </div>
+        <AccountDropdown />
       </div>
     </div>
   )
