@@ -9,7 +9,7 @@ import extensionState from '../../../state/ExtensionState'
 import onboardingState from '../../../store/OnboardingStore'
 import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
-import { useQueryClient } from 'react-query'
+import useAuthSession from '../../../hooks/useAuthSession'
 
 const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
@@ -20,7 +20,7 @@ const isTooManyRequestsError = (error: string) => {
 }
 
 const AuthModal = () => {
-  const queryClient = useQueryClient()
+  const authSession = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
 
   const sendRetryConnectionMessage = () => {
@@ -65,10 +65,10 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
-          await queryClient.invalidateQueries('authSession')
+          await authSession.invalidateQuery()
           break
         case 'auth:accountDisconnected':
-          await queryClient.invalidateQueries('authSession')
+          await authSession.invalidateQuery()
           break
         case 'auth:accountNotConnected':
           await handleAccountNotConnected()

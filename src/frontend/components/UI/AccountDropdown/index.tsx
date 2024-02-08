@@ -37,7 +37,7 @@ function NavigationMenuItem({
 }
 
 const WalletDropdown: React.FC = observer(() => {
-  const { isSignedIn, invalidate } = useAuthSession()
+  const { isSignedIn, invalidateQuery } = useAuthSession()
   const { t } = useTranslation()
   const showWalletConnectedLinks = walletState.isConnected
   const showMetaMaskExtensionLinks =
@@ -138,7 +138,7 @@ const WalletDropdown: React.FC = observer(() => {
             <Menu.Item
               onClick={async () => {
                 await window.api.logOut()
-                await invalidate()
+                await invalidateQuery()
               }}
             >
               <div className={`body ${styles.itemContents} ${styles.logOut}`}>
