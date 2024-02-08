@@ -48,7 +48,6 @@ const WalletDropdown: React.FC = observer(() => {
     <Menu
       position="bottom-end"
       trigger="hover"
-      opened={true}
       zIndex={100001}
       classNames={{
         dropdown: styles.menuDropdown,
