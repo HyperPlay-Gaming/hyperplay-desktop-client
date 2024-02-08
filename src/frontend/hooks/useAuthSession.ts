@@ -5,7 +5,7 @@ const queryKey = 'authSession'
 export default function useAuthSession() {
   const queryClient = useQueryClient()
   const query = useQuery(
-    'authSession',
+    queryKey,
     async () => {
       const response = await window.api.getAuthSession()
       if (!response) return null

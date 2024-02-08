@@ -34,5 +34,13 @@ ipcMain.handle('getAuthSession', async () => {
 
 ipcMain.handle('logOut', async () => {
   const authSession = session.fromPartition('persist:auth')
-  return authSession.cookies.remove(DEV_PORTAL_URL, 'next-auth.session-token')
+  const cookiesToRemove = [
+    'next-auth.session-token',
+    '__Secure-next-auth.session-token'
+  ]
+  await Promise.all(
+    cookiesToRemove.map(async (cookie) =>
+      authSession.cookies.remove(DEV_PORTAL_URL, cookie)
+    )
+  )
 })
