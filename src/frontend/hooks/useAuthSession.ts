@@ -27,6 +27,7 @@ export default function useAuthSession() {
   return {
     ...query,
     session: query.data,
+    isSignedIn: Boolean(query.data),
     invalidate: async () => queryClient.invalidateQueries(queryKey)
   }
 }

@@ -37,7 +37,7 @@ function NavigationMenuItem({
 }
 
 const WalletDropdown: React.FC = observer(() => {
-  const { isUserSignedIn, invalidate } = useAuthSession()
+  const { isSignedIn, invalidate } = useAuthSession()
   const { t } = useTranslation()
   const showWalletConnectedLinks = walletState.isConnected
   const showMetaMaskExtensionLinks =
@@ -128,7 +128,7 @@ const WalletDropdown: React.FC = observer(() => {
         </Menu.Item>
         <Divider className={styles.divider} />
         <Menu.Label>HyperPlay {t('profile', `Profile`)}</Menu.Label>
-        {isUserSignedIn ? (
+        {isSignedIn ? (
           <>
             <Menu.Item onClick={() => authState.openSignInModal()}>
               <div className={`body ${styles.itemContents}`}>
