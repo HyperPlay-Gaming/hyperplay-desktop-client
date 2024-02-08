@@ -37,7 +37,7 @@ function NavigationMenuItem({
 }
 
 const WalletDropdown: React.FC = observer(() => {
-  const { session, invalidate } = useAuthSession()
+  const { isUserSignedIn, invalidate } = useAuthSession()
   const { t } = useTranslation()
   const showWalletConnectedLinks = walletState.isConnected
   const showMetaMaskExtensionLinks =
@@ -65,26 +65,21 @@ const WalletDropdown: React.FC = observer(() => {
         </div>
       </Menu.Target>
       <Menu.Dropdown>
-        <Menu.Label>Epic/GoG {t('accounts', `accounts`)}</Menu.Label>
-        <Menu.Item>
-          <NavLink to={'/login'}>
-            <div className={`body ${styles.itemContents}`}>
-              {t('userselector.manageStore', `Manage stores`)}
-            </div>
-          </NavLink>
-        </Menu.Item>
-        <Divider className={styles.divider} />
-        <Menu.Label>HyperPlay {t('profile', `Profile`)}</Menu.Label>
-        <Menu.Item onClick={() => authState.openSignInModal()}>
+        <Menu.Label className={styles.menuLabel}>
+          {t('hyperplay.currentWallet', `Current wallet`)}
+        </Menu.Label>
+        <Menu.Item
+          className={styles.menuItem}
+          onClick={() => onboardingStore.openOnboarding()}
+        >
           <div className={`body ${styles.itemContents}`}>
-            {t('userselector.manageaccounts', `Manage accounts`)}
+            {showWalletConnectedLinks
+              ? t('hyperplay.changeWallet', `Change wallet`)
+              : t('hyperplay.connectWallet', `Connect wallet`)}
           </div>
         </Menu.Item>
         {showMetaMaskExtensionLinks && (
           <>
-            <Menu.Label>
-              {t('hyperplay.currentWallet', `Current wallet`)}
-            </Menu.Label>
             <NavigationMenuItem
               label={t('hyperplay.viewFullscreen', `View fullscreen`)}
               to={'/metamaskHome'}
@@ -123,22 +118,38 @@ const WalletDropdown: React.FC = observer(() => {
             </NavLink>
           </Menu.Item>
         )}
-        <Menu.Item onClick={() => onboardingStore.openOnboarding()}>
-          <div className={`body ${styles.itemContents}`}>
-            {showWalletConnectedLinks
-              ? t('hyperplay.changeWallet', `Change wallet`)
-              : t('hyperplay.connectWallet', `Connect wallet`)}
-          </div>
+        <Menu.Label>Epic/GoG {t('accounts', `accounts`)}</Menu.Label>
+        <Menu.Item>
+          <NavLink to={'/login'}>
+            <div className={`body ${styles.itemContents}`}>
+              {t('userselector.manageStore', `Manage stores`)}
+            </div>
+          </NavLink>
         </Menu.Item>
-        {Boolean(session) && (
-          <Menu.Item
-            onClick={async () => {
-              await window.api.logOut()
-              await invalidate()
-            }}
-          >
-            <div className={`body ${styles.itemContents} ${styles.logOut}`}>
-              {t('hyperplay.logOut', `Log out`)}
+        <Divider className={styles.divider} />
+        <Menu.Label>HyperPlay {t('profile', `Profile`)}</Menu.Label>
+        {isUserSignedIn ? (
+          <>
+            <Menu.Item onClick={() => authState.openSignInModal()}>
+              <div className={`body ${styles.itemContents}`}>
+                {t('userselector.manageaccounts', `Manage accounts`)}
+              </div>
+            </Menu.Item>
+            <Menu.Item
+              onClick={async () => {
+                await window.api.logOut()
+                await invalidate()
+              }}
+            >
+              <div className={`body ${styles.itemContents} ${styles.logOut}`}>
+                {t('hyperplay.logOut', `Log out`)}
+              </div>
+            </Menu.Item>
+          </>
+        ) : (
+          <Menu.Item onClick={() => authState.openSignInModal()}>
+            <div className={`body ${styles.itemContents}`}>
+              {t('userselector.logIn', `Log in`)}
             </div>
           </Menu.Item>
         )}
