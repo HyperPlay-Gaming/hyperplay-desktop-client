@@ -6,7 +6,8 @@ export const getAuthSession = async () => {
 }
 
 export const logOut = async () => {
-  return ipcRenderer.emit('logOut')
+  await ipcRenderer.invoke('logOut')
+  ipcRenderer.emit('logOut')
 }
 
 export const signInWithProvider = (provider: string) =>

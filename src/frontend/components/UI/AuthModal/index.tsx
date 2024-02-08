@@ -95,9 +95,7 @@ const AuthModal = () => {
     )
 
     const onLogoutCleanup = window.api.handleLogOut(async () => {
-      await webviewRef.current?.loadURL(
-        `${DEV_PORTAL_URL}/logout?isLauncher=true`
-      )
+      webviewRef.current?.reload()
     })
 
     return () => {

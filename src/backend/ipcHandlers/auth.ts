@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron'
+import { ipcMain, session } from 'electron'
 import getPartitionCookies from '../utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from '../../common/constants'
 import { LogPrefix } from '../logger/logger'
@@ -30,4 +30,9 @@ ipcMain.handle('getAuthSession', async () => {
   }
 
   return body as AuthSession
+})
+
+ipcMain.handle('logOut', async () => {
+  const authSession = session.fromPartition('persist:auth')
+  return authSession.cookies.remove(DEV_PORTAL_URL, 'next-auth.session-token')
 })

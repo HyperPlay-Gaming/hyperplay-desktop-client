@@ -1,7 +1,10 @@
-import { useQuery } from 'react-query'
+import { useQuery, useQueryClient } from 'react-query'
+
+const queryKey = 'authSession'
 
 export default function useAuthSession() {
-  return useQuery(
+  const queryClient = useQueryClient()
+  const query = useQuery(
     'authSession',
     async () => {
       const response = await window.api.getAuthSession()
@@ -20,4 +23,10 @@ export default function useAuthSession() {
       refetchOnWindowFocus: false
     }
   )
+
+  return {
+    ...query,
+    session: query.data,
+    invalidate: async () => queryClient.invalidateQueries(queryKey)
+  }
 }

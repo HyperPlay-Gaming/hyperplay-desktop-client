@@ -37,7 +37,7 @@ function NavigationMenuItem({
 }
 
 const WalletDropdown: React.FC = observer(() => {
-  const { data: session } = useAuthSession()
+  const { session, invalidate } = useAuthSession()
   const { t } = useTranslation()
   const showWalletConnectedLinks = walletState.isConnected
   const showMetaMaskExtensionLinks =
@@ -132,7 +132,12 @@ const WalletDropdown: React.FC = observer(() => {
           </div>
         </Menu.Item>
         {Boolean(session) && (
-          <Menu.Item onClick={window.api.logOut}>
+          <Menu.Item
+            onClick={async () => {
+              await window.api.logOut()
+              await invalidate()
+            }}
+          >
             <div className={`body ${styles.itemContents} ${styles.logOut}`}>
               {t('hyperplay.logOut', `Log out`)}
             </div>
