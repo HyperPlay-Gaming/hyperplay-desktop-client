@@ -145,7 +145,6 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   copyWalletConnectBaseURIToClipboard: () => void
   closeAuthModal: () => void
   'auth:accountConnected': () => void
-  'auth:accountDisconnected': () => void
   'auth:accountNotConnected': () => void
   'auth:otpFinished': () => void
   focusMainWindow: () => void
