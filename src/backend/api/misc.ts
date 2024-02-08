@@ -214,3 +214,12 @@ export const handleOtpDeepLink = (
 export const openAuthModalIfAppReloads = () => {
   ipcRenderer.send('openAuthModalIfAppReloads')
 }
+
+export const handleLogOut = (
+  cb: WrapRendererCallback<() => void>
+): (() => void) => {
+  ipcRenderer.on('logOut', cb)
+  return () => {
+    ipcRenderer.removeListener('logOut', cb)
+  }
+}

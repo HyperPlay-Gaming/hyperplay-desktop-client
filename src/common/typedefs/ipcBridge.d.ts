@@ -145,6 +145,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   copyWalletConnectBaseURIToClipboard: () => void
   closeAuthModal: () => void
   'auth:accountConnected': () => void
+  'auth:accountDisconnected': () => void
   'auth:accountNotConnected': () => void
   'auth:otpFinished': () => void
   focusMainWindow: () => void
@@ -252,6 +253,7 @@ interface HyperPlayAsyncIPCFunctions {
   get_extension_state_isPopupOpen: () => Promise<boolean>
   getLDEnvConfig: () => Promise<LDEnv>
   getAuthSession: () => Promise<AuthSession | null>
+  logOut: () => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

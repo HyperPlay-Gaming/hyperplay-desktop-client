@@ -67,6 +67,9 @@ const AuthModal = () => {
         case 'auth:accountConnected':
           await queryClient.invalidateQueries('authSession')
           break
+        case 'auth:accountDisconnected':
+          await queryClient.invalidateQueries('authSession')
+          break
         case 'auth:accountNotConnected':
           await handleAccountNotConnected()
           break
@@ -91,7 +94,14 @@ const AuthModal = () => {
       }
     )
 
+    const onLogoutCleanup = window.api.handleLogOut(async () => {
+      await webviewRef.current?.loadURL(
+        `${DEV_PORTAL_URL}/logout?isLauncher=true`
+      )
+    })
+
     return () => {
+      onLogoutCleanup()
       qaModeListenerCleanup()
       oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
