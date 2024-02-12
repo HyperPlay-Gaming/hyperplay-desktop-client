@@ -6,7 +6,7 @@ import {
   GamepadInputEvent,
   GameSettings,
   Runner,
-  StatusPromise,
+  StatusPromise
 } from 'common/types'
 import * as path from 'path'
 import { join } from 'path'
