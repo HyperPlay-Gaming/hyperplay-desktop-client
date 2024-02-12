@@ -74,14 +74,14 @@ const WalletDropdown: React.FC = observer(() => {
         >
           <div className={`body ${styles.itemContents}`}>
             {showWalletConnectedLinks
-              ? t('hyperplay.changeWallet', `Change wallet`)
+              ? t('hyperplay.changeWallet', `Swap wallet account`)
               : t('hyperplay.connectWallet', `Connect wallet`)}
           </div>
         </Menu.Item>
         {showMetaMaskExtensionLinks && (
           <>
             <NavigationMenuItem
-              label={t('hyperplay.viewFullscreen', `View fullscreen`)}
+              label={t('hyperplay.viewMyAccount', `View my account`)}
               to={'/metamaskHome'}
               showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
             ></NavigationMenuItem>
@@ -95,7 +95,7 @@ const WalletDropdown: React.FC = observer(() => {
             ></NavigationMenuItem>
           </>
         )}
-        {showWalletConnectedLinks && (
+        {showMetaMaskExtensionLinks && (
           <Menu.Item
             className={`${styles.menuItem} `}
             id={

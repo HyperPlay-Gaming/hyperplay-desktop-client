@@ -324,7 +324,7 @@
             "agree": "I agree",
             "noThanks": "No Thanks"
         },
-        "changeWallet": "Change wallet",
+        "swapWallet": "Swap wallet account",
         "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
@@ -412,6 +412,7 @@
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
         "viewFullscreen": "View fullscreen",
+        "viewMyAccount": "View my account",
         "viewItem": "View {{item}}",
         "viewPortfolio": "View portfolio",
         "wallet": {
