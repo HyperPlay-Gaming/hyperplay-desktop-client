@@ -7,7 +7,8 @@ import {
   GameSettings,
   PlatformConfig,
   LicenseConfigValidateResult,
-  ChannelReleaseMeta
+  ChannelReleaseMeta,
+  WineCommandArgs
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
@@ -65,8 +66,9 @@ import { DownloadItem } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
-import { runWineCommandOnGame } from 'backend/main'
 import Store from 'electron-store'
+import { gameManagerMap } from '..'
+import { runWineCommand } from 'backend/launcher'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -222,6 +224,29 @@ export async function importGame(
   return { stderr: '', stdout: '' }
 }
 
+export async function runWineCommandOnGame(
+  runner: string,
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  if (isNative(appName)) {
+    logError('runWineCommand called on native game!', LogPrefix.Gog)
+    return { stdout: '', stderr: '' }
+  }
+  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
+  const gameSettings = await gameManagerMap[runner].getSettings(appName)
+
+  return runWineCommand({
+    gameSettings,
+    installFolderName: folder_name,
+    gameInstallPath: install.install_path,
+    commandParts,
+    wait,
+    protonVerb,
+    startFolder
+  })
+}
+
 type DistArgs = {
   gamePath: string
   appName: string
@@ -247,13 +272,16 @@ const installDistributables = async ({ gamePath, appName }: DistArgs) => {
 
   for await (const executable of executables) {
     logInfo(`Installing distributable ${executable}`, LogPrefix.HyperPlay)
+    // Not windows
     if (!isWindows && !isNative(appName)) {
       return runWineCommandOnGame('hyperplay', appName, {
         commandParts: [executable, '/quiet'],
-        wait: false,
+        protonVerb: 'run',
         startFolder: dirname(executable)
       })
     }
+
+    // Windows
     return spawnAsync(executable, ['/quiet'])
   }
   return

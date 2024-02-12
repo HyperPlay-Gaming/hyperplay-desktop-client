@@ -3,12 +3,10 @@ import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
   AppSettings,
-  ExecResult,
   GamepadInputEvent,
   GameSettings,
   Runner,
   StatusPromise,
-  WineCommandArgs
 } from 'common/types'
 import * as path from 'path'
 import { join } from 'path'
@@ -210,6 +208,7 @@ import {
 import { uuid } from 'short-uuid'
 import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
+import { runWineCommandOnGame } from 'backend/storeManagers/hyperplay/games'
 
 let ldMainClient: LDElectron.LDElectronMainClient
 
@@ -744,29 +743,6 @@ ipcMain.on('showConfigFileInFolder', async (event, appName) => {
   }
   return openUrlOrFile(path.join(gamesConfigPath, `${appName}.json`))
 })
-
-export async function runWineCommandOnGame(
-  runner: string,
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  if (gameManagerMap[runner].isNative(appName)) {
-    logError('runWineCommand called on native game!', LogPrefix.Gog)
-    return { stdout: '', stderr: '' }
-  }
-  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
-  const gameSettings = await gameManagerMap[runner].getSettings(appName)
-
-  return runWineCommand({
-    gameSettings,
-    installFolderName: folder_name,
-    gameInstallPath: install.install_path,
-    commandParts,
-    wait,
-    protonVerb,
-    startFolder
-  })
-}
 
 // Calls WineCFG or Winetricks. If is WineCFG, use the same binary as wine to launch it to dont update the prefix
 ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
