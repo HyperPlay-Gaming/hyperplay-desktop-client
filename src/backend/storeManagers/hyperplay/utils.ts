@@ -8,6 +8,8 @@ import {
 import axios from 'axios'
 import { getTitleFromEpicStoreUrl } from 'backend/utils'
 import { getValistListingApiUrl, valistListingsApiUrl } from 'backend/constants'
+import zl from 'zip-lib'
+import { LogPrefix, logInfo } from 'backend/logger/logger'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -269,4 +271,29 @@ export async function loadEpicHyperPlayGameInfoMap() {
 
 export function sanitizeVersion(ver: string) {
   return ver.toLowerCase().replaceAll(' ', '')
+}
+
+export async function alternativeUnzip(
+  zipPath: string,
+  destPath: string
+): Promise<void> {
+  const unzip = new zl.Unzip({
+    // Called before an item is extracted.
+    onEntry: function (event) {
+      console.log(event.entryCount, event.entryName)
+      logInfo(
+        `Extracting ${event.entryName} from ${zipPath} to ${destPath} with ${event.entryCount} entries`,
+        LogPrefix.Backend
+      )
+    }
+  })
+
+  unzip.extract(zipPath, destPath).then(
+    function () {
+      console.log('done')
+    },
+    function (err) {
+      console.log(err)
+    }
+  )
 }
