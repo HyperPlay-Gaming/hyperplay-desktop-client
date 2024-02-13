@@ -169,7 +169,10 @@ export async function pause(appName: string): Promise<void> {
 // return the path to the folder with a valid json file
 // if none was found return empty string
 // this is necessary because we do not know which folder the user has selected, the main folder or the game folder
-const isValidGameFolder = (appName: string, folderPath: string): string => {
+const getValidGameFolderPath = (
+  appName: string,
+  folderPath: string
+): string => {
   const subFolders = readdirSync(folderPath)
 
   if (subFolders.includes(`${appName}.json`)) {
@@ -181,7 +184,7 @@ const isValidGameFolder = (appName: string, folderPath: string): string => {
     // check if it is a folder or a file, if it is a file, skip it
     const subFolderStats = statSync(path.join(folderPath, subFolder))
     if (subFolderStats.isDirectory()) {
-      if (isValidGameFolder(appName, path.join(folderPath, subFolder))) {
+      if (getValidGameFolderPath(appName, path.join(folderPath, subFolder))) {
         return path.join(folderPath, subFolder)
       }
     }
@@ -205,7 +208,7 @@ export async function importGame(
   appName: string,
   pathName: string
 ): Promise<ExecResult> {
-  pathName = isValidGameFolder(appName, pathName)
+  pathName = getValidGameFolderPath(appName, pathName)
   if (!pathName) {
     logError(
       'Not a valid game folder, import not possible',
