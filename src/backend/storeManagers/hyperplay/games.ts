@@ -7,7 +7,8 @@ import {
   GameSettings,
   PlatformConfig,
   LicenseConfigValidateResult,
-  ChannelReleaseMeta
+  ChannelReleaseMeta,
+  WineCommandArgs
 } from '../../../common/types'
 import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
@@ -34,7 +35,7 @@ import {
   calculateEta
 } from 'backend/utils'
 import { notify } from 'backend/dialog/dialog'
-import path, { join } from 'path'
+import path, { dirname, join } from 'path'
 import {
   callAbortController,
   createAbortController,
@@ -66,6 +67,8 @@ import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 import Store from 'electron-store'
+import { gameManagerMap } from '..'
+import { runWineCommand } from 'backend/launcher'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -221,22 +224,114 @@ export async function importGame(
   return { stderr: '', stdout: '' }
 }
 
-const installDistributables = async (gamePath: string) => {
-  const distFolder = path.join(gamePath, 'dist')
-  if (!existsSync(distFolder)) {
-    logWarning(
-      `Tried to install distributables from ${distFolder} but folder does not exist!`,
-      LogPrefix.HyperPlay
-    )
-    return
+export async function runWineCommandOnGame(
+  runner: string,
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  if (isNative(appName)) {
+    logError('runWineCommand called on native game!', LogPrefix.Gog)
+    return { stdout: '', stderr: '' }
   }
+  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
+  const gameSettings = await gameManagerMap[runner].getSettings(appName)
 
-  const files = readdirSync(distFolder)
-  const executables = files.filter((file) => file.endsWith('.exe'))
+  return runWineCommand({
+    gameSettings,
+    installFolderName: folder_name,
+    gameInstallPath: install.install_path,
+    commandParts,
+    wait,
+    protonVerb,
+    startFolder
+  })
+}
+
+type DistArgs = {
+  gamePath: string
+  appName: string
+}
+
+// for Windows games only
+const installDistributables = async ({ gamePath, appName }: DistArgs) => {
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    status: 'distributables',
+    runner: 'hyperplay',
+    folder: gamePath
+  })
+
+  const possibleFolders = ['dist', 'redist', 'Dist', 'Redist']
+  let executables: string[] = []
+
+  for (const folder of possibleFolders) {
+    executables = executables.concat(
+      await findFolderAndExecutables(gamePath, folder)
+    )
+  }
 
   for await (const executable of executables) {
-    await spawnAsync(path.join(gamePath, 'dist', executable), [])
+    logInfo(`Installing distributable ${executable}`, LogPrefix.HyperPlay)
+    // Not windows
+    if (!isWindows && !isNative(appName)) {
+      return runWineCommandOnGame('hyperplay', appName, {
+        commandParts: [executable, '/quiet'],
+        protonVerb: 'run',
+        startFolder: dirname(executable)
+      })
+    }
+
+    // Windows
+    return spawnAsync(executable, ['/quiet'])
   }
+  return
+}
+
+const findFolderAndExecutables = async (
+  basePath: string,
+  folderName: string
+): Promise<string[]> => {
+  let executables: string[] = []
+  if (!existsSync(basePath)) {
+    return executables
+  }
+
+  const entries = readdirSync(basePath, { withFileTypes: true })
+
+  for (const entry of entries) {
+    const entryPath = path.join(basePath, entry.name)
+    if (entry.isDirectory()) {
+      if (entry.name === folderName) {
+        executables = executables.concat(await findExecutables(entryPath))
+      } else {
+        executables = executables.concat(
+          await findFolderAndExecutables(entryPath, folderName)
+        )
+      }
+    }
+  }
+
+  return executables
+}
+
+const findExecutables = async (folderPath: string): Promise<string[]> => {
+  let executables: string[] = []
+  const files = readdirSync(folderPath, { withFileTypes: true })
+  logInfo(`Searching for executables in ${folderPath}`, LogPrefix.HyperPlay)
+
+  for (const file of files) {
+    if (file.isDirectory()) {
+      const subFolderExecutables = await findExecutables(
+        path.join(folderPath, file.name)
+      )
+      executables = executables.concat(subFolderExecutables)
+    } else if (file.name.endsWith('.exe')) {
+      logInfo(`Found distributable ${file.name}`, LogPrefix.HyperPlay)
+      executables.push(path.join(folderPath, file.name))
+    }
+  }
+
+  return executables
 }
 
 function cleanUpDownload(appName: string, directory: string) {
@@ -684,7 +779,7 @@ export async function install(
       }
     }
 
-    return await extract(appName, {
+    await extract(appName, {
       appPlatform,
       gameInfo,
       destinationPath,
@@ -692,6 +787,15 @@ export async function install(
       installVersion,
       channelName
     })
+
+    if (platformToInstall === 'Windows') {
+      logInfo(`Looking for  distributables for ${appName}`, LogPrefix.HyperPlay)
+      await installDistributables({
+        gamePath: destinationPath,
+        appName
+      })
+    }
+    return { status: 'done' }
   } catch (error) {
     process.noAsar = false
 
@@ -880,10 +984,6 @@ export async function extract(
             folder: destinationPath,
             status: 'extracting'
           })
-
-          if (isWindows) {
-            await installDistributables(destinationPath)
-          }
 
           process.noAsar = false
 

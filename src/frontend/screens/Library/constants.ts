@@ -43,9 +43,19 @@ export function translateChannelName(
 
 export function getMessage(
   t: TFunction<'translation'>,
-  status: 'extracting' | 'paused' | 'installing' | 'installed'
+  status:
+    | 'extracting'
+    | 'paused'
+    | 'installing'
+    | 'installed'
+    | 'distributables'
 ): string | undefined {
   switch (status) {
+    case 'distributables':
+      return t(
+        'hyperplay.gamecard.distributables',
+        'Installing Distributables...'
+      )
     case 'extracting':
       return t('hyperplay.gamecard.extracting', 'Extracting...')
     case 'paused':

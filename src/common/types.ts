@@ -245,6 +245,7 @@ export type Status =
   | 'extracting'
   | 'paused'
   | 'preparing'
+  | 'distributables'
 
 export interface GameStatus {
   appName: string

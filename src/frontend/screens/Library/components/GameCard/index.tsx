@@ -104,7 +104,9 @@ const GameCard = ({
     notAvailable,
     isUpdating,
     isPaused,
-    isExtracting
+    isExtracting,
+    isPreparing,
+    isInstallingDistributables
   } = getCardStatus(status, isInstalled, layout)
 
   const handleRemoveFromQueue = () => {
@@ -120,6 +122,12 @@ const GameCard = ({
       !authState.isQaModeActive
     if (notSupportedGame) {
       return 'NOT_SUPPORTED'
+    }
+    if (isInstallingDistributables) {
+      return 'DOWNLOADING_DISTRIBUTABLES'
+    }
+    if (isPreparing) {
+      return 'PREPARING'
     }
     if (isUninstalling) {
       return 'UNINSTALLING'

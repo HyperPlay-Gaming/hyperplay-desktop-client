@@ -331,6 +331,7 @@
         "discordApp": "Discord",
         "folder": "Folder",
         "gamecard": {
+            "distributables": "Installing Distributables...",
             "extracting": "Extracting...",
             "installed": "Ready to play",
             "installing": "Downloading...",
