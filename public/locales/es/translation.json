@@ -821,7 +821,8 @@
             "installed": "Listo para jugar",
             "paused": "Pausado",
             "extracting": "Extrayendo...",
-            "installing": "Descargando..."
+            "installing": "Descargando...",
+            "distributables": "Instalando distribuibles..."
         },
         "connectWallet": "Conectar monedero",
         "achievements": {
@@ -834,7 +835,10 @@
             "gamesToMint": "Juegos para acuñar"
         },
         "Sync": "Sincronizar",
-        "syncing": "Sincronizando..."
+        "syncing": "Sincronizando...",
+        "linkSteamAccountTitle": "Vincular cuenta de Steam",
+        "linkSteamAccountCta": "Iniciar sesión en Steam",
+        "linkSteamAccountDescription": "Inicia sesión en Steam para vincular tu cuenta HyperPlay."
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -897,5 +901,8 @@
             "minted": "Activar cadena",
             "notMinted": "Apagar cadena"
         }
-    }
+    },
+    "importGameErrorTitle": "Error al importar el juego",
+    "importGameErrorMessage": "No es una carpeta de juego válida, no es posible importar el juego",
+    "importGameErrorMessageExecutable": "No se encuentra el ejecutable del juego, no es posible importar el juego"
 }
