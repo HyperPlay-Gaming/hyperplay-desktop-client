@@ -1116,9 +1116,10 @@ export async function launch(
   const isAvailable = isGameAvailable(appName)
 
   if (!isAvailable) {
+    const { title } = getGameInfo(appName)
     const { response } = await dialog.showMessageBox({
       type: 'question',
-      title: i18next.t('box.error.folder-not-found.title', 'Game not found'),
+      title,
       message: i18next.t(
         'box.error.folder-not-found.title',
         'Game folder appears to be deleted, do you want to remove the game from the installed list?'
