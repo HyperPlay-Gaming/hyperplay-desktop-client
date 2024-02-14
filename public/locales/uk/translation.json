@@ -78,7 +78,10 @@
                 "message": "Під час виконання Winetricks повернув наступну помилку:{{newLine}}{{error}}",
                 "title": "Помилка Winetricks"
             },
-            "moving": "Помилка переміщення гри {{error}}"
+            "moving": "Помилка переміщення гри {{error}}",
+            "ubisoft-connect": {
+                "message": "Не вдалося встановити Ubisoft Connect в грі. Перевірте нашу сторінку вікі на https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac для установки його maunally."
+            }
         },
         "info": {
             "update": {
