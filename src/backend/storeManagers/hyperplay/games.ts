@@ -65,7 +65,7 @@ import {
 import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
-import { DownloadItem } from 'electron'
+import { DownloadItem, dialog } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
@@ -1275,6 +1275,28 @@ export async function launch(
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   launchArguments?: string
 ): Promise<boolean> {
+  const isAvailable = isGameAvailable(appName)
+
+  if (!isAvailable) {
+    const { title } = getGameInfo(appName)
+    const { response } = await dialog.showMessageBox({
+      type: 'question',
+      title,
+      message: i18next.t(
+        'box.error.folder-not-found.title',
+        'Game folder appears to be deleted, do you want to remove the game from the installed list?'
+      ),
+      buttons: [i18next.t('box.no'), i18next.t('box.yes')]
+    })
+
+    if (response === 1) {
+      await forceUninstall(appName)
+      return false
+    }
+
+    return false
+  }
+
   return launchGame(appName, getGameInfo(appName), 'hyperplay')
 }
 
