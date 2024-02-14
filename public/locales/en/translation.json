@@ -331,11 +331,15 @@
         "discordApp": "Discord",
         "folder": "Folder",
         "gamecard": {
+            "distributables": "Installing Distributables...",
             "extracting": "Extracting...",
             "installed": "Ready to play",
             "installing": "Downloading...",
             "paused": "Paused"
         },
+        "linkSteamAccountCta": "Go to Steam sign in",
+        "linkSteamAccountDescription": "Sign in to Steam to link your HyperPlay account.",
+        "linkSteamAccountTitle": "Link Steam Account",
         "misc": "Never",
         "onboarding": {
             "analytics": {
@@ -458,6 +462,9 @@
             "INITIATED": "Add custom token request pending"
         }
     },
+    "importGameErrorMessage": "Not a valid game folder, importing game is not possible",
+    "importGameErrorMessageExecutable": "Game Executable not found, importing game is not possible",
+    "importGameErrorTitle": "Import Game Error",
     "info": {
         "hyperplay": {
             "version": "HyperPlay Version"
