@@ -801,11 +801,13 @@
             "extracting": "Витягування...",
             "installed": "Готова до гри",
             "installing": "Завантаження...",
-            "distributables": "Встановлення дистрибутивів..."
+            "distributables": "Встановлення дистрибутивів...",
+            "paused": "Призупинено"
         },
         "linkSteamAccountTitle": "Прив'язати обліковий запис Steam",
         "linkSteamAccountCta": "Увійти в Steam",
-        "linkSteamAccountDescription": "Увійдіть в Steam, щоб прив'язати свій обліковий запис HyperPlay."
+        "linkSteamAccountDescription": "Увійдіть в Steam, щоб прив'язати свій обліковий запис HyperPlay.",
+        "Sync": "Синхронізувати"
     },
     "hyperplayOverlay": {
         "description": {
