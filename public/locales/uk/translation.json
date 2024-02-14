@@ -95,7 +95,7 @@
             }
         },
         "no": "НІ",
-        "ok": "Гаразд",
+        "ok": "ОК",
         "protocol": {
             "install": {
                 "not_installed": "Наразі не встановлена, встановити?"
@@ -388,7 +388,7 @@
         }
     },
     "offline-message": {
-        "hint": "Ми перевіряємо підключення до:{{newline}}github.com,{{newline}}gog.com,{{newline}}store.epicgames.com та{{newline}}cloudflare-dns.com",
+        "hint": "Ми перевіряємо з'єднання до:{{newline}}github.com,{{newline}}gog.com,{{newline}}store.epicgames.com та{{newline}}cloudflare-dns.com",
         "ignore": "Ignore",
         "offline": "Offline",
         "offline-retry-in": "Офлайн. Повторна спроба через {{seconds}} секунд.",
@@ -439,7 +439,8 @@
         "custom_themes_path": "Виберіть шлях для пошуку власних файлів CSS",
         "egs-prefix": "Префікс де встановлено EGS",
         "prefered_language": "2-значний код (приклад: \"en\" або \"uk\")",
-        "alt-nile-bin": "Використовуючи вбудований двійковий файл Nile..."
+        "alt-nile-bin": "Використовуючи вбудований двійковий файл Nile...",
+        "dxvkfpsvalue": "Позитивне ціле число (наприклад, 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -575,7 +576,12 @@
         "showMetalOverlay": "Показати статистику оверлею",
         "addgamestoapplications": "Автоматично додавати ігри до Applications",
         "disable_logs": "Вимкнути журнали",
-        "alt-nile-bin": "Виберіть альтернативний двійковий файл Nile"
+        "alt-nile-bin": "Виберіть альтернативний двійковий файл Nile",
+        "autodxvknvapi": "Автоматичне встановити/оновити DXVK-NVAPI на префіксі",
+        "experimental_features": {
+            "enableNewShinyFeature": "Нова яскрава функція"
+        },
+        "steamId": "Steam ID"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -610,7 +616,8 @@
             "log": "Журнал",
             "other": "Інше",
             "sync": "Синхронізація хмарних збережень",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Облікові записи"
         },
         "open-config-file": "Відкрити файл налаштування",
         "reset-hyperplay": "Скинути HyperPlay",
@@ -618,7 +625,10 @@
             "label": "Save Location:",
             "warning": "Збереження у хмарі, наразі у тестовому режимі. Будь ласка збережіть ваш файл збереження у іншому місці (у разі якщо щось піде не так)"
         },
-        "gamesSettings": "Налаштування ігор"
+        "gamesSettings": "Налаштування ігор",
+        "experimental_features": {
+            "title": "Експериментальні функції"
+        }
     },
     "Settings": "Налаштування",
     "sidebar": {
@@ -662,7 +672,8 @@
         "logout": "Вийти з облікого запису",
         "logout_confirmation": "Точно бажаєте вийти?",
         "manageaccounts": "Облікові записи",
-        "quit": "Закрити"
+        "quit": "Закрити",
+        "manageStore": "Керування крамницями"
     },
     "webview": {
         "controls": {
@@ -705,7 +716,7 @@
                             "title": "Дім для ваших цифрових активів"
                         },
                         "login": {
-                            "details": "Альтернатива створенню нових облікових записів і паролів на кожному вебсайті - просто підключіть свій гаманець.",
+                            "details": "Альтернатива створенню нових облікових записів і паролів на кожному вебсайті - просто під'єднайте свій гаманець.",
                             "title": "Новий спосіб входу"
                         },
                         "createWalletCTA": "Створити гаманець",
@@ -728,16 +739,16 @@
                         "title": "Скануйте QR за допомогою "
                     }
                 },
-                "pleaseConnect": "Будь ласка, підключіть свій гаманець або завантажте мобільний застосунок Metamask, щоб отримати\n        почати роботу:",
-                "title": "Підключення гаманця"
+                "pleaseConnect": "Будь ласка, під'єднайте свій гаманець або завантажте мобільний застосунок Metamask, щоб отримати\n        почати роботу:",
+                "title": "Під'єднання гаманця"
             },
             "connectionCanceled": {
-                "title": "Підключення скасовано!",
-                "description": "Будь ласка, підтвердіть запит на підключення у своєму мобільному гаманці, щоб продовжити."
+                "title": "З'єднання скасовано!",
+                "description": "Будь ласка, підтвердіть запит на з'єднання у своєму мобільному гаманці, щоб продовжити."
             },
             "connectionConnected": {
-                "title": "Гаманець підключено!",
-                "description": "Ваш гаманець підключено. Ви готові до гри."
+                "title": "Гаманець під'єднано!",
+                "description": "Ваш гаманець під'єднано. Ви готові до гри."
             },
             "welcome": {
                 "text": {
@@ -749,7 +760,7 @@
                 },
                 "title": "Ласкаво просимо до раннього доступу HyperPlay!"
             },
-            "connectAgain": "Підключитися знову",
+            "connectAgain": "Під'єжнатися знову",
             "terms": "Умови надання послуг."
         },
         "analyticsOff": "Аналітика вимкнена",
@@ -763,8 +774,8 @@
         "turnAnalyticsOff": "Вимкнути",
         "turnAnalyticsOn": "Ввімкнено",
         "wallet": {
-            "connected": "Підключено",
-            "notConnected": "Не підключено"
+            "connected": "З'єднано",
+            "notConnected": "Немає з'єднання"
         },
         "changeWallet": "Змінити гаманець",
         "viewPortfolio": "Переглянути портфоліо",
@@ -807,7 +818,8 @@
         "linkSteamAccountTitle": "Прив'язати обліковий запис Steam",
         "linkSteamAccountCta": "Увійти в Steam",
         "linkSteamAccountDescription": "Увійдіть в Steam, щоб прив'язати свій обліковий запис HyperPlay.",
-        "Sync": "Синхронізувати"
+        "Sync": "Синхронізувати",
+        "syncing": "Синхронізація..."
     },
     "hyperplayOverlay": {
         "description": {
@@ -879,7 +891,7 @@
         "alpha": "Альфа"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Ви підключені до HyperPlay за допомогою зовнішнього гаманця.\n\nДля затвердження транзакцій в оверлеї HyperPlay вам потрібно буде підключитися до HyperPlay з розширенням MetaMask."
+        "EXTERNAL_WALLET_CONNECTED": "Ви під'єднані до HyperPlay за допомогою зовнішнього гаманця.\n\nДля затвердження транзакцій в оверлеї HyperPlay вам потрібно буде під'єднатися до HyperPlay з розширенням MetaMask."
     },
     "dlc": {
         "size": "Розмір",
@@ -899,5 +911,8 @@
             "minted": "ввімкнути ланцюг",
             "notMinted": "вимкнути ланцюг"
         }
-    }
+    },
+    "importGameErrorTitle": "Помилка імпорту гри",
+    "importGameErrorMessage": "Невірна тека гри, імпорт гри неможливий",
+    "importGameErrorMessageExecutable": "Виконавчий файл гри не знайдено, імпорт гри неможливий"
 }
