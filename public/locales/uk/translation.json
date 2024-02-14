@@ -869,7 +869,8 @@
     "prime-gaming": "Prime Gaming",
     "achievements": {
         "progress": {
-            "minted": "на ланцюг"
+            "minted": "ввімкнути ланцюг",
+            "notMinted": "вимкнути ланцюг"
         }
     }
 }
