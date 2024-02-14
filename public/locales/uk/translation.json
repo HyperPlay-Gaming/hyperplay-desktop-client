@@ -80,7 +80,8 @@
             },
             "moving": "Помилка переміщення гри {{error}}",
             "ubisoft-connect": {
-                "message": "Не вдалося встановити Ubisoft Connect в грі. Перевірте нашу сторінку вікі на https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac для установки його maunally."
+                "message": "Не вдалося встановити Ubisoft Connect в префіксі грі. Перевірте нашу сторінку вікі https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac для ручного встановлення.",
+                "title": "Ubisoft Connect"
             }
         },
         "info": {
@@ -780,7 +781,31 @@
                 "validation": "Код доступу недійсний"
             }
         },
-        "viewItem": "Переглянути {{item}}"
+        "viewItem": "Переглянути {{item}}",
+        "browserImport": {
+            "appId": "ID застосунку",
+            "profile": "Профіль"
+        },
+        "folder": "Тека",
+        "achievements": {
+            "addThisGame": "Додати цю гру",
+            "freeMints": "Безплатний Mints",
+            "gamesToMint": "Ігри до mint",
+            "noAchievements": {
+                "oops": "Ой!",
+                "doubleCheckMessage": "Схоже, ми не змогли знайти жодної гри у вашому обліковому записі Steam. Просто нагадуємо, що потрібно перевірити, чи увімкнена публічний показ вашої гри. Так ми зможемо отримати доступ до ваших досягнень і забезпечити вам найкращий досвід."
+            }
+        },
+        "connectWallet": "Під'єднати гаманець",
+        "gamecard": {
+            "extracting": "Витягування...",
+            "installed": "Готова до гри",
+            "installing": "Завантаження...",
+            "distributables": "Встановлення дистрибутивів..."
+        },
+        "linkSteamAccountTitle": "Прив'язати обліковий запис Steam",
+        "linkSteamAccountCta": "Увійти в Steam",
+        "linkSteamAccountDescription": "Увійдіть в Steam, щоб прив'язати свій обліковий запис HyperPlay."
     },
     "hyperplayOverlay": {
         "description": {
