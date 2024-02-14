@@ -10,6 +10,7 @@ import onboardingStore from 'frontend/store/OnboardingStore'
 import { useTranslation } from 'react-i18next'
 import { PROVIDERS } from 'common/types/proxy-types'
 import authState from 'frontend/state/authState'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 function NavigationMenuItem({
   label,
@@ -36,7 +37,9 @@ function NavigationMenuItem({
 }
 
 const WalletDropdown: React.FC = observer(() => {
+  const flags = useFlags()
   const { t } = useTranslation()
+  const isAuthEnabled = flags.auth
   const showWalletConnectedLinks = walletState.isConnected
   const showMetaMaskExtensionLinks =
     walletState.isConnected &&
@@ -117,17 +120,21 @@ const WalletDropdown: React.FC = observer(() => {
             </div>
           </NavLink>
         </Menu.Item>
-        <Menu.Label className={styles.menuLabel}>
-          HyperPlay {t('accounts', `accounts`)}
-        </Menu.Label>
-        <Menu.Item
-          onClick={() => authState.openSignInModal()}
-          className={styles.menuItem}
-        >
-          <div className={`body ${styles.itemContents}`}>
-            {t('userselector.manageaccounts', `Manage accounts`)}
-          </div>
-        </Menu.Item>
+        {isAuthEnabled && (
+          <>
+            <Menu.Label className={styles.menuLabel}>
+              HyperPlay {t('accounts', `accounts`)}
+            </Menu.Label>
+            <Menu.Item
+              onClick={() => authState.openSignInModal()}
+              className={styles.menuItem}
+            >
+              <div className={`body ${styles.itemContents}`}>
+                {t('userselector.manageaccounts', `Manage accounts`)}
+              </div>
+            </Menu.Item>
+          </>
+        )}
       </Menu.Dropdown>
     </Menu>
   )
