@@ -10,6 +10,7 @@ import onboardingStore from 'frontend/store/OnboardingStore'
 import { useTranslation } from 'react-i18next'
 import { PROVIDERS } from 'common/types/proxy-types'
 import authState from 'frontend/state/authState'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 import classNames from 'classnames'
 import useAuthSession from '../../../hooks/useAuthSession'
 
@@ -38,7 +39,9 @@ function NavigationMenuItem({
 
 const WalletDropdown: React.FC = observer(() => {
   const { isSignedIn, invalidateQuery } = useAuthSession()
+  const flags = useFlags()
   const { t } = useTranslation()
+  const isAuthEnabled = flags.auth
   const showWalletConnectedLinks = walletState.isConnected
   const showMetaMaskExtensionLinks =
     walletState.isConnected &&
@@ -126,32 +129,38 @@ const WalletDropdown: React.FC = observer(() => {
             </div>
           </NavLink>
         </Menu.Item>
-        <Divider className={styles.divider} />
-        <Menu.Label>HyperPlay {t('profile', `Profile`)}</Menu.Label>
-        {isSignedIn ? (
+        {isAuthEnabled && (
           <>
-            <Menu.Item onClick={() => authState.openSignInModal()}>
-              <div className={`body ${styles.itemContents}`}>
-                {t('userselector.manageaccounts', `Manage accounts`)}
-              </div>
-            </Menu.Item>
-            <Menu.Item
-              onClick={async () => {
-                await window.api.logOut()
-                await invalidateQuery()
-              }}
-            >
-              <div className={`body ${styles.itemContents} ${styles.logOut}`}>
-                {t('hyperplay.logOut', `Log out`)}
-              </div>
-            </Menu.Item>
+            <Divider className={styles.divider} />
+            <Menu.Label>HyperPlay {t('profile', `Profile`)}</Menu.Label>
+            {isSignedIn ? (
+              <>
+                <Menu.Item onClick={() => authState.openSignInModal()}>
+                  <div className={`body ${styles.itemContents}`}>
+                    {t('userselector.manageaccounts', `Manage accounts`)}
+                  </div>
+                </Menu.Item>
+                <Menu.Item
+                  onClick={async () => {
+                    await window.api.logOut()
+                    await invalidateQuery()
+                  }}
+                >
+                  <div
+                    className={`body ${styles.itemContents} ${styles.logOut}`}
+                  >
+                    {t('hyperplay.logOut', `Log out`)}
+                  </div>
+                </Menu.Item>
+              </>
+            ) : (
+              <Menu.Item onClick={() => authState.openSignInModal()}>
+                <div className={`body ${styles.itemContents}`}>
+                  {t('userselector.logIn', `Log in`)}
+                </div>
+              </Menu.Item>
+            )}
           </>
-        ) : (
-          <Menu.Item onClick={() => authState.openSignInModal()}>
-            <div className={`body ${styles.itemContents}`}>
-              {t('userselector.logIn', `Log in`)}
-            </div>
-          </Menu.Item>
         )}
       </Menu.Dropdown>
     </Menu>

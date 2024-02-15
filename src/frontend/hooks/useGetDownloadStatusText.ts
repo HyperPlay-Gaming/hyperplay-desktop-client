@@ -22,6 +22,9 @@ export function useGetDownloadStatusText(
   )
 
   function getStatus() {
+    if (status === 'distributables') {
+      return 'distributables'
+    }
     if (status === 'extracting') {
       return 'extracting'
     }

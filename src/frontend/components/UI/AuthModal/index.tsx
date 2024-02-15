@@ -10,6 +10,7 @@ import onboardingState from '../../../store/OnboardingStore'
 import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
 import useAuthSession from '../../../hooks/useAuthSession'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
@@ -20,8 +21,10 @@ const isTooManyRequestsError = (error: string) => {
 }
 
 const AuthModal = () => {
+  const flags = useFlags()
   const authSession = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
+  const isAuthEnabled = flags.auth
 
   const sendRetryConnectionMessage = () => {
     const webview = webviewRef.current
@@ -115,7 +118,7 @@ const AuthModal = () => {
 
   return (
     <ModalAnimation
-      isOpen={authState.isSignInModalOpen}
+      isOpen={isAuthEnabled && authState.isSignInModalOpen}
       onClose={() => authState.closeSignInModal()}
     >
       <webview
