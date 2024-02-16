@@ -99,12 +99,6 @@ export default defineConfig({
       },
       {
         entry: path.resolve(
-          __dirname + '/src/backend/transparent_body_preload.ts'
-        ),
-        vite: electronViteConfig
-      },
-      {
-        entry: path.resolve(
           __dirname + '/src/backend/auth_provider_preload.ts'
         ),
         vite: electronViteConfig

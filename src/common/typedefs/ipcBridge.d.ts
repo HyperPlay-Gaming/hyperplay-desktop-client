@@ -252,6 +252,7 @@ interface HyperPlayAsyncIPCFunctions {
   get_extension_state_isPopupOpen: () => Promise<boolean>
   getLDEnvConfig: () => Promise<LDEnv>
   getAuthSession: () => Promise<AuthSession | null>
+  logOut: () => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

@@ -1,4 +1,4 @@
-import { Menu } from '@mantine/core'
+import { Divider, Menu } from '@mantine/core'
 import React from 'react'
 import walletState from 'frontend/state/WalletState'
 import { observer } from 'mobx-react-lite'
@@ -11,6 +11,8 @@ import { useTranslation } from 'react-i18next'
 import { PROVIDERS } from 'common/types/proxy-types'
 import authState from 'frontend/state/authState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import classNames from 'classnames'
+import useAuthSession from '../../../hooks/useAuthSession'
 
 function NavigationMenuItem({
   label,
@@ -23,7 +25,6 @@ function NavigationMenuItem({
 }) {
   return (
     <Menu.Item
-      className={styles.menuItem}
       id={showMetaMaskExtensionLinks ? 'topMenuItemWalletDropdown' : undefined}
     >
       <NavLink
@@ -37,6 +38,7 @@ function NavigationMenuItem({
 }
 
 const WalletDropdown: React.FC = observer(() => {
+  const { isSignedIn, invalidateQuery } = useAuthSession()
   const flags = useFlags()
   const { t } = useTranslation()
   const isAuthEnabled = flags.auth
@@ -46,7 +48,16 @@ const WalletDropdown: React.FC = observer(() => {
     walletState.provider === PROVIDERS.METAMASK_EXTENSION
 
   return (
-    <Menu position="bottom" trigger="hover" zIndex={100001}>
+    <Menu
+      position="bottom-end"
+      trigger="hover"
+      zIndex={100001}
+      classNames={{
+        dropdown: styles.menuDropdown,
+        item: styles.menuItem,
+        label: classNames('eyebrow', styles.menuLabel)
+      }}
+    >
       <Menu.Target>
         <div>
           <Wallet
@@ -56,14 +67,24 @@ const WalletDropdown: React.FC = observer(() => {
           />
         </div>
       </Menu.Target>
-      <Menu.Dropdown className={styles.menuDropdown}>
+      <Menu.Dropdown>
         <Menu.Label className={styles.menuLabel}>
           {t('hyperplay.currentWallet', `Current wallet`)}
         </Menu.Label>
+        <Menu.Item
+          className={styles.menuItem}
+          onClick={() => onboardingStore.openOnboarding()}
+        >
+          <div className={`body ${styles.itemContents}`}>
+            {showWalletConnectedLinks
+              ? t('hyperplay.changeWallet', `Swap wallet account`)
+              : t('hyperplay.connectWallet', `Connect wallet`)}
+          </div>
+        </Menu.Item>
         {showMetaMaskExtensionLinks && (
           <>
             <NavigationMenuItem
-              label={t('hyperplay.viewFullscreen', `View fullscreen`)}
+              label={t('hyperplay.viewMyAccount', `View my account`)}
               to={'/metamaskHome'}
               showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
             ></NavigationMenuItem>
@@ -77,7 +98,7 @@ const WalletDropdown: React.FC = observer(() => {
             ></NavigationMenuItem>
           </>
         )}
-        {showWalletConnectedLinks && (
+        {showMetaMaskExtensionLinks && (
           <Menu.Item
             className={`${styles.menuItem} `}
             id={
@@ -100,20 +121,8 @@ const WalletDropdown: React.FC = observer(() => {
             </NavLink>
           </Menu.Item>
         )}
-        <Menu.Item
-          className={styles.menuItem}
-          onClick={() => onboardingStore.openOnboarding()}
-        >
-          <div className={`body ${styles.itemContents}`}>
-            {showWalletConnectedLinks
-              ? t('hyperplay.changeWallet', `Change wallet`)
-              : t('hyperplay.connectWallet', `Connect wallet`)}
-          </div>
-        </Menu.Item>
-        <Menu.Label className={styles.menuLabel}>
-          Epic/GoG {t('accounts', `accounts`)}
-        </Menu.Label>
-        <Menu.Item className={styles.menuItem}>
+        <Menu.Label>Epic/GoG {t('accounts', `accounts`)}</Menu.Label>
+        <Menu.Item>
           <NavLink to={'/login'}>
             <div className={`body ${styles.itemContents}`}>
               {t('userselector.manageStore', `Manage stores`)}
@@ -122,17 +131,35 @@ const WalletDropdown: React.FC = observer(() => {
         </Menu.Item>
         {isAuthEnabled && (
           <>
-            <Menu.Label className={styles.menuLabel}>
-              HyperPlay {t('accounts', `accounts`)}
-            </Menu.Label>
-            <Menu.Item
-              onClick={() => authState.openSignInModal()}
-              className={styles.menuItem}
-            >
-              <div className={`body ${styles.itemContents}`}>
-                {t('userselector.manageaccounts', `Manage accounts`)}
-              </div>
-            </Menu.Item>
+            <Divider className={styles.divider} />
+            <Menu.Label>HyperPlay {t('profile', `Profile`)}</Menu.Label>
+            {isSignedIn ? (
+              <>
+                <Menu.Item onClick={() => authState.openSignInModal()}>
+                  <div className={`body ${styles.itemContents}`}>
+                    {t('userselector.manageaccounts', `Manage accounts`)}
+                  </div>
+                </Menu.Item>
+                <Menu.Item
+                  onClick={async () => {
+                    await window.api.logOut()
+                    await invalidateQuery()
+                  }}
+                >
+                  <div
+                    className={`body ${styles.itemContents} ${styles.logOut}`}
+                  >
+                    {t('hyperplay.logOut', `Log out`)}
+                  </div>
+                </Menu.Item>
+              </>
+            ) : (
+              <Menu.Item onClick={() => authState.openSignInModal()}>
+                <div className={`body ${styles.itemContents}`}>
+                  {t('userselector.logIn', `Log in`)}
+                </div>
+              </Menu.Item>
+            )}
           </>
         )}
       </Menu.Dropdown>

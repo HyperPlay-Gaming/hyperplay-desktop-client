@@ -417,7 +417,6 @@ if (!gotTheLock) {
     const authSession = session.fromPartition('persist:auth')
     authSession.setPreloads([
       path.join(__dirname, 'providerPreload.js'),
-      path.join(__dirname, 'transparent_body_preload.js'),
       path.join(__dirname, 'auth_provider_preload.js')
     ])
 
