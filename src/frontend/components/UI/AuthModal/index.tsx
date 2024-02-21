@@ -43,7 +43,7 @@ const AuthModal = () => {
       return
     }
 
-    if (window.ethereum === undefined){
+    if (window.ethereum === undefined) {
       console.error('window.ethereum is undefined!')
       return
     }
