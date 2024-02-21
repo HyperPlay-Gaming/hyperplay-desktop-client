@@ -161,9 +161,9 @@
     "@hyperplay/ui": "^1.1.27",
     "@mantine/carousel": "^7.5.1",
     "@mantine/core": "^7.5.1",
-    "@mantine/hooks": "^7.5.1",
     "@mantine/dropzone": "^7.5.1",
-    "@metamask/sdk": "^0.12.0",
+    "@mantine/hooks": "^7.5.1",
+    "@metamask/sdk": "^0.15.0",
     "@mui/icons-material": "^5.10.9",
     "@mui/material": "^5.10.12",
     "@mysten/sui.js": "^0.45.1",
@@ -362,7 +362,9 @@
       "vite>esbuild": true,
       "$root$": true,
       "postinstall-postinstall": true,
-      "@rudderstack/rudder-sdk-node": true
+      "@rudderstack/rudder-sdk-node": true,
+      "jsdom>ws>bufferutil": true,
+      "jsdom>ws>utf-8-validate": true
     }
   }
 }
