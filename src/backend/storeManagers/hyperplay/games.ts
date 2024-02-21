@@ -775,7 +775,7 @@ export async function install(
     if (!platformInfo) {
       return {
         status: 'error',
-        error: `Platform info not found for ${appName}`
+        error: `Platform info not found for ${appName} for platform ${appPlatform} and release meta ${JSON.stringify(releaseMeta)}`
       }
     }
 
