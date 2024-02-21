@@ -43,6 +43,11 @@ const AuthModal = () => {
       return
     }
 
+    if (window.ethereum === undefined){
+      console.error('window.ethereum is undefined!')
+      return
+    }
+
     // try to trigger metamask popup to connect account
     try {
       const provider = new ethers.BrowserProvider(window.ethereum)
