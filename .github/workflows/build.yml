@@ -82,7 +82,7 @@ jobs:
       - name: Build pacman artifact
         run: yarn dist:linux:ci:pacman
   build_mac_x64:
-    runs-on: macos-13
+    runs-on: macos-latest
     concurrency:
       group: build-mac-x64-${{ github.ref }}
       cancel-in-progress: true
@@ -108,12 +108,18 @@ jobs:
       - name: setup env production file
         run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID_TEST }}" > .env
       - name: Build artifacts.
-        run: yarn dist:mac:x64
+        run: yarn dist:mac
         env:
           NOTARIZE: false
       - name: Upload Intel build.
         uses: actions/upload-artifact@v3
         with:
-          name: mac-dmg-x64
+          name: mac-intel
           path: dist/HyperPlay*x64.dmg
+          retention-days: 7
+      - name: Upload ARM build.
+        uses: actions/upload-artifact@v3
+        with:
+          name: mac-arm64
+          path: dist/HyperPlay*arm64.dmg
           retention-days: 7
