@@ -125,6 +125,7 @@ export default function DownloadDialog({
     useContext(ContextProvider)
 
   const isWin = platform === 'win32'
+  const isNotNative = platformToInstall === 'Windows' && !isWin
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
     | LegendaryInstallInfo
@@ -251,6 +252,7 @@ export default function DownloadDialog({
           platformToInstall,
           channelNameToInstall
         )
+
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 
@@ -427,6 +429,15 @@ export default function DownloadDialog({
             key={p.value}
           />
         ))}
+        {isNotNative && (
+          <div className="warning">
+            {`${t(
+              'install.compatibility-warning',
+              'This Windows game will run using a compatibility layer. Your experience may vary.'
+            )}`}
+          </div>
+        )
+        }
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
       <DialogContent>
