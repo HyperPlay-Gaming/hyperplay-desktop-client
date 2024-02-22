@@ -41,14 +41,14 @@ import si from 'systeminformation'
 import {
   fixAsarPath,
   getSteamLibraries,
-  configPath,
   gamesConfigPath,
   icon,
   isWindows,
   publicDir,
   isMac,
   configStore,
-  isLinux
+  isLinux,
+  appFolder
 } from './constants'
 import {
   logError,
@@ -487,9 +487,13 @@ function clearCache(library?: 'gog' | 'legendary' | 'nile') {
 }
 
 function resetApp() {
-  const appConfigFolders = [gamesConfigPath, configPath]
+  const appConfigFolders = [appFolder]
   appConfigFolders.forEach((folder) => {
-    rmSync(folder, { recursive: true, force: true })
+    try {
+      rmSync(folder, { recursive: true, force: true })
+    } catch (e) {
+      console.error(`Error while removing ${folder} ${e}`)
+    }
   })
   // wait a sec to avoid racing conditions
   setTimeout(() => {

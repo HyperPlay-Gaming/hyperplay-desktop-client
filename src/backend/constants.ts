@@ -305,5 +305,6 @@ export {
   nileInstalled,
   nileLibrary,
   nileUserData,
-  cachedUbisoftInstallerPath
+  cachedUbisoftInstallerPath,
+  appFolder
 }
