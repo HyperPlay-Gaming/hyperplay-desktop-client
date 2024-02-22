@@ -316,7 +316,9 @@ export default function DownloadDialog({
       if (gameInstallInfo?.manifest?.disk_size) {
         let notEnoughDiskSpace = free < uncompressedSize
         // downloads the entire zip, then extracts the entire zip, then deletes the zip, so we need space for both
-        let spaceLeftAfter = size(free - Number(uncompressedSize) - Number(gameDownloadSize))
+        let spaceLeftAfter = size(
+          free - Number(uncompressedSize) - Number(gameDownloadSize)
+        )
 
         const partiallyDownloaded = previousProgress.folder === installPath
         if (partiallyDownloaded) {
@@ -326,7 +328,9 @@ export default function DownloadDialog({
 
           // downloads the entire zip, then extracts the entire zip, then deletes the zip, so we need space for both
           spaceLeftAfter = size(
-            free - Number(uncompressedSize) - (progress / 100) * gameDownloadSize
+            free -
+              Number(uncompressedSize) -
+              (progress / 100) * gameDownloadSize
           )
         }
 
