@@ -81,8 +81,8 @@ jobs:
         run: yarn dist:linux:ci:rpm
       - name: Build pacman artifact
         run: yarn dist:linux:ci:pacman
-  build_mac_x64:
-    runs-on: macos-latest
+  build_mac:
+    runs-on: macos-latest-xlarge
     concurrency:
       group: build-mac-x64-${{ github.ref }}
       cancel-in-progress: true
