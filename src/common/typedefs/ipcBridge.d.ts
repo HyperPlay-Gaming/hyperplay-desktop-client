@@ -168,7 +168,7 @@ interface HyperPlayAsyncIPCFunctions {
   chromeWindowsGetCurrent: (
     queryOptions?: chrome.windows.QueryOptions,
     callback?: (window: chrome.windows.Window) => void
-  ) => Promise<chrome.windows.Window>
+  ) => Promise<string>
   chromeWindowsRemove: (windowId: number) => Promise<void>
   chromeWindowsGetAll: (
     queryOptions?: string,
