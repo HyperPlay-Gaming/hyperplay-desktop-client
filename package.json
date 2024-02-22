@@ -315,7 +315,7 @@
     "@valist/sdk": "^2.9.1",
     "@vitejs/plugin-react": "^2.2.0",
     "cross-env": "^7.0.3",
-    "electron": "^29.0.0",
+    "electron": "^28.0.0",
     "electron-builder": "^24.6.3",
     "electron-playwright-helpers": "^1.6.0",
     "electron-vite": "^1.0.23",
