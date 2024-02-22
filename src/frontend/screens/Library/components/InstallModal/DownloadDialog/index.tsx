@@ -162,10 +162,12 @@ export default function DownloadDialog({
   const { i18n, t } = useTranslation('gamepage')
   const { t: tr } = useTranslation()
 
+  const diskSize = gameInstallInfo?.manifest?.disk_size || 0
+  const gameDownloadSize = gameInstallInfo?.manifest?.download_size || 0
   const uncompressedSize = useEstimatedUncompressedSize(
     platformToInstall,
-    gameInstallInfo?.manifest?.disk_size || 0,
-    gameInstallInfo?.manifest?.download_size || 0
+    diskSize,
+    gameDownloadSize
   )
 
   const haveSDL = sdls.length > 0
@@ -313,14 +315,22 @@ export default function DownloadDialog({
       )
       if (gameInstallInfo?.manifest?.disk_size) {
         let notEnoughDiskSpace = free < uncompressedSize
-        let spaceLeftAfter = size(free - Number(uncompressedSize))
-        if (previousProgress.folder === installPath) {
+        // downloads the entire zip, then extracts the entire zip, then deletes the zip, so we need space for both
+        let spaceLeftAfter = size(
+          free - Number(uncompressedSize) - Number(gameDownloadSize)
+        )
+
+        const partiallyDownloaded = previousProgress.folder === installPath
+        if (partiallyDownloaded) {
           const progress = 100 - getProgress(previousProgress)
           notEnoughDiskSpace =
             free < (progress / 100) * Number(uncompressedSize)
 
+          // downloads the entire zip, then extracts the entire zip, then deletes the zip, so we need space for both
           spaceLeftAfter = size(
-            free - (progress / 100) * Number(uncompressedSize)
+            free -
+              Number(uncompressedSize) -
+              (progress / 100) * gameDownloadSize
           )
         }
 
@@ -340,7 +350,6 @@ export default function DownloadDialog({
     gameInstallInfo.game.owned_dlc.length > 0
 
   const DLCList = gameInstallInfo?.game?.owned_dlc
-  const gameDownloadSize = gameInstallInfo?.manifest?.download_size
   const downloadSize = () => {
     if (gameDownloadSize !== undefined && gameInstallInfo !== null) {
       if (previousProgress.folder === installPath) {
