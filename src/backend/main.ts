@@ -65,6 +65,7 @@ import {
   isEpicServiceOffline,
   openUrlOrFile,
   resetApp,
+  setGPTKDefaultOnMacOS,
   showAboutWindow,
   showItemInFolder,
   wait
@@ -306,6 +307,9 @@ async function initializeWindow(): Promise<BrowserWindow> {
       Winetricks.download(),
       shouldDownloadWine ? downloadDefaultWine() : null
     ])
+    if (isMac) {
+      await setGPTKDefaultOnMacOS()
+    }
   }, 2500)
 
   GlobalConfig.get()

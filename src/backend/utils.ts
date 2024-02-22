@@ -965,6 +965,26 @@ export async function downloadDefaultWine() {
   return null
 }
 
+export async function setGPTKDefaultOnMacOS() {
+  const wineList = await GlobalConfig.get().getAlternativeWine()
+  const gptk = wineList.find((wine) => wine.type === 'toolkit')
+  if (!gptk) {
+    await downloadDefaultWine()
+    return
+  }
+  if (gptk && existsSync(gptk.bin)) {
+    logInfo(`Changing wine version to ${gptk.name}`)
+    GlobalConfig.get().setSetting('wineVersion', gptk)
+    // update prefix to use the new one as well
+    const installPath = GlobalConfig.get().getSettings().defaultInstallPath
+    const newPrefix = join(installPath, 'Prefixes', 'GPTK')
+    GlobalConfig.get().setSetting('winePrefix', newPrefix)
+
+    return true
+  }
+  return false
+}
+
 export async function checkWineBeforeLaunch(
   appName: string,
   gameSettings: GameSettings,
