@@ -18,41 +18,6 @@ env:
 
 jobs:
   release-x64:
-    runs-on: macos-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-          cache: 'yarn'
-
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-
-      - name: Authenticate with private NPM package
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-
-      - name: Install dependencies
-        run: yarn setup
-
-      - name: setup env production file
-        run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
-
-      - name: Build artifacts.
-        run: yarn release:mac:x64
-        env:
-          NOTARIZE: true
-
-  release-arm64:
     runs-on: macos-latest-xlarge
 
     steps:
@@ -83,6 +48,6 @@ jobs:
         run: echo "VITE_LD_ENVIRONMENT_ID=${{ secrets.VITE_LD_ENVIRONMENT_ID }}" > .env.production
 
       - name: Build artifacts.
-        run: yarn release:mac:arm64
+        run: yarn release:mac
         env:
           NOTARIZE: true
