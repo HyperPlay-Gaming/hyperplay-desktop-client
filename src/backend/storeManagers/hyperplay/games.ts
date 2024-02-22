@@ -30,7 +30,8 @@ import {
   isWindows,
   isLinux,
   configFolder,
-  getValidateLicenseKeysApiUrl
+  getValidateLicenseKeysApiUrl,
+  configStore
 } from 'backend/constants'
 import {
   downloadFile,
@@ -559,7 +560,11 @@ function getZipFileName(
   platformInfo: PlatformConfig
 ): { directory: string; filename: string } {
   const zipName = encodeURI(platformInfo.name)
-  const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
+  const downloadFolder = configStore.get(
+    'settings.defaultInstallPath',
+    configFolder
+  )
+  const tempfolder = path.join(downloadFolder, 'hyperplay', '.temp', appName)
 
   if (!existsSync(tempfolder)) {
     mkdirSync(tempfolder, { recursive: true })
