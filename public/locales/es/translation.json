@@ -879,7 +879,7 @@
         "closeOverlay": "Pulsa {{overlayKeyMod}} + X para cerrar la superposición"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo. \n \n Para aprobar las transacciones en la superposición de HyperPlay, deberá conectarse a HyperPlay con la extensión MetaMask."
+        "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo."
     },
     "sideload": {
         "warningTitle": "Importante",
