@@ -1,3 +1,5 @@
+/*TODO: use scss for this file*/
+
 .SidebarLinks {
   grid-area: links;
   padding-top: var(--sidebar-vertical-padding);
@@ -55,4 +57,11 @@
 .Sidebar__item.disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.Tooltip {
+  padding: var(--space-xs) var(--space-md);
+  background: var(--color-neutral-600);
+  color: var(--color-neutral-100);
+  border-radius: var(--space-xs);
 }
