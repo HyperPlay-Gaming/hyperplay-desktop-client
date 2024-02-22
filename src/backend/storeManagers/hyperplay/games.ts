@@ -29,9 +29,7 @@ import {
   isMac,
   isWindows,
   isLinux,
-  configFolder,
-  getValidateLicenseKeysApiUrl,
-  configStore
+  getValidateLicenseKeysApiUrl
 } from 'backend/constants'
 import {
   downloadFile,
@@ -557,14 +555,11 @@ function sanitizeFileName(filename: string) {
 
 function getZipFileName(
   appName: string,
-  platformInfo: PlatformConfig
+  platformInfo: PlatformConfig,
+  destinationPath: string
 ): { directory: string; filename: string } {
   const zipName = encodeURI(platformInfo.name)
-  const downloadFolder = configStore.get(
-    'settings.defaultInstallPath',
-    configFolder
-  )
-  const tempfolder = path.join(downloadFolder, 'hyperplay', '.temp', appName)
+  const tempfolder = path.join(destinationPath, '.temp', appName)
 
   if (!existsSync(tempfolder)) {
     mkdirSync(tempfolder, { recursive: true })
@@ -803,7 +798,7 @@ export async function install(
     }
 
     logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
-    const zipPathInfo = getZipFileName(appName, platformInfo)
+    const zipPathInfo = getZipFileName(appName, platformInfo, destinationPath)
     directory = zipPathInfo.directory
     fileName = zipPathInfo.filename
 
@@ -915,7 +910,7 @@ export async function extract(
     }
 
     const { title } = gameInfo
-    const zipPathInfo = getZipFileName(appName, platformInfo)
+    const zipPathInfo = getZipFileName(appName, platformInfo, destinationPath)
     directory = zipPathInfo.directory
     fileName = zipPathInfo.filename
 
