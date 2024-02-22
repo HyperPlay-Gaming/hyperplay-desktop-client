@@ -103,7 +103,7 @@ const Overlay = observer(function ({ appName, runner }: BrowserGameProps) {
         <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
           {t(
             'overlay.EXTERNAL_WALLET_CONNECTED',
-            'You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension.'
+            'You are connected to HyperPlay with an external wallet.'
           )}
         </div>
       )
