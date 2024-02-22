@@ -8,7 +8,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { getGameInfo, install, launch } from 'frontend/helpers'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
-import { updateGame } from 'frontend/helpers/library'
+import { isNotNative, updateGame } from 'frontend/helpers/library'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
 import { observer } from 'mobx-react-lite'
@@ -57,7 +57,7 @@ const GameCard = ({
 
   const navigate = useNavigate()
 
-  const { layout, allTilesInColor, showDialogModal, setIsSettingsModalOpen } =
+  const { layout, allTilesInColor, showDialogModal, setIsSettingsModalOpen, platform } =
     useContext(ContextProvider)
 
   const {
@@ -430,7 +430,8 @@ const GameCard = ({
         t,
         runner,
         hasUpdate,
-        showDialogModal
+        showDialogModal,
+        isNotNative: isNotNative(platform, gameInfo.install.platform!)
       })
     }
     return

@@ -509,7 +509,9 @@ class GlobalState extends PureComponent<Props> {
             t,
             runner,
             hasUpdate,
-            showDialogModal: this.handleShowDialogModal
+            showDialogModal: this.handleShowDialogModal,
+            // don't show warning here to avoid blocking the launch process from protocol
+            isNotNative: false
           })
         }
         return { status: 'error' }

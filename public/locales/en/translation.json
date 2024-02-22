@@ -324,7 +324,7 @@
             "agree": "I agree",
             "noThanks": "No Thanks"
         },
-        "swapWallet": "Swap wallet account",
+        "changeWallet": "Swap wallet account",
         "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
@@ -340,6 +340,7 @@
         "linkSteamAccountCta": "Go to Steam sign in",
         "linkSteamAccountDescription": "Sign in to Steam to link your HyperPlay account.",
         "linkSteamAccountTitle": "Link Steam Account",
+        "logOut": "Log out",
         "misc": "Never",
         "onboarding": {
             "analytics": {
@@ -415,14 +416,9 @@
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
-        "viewFullscreen": "View fullscreen",
-        "viewMyAccount": "View my account",
         "viewItem": "View {{item}}",
-        "viewPortfolio": "View portfolio",
-        "wallet": {
-            "connected": "Connected",
-            "notConnected": "Not connected"
-        }
+        "viewMyAccount": "View my account",
+        "viewPortfolio": "View portfolio"
     },
     "HyperPlay": "",
     "hyperplayOverlay": {
@@ -615,6 +611,7 @@
     },
     "Please connect to the internet to access the stores": "",
     "please-wait": "Please wait...",
+    "profile": "Profile",
     "progress": "Progress",
     "queue": {
         "label": {
@@ -798,6 +795,12 @@
         }
     },
     "Settings": "Settings",
+    "sidebar": {
+        "achievements": "Achievements",
+        "downloadManager": "Download Manager",
+        "library": "Library",
+        "store": "Store"
+    },
     "sideload": {
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Side-loading an installer that contains malware could compromise your computer and lead to theft of funds.",
         "warningTitle": "Important"
@@ -833,6 +836,7 @@
     },
     "userselector": {
         "logging_out": "Logging out",
+        "logIn": "Log in",
         "logout": "Log out",
         "logout_confirmation": "Are you sure you want to log out?",
         "manageaccounts": "Manage Accounts",
