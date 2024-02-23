@@ -267,7 +267,7 @@ class GlobalState extends PureComponent<Props> {
     this.handleShowDialogModal({
       title: t('box.reset-extension.question.title', 'Reset Extension'),
       message: t(
-        'box.reset-app.question.message',
+        'box.reset-extension.question.message',
         'Are you sure you want to reset the MetaMask Extension?'
       ),
       buttons: [
