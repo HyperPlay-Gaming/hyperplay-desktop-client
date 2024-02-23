@@ -20,27 +20,36 @@ function log(text){
 function deleteFolderRecursive(path) {
     log('deleting ', path)
     if (fs.existsSync(path)) {
-        log('deleting existing path ', path)
-        fs.readdirSync(path).forEach(function (file) {
-        const curPath = path + '/' + file
-        try {
-          if (fs.lstatSync(curPath).isDirectory()) {
-            // recurse
-            deleteFolderRecursive(curPath)
-          } else {
-            // delete file
-            fs.rmSync(curPath)
-            log('deleting file ', curPath)
+      fs.stat(path, (err, stats)=>{
+        if(stats.isDirectory()){
+          log('deleting existing path ', path)
+          fs.readdirSync(path).forEach(function (file) {
+            const curPath = path + '/' + file
+            try {
+              if (fs.lstatSync(curPath).isDirectory()) {
+                // recurse
+                deleteFolderRecursive(curPath)
+              } else {
+                // delete file
+                fs.rmSync(curPath)
+                log('deleting file ', curPath)
+              }
+            } catch (err) {
+                log(`Error deleting file ${err} ${curPath}`)
+            }
+          })
+          try {
+            fs.rmdirSync(path)
+          } catch (err) {
+            log(`Error deleting folder ${err} ${path}`)
           }
-        } catch (err) {
-            log(`Error deleting file ${err} ${curPath}`)
+        }
+        // if the path passed is a file
+        else if (stats.isFile){
+          fs.rmSync(path)
+          log('deleting file ', path)
         }
       })
-      try {
-        fs.rmdirSync(path)
-      } catch (err) {
-        log(`Error deleting folder ${err} ${path}`)
-      }
     }
 }
 
@@ -48,7 +57,8 @@ function rmFolders() {
     log('removing folders')
     const appConfigFolders = [
         process.argv[2],
-        process.argv[3]
+        process.argv[3],
+        process.argv[4]
     ]
     appConfigFolders.forEach((folder) => {
       try {
@@ -60,4 +70,4 @@ function rmFolders() {
 }
 
 log('setting timeout')
-setTimeout(rmFolders.bind(this), 2000)
+setTimeout(rmFolders.bind(this), 1000)
