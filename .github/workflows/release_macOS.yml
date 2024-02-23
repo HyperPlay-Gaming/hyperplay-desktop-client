@@ -126,6 +126,9 @@ jobs:
           name: latest-mac-arm64
           path: dist-arm64
 
+      - name: list files and subdirectories
+        run: ls -R dist-x64 && ls -R dist-arm64
+
       - name: Append arm64 entries to x64 file
         run: |
           sed -i -e '/^files:/,/^[[:space:]]*$/ { /^files:/b; /^[[:space:]]*$/b; d }' dist-x64/latest-mac-x64.yml
@@ -139,6 +142,10 @@ jobs:
           echo "version: $version" > latest-mac.yml
           echo "releaseDate: '$releaseDate'" >> latest-mac.yml
           cat dist-x64/latest-mac-x64.yml >> latest-mac.yml
+
+      - name: Show latest-mac.yml
+        run: cat latest-mac.yml
+
       - name: Update draft with latest-mac.yml
         uses: ncipollo/release-action@v1.13.0
         with:
