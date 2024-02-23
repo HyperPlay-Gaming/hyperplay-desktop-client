@@ -263,6 +263,20 @@ class GlobalState extends PureComponent<Props> {
     })
   }).bind(this)
 
+  showResetExtensionDialog = (()=>{
+    this.handleShowDialogModal({
+      title: t('box.reset-extension.question.title', 'Reset Extension'),
+      message: t(
+        'box.reset-app.question.message',
+        'Are you sure you want to reset the MetaMask Extension?'
+      ),
+      buttons: [
+        { text: t('box.yes'), onClick: window.api.resetExtension },
+        { text: t('box.no') }
+      ]
+    })
+  })
+
   handleExternalLinkDialog = (value: ExternalLinkDialogOptions) => {
     this.setState({ externalLinkDialogOptions: value })
   }
@@ -686,6 +700,7 @@ class GlobalState extends PureComponent<Props> {
       setSecondaryFontFamily: this.setSecondaryFontFamily,
       showDialogModal: this.handleShowDialogModal,
       showResetDialog: this.showResetDialog,
+      showResetExtensionDialog: this.showResetExtensionDialog,
       handleExternalLinkDialog: this.handleExternalLinkDialog,
       isSettingsModalOpen: settingsModalOpen,
       setIsSettingsModalOpen: this.handleSettingsModalOpen,

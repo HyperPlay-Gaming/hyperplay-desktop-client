@@ -116,6 +116,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   showConfigFileInFolder: (appName: string) => void
   clearCache: (showDialog?: boolean) => void
   resetApp: () => void
+  resetExtension: () => void
   createNewWindow: (url: string) => void
   logoutGOG: () => void
   toggleVKD3D: (args: ToolArgs) => void
