@@ -1,5 +1,6 @@
 const process = require('process')
 const fs = require('fs')
+const exec = require('child_process').execFile;
 
 log('hello reset extension')
 log(JSON.stringify(process.argv))
@@ -10,7 +11,7 @@ log(JSON.stringify(process.argv))
  */
 function appendMessageToLogFile(message) {
   // rm this for debugging
-  return
+  // return
   fs.appendFileSync('./testFile.txt', `${message}\n`)
 }
 
@@ -75,9 +76,19 @@ function rmExtensionMetadata() {
   fs.writeFileSync(extMetaPath, JSON.stringify(extMeta, null, 4))
 }
 
+function relaunchHyperPlay(){
+  const execPath = process.argv[6]
+  log(`relaunching hyperplay with this exec path ${execPath}`)
+  exec(execPath, function(err, data) {
+    console.error(err)
+    console.log(data.toString());
+   });
+}
+
 function runCommands() {
   rmExtensionMetadata()
   rmFolders()
+  relaunchHyperPlay()
 }
 
 log('setting timeout')

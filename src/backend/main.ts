@@ -841,7 +841,6 @@ ipcMain.on('resetApp', async () => {
 
 ipcMain.on('resetExtension', async () => {
   resetExtension()
-  relaunchApp()
 })
 
 ipcMain.on('createNewWindow', (e, url) => {
