@@ -51,6 +51,18 @@ jobs:
         run: yarn release:mac:x64
         env:
           NOTARIZE: true
+      - name: Copy dist/latest-mac.yml to dist/latest-mac-x64.yml
+        run: |
+          cp dist/latest-mac.yml dist/latest-mac-x64.yml
+        shell: bash
+      - name: Upload yml file to release
+        uses: ncipollo/release-action@v1.13.0
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+          draft: true
+          allowUpdates: true
+          artifacts: |
+            dist/latest-mac-x64.yml
 
   release-arm64:
     runs-on: macos-latest-xlarge
@@ -86,3 +98,15 @@ jobs:
         run: yarn release:mac:arm64
         env:
           NOTARIZE: true
+      - name: Copy dist/latest-mac.yml to dist/latest-mac-arm64.yml
+        run: |
+          cp dist/latest-mac.yml dist/latest-mac-arm64.yml
+        shell: bash
+      - name: Upload yml file to release
+        uses: ncipollo/release-action@v1.13.0
+        with:
+          token: ${{ secrets.WORKFLOW_TOKEN }}
+          draft: true
+          allowUpdates: true
+          artifacts: |
+            dist/latest-mac-arm64.yml
