@@ -67,7 +67,6 @@ import {
   handleExit,
   isEpicServiceOffline,
   openUrlOrFile,
-  relaunchApp,
   resetApp,
   showAboutWindow,
   showItemInFolder,
