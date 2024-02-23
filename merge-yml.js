@@ -21,4 +21,4 @@ const combinedData = {
 
 const resultYaml = yaml.dump(combinedData, { lineWidth: 120 })
 
-fs.writeFileSync('dist/latest-mac.yml', resultYaml, 'utf8')
+fs.writeFileSync('latest-mac.yml', resultYaml, 'utf8')
