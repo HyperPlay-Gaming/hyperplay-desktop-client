@@ -118,13 +118,18 @@ jobs:
       - name: Download artifacts from release-x64 and release-arm64 jobs
         uses: actions/download-artifact@v2
         with:
-          name: dist-x64
-          path: dist-x64
+          name: latest-mac-x64
+          path: dist-x64-zip
 
       - uses: actions/download-artifact@v2
         with:
-          name: dist-arm64
-          path: dist-arm64
+          name: latest-mac-arm64
+          path: dist-arm64-zip
+
+      - name: Extract artifacts
+        run: |
+          unzip -q dist-x64-zip/latest-mac-x64.zip -d dist-x64
+          unzip -q dist-arm64-zip/latest-mac-arm64.zip -d dist-arm64
 
       - name: Append arm64 entries to x64 file
         run: |
