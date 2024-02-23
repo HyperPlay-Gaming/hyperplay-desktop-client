@@ -9,7 +9,9 @@ log(JSON.stringify(process.argv));
  * @param message message to append
  */
 function appendMessageToLogFile(message) {
-    fs.appendFileSync('./testFile.txt', `${message}\n`)
+  // rm this for debugging
+  return
+  fs.appendFileSync('./testFile.txt', `${message}\n`)
 }
 
 function log(text){
@@ -69,5 +71,19 @@ function rmFolders() {
     })
 }
 
+function rmExtensionMetadata(){
+  log('removing extension metadata')
+  const extMetaPath = process.argv[5]
+  log(`ext meta path ${extMetaPath}`)
+  const extMeta = JSON.parse(fs.readFileSync(extMetaPath))
+  delete extMeta['extensionMetadata']
+  fs.writeFileSync(extMetaPath, JSON.stringify(extMeta, null, 4))
+}
+
+function runCommands(){
+  rmExtensionMetadata()
+  rmFolders()
+}
+
 log('setting timeout')
-setTimeout(rmFolders.bind(this), 1000)
+setTimeout(runCommands.bind(this), 1000)
