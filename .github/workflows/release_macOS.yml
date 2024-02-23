@@ -126,26 +126,11 @@ jobs:
           name: latest-mac-arm64
           path: dist-arm64
 
-      - name: list files and subdirectories
-        run: ls -R dist-x64 && ls -R dist-arm64
-
-      - name: Set version and release date
+      - name: Merge YMLs
         run: |
-          version=$(awk '/^version:/ {print $2}' dist-x64/latest-mac-x64.yml)
-          releaseDate=$(awk '/^releaseDate:/ {print $2}' dist-x64/latest-mac-x64.yml)
-
-          echo "version: $version" > dist/latest-mac.yml
-          echo "releaseDate: '$releaseDate'" >> dist/latest-mac.yml
-          echo "files:" >> dist/latest-mac.yml
-
-          # Append content from x64 files
-          awk '/^files:/,/^ *$/' dist-x64/latest-mac-x64.yml | tail -n +2 >> dist/latest-mac.yml
-
-          # Append content from arm64 files
-          awk '/^files:/,/^ *$/' dist-arm64/latest-mac-arm64.yml | tail -n +2 >> dist/latest-mac.yml
-
-      - name: Show latest-mac.yml
-        run: cat latest-mac.yml
+          npm install js-yaml
+          node merge-yml.js
+        working-directory: ${{ github.workspace }}
 
       - name: Update draft with latest-mac.yml
         uses: ncipollo/release-action@v1.13.0
