@@ -55,14 +55,11 @@ jobs:
         run: |
           cp dist/latest-mac.yml dist/latest-mac-x64.yml
         shell: bash
-      - name: Upload yml file to release
-        uses: ncipollo/release-action@v1.13.0
+      - name: Save latest-mac-x64.yml as an artifact
+        uses: actions/upload-artifact@v2
         with:
-          token: ${{ secrets.WORKFLOW_TOKEN }}
-          draft: true
-          allowUpdates: true
-          artifacts: |
-            dist/latest-mac-x64.yml
+          name: latest-mac-x64
+          path: dist/latest-mac-x64.yml
 
   release-arm64:
     runs-on: macos-latest-xlarge
@@ -102,11 +99,50 @@ jobs:
         run: |
           cp dist/latest-mac.yml dist/latest-mac-arm64.yml
         shell: bash
-      - name: Upload yml file to release
+      - name: Save latest-mac-arm64.yml as an artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: latest-mac-arm64
+          path: dist/latest-mac-arm64.yml
+
+  generate-latest-mac:
+    needs:
+      - release-x64
+      - release-arm64
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Download artifacts from release-x64 and release-arm64 jobs
+        uses: actions/download-artifact@v2
+        with:
+          name: dist-x64
+          path: dist-x64
+
+      - uses: actions/download-artifact@v2
+        with:
+          name: dist-arm64
+          path: dist-arm64
+
+      - name: Append arm64 entries to x64 file
+        run: |
+          sed -i -e '/^files:/,/^[[:space:]]*$/ { /^files:/b; /^[[:space:]]*$/b; d }' dist-x64/latest-mac-x64.yml
+          cat dist-arm64/latest-mac-arm64.yml >> dist-x64/latest-mac-x64.yml
+
+      - name: Set version and release date
+        run: |
+          version=$(awk '/^version:/ {print $2}' dist-x64/latest-mac-x64.yml)
+          releaseDate=$(awk '/^releaseDate:/ {print $2}' dist-x64/latest-mac-x64.yml)
+
+          echo "version: $version" > latest-mac.yml
+          echo "releaseDate: '$releaseDate'" >> latest-mac.yml
+          cat dist-x64/latest-mac-x64.yml >> latest-mac.yml
+      - name: Update draft with latest-mac.yml
         uses: ncipollo/release-action@v1.13.0
         with:
           token: ${{ secrets.WORKFLOW_TOKEN }}
           draft: true
           allowUpdates: true
-          artifacts: |
-            dist/latest-mac-arm64.yml
+          artifacts: latest-mac.yml
