@@ -263,7 +263,7 @@ class GlobalState extends PureComponent<Props> {
     })
   }).bind(this)
 
-  showResetExtensionDialog = (()=>{
+  showResetExtensionDialog = () => {
     this.handleShowDialogModal({
       title: t('box.reset-extension.question.title', 'Reset Extension'),
       message: t(
@@ -275,7 +275,7 @@ class GlobalState extends PureComponent<Props> {
         { text: t('box.no') }
       ]
     })
-  })
+  }
 
   handleExternalLinkDialog = (value: ExternalLinkDialogOptions) => {
     this.setState({ externalLinkDialogOptions: value })
