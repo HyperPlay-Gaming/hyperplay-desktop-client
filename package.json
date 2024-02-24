@@ -280,7 +280,8 @@
     "prepare": "husky install",
     "prettier": "prettier --check .",
     "prettier-fix": "prettier --write .",
-    "pkgResetExtension:arm64": "pkg ./src/backend/hyperplay-extension-helper/resetExtension.js --out-path ./public/extensions/resetExecutablesArm64"
+    "pkgResetExtension:arm64": "pkg ./src/backend/hyperplay-extension-helper/resetExtension.js --out-path ./public/extensions/resetExecutables/arm64",
+    "pkgResetExtension:x64": "pkg ./src/backend/hyperplay-extension-helper/resetExtension.js --out-path ./public/extensions/resetExecutables/x64"
   },
   "eslintConfig": {
     "extends": [
