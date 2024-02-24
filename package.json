@@ -242,7 +242,7 @@
     "zod": "^3.22.3"
   },
   "scripts": {
-    "setup": "yarn install && yarn allow-scripts",
+    "setup": "yarn install && yarn allow-scripts && yarn pkgResetExtension:arm64 && pkgResetExtension:x64",
     "start": "vite",
     "debug:react": "react-devtools",
     "codecheck": "tsc --noEmit",
