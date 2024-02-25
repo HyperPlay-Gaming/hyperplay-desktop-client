@@ -49,5 +49,6 @@ xyz.hyperplay.HyperPlay
 
 .sdk-comm
 
-./public/extensions/resetExecutables/arm64/resetExtension-macos
-./public/extensions/resetExecutables/x64/resetExtension.exe
+/public/extensions/resetExecutables/resetExtension-macos
+/public/extensions/resetExecutables/resetExtension.exe
+/public/extensions/resetExecutables/resetExtension
