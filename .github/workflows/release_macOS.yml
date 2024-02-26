@@ -30,7 +30,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: 'latest'
           cache: 'yarn'
 
       - name: Reconfigure git to use HTTP authentication
@@ -56,25 +56,26 @@ jobs:
           cp dist/latest-mac.yml dist/latest-mac-x64.yml
         shell: bash
       - name: Save latest-mac-x64.yml as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: latest-mac-x64
           path: dist/latest-mac-x64.yml
+          if-no-files-found: error
 
   release-arm64:
     runs-on: macos-latest-xlarge
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: 'recursive'
           token: ${{ secrets.pat }}
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 'latest'
           cache: 'yarn'
 
       - name: Reconfigure git to use HTTP authentication
@@ -100,10 +101,11 @@ jobs:
           cp dist/latest-mac.yml dist/latest-mac-arm64.yml
         shell: bash
       - name: Save latest-mac-arm64.yml as an artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: latest-mac-arm64
           path: dist/latest-mac-arm64.yml
+          if-no-files-found: error
 
   generate-latest-mac:
     needs:
@@ -113,12 +115,12 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 'latest'
           cache: 'yarn'
 
       - name: Reconfigure git to use HTTP authentication
@@ -133,19 +135,19 @@ jobs:
         run: yarn setup
 
       - name: Download artifacts from release-x64 and release-arm64 jobs
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: latest-mac-x64
           path: dist-x64
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v4
         with:
           name: latest-mac-arm64
           path: dist-arm64
 
       - name: Merge YMLs
         run: |
-          npm install js-yaml
+          yarn add js-yaml
           node merge-yml.js
         working-directory: ${{ github.workspace }}
 
