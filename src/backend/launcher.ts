@@ -502,7 +502,7 @@ function setupWrappers(
  * @returns true if the wine version exists, false if it doesn't
  */
 export async function validWine(
-  wineVersion: WineInstallation
+  wineVersion: WineInstallation | undefined
 ): Promise<boolean> {
   if (!wineVersion) {
     return false

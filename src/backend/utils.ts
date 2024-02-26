@@ -899,6 +899,26 @@ async function ContinueWithFoundWine(
   selectedWine: string,
   foundWine: string
 ): Promise<{ response: number }> {
+  const isGPTK = selectedWine.toLowerCase().includes('toolkit')
+
+  if (isMac && isGPTK) {
+    const { response } = await dialog.showMessageBox({
+      title: i18next.t(
+        'box.warning.wine-change.title-gptk',
+        'Game Porting Toolkit Not Compatible '
+      ),
+      message: i18next.t('box.warning.wine-change.message-gptk', {
+        defaultValue:
+          'To be able to run games using the Apple Gaming porting toolkit you need to upgrade your macOS to 14 (Sonoma) or higher. {{newline}} We found Wine on your system, do you want to continue launching using {{foundWine}} ?',
+        newline: '\n',
+        foundWine: foundWine
+      }),
+      buttons: [i18next.t('box.yes'), i18next.t('box.no')],
+      icon: icon
+    })
+    return { response }
+  }
+
   const { response } = await dialog.showMessageBox({
     title: i18next.t('box.warning.wine-change.title', 'Wine not found!'),
     message: i18next.t('box.warning.wine-change.message', {
@@ -1017,7 +1037,15 @@ export async function checkWineBeforeLaunch(
 ): Promise<boolean> {
   const wineIsValid = await validWine(gameSettings.wineVersion)
 
-  if (wineIsValid) {
+  const isToolkit = gameSettings.wineVersion.type === 'toolkit'
+  const isGPTKCompatible = await isMacSonomaOrHigher()
+
+  const isValidOnLinux = isLinux && wineIsValid
+  const isValidOnMac =
+    (isMac && isToolkit && isGPTKCompatible && wineIsValid) ||
+    (isMac && !isToolkit && wineIsValid)
+
+  if (isValidOnMac || isValidOnLinux) {
     return true
   } else {
     if (!logsDisabled) {
@@ -1052,7 +1080,18 @@ export async function checkWineBeforeLaunch(
       }
     } else {
       const wineList = await GlobalConfig.get().getAlternativeWine()
-      const firstFoundWine = wineList[0]
+
+      // if Linux get the first element, if macOS and isGPTKCompatible is true get one with type 'toolkit', otherwise get the one with type 'wine'
+      const firstFoundWine = wineList.find((wine) => {
+        if (isLinux) {
+          return wine.type === 'wine'
+        } else if (isMac) {
+          return isGPTKCompatible
+            ? wine.type === 'toolkit'
+            : wine.type === 'wine'
+        }
+        return undefined
+      })
 
       const isValidWine = await validWine(firstFoundWine)
 
