@@ -900,8 +900,9 @@ async function ContinueWithFoundWine(
   foundWine: string
 ): Promise<{ response: number }> {
   const isGPTK = selectedWine.toLowerCase().includes('toolkit')
+  const isGPTKCompatible = await isMacSonomaOrHigher()
 
-  if (isMac && isGPTK) {
+  if (isMac && isGPTK && !isGPTKCompatible) {
     const { response } = await dialog.showMessageBox({
       title: i18next.t(
         'box.warning.wine-change.title-gptk',
@@ -942,8 +943,9 @@ export async function isMacSonomaOrHigher() {
   logInfo('Checking if macOS is Sonoma or higher', LogPrefix.Backend)
 
   const { release } = await si.osInfo()
-  const [major, minor] = release.split('.').map(Number)
-  return major === 14 && minor >= 0
+  const [major] = release.split('.').map(Number)
+
+  return major >= 14
 }
 
 export async function downloadDefaultWine() {
