@@ -47,6 +47,7 @@ const initialContext: ContextType = {
   dialogModalOptions: { showDialog: false },
   showDialogModal: () => null,
   showResetDialog: () => null,
+  showResetExtensionDialog: () => null,
   externalLinkDialogOptions: { showDialog: false },
   handleExternalLinkDialog: () => null,
   isSettingsModalOpen: { value: false, type: 'settings' },
