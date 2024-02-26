@@ -1,4 +1,7 @@
-import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
+import {
+  initExtension,
+  resetExtension
+} from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -833,6 +836,10 @@ ipcMain.on('clearCache', (event) => {
 
 ipcMain.on('resetApp', async () => {
   resetApp()
+})
+
+ipcMain.on('resetExtension', async () => {
+  resetExtension()
 })
 
 ipcMain.on('createNewWindow', (e, url) => {
