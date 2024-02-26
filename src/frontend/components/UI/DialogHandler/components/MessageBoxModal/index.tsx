@@ -77,14 +77,11 @@ const MessageBoxModal: React.FC<MessageBoxModalProps> = function (props) {
         {getContent()}
         {props.showCheckbox && (
           <div className="checkbox">
-            <input
-              type="checkbox"
-              checked={props.checkboxValue ? true : false}
-            >
+            <input type="checkbox" checked={props.checkboxValue ? true : false}>
               {props.checkboxLabel}
             </input>
           </div>
-        )} 
+        )}
       </DialogContent>
 
       <DialogFooter>{getButtons()}</DialogFooter>
