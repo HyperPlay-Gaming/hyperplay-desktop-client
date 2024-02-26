@@ -915,19 +915,35 @@ async function ContinueWithFoundWine(
   return { response }
 }
 
+export async function isMacSonomaOrHigher() {
+  if (!isMac) {
+    return false
+  }
+  logInfo('Checking if macOS is Sonoma or higher', LogPrefix.Backend)
+
+  const { release } = await si.osInfo()
+  const [major, minor] = release.split('.').map(Number)
+  return major === 14 && minor >= 0
+}
+
 export async function downloadDefaultWine() {
   // refresh wine list
   await updateWineVersionInfos(true)
   // get list of wines on wineDownloaderInfoStore
   const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
   // use Wine-GE type if on Linux and Wine-Crossover if on Mac
-  const release = availableWine.filter((version) => {
+  const release = availableWine.filter(async (version) => {
     if (isLinux) {
       return (
         version.type === 'Wine-GE' && version.version.includes('Wine-GE-Proton')
       )
     } else if (isMac) {
-      return version.type === 'Game-Porting-Toolkit'
+      const isGPTKCompatible = await isMacSonomaOrHigher()
+
+      if (isGPTKCompatible) {
+        return version.type === 'Game-Porting-Toolkit'
+      }
+      return version.type === 'Wine-Crossover'
     }
     return false
   })[0]
@@ -970,6 +986,11 @@ export async function downloadDefaultWine() {
 }
 
 export async function setGPTKDefaultOnMacOS() {
+  const isGPTKCompatible = await isMacSonomaOrHigher()
+  if (!isGPTKCompatible) {
+    return
+  }
+
   const wineList = await GlobalConfig.get().getAlternativeWine()
   const gptk = wineList.find((wine) => wine.type === 'toolkit')
   if (!gptk) {
