@@ -115,6 +115,12 @@
                 "title": "Reset HyperPlay"
             }
         },
+        "reset-extension": {
+            "question": {
+                "message": "Are you sure you want to reset the MetaMask Extension?",
+                "title": "Reset Extension"
+            }
+        },
         "runexe": {
             "title": "Select EXE to Run"
         },
@@ -784,6 +790,7 @@
             "sync": "Cloud Saves Sync"
         },
         "open-config-file": "Open Config File",
+        "reset-extension": "Reset Extension",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"

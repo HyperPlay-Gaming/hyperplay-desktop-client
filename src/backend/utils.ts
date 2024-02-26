@@ -491,6 +491,10 @@ function resetApp() {
   appConfigFolders.forEach((folder) => {
     rmSync(folder, { recursive: true, force: true })
   })
+  relaunchApp()
+}
+
+export function relaunchApp() {
   // wait a sec to avoid racing conditions
   setTimeout(() => {
     ipcMain.emit('ignoreExitToTray')
