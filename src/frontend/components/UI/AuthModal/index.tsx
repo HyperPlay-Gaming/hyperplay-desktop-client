@@ -12,7 +12,9 @@ import { DEV_PORTAL_URL } from 'common/constants'
 import useAuthSession from '../../../hooks/useAuthSession'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 
-const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
+const PROMO_MODE = true
+
+const url = `${DEV_PORTAL_URL}/signin?isLauncher=true&promoMode=${PROMO_MODE}`
 
 const METAMASK_ALREADY_PROVIDED_ERROR_CODE = -32002
 
