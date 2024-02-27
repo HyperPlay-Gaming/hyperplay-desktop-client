@@ -33,7 +33,7 @@ import StatusScreen, { CONNECTION_STATUS } from './screens/status'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ONBOARDING_SCREEN } from '../types'
-import authState from '../../../state/authState'
+import emailSubscriptionState from '../../../state/EmailSubscriptionState'
 
 enum WALLET_SELECTION_DETAILS_SCREEN {
   INFO = 'INFO',
@@ -145,7 +145,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     dbPath?: string,
     browser?: ImportableBrowser
   ) {
-    authState.enableOpenAuthModalOnAppReload()
+    emailSubscriptionState.enableOpenEmailModalOnAppReload()
     if (mmInitMethod === 'CREATE' || mmInitMethod === 'SECRET_PHRASE') {
       window.api.createNewMetaMaskWallet(mmInitMethod)
     } else {
@@ -167,7 +167,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     })
     wait(4000).then(() => {
       props.disableOnboarding('connected')
-      authState.openSignInModal()
+      emailSubscriptionState.openEmailModal()
     })
   }
 

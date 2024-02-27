@@ -25,7 +25,6 @@ const AuthModal = () => {
   const authSession = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
   const isAuthEnabled = flags.auth
-  const promoMode = flags.emailPromo
 
   const sendRetryConnectionMessage = () => {
     const webview = webviewRef.current
@@ -129,7 +128,7 @@ const AuthModal = () => {
     >
       <webview
         ref={webviewRef}
-        src={`${url}&promoMode=${Boolean(promoMode)}`}
+        src={url}
         className={styles.webview}
         partition="persist:auth"
         allowpopups={'true' as unknown as boolean | undefined}
