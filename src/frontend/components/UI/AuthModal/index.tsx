@@ -12,9 +12,7 @@ import { DEV_PORTAL_URL } from 'common/constants'
 import useAuthSession from '../../../hooks/useAuthSession'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 
-const PROMO_MODE = true
-
-const url = `${DEV_PORTAL_URL}/signin?isLauncher=true&promoMode=${PROMO_MODE}`
+const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
 const METAMASK_ALREADY_PROVIDED_ERROR_CODE = -32002
 
@@ -27,6 +25,7 @@ const AuthModal = () => {
   const authSession = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
   const isAuthEnabled = flags.auth
+  const promoMode = flags.emailPromo
 
   const sendRetryConnectionMessage = () => {
     const webview = webviewRef.current
@@ -130,7 +129,7 @@ const AuthModal = () => {
     >
       <webview
         ref={webviewRef}
-        src={url}
+        src={`${url}&promoMode=${Boolean(promoMode)}`}
         className={styles.webview}
         partition="persist:auth"
         allowpopups={'true' as unknown as boolean | undefined}
