@@ -172,7 +172,10 @@ const launch = async ({
             res()
           }
         }
-      ]
+      ],
+      onClose: () => {
+        res()
+      }
     })
   })
 
