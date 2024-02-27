@@ -936,6 +936,49 @@ async function ContinueWithFoundWine(
   return { response }
 }
 
+export async function isRosettaAvailable() {
+  if (!isMac) {
+    return
+  }
+
+  // check if on arm64 macOS
+  const { stdout: archCheck } = await execAsync('arch')
+  const isArm64 = archCheck.trim() === 'arm64'
+
+  if (!isArm64) {
+    return
+  }
+
+  const { stdout: rosettaCheck } = await execAsync(
+    'arch -x86_64 /usr/sbin/sysctl sysctl.proc_translated'
+  )
+
+  const result = rosettaCheck.split(':')[1].trim() === '1'
+
+  logInfo(
+    `Rosetta is ${result ? 'available' : 'not available'} on this system.`,
+    LogPrefix.Backend
+  )
+
+  if (!result) {
+    // show a dialog saying that hyperplay wont run without rosetta and add information on how to install it
+    await dialog.showMessageBox({
+      title: i18next.t('box.warning.rosetta.title', 'Rosetta not found'),
+      message: i18next.t(
+        'box.warning.rosetta.message',
+        'HyperPlay requires Rosetta to run correctly on macOS with Apple Silicon chips. Please install it from the macOS terminal using the following command: "softwareupdate --install-rosetta" and restart HyperPlay. '
+      ),
+      buttons: ['OK'],
+      icon: icon
+    })
+
+    logInfo(
+      'Rosetta is not available, install it with softwareupdate --install-rosetta from the terminal',
+      LogPrefix.Backend
+    )
+  }
+}
+
 export async function isMacSonomaOrHigher() {
   if (!isMac) {
     return false
