@@ -11,7 +11,7 @@ export default function DialogHandler() {
       title: string,
       message: string,
       type: DialogType,
-      buttons?: Array<ButtonOptions>,
+      buttons?: Array<ButtonOptions>
     ) => {
       showDialogModal({ title, message, type, buttons })
     }
