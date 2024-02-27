@@ -145,6 +145,7 @@ const WalletSelection: React.FC<WalletSelectionProps> = function (props) {
     dbPath?: string,
     browser?: ImportableBrowser
   ) {
+    authState.enableOpenAuthModalOnAppReload()
     if (mmInitMethod === 'CREATE' || mmInitMethod === 'SECRET_PHRASE') {
       window.api.createNewMetaMaskWallet(mmInitMethod)
     } else {
