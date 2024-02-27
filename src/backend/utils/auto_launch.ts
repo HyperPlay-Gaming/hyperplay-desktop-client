@@ -24,3 +24,12 @@ ipcMain.handle('updateAutoLaunch', async () => {
   const { autoLaunchHyperPlay } = settings
   return updateAutoLaunch(autoLaunchHyperPlay)
 })
+
+const settings = GlobalConfig.get().getSettings()
+const { autoLaunchHyperPlay } = settings
+
+// default to true on fresh install
+if (autoLaunchHyperPlay === undefined) {
+  updateAutoLaunch(true)
+  GlobalConfig.get().setSetting('autoLaunchHyperPlay', true)
+}
