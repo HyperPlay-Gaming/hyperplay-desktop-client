@@ -19,6 +19,7 @@ import {
   WinePrefixesBasePath
 } from '../../components'
 import AppVersion from 'frontend/components/UI/AppVersion'
+import AutoLaunchHyperPlay from '../../components/AutoLaunchHyperPlay'
 
 export default function GeneralSettings() {
   const { t } = useTranslation()
@@ -40,6 +41,8 @@ export default function GeneralSettings() {
       <DefaultSteamPath />
 
       <EgsSettings />
+
+      <AutoLaunchHyperPlay />
 
       <CheckUpdatesOnStartup />
 
