@@ -5,11 +5,14 @@ import { WebviewTag } from 'electron'
 import { observer } from 'mobx-react-lite'
 import { DEV_PORTAL_URL } from 'common/constants'
 import emailSubscriptionState from '../../../state/EmailSubscriptionState'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 const url = `${DEV_PORTAL_URL}/signin?isLauncher=true&promoMode=true`
 
 const EmailSubscriptionModal = () => {
+  const flags = useFlags()
   const webviewRef = useRef<WebviewTag>(null)
+  const isEnabled = flags.emailSubscriptionModal
 
   useEffect(() => {
     const webview = webviewRef.current
@@ -39,7 +42,7 @@ const EmailSubscriptionModal = () => {
 
   return (
     <ModalAnimation
-      isOpen={emailSubscriptionState.isEmailModalOpen}
+      isOpen={isEnabled && emailSubscriptionState.isEmailModalOpen}
       onClose={() => emailSubscriptionState.closeEmailModal()}
     >
       <webview
