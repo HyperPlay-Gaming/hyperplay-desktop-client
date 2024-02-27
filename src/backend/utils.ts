@@ -936,7 +936,7 @@ async function ContinueWithFoundWine(
   return { response }
 }
 
-export async function isRosettaAvailable() {
+export async function checkRosettaInstall() {
   if (!isMac) {
     return
   }
@@ -1060,7 +1060,7 @@ export async function setGPTKDefaultOnMacOS() {
   const gptk = wineList.find((wine) => wine.type === 'toolkit')
   if (!gptk) {
     await downloadDefaultWine()
-    return
+    return setGPTKDefaultOnMacOS()
   }
   if (gptk && existsSync(gptk.bin)) {
     logInfo(`Changing wine version to ${gptk.name}`)
@@ -1069,10 +1069,8 @@ export async function setGPTKDefaultOnMacOS() {
     const installPath = GlobalConfig.get().getSettings().defaultInstallPath
     const newPrefix = join(installPath, 'Prefixes', 'GPTK')
     GlobalConfig.get().setSetting('winePrefix', newPrefix)
-
-    return true
   }
-  return false
+  return
 }
 
 export async function checkWineBeforeLaunch(
@@ -1086,9 +1084,10 @@ export async function checkWineBeforeLaunch(
   const isGPTKCompatible = await isMacSonomaOrHigher()
 
   const isValidOnLinux = isLinux && wineIsValid
-  const isValidOnMac =
-    (isMac && isToolkit && isGPTKCompatible && wineIsValid) ||
-    (isMac && !isToolkit && wineIsValid)
+  const isValidtoolkitOnMac =
+    isMac && isToolkit && isGPTKCompatible && wineIsValid
+  const isValidWineOnMac = isMac && !isToolkit && wineIsValid
+  const isValidOnMac = isValidtoolkitOnMac || isValidWineOnMac
 
   if (isValidOnMac || isValidOnLinux) {
     return true

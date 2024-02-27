@@ -66,7 +66,7 @@ import {
   getSystemInfo,
   handleExit,
   isEpicServiceOffline,
-  isRosettaAvailable,
+  checkRosettaInstall,
   openUrlOrFile,
   resetApp,
   setGPTKDefaultOnMacOS,
@@ -310,7 +310,7 @@ async function initializeWindow(): Promise<BrowserWindow> {
       DXVK.getLatest(),
       Winetricks.download(),
       shouldDownloadWine ? downloadDefaultWine() : null,
-      isMac && isRosettaAvailable(),
+      isMac && checkRosettaInstall(),
       isMac && setGPTKDefaultOnMacOS()
     ])
   }, 2500)
