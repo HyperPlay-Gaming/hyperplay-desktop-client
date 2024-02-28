@@ -66,8 +66,10 @@ import {
   getSystemInfo,
   handleExit,
   isEpicServiceOffline,
+  checkRosettaInstall,
   openUrlOrFile,
   resetApp,
+  setGPTKDefaultOnMacOS,
   showAboutWindow,
   showItemInFolder,
   wait
@@ -90,6 +92,7 @@ import {
   isCLIFullscreen,
   isCLINoGui,
   isFlatpak,
+  isMac,
   isSteamDeckGameMode,
   onboardLocalStore,
   publicDir,
@@ -296,11 +299,19 @@ async function initializeWindow(): Promise<BrowserWindow> {
 
   setTimeout(async () => {
     // Will download Wine if none was found
-    const availableWine = await GlobalConfig.get().getAlternativeWine()
+    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
+    const toolkitListDownloaded = availableWine.some(
+      (wine) => wine.type === 'toolkit'
+    )
+    const shouldDownloadWine =
+      !availableWine.length || (isMac && !toolkitListDownloaded)
+
     Promise.all([
       DXVK.getLatest(),
       Winetricks.download(),
-      !availableWine.length ? downloadDefaultWine() : null
+      shouldDownloadWine ? downloadDefaultWine() : null,
+      isMac && checkRosettaInstall(),
+      isMac && setGPTKDefaultOnMacOS()
     ])
   }, 2500)
 
