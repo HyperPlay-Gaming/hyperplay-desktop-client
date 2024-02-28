@@ -17,12 +17,8 @@ const AutoLaunchHyperPlay = () => {
       handleChange={() => {
         setAutoLaunchHyperPlay(!autoLaunchHyperPlay)
         window.api.updateAutoLaunch()
-      }
-      }
-      title={t(
-        'setting.autoLaunchHyperPlay',
-        'Auto Launch HyperPlay'
-      )}
+      }}
+      title={t('setting.autoLaunchHyperPlay', 'Auto Launch HyperPlay')}
     />
   )
 }
