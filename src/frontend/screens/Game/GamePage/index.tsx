@@ -39,7 +39,7 @@ import TimeContainer from '../TimeContainer'
 import GameRequirements from '../GameRequirements'
 import { GameSubMenu } from '..'
 import { InstallModal } from 'frontend/screens/Library/components'
-import { install } from 'frontend/helpers/library'
+import { install, isNotNative } from 'frontend/helpers/library'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faTriangleExclamation,
@@ -887,7 +887,8 @@ export default observer(function GamePage(): JSX.Element | null {
         launchArguments,
         runner: gameInfo.runner,
         hasUpdate,
-        showDialogModal
+        showDialogModal,
+        isNotNative: isNotNative(platform, gameInfo.install.platform!)
       })
     }
   }
