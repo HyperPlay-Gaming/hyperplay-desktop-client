@@ -99,6 +99,7 @@ export interface AppSettings extends GameSettings {
   altLegendaryBin: string
   autoUpdateGames: boolean
   checkForUpdatesOnStartup: boolean
+  autoLaunchHyperPlay: boolean
   checkUpdatesInterval: number
   customThemesPath: string
   customWinePaths: string[]

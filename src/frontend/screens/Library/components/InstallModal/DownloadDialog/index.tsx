@@ -38,7 +38,7 @@ import React, {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { configStore } from 'frontend/helpers/electronStores'
-import { Button } from '@hyperplay/ui'
+import { Button, Images } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
@@ -125,6 +125,7 @@ export default function DownloadDialog({
     useContext(ContextProvider)
 
   const isWin = platform === 'win32'
+  const isNotNative = platformToInstall === 'Windows' && !isWin
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
     | LegendaryInstallInfo
@@ -251,6 +252,7 @@ export default function DownloadDialog({
           platformToInstall,
           channelNameToInstall
         )
+
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 
@@ -427,6 +429,15 @@ export default function DownloadDialog({
             key={p.value}
           />
         ))}
+        {isNotNative && (
+          <div className={styles.installModalWarning}>
+            <Images.Info fill="var(--error-300)" />
+            {t(
+              'install.compatibility-warning',
+              'This Windows game will run using a compatibility layer. Your experience may vary.'
+            )}
+          </div>
+        )}
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
       <DialogContent>

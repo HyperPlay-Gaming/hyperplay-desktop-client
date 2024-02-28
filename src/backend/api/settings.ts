@@ -44,3 +44,6 @@ export const getLogContent = async (args: {
 
 export const getNumOfGpus = async (): Promise<number> =>
   ipcRenderer.invoke('getNumOfGpus')
+
+export const updateAutoLaunch = async () =>
+  ipcRenderer.invoke('updateAutoLaunch')
