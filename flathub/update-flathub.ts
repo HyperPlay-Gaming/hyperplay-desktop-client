@@ -13,7 +13,7 @@ async function main() {
 
   // update url in xyz.hyperplay.HyperPlay.yml
   console.log('updating url in xyz.hyperplay.HyperPlay.yml')
-  const ymlFilePath = '../xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.yml'
+  const ymlFilePath = './xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.yml'
   let hpYml = fs.readFileSync(ymlFilePath).toString()
 
   const releaseString = `https://github.com/${repoName}/releases/download/${
@@ -55,7 +55,7 @@ async function main() {
     'updating release version and date on xml tag in xyz.hyperplay.HyperPlay.metainfo.xml'
   )
   const xmlFilePath =
-    '../xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.metainfo.xml'
+    './xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.metainfo.xml'
   let hpXml = fs.readFileSync(xmlFilePath).toString()
   const date = new Date()
   const isoDate = date.toISOString().slice(0, 10)
