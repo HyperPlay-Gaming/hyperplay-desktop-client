@@ -13,6 +13,7 @@ import { NileRegisterData } from 'common/types/nile'
 export const clearCache = (showDialog?: boolean) =>
   ipcRenderer.send('clearCache', showDialog)
 export const resetApp = () => ipcRenderer.send('resetApp')
+export const resetExtension = () => ipcRenderer.send('resetExtension')
 
 export const openWeblate = () => ipcRenderer.send('openWeblate')
 export const changeLanguage = (newLanguage: string) =>
@@ -213,6 +214,10 @@ export const handleOtpDeepLink = (
 
 export const openAuthModalIfAppReloads = () => {
   ipcRenderer.send('openAuthModalIfAppReloads')
+}
+
+export const openEmailModalIfAppReloads = () => {
+  ipcRenderer.send('openEmailModalIfAppReloads')
 }
 
 export const handleLogOut = (

@@ -61,6 +61,7 @@ export interface ContextType {
   dialogModalOptions: DialogModalOptions
   showDialogModal: (options: DialogModalOptions) => void
   showResetDialog: () => void
+  showResetExtensionDialog: () => void
   externalLinkDialogOptions: ExternalLinkDialogOptions
   handleExternalLinkDialog: (options: ExternalLinkDialogOptions) => void
   isSettingsModalOpen: {
@@ -86,6 +87,7 @@ export type DialogModalOptions = {
   message?: string
   buttons?: Array<ButtonOptions>
   type?: DialogType
+  onClose?: () => void
 }
 
 export interface ExternalLinkDialogOptions {

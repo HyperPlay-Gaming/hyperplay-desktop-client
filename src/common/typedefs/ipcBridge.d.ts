@@ -79,6 +79,7 @@ interface HyperPlaySyncIPCFunctions {
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
   openAuthModalIfAppReloads: () => void
+  openEmailModalIfAppReloads: () => void
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
   toggleIsPopupOpen: () => void
@@ -116,6 +117,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   showConfigFileInFolder: (appName: string) => void
   clearCache: (showDialog?: boolean) => void
   resetApp: () => void
+  resetExtension: () => void
   createNewWindow: (url: string) => void
   logoutGOG: () => void
   toggleVKD3D: (args: ToolArgs) => void
@@ -168,7 +170,7 @@ interface HyperPlayAsyncIPCFunctions {
   chromeWindowsGetCurrent: (
     queryOptions?: chrome.windows.QueryOptions,
     callback?: (window: chrome.windows.Window) => void
-  ) => Promise<chrome.windows.Window>
+  ) => Promise<string>
   chromeWindowsRemove: (windowId: number) => Promise<void>
   chromeWindowsGetAll: (
     queryOptions?: string,
@@ -253,6 +255,7 @@ interface HyperPlayAsyncIPCFunctions {
   getLDEnvConfig: () => Promise<LDEnv>
   getAuthSession: () => Promise<AuthSession | null>
   logOut: () => Promise<void>
+  updateAutoLaunch: () => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

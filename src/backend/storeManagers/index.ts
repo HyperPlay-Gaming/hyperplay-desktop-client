@@ -19,11 +19,12 @@ import { ipcMain } from 'electron'
 import { sendFrontendMessage } from 'backend/main_window'
 import { loadEpicHyperPlayGameInfoMap } from './hyperplay/utils'
 import { isGameAvailable } from 'backend/api/helpers'
-interface GameManagerMap {
-  [key: string]: GameManager
-}
+import { notify } from '../dialog/dialog'
+import i18next from 'i18next'
 
-export const gameManagerMap: GameManagerMap = {
+const MAX_GAMES_UPDATE_NOTIFICATIONS = 3
+
+export const gameManagerMap: Record<Runner, GameManager> = {
   hyperplay: HyperPlayGameManager,
   sideload: SideloadGameManager,
   gog: GOGGameManager,
@@ -31,11 +32,7 @@ export const gameManagerMap: GameManagerMap = {
   nile: NileGameManager
 }
 
-interface LibraryManagerMap {
-  [key: string]: LibraryManager
-}
-
-export const libraryManagerMap: LibraryManagerMap = {
+export const libraryManagerMap: Record<Runner, LibraryManager> = {
   hyperplay: HyperPlayLibraryManager,
   sideload: SideloadLibraryManager,
   gog: GOGLibraryManager,
@@ -89,6 +86,59 @@ export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
     }
   })
   return gamesToUpdate
+}
+
+let notificationsSent = false
+
+// We only check hyperplay games for updates
+export async function sendGameUpdatesNotifications() {
+  if (notificationsSent) {
+    return
+  }
+  notificationsSent = true
+  const gamesToUpdate: string[] = []
+  const allGames = await libraryManagerMap.hyperplay.listUpdateableGames()
+  const gamesToCheck = allGames.slice(0, MAX_GAMES_UPDATE_NOTIFICATIONS)
+
+  const gameSettings = await Promise.all(
+    gamesToCheck.map(async (game) => gameManagerMap.hyperplay.getSettings(game))
+  )
+
+  const notifiableGames = gamesToCheck.filter(async (_game, index) => {
+    const { ignoreGameUpdates } = gameSettings[index]
+    return !ignoreGameUpdates
+  })
+
+  gamesToUpdate.push(...notifiableGames)
+
+  if (gamesToUpdate.length === 0) {
+    return
+  }
+
+  const leadGameInfo = gameManagerMap.hyperplay.getGameInfo(gamesToUpdate[0])
+
+  const title = i18next.t(
+    'gameUpdateNotifications.title',
+    'Game Updates Available'
+  )
+
+  let body = ''
+
+  if (gamesToUpdate.length > 1) {
+    body = i18next.t(
+      'gameUpdateNotifications.body.multiple',
+      `${leadGameInfo.title} and other games are ready to update.`,
+      { gameName: leadGameInfo.title }
+    )
+  } else {
+    body = i18next.t(
+      'gameUpdateNotifications.body.single',
+      `There is an update ready for ${leadGameInfo.title}.`,
+      { gameName: leadGameInfo.title }
+    )
+  }
+
+  notify({ title, body })
 }
 
 export async function initStoreManagers() {

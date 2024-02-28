@@ -1,11 +1,16 @@
 {
     "box": {
+        "aware": "I am aware",
         "change": {
             "message": "This will change the install location of this game, are you sure?",
             "path": "Choose a new install path",
             "title": "Change Games Install Path"
         },
         "choose": "Choose",
+        "compability": {
+            "message": "This Windows game will run using a compatibility layer. You might encounter some issues or the game might not work at all."
+        },
+        "dont-show-again": "Don't show again",
         "importpath": "Choose Game Folder to import",
         "move": {
             "message": "This can take a long time, are you sure?",
@@ -118,6 +123,7 @@
         "web3-supported": "Has Web3 features"
     },
     "install": {
+        "compatibility-warning": "This Windows game will run using a compatibility layer. Your experience may vary.",
         "disk-space-left": "Space Available",
         "not-enough-disk-space": "Not enough disk space",
         "path": "Select Install Path",
