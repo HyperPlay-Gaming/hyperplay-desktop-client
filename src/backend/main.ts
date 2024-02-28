@@ -188,6 +188,7 @@ import { backendEvents } from 'backend/backend_events'
 import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
 import 'backend/hyperplay-achievements'
+import 'backend/utils/auto_launch'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 
