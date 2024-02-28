@@ -101,7 +101,7 @@ async function main() {
   )
 
   const releaseNotesJson = JSON.parse(releaseNotesStdOut)
-  const releaseNotesComponents = releaseNotesJson.body.split('\n')
+  const releaseNotesComponents: string[] = releaseNotesJson.body.split('\n')
 
   const hpXmlJson = convert.xml2js(hpXml, { compact: false }) as Element
   const releaseNotesElements: Element[] = []
@@ -111,20 +111,26 @@ async function main() {
     if (i === 0) continue
     if (!releaseComponent_i.startsWith('*')) continue
     if (releaseComponent_i.includes('http')) continue
+    const li = releaseComponent_i
+      .replace(/\n/g, '')
+      .replace(/\r/g, '')
+      .replace(/\t/g, '')
+      .slice(1)
+      .trim()
     const releaseNoteElement: Element = {
       type: 'element',
       name: 'li',
       elements: [
         {
           type: 'text',
-          text: releaseComponent_i.slice(1) //remove the asterisk
+          text: li
         }
       ]
     }
     releaseNotesElements.push(releaseNoteElement)
   }
 
-  const componentsTag = hpXmlJson.elements?.[0]
+  const componentsTag = hpXmlJson.elements?.[1]
   const releasesTag = componentsTag?.elements?.find(
     (val) => val.name === 'releases'
   ) //.releases.release.description.ul =
@@ -136,7 +142,9 @@ async function main() {
     throw 'releaseListTag ul undefined'
   }
   releaseListTag.elements = releaseNotesElements
-  hpXml = convert.js2xml(hpXmlJson)
+  hpXml = convert.js2xml(hpXmlJson, {
+    spaces: 4
+  })
   fs.writeFileSync(xmlFilePath, hpXml)
 
   console.log(
