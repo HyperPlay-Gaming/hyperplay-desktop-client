@@ -25,6 +25,15 @@ export default function DialogHandler() {
     }
   }, [])
 
+  const handleClose = () => {
+    if (dialogModalOptions.onClose) {
+      // runs the optional onClose function and then closes the modal
+      dialogModalOptions.onClose()
+      return showDialogModal({ showDialog: false })
+    }
+    showDialogModal({ showDialog: false })
+  }
+
   return (
     <>
       {dialogModalOptions.showDialog && (
@@ -33,7 +42,7 @@ export default function DialogHandler() {
           title={dialogModalOptions.title ? dialogModalOptions.title : ''}
           message={dialogModalOptions.message ? dialogModalOptions.message : ''}
           buttons={dialogModalOptions.buttons ? dialogModalOptions.buttons : []}
-          onClose={() => showDialogModal({ showDialog: false })}
+          onClose={() => handleClose()}
         />
       )}
     </>

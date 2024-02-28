@@ -255,6 +255,7 @@ interface HyperPlayAsyncIPCFunctions {
   getLDEnvConfig: () => Promise<LDEnv>
   getAuthSession: () => Promise<AuthSession | null>
   logOut: () => Promise<void>
+  updateAutoLaunch: () => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
