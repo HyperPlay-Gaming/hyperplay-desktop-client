@@ -877,5 +877,12 @@
         },
         "release": "Release Date",
         "size": "Size"
+    },
+    "gameUpdateNotifications": {
+        "title": "Game Updates Available",
+        "body": {
+            "single": "There is an update ready for {{gameName}}.",
+            "multiple": "{{gameName}} and other games are ready to update."
+        }
     }
 }

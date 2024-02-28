@@ -156,7 +156,8 @@ import {
   autoUpdate,
   gameManagerMap,
   initStoreManagers,
-  libraryManagerMap
+  libraryManagerMap,
+  sendGameUpdatesNotifications
 } from './storeManagers'
 import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
@@ -809,6 +810,13 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
     }
     oldGames = [...oldGames, ...gamesToUpdate]
   }
+
+  sendGameUpdatesNotifications().catch((e) =>
+    logError(
+      `Something went wrong sending update notifications: ${e}`,
+      LogPrefix.Backend
+    )
+  )
 
   return oldGames
 })
