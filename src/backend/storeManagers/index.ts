@@ -19,6 +19,9 @@ import { ipcMain } from 'electron'
 import { sendFrontendMessage } from 'backend/main_window'
 import { loadEpicHyperPlayGameInfoMap } from './hyperplay/utils'
 import { isGameAvailable } from 'backend/api/helpers'
+import { notify } from '../dialog/dialog'
+import i18next from 'i18next'
+
 interface GameManagerMap {
   [key: string]: GameManager
 }
@@ -89,6 +92,64 @@ export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
     }
   })
   return gamesToUpdate
+}
+
+export async function sendGameUpdatesNotifications() {
+  const gamesToUpdate: {
+    runner: string
+    game: string
+  }[] = []
+
+  for (const runner in libraryManagerMap) {
+    const games = await libraryManagerMap[runner].listUpdateableGames()
+
+    const gameSettings = await Promise.all(
+      games.map(async (game) => gameManagerMap[runner].getSettings(game))
+    )
+
+    const notifiableGames = games.filter(async (_game, index) => {
+      const { ignoreGameUpdates } = gameSettings[index]
+      return !ignoreGameUpdates
+    })
+
+    const gamesWithRunner = notifiableGames.map((game, index) => ({
+      runner,
+      game,
+      settings: gameSettings[index]
+    }))
+
+    gamesToUpdate.push(...gamesWithRunner)
+  }
+
+  if (gamesToUpdate.length === 0) {
+    return
+  }
+
+  const { runner, game } = gamesToUpdate[0]
+  const leadGameInfo = gameManagerMap[runner].getGameInfo(game)
+
+  const title = i18next.t(
+    'gameUpdateNotifications.title',
+    'Game Updates Available'
+  )
+
+  let body = ''
+
+  if (gamesToUpdate.length > 1) {
+    body = i18next.t(
+      'gameUpdateNotifications.body.multiple',
+      `${leadGameInfo.title} and other games are ready to update.`,
+      { gameName: leadGameInfo.title }
+    )
+  } else {
+    body = i18next.t(
+      'gameUpdateNotifications.body.single',
+      `There is an update ready for ${leadGameInfo.title}.`,
+      { gameName: leadGameInfo.title }
+    )
+  }
+
+  notify({ title, body })
 }
 
 export async function initStoreManagers() {
