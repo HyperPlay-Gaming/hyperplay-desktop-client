@@ -104,6 +104,7 @@ async function installQueueElement(params: InstallParams): Promise<{
 
     if (status === 'error') {
       errorMessage(error ?? 'Unknown error')
+      trackFailedInstall(error ?? 'Unknown error')
       return { status }
     }
 
