@@ -44,6 +44,10 @@ class AuthState {
   setPendingSignatureRequest(pending: boolean) {
     this.pendingSignatureRequest = pending
   }
+
+  enableOpenAuthModalOnAppReload() {
+    onboardingStore.set('openAuthModalIfAppReloads', true)
+  }
 }
 
 const authState = new AuthState()
