@@ -1000,6 +1000,9 @@ export async function isMacSonomaOrHigher() {
 }
 
 export async function downloadDefaultWine() {
+  if (isWindows) {
+    return
+  }
   // refresh wine list
   await updateWineVersionInfos(false)
   // get list of wines on wineDownloaderInfoStore

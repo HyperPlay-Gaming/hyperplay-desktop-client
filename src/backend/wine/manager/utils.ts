@@ -14,7 +14,7 @@ import {
 } from 'common/types'
 
 import { getAvailableVersions, installVersion } from './downloader/main'
-import { toolsPath, isMac } from '../../constants'
+import { toolsPath, isMac, isWindows } from '../../constants'
 import { sendFrontendMessage } from '../../main_window'
 import { TypeCheckedStoreBackend } from 'backend/electron_store'
 
@@ -30,6 +30,9 @@ async function updateWineVersionInfos(
   fetch = false,
   count = 50
 ): Promise<WineVersionInfo[]> {
+  if (isWindows) {
+    return []
+  }
   let releases: WineVersionInfo[] = []
 
   logInfo('Updating wine versions info', LogPrefix.WineDownloader)
@@ -97,6 +100,9 @@ async function installWineVersion(
   onProgress: (state: State, progress?: ProgressInfo) => void,
   abortSignal: AbortSignal
 ) {
+  if (isWindows) {
+    return
+  }
   let updatedInfo: WineVersionInfo
 
   if (!existsSync(`${toolsPath}/wine`)) {
