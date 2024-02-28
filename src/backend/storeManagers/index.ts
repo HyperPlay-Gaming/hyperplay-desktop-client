@@ -22,11 +22,9 @@ import { isGameAvailable } from 'backend/api/helpers'
 import { notify } from '../dialog/dialog'
 import i18next from 'i18next'
 
-interface GameManagerMap {
-  [key: string]: GameManager
-}
+const MAX_GAMES_UPDATE_NOTIFICATIONS = 3
 
-export const gameManagerMap: GameManagerMap = {
+export const gameManagerMap: Record<Runner, GameManager> = {
   hyperplay: HyperPlayGameManager,
   sideload: SideloadGameManager,
   gog: GOGGameManager,
@@ -34,11 +32,7 @@ export const gameManagerMap: GameManagerMap = {
   nile: NileGameManager
 }
 
-interface LibraryManagerMap {
-  [key: string]: LibraryManager
-}
-
-export const libraryManagerMap: LibraryManagerMap = {
+export const libraryManagerMap: Record<Runner, LibraryManager> = {
   hyperplay: HyperPlayLibraryManager,
   sideload: SideloadLibraryManager,
   gog: GOGLibraryManager,
@@ -94,39 +88,28 @@ export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
   return gamesToUpdate
 }
 
+// We only check hyperplay games for updates
 export async function sendGameUpdatesNotifications() {
-  const gamesToUpdate: {
-    runner: string
-    game: string
-  }[] = []
+  const gamesToUpdate: string[] = []
+  const allGames = await libraryManagerMap.hyperplay.listUpdateableGames()
+  const gamesToCheck = allGames.slice(0, MAX_GAMES_UPDATE_NOTIFICATIONS)
 
-  for (const runner in libraryManagerMap) {
-    const games = await libraryManagerMap[runner].listUpdateableGames()
+  const gameSettings = await Promise.all(
+    gamesToCheck.map(async (game) => gameManagerMap.hyperplay.getSettings(game))
+  )
 
-    const gameSettings = await Promise.all(
-      games.map(async (game) => gameManagerMap[runner].getSettings(game))
-    )
+  const notifiableGames = gamesToCheck.filter(async (_game, index) => {
+    const { ignoreGameUpdates } = gameSettings[index]
+    return !ignoreGameUpdates
+  })
 
-    const notifiableGames = games.filter(async (_game, index) => {
-      const { ignoreGameUpdates } = gameSettings[index]
-      return !ignoreGameUpdates
-    })
-
-    const gamesWithRunner = notifiableGames.map((game, index) => ({
-      runner,
-      game,
-      settings: gameSettings[index]
-    }))
-
-    gamesToUpdate.push(...gamesWithRunner)
-  }
+  gamesToUpdate.push(...notifiableGames)
 
   if (gamesToUpdate.length === 0) {
     return
   }
 
-  const { runner, game } = gamesToUpdate[0]
-  const leadGameInfo = gameManagerMap[runner].getGameInfo(game)
+  const leadGameInfo = gameManagerMap.hyperplay.getGameInfo(gamesToUpdate[0])
 
   const title = i18next.t(
     'gameUpdateNotifications.title',
