@@ -36,6 +36,7 @@ import AuthModal from './components/UI/AuthModal'
 import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -58,6 +59,7 @@ function App() {
           <DialogHandler />
           <ExternalLinkDialog />
           <AuthModal />
+          <EmailSubscriptionModal />
           <StoreNavHandler />
           {isSettingsModalOpen.gameInfo && (
             <SettingsModal

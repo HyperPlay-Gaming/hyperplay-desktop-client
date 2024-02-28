@@ -79,6 +79,7 @@ interface HyperPlaySyncIPCFunctions {
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
   openAuthModalIfAppReloads: () => void
+  openEmailModalIfAppReloads: () => void
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
   toggleIsPopupOpen: () => void

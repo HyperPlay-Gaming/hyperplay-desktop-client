@@ -424,6 +424,11 @@ if (!gotTheLock) {
       path.join(__dirname, 'auth_provider_preload.js')
     ])
 
+    const emailModalSession = session.fromPartition('persist:emailModal')
+    emailModalSession.setPreloads([
+      path.join(__dirname, 'email_modal_provider_preload.js')
+    ])
+
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
       path.join(__dirname, 'hyperplay_store_preload.js'),

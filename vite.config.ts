@@ -102,6 +102,12 @@ export default defineConfig({
           __dirname + '/src/backend/auth_provider_preload.ts'
         ),
         vite: electronViteConfig
+      },
+      {
+        entry: path.resolve(
+          __dirname + '/src/backend/email_modal_provider_preload.ts'
+        ),
+        vite: electronViteConfig
       }
     ]),
     svgr()
