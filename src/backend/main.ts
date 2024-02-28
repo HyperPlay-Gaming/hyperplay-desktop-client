@@ -461,10 +461,6 @@ if (!gotTheLock) {
 
     initOnlineMonitor()
 
-    getSystemInfo().then((systemInfo) =>
-      logInfo(`\n\n${systemInfo}\n`, LogPrefix.Backend)
-    )
-
     initImagesCache()
 
     logInfo(
