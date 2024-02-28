@@ -5,17 +5,17 @@ import { useTranslation } from 'react-i18next'
 
 const AutoLaunchHyperPlay = () => {
   const { t } = useTranslation()
-  
+
   const [autoLaunchHyperPlay, setAutoLaunchHyperPlay] = useSetting(
     'autoLaunchHyperPlay',
     true
   )
 
-  useEffect(()=>{
-    async function init(){
+  useEffect(() => {
+    async function init() {
       const platform = await window.api.getPlatform()
       // currently set as opt in on mac
-      if (platform === 'darwin'){
+      if (platform === 'darwin') {
         setAutoLaunchHyperPlay(false)
       }
     }
