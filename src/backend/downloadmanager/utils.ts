@@ -103,7 +103,7 @@ async function installQueueElement(params: InstallParams): Promise<{
     })
 
     if (status === 'error') {
-      errorMessage(error ?? '')
+      errorMessage(error ?? 'Unknown error')
       return { status }
     }
 
