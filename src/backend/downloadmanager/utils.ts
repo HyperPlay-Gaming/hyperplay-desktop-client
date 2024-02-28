@@ -148,12 +148,6 @@ async function installQueueElement(params: InstallParams): Promise<{
   }
 
   function trackFailedInstall(error: string) {
-    const errorsToIgnore = ['EPERM', 'EACCES', 'EBUSY']
-
-    if (errorsToIgnore.some((err) => error?.includes(err))) {
-      return
-    }
-
     trackEvent({
       event: 'Game Install Failed',
       properties: {
