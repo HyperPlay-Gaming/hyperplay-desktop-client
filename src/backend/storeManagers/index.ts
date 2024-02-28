@@ -88,8 +88,14 @@ export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
   return gamesToUpdate
 }
 
+let notificationsSent = false
+
 // We only check hyperplay games for updates
 export async function sendGameUpdatesNotifications() {
+  if (notificationsSent) {
+    return
+  }
+  notificationsSent = true
   const gamesToUpdate: string[] = []
   const allGames = await libraryManagerMap.hyperplay.listUpdateableGames()
   const gamesToCheck = allGames.slice(0, MAX_GAMES_UPDATE_NOTIFICATIONS)
