@@ -3,8 +3,7 @@ import * as crypto from 'crypto'
 import * as os from 'os'
 import * as child_process from 'child_process'
 import axios from 'axios'
-import * as convert from 'xml-js'
-import { Element } from 'xml-js'
+import { XMLParser, XMLBuilder } from 'fast-xml-parser'
 
 async function main() {
   console.log('tag name: ', process.env.RELEASE_VERSION)
@@ -14,7 +13,7 @@ async function main() {
 
   // update url in xyz.hyperplay.HyperPlay.yml
   console.log('updating url in xyz.hyperplay.HyperPlay.yml')
-  const ymlFilePath = './xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.yml'
+  const ymlFilePath = '../xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.yml'
   let hpYml = fs.readFileSync(ymlFilePath).toString()
 
   const releaseString = `https://github.com/${repoName}/releases/download/${
@@ -56,7 +55,7 @@ async function main() {
     'updating release version and date on xml tag in xyz.hyperplay.HyperPlay.metainfo.xml'
   )
   const xmlFilePath =
-    './xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.metainfo.xml'
+    '../xyz.hyperplay.HyperPlay/xyz.hyperplay.HyperPlay.metainfo.xml'
   let hpXml = fs.readFileSync(xmlFilePath).toString()
   const date = new Date()
   const isoDate = date.toISOString().slice(0, 10)
@@ -103,49 +102,67 @@ async function main() {
   const releaseNotesJson = JSON.parse(releaseNotesStdOut)
   const releaseNotesComponents: string[] = releaseNotesJson.body.split('\n')
 
-  const hpXmlJson = convert.xml2js(hpXml, { compact: false }) as Element
-  const releaseNotesElements: Element[] = []
+  // XML Modification with fast-xml-parser
+  hpXml = fs.readFileSync(xmlFilePath).toString()
+
+  const parserOptions = {
+    ignoreAttributes: false,
+    preserveOrder: true,
+    format: true, // Enable formatting
+    indentBy: '  ' // Use two spaces for indentation
+  }
+
+  const parser = new XMLParser(parserOptions)
+
+  const hpXmlJson = parser.parse(hpXml)
+
+  const builder = new XMLBuilder(parserOptions)
+
+  const releaseNotesElements: Record<string, Array<Record<string, string>>>[] =
+    [] // An array to hold generated <li> elements
 
   for (const [i, releaseComponent_i] of releaseNotesComponents.entries()) {
-    //update metainfo hpXml
     if (i === 0) continue
     if (!releaseComponent_i.startsWith('*')) continue
     if (releaseComponent_i.includes('http')) continue
+
     const li = releaseComponent_i
       .replace(/\n/g, '')
       .replace(/\r/g, '')
       .replace(/\t/g, '')
       .slice(1)
       .trim()
-    const releaseNoteElement: Element = {
-      type: 'element',
-      name: 'li',
-      elements: [
-        {
-          type: 'text',
-          text: li
-        }
+
+    // Creating the <li> element (compatible with fast-xml-parser)
+    const releaseNoteElement = {
+      li: [
+        { '#text': li } // Directly set the text within the <li> element
       ]
     }
+
     releaseNotesElements.push(releaseNoteElement)
   }
 
-  const componentsTag = hpXmlJson.elements?.[1]
-  const releasesTag = componentsTag?.elements?.find(
-    (val) => val.name === 'releases'
-  ) //.releases.release.description.ul =
-  const releaseListTag =
-    releasesTag?.elements?.[0].elements?.[0].elements?.find(
-      (val) => val.name === 'ul'
-    )
+  const componentsTag = hpXmlJson[1].component
+  // Locate the 'releases' element within the 'componentsTag'
+  const releasesTag = componentsTag.find((val) => val.releases !== undefined)
+
+  // Proceed to find the <ul> element as before
+  const releaseListTag = releasesTag?.releases[0].release[0].description[1]
+
   if (releaseListTag === undefined) {
     throw 'releaseListTag ul undefined'
   }
-  releaseListTag.elements = releaseNotesElements
-  hpXml = convert.js2xml(hpXmlJson, {
-    spaces: 4
-  })
-  fs.writeFileSync(xmlFilePath, hpXml)
+
+  releaseListTag.ul = [...releaseNotesElements] // Set the <ul> element to the generated <li> elements
+
+  console.log('new releaseListTag = ', JSON.stringify(releaseListTag, null, 2))
+
+  const updatedHpXml = builder.build(hpXmlJson)
+
+  console.log('updatedHpXml = ', updatedHpXml)
+
+  fs.writeFileSync(xmlFilePath, updatedHpXml)
 
   console.log(
     'Finished updating flathub release! Please review and merge the flathub repo PR manually.'
