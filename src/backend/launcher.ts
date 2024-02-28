@@ -24,7 +24,8 @@ import {
   searchForExecutableOnPath,
   quoteIfNecessary,
   errorHandler,
-  removeQuoteIfNecessary
+  removeQuoteIfNecessary,
+  isMacSonomaOrHigher
 } from './utils'
 import {
   logDebug,
@@ -502,7 +503,7 @@ function setupWrappers(
  * @returns true if the wine version exists, false if it doesn't
  */
 export async function validWine(
-  wineVersion: WineInstallation
+  wineVersion: WineInstallation | undefined
 ): Promise<boolean> {
   if (!wineVersion) {
     return false
@@ -517,6 +518,13 @@ export async function validWine(
   const { bin, wineserver, type } = wineVersion
   const necessary = type === 'wine' ? [bin, wineserver] : [bin]
   const haveAll = necessary.every((binary) => existsSync(binary as string))
+
+  if (isMac && type === 'toolkit') {
+    const isGPTKCompatible = await isMacSonomaOrHigher()
+    if (!isGPTKCompatible) {
+      return false
+    }
+  }
 
   // if wine version does not exist, use the default one
   if (!haveAll) {
