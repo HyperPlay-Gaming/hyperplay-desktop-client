@@ -216,6 +216,10 @@ export const openAuthModalIfAppReloads = () => {
   ipcRenderer.send('openAuthModalIfAppReloads')
 }
 
+export const openEmailModalIfAppReloads = () => {
+  ipcRenderer.send('openEmailModalIfAppReloads')
+}
+
 export const handleLogOut = (
   cb: WrapRendererCallback<() => void>
 ): (() => void) => {

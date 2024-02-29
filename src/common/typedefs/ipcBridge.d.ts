@@ -79,6 +79,7 @@ interface HyperPlaySyncIPCFunctions {
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
   openAuthModalIfAppReloads: () => void
+  openEmailModalIfAppReloads: () => void
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
   toggleIsPopupOpen: () => void
@@ -254,6 +255,7 @@ interface HyperPlayAsyncIPCFunctions {
   getLDEnvConfig: () => Promise<LDEnv>
   getAuthSession: () => Promise<AuthSession | null>
   logOut: () => Promise<void>
+  updateAutoLaunch: () => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
