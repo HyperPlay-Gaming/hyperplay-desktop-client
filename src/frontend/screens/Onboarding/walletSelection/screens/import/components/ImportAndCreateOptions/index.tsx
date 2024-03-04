@@ -16,7 +16,7 @@ export default function ImportAndCreateOptions({
   const [isOpenAdvancedOptions, setIsOpenAdvancedOptions] = useState(false)
 
   const onAdvancedOptionsClick = () => {
-    setIsOpenAdvancedOptions((prev: boolean) => !prev);
+    setIsOpenAdvancedOptions((prev: boolean) => !prev)
   }
 
   if (importOptions !== undefined) {
@@ -37,7 +37,7 @@ export default function ImportAndCreateOptions({
       <div className={styles.importOptionsContainer}>
         {importableBrowserOptions}
         {isOpenAdvancedOptions && (
-            <>
+          <>
             <ImportOption
               override="create"
               title={t(
@@ -64,16 +64,12 @@ export default function ImportAndCreateOptions({
         )}
       </div>
       <div className={styles.actionsContainer}>
-        <Button
-              type="tertiary"
-              size="medium"
-              onClick={onAdvancedOptionsClick}
-            >
-              {t(
-                'hyperplay.onboarding.walletSelection.screens.import.advancedOptions',
-                `Advanced`
-              )}
-          </Button>
+        <Button type="tertiary" size="medium" onClick={onAdvancedOptionsClick}>
+          {t(
+            'hyperplay.onboarding.walletSelection.screens.import.advancedOptions',
+            `Advanced`
+          )}
+        </Button>
       </div>
     </>
   )
