@@ -10,3 +10,9 @@
   overflow-y: scroll;
   @include mixins.showScrollbar;
 }
+
+.actionsContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 calc(4 * var(--space-sm));
+}

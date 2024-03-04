@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ImportAndCreateOptionsProps } from '../../types'
 import { ImportableBrowser } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportOption from 'frontend/screens/Onboarding/components/importOption'
 import { NavLink } from 'react-router-dom'
 import { t } from 'i18next'
 import styles from './index.module.scss'
+import { Button } from '@hyperplay/ui'
 
 export default function ImportAndCreateOptions({
   importOptions,
@@ -12,6 +13,11 @@ export default function ImportAndCreateOptions({
   setBrowserSelected
 }: ImportAndCreateOptionsProps) {
   let importableBrowserOptions = null
+  const [isOpenAdvancedOptions, setIsOpenAdvancedOptions] = useState(false)
+
+  const onAdvancedOptionsClick = () => {
+    setIsOpenAdvancedOptions((prev: boolean) => !prev);
+  }
 
   if (importOptions !== undefined) {
     importableBrowserOptions = Object.keys(importOptions).map((browser) => {
@@ -27,30 +33,48 @@ export default function ImportAndCreateOptions({
   }
 
   return (
-    <div className={styles.importOptionsContainer}>
-      {importableBrowserOptions}
-      <ImportOption
-        override="create"
-        title={t(
-          'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
-          `Create new MM extension wallet`
+    <>
+      <div className={styles.importOptionsContainer}>
+        {importableBrowserOptions}
+        {isOpenAdvancedOptions && (
+            <>
+            <ImportOption
+              override="create"
+              title={t(
+                'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
+                `Create new MM extension wallet`
+              )}
+              onClick={async () => {
+                handleImportMmExtensionClicked('CREATE')
+              }}
+            />
+            <NavLink to="/metamaskSecretPhrase">
+              <ImportOption
+                override="recovery"
+                title={t(
+                  'hyperplay.onboarding.walletSelection.screens.import.useRecoveryPhrase',
+                  `Access with secret recovery phrase`
+                )}
+                onClick={async () => {
+                  handleImportMmExtensionClicked('SECRET_PHRASE')
+                }}
+              />
+            </NavLink>
+          </>
         )}
-        onClick={async () => {
-          handleImportMmExtensionClicked('CREATE')
-        }}
-      />
-      <NavLink to="/metamaskSecretPhrase">
-        <ImportOption
-          override="recovery"
-          title={t(
-            'hyperplay.onboarding.walletSelection.screens.import.useRecoveryPhrase',
-            `Access with secret recovery phrase`
-          )}
-          onClick={async () => {
-            handleImportMmExtensionClicked('SECRET_PHRASE')
-          }}
-        />
-      </NavLink>
-    </div>
+      </div>
+      <div className={styles.actionsContainer}>
+        <Button
+              type="tertiary"
+              size="medium"
+              onClick={onAdvancedOptionsClick}
+            >
+              {t(
+                'hyperplay.onboarding.walletSelection.screens.import.advancedOptions',
+                `Advanced`
+              )}
+          </Button>
+      </div>
+    </>
   )
 }
