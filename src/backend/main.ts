@@ -599,12 +599,6 @@ if (!gotTheLock) {
       configStore.set('settings.ldUser', ldUser)
     }
 
-    console.log(
-      'XXXXXXXXXXXXXXXX \n \n \n initializing ld main client ',
-      LDEnvironmentId,
-      ldUser,
-      ldOptions
-    )
     ldMainClient = LDElectron.initializeInMain(
       LDEnvironmentId,
       ldUser,
