@@ -246,28 +246,49 @@ ipcMain.on('focusMainWindow', () => {
 })
 
 async function completeHyperPlayQuest() {
-  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
-  const cookieString = await getPartitionCookies({
-    partition: 'persist:auth',
-    url: DEV_PORTAL_URL
-  })
-
-  const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
-    method: 'POST',
-    headers: {
-      Cookie: cookieString
-    }
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    logError(
-      `Failed to complete summon task: ${
-        error?.message ?? response.statusText
-      }`,
-      LogPrefix.Backend
-    )
+  const completeHpSummonQuestIsActive = ldMainClient.variation(
+    'complete-hp-summon-quest',
+    false
+  )
+  if (!completeHpSummonQuestIsActive) {
     return
+  }
+  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
+  try {
+    const cookieString = await getPartitionCookies({
+      partition: 'persist:auth',
+      url: DEV_PORTAL_URL
+    })
+
+    const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
+      method: 'POST',
+      headers: {
+        Cookie: cookieString
+      }
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      logError(
+        `Failed to complete summon task: ${
+          error?.message ?? response.statusText
+        }`,
+        LogPrefix.Backend
+      )
+      trackEvent({
+        event: 'HyperPlay Summon Quest Failed'
+      })
+      return
+    }
+
+    trackEvent({
+      event: 'HyperPlay Summon Quest Succeeded'
+    })
+  } catch (err) {
+    logError(`Error completing Summon quest ${err}`, LogPrefix.HyperPlay)
+    trackEvent({
+      event: 'HyperPlay Summon Quest Failed'
+    })
   }
 
   logInfo(`Completed HyperPlay Summon task`, LogPrefix.Backend)
