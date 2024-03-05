@@ -54,10 +54,7 @@ import {
   clearCache,
   execAsync,
   getGOGdlBin,
-  getGogdlVersion,
   getLegendaryBin,
-  getLegendaryVersion,
-  getNileVersion,
   getPlatformName,
   getStoreName,
   isEpicServiceOffline,
@@ -138,8 +135,6 @@ import {
   sendFrontendMessage
 } from './main_window'
 import { addGameToLibrary } from './storeManagers/hyperplay/library'
-
-import * as si from 'systeminformation'
 
 import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
@@ -823,9 +818,6 @@ ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
 ipcMain.handle('getMaxCpus', () => cpus().length)
 
 ipcMain.handle('getAppVersion', () => app.getVersion())
-ipcMain.handle('getLegendaryVersion', async () => getLegendaryVersion())
-ipcMain.handle('getGogdlVersion', async () => getGogdlVersion())
-ipcMain.handle('getNileVersion', getNileVersion)
 ipcMain.handle('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 ipcMain.handle('isFlatpak', () => isFlatpak)
 ipcMain.handle('getGameOverride', async () => getGameOverride())
@@ -834,11 +826,6 @@ ipcMain.handle('getGameSdl', async (event, appName) => getGameSdl(appName))
 ipcMain.handle('getPlatform', () => process.platform)
 
 ipcMain.handle('showUpdateSetting', () => !isFlatpak)
-
-ipcMain.handle('getNumOfGpus', async (): Promise<number> => {
-  const { controllers } = await si.graphics()
-  return controllers.length
-})
 
 ipcMain.on('clearCache', (event) => {
   clearCache()
