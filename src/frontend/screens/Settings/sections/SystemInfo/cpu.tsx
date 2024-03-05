@@ -17,10 +17,10 @@ function CPUCard({ cpu }: { cpu: SystemInformation['CPU'] }) {
         {t('settings.systemInformation.cpu', 'CPU:')}
       </Typography>
       <Grid container>
-        <Grid item xs={2}>
+        <Grid item xs={1.8}>
           <VendorLogo model={model} />
         </Grid>
-        <Grid item xs={10} margin={'auto'} padding={'var(--space-md-fixed)'}>
+        <Grid item xs={10} margin={'auto'} paddingLeft={'var(--space-md-fixed)'} >
           {t(
             'settings.systemInformation.cpuDescription',
             '{{numOfCores}}x {{modelName}}',

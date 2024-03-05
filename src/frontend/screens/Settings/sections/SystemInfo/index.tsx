@@ -96,12 +96,8 @@ export default function SystemInfo() {
   return (
     <StyledEngineProvider injectFirst>
       <Box sx={{ width: '770px', textAlign: 'start' }} className="systeminfo">
-        <h3>{t('settings.navbar.systemInformation', 'System Information')}</h3>
         <h5>
-          {t(
-            'settings.systemInformation.systemSpecifications',
-            'System Specifications:'
-          )}
+{t('settings.navbar.systemInformation', 'System Information')}
         </h5>
         {systemInformation.isSteamDeck ? (
           <SteamDeckSystemSpecifications

@@ -28,10 +28,10 @@ function SoftwareInfo({ software }: Props) {
         <Grid item xs={2}>
           <HyperPlayIcon className="app-icon" />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={10} margin={'auto'} paddingLeft={'var(--space-xs-fixed)'} >
           {t(
-            'settings.systemInformation.appVersion',
-            'AppVersion: {{appVersion}}',
+            'settings.systemInformation.version',
+            'Version: {{appVersion}}',
             {
               appVersion
             }
