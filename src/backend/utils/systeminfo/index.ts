@@ -1,5 +1,5 @@
 /**
- * @file Figures out system information (CPU, GPU, memory) and software versions (Heroic, Legendary, gogdl, etc.)
+ * @file Figures out system information (CPU, GPU, memory) and software versions (HyperPlay, Legendary, gogdl, etc.)
  */
 
 import os from 'os'
@@ -10,12 +10,13 @@ import { getGpuInfo } from './gpu'
 import { getMemoryInfo } from './memory'
 import { getOsInfo } from './osInfo'
 import { isSteamDeck } from './steamDeck'
-import { getHeroicVersion } from './heroicVersion'
+
 import {
   getGogdlVersion,
   getLegendaryVersion,
   getNileVersion
 } from '../helperBinaries'
+import { getAppVersion } from 'backend/utils'
 
 type GPUInfo = {
   // The PCI device ID of the graphics card (hexadecimal)
@@ -55,7 +56,7 @@ interface SystemInformation {
   isSteamDeck: boolean
   isFlatpak: boolean
   softwareInUse: {
-    heroicVersion: string
+    appVersion: string
     legendaryVersion: string
     gogdlVersion: string
     nileVersion: string
@@ -104,7 +105,7 @@ async function getSystemInfo(cache = true): Promise<SystemInformation> {
     isSteamDeck: isDeck,
     isFlatpak: !!process.env.FLATPAK_ID,
     softwareInUse: {
-      heroicVersion: getHeroicVersion(),
+      appVersion: getAppVersion(),
       legendaryVersion: legendaryVersion,
       gogdlVersion: gogdlVersion,
       nileVersion: nileVersion
@@ -130,7 +131,7 @@ The current system is${info.isSteamDeck ? '' : ' not'} a Steam Deck
 We are${info.isFlatpak ? '' : ' not'} running inside a Flatpak container
 
 Software Versions:
-  Heroic: ${info.softwareInUse.heroicVersion}
+  HyperPlay: ${info.softwareInUse.appVersion}
   Legendary: ${info.softwareInUse.legendaryVersion}
   gogdl: ${info.softwareInUse.gogdlVersion}
   Nile: ${info.softwareInUse.nileVersion}`

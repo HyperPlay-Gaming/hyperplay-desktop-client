@@ -4,7 +4,7 @@ import Paper from '@mui/material/Paper'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 
-import { ReactComponent as HeroicIcon } from 'frontend/assets/heroic-icon.svg'
+import { ReactComponent as HyperPlayIcon } from 'frontend/assets/hyperplay/hyperplay_logo_white.svg'
 
 import type { SystemInformation } from 'backend/utils/systeminfo'
 import { useTranslation } from 'react-i18next'
@@ -16,7 +16,7 @@ interface Props {
 function SoftwareInfo({ software }: Props) {
   const { t } = useTranslation()
 
-  const { heroicVersion, legendaryVersion, gogdlVersion, nileVersion } =
+  const { appVersion, legendaryVersion, gogdlVersion, nileVersion } =
     software
 
   return (
@@ -26,14 +26,14 @@ function SoftwareInfo({ software }: Props) {
       </Typography>
       <Grid container>
         <Grid item xs={2}>
-          <HeroicIcon className="heroic-icon" />
+          <HyperPlayIcon className="app-icon" />
         </Grid>
         <Grid item xs={10}>
           {t(
-            'settings.systemInformation.heroicVersion',
-            'Heroic: {{heroicVersion}}',
+            'settings.systemInformation.appVersion',
+            'AppVersion: {{appVersion}}',
             {
-              heroicVersion
+              appVersion
             }
           )}
           <br />
