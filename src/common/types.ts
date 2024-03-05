@@ -148,6 +148,11 @@ export interface ExtraInfo {
 
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 
+/**
+ * GameInfo stored locally by HyperPlay
+ * @prop runner This tool wraps the store's functionality
+ * @interface
+ */
 export interface GameInfo {
   runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload' | 'nile'
   store_url?: string
