@@ -68,7 +68,7 @@ import {
   installInfoStore as GOGinstallInfoStore,
   libraryStore as GOGlibraryStore
 } from './storeManagers/gog/electronStores'
-import fileSize from 'filesize'
+import * as fileSize from 'filesize'
 import {
   installStore as nileInstallStore,
   libraryStore as nileLibraryStore
@@ -142,7 +142,7 @@ function semverGt(target: string, base: string) {
   return isGE
 }
 
-const getFileSize = fileSize.partial({ base: 2 })
+const getFileSize = fileSize.partial({ base: 2 }) as (arg: unknown) => string
 
 export function getWineFromProton(
   wineVersion: WineInstallation,
