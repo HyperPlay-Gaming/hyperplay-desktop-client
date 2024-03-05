@@ -84,8 +84,8 @@ export const handleDMQueueInformation = (
 export const cancelDownload = (removeDownloaded: boolean) =>
   ipcRenderer.send('cancelDownload', removeDownloaded)
 
-export const cancelExtraction = (appName: string) =>
-  ipcRenderer.send('cancelExtraction', appName)
+export const cancelExtraction = (appName: string, removeDownloaded: boolean) =>
+  ipcRenderer.send('cancelExtraction', appName, removeDownloaded)
 
 export const resumeCurrentDownload = () =>
   ipcRenderer.send('resumeCurrentDownload')

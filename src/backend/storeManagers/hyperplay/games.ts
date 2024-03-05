@@ -72,6 +72,7 @@ import Store from 'electron-store'
 import i18next from 'i18next'
 import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
+import { deleteFolderRecursive } from 'backend/utils/rmFolderRecursive'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -396,11 +397,10 @@ const findExecutables = async (folderPath: string): Promise<string[]> => {
   return executables
 }
 
-function cleanUpDownload(appName: string, directory: string) {
+function cleanUpDownload(appName: string) {
   inProgressDownloadsMap.delete(appName)
   inProgressExtractionsMap.delete(appName)
   deleteAbortController(appName)
-  rmSync(directory, { recursive: true, force: true })
 }
 
 function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
@@ -502,7 +502,7 @@ async function downloadGame(
 
     function onCancel() {
       try {
-        cleanUpDownload(appName, directory)
+        cleanUpDownload(appName)
       } catch (err) {
         rej(err)
       }
@@ -531,6 +531,29 @@ async function downloadGame(
   })
 }
 
+function getInProgressZipPath(appName: string) {
+  const destPath = inProgressDownloadsMap.get(appName)?.destinationPath
+  if (destPath === undefined) {
+    return undefined
+  }
+  return getZipTempFolderPath(destPath, appName)
+}
+
+export function rmInProgressZipPath(appName: string) {
+  const zipPath = getInProgressZipPath(appName)
+  if (zipPath !== undefined) {
+    rmSync(zipPath, { recursive: true, force: true })
+  }
+}
+
+function rmInProgressExtractedFilesPath(appName: string) {
+  const destPath = inProgressDownloadsMap.get(appName)?.destinationPath
+  if (destPath === undefined) {
+    return undefined
+  }
+  deleteFolderRecursive(destPath)
+}
+
 function calculateProgress(
   downloadedBytes: number,
   downloadSize: number,
@@ -553,13 +576,17 @@ function sanitizeFileName(filename: string) {
   return filename.replace(/[/\\?%*:|"<>]/g, '-')
 }
 
+function getZipTempFolderPath(destinationPath: string, appName: string) {
+  return path.join(destinationPath, '.temp', appName)
+}
+
 function getZipFileName(
   appName: string,
   platformInfo: PlatformConfig,
   destinationPath: string
 ): { directory: string; filename: string } {
   const zipName = encodeURI(platformInfo.name)
-  const tempfolder = path.join(destinationPath, '.temp', appName)
+  const tempfolder = getZipTempFolderPath(destinationPath, appName)
 
   if (!existsSync(tempfolder)) {
     mkdirSync(tempfolder, { recursive: true })
@@ -696,7 +723,10 @@ async function resumeIfPaused(
   return isPaused
 }
 
-export async function cancelExtraction(appName: string) {
+export async function cancelExtraction(
+  appName: string,
+  removeDownloaded: boolean
+) {
   logInfo(
     `cancelExtraction: Extraction will be canceled and downloaded zip will be removed`,
     LogPrefix.HyperPlay
@@ -716,6 +746,21 @@ export async function cancelExtraction(appName: string) {
       } `,
       LogPrefix.HyperPlay
     )
+  }
+
+  if (removeDownloaded) {
+    // rm zip
+    rmInProgressZipPath(appName)
+
+    // rm extracted files
+    rmInProgressExtractedFilesPath(appName)
+
+    /**
+     * clean up here instead of extract zip service canceled handler
+     * so that map can still be accessed to delete folders after
+     * the folders are no longer being used/locked.
+     */
+    cleanUpDownload(appName)
   }
 }
 
@@ -1075,7 +1120,7 @@ export async function extract(
             body: `Installed`
           })
 
-          cleanUpDownload(appName, directory)
+          cleanUpDownload(appName)
 
           sendFrontendMessage('refreshLibrary', 'hyperplay')
 
@@ -1090,7 +1135,7 @@ export async function extract(
         cancelQueueExtraction()
         callAbortController(appName)
 
-        cleanUpDownload(appName, directory)
+        cleanUpDownload(appName)
 
         sendFrontendMessage('refreshLibrary', 'hyperplay')
 
@@ -1135,8 +1180,6 @@ export async function extract(
           title,
           body: 'Installation Stopped'
         })
-
-        cleanUpDownload(appName, directory)
 
         sendFrontendMessage('refreshLibrary', 'hyperplay')
 
