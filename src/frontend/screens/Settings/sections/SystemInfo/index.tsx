@@ -39,7 +39,7 @@ function SystemSpecifications({
       <Grid item xs={6}>
         <MemoryProgress memory={systemInformation.memory} />
       </Grid>
-      {...systemInformation.GPUs.map((gpu, index) => (
+      {systemInformation.GPUs.map((gpu, index) => (
         <Grid key={index} item xs={6}>
           <GPUCard
             gpu={gpu}

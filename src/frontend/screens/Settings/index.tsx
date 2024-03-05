@@ -162,10 +162,8 @@ function Settings() {
               <Tabs.Panel value="advSettings">
                 <AdvancedSettings />
               </Tabs.Panel>
-              <Tabs.Panel value="systeminfo">
-                <SystemInfo />
-              </Tabs.Panel>
               <Tabs.Panel value="logSettings">
+                <SystemInfo />
                 <LogSettings />
               </Tabs.Panel>
               <Tabs.Panel value="accessibility">

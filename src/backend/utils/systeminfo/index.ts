@@ -116,6 +116,14 @@ async function getSystemInfo(cache = true): Promise<SystemInformation> {
 }
 
 async function formatSystemInfo(info: SystemInformation): Promise<string> {
+  let steamDeckAndFlatpakInfo = ''
+  if (info.OS.platform === 'linux') {
+    steamDeckAndFlatpakInfo = `
+The current system is${info.isSteamDeck ? '' : ' not'} a Steam Deck
+We are${info.isFlatpak ? '' : ' not'} running inside a Flatpak container
+`
+  }
+
   return `CPU: ${info.CPU.cores}x ${info.CPU.model}
 Memory: ${filesize(info.memory.total)} (used: ${filesize(info.memory.used)})
 GPUs:
@@ -126,10 +134,7 @@ ${info.GPUs.map(
     Driver: ${gpu.driverVersion}`
 ).join('\n')}
 OS: ${info.OS.name} ${info.OS.version} (${info.OS.platform})
-
-The current system is${info.isSteamDeck ? '' : ' not'} a Steam Deck
-We are${info.isFlatpak ? '' : ' not'} running inside a Flatpak container
-
+${steamDeckAndFlatpakInfo}
 Software Versions:
   HyperPlay: ${info.softwareInUse.appVersion}
   Legendary: ${info.softwareInUse.legendaryVersion}
