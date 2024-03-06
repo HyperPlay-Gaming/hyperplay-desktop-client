@@ -119,7 +119,7 @@ export default React.memo(function NewLogin() {
 
           <p className="runnerMessage">{loginMessage}</p>
           {oldMac && <p className="disabledMessage">{oldMacMessage}</p>}
-          
+
           <div className="runnerGroup">
             <Runner
               class="epic"

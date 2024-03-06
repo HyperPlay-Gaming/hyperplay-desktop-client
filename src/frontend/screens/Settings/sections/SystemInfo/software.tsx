@@ -16,8 +16,7 @@ interface Props {
 function SoftwareInfo({ software }: Props) {
   const { t } = useTranslation()
 
-  const { appVersion, legendaryVersion, gogdlVersion, nileVersion } =
-    software
+  const { appVersion, legendaryVersion, gogdlVersion, nileVersion } = software
 
   return (
     <Paper sx={{ padding: 1 }} square>
@@ -28,14 +27,15 @@ function SoftwareInfo({ software }: Props) {
         <Grid item xs={2}>
           <HyperPlayIcon className="app-icon" />
         </Grid>
-        <Grid item xs={10} margin={'auto'} paddingLeft={'var(--space-xs-fixed)'} >
-          {t(
-            'settings.systemInformation.version',
-            'Version: {{appVersion}}',
-            {
-              appVersion
-            }
-          )}
+        <Grid
+          item
+          xs={10}
+          margin={'auto'}
+          paddingLeft={'var(--space-xs-fixed)'}
+        >
+          {t('settings.systemInformation.version', 'Version: {{appVersion}}', {
+            appVersion
+          })}
           <br />
           {t(
             'settings.systemInformation.legendaryVersion',
