@@ -297,8 +297,8 @@
   "devDependencies": {
     "@babel/plugin-transform-arrow-functions": "^7.22.5",
     "@electron/notarize": "^1.2.3",
-    "@lavamoat/allow-scripts": "^2.3.1",
-    "@lavamoat/preinstall-always-fail": "^1.0.0",
+    "@lavamoat/allow-scripts": "^3.0.2",
+    "@lavamoat/preinstall-always-fail": "^2.0.0",
     "@playwright/test": "^1.32.1",
     "@testing-library/dom": "^7.31.0",
     "@testing-library/jest-dom": "^6.2.0",
