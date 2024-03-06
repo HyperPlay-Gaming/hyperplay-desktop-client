@@ -891,7 +891,7 @@
         "alpha": "Альфа"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Ви під'єднані до HyperPlay за допомогою зовнішнього гаманця."
+        "EXTERNAL_WALLET_CONNECTED": "Ви під'єднані до HyperPlay за допомогою зовнішнього гаманця.\n\nДля затвердження транзакцій в оверлеї HyperPlay вам потрібно буде під'єднатися до HyperPlay з розширенням MetaMask."
     },
     "dlc": {
         "size": "Розмір",
