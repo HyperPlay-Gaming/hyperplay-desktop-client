@@ -71,7 +71,7 @@ async function downloadFile(
     .get(url, {
       ...options.axiosConfig,
       headers: {
-        'User-Agent': `HeroicGamesLauncher/${app.getVersion()}`,
+        'User-Agent': `HyperPlay/${app.getVersion()}`,
         ...options.axiosConfig?.headers
       }
     })
