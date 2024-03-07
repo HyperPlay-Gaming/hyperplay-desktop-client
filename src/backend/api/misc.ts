@@ -91,14 +91,6 @@ export const clipboardWriteText = async (text: string) =>
 export const pathExists = async (path: string) =>
   ipcRenderer.invoke('pathExists', path)
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const handleGoToScreen = (callback: any) => {
-  ipcRenderer.on('openScreen', callback)
-  return () => {
-    ipcRenderer.removeListener('openScreen', callback)
-  }
-}
-
 export const handleShowDialog = (
   onMessage: (
     e: Electron.IpcRendererEvent,
