@@ -89,6 +89,17 @@ class ExtensionHandlerState {
 
   bindEthereumListeners() {
     window.addEventListener('message', (event: MessageEvent) => {
+      /**
+       * An {"isTrusted": true} message is sent every few seconds and spams the logs.
+       * This makes debugging difficult in Sentry so we filter these out.
+       */
+      if (
+        event !== undefined &&
+        Object.hasOwn(event, 'isTrusted') &&
+        Object.keys(event).length === 1
+      ) {
+        return
+      }
       console.log('window message received = ', JSON.stringify(event, null, 4))
     })
 
