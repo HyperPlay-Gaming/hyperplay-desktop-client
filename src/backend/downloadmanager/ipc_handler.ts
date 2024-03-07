@@ -27,8 +27,11 @@ ipcMain.on('cancelDownload', (e, removeDownloaded) => {
   cancelCurrentDownload({ removeDownloaded })
 })
 
-ipcMain.on('cancelExtraction', (e, appName: string) => {
-  cancelExtraction(appName)
-})
+ipcMain.on(
+  'cancelExtraction',
+  (e, appName: string, removeDownloaded: boolean) => {
+    cancelExtraction(appName, removeDownloaded)
+  }
+)
 
 ipcMain.handle('getDMQueueInformation', getQueueInformation)

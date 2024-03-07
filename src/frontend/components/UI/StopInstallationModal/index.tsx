@@ -74,7 +74,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
               storage.setItem(app_name, JSON.stringify(latestProgress))
 
               if (isExtracting) {
-                window.api.cancelExtraction(app_name)
+                window.api.cancelExtraction(app_name, false)
 
                 return
               }
@@ -86,7 +86,7 @@ export default function StopInstallationModal(props: StopInstallProps) {
               props.onClose()
 
               if (isExtracting) {
-                window.api.cancelExtraction(app_name)
+                window.api.cancelExtraction(app_name, true)
               } else {
                 window.api.cancelDownload(true)
               }
