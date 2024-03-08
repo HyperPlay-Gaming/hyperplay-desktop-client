@@ -938,6 +938,10 @@
     "importGameErrorMessageExecutable": "Виконавчий файл гри не знайдено, імпорт гри неможливий",
     "profile": "Профіль",
     "gameUpdateNotifications": {
-        "title": "Оновлення ігор Доступно"
+        "title": "Доступно оновлення ігор",
+        "body": {
+            "single": "Є оновлення для {{gameName}}.",
+            "multiple": "{{gameName}} та інші ігри готові до оновлення."
+        }
     }
 }
