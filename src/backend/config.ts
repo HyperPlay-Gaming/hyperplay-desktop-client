@@ -333,8 +333,8 @@ class GlobalConfigV0 extends GlobalConfig {
       winePrefix: isWindows ? '' : defaultWinePrefix,
       wineVersion: defaultWine,
       enableEsync: isMac,
-      enableFsync: isLinux,
       enableMsync: isMac,
+      enableFsync: isLinux,
       ldUser: {
         kind: 'user',
         key: uuid()

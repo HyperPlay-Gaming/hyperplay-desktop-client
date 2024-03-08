@@ -5,14 +5,16 @@ import useSetting from 'frontend/hooks/useSetting'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import SettingsContext from '../SettingsContext'
 
 const EnableMsync = () => {
   const { t } = useTranslation()
   const { platform } = useContext(ContextProvider)
+  const { isMacNative } = useContext(SettingsContext)
   const isMac = platform === 'darwin'
   const [enableMsync, setEnableMsync] = useSetting('enableMsync', false)
 
-  if (!isMac) {
+  if (!isMac || isMacNative) {
     return <></>
   }
 
