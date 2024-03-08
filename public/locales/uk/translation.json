@@ -650,7 +650,8 @@
         "uncollapse": "Розгорнути бічну панель",
         "achievements": "Досягнення",
         "store": "Крамниця",
-        "downloadManager": "Завантажити менеджер"
+        "downloadManager": "Завантажити менеджер",
+        "library": "Бібліотека"
     },
     "status": {
         "installing": "Встановлення",
@@ -690,7 +691,8 @@
         "logout_confirmation": "Точно бажаєте вийти?",
         "manageaccounts": "Облікові записи",
         "quit": "Закрити",
-        "manageStore": "Керування крамницями"
+        "manageStore": "Керування крамницями",
+        "logIn": "Увійти"
     },
     "webview": {
         "controls": {
