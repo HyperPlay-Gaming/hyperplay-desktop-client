@@ -251,6 +251,13 @@
         "main": "Main",
         "prototype": "Prototype"
     },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} and other games are ready to update.",
+            "single": "There is an update ready for {{gameName}}."
+        },
+        "title": "Game Updates Available"
+    },
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -284,6 +291,7 @@
         "gamemode": "Feral GameMode applies automatic and temporary tweaks to the system when running games. Enabling may improve performance.",
         "general": "Sync with EGL if you have a working installation of the Epic Games Launcher elsewhere and want to import your games to avoid downloading them again.",
         "mangohud": "MangoHUD is an overlay that displays and monitors FPS, temperatures, CPU/GPU load and other system resources.",
+        "msync": "Msync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on several games.",
         "other": {
             "part4": "Use the ",
             "part5": "Game Arguments",
@@ -729,6 +737,7 @@
         "maxRecentGames": "Played Recently to Show",
         "maxworkers": "Maximum Number of Workers when downloading",
         "minimize-on-launch": "Minimize HyperPlay After Game Launch",
+        "msync": "Enable Msync",
         "offlinemode": "Run Game Offline",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
@@ -877,12 +886,5 @@
         },
         "release": "Release Date",
         "size": "Size"
-    },
-    "gameUpdateNotifications": {
-        "title": "Game Updates Available",
-        "body": {
-            "single": "There is an update ready for {{gameName}}.",
-            "multiple": "{{gameName}} and other games are ready to update."
-        }
     }
 }
