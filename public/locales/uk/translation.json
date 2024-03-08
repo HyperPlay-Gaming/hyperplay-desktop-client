@@ -649,7 +649,8 @@
         "collapse": "Згорнути бічну панель",
         "uncollapse": "Розгорнути бічну панель",
         "achievements": "Досягнення",
-        "store": "Крамниця"
+        "store": "Крамниця",
+        "downloadManager": "Завантажити менеджер"
     },
     "status": {
         "installing": "Встановлення",
@@ -933,5 +934,8 @@
     "importGameErrorTitle": "Помилка імпорту гри",
     "importGameErrorMessage": "Невірна тека гри, імпорт гри неможливий",
     "importGameErrorMessageExecutable": "Виконавчий файл гри не знайдено, імпорт гри неможливий",
-    "profile": "Профіль"
+    "profile": "Профіль",
+    "gameUpdateNotifications": {
+        "title": "Оновлення ігор Доступно"
+    }
 }
