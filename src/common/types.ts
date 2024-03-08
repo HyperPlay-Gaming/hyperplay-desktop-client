@@ -204,6 +204,7 @@ export interface GameSettings {
   enableEsync: boolean
   enableFSR: boolean
   enableFsync: boolean
+  enableMsync: boolean
   enviromentOptions: EnviromentVariable[]
   ignoreGameUpdates: boolean
   language: string

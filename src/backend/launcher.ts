@@ -393,6 +393,11 @@ function setupWineEnvVars(
   if (gameSettings.enableEsync && wineVersion.type !== 'proton') {
     ret.WINEESYNC = '1'
   }
+  if (isMac && gameSettings.enableMsync) {
+    ret.WINEMSYNC = '1'
+    // due to a bug on D3DMetal Esync needs to be enabled as well for msync to work
+    ret.WINEESYNC = '1'
+  }
   if (!gameSettings.enableEsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_ESYNC = '1'
   }
