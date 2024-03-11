@@ -806,7 +806,7 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
   for (const runner in libraryManagerMap) {
     let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
     if (autoUpdateGames) {
-      gamesToUpdate = autoUpdate(runner as Runner, gamesToUpdate)
+      gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
     }
     oldGames = [...oldGames, ...gamesToUpdate]
   }
