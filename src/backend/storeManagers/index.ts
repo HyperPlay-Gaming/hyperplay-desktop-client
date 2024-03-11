@@ -18,9 +18,10 @@ import { DMQueueElement, GameInfo, Runner } from 'common/types'
 import { ipcMain } from 'electron'
 import { sendFrontendMessage } from 'backend/main_window'
 import { loadEpicHyperPlayGameInfoMap } from './hyperplay/utils'
-import { isGameAvailable } from 'backend/api/helpers'
+
 import { notify } from '../dialog/dialog'
 import i18next from 'i18next'
+import { wait } from 'backend/utils'
 
 const MAX_GAMES_UPDATE_NOTIFICATIONS = 3
 
@@ -61,30 +62,31 @@ function getDMElement(gameInfo: GameInfo, appName: string) {
   return dmQueueElement
 }
 
-export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
+export async function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
   const logPrefix = RunnerToLogPrefixMap[runner]
-  gamesToUpdate.forEach(async (appName) => {
+  for (const appName of gamesToUpdate) {
     const { ignoreGameUpdates } = await gameManagerMap[runner].getSettings(
       appName
     )
     const gameInfo = gameManagerMap[runner].getGameInfo(appName)
-    const gameAvailable = await isGameAvailable({ appName, runner })
+    const gameAvailable = gameManagerMap[runner].isGameAvailable(appName)
 
     if (!gameAvailable) {
       logInfo(`Skipping auto-update for ${gameInfo.title}`, logPrefix)
-      return
+      continue
     }
 
     if (!ignoreGameUpdates) {
       logInfo(`Auto-Updating ${gameInfo.title}`, logPrefix)
       const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
+      await wait(3000)
       addToQueue(dmQueueElement)
       // remove from the array to avoid downloading the same game twice
       gamesToUpdate = gamesToUpdate.filter((game) => game !== appName)
     } else {
       logInfo(`Skipping auto-update for ${gameInfo.title}`, logPrefix)
     }
-  })
+  }
   return gamesToUpdate
 }
 

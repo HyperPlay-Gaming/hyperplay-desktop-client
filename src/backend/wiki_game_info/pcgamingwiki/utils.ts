@@ -58,7 +58,7 @@ async function getPageID(title: string, id?: string): Promise<string | null> {
       `https://www.pcgamingwiki.com/w/api.php?action=cargoquery&tables=Infobox_game&fields=Infobox_game._pageID%3DpageID%2C&where=Infobox_game.GOGcom_ID%20HOLDS%20${id}&format=json`
     )
 
-    const number = data.cargoquery[0]?.title?.pageID
+    const number = data?.cargoquery[0]?.title?.pageID
 
     if (number) {
       return number
@@ -72,7 +72,7 @@ async function getPageID(title: string, id?: string): Promise<string | null> {
     )}"&format=json`
   )
 
-  return data.cargoquery[0]?.title?.pageID
+  return data?.cargoquery[0]?.title?.pageID
 }
 
 async function getWikiText(id: string): Promise<string | null> {
