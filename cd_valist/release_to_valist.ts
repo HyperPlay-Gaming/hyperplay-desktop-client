@@ -66,7 +66,7 @@ async function main() {
 
   // call hyperplay cli
   child_process.spawnSync(
-    `npx @hyperplay/cli --private-key=${process.env.VALIST_PUBLISH_KEY} --no-meta-tx --yml-path=${dest}`
+    `npx @hyperplay/cli --private-key=${process.env.VALIST_PUBLISH_KEY} --no-meta-tx --yml-path=${dest} --skip_hyperplay_publish`
   )
 }
 
