@@ -8,6 +8,7 @@ import { isOnline } from './online_monitor'
 
 autoUpdater.autoDownload = false
 autoUpdater.autoInstallOnAppQuit = false
+autoUpdater.setFeedURL('https://developers.hyperplay.xyz/api/v1/client/updater')
 
 autoUpdater.on('update-available', async () => {
   if (!isOnline()) {
