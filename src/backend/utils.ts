@@ -987,31 +987,45 @@ export async function isMacSonomaOrHigher() {
 
   const { release } = await si.osInfo()
   const [major] = release.split('.').map(Number)
+  const isMacSonomaOrHigher = major >= 14
 
-  return major >= 14
+  logInfo(
+    `macOS is ${
+      isMacSonomaOrHigher ? 'Sonoma or higher' : 'not Sonoma or higher'
+    }`,
+    LogPrefix.Backend
+  )
+
+  return isMacSonomaOrHigher
 }
 
 export async function downloadDefaultWine() {
   // refresh wine list
-  await updateWineVersionInfos(true)
+  await updateWineVersionInfos(false)
   // get list of wines on wineDownloaderInfoStore
   const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
-  // use Wine-GE type if on Linux and Wine-Crossover if on Mac
-  const release = availableWine.filter(async (version) => {
-    if (isLinux) {
-      return (
-        version.type === 'Wine-GE' && version.version.includes('Wine-GE-Proton')
-      )
-    } else if (isMac) {
-      const isGPTKCompatible = await isMacSonomaOrHigher()
 
-      if (isGPTKCompatible) {
-        return version.type === 'Game-Porting-Toolkit'
+  // use Wine-GE type if on Linux and GPTK or Wine-Crossover if on Mac
+  const isGPTKCompatible = isMac ? await isMacSonomaOrHigher() : false
+  const results = await Promise.all(
+    availableWine.map(async (version) => {
+      if (isLinux) {
+        return (
+          version.type === 'Wine-GE' &&
+          version.version.includes('Wine-GE-Proton')
+        )
       }
-      return version.type === 'Wine-Crossover'
-    }
-    return false
-  })[0]
+
+      if (isMac) {
+        return isGPTKCompatible
+          ? version.type === 'Game-Porting-Toolkit'
+          : version.type === 'Wine-Crossover'
+      }
+      return false
+    })
+  )
+
+  const release = availableWine.filter((_, index) => results[index])[0]
 
   if (!release) {
     logError('Could not find default wine version', LogPrefix.Backend)
@@ -1025,6 +1039,7 @@ export async function downloadDefaultWine() {
       progress
     })
   }
+
   const result = await installWineVersion(
     release,
     onProgress,
@@ -1056,12 +1071,20 @@ export async function setGPTKDefaultOnMacOS() {
     return
   }
 
+  const { wineVersion: defaultWine } = GlobalConfig.get().getSettings()
+
+  const ignoreList = ['crossover', 'toolkit']
+
+  if (
+    ignoreList.includes(defaultWine.type.toLowerCase()) ||
+    defaultWine.name.includes('Toolkit')
+  ) {
+    return
+  }
+
   const wineList = await GlobalConfig.get().getAlternativeWine()
   const gptk = wineList.find((wine) => wine.type === 'toolkit')
-  if (!gptk) {
-    await downloadDefaultWine()
-    return setGPTKDefaultOnMacOS()
-  }
+
   if (gptk && existsSync(gptk.bin)) {
     logInfo(`Changing wine version to ${gptk.name}`)
     GlobalConfig.get().setSetting('wineVersion', gptk)
