@@ -148,13 +148,25 @@
             "title": "Увага",
             "wine-change": {
                 "message": "Ми не змогли знайти вибрану версію wine для запуску цієї назви ({{selectedWine}}). {{newline}} Ми знайшли іншу, ви хочете продовжити запуск за допомогою {{foundWine}}?",
-                "title": "Wine не знайдено!"
+                "title": "Wine не знайдено!",
+                "message-gptk": "Для того, щоб мати можливість запустити ігри за допомогою інструмента Apple Gaming, вам потрібно оновити macOS до 14 (Sonoma) або вище. {{newline}} Ми знайшли Wine на вашій системі, ви хочете продовжити запуск за допомогою {{foundWine}} ?",
+                "title-gptk": "Набір інструментів портування гри несумісний "
+            },
+            "rosetta": {
+                "title": "Rosetta не знайдено",
+                "message": "HyperPlay вимагає, щоб Rosetta коректно працював на macOS із чипами Apple Silicon. Установіть його з терміналу macOS за допомогою такої команди: «softwareupdate --install-rosetta» та перезапустіть HyperPlay. "
             }
         },
         "wineprefix": "Оберіть теку префікса Wine",
         "yes": "ТАК",
         "dontShowAgain": "Не показувати більше",
-        "choose-nile-binary": "Виберіть подвійний файл Nile"
+        "choose-nile-binary": "Виберіть подвійний файл Nile",
+        "reset-extension": {
+            "question": {
+                "title": "Скинути розширення",
+                "message": "Ви впевнені, що бажаєте скинути розширення MetaMask?"
+            }
+        }
     },
     "button": {
         "cancel": "Скасувати",
@@ -581,7 +593,8 @@
         "experimental_features": {
             "enableNewShinyFeature": "Нова яскрава функція"
         },
-        "steamId": "Steam ID"
+        "steamId": "Steam ID",
+        "autoLaunchHyperPlay": "Автоматично запускати HyperPlay"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -628,12 +641,17 @@
         "gamesSettings": "Налаштування ігор",
         "experimental_features": {
             "title": "Експериментальні функції"
-        }
+        },
+        "reset-extension": "Скинути розширення"
     },
     "Settings": "Налаштування",
     "sidebar": {
         "collapse": "Згорнути бічну панель",
-        "uncollapse": "Розгорнути бічну панель"
+        "uncollapse": "Розгорнути бічну панель",
+        "achievements": "Досягнення",
+        "store": "Крамниця",
+        "downloadManager": "Завантажити менеджер",
+        "library": "Бібліотека"
     },
     "status": {
         "installing": "Встановлення",
@@ -673,7 +691,8 @@
         "logout_confirmation": "Точно бажаєте вийти?",
         "manageaccounts": "Облікові записи",
         "quit": "Закрити",
-        "manageStore": "Керування крамницями"
+        "manageStore": "Керування крамницями",
+        "logIn": "Увійти"
     },
     "webview": {
         "controls": {
@@ -777,7 +796,7 @@
             "connected": "З'єднано",
             "notConnected": "Немає з'єднання"
         },
-        "changeWallet": "Змінити гаманець",
+        "changeWallet": "Змінити обліковий запис гаманця",
         "viewPortfolio": "Переглянути портфоліо",
         "copyUrl": "Копіювати URL",
         "currentWallet": "Поточний гаманець",
@@ -819,7 +838,9 @@
         "linkSteamAccountCta": "Увійти в Steam",
         "linkSteamAccountDescription": "Увійдіть в Steam, щоб прив'язати свій обліковий запис HyperPlay.",
         "Sync": "Синхронізувати",
-        "syncing": "Синхронізація..."
+        "syncing": "Синхронізація...",
+        "logOut": "Вийти з системи",
+        "viewMyAccount": "Перегляд облікового запису"
     },
     "hyperplayOverlay": {
         "description": {
@@ -891,7 +912,7 @@
         "alpha": "Альфа"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Ви під'єднані до HyperPlay за допомогою зовнішнього гаманця.\n\nДля затвердження транзакцій в оверлеї HyperPlay вам потрібно буде під'єднатися до HyperPlay з розширенням MetaMask."
+        "EXTERNAL_WALLET_CONNECTED": "Ви під'єднані до HyperPlay за допомогою зовнішнього гаманця."
     },
     "dlc": {
         "size": "Розмір",
@@ -914,5 +935,13 @@
     },
     "importGameErrorTitle": "Помилка імпорту гри",
     "importGameErrorMessage": "Невірна тека гри, імпорт гри неможливий",
-    "importGameErrorMessageExecutable": "Виконавчий файл гри не знайдено, імпорт гри неможливий"
+    "importGameErrorMessageExecutable": "Виконавчий файл гри не знайдено, імпорт гри неможливий",
+    "profile": "Профіль",
+    "gameUpdateNotifications": {
+        "title": "Доступно оновлення ігор",
+        "body": {
+            "single": "Є оновлення для {{gameName}}.",
+            "multiple": "{{gameName}} та інші ігри готові до оновлення."
+        }
+    }
 }
