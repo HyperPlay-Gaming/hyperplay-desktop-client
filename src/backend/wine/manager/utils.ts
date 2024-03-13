@@ -39,11 +39,7 @@ async function updateWineVersionInfos(
   if (fetch) {
     logInfo('Fetching upstream information...', LogPrefix.WineDownloader)
     const repositorys = isMac
-      ? [
-          Repositorys.WINECROSSOVER,
-          Repositorys.WINESTAGINGMACOS,
-          Repositorys.GPTK
-        ]
+      ? [Repositorys.WINECROSSOVER, Repositorys.GPTK]
       : [Repositorys.WINEGE, Repositorys.PROTONGE]
     await getAvailableVersions({
       repositorys,
@@ -76,6 +72,7 @@ async function updateWineVersionInfos(
     }
 
     wineDownloaderInfoStore.set('wine-releases', releases)
+    logInfo('Wine version list was updated', LogPrefix.WineDownloader)
   } else {
     logInfo('Read local information ...', LogPrefix.WineDownloader)
     if (wineDownloaderInfoStore.has('wine-releases')) {

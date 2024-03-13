@@ -320,26 +320,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
     mainWindow.setFullScreen(true)
   }
 
-  setTimeout(async () => {
-    // Will download Wine if none was found
-    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
-    const toolkitListDownloaded = availableWine.some(
-      (wine) => wine.type === 'toolkit'
-    )
-    const shouldDownloadWine =
-      !availableWine.length || (isMac && !toolkitListDownloaded)
-
-    Promise.all([
-      DXVK.getLatest(),
-      Winetricks.download(),
-      shouldDownloadWine ? downloadDefaultWine() : null,
-      isMac && checkRosettaInstall(),
-      isMac && setGPTKDefaultOnMacOS()
-    ])
-  }, 2500)
-
-  GlobalConfig.get()
-
   mainWindow.setIcon(icon)
   app.setAppUserModelId('HyperPlay')
   app.commandLine?.appendSwitch('enable-spatial-navigation')
@@ -648,6 +628,22 @@ if (!gotTheLock) {
       }, 10000)
     }
 
+    // Will download Wine if none was found
+    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
+    const toolkitDownloaded = availableWine.some(
+      (wine) => wine.type === 'toolkit'
+    )
+    const shouldDownloadWine =
+      !availableWine.length || (isMac && !toolkitDownloaded)
+
+    Promise.all([
+      DXVK.getLatest(),
+      Winetricks.download(),
+      shouldDownloadWine ? downloadDefaultWine() : null,
+      isMac && checkRosettaInstall(),
+      isMac && !shouldDownloadWine && setGPTKDefaultOnMacOS()
+    ])
+
     // set initial zoom level after a moment, if set in sync the value stays as 1
     setTimeout(() => {
       const zoomFactor = configStore.get('zoomPercent', 100) / 100
@@ -823,7 +819,7 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
   for (const runner in libraryManagerMap) {
     let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
     if (autoUpdateGames) {
-      gamesToUpdate = autoUpdate(runner as Runner, gamesToUpdate)
+      gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
     }
     oldGames = [...oldGames, ...gamesToUpdate]
   }
