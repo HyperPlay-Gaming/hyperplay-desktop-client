@@ -78,7 +78,7 @@ import {
 } from './storeManagers/nile/electronStores'
 
 import makeClient from 'discord-rich-presence-typescript'
-import { showDialogBoxModalAuto } from './dialog/dialog'
+import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
@@ -1042,6 +1042,14 @@ export async function downloadDefaultWine() {
       progress
     })
   }
+
+  notify({
+    title: i18next.t('notification.wine-download.title', 'Compatibility Layer'),
+    body: i18next.t(
+      'notification.wine-download.message',
+      'Setting up the default compatibility layer'
+    )
+  })
 
   const result = await installWineVersion(
     release,
