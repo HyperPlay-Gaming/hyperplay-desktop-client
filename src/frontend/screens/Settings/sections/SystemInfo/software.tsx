@@ -21,9 +21,9 @@ function SoftwareInfo({ software }: Props) {
   return (
     <Paper sx={{ padding: 1 }} square>
       <Typography variant="h6">
-        {t('settings.systemInformation.software', 'Software:')}
+        HyperPlay
       </Typography>
-      <Grid container>
+      <Grid container spacing={4}>
         <Grid item xs={2}>
           <HyperPlayIcon className="app-icon" />
         </Grid>
