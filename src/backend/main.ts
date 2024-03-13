@@ -26,7 +26,7 @@ import {
   screen,
   session
 } from 'electron'
-import 'backend/updater'
+import { changeUpdaterFeedUrl } from 'backend/updater'
 import { autoUpdater } from 'electron-updater'
 import { cpus, platform } from 'os'
 import {
@@ -376,7 +376,15 @@ const prodAppUrl = `file://${path.join(
   publicDir,
   '../build/index.html?view=App'
 )}`
-const loadMainWindowURL = function () {
+
+async function checkForUpdatesAndLog() {
+  const val = await autoUpdater.checkForUpdates()
+  logInfo(
+    `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
+  )
+}
+
+const loadMainWindowURL = async function () {
   if (!app.isPackaged && process.env.CI !== 'e2e') {
     mainWindow.loadURL(devAppUrl)
     // Open the DevTools.
@@ -384,11 +392,19 @@ const loadMainWindowURL = function () {
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(prodAppUrl)
-    autoUpdater.checkForUpdates().then((val) => {
-      logInfo(
-        `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
+    try {
+      await checkForUpdatesAndLog()
+    } catch (err) {
+      logError(
+        `Error updating HyperPlay with Valist url ${err} \n Trying with Github...`
       )
-    })
+      changeUpdaterFeedUrl('github')
+      try {
+        await checkForUpdatesAndLog()
+      } catch (err) {
+        logError(`Error updating HyperPlay with Github url ${err}`)
+      }
+    }
   }
 
   mainWindow.webContents.setWindowOpenHandler((details) => {

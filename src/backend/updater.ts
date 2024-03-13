@@ -8,7 +8,18 @@ import { isOnline } from './online_monitor'
 
 autoUpdater.autoDownload = false
 autoUpdater.autoInstallOnAppQuit = false
-autoUpdater.setFeedURL('https://developers.hyperplay.xyz/api/v1/client/updater')
+const valistFeedUrl = 'https://developers.hyperplay.xyz/api/v1/client/updater'
+const githubFeedUrl =
+  'https://api.github.com/repos/HyperPlay-Gaming/hyperplay-desktop-client/releases'
+autoUpdater.setFeedURL(valistFeedUrl)
+
+export function changeUpdaterFeedUrl(provider: 'valist' | 'github') {
+  let feedUrl = githubFeedUrl
+  if (provider === 'valist') {
+    feedUrl = valistFeedUrl
+  }
+  autoUpdater.setFeedURL(feedUrl)
+}
 
 autoUpdater.on('update-available', async () => {
   if (!isOnline()) {
