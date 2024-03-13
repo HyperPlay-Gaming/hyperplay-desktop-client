@@ -1,38 +1,72 @@
-import { defineConfig } from 'vite'
-import electron from 'vite-plugin-electron'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
-import path from 'path'
-import { bytecodePlugin } from 'electron-vite'
+import { join } from 'path'
+import {
+  bytecodePlugin,
+  defineConfig,
+  externalizeDepsPlugin
+} from 'electron-vite'
 
-const srcAliases = ['backend', 'frontend', 'common'].map((srcFolder) => {
+const srcAliases = ['backend', 'frontend', 'common'].map((aliasName) => {
   return {
-    find: srcFolder,
-    replacement: path.resolve(__dirname, `./src/${srcFolder}`)
+    find: aliasName,
+    replacement: join(__dirname, 'src', aliasName)
   }
 })
 
-const aliases = [
-  {
-    find: '~@fontsource',
-    replacement: path.resolve(__dirname, 'node_modules/@fontsource')
-  },
-  ...srcAliases
-]
+const dependenciesToNotExternalize = ['check-disk-space']
 
-const electronViteConfig = {
-  build: { outDir: 'build/electron', target: 'es2020' },
-  optimizeDeps: {
-    esbuildOptions: {
-      target: 'es2020'
-    }
+export default defineConfig(({ mode }) => ({
+  main: {
+    build: {
+      rollupOptions: {
+        input: 'src/backend/main.ts'
+      },
+      outDir: 'build/main',
+      minify: mode === 'production',
+      sourcemap: mode === 'development' ? 'inline' : false
+    },
+    resolve: { alias: srcAliases },
+    plugins: [externalizeDepsPlugin({ exclude: dependenciesToNotExternalize })]
   },
-  resolve: {
-    alias: aliases
+  preload: {
+    build: {
+      rollupOptions: {
+        input: [
+          'src/backend/preload.ts',
+          'src/backend/hyperplay-extension-helper/extensionPreload.ts',
+          'src/backend/hyperplay-proxy-server/providerPreload.ts',
+          'src/backend/hyperplay_store_preload.ts',
+          'src/backend/webview_style_preload.ts',
+          'src/backend/auth_provider_preload.ts',
+          'src/backend/email_modal_provider_preload.ts'
+        ]
+      },
+      outDir: 'build/preload',
+      minify: mode === 'production',
+      sourcemap: mode === 'development' ? 'inline' : false
+    },
+    resolve: { alias: srcAliases },
+    plugins: [externalizeDepsPlugin({ exclude: dependenciesToNotExternalize })]
+  },
+  renderer: {
+    root: '.',
+    build: {
+      rollupOptions: {
+        input: 'index.html'
+      },
+      target: 'esnext',
+      outDir: 'build',
+      emptyOutDir: false,
+      minify: mode === 'production',
+      sourcemap: mode === 'development' ? 'inline' : false
+    },
+    resolve: { alias: srcAliases },
+    plugins: [react(), svgr(), bytecodePlugin()]
   }
-}
+}))
 
-export default defineConfig({
+/* export default defineConfig({
   build: {
     outDir: 'build'
   },
@@ -112,4 +146,4 @@ export default defineConfig({
     ]),
     svgr()
   ]
-})
+}) */
