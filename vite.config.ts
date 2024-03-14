@@ -50,7 +50,10 @@ export default defineConfig(({ mode }) => ({
       sourcemap: mode === 'development' ? 'inline' : false
     },
     resolve: { alias: srcAliases },
-    plugins: [externalizeDepsPlugin({ exclude: dependenciesToNotExternalize })]
+    plugins: [
+      bytecodePlugin(),
+      externalizeDepsPlugin({ exclude: dependenciesToNotExternalize })
+    ]
   },
   renderer: {
     root: '.',
