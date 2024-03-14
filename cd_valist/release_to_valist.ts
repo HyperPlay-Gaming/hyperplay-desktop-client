@@ -78,7 +78,7 @@ async function main() {
   // call hyperplay cli
   console.log('publishing to Valist')
   const child = child_process.spawnSync(
-    `npx @hyperplay/cli publish --private-key=${process.env.VALIST_PUBLISH_KEY} --yml-path=${dest} --skip_hyperplay_publish --use-yml`,
+    `hyperplay publish --private-key=${process.env.VALIST_PUBLISH_KEY} --yml-path=${dest} --skip_hyperplay_publish --use-yml`,
     { shell: true }
   )
   if (child.error) {

@@ -33,5 +33,7 @@ jobs:
         run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
       - name: Install modules.
         run: yarn setup
+      - name: Install @hyperplay/cli globally
+        run: npm install -g @hyperplay/cli
       - name: Download all artifacts, create hyperplay.yml, and upload to Valist
         run: export RELEASE_VERSION=${{ github.ref_name }} && export VALIST_PUBLISH_KEY=${{ secrets.VALIST_PUBLISH_KEY }} && yarn release:valist
