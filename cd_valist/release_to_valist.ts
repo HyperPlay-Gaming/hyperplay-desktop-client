@@ -77,9 +77,16 @@ async function main() {
 
   // call hyperplay cli
   console.log('publishing to Valist')
-  child_process.spawnSync(
-    `npx @hyperplay/cli publish --private-key=${process.env.VALIST_PUBLISH_KEY} --yml-path=${dest} --skip_hyperplay_publish --use-yml`
+  const child = child_process.spawnSync(
+    `npx @hyperplay/cli publish --private-key=${process.env.VALIST_PUBLISH_KEY} --yml-path=${dest} --skip_hyperplay_publish --use-yml`,
+    { shell: true }
   )
+  if (child.error) {
+    console.error(`ERROR: ${child.error}`)
+  }
+  console.log('stdout: ', child.stdout.toString())
+  console.log('stderr: ', child.stderr.toString())
+  console.log('exit code: ', child.status)
 }
 
 main()
