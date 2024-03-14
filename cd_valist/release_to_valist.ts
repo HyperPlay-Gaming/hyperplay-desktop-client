@@ -1,8 +1,8 @@
 import * as os from 'os'
 import * as child_process from 'child_process'
 import axios from 'axios'
-import fs from 'fs'
-import YAML from 'yaml'
+import * as fs from 'fs'
+import * as YAML from 'yaml'
 
 async function downloadAllReleaseAssets() {
   console.log('tag name: ', process.env.RELEASE_VERSION)
@@ -16,13 +16,22 @@ async function downloadAllReleaseAssets() {
   )
 
   const destDir = `${os.tmpdir()}/assets`
-  fs.mkdirSync(destDir)
+  if (!fs.existsSync(destDir)) {
+    fs.mkdirSync(destDir)
+  }
   // download each asset in the latest release
   for (const key of Object.keys(data.assets)) {
     const asset = data.assets[key]
     const downloadUrl = asset.browser_download_url
 
     const outputFile = `${os.tmpdir()}/${asset.name}`
+
+    console.log(
+      'downloading from ',
+      downloadUrl,
+      ' to output file ',
+      outputFile
+    )
     child_process.spawnSync('curl', [
       '-L',
       downloadUrl,
@@ -44,17 +53,19 @@ function writeHpConfig(assets: any) {
     project: 'desktop',
     release: process.env.RELEASE_VERSION
   }
-  const platforms = assets.map((asset) => {
-    /* eslint-disable-next-line */
-    const platform: Record<string, any> = {}
-    platform[asset.name] = {
+
+  /* eslint-disable-next-line */
+  const platforms: Record<string, any> = {}
+  for (const asset of assets) {
+    platforms[asset.name] = {
       path: `${os.tmpdir()}/${asset.name}`,
       zip: false
     }
-  })
+  }
   hpCliConfig.platforms = platforms
 
   const dest = `${os.tmpdir()}/assets/hyperplay.yml`
+  console.log('writing hyperplay CLI YAML config file to ', dest)
   fs.writeFileSync(dest, YAML.stringify(hpCliConfig))
   return dest
 }
@@ -65,6 +76,7 @@ async function main() {
   const dest = writeHpConfig(assets)
 
   // call hyperplay cli
+  console.log('publishing to Valist')
   child_process.spawnSync(
     `npx @hyperplay/cli publish --private-key=${process.env.VALIST_PUBLISH_KEY} --yml-path=${dest} --skip_hyperplay_publish --use-yml`
   )
