@@ -27,7 +27,10 @@ export default defineConfig(({ mode }) => ({
       sourcemap: mode === 'development' ? 'inline' : false
     },
     resolve: { alias: srcAliases },
-    plugins: [externalizeDepsPlugin({ exclude: dependenciesToNotExternalize })]
+    plugins: [
+      externalizeDepsPlugin({ exclude: dependenciesToNotExternalize }),
+      bytecodePlugin()
+    ]
   },
   preload: {
     build: {
@@ -62,7 +65,7 @@ export default defineConfig(({ mode }) => ({
       sourcemap: mode === 'development' ? 'inline' : false
     },
     resolve: { alias: srcAliases },
-    plugins: [react(), svgr(), bytecodePlugin()]
+    plugins: [react(), svgr()]
   }
 }))
 
