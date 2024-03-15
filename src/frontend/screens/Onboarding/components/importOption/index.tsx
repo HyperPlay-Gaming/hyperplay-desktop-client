@@ -1,15 +1,17 @@
 import ImportOptionStyles from './index.module.scss'
 import React, { useEffect, useState } from 'react'
+import cn from 'classnames'
 import { ImportableBrowser } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import { Images } from '@hyperplay/ui'
 
 interface WalletOptionProps {
   title: ImportableBrowser
   onClick: () => void
+  classNames?: string
   override?: 'create' | 'recovery'
 }
 
-const ImportOption = ({ title, onClick, override }: WalletOptionProps) => {
+const ImportOption = ({ title, onClick, override, classNames }: WalletOptionProps) => {
   const [icon, setIcon] = useState('')
 
   useEffect(() => {
@@ -30,7 +32,7 @@ const ImportOption = ({ title, onClick, override }: WalletOptionProps) => {
   }
 
   return (
-    <button className={ImportOptionStyles.importOption} onClick={onClick}>
+    <button className={cn(ImportOptionStyles.importOption, classNames)} onClick={onClick}>
       {override !== undefined ? (
         getOverrideIcon()
       ) : (

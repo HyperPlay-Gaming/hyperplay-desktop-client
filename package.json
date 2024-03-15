@@ -158,7 +158,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@hyperplay/check-disk-space": "^3.5.2",
-    "@hyperplay/ui": "^1.1.27",
+    "@hyperplay/ui": "^1.2.7",
     "@mantine/carousel": "^7.5.1",
     "@mantine/core": "^7.5.1",
     "@mantine/dropzone": "^7.5.1",
