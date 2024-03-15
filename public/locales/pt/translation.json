@@ -671,9 +671,8 @@
         "warning": "Isso abrirá um link externo."
     },
     "dlc": {
-        "installDlcs": "Instalar todos os DLCs",
-        "actions": "Ações",
         "installDlcs": "Instalar todas as DLCs",
+        "actions": "Ações",
         "noDlcFound": "Nenhum DLC encontrado",
         "title": "Title"
     },
