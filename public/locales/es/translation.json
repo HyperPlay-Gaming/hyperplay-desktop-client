@@ -904,5 +904,6 @@
     },
     "importGameErrorTitle": "Error al importar el juego",
     "importGameErrorMessage": "No es una carpeta de juego válida, no es posible importar el juego",
-    "importGameErrorMessageExecutable": "No se encuentra el ejecutable del juego, no es posible importar el juego"
+    "importGameErrorMessageExecutable": "No se encuentra el ejecutable del juego, no es posible importar el juego",
+    "amazon": "Amazon"
 }
