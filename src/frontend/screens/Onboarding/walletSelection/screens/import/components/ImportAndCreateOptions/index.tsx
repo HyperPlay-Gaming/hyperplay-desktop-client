@@ -36,11 +36,17 @@ export default function ImportAndCreateOptions({
         <Collapse title="Advanced Options">
           <div className={styles.actionsCollapseContainer}>
             <div className={styles.infoBox}>
-              <Images.Info fill="var(--color-neutral-400)" className={styles.infoIcon} />
+              <Images.Info
+                fill="var(--color-neutral-400)"
+                className={styles.infoIcon}
+              />
               <div className={styles.infoText}>
-                This feature is recommended for advanced users and developers. 
-                <span onClick={() => window.api.openHyperplaySite()} className={styles.infoLink} >
-                   Learn more
+                This feature is recommended for advanced users and developers.
+                <span
+                  onClick={() => window.api.openHyperplaySite()}
+                  className={styles.infoLink}
+                >
+                  Learn more
                 </span>
               </div>
             </div>
@@ -62,21 +68,19 @@ export default function ImportAndCreateOptions({
       </div>
       <div className={styles.otherOptionsStatement}>
         <span className={styles.line}></span>
-        <span className={styles.otherOptionsText}>
-          OR
-        </span>
+        <span className={styles.otherOptionsText}>OR</span>
         <span className={styles.line}></span>
       </div>
       <ImportOption
-          override="create"
-          title={t(
-            'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
-            `Create New Extension Wallet`
-          )}
-          classNames={styles.importCreateMMButton}
-          onClick={async () => {
-            handleImportMmExtensionClicked('CREATE')
-          }}
+        override="create"
+        title={t(
+          'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
+          `Create New Extension Wallet`
+        )}
+        classNames={styles.importCreateMMButton}
+        onClick={async () => {
+          handleImportMmExtensionClicked('CREATE')
+        }}
       />
     </div>
   )

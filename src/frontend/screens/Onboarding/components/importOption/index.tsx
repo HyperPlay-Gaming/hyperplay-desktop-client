@@ -11,7 +11,12 @@ interface WalletOptionProps {
   override?: 'create' | 'recovery'
 }
 
-const ImportOption = ({ title, onClick, override, classNames }: WalletOptionProps) => {
+const ImportOption = ({
+  title,
+  onClick,
+  override,
+  classNames
+}: WalletOptionProps) => {
   const [icon, setIcon] = useState('')
 
   useEffect(() => {
@@ -32,7 +37,10 @@ const ImportOption = ({ title, onClick, override, classNames }: WalletOptionProp
   }
 
   return (
-    <button className={cn(ImportOptionStyles.importOption, classNames)} onClick={onClick}>
+    <button
+      className={cn(ImportOptionStyles.importOption, classNames)}
+      onClick={onClick}
+    >
       {override !== undefined ? (
         getOverrideIcon()
       ) : (
