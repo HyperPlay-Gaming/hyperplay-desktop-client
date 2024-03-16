@@ -19,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "¡Se borró la caché de HyperPlay!",
+            "message": "Caché de Heroic borrada.",
             "title": "Caché borrado"
         },
         "choose": "Elegir",
