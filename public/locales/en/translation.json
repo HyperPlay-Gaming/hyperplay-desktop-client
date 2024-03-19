@@ -528,6 +528,12 @@
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
     },
+    "notification": {
+        "wine-download": {
+            "message": "Setting up the default compatibility layer",
+            "title": "Compatibility Layer"
+        }
+    },
     "notify": {
         "error": {
             "move": "Error Moving the Game",
@@ -827,7 +833,6 @@
             "osNameFlatpak": "{{osName}} (inside Flatpak)",
             "osVersion": "Version {{versionNumber}}",
             "showDetailed": "Show detailed system specifications",
-            "software": "Software:",
             "steamDeck": "Steam Deck",
             "systemModel": "System Model:",
             "version": "Version: {{appVersion}}"
