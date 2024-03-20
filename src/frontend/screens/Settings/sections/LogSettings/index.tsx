@@ -67,6 +67,7 @@ function LogSettings() {
   const { t } = useTranslation()
   const { appName } = useContext(SettingsContext)
 
+  const hyperPlayLibrary = libraryState.hyperPlayLibrary
   const epicLibrary = libraryState.epicLibrary
   const gogLibrary = libraryState.gogLibrary
   const amazonLibrary = libraryState.amazonLibrary
@@ -75,7 +76,7 @@ function LogSettings() {
   const [logFileContent, setLogFileContent] = useState<string>('')
   const [logFileExist, setLogFileExist] = useState<boolean>(false)
   const [showLogOf, setShowLogOf] = useState<string>(
-    appName === 'default' ? 'heroic' : appName
+    appName === 'default' ? 'hyperplay' : appName
   )
   const [refreshing, setRefreshing] = useState<boolean>(true)
   const [copiedLog, setCopiedLog] = useState<boolean>(false)
@@ -84,6 +85,7 @@ function LogSettings() {
 
   useEffect(() => {
     let games: GameInfo[] = []
+    games = games.concat(hyperPlayLibrary.filter((game) => game.is_installed))
     games = games.concat(epicLibrary.filter((game) => game.is_installed))
     games = games.concat(gogLibrary.filter((game) => game.is_installed))
     games = games.concat(amazonLibrary.filter((game) => game.is_installed))
@@ -138,7 +140,7 @@ function LogSettings() {
       <div className="logs-wrapper">
         <span className="log-buttongroup">
           {[
-            ['Heroic', 'heroic'],
+            ['HyperPlay', 'hyperplay'],
             ['Epic/Legendary', 'legendary'],
             ['GOG', 'gogdl'],
             ['Amazon/Nile', 'nile']
@@ -231,7 +233,7 @@ function LogSettings() {
           </a>
           <a
             onClick={window.api.openDiscordLink}
-            title={t('setting.log.join-heroic-discord', 'Join our Discord')}
+            title={t('setting.log.join-hyperplay-discord', 'Join our Discord')}
             className="button is-footer"
           >
             <div className="button-icontext-flex">
@@ -239,7 +241,7 @@ function LogSettings() {
                 <FontAwesomeIcon icon={faDiscord} />
               </div>
               <span className="button-icon-text">
-                {t('setting.log.join-heroic-discord', 'Join our Discord')}
+                {t('setting.log.join-hyperplay-discord', 'Join our Discord')}
               </span>
             </div>
           </a>

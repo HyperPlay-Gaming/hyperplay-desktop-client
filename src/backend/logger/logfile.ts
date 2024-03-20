@@ -125,7 +125,7 @@ export function getLogFile(appNameOrRunner: string): string {
   })
 
   switch (appNameOrRunner) {
-    case 'heroic':
+    case 'hyperplay':
       return logs.currentLogFile
     case 'legendary':
       return logs.legendaryLogFile
