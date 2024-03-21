@@ -44,7 +44,7 @@ then
         yarn dist:$os
     fi
 else
-    yarn vite build
+    yarn electron-vite build
 fi
 
 # mock backend server
