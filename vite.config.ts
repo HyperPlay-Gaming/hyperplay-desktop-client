@@ -14,7 +14,7 @@ const srcAliases = ['backend', 'frontend', 'common'].map((aliasName) => {
   }
 })
 
-const dependenciesToNotExternalize = ['check-disk-space']
+const dependenciesToNotExternalize = ['check-disk-space', 'axios']
 
 export default defineConfig(({ mode }) => ({
   main: {
