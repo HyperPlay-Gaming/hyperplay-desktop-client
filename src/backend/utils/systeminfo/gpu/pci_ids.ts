@@ -2,14 +2,16 @@
  * Contains helper functions to work with the `pci.ids` file
  * ({@link https://pci-ids.ucw.cz})
  */
-import axios, { AxiosError } from 'axios'
-import path from 'path'
+import { join } from 'path'
 
-import { downloadFile, DAYS } from '../../inet/downloader'
 import { toolsPath } from 'backend/constants'
 
 import type { PartialGpuInfo } from './index'
 import type { GPUInfo } from '../index'
+import { LogPrefix, logError } from 'backend/logger/logger'
+import { downloadFile } from 'backend/utils'
+import { createAbortController } from 'backend/utils/aborthandler/aborthandler'
+import { existsSync, readFileSync } from 'graceful-fs'
 
 const pciIdsMap: Record<
   string,
@@ -25,21 +27,26 @@ const pciIdsMap: Record<
   }
 > = {}
 
-async function getPicIds(): Promise<typeof pciIdsMap | null> {
+async function getPciIds(): Promise<typeof pciIdsMap | null> {
   if (Object.keys(pciIdsMap).length !== 0) return pciIdsMap
 
-  const pciIdsFile = await downloadFile('https://pci-ids.ucw.cz/v2.2/pci.ids', {
-    axiosConfig: {
-      responseType: 'text'
-    },
-    writeToFile: path.join(toolsPath, 'pci.ids'),
-    maxCache: 30 * DAYS
-  }).catch((error) => error as AxiosError)
-  if (axios.isAxiosError(pciIdsFile)) return null
+  await downloadFile(
+    'https://pci-ids.ucw.cz/v2.2/pci.ids',
+    toolsPath,
+    'pci.ids',
+    createAbortController('pci.ids')
+  )
 
   let currentVendor: string | null = null
   let currentDevice: string | null = null
-  for (const line of pciIdsFile.split('\n')) {
+
+  const pciIdsFile = join(toolsPath, 'pci.ids')
+
+  if (!existsSync(pciIdsFile)) return null
+
+  const pciIdsFileContent = readFileSync(pciIdsFile, 'utf-8')
+
+  for (const line of pciIdsFileContent.split('\n')) {
     // Skip comments and empty lines
     if (line.startsWith('#')) continue
     if (line === '') continue
@@ -89,28 +96,36 @@ async function getPicIds(): Promise<typeof pciIdsMap | null> {
 async function populateDeviceAndVendorName(
   partialGpus: PartialGpuInfo[]
 ): Promise<GPUInfo[]> {
-  const pciIds = await getPicIds()
-  if (pciIds === null) return partialGpus
+  try {
+    const pciIds = await getPciIds()
+    if (pciIds === null) return partialGpus
 
-  const fullGpuInfo: GPUInfo[] = []
-  for (const gpu of partialGpus) {
-    const vendorId = gpu.vendorId.toLowerCase()
-    const deviceId = gpu.deviceId.toLowerCase()
-    const subvendorId = gpu.subvendorId?.toLowerCase()
-    const subdeviceId = gpu.subdeviceId?.toLowerCase()
-    const vendor = pciIds[vendorId]
-    const device = pciIds[vendorId]?.devices[deviceId]
-    const subsystem =
-      pciIds[vendorId]?.devices[deviceId]?.subsystems[
-        `${subvendorId} ${subdeviceId}`
-      ]
-    fullGpuInfo.push({
-      ...gpu,
-      deviceString: subsystem ?? device?.deviceName,
-      vendorString: vendor?.vendorName
-    })
+    const fullGpuInfo: GPUInfo[] = []
+    for (const gpu of partialGpus) {
+      const vendorId = gpu.vendorId.toLowerCase()
+      const deviceId = gpu.deviceId.toLowerCase()
+      const subvendorId = gpu.subvendorId?.toLowerCase()
+      const subdeviceId = gpu.subdeviceId?.toLowerCase()
+      const vendor = pciIds[vendorId]
+      const device = pciIds[vendorId]?.devices[deviceId]
+      const subsystem =
+        pciIds[vendorId]?.devices[deviceId]?.subsystems[
+          `${subvendorId} ${subdeviceId}`
+        ]
+      fullGpuInfo.push({
+        ...gpu,
+        deviceString: subsystem ?? device?.deviceName,
+        vendorString: vendor?.vendorName
+      })
+    }
+    return fullGpuInfo
+  } catch (error) {
+    logError(
+      `Failed to populate device and vendor name: ${error}`,
+      LogPrefix.Backend
+    )
+    return partialGpus
   }
-  return fullGpuInfo
 }
 
 export { populateDeviceAndVendorName }
