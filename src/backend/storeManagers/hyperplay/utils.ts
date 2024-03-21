@@ -32,6 +32,23 @@ export async function getHyperPlayReleaseMap() {
   return hpStoreGameMap
 }
 
+export const archMap: Record<string, string> = {
+  x64: 'amd64',
+  arm64: 'arm64'
+}
+
+export const platformMap: Record<string, string> = {
+  win32: 'windows',
+  darwin: 'darwin',
+  linux: 'linux'
+}
+
+export function getValistPlatformOfThisPlatform() {
+  const platform = platformMap[process.platform]
+  const arch = archMap[process.arch] || process.arch
+  return `${platform}_${arch}`
+}
+
 export function handleArchAndPlatform(
   platformToInstall: InstallPlatform,
   releaseMeta: ChannelReleaseMeta

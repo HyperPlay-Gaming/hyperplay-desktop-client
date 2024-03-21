@@ -129,6 +129,10 @@ export function getValidateLicenseKeysApiUrl() {
   return `${valistBaseApiUrlv1}/license_keys/validate`
 }
 
+export function getPatchingApiUrl() {
+  return `${valistBaseApiUrlv1}/patching`
+}
+
 /**
  * Get shell for different os
  * @returns Windows: powershell

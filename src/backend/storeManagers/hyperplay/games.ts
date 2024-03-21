@@ -29,7 +29,9 @@ import {
   isMac,
   isWindows,
   isLinux,
-  getValidateLicenseKeysApiUrl
+  getValidateLicenseKeysApiUrl,
+  getPatchingApiUrl,
+  appConfigFolder
 } from 'backend/constants'
 import {
   downloadFile,
@@ -46,6 +48,7 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import {
+  getValistPlatformOfThisPlatform,
   handleArchAndPlatform,
   handlePlatformReversed,
   sanitizeVersion
@@ -719,6 +722,39 @@ export async function cancelExtraction(appName: string) {
   }
 }
 
+async function downloadIPDT() {
+  try {
+    const ipdtLatestReleaseMeta = await getIPDTLatestReleaseMeta()
+    // download IPDT
+    const ipdtName = process.platform === 'win32' ? 'ipdt.exe' : 'ipdt'
+    await downloadFile(
+      ipdtLatestReleaseMeta[getValistPlatformOfThisPlatform()].external_url,
+      appConfigFolder,
+      ipdtName,
+      createAbortController('ipdt-download')
+    )
+  } catch (err) {
+    const errorMessage = `Error downloading IPDT! ${err}`
+    captureException(errorMessage)
+    logError(errorMessage)
+  }
+}
+
+async function downloadManifest() {
+  try {
+    await downloadFile(
+      getPatchingApiUrl(),
+      _,
+      _,
+      createAbortController('ipdt-download')
+    )
+  } catch (err) {
+    const errorMessage = `Error downloading Manifest! ${err}`
+    captureException(errorMessage)
+    logError(errorMessage)
+  }
+}
+
 export async function install(
   appName: string,
   {
@@ -1300,7 +1336,6 @@ export async function launch(
   return launchGame(appName, getGameInfo(appName), 'hyperplay')
 }
 
-// TODO: Refactor to only replace updated files
 export async function update(appName: string): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
     return { status: 'done' }
