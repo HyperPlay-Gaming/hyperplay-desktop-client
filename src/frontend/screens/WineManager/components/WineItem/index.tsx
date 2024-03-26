@@ -216,9 +216,7 @@ function getProgressElement(progress: ProgressInfo) {
         fontStyle: 'italic'
       }}
     >
-      {[percentageAsString, etaAsString].join(
-        ' '
-      )}
+      {[percentageAsString, etaAsString].join(' ')}
     </span>
   )
 }
