@@ -106,6 +106,9 @@ export interface StoreStructure {
   providerMetadata: {
     currentWeb3Provider: PROVIDERS
   }
+  extensionMetadata: {
+    isInitialized: boolean
+  }
 }
 
 export type StoreOptions<T extends Record<string, unknown>> = Store.Options<T>
