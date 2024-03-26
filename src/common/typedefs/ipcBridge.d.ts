@@ -248,7 +248,6 @@ interface HyperPlayAsyncIPCFunctions {
     channelId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
-  shouldShowAchievements: () => Promise<boolean>
   get_wallet_state_address: () => Promise<string>
   get_wallet_state_isConnected: () => Promise<boolean>
   get_wallet_state_provider: () => Promise<PROVIDERS>
