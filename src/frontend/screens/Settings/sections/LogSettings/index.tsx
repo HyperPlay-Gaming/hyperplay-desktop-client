@@ -11,7 +11,6 @@ import { GameInfo } from 'common/types'
 import libraryState from 'frontend/state/libraryState'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
 
-
 interface LogBoxProps {
   logFileContent: string
 }
