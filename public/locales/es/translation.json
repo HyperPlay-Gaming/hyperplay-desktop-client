@@ -962,7 +962,8 @@
     "profile": "Perfil",
     "notification": {
         "wine-download": {
-            "message": "Configuración de la capa de compatibilidad por defecto"
+            "message": "Configuración de la capa de compatibilidad por defecto",
+            "title": "Compatibilidad"
         }
     }
 }
