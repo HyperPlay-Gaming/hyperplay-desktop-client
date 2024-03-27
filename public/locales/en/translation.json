@@ -420,7 +420,7 @@
             },
             "welcome": {
                 "text": {
-                    "beta": "Please note that HyperPlay is in a Beta stage. Many features are still\n          in development, and bugs are expected.",
+                    "bugs": "Please note that HyperPlay is a public alpha. Many features are still\n          in development, and there will be bugs.",
                     "communityCTA_1": "We'd love your feedback and to have you join us in our",
                     "communityCTA_2": "community. Together, let's shape the future of gaming!",
                     "construction": "HyperPlay is under construction.",
@@ -430,7 +430,7 @@
             }
         },
         "otp": "One Time Passcode",
-        "publicBeta": "Public Beta",
+        "publicAlpha": "Public Alpha",
         "Sync": "Sync",
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
@@ -527,12 +527,6 @@
     "message": {
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
-    },
-    "notification": {
-        "wine-download": {
-            "message": "Setting up the default compatibility layer",
-            "title": "Compatibility Layer"
-        }
     },
     "notify": {
         "error": {
@@ -833,6 +827,7 @@
             "osNameFlatpak": "{{osName}} (inside Flatpak)",
             "osVersion": "Version {{versionNumber}}",
             "showDetailed": "Show detailed system specifications",
+            "software": "Software:",
             "steamDeck": "Steam Deck",
             "systemModel": "System Model:",
             "version": "Version: {{appVersion}}"
