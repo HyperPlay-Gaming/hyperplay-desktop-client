@@ -301,9 +301,9 @@ export async function launchGame(
     // Native
     if (isNative) {
       logInfo(
-        `launching native sideloaded or hyperplay store game: ${executable} ${
-          launcherArgs ?? ''
-        }`,
+        `launching native ${
+          runner === 'hyperplay' ? 'HyperPlay' : 'Sideloaded'
+        } Game: ${executable} ${launcherArgs ?? ''}`,
         LogPrefix.Backend
       )
 
@@ -349,7 +349,9 @@ export async function launchGame(
     }
 
     logInfo(
-      `launching non-native sideloaded: ${executable}}`,
+      `launching non-native ${
+        runner === 'hyperplay' ? 'HyperPlay' : 'Sideloaded'
+      } Game: ${executable}}`,
       LogPrefix.Backend
     )
 

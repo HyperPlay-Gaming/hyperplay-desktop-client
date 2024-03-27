@@ -27,7 +27,8 @@ import {
   WinePrefix,
   WineVersionSelector,
   WrappersTable,
-  IgnoreGameUpdates
+  IgnoreGameUpdates,
+  EnableMsync
 } from '../../components'
 import ContextProvider from 'frontend/state/ContextProvider'
 import Tools from '../../components/Tools'
@@ -137,7 +138,7 @@ export default function GamesSettings({ useDetails = true }: Props) {
         {showCrossPlatformOptions && (
           <>
             <EnableEsync />
-
+            <EnableMsync />
             {isLinux && (
               <>
                 <EnableFsync />

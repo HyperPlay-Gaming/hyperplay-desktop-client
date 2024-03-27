@@ -332,8 +332,9 @@ class GlobalConfigV0 extends GlobalConfig {
       wineCrossoverBottle: 'HyperPlay',
       winePrefix: isWindows ? '' : defaultWinePrefix,
       wineVersion: defaultWine,
-      enableEsync: true,
-      enableFsync: true,
+      enableEsync: isMac,
+      enableMsync: isMac,
+      enableFsync: isLinux,
       ldUser: {
         kind: 'user',
         key: uuid()

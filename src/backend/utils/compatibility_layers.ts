@@ -220,7 +220,10 @@ export async function getWineOnMac(): Promise<Set<WineInstallation>> {
   await execAsync('mdfind kMDItemCFBundleIdentifier = "*.wine"').then(
     async ({ stdout }) => {
       stdout.split('\n').forEach((winePath) => {
-        winePaths.add(winePath)
+        // avoid duplicating toolkit wine
+        if (!winePath.includes('game-porting-toolkit')) {
+          winePaths.add(winePath)
+        }
       })
     }
   )

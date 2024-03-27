@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ToggleSwitch } from 'frontend/components/UI'
 import useSetting from 'frontend/hooks/useSetting'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
+import SettingsContext from '../SettingsContext'
 
 const EnableEsync = () => {
   const { t } = useTranslation()
+  const { isMacNative, isLinuxNative } = useContext(SettingsContext)
 
   const [enableEsync, setEnableEsync] = useSetting('enableEsync', false)
+
+  if (isMacNative || isLinuxNative) {
+    return <></>
+  }
 
   return (
     <div className="toggleRow">
