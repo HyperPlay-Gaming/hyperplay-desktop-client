@@ -46,7 +46,7 @@ const TopNavBar = observer(() => {
   function getStoreTextStyle(viewURL: string) {
     const { currentUrl } = webviewNavigationStore
     const inactiveStyle = { color: 'var(--color-neutral-400)' }
-    const activeStyle = { color: '' }
+    const activeStyle = { color: '', textStyle: 'underline' }
     // initial value of currentUrl is ''
     if (!currentUrl) return inactiveStyle
     const viewURLMainDomain = extractMainDomain(viewURL)
@@ -66,7 +66,7 @@ const TopNavBar = observer(() => {
         <Images.HyperPlayTextLogo fill="var(--color-neutral-100)" />
         <div className={styles.versionBadge}>
           <div className={`caption ${styles.alphaCaption}`}>
-            {t(`hyperplay.publicBeta`, `Public Beta`)}
+            Beta
           </div>
         </div>
       </div>

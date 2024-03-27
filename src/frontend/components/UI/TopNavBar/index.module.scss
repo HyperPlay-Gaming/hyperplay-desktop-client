@@ -6,7 +6,7 @@
   display: grid;
   align-items: center;
   justify-content: space-between;
-  grid-template-columns: 280px auto 100px;
+  grid-template-columns: 300px auto 300px;
   padding: var(--space-md) var(--space-lg);
   z-index: 100000;
 }
@@ -26,10 +26,6 @@
   margin: 0 0 0 auto;
 }
 
-.storeLinks {
-  margin-left: -20%;
-}
-
 .iconButton {
   padding: var(--space-sm);
   background-color: var(--color-neutral-800);
@@ -43,8 +39,9 @@
 }
 
 .versionBadge {
-  background-color: var(--color-tertiary-700);
+  background-color: var(--color-primary-600);
   padding: var(--space-3xs) var(--space-sm);
+  color: var(--color-neutral-100);
   border-radius: var(--space-xs);
   margin-left: var(--space-sm);
 }
