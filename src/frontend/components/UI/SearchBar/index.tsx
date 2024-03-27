@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import './index.css'
+import './index.scss'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { GameInfo } from '../../../../common/types'
@@ -81,15 +81,16 @@ export default observer(function SearchBar() {
   const handleClick = (game: GameInfo) => {
     libraryState.filterText = ''
     if (input.current) {
-      input.current.value = ''
-
       if (game !== undefined) {
         navigate(`/gamepage/${game.runner}/${game.app_name}`, {
-          state: { gameInfo: game }
+          state: { gameInfo: JSON.parse(JSON.stringify(game)) , fromDM: false}
         })
       }
+      input.current.value = ''
     }
   }
+
+  const showAutoComplete = list.length > 0 && libraryState.filterText.length > 0
 
   return (
     <div className="SearchBar" data-testid="searchBar">
@@ -109,7 +110,7 @@ export default observer(function SearchBar() {
         id="search"
         className="searchBarInput"
       />
-      {libraryState.filterText.length > 0 && (
+      {showAutoComplete && (
         <>
           <ul className="autoComplete body-sm">
             {list.length > 0 &&
