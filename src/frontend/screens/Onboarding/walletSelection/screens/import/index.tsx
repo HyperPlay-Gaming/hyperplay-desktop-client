@@ -42,13 +42,13 @@ const WalletImportScreen = ({
       <div className={`title ${ImportScreenStyles.title}`}>
         {t(
           'hyperplay.onboarding.walletSelection.screens.import.title',
-          `Select the browser to import from`
+          `Select a browser to import from`
         )}
       </div>
       <div className={`body ${ImportScreenStyles.description}`}>
         {t(
           'hyperplay.onboarding.walletSelection.screens.import.details',
-          `By importing, your MetaMask installation and  settings will be imported into HyperPlay.`
+          `The browsers below already have MetaMask installed. Choose the one you’d like to import from.`
         )}
       </div>
       {browserToImportFromIsNotSelected() ? (

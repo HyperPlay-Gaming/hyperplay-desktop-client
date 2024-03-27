@@ -39,6 +39,7 @@
   height: max-content;
   white-space: pre;
   font-family: monospace;
+  text-wrap: balance;
 }
 
 .log-error {
