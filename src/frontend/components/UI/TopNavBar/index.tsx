@@ -77,6 +77,7 @@ const TopNavBar = observer(() => {
             {t(`hyperplay.publicAlpha`, `Public Alpha`)}
           </div>
         </div>
+        {showStoreNavOptions && (
           <>
             <NavLink to="/hyperplaystore">
               <Button
