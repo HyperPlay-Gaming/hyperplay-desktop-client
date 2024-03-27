@@ -814,7 +814,8 @@
                     "description": "HyperPlay es un lanzador de juegos y un agregador de tiendas de juegos para el\n          futuro. Con HyperPlay, puedes llevar tu cartera, tokens y activos\n          en cada juego. HyperPlay es compatible con toda la biblioteca de Epic\n          Store, GOG y nuestra propia tienda HyperPlay. Al utilizar HyperPlay, aceptas\n          para nuestro",
                     "construction": "HyperPlay está en fase de desarrollo.",
                     "communityCTA_2": "comunidad. Juntos, ¡demos forma al futuro de los juegos!",
-                    "communityCTA_1": "Nos encantaría recibir sus comentarios y que se uniera a nosotros a nuestra"
+                    "communityCTA_1": "Nos encantaría recibir sus comentarios y que se uniera a nosotros a nuestra",
+                    "beta": "Por favor, tenga en cuenta que HyperPlay se encuentra en fase Beta. Muchas funciones están aún\n          en desarrollo, y se esperan errores."
                 }
             },
             "terms": "Condiciones del servicio.",
@@ -886,7 +887,8 @@
         "linkSteamAccountCta": "Iniciar sesión en Steam",
         "linkSteamAccountDescription": "Inicia sesión en Steam para vincular tu cuenta HyperPlay.",
         "viewMyAccount": "Consultar mi cuenta",
-        "logOut": "Cerrar sesión"
+        "logOut": "Cerrar sesión",
+        "publicBeta": "Versión beta pública"
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -957,5 +959,10 @@
     "gameUpdateNotifications": {
         "title": "Actualizaciones del juego disponibles"
     },
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "notification": {
+        "wine-download": {
+            "message": "Configuración de la capa de compatibilidad por defecto"
+        }
+    }
 }
