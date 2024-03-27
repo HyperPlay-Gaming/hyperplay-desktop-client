@@ -23,7 +23,7 @@
 
 .wineManagerListItem {
   display: grid;
-  grid-template-columns: 3fr 2fr 1fr 10%;
+  grid-template-columns: 4fr 2fr 2fr 1fr;
   grid-template-areas: 'name date size action';
   margin: 0 var(--space-xl-fixed);
   align-items: center;
@@ -33,6 +33,7 @@
   place-self: center;
   border-bottom: 1px solid gray;
   padding: var(--space-xs-fixed) 0;
+  height: var(--space-2xl);
 }
 
 .wineManagerTitleList {
@@ -52,30 +53,6 @@
 .wineManagerListItem > .icons > button {
   margin-left: 0;
   padding-left: 4px;
-}
-
-.wineManagerListItem > .progress {
-  z-index: 5;
-  grid-area: cover;
-  font-weight: var(--medium);
-  background: var(--background-gradient);
-  padding: var(--space-3xs) var(--space-2xs);
-  border-radius: 4px;
-  color: var(--success);
-  position: relative;
-  bottom: -38px;
-  left: -38px;
-  color: var(--success);
-  font-family: var(--secondary-font-family);
-  font-style: italic;
-  font-weight: normal;
-  line-height: 12px;
-}
-
-.wineManagerListItem > .progress > .MuiSvgIcon-root {
-  position: relative;
-  bottom: 0;
-  top: 0;
 }
 
 .wineManagerListDate {

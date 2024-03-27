@@ -34,9 +34,10 @@
 
 .wineList {
   margin-top: 48px;
+  min-width: 100%;
 
   .gameListHeader {
-    grid-template-columns: 3fr 2fr 1fr 10%;
+    grid-template-columns: 4fr 2fr 2fr 1fr;
     margin: 0 var(--space-xl-fixed);
     span:last-child {
       justify-self: center;
