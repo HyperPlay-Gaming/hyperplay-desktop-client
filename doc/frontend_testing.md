@@ -1,4 +1,4 @@
-# Overview of Frontend testing enviroment
+# Overview of Frontend testing environment
 
 ## Configuration files
 
@@ -35,4 +35,4 @@ test's and also to manipulate them easy for your needs.
 All this type configurations are defined via a template class `TestType<Type>`. This provides the function `set()`, `get()` and `reset()`.
 
 Also there is a helper function `resetTestTypes()` which resets all type
-configurations to there default values. It is a good practice to call this in a `beforeEach()` of a describe entry.
+configurations to their default values. It is a good practice to call this in a `beforeEach()` of a describe entry.
