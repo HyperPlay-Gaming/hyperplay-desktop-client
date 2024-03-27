@@ -52,9 +52,9 @@ const Welcome: React.FC<WelcomeProps> = function (props) {
         </div>
         <div>
           {t(
-            'hyperplay.onboarding.welcome.text.bugs',
-            `Please note that HyperPlay is a public alpha. Many features are still
-          in development, and there will be bugs.`
+            'hyperplay.onboarding.welcome.text.beta',
+            `Please note that HyperPlay is in a Beta stage. Many features are still
+          in development, and bugs are expected.`
           )}
         </div>
         <div>
