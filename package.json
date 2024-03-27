@@ -61,6 +61,17 @@
     "portable": {
       "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": true,
+      "installerIcon": "build/win_icon.ico",
+      "uninstallerIcon": "build/win_icon.ico"
+    },
     "mac": {
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "category": "public.app-category.games",
@@ -197,7 +208,7 @@
     "embla-carousel-autoplay": ">=7.0.0",
     "embla-carousel-react": ">=7.0.0",
     "ethers": "^6.9.0",
-    "express": "^4.18.1",
+    "express": "^4.19.2",
     "filesize": "^10.1.0",
     "find-process": "^1.4.7",
     "font-list": "^1.4.5",
