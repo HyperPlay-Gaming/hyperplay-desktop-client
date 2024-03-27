@@ -243,7 +243,8 @@ interface HyperPlayAsyncIPCFunctions {
     totalPages: number
   }>
   getAchievementsStats: (options: PlayerOptions) => Promise<AchievementsStats>
-  syncAchievements: (options: PlayerOptions) => Promise<void>
+  syncAchievements: (options: PlayerOptions) => Promise<string>
+  getSyncProgress: (requestId: string) => Promise<number>
   checkHyperPlayAccessCode: (
     channelId: number,
     accessCode: string
