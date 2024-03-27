@@ -61,6 +61,17 @@
     "portable": {
       "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": true,
+      "installerIcon": "build/win_icon.ico",
+      "uninstallerIcon": "build/win_icon.ico"
+    },
     "mac": {
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "category": "public.app-category.games",
