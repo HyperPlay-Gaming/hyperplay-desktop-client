@@ -69,6 +69,8 @@ const TopNavBar = observer(() => {
             {t(`hyperplay.publicBeta`, `Public Beta`)}
           </div>
         </div>
+      </div>
+      <div className={styles.storeLinks}>
           <>
             <NavLink to="/hyperplaystore">
               <Button
