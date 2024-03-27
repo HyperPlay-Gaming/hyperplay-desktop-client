@@ -1,10 +1,12 @@
 .navBar {
   height: var(--top-navbar-height);
   background-color: var(--color-neutral-700);
-  width: 100%;
+  width: 100vw;
   grid-column: 1 / -1;
-  display: flex;
+  display: grid;
   align-items: center;
+  justify-content: space-between;
+  grid-template-columns: 350px auto 350px;
   padding: var(--space-md) var(--space-lg);
   z-index: 100000;
 }
@@ -36,9 +38,10 @@
   position: relative;
 }
 
-.alphaBadge {
-  background-color: var(--color-tertiary-700);
+.versionBadge {
+  background-color: var(--color-primary-600);
   padding: var(--space-3xs) var(--space-sm);
+  color: var(--color-neutral-100);
   border-radius: var(--space-xs);
   margin-left: var(--space-sm);
 }

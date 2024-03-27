@@ -27,15 +27,6 @@ const TopNavBar = observer(() => {
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
   const { pathname } = useLocation()
-  const pagesToShowStoreNavOptions = [
-    '/hyperplaystore',
-    '/gogstore',
-    '/epicstore',
-    '/amazonstore',
-    '/store-page'
-  ]
-
-  const showStoreNavOptions = pagesToShowStoreNavOptions.includes(pathname)
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   function setBadgeString(err: any, text: string) {
@@ -54,7 +45,7 @@ const TopNavBar = observer(() => {
   function getStoreTextStyle(viewURL: string) {
     const { currentUrl } = webviewNavigationStore
     const inactiveStyle = { color: 'var(--color-neutral-400)' }
-    const activeStyle = { color: '' }
+    const activeStyle = { color: '', textStyle: 'underline' }
     // initial value of currentUrl is ''
     if (!currentUrl) return inactiveStyle
     const viewURLMainDomain = extractMainDomain(viewURL)
@@ -72,53 +63,51 @@ const TopNavBar = observer(() => {
           className={styles.hpLogo}
         />
         <Images.HyperPlayTextLogo fill="var(--color-neutral-100)" />
-        <div className={styles.alphaBadge}>
-          <div className={`caption ${styles.alphaCaption}`}>
-            {t(`hyperplay.publicAlpha`, `Public Alpha`)}
-          </div>
+        <div className={styles.versionBadge}>
+          <div className={`caption ${styles.alphaCaption}`}>Beta</div>
         </div>
-        {showStoreNavOptions && (
-          <>
-            <NavLink to="/hyperplaystore">
+      </div>
+      <div className={styles.storeLinks}>
+        <>
+          <NavLink to="/hyperplaystore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
+            >
+              HyperPlay
+            </Button>
+          </NavLink>
+          <NavLink to="/epicstore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(EPIC_STORE_URL)}
+            >
+              {t('Epic Games', 'Epic Games')}
+            </Button>
+          </NavLink>
+          <NavLink to="/gogstore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(GOG_STORE_URL)}
+            >
+              {t('GOG', 'GOG')}
+            </Button>
+          </NavLink>
+          {ENABLE_AMAZON_STORE ? (
+            <NavLink to="/amazonstore">
               <Button
                 type="link"
                 size="small"
-                style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
+                style={getStoreTextStyle(AMAZON_STORE)}
               >
-                HyperPlay
+                {t('Amazon', 'Amazon')}
               </Button>
             </NavLink>
-            <NavLink to="/epicstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(EPIC_STORE_URL)}
-              >
-                {t('Epic Games', 'Epic Games')}
-              </Button>
-            </NavLink>
-            <NavLink to="/gogstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(GOG_STORE_URL)}
-              >
-                {t('GOG', 'GOG')}
-              </Button>
-            </NavLink>
-            {ENABLE_AMAZON_STORE ? (
-              <NavLink to="/amazonstore">
-                <Button
-                  type="link"
-                  size="small"
-                  style={getStoreTextStyle(AMAZON_STORE)}
-                >
-                  {t('Amazon', 'Amazon')}
-                </Button>
-              </NavLink>
-            ) : null}
-          </>
-        )}
+          ) : null}
+        </>
       </div>
       <div>
         {pathname === '/library' ? <SearchBar /> : null}
