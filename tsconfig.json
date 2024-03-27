@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "module": "esnext",
-    "target": "es2020",
+    "target": "esnext",
     "lib": ["esnext", "dom", "dom.iterable"],
     "sourceMap": true,
     "jsx": "react-jsx",

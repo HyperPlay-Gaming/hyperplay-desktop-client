@@ -127,10 +127,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   showItemInFolder: (item: string) => void
   clipboardWriteText: (text: string) => void
   addNewApp: (args: SideloadGame) => void
-  showLogFileInFolder: (args: {
-    appName: string
-    defaultLast?: boolean
-  }) => void
+  showLogFileInFolder: (appNameOrRunner: string) => void
   addShortcut: (appName: string, runner: Runner, fromMenu: boolean) => void
   removeShortcut: (appName: string, runner: Runner) => void
   removeFromDMQueue: (appName: string) => void
@@ -362,7 +359,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: 'sideload' | 'hyperplay'
   ) => Promise<boolean>
   isNative: (args: { appName: string; runner: Runner }) => boolean
-  getLogContent: (args: { appName: string; defaultLast?: boolean }) => string
+  getLogContent: (appNameOrRunner: string) => string
   installWineVersion: (
     release: WineVersionInfo
   ) => Promise<'error' | 'abort' | 'success'>
