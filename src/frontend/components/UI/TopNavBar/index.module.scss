@@ -1,10 +1,12 @@
 .navBar {
   height: var(--top-navbar-height);
   background-color: var(--color-neutral-700);
-  width: 100%;
+  width: 100vw;
   grid-column: 1 / -1;
-  display: flex;
+  display: grid;
   align-items: center;
+  justify-content: space-between;
+  grid-template-columns: 280px auto 100px;
   padding: var(--space-md) var(--space-lg);
   z-index: 100000;
 }
@@ -22,6 +24,10 @@
   display: flex;
   align-items: center;
   margin: 0 0 0 auto;
+}
+
+.storeLinks {
+  margin-left: -20%;
 }
 
 .iconButton {
