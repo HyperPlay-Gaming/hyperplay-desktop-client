@@ -95,10 +95,6 @@ async function installQueueElement(params: InstallParams): Promise<{
 
     const { status, error } = await installInstance()
 
-    if (status === 'error') {
-      errorMessage(error ?? '')
-    }
-
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       runner,
@@ -106,7 +102,13 @@ async function installQueueElement(params: InstallParams): Promise<{
       folder: path
     })
 
-    if (status === 'done')
+    if (status === 'error') {
+      errorMessage(error ?? 'Unknown error')
+      trackFailedInstall(error ?? 'Unknown error')
+      return { status }
+    }
+
+    if (status === 'done') {
       trackEvent({
         event: 'Game Install Success',
         properties: {
@@ -117,7 +119,19 @@ async function installQueueElement(params: InstallParams): Promise<{
           platform_arch: platformToInstall
         }
       })
-    else trackFailedInstall(`${error}`)
+      return { status }
+    }
+    if (status === 'abort') {
+      trackEvent({
+        event: 'Game Install Canceled',
+        properties: {
+          game_name: appName,
+          store_name: runner,
+          game_title: title
+        }
+      })
+      return { status }
+    }
 
     return { status }
   } catch (error) {
@@ -133,7 +147,7 @@ async function installQueueElement(params: InstallParams): Promise<{
     })
   }
 
-  function trackFailedInstall(error: unknown) {
+  function trackFailedInstall(error: string) {
     trackEvent({
       event: 'Game Install Failed',
       properties: {

@@ -51,28 +51,24 @@ import { NileUser } from './storeManagers/nile/user'
 import setup from './storeManagers/gog/setup'
 import nileSetup from './storeManagers/nile/setup'
 import {
-  checkWineBeforeLaunch,
   clearCache,
-  downloadDefaultWine,
   execAsync,
   getGOGdlBin,
-  getGogdlVersion,
   getLegendaryBin,
-  getLegendaryVersion,
-  getNileVersion,
   getPlatformName,
-  getShellPath,
   getStoreName,
-  getSystemInfo,
-  handleExit,
   isEpicServiceOffline,
+  handleExit,
   checkRosettaInstall,
   openUrlOrFile,
   resetApp,
   setGPTKDefaultOnMacOS,
   showAboutWindow,
   showItemInFolder,
-  wait
+  wait,
+  getShellPath,
+  checkWineBeforeLaunch,
+  downloadDefaultWine
 } from './utils'
 import {
   configPath,
@@ -132,7 +128,6 @@ import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { addRecentGame } from './recent_games/recent_games'
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import { getDefaultSavePath } from './save_sync'
-import si from 'systeminformation'
 import { initTrayIcon } from './tray_icon/tray_icon'
 import {
   createMainWindow,
@@ -217,6 +212,7 @@ import { uuid } from 'short-uuid'
 import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
 import { runWineCommandOnGame } from 'backend/storeManagers/hyperplay/games'
+import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
 
 let ldMainClient: LDElectron.LDElectronMainClient
 
@@ -246,28 +242,49 @@ ipcMain.on('focusMainWindow', () => {
 })
 
 async function completeHyperPlayQuest() {
-  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
-  const cookieString = await getPartitionCookies({
-    partition: 'persist:auth',
-    url: DEV_PORTAL_URL
-  })
-
-  const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
-    method: 'POST',
-    headers: {
-      Cookie: cookieString
-    }
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    logError(
-      `Failed to complete summon task: ${
-        error?.message ?? response.statusText
-      }`,
-      LogPrefix.Backend
-    )
+  const completeHpSummonQuestIsActive = ldMainClient.variation(
+    'complete-hp-summon-quest',
+    false
+  )
+  if (!completeHpSummonQuestIsActive) {
     return
+  }
+  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
+  try {
+    const cookieString = await getPartitionCookies({
+      partition: 'persist:auth',
+      url: DEV_PORTAL_URL
+    })
+
+    const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
+      method: 'POST',
+      headers: {
+        Cookie: cookieString
+      }
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      logError(
+        `Failed to complete summon task: ${
+          error?.message ?? response.statusText
+        }`,
+        LogPrefix.Backend
+      )
+      trackEvent({
+        event: 'HyperPlay Summon Quest Failed'
+      })
+      return
+    }
+
+    trackEvent({
+      event: 'HyperPlay Summon Quest Succeeded'
+    })
+  } catch (err) {
+    logError(`Error completing Summon quest ${err}`, LogPrefix.HyperPlay)
+    trackEvent({
+      event: 'HyperPlay Summon Quest Failed'
+    })
   }
 
   logInfo(`Completed HyperPlay Summon task`, LogPrefix.Backend)
@@ -298,26 +315,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
     )
     mainWindow.setFullScreen(true)
   }
-
-  setTimeout(async () => {
-    // Will download Wine if none was found
-    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
-    const toolkitListDownloaded = availableWine.some(
-      (wine) => wine.type === 'toolkit'
-    )
-    const shouldDownloadWine =
-      !availableWine.length || (isMac && !toolkitListDownloaded)
-
-    Promise.all([
-      DXVK.getLatest(),
-      Winetricks.download(),
-      shouldDownloadWine ? downloadDefaultWine() : null,
-      isMac && checkRosettaInstall(),
-      isMac && setGPTKDefaultOnMacOS()
-    ])
-  }, 2500)
-
-  GlobalConfig.get()
 
   mainWindow.setIcon(icon)
   app.setAppUserModelId('HyperPlay')
@@ -428,27 +425,27 @@ if (!gotTheLock) {
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )
-    ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
+    ses.setPreloads([path.join(__dirname, '../preload/providerPreload.js')])
 
     const authSession = session.fromPartition('persist:auth')
     authSession.setPreloads([
-      path.join(__dirname, 'providerPreload.js'),
-      path.join(__dirname, 'auth_provider_preload.js')
+      path.join(__dirname, '../preload/providerPreload.js'),
+      path.join(__dirname, '../preload/auth_provider_preload.js')
     ])
 
     const emailModalSession = session.fromPartition('persist:emailModal')
     emailModalSession.setPreloads([
-      path.join(__dirname, 'email_modal_provider_preload.js')
+      path.join(__dirname, '../preload/email_modal_provider_preload.js')
     ])
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
-      path.join(__dirname, 'hyperplay_store_preload.js'),
-      path.join(__dirname, 'webview_style_preload.js')
+      path.join(__dirname, '../preload/hyperplay_store_preload.js'),
+      path.join(__dirname, '../preload/webview_style_preload.js')
     ])
     const epicStoreSession = session.fromPartition('persist:epicstore')
     epicStoreSession.setPreloads([
-      path.join(__dirname, 'webview_style_preload.js')
+      path.join(__dirname, '../preload/webview_style_preload.js')
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
@@ -460,10 +457,6 @@ if (!gotTheLock) {
     initExtension()
 
     initOnlineMonitor()
-
-    getSystemInfo().then((systemInfo) =>
-      logInfo(`\n\n${systemInfo}\n`, LogPrefix.Backend)
-    )
 
     initImagesCache()
 
@@ -630,6 +623,22 @@ if (!gotTheLock) {
         }
       }, 10000)
     }
+
+    // Will download Wine if none was found
+    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
+    const toolkitDownloaded = availableWine.some(
+      (wine) => wine.type === 'toolkit'
+    )
+    const shouldDownloadWine =
+      !availableWine.length || (isMac && !toolkitDownloaded)
+
+    Promise.all([
+      DXVK.getLatest(),
+      Winetricks.download(),
+      shouldDownloadWine ? downloadDefaultWine() : null,
+      isMac && checkRosettaInstall(),
+      isMac && !shouldDownloadWine && setGPTKDefaultOnMacOS()
+    ])
 
     // set initial zoom level after a moment, if set in sync the value stays as 1
     setTimeout(() => {
@@ -806,7 +815,7 @@ ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
   for (const runner in libraryManagerMap) {
     let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
     if (autoUpdateGames) {
-      gamesToUpdate = autoUpdate(runner as Runner, gamesToUpdate)
+      gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
     }
     oldGames = [...oldGames, ...gamesToUpdate]
   }
@@ -826,9 +835,6 @@ ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
 ipcMain.handle('getMaxCpus', () => cpus().length)
 
 ipcMain.handle('getAppVersion', () => app.getVersion())
-ipcMain.handle('getLegendaryVersion', async () => getLegendaryVersion())
-ipcMain.handle('getGogdlVersion', async () => getGogdlVersion())
-ipcMain.handle('getNileVersion', getNileVersion)
 ipcMain.handle('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 ipcMain.handle('isFlatpak', () => isFlatpak)
 ipcMain.handle('getGameOverride', async () => getGameOverride())
@@ -837,11 +843,6 @@ ipcMain.handle('getGameSdl', async (event, appName) => getGameSdl(appName))
 ipcMain.handle('getPlatform', () => process.platform)
 
 ipcMain.handle('showUpdateSetting', () => !isFlatpak)
-
-ipcMain.handle('getNumOfGpus', async (): Promise<number> => {
-  const { controllers } = await si.graphics()
-  return controllers.length
-})
 
 ipcMain.on('clearCache', (event) => {
   clearCache()
@@ -946,7 +947,7 @@ ipcMain.handle('authGOG', async (event, code) => GOGUser.login(code))
 ipcMain.handle('logoutLegendary', LegendaryUser.logout)
 ipcMain.on('logoutGOG', GOGUser.logout)
 ipcMain.handle('getLocalPeloadPath', async () => {
-  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
+  return fixAsarPath(join(publicDir, '../preload/webviewPreload.js'))
 })
 
 ipcMain.handle('getAmazonLoginData', NileUser.getLoginData)
@@ -1183,11 +1184,21 @@ ipcMain.handle(
       powerDisplayId = powerSaveBlocker.start('prevent-display-sleep')
     }
 
-    const systemInfo = await getSystemInfo()
-    const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
     const logFileLocation = getLogFileLocation(appName)
 
-    writeFileSync(
+    const systemInfo = await getSystemInfo()
+      .then(formatSystemInfo)
+      .catch((error) => {
+        logError(
+          ['Failed to fetch system information', error],
+          LogPrefix.Backend
+        )
+        return 'Error, check general log'
+      })
+    writeFileSync(logFileLocation, 'System Info:\n' + `${systemInfo}\n` + '\n')
+
+    const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
+    appendFileSync(
       logFileLocation,
       'System Info:\n' +
         `${systemInfo}\n` +
@@ -1991,3 +2002,8 @@ ipcMain.on('openAuthModalIfAppReloads', () => {
 ipcMain.on('killOverlay', () => {
   closeOverlay()
 })
+/*
+ * INSERT OTHER IPC HANDLERS HERE
+ */
+
+import './storeManagers/legendary/eos_overlay/ipc_handler'
