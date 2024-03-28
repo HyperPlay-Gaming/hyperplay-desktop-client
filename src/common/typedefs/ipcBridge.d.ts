@@ -247,10 +247,24 @@ interface HyperPlayAsyncIPCFunctions {
   getSyncProgress: (requestId: string) => Promise<number>
   /* eslint-disable-next-line */
   freeBatchMintGameSummaries: (gamesToMint: string[]) => Promise<any>
+  getGameSummaryMintSignature: () => Promise<{
+    signature: string
+    nonce: number
+  }>
   checkHyperPlayAccessCode: (
     channelId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
+  callOrSendContract: (
+    isCall: boolean,
+    req: ContractInteractionRequest
+  ) => Promise<{
+    ok: boolean
+    /* eslint-disable-next-line */
+    result: any
+    status?: undefined
+    message?: undefined
+  }>
   get_wallet_state_address: () => Promise<string>
   get_wallet_state_isConnected: () => Promise<boolean>
   get_wallet_state_provider: () => Promise<PROVIDERS>
