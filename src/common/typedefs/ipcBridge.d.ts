@@ -245,6 +245,8 @@ interface HyperPlayAsyncIPCFunctions {
   getAchievementsStats: (options: PlayerOptions) => Promise<AchievementsStats>
   syncAchievements: (options: PlayerOptions) => Promise<string>
   getSyncProgress: (requestId: string) => Promise<number>
+  /* eslint-disable-next-line */
+  freeBatchMintGameSummaries: (gamesToMint: string[]) => Promise<any>
   checkHyperPlayAccessCode: (
     channelId: number,
     accessCode: string

@@ -39,7 +39,9 @@ class MintAchievementsState {
     }, ms)
   }
 
-  handleMint = () => this.testLoad(3000)
+  handleMint = async () => {
+    await window.api.freeBatchMintGameSummaries(this.achievementsToBeMinted)
+  }
 
   handleUpdate = () => this.testLoad(3000)
 }
