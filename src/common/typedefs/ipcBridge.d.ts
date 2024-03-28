@@ -243,12 +243,12 @@ interface HyperPlayAsyncIPCFunctions {
     totalPages: number
   }>
   getAchievementsStats: (options: PlayerOptions) => Promise<AchievementsStats>
-  syncAchievements: (options: PlayerOptions) => Promise<void>
+  syncAchievements: (options: PlayerOptions) => Promise<string>
+  getSyncProgress: (requestId: string) => Promise<number>
   checkHyperPlayAccessCode: (
     channelId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
-  shouldShowAchievements: () => Promise<boolean>
   get_wallet_state_address: () => Promise<string>
   get_wallet_state_isConnected: () => Promise<boolean>
   get_wallet_state_provider: () => Promise<PROVIDERS>

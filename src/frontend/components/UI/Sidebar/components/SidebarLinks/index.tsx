@@ -9,9 +9,9 @@ import { Images } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import { observer } from 'mobx-react-lite'
 import storeAuthState from 'frontend/state/storeAuthState'
-import AchievementState from 'frontend/state/AchievementState'
 import { useTranslation } from 'react-i18next'
 import { Tooltip, TooltipProps } from '@mantine/core'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 const tooltipProps: Partial<TooltipProps> = {
   offset: 16,
@@ -35,6 +35,9 @@ export default observer(function SidebarLinks() {
   useEffect(() => {
     window.api.isFullscreen().then((res) => setIsFullscreen(res))
   }, [])
+
+  const flags = useFlags()
+  const SHOW_ACHIEVEMENTS = flags.achievements
 
   async function handleRefresh() {
     localStorage.setItem('scrollPosition', '0')
@@ -110,7 +113,7 @@ export default observer(function SidebarLinks() {
             </NavLink>
           </Tooltip>
         </div>
-        {AchievementState.showAchievements && (
+        {SHOW_ACHIEVEMENTS && (
           <div className="sidebarLinkGradientWrapper">
             <Tooltip
               {...tooltipProps}

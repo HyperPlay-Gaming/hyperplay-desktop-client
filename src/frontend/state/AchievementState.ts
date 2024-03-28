@@ -67,9 +67,6 @@ class AchievementState {
   individualAchievements = new Map<string, IndividualAchievementData>()
   currentIndividualSort: AchievementSortOption = ACHIEVEMENT_SORT_OPTIONS[0]
 
-  // Achievements Feature Flag
-  showAchievements = false
-
   fetching = false
 
   syncing = false
@@ -87,9 +84,7 @@ class AchievementState {
   }
 
   init() {
-    window.api
-      .shouldShowAchievements()
-      .then((res) => (this.showAchievements = res))
+    // initialize code here. called on app start
   }
 
   getAchievementsStats = async () => {
