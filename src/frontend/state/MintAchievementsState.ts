@@ -4,6 +4,7 @@ class MintAchievementsState {
   achievementsToBeMinted = [] as string[]
   achievementsToBeUpdated = [] as string[]
   isLoading = false
+  isMinting = false
 
   constructor() {
     makeAutoObservable(this)
@@ -40,7 +41,11 @@ class MintAchievementsState {
   }
 
   handleMint = async () => {
-    await window.api.freeBatchMintGameSummaries(this.achievementsToBeMinted)
+    this.isMinting = true
+    await window.api.freeBatchMintGameSummaries(
+      JSON.parse(JSON.stringify(this.achievementsToBeMinted))
+    )
+    this.isMinting = false
   }
 
   handleUpdate = () => this.testLoad(3000)

@@ -1,6 +1,10 @@
 import React from 'react'
 import walletState from 'frontend/state/WalletState'
-import { AchievementCard, AchievementSummaryTable } from '@hyperplay/ui'
+import {
+  AchievementCard,
+  AchievementSummaryTable,
+  LoadingSpinner
+} from '@hyperplay/ui'
 import { NavLink } from 'react-router-dom'
 import { StatusIconState } from '@hyperplay/ui/dist/components/AchievementCard/components/StatusIcon'
 import { useTranslation } from 'react-i18next'
@@ -20,13 +24,14 @@ export default observer(function Achievements(): JSX.Element {
   const toggleAchievementToBeMinted =
     MintAchievementsState.toggleAchievementToBeMinted
   const isLoading = MintAchievementsState.isLoading
+  const isMinting = MintAchievementsState.isMinting
   const handleMint = MintAchievementsState.handleMint
   const handleUpdate = MintAchievementsState.handleUpdate
   const achievementsToBeUpdated = MintAchievementsState.achievementsToBeUpdated
   const toggleAchievementToBeUpdated =
     MintAchievementsState.toggleAchievementToBeUpdated
 
-  const isDisabled = isLoading || !walletState.isConnected
+  const isDisabled = isLoading || !walletState.isConnected || isMinting
 
   if (AchievementState.summaryAchievementsToDisplay === undefined) {
     AchievementState.fetchMoreSummaryAchievements()
@@ -44,6 +49,16 @@ export default observer(function Achievements(): JSX.Element {
     AchievementState?.summaryAchievementsToDisplay?.map(
       (game) => game.gameImageURL
     ) ?? []
+
+  const mintProps = {
+    onClick: handleMint,
+    disabled: isDisabled || achievementsToBeMinted.length === 0,
+    totalToMint: achievementsToBeMinted.length
+  }
+
+  if (isMinting) {
+    mintProps['leftIcon'] = <LoadingSpinner />
+  }
 
   return (
     <>
@@ -72,7 +87,7 @@ export default observer(function Achievements(): JSX.Element {
                 return (
                   <NavLink key={id} to={`/achievements/${game.gameId}`}>
                     <AchievementCard
-                      showStatusIcon={false}
+                      showStatusIcon={true}
                       id={id}
                       title={game.gameName}
                       image={game.gameImageURL}
@@ -139,11 +154,7 @@ export default observer(function Achievements(): JSX.Element {
             AchievementState.setFilter(filter)
           }
         }}
-        mintButtonProps={{
-          onClick: handleMint,
-          disabled: isDisabled || achievementsToBeMinted.length === 0,
-          totalToMint: achievementsToBeMinted.length
-        }}
+        mintButtonProps={mintProps}
         updateButtonProps={{
           onClick: handleUpdate,
           disabled: isDisabled || achievementsToBeUpdated.length === 0,
