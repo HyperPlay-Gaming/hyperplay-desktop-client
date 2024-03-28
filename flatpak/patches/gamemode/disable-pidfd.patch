@@ -1,0 +1,14 @@
+diff --git a/meson.build b/meson.build
+--- meson.build
++++ meson.build
+@@ -152,9 +152,9 @@
+ with_examples = get_option('with-examples')
+ with_util = get_option('with-util')
+ 
+ # Provide a config.h
+-pidfd_open = cc.has_function('pidfd_open', args: '-D_GNU_SOURCE')
++pidfd_open = false
+ 
+ cdata = configuration_data()
+ cdata.set_quoted('LIBEXECDIR', path_libexecdir)
+ cdata.set_quoted('SYSCONFDIR', path_sysconfdir)
