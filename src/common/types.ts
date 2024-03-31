@@ -891,3 +891,32 @@ export interface RunnerBin {
 }
 
 export type OverlayType = 'native' | 'browser' | 'mainWindow'
+
+export interface Reward {
+  id: number
+  amount_per_user: number
+  chain_id: number
+  marketplace_url: string | null
+  reward_type: string
+  name: string
+  contract_address: string
+  decimals: number
+  /* eslint-disable-next-line */
+  token_ids: any[]
+}
+
+export interface Quest {
+  id: number
+  project_id: string
+  name: string
+  type: string
+  status: string
+  description: string
+  rewards: Reward[]
+  /* eslint-disable-next-line */
+  deposit_contracts: any[]
+  eligibility: {
+    completion_threshold: number
+    steam_games: { id: string }[]
+  }
+}
