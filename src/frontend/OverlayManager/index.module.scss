@@ -6,42 +6,8 @@
   top: 0px;
 }
 
-.txnToastContainer {
-  position: absolute;
-  right: 10px;
-  bottom: 10px;
-  z-index: 100000;
-  opacity: 90%;
-}
-
 .overlayContainer {
   position: relative;
   width: 100vw;
   height: 100vh;
-}
-
-.overlayToggleHint {
-  padding: 10px;
-  display: inline-block;
-  white-space: pre-line;
-  max-width: 600px;
-  z-index: 3;
-}
-
-.bgFilter {
-  background-color: rgba(0, 0, 0, 0.5);
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2;
-}
-
-.closeOverlayText {
-  position: absolute;
-  top: var(--space-md);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
 }
