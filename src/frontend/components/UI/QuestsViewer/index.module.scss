@@ -1,0 +1,14 @@
+.questsViewerContainer {
+  position: absolute;
+  left: 400px;
+  width: 1000px;
+  bottom: 80px;
+  top: 40px;
+  z-index: 4;
+  display: flex;
+  flex-direction: row;
+
+  > .questLog {
+    flex-grow: 1;
+  }
+}

@@ -6,11 +6,12 @@ import { observer } from 'mobx-react-lite'
 import OverlayState from 'frontend/state/OverlayState'
 import WalletState from 'frontend/state/WalletState'
 import { t } from 'i18next'
-import { Button } from '@hyperplay/ui'
 import DeviceState from 'frontend/state/DeviceState'
 import ExtensionManager from 'frontend/ExtensionManager'
 import TransactionState from 'frontend/state/TransactionState'
 import { BrowserGameProps } from '../types'
+import { Button } from '@hyperplay/ui'
+import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 
 export const Overlay = observer(function ({
   appName,
@@ -113,6 +114,7 @@ export const Overlay = observer(function ({
         {hintText}
         {exitGameButton}
         {extensionManager}
+        <QuestsViewer projectId={appName} />
       </>
     )
   }
