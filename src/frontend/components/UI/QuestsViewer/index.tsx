@@ -8,6 +8,7 @@ import {
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import { Quest } from 'common/types'
 import styles from './index.module.scss'
+import useGetQuest from 'frontend/hooks/useGetQuest'
 
 export interface QuestsViewerProps {
   projectId: string
@@ -18,9 +19,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const quests = questsResults?.data?.data
 
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
+  const questResult = useGetQuest(selectedQuestId)
   let questLog = null
   if (Array.isArray(quests)) {
-    const questsUi = quests.map((val: Quest) => {
+    const questsUi = quests.map((val) => {
       const questUi_i: QuestLogInfo = {
         questType: 'REPUTATION',
         title: val.name,
@@ -34,8 +36,14 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   }
 
   let questDetails = null
-  if (selectedQuestId !== null && Array.isArray(quests)) {
-    const questMeta = quests.find((val) => val.id === selectedQuestId) as Quest
+  // TODO: add loading state to quest details component
+  if (
+    selectedQuestId !== null &&
+    Object.hasOwn(questResult?.data?.data ?? {}, 'name')
+  ) {
+    const questMeta = questResult.data.data as Quest
+    //questMeta.eligibility.steam_games
+    //react query to fetch from https://developers.hyperplay.xyz/api/v1/steam/games/
     const questDetailsProps: QuestDetailsProps = {
       title: questMeta.name,
       description: questMeta.description,

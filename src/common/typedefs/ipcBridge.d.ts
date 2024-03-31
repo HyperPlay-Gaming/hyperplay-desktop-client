@@ -258,7 +258,10 @@ interface HyperPlayAsyncIPCFunctions {
   getAuthSession: () => Promise<AuthSession | null>
   logOut: () => Promise<void>
   updateAutoLaunch: () => Promise<void>
-  getQuestsForGame: (projectId: string) => Promise<Quest[]>
+  getQuestsForGame: (
+    projectId: string
+  ) => Promise<{ id: number; name: string }[]>
+  getQuest: (questId: number) => Promise<Quest[]>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
