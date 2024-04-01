@@ -27,6 +27,7 @@ import {
   ExtraInfo,
   GameInfo,
   HyperPlayInstallInfo,
+  InstallProgress,
   Runner,
   WineInstallation
 } from 'common/types'
@@ -772,16 +773,7 @@ export default observer(function GamePage(): JSX.Element | null {
       return `${t('status.moving', 'Moving Installation, please wait')} ...`
     }
 
-    const currentProgress =
-      getProgress(progress) >= 99
-        ? ''
-        : `${
-            percent && bytes
-              ? `${percent.toFixed(2)}% [${Number(bytes).toFixed(2)} MB]  ${
-                  eta ? `ETA: ${eta}` : ''
-                }`
-              : '...'
-          }`
+    const currentProgress = getCurrentProgress(progress, percent, bytes, eta)
 
     if (isUpdating && is_installed) {
       if (!currentProgress) {
@@ -938,3 +930,21 @@ export default observer(function GamePage(): JSX.Element | null {
     })
   }
 })
+function getCurrentProgress(
+  progress: InstallProgress,
+  percent: number | undefined,
+  bytes: string | number,
+  eta: string | undefined
+) {
+  if (typeof bytes === 'string') {
+    bytes = Number(bytes.replaceAll('MB', '')).toFixed(2)
+  }
+
+  return getProgress(progress) >= 99
+    ? ''
+    : `${
+        percent && bytes
+          ? `${percent.toFixed(2)}% [${bytes} MB]  ${eta ? `ETA: ${eta}` : ''}`
+          : '...'
+      }`
+}
