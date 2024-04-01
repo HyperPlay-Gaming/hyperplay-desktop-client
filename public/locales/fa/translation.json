@@ -62,7 +62,7 @@
             "launchAborted": "راه اندازی متوقف شد",
             "title": "خطا",
             "uncaught-exception": {
-                "message": "یک خطای نامشخص رخ داد:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay بسته خواهد شد! خطا را در ریپوزیتوری گیت\u200cهاب ما گزارش دهید.",
+                "message": "یک خطای نامشخص رخ داد:{{newLine}}{{error}}{{newLine}}{{newLine}}HyperPlay بسته خواهد شد! خطا را در ریپوزیتوری گیت‌هاب ما گزارش دهید.",
                 "title": "خطای نامشخص رخ داد!"
             },
             "update": {

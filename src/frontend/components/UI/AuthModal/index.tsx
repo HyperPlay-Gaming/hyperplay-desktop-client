@@ -50,7 +50,8 @@ const AuthModal = () => {
 
     // try to trigger metamask popup to connect account
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum)
+      // to handle network switched events with NETWORK_ERROR, we need to pass in "any" as the network
+      const provider = new ethers.BrowserProvider(window.ethereum, 'any')
       await provider.getSigner()
     } catch (e) {
       // if it fails, open the popup manually

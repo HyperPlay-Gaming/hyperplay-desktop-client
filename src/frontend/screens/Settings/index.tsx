@@ -23,9 +23,9 @@ import Accessibility from '../Accessibility'
 import WineManager from '../WineManager'
 import AccountSettings from './sections/AccountSettings'
 import { observer } from 'mobx-react-lite'
-import AchievementState from 'frontend/state/AchievementState'
 import DeviceState from 'frontend/state/DeviceState'
 import { Tabs, getTabsClassNames } from '@hyperplay/ui'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export const defaultWineVersion: WineInstallation = {
   bin: '/usr/bin/wine',
@@ -34,6 +34,8 @@ export const defaultWineVersion: WineInstallation = {
 }
 
 function Settings() {
+  const flags = useFlags()
+  const SHOW_ACHIEVEMENTS = flags.achievements
   const { t, i18n } = useTranslation()
   const {
     state: { fromGameCard, runner, gameInfo }
@@ -169,7 +171,7 @@ function Settings() {
               <Tabs.Panel value="accessibility">
                 <Accessibility />
               </Tabs.Panel>
-              {AchievementState.showAchievements && (
+              {SHOW_ACHIEVEMENTS && (
                 <Tabs.Panel value="accounts">
                   <AccountSettings />
                 </Tabs.Panel>
