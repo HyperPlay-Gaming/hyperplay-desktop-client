@@ -11,7 +11,6 @@ import { GameInfo } from 'common/types'
 import libraryState from 'frontend/state/libraryState'
 import { faDiscord } from '@fortawesome/free-brands-svg-icons'
 
-
 interface LogBoxProps {
   logFileContent: string
 }
@@ -118,6 +117,10 @@ function LogSettings() {
 
   function showLogFileInFolder() {
     window.api.showLogFileInFolder(showLogOf)
+  }
+
+  const handleDiscordLink = () => {
+    window.api.openDiscordLink()
   }
 
   return (
@@ -232,7 +235,7 @@ function LogSettings() {
             </div>
           </a>
           <a
-            onClick={() => window.api.openDiscordLink()}
+            onClick={handleDiscordLink}
             title={t('setting.log.join-hyperplay-discord', 'Join our Discord')}
             className="button is-footer"
           >
