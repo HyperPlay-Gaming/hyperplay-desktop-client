@@ -26,15 +26,6 @@ export type {
   PlatformConfig
 } from '@valist/sdk/dist/typesShared'
 
-declare module '@valist/sdk/dist/typesApi' {
-  interface Channel {
-    license_config: {
-      id: number
-      access_codes: boolean
-    }
-  }
-}
-
 export interface LicenseConfigValidateResult {
   valid: boolean
   platforms: PlatformsMetaInterface
