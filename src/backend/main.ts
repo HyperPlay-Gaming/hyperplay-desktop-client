@@ -176,6 +176,7 @@ import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
 
 import './ipcHandlers'
+import './ipcHandlers/checkDiskSpace'
 
 import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
