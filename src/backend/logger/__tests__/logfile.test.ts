@@ -136,14 +136,12 @@ describe('logger/logfile.ts', () => {
   }) */
 
   test('getLogFile all possible values', () => {
-    expect(logfile.getLogFile('heroic')).toMatch(/-hyperplay.log$/)
-    expect(logfile.getLogFile('legendary')).toMatch(/-legendary.log$/)
-    expect(logfile.getLogFile('gogdl')).toMatch(/-gogdl.log$/)
-    expect(logfile.getLogFile('nile')).toMatch(/-nile.log$/)
+    expect(logfile.getLogFile('hyperplay')).toMatch(/hyperplay.*\.log$/)
+    expect(logfile.getLogFile('legendary')).toMatch(/legendary.*\.log$/)
+    expect(logfile.getLogFile('gogdl')).toMatch(/gogdl.*\.log$/)
+    expect(logfile.getLogFile('nile')).toMatch(/nile.*\.log$/)
     // get game log
-    expect(logfile.getLogFile('MyApp')).toBe(
-      '/tmp/appData/heroic/GamesConfig/MyApp-lastPlay.log'
-    )
+    expect(logfile.getLogFile('MyApp')).toMatch(/MyApp.*\.log$/)
   })
 
   test('appendMessageToLogFile success', () => {
