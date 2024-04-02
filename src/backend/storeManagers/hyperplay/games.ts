@@ -568,17 +568,23 @@ function getZipFileName(
   return { directory: tempfolder, filename: zipName }
 }
 
-export async function validateAccessCode(
-  accessCode: string,
-  channelId: number
-) {
+export async function validateAccessCode({
+  accessCode,
+  channelId,
+  licenseConfigId
+}: {
+  accessCode: string
+  channelId?: number
+  licenseConfigId?: number
+}) {
   const validateUrl = getValidateLicenseKeysApiUrl()
 
   const validateResult = await axios.post<LicenseConfigValidateResult>(
     validateUrl,
     {
       code: accessCode,
-      channel_id: channelId
+      channel_id: channelId,
+      license_config_id: licenseConfigId
     }
   )
   return validateResult.data
@@ -589,7 +595,7 @@ async function getAccessCodeGatedPlatforms(
   channelId: number,
   appName: string
 ): Promise<PlatformsMetaInterface> {
-  const validateResult = await validateAccessCode(accessCode, channelId)
+  const validateResult = await validateAccessCode({ accessCode, channelId })
 
   if (validateResult.valid !== true)
     throw `Access code ${accessCode} is not valid for channel id ${channelId}!`

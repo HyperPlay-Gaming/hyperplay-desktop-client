@@ -1712,8 +1712,11 @@ ipcMain.handle(
 
 ipcMain.handle(
   'checkHyperPlayAccessCode',
-  async (_e, channelId: number, accessCode: string) => {
-    return HyperPlayGameManager.validateAccessCode(accessCode, channelId)
+  async (_e, licenseConfigId: number, accessCode: string) => {
+    return HyperPlayGameManager.validateAccessCode({
+      accessCode,
+      licenseConfigId
+    })
   }
 )
 

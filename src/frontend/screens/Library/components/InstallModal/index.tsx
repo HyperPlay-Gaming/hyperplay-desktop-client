@@ -166,7 +166,7 @@ export default React.memo(function InstallModal({
     async function validateAccessCode() {
       if (selectedChannel?.channel_id !== undefined) {
         const result = await window.api.checkHyperPlayAccessCode(
-          selectedChannel?.channel_id,
+          selectedChannel?.license_config.id,
           accessCode
         )
 
