@@ -1,7 +1,4 @@
-import React from 'react'
-import GameUpdateDialog from 'frontend/components/UI/GameUpdateDialog'
 import { makeAutoObservable, runInAction } from 'mobx'
-import { observer } from 'mobx-react-lite'
 import { GameInfo } from 'common/types'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
 
@@ -73,18 +70,4 @@ class UpdateState {
   }
 }
 
-const updateState = new UpdateState()
-export default updateState
-
-export const UpdateModalController = observer(() => {
-  if (!updateState.showUpdateModal) {
-    return null
-  }
-  return (
-    <GameUpdateDialog
-      onClose={() => {
-        updateState.showUpdateModal = false
-      }}
-    ></GameUpdateDialog>
-  )
-})
+export default new UpdateState()
