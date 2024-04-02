@@ -579,13 +579,20 @@ export async function validateAccessCode({
 }) {
   const validateUrl = getValidateLicenseKeysApiUrl()
 
+  /* eslint-disable-next-line */
+  const request: Record<string, any> = {
+    code: accessCode
+  }
+  if (channelId !== undefined) {
+    request.channel_id = channelId
+  }
+  if (licenseConfigId !== undefined) {
+    request.license_config_id = licenseConfigId
+  }
+
   const validateResult = await axios.post<LicenseConfigValidateResult>(
     validateUrl,
-    {
-      code: accessCode,
-      channel_id: channelId,
-      license_config_id: licenseConfigId
-    }
+    request
   )
   return validateResult.data
 }
