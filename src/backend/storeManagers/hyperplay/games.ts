@@ -1307,7 +1307,10 @@ export async function launch(
 }
 
 // TODO: Refactor to only replace updated files
-export async function update(appName: string): Promise<InstallResult> {
+export async function update(
+  appName: string,
+  accessCode?: string
+): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
     return { status: 'done' }
   }
@@ -1327,24 +1330,6 @@ export async function update(appName: string): Promise<InstallResult> {
       LogPrefix.HyperPlay
     )
     return { status: 'error' }
-  }
-
-  let accessCode: string | undefined = undefined
-
-  // if we used an access code for this channel on last install, use it again
-  // if this fails due a different license config, game will remain in an uninstalled state
-  if (
-    gameInfo.channels !== undefined &&
-    gameInfo.install.channelName !== undefined &&
-    gameInfo.channels[gameInfo.install.channelName] !== undefined
-  ) {
-    const channelIdOfCurrentInstall =
-      gameInfo.channels[gameInfo.install.channelName].channel_id
-    if (
-      gameInfo.accessCodesCache !== undefined &&
-      Object.hasOwn(gameInfo.accessCodesCache, channelIdOfCurrentInstall)
-    )
-      accessCode = gameInfo.accessCodesCache[channelIdOfCurrentInstall]
   }
 
   //install the new version

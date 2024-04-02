@@ -10,6 +10,7 @@ import { TFunction } from 'i18next'
 import { getGameInfo, getPlatformName } from './index'
 import { DialogModalOptions } from 'frontend/types'
 import authState from 'frontend/state/authState'
+import updateState from 'frontend/state/UpdateState'
 
 const storage: Storage = window.localStorage
 
@@ -258,7 +259,7 @@ const launch = async ({
 }
 
 const updateGame = async (gameInfo: GameInfo) => {
-  return window.api.updateGame(gameInfo)
+  return updateState.updateGame(gameInfo)
 }
 
 export const epicCategories = ['all', 'legendary', 'epic']
