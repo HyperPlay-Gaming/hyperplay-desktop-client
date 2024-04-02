@@ -48,5 +48,11 @@ export const UpdateModalController = observer(() => {
   if (!updateState.showUpdateModal) {
     return null
   }
-  return <GameUpdateDialog onClose={() => {}}></GameUpdateDialog>
+  return (
+    <GameUpdateDialog
+      onClose={() => {
+        updateState.showUpdateModal = false
+      }}
+    ></GameUpdateDialog>
+  )
 })

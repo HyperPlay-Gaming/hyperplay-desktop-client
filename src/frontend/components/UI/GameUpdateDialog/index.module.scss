@@ -5,3 +5,8 @@
 .successText {
   color: var(--color-success-400);
 }
+
+.dialog {
+  display: flex;
+  gap: var(--space-md);
+}

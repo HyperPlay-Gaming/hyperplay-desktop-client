@@ -66,13 +66,20 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
   function updateClick() {
     if (gameInfo) {
       window.api.updateGame(gameInfo, accessCode)
+      onClose()
     } else {
       setErrorText('Error during update!')
     }
   }
 
   return (
-    <Dialog showCloseButton onClose={onClose}>
+    <Dialog showCloseButton onClose={onClose} className={styles.dialog}>
+      <div className="title">
+        {t(
+          'hyperplay.accesscodes.requirescode',
+          'This game update requires an access code.'
+        )}
+      </div>
       <TextInputField
         placeholder={'Enter access code'}
         value={accessCode}

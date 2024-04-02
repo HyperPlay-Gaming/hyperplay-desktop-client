@@ -177,7 +177,8 @@
         "go_to_library": "Go to Library",
         "sync": "",
         "syncing": "",
-        "unsync": ""
+        "unsync": "",
+        "update": "Update"
     },
     "controller": {
         "hints": {
@@ -320,6 +321,7 @@
             "error": {
                 "validation": "Access code is invalid"
             },
+            "requirescode": "This game update requires an access code.",
             "success": {
                 "validation": "Success! Access code is valid"
             }
@@ -527,6 +529,12 @@
     "message": {
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
+    },
+    "notification": {
+        "wine-download": {
+            "message": "Setting up the default compatibility layer",
+            "title": "Compatibility Layer"
+        }
     },
     "notify": {
         "error": {
@@ -827,7 +835,6 @@
             "osNameFlatpak": "{{osName}} (inside Flatpak)",
             "osVersion": "Version {{versionNumber}}",
             "showDetailed": "Show detailed system specifications",
-            "software": "Software:",
             "steamDeck": "Steam Deck",
             "systemModel": "System Model:",
             "version": "Version: {{appVersion}}"
