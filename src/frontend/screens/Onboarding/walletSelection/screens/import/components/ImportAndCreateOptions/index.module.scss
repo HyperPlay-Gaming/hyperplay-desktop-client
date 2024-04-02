@@ -1,12 +1,100 @@
 @use '../../mixins';
 
+.importAndCreateOptionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2lg);
+  align-items: center;
+  margin-top: var(--space-2lg);
+}
+
 .importOptionsContainer {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 112px;
-  gap: 16px;
-  margin: var(--space-sm) auto calc(2 * var(--space-sm));
-  max-height: 300px;
-  overflow-y: scroll;
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  align-self: stretch;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  overflow-y: auto;
+  width: 100%;
   @include mixins.showScrollbar;
+}
+
+.importSecretRecoveryButton {
+  width: 100%;
+  display: flex;
+  height: 124px;
+}
+
+.importCreateMMButton {
+  width: 100%;
+  height: 124px;
+  align-self: stretch;
+}
+
+.otherOptionsStatement {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  align-self: stretch;
+  flex-direction: row;
+}
+
+.line {
+  background: var(--color-neutral-700);
+  height: 1px;
+  width: 50%;
+}
+
+.otherOptionsText {
+  color: var(--color-neutral-400);
+  text-align: center;
+  font-family: var(--secondary-font-family);
+  font-size: var(--text-lg);
+  font-style: normal;
+  font-weight: var(--regular);
+  line-height: normal;
+}
+
+.actionsContainer {
+  width: 100%;
+}
+
+.actionsCollapseContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.infoBox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+  align-self: stretch;
+}
+
+.infoText {
+  color: var(--color-neutral-400);
+  font-family: var(--secondary-font-family);
+  font-size: var(--text-md);
+  font-style: normal;
+  font-weight: var(--medium);
+  line-height: calc(var(--text-md) * 24 / 16);
+}
+
+.infoLink {
+  text-decoration: underline;
+  cursor: pointer;
+  padding-left: 5px;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.infoIcon {
+  width: 16px;
+  height: 16px;
+  padding-top: 5px;
+  font-weight: bold;
 }

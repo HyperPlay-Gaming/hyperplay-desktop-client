@@ -176,6 +176,7 @@ import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
 
 import './ipcHandlers'
+import './ipcHandlers/checkDiskSpace'
 
 import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
@@ -425,27 +426,27 @@ if (!gotTheLock) {
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )
-    ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
+    ses.setPreloads([path.join(__dirname, '../preload/providerPreload.js')])
 
     const authSession = session.fromPartition('persist:auth')
     authSession.setPreloads([
-      path.join(__dirname, 'providerPreload.js'),
-      path.join(__dirname, 'auth_provider_preload.js')
+      path.join(__dirname, '../preload/providerPreload.js'),
+      path.join(__dirname, '../preload/auth_provider_preload.js')
     ])
 
     const emailModalSession = session.fromPartition('persist:emailModal')
     emailModalSession.setPreloads([
-      path.join(__dirname, 'email_modal_provider_preload.js')
+      path.join(__dirname, '../preload/email_modal_provider_preload.js')
     ])
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
-      path.join(__dirname, 'hyperplay_store_preload.js'),
-      path.join(__dirname, 'webview_style_preload.js')
+      path.join(__dirname, '../preload/hyperplay_store_preload.js'),
+      path.join(__dirname, '../preload/webview_style_preload.js')
     ])
     const epicStoreSession = session.fromPartition('persist:epicstore')
     epicStoreSession.setPreloads([
-      path.join(__dirname, 'webview_style_preload.js')
+      path.join(__dirname, '../preload/webview_style_preload.js')
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
@@ -947,7 +948,7 @@ ipcMain.handle('authGOG', async (event, code) => GOGUser.login(code))
 ipcMain.handle('logoutLegendary', LegendaryUser.logout)
 ipcMain.on('logoutGOG', GOGUser.logout)
 ipcMain.handle('getLocalPeloadPath', async () => {
-  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
+  return fixAsarPath(join(publicDir, '../preload/webviewPreload.js'))
 })
 
 ipcMain.handle('getAmazonLoginData', NileUser.getLoginData)

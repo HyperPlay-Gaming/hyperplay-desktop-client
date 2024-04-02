@@ -26,15 +26,6 @@ export type {
   PlatformConfig
 } from '@valist/sdk/dist/typesShared'
 
-declare module '@valist/sdk/dist/typesApi' {
-  interface Channel {
-    license_config: {
-      id: number
-      access_codes: boolean
-    }
-  }
-}
-
 export interface LicenseConfigValidateResult {
   valid: boolean
   platforms: PlatformsMetaInterface
@@ -410,6 +401,7 @@ export interface CallRunnerOptions {
   logMessagePrefix?: string
   logFile?: string
   verboseLogFile?: string
+  logSanitizer?: (line: string) => string
   env?: Record<string, string> | NodeJS.ProcessEnv
   wrappers?: string[]
   onOutput?: (output: string, child: ChildProcess) => void

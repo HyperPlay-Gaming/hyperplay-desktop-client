@@ -2,7 +2,7 @@
   "compilerOptions": {
     "allowJs": true,
     "module": "esnext",
-    "target": "es2020",
+    "target": "esnext",
     "lib": ["esnext", "dom", "dom.iterable"],
     "sourceMap": true,
     "jsx": "react-jsx",
@@ -24,18 +24,13 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src/",
-    "types": [
-      "vite-plugin-svgr/client",
-      "vite/client",
-      "@types/chrome",
-      "@types/jest"
-    ],
+    "types": ["@types/chrome", "@types/jest"],
     "typeRoots": ["./node_modules", "src/common/typedefs"],
     "strictPropertyInitialization": true
   },
   "include": ["src"],
   "exclude": [
-    "vite.config.ts",
+    "electron.vite.config.ts",
     "**/__tests__/**",
     "**/__mocks__/**",
     "sign",

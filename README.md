@@ -11,7 +11,6 @@
       - [Other Distributions (TAR.XZ)](#other-distributions-tarxz)
     - [Windows](#windows)
     - [macOS](#macos)
-  - [Testing with Docker](#testing-with-docker)
   - [Credits](#credits)
 
 ## Supported Operating Systems
@@ -76,24 +75,6 @@ This projects uses submodules, so you need to clone it with the `--recurse-submo
 ```bash
 yarn setup
 yarn start
-```
-
-### Testing with Docker
-
-It is recommended to run end to end tests with Docker so you don't alter your local config files or have your local config files interfere with the tests.
-
-To run e2e tests on the unpackaged app running in dev mode.
-From the root of your local Heroic directory, run:
-
-```bash
-yarn test:e2e
-```
-
-To run e2e tests on the packaged app.
-From the root of your local Heroic directory, run:
-
-```bash
-yarn test:e2ePackaged
 ```
 
 ## Credits

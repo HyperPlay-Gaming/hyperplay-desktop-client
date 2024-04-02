@@ -1,5 +1,5 @@
-@import '~@fontsource/rajdhani/index.css';
-@import '~@fontsource/barlow/index.css';
+@import '@fontsource/rajdhani/index.css';
+@import '@fontsource/barlow/index.css';
 /*
   Subset of font https://github.com/googlefonts/noto-emoji
   which includes only flags emoji generated using command:
