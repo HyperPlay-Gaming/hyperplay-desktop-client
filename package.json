@@ -17,7 +17,6 @@
   "build": {
     "appId": "gg.hyperplay.HyperPlay",
     "productName": "HyperPlay",
-    "afterSign": "sign/notarize.js",
     "files": [
       "build/**/*",
       "node_modules/**/*",
@@ -80,6 +79,9 @@
       "entitlementsInherit": "build/entitlements.mac.plist",
       "extendInfo": {
         "com.apple.security.cs.allow-jit": true
+      },
+      "notarize": {
+        "teamId": "DLB2RYLUDX"
       },
       "asarUnpack": [
         "build/bin/darwin/legendary",
@@ -307,7 +309,6 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-arrow-functions": "^7.22.5",
-    "@electron/notarize": "^1.2.3",
     "@lavamoat/allow-scripts": "^3.0.2",
     "@lavamoat/preinstall-always-fail": "^2.0.0",
     "@playwright/test": "^1.32.1",
@@ -334,7 +335,7 @@
     "@vitejs/plugin-react": "^2.2.0",
     "cross-env": "^7.0.3",
     "electron": "^28.0.0",
-    "electron-builder": "^24.6.3",
+    "electron-builder": "^24.13.3",
     "electron-playwright-helpers": "^1.6.0",
     "electron-vite": "^2.1.0",
     "eslint": "^8.13.0",
