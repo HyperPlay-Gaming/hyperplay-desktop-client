@@ -65,7 +65,7 @@ import { readFileSync } from 'fs'
 import { LegendaryCommand } from './storeManagers/legendary/commands'
 import { commandToArgsArray } from './storeManagers/legendary/library'
 import { searchForExecutableOnPath } from './utils/os/path'
-import { closeOverlay, openOverlay } from './extensions/overlay'
+import { closeOverlay, openOverlay } from './extensions/overlay/overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,

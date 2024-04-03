@@ -33,7 +33,7 @@ import { domainsAreEqual } from 'common/utils'
 import { connectedProvider } from 'backend/hyperplay-proxy-server/providerState'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { controlWindow } from 'backend/hyperplay-overlay/model'
-import { initOverlayRenderState } from 'backend/hyperplay-overlay'
+import { initOverlayRenderState } from 'backend/extensions/overlay/overlay'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
