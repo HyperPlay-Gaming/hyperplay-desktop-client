@@ -2,7 +2,7 @@ import { logDebug, LogPrefix } from 'backend/logger/logger'
 import { OverlayMode } from 'common/state/interfaces'
 import { OverlayAction, OverlayRenderState, Runner } from 'common/types'
 
-export const openOverlay = async (appName: string, runner: Runner) => {
+export async function openOverlay(appName: string, runner: Runner){
     try {
     const { openOverlay: openOverlayFromImport } = await import('backend/hyperplay-overlay')
     return await openOverlayFromImport(appName, runner)
@@ -12,7 +12,7 @@ export const openOverlay = async (appName: string, runner: Runner) => {
   }
 }
 
-export const closeOverlay = async () => {
+export async function closeOverlay(){
   try {
     const { closeOverlay: closeOverlayFromImport } = await import('backend/hyperplay-overlay')
     return closeOverlayFromImport
@@ -36,7 +36,7 @@ export async function toggleOverlay({
   }
 }
 
-export const updatePopupInOverlay = async (show: boolean) => {
+export async function updatePopupInOverlay(show: boolean){
     try {
         const { updatePopupInOverlay: updatePopupInOverlayFromImport } = await import('backend/hyperplay-overlay')
         return updatePopupInOverlayFromImport(show)
@@ -46,7 +46,7 @@ export const updatePopupInOverlay = async (show: boolean) => {
     }
     }
 
-export const initOverlayRenderState = async (webContentsId: number, renderState: OverlayRenderState, title: OverlayMode) => {
+export async function initOverlayRenderState(webContentsId: number, renderState: OverlayRenderState, title: OverlayMode){
     try {
         const { initOverlayRenderState: initOverlayRenderStateFromImport } = await import('backend/hyperplay-overlay')
         return initOverlayRenderStateFromImport(webContentsId, renderState, title)
