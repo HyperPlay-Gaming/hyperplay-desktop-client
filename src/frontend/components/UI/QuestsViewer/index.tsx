@@ -3,12 +3,14 @@ import {
   QuestLog,
   QuestDetails,
   QuestDetailsProps,
-  QuestLogInfo
+  QuestLogInfo,
+  Game
 } from '@hyperplay/ui'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import { Quest } from 'common/types'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
+import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 
 export interface QuestsViewerProps {
   projectId: string
@@ -37,19 +39,32 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
 
   let questDetails = null
   // TODO: add loading state to quest details component
+  const questMeta = questResult.data.data as Quest
+
+  const getSteamGameResult = useGetSteamGame(
+    questMeta?.eligibility?.steam_games ?? []
+  )
+
+  const steamGames: Game[] =
+    getSteamGameResult?.data?.map((val) => ({
+      /* eslint-disable-next-line */
+      // @ts-ignore
+      title: val.data?.name ?? '',
+      /* eslint-disable-next-line */
+      // @ts-ignore
+      imageUrl: val.data?.capsule_image ?? ''
+    })) ?? []
+
   if (
     selectedQuestId !== null &&
     Object.hasOwn(questResult?.data?.data ?? {}, 'name')
   ) {
-    const questMeta = questResult.data.data as Quest
-    //questMeta.eligibility.steam_games
-    //react query to fetch from https://developers.hyperplay.xyz/api/v1/steam/games/
     const questDetailsProps: QuestDetailsProps = {
       title: questMeta.name,
       description: questMeta.description,
       eligibility: {
         reputation: {
-          games: [],
+          games: steamGames,
           completionPercent: questMeta.eligibility.completion_threshold,
           eligible: false,
           steamAccountLinked: false

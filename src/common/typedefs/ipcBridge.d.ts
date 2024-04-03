@@ -262,6 +262,7 @@ interface HyperPlayAsyncIPCFunctions {
     projectId: string
   ) => Promise<{ id: number; name: string }[]>
   getQuest: (questId: number) => Promise<Quest[]>
+  getSteamGameMetadata: (gameId: number) => Promise<unknown>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
