@@ -31,6 +31,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         state: 'ACTIVE',
         onClick: () => setSelectedQuestId(val.id),
         selected: false
+        // TODO: enable after bumping hp/ui
+        // id: val.id
       }
       return questUi_i
     })
