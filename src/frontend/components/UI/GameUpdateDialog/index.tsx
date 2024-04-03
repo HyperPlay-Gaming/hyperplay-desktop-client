@@ -65,7 +65,7 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
 
   function updateClick() {
     if (gameInfo) {
-      window.api.updateGame(gameInfo, accessCode)
+      window.api.updateGame(JSON.parse(JSON.stringify(gameInfo)), accessCode)
       onClose()
     } else {
       setErrorText('Error during update!')
