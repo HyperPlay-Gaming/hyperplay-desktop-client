@@ -390,16 +390,25 @@ function setupWineEnvVars(
       )
     }
   }
+  if (isMac && gameSettings.enableMsync) {
+    ret.WINEMSYNC = '1'
+    // due to a bug on D3DMetal Esync needs to be enabled as well for msync to work
+    if (gameSettings.wineVersion.type === 'toolkit') {
+      ret.WINEESYNC = '1'
+    }
+  }
+
   if (gameSettings.enableEsync && wineVersion.type !== 'proton') {
     ret.WINEESYNC = '1'
   }
+
   if (!gameSettings.enableEsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_ESYNC = '1'
   }
-  if (gameSettings.enableFsync && wineVersion.type !== 'proton') {
+  if (isLinux && gameSettings.enableFsync && wineVersion.type !== 'proton') {
     ret.WINEFSYNC = '1'
   }
-  if (!gameSettings.enableFsync && wineVersion.type === 'proton') {
+  if (isLinux && !gameSettings.enableFsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_FSYNC = '1'
   }
   if (gameSettings.autoInstallDxvkNvapi && wineVersion.type === 'proton') {
