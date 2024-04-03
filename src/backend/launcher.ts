@@ -59,12 +59,13 @@ import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import { legendarySetup } from './storeManagers/legendary/setup'
 import { gameManagerMap } from 'backend/storeManagers'
-import { closeOverlay, openOverlay } from 'backend/hyperplay-overlay'
+
 import * as VDF from '@node-steam/vdf'
 import { readFileSync } from 'fs'
 import { LegendaryCommand } from './storeManagers/legendary/commands'
 import { commandToArgsArray } from './storeManagers/legendary/library'
 import { searchForExecutableOnPath } from './utils/os/path'
+import { closeOverlay, openOverlay } from './extensions/overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -681,6 +682,7 @@ async function runWineCommand({
 
     if (overlayInfo) {
       const { showOverlay, appName, runner } = overlayInfo
+
       if (showOverlay) openOverlay(appName, runner)
     }
 
