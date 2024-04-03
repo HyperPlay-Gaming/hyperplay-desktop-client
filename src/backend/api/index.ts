@@ -9,7 +9,7 @@ import * as Proxy from '../hyperplay-proxy-server/api/proxy'
 import * as DownloadManager from './downloadmanager'
 import * as Extensions from '../hyperplay-extension-helper/api/extensions'
 import * as Metrics from './metrics'
-import * as Overlay from 'backend/hyperplay-overlay/api'
+import * as Overlay from 'backend/extensions/overlay/api'
 import * as Achievements from 'backend/hyperplay-achievements/api'
 
 export default {

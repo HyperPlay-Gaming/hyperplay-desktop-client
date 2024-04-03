@@ -1,7 +1,7 @@
 import { BrowserWindow, screen, app } from 'electron'
 import path from 'path'
 import { configStore } from './constants'
-import { controlWindow } from './hyperplay-overlay/model'
+import { existsSync } from 'graceful-fs'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -82,7 +82,15 @@ export const createMainWindow = () => {
     }
   })
 
-  controlWindow(mainWindow.webContents.id, 'mainWindow')
+  const modulePath = path.resolve(__dirname, 'backend/hyperplay-overlay/model')
+
+  if (existsSync(modulePath)) {
+    import(modulePath).then(({ controlWindow }) =>
+      controlWindow(mainWindow!.webContents.id, 'mainWindow')
+    )
+  } else {
+    console.log('Module does not exist')
+  }
 
   mainWindow.webContents?.on('before-input-event', (ev, input) => {
     if (

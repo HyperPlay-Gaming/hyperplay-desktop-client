@@ -32,8 +32,10 @@ const buildDir = resolve(__dirname, '../../build')
 import { domainsAreEqual } from 'common/utils'
 import { connectedProvider } from 'backend/hyperplay-proxy-server/providerState'
 import { PROVIDERS } from 'common/types/proxy-types'
-import { controlWindow } from 'backend/hyperplay-overlay/model'
-import { initOverlayRenderState } from 'backend/extensions/overlay/overlay'
+import {
+  importOverlayModule,
+  initOverlayRenderState
+} from 'backend/extensions/overlay/overlay'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -63,6 +65,8 @@ const openNewBrowserGameWindow = async (
   browserUrl: string,
   gameInfo: GameInfo
 ): Promise<boolean> => {
+  const controlWindowModule = await importOverlayModule('controlWindow')
+
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
       icon: icon,
@@ -157,7 +161,9 @@ const openNewBrowserGameWindow = async (
     // https://github.com/electron/electron/blob/main/docs/api/browser-window.md#using-the-ready-to-show-event
     browserGame.on('ready-to-show', () => browserGame.show())
 
-    controlWindow(browserGame.webContents.id, 'browser')
+    if (controlWindowModule) {
+      controlWindowModule.controlWindow(browserGame.webContents.id, 'browser')
+    }
 
     const renderState: OverlayRenderState = {
       showToasts: true,
