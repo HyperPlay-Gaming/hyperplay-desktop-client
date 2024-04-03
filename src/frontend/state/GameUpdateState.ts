@@ -2,7 +2,7 @@ import { makeAutoObservable, runInAction } from 'mobx'
 import { GameInfo } from 'common/types'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
 
-class UpdateState {
+class GameUpdateState {
   showUpdateModal = false
   gameInfo: GameInfo | undefined
 
@@ -70,4 +70,4 @@ class UpdateState {
   }
 }
 
-export default new UpdateState()
+export default new GameUpdateState()

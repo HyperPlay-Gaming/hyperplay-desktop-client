@@ -4,7 +4,7 @@ import TextInputField from '../TextInputField'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
 import { Button } from '@hyperplay/ui'
-import updateState from 'frontend/state/UpdateState'
+import gameUpdateState from 'frontend/state/GameUpdateState'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
 
 export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
@@ -14,7 +14,7 @@ export default function GameUpdateDialog({ onClose }: { onClose: () => void }) {
   const [successText, setSuccessText] = useState('')
   const { t } = useTranslation()
 
-  const gameInfo = updateState.gameInfo
+  const gameInfo = gameUpdateState.gameInfo
   const channelName = gameInfo?.install.channelName
   const selectedChannel = gameInfo?.channels?.[channelName ?? '']
   const channelRequiresAccessCode = gameInfo
