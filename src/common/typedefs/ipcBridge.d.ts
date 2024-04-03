@@ -243,7 +243,7 @@ interface HyperPlayAsyncIPCFunctions {
   syncAchievements: (options: PlayerOptions) => Promise<string>
   getSyncProgress: (requestId: string) => Promise<number>
   checkHyperPlayAccessCode: (
-    channelId: number,
+    licenseConfigId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
   get_wallet_state_address: () => Promise<string>

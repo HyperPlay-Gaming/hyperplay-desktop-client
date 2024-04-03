@@ -177,7 +177,8 @@
         "go_to_library": "Go to Library",
         "sync": "Sync",
         "syncing": "Syncing",
-        "unsync": "Unsync"
+        "unsync": "Unsync",
+        "update": "Update"
     },
     "controller": {
         "hints": {
@@ -321,6 +322,7 @@
             "error": {
                 "validation": "Access code is invalid"
             },
+            "requirescode": "This game update requires an access code.",
             "success": {
                 "validation": "Success! Access code is valid"
             }
@@ -528,6 +530,12 @@
     "message": {
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
+    },
+    "notification": {
+        "wine-download": {
+            "message": "Setting up the default compatibility layer",
+            "title": "Compatibility Layer"
+        }
     },
     "notify": {
         "error": {
