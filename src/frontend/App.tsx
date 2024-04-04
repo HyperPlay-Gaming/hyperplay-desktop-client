@@ -37,6 +37,7 @@ import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
+import { UpdateModalController } from './components/UI/UpdateModalController'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -150,6 +151,7 @@ function App() {
       <TransactionNotification />
       <DownloadToastManager />
       <DeviceStateController />
+      <UpdateModalController />
     </div>
   )
 }

@@ -48,7 +48,12 @@
         "wineprefix": "Elija la carpeta con el Prefijo de Wine",
         "yes": "SÍ",
         "yesCancel": "Sí, cancelar",
-        "ok": "DE ACUERDO"
+        "ok": "DE ACUERDO",
+        "dont-show-again": "No volver a mostrar",
+        "aware": "Estoy consciente",
+        "compability": {
+            "message": "Este juego para Windows se ejecutará utilizando una capa de compatibilidad. Es posible que encuentres algunos problemas o que el juego no funcione en absoluto."
+        }
     },
     "button": {
         "add_to_favourites": "Agregar a Favoritos",
@@ -139,7 +144,8 @@
             "message": "El antitrampas está roto o desactivado. El juego no funcionará. ¿Quieres instalarlo de todos modos?",
             "install": "Sí (entiendo que no funcionará)",
             "title": "Antitrampa desactivado/denegado"
-        }
+        },
+        "compatibility-warning": "Este juego para Windows se ejecutará utilizando una capa de compatibilidad. Su experiencia puede variar."
     },
     "label": {
         "game": {

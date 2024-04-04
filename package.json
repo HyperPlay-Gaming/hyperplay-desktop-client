@@ -17,7 +17,6 @@
   "build": {
     "appId": "gg.hyperplay.HyperPlay",
     "productName": "HyperPlay",
-    "afterSign": "sign/notarize.js",
     "files": [
       "build/**/*",
       "node_modules/**/*",
@@ -61,6 +60,17 @@
     "portable": {
       "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
     },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "deleteAppDataOnUninstall": true,
+      "installerIcon": "build/win_icon.ico",
+      "uninstallerIcon": "build/win_icon.ico"
+    },
     "mac": {
       "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
       "category": "public.app-category.games",
@@ -69,6 +79,9 @@
       "entitlementsInherit": "build/entitlements.mac.plist",
       "extendInfo": {
         "com.apple.security.cs.allow-jit": true
+      },
+      "notarize": {
+        "teamId": "DLB2RYLUDX"
       },
       "asarUnpack": [
         "build/bin/darwin/legendary",
@@ -158,7 +171,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@hyperplay/check-disk-space": "^3.5.2",
-    "@hyperplay/ui": "^1.1.27",
+    "@hyperplay/ui": "^1.2.7",
     "@mantine/carousel": "^7.5.1",
     "@mantine/core": "^7.5.1",
     "@mantine/dropzone": "^7.5.1",
@@ -168,7 +181,7 @@
     "@mui/material": "^5.10.12",
     "@mysten/sui.js": "^0.45.1",
     "@node-steam/vdf": "^2.2.0",
-    "@rudderstack/rudder-sdk-node": "^2.0.6",
+    "@rudderstack/rudder-sdk-node": "^2.0.7",
     "@sentry/electron": "^4.6.0",
     "@sentry/react": "7.50.0",
     "@shockpkg/icon-encoder": "^2.1.3",
@@ -185,7 +198,7 @@
     "@walletconnect/modal": "^2.6.0",
     "@walletconnect/types": "^2.9.0",
     "auto-launch": "^5.0.6",
-    "axios": "^1.6.5",
+    "axios": "^1.6.8",
     "bn.js": "^5.2.1",
     "classic-level": "1.2.0",
     "classnames": "^2.3.1",
@@ -197,7 +210,7 @@
     "embla-carousel-autoplay": ">=7.0.0",
     "embla-carousel-react": ">=7.0.0",
     "ethers": "^6.9.0",
-    "express": "^4.18.1",
+    "express": "^4.19.2",
     "filesize": "^10.1.0",
     "find-process": "^1.4.7",
     "font-list": "^1.4.5",
@@ -296,7 +309,6 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-arrow-functions": "^7.22.5",
-    "@electron/notarize": "^1.2.3",
     "@lavamoat/allow-scripts": "^3.0.2",
     "@lavamoat/preinstall-always-fail": "^2.0.0",
     "@playwright/test": "^1.32.1",
@@ -319,11 +331,11 @@
     "@types/ws": "^8.5.5",
     "@typescript-eslint/eslint-plugin": "^6.13.2",
     "@typescript-eslint/parser": "^6.13.2",
-    "@valist/sdk": "^2.9.1",
+    "@valist/sdk": "^2.9.5",
     "@vitejs/plugin-react": "^2.2.0",
     "cross-env": "^7.0.3",
     "electron": "^28.0.0",
-    "electron-builder": "^24.6.3",
+    "electron-builder": "^24.13.3",
     "electron-playwright-helpers": "^1.6.0",
     "electron-vite": "^2.1.0",
     "eslint": "^8.13.0",

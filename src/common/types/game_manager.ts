@@ -54,7 +54,7 @@ export interface GameManager {
     gogSaves?: GOGCloudSavesLocation[]
   ) => Promise<string>
   uninstall: (args: RemoveArgs) => Promise<ExecResult>
-  update: (appName: string) => Promise<InstallResult>
+  update: (appName: string, accessCode?: string) => Promise<InstallResult>
   forceUninstall: (appName: string) => Promise<void>
   stop: (appName: string) => Promise<void>
   isGameAvailable: (appName: string) => boolean

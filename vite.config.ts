@@ -14,7 +14,7 @@ const srcAliases = ['backend', 'frontend', 'common'].map((aliasName) => {
   }
 })
 
-const dependenciesToNotExternalize = ['check-disk-space']
+const dependenciesToNotExternalize = ['@hyperplay/check-disk-space']
 
 export default defineConfig(({ mode }) => ({
   main: {

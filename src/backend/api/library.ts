@@ -132,8 +132,12 @@ export const removeFromLibrary = async (appName: string) => {
 }
 
 export const checkHyperPlayAccessCode = async (
-  channelId: number,
+  licenseConfigId: number,
   accessCode: string
 ) => {
-  return ipcRenderer.invoke('checkHyperPlayAccessCode', channelId, accessCode)
+  return ipcRenderer.invoke(
+    'checkHyperPlayAccessCode',
+    licenseConfigId,
+    accessCode
+  )
 }

@@ -390,16 +390,25 @@ function setupWineEnvVars(
       )
     }
   }
+  if (isMac && gameSettings.enableMsync) {
+    ret.WINEMSYNC = '1'
+    // due to a bug on D3DMetal Esync needs to be enabled as well for msync to work
+    if (gameSettings.wineVersion.type === 'toolkit') {
+      ret.WINEESYNC = '1'
+    }
+  }
+
   if (gameSettings.enableEsync && wineVersion.type !== 'proton') {
     ret.WINEESYNC = '1'
   }
+
   if (!gameSettings.enableEsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_ESYNC = '1'
   }
-  if (gameSettings.enableFsync && wineVersion.type !== 'proton') {
+  if (isLinux && gameSettings.enableFsync && wineVersion.type !== 'proton') {
     ret.WINEFSYNC = '1'
   }
-  if (!gameSettings.enableFsync && wineVersion.type === 'proton') {
+  if (isLinux && !gameSettings.enableFsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_FSYNC = '1'
   }
   if (gameSettings.autoInstallDxvkNvapi && wineVersion.type === 'proton') {
@@ -843,13 +852,17 @@ async function callRunner(
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
       const dataStr = data.toString()
+      const stringToLog = options?.logSanitizer
+        ? options.logSanitizer(data)
+        : data
+
       if (!logsDisabled) {
         if (options?.logFile) {
-          appendFileSync(options.logFile, data)
+          appendFileSync(options.logFile, stringToLog)
         }
 
         if (options?.verboseLogFile) {
-          appendFileSync(options.verboseLogFile, data)
+          appendFileSync(options.verboseLogFile, stringToLog)
         }
       }
 
@@ -862,13 +875,17 @@ async function callRunner(
 
     child.stderr.setEncoding('utf-8')
     child.stderr.on('data', (data: string) => {
+      const stringToLog = options?.logSanitizer
+        ? options.logSanitizer(data)
+        : data
+
       if (!logsDisabled) {
         if (options?.logFile) {
-          appendFileSync(options.logFile, data)
+          appendFileSync(options.logFile, stringToLog)
         }
 
         if (options?.verboseLogFile) {
-          appendFileSync(options.verboseLogFile, data)
+          appendFileSync(options.verboseLogFile, stringToLog)
         }
       }
 
