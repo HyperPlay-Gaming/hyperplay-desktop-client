@@ -668,12 +668,6 @@ ipcMain.once('loadingScreenReady', () => {
   logInfo('Loading Screen Ready', LogPrefix.Backend)
 })
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-let resolveFrontendReady = () => {}
-export const frontendReady = new Promise<void>((res) => {
-  resolveFrontendReady = res
-})
-
 ipcMain.once('frontendReady', () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
   handleProtocol([openUrlArgument, ...process.argv])
@@ -683,7 +677,6 @@ ipcMain.once('frontendReady', () => {
   }, 5000)
 
   watchLibraryChanges()
-  resolveFrontendReady()
 })
 
 // Maybe this can help with white screens
