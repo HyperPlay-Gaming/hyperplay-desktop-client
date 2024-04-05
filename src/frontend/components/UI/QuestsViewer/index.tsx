@@ -29,8 +29,16 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         questType: 'REPUTATION',
         title: val.name,
         state: 'ACTIVE',
-        onClick: () => setSelectedQuestId(val.id),
-        selected: false,
+        onClick: () => {
+          // deselect
+          if (selectedQuestId === val.id){
+            setSelectedQuestId(null)
+            return
+          }
+          //select
+          setSelectedQuestId(val.id)
+        },
+        selected: selectedQuestId === val.id,
         id: val.id
       }
       return questUi_i
@@ -42,7 +50,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   }
 
   let questDetails = null
-  // TODO: add loading state to quest details component
   const questMeta = questResult.data.data as Quest
 
   const getSteamGameResult = useGetSteamGame(
@@ -50,10 +57,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   )
 
   const steamGames: Game[] =
-    getSteamGameResult?.data?.map((val) => ({
+    getSteamGameResult?.data?.map((val, index) => ({
       /* eslint-disable-next-line */
       // @ts-ignore
-      title: val.data?.name ?? '',
+      title: val.data?.name ?? index,
       /* eslint-disable-next-line */
       // @ts-ignore
       imageUrl: val.data?.capsule_image ?? '',
@@ -81,7 +88,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       })),
       onClaimClick: () => console.log('claim clicked for ', questMeta.name)
     }
-    questDetails = <QuestDetails {...questDetailsProps} />
+    questDetails = <QuestDetails {...questDetailsProps} className={styles.questDetails} ctaDisabled={true} />
   }
   else if (questResult?.data.isLoading || questResult?.data.isFetching){
     const emptyQuestDetailsProps: QuestDetailsProps = {
@@ -98,7 +105,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       rewards:[],
       onClaimClick: () => console.log('claim clicked for ', questMeta.name)
     }
-    questDetails = <QuestDetails loading={true} {...emptyQuestDetailsProps} />
+    questDetails = <QuestDetails {...emptyQuestDetailsProps} className={styles.questDetails} ctaDisabled={true} />
   }
 
   return (

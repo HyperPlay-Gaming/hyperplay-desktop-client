@@ -1815,10 +1815,10 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
 
-"@hyperplay/ui@^1.2.29":
-  version "1.2.29"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.2.29.tgz#eacf5e3dfb379a2000ec80dec4e0eb08a3186f8d"
-  integrity sha512-FNxLZqT/ap5xOtYctlr4OCCkHHJm7SYUU4XT9uelt3r8Duy1ZBdaC/VvGpqrw3Yk89E4j9OFMQqjzWtEu2VJGQ==
+"@hyperplay/ui@^1.2.31":
+  version "1.2.31"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.2.31.tgz#2abe12941caa7925f3da47709e1b73b6b5e2939a"
+  integrity sha512-6piiQQcan4fqPhPbe69raXkj3E/zBgMzqa90cQBn8YbggP3OtFvFFjKJtTc6TlYt6No9QjbqVUvvbytfjLyGFg==
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"

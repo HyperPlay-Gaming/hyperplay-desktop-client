@@ -8,7 +8,15 @@
   display: flex;
   flex-direction: row;
 
-  > .questLog {
+  > *.questLog {
     flex-grow: 1;
+    margin: 0px var(--space-sm);
+  }
+
+  > *.questDetails {
+    flex-grow: 1;
+    width: 100%;
+    max-width: 576px;
+    padding: var(--space-2lg);
   }
 }
