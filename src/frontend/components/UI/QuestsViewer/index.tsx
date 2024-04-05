@@ -67,6 +67,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       loading: val.isLoading || val.isFetching
     })) ?? []
 
+  const [collapseIsOpen, setCollapseIsOpen] = useState(false)
+  
   if (
     selectedQuestId !== null &&
     Object.hasOwn(questResult?.data?.data ?? {}, 'name')
@@ -86,7 +88,9 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         title: val.name,
         imageUrl: ''
       })),
-      onClaimClick: () => console.log('claim clicked for ', questMeta.name)
+      onClaimClick: () => console.log('claim clicked for ', questMeta.name),
+      collapseIsOpen,
+      toggleCollapse: ()=>setCollapseIsOpen(!collapseIsOpen)
     }
     questDetails = <QuestDetails {...questDetailsProps} className={styles.questDetails} ctaDisabled={true} />
   }
@@ -101,9 +105,12 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           eligible: false,
           steamAccountLinked: false
         }
+
       },
       rewards:[],
-      onClaimClick: () => console.log('claim clicked for ', questMeta.name)
+      onClaimClick: () => console.log('claim clicked for ', questMeta.name),
+      collapseIsOpen,
+      toggleCollapse: ()=>setCollapseIsOpen(!collapseIsOpen)
     }
     questDetails = <QuestDetails {...emptyQuestDetailsProps} className={styles.questDetails} ctaDisabled={true} />
   }
