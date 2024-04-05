@@ -31,7 +31,6 @@ export default function WineVersionSelector() {
       }
       setRefreshing(false)
     }
-    window.api.handleWineVersionsUpdated(getAltWine)
     getAltWine()
   }, [])
 

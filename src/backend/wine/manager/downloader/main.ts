@@ -25,7 +25,6 @@ import {
   unlinkFile,
   unzipFile
 } from './utilities'
-import { sendFrontendMessage } from 'backend/main_window'
 
 interface getVersionsProps {
   repositorys?: Repositorys[]
@@ -312,9 +311,6 @@ async function installVersion({
 
   // resolve with disksize
   versionInfo.disksize = getFolderSize(installSubDir)
-
-  sendFrontendMessage('wineVersionsUpdated')
-
   return { versionInfo: versionInfo, installDir: installSubDir }
 }
 
