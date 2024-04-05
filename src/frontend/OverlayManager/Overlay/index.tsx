@@ -12,11 +12,13 @@ import TransactionState from 'frontend/state/TransactionState'
 import { BrowserGameProps } from '../types'
 import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export const Overlay = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
+  const flags = useFlags()
   const txnToastContainerStyle = {} as React.CSSProperties
   if (OverlayState.title === 'HyperPlay Toasts') {
     txnToastContainerStyle.bottom = 'unset'
@@ -108,13 +110,18 @@ export const Overlay = observer(function ({
       )
     }
 
+    let questsViewer = null
+    if (flags.questsOverlayClaimModals){
+      questsViewer = <QuestsViewer projectId={appName} />
+    }
+
     overlayItems = (
       <>
         <div className={BrowserGameStyles.bgFilter}></div>
         {hintText}
         {exitGameButton}
         {extensionManager}
-        <QuestsViewer projectId={appName} />
+        {questsViewer}
       </>
     )
   }
