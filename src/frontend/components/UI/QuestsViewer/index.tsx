@@ -31,7 +31,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         state: 'ACTIVE',
         onClick: () => {
           // deselect
-          if (selectedQuestId === val.id){
+          if (selectedQuestId === val.id) {
             setSelectedQuestId(null)
             return
           }
@@ -44,9 +44,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       return questUi_i
     })
     questLog = <QuestLog quests={questsUi} className={styles.questLog} />
-  }
-  else if (questsResults?.data.isLoading || questsResults?.data.isFetching){
-    questLog = <QuestLog quests={[]} className={styles.questLog} loading={true} />
+  } else if (questsResults?.data.isLoading || questsResults?.data.isFetching) {
+    questLog = (
+      <QuestLog quests={[]} className={styles.questLog} loading={true} />
+    )
   }
 
   let questDetails = null
@@ -68,7 +69,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     })) ?? []
 
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
-  
+
   if (
     selectedQuestId !== null &&
     Object.hasOwn(questResult?.data?.data ?? {}, 'name')
@@ -90,11 +91,16 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       })),
       onClaimClick: () => console.log('claim clicked for ', questMeta.name),
       collapseIsOpen,
-      toggleCollapse: ()=>setCollapseIsOpen(!collapseIsOpen)
+      toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
     }
-    questDetails = <QuestDetails {...questDetailsProps} className={styles.questDetails} ctaDisabled={true} />
-  }
-  else if (questResult?.data.isLoading || questResult?.data.isFetching){
+    questDetails = (
+      <QuestDetails
+        {...questDetailsProps}
+        className={styles.questDetails}
+        ctaDisabled={true}
+      />
+    )
+  } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
       title: '',
       description: '',
@@ -105,14 +111,19 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           eligible: false,
           steamAccountLinked: false
         }
-
       },
-      rewards:[],
+      rewards: [],
       onClaimClick: () => console.log('claim clicked for ', questMeta.name),
       collapseIsOpen,
-      toggleCollapse: ()=>setCollapseIsOpen(!collapseIsOpen)
+      toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
     }
-    questDetails = <QuestDetails {...emptyQuestDetailsProps} className={styles.questDetails} ctaDisabled={true} />
+    questDetails = (
+      <QuestDetails
+        {...emptyQuestDetailsProps}
+        className={styles.questDetails}
+        ctaDisabled={true}
+      />
+    )
   }
 
   return (

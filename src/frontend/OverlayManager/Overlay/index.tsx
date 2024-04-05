@@ -111,7 +111,7 @@ export const Overlay = observer(function ({
     }
 
     let questsViewer = null
-    if (flags.questsOverlayClaimModals){
+    if (flags.questsOverlayClaimModals) {
       questsViewer = <QuestsViewer projectId={appName} />
     }
 
