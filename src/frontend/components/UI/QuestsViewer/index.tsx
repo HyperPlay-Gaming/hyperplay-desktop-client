@@ -30,13 +30,15 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         title: val.name,
         state: 'ACTIVE',
         onClick: () => setSelectedQuestId(val.id),
-        selected: false
-        // TODO: enable after bumping hp/ui
-        // id: val.id
+        selected: false,
+        id: val.id
       }
       return questUi_i
     })
     questLog = <QuestLog quests={questsUi} className={styles.questLog} />
+  }
+  else if (questsResults?.data.isLoading || questsResults?.data.isFetching){
+    questLog = <QuestLog quests={[]} className={styles.questLog} loading={true} />
   }
 
   let questDetails = null
@@ -54,7 +56,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       title: val.data?.name ?? '',
       /* eslint-disable-next-line */
       // @ts-ignore
-      imageUrl: val.data?.capsule_image ?? ''
+      imageUrl: val.data?.capsule_image ?? '',
+      loading: val.isLoading || val.isFetching
     })) ?? []
 
   if (
@@ -79,6 +82,23 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       onClaimClick: () => console.log('claim clicked for ', questMeta.name)
     }
     questDetails = <QuestDetails {...questDetailsProps} />
+  }
+  else if (questResult?.data.isLoading || questResult?.data.isFetching){
+    const emptyQuestDetailsProps: QuestDetailsProps = {
+      title: '',
+      description: '',
+      eligibility: {
+        reputation: {
+          games: [],
+          completionPercent: 0,
+          eligible: false,
+          steamAccountLinked: false
+        }
+      },
+      rewards:[],
+      onClaimClick: () => console.log('claim clicked for ', questMeta.name)
+    }
+    questDetails = <QuestDetails loading={true} {...emptyQuestDetailsProps} />
   }
 
   return (
