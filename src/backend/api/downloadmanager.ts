@@ -33,7 +33,7 @@ export const install = async (args: InstallParams) => {
   }
 }
 
-export const updateGame = (gameInfo: GameInfo) => {
+export const updateGame = (gameInfo: GameInfo, accessCode?: string) => {
   const {
     app_name: appName,
     runner,
@@ -46,7 +46,8 @@ export const updateGame = (gameInfo: GameInfo) => {
       appName,
       runner,
       path: install_path!,
-      platformToInstall: platform!
+      platformToInstall: platform!,
+      accessCode
     },
     type: 'update',
     addToQueueTime: Date.now(),

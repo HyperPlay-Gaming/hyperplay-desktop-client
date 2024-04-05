@@ -29,6 +29,7 @@ import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
 import TextInputField from 'frontend/components/UI/TextInputField'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
+import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
 
 type Props = {
   appName: string
@@ -159,14 +160,15 @@ export default React.memo(function InstallModal({
       setPlatformToInstall(availablePlatforms[0].value as InstallPlatform)
   }, [availablePlatforms])
 
-  const channelRequiresAccessCode =
-    !!selectedChannel?.license_config.access_codes
+  const channelRequiresAccessCode = gameInfo
+    ? gameRequiresAccessCodes(gameInfo, channelNameToInstall)
+    : false
 
   useEffect(() => {
     async function validateAccessCode() {
       if (selectedChannel?.channel_id !== undefined) {
         const result = await window.api.checkHyperPlayAccessCode(
-          selectedChannel?.channel_id,
+          selectedChannel?.license_config.id,
           accessCode
         )
 
