@@ -37,16 +37,16 @@ export default function ImportAndCreateOptions({
           <div className={styles.actionsCollapseContainer}>
             <div className={styles.infoBox}>
               <Images.Info
-                fill="var(--color-neutral-400)"
+                fill="var(--color-alert-400)"
                 className={styles.infoIcon}
               />
               <div className={styles.infoText}>
-                This feature is recommended for advanced users and developers.
+                This feature is recommended for advanced users and developers. Your recovery phrase remains confidential and inaccessible to HyperPlay.
                 <span
                   onClick={() => window.api.openHyperplaySite()}
                   className={styles.infoLink}
                 >
-                  Learn more
+                  Learn more.
                 </span>
               </div>
             </div>
