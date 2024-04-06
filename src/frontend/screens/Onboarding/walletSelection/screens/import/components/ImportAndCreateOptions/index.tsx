@@ -41,7 +41,9 @@ export default function ImportAndCreateOptions({
                 className={styles.infoIcon}
               />
               <div className={styles.infoText}>
-                This feature is recommended for advanced users and developers. Your recovery phrase remains confidential and inaccessible to HyperPlay.
+                This feature is recommended for advanced users and developers.
+                Your recovery phrase remains confidential and inaccessible to
+                HyperPlay.
                 <span
                   onClick={() => window.api.openHyperplaySite()}
                   className={styles.infoLink}
