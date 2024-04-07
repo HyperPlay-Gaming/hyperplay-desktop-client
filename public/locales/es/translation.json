@@ -19,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Caché de Heroic borrada.",
+            "message": "Caché de HyperPlay borrada.",
             "title": "Caché borrado"
         },
         "choose": "Elegir",
@@ -67,7 +67,7 @@
             },
             "update": {
                 "title": "Error al actualizar",
-                "message": "¡Algo salió mal con la actualización! Desinstale y reinstale HyperPlay manualmente!"
+                "message": "¡Algo ha ido mal con la actualización!. Por favor, desinstala manualmente y vuelve a instalar HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -80,7 +80,7 @@
             },
             "moving": "Error al Mover el Juego {{error}}",
             "ubisoft-connect": {
-                "message": "La instalación de Ubisoft Connect en el prefijo del juego ha fallado. Consulta nuestra página wiki en https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para instalarlo manualmente.",
+                "message": "La instalación de Ubisoft Connect en el prefijo del juego ha fallado. Consulte nuestra página wiki en https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para instalarlo maunally.",
                 "title": "Ubisoft Connect"
             }
         },
@@ -89,8 +89,8 @@
                 "changelog": "Abrir registro de cambios",
                 "detail": "¿Quiere descargar la actualización en segundo plano?",
                 "message": "¡Hay una nueva versión disponible!",
-                "message-finished": "¿Quieres reiniciar Heroic ahora?",
-                "title": "Lanzador de Juegos Heroicos",
+                "message-finished": "¿Quieres reiniciar HyperPlay ahora?",
+                "title": "Iniciador de juegos HyperPlay",
                 "title-finished": "Actualización finalizada"
             }
         },
@@ -107,7 +107,7 @@
         },
         "reset-app": {
             "question": {
-                "message": "¿Estás seguro de que quieres reiniciar HyperPlay? Esto eliminará todos los ajustes y el caché, pero no eliminará los juegos instalados ni las credenciales de Epic. Las versiones portátiles (AppImage, WinPortable, ...) de hyperplay necesitan ser reiniciadas manualmente después.",
+                "message": "¿Estás seguro de que quieres reiniciar HyperPlay? Esto eliminará todos los ajustes y el caché, pero no eliminará los juegos instalados ni las credenciales de Epic. Las versiones portables (AppImage, WinPortable, ...) de HyperPlay necesitan ser reiniciadas manualmente después.",
                 "title": "Reset HyperPlay"
             }
         },
