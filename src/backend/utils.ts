@@ -88,6 +88,10 @@ import {
 } from './wine/manager/utils'
 
 import * as si from 'systeminformation'
+import {
+  deviceNameCache,
+  vendorNameCache
+} from './utils/systeminfo/gpu/pci_ids'
 
 const execAsync = promisify(exec)
 
@@ -360,7 +364,10 @@ async function openUrlOrFile(url: string): Promise<string | void> {
   return shell.openPath(url)
 }
 
-function clearCache(library?: 'gog' | 'legendary' | 'nile') {
+function clearCache(
+  library?: 'gog' | 'legendary' | 'nile',
+  fromVersionChange = false
+) {
   if (library === 'gog' || !library) {
     GOGapiInfoCache.clear()
     GOGlibraryStore.clear()
@@ -379,6 +386,10 @@ function clearCache(library?: 'gog' | 'legendary' | 'nile') {
   if (library === 'nile' || !library) {
     nileInstallStore.clear()
     nileLibraryStore.clear()
+  }
+  if (!fromVersionChange) {
+    deviceNameCache.clear()
+    vendorNameCache.clear()
   }
 }
 
