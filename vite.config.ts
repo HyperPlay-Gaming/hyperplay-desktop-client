@@ -1,6 +1,6 @@
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
-import { join } from 'path'
+import { join, resolve } from 'path'
 import {
   bytecodePlugin,
   defineConfig,
@@ -56,7 +56,7 @@ export default defineConfig(({ mode }) => ({
     root: '.',
     build: {
       rollupOptions: {
-        input: 'index.html'
+        input: resolve('index.html')
       },
       target: 'esnext',
       outDir: 'build',
