@@ -87,7 +87,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       },
       rewards: questMeta.rewards.map((val) => ({
         title: val.name,
-        imageUrl: ''
+        imageUrl: val.image_url
       })),
       onClaimClick: () => console.log('claim clicked for ', questMeta.name),
       collapseIsOpen,

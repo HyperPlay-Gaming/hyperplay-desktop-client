@@ -905,6 +905,7 @@ export interface Reward {
   decimals: number
   /* eslint-disable-next-line */
   token_ids: any[]
+  image_url: string
 }
 
 export interface Quest {
