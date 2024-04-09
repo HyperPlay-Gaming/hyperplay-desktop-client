@@ -6,7 +6,6 @@ import { observer } from 'mobx-react-lite'
 import OverlayState from 'frontend/state/OverlayState'
 import WalletState from 'frontend/state/WalletState'
 import { t } from 'i18next'
-import DeviceState from 'frontend/state/DeviceState'
 import ExtensionManager from 'frontend/ExtensionManager'
 import TransactionState from 'frontend/state/TransactionState'
 import { BrowserGameProps } from '../types'
@@ -30,7 +29,9 @@ export const Overlay = observer(function ({
     top: 'var(--space-md)',
     right: 'var(--space-md)',
     position: 'absolute',
-    zIndex: 200
+    zIndex: 200,
+    display: 'flex',
+    gap: 'var(--space-sm)'
   } as React.CSSProperties
 
   if (
@@ -63,33 +64,31 @@ export const Overlay = observer(function ({
 
   let overlayItems = null
   if (!TransactionState.isInitialToastShown) {
-    let hintText = null
-    if (OverlayState.renderState.showHintText) {
-      hintText = (
-        <div className={`${BrowserGameStyles.closeOverlayText} title`}>
-          {t('hyperplayOverlay.closeOverlay', {
-            defaultValue: 'Press {{overlayKeyMod}} + X to close the overlay',
-            overlayKeyMod: DeviceState.isMac ? 'Option' : 'Alt'
-          })}
-        </div>
-      )
-    }
-
     let exitGameButton = null
     if (OverlayState.renderState.showExitGameButton) {
       exitGameButton = (
-        <Button
-          onClick={async () => {
-            // mac can take ~5 seconds to close the wine process, so we close the overlay instantly
-            window.api.killOverlay()
-            window.api.kill(appName, runner)
-          }}
-          style={exitGameButtonStyle}
-          type="secondary"
-          size="medium"
-        >
-          {t('exit_game', 'Exit Game')}
-        </Button>
+        <div style={exitGameButtonStyle}>
+          <Button
+            onClick={async () => {
+              // mac can take ~5 seconds to close the wine process, so we close the overlay instantly
+              window.api.killOverlay()
+              window.api.kill(appName, runner)
+            }}
+            type="tertiary"
+            size="medium"
+          >
+            {t('exit_game', 'Exit Game')}
+          </Button>
+          <Button
+            onClick={async () => {
+              window.api.toggleOverlay()
+            }}
+            type="secondary"
+            size="medium"
+          >
+            {t('back_to_game', 'Back to game')}
+          </Button>
+        </div>
       )
     }
 
@@ -118,7 +117,6 @@ export const Overlay = observer(function ({
     overlayItems = (
       <>
         <div className={BrowserGameStyles.bgFilter}></div>
-        {hintText}
         {exitGameButton}
         {extensionManager}
         {questsViewer}

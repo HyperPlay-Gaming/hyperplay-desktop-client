@@ -1999,6 +1999,10 @@ ipcMain.on('openAuthModalIfAppReloads', () => {
 ipcMain.on('killOverlay', () => {
   closeOverlay()
 })
+
+ipcMain.on('toggleOverlay', () => {
+  toggleOverlay()
+})
 /*
  * INSERT OTHER IPC HANDLERS HERE
  */
