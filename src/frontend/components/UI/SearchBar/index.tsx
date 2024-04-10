@@ -85,7 +85,7 @@ export default observer(function SearchBar() {
 
       if (game !== undefined) {
         navigate(`/gamepage/${game.runner}/${game.app_name}`, {
-          state: { gameInfo: JSON.parse(JSON.stringify(game)) , fromDM: false}
+          state: { gameInfo: JSON.parse(JSON.stringify(game)), fromDM: false }
         })
       }
     }
