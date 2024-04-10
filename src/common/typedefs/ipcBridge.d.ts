@@ -260,10 +260,11 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<{ id: number; name: string }[]>
   getQuest: (questId: number) => Promise<Quest[]>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
+  // TODO: replace with mintQuestRewards handler
   getQuestRewardSignature: (
     questId: number,
     rewardId: number
-  ) => Promise<unknown>
+  ) => Promise<{ signature: string; nonce: string }>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
