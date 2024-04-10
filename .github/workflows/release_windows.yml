@@ -78,7 +78,7 @@ jobs:
             -ProjectSlug "HyperPlay_Win_x64" `
             -SigningPolicySlug "Release_Signing" `
             -OutputArtifactPath "signed/$exeName" `
-            -WaitForCompletion
+            -WaitForCompletion `
             -Force
 
       - name: Install powershell-yaml
