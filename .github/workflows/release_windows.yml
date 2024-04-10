@@ -79,6 +79,7 @@ jobs:
             -SigningPolicySlug "Release_Signing" `
             -OutputArtifactPath "signed/$exeName" `
             -WaitForCompletion
+            -Force
 
       - name: Install powershell-yaml
         run: Install-Module -Name powershell-yaml -Force
