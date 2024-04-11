@@ -3,7 +3,8 @@ import {
   DownloadManagerState,
   Achievement,
   SummaryAchievement,
-  LDEnv
+  LDEnv,
+  Quest
 } from './../types'
 import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
@@ -260,11 +261,9 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<{ id: number; name: string }[]>
   getQuest: (questId: number) => Promise<Quest[]>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
-  // TODO: replace with mintQuestRewards handler
-  getQuestRewardSignature: (
-    questId: number,
-    rewardId: number
-  ) => Promise<{ signature: string; nonce: string }>
+  claimQuestRewards: (
+    questmeta: Quest
+  ) => Promise<{ success: boolean; message: string }>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

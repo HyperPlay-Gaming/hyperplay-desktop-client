@@ -1770,10 +1770,24 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
+"@hyperplay/chains@^0.2.8":
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/@hyperplay/chains/-/chains-0.2.8.tgz#da275880fbc7b82abab6f1fdea6eca7a44e0a2cf"
+  integrity sha512-nihRs9EkVHOHRceMaYhwnN1I91ZVSaUlMnRVoxsXlWjO59N7KADsWimKWvL2cnb8YczmolROLL4FulWHxzu2Ig==
+  dependencies:
+    axios "^1.4.0"
+
 "@hyperplay/check-disk-space@^3.5.2":
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
+
+"@hyperplay/contracts@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@hyperplay/contracts/-/contracts-1.0.1.tgz#18e48d708404f2630135eb5e6b94e220e000e48b"
+  integrity sha512-LKXDlGM1191vdqdI2NavNfLG0esVrmeAMjyA/YO6tU28fVJBTDnpPBSDw8wTfd0YaGR2LP2za5qC54Y8HACxJQ==
+  dependencies:
+    "@openzeppelin/contracts" "^4.9.5"
 
 "@hyperplay/ui@^1.2.32":
   version "1.2.32"
@@ -2661,6 +2675,11 @@
     isomorphic-ws "^5.0.0"
     strict-event-emitter-types "^2.0.0"
     ws "^7.0.0"
+
+"@openzeppelin/contracts@^4.9.5":
+  version "4.9.6"
+  resolved "https://registry.yarnpkg.com/@openzeppelin/contracts/-/contracts-4.9.6.tgz#2a880a24eb19b4f8b25adc2a5095f2aa27f39677"
+  integrity sha512-xSmezSupL+y9VkHZJGDoCBpmnB2ogM13ccaYDWqJTfS3dbuHkgjuwDFUmaFauBCboQMGB/S5UqUl2y54X99BmA==
 
 "@parcel/watcher-android-arm64@2.3.0":
   version "2.3.0"
@@ -4907,6 +4926,11 @@ big-integer@^1.6.16:
   version "1.6.52"
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.52.tgz#60a887f3047614a8e1bffe5d7173490a97dc8c85"
   integrity sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==
+
+bignumber.js@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.2.tgz#b7c4242259c008903b13707983b5f4bbd31eda0c"
+  integrity sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==
 
 bin-links@4.0.3:
   version "4.0.3"

@@ -74,7 +74,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     selectedQuestId !== null &&
     Object.hasOwn(questResult?.data?.data ?? {}, 'name')
   ) {
-    interface SignatureMessage {message?: string}
     const questDetailsProps: QuestDetailsProps = {
       title: questMeta.name,
       description: questMeta.description,
@@ -91,22 +90,17 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         imageUrl: ''
       })),
       onClaimClick: async () => {
-        for (const questReward of questMeta.rewards) {
-          const signature = await window.api.getQuestRewardSignature(questMeta.id, questReward.id)
-          if ((signature as SignatureMessage)?.message === 'Not authenticated'){
-            window.api.signInWithProvider('steam')
-            break
-          }
+        const result = await window.api.claimQuestRewards(questMeta)
+        if (!result.success) {
+          window.api.signInWithProvider('steam')
+          return
         }
       },
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
     }
     questDetails = (
-      <QuestDetails
-        {...questDetailsProps}
-        className={styles.questDetails}
-      />
+      <QuestDetails {...questDetailsProps} className={styles.questDetails} />
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
