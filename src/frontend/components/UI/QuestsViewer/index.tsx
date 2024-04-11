@@ -11,6 +11,8 @@ import { Quest } from 'common/types'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
+import useAuthSession from 'frontend/hooks/useAuthSession'
+import { useTranslation } from 'react-i18next'
 
 export interface QuestsViewerProps {
   projectId: string
@@ -19,6 +21,7 @@ export interface QuestsViewerProps {
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const questsResults = useGetQuests(appName)
   const quests = questsResults?.data?.data
+  const { t } = useTranslation()
 
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const questResult = useGetQuest(selectedQuestId)
@@ -69,6 +72,28 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     })) ?? []
 
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
+  const session = useAuthSession()
+  const accounts = session.data?.linkedAccounts
+  const steamIsLinked = accounts?.has('steam')
+  const i18n = {
+    reward: t('quest.reward', 'Reward'),
+    associatedGames: t('quest.associatedGames', 'Associated games'),
+    linkSteamAccount: t(
+      'quest.linkAccount',
+      'Link your Steam account to check eligibility.'
+    ),
+    needMoreAchievements: t(
+      'quest.needMoreAchievements',
+      `You need to have completed {{percent}}% of the achievements in one of these games.`,
+      { percent: questMeta?.eligibility?.completion_threshold ?? '??' }
+    ),
+    claim: steamIsLinked
+      ? t('quest.claimAll', 'Claim all')
+      : t('quest.connectSteamAccount', 'Connect Steam account'),
+    questType: {
+      REPUTATION: t('quest.reputation', 'Reputation')
+    }
+  }
 
   if (
     selectedQuestId !== null &&
@@ -89,6 +114,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         title: val.name,
         imageUrl: val.image_url
       })),
+      i18n,
       onClaimClick: () => console.log('claim clicked for ', questMeta.name),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
@@ -112,6 +138,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           steamAccountLinked: false
         }
       },
+      i18n,
       rewards: [],
       onClaimClick: () => console.log('claim clicked for ', questMeta.name),
       collapseIsOpen,
