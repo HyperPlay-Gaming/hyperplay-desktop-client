@@ -68,46 +68,46 @@ const TopNavBar = observer(() => {
             {t(`hyperplay.publicAlpha`, `Public Alpha`)}
           </div>
         </div>
-          <>
-            <NavLink to="/hyperplaystore">
+        <>
+          <NavLink to="/hyperplaystore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
+            >
+              HyperPlay
+            </Button>
+          </NavLink>
+          <NavLink to="/epicstore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(EPIC_STORE_URL)}
+            >
+              {t('Epic Games', 'Epic Games')}
+            </Button>
+          </NavLink>
+          <NavLink to="/gogstore">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(GOG_STORE_URL)}
+            >
+              {t('GOG', 'GOG')}
+            </Button>
+          </NavLink>
+          {ENABLE_AMAZON_STORE ? (
+            <NavLink to="/amazonstore">
               <Button
                 type="link"
                 size="small"
-                style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
+                style={getStoreTextStyle(AMAZON_STORE)}
               >
-                HyperPlay
+                {t('Amazon', 'Amazon')}
               </Button>
             </NavLink>
-            <NavLink to="/epicstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(EPIC_STORE_URL)}
-              >
-                {t('Epic Games', 'Epic Games')}
-              </Button>
-            </NavLink>
-            <NavLink to="/gogstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(GOG_STORE_URL)}
-              >
-                {t('GOG', 'GOG')}
-              </Button>
-            </NavLink>
-            {ENABLE_AMAZON_STORE ? (
-              <NavLink to="/amazonstore">
-                <Button
-                  type="link"
-                  size="small"
-                  style={getStoreTextStyle(AMAZON_STORE)}
-                >
-                  {t('Amazon', 'Amazon')}
-                </Button>
-              </NavLink>
-            ) : null}
-          </>
+          ) : null}
+        </>
       </div>
       <div>
         {pathname === '/library' ? <SearchBar /> : null}
