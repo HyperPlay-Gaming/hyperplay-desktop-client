@@ -13,7 +13,7 @@ interface Props {
 
 function getRecentGames(
   libraries: GameInfo[],
-  limit: number,
+  limit: number = 5,
   onlyInstalled: boolean
 ): GameInfo[] {
   const recentGames = configStore.get('games.recent', [])
