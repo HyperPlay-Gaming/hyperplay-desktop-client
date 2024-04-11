@@ -3,7 +3,17 @@
   left: 0px;
   right: 0px;
   bottom: 0px;
+  top: 30px;
+}
+
+.topBar {
+  position: absolute;
+  left: 0px;
+  right: 0px;
   top: 0px;
+  height: 30px;
+  display: flex;
+  flex-direction: row;
 }
 
 .txnToastContainer {

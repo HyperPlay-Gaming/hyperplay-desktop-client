@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import BrowserGameStyles from './index.module.scss'
 import ToastManager from './ToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
@@ -7,10 +7,11 @@ import { observer } from 'mobx-react-lite'
 import OverlayState from 'frontend/state/OverlayState'
 import WalletState from 'frontend/state/WalletState'
 import { t } from 'i18next'
-import { Button } from '@hyperplay/ui'
+import { Button, Images } from '@hyperplay/ui'
 import DeviceState from 'frontend/state/DeviceState'
 import ExtensionManager from 'frontend/ExtensionManager'
 import TransactionState from 'frontend/state/TransactionState'
+import { WebviewTag } from 'electron'
 
 interface BrowserGameProps {
   appName: string
@@ -149,6 +150,15 @@ const OverlayManager = observer(function ({
     style.width = '100%'
     style.height = '100%'
   }
+  const webviewRef = useRef<WebviewTag>(null)
+
+  function goBack() {
+    webviewRef.current?.goBack()
+  }
+
+  function goForward() {
+    webviewRef.current?.goForward()
+  }
 
   /* eslint-disable react/no-unknown-property */
   return (
@@ -161,19 +171,30 @@ const OverlayManager = observer(function ({
         <Overlay appName={appName} runner={runner} />
       ) : null}
       {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
-        <webview
-          src={url}
-          className={BrowserGameStyles.browserGame}
-          partition={
-            WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
-            PROVIDERS.WALLET_CONNECT
-              ? 'persist:InPageWindowEthereumExternalWallet'
-              : undefined
-          }
-          webpreferences="contextIsolation=true"
-          // setting = to {true} does not work :(
-          allowpopups={trueAsStr}
-        />
+        <div>
+          <div className={BrowserGameStyles.topBar}>
+            <Button onClick={goBack} type="secondary" size="icon">
+              <Images.ArrowLeft />
+            </Button>
+            <Button onClick={goForward} type="secondary" size="icon">
+              <Images.RightArrow />
+            </Button>
+          </div>
+          <webview
+            src={url}
+            className={BrowserGameStyles.browserGame}
+            partition={
+              WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
+              PROVIDERS.WALLET_CONNECT
+                ? 'persist:InPageWindowEthereumExternalWallet'
+                : undefined
+            }
+            webpreferences="contextIsolation=true"
+            // setting = to {true} does not work :(
+            allowpopups={trueAsStr}
+            ref={webviewRef}
+          />
+        </div>
       ) : null}
     </div>
   )
