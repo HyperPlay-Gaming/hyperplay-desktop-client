@@ -27,15 +27,6 @@ const TopNavBar = observer(() => {
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
   const { pathname } = useLocation()
-  const pagesToShowStoreNavOptions = [
-    '/hyperplaystore',
-    '/gogstore',
-    '/epicstore',
-    '/amazonstore',
-    '/store-page'
-  ]
-
-  const showStoreNavOptions = pagesToShowStoreNavOptions.includes(pathname)
 
   /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
   function setBadgeString(err: any, text: string) {
@@ -77,7 +68,6 @@ const TopNavBar = observer(() => {
             {t(`hyperplay.publicAlpha`, `Public Alpha`)}
           </div>
         </div>
-        {showStoreNavOptions && (
           <>
             <NavLink to="/hyperplaystore">
               <Button
@@ -118,7 +108,6 @@ const TopNavBar = observer(() => {
               </NavLink>
             ) : null}
           </>
-        )}
       </div>
       <div>
         {pathname === '/library' ? <SearchBar /> : null}
