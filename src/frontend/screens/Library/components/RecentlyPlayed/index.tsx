@@ -42,6 +42,7 @@ export default React.memo(
       const { maxRecentGames } = await window.api.requestAppSettings()
       const newRecentGames = getRecentGames(
         [
+          ...libraryState.hyperPlayLibrary,
           ...libraryState.epicLibrary,
           ...libraryState.gogLibrary,
           ...libraryState.sideloadedLibrary,
