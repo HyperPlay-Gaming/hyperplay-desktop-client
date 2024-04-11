@@ -916,7 +916,7 @@ export interface Quest {
   description: string
   rewards: Reward[]
   /* eslint-disable-next-line */
-  deposit_contracts: any[]
+  deposit_contracts: { chain_id: number; contract_address: string }[]
   eligibility: {
     completion_threshold: number
     steam_games: { id: string }[]
