@@ -84,6 +84,16 @@ export default React.memo(
           onlyInstalled={onlyInstalled}
           isRecent={true}
         />
+        <hr
+          style={{
+            margin: 'var(--space-xl-fixed) auto',
+            border: '0',
+            borderTop: '1px solid var(--color-neutral-500)',
+            width: '10%',
+            justifySelf: 'center',
+            alignSelf: 'center'
+          }}
+        />
       </>
     )
   })
