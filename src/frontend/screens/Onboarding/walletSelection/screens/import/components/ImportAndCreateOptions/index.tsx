@@ -41,14 +41,18 @@ export default function ImportAndCreateOptions({
                 className={styles.infoIcon}
               />
               <div className={styles.infoText}>
-                This feature is recommended for advanced users and developers.
-                Your recovery phrase remains confidential and inaccessible to
-                HyperPlay.
+                {t(
+                  'hyperplay.onboarding.walletSelection.screens.import.useRecoveryPhraseInfo',
+                  `This feature is recommended for advanced users and developers. Your secret recovery phrase is stored locally in MetaMask and never shared with HyperPlay.`
+                )}
                 <span
                   onClick={() => window.api.openHyperplaySite()}
                   className={styles.infoLink}
                 >
-                  Learn more.
+                  {t(
+                    'hyperplay.onboarding.walletSelection.screens.import.learnMore',
+                    `Learn more.`
+                  )}
                 </span>
               </div>
             </div>
@@ -70,7 +74,12 @@ export default function ImportAndCreateOptions({
       </div>
       <div className={styles.otherOptionsStatement}>
         <span className={styles.line}></span>
-        <span className={styles.otherOptionsText}>OR</span>
+        <span className={styles.otherOptionsText}>
+          {t(
+            'hyperplay.onboarding.walletSelection.screens.import.orWord',
+            `OR`
+          )}
+        </span>
         <span className={styles.line}></span>
       </div>
       <ImportOption
