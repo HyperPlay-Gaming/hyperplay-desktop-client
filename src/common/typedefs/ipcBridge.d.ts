@@ -246,6 +246,16 @@ interface HyperPlayAsyncIPCFunctions {
     licenseConfigId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
+  callOrSendContract: (
+    isCall: boolean,
+    req: ContractInteractionRequest
+  ) => Promise<{
+    ok: boolean
+    /* eslint-disable-next-line */
+    result?: any
+    status?: number
+    message?: string
+  }>
   get_wallet_state_address: () => Promise<string>
   get_wallet_state_isConnected: () => Promise<boolean>
   get_wallet_state_provider: () => Promise<PROVIDERS>
