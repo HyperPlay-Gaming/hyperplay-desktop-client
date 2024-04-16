@@ -90,10 +90,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     }
   }
 
-  if (
-    selectedQuestId !== null && 
-    questMeta !== undefined 
-  ) {
+  if (selectedQuestId !== null && questMeta !== undefined) {
     const questDetailsProps: QuestDetailsProps = {
       title: questMeta.name,
       description: questMeta.description,
