@@ -7,11 +7,12 @@ import { observer } from 'mobx-react-lite'
 import OverlayState from 'frontend/state/OverlayState'
 import WalletState from 'frontend/state/WalletState'
 import { t } from 'i18next'
-import { Button, Images } from '@hyperplay/ui'
+import { Button } from '@hyperplay/ui'
 import DeviceState from 'frontend/state/DeviceState'
 import ExtensionManager from 'frontend/ExtensionManager'
 import TransactionState from 'frontend/state/TransactionState'
 import { WebviewTag } from 'electron'
+import WebviewControls from 'frontend/components/UI/WebviewControls'
 
 interface BrowserGameProps {
   appName: string
@@ -152,14 +153,6 @@ const OverlayManager = observer(function ({
   }
   const webviewRef = useRef<WebviewTag>(null)
 
-  function goBack() {
-    webviewRef.current?.goBack()
-  }
-
-  function goForward() {
-    webviewRef.current?.goForward()
-  }
-
   /* eslint-disable react/no-unknown-property */
   return (
     <div
@@ -172,14 +165,7 @@ const OverlayManager = observer(function ({
       ) : null}
       {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
         <div>
-          <div className={BrowserGameStyles.topBar}>
-            <Button onClick={goBack} type="secondary" size="icon">
-              <Images.ArrowLeft />
-            </Button>
-            <Button onClick={goForward} type="secondary" size="icon">
-              <Images.RightArrow />
-            </Button>
-          </div>
+          <WebviewControls webview={webviewRef.current} initURL={''} openInBrowser={false} disableUrl={true} />
           <webview
             src={url}
             className={BrowserGameStyles.browserGame}
