@@ -43,7 +43,7 @@ export default function WebviewControls({
   useEffect(() => {
     if (webview) {
       const eventCallback = () => {
-        if (!disableUrl){
+        if (!disableUrl) {
           setUrl(webview.getURL())
         }
       }

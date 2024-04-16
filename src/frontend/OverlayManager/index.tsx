@@ -165,7 +165,12 @@ const OverlayManager = observer(function ({
       ) : null}
       {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
         <div>
-          <WebviewControls webview={webviewRef.current} initURL={''} openInBrowser={false} disableUrl={true} />
+          <WebviewControls
+            webview={webviewRef.current}
+            initURL={''}
+            openInBrowser={false}
+            disableUrl={true}
+          />
           <webview
             src={url}
             className={BrowserGameStyles.browserGame}
