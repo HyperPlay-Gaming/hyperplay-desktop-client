@@ -11,6 +11,7 @@ import { app } from 'electron'
 import { existsSync, mkdirSync, readFileSync } from 'graceful-fs'
 import { GlobalConfig } from './config'
 import { TypeCheckedStoreBackend } from './electron_store'
+import { DEV_PORTAL_URL } from 'common/constants'
 
 const configStore = new TypeCheckedStoreBackend('configStore', {
   cwd: 'store'
@@ -111,7 +112,6 @@ const eventsToCloseMetaMaskPopupOn = [
 ]
 const valistListingsApiUrl = 'https://developers.hyperplay.xyz/api/v1/listings'
 const mainReleaseChannelName = 'main'
-const valistBaseApiUrlv1 = 'https://api.valist.io/v1'
 export let qaToken = ''
 
 export function setQaToken(token: string) {
@@ -126,7 +126,7 @@ export function getValistListingApiUrl(projectId: string) {
 }
 
 export function getValidateLicenseKeysApiUrl() {
-  return `${valistBaseApiUrlv1}/license_keys/validate`
+  return `${DEV_PORTAL_URL}api/v1/license_keys/validate`
 }
 
 /**
