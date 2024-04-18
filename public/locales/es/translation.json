@@ -543,7 +543,8 @@
             "no-file": "No se ha encontrado ningún archivo de registro",
             "show-in-folder": "Mostrar el archivo de registro en la carpeta",
             "instructions-part-02": "Para ayudarnos a diagnosticar y solucionar el problema lo antes posible, facilítenos toda la información posible, incluida una copia de sus registros. Nuestro equipo de soporte supervisará ambos canales y hará todo lo posible para responder a su problema lo antes posible. Gracias por su paciencia y comprensión mientras trabajamos para resolver cualquier problema que pueda encontrar.",
-            "instructions-part-01": "Si encuentras algún problema mientras usas HyperPlay, tenemos dos áreas designadas para informar de tus problemas en nuestro servidor de Discord. Si eres un jugador, por favor reporta cualquier problema visitando el foro de soporte al jugador. Si eres un desarrollador de juegos, por favor informa de cualquier problema visitando el foro de soporte para desarrolladores."
+            "instructions-part-01": "Si encuentras algún problema mientras usas HyperPlay, tenemos dos áreas designadas para informar de tus problemas en nuestro servidor de Discord. Si eres un jugador, por favor reporta cualquier problema visitando el foro de soporte al jugador. Si eres un desarrollador de juegos, por favor informa de cualquier problema visitando el foro de soporte para desarrolladores.",
+            "join-hyperplay-discord": "Únase a nuestro Discord"
         },
         "mangohud": "Habilitar Mangohud (es necesario instalar Mangohud)",
         "manualsync": {
@@ -767,11 +768,14 @@
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "useRecoveryPhrase": "Acceso con una frase secreta de recuperación",
-                        "details": "Al importar, su instalación de MetaMask y    La configuración se importará a HyperPlay.",
+                        "useRecoveryPhrase": "Importar utilizando la frase de recuperación secret",
+                        "details": "Los navegadores que aparecen a continuación ya tienen MetaMask instalado. Elija el que desea importar.",
                         "cantFindProfile": "¿No encuentra el perfil de su navegador?",
                         "title": "Seleccione el navegador desde el que desea importar",
-                        "createNewWallet": "Crear un nuevo monedero con la extensión MM"
+                        "createNewWallet": "Crear un nuevo monedero con la extensión MM",
+                        "useRecoveryPhraseInfo": "Esta función está recomendada para usuarios avanzados y desarrolladores. Su frase secreta de recuperación se almacena localmente en MetaMask y nunca se comparte con HyperPlay.",
+                        "learnMore": "Más información.",
+                        "orWord": "O"
                     },
                     "scan": {
                         "title": "Escanea el código QR con ",
