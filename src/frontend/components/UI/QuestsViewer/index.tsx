@@ -145,6 +145,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     )
   }
 
+  if (!quests?.length){
+    return null
+  }
+
   return (
     <div className={styles.questsViewerContainer}>
       {questLog}
