@@ -62,7 +62,7 @@ const TopNavBar = observer(() => {
           width="27px"
           className={styles.hpLogo}
         />
-        <Images.HyperPlayTextLogo fill="var(--color-neutral-100)" />
+        <Images.HyperPlayTextLogo fill="var(--color-neutral-100)" className={styles.hpTextLogo} />
         <div className={styles.alphaBadge}>
           <div className={`caption ${styles.alphaCaption}`}>
             {t(`hyperplay.publicAlpha`, `Public Alpha`)}
