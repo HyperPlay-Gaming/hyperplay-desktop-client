@@ -52,6 +52,8 @@ jobs:
         run: yarn setup
       - name: Build artifacts.
         run: yarn dist:linux:ci:flatpak
+      - name: remove build, node_modules and dist unpacked files to save space
+        run: rm -rf build dist/linux-unpacked node_modules
       - name: Prepare Flatpak
         run: yarn flatpak:prepare
       - name: Build Flatpak
