@@ -91,6 +91,8 @@ export default observer(function SearchBar() {
     }
   }
 
+  const showAutoComplete = list.length > 0 && libraryState.filterText.length > 0
+
   return (
     <div className="SearchBar" data-testid="searchBar">
       <button
@@ -109,7 +111,7 @@ export default observer(function SearchBar() {
         id="search"
         className="searchBarInput"
       />
-      {libraryState.filterText.length > 0 && (
+      {showAutoComplete && (
         <>
           <ul className="autoComplete body-sm">
             {list.length > 0 &&
