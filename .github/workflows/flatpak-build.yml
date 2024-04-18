@@ -52,6 +52,10 @@ jobs:
         run: yarn setup
       - name: Build artifacts.
         run: yarn dist:linux:ci:flatpak
+      - name: Clean up build files to save space
+        run: rm -rf build dist/linux-unpacked node_modules
+      - name: Install Axios
+        run: yarn add axios
       - name: Prepare Flatpak
         run: yarn flatpak:prepare
       - name: Build Flatpak
