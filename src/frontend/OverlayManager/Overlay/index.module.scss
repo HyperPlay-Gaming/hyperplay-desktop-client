@@ -1,3 +1,5 @@
+$topNavBarHeight: 30px;
+
 .txnToastContainer {
   position: absolute;
   right: 10px;
@@ -8,7 +10,7 @@
 
 .closeOverlayText {
   position: absolute;
-  top: var(--space-md);
+  top: calc($topNavBarHeight + 10px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
@@ -20,6 +22,8 @@
   white-space: pre-line;
   max-width: 600px;
   z-index: 3;
+  top: calc($topNavBarHeight + 10px);
+  position: absolute;
 }
 
 .bgFilter {
