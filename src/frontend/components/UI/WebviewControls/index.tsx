@@ -15,6 +15,7 @@ interface WebviewControlsProps {
   webview: WebviewTag | null
   initURL: string
   openInBrowser: boolean
+  disableUrl?: boolean
 }
 
 function removeSelection(event: SyntheticEvent<unknown>) {
@@ -31,7 +32,8 @@ function removeSelection(event: SyntheticEvent<unknown>) {
 export default function WebviewControls({
   webview,
   initURL,
-  openInBrowser
+  openInBrowser,
+  disableUrl
 }: WebviewControlsProps) {
   const [url, setUrl] = React.useState(initURL)
   const { t } = useTranslation()
@@ -40,7 +42,11 @@ export default function WebviewControls({
 
   useEffect(() => {
     if (webview) {
-      const eventCallback = () => setUrl(webview.getURL())
+      const eventCallback = () => {
+        if (!disableUrl) {
+          setUrl(webview.getURL())
+        }
+      }
       webview.addEventListener('did-navigate-in-page', eventCallback)
       webview.addEventListener('did-navigate', eventCallback)
       webview.addEventListener('did-navigate-in-page', () => {
@@ -78,10 +84,10 @@ export default function WebviewControls({
     [webview]
   )
 
-  const _url = new URL(url)
+  const _url = url !== '' ? new URL(url) : null
   const allowList = ['store.hyperplay.xyz', 'docs.hyperplay.xyz']
 
-  if (allowList.includes(_url.host)) return null
+  if (_url && allowList.includes(_url.host)) return null
 
   return (
     <div className="WebviewControls">
