@@ -1,9 +1,21 @@
+$topNavBarHeight: 30px;
+
 .browserGame {
   position: absolute;
   left: 0px;
   right: 0px;
   bottom: 0px;
+  top: $topNavBarHeight;
+}
+
+.topBar {
+  position: absolute;
+  left: 0px;
+  right: 0px;
   top: 0px;
+  height: $topNavBarHeight;
+  display: flex;
+  flex-direction: row;
 }
 
 .txnToastContainer {
@@ -21,11 +33,12 @@
 }
 
 .overlayToggleHint {
-  padding: 10px;
   display: inline-block;
   white-space: pre-line;
   max-width: 600px;
   z-index: 3;
+  position: absolute;
+  top: calc($topNavBarHeight + 10px);
 }
 
 .bgFilter {
@@ -40,7 +53,7 @@
 
 .closeOverlayText {
   position: absolute;
-  top: var(--space-md);
+  top: calc($topNavBarHeight + 10px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;

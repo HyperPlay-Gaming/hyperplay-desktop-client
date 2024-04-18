@@ -74,17 +74,19 @@
 }
 
 .infoText {
-  color: var(--color-neutral-400);
+  color: var(--color-alert-400);
   font-family: var(--secondary-font-family);
-  font-size: var(--text-md);
+  font-size: var(--text-xs);
   font-style: normal;
   font-weight: var(--medium);
-  line-height: calc(var(--text-md) * 24 / 16);
+  line-height: calc(var(--text-xs) * 24 / 16);
+  flex: 1 0 0;
 }
 
 .infoLink {
   text-decoration: underline;
   cursor: pointer;
+  color: var(--color-primary-200);
   padding-left: 5px;
 
   &:hover {
@@ -93,8 +95,11 @@
 }
 
 .infoIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 16px;
   height: 16px;
-  padding-top: 5px;
-  font-weight: bold;
+  font-weight: var(--bold);
+  margin-top: 5px;
 }
