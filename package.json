@@ -359,7 +359,9 @@
     "vite": "^5.2.8",
     "vite-plugin-svgr": "^2.2.2"
   },
-  "optionalDependencies": {},
+  "optionalDependencies": {
+    "@hyperplay/proxy-server": "^0.0.4"
+  },
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
     "allowScripts": {
