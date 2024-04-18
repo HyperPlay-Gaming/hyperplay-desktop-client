@@ -145,7 +145,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     )
   }
 
-  if (!quests?.length){
+  if (!quests?.length) {
     return null
   }
 
