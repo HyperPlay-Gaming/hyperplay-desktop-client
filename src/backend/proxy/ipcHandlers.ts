@@ -1,22 +1,23 @@
 import { backendEvents } from 'backend/backend_events'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { clipboard, ipcMain } from 'electron'
-import {
-  baseUri,
-  getConnectionUri,
-  provider,
-  initBackendEvents,
-  connectedProvider
-} from '@hyperplay/providers'
 import { JsonRpcCallback } from 'common/types'
-import { logError, logInfo } from 'backend/logger/logger'
-import { HyperPlayAPI } from '@hyperplay/providers/dist/types'
+import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { extensionProvider } from 'backend/hyperplay-extension-helper/extensionProvider'
 import { updatePopupInOverlay } from 'backend/hyperplay-overlay'
 import { trackEvent } from 'backend/metrics/metrics'
 import defaultProviderStore from './provider_store'
 
-initBackendEvents(backendEvents, trackEvent)
+async function init() {
+  try {
+    const providers = await import('@hyperplay/providers')
+    providers.initBackendEvents(backendEvents, trackEvent)
+  } catch (err) {
+    logError(`Error initializing providers ${err}`, LogPrefix.HyperPlay)
+  }
+}
+
+init()
 
 ipcMain?.handle(
   'getConnectionUris',
@@ -25,20 +26,21 @@ ipcMain?.handle(
     providerSelection: PROVIDERS,
     isBootstrapping = false
   ): Promise<string> {
-    const api: HyperPlayAPI = {
+    const api: any = {
       backendEvents,
       updatePopupInOverlay,
       logError,
       logInfo,
       extensionProvider
     }
-    const baseUri = await getConnectionUri(
+    const providers = await import('@hyperplay/providers')
+    const baseUri = await providers.getConnectionUri(
       providerSelection,
       isBootstrapping,
       api
     )
     const proxyServer = await import('@hyperplay/proxy-server')
-    proxyServer.setProvider(provider)
+    proxyServer.setProvider(providers.provider)
     return baseUri
   }
 )
@@ -66,8 +68,9 @@ ipcMain.on('enableOnEvents', (ev, topic) => {
 // so we catch and return the error object, then check and rethrow in preload
 ipcMain.handle('providerRequest', async (ev, args) => {
   try {
+    const providers = await import('@hyperplay/providers')
     // this will actually call request on the wrapped EIP1193 provider, not the deprecated send method
-    const result = await provider.send(
+    const result = await providers.provider.send(
       args.method,
       args.params ? args.params : []
     )
@@ -78,8 +81,9 @@ ipcMain.handle('providerRequest', async (ev, args) => {
 })
 
 ipcMain.handle('sendRequest', async (ev, args: unknown[]) => {
+  const providers = await import('@hyperplay/providers')
   // this will actually call request on the wrapped EIP1193 provider, not the deprecated send method
-  const result = await provider.send('send', args)
+  const result = await providers.provider.send('send', args)
   return result
 })
 
@@ -87,7 +91,8 @@ ipcMain.handle(
   'sendAsyncRequest',
   /* eslint-disable-next-line */
   async (ev, payload: any, callback: JsonRpcCallback) => {
-    const result = await provider.send(
+    const providers = await import('@hyperplay/providers')
+    const result = await providers.provider.send(
       payload.method,
       payload.params !== undefined ? payload.params : []
     )
@@ -96,12 +101,14 @@ ipcMain.handle(
   }
 )
 
-ipcMain.on('copyWalletConnectBaseURIToClipboard', () => {
-  if (baseUri) clipboard.writeText(baseUri)
+ipcMain.on('copyWalletConnectBaseURIToClipboard', async () => {
+  const providers = await import('@hyperplay/providers')
+  if (providers.baseUri) clipboard.writeText(providers.baseUri)
 })
 
 ipcMain.handle('getConnectedProvider', async () => {
-  return connectedProvider
+  const providers = await import('@hyperplay/providers')
+  return providers.connectedProvider
 })
 
 ipcMain.handle('getCurrentWeb3Provider', async () => {

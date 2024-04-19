@@ -6,6 +6,7 @@ import {
   defineConfig,
   externalizeDepsPlugin
 } from 'electron-vite'
+import { statSync } from 'fs'
 
 const srcAliases = ['backend', 'frontend', 'common'].map((aliasName) => {
   return {
@@ -13,6 +14,22 @@ const srcAliases = ['backend', 'frontend', 'common'].map((aliasName) => {
     replacement: join(__dirname, 'src', aliasName)
   }
 })
+
+// only set alias if the proxy-server optional package was not added
+try {
+  statSync(join(__dirname, 'node_modules', '@hyperplay', 'proxy-server'))
+} catch (err) {
+  srcAliases.push(
+    {
+      find: '@hyperplay/providers',
+      replacement: join(__dirname, 'src', 'empty.js')
+    },
+    {
+      find: '@hyperplay/proxy-server',
+      replacement: join(__dirname, 'src', 'empty.js')
+    }
+  )
+}
 
 const dependenciesToNotExternalize = ['@hyperplay/check-disk-space']
 
