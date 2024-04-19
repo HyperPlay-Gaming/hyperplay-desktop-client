@@ -1906,16 +1906,20 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
 
-"@hyperplay/providers@file:../../hyperplay/providers":
-  version "0.0.2"
+"@hyperplay/providers@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/providers/-/providers-0.0.3.tgz#f915c73d0387c02ef61c4ebc39100d443067d844"
+  integrity sha512-2jz/WFyvPdnES+hqTkWPuqNG0KdSuNxHIvPUbhhFHARH4/ZGmaoePGIGd/fsnmD8z9Vokff9NG4DHtaCuN6DKQ==
   dependencies:
     "@metamask/sdk" "^0.18.5"
     "@types/qrcode" "^1.5.5"
     "@walletconnect/ethereum-provider" "^2.12.2"
     qrcode "^1.5.3"
 
-"@hyperplay/proxy-server@file:../../hyperplay/proxy-server":
+"@hyperplay/proxy-server@^0.0.5":
   version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@hyperplay/proxy-server/-/proxy-server-0.0.5.tgz#ce625dc1e3f8e40ae989cf8ba13ad1679ba7eb79"
+  integrity sha512-mFKPNc6pB+VcG0tEt2O9bXTlq7q3trLdke0jhvHG9zeb98CqZuS/wkSkDZ9vruX/n2Q8kg5JbFU6WtjKYzFzHg==
   dependencies:
     "@mantleio/sdk" "^0.2.2"
     "@mysten/sui.js" "^0.48.1"
