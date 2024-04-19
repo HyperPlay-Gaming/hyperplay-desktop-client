@@ -118,7 +118,6 @@ import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
-import * as ProxyServer from './hyperplay-proxy-server/proxy'
 import {
   initOnlineMonitor,
   isOnline,
@@ -186,8 +185,19 @@ import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
 import 'backend/hyperplay-achievements'
 import 'backend/utils/auto_launch'
+import * as proxyServer from '@hyperplay/proxy-server'
 
-ProxyServer.serverStarted.then(() => console.log('Server started'))
+async function startProxyServer() {
+  try {
+    proxyServer.initServer(undefined)
+    console.log('Server started')
+    logInfo('Proxy server started', LogPrefix.HyperPlay)
+  } catch (err) {
+    logError(`Error starting proxy server ${err}`, LogPrefix.HyperPlay)
+  }
+}
+
+startProxyServer()
 
 let sentryInitialized = false
 

@@ -171,6 +171,8 @@
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@hyperplay/check-disk-space": "^3.5.2",
+    "@hyperplay/providers": "D:\\a_repos\\hyperplay\\providers",
+    "@hyperplay/proxy-server": "D:\\a_repos\\hyperplay\\proxy-server",
     "@hyperplay/ui": "^1.2.7",
     "@mantine/carousel": "^7.5.1",
     "@mantine/core": "^7.5.1",
@@ -359,9 +361,7 @@
     "vite": "^5.2.8",
     "vite-plugin-svgr": "^2.2.2"
   },
-  "optionalDependencies": {
-    "@hyperplay/proxy-server": "^0.0.4"
-  },
+  "optionalDependencies": {},
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
     "allowScripts": {
