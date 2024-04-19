@@ -173,6 +173,7 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
+import 'backend/proxy/ipcHandlers.ts'
 
 import './ipcHandlers'
 import './ipcHandlers/checkDiskSpace'
