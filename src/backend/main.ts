@@ -186,10 +186,10 @@ import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
 import 'backend/hyperplay-achievements'
 import 'backend/utils/auto_launch'
-import * as proxyServer from '@hyperplay/proxy-server'
 
 async function startProxyServer() {
   try {
+    const proxyServer = await import('@hyperplay/proxy-server')
     proxyServer.initServer(undefined)
     console.log('Server started')
     logInfo('Proxy server started', LogPrefix.HyperPlay)

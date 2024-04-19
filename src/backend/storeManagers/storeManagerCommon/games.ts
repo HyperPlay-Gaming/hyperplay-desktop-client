@@ -33,7 +33,6 @@ import { domainsAreEqual } from 'common/utils'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { controlWindow } from 'backend/hyperplay-overlay/model'
 import { initOverlayRenderState } from 'backend/hyperplay-overlay'
-import * as proxyServer from '@hyperplay/proxy-server'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -65,6 +64,7 @@ const openNewBrowserGameWindow = async (
 ): Promise<boolean> => {
   let connectedProvider = PROVIDERS.UNCONNECTED
   try {
+    const proxyServer = await import('@hyperplay/proxy-server')
     connectedProvider = proxyServer.getProvider()
   } catch (err) {
     logError(`Error importing proxy server ${err}`, LogPrefix.HyperPlay)

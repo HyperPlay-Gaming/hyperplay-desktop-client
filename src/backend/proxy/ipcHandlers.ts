@@ -11,7 +11,6 @@ import {
 import { JsonRpcCallback } from 'common/types'
 import { logError, logInfo } from 'backend/logger/logger'
 import { HyperPlayAPI } from '@hyperplay/providers/dist/types'
-import { callOrSendContract, setProvider } from '@hyperplay/proxy-server'
 import { extensionProvider } from 'backend/hyperplay-extension-helper/extensionProvider'
 import { updatePopupInOverlay } from 'backend/hyperplay-overlay'
 import { trackEvent } from 'backend/metrics/metrics'
@@ -38,7 +37,8 @@ ipcMain?.handle(
       isBootstrapping,
       api
     )
-    setProvider(provider)
+    const proxyServer = await import('@hyperplay/proxy-server')
+    proxyServer.setProvider(provider)
     return baseUri
   }
 )
@@ -109,5 +109,6 @@ ipcMain.handle('getCurrentWeb3Provider', async () => {
 })
 
 ipcMain.handle('callOrSendContract', async (e, ...args) => {
-  return callOrSendContract(...args)
+  const proxyServer = await import('@hyperplay/proxy-server')
+  return proxyServer.callOrSendContract(...args)
 })
