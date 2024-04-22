@@ -803,26 +803,29 @@ ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 
 /// IPC handlers begin here.
 
-ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
-  let oldGames: string[] = []
-  const { autoUpdateGames } = GlobalConfig.get().getSettings()
-  for (const runner in libraryManagerMap) {
-    let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
-    if (autoUpdateGames) {
-      gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
+ipcMain.handle(
+  'checkGameUpdates',
+  async (e, runners: Runner[]): Promise<string[]> => {
+    let oldGames: string[] = []
+    const { autoUpdateGames } = GlobalConfig.get().getSettings()
+    for (const runner of runners) {
+      let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
+      if (autoUpdateGames) {
+        gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
+      }
+      oldGames = [...oldGames, ...gamesToUpdate]
     }
-    oldGames = [...oldGames, ...gamesToUpdate]
-  }
 
-  sendGameUpdatesNotifications().catch((e) =>
-    logError(
-      `Something went wrong sending update notifications: ${e}`,
-      LogPrefix.Backend
+    sendGameUpdatesNotifications().catch((e) =>
+      logError(
+        `Something went wrong sending update notifications: ${e}`,
+        LogPrefix.Backend
+      )
     )
-  )
 
-  return oldGames
-})
+    return oldGames
+  }
+)
 
 ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
 
