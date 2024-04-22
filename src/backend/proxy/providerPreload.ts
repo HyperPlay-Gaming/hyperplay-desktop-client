@@ -2,7 +2,8 @@ import { RequestArguments } from 'common/typedefs/ipcBridge'
 import { JsonRpcCallback } from 'common/types'
 import { contextBridge, ipcRenderer, webFrame } from 'electron'
 
-/* Extension must be removed prior to loading a page with this preload script.
+/**
+ * @dev Extension must be removed prior to loading a page with this preload script.
  * Otherwise window.ethereum in the MM content script will replace the window.ethereum exposed here
  */
 interface onEventsEnabledMap {
@@ -122,7 +123,6 @@ function initProvider() {
       }
 
       windowAny.ethereum.on('accountsChanged', (accounts: string[]) => {
-        // let's leave this log in for now it will be useful for debugging
         console.log('accounts changed', accounts)
         windowAny.ethereum.selectedAddress = accounts[0]
         windowAny.ethereum.accounts = accounts
