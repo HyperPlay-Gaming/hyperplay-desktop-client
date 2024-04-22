@@ -275,7 +275,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   runWineCommand: (
     args: WineCommandArgs
   ) => Promise<{ stdout: string; stderr: string }>
-  checkGameUpdates: () => Promise<string[]>
+  checkGameUpdates: (runners: Runner[]) => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
   updateAll: () => Promise<({ status: 'done' | 'error' | 'abort' } | null)[]>
   getMaxCpus: () => number
