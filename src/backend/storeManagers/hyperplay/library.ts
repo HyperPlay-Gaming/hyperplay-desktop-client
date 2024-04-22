@@ -188,6 +188,11 @@ export async function listUpdateableGames(): Promise<string[]> {
   const updateableGames: string[] = []
   const currentHpLibrary = hpLibraryStore.get('games', [])
 
+  logInfo(
+    `Checking for updateable games in HyperPlay Library`,
+    LogPrefix.HyperPlay
+  )
+
   currentHpLibrary.map((val) => {
     if (
       val.install.platform === 'web' ||
@@ -226,6 +231,11 @@ export async function listUpdateableGames(): Promise<string[]> {
   function gameIsInstalled(val: GameInfo) {
     return Object.keys(val.install).length > 0
   }
+
+  logInfo(
+    `Found ${updateableGames.length} updateable games in HyperPlay Library`,
+    LogPrefix.HyperPlay
+  )
 
   return updateableGames
 }
