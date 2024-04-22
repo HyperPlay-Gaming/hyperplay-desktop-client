@@ -29,6 +29,7 @@
         "status": "Status",
         "title": "This game includes anticheat software"
     },
+    "back_to_game": "Back to game",
     "box": {
         "cache-cleared": {
             "message": "HyperPlay cache cleared.",
@@ -452,7 +453,6 @@
             "FAILED": "Custom network canceled",
             "INITIATED": "Custom network request"
         },
-        "closeOverlay": "Press {{overlayKeyMod}} + X to close the overlay",
         "description": {
             "CONFIRMED": "The transaction was successfully confirmed!",
             "FAILED": "The transaction was canceled or not submitted, please try again",
@@ -645,6 +645,15 @@
     "please-wait": "Please wait...",
     "profile": "Profile",
     "progress": "Progress",
+    "quest": {
+        "associatedGames": "Associated games",
+        "claimAll": "Claim all",
+        "connectSteamAccount": "Connect Steam account",
+        "linkAccount": "Link your Steam account to check eligibility.",
+        "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
+        "reputation": "Reputation",
+        "reward": "Reward"
+    },
     "queue": {
         "label": {
             "canceled": "Canceled",
