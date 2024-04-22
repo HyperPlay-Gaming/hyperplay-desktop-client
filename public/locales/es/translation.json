@@ -977,5 +977,15 @@
             "message": "Configuración de la capa de compatibilidad por defecto",
             "title": "Compatibilidad"
         }
-    }
+    },
+    "quest": {
+        "associatedGames": "Juegos asociados",
+        "claimAll": "Reclamar todo",
+        "reputation": "Reputación",
+        "reward": "Recompensa",
+        "connectSteamAccount": "Conectar a una cuenta de Steam",
+        "linkAccount": "Vincula tu cuenta de Steam para verificar la elegibilidad.",
+        "needMoreAchievements": "Necesitas haber completado\n{{percent}}% de los logros en uno de estos juegos."
+    },
+    "back_to_game": "Volver al juego"
 }
