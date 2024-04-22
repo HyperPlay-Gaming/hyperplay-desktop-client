@@ -113,11 +113,16 @@ class LibraryState {
 
   async refresh(library?: Runner | 'all', checkUpdates = true): Promise<void> {
     if (checkUpdates) {
-      try {
-        this.gameUpdates = await window.api.checkGameUpdates()
-      } catch (error) {
-        window.api.logError(`${error}`)
-      }
+      const hpUpdates = await window.api.checkGameUpdates(['hyperplay'])
+      this.gameUpdates = [...this.gameUpdates, ...hpUpdates]
+      window.api
+        .checkGameUpdates(['legendary', 'gog', 'nile'])
+        .then((otherUpdates) => {
+          this.gameUpdates = [...this.gameUpdates, ...otherUpdates]
+        })
+        .catch((error) => {
+          window.api.logError(`${error}`)
+        })
     }
 
     this.hyperPlayLibrary = hyperPlayLibraryStore.get('games', [])
