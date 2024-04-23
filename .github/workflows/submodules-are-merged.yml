@@ -20,9 +20,6 @@ jobs:
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
-      - name: Check proxy server
-        id: proxyDiff
-        run: cd src/backend/hyperplay-proxy-server && echo "PROXY_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
       - name: Check extension helper
         id: extDiff
         run: cd src/backend/hyperplay-extension-helper && echo "EXT_HELPER_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
