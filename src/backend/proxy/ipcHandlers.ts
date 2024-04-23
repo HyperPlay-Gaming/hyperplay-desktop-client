@@ -26,6 +26,7 @@ ipcMain?.handle(
     providerSelection: PROVIDERS,
     isBootstrapping = false
   ): Promise<string> {
+    /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     const api: any = {
       backendEvents,
       updatePopupInOverlay,
