@@ -6,7 +6,11 @@ import React, {
   useState
 } from 'react'
 import WalletOption from '../components/walletOption'
-import { ConnectionRequestRejectedType, PROVIDERS, WalletConnectedType } from 'common/types/proxy-types'
+import {
+  ConnectionRequestRejectedType,
+  PROVIDERS,
+  WalletConnectedType
+} from 'common/types/proxy-types'
 // import './index.css'
 import { MMTransparent, WCBlue } from 'frontend/assets/hyperplay'
 import { Images } from '@hyperplay/ui'
@@ -29,7 +33,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ONBOARDING_SCREEN } from '../types'
 import emailSubscriptionState from '../../../state/EmailSubscriptionState'
-
 
 const wait = async (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms))
