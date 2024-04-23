@@ -35,10 +35,10 @@ export const gameManagerMap: Record<Runner, GameManager> = {
 
 export const libraryManagerMap: Record<Runner, LibraryManager> = {
   hyperplay: HyperPlayLibraryManager,
-  sideload: SideloadLibraryManager,
-  gog: GOGLibraryManager,
   legendary: LegendaryLibraryManager,
-  nile: NileLibraryManager
+  gog: GOGLibraryManager,
+  nile: NileLibraryManager,
+  sideload: SideloadLibraryManager
 }
 
 function getDMElement(gameInfo: GameInfo, appName: string) {
