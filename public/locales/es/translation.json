@@ -19,7 +19,7 @@
     },
     "box": {
         "cache-cleared": {
-            "message": "Caché de Heroic borrada.",
+            "message": "Caché de HyperPlay borrada.",
             "title": "Caché borrado"
         },
         "choose": "Elegir",
@@ -67,7 +67,7 @@
             },
             "update": {
                 "title": "Error al actualizar",
-                "message": "¡Algo salió mal con la actualización! Desinstale y reinstale HyperPlay manualmente!"
+                "message": "¡Algo ha ido mal con la actualización!. Por favor, desinstala manualmente y vuelve a instalar HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -89,8 +89,8 @@
                 "changelog": "Abrir registro de cambios",
                 "detail": "¿Quiere descargar la actualización en segundo plano?",
                 "message": "¡Hay una nueva versión disponible!",
-                "message-finished": "¿Quieres reiniciar Heroic ahora?",
-                "title": "Lanzador de Juegos Heroicos",
+                "message-finished": "¿Quieres reiniciar HyperPlay ahora?",
+                "title": "Iniciador de juegos HyperPlay",
                 "title-finished": "Actualización finalizada"
             }
         },
@@ -107,7 +107,7 @@
         },
         "reset-app": {
             "question": {
-                "message": "¿Estás seguro de que quieres reiniciar HyperPlay? Esto eliminará todos los ajustes y el caché, pero no eliminará los juegos instalados ni las credenciales de Epic. Las versiones portátiles (AppImage, WinPortable, ...) de hyperplay necesitan ser reiniciadas manualmente después.",
+                "message": "¿Estás seguro de que quieres reiniciar HyperPlay? Esto eliminará todos los ajustes y el caché, pero no eliminará los juegos instalados ni las credenciales de Epic. Las versiones portables (AppImage, WinPortable, ...) de HyperPlay necesitan ser reiniciadas manualmente después.",
                 "title": "Reset HyperPlay"
             }
         },
@@ -176,7 +176,8 @@
         "syncing": "Sincronizando",
         "unsync": "Desincronizar",
         "download": "Descargar",
-        "continue": "Continuar"
+        "continue": "Continuar",
+        "update": "Actualizar"
     },
     "controller": {
         "hints": {
@@ -216,7 +217,7 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Tiempo estimado"
+        "ETA": "Tiempo Estimado"
     },
     "epic": {
         "offline-notification-body": "¡Puede que algunos servicios no funcionen correctamente si no estás conectado a los servidores de Epic Games!",
@@ -259,7 +260,7 @@
         "esync": "Esync intenta reducir la sobrecarga de wineserver en juegos con intenso uso de CPU. Activarlo puede mejorar el rendimiento.",
         "fsync": "Fsync intenta reducir la sobrecarga de wineserver en juegos con uso intensivo de CPU. Activarlo puede mejorar el rendimiento en kernels de Linux que lo soporten.",
         "game_language": {
-            "fallback": "Dejar en blanco para utilizar el lenguaje de Heroic.",
+            "fallback": "Dejar en blanco para utilizar el idioma de HyperPlay.",
             "in_game_config": "No todos los juegos soportan esta configuración, algunos tienen configuración del lenguage dentro del juego.",
             "valid_codes": "Códigos de lenguaje válidos varian dependiendo del juego."
         },
@@ -275,23 +276,24 @@
         "preferSystemLibs": "Versiones custom de Wine (Wine-GE, Wine-Lutris) incluyen sus propias librerías para sus dependencias. Al activar esta opción, esa librarías son ignoradas y Wine cargará las librarías del sistema en su lugar. Advertencia! Pueden ocurrir errores si las dependencias no se cumplen.",
         "primerun": "Utiliza una tarjeta gráfica dedicada para renderizar el juego en sistemas multi-GPU. Solo es necesario en portátiles o equipos de sobremesa para juegos que utilicen una GPU headless para el renderizado (NVIDIA Optimus, AMD CrossFire)",
         "steam_path": {
-            "info": "Esta ruta permite a Heroic determinar qué versión de Proton utiliza Steam, para añadir juegos que no son de Steam a Steam."
+            "info": "Esta ruta permite a HyperPlay determinar qué versión de Proton utiliza Steam, para añadir juegos que no sean de Steam a Steam."
         },
         "steamruntime": "Librerías provistas por Steam para ayudar a ejecutar juegos de Linux y Windows (Proton). Activarlas puede mejorar la compatibilidad.",
         "sync": {
-            "part1": "Heroic intenta adivinar la carpeta de guardado correcta y esto funcionará en la mayoría de los casos. En caso de que la carpeta sea incorrecta, usa la casilla de anulación para cambiarla.",
-            "part2": "En caso de que cambies el prefijo de la carpeta para Wine o Proton, necesitarás comprobar la ruta de nuevo ya que Proton usa un prefijo (/pfx) y nombre de usuario (steamuser) diferentes. Así que puedes simplemente borrar la ruta actual salir de la página de configuración de sincronización y volver de nuevo para que Heroic adivine la carpeta una vez más con el prefijo correcto.",
+            "part1": "HyperPlay intenta adivinar la carpeta de guardado correcta y esto funcionará en la mayoría de los casos. En caso de que la carpeta sea incorrecta, utilice la casilla de anulación para cambiarla.",
+            "part2": "En caso de que cambies el prefijo de la carpeta para Wine o Proton, necesitarás comprobar la ruta de nuevo ya que Proton usa un prefijo (/pfx) y nombre de usuario (steamuser) diferentes. Así que puedes simplemente borrar la ruta actual salir de la página de configuración de sincronización y volver de nuevo para que HyperPlay adivine la carpeta una vez más con el prefijo correcto.",
             "part3": "Sincronización manual: elija Descargar para descargar los juegos guardados en la nube. Subir para subir los locales a la nube. Forzar descarga y Carga forzada ignorarán la versión local o en la nube.",
             "part4": "Sincronizar guardados automáticamente sincronizará los guardados cada vez que inicie un juego y después de terminar de jugar."
         },
         "vkd3d": "VKD3D una capa de traducción basada en Vulkan para juegos que usan DirectX 12. Activarla puede mejorar el rendimiento significativamente. No tiene efecto en juegos viejos que usen DirectX.",
         "wine": {
-            "part1": "Heroic busca versiones de Wine, Proton y CrossOver en las siguientes carpetas:",
+            "part1": "HyperPlay busca versiones de Wine, Proton y CrossOver en las siguientes carpetas:",
             "part2": "Para otros lugares, use un enlace simbólico a una de estas carpetas"
         },
         "disable_logs": "Active esta casilla de verificación para desactivar la mayoría de las escrituras en los archivos de registro (la información crítica siempre se registra). Asegúrese de DESACTIVAR esta configuración antes de informar cualquier problema.",
         "dxvknvapi": "DXVK-NVAPI es una implementación de NVAPI construida sobre DXVK y la NVAPI nativa de Linux, que permite el uso de DLSS en GPUs Nvidia.",
-        "dxvkfpslimit": "Establece un límite de fps para los juegos DXVK"
+        "dxvkfpslimit": "Establece un límite de fps para los juegos DXVK",
+        "msync": "El objetivo de Msync es reducir la sobrecarga del servidor de vinos en los juegos que consumen mucha CPU. Activarlo puede mejorar el rendimiento en varios juegos."
     },
     "info": {
         "hyperplay": {
@@ -318,7 +320,7 @@
         "wine-repfix": {
             "message": "Wine utiliza lo que se denomina un WINEPREFIX para encapsular las aplicaciones en Windows. Este prefijo contiene los archivos de configuración de Wine y una reproducción de la jerarquía de los archivos de C: (el disco principal en un Sistema Operativo Windows). En esta reproducción de la unidad C: se almacenan los archivos de guardado de tus juegos y las dependencias instaladas a través de winetricks."
         },
-        "wine-path-none-found": "No se ha encontrado ninguna versión de Wine, descargue una desde el Gestor de Wine",
+        "wine-path-none-found": "No se ha encontrado ninguna versión de Wine, descargue una desde el Gestor de compatibilidad",
         "wine-path-invalid": "La ruta de Wine no es válida, por favor seleccione otra."
     },
     "install": {
@@ -441,7 +443,7 @@
     "other": {
         "gogdl-version": "Versión de GOGDL: ",
         "legendary-version": "Versión de Legendary: ",
-        "weblate": "Ayuda a traducir Heroic.",
+        "weblate": "Ayuda a traducir HyperPlay.",
         "nile-version": "Versión del Nilo: "
     },
     "Other": "Other",
@@ -486,7 +488,7 @@
         "autosync": "Autosincronizar guardados",
         "autovkd3d": "Instalación/actualización automática de VKD3D en el prefijo",
         "change-target-exe": "Seleccione un EXE alternativo para ejecutar",
-        "checkForUpdatesOnStartup": "Buscar actualizaciones Heroic al iniciar",
+        "checkForUpdatesOnStartup": "Buscar actualizaciones de HyperPlay al iniciar",
         "crossover-version": "Versión de Crossover",
         "custom_themes_path": "Ruta de los temas personalizados",
         "customWineProton": "Rutas personalizadas de Wine o Proton",
@@ -494,7 +496,7 @@
         "default-install-path": "Ruta de instalación predeterminada",
         "default-steam-path": "Ruta de Steam por defecto",
         "defaultWinePrefix": "Establecer carpeta para nuevos prefijos de Wine",
-        "disable_controller": "Desactivar la navegación Heroic con el mando",
+        "disable_controller": "Desactivar la navegación de HyperPlay con el mando",
         "discordRPC": "Activar Discord Rich Presence",
         "download-no-https": "Descargar juegos sin HTTPS (útil para CDNs, ej: LanCache)",
         "egs-sync": "Sincronizar con juegos EGS",
@@ -507,14 +509,14 @@
             "disable": "Desactivar",
             "enable": "Activar",
             "install": "Instalar",
-            "installed": "La superposición EOS está instalada",
-            "installing": "Se está instalando la superposición de EOS...",
+            "installed": "Epic Overlay instalado",
+            "installing": "Se está instalando Epic Overlay...",
             "latestVersion": "Última versión: {{version}}",
-            "notInstalled": "La superposición EOS no está instalada",
-            "notInstalledMsg": "La superposición EOS no está instalada. ¿Desea instalarla ahora?",
+            "notInstalled": "Epic Overlay no está instalado",
+            "notInstalledMsg": "Epic Overlay no está instalada. ¿Desea instalarla ahora?",
             "notInstalledTitle": "Overlay no instalado",
             "remove": "Desinstalar",
-            "removeConfirm": "¿Estás seguro de que quieres desinstalar la superposición EOS?",
+            "removeConfirm": "¿Estás seguro de que quieres desinstalar Epic Overlay?",
             "removeConfirmTitle": "Confirmar remover el overlay",
             "updateNow": "Actualizar",
             "updating": "Actualizando..."
@@ -524,7 +526,7 @@
         "FsrSharpnessStrenght": "FSR Fuerza de Nitidez",
         "fsync": "Habilitar Fsync",
         "gamemode": "Usar GameMode (Feral Game Mode debe estar instalado)",
-        "language": "Elegir idioma de la aplicación",
+        "language": "Elegir el idioma",
         "library_top_option": {
             "disabled": "Desactivada",
             "favourites": "Juegos Favoritos",
@@ -541,7 +543,8 @@
             "no-file": "No se ha encontrado ningún archivo de registro",
             "show-in-folder": "Mostrar el archivo de registro en la carpeta",
             "instructions-part-02": "Para ayudarnos a diagnosticar y solucionar el problema lo antes posible, facilítenos toda la información posible, incluida una copia de sus registros. Nuestro equipo de soporte supervisará ambos canales y hará todo lo posible para responder a su problema lo antes posible. Gracias por su paciencia y comprensión mientras trabajamos para resolver cualquier problema que pueda encontrar.",
-            "instructions-part-01": "Si encuentras algún problema mientras usas HyperPlay, tenemos dos áreas designadas para informar de tus problemas en nuestro servidor de Discord. Si eres un jugador, por favor reporta cualquier problema visitando el foro de soporte al jugador. Si eres un desarrollador de juegos, por favor informa de cualquier problema visitando el foro de soporte para desarrolladores."
+            "instructions-part-01": "Si encuentras algún problema mientras usas HyperPlay, tenemos dos áreas designadas para informar de tus problemas en nuestro servidor de Discord. Si eres un jugador, por favor reporta cualquier problema visitando el foro de soporte al jugador. Si eres un desarrollador de juegos, por favor informa de cualquier problema visitando el foro de soporte para desarrolladores.",
+            "join-hyperplay-discord": "Únase a nuestro Discord"
         },
         "mangohud": "Habilitar Mangohud (es necesario instalar Mangohud)",
         "manualsync": {
@@ -555,7 +558,7 @@
         },
         "maxRecentGames": "Cantidad de jugados recientemente a mostrar",
         "maxworkers": "Número máximo de procesos al descargar",
-        "minimize-on-launch": "Minimizar Heroic tras el inicio del juego",
+        "minimize-on-launch": "Minimizar HyperPlay tras el inicio del juego",
         "offlinemode": "Ejecutar juego sin conexión",
         "prefered_language": "Lenguaje preferido (Código de Lenguage)",
         "preferSystemLibs": "Preferir librerías del sistema",
@@ -594,14 +597,15 @@
         },
         "dxvkfpslimit": "Limitar los FPS (DX9, 10 y 11)",
         "steamId": "ID de Steam",
-        "autoLaunchHyperPlay": "Inicio automático de HyperPlay"
+        "autoLaunchHyperPlay": "Inicio automático de HyperPlay",
+        "msync": "Activar Msync"
     },
     "settings": {
         "battlEyeRuntime": {
             "installing": "Instalando runtime de BattlEye...",
             "name": "Tiempo de ejecución del sistema antitrampas en BattlEye"
         },
-        "clear-cache": "Borrar la caché de Heroic",
+        "clear-cache": "Borrar la caché de HyperPlay",
         "copiedToClipboard": "¡Copiado en el portapapeles!",
         "copyToClipboard": "Copiar todas las configuraciones al portapapeles",
         "default_hint": "Los cambios de esta sección sólo se aplican como valores por defecto al instalar juegos. Si quieres cambiar los ajustes de un juego ya instalado, utiliza el botón Ajustes de la página del juego.",
@@ -734,7 +738,7 @@
         "manager": {
             "link": "Gestor de Wine",
             "not-found": "No se encontraron versiones de Wine. Haga clic en el icono de actualización para volver a intentarlo.",
-            "title": "Gestor de Wine",
+            "title": "Capa de compatibilidad ",
             "unzipping": "Descomprimiendo"
         },
         "release": "Fecha de lanzamiento",
@@ -764,11 +768,14 @@
             "walletSelection": {
                 "screens": {
                     "import": {
-                        "useRecoveryPhrase": "Acceso con una frase secreta de recuperación",
-                        "details": "Al importar, su instalación de MetaMask y    La configuración se importará a HyperPlay.",
+                        "useRecoveryPhrase": "Importar utilizando la frase de recuperación secret",
+                        "details": "Los navegadores que aparecen a continuación ya tienen MetaMask instalado. Elija el que desea importar.",
                         "cantFindProfile": "¿No encuentra el perfil de su navegador?",
                         "title": "Seleccione el navegador desde el que desea importar",
-                        "createNewWallet": "Crear un nuevo monedero con la extensión MM"
+                        "createNewWallet": "Crear un nuevo monedero con la extensión MM",
+                        "useRecoveryPhraseInfo": "Esta función está recomendada para usuarios avanzados y desarrolladores. Su frase secreta de recuperación se almacena localmente en MetaMask y nunca se comparte con HyperPlay.",
+                        "learnMore": "Más información.",
+                        "orWord": "O"
                     },
                     "scan": {
                         "title": "Escanea el código QR con ",
@@ -835,7 +842,8 @@
             },
             "error": {
                 "validation": "Código de acceso no válido"
-            }
+            },
+            "requirescode": "Esta actualización del juego requiere un código de acceso."
         },
         "buttons": {
             "noThanks": "No, gracias",
@@ -957,7 +965,11 @@
     "importGameErrorMessageExecutable": "No se encuentra el ejecutable del juego, no es posible importar el juego",
     "amazon": "Amazon",
     "gameUpdateNotifications": {
-        "title": "Actualizaciones del juego disponibles"
+        "title": "Actualizaciones del juego disponibles",
+        "body": {
+            "single": "Hay una actualización lista para {{gameName}}.",
+            "multiple": "{{gameName}} y otros juegos están listos para actualizarse."
+        }
     },
     "profile": "Perfil",
     "notification": {
@@ -965,5 +977,15 @@
             "message": "Configuración de la capa de compatibilidad por defecto",
             "title": "Compatibilidad"
         }
-    }
+    },
+    "quest": {
+        "associatedGames": "Juegos asociados",
+        "claimAll": "Reclamar todo",
+        "reputation": "Reputación",
+        "reward": "Recompensa",
+        "connectSteamAccount": "Conectar a una cuenta de Steam",
+        "linkAccount": "Vincula tu cuenta de Steam para verificar la elegibilidad.",
+        "needMoreAchievements": "Necesitas haber completado\n{{percent}}% de los logros en uno de estos juegos."
+    },
+    "back_to_game": "Volver al juego"
 }
