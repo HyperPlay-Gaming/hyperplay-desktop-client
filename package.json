@@ -361,7 +361,7 @@
   },
   "optionalDependencies": {
     "@hyperplay/providers": "^0.0.3",
-    "@hyperplay/proxy-server": "^0.0.5"
+    "@hyperplay/proxy-server": "^0.0.6"
   },
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
