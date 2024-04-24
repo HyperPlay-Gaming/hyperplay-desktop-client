@@ -321,6 +321,7 @@ export interface InstallParams extends InstallArgs {
 
 export interface UpdateArgs {
   siweValues?: SiweValues
+  accessCode?: string
 }
 
 export interface UpdateParams {

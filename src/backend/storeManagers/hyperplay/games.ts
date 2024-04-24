@@ -1393,7 +1393,7 @@ export async function update(
     path: gameInfo.install.install_path,
     platformToInstall: gameInfo.install.platform,
     channelName: gameInfo.install.channelName,
-    accessCode,
+    accessCode: args?.accessCode,
     updateOnly: true,
     siweValues: args?.siweValues
   })
