@@ -5,7 +5,7 @@ import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL } from 'common/constants'
 import { URLSearchParams } from 'url'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
-import './questsIpcHandlers'
+import './quests'
 
 const ACHIEVEMENTS_API_ENDPOINT = `${DEV_PORTAL_URL}api/achievements/v1`
 
