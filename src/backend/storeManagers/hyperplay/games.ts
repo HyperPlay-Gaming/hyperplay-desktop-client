@@ -69,12 +69,11 @@ import { DownloadItem, dialog } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
-import { valistBaseApiUrlv1 } from 'common/constants'
 import Store from 'electron-store'
 import i18next from 'i18next'
 import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
-import { DEV_PORTAL_URL } from 'common/constants'
+import { DEV_PORTAL_URL, valistBaseApiUrlv1 } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
 interface ProgressDownloadingItem {
@@ -649,17 +648,20 @@ async function getTokenGatedPlatforms(
 ): Promise<PlatformsMetaInterface> {
   const { address, message, signature } = siweValues
 
-  const validateResult = (
-    await axios.post<LicenseConfigValidateResult>(
-      `${valistBaseApiUrlv1}/license_contracts/validate`,
-      {
-        message,
-        signature,
-        address,
-        channel_id
-      }
-    )
-  ).data
+  const request = {
+    message,
+    signature,
+    address,
+    channel_id
+  }
+  const validateUrl = `${valistBaseApiUrlv1}/license_contracts/validate`
+  const validateResponse = await fetch(validateUrl, {
+    method: 'POST',
+    body: JSON.stringify(request)
+  })
+
+  const validateResult: LicenseConfigValidateResult =
+    await validateResponse.json()
 
   if (validateResult.valid !== true)
     throw `Address code ${address} is not valid for channel id ${channel_id}!`
