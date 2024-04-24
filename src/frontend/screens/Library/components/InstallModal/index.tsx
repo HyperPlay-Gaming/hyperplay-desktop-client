@@ -73,6 +73,22 @@ export default React.memo(function InstallModal({
   const selectedChannel = gameInfo?.channels?.[channelNameToInstall]
 
   const channelPlatforms = selectedChannel?.release_meta.platforms ?? []
+  let listingMarketplaceUrl = ''
+
+  /*
+   * This just returns the first token's marketplace url
+   * TODO: return the licensing config info from /listings endpoint,
+   * so we can link to the gating token's marketplace URL
+   */
+  if (
+    gameInfo &&
+    gameInfo.networks &&
+    gameInfo.networks.length > 0 &&
+    gameInfo.networks[0].marketplace_urls &&
+    gameInfo.networks[0].marketplace_urls[0]
+  ) {
+    listingMarketplaceUrl = gameInfo.networks[0].marketplace_urls[0]
+  }
   const hpPlatforms = Object.keys(channelPlatforms) as AppPlatforms[]
   const isHpGame = runner === 'hyperplay'
 
@@ -164,6 +180,8 @@ export default React.memo(function InstallModal({
     ? gameRequiresAccessCodes(gameInfo, channelNameToInstall)
     : false
 
+  const channelRequiresToken = !!selectedChannel?.license_config.tokens
+
   useEffect(() => {
     async function validateAccessCode() {
       if (selectedChannel?.channel_id !== undefined) {
@@ -229,8 +247,11 @@ export default React.memo(function InstallModal({
             gameInfo={gameInfo}
             crossoverBottle={crossoverBottle}
             channelNameToInstall={channelNameToInstall}
+            channelId={selectedChannel?.channel_id}
             accessCode={accessCode}
             enableCTAButton={enableCTAButton}
+            requiresToken={channelRequiresToken}
+            marketplaceUrl={listingMarketplaceUrl}
           >
             <PlatformSelection
               disabled={disabledPlatformSelection}
