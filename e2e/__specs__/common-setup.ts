@@ -53,26 +53,26 @@ export const launchApp = async () => {
   }
 
   // this pipes the main process std out to test std out
-  electronApp
-    .process()
-    .stdout?.on('data', (data) => console.log(`main process stdout: ${data}`))
-  electronApp
-    .process()
-    .stderr?.on('data', (error) => console.log(`main process stderr: ${error}`))
+  // electronApp
+  //   .process()
+  //   .stdout?.on('data', (data) => console.log(`main process stdout: ${data}`))
+  // electronApp
+  //   .process()
+  //   .stderr?.on('data', (error) => console.log(`main process stderr: ${error}`))
 
-  electronApp.on('window', async (page) => {
-    const filename = page.url()?.split('/').pop()
-    console.log(`Window opened: ${filename} page url ${page.url()}`)
+  // electronApp.on('window', async (page) => {
+  //   const filename = page.url()?.split('/').pop()
+  //   console.log(`Window opened: ${filename} page url ${page.url()}`)
 
-    // capture errors
-    page.on('pageerror', (error) => {
-      console.error(error)
-    })
-    // capture console messages
-    page.on('console', (msg) => {
-      console.log(msg.text())
-    })
-  })
+  //   // capture errors
+  //   page.on('pageerror', (error) => {
+  //     console.error(error)
+  //   })
+  //   // capture console messages
+  //   page.on('console', (msg) => {
+  //     console.log(msg.text())
+  //   })
+  // })
 
   const hpPagePromise = new Promise<Page>((res, rej) => {
     async function getPageTitle(page_i: Page) {
