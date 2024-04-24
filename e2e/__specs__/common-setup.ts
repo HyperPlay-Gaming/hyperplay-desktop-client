@@ -115,7 +115,20 @@ export const launchApp = async () => {
   console.log('Electron app is ready for testing!')
 }
 
+async function launchMockBackend() {
+  try {
+    const mockBackend = await import('@hyperplay/mock-backend')
+    await mockBackend.connectedPromise
+  } catch (err) {
+    console.error(`Error launching mock backend for e2e test setup ${err}`)
+  }
+}
+
 export default function setup(timeout = 120000): void {
+  test.beforeAll(async () => {
+    await launchMockBackend()
+  })
+
   test.beforeEach(async () => {
     test.setTimeout(timeout)
     await launchApp()
