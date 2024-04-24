@@ -61,7 +61,6 @@ import {
   getGameProcessName,
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
-import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem, dialog } from 'electron'
@@ -72,6 +71,8 @@ import Store from 'electron-store'
 import i18next from 'i18next'
 import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
+import { DEV_PORTAL_URL } from 'common/constants'
+import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -590,11 +591,20 @@ export async function validateAccessCode({
     request.license_config_id = licenseConfigId
   }
 
-  const validateResult = await axios.post<LicenseConfigValidateResult>(
-    validateUrl,
-    request
-  )
-  return validateResult.data
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const validateResult = await fetch(validateUrl, {
+    method: 'POST',
+    headers: {
+      Cookie: cookieString
+    },
+    body: JSON.stringify(request)
+  })
+  const result: LicenseConfigValidateResult = await validateResult.json()
+  return result
 }
 
 async function getAccessCodeGatedPlatforms(

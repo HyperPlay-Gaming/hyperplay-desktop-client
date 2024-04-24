@@ -29,6 +29,7 @@
         "status": "Status",
         "title": "This game includes anticheat software"
     },
+    "back_to_game": "Back to game",
     "box": {
         "cache-cleared": {
             "message": "HyperPlay cache cleared.",
@@ -393,9 +394,12 @@
                     "import": {
                         "cantFindProfile": "Can't find your browser profile?",
                         "createNewWallet": "Create new MM extension wallet",
-                        "details": "By importing, your MetaMask installation and  settings will be imported into HyperPlay.",
+                        "details": "The browsers below already have MetaMask installed. Choose the one you’d like to import from.",
                         "title": "Select the browser to import from",
-                        "useRecoveryPhrase": "Access with secret recovery phrase"
+                        "useRecoveryPhrase": "Import Using Secret Recovery phrase",
+                        "useRecoveryPhraseInfo": "This feature is recommended for advanced users and developers. Your secret recovery phrase is stored locally in MetaMask and never shared with HyperPlay.",
+                        "learnMore": "Learn more.",
+                        "orWord": "OR"
                     },
                     "info": {
                         "createWalletCTA": "Create a wallet",
@@ -449,7 +453,6 @@
             "FAILED": "Custom network canceled",
             "INITIATED": "Custom network request"
         },
-        "closeOverlay": "Press {{overlayKeyMod}} + X to close the overlay",
         "description": {
             "CONFIRMED": "The transaction was successfully confirmed!",
             "FAILED": "The transaction was canceled or not submitted, please try again",

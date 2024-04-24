@@ -13,7 +13,10 @@ export default function useGetSteamGame(
           Number.parseInt(val.id)
         )
         if (!response) return null
-        return response
+        return response as {
+          name?: string
+          capsule_image?: string
+        }
       },
       staleTime: Infinity
     }))

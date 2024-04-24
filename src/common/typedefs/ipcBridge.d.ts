@@ -89,6 +89,7 @@ interface HyperPlaySyncIPCFunctions {
   toastCloseOnClick: (key: ToastKey) => void
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
+  toggleOverlay: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -274,6 +275,11 @@ interface HyperPlayAsyncIPCFunctions {
   claimQuestRewards: (
     questmeta: Quest
   ) => Promise<{ success: boolean; message: string }>
+  getQuestsForGame: (
+    projectId: string
+  ) => Promise<{ id: number; name: string }[]>
+  getQuest: (questId: number) => Promise<Quest>
+  getSteamGameMetadata: (gameId: number) => Promise<unknown>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -284,7 +290,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   runWineCommand: (
     args: WineCommandArgs
   ) => Promise<{ stdout: string; stderr: string }>
-  checkGameUpdates: () => Promise<string[]>
+  checkGameUpdates: (runners: Runner[]) => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
   updateAll: () => Promise<({ status: 'done' | 'error' | 'abort' } | null)[]>
   getMaxCpus: () => number

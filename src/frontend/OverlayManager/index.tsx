@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import BrowserGameStyles from './index.module.scss'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { observer } from 'mobx-react-lite'
@@ -6,6 +6,8 @@ import OverlayState from 'frontend/state/OverlayState'
 import WalletState from 'frontend/state/WalletState'
 import { BrowserGameProps } from './types'
 import { Overlay } from './Overlay'
+import { WebviewTag } from 'electron'
+import WebviewControls from 'frontend/components/UI/WebviewControls'
 
 const OverlayManager = observer(function ({
   appName,
@@ -29,6 +31,7 @@ const OverlayManager = observer(function ({
     style.width = '100%'
     style.height = '100%'
   }
+  const webviewRef = useRef<WebviewTag>(null)
 
   /* eslint-disable react/no-unknown-property */
   return (
@@ -41,19 +44,28 @@ const OverlayManager = observer(function ({
         <Overlay appName={appName} runner={runner} />
       ) : null}
       {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
-        <webview
-          src={url}
-          className={BrowserGameStyles.browserGame}
-          partition={
-            WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
-            PROVIDERS.WALLET_CONNECT
-              ? 'persist:InPageWindowEthereumExternalWallet'
-              : undefined
-          }
-          webpreferences="contextIsolation=true"
-          // setting = to {true} does not work :(
-          allowpopups={trueAsStr}
-        />
+        <div>
+          <WebviewControls
+            webview={webviewRef.current}
+            initURL={''}
+            openInBrowser={false}
+            disableUrl={true}
+          />
+          <webview
+            src={url}
+            className={BrowserGameStyles.browserGame}
+            partition={
+              WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
+              PROVIDERS.WALLET_CONNECT
+                ? 'persist:InPageWindowEthereumExternalWallet'
+                : undefined
+            }
+            webpreferences="contextIsolation=true"
+            // setting = to {true} does not work :(
+            allowpopups={trueAsStr}
+            ref={webviewRef}
+          />
+        </div>
       ) : null}
     </div>
   )

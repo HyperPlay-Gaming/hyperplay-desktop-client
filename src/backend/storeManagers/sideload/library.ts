@@ -79,7 +79,6 @@ export function installState(appName: string, state: boolean) {
 }
 
 export async function refresh() {
-  logWarning(`refresh not implemented on Sideload Library Manager`)
   return null
 }
 
@@ -98,7 +97,6 @@ export function getGameInfo(appName: string, forceReload?: boolean): GameInfo {
 }
 
 export async function listUpdateableGames(): Promise<string[]> {
-  logWarning(`listUpdateableGames not implemented on Sideload Library Manager`)
   return []
 }
 

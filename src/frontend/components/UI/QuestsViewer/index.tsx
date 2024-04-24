@@ -7,7 +7,6 @@ import {
   Game
 } from '@hyperplay/ui'
 import useGetQuests from 'frontend/hooks/useGetQuests'
-import { Quest } from 'common/types'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
@@ -54,28 +53,23 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   }
 
   let questDetails = null
-  const questMeta = questResult.data.data as Quest
+  const questMeta = questResult.data.data
 
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
   )
 
-  const session = useAuthSession()
-  const accounts = session.data?.linkedAccounts
-  const steamIsLinked = accounts?.has('steam')
-
   const steamGames: Game[] =
     getSteamGameResult?.data?.map((val, index) => ({
-      /* eslint-disable-next-line */
-      // @ts-ignore
-      title: val.data?.name ?? index,
-      /* eslint-disable-next-line */
-      // @ts-ignore
+      title: val.data?.name ?? index.toString(),
       imageUrl: val.data?.capsule_image ?? '',
       loading: val.isLoading || val.isFetching
     })) ?? []
 
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
+  const session = useAuthSession()
+  const accounts = session.data?.linkedAccounts
+  const steamIsLinked = accounts?.has('steam')
   const i18n = {
     reward: t('quest.reward', 'Reward'),
     associatedGames: t('quest.associatedGames', 'Associated games'),
@@ -96,10 +90,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     }
   }
 
-  if (
-    selectedQuestId !== null &&
-    Object.hasOwn(questResult?.data?.data ?? {}, 'name')
-  ) {
+  if (selectedQuestId !== null && questMeta !== undefined) {
     const questDetailsProps: QuestDetailsProps = {
       title: questMeta.name,
       description: questMeta.description,
@@ -113,22 +104,19 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       },
       rewards: questMeta.rewards.map((val) => ({
         title: val.name,
-        imageUrl: ''
+        imageUrl: val.image_url
       })),
       i18n,
-      onClaimClick: async () => {
-        if (!steamIsLinked) {
-          window.api.signInWithProvider('steam')
-          return
-        }
-        const result = await window.api.claimQuestRewards(questMeta)
-        console.log('claim result ', result)
-      },
+      onClaimClick: () => console.log('claim clicked for ', questMeta.name),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
     }
     questDetails = (
-      <QuestDetails {...questDetailsProps} className={styles.questDetails} />
+      <QuestDetails
+        {...questDetailsProps}
+        className={styles.questDetails}
+        ctaDisabled={true}
+      />
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
@@ -144,7 +132,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       },
       i18n,
       rewards: [],
-      onClaimClick: () => console.log('claim clicked for ', questMeta.name),
+      onClaimClick: () => console.log('claim clicked for ', questMeta?.name),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
     }
@@ -152,8 +140,13 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       <QuestDetails
         {...emptyQuestDetailsProps}
         className={styles.questDetails}
+        ctaDisabled={true}
       />
     )
+  }
+
+  if (!quests?.length) {
+    return null
   }
 
   return (
