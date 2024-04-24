@@ -223,9 +223,8 @@ async function updateQueueElement(params: InstallParams): Promise<{
   }
 
   try {
-    const { status } = await gameManagerMap[runner].update(
-      appName, {
-      siweValues
+    const { status } = await gameManagerMap[runner].update(appName, {
+      siweValues,
       accessCode: params.accessCode
     })
 
