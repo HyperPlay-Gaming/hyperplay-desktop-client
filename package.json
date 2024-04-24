@@ -174,6 +174,7 @@
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/contracts": "^1.0.1",
     "@hyperplay/ui": "^1.2.32",
+    "@hyperplay/utils": "^0.0.2",
     "@mantine/carousel": "^7.5.1",
     "@mantine/core": "^7.5.1",
     "@mantine/dropzone": "^7.5.1",
