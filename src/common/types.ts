@@ -26,16 +26,6 @@ export type {
   PlatformConfig
 } from '@valist/sdk/dist/typesShared'
 
-declare module '@valist/sdk/dist/typesApi' {
-  interface Channel {
-    license_config: {
-      id: number
-      access_codes: boolean
-      tokens: boolean
-    }
-  }
-}
-
 export interface LicenseConfigValidateResult {
   valid: boolean
   platforms: PlatformsMetaInterface
@@ -100,6 +90,7 @@ export interface AppSettings extends GameSettings {
   altLegendaryBin: string
   autoUpdateGames: boolean
   checkForUpdatesOnStartup: boolean
+  autoLaunchHyperPlay: boolean
   checkUpdatesInterval: number
   customThemesPath: string
   customWinePaths: string[]
@@ -206,6 +197,7 @@ export interface GameSettings {
   enableEsync: boolean
   enableFSR: boolean
   enableFsync: boolean
+  enableMsync: boolean
   enviromentOptions: EnviromentVariable[]
   ignoreGameUpdates: boolean
   language: string
@@ -248,6 +240,7 @@ export type Status =
   | 'extracting'
   | 'paused'
   | 'preparing'
+  | 'distributables'
 
 export interface GameStatus {
   appName: string
@@ -415,6 +408,7 @@ export interface CallRunnerOptions {
   logMessagePrefix?: string
   logFile?: string
   verboseLogFile?: string
+  logSanitizer?: (line: string) => string
   env?: Record<string, string> | NodeJS.ProcessEnv
   wrappers?: string[]
   onOutput?: (output: string, child: ChildProcess) => void
@@ -912,3 +906,33 @@ export interface RunnerBin {
 }
 
 export type OverlayType = 'native' | 'browser' | 'mainWindow'
+
+export interface Reward {
+  id: number
+  amount_per_user: number
+  chain_id: number
+  marketplace_url: string | null
+  reward_type: string
+  name: string
+  contract_address: string
+  decimals: number
+  /* eslint-disable-next-line */
+  token_ids: any[]
+  image_url: string
+}
+
+export interface Quest {
+  id: number
+  project_id: string
+  name: string
+  type: string
+  status: string
+  description: string
+  rewards: Reward[]
+  /* eslint-disable-next-line */
+  deposit_contracts: any[]
+  eligibility: {
+    completion_threshold: number
+    steam_games: { id: string }[]
+  }
+}

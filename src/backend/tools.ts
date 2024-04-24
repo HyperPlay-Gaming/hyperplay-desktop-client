@@ -393,15 +393,12 @@ export const DXVK = {
 
 export const Winetricks = {
   download: async () => {
-    if (!isLinux) {
+    if (isWindows) {
       return
     }
 
-    const linuxUrl =
+    const url =
       'https://raw.githubusercontent.com/Winetricks/winetricks/master/src/winetricks'
-    const macUrl =
-      'https://raw.githubusercontent.com/The-Wineskin-Project/winetricks/macOS/src/winetricks'
-    const url = isMac ? macUrl : linuxUrl
     const path = `${toolsPath}/winetricks`
 
     if (!isOnline()) {
@@ -432,7 +429,7 @@ export const Winetricks = {
     }
 
     return new Promise<void>((resolve) => {
-      const winetricks = `${toolsPath}/winetricks`
+      const winetricks = join(toolsPath, 'winetricks')
 
       const { winePrefix, wineBin } = getWineFromProton(
         wineVersion,

@@ -21,10 +21,10 @@ import {
   constructAndUpdateRPC,
   getSteamRuntime,
   isEpicServiceOffline,
-  searchForExecutableOnPath,
   quoteIfNecessary,
   errorHandler,
-  removeQuoteIfNecessary
+  removeQuoteIfNecessary,
+  isMacSonomaOrHigher
 } from './utils'
 import {
   logDebug,
@@ -64,6 +64,7 @@ import * as VDF from '@node-steam/vdf'
 import { readFileSync } from 'fs'
 import { LegendaryCommand } from './storeManagers/legendary/commands'
 import { commandToArgsArray } from './storeManagers/legendary/library'
+import { searchForExecutableOnPath } from './utils/os/path'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -96,7 +97,7 @@ async function prepareLaunch(
 
   // Figure out where MangoHud/GameMode are located, if they're enabled
   let mangoHudCommand: string[] = []
-  let gameModeBin = ''
+  let gameModeBin: string | null = null
   if (gameSettings.showMangohud) {
     const mangoHudBin = await searchForExecutableOnPath('mangohud')
     if (!mangoHudBin) {
@@ -173,7 +174,7 @@ async function prepareLaunch(
     success: true,
     rpcClient,
     mangoHudCommand,
-    gameModeBin,
+    gameModeBin: gameModeBin ?? undefined,
     steamRuntime,
     offlineMode
   }
@@ -389,16 +390,25 @@ function setupWineEnvVars(
       )
     }
   }
+  if (isMac && gameSettings.enableMsync) {
+    ret.WINEMSYNC = '1'
+    // due to a bug on D3DMetal Esync needs to be enabled as well for msync to work
+    if (gameSettings.wineVersion.type === 'toolkit') {
+      ret.WINEESYNC = '1'
+    }
+  }
+
   if (gameSettings.enableEsync && wineVersion.type !== 'proton') {
     ret.WINEESYNC = '1'
   }
+
   if (!gameSettings.enableEsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_ESYNC = '1'
   }
-  if (gameSettings.enableFsync && wineVersion.type !== 'proton') {
+  if (isLinux && gameSettings.enableFsync && wineVersion.type !== 'proton') {
     ret.WINEFSYNC = '1'
   }
-  if (!gameSettings.enableFsync && wineVersion.type === 'proton') {
+  if (isLinux && !gameSettings.enableFsync && wineVersion.type === 'proton') {
     ret.PROTON_NO_FSYNC = '1'
   }
   if (gameSettings.autoInstallDxvkNvapi && wineVersion.type === 'proton') {
@@ -502,7 +512,7 @@ function setupWrappers(
  * @returns true if the wine version exists, false if it doesn't
  */
 export async function validWine(
-  wineVersion: WineInstallation
+  wineVersion: WineInstallation | undefined
 ): Promise<boolean> {
   if (!wineVersion) {
     return false
@@ -517,6 +527,13 @@ export async function validWine(
   const { bin, wineserver, type } = wineVersion
   const necessary = type === 'wine' ? [bin, wineserver] : [bin]
   const haveAll = necessary.every((binary) => existsSync(binary as string))
+
+  if (isMac && type === 'toolkit') {
+    const isGPTKCompatible = await isMacSonomaOrHigher()
+    if (!isGPTKCompatible) {
+      return false
+    }
+  }
 
   // if wine version does not exist, use the default one
   if (!haveAll) {
@@ -835,13 +852,17 @@ async function callRunner(
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
       const dataStr = data.toString()
+      const stringToLog = options?.logSanitizer
+        ? options.logSanitizer(data)
+        : data
+
       if (!logsDisabled) {
         if (options?.logFile) {
-          appendFileSync(options.logFile, data)
+          appendFileSync(options.logFile, stringToLog)
         }
 
         if (options?.verboseLogFile) {
-          appendFileSync(options.verboseLogFile, data)
+          appendFileSync(options.verboseLogFile, stringToLog)
         }
       }
 
@@ -854,13 +875,17 @@ async function callRunner(
 
     child.stderr.setEncoding('utf-8')
     child.stderr.on('data', (data: string) => {
+      const stringToLog = options?.logSanitizer
+        ? options.logSanitizer(data)
+        : data
+
       if (!logsDisabled) {
         if (options?.logFile) {
-          appendFileSync(options.logFile, data)
+          appendFileSync(options.logFile, stringToLog)
         }
 
         if (options?.verboseLogFile) {
-          appendFileSync(options.verboseLogFile, data)
+          appendFileSync(options.verboseLogFile, stringToLog)
         }
       }
 

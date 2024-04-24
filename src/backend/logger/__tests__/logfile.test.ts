@@ -135,21 +135,14 @@ describe('logger/logfile.ts', () => {
     expect(graceful_fs.existsSync(yearOutdatedLogFile)).toBeFalsy()
   }) */
 
-  /*   test('getLogFile all possible values', () => {
-    // get global current logfile
-    expect(logfile.getLogFile({})).toBe('current.log')
-    // get global last logfile
-    expect(logfile.getLogFile({ defaultLast: true })).toBe('last.log')
-
+  test('getLogFile all possible values', () => {
+    expect(logfile.getLogFile('hyperplay')).toMatch(/hyperplay.*\.log$/)
+    expect(logfile.getLogFile('legendary')).toMatch(/legendary.*\.log$/)
+    expect(logfile.getLogFile('gogdl')).toMatch(/gogdl.*\.log$/)
+    expect(logfile.getLogFile('nile')).toMatch(/nile.*\.log$/)
     // get game log
-    expect(logfile.getLogFile({ appName: 'MyApp' })).toBe(
-      '/tmp/appData/hyperplay/GamesConfig/MyApp-lastPlay.log'
-    )
-    // get game log and isDefaultLast has no impact
-    expect(logfile.getLogFile({ appName: 'MyApp', defaultLast: true })).toBe(
-      '/tmp/appData/hyperplay/GamesConfig/MyApp-lastPlay.log'
-    )
-  }) */
+    expect(logfile.getLogFile('MyApp')).toMatch(/MyApp.*\.log$/)
+  })
 
   test('appendMessageToLogFile success', () => {
     const appendFileSyncSpy = jest

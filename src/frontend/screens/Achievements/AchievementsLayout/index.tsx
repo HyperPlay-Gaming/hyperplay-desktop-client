@@ -26,7 +26,10 @@ export default React.memo(function AchievementsLayout({
     <SettingsContext.Provider value={contextValues}>
       <Background style={{ position: 'absolute' }}></Background>
       <div className={`contentContainer ${styles.achievementsContainer}`}>
-        <Grid className={`${styles.gridItems}`}>
+        <Grid
+          className={`${styles.gridItems}`}
+          classNames={{ inner: styles.gridItems }}
+        >
           <Grid.Col span={4}>
             <Flex
               direction="column"

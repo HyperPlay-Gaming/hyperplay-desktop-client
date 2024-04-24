@@ -300,7 +300,8 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-invalid": "O caminho do Wine é inválido, por favor selecione outro."
     },
     "install": {
         "path": "Select Install Path"
@@ -314,7 +315,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "Alfabético A-Z",
+        "alphabeticalZA": "Alfabética Z-A"
     },
     "loading": {
         "default": "Carregando",
@@ -354,11 +357,13 @@
             "reparing": "Terminou o Reparo"
         },
         "install": {
-            "canceled": "Instalação cancelada",
+            "canceled": "Instalação Cancelada",
             "error": "Instalação falhada",
             "finished": "Instalação concluída",
             "imported": "Game Imported",
-            "startInstall": "Installation Started"
+            "startInstall": "Installation Started",
+            "stopped": "Instalação interrompida",
+            "paused": "Instalação Pausada"
         },
         "moved": "Movido com sucesso",
         "moving": "Moving Game",
@@ -368,9 +373,11 @@
         },
         "uninstalled": "Desinstalado",
         "update": {
-            "canceled": "Updated Cancelado",
+            "canceled": "Atualização cancelada",
             "finished": "Update Finalizado",
-            "started": "Update Started"
+            "started": "Update Started",
+            "stopped": "Atualização interrompida",
+            "paused": "Atualização pausada"
         }
     },
     "offline-message": {
@@ -442,7 +449,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Pausar a descarga",
+            "resume": "Retomar a descarga"
         }
     },
     "Recent": "Played Recently",
@@ -510,7 +519,9 @@
             "instructions_title": "How to report a problem?",
             "last-log": "Last Log",
             "no-file": "No log file found",
-            "show-in-folder": "Show log file in folder"
+            "show-in-folder": "Show log file in folder",
+            "instructions-part-01": "Se encontrar algum problema ao usar o Hyper Play, temos duas áreas designadas para relatar os seus problemas no nosso servidor Discord. Se é um jogador, por favor relate quaisquer problemas visitando o Fórum de suporte ao jogador. Se é um programador de jogos, por favor relate quaisquer problemas visitando o dev-support-forum.",
+            "instructions-part-02": "Para nos ajudar a diagnosticar e corrigir o problema o mais rapidamente possível, forneça o máximo de informações possível, incluindo uma cópia dos seus registos. A nossa equipa de apoio monitorará ambos os canais e fará o possível para responder ao seu problema o mais rápido possível. Obrigado pela sua paciência e compreensão enquanto trabalhamos para resolver quaisquer problemas que possa encontrar."
         },
         "mangohud": "Habilitar Mangohud (necessita mangohud instalado)",
         "manualsync": {
@@ -556,7 +567,8 @@
         "disable_logs": "Desativar registros",
         "addgamestoapplications": "Adicionar jogos a aplicativos automaticamente",
         "showMetalOverlay": "Mostrar sobreposição de estatísticas",
-        "alt-nile-bin": "Escolha um binário alternativo do Nilo"
+        "alt-nile-bin": "Escolha um binário alternativo do Nilo",
+        "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -598,12 +610,15 @@
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
-        }
+        },
+        "gamesSettings": "Configurações de jogos"
     },
     "Settings": "Configurações",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Biblioteca",
+        "store": "Loja"
     },
     "status": {
         "installing": "Installing",
@@ -671,13 +686,143 @@
         "warning": "Isso abrirá um link externo."
     },
     "dlc": {
-        "installDlcs": "Instalar todos os DLCs",
-        "actions": "Ações",
         "installDlcs": "Instalar todas as DLCs",
+        "actions": "Ações",
         "noDlcFound": "Nenhum DLC encontrado",
-        "title": "Title"
+        "title": "Title",
+        "size": "Tamanho"
     },
     "amazon": "Amazonas",
     "Amazon Games": "Amazon Games",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "info": {
+                        "skip": "Pular por enquanto",
+                        "createWalletDescription": "Clique em \"Criar uma carteira\" abaixo se não tiver uma carteira ou quiser criar uma nova:",
+                        "digitalAssets": {
+                            "details": "As carteiras são usadas para enviar, receber, armazenar e exibir ativos digitais, como tokens e NFTs.",
+                            "title": "Um local para os seus ativos digitais"
+                        },
+                        "login": {
+                            "title": "Uma nova maneira de fazer login",
+                            "details": "Uma alternativa para criar contas e palavras-passe em todos os sites, basta conectar a sua carteira."
+                        },
+                        "title": "O que é uma carteira?",
+                        "createWalletCTA": "Crie uma carteira"
+                    },
+                    "scan": {
+                        "details": "Crie um canal de comunicação criptografado. As suas chaves nunca serão partilhadas com o HyperPlay.",
+                        "title": "Escaneie o QR com ",
+                        "updateWarning": "Está com problemas? Verifique se o MetaMask está atualizado.",
+                        "dontHaveWallet": "Não tem carteira?",
+                        "getMetamask": "Obter MetaMask"
+                    },
+                    "import": {
+                        "cantFindProfile": "Não é possível encontrar o perfil do seu navegador?",
+                        "createNewWallet": "Criar carteira de extensão MM",
+                        "title": "Selecione o navegador do qual importar",
+                        "details": "Ao importar, a instalação e as configurações do MetaMask serão importadas para o HyperPlay.",
+                        "useRecoveryPhrase": "Acesso com a frase secreta de recuperação"
+                    }
+                },
+                "pleaseConnect": "Conecte a sua carteira ou descarregue a app móvel Netmask para obter\n        iniciado:",
+                "title": "Conexões de carteira"
+            },
+            "connectAgain": "se conectar novamente",
+            "welcome": {
+                "title": "Bem-vindo ao acesso antecipado do HyperPlay!",
+                "text": {
+                    "construction": "O HyperPlay ainda está em desenvolvimento.",
+                    "bugs": "Observe que o HyperPlay é um alfa público. Muitos recursos ainda estão\n           em desenvolvimento e haverá bugs.",
+                    "communityCTA_1": "Adoraríamos o seu comentário e que se juntasse a nós na nossa",
+                    "communityCTA_2": "comunidade. Juntos, vamos moldar o futuro dos jogos!",
+                    "description": "HyperPlay é um launcher de jogos e agregador de loja de jogos do\n          futuro. Com o HyperPlay, pode carregar a sua carteira, tokens e ativos\n          em cada jogo. HyperPlay suporta toda a biblioteca do Epic\n          Loja, GOG e a nossa própria loja HyperPlay. Ao usar o HyperPlay, concorda\n          à nossa"
+                }
+            },
+            "analytics": {
+                "neverCollectIP": " coletar o seu endereço IP completo;",
+                "hyperplayWill": "O HyperPlay irá:",
+                "neverCollectPersonal": " coletar chaves, morada, saldos, hashes ou qualquer informação pessoal;",
+                "privacyCaption": "Estes dados são agregados e, por conseguinte, anónimos para efeitos do Regulamento Geral Sobre a proteção de dados (UE) 2016/679. Para mais informações sobre as nossas práticas de privacidade, consulte o nosso ",
+                "privacyPolicyHere": "Política de privacidade aqui.",
+                "anonymized": "Enviar interação anónima de cliques e jogos;",
+                "body": "A HyperPlay gostaria de coletar dados de uso para perceber melhor como os nossos utilizadores interagem com a aplicação. Essas informações nos ajudam a perceber como usa a aplicação e nos permite fazer o HyperPlay ainda melhor para si.",
+                "neverSellData": " vender dados com fins lucrativos. Nunca!",
+                "optOut": "Permitir-lhe sempre optar por não participar através das Definições;",
+                "title": "Ajude-nos a melhorar o Hyper Play!"
+            },
+            "connectionConnected": {
+                "description": "A sua carteira está conectada. Está pronto para jogar.",
+                "title": "Carteira conectada!"
+            },
+            "terms": "Termos do serviço.",
+            "connectionCanceled": {
+                "description": "Confirme a solicitação de conexão na sua carteira móvel para prosseguir.",
+                "title": "Conexão cancelada!"
+            }
+        },
+        "gamecard": {
+            "installing": "A descarregar...",
+            "extracting": "A extrair..."
+        },
+        "logOut": "Desconectar",
+        "misc": "Nunca",
+        "otp": "Palavra-passe única",
+        "turnAnalyticsOn": "Ativar",
+        "viewPortfolio": "Ver portfólio",
+        "publicAlpha": "Alfa público",
+        "turnAnalyticsOff": "Desativar",
+        "currentWallet": "Carteira atual",
+        "Sync": "Sincronizar",
+        "analyticsOff": "A análise está desactivada",
+        "analyticsOn": "A análise está ativada",
+        "buttons": {
+            "agree": "Concordo",
+            "noThanks": "Não obrigado"
+        },
+        "copyUrl": "Copiar URL",
+        "discordApp": "Discord",
+        "folder": "Pasta"
+    },
+    "hyperplayOverlay": {
+        "description": {
+            "CONFIRMED": "A transação foi confirmada com sucesso!",
+            "INITIATED": "A confirmação da carteira está pendente na sua carteira móvel",
+            "PENDING": "A aguardar confirmação do blockchain. Avisaremos quando for confirmado",
+            "FAILED": "A transação foi cancelada ou não foi enviada, tente novamente"
+        },
+        "chainRequest": {
+            "CONFIRMED": "Rede personalizada adicionada",
+            "FAILED": "Rede personalizada cancelada",
+            "INITIATED": "Solicitação de rede personalizada"
+        },
+        "extensionNotification": {
+            "TITLE": "Transação solicitada"
+        },
+        "greeting": {
+            "title": "Overlay Hyper Play"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Assinatura enviada",
+            "FAILED": "Assinatura interrompida",
+            "INITIATED": "Pedido de assinatura pendente"
+        },
+        "txnRequest": {
+            "CONFIRMED": "Operação confirmada",
+            "FAILED": "Operação interrompida",
+            "INITIATED": "Pedido de operação pendente",
+            "PENDING": "Transação enviada"
+        },
+        "walletWatch": {
+            "FAILED": "Pedido de token personalizado cancelado",
+            "INITIATED": "Adicionar pedido de token personalizado pendente",
+            "CONFIRMED": "Token personalizado adicionado"
+        }
+    },
+    "wiki_info": {
+        "not_found": "Não conseguimos encontrar informações extras."
+    }
 }

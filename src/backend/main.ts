@@ -1,14 +1,15 @@
-import { initExtension } from 'backend/hyperplay-extension-helper/ipcHandlers/index'
+import {
+  initExtension,
+  resetExtension
+} from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
   AppSettings,
-  ExecResult,
   GamepadInputEvent,
   GameSettings,
   Runner,
-  StatusPromise,
-  WineCommandArgs
+  StatusPromise
 } from 'common/types'
 import * as path from 'path'
 import { join } from 'path'
@@ -50,26 +51,24 @@ import { NileUser } from './storeManagers/nile/user'
 import setup from './storeManagers/gog/setup'
 import nileSetup from './storeManagers/nile/setup'
 import {
-  checkWineBeforeLaunch,
   clearCache,
-  downloadDefaultWine,
   execAsync,
   getGOGdlBin,
-  getGogdlVersion,
   getLegendaryBin,
-  getLegendaryVersion,
-  getNileVersion,
   getPlatformName,
-  getShellPath,
   getStoreName,
-  getSystemInfo,
-  handleExit,
   isEpicServiceOffline,
+  handleExit,
+  checkRosettaInstall,
   openUrlOrFile,
   resetApp,
+  setGPTKDefaultOnMacOS,
   showAboutWindow,
   showItemInFolder,
-  wait
+  wait,
+  getShellPath,
+  checkWineBeforeLaunch,
+  downloadDefaultWine
 } from './utils'
 import {
   configPath,
@@ -89,6 +88,7 @@ import {
   isCLIFullscreen,
   isCLINoGui,
   isFlatpak,
+  isMac,
   isSteamDeckGameMode,
   onboardLocalStore,
   publicDir,
@@ -128,7 +128,6 @@ import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { addRecentGame } from './recent_games/recent_games'
 import { callAbortController } from './utils/aborthandler/aborthandler'
 import { getDefaultSavePath } from './save_sync'
-import si from 'systeminformation'
 import { initTrayIcon } from './tray_icon/tray_icon'
 import {
   createMainWindow,
@@ -152,7 +151,8 @@ import {
   autoUpdate,
   gameManagerMap,
   initStoreManagers,
-  libraryManagerMap
+  libraryManagerMap,
+  sendGameUpdatesNotifications
 } from './storeManagers'
 import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
@@ -176,6 +176,7 @@ import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
 
 import './ipcHandlers'
+import './ipcHandlers/checkDiskSpace'
 
 import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
@@ -183,7 +184,9 @@ import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/side
 import { backendEvents } from 'backend/backend_events'
 import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
-import 'backend/hyperplay-achievements'
+import 'backend/ipcHandlers/quests'
+import 'backend/ipcHandlers/achievements'
+import 'backend/utils/auto_launch'
 
 ProxyServer.serverStarted.then(() => console.log('Server started'))
 
@@ -209,6 +212,9 @@ import {
 } from 'backend/storeManagers/legendary/library'
 import { uuid } from 'short-uuid'
 import { LDEnvironmentId, ldOptions } from './ldconstants'
+import getPartitionCookies from './utils/get_partition_cookies'
+import { runWineCommandOnGame } from 'backend/storeManagers/hyperplay/games'
+import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
 
 let ldMainClient: LDElectron.LDElectronMainClient
 
@@ -238,34 +244,49 @@ ipcMain.on('focusMainWindow', () => {
 })
 
 async function completeHyperPlayQuest() {
-  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
-
-  const authSession = session.fromPartition('persist:auth')
-
-  const cookies = await authSession.cookies.get({
-    url: DEV_PORTAL_URL
-  })
-
-  const cookieString = cookies
-    .map((cookie) => `${cookie.name}=${cookie.value}`)
-    .join('; ')
-
-  const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
-    method: 'POST',
-    headers: {
-      Cookie: cookieString
-    }
-  })
-
-  if (!response.ok) {
-    const error = await response.json()
-    logError(
-      `Failed to complete summon task: ${
-        error?.message ?? response.statusText
-      }`,
-      LogPrefix.Backend
-    )
+  const completeHpSummonQuestIsActive = ldMainClient.variation(
+    'complete-hp-summon-quest',
+    false
+  )
+  if (!completeHpSummonQuestIsActive) {
     return
+  }
+  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
+  try {
+    const cookieString = await getPartitionCookies({
+      partition: 'persist:auth',
+      url: DEV_PORTAL_URL
+    })
+
+    const response = await fetch(`${DEV_PORTAL_URL}/api/hyperplay-quest`, {
+      method: 'POST',
+      headers: {
+        Cookie: cookieString
+      }
+    })
+
+    if (!response.ok) {
+      const error = await response.json()
+      logError(
+        `Failed to complete summon task: ${
+          error?.message ?? response.statusText
+        }`,
+        LogPrefix.Backend
+      )
+      trackEvent({
+        event: 'HyperPlay Summon Quest Failed'
+      })
+      return
+    }
+
+    trackEvent({
+      event: 'HyperPlay Summon Quest Succeeded'
+    })
+  } catch (err) {
+    logError(`Error completing Summon quest ${err}`, LogPrefix.HyperPlay)
+    trackEvent({
+      event: 'HyperPlay Summon Quest Failed'
+    })
   }
 
   logInfo(`Completed HyperPlay Summon task`, LogPrefix.Backend)
@@ -296,18 +317,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
     )
     mainWindow.setFullScreen(true)
   }
-
-  setTimeout(async () => {
-    // Will download Wine if none was found
-    const availableWine = await GlobalConfig.get().getAlternativeWine()
-    Promise.all([
-      DXVK.getLatest(),
-      Winetricks.download(),
-      !availableWine.length ? downloadDefaultWine() : null
-    ])
-  }, 2500)
-
-  GlobalConfig.get()
 
   mainWindow.setIcon(icon)
   app.setAppUserModelId('HyperPlay')
@@ -418,23 +427,27 @@ if (!gotTheLock) {
     const ses = session.fromPartition(
       'persist:InPageWindowEthereumExternalWallet'
     )
-    ses.setPreloads([path.join(__dirname, 'providerPreload.js')])
+    ses.setPreloads([path.join(__dirname, '../preload/providerPreload.js')])
 
     const authSession = session.fromPartition('persist:auth')
     authSession.setPreloads([
-      path.join(__dirname, 'providerPreload.js'),
-      path.join(__dirname, 'transparent_body_preload.js'),
-      path.join(__dirname, 'auth_provider_preload.js')
+      path.join(__dirname, '../preload/providerPreload.js'),
+      path.join(__dirname, '../preload/auth_provider_preload.js')
+    ])
+
+    const emailModalSession = session.fromPartition('persist:emailModal')
+    emailModalSession.setPreloads([
+      path.join(__dirname, '../preload/email_modal_provider_preload.js')
     ])
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
     hpStoreSession.setPreloads([
-      path.join(__dirname, 'hyperplay_store_preload.js'),
-      path.join(__dirname, 'webview_style_preload.js')
+      path.join(__dirname, '../preload/hyperplay_store_preload.js'),
+      path.join(__dirname, '../preload/webview_style_preload.js')
     ])
     const epicStoreSession = session.fromPartition('persist:epicstore')
     epicStoreSession.setPreloads([
-      path.join(__dirname, 'webview_style_preload.js')
+      path.join(__dirname, '../preload/webview_style_preload.js')
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
@@ -446,10 +459,6 @@ if (!gotTheLock) {
     initExtension()
 
     initOnlineMonitor()
-
-    getSystemInfo().then((systemInfo) =>
-      logInfo(`\n\n${systemInfo}\n`, LogPrefix.Backend)
-    )
 
     initImagesCache()
 
@@ -617,6 +626,22 @@ if (!gotTheLock) {
       }, 10000)
     }
 
+    // Will download Wine if none was found
+    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
+    const toolkitDownloaded = availableWine.some(
+      (wine) => wine.type === 'toolkit'
+    )
+    const shouldDownloadWine =
+      !availableWine.length || (isMac && !toolkitDownloaded)
+
+    Promise.all([
+      DXVK.getLatest(),
+      Winetricks.download(),
+      shouldDownloadWine ? downloadDefaultWine() : null,
+      isMac && checkRosettaInstall(),
+      isMac && !shouldDownloadWine && setGPTKDefaultOnMacOS()
+    ])
+
     // set initial zoom level after a moment, if set in sync the value stays as 1
     setTimeout(() => {
       const zoomFactor = configStore.get('zoomPercent', 100) / 100
@@ -644,12 +669,6 @@ ipcMain.once('loadingScreenReady', () => {
   logInfo('Loading Screen Ready', LogPrefix.Backend)
 })
 
-// eslint-disable-next-line @typescript-eslint/no-empty-function
-let resolveFrontendReady = () => {}
-export const frontendReady = new Promise<void>((res) => {
-  resolveFrontendReady = res
-})
-
 ipcMain.once('frontendReady', () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
   handleProtocol([openUrlArgument, ...process.argv])
@@ -659,7 +678,6 @@ ipcMain.once('frontendReady', () => {
   }, 5000)
 
   watchLibraryChanges()
-  resolveFrontendReady()
 })
 
 // Maybe this can help with white screens
@@ -750,29 +768,6 @@ ipcMain.on('showConfigFileInFolder', async (event, appName) => {
   return openUrlOrFile(path.join(gamesConfigPath, `${appName}.json`))
 })
 
-async function runWineCommandOnGame(
-  runner: string,
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  if (gameManagerMap[runner].isNative(appName)) {
-    logError('runWineCommand called on native game!', LogPrefix.Gog)
-    return { stdout: '', stderr: '' }
-  }
-  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
-  const gameSettings = await gameManagerMap[runner].getSettings(appName)
-
-  return runWineCommand({
-    gameSettings,
-    installFolderName: folder_name,
-    gameInstallPath: install.install_path,
-    commandParts,
-    wait,
-    protonVerb,
-    startFolder
-  })
-}
-
 // Calls WineCFG or Winetricks. If is WineCFG, use the same binary as wine to launch it to dont update the prefix
 ipcMain.handle('callTool', async (event, { tool, exe, appName, runner }) => {
   const gameSettings = await gameManagerMap[runner].getSettings(appName)
@@ -809,28 +804,35 @@ ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 
 /// IPC handlers begin here.
 
-ipcMain.handle('checkGameUpdates', async (): Promise<string[]> => {
-  let oldGames: string[] = []
-  const { autoUpdateGames } = GlobalConfig.get().getSettings()
-  for (const runner in libraryManagerMap) {
-    let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
-    if (autoUpdateGames) {
-      gamesToUpdate = autoUpdate(runner as Runner, gamesToUpdate)
+ipcMain.handle(
+  'checkGameUpdates',
+  async (e, runners: Runner[]): Promise<string[]> => {
+    let oldGames: string[] = []
+    const { autoUpdateGames } = GlobalConfig.get().getSettings()
+    for (const runner of runners) {
+      let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
+      if (autoUpdateGames) {
+        gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
+      }
+      oldGames = [...oldGames, ...gamesToUpdate]
     }
-    oldGames = [...oldGames, ...gamesToUpdate]
-  }
 
-  return oldGames
-})
+    sendGameUpdatesNotifications().catch((e) =>
+      logError(
+        `Something went wrong sending update notifications: ${e}`,
+        LogPrefix.Backend
+      )
+    )
+
+    return oldGames
+  }
+)
 
 ipcMain.handle('getEpicGamesStatus', async () => isEpicServiceOffline())
 
 ipcMain.handle('getMaxCpus', () => cpus().length)
 
 ipcMain.handle('getAppVersion', () => app.getVersion())
-ipcMain.handle('getLegendaryVersion', async () => getLegendaryVersion())
-ipcMain.handle('getGogdlVersion', async () => getGogdlVersion())
-ipcMain.handle('getNileVersion', getNileVersion)
 ipcMain.handle('isFullscreen', () => isSteamDeckGameMode || isCLIFullscreen)
 ipcMain.handle('isFlatpak', () => isFlatpak)
 ipcMain.handle('getGameOverride', async () => getGameOverride())
@@ -839,11 +841,6 @@ ipcMain.handle('getGameSdl', async (event, appName) => getGameSdl(appName))
 ipcMain.handle('getPlatform', () => process.platform)
 
 ipcMain.handle('showUpdateSetting', () => !isFlatpak)
-
-ipcMain.handle('getNumOfGpus', async (): Promise<number> => {
-  const { controllers } = await si.graphics()
-  return controllers.length
-})
 
 ipcMain.on('clearCache', (event) => {
   clearCache()
@@ -863,6 +860,10 @@ ipcMain.on('clearCache', (event) => {
 
 ipcMain.on('resetApp', async () => {
   resetApp()
+})
+
+ipcMain.on('resetExtension', async () => {
+  resetExtension()
 })
 
 ipcMain.on('createNewWindow', (e, url) => {
@@ -944,7 +945,7 @@ ipcMain.handle('authGOG', async (event, code) => GOGUser.login(code))
 ipcMain.handle('logoutLegendary', LegendaryUser.logout)
 ipcMain.on('logoutGOG', GOGUser.logout)
 ipcMain.handle('getLocalPeloadPath', async () => {
-  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
+  return fixAsarPath(join(publicDir, '../preload/webviewPreload.js'))
 })
 
 ipcMain.handle('getAmazonLoginData', NileUser.getLoginData)
@@ -1181,11 +1182,21 @@ ipcMain.handle(
       powerDisplayId = powerSaveBlocker.start('prevent-display-sleep')
     }
 
-    const systemInfo = await getSystemInfo()
-    const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
     const logFileLocation = getLogFileLocation(appName)
 
-    writeFileSync(
+    const systemInfo = await getSystemInfo()
+      .then(formatSystemInfo)
+      .catch((error) => {
+        logError(
+          ['Failed to fetch system information', error],
+          LogPrefix.Backend
+        )
+        return 'Error, check general log'
+      })
+    writeFileSync(logFileLocation, 'System Info:\n' + `${systemInfo}\n` + '\n')
+
+    const gameSettingsString = JSON.stringify(gameSettings, null, '\t')
+    appendFileSync(
       logFileLocation,
       'System Info:\n' +
         `${systemInfo}\n` +
@@ -1698,8 +1709,11 @@ ipcMain.handle(
 
 ipcMain.handle(
   'checkHyperPlayAccessCode',
-  async (_e, channelId: number, accessCode: string) => {
-    return HyperPlayGameManager.validateAccessCode(accessCode, channelId)
+  async (_e, licenseConfigId: number, accessCode: string) => {
+    return HyperPlayGameManager.validateAccessCode({
+      accessCode,
+      licenseConfigId
+    })
   }
 )
 
@@ -1989,3 +2003,12 @@ ipcMain.on('openAuthModalIfAppReloads', () => {
 ipcMain.on('killOverlay', () => {
   closeOverlay()
 })
+
+ipcMain.on('toggleOverlay', () => {
+  toggleOverlay()
+})
+/*
+ * INSERT OTHER IPC HANDLERS HERE
+ */
+
+import './storeManagers/legendary/eos_overlay/ipc_handler'

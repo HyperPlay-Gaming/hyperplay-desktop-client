@@ -11,7 +11,7 @@ import { app } from 'electron'
 import { existsSync, mkdirSync, readFileSync } from 'graceful-fs'
 import { GlobalConfig } from './config'
 import { TypeCheckedStoreBackend } from './electron_store'
-import { valistBaseApiUrlv1 } from 'common/constants'
+import { DEV_PORTAL_URL } from 'common/constants'
 
 const configStore = new TypeCheckedStoreBackend('configStore', {
   cwd: 'store'
@@ -126,7 +126,7 @@ export function getValistListingApiUrl(projectId: string) {
 }
 
 export function getValidateLicenseKeysApiUrl() {
-  return `${valistBaseApiUrlv1}/license_keys/validate`
+  return `${DEV_PORTAL_URL}api/v1/license_keys/validate`
 }
 
 /**

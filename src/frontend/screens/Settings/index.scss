@@ -36,6 +36,10 @@
   place-items: flex-start;
   width: 100%;
   padding-bottom: var(--space-xs);
+
+  .settingsTabList {
+    margin-bottom: var(--space-md);
+  }
 }
 
 .headerTitle {

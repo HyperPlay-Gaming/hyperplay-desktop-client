@@ -6,11 +6,12 @@ import { useTranslation } from 'react-i18next'
 
 import {
   Dropdown,
-  Tabs,
   Toggle,
   DropdownItemType,
   GenericDropdown,
-  Menu
+  Menu,
+  Tabs,
+  getTabsClassNames
 } from '@hyperplay/ui'
 import { Category } from 'frontend/types'
 import { observer } from 'mobx-react-lite'
@@ -47,10 +48,18 @@ export const LibraryTopBar = observer(
 
     return (
       <Tabs
-        onTabChange={(val: Category) => (libraryState.category = val)}
+        onChange={(val) => {
+          if (val !== null) {
+            libraryState.category = val as Category
+          }
+        }}
         defaultValue={category}
+        classNames={getTabsClassNames(
+          { list: styles.tabsList },
+          { list: 'outline' }
+        )}
       >
-        <Tabs.List className={styles.tabsList} type="outline">
+        <Tabs.List>
           <Tabs.Tab value="all">
             <div className="menu">{t('ALL', 'ALL')}</div>
           </Tabs.Tab>
@@ -80,16 +89,19 @@ export const LibraryTopBar = observer(
               options={filters}
               onItemChange={setSelectedFilter}
               selected={selectedFilter}
-              targetWidth={'275'}
+              targetWidth={275}
               dropdownButtonDivProps={{
                 className: 'body-sm'
+              }}
+              containerProps={{
+                className: styles.dropdownContainer
               }}
               classNames={{ item: 'body-sm' }}
               styles={{ dropdown: { gap: '0px' } }}
               menuItemsGap="0px"
             />
           </div>
-          <div>
+          <div className={styles.dropdownContainer}>
             <GenericDropdown
               target={
                 <GenericDropdown.GenericButton
@@ -98,6 +110,9 @@ export const LibraryTopBar = observer(
                   divProps={{ className: 'body-sm' }}
                 ></GenericDropdown.GenericButton>
               }
+              containerProps={{
+                className: styles.dropdownContainer
+              }}
               menuItemsGap="0px"
             >
               {otherFiltersData.map((val, index) => (

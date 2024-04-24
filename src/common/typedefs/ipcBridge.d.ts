@@ -48,6 +48,8 @@ import {
   NileUserData
 } from 'common/types/nile'
 import { ToastKey } from 'frontend/store/types'
+import { AuthSession } from '../types/auth'
+import type { SystemInformation } from 'backend/utils/systeminfo'
 
 /**
  * Some notes here:
@@ -78,6 +80,7 @@ interface HyperPlaySyncIPCFunctions {
   setQaToken: (qaToken: string) => void
   removeFromLibrary: (appName: string) => void
   openAuthModalIfAppReloads: () => void
+  openEmailModalIfAppReloads: () => void
   overlayReady: () => void
   updateOverlayWindow: (state: OverlayWindowState) => void
   toggleIsPopupOpen: () => void
@@ -85,6 +88,7 @@ interface HyperPlaySyncIPCFunctions {
   toastCloseOnClick: (key: ToastKey) => void
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
+  toggleOverlay: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -115,6 +119,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   showConfigFileInFolder: (appName: string) => void
   clearCache: (showDialog?: boolean) => void
   resetApp: () => void
+  resetExtension: () => void
   createNewWindow: (url: string) => void
   logoutGOG: () => void
   toggleVKD3D: (args: ToolArgs) => void
@@ -123,10 +128,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   showItemInFolder: (item: string) => void
   clipboardWriteText: (text: string) => void
   addNewApp: (args: SideloadGame) => void
-  showLogFileInFolder: (args: {
-    appName: string
-    defaultLast?: boolean
-  }) => void
+  showLogFileInFolder: (appNameOrRunner: string) => void
   addShortcut: (appName: string, runner: Runner, fromMenu: boolean) => void
   removeShortcut: (appName: string, runner: Runner) => void
   removeFromDMQueue: (appName: string) => void
@@ -140,11 +142,13 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   openGameInEpicStore: (url: string) => void
   resumeCurrentDownload: () => void
   cancelDownload: (removeDownloaded: boolean) => void
+  copySystemInfoToClipboard: () => void
   cancelExtraction: (appName: string) => void
   copyWalletConnectBaseURIToClipboard: () => void
   closeAuthModal: () => void
   'auth:accountConnected': () => void
   'auth:accountNotConnected': () => void
+  'auth:otpFinished': () => void
   focusMainWindow: () => void
 }
 
@@ -166,7 +170,7 @@ interface HyperPlayAsyncIPCFunctions {
   chromeWindowsGetCurrent: (
     queryOptions?: chrome.windows.QueryOptions,
     callback?: (window: chrome.windows.Window) => void
-  ) => Promise<chrome.windows.Window>
+  ) => Promise<string>
   chromeWindowsRemove: (windowId: number) => Promise<void>
   chromeWindowsGetAll: (
     queryOptions?: string,
@@ -237,18 +241,36 @@ interface HyperPlayAsyncIPCFunctions {
     totalPages: number
   }>
   getAchievementsStats: (options: PlayerOptions) => Promise<AchievementsStats>
-  syncAchievements: (options: PlayerOptions) => Promise<void>
+  syncAchievements: (options: PlayerOptions) => Promise<string>
+  getSyncProgress: (requestId: string) => Promise<number>
   checkHyperPlayAccessCode: (
-    channelId: number,
+    licenseConfigId: number,
     accessCode: string
   ) => Promise<LicenseConfigValidateResult>
-  shouldShowAchievements: () => Promise<boolean>
+  callOrSendContract: (
+    isCall: boolean,
+    req: ContractInteractionRequest
+  ) => Promise<{
+    ok: boolean
+    /* eslint-disable-next-line */
+    result?: any
+    status?: number
+    message?: string
+  }>
   get_wallet_state_address: () => Promise<string>
   get_wallet_state_isConnected: () => Promise<boolean>
   get_wallet_state_provider: () => Promise<PROVIDERS>
   get_wallet_state_otp: () => Promise<string>
   get_extension_state_isPopupOpen: () => Promise<boolean>
   getLDEnvConfig: () => Promise<LDEnv>
+  getAuthSession: () => Promise<AuthSession | null>
+  logOut: () => Promise<void>
+  updateAutoLaunch: () => Promise<void>
+  getQuestsForGame: (
+    projectId: string
+  ) => Promise<{ id: number; name: string }[]>
+  getQuest: (questId: number) => Promise<Quest>
+  getSteamGameMetadata: (gameId: number) => Promise<unknown>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -259,7 +281,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   runWineCommand: (
     args: WineCommandArgs
   ) => Promise<{ stdout: string; stderr: string }>
-  checkGameUpdates: () => Promise<string[]>
+  checkGameUpdates: (runners: Runner[]) => Promise<string[]>
   getEpicGamesStatus: () => Promise<boolean>
   updateAll: () => Promise<({ status: 'done' | 'error' | 'abort' } | null)[]>
   getMaxCpus: () => number
@@ -353,7 +375,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: 'sideload' | 'hyperplay'
   ) => Promise<boolean>
   isNative: (args: { appName: string; runner: Runner }) => boolean
-  getLogContent: (args: { appName: string; defaultLast?: boolean }) => string
+  getLogContent: (appNameOrRunner: string) => string
   installWineVersion: (
     release: WineVersionInfo
   ) => Promise<'error' | 'abort' | 'success'>
@@ -389,7 +411,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     status: ConnectivityStatus
     retryIn: number
   }
-  getNumOfGpus: () => Promise<number>
+  getSystemInfo: (cache?: boolean) => Promise<SystemInformation>
   removeRecent: (appName: string) => Promise<void>
   getWikiGameInfo: (
     title: string,

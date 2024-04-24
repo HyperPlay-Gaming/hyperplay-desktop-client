@@ -10,6 +10,7 @@ import StopInstallationModal from '../StopInstallationModal'
 import { downloadStatus } from '@hyperplay/ui/dist/components/DownloadToast'
 import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
 import DMQueueState from 'frontend/state/DMQueueState'
+import { isNotNative } from 'frontend/helpers/library'
 
 const nullProgress: InstallProgress = {
   bytes: '0',
@@ -21,7 +22,7 @@ export default function DownloadToastManager() {
   const [currentElement, setCurrentElement] = useState<DMQueueElement>()
   const [progress, setProgress] = useState<InstallProgress>(nullProgress)
   const [showDownloadToast, setShowDownloadToast] = useState(true)
-  const { showDialogModal } = useContext(ContextProvider)
+  const { showDialogModal, platform } = useContext(ContextProvider)
   const { t } = useTranslation('gamepage')
   const [showPlay, setShowPlay] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
@@ -32,6 +33,7 @@ export default function DownloadToastManager() {
     appName,
     gameInfo
   )
+  const installedPlatform = currentElement?.params.platformToInstall
   const isExtracting = status === 'extracting'
 
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
@@ -229,7 +231,8 @@ export default function DownloadToastManager() {
               t,
               runner,
               hasUpdate: false,
-              showDialogModal
+              showDialogModal,
+              isNotNative: isNotNative(platform, installedPlatform!)
             })
             window.api.trackEvent({
               event: 'DownloadToastInteraction',

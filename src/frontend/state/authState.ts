@@ -25,10 +25,6 @@ class AuthState {
     return this.signInModalOpen
   }
 
-  get isSignedIn() {
-    return this.signedIn
-  }
-
   get isQaModeActive() {
     return this.qaModeActive
   }
@@ -45,12 +41,12 @@ class AuthState {
     this.qaModeActive = true
   }
 
-  setSignedIn() {
-    this.signedIn = true
-  }
-
   setPendingSignatureRequest(pending: boolean) {
     this.pendingSignatureRequest = pending
+  }
+
+  enableOpenAuthModalOnAppReload() {
+    onboardingStore.set('openAuthModalIfAppReloads', true)
   }
 }
 

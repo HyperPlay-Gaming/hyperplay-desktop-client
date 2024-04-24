@@ -1,3 +1,4 @@
+import { HyperPlayDesignProvider } from '@hyperplay/ui'
 import { I18nextProvider, initReactI18next } from 'react-i18next'
 import HttpApi from 'i18next-http-backend'
 import React, { Suspense } from 'react'
@@ -5,7 +6,11 @@ import { createRoot } from 'react-dom/client'
 import i18next from 'i18next'
 import { initGamepad } from './helpers/gamepad'
 
+import '@mantine/carousel/styles.css'
+import '@mantine/core/styles.css'
+
 // keep @hyperplay/ui/index.css before index.scss until after frontend design rework
+// import HyperPlay styles after mantine to override their defaults with our design system
 import '@hyperplay/ui/style.css'
 import './index.scss'
 import Loading from './screens/Loading'
@@ -18,11 +23,12 @@ import { defaultThemes } from './components/UI/ThemeSelector'
 import '@fontsource/rajdhani'
 import '@fontsource/barlow'
 import StoreController from './store'
-
-initOnlineMonitor()
 import ViewManager from './ViewManager'
 import SentryHandler from './SentryHandler'
 import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk'
+import { QueryClient, QueryClientProvider } from 'react-query'
+
+initOnlineMonitor()
 
 window.addEventListener('error', (ev: ErrorEvent) => {
   window.api.logError(ev.error.stack)
@@ -105,6 +111,7 @@ i18next
     ]
   })
 
+const queryClient = new QueryClient()
 const container = document.getElementById('root')
 const root = createRoot(container!) // createRoot(container!) if you use TypeScript
 
@@ -118,16 +125,20 @@ const renderApp = async () => {
   root.render(
     <React.StrictMode>
       <StoreController />
-      <LDProvider>
-        <GlobalState>
-          <SentryHandler />
-          <I18nextProvider i18n={i18next}>
-            <Suspense fallback={<Loading />}>
-              <ViewManager />
-            </Suspense>
-          </I18nextProvider>
-        </GlobalState>
-      </LDProvider>
+      <QueryClientProvider client={queryClient}>
+        <LDProvider>
+          <HyperPlayDesignProvider forceColorScheme="dark">
+            <GlobalState>
+              <SentryHandler />
+              <I18nextProvider i18n={i18next}>
+                <Suspense fallback={<Loading />}>
+                  <ViewManager />
+                </Suspense>
+              </I18nextProvider>
+            </GlobalState>
+          </HyperPlayDesignProvider>
+        </LDProvider>
+      </QueryClientProvider>
     </React.StrictMode>
   )
 }

@@ -38,7 +38,7 @@ import React, {
 } from 'react'
 import { useTranslation } from 'react-i18next'
 import { configStore } from 'frontend/helpers/electronStores'
-import { AlertCard, Button } from '@hyperplay/ui'
+import { AlertCard, Button, Images } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
 import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
@@ -132,6 +132,7 @@ export default function DownloadDialog({
     useContext(ContextProvider)
 
   const isWin = platform === 'win32'
+  const isNotNative = platformToInstall === 'Windows' && !isWin
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
     | LegendaryInstallInfo
@@ -169,10 +170,12 @@ export default function DownloadDialog({
   const { i18n, t } = useTranslation('gamepage')
   const { t: tr } = useTranslation()
 
+  const diskSize = gameInstallInfo?.manifest?.disk_size || 0
+  const gameDownloadSize = gameInstallInfo?.manifest?.download_size || 0
   const uncompressedSize = useEstimatedUncompressedSize(
     platformToInstall,
-    gameInstallInfo?.manifest?.disk_size || 0,
-    gameInstallInfo?.manifest?.download_size || 0
+    diskSize,
+    gameDownloadSize
   )
 
   const haveSDL = sdls.length > 0
@@ -260,6 +263,7 @@ export default function DownloadDialog({
           platformToInstall,
           channelNameToInstall
         )
+
         setGameInstallInfo(gameInstallInfo)
         setGettingInstallInfo(false)
 
@@ -324,14 +328,22 @@ export default function DownloadDialog({
       )
       if (gameInstallInfo?.manifest?.disk_size) {
         let notEnoughDiskSpace = free < uncompressedSize
-        let spaceLeftAfter = size(free - Number(uncompressedSize))
-        if (previousProgress.folder === installPath) {
+        // downloads the entire zip, then extracts the entire zip, then deletes the zip, so we need space for both
+        let spaceLeftAfter = size(
+          free - Number(uncompressedSize) - Number(gameDownloadSize)
+        )
+
+        const partiallyDownloaded = previousProgress.folder === installPath
+        if (partiallyDownloaded) {
           const progress = 100 - getProgress(previousProgress)
           notEnoughDiskSpace =
             free < (progress / 100) * Number(uncompressedSize)
 
+          // downloads the entire zip, then extracts the entire zip, then deletes the zip, so we need space for both
           spaceLeftAfter = size(
-            free - (progress / 100) * Number(uncompressedSize)
+            free -
+              Number(uncompressedSize) -
+              (progress / 100) * gameDownloadSize
           )
         }
 
@@ -351,7 +363,6 @@ export default function DownloadDialog({
     gameInstallInfo.game.owned_dlc.length > 0
 
   const DLCList = gameInstallInfo?.game?.owned_dlc
-  const gameDownloadSize = gameInstallInfo?.manifest?.download_size
   const downloadSize = () => {
     if (gameDownloadSize !== undefined && gameInstallInfo !== null) {
       if (previousProgress.folder === installPath) {
@@ -434,6 +445,15 @@ export default function DownloadDialog({
             key={p.value}
           />
         ))}
+        {isNotNative && (
+          <div className={styles.installModalWarning}>
+            <Images.Info fill="var(--error-300)" />
+            {t(
+              'install.compatibility-warning',
+              'This Windows game will run using a compatibility layer. Your experience may vary.'
+            )}
+          </div>
+        )}
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
       <DialogContent>

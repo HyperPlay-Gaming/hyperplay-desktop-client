@@ -8,13 +8,14 @@ import {
 } from 'common/types'
 
 import { TFunction } from 'i18next'
-import { getGameInfo } from './index'
+import { getGameInfo, getPlatformName } from './index'
 import { DialogModalOptions } from 'frontend/types'
 import { SiweMessage } from 'siwe'
 import { valistBaseApiUrlv1 } from 'common/constants'
 import { ethers } from 'ethers'
 import axios from 'axios'
 import authState from 'frontend/state/authState'
+import gameUpdateState from 'frontend/state/GameUpdateState'
 
 const storage: Storage = window.localStorage
 
@@ -123,6 +124,18 @@ type LaunchOptions = {
   runner: Runner
   hasUpdate: boolean
   showDialogModal: (options: DialogModalOptions) => void
+  isNotNative: boolean
+}
+
+export const SHOW_COMPATIBILITY_LAYER_WARNING =
+  'show-compatibility-layer-warning'
+
+export const isNotNative = (
+  platform: NodeJS.Platform | 'unknown',
+  installedPlatform: InstallPlatform
+) => {
+  const isWindows = platform === 'win32'
+  return !isWindows && getPlatformName(installedPlatform) === 'Windows'
 }
 
 const launch = async ({
@@ -131,8 +144,50 @@ const launch = async ({
   launchArguments = '',
   runner,
   hasUpdate,
-  showDialogModal
+  showDialogModal,
+  isNotNative
 }: LaunchOptions): Promise<{ status: 'done' | 'error' | 'abort' }> => {
+  const showCompatibilityWarningDialog: boolean =
+    isNotNative &&
+    JSON.parse(
+      localStorage.getItem(`${SHOW_COMPATIBILITY_LAYER_WARNING}-${appName}`) ??
+        'true'
+    )
+
+  const showWarningDialog = new Promise<void>((res) => {
+    if (!showCompatibilityWarningDialog) {
+      return res()
+    }
+    showDialogModal({
+      message: t(
+        'gamepage:box.compability.message',
+        'This Windows game will run using a compatibility layer. You might encounter some issues or the game might not work at all.'
+      ),
+      title: t('infobox.warning', 'Warning'),
+      buttons: [
+        {
+          text: t('gamepage:box.dont-show-again', "Don't show again"),
+          onClick: () => {
+            localStorage.setItem(
+              `${SHOW_COMPATIBILITY_LAYER_WARNING}-${appName}`,
+              JSON.stringify(false)
+            )
+            res()
+          }
+        },
+        {
+          text: t('gamepage:box.aware', 'I am aware'),
+          onClick: () => {
+            res()
+          }
+        }
+      ],
+      onClose: () => {
+        res()
+      }
+    })
+  })
+
   if (hasUpdate && !authState.isQaModeActive) {
     const { ignoreGameUpdates } = await window.api.requestGameSettings(appName)
 
@@ -206,12 +261,14 @@ const launch = async ({
     return launchFinished
   }
 
+  await showWarningDialog
+
   return window.api.launch({ appName, launchArguments, runner })
 }
 
 const updateGame = async (gameInfo: GameInfo) => {
   const siweValues = await signSiweMessage()
-  return window.api.updateGame({ ...gameInfo, siweValues })
+  return gameUpdateState.updateGame({ ...gameInfo, siweValues })
 }
 
 export const epicCategories = ['all', 'legendary', 'epic']

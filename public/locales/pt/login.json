@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Entrar"
+        "login": "Entrar",
+        "loading": "A carregar",
+        "error": "Erro, tente um código diferente"
     },
     "message": {
         "part1": "Para que você possa entrar e instalar os seus jogos, é necessário seguir os seguintes passos:",

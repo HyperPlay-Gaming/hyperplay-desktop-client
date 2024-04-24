@@ -6,7 +6,7 @@ import React, {
   useState
 } from 'react'
 import { useTranslation } from 'react-i18next'
-import { useNavigate, useLocation, useParams } from 'react-router'
+import { useNavigate, useLocation, useParams } from 'react-router-dom'
 import { DidNavigateEvent, WebviewTag } from 'electron'
 
 import { UpdateComponent } from 'frontend/components/UI'
@@ -291,6 +291,13 @@ function WebView() {
       webviewRef.current?.removeEventListener('did-navigate', handleNavigation)
     }
   }, [webviewRef])
+
+  useEffect(() => {
+    const isOffline = connectivity.status !== 'online'
+    if (isOffline) {
+      navigate('/library')
+    }
+  }, [connectivity.status])
 
   const onLoginWarningClosed = () => {
     setShowLoginWarningFor(null)

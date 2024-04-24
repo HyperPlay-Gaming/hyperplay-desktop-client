@@ -9,9 +9,9 @@ import {
   LicenseConfigValidateResult,
   ChannelReleaseMeta,
   SiweValues,
-  UpdateArgs
+  UpdateArgs,
+  WineCommandArgs
 } from '../../../common/types'
-import { InstallPlatform } from 'common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
@@ -19,13 +19,18 @@ import {
   ExtractZipService,
   ExtractZipProgressResponse
 } from 'backend/services/ExtractZipService'
-import { existsSync, mkdirSync, rmSync, readdirSync } from 'graceful-fs'
+import {
+  existsSync,
+  mkdirSync,
+  rmSync,
+  readdirSync,
+  readFileSync,
+  statSync
+} from 'graceful-fs'
 import {
   isMac,
   isWindows,
   isLinux,
-  configFolder,
-  mainReleaseChannelName,
   getValidateLicenseKeysApiUrl
 } from 'backend/constants'
 import {
@@ -35,15 +40,14 @@ import {
   shutdownWine,
   calculateEta
 } from 'backend/utils'
-import { notify } from 'backend/dialog/dialog'
-import path, { join } from 'path'
+import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
+import path, { dirname, join } from 'path'
 import {
   callAbortController,
   createAbortController,
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import {
-  getHyperPlayStoreRelease,
   handleArchAndPlatform,
   handlePlatformReversed,
   sanitizeVersion
@@ -59,16 +63,19 @@ import {
   getGameProcessName,
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
-import { isOnline } from 'backend/online_monitor'
-import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
-import { DownloadItem } from 'electron'
+import { DownloadItem, dialog } from 'electron'
 import { waitForItemToDownload } from 'backend/utils/downloadFile/download_file'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { captureException } from '@sentry/electron'
 import { valistBaseApiUrlv1 } from 'common/constants'
 import Store from 'electron-store'
+import i18next from 'i18next'
+import { gameManagerMap } from '..'
+import { runWineCommand } from 'backend/launcher'
+import { DEV_PORTAL_URL } from 'common/constants'
+import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -160,6 +167,39 @@ export async function pause(appName: string): Promise<void> {
   dl.DownloadItem.pause()
 }
 
+// check for valid json file inside the folder before importing
+// if none was found, check the first folder inside the folder
+// return the path to the folder with a valid json file
+// if none was found return empty string
+// this is necessary because we do not know which folder the user has selected, the main folder or the game folder
+const getValidGameFolderPath = (
+  appName: string,
+  folderPath: string
+): string => {
+  const subFolders = readdirSync(folderPath)
+
+  if (subFolders.includes(`${appName}.json`)) {
+    return folderPath
+  }
+
+  // in case the selected folder is a dev folder with multiple games
+  for (const subFolder of subFolders) {
+    // check if it is a folder or a file, if it is a file, skip it
+    const subFolderStats = statSync(path.join(folderPath, subFolder))
+    if (subFolderStats.isDirectory()) {
+      if (getValidGameFolderPath(appName, path.join(folderPath, subFolder))) {
+        return path.join(folderPath, subFolder)
+      }
+    }
+  }
+
+  return ''
+}
+
+type HyperPlayManifest = {
+  manifest: InstalledInfo
+}
+
 /**
  *
  * @param appName
@@ -169,13 +209,34 @@ export async function pause(appName: string): Promise<void> {
  */
 export async function importGame(
   appName: string,
-  pathName: string,
-  platform: InstallPlatform
+  pathName: string
 ): Promise<ExecResult> {
+  pathName = getValidGameFolderPath(appName, pathName)
+  if (!pathName) {
+    logError(
+      'Not a valid game folder, import not possible',
+      LogPrefix.HyperPlay
+    )
+
+    showDialogBoxModalAuto({
+      title: i18next.t('importGameErrorTitle', 'Import Game Error'),
+      message: i18next.t(
+        'importGameErrorMessage',
+        'Not a valid game folder, importing game is not possible'
+      ),
+      type: 'ERROR'
+    })
+
+    throw Error('Not a valid game folder, import not possible')
+  }
+
+  // read the json file and get the game info
+  const installInfo: HyperPlayManifest = JSON.parse(
+    readFileSync(path.join(pathName, `${appName}.json`), 'utf8')
+  )
+
   const currentLibrary = hpLibraryStore.get('games', [])
 
-  // TODO refactor this to constant time check with a set
-  // not important for alpha release
   const gameInLibrary = currentLibrary.find((val) => {
     return val.app_name === appName
   })
@@ -186,60 +247,157 @@ export async function importGame(
   }
 
   const gameInfo = getGameInfo(appName)
-  //necessary so that injectProcess can find the process name
-  if (
-    gameInfo.channels &&
-    gameInfo.channels[mainReleaseChannelName].release_meta
-  )
-    platform = handleArchAndPlatform(
-      platform,
-      gameInfo.channels[mainReleaseChannelName].release_meta
-    )
+  const channel = gameInfo.channels![
+    installInfo.manifest.channelName!
+  ] as Channel
+  const mainExe =
+    channel.release_meta.platforms[installInfo.manifest.platform].executable
+  const executable = path.join(pathName, mainExe)
 
-  let hpImportVersion = '-1'
-  /**
-   * TODO: Figure out a way to get release name/version of game that is already installed
-   * Currently this just sets version to the latest store release and relies on the game dev
-   * to handle if their game is launched with an old version
-   **/
-  if (isOnline()) {
-    const currentRelease = await getHyperPlayStoreRelease(appName)
-    hpImportVersion =
-      currentRelease.channels[mainReleaseChannelName]?.release_meta?.name
+  if (!existsSync(executable)) {
+    logError(`Executable ${executable} does not exist!`, LogPrefix.HyperPlay)
+
+    showDialogBoxModalAuto({
+      title: i18next.t('importGameErrorTitle', 'Import Game Error'),
+      message: i18next.t(
+        'importGameErrorMessageExecutable',
+        'Game Executable not found, importing game is not possible'
+      ),
+      type: 'ERROR'
+    })
+
+    throw Error(`Executable ${executable} does not exist!`)
   }
 
   gameInLibrary.install = {
-    install_path: path.dirname(pathName),
-    executable: pathName,
-    install_size: '0 GiB',
+    install_path: pathName,
+    executable,
+    install_size: installInfo.manifest.install_size ?? '0',
     is_dlc: false,
-    version: hpImportVersion,
-    platform: platform
+    version: installInfo.manifest.version,
+    platform: installInfo.manifest.platform,
+    channelName: installInfo.manifest.channelName
   }
 
   gameInLibrary.is_installed = true
   hpLibraryStore.set('games', currentLibrary)
 
   sendFrontendMessage('refreshLibrary')
+
+  // delete current manifest file
+  rmSync(path.join(pathName, `${appName}.json`))
+  writeManifestFile(appName, gameInLibrary.install)
   return { stderr: '', stdout: '' }
 }
 
-const installDistributables = async (gamePath: string) => {
-  const distFolder = path.join(gamePath, 'dist')
-  if (!existsSync(distFolder)) {
-    logWarning(
-      `Tried to install distributables from ${distFolder} but folder does not exist!`,
-      LogPrefix.HyperPlay
-    )
-    return
+export async function runWineCommandOnGame(
+  runner: string,
+  appName: string,
+  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
+): Promise<ExecResult> {
+  if (isNative(appName)) {
+    logError('runWineCommand called on native game!', LogPrefix.Gog)
+    return { stdout: '', stderr: '' }
   }
+  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
+  const gameSettings = await gameManagerMap[runner].getSettings(appName)
 
-  const files = readdirSync(distFolder)
-  const executables = files.filter((file) => file.endsWith('.exe'))
+  return runWineCommand({
+    gameSettings,
+    installFolderName: folder_name,
+    gameInstallPath: install.install_path,
+    commandParts,
+    wait,
+    protonVerb,
+    startFolder
+  })
+}
+
+type DistArgs = {
+  gamePath: string
+  appName: string
+}
+
+// for Windows games only
+const installDistributables = async ({ gamePath, appName }: DistArgs) => {
+  sendFrontendMessage('gameStatusUpdate', {
+    appName,
+    status: 'distributables',
+    runner: 'hyperplay',
+    folder: gamePath
+  })
+
+  const possibleFolders = ['dist', 'redist', 'Dist', 'Redist']
+  let executables: string[] = []
+
+  for (const folder of possibleFolders) {
+    executables = executables.concat(
+      await findFolderAndExecutables(gamePath, folder)
+    )
+  }
 
   for await (const executable of executables) {
-    await spawnAsync(path.join(gamePath, 'dist', executable), [])
+    logInfo(`Installing distributable ${executable}`, LogPrefix.HyperPlay)
+    // Not windows
+    if (!isWindows && !isNative(appName)) {
+      return runWineCommandOnGame('hyperplay', appName, {
+        commandParts: [executable, '/quiet'],
+        protonVerb: 'run',
+        startFolder: dirname(executable)
+      })
+    }
+
+    // Windows
+    return spawnAsync(executable, ['/quiet'])
   }
+  return
+}
+
+const findFolderAndExecutables = async (
+  basePath: string,
+  folderName: string
+): Promise<string[]> => {
+  let executables: string[] = []
+  if (!existsSync(basePath)) {
+    return executables
+  }
+
+  const entries = readdirSync(basePath, { withFileTypes: true })
+
+  for (const entry of entries) {
+    const entryPath = path.join(basePath, entry.name)
+    if (entry.isDirectory()) {
+      if (entry.name === folderName) {
+        executables = executables.concat(await findExecutables(entryPath))
+      } else {
+        executables = executables.concat(
+          await findFolderAndExecutables(entryPath, folderName)
+        )
+      }
+    }
+  }
+
+  return executables
+}
+
+const findExecutables = async (folderPath: string): Promise<string[]> => {
+  let executables: string[] = []
+  const files = readdirSync(folderPath, { withFileTypes: true })
+  logInfo(`Searching for executables in ${folderPath}`, LogPrefix.HyperPlay)
+
+  for (const file of files) {
+    if (file.isDirectory()) {
+      const subFolderExecutables = await findExecutables(
+        path.join(folderPath, file.name)
+      )
+      executables = executables.concat(subFolderExecutables)
+    } else if (file.name.endsWith('.exe')) {
+      logInfo(`Found distributable ${file.name}`, LogPrefix.HyperPlay)
+      executables.push(path.join(folderPath, file.name))
+    }
+  }
+
+  return executables
 }
 
 function cleanUpDownload(appName: string, directory: string) {
@@ -401,10 +559,11 @@ function sanitizeFileName(filename: string) {
 
 function getZipFileName(
   appName: string,
-  platformInfo: PlatformConfig
+  platformInfo: PlatformConfig,
+  destinationPath: string
 ): { directory: string; filename: string } {
   const zipName = encodeURI(platformInfo.name)
-  const tempfolder = path.join(configFolder, 'hyperplay', '.temp', appName)
+  const tempfolder = path.join(destinationPath, '.temp', appName)
 
   if (!existsSync(tempfolder)) {
     mkdirSync(tempfolder, { recursive: true })
@@ -413,20 +572,42 @@ function getZipFileName(
   return { directory: tempfolder, filename: zipName }
 }
 
-export async function validateAccessCode(
-  accessCode: string,
-  channelId: number
-) {
+export async function validateAccessCode({
+  accessCode,
+  channelId,
+  licenseConfigId
+}: {
+  accessCode: string
+  channelId?: number
+  licenseConfigId?: number
+}) {
   const validateUrl = getValidateLicenseKeysApiUrl()
 
-  const validateResult = await axios.post<LicenseConfigValidateResult>(
-    validateUrl,
-    {
-      code: accessCode,
-      channel_id: channelId
-    }
-  )
-  return validateResult.data
+  /* eslint-disable-next-line */
+  const request: Record<string, any> = {
+    code: accessCode
+  }
+  if (channelId !== undefined) {
+    request.channel_id = channelId
+  }
+  if (licenseConfigId !== undefined) {
+    request.license_config_id = licenseConfigId
+  }
+
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const validateResult = await fetch(validateUrl, {
+    method: 'POST',
+    headers: {
+      Cookie: cookieString
+    },
+    body: JSON.stringify(request)
+  })
+  const result: LicenseConfigValidateResult = await validateResult.json()
+  return result
 }
 
 async function getAccessCodeGatedPlatforms(
@@ -434,7 +615,7 @@ async function getAccessCodeGatedPlatforms(
   channelId: number,
   appName: string
 ): Promise<PlatformsMetaInterface> {
-  const validateResult = await validateAccessCode(accessCode, channelId)
+  const validateResult = await validateAccessCode({ accessCode, channelId })
 
   if (validateResult.valid !== true)
     throw `Access code ${accessCode} is not valid for channel id ${channelId}!`
@@ -499,7 +680,7 @@ function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
 
   hpLibraryStore.set('games', currentLibrary)
 
-  writeManifestFile(installedInfo)
+  writeManifestFile(appName, installedInfo)
 }
 
 function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
@@ -679,7 +860,7 @@ export async function install(
     }
 
     logInfo(`Installing ${title} to ${dirpath}...`, LogPrefix.HyperPlay)
-    const zipPathInfo = getZipFileName(appName, platformInfo)
+    const zipPathInfo = getZipFileName(appName, platformInfo, destinationPath)
     directory = zipPathInfo.directory
     fileName = zipPathInfo.filename
 
@@ -723,7 +904,7 @@ export async function install(
       }
     }
 
-    return await extract(appName, {
+    await extract(appName, {
       appPlatform,
       gameInfo,
       destinationPath,
@@ -731,6 +912,15 @@ export async function install(
       installVersion,
       channelName
     })
+
+    if (platformToInstall === 'Windows') {
+      logInfo(`Looking for  distributables for ${appName}`, LogPrefix.HyperPlay)
+      await installDistributables({
+        gamePath: destinationPath,
+        appName
+      })
+    }
+    return { status: 'done' }
   } catch (error) {
     process.noAsar = false
 
@@ -782,7 +972,7 @@ export async function extract(
     }
 
     const { title } = gameInfo
-    const zipPathInfo = getZipFileName(appName, platformInfo)
+    const zipPathInfo = getZipFileName(appName, platformInfo, destinationPath)
     directory = zipPathInfo.directory
     fileName = zipPathInfo.filename
 
@@ -920,10 +1110,6 @@ export async function extract(
             status: 'extracting'
           })
 
-          if (isWindows) {
-            await installDistributables(destinationPath)
-          }
-
           process.noAsar = false
 
           if (isMac && executable.endsWith('.app')) {
@@ -1057,7 +1243,7 @@ export function getGameInfo(appName: string): GameInfo {
   // TODO: remove this in the future, it is only needed for games downloaded from v0.10 and below
   // write manifest file
   if (appInfo?.is_installed && appInfo.install) {
-    writeManifestFile(appInfo.install)
+    writeManifestFile(appName, appInfo.install)
   }
 
   if (!appInfo) {
@@ -1151,6 +1337,28 @@ export async function launch(
   /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
   launchArguments?: string
 ): Promise<boolean> {
+  const isAvailable = isGameAvailable(appName)
+
+  if (!isAvailable) {
+    const { title } = getGameInfo(appName)
+    const { response } = await dialog.showMessageBox({
+      type: 'question',
+      title,
+      message: i18next.t(
+        'box.error.folder-not-found.title',
+        'Game folder appears to be deleted, do you want to remove the game from the installed list?'
+      ),
+      buttons: [i18next.t('box.no'), i18next.t('box.yes')]
+    })
+
+    if (response === 1) {
+      await forceUninstall(appName)
+      return false
+    }
+
+    return false
+  }
+
   return launchGame(appName, getGameInfo(appName), 'hyperplay')
 }
 
@@ -1178,24 +1386,6 @@ export async function update(
       LogPrefix.HyperPlay
     )
     return { status: 'error' }
-  }
-
-  let accessCode: string | undefined = undefined
-
-  // if we used an access code for this channel on last install, use it again
-  // if this fails due a different license config, game will remain in an uninstalled state
-  if (
-    gameInfo.channels !== undefined &&
-    gameInfo.install.channelName !== undefined &&
-    gameInfo.channels[gameInfo.install.channelName] !== undefined
-  ) {
-    const channelIdOfCurrentInstall =
-      gameInfo.channels[gameInfo.install.channelName].channel_id
-    if (
-      gameInfo.accessCodesCache !== undefined &&
-      Object.hasOwn(gameInfo.accessCodesCache, channelIdOfCurrentInstall)
-    )
-      accessCode = gameInfo.accessCodesCache[channelIdOfCurrentInstall]
   }
 
   //install the new version
@@ -1255,13 +1445,16 @@ export async function forceUninstall(appName: string): Promise<void> {
   await uninstall({ appName, shouldRemovePrefix: false })
 }
 
-function writeManifestFile(installedInfo: Partial<InstalledInfo>) {
+function writeManifestFile(
+  appName: string,
+  installedInfo: Partial<InstalledInfo>
+) {
   if (!installedInfo.install_path) {
     return
   }
   const store = new Store({
     cwd: installedInfo.install_path,
-    name: installedInfo.appName
+    name: appName
   })
 
   return store.set('manifest', installedInfo)

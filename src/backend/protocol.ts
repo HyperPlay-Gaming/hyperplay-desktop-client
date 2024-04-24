@@ -8,12 +8,7 @@ import { icon } from './constants'
 import { getGameInfo } from 'backend/storeManagers/hyperplay/games'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 
-type Command =
-  | 'ping'
-  | 'launch'
-  | 'otp-deeplink'
-  | 'email-verified'
-  | 'email-confirmation'
+type Command = 'ping' | 'launch' | 'otp-deeplink'
 
 const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
 
@@ -45,13 +40,7 @@ export async function handleProtocol(args: string[]) {
       await handleLaunch(runner, arg, mainWindow)
       break
     case 'otp-deeplink':
-      sendFrontendMessage('oauthDeeplink', new URL(url).searchParams.get('otp'))
-      break
-    case 'email-verified':
-      sendFrontendMessage('emailVerified')
-      break
-    case 'email-confirmation':
-      sendFrontendMessage('emailConfirmation', decodeURIComponent(arg))
+      sendFrontendMessage('otpDeeplink', new URL(url).searchParams.get('otp'))
       break
     default:
       return
@@ -103,9 +92,6 @@ export function parseUrl(url: string): [Command, Runner?, string?, string?] {
       const [command, runner, accountId, appId] = splitCommand
       return [command as Command, runner as Runner, accountId, appId]
     }
-  } else if (splitCommand[0].startsWith('email-confirmation')) {
-    const emailConfirmUrl = urlObject.searchParams.get('url')
-    return ['email-confirmation', undefined, emailConfirmUrl ?? undefined]
   } else if (splitCommand[0].startsWith('otp-deeplink')) {
     return [
       'otp-deeplink',

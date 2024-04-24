@@ -288,6 +288,18 @@ export interface HyperPlayLaunched {
   sensitiveProperties?: never
 }
 
+export interface HyperPlaySummonQuestFailed {
+  event: 'HyperPlay Summon Quest Failed'
+  properties?: never
+  sensitiveProperties?: never
+}
+
+export interface HyperPlaySummonQuestSucceeded {
+  event: 'HyperPlay Summon Quest Succeeded'
+  properties?: never
+  sensitiveProperties?: never
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -317,5 +329,7 @@ export type PossibleMetricPayloads =
   | GameInstallPaused
   | GameInstallResumed
   | HyperPlayLaunched
+  | HyperPlaySummonQuestFailed
+  | HyperPlaySummonQuestSucceeded
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']

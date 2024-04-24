@@ -11,8 +11,12 @@ import {
   deleteAbortController
 } from '../../utils/aborthandler/aborthandler'
 import { sendFrontendMessage } from '../../main_window'
+import { isWindows } from 'backend/constants'
 
-ipcMain.handle('installWineVersion', async (e, release) => {
+ipcMain.handle('installWineVersion', async (_e, release) => {
+  if (isWindows) {
+    return 'error'
+  }
   const onProgress = (state: State, progress?: ProgressInfo) => {
     sendFrontendMessage('progressOfWineManager' + release.version, {
       state,
@@ -25,10 +29,13 @@ ipcMain.handle('installWineVersion', async (e, release) => {
     createAbortController(release.version).signal
   )
   deleteAbortController(release.version)
-  return result
+  return result ?? 'error'
 })
 
 ipcMain.handle('refreshWineVersionInfo', async (e, fetch?) => {
+  if (isWindows) {
+    return
+  }
   try {
     await updateWineVersionInfos(fetch)
     return

@@ -1,9 +1,9 @@
 id: xyz.hyperplay.HyperPlay
 sdk: org.freedesktop.Sdk
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: "23.08"
 base: org.electronjs.Electron2.BaseApp
-base-version: '22.08'
+base-version: "23.08"
 command: hyperplay-run
 separate-locales: false
 
@@ -19,43 +19,46 @@ finish-args:
   - --allow=devel
   - --allow=multiarch
   - --device=all
-  - --env=PATH=/app/bin:/app/utils/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin:/usr/lib/extensions/vulkan/OBSVkCapture/bin:/app/bin/hyperplay/resources/app.asar.unpacked/build/bin/linux
-  - --filesystem=xdg-data/lutris:rw
-  - --filesystem=xdg-data/Steam:rw
-  - --filesystem=xdg-data/applications:rw
-  - --filesystem=~/.steam:rw
+  - --env=PATH=/app/bin:/app/utils/bin:/usr/bin:/usr/lib/extensions/vulkan/MangoHud/bin:/usr/lib/extensions/vulkan/gamescope/bin:/usr/lib/extensions/vulkan/OBSVkCapture/bin:/app/bin/hyperplay/resources/app.asar.unpacked/build/bin/linux
+  - --filesystem=~/.local/share/lutris:rw
+  - --filesystem=~/.config/heroic:rw
+  - --filesystem=~/.local/share/applications:rw
+  - --filesystem=~/.local/share/Steam:rw
   - --filesystem=~/Games/HyperPlay:create
   - --filesystem=~/.var/app/com.valvesoftware.Steam:rw
   - --filesystem=xdg-documents
   - --filesystem=xdg-desktop
   # should fix access to SD card on the deck
   - --filesystem=/run/media
+  # There are still quite a few users using /mnt/ for external drives
+  - --filesystem=/mnt
+  - --filesystem=/media
   # should fix steamdeck controler navigation
   - --filesystem=/run/udev:ro
   # should fix discord rich presence
   - --filesystem=xdg-run/app/com.discordapp.Discord:create
+  - --persist=.
   - --share=ipc
   - --share=network
   - --socket=x11
   - --socket=wayland
   - --socket=pulseaudio
-  - --talk-name=org.freedesktop.Notifications
-  - --own-name=org.kde.*
+  - --talk-name=org.kde.StatusNotifierWatcher
 
 add-extensions:
   org.freedesktop.Platform.Compat.i386:
     directory: lib/i386-linux-gnu
-    version: '22.08'
+    version: "23.08"
 
   org.freedesktop.Platform.Compat.i386.Debug:
     directory: lib/debug/lib/i386-linux-gnu
-    version: '22.08'
+    version: "23.08"
     no-autodownload: true
 
   org.freedesktop.Platform.GL32:
     directory: lib/i386-linux-gnu/GL
-    version: '1.4'
-    versions: 22.08;1.4
+    version: "1.4"
+    versions: 23.08;1.4
     subdirectories: true
     no-autodownload: true
     autodelete: false
@@ -75,8 +78,8 @@ add-extensions:
 
   org.freedesktop.Platform.VAAPI.Intel.i386:
     directory: lib/i386-linux-gnu/dri/intel-vaapi-driver
-    version: '22.08'
-    versions: '22.08'
+    version: "23.08"
+    versions: "23.08"
     autodelete: false
     no-autodownload: true
     add-ld-path: lib
@@ -104,7 +107,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/KhronosGroup/Vulkan-Tools.git
-        tag: sdk-1.3.224.1
+        tag: sdk-1.3.261.1
 
   - name: gamemode
     buildsystem: meson
@@ -115,10 +118,13 @@ modules:
     sources: &gamemode_sources
       - type: git
         url: https://github.com/FeralInteractive/gamemode.git
-        tag: '1.7'
+        tag: "1.7"
         commit: 4dc99dff76218718763a6b07fc1900fa6d1dafd9
         x-checker-data:
           type: git
+      - type: patch
+        paths:
+          - patches/gamemode/disable-pidfd.patch
 
   - name: gamemode-32bit
     build-options:
@@ -170,7 +176,7 @@ modules:
           - zypak-wrapper /app/bin/hyperplay/hyperplay "$@"
 
       - ${hyperplay-tarxz}
-
+      
   - name: platform-bootstrap
     buildsystem: simple
     build-commands:
@@ -199,7 +205,7 @@ modules:
       - type: file
         path: xyz.hyperplay.HyperPlay.desktop
 
-  #START --- Winetricks Deps ---
+    #START --- Winetricks Deps ---
   - name: p7zip
     no-autogen: true
     build-options:
@@ -218,19 +224,19 @@ modules:
       - DEST_MAN=$(FLATPAK_DEST)/share/man
     sources:
       - type: archive
-        url: "https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2"
+        url: https://downloads.sourceforge.net/p7zip/p7zip_16.02_src_all.tar.bz2
         sha256: 5eb20ac0e2944f6cb9c2d51dd6c4518941c185347d4089ea89087ffdd6e2341f
       - type: patch
         paths:
           - patches/p7zip/gcc10-conversion.patch
       - type: shell
         only-arches:
-          - "x86_64"
+          - x86_64
         commands:
           - ln -sf makefile.linux_amd64_asm makefile.machine
       - type: shell
         only-arches:
-          - "i386"
+          - i386
         commands:
           - ln -sf makefile.linux_x86_asm_gcc_4.X makefile.machine
     modules:
@@ -238,7 +244,7 @@ modules:
         buildsystem: cmake-ninja
         sources:
           - type: archive
-            url: "https://github.com/yasm/yasm/archive/v1.3.0.tar.gz"
+            url: https://github.com/yasm/yasm/archive/v1.3.0.tar.gz
             sha256: f708be0b7b8c59bc1dbe7134153cd2f31faeebaa8eec48676c10f972a1f13df3
         cleanup:
           - "*"
@@ -248,8 +254,8 @@ modules:
       strip: true
     sources:
       - type: archive
-        url: "https://www.cabextract.org.uk/cabextract-1.10.tar.gz"
-        sha256: edfc785ef252460cab7fdfa6fb2599058a6f5618f7f48a4ad22da816da8cb117
+        url: https://www.cabextract.org.uk/cabextract-1.11.tar.gz
+        sha256: b5546db1155e4c718ff3d4b278573604f30dd64c3c5bfd4657cd089b823a3ac6
         x-checker-data:
           type: anitya
           project-id: 245
@@ -263,8 +269,8 @@ modules:
       - DESTDIR=$(FLATPAK_DEST)
     sources:
       - type: archive
-        url: "https://www.rarlab.com/rar/unrarsrc-6.2.5.tar.gz"
-        sha256: 9a3974410d1d340e3998dd2a6f98faefbe838cad556266e714adfb0e8cf9377c
+        url: https://www.rarlab.com/rar/unrarsrc-6.2.10.tar.gz
+        sha256: 55fe6ebd5e48d6655bfda3fd19b55438ca05e13c7e69772420caad9fdb68ef42
         x-checker-data:
           type: anitya
           project-id: 13306
@@ -286,7 +292,7 @@ modules:
     sources:
       - type: archive
         sha256: 58d1e7608c12404f0229a3d9a4953d0d00c18040504498b483305bcb3de907a5
-        url: "https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0.tar.xz"
+        url: https://github.com/aria2/aria2/releases/download/release-1.36.0/aria2-1.36.0.tar.xz
       - type: patch
         path: patches/aria2/working-build.patch
-  #END --- Winetricks Deps --
+  #END --- Winetricks Deps ---

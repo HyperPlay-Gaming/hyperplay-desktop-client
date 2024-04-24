@@ -16,5 +16,5 @@
 }
 
 .gameList.firstLane {
-  padding: 0 var(--space-md-fixed) var(--space-md-fixed);
+  padding-bottom: var(--space-md-fixed);
 }

@@ -2,10 +2,14 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
+import { observer } from 'mobx-react-lite'
+import { Done, ContentCopy } from '@mui/icons-material'
 import { UpdateComponent } from 'frontend/components/UI'
 import SettingsContext from '../../SettingsContext'
 import './index.css'
+import { GameInfo } from 'common/types'
+import libraryState from 'frontend/state/libraryState'
+import { faDiscord } from '@fortawesome/free-brands-svg-icons'
 
 interface LogBoxProps {
   logFileContent: string
@@ -58,50 +62,65 @@ const LogBox: React.FC<LogBoxProps> = ({ logFileContent }) => {
   )
 }
 
-export default function LogSettings() {
+function LogSettings() {
   const { t } = useTranslation()
+  const { appName } = useContext(SettingsContext)
+
+  const hyperPlayLibrary = libraryState.hyperPlayLibrary
+  const epicLibrary = libraryState.epicLibrary
+  const gogLibrary = libraryState.gogLibrary
+  const amazonLibrary = libraryState.amazonLibrary
+  const sideloadedLibrary = libraryState.sideloadedLibrary
+
   const [logFileContent, setLogFileContent] = useState<string>('')
   const [logFileExist, setLogFileExist] = useState<boolean>(false)
-  const [defaultLast, setDefaultLast] = useState<boolean>(false)
+  const [showLogOf, setShowLogOf] = useState<string>(
+    appName === 'default' ? 'hyperplay' : appName
+  )
   const [refreshing, setRefreshing] = useState<boolean>(true)
-  const { appName, isDefault } = useContext(SettingsContext)
+  const [copiedLog, setCopiedLog] = useState<boolean>(false)
+
+  const [installedGames, setInstalledGames] = useState<GameInfo[]>([])
+
+  useEffect(() => {
+    let games: GameInfo[] = []
+    games = games.concat(hyperPlayLibrary.filter((game) => game.is_installed))
+    games = games.concat(epicLibrary.filter((game) => game.is_installed))
+    games = games.concat(gogLibrary.filter((game) => game.is_installed))
+    games = games.concat(amazonLibrary.filter((game) => game.is_installed))
+    games = games.concat(sideloadedLibrary.filter((game) => game.is_installed))
+    games = games.sort((game1, game2) => game1.title.localeCompare(game2.title))
+
+    setInstalledGames(games)
+  }, [epicLibrary, gogLibrary, amazonLibrary, sideloadedLibrary])
 
   const getLogContent = () => {
-    window.api
-      .getLogContent({
-        appName: isDefault ? '' : appName,
-        defaultLast
-      })
-      .then((content: string) => {
-        if (!content) {
-          setLogFileContent(t('setting.log.no-file', 'No log file found.'))
-          setLogFileExist(false)
-          return setRefreshing(false)
-        }
-        setLogFileContent(content)
-        setLogFileExist(true)
-        setRefreshing(false)
-      })
+    window.api.getLogContent(showLogOf).then((content: string) => {
+      if (!content) {
+        setLogFileContent(t('setting.log.no-file', 'No log file found.'))
+        setLogFileExist(false)
+        return setRefreshing(false)
+      }
+      setLogFileContent(content)
+      setLogFileExist(true)
+      setRefreshing(false)
+    })
   }
 
   useEffect(() => {
-    if (defaultLast || !isDefault) {
+    getLogContent()
+    const interval = setInterval(() => {
       getLogContent()
-      return
-    } else {
-      getLogContent()
-      const interval = setInterval(() => {
-        getLogContent()
-      }, 1000)
-      return () => clearInterval(interval)
-    }
-  }, [isDefault, defaultLast])
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [showLogOf])
 
   function showLogFileInFolder() {
-    window.api.showLogFileInFolder({
-      appName: isDefault ? '' : appName,
-      defaultLast
-    })
+    window.api.showLogFileInFolder(showLogOf)
+  }
+
+  const handleDiscordLink = () => {
+    window.api.openDiscordLink()
   }
 
   return (
@@ -121,37 +140,58 @@ export default function LogSettings() {
           'To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.'
         )}
       </p>
-      {isDefault && (
+      <div className="logs-wrapper">
         <span className="log-buttongroup">
-          <a
-            className={`log-buttons ${!defaultLast ? 'log-choosen' : ''}`}
-            onClick={() => {
-              setRefreshing(true)
-              setDefaultLast(false)
-            }}
-            title={t('setting.log.current-log')}
-          >
-            {t('setting.log.current-log', 'Current log')}
-          </a>
-          <a
-            className={`log-buttons ${defaultLast ? 'log-choosen' : ''}`}
-            onClick={() => {
-              setRefreshing(true)
-              setDefaultLast(true)
-            }}
-            title={t('setting.log.last-log')}
-          >
-            {t('setting.log.last-log', 'Last Log')}
-          </a>
+          {[
+            ['HyperPlay', 'hyperplay'],
+            ['Epic/Legendary', 'legendary'],
+            ['GOG', 'gogdl'],
+            ['Amazon/Nile', 'nile']
+          ].map((log) => {
+            const [label, value] = log
+            return (
+              <a
+                key={value}
+                className={`log-buttons ${
+                  showLogOf === value ? 'log-choosen' : ''
+                }`}
+                onClick={() => {
+                  setRefreshing(true)
+                  setShowLogOf(value)
+                }}
+                title={label}
+              >
+                {label}
+              </a>
+            )
+          })}
+          {installedGames.map((game) => {
+            return (
+              <a
+                key={game.app_name}
+                className={`log-buttons ${
+                  showLogOf === game.app_name ? 'log-choosen' : ''
+                }`}
+                onClick={() => {
+                  setRefreshing(true)
+                  setShowLogOf(game.app_name)
+                }}
+                title={game.title}
+              >
+                {game.title}
+              </a>
+            )
+          })}
         </span>
-      )}
-      {refreshing ? (
-        <span className="log-box">
-          <UpdateComponent inline />
-        </span>
-      ) : (
-        <LogBox logFileContent={logFileContent} />
-      )}
+
+        {refreshing ? (
+          <span className="setting log-box">
+            <UpdateComponent inline />
+          </span>
+        ) : (
+          <LogBox logFileContent={logFileContent} />
+        )}
+      </div>
       {logFileExist && (
         <span className="footerFlex">
           <a
@@ -171,6 +211,10 @@ export default function LogSettings() {
           <a
             onClick={() => {
               navigator.clipboard.writeText(logFileContent)
+              setCopiedLog(true)
+              setTimeout(() => {
+                setCopiedLog(false)
+              }, 3000)
             }}
             title={t(
               'setting.log.copy-to-clipboard',
@@ -180,7 +224,7 @@ export default function LogSettings() {
           >
             <div className="button-icontext-flex">
               <div className="button-icon-flex">
-                <ContentCopyIcon />
+                {copiedLog ? <Done /> : <ContentCopy />}
               </div>
               <span className="button-icon-text">
                 {t(
@@ -190,8 +234,24 @@ export default function LogSettings() {
               </span>
             </div>
           </a>
+          <a
+            onClick={handleDiscordLink}
+            title={t('setting.log.join-hyperplay-discord', 'Join our Discord')}
+            className="button is-footer"
+          >
+            <div className="button-icontext-flex">
+              <div className="button-icon-flex">
+                <FontAwesomeIcon icon={faDiscord} />
+              </div>
+              <span className="button-icon-text">
+                {t('setting.log.join-hyperplay-discord', 'Join our Discord')}
+              </span>
+            </div>
+          </a>
         </span>
       )}
     </>
   )
 }
+
+export default observer(LogSettings)

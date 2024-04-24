@@ -33,15 +33,19 @@ import QaAuthHandler from './QaAuthHandler'
 import AchievementsLayout from './screens/Achievements/AchievementsLayout'
 import GameAchievementDetails from './screens/Achievements/GameAchievementDetails'
 import AuthModal from './components/UI/AuthModal'
-import EmailVerifiedModal from './components/UI/EmailVerifiedModal'
 import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
+import { UpdateModalController } from './components/UI/UpdateModalController'
 
 function App() {
-  const { sidebarCollapsed, isSettingsModalOpen } = useContext(ContextProvider)
+  const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
+    useContext(ContextProvider)
   const flags = useFlags()
   const ENABLE_AMAZON_STORE = flags.amazonStore
+  const isOffline = connectivity.status !== 'online'
+  const firstDestination = isOffline ? '/library' : '/hyperplaystore'
 
   return (
     <div className={classNames('App', { collapsed: sidebarCollapsed })}>
@@ -56,7 +60,7 @@ function App() {
           <DialogHandler />
           <ExternalLinkDialog />
           <AuthModal />
-          <EmailVerifiedModal />
+          <EmailSubscriptionModal />
           <StoreNavHandler />
           {isSettingsModalOpen.gameInfo && (
             <SettingsModal
@@ -67,7 +71,7 @@ function App() {
           <Routes>
             <Route
               path="/"
-              element={<Navigate replace to="/hyperplaystore" />}
+              element={<Navigate replace to={firstDestination} />}
             />
             <Route path="/library" element={<Library />} />
             <Route
@@ -147,6 +151,7 @@ function App() {
       <TransactionNotification />
       <DownloadToastManager />
       <DeviceStateController />
+      <UpdateModalController />
     </div>
   )
 }

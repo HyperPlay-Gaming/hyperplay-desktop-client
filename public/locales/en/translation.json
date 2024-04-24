@@ -18,7 +18,7 @@
     "All": "All",
     "ALL": "ALL",
     "amazon": "",
-    "Amazon": "Amazon",
+    "Amazon": "",
     "Amazon Games": "Amazon Games",
     "analytics": "Analytics",
     "anticheat": {
@@ -29,6 +29,7 @@
         "status": "Status",
         "title": "This game includes anticheat software"
     },
+    "back_to_game": "Back to game",
     "box": {
         "cache-cleared": {
             "message": "HyperPlay cache cleared.",
@@ -115,6 +116,12 @@
                 "title": "Reset HyperPlay"
             }
         },
+        "reset-extension": {
+            "question": {
+                "message": "Are you sure you want to reset the MetaMask Extension?",
+                "title": "Reset Extension"
+            }
+        },
         "runexe": {
             "title": "Select EXE to Run"
         },
@@ -149,10 +156,16 @@
                 "install": "Epic Servers are having major outage right now, the game cannot be installed!",
                 "update": "Epic Servers are having major outage right now, the game cannot be updated!"
             },
+            "rosetta": {
+                "message": "HyperPlay requires Rosetta to run correctly on macOS with Apple Silicon chips. Please install it from the macOS terminal using the following command: \"softwareupdate --install-rosetta\" and restart HyperPlay. ",
+                "title": "Rosetta not found"
+            },
             "title": "Warning",
             "wine-change": {
                 "message": "We could not find the selected wine version to launch this title ({{selectedWine}}). {{newline}} We found another one, do you want to continue launching using {{foundWine}} ?",
-                "title": "Wine not found!"
+                "message-gptk": "To be able to run games using the Apple Gaming porting toolkit you need to upgrade your macOS to 14 (Sonoma) or higher. {{newline}} We found Wine on your system, do you want to continue launching using {{foundWine}} ?",
+                "title": "Wine not found!",
+                "title-gptk": "Game Porting Toolkit Not Compatible "
             }
         },
         "wineprefix": "Choose Wine Prefix Folder",
@@ -165,7 +178,8 @@
         "go_to_library": "Go to Library",
         "sync": "Sync",
         "syncing": "Syncing",
-        "unsync": "Unsync"
+        "unsync": "Unsync",
+        "update": "Update"
     },
     "controller": {
         "hints": {
@@ -239,6 +253,13 @@
         "main": "Main",
         "prototype": "Prototype"
     },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} and other games are ready to update.",
+            "single": "There is an update ready for {{gameName}}."
+        },
+        "title": "Game Updates Available"
+    },
     "generic": {
         "error": {
             "component": "No Games found - Try to logout and login again or one of the options bellow"
@@ -272,6 +293,7 @@
         "gamemode": "Feral GameMode applies automatic and temporary tweaks to the system when running games. Enabling may improve performance.",
         "general": "Sync with EGL if you have a working installation of the Epic Games Launcher elsewhere and want to import your games to avoid downloading them again.",
         "mangohud": "MangoHUD is an overlay that displays and monitors FPS, temperatures, CPU/GPU load and other system resources.",
+        "msync": "Msync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on several games.",
         "other": {
             "part4": "Use the ",
             "part5": "Game Arguments",
@@ -301,6 +323,7 @@
             "error": {
                 "validation": "Access code is invalid"
             },
+            "requirescode": "This game update requires an access code.",
             "success": {
                 "validation": "Success! Access code is valid"
             }
@@ -324,18 +347,23 @@
             "agree": "I agree",
             "noThanks": "No Thanks"
         },
-        "changeWallet": "Change wallet",
+        "changeWallet": "Swap wallet account",
         "connectWallet": "Connect wallet",
         "copyUrl": "Copy URL",
         "currentWallet": "Current wallet",
         "discordApp": "Discord",
         "folder": "Folder",
         "gamecard": {
+            "distributables": "Installing Distributables...",
             "extracting": "Extracting...",
             "installed": "Ready to play",
             "installing": "Downloading...",
             "paused": "Paused"
         },
+        "linkSteamAccountCta": "Go to Steam sign in",
+        "linkSteamAccountDescription": "Sign in to Steam to link your HyperPlay account.",
+        "linkSteamAccountTitle": "Link Steam Account",
+        "logOut": "Log out",
         "misc": "Never",
         "onboarding": {
             "analytics": {
@@ -366,9 +394,12 @@
                     "import": {
                         "cantFindProfile": "Can't find your browser profile?",
                         "createNewWallet": "Create new MM extension wallet",
-                        "details": "By importing, your MetaMask installation and  settings will be imported into HyperPlay.",
+                        "details": "The browsers below already have MetaMask installed. Choose the one you’d like to import from.",
                         "title": "Select the browser to import from",
-                        "useRecoveryPhrase": "Access with secret recovery phrase"
+                        "useRecoveryPhrase": "Import Using Secret Recovery phrase",
+                        "useRecoveryPhraseInfo": "This feature is recommended for advanced users and developers. Your secret recovery phrase is stored locally in MetaMask and never shared with HyperPlay.",
+                        "learnMore": "Learn more.",
+                        "orWord": "OR"
                     },
                     "info": {
                         "createWalletCTA": "Create a wallet",
@@ -411,13 +442,9 @@
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
-        "viewFullscreen": "View fullscreen",
         "viewItem": "View {{item}}",
-        "viewPortfolio": "View portfolio",
-        "wallet": {
-            "connected": "Connected",
-            "notConnected": "Not connected"
-        }
+        "viewMyAccount": "View my account",
+        "viewPortfolio": "View portfolio"
     },
     "HyperPlay": "",
     "hyperplayOverlay": {
@@ -426,7 +453,6 @@
             "FAILED": "Custom network canceled",
             "INITIATED": "Custom network request"
         },
-        "closeOverlay": "Press {{overlayKeyMod}} + X to close the overlay",
         "description": {
             "CONFIRMED": "The transaction was successfully confirmed!",
             "FAILED": "The transaction was canceled or not submitted, please try again",
@@ -458,6 +484,9 @@
             "INITIATED": "Add custom token request pending"
         }
     },
+    "importGameErrorMessage": "Not a valid game folder, importing game is not possible",
+    "importGameErrorMessageExecutable": "Game Executable not found, importing game is not possible",
+    "importGameErrorTitle": "Import Game Error",
     "info": {
         "hyperplay": {
             "version": "HyperPlay Version"
@@ -498,11 +527,18 @@
         "amazon": "Amazon Login",
         "epic": "Epic Games Login",
         "gog": "GOG Login",
-        "message": "Login with your platform. You can login to more than one platform at the same time."
+        "message": "Login with your platform. You can login to more than one platform at the same time.",
+        "old-mac": "Your macOS version is {{version}}. macOS 12 or newer is required to log in."
     },
     "message": {
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
+    },
+    "notification": {
+        "wine-download": {
+            "message": "Setting up the default compatibility layer",
+            "title": "Compatibility Layer"
+        }
     },
     "notify": {
         "error": {
@@ -556,7 +592,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Open",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -595,7 +631,7 @@
     },
     "Other": "Other",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet. \n \n To approve transactions in the HyperPlay overlay, you will need to connect to HyperPlay with the MetaMask Extension."
+        "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet."
     },
     "placeholder": {
         "alt-gogdl-bin": "Using built-in GOGDL binary...",
@@ -605,8 +641,19 @@
         "egs-prefix": "Prefix where EGS is installed",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
     },
+    "Please connect to the internet to access the stores": "",
     "please-wait": "Please wait...",
+    "profile": "Profile",
     "progress": "Progress",
+    "quest": {
+        "associatedGames": "Associated games",
+        "claimAll": "Claim all",
+        "connectSteamAccount": "Connect Steam account",
+        "linkAccount": "Link your Steam account to check eligibility.",
+        "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
+        "reputation": "Reputation",
+        "reward": "Reward"
+    },
     "queue": {
         "label": {
             "canceled": "Canceled",
@@ -631,6 +678,7 @@
         "alt-legendary-bin": "Choose an Alternative Legendary Binary",
         "autodxvk": "Auto Install/Update DXVK on Prefix",
         "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix",
+        "autoLaunchHyperPlay": "Auto Launch HyperPlay",
         "autosync": "Autosync Saves",
         "autoUpdateGames": "Automatically update games",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
@@ -689,11 +737,10 @@
         "library_top_section": "Library Top Section",
         "log": {
             "copy-to-clipboard": "Copy log content to clipboard",
-            "current-log": "Current Log",
             "instructions_title": "How to report a problem?",
             "instructions-part-01": "If you encounter any issues while using HyperPlay, we have two designated areas to report your issues in our Discord Server. If you're a player, please report any problems by visiting the player-support-forum. If you are a game dev, please report any problems by visiting the dev-support-forum.",
             "instructions-part-02": "To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.",
-            "last-log": "Last Log",
+            "join-hyperplay-discord": "Join our Discord",
             "no-file": "No log file found",
             "show-in-folder": "Show log file in folder"
         },
@@ -710,6 +757,7 @@
         "maxRecentGames": "Played Recently to Show",
         "maxworkers": "Maximum Number of Workers when downloading",
         "minimize-on-launch": "Minimize HyperPlay After Game Launch",
+        "msync": "Enable Msync",
         "offlinemode": "Run Game Offline",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
@@ -775,20 +823,48 @@
             "general": "General",
             "log": "Log",
             "other": "Other",
-            "sync": "Cloud Saves Sync"
+            "sync": "Cloud Saves Sync",
+            "systemInformation": "System Information"
         },
         "open-config-file": "Open Config File",
+        "reset-extension": "Reset Extension",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
         },
+        "systemInformation": {
+            "copyToClipboard": "Copy to clipboard",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "gpuDriver": "Driver: {{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "Legendary: {{legendaryVersion}}",
+            "memory": "Memory:",
+            "memoryStats": "{{percentUsed}}% used ({{usedGib}} / {{totalGib}}",
+            "nileVersion": "Nile: {{nileVersion}}",
+            "os": "Operating System:",
+            "osNameFlatpak": "{{osName}} (inside Flatpak)",
+            "osVersion": "Version {{versionNumber}}",
+            "showDetailed": "Show detailed system specifications",
+            "steamDeck": "Steam Deck",
+            "systemModel": "System Model:",
+            "version": "Version: {{appVersion}}"
+        },
         "wine": {
             "manager": {
-                "title": ""
+                "title": "Wine Manager"
             }
         }
     },
     "Settings": "Settings",
+    "sidebar": {
+        "achievements": "Achievements",
+        "downloadManager": "Download Manager",
+        "library": "Library",
+        "store": "Store"
+    },
     "sideload": {
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Side-loading an installer that contains malware could compromise your computer and lead to theft of funds.",
         "warningTitle": "Important"
@@ -824,6 +900,7 @@
     },
     "userselector": {
         "logging_out": "Logging out",
+        "logIn": "Log in",
         "logout": "Log out",
         "logout_confirmation": "Are you sure you want to log out?",
         "manageaccounts": "Manage Accounts",

@@ -48,3 +48,7 @@ flathub/update-flathub.js
 xyz.hyperplay.HyperPlay
 
 .sdk-comm
+
+/public/extensions/resetExecutables/resetExtension-macos
+/public/extensions/resetExecutables/resetExtension.exe
+/public/extensions/resetExecutables/resetExtension

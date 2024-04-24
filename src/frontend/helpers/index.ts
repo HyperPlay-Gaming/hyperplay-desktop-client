@@ -11,12 +11,12 @@ import { GogInstallInfo } from 'common/types/gog'
 import { NileInstallInfo } from 'common/types/nile'
 
 import { install, launch, repair, updateGame } from './library'
-import fileSize from 'filesize'
+import * as fileSize from 'filesize'
 
 const notify = (args: { title: string; body: string }) =>
   window.api.notify(args)
 
-export const size = fileSize.partial({ base: 2 })
+export const size = fileSize.partial({ base: 2 }) as (arg: unknown) => string
 
 const syncSaves = async (
   savesPath: string,

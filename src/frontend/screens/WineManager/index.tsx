@@ -36,7 +36,7 @@ export default React.memo(function WineManager(): JSX.Element | null {
 
   const gamePortingToolkit: WineManagerUISettings = {
     type: 'Game-Porting-Toolkit',
-    value: 'gpt',
+    value: 'toolkit',
     enabled: !isLinux
   }
 
@@ -48,13 +48,8 @@ export default React.memo(function WineManager(): JSX.Element | null {
   >([
     { type: 'Wine-GE', value: 'winege', enabled: isLinux },
     { type: 'Proton-GE', value: 'protonge', enabled: isLinux },
-    { type: 'Game-Porting-Toolkit', value: 'gpt', enabled: !isLinux },
-    { type: 'Wine-Crossover', value: 'winecrossover', enabled: !isLinux },
-    {
-      type: 'Wine-Staging-macOS',
-      value: 'winestagingmacos',
-      enabled: !isLinux
-    }
+    { type: 'Game-Porting-Toolkit', value: 'toolkit', enabled: !isLinux },
+    { type: 'Wine-Crossover', value: 'winecrossover', enabled: !isLinux }
   ])
 
   const getWineVersions = (repo: Type) => {

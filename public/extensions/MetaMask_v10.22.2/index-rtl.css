@@ -171,9 +171,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -6428,9 +6445,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -23375,6 +23409,20 @@ readers do not read off random characters that represent icons */
   }
 }
 
+.mm-container {
+  --size: 100%;
+  max-width: var(--size);
+}
+.mm-container--max-width-sm {
+  --size: 360px;
+}
+.mm-container--max-width-md {
+  --size: 480px;
+}
+.mm-container--max-width-lg {
+  --size: 720px;
+}
+
 /*
 Responsive breakpoints
 */
@@ -23382,9 +23430,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -30213,9 +30278,7 @@ a.mm-button-base:hover {
   position: relative;
 }
 .mm-checkbox__input {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   width: 20px;
   height: 20px;
 }
@@ -30309,6 +30372,29 @@ a.mm-button-base:hover {
   flex-grow: 1;
 }
 
+.mm-textarea--is-disabled, .mm-textarea:disabled {
+  opacity: var(--opacity-disabled);
+  cursor: not-allowed;
+}
+.mm-textarea--resize-none {
+  resize: none;
+}
+.mm-textarea--resize-both {
+  resize: both;
+}
+.mm-textarea--resize-horizontal {
+  resize: horizontal;
+}
+.mm-textarea--resize-vertical {
+  resize: vertical;
+}
+.mm-textarea--resize-initial {
+  resize: initial;
+}
+.mm-textarea--resize-inherit {
+  resize: inherit;
+}
+
 .mm-text-field-search ::-webkit-search-decoration,
 .mm-text-field-search ::-webkit-search-cancel-button,
 .mm-text-field-search ::-webkit-search-results-button,
@@ -30352,6 +30438,11 @@ a.mm-button-base:hover {
   scrollbar-width: thin;
   scrollbar-color: var(--color-icon-muted) transparent;
 }
+@media (max-height: 475px) {
+  .mm-modal-content {
+    padding: 8px;
+  }
+}
 .mm-modal-content ::-webkit-scrollbar {
   width: 8px;
 }
@@ -30361,11 +30452,19 @@ a.mm-button-base:hover {
 }
 .mm-modal-content__dialog {
   --modal-content-size: var(--size, 360px);
-  position: relative;
+  max-height: 100%;
   box-shadow: var(--shadow-size-lg) var(--color-shadow-default);
 }
 .mm-modal-content__dialog--size-sm {
   --size: 360px;
+  max-width: var(--modal-content-size);
+}
+.mm-modal-content__dialog--size-md {
+  --size: 480px;
+  max-width: var(--modal-content-size);
+}
+.mm-modal-content__dialog--size-lg {
+  --size: 720px;
   max-width: var(--modal-content-size);
 }
 
@@ -30376,6 +30475,16 @@ a.mm-button-base:hover {
   left: 0;
   bottom: 0;
   z-index: 1050;
+}
+
+.mm-modal-body {
+  max-height: 100%;
+  overflow-y: auto;
+  position: relative;
+}
+
+.mm-modal-footer__button {
+  flex: 1 0 auto;
 }
 
 .mm-popover {
@@ -30444,11 +30553,44 @@ a.mm-button-base:hover {
 }
 
 .mm-select-button {
-  box-sizing: border-box;
+  --select-button-height: var(--size, 40px);
+  position: relative;
+  cursor: pointer;
+  text-align: start;
+  height: min-content;
+  min-height: var(--select-button-height);
+  overflow: hidden;
+  max-width: 100%;
 }
-.mm-select-button:active, .mm-select-button:focus {
+.mm-select-button--size-sm {
+  --size: 32px;
+}
+.mm-select-button--size-md {
+  --size: 40px;
+}
+.mm-select-button--size-lg {
+  --size: 48px;
+}
+.mm-select-button:hover:not(.mm-select-button--disabled) {
+  background-color: var(--color-background-hover);
+}
+.mm-select-button:active:not(.mm-select-button--disabled) {
+  background-color: var(--color-background-pressed);
+}
+.mm-select-button:active:not(.mm-select-button--disabled), .mm-select-button:focus:not(.mm-select-button--disabled) {
   border-color: var(--color-primary-default);
   box-shadow: inset 0 0 0 1px var(--color-primary-default);
+}
+.mm-select-button--type-danger {
+  border-color: var(--color-error-default);
+  box-shadow: inset 0 0 0 1px var(--color-error-default);
+}
+.mm-select-button__content {
+  overflow: auto;
+}
+
+.mm-select-wrapper:has(.mm-select-button--block) {
+  width: 100%;
 }
 
 .mm-select-wrapper__popover {
@@ -30687,8 +30829,6 @@ a.mm-button-base:hover {
   border: 1px solid var(--color-warning-default);
 }
 .advanced-gas-inputs__gas-edit-row input[type=number] {
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
   appearance: textfield;
 }
 .advanced-gas-inputs__gas-edit-row input[type=number]::-webkit-inner-spin-button {
@@ -30991,7 +31131,6 @@ a.mm-button-base:hover {
 }
 .confirm-page-container-content__details {
   box-sizing: border-box;
-  padding: 0 24px;
 }
 .confirm-page-container-content__gas-fee {
   border-bottom: 1px solid var(--color-border-muted);
@@ -31087,6 +31226,7 @@ a.mm-button-base:hover {
 
 .confirm-detail-row {
   padding: 14px 0;
+  margin: 15px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -31244,63 +31384,38 @@ a.mm-button-base:hover {
   flex: 0;
 }
 
-.token-list__title {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
+.token-list__empty-list {
+  height: 214.5px;
+}
+@media screen and (max-width: calc(576px - 1px)) {
+  .token-list__empty-list {
+    height: 207.5px;
+  }
 }
 .token-list__tokens-container {
   display: flex;
   flex-direction: column;
+  overflow: auto;
+  max-height: 214.5px;
 }
-.token-list__token {
-  transition: 200ms ease-in-out;
+@media screen and (max-width: calc(576px - 1px)) {
+  .token-list__tokens-container {
+    max-height: 207.5px;
+  }
+}
+.token-list__token_component {
   display: flex;
   flex-flow: row nowrap;
+  padding: 16px;
   align-items: center;
-  padding: 8px;
-  margin-top: 8px;
-  box-sizing: border-box;
-  border-radius: 10px;
   cursor: pointer;
-  border: 1px solid transparent;
-  position: relative;
 }
-.token-list__token:hover, .token-list__token:focus {
-  border-color: var(--color-primary-muted);
+.token-list__token_component--selected {
+  background-color: var(--color-primary-muted);
 }
-.token-list__token--selected {
-  border-color: var(--color-primary-default) !important;
-}
-.token-list__token--disabled {
+.token-list__token_component--disabled {
   opacity: 0.4;
   pointer-events: none;
-}
-.token-list__token-icon {
-  width: 48px;
-  height: 48px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
-  border-radius: 50%;
-  background-color: var(--color-background-default);
-  box-shadow: var(--shadow-size-xs) var(--color-shadow-default);
-  margin-left: 12px;
-  flex: 0 0 auto;
-}
-.token-list__token-data {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  min-width: 0;
-}
-.token-list__token-name {
-  direction: ltr;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .nfts-items__collection {
@@ -31580,9 +31695,6 @@ a.mm-button-base:hover {
 .create-new-vault__terms {
   margin-top: 16px;
   margin-bottom: 16px;
-}
-.create-new-vault__terms-label {
-  margin-right: 8px;
 }
 .create-new-vault__terms-link {
   color: var(--color-primary-default);
@@ -32009,6 +32121,8 @@ a.mm-button-base:hover {
 }
 .snap-ui-renderer__spinner {
   width: 30px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 .snap-ui-renderer__divider {
   width: 100%;
@@ -32064,49 +32178,49 @@ a.mm-button-base:hover {
   transition: background-color background 0.2s;
 }
 .copyable .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, var(--color-background-alternative) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-background-alternative) 33%);
 }
 .copyable:hover {
   background-color: var(--color-background-alternative-hover);
 }
 .copyable:hover .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, var(--color-background-alternative-hover) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-background-alternative-hover) 33%);
 }
 .copyable.clicked {
   background-color: var(--color-background-alternative-pressed);
 }
 .copyable.clicked .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, var(--color-background-alternative-pressed) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-background-alternative-pressed) 33%);
 }
 .copyable.clicked:hover {
   background-color: var(--color-background-alternative-pressed);
 }
 .copyable.clicked:hover .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, var(--color-background-alternative-pressed) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-background-alternative-pressed) 33%);
 }
 .copyable.sensitive.visible {
-  background-color: rgba(215, 56, 71, 0.2);
+  background-color: var(--color-error-muted);
 }
 .copyable.sensitive.visible .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(215, 56, 71, 0.2) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-error-muted) 33%);
 }
 .copyable.sensitive.visible:hover {
-  background-color: rgba(215, 56, 71, 0.25);
+  background-color: var(--color-error-muted-hover);
 }
 .copyable.sensitive.visible:hover .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(215, 56, 71, 0.25) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-error-muted-hover) 33%);
 }
 .copyable.sensitive.visible.clicked {
-  background-color: rgba(215, 56, 71, 0.3);
+  background-color: var(--color-error-muted-pressed);
 }
 .copyable.sensitive.visible.clicked .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(215, 56, 71, 0.3) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-error-muted-pressed) 33%);
 }
 .copyable.sensitive.visible.clicked:hover {
-  background-color: rgba(215, 56, 71, 0.3);
+  background-color: var(--color-error-muted-pressed);
 }
 .copyable.sensitive.visible.clicked:hover .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, rgba(215, 56, 71, 0.3) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-error-muted-pressed) 33%);
 }
 .copyable__icon {
   margin-top: 2px;
@@ -32141,7 +32255,7 @@ a.mm-button-base:hover {
   }
 }
 .show-more__button {
-  background: linear-gradient(-90deg, rgba(255, 255, 255, 0) 0%, var(--color-background-default) 33%);
+  background: linear-gradient(-90deg, transparent 0%, var(--color-background-default) 33%);
   vertical-align: baseline;
 }
 
@@ -32157,27 +32271,8 @@ a.mm-button-base:hover {
   white-space: nowrap;
 }
 
-.gas-details-item-title__estimate {
-  font-weight: 400;
-  font-style: italic;
-  font-size: 12px;
-  color: var(--color-text-muted);
-  line-height: inherit;
-}
-
 .typography.gas-timing {
   color: var(--color-text-alternative);
-}
-.typography.gas-timing--positive {
-  color: var(--color-success-default);
-  font-weight: bold;
-}
-.typography.gas-timing--warning {
-  color: var(--color-warning-default);
-}
-.typography.gas-timing--negative {
-  color: var(--color-warning-default);
-  font-weight: bold;
 }
 .typography.gas-timing .info-tooltip {
   display: inline-block;
@@ -33881,7 +33976,7 @@ a.signature-request-content__verify-contract-details {
     min-height: 570px;
     flex: 0 0 auto;
     border-radius: 8px;
-    box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-size-sm) var(--color-shadow-default);
   }
 }
 
@@ -34256,7 +34351,6 @@ a.signature-request-content__verify-contract-details {
 }
 
 .token-list-item {
-  padding: 8px;
   display: flex;
   flex-flow: row nowrap;
   align-items: center;
@@ -34264,7 +34358,7 @@ a.signature-request-content__verify-contract-details {
   padding: 8px;
 }
 .token-list-item:hover {
-  background-color: rgba(222, 222, 222, 0.2);
+  background-color: var(--color-background-hover);
 }
 .token-list-item__data {
   margin-right: 8px;
@@ -34419,6 +34513,10 @@ a.signature-request-content__verify-contract-details {
 }
 
 .transaction-detail {
+  margin: 15px;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-default);
   position: relative;
 }
 .transaction-detail .transaction-detail-edit {
@@ -34443,8 +34541,7 @@ a.signature-request-content__verify-contract-details {
 
 .transaction-detail-item {
   color: var(--color-text-alternative);
-  padding: 20px 0;
-  border-bottom: 1px solid var(--color-border-default);
+  margin-bottom: 8px;
 }
 .transaction-detail-item__row {
   display: flex;
@@ -34479,9 +34576,6 @@ a.signature-request-content__verify-contract-details {
 }
 .transaction-detail-item:first-of-type {
   padding-top: 0;
-}
-.transaction-detail-item:last-of-type {
-  margin-bottom: 20px;
 }
 .transaction-detail-item:first-child {
   padding-top: 0;
@@ -34739,7 +34833,7 @@ a.signature-request-content__verify-contract-details {
 .transaction-status-label--failed, .transaction-status-label--cancelled, .transaction-status-label--dropped, .transaction-status-label--rejected {
   color: var(--color-error-default);
 }
-.transaction-status-label--unapproved, .transaction-status-label--pending {
+.transaction-status-label--unapproved, .transaction-status-label--signing, .transaction-status-label--pending {
   color: var(--color-warning-default);
 }
 .transaction-status-label--queued {
@@ -35200,6 +35294,7 @@ a.signature-request-content__verify-contract-details {
 
 .transaction-alerts {
   text-align: right;
+  margin: 15px;
 }
 .transaction-alerts > *:first-of-type {
   margin-top: 20px;
@@ -35260,11 +35355,7 @@ a.signature-request-content__verify-contract-details {
 
 .name-details__display-name {
   width: 100%;
-}
-.name-details__line {
-  margin-right: -16px;
-  margin-left: -16px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 .name-details__address .mm-text-field {
   padding-left: 5px;
@@ -35319,6 +35410,15 @@ a.signature-request-content__verify-contract-details {
   border: 1px solid var(--color-border-muted);
   max-width: 100%;
   overflow-wrap: anywhere;
+}
+
+.confirm_header__wrapper {
+  box-shadow: var(--shadow-size-md) var(--color-shadow-default);
+  height: 64px;
+}
+.confirm_header__avatar-network {
+  margin-right: -12px;
+  margin-top: -4px;
 }
 
 /** Please import your files in alphabetical order **/
@@ -35675,9 +35775,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -52652,9 +52769,7 @@ input[type=submit][disabled] {
 }
 
 .check-box {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   background: var(--color-background-default);
   color: var(--color-icon-muted);
   width: 18px;
@@ -52680,9 +52795,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -59150,9 +59282,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -67366,9 +67515,7 @@ readers do not read off random characters that represent icons */
   display: inline-flex;
 }
 .show-hide-toggle__input {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
+  appearance: none;
   /* Focused when tabbing with keyboard */
 }
 .show-hide-toggle__input + .show-hide-toggle__label {
@@ -67643,9 +67790,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -74091,9 +74255,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -80432,10 +80613,25 @@ readers do not read off random characters that represent icons */
   transition: 0.1s transform;
 }
 
-.deprecated-test-networks {
+.deprecated-networks {
   position: fixed;
   bottom: 0;
   z-index: 1050;
+}
+@media screen and (min-width: 576px) {
+  .deprecated-networks {
+    width: 85vw;
+  }
+}
+@media screen and (min-width: 768px) {
+  .deprecated-networks {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .deprecated-networks {
+    width: 62vw;
+  }
 }
 
 .collection-image-alt {
@@ -80701,6 +80897,12 @@ readers do not read off random characters that represent icons */
 .multichain-account-menu-popover__list {
   overflow: auto;
 }
+.multichain-account-menu-popover__list--menu-item-hidden {
+  opacity: 0.5;
+}
+.multichain-account-menu-popover__list--menu-item-hidden-account {
+  opacity: 0.5;
+}
 
 .multichain-account-picker:not([disabled]):hover, .multichain-account-picker:not([disabled]):focus {
   box-shadow: none;
@@ -80880,6 +81082,12 @@ readers do not read off random characters that represent icons */
 .multichain-account-menu-popover__list {
   overflow: auto;
 }
+.multichain-account-menu-popover__list--menu-item-hidden {
+  opacity: 0.5;
+}
+.multichain-account-menu-popover__list--menu-item-hidden-account {
+  opacity: 0.5;
+}
 
 .multichain-token-list-item__container-cell:hover, .multichain-token-list-item__container-cell:focus-within {
   background-color: var(--color-background-default-hover);
@@ -81007,13 +81215,71 @@ readers do not read off random characters that represent icons */
 .import-tokens-modal .tabs li {
   width: 50%;
 }
+.import-tokens-modal__body::-webkit-scrollbar {
+  display: none;
+}
+.import-tokens-modal__body {
+  overflow-y: auto;
+}
+.import-tokens-modal__confirmation-list {
+  overflow-y: scroll;
+  overflow: auto;
+  height: 332px;
+}
+@media screen and (max-width: calc(576px - 1px)) {
+  .import-tokens-modal__confirmation-list {
+    height: 320px;
+  }
+}
+.import-tokens-modal__tabs {
+  padding-right: 16px;
+  padding-left: 16px;
+  justify-content: center;
+}
+.import-tokens-modal__modal-dialog-content {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+  padding-top: 16px !important;
+}
 .import-tokens-modal__autodetect {
   vertical-align: unset;
 }
 .import-tokens-modal__search-list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  overflow-y: scroll;
   max-width: 100%;
   overflow: auto;
-  max-height: 200px;
+  max-height: 400px;
+}
+.import-tokens-modal__button-link {
+  font-size: 12px;
+}
+.import-tokens-modal__active-tab {
+  color: var(--color-primary-default);
+}
+.import-tokens-modal__button-tab {
+  font-weight: 500;
+}
+.import-tokens-modal__button-search {
+  outline-color: var(--color-primary-default);
+  padding-right: 16px;
+  padding-left: 16px;
+}
+.import-tokens-modal__custom-token-form__container {
+  overflow: auto;
+  height: 384px;
+}
+@media screen and (max-width: calc(576px - 1px)) {
+  .import-tokens-modal__custom-token-form__container {
+    height: 370px;
+  }
+}
+.import-tokens-modal__custom-token-form__text-outline-success {
+  outline-color: var(--color-primary-default);
+}
+.import-tokens-modal__custom-token-form__text-outline-error {
+  outline-color: var(--color-error-default);
 }
 .import-tokens-modal__custom-token-form input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -81087,6 +81353,69 @@ readers do not read off random characters that represent icons */
   cursor: pointer;
 }
 
+.asset-picker-modal__search-list {
+  max-width: 100%;
+  overflow: auto;
+  max-height: 200px;
+}
+.asset-picker-modal__search-list:hover {
+  border-color: var(--color-primary-default);
+}
+.asset-picker-modal__autodetect {
+  vertical-align: unset;
+}
+.asset-picker-modal .multichain-asset-picker-list-item {
+  position: relative;
+  cursor: pointer;
+  overflow-y: auto;
+  max-height: 564px;
+}
+.asset-picker-modal .multichain-asset-picker-list-item:not(.multichain-asset-picker-list-item--selected):hover, .asset-picker-modal .multichain-asset-picker-list-item:not(.multichain-asset-picker-list-item--selected):focus-within {
+  background: var(--color-background-default-hover);
+}
+.asset-picker-modal .multichain-asset-picker-list-item__selected-indicator {
+  width: 4px;
+  height: calc(100% - 8px);
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.asset-picker-modal .tokens-main-view-modal {
+  max-height: 564px;
+  overflow: auto;
+}
+.asset-picker-modal .modal-tab__main-view {
+  flex: 1 1 66.5%;
+  max-height: 564px;
+  background: var(--color-background-default);
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+.asset-picker-modal .modal-tab__main-view .asset-picker-modal .modal-tab__tab {
+  font-size: 0.875rem;
+  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 140%;
+  font-style: normal;
+  font-weight: normal;
+  flex-grow: 1;
+  color: var(--color-icon-default);
+  font-weight: 500;
+}
+.asset-picker-modal .modal-tab__main-view .asset-picker-modal .modal-tab__tab--active {
+  color: var(--color-primary-default);
+}
+.asset-picker-modal .modal-tab__main-view .asset-picker-modal .modal-tab__tab button {
+  padding: 8px;
+}
+.asset-picker-modal .modal-tab__tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 0;
+  padding: 16px;
+}
+
 /** Please import your files in alphabetical order **/
 .asset__container {
   background-color: var(--color-background-default);
@@ -81121,16 +81450,6 @@ readers do not read off random characters that represent icons */
 
 .confirm-add-suggested-token {
   padding: 16px;
-}
-.confirm-add-suggested-token__link {
-  font-size: 0.75rem;
-  font-family: "Euclid Circular B", Roboto, Helvetica, Arial, sans-serif;
-  line-height: 140%;
-  font-style: normal;
-  font-weight: normal;
-  display: inline;
-  color: var(--color-primary-default);
-  padding-right: 0;
 }
 .confirm-add-suggested-token__header {
   font-size: 0.75rem;
@@ -81177,7 +81496,7 @@ readers do not read off random characters that represent icons */
 
 .confirm-add-suggested-nft__card {
   margin: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  box-shadow: var(--shadow-size-md) var(--color-shadow-default);
 }
 .confirm-add-suggested-nft__header {
   border-bottom: 1px solid var(--color-border-muted);
@@ -82076,10 +82395,10 @@ readers do not read off random characters that represent icons */
 
 .confirmation-network-switch__center-icon {
   position: relative;
-  height: 64px;
+  height: 48px;
 }
 .confirmation-network-switch__icon {
-  width: 64px;
+  width: 48px;
 }
 .confirmation-network-switch__check {
   width: 32px;
@@ -82105,17 +82424,6 @@ readers do not read off random characters that represent icons */
   width: 130px;
   border-bottom: 1px solid var(--color-border-muted);
   border-style: dashed;
-}
-.confirmation-network-switch__unknown-icon {
-  color: var(--color-icon-muted);
-  border-radius: 50%;
-  border: 1px solid var(--color-border-muted);
-  background-color: var(--color-background-alternative);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
-  width: 64px;
 }
 
 .snap-prompt {
@@ -82148,6 +82456,8 @@ readers do not read off random characters that represent icons */
   color: var(--color-primary-default);
 }
 .confirmation-page__content {
+  display: flex;
+  flex-direction: column;
   grid-area: content;
   min-width: 0;
 }
@@ -82192,6 +82502,9 @@ readers do not read off random characters that represent icons */
 }
 .confirmation-page .chip__label {
   word-break: break-all;
+}
+.confirmation-page .actionable-message {
+  margin-top: 0;
 }
 
 .connected-sites h2 {
@@ -82815,15 +83128,20 @@ readers do not read off random characters that represent icons */
   margin-right: 44px;
 }
 .home__new-tokens-imported-notification {
-  margin-bottom: 4px;
-  margin-inline-start: 8px;
   padding: 8px;
+  bottom: 16px !important;
 }
 @media screen and (min-width: 576px) {
   .home__new-tokens-imported-notification {
     margin-bottom: 50px;
     margin-inline-end: 8px;
-    right: 70%;
+    margin-left: 40%;
+  }
+}
+@media screen and (max-width: calc(576px - 1px)) {
+  .home__new-tokens-imported-notification {
+    right: 5%;
+    left: 5% !important;
   }
 }
 .home__new-tokens-imported-notification-title, .home__new-tokens-imported-notification-message {
@@ -82836,7 +83154,6 @@ readers do not read off random characters that represent icons */
   font-style: normal;
   font-weight: normal;
   margin-inline-end: 12px;
-  padding-top: 12px;
   color: var(--color-success-default);
 }
 .home__new-tokens-imported-notification-close {
@@ -82896,6 +83213,12 @@ readers do not read off random characters that represent icons */
   font-size: 12px;
   line-height: 140.62%;
 }
+.home__survey-banner {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  left: 8px;
+}
 
 .custody-account-list {
   flex: 1;
@@ -82927,7 +83250,7 @@ readers do not read off random characters that represent icons */
   border: 0;
 }
 .custody-account-list__item:hover {
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: var(--color-background-hover);
 }
 .custody-account-list__buttons {
   border-top: 1px solid #d2d8dd;
@@ -82965,7 +83288,7 @@ readers do not read off random characters that represent icons */
   border: 0;
 }
 .interactive-replacement-token-page__item:hover {
-  background-color: rgba(0, 0, 0, 0.03);
+  background-color: var(--color-background-hover);
 }
 
 .gas-display {
@@ -82974,9 +83297,6 @@ readers do not read off random characters that represent icons */
 }
 .gas-display .transaction-detail-rows {
   padding: 10px;
-  border-radius: 8px;
-  border: 1px solid var(--color-border-default);
-  margin: 16px 16px;
 }
 .gas-display .transaction-detail-rows .transaction-detail-item:not(:first-child) {
   border-top: 1px solid var(--color-border-default);
@@ -83087,98 +83407,6 @@ readers do not read off random characters that represent icons */
 }
 .reveal-seed__active-tab {
   color: var(--color-primary-default);
-}
-
-@media screen and (min-width: 576px) {
-  .snap-details-page {
-    width: 85vw;
-  }
-}
-@media screen and (min-width: 768px) {
-  .snap-details-page {
-    width: 80vw;
-  }
-}
-@media screen and (min-width: 1280px) {
-  .snap-details-page {
-    width: 62vw;
-  }
-}
-.snap-details-page .snap-detail-icon {
-  width: 16px;
-  height: 16px;
-}
-
-.snap-account-page {
-  background-image: url("images/snap-account-page.svg");
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position: bottom;
-}
-@media screen and (min-width: 576px) {
-  .snap-account-page {
-    width: 85vw;
-  }
-}
-@media screen and (min-width: 768px) {
-  .snap-account-page {
-    width: 80vw;
-  }
-}
-@media screen and (min-width: 1280px) {
-  .snap-account-page {
-    width: 62vw;
-  }
-}
-
-.snap-account-subtitle {
-  text-align: center;
-}
-@media screen and (min-width: 576px) {
-  .snap-account-subtitle {
-    padding-right: 48px;
-    padding-left: 48px;
-  }
-}
-@media screen and (min-width: 768px) {
-  .snap-account-subtitle {
-    padding-right: 48px;
-    padding-left: 48px;
-  }
-}
-
-.snap-account-cards {
-  grid-template-columns: repeat(3, 1fr);
-}
-
-.snap-account-color-text {
-  background-image: linear-gradient(-0.45deg, #f6851b, #43aefc);
-  -webkit-background-clip: text;
-          background-clip: text;
-  color: transparent;
-}
-
-.snap-account-footer {
-  padding-top: 140px;
-}
-
-.legal-disclaimer {
-  padding-right: 48px;
-  padding-left: 48px;
-}
-
-.legal-disclaimer-element {
-  padding-top: 30px;
-  white-space: pre-line;
-}
-
-.feedback-link {
-  padding-top: 50px;
-  padding-bottom: 20px;
-}
-
-.configure-button:hover > * {
-  color: var(--color-primary-inverse);
 }
 
 .notifications {
@@ -84241,7 +84469,7 @@ readers do not read off random characters that represent icons */
   padding: 16px;
 }
 .send__select-recipient-wrapper__group-item:hover, .send__select-recipient-wrapper__group-item--selected:hover {
-  background-color: rgba(222, 222, 222, 0.2);
+  background-color: var(--color-background-hover);
 }
 .send__select-recipient-wrapper__group-item .identicon, .send__select-recipient-wrapper__group-item--selected .identicon {
   margin-left: 1rem;
@@ -84431,9 +84659,26 @@ Responsive breakpoints
 DEPRECATED
 */
 /**
-  These colors are either deprecated or will move into colors.scss
-  when approved for the design system
+  These colors are pending to be approved for the design system's design-token package
 **/
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+:root {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
+/**
+ * Dark Theme Colors
+ * Colors for dark theme
+ */
+[data-theme=dark] {
+  --color-error-muted-hover: #d738473f;
+  --color-error-muted-pressed: #d738474c;
+}
+
 /*!
  * Font Awesome Free 5.13.0 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -90991,11 +91236,11 @@ readers do not read off random characters that represent icons */
   width: 25%;
 }
 .settings-tab__button--red {
-  border-color: #fd0826;
+  border-color: var(--color-error-muted);
   color: var(--color-error-default);
 }
 .settings-tab__button--red:active {
-  background: #ffecee;
+  background: var(--color-error-muted-pressed);
   border-color: var(--color-error-default);
 }
 .settings-tab__button--red:hover {
@@ -91707,6 +91952,50 @@ readers do not read off random characters that represent icons */
 }
 .snap-view__content__remove-button .mm-box--color-error-default, .snap-view__content__remove-button:hover .mm-box--color-error-default {
   color: inherit;
+}
+
+@media screen and (min-width: 576px) {
+  .create-snap-account-page {
+    width: 85vw;
+  }
+}
+@media screen and (min-width: 768px) {
+  .create-snap-account-page {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .create-snap-account-page {
+    width: 62vw;
+  }
+}
+
+@media screen and (min-width: 576px) {
+  .remove-snap-account-page {
+    width: 85vw;
+  }
+}
+@media screen and (min-width: 768px) {
+  .remove-snap-account-page {
+    width: 80vw;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .remove-snap-account-page {
+    width: 62vw;
+  }
+}
+
+.snap-account-card .multichain-account-list-item {
+  pointer-events: none;
+}
+
+.snap-account-card-remove .multichain-account-list-item {
+  background-color: var(--color-transparent);
+  pointer-events: none;
+}
+.snap-account-card-remove .multichain-account-list-item__selected-indicator {
+  background-color: var(--color-error-default);
 }
 
 .awaiting-swap {

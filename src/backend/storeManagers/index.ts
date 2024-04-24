@@ -18,12 +18,14 @@ import { DMQueueElement, GameInfo, Runner } from 'common/types'
 import { ipcMain } from 'electron'
 import { sendFrontendMessage } from 'backend/main_window'
 import { loadEpicHyperPlayGameInfoMap } from './hyperplay/utils'
-import { isGameAvailable } from 'backend/api/helpers'
-interface GameManagerMap {
-  [key: string]: GameManager
-}
 
-export const gameManagerMap: GameManagerMap = {
+import { notify } from '../dialog/dialog'
+import i18next from 'i18next'
+import { wait } from 'backend/utils'
+
+const MAX_GAMES_UPDATE_NOTIFICATIONS = 3
+
+export const gameManagerMap: Record<Runner, GameManager> = {
   hyperplay: HyperPlayGameManager,
   sideload: SideloadGameManager,
   gog: GOGGameManager,
@@ -31,16 +33,12 @@ export const gameManagerMap: GameManagerMap = {
   nile: NileGameManager
 }
 
-interface LibraryManagerMap {
-  [key: string]: LibraryManager
-}
-
-export const libraryManagerMap: LibraryManagerMap = {
+export const libraryManagerMap: Record<Runner, LibraryManager> = {
   hyperplay: HyperPlayLibraryManager,
-  sideload: SideloadLibraryManager,
-  gog: GOGLibraryManager,
   legendary: LegendaryLibraryManager,
-  nile: NileLibraryManager
+  gog: GOGLibraryManager,
+  nile: NileLibraryManager,
+  sideload: SideloadLibraryManager
 }
 
 function getDMElement(gameInfo: GameInfo, appName: string) {
@@ -64,31 +62,85 @@ function getDMElement(gameInfo: GameInfo, appName: string) {
   return dmQueueElement
 }
 
-export function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
+export async function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
   const logPrefix = RunnerToLogPrefixMap[runner]
-  gamesToUpdate.forEach(async (appName) => {
+  for (const appName of gamesToUpdate) {
     const { ignoreGameUpdates } = await gameManagerMap[runner].getSettings(
       appName
     )
     const gameInfo = gameManagerMap[runner].getGameInfo(appName)
-    const gameAvailable = await isGameAvailable({ appName, runner })
+    const gameAvailable = gameManagerMap[runner].isGameAvailable(appName)
 
     if (!gameAvailable) {
       logInfo(`Skipping auto-update for ${gameInfo.title}`, logPrefix)
-      return
+      continue
     }
 
     if (!ignoreGameUpdates) {
       logInfo(`Auto-Updating ${gameInfo.title}`, logPrefix)
       const dmQueueElement: DMQueueElement = getDMElement(gameInfo, appName)
+      await wait(3000)
       addToQueue(dmQueueElement)
       // remove from the array to avoid downloading the same game twice
       gamesToUpdate = gamesToUpdate.filter((game) => game !== appName)
     } else {
       logInfo(`Skipping auto-update for ${gameInfo.title}`, logPrefix)
     }
-  })
+  }
   return gamesToUpdate
+}
+
+let notificationsSent = false
+
+// We only check hyperplay games for updates
+export async function sendGameUpdatesNotifications() {
+  if (notificationsSent) {
+    return
+  }
+  notificationsSent = true
+  const gamesToUpdate: string[] = []
+  const allGames = await libraryManagerMap.hyperplay.listUpdateableGames()
+  const gamesToCheck = allGames.slice(0, MAX_GAMES_UPDATE_NOTIFICATIONS)
+
+  const gameSettings = await Promise.all(
+    gamesToCheck.map(async (game) => gameManagerMap.hyperplay.getSettings(game))
+  )
+
+  const notifiableGames = gamesToCheck.filter(async (_game, index) => {
+    const { ignoreGameUpdates } = gameSettings[index]
+    return !ignoreGameUpdates
+  })
+
+  gamesToUpdate.push(...notifiableGames)
+
+  if (gamesToUpdate.length === 0) {
+    return
+  }
+
+  const leadGameInfo = gameManagerMap.hyperplay.getGameInfo(gamesToUpdate[0])
+
+  const title = i18next.t(
+    'gameUpdateNotifications.title',
+    'Game Updates Available'
+  )
+
+  let body = ''
+
+  if (gamesToUpdate.length > 1) {
+    body = i18next.t(
+      'gameUpdateNotifications.body.multiple',
+      `${leadGameInfo.title} and other games are ready to update.`,
+      { gameName: leadGameInfo.title }
+    )
+  } else {
+    body = i18next.t(
+      'gameUpdateNotifications.body.single',
+      `There is an update ready for ${leadGameInfo.title}.`,
+      { gameName: leadGameInfo.title }
+    )
+  }
+
+  notify({ title, body })
 }
 
 export async function initStoreManagers() {

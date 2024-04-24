@@ -1,6 +1,12 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
-import { StoreRow, Images, Button } from '@hyperplay/ui'
+import {
+  Button,
+  Images,
+  LinkAccountDialog,
+  ModalAnimation,
+  StoreRow
+} from '@hyperplay/ui'
 import { Flex } from '@mantine/core'
 
 import styles from './index.module.css'
@@ -8,13 +14,16 @@ import styles from './index.module.css'
 import classNames from 'classnames'
 import { observer } from 'mobx-react-lite'
 import AchievementState from 'frontend/state/AchievementState'
-import useSetting from 'frontend/hooks/useSetting'
 import walletState from 'frontend/state/WalletState'
 import { useTranslation } from 'react-i18next'
+import useAuthSession from '../../../hooks/useAuthSession'
 
 export const AchievementStores = observer(() => {
-  const [steamId] = useSetting('steamId', '')
   const { t } = useTranslation()
+  const { data: authSession, isLoading } = useAuthSession()
+  const [showLinkDialog, setShowLinkDialog] = useState(
+    !authSession?.linkedAccounts.has('steam')
+  )
 
   const {
     store,
@@ -25,21 +34,51 @@ export const AchievementStores = observer(() => {
     getAchievementsStats
   } = AchievementState
 
-  useEffect(() => {
-    setPlayerStoreId(steamId)
-    getAchievementsStats()
-    syncAchievements('STEAM')
-  }, [steamId, walletState.address])
-
   const activeSecondaryText = `${totalGames} Games`
   const isSteam = store === 'STEAM'
 
-  async function handleSyncClicked() {
+  const handleDialogClose = () => setShowLinkDialog(true)
+
+  useEffect(() => {
+    const steamId = authSession?.linkedAccounts.get('steam')
+    if (isLoading || !steamId) return
+    setPlayerStoreId(steamId)
+    getAchievementsStats()
     syncAchievements('STEAM')
-  }
+  }, [isLoading, authSession, walletState.address])
+
+  useEffect(() => {
+    if (isLoading) return
+    setShowLinkDialog(!authSession?.linkedAccounts.has('steam'))
+  }, [isLoading, authSession])
 
   return (
     <div className={`${styles.storeCard}`}>
+      <ModalAnimation isOpen={showLinkDialog} onClose={handleDialogClose}>
+        {isLoading ? (
+          'loading...'
+        ) : (
+          <LinkAccountDialog
+            i18n={{
+              connectTitle: t(
+                'hyperplay.linkSteamAccountTitle',
+                'Link Steam Account'
+              ),
+              connectSubtitle: t(
+                'hyperplay.linkSteamAccountDescription',
+                'Sign in to Steam to link your HyperPlay account.'
+              ),
+              callToActionText: t(
+                'hyperplay.linkSteamAccountCta',
+                'Go to Steam sign in'
+              )
+            }}
+            open={true}
+            onClose={() => setShowLinkDialog(true)}
+            onConnectTap={() => window.api.signInWithProvider('steam')}
+          />
+        )}
+      </ModalAnimation>
       <div className={`${styles.storeTitle}`}>My Stores</div>
       <Flex direction="column" gap="4px" className={`${styles.fullHeight}`}>
         <div className={classNames(isSteam ? '' : styles.notActive)}>
@@ -72,7 +111,7 @@ export const AchievementStores = observer(() => {
                 <Button
                   type={'secondary'}
                   size={'small'}
-                  onClick={handleSyncClicked}
+                  onClick={async () => syncAchievements('STEAM')}
                 >
                   {t('hyperplay.Sync', 'Sync')}
                 </Button>

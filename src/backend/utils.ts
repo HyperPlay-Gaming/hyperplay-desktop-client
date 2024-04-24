@@ -36,7 +36,6 @@ import {
 import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
-import si from 'systeminformation'
 
 import {
   fixAsarPath,
@@ -59,8 +58,6 @@ import {
 } from './logger/logger'
 import { basename, dirname, join, normalize } from 'path'
 import { runRunnerCommand as runLegendaryCommand } from 'backend/storeManagers/legendary/library'
-import { runRunnerCommand as runGogdlCommand } from './storeManagers/gog/library'
-import { runRunnerCommand as runNileCommand } from './storeManagers/nile/library'
 import {
   gameInfoStore,
   installStore,
@@ -71,14 +68,14 @@ import {
   installInfoStore as GOGinstallInfoStore,
   libraryStore as GOGlibraryStore
 } from './storeManagers/gog/electronStores'
-import fileSize from 'filesize'
+import * as fileSize from 'filesize'
 import {
   installStore as nileInstallStore,
   libraryStore as nileLibraryStore
 } from './storeManagers/nile/electronStores'
 
 import makeClient from 'discord-rich-presence-typescript'
-import { showDialogBoxModalAuto } from './dialog/dialog'
+import { notify, showDialogBoxModalAuto } from './dialog/dialog'
 import { getMainWindow, sendFrontendMessage } from './main_window'
 import { GlobalConfig } from './config'
 import { GameConfig } from './game_config'
@@ -89,6 +86,8 @@ import {
   updateWineVersionInfos,
   wineDownloaderInfoStore
 } from './wine/manager/utils'
+
+import * as si from 'systeminformation'
 
 const execAsync = promisify(exec)
 
@@ -143,9 +142,9 @@ function semverGt(target: string, base: string) {
   return isGE
 }
 
-const getFileSize = fileSize.partial({ base: 2 })
+const getFileSize = fileSize.partial({ base: 2 }) as (arg: unknown) => string
 
-function getWineFromProton(
+export function getWineFromProton(
   wineVersion: WineInstallation,
   winePrefix: string
 ): { winePrefix: string; wineBin: string } {
@@ -218,71 +217,21 @@ async function isEpicServiceOffline(
   }
 }
 
-const getLegendaryVersion = async () => {
-  const abortID = 'legendary-version'
-  const { stdout, error, abort } = await runLegendaryCommand(
-    { subcommand: undefined, '--version': true },
-    createAbortController(abortID)
-  )
-
-  deleteAbortController(abortID)
-
-  if (error || abort) {
-    return 'invalid'
-  }
-
-  return stdout
-    .split('legendary version')[1]
-    .replaceAll('"', '')
-    .replaceAll(', codename', '')
-    .replaceAll('\n', '')
-}
-
-const getGogdlVersion = async () => {
-  const abortID = 'gogdl-version'
-  const { stdout, error } = await runGogdlCommand(
-    ['--version'],
-    createAbortController(abortID)
-  )
-
-  deleteAbortController(abortID)
-
-  if (error) {
-    return 'invalid'
-  }
-
-  return stdout
-}
-
-export const getAppVersion = () => {
-  const VERSION_NUMBER = app.getVersion()
-
-  return `${VERSION_NUMBER}`
-}
-
-const getNileVersion = async () => {
-  const abortID = 'nile-version'
-  const { stdout, error } = await runNileCommand(
-    ['--version'],
-    createAbortController(abortID)
-  )
-  deleteAbortController(abortID)
-
-  if (error) {
-    return 'invalid'
-  }
-  return stdout
-}
-
 const showAboutWindow = () => {
   app.setAboutPanelOptions({
     applicationName: 'HyperPlay',
     applicationVersion: getAppVersion(),
     copyright: 'GPL V3',
     iconPath: icon,
-    website: 'https://hyperplay.gg'
+    website: 'https://hyperplay.xyz'
   })
   return app.showAboutPanel()
+}
+
+export const getAppVersion = () => {
+  const VERSION_NUMBER = app.getVersion()
+
+  return `${VERSION_NUMBER}`
 }
 
 async function handleExit() {
@@ -318,59 +267,6 @@ async function handleExit() {
     callAllAbortControllers()
   }
   app.exit()
-}
-
-// This won't change while the app is running
-// Caching significantly increases performance when launching games
-let systemInfoCache = ''
-const getSystemInfo = async () => {
-  if (systemInfoCache !== '') {
-    return systemInfoCache
-  }
-  const hyperplayVersion = getAppVersion()
-  const legendaryVersion = await getLegendaryVersion()
-  const gogdlVersion = await getGogdlVersion()
-  const nileVersion = await getNileVersion()
-
-  // get CPU and RAM info
-  const { manufacturer, brand, speed, governor } = await si.cpu()
-  const { total, available } = await si.mem()
-
-  // get OS information
-  const { distro, kernel, arch, platform, release, codename } =
-    await si.osInfo()
-
-  // get GPU information
-  const { controllers } = await si.graphics()
-  const graphicsCards = String(
-    controllers.map(
-      ({ name, model, vram, driverVersion }, i) =>
-        `GPU${i}: ${name ? name : model} ${vram ? `VRAM: ${vram}MB` : ''} ${
-          driverVersion ? `DRIVER: ${driverVersion}` : ''
-        } \n`
-    )
-  )
-    .replaceAll(',', '')
-    .replaceAll('\n', '')
-
-  const isLinux = platform === 'linux'
-  const xEnv = isLinux
-    ? (await execAsync('echo $XDG_SESSION_TYPE')).stdout.replaceAll('\n', '')
-    : ''
-
-  systemInfoCache = `HyperPlay Version: ${hyperplayVersion}
-Legendary Version: ${legendaryVersion}
-GOGdl Version: ${gogdlVersion}
-Nile Version: ${nileVersion}
-
-OS: ${isMac ? `${codename} ${release}` : distro} KERNEL: ${kernel} ARCH: ${arch}
-CPU: ${manufacturer} ${brand} @${speed} ${
-    governor ? `GOVERNOR: ${governor}` : ''
-  }
-RAM: Total: ${getFileSize(total)} Available: ${getFileSize(available)}
-GRAPHICS: ${graphicsCards}
-${isLinux ? `PROTOCOL: ${xEnv}` : ''}`
-  return systemInfoCache
 }
 
 type ErrorHandlerMessage = {
@@ -491,6 +387,10 @@ function resetApp() {
   appConfigFolders.forEach((folder) => {
     rmSync(folder, { recursive: true, force: true })
   })
+  relaunchApp()
+}
+
+export function relaunchApp() {
   // wait a sec to avoid racing conditions
   setTimeout(() => {
     ipcMain.emit('ignoreExitToTray')
@@ -564,34 +464,6 @@ export function getFormattedOsName(): string {
   }
 }
 
-/**
- * Finds an executable on %PATH%/$PATH
- * @param executable The executable to find
- * @returns The full path to the executable, or nothing if it was not found
- */
-// This name could use some work
-async function searchForExecutableOnPath(executable: string): Promise<string> {
-  if (isWindows) {
-    // Todo: Respect %PATHEXT% here
-    const paths = process.env.PATH?.split(';') || []
-    for (const path of paths) {
-      const fullPath = join(path, executable)
-      if (existsSync(fullPath)) {
-        return fullPath
-      }
-    }
-    return ''
-  } else {
-    return execAsync(`which ${executable}`)
-      .then(({ stdout }) => {
-        return stdout.split('\n')[0]
-      })
-      .catch((error) => {
-        logError(error, LogPrefix.Backend)
-        return ''
-      })
-  }
-}
 async function getSteamRuntime(
   requestedType: SteamRuntime['type']
 ): Promise<SteamRuntime> {
@@ -895,6 +767,27 @@ async function ContinueWithFoundWine(
   selectedWine: string,
   foundWine: string
 ): Promise<{ response: number }> {
+  const isGPTK = selectedWine.toLowerCase().includes('toolkit')
+  const isGPTKCompatible = await isMacSonomaOrHigher()
+
+  if (isMac && isGPTK && !isGPTKCompatible) {
+    const { response } = await dialog.showMessageBox({
+      title: i18next.t(
+        'box.warning.wine-change.title-gptk',
+        'Game Porting Toolkit Not Compatible '
+      ),
+      message: i18next.t('box.warning.wine-change.message-gptk', {
+        defaultValue:
+          'To be able to run games using the Apple Gaming porting toolkit you need to upgrade your macOS to 14 (Sonoma) or higher. {{newline}} We found Wine on your system, do you want to continue launching using {{foundWine}} ?',
+        newline: '\n',
+        foundWine: foundWine
+      }),
+      buttons: [i18next.t('box.yes'), i18next.t('box.no')],
+      icon: icon
+    })
+    return { response }
+  }
+
   const { response } = await dialog.showMessageBox({
     title: i18next.t('box.warning.wine-change.title', 'Wine not found!'),
     message: i18next.t('box.warning.wine-change.message', {
@@ -911,22 +804,99 @@ async function ContinueWithFoundWine(
   return { response }
 }
 
+export async function checkRosettaInstall() {
+  if (!isMac) {
+    return
+  }
+
+  // check if on arm64 macOS
+  const { stdout: archCheck } = await execAsync('arch')
+  const isArm64 = archCheck.trim() === 'arm64'
+
+  if (!isArm64) {
+    return
+  }
+
+  const { stdout: rosettaCheck } = await execAsync(
+    'arch -x86_64 /usr/sbin/sysctl sysctl.proc_translated'
+  )
+
+  const result = rosettaCheck.split(':')[1].trim() === '1'
+
+  logInfo(
+    `Rosetta is ${result ? 'available' : 'not available'} on this system.`,
+    LogPrefix.Backend
+  )
+
+  if (!result) {
+    // show a dialog saying that hyperplay wont run without rosetta and add information on how to install it
+    await dialog.showMessageBox({
+      title: i18next.t('box.warning.rosetta.title', 'Rosetta not found'),
+      message: i18next.t(
+        'box.warning.rosetta.message',
+        'HyperPlay requires Rosetta to run correctly on macOS with Apple Silicon chips. Please install it from the macOS terminal using the following command: "softwareupdate --install-rosetta" and restart HyperPlay. '
+      ),
+      buttons: ['OK'],
+      icon: icon
+    })
+
+    logInfo(
+      'Rosetta is not available, install it with softwareupdate --install-rosetta from the terminal',
+      LogPrefix.Backend
+    )
+  }
+}
+
+export async function isMacSonomaOrHigher() {
+  if (!isMac) {
+    return false
+  }
+  logInfo('Checking if macOS is Sonoma or higher', LogPrefix.Backend)
+
+  const { release } = await si.osInfo()
+  const [major] = release.split('.').map(Number)
+  const isMacSonomaOrHigher = major >= 14
+
+  logInfo(
+    `macOS is ${
+      isMacSonomaOrHigher ? 'Sonoma or higher' : 'not Sonoma or higher'
+    }`,
+    LogPrefix.Backend
+  )
+
+  return isMacSonomaOrHigher
+}
+
 export async function downloadDefaultWine() {
+  if (isWindows) {
+    return
+  }
   // refresh wine list
-  await updateWineVersionInfos(true)
+  await updateWineVersionInfos(false)
   // get list of wines on wineDownloaderInfoStore
   const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
-  // use Wine-GE type if on Linux and Wine-Crossover if on Mac
-  const release = availableWine.filter((version) => {
-    if (isLinux) {
-      return (
-        version.type === 'Wine-GE' && version.version.includes('Wine-GE-Proton')
-      )
-    } else if (isMac) {
-      return version.type === 'Game-Porting-Toolkit'
-    }
-    return false
-  })[0]
+
+  // use Wine-GE type if on Linux and GPTK or Wine-Crossover if on Mac
+  const isGPTKCompatible = isMac ? await isMacSonomaOrHigher() : false
+  const results = await Promise.all(
+    availableWine.map(async (version) => {
+      if (isLinux) {
+        return (
+          version.type === 'Wine-GE' &&
+          version.version.includes('Wine-GE-Proton')
+        )
+      }
+
+      if (isMac) {
+        return isGPTKCompatible
+          ? version.type === 'Game-Porting-Toolkit'
+          : version.type === 'Wine-Crossover'
+      }
+      return false
+    })
+  )
+
+  const release = availableWine.filter((_, index) => results[index])[0]
 
   if (!release) {
     logError('Could not find default wine version', LogPrefix.Backend)
@@ -940,6 +910,15 @@ export async function downloadDefaultWine() {
       progress
     })
   }
+
+  notify({
+    title: i18next.t('notification.wine-download.title', 'Compatibility Layer'),
+    body: i18next.t(
+      'notification.wine-download.message',
+      'Setting up the default compatibility layer'
+    )
+  })
+
   const result = await installWineVersion(
     release,
     onProgress,
@@ -965,6 +944,37 @@ export async function downloadDefaultWine() {
   return null
 }
 
+export async function setGPTKDefaultOnMacOS() {
+  const isGPTKCompatible = await isMacSonomaOrHigher()
+  if (!isGPTKCompatible) {
+    return
+  }
+
+  const { wineVersion: defaultWine } = GlobalConfig.get().getSettings()
+
+  const ignoreList = ['crossover', 'toolkit']
+
+  if (
+    ignoreList.includes(defaultWine.type.toLowerCase()) ||
+    defaultWine.name.includes('Toolkit')
+  ) {
+    return
+  }
+
+  const wineList = await GlobalConfig.get().getAlternativeWine()
+  const gptk = wineList.find((wine) => wine.type === 'toolkit')
+
+  if (gptk && existsSync(gptk.bin)) {
+    logInfo(`Changing wine version to ${gptk.name}`)
+    GlobalConfig.get().setSetting('wineVersion', gptk)
+    // update prefix to use the new one as well
+    const installPath = GlobalConfig.get().getSettings().defaultInstallPath
+    const newPrefix = join(installPath, 'Prefixes', 'GPTK')
+    GlobalConfig.get().setSetting('winePrefix', newPrefix)
+  }
+  return
+}
+
 export async function checkWineBeforeLaunch(
   appName: string,
   gameSettings: GameSettings,
@@ -972,7 +982,16 @@ export async function checkWineBeforeLaunch(
 ): Promise<boolean> {
   const wineIsValid = await validWine(gameSettings.wineVersion)
 
-  if (wineIsValid) {
+  const isToolkit = gameSettings.wineVersion.type === 'toolkit'
+  const isGPTKCompatible = await isMacSonomaOrHigher()
+
+  const isValidOnLinux = isLinux && wineIsValid
+  const isValidtoolkitOnMac =
+    isMac && isToolkit && isGPTKCompatible && wineIsValid
+  const isValidWineOnMac = isMac && !isToolkit && wineIsValid
+  const isValidOnMac = isValidtoolkitOnMac || isValidWineOnMac
+
+  if (isValidOnMac || isValidOnLinux) {
     return true
   } else {
     if (!logsDisabled) {
@@ -1007,7 +1026,18 @@ export async function checkWineBeforeLaunch(
       }
     } else {
       const wineList = await GlobalConfig.get().getAlternativeWine()
-      const firstFoundWine = wineList[0]
+
+      // if Linux get the first element, if macOS and isGPTKCompatible is true get one with type 'toolkit', otherwise get the one with type 'wine'
+      const firstFoundWine = wineList.find((wine) => {
+        if (isLinux) {
+          return wine.type === 'wine'
+        } else if (isMac) {
+          return isGPTKCompatible
+            ? wine.type === 'toolkit'
+            : wine.type === 'wine'
+        }
+        return undefined
+      })
 
       const isValidWine = await validWine(firstFoundWine)
 
@@ -1397,7 +1427,6 @@ export {
   getGOGdlBin,
   getNileBin,
   formatEpicStoreUrl,
-  searchForExecutableOnPath,
   getSteamRuntime,
   constructAndUpdateRPC,
   quoteIfNecessary,
@@ -1406,16 +1435,11 @@ export {
   killPattern,
   getInfo,
   getShellPath,
-  getSystemInfo,
-  getWineFromProton,
-  getFileSize,
-  getLegendaryVersion,
-  getGogdlVersion,
   getTitleFromEpicStoreUrl,
-  removeFolder,
   shutdownWine,
-  getNileVersion,
-  memoryLog
+  getFileSize,
+  memoryLog,
+  removeFolder
 }
 
 // Exported only for testing purpose

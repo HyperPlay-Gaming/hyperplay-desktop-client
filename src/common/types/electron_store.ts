@@ -98,12 +98,16 @@ export interface StoreStructure {
     completedEarlyAccess: boolean
     completedDataPrivacy: boolean
     openAuthModalIfAppReloads: boolean
+    openEmailModalIfAppReloads: boolean
   }
   hpLibraryStore: {
     [key: string]: GameInfo[]
   }
   providerMetadata: {
     currentWeb3Provider: PROVIDERS
+  }
+  extensionMetadata: {
+    isInitialized: boolean
   }
 }
 

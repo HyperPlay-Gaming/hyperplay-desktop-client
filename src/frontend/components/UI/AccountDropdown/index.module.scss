@@ -2,9 +2,13 @@
   color: var(--color-neutral-300);
 }
 
-.menuItem:hover {
-  opacity: 1;
+.menuItem {
+  padding: var(--space-xs) var(--space-sm);
+  &:hover {
+    opacity: 1;
+  }
 }
+
 .menuItem[data-hovered='true'] {
   background-color: var(--color-neutral-500);
 }
@@ -14,15 +18,21 @@
 }
 
 .menuDropdown {
-  background-color: var(--color-neutral-600);
+  background-color: var(--color-neutral-600) !important;
   border: none;
-  padding: var(--space-sm);
+  padding: var(--space-sm) var(--space-xs);
+  border-radius: var(--space-xs);
 }
 
-.selected {
+.logOut {
   color: var(--color-secondary-200);
 }
 
 .menuLabel {
   color: var(--color-neutral-400);
+  padding: var(--space-xs) var(--space-sm);
+}
+
+.divider {
+  margin: var(--space-xs) auto;
 }

@@ -13,7 +13,7 @@ interface Props {
 
 function getRecentGames(
   libraries: GameInfo[],
-  limit: number,
+  limit: number = 5,
   onlyInstalled: boolean
 ): GameInfo[] {
   const recentGames = configStore.get('games.recent', [])
@@ -42,6 +42,7 @@ export default React.memo(
       const { maxRecentGames } = await window.api.requestAppSettings()
       const newRecentGames = getRecentGames(
         [
+          ...libraryState.hyperPlayLibrary,
           ...libraryState.epicLibrary,
           ...libraryState.gogLibrary,
           ...libraryState.sideloadedLibrary,
@@ -82,6 +83,16 @@ export default React.memo(
           handleGameCardClick={handleModal}
           onlyInstalled={onlyInstalled}
           isRecent={true}
+        />
+        <hr
+          style={{
+            margin: 'var(--space-md-fixed) auto var(--space-xl-fixed) auto',
+            border: '0',
+            borderTop: '1px solid var(--color-neutral-500)',
+            width: '150px',
+            justifySelf: 'center',
+            alignSelf: 'center'
+          }}
         />
       </>
     )

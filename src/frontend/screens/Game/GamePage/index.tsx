@@ -27,6 +27,7 @@ import {
   ExtraInfo,
   GameInfo,
   HyperPlayInstallInfo,
+  InstallProgress,
   Runner,
   WineInstallation
 } from 'common/types'
@@ -39,7 +40,7 @@ import TimeContainer from '../TimeContainer'
 import GameRequirements from '../GameRequirements'
 import { GameSubMenu } from '..'
 import { InstallModal } from 'frontend/screens/Library/components'
-import { install } from 'frontend/helpers/library'
+import { install, isNotNative } from 'frontend/helpers/library'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faTriangleExclamation,
@@ -130,6 +131,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const isSyncing = status === 'syncing-saves'
   const isPaused = DMQueueState.isPaused(appName)
   const isExtracting = status === 'extracting'
+  const isInstallingDistributable = status === 'distributables'
   const isPreparing = status === 'preparing'
   const notAvailable = !gameAvailable && gameInfo.is_installed
   const notInstallable =
@@ -771,16 +773,7 @@ export default observer(function GamePage(): JSX.Element | null {
       return `${t('status.moving', 'Moving Installation, please wait')} ...`
     }
 
-    const currentProgress =
-      getProgress(progress) >= 99
-        ? ''
-        : `${
-            percent && bytes
-              ? `${percent.toFixed(2)}% [${Number(bytes).toFixed(2)} MB]  ${
-                  eta ? `ETA: ${eta}` : ''
-                }`
-              : '...'
-          }`
+    const currentProgress = getCurrentProgress(progress, percent, bytes, eta)
 
     if (isUpdating && is_installed) {
       if (!currentProgress) {
@@ -790,6 +783,10 @@ export default observer(function GamePage(): JSX.Element | null {
         return `${t('status.reparing')}: ${percent} [${bytes}]`
       }
       return `${t('status.updating')} ${currentProgress}`
+    }
+
+    if (isInstallingDistributable) {
+      return `${t('status.installing.distributable')}`
     }
 
     if (isExtracting) {
@@ -882,7 +879,8 @@ export default observer(function GamePage(): JSX.Element | null {
         launchArguments,
         runner: gameInfo.runner,
         hasUpdate,
-        showDialogModal
+        showDialogModal,
+        isNotNative: isNotNative(platform, gameInfo.install.platform!)
       })
     }
   }
@@ -932,3 +930,21 @@ export default observer(function GamePage(): JSX.Element | null {
     })
   }
 })
+function getCurrentProgress(
+  progress: InstallProgress,
+  percent: number | undefined,
+  bytes: string | number,
+  eta: string | undefined
+) {
+  if (typeof bytes === 'string') {
+    bytes = Number(bytes.replaceAll('MB', '')).toFixed(2)
+  }
+
+  return getProgress(progress) >= 99
+    ? ''
+    : `${
+        percent && bytes
+          ? `${percent.toFixed(2)}% [${bytes} MB]  ${eta ? `ETA: ${eta}` : ''}`
+          : '...'
+      }`
+}

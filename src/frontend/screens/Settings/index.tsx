@@ -9,18 +9,23 @@ import ContextMenu from '../Library/components/ContextMenu'
 import SettingsContext from './SettingsContext'
 import LogSettings from './sections/LogSettings'
 import FooterInfo from './sections/FooterInfo'
-import { GeneralSettings, GamesSettings, AdvancedSettings } from './sections'
+import {
+  GeneralSettings,
+  GamesSettings,
+  AdvancedSettings,
+  SystemInfo
+} from './sections'
 import { AppSettings, WineInstallation } from 'common/types'
 import { UpdateComponent } from 'frontend/components/UI'
 import { LocationState, SettingsContextType } from 'frontend/types'
 import useSettingsContext from 'frontend/hooks/useSettingsContext'
-import { Tabs } from '@hyperplay/ui'
 import Accessibility from '../Accessibility'
 import WineManager from '../WineManager'
 import AccountSettings from './sections/AccountSettings'
 import { observer } from 'mobx-react-lite'
-import AchievementState from 'frontend/state/AchievementState'
 import DeviceState from 'frontend/state/DeviceState'
+import { Tabs, getTabsClassNames } from '@hyperplay/ui'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export const defaultWineVersion: WineInstallation = {
   bin: '/usr/bin/wine',
@@ -29,6 +34,8 @@ export const defaultWineVersion: WineInstallation = {
 }
 
 function Settings() {
+  const flags = useFlags()
+  const SHOW_ACHIEVEMENTS = flags.achievements
   const { t, i18n } = useTranslation()
   const {
     state: { fromGameCard, runner, gameInfo }
@@ -112,11 +119,14 @@ function Settings() {
             <h3 className="headerTitle" data-testid="headerTitle">
               Settings
             </h3>
-            <Tabs defaultValue="general">
-              <Tabs.List
-                style={{ marginBottom: 'var(--space-md)' }}
-                type="outline"
-              >
+            <Tabs
+              defaultValue="general"
+              classNames={getTabsClassNames(
+                { list: 'settingsTabList' },
+                { list: 'outline' }
+              )}
+            >
+              <Tabs.List>
                 <Tabs.Tab value="general">
                   <div className="menu">{t('settings.navbar.general')}</div>
                 </Tabs.Tab>
@@ -155,12 +165,13 @@ function Settings() {
                 <AdvancedSettings />
               </Tabs.Panel>
               <Tabs.Panel value="logSettings">
+                <SystemInfo />
                 <LogSettings />
               </Tabs.Panel>
               <Tabs.Panel value="accessibility">
                 <Accessibility />
               </Tabs.Panel>
-              {AchievementState.showAchievements && (
+              {SHOW_ACHIEVEMENTS && (
                 <Tabs.Panel value="accounts">
                   <AccountSettings />
                 </Tabs.Panel>

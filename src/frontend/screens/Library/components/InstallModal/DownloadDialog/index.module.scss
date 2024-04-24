@@ -2,3 +2,20 @@
   pointer-events: none;
   user-select: none;
 }
+
+.installModalWarning {
+  background: var(--color-neutral-700);
+  padding: var(--space-md);
+  margin-top: var(--space-xl);
+  border-radius: 10px;
+  font-size: var(--text-md);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  svg {
+    width: var(--text-md);
+    height: var(--text-md);
+    margin-right: var(--space-xs);
+  }
+}

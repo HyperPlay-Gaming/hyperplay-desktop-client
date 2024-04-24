@@ -13,6 +13,7 @@ import { NileRegisterData } from 'common/types/nile'
 export const clearCache = (showDialog?: boolean) =>
   ipcRenderer.send('clearCache', showDialog)
 export const resetApp = () => ipcRenderer.send('resetApp')
+export const resetExtension = () => ipcRenderer.send('resetExtension')
 
 export const openWeblate = () => ipcRenderer.send('openWeblate')
 export const changeLanguage = (newLanguage: string) =>
@@ -45,8 +46,8 @@ export const getAmazonLoginData = async () =>
 export const authAmazon = async (data: NileRegisterData) =>
   ipcRenderer.invoke('authAmazon', data)
 export const logoutAmazon = async () => ipcRenderer.invoke('logoutAmazon')
-export const checkGameUpdates = async () =>
-  ipcRenderer.invoke('checkGameUpdates')
+export const checkGameUpdates = async (runners: Runner[]) =>
+  ipcRenderer.invoke('checkGameUpdates', runners)
 export const refreshLibrary = async (library?: Runner | 'all') =>
   ipcRenderer.invoke('refreshLibrary', library)
 
@@ -202,21 +203,12 @@ export const handleQaModeActivated = (
   }
 }
 
-export const handleOAuthDeepLink = (
+export const handleOtpDeepLink = (
   cb: WrapRendererCallback<(otp: string) => void>
 ): (() => void) => {
-  ipcRenderer.on('oauthDeeplink', cb)
+  ipcRenderer.on('otpDeeplink', cb)
   return () => {
-    ipcRenderer.removeListener('oauthDeeplink', cb)
-  }
-}
-
-export const handleEmailConfirmed = (
-  onMessage: (e: Electron.IpcRendererEvent) => void
-): (() => void) => {
-  ipcRenderer.on('emailVerified', onMessage)
-  return () => {
-    ipcRenderer.removeListener('emailVerified', onMessage)
+    ipcRenderer.removeListener('otpDeeplink', cb)
   }
 }
 
@@ -224,11 +216,15 @@ export const openAuthModalIfAppReloads = () => {
   ipcRenderer.send('openAuthModalIfAppReloads')
 }
 
-export const handleEmailConfirmationNavigation = (
-  cb: WrapRendererCallback<(url: string) => void>
+export const openEmailModalIfAppReloads = () => {
+  ipcRenderer.send('openEmailModalIfAppReloads')
+}
+
+export const handleLogOut = (
+  cb: WrapRendererCallback<() => void>
 ): (() => void) => {
-  ipcRenderer.on('emailConfirmation', cb)
+  ipcRenderer.on('logOut', cb)
   return () => {
-    ipcRenderer.removeListener('emailConfirmation', cb)
+    ipcRenderer.removeListener('logOut', cb)
   }
 }
