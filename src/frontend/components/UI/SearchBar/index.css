@@ -76,3 +76,10 @@ div.SearchBar:has(input:not(:placeholder-shown)) > button {
   outline: none;
   transition: color 250ms;
 }
+
+@media screen and (max-width: 1280px) {
+  div.SearchBar:has(*:focus),
+  div.SearchBar:has(input:not(:placeholder-shown)) {
+    width: 243px;
+  }
+}
