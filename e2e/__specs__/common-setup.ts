@@ -88,6 +88,10 @@ export const launchApp = async () => {
       return false
     }
 
+    /**
+     * @dev Note that this will throw the following error on the electronApp.close function call
+     * Error during electronApp.waitForEvent(window): Error: electronApplication.waitForEvent: Target page, context or browser has been closed
+     */
     electronApp
       .waitForEvent('window', {
         predicate: async (page_i: Page) => {
@@ -135,6 +139,12 @@ export default function setup(timeout = 120000): void {
   })
 
   test.afterEach(async () => {
-    await electronApp.close()
+    try {
+      await electronApp?.close()
+    } catch (err) {
+      console.error(
+        `Error while closing electron app in after each hook ${err}`
+      )
+    }
   })
 }
