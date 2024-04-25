@@ -57,8 +57,8 @@ echo
 if [[ "$os" == "linux" ]]
 then
     yarn playwright test .*/api.spec.ts
-    # xvfb-run -a -e /dev/stdout -s "-screen 0 1280x960x24" yarn playwright test .*hpStoreApi.spec.ts
+    xvfb-run -a -e /dev/stdout -s "-screen 0 1280x960x24" yarn playwright test .*hpStoreApi.spec.ts
 else
     yarn playwright test .*/api.spec.ts
-    # yarn playwright test .*hpStoreApi.spec.ts
+    yarn playwright test .*hpStoreApi.spec.ts
 fi
