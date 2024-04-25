@@ -1890,10 +1890,10 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
 
-"@hyperplay/mock-backend@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/mock-backend/-/mock-backend-0.0.0.tgz#3a1c86eb0aa6630e31e7db070407aaa7658a7d91"
-  integrity sha512-EIW/YKWw8sl/gOsVtLSU5dLDhTzhKCkBSBmoT/MU7PxxsL17/VjqWu+kzUvAg+/iJl4ZEdULD6ab5+UpoBUCcQ==
+"@hyperplay/mock-backend@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@hyperplay/mock-backend/-/mock-backend-0.0.1.tgz#5987f4860fac890a2ee77b174a89e8664d0cc8c6"
+  integrity sha512-e+Opn7x/2axWJvnQ0Vm0/QYgObjhxNs90m/KKcBSpYT45v4slIQW54Af/trjlkDVK3S2YQuZ4mbvMV1ona05JA==
   dependencies:
     "@types/cors" "^2.8.13"
     "@types/express" "^4.17.17"

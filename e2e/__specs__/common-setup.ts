@@ -27,7 +27,7 @@ export const appNameToMock =
 
 export const launchApp = async () => {
   process.env.CI = 'e2e'
-  process.env.MOCK_DOWNLOAD_URL = `http://127.0.0.1:8080/download/kosium`
+  process.env.MOCK_DOWNLOAD_URL = `http://127.0.0.1:8081/download/kosium`
   process.env.APP_NAME_TO_MOCK = appNameToMock
   if (process.env.TEST_PACKAGED === 'true') {
     console.log('Testing packaged build')
