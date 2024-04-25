@@ -101,7 +101,6 @@ export const launchApp = async () => {
       })
       .catch((err) => {
         console.log(`Error during electronApp.waitForEvent(window): ${err}`)
-        rej(err)
       })
 
     for (const windowPage of electronApp.windows()) {
