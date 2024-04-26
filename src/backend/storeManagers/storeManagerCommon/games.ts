@@ -5,13 +5,7 @@ import {
   Runner
 } from 'common/types'
 import { GameConfig } from '../../game_config'
-import {
-  isMac,
-  isLinux,
-  gamesConfigPath,
-  icon,
-  isWindows
-} from '../../constants'
+import { isMac, isLinux, gamesConfigPath, icon } from '../../constants'
 import { logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import path, { dirname, join, resolve } from 'path'
 import {
@@ -228,15 +222,7 @@ export function getExecutableAndArgs(executableWithArgs: string): {
   executable: string
   launchArgs: string
 } {
-  let match
-  if (isWindows) {
-    // Windows regex: Matches paths with backslashes and captures the executable name
-    match = executableWithArgs.match(/^(.*?\\(?:.*?))(\.exe)/i)
-  } else {
-    // Unix-like systems regex: Matches paths with forward slashes and captures the executable name
-    match = executableWithArgs.match(/^(.*?\.(exe|app|bin|sh))/i)
-  }
-
+  const match = executableWithArgs.match(/^(.*?\.(exe|app|bin|sh))/i)
   const executable = match ? match[0] : ''
   const launchArgs = executableWithArgs.replace(executable, '').trim()
 
@@ -354,8 +340,8 @@ export async function launchGame(
         {
           name: runner,
           logPrefix: LogPrefix.Backend,
-          bin: executable,
-          dir: dirname(executable)
+          bin: exeOnly,
+          dir: dirname(exeOnly)
         },
         createAbortController(appName),
         {
@@ -369,7 +355,7 @@ export async function launchGame(
 
       launchCleanup(rpcClient)
       // TODO: check and revert to previous permissions
-      if (isLinux || (isMac && !executable.endsWith('.app'))) {
+      if (isLinux || (isMac && !exeOnly.endsWith('.app'))) {
         await chmod(exeOnly, 0o775)
       }
       return true
