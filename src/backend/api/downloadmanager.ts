@@ -37,7 +37,8 @@ export const updateGame = (gameInfo: GameInfo, accessCode?: string) => {
   const {
     app_name: appName,
     runner,
-    install: { install_path, platform }
+    install: { install_path, platform },
+    siweValues
   } = gameInfo
 
   const dmQueueElement: DMQueueElement = {
@@ -47,7 +48,8 @@ export const updateGame = (gameInfo: GameInfo, accessCode?: string) => {
       runner,
       path: install_path!,
       platformToInstall: platform!,
-      accessCode
+      accessCode,
+      siweValues
     },
     type: 'update',
     addToQueueTime: Date.now(),
