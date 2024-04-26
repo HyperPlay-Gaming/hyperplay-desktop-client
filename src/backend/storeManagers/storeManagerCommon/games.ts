@@ -34,6 +34,7 @@ import { connectedProvider } from 'backend/hyperplay-proxy-server/providerState'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { controlWindow } from 'backend/hyperplay-overlay/model'
 import { initOverlayRenderState } from 'backend/hyperplay-overlay'
+import { getExecutableAndArgs } from 'backend/utils'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -216,17 +217,6 @@ export function getGameProcessName(gameInfo: GameInfo): string | undefined {
   return gameInfo.channels[channelName].release_meta.platforms[
     installedPlatform
   ]?.processName
-}
-
-export function getExecutableAndArgs(executableWithArgs: string): {
-  executable: string
-  launchArgs: string
-} {
-  const match = executableWithArgs.match(/^(.*?\.(exe|app|bin|sh))/i)
-  const executable = match ? match[0] : ''
-  const launchArgs = executableWithArgs.replace(executable, '').trim()
-
-  return { executable, launchArgs }
 }
 
 export async function launchGame(

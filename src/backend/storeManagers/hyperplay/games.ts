@@ -38,7 +38,8 @@ import {
   spawnAsync,
   killPattern,
   shutdownWine,
-  calculateEta
+  calculateEta,
+  getExecutableAndArgs
 } from 'backend/utils'
 import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { dirname, join } from 'path'
@@ -60,7 +61,6 @@ import {
 import { InstallResult, RemoveArgs } from 'common/types/game_manager'
 import { GOGCloudSavesLocation } from 'common/types/gog'
 import {
-  getExecutableAndArgs,
   getGameProcessName,
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
