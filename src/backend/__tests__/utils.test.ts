@@ -182,6 +182,15 @@ describe('backend/utils.ts', () => {
       expect(getExecutableAndArgs(input)).toEqual(expected)
     })
 
+    it('should correctly parse executable with .exe extension and arguments with backward slashes', () => {
+      const input = '\\path\\to\\executable.exe --arg1 --arg2'
+      const expected = {
+        executable: '\\path\\to\\executable.exe',
+        launchArgs: '--arg1 --arg2'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
     it('should correctly parse executable with .app extension and no arguments', () => {
       const input = 'path/to/application.app'
       const expected = {
