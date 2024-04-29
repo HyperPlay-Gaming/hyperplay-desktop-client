@@ -8,6 +8,8 @@ import {
   PlatformConfig,
   LicenseConfigValidateResult,
   ChannelReleaseMeta,
+  SiweValues,
+  UpdateArgs,
   WineCommandArgs
 } from '../../../common/types'
 import { hpLibraryStore } from './electronStore'
@@ -61,7 +63,6 @@ import {
   getGameProcessName,
   launchGame
 } from 'backend/storeManagers/storeManagerCommon/games'
-import axios from 'axios'
 import { PlatformsMetaInterface } from '@valist/sdk/dist/typesShared'
 import { Channel } from '@valist/sdk/dist/typesApi'
 import { DownloadItem, dialog } from 'electron'
@@ -72,6 +73,8 @@ import Store from 'electron-store'
 import i18next from 'i18next'
 import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
+import { DEV_PORTAL_URL, valistBaseApiUrlv1 } from 'common/constants'
+import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -590,11 +593,20 @@ export async function validateAccessCode({
     request.license_config_id = licenseConfigId
   }
 
-  const validateResult = await axios.post<LicenseConfigValidateResult>(
-    validateUrl,
-    request
-  )
-  return validateResult.data
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const validateResult = await fetch(validateUrl, {
+    method: 'POST',
+    headers: {
+      Cookie: cookieString
+    },
+    body: JSON.stringify(request)
+  })
+  const result: LicenseConfigValidateResult = await validateResult.json()
+  return result
 }
 
 async function getAccessCodeGatedPlatforms(
@@ -626,6 +638,36 @@ async function getAccessCodeGatedPlatforms(
     return val
   })
   hpLibraryStore.set('games', newHpGames)
+
+  return validateResult.platforms
+}
+
+async function getTokenGatedPlatforms(
+  channel_id: number,
+  siweValues: SiweValues
+): Promise<PlatformsMetaInterface> {
+  const { address, message, signature } = siweValues
+
+  const request = {
+    message,
+    signature,
+    address,
+    channel_id
+  }
+  const validateUrl = `${valistBaseApiUrlv1}/license_contracts/validate`
+  const validateResponse = await fetch(validateUrl, {
+    method: 'POST',
+    body: JSON.stringify(request)
+  })
+
+  const validateResult: LicenseConfigValidateResult =
+    await validateResponse.json()
+
+  if (validateResult.valid !== true)
+    throw `Address code ${address} is not valid for channel id ${channel_id}!`
+
+  if (validateResult.platforms === undefined)
+    throw 'Token gated platforms returned by the validate url were undefined'
 
   return validateResult.platforms
 }
@@ -739,7 +781,8 @@ export async function install(
     platformToInstall,
     channelName,
     accessCode,
-    updateOnly = false
+    updateOnly = false,
+    siweValues
   }: InstallArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
@@ -792,8 +835,16 @@ export async function install(
       }
     }
 
-    // get presigned platform info if code gated
-    if (selectedChannel.license_config.access_codes) {
+    if (selectedChannel.license_config.tokens) {
+      if (!siweValues?.address) throw 'No address found'
+      const gatedPlatforms = await getTokenGatedPlatforms(
+        selectedChannel.channel_id,
+        siweValues
+      )
+
+      platformInfo = gatedPlatforms[appPlatform] ?? platformInfo
+    } else if (selectedChannel.license_config.access_codes) {
+      // get presigned platform info if code gated
       if (accessCode === undefined)
         throw 'Access code was undefined for an access code gated channel'
 
@@ -1316,7 +1367,7 @@ export async function launch(
 // TODO: Refactor to only replace updated files
 export async function update(
   appName: string,
-  accessCode?: string
+  args?: UpdateArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
     return { status: 'done' }
@@ -1344,8 +1395,9 @@ export async function update(
     path: gameInfo.install.install_path,
     platformToInstall: gameInfo.install.platform,
     channelName: gameInfo.install.channelName,
-    accessCode,
-    updateOnly: true
+    accessCode: args?.accessCode,
+    updateOnly: true,
+    siweValues: args?.siweValues
   })
   return installResult
 }

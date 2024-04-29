@@ -9,7 +9,7 @@ import {
   SupportedPlatform as AppPlatforms,
   PlatformsMetaInterface
 } from '@valist/sdk/dist/typesShared'
-import { Channel } from '@valist/sdk/dist/typesApi'
+import { Channel, ContractMetadata } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
 import { NileInstallPlatform } from './types/nile'
 import { DropdownItemType } from '@hyperplay/ui'
@@ -181,6 +181,8 @@ export interface GameInfo {
   dlcList?: GameMetadataInner[]
   //key is channel_id, value is last access code used
   accessCodesCache?: Record<string, string>
+  siweValues?: SiweValues
+  networks?: ContractMetadata[]
 }
 
 export interface GameSettings {
@@ -307,6 +309,7 @@ export interface InstallArgs {
   channelName?: string
   accessCode?: string
   updateOnly?: boolean
+  siweValues?: SiweValues
 }
 
 export interface InstallParams extends InstallArgs {
@@ -314,6 +317,11 @@ export interface InstallParams extends InstallArgs {
   gameInfo: GameInfo
   runner: Runner
   size?: string
+}
+
+export interface UpdateArgs {
+  siweValues?: SiweValues
+  accessCode?: string
 }
 
 export interface UpdateParams {
@@ -545,6 +553,12 @@ interface GamepadActionArgsWithoutMetadata {
     | 'altAction'
     | 'esc'
   metadata?: undefined
+}
+
+export type SiweValues = {
+  address: string
+  message: string
+  signature: string
 }
 
 export type InstallPlatform =
@@ -893,3 +907,33 @@ export interface RunnerBin {
 }
 
 export type OverlayType = 'native' | 'browser' | 'mainWindow'
+
+export interface Reward {
+  id: number
+  amount_per_user: number
+  chain_id: number
+  marketplace_url: string | null
+  reward_type: string
+  name: string
+  contract_address: string
+  decimals: number
+  /* eslint-disable-next-line */
+  token_ids: any[]
+  image_url: string
+}
+
+export interface Quest {
+  id: number
+  project_id: string
+  name: string
+  type: string
+  status: string
+  description: string
+  rewards: Reward[]
+  /* eslint-disable-next-line */
+  deposit_contracts: any[]
+  eligibility: {
+    completion_threshold: number
+    steam_games: { id: string }[]
+  }
+}
