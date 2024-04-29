@@ -13,6 +13,7 @@ import authState from 'frontend/state/authState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import classNames from 'classnames'
 import useAuthSession from '../../../hooks/useAuthSession'
+import { LD_FLAG_AUTH } from '../../../constants'
 
 function NavigationMenuItem({
   label,
@@ -41,7 +42,7 @@ const WalletDropdown: React.FC = observer(() => {
   const { isSignedIn, invalidateQuery } = useAuthSession()
   const flags = useFlags()
   const { t } = useTranslation()
-  const isAuthEnabled = flags.auth
+  const isAuthEnabled = flags[LD_FLAG_AUTH]
   const showWalletConnectedLinks = walletState.isConnected
   const showMetaMaskExtensionLinks =
     walletState.isConnected &&
