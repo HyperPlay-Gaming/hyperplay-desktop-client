@@ -11,6 +11,7 @@ import walletState from '../../../state/WalletState'
 import { DEV_PORTAL_URL } from 'common/constants'
 import useAuthSession from '../../../hooks/useAuthSession'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import { LD_FLAG_AUTH } from '../../../constants'
 
 const url = `${DEV_PORTAL_URL}/signin?isLauncher=true`
 
@@ -24,7 +25,8 @@ const AuthModal = () => {
   const flags = useFlags()
   const authSession = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
-  const isAuthEnabled = flags.auth
+  console.log('flags', { ...flags })
+  const isAuthEnabled = flags[LD_FLAG_AUTH]
 
   const sendRetryConnectionMessage = () => {
     const webview = webviewRef.current
