@@ -25,7 +25,6 @@ const AuthModal = () => {
   const flags = useFlags()
   const authSession = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
-  console.log('flags', { ...flags })
   const isAuthEnabled = flags[LD_FLAG_AUTH]
 
   const sendRetryConnectionMessage = () => {
