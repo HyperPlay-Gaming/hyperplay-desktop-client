@@ -36,7 +36,6 @@ import libraryState from 'frontend/state/libraryState'
 import storeAuthState from './storeAuthState'
 
 const storage: Storage = window.localStorage
-const globalSettings = configStore.get_nodefault('settings')
 
 const RTL_LANGUAGES = ['fa', 'ar']
 
