@@ -8,7 +8,7 @@ import {
   WineVersionInfo,
   InstallParams,
   LibraryTopSectionOptions,
-  MetricsOptInStatus,
+  MetricsOptInStatus
 } from 'common/types'
 import {
   Category,
@@ -124,7 +124,7 @@ class GlobalState extends PureComponent<Props> {
     metricsOptInStatus: metricsStore.get(
       'metricsOptInStatus',
       MetricsOptInStatus.undecided
-    ) as MetricsOptInStatus,
+    ) as MetricsOptInStatus
   }
 
   setLanguage = (newLanguage: string) => {
@@ -697,7 +697,7 @@ class GlobalState extends PureComponent<Props> {
       isSettingsModalOpen: settingsModalOpen,
       setIsSettingsModalOpen: this.handleSettingsModalOpen,
       setShowMetaMaskBrowserSidebarLinks:
-        this.setShowMetaMaskBrowserSidebarLinks,
+        this.setShowMetaMaskBrowserSidebarLinks
     }
 
     return (
