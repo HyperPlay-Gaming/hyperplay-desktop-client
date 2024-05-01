@@ -5,24 +5,25 @@ import ExtensionContentsStyles from './index.module.scss'
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
 declare global {
-    // eslint-disable-next-line @typescript-eslint/no-namespace
-    namespace React {
-      interface WebViewHTMLAttributes<T> extends HTMLAttributes<T> {
-        nodeintegrationinsubframes?: string
-      }
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace React {
+    interface WebViewHTMLAttributes<T> extends HTMLAttributes<T> {
+      nodeintegrationinsubframes?: string
     }
   }
-
-const animation = {
-    initial: { opacity: 0, transform: 'translateY(-20px)' },
-    animate: { opacity: 1, transform: 'translateY(0px)' },
-    exit: { opacity: 0, transform: 'translateY(-20px)' },
-    transition: { duration: 0.2 }
 }
 
-export default function ExtensionContents(){
-    const trueAsStr = 'false' as unknown as boolean | undefined
-    return <AnimatePresence>
+const animation = {
+  initial: { opacity: 0, transform: 'translateY(-20px)' },
+  animate: { opacity: 1, transform: 'translateY(0px)' },
+  exit: { opacity: 0, transform: 'translateY(-20px)' },
+  transition: { duration: 0.2 }
+}
+
+export default function ExtensionContents() {
+  const trueAsStr = 'false' as unknown as boolean | undefined
+  return (
+    <AnimatePresence>
       {extensionState.isPopupOpen ? (
         <motion.div
           {...animation}
@@ -52,4 +53,5 @@ export default function ExtensionContents(){
         </motion.div>
       ) : null}
     </AnimatePresence>
-  }
+  )
+}

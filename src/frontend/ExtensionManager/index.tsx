@@ -13,17 +13,16 @@ const ExtensionManager = function () {
 
   const mmContainerStyle = {} as React.CSSProperties
 
-  const isOverlay = OverlayState.title === 'HyperPlay Extension Overlay' ||
-  OverlayState.title === 'HyperPlay Browser Game' ||
-  OverlayState.title === 'HyperPlay Web Game'
+  const isOverlay =
+    OverlayState.title === 'HyperPlay Extension Overlay' ||
+    OverlayState.title === 'HyperPlay Browser Game' ||
+    OverlayState.title === 'HyperPlay Web Game'
 
   if (OverlayState.title === 'HyperPlay Extension') {
     mmContainerStyle.left = 0
     mmContainerStyle.right = 'unset'
     mmContainerStyle.top = 0
-  } else if (
-    isOverlay
-  ) {
+  } else if (isOverlay) {
     mmContainerStyle.left = 20
     mmContainerStyle.right = 'unset'
     mmContainerStyle.top = 20
@@ -41,11 +40,12 @@ const ExtensionManager = function () {
     rootRef.current?.close()
   }
 
-  if (isOverlay){
+  if (isOverlay) {
     return (
       <div
-      className={ExtensionManagerStyles.mmContainer}
-      style={mmContainerStyle}>
+        className={ExtensionManagerStyles.mmContainer}
+        style={mmContainerStyle}
+      >
         {ExtensionContents()}
       </div>
     )
