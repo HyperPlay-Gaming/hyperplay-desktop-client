@@ -35,12 +35,12 @@
         "https://*/*"
       ],
       "js": [
-        "disable-console.js",
-        "globalthis.js",
-        "lockdown-install.js",
-        "lockdown-run.js",
-        "lockdown-more.js",
-        "contentscript.js"
+        "scripts/disable-console.js",
+        "scripts/lockdown-install.js",
+        "scripts/lockdown-run.js",
+        "scripts/lockdown-more.js",
+        "scripts/contentscript.js",
+        "scripts/inpage.js"
       ],
       "run_at": "document_start",
       "all_frames": true
@@ -55,7 +55,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: 44607545",
+  "description": "other build from git id: d96fa62a",
   "icons": {
     "16": "images/icon-16.png",
     "19": "images/icon-19.png",
@@ -75,6 +75,7 @@
     "http://localhost:8545/",
     "https://*.infura.io/",
     "https://*.codefi.network/",
+    "https://*.cx.metamask.io/",
     "https://chainid.network/chains.json",
     "https://lattice.gridplus.io/*",
     "activeTab",
@@ -92,5 +93,5 @@
     ]
   },
   "minimum_chrome_version": "89",
-  "version": "11.10.0"
+  "version": "11.15.0"
 }
