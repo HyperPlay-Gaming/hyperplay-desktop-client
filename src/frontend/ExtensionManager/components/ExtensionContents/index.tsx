@@ -1,9 +1,11 @@
+import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import extensionState from 'frontend/state/ExtensionState'
 import ExtensionContentsStyles from './index.module.scss'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
+/* eslint-disable react/no-unknown-property */
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace React {
