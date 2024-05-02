@@ -786,7 +786,8 @@ export default observer(function GamePage(): JSX.Element | null {
     }
 
     if (isInstallingDistributable) {
-      return `${t('status.installing.distributable')}`
+      return `${t('status.distributables',
+      'Installing Distributables')}`
     }
 
     if (isExtracting) {
