@@ -8,8 +8,7 @@ import {
   WineVersionInfo,
   InstallParams,
   LibraryTopSectionOptions,
-  MetricsOptInStatus,
-  ExperimentalFeatures
+  MetricsOptInStatus
 } from 'common/types'
 import {
   Category,
@@ -37,7 +36,6 @@ import libraryState from 'frontend/state/libraryState'
 import storeAuthState from './storeAuthState'
 
 const storage: Storage = window.localStorage
-const globalSettings = configStore.get_nodefault('settings')
 
 const RTL_LANGUAGES = ['fa', 'ar']
 
@@ -82,7 +80,6 @@ interface StateProps {
   }
   showMetaMaskBrowserSidebarLinks: boolean
   metricsOptInStatus: MetricsOptInStatus
-  experimentalFeatures: ExperimentalFeatures
 }
 
 class GlobalState extends PureComponent<Props> {
@@ -127,10 +124,7 @@ class GlobalState extends PureComponent<Props> {
     metricsOptInStatus: metricsStore.get(
       'metricsOptInStatus',
       MetricsOptInStatus.undecided
-    ) as MetricsOptInStatus,
-    experimentalFeatures: globalSettings?.experimentalFeatures || {
-      enableNewShinyFeature: false // remove this when adding a real experimental feature
-    }
+    ) as MetricsOptInStatus
   }
 
   setLanguage = (newLanguage: string) => {
@@ -283,10 +277,6 @@ class GlobalState extends PureComponent<Props> {
 
   handleLibraryTopSection = (value: LibraryTopSectionOptions) => {
     this.setState({ libraryTopSection: value })
-  }
-
-  handleExperimentalFeatures = (value: ExperimentalFeatures) => {
-    this.setState({ experimentalFeatures: value })
   }
 
   handleSuccessfulLogin = (runner: Runner) => {
@@ -707,8 +697,7 @@ class GlobalState extends PureComponent<Props> {
       isSettingsModalOpen: settingsModalOpen,
       setIsSettingsModalOpen: this.handleSettingsModalOpen,
       setShowMetaMaskBrowserSidebarLinks:
-        this.setShowMetaMaskBrowserSidebarLinks,
-      handleExperimentalFeatures: this.handleExperimentalFeatures
+        this.setShowMetaMaskBrowserSidebarLinks
     }
 
     return (
