@@ -170,10 +170,11 @@ export default function DownloadToastManager() {
   const downloadSizeInMB = progress.percent
     ? (downloadedMB / progress.percent) * 100
     : 0
-  
-    const estimatedCompletionTimeInMs = (progress.downSpeed && !isInstallingDistributables)
-    ? (downloadSizeInMB / progress.downSpeed) * 1000
-    : 0
+
+  const estimatedCompletionTimeInMs =
+    progress.downSpeed && !isInstallingDistributables
+      ? (downloadSizeInMB / progress.downSpeed) * 1000
+      : 0
 
   let imgUrl = currentElement?.params.gameInfo.art_cover
     ? currentElement?.params.gameInfo.art_cover
