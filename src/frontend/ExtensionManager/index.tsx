@@ -46,7 +46,7 @@ const ExtensionManager = function () {
         className={ExtensionManagerStyles.mmContainer}
         style={mmContainerStyle}
       >
-        {ExtensionContents()}
+        <ExtensionContents />
       </div>
     )
   }
