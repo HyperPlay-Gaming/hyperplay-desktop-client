@@ -58,7 +58,7 @@ const ExtensionManager = function () {
       ref={rootRef}
       style={mmContainerStyle}
     >
-      {ExtensionContents()}
+      <ExtensionContents />
     </dialog>
   )
 }
