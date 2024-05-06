@@ -1,4 +1,5 @@
 import * as utils from '../utils'
+import { getExecutableAndArgs } from '../utils'
 
 jest.mock('electron')
 jest.mock('../logger/logger')
@@ -168,6 +169,71 @@ describe('backend/utils.ts', () => {
       expect(utils.bytesToSize(1024 * 1024 * 1029 * 44000)).toEqual('43.18 TB')
       expect(utils.bytesToSize(1025 * 1024 * 2056 * 21010)).toEqual('41.24 TB')
       expect(utils.bytesToSize(2059 * 1024 * 3045 * 4000)).toEqual('23.36 TB')
+    })
+  })
+
+  describe('getExecutableAndArgs', () => {
+    it('should correctly parse executable with .exe extension and arguments', () => {
+      const input = 'path/to/executable.exe --arg1 --arg2'
+      const expected = {
+        executable: 'path/to/executable.exe',
+        launchArgs: '--arg1 --arg2'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .exe extension and arguments with backward slashes', () => {
+      const input = '\\path\\to\\executable.exe --arg1 --arg2'
+      const expected = {
+        executable: '\\path\\to\\executable.exe',
+        launchArgs: '--arg1 --arg2'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .app extension and no arguments', () => {
+      const input = 'path/to/application.app'
+      const expected = {
+        executable: 'path/to/application.app',
+        launchArgs: ''
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .bin extension and single argument', () => {
+      const input = 'path/to/executable.bin -arg'
+      const expected = {
+        executable: 'path/to/executable.bin',
+        launchArgs: '-arg'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should return empty strings if no executable is found', () => {
+      const input = '--arg1 --arg2'
+      const expected = {
+        executable: '',
+        launchArgs: '--arg1 --arg2'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with .sh extension and multiple arguments', () => {
+      const input = 'path/to/script.sh -arg1 --arg2 /arg3'
+      const expected = {
+        executable: 'path/to/script.sh',
+        launchArgs: '-arg1 --arg2 /arg3'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should handle case sensitivity in extensions', () => {
+      const input = 'path/to/Executable.EXE --option'
+      const expected = {
+        executable: 'path/to/Executable.EXE',
+        launchArgs: '--option'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
     })
   })
 })
