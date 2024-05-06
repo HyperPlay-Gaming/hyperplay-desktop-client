@@ -193,7 +193,8 @@ export function refreshGameInfoFromHpRelease(
     cloud_save_enabled: false,
     is_mac_native: hasMacNativeBuild,
     is_linux_native: hasLinuxNativeBuild,
-    account_name: data.account_name
+    account_name: data.account_name,
+    networks: data.project_meta.networks
   }
 }
 

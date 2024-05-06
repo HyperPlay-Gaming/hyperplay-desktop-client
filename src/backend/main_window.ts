@@ -5,6 +5,16 @@ import { controlWindow } from './hyperplay-overlay/model'
 
 let mainWindow: BrowserWindow | null = null
 
+// Steam Deck resolution is 1280x800
+const minSupportedResolution = {
+  width: 1280,
+  height: 800
+}
+
+// 50% of the screen for the minimum supported resolution seems like a reasonable size
+const minSupportedHeight = Math.round(minSupportedResolution.height / 1.5)
+const minSupportedWidth = Math.round(minSupportedResolution.width / 1.5)
+
 export const getMainWindow = () => {
   return mainWindow
 }
@@ -33,8 +43,8 @@ let hiddenPhraseCurrentIndex = 0
 // creates the mainWindow based on the configuration
 export const createMainWindow = () => {
   let windowProps: Electron.Rectangle = {
-    height: 690,
-    width: 1200,
+    height: minSupportedResolution.height,
+    width: minSupportedResolution.width,
     x: 0,
     y: 0
   }
@@ -68,8 +78,8 @@ export const createMainWindow = () => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     ...windowProps,
-    minHeight: 345,
-    minWidth: 600,
+    minHeight: minSupportedHeight,
+    minWidth: minSupportedWidth,
     show: false,
 
     webPreferences: {

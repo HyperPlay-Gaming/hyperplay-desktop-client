@@ -3,12 +3,17 @@ import {
   AppSettings,
   GameInfo,
   InstallProgress,
-  Runner
+  Runner,
+  SiweValues
 } from 'common/types'
 
 import { TFunction } from 'i18next'
 import { getGameInfo, getPlatformName } from './index'
 import { DialogModalOptions } from 'frontend/types'
+import { SiweMessage } from 'siwe'
+import { valistBaseApiUrlv1 } from 'common/constants'
+import { ethers } from 'ethers'
+import axios from 'axios'
 import authState from 'frontend/state/authState'
 import gameUpdateState from 'frontend/state/GameUpdateState'
 
@@ -29,6 +34,7 @@ type InstallArgs = {
   installLanguage?: string
   channelName?: string
   accessCode?: string
+  siweValues?: SiweValues
 }
 
 async function install({
@@ -42,7 +48,8 @@ async function install({
   installLanguage = 'en-US',
   platformToInstall = 'Windows',
   channelName,
-  accessCode
+  accessCode,
+  siweValues
 }: InstallArgs) {
   if (!installPath) {
     console.error('installPath is undefined')
@@ -102,7 +109,8 @@ async function install({
     platformToInstall,
     gameInfo: JSON.parse(JSON.stringify(gameInfo)),
     channelName,
-    accessCode
+    accessCode,
+    siweValues
   })
 }
 
@@ -259,7 +267,8 @@ const launch = async ({
 }
 
 const updateGame = async (gameInfo: GameInfo) => {
-  return gameUpdateState.updateGame(gameInfo)
+  const siweValues = await signSiweMessage()
+  return gameUpdateState.updateGame({ ...gameInfo, siweValues })
 }
 
 export const epicCategories = ['all', 'legendary', 'epic']
@@ -269,3 +278,47 @@ export const hyperPlayCategories = ['all', 'hyperplay']
 export const amazonCategories = ['all', 'nile', 'amazon']
 
 export { install, launch, repair, updateGame }
+
+export async function signSiweMessage(): Promise<SiweValues> {
+  const signer = await getSigner()
+  const address = await signer.getAddress()
+
+  const siweMessage = await createSiweMessage(address)
+  const message = siweMessage.prepareMessage()
+  const signature = await signer.signMessage(message)
+
+  return {
+    message,
+    signature,
+    address
+  }
+}
+
+export async function getSigner(): Promise<ethers.Signer> {
+  if (!window.ethereum) throw new Error('Ethereum provider not found')
+  const provider = new ethers.BrowserProvider(window.ethereum)
+  return provider.getSigner()
+}
+
+export async function createSiweMessage(
+  signerAddress: string
+): Promise<SiweMessage> {
+  const domain = window.location.host ? window.location.host : 'hyperplay'
+  const origin = window.location.origin.startsWith('file://')
+    ? 'file://hyperplay'
+    : window.location.origin
+
+  const statementRes = await axios.get(
+    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
+  )
+  const statement = String(statementRes?.data)
+
+  return new SiweMessage({
+    domain,
+    address: signerAddress,
+    statement,
+    uri: origin,
+    version: '1',
+    chainId: 1
+  })
+}

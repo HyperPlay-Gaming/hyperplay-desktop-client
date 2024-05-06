@@ -46,8 +46,8 @@ export const getAmazonLoginData = async () =>
 export const authAmazon = async (data: NileRegisterData) =>
   ipcRenderer.invoke('authAmazon', data)
 export const logoutAmazon = async () => ipcRenderer.invoke('logoutAmazon')
-export const checkGameUpdates = async () =>
-  ipcRenderer.invoke('checkGameUpdates')
+export const checkGameUpdates = async (runners: Runner[]) =>
+  ipcRenderer.invoke('checkGameUpdates', runners)
 export const refreshLibrary = async (library?: Runner | 'all') =>
   ipcRenderer.invoke('refreshLibrary', library)
 

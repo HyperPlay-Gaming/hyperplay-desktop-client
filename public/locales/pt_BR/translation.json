@@ -108,7 +108,7 @@
             }
         },
         "runexe": {
-            "title": "Selecione o EXE"
+            "title": "Selecione o EXE para rodar"
         },
         "select": {
             "button": "Selecione",
@@ -159,7 +159,8 @@
         "sync": "Sincronizar",
         "syncing": "Sincronizando",
         "unsync": "Dessincronizar",
-        "continue": "Continuar"
+        "continue": "Continuar",
+        "update": "Atualizar"
     },
     "controller": {
         "hints": {
@@ -557,7 +558,7 @@
         "showfps": "Exibir contador de FPS (DX9, 10 e 11)",
         "start-in-tray": "Iniciar minimizado",
         "steamruntime": "Utilizar Steam Runtime",
-        "winecrossoverbottle": "Prefixo CrossOver",
+        "winecrossoverbottle": "Bottle CrossOver",
         "wineprefix": "Pasta do prefixo Wine",
         "wineversion": "Wine Versão",
         "ignoreGameUpdates": "Ignorar atualizações do jogo",
@@ -815,7 +816,7 @@
     "dlc": {
         "title": "Título",
         "actions": "Ações",
-        "installDlcs": "Instalar todas as DLCs",
+        "installDlcs": "Instalar DLCs",
         "noDlcFound": "Nenhuma DLC encontrada",
         "size": "Tamanho"
     },
