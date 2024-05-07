@@ -27,7 +27,7 @@ const EmailSubscriptionModal = () => {
   const { mutate, error, isLoading } = useMutation(
     'newsletter/subscribe',
     async (email: string) => {
-      const request = await fetch(`${DEV_PORTAL_URL}/api/newsletter`, {
+      const request = await fetch(`${DEV_PORTAL_URL}/api/v1/newsletter`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
