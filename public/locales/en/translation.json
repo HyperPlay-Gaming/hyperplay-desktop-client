@@ -927,5 +927,9 @@
         },
         "release": "Release Date",
         "size": "Size"
+    },
+    "email_subscription": {
+        "title": "Thank you for subscribing!",
+        "subtitle": "You’re now a part of our community, and we’re excited to share valuable updates and insights with you."
     }
 }

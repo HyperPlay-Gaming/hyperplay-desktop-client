@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {
-  CheckEmail,
+  Modal,
   ModalAnimation,
-  UpdatesSubscriptionModal
+  UpdatesSubscriptionModal,
+  Images
 } from '@hyperplay/ui'
 import { observer } from 'mobx-react-lite'
 import emailSubscriptionState from '../../../state/EmailSubscriptionState'
@@ -11,6 +12,8 @@ import { useMutation } from 'react-query'
 import { DEV_PORTAL_URL } from '../../../../common/constants'
 import { MODAL_ANIMATION_DURATION } from '../../../constants'
 import { newsLetterStore } from '../../../helpers/electronStores'
+import styles from './index.module.scss'
+import { t } from 'i18next'
 
 const EmailSubscriptionModal = () => {
   const flags = useFlags()
@@ -45,6 +48,9 @@ const EmailSubscriptionModal = () => {
       onSuccess: (email) => {
         setSubmittedEmail(email)
         newsLetterStore.set('subscribed', true)
+        setTimeout(() => {
+          emailSubscriptionState.closeEmailModal()
+        }, 3000)
       }
     }
   )
@@ -57,16 +63,27 @@ const EmailSubscriptionModal = () => {
 
   if (submittedEmail) {
     return (
-      <ModalAnimation
+      <Modal
+        withCloseButton
         isOpen={isEnabled && emailSubscriptionState.isEmailModalOpen}
         onClose={handleClose}
+        classNames={{ root: styles.root }}
       >
-        <CheckEmail
-          onClose={handleClose}
-          email={submittedEmail}
-          onResend={() => mutate(submittedEmail)}
-        />
-      </ModalAnimation>
+        <Modal.HeadingIcon className={styles.emailRoundedIcon}>
+          <Images.Email width={20} height={20} className={styles.icon} />
+        </Modal.HeadingIcon>
+        <Modal.Header>
+          <Modal.Title>
+            {t('email_subscription.title', 'Thank you for subscribing!')}
+          </Modal.Title>
+          <Modal.Body>
+            {t(
+              'email_subscription.subtitle',
+              `You’re now a part of our community, and we’re excited to share valuable updates and insights with you.`
+            )}
+          </Modal.Body>
+        </Modal.Header>
+      </Modal>
     )
   }
 
