@@ -41,8 +41,7 @@ export default defineConfig(({ mode }) => ({
           'src/backend/hyperplay-proxy-server/providerPreload.ts',
           'src/backend/hyperplay_store_preload.ts',
           'src/backend/webview_style_preload.ts',
-          'src/backend/auth_provider_preload.ts',
-          'src/backend/email_modal_provider_preload.ts'
+          'src/backend/auth_provider_preload.ts'
         ]
       },
       outDir: 'build/preload',
