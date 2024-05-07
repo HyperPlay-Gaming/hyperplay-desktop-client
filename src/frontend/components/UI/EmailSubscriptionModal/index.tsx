@@ -13,12 +13,13 @@ import { DEV_PORTAL_URL } from '../../../../common/constants'
 import { MODAL_ANIMATION_DURATION } from '../../../constants'
 import { newsLetterStore } from '../../../helpers/electronStores'
 import styles from './index.module.scss'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 const EmailSubscriptionModal = () => {
   const flags = useFlags()
   const [submittedEmail, setSubmittedEmail] = useState<string>()
   const isEnabled = flags.emailSubscriptionModal
+  const { t } = useTranslation()
 
   const handleClose = () => {
     emailSubscriptionState.closeEmailModal()
