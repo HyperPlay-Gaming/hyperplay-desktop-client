@@ -1,57 +1,86 @@
-import React, { useEffect, useRef } from 'react'
-import styles from './index.module.scss'
-import { ModalAnimation } from '@hyperplay/ui'
-import { WebviewTag } from 'electron'
+import React, { useEffect, useState } from 'react'
+import {
+  CheckEmail,
+  ModalAnimation,
+  UpdatesSubscriptionModal
+} from '@hyperplay/ui'
 import { observer } from 'mobx-react-lite'
-import { DEV_PORTAL_URL } from 'common/constants'
 import emailSubscriptionState from '../../../state/EmailSubscriptionState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-
-const url = `${DEV_PORTAL_URL}/signin?isLauncher=true&promoMode=true`
+import { useMutation } from 'react-query'
+import { DEV_PORTAL_URL } from '../../../../common/constants'
+import { MODAL_ANIMATION_DURATION } from '../../../constants'
+import { newsLetterStore } from '../../../helpers/electronStores'
 
 const EmailSubscriptionModal = () => {
   const flags = useFlags()
-  const webviewRef = useRef<WebviewTag>(null)
+  const [submittedEmail, setSubmittedEmail] = useState<string>()
   const isEnabled = flags.emailSubscriptionModal
 
-  useEffect(() => {
-    const webview = webviewRef.current
-    if (!webview) return
+  const handleClose = () => {
+    emailSubscriptionState.closeEmailModal()
+    setTimeout(() => {
+      setSubmittedEmail(undefined)
+    }, MODAL_ANIMATION_DURATION)
+  }
 
-    const handleIpcMessage = async (event: Electron.IpcMessageEvent) => {
-      switch (event.channel) {
-        case 'closeAuthModal':
-          emailSubscriptionState.closeEmailModal()
-          break
-        default:
-          break
+  const { mutate, error, isLoading } = useMutation(
+    'newsletter/subscribe',
+    async (email: string) => {
+      const request = await fetch(`${DEV_PORTAL_URL}/api/newsletter`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      })
+
+      if (!request.ok) {
+        throw new Error('Error sending email')
+      }
+
+      return email
+    },
+    {
+      onSuccess: (email) => {
+        setSubmittedEmail(email)
+        newsLetterStore.set('subscribed', true)
       }
     }
+  )
 
-    const handleDomReady = () => {
-      webview.addEventListener('ipc-message', handleIpcMessage)
-    }
-
-    webview.addEventListener('dom-ready', handleDomReady)
-
+  useEffect(() => {
     return () => {
-      webview.removeEventListener('dom-ready', handleDomReady)
-      webview.removeEventListener('ipc-message', handleIpcMessage)
+      setSubmittedEmail(undefined)
     }
   }, [])
+
+  if (submittedEmail) {
+    return (
+      <ModalAnimation
+        isOpen={isEnabled && emailSubscriptionState.isEmailModalOpen}
+        onClose={handleClose}
+      >
+        <CheckEmail
+          onClose={handleClose}
+          email={submittedEmail}
+          onResend={() => mutate(submittedEmail)}
+        />
+      </ModalAnimation>
+    )
+  }
 
   return (
     <ModalAnimation
       isOpen={isEnabled && emailSubscriptionState.isEmailModalOpen}
-      onClose={() => emailSubscriptionState.closeEmailModal()}
+      onClose={handleClose}
     >
-      <webview
-        ref={webviewRef}
-        src={url}
-        className={styles.webview}
-        partition="persist:emailModal"
-        allowpopups={'true' as unknown as boolean | undefined}
-        useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15"
+      <UpdatesSubscriptionModal
+        loading={isLoading}
+        onSubmit={mutate}
+        onCancel={handleClose}
+        error={error ? 'Something went wrong. Please try again.' : undefined}
+        onClose={handleClose}
       />
     </ModalAnimation>
   )

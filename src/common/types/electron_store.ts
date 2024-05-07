@@ -109,6 +109,9 @@ export interface StoreStructure {
   extensionMetadata: {
     isInitialized: boolean
   }
+  newsLetterStore: {
+    subscribed: boolean
+  }
 }
 
 export type StoreOptions<T extends Record<string, unknown>> = Store.Options<T>
