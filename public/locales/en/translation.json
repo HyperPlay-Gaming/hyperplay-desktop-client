@@ -395,11 +395,11 @@
                         "cantFindProfile": "Can't find your browser profile?",
                         "createNewWallet": "Create new MM extension wallet",
                         "details": "The browsers below already have MetaMask installed. Choose the one you’d like to import from.",
+                        "learnMore": "Learn more.",
+                        "orWord": "OR",
                         "title": "Select the browser to import from",
                         "useRecoveryPhrase": "Import Using Secret Recovery phrase",
-                        "useRecoveryPhraseInfo": "This feature is recommended for advanced users and developers. Your secret recovery phrase is stored locally in MetaMask and never shared with HyperPlay.",
-                        "learnMore": "Learn more.",
-                        "orWord": "OR"
+                        "useRecoveryPhraseInfo": "This feature is recommended for advanced users and developers. Your secret recovery phrase is stored locally in MetaMask and never shared with HyperPlay."
                     },
                     "info": {
                         "createWalletCTA": "Create a wallet",
