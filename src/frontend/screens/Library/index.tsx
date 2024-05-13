@@ -13,10 +13,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import GamesList from './components/GamesList'
 import { FilterItem, GameInfo, Runner } from 'common/types'
 import ErrorComponent from 'frontend/components/UI/ErrorComponent'
-import {
-  epicCategories,
-  gogCategories
-} from 'frontend/helpers/library'
+import { epicCategories, gogCategories } from 'frontend/helpers/library'
 import RecentlyPlayed from './components/RecentlyPlayed'
 import { InstallModal } from './components'
 import './index.css'

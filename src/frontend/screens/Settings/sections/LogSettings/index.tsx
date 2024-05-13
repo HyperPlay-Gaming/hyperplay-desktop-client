@@ -143,7 +143,7 @@ function LogSettings() {
           {[
             ['HyperPlay', 'hyperplay'],
             ['Epic/Legendary', 'legendary'],
-            ['GOG', 'gogdl'],
+            ['GOG', 'gogdl']
           ].map((log) => {
             const [label, value] = log
             return (

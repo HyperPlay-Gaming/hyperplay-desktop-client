@@ -134,10 +134,7 @@ export default function DownloadDialog({
   const isNotNative = platformToInstall === 'Windows' && !isWin
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    | LegendaryInstallInfo
-    | GogInstallInfo
-    | HyperPlayInstallInfo
-    | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >(null)
   const [installLanguages, setInstallLanguages] = useState(Array<string>())
   const [installLanguage, setInstallLanguage] = useState('')

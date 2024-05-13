@@ -24,7 +24,7 @@ import {
   GOG_LOGIN_URL,
   GOG_STORE_URL,
   HYPERPLAY_STORE_URL,
-  WIKI_URL,
+  WIKI_URL
 } from '../../constants'
 import { METAMASK_SNAPS_URL } from 'common/constants'
 import storeAuthState from 'frontend/state/storeAuthState'
@@ -151,7 +151,7 @@ function WebView() {
         // Ignore the login handling if not on login page
         if (!runner) {
           return
-        } 
+        }
         if (runner === 'gog') {
           const pageUrl = webview.getURL()
           if (pageUrl.match(gogEmbedRegExp)) {

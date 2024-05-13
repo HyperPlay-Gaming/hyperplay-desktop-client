@@ -97,10 +97,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const [extraInfo, setExtraInfo] = useState<ExtraInfo | null>(null)
   const [autoSyncSaves, setAutoSyncSaves] = useState(false)
   const [gameInstallInfo, setGameInstallInfo] = useState<
-    | LegendaryInstallInfo
-    | GogInstallInfo
-    | HyperPlayInstallInfo
-    | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >(null)
   const [launchArguments, setLaunchArguments] = useState('')
   const [hasError, setHasError] = useState<{

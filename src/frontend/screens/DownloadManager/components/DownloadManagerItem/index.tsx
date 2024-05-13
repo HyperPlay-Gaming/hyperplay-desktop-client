@@ -76,7 +76,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const library = [
     ...libraryState.epicLibrary,
     ...libraryState.gogLibrary,
-    ...libraryState.hyperPlayLibrary,
+    ...libraryState.hyperPlayLibrary
   ]
 
   const { params, addToQueueTime, endTime, type, startTime } = element
