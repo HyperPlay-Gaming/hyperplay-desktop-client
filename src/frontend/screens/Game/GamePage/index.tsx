@@ -63,7 +63,6 @@ import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import DLCList from 'frontend/components/UI/DLCList'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
-import { NileInstallInfo } from 'common/types/nile'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import authState from 'frontend/state/authState'
@@ -101,7 +100,6 @@ export default observer(function GamePage(): JSX.Element | null {
     | LegendaryInstallInfo
     | GogInstallInfo
     | HyperPlayInstallInfo
-    | NileInstallInfo
     | null
   >(null)
   const [launchArguments, setLaunchArguments] = useState('')

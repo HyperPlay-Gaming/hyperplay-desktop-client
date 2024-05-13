@@ -40,7 +40,6 @@ import { useTranslation } from 'react-i18next'
 import { configStore } from 'frontend/helpers/electronStores'
 import { AlertCard, Button, Images } from '@hyperplay/ui'
 import DLCDownloadListing from './DLCDownloadListing'
-import { NileInstallInfo } from 'common/types/nile'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import { signSiweMessage } from 'frontend/helpers/library'
 import styles from './index.module.scss'
@@ -138,7 +137,6 @@ export default function DownloadDialog({
     | LegendaryInstallInfo
     | GogInstallInfo
     | HyperPlayInstallInfo
-    | NileInstallInfo
     | null
   >(null)
   const [installLanguages, setInstallLanguages] = useState(Array<string>())

@@ -12,17 +12,13 @@ import { NavLink, useLocation } from 'react-router-dom'
 import {
   EPIC_STORE_URL,
   GOG_STORE_URL,
-  AMAZON_STORE,
   HYPERPLAY_STORE_URL
 } from 'frontend/constants'
 import webviewNavigationStore from 'frontend/store/WebviewNavigationStore'
 import { extractMainDomain } from '../../../helpers/extract-main-domain'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 
 const TopNavBar = observer(() => {
   const { t } = useTranslation()
-  const flags = useFlags()
-  const ENABLE_AMAZON_STORE = flags.amazonStore
 
   const { showMetaMaskBrowserSidebarLinks } = useContext(ContextProvider)
   const [badgeText, setBadgeText] = useState('0')
@@ -99,17 +95,6 @@ const TopNavBar = observer(() => {
               {t('GOG', 'GOG')}
             </Button>
           </NavLink>
-          {ENABLE_AMAZON_STORE ? (
-            <NavLink to="/amazonstore">
-              <Button
-                type="link"
-                size="small"
-                style={getStoreTextStyle(AMAZON_STORE)}
-              >
-                {t('Amazon', 'Amazon')}
-              </Button>
-            </NavLink>
-          ) : null}
         </>
       </div>
       <div>

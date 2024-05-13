@@ -69,10 +69,6 @@ import {
   libraryStore as GOGlibraryStore
 } from './storeManagers/gog/electronStores'
 import * as fileSize from 'filesize'
-import {
-  installStore as nileInstallStore,
-  libraryStore as nileLibraryStore
-} from './storeManagers/nile/electronStores'
 
 import makeClient from 'discord-rich-presence-typescript'
 import { notify, showDialogBoxModalAuto } from './dialog/dialog'
@@ -346,7 +342,6 @@ async function errorHandler({
   }
 }
 
-// If you ever modify this range of characters, please also add them to nile
 // source as this function is used to determine how game directory will be named
 function removeSpecialcharacters(text: string): string {
   const regexp = new RegExp(/[:|/|*|?|<|>|\\|&|{|}|%|$|@|`|!|™|+|'|"|®]/, 'gi')
@@ -360,7 +355,7 @@ async function openUrlOrFile(url: string): Promise<string | void> {
   return shell.openPath(url)
 }
 
-function clearCache(library?: 'gog' | 'legendary' | 'nile') {
+function clearCache(library?: 'gog' | 'legendary') {
   if (library === 'gog' || !library) {
     GOGapiInfoCache.clear()
     GOGlibraryStore.clear()
@@ -375,10 +370,6 @@ function clearCache(library?: 'gog' | 'legendary' | 'nile') {
       { subcommand: 'cleanup' },
       createAbortController(abortID)
     ).then(() => deleteAbortController(abortID))
-  }
-  if (library === 'nile' || !library) {
-    nileInstallStore.clear()
-    nileLibraryStore.clear()
   }
 }
 
@@ -442,12 +433,6 @@ function getGOGdlBin(): { dir: string; bin: string } {
   }
   return splitPathAndName(
     fixAsarPath(join(publicDir, 'bin', process.platform, 'gogdl'))
-  )
-}
-
-function getNileBin(): { dir: string; bin: string } {
-  return splitPathAndName(
-    fixAsarPath(join(publicDir, 'bin', process.platform, 'nile'))
   )
 }
 
@@ -1425,7 +1410,6 @@ export {
   resetApp,
   getLegendaryBin,
   getGOGdlBin,
-  getNileBin,
   formatEpicStoreUrl,
   getSteamRuntime,
   constructAndUpdateRPC,
@@ -1473,18 +1457,12 @@ export const processIsClosed = async (pid: number) => {
 }
 
 type RunnerStore = {
-  [key in Runner]:
-    | 'Epic Games'
-    | 'GOG'
-    | 'Amazon Games'
-    | 'HyperPlay'
-    | 'Sideloaded'
+  [key in Runner]: 'Epic Games' | 'GOG' | 'HyperPlay' | 'Sideloaded'
 }
 
 const runnerStore: RunnerStore = {
   legendary: 'Epic Games',
   gog: 'GOG',
-  nile: 'Amazon Games',
   hyperplay: 'HyperPlay',
   sideload: 'Sideloaded'
 }

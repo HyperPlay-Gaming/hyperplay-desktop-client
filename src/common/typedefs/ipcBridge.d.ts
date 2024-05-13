@@ -41,12 +41,6 @@ import {
 import { LegendaryInstallInfo, SelectiveDownload } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
 import { PROVIDERS } from 'common/types/proxy-types'
-import {
-  NileInstallInfo,
-  NileLoginData,
-  NileRegisterData,
-  NileUserData
-} from 'common/types/nile'
 import { ToastKey } from 'frontend/store/types'
 import { AuthSession } from '../types/auth'
 import type { SystemInformation } from 'backend/utils/systeminfo'
@@ -288,7 +282,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   getAppVersion: () => string
   getLegendaryVersion: () => Promise<string>
   getGogdlVersion: () => Promise<string>
-  getNileVersion: () => Promise<string>
   isFullscreen: () => boolean
   isFlatpak: () => boolean
   getPlatform: () => NodeJS.Platform
@@ -306,14 +299,9 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     installPlatform: InstallPlatform,
     channelNameToInstall?: string
   ) => Promise<
-    | LegendaryInstallInfo
-    | GogInstallInfo
-    | HyperPlayInstallInfo
-    | NileInstallInfo
-    | null
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
   >
   getUserInfo: () => Promise<UserInfo | undefined>
-  getAmazonUserInfo: () => Promise<NileUserData | undefined>
   isLoggedIn: () => boolean
   login: (sid: string) => Promise<{
     status: 'done' | 'failed'
@@ -323,12 +311,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     status: 'done' | 'error'
     data?: UserData
   }>
-  authAmazon: (data: NileRegisterData) => Promise<{
-    status: 'done' | 'failed'
-    user: NileUserData | undefined
-  }>
   logoutLegendary: () => Promise<void>
-  logoutAmazon: () => Promise<void>
   getAlternativeWine: () => Promise<WineInstallation[]>
   getLocalPeloadPath: () => Promise<string>
   readConfig: (config_class: 'library' | 'user') => Promise<GameInfo[] | string>
@@ -439,7 +422,6 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     runner: Runner,
     appName: string
   ) => Promise<number | undefined>
-  getAmazonLoginData: () => Promise<NileLoginData>
   pauseCurrentDownload: () => Promise<void>
 }
 
