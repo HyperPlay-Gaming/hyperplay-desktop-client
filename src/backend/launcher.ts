@@ -143,31 +143,17 @@ async function prepareLaunch(
         )
       }
     }
-    // for native games lets use scout for now
-    const runtimeType = isNative ? 'scout' : nonNativeRuntime
+    const runtimeType = isNative ? 'sniper' : nonNativeRuntime
     const { path, args } = await getSteamRuntime(runtimeType)
-    if (!path) {
-      return {
-        success: false,
-        failureReason:
-          'Steam Runtime is enabled, but no runtimes could be found\n' +
-          `Make sure Steam ${
-            isNative
-              ? 'is'
-              : `and the SteamLinuxRuntime - ${
-                  nonNativeRuntime === 'sniper' ? 'Sniper' : 'Soldier'
-                } are`
-          } installed`
-      }
+    if (path) {
+      steamRuntime = [
+        path,
+        isNative || !gameInfo.install['install_path']
+          ? ''
+          : `--filesystem=${gameInfo.install['install_path']}`,
+        ...args
+      ]
     }
-
-    steamRuntime = [
-      path,
-      isNative || !gameInfo.install['install_path']
-        ? ''
-        : `--filesystem=${gameInfo.install['install_path']}`,
-      ...args
-    ]
   }
 
   return {
