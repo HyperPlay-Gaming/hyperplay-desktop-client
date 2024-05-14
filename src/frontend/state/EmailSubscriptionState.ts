@@ -10,8 +10,9 @@ class EmailSubscriptionState {
   constructor() {
     makeAutoObservable(this)
     const isAlreadySubscribed = newsLetterStore.get('subscribed', false)
+    const hasAlreadySkipped = newsLetterStore.get('skipped', false)
 
-    if (!isAlreadySubscribed) {
+    if (!isAlreadySubscribed && !hasAlreadySkipped) {
       this.modalOpen = onboardingStore.get('openEmailModalIfAppReloads', false)
     }
 

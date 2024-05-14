@@ -111,6 +111,7 @@ export interface StoreStructure {
   }
   newsLetterStore: {
     subscribed: boolean
+    skipped: boolean
   }
 }
 
