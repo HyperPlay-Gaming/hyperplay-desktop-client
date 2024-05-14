@@ -54,9 +54,7 @@ const initialContext: ContextType = {
   setIsSettingsModalOpen: () => null,
   showMetaMaskBrowserSidebarLinks: false,
   setShowMetaMaskBrowserSidebarLinks: () => null,
-  metricsOptInStatus: MetricsOptInStatus.undecided,
-  experimentalFeatures: { enableNewShinyFeature: false }, // remove this when adding a real experimental feature
-  handleExperimentalFeatures: () => null
+  metricsOptInStatus: MetricsOptInStatus.undecided
 }
 
 export default React.createContext(initialContext)

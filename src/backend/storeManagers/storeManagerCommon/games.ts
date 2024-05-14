@@ -34,6 +34,7 @@ import { connectedProvider } from 'backend/hyperplay-proxy-server/providerState'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { controlWindow } from 'backend/hyperplay-overlay/model'
 import { initOverlayRenderState } from 'backend/hyperplay-overlay'
+import { getExecutableAndArgs } from 'backend/utils'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -263,10 +264,12 @@ export async function launchGame(
     throw `Could not launch web game for ${appName}`
   }
 
-  const gameSettings = await getAppSettings(appName)
-  const { launcherArgs } = gameSettings
-
   if (executable) {
+    const gameSettings = await getAppSettings(appName)
+    const { launcherArgs: launchArgsFromSettings } = gameSettings
+    const { launchArgs, executable: exeOnly } = getExecutableAndArgs(executable)
+    const combinedArgs = `${launchArgs ?? ''} ${launchArgsFromSettings ?? ''}`
+
     const isNative = gameManagerMap[runner].isNative(appName)
     const {
       success: launchPrepSuccess,
@@ -303,32 +306,32 @@ export async function launchGame(
       logInfo(
         `launching native ${
           runner === 'hyperplay' ? 'HyperPlay' : 'Sideloaded'
-        } Game: ${executable} ${launcherArgs ?? ''}`,
+        } Game: ${exeOnly} ${combinedArgs ?? ''}`,
         LogPrefix.Backend
       )
 
       try {
-        await access(executable, FS_CONSTANTS.X_OK)
+        await access(exeOnly, FS_CONSTANTS.X_OK)
       } catch (error) {
         logWarning(
           'File not executable, changing permissions temporarilly',
           LogPrefix.Backend
         )
         // On Mac, it gives an error when changing the permissions of the file inside the app bundle. But we need it for other executables like scripts.
-        if (isLinux || (isMac && !executable.endsWith('.app'))) {
-          await chmod(executable, 0o775)
+        if (isLinux || (isMac && !exeOnly.endsWith('.app'))) {
+          await chmod(exeOnly, 0o775)
         }
       }
 
-      const commandParts = shlex.split(launcherArgs ?? '')
+      const commandParts = shlex.split(combinedArgs ?? '')
 
       await callRunner(
         commandParts,
         {
           name: runner,
           logPrefix: LogPrefix.Backend,
-          bin: executable,
-          dir: dirname(executable)
+          bin: exeOnly,
+          dir: dirname(exeOnly)
         },
         createAbortController(appName),
         {
@@ -342,8 +345,8 @@ export async function launchGame(
 
       launchCleanup(rpcClient)
       // TODO: check and revert to previous permissions
-      if (isLinux || (isMac && !executable.endsWith('.app'))) {
-        await chmod(executable, 0o775)
+      if (isLinux || (isMac && !exeOnly.endsWith('.app'))) {
+        await chmod(exeOnly, 0o775)
       }
       return true
     }
@@ -351,7 +354,7 @@ export async function launchGame(
     logInfo(
       `launching non-native ${
         runner === 'hyperplay' ? 'HyperPlay' : 'Sideloaded'
-      } Game: ${executable}}`,
+      } Game: ${exeOnly}}`,
       LogPrefix.Backend
     )
 
@@ -361,10 +364,10 @@ export async function launchGame(
         (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
 
     await runWineCommand({
-      commandParts: [executable, launcherArgs ?? ''],
+      commandParts: [exeOnly, combinedArgs ?? ''],
       gameSettings,
       wait: false,
-      startFolder: dirname(executable),
+      startFolder: dirname(exeOnly),
       options: {
         wrappers,
         logFile: logFileLocation(appName),
