@@ -1,0 +1,15 @@
+.mmWindow {
+  width: 357px;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 0px 0px 16px 16px;
+  background: #24272a;
+  display: flex;
+  box-shadow: rgb(0 0 0 / 35%) 0px 5px 15px;
+}
+
+.mmWindowContainer {
+  top: var(--top-navbar-height);
+  position: fixed;
+  right: 0px;
+}
