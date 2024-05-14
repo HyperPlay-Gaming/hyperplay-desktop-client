@@ -1,4 +1,7 @@
-import { onboardingStore } from 'frontend/helpers/electronStores'
+import {
+  newsLetterStore,
+  onboardingStore
+} from 'frontend/helpers/electronStores'
 import { makeAutoObservable } from 'mobx'
 
 class EmailSubscriptionState {
@@ -6,7 +9,13 @@ class EmailSubscriptionState {
 
   constructor() {
     makeAutoObservable(this)
-    this.modalOpen = onboardingStore.get('openEmailModalIfAppReloads', false)
+    const isAlreadySubscribed = newsLetterStore.get('subscribed', false)
+    const hasAlreadySkipped = newsLetterStore.get('skipped', false)
+
+    if (!isAlreadySubscribed && !hasAlreadySkipped) {
+      this.modalOpen = onboardingStore.get('openEmailModalIfAppReloads', false)
+    }
+
     onboardingStore.set('openEmailModalIfAppReloads', false)
   }
 
