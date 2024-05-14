@@ -38,7 +38,8 @@ import {
   spawnAsync,
   killPattern,
   shutdownWine,
-  calculateEta
+  calculateEta,
+  getExecutableAndArgs
 } from 'backend/utils'
 import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { dirname, join } from 'path'
@@ -100,7 +101,8 @@ export const isGameAvailable = (appName: string) => {
   }
 
   if (hpGameInfo.install && hpGameInfo.install.executable) {
-    return existsSync(hpGameInfo.install.executable)
+    const { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+    return existsSync(executable)
   }
   return false
 }
@@ -1334,11 +1336,7 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
   return extraInfo
 }
 
-export async function launch(
-  appName: string,
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  launchArguments?: string
-): Promise<boolean> {
+export async function launch(appName: string): Promise<boolean> {
   const isAvailable = isGameAvailable(appName)
 
   if (!isAvailable) {

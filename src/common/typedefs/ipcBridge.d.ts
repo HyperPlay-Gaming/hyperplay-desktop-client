@@ -5,7 +5,6 @@ import {
   SummaryAchievement,
   LDEnv
 } from './../types'
-import { ProxiedProviderEventCallback } from './../../backend/hyperplay-proxy-server/providers/types'
 import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -40,7 +39,10 @@ import {
 } from 'common/types'
 import { LegendaryInstallInfo, SelectiveDownload } from 'common/types/legendary'
 import { GOGCloudSavesLocation, GogInstallInfo } from 'common/types/gog'
-import { PROVIDERS } from 'common/types/proxy-types'
+import {
+  PROVIDERS,
+  ProxiedProviderEventCallback
+} from 'common/types/proxy-types'
 import {
   NileInstallInfo,
   NileLoginData,

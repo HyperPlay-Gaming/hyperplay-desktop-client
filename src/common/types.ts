@@ -68,10 +68,6 @@ interface About {
   shortDescription: string
 }
 
-export type ExperimentalFeatures = {
-  enableNewShinyFeature: boolean // remove this when adding a real experimental feature
-}
-
 export type LDUser = {
   kind: string
   key: string
@@ -105,7 +101,6 @@ export interface AppSettings extends GameSettings {
   egsLinkedPath: string
   enableUpdates: boolean
   exitToTray: boolean
-  experimentalFeatures: ExperimentalFeatures
   hideChangelogsOnStartup: boolean
   libraryTopSection: LibraryTopSectionOptions
   maxRecentGames: number

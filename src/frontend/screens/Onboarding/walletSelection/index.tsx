@@ -6,7 +6,11 @@ import React, {
   useState
 } from 'react'
 import WalletOption from '../components/walletOption'
-import { PROVIDERS } from 'common/types/proxy-types'
+import {
+  ConnectionRequestRejectedType,
+  PROVIDERS,
+  WalletConnectedType
+} from 'common/types/proxy-types'
 // import './index.css'
 import { MMTransparent, WCBlue } from 'frontend/assets/hyperplay'
 import { Images } from '@hyperplay/ui'
@@ -22,11 +26,6 @@ import {
   MetaMaskImportOptions,
   MetaMaskInitMethod
 } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
-import {
-  WalletConnectedType,
-  ConnectionRequestRejectedType,
-  wait
-} from 'backend/hyperplay-proxy-server/commonProxyTypes'
 import { toString, QRCodeToStringOptions } from 'qrcode'
 import { WalletOnboardCloseReason, WrapRendererCallback } from 'common/types'
 import StatusScreen, { CONNECTION_STATUS } from './screens/status'
@@ -34,6 +33,9 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ONBOARDING_SCREEN } from '../types'
 import emailSubscriptionState from '../../../state/EmailSubscriptionState'
+
+const wait = async (ms: number) =>
+  new Promise((resolve) => setTimeout(resolve, ms))
 
 enum WALLET_SELECTION_DETAILS_SCREEN {
   INFO = 'INFO',

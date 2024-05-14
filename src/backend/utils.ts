@@ -1515,3 +1515,14 @@ const platformMap: Record<string, PlatformName> = {
 export function getPlatformName(platform: string): PlatformName {
   return platformMap[platform] || 'Unknown'
 }
+
+export function getExecutableAndArgs(executableWithArgs: string): {
+  executable: string
+  launchArgs: string
+} {
+  const match = executableWithArgs.match(/^(.*?\.(exe|app|bin|sh))/i)
+  const executable = match ? match[0] : ''
+  const launchArgs = executableWithArgs.replace(executable, '').trim()
+
+  return { executable, launchArgs }
+}
