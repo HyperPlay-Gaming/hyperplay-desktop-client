@@ -116,7 +116,6 @@ import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
 import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
-import * as ProxyServer from './hyperplay-proxy-server/proxy'
 import {
   initOnlineMonitor,
   isOnline,
@@ -172,6 +171,7 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/hyperplay-extension-helper/usbHandler'
+import 'backend/proxy/ipcHandlers.ts'
 
 import './ipcHandlers'
 import './ipcHandlers/checkDiskSpace'
@@ -186,7 +186,18 @@ import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
 import 'backend/utils/auto_launch'
 
-ProxyServer.serverStarted.then(() => console.log('Server started'))
+async function startProxyServer() {
+  try {
+    const proxyServer = await import('@hyperplay/proxy-server')
+    proxyServer.initServer(undefined)
+    console.log('Server started')
+    logInfo('Proxy server started', LogPrefix.HyperPlay)
+  } catch (err) {
+    logError(`Error starting proxy server ${err}`, LogPrefix.HyperPlay)
+  }
+}
+
+startProxyServer()
 
 let sentryInitialized = false
 
@@ -431,11 +442,6 @@ if (!gotTheLock) {
     authSession.setPreloads([
       path.join(__dirname, '../preload/providerPreload.js'),
       path.join(__dirname, '../preload/auth_provider_preload.js')
-    ])
-
-    const emailModalSession = session.fromPartition('persist:emailModal')
-    emailModalSession.setPreloads([
-      path.join(__dirname, '../preload/email_modal_provider_preload.js')
     ])
 
     const hpStoreSession = session.fromPartition('persist:hyperplaystore')
