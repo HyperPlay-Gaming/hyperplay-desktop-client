@@ -221,23 +221,15 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
 
     const { runner } = currentElement!.params
     if (runner === 'hyperplay' && removeDownloaded) {
-      const { appName, gameInfo, channelName } = currentElement!.params
-      const { folder_name } = gameInfo
-      if (gameInfo.channels === undefined || channelName === undefined) {
-        console.error(
-          `Error when canceling current download channels ${gameInfo.channels} or channelName ${channelName} is undefined`
-        )
-        return
-      }
-      const releaseMeta = gameInfo.channels[channelName].release_meta
+      const { appName } = currentElement!.params
+      console.log(
+        'current element in cancel ',
+        JSON.stringify(currentElement, null, 4)
+      )
 
-      if (releaseMeta) {
-        const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
-        logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
-        callAbortController(appName)
-      } else if (folder_name) {
-        removeFolder(currentElement.params.path, folder_name)
-      }
+      const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
+      logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
+      callAbortController(appName)
     }
     currentElement = null
   }
