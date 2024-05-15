@@ -222,11 +222,6 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
     const { runner } = currentElement!.params
     if (runner === 'hyperplay' && removeDownloaded) {
       const { appName } = currentElement!.params
-      console.log(
-        'current element in cancel ',
-        JSON.stringify(currentElement, null, 4)
-      )
-
       const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
       logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
       callAbortController(appName)
