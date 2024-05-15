@@ -114,6 +114,7 @@ class LibraryState {
   async refresh(library?: Runner | 'all', checkUpdates = true): Promise<void> {
     if (checkUpdates) {
       const hpUpdates = await window.api.checkGameUpdates(['hyperplay'])
+      this.gameUpdates = []
       this.gameUpdates = [...this.gameUpdates, ...hpUpdates]
       window.api
         .checkGameUpdates(['legendary', 'gog', 'nile'])
