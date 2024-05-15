@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.13.1",
+  "version": "0.14.0",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -361,9 +361,9 @@
     "vite-plugin-svgr": "^2.2.2"
   },
   "optionalDependencies": {
+    "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/providers": "^0.0.4",
-    "@hyperplay/proxy-server": "^0.0.6",
-    "@hyperplay/mock-backend": "^0.0.1"
+    "@hyperplay/proxy-server": "^0.0.7"
   },
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
