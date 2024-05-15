@@ -179,6 +179,7 @@
         "recommended": "Recommended"
     },
     "status": {
+        "distributables": "Installing Distributables",
         "downloading": "Downloading",
         "extracting": {
             "cancel": "Cancel Extraction",
