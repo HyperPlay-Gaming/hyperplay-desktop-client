@@ -1928,10 +1928,10 @@
     "@walletconnect/ethereum-provider" "^2.12.2"
     qrcode "^1.5.3"
 
-"@hyperplay/proxy-server@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@hyperplay/proxy-server/-/proxy-server-0.0.6.tgz#fe8e33a8aa4096c594a27421f38b8f76da67fd21"
-  integrity sha512-uelObs7On/nwMZJYeygD6ETb5fXVfy8sS9WCLmKJJFeZ9ACmqq/jEgmACV/dEj8Lc3piqCh1AKsqiV+gEyq8+g==
+"@hyperplay/proxy-server@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@hyperplay/proxy-server/-/proxy-server-0.0.7.tgz#3c735666e519586533a712073e8f7b7cc4be8aa0"
+  integrity sha512-xInzKB5qedC7qmX33vCTLf87lrSWrDnu2PvNTDjWJktVTlL972bXwHDWnh68AFcAYZfGH1xi/z/l5h6GG373yA==
   dependencies:
     "@mysten/sui.js" "^0.48.1"
     "@types/supertest" "^2.0.16"
@@ -14668,6 +14668,6 @@ zod@^3.22.3:
   integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
 
 zod@^3.22.4:
-  version "3.23.5"
-  resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.5.tgz#c7b7617d017d4a2f21852f533258d26a9a5ae09f"
-  integrity sha512-fkwiq0VIQTksNNA131rDOsVJcns0pfVUjHzLrNBiF/O/Xxb5lQyEXkhZWcJ7npWsYlvs+h0jFWXXy4X46Em1JA==
+  version "3.23.8"
+  resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.8.tgz#e37b957b5d52079769fb8097099b592f0ef4067d"
+  integrity sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==
