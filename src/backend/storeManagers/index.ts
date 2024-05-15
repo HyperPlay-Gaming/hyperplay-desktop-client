@@ -65,7 +65,7 @@ function getDMElement(gameInfo: GameInfo, appName: string) {
 export async function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
   const logPrefix = RunnerToLogPrefixMap[runner]
   for (const appName of gamesToUpdate) {
-    const { ignoreGameUpdates } = await gameManagerMap[runner].getSettings(
+    let { ignoreGameUpdates } = await gameManagerMap[runner].getSettings(
       appName
     )
     const gameInfo = gameManagerMap[runner].getGameInfo(appName)
@@ -74,6 +74,21 @@ export async function autoUpdate(runner: Runner, gamesToUpdate: string[]) {
     if (!gameAvailable) {
       logInfo(`Skipping auto-update for ${gameInfo.title}`, logPrefix)
       continue
+    }
+
+    /**
+     * Ignore auto update for access code gated HyperPlay games to keep user from having to
+     * enter another one time use code in the update modal, which would block other games from updating.
+     */
+    if (
+      runner === 'hyperplay' &&
+      HyperPlayGameManager.gameIsAccessCodeGated(appName)
+    ) {
+      logInfo(
+        `Ignoring auto-update for ${gameInfo.title} because it is access code gated.`,
+        logPrefix
+      )
+      ignoreGameUpdates = true
     }
 
     if (!ignoreGameUpdates) {
