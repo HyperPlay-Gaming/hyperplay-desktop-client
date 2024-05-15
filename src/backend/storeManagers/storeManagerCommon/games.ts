@@ -6,7 +6,7 @@ import {
 } from 'common/types'
 import { GameConfig } from '../../game_config'
 import { isMac, isLinux, gamesConfigPath, icon } from '../../constants'
-import { logInfo, LogPrefix, logWarning } from '../../logger/logger'
+import { logError, logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import path, { dirname, join, resolve } from 'path'
 import {
   appendFileSync,
@@ -30,7 +30,6 @@ import { app, BrowserWindow } from 'electron'
 import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { domainsAreEqual } from 'common/utils'
-import { connectedProvider } from 'backend/hyperplay-proxy-server/providerState'
 import { PROVIDERS } from 'common/types/proxy-types'
 import { controlWindow } from 'backend/hyperplay-overlay/model'
 import { initOverlayRenderState } from 'backend/hyperplay-overlay'
@@ -64,6 +63,13 @@ const openNewBrowserGameWindow = async (
   browserUrl: string,
   gameInfo: GameInfo
 ): Promise<boolean> => {
+  let connectedProvider = PROVIDERS.UNCONNECTED
+  try {
+    const proxyServer = await import('@hyperplay/proxy-server')
+    connectedProvider = proxyServer.getProvider()
+  } catch (err) {
+    logError(`Error importing proxy server ${err}`, LogPrefix.HyperPlay)
+  }
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
       icon: icon,

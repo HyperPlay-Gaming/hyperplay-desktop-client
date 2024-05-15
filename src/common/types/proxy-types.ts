@@ -31,3 +31,8 @@ export interface OverlayWindowState {
   ignoreInput: boolean
   state?: 'show' | 'hide' | null
 }
+
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+export type MetamaskExtensionRequest = (requestId: number, args: any) => void
+
+export type ProxiedProviderEventCallback = (id: number) => void

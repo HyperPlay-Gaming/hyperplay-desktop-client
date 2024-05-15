@@ -178,6 +178,11 @@ const hyperPlayLibraryStore = new TypeCheckedStoreFrontend('hpLibraryStore', {
   name: 'library'
 })
 
+const newsLetterStore = new TypeCheckedStoreFrontend('newsLetterStore', {
+  cwd: 'store',
+  name: 'newsletter-store'
+})
+
 export {
   configStore,
   gogLibraryStore,
@@ -192,5 +197,6 @@ export {
   onboardingStore,
   hyperPlayLibraryStore,
   nileLibraryStore,
-  nileConfigStore
+  nileConfigStore,
+  newsLetterStore
 }
