@@ -39,6 +39,15 @@ const createLogFile = (filePath: string) => {
  * @returns path to current log file
  */
 export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
+  if (!app.requestSingleInstanceLock()) {
+    return configStore.get('general-logs', {
+      currentLogFile: '',
+      lastLogFile: '',
+      legendaryLogFile: '',
+      gogdlLogFile: '',
+      nileLogFile: ''
+    })
+  }
   const date = new Date()
   const logDir = app.getPath('logs')
   const fmtDate = date.toISOString().replaceAll(':', '_')
