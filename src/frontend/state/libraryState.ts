@@ -114,6 +114,11 @@ class LibraryState {
   async refresh(library?: Runner | 'all', checkUpdates = true): Promise<void> {
     if (checkUpdates) {
       const hpUpdates = await window.api.checkGameUpdates(['hyperplay'])
+      /**
+       * Need to clear the gameUpdates array on refresh or updated games will still show
+       * as needing update after updating and entries will be added multiple times to the array
+       */
+      this.gameUpdates = []
       this.gameUpdates = [...this.gameUpdates, ...hpUpdates]
       window.api
         .checkGameUpdates(['legendary', 'gog', 'nile'])

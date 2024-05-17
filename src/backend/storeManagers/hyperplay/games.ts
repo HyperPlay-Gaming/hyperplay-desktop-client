@@ -776,6 +776,16 @@ export async function cancelExtraction(appName: string) {
   }
 }
 
+export function gameIsAccessCodeGated(appName: string): boolean {
+  const gameInfo = getGameInfo(appName)
+
+  const [, installedChannel] = getReleaseMeta(
+    gameInfo,
+    gameInfo.install.channelName
+  )
+  return installedChannel.license_config.access_codes
+}
+
 export async function install(
   appName: string,
   {

@@ -4,4 +4,3 @@
 [submodule "src/backend/hyperplay-overlay"]
 	path = src/backend/hyperplay-overlay
 	url = https://github.com/HyperPlay-Gaming/hyperplay-overlay.git
-
