@@ -24,7 +24,7 @@ const app = {
   getVersion(): string {
     return '1.0.0'
   },
-  requestSingleInstanceLock: jest.fn().mockReturnValue(false)
+  requestSingleInstanceLock: jest.fn().mockReturnValue(true)
 }
 
 class Notification {

@@ -99,6 +99,13 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
     return logs
   }
 
+  logs.lastLogFile = logs.currentLogFile
+  logs.currentLogFile = newLogFile
+  logs.legendaryLogFile = newLegendaryLogFile
+  logs.gogdlLogFile = newGogdlLogFile
+  logs.nileLogFile = newNileLogFile
+  configStore.set('general-logs', logs)
+
   // get longest prefix to log lines in a kind of table
   for (const prefix in LogPrefix) {
     if (longestPrefix < String(prefix).length) {
@@ -125,7 +132,7 @@ export function getLogFile(appNameOrRunner: string): string {
 
   switch (appNameOrRunner) {
     case 'hyperplay':
-      return logs.currentLogFile
+      return logs.currentLogFile ?? logs.lastLogFile
     case 'legendary':
       return logs.legendaryLogFile
     case 'gogdl':

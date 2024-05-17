@@ -60,6 +60,7 @@ describe('logger/logfile.ts', () => {
 
   test('createNewLogFileAndClearOldOnes success', () => {
     jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
+
     configStore.set('general-logs', {
       currentLogFile: 'old/log/path/file.log',
       lastLogFile: '',
@@ -68,6 +69,7 @@ describe('logger/logfile.ts', () => {
       nileLogFile: ''
     })
 
+    jest.spyOn(app, 'requestSingleInstanceLock').mockImplementation(() => true)
     const data = logfile.createNewLogFileAndClearOldOnes()
 
     expect(logError).not.toBeCalled()
