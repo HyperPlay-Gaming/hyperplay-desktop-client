@@ -40,15 +40,8 @@ const createLogFile = (filePath: string) => {
  */
 export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
   // If the app is already running, don't create a new log file
-  if (!app.requestSingleInstanceLock()) {
-    return configStore.get('general-logs', {
-      currentLogFile: '',
-      lastLogFile: '',
-      legendaryLogFile: '',
-      gogdlLogFile: '',
-      nileLogFile: ''
-    })
-  }
+  const isNewInstance = app.requestSingleInstanceLock()
+
   const date = new Date()
   const logDir = app.getPath('logs')
   const fmtDate = date.toISOString().replaceAll(':', '_')
@@ -102,13 +95,9 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
     nileLogFile: ''
   })
 
-  logs.lastLogFile = logs.currentLogFile
-  logs.currentLogFile = newLogFile
-  logs.legendaryLogFile = newLegendaryLogFile
-  logs.gogdlLogFile = newGogdlLogFile
-  logs.nileLogFile = newNileLogFile
-
-  configStore.set('general-logs', logs)
+  if (!isNewInstance) {
+    return logs
+  }
 
   // get longest prefix to log lines in a kind of table
   for (const prefix in LogPrefix) {
