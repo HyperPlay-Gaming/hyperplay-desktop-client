@@ -39,6 +39,7 @@ const createLogFile = (filePath: string) => {
  * @returns path to current log file
  */
 export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
+  // If the app is already running, don't create a new log file
   if (!app.requestSingleInstanceLock()) {
     return configStore.get('general-logs', {
       currentLogFile: '',
