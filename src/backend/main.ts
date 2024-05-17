@@ -419,13 +419,24 @@ if (!gotTheLock) {
   logInfo('HyperPlay is already running, quitting this instance')
   app.quit()
 } else {
+  let secondInstanceFired = false
   app.on('second-instance', (event, argv) => {
+    // If the second-instance event has already been fired, skip it
+    if (secondInstanceFired) {
+      return
+    }
+
+    secondInstanceFired = true
+
     // Someone tried to run a second instance, we should focus our window.
     const mainWindow = getMainWindow()
     mainWindow?.show()
 
-    handleProtocol(argv)
+    handleProtocol(argv).finally(() => {
+      secondInstanceFired = false
+    })
   })
+
   app.whenReady().then(async () => {
     trackEvent({
       event: 'HyperPlay Launched'
@@ -599,10 +610,13 @@ if (!gotTheLock) {
       })
     }
 
-    protocol.registerStringProtocol('hyperplay', (request, callback) => {
-      handleProtocol([request.url])
-      callback('Operation initiated.')
+    protocol.handle('hyperplay', async (request) => {
+      const url = request.url
+      handleProtocol([url])
+      // Return a response or a promise that resolves to a response
+      return new Response()
     })
+
     if (!app.isDefaultProtocolClient('hyperplay')) {
       if (app.setAsDefaultProtocolClient('hyperplay')) {
         logInfo('Registered protocol with OS.', LogPrefix.Backend)
