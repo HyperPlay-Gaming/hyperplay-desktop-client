@@ -1,6 +1,6 @@
 import React from 'react'
 import { BrowserPackageManagerImportOptionProps } from '../../types'
-import { BrowserProfile } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+import { BrowserProfile } from '@hyperplay/utils'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Images } from '@hyperplay/ui'
 import { faUser } from '@fortawesome/free-solid-svg-icons'

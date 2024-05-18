@@ -33,6 +33,20 @@ try {
 
 const dependenciesToNotExternalize = ['@hyperplay/check-disk-space']
 
+const preloads = [
+  'src/backend/preload.ts',
+  'src/backend/proxy/providerPreload.ts',
+  'src/backend/hyperplay_store_preload.ts',
+  'src/backend/webview_style_preload.ts',
+  'src/backend/auth_provider_preload.ts'
+]
+
+// only set alias if the extension-provider optional package was added
+try {
+  statSync(join(__dirname, 'node_modules', '@hyperplay', 'extension-provider'))
+  preloads.push('node_modules/extension-provider/dist/extensionPreload.ts')
+} catch (err) {}
+
 export default defineConfig(({ mode }) => ({
   main: {
     build: {
@@ -52,14 +66,7 @@ export default defineConfig(({ mode }) => ({
   preload: {
     build: {
       rollupOptions: {
-        input: [
-          'src/backend/preload.ts',
-          'src/backend/hyperplay-extension-helper/extensionPreload.ts',
-          'src/backend/proxy/providerPreload.ts',
-          'src/backend/hyperplay_store_preload.ts',
-          'src/backend/webview_style_preload.ts',
-          'src/backend/auth_provider_preload.ts'
-        ]
+        input: preloads
       },
       outDir: 'build/preload',
       minify: mode === 'production',

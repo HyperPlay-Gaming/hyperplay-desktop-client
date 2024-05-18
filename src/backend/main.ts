@@ -1,7 +1,3 @@
-import {
-  initExtension,
-  resetExtension
-} from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -172,7 +168,7 @@ import './utils/ipc_handler'
 import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
-import 'backend/hyperplay-extension-helper/usbHandler'
+import 'backend/extension/provider'
 import 'backend/proxy/ipcHandlers.ts'
 
 import './ipcHandlers'
@@ -192,7 +188,6 @@ async function startProxyServer() {
   try {
     const proxyServer = await import('@hyperplay/proxy-server')
     proxyServer.initServer(undefined)
-    console.log('Server started')
     logInfo('Proxy server started', LogPrefix.HyperPlay)
   } catch (err) {
     logError(`Error starting proxy server ${err}`, LogPrefix.HyperPlay)
@@ -462,7 +457,7 @@ if (!gotTheLock) {
     const openOverlayAcceleratorMac = 'Option+X'
     globalShortcut.register(openOverlayAcceleratorMac, toggleOverlay)
 
-    initExtension()
+    initExtension(hpApi)
 
     initOnlineMonitor()
 
@@ -869,7 +864,10 @@ ipcMain.on('resetApp', async () => {
 })
 
 ipcMain.on('resetExtension', async () => {
-  resetExtension()
+  const extensionImporter = import('@hyperplay/extension-importer')
+  extensionImporter.resetExtension()
+  ipcMain.emit('ignoreExitToTray')
+  app.quit()
 })
 
 ipcMain.on('createNewWindow', (e, url) => {
@@ -2017,4 +2015,6 @@ ipcMain.on('toggleOverlay', () => {
  * INSERT OTHER IPC HANDLERS HERE
  */
 
-import './storeManagers/legendary/eos_overlay/ipc_handler'
+import './storeManagers/legendary/eos_overlay/ipc_handler'import { initExtension } from './extension/importer'
+import { hpApi } from './utils/hyperplay_api'
+

@@ -25,7 +25,7 @@ import {
   ImportableBrowser,
   MetaMaskImportOptions,
   MetaMaskInitMethod
-} from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+} from '@hyperplay/utils'
 import { toString, QRCodeToStringOptions } from 'qrcode'
 import { WalletOnboardCloseReason, WrapRendererCallback } from 'common/types'
 import StatusScreen, { CONNECTION_STATUS } from './screens/status'

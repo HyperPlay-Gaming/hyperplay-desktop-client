@@ -1906,6 +1906,16 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
 
+"@hyperplay/extension-importer@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-importer/-/extension-importer-0.0.0.tgz#52bfd8fe766b7a57ab95943faffd3b8bd9015c0f"
+  integrity sha512-/N1unwkNhM1yUOn5I+6O4NF6wCHDBE9Dxc5xNTr7fdih3HK9qundBNNx6W7cRlyPDYVJaNQVWjqbC3DMnZTJQg==
+  dependencies:
+    "@hyperplay/utils" "^0.0.6"
+    classic-level "^1.4.1"
+    fs-extra "^11.2.0"
+    graceful-fs "^4.2.11"
+
 "@hyperplay/mock-backend@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@hyperplay/mock-backend/-/mock-backend-0.0.1.tgz#5987f4860fac890a2ee77b174a89e8664d0cc8c6"
@@ -1945,6 +1955,13 @@
   version "1.2.32"
   resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.2.32.tgz#d9470d3fc56832fee5a56c5d734255c80d764562"
   integrity sha512-GCBeZpB2LKqZedirkE/vWm9jnwC5mVxdnkEp0vY6sAFNb1CuO3ZYeTpJfADqLMSSCE6JqG0yUBi+ekbJymN3ZQ==
+
+"@hyperplay/utils@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.6.tgz#4e5317818e6bf3fbcc22c32a1ca2a1a3f8b1d049"
+  integrity sha512-KnKocmyK2WiFGMPKXhfwZLauofJ+R0kM2XmuZvyKk4QoWP29qf1exqEZh+7VetIUNfq9qEvy4Pn/AsRPmDvKJg==
+  dependencies:
+    bignumber.js "^9.1.2"
 
 "@ioredis/commands@^1.1.1":
   version "1.2.0"
@@ -5425,6 +5442,11 @@ big-integer@^1.6.16:
   resolved "https://registry.yarnpkg.com/big-integer/-/big-integer-1.6.52.tgz#60a887f3047614a8e1bffe5d7173490a97dc8c85"
   integrity sha512-QxD8cf2eVqJOOz63z6JIN9BzvVs/dlySa5HGSBH5xtR8dPteIRQnBxxKqkNTiT6jbDTF6jAfrd4oMcND9RGbQg==
 
+bignumber.js@^9.1.2:
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.2.tgz#b7c4242259c008903b13707983b5f4bbd31eda0c"
+  integrity sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==
+
 bin-links@4.0.3:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/bin-links/-/bin-links-4.0.3.tgz#9e4a3c5900830aee3d7f52178b65e01dcdde64a5"
@@ -5935,6 +5957,17 @@ classic-level@1.2.0:
     catering "^2.1.0"
     module-error "^1.0.1"
     napi-macros "~2.0.0"
+    node-gyp-build "^4.3.0"
+
+classic-level@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/classic-level/-/classic-level-1.4.1.tgz#169ecf9f9c6200ad42a98c8576af449c1badbaee"
+  integrity sha512-qGx/KJl3bvtOHrGau2WklEZuXhS3zme+jf+fsu6Ej7W7IP/C49v7KNlWIsT1jZu0YnfzSIYDGcEWpCa1wKGWXQ==
+  dependencies:
+    abstract-level "^1.0.2"
+    catering "^2.1.0"
+    module-error "^1.0.1"
+    napi-macros "^2.2.2"
     node-gyp-build "^4.3.0"
 
 classnames@*, classnames@^2.2.5, classnames@^2.3.1:
@@ -8112,6 +8145,15 @@ fs-extra@^10.0.0, fs-extra@^10.1.0:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
+fs-extra@^11.2.0:
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.2.0.tgz#e70e17dfad64232287d01929399e0ea7c86b0e5b"
+  integrity sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
 fs-extra@^8.0.1, fs-extra@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
@@ -8443,7 +8485,7 @@ graceful-fs@^4.0.0, graceful-fs@^4.1.11, graceful-fs@^4.1.6, graceful-fs@^4.2.0,
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.10.tgz#147d3a006da4ca3ce14728c7aefc287c367d7a6c"
   integrity sha512-9ByhssR2fPVsNZj478qUUbKfmL0+t5BDVyjShtyZZLiK7ZDAArFFfopyOTj0M05wE2tJPisA4iTnnXl2YoPvOA==
 
-graceful-fs@^4.2.6:
+graceful-fs@^4.2.11, graceful-fs@^4.2.6:
   version "4.2.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.11.tgz#4183e4e8bf08bb6e05bbb2f7d2e0c8f712ca40e3"
   integrity sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==
@@ -10873,6 +10915,11 @@ napi-build-utils@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/napi-build-utils/-/napi-build-utils-1.0.2.tgz#b1fddc0b2c46e380a0b7a76f984dd47c41a13806"
   integrity sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==
+
+napi-macros@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/napi-macros/-/napi-macros-2.2.2.tgz#817fef20c3e0e40a963fbf7b37d1600bd0201044"
+  integrity sha512-hmEVtAGYzVQpCKdbQea4skABsdXW4RUh5t5mJ2zzqowJS2OyXZTU1KhDVFhx+NlWZ4ap9mqR9TcDO3LTTttd+g==
 
 napi-macros@~2.0.0:
   version "2.0.0"
