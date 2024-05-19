@@ -32,7 +32,7 @@ ipcMain?.handle(
       updatePopupInOverlay,
       logError,
       logInfo,
-      extensionProvider: extensionProvider
+      extensionProvider: extensionProvider.extensionProvider
     }
     const providers = await import('@hyperplay/providers')
     const baseUri = await providers.getConnectionUri(
