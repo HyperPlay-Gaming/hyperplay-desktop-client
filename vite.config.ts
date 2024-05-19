@@ -44,7 +44,9 @@ const preloads = [
 // only set alias if the extension-provider optional package was added
 try {
   statSync(join(__dirname, 'node_modules', '@hyperplay', 'extension-provider'))
-  preloads.push('node_modules/extension-provider/dist/extensionPreload.ts')
+  preloads.push(
+    'node_modules/@hyperplay/extension-provider/src/extensionPreload.ts'
+  )
 } catch (err) {}
 
 export default defineConfig(({ mode }) => ({
