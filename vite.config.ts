@@ -27,6 +27,14 @@ try {
     {
       find: '@hyperplay/proxy-server',
       replacement: join(__dirname, 'src', 'empty.js')
+    },
+    {
+      find: '@hyperplay/extension-importer',
+      replacement: join(__dirname, 'src', 'empty.js')
+    },
+    {
+      find: '@hyperplay/extension-provider',
+      replacement: join(__dirname, 'src', 'empty.js')
     }
   )
 }
