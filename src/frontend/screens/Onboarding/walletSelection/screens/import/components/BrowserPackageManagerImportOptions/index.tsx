@@ -17,7 +17,7 @@ export function BrowserPackageManagerImportOption({
     importOptions[browserSelected]![pkgManager]
   function getProfileBgColor(profile: BrowserProfile) {
     return (
-      '#' + profile.imageBackgroundColor ?? DEFAULT_BROWSER_PROFILE_IMPORT_COLOR
+      '#' + (profile.imageBackgroundColor ?? DEFAULT_BROWSER_PROFILE_IMPORT_COLOR)
     )
   }
   return (
