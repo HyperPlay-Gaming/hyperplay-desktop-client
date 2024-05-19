@@ -113,7 +113,6 @@ import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
-import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import {
   initOnlineMonitor,
   isOnline,
@@ -308,8 +307,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
       backendEvents.emit('removePopup')
     }
   })
-
-  ExtensionHelper.initExtensionProvider(mainWindow)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -864,8 +861,8 @@ ipcMain.on('resetApp', async () => {
 })
 
 ipcMain.on('resetExtension', async () => {
-  const extensionImporter = import('@hyperplay/extension-importer')
-  extensionImporter.resetExtension()
+  const extensionImporter = await import('@hyperplay/extension-importer')
+  extensionImporter.resetExtension(hpApi)
   ipcMain.emit('ignoreExitToTray')
   app.quit()
 })
@@ -2015,6 +2012,6 @@ ipcMain.on('toggleOverlay', () => {
  * INSERT OTHER IPC HANDLERS HERE
  */
 
-import './storeManagers/legendary/eos_overlay/ipc_handler'import { initExtension } from './extension/importer'
+import './storeManagers/legendary/eos_overlay/ipc_handler'
+import { initExtension } from './extension/importer'
 import { hpApi } from './utils/hyperplay_api'
-

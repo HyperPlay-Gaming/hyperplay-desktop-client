@@ -1916,6 +1916,17 @@
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
 
+"@hyperplay/extension-provider@^0.0.0":
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.0.tgz#56cec62a11d41c7b9b42ea443a6b817cb740bb45"
+  integrity sha512-CaBdCYnl45cjMJChalo5jU+G1QZgTqVOpEtPQTwY0dkDp6Ew4rrP1T7c0EZQJX9pgrDa2utkmrjuHuP3zGt+yA==
+  dependencies:
+    "@hyperplay/utils" "^0.0.7"
+    classic-level "^1.4.1"
+    fs-extra "^11.2.0"
+    graceful-fs "^4.2.11"
+    zod "^3.23.8"
+
 "@hyperplay/mock-backend@^0.0.1":
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/@hyperplay/mock-backend/-/mock-backend-0.0.1.tgz#5987f4860fac890a2ee77b174a89e8664d0cc8c6"
@@ -1960,6 +1971,13 @@
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.6.tgz#4e5317818e6bf3fbcc22c32a1ca2a1a3f8b1d049"
   integrity sha512-KnKocmyK2WiFGMPKXhfwZLauofJ+R0kM2XmuZvyKk4QoWP29qf1exqEZh+7VetIUNfq9qEvy4Pn/AsRPmDvKJg==
+  dependencies:
+    bignumber.js "^9.1.2"
+
+"@hyperplay/utils@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.7.tgz#819e32ace713df942b76153183401dd19c717bde"
+  integrity sha512-JNIA5twZSJp/1HIp5jzVm25TcRciWPevX69D3Al9LRBAqmbrlseA4/d0CPeu5uTyVium+qlqzzaaOr/0eZf1Wg==
   dependencies:
     bignumber.js "^9.1.2"
 
@@ -14714,7 +14732,7 @@ zod@^3.22.3:
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.22.4.tgz#f31c3a9386f61b1f228af56faa9255e845cf3fff"
   integrity sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==
 
-zod@^3.22.4:
+zod@^3.22.4, zod@^3.23.8:
   version "3.23.8"
   resolved "https://registry.yarnpkg.com/zod/-/zod-3.23.8.tgz#e37b957b5d52079769fb8097099b592f0ef4067d"
   integrity sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==

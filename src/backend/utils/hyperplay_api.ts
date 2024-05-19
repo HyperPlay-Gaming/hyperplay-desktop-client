@@ -5,6 +5,7 @@ import {
   appConfigFolder,
   configFolder,
   fixAsarPath,
+  icon,
   publicDir
 } from 'backend/constants'
 import {
@@ -13,7 +14,8 @@ import {
   providerRequests,
   returnExtensionRequestEvents
 } from 'backend/extension/provider/emitters'
-import { updatePopupInOverlay } from 'backend/hyperplay-overlay'
+import { toggleOverlay, updatePopupInOverlay } from 'backend/hyperplay-overlay'
+import { removePopup } from 'backend/hyperplay-overlay/model'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { getMainWindow } from 'backend/main_window'
 import { openUrlOrFile } from 'backend/utils'
@@ -29,8 +31,9 @@ export const hpApi: HyperPlayAPI = {
     getMainWindow()?.webContents.send('openMetaMaskHomePage'),
   openMetaMaskSnapsPage: () =>
     getMainWindow()?.webContents.send('openMetaMaskSnapsPage'),
-  openMetaMaskPortfolioPage: () =>
-    getMainWindow()?.webContents.send('openMetaMaskPortfolioPage'),
+  /* eslint-disable-next-line */
+  openMetaMaskPortfolioPage: (...args: any) =>
+    getMainWindow()?.webContents.send('openMetaMaskPortfolioPage', ...args),
   setBadgeTextInRenderer: (text: string) =>
     getMainWindow()?.webContents.send('setBadgeTextInRenderer', text),
   openUrl: async (url: string) => openUrlOrFile(url),
@@ -40,11 +43,18 @@ export const hpApi: HyperPlayAPI = {
   publicDir,
   fixAsarPath,
   eventsToCloseMetaMaskPopupOn: [],
-  appIconPath: '',
+  appIconPath: icon,
   providerEvents,
   returnExtensionRequestEvents,
   errorExtensionRequestEvents,
-  providerRequests
+  providerRequests,
+  toggleOverlay: toggleOverlay,
+  removePopup: () => {
+    const mainWindow = getMainWindow()
+    if (mainWindow) {
+      removePopup(mainWindow.id)
+    }
+  }
 }
 
 async function initHyperPlayAPI() {

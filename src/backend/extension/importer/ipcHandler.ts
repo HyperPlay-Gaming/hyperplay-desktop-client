@@ -2,10 +2,11 @@ import { dialog, ipcMain } from 'electron'
 import { trackEvent } from 'backend/metrics/metrics'
 import { hpApi } from 'backend/utils/hyperplay_api'
 import store from './store'
+import { configFolder } from 'backend/constants'
 
 ipcMain.handle('getMetaMaskImportOptions', async () => {
   const extensionImporter = await import('@hyperplay/extension-importer')
-  return extensionImporter.getAvailableMetaMaskImports()
+  return extensionImporter.getAvailableMetaMaskImports(configFolder)
 })
 
 ipcMain.on('createNewMetaMaskWallet', async (e, mmInitMethod) => {
