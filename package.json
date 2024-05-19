@@ -297,7 +297,7 @@
     "prepare": "husky install",
     "prettier": "prettier --check .",
     "prettier-fix": "prettier --write .",
-    "pkgResetExtension:base": "pkg ./src/backend/hyperplay-extension-helper/src/resetExtension.js --out-path ./public/extensions/resetExecutables",
+    "pkgResetExtension:base": "node ./buildResetExtension.js",
     "pkgResetExtension:arm64:mac": "yarn pkgResetExtension:base -t node18-macos-arm64",
     "pkgResetExtension:x64:mac": "yarn pkgResetExtension:base -t node18-macos-x64",
     "pkgResetExtension:x64:win": "yarn pkgResetExtension:base -t node18-win-x64",
