@@ -267,7 +267,13 @@ const launch = async ({
 }
 
 const updateGame = async (gameInfo: GameInfo) => {
-  const siweValues = await signSiweMessage()
+  const channelRequiresTokens =
+    gameInfo?.channels?.[gameInfo.install.channelName ?? ''].license_config
+      .tokens
+  let siweValues = undefined
+  if (channelRequiresTokens) {
+    siweValues = await signSiweMessage()
+  }
   return gameUpdateState.updateGame({ ...gameInfo, siweValues })
 }
 

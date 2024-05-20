@@ -36,7 +36,11 @@ export function getStatusLabel({
     }`,
     notInstalled: t('gamepage:status.notinstalled'),
     paused: t('gamepage:status.paused', 'Paused'),
-    preparing: t('gamepage:status.preparing', 'Preparing')
+    preparing: t('gamepage:status.preparing', 'Preparing'),
+    distributables: t(
+      'gamepage:status.distributables',
+      'Installing Distributables'
+    )
   }
 
   return statusMap[status] || t('gamepage:status.notinstalled')
