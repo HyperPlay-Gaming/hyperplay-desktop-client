@@ -33,7 +33,7 @@ import storeAuthState from 'frontend/state/storeAuthState'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
-  return urlToTest.hostname === 'store.hyperplay.xyz'
+  return urlToTest.hostname === 'hyperplay-store-git-tech-apilaunch-hyperplay.vercel.app'
 }
 
 function shouldInjectProvider(url: string) {
