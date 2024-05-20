@@ -1949,10 +1949,10 @@
     "@walletconnect/ethereum-provider" "^2.12.2"
     qrcode "^1.5.3"
 
-"@hyperplay/proxy-server@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@hyperplay/proxy-server/-/proxy-server-0.0.7.tgz#3c735666e519586533a712073e8f7b7cc4be8aa0"
-  integrity sha512-xInzKB5qedC7qmX33vCTLf87lrSWrDnu2PvNTDjWJktVTlL972bXwHDWnh68AFcAYZfGH1xi/z/l5h6GG373yA==
+"@hyperplay/proxy-server@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@hyperplay/proxy-server/-/proxy-server-0.0.9.tgz#021c893fe95433b9817acde5c10123714ebd525b"
+  integrity sha512-sLe9Xbhitjaqj2U3t3o+CHfLeQ9eTEJAz7YfCSBWUvQgn7klPZYXYKz/aDErqczrriPUiR8K0sfS2NxRHK4aCg==
   dependencies:
     "@mysten/sui.js" "^0.48.1"
     "@types/supertest" "^2.0.16"

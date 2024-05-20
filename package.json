@@ -366,7 +366,7 @@
     "@hyperplay/extension-provider": "^0.0.1",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/providers": "^0.0.4",
-    "@hyperplay/proxy-server": "^0.0.7"
+    "@hyperplay/proxy-server": "^0.0.9"
   },
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
