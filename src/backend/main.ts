@@ -900,6 +900,38 @@ ipcMain.handle('appIsInLibrary', async (event, appName, runner) => {
   return HyperPlayGameManager.appIsInLibrary(appName)
 })
 
+ipcMain.on('installAndPlay', async (event, appName) => {
+  const isInLibrary = HyperPlayGameManager.appIsInLibrary(appName)
+  if (!isInLibrary) {
+    await addGameToLibrary(appName)
+  }
+
+  const { is_installed, title } = HyperPlayGameManager.getGameInfo(appName)
+  if (!is_installed) {
+    const { response } = await dialog.showMessageBox(mainWindow, {
+      buttons: [i18next.t('box.yes'), i18next.t('box.no')],
+      cancelId: 1,
+      message: `${title} ${i18next.t(
+        'box.protocol.install.not_installed',
+        'Is Not Installed, do you wish to Install it?'
+      )}`,
+      title: title,
+      icon: icon
+    })
+    if (response === 0) {
+      return sendFrontendMessage('installGame', {
+        appName: appName,
+        runner: 'hyperplay'
+      })
+    }
+    if (response === 1) {
+      return logInfo('Not installing game', LogPrefix.ProtocolHandler)
+    }
+  }
+
+  return sendFrontendMessage('launchGame', appName, 'hyperplay')
+})
+
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
   // Fastpath since we sometimes have to request info for a GOG game as Legendary because we don't know it's a GOG game yet
   if (runner === 'legendary' && !LegendaryLibraryManager.hasGame(appName)) {

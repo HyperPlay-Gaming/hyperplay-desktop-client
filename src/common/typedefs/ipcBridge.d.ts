@@ -152,6 +152,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   'auth:accountNotConnected': () => void
   'auth:otpFinished': () => void
   focusMainWindow: () => void
+  installAndPlay: (gameId: string) => void
 }
 
 interface RequestArguments {
