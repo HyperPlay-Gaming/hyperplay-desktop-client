@@ -987,5 +987,9 @@
         "linkAccount": "Vincula tu cuenta de Steam para verificar la elegibilidad.",
         "needMoreAchievements": "Necesitas haber completado\n{{percent}}% de los logros en uno de estos juegos."
     },
-    "back_to_game": "Volver al juego"
+    "back_to_game": "Volver al juego",
+    "email_subscription": {
+        "title": "¡Gracias por suscribirte!",
+        "subtitle": "Ahora formas parte de nuestra comunidad, y estamos encantados de compartir contigo valiosas actualizaciones y conocimientos."
+    }
 }
