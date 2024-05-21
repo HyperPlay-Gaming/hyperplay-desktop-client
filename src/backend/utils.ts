@@ -1520,7 +1520,12 @@ export function getExecutableAndArgs(executableWithArgs: string): {
   executable: string
   launchArgs: string
 } {
-  const match = executableWithArgs.match(/^(.*?\.(exe|app|bin|sh))/i)
+  if (executableWithArgs.includes('.app')) {
+    const executable = executableWithArgs.split(' -')[0]
+    const launchArgs = executableWithArgs.replace(executable, '').trim()
+    return { executable, launchArgs }
+  }
+  const match = executableWithArgs.match(/^(.*?\.(exe|bin|sh))/i)
   const executable = match ? match[0] : ''
   const launchArgs = executableWithArgs.replace(executable, '').trim()
 
