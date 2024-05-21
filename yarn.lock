@@ -1906,22 +1906,22 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/check-disk-space/-/check-disk-space-3.5.2.tgz#367caa30fec5494e2714891aefcb021aa1fc7e2f"
   integrity sha512-OIkScg+XHEIIHzjDijWE/DdYNANAeMJqFzHi0Y7MsBTVlemCXYHzopehDJMqzx8QM5XL6qPBO4CFttpnyQV9pQ==
 
-"@hyperplay/extension-importer@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@hyperplay/extension-importer/-/extension-importer-0.0.1.tgz#d7b6567013aa9f1499867b18edf0701f6537a7b8"
-  integrity sha512-YCSa6Pj4fFG1y/6rMPmHVDUMENO4diVSzw3U3scpOi2grsaW7VoFGDAEHUqbF9228kX7wZ1aaWT9S6f7IPU7fg==
+"@hyperplay/extension-importer@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-importer/-/extension-importer-0.0.3.tgz#6a6052714861450b7faf07d332227a28a154b026"
+  integrity sha512-loFvFTVBzuYEZ4YKos37+zk3KFTMlhoZT1A5HdxOcuarlVtzZG1KpOmEZM+6obvqYIfGuWuXXiZjAvStcfxWww==
   dependencies:
-    "@hyperplay/utils" "^0.0.6"
+    "@hyperplay/utils" "^0.0.9"
     classic-level "^1.4.1"
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
 
-"@hyperplay/extension-provider@^0.0.1":
-  version "0.0.1"
-  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.1.tgz#feb52ff718250c2d735948a009d0ee72844a7fbe"
-  integrity sha512-SJomNvRLNcl0Knt2l/GuGkdatqq9dnTVsk0DWqRqe0F49cY2lWT0UHPlTMVuATN+Z3UeTwb6S4JxOdNbj/XiqQ==
+"@hyperplay/extension-provider@^0.0.3":
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/extension-provider/-/extension-provider-0.0.3.tgz#1a7eed7772d1e084c9a1aa8ce89e787e8cde134d"
+  integrity sha512-bSytYBuMJSxOqNniTNTGeS4rPXCQUGtf2o1qJYJi3kBAXeiDaqXtDZfktKJD8wRg9nY3V2+sh2G4fQfNeUZK0w==
   dependencies:
-    "@hyperplay/utils" "^0.0.7"
+    "@hyperplay/utils" "^0.0.11"
     classic-level "^1.4.1"
     fs-extra "^11.2.0"
     graceful-fs "^4.2.11"
@@ -1967,17 +1967,17 @@
   resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.2.32.tgz#d9470d3fc56832fee5a56c5d734255c80d764562"
   integrity sha512-GCBeZpB2LKqZedirkE/vWm9jnwC5mVxdnkEp0vY6sAFNb1CuO3ZYeTpJfADqLMSSCE6JqG0yUBi+ekbJymN3ZQ==
 
-"@hyperplay/utils@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.6.tgz#4e5317818e6bf3fbcc22c32a1ca2a1a3f8b1d049"
-  integrity sha512-KnKocmyK2WiFGMPKXhfwZLauofJ+R0kM2XmuZvyKk4QoWP29qf1exqEZh+7VetIUNfq9qEvy4Pn/AsRPmDvKJg==
+"@hyperplay/utils@^0.0.11":
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.11.tgz#5d10b70e7ad7c1c78e0237b525f8966977ece15a"
+  integrity sha512-SgUA+p6H63qUlfXGnk/HnCAm7hVoiuNHcqsWTtueYj2RH3LZMuZkmhVstta4vJw45sHZZQaNwK+Fryx6ncnshg==
   dependencies:
     bignumber.js "^9.1.2"
 
-"@hyperplay/utils@^0.0.7":
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.7.tgz#819e32ace713df942b76153183401dd19c717bde"
-  integrity sha512-JNIA5twZSJp/1HIp5jzVm25TcRciWPevX69D3Al9LRBAqmbrlseA4/d0CPeu5uTyVium+qlqzzaaOr/0eZf1Wg==
+"@hyperplay/utils@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.9.tgz#80836cfde5c4d63e41f5df809ae2e80314600c5a"
+  integrity sha512-gMAa6gdFXfLrJUjPAD2is06qNo4MHzpb6Cbzt4xfNd7wI9chOblQ+piwTI1oFWs44GgfacsMq6i5esNly3hELg==
   dependencies:
     bignumber.js "^9.1.2"
 

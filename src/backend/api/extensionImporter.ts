@@ -78,7 +78,7 @@ export const createNewMetaMaskWallet = (mmInitMethod: MetaMaskInitMethod) => {
 }
 
 export const handleOpenMetaMaskHomePage = (
-  cb: WrapRendererCallback<() => void>
+  cb: WrapRendererCallback<(pathname: string) => void>
 ) => {
   ipcRenderer.on('openMetaMaskHomePage', cb)
   return () => {
