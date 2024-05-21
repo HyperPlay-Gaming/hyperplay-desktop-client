@@ -17,6 +17,9 @@ import {
   getNileVersion
 } from '../helperBinaries'
 import { getAppVersion } from 'backend/utils'
+import getPartitionCookies from '../get_partition_cookies'
+import { DEV_PORTAL_URL } from '../../../common/constants'
+import { logError, LogPrefix } from '../../logger/logger'
 
 type GPUInfo = {
   // The PCI device ID of the graphics card (hexadecimal)
@@ -61,6 +64,7 @@ interface SystemInformation {
     gogdlVersion: string
     nileVersion: string
   }
+  userId?: string | null
 }
 
 let cachedSystemInfo: SystemInformation | null = null
@@ -82,6 +86,35 @@ async function getSystemInfo(cache = true): Promise<SystemInformation> {
     getGogdlVersion(),
     getNileVersion()
   ])
+
+  let userId = null
+
+  try {
+    const cookieString = await getPartitionCookies({
+      partition: 'persist:auth',
+      url: DEV_PORTAL_URL
+    })
+
+    if (cookieString) {
+      const request = await fetch(`${DEV_PORTAL_URL}/api/auth/session`, {
+        headers: {
+          cookie: cookieString
+        }
+      })
+
+      if (request.ok) {
+        const response = await request.json()
+        userId = response.userId
+      } else {
+        logError(
+          `Failed to get user ID, Status: ${request.statusText}`,
+          LogPrefix.Backend
+        )
+      }
+    }
+  } catch (e) {
+    logError(`Failed to get user ID: ${e}`, LogPrefix.Backend)
+  }
 
   const sysinfo: SystemInformation = {
     CPU: {
@@ -109,7 +142,8 @@ async function getSystemInfo(cache = true): Promise<SystemInformation> {
       legendaryVersion: legendaryVersion,
       gogdlVersion: gogdlVersion,
       nileVersion: nileVersion
-    }
+    },
+    userId
   }
   cachedSystemInfo = sysinfo
   return sysinfo
@@ -139,7 +173,9 @@ Software Versions:
   HyperPlay: ${info.softwareInUse.appVersion}
   Legendary: ${info.softwareInUse.legendaryVersion}
   gogdl: ${info.softwareInUse.gogdlVersion}
-  Nile: ${info.softwareInUse.nileVersion}`
+  Nile: ${info.softwareInUse.nileVersion}
+
+User ID: ${info.userId ?? 'Not logged in'}`
 }
 
 export { getSystemInfo, formatSystemInfo }
