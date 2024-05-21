@@ -65,8 +65,8 @@ const openNewBrowserGameWindow = async (
 ): Promise<boolean> => {
   let connectedProvider = PROVIDERS.UNCONNECTED
   try {
-    const proxyServer = await import('@hyperplay/proxy-server')
-    connectedProvider = proxyServer.getProvider()
+    const proxyServer = await import('@hyperplay/providers')
+    connectedProvider = proxyServer.connectedProvider
   } catch (err) {
     logError(`Error importing proxy server ${err}`, LogPrefix.HyperPlay)
   }
