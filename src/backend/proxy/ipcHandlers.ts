@@ -84,7 +84,8 @@ ipcMain.handle('providerRequest', async (ev, args) => {
 ipcMain.handle('sendRequest', async (ev, args: unknown[]) => {
   const providers = await import('@hyperplay/providers')
   // this will actually call request on the wrapped EIP1193 provider, not the deprecated send method
-  const result = await providers.provider.send('send', args)
+  const [method, ...rest] = args
+  const result = await providers.provider.send(method as string, rest)
   return result
 })
 

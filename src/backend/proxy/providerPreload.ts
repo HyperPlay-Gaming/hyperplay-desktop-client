@@ -49,7 +49,7 @@ const provRequest = async (args: RequestArguments) => {
 }
 
 const sendRequest = async (...args: unknown[]) => {
-  const result = ipcRenderer.invoke('sendRequest', args)
+  const result = (await ipcRenderer.invoke('sendRequest', args)) as object
   if (Object.hasOwn(result, 'error')) {
     throw result[0].error.message
   }
