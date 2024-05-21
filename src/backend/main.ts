@@ -260,6 +260,7 @@ async function completeHyperPlayQuest() {
     false
   )
   if (!completeHpSummonQuestIsActive) {
+    logInfo('Complete HyperPlay Quest is not active', LogPrefix.Backend)
     return
   }
   logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
