@@ -163,7 +163,7 @@ export default function AdvancedSettings() {
   async function clearAppCache() {
     const storage: Storage = window.localStorage
     storage.removeItem('updates')
-    window.api.clearCache(true)
+    window.api.clearCache(true, false)
     return libraryState.refreshLibrary({ runInBackground: true })
   }
 

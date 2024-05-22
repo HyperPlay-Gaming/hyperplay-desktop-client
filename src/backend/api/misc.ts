@@ -10,8 +10,8 @@ import {
 } from 'common/types'
 import { NileRegisterData } from 'common/types/nile'
 
-export const clearCache = (showDialog?: boolean) =>
-  ipcRenderer.send('clearCache', showDialog)
+export const clearCache = (showDialog?: boolean, fromVersionChange?: boolean) =>
+  ipcRenderer.send('clearCache', showDialog, fromVersionChange)
 export const resetApp = () => ipcRenderer.send('resetApp')
 export const resetExtension = () => ipcRenderer.send('resetExtension')
 
