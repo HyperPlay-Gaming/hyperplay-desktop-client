@@ -28,6 +28,12 @@ import {
   TITLE
 } from 'frontend/screens/TransactionNotification/constants'
 
+function setMainWindowOnTop() {
+  getMainWindow()?.maximize()
+  getMainWindow()?.focus()
+  getMainWindow()?.moveTop()
+}
+
 export const hpApi: HyperPlayAPI = {
   backendEvents,
   updatePopupInOverlay,
@@ -36,13 +42,19 @@ export const hpApi: HyperPlayAPI = {
   extensionProvider: undefined,
   getMainWindowId: () => getMainWindow()?.id ?? -1,
   /* eslint-disable-next-line */
-  openMetaMaskHomePage: (...args: any) =>
-    getMainWindow()?.webContents.send('openMetaMaskHomePage', ...args),
-  openMetaMaskSnapsPage: () =>
-    getMainWindow()?.webContents.send('openMetaMaskSnapsPage'),
+  openMetaMaskHomePage: (...args: any) => {
+    setMainWindowOnTop()
+    getMainWindow()?.webContents.send('openMetaMaskHomePage', ...args)
+  },
+  openMetaMaskSnapsPage: () => {
+    setMainWindowOnTop()
+    getMainWindow()?.webContents.send('openMetaMaskSnapsPage')
+  },
   /* eslint-disable-next-line */
-  openMetaMaskPortfolioPage: (...args: any) =>
-    getMainWindow()?.webContents.send('openMetaMaskPortfolioPage', ...args),
+  openMetaMaskPortfolioPage: (...args: any) => {
+    setMainWindowOnTop()
+    getMainWindow()?.webContents.send('openMetaMaskPortfolioPage', ...args)
+  },
   setBadgeTextInRenderer: (text: string) =>
     getMainWindow()?.webContents.send('setBadgeTextInRenderer', text),
   openUrl: async (url: string) => openUrlOrFile(url),
