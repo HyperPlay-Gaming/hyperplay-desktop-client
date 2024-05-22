@@ -119,7 +119,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   openCustomThemesWiki: () => void
   openHyperplaySite: () => void
   showConfigFileInFolder: (appName: string) => void
-  clearCache: (showDialog?: boolean) => void
+  clearCache: (showDialog?: boolean, fromVersionChange?: boolean) => void
   resetApp: () => void
   resetExtension: () => void
   createNewWindow: (url: string) => void

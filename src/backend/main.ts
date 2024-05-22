@@ -848,8 +848,8 @@ ipcMain.handle('getPlatform', () => process.platform)
 
 ipcMain.handle('showUpdateSetting', () => !isFlatpak)
 
-ipcMain.on('clearCache', (event) => {
-  clearCache()
+ipcMain.on('clearCache', (event, showDialog, fromVersionChange = false) => {
+  clearCache(undefined, fromVersionChange)
   sendFrontendMessage('refreshLibrary')
 
   showDialogBoxModalAuto({
