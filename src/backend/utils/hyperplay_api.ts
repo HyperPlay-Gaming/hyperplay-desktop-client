@@ -8,7 +8,7 @@ import {
   fixAsarPath,
   icon,
   publicDir
-} from 'backend/constants'
+} from 'backend/constants/folders'
 import {
   errorExtensionRequestEvents,
   providerEvents,

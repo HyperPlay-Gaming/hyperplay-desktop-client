@@ -34,6 +34,8 @@ import { PROVIDERS } from 'common/types/proxy-types'
 import { controlWindow } from 'backend/hyperplay-overlay/model'
 import { initOverlayRenderState } from 'backend/hyperplay-overlay'
 import { getExecutableAndArgs } from 'backend/utils'
+import { hpApi } from 'backend/utils/hyperplay_api'
+import { windowOpenHandlerForExtension } from '@hyperplay/extension-importer'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -44,19 +46,6 @@ export async function getAppSettings(appName: string): Promise<GameSettings> {
 
 export function logFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
-}
-
-const openRestrictedBrowserGameWindow = async (url: string) => {
-  const restrictedBrowserWindow = new BrowserWindow({
-    icon: icon,
-    webPreferences: {
-      webviewTag: true,
-      contextIsolation: true,
-      nodeIntegration: false,
-      sandbox: true
-    }
-  })
-  restrictedBrowserWindow.loadURL(url)
 }
 
 const openNewBrowserGameWindow = async (
@@ -141,6 +130,7 @@ const openNewBrowserGameWindow = async (
           checkContentsUrlBeforeHandling(contents)
         )
 
+        /* this overrides the handler set in extension-importer but falls back to its behavior */
         contents.setWindowOpenHandler(({ url }) => {
           const urlToOpen = new URL(url)
           const protocol = urlToOpen.protocol
@@ -152,8 +142,7 @@ const openNewBrowserGameWindow = async (
             openNewBrowserGameWindow(url, gameInfo)
             return { action: 'deny' }
           }
-          openRestrictedBrowserGameWindow(url)
-          return { action: 'deny' }
+          return windowOpenHandlerForExtension(url, contents, hpApi)
         })
       }
     }
