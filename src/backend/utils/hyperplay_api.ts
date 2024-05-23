@@ -29,7 +29,7 @@ import {
 } from 'frontend/screens/TransactionNotification/constants'
 
 function setMainWindowOnTop() {
-  getMainWindow()?.maximize()
+  getMainWindow()?.restore()
   getMainWindow()?.focus()
   getMainWindow()?.moveTop()
 }
