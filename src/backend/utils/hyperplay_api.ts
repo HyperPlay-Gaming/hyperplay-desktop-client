@@ -1,4 +1,3 @@
-import { getExtensionId } from '@hyperplay/extension-importer'
 import { HyperPlayAPI } from '@hyperplay/utils'
 import { captureException } from '@sentry/electron'
 import { backendEvents } from 'backend/backend_events'
@@ -76,7 +75,10 @@ export const hpApi: HyperPlayAPI = {
       removePopup(mainWindow.id)
     }
   },
-  getMetaMaskExtensionId: getExtensionId,
+  getMetaMaskExtensionId: async () => {
+    const extensionImporter = await import('@hyperplay/extension-importer')
+    return extensionImporter?.getExtensionId() ?? ''
+  },
   getCurrentWeb3Provider: () => {
     return defaultProviderStore.get_nodefault('currentWeb3Provider')
   },

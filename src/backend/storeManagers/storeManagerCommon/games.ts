@@ -35,7 +35,6 @@ import { controlWindow } from 'backend/hyperplay-overlay/model'
 import { initOverlayRenderState } from 'backend/hyperplay-overlay'
 import { getExecutableAndArgs } from 'backend/utils'
 import { hpApi } from 'backend/utils/hyperplay_api'
-import { windowOpenHandlerForExtension } from '@hyperplay/extension-importer'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -53,9 +52,12 @@ const openNewBrowserGameWindow = async (
   gameInfo: GameInfo
 ): Promise<boolean> => {
   let connectedProvider = PROVIDERS.UNCONNECTED
+  /* eslint-disable-next-line */
+  let extensionImporter: any = undefined
   try {
     const proxyServer = await import('@hyperplay/providers')
     connectedProvider = proxyServer.connectedProvider
+    extensionImporter = await import('@hyperplay/extension-importer')
   } catch (err) {
     logError(`Error importing proxy server ${err}`, LogPrefix.HyperPlay)
   }
@@ -142,7 +144,13 @@ const openNewBrowserGameWindow = async (
             openNewBrowserGameWindow(url, gameInfo)
             return { action: 'deny' }
           }
-          return windowOpenHandlerForExtension(url, contents, hpApi)
+          return (
+            extensionImporter?.windowOpenHandlerForExtension(
+              url,
+              contents,
+              hpApi
+            ) ?? { action: 'deny' }
+          )
         })
       }
     }
