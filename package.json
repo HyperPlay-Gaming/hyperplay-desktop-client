@@ -201,7 +201,6 @@
     "auto-launch": "^5.0.6",
     "axios": "^1.6.8",
     "bn.js": "^5.2.1",
-    "classic-level": "1.2.0",
     "classnames": "^2.3.1",
     "compare-versions": "^6.0.0-rc.1",
     "crc": "^4.1.1",
@@ -381,7 +380,6 @@
       "@rudderstack/rudder-sdk-node>bull>msgpackr>msgpackr-extract": true,
       "@testing-library/dom>aria-query>@babel/runtime-corejs3>core-js-pure": true,
       "@valist/sdk>files-from-path>ipfs-unixfs>protobufjs": true,
-      "classic-level": true,
       "discord-rich-presence-typescript>discord-rpc>register-scheme": false,
       "electron": true,
       "electron-vite>esbuild": true,
@@ -393,8 +391,7 @@
       "jsdom>ws>bufferutil": true,
       "jsdom>ws>utf-8-validate": true,
       "@hyperplay/extension-importer>classic-level": true,
-      "@hyperplay/extension-provider>classic-level": true,
-      "@hyperplay/extension-provider>@hyperplay/extension-importer>classic-level": false
+      "@hyperplay/extension-provider>classic-level": true
     }
   }
 }
