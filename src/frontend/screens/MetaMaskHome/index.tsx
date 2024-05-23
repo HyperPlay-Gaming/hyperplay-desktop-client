@@ -19,7 +19,10 @@ const MetaMaskHome = function ({ path = 'home.html' }: MetaMaskHomeProps) {
       <div className={MetaMaskHomeStyles.homeDiv}>
         <webview
           className={MetaMaskHomeStyles.homeWebview}
-          src={`chrome-extension://${extId}/${path}${hash.replace('#/metamaskHome', '')}`}
+          src={`chrome-extension://${extId}/${path}${hash.replace(
+            '#/metamaskHome',
+            ''
+          )}`}
           allowpopups={trueAsStr}
         />
       </div>
