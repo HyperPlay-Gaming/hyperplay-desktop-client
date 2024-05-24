@@ -951,7 +951,7 @@ ipcMain.handle('authGOG', async (event, code) => GOGUser.login(code))
 ipcMain.handle('logoutLegendary', LegendaryUser.logout)
 ipcMain.on('logoutGOG', GOGUser.logout)
 ipcMain.handle('getLocalPeloadPath', async () => {
-  return fixAsarPath(join(publicDir, '../preload/webviewPreload.js'))
+  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
 })
 
 ipcMain.handle('getAmazonLoginData', NileUser.getLoginData)
