@@ -1,5 +1,3 @@
-import './index.css'
-
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DMQueueElement, DownloadManagerState } from 'common/types'
@@ -9,6 +7,7 @@ import DownloadManagerHeader from './DownloadManagerHeader'
 import { DMQueue } from 'frontend/types'
 import DownloadManagerItem from './components/DownloadManagerItem'
 import { Tabs, getTabsClassNames } from '@hyperplay/ui'
+import styles from './index.module.scss'
 
 export default React.memo(function DownloadManager(): JSX.Element | null {
   const { t } = useTranslation()
@@ -97,12 +96,12 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
           <Tabs.Tab value="downloaded">Downloaded</Tabs.Tab>
         </Tabs.List>
         <Tabs.Panel value="downloading">
-          <div className="downloadManager">
+          <div className={styles.downloadManager}>
             <div
               style={!currentElement ? { backgroundColor: 'transparent' } : {}}
-              className="downloadList"
+              className={styles.downloadList}
             >
-              <div className="dmItemList">
+              <div className={styles.dmItemList}>
                 <DownloadManagerHeader time="started" />
                 <DownloadManagerItem
                   element={currentElement}
@@ -116,7 +115,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
 
         <Tabs.Panel value="queued">
           <>
-            <div className="dmItemList">
+            <div className={styles.dmItemList}>
               <DownloadManagerHeader time="queued" />
               {plannendElements.length > 0 ? (
                 plannendElements.map((el) => (
@@ -133,9 +132,9 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
           </>
         </Tabs.Panel>
         <Tabs.Panel value="downloaded">
-          <div className="downloadManager">
-            <div className="downloadList">
-              <div className="dmItemList">
+          <div className={styles.downloadManager}>
+            <div className={styles.downloadList}>
+              <div className={styles.dmItemList}>
                 <DownloadManagerHeader time="finished" />
                 {doneElements.map((el, key) => (
                   <DownloadManagerItem key={key} element={el} current={false} />
