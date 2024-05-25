@@ -260,8 +260,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           progress={progress}
         />
       ) : null}
-      <div className="downloadManagerListItem">
-        <span
+      <tr>
+        <td
           role="button"
           onClick={() => goToGamePage()}
           className="downloadManagerTitleList"
@@ -280,11 +280,11 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
               {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
             </span>
           </span>
-        </span>
-        <span title={fullDate}>{hour}</span>
-        <span>{translatedTypes[type]}</span>
-        <span>{getStoreName(runner, t2('Other'))}</span>
-        <span className="icons">
+        </td>
+        <td title={fullDate}>{hour}</td>
+        <td>{translatedTypes[type]}</td>
+        <td>{getStoreName(runner, t2('Other'))}</td>
+        <td className="icons">
           <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
             {mainActionIcon()}
           </SvgButton>
@@ -296,8 +296,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
               {secondaryActionIcon()}
             </SvgButton>
           )}
-        </span>
-      </div>
+        </td>
+      </tr>
     </>
   )
 })

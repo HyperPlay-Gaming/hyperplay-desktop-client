@@ -3,17 +3,16 @@ import { useTranslation } from 'react-i18next'
 import { DMQueueElement, DownloadManagerState } from 'common/types'
 import { UpdateComponent } from 'frontend/components/UI'
 import ProgressHeader from './components/ProgressHeader'
-import DownloadManagerHeader from './DownloadManagerHeader'
 import { DMQueue } from 'frontend/types'
-import DownloadManagerItem from './components/DownloadManagerItem'
 import { Background, Tabs, getTabsClassNames } from '@hyperplay/ui'
 import styles from './index.module.scss'
+import { DownloadTable } from './components/DownloadTable'
 
 export default React.memo(function DownloadManager(): JSX.Element | null {
   const { t } = useTranslation()
   const [refreshing, setRefreshing] = useState(false)
   const [state, setState] = useState<DownloadManagerState>('idle')
-  const [plannendElements, setPlannendElements] = useState<DMQueueElement[]>([])
+  const [queuedElements, setQueuedElements] = useState<DMQueueElement[]>([])
   const [currentElement, setCurrentElement] = useState<DMQueueElement>()
   const [finishedElem, setFinishedElem] = useState<DMQueueElement[]>()
 
@@ -23,7 +22,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     setRefreshing(true)
     window.api.getDMQueueInformation().then(({ elements, state }: DMQueue) => {
       setCurrentElement(elements[0])
-      setPlannendElements([...elements.slice(1)])
+      setQueuedElements([...elements.slice(1)])
       setRefreshing(false)
       setState(state)
     })
@@ -36,7 +35,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
       ) => {
         if (elements) {
           setCurrentElement(elements[0])
-          setPlannendElements([...elements.slice(1)])
+          setQueuedElements([...elements.slice(1)])
           setState(state)
         }
       }
@@ -51,7 +50,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     window.api.getDMQueueInformation().then(({ finished }: DMQueue) => {
       setFinishedElem(finished)
     })
-  }, [plannendElements.length, appName])
+  }, [queuedElements.length, appName])
 
   // Track the screen view once and only once
   useEffect(() => {
@@ -108,14 +107,10 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
                 }
                 className={styles.downloadList}
               >
-                <div className={styles.dmItemList}>
-                  <DownloadManagerHeader time="started" />
-                  <DownloadManagerItem
-                    element={currentElement}
-                    current={true}
-                    state={state}
-                  />
-                </div>
+                <DownloadTable
+                  elements={currentElement ? [currentElement] : []}
+                  time="started"
+                />
               </div>
             </div>
           </Tabs.Panel>
@@ -123,34 +118,14 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
           <Tabs.Panel value="queued">
             <>
               <div className={styles.dmItemList}>
-                <DownloadManagerHeader time="queued" />
-                {plannendElements.length > 0 ? (
-                  plannendElements.map((el) => (
-                    <DownloadManagerItem
-                      key={el.params.appName}
-                      element={el}
-                      current={false}
-                    />
-                  ))
-                ) : (
-                  <DownloadManagerItem current={false} />
-                )}
+                <DownloadTable elements={queuedElements} time="queued" />
               </div>
             </>
           </Tabs.Panel>
           <Tabs.Panel value="downloaded">
             <div className={styles.downloadManager}>
               <div className={styles.downloadList}>
-                <div className={styles.dmItemList}>
-                  <DownloadManagerHeader time="finished" />
-                  {doneElements.map((el, key) => (
-                    <DownloadManagerItem
-                      key={key}
-                      element={el}
-                      current={false}
-                    />
-                  ))}
-                </div>
+                <DownloadTable elements={doneElements} time="finished" />
               </div>
             </div>
           </Tabs.Panel>
