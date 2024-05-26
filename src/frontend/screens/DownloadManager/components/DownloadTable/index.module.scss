@@ -12,6 +12,7 @@
     background-color: var(--color-neutral-700);
     th {
       padding: var(--space-sm-fixed) 0px;
+      color: var(--color-neutral-400);
 
       &:first-child {
         border-top-left-radius: var(--space-sm-fixed);
@@ -25,5 +26,6 @@
 
   tr > td {
     padding: var(--space-sm-fixed) var(--space-2lg-fixed);
+    color: var(--color-neutral-200);
   }
 }
