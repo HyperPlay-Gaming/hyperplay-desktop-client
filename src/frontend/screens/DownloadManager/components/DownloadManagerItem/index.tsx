@@ -8,7 +8,6 @@ import {
   GameInfo,
   HyperPlayInstallInfo
 } from 'common/types'
-import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import {
   getGameInfo,
@@ -19,9 +18,7 @@ import {
 import { useTranslation } from 'react-i18next'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import { useNavigate } from 'react-router-dom'
-import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
 import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
-import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
 import { GogInstallInfo } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
@@ -29,6 +26,8 @@ import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { NileInstallInfo } from 'common/types/nile'
 import { hasStatus } from 'frontend/hooks/hasStatus'
+import { Images } from '@hyperplay/ui'
+const { PauseIcon, PlayIcon, XCircle } = Images
 
 type Props = {
   element?: DMQueueElement
@@ -175,7 +174,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       return <DownIcon />
     }
 
-    return <StopIcon />
+    return <XCircle />
   }
 
   const secondaryActionIcon = () => {
