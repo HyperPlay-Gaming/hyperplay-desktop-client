@@ -283,7 +283,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
         <td title={fullDate}>{hour}</td>
         <td>{translatedTypes[type]}</td>
         <td>{getStoreName(runner, t2('Other'))}</td>
-        <td className="icons">
+        <td>
           <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
             {mainActionIcon()}
           </SvgButton>
