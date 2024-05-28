@@ -25,8 +25,6 @@ export default function Runner(props: RunnerProps) {
   let buttonText = ''
   if (props.class === 'epic') {
     buttonText = t('login.epic', 'Epic Games Login')
-  } else if (props.class === 'nile') {
-    buttonText = t('login.amazon', 'Amazon Login')
   } else {
     buttonText = t('login.gog', 'GOG Login')
   }

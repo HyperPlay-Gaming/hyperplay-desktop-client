@@ -8,7 +8,6 @@ import {
   GamepadActionArgs,
   WrapRendererCallback
 } from 'common/types'
-import { NileRegisterData } from 'common/types/nile'
 
 export const clearCache = (showDialog?: boolean, fromVersionChange?: boolean) =>
   ipcRenderer.send('clearCache', showDialog, fromVersionChange)
@@ -41,11 +40,6 @@ export const logoutLegendary = async () => ipcRenderer.invoke('logoutLegendary')
 export const authGOG = async (token: string) =>
   ipcRenderer.invoke('authGOG', token)
 export const logoutGOG = () => ipcRenderer.send('logoutGOG')
-export const getAmazonLoginData = async () =>
-  ipcRenderer.invoke('getAmazonLoginData')
-export const authAmazon = async (data: NileRegisterData) =>
-  ipcRenderer.invoke('authAmazon', data)
-export const logoutAmazon = async () => ipcRenderer.invoke('logoutAmazon')
 export const checkGameUpdates = async (runners: Runner[]) =>
   ipcRenderer.invoke('checkGameUpdates', runners)
 export const refreshLibrary = async (library?: Runner | 'all') =>

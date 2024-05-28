@@ -10,7 +10,6 @@ import {
 } from 'common/types'
 import { GOGCloudSavesLocation, GogInstallInfo } from './gog'
 import { LegendaryInstallInfo } from './legendary'
-import { NileInstallInfo } from './nile'
 
 export interface InstallResult {
   status: 'done' | 'error' | 'abort'
@@ -71,11 +70,7 @@ export interface LibraryManager {
     lang?: string,
     channelNameToInstall?: string
   ) => Promise<
-    | LegendaryInstallInfo
-    | GogInstallInfo
-    | HyperPlayInstallInfo
-    | NileInstallInfo
-    | undefined
+    LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | undefined
   >
   listUpdateableGames: () => Promise<string[]>
   changeGameInstallPath: (appName: string, newPath: string) => Promise<void>
