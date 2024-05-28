@@ -81,9 +81,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
       <Background style={{ position: 'absolute' }}></Background>
       <div className="contentContainer">
         <h3
-          style={{
-            textAlign: 'left'
-          }}
+          className={styles.title}
         >
           {t('download-manager.title_dm', 'Download Manager')}
         </h3>
