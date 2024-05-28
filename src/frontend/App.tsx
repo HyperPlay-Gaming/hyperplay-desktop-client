@@ -35,15 +35,12 @@ import GameAchievementDetails from './screens/Achievements/GameAchievementDetail
 import AuthModal from './components/UI/AuthModal'
 import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
 import { UpdateModalController } from './components/UI/UpdateModalController'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
     useContext(ContextProvider)
-  const flags = useFlags()
-  const ENABLE_AMAZON_STORE = flags.amazonStore
   const isOffline = connectivity.status !== 'online'
   const firstDestination = isOffline ? '/library' : '/hyperplaystore'
 
@@ -95,9 +92,6 @@ function App() {
             />
             <Route path="epicstore" element={<WebView key="epicstore" />} />
             <Route path="gogstore" element={<WebView key="gogstore" />} />
-            {ENABLE_AMAZON_STORE ? (
-              <Route path="amazonstore" element={<WebView />} />
-            ) : null}
             <Route path="wiki" element={<WebView key="wiki" />} />
             <Route path="metamaskHome" element={<MetaMaskHome />} />
             <Route

@@ -26,12 +26,10 @@ import {
   configStore,
   gogConfigStore,
   metricsStore,
-  nileConfigStore,
   wineDownloaderInfoStore
 } from 'frontend/helpers/electronStores'
 import { InstallModal } from 'frontend/screens/Library/components'
 import { IpcRendererEvent } from 'electron/renderer'
-import { NileRegisterData } from 'common/types/nile'
 import libraryState from 'frontend/state/libraryState'
 import storeAuthState from './storeAuthState'
 
@@ -335,36 +333,6 @@ class GlobalState extends PureComponent<Props> {
     window.location.reload()
   }
 
-  amazonLogin = async (data: NileRegisterData) => {
-    console.log('logging amazon')
-    const response = await window.api.authAmazon(data)
-
-    if (response.status === 'done') {
-      libraryState.amazonLibrary = []
-      storeAuthState.amazon.user_id = response.user?.user_id ?? ''
-      storeAuthState.amazon.username = response.user?.name ?? ''
-
-      this.handleSuccessfulLogin('nile')
-    }
-
-    return response.status
-  }
-
-  amazonLogout = async () => {
-    await window.api.logoutAmazon()
-    this.setState({
-      amazon: {
-        library: [],
-        user_id: null,
-        username: null
-      }
-    })
-    console.log('Logging out from amazon')
-    window.location.reload()
-  }
-
-  getAmazonLoginData = async () => window.api.getAmazonLoginData()
-
   handleSettingsModalOpen = (
     value: boolean,
     type?: 'settings' | 'log',
@@ -584,19 +552,10 @@ class GlobalState extends PureComponent<Props> {
 
     const legendaryUser = configStore.has('userInfo')
     const gogUser = gogConfigStore.has('userData')
-    const amazonUser = nileConfigStore.has('userData')
     const platform = await window.api.getPlatform()
 
     if (legendaryUser) {
       await window.api.getUserInfo()
-    }
-
-    if (amazonUser) {
-      await window.api.getAmazonUserInfo()
-    }
-
-    if (amazonUser) {
-      await window.api.getAmazonUserInfo()
     }
 
     if (!libraryState.gameUpdates.length) {
@@ -606,7 +565,7 @@ class GlobalState extends PureComponent<Props> {
 
     this.setState({ platform })
 
-    if (legendaryUser || gogUser || amazonUser) {
+    if (legendaryUser || gogUser) {
       libraryState.refreshLibrary({
         runInBackground: Boolean(libraryState.epicLibrary.length)
       })
@@ -676,11 +635,6 @@ class GlobalState extends PureComponent<Props> {
       gog: {
         login: this.gogLogin,
         logout: this.gogLogout
-      },
-      amazon: {
-        getLoginData: this.getAmazonLoginData,
-        login: this.amazonLogin,
-        logout: this.amazonLogout
       },
       handleLayout: this.handleLayout,
       setLanguage: this.setLanguage,

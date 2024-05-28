@@ -6,12 +6,12 @@ import {
   DialogHeader
 } from 'frontend/components/UI/Dialog'
 import { useTranslation } from 'react-i18next'
-import { amazonLoginPath, epicLoginPath, gogLoginPath } from '../..'
+import { epicLoginPath, gogLoginPath } from '../..'
 import { NavLink } from 'react-router-dom'
 import { Button } from '@hyperplay/ui'
 
 interface LoginWarningProps {
-  warnLoginForStore: null | 'epic' | 'gog' | 'amazon'
+  warnLoginForStore: null | 'epic' | 'gog'
   onClose: () => void
 }
 
@@ -39,12 +39,6 @@ const LoginWarning = function ({
       "You are not logged in with a GOG account in HyperPlay. Don't use the store page to login, click the following button instead:"
     )
     loginPath = gogLoginPath
-  } else if (warnLoginForStore === 'amazon') {
-    textContent = t(
-      'not_logged_in.amazon',
-      "You are not logged in with an Amazon account in Hyperplay. Don't use the store page to login, click the following button instead:"
-    )
-    loginPath = amazonLoginPath
   }
 
   return (

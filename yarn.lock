@@ -12,10 +12,10 @@
   resolved "https://registry.yarnpkg.com/@adobe/css-tools/-/css-tools-4.3.2.tgz#a6abc715fb6884851fca9dad37fc34739a04fd11"
   integrity sha512-DA5a1C0gD/pLOvhv33YMrbf2FK3oUzwNl9oOJqE4XVjuEtt6XIakRcsd7eLiOSPkp1kTRQGICTA8cKra/vFbjw==
 
-"@adraffy/ens-normalize@1.10.0":
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.10.0.tgz#d2a39395c587e092d77cbbc80acf956a54f38bf7"
-  integrity sha512-nA9XHtlAkYfJxY7bce8DcN7eKxWWCWkU+1GR9d+U6MbNpfwQp8TI7vqOsBsMcHoT4mBu2kypKoSKnghEzOOq5Q==
+"@adraffy/ens-normalize@1.10.1":
+  version "1.10.1"
+  resolved "https://registry.yarnpkg.com/@adraffy/ens-normalize/-/ens-normalize-1.10.1.tgz#63430d04bd8c5e74f8d7d049338f1cd9d4f02069"
+  integrity sha512-96Z2IP3mYmF1Xg2cDm8f1gWGf/HUVedQ3FMifV4kG/PQ4yEP51xDtRAEfhVNt5f/uzpNkZHwWQuUcu6D6K+Ekw==
 
 "@ampproject/remapping@^2.1.0":
   version "2.2.0"
@@ -622,9 +622,9 @@
     regenerator-runtime "^0.13.4"
 
 "@babel/runtime@^7.19.4":
-  version "7.24.5"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.5.tgz#230946857c053a36ccc66e1dd03b17dd0c4ed02c"
-  integrity sha512-Nms86NXrsaeU9vbBJKni6gXiEXZ4CVpYVzEjDH9Sb8vmZ3UljyA1GSOJl/6LGPO8EHLuSF9H+IxNXHPX8QHJ4g==
+  version "7.24.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.24.6.tgz#5b76eb89ad45e2e4a0a8db54c456251469a3358e"
+  integrity sha512-Ja18XcETdEl5mzzACGd+DKgaGJzPTCow7EglgwTmHdwokzDFYh/MHua6lU6DV/hjF2IaOJ4oX2nqnjG7RElKOw==
   dependencies:
     regenerator-runtime "^0.14.0"
 
@@ -1918,20 +1918,20 @@
     express "^4.18.2"
     stream-throttle "^0.1.3"
 
-"@hyperplay/providers@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@hyperplay/providers/-/providers-0.0.4.tgz#f05964f903e2645c8b7dc797014ea26214ea510b"
-  integrity sha512-Ke3JDV3cwE1Ns2r9JawR26iNDMhLVECMeVq+32kHPHAgWrh3Vdrms4SKDiAjsdRIwfKmiLxEv8hWO8KNm1R4VA==
+"@hyperplay/providers@^0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@hyperplay/providers/-/providers-0.0.5.tgz#0cfa9783fc7cbca14722545a936f872e1ea3d4cd"
+  integrity sha512-USAJZwuOiXHiUjTRTCj891ZsxLn4tXklw8rgkEjIYndmWNdjNjrjdH8KDw3k4TCK1ZjezcEZRA21e2UR0vCxiQ==
   dependencies:
     "@metamask/sdk" "^0.18.5"
     "@types/qrcode" "^1.5.5"
     "@walletconnect/ethereum-provider" "^2.12.2"
     qrcode "^1.5.3"
 
-"@hyperplay/proxy-server@^0.0.8":
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/@hyperplay/proxy-server/-/proxy-server-0.0.8.tgz#29b6fa06092bf25a9e5bec11a414541dfe19d4f7"
-  integrity sha512-DYpq0wRUJJwx6Kxw1lcsux+jCnlJqH10L+ifH5LktQizvAnnhKGH+jRx8Mc27lR7djNeeFu2tPSI/8VIOUvC4w==
+"@hyperplay/proxy-server@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@hyperplay/proxy-server/-/proxy-server-0.0.9.tgz#021c893fe95433b9817acde5c10123714ebd525b"
+  integrity sha512-sLe9Xbhitjaqj2U3t3o+CHfLeQ9eTEJAz7YfCSBWUvQgn7klPZYXYKz/aDErqczrriPUiR8K0sfS2NxRHK4aCg==
   dependencies:
     "@mysten/sui.js" "^0.48.1"
     "@types/supertest" "^2.0.16"
@@ -7684,12 +7684,12 @@ ethers@^5.5.4:
     "@ethersproject/web" "5.7.1"
     "@ethersproject/wordlists" "5.7.0"
 
-ethers@^6.9.0:
-  version "6.9.0"
-  resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.9.0.tgz#a4534bdcdfde306aee94ef32f3d5c70d7e33fcb9"
-  integrity sha512-pmfNyQzc2mseLe91FnT2vmNaTt8dDzhxZ/xItAV7uGsF4dI4ek2ufMu3rAkgQETL/TIs0GS5A+U05g9QyWnv3Q==
+ethers@^6.12.1, ethers@^6.9.0:
+  version "6.12.1"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.12.1.tgz#517ff6d66d4fd5433e38e903051da3e57c87ff37"
+  integrity sha512-j6wcVoZf06nqEcBbDWkKg8Fp895SS96dSnTCjiXT+8vt2o02raTn4Lo9ERUuIVU5bAjoPYeA+7ytQFexFmLuVw==
   dependencies:
-    "@adraffy/ens-normalize" "1.10.0"
+    "@adraffy/ens-normalize" "1.10.1"
     "@noble/curves" "1.2.0"
     "@noble/hashes" "1.3.2"
     "@types/node" "18.15.13"

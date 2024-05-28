@@ -12,7 +12,6 @@ export default observer(function StoreFilter() {
 
   const isGOGLoggedin = storeAuthState.gog.username
   const isEpicLoggedin = storeAuthState.epic.username
-  const isAmazonLoggedin = storeAuthState.amazon.user_id
   const category = libraryState.category
   const handleCategory = (category: Category) =>
     (libraryState.category = category)
@@ -69,17 +68,6 @@ export default observer(function StoreFilter() {
             onClick={() => handleCategory('sideload')}
           >
             {t('Other')}
-          </button>
-        )}
-        {isAmazonLoggedin && (
-          <button
-            className={classNames('FormControl__button', {
-              active: category === 'nile'
-            })}
-            title={`${t('header.store')}: ${t('amazon')}`}
-            onClick={() => handleCategory('nile')}
-          >
-            AMAZON
           </button>
         )}
         <button

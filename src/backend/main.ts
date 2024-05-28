@@ -47,9 +47,7 @@ import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
 import { GOGUser } from './storeManagers/gog/user'
-import { NileUser } from './storeManagers/nile/user'
 import setup from './storeManagers/gog/setup'
-import nileSetup from './storeManagers/nile/setup'
 import {
   clearCache,
   execAsync,
@@ -848,8 +846,8 @@ ipcMain.handle('getPlatform', () => process.platform)
 
 ipcMain.handle('showUpdateSetting', () => !isFlatpak)
 
-ipcMain.on('clearCache', (event) => {
-  clearCache()
+ipcMain.on('clearCache', (event, showDialog, fromVersionChange = false) => {
+  clearCache(undefined, fromVersionChange)
   sendFrontendMessage('refreshLibrary')
 
   showDialogBoxModalAuto({
@@ -941,8 +939,6 @@ ipcMain.handle('getUserInfo', async () => {
   return LegendaryUser.getUserInfo()
 })
 
-ipcMain.handle('getAmazonUserInfo', async () => NileUser.getUserData())
-
 // Checks if the user have logged in with Legendary already
 ipcMain.handle('isLoggedIn', LegendaryUser.isLoggedIn)
 
@@ -951,12 +947,8 @@ ipcMain.handle('authGOG', async (event, code) => GOGUser.login(code))
 ipcMain.handle('logoutLegendary', LegendaryUser.logout)
 ipcMain.on('logoutGOG', GOGUser.logout)
 ipcMain.handle('getLocalPeloadPath', async () => {
-  return fixAsarPath(join(publicDir, '../preload/webviewPreload.js'))
+  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
 })
-
-ipcMain.handle('getAmazonLoginData', NileUser.getLoginData)
-ipcMain.handle('authAmazon', async (event, data) => NileUser.login(data))
-ipcMain.handle('logoutAmazon', NileUser.logout)
 
 ipcMain.handle('getAlternativeWine', async () =>
   GlobalConfig.get().getAlternativeWine()
@@ -1849,9 +1841,6 @@ ipcMain.handle(
 
     if (runner === 'gog' && updated) {
       await setup(appName)
-    }
-    if (runner === 'nile' && updated) {
-      await nileSetup(appName)
     }
     if (runner === 'legendary' && updated) {
       await legendarySetup(appName)

@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.14.1",
+  "version": "0.14.3",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -50,8 +50,7 @@
       "icon": "build/win_icon.ico",
       "asarUnpack": [
         "build/bin/win32/legendary.exe",
-        "build/bin/win32/gogdl.exe",
-        "build/bin/win32/nile.exe"
+        "build/bin/win32/gogdl.exe"
       ],
       "files": [
         "build/bin/win32/*"
@@ -85,8 +84,7 @@
       },
       "asarUnpack": [
         "build/bin/darwin/legendary",
-        "build/bin/darwin/gogdl",
-        "build/bin/darwin/nile"
+        "build/bin/darwin/gogdl"
       ],
       "files": [
         "build/bin/darwin/*"
@@ -123,7 +121,6 @@
         "build/bin/linux/legendary",
         "build/bin/linux/gogdl",
         "build/bin/linux/wmctrl",
-        "build/bin/linux/nile",
         "build/bin/linux/vulkan-helper"
       ],
       "files": [
@@ -209,7 +206,7 @@
     "electron-updater": "^5.0.1",
     "embla-carousel-autoplay": ">=7.0.0",
     "embla-carousel-react": ">=7.0.0",
-    "ethers": "^6.9.0",
+    "ethers": "^6.12.1",
     "express": "^4.19.2",
     "filesize": "^10.1.0",
     "find-process": "^1.4.7",
@@ -362,8 +359,8 @@
   },
   "optionalDependencies": {
     "@hyperplay/mock-backend": "^0.0.1",
-    "@hyperplay/providers": "^0.0.4",
-    "@hyperplay/proxy-server": "^0.0.8"
+    "@hyperplay/providers": "^0.0.5",
+    "@hyperplay/proxy-server": "^0.0.9"
   },
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
