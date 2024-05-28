@@ -84,6 +84,10 @@ import {
 } from './wine/manager/utils'
 
 import * as si from 'systeminformation'
+import {
+  deviceNameCache,
+  vendorNameCache
+} from './utils/systeminfo/gpu/pci_ids'
 
 const execAsync = promisify(exec)
 
@@ -355,7 +359,7 @@ async function openUrlOrFile(url: string): Promise<string | void> {
   return shell.openPath(url)
 }
 
-function clearCache(library?: 'gog' | 'legendary') {
+function clearCache(library?: 'gog' | 'legendary', fromVersionChange = false) {
   if (library === 'gog' || !library) {
     GOGapiInfoCache.clear()
     GOGlibraryStore.clear()
@@ -370,6 +374,10 @@ function clearCache(library?: 'gog' | 'legendary') {
       { subcommand: 'cleanup' },
       createAbortController(abortID)
     ).then(() => deleteAbortController(abortID))
+  }
+  if (!fromVersionChange) {
+    deviceNameCache.clear()
+    vendorNameCache.clear()
   }
 }
 
@@ -1498,7 +1506,12 @@ export function getExecutableAndArgs(executableWithArgs: string): {
   executable: string
   launchArgs: string
 } {
-  const match = executableWithArgs.match(/^(.*?\.(exe|app|bin|sh))/i)
+  if (executableWithArgs.includes('.app')) {
+    const executable = executableWithArgs.split(' -')[0]
+    const launchArgs = executableWithArgs.replace(executable, '').trim()
+    return { executable, launchArgs }
+  }
+  const match = executableWithArgs.match(/^(.*?\.(exe|bin|sh))/i)
   const executable = match ? match[0] : ''
   const launchArgs = executableWithArgs.replace(executable, '').trim()
 

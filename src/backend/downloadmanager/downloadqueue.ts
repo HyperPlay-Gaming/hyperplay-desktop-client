@@ -1,7 +1,7 @@
 import { gameManagerMap, libraryManagerMap } from 'backend/storeManagers'
 import { TypeCheckedStoreBackend } from './../electron_store'
 import { logError, logInfo, LogPrefix, logWarning } from '../logger/logger'
-import { getFileSize, removeFolder } from '../utils'
+import { getFileSize } from '../utils'
 import { DMQueueElement, DMStatus, DownloadManagerState } from 'common/types'
 import { installQueueElement, updateQueueElement } from './utils'
 import { sendFrontendMessage } from '../main_window'
@@ -221,23 +221,10 @@ function cancelCurrentDownload({ removeDownloaded = false }) {
 
     const { runner } = currentElement!.params
     if (runner === 'hyperplay' && removeDownloaded) {
-      const { appName, gameInfo, channelName } = currentElement!.params
-      const { folder_name } = gameInfo
-      if (gameInfo.channels === undefined || channelName === undefined) {
-        console.error(
-          `Error when canceling current download channels ${gameInfo.channels} or channelName ${channelName} is undefined`
-        )
-        return
-      }
-      const releaseMeta = gameInfo.channels[channelName].release_meta
-
-      if (releaseMeta) {
-        const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
-        logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
-        callAbortController(appName)
-      } else if (folder_name) {
-        removeFolder(currentElement.params.path, folder_name)
-      }
+      const { appName } = currentElement!.params
+      const tempfolder = join(configFolder, 'hyperplay', '.temp', appName)
+      logInfo(`Removing ${tempfolder}...`, LogPrefix.DownloadManager)
+      callAbortController(appName)
     }
     currentElement = null
   }

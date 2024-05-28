@@ -73,6 +73,12 @@
         white-space: nowrap;
         font-size: 1rem;
         background: var(--navbar-background);
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.5;
+          transition: 200ms;
+        }
 
         &:last-child {
           padding-bottom: 0;

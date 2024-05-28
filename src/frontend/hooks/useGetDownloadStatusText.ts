@@ -21,7 +21,14 @@ export function useGetDownloadStatusText(
     layout
   )
 
-  function getStatus() {
+  type MessageStatus =
+    | 'distributables'
+    | 'extracting'
+    | 'paused'
+    | 'installing'
+    | 'installed'
+
+  function getStatus(): MessageStatus {
     if (status === 'distributables') {
       return 'distributables'
     }

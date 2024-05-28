@@ -200,6 +200,16 @@ describe('backend/utils.ts', () => {
       expect(getExecutableAndArgs(input)).toEqual(expected)
     })
 
+    it('should correctly parse executable with .app extension and arguments with spaces', () => {
+      const input =
+        'path/to/app li ca tion.app/Contents/MacOS/application --arg1 "arg"'
+      const expected = {
+        executable: 'path/to/app li ca tion.app/Contents/MacOS/application',
+        launchArgs: '--arg1 "arg"'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
     it('should correctly parse executable with .bin extension and single argument', () => {
       const input = 'path/to/executable.bin -arg'
       const expected = {
@@ -232,6 +242,15 @@ describe('backend/utils.ts', () => {
       const expected = {
         executable: 'path/to/Executable.EXE',
         launchArgs: '--option'
+      }
+      expect(getExecutableAndArgs(input)).toEqual(expected)
+    })
+
+    it('should correctly parse executable with spaces', () => {
+      const input = 'path/t o/exec utable.exe --arg1 --arg2'
+      const expected = {
+        executable: 'path/t o/exec utable.exe',
+        launchArgs: '--arg1 --arg2'
       }
       expect(getExecutableAndArgs(input)).toEqual(expected)
     })

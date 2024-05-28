@@ -418,7 +418,9 @@ class GlobalState extends PureComponent<Props> {
         'playing',
         'extracting',
         'preparing',
-        'uninstalling'
+        'uninstalling',
+        'installing',
+        'distributables'
       ].includes(status)
     ) {
       currentApp.status = status

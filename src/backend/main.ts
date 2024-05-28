@@ -846,8 +846,8 @@ ipcMain.handle('getPlatform', () => process.platform)
 
 ipcMain.handle('showUpdateSetting', () => !isFlatpak)
 
-ipcMain.on('clearCache', (event) => {
-  clearCache()
+ipcMain.on('clearCache', (event, showDialog, fromVersionChange = false) => {
+  clearCache(undefined, fromVersionChange)
   sendFrontendMessage('refreshLibrary')
 
   showDialogBoxModalAuto({
@@ -947,7 +947,7 @@ ipcMain.handle('authGOG', async (event, code) => GOGUser.login(code))
 ipcMain.handle('logoutLegendary', LegendaryUser.logout)
 ipcMain.on('logoutGOG', GOGUser.logout)
 ipcMain.handle('getLocalPeloadPath', async () => {
-  return fixAsarPath(join(publicDir, '../preload/webviewPreload.js'))
+  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
 })
 
 ipcMain.handle('getAlternativeWine', async () =>

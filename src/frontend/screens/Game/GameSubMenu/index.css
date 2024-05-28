@@ -46,6 +46,7 @@
 .submenu .MuiCircularProgress-root.is-link {
   width: auto !important;
   height: auto !important;
+  cursor: pointer;
 }
 .submenu .MuiCircularProgress-root.is-link svg {
   width: var(--line-height) !important;
