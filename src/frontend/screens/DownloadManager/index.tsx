@@ -110,6 +110,8 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
                 <DownloadTable
                   elements={currentElement ? [currentElement] : []}
                   time="started"
+                  isCurrent={true}
+                  state={state}
                 />
               </div>
             </div>
