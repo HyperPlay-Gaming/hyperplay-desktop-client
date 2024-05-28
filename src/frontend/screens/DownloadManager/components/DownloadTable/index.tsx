@@ -11,12 +11,22 @@ export interface DownloadTableProps {
   state?: DownloadManagerState
 }
 
-export function DownloadTable({ elements, time, isCurrent, state }: DownloadTableProps) {
+export function DownloadTable({
+  elements,
+  time,
+  isCurrent,
+  state
+}: DownloadTableProps) {
   return (
     <table className={styles.dmItemList}>
       <DownloadManagerHeader time={time} />
       {elements.map((el, key) => (
-        <DownloadManagerItem key={key} element={el} current={!!isCurrent} state={state} />
+        <DownloadManagerItem
+          key={key}
+          element={el}
+          current={!!isCurrent}
+          state={state}
+        />
       ))}
     </table>
   )

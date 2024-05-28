@@ -296,7 +296,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
                 {secondaryActionIcon()}
               </SvgButton>
             )}
-          </div>          
+          </div>
         </td>
       </tr>
     </>
