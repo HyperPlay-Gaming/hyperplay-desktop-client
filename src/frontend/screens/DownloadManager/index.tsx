@@ -116,11 +116,9 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
           </Tabs.Panel>
 
           <Tabs.Panel value="queued">
-            <>
-              <div className={styles.dmItemList}>
-                <DownloadTable elements={queuedElements} time="queued" />
-              </div>
-            </>
+            <div className={styles.dmItemList}>
+              <DownloadTable elements={queuedElements} time="queued" />
+            </div>
           </Tabs.Panel>
           <Tabs.Panel value="downloaded">
             <div className={styles.downloadManager}>
