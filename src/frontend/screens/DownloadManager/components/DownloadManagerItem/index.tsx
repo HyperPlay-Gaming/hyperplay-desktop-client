@@ -284,17 +284,19 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
         <td>{translatedTypes[type]}</td>
         <td>{getStoreName(runner, t2('Other'))}</td>
         <td>
-          <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
-            {mainActionIcon()}
-          </SvgButton>
-          {current && !isExtracting && (
-            <SvgButton
-              onClick={handleSecondaryActionClick}
-              title={secondaryIconTitle()}
-            >
-              {secondaryActionIcon()}
+          <div className={styles.iconContainer}>
+            <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
+              {mainActionIcon()}
             </SvgButton>
-          )}
+            {current && !isExtracting && (
+              <SvgButton
+                onClick={handleSecondaryActionClick}
+                title={secondaryIconTitle()}
+              >
+                {secondaryActionIcon()}
+              </SvgButton>
+            )}
+          </div>          
         </td>
       </tr>
     </>
