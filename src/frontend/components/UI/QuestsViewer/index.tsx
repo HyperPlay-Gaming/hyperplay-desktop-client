@@ -115,7 +115,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       <QuestDetails
         {...questDetailsProps}
         className={styles.questDetails}
-        ctaDisabled={true}
+        ctaDisabled={false}
       />
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
@@ -140,7 +140,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       <QuestDetails
         {...emptyQuestDetailsProps}
         className={styles.questDetails}
-        ctaDisabled={true}
+        ctaDisabled={false}
       />
     )
   }
