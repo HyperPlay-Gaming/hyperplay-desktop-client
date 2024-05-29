@@ -1,5 +1,5 @@
 import { logError, LogPrefix } from 'backend/logger/logger'
-import { Achievement } from 'common/types'
+import { Achievement, Signature } from 'common/types'
 import { ipcMain } from 'electron'
 import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL } from 'common/constants'
@@ -237,3 +237,26 @@ ipcMain.handle('getSyncProgress', async (e, requestId) => {
     Sentry.captureException(error)
   }
 })
+
+async function getQuestRewardSignature(
+  address: string,
+  questId: number,
+  rewardId: number
+): Promise<Signature> {
+  // TODO: remove test url before merge
+  const DEV_PORTAL_URL = 'https://hyperplay-18dvrc49x-hyperplay.vercel.app/'
+  const url =
+    `${DEV_PORTAL_URL}api/v1/quests/${questId}/rewards/${rewardId}/signature?` +
+    new URLSearchParams({
+      withdraw: 'true',
+      address
+    })
+
+  const result = await fetch(url)
+  const resultJson = await result.json()
+  return resultJson
+}
+
+ipcMain.handle('getQuestRewardSignature', async (_e, ...args) =>
+  getQuestRewardSignature(...args)
+)

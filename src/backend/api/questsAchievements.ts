@@ -26,3 +26,9 @@ export const getQuest = async (questId: number) =>
 
 export const getSteamGameMetadata = async (gameId: number) =>
   ipcRenderer.invoke('getSteamGameMetadata', gameId)
+
+export const getQuestRewardSignature = async (
+  address: string,
+  questId: number,
+  rewardId: number
+) => ipcRenderer.invoke('getQuestRewardSignature', address, questId, rewardId)

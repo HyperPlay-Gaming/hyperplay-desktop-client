@@ -930,3 +930,8 @@ export interface Quest {
     steam_games: { id: string }[]
   }
 }
+
+export interface Signature {
+  signature: string
+  nonce: string
+}
