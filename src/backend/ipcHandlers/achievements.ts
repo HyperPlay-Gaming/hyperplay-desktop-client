@@ -243,8 +243,6 @@ async function getQuestRewardSignature(
   questId: number,
   rewardId: number
 ): Promise<RewardClaimSignature> {
-  // TODO: remove test url before merge
-  const DEV_PORTAL_URL = 'https://hyperplay-18dvrc49x-hyperplay.vercel.app/'
   const url =
     `${DEV_PORTAL_URL}api/v1/quests/${questId}/rewards/${rewardId}/signature?` +
     new URLSearchParams({

@@ -77,6 +77,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const session = useAuthSession()
   const accounts = session.data?.linkedAccounts
   const steamIsLinked = accounts?.has('steam')
+  const userId = session.data?.userId
   const i18n = {
     reward: t('quest.reward', 'Reward'),
     associatedGames: t('quest.associatedGames', 'Associated games'),
@@ -152,10 +153,19 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         imageUrl: val.image_url
       })),
       i18n,
-      onClaimClick: async () =>
-        steamIsLinked
-          ? mintRewards(questMeta.rewards)
-          : window.api.signInWithProvider('steam'),
+      onClaimClick: async () => {
+        if (questMeta.type === 'REPUTATION_QUEST' && !steamIsLinked){
+          window.api.signInWithProvider('steam')
+        }
+        else if (questMeta.type === 'PLAY_STREAK'){
+          if (userId){
+            mintRewards(questMeta.rewards)
+          }
+          else {
+            // prompt sign in
+          }
+        }
+      },
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
     }
