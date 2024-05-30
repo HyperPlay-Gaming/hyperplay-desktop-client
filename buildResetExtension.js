@@ -10,13 +10,17 @@ const resetExtensionScript =
 if (existsSync(resetExtensionScript)) {
   console.log('spawning pkg', resetExtensionScript, args)
   const command = platform() === 'win32' ? 'yarn.cmd' : 'yarn'
-  const result = spawnSync(command, [
-    'pkg',
-    resetExtensionScript,
-    '--out-path',
-    './public/extensions/resetExecutables',
-    ...args
-  ])
+  const result = spawnSync(
+    command,
+    [
+      'pkg',
+      resetExtensionScript,
+      '--out-path',
+      './public/extensions/resetExecutables',
+      ...args
+    ],
+    { shell: true }
+  )
   if (result.error) {
     console.error(result.error)
   } else {
