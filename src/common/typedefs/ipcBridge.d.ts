@@ -5,7 +5,6 @@ import {
   SummaryAchievement,
   LDEnv
 } from './../types'
-import { MetaMaskImportOptions } from './../../backend/hyperplay-extension-helper/ipcHandlers/index'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
 
@@ -46,6 +45,11 @@ import {
 import { ToastKey } from 'frontend/store/types'
 import { AuthSession } from '../types/auth'
 import type { SystemInformation } from 'backend/utils/systeminfo'
+import {
+  MetaMaskInitMethod,
+  ImportableBrowser,
+  MetaMaskImportOptions
+} from '@hyperplay/utils'
 
 /**
  * Some notes here:

@@ -1,7 +1,3 @@
-import {
-  initExtension,
-  resetExtension
-} from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -115,7 +111,6 @@ import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
-import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import {
   initOnlineMonitor,
   isOnline,
@@ -170,7 +165,7 @@ import './utils/ipc_handler'
 import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
-import 'backend/hyperplay-extension-helper/usbHandler'
+import 'backend/extension/provider'
 import 'backend/proxy/ipcHandlers.ts'
 
 import './ipcHandlers'
@@ -190,7 +185,6 @@ async function startProxyServer() {
   try {
     const proxyServer = await import('@hyperplay/proxy-server')
     proxyServer.initServer(undefined)
-    console.log('Server started')
     logInfo('Proxy server started', LogPrefix.HyperPlay)
   } catch (err) {
     logError(`Error starting proxy server ${err}`, LogPrefix.HyperPlay)
@@ -311,8 +305,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
       backendEvents.emit('removePopup')
     }
   })
-
-  ExtensionHelper.initExtensionProvider(mainWindow)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -460,7 +452,7 @@ if (!gotTheLock) {
     const openOverlayAcceleratorMac = 'Option+X'
     globalShortcut.register(openOverlayAcceleratorMac, toggleOverlay)
 
-    initExtension()
+    initExtension(hpApi)
 
     initOnlineMonitor()
 
@@ -867,7 +859,10 @@ ipcMain.on('resetApp', async () => {
 })
 
 ipcMain.on('resetExtension', async () => {
-  resetExtension()
+  const extensionImporter = await import('@hyperplay/extension-importer')
+  extensionImporter.resetExtension(hpApi)
+  ipcMain.emit('ignoreExitToTray')
+  app.quit()
 })
 
 ipcMain.on('createNewWindow', (e, url) => {
@@ -2007,3 +2002,5 @@ ipcMain.on('toggleOverlay', () => {
  */
 
 import './storeManagers/legendary/eos_overlay/ipc_handler'
+import { initExtension } from './extension/importer'
+import { hpApi } from './utils/hyperplay_api'

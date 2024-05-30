@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { existsSync, mkdirSync, unlinkSync } from 'graceful-fs'
 import { join } from 'path'
-import { runtimePath } from './../../constants'
+import { runtimePath } from '../../constants'
 import { logError, logInfo, LogPrefix } from './../../logger/logger'
 import { Runtime, RuntimeName } from 'common/types'
 import { downloadFile, extractTarFile, getAssetDataFromDownload } from './util'

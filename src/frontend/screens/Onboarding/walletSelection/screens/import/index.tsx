@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { t } from 'i18next'
 import ImportScreenStyles from './index.module.scss'
-import { ImportableBrowser } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+import { ImportableBrowser } from '@hyperplay/utils'
 import { ImportProps } from './types'
 import ImportAndCreateOptions from './components/ImportAndCreateOptions'
 import { BrowsersAndManualImportOptions } from './components/BrowsersAndManualImportOptions'

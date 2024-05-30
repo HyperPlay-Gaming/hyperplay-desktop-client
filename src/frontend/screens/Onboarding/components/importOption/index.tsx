@@ -1,7 +1,7 @@
 import ImportOptionStyles from './index.module.scss'
 import React, { useEffect, useState } from 'react'
 import cn from 'classnames'
-import { ImportableBrowser } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+import { ImportableBrowser } from '@hyperplay/utils'
 import { Images } from '@hyperplay/ui'
 
 interface WalletOptionProps {

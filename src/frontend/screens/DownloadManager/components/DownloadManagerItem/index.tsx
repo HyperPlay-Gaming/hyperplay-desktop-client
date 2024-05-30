@@ -8,7 +8,6 @@ import {
   GameInfo,
   HyperPlayInstallInfo
 } from 'common/types'
-import { ReactComponent as StopIcon } from 'frontend/assets/stop-icon.svg'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import {
   getGameInfo,
@@ -19,15 +18,15 @@ import {
 import { useTranslation } from 'react-i18next'
 import { hasProgress } from 'frontend/hooks/hasProgress'
 import { useNavigate } from 'react-router-dom'
-import { ReactComponent as PlayIcon } from 'frontend/assets/play-icon.svg'
-import { ReactComponent as DownIcon } from 'frontend/assets/down-icon.svg'
-import { ReactComponent as PauseIcon } from 'frontend/assets/pause-icon.svg'
 import { GogInstallInfo } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import StopInstallationModal from 'frontend/components/UI/StopInstallationModal'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { hasStatus } from 'frontend/hooks/hasStatus'
+import { Images } from '@hyperplay/ui'
+import styles from './index.module.scss'
+const { PauseIcon, PlayIcon, XCircle, DownloadIcon } = Images
 
 type Props = {
   element?: DMQueueElement
@@ -165,21 +164,21 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       if (is_dlc) {
         return <>-</>
       }
-      return <PlayIcon className="playIcon" />
+      return <PlayIcon className={styles.playIcon} />
     }
 
     if (canceled) {
-      return <DownIcon />
+      return <DownloadIcon className={styles.downloadIcon} />
     }
 
-    return <StopIcon />
+    return <XCircle />
   }
 
   const secondaryActionIcon = () => {
     if (state === 'paused') {
-      return <PlayIcon className="playIcon" />
+      return <PlayIcon className={styles.playIcon} />
     } else if (state === 'running') {
-      return <PauseIcon className="pauseIcon" />
+      return <PauseIcon className={styles.pauseIcon} />
     }
 
     return <></>
@@ -257,8 +256,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
           progress={progress}
         />
       ) : null}
-      <div className="downloadManagerListItem">
-        <span
+      <tr>
+        <td
           role="button"
           onClick={() => goToGamePage()}
           className="downloadManagerTitleList"
@@ -277,24 +276,26 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
               {canceled ? ` (${t('queue.label.canceled', 'Canceled')})` : ''}
             </span>
           </span>
-        </span>
-        <span title={fullDate}>{hour}</span>
-        <span>{translatedTypes[type]}</span>
-        <span>{getStoreName(runner, t2('Other'))}</span>
-        <span className="icons">
-          <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
-            {mainActionIcon()}
-          </SvgButton>
-          {current && !isExtracting && (
-            <SvgButton
-              onClick={handleSecondaryActionClick}
-              title={secondaryIconTitle()}
-            >
-              {secondaryActionIcon()}
+        </td>
+        <td title={fullDate}>{hour}</td>
+        <td>{translatedTypes[type]}</td>
+        <td>{getStoreName(runner, t2('Other'))}</td>
+        <td>
+          <div className={styles.iconContainer}>
+            <SvgButton onClick={handleMainActionClick} title={mainIconTitle()}>
+              {mainActionIcon()}
             </SvgButton>
-          )}
-        </span>
-      </div>
+            {current && !isExtracting && (
+              <SvgButton
+                onClick={handleSecondaryActionClick}
+                title={secondaryIconTitle()}
+              >
+                {secondaryActionIcon()}
+              </SvgButton>
+            )}
+          </div>
+        </td>
+      </tr>
     </>
   )
 })
