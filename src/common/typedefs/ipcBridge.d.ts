@@ -268,10 +268,10 @@ interface HyperPlayAsyncIPCFunctions {
   getQuest: (questId: number) => Promise<Quest>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
   getQuestRewardSignature: (
-    address: string,
+    address: `0x${string}`,
     questId: number,
     rewardId: number
-  ) => Promise<Signature>
+  ) => Promise<RewardClaimSignature>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

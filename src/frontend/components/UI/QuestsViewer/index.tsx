@@ -12,12 +12,19 @@ import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
+import { useWriteContract, useAccount, useSwitchChain } from 'wagmi'
+import { Reward, RewardClaimSignature } from 'common/types'
+import { getAmount } from '@hyperplay/utils'
+import { questRewardAbi } from 'frontend/abis/RewardsAbi'
 
 export interface QuestsViewerProps {
   projectId: string
 }
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
+  const { writeContract } = useWriteContract()
+  const { switchChainAsync } = useSwitchChain()
+  const account = useAccount()
   const questsResults = useGetQuests(appName)
   const quests = questsResults?.data?.data
   const { t } = useTranslation()
@@ -90,6 +97,44 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     }
   }
 
+  async function mintRewards(rewards: Reward[]) {
+    if (questMeta?.id === undefined) {
+      console.error('tried to mint but quest meta id is undefined')
+      return
+    }
+    if (account.address === undefined) {
+      console.error('tried to mint but no account connected')
+      return
+    }
+    for (const reward_i of rewards) {
+      await switchChainAsync({ chainId: reward_i.chain_id })
+      const sig: RewardClaimSignature =
+        await window.api.getQuestRewardSignature(
+          account.address,
+          questMeta.id,
+          reward_i.id
+        )
+      const fxnName = 'withdraw' + reward_i.reward_type
+      if (reward_i.reward_type === 'ERC20') {
+        writeContract({
+          address: '0x',
+          abi: questRewardAbi,
+          functionName: fxnName as 'withdrawERC20',
+          args: [
+            BigInt(questMeta.id),
+            reward_i.contract_address,
+            BigInt(
+              getAmount(reward_i.amount_per_user, reward_i.decimals).toString()
+            ),
+            BigInt(sig.nonce),
+            BigInt(sig.expiration),
+            sig.signature
+          ]
+        })
+      }
+    }
+  }
+
   if (selectedQuestId !== null && questMeta !== undefined) {
     const questDetailsProps: QuestDetailsProps = {
       title: questMeta.name,
@@ -107,7 +152,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         imageUrl: val.image_url
       })),
       i18n,
-      onClaimClick: () => console.log('claim clicked for ', questMeta.name),
+      onClaimClick: async () =>
+        steamIsLinked
+          ? mintRewards(questMeta.rewards)
+          : window.api.signInWithProvider('steam'),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
     }
