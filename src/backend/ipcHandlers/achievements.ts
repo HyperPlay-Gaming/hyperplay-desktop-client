@@ -252,7 +252,17 @@ async function getQuestRewardSignature(
       address
     })
 
-  const result = await fetch(url)
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const result = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Cookie: cookieString
+    }
+  })
   const resultJson = await result.json()
   return resultJson
 }
