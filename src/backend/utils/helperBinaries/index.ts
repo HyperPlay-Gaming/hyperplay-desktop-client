@@ -4,7 +4,6 @@ import {
 } from '../aborthandler/aborthandler'
 import { runRunnerCommand as runLegendaryCommand } from '../../storeManagers/legendary/library'
 import { runRunnerCommand as runGogdlCommand } from '../../storeManagers/gog/library'
-import { runRunnerCommand as runNileCommand } from '../../storeManagers/nile/library'
 
 async function getLegendaryVersion(): Promise<string> {
   const abortID = 'legendary-version'
@@ -41,17 +40,4 @@ async function getGogdlVersion(): Promise<string> {
   return stdout
 }
 
-async function getNileVersion(): Promise<string> {
-  const abortID = 'nile-version'
-  const { stdout, error } = await runNileCommand(
-    ['--version'],
-    createAbortController(abortID)
-  )
-  deleteAbortController(abortID)
-
-  if (error) return 'invalid'
-
-  return stdout
-}
-
-export { getLegendaryVersion, getGogdlVersion, getNileVersion }
+export { getLegendaryVersion, getGogdlVersion }

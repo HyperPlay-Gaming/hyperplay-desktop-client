@@ -13,11 +13,7 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import GamesList from './components/GamesList'
 import { FilterItem, GameInfo, Runner } from 'common/types'
 import ErrorComponent from 'frontend/components/UI/ErrorComponent'
-import {
-  amazonCategories,
-  epicCategories,
-  gogCategories
-} from 'frontend/helpers/library'
+import { epicCategories, gogCategories } from 'frontend/helpers/library'
 import RecentlyPlayed from './components/RecentlyPlayed'
 import { InstallModal } from './components'
 import './index.css'
@@ -41,7 +37,7 @@ type ModalState = {
 }
 
 export default observer(function Library(): JSX.Element {
-  const { layout, epic, gog, platform, amazon, connectivity } =
+  const { layout, epic, gog, platform, connectivity } =
     useContext(ContextProvider)
   const { t } = useTranslation()
   const isOffline = connectivity.status !== 'online'
@@ -129,16 +125,10 @@ export default observer(function Library(): JSX.Element {
   ) {
     libraryState.category = 'all'
   }
-  if (
-    amazonCategories.includes(libraryState.category) &&
-    !storeAuthState.amazon.user_id
-  ) {
-    libraryState.category = 'all'
-  }
 
   const showRecentGames = libraryState.showRecentGames
 
-  if (!epic && !gog && !amazon) {
+  if (!epic && !gog) {
     return (
       <ErrorComponent
         message={t(

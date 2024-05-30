@@ -16,7 +16,7 @@ interface Props {
 function SoftwareInfo({ software }: Props) {
   const { t } = useTranslation()
 
-  const { appVersion, legendaryVersion, gogdlVersion, nileVersion } = software
+  const { appVersion, legendaryVersion, gogdlVersion } = software
 
   return (
     <Paper sx={{ padding: 1 }} square>
@@ -46,14 +46,6 @@ function SoftwareInfo({ software }: Props) {
             'Gogdl: {{gogdlVersion}}',
             {
               gogdlVersion
-            }
-          )}
-          <br />
-          {t(
-            'settings.systemInformation.nileVersion',
-            'Nile: {{nileVersion}}',
-            {
-              nileVersion
             }
           )}
         </Grid>

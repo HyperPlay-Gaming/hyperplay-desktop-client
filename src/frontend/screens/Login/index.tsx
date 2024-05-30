@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom'
 
 import { ReactComponent as EpicLogo } from 'frontend/assets/epic-logo.svg'
 import { ReactComponent as GOGLogo } from 'frontend/assets/gog-logo.svg'
-import { ReactComponent as AmazonLogo } from 'frontend/assets/amazon-logo.svg'
 
 import { LanguageSelector, UpdateComponent } from '../../components/UI'
 import { FlagPosition } from '../../components/UI/LanguageSelector'
@@ -15,15 +14,13 @@ import ContextProvider from '../../state/ContextProvider'
 import { Background, Images } from '@hyperplay/ui'
 import libraryState from 'frontend/state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useAwaited } from '../../hooks/useAwaited'
 
 export const epicLoginPath = '/loginweb/legendary'
 export const gogLoginPath = '/loginweb/gog'
-export const amazonLoginPath = '/loginweb/nile'
 
 export default React.memo(function NewLogin() {
-  const { epic, gog, amazon } = useContext(ContextProvider)
+  const { epic, gog } = useContext(ContextProvider)
   const { t } = useTranslation()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
@@ -34,11 +31,6 @@ export default React.memo(function NewLogin() {
   const [isGogLoggedIn, setIsGogLoggedIn] = useState(
     Boolean(storeAuthState.gog.username)
   )
-  const [isAmazonLoggedIn, setIsAmazonLoggedIn] = useState(
-    Boolean(storeAuthState.amazon.user_id)
-  )
-  const flags = useFlags()
-  const ENABLE_AMAZON_STORE = flags.amazonStore
 
   const systemInfo = useAwaited(window.api.systemInfo.get)
 
@@ -73,8 +65,7 @@ export default React.memo(function NewLogin() {
   useEffect(() => {
     setIsEpicLoggedIn(Boolean(storeAuthState.epic.username))
     setIsGogLoggedIn(Boolean(storeAuthState.gog.username))
-    setIsAmazonLoggedIn(Boolean(storeAuthState.amazon.user_id))
-  }, [storeAuthState.epic.username, storeAuthState.gog.username, storeAuthState.amazon.user_id, t])
+  }, [storeAuthState.epic.username, storeAuthState.gog.username, t])
 
   async function handleLibraryClick() {
     await libraryState.refreshLibrary({
@@ -140,16 +131,6 @@ export default React.memo(function NewLogin() {
               user={storeAuthState.gog.username}
               logoutAction={gog.logout}
             />
-            {ENABLE_AMAZON_STORE ? (
-              <Runner
-                class="nile"
-                icon={() => <AmazonLogo />}
-                loginUrl={amazonLoginPath}
-                isLoggedIn={isAmazonLoggedIn}
-                user={storeAuthState.amazon.username || 'Unknown'}
-                logoutAction={amazon.logout}
-              />
-            ) : null}
           </div>
           <button
             onClick={async () => handleLibraryClick()}

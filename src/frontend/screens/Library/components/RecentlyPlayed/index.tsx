@@ -45,8 +45,7 @@ export default React.memo(
           ...libraryState.hyperPlayLibrary,
           ...libraryState.epicLibrary,
           ...libraryState.gogLibrary,
-          ...libraryState.sideloadedLibrary,
-          ...libraryState.amazonLibrary
+          ...libraryState.sideloadedLibrary
         ],
         maxRecentGames,
         onlyInstalled
@@ -68,7 +67,7 @@ export default React.memo(
       return () => {
         recentGamesChangedRemoveListener()
       }
-    }, [libraryState.epicLibrary, libraryState.gogLibrary, libraryState.sideloadedLibrary, libraryState.amazonLibrary])
+    }, [libraryState.epicLibrary, libraryState.gogLibrary, libraryState.sideloadedLibrary])
 
     if (!recentGames.length) {
       return null

@@ -8,7 +8,6 @@ import {
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GogInstallInfo } from 'common/types/gog'
-import { NileInstallInfo } from 'common/types/nile'
 
 import { install, launch, repair, updateGame } from './library'
 import * as fileSize from 'filesize'
@@ -67,11 +66,7 @@ const getInstallInfo = async (
   installPlatform: InstallPlatform,
   channelNameToInstall?: string
 ): Promise<
-  | LegendaryInstallInfo
-  | GogInstallInfo
-  | HyperPlayInstallInfo
-  | NileInstallInfo
-  | null
+  LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
 > => {
   if (runner === 'hyperplay') {
     installPlatform = handleRunnersPlatforms(installPlatform, runner)
@@ -130,8 +125,6 @@ const getStoreName = (runner: Runner, other: string) => {
       return 'Epic Games'
     case 'gog':
       return 'GOG'
-    case 'nile':
-      return 'Amazon Games'
     default:
       return other
   }

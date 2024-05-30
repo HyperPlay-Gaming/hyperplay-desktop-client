@@ -11,11 +11,7 @@ import { getMemoryInfo } from './memory'
 import { getOsInfo } from './osInfo'
 import { isSteamDeck } from './steamDeck'
 
-import {
-  getGogdlVersion,
-  getLegendaryVersion,
-  getNileVersion
-} from '../helperBinaries'
+import { getGogdlVersion, getLegendaryVersion } from '../helperBinaries'
 import { getAppVersion } from 'backend/utils'
 
 type GPUInfo = {
@@ -59,7 +55,6 @@ interface SystemInformation {
     appVersion: string
     legendaryVersion: string
     gogdlVersion: string
-    nileVersion: string
   }
 }
 
@@ -77,10 +72,9 @@ async function getSystemInfo(cache = true): Promise<SystemInformation> {
   const gpus = await getGpuInfo()
   const detailedOsInfo = await getOsInfo()
   const isDeck = isSteamDeck(cpus, gpus)
-  const [legendaryVersion, gogdlVersion, nileVersion] = await Promise.all([
+  const [legendaryVersion, gogdlVersion] = await Promise.all([
     getLegendaryVersion(),
-    getGogdlVersion(),
-    getNileVersion()
+    getGogdlVersion()
   ])
 
   const sysinfo: SystemInformation = {
@@ -107,8 +101,7 @@ async function getSystemInfo(cache = true): Promise<SystemInformation> {
     softwareInUse: {
       appVersion: getAppVersion(),
       legendaryVersion: legendaryVersion,
-      gogdlVersion: gogdlVersion,
-      nileVersion: nileVersion
+      gogdlVersion: gogdlVersion
     }
   }
   cachedSystemInfo = sysinfo
@@ -138,8 +131,7 @@ ${steamDeckAndFlatpakInfo}
 Software Versions:
   HyperPlay: ${info.softwareInUse.appVersion}
   Legendary: ${info.softwareInUse.legendaryVersion}
-  gogdl: ${info.softwareInUse.gogdlVersion}
-  Nile: ${info.softwareInUse.nileVersion}`
+  gogdl: ${info.softwareInUse.gogdlVersion}`
 }
 
 export { getSystemInfo, formatSystemInfo }

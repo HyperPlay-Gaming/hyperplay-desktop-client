@@ -44,8 +44,7 @@ export default observer(function SidebarLinks() {
 
     const shouldRefresh =
       (storeAuthState.epic.username && !libraryState.epicLibrary.length) ||
-      (storeAuthState.gog.username && !libraryState.gogLibrary.length) ||
-      (storeAuthState.amazon.user_id && !libraryState.amazonLibrary.length)
+      (storeAuthState.gog.username && !libraryState.gogLibrary.length)
     if (shouldRefresh) {
       return libraryState.refreshLibrary({
         runInBackground: true,
