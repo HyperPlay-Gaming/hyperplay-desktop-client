@@ -1,20 +1,18 @@
-import './index.css'
-
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DMQueueElement, DownloadManagerState } from 'common/types'
 import { UpdateComponent } from 'frontend/components/UI'
 import ProgressHeader from './components/ProgressHeader'
-import DownloadManagerHeader from './DownloadManagerHeader'
-import { downloadManagerStore } from 'frontend/helpers/electronStores'
 import { DMQueue } from 'frontend/types'
-import DownloadManagerItem from './components/DownloadManagerItem'
+import { Background, Tabs, getTabsClassNames } from '@hyperplay/ui'
+import styles from './index.module.scss'
+import { DownloadTable } from './components/DownloadTable'
 
 export default React.memo(function DownloadManager(): JSX.Element | null {
   const { t } = useTranslation()
   const [refreshing, setRefreshing] = useState(false)
   const [state, setState] = useState<DownloadManagerState>('idle')
-  const [plannendElements, setPlannendElements] = useState<DMQueueElement[]>([])
+  const [queuedElements, setQueuedElements] = useState<DMQueueElement[]>([])
   const [currentElement, setCurrentElement] = useState<DMQueueElement>()
   const [finishedElem, setFinishedElem] = useState<DMQueueElement[]>()
 
@@ -24,7 +22,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     setRefreshing(true)
     window.api.getDMQueueInformation().then(({ elements, state }: DMQueue) => {
       setCurrentElement(elements[0])
-      setPlannendElements([...elements.slice(1)])
+      setQueuedElements([...elements.slice(1)])
       setRefreshing(false)
       setState(state)
     })
@@ -37,7 +35,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
       ) => {
         if (elements) {
           setCurrentElement(elements[0])
-          setPlannendElements([...elements.slice(1)])
+          setQueuedElements([...elements.slice(1)])
           setState(state)
         }
       }
@@ -52,7 +50,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     window.api.getDMQueueInformation().then(({ finished }: DMQueue) => {
       setFinishedElem(finished)
     })
-  }, [plannendElements.length, appName])
+  }, [queuedElements.length, appName])
 
   // Track the screen view once and only once
   useEffect(() => {
@@ -61,11 +59,6 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
 
   if (refreshing) {
     return <UpdateComponent />
-  }
-
-  const handleClearList = () => {
-    setFinishedElem([])
-    downloadManagerStore.set('finished', [])
   }
 
   const doneElements =
@@ -84,81 +77,57 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     */
 
   return (
-    <div className="contentContainer">
-      <h3
-        style={{
-          textAlign: 'left'
-        }}
-      >
-        {t('download-manager.title', 'Downloads')}
-      </h3>
-      {
-        <>
-          <ProgressHeader state={state} appName={appName} />
-          {currentElement && (
-            <div className="downloadManager">
+    <>
+      <Background style={{ position: 'absolute' }}></Background>
+      <div className="contentContainer">
+        <h3 className={styles.title}>
+          {t('download-manager.title_dm', 'Download Manager')}
+        </h3>
+        <Tabs
+          defaultValue="downloading"
+          classNames={getTabsClassNames(
+            { list: styles.tabsList, panel: styles.tabsPanel },
+            { list: 'outline' }
+          )}
+        >
+          <Tabs.List>
+            <Tabs.Tab value="downloading">Downloading</Tabs.Tab>
+            <Tabs.Tab value="queued">Queued</Tabs.Tab>
+            <Tabs.Tab value="downloaded">Downloaded</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value="downloading">
+            <div className={styles.downloadManager}>
               <div
                 style={
                   !currentElement ? { backgroundColor: 'transparent' } : {}
                 }
-                className="downloadList"
+                className={styles.downloadList}
               >
-                <h5 className="downloadManagerCurrentSectionTitle">
-                  {t('queue.label.downloading', 'Downloading')}
-                </h5>
-                <div className="dmItemList">
-                  <DownloadManagerHeader time="started" />
-                  <DownloadManagerItem
-                    element={currentElement}
-                    current={true}
-                    state={state}
-                  />
-                </div>
+                <DownloadTable
+                  elements={currentElement ? [currentElement] : []}
+                  time="started"
+                  isCurrent={true}
+                  state={state}
+                />
               </div>
             </div>
-          )}
-          <h5 className="downloadManagerQueuedSectionTitle">
-            {t('queue.label.queued', 'Queued')}
-          </h5>
-          <div className="dmItemList">
-            <DownloadManagerHeader time="queued" />
-            {plannendElements.length > 0 ? (
-              plannendElements.map((el) => (
-                <DownloadManagerItem
-                  key={el.params.appName}
-                  element={el}
-                  current={false}
-                />
-              ))
-            ) : (
-              <DownloadManagerItem current={false} />
-            )}
-          </div>
-        </>
-      }
-      {!!doneElements?.length && (
-        <div className="downloadManager">
-          <div className="downloadList">
-            <span>
-              <h5 className="downloadManagerQueuedSectionTitle">
-                {t('queue.label.finished', 'Completed')}
-                <button
-                  className="button is-text"
-                  onClick={() => handleClearList()}
-                >
-                  {t('queue.label.clear', 'Clear List')}
-                </button>
-              </h5>
-            </span>
-            <div className="dmItemList">
-              <DownloadManagerHeader time="finished" />
-              {doneElements.map((el, key) => (
-                <DownloadManagerItem key={key} element={el} current={false} />
-              ))}
+          </Tabs.Panel>
+
+          <Tabs.Panel value="queued">
+            <div className={styles.dmItemList}>
+              <DownloadTable elements={queuedElements} time="queued" />
             </div>
-          </div>
-        </div>
-      )}
-    </div>
+          </Tabs.Panel>
+          <Tabs.Panel value="downloaded">
+            <div className={styles.downloadManager}>
+              <div className={styles.downloadList}>
+                <DownloadTable elements={doneElements} time="finished" />
+              </div>
+            </div>
+          </Tabs.Panel>
+        </Tabs>
+        <ProgressHeader state={state} appName={appName} />
+      </div>
+    </>
   )
 })

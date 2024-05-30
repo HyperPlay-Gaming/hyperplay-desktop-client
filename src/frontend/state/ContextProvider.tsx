@@ -12,17 +12,6 @@ const initialContext: ContextType = {
     login: async () => Promise.resolve(''),
     logout: async () => Promise.resolve()
   },
-  amazon: {
-    getLoginData: async () =>
-      Promise.resolve({
-        client_id: '',
-        code_verifier: '',
-        serial: '',
-        url: ''
-      }),
-    login: async () => Promise.resolve(''),
-    logout: async () => Promise.resolve()
-  },
   error: false,
   handleLayout: () => null,
   layout: 'grid',

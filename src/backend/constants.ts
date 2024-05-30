@@ -63,7 +63,6 @@ const defaultWinePrefix = join(
   'default'
 )
 const anticheatDataPath = join(appConfigFolder, 'areweanticheatyet.json')
-const nileConfigPath = join(appFolder, 'nile_config', 'nile')
 const runtimePath = join(toolsPath, 'runtimes')
 const userInfo = join(legendaryConfigPath, 'user.json')
 const imagesCachePath = join(appConfigFolder, 'images-cache')
@@ -73,13 +72,8 @@ const cachedUbisoftInstallerPath = join(
   'UbisoftConnectInstaller.exe'
 )
 
-const {
-  currentLogFile,
-  lastLogFile,
-  legendaryLogFile,
-  gogdlLogFile,
-  nileLogFile
-} = createNewLogFileAndClearOldOnes()
+const { currentLogFile, lastLogFile, legendaryLogFile, gogdlLogFile } =
+  createNewLogFileAndClearOldOnes()
 
 const gogdlAuthConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
@@ -89,9 +83,6 @@ const vulkanHelperBin = fixAsarPath(
 )
 const installed = join(legendaryConfigPath, 'installed.json')
 const legendaryMetadata = join(legendaryConfigPath, 'metadata')
-const nileInstalled = join(nileConfigPath, 'installed.json')
-const nileLibrary = join(nileConfigPath, 'library.json')
-const nileUserData = join(nileConfigPath, 'user.json')
 const fallBackImage = 'fallback'
 const epicLoginUrl = 'https://legendary.gl/epiclogin'
 const sidInfoUrl =
@@ -240,7 +231,6 @@ export {
   lastLogFile,
   legendaryLogFile,
   gogdlLogFile,
-  nileLogFile,
   discordLink,
   twitterLink,
   execOptions,
@@ -293,9 +283,5 @@ export {
   valistListingsApiUrl,
   mainReleaseChannelName,
   vulkanHelperBin,
-  nileConfigPath,
-  nileInstalled,
-  nileLibrary,
-  nileUserData,
   cachedUbisoftInstallerPath
 }

@@ -10,7 +10,7 @@ import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 
 type Command = 'ping' | 'launch' | 'otp-deeplink'
 
-const RUNNERS = ['hyperplay', 'legendary', 'gog', 'nile', 'sideload']
+const RUNNERS = ['hyperplay', 'legendary', 'gog', 'sideload']
 
 /**
  * Handles a protocol request
@@ -118,8 +118,6 @@ async function handlePing(arg: string) {
  * // => 'Received launch! Runner: hyperplay, Arg: 123'
  * handleLaunch('legendary', '123')
  * // => 'Received launch! Runner: legendary, Arg: 123'
- * handleLaunch('nile', '123')
- * // => 'Received launch! Runner: nile, Arg: 123'
  **/
 async function handleLaunch(
   runner: Runner | undefined,
@@ -177,10 +175,6 @@ async function handleLaunch(
  * @example
  * findGame('gog', '123')
  * // => { app_name: '123', title: '123', is_installed: true, runner: 'gog' ...}
- * findGame('legendary', '123')
- * // => { app_name: '123', title: '123', is_installed: true, runner: 'legendary' ...}
- * findGame('nile', '123')
- * // => { app_name: '123', title: '123', is_installed: true, runner: 'nile' ...}
  **/
 async function findGame(
   runner: Runner | undefined,

@@ -1,0 +1,21 @@
+.playIcon {
+  fill: var(--color-success-200);
+}
+
+.pauseIcon {
+  fill: var(--color-tertiary-600);
+}
+
+.downloadIcon {
+  fill: var(--color-tertiary-600);
+}
+
+.iconContainer {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-md-fixed);
+
+  > button {
+    display: inline-flex;
+  }
+}
