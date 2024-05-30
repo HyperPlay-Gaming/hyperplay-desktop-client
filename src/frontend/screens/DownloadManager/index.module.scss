@@ -40,9 +40,14 @@
   text-align: initial;
 }
 
-.dmItemList {
-  border: solid 2px var(--input-background);
-  background-color: var(--input-background);
-  border-radius: 6px;
-  margin: var(--space-3xs) 0px;
+.tabsList {
+  margin: var(--space-2lg-fixed) 0px;
+}
+
+.tabsPanel {
+  margin-bottom: var(--space-xl-fixed);
+}
+
+.title {
+  text-align: left;
 }
