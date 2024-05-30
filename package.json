@@ -393,7 +393,7 @@
       "jsdom>ws>utf-8-validate": true,
       "wagmi>@wagmi/connectors>cbw-sdk>keccak": true,
       "viem>ws>bufferutil": true,
-      "viem>ws>utf-8-validate": true
+      "viem>ws>utf-8-validate": true,
       "@hyperplay/extension-importer>classic-level": true,
       "classic-level": false
     }
