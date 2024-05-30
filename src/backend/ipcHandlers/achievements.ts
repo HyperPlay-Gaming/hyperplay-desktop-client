@@ -268,3 +268,11 @@ async function getQuestRewardSignature(
 ipcMain.handle('getQuestRewardSignature', async (_e, ...args) =>
   getQuestRewardSignature(...args)
 )
+
+ipcMain.handle('getDepositContractAddress', async (_e, questId) => {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/${questId}/deposit-contracts`
+
+  const result = await fetch(url)
+  const resultJson = await result.json()
+  return resultJson
+})

@@ -936,3 +936,8 @@ export interface RewardClaimSignature {
   nonce: string
   expiration: number
 }
+
+export interface DepositContract {
+  contract_address: string
+  chain_id: number
+}

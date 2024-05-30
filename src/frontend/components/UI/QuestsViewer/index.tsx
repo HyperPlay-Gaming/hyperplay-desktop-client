@@ -75,8 +75,22 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
 
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
   const session = useAuthSession()
-  const accounts = session.data?.linkedAccounts
-  const steamIsLinked = accounts?.has('steam')
+  // const accounts = session.data?.linkedAccounts
+  // const steamIsLinked = accounts?.has('steam')
+
+  function getCTAText() {
+    // TODO: uncomment when rep quests are enabled
+    // if (questMeta.type === 'REPUTATION_QUEST' && !steamIsLinked){
+    //   return t('quest.connectSteamAccount', 'Connect Steam account')
+    // }
+    // else if (questMeta.type === 'PLAY_STREAK'){
+    if (userId) {
+      return t('quest.claimAll', 'Claim all')
+    } else {
+      return t('quest.signIn', 'Sign in')
+    }
+    // }
+  }
   const userId = session.data?.userId
   const i18n = {
     reward: t('quest.reward', 'Reward'),
@@ -90,9 +104,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       `You need to have completed {{percent}}% of the achievements in one of these games.`,
       { percent: questMeta?.eligibility?.completion_threshold ?? '??' }
     ),
-    claim: steamIsLinked
-      ? t('quest.claimAll', 'Claim all')
-      : t('quest.connectSteamAccount', 'Connect Steam account'),
+    claim: getCTAText(),
     questType: {
       REPUTATION: t('quest.reputation', 'Reputation')
     }
@@ -115,12 +127,13 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           questMeta.id,
           reward_i.id
         )
-      const fxnName = 'withdraw' + reward_i.reward_type
+
+      const depositContractAddrss = await window.api.getDepositContractAddress(questMeta.id)
       if (reward_i.reward_type === 'ERC20') {
         writeContract({
-          address: '0x',
+          address: depositContractAddrss,
           abi: questRewardAbi,
-          functionName: fxnName as 'withdrawERC20',
+          functionName: 'withdrawERC20',
           args: [
             BigInt(questMeta.id),
             reward_i.contract_address,
@@ -154,17 +167,17 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       })),
       i18n,
       onClaimClick: async () => {
-        if (questMeta.type === 'REPUTATION_QUEST' && !steamIsLinked){
-          window.api.signInWithProvider('steam')
+        // TODO: uncomment when rep quests are enabled
+        // if (questMeta.type === 'REPUTATION_QUEST' && !steamIsLinked){
+        //   window.api.signInWithProvider('steam')
+        // }
+        // else if (questMeta.type === 'PLAY_STREAK'){
+        if (userId) {
+          mintRewards(questMeta.rewards)
+        } else {
+          // prompt sign in
         }
-        else if (questMeta.type === 'PLAY_STREAK'){
-          if (userId){
-            mintRewards(questMeta.rewards)
-          }
-          else {
-            // prompt sign in
-          }
-        }
+        // }
       },
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
