@@ -20,9 +20,6 @@ jobs:
         run: >
           git config --global url."https://github.com/".insteadOf
           ssh://git@github.com/
-      - name: Check extension helper
-        id: extDiff
-        run: cd src/backend/hyperplay-extension-helper && echo "EXT_HELPER_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"
       - name: Check overlay
         id: overlayDiff
         run: cd src/backend/hyperplay-overlay && echo "OVERLAY_DIFF=$(git log origin/main...HEAD)" >> "$GITHUB_OUTPUT"

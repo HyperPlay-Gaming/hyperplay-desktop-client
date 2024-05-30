@@ -4,3 +4,4 @@ flatpak/.flatpak-builder/
 vite.config.ts
 **/__mocks__/**
 sign/**
+buildResetExtension.js

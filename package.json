@@ -169,6 +169,7 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/ui": "^1.2.32",
+    "@hyperplay/utils": "^0.0.12",
     "@mantine/carousel": "^7.5.1",
     "@mantine/core": "^7.5.1",
     "@mantine/dropzone": "^7.5.1",
@@ -197,7 +198,7 @@
     "auto-launch": "^5.0.6",
     "axios": "^1.6.8",
     "bn.js": "^5.2.1",
-    "classic-level": "1.2.0",
+    "classic-level": "^1.4.1",
     "classnames": "^2.3.1",
     "compare-versions": "^6.0.0-rc.1",
     "crc": "^4.1.1",
@@ -293,7 +294,7 @@
     "prepare": "husky install",
     "prettier": "prettier --check .",
     "prettier-fix": "prettier --write .",
-    "pkgResetExtension:base": "pkg ./src/backend/hyperplay-extension-helper/resetExtension.js --out-path ./public/extensions/resetExecutables",
+    "pkgResetExtension:base": "node ./buildResetExtension.js",
     "pkgResetExtension:arm64:mac": "yarn pkgResetExtension:base -t node18-macos-arm64",
     "pkgResetExtension:x64:mac": "yarn pkgResetExtension:base -t node18-macos-x64",
     "pkgResetExtension:x64:win": "yarn pkgResetExtension:base -t node18-win-x64",
@@ -358,6 +359,8 @@
     "vite-plugin-svgr": "^2.2.2"
   },
   "optionalDependencies": {
+    "@hyperplay/extension-importer": "^0.0.4",
+    "@hyperplay/extension-provider": "^0.0.5",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/providers": "^0.0.5",
     "@hyperplay/proxy-server": "^0.0.9"
@@ -375,7 +378,6 @@
       "@rudderstack/rudder-sdk-node>bull>msgpackr>msgpackr-extract": true,
       "@testing-library/dom>aria-query>@babel/runtime-corejs3>core-js-pure": true,
       "@valist/sdk>files-from-path>ipfs-unixfs>protobufjs": true,
-      "classic-level": true,
       "discord-rich-presence-typescript>discord-rpc>register-scheme": false,
       "electron": true,
       "electron-vite>esbuild": true,
@@ -385,7 +387,9 @@
       "postinstall-postinstall": true,
       "@rudderstack/rudder-sdk-node": true,
       "jsdom>ws>bufferutil": true,
-      "jsdom>ws>utf-8-validate": true
+      "jsdom>ws>utf-8-validate": true,
+      "@hyperplay/extension-importer>classic-level": true,
+      "classic-level": false
     }
   }
 }

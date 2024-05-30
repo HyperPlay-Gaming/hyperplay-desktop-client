@@ -1,6 +1,6 @@
 import { spawnSync } from 'child_process'
 import { homedir, platform } from 'os'
-import { join, resolve } from 'path'
+import { join } from 'path'
 import { parse } from '@node-steam/vdf'
 
 import { GameConfigVersion, GlobalConfigVersion } from 'common/types'
@@ -12,6 +12,14 @@ import { existsSync, mkdirSync, readFileSync } from 'graceful-fs'
 import { GlobalConfig } from './config'
 import { TypeCheckedStoreBackend } from './electron_store'
 import { DEV_PORTAL_URL } from 'common/constants'
+import {
+  configFolder,
+  appConfigFolder,
+  publicDir,
+  fixAsarPath,
+  icon
+} from './constants/folders'
+export * from './constants/folders'
 
 const configStore = new TypeCheckedStoreBackend('configStore', {
   cwd: 'store'
@@ -39,10 +47,8 @@ const currentGlobalConfigVersion: GlobalConfigVersion = 'v0'
 
 const flatPakHome = env.XDG_DATA_HOME?.replace('/data', '') || homedir()
 const userHome = homedir()
-const configFolder = app.getPath('appData')
 const appFolder = join(configFolder, 'hyperplay')
 const legendaryConfigPath = join(appFolder, 'legendaryConfig', 'legendary')
-const appConfigFolder = join(configFolder, 'hyperplay')
 const configPath = join(appConfigFolder, 'config.json')
 const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
 
@@ -69,9 +75,7 @@ const cachedUbisoftInstallerPath = join(
 const { currentLogFile, lastLogFile, legendaryLogFile, gogdlLogFile } =
   createNewLogFileAndClearOldOnes()
 
-const publicDir = resolve(__dirname, '..', app.isPackaged ? '' : '../public')
 const gogdlAuthConfig = join(app.getPath('userData'), 'gog_store', 'auth.json')
-const icon = fixAsarPath(join(publicDir, 'app_icon.png'))
 const iconDark = fixAsarPath(join(publicDir, 'trayIconDark24x24.png'))
 const iconLight = fixAsarPath(join(publicDir, 'trayIconLight24x24.png'))
 const vulkanHelperBin = fixAsarPath(
@@ -137,18 +141,6 @@ function getShell() {
     default:
       return '/bin/bash'
   }
-}
-
-/**
- * Fix path for packed files with asar, else will do nothing.
- * @param origin  original path
- * @returns fixed path
- */
-function fixAsarPath(origin: string): string {
-  if (!origin.includes('app.asar.unpacked')) {
-    return origin.replace('app.asar', 'app.asar.unpacked')
-  }
-  return origin
 }
 
 export function getSteamCompatFolder() {

@@ -1,7 +1,3 @@
-import {
-  ImportableBrowser,
-  MetaMaskInitMethod
-} from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import { getPlatformName, getStoreName } from 'backend/utils'
 import { AppPlatforms, InstallPlatform, Runner } from 'common/types'
 import { PROVIDERS } from 'common/types/proxy-types'
@@ -63,8 +59,8 @@ export interface WalletConnected {
 export interface MetaMaskInitialized {
   event: 'MetaMask Initialized'
   properties?: {
-    initMethod: MetaMaskInitMethod
-    browser?: ImportableBrowser
+    initMethod: string
+    browser?: string
   }
   sensitiveProperties?: never
 }
