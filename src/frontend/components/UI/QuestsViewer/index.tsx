@@ -22,7 +22,7 @@ export interface QuestsViewerProps {
 }
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
-  const { writeContract } = useWriteContract()
+  const { writeContract, error, status } = useWriteContract()
   const { switchChainAsync } = useSwitchChain()
   const account = useAccount()
   const questsResults = useGetQuests(appName)
@@ -180,7 +180,9 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         // }
       },
       collapseIsOpen,
-      toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
+      toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen),
+      errorMessage: error?.message,
+      isMinting: status === 'pending'
     }
     questDetails = (
       <QuestDetails
