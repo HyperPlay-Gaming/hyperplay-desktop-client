@@ -89,6 +89,7 @@ interface HyperPlaySyncIPCFunctions {
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
   toggleOverlay: () => void
+  goToGamePage: (appName: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {

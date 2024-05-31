@@ -28,6 +28,7 @@ import {
 } from '../../constants'
 import { METAMASK_SNAPS_URL } from 'common/constants'
 import storeAuthState from 'frontend/state/storeAuthState'
+import { getGameInfo } from 'backend/storeManagers/gog/library'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -123,6 +124,14 @@ function WebView() {
   useEffect(() => {
     window.api.trackScreen('WebView', { url: startUrl, runner })
   }, [startUrl, runner])
+
+  useEffect(() => {
+    window.api.handleGoToGamePage((_, gameId) => {
+      const gameInfo = getGameInfo(gameId)
+      navigate(`/gamepage/hyperplay/${gameId}`, { state: { gameInfo, fromDM: false } })
+    }
+    )
+  }, [])
 
   useLayoutEffect(() => {
     const webview = webviewRef.current
