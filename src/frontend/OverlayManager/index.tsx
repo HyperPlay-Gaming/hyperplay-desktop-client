@@ -11,6 +11,7 @@ import WebviewControls from 'frontend/components/UI/WebviewControls'
 import { WagmiProvider } from 'wagmi'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { config } from './config'
+import AuthModal from 'frontend/components/UI/AuthModal'
 const queryClient = new QueryClient()
 
 const OverlayManager = observer(function ({
@@ -41,6 +42,7 @@ const OverlayManager = observer(function ({
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
+        <AuthModal />
         <div
           className={BrowserGameStyles.overlayContainer}
           style={style}

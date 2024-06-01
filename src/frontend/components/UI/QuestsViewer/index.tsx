@@ -13,16 +13,20 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import { useWriteContract, useAccount, useSwitchChain } from 'wagmi'
-import { Reward, RewardClaimSignature } from 'common/types'
+import { DepositContract, Reward, RewardClaimSignature } from 'common/types'
 import { getAmount } from '@hyperplay/utils'
 import { questRewardAbi } from 'frontend/abis/RewardsAbi'
+import authState from 'frontend/state/authState'
 
 export interface QuestsViewerProps {
   projectId: string
 }
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
-  const { writeContract, error, status } = useWriteContract()
+  const { writeContract, error, isError, status } = useWriteContract()
+  if (isError) {
+    console.error(error)
+  }
   const { switchChainAsync } = useSwitchChain()
   const account = useAccount()
   const questsResults = useGetQuests(appName)
@@ -128,10 +132,15 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           reward_i.id
         )
 
-      const depositContractAddrss = await window.api.getDepositContractAddress(questMeta.id)
+      const depositContractAddress: DepositContract =
+        await window.api.getDepositContractAddress(questMeta.id)
       if (reward_i.reward_type === 'ERC20') {
+        console.log(
+          'calling write contract on ',
+          depositContractAddress.contract_address
+        )
         writeContract({
-          address: depositContractAddrss,
+          address: depositContractAddress.contract_address,
           abi: questRewardAbi,
           functionName: 'withdrawERC20',
           args: [
@@ -176,12 +185,15 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           mintRewards(questMeta.rewards)
         } else {
           // prompt sign in
+          authState.openSignInModal()
         }
         // }
       },
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen),
-      errorMessage: error?.message,
+      errorMessage: isError
+        ? t('quest.errorMessage', 'There was an error with the transaction.')
+        : undefined,
       isMinting: status === 'pending'
     }
     questDetails = (

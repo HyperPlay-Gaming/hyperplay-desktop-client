@@ -938,6 +938,6 @@ export interface RewardClaimSignature {
 }
 
 export interface DepositContract {
-  contract_address: string
+  contract_address: `0x${string}`
   chain_id: number
 }
