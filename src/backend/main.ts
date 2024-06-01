@@ -175,7 +175,11 @@ import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
-import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
+import {
+  closeOverlay,
+  overlayIsRunning,
+  toggleOverlay
+} from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
 import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
@@ -410,9 +414,13 @@ if (!gotTheLock) {
   app.quit()
 } else {
   app.on('second-instance', (event, argv) => {
-    // Someone tried to run a second instance, we should focus our window.
-    const mainWindow = getMainWindow()
-    mainWindow?.show()
+    // Someone tried to run a second instance, we should focus the overlay or the main window if no overlay is running.
+    if (overlayIsRunning()) {
+      toggleOverlay({ action: 'ON' })
+    } else {
+      const mainWindow = getMainWindow()
+      mainWindow?.show()
+    }
 
     handleProtocol(argv)
   })
