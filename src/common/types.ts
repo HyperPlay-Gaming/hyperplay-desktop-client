@@ -11,7 +11,6 @@ import {
 } from '@valist/sdk/dist/typesShared'
 import { Channel, ContractMetadata } from '@valist/sdk/dist/typesApi'
 import { IconDefinition } from '@fortawesome/free-solid-svg-icons'
-import { NileInstallPlatform } from './types/nile'
 import { DropdownItemType } from '@hyperplay/ui'
 
 export type {
@@ -46,7 +45,7 @@ export type WrapRendererCallback<
   ...args: [...Parameters<TFunction>]
 ) => ReturnType<TFunction>
 
-export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay' | 'nile'
+export type Runner = 'legendary' | 'gog' | 'sideload' | 'hyperplay'
 
 // NOTE: Do not put enum's in this module or it will break imports
 
@@ -135,7 +134,7 @@ export interface ExtraInfo {
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 
 export interface GameInfo {
-  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload' | 'nile'
+  runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload'
   store_url?: string
   app_name: string
   art_cover: string
@@ -560,7 +559,6 @@ export type InstallPlatform =
   | LegendaryInstallPlatform
   | GogInstallPlatform
   | AppPlatforms
-  | NileInstallPlatform
   | 'Browser'
 
 export type ConnectivityChangedCallback = (

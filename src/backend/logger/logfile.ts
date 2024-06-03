@@ -16,7 +16,6 @@ interface createLogFileReturn {
   lastLogFile: string
   legendaryLogFile: string
   gogdlLogFile: string
-  nileLogFile: string
 }
 
 let longestPrefix = 0
@@ -48,12 +47,10 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
   const newLogFile = join(logDir, `hyperplay-${fmtDate}.log`)
   const newLegendaryLogFile = join(logDir, `legendary-${fmtDate}.log`)
   const newGogdlLogFile = join(logDir, `gogdl-${fmtDate}.log`)
-  const newNileLogFile = join(logDir, `nile-${fmtDate}.log`)
 
   createLogFile(newLogFile)
   createLogFile(newLegendaryLogFile)
   createLogFile(newGogdlLogFile)
-  createLogFile(newNileLogFile)
 
   // Clean out logs that are more than a month old
   if (existsSync(logDir)) {
@@ -68,9 +65,9 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
         .map((dirent) => dirent.name)
 
       logs.forEach((log) => {
-        if (log.match(/(hyperplay|legendary|gogdl|nile)-/)) {
+        if (log.match(/(hyperplay|legendary|gogdl)-/)) {
           const dateString = log
-            .replace(/(hyperplay|legendary|gogdl|nile)-/, '')
+            .replace(/(hyperplay|legendary|gogdl)-/, '')
             .replace('.log', '')
             .replaceAll('_', ':')
           const logDate = new Date(dateString)
@@ -91,8 +88,7 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
     currentLogFile: '',
     lastLogFile: '',
     legendaryLogFile: '',
-    gogdlLogFile: '',
-    nileLogFile: ''
+    gogdlLogFile: ''
   })
 
   if (!isNewInstance) {
@@ -103,7 +99,6 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
   logs.currentLogFile = newLogFile
   logs.legendaryLogFile = newLegendaryLogFile
   logs.gogdlLogFile = newGogdlLogFile
-  logs.nileLogFile = newNileLogFile
   configStore.set('general-logs', logs)
 
   // get longest prefix to log lines in a kind of table
@@ -126,8 +121,7 @@ export function getLogFile(appNameOrRunner: string): string {
     currentLogFile: '',
     lastLogFile: '',
     legendaryLogFile: '',
-    gogdlLogFile: '',
-    nileLogFile: ''
+    gogdlLogFile: ''
   })
 
   switch (appNameOrRunner) {
@@ -137,8 +131,6 @@ export function getLogFile(appNameOrRunner: string): string {
       return logs.legendaryLogFile
     case 'gogdl':
       return logs.gogdlLogFile
-    case 'nile':
-      return logs.nileLogFile
     default:
       return join(gamesConfigPath, appNameOrRunner + '-lastPlay.log')
   }

@@ -69,7 +69,6 @@ function LogSettings() {
   const hyperPlayLibrary = libraryState.hyperPlayLibrary
   const epicLibrary = libraryState.epicLibrary
   const gogLibrary = libraryState.gogLibrary
-  const amazonLibrary = libraryState.amazonLibrary
   const sideloadedLibrary = libraryState.sideloadedLibrary
 
   const [logFileContent, setLogFileContent] = useState<string>('')
@@ -87,12 +86,11 @@ function LogSettings() {
     games = games.concat(hyperPlayLibrary.filter((game) => game.is_installed))
     games = games.concat(epicLibrary.filter((game) => game.is_installed))
     games = games.concat(gogLibrary.filter((game) => game.is_installed))
-    games = games.concat(amazonLibrary.filter((game) => game.is_installed))
     games = games.concat(sideloadedLibrary.filter((game) => game.is_installed))
     games = games.sort((game1, game2) => game1.title.localeCompare(game2.title))
 
     setInstalledGames(games)
-  }, [epicLibrary, gogLibrary, amazonLibrary, sideloadedLibrary])
+  }, [epicLibrary, gogLibrary, sideloadedLibrary])
 
   const getLogContent = () => {
     window.api.getLogContent(showLogOf).then((content: string) => {
@@ -145,8 +143,7 @@ function LogSettings() {
           {[
             ['HyperPlay', 'hyperplay'],
             ['Epic/Legendary', 'legendary'],
-            ['GOG', 'gogdl'],
-            ['Amazon/Nile', 'nile']
+            ['GOG', 'gogdl']
           ].map((log) => {
             const [label, value] = log
             return (

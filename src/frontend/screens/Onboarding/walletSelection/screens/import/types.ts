@@ -2,7 +2,7 @@ import {
   ImportableBrowser,
   MetaMaskImportOptions,
   MetaMaskInitMethod
-} from 'backend/hyperplay-extension-helper/ipcHandlers/types'
+} from '@hyperplay/utils'
 
 export interface ImportProps {
   importOptions: MetaMaskImportOptions

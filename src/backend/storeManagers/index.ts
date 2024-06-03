@@ -2,13 +2,11 @@ import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as SideloadGameManager from 'backend/storeManagers/sideload/games'
 import * as GOGGameManager from 'backend/storeManagers/gog/games'
 import * as LegendaryGameManager from 'backend/storeManagers/legendary/games'
-import * as NileGameManager from 'backend/storeManagers/nile/games'
 
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
 import * as SideloadLibraryManager from 'backend/storeManagers/sideload/library'
 import * as GOGLibraryManager from 'backend/storeManagers/gog/library'
 import * as LegendaryLibraryManager from 'backend/storeManagers/legendary/library'
-import * as NileLibraryManager from 'backend/storeManagers/nile/library'
 import { GameManager, LibraryManager } from 'common/types/game_manager'
 
 import { logInfo, RunnerToLogPrefixMap } from 'backend/logger/logger'
@@ -29,15 +27,13 @@ export const gameManagerMap: Record<Runner, GameManager> = {
   hyperplay: HyperPlayGameManager,
   sideload: SideloadGameManager,
   gog: GOGGameManager,
-  legendary: LegendaryGameManager,
-  nile: NileGameManager
+  legendary: LegendaryGameManager
 }
 
 export const libraryManagerMap: Record<Runner, LibraryManager> = {
   hyperplay: HyperPlayLibraryManager,
   legendary: LegendaryLibraryManager,
   gog: GOGLibraryManager,
-  nile: NileLibraryManager,
   sideload: SideloadLibraryManager
 }
 
@@ -161,7 +157,6 @@ export async function sendGameUpdatesNotifications() {
 export async function initStoreManagers() {
   await LegendaryLibraryManager.initLegendaryLibraryManager()
   await GOGLibraryManager.refresh()
-  await NileLibraryManager.initNileLibraryManager()
   loadEpicHyperPlayGameInfoMap()
 }
 

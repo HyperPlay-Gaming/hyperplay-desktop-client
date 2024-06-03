@@ -3,7 +3,6 @@ import { PROVIDERS } from 'common/types/proxy-types'
 import { clipboard, ipcMain } from 'electron'
 import { JsonRpcCallback } from 'common/types'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
-import { extensionProvider } from 'backend/hyperplay-extension-helper/extensionProvider'
 import { updatePopupInOverlay } from 'backend/hyperplay-overlay'
 import { trackEvent } from 'backend/metrics/metrics'
 import defaultProviderStore from './provider_store'
@@ -26,13 +25,14 @@ ipcMain?.handle(
     providerSelection: PROVIDERS,
     isBootstrapping = false
   ): Promise<string> {
+    const extensionProvider = await import('@hyperplay/extension-provider')
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     const api: any = {
       backendEvents,
       updatePopupInOverlay,
       logError,
       logInfo,
-      extensionProvider
+      extensionProvider: extensionProvider.extensionProvider
     }
     const providers = await import('@hyperplay/providers')
     const baseUri = await providers.getConnectionUri(
@@ -84,7 +84,8 @@ ipcMain.handle('providerRequest', async (ev, args) => {
 ipcMain.handle('sendRequest', async (ev, args: unknown[]) => {
   const providers = await import('@hyperplay/providers')
   // this will actually call request on the wrapped EIP1193 provider, not the deprecated send method
-  const result = await providers.provider.send('send', args)
+  const [method, ...rest] = args
+  const result = await providers.provider.send(method as string, rest)
   return result
 })
 

@@ -1,7 +1,3 @@
-import {
-  initExtension,
-  resetExtension
-} from 'backend/hyperplay-extension-helper/ipcHandlers/index'
 import { initImagesCache } from './images_cache'
 import { downloadAntiCheatData } from './anticheat/utils'
 import {
@@ -47,9 +43,7 @@ import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
 import { GOGUser } from './storeManagers/gog/user'
-import { NileUser } from './storeManagers/nile/user'
 import setup from './storeManagers/gog/setup'
-import nileSetup from './storeManagers/nile/setup'
 import {
   clearCache,
   execAsync,
@@ -117,7 +111,6 @@ import { getFonts } from 'font-list'
 import { runWineCommand, verifyWinePrefix } from './launcher'
 import shlex from 'shlex'
 import { initQueue } from './downloadmanager/downloadqueue'
-import * as ExtensionHelper from './hyperplay-extension-helper/extensionProvider'
 import {
   initOnlineMonitor,
   isOnline,
@@ -172,7 +165,7 @@ import './utils/ipc_handler'
 import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
-import 'backend/hyperplay-extension-helper/usbHandler'
+import 'backend/extension/provider'
 import 'backend/proxy/ipcHandlers.ts'
 
 import './ipcHandlers'
@@ -192,7 +185,6 @@ async function startProxyServer() {
   try {
     const proxyServer = await import('@hyperplay/proxy-server')
     proxyServer.initServer(undefined)
-    console.log('Server started')
     logInfo('Proxy server started', LogPrefix.HyperPlay)
   } catch (err) {
     logError(`Error starting proxy server ${err}`, LogPrefix.HyperPlay)
@@ -313,8 +305,6 @@ async function initializeWindow(): Promise<BrowserWindow> {
       backendEvents.emit('removePopup')
     }
   })
-
-  ExtensionHelper.initExtensionProvider(mainWindow)
 
   if ((isSteamDeckGameMode || isCLIFullscreen) && !isCLINoGui) {
     logInfo(
@@ -462,7 +452,7 @@ if (!gotTheLock) {
     const openOverlayAcceleratorMac = 'Option+X'
     globalShortcut.register(openOverlayAcceleratorMac, toggleOverlay)
 
-    initExtension()
+    initExtension(hpApi)
 
     initOnlineMonitor()
 
@@ -848,8 +838,8 @@ ipcMain.handle('getPlatform', () => process.platform)
 
 ipcMain.handle('showUpdateSetting', () => !isFlatpak)
 
-ipcMain.on('clearCache', (event) => {
-  clearCache()
+ipcMain.on('clearCache', (event, showDialog, fromVersionChange = false) => {
+  clearCache(undefined, fromVersionChange)
   sendFrontendMessage('refreshLibrary')
 
   showDialogBoxModalAuto({
@@ -869,7 +859,10 @@ ipcMain.on('resetApp', async () => {
 })
 
 ipcMain.on('resetExtension', async () => {
-  resetExtension()
+  const extensionImporter = await import('@hyperplay/extension-importer')
+  extensionImporter.resetExtension(hpApi)
+  ipcMain.emit('ignoreExitToTray')
+  app.quit()
 })
 
 ipcMain.on('createNewWindow', (e, url) => {
@@ -941,8 +934,6 @@ ipcMain.handle('getUserInfo', async () => {
   return LegendaryUser.getUserInfo()
 })
 
-ipcMain.handle('getAmazonUserInfo', async () => NileUser.getUserData())
-
 // Checks if the user have logged in with Legendary already
 ipcMain.handle('isLoggedIn', LegendaryUser.isLoggedIn)
 
@@ -951,12 +942,8 @@ ipcMain.handle('authGOG', async (event, code) => GOGUser.login(code))
 ipcMain.handle('logoutLegendary', LegendaryUser.logout)
 ipcMain.on('logoutGOG', GOGUser.logout)
 ipcMain.handle('getLocalPeloadPath', async () => {
-  return fixAsarPath(join(publicDir, '../preload/webviewPreload.js'))
+  return fixAsarPath(join(publicDir, 'webviewPreload.js'))
 })
-
-ipcMain.handle('getAmazonLoginData', NileUser.getLoginData)
-ipcMain.handle('authAmazon', async (event, data) => NileUser.login(data))
-ipcMain.handle('logoutAmazon', NileUser.logout)
 
 ipcMain.handle('getAlternativeWine', async () =>
   GlobalConfig.get().getAlternativeWine()
@@ -1850,9 +1837,6 @@ ipcMain.handle(
     if (runner === 'gog' && updated) {
       await setup(appName)
     }
-    if (runner === 'nile' && updated) {
-      await nileSetup(appName)
-    }
     if (runner === 'legendary' && updated) {
       await legendarySetup(appName)
     }
@@ -2018,3 +2002,5 @@ ipcMain.on('toggleOverlay', () => {
  */
 
 import './storeManagers/legendary/eos_overlay/ipc_handler'
+import { initExtension } from './extension/importer'
+import { hpApi } from './utils/hyperplay_api'

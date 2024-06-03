@@ -17,7 +17,6 @@ import { Category } from 'frontend/types'
 import { observer } from 'mobx-react-lite'
 import libraryState from '../../../../state/libraryState'
 import storeAuthState from 'frontend/state/storeAuthState'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export interface LibraryTopBarInterface {
   filters: DropdownItemType[]
@@ -38,13 +37,10 @@ export const LibraryTopBar = observer(
     otherFiltersData
   }: LibraryTopBarInterface): JSX.Element => {
     const { t } = useTranslation()
-    const flags = useFlags()
-    const ENABLE_AMAZON_STORE = flags.amazonStore
     const category = libraryState.category
 
     const isGOGLoggedin = storeAuthState.gog.username
     const isEpicLoggedin = storeAuthState.epic.username
-    const isAmazonLoggedin = storeAuthState.amazon.username
 
     return (
       <Tabs
@@ -74,11 +70,6 @@ export const LibraryTopBar = observer(
           {isGOGLoggedin ? (
             <Tabs.Tab value="gog">
               <div className="menu">GOG</div>
-            </Tabs.Tab>
-          ) : null}
-          {isAmazonLoggedin && ENABLE_AMAZON_STORE ? (
-            <Tabs.Tab value="nile">
-              <div className="menu">Amazon</div>
             </Tabs.Tab>
           ) : null}
           <Tabs.Tab value="sideload">

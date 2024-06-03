@@ -1,11 +1,11 @@
 import React from 'react'
 import { ImportAndCreateOptionsProps } from '../../types'
-import { ImportableBrowser } from 'backend/hyperplay-extension-helper/ipcHandlers/types'
 import ImportOption from 'frontend/screens/Onboarding/components/importOption'
 import { NavLink } from 'react-router-dom'
 import { t } from 'i18next'
 import styles from './index.module.scss'
 import { Collapse, Images } from '@hyperplay/ui'
+import { ImportableBrowser } from '@hyperplay/utils'
 
 export default function ImportAndCreateOptions({
   importOptions,
@@ -56,7 +56,7 @@ export default function ImportAndCreateOptions({
                 </span>
               </div>
             </div>
-            <NavLink to="/metamaskSecretPhrase">
+            <NavLink to="/metamaskHome">
               <ImportOption
                 override="recovery"
                 classNames={styles.importSecretRecoveryButton}

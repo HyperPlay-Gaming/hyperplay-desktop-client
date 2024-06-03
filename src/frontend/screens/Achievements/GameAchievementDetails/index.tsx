@@ -1,7 +1,6 @@
 import { GameAchievements, DropdownItemType } from '@hyperplay/ui'
 import React, { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import walletState from 'frontend/state/WalletState'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import AchievementState, {
@@ -20,7 +19,6 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const {
     achievementsToBeMinted,
     achievementsToBeUpdated,
-    isLoading,
     handleMint,
     handleUpdate
   } = MintAchievementsState
@@ -46,8 +44,6 @@ export default observer(function GameAchievementDetails(): JSX.Element {
   const handlePrevPage = () => {
     navigate('/achievements')
   }
-
-  const isDisabled = isLoading || !walletState.isConnected
 
   if (!summaryAchievement) return <></>
 
@@ -103,12 +99,12 @@ export default observer(function GameAchievementDetails(): JSX.Element {
       }}
       mintButtonProps={{
         onClick: handleMint,
-        disabled: achievementsToBeMinted.length === 0 ?? isDisabled,
+        disabled: achievementsToBeMinted.length === 0,
         totalToMint: achievementsToBeMinted.length
       }}
       updateButtonProps={{
         onClick: handleUpdate,
-        disabled: achievementsToBeUpdated.length === 0 ?? isDisabled,
+        disabled: achievementsToBeUpdated.length === 0,
         totalToUpdate: achievementsToBeUpdated.length
       }}
       progressKeyProps={{

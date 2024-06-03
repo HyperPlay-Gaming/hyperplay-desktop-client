@@ -13,7 +13,6 @@ export async function getInfoFromGamesDB(
   const storeMap: { [key in Runner]: string | undefined } = {
     legendary: 'epic',
     gog: 'gog',
-    nile: 'amazon',
     hyperplay: 'hyperplay',
     sideload: undefined
   }

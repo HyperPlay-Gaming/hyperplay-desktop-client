@@ -67,7 +67,7 @@
   min-width: calc(1.3 * var(--text-xs));
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (max-width: 1000px) {
   .alphaBadge,
   .hpTextLogo {
     display: none;

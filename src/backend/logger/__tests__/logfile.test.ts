@@ -65,8 +65,7 @@ describe('logger/logfile.ts', () => {
       currentLogFile: 'old/log/path/file.log',
       lastLogFile: '',
       legendaryLogFile: '',
-      gogdlLogFile: '',
-      nileLogFile: ''
+      gogdlLogFile: ''
     })
 
     jest.spyOn(app, 'requestSingleInstanceLock').mockImplementation(() => true)
@@ -77,8 +76,7 @@ describe('logger/logfile.ts', () => {
       currentLogFile: expect.any(String),
       lastLogFile: expect.any(String),
       legendaryLogFile: expect.any(String),
-      gogdlLogFile: expect.any(String),
-      nileLogFile: expect.any(String)
+      gogdlLogFile: expect.any(String)
     })
   })
 
@@ -86,7 +84,6 @@ describe('logger/logfile.ts', () => {
     expect(logfile.getLogFile('hyperplay')).toMatch(/hyperplay.*\.log$/)
     expect(logfile.getLogFile('legendary')).toMatch(/legendary.*\.log$/)
     expect(logfile.getLogFile('gogdl')).toMatch(/gogdl.*\.log$/)
-    expect(logfile.getLogFile('nile')).toMatch(/nile.*\.log$/)
     // get game log
     expect(logfile.getLogFile('MyApp')).toMatch(/MyApp.*\.log$/)
   })

@@ -22,9 +22,12 @@ class ExtensionHandlerState {
     }
   }
 
-  async handleOpenMMHomePage() {
+  async handleOpenMMHomePage(
+    event: Electron.IpcRendererEvent,
+    pathname: string
+  ) {
     runInAction(() => {
-      this.navigateTo = 'metamaskHome'
+      this.navigateTo = 'metamaskHome' + pathname
     })
   }
 

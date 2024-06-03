@@ -19,8 +19,7 @@ const RUNNER_TO_STORE = {
   legendary: 'Epic',
   gog: 'GOG',
   hyperplay: 'HyperPlay',
-  sideloaded: 'Other',
-  nile: 'Amazon'
+  sideloaded: 'Other'
 }
 
 export default observer(function SearchBar() {
@@ -34,8 +33,7 @@ export default observer(function SearchBar() {
       ...libraryState.epicLibrary,
       ...libraryState.gogLibrary,
       ...libraryState.sideloadedLibrary,
-      ...libraryState.hyperPlayLibrary,
-      ...libraryState.amazonLibrary
+      ...libraryState.hyperPlayLibrary
     ]
       .filter(Boolean)
       .filter((el) => {
@@ -49,8 +47,7 @@ export default observer(function SearchBar() {
     libraryState.epicLibrary,
     libraryState.gogLibrary,
     libraryState.filterText,
-    libraryState.sideloadedLibrary,
-    libraryState.amazonLibrary
+    libraryState.sideloadedLibrary
   ])
 
   // we have to use an event listener instead of the react
