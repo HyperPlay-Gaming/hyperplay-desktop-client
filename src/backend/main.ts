@@ -1266,14 +1266,8 @@ ipcMain.handle(
     const stopPlayingTimeMonotonic = hrtime.bigint()
     const sessionPlaytimeInMs =
       (stopPlayingTimeMonotonic - startPlayingTimeMonotonic) / BigInt(1000000)
-    console.log(
-      'nanosecond playtime ',
-      stopPlayingTimeMonotonic - startPlayingTimeMonotonic
-    )
-    console.log('millisecond playtime ', sessionPlaytimeInMs)
     const sessionPlaytimeInMinutes =
       sessionPlaytimeInMs / BigInt(1000) / BigInt(60)
-    console.log('minutes playtime ', sessionPlaytimeInMinutes)
 
     const totalPlaytime =
       sessionPlaytimeInMinutes +
