@@ -126,6 +126,10 @@ function WebView() {
   }, [startUrl, runner])
 
   useEffect(() => {
+    if (!urlIsHpUrl(startUrl)) {
+      return 
+    }
+
     window.api.handleGoToGamePage(async (_, gameId) => {
       const gameInfo = await getGameInfo(gameId, 'hyperplay')
       navigate(`/gamepage/hyperplay/${gameId}`, { state: { gameInfo, fromDM: false } })
