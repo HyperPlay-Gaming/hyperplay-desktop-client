@@ -1265,9 +1265,15 @@ ipcMain.handle(
     // Playtime of this session in minutes. Uses hrtime for monotonic timer not subject to clock drift or sync errors
     const stopPlayingTimeMonotonic = hrtime.bigint()
     const sessionPlaytimeInMs =
-      (stopPlayingTimeMonotonic - startPlayingTimeMonotonic) / BigInt(10 ^ 6)
+      (stopPlayingTimeMonotonic - startPlayingTimeMonotonic) / BigInt(1000000)
+    console.log(
+      'nanosecond playtime ',
+      stopPlayingTimeMonotonic - startPlayingTimeMonotonic
+    )
+    console.log('millisecond playtime ', sessionPlaytimeInMs)
     const sessionPlaytimeInMinutes =
-      sessionPlaytimeInMs / BigInt(10 ^ 3) / BigInt(60)
+      sessionPlaytimeInMs / BigInt(1000) / BigInt(60)
+    console.log('minutes playtime ', sessionPlaytimeInMinutes)
 
     const totalPlaytime =
       sessionPlaytimeInMinutes +
