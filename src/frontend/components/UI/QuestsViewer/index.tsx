@@ -135,10 +135,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       const depositContractAddress: DepositContract =
         await window.api.getDepositContractAddress(questMeta.id)
       if (reward_i.reward_type === 'ERC20') {
-        console.log(
-          'calling write contract on ',
-          depositContractAddress.contract_address
-        )
         writeContract({
           address: depositContractAddress.contract_address,
           abi: questRewardAbi,

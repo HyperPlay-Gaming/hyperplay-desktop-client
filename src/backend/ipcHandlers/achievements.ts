@@ -1,5 +1,9 @@
 import { logError, LogPrefix } from 'backend/logger/logger'
-import { Achievement, RewardClaimSignature } from 'common/types'
+import {
+  Achievement,
+  DepositContract,
+  RewardClaimSignature
+} from 'common/types'
 import { ipcMain } from 'electron'
 import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL } from 'common/constants'
@@ -272,6 +276,9 @@ ipcMain.handle('getDepositContractAddress', async (_e, questId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/${questId}/deposit-contracts`
 
   const result = await fetch(url)
-  const resultJson = await result.json()
-  return resultJson
+  const resultJson = (await result.json()) as DepositContract[]
+  if (!resultJson.length) {
+    throw `Error getting deposit contract address for quest ${questId}`
+  }
+  return resultJson[0]
 })
