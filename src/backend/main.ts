@@ -180,6 +180,7 @@ import { PROVIDERS } from 'common/types/proxy-types'
 import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
 import 'backend/utils/auto_launch'
+import { hrtime } from 'process'
 
 async function startProxyServer() {
   try {
@@ -1110,6 +1111,8 @@ ipcMain.handle(
     const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
     const startPlayingDate = new Date()
+    // Uses hrtime for monotonic timer not subject to clock drift or sync errors
+    const startPlayingTimeMonotonic = hrtime.bigint()
 
     if (!tsStore.has(game.app_name)) {
       tsStore.set(
@@ -1259,12 +1262,17 @@ ipcMain.handle(
     // Update playtime and last played date
     const finishedPlayingDate = new Date()
     tsStore.set(`${appName}.lastPlayed`, finishedPlayingDate.toISOString())
-    // Playtime of this session in minutes
-    const sessionPlaytime =
-      (finishedPlayingDate.getTime() - startPlayingDate.getTime()) / 1000 / 60
+    // Playtime of this session in minutes. Uses hrtime for monotonic timer not subject to clock drift or sync errors
+    const stopPlayingTimeMonotonic = hrtime.bigint()
+    const sessionPlaytimeInMs =
+      (stopPlayingTimeMonotonic - startPlayingTimeMonotonic) / BigInt(10 ^ 6)
+    const sessionPlaytimeInMinutes =
+      sessionPlaytimeInMs / BigInt(10 ^ 3) / BigInt(60)
+
     const totalPlaytime =
-      sessionPlaytime + tsStore.get(`${appName}.totalPlayed`, 0)
-    tsStore.set(`${appName}.totalPlayed`, Math.floor(totalPlaytime))
+      sessionPlaytimeInMinutes +
+      BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
+    tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
 
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
@@ -1317,7 +1325,7 @@ ipcMain.handle(
         store_name: getStoreName(runner),
         browserUrl: browserUrl ?? undefined,
         platform: getPlatformName(install.platform!),
-        playTimeInMs: sessionPlaytime * 60 * 1000,
+        playTimeInMs: Number(sessionPlaytimeInMs),
         platform_arch: install.platform!
       }
     })
