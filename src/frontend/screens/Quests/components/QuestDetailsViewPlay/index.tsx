@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { QuestDetails } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
+import styles from './index.module.scss'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -65,6 +66,7 @@ export function QuestDetailsViewPlayWrapper({
           steamAccountLinked: false
         }
       }}
+      classNames={{ root: styles.questDetailsRoot }}
     />
   )
 }

@@ -1,0 +1,6 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: var(--space-2lg-fixed);
+  padding-bottom: var(--space-2lg-fixed);
+}

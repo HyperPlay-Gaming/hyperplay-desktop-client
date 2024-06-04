@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { QuestsSummaryTable, QuestCard } from '@hyperplay/ui'
 import useGetQuests from 'frontend/hooks/useGetQuests'
+import { useTranslation } from 'react-i18next'
+import styles from './index.module.scss'
 
 export interface QuestsSummaryTableWrapperProps {
   projectId: string
@@ -13,6 +15,7 @@ export function QuestsSummaryTableWrapper({
   selectedQuestId,
   setSelectedQuestId
 }: QuestsSummaryTableWrapperProps) {
+  const { t } = useTranslation()
   const questsResults = useGetQuests(appName)
   const quests = questsResults?.data?.data
 
@@ -52,6 +55,8 @@ export function QuestsSummaryTableWrapper({
         title: 'msg modal title',
         message: 'msg modal msg'
       }}
+      pageTitle={t('quests.quests', 'Quests')}
+      className={styles.tableContainer}
     />
   )
 }
