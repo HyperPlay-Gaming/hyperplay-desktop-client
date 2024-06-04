@@ -1,3 +1,9 @@
 .questDetailsRoot {
   margin: 0px;
+  background-color: var(--color-neutral-800);
+  border: none;
+
+  div {
+    background-color: inherit;
+  }
 }
