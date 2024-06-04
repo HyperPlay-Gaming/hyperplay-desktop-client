@@ -108,8 +108,11 @@ const AuthModal = () => {
       webviewRef.current?.reload()
     })
 
-    async function handleAuthEvent(event: Electron.IpcRendererEvent, name: string){
-      if(name === 'connected'){
+    async function handleAuthEvent(
+      event: Electron.IpcRendererEvent,
+      name: string
+    ) {
+      if (name === 'connected') {
         await authSession.invalidateQuery()
       }
     }
