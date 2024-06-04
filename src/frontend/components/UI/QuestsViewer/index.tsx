@@ -79,22 +79,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
 
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
   const session = useAuthSession()
+  // TODO: uncomment when reputation quest is activated and pass in quest details eligibility
   // const accounts = session.data?.linkedAccounts
   // const steamIsLinked = accounts?.has('steam')
 
-  function getCTAText() {
-    // TODO: uncomment when rep quests are enabled
-    // if (questMeta.type === 'REPUTATION_QUEST' && !steamIsLinked){
-    //   return t('quest.connectSteamAccount', 'Connect Steam account')
-    // }
-    // else if (questMeta.type === 'PLAY_STREAK'){
-    if (userId) {
-      return t('quest.claimAll', 'Claim all')
-    } else {
-      return t('quest.signIn', 'Sign in')
-    }
-    // }
-  }
   const userId = session.data?.userId
   const i18n = {
     reward: t('quest.reward', 'Reward'),
@@ -108,7 +96,9 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       `You need to have completed {{percent}}% of the achievements in one of these games.`,
       { percent: questMeta?.eligibility?.completion_threshold ?? '??' }
     ),
-    claim: getCTAText(),
+    claim: t('quest.claimAll', 'Claim all'),
+    signIn: t('quest.signIn', 'Sign in'),
+    connectSteamAccount: t('quest.connectSteamAccount', 'Connect Steam account'),
     questType: {
       REPUTATION: t('quest.reputation', 'Reputation')
     }
@@ -172,7 +162,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           games: steamGames,
           completionPercent: questMeta.eligibility.completion_threshold,
           eligible: false,
-          steamAccountLinked: false
+          steamAccountLinked: true
         }
       },
       rewards: questMeta.rewards.map((val) => ({
@@ -180,26 +170,16 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         imageUrl: val.image_url
       })),
       i18n,
-      onClaimClick: async () => {
-        // TODO: uncomment when rep quests are enabled
-        // if (questMeta.type === 'REPUTATION_QUEST' && !steamIsLinked){
-        //   window.api.signInWithProvider('steam')
-        // }
-        // else if (questMeta.type === 'PLAY_STREAK'){
-        if (userId) {
-          mintRewards(questMeta.rewards)
-        } else {
-          // prompt sign in
-          authState.openSignInModal()
-        }
-        // }
-      },
+      onClaimClick: async ()=>mintRewards(questMeta.rewards),
+      onSignInClick: authState.openSignInModal,
+      onConnectSteamAccountClick: ()=>window.api.signInWithProvider('steam'),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen),
       errorMessage: isError
         ? t('quest.errorMessage', 'There was an error with the transaction.')
         : undefined,
-      isMinting: status === 'pending'
+      isMinting: status === 'pending',
+      isSignedIn: !!userId,
     }
     questDetails = (
       <QuestDetails
@@ -223,8 +203,11 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       i18n,
       rewards: [],
       onClaimClick: () => console.log('claim clicked for ', questMeta?.name),
+      onSignInClick: () => console.log('sign in clicked for ', questMeta?.name),
+      onConnectSteamAccountClick: () => console.log('connect steam account clicked for ', questMeta?.name),
       collapseIsOpen,
-      toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen)
+      toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen),
+      isSignedIn: !!userId,
     }
     questDetails = (
       <QuestDetails
