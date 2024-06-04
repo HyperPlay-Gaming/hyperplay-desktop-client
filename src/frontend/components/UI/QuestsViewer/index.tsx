@@ -132,11 +132,20 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           reward_i.id
         )
 
-      const depositContractAddress: DepositContract =
-        await window.api.getDepositContractAddress(questMeta.id)
+      const depositContracts: DepositContract[] =
+        await window.api.getDepositContracts(questMeta.id)
+      const depositContractAddress = depositContracts.find(
+        (val) => val.chain_id === reward_i.chain_id
+      )?.contract_address
+      if (depositContractAddress === undefined) {
+        console.error(
+          `Deposit contract address undefined for quest ${questMeta.id} and chain id ${reward_i.chain_id}`
+        )
+        return
+      }
       if (reward_i.reward_type === 'ERC20') {
         writeContract({
-          address: depositContractAddress.contract_address,
+          address: depositContractAddress,
           abi: questRewardAbi,
           functionName: 'withdrawERC20',
           args: [
