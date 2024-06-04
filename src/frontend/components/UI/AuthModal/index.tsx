@@ -74,6 +74,7 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
+          window.api.authConnected()
           await authSession.invalidateQuery()
           break
         case 'auth:accountDisconnected':
@@ -107,12 +108,20 @@ const AuthModal = () => {
       webviewRef.current?.reload()
     })
 
+    async function handleAuthEvent(event: Electron.IpcRendererEvent, name: string){
+      if(name === 'connected'){
+        await authSession.invalidateQuery()
+      }
+    }
+    const removeHandleAuthEvent = window.api.handleAuthEvent(handleAuthEvent)
+
     return () => {
       onLogoutCleanup()
       qaModeListenerCleanup()
       oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
       webview.removeEventListener('ipc-message', handleIpcMessage)
+      removeHandleAuthEvent()
     }
   }, [])
 

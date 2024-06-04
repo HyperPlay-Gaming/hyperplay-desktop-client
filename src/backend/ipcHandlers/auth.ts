@@ -3,6 +3,7 @@ import getPartitionCookies from '../utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from '../../common/constants'
 import { LogPrefix } from '../logger/logger'
 import { AuthSession } from '../../common/types/auth'
+import { getMainWindow } from 'backend/main_window'
 
 ipcMain.handle('getAuthSession', async () => {
   const cookieString = await getPartitionCookies({
@@ -43,4 +44,8 @@ ipcMain.handle('logOut', async () => {
       authSession.cookies.remove(DEV_PORTAL_URL, cookie)
     )
   )
+})
+
+ipcMain.on('authConnected', async () => {
+  getMainWindow()?.webContents.send('authEvent', 'connected')
 })

@@ -89,6 +89,7 @@ interface HyperPlaySyncIPCFunctions {
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
   toggleOverlay: () => void
+  authConnected: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
