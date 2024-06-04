@@ -17,10 +17,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         selectedQuestId={selectedQuestId}
         setSelectedQuestId={setSelectedQuestId}
       />
-      <QuestDetailsWrapper
-        projectId={appName}
-        selectedQuestId={selectedQuestId}
-      />
+      <QuestDetailsWrapper selectedQuestId={selectedQuestId} />
     </div>
   )
 }

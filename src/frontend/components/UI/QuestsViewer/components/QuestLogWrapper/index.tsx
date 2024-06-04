@@ -65,5 +65,9 @@ export function QuestLogWrapper({
     )
   }
 
+  if (!quests?.length) {
+    return null
+  }
+
   return questLog
 }

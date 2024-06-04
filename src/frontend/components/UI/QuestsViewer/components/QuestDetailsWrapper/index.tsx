@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { QuestDetails, QuestDetailsProps, Game } from '@hyperplay/ui'
-import useGetQuests from 'frontend/hooks/useGetQuests'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
@@ -13,12 +12,10 @@ import { questRewardAbi } from 'frontend/abis/RewardsAbi'
 import authState from 'frontend/state/authState'
 
 export interface QuestDetailsWrapperProps {
-  projectId: string
   selectedQuestId: number | null
 }
 
 export function QuestDetailsWrapper({
-  projectId: appName,
   selectedQuestId
 }: QuestDetailsWrapperProps) {
   const { writeContract, error, isError, status } = useWriteContract()
@@ -27,14 +24,11 @@ export function QuestDetailsWrapper({
   }
   const { switchChainAsync } = useSwitchChain()
   const account = useAccount()
-  const questsResults = useGetQuests(appName)
-  const quests = questsResults?.data?.data
   const { t } = useTranslation()
-
   const questResult = useGetQuest(selectedQuestId)
+  const questMeta = questResult.data.data
 
   let questDetails = null
-  const questMeta = questResult.data.data
 
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
@@ -145,7 +139,7 @@ export function QuestDetailsWrapper({
       })),
       i18n,
       onClaimClick: async () => mintRewards(questMeta.rewards),
-      onSignInClick: authState.openSignInModal,
+      onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen),
@@ -191,10 +185,6 @@ export function QuestDetailsWrapper({
         ctaDisabled={false}
       />
     )
-  }
-
-  if (!quests?.length) {
-    return null
   }
 
   return questDetails
