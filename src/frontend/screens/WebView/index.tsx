@@ -32,7 +32,7 @@ import { getGameInfo } from 'frontend/helpers'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
-  return urlToTest.hostname === 'hyperplay-store-git-feat-libfromstore-hyperplay.vercel.app'
+  return urlToTest.hostname === 'store.hyperplay.xyz'
 }
 
 function shouldInjectProvider(url: string) {
