@@ -1,0 +1,70 @@
+import React, { useState } from 'react'
+import { QuestDetails } from '@hyperplay/ui'
+import { useTranslation } from 'react-i18next'
+import useGetQuest from 'frontend/hooks/useGetQuest'
+
+export interface QuestDetailsViewPlayWrapperProps {
+  selectedQuestId: number | null
+}
+
+export function QuestDetailsViewPlayWrapper({
+  selectedQuestId
+}: QuestDetailsViewPlayWrapperProps) {
+  const { t } = useTranslation()
+  const [collapseIsOpen, setCollapseIsOpen] = useState(false)
+
+  const questResult = useGetQuest(selectedQuestId)
+  const questMeta = questResult.data.data
+
+  const i18n = {
+    reward: t('quest.reward', 'Reward'),
+    associatedGames: t('quest.associatedGames', 'Associated games'),
+    linkSteamAccount: t(
+      'quest.linkAccount',
+      'Link your Steam account to check eligibility.'
+    ),
+    needMoreAchievements: t(
+      'quest.needMoreAchievements',
+      `You need to have completed {{percent}}% of the achievements in one of these games.`,
+      { percent: questMeta?.eligibility?.completion_threshold ?? '??' }
+    ),
+    claim: t('quest.claimAll', 'Claim all'),
+    signIn: t('quest.signIn', 'Sign in'),
+    connectSteamAccount: t(
+      'quest.connectSteamAccount',
+      'Connect Steam account'
+    ),
+    questType: {
+      REPUTATION: t('quest.reputation', 'Reputation'),
+      PLAYSTREAK: t('quest.playstreak', 'Play Streak')
+    }
+  }
+
+  if (!questMeta) {
+    return null
+  }
+  const rewards =
+    questMeta.rewards.map((val) => ({
+      title: val.name,
+      imageUrl: val.image_url
+    })) ?? []
+  return (
+    <QuestDetails
+      i18n={i18n}
+      rewards={rewards}
+      title={questMeta.name}
+      description={questMeta.description}
+      collapseIsOpen={collapseIsOpen}
+      toggleCollapse={() => setCollapseIsOpen(!collapseIsOpen)}
+      onClaimClick={() => console.log('claim click')}
+      eligibility={{
+        reputation: {
+          games: [],
+          completionPercent: 0,
+          eligible: false,
+          steamAccountLinked: false
+        }
+      }}
+    />
+  )
+}

@@ -167,6 +167,24 @@ export default observer(function SidebarLinks() {
             </NavLink>
           </Tooltip>
         </div>
+        <div className="sidebarLinkGradientWrapper">
+          <Tooltip {...tooltipProps} label="Quests">
+            <NavLink
+              data-testid="quests"
+              className={({ isActive }) =>
+                classNames('Sidebar__item', {
+                  active: isActive || location.pathname.includes('quests')
+                })
+              }
+              to={{ pathname: '/quests' }}
+              state={{
+                fromGameCard: false
+              }}
+            >
+              <Images.QuestIcon fill={sidebarSvgUnselectedFill} />
+            </NavLink>
+          </Tooltip>
+        </div>
       </div>
 
       <div className=" SidebarLinks Sidebar__section">

@@ -1961,11 +1961,6 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/ui@^1.2.32":
-  version "1.2.32"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.2.32.tgz#d9470d3fc56832fee5a56c5d734255c80d764562"
-  integrity sha512-GCBeZpB2LKqZedirkE/vWm9jnwC5mVxdnkEp0vY6sAFNb1CuO3ZYeTpJfADqLMSSCE6JqG0yUBi+ekbJymN3ZQ==
-
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.12.tgz#4ce7a97268f862deae99363d2d8029ee80003cc0"
