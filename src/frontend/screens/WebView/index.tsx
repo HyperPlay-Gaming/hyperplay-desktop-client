@@ -127,14 +127,28 @@ function WebView() {
 
   useEffect(() => {
     if (!urlIsHpUrl(startUrl)) {
-      return 
+      return
     }
 
     window.api.handleGoToGamePage(async (_, gameId) => {
       const gameInfo = await getGameInfo(gameId, 'hyperplay')
-      navigate(`/gamepage/hyperplay/${gameId}`, { state: { gameInfo, fromDM: false } })
-    }
+      navigate(`/gamepage/hyperplay/${gameId}`, {
+        state: { gameInfo, fromDM: false }
+      })
+    })
+
+    const removeHandleGoToGamePage = window.api.handleGoToGamePage(
+      async (_, gameId) => {
+        const gameInfo = await getGameInfo(gameId, 'hyperplay')
+        navigate(`/gamepage/hyperplay/${gameId}`, {
+          state: { gameInfo, fromDM: false }
+        })
+      }
     )
+
+    return () => {
+      removeHandleGoToGamePage()
+    }
   }, [])
 
   useLayoutEffect(() => {
