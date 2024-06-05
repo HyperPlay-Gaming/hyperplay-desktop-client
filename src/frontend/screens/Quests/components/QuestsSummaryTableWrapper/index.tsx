@@ -55,10 +55,9 @@ export function QuestsSummaryTableWrapper({
         key={id}
         {...rest}
         onClick={() => {
-          if (selectedQuestId === id){
+          if (selectedQuestId === id) {
             setSelectedQuestId(null)
-          }
-          else {
+          } else {
             setSelectedQuestId(id)
           }
         }}

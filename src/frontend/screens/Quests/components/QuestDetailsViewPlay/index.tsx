@@ -15,7 +15,7 @@ export function QuestDetailsViewPlayWrapper({
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
 
   const questResult = useGetQuest(selectedQuestId)
-  if (selectedQuestId === null){
+  if (selectedQuestId === null) {
     return null
   }
   const questMeta = questResult.data.data
@@ -64,7 +64,8 @@ export function QuestDetailsViewPlayWrapper({
         }}
         classNames={{ root: styles.questDetailsRoot }}
         loading={true}
-      />)
+      />
+    )
   }
   const rewards =
     questMeta.rewards.map((val) => ({
