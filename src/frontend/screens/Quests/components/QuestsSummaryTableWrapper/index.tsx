@@ -79,9 +79,10 @@ export function QuestsSummaryTableWrapper({
       isPageLoading={questsResults?.data.isLoading}
       activeTab={'ACTIVE'}
       tabs={[
-        { label: 'Active', value: 'ACTIVE' },
-        { label: 'Claim Ready', value: 'CLAIM_READY' },
-        { label: 'Completed', value: 'COMPLETED' }
+        // TODO: uncomment when we can filter based on these categories
+        // { label: 'Active', value: 'ACTIVE' },
+        // { label: 'Claim Ready', value: 'CLAIM_READY' },
+        // { label: 'Completed', value: 'COMPLETED' }
       ]}
       messageModalProps={{
         title: 'msg modal title',
