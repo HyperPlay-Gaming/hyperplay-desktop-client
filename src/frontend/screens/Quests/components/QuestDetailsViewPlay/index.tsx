@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
-import { QuestDetails } from '@hyperplay/ui'
+import { Game, QuestDetails } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { getGameInfo } from 'frontend/helpers'
+import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -18,10 +19,21 @@ export function QuestDetailsViewPlayWrapper({
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
 
   const questResult = useGetQuest(selectedQuestId)
+  const questMeta = questResult.data.data
+
+  const getSteamGameResult = useGetSteamGame(
+    questMeta?.eligibility?.steam_games ?? []
+  )
   if (selectedQuestId === null) {
     return null
   }
-  const questMeta = questResult.data.data
+
+  const steamGames: Game[] =
+    getSteamGameResult?.data?.map((val, index) => ({
+      title: val.data?.name ?? index.toString(),
+      imageUrl: val.data?.capsule_image ?? '',
+      loading: val.isLoading || val.isFetching
+    })) ?? []
 
   const i18n = {
     reward: t('quest.reward', 'Reward'),
@@ -96,8 +108,8 @@ export function QuestDetailsViewPlayWrapper({
       onClaimClick={() => console.log('claim click')}
       eligibility={{
         reputation: {
-          games: [],
-          completionPercent: 0,
+          games: steamGames,
+          completionPercent: questMeta.eligibility.completion_threshold,
           eligible: false,
           steamAccountLinked: false
         }
