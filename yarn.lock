@@ -2001,10 +2001,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/ui@^1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.0.tgz#25422bb547c2867c0b8495b8315b99439d59968b"
-  integrity sha512-ZSDGkwe7oZq+Qv1WpqlPlQZijkcnv8DCZ9HPQhXVeA7IDsLOQou8tqyOQguGmUaXy15Ppn5jFI+wINGGLy/GKQ==
+"@hyperplay/ui@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.1.tgz#90cea34cc94469d656a5193c854311c965cd71e4"
+  integrity sha512-3AM9IECXKOf3/Ez/cSj7pVmwTSsNF5/Vk7Pt7pTIxMrc8Y2P4/Y12znKDHV81Tp5LtocAkvQ2F8gMbtd0n8MzQ==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"

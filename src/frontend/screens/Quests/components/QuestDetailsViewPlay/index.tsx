@@ -3,6 +3,8 @@ import { QuestDetails } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import styles from './index.module.scss'
+import { useNavigate } from 'react-router-dom'
+import { getGameInfo } from 'frontend/helpers'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -11,6 +13,7 @@ export interface QuestDetailsViewPlayWrapperProps {
 export function QuestDetailsViewPlayWrapper({
   selectedQuestId
 }: QuestDetailsViewPlayWrapperProps) {
+  const navigate = useNavigate()
   const { t } = useTranslation()
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
 
@@ -34,6 +37,8 @@ export function QuestDetailsViewPlayWrapper({
     ),
     claim: t('quest.claimAll', 'Claim all'),
     signIn: t('quest.signIn', 'Sign in'),
+    play: t('quest.Play', 'Play'),
+    secondCTAText: t('quest.View Game', 'View Game'),
     connectSteamAccount: t(
       'quest.connectSteamAccount',
       'Connect Steam account'
@@ -72,6 +77,14 @@ export function QuestDetailsViewPlayWrapper({
       title: val.name,
       imageUrl: val.image_url
     })) ?? []
+
+  async function navigateToGamePage(appName: string) {
+    const gameInfo = await getGameInfo(appName, 'hyperplay')
+    navigate(`/gamepage/hyperplay/${appName}`, {
+      state: { gameInfo, fromDM: false }
+    })
+  }
+
   return (
     <QuestDetails
       i18n={i18n}
@@ -90,6 +103,15 @@ export function QuestDetailsViewPlayWrapper({
         }
       }}
       classNames={{ root: styles.questDetailsRoot }}
+      isQuestsPage={true}
+      onPlayClick={async () =>
+        window.api.launch({
+          appName: questMeta.project_id,
+          launchArguments: '',
+          runner: 'hyperplay'
+        })
+      }
+      onSecondCTAClick={async () => navigateToGamePage(questMeta.project_id)}
     />
   )
 }
