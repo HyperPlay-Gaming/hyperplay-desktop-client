@@ -56,7 +56,7 @@ export default function ImportAndCreateOptions({
                 </span>
               </div>
             </div>
-            <NavLink to="/metamaskSecretPhrase">
+            <NavLink to="/metamaskHome">
               <ImportOption
                 override="recovery"
                 classNames={styles.importSecretRecoveryButton}

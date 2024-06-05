@@ -98,12 +98,6 @@ function App() {
               path="metamaskSnaps"
               element={<WebView key="metamaskSnaps" />}
             />
-            <Route
-              path="metamaskSecretPhrase"
-              element={
-                <MetaMaskHome path="home.html#onboarding/import-with-recovery-phrase" />
-              }
-            />
             <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
               <Route path=":page" element={<MetaMaskPortfolio />} />
             </Route>

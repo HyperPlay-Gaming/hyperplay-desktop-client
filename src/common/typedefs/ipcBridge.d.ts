@@ -90,6 +90,7 @@ interface HyperPlaySyncIPCFunctions {
   killOverlay: () => void
   toggleOverlay: () => void
   authConnected: () => void
+  goToGamePage: (appName: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
