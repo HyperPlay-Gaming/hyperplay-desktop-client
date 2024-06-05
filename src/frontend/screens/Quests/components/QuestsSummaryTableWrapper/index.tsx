@@ -61,10 +61,12 @@ export function QuestsSummaryTableWrapper({
       if (imageUrl) {
         imagesToPreload.push(imageUrl)
       }
+      const title = listings ? listings[project_id]?.project_meta?.name : ''
       return (
         <QuestCard
           key={id}
           image={imageUrl}
+          title={title}
           {...rest}
           onClick={() => {
             if (selectedQuestId === id) {
