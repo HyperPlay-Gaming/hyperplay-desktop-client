@@ -78,6 +78,7 @@ const AuthModal = () => {
           await authSession.invalidateQuery()
           break
         case 'auth:accountDisconnected':
+          window.api.authDisconnected()
           await authSession.invalidateQuery()
           break
         case 'auth:accountNotConnected':
@@ -112,7 +113,7 @@ const AuthModal = () => {
       event: Electron.IpcRendererEvent,
       name: string
     ) {
-      if (name === 'connected') {
+      if (name === 'refreshSession') {
         await authSession.invalidateQuery()
       }
     }

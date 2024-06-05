@@ -1,9 +1,8 @@
-import { ipcMain, session } from 'electron'
+import { ipcMain, session, webContents } from 'electron'
 import getPartitionCookies from '../utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from '../../common/constants'
 import { LogPrefix } from '../logger/logger'
 import { AuthSession } from '../../common/types/auth'
-import { getMainWindow } from 'backend/main_window'
 
 ipcMain.handle('getAuthSession', async () => {
   const cookieString = await getPartitionCookies({
@@ -46,6 +45,16 @@ ipcMain.handle('logOut', async () => {
   )
 })
 
-ipcMain.on('authConnected', async () => {
-  getMainWindow()?.webContents.send('authEvent', 'connected')
+function refreshAllSessions() {
+  webContents.getAllWebContents().forEach((val) => {
+    val.send('authEvent', 'refreshSession')
+  })
+}
+
+ipcMain.on('authConnected', () => {
+  refreshAllSessions()
+})
+
+ipcMain.on('authDisconnected', () => {
+  refreshAllSessions()
 })
