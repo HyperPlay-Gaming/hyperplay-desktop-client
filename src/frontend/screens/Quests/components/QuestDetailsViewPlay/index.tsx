@@ -15,6 +15,9 @@ export function QuestDetailsViewPlayWrapper({
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
 
   const questResult = useGetQuest(selectedQuestId)
+  if (selectedQuestId === null){
+    return null
+  }
   const questMeta = questResult.data.data
 
   const i18n = {
@@ -41,8 +44,27 @@ export function QuestDetailsViewPlayWrapper({
     }
   }
 
-  if (!questMeta) {
-    return null
+  if (!questMeta || questResult.data.isLoading || questResult.data.isFetching) {
+    return (
+      <QuestDetails
+        i18n={i18n}
+        rewards={[]}
+        title={''}
+        description={''}
+        collapseIsOpen={collapseIsOpen}
+        toggleCollapse={() => setCollapseIsOpen(!collapseIsOpen)}
+        onClaimClick={() => console.log('claim click')}
+        eligibility={{
+          reputation: {
+            games: [],
+            completionPercent: 0,
+            eligible: false,
+            steamAccountLinked: false
+          }
+        }}
+        classNames={{ root: styles.questDetailsRoot }}
+        loading={true}
+      />)
   }
   const rewards =
     questMeta.rewards.map((val) => ({
