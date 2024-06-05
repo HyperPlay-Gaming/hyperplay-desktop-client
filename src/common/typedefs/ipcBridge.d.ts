@@ -3,7 +3,8 @@ import {
   DownloadManagerState,
   Achievement,
   SummaryAchievement,
-  LDEnv
+  LDEnv,
+  HyperPlayRelease
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -269,6 +270,7 @@ interface HyperPlayAsyncIPCFunctions {
   getQuests: (projectId?: string) => Promise<Quest[]>
   getQuest: (questId: number) => Promise<Quest>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
+  getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

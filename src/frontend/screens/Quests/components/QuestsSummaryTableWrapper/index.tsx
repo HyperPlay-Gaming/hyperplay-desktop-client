@@ -4,6 +4,7 @@ import useGetQuests from 'frontend/hooks/useGetQuests'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
 import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
+import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
 
 export interface QuestsSummaryTableWrapperProps {
   selectedQuestId: number | null
@@ -17,6 +18,8 @@ export function QuestsSummaryTableWrapper({
   const { t } = useTranslation()
   const questsResults = useGetQuests()
   const quests = questsResults?.data?.data
+  const hyperplayListings = useGetHyperPlayListings()
+  const listings = hyperplayListings.data.data
 
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
 
@@ -50,9 +53,10 @@ export function QuestsSummaryTableWrapper({
 
   // set outline css on selected
   const gameElements =
-    quests?.map(({ id, ...rest }) => (
+    quests?.map(({ id, project_id, ...rest }) => (
       <QuestCard
         key={id}
+        image={listings ? listings[project_id]?.project_meta?.main_capsule : ''}
         {...rest}
         onClick={() => {
           if (selectedQuestId === id) {
