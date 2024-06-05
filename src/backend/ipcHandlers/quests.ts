@@ -1,10 +1,12 @@
 import { DEV_PORTAL_URL } from 'common/constants'
 import { ipcMain } from 'electron'
 
-ipcMain.handle('getQuestsForGame', async (e, projectId) => {
-  const questMetaResults = await fetch(
-    `https://api.valist.io/v1/quests?projectId=${projectId}&showDrafts=false`
-  )
+ipcMain.handle('getQuests', async (e, projectId) => {
+  let url = `${DEV_PORTAL_URL}api/v1/quests?questStatus=ACTIVE`
+  if (projectId) {
+    url += `&projectId=${projectId}`
+  }
+  const questMetaResults = await fetch(url)
   const questsMetaJson = await questMetaResults.json()
   return questsMetaJson
 })

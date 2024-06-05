@@ -6,18 +6,16 @@ import styles from './index.module.scss'
 import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 
 export interface QuestsSummaryTableWrapperProps {
-  projectId: string
   selectedQuestId: number | null
   setSelectedQuestId: (id: number | null) => void
 }
 
 export function QuestsSummaryTableWrapper({
-  projectId: appName,
   selectedQuestId,
   setSelectedQuestId
 }: QuestsSummaryTableWrapperProps) {
   const { t } = useTranslation()
-  const questsResults = useGetQuests(appName)
+  const questsResults = useGetQuests()
   const quests = questsResults?.data?.data
 
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
@@ -26,37 +24,39 @@ export function QuestsSummaryTableWrapper({
     { text: 'Alphabetically (ASC)', id: 'ALPHA_ASC' },
     { text: 'Alphabetically (DES)', id: 'ALPHA_DES' }
   ]
-  const [selectedSort, setSelectedSort] = useState<itemType>(achievementsSortOptions[0])
+  const [selectedSort, setSelectedSort] = useState<itemType>(
+    achievementsSortOptions[0]
+  )
 
-  if (selectedSort.id === 'ALPHA_ASC'){
-    quests?.sort((a,b)=> {
-      if (a.name < b.name){
+  if (selectedSort.id === 'ALPHA_ASC') {
+    quests?.sort((a, b) => {
+      if (a.name < b.name) {
         return -1
-      }
-      else if (a.name > b.name){
+      } else if (a.name > b.name) {
         return 1
       }
       return 0
-    }
-    )
+    })
+  } else if (selectedSort.id === 'ALPHA_DES') {
+    quests?.sort((a, b) => {
+      if (a.name > b.name) {
+        return -1
+      } else if (a.name < b.name) {
+        return 1
+      }
+      return 0
+    })
   }
-  else if (selectedSort.id === 'ALPHA_DES'){
-    quests?.sort((a,b)=> {
-      if (a.name > b.name){
-        return -1
-      }
-      else if (a.name < b.name){
-        return 1
-      }
-      return 0
-    }
-    )
-  } 
-  
+
   // set outline css on selected
   const gameElements =
     quests?.map(({ id, ...rest }) => (
-      <QuestCard key={id} {...rest} onClick={() => setSelectedQuestId(id)} />
+      <QuestCard
+        key={id}
+        {...rest}
+        onClick={() => setSelectedQuestId(id)}
+        selected={id === selectedQuestId}
+      />
     )) ?? []
 
   return (

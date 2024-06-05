@@ -18,8 +18,8 @@ export const getAchievementsStats = async (options: PlayerOptions) =>
 export const syncAchievements = async (options: PlayerOptions) =>
   ipcRenderer.invoke('syncAchievements', options)
 
-export const getQuestsForGame = async (projectId: string) =>
-  ipcRenderer.invoke('getQuestsForGame', projectId)
+export const getQuests = async (projectId?: string) =>
+  ipcRenderer.invoke('getQuests', projectId)
 
 export const getQuest = async (questId: number) =>
   ipcRenderer.invoke('getQuest', questId)

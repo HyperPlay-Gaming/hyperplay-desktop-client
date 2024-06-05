@@ -1,12 +1,12 @@
 import { useQuery, useQueryClient } from 'react-query'
 
-export default function useGetQuests(projectId: string) {
+export default function useGetQuests(projectId?: string) {
   const queryClient = useQueryClient()
-  const queryKey = `getQuestsForProject:${projectId}`
+  const queryKey = `getQuestsForProject:${projectId ?? 'allActive'}`
   const query = useQuery(
     queryKey,
     async () => {
-      const response = await window.api.getQuestsForGame(projectId)
+      const response = await window.api.getQuests(projectId)
       if (!response) return null
       return response
     },
