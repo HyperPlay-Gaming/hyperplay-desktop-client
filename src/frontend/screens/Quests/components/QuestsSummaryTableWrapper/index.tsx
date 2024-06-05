@@ -54,7 +54,14 @@ export function QuestsSummaryTableWrapper({
       <QuestCard
         key={id}
         {...rest}
-        onClick={() => setSelectedQuestId(id)}
+        onClick={() => {
+          if (selectedQuestId === id){
+            setSelectedQuestId(null)
+          }
+          else {
+            setSelectedQuestId(id)
+          }
+        }}
         selected={id === selectedQuestId}
       />
     )) ?? []
