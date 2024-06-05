@@ -1,12 +1,12 @@
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 const queryKey = 'authSession'
 
 export default function useAuthSession() {
   const queryClient = useQueryClient()
-  const query = useQuery(
-    queryKey,
-    async () => {
+  const query = useQuery({
+    queryKey: [queryKey],
+    queryFn: async () => {
       const response = await window.api.getAuthSession()
       if (!response) return null
       return {
@@ -19,15 +19,14 @@ export default function useAuthSession() {
         )
       }
     },
-    {
-      refetchOnWindowFocus: false
-    }
-  )
+    refetchOnWindowFocus: false
+  })
 
   return {
     ...query,
     session: query.data,
     isSignedIn: Boolean(query.data),
-    invalidateQuery: async () => queryClient.invalidateQueries(queryKey)
+    invalidateQuery: async () =>
+      queryClient.invalidateQueries({ queryKey: [queryKey] })
   }
 }

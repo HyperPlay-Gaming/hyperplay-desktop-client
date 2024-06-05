@@ -26,7 +26,9 @@ import StoreController from './store'
 import ViewManager from './ViewManager'
 import SentryHandler from './SentryHandler'
 import { asyncWithLDProvider } from 'launchdarkly-react-client-sdk'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { WagmiProvider } from 'wagmi'
+import { config } from './config'
 
 initOnlineMonitor()
 
@@ -125,20 +127,22 @@ const renderApp = async () => {
   root.render(
     <React.StrictMode>
       <StoreController />
-      <QueryClientProvider client={queryClient}>
-        <LDProvider>
-          <HyperPlayDesignProvider forceColorScheme="dark">
-            <GlobalState>
-              <SentryHandler />
-              <I18nextProvider i18n={i18next}>
-                <Suspense fallback={<Loading />}>
-                  <ViewManager />
-                </Suspense>
-              </I18nextProvider>
-            </GlobalState>
-          </HyperPlayDesignProvider>
-        </LDProvider>
-      </QueryClientProvider>
+      <WagmiProvider config={config}>
+        <QueryClientProvider client={queryClient}>
+          <LDProvider>
+            <HyperPlayDesignProvider forceColorScheme="dark">
+              <GlobalState>
+                <SentryHandler />
+                <I18nextProvider i18n={i18next}>
+                  <Suspense fallback={<Loading />}>
+                    <ViewManager />
+                  </Suspense>
+                </I18nextProvider>
+              </GlobalState>
+            </HyperPlayDesignProvider>
+          </LDProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
     </React.StrictMode>
   )
 }
