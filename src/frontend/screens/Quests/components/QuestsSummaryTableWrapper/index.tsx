@@ -51,28 +51,37 @@ export function QuestsSummaryTableWrapper({
     })
   }
 
+  const imagesToPreload: string[] = []
   // set outline css on selected
   const gameElements =
-    quests?.map(({ id, project_id, ...rest }) => (
-      <QuestCard
-        key={id}
-        image={listings ? listings[project_id]?.project_meta?.main_capsule : ''}
-        {...rest}
-        onClick={() => {
-          if (selectedQuestId === id) {
-            setSelectedQuestId(null)
-          } else {
-            setSelectedQuestId(id)
-          }
-        }}
-        selected={id === selectedQuestId}
-      />
-    )) ?? []
+    quests?.map(({ id, project_id, ...rest }) => {
+      const imageUrl = listings
+        ? listings[project_id]?.project_meta?.main_capsule
+        : ''
+      if (imageUrl) {
+        imagesToPreload.push(imageUrl)
+      }
+      return (
+        <QuestCard
+          key={id}
+          image={imageUrl}
+          {...rest}
+          onClick={() => {
+            if (selectedQuestId === id) {
+              setSelectedQuestId(null)
+            } else {
+              setSelectedQuestId(id)
+            }
+          }}
+          selected={id === selectedQuestId}
+        />
+      )
+    }) ?? []
 
   return (
     <QuestsSummaryTable
       games={gameElements}
-      imagesToPreload={[]}
+      imagesToPreload={imagesToPreload}
       sortProps={{
         options: achievementsSortOptions,
         selected: selectedSort,
