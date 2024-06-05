@@ -116,7 +116,7 @@ const AuthModal = () => {
       if (name === 'refreshSession') {
         await authSession.invalidateQuery()
         // need to send the auth modal back to first page on sign out from another window
-        webviewRef.current?.loadURL(url)
+        webviewRef.current?.reload()
       }
     }
     const removeHandleAuthEvent = window.api.handleAuthEvent(handleAuthEvent)
