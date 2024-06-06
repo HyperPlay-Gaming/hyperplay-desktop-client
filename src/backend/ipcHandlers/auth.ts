@@ -1,4 +1,4 @@
-import { ipcMain, session } from 'electron'
+import { ipcMain, session, webContents } from 'electron'
 import getPartitionCookies from '../utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from '../../common/constants'
 import { LogPrefix } from '../logger/logger'
@@ -43,4 +43,18 @@ ipcMain.handle('logOut', async () => {
       authSession.cookies.remove(DEV_PORTAL_URL, cookie)
     )
   )
+})
+
+function refreshAllSessions() {
+  webContents.getAllWebContents().forEach((val) => {
+    val.send('authEvent', 'refreshSession')
+  })
+}
+
+ipcMain.on('authConnected', () => {
+  refreshAllSessions()
+})
+
+ipcMain.on('authDisconnected', () => {
+  refreshAllSessions()
 })

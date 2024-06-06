@@ -9,7 +9,7 @@ import {
 import { observer } from 'mobx-react-lite'
 import emailSubscriptionState from '../../../state/EmailSubscriptionState'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { DEV_PORTAL_URL } from '../../../../common/constants'
 import { MODAL_ANIMATION_DURATION } from '../../../constants'
 import { newsLetterStore } from '../../../helpers/electronStores'
@@ -34,9 +34,13 @@ const EmailSubscriptionModal = () => {
     }, MODAL_ANIMATION_DURATION)
   }
 
-  const { mutate, error, isLoading } = useMutation(
-    'newsletter/subscribe',
-    async (email: string) => {
+  const { mutate, error, status } = useMutation({
+    mutationKey: ['newsletter/subscribe'],
+    onSuccess: (email) => {
+      setSubmittedEmail(email)
+      newsLetterStore.set('subscribed', true)
+    },
+    mutationFn: async (email: string) => {
       const request = await fetch(`${DEV_PORTAL_URL}/api/v1/newsletter`, {
         method: 'POST',
         headers: {
@@ -50,14 +54,8 @@ const EmailSubscriptionModal = () => {
       }
 
       return email
-    },
-    {
-      onSuccess: (email) => {
-        setSubmittedEmail(email)
-        newsLetterStore.set('subscribed', true)
-      }
     }
-  )
+  })
 
   useEffect(() => {
     return () => {
@@ -103,7 +101,7 @@ const EmailSubscriptionModal = () => {
       onClose={() => {}}
     >
       <UpdatesSubscriptionModal
-        loading={isLoading}
+        loading={status === 'pending'}
         onSubmit={mutate}
         onCancel={handleDismissed}
         error={error ? 'Something went wrong. Please try again.' : undefined}

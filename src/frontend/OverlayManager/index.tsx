@@ -8,6 +8,7 @@ import { BrowserGameProps } from './types'
 import { Overlay } from './Overlay'
 import { WebviewTag } from 'electron'
 import WebviewControls from 'frontend/components/UI/WebviewControls'
+import AuthModal from 'frontend/components/UI/AuthModal'
 
 const OverlayManager = observer(function ({
   appName,
@@ -35,39 +36,42 @@ const OverlayManager = observer(function ({
 
   /* eslint-disable react/no-unknown-property */
   return (
-    <div
-      className={BrowserGameStyles.overlayContainer}
-      style={style}
-      id="overlay-manager"
-    >
-      {OverlayState.showOverlay ? (
-        <Overlay appName={appName} runner={runner} />
-      ) : null}
-      {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
-        <div>
-          <WebviewControls
-            webview={webviewRef.current}
-            initURL={''}
-            openInBrowser={false}
-            disableUrl={true}
-          />
-          <webview
-            src={url}
-            className={BrowserGameStyles.browserGame}
-            partition={
-              WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
-              PROVIDERS.WALLET_CONNECT
-                ? 'persist:InPageWindowEthereumExternalWallet'
-                : undefined
-            }
-            webpreferences="contextIsolation=true"
-            // setting = to {true} does not work :(
-            allowpopups={trueAsStr}
-            ref={webviewRef}
-          />
-        </div>
-      ) : null}
-    </div>
+    <>
+      <AuthModal />
+      <div
+        className={BrowserGameStyles.overlayContainer}
+        style={style}
+        id="overlay-manager"
+      >
+        {OverlayState.showOverlay ? (
+          <Overlay appName={appName} runner={runner} />
+        ) : null}
+        {url !== 'ignore' && OverlayState.renderState.showBrowserGame ? (
+          <div>
+            <WebviewControls
+              webview={webviewRef.current}
+              initURL={''}
+              openInBrowser={false}
+              disableUrl={true}
+            />
+            <webview
+              src={url}
+              className={BrowserGameStyles.browserGame}
+              partition={
+                WalletState.provider === PROVIDERS.METAMASK_MOBILE ||
+                PROVIDERS.WALLET_CONNECT
+                  ? 'persist:InPageWindowEthereumExternalWallet'
+                  : undefined
+              }
+              webpreferences="contextIsolation=true"
+              // setting = to {true} does not work :(
+              allowpopups={trueAsStr}
+              ref={webviewRef}
+            />
+          </div>
+        ) : null}
+      </div>
+    </>
   )
 })
 
