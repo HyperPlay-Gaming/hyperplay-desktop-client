@@ -184,6 +184,7 @@ import { PROVIDERS } from 'common/types/proxy-types'
 import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
 import 'backend/utils/auto_launch'
+import { getHyperPlayReleaseObject } from './storeManagers/hyperplay/utils'
 
 async function startProxyServer() {
   try {
@@ -2008,6 +2009,11 @@ ipcMain.on('killOverlay', () => {
 
 ipcMain.on('toggleOverlay', () => {
   toggleOverlay()
+})
+
+ipcMain.handle('getHyperPlayListings', async () => {
+  const listingsMap = await getHyperPlayReleaseObject()
+  return JSON.parse(JSON.stringify(listingsMap))
 })
 /*
  * INSERT OTHER IPC HANDLERS HERE

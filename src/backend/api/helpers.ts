@@ -121,3 +121,6 @@ export const isGameAvailable = async (args: {
   appName: string
   runner: Runner
 }) => ipcRenderer.invoke('isGameAvailable', args)
+
+export const getHyperPlayListings = async () =>
+  ipcRenderer.invoke('getHyperPlayListings')

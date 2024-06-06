@@ -1982,10 +1982,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/ui@^1.4.6":
-  version "1.4.6"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.4.6.tgz#a7909f21a7c28dc3705d5e59895d3887592ba24a"
-  integrity sha512-fk0uItvJyOxKZHnT2ted8h2q+S5qYrnPCrG4Wa0xOP5WqDR0KKY8NMvxQG9DA0w/NwL1fDDmIscnpiPQLXC3sw==
+"@hyperplay/ui@^1.5.2":
+  version "1.5.2"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.2.tgz#21146ba3bb49acb067e71e13a25cb9a42cf91b12"
+  integrity sha512-7R6zbnUpvRdg3U+aqCRG2ie5/q/oLwvpz23eP4J3VSI+tk1BibUi9MqTVSwKmz8Z0aqfsqimJr1XC+SbAWcZmA==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
