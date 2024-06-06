@@ -1,5 +1,9 @@
 import { logError, LogPrefix } from 'backend/logger/logger'
-import { Achievement } from 'common/types'
+import {
+  Achievement,
+  DepositContract,
+  RewardClaimSignature
+} from 'common/types'
 import { ipcMain } from 'electron'
 import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL } from 'common/constants'
@@ -236,4 +240,42 @@ ipcMain.handle('getSyncProgress', async (e, requestId) => {
     logError(error, LogPrefix.Achievements)
     Sentry.captureException(error)
   }
+})
+
+async function getQuestRewardSignature(
+  address: `0x${string}`,
+  questId: number,
+  rewardId: number
+): Promise<RewardClaimSignature> {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/${questId}/rewards/${rewardId}/signature`
+
+  const cookieString = await getPartitionCookies({
+    partition: 'persist:auth',
+    url: DEV_PORTAL_URL
+  })
+
+  const result = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Cookie: cookieString
+    },
+    body: JSON.stringify({
+      withdraw: true,
+      address
+    })
+  })
+  const resultJson = await result.json()
+  return resultJson
+}
+
+ipcMain.handle('getQuestRewardSignature', async (_e, ...args) =>
+  getQuestRewardSignature(...args)
+)
+
+ipcMain.handle('getDepositContracts', async (_e, questId) => {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/${questId}/deposit-contracts`
+
+  const result = await fetch(url)
+  const resultJson = (await result.json()) as DepositContract[]
+  return resultJson
 })

@@ -74,9 +74,11 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
+          window.api.authConnected()
           await authSession.invalidateQuery()
           break
         case 'auth:accountDisconnected':
+          window.api.authDisconnected()
           await authSession.invalidateQuery()
           break
         case 'auth:accountNotConnected':
@@ -107,12 +109,24 @@ const AuthModal = () => {
       webviewRef.current?.reload()
     })
 
+    async function handleAuthEvent(
+      event: Electron.IpcRendererEvent,
+      name: string
+    ) {
+      if (name === 'refreshSession') {
+        await authSession.invalidateQuery()
+        // TODO: need to clear cookie in auth modal to send back to first page
+      }
+    }
+    const removeHandleAuthEvent = window.api.handleAuthEvent(handleAuthEvent)
+
     return () => {
       onLogoutCleanup()
       qaModeListenerCleanup()
       oAuthCompletedCleanup()
       webview.removeEventListener('dom-ready', handleDomReady)
       webview.removeEventListener('ipc-message', handleIpcMessage)
+      removeHandleAuthEvent()
     }
   }, [])
 
