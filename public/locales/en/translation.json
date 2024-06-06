@@ -654,12 +654,17 @@
         "errorMessage": "There was an error with the transaction.",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
+        "Play": "Play",
         "playstreak": "Play Streak",
         "quests": "Quests",
         "readyForClaim": "Ready for claim",
         "reputation": "Reputation",
         "reward": "Reward",
-        "signIn": "Sign in"
+        "signIn": "Sign in",
+        "View Game": "View Game"
+    },
+    "quests": {
+        "quests": "Quests"
     },
     "queue": {
         "label": {
