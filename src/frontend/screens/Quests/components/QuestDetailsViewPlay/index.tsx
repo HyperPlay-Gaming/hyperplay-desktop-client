@@ -64,8 +64,8 @@ export function QuestDetailsViewPlayWrapper({
   if (!questMeta || questResult.data.isLoading || questResult.data.isFetching) {
     return (
       <QuestDetails
-        onSignInClick={()=>console.log('sign in click')}
-        onConnectSteamAccountClick={()=>console.log('steam connect click')}
+        onSignInClick={() => console.log('sign in click')}
+        onConnectSteamAccountClick={() => console.log('steam connect click')}
         isSignedIn={true}
         i18n={i18n}
         rewards={[]}
@@ -102,8 +102,8 @@ export function QuestDetailsViewPlayWrapper({
 
   return (
     <QuestDetails
-      onSignInClick={()=>console.log('sign in click')}
-      onConnectSteamAccountClick={()=>console.log('steam connect click')}
+      onSignInClick={() => console.log('sign in click')}
+      onConnectSteamAccountClick={() => console.log('steam connect click')}
       isSignedIn={true}
       i18n={i18n}
       rewards={rewards}
