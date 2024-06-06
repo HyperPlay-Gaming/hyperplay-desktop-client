@@ -224,7 +224,11 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title_dm": "Download Manager"
+    },
+    "email_subscription": {
+        "subtitle": "You’re now a part of our community, and we’re excited to share valuable updates and insights with you.",
+        "title": "Thank you for subscribing!"
     },
     "epic": {
         "offline-notification-body": "Online services may not work fully as Epic Games servers are offline!",
@@ -642,23 +646,26 @@
     "profile": "Profile",
     "progress": "Progress",
     "quest": {
+        "active": "Active",
         "associatedGames": "Associated games",
         "claimAll": "Claim all",
+        "claimed": "Claimed",
         "connectSteamAccount": "Connect Steam account",
+        "errorMessage": "There was an error with the transaction.",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
+        "playstreak": "Play Streak",
+        "quests": "Quests",
+        "readyForClaim": "Ready for claim",
         "reputation": "Reputation",
-        "reward": "Reward"
+        "reward": "Reward",
+        "signIn": "Sign in"
     },
     "queue": {
         "label": {
             "canceled": "Canceled",
-            "clear": "Clear List",
-            "downloading": "Downloading",
             "empty": "Nothing to download",
-            "finished": "Completed",
             "pause": "Pause download",
-            "queued": "Queued",
             "remove": "Remove from Downloads",
             "resume": "Resume download"
         }
@@ -915,9 +922,5 @@
         },
         "release": "Release Date",
         "size": "Size"
-    },
-    "email_subscription": {
-        "title": "Thank you for subscribing!",
-        "subtitle": "You’re now a part of our community, and we’re excited to share valuable updates and insights with you."
     }
 }

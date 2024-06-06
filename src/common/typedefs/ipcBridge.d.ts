@@ -89,7 +89,9 @@ interface HyperPlaySyncIPCFunctions {
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
   toggleOverlay: () => void
+  authConnected: () => void
   goToGamePage: (appName: string) => void
+  authDisconnected: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -272,6 +274,12 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<{ id: number; name: string }[]>
   getQuest: (questId: number) => Promise<Quest>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
+  getQuestRewardSignature: (
+    address: `0x${string}`,
+    questId: number,
+    rewardId: number
+  ) => Promise<RewardClaimSignature>
+  getDepositContracts: (questId: number) => Promise<DepositContract[]>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
