@@ -38,6 +38,9 @@ const createLogFile = (filePath: string) => {
  * @returns path to current log file
  */
 export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
+  // If the app is already running, don't create a new log file
+  const isNewInstance = app.requestSingleInstanceLock()
+
   const date = new Date()
   const logDir = app.getPath('logs')
   const fmtDate = date.toISOString().replaceAll(':', '_')
@@ -88,11 +91,14 @@ export function createNewLogFileAndClearOldOnes(): createLogFileReturn {
     gogdlLogFile: ''
   })
 
+  if (!isNewInstance) {
+    return logs
+  }
+
   logs.lastLogFile = logs.currentLogFile
   logs.currentLogFile = newLogFile
   logs.legendaryLogFile = newLegendaryLogFile
   logs.gogdlLogFile = newGogdlLogFile
-
   configStore.set('general-logs', logs)
 
   // get longest prefix to log lines in a kind of table
@@ -120,7 +126,7 @@ export function getLogFile(appNameOrRunner: string): string {
 
   switch (appNameOrRunner) {
     case 'hyperplay':
-      return logs.currentLogFile
+      return logs.currentLogFile ?? logs.lastLogFile
     case 'legendary':
       return logs.legendaryLogFile
     case 'gogdl':
