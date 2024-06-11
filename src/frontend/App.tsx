@@ -37,6 +37,7 @@ import { WalletOnboardCloseReason } from 'common/types'
 import { DeviceStateController } from './state/DeviceState'
 import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
 import { UpdateModalController } from './components/UI/UpdateModalController'
+import { QuestsPage } from './screens/Quests'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -118,6 +119,7 @@ function App() {
               </Route>
             </Route>
             <Route path="/download-manager" element={<DownloadManager />} />
+            <Route path="/quests" element={<QuestsPage />} />
           </Routes>
         </main>
         <div className="controller">

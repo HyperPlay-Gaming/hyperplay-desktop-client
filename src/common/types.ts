@@ -906,9 +906,9 @@ export interface Reward {
   amount_per_user: number
   chain_id: number
   marketplace_url: string | null
-  reward_type: string
+  reward_type: 'ERC20' | 'ERC721' | 'ERC1155'
   name: string
-  contract_address: string
+  contract_address: `0x${string}`
   decimals: number
   /* eslint-disable-next-line */
   token_ids: any[]
@@ -929,4 +929,15 @@ export interface Quest {
     completion_threshold: number
     steam_games: { id: string }[]
   }
+}
+
+export interface RewardClaimSignature {
+  signature: `0x${string}`
+  nonce: string
+  expiration: number
+}
+
+export interface DepositContract {
+  contract_address: `0x${string}`
+  chain_id: number
 }

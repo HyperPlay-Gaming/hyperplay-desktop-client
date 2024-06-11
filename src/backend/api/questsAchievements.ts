@@ -18,11 +18,20 @@ export const getAchievementsStats = async (options: PlayerOptions) =>
 export const syncAchievements = async (options: PlayerOptions) =>
   ipcRenderer.invoke('syncAchievements', options)
 
-export const getQuestsForGame = async (projectId: string) =>
-  ipcRenderer.invoke('getQuestsForGame', projectId)
+export const getQuests = async (projectId?: string) =>
+  ipcRenderer.invoke('getQuests', projectId)
 
 export const getQuest = async (questId: number) =>
   ipcRenderer.invoke('getQuest', questId)
 
 export const getSteamGameMetadata = async (gameId: number) =>
   ipcRenderer.invoke('getSteamGameMetadata', gameId)
+
+export const getQuestRewardSignature = async (
+  address: `0x${string}`,
+  questId: number,
+  rewardId: number
+) => ipcRenderer.invoke('getQuestRewardSignature', address, questId, rewardId)
+
+export const getDepositContracts = async (questId: number) =>
+  ipcRenderer.invoke('getDepositContracts', questId)

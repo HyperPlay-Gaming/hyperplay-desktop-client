@@ -1,0 +1,9 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: 100%;
+  column-gap: var(--space-2lg-fixed);
+  padding-bottom: var(--space-2lg-fixed);
+  position: absolute;
+  inset: 0;
+}

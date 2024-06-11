@@ -12,3 +12,15 @@ export const logOut = async () => {
 
 export const signInWithProvider = (provider: string) =>
   ipcRenderer.send('openExternalUrl', `${DEV_PORTAL_URL}/oauth/${provider}`)
+
+export const authConnected = () => ipcRenderer.send('authConnected')
+export const authDisconnected = () => ipcRenderer.send('authDisconnected')
+
+export const handleAuthEvent = (
+  onChange: (e: Electron.IpcRendererEvent, name: string) => void
+) => {
+  ipcRenderer.on('authEvent', onChange)
+  return () => {
+    ipcRenderer.removeListener('authEvent', onChange)
+  }
+}

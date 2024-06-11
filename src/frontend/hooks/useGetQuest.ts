@@ -1,12 +1,12 @@
 import { Quest } from 'common/types'
-import { useQuery, useQueryClient } from 'react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 
 export default function useGetQuest(questId: number | null) {
   const queryClient = useQueryClient()
   const queryKey = `getQuest:${questId}`
-  const query = useQuery<Quest>(
-    queryKey,
-    async () => {
+  const query = useQuery<Quest>({
+    queryKey: [queryKey],
+    queryFn: async () => {
       if (questId === null) {
         return null
       }
@@ -14,15 +14,14 @@ export default function useGetQuest(questId: number | null) {
       if (!response) return null
       return response
     },
-    {
-      refetchOnWindowFocus: false,
-      enabled: questId !== null
-    }
-  )
+    refetchOnWindowFocus: false,
+    enabled: questId !== null
+  })
 
   return {
     data: query,
     isLoading: query.isLoading || query.isFetching,
-    invalidateQuery: async () => queryClient.invalidateQueries(queryKey)
+    invalidateQuery: async () =>
+      queryClient.invalidateQueries({ queryKey: [queryKey] })
   }
 }
