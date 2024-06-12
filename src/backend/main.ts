@@ -175,12 +175,17 @@ import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
-import { closeOverlay, toggleOverlay } from 'backend/hyperplay-overlay'
+import {
+  closeOverlay,
+  overlayIsRunning,
+  toggleOverlay
+} from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
 import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
 import 'backend/utils/auto_launch'
 import { hrtime } from 'process'
+import { getHyperPlayReleaseObject } from './storeManagers/hyperplay/utils'
 
 async function startProxyServer() {
   try {
@@ -411,9 +416,13 @@ if (!gotTheLock) {
   app.quit()
 } else {
   app.on('second-instance', (event, argv) => {
-    // Someone tried to run a second instance, we should focus our window.
-    const mainWindow = getMainWindow()
-    mainWindow?.show()
+    // Someone tried to run a second instance, we should focus the overlay or the main window if no overlay is running.
+    if (overlayIsRunning()) {
+      toggleOverlay({ action: 'ON' })
+    } else {
+      const mainWindow = getMainWindow()
+      mainWindow?.show()
+    }
 
     handleProtocol(argv)
   })
@@ -878,6 +887,10 @@ ipcMain.handle('isGameAvailable', async (e, args) => {
 ipcMain.handle('appIsInLibrary', async (event, appName, runner) => {
   if (runner !== 'hyperplay') return false
   return HyperPlayGameManager.appIsInLibrary(appName)
+})
+
+ipcMain.on('goToGamePage', async (event, appName) => {
+  return sendFrontendMessage('goToGamePage', appName)
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
@@ -2004,6 +2017,11 @@ ipcMain.on('killOverlay', () => {
 
 ipcMain.on('toggleOverlay', () => {
   toggleOverlay()
+})
+
+ipcMain.handle('getHyperPlayListings', async () => {
+  const listingsMap = await getHyperPlayReleaseObject()
+  return JSON.parse(JSON.stringify(listingsMap))
 })
 /*
  * INSERT OTHER IPC HANDLERS HERE

@@ -3,7 +3,8 @@ import {
   DownloadManagerState,
   Achievement,
   SummaryAchievement,
-  LDEnv
+  LDEnv,
+  HyperPlayRelease
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -89,6 +90,9 @@ interface HyperPlaySyncIPCFunctions {
   lockPopup: (lock: boolean) => void
   killOverlay: () => void
   toggleOverlay: () => void
+  authConnected: () => void
+  goToGamePage: (appName: string) => void
+  authDisconnected: () => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -266,11 +270,16 @@ interface HyperPlayAsyncIPCFunctions {
   getAuthSession: () => Promise<AuthSession | null>
   logOut: () => Promise<void>
   updateAutoLaunch: () => Promise<void>
-  getQuestsForGame: (
-    projectId: string
-  ) => Promise<{ id: number; name: string }[]>
+  getQuests: (projectId?: string) => Promise<Quest[]>
   getQuest: (questId: number) => Promise<Quest>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
+  getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
+  getQuestRewardSignature: (
+    address: `0x${string}`,
+    questId: number,
+    rewardId: number
+  ) => Promise<RewardClaimSignature>
+  getDepositContracts: (questId: number) => Promise<DepositContract[]>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

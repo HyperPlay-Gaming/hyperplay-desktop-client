@@ -22,9 +22,9 @@ const app = {
     return join(appBasePath, path)
   }),
   getVersion(): string {
-    // TODO: What should we return here?
     return '1.0.0'
-  }
+  },
+  requestSingleInstanceLock: jest.fn().mockReturnValue(true)
 }
 
 class Notification {

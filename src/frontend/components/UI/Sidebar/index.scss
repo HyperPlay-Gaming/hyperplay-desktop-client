@@ -22,6 +22,10 @@
   align-items: center;
   justify-content: center;
   font-weight: var(--semibold);
+
+  svg {
+    max-width: 24px;
+  }
 }
 
 .Sidebar__item:focus-visible {

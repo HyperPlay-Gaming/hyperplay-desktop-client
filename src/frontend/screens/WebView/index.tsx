@@ -28,6 +28,7 @@ import {
 } from '../../constants'
 import { METAMASK_SNAPS_URL } from 'common/constants'
 import storeAuthState from 'frontend/state/storeAuthState'
+import { getGameInfo } from 'frontend/helpers'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -123,6 +124,25 @@ function WebView() {
   useEffect(() => {
     window.api.trackScreen('WebView', { url: startUrl, runner })
   }, [startUrl, runner])
+
+  useEffect(() => {
+    if (!urlIsHpUrl(startUrl)) {
+      return
+    }
+
+    const removeHandleGoToGamePage = window.api.handleGoToGamePage(
+      async (_, gameId) => {
+        const gameInfo = await getGameInfo(gameId, 'hyperplay')
+        navigate(`/gamepage/hyperplay/${gameId}`, {
+          state: { gameInfo, fromDM: false }
+        })
+      }
+    )
+
+    return () => {
+      removeHandleGoToGamePage()
+    }
+  }, [])
 
   useLayoutEffect(() => {
     const webview = webviewRef.current

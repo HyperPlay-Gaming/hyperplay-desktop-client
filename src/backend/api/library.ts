@@ -57,6 +57,15 @@ export const handleGameStatus = (
   }
 }
 
+export const handleGoToGamePage = (
+  onChange: (e: Electron.IpcRendererEvent, gameId: string) => void
+) => {
+  ipcRenderer.on('goToGamePage', onChange)
+  return () => {
+    ipcRenderer.removeListener('goToGamePage', onChange)
+  }
+}
+
 export const onProgressUpdate = (
   appName: string,
   onChange: (e: Electron.IpcRendererEvent, status: GameStatus) => void

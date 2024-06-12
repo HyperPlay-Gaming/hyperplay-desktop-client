@@ -32,6 +32,25 @@ export async function getHyperPlayReleaseMap() {
   return hpStoreGameMap
 }
 
+/**
+ * @returns an object mapping project id key to listing value
+ * necessary for stringifying over ipc to send to the frontend.
+ * use getHyperPlayReleaseMap for backend/main process calls.
+ */
+export async function getHyperPlayReleaseObject() {
+  const hpStoreGameReleases = (
+    await axios.get<HyperPlayRelease[]>(valistListingsApiUrl)
+  ).data
+
+  const hpStoreGameMap = {}
+
+  hpStoreGameReleases.forEach((val) => {
+    hpStoreGameMap[val.project_id] = val
+  })
+
+  return hpStoreGameMap
+}
+
 export function handleArchAndPlatform(
   platformToInstall: InstallPlatform,
   releaseMeta: ChannelReleaseMeta

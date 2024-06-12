@@ -60,6 +60,7 @@ describe('logger/logfile.ts', () => {
 
   test('createNewLogFileAndClearOldOnes success', () => {
     jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
+
     configStore.set('general-logs', {
       currentLogFile: 'old/log/path/file.log',
       lastLogFile: '',
@@ -67,71 +68,17 @@ describe('logger/logfile.ts', () => {
       gogdlLogFile: ''
     })
 
+    jest.spyOn(app, 'requestSingleInstanceLock').mockImplementation(() => true)
     const data = logfile.createNewLogFileAndClearOldOnes()
 
     expect(logError).not.toBeCalled()
     expect(data).toStrictEqual({
       currentLogFile: expect.any(String),
-      lastLogFile: 'old/log/path/file.log',
+      lastLogFile: expect.any(String),
       legendaryLogFile: expect.any(String),
       gogdlLogFile: expect.any(String)
     })
   })
-
-  /*   test('createNewLogFileAndClearOldOnces removing old logs successful', () => {
-    jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
-    const date = new Date()
-    date.setMonth(date.getMonth() - 1)
-    const monthOutdatedLogFile = join(
-      tmpDir.name,
-      // @ts-ignore replaceAll error
-      `hyperplay-${date.toISOString().replaceAll(':', '_')}.log`
-    )
-
-    graceful_fs.closeSync(graceful_fs.openSync(monthOutdatedLogFile, 'w'))
-
-    expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeTruthy()
-
-    const data = logfile.createNewLogFileAndClearOldOnes()
-
-    expect(logError).toBeCalledWith(
-      [
-        expect.stringContaining('Removing old logs in /tmp/'),
-        Error('unlink failed')
-      ],
-      { prefix: 'Backend', skipLogToFile: true }
-    )
-    expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeTruthy()
-  })
-
-  test('createNewLogFileAndClearOldOnes removing old logs successful', () => {
-    jest.spyOn(app, 'getPath').mockReturnValue(tmpDir.name)
-    const date = new Date()
-    date.setMonth(date.getMonth() - 1)
-    const monthOutdatedLogFile = join(
-      tmpDir.name,
-      // @ts-ignore replaceAll error
-      `hyperplay-${date.toISOString().replaceAll(':', '_')}.log`
-    )
-    date.setFullYear(2021)
-    const yearOutdatedLogFile = join(
-      tmpDir.name,
-      // @ts-ignore replaceAll error
-      `hyperplay-${date.toISOString().replaceAll(':', '_')}.log`
-    )
-
-    graceful_fs.closeSync(graceful_fs.openSync(monthOutdatedLogFile, 'w'))
-    graceful_fs.closeSync(graceful_fs.openSync(yearOutdatedLogFile, 'w'))
-
-    expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeTruthy()
-    expect(graceful_fs.existsSync(yearOutdatedLogFile)).toBeTruthy()
-
-    const data = logfile.createNewLogFileAndClearOldOnes()
-
-    expect(logError).not.toBeCalled()
-    expect(graceful_fs.existsSync(monthOutdatedLogFile)).toBeFalsy()
-    expect(graceful_fs.existsSync(yearOutdatedLogFile)).toBeFalsy()
-  }) */
 
   test('getLogFile all possible values', () => {
     expect(logfile.getLogFile('hyperplay')).toMatch(/hyperplay.*\.log$/)

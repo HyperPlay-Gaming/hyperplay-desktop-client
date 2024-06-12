@@ -1,12 +1,13 @@
+import { HyperPlayRelease } from 'common/types'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 
-export default function useGetQuests(projectId?: string) {
+export default function useGetHyperPlayListings() {
   const queryClient = useQueryClient()
-  const queryKey = `getQuestsForProject:${projectId ?? 'allActive'}`
-  const query = useQuery({
+  const queryKey = `getHyperPlayListings`
+  const query = useQuery<Record<string, HyperPlayRelease> | null>({
     queryKey: [queryKey],
     queryFn: async () => {
-      const response = await window.api.getQuests(projectId)
+      const response = await window.api.getHyperPlayListings()
       if (!response) return null
       return response
     },
@@ -15,6 +16,7 @@ export default function useGetQuests(projectId?: string) {
 
   return {
     data: query,
+    isLoading: query.isLoading || query.isFetching,
     invalidateQuery: async () =>
       queryClient.invalidateQueries({ queryKey: [queryKey] })
   }
