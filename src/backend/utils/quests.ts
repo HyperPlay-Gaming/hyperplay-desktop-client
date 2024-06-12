@@ -4,7 +4,7 @@ import { DEV_PORTAL_URL } from 'common/constants'
 
 export async function postPlaySessionTime(
   appName: string,
-  playSessionInSeconds: string
+  playSessionInSeconds: number
 ) {
   const cookieString = await getPartitionCookies({
     partition: 'persist:auth',
@@ -22,7 +22,11 @@ export async function postPlaySessionTime(
   })
   const resultJson = await result.json()
   logInfo(
-    `Posted playstreak playsession. response: ${resultJson}`,
+    `Posted playstreak playsession. response: ${JSON.stringify(
+      resultJson,
+      null,
+      4
+    )}`,
     LogPrefix.HyperPlay
   )
 }
