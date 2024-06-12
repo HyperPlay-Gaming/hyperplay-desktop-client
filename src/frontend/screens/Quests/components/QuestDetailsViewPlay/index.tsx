@@ -11,6 +11,17 @@ export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
 }
 
+function getNextMidnightTimestamp() {
+  // Get the current date and time in UTC
+  const now = new Date()
+
+  // Get the timestamp for the next 00:00:00 UTC by adding 24 hours and then flooring it to the nearest day
+  const nextMidnight = new Date(now.getTime() + 24 * 60 * 60 * 1000)
+  nextMidnight.setUTCHours(0, 0, 0, 0)
+
+  return nextMidnight.valueOf()
+}
+
 export function QuestDetailsViewPlayWrapper({
   selectedQuestId
 }: QuestDetailsViewPlayWrapperProps) {
@@ -64,6 +75,7 @@ export function QuestDetailsViewPlayWrapper({
   if (!questMeta || questResult.data.isLoading || questResult.data.isFetching) {
     return (
       <QuestDetails
+        questType="PLAYSTREAK"
         onSignInClick={() => console.log('sign in click')}
         onConnectSteamAccountClick={() => console.log('steam connect click')}
         isSignedIn={true}
@@ -80,6 +92,11 @@ export function QuestDetailsViewPlayWrapper({
             completionPercent: 0,
             eligible: false,
             steamAccountLinked: false
+          },
+          playStreak: {
+            resetTimeInMsSinceEpoch: 0,
+            currentStreakInDays: 0,
+            requiredStreakInDays: 1
           }
         }}
         classNames={{ root: styles.questDetailsRoot }}
@@ -102,6 +119,7 @@ export function QuestDetailsViewPlayWrapper({
 
   return (
     <QuestDetails
+      questType={questMeta.type}
       onSignInClick={() => console.log('sign in click')}
       onConnectSteamAccountClick={() => console.log('steam connect click')}
       isSignedIn={true}
@@ -118,6 +136,13 @@ export function QuestDetailsViewPlayWrapper({
           completionPercent: questMeta.eligibility.completion_threshold,
           eligible: false,
           steamAccountLinked: false
+        },
+        playStreak: {
+          resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
+          currentStreakInDays:
+            questMeta.eligibility?.play_streak?.current_playstreak_in_days ?? 0,
+          requiredStreakInDays:
+            questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
         }
       }}
       classNames={{ root: styles.questDetailsRoot }}

@@ -123,6 +123,7 @@ export function QuestDetailsWrapper({
 
   if (selectedQuestId !== null && questMeta !== undefined) {
     const questDetailsProps: QuestDetailsProps = {
+      questType: 'PLAYSTREAK',
       title: questMeta.name,
       description: questMeta.description,
       eligibility: {
@@ -131,6 +132,11 @@ export function QuestDetailsWrapper({
           completionPercent: questMeta.eligibility.completion_threshold,
           eligible: false,
           steamAccountLinked: true
+        },
+        playStreak: {
+          resetTimeInMsSinceEpoch: 0,
+          currentStreakInDays: 0,
+          requiredStreakInDays: 1
         }
       },
       rewards: questMeta.rewards.map((val) => ({
@@ -158,6 +164,7 @@ export function QuestDetailsWrapper({
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
+      questType: 'PLAYSTREAK',
       title: '',
       description: '',
       eligibility: {
@@ -166,6 +173,11 @@ export function QuestDetailsWrapper({
           completionPercent: 0,
           eligible: false,
           steamAccountLinked: false
+        },
+        playStreak: {
+          resetTimeInMsSinceEpoch: 0,
+          currentStreakInDays: 1,
+          requiredStreakInDays: 2
         }
       },
       i18n,
