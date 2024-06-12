@@ -1287,6 +1287,8 @@ ipcMain.handle(
       BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
     tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
 
+    postPlaySessionTime(appName, (sessionPlaytimeInMs / BigInt(1000)).toString())
+
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
     }
@@ -2029,4 +2031,5 @@ ipcMain.handle('getHyperPlayListings', async () => {
 
 import './storeManagers/legendary/eos_overlay/ipc_handler'
 import { initExtension } from './extension/importer'
-import { hpApi } from './utils/hyperplay_api'
+import { hpApi } from './utils/hyperplay_api'import { postPlaySessionTime } from './utils/quests'
+
