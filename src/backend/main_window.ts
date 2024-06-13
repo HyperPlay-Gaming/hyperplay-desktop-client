@@ -1,7 +1,7 @@
 import { BrowserWindow, screen, app } from 'electron'
 import path from 'path'
 import { configStore } from './constants'
-import { controlWindow } from './hyperplay-overlay/model'
+import { getHpOverlay } from './overlay'
 
 let mainWindow: BrowserWindow | null = null
 
@@ -41,7 +41,7 @@ const hiddenPhrase = 'superhyper123'
 let hiddenPhraseCurrentIndex = 0
 
 // creates the mainWindow based on the configuration
-export const createMainWindow = () => {
+export const createMainWindow = async () => {
   let windowProps: Electron.Rectangle = {
     height: minSupportedResolution.height,
     width: minSupportedResolution.width,
@@ -92,7 +92,8 @@ export const createMainWindow = () => {
     }
   })
 
-  controlWindow(mainWindow.webContents.id, 'mainWindow')
+  const hpOverlay = await getHpOverlay()
+  hpOverlay?.controlWindow(mainWindow.webContents.id, 'mainWindow')
 
   mainWindow.webContents?.on('before-input-event', (ev, input) => {
     if (

@@ -58,12 +58,12 @@ import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
 import { legendarySetup } from './storeManagers/legendary/setup'
 import { gameManagerMap } from 'backend/storeManagers'
-import { closeOverlay, openOverlay } from 'backend/hyperplay-overlay'
 import * as VDF from '@node-steam/vdf'
 import { readFileSync } from 'fs'
 import { LegendaryCommand } from './storeManagers/legendary/commands'
 import { commandToArgsArray } from './storeManagers/legendary/library'
 import { searchForExecutableOnPath } from './utils/os/path'
+import { getHpOverlay } from './overlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -652,6 +652,7 @@ async function runWineCommand({
   const wineBin = wineVersion.bin.replaceAll("'", '')
 
   logDebug(['Running Wine command:', commandParts.join(' ')], LogPrefix.Backend)
+  const hpOverlay = await getHpOverlay()
 
   return new Promise<{ stderr: string; stdout: string }>((res) => {
     const wrappers = options?.wrappers || []
@@ -672,7 +673,7 @@ async function runWineCommand({
 
     if (overlayInfo) {
       const { showOverlay, appName, runner } = overlayInfo
-      if (showOverlay) openOverlay(appName, runner)
+      if (showOverlay) hpOverlay?.openOverlay(appName, runner)
     }
 
     if (!logsDisabled) {
@@ -735,18 +736,24 @@ async function runWineCommand({
 
       if (overlayInfo) {
         const { showOverlay } = overlayInfo
-        if (showOverlay) closeOverlay()
+        if (showOverlay) {
+          const hpOverlay = await getHpOverlay()
+          hpOverlay?.closeOverlay()
+        }
       }
 
       res(response)
     })
 
-    child.on('error', (error) => {
+    child.on('error', async (error) => {
       console.log(error)
 
       if (overlayInfo) {
         const { showOverlay } = overlayInfo
-        if (showOverlay) closeOverlay()
+        if (showOverlay) {
+          const hpOverlay = await getHpOverlay()
+          hpOverlay?.closeOverlay()
+        }
       }
     })
   })
@@ -813,6 +820,7 @@ async function callRunner(
   if (currentPromise) {
     return currentPromise
   }
+  const hpOverlay = await getHpOverlay()
 
   let promise = new Promise<ExecResult>((res, rej) => {
     const child = spawn(bin, commandParts, {
@@ -826,7 +834,8 @@ async function callRunner(
       (gameInfo.runner === 'hyperplay' ||
         (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
 
-    if (shouldOpenOverlay) openOverlay(gameInfo?.app_name, gameInfo.runner)
+    if (shouldOpenOverlay)
+      hpOverlay?.openOverlay(gameInfo?.app_name, gameInfo.runner)
 
     const stdout: string[] = []
     const stderr: string[] = []
@@ -879,7 +888,7 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
-      if (shouldOpenOverlay) closeOverlay()
+      if (shouldOpenOverlay) hpOverlay?.closeOverlay()
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,
@@ -898,7 +907,7 @@ async function callRunner(
     })
 
     child.on('error', (error) => {
-      if (shouldOpenOverlay) closeOverlay()
+      if (shouldOpenOverlay) hpOverlay?.closeOverlay()
       rej(error)
     })
   })

@@ -150,6 +150,7 @@ import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 
 import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL, devSentryDsn, prodSentryDsn } from 'common/constants'
+import { getHpOverlay, initOverlay } from './overlay'
 
 /*
  * INSERT OTHER IPC HANDLERS HERE
@@ -175,11 +176,6 @@ import { metricsAreEnabled, trackEvent } from './metrics/metrics'
 import { hpLibraryStore } from './storeManagers/hyperplay/electronStore'
 import { libraryStore as sideloadLibraryStore } from 'backend/storeManagers/sideload/electronStores'
 import { backendEvents } from 'backend/backend_events'
-import {
-  closeOverlay,
-  overlayIsRunning,
-  toggleOverlay
-} from 'backend/hyperplay-overlay'
 import { PROVIDERS } from 'common/types/proxy-types'
 import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
@@ -304,7 +300,7 @@ async function completeHyperPlayQuest() {
 async function initializeWindow(): Promise<BrowserWindow> {
   createNecessaryFolders()
   configStore.set('userHome', userHome)
-  mainWindow = createMainWindow()
+  mainWindow = await createMainWindow()
 
   mainWindow.webContents.on('input-event', (ev, inputEv) => {
     if (eventsToCloseMetaMaskPopupOn.includes(inputEv.type)) {
@@ -415,10 +411,11 @@ if (!gotTheLock) {
   logInfo('HyperPlay is already running, quitting this instance')
   app.quit()
 } else {
-  app.on('second-instance', (event, argv) => {
+  app.on('second-instance', async (event, argv) => {
     // Someone tried to run a second instance, we should focus the overlay or the main window if no overlay is running.
-    if (overlayIsRunning()) {
-      toggleOverlay({ action: 'ON' })
+    const hpOverlay = await getHpOverlay()
+    if (hpOverlay?.overlayIsRunning()) {
+      hpOverlay.toggleOverlay({ action: 'ON' })
     } else {
       const mainWindow = getMainWindow()
       mainWindow?.show()
@@ -457,12 +454,21 @@ if (!gotTheLock) {
     ])
 
     // keyboards with alt and no option key can be used with mac so register both
+    const hpOverlay = await getHpOverlay()
+    const toggle =
+      hpOverlay?.toggleOverlay ??
+      (() =>
+        logInfo(
+          'Cannot toggle overlay without @hyperplay/overlay package',
+          LogPrefix.HyperPlay
+        ))
     const openOverlayAccelerator = 'Alt+X'
-    globalShortcut.register(openOverlayAccelerator, toggleOverlay)
+    globalShortcut.register(openOverlayAccelerator, toggle)
     const openOverlayAcceleratorMac = 'Option+X'
-    globalShortcut.register(openOverlayAcceleratorMac, toggleOverlay)
+    globalShortcut.register(openOverlayAcceleratorMac, toggle)
 
     initExtension(hpApi)
+    initOverlay(hpApi)
 
     initOnlineMonitor()
 
@@ -2011,12 +2017,14 @@ ipcMain.on('openAuthModalIfAppReloads', () => {
   onboardLocalStore.set('openAuthModalIfAppReloads', true)
 })
 
-ipcMain.on('killOverlay', () => {
-  closeOverlay()
+ipcMain.on('killOverlay', async () => {
+  const hpOverlay = await getHpOverlay()
+  hpOverlay?.closeOverlay()
 })
 
-ipcMain.on('toggleOverlay', () => {
-  toggleOverlay()
+ipcMain.on('toggleOverlay', async () => {
+  const hpOverlay = await getHpOverlay()
+  hpOverlay?.toggleOverlay()
 })
 
 ipcMain.handle('getHyperPlayListings', async () => {
