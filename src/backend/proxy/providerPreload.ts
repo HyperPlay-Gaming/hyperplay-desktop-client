@@ -17,7 +17,10 @@ const enabledTopics = [
   'connect',
   'message',
   'disconnect',
-  'chainChanged'
+  'chainChanged',
+  'close',
+  // deprecated
+  'networkChanged'
 ]
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -53,7 +56,7 @@ const sendRequest = async (...args: unknown[]) => {
   if (Object.hasOwn(result, 'error')) {
     throw result[0].error.message
   }
-  return result[0].result
+  return result
 }
 
 const sendAsyncRequest = async (payload: any, callback: JsonRpcCallback) => {
