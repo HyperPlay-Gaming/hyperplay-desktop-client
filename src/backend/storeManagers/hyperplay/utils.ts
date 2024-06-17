@@ -193,7 +193,7 @@ export function refreshGameInfoFromHpRelease(
             : data.project_name
         }
       ],
-      storeUrl: `https://hyperplay-store-6wgwlqpev-hyperplay.vercel.app/game/${data.project_name}`
+      storeUrl: `https://hyperplay-store-kx4d6geil-hyperplay.vercel.app/game/${data.project_name}`
     },
     art_square: newArtSquare !== undefined ? newArtSquare : 'fallback',
     art_cover: newArtCover !== undefined ? newArtCover : 'fallback',
@@ -201,7 +201,7 @@ export function refreshGameInfoFromHpRelease(
     version: latestVersion,
     is_windows_native: hasWindowsNativeBuild,
     channels: channelsMap,
-    store_url: `https://hyperplay-store-6wgwlqpev-hyperplay.vercel.app/game/${data.project_name}`,
+    store_url: `https://hyperplay-store-kx4d6geil-hyperplay.vercel.app/game/${data.project_name}`,
     wineSupport: data.project_meta.wine_support,
     description: newDescription,
     v: '1',
