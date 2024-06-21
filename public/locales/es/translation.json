@@ -217,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Tiempo Estimado"
+        "ETA": "Tiempo Estimado",
+        "title_dm": "Gestor de descargas"
     },
     "epic": {
         "offline-notification-body": "¡Puede que algunos servicios no funcionen correctamente si no estás conectado a los servidores de Epic Games!",
@@ -985,7 +986,23 @@
         "reward": "Recompensa",
         "connectSteamAccount": "Conectar a una cuenta de Steam",
         "linkAccount": "Vincula tu cuenta de Steam para verificar la elegibilidad.",
-        "needMoreAchievements": "Necesitas haber completado\n{{percent}}% de los logros en uno de estos juegos."
+        "needMoreAchievements": "Necesitas haber completado\n{{percent}}% de los logros en uno de estos juegos.",
+        "claimed": "Reclamado",
+        "quests": "Misiones",
+        "playstreak": "Racha de juego",
+        "errorMessage": "Ha habido un error en la transacción.",
+        "Play": "Jugar",
+        "readyForClaim": "Listo para reclamar",
+        "active": "Activo",
+        "signIn": "Iniciar sesión",
+        "View Game": "Ver el juego"
     },
-    "back_to_game": "Volver al juego"
+    "back_to_game": "Volver al juego",
+    "email_subscription": {
+        "title": "¡Gracias por suscribirte!",
+        "subtitle": "Ahora formas parte de nuestra comunidad, y estamos encantados de compartir contigo valiosas actualizaciones y conocimientos."
+    },
+    "quests": {
+        "quests": "Misiones"
+    }
 }
