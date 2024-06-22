@@ -12,7 +12,7 @@ ipcMain.handle('getQuests', async (e, projectId) => {
 })
 
 ipcMain.handle('getQuest', async (e, questId) => {
-  const questResult = await fetch(`https://api.valist.io/v1/quests/${questId}`)
+  const questResult = await fetch(`${DEV_PORTAL_URL}api/v1/quests/${questId}`)
   const questResultJson = await questResult.json()
   return questResultJson
 })
