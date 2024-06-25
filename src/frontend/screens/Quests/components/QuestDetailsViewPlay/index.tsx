@@ -6,6 +6,7 @@ import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
+import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -64,6 +65,7 @@ export function QuestDetailsViewPlayWrapper({
   if (!questMeta || questResult.data.isLoading || questResult.data.isFetching) {
     return (
       <QuestDetails
+        questType="PLAYSTREAK"
         onSignInClick={() => console.log('sign in click')}
         onConnectSteamAccountClick={() => console.log('steam connect click')}
         isSignedIn={true}
@@ -80,6 +82,11 @@ export function QuestDetailsViewPlayWrapper({
             completionPercent: 0,
             eligible: false,
             steamAccountLinked: false
+          },
+          playStreak: {
+            resetTimeInMsSinceEpoch: 0,
+            currentStreakInDays: 0,
+            requiredStreakInDays: 1
           }
         }}
         classNames={{ root: styles.questDetailsRoot }}
@@ -102,6 +109,7 @@ export function QuestDetailsViewPlayWrapper({
 
   return (
     <QuestDetails
+      questType={questMeta.type}
       onSignInClick={() => console.log('sign in click')}
       onConnectSteamAccountClick={() => console.log('steam connect click')}
       isSignedIn={true}
@@ -118,6 +126,13 @@ export function QuestDetailsViewPlayWrapper({
           completionPercent: questMeta.eligibility.completion_threshold,
           eligible: false,
           steamAccountLinked: false
+        },
+        playStreak: {
+          resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
+          currentStreakInDays:
+            questMeta.eligibility?.play_streak?.current_playstreak_in_days ?? 0,
+          requiredStreakInDays:
+            questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
         }
       }}
       classNames={{ root: styles.questDetailsRoot }}

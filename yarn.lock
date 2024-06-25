@@ -1868,12 +1868,24 @@
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.2.0.tgz#76467a94aa888aeb22aafa43eb6ff889df3a5a7f"
   integrity sha512-rBevIsj2nclStJ7AxTdfsa3ovHb1H+qApwrxcTVo+NNdeJiB9V75hsKfrkG5AwNcRUNxrPPiScGYCNmLMoh8pg==
 
+"@fortawesome/fontawesome-common-types@6.5.2":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-common-types/-/fontawesome-common-types-6.5.2.tgz#eaf2f5699f73cef198454ebc0c414e3688898179"
+  integrity sha512-gBxPg3aVO6J0kpfHNILc+NMhXnqHumFxOmjYCFfOiLZfwhnnfhtsdA2hfJlDnj+8PjAs6kKQPenOTKj3Rf7zHw==
+
 "@fortawesome/fontawesome-svg-core@^6.1.1":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.2.0.tgz#11856eaf4dd1d865c442ddea1eed8ee855186ba2"
   integrity sha512-Cf2mAAeMWFMzpLC7Y9H1I4o3wEU+XovVJhTiNG8ZNgSQj53yl7OCJaS80K4YjrABWZzbAHVaoHE1dVJ27AAYXw==
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.2.0"
+
+"@fortawesome/fontawesome-svg-core@^6.4.0":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/fontawesome-svg-core/-/fontawesome-svg-core-6.5.2.tgz#4b42de71e196039b0d5ccf88559b8044e3296c21"
+  integrity sha512-5CdaCBGl8Rh9ohNdxeeTMxIj8oc3KNBgIeLMvJosBMdslK/UnEB8rzyDRrbKdL1kDweqBPo4GT9wvnakHWucZw==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.5.2"
 
 "@fortawesome/free-brands-svg-icons@^6.1.1":
   version "6.2.0"
@@ -1889,6 +1901,13 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.2.0"
 
+"@fortawesome/free-regular-svg-icons@^6.4.0":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-regular-svg-icons/-/free-regular-svg-icons-6.5.2.tgz#e8e04b4368d49920abdf1bacc63c67c870635222"
+  integrity sha512-iabw/f5f8Uy2nTRtJ13XZTS1O5+t+anvlamJ3zJGLEVE2pKsAWhPv2lq01uQlfgCX7VaveT3EVs515cCN9jRbw==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.5.2"
+
 "@fortawesome/free-solid-svg-icons@^6.1.1":
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.2.0.tgz#8dcde48109354fd7a5ece8ea48d678bb91d4b5f0"
@@ -1896,10 +1915,24 @@
   dependencies:
     "@fortawesome/fontawesome-common-types" "6.2.0"
 
+"@fortawesome/free-solid-svg-icons@^6.4.0":
+  version "6.5.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/free-solid-svg-icons/-/free-solid-svg-icons-6.5.2.tgz#9b40b077b27400a5e9fcbf2d15b986c7be69e9ca"
+  integrity sha512-QWFZYXFE7O1Gr1dTIp+D6UcFUF0qElOnZptpi7PBUMylJh+vFmIedVe1Ir6RM1t2tEQLLSV1k7bR4o92M+uqlw==
+  dependencies:
+    "@fortawesome/fontawesome-common-types" "6.5.2"
+
 "@fortawesome/react-fontawesome@^0.1.18":
   version "0.1.19"
   resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.19.tgz#2b36917578596f31934e71f92b7cf9c425fd06e4"
   integrity sha512-Hyb+lB8T18cvLNX0S3llz7PcSOAJMLwiVKBuuzwM/nI5uoBw+gQjnf9il0fR1C3DKOI5Kc79pkJ4/xB0Uw9aFQ==
+  dependencies:
+    prop-types "^15.8.1"
+
+"@fortawesome/react-fontawesome@^0.2.0":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.2.2.tgz#68b058f9132b46c8599875f6a636dad231af78d4"
+  integrity sha512-EnkrprPNqI6SXJl//m29hpaNzOp1bruISWaOiRtkMi/xSvHJlzc2j2JAYS7egxt/EbjSNV/k6Xy0AQI6vB2+1g==
   dependencies:
     prop-types "^15.8.1"
 
@@ -1921,6 +1954,13 @@
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
+
+"@hyperplay/chains@^0.2.9":
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/@hyperplay/chains/-/chains-0.2.9.tgz#4d3f4a4a5facd4b00d8f8a0a7abb9e9f8a8ae8b0"
+  integrity sha512-lBGN+dnNsSD2ys2/CAjfbqOdJUUYBX6IqHqc/pwEQDE6tLE1DI58mcuFY/KLPD0y9gA9hqEkbXnRmIaC7QTlAw==
+  dependencies:
+    axios "^1.4.0"
 
 "@hyperplay/check-disk-space@^3.5.2":
   version "3.5.2"
@@ -1982,10 +2022,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/ui@^1.5.2":
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.2.tgz#21146ba3bb49acb067e71e13a25cb9a42cf91b12"
-  integrity sha512-7R6zbnUpvRdg3U+aqCRG2ie5/q/oLwvpz23eP4J3VSI+tk1BibUi9MqTVSwKmz8Z0aqfsqimJr1XC+SbAWcZmA==
+"@hyperplay/ui@^1.5.9":
+  version "1.5.9"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.9.tgz#a348e0a7754c35c49af37645eddd2d5d562f0c73"
+  integrity sha512-/ImVfd3Yb3jMne989EVZLXlNLEE46OPRiSlNVEICbz+3NoelIKkc8BDKP0RHjl/dIT/p59oDVinHDGN/pWSMkA==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
@@ -3727,6 +3767,19 @@
   dependencies:
     defer-to-connect "^2.0.0"
 
+"@tabler/icons-react@^2.46.0":
+  version "2.47.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons-react/-/icons-react-2.47.0.tgz#b704e7ae98f95be8bd6e938b4b2e84cd20b0cf31"
+  integrity sha512-iqly2FvCF/qUbgmvS8E40rVeYY7laltc5GUjRxQj59DuX0x/6CpKHTXt86YlI2whg4czvd/c8Ce8YR08uEku0g==
+  dependencies:
+    "@tabler/icons" "2.47.0"
+    prop-types "^15.7.2"
+
+"@tabler/icons@2.47.0":
+  version "2.47.0"
+  resolved "https://registry.yarnpkg.com/@tabler/icons/-/icons-2.47.0.tgz#c41c680d1947e3ab2d60af3febc4132287c60596"
+  integrity sha512-4w5evLh+7FUUiA1GucvGj2ReX2TvOjEr4ejXdwL/bsjoSkof6r1gQmzqI+VHrE2CpJpB3al7bCTulOkFa/RcyA==
+
 "@tanstack/query-core@5.40.0":
   version "5.40.0"
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.40.0.tgz#c74ae8303752ed4b5a0ab848ec71a0e6e8179f83"
@@ -4535,6 +4588,18 @@
   dependencies:
     "@typescript-eslint/types" "6.13.2"
     eslint-visitor-keys "^3.4.1"
+
+"@valist/sdk@^2.9.1":
+  version "2.9.7"
+  resolved "https://registry.yarnpkg.com/@valist/sdk/-/sdk-2.9.7.tgz#57d5c25083d4e5b10d19031a73a6de0638b3f79f"
+  integrity sha512-DLZ1Rb7HtfNWjtF8dlIBc9s1cGlq2/zX7Kp7ZGc/VOK4ynNIyWY8m9Cjre0TS4cLIQPUlqmJM3pIcekUKz7kYg==
+  dependencies:
+    "@capacitor-community/electron" "1.4.2"
+    axios "^1.4.0"
+    ethers "^6.11.1"
+    node-fetch "^2.6.1"
+    proxy-from-env "^1.1.0"
+    ua-parser-js "1.0.35"
 
 "@valist/sdk@^2.9.5":
   version "2.9.5"
@@ -7852,6 +7917,13 @@ eth-rpc-errors@^4.0.2, eth-rpc-errors@^4.0.3:
   dependencies:
     fast-safe-stringify "^2.0.6"
 
+ethereum-blockies-base64@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/ethereum-blockies-base64/-/ethereum-blockies-base64-1.0.2.tgz#4aebca52142bf4d16a3144e6e2b59303e39ed2b3"
+  integrity sha512-Vg2HTm7slcWNKaRhCUl/L3b4KrB8ohQXdd5Pu3OI897EcR6tVRvUqdTwAyx+dnmoDzj8e2bwBLDQ50ByFmcz6w==
+  dependencies:
+    pnglib "0.0.1"
+
 ethereum-cryptography@^2.0.0:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ethereum-cryptography/-/ethereum-cryptography-2.1.2.tgz#18fa7108622e56481157a5cb7c01c0c6a672eb67"
@@ -7897,6 +7969,19 @@ ethers@^5.5.4:
     "@ethersproject/wallet" "5.7.0"
     "@ethersproject/web" "5.7.1"
     "@ethersproject/wordlists" "5.7.0"
+
+ethers@^6.11.1:
+  version "6.13.0"
+  resolved "https://registry.yarnpkg.com/ethers/-/ethers-6.13.0.tgz#f342958d0f622cf06559f59fbccdc1d30fa64f50"
+  integrity sha512-+yyQQQWEntY5UVbCv++guA14RRVFm1rSnO1GoLFdrK7/XRWMoktNgyG9UjwxrQqGBfGyFKknNZ81YpUS2emCgg==
+  dependencies:
+    "@adraffy/ens-normalize" "1.10.1"
+    "@noble/curves" "1.2.0"
+    "@noble/hashes" "1.3.2"
+    "@types/node" "18.15.13"
+    aes-js "4.0.0-beta.5"
+    tslib "2.4.0"
+    ws "8.5.0"
 
 ethers@^6.12.1:
   version "6.12.1"
@@ -11908,6 +11993,11 @@ pngjs@^5.0.0:
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-5.0.0.tgz#e79dd2b215767fd9c04561c01236df960bce7fbb"
   integrity sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==
+
+pnglib@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/pnglib/-/pnglib-0.0.1.tgz#f9ab6f9c688f4a9d579ad8be28878a716e30c096"
+  integrity sha512-95ChzOoYLOPIyVmL+Y6X+abKGXUJlvOVLkB1QQkyXl7Uczc6FElUy/x01NS7r2GX6GRezloO/ecCX9h4U9KadA==
 
 pony-cause@^2.1.10:
   version "2.1.11"
