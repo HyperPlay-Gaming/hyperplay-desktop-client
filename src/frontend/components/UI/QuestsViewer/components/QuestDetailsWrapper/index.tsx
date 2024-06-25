@@ -72,7 +72,7 @@ export function QuestDetailsWrapper({
     }
   }
 
-  async function mintRewards(rewards: Reward[]) {
+  async function mintReward(reward_i: Reward) {
     if (questMeta?.id === undefined) {
       console.error('tried to mint but quest meta id is undefined')
       return
@@ -81,43 +81,72 @@ export function QuestDetailsWrapper({
       console.error('tried to mint but no account connected')
       return
     }
-    for (const reward_i of rewards) {
-      await switchChainAsync({ chainId: reward_i.chain_id })
-      const sig: RewardClaimSignature =
-        await window.api.getQuestRewardSignature(
-          account.address,
-          questMeta.id,
-          reward_i.id
-        )
+    await switchChainAsync({ chainId: reward_i.chain_id })
+    const sig: RewardClaimSignature =
+      await window.api.getQuestRewardSignature(
+        account.address,
+        questMeta.id,
+        reward_i.id
+      )
 
-      const depositContracts: DepositContract[] =
-        await window.api.getDepositContracts(questMeta.id)
-      const depositContractAddress = depositContracts.find(
-        (val) => val.chain_id === reward_i.chain_id
-      )?.contract_address
-      if (depositContractAddress === undefined) {
-        console.error(
-          `Deposit contract address undefined for quest ${questMeta.id} and chain id ${reward_i.chain_id}`
-        )
-        return
-      }
-      if (reward_i.reward_type === 'ERC20') {
-        writeContract({
-          address: depositContractAddress,
-          abi: questRewardAbi,
-          functionName: 'withdrawERC20',
-          args: [
-            BigInt(questMeta.id),
-            reward_i.contract_address,
-            BigInt(
-              getAmount(reward_i.amount_per_user, reward_i.decimals).toString()
-            ),
-            BigInt(sig.nonce),
-            BigInt(sig.expiration),
-            sig.signature
-          ]
-        })
-      }
+    const depositContracts: DepositContract[] =
+      await window.api.getDepositContracts(questMeta.id)
+    const depositContractAddress = depositContracts.find(
+      (val) => val.chain_id === reward_i.chain_id
+    )?.contract_address
+    if (depositContractAddress === undefined) {
+      console.error(
+        `Deposit contract address undefined for quest ${questMeta.id} and chain id ${reward_i.chain_id}`
+      )
+      return
+    }
+    if (reward_i.reward_type === 'ERC20') {
+      writeContract({
+        address: depositContractAddress,
+        abi: questRewardAbi,
+        functionName: 'withdrawERC20',
+        args: [
+          BigInt(questMeta.id),
+          reward_i.contract_address,
+          BigInt(
+            getAmount(reward_i.amount_per_user, reward_i.decimals).toString()
+          ),
+          BigInt(sig.nonce),
+          BigInt(sig.expiration),
+          sig.signature
+        ]
+      })
+    }
+  }
+
+  async function claimPoints(reward: Reward){
+    const result = await window.api.claimQuestPointsReward(reward.id.toString())
+    console.log('claim points result ', result)
+  }
+
+  async function completeExternalTask(reward: Reward){
+    const result = await window.api.completeExternalTask(reward.id.toString())
+    console.log('completeExternalTask result ', result)
+  }
+
+  async function claimRewards(rewards: Reward[]) {
+    for (const reward_i of rewards) {
+      switch (reward_i.reward_type) {
+        case 'ERC1155':
+        case 'ERC721':
+        case 'ERC20':
+          await mintReward(reward_i)
+          break;
+        case 'POINTS': 
+          await claimPoints(reward_i)
+          break;
+        case 'EXTERNAL-TASKS': 
+          await completeExternalTask(reward_i)
+          break;
+        default:
+          console.error(`unkonwn reward type ${reward_i.reward_type}`)
+          break;
+      } 
     }
   }
 
@@ -138,7 +167,7 @@ export function QuestDetailsWrapper({
         imageUrl: val.image_url
       })),
       i18n,
-      onClaimClick: async () => mintRewards(questMeta.rewards),
+      onClaimClick: async () => claimRewards(questMeta.rewards),
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,

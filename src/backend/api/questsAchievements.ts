@@ -35,3 +35,9 @@ export const getQuestRewardSignature = async (
 
 export const getDepositContracts = async (questId: number) =>
   ipcRenderer.invoke('getDepositContracts', questId)
+
+export const claimQuestPointsReward = async (rewardId: string) =>
+  ipcRenderer.invoke('claimQuestPointsReward', rewardId)
+
+export const completeExternalTask = async (rewardId: string) =>
+  ipcRenderer.invoke('completeExternalTask', rewardId)
