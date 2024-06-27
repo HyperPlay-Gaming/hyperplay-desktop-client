@@ -1,10 +1,8 @@
 import React from 'react'
-import Typography from '@mui/material/Typography'
-import LinearProgress from '@mui/material/LinearProgress'
-import Paper from '@mui/material/Paper'
 
 import type { SystemInformation } from 'backend/utils/systeminfo'
 import { useTranslation } from 'react-i18next'
+import { Progress } from '@mantine/core'
 
 interface Props {
   memory: SystemInformation['memory']
@@ -17,12 +15,10 @@ function MemoryProgress({ memory }: Props) {
   const memoryUsedInPercent = (used / total) * 100
 
   return (
-    <Paper sx={{ p: 1, height: '100%' }} square>
-      <Typography variant="h6">
-        {t('settings.systemInformation.memory', 'Memory:')}
-      </Typography>
-      <LinearProgress variant="determinate" value={memoryUsedInPercent} />
-      <Typography>
+    <div style={{ height: '100%' }}>
+      <h6>{t('settings.systemInformation.memory', 'Memory:')}</h6>
+      <Progress variant="determinate" value={memoryUsedInPercent} />
+      <div>
         {t(
           'settings.systemInformation.memoryStats',
           '{{percentUsed}}% used ({{usedGib}} / {{totalGib}}',
@@ -32,8 +28,8 @@ function MemoryProgress({ memory }: Props) {
             totalGib: totalFormatted
           }
         )}
-      </Typography>
-    </Paper>
+      </div>
+    </div>
   )
 }
 

@@ -1,10 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
-import Grid from '@mui/material/Grid'
-
 import VendorLogo from './vendorLogo'
 
 import type { SystemInformation } from 'backend/utils/systeminfo'
@@ -34,13 +30,13 @@ function GPUCard({ gpu, gpuNumber, showNumber }: GPUCardProps) {
     : t('settings.systemInformation.gpu', 'GPU:')
 
   return (
-    <Paper sx={{ padding: 1, height: '100%' }} square>
-      <Typography variant="h6">{headingText}</Typography>
-      <Grid container spacing={1}>
-        <Grid item xs={2}>
+    <div>
+      <h6>{headingText}</h6>
+      <div className="gridItemContainer">
+        <div>
           <VendorLogo model={vendorString} />
-        </Grid>
-        <Grid item xs={10}>
+        </div>
+        <div>
           {deviceString}
           <br />
           DID={deviceId} VID={vendorId}, DSID={subdeviceId} VSID={subvendorId}
@@ -50,9 +46,9 @@ function GPUCard({ gpu, gpuNumber, showNumber }: GPUCardProps) {
             'Driver: {{driverVersion}}',
             { driverVersion }
           )}
-        </Grid>
-      </Grid>
-    </Paper>
+        </div>
+      </div>
+    </div>
   )
 }
 

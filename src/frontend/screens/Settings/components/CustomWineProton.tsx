@@ -4,9 +4,9 @@ import { SelectField, SvgButton } from 'frontend/components/UI'
 import ContextProvider from 'frontend/state/ContextProvider'
 import useSetting from 'frontend/hooks/useSetting'
 import SettingsContext from '../SettingsContext'
-import { Tooltip } from '@mui/material'
-import AddBoxIcon from '@mui/icons-material/AddBox'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
+import { Tooltip } from '@mantine/core'
+import { faAdd, faRemove } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export default function CustomWineProton() {
   const { t } = useTranslation()
@@ -61,11 +61,10 @@ export default function CustomWineProton() {
         <div className="iconsWrapper rightButtons addRemoveSvgButtons">
           <SvgButton onClick={() => removeCustomPath()}>
             <Tooltip
-              title={t('tooltip.removepath', 'Remove Path')}
-              placement="bottom"
-              arrow
+              label={t('tooltip.removepath', 'Remove Path')}
+              position="bottom"
             >
-              <RemoveCircleIcon
+              <FontAwesomeIcon
                 data-testid="removeWinePath"
                 style={{
                   color: selectedPath
@@ -74,6 +73,7 @@ export default function CustomWineProton() {
                   cursor: selectedPath ? 'pointer' : ''
                 }}
                 fontSize="large"
+                icon={faRemove}
               />
             </Tooltip>
           </SvgButton>{' '}
@@ -82,14 +82,14 @@ export default function CustomWineProton() {
             className={`is-primary`}
           >
             <Tooltip
-              title={t('tooltip.addpath', 'Add New Path')}
-              placement="bottom"
-              arrow
+              label={t('tooltip.addpath', 'Add New Path')}
+              position="bottom"
             >
-              <AddBoxIcon
+              <FontAwesomeIcon
                 data-testid="addWinePath"
                 style={{ color: 'var(--success)', cursor: 'pointer' }}
                 fontSize="large"
+                icon={faAdd}
               />
             </Tooltip>
           </SvgButton>

@@ -2,9 +2,8 @@ import React, { useContext, useState } from 'react'
 
 import { useTranslation } from 'react-i18next'
 
-import Backspace from '@mui/icons-material/Backspace'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
+import { faBackspace, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import ContextProvider from 'frontend/state/ContextProvider'
 import useSetting from 'frontend/hooks/useSetting'
 import {
@@ -95,13 +94,14 @@ const EgsSettings = () => {
                 }}
               />
             ) : (
-              <Backspace
+              <FontAwesomeIcon
                 data-testid="setEpicSyncPathBackspace"
                 style={
                   isLinked
                     ? { color: 'transparent', pointerEvents: 'none' }
                     : { color: '#B0ABB6' }
                 }
+                icon={faBackspace}
               />
             )
           }

@@ -1,9 +1,13 @@
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { faHeartCrack, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import {
+  faHeartCrack,
+  faPowerOff,
+  faSyncAlt,
+  faTrash
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-import { CleaningServicesOutlined, DeleteOutline } from '@mui/icons-material'
 import './index.css'
 import ContextProvider from 'frontend/state/ContextProvider'
 import libraryState from 'frontend/state/libraryState'
@@ -41,7 +45,7 @@ export default function ErrorComponent({ message }: { message: string }) {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <CleaningServicesOutlined />
+              <FontAwesomeIcon className="Dialog__CloseIcon" icon={faTrash} />
             </div>
             <span className="button-icon-text">
               {t('settings.clear-cache', 'Clear HyperPlay Cache')}
@@ -55,7 +59,10 @@ export default function ErrorComponent({ message }: { message: string }) {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <DeleteOutline />
+              <FontAwesomeIcon
+                className="Dialog__CloseIcon"
+                icon={faPowerOff}
+              />
             </div>
             <span className="button-icon-text">
               {t('settings.reset-hyperplay', 'Reset HyperPlay')}

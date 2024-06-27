@@ -1,6 +1,6 @@
 import React from 'react'
-import { CircularProgress } from '@mui/material'
 import './index.scss'
+import { LoadingSpinner } from '@hyperplay/ui'
 
 interface Props {
   text: string
@@ -14,7 +14,7 @@ export default function TextWithProgress({ text, onClick }: Props) {
       role={onClick ? 'button' : 'status'}
       onClick={onClick}
     >
-      <CircularProgress className="progress" size={24} />
+      <LoadingSpinner className="progress" size={24} />
       <span className="feedback-text">{text}</span>
     </div>
   )

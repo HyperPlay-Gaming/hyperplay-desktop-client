@@ -1,18 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CircularProgress from '@mui/material/CircularProgress'
-import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
-import Button from '@mui/material/Button'
-import Box from '@mui/material/Box'
-import { StyledEngineProvider } from '@mui/material/styles'
-
 import { useAwaited } from 'frontend/hooks/useAwaited'
 
 import { ReactComponent as SteamDeckLogo } from 'frontend/assets/steam-deck-logo.svg'
-import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 
 import CPUCard from './cpu'
 import MemoryProgress from './memory'
@@ -23,6 +14,10 @@ import SoftwareInfo from './software'
 import './index.scss'
 
 import type { SystemInformation } from 'backend/utils/systeminfo'
+import { Button, LoadingSpinner } from '@hyperplay/ui'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCopy } from '@fortawesome/free-solid-svg-icons'
+import styles from './index.module.scss'
 
 interface SystemSpecificationsProps {
   systemInformation: SystemInformation
@@ -32,23 +27,19 @@ function SystemSpecifications({
   systemInformation
 }: SystemSpecificationsProps) {
   return (
-    <Grid container spacing={1}>
-      <Grid item xs={6}>
-        <CPUCard cpu={systemInformation.CPU} />
-      </Grid>
-      <Grid item xs={6}>
-        <MemoryProgress memory={systemInformation.memory} />
-      </Grid>
+    <>
+      <CPUCard cpu={systemInformation.CPU} />
+      <MemoryProgress memory={systemInformation.memory} />
       {systemInformation.GPUs.map((gpu, index) => (
-        <Grid key={index} item xs={6}>
+        <div key={index}>
           <GPUCard
             gpu={gpu}
             gpuNumber={index}
             showNumber={systemInformation.GPUs.length !== 1}
           />
-        </Grid>
+        </div>
       ))}
-    </Grid>
+    </>
   )
 }
 
@@ -59,19 +50,15 @@ function SteamDeckSystemSpecifications({
 
   return (
     <>
-      <Paper sx={{ width: '50%' }} square>
-        <Typography variant="h6">
-          {t('settings.systemInformation.systemModel', 'System Model:')}
-        </Typography>
-        <Grid container>
-          <Grid item xs={2}>
+      <div>
+        <h6>{t('settings.systemInformation.systemModel', 'System Model:')}</h6>
+        <div>
+          <div>
             <SteamDeckLogo className="logo fillWithThemeColor" />
-          </Grid>
-          <Grid item xs={10}>
-            {t('settings.systemInformation.steamDeck', 'Steam Deck')}
-          </Grid>
-        </Grid>
-      </Paper>
+          </div>
+          <div>{t('settings.systemInformation.steamDeck', 'Steam Deck')}</div>
+        </div>
+      </div>
       <details>
         <summary className="showSystemSpecifications">
           {t(
@@ -91,12 +78,14 @@ export default function SystemInfo() {
   const systemInformation = useAwaited(async () =>
     window.api.systemInfo.get(false)
   )
-  if (!systemInformation) return <CircularProgress />
+  if (!systemInformation) return <LoadingSpinner />
 
   return (
-    <StyledEngineProvider injectFirst>
-      <Box sx={{ width: '770px', textAlign: 'start' }} className="systeminfo">
-        <h5>{t('settings.navbar.systemInformation', 'System Information')}</h5>
+    <div style={{ width: '770px', textAlign: 'start' }} className="systeminfo">
+      <h5 style={{ marginBottom: 'var(--space-xs)' }}>
+        {t('settings.navbar.systemInformation', 'System Information')}
+      </h5>
+      <div className={styles.gridContainer}>
         {systemInformation.isSteamDeck ? (
           <SteamDeckSystemSpecifications
             systemInformation={systemInformation}
@@ -104,27 +93,22 @@ export default function SystemInfo() {
         ) : (
           <SystemSpecifications systemInformation={systemInformation} />
         )}
-        <hr />
-        <Grid container spacing={1}>
-          <Grid item xs={6}>
-            <OSInfo
-              os={systemInformation.OS}
-              isFlatpak={systemInformation.isFlatpak}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <SoftwareInfo software={systemInformation.softwareInUse} />
-          </Grid>
-        </Grid>
-        <Button
-          className="copyToClipboardButton"
-          variant="contained"
-          startIcon={<ContentCopyIcon />}
-          onClick={window.api.systemInfo.copyToClipboard}
-        >
-          {t('settings.systemInformation.copyToClipboard', 'Copy to clipboard')}
-        </Button>
-      </Box>
-    </StyledEngineProvider>
+        <OSInfo
+          os={systemInformation.OS}
+          isFlatpak={systemInformation.isFlatpak}
+        />
+        <div>
+          <SoftwareInfo software={systemInformation.softwareInUse} />
+        </div>
+      </div>
+      <Button
+        className="copyToClipboardButton"
+        type="secondary"
+        leftIcon={<FontAwesomeIcon icon={faCopy} />}
+        onClick={window.api.systemInfo.copyToClipboard}
+      >
+        {t('settings.systemInformation.copyToClipboard', 'Copy to clipboard')}
+      </Button>
+    </div>
   )
 }

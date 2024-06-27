@@ -10,9 +10,9 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { NavLink } from 'react-router-dom'
 
 import { InstallModal } from 'frontend/screens/Library/components'
-import { CircularProgress } from '@mui/material'
 import UninstallModal from 'frontend/components/UI/UninstallModal'
 import libraryState from 'frontend/state/libraryState'
+import { LoadingSpinner } from '@hyperplay/ui'
 
 interface Props {
   appName: string
@@ -216,7 +216,7 @@ export default function GamesSubmenu({
   }, [title, appName])
 
   const refreshCircle = () => {
-    return <CircularProgress className="link button is-text is-link" />
+    return <LoadingSpinner className="link button is-text is-link" />
   }
 
   const isHyperPlayGame = runner === 'hyperplay'

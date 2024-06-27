@@ -1,0 +1,7 @@
+.gridContainer {
+  display: grid;
+  grid-auto-rows: auto;
+  grid-template-columns: auto auto;
+  row-gap: var(--space-md-fixed);
+  column-gap: var(--space-md-fixed);
+}
