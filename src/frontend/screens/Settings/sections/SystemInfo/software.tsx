@@ -15,9 +15,9 @@ function SoftwareInfo({ software }: Props) {
   const { appVersion, legendaryVersion, gogdlVersion } = software
 
   return (
-    <div style={{ padding: 'var(--space-md)' }}>
+    <div>
       <h6>HyperPlay</h6>
-      <div>
+      <div className="gridItemContainer">
         <div>
           <HyperPlayIcon className="app-icon" />
         </div>

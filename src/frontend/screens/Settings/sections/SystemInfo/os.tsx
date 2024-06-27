@@ -5,6 +5,7 @@ import { faApple, faLinux, faWindows } from '@fortawesome/free-brands-svg-icons'
 
 import type { SystemInformation } from 'backend/utils/systeminfo'
 import { useTranslation } from 'react-i18next'
+import styles from './os.module.scss'
 
 interface OSLogoProps {
   platform: string
@@ -28,10 +29,10 @@ interface OSInfoProps {
 function OSInfo({ os, isFlatpak }: OSInfoProps) {
   const { t } = useTranslation()
   return (
-    <div style={{ padding: 1, height: '100%' }}>
+    <div style={{ padding: 1 }}>
       <h6>{t('settings.systemInformation.os', 'Operating System:')}</h6>
-      <div>
-        <div>
+      <div className="gridItemContainer">
+        <div className={styles.logoContainer}>
           <OSLogo platform={os.platform} />
         </div>
         <div>

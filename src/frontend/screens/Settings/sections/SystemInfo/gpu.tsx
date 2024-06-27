@@ -32,7 +32,7 @@ function GPUCard({ gpu, gpuNumber, showNumber }: GPUCardProps) {
   return (
     <div>
       <h6>{headingText}</h6>
-      <div>
+      <div className="gridItemContainer">
         <div>
           <VendorLogo model={vendorString} />
         </div>

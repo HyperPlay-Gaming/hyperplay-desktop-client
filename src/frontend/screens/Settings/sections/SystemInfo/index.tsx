@@ -17,6 +17,7 @@ import type { SystemInformation } from 'backend/utils/systeminfo'
 import { Button, LoadingSpinner } from '@hyperplay/ui'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopy } from '@fortawesome/free-solid-svg-icons'
+import styles from './index.module.scss'
 
 interface SystemSpecificationsProps {
   systemInformation: SystemInformation
@@ -26,13 +27,9 @@ function SystemSpecifications({
   systemInformation
 }: SystemSpecificationsProps) {
   return (
-    <div>
-      <div>
-        <CPUCard cpu={systemInformation.CPU} />
-      </div>
-      <div>
-        <MemoryProgress memory={systemInformation.memory} />
-      </div>
+    <>
+      <CPUCard cpu={systemInformation.CPU} />
+      <MemoryProgress memory={systemInformation.memory} />
       {systemInformation.GPUs.map((gpu, index) => (
         <div key={index}>
           <GPUCard
@@ -42,7 +39,7 @@ function SystemSpecifications({
           />
         </div>
       ))}
-    </div>
+    </>
   )
 }
 
@@ -85,20 +82,21 @@ export default function SystemInfo() {
 
   return (
     <div style={{ width: '770px', textAlign: 'start' }} className="systeminfo">
-      <h5>{t('settings.navbar.systemInformation', 'System Information')}</h5>
-      {systemInformation.isSteamDeck ? (
-        <SteamDeckSystemSpecifications systemInformation={systemInformation} />
-      ) : (
-        <SystemSpecifications systemInformation={systemInformation} />
-      )}
-      <hr />
-      <div>
-        <div>
-          <OSInfo
-            os={systemInformation.OS}
-            isFlatpak={systemInformation.isFlatpak}
+      <h5 style={{ marginBottom: 'var(--space-xs)' }}>
+        {t('settings.navbar.systemInformation', 'System Information')}
+      </h5>
+      <div className={styles.gridContainer}>
+        {systemInformation.isSteamDeck ? (
+          <SteamDeckSystemSpecifications
+            systemInformation={systemInformation}
           />
-        </div>
+        ) : (
+          <SystemSpecifications systemInformation={systemInformation} />
+        )}
+        <OSInfo
+          os={systemInformation.OS}
+          isFlatpak={systemInformation.isFlatpak}
+        />
         <div>
           <SoftwareInfo software={systemInformation.softwareInUse} />
         </div>

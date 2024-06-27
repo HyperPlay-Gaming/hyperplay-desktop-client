@@ -3,16 +3,15 @@ import React from 'react'
 import type { SystemInformation } from 'backend/utils/systeminfo'
 import { useTranslation } from 'react-i18next'
 import VendorLogo from './vendorLogo'
-import styles from './cpu.module.scss'
 
 function CPUCard({ cpu }: { cpu: SystemInformation['CPU'] }) {
   const { model, cores } = cpu
   const { t } = useTranslation()
 
   return (
-    <div className={styles.root}>
+    <div>
       <h6>{t('settings.systemInformation.cpu', 'CPU:')}</h6>
-      <div>
+      <div className="gridItemContainer">
         <div>
           <VendorLogo model={model} />
         </div>
