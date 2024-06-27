@@ -43,9 +43,15 @@ const AlternativeExe = () => {
       onChange={(event) => setTargetExe(event.target.value)}
       icon={
         !targetExe.length ? (
-          <FontAwesomeIcon className="material-icons refreshing" icon={faFolderPlus} />
+          <FontAwesomeIcon
+            className="material-icons refreshing"
+            icon={faFolderPlus}
+          />
         ) : (
-          <FontAwesomeIcon className="setEpicSyncPathBackspace" icon={faBackspace} />
+          <FontAwesomeIcon
+            className="setEpicSyncPathBackspace"
+            icon={faBackspace}
+          />
         )
       }
       onIconClick={handleTargetExe}

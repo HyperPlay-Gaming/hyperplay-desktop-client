@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { faCheck, faCopy, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
+import {
+  faCheck,
+  faCopy,
+  faFolderOpen
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { observer } from 'mobx-react-lite'
 import { UpdateComponent } from 'frontend/components/UI'
@@ -220,7 +224,11 @@ function LogSettings() {
           >
             <div className="button-icontext-flex">
               <div className="button-icon-flex">
-                {copiedLog ? <FontAwesomeIcon icon={faCheck}/> : <FontAwesomeIcon icon={faCopy}/>}
+                {copiedLog ? (
+                  <FontAwesomeIcon icon={faCheck} />
+                ) : (
+                  <FontAwesomeIcon icon={faCopy} />
+                )}
               </div>
               <span className="button-icon-text">
                 {t(

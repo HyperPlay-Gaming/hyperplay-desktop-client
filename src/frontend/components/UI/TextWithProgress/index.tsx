@@ -14,7 +14,7 @@ export default function TextWithProgress({ text, onClick }: Props) {
       role={onClick ? 'button' : 'status'}
       onClick={onClick}
     >
-      <LoadingSpinner className="progress" size={24}/>
+      <LoadingSpinner className="progress" size={24} />
       <span className="feedback-text">{text}</span>
     </div>
   )

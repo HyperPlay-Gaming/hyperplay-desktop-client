@@ -61,9 +61,7 @@ export default React.memo(function WineManager(): JSX.Element | null {
     getWineVersions(repository.type)
   )
 
-  const handleChangeTab = (
-    repo: WineManagerUISettings
-  ) => {
+  const handleChangeTab = (repo: WineManagerUISettings) => {
     setRepository(repo)
     setWineVersions(getWineVersions(repo.type))
   }
@@ -112,7 +110,11 @@ export default React.memo(function WineManager(): JSX.Element | null {
           >
             {wineManagerSettings.map(({ type, value, enabled }) => {
               if (enabled) {
-                return <Tabs.Tab value={value} key={value}><div className="menu">{type}</div></Tabs.Tab>
+                return (
+                  <Tabs.Tab value={value} key={value}>
+                    <div className="menu">{type}</div>
+                  </Tabs.Tab>
+                )
               }
               return null
             })}

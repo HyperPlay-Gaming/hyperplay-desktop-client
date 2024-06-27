@@ -1,6 +1,11 @@
 import React, { useContext } from 'react'
 import { useTranslation } from 'react-i18next'
-import { faHeartCrack, faPowerOff, faSyncAlt, faTrash } from '@fortawesome/free-solid-svg-icons'
+import {
+  faHeartCrack,
+  faPowerOff,
+  faSyncAlt,
+  faTrash
+} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import './index.css'
@@ -54,7 +59,10 @@ export default function ErrorComponent({ message }: { message: string }) {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <FontAwesomeIcon className="Dialog__CloseIcon" icon={faPowerOff} />
+              <FontAwesomeIcon
+                className="Dialog__CloseIcon"
+                icon={faPowerOff}
+              />
             </div>
             <span className="button-icon-text">
               {t('settings.reset-hyperplay', 'Reset HyperPlay')}

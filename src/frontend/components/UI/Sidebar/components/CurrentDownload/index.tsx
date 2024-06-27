@@ -54,9 +54,7 @@ export default React.memo(function CurrentDownload({ appName, runner }: Props) {
       <Link to={`/download-manager`} className="currentDownload">
         {sidebarCollapsed && (
           <span className="statusIcon" title={`${getStatus()} - ${gameTitle}`}>
-            <Indicator
-              label={`${Math.round(progress.percent ?? 0)}%`}
-            >
+            <Indicator label={`${Math.round(progress.percent ?? 0)}%`}>
               <FontAwesomeIcon icon={faDownload} />
             </Indicator>
           </span>
@@ -69,12 +67,10 @@ export default React.memo(function CurrentDownload({ appName, runner }: Props) {
             <br />
             <div className={styles.progressContainer}>
               <div className={styles.progressBarContainer}>
-                <Progress
-                  value={progress.percent || 0}
-                />
+                <Progress value={progress.percent || 0} />
               </div>
               <div className={styles.progressValueContainer}>
-                <div className='body-sm'>{`${Math.round(
+                <div className="body-sm">{`${Math.round(
                   progress.percent || 0
                 )}%`}</div>
               </div>

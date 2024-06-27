@@ -64,7 +64,11 @@ const AltLegendaryBin = () => {
             }}
           />
         ) : (
-          <FontAwesomeIcon style={{ color: 'currentColor' }} data-testid="setLegendaryBinaryBackspace" icon={faBackspace} />
+          <FontAwesomeIcon
+            style={{ color: 'currentColor' }}
+            data-testid="setLegendaryBinaryBackspace"
+            icon={faBackspace}
+          />
         )
       }
       onIconClick={

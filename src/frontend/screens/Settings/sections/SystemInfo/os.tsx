@@ -29,9 +29,7 @@ function OSInfo({ os, isFlatpak }: OSInfoProps) {
   const { t } = useTranslation()
   return (
     <div style={{ padding: 1, height: '100%' }}>
-      <h6>
-        {t('settings.systemInformation.os', 'Operating System:')}
-      </h6>
+      <h6>{t('settings.systemInformation.os', 'Operating System:')}</h6>
       <div>
         <div>
           <OSLogo platform={os.platform} />

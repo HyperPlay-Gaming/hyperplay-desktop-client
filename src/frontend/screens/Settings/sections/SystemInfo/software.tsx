@@ -18,12 +18,10 @@ function SoftwareInfo({ software }: Props) {
     <div style={{ padding: 'var(--space-md)' }}>
       <h6>HyperPlay</h6>
       <div>
-        <div >
+        <div>
           <HyperPlayIcon className="app-icon" />
         </div>
-        <div
-        style={{margin: 'auto', paddingLeft: 'var(--space-xs-fixed)'}}
-        >
+        <div style={{ margin: 'auto', paddingLeft: 'var(--space-xs-fixed)' }}>
           {t('settings.systemInformation.version', 'Version: {{appVersion}}', {
             appVersion
           })}

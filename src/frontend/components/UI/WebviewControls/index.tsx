@@ -5,7 +5,13 @@ import { useTranslation } from 'react-i18next'
 import SvgButton from '../SvgButton'
 import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBackward, faExternalLink, faForward, faRefresh, faReply } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBackward,
+  faExternalLink,
+  faForward,
+  faRefresh,
+  faReply
+} from '@fortawesome/free-solid-svg-icons'
 
 interface WebviewControlsProps {
   webview: WebviewTag | null
@@ -94,7 +100,7 @@ export default function WebviewControls({
           onClick={() => handleButtons('back')}
           disabled={!canGoBack}
         >
-                <FontAwesomeIcon icon={faBackward} />
+          <FontAwesomeIcon icon={faBackward} />
         </SvgButton>
         <SvgButton
           className="WebviewControls__icon"

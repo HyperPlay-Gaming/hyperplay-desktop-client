@@ -54,16 +54,12 @@ function SteamDeckSystemSpecifications({
   return (
     <>
       <div>
-        <h6>
-          {t('settings.systemInformation.systemModel', 'System Model:')}
-        </h6>
+        <h6>{t('settings.systemInformation.systemModel', 'System Model:')}</h6>
         <div>
           <div>
             <SteamDeckLogo className="logo fillWithThemeColor" />
           </div>
-          <div>
-            {t('settings.systemInformation.steamDeck', 'Steam Deck')}
-          </div>
+          <div>{t('settings.systemInformation.steamDeck', 'Steam Deck')}</div>
         </div>
       </div>
       <details>
@@ -88,35 +84,33 @@ export default function SystemInfo() {
   if (!systemInformation) return <LoadingSpinner />
 
   return (
-      <div style={{ width: '770px', textAlign: 'start' }} className="systeminfo">
-        <h5>{t('settings.navbar.systemInformation', 'System Information')}</h5>
-        {systemInformation.isSteamDeck ? (
-          <SteamDeckSystemSpecifications
-            systemInformation={systemInformation}
-          />
-        ) : (
-          <SystemSpecifications systemInformation={systemInformation} />
-        )}
-        <hr />
+    <div style={{ width: '770px', textAlign: 'start' }} className="systeminfo">
+      <h5>{t('settings.navbar.systemInformation', 'System Information')}</h5>
+      {systemInformation.isSteamDeck ? (
+        <SteamDeckSystemSpecifications systemInformation={systemInformation} />
+      ) : (
+        <SystemSpecifications systemInformation={systemInformation} />
+      )}
+      <hr />
+      <div>
         <div>
-          <div>
-            <OSInfo
-              os={systemInformation.OS}
-              isFlatpak={systemInformation.isFlatpak}
-            />
-          </div>
-          <div>
-            <SoftwareInfo software={systemInformation.softwareInUse} />
-          </div>
+          <OSInfo
+            os={systemInformation.OS}
+            isFlatpak={systemInformation.isFlatpak}
+          />
         </div>
-        <Button
-          className="copyToClipboardButton"
-          type='secondary'
-          leftIcon={ <FontAwesomeIcon icon={faCopy}/>}
-          onClick={window.api.systemInfo.copyToClipboard}
-        >
-          {t('settings.systemInformation.copyToClipboard', 'Copy to clipboard')}
-        </Button>
+        <div>
+          <SoftwareInfo software={systemInformation.softwareInUse} />
+        </div>
       </div>
+      <Button
+        className="copyToClipboardButton"
+        type="secondary"
+        leftIcon={<FontAwesomeIcon icon={faCopy} />}
+        onClick={window.api.systemInfo.copyToClipboard}
+      >
+        {t('settings.systemInformation.copyToClipboard', 'Copy to clipboard')}
+      </Button>
+    </div>
   )
 }

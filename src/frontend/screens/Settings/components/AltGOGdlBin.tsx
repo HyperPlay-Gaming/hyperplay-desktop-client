@@ -62,7 +62,11 @@ const AltGOGdlBin = () => {
             }}
           />
         ) : (
-          <FontAwesomeIcon style={{ color: '#currentColor' }} data-testid="setGogdlBinaryBackspace" icon={faBackspace} />
+          <FontAwesomeIcon
+            style={{ color: '#currentColor' }}
+            data-testid="setGogdlBinaryBackspace"
+            icon={faBackspace}
+          />
         )
       }
       onIconClick={

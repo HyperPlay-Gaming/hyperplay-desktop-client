@@ -304,7 +304,11 @@ export default observer(function Library(): JSX.Element {
         </div>
 
         <button id="backToTopBtn" onClick={backToTop} ref={backToTopElement}>
-          <FontAwesomeIcon id="backToTopArrow" className="material-icons" icon={faArrowUp} />
+          <FontAwesomeIcon
+            id="backToTopArrow"
+            className="material-icons"
+            icon={faArrowUp}
+          />
         </button>
 
         {showModal.show && (

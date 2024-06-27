@@ -79,7 +79,11 @@ export default function SIDLogin({ backdropClick }: Props) {
                 className="sid"
               >
                 {`${t('message.part5')}`}
-          <FontAwesomeIcon style={{ marginLeft: '4px' }} className="material-icons" icon={faInfo} />
+                <FontAwesomeIcon
+                  style={{ marginLeft: '4px' }}
+                  className="material-icons"
+                  icon={faInfo}
+                />
               </span>
             </li>
             <li>
@@ -106,7 +110,10 @@ export default function SIDLogin({ backdropClick }: Props) {
         />
         {loading && (
           <p className="message">
-            <FontAwesomeIcon className="material-icons refreshing" icon={faRefresh} />
+            <FontAwesomeIcon
+              className="material-icons refreshing"
+              icon={faRefresh}
+            />
           </p>
         )}
         <div className=".sidLoginButton">

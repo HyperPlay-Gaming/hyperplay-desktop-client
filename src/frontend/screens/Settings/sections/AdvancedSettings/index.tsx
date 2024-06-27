@@ -12,7 +12,17 @@ import {
 } from '../../components'
 import libraryState from 'frontend/state/libraryState'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBoxOpen, faCancel, faCopy, faDownload, faPaintBrush, faRefresh, faTrash, faUpload, faX } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBoxOpen,
+  faCancel,
+  faCopy,
+  faDownload,
+  faPaintBrush,
+  faRefresh,
+  faTrash,
+  faUpload,
+  faX
+} from '@fortawesome/free-solid-svg-icons'
 
 export default function AdvancedSettings() {
   const { config } = useContext(SettingsContext)
@@ -207,7 +217,7 @@ export default function AdvancedSettings() {
                   className="button is-primary"
                   onClick={checkForEosOverlayUpdates}
                 >
-                <FontAwesomeIcon icon={faRefresh}/>
+                  <FontAwesomeIcon icon={faRefresh} />
                   <span>
                     {eosOverlayCheckingForUpdates
                       ? t(
@@ -228,7 +238,7 @@ export default function AdvancedSettings() {
                     className="button is-primary"
                     onClick={updateEosOverlay}
                   >
-                    <FontAwesomeIcon icon={faUpload}/>
+                    <FontAwesomeIcon icon={faUpload} />
                     <span>
                       {eosOverlayInstallingOrUpdating
                         ? t('setting.eosOverlay.updating', 'Updating...')
@@ -270,7 +280,7 @@ export default function AdvancedSettings() {
           {/* Install */}
           {!eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
             <button className="button is-primary" onClick={installEosOverlay}>
-                  <FontAwesomeIcon icon={faDownload} />
+              <FontAwesomeIcon icon={faDownload} />
               <span>{t('setting.eosOverlay.install', 'Install')}</span>
             </button>
           )}
@@ -335,7 +345,7 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-            <FontAwesomeIcon icon={faX} />
+              <FontAwesomeIcon icon={faX} />
             </div>
             <span className="button-icon-text">
               {t('settings.reset-hyperplay', 'Reset HyperPlay')}
@@ -348,7 +358,7 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-            <FontAwesomeIcon icon={faX} />
+              <FontAwesomeIcon icon={faX} />
             </div>
             <span className="button-icon-text">
               {t('settings.reset-extension', 'Reset Extension')}

@@ -40,8 +40,8 @@ function ContextMenu({ children, items }: Props) {
     callback()
   }
 
-  const y = contextMenu !== null ? contextMenu.mouseY : 0;
-  const x = contextMenu !== null ? contextMenu.mouseX : 0;
+  const y = contextMenu !== null ? contextMenu.mouseY : 0
+  const x = contextMenu !== null ? contextMenu.mouseX : 0
 
   return (
     <div

@@ -1,7 +1,12 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import SvgButton from '../SvgButton'
 import TextInputField from '../TextInputField'
-import { faAdd, faArrowUp, faCircle, faEdit } from '@fortawesome/free-solid-svg-icons'
+import {
+  faAdd,
+  faArrowUp,
+  faCircle,
+  faEdit
+} from '@fortawesome/free-solid-svg-icons'
 import classnames from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
@@ -153,12 +158,18 @@ export function TableInput({
                   </td>
                   <td>
                     <SvgButton onClick={() => editRow(row)}>
-                      <FontAwesomeIcon style={{ color: 'var(--accent)' }}
-                                  fontSize="large" icon={faEdit} />
+                      <FontAwesomeIcon
+                        style={{ color: 'var(--accent)' }}
+                        fontSize="large"
+                        icon={faEdit}
+                      />
                     </SvgButton>
                     <SvgButton onClick={() => removeRow(row)}>
-            <FontAwesomeIcon style={{ color: 'var(--danger)' }}
-                        fontSize="large" icon={faCircle} />
+                      <FontAwesomeIcon
+                        style={{ color: 'var(--danger)' }}
+                        fontSize="large"
+                        icon={faCircle}
+                      />
                     </SvgButton>
                   </td>
                 </tr>
@@ -196,8 +207,11 @@ export function TableInput({
                 onClick={() => addRow(valueInputs)}
                 className={`is-primary`}
               >
-                <FontAwesomeIcon style={{ color: 'var(--success)' }}
-                            fontSize="large" icon={faAdd} />
+                <FontAwesomeIcon
+                  style={{ color: 'var(--success)' }}
+                  fontSize="large"
+                  icon={faAdd}
+                />
               </SvgButton>
             </td>
           </tr>

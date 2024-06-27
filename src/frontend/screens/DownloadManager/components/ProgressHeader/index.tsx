@@ -124,7 +124,7 @@ export default function ProgressHeader(props: {
             </div>
             <div style={{ minWidth: 35 }}>
               <div
-              className='caption'
+                className="caption"
                 title={t('download-manager.ETA', 'Estimated Time')}
               >
                 {props.state === 'running'

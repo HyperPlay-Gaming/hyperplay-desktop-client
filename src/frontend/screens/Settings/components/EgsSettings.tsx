@@ -94,13 +94,15 @@ const EgsSettings = () => {
                 }}
               />
             ) : (
-              <FontAwesomeIcon 
-              data-testid="setEpicSyncPathBackspace"
-              style={
-                isLinked
-                  ? { color: 'transparent', pointerEvents: 'none' }
-                  : { color: '#B0ABB6' }
-              } icon={faBackspace} />
+              <FontAwesomeIcon
+                data-testid="setEpicSyncPathBackspace"
+                style={
+                  isLinked
+                    ? { color: 'transparent', pointerEvents: 'none' }
+                    : { color: '#B0ABB6' }
+                }
+                icon={faBackspace}
+              />
             )
           }
           onIconClick={

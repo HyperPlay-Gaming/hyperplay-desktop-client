@@ -11,9 +11,7 @@ function CPUCard({ cpu }: { cpu: SystemInformation['CPU'] }) {
 
   return (
     <div className={styles.root}>
-      <h6>
-        {t('settings.systemInformation.cpu', 'CPU:')}
-      </h6>
+      <h6>{t('settings.systemInformation.cpu', 'CPU:')}</h6>
       <div>
         <div>
           <VendorLogo model={model} />

@@ -120,8 +120,11 @@ export const ThemeSelector = () => {
           !themesPath ? (
             <FontAwesomeIcon icon={faFolderOpen} />
           ) : (
-            <FontAwesomeIcon icon={faBackspace} data-testid="setGogdlBinaryBackspace"
-            style={{ color: '#currentColor' }} />
+            <FontAwesomeIcon
+              icon={faBackspace}
+              data-testid="setGogdlBinaryBackspace"
+              style={{ color: '#currentColor' }}
+            />
           )
         }
         onIconClick={

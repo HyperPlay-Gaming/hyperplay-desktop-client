@@ -64,7 +64,7 @@ export default function CustomWineProton() {
               label={t('tooltip.removepath', 'Remove Path')}
               position="bottom"
             >
-              <FontAwesomeIcon 
+              <FontAwesomeIcon
                 data-testid="removeWinePath"
                 style={{
                   color: selectedPath
@@ -72,7 +72,9 @@ export default function CustomWineProton() {
                     : 'var(--status-warning)',
                   cursor: selectedPath ? 'pointer' : ''
                 }}
-                fontSize="large" icon={faRemove} />
+                fontSize="large"
+                icon={faRemove}
+              />
             </Tooltip>
           </SvgButton>{' '}
           <SvgButton
@@ -83,9 +85,12 @@ export default function CustomWineProton() {
               label={t('tooltip.addpath', 'Add New Path')}
               position="bottom"
             >
-                    <FontAwesomeIcon data-testid="addWinePath"
+              <FontAwesomeIcon
+                data-testid="addWinePath"
                 style={{ color: 'var(--success)', cursor: 'pointer' }}
-                fontSize="large" icon={faAdd} />
+                fontSize="large"
+                icon={faAdd}
+              />
             </Tooltip>
           </SvgButton>
         </div>
