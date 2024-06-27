@@ -3,9 +3,9 @@ import { PROVIDERS } from 'common/types/proxy-types'
 import { clipboard, ipcMain } from 'electron'
 import { JsonRpcCallback } from 'common/types'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
-import { updatePopupInOverlay } from 'backend/hyperplay-overlay'
 import { trackEvent } from 'backend/metrics/metrics'
 import defaultProviderStore from './provider_store'
+import { getHpOverlay } from 'backend/overlay'
 
 async function init() {
   try {
@@ -26,10 +26,11 @@ ipcMain?.handle(
     isBootstrapping = false
   ): Promise<string> {
     const extensionProvider = await import('@hyperplay/extension-provider')
+    const hpOverlay = await getHpOverlay()
     /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
     const api: any = {
       backendEvents,
-      updatePopupInOverlay,
+      updatePopupInOverlay: hpOverlay?.updatePopupInOverlay,
       logError,
       logInfo,
       extensionProvider: extensionProvider.extensionProvider

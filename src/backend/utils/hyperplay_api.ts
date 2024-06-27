@@ -14,8 +14,6 @@ import {
   providerRequests,
   returnExtensionRequestEvents
 } from 'backend/extension/provider/emitters'
-import { toggleOverlay, updatePopupInOverlay } from 'backend/hyperplay-overlay'
-import { removePopup } from 'backend/hyperplay-overlay/model'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { getMainWindow } from 'backend/main_window'
 import defaultProviderStore from 'backend/proxy/provider_store'
@@ -35,7 +33,10 @@ function setMainWindowOnTop() {
 
 export const hpApi: HyperPlayAPI = {
   backendEvents,
-  updatePopupInOverlay,
+  updatePopupInOverlay: async (...args) => {
+    const hpOverlay = await import('@hyperplay/overlay')
+    return hpOverlay?.updatePopupInOverlay(...args)
+  },
   logError: (msg: string) => logError(msg, LogPrefix.HyperPlay),
   logInfo: (msg: string) => logInfo(msg, LogPrefix.HyperPlay),
   extensionProvider: undefined,
@@ -68,11 +69,15 @@ export const hpApi: HyperPlayAPI = {
   returnExtensionRequestEvents,
   errorExtensionRequestEvents,
   providerRequests,
-  toggleOverlay: toggleOverlay,
-  removePopup: () => {
+  toggleOverlay: async (...args) => {
+    const hpOverlay = await import('@hyperplay/overlay')
+    return hpOverlay?.toggleOverlay(...args)
+  },
+  removePopup: async () => {
     const mainWindow = getMainWindow()
     if (mainWindow) {
-      removePopup(mainWindow.id)
+      const hpOverlay = await import('@hyperplay/overlay')
+      hpOverlay?.removePopup(mainWindow.id)
     }
   },
   getMetaMaskExtensionId: async () => {

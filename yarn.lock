@@ -1999,6 +1999,14 @@
     express "^4.18.2"
     stream-throttle "^0.1.3"
 
+"@hyperplay/overlay@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@hyperplay/overlay/-/overlay-0.0.6.tgz#c25bc205917dfc0c17c9b95a525cea08960a3680"
+  integrity sha512-y9GON2QFoJybfElUhv8P9eDPwRXLyHzcCvr2GLPY685Yww8ryGlnpj8LevpLqirz71PqrR2p5P9wmUTybi9KMg==
+  dependencies:
+    "@hyperplay/utils" "^0.0.14"
+    mobx "^6.12.3"
+
 "@hyperplay/providers@^0.0.5":
   version "0.0.5"
   resolved "https://registry.yarnpkg.com/@hyperplay/providers/-/providers-0.0.5.tgz#0cfa9783fc7cbca14722545a936f872e1ea3d4cd"
@@ -2031,6 +2039,13 @@
   version "0.0.12"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.12.tgz#4ce7a97268f862deae99363d2d8029ee80003cc0"
   integrity sha512-EQ7i/OPlF8Se1DsLWvyrEf1Bv20wNnKpT7U+t6KolDudolhAnMNMvjnpcDc431ctWxpi9PZbYjNcwhkGdpo9ww==
+  dependencies:
+    bignumber.js "^9.1.2"
+
+"@hyperplay/utils@^0.0.14":
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.14.tgz#7420bdb67214c24086ed8463a9cabc30a7023192"
+  integrity sha512-eWn3jVTBBH2ki5+etZQs77hH4qVpphSINjBRW8AJ5oNtUXCqrPFS+eFimfUyzi+Kwl2/ef9lQ1QD3SEe/1BRZA==
   dependencies:
     bignumber.js "^9.1.2"
 
@@ -11143,6 +11158,11 @@ mobx-react-lite@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/mobx-react-lite/-/mobx-react-lite-3.4.0.tgz#d59156a96889cdadad751e5e4dab95f28926dfff"
   integrity sha512-bRuZp3C0itgLKHu/VNxi66DN/XVkQG7xtoBVWxpvC5FhAqbOCP21+nPhULjnzEqd7xBMybp6KwytdUpZKEgpIQ==
+
+mobx@^6.12.3:
+  version "6.12.3"
+  resolved "https://registry.yarnpkg.com/mobx/-/mobx-6.12.3.tgz#b6a0fde4268116be602d50bffb32f1b90a8fb077"
+  integrity sha512-c8NKkO4R2lShkSXZ2Ongj1ycjugjzFFo/UswHBnS62y07DMcTc9Rvo03/3nRyszIvwPNljlkd4S828zIBv/piw==
 
 mobx@^6.9.0:
   version "6.9.0"

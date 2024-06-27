@@ -7,7 +7,7 @@ import { getMainWindow, sendFrontendMessage } from './main_window'
 import { icon } from './constants'
 import { getGameInfo } from 'backend/storeManagers/hyperplay/games'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
-import { sendMessageToOverlayWindows } from './hyperplay-overlay'
+import { getHpOverlay } from './overlay'
 
 type Command = 'ping' | 'launch' | 'otp-deeplink'
 
@@ -36,6 +36,7 @@ export async function handleProtocol(args: string[]) {
 
   const channel = 'otpDeeplink'
   const otp = new URL(url).searchParams.get('otp')
+  const hpOverlay = await getHpOverlay()
   switch (command) {
     case 'ping':
       return handlePing(arg)
@@ -44,7 +45,7 @@ export async function handleProtocol(args: string[]) {
       break
     case 'otp-deeplink':
       // if no overlay window exists
-      if (!sendMessageToOverlayWindows(channel, otp)) {
+      if (!hpOverlay?.sendMessageToOverlayWindows(channel, otp)) {
         // send to main window
         logInfo('No overlay windows exist. Sending otp to main window.')
         sendFrontendMessage(channel, otp)
