@@ -1,9 +1,5 @@
 import React from 'react'
 
-import Grid from '@mui/material/Grid'
-import Paper from '@mui/material/Paper'
-import Typography from '@mui/material/Typography'
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faApple, faLinux, faWindows } from '@fortawesome/free-brands-svg-icons'
 
@@ -32,15 +28,15 @@ interface OSInfoProps {
 function OSInfo({ os, isFlatpak }: OSInfoProps) {
   const { t } = useTranslation()
   return (
-    <Paper sx={{ padding: 1, height: '100%' }} square>
-      <Typography variant="h6">
+    <div style={{ padding: 1, height: '100%' }}>
+      <h6>
         {t('settings.systemInformation.os', 'Operating System:')}
-      </Typography>
-      <Grid container spacing={1}>
-        <Grid item xs={2}>
+      </h6>
+      <div>
+        <div>
           <OSLogo platform={os.platform} />
-        </Grid>
-        <Grid item xs={10}>
+        </div>
+        <div>
           {isFlatpak
             ? t(
                 'settings.systemInformation.osNameFlatpak',
@@ -56,9 +52,9 @@ function OSInfo({ os, isFlatpak }: OSInfoProps) {
               versionNumber: os.version
             }
           )}
-        </Grid>
-      </Grid>
-    </Paper>
+        </div>
+      </div>
+    </div>
   )
 }
 

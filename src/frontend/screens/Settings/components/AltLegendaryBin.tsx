@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFolderOpen } from '@fortawesome/free-solid-svg-icons'
-import { Backspace } from '@mui/icons-material'
+import { faBackspace, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import useSetting from 'frontend/hooks/useSetting'
 import { TextInputWithIconField } from 'frontend/components/UI'
 
@@ -65,10 +64,7 @@ const AltLegendaryBin = () => {
             }}
           />
         ) : (
-          <Backspace
-            data-testid="setLegendaryBinaryBackspace"
-            style={{ color: 'currentColor' }}
-          />
+          <FontAwesomeIcon style={{ color: 'currentColor' }} data-testid="setLegendaryBinaryBackspace" icon={faBackspace} />
         )
       }
       onIconClick={

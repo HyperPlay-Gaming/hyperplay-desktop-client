@@ -1,16 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  CleaningServicesOutlined,
-  ContentCopyOutlined,
-  DeleteOutline,
-  CachedOutlined,
-  UploadOutlined,
-  DownloadOutlined,
-  CancelOutlined,
-  SelectAllOutlined,
-  DeselectOutlined
-} from '@mui/icons-material'
 import classNames from 'classnames'
 import SettingsContext from '../../SettingsContext'
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -22,6 +11,8 @@ import {
   DownloadNoHTTPS
 } from '../../components'
 import libraryState from 'frontend/state/libraryState'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBoxOpen, faCancel, faCopy, faDownload, faPaintBrush, faRefresh, faTrash, faUpload, faX } from '@fortawesome/free-solid-svg-icons'
 
 export default function AdvancedSettings() {
   const { config } = useContext(SettingsContext)
@@ -216,7 +207,7 @@ export default function AdvancedSettings() {
                   className="button is-primary"
                   onClick={checkForEosOverlayUpdates}
                 >
-                  <CachedOutlined />
+                <FontAwesomeIcon icon={faRefresh}/>
                   <span>
                     {eosOverlayCheckingForUpdates
                       ? t(
@@ -237,7 +228,7 @@ export default function AdvancedSettings() {
                     className="button is-primary"
                     onClick={updateEosOverlay}
                   >
-                    <UploadOutlined />
+                    <FontAwesomeIcon icon={faUpload}/>
                     <span>
                       {eosOverlayInstallingOrUpdating
                         ? t('setting.eosOverlay.updating', 'Updating...')
@@ -256,9 +247,9 @@ export default function AdvancedSettings() {
                   onClick={toggleEosOverlay}
                 >
                   {eosOverlayEnabledGlobally ? (
-                    <DeselectOutlined />
+                    <FontAwesomeIcon icon={faX} />
                   ) : (
-                    <SelectAllOutlined />
+                    <FontAwesomeIcon icon={faBoxOpen} />
                   )}
                   <span>
                     {eosOverlayEnabledGlobally
@@ -270,7 +261,7 @@ export default function AdvancedSettings() {
               {/* Remove */}
               {!eosOverlayInstallingOrUpdating && (
                 <button className="button is-danger" onClick={removeEosOverlay}>
-                  <DeleteOutline />
+                  <FontAwesomeIcon icon={faTrash} />
                   <span>{t('setting.eosOverlay.remove', 'Uninstall')}</span>
                 </button>
               )}
@@ -279,7 +270,7 @@ export default function AdvancedSettings() {
           {/* Install */}
           {!eosOverlayInstalled && !eosOverlayInstallingOrUpdating && (
             <button className="button is-primary" onClick={installEosOverlay}>
-              <DownloadOutlined />
+                  <FontAwesomeIcon icon={faDownload} />
               <span>{t('setting.eosOverlay.install', 'Install')}</span>
             </button>
           )}
@@ -289,7 +280,7 @@ export default function AdvancedSettings() {
               className="button is-danger"
               onClick={cancelEosOverlayInstallOrUpdate}
             >
-              <CancelOutlined />
+              <FontAwesomeIcon icon={faCancel} />
               <span>{t('setting.eosOverlay.cancelInstall', 'Cancel')}</span>
             </button>
           )}
@@ -312,7 +303,7 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <ContentCopyOutlined />
+              <FontAwesomeIcon icon={faCopy} />
             </div>
             <span className="button-icon-text">
               {isCopiedToClipboard
@@ -330,7 +321,7 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <CleaningServicesOutlined />
+              <FontAwesomeIcon icon={faPaintBrush} />
             </div>
             <span className="button-icon-text">
               {t('settings.clear-cache', 'Clear HyperPlay Cache')}
@@ -344,7 +335,7 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <DeleteOutline />
+            <FontAwesomeIcon icon={faX} />
             </div>
             <span className="button-icon-text">
               {t('settings.reset-hyperplay', 'Reset HyperPlay')}
@@ -357,7 +348,7 @@ export default function AdvancedSettings() {
         >
           <div className="button-icontext-flex">
             <div className="button-icon-flex">
-              <DeleteOutline />
+            <FontAwesomeIcon icon={faX} />
             </div>
             <span className="button-icon-text">
               {t('settings.reset-extension', 'Reset Extension')}

@@ -1,6 +1,5 @@
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import { faBackspace, faExclamationTriangle, faFolderPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Backspace, CreateNewFolder } from '@mui/icons-material'
 import React, { useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
@@ -116,15 +115,11 @@ export default function LegendarySyncSaves({
             onChange={(event) => setSavesPath(event.target.value)}
             icon={
               !isLinked ? (
-                <CreateNewFolder
-                  data-testid="selectSavePath"
-                  style={{ color: '#B0ABB6' }}
-                />
+                <FontAwesomeIcon data-testid="selectSavePath"
+                style={{ color: '#B0ABB6' }} icon={faFolderPlus}/>
               ) : (
-                <Backspace
-                  data-testid="removeSavePath"
-                  style={{ color: '#B0ABB6' }}
-                />
+                <FontAwesomeIcon data-testid="removeSavePath"
+                style={{ color: '#B0ABB6' }} icon={faBackspace}/>
               )
             }
             onIconClick={

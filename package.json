@@ -175,8 +175,6 @@
     "@mantine/dropzone": "^7.5.1",
     "@mantine/hooks": "^7.5.1",
     "@metamask/sdk": "^0.15.0",
-    "@mui/icons-material": "^5.10.9",
-    "@mui/material": "^5.15.19",
     "@mysten/sui.js": "^0.45.1",
     "@node-steam/vdf": "^2.2.0",
     "@rudderstack/rudder-sdk-node": "^2.0.7",
