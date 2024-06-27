@@ -247,7 +247,7 @@ async function getQuestRewardSignature(
   questId: number,
   rewardId: number
 ): Promise<RewardClaimSignature> {
-  const url = `${DEV_PORTAL_URL}api/v1/quests/${questId}/rewards/${rewardId}/signature`
+  const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/signature`
 
   const cookieString = await getPartitionCookies({
     partition: 'persist:auth',

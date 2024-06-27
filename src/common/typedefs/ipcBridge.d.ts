@@ -280,6 +280,9 @@ interface HyperPlayAsyncIPCFunctions {
     rewardId: number
   ) => Promise<RewardClaimSignature>
   getDepositContracts: (questId: number) => Promise<DepositContract[]>
+  claimQuestPointsReward: (rewardId: string) => Promise<any>
+  completeExternalTask: (rewardId: string) => Promise<any>
+  resyncExternalTask: (rewardId: string) => Promise<any>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
