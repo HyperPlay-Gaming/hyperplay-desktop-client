@@ -10,7 +10,6 @@ import {
   faExternalLink,
   faForward,
   faRefresh,
-  faReply
 } from '@fortawesome/free-solid-svg-icons'
 
 interface WebviewControlsProps {
