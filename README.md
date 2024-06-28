@@ -11,6 +11,7 @@
       - [Other Distributions (TAR.XZ)](#other-distributions-tarxz)
     - [Windows](#windows)
     - [macOS](#macos)
+  - [Contributing](#contributing)
   - [Credits](#credits)
 
 ## Supported Operating Systems
@@ -76,6 +77,10 @@ This projects uses submodules, so you need to clone it with the `--recurse-submo
 yarn setup
 yarn start
 ```
+
+## Contributing
+
+Also read our [Contribution License Agreement](https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/blob/main/doc/cla.md).
 
 ## Credits
 
