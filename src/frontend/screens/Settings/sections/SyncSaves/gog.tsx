@@ -8,10 +8,13 @@ import {
   TextInputWithIconField,
   ToggleSwitch
 } from 'frontend/components/UI'
-import { Backspace, CreateNewFolder } from '@mui/icons-material'
 import { useTranslation } from 'react-i18next'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons'
+import {
+  faBackspace,
+  faExclamationTriangle,
+  faFolderPlus
+} from '@fortawesome/free-solid-svg-icons'
 import { ProgressDialog } from 'frontend/components/UI/ProgressDialog'
 import SettingsContext from '../../SettingsContext'
 import TextWithProgress from 'frontend/components/UI/TextWithProgress'
@@ -136,14 +139,16 @@ export default function GOGSyncSaves({
                 }}
                 icon={
                   !value.location.length ? (
-                    <CreateNewFolder
+                    <FontAwesomeIcon
                       data-testid="selectSavePath"
                       style={{ color: '#B0ABB6' }}
+                      icon={faFolderPlus}
                     />
                   ) : (
-                    <Backspace
-                      data-testid="removeSavePath"
+                    <FontAwesomeIcon
                       style={{ color: '#B0ABB6' }}
+                      data-testid="removeSavePath"
+                      icon={faBackspace}
                     />
                   )
                 }

@@ -5,7 +5,6 @@ import { UpdateComponent } from 'frontend/components/UI'
 
 import React, { lazy, useContext, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Tab, Tabs } from '@mui/material'
 import {
   TypeCheckedStoreFrontend,
   wineDownloaderInfoStore
@@ -14,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { WineVersionInfo, Type, WineManagerUISettings } from 'common/types'
 import libraryState from 'frontend/state/libraryState'
+import { Tabs } from '@hyperplay/ui'
 
 const WineItem = lazy(
   async () => import('frontend/screens/WineManager/components/WineItem')
@@ -61,10 +61,7 @@ export default React.memo(function WineManager(): JSX.Element | null {
     getWineVersions(repository.type)
   )
 
-  const handleChangeTab = (
-    e: React.SyntheticEvent,
-    repo: WineManagerUISettings
-  ) => {
+  const handleChangeTab = (repo: WineManagerUISettings) => {
     setRepository(repo)
     setWineVersions(getWineVersions(repo.type))
   }
@@ -102,19 +99,22 @@ export default React.memo(function WineManager(): JSX.Element | null {
           <Tabs
             className="tabs"
             value={repository.value}
-            onChange={(e, value) => {
+            onChange={(value) => {
               const repo = wineManagerSettings.find(
                 (setting) => setting.value === value
               )
               if (repo) {
-                handleChangeTab(e, repo)
+                handleChangeTab(repo)
               }
             }}
-            centered={true}
           >
             {wineManagerSettings.map(({ type, value, enabled }) => {
               if (enabled) {
-                return <Tab value={value} label={type} key={value} />
+                return (
+                  <Tabs.Tab value={value} key={value}>
+                    <div className="menu">{type}</div>
+                  </Tabs.Tab>
+                )
               }
               return null
             })}

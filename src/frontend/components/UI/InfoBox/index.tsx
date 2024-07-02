@@ -2,8 +2,9 @@ import './index.css'
 
 import { useToggle } from 'frontend/hooks'
 import { useTranslation } from 'react-i18next'
-import Info from '@mui/icons-material/Info'
 import React from 'react'
+import { faInfo } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface Props {
   children: React.ReactNode
@@ -33,7 +34,7 @@ export default function InfoBox({ children, text }: Props) {
         }}
         data-testid="infoboxSpan"
       >
-        <Info className="material-icons" />
+        <FontAwesomeIcon className="Dialog__CloseIcon" icon={faInfo} />
         <p>{t(text)}</p>
       </a>
       <div

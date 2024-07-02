@@ -9,7 +9,7 @@ import * as Proxy from './proxy'
 import * as DownloadManager from './downloadmanager'
 import * as Extensions from './extensionImporter'
 import * as Metrics from './metrics'
-import * as Overlay from 'backend/hyperplay-overlay/api'
+import * as Overlay from 'backend/overlay/api'
 import * as Achievements from './questsAchievements'
 
 export default {

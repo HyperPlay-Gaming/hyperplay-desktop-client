@@ -6,7 +6,6 @@ import {
   DialogContent,
   DialogHeader
 } from 'frontend/components/UI/Dialog'
-import { LinearProgress } from '@mui/material'
 import classNames from 'classnames'
 import { useTranslation } from 'react-i18next'
 
@@ -85,7 +84,6 @@ export function ProgressDialog(props: {
             })}
             <div ref={winetricksOutputBottomRef} />
           </div>
-          <LinearProgress className="progressDialog linearProgress" />
         </DialogContent>
       </Dialog>
     </>
