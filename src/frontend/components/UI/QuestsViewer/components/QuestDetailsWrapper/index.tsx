@@ -145,7 +145,7 @@ export function QuestDetailsWrapper({
       eligibility: {
         reputation: {
           games: steamGames,
-          completionPercent: questMeta.eligibility.completion_threshold,
+          completionPercent: questMeta.eligibility?.completion_threshold ?? 100,
           eligible: false,
           steamAccountLinked: true
         },
@@ -157,12 +157,13 @@ export function QuestDetailsWrapper({
             questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
         }
       },
-      rewards: questMeta.rewards.map((val) => ({
-        title: val.name,
-        imageUrl: val.image_url
-      })),
+      rewards:
+        questMeta.rewards?.map((val) => ({
+          title: val.name,
+          imageUrl: val.image_url
+        })) ?? [],
       i18n,
-      onClaimClick: async () => mintRewards(questMeta.rewards),
+      onClaimClick: async () => mintRewards(questMeta.rewards ?? []),
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,

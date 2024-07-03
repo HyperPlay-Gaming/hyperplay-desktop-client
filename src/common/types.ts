@@ -922,11 +922,11 @@ export interface Quest {
   type: 'REPUTATIONAL-AIRDROP' | 'PLAYSTREAK'
   status: string
   description: string
-  rewards: Reward[]
+  rewards?: Reward[]
   /* eslint-disable-next-line */
   deposit_contracts: any[]
-  eligibility: {
-    completion_threshold: number
+  eligibility?: {
+    completion_threshold?: number
     steam_games: { id: string }[]
     play_streak: {
       required_playstreak_in_days: number

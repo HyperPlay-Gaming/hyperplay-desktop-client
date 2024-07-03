@@ -95,7 +95,7 @@ export function QuestDetailsViewPlayWrapper({
     )
   }
   const rewards =
-    questMeta.rewards.map((val) => ({
+    questMeta.rewards?.map((val) => ({
       title: val.name,
       imageUrl: val.image_url
     })) ?? []
@@ -123,7 +123,7 @@ export function QuestDetailsViewPlayWrapper({
       eligibility={{
         reputation: {
           games: steamGames,
-          completionPercent: questMeta.eligibility.completion_threshold,
+          completionPercent: questMeta.eligibility?.completion_threshold ?? 100,
           eligible: false,
           steamAccountLinked: false
         },
