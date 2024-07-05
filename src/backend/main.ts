@@ -182,6 +182,7 @@ import 'backend/ipcHandlers/achievements'
 import 'backend/utils/auto_launch'
 import { hrtime } from 'process'
 import { getHyperPlayReleaseObject } from './storeManagers/hyperplay/utils'
+import { postPlaySessionTime } from './utils/quests'
 
 async function startProxyServer() {
   try {
@@ -1292,6 +1293,11 @@ ipcMain.handle(
       sessionPlaytimeInMinutes +
       BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
     tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
+
+    postPlaySessionTime(
+      appName,
+      parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
+    )
 
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
