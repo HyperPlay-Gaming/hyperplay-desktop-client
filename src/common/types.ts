@@ -919,15 +919,20 @@ export interface Quest {
   id: number
   project_id: string
   name: string
-  type: string
+  type: 'REPUTATIONAL-AIRDROP' | 'PLAYSTREAK'
   status: string
   description: string
-  rewards: Reward[]
+  rewards?: Reward[]
   /* eslint-disable-next-line */
   deposit_contracts: any[]
-  eligibility: {
-    completion_threshold: number
+  eligibility?: {
+    completion_threshold?: number
     steam_games: { id: string }[]
+    play_streak: {
+      required_playstreak_in_days: number
+      current_playstreak_in_days?: number
+      last_play_session_completed_datetime_utc?: string
+    }
   }
 }
 

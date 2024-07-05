@@ -1,7 +1,6 @@
 import React from 'react'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import './index.css'
+import { Menu } from '@hyperplay/ui'
 
 export interface Item {
   label: string
@@ -41,6 +40,9 @@ function ContextMenu({ children, items }: Props) {
     callback()
   }
 
+  const y = contextMenu !== null ? contextMenu.mouseY : 0
+  const x = contextMenu !== null ? contextMenu.mouseX : 0
+
   return (
     <div
       onContextMenu={handleContextMenu}
@@ -52,22 +54,17 @@ function ContextMenu({ children, items }: Props) {
     >
       {children}
       <Menu
-        open={contextMenu !== null}
+        opened={contextMenu !== null}
         onClose={handleClose}
-        anchorReference="anchorPosition"
-        className="contextMenu"
-        anchorPosition={
-          contextMenu !== null
-            ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
-            : { top: 0, left: 0 }
-        }
+        offset={y}
+        styles={{ dropdown: { left: x } }}
       >
         {items.map(
           ({ label, onClick, show }, i) =>
             show && (
-              <MenuItem key={i} onClick={() => handleClick(onClick)}>
+              <Menu.Item key={i} onClick={() => handleClick(onClick)}>
                 {label}
-              </MenuItem>
+              </Menu.Item>
             )
         )}
       </Menu>

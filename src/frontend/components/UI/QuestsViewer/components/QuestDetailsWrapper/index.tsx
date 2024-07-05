@@ -10,6 +10,7 @@ import { DepositContract, Reward, RewardClaimSignature } from 'common/types'
 import { getAmount } from '@hyperplay/utils'
 import { questRewardAbi } from 'frontend/abis/RewardsAbi'
 import authState from 'frontend/state/authState'
+import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -150,24 +151,48 @@ export function QuestDetailsWrapper({
     }
   }
 
+  function isEligible() {
+    if (!questMeta) {
+      return false
+    }
+    const currentStreak =
+      questMeta.eligibility?.play_streak?.current_playstreak_in_days
+    const requiredStreak =
+      questMeta.eligibility?.play_streak?.required_playstreak_in_days
+    if (questMeta.type === 'PLAYSTREAK' && currentStreak && requiredStreak) {
+      return currentStreak >= requiredStreak
+    }
+
+    return false
+  }
+
   if (selectedQuestId !== null && questMeta !== undefined) {
     const questDetailsProps: QuestDetailsProps = {
+      questType: questMeta.type,
       title: questMeta.name,
       description: questMeta.description,
       eligibility: {
         reputation: {
           games: steamGames,
-          completionPercent: questMeta.eligibility.completion_threshold,
+          completionPercent: questMeta.eligibility?.completion_threshold ?? 100,
           eligible: false,
           steamAccountLinked: true
+        },
+        playStreak: {
+          resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
+          currentStreakInDays:
+            questMeta.eligibility?.play_streak?.current_playstreak_in_days ?? 0,
+          requiredStreakInDays:
+            questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
         }
       },
-      rewards: questMeta.rewards.map((val) => ({
-        title: val.name,
-        imageUrl: val.image_url
-      })),
+      rewards:
+        questMeta.rewards?.map((val) => ({
+          title: val.name,
+          imageUrl: val.image_url
+        })) ?? [],
       i18n,
-      onClaimClick: async () => claimRewards(questMeta.rewards),
+      onClaimClick: async () => claimRewards(questMeta.rewards ?? []),
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
@@ -176,17 +201,15 @@ export function QuestDetailsWrapper({
         ? t('quest.errorMessage', 'There was an error with the transaction.')
         : undefined,
       isMinting: status === 'pending',
-      isSignedIn: !!userId
+      isSignedIn: !!userId,
+      ctaDisabled: !isEligible()
     }
     questDetails = (
-      <QuestDetails
-        {...questDetailsProps}
-        className={styles.questDetails}
-        ctaDisabled={false}
-      />
+      <QuestDetails {...questDetailsProps} className={styles.questDetails} />
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
+      questType: 'PLAYSTREAK',
       title: '',
       description: '',
       eligibility: {
@@ -195,6 +218,11 @@ export function QuestDetailsWrapper({
           completionPercent: 0,
           eligible: false,
           steamAccountLinked: false
+        },
+        playStreak: {
+          resetTimeInMsSinceEpoch: 0,
+          currentStreakInDays: 0,
+          requiredStreakInDays: 1
         }
       },
       i18n,
@@ -211,7 +239,7 @@ export function QuestDetailsWrapper({
       <QuestDetails
         {...emptyQuestDetailsProps}
         className={styles.questDetails}
-        ctaDisabled={false}
+        ctaDisabled={true}
       />
     )
   }

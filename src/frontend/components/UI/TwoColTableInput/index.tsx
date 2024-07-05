@@ -1,10 +1,12 @@
 import React, { ReactNode, useContext, useEffect, useState } from 'react'
 import SvgButton from '../SvgButton'
 import TextInputField from '../TextInputField'
-import AddBoxIcon from '@mui/icons-material/AddBox'
-import RemoveCircleIcon from '@mui/icons-material/RemoveCircle'
-import { faArrowUp } from '@fortawesome/free-solid-svg-icons'
-import EditIcon from '@mui/icons-material/Edit'
+import {
+  faAdd,
+  faArrowUp,
+  faCircle,
+  faEdit
+} from '@fortawesome/free-solid-svg-icons'
 import classnames from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
 import './index.css'
@@ -156,15 +158,17 @@ export function TableInput({
                   </td>
                   <td>
                     <SvgButton onClick={() => editRow(row)}>
-                      <EditIcon
+                      <FontAwesomeIcon
                         style={{ color: 'var(--accent)' }}
                         fontSize="large"
+                        icon={faEdit}
                       />
                     </SvgButton>
                     <SvgButton onClick={() => removeRow(row)}>
-                      <RemoveCircleIcon
+                      <FontAwesomeIcon
                         style={{ color: 'var(--danger)' }}
                         fontSize="large"
+                        icon={faCircle}
                       />
                     </SvgButton>
                   </td>
@@ -203,9 +207,10 @@ export function TableInput({
                 onClick={() => addRow(valueInputs)}
                 className={`is-primary`}
               >
-                <AddBoxIcon
+                <FontAwesomeIcon
                   style={{ color: 'var(--success)' }}
                   fontSize="large"
+                  icon={faAdd}
                 />
               </SvgButton>
             </td>
