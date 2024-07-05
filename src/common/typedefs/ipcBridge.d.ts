@@ -4,7 +4,9 @@ import {
   Achievement,
   SummaryAchievement,
   LDEnv,
-  HyperPlayRelease
+  HyperPlayRelease,
+  PointsClaimReturn,
+  GenericApiResponse
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -280,9 +282,10 @@ interface HyperPlayAsyncIPCFunctions {
     rewardId: number
   ) => Promise<RewardClaimSignature>
   getDepositContracts: (questId: number) => Promise<DepositContract[]>
-  claimQuestPointsReward: (rewardId: string) => Promise<any>
-  completeExternalTask: (rewardId: string) => Promise<any>
-  resyncExternalTask: (rewardId: string) => Promise<any>
+  /*  */
+  claimQuestPointsReward: (rewardId: string) => Promise<PointsClaimReturn>
+  completeExternalTask: (rewardId: string) => Promise<GenericApiResponse>
+  resyncExternalTask: (rewardId: string) => Promise<GenericApiResponse>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

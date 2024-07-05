@@ -946,3 +946,16 @@ export interface DepositContract {
   contract_address: `0x${string}`
   chain_id: number
 }
+
+export interface GenericApiResponse {
+  status?: string
+  message: string
+}
+
+export interface PointsClaimReturn {
+  // sent on error
+  status?: string
+  message?: string
+  // sent on success
+  success?: string
+}
