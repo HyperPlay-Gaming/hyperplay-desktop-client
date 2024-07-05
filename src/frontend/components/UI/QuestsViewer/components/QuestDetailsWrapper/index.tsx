@@ -83,12 +83,11 @@ export function QuestDetailsWrapper({
       return
     }
     await switchChainAsync({ chainId: reward_i.chain_id })
-    const sig: RewardClaimSignature =
-      await window.api.getQuestRewardSignature(
-        account.address,
-        questMeta.id,
-        reward_i.id
-      )
+    const sig: RewardClaimSignature = await window.api.getQuestRewardSignature(
+      account.address,
+      questMeta.id,
+      reward_i.id
+    )
 
     const depositContracts: DepositContract[] =
       await window.api.getDepositContracts(questMeta.id)
@@ -120,12 +119,12 @@ export function QuestDetailsWrapper({
     }
   }
 
-  async function claimPoints(reward: Reward){
+  async function claimPoints(reward: Reward) {
     const result = await window.api.claimQuestPointsReward(reward.id.toString())
     console.log('claim points result ', result)
   }
 
-  async function completeExternalTask(reward: Reward){
+  async function completeExternalTask(reward: Reward) {
     const result = await window.api.completeExternalTask(reward.id.toString())
     console.log('completeExternalTask result ', result)
   }
@@ -137,17 +136,17 @@ export function QuestDetailsWrapper({
         case 'ERC721':
         case 'ERC20':
           await mintReward(reward_i)
-          break;
-        case 'POINTS': 
+          break
+        case 'POINTS':
           await claimPoints(reward_i)
-          break;
-        case 'EXTERNAL-TASKS': 
+          break
+        case 'EXTERNAL-TASKS':
           await completeExternalTask(reward_i)
-          break;
+          break
         default:
           console.error(`unkonwn reward type ${reward_i.reward_type}`)
-          break;
-      } 
+          break
+      }
     }
   }
 
