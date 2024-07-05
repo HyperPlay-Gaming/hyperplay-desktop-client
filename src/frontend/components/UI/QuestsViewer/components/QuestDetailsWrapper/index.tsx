@@ -144,7 +144,7 @@ export function QuestDetailsWrapper({
           await completeExternalTask(reward_i)
           break
         default:
-          console.error(`unkonwn reward type ${reward_i.reward_type}`)
+          console.error(`unknown reward type ${reward_i.reward_type}`)
           break
       }
     }
