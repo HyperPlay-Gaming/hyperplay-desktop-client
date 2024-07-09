@@ -274,6 +274,7 @@ interface HyperPlayAsyncIPCFunctions {
   updateAutoLaunch: () => Promise<void>
   getQuests: (projectId?: string) => Promise<Quest[]>
   getQuest: (questId: number) => Promise<Quest>
+  getUserPlayStreak: (questId: number) => Promise<UserPlayStreak>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
   getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
   getQuestRewardSignature: (

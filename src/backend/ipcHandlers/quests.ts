@@ -19,6 +19,15 @@ ipcMain.handle('getQuest', async (e, questId) => {
   return questResultJson
 })
 
+ipcMain.handle('getUserPlayStreak', async (e, questId) => {
+  const questResult = await fetchWithCookie(
+    `${DEV_PORTAL_URL}api/v1/quests/${questId}/playstreak`,
+    'GET'
+  )
+  const questResultJson = await questResult.json()
+  return questResultJson
+})
+
 ipcMain.handle('getSteamGameMetadata', async (e, gameId) => {
   const result = await fetch(`${DEV_PORTAL_URL}api/v1/steam/games/${gameId}`)
   const resultJson = await result.json()

@@ -6,11 +6,13 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import { useWriteContract, useAccount, useSwitchChain } from 'wagmi'
-import { DepositContract, Reward, RewardClaimSignature } from 'common/types'
-import { getAmount } from '@hyperplay/utils'
-import { questRewardAbi } from 'frontend/abis/RewardsAbi'
+import { Reward } from 'common/types'
 import authState from 'frontend/state/authState'
 import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
+import { mintReward } from './rewards/mintReward'
+import { claimPoints } from './rewards/claimPoints'
+import { completeExternalTask } from './rewards/completeExternalTask'
+import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -28,6 +30,9 @@ export function QuestDetailsWrapper({
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
   const questMeta = questResult.data.data
+
+  const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
+  const questPlayStreakData = questPlayStreakResult.data.data
 
   let questDetails = null
 
@@ -73,7 +78,7 @@ export function QuestDetailsWrapper({
     }
   }
 
-  async function mintReward(reward_i: Reward) {
+  const mintOnChainReward = async (reward: Reward) => {
     if (questMeta?.id === undefined) {
       console.error('tried to mint but quest meta id is undefined')
       return
@@ -82,51 +87,13 @@ export function QuestDetailsWrapper({
       console.error('tried to mint but no account connected')
       return
     }
-    await switchChainAsync({ chainId: reward_i.chain_id })
-    const sig: RewardClaimSignature = await window.api.getQuestRewardSignature(
-      account.address,
-      questMeta.id,
-      reward_i.id
-    )
-
-    const depositContracts: DepositContract[] =
-      await window.api.getDepositContracts(questMeta.id)
-    const depositContractAddress = depositContracts.find(
-      (val) => val.chain_id === reward_i.chain_id
-    )?.contract_address
-    if (depositContractAddress === undefined) {
-      console.error(
-        `Deposit contract address undefined for quest ${questMeta.id} and chain id ${reward_i.chain_id}`
-      )
-      return
-    }
-    if (reward_i.reward_type === 'ERC20') {
-      writeContract({
-        address: depositContractAddress,
-        abi: questRewardAbi,
-        functionName: 'withdrawERC20',
-        args: [
-          BigInt(questMeta.id),
-          reward_i.contract_address,
-          BigInt(
-            getAmount(reward_i.amount_per_user, reward_i.decimals).toString()
-          ),
-          BigInt(sig.nonce),
-          BigInt(sig.expiration),
-          sig.signature
-        ]
-      })
-    }
-  }
-
-  async function claimPoints(reward: Reward) {
-    const result = await window.api.claimQuestPointsReward(reward.id.toString())
-    console.log('claim points result ', result)
-  }
-
-  async function completeExternalTask(reward: Reward) {
-    const result = await window.api.completeExternalTask(reward.id.toString())
-    console.log('completeExternalTask result ', result)
+    return mintReward({
+      questId: questMeta.id,
+      address: account.address,
+      reward,
+      writeContract,
+      switchChainAsync
+    })
   }
 
   async function claimRewards(rewards: Reward[]) {
@@ -135,7 +102,7 @@ export function QuestDetailsWrapper({
         case 'ERC1155':
         case 'ERC721':
         case 'ERC20':
-          await mintReward(reward_i)
+          await mintOnChainReward(reward_i)
           break
         case 'POINTS':
           await claimPoints(reward_i)
@@ -154,8 +121,7 @@ export function QuestDetailsWrapper({
     if (!questMeta) {
       return false
     }
-    const currentStreak =
-      questMeta.eligibility?.play_streak?.current_playstreak_in_days
+    const currentStreak = questPlayStreakData?.current_playstreak_in_days
     const requiredStreak =
       questMeta.eligibility?.play_streak?.required_playstreak_in_days
     if (questMeta.type === 'PLAYSTREAK' && currentStreak && requiredStreak) {
@@ -180,7 +146,7 @@ export function QuestDetailsWrapper({
         playStreak: {
           resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
           currentStreakInDays:
-            questMeta.eligibility?.play_streak?.current_playstreak_in_days ?? 0,
+            questPlayStreakData?.current_playstreak_in_days ?? 0,
           requiredStreakInDays:
             questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
         }

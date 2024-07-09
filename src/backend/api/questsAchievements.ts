@@ -24,6 +24,9 @@ export const getQuests = async (projectId?: string) =>
 export const getQuest = async (questId: number) =>
   ipcRenderer.invoke('getQuest', questId)
 
+export const getUserPlayStreak = async (questId: number) =>
+  ipcRenderer.invoke('getUserPlayStreak', questId)
+
 export const getSteamGameMetadata = async (gameId: number) =>
   ipcRenderer.invoke('getSteamGameMetadata', gameId)
 

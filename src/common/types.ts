@@ -930,8 +930,6 @@ export interface Quest {
     steam_games: { id: string }[]
     play_streak: {
       required_playstreak_in_days: number
-      current_playstreak_in_days?: number
-      last_play_session_completed_datetime_utc?: string
     }
   }
 }
@@ -958,4 +956,11 @@ export interface PointsClaimReturn {
   message?: string
   // sent on success
   success?: string
+}
+
+export interface UserPlayStreak {
+  current_playstreak_in_days: number
+  completed_counter: number
+  accumulated_playtime_today_in_seconds: number
+  last_play_session_completed_datetime: string
 }
