@@ -30,6 +30,7 @@ import TextInputField from 'frontend/components/UI/TextInputField'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
+import ModDialog from './ModDialog'
 
 type Props = {
   appName: string
@@ -220,13 +221,15 @@ export default React.memo(function InstallModal({
     }
   }, [selectedChannel, accessCode])
 
-  const showDownloadDialog = !isSideload && gameInfo
+  const showModDialog = gameInfo && gameInfo.folder_name === 'ironworks'
+  const showDownloadDialog = !showModDialog && !isSideload && gameInfo
 
   const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
 
   const enableCTAButton =
     !channelRequiresAccessCode ||
     (channelRequiresAccessCode && accessCodeVerified)
+
 
   return (
     <div className="InstallModal">
@@ -235,7 +238,7 @@ export default React.memo(function InstallModal({
         showCloseButton
         className={'InstallModal__dialog'}
       >
-        {showDownloadDialog ? (
+        {showDownloadDialog && (
           <DownloadDialog
             appName={appName}
             runner={runner}
@@ -296,7 +299,8 @@ export default React.memo(function InstallModal({
               />
             ) : null}
           </DownloadDialog>
-        ) : (
+        )}
+        {isSideload && (
           <SideloadDialog
             setWinePrefix={setWinePrefix}
             winePrefix={winePrefix}
@@ -325,6 +329,12 @@ export default React.memo(function InstallModal({
               />
             ) : null}
           </SideloadDialog>
+        )}
+        {showModDialog && (
+          <ModDialog  
+            backdropClick={backdropClick}
+            gameInfo={gameInfo}
+          />  
         )}
       </Dialog>
     </div>
