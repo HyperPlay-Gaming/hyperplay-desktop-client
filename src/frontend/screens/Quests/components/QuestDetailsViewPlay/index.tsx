@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
+import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -21,6 +22,8 @@ export function QuestDetailsViewPlayWrapper({
 
   const questResult = useGetQuest(selectedQuestId)
   const questMeta = questResult.data.data
+  const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
+  const questPlayStreakData = questPlayStreakResult.data.data
 
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
@@ -130,7 +133,7 @@ export function QuestDetailsViewPlayWrapper({
         playStreak: {
           resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
           currentStreakInDays:
-            questMeta.eligibility?.play_streak?.current_playstreak_in_days ?? 0,
+            questPlayStreakData?.current_playstreak_in_days ?? 0,
           requiredStreakInDays:
             questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
         }
