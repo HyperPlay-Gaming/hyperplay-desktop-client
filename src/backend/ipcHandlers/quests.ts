@@ -20,11 +20,10 @@ ipcMain.handle('getQuest', async (e, questId) => {
 })
 
 ipcMain.handle('getUserPlayStreak', async (e, questId) => {
-  const questResult = await fetchWithCookie(
+  const questResultJson = await fetchWithCookie(
     `${DEV_PORTAL_URL}api/v1/quests/${questId}/playstreak`,
     'GET'
   )
-  const questResultJson = await questResult.json()
   return questResultJson
 })
 
