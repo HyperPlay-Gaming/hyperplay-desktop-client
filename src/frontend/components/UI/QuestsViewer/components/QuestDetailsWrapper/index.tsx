@@ -143,6 +143,7 @@ export function QuestDetailsWrapper({
           break
       }
     }
+    await questPlayStreakResult.invalidateQuery()
   }
 
   function isEligible() {
