@@ -96,7 +96,7 @@ import {
   wikiLink,
   wineprefixFAQ
 } from './constants'
-import { handleProtocol } from './protocol'
+import { handleOtp, handleProtocol } from './protocol'
 import {
   initLogger,
   logChangedSetting,
@@ -226,6 +226,10 @@ let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
+
+  ipcMain.on('otp', (e, otp: string) => {
+    handleOtp(otp)
+  })
 }
 
 const { showOpenDialog } = dialog

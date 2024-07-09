@@ -93,6 +93,7 @@ interface HyperPlaySyncIPCFunctions {
   authConnected: () => void
   goToGamePage: (appName: string) => void
   authDisconnected: () => void
+  otp: (otp: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
