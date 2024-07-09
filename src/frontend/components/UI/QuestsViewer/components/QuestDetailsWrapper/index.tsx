@@ -44,6 +44,18 @@ export function QuestDetailsWrapper({
     }
   })
 
+  const completeTaskMutation = useMutation({
+    mutationFn: async (reward: Reward) => {
+      return completeExternalTask(reward)
+    }
+  })
+
+  const claimPointsMutation = useMutation({
+    mutationFn: async (reward: Reward) => {
+      return completeExternalTask(reward)
+    }
+  })
+
   let questDetails = null
 
   const getSteamGameResult = useGetSteamGame(
@@ -121,10 +133,10 @@ export function QuestDetailsWrapper({
           await mintOnChainReward(reward_i)
           break
         case 'POINTS':
-          await claimPoints(reward_i)
+          await claimPointsMutation.mutateAsync(reward_i)
           break
         case 'EXTERNAL-TASKS':
-          await completeExternalTask(reward_i)
+          await completeTaskMutation.mutateAsync(reward_i)
           break
         default:
           console.error(`unknown reward type ${reward_i.reward_type}`)
@@ -146,6 +158,11 @@ export function QuestDetailsWrapper({
 
     return false
   }
+
+  const isClaiming =
+    status === 'pending' ||
+    completeTaskMutation.isPending ||
+    claimPointsMutation.isPending
 
   if (selectedQuestId !== null && questMeta !== undefined) {
     const questDetailsProps: QuestDetailsProps = {
@@ -181,7 +198,7 @@ export function QuestDetailsWrapper({
       errorMessage: isError
         ? t('quest.errorMessage', 'There was an error with the transaction.')
         : undefined,
-      isMinting: status === 'pending',
+      isMinting: isClaiming,
       isSignedIn: !!userId,
       ctaDisabled: !isEligible(),
       showSync: showResyncButton,
