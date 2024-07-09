@@ -52,7 +52,7 @@ export function QuestDetailsWrapper({
 
   const claimPointsMutation = useMutation({
     mutationFn: async (reward: Reward) => {
-      return completeExternalTask(reward)
+      return claimPoints(reward)
     }
   })
 
