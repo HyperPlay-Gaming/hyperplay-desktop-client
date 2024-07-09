@@ -62,7 +62,9 @@ export function QuestDetailsViewPlayWrapper({
     questType: {
       REPUTATION: t('quest.reputation', 'Reputation'),
       PLAYSTREAK: t('quest.playstreak', 'Play Streak')
-    }
+    },
+    sync: t('quest.sync', 'Sync'),
+    rewards: t('quest.rewards', 'Rewards')
   }
 
   if (!questMeta || questResult.data.isLoading || questResult.data.isFetching) {

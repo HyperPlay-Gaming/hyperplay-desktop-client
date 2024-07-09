@@ -11,8 +11,12 @@ import authState from 'frontend/state/authState'
 import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
 import { mintReward } from './rewards/mintReward'
 import { claimPoints } from './rewards/claimPoints'
-import { completeExternalTask } from './rewards/completeExternalTask'
+import {
+  completeExternalTask,
+  resyncExternalTasks
+} from './rewards/completeExternalTask'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
+import { useMutation } from '@tanstack/react-query'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -34,6 +38,12 @@ export function QuestDetailsWrapper({
   const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
   const questPlayStreakData = questPlayStreakResult.data.data
 
+  const resyncMutation = useMutation({
+    mutationFn: async (rewards: Reward[]) => {
+      return resyncExternalTasks(rewards)
+    }
+  })
+
   let questDetails = null
 
   const getSteamGameResult = useGetSteamGame(
@@ -54,6 +64,10 @@ export function QuestDetailsWrapper({
   // const steamIsLinked = accounts?.has('steam')
 
   const userId = session.data?.userId
+
+  const showResyncButton =
+    questMeta?.type === 'PLAYSTREAK' && !!questPlayStreakData?.completed_counter
+
   const i18n = {
     reward: t('quest.reward', 'Reward'),
     associatedGames: t('quest.associatedGames', 'Associated games'),
@@ -75,7 +89,9 @@ export function QuestDetailsWrapper({
     questType: {
       REPUTATION: t('quest.reputation', 'Reputation'),
       PLAYSTREAK: t('quest.playstreak', 'Play Streak')
-    }
+    },
+    sync: t('quest.sync', 'Sync'),
+    rewards: t('quest.rewards', 'Rewards')
   }
 
   const mintOnChainReward = async (reward: Reward) => {
@@ -167,7 +183,12 @@ export function QuestDetailsWrapper({
         : undefined,
       isMinting: status === 'pending',
       isSignedIn: !!userId,
-      ctaDisabled: !isEligible()
+      ctaDisabled: !isEligible(),
+      showSync: showResyncButton,
+      onSyncClick: () => {
+        resyncMutation.mutateAsync(questMeta.rewards ?? [])
+      },
+      isSyncing: resyncMutation.isPending
     }
     questDetails = (
       <QuestDetails {...questDetailsProps} className={styles.questDetails} />

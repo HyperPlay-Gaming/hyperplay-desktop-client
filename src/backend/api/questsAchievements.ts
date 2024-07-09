@@ -44,3 +44,6 @@ export const claimQuestPointsReward = async (rewardId: string) =>
 
 export const completeExternalTask = async (rewardId: string) =>
   ipcRenderer.invoke('completeExternalTask', rewardId)
+
+export const resyncExternalTask = async (rewardId: string) =>
+  ipcRenderer.invoke('resyncExternalTask', rewardId)
