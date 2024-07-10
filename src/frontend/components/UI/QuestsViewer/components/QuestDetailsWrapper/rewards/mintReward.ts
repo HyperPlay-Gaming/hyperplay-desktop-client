@@ -35,7 +35,7 @@ export async function mintReward({
     )
     return
   }
-  if (reward.reward_type === 'ERC20') {
+  if (reward.reward_type === 'ERC20' && reward.amount_per_user) {
     writeContract({
       address: depositContractAddress,
       abi: questRewardAbi,
@@ -43,7 +43,12 @@ export async function mintReward({
       args: [
         BigInt(questId),
         reward.contract_address,
-        BigInt(getAmount(reward.amount_per_user, reward.decimals).toString()),
+        BigInt(
+          getAmount(
+            reward.amount_per_user.toString(),
+            reward.decimals
+          ).toString()
+        ),
         BigInt(sig.nonce),
         BigInt(sig.expiration),
         sig.signature
