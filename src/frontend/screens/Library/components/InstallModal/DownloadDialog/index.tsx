@@ -5,7 +5,6 @@ import {
   faFolderOpen
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { DialogContent } from '@mui/material'
 
 import classNames from 'classnames'
 import {
@@ -451,7 +450,7 @@ export default function DownloadDialog({
         )}
       </DialogHeader>
       {gameInfo && <Anticheat gameInfo={gameInfo} />}
-      <DialogContent>
+      <div>
         {requiresToken ? (
           <div style={{ maxWidth: 500, overflow: 'hidden' }}>
             {showAlert ? (
@@ -653,7 +652,7 @@ export default function DownloadDialog({
             </div>
           </div>
         )}
-      </DialogContent>
+      </div>
       <DialogFooter>
         <Button
           type="tertiary"

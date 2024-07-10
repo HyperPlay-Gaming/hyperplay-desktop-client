@@ -5,7 +5,6 @@ import Crossover from './components/Crossover'
 import './index.scss'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { Dialog, DialogHeader } from '../Dialog'
-import { DialogContent } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
 interface Props {
@@ -37,7 +36,7 @@ export function WikiGameInfo({ title, appName, runner, setShouldShow }: Props) {
         <DialogHeader onClose={() => setShouldShow(false)}>
           <></>
         </DialogHeader>
-        <DialogContent className="gameExtraDialog">
+        <div className="gameExtraDialog">
           {!wikiGameInfo && (
             <p>
               {t('wiki_info.not_found', "We couldn't find extra information.")}
@@ -49,7 +48,7 @@ export function WikiGameInfo({ title, appName, runner, setShouldShow }: Props) {
           {isMac && wikiGameInfo?.applegamingwiki && (
             <Crossover info={wikiGameInfo.applegamingwiki} title={title} />
           )}
-        </DialogContent>
+        </div>
       </Dialog>
     </div>
   )

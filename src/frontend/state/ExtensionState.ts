@@ -4,7 +4,7 @@ import { makeAutoObservable } from 'mobx'
 class ExtensionState implements ExtensionStateInterface {
   extensionId = ''
 
-  isPopupOpen = true
+  isPopupOpen = false
   isNotificationOpen = false
 
   constructor() {
