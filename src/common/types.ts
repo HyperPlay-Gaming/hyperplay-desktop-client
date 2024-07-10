@@ -903,7 +903,7 @@ export type OverlayType = 'native' | 'browser' | 'mainWindow'
 
 export interface Reward {
   id: number
-  amount_per_user: number
+  amount_per_user: number | null
   chain_id: number
   marketplace_url: string | null
   reward_type: 'ERC20' | 'ERC721' | 'ERC1155' | 'POINTS' | 'EXTERNAL-TASKS'

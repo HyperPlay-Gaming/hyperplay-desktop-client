@@ -17,6 +17,8 @@ import {
 } from './rewards/completeExternalTask'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { useMutation } from '@tanstack/react-query'
+import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
+import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -160,6 +162,10 @@ export function QuestDetailsWrapper({
     return false
   }
 
+  const chainTooltips: Record<string, string> = {}
+  chainTooltips[t('quest.points', 'Points')] =
+    'Points are off-chain fungible rewards that may or may not be redeemable for an on-chain reward in the future. This is up to the particular game developer who is providing this reward.'
+
   const isClaiming =
     status === 'pending' ||
     completeTaskMutation.isPending ||
@@ -188,7 +194,14 @@ export function QuestDetailsWrapper({
       rewards:
         questMeta.rewards?.map((val) => ({
           title: val.name,
-          imageUrl: val.image_url
+          imageUrl: val.image_url,
+          chainName: getRewardCategory(val, t),
+          numToClaim: val.amount_per_user
+            ? getDecimalNumberFromAmount(
+                val.amount_per_user.toString(),
+                val.decimals
+              ).toString()
+            : undefined
         })) ?? [],
       i18n,
       onClaimClick: async () => claimRewards(questMeta.rewards ?? []),
@@ -206,7 +219,8 @@ export function QuestDetailsWrapper({
       onSyncClick: () => {
         resyncMutation.mutateAsync(questMeta.rewards ?? [])
       },
-      isSyncing: resyncMutation.isPending
+      isSyncing: resyncMutation.isPending,
+      chainTooltips: {}
     }
     questDetails = (
       <QuestDetails {...questDetailsProps} className={styles.questDetails} />

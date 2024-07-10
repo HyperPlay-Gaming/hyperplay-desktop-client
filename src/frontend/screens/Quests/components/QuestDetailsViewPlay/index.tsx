@@ -8,6 +8,8 @@ import { getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
+import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
+import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -102,7 +104,14 @@ export function QuestDetailsViewPlayWrapper({
   const rewards =
     questMeta.rewards?.map((val) => ({
       title: val.name,
-      imageUrl: val.image_url
+      imageUrl: val.image_url,
+      chainName: getRewardCategory(val, t),
+      numToClaim: val.amount_per_user
+        ? getDecimalNumberFromAmount(
+            val.amount_per_user.toString(),
+            val.decimals
+          ).toString()
+        : undefined
     })) ?? []
 
   async function navigateToGamePage(appName: string) {

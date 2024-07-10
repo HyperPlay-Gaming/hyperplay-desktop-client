@@ -1,0 +1,16 @@
+import { getChainMetadataSync } from '@hyperplay/chains'
+import { Reward } from 'common/types'
+import { TFunction } from 'i18next'
+
+export function getRewardCategory(
+  reward: Reward,
+  t: TFunction<'translation', undefined, 'translation'>
+) {
+  if (
+    reward.reward_type === 'POINTS' ||
+    reward.reward_type === 'EXTERNAL-TASKS'
+  ) {
+    return t('quest.points', 'Points')
+  }
+  return getChainMetadataSync(reward.chain_id.toString())?.chain.name ?? ''
+}
