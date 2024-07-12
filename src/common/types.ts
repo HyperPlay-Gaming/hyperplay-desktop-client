@@ -911,7 +911,7 @@ export interface Reward {
   contract_address: `0x${string}`
   decimals: number
   /* eslint-disable-next-line */
-  token_ids: any[]
+  token_ids: { amount_per_user: string; token_id: number }[]
   image_url: string
 }
 

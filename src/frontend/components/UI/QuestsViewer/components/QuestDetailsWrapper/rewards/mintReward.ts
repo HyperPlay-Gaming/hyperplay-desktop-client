@@ -18,10 +18,16 @@ export async function mintReward({
   writeContract: WriteContractMutate<Config, unknown>
 }) {
   await switchChainAsync({ chainId: reward.chain_id })
+  const isERC1155Reward =
+    reward.reward_type === 'ERC1155' && reward.token_ids.length === 1
+  let tokenId: number | undefined = undefined
+  if (isERC1155Reward) {
+    tokenId = reward.token_ids[0].token_id
+  }
   const sig: RewardClaimSignature = await window.api.getQuestRewardSignature(
     address,
-    questId,
-    reward.id
+    reward.id,
+    tokenId
   )
 
   const depositContracts: DepositContract[] =
@@ -49,6 +55,37 @@ export async function mintReward({
             reward.decimals
           ).toString()
         ),
+        BigInt(sig.nonce),
+        BigInt(sig.expiration),
+        sig.signature
+      ]
+    })
+  } else if (isERC1155Reward) {
+    const { token_id, amount_per_user } = reward.token_ids[0]
+    writeContract({
+      address: depositContractAddress,
+      abi: questRewardAbi,
+      functionName: 'withdrawERC1155',
+      args: [
+        BigInt(questId),
+        reward.contract_address,
+        BigInt(token_id),
+        BigInt(getAmount(amount_per_user, reward.decimals).toString()),
+        BigInt(sig.nonce),
+        BigInt(sig.expiration),
+        sig.signature
+      ]
+    })
+  } else if (reward.reward_type === 'ERC721' && reward.amount_per_user) {
+    writeContract({
+      address: depositContractAddress,
+      abi: questRewardAbi,
+      functionName: 'withdrawERC721',
+      args: [
+        BigInt(questId),
+        reward.contract_address,
+        // TODO: supply token id from return statement of get sig
+        BigInt('0'),
         BigInt(sig.nonce),
         BigInt(sig.expiration),
         sig.signature

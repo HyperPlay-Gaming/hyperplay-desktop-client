@@ -279,8 +279,8 @@ interface HyperPlayAsyncIPCFunctions {
   getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
   getQuestRewardSignature: (
     address: `0x${string}`,
-    questId: number,
-    rewardId: number
+    rewardId: number,
+    tokenId?: number
   ) => Promise<RewardClaimSignature>
   getDepositContracts: (questId: number) => Promise<DepositContract[]>
   /*  */
