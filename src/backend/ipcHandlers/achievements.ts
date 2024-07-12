@@ -244,8 +244,8 @@ ipcMain.handle('getSyncProgress', async (e, requestId) => {
 
 async function getQuestRewardSignature(
   address: `0x${string}`,
-  questId: number,
-  rewardId: number
+  rewardId: number,
+  tokenId?: number
 ): Promise<RewardClaimSignature> {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/signature`
 
@@ -261,7 +261,8 @@ async function getQuestRewardSignature(
     },
     body: JSON.stringify({
       withdraw: true,
-      address
+      address,
+      tokenId
     })
   })
   const resultJson = await result.json()

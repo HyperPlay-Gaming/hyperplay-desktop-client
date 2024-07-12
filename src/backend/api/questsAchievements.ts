@@ -32,9 +32,9 @@ export const getSteamGameMetadata = async (gameId: number) =>
 
 export const getQuestRewardSignature = async (
   address: `0x${string}`,
-  questId: number,
-  rewardId: number
-) => ipcRenderer.invoke('getQuestRewardSignature', address, questId, rewardId)
+  rewardId: number,
+  tokenId?: number
+) => ipcRenderer.invoke('getQuestRewardSignature', address, rewardId, tokenId)
 
 export const getDepositContracts = async (questId: number) =>
   ipcRenderer.invoke('getDepositContracts', questId)
