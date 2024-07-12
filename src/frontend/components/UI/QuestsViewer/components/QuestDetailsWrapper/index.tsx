@@ -8,7 +8,6 @@ import { useTranslation } from 'react-i18next'
 import { useWriteContract, useAccount, useSwitchChain } from 'wagmi'
 import { Reward } from 'common/types'
 import authState from 'frontend/state/authState'
-import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
 import { mintReward } from './rewards/mintReward'
 import { claimPoints } from './rewards/claimPoints'
 import {
@@ -20,6 +19,7 @@ import { useMutation } from '@tanstack/react-query'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -185,13 +185,7 @@ export function QuestDetailsWrapper({
           eligible: false,
           steamAccountLinked: true
         },
-        playStreak: {
-          resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
-          currentStreakInDays:
-            questPlayStreakData?.current_playstreak_in_days ?? 0,
-          requiredStreakInDays:
-            questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
-        }
+        playStreak: getPlayStreak(questMeta, questPlayStreakData)
       },
       rewards:
         questMeta.rewards?.map((val) => ({

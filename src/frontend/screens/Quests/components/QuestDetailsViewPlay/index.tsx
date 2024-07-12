@@ -6,10 +6,10 @@ import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
-import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
+import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -141,13 +141,7 @@ export function QuestDetailsViewPlayWrapper({
           eligible: false,
           steamAccountLinked: false
         },
-        playStreak: {
-          resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
-          currentStreakInDays:
-            questPlayStreakData?.current_playstreak_in_days ?? 0,
-          requiredStreakInDays:
-            questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
-        }
+        playStreak: getPlayStreak(questMeta, questPlayStreakData)
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}
