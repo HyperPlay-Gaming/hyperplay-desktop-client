@@ -54,5 +54,24 @@ export async function mintReward({
         sig.signature
       ]
     })
+  } else if (
+    reward.reward_type === 'ERC1155' &&
+    reward.token_ids.length === 1
+  ) {
+    const { token_id, amount_per_user } = reward.token_ids[0]
+    writeContract({
+      address: depositContractAddress,
+      abi: questRewardAbi,
+      functionName: 'withdrawERC1155',
+      args: [
+        BigInt(questId),
+        reward.contract_address,
+        BigInt(token_id),
+        BigInt(getAmount(amount_per_user, reward.decimals).toString()),
+        BigInt(sig.nonce),
+        BigInt(sig.expiration),
+        sig.signature
+      ]
+    })
   }
 }
