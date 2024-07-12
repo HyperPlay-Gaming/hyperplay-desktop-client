@@ -84,12 +84,8 @@ export async function mintReward({
       args: [
         BigInt(questId),
         reward.contract_address,
-        BigInt(
-          getAmount(
-            reward.amount_per_user.toString(),
-            reward.decimals
-          ).toString()
-        ),
+        // TODO: supply token id from return statement of get sig
+        BigInt('0'),
         BigInt(sig.nonce),
         BigInt(sig.expiration),
         sig.signature
