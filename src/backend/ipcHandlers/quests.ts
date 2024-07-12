@@ -20,10 +20,10 @@ ipcMain.handle('getQuest', async (e, questId) => {
 })
 
 ipcMain.handle('getUserPlayStreak', async (e, questId) => {
-  const questResultJson = await fetchWithCookie(
-    `${DEV_PORTAL_URL}api/v1/quests/${questId}/playstreak`,
-    'GET'
-  )
+  const questResultJson = await fetchWithCookie({
+    url: `${DEV_PORTAL_URL}api/v1/quests/${questId}/playstreak`,
+    method: 'GET'
+  })
   return questResultJson
 })
 
@@ -35,15 +35,15 @@ ipcMain.handle('getSteamGameMetadata', async (e, gameId) => {
 
 ipcMain.handle('claimQuestPointsReward', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/points-claim`
-  return (await fetchWithCookie(url, 'POST')) as PointsClaimReturn
+  return (await fetchWithCookie({ url, method: 'POST' })) as PointsClaimReturn
 })
 
 ipcMain.handle('completeExternalTask', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/completed`
-  return (await fetchWithCookie(url, 'POST')) as GenericApiResponse
+  return (await fetchWithCookie({ url, method: 'POST' })) as GenericApiResponse
 })
 
 ipcMain.handle('resyncExternalTask', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/re-sync`
-  return (await fetchWithCookie(url, 'POST')) as GenericApiResponse
+  return (await fetchWithCookie({ url, method: 'POST' })) as GenericApiResponse
 })
