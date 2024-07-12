@@ -19,6 +19,7 @@ import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { useMutation } from '@tanstack/react-query'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -27,6 +28,7 @@ export interface QuestDetailsWrapperProps {
 export function QuestDetailsWrapper({
   selectedQuestId
 }: QuestDetailsWrapperProps) {
+  const flags = useFlags()
   const { writeContract, error, isError, status } = useWriteContract()
   if (isError) {
     console.error(error)
@@ -214,7 +216,7 @@ export function QuestDetailsWrapper({
         : undefined,
       isMinting: isClaiming,
       isSignedIn: !!userId,
-      ctaDisabled: !isEligible(),
+      ctaDisabled: !flags.questsOverlayClaimCTAEnabled || !isEligible(),
       showSync: showResyncButton,
       onSyncClick: () => {
         resyncMutation.mutateAsync(questMeta.rewards ?? [])
