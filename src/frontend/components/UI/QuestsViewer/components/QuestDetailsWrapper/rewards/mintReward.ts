@@ -76,5 +76,24 @@ export async function mintReward({
         sig.signature
       ]
     })
+  } else if (reward.reward_type === 'ERC721' && reward.amount_per_user) {
+    writeContract({
+      address: depositContractAddress,
+      abi: questRewardAbi,
+      functionName: 'withdrawERC721',
+      args: [
+        BigInt(questId),
+        reward.contract_address,
+        BigInt(
+          getAmount(
+            reward.amount_per_user.toString(),
+            reward.decimals
+          ).toString()
+        ),
+        BigInt(sig.nonce),
+        BigInt(sig.expiration),
+        sig.signature
+      ]
+    })
   }
 }
