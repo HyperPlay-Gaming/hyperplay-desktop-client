@@ -2004,9 +2004,11 @@ function watchLibraryChanges() {
   sideloadLibraryStore.onDidChange('games', (newValue) =>
     sendFrontendMessage('onLibraryChanged', 'sideload', newValue)
   )
-  hpLibraryStore.onDidChange('games', (newValue) =>
-    sendFrontendMessage('onLibraryChanged', 'hyperplay', newValue)
-  )
+  hpLibraryStore.onDidChange('games', (newValue) => {
+    for (const win of BrowserWindow.getAllWindows()) {
+      win.webContents.send('onLibraryChanged', 'hyperplay', newValue)
+    }
+  })
 }
 
 ipcMain.on('openGameInEpicStore', async (_e, url) => {
