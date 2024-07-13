@@ -68,7 +68,7 @@ export async function mintReward({
         sig.signature
       ]
     })
-  } else if (isERC1155Reward && reward.decimals) {
+  } else if (isERC1155Reward && reward.decimals !== null) {
     const { token_id, amount_per_user } = reward.token_ids[0]
     writeContract({
       address: depositContractAddress,
