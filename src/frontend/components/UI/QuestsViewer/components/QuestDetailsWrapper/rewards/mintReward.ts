@@ -17,6 +17,10 @@ export async function mintReward({
   switchChainAsync: SwitchChainMutateAsync<Config, unknown>
   writeContract: WriteContractMutate<Config, unknown>
 }) {
+  if (reward.chain_id === null) {
+    console.error('chain id is not set for reward when trying to mint')
+    return
+  }
   await switchChainAsync({ chainId: reward.chain_id })
   const isERC1155Reward =
     reward.reward_type === 'ERC1155' && reward.token_ids.length === 1
@@ -41,7 +45,11 @@ export async function mintReward({
     )
     return
   }
-  if (reward.reward_type === 'ERC20' && reward.amount_per_user) {
+  if (
+    reward.reward_type === 'ERC20' &&
+    reward.amount_per_user &&
+    reward.decimals
+  ) {
     writeContract({
       address: depositContractAddress,
       abi: questRewardAbi,
@@ -60,7 +68,7 @@ export async function mintReward({
         sig.signature
       ]
     })
-  } else if (isERC1155Reward) {
+  } else if (isERC1155Reward && reward.decimals) {
     const { token_id, amount_per_user } = reward.token_ids[0]
     writeContract({
       address: depositContractAddress,

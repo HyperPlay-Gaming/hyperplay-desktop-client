@@ -106,7 +106,7 @@ export function QuestDetailsViewPlayWrapper({
       title: val.name,
       imageUrl: val.image_url,
       chainName: getRewardCategory(val, t),
-      numToClaim: val.amount_per_user
+      numToClaim: val.amount_per_user && val.decimals
         ? getDecimalNumberFromAmount(
             val.amount_per_user.toString(),
             val.decimals

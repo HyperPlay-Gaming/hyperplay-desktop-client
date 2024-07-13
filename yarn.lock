@@ -2003,10 +2003,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/ui@^1.5.9":
-  version "1.5.27"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.27.tgz#9f64f75bfcade9a8df544af9f79675660b4b39f4"
-  integrity sha512-9d//eOmp1POfeZZvYmB7bUAShYMxjUtV/SU3K0cXkcxL5eeTPz/Mp0LKji57eyoGbV0QfiMl3Mk5Pkdox0dL9w==
+"@hyperplay/ui@^1.5.28":
+  version "1.5.28"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.28.tgz#05270b55b777ecd1d5e89aca08d7c709dbdb0a9e"
+  integrity sha512-rDZbgjZeoLETyokHZ3BVIL1nDcgNFt3pdNg0eIW4b0J4h/BAwiMkFxc8hrQ8gOnPEyv/6d1qs2yNHdqxThxEBA==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
