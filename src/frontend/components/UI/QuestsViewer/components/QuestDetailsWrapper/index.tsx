@@ -82,7 +82,10 @@ export function QuestDetailsWrapper({
   const userId = session.data?.userId
 
   const showResyncButton =
-    questMeta?.type === 'PLAYSTREAK' && !!questPlayStreakData?.completed_counter && !!questMeta?.rewards?.filter(val=>val.reward_type === 'EXTERNAL-TASKS')?.length
+    questMeta?.type === 'PLAYSTREAK' &&
+    !!questPlayStreakData?.completed_counter &&
+    !!questMeta?.rewards?.filter((val) => val.reward_type === 'EXTERNAL-TASKS')
+      ?.length
 
   const i18n = {
     reward: t('quest.reward', 'Reward'),
@@ -192,12 +195,13 @@ export function QuestDetailsWrapper({
           title: val.name,
           imageUrl: val.image_url,
           chainName: getRewardCategory(val, t),
-          numToClaim: val.amount_per_user && val.decimals
-            ? getDecimalNumberFromAmount(
-                val.amount_per_user.toString(),
-                val.decimals
-              ).toString()
-            : undefined
+          numToClaim:
+            val.amount_per_user && val.decimals
+              ? getDecimalNumberFromAmount(
+                  val.amount_per_user.toString(),
+                  val.decimals
+                ).toString()
+              : undefined
         })) ?? [],
       i18n,
       onClaimClick: async () => claimRewards(questMeta.rewards ?? []),
@@ -210,7 +214,9 @@ export function QuestDetailsWrapper({
         : undefined,
       isMinting: isClaiming,
       isSignedIn: !!userId,
-      ctaDisabled: !flags.questsOverlayClaimCtaEnabled || (!isEligible() && !showResyncButton),
+      ctaDisabled:
+        !flags.questsOverlayClaimCtaEnabled ||
+        (!isEligible() && !showResyncButton),
       showSync: showResyncButton,
       onSyncClick: () => {
         resyncMutation.mutateAsync(questMeta.rewards ?? [])
