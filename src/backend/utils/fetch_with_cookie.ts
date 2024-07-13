@@ -22,7 +22,7 @@ export async function fetchWithCookie({
     }
   })
   if (!response.ok) {
-    throw response.text()
+    throw await response.text()
   }
   const resultJson = await response.json()
   return resultJson
