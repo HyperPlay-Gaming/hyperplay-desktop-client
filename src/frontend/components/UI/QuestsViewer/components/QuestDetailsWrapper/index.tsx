@@ -6,11 +6,20 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import { useWriteContract, useAccount, useSwitchChain } from 'wagmi'
-import { DepositContract, Reward, RewardClaimSignature } from 'common/types'
-import { getAmount } from '@hyperplay/utils'
-import { questRewardAbi } from 'frontend/abis/RewardsAbi'
+import { Reward } from 'common/types'
 import authState from 'frontend/state/authState'
-import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
+import { mintReward } from './rewards/mintReward'
+import { claimPoints } from './rewards/claimPoints'
+import {
+  completeExternalTask,
+  resyncExternalTasks
+} from './rewards/completeExternalTask'
+import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
+import { useMutation } from '@tanstack/react-query'
+import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
+import { getDecimalNumberFromAmount } from '@hyperplay/utils'
+import { useFlags } from 'launchdarkly-react-client-sdk'
+import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -19,6 +28,7 @@ export interface QuestDetailsWrapperProps {
 export function QuestDetailsWrapper({
   selectedQuestId
 }: QuestDetailsWrapperProps) {
+  const flags = useFlags()
   const { writeContract, error, isError, status } = useWriteContract()
   if (isError) {
     console.error(error)
@@ -28,6 +38,27 @@ export function QuestDetailsWrapper({
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
   const questMeta = questResult.data.data
+
+  const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
+  const questPlayStreakData = questPlayStreakResult.data.data
+
+  const resyncMutation = useMutation({
+    mutationFn: async (rewards: Reward[]) => {
+      return resyncExternalTasks(rewards)
+    }
+  })
+
+  const completeTaskMutation = useMutation({
+    mutationFn: async (reward: Reward) => {
+      return completeExternalTask(reward)
+    }
+  })
+
+  const claimPointsMutation = useMutation({
+    mutationFn: async (reward: Reward) => {
+      return claimPoints(reward)
+    }
+  })
 
   let questDetails = null
 
@@ -49,6 +80,13 @@ export function QuestDetailsWrapper({
   // const steamIsLinked = accounts?.has('steam')
 
   const userId = session.data?.userId
+
+  const showResyncButton =
+    questMeta?.type === 'PLAYSTREAK' &&
+    !!questPlayStreakData?.completed_counter &&
+    !!questMeta?.rewards?.filter((val) => val.reward_type === 'EXTERNAL-TASKS')
+      ?.length
+
   const i18n = {
     reward: t('quest.reward', 'Reward'),
     associatedGames: t('quest.associatedGames', 'Associated games'),
@@ -70,10 +108,12 @@ export function QuestDetailsWrapper({
     questType: {
       REPUTATION: t('quest.reputation', 'Reputation'),
       PLAYSTREAK: t('quest.playstreak', 'Play Streak')
-    }
+    },
+    sync: t('quest.sync', 'Sync'),
+    rewards: t('quest.rewards', 'Rewards')
   }
 
-  async function mintRewards(rewards: Reward[]) {
+  const mintOnChainReward = async (reward: Reward) => {
     if (questMeta?.id === undefined) {
       console.error('tried to mint but quest meta id is undefined')
       return
@@ -82,52 +122,42 @@ export function QuestDetailsWrapper({
       console.error('tried to mint but no account connected')
       return
     }
-    for (const reward_i of rewards) {
-      await switchChainAsync({ chainId: reward_i.chain_id })
-      const sig: RewardClaimSignature =
-        await window.api.getQuestRewardSignature(
-          account.address,
-          questMeta.id,
-          reward_i.id
-        )
+    return mintReward({
+      questId: questMeta.id,
+      address: account.address,
+      reward,
+      writeContract,
+      switchChainAsync
+    })
+  }
 
-      const depositContracts: DepositContract[] =
-        await window.api.getDepositContracts(questMeta.id)
-      const depositContractAddress = depositContracts.find(
-        (val) => val.chain_id === reward_i.chain_id
-      )?.contract_address
-      if (depositContractAddress === undefined) {
-        console.error(
-          `Deposit contract address undefined for quest ${questMeta.id} and chain id ${reward_i.chain_id}`
-        )
-        return
-      }
-      if (reward_i.reward_type === 'ERC20') {
-        writeContract({
-          address: depositContractAddress,
-          abi: questRewardAbi,
-          functionName: 'withdrawERC20',
-          args: [
-            BigInt(questMeta.id),
-            reward_i.contract_address,
-            BigInt(
-              getAmount(reward_i.amount_per_user, reward_i.decimals).toString()
-            ),
-            BigInt(sig.nonce),
-            BigInt(sig.expiration),
-            sig.signature
-          ]
-        })
+  async function claimRewards(rewards: Reward[]) {
+    for (const reward_i of rewards) {
+      switch (reward_i.reward_type) {
+        case 'ERC1155':
+        case 'ERC721':
+        case 'ERC20':
+          await mintOnChainReward(reward_i)
+          break
+        case 'POINTS':
+          await claimPointsMutation.mutateAsync(reward_i)
+          break
+        case 'EXTERNAL-TASKS':
+          await completeTaskMutation.mutateAsync(reward_i)
+          break
+        default:
+          console.error(`unknown reward type ${reward_i.reward_type}`)
+          break
       }
     }
+    await questPlayStreakResult.invalidateQuery()
   }
 
   function isEligible() {
     if (!questMeta) {
       return false
     }
-    const currentStreak =
-      questMeta.eligibility?.play_streak?.current_playstreak_in_days
+    const currentStreak = questPlayStreakData?.current_playstreak_in_days
     const requiredStreak =
       questMeta.eligibility?.play_streak?.required_playstreak_in_days
     if (questMeta.type === 'PLAYSTREAK' && currentStreak && requiredStreak) {
@@ -136,6 +166,15 @@ export function QuestDetailsWrapper({
 
     return false
   }
+
+  const chainTooltips: Record<string, string> = {}
+  chainTooltips[t('quest.points', 'Points')] =
+    'Points are off-chain fungible rewards that may or may not be redeemable for an on-chain reward in the future. This is up to the particular game developer who is providing this reward.'
+
+  const isClaiming =
+    status === 'pending' ||
+    completeTaskMutation.isPending ||
+    claimPointsMutation.isPending
 
   if (selectedQuestId !== null && questMeta !== undefined) {
     const questDetailsProps: QuestDetailsProps = {
@@ -149,21 +188,23 @@ export function QuestDetailsWrapper({
           eligible: false,
           steamAccountLinked: true
         },
-        playStreak: {
-          resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
-          currentStreakInDays:
-            questMeta.eligibility?.play_streak?.current_playstreak_in_days ?? 0,
-          requiredStreakInDays:
-            questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
-        }
+        playStreak: getPlayStreak(questMeta, questPlayStreakData)
       },
       rewards:
         questMeta.rewards?.map((val) => ({
           title: val.name,
-          imageUrl: val.image_url
+          imageUrl: val.image_url,
+          chainName: getRewardCategory(val, t),
+          numToClaim:
+            val.amount_per_user && val.decimals
+              ? getDecimalNumberFromAmount(
+                  val.amount_per_user.toString(),
+                  val.decimals
+                ).toString()
+              : undefined
         })) ?? [],
       i18n,
-      onClaimClick: async () => mintRewards(questMeta.rewards ?? []),
+      onClaimClick: async () => claimRewards(questMeta.rewards ?? []),
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
@@ -171,9 +212,17 @@ export function QuestDetailsWrapper({
       errorMessage: isError
         ? t('quest.errorMessage', 'There was an error with the transaction.')
         : undefined,
-      isMinting: status === 'pending',
+      isMinting: isClaiming,
       isSignedIn: !!userId,
-      ctaDisabled: !isEligible()
+      ctaDisabled:
+        !flags.questsOverlayClaimCtaEnabled ||
+        (!isEligible() && !showResyncButton),
+      showSync: showResyncButton,
+      onSyncClick: () => {
+        resyncMutation.mutateAsync(questMeta.rewards ?? [])
+      },
+      isSyncing: resyncMutation.isPending,
+      chainTooltips: {}
     }
     questDetails = (
       <QuestDetails {...questDetailsProps} className={styles.questDetails} />

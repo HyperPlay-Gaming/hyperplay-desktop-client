@@ -1,10 +1,11 @@
 import { createConfig, http } from 'wagmi'
-import { mainnet, sepolia } from 'wagmi/chains'
+import { mainnet, polygon, sepolia } from 'wagmi/chains'
 
 export const config = createConfig({
-  chains: [mainnet, sepolia],
+  chains: [mainnet, sepolia, polygon],
   transports: {
-    [mainnet.id]: http(mainnet.rpcUrls.default[0]),
-    [sepolia.id]: http(sepolia.rpcUrls.default[0])
+    [mainnet.id]: http(mainnet.rpcUrls.default.http[0]),
+    [sepolia.id]: http(sepolia.rpcUrls.default.http[0]),
+    [polygon.id]: http(polygon.rpcUrls.default.http[0])
   }
 })

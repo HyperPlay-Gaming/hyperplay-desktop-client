@@ -38,7 +38,10 @@ export default observer(function SidebarLinks() {
 
   const flags = useFlags()
   const SHOW_ACHIEVEMENTS = flags.achievements
-  const SHOW_QUESTS = flags.questsPageInClient
+  const gamesToShowQuestsFor =
+    (flags.gamesToShowQuestsFor as string | undefined)?.split(',') ?? []
+  const SHOW_QUESTS =
+    flags.questsPageInClient || libraryState.hasGame(gamesToShowQuestsFor)
 
   async function handleRefresh() {
     localStorage.setItem('scrollPosition', '0')

@@ -24,14 +24,26 @@ export const getQuests = async (projectId?: string) =>
 export const getQuest = async (questId: number) =>
   ipcRenderer.invoke('getQuest', questId)
 
+export const getUserPlayStreak = async (questId: number) =>
+  ipcRenderer.invoke('getUserPlayStreak', questId)
+
 export const getSteamGameMetadata = async (gameId: number) =>
   ipcRenderer.invoke('getSteamGameMetadata', gameId)
 
 export const getQuestRewardSignature = async (
   address: `0x${string}`,
-  questId: number,
-  rewardId: number
-) => ipcRenderer.invoke('getQuestRewardSignature', address, questId, rewardId)
+  rewardId: number,
+  tokenId?: number
+) => ipcRenderer.invoke('getQuestRewardSignature', address, rewardId, tokenId)
 
 export const getDepositContracts = async (questId: number) =>
   ipcRenderer.invoke('getDepositContracts', questId)
+
+export const claimQuestPointsReward = async (rewardId: string) =>
+  ipcRenderer.invoke('claimQuestPointsReward', rewardId)
+
+export const completeExternalTask = async (rewardId: string) =>
+  ipcRenderer.invoke('completeExternalTask', rewardId)
+
+export const resyncExternalTask = async (rewardId: string) =>
+  ipcRenderer.invoke('resyncExternalTask', rewardId)
