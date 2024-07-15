@@ -74,6 +74,7 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
+          authState.closeSignInModal()
           window.api.authConnected()
           await authSession.invalidateQuery()
           break
@@ -118,6 +119,7 @@ const AuthModal = () => {
         // TODO: need to clear cookie in auth modal to send back to first page
       }
     }
+
     const removeHandleAuthEvent = window.api.handleAuthEvent(handleAuthEvent)
 
     return () => {
