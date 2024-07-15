@@ -12,6 +12,7 @@ import { BrowserGameProps } from '../types'
 import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import libraryState from 'frontend/state/libraryState'
 
 export const Overlay = observer(function ({
   appName,
@@ -110,7 +111,12 @@ export const Overlay = observer(function ({
     }
 
     let questsViewer = null
-    if (flags.questsOverlayClaimModals) {
+    const gamesToShowQuestsFor =
+      (flags.gamesToShowQuestsFor as string | undefined)?.split(',') ?? []
+    if (
+      flags.questsOverlayClaimModals ||
+      libraryState.hasGame(gamesToShowQuestsFor)
+    ) {
       questsViewer = <QuestsViewer projectId={appName} />
     }
 

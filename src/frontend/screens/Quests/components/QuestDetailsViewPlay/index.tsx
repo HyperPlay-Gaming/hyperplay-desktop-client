@@ -6,7 +6,10 @@ import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
-import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
+import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
+import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
+import { getDecimalNumberFromAmount } from '@hyperplay/utils'
+import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -21,6 +24,8 @@ export function QuestDetailsViewPlayWrapper({
 
   const questResult = useGetQuest(selectedQuestId)
   const questMeta = questResult.data.data
+  const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
+  const questPlayStreakData = questPlayStreakResult.data.data
 
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
@@ -59,7 +64,9 @@ export function QuestDetailsViewPlayWrapper({
     questType: {
       REPUTATION: t('quest.reputation', 'Reputation'),
       PLAYSTREAK: t('quest.playstreak', 'Play Streak')
-    }
+    },
+    sync: t('quest.sync', 'Sync'),
+    rewards: t('quest.rewards', 'Rewards')
   }
 
   if (!questMeta || questResult.data.isLoading || questResult.data.isFetching) {
@@ -97,7 +104,15 @@ export function QuestDetailsViewPlayWrapper({
   const rewards =
     questMeta.rewards?.map((val) => ({
       title: val.name,
-      imageUrl: val.image_url
+      imageUrl: val.image_url,
+      chainName: getRewardCategory(val, t),
+      numToClaim:
+        val.amount_per_user && val.decimals
+          ? getDecimalNumberFromAmount(
+              val.amount_per_user.toString(),
+              val.decimals
+            ).toString()
+          : undefined
     })) ?? []
 
   async function navigateToGamePage(appName: string) {
@@ -127,13 +142,7 @@ export function QuestDetailsViewPlayWrapper({
           eligible: false,
           steamAccountLinked: false
         },
-        playStreak: {
-          resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
-          currentStreakInDays:
-            questMeta.eligibility?.play_streak?.current_playstreak_in_days ?? 0,
-          requiredStreakInDays:
-            questMeta.eligibility?.play_streak?.required_playstreak_in_days ?? 0
-        }
+        playStreak: getPlayStreak(questMeta, questPlayStreakData)
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}

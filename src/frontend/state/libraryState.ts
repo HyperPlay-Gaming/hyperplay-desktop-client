@@ -455,6 +455,13 @@ class LibraryState {
       (hiddenGame: HiddenGame) => hiddenGame.appName === appName
     )
   }
+
+  hasGame(appNames: string[]) {
+    return (
+      this.hyperPlayLibrary.filter((val) => appNames.includes(val.app_name))
+        .length > 0
+    )
+  }
 }
 
 export default new LibraryState()
