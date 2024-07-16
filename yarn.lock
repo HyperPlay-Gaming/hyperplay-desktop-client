@@ -2004,9 +2004,9 @@
     zod "^3.22.4"
 
 "@hyperplay/ui@^1.5.28":
-  version "1.5.28"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.28.tgz#05270b55b777ecd1d5e89aca08d7c709dbdb0a9e"
-  integrity sha512-rDZbgjZeoLETyokHZ3BVIL1nDcgNFt3pdNg0eIW4b0J4h/BAwiMkFxc8hrQ8gOnPEyv/6d1qs2yNHdqxThxEBA==
+  version "1.5.30"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.30.tgz#240238bba7188cd59182d83c5750a5d23cc48ba6"
+  integrity sha512-aDUExgQOSGPrgaFB12V11y90XqZGWgVUofbLWFcvdEklJq/cddnbU/RpE45CIN1z1rgRo6nkm37LieQwcxVaHw==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
