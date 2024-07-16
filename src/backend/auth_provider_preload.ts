@@ -1,4 +1,5 @@
 import { contextBridge, ipcRenderer, webFrame } from 'electron'
+
 const DEV_PORTAL_URL = 'https://developers.hyperplay.xyz/'
 
 const removeBackground = `
@@ -23,6 +24,9 @@ contextBridge.exposeInMainWorld('authApi', {
   },
   reportAccountConnected: () => {
     ipcRenderer.sendToHost('auth:accountConnected')
+  },
+  reportLoginSuccess: () => {
+    ipcRenderer.sendToHost('auth:loginSuccess')
   },
   openProviderOAuthLink: (provider: string) => {
     ipcRenderer.send('openExternalUrl', `${DEV_PORTAL_URL}/oauth/${provider}`)

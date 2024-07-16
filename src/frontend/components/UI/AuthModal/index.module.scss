@@ -2,3 +2,25 @@
   width: 620px;
   height: 490px;
 }
+
+
+.toast {
+  display: flex;
+  gap: var(--space-xs);
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-xs);
+  border-radius: var(--space-xs-fixed);
+  background: var(--color-success-400);
+  color: var(--color-neutral-900);
+  width: 100%;
+  max-width: 700px;
+  z-index: 400;
+  position: absolute;
+  animation: slideIn 0.5s ease-in-out;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: var(--space-md)
+}

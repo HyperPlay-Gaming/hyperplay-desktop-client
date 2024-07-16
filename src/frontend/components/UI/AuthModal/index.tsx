@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './index.module.scss'
-import { ModalAnimation } from '@hyperplay/ui'
+import { Images, ModalAnimation } from '@hyperplay/ui'
 import { WebviewTag } from 'electron'
 import { observer } from 'mobx-react-lite'
 import authState from '../../../state/authState'
@@ -23,6 +23,7 @@ const isTooManyRequestsError = (error: string) => {
 const AuthModal = () => {
   const flags = useFlags()
   const authSession = useAuthSession()
+  const [showSuccessToast, setShowSuccessToast] = useState(false)
   const webviewRef = useRef<WebviewTag>(null)
   const isAuthEnabled = flags.auth
 
@@ -31,6 +32,16 @@ const AuthModal = () => {
     if (!webview) return
     authState.setPendingSignatureRequest(false)
     webview.send('auth:retryWalletConnection')
+  }
+
+  const handleLoginSuccess = async () => {
+    authState.closeSignInModal()
+    await authSession.invalidateQuery()
+    await webviewRef.current?.loadURL(url)
+    setShowSuccessToast(true)
+    setTimeout(() => {
+      setShowSuccessToast(false)
+    }, 5000)
   }
 
   const handleAccountNotConnected = async () => {
@@ -84,6 +95,9 @@ const AuthModal = () => {
           break
         case 'auth:accountNotConnected':
           await handleAccountNotConnected()
+          break
+        case 'auth:loginSuccess':
+          await handleLoginSuccess()
           break
         default:
           break
@@ -139,19 +153,27 @@ const AuthModal = () => {
   }, [walletState.isConnected, authState.hasPendingSignatureRequest])
 
   return (
-    <ModalAnimation
-      isOpen={isAuthEnabled && authState.isSignInModalOpen}
-      onClose={() => authState.closeSignInModal()}
-    >
-      <webview
-        ref={webviewRef}
-        src={url}
-        className={styles.webview}
-        partition="persist:auth"
-        allowpopups={'true' as unknown as boolean | undefined}
-        useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15"
-      />
-    </ModalAnimation>
+    <>
+      {showSuccessToast && (
+        <div className={styles.toast}>
+          <Images.CheckmarkCircleOutline width={20} height={20} />
+          <span className="eyebrow">Login successful</span>
+        </div>
+      )}
+      <ModalAnimation
+        isOpen={isAuthEnabled && authState.isSignInModalOpen}
+        onClose={() => authState.closeSignInModal()}
+      >
+        <webview
+          ref={webviewRef}
+          src={url}
+          className={styles.webview}
+          partition="persist:auth"
+          allowpopups={'true' as unknown as boolean | undefined}
+          useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.2 Safari/605.1.15"
+        />
+      </ModalAnimation>
+    </>
   )
 }
 
