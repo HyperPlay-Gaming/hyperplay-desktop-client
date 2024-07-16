@@ -8,15 +8,21 @@
   position: absolute;
   inset: 0;
 
-  grid-template-areas:
-    'alert alert'
-    'questTable questDetails';
+  &.with-alert {
+    grid-template-areas:
+      'alert alert'
+      'questTable questDetails';
 
-  > &:nth-child(2) {
-    grid-area: questTable;
+    > &:nth-child(2) {
+      grid-area: questTable;
+    }
+    > &:nth-child(3) {
+      grid-area: questDetails;
+    }
   }
-  > &:nth-child(3) {
-    grid-area: questDetails;
+
+  &.no-alert {
+    grid-template-rows: 1fr;
   }
 }
 

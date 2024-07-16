@@ -11,7 +11,10 @@ export function QuestsPage() {
   const { isSignedIn } = useAuthSession()
 
   let alertComponent = null
-  if (!isSignedIn) {
+  const showAlert = !isSignedIn
+  let contentWithAlertClass = styles['no-alert']
+  if (showAlert) {
+    contentWithAlertClass = styles['with-alert']
     alertComponent = (
       <Alert
         className={styles.alert}
@@ -24,7 +27,13 @@ export function QuestsPage() {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <div className={classNames('contentContainer', styles.root)}>
+      <div
+        className={classNames(
+          'contentContainer',
+          contentWithAlertClass,
+          styles.root
+        )}
+      >
         {alertComponent}
         <QuestsSummaryTableWrapper
           setSelectedQuestId={setSelectedQuestId}
