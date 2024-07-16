@@ -10,4 +10,4 @@ export const METAMASK_PORTFOLIO_URL = 'https://portfolio.metamask.io/'
 
 export const valistBaseApiUrlv1 = 'https://api.valist.io/v1'
 export const DEV_PORTAL_URL =
-  'https://hyperplay-dev-git-fix-session-clear-hyperplay.vercel.app/'
+  'https://hyperplay-dev-git-feat-reset-email-hyperplay.vercel.app/'
