@@ -146,13 +146,13 @@ export function QuestDetailsViewPlayWrapper({
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}
-      onPlayClick={async () =>
-        window.api.launch({
-          appName: questMeta.project_id,
-          launchArguments: '',
-          runner: 'hyperplay'
+      onPlayClick={async () => {
+        const gameId = questMeta.project_id
+        const gameInfo = await getGameInfo(gameId, 'hyperplay')
+        navigate(`/gamepage/hyperplay/${gameId}`, {
+          state: { gameInfo, fromDM: false }
         })
-      }
+      }}
       onSecondCTAClick={async () => navigateToGamePage(questMeta.project_id)}
     />
   )
