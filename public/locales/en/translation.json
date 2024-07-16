@@ -656,14 +656,20 @@
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
         "Play": "Play",
         "playstreak": "Play Streak",
+        "points": "Points",
         "quests": "Quests",
         "readyForClaim": "Ready for claim",
         "reputation": "Reputation",
         "reward": "Reward",
+        "rewards": "Rewards",
         "signIn": "Sign in",
+        "sync": "Sync",
         "View Game": "View Game"
     },
     "quests": {
+        "playstreak": {
+            "signInWarning": "You are currently not logged in and play streak progress will not be tracked."
+        },
         "quests": "Quests"
     },
     "queue": {
