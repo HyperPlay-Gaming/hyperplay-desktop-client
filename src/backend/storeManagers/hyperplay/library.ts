@@ -213,6 +213,7 @@ export async function listUpdateableGames(): Promise<string[]> {
         To continue to receive game updates, uninstall and reinstall this game: ${val.title}`,
           LogPrefix.HyperPlay
         )
+        return
       }
       if (
         // games installed before 0.5.0 used gameInfo.version for install.version
