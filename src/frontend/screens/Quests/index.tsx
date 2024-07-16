@@ -21,8 +21,8 @@ export function QuestsPage() {
       <Alert
         className={styles.alert}
         message={t(
-          'quests.playstreak.signInWarning',
-          'You are currently not logged in and play streak progress will not be tracked.'
+          'quests.playstreak.signInWarning.client',
+          'You are currently not logged in, play streak progress will not be tracked. Please login to HyperPlay via the top-right dropdown to track progress.'
         )}
         variant="warning"
       />

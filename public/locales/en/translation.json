@@ -668,7 +668,10 @@
     },
     "quests": {
         "playstreak": {
-            "signInWarning": "You are currently not logged in and play streak progress will not be tracked."
+            "signInWarning": {
+                "client": "You are currently not logged in, play streak progress will not be tracked. Please login to HyperPlay via the top-right dropdown to track progress.",
+                "overlay": "You are currently not logged in, play streak progress will not be tracked. Please exit the game and login to HyperPlay via the top-right dropdown to track progress."
+            }
         },
         "quests": "Quests"
     },
