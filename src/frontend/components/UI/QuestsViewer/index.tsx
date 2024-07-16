@@ -4,6 +4,7 @@ import { QuestLogWrapper } from './components/QuestLogWrapper'
 import { QuestDetailsWrapper } from './components/QuestDetailsWrapper'
 import { Alert } from '@hyperplay/ui'
 import useAuthSession from 'frontend/hooks/useAuthSession'
+import { useTranslation } from 'react-i18next'
 
 export interface QuestsViewerProps {
   projectId: string
@@ -12,13 +13,14 @@ export interface QuestsViewerProps {
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn } = useAuthSession()
+  const { t } = useTranslation()
 
   let alertComponent = null
   if (!isSignedIn) {
     alertComponent = (
       <Alert
         className={styles.alert}
-        message="Be sure to log into HyperPlay to maintain your play streak progress."
+        message={t('quests.playstreak.signInWarning')}
         variant="warning"
       />
     )
