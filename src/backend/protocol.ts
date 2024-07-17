@@ -34,9 +34,7 @@ export async function handleProtocol(args: string[]) {
 
   logInfo(`received ${url}`, LogPrefix.ProtocolHandler)
 
-  const channel = 'otpDeeplink'
   const otp = new URL(url).searchParams.get('otp')
-  const hpOverlay = await getHpOverlay()
   switch (command) {
     case 'ping':
       return handlePing(arg)
@@ -44,17 +42,23 @@ export async function handleProtocol(args: string[]) {
       await handleLaunch(runner, arg, mainWindow)
       break
     case 'otp-deeplink':
-      // if no overlay window exists
-      if (!hpOverlay?.sendMessageToOverlayWindows(channel, otp)) {
-        // send to main window
-        logInfo('No overlay windows exist. Sending otp to main window.')
-        sendFrontendMessage(channel, otp)
-      } else {
-        logInfo('Sent otp to overlay windows.')
-      }
+      await handleOtp(otp)
       break
     default:
       return
+  }
+}
+
+export async function handleOtp(otp: string | null) {
+  const channel = 'otpDeeplink'
+  const hpOverlay = await getHpOverlay()
+  // if no overlay window exists
+  if (!hpOverlay?.sendMessageToOverlayWindows(channel, otp)) {
+    // send to main window
+    logInfo('No overlay windows exist. Sending otp to main window.')
+    sendFrontendMessage(channel, otp)
+  } else {
+    logInfo('Sent otp to overlay windows.')
   }
 }
 
