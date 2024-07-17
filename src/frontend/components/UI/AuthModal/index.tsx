@@ -85,7 +85,6 @@ const AuthModal = () => {
           authState.closeSignInModal()
           break
         case 'auth:accountConnected':
-          authState.closeSignInModal()
           window.api.authConnected()
           await authSession.invalidateQuery()
           break
