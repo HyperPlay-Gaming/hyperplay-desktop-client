@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { QuestDetails, QuestDetailsProps, Game, QuestDetailsTranslations } from '@hyperplay/ui'
+import {
+  QuestDetails,
+  QuestDetailsProps,
+  Game,
+  QuestDetailsTranslations
+} from '@hyperplay/ui'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
@@ -114,9 +119,18 @@ export function QuestDetailsWrapper({
     streakProgressI18n: {
       streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
       days: t('quest.playstreak.days', 'days'),
-      playToStart: t('quest.playstreak.playToStart', 'Play this game to start your streak!'),
-      playEachDay: t('quest.playstreak.playEachDay', `Play each day so your streak won't reset!`),
-      streakCompleted: t('quest.playstreak.streakCompleted', 'Streak completed! Claim your rewards now.'),
+      playToStart: t(
+        'quest.playstreak.playToStart',
+        'Play this game to start your streak!'
+      ),
+      playEachDay: t(
+        'quest.playstreak.playEachDay',
+        `Play each day so your streak won't reset!`
+      ),
+      streakCompleted: t(
+        'quest.playstreak.streakCompleted',
+        'Streak completed! Claim your rewards now.'
+      ),
       now: t('quest.playstreak.now', 'Now'),
       dayResets: t('quest.playstreak.dayResets', 'Day resets:')
     }
