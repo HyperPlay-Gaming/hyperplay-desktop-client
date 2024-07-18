@@ -156,6 +156,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   'auth:accountConnected': () => void
   'auth:accountNotConnected': () => void
   'auth:otpFinished': () => void
+  'auth:loginSuccess': () => void
   focusMainWindow: () => void
 }
 
