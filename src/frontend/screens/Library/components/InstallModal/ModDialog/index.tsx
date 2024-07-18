@@ -1,18 +1,15 @@
 import React, { useState } from 'react'
 import { GameInfo } from 'common/types'
-import { DialogHeader } from 'frontend/components/UI/Dialog'
+import { DialogHeader, DialogContent } from 'frontend/components/UI/Dialog'
 import { useTranslation } from 'react-i18next'
-import { DialogContent } from '@mui/material'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faFile,
-  faFolderOpen
-} from '@fortawesome/free-solid-svg-icons'
+import { faFile, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import styles from './ModDialog.module.scss'
 import { configStore } from 'frontend/helpers/electronStores'
 import TextInputWithIconField from 'frontend/components/UI/TextInputWithIconField'
 import { Button, Images } from '@hyperplay/ui'
+// import { install } from 'frontend/helpers'
 
 interface Props {
   backdropClick: () => void
@@ -21,12 +18,18 @@ interface Props {
 
 const userHome = configStore.get('userHome', '')
 
+/* const previousProgress = {
+  bytes: '0.00MB',
+  eta: '00:00:00',
+  percent: 0
+} */
+
 const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
   const { t } = useTranslation()
   const [zipFilePath, setZipFilePath] = useState<string>('')
   const [installPath, setInstallPath] = useState<string>('')
 
-  const { title } = gameInfo
+  const { title, app_name: appName } = gameInfo
 
   const handleZipFileSelection = async () => {
     const path = await window.api.openDialog({
@@ -55,25 +58,25 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
     return defaultInstallPath
   }
 
-  function handleInstall(): void | PromiseLike<void> {
-    // Add your implementation here
-    // For example, you can use async/await to perform an asynchronous operation
-    // and handle any errors that may occur
+  async function handleInstall(): Promise<void> {
 
-    // Assuming you want to simulate an installation process that takes some time
-    const simulateInstallation = async () => {
-      try {
-        // Simulate installation process
-        console.log('Installing...')
-        await new Promise((resolve) => setTimeout(resolve, 2000)) // Simulate 2 seconds of installation time
-        console.log('Installation complete!')
-      } catch (error) {
-        console.error('Installation failed:', error)
-      }
-    }
+    backdropClick()
 
-    // Call the simulateInstallation function
-    simulateInstallation()
+    await window.api.prepareBaseGameForModding({
+      appName,
+      zipFile: zipFilePath,
+      installPath
+    })
+
+    /* await install({
+      gameInfo,
+      installPath,
+      t,
+      isInstalling: false,
+      previousProgress,
+      progress: previousProgress,
+      showDialogModal: () => {}
+    }) */
   }
   return (
     <>
@@ -90,11 +93,7 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
         <br />
         {t('mods.instructions.title', 'Mod Instructions')}
       </DialogHeader>
-      <DialogContent
-        sx={{
-          padding: 'var(--space-md) 0'
-        }}
-      >
+      <DialogContent>
         <div className={styles.stepContainer}>
           <div className={styles.step}>
             <div className={styles.stepTitle}>
@@ -107,13 +106,11 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
               )}
             </div>
             <p className={styles.stepDescription}>
-              {t(
-                'mods.instructions.step1.description',
-                {
-                  defaultValue: 'This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from several external sources:',
-                  newline: '\n'
-                }
-              )}
+              {t('mods.instructions.step1.description', {
+                defaultValue:
+                  'This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from several external sources:',
+                newline: '\n'
+              })}
             </p>
             <ul className={styles.sourceList}>
               <li className={styles.sourceItem}>
@@ -200,7 +197,13 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
             size="medium"
             onClick={async () => handleInstall()}
             disabled={!installPath || !zipFilePath}
-            leftIcon={<Images.DownloadIcon fill="var(--color-success-400)" width={20} height={20} />}
+            leftIcon={
+              <Images.DownloadIcon
+                fill="var(--color-success-400)"
+                width={20}
+                height={20}
+              />
+            }
             style={{ width: '100%' }}
           >
             {t('mods.instructions.step3.install', 'Install')}
