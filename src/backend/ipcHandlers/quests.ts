@@ -1,7 +1,7 @@
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
 import { DEV_PORTAL_URL } from 'common/constants'
 import { GenericApiResponse, PointsClaimReturn } from 'common/types'
-import { ipcMain } from 'electron'
+import { app, ipcMain } from 'electron'
 
 ipcMain.handle('getQuests', async (e, projectId) => {
   let url = `${DEV_PORTAL_URL}api/v1/quests?questStatus=ACTIVE`
@@ -9,7 +9,20 @@ ipcMain.handle('getQuests', async (e, projectId) => {
     url += `&projectId=${projectId}`
   }
   const questMetaResults = await fetch(url)
-  const questsMetaJson = await questMetaResults.json()
+  if (!questMetaResults.ok) {
+    throw await questMetaResults.text()
+  }
+  let questsMetaJson = await questMetaResults.json()
+
+  if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
+    url += `&isTest=true`
+    const testQuestMetaResults = await fetch(url)
+    if (!testQuestMetaResults.ok) {
+      throw await testQuestMetaResults.text()
+    }
+    const testQuestsMetaJson = await testQuestMetaResults.json()
+    questsMetaJson = questsMetaJson.concat(testQuestsMetaJson)
+  }
   return questsMetaJson
 })
 
