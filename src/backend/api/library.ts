@@ -150,3 +150,16 @@ export const checkHyperPlayAccessCode = async (
     accessCode
   )
 }
+
+type ModArgs = { appName: string; zipFile: string; installPath: string }
+
+export const prepareBaseGameForModding = async ({
+  appName,
+  zipFile,
+  installPath
+}: ModArgs) =>
+  ipcRenderer.invoke('prepareBaseGameForModding', {
+    appName,
+    zipFile,
+    installPath
+  })

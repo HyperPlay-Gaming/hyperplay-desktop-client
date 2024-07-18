@@ -280,6 +280,11 @@ interface HyperPlayAsyncIPCFunctions {
     rewardId: number
   ) => Promise<RewardClaimSignature>
   getDepositContracts: (questId: number) => Promise<DepositContract[]>
+  prepareBaseGameForModding: ({
+    appName: string,
+    zipFile: string,
+    installPath: string
+  }) => Promise<void>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

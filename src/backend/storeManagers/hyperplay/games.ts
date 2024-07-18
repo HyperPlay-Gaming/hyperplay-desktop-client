@@ -401,7 +401,7 @@ const findExecutables = async (folderPath: string): Promise<string[]> => {
   return executables
 }
 
-function cleanUpDownload(appName: string, directory: string) {
+export function cleanUpDownload(appName: string, directory: string) {
   inProgressDownloadsMap.delete(appName)
   inProgressExtractionsMap.delete(appName)
   deleteAbortController(appName)
@@ -536,7 +536,7 @@ async function downloadGame(
   })
 }
 
-function calculateProgress(
+export function calculateProgress(
   downloadedBytes: number,
   downloadSize: number,
   downloadSpeed: number,
