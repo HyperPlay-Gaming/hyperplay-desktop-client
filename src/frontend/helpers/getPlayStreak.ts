@@ -23,7 +23,7 @@ export function getPlayStreak(
     questPlayStreakData
   )
   return {
-    resetTimeInMsSinceEpoch: getNextMidnightTimestamp(),
+    getResetTimeInMsSinceEpoch: getNextMidnightTimestamp,
     currentStreakInDays,
     requiredStreakInDays
   }

@@ -3,6 +3,7 @@ import { QuestLog, QuestLogInfo, QuestLogTranslations } from '@hyperplay/ui'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
+import { Quest } from 'common/types'
 
 export interface QuestLogWrapperProps {
   projectId: string
@@ -32,9 +33,9 @@ export function QuestLogWrapper({
 
   let questLog = null
   if (Array.isArray(quests)) {
-    const questsUi = quests.map((val) => {
+    const questsUi = quests.map((val: Quest) => {
       const questUi_i: QuestLogInfo = {
-        questType: 'REPUTATION',
+        questType: val.type,
         title: val.name,
         state: 'ACTIVE',
         onClick: () => {

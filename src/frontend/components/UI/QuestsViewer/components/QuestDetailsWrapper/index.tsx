@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { QuestDetails, QuestDetailsProps, Game } from '@hyperplay/ui'
+import { QuestDetails, QuestDetailsProps, Game, QuestDetailsTranslations } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
@@ -20,6 +20,7 @@ import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
+import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -87,8 +88,8 @@ export function QuestDetailsWrapper({
     !!questMeta?.rewards?.filter((val) => val.reward_type === 'EXTERNAL-TASKS')
       ?.length
 
-  const i18n = {
-    reward: t('quest.reward', 'Reward'),
+  const i18n: QuestDetailsTranslations = {
+    rewards: t('quest.reward', 'Rewards'),
     associatedGames: t('quest.associatedGames', 'Associated games'),
     linkSteamAccount: t(
       'quest.linkAccount',
@@ -110,7 +111,15 @@ export function QuestDetailsWrapper({
       PLAYSTREAK: t('quest.playstreak', 'Play Streak')
     },
     sync: t('quest.sync', 'Sync'),
-    rewards: t('quest.rewards', 'Rewards')
+    streakProgressI18n: {
+      streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
+      days: t('quest.playstreak.days', 'days'),
+      playToStart: t('quest.playstreak.playToStart', 'Play this game to start your streak!'),
+      playEachDay: t('quest.playstreak.playEachDay', `Play each day so your streak won't reset!`),
+      streakCompleted: t('quest.playstreak.streakCompleted', 'Streak completed! Claim your rewards now.'),
+      now: t('quest.playstreak.now', 'Now'),
+      dayResets: t('quest.playstreak.dayResets', 'Day resets:')
+    }
   }
 
   const mintOnChainReward = async (reward: Reward) => {
@@ -240,7 +249,7 @@ export function QuestDetailsWrapper({
           steamAccountLinked: false
         },
         playStreak: {
-          resetTimeInMsSinceEpoch: 0,
+          getResetTimeInMsSinceEpoch: getNextMidnightTimestamp,
           currentStreakInDays: 0,
           requiredStreakInDays: 1
         }
