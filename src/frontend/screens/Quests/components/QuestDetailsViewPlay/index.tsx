@@ -9,8 +9,6 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
-import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
-import { getMidnightUTCTimestamp } from 'frontend/helpers/getMidnightUTC'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 
 export interface QuestDetailsViewPlayWrapperProps {
@@ -114,10 +112,11 @@ export function QuestDetailsViewPlayWrapper({
             steamAccountLinked: false
           },
           playStreak: {
-            getResetTimeInMsSinceEpoch: getMidnightUTCTimestamp,
             currentStreakInDays: 0,
             requiredStreakInDays: 1,
-            getDailySessionPercentCompleted: () => 0
+            minimumSessionTimeInSeconds: 100,
+            accumulatedPlaytimeTodayInSeconds: 0,
+            lastPlaySessionCompletedDateTimeUTC: new Date().toUTCString()
           }
         }}
         classNames={{ root: styles.questDetailsRoot }}
@@ -166,8 +165,9 @@ export function QuestDetailsViewPlayWrapper({
           eligible: false,
           steamAccountLinked: false
         },
-        playStreak: getPlayStreak(
-          getPlaystreakArgsFromQuestData(questMeta, questPlayStreakData)
+        playStreak: getPlaystreakArgsFromQuestData(
+          questMeta,
+          questPlayStreakData
         )
       }}
       classNames={{ root: styles.questDetailsRoot }}

@@ -24,8 +24,6 @@ import { useMutation } from '@tanstack/react-query'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
-import { getMidnightUTCTimestamp } from 'frontend/helpers/getMidnightUTC'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 
 export interface QuestDetailsWrapperProps {
@@ -87,6 +85,7 @@ export function QuestDetailsWrapper({
   // const steamIsLinked = accounts?.has('steam')
 
   const userId = session.data?.userId
+  const isSignedIn = !!userId
 
   const showResyncButton =
     questMeta?.type === 'PLAYSTREAK' &&
@@ -216,8 +215,10 @@ export function QuestDetailsWrapper({
           eligible: false,
           steamAccountLinked: true
         },
-        playStreak: getPlayStreak(
-          getPlaystreakArgsFromQuestData(questMeta, questPlayStreakData)
+        playStreak: getPlaystreakArgsFromQuestData(
+          questMeta,
+          questPlayStreakData,
+          isSignedIn
         )
       },
       rewards:
@@ -243,7 +244,7 @@ export function QuestDetailsWrapper({
         ? t('quest.errorMessage', 'There was an error with the transaction.')
         : undefined,
       isMinting: isClaiming,
-      isSignedIn: !!userId,
+      isSignedIn,
       ctaDisabled:
         !flags.questsOverlayClaimCtaEnabled ||
         (!isEligible() && !showResyncButton),
@@ -255,7 +256,11 @@ export function QuestDetailsWrapper({
       chainTooltips: {}
     }
     questDetails = (
-      <QuestDetails {...questDetailsProps} className={styles.questDetails} />
+      <QuestDetails
+        {...questDetailsProps}
+        className={styles.questDetails}
+        key={'questDetailsLoaded'}
+      />
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
@@ -270,10 +275,11 @@ export function QuestDetailsWrapper({
           steamAccountLinked: false
         },
         playStreak: {
-          getResetTimeInMsSinceEpoch: getMidnightUTCTimestamp,
           currentStreakInDays: 0,
           requiredStreakInDays: 1,
-          getDailySessionPercentCompleted: () => 0
+          minimumSessionTimeInSeconds: 100,
+          accumulatedPlaytimeTodayInSeconds: 0,
+          lastPlaySessionCompletedDateTimeUTC: new Date().toUTCString()
         }
       },
       i18n,
@@ -284,13 +290,14 @@ export function QuestDetailsWrapper({
         console.log('connect steam account clicked for ', questMeta?.name),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen),
-      isSignedIn: !!userId
+      isSignedIn
     }
     questDetails = (
       <QuestDetails
         {...emptyQuestDetailsProps}
         className={styles.questDetails}
         ctaDisabled={true}
+        key={'questDetailsLoading'}
       />
     )
   }

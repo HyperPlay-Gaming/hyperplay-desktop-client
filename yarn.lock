@@ -2003,10 +2003,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/ui@^1.5.36":
-  version "1.5.38"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.38.tgz#d079f11d61d809c6ab52d06d0bae7448ab28362e"
-  integrity sha512-gVzoAfZlNaLe+eJ29d+P8SCkZLpwDGb1eCQqiKbfcCIUKV4R6DQMK0IlfytDEs+iCdNMeFjYRNqqoCklv8g73w==
+"@hyperplay/ui@^1.5.39":
+  version "1.5.39"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.39.tgz#ff5f286af6d960c42dcd007f387f9a2943a62331"
+  integrity sha512-cQbK9yeDJuuqu3fYzO5Exgy/iDX4rrebFq0qyTdpA7SRVonnDB66UBhmslaNcFxRYRwyOMnqYGKrg1VjoK13HQ==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
@@ -2037,9 +2037,9 @@
     bignumber.js "^9.1.2"
 
 "@hyperplay/utils@^0.1.0":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.1.1.tgz#03aa4a823abedaff787062df37bdaaaf1a571275"
-  integrity sha512-dwvG/i4y5t3+T66N6R/hDVOYltjUjcGAoBc69BZQaKTJahE/eOFJF+loZq80mMUUmuHpxF+4OneaXJBcthDnvA==
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.1.2.tgz#f26a2a3f997fec849cb4a77d0e1106d9f1b37ce8"
+  integrity sha512-bzGX2JFU8mP5equd6ZoKwGwLl3YNwZJv3og+00/T5JvqnqzdDwA21qvn2nz1bCh6FqlnU3N/7fAtSvcfow4NkA==
   dependencies:
     bignumber.js "^9.1.2"
 
