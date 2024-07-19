@@ -1,5 +1,10 @@
 import React, { useState } from 'react'
-import { QuestDetails, QuestDetailsProps, Game } from '@hyperplay/ui'
+import {
+  QuestDetails,
+  QuestDetailsProps,
+  Game,
+  QuestDetailsTranslations
+} from '@hyperplay/ui'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
@@ -19,7 +24,7 @@ import { useMutation } from '@tanstack/react-query'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
+import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -80,6 +85,7 @@ export function QuestDetailsWrapper({
   // const steamIsLinked = accounts?.has('steam')
 
   const userId = session.data?.userId
+  const isSignedIn = !!userId
 
   const showResyncButton =
     questMeta?.type === 'PLAYSTREAK' &&
@@ -87,8 +93,8 @@ export function QuestDetailsWrapper({
     !!questMeta?.rewards?.filter((val) => val.reward_type === 'EXTERNAL-TASKS')
       ?.length
 
-  const i18n = {
-    reward: t('quest.reward', 'Reward'),
+  const i18n: QuestDetailsTranslations = {
+    rewards: t('quest.reward', 'Rewards'),
     associatedGames: t('quest.associatedGames', 'Associated games'),
     linkSteamAccount: t(
       'quest.linkAccount',
@@ -106,11 +112,32 @@ export function QuestDetailsWrapper({
       'Connect Steam account'
     ),
     questType: {
-      REPUTATION: t('quest.reputation', 'Reputation'),
-      PLAYSTREAK: t('quest.playstreak', 'Play Streak')
+      REPUTATION: t('quest.type.reputation', 'Reputation'),
+      PLAYSTREAK: t('quest.type.playstreak', 'Play Streak')
     },
     sync: t('quest.sync', 'Sync'),
-    rewards: t('quest.rewards', 'Rewards')
+    streakProgressI18n: {
+      streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
+      days: t('quest.playstreak.days', 'days'),
+      playToStart: t(
+        'quest.playstreak.playToStart',
+        'Play this game to start your streak!'
+      ),
+      playEachDay: t(
+        'quest.playstreak.playEachDay',
+        `Play each day so your streak won't reset!`
+      ),
+      streakCompleted: t(
+        'quest.playstreak.streakCompleted',
+        'Streak completed! Claim your rewards now.'
+      ),
+      now: t('quest.playstreak.now', 'Now'),
+      dayResets: t('quest.playstreak.dayResets', 'Day resets:'),
+      progressTowardsStreak: t(
+        'quest.playstreak.progressTowardsStreak',
+        `progress towards today's streak.`
+      )
+    }
   }
 
   const mintOnChainReward = async (reward: Reward) => {
@@ -188,7 +215,11 @@ export function QuestDetailsWrapper({
           eligible: false,
           steamAccountLinked: true
         },
-        playStreak: getPlayStreak(questMeta, questPlayStreakData)
+        playStreak: getPlaystreakArgsFromQuestData(
+          questMeta,
+          questPlayStreakData,
+          isSignedIn
+        )
       },
       rewards:
         questMeta.rewards?.map((val) => ({
@@ -213,7 +244,7 @@ export function QuestDetailsWrapper({
         ? t('quest.errorMessage', 'There was an error with the transaction.')
         : undefined,
       isMinting: isClaiming,
-      isSignedIn: !!userId,
+      isSignedIn,
       ctaDisabled:
         !flags.questsOverlayClaimCtaEnabled ||
         (!isEligible() && !showResyncButton),
@@ -225,7 +256,13 @@ export function QuestDetailsWrapper({
       chainTooltips: {}
     }
     questDetails = (
-      <QuestDetails {...questDetailsProps} className={styles.questDetails} />
+      <QuestDetails
+        {...questDetailsProps}
+        className={styles.questDetails}
+        key={`questDetailsLoadedId${
+          questMeta.id
+        }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
+      />
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
@@ -240,9 +277,11 @@ export function QuestDetailsWrapper({
           steamAccountLinked: false
         },
         playStreak: {
-          resetTimeInMsSinceEpoch: 0,
           currentStreakInDays: 0,
-          requiredStreakInDays: 1
+          requiredStreakInDays: 1,
+          minimumSessionTimeInSeconds: 100,
+          accumulatedPlaytimeTodayInSeconds: 0,
+          lastPlaySessionCompletedDateTimeUTC: new Date().toISOString()
         }
       },
       i18n,
@@ -253,13 +292,14 @@ export function QuestDetailsWrapper({
         console.log('connect steam account clicked for ', questMeta?.name),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen),
-      isSignedIn: !!userId
+      isSignedIn
     }
     questDetails = (
       <QuestDetails
         {...emptyQuestDetailsProps}
         className={styles.questDetails}
         ctaDisabled={true}
+        key={'questDetailsLoading'}
       />
     )
   }
