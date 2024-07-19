@@ -131,8 +131,7 @@ ${steamDeckAndFlatpakInfo}
 Software Versions:
   HyperPlay: ${info.softwareInUse.appVersion}
   Legendary: ${info.softwareInUse.legendaryVersion}
-  gogdl: ${info.softwareInUse.gogdlVersion}
-`
+  gogdl: ${info.softwareInUse.gogdlVersion}`
 }
 
 export { getSystemInfo, formatSystemInfo }
