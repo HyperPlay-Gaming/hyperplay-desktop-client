@@ -259,7 +259,9 @@ export function QuestDetailsWrapper({
       <QuestDetails
         {...questDetailsProps}
         className={styles.questDetails}
-        key={`questDetailsLoadedId${questMeta.id}`}
+        key={`questDetailsLoadedId${
+          questMeta.id
+        }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
       />
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
@@ -279,7 +281,7 @@ export function QuestDetailsWrapper({
           requiredStreakInDays: 1,
           minimumSessionTimeInSeconds: 100,
           accumulatedPlaytimeTodayInSeconds: 0,
-          lastPlaySessionCompletedDateTimeUTC: new Date().toUTCString()
+          lastPlaySessionCompletedDateTimeUTC: new Date().toISOString()
         }
       },
       i18n,

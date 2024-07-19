@@ -116,11 +116,12 @@ export function QuestDetailsViewPlayWrapper({
             requiredStreakInDays: 1,
             minimumSessionTimeInSeconds: 100,
             accumulatedPlaytimeTodayInSeconds: 0,
-            lastPlaySessionCompletedDateTimeUTC: new Date().toUTCString()
+            lastPlaySessionCompletedDateTimeUTC: new Date().toISOString()
           }
         }}
         classNames={{ root: styles.questDetailsRoot }}
         loading={true}
+        key={'questDetailsLoading'}
       />
     )
   }
@@ -180,6 +181,7 @@ export function QuestDetailsViewPlayWrapper({
         })
       }
       onSecondCTAClick={async () => navigateToGamePage(questMeta.project_id)}
+      key={`questDetailsLoadedId${questMeta.id}streak${!!questPlayStreakData}`}
     />
   )
 }
