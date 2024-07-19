@@ -55,7 +55,7 @@ export function QuestDetailsViewPlayWrapper({
     ),
     claim: t('quest.claimAll', 'Claim all'),
     signIn: t('quest.signIn', 'Sign in'),
-    play: t('quest.Play', 'Play'),
+    play: t('quest.View Game', 'View Game'),
     secondCTAText: t('quest.View Game', 'View Game'),
     connectSteamAccount: t(
       'quest.connectSteamAccount',
@@ -173,14 +173,7 @@ export function QuestDetailsViewPlayWrapper({
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}
-      onPlayClick={async () =>
-        window.api.launch({
-          appName: questMeta.project_id,
-          launchArguments: '',
-          runner: 'hyperplay'
-        })
-      }
-      onSecondCTAClick={async () => navigateToGamePage(questMeta.project_id)}
+      onPlayClick={async () => navigateToGamePage(questMeta.project_id)}
       key={`questDetailsLoadedId${questMeta.id}streak${!!questPlayStreakData}`}
     />
   )
