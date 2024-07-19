@@ -9,12 +9,6 @@ export function getPlaystreakArgsFromQuestData(
   questPlayStreakData: UserPlayStreak | undefined,
   userIsLoggedIn?: boolean
 ): PlayStreakEligibility {
-  console.log(
-    'in getPlaystreakArgsFromQuestData quest meta ',
-    questMeta,
-    questPlayStreakData,
-    userIsLoggedIn
-  )
   return {
     requiredStreakInDays:
       questMeta?.eligibility?.play_streak.required_playstreak_in_days ?? 0,
