@@ -259,7 +259,7 @@ export function QuestDetailsWrapper({
       <QuestDetails
         {...questDetailsProps}
         className={styles.questDetails}
-        key={'questDetailsLoaded'}
+        key={`questDetailsLoadedId${questMeta.id}`}
       />
     )
   } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
