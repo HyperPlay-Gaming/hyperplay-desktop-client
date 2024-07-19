@@ -13,9 +13,6 @@ import { isSteamDeck } from './steamDeck'
 
 import { getGogdlVersion, getLegendaryVersion } from '../helperBinaries'
 import { getAppVersion } from 'backend/utils'
-import { getAuthSession } from '../../auth'
-import { AuthSession } from '../../../common/types/auth'
-import { logError, LogPrefix } from '../../logger/logger'
 
 type GPUInfo = {
   // The PCI device ID of the graphics card (hexadecimal)
@@ -59,7 +56,6 @@ interface SystemInformation {
     legendaryVersion: string
     gogdlVersion: string
   }
-  user: AuthSession | null
 }
 
 let cachedSystemInfo: SystemInformation | null = null
@@ -80,14 +76,6 @@ async function getSystemInfo(cache = true): Promise<SystemInformation> {
     getLegendaryVersion(),
     getGogdlVersion()
   ])
-
-  let user = null
-
-  try {
-    user = await getAuthSession()
-  } catch (e) {
-    logError(['Failed to fetch user information', e], LogPrefix.Backend)
-  }
 
   const sysinfo: SystemInformation = {
     CPU: {
@@ -114,8 +102,7 @@ async function getSystemInfo(cache = true): Promise<SystemInformation> {
       appVersion: getAppVersion(),
       legendaryVersion: legendaryVersion,
       gogdlVersion: gogdlVersion
-    },
-    user
+    }
   }
   cachedSystemInfo = sysinfo
   return sysinfo
@@ -145,8 +132,6 @@ Software Versions:
   HyperPlay: ${info.softwareInUse.appVersion}
   Legendary: ${info.softwareInUse.legendaryVersion}
   gogdl: ${info.softwareInUse.gogdlVersion}
-
-Session: ${JSON.stringify(info.user, null, 2)}
 `
 }
 
