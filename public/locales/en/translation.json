@@ -661,6 +661,7 @@
             "now": "Now",
             "playEachDay": "Play each day so your streak won't reset!",
             "playToStart": "Play this game to start your streak!",
+            "progressTowardsStreak": "progress towards today's streak.",
             "streakCompleted": "Streak completed! Claim your rewards now.",
             "streakProgress": "Streak Progress"
         },
@@ -671,6 +672,10 @@
         "reward": "Reward",
         "signIn": "Sign in",
         "sync": "Sync",
+        "type": {
+            "playstreak": "Play Streak",
+            "reputation": "Reputation"
+        },
         "View Game": "View Game"
     },
     "quests": {
