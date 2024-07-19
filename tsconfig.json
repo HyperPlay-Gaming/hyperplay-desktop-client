@@ -31,6 +31,7 @@
   "include": ["src"],
   "exclude": [
     "electron.vite.config.ts",
+    "**/__tests__/**",
     "**/__mocks__/**",
     "sign",
     "./node_modules/@mysten"

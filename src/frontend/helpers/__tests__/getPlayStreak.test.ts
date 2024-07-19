@@ -1,6 +1,9 @@
 import { oneDayInMs } from '../getMidnightUTC'
-import { getPlayStreak, getPlaytimePercentage } from '../getPlayStreak'
-import { PlayStreakEligibility } from '@hyperplay/ui'
+import {
+  getPlayStreak,
+  GetPlayStreakArgs,
+  getPlaytimePercentage
+} from '../getPlayStreak'
 
 describe('get playstreak test', () => {
   describe('getPlaytimePercentage', () => {
@@ -44,68 +47,102 @@ describe('get playstreak test', () => {
       expect(percentage).toEqual(0)
     })
   })
+
   describe('getPlayStreak', () => {
+    function testGetPlaystreak(
+      args: GetPlayStreakArgs,
+      expectedResult: {
+        currentStreakInDays: number
+        requiredStreakInDays: number
+        dailySessionPercentCompleted: number
+      }
+    ) {
+      const {
+        /* eslint-disable-next-line */
+        getResetTimeInMsSinceEpoch,
+        getDailySessionPercentCompleted,
+        ...result
+      } = getPlayStreak(args)
+      const { dailySessionPercentCompleted, ...expected } = expectedResult
+      expect(result).toEqual(expected)
+      expect(getDailySessionPercentCompleted()).toEqual(
+        dailySessionPercentCompleted
+      )
+    }
+
     test('3 out of 7 days', () => {
       const now = new Date().toUTCString()
-      /* eslint-disable-next-line */
-      const { getResetTimeInMsSinceEpoch, ...result } = getPlayStreak({
-        lastPlaySessionCompletedDateTimeUTC: now,
-        requiredStreakInDays: 7,
-        currentStreakInDays: 3,
-        minimumSessionTimeInSeconds: 100,
-        accumulatedPlaytimeTodayInSeconds: 10
-      })
-      const expected: Omit<
-        PlayStreakEligibility,
-        'getResetTimeInMsSinceEpoch'
-      > = {
-        currentStreakInDays: 3,
-        requiredStreakInDays: 7,
-        dailySessionPercentCompleted: 10
-      }
-      expect(result).toEqual(expected)
+      testGetPlaystreak(
+        {
+          lastPlaySessionCompletedDateTimeUTC: now,
+          requiredStreakInDays: 7,
+          currentStreakInDays: 3,
+          minimumSessionTimeInSeconds: 100,
+          accumulatedPlaytimeTodayInSeconds: 10
+        },
+        {
+          currentStreakInDays: 3,
+          requiredStreakInDays: 7,
+          dailySessionPercentCompleted: 10
+        }
+      )
     })
 
     test('3 out of 7 days but > 2 day UTC old timestamp', () => {
       const old = new Date(Date.now() - 2 * oneDayInMs).toUTCString()
-      /* eslint-disable-next-line */
-      const { getResetTimeInMsSinceEpoch, ...result } = getPlayStreak({
-        lastPlaySessionCompletedDateTimeUTC: old,
-        requiredStreakInDays: 7,
-        currentStreakInDays: 3,
-        minimumSessionTimeInSeconds: 100,
-        accumulatedPlaytimeTodayInSeconds: 10
-      })
-      const expected: Omit<
-        PlayStreakEligibility,
-        'getResetTimeInMsSinceEpoch'
-      > = {
-        currentStreakInDays: 0,
-        requiredStreakInDays: 7,
-        dailySessionPercentCompleted: 0
-      }
-      expect(result).toEqual(expected)
+      testGetPlaystreak(
+        {
+          lastPlaySessionCompletedDateTimeUTC: old,
+          requiredStreakInDays: 7,
+          currentStreakInDays: 3,
+          minimumSessionTimeInSeconds: 100,
+          accumulatedPlaytimeTodayInSeconds: 10
+        },
+        {
+          currentStreakInDays: 0,
+          requiredStreakInDays: 7,
+          dailySessionPercentCompleted: 0
+        }
+      )
     })
 
     test('8 out of 7 days', () => {
       const now = new Date().toUTCString()
-      /* eslint-disable-next-line */
-      const { getResetTimeInMsSinceEpoch, ...result } = getPlayStreak({
-        lastPlaySessionCompletedDateTimeUTC: now,
-        requiredStreakInDays: 7,
-        currentStreakInDays: 8,
-        minimumSessionTimeInSeconds: 100,
-        accumulatedPlaytimeTodayInSeconds: 10
-      })
-      const expected: Omit<
-        PlayStreakEligibility,
-        'getResetTimeInMsSinceEpoch'
-      > = {
-        currentStreakInDays: 7,
-        requiredStreakInDays: 7,
-        dailySessionPercentCompleted: 10
-      }
-      expect(result).toEqual(expected)
+      testGetPlaystreak(
+        {
+          lastPlaySessionCompletedDateTimeUTC: now,
+          requiredStreakInDays: 7,
+          currentStreakInDays: 8,
+          minimumSessionTimeInSeconds: 100,
+          accumulatedPlaytimeTodayInSeconds: 10
+        },
+        {
+          currentStreakInDays: 7,
+          requiredStreakInDays: 7,
+          dailySessionPercentCompleted: 10
+        }
+      )
+    })
+
+    test('percentage increments', () => {
+      const now = Date.now()
+      const twoHoursAgo = new Date(Date.now() - 1000 * 3600 * 2).toUTCString()
+      jest.useFakeTimers().setSystemTime(new Date(Date.now() + 1000 * 45))
+      testGetPlaystreak(
+        {
+          lastPlaySessionCompletedDateTimeUTC: twoHoursAgo,
+          requiredStreakInDays: 7,
+          currentStreakInDays: 8,
+          minimumSessionTimeInSeconds: 100,
+          accumulatedPlaytimeTodayInSeconds: 10,
+          dateTimeCurrentSessionStartedInMsSinceEpoch: now
+        },
+        {
+          currentStreakInDays: 7,
+          requiredStreakInDays: 7,
+          dailySessionPercentCompleted: 55
+        }
+      )
     })
   })
 })

@@ -34,29 +34,34 @@ interface GetPlaytimePercentageArgs {
   minimumSessionTimeInSeconds: number
   accumulatedPlaytimeTodayInSeconds: number
   lastPlaySessionCompletedDateTimeUTC: string
+  dateTimeCurrentSessionStartedInMsSinceEpoch?: number
 }
 
 export function getPlaytimePercentage({
   minimumSessionTimeInSeconds,
   accumulatedPlaytimeTodayInSeconds,
-  lastPlaySessionCompletedDateTimeUTC
+  lastPlaySessionCompletedDateTimeUTC,
+  dateTimeCurrentSessionStartedInMsSinceEpoch
 }: GetPlaytimePercentageArgs) {
   if (questWillResetOnNextSession(lastPlaySessionCompletedDateTimeUTC)) {
     return 0
   }
 
-  const requiredPlaytime = accumulatedPlaytimeTodayInSeconds
-  const requiredStreakDailyPlaytime = minimumSessionTimeInSeconds
+  if (dateTimeCurrentSessionStartedInMsSinceEpoch) {
+    const unrecordedPlaytimeInMs =
+      Date.now() - dateTimeCurrentSessionStartedInMsSinceEpoch
+    accumulatedPlaytimeTodayInSeconds += unrecordedPlaytimeInMs / 1000
+  }
 
   let percentageCompleted = Math.round(
-    (requiredPlaytime / requiredStreakDailyPlaytime) * 100
+    (accumulatedPlaytimeTodayInSeconds / minimumSessionTimeInSeconds) * 100
   )
   percentageCompleted = Math.min(percentageCompleted, 100)
   percentageCompleted = Math.max(percentageCompleted, 0)
   return percentageCompleted
 }
 
-interface GetPlayStreakArgs extends GetPlaytimePercentageArgs {
+export interface GetPlayStreakArgs extends GetPlaytimePercentageArgs {
   requiredStreakInDays: number
   currentStreakInDays: number
 }
@@ -66,7 +71,8 @@ export function getPlayStreak({
   accumulatedPlaytimeTodayInSeconds,
   lastPlaySessionCompletedDateTimeUTC,
   requiredStreakInDays,
-  currentStreakInDays
+  currentStreakInDays,
+  dateTimeCurrentSessionStartedInMsSinceEpoch
 }: GetPlayStreakArgs): PlayStreakEligibility {
   const {
     currentStreakInDays: currentStreakInDaysToDisplay,
@@ -80,10 +86,12 @@ export function getPlayStreak({
     getResetTimeInMsSinceEpoch: getMidnightUTCTimestamp,
     currentStreakInDays: currentStreakInDaysToDisplay,
     requiredStreakInDays: requiredStreakInDaysToDisplay,
-    dailySessionPercentCompleted: getPlaytimePercentage({
-      minimumSessionTimeInSeconds,
-      accumulatedPlaytimeTodayInSeconds,
-      lastPlaySessionCompletedDateTimeUTC
-    })
+    getDailySessionPercentCompleted: () =>
+      getPlaytimePercentage({
+        minimumSessionTimeInSeconds,
+        accumulatedPlaytimeTodayInSeconds,
+        lastPlaySessionCompletedDateTimeUTC,
+        dateTimeCurrentSessionStartedInMsSinceEpoch
+      })
   }
 }

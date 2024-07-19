@@ -273,7 +273,7 @@ export function QuestDetailsWrapper({
           getResetTimeInMsSinceEpoch: getMidnightUTCTimestamp,
           currentStreakInDays: 0,
           requiredStreakInDays: 1,
-          dailySessionPercentCompleted: 0
+          getDailySessionPercentCompleted: () => 0
         }
       },
       i18n,
