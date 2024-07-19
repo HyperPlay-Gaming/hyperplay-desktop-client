@@ -25,6 +25,7 @@ export function getPlayStreak(
   return {
     getResetTimeInMsSinceEpoch: getNextMidnightTimestamp,
     currentStreakInDays,
-    requiredStreakInDays
+    requiredStreakInDays,
+    dailySessionPercentCompleted: 0
   }
 }

@@ -111,7 +111,8 @@ export function QuestDetailsViewPlayWrapper({
           playStreak: {
             getResetTimeInMsSinceEpoch: getNextMidnightTimestamp,
             currentStreakInDays: 0,
-            requiredStreakInDays: 1
+            requiredStreakInDays: 1,
+            dailySessionPercentCompleted: 0
           }
         }}
         classNames={{ root: styles.questDetailsRoot }}
