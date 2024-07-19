@@ -27,7 +27,7 @@ export function QuestLogWrapper({
     active: t('quest.active', 'Active'),
     type: {
       REPUTATION: t('quest.reputation', 'Reputation'),
-      PLAYSTREAK: t('quest.playstreak', 'Play Streak')
+      PLAYSTREAK: t('quest.type.playstreak', 'Play Streak')
     }
   }
 

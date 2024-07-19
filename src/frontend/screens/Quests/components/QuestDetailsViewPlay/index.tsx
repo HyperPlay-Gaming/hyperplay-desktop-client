@@ -10,7 +10,8 @@ import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
-import { getNextMidnightTimestamp } from 'frontend/helpers/getMidnightUTC'
+import { getMidnightUTCTimestamp } from 'frontend/helpers/getMidnightUTC'
+import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -64,7 +65,7 @@ export function QuestDetailsViewPlayWrapper({
     ),
     questType: {
       REPUTATION: t('quest.reputation', 'Reputation'),
-      PLAYSTREAK: t('quest.playstreak', 'Play Streak')
+      PLAYSTREAK: t('quest.type.playstreak', 'Play Streak')
     },
     sync: t('quest.sync', 'Sync'),
     streakProgressI18n: {
@@ -83,7 +84,11 @@ export function QuestDetailsViewPlayWrapper({
         'Streak completed! Claim your rewards now.'
       ),
       now: t('quest.playstreak.now', 'Now'),
-      dayResets: t('quest.playstreak.dayResets', 'Day resets:')
+      dayResets: t('quest.playstreak.dayResets', 'Day resets:'),
+      progressTowardsStreak: t(
+        'quest.playstreak.progressTowardsStreak',
+        `progress towards today's streak.`
+      )
     }
   }
 
@@ -109,7 +114,7 @@ export function QuestDetailsViewPlayWrapper({
             steamAccountLinked: false
           },
           playStreak: {
-            getResetTimeInMsSinceEpoch: getNextMidnightTimestamp,
+            getResetTimeInMsSinceEpoch: getMidnightUTCTimestamp,
             currentStreakInDays: 0,
             requiredStreakInDays: 1,
             dailySessionPercentCompleted: 0
@@ -161,7 +166,9 @@ export function QuestDetailsViewPlayWrapper({
           eligible: false,
           steamAccountLinked: false
         },
-        playStreak: getPlayStreak(questMeta, questPlayStreakData)
+        playStreak: getPlayStreak(
+          getPlaystreakArgsFromQuestData(questMeta, questPlayStreakData)
+        )
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}
