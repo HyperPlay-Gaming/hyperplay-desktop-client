@@ -930,6 +930,7 @@ export interface Quest {
     steam_games: { id: string }[]
     play_streak: {
       required_playstreak_in_days: number
+      minimum_session_time_in_seconds: number
     }
   }
 }

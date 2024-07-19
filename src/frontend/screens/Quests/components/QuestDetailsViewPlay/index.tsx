@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Game, QuestDetails } from '@hyperplay/ui'
+import { Game, QuestDetails, QuestDetailsTranslations } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import styles from './index.module.scss'
@@ -9,7 +9,7 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
-import { getPlayStreak } from 'frontend/helpers/getPlayStreak'
+import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -41,8 +41,8 @@ export function QuestDetailsViewPlayWrapper({
       loading: val.isLoading || val.isFetching
     })) ?? []
 
-  const i18n = {
-    reward: t('quest.reward', 'Reward'),
+  const i18n: QuestDetailsTranslations = {
+    rewards: t('quest.reward', 'Rewards'),
     associatedGames: t('quest.associatedGames', 'Associated games'),
     linkSteamAccount: t(
       'quest.linkAccount',
@@ -63,10 +63,31 @@ export function QuestDetailsViewPlayWrapper({
     ),
     questType: {
       REPUTATION: t('quest.reputation', 'Reputation'),
-      PLAYSTREAK: t('quest.playstreak', 'Play Streak')
+      PLAYSTREAK: t('quest.type.playstreak', 'Play Streak')
     },
     sync: t('quest.sync', 'Sync'),
-    rewards: t('quest.rewards', 'Rewards')
+    streakProgressI18n: {
+      streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
+      days: t('quest.playstreak.days', 'days'),
+      playToStart: t(
+        'quest.playstreak.playToStart',
+        'Play this game to start your streak!'
+      ),
+      playEachDay: t(
+        'quest.playstreak.playEachDay',
+        `Play each day so your streak won't reset!`
+      ),
+      streakCompleted: t(
+        'quest.playstreak.streakCompleted',
+        'Streak completed! Claim your rewards now.'
+      ),
+      now: t('quest.playstreak.now', 'Now'),
+      dayResets: t('quest.playstreak.dayResets', 'Day resets:'),
+      progressTowardsStreak: t(
+        'quest.playstreak.progressTowardsStreak',
+        `progress towards today's streak.`
+      )
+    }
   }
 
   if (!questMeta || questResult.data.isLoading || questResult.data.isFetching) {
@@ -91,13 +112,16 @@ export function QuestDetailsViewPlayWrapper({
             steamAccountLinked: false
           },
           playStreak: {
-            resetTimeInMsSinceEpoch: 0,
             currentStreakInDays: 0,
-            requiredStreakInDays: 1
+            requiredStreakInDays: 1,
+            minimumSessionTimeInSeconds: 100,
+            accumulatedPlaytimeTodayInSeconds: 0,
+            lastPlaySessionCompletedDateTimeUTC: new Date().toISOString()
           }
         }}
         classNames={{ root: styles.questDetailsRoot }}
         loading={true}
+        key={'questDetailsLoading'}
       />
     )
   }
@@ -142,7 +166,10 @@ export function QuestDetailsViewPlayWrapper({
           eligible: false,
           steamAccountLinked: false
         },
-        playStreak: getPlayStreak(questMeta, questPlayStreakData)
+        playStreak: getPlaystreakArgsFromQuestData(
+          questMeta,
+          questPlayStreakData
+        )
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}
@@ -154,6 +181,7 @@ export function QuestDetailsViewPlayWrapper({
         })
       }
       onSecondCTAClick={async () => navigateToGamePage(questMeta.project_id)}
+      key={`questDetailsLoadedId${questMeta.id}streak${!!questPlayStreakData}`}
     />
   )
 }
