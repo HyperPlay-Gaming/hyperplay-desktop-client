@@ -1,8 +1,6 @@
 import { ipcMain, session, webContents } from 'electron'
-import getPartitionCookies from '../utils/get_partition_cookies'
 import { DEV_PORTAL_URL } from '../../common/constants'
-import { LogPrefix } from '../logger/logger'
-import { AuthSession } from '../../common/types/auth'
+import { logError, logInfo, LogPrefix } from '../logger/logger'
 import { getAuthSession } from '../auth'
 
 ipcMain.handle('getAuthSession', getAuthSession)
@@ -27,6 +25,18 @@ function refreshAllSessions() {
 }
 
 ipcMain.on('authConnected', () => {
+  getAuthSession()
+    .then((user) => {
+      logInfo(
+        `Account Connected: ${
+          user ? JSON.stringify(user) : 'unknown user'
+        } with userID: ${user ? user.userId : 'unknown'}`,
+        LogPrefix.Auth
+      )
+    })
+    .catch((error) =>
+      logError(['Failed to fetch user information', error], LogPrefix.Auth)
+    )
   refreshAllSessions()
 })
 
