@@ -13,12 +13,23 @@ import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
+import { useQuery } from '@tanstack/react-query'
+
+function useConnectedProvider() {
+  return useQuery({
+    queryKey: ['connectedProvider'],
+    queryFn: async () => {
+      return window.api.getConnectedProvider()
+    }
+  })
+}
 
 export const Overlay = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
   const flags = useFlags()
+  const { data: connectedProvider } = useConnectedProvider()
   const txnToastContainerStyle = {} as React.CSSProperties
   if (OverlayState.title === 'HyperPlay Toasts') {
     txnToastContainerStyle.bottom = 'unset'
@@ -96,6 +107,15 @@ export const Overlay = observer(function ({
     let extensionManager = null
     if (shouldShowExtension) {
       extensionManager = <ExtensionManager />
+    } else if (connectedProvider === 'Unconnected') {
+      extensionManager = (
+        <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
+          {t(
+            'overlay.EXTERNAL_WALLET_DISCONNECTED',
+            "You don't have any wallet connected to HyperPlay."
+          )}
+        </div>
+      )
     } else if (
       OverlayState.renderState.showHintText &&
       OverlayState.title !== 'HyperPlay Hint Text'
