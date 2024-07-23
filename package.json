@@ -167,7 +167,7 @@
     "@fortawesome/free-regular-svg-icons": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
-    "@hyperplay/chains": "^0.2.10",
+    "@hyperplay/chains": "^0.3.0",
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/ui": "^1.5.40",
     "@hyperplay/utils": "^0.0.16",
