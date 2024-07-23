@@ -2004,9 +2004,9 @@
     zod "^3.22.4"
 
 "@hyperplay/ui@^1.5.40":
-  version "1.5.40"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.40.tgz#49105d1978c008059570ff0dcfa11287e56eb5f1"
-  integrity sha512-7m0zxh+qn/zeieapomdLZUNNWxSFZE0Aw91/Jbw83b19hsn6o0nJuJcbj1uEvduPxPSrYSpCEo7fu7AxcwFkOg==
+  version "1.5.41"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.41.tgz#5d9ecdd59f6632bcdc757e1fb0db734ac9f4c1f8"
+  integrity sha512-VZSQmnoLlsvb49pNO2vxx3ZtDS5NHKtfXRTdjlxsq68AqF2QmK1tDmDTTweYxZdjsKrQFiIF8pAdMrCfEW+tsw==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
@@ -2037,9 +2037,9 @@
     bignumber.js "^9.1.2"
 
 "@hyperplay/utils@^0.1.0":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.1.2.tgz#f26a2a3f997fec849cb4a77d0e1106d9f1b37ce8"
-  integrity sha512-bzGX2JFU8mP5equd6ZoKwGwLl3YNwZJv3og+00/T5JvqnqzdDwA21qvn2nz1bCh6FqlnU3N/7fAtSvcfow4NkA==
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.1.3.tgz#1f74c8054b47de10a0de07cc0877ccee8bf94d20"
+  integrity sha512-aDO30nd0KH3V7PObonXjJ7+AEPXg5UBtVZeSiraN/Ig/yzjOwXpwIXHA4C8gdpmSUSXhA9NSf/xJJMYYkdr/Og==
   dependencies:
     bignumber.js "^9.1.2"
 
@@ -4484,9 +4484,9 @@
     eslint-visitor-keys "^3.4.1"
 
 "@valist/sdk@^2.9.1":
-  version "2.9.15"
-  resolved "https://registry.yarnpkg.com/@valist/sdk/-/sdk-2.9.15.tgz#ec8d7ba5f0e3d35f1d8f00e9ed928b2bb9380c35"
-  integrity sha512-N0iJEcVgyuqhWIgn9S+Fvv6Bc+2YITgF4TYl8VuuY6v3QblZjiNG3o53SE3qXiIryWaf35WBS5tTfc4M5lUXfA==
+  version "2.9.16"
+  resolved "https://registry.yarnpkg.com/@valist/sdk/-/sdk-2.9.16.tgz#6ce9bc2692a3d55e72f4552c13e341e1f4654c03"
+  integrity sha512-SJ9Enr2UugRc8w8AEt/fwh49CWgUkmXXYP/tkGsZ8HryyE0mu2o7vs3dsjCFKcuPzqeRd/toZGpfMizeGL5ncg==
   dependencies:
     "@ethersproject/contracts" "^5.7.0"
     axios "^1.4.0"
@@ -5486,9 +5486,9 @@ axios-retry@3.7.0:
     is-retry-allowed "^2.2.0"
 
 axios-retry@^4.4.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-4.4.1.tgz#e5d0c851e635fd4de866aec2b9b422f05d661257"
-  integrity sha512-JGzNoglDHtHWIEvvAampB0P7jxQ/sT4COmW0FgSQkVg6o4KqNjNMBI6uFVOq517hkw/OAYYAG08ADtBlV8lvmQ==
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-4.4.2.tgz#cef7c3eb1aa004f6a7e7b1a0918907b10a1986be"
+  integrity sha512-2fjo9uDNBQjX8+GMEGOFG5TrLMZ3QijjeRYcgBI2MhrsabnvcIAfLxxIhG7+CCD68vPEQY3IM2llV70ZsrqPvA==
   dependencies:
     is-retry-allowed "^2.2.0"
 
