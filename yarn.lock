@@ -1972,9 +1972,9 @@
     zod "^3.22.4"
 
 "@hyperplay/ui@^1.5.40":
-  version "1.5.40"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.40.tgz#49105d1978c008059570ff0dcfa11287e56eb5f1"
-  integrity sha512-7m0zxh+qn/zeieapomdLZUNNWxSFZE0Aw91/Jbw83b19hsn6o0nJuJcbj1uEvduPxPSrYSpCEo7fu7AxcwFkOg==
+  version "1.5.41"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.5.41.tgz#5d9ecdd59f6632bcdc757e1fb0db734ac9f4c1f8"
+  integrity sha512-VZSQmnoLlsvb49pNO2vxx3ZtDS5NHKtfXRTdjlxsq68AqF2QmK1tDmDTTweYxZdjsKrQFiIF8pAdMrCfEW+tsw==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
@@ -2001,6 +2001,13 @@
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.9.tgz#80836cfde5c4d63e41f5df809ae2e80314600c5a"
   integrity sha512-gMAa6gdFXfLrJUjPAD2is06qNo4MHzpb6Cbzt4xfNd7wI9chOblQ+piwTI1oFWs44GgfacsMq6i5esNly3hELg==
+  dependencies:
+    bignumber.js "^9.1.2"
+
+"@hyperplay/utils@^0.1.0":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.1.3.tgz#1f74c8054b47de10a0de07cc0877ccee8bf94d20"
+  integrity sha512-aDO30nd0KH3V7PObonXjJ7+AEPXg5UBtVZeSiraN/Ig/yzjOwXpwIXHA4C8gdpmSUSXhA9NSf/xJJMYYkdr/Og==
   dependencies:
     bignumber.js "^9.1.2"
 
@@ -4472,6 +4479,17 @@
     "@typescript-eslint/types" "6.13.2"
     eslint-visitor-keys "^3.4.1"
 
+"@valist/sdk@^2.9.1":
+  version "2.9.16"
+  resolved "https://registry.yarnpkg.com/@valist/sdk/-/sdk-2.9.16.tgz#6ce9bc2692a3d55e72f4552c13e341e1f4654c03"
+  integrity sha512-SJ9Enr2UugRc8w8AEt/fwh49CWgUkmXXYP/tkGsZ8HryyE0mu2o7vs3dsjCFKcuPzqeRd/toZGpfMizeGL5ncg==
+  dependencies:
+    "@ethersproject/contracts" "^5.7.0"
+    axios "^1.4.0"
+    axios-retry "^4.4.1"
+    ethers "^6.11.1"
+    node-fetch "^2.6.1"
+
 "@valist/sdk@^2.9.5":
   version "2.9.5"
   resolved "https://registry.yarnpkg.com/@valist/sdk/-/sdk-2.9.5.tgz#183cade809ad15ca796f3992f5279022e376af73"
@@ -5466,6 +5484,13 @@ axios-retry@3.7.0:
   integrity sha512-ZTnCkJbRtfScvwiRnoVskFAfvU0UG3xNcsjwTR0mawSbIJoothxn67gKsMaNAFHRXJ1RmuLhmZBzvyXi3+9WyQ==
   dependencies:
     "@babel/runtime" "^7.15.4"
+    is-retry-allowed "^2.2.0"
+
+axios-retry@^4.4.1:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-4.4.2.tgz#cef7c3eb1aa004f6a7e7b1a0918907b10a1986be"
+  integrity sha512-2fjo9uDNBQjX8+GMEGOFG5TrLMZ3QijjeRYcgBI2MhrsabnvcIAfLxxIhG7+CCD68vPEQY3IM2llV70ZsrqPvA==
+  dependencies:
     is-retry-allowed "^2.2.0"
 
 axios@1.6.5:
