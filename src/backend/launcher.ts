@@ -11,9 +11,11 @@ import { join, normalize } from 'path'
 
 import {
   defaultWinePrefix,
+  fixAsarPath,
   flatPakHome,
   isLinux,
   isMac,
+  publicDir,
   runtimePath,
   userHome
 } from './constants'
@@ -52,7 +54,7 @@ import {
   WineCommandArgs,
   SteamRuntime
 } from 'common/types'
-import { spawn } from 'child_process'
+import { spawn, spawnSync } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
@@ -829,6 +831,8 @@ async function callRunner(
       signal: abortController.signal
     })
 
+    console.log('spawning child pid ', child.pid)
+
     const shouldOpenOverlay =
       gameInfo &&
       (gameInfo.runner === 'hyperplay' ||
@@ -895,6 +899,22 @@ async function callRunner(
         runner: runner.name,
         appName
       })
+
+      // close processes created by this process
+      if (child.pid !== undefined) {
+        const scriptPath = fixAsarPath(
+          join(publicDir, './win32/stopProcessTree.ps1')
+        )
+        console.log(
+          'calling ',
+          scriptPath,
+          ' with child pid ',
+          child.pid.toString()
+        )
+        spawnSync(scriptPath, ['-ParentPID', child.pid.toString()], {
+          shell: 'powershell.exe'
+        })
+      }
 
       if (signal && !child.killed) {
         rej('Process terminated with signal ' + signal)
