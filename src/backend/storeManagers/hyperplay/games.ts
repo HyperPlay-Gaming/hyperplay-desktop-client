@@ -36,7 +36,6 @@ import {
 import {
   downloadFile,
   spawnAsync,
-  killPattern,
   shutdownWine,
   calculateEta,
   getExecutableAndArgs
@@ -76,6 +75,7 @@ import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL, valistBaseApiUrlv1 } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
+import { execSync } from 'child_process'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -143,7 +143,8 @@ export async function stop(appName: string): Promise<void> {
   if (executable) {
     const split = executable.split('/')
     const exe = split[split.length - 1]
-    killPattern(exe)
+    const pids = findPIDs(exe)
+    killProcesses(pids)
     if (!isNative(appName)) {
       const gameSettings = await getSettings(appName)
       shutdownWine(gameSettings)
@@ -152,12 +153,59 @@ export async function stop(appName: string): Promise<void> {
 
   const gameProcessName = getGameProcessName(gameInfo)
   if (gameProcessName) {
-    killPattern(gameProcessName)
+    const pids = findPIDs(gameProcessName)
+    killProcesses(pids)
     if (!isNative(appName)) {
       const gameSettings = await getSettings(appName)
       shutdownWine(gameSettings)
     }
   }
+}
+
+function findPIDs(executable: string) {
+  let pids: string[] = []
+  try {
+    if (isWindows) {
+      const output = execSync(
+        `tasklist /FI "IMAGENAME eq ${executable}" /FO CSV /NH`
+      ).toString()
+      const lines = output.trim().split('\n')
+      lines.forEach((line) => {
+        const columns = line.split('","')
+        if (columns[0] === `"${executable}`) {
+          pids.push(columns[1])
+        }
+      })
+    } else {
+      const output = execSync(`pgrep -f '${executable}'`).toString()
+      pids = output.trim().split('\n')
+    }
+  } catch (error) {
+    logError(
+      `Failed to find PIDs for ${executable}: ${error}`,
+      LogPrefix.HyperPlay
+    )
+  }
+  return pids
+}
+
+function killProcesses(pids: string[]) {
+  pids.forEach((pid) => {
+    try {
+      if (isWindows) {
+        execSync(`taskkill /PID ${pid} /T /F`)
+      } else {
+        execSync(`pkill -TERM -P ${pid}`)
+        execSync(`kill -TERM ${pid}`)
+      }
+      logInfo(`Killed process with PID ${pid}`, LogPrefix.HyperPlay)
+    } catch (error) {
+      logError(
+        `Failed to kill process with PID ${pid}: ${error}`,
+        LogPrefix.HyperPlay
+      )
+    }
+  })
 }
 
 export async function pause(appName: string): Promise<void> {
