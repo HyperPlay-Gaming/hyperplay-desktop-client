@@ -79,10 +79,6 @@ async function getRewardClaimGasEstimation(reward: Reward) {
   const gasPrice = await publicClient.getGasPrice()
   const gasNeeded = BigInt(gasPerFunction) * gasPrice
 
-  console.log(
-    `Gas needed to claim ${reward.reward_type} reward: ${gasNeeded} (${gasPerFunction} gas per function * ${gasPrice} gas price)`
-  )
-
   window.api.logInfo(
     `Gas needed to claim ${reward.reward_type} reward: ${gasNeeded} (${gasPerFunction} gas per function * ${gasPrice} gas price)`
   )
@@ -273,11 +269,7 @@ export function QuestDetailsWrapper({
     }
   }
 
-  const {
-    mutate: claimRewardsMutation,
-    error: claimError,
-    isPending: isPendingClaimRewardsMutation
-  } = useMutation({
+  const claimRewardsMutation = useMutation({
     mutationFn: async (rewards: Reward[]) => {
       return claimRewards(rewards)
     },
@@ -307,18 +299,19 @@ export function QuestDetailsWrapper({
   const isClaiming =
     completeTaskMutation.isPending ||
     claimPointsMutation.isPending ||
-    isPendingClaimRewardsMutation
+    claimRewardsMutation.isPending ||
+    isPendingWriteContract ||
+    isPendingSwitchingChain
 
   if (selectedQuestId !== null && questMeta !== undefined) {
     const ctaDisabled =
       !flags.questsOverlayClaimCtaEnabled ||
       (!isEligible() && !showResyncButton) ||
-      isPendingSwitchingChain ||
-      isPendingWriteContract
+      isClaiming
 
     let alertProps: InfoAlertProps | undefined
 
-    if (writeContractError || claimError || switchChainError) {
+    if (writeContractError || claimRewardsMutation.error || switchChainError) {
       alertProps = {
         showClose: false,
         title: t('quest.claimFailed', 'Claim failed'),
@@ -364,7 +357,8 @@ export function QuestDetailsWrapper({
               : undefined
         })) ?? [],
       i18n,
-      onClaimClick: async () => claimRewardsMutation(questMeta.rewards ?? []),
+      onClaimClick: async () =>
+        claimRewardsMutation.mutate(questMeta.rewards ?? []),
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
