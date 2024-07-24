@@ -111,7 +111,7 @@ export const Overlay = observer(function ({
       extensionManager = (
         <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
           {t(
-            'overlay.WALLET_DISCONNECTED',
+            'overlay.EXTERNAL_WALLET_DISCONNECTED',
             "You don't have any wallet connected to HyperPlay."
           )}
         </div>

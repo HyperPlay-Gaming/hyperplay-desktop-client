@@ -631,8 +631,7 @@
     },
     "Other": "Other",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet.",
-        "WALLET_DISCONNECTED": "You don't have any wallet connected to HyperPlay."
+        "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet."
     },
     "placeholder": {
         "alt-gogdl-bin": "Using built-in GOGDL binary...",
