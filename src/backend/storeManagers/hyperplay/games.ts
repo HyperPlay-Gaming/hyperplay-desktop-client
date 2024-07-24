@@ -141,9 +141,9 @@ export async function stop(appName: string): Promise<void> {
   } = gameInfo
 
   if (executable) {
-    const split = executable.split('/')
-    const exe = split[split.length - 1]
-    killPattern(exe)
+    //const split = executable.split('/')
+    //const exe = split[split.length - 1]
+    // killPattern(exe)
     if (!isNative(appName)) {
       const gameSettings = await getSettings(appName)
       shutdownWine(gameSettings)
@@ -152,7 +152,7 @@ export async function stop(appName: string): Promise<void> {
 
   const gameProcessName = getGameProcessName(gameInfo)
   if (gameProcessName) {
-    killPattern(gameProcessName)
+    // killPattern(gameProcessName)
     if (!isNative(appName)) {
       const gameSettings = await getSettings(appName)
       shutdownWine(gameSettings)

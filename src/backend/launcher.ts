@@ -8,6 +8,7 @@ import {
   writeFileSync
 } from 'graceful-fs'
 import { join, normalize } from 'path'
+import kill from 'tree-kill-promise'
 
 import {
   defaultWinePrefix,
@@ -777,6 +778,7 @@ async function callRunner(
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
+  let childPid: number | undefined = undefined
 
   // Necessary to get rid of possible undefined or null entries, else
   // TypeError is triggered
@@ -829,6 +831,8 @@ async function callRunner(
       signal: abortController.signal
     })
 
+    childPid = child.pid
+
     const shouldOpenOverlay =
       gameInfo &&
       (gameInfo.runner === 'hyperplay' ||
@@ -839,6 +843,11 @@ async function callRunner(
 
     const stdout: string[] = []
     const stderr: string[] = []
+
+    abortController.signal.onabort = async () => {
+      logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
+      await kill(child)
+    }
 
     child.stdout.setEncoding('utf-8')
     child.stdout.on('data', (data: string) => {
@@ -887,7 +896,7 @@ async function callRunner(
       stderr.push(data.trim())
     })
 
-    child.on('close', (code, signal) => {
+    child.on('close', async (code, signal) => {
       if (shouldOpenOverlay) hpOverlay?.closeOverlay()
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
@@ -895,6 +904,8 @@ async function callRunner(
         runner: runner.name,
         appName
       })
+
+      await kill(childPid)
 
       if (signal && !child.killed) {
         rej('Process terminated with signal ' + signal)
@@ -906,8 +917,10 @@ async function callRunner(
       })
     })
 
-    child.on('error', (error) => {
+    child.on('error', async (error) => {
       if (shouldOpenOverlay) hpOverlay?.closeOverlay()
+      await kill(childPid)
+
       rej(error)
     })
   })
@@ -916,9 +929,10 @@ async function callRunner(
     .then(({ stdout, stderr }) => {
       return { stdout, stderr, fullCommand: safeCommand }
     })
-    .catch((error) => {
+    .catch(async (error) => {
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
+        await kill(childPid)
 
         return {
           stdout: '',

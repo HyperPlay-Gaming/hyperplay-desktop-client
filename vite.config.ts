@@ -43,7 +43,10 @@ try {
   )
 }
 
-const dependenciesToNotExternalize = ['@hyperplay/check-disk-space']
+const dependenciesToNotExternalize = [
+  '@hyperplay/check-disk-space',
+  'tree-kill-promise'
+]
 
 const preloads = [
   'src/backend/preload.ts',
