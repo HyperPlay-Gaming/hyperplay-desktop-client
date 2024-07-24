@@ -846,7 +846,7 @@ async function callRunner(
 
     abortController.signal.onabort = async () => {
       logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
-      await kill(child)
+      await kill(childPid)
     }
 
     child.stdout.setEncoding('utf-8')
