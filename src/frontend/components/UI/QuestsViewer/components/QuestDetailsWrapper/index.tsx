@@ -10,7 +10,13 @@ import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
-import { useWriteContract, useAccount, useSwitchChain } from 'wagmi'
+import {
+  useWriteContract,
+  useAccount,
+  useSwitchChain,
+  http,
+  useBalance
+} from 'wagmi'
 import { Reward } from 'common/types'
 import authState from 'frontend/state/authState'
 import { mintReward } from './rewards/mintReward'
@@ -25,23 +31,86 @@ import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
 import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { createPublicClient } from 'viem'
+import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
+import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
 }
 
+const averageGasPerFunction: Record<string, number> = {
+  ERC1155: 102_470,
+  ERC721: 107_567,
+  ERC20: 98_507
+}
+
+async function getRewardClaimGasEstimation(reward: Reward) {
+  if (!reward.chain_id) {
+    throw Error(`chain_id is not set for reward: ${reward.id}`)
+  }
+
+  const chainMetadata = chainMap[reward.chain_id]
+
+  if (!chainMetadata) {
+    throw Error(`chainMetadata is not set for reward: ${reward.id}`)
+  }
+
+  const viemChain = parseChainMetadataToViemChain(chainMetadata)
+
+  const publicClient = createPublicClient({
+    // @ts-expect-error: chain types are valid
+    chain: viemChain,
+    transport: http()
+  })
+
+  let gasPerFunction
+
+  switch (reward.reward_type) {
+    case 'ERC1155':
+    case 'ERC721':
+    case 'ERC20':
+      gasPerFunction = averageGasPerFunction[reward.reward_type]
+      break
+    default:
+      throw Error(`unknown reward type ${reward.reward_type}`)
+  }
+
+  const gasPrice = await publicClient.getGasPrice()
+  const gasNeeded = BigInt(gasPerFunction) * gasPrice
+
+  console.log(
+    `Gas needed to claim ${reward.reward_type} reward: ${gasNeeded} (${gasPerFunction} gas per function * ${gasPrice} gas price)`
+  )
+
+  window.api.logInfo(
+    `Gas needed to claim ${reward.reward_type} reward: ${gasNeeded} (${gasPerFunction} gas per function * ${gasPrice} gas price)`
+  )
+
+  return gasNeeded
+}
+
 export function QuestDetailsWrapper({
   selectedQuestId
 }: QuestDetailsWrapperProps) {
+  const {
+    writeContract,
+    error: writeContractError,
+    isPending: isPendingWriteContract
+  } = useWriteContract()
+
+  const {
+    switchChainAsync,
+    isPending: isPendingSwitchingChain,
+    error: switchChainError
+  } = useSwitchChain()
+
   const flags = useFlags()
-  const { writeContract, error, isError, status } = useWriteContract()
-  if (isError) {
-    console.error(error)
-  }
-  const { switchChainAsync } = useSwitchChain()
   const account = useAccount()
+  const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
+  const [warningMessage, setWarningMessage] = useState<string>()
   const questMeta = questResult.data.data
 
   const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
@@ -141,20 +210,45 @@ export function QuestDetailsWrapper({
   }
 
   const mintOnChainReward = async (reward: Reward) => {
+    setWarningMessage(undefined)
+
     if (questMeta?.id === undefined) {
-      console.error('tried to mint but quest meta id is undefined')
-      return
+      throw Error('tried to mint but quest meta id is undefined')
     }
+
+    if (reward.chain_id === null) {
+      throw Error('chain id is not set for reward when trying to mint')
+    }
+
     if (account.address === undefined) {
-      console.error('tried to mint but no account connected')
+      setWarningMessage('Please connect your wallet to claim rewards.')
       return
     }
+
+    if (!walletBalance) {
+      throw Error('Wallet balance not available')
+    }
+
+    await switchChainAsync({ chainId: reward.chain_id })
+
+    const gasNeeded = await getRewardClaimGasEstimation(reward)
+    const hasEnoughBalance = walletBalance.value >= gasNeeded
+
+    if (!hasEnoughBalance) {
+      window.api.logError(
+        `Not enough balance in the connected wallet to cover the gas fee associated with this Quest Reward claim. Current balance: ${walletBalance.value}, gas needed: ${gasNeeded}`
+      )
+      setWarningMessage(
+        'Not enough balance in the connected wallet to cover the gas fee associated with this Quest Reward claim.'
+      )
+      return
+    }
+
     return mintReward({
       questId: questMeta.id,
       address: account.address,
       reward,
-      writeContract,
-      switchChainAsync
+      writeContract
     })
   }
 
@@ -177,8 +271,20 @@ export function QuestDetailsWrapper({
           break
       }
     }
-    await questPlayStreakResult.invalidateQuery()
   }
+
+  const {
+    mutate: claimRewardsMutation,
+    error: claimError,
+    isPending: isPendingClaimRewardsMutation
+  } = useMutation({
+    mutationFn: async (rewards: Reward[]) => {
+      return claimRewards(rewards)
+    },
+    onSuccess: async () => {
+      await questPlayStreakResult.invalidateQuery()
+    }
+  })
 
   function isEligible() {
     if (!questMeta) {
@@ -199,12 +305,35 @@ export function QuestDetailsWrapper({
     'Points are off-chain fungible rewards that may or may not be redeemable for an on-chain reward in the future. This is up to the particular game developer who is providing this reward.'
 
   const isClaiming =
-    status === 'pending' ||
     completeTaskMutation.isPending ||
-    claimPointsMutation.isPending
+    claimPointsMutation.isPending ||
+    isPendingClaimRewardsMutation
 
   if (selectedQuestId !== null && questMeta !== undefined) {
+    const ctaDisabled =
+      !flags.questsOverlayClaimCtaEnabled ||
+      (!isEligible() && !showResyncButton) ||
+      isPendingSwitchingChain ||
+      isPendingWriteContract
+
+    let alertProps: InfoAlertProps | undefined
+
+    if (writeContractError || claimError || switchChainError) {
+      alertProps = {
+        showClose: false,
+        title: t('quest.claimFailed', 'Claim failed'),
+        message: t(
+          'quest.claimFailedMessage',
+          "Please try once more. If it still doesn't work, create a Discord support ticket."
+        ),
+        actionText: t('quest.createDiscordTicket', 'Create Discord Ticket'),
+        onActionClick: () => window.api.openDiscordLink(),
+        variant: 'danger'
+      }
+    }
+
     const questDetailsProps: QuestDetailsProps = {
+      alertProps,
       questType: questMeta.type,
       title: questMeta.name,
       description: questMeta.description,
@@ -235,19 +364,15 @@ export function QuestDetailsWrapper({
               : undefined
         })) ?? [],
       i18n,
-      onClaimClick: async () => claimRewards(questMeta.rewards ?? []),
+      onClaimClick: async () => claimRewardsMutation(questMeta.rewards ?? []),
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
       toggleCollapse: () => setCollapseIsOpen(!collapseIsOpen),
-      errorMessage: isError
-        ? t('quest.errorMessage', 'There was an error with the transaction.')
-        : undefined,
+      errorMessage: warningMessage,
       isMinting: isClaiming,
       isSignedIn,
-      ctaDisabled:
-        !flags.questsOverlayClaimCtaEnabled ||
-        (!isEligible() && !showResyncButton),
+      ctaDisabled,
       showSync: showResyncButton,
       onSyncClick: () => {
         resyncMutation.mutateAsync(questMeta.rewards ?? [])
