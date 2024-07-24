@@ -275,6 +275,9 @@ export function QuestDetailsWrapper({
     },
     onSuccess: async () => {
       await questPlayStreakResult.invalidateQuery()
+    },
+    onError: (error) => {
+      window.api.logError(`Error claiming rewards: ${error}`)
     }
   })
 
