@@ -16,8 +16,7 @@ export async function mintReward({
   writeContract: WriteContractMutate<Config, unknown>
 }) {
   if (reward.chain_id === null) {
-    window.api.logError('chain id is not set for reward when trying to mint')
-    return
+    throw Error('chain id is not set for reward when trying to mint')
   }
 
   const isERC1155Reward =
@@ -43,15 +42,13 @@ export async function mintReward({
   )?.contract_address
 
   if (depositContractAddress === undefined) {
-    window.api.logError(
+    throw Error(
       `Deposit contract address undefined for quest ${questId} and chain id ${reward.chain_id}`
     )
-    return
   }
 
   const logError = (error: Error) => {
-    console.log(error.message)
-    window.api.logError(error.message)
+    window.api.logError(`Error minting reward: ${error.message}`)
   }
 
   if (
