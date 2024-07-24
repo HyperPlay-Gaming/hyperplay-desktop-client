@@ -888,7 +888,11 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
-      if (shouldOpenOverlay) hpOverlay?.closeOverlay()
+      try {
+        if (shouldOpenOverlay) hpOverlay?.closeOverlay()
+      } catch (err) {
+        logError(`Error closing overlay: ${err}`, LogPrefix.HyperPlay)
+      }
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,
