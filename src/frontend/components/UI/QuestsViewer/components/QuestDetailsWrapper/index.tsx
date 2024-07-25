@@ -71,7 +71,9 @@ async function getRewardClaimGasEstimation(reward: Reward) {
     case 'ERC721':
     case 'ERC20':
       // we bump by 50% to account for potential gas price fluctuations
-      gasPerFunction = averageGasUsagePerFunction[reward.reward_type] * 1.5
+      gasPerFunction = Math.ceil(
+        averageGasUsagePerFunction[reward.reward_type] * 1.5
+      )
       break
     default:
       throw Error(`unknown reward type ${reward.reward_type}`)
