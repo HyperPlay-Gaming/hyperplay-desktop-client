@@ -15,6 +15,7 @@ import {
   flatPakHome,
   isLinux,
   isMac,
+  isWindows,
   publicDir,
   runtimePath,
   userHome
@@ -54,7 +55,7 @@ import {
   WineCommandArgs,
   SteamRuntime
 } from 'common/types'
-import { spawn, spawnSync } from 'child_process'
+import { execSync, spawn, spawnSync } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
@@ -908,7 +909,7 @@ async function callRunner(
 
       // close processes created by this process
       if (childPid !== undefined) {
-        killChildProcesses(runner, childPid)
+        killChildProcesses(childPid)
       }
 
       if (signal && !child.killed) {
@@ -929,7 +930,7 @@ async function callRunner(
 
   abortController.signal.onabort = () => {
     if (childPid !== undefined) {
-      killChildProcesses(runner, childPid)
+      killChildProcesses(childPid)
     }
   }
 
@@ -941,7 +942,7 @@ async function callRunner(
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
         if (childPid !== undefined) {
-          killChildProcesses(runner, childPid)
+          killChildProcesses(childPid)
         }
         return {
           stdout: '',
@@ -980,15 +981,21 @@ async function callRunner(
   return promise
 }
 
-function killChildProcesses(runner: RunnerProps, childPid: number) {
-  const scriptPath = fixAsarPath(join(publicDir, './win32/stopProcessTree.ps1'))
-  logWarning(
-    `Killing all processes spawned by ${runner.name} with PID ${childPid}`,
-    LogPrefix.Backend
-  )
-  spawnSync(scriptPath, ['-ParentPID', childPid.toString()], {
-    shell: 'powershell.exe'
-  })
+function killChildProcesses(childPid: number) {
+  if (isWindows) {
+    const scriptPath = fixAsarPath(
+      join(publicDir, './win32/stopProcessTree.ps1')
+    )
+    logWarning(
+      `Killing all processes spawned by PID ${childPid}`,
+      LogPrefix.Backend
+    )
+    return spawnSync(scriptPath, ['-ParentPID', childPid.toString()], {
+      shell: 'powershell.exe'
+    })
+  }
+
+  return execSync(`pkill -TERM -P ${childPid}`)
 }
 
 /**
