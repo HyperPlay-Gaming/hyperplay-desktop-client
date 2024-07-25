@@ -39,7 +39,7 @@ export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
 }
 
-const averageGasUsagePerFunction: Record<string, number> = {
+const averageEstimatedGasUsagePerFunction: Record<string, number> = {
   ERC1155: 102_470,
   ERC721: 107_567,
   ERC20: 98_507
@@ -72,7 +72,7 @@ async function getRewardClaimGasEstimation(reward: Reward) {
     case 'ERC20':
       // we bump by 50% to account for potential gas price fluctuations
       gasPerFunction = Math.ceil(
-        averageGasUsagePerFunction[reward.reward_type] * 1.5
+        averageEstimatedGasUsagePerFunction[reward.reward_type] * 1.5
       )
       break
     default:
