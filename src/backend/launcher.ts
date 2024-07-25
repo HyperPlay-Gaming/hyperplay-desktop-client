@@ -779,6 +779,7 @@ async function callRunner(
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
+  let childPid: number | undefined
 
   // Necessary to get rid of possible undefined or null entries, else
   // TypeError is triggered
@@ -831,7 +832,12 @@ async function callRunner(
       signal: abortController.signal
     })
 
-    console.log('spawning child pid ', child.pid)
+    childPid = child.pid
+
+    logInfo(
+      ['Spawned', runner.name, 'with PID', childPid!.toString()],
+      LogPrefix.Backend
+    )
 
     const shouldOpenOverlay =
       gameInfo &&
@@ -901,19 +907,8 @@ async function callRunner(
       })
 
       // close processes created by this process
-      if (child.pid !== undefined) {
-        const scriptPath = fixAsarPath(
-          join(publicDir, './win32/stopProcessTree.ps1')
-        )
-        console.log(
-          'calling ',
-          scriptPath,
-          ' with child pid ',
-          child.pid.toString()
-        )
-        spawnSync(scriptPath, ['-ParentPID', child.pid.toString()], {
-          shell: 'powershell.exe'
-        })
+      if (childPid !== undefined) {
+        killChildProcesses(runner, childPid)
       }
 
       if (signal && !child.killed) {
@@ -932,6 +927,12 @@ async function callRunner(
     })
   })
 
+  abortController.signal.onabort = () => {
+    if (childPid !== undefined) {
+      killChildProcesses(runner, childPid)
+    }
+  }
+
   promise = promise
     .then(({ stdout, stderr }) => {
       return { stdout, stderr, fullCommand: safeCommand }
@@ -939,7 +940,9 @@ async function callRunner(
     .catch((error) => {
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
-
+        if (childPid !== undefined) {
+          killChildProcesses(runner, childPid)
+        }
         return {
           stdout: '',
           stderr: '',
@@ -975,6 +978,17 @@ async function callRunner(
   commandsRunning[key] = promise
 
   return promise
+}
+
+function killChildProcesses(runner: RunnerProps, childPid: number) {
+  const scriptPath = fixAsarPath(join(publicDir, './win32/stopProcessTree.ps1'))
+  logWarning(
+    `Killing all processes spawned by ${runner.name} with PID ${childPid}`,
+    LogPrefix.Backend
+  )
+  spawnSync(scriptPath, ['-ParentPID', childPid.toString()], {
+    shell: 'powershell.exe'
+  })
 }
 
 /**
