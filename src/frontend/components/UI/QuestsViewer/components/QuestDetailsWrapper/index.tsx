@@ -39,7 +39,7 @@ export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
 }
 
-const averageGasPerFunction: Record<string, number> = {
+const averageGasUsagePerFunction: Record<string, number> = {
   ERC1155: 102_470,
   ERC721: 107_567,
   ERC20: 98_507
@@ -70,7 +70,8 @@ async function getRewardClaimGasEstimation(reward: Reward) {
     case 'ERC1155':
     case 'ERC721':
     case 'ERC20':
-      gasPerFunction = averageGasPerFunction[reward.reward_type]
+      // we bump by 50% to account for potential gas price fluctuations
+      gasPerFunction = averageGasUsagePerFunction[reward.reward_type] * 1.5
       break
     default:
       throw Error(`unknown reward type ${reward.reward_type}`)
@@ -235,7 +236,10 @@ export function QuestDetailsWrapper({
         `Not enough balance in the connected wallet to cover the gas fee associated with this Quest Reward claim. Current balance: ${walletBalance.value}, gas needed: ${gasNeeded}`
       )
       setWarningMessage(
-        'Not enough balance in the connected wallet to cover the gas fee associated with this Quest Reward claim.'
+        t(
+          'quest.notEnoughGas',
+          'Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.'
+        )
       )
       return
     }
