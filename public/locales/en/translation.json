@@ -654,7 +654,6 @@
         "errorMessage": "There was an error with the transaction.",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
-        "Play": "Play",
         "playstreak": {
             "dayResets": "Day resets:",
             "days": "days",
@@ -666,6 +665,7 @@
             "streakProgress": "Streak Progress"
         },
         "points": "Points",
+        "pointsClaimed": "Points Claimed",
         "quests": "Quests",
         "readyForClaim": "Ready for claim",
         "reputation": "Reputation",

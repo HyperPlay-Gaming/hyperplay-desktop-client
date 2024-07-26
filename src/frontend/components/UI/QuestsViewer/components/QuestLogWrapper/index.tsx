@@ -1,9 +1,15 @@
 import React from 'react'
-import { QuestLog, QuestLogInfo, QuestLogTranslations } from '@hyperplay/ui'
+import {
+  PointsBalanceProps,
+  QuestLog,
+  QuestLogInfo,
+  QuestLogTranslations
+} from '@hyperplay/ui'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
 import { Quest } from 'common/types'
+import useGetG7UserCredits from 'frontend/hooks/useGetG7UserCredits'
 
 export interface QuestLogWrapperProps {
   projectId: string
@@ -17,6 +23,8 @@ export function QuestLogWrapper({
   setSelectedQuestId
 }: QuestLogWrapperProps) {
   const questsResults = useGetQuests(appName)
+  const userCredits = useGetG7UserCredits()
+  const userCreditsBalance = userCredits?.data?.data
   const quests = questsResults?.data?.data
   const { t } = useTranslation()
 
@@ -28,7 +36,20 @@ export function QuestLogWrapper({
     type: {
       REPUTATION: t('quest.reputation', 'Reputation'),
       PLAYSTREAK: t('quest.type.playstreak', 'Play Streak')
-    }
+    },
+    pointsClaimed: t('quest.pointsClaimed', 'Points Claimed')
+  }
+
+  let pointsBalanceProps: PointsBalanceProps[] | undefined = undefined
+  if (userCreditsBalance !== undefined) {
+    pointsBalanceProps = [
+      {
+        symbol: 'G7C',
+        name: 'Game7 Credits',
+        isGame7Credits: true,
+        balance: userCreditsBalance
+      }
+    ]
   }
 
   let questLog = null
@@ -53,7 +74,12 @@ export function QuestLogWrapper({
       return questUi_i
     })
     questLog = (
-      <QuestLog quests={questsUi} className={styles.questLog} i18n={i18n} />
+      <QuestLog
+        quests={questsUi}
+        className={styles.questLog}
+        i18n={i18n}
+        pointsProps={pointsBalanceProps}
+      />
     )
   } else if (questsResults?.data.isLoading || questsResults?.data.isFetching) {
     questLog = (
