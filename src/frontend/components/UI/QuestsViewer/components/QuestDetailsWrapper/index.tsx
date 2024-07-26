@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   QuestDetails,
   QuestDetailsProps,
@@ -95,7 +95,8 @@ export function QuestDetailsWrapper({
   const {
     writeContract,
     error: writeContractError,
-    isPending: isPendingWriteContract
+    isPending: isPendingWriteContract,
+    reset: resetWriteContract
   } = useWriteContract()
 
   const {
@@ -311,6 +312,11 @@ export function QuestDetailsWrapper({
     claimRewardsMutation.isPending ||
     isPendingWriteContract ||
     isPendingSwitchingChain
+
+  useEffect(() => {
+    setWarningMessage(undefined)
+    resetWriteContract()
+  }, [selectedQuestId])
 
   if (selectedQuestId !== null && questMeta !== undefined) {
     const ctaDisabled =
