@@ -287,6 +287,8 @@ interface HyperPlayAsyncIPCFunctions {
   claimQuestPointsReward: (rewardId: string) => Promise<PointsClaimReturn>
   completeExternalTask: (rewardId: string) => Promise<GenericApiResponse>
   resyncExternalTask: (rewardId: string) => Promise<GenericApiResponse>
+  getG7Credits: () => Promise<string>
+  getG7TaskCredits: (taskId: string) => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

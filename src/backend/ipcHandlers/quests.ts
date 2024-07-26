@@ -60,3 +60,19 @@ ipcMain.handle('resyncExternalTask', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/re-sync`
   return (await fetchWithCookie({ url, method: 'POST' })) as GenericApiResponse
 })
+
+ipcMain.handle('getG7Credits', async () => {
+  const url = `${DEV_PORTAL_URL}api/v1/game7/user/total/credits`
+  const response = (await fetchWithCookie({ url, method: 'GET' })) as {
+    credits: number
+  }
+  return response.credits.toString()
+})
+
+ipcMain.handle('getG7TaskCredits', async (e, taskId) => {
+  const url = `${DEV_PORTAL_URL}api/v1/game7/task/${taskId}/credits`
+  const response = (await fetchWithCookie({ url, method: 'GET' })) as {
+    credits: number
+  }
+  return response.credits.toString()
+})
