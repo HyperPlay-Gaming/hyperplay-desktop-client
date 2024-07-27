@@ -1010,7 +1010,11 @@
             "playstreak": "Racha de juego",
             "reputation": "Reputación"
         },
-        "points": "Puntos"
+        "points": "Puntos",
+        "claimFailed": "Reclamación rechazada",
+        "createDiscordTicket": "Ticket creado en Discord",
+        "notEnoughGas": "El saldo del monedero es insuficiente para reclamar la recompensa debido a los gastos de gasolina. Prueba con otro monedero o recarga este antes de volver a intentarlo.",
+        "claimFailedMessage": "Por favor, inténtalo una vez más. Si sigue sin funcionar, crea un ticket de soporte en Discord."
     },
     "back_to_game": "Volver al juego",
     "email_subscription": {
