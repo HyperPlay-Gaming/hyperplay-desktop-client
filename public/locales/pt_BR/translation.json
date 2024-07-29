@@ -934,7 +934,20 @@
         "associatedGames": "Jogos associados",
         "claimAll": "Reivindicar tudo",
         "claimed": "Cláusula",
-        "active": "Ativo"
+        "active": "Ativo",
+        "errorMessage": "Houve um erro com a transação.",
+        "needMoreAchievements": "Você precisa ter completado {{percent}}% das conquistas em um desses jogos.",
+        "playstreak": {
+            "dayResets": "Reiniciações do dia:",
+            "playEachDay": "Jogue todos os dias para que sua série não reinicie!",
+            "playToStart": "Jogue este jogo para começar sua série!",
+            "progressTowardsStreak": "progredir para a sequência de hoje.",
+            "streakCompleted": "Streak concluído! Reclama as tuas recompensas agora.",
+            "streakProgress": "Progresso de Streak"
+        },
+        "connectSteamAccount": "Conecte a conta Steam",
+        "linkAccount": "Ligar o seu Conta Steam para verificar a elegibilidade.",
+        "readyForClaim": "Pronto para reclamação"
     },
     "profile": "Perfil",
     "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas"
