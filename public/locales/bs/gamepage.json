@@ -52,7 +52,9 @@
         "compability": {
             "message": "@This #Prozor #igra #volja #bijeg #uporabiti @a #kompatibilnost #red. #Free @might @encounter #kakav #tema ili @the #igra @might ne #rad uopće#."
         },
-        "yesCancel": "@Yes, #ukidati"
+        "yesCancel": "@Yes, #ukidati",
+        "dont-show-again": "Ne prikazuj ponovo",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Dodaj u favorite",
@@ -67,7 +69,8 @@
         "no-path-selected": "No path selected",
         "queue": {
             "remove": "Remove from Queue",
-            "cancel": "#Ukidati"
+            "cancel": "#Ukidati",
+            "continue": "Nastavi preuzimanje"
         },
         "remove_from_favourites": "Otkloni iz favorita",
         "remove_from_recent": "Remove From Recent",
@@ -79,7 +82,10 @@
         "unhide_game": "Prikaži igru",
         "uninstall": "Deinstaliraj",
         "update": "Ažuriraj",
-        "unfavorites": "Unfavorite"
+        "unfavorites": "Unfavorite",
+        "details": "Details",
+        "favorites": "Favorite",
+        "remove_from_library": "Ukloni"
     },
     "cloud_save_unsupported": "Nepodržano",
     "disabled": "Onemogućeno",
@@ -142,7 +148,8 @@
         },
         "playing": {
             "start": "Igraj sada",
-            "stop": "Igra se (Prekini)"
+            "stop": "Igra se (Prekini)",
+            "update": "Update"
         },
         "saves": {
             "syncing": "Sinhoniziranje podataka"
@@ -163,7 +170,8 @@
         "title": "Odaberite komponente za instalaciju"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -212,7 +220,10 @@
             "cancel": "#Ukidati",
             "progress": "#Vaditi"
         },
-        "playing": "#Igrati"
+        "playing": "#Igrati",
+        "syncingSaves": "Sinhoniziranje podataka",
+        "downloading": "Preuzimanje",
+        "paused": "Paused"
     },
     "submenu": {
         "addShortcut": "Dodaj prečicu",
