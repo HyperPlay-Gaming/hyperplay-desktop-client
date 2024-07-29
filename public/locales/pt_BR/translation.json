@@ -592,10 +592,11 @@
         "showMetalOverlay": "Mostrar sobreposição de estatísticas",
         "alt-nile-bin": "Escolha um binário alternativo do Nilo",
         "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo",
-        "autoLaunchHyperPlay": "Lançamento automático Hyper Jogar",
+        "autoLaunchHyperPlay": "Iniciar HyperPlay automaticamente",
         "msync": "Ativar Msync",
         "dxvkfpslimit": "Limite FPS (DX9, 10 e 11)",
-        "autoUpdateGames": "Atualizar automaticamente os jogos"
+        "autoUpdateGames": "Atualizar automaticamente os jogos",
+        "steamId": "Steam ID"
     },
     "settings": {
         "battlEyeRuntime": {
