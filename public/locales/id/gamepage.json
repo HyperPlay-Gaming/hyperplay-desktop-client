@@ -48,7 +48,11 @@
         "wineprefix": "Pilih Folder Prefiks Wine",
         "yes": "YA",
         "yesCancel": "Ya, batalkan",
-        "ok": "Oke"
+        "ok": "Oke",
+        "aware": "Login",
+        "compability": {
+            "message": "Game Windows ini akan berjalan menggunakan lapisan kompatibilitas. Anda mungkin menemukan beberapa masalah atau permainan mungkin tidak bekerja sama sama sekali."
+        }
     },
     "button": {
         "add_to_favourites": "Tambahkan Ke Favorit",
@@ -97,7 +101,9 @@
         "neverPlayed": "Tidak pernah",
         "platform": "Pilih Versi Platform yang Akan Dipasang",
         "requirements": "Persyaratan Sistem",
-        "totalPlayed": "Lama Dimainkan"
+        "totalPlayed": "Lama Dimainkan",
+        "dlcs": "Login",
+        "selectChannelName": "Pilih Saluran Login"
     },
     "gamecard": {
         "moving": "Memindahkan",
@@ -129,7 +135,8 @@
         "path-not-writtable": "Peringatan: lokasi mungkin tidak dapat ditulis.",
         "space-after-install": "Setelah Instalasi",
         "wineprefix": "PrefiksWine",
-        "wineversion": "Versi Wine"
+        "wineversion": "Versi Wine",
+        "compatibility-warning": "Game Windows ini akan berjalan menggunakan lapisan kompatibilitas. Pengalaman Anda dapat bervariasi."
     },
     "label": {
         "game": {
@@ -197,7 +204,16 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Jumlah yang Diunduh",
         "uninstalling": "Uninstalling",
-        "updating": "Memperbarui Gim"
+        "updating": "Memperbarui Gim",
+        "gog-goodie": "Game ini tidak muncul untuk dapat diinstal. URL https://gog.com/account",
+        "goodie": "Tidak dapat dipasang",
+        "distributables": "Menginstal Distributables",
+        "extracting": {
+            "cancel": "Batalkan Ekstraksi",
+            "progress": "Login"
+        },
+        "moving-files": "Pindahkan file '{{file}}': {{percent}} ",
+        "preparing": "Preparing Download"
     },
     "submenu": {
         "addShortcut": "Tambahkan pintasan",
@@ -211,6 +227,7 @@
         "removeShortcut": "Remove shortcuts",
         "settings": "Pengaturan",
         "store": "Halaman Toko",
-        "verify": "Verifikasi dan Perbaiki"
+        "verify": "Verifikasi dan Perbaiki",
+        "extraInfo": "Info Tambahan"
     }
 }
