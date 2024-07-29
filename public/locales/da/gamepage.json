@@ -18,17 +18,22 @@
         "stopInstall": {
             "keepInstalling": "Fortsæt installationen",
             "message": "Vil du fortsætte med at hente filerne?",
-            "title": "Stop installationen"
+            "title": "Stop installationen",
+            "keepFilesMessage": "Tjek her, hvis du ønsker at holde download-filer efter annullering."
         },
         "uninstall": {
             "checkbox": "Vil du også fjerne prefixet? Dette kan ikke omgøres.",
             "checkbox_prefix": "Prefix",
             "message": "Vil du afinstallere spillet?",
-            "title": "Afinstaller"
+            "title": "Afinstaller",
+            "dlc": "Vil du afinstallere denne DLC?",
+            "prefix_warning": "Vin præfiks til dette spil er standard præfiks. Hvis du virkelig ønsker at slette det, skal du gøre det manuelt.",
+            "settingcheckbox": "Slette indstillinger og fjerne log{{newLine}}Note: Dette kan ikke fortrydes. Alle ændrede indstillinger vil blive glemt, og log vil blive slettet."
         },
         "update": {
             "title": "Spillet skal opdateres",
-            "message": "Der findes en opdatering til spillet. Vil du updatere nu?"
+            "message": "Der findes en opdatering til spillet. Vil du updatere nu?",
+            "message-cancel": "Det er ikke muligt at spille dette spil uden at opdatere"
         },
         "yes": "JA",
         "choose": "Vælg",
@@ -44,7 +49,12 @@
         },
         "sideload": {
             "exe": "Vælg Eksekverbar"
-        }
+        },
+        "aware": "Jeg er klar",
+        "compability": {
+            "message": "Dette Windows-spil kører ved hjælp af et kompatibilitetslag. Du kan møde nogle problemer eller spillet kan ikke arbejde overhovedet."
+        },
+        "yesCancel": "Ja, annullere"
     },
     "button": {
         "cancel": "Pause/Afbryd",
@@ -64,7 +74,17 @@
         "finish": "Afslut",
         "queue": {
             "cancel": "Annuller download",
-            "continue": "Fortsæt Download"
+            "continue": "Fortsæt Download",
+            "remove": "Fjern fra Queue"
+        },
+        "force-innstall": "Kraftinstallation",
+        "remove_from_recent": "Fjern fra Seneste",
+        "run-exe-first": "Kør Installer først",
+        "unfavorites": "Ufavorit",
+        "no-path-selected": "Ingen sti valgt",
+        "running-setup": "Løbeopsætning",
+        "sideload": {
+            "edit": "Rediger app/Game"
         }
     },
     "disabled": "Slå Fra",
@@ -84,7 +104,11 @@
         "info": "Info",
         "platform": "Vælg platformsversion, der skal installeres",
         "requirements": "System Krav",
-        "tools": "Værktøjer"
+        "tools": "Værktøjer",
+        "selectChannelName": "Vælg kanal Navn Navn",
+        "getting-download-size": "Sådan downloades størrelse",
+        "getting-install-size": "Sådan installeres størrelse",
+        "dlcs": "DLC'er"
     },
     "gamecard": {
         "moving": "Flytter",
@@ -96,7 +120,8 @@
         "size": "Størrelse",
         "syncsaves": "Synkroniser Saves",
         "version": "Version",
-        "installedPlatform": "Installeret platform"
+        "installedPlatform": "Installeret platform",
+        "web3-supported": "Har Web3 funktioner"
     },
     "install": {
         "path": "Vælg Installations Sti",
@@ -105,7 +130,8 @@
         "wineversion": "Wine version",
         "space-after-install": "Efter installation",
         "disk-space-left": "Ledig diskplads",
-        "path-not-writtable": "Advarsel: Sti er muligvis ikke skrivebar."
+        "path-not-writtable": "Advarsel: Sti er muligvis ikke skrivebar.",
+        "compatibility-warning": "Dette Windows-spil kører ved hjælp af et kompatibilitetslag. Din oplevelse kan variere."
     },
     "label": {
         "playing": {
@@ -150,7 +176,16 @@
         "syncingSaves": "Synkroniserer Saves",
         "paused": "Pause",
         "playing": "Afspiller",
-        "downloading": "Henter ned"
+        "downloading": "Henter ned",
+        "moving-files": "Flyttende fil '{{file}}': {{percent}} ",
+        "preparing": "Forberedelse af download, vent",
+        "distributables": "Installation af Distributables",
+        "extracting": {
+            "cancel": "Annuller udsugning",
+            "progress": "Udtræk"
+        },
+        "gog-goodie": "Dette spil vises ikke for at blive installeret. Tjek download-indhold på https://gog.com/account",
+        "goodie": "Ikke at installere"
     },
     "submenu": {
         "addShortcut": "Opret genvej",
@@ -165,7 +200,8 @@
         "removeFromSteam": "Fjern fra Steam",
         "addToSteam": "Tilføj til Steam",
         "disableEosOverlay": "Deaktiver Epic Overlay",
-        "enableEosOverlay": "Aktiver Epic Overlay"
+        "enableEosOverlay": "Aktiver Epic Overlay",
+        "extraInfo": "Ekstra information"
     },
     "generic": {
         "error": "Ukendt fejl",
@@ -193,11 +229,14 @@
         "info": {
             "exe": "Vælg Eksekverbar",
             "image": "App billede",
-            "title": "Spil/App titel"
+            "title": "Spil/App titel",
+            "supports-web3": "Dette spil har Web3 funktioner",
+            "broser": "BrowserURL"
         },
         "placeholder": {
             "image": "Indsæt en billed-URL her",
-            "title": "Tilføj en titel til dit spil/app"
+            "title": "Tilføj en titel til dit spil/app",
+            "url": "Indsæt spillets URL her"
         }
     },
     "setting": {
