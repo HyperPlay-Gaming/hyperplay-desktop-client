@@ -291,7 +291,7 @@
             "part1": "O HyperPlay busca por versões do Wine, Proton e CrossOver nas pastas a seguir:",
             "part2": "Para outros locais, use um link simbólico para uma dessas pastas"
         },
-        "dxvkfpslimit": "Define uma tampa de taxa de quadros para jogos DXVK",
+        "dxvkfpslimit": "Define uma taxa de quadros fixos para jogos DXVK",
         "disable_logs": "Alternar esta caixa de seleção ON para desativar a maioria dos registros de arquivos (informações críticas são sempre registradas). Certifique-se de desativar esta configuração antes de reportar qualquer problema.",
         "dxvknvapi": "DXVK-NVAPI é uma implementação de NVAPI construído em cima de DXVK e o NVAPI nativo linux, permite o uso de DLSS em GPUs Nvidia.",
         "msync": "Msync visa reduzir a sobrecarga de Winever em jogos intensivos em CPU. A ativação pode melhorar o desempenho em vários jogos."
