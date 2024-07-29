@@ -349,7 +349,8 @@
         "epic": "Login da Epic Games",
         "gog": "Login da GOG",
         "message": "Faça login com sua plataforma. Você pode acessar mais de uma plataforma ao mesmo tempo.",
-        "amazon": "Login da Amazon"
+        "amazon": "Login da Amazon",
+        "old-mac": "Sua versão do macOS é {{version}}. O macOS 12 ou mais recente é necessário para fazer login."
     },
     "message": {
         "sync": "Sincronização Completa",
@@ -917,5 +918,11 @@
     },
     "exit_game": "Sair do jogo",
     "importGameErrorMessage": "Não é uma pasta de jogo válida, não é possível importar o jogo",
-    "importGameErrorMessageExecutable": "Jogo Executável não encontrado, importando jogo não é possível"
+    "importGameErrorMessageExecutable": "Executável do jogo não encontrado, não é possível importar o jogo",
+    "notification": {
+        "wine-download": {
+            "title": "Camada de compatibilidade"
+        }
+    },
+    "importGameErrorTitle": "Erro ao importar o jogo"
 }
