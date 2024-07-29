@@ -42,7 +42,9 @@
             "title": "بازی نیاز به روزرسانی دارد"
         },
         "wineprefix": "انتخاب پوشه Wine Prefix",
-        "yes": "بله"
+        "yes": "بله",
+        "dont-show-again": "عدم نمایش",
+        "ok": "خوب"
     },
     "button": {
         "add_to_favourites": "افزودن به مورد علاقه ها",
@@ -56,7 +58,9 @@
         "install": "نصب",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "لغو دانلود",
+            "continue": "ادامه بارگیری"
         },
         "remove_from_favourites": "حذف کردن از مورد علاقه ها",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +71,10 @@
         },
         "unhide_game": "نشان دادن بازی",
         "uninstall": "حذف",
-        "update": "بهروزرسانی"
+        "update": "بهروزرسانی",
+        "remove_from_library": "برداشتن",
+        "details": "جزییات",
+        "favorites": "برگزیدن"
     },
     "cloud_save_unsupported": "پشتیبانی نشده",
     "disabled": "غیر فعال",
@@ -93,7 +100,8 @@
         "repairing": "در حال تعمیر"
     },
     "generic": {
-        "error": "خطای نامشخص"
+        "error": "خطای نامشخص",
+        "noDescription": "No description available!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -126,7 +134,8 @@
         },
         "playing": {
             "start": "اجرا",
-            "stop": "در حال اجرا (توقف)"
+            "stop": "در حال اجرا (توقف)",
+            "update": "روزآمدسازی"
         },
         "saves": {
             "syncing": "در حال همگام سازی ذخیره ها"
@@ -147,7 +156,8 @@
         "title": "انتخاب محتواها برای نصب"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver باتل"
     },
     "sideload": {
         "field": {
@@ -186,7 +196,10 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "حجم کل دانلود شده",
         "uninstalling": "Uninstalling",
-        "updating": "در حال به روزرسانی بازی"
+        "updating": "در حال به روزرسانی بازی",
+        "syncingSaves": "در حال همگام سازی ذخیره ها",
+        "downloading": "در حال بارگیری",
+        "paused": "متوقف شده"
     },
     "submenu": {
         "addShortcut": "افزودن میانبر",
