@@ -51,7 +51,9 @@
         "aware": "Ben farkındayım",
         "compability": {
             "message": "Bu Windows oyunu bir uyumluluk katmanı kullanarak çalışacak. Bazı sorunlarla karşılaşabilirsiniz veya oyun hiç çalışmayabilir."
-        }
+        },
+        "dont-show-again": "Bir daha gösterme",
+        "ok": "Tamam"
     },
     "button": {
         "add_to_favourites": "Favorilere Ekle",
@@ -65,7 +67,9 @@
         "install": "Kur",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "İndirmeyi İptal Et",
+            "continue": "İndirmeye Devam Et"
         },
         "remove_from_favourites": "Favorilerden Kaldır",
         "remove_from_recent": "Remove From Recent",
@@ -76,7 +80,11 @@
         },
         "unhide_game": "Oyunu Göster",
         "uninstall": "Kaldır",
-        "update": "Güncelle"
+        "update": "Güncelle",
+        "favorites": "Favori",
+        "remove_from_library": "Kaldır",
+        "unfavorites": "Favorilerden kaldır",
+        "details": "Detaylar"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Devre dışı",
@@ -104,7 +112,8 @@
         "repairing": "Onarılıyor"
     },
     "generic": {
-        "error": "Bilinmeyen hata"
+        "error": "Bilinmeyen hata",
+        "noDescription": "Açıklama bulunmuyor!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -138,7 +147,8 @@
         },
         "playing": {
             "start": "Şimdi Oyna",
-            "stop": "Oynanıyor (Durdur)"
+            "stop": "Oynanıyor (Durdur)",
+            "update": "Güncelle"
         },
         "saves": {
             "syncing": "Kayıtlar Eşzamanlanıyor"
@@ -159,7 +169,8 @@
         "title": "Kurulacak bileşenleri seç"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Şişesi"
     },
     "sideload": {
         "field": {
@@ -207,7 +218,11 @@
         "gog-goodie": "Bu oyun ayarlanabilir gibi görünmüyor. https://gog.com/account",
         "distributables": "Dağıtılabilirler",
         "goodie": "Yüklemek için değil",
-        "preparing": "Downloading Download, lütfen bekleyin"
+        "preparing": "Downloading Download, lütfen bekleyin",
+        "paused": "Duraklatıldı",
+        "downloading": "İndiriliyor",
+        "playing": "Oynatılıyor",
+        "syncingSaves": "Kayıtlar Eşzamanlanıyor"
     },
     "submenu": {
         "addShortcut": "Kısayol ekle",
