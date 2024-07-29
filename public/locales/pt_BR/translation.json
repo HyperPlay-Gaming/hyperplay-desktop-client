@@ -1018,7 +1018,7 @@
         "quests": "Missões"
     },
     "sideload": {
-        "warningMessage": "O carregamento lateral de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O carregamento lateral de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos.",
+        "warningMessage": "O recurso de Sideloading de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O Sideloading de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos.",
         "warningTitle": "Importante"
     }
 }
