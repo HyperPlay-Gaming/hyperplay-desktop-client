@@ -933,7 +933,7 @@
     "quest": {
         "associatedGames": "Jogos associados",
         "claimAll": "Reivindicar tudo",
-        "claimed": "Cláusula",
+        "claimed": "Reinvidicados",
         "active": "Ativo",
         "errorMessage": "Houve um erro com a transação.",
         "needMoreAchievements": "Você precisa ter completado {{percent}}% das conquistas em um desses jogos.",
