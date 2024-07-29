@@ -70,6 +70,7 @@ interface About {
 export type LDUser = {
   kind: string
   key: string
+  appVersion: string
 }
 
 export type LDEnv = {

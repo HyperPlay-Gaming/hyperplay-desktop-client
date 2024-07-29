@@ -36,6 +36,7 @@ import {
 } from './utils/compatibility_layers'
 
 import { backendEvents } from './backend_events'
+import { getAppVersion } from './utils'
 
 /**
  * This class does config handling.
@@ -337,7 +338,8 @@ class GlobalConfigV0 extends GlobalConfig {
       enableFsync: isLinux,
       ldUser: {
         kind: 'user',
-        key: uuid()
+        key: uuid(),
+        appVersion: getAppVersion()
       }
     } as AppSettings
   }

@@ -62,7 +62,8 @@ import {
   wait,
   getShellPath,
   checkWineBeforeLaunch,
-  downloadDefaultWine
+  downloadDefaultWine,
+  getAppVersion
 } from './utils'
 import {
   configPath,
@@ -585,7 +586,8 @@ if (!gotTheLock) {
       logInfo('No LaunchDarkly user found, creating new one.')
       ldUser = {
         kind: 'user',
-        key: uuid()
+        key: uuid(),
+        appVersion: getAppVersion()
       }
       configStore.set('settings.ldUser', ldUser)
     }
