@@ -933,6 +933,8 @@
     "quest": {
         "associatedGames": "Jogos associados",
         "claimAll": "Reivindicar tudo",
-        "claimed": "Cláusula"
-    }
+        "claimed": "Cláusula",
+        "active": "Ativo"
+    },
+    "profile": "Perfil"
 }
