@@ -409,7 +409,7 @@
         "offline-retry-in": "Offline. Nova tentativa em {{seconds}} segundos.",
         "retrying": "Tentar novamente"
     },
-    "Open": "",
+    "Open": "Aberto",
     "options": {
         "advanced": {
             "key": "Nome da variável",
