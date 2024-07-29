@@ -747,7 +747,8 @@
                         "details": "Ao importar, a instalação e as configurações do MetaMask serão importadas para o HyperPlay.",
                         "useRecoveryPhrase": "Acesso com a frase secreta de recuperação",
                         "learnMore": "Saiba mais.",
-                        "orWord": "OU"
+                        "orWord": "OU",
+                        "useRecoveryPhraseInfo": "Este recurso é recomendado para usuários e desenvolvedores avançados. Sua frase de recuperação secreta é armazenada localmente em MetaMask e nunca compartilhada com HyperPlay."
                     }
                 },
                 "pleaseConnect": "Conecte a sua carteira ou descarregue a app móvel Netmask para obter\n        iniciado:",
@@ -838,7 +839,9 @@
         "connectWallet": "Conecte a carteira",
         "linkSteamAccountTitle": "Conta Steam Link",
         "linkSteamAccountCta": "Ir para o Steam",
-        "syncing": "A sincronizar..."
+        "syncing": "A sincronizar...",
+        "viewMyAccount": "Ver minha conta",
+        "viewItem": "Ver {{item}}"
     },
     "hyperplayOverlay": {
         "description": {
