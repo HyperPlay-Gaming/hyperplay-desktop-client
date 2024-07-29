@@ -928,7 +928,7 @@
     },
     "importGameErrorTitle": "Erro ao importar o jogo",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Você está conectado ao HyperPlay com uma carteira externa. . \n \n Para aprovar transações na sobreposição do HyperPlay, você precisará se conectar ao HyperPlay com a extensão MetaMask.."
+        "EXTERNAL_WALLET_CONNECTED": "Você está conectado ao HyperPlay com uma carteira externa."
     },
     "quest": {
         "associatedGames": "Jogos associados",
@@ -936,5 +936,6 @@
         "claimed": "Cláusula",
         "active": "Ativo"
     },
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas"
 }
