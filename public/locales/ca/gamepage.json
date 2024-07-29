@@ -42,7 +42,9 @@
             "title": "Cal actualitzar el joc"
         },
         "wineprefix": "Selecciona el directori del WinePrefix",
-        "yes": "SÍ"
+        "yes": "SÍ",
+        "dont-show-again": "No tornis a mostrar",
+        "ok": "D'acord"
     },
     "button": {
         "add_to_favourites": "Afegeix a preferits",
@@ -56,7 +58,9 @@
         "install": "Instal·la",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Cancel·la la baixada",
+            "continue": "Continua la baixada"
         },
         "remove_from_favourites": "Treu dels preferits",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +71,10 @@
         },
         "unhide_game": "Torna a mostrar el joc",
         "uninstall": "Desinstal·la",
-        "update": "Actualitza"
+        "update": "Actualitza",
+        "remove_from_library": "Suprimeix",
+        "details": "Detalls",
+        "favorites": "Preferit"
     },
     "cloud_save_unsupported": "No suportat",
     "disabled": "Desactivat",
@@ -93,7 +100,8 @@
         "repairing": "S'està reparant"
     },
     "generic": {
-        "error": "Error desconegut"
+        "error": "Error desconegut",
+        "noDescription": "No hi ha descripció disponible!"
     },
     "hours": "Hores",
     "how-long-to-beat": {
@@ -132,7 +140,8 @@
         },
         "playing": {
             "start": "Juga",
-            "stop": "Atura"
+            "stop": "Atura",
+            "update": "Actualitza"
         },
         "saves": {
             "syncing": "S'estan sincronitzant les partides"
@@ -153,7 +162,8 @@
         "title": "Selecciona els components a instal·lar"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Ampolla CrossOver"
     },
     "sideload": {
         "field": {
@@ -192,7 +202,11 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total baixat",
         "uninstalling": "Uninstalling",
-        "updating": "S'està actualitzant el joc"
+        "updating": "S'està actualitzant el joc",
+        "downloading": "S'està baixant",
+        "paused": "Pausat",
+        "playing": "Reproduint",
+        "syncingSaves": "S'estan sincronitzant les partides"
     },
     "submenu": {
         "addShortcut": "Afegeix una drecera",
