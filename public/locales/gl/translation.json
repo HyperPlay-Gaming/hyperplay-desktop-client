@@ -174,7 +174,10 @@
         "login": "Iniciar sesión",
         "sync": "Sincronizar",
         "syncing": "Sincronizando",
-        "unsync": "Desincronizar"
+        "unsync": "Desincronizar",
+        "continue": "Continuar",
+        "download": "Baixar",
+        "update": "Actualizar"
     },
     "controller": {
         "hints": {
@@ -214,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "title_dm": "Director de descarga"
+        "title_dm": "Director de descarga",
+        "ETA": "Tempo estimado"
     },
     "epic": {
         "offline-notification-body": "Os servizos en liña podería non funcionar correctamente xa que os servidores de Epic Games están sen conexión!",
@@ -405,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Abrir",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -468,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Continuar Descarga",
+            "pause": "Parar as descagas"
         }
     },
     "Recent": "Xogado recentemente",
@@ -589,7 +595,8 @@
         "autodxvknvapi": "O coche Instala/Actualiza DXVK-NVAPI en Prefixo",
         "dxvkfpslimit": "FPS extremo (DX9, 10 e 11)",
         "autoLaunchHyperPlay": "Lancha de coche HyperPlay",
-        "steamId": "Carné de identidade de vapor"
+        "steamId": "Carné de identidade de vapor",
+        "msync": "Activar Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -624,7 +631,9 @@
             "log": "Log",
             "other": "Outro",
             "sync": "Gardar-Sincronizar",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Contas",
+            "systemInformation": "Inf_ormación do sistema"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Restabelecer HyperPlay",
@@ -647,17 +656,26 @@
             "cpuDescription": "{{numOfCores}}x {{modelName}}",
             "gogdlVersion": "Gogdl: {{gogdlVersion}}",
             "gpu": "GPU:",
-            "memoryStats": "{{percentUsed}}% Utilizado ({{usedGib}} / {{totalGib}}"
+            "memoryStats": "{{percentUsed}}% Utilizado ({{usedGib}} / {{totalGib}}",
+            "os": "Sistema Operativo",
+            "copyToClipboard": "Copiar no portapapeis"
         },
         "gamesSettings": "Colocacións de xogos",
-        "reset-extension": "Reset Extensión"
+        "reset-extension": "Reset Extensión",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
+        }
     },
     "Settings": "Preferencias",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
         "achievements": "Consecucións",
-        "downloadManager": "Director de descarga"
+        "downloadManager": "Director de descarga",
+        "library": "Biblioteca",
+        "store": "Tenda"
     },
     "status": {
         "installing": "Installing",
@@ -697,7 +715,8 @@
         "logout_confirmation": "Tes certeza que queres pechar a sesión?",
         "manageaccounts": "Manage Accounts",
         "quit": "Saír",
-        "manageStore": "Xestiona tendas"
+        "manageStore": "Xestiona tendas",
+        "logIn": "Acceder"
     },
     "webview": {
         "controls": {
@@ -747,7 +766,8 @@
                         "createNewWallet": "Crea carteira de extensión de MM nova",
                         "orWord": "OR",
                         "title": "Selecto o navegador para importar desde",
-                        "details": "Os navegadores abaixo xa haber MetaMask instalou. Escolle o gostaríache importar desde."
+                        "details": "Os navegadores abaixo xa haber MetaMask instalou. Escolle o gostaríache importar desde.",
+                        "learnMore": "Aprender máis"
                     },
                     "scan": {
                         "details": "Crear un encrypted canle de comunicación. As vosas chaves nunca serán compartidas con HyperPlay.",
@@ -804,7 +824,8 @@
                 "description": "Compracer confirmar a petición de conexión na vosa carteira móbil para proceder.",
                 "title": "Conexión canceled!"
             },
-            "connectAgain": "Conecta outra vez"
+            "connectAgain": "Conecta outra vez",
+            "terms": "Condicións do servicio"
         },
         "viewItem": "Vista {{item}}",
         "accesscodes": {
@@ -831,14 +852,16 @@
         },
         "analyticsOff": "Analytics É apagado",
         "buttons": {
-            "agree": "Estou de acordo"
+            "agree": "Estou de acordo",
+            "noThanks": "Non, grazas"
         },
         "changeWallet": "Swap Conta de carteira",
         "viewMyAccount": "Vista a miña conta",
         "viewPortfolio": "Cartafol de vista",
         "otp": "Un Cronometra Passcode",
         "browserImport": {
-            "appId": "App Id"
+            "appId": "App Id",
+            "profile": "Perfil"
         },
         "currentWallet": "Carteira actual",
         "connectWallet": "Conecta carteira",
@@ -846,8 +869,19 @@
         "syncing": "Syncing...",
         "gamecard": {
             "extracting": "Extraendo...",
-            "installed": "A punto para xogar"
-        }
+            "installed": "A punto para xogar",
+            "paused": "En pausa",
+            "installing": "Descargando...",
+            "distributables": "Instalador Distributables"
+        },
+        "logOut": "Saír",
+        "Sync": "Sincronizar",
+        "discordApp": "Discord",
+        "folder": "Cartafol",
+        "misc": "Nunca",
+        "copyUrl": "Copy URL",
+        "turnAnalyticsOff": "Apagar",
+        "turnAnalyticsOn": "Acender"
     },
     "hyperplayOverlay": {
         "greeting": {
@@ -913,11 +947,14 @@
             "progressTowardsStreak": "Progreso cara a hoxe  streak.",
             "streakCompleted": "Streak Completou! Reclamación as vosas recompensas agora.",
             "streakProgress": "Streak Progreso",
-            "playToStart": "Xogo este xogo para arrancar o voso streak!"
+            "playToStart": "Xogo este xogo para arrancar o voso streak!",
+            "days": "días",
+            "now": "Agora"
         },
         "readyForClaim": "A punto para reclamación",
         "type": {
-            "playstreak": "Xogo Streak"
+            "playstreak": "Xogo Streak",
+            "reputation": "Reputación"
         },
         "View Game": "Xogo de vista",
         "associatedGames": "Xogos asociados",
@@ -927,7 +964,13 @@
         "needMoreAchievements": "Necesitas para ter completado {{percent}}% das consecucións nun destes xogos.",
         "claimFailedMessage": "Compracer tentar unha vez máis. Se aínda non traballa, crear un tícket de apoio da Discordia.",
         "createDiscordTicket": "Tícket de Discordia creada",
-        "notEnoughGas": "Equilibrio de carteira insuficiente para afirmar a vosa recompensa debido a custos de gas. Tentar unha carteira diferente ou replenish isto un antes de tentar novamente."
+        "notEnoughGas": "Equilibrio de carteira insuficiente para afirmar a vosa recompensa debido a custos de gas. Tentar unha carteira diferente ou replenish isto un antes de tentar novamente.",
+        "active": "Activo",
+        "Play": "Reproducir",
+        "points": "Puntos",
+        "signIn": "Rexistro",
+        "sync": "Sincronizar",
+        "reputation": "Reputación"
     },
     "email_subscription": {
         "title": "Grazas Para subscribir!",
@@ -948,7 +991,8 @@
     },
     "notification": {
         "wine-download": {
-            "message": "Montando o default capa de compatibilidade"
+            "message": "Montando o default capa de compatibilidade",
+            "title": "Compatibility Layer"
         }
     },
     "achievements": {
@@ -961,6 +1005,13 @@
     "importGameErrorMessageExecutable": "O xogo Executábel non atopado, importando o xogo non é posíbel",
     "importGameErrorTitle": "Erro de Xogo da importación",
     "gameRelease": {
-        "prototype": "Prototipo"
-    }
+        "prototype": "Prototipo",
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Demo",
+        "main": "Principal"
+    },
+    "ALL": "TODO",
+    "analytics": "Análises",
+    "profile": "Perfil"
 }
