@@ -29,20 +29,29 @@
         "stopInstall": {
             "keepInstalling": "Kuruluma Devam Et",
             "message": "İndirilen dosyaları SAKLAMAK ister misiniz?",
-            "title": "Kurulumu Durdur"
+            "title": "Kurulumu Durdur",
+            "keepFilesMessage": "İptal ettikten sonra indirme dosyalarını tutmak istiyorsanız burada kontrol edin."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Oyunu kaldırmak istiyor musunuz?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Kaldır"
+            "title": "Kaldır",
+            "dlc": "Bu DLC'yi kaldırmak ister misiniz?",
+            "prefix_warning": "Bu oyun için Şarap eki varsayılan ön ektir. Gerçekten silmek istiyorsanız, bunu manuel olarak yapmanız gerekir."
         },
         "update": {
             "message": "Bu oyunun bir güncellemesi var, güncelleme şimdi uygulansın mı?",
-            "title": "Oyunun Güncellenmesi Gerekiyor"
+            "title": "Oyunun Güncellenmesi Gerekiyor",
+            "message-cancel": "Bu oyunu güncelleştirmeden oynamak mümkün değil"
         },
         "wineprefix": "Wine Prefix Klasörünü Seçin",
-        "yes": "EVET"
+        "yes": "EVET",
+        "yesCancel": "Evet, iptal",
+        "aware": "Ben farkındayım",
+        "compability": {
+            "message": "Bu Windows oyunu bir uyumluluk katmanı kullanarak çalışacak. Bazı sorunlarla karşılaşabilirsiniz veya oyun hiç çalışmayabilir."
+        }
     },
     "button": {
         "add_to_favourites": "Favorilere Ekle",
@@ -86,7 +95,9 @@
         "neverPlayed": "Hiç Oynanmadı",
         "platform": "Kurulacak Platform Sürümünü Seç",
         "requirements": "Sistem Gereksinimleri",
-        "totalPlayed": "Oynanan Zaman"
+        "totalPlayed": "Oynanan Zaman",
+        "selectChannelName": "Select Channel Name Name Name Name Name Name Name Name Name Name Name",
+        "dlcs": "DLCs"
     },
     "gamecard": {
         "moving": "Taşınıyor",
@@ -118,7 +129,8 @@
         "path-not-writtable": "Uyarı: yol yazılabilir olmayabilir.",
         "space-after-install": "Kurulumdan Sonra",
         "wineprefix": "WinePrefix",
-        "wineversion": "Wine sürümü"
+        "wineversion": "Wine sürümü",
+        "compatibility-warning": "Bu Windows oyunu bir uyumluluk katmanı kullanarak çalışacak. Deneyiminiz değişebilir."
     },
     "label": {
         "game": {
@@ -186,7 +198,16 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Toplam İndirilen",
         "uninstalling": "Uninstalling",
-        "updating": "Oyun Güncelleniyor"
+        "updating": "Oyun Güncelleniyor",
+        "moving-files": "Move file '{{file}}: {{percent}} ",
+        "extracting": {
+            "cancel": "Cancel Ekstraksiyon",
+            "progress": "Türleme"
+        },
+        "gog-goodie": "Bu oyun ayarlanabilir gibi görünmüyor. https://gog.com/account",
+        "distributables": "Dağıtılabilirler",
+        "goodie": "Yüklemek için değil",
+        "preparing": "Downloading Download, lütfen bekleyin"
     },
     "submenu": {
         "addShortcut": "Kısayol ekle",
@@ -200,6 +221,7 @@
         "removeShortcut": "Kısayolları kaldır",
         "settings": "Ayarlar",
         "store": "Mağaza Sayfası",
-        "verify": "Doğrula ve Onar"
+        "verify": "Doğrula ve Onar",
+        "extraInfo": "Ekstra Info"
     }
 }
