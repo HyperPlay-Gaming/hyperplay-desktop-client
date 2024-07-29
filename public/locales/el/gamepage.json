@@ -51,7 +51,9 @@
         "aware": "Γνωρίζω",
         "compability": {
             "message": "Αυτό το παιχνίδι Windows θα τρέξει χρησιμοποιώντας ένα στρώμα συμβατότητας. Μπορεί να αντιμετωπίσετε κάποια ζητήματα ή το παιχνίδι δεν μπορεί να λειτουργήσει καθόλου."
-        }
+        },
+        "dont-show-again": "Να μην εμφανιστεί ξανά",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Προσθήκη στα Αγαπημένα",
@@ -65,7 +67,9 @@
         "install": "Εγκατάσταση",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Ακύρωση Λήψης",
+            "continue": "Συνέχιση λήψης"
         },
         "remove_from_favourites": "Κατάργηση από τα Αγαπημένα",
         "remove_from_recent": "Remove From Recent",
@@ -76,7 +80,11 @@
         },
         "unhide_game": "Φανέρωση Παιχνιδιού",
         "uninstall": "Απεγκατάσταση",
-        "update": "Ενημέρωση"
+        "update": "Ενημέρωση",
+        "details": "Λεπτομέρειες",
+        "favorites": "Αγαπημένο",
+        "remove_from_library": "Αφαίρεση",
+        "unfavorites": "Αφαίρεση από αγαπημένα"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Απενεργοποιημένο",
@@ -104,7 +112,8 @@
         "repairing": "Επιδιόρθωση"
     },
     "generic": {
-        "error": "Άγνωστο Σφάλμα"
+        "error": "Άγνωστο Σφάλμα",
+        "noDescription": "Δεν υπάρχει διαθέσιμη περιγραφή."
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -138,7 +147,8 @@
         },
         "playing": {
             "start": "Παίξτε τώρα",
-            "stop": "Σε παιχνίδι (Διακοπή)"
+            "stop": "Σε παιχνίδι (Διακοπή)",
+            "update": "Ενημέρωση"
         },
         "saves": {
             "syncing": "Συγχρονισμός save"
@@ -159,7 +169,8 @@
         "title": "Διαλέξτε στοιχεία για εγκατάσταση"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Περιβάλλον"
     },
     "sideload": {
         "field": {
@@ -207,7 +218,11 @@
         "goodie": "Δεν είναι εφικτό",
         "preparing": "Preparing Download, παρακαλώ περιμένετε",
         "gog-goodie": "Αυτό το παιχνίδι δεν φαίνεται να είναι εφικτό. Ελέγξτε το περιεχόμενο downloadable στο Reefgog.com/account",
-        "moving-files": "Κινούμενο αρχείο \"{{file}}\": {{percent}} "
+        "moving-files": "Κινούμενο αρχείο \"{{file}}\": {{percent}} ",
+        "syncingSaves": "Συγχρονισμός save",
+        "playing": "Παίζει",
+        "downloading": "Κατεβαίνει",
+        "paused": "Σε παύση"
     },
     "submenu": {
         "addShortcut": "Προσθήκη συντόμευσης",
