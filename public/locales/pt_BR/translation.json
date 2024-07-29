@@ -594,7 +594,8 @@
         "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo",
         "autoLaunchHyperPlay": "Lançamento automático Hyper Jogar",
         "msync": "Ativar Msync",
-        "dxvkfpslimit": "Limite FPS (DX9, 10 e 11)"
+        "dxvkfpslimit": "Limite FPS (DX9, 10 e 11)",
+        "autoUpdateGames": "Atualizar automaticamente os jogos"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -629,7 +630,9 @@
             "log": "Log",
             "other": "Outros",
             "sync": "Sincronização",
-            "wineExt": "Extensões do Wine"
+            "wineExt": "Extensões do Wine",
+            "accounts": "Contas",
+            "systemInformation": "Informações do sistema"
         },
         "open-config-file": "Abrir arquivo de configuração",
         "reset-hyperplay": "Redefinir HyperPlay",
@@ -645,7 +648,8 @@
             "cpuDescription": "{{numOfCores}}x {{modelName}}",
             "legendaryVersion": "Legendário: {{legendaryVersion}}",
             "gpu": "GPU:",
-            "gpuDriver": "Driver: {{driverVersion}}"
+            "gpuDriver": "Driver: {{driverVersion}}",
+            "copyToClipboard": "Copiar para a área de transferência"
         },
         "reset-extension": "Repor a extensão"
     },
