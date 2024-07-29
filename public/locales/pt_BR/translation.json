@@ -658,9 +658,15 @@
             "osNameFlatpak": "{{osName}} (dentro de Flatpak)",
             "osVersion": "Versão {{versionNumber}}",
             "memory": "Memória:",
-            "memoryStats": "{{percentUsed}}% usado ({{usedGib}} / {{totalGib}}"
+            "memoryStats": "{{percentUsed}}% usado ({{usedGib}} / {{totalGib}}",
+            "os": "Sistema operacional:"
         },
-        "reset-extension": "Repor a extensão"
+        "reset-extension": "Repor a extensão",
+        "wine": {
+            "manager": {
+                "title": "Versões do Wine"
+            }
+        }
     },
     "Settings": "Configurações",
     "sidebar": {
@@ -668,7 +674,8 @@
         "uncollapse": "Mostrar barra lateral",
         "store": "Loja",
         "downloadManager": "Gerenciador de Downloads",
-        "achievements": "Conquistas"
+        "achievements": "Conquistas",
+        "library": "Biblioteca"
     },
     "status": {
         "installing": "Instalando",
@@ -1007,5 +1014,8 @@
             }
         },
         "quests": "Missões"
+    },
+    "sideload": {
+        "warningMessage": "O carregamento lateral de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O carregamento lateral de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos."
     }
 }
