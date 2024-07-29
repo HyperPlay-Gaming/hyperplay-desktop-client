@@ -18,22 +18,22 @@
             "title": "Verificar e Reparar"
         },
         "runexe": {
-            "title": "Selecione o EXE para rodar"
+            "title": "Selecione EXE para executar"
         },
         "select": {
             "button": "Selecione"
         },
         "sideload": {
-            "exe": "Selecione o executável"
+            "exe": "Selecione executável"
         },
         "stopInstall": {
             "keepInstalling": "Continuar a Instalação",
             "message": "Deseja MANTER os arquivos baixados?",
-            "title": "Parar a Instalação",
-            "keepFilesMessage": "Clique aqui se deseja manter os arquivos baixados após cancelar."
+            "title": "Você quer cancelar o download?",
+            "keepFilesMessage": "Marque aqui se deseja manter os arquivos baixados após o cancelamento."
         },
         "uninstall": {
-            "checkbox": "{{newLine}}Remover prefixo: {{prefix}}{{newLine}}Obs.: Isso não pode ser desfeito e também vai remover jogos salvos sem backup",
+            "checkbox": "Remover prefixo: {{prefix}}{{newLine}}Obs.: Isso não pode ser desfeito e também vai remover jogos salvos sem backup.",
             "message": "Deseja desinstalar este jogo?",
             "settingcheckbox": "Apagar configurações e logs{{newLine}}Nota: Isto não pode ser desfeito. Qualquer configuração modificada será esquecida e o log será deletado.",
             "title": "Desinstalar",
