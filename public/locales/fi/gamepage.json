@@ -51,7 +51,9 @@
         "compability": {
             "message": "Tämä Windows-peli toimii yhteensopivuuskerroksen avulla. Saatat kohdata ongelmia tai peli ei ehkä toimi ollenkaan."
         },
-        "yesCancel": "Kyllä, peruutus"
+        "yesCancel": "Kyllä, peruutus",
+        "dont-show-again": "Älä näytä uudelleen",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -65,7 +67,9 @@
         "install": "Asenna",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Peruuta lataus",
+            "continue": "Jatka lataamista"
         },
         "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
@@ -77,7 +81,10 @@
         "unhide_game": "Unhide Game",
         "uninstall": "Poista",
         "update": "Päivitä",
-        "unfavorites": "Epäsuosikki"
+        "unfavorites": "Epäsuosikki",
+        "details": "Yksityiskohdat",
+        "favorites": "Lisää suosikiksi",
+        "remove_from_library": "Poista"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Pois käytöstä",
@@ -105,7 +112,8 @@
         "repairing": "Korjataan"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "Ei kuvausta."
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -139,7 +147,8 @@
         },
         "playing": {
             "start": "Pelaa nyt",
-            "stop": "Pelataan (pysäytä)"
+            "stop": "Pelataan (pysäytä)",
+            "update": "Päivitä"
         },
         "saves": {
             "syncing": "Synkronoidaan tallennuksia"
@@ -160,7 +169,8 @@
         "title": "Valitse asennettavat komponentit"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -208,7 +218,11 @@
             "progress": "Ulkoistaminen"
         },
         "gog-goodie": "Tämä peli ei näytä olevan asennettavissa. Tarkista ladattava sisältö https:/gog.com/account",
-        "goodie": "Ei asennettavissa"
+        "goodie": "Ei asennettavissa",
+        "downloading": "Tor-selaimen lataaminen",
+        "paused": "Pysäytetty",
+        "playing": "Toistaa",
+        "syncingSaves": "Synkronoidaan tallennuksia"
     },
     "submenu": {
         "addShortcut": "Lisää pikakuvake",
