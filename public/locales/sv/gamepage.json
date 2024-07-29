@@ -29,20 +29,29 @@
         "stopInstall": {
             "keepInstalling": "Fortsätt installationen",
             "message": "Vill du behålla nedladdade filer?",
-            "title": "Avbryt installationen"
+            "title": "Avbryt installationen",
+            "keepFilesMessage": "Kontrollera här om du vill behålla nedladdningsfilerna efter avbokning."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Vill du avinstallera spelet?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Avinstallera"
+            "title": "Avinstallera",
+            "dlc": "Vill du avinstallera denna DLC?",
+            "prefix_warning": "Wine prefixet för detta spel är standard prefixet. Om du verkligen vill ta bort det måste du göra det manuellt."
         },
         "update": {
             "message": "Det finns en speluppdatering, uppdatera nu?",
-            "title": "Spelet behöver uppdateras"
+            "title": "Spelet behöver uppdateras",
+            "message-cancel": "Det är inte möjligt att spela detta spel utan att uppdatera"
         },
         "wineprefix": "Ange Wine-prefix mapp",
-        "yes": "Ja"
+        "yes": "Ja",
+        "aware": "Jag är medveten",
+        "compability": {
+            "message": "Detta Windows-spel kommer att köras med ett kompatibilitetslager. Du kan stöta på några problem eller spelet kanske inte fungerar alls."
+        },
+        "yesCancel": "Ja, Avbryt"
     },
     "button": {
         "add_to_favourites": "Lägg till i Favoriter",
@@ -86,7 +95,9 @@
         "neverPlayed": "Aldrig",
         "platform": "Välj plattform för installation",
         "requirements": "System Requirements",
-        "totalPlayed": "Speltid"
+        "totalPlayed": "Speltid",
+        "dlcs": "DLCs",
+        "selectChannelName": "Välj kanal Namnnamn"
     },
     "gamecard": {
         "moving": "Flyttar",
@@ -124,7 +135,8 @@
             "message": "Antifusk stödet är trasigt eller nekat. Spelet kommer inte att fungera. Vill du installera det ändå?",
             "install": "Ja (jag förstår att det inte kommer att fungera)",
             "title": "Antifusk trasigt/nekat"
-        }
+        },
+        "compatibility-warning": "Detta Windows-spel kommer att köras med ett kompatibilitetslager. Din erfarenhet kan variera."
     },
     "label": {
         "game": {
@@ -192,7 +204,16 @@
         "this-game-uses-third-party": "Spelet använder tredjeparts-launcher och stöds ej i nuläget",
         "totalDownloaded": "Nedladdning",
         "uninstalling": "Avinstallerar",
-        "updating": "Updaterar spelet"
+        "updating": "Updaterar spelet",
+        "moving-files": "Flytta filen {{file}}\": {{percent}} ",
+        "distributables": "Installera Distributables",
+        "extracting": {
+            "cancel": "Avbryt extraktion",
+            "progress": "Extrahera"
+        },
+        "gog-goodie": "Detta spel verkar inte vara installerat. Kontrollera nedladdningsbart innehåll på https://gog.com/account",
+        "preparing": "Förbered nedladdning, vänligen vänta",
+        "goodie": "Inte installeras"
     },
     "submenu": {
         "addShortcut": "Skapa genväg",
