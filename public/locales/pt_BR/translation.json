@@ -925,5 +925,8 @@
             "message": "Configurando a camada de compatibilidade padrão"
         }
     },
-    "importGameErrorTitle": "Erro ao importar o jogo"
+    "importGameErrorTitle": "Erro ao importar o jogo",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Você está conectado ao HyperPlay com uma carteira externa. . \n \n Para aprovar transações na sobreposição do HyperPlay, você precisará se conectar ao HyperPlay com a extensão MetaMask.."
+    }
 }
