@@ -921,7 +921,8 @@
     "importGameErrorMessageExecutable": "Executável do jogo não encontrado, não é possível importar o jogo",
     "notification": {
         "wine-download": {
-            "title": "Camada de compatibilidade"
+            "title": "Camada de compatibilidade",
+            "message": "Configurando a camada de compatibilidade padrão"
         }
     },
     "importGameErrorTitle": "Erro ao importar o jogo"
