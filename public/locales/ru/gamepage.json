@@ -51,7 +51,9 @@
         "yesCancel": "Да, отмена",
         "compability": {
             "message": "Эта игра Windows будет запущена с помощью слоя совместимости. Вы можете столкнуться с некоторыми проблемами или игра может вообще не работать."
-        }
+        },
+        "dont-show-again": "Не показывать снова",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Добавить в избранное",
@@ -65,7 +67,9 @@
         "install": "Установить",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Отменить загрузку",
+            "continue": "Продолжить загрузку"
         },
         "remove_from_favourites": "Удалить из избранного",
         "remove_from_recent": "Remove From Recent",
@@ -76,7 +80,11 @@
         },
         "unhide_game": "Показать игру",
         "uninstall": "Удалить",
-        "update": "Обновить"
+        "update": "Обновить",
+        "details": "Подробности",
+        "favorites": "Любимое",
+        "remove_from_library": "Удалить",
+        "unfavorites": "Нелюбимое"
     },
     "cloud_save_unsupported": "Не поддерживается",
     "disabled": "Выключено",
@@ -104,7 +112,8 @@
         "repairing": "Восстановление"
     },
     "generic": {
-        "error": "Неизвестная ошибка"
+        "error": "Неизвестная ошибка",
+        "noDescription": "Описание отсутствует"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -144,7 +153,8 @@
         },
         "playing": {
             "start": "Начать игру",
-            "stop": "Игра запущена (Остановить)"
+            "stop": "Игра запущена (Остановить)",
+            "update": "Обновить"
         },
         "saves": {
             "syncing": "Синхронизация сохранений"
@@ -165,7 +175,8 @@
         "title": "Выбрать компоненты для установки"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Бутылка CrossOver"
     },
     "sideload": {
         "field": {
@@ -212,12 +223,14 @@
         "ubisoft": "Установка Ubisoft",
         "downloading": "Загрузка",
         "extracting": {
-            "cancel": "Отменить экстракцию"
+            "cancel": "Отменить экстракцию",
+            "progress": "Извлечение"
         },
         "gog-goodie": "Кажется, эту игру нельзя установить. Проверьте загружаемый контент на https://gog.com/account",
         "goodie": "Не устанавливается",
         "preparing": "Скачать, пожалуйста, подождите",
-        "distributables": "Установка распределенных"
+        "distributables": "Установка распределенных",
+        "paused": "Пауза"
     },
     "submenu": {
         "addShortcut": "Создать ярлык",
@@ -231,6 +244,7 @@
         "removeShortcut": "Удалить ярлыки",
         "settings": "Настройки",
         "store": "Страница в магазине",
-        "verify": "Проверить и восстановить"
+        "verify": "Проверить и восстановить",
+        "extraInfo": "Дополнительная информация"
     }
 }
