@@ -739,7 +739,9 @@
                         "title": "Selecione o navegador do qual importar",
                         "useRecoveryPhrase": "Acesso com a frase secreta de recuperação",
                         "cantFindProfile": "Não é possível encontrar o perfil do seu navegador?",
-                        "learnMore": "Saiba mais"
+                        "learnMore": "Saiba mais",
+                        "useRecoveryPhraseInfo": "Este recurso é recomendado para usuários e desenvolvedores avançados. Sua frase de recuperação secreta é armazenada localmente em MetaMask e nunca compartilhada com HyperPlay.",
+                        "orWord": "OU"
                     }
                 },
                 "pleaseConnect": "Conecte sua carteira ou baixe o aplicativo móvel Netmask para obter\n        iniciado:",
@@ -823,7 +825,9 @@
         "linkSteamAccountDescription": "Inicie sessão no Steam para ligar a sua conta do HyperPlay.",
         "logOut": "Sair",
         "syncing": "Sincronizando...",
-        "Sync": "Sincronizar"
+        "Sync": "Sincronizar",
+        "viewMyAccount": "Ver minha conta",
+        "viewItem": "Ver {{item}}"
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -911,5 +915,6 @@
         "prototype": "Protótipo",
         "main": "Principal"
     },
-    "exit_game": "Sair do jogo"
+    "exit_game": "Sair do jogo",
+    "importGameErrorMessage": "Não uma pasta de jogo válida, o jogo de importação não é possível"
 }
