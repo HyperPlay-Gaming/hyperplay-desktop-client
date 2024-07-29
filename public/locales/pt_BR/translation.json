@@ -2,7 +2,7 @@
     "accessibility": {
         "actions_font_family_no_default": "Família da fonte da ação (padrão: ",
         "all_tiles_in_color": "Mostrar quadrados dos jogos coloridos",
-        "content_font_family_no_default": "Tipo de letra do conteúdo (Pradrão: ",
+        "content_font_family_no_default": "Tipo de letra do conteúdo (Padrão: ",
         "fonts": "Fontes",
         "title": "Acessibilidade",
         "zoom": "Zoom"
@@ -11,10 +11,10 @@
     "All": "Todos",
     "anticheat": {
         "anticheats": "Anti-cheats",
-        "may_not_work": "Pode não funcionar devido ao suporte anti-cheat negado ou quebrado.",
+        "may_not_work": "Pode não funcionar devido ao suporte anti-cheat não-funcional ou quebrado.",
         "reference": "Referência",
-        "source": "Source",
-        "status": "Status",
+        "source": "Fonte",
+        "status": "Situação",
         "title": "Este jogo inclui software anticheat"
     },
     "box": {
@@ -42,7 +42,7 @@
             },
             "cx-bottle-not-found": {
                 "message": "Não é posível iniciar, a pacote CrossOver \"{{bottle_name}}\" não existe!",
-                "title": "Registro Cross Over não encontrado"
+                "title": "Garrafa CrossOver não encontrada"
             },
             "diskspace": {
                 "message": "Sem espaço suficiente disponível no disco",
@@ -78,7 +78,11 @@
                 "message": "O Winetricks retornou o seguinte erro durante a execução:{{newLine}}{{error}}",
                 "title": "Erro do Winetricks"
             },
-            "moving": "Erro ao mover o jogo {{error}}"
+            "moving": "Erro ao mover o jogo {{error}}",
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "A instalação do Ubisoft Connect no prefixo do jogo falhou. Confira nossa página wiki em https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para instalá-lo manualmente."
+            }
         },
         "info": {
             "update": {
@@ -108,7 +112,7 @@
             }
         },
         "runexe": {
-            "title": "Selecione o EXE para rodar"
+            "title": "Selecione EXE para executar"
         },
         "select": {
             "button": "Selecione",
@@ -144,13 +148,25 @@
             "title": "Aviso",
             "wine-change": {
                 "title": "Wine não encontrado!",
-                "message": "Não foi possível encontrar a versão do Wine selecionada para rodar este título ({{selectedWine}}). {{newline}} Encontramos outro, deseja continuar a iniciar usando {{foundWine}}? ?"
+                "message": "Não foi possível encontrar a versão do Wine selecionada para rodar este título ({{selectedWine}}). {{newline}} Encontramos outro, deseja continuar a iniciar usando {{foundWine}}? ?",
+                "message-gptk": "Para ser capaz de rodar jogos usando o Gaming Porting Toolkit da Apple é necessário atualizar o macOS para a versão 14 (Sonoma) ou superior. {{newline}} Uma versão do Wine foi encontrado no seu sistema, deseja continuar rodando o jogo usando {{foundWine}} ?",
+                "title-gptk": "Não compatível com Game Porting Toolkit. "
+            },
+            "rosetta": {
+                "message": "O HyperPlay requer Rosetta para executar corretamente no macOS com chips Apple Silicon. Por favor, instale-o no terminal macOS usando o seguinte comando: \"softwareupdate --install-rosetta\" e reinicie o HyperPlay. ",
+                "title": "Sistema Rosetta não encontrado"
             }
         },
         "wineprefix": "Escolha o Caminho do Prefixo Wine",
         "yes": "SIM",
         "dontShowAgain": "Não mostrar novamente",
-        "choose-nile-binary": "Selecione o binário do Nilo"
+        "choose-nile-binary": "Selecione o binário do Nilo",
+        "reset-extension": {
+            "question": {
+                "message": "Tem certeza de que deseja redefinir a Extensão MetaMask?",
+                "title": "Repor a extensão"
+            }
+        }
     },
     "button": {
         "cancel": "Cancelar",
@@ -160,7 +176,8 @@
         "syncing": "Sincronizando",
         "unsync": "Dessincronizar",
         "continue": "Continuar",
-        "update": "Atualizar"
+        "update": "Atualizar",
+        "download": "Baixar"
     },
     "controller": {
         "hints": {
@@ -200,7 +217,8 @@
             "type": "Tipo"
         },
         "title": "Downloads",
-        "ETA": "Tempo estimado"
+        "ETA": "Tempo estimado",
+        "title_dm": "Gerenciador de Downloads"
     },
     "epic": {
         "offline-notification-body": "Serviços online podem não funcionar totalmente, os servidores da Epic Games estão offline!",
@@ -822,5 +840,18 @@
     },
     "amazon": "Amazonas",
     "Amazon Games": "Amazon Games",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "dlcs": {
+        "label": "Selecione DLCs para instalar:"
+    },
+    "achievements": {
+        "progress": {
+            "minted": "em cadeia",
+            "notMinted": "fora da cadeia"
+        }
+    },
+    "back_to_game": "Voltar ao jogo",
+    "email_subscription": {
+        "subtitle": "Agora você faz parte de nossa comunidade, e estamos animados em compartilhar atualizações e insights valiosos com você."
+    }
 }
