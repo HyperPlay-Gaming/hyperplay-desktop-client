@@ -73,7 +73,10 @@
                 "title": "Ubisoft Connect",
                 "message": "Installation af Ubisoft Connect i spillet prefix mislykkedes. Tjek vores wikiside på https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-og-Mac for at installere det maunally."
             },
-            "moving": "Fejl Flyttespil {{error}}"
+            "moving": "Fejl Flyttespil {{error}}",
+            "generic": {
+                "title": "Vælg EXE til at køre"
+            }
         },
         "info": {
             "update": {
@@ -159,7 +162,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "Er du sikker på, at du vil nulstille HyperPlay? Dette fjerner alle indstillinger og Caching, men fjerner ikke dine installerede spil eller dine Epic legitimationsoplysninger. Bærbare versioner (AppImage, WinPortable, ...) af HyperPlay skal genstartes manuelt bagefter."
+                "message": "Er du sikker på, at du vil nulstille HyperPlay? Dette fjerner alle indstillinger og Caching, men fjerner ikke dine installerede spil eller dine Epic legitimationsoplysninger. Bærbare versioner (AppImage, WinPortable, ...) af HyperPlay skal genstartes manuelt bagefter.",
+                "title": "Nulstil HyperPlay"
             }
         }
     },
@@ -209,7 +213,8 @@
             "message": "Wine bruger det, der kaldes en WINEPREFIX til at indkapsle Windows-applikationer. Dette præfiks indeholder Wine-konfigurationsfilerne og en gengivelse af filhierarkiet af C: (hoveddisken på et Windows OS). I denne gengivelse af C:-drevet gemmes dine spillagringsfiler og afhængigheder installeret via winetricks."
         },
         "wine-path-none-found": "Ingen Vin version blev fundet, download en fra Kompatibilitetschefen",
-        "wine-path-invalid": "Vin Path er ugyldig, skal du vælge en anden."
+        "wine-path-invalid": "Vin Path er ugyldig, skal du vælge en anden.",
+        "warning": "Advarsel"
     },
     "button": {
         "go_to_library": "Gå til biblioteket",
@@ -217,7 +222,10 @@
         "syncing": "Synkroniserer",
         "unsync": "Fjern synkronisering",
         "login": "Log ind",
-        "cancel": "Afbestille"
+        "cancel": "Afbestille",
+        "download": "Hent",
+        "update": "Opdater",
+        "continue": "Fortsæt"
     },
     "help": {
         "esync": "Esync sigter mod at reducere vinserveroverhead i CPU-intensive spil. Aktivering kan forbedre ydeevnen.",
@@ -432,7 +440,8 @@
         "alt-nile-bin": "Vælg en alternativ Nile Binær",
         "steamId": "Steam-id",
         "autodxvknvapi": "Automatisk installation/Opdater DXVK-NVAPI på Prefix",
-        "autoLaunchHyperPlay": "Auto Launch Hyper Afspil spil"
+        "autoLaunchHyperPlay": "Auto Launch Hyper Afspil spil",
+        "msync": "Aktiver Esync"
     },
     "wine": {
         "manager": {
@@ -456,7 +465,8 @@
             "list": "Skift til et listelayout"
         },
         "alphabeticalAZ": "Alfabetisk A-Z",
-        "alphabeticalZA": "Alfabetisk Z-A"
+        "alphabeticalZA": "Alfabetisk Z-A",
+        "label": "Bibliotek"
     },
     "settings": {
         "clear-cache": "Ryd heroisk cache",
@@ -491,7 +501,9 @@
             "general": "Generel",
             "log": "Log",
             "other": "Andet",
-            "sync": "Gem-synkronisering"
+            "sync": "Gem-synkronisering",
+            "accounts": "Konti",
+            "systemInformation": "System information"
         },
         "battlEyeRuntime": {
             "installing": "Installerer BattlEye Runtime...",
@@ -513,10 +525,17 @@
             "cpu": "CPU:",
             "cpuDescription": "{{numOfCores}}x {{modelName}}",
             "gogdlVersion": "Gogdl: {{gogdlVersion}}",
-            "gpu": "GPU:"
+            "gpu": "GPU:",
+            "os": "Operativsystem",
+            "copyToClipboard": "Kopier til udklipsholder"
         },
         "gamesSettings": "Spil Indstillinger",
-        "default_hint": "Ændringer i dette afsnit gælder kun som standardværdier, når du installerer spil. Hvis du vil ændre indstillingerne for et allerede installeret spil, skal du bruge knappen Indstillinger i spillets side."
+        "default_hint": "Ændringer i dette afsnit gælder kun som standardværdier, når du installerer spil. Hvis du vil ændre indstillingerne for et allerede installeret spil, skal du bruge knappen Indstillinger i spillets side.",
+        "wine": {
+            "manager": {
+                "title": "Vinchef"
+            }
+        }
     },
     "title": {
         "allUnreal": "Uvirkeligt - Alt",
@@ -548,7 +567,9 @@
             "play_game": "Spille spil",
             "scroll": "Rul",
             "space": "Plads",
-            "close_options": "Tæt på muligheder"
+            "close_options": "Tæt på muligheder",
+            "select": "Vælg",
+            "options": "Indstillinger"
         }
     },
     "Epic Games": "Episke spil",
@@ -631,7 +652,9 @@
         "collapse": "Skjul sidebjælken",
         "uncollapse": "Luk sidebjælken ud",
         "achievements": "Opnåelser",
-        "downloadManager": "Download Manager"
+        "downloadManager": "Download Manager",
+        "library": "Bibliotek",
+        "store": "Marketplace"
     },
     "userselector": {
         "discord": "Uenighed",
@@ -639,7 +662,9 @@
         "logout_confirmation": "Er du sikker på, at du vil logge ud?",
         "manageaccounts": "Administrer konti",
         "quit": "Afslut",
-        "manageStore": "Administrer butikker"
+        "manageStore": "Administrer butikker",
+        "logging_out": "Logger ud",
+        "logIn": "Log ind"
     },
     "anticheat": {
         "anticheats": "Anticheats",
@@ -722,7 +747,8 @@
         "offline": "Offline",
         "retry-in": "Prøver igen om ... {{seconds}} sekunder",
         "retrying": "Prøver igen",
-        "offline-retry-in": "Offline. Retning i {{seconds}} sekunder."
+        "offline-retry-in": "Offline. Retning i {{seconds}} sekunder.",
+        "ignore": "Ignorer"
     },
     "Other": "Andet",
     "queue": {
@@ -734,7 +760,8 @@
             "canceled": "Annulleret",
             "empty": "Intet at downloade",
             "remove": "Fjern fra downloads",
-            "resume": "Genop download"
+            "resume": "Genop download",
+            "pause": "Sæt downloads på pause"
         }
     },
     "add_game": "Tilføj spil",
@@ -799,7 +826,8 @@
                             "details": "Tegnebøger bruges til at sende, modtage, gemme og vise digitale aktiver som tokens og NFT'er."
                         },
                         "createWalletDescription": "Klik på \"Opret en tegnebog\" nedenfor, hvis du ikke har en tegnebog eller ønsker at oprette en ny:",
-                        "title": "Hvad er en tegnebog?"
+                        "title": "Hvad er en tegnebog?",
+                        "skip": "Spring over indtil videre"
                     },
                     "import": {
                         "details": "De browsere nedenfor allerede har MetaMask installeret. Vælg den, du gerne vil importere fra.",
@@ -807,7 +835,9 @@
                         "title": "Vælg browseren for at importere fra",
                         "useRecoveryPhrase": "Import ved hjælp af Secret Recovery-sætningen",
                         "useRecoveryPhraseInfo": "Denne funktion anbefales til avancerede brugere og udviklere. Din hemmelige opsving sætning gemmes lokalt i MetaMask og aldrig delt med HyperPlay.",
-                        "createNewWallet": "Opret ny MM forlænger tegnebog"
+                        "createNewWallet": "Opret ny MM forlænger tegnebog",
+                        "learnMore": "Mere info",
+                        "orWord": "ELLER"
                     },
                     "scan": {
                         "dontHaveWallet": "Har du ikke en tegnebog?",
@@ -850,7 +880,8 @@
                 },
                 "title": "Velkommen til Hyper Afspil Tidlig adgang!"
             },
-            "connectAgain": "Tilslut igen"
+            "connectAgain": "Tilslut igen",
+            "terms": "Vilkår for tjeneste"
         },
         "achievements": {
             "freeMints": "Gratis Mints",
@@ -880,19 +911,33 @@
         "viewItem": "Udsigt {{item}}",
         "viewPortfolio": "Se portefølje",
         "buttons": {
-            "agree": "Jeg accepterer"
+            "agree": "Jeg accepterer",
+            "noThanks": "Nej tak"
         },
         "connectWallet": "Tilslut tegnebog",
         "analyticsOff": "Analytics slukkes",
         "browserImport": {
-            "appId": "App Id"
+            "appId": "App Id",
+            "profile": "Profil"
         },
         "gamecard": {
             "extracting": "Uddrag...",
-            "installed": "Klar til at spille"
+            "installed": "Klar til at spille",
+            "installing": "Downloader...",
+            "paused": "Pause",
+            "distributables": "Installation af Distributables"
         },
         "currentWallet": "Nuværende tegnebog",
-        "otp": "Et tidspaskode"
+        "otp": "Et tidspaskode",
+        "turnAnalyticsOff": "Slå fra",
+        "misc": "Aldrig",
+        "logOut": "Log ud",
+        "copyUrl": "Copy URL",
+        "discordApp": "Uenighed",
+        "folder": "Mappe",
+        "turnAnalyticsOn": "Slå til",
+        "Sync": "Synkronisering",
+        "syncing": "Synkroniserer..."
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -951,12 +996,15 @@
             "playToStart": "Spil dette spil for at starte din stribe!",
             "progressTowardsStreak": "fremskridt mod dagens striber.",
             "streakCompleted": "Streak afsluttet! Gør krav på dine belønninger nu.",
-            "streakProgress": "Streak fremgang"
+            "streakProgress": "Streak fremgang",
+            "days": "dage",
+            "now": "Nu"
         },
         "reward": "Belønningsfordele",
         "readyForClaim": "Klar til krav",
         "type": {
-            "playstreak": "Spil Streak"
+            "playstreak": "Spil Streak",
+            "reputation": "Omdømme"
         },
         "View Game": "Vis spil",
         "claimFailed": "Krav mislykkedes",
@@ -964,12 +1012,20 @@
         "createDiscordTicket": "Oprettet Discord billet",
         "notEnoughGas": "Utilstrækkelig tegnebogsbalance til at kræve din belønning på grund af gasgebyrer. Prøv en anden tegnebog eller genopfylde denne, før du tager hånd om det.",
         "claimed": "Krav til krav",
-        "quests": "Quests"
+        "quests": "Quests",
+        "reputation": "Omdømme",
+        "active": "Aktiv",
+        "Play": "Afspil",
+        "signIn": "Log ind",
+        "sync": "Synkronisering",
+        "connectSteamAccount": "Forbind team-konto",
+        "points": "Punkter"
     },
     "importGameErrorMessageExecutable": "Spil spil Udførelse ikke fundet, import af spil er ikke muligt",
     "exit_game": "Afslut spil",
     "sideload": {
-        "warningMessage": "Side-loading et spil er en funktion beregnet til udviklere og erfarne power brugere. Ved at indlæse en installatør, der indeholder malware, kunne gå på kompromis med din computer og føre til tyveri af midler."
+        "warningMessage": "Side-loading et spil er en funktion beregnet til udviklere og erfarne power brugere. Ved at indlæse en installatør, der indeholder malware, kunne gå på kompromis med din computer og føre til tyveri af midler.",
+        "warningTitle": "Vigtigt"
     },
     "email_subscription": {
         "subtitle": "Du er nu en del af vores fællesskab, og vi glæder os til at dele værdifulde opdateringer og indsigter med dig.",
@@ -1003,6 +1059,13 @@
     },
     "importGameErrorMessage": "Ikke en gyldig spilmappe, import af spil er ikke muligt",
     "gameRelease": {
-        "prototype": "Prototype"
-    }
+        "prototype": "Prototype",
+        "alpha": "Alpha",
+        "demo": "Demo",
+        "beta": "Beta",
+        "main": "Hovedbog"
+    },
+    "profile": "Profil",
+    "ALL": "ALLE",
+    "analytics": "Analyser"
 }
