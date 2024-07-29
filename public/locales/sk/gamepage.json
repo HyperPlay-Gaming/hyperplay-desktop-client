@@ -51,7 +51,9 @@
         "compability": {
             "message": "Táto Windows hra spustí pomocou kompatibility vrstvy. Môžete sa stretnúť s niektorými problémami alebo hra nemusí fungovať vôbec."
         },
-        "yesCancel": "Áno, zrušiť"
+        "yesCancel": "Áno, zrušiť",
+        "dont-show-again": "Znovu nezobrazovat",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Pridať do obľúbených",
@@ -65,7 +67,9 @@
         "install": "Inštalácia",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Zrušiť sťahovanie",
+            "continue": "Pokračovať v sťahovaní"
         },
         "remove_from_favourites": "Odstrániť z obľúbených",
         "remove_from_recent": "Remove From Recent",
@@ -77,7 +81,10 @@
         "unhide_game": "Odkryť hru",
         "uninstall": "Odinštalovať",
         "update": "Aktualizovať",
-        "unfavorites": "Unfavorit"
+        "unfavorites": "Unfavorit",
+        "details": "Podrobnosti",
+        "favorites": "Obľúbené",
+        "remove_from_library": "Odstrániť"
     },
     "cloud_save_unsupported": "Nepodporované",
     "disabled": "Zakázané",
@@ -105,7 +112,8 @@
         "repairing": "Oprava"
     },
     "generic": {
-        "error": "Neznáma chyba"
+        "error": "Neznáma chyba",
+        "noDescription": "Popis nie je dostupný."
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -139,7 +147,8 @@
         },
         "playing": {
             "start": "Hrať teraz",
-            "stop": "Prehráva sa (Stop)"
+            "stop": "Prehráva sa (Stop)",
+            "update": "Aktualizovať"
         },
         "saves": {
             "syncing": "Synchronizácia uloženia"
@@ -160,7 +169,8 @@
         "title": "Vyberte komponenty na inštaláciu"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -208,7 +218,11 @@
             "progress": "Extrahovanie"
         },
         "gog-goodie": "Táto hra sa nezdá byť inštalovaná. Skontrolujte downloadable obsah na https://gog.com/account",
-        "goodie": "Nie je inštalovať"
+        "goodie": "Nie je inštalovať",
+        "paused": "Pozastavené",
+        "syncingSaves": "Synchronizácia uloženia",
+        "playing": "Prehrávané",
+        "downloading": "Sťahovanie"
     },
     "submenu": {
         "addShortcut": "Pridať skratku",
