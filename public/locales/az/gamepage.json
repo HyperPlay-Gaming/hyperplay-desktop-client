@@ -29,21 +29,30 @@
         "stopInstall": {
             "keepInstalling": "Quraşdırmağa davam edin",
             "message": "Endirilmiş faylları SAXLAMAQ istəyirsiniz?",
-            "title": "Quraşdırmanı dayandırın"
+            "title": "Quraşdırmanı dayandırın",
+            "keepFilesMessage": "Qeydiyyatdan sonra download faylları saxlamaq istəyirsinizsə buraya baxın."
         },
         "uninstall": {
             "checkbox": "Siz də prefiksi silmək istərdinizmi? Bu geri qaytarıla bilməz.",
             "checkbox_prefix": "Prefiks",
             "message": "Bu oyunu silmək istəyirsiniz?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Silin"
+            "title": "Silin",
+            "dlc": "Bu DLC yükləmək istəyirsiniz?",
+            "prefix_warning": "Bu oyun üçün Wine önfix default önfix edir. Siz haqqında onu silmək istəyirsinizsə, bunu eləcə etmək lazımdır."
         },
         "update": {
             "message": "Bu oyunun yeniləməsi var, yeniləmə indi tətbiq edilsin?",
-            "title": "Oyun yeniləməyə ehtiyacı var"
+            "title": "Oyun yeniləməyə ehtiyacı var",
+            "message-cancel": "Bu oyun oynamaq mümkün deyil"
         },
         "wineprefix": "WinePrefix Qovluğunu seçin",
-        "yes": "HƏ"
+        "yes": "HƏ",
+        "yesCancel": "Böyük",
+        "aware": "Qeyd",
+        "compability": {
+            "message": "Bu Windows oyun uyğunluq kağızı istifadə edəcək. Siz sənaye və ya oyun bütün işləyə bilər."
+        }
     },
     "button": {
         "add_to_favourites": "Sevimlilərə əlavə edin",
@@ -68,7 +77,8 @@
         },
         "unhide_game": "Oyunu Gizlət",
         "uninstall": "Silin",
-        "update": "Yeniləyin"
+        "update": "Yeniləyin",
+        "unfavorites": "Tarix"
     },
     "cloud_save_unsupported": "Dəstəklənmir",
     "disabled": "Əlil",
@@ -87,14 +97,17 @@
         "neverPlayed": "Heç vaxt",
         "platform": "Quraşdırmaq üçün Platforma Versiyasını seçin",
         "requirements": "Sistem Tələbləri",
-        "totalPlayed": "Oynanan Vaxt"
+        "totalPlayed": "Oynanan Vaxt",
+        "dlcs": "Qalereya",
+        "selectChannelName": "Kanal seçin Ad Soyad"
     },
     "gamecard": {
         "moving": "Hərəkət edir",
         "repairing": "Təmir"
     },
     "generic": {
-        "error": "Naməlum xəta"
+        "error": "Naməlum xəta",
+        "noDescription": "Xüsusi mövcuddur"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -119,7 +132,8 @@
         "path-not-writtable": "Xəbərdarlıq: yol yazıla bilən olmaya bilər.",
         "space-after-install": "Quraşdırıldıqdan sonra",
         "wineprefix": "WinePrefiks",
-        "wineversion": "Şərab versiyası"
+        "wineversion": "Şərab versiyası",
+        "compatibility-warning": "Bu Windows oyun uyğunluq kağızı istifadə edəcək. Sizin təcrübə dəyişiklik ola bilər."
     },
     "label": {
         "game": {
@@ -187,7 +201,17 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Toplam Endirilib",
         "uninstalling": "Uninstalling",
-        "updating": "Oyun Yenilənir"
+        "updating": "Oyun Yenilənir",
+        "preparing": "İndirin hazırlanması, baxın",
+        "extracting": {
+            "cancel": "Cancel",
+            "progress": "Ümumi"
+        },
+        "moving-files": "\"{{file}}\": {{percent}} ",
+        "distributables": "Dağlıqları",
+        "playing": "Oyuncaq",
+        "gog-goodie": "Bu oyun yüklemek mümkün deyil. https://gog.com/account",
+        "goodie": "Daxil ol"
     },
     "submenu": {
         "addShortcut": "Qısayol əlavə edin",
@@ -201,6 +225,7 @@
         "removeShortcut": "Qısayolları silin",
         "settings": "Parametrlər",
         "store": "Mağaza Səhifəsi",
-        "verify": "Doğrulayın və Təmir edin"
+        "verify": "Doğrulayın və Təmir edin",
+        "extraInfo": "Qeydiyyat"
     }
 }
