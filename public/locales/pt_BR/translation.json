@@ -647,17 +647,20 @@
             "gpuWithNumber": "GPU {{number}}:",
             "cpu": "CPU:",
             "cpuDescription": "{{numOfCores}}x {{modelName}}",
-            "legendaryVersion": "Legendário: {{legendaryVersion}}",
+            "legendaryVersion": "Legendary: {{legendaryVersion}}",
             "gpu": "GPU:",
             "gpuDriver": "Driver: {{driverVersion}}",
-            "copyToClipboard": "Copiar para a área de transferência"
+            "copyToClipboard": "Copiar para a área de transferência",
+            "steamDeck": "Steam Deck"
         },
         "reset-extension": "Repor a extensão"
     },
     "Settings": "Configurações",
     "sidebar": {
         "collapse": "Recolher barra lateral",
-        "uncollapse": "Mostrar barra lateral"
+        "uncollapse": "Mostrar barra lateral",
+        "store": "Loja",
+        "downloadManager": "Gerenciador de Downloads"
     },
     "status": {
         "installing": "Instalando",
