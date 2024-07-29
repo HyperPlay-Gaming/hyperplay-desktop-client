@@ -1,6 +1,7 @@
 {
     "button": {
-        "login": "Prijava"
+        "login": "Prijava",
+        "loading": "Učitavanje"
     },
     "message": {
         "part1": "Ukoliko se želite prijaviti i instalirati svoje igre, morate slijediti sljedeće korake:",
