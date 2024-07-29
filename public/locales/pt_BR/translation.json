@@ -811,8 +811,13 @@
         },
         "connectWallet": "Conecte a carteira",
         "gamecard": {
-            "distributables": "Instalação de..."
-        }
+            "distributables": "Instalação de...",
+            "extracting": "Extraindo...",
+            "installed": "Pronto para jogar"
+        },
+        "linkSteamAccountTitle": "Conta Steam Link",
+        "linkSteamAccountCta": "Ir para o Steam",
+        "linkSteamAccountDescription": "Inicie sessão no Steam para ligar a sua conta do HyperPlay."
     },
     "hyperplayOverlay": {
         "chainRequest": {
