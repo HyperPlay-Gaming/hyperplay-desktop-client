@@ -715,7 +715,8 @@
         "logout_confirmation": "Tem certeza que deseja desconectar da sua conta?",
         "manageaccounts": "Gerenciar Contas",
         "quit": "Sair",
-        "logIn": "Entrar"
+        "logIn": "Entrar",
+        "manageStore": "Gerenciar lojas"
     },
     "webview": {
         "controls": {
