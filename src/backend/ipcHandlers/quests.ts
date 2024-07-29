@@ -69,8 +69,8 @@ ipcMain.handle('getG7Credits', async () => {
   return response.credits.toString()
 })
 
-ipcMain.handle('getG7TaskCredits', async (e, taskId) => {
-  const url = `${DEV_PORTAL_URL}api/v1/game7/task/${taskId}/credits`
+ipcMain.handle('getExternalTaskCredits', async (e, rewardId) => {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/amount`
   const response = (await fetchWithCookie({ url, method: 'GET' })) as {
     credits: number
   }

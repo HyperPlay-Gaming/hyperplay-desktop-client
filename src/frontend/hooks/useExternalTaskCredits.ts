@@ -1,12 +1,12 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 
-export default function useGetG7TaskCredits(taskId: string) {
+export function useGetExternalTaskCredits(rewardId: string) {
   const queryClient = useQueryClient()
-  const queryKey = `useGetG7TaskCredits`
+  const queryKey = `useGetExternalTaskCredits:${rewardId}`
   const query = useQuery<string>({
     queryKey: [queryKey],
     queryFn: async () => {
-      const response = await window.api.getG7TaskCredits(taskId)
+      const response = await window.api.getExternalTaskCredits(rewardId)
       if (!response) return ''
       return response
     },

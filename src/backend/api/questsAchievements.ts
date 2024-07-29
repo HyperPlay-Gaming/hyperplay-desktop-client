@@ -50,5 +50,5 @@ export const resyncExternalTask = async (rewardId: string) =>
 
 export const getG7Credits = async () => ipcRenderer.invoke('getG7Credits')
 
-export const getG7TaskCredits = async (taskId: string) =>
-  ipcRenderer.invoke('getG7TaskCredits', taskId)
+export const getExternalTaskCredits = async (rewardId: string) =>
+  ipcRenderer.invoke('getExternalTaskCredits', rewardId)
