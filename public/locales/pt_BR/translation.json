@@ -863,5 +863,13 @@
             "single": "Há uma atualização pronta para {{gameName}}.",
             "multiple": "{{gameName}} e outros jogos estão prontos para atualizar."
         }
-    }
+    },
+    "gameRelease": {
+        "beta": "Beta",
+        "demo": "Demonstração",
+        "alpha": "Alpha",
+        "prototype": "Protótipo",
+        "main": "Principal"
+    },
+    "exit_game": "Sair do jogo"
 }
