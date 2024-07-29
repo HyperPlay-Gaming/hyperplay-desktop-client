@@ -739,7 +739,7 @@
                         "title": "Selecione o navegador do qual importar",
                         "useRecoveryPhrase": "Acesso com a frase secreta de recuperação",
                         "cantFindProfile": "Não é possível encontrar o perfil do seu navegador?",
-                        "learnMore": "Saiba mais",
+                        "learnMore": "Saiba mais.",
                         "useRecoveryPhraseInfo": "Este recurso é recomendado para usuários e desenvolvedores avançados. Sua frase de recuperação secreta é armazenada localmente em MetaMask e nunca compartilhada com HyperPlay.",
                         "orWord": "OU"
                     }
