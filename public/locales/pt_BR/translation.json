@@ -812,7 +812,7 @@
         },
         "connectWallet": "Conecte a carteira",
         "gamecard": {
-            "distributables": "Instalação de...",
+            "distributables": "Instalando dependências...",
             "extracting": "Extraindo...",
             "installed": "Pronto para jogar",
             "installing": "Baixando...",
