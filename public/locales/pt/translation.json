@@ -78,7 +78,11 @@
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
             },
-            "moving": "erro ao mover o jogo {{error}}"
+            "moving": "erro ao mover o jogo {{error}}",
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "A instalação do Ubisoft Connect no prefix do jogo falhou. Cheque essa pagina https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para saber como instalar manualmente."
+            }
         },
         "info": {
             "update": {
@@ -144,13 +148,25 @@
             "title": "Warning",
             "wine-change": {
                 "message": "Não foi possível encontrar a versão selecionada do Wine ({{selectedWine}}. {{newline}} Encontramos outra versão, deseja continuar usando {{foundWine}} ?",
-                "title": "Wine não encontrado!"
+                "title": "Wine não encontrado!",
+                "title-gptk": "Não compatível com Game Porting Toolkit. ",
+                "message-gptk": "Para ser capaz de rodar jogos usando o Gaming Porting Toolkit da Apple é necessário atualizar o macOS para a versão 14 (Sonoma) ou superior. {{newline}} Uma versão do Wine foi encontrado no seu sistema, deseja continuar rodando o jogo usando {{foundWine}} ?"
+            },
+            "rosetta": {
+                "title": "Sistema Rosetta não encontrado",
+                "message": "HyperPlay querer que o sistema Rosetta esteja instalado para funcionar corretamente em macOS com chips da Apple. Por favor instale-o a partir do terminal do macOS usando o seguinte command: \"softwareupdate --install-rosetta\". Em seguida, reinicie o HyperPlay. "
             }
         },
         "wineprefix": "Escolha a pasta com o Prefixo Wine",
         "yes": "SIM",
         "dontShowAgain": "Não mostrar novamente",
-        "choose-nile-binary": "Selecione o binário do Nilo"
+        "choose-nile-binary": "Selecione o binário do Nilo",
+        "reset-extension": {
+            "question": {
+                "message": "Tem certeza de que quer Reiniciar a Extenção MetaMask?",
+                "title": "Reiniciar Extensão"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -160,7 +176,8 @@
         "syncing": "Sincronizando",
         "unsync": "Dessincronizar",
         "download": "Download",
-        "continue": "Continuar"
+        "continue": "Continuar",
+        "update": "Atualizar"
     },
     "controller": {
         "hints": {
@@ -200,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Tempo Estimado"
+        "ETA": "Tempo Estimado",
+        "title_dm": "Gerenciador de Downloads"
     },
     "epic": {
         "offline-notification-body": "Serviços online talvez não funcionem completamente enquanto os servidores Epic Games estão offline!",
@@ -824,5 +842,25 @@
     },
     "wiki_info": {
         "not_found": "Não conseguimos encontrar informações extras."
+    },
+    "back_to_game": "Voltar ao Jogo",
+    "achievements": {
+        "progress": {
+            "notMinted": "fora da blockchain",
+            "minted": "na blockchain"
+        }
+    },
+    "gameRelease": {
+        "beta": "Beta",
+        "main": "Estável",
+        "demo": "Demo"
+    },
+    "exit_game": "Sair do Jogo",
+    "dlcs": {
+        "label": "Selecione os DLCs a instalar:"
+    },
+    "email_subscription": {
+        "subtitle": "Agora você é parte da nossa comunidade e estamos felizes de compartilhar atualizações valiosas e insights contigo.",
+        "title": "Obrigado por subscrever!"
     }
 }
