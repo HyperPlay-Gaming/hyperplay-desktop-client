@@ -799,6 +799,10 @@
             "success": {
                 "validation": "Sucesso! Código de acesso é válido"
             }
+        },
+        "folder": "Pasta",
+        "browserImport": {
+            "profile": "Perfíl"
         }
     },
     "hyperplayOverlay": {
