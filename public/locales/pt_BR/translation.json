@@ -962,7 +962,8 @@
             "playstreak": "Streak do jogo"
         },
         "signIn": "Fazer login",
-        "sync": "Sincronizar"
+        "sync": "Sincronizar",
+        "claimFailedMessage": "Por favor, tente mais uma vez. Se ainda não funcionar, crie um ticket de suporte Discord."
     },
     "profile": "Perfil",
     "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas"
