@@ -1,7 +1,8 @@
 {
     "button": {
         "login": "Login",
-        "error": "Chyba, skúste iný kód"
+        "error": "Chyba, skúste iný kód",
+        "loading": "Načítanie"
     },
     "message": {
         "part1": "In order for you to be able to log in and install your games, we first need you to follow the steps below:",
