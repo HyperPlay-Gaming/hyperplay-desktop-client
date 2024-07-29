@@ -821,7 +821,9 @@
         "linkSteamAccountTitle": "Conta Steam Link",
         "linkSteamAccountCta": "Ir para o Steam",
         "linkSteamAccountDescription": "Inicie sessão no Steam para ligar a sua conta do HyperPlay.",
-        "logOut": "Sair"
+        "logOut": "Sair",
+        "syncing": "Sincronizando...",
+        "Sync": "Sincronizar"
     },
     "hyperplayOverlay": {
         "chainRequest": {
