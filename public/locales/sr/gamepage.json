@@ -17,14 +17,18 @@
         "install": "Инсталирај",
         "no-path-selected": "Није изабрана ниједна путања",
         "queue": {
-            "remove": "Уклони из реда"
+            "remove": "Уклони из реда",
+            "cancel": "Откажи преузимање",
+            "continue": "Настави преузимање"
         },
         "remove_from_favourites": "Уклони из омиљених",
         "remove_from_recent": "Уклони из недавног",
         "run-exe-first": "Прво покрени инсталацију",
         "running-setup": "Покретање подешавања",
         "details": "Детаљи",
-        "unfavorites": "Unfavorite"
+        "unfavorites": "Unfavorite",
+        "remove_from_library": "Ukloni",
+        "favorites": "Омиљен"
     },
     "cloud_save_unsupported": "Неподржано",
     "submenu": {
@@ -95,7 +99,9 @@
         "aware": "@I #biti #svjestan",
         "compability": {
             "message": "@This #Prozor #igra #volja #bijeg #uporabiti @a #kompatibilnost #red. #Free @might @encounter #kakav #tema ili @the #igra @might ne #rad uopće#."
-        }
+        },
+        "dont-show-again": "Не приказуј поново",
+        "ok": "У реду"
     },
     "disabled": "Онемогућено",
     "dlc": {
@@ -164,7 +170,8 @@
         },
         "playing": {
             "start": "Играј сад",
-            "stop": "Игра се (заустави)"
+            "stop": "Игра се (заустави)",
+            "update": "Ажурирај"
         },
         "saves": {
             "syncing": "Синхронизовање чувања"
@@ -235,12 +242,14 @@
         "ubisoft": "Инсталирање Убисофта",
         "downloading": "Преузимање",
         "extracting": {
-            "cancel": "#Ukidati"
+            "cancel": "#Ukidati",
+            "progress": "Екстракција"
         },
         "gog-goodie": "Чини се да се ова игра не може инсталирати. Проверите садржај за преузимање на хттпс://гог.цом/аццоунт",
         "goodie": "Није могуће инсталирати",
         "distributables": "#Instaliranje",
-        "preparing": "@Preparing #Preuzimanje, @please #čekanje"
+        "preparing": "@Preparing #Preuzimanje, @please #čekanje",
+        "paused": "Paused"
     },
     "help": {
         "cloud_save_unsupported": "Ова игра не подржава чување у облаку. Ове информације пружају програмери игре. Неке игре имплементирају сопствени систем чувања у облаку"
