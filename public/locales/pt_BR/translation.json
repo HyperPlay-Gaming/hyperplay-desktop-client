@@ -544,7 +544,8 @@
             "no-file": "Arquivo de log não encontrado",
             "show-in-folder": "Mostrar arquivo de log na pasta",
             "instructions-part-01": "Se você encontrar algum problema ao usar o Hyper Play, temos duas áreas designadas para relatar seus problemas em nosso servidor Discord. Se você é um jogador, por favor relate quaisquer problemas visitando o Fórum de suporte ao jogador. Se você é um desenvolvedor de jogos, por favor relate quaisquer problemas visitando o dev-support-forum.",
-            "instructions-part-02": "Para nos ajudar a diagnosticar e corrigir o problema o mais rapidamente possível, forneça o máximo de informações possível, incluindo uma cópia dos seus registos. Nossa equipe de suporte monitorará ambos os canais e fará o possível para responder ao seu problema o mais rápido possível. Obrigado pela sua paciência e compreensão enquanto trabalhamos para resolver quaisquer problemas que possa encontrar."
+            "instructions-part-02": "Para nos ajudar a diagnosticar e corrigir o problema o mais rapidamente possível, forneça o máximo de informações possível, incluindo uma cópia dos seus registos. Nossa equipe de suporte monitorará ambos os canais e fará o possível para responder ao seu problema o mais rápido possível. Obrigado pela sua paciência e compreensão enquanto trabalhamos para resolver quaisquer problemas que possa encontrar.",
+            "join-hyperplay-discord": "Junte-se à nossa Discord"
         },
         "mangohud": "Habilitar o MangoHud (precisa do mangohud instalado)",
         "manualsync": {
@@ -591,7 +592,9 @@
         "showMetalOverlay": "Mostrar sobreposição de estatísticas",
         "alt-nile-bin": "Escolha um binário alternativo do Nilo",
         "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo",
-        "autoLaunchHyperPlay": "Lançamento automático Hyper Jogar"
+        "autoLaunchHyperPlay": "Lançamento automático Hyper Jogar",
+        "msync": "Ativar Msync",
+        "dxvkfpslimit": "Limite FPS (DX9, 10 e 11)"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -634,7 +637,17 @@
             "label": "Save Location:",
             "warning": "O recurso Cloud Saves está em Beta, faça backup de seus saves antes de sincronizar (caso algo dê errado)"
         },
-        "gamesSettings": "Configurações de jogos"
+        "gamesSettings": "Configurações de jogos",
+        "systemInformation": {
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "legendaryVersion": "Legendário: {{legendaryVersion}}",
+            "gpu": "GPU:",
+            "gpuDriver": "Driver: {{driverVersion}}"
+        },
+        "reset-extension": "Repor a extensão"
     },
     "Settings": "Configurações",
     "sidebar": {
