@@ -714,7 +714,8 @@
         "logout": "Desconectar",
         "logout_confirmation": "Tem certeza que deseja desconectar da sua conta?",
         "manageaccounts": "Gerenciar Contas",
-        "quit": "Sair"
+        "quit": "Sair",
+        "logIn": "Entrar"
     },
     "webview": {
         "controls": {
@@ -1016,6 +1017,7 @@
         "quests": "Missões"
     },
     "sideload": {
-        "warningMessage": "O carregamento lateral de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O carregamento lateral de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos."
+        "warningMessage": "O carregamento lateral de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O carregamento lateral de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos.",
+        "warningTitle": "Importante"
     }
 }
