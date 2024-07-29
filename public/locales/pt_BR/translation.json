@@ -943,11 +943,16 @@
             "playToStart": "Jogue este jogo para começar sua série!",
             "progressTowardsStreak": "progredir para a sequência de hoje.",
             "streakCompleted": "Streak concluído! Reclama as tuas recompensas agora.",
-            "streakProgress": "Progresso de Streak"
+            "streakProgress": "Progresso de Streak",
+            "days": "dias",
+            "now": "Agora"
         },
         "connectSteamAccount": "Conecte a conta Steam",
         "linkAccount": "Ligar o seu Conta Steam para verificar a elegibilidade.",
-        "readyForClaim": "Pronto para reclamação"
+        "readyForClaim": "Pronto para reclamação",
+        "Play": "Reproduzir",
+        "points": "Pontos",
+        "quests": "Missões"
     },
     "profile": "Perfil",
     "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas"
