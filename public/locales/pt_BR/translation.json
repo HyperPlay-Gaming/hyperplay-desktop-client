@@ -590,7 +590,8 @@
         "addgamestoapplications": "Adicionar jogos a aplicativos automaticamente",
         "showMetalOverlay": "Mostrar sobreposição de estatísticas",
         "alt-nile-bin": "Escolha um binário alternativo do Nilo",
-        "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo"
+        "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo",
+        "autoLaunchHyperPlay": "Lançamento automático Hyper Jogar"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -963,8 +964,17 @@
         },
         "signIn": "Fazer login",
         "sync": "Sincronizar",
-        "claimFailedMessage": "Por favor, tente mais uma vez. Se ainda não funcionar, crie um ticket de suporte Discord."
+        "claimFailedMessage": "Por favor, tente mais uma vez. Se ainda não funcionar, crie um ticket de suporte Discord.",
+        "notEnoughGas": "Balança de carteira insuficiente para reclamar sua recompensa devido a taxas de gás. Tente uma carteira diferente ou reabastecer esta antes de retentar."
     },
     "profile": "Perfil",
-    "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas"
+    "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas",
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "Atualmente, você não está conectado, o progresso da série não será rastreado. Por favor, faça login no HyperPlay através do dropdown superior direito para acompanhar o progresso.",
+                "overlay": "Atualmente, você não está conectado, o progresso da série não será rastreado. Por favor, saia do jogo e faça login no HyperPlay através do dropdown superior direito para acompanhar o progresso."
+            }
+        }
+    }
 }
