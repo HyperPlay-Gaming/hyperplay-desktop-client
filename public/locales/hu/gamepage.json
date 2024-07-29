@@ -42,7 +42,9 @@
             "title": "A játékot frissíteni kell"
         },
         "wineprefix": "Wine prefix mappa kiválasztása",
-        "yes": "IGEN"
+        "yes": "IGEN",
+        "dont-show-again": "Ne mutasd újra",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Kedvencekhez adás",
@@ -56,7 +58,9 @@
         "install": "Telepítés",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Letöltés megszakítása",
+            "continue": "Letöltés folytatása"
         },
         "remove_from_favourites": "Eltávolítás a kedvencekből",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +71,10 @@
         },
         "unhide_game": "Játék felfedése",
         "uninstall": "Eltávolítás",
-        "update": "Frissítés"
+        "update": "Frissítés",
+        "remove_from_library": "Eltávolítás",
+        "details": "Részletek",
+        "favorites": "Kedvencnek jelölés"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Letiltva",
@@ -93,7 +100,8 @@
         "repairing": "Javítás"
     },
     "generic": {
-        "error": "Ismeretlen hiba"
+        "error": "Ismeretlen hiba",
+        "noDescription": "Nincs elérhető leírás!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -126,7 +134,8 @@
         },
         "playing": {
             "start": "Indítás most",
-            "stop": "Játékban (leállítás)"
+            "stop": "Játékban (leállítás)",
+            "update": "Frissítés"
         },
         "saves": {
             "syncing": "Mentések szinkronizálása"
@@ -147,7 +156,8 @@
         "title": "Válaszd ki a telepíteni kívánt elemeket"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver palack"
     },
     "sideload": {
         "field": {
@@ -186,7 +196,11 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Teljesen letöltve",
         "uninstalling": "Uninstalling",
-        "updating": "Játék frissítése"
+        "updating": "Játék frissítése",
+        "playing": "Lejátszás folyamatban",
+        "paused": "Szüneteltetett",
+        "syncingSaves": "Mentések szinkronizálása",
+        "downloading": "Letöltés"
     },
     "submenu": {
         "addShortcut": "Parancsikon hozzáadása",
