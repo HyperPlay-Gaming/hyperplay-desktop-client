@@ -743,7 +743,8 @@
                         "createNewWallet": "Criar carteira de extensão MM",
                         "title": "Selecione o navegador do qual importar",
                         "details": "Ao importar, a instalação e as configurações do MetaMask serão importadas para o HyperPlay.",
-                        "useRecoveryPhrase": "Acesso com a frase secreta de recuperação"
+                        "useRecoveryPhrase": "Acesso com a frase secreta de recuperação",
+                        "learnMore": "Saiba mais."
                     }
                 },
                 "pleaseConnect": "Conecte a sua carteira ou descarregue a app móvel Netmask para obter\n        iniciado:",
@@ -784,7 +785,8 @@
         },
         "gamecard": {
             "installing": "A descarregar...",
-            "extracting": "A extrair..."
+            "extracting": "A extrair...",
+            "paused": "Pausado"
         },
         "logOut": "Desconectar",
         "misc": "Nunca",
@@ -803,7 +805,19 @@
         },
         "copyUrl": "Copiar URL",
         "discordApp": "Discord",
-        "folder": "Pasta"
+        "folder": "Pasta",
+        "browserImport": {
+            "profile": "Perfil"
+        },
+        "accesscodes": {
+            "success": {
+                "validation": "Sucesso! Código de acesso válido"
+            },
+            "error": {
+                "validation": "Código de Acesso Inválido"
+            }
+        },
+        "changeWallet": "Trocar Carteira"
     },
     "hyperplayOverlay": {
         "description": {
@@ -853,7 +867,8 @@
     "gameRelease": {
         "beta": "Beta",
         "main": "Estável",
-        "demo": "Demo"
+        "demo": "Demo",
+        "prototype": "Protótipo"
     },
     "exit_game": "Sair do Jogo",
     "dlcs": {
