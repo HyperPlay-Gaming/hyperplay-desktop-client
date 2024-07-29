@@ -51,7 +51,9 @@
         "aware": "Je suis au courant",
         "compability": {
             "message": "Ce jeu Windows va fonctionner avec une couche de compatibilité. Vous pourriez rencontrer quelques problèmes ou le jeu pourrait ne pas fonctionner du tout."
-        }
+        },
+        "dont-show-again": "Ne plus afficher",
+        "ok": "D'accord"
     },
     "button": {
         "add_to_favourites": "Ajouter aux favoris",
@@ -65,7 +67,9 @@
         "install": "Installer",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Annuler le téléchargement",
+            "continue": "Continuer le téléchargement"
         },
         "remove_from_favourites": "Retirer des favoris",
         "remove_from_recent": "Remove From Recent",
@@ -76,7 +80,11 @@
         },
         "unhide_game": "Afficher le jeu",
         "uninstall": "Désinstaller",
-        "update": "Mise à jour"
+        "update": "Mise à jour",
+        "details": "Détails",
+        "favorites": "Favoris",
+        "remove_from_library": "Supprimer",
+        "unfavorites": "Supprimer des favoris"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Désactivé",
@@ -104,7 +112,8 @@
         "repairing": "Réparation en cours"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "Aucune description !"
     },
     "hours": "Heures",
     "how-long-to-beat": {
@@ -138,7 +147,8 @@
         },
         "playing": {
             "start": "Jouer maintenant",
-            "stop": "Jeu en cours (Arrêter)"
+            "stop": "Jeu en cours (Arrêter)",
+            "update": "Mise à jour"
         },
         "saves": {
             "syncing": "Synchronisation des sauvegardes en cours"
@@ -208,7 +218,11 @@
         "gog-goodie": "Ce jeu ne semble pas être installable. Vérifier le contenu téléchargeable sur https://gog.com/account",
         "distributables": "Installation de distributeurs",
         "moving-files": "Fichier de mouvement '{{file}}': {{percent}} ",
-        "goodie": "Non installable"
+        "goodie": "Non installable",
+        "playing": "Lecture en cours",
+        "paused": "En suspend",
+        "syncingSaves": "Synchronisation des sauvegardes en cours",
+        "downloading": "Téléchargement"
     },
     "submenu": {
         "addShortcut": "Ajouter un raccourci",
