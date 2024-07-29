@@ -949,7 +949,7 @@
         },
         "connectSteamAccount": "Conecte a conta Steam",
         "linkAccount": "Ligar o seu Conta Steam para verificar a elegibilidade.",
-        "readyForClaim": "Pronto para reclamação",
+        "readyForClaim": "Pronto para reivindicar",
         "Play": "Reproduzir",
         "points": "Pontos",
         "quests": "Missões",
@@ -958,7 +958,8 @@
         "reputation": "Reputação",
         "claimFailed": "Reclamação falhada",
         "type": {
-            "reputation": "Reputação"
+            "reputation": "Reputação",
+            "playstreak": "Streak do jogo"
         },
         "signIn": "Fazer login",
         "sync": "Sincronizar"
