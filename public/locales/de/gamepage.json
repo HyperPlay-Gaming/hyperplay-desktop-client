@@ -42,7 +42,9 @@
             "title": "Spiel benötigt eine neuere Version"
         },
         "wineprefix": "Wine Prefix Ordner auswählen",
-        "yes": "JA"
+        "yes": "JA",
+        "dont-show-again": "Nicht wieder anzeigen",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Zu Favoriten hinzufügen",
@@ -56,7 +58,9 @@
         "install": "Installieren",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Herunterladen abbrechen",
+            "continue": "Download fortsetzen"
         },
         "remove_from_favourites": "Aus Favoriten entfernen",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +71,11 @@
         },
         "unhide_game": "Spiel einblenden",
         "uninstall": "Deinstallieren",
-        "update": "Update"
+        "update": "Update",
+        "unfavorites": "kein Favorit",
+        "details": "Details",
+        "favorites": "Favorisiert",
+        "remove_from_library": "Löschen"
     },
     "cloud_save_unsupported": "Nicht unterstützt",
     "disabled": "Deaktiviert",
@@ -93,7 +101,8 @@
         "repairing": "Repariere"
     },
     "generic": {
-        "error": "Unbekannter Fehler"
+        "error": "Unbekannter Fehler",
+        "noDescription": "Keine Beschreibung verfügbar!"
     },
     "hours": "Stunden",
     "how-long-to-beat": {
@@ -126,7 +135,8 @@
         },
         "playing": {
             "start": "Jetzt spielen",
-            "stop": "Läuft (Stoppen)"
+            "stop": "Läuft (Stoppen)",
+            "update": "Aktualisieren"
         },
         "saves": {
             "syncing": "Spielstände werden synchronisiert"
@@ -147,7 +157,8 @@
         "title": "Zu installierende Komponenten auswählen"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -186,7 +197,11 @@
         "this-game-uses-third-party": "Dieses Spiel verwendet einen Drittanbieter-Launcher und wird noch nicht unterstützt",
         "totalDownloaded": "Insgesamt heruntergeladen",
         "uninstalling": "Uninstalling",
-        "updating": "Spiel wird aktualisiert"
+        "updating": "Spiel wird aktualisiert",
+        "downloading": "Wird heruntergeladen",
+        "paused": "Pausiert",
+        "syncingSaves": "Spielstände werden synchronisiert",
+        "playing": "Wiedergabe"
     },
     "submenu": {
         "addShortcut": "Verknüpfung hinzufügen",
@@ -200,6 +215,7 @@
         "removeShortcut": "Verknüpfungen entfernen",
         "settings": "Einstellungen",
         "store": "Store-Seite",
-        "verify": "Prüfen und reparieren"
+        "verify": "Prüfen und reparieren",
+        "extraInfo": "Weitere Infos"
     }
 }
