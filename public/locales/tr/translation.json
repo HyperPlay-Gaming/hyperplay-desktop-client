@@ -152,7 +152,10 @@
         "login": "Oturum Aç",
         "sync": "Eşzamanla",
         "syncing": "Eşzamanlanıyor",
-        "unsync": "Eşzamanlamayı kaldır"
+        "unsync": "Eşzamanlamayı kaldır",
+        "download": "İndir",
+        "continue": "Devam",
+        "update": "Güncelle"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Öngörülen süre"
     },
     "epic": {
         "offline-notification-body": "Epic Games sunucuları çevrim dışı olduğundan çevrim içi hizmetler tam olarak çalışmayabilir!",
@@ -369,7 +373,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Aç",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -431,7 +435,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "İndirmeyi Sürdür",
+            "pause": "İndirmeleri duraklat"
         }
     },
     "Recent": "Son Oynanan",
@@ -545,7 +551,8 @@
         "disable_logs": "Günlükleri Devre Dışı Bırak",
         "showMetalOverlay": "İstatistik Yer Paylaşımını Göster",
         "addgamestoapplications": "Oyunları Uygulamalara otomatik olarak ekleyin",
-        "alt-nile-bin": "Alternatif Bir Nil İkilisi Seçin"
+        "alt-nile-bin": "Alternatif Bir Nil İkilisi Seçin",
+        "msync": "Esync'i Etkinleştir"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +587,32 @@
             "log": "Log",
             "other": "Diğer",
             "sync": "Kaydet-Eşzamanla",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Hesaplar",
+            "systemInformation": "Sistem bilgileri"
         },
         "open-config-file": "Yapılandırma Dosyasını Aç",
         "reset-hyperplay": "HyperPlay'i Sıfırla",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "systemInformation": {
+            "os": "Operasyon sistemi:",
+            "copyToClipboard": "Panoya kopyala"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine Yöneticisi"
+            }
         }
     },
     "Settings": "Ayarlar",
     "sidebar": {
         "collapse": "Kenar çubuğunu daralt",
-        "uncollapse": "Kenar çubuğunu genişlet"
+        "uncollapse": "Kenar çubuğunu genişlet",
+        "library": "Kütüphane",
+        "store": "Marketplace"
     },
     "status": {
         "installing": "Kuruluyor",
@@ -631,7 +651,8 @@
         "logout": "Oturumu kapat",
         "logout_confirmation": "Oturumu kapatmak istediğinizden emin misiniz?",
         "manageaccounts": "Hesapları Yönet",
-        "quit": "Çık"
+        "quit": "Çık",
+        "logIn": "Giriş yap"
     },
     "webview": {
         "controls": {
@@ -668,5 +689,74 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "amazon oyunları",
-    "prime-gaming": "Prime Oyun"
+    "prime-gaming": "Prime Oyun",
+    "hyperplay": {
+        "logOut": "Oturumu kapat",
+        "gamecard": {
+            "installing": "İndiriliyor...",
+            "paused": "Duraklatıldı",
+            "distributables": "Dağıtılabilirler"
+        },
+        "misc": "Hiçbir Zaman",
+        "onboarding": {
+            "terms": "Kullanım koşulları",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Daha fazla öğren"
+                    }
+                }
+            }
+        },
+        "Sync": "Senkronize Et",
+        "achievements": {
+            "noAchievements": {
+                "oops": "Hoppala!"
+            }
+        },
+        "buttons": {
+            "noThanks": "Hayır, Teşekkürler"
+        },
+        "copyUrl": "URL'yi kopyala",
+        "discordApp": "Discord",
+        "folder": "Klasör",
+        "syncing": "Eşzamanlanıyor...",
+        "turnAnalyticsOff": "Kapat",
+        "turnAnalyticsOn": "Açılsın",
+        "browserImport": {
+            "profile": "Profil"
+        }
+    },
+    "gameRelease": {
+        "main": "Ana",
+        "demo": "Demo",
+        "beta": "Beta",
+        "alpha": "Alfa"
+    },
+    "quest": {
+        "active": "Aktif",
+        "Play": "Oynat",
+        "playstreak": {
+            "days": "gün",
+            "now": "Şimdi"
+        },
+        "points": "Noktalar",
+        "signIn": "Giriş yap",
+        "sync": "Senkronize Et",
+        "type": {
+            "reputation": "İtibar"
+        },
+        "reputation": "İtibar"
+    },
+    "ALL": "Tümü",
+    "analytics": "Analytics",
+    "profile": "Profil",
+    "sideload": {
+        "warningTitle": "Önemli"
+    },
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "CONFIRMED": "İşlem Onaylandı"
+        }
+    }
 }
