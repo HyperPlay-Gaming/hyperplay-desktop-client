@@ -651,7 +651,14 @@
             "gpu": "GPU:",
             "gpuDriver": "Driver: {{driverVersion}}",
             "copyToClipboard": "Copiar para a área de transferência",
-            "steamDeck": "Steam Deck"
+            "steamDeck": "Steam Deck",
+            "showDetailed": "Mostrar especificações detalhadas do sistema",
+            "version": "Versão: {{appVersion}}",
+            "systemModel": "Modelo do sistema:",
+            "osNameFlatpak": "{{osName}} (dentro de Flatpak)",
+            "osVersion": "Versão {{versionNumber}}",
+            "memory": "Memória:",
+            "memoryStats": "{{percentUsed}}% usado ({{usedGib}} / {{totalGib}}"
         },
         "reset-extension": "Repor a extensão"
     },
@@ -660,7 +667,8 @@
         "collapse": "Recolher barra lateral",
         "uncollapse": "Mostrar barra lateral",
         "store": "Loja",
-        "downloadManager": "Gerenciador de Downloads"
+        "downloadManager": "Gerenciador de Downloads",
+        "achievements": "Conquistas"
     },
     "status": {
         "installing": "Instalando",
