@@ -789,7 +789,11 @@
         "achievements": {
             "freeMints": "Mints grátis",
             "gamesToMint": "Jogos de hortelã",
-            "addThisGame": "Adicionar este jogo"
+            "addThisGame": "Adicionar este jogo",
+            "noAchievements": {
+                "doubleCheckMessage": "Parece que não conseguimos encontrar jogos na sua conta Steam neste momento. Apenas um lembrete rápido para verificar duas vezes que seus detalhes do jogo estão definidos para público. Desta forma, podemos acessar suas realizações e fornecer-lhe a melhor experiência.",
+                "oops": "Oops!"
+            }
         },
         "accesscodes": {
             "error": {
@@ -802,7 +806,12 @@
         },
         "folder": "Pasta",
         "browserImport": {
-            "profile": "Perfíl"
+            "profile": "Perfíl",
+            "appId": "Aplicação"
+        },
+        "connectWallet": "Conecte a carteira",
+        "gamecard": {
+            "distributables": "Instalação de..."
         }
     },
     "hyperplayOverlay": {
