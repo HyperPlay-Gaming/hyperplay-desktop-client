@@ -35,14 +35,17 @@
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Desexas desinstalar o xogo?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Desinstalar"
+            "title": "Desinstalar",
+            "dlc": "Queres desinstalar esta aplicación?"
         },
         "update": {
             "message": "Este xogo ten unha actualización, ¿desexas actualizar agora?",
             "title": "O xogo precisa unha actualización"
         },
         "wineprefix": "Seleccione o cartafol co prefixo de Wine",
-        "yes": "Sí"
+        "yes": "Sí",
+        "dont-show-again": "Non volvas mostrar",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -56,7 +59,9 @@
         "install": "Instalar",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Desbotar baixada",
+            "continue": "Continuar descarga"
         },
         "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +72,10 @@
         },
         "unhide_game": "Unhide Game",
         "uninstall": "Desinstalar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "remove_from_library": "Retirar",
+        "details": "Detalles",
+        "favorites": "Favorecer"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Deshabilitar",
@@ -93,7 +101,8 @@
         "repairing": "Reparando"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "Sen descrición dispoñible!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -126,7 +135,8 @@
         },
         "playing": {
             "start": "Xogar",
-            "stop": "Deter"
+            "stop": "Deter",
+            "update": "Actualizar"
         },
         "saves": {
             "syncing": "Sincronización de gardados"
@@ -147,7 +157,8 @@
         "title": "Seleccione os compoñentes a instalar"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -186,7 +197,11 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total descargado",
         "uninstalling": "Uninstalling",
-        "updating": "Actualización do xogo"
+        "updating": "Actualización do xogo",
+        "downloading": "Baixando",
+        "syncingSaves": "Sincronización de gardados",
+        "playing": "Reproducindo",
+        "paused": "En pausa"
     },
     "submenu": {
         "addShortcut": "Engadir acceso directo",
