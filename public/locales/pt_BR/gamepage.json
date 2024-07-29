@@ -95,8 +95,8 @@
     "game": {
         "downloadSize": "Tamanho do Download",
         "firstPlayed": "Jogado inicialmente em",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Obter tamanho de download",
+        "getting-install-size": "Obtendo o tamanho da instalação",
         "installSize": "Tamanho Instalado",
         "language": "Idioma",
         "lastPlayed": "Jogado pela última vez em",
@@ -221,7 +221,8 @@
         "moving-files": "Movendo arquivo '{{file}}': {{percent}} ",
         "playing": "Jogando",
         "preparing": "Preparando download, por favor espere",
-        "syncingSaves": "Sincronizando Saves"
+        "syncingSaves": "Sincronizando Saves",
+        "distributables": "Instalando Dependências"
     },
     "submenu": {
         "addShortcut": "Adicionar Atalho",
