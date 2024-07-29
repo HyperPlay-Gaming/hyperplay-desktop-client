@@ -33,7 +33,18 @@
         "yes": "JA",
         "choose": "Vælg",
         "importpath": "Vælg spil mappe til import",
-        "wineprefix": "Vælg WinePrefix mappe"
+        "wineprefix": "Vælg WinePrefix mappe",
+        "dont-show-again": "Vis ikke igen",
+        "runexe": {
+            "title": "Vælg EXE til at køre"
+        },
+        "ok": "OK",
+        "select": {
+            "button": "Vælg"
+        },
+        "sideload": {
+            "exe": "Vælg Eksekverbar"
+        }
     },
     "button": {
         "cancel": "Pause/Afbryd",
@@ -46,7 +57,15 @@
         "unhide_game": "Vis spil",
         "add_to_favourites": "Tilføj til favorit",
         "remove_from_favourites": "Fjern fra favoritter",
-        "force_update": "Tving opdatering, hvis tilgængelig"
+        "force_update": "Tving opdatering, hvis tilgængelig",
+        "remove_from_library": "Fjern",
+        "details": "Details",
+        "favorites": "Favorit",
+        "finish": "Afslut",
+        "queue": {
+            "cancel": "Annuller download",
+            "continue": "Fortsæt Download"
+        }
     },
     "disabled": "Slå Fra",
     "dlc": {
@@ -91,7 +110,8 @@
     "label": {
         "playing": {
             "start": "Spil Nu",
-            "stop": "Spiller (Stop)"
+            "stop": "Spiller (Stop)",
+            "update": "Opdater"
         },
         "saves": {
             "syncing": "Synkroniserer Saves"
@@ -126,7 +146,11 @@
         "gameNotAvailable": "Spil ikke tilgængeligt",
         "notSupported": "Ikke understøttet",
         "notSupportedGame": "Ikke understøttet",
-        "this-game-uses-third-party": "Dette spil bruger tredjeparts launcher, og det er ikke understøttet endnu"
+        "this-game-uses-third-party": "Dette spil bruger tredjeparts launcher, og det er ikke understøttet endnu",
+        "syncingSaves": "Synkroniserer Saves",
+        "paused": "Pause",
+        "playing": "Afspiller",
+        "downloading": "Henter ned"
     },
     "submenu": {
         "addShortcut": "Opret genvej",
@@ -144,7 +168,8 @@
         "enableEosOverlay": "Aktiver Epic Overlay"
     },
     "generic": {
-        "error": "Ukendt fejl"
+        "error": "Ukendt fejl",
+        "noDescription": "Ingen beskrivelse tilgængelig!"
     },
     "report_problem": "Rapportér et problem med at køre dette spil",
     "cloud_save_unsupported": "Ikke understøttet",
@@ -176,7 +201,8 @@
         }
     },
     "setting": {
-        "use-default-wine-settings": "Brug standard vinindstillinger"
+        "use-default-wine-settings": "Brug standard vinindstillinger",
+        "winecrossoverbottle": "CrossOver flaske"
     },
     "hours": "Timer",
     "how-long-to-beat": {
