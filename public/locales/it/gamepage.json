@@ -42,7 +42,9 @@
             "title": "Il gioco richiede un aggiornamento"
         },
         "wineprefix": "Seleziona la cartella del prefisso di Wine",
-        "yes": "SI"
+        "yes": "SI",
+        "dont-show-again": "Non mostrare più",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Aggiungi Ai Preferiti",
@@ -56,7 +58,9 @@
         "install": "Installa",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Annulla download",
+            "continue": "Continua Download"
         },
         "remove_from_favourites": "Rimuovi Dai Preferiti",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +71,11 @@
         },
         "unhide_game": "Mostra gioco",
         "uninstall": "Disinstalla",
-        "update": "Update"
+        "update": "Update",
+        "remove_from_library": "Rimuovi",
+        "unfavorites": "Non preferito",
+        "details": "Dettagli",
+        "favorites": "Preferito"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Disattivato",
@@ -94,7 +102,8 @@
         "repairing": "Riparazione in corso"
     },
     "generic": {
-        "error": "Errore sconosciuto"
+        "error": "Errore sconosciuto",
+        "noDescription": "Nessuna descrizione disponibile!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -115,7 +124,8 @@
         "game-scores": "Punteggi di gioco",
         "installedInfo": "Informazioni di installazione",
         "protondb-compatibility-info": "Livello di compatibilità Proton",
-        "steamdeck-compatibility-info": "Compatibilità SteamDeck"
+        "steamdeck-compatibility-info": "Compatibilità SteamDeck",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Spazio Disponibile",
@@ -138,7 +148,8 @@
         },
         "playing": {
             "start": "Esegui ora",
-            "stop": "In esecuzione (Stop)"
+            "stop": "In esecuzione (Stop)",
+            "update": "Aggiorna"
         },
         "saves": {
             "syncing": "Sincronizzando i salvataggi"
@@ -161,7 +172,8 @@
         "title": "Seleziona i componenti da installare"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Bottiglia CrossOver"
     },
     "sideload": {
         "field": {
@@ -207,9 +219,12 @@
         "launching": "Avviando",
         "ubisoft": "Installazione di Ubisoft",
         "downloading": "Scaricamento",
-        "extracting": "Estrazione",
+        "extracting": {
+            "progress": "Estrazione"
+        },
         "gog-goodie": "Questo gioco non sembra essere installabile. Controlla i contenuti scaricabili su https://gog.com/account",
-        "goodie": "Non installabile"
+        "goodie": "Non installabile",
+        "paused": "In pausa"
     },
     "submenu": {
         "addShortcut": "Aggiungi scorciatoia",
