@@ -738,7 +738,8 @@
                         "details": "Ao importar, a instalação e as configurações do MetaMask serão importadas para o HyperPlay.",
                         "title": "Selecione o navegador do qual importar",
                         "useRecoveryPhrase": "Acesso com a frase secreta de recuperação",
-                        "cantFindProfile": "Não é possível encontrar o perfil do seu navegador?"
+                        "cantFindProfile": "Não é possível encontrar o perfil do seu navegador?",
+                        "learnMore": "Saiba mais"
                     }
                 },
                 "pleaseConnect": "Conecte sua carteira ou baixe o aplicativo móvel Netmask para obter\n        iniciado:",
@@ -813,11 +814,14 @@
         "gamecard": {
             "distributables": "Instalação de...",
             "extracting": "Extraindo...",
-            "installed": "Pronto para jogar"
+            "installed": "Pronto para jogar",
+            "installing": "Baixando...",
+            "paused": "Pausado"
         },
         "linkSteamAccountTitle": "Conta Steam Link",
         "linkSteamAccountCta": "Ir para o Steam",
-        "linkSteamAccountDescription": "Inicie sessão no Steam para ligar a sua conta do HyperPlay."
+        "linkSteamAccountDescription": "Inicie sessão no Steam para ligar a sua conta do HyperPlay.",
+        "logOut": "Sair"
     },
     "hyperplayOverlay": {
         "chainRequest": {
