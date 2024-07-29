@@ -52,7 +52,9 @@
         "aware": "Qeyd",
         "compability": {
             "message": "Bu Windows oyun uyğunluq kağızı istifadə edəcək. Siz sənaye və ya oyun bütün işləyə bilər."
-        }
+        },
+        "dont-show-again": "Bir daha göstərmə",
+        "ok": "tamam"
     },
     "button": {
         "add_to_favourites": "Sevimlilərə əlavə edin",
@@ -66,7 +68,9 @@
         "install": "Yüklemek",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Yükləməni Ləğv Et",
+            "continue": "Yükləməyə davam edin"
         },
         "remove_from_favourites": "Sevimlilərdən Sil",
         "remove_from_recent": "Remove From Recent",
@@ -78,7 +82,10 @@
         "unhide_game": "Oyunu Gizlət",
         "uninstall": "Silin",
         "update": "Yeniləyin",
-        "unfavorites": "Tarix"
+        "unfavorites": "Tarix",
+        "details": "Detallar",
+        "remove_from_library": "Sil",
+        "favorites": "Favorit"
     },
     "cloud_save_unsupported": "Dəstəklənmir",
     "disabled": "Əlil",
@@ -141,7 +148,8 @@
         },
         "playing": {
             "start": "İndi oyna",
-            "stop": "Oynanır (Dayandır)"
+            "stop": "Oynanır (Dayandır)",
+            "update": "Yenilə"
         },
         "saves": {
             "syncing": "Sinxronizasiya Saxlamalar"
@@ -162,7 +170,8 @@
         "title": "Quraşdırılacaq komponentləri seçin"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Krossover şüşə"
     },
     "sideload": {
         "field": {
@@ -211,7 +220,10 @@
         "distributables": "Dağlıqları",
         "playing": "Oyuncaq",
         "gog-goodie": "Bu oyun yüklemek mümkün deyil. https://gog.com/account",
-        "goodie": "Daxil ol"
+        "goodie": "Daxil ol",
+        "syncingSaves": "Sinxronizasiya Saxlamalar",
+        "downloading": "Yüklənir",
+        "paused": "Fasilə verildi"
     },
     "submenu": {
         "addShortcut": "Qısayol əlavə edin",
