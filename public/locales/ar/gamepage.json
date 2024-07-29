@@ -43,7 +43,9 @@
             "title": "تحتاج اللعبة للتحديث"
         },
         "wineprefix": "اختر مجلد سابقات واين",
-        "yes": "نعم"
+        "yes": "نعم",
+        "dont-show-again": "لا تظهر مرَّةً أخرى",
+        "ok": "حسناً"
     },
     "button": {
         "add_to_favourites": "أضف للمفضلة",
@@ -57,7 +59,9 @@
         "install": "ثبت",
         "no-path-selected": "لم يُحدد مسار",
         "queue": {
-            "remove": "أزل من قائمة الانتظار"
+            "remove": "أزل من قائمة الانتظار",
+            "cancel": "إلغاء التحميل",
+            "continue": "تابع التنزيل"
         },
         "remove_from_favourites": "احذف من المفضلة",
         "remove_from_recent": "أزل من \"المشغلة مؤخرًا\"",
@@ -68,7 +72,11 @@
         },
         "unhide_game": "أظهر اللعبة",
         "uninstall": "ألغِ التثبيت",
-        "update": "حدّث"
+        "update": "حدّث",
+        "remove_from_library": "إزالة",
+        "unfavorites": "إزالة من المفضلة",
+        "details": "تفاصيل",
+        "favorites": "المفضلة"
     },
     "cloud_save_unsupported": "غير مدعوم",
     "disabled": "معطّل",
@@ -94,7 +102,8 @@
         "repairing": "قيد الإصلاح"
     },
     "generic": {
-        "error": "خطأ مجهول"
+        "error": "خطأ مجهول",
+        "noDescription": "لا يوجد وصف!"
     },
     "hours": "ساعات",
     "how-long-to-beat": {
@@ -132,7 +141,8 @@
         },
         "playing": {
             "start": "إلعب الأن",
-            "stop": "مشغّلة (أوقفها)"
+            "stop": "مشغّلة (أوقفها)",
+            "update": "تحديث"
         },
         "saves": {
             "syncing": "قيد مزامنة ملفات التخزين"
@@ -153,7 +163,8 @@
         "title": "اختر المكونات المراد تثبيتها"
     },
     "setting": {
-        "use-default-wine-settings": "استخدم إعدادات واين الافتراضية"
+        "use-default-wine-settings": "استخدم إعدادات واين الافتراضية",
+        "winecrossoverbottle": "قارورة كروس.أوفر"
     },
     "sideload": {
         "field": {
@@ -189,7 +200,11 @@
         "this-game-uses-third-party": "تستخدم هذه اللعبة مُشغل طرف ثالث وهي غير مدعومة بعد",
         "totalDownloaded": "إجمالي التنزيلات",
         "uninstalling": "قيد إلغاء التثبيت",
-        "updating": "قيد تحديث اللعبة"
+        "updating": "قيد تحديث اللعبة",
+        "playing": "جاري التشغيل",
+        "paused": "متوقف مؤقتًا",
+        "downloading": "جاري التحميل",
+        "syncingSaves": "قيد مزامنة ملفات التخزين"
     },
     "submenu": {
         "addShortcut": "أضف اختصارًا",
