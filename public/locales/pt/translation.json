@@ -292,7 +292,9 @@
             "part2": "Para outros lugares, crie um link simbólico até uma dessas pastas"
         },
         "disable_logs": "Habilitar essa opção faz com que a maioria dos registros (informações críticas) sejam desabilitadas. Desabilite essa opção antes de reportar erros no app.",
-        "dxvkfpslimit": "Limita o número de quadros em jogos que usam DXVK"
+        "dxvkfpslimit": "Limita o número de quadros em jogos que usam DXVK",
+        "msync": "Msync visa reduzir a sobrecarga de Winever em jogos intensivos em CPU. A ativação pode melhorar o desempenho em vários jogos.",
+        "dxvknvapi": "DXVK-NVAPI é uma implementação de NVAPI construído em cima de DXVK e o NVAPI nativo linux, permite o uso de DLSS em GPUs Nvidia."
     },
     "info": {
         "hyperplay": {
@@ -786,7 +788,9 @@
         "gamecard": {
             "installing": "A descarregar...",
             "extracting": "A extrair...",
-            "paused": "Pausado"
+            "paused": "Pausado",
+            "distributables": "Instalação de...",
+            "installed": "Pronto para jogar"
         },
         "logOut": "Desconectar",
         "misc": "Nunca",
@@ -807,7 +811,8 @@
         "discordApp": "Discord",
         "folder": "Pasta",
         "browserImport": {
-            "profile": "Perfil"
+            "profile": "Perfil",
+            "appId": "Aplicação"
         },
         "accesscodes": {
             "success": {
@@ -815,9 +820,23 @@
             },
             "error": {
                 "validation": "Código de Acesso Inválido"
-            }
+            },
+            "requirescode": "Esta atualização do jogo requer um código de acesso."
         },
-        "changeWallet": "Trocar Carteira"
+        "changeWallet": "Trocar Carteira",
+        "achievements": {
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "Parece que não conseguimos encontrar jogos na sua conta Steam neste momento. Apenas um lembrete rápido para verificar duas vezes que seus detalhes do jogo estão definidos para público. Desta forma, podemos acessar suas realizações e fornecer-lhe a melhor experiência."
+            },
+            "freeMints": "Mints grátis",
+            "gamesToMint": "Jogos de hortelã",
+            "addThisGame": "Adicionar este jogo"
+        },
+        "linkSteamAccountDescription": "Inicie sessão no Steam para ligar a sua conta do HyperPlay.",
+        "connectWallet": "Conecte a carteira",
+        "linkSteamAccountTitle": "Conta Steam Link",
+        "linkSteamAccountCta": "Ir para o Steam"
     },
     "hyperplayOverlay": {
         "description": {
@@ -877,5 +896,12 @@
     "email_subscription": {
         "subtitle": "Agora você é parte da nossa comunidade e estamos felizes de compartilhar atualizações valiosas e insights contigo.",
         "title": "Obrigado por subscrever!"
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "single": "Há uma atualização pronta para {{gameName}}.",
+            "multiple": "{{gameName}} e outros jogos estão prontos para atualizar."
+        },
+        "title": "Atualizações do jogo Disponível"
     }
 }
