@@ -290,7 +290,9 @@
         "wine": {
             "part1": "O HyperPlay busca por versões do Wine, Proton e CrossOver nas pastas a seguir:",
             "part2": "Para outros locais, use um link simbólico para uma dessas pastas"
-        }
+        },
+        "dxvkfpslimit": "Define uma tampa de taxa de quadros para jogos DXVK",
+        "disable_logs": "Alternar esta caixa de seleção ON para desativar a maioria dos registros de arquivos (informações críticas são sempre registradas). Certifique-se de desativar esta configuração antes de reportar qualquer problema."
     },
     "info": {
         "hyperplay": {
@@ -852,6 +854,14 @@
     },
     "back_to_game": "Voltar ao jogo",
     "email_subscription": {
-        "subtitle": "Agora você faz parte de nossa comunidade, e estamos animados em compartilhar atualizações e insights valiosos com você."
+        "subtitle": "Agora você faz parte de nossa comunidade, e estamos animados em compartilhar atualizações e insights valiosos com você.",
+        "title": "Obrigado por subscrever!"
+    },
+    "gameUpdateNotifications": {
+        "title": "Atualizações do jogo Disponível",
+        "body": {
+            "single": "Há uma atualização pronta para {{gameName}}.",
+            "multiple": "{{gameName}} e outros jogos estão prontos para atualizar."
+        }
     }
 }
