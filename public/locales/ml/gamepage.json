@@ -35,14 +35,17 @@
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "ഇാ കളി എടുത്തുനീക്കട്ടെ?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "എടുത്തു നീക്കൂ"
+            "title": "എടുത്തു നീക്കൂ",
+            "dlc": "ഈ അപ്ലിക്കേഷൻ അൺഇൻസ്റ്റാളുചെയ്യണോ?"
         },
         "update": {
             "message": "ഈ ഗെയിമിന് ഒരു അപ്ഡേറ്റ് ഉണ്ട്, ഇപ്പോൾ അപ്ഡേറ്റ് ചെയ്യട്ടെ?",
             "title": "കളി പുതുക്കേണ്ടതുണ്ട്"
         },
         "wineprefix": "വൈൻ പ്രിഫിക്സ് ഫോൾഡർ തിരഞ്ഞെടുക്കൂ",
-        "yes": "ശരി"
+        "yes": "ശരി",
+        "dont-show-again": "വീണ്ടും കാണിക്കരുത്",
+        "ok": "ശരി"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -56,7 +59,9 @@
         "install": "നടൂ",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "continue": "ഇറക്കൽ തുടരൂ",
+            "cancel": "ഡൗൺലോഡ് റദ്ദാക്കുക"
         },
         "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +72,10 @@
         },
         "unhide_game": "Unhide Game",
         "uninstall": "എടുത്തുനീക്കൂ",
-        "update": "പുതുക്കൂ"
+        "update": "പുതുക്കൂ",
+        "details": "വിശദാംശങ്ങള്‍",
+        "favorites": "ഇഷ്ടപ്പെട്ടവ",
+        "remove_from_library": "നീക്കം ചെയ്യുക"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "പ്രവര്ത്തനരഹിതം",
@@ -93,7 +101,8 @@
         "repairing": "നന്നാക്കുന്നു"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "വിവരണം ലഭ്യമല്ല!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -126,7 +135,8 @@
         },
         "playing": {
             "start": "കളിക്കാം",
-            "stop": "നടക്കുന്നു(നിര്ത്തൂ)"
+            "stop": "നടക്കുന്നു(നിര്ത്തൂ)",
+            "update": "പുതുക്കുക"
         },
         "saves": {
             "syncing": "സൂക്ഷിപ്പുകള് ഒന്നിപ്പിക്കുന്നു"
@@ -147,7 +157,8 @@
         "title": "നടുവാനുള്ള ഘടകങ്ങള് തിരഞ്ഞെടുക്കൂ"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "ക്രോസ്സോവര് കുപ്പി"
     },
     "sideload": {
         "field": {
@@ -186,7 +197,10 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "ആകെ ഇറക്കിയെടുത്തത്",
         "uninstalling": "Uninstalling",
-        "updating": "കളി പുതുക്കുന്നു"
+        "updating": "കളി പുതുക്കുന്നു",
+        "downloading": "ഡൌൺലോഡ് ചെയ്യുന്നു",
+        "paused": "താല്‍ക്കാലികമായി നിര്‍ത്തിയിരിക്കുന്നു",
+        "syncingSaves": "സൂക്ഷിപ്പുകള് ഒന്നിപ്പിക്കുന്നു"
     },
     "submenu": {
         "addShortcut": "കുറുക്കുവഴി ചേര്ക്കൂ",
