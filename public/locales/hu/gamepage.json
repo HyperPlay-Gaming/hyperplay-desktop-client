@@ -29,22 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Telepítés folytatása",
             "message": "Szeretnéd MEGTARTANI a letöltött fájlokat?",
-            "title": "Telepítés megállítása"
+            "title": "Telepítés megállítása",
+            "keepFilesMessage": "Ellenőrizze itt, ha meg akarja tartani a letöltési fájlokat a törlés után."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "El akarod távolítani ezt a játékot?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Eltávolítás"
+            "title": "Eltávolítás",
+            "dlc": "Szeretné eltávolítani ezt a DLC-t?",
+            "prefix_warning": "A Wine Prefix ehhez a játékhoz az alapértelmezett előtag. Ha tényleg törölni akarja, manuálisan kell csinálnia."
         },
         "update": {
             "message": "Ennek a játéknak van egy frissítése, alkalmazzuk a frissítést most?",
-            "title": "A játékot frissíteni kell"
+            "title": "A játékot frissíteni kell",
+            "message-cancel": "Nem lehet játszani ezt a játékot frissítés nélkül"
         },
         "wineprefix": "Wine prefix mappa kiválasztása",
         "yes": "IGEN",
         "dont-show-again": "Ne mutasd újra",
-        "ok": "OK"
+        "ok": "OK",
+        "aware": "Tudatában vagyok",
+        "compability": {
+            "message": "Ez a Windows játék egy kompatibilitási réteg használatával fog futni. Találkozhat néhány kérdéssel, vagy a játék egyáltalán nem működik."
+        },
+        "yesCancel": "Igen, töröl"
     },
     "button": {
         "add_to_favourites": "Kedvencekhez adás",
@@ -74,7 +83,8 @@
         "update": "Frissítés",
         "remove_from_library": "Eltávolítás",
         "details": "Részletek",
-        "favorites": "Kedvencnek jelölés"
+        "favorites": "Kedvencnek jelölés",
+        "unfavorites": "Kedvenc"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Letiltva",
@@ -93,7 +103,9 @@
         "neverPlayed": "Soha",
         "platform": "Telepítendő platform változat kiválasztása",
         "requirements": "Rendszerkövetelmények",
-        "totalPlayed": "Játszott idő"
+        "totalPlayed": "Játszott idő",
+        "selectChannelName": "Válasszon Csatorna Név",
+        "dlcs": "DLCs"
     },
     "gamecard": {
         "moving": "Áthelyezés",
@@ -126,7 +138,8 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "Telepítés után",
         "wineprefix": "Wine prefix",
-        "wineversion": "Wine verzió"
+        "wineversion": "Wine verzió",
+        "compatibility-warning": "Ez a Windows játék egy kompatibilitási réteg használatával fog futni. Tapasztalata változhat."
     },
     "label": {
         "game": {
@@ -200,7 +213,16 @@
         "playing": "Lejátszás folyamatban",
         "paused": "Szüneteltetett",
         "syncingSaves": "Mentések szinkronizálása",
-        "downloading": "Letöltés"
+        "downloading": "Letöltés",
+        "distributables": "Eloszthatók telepítése",
+        "extracting": {
+            "cancel": "Törölje a kitermelést",
+            "progress": "Kitermelés"
+        },
+        "moving-files": "Mozgó fájl \"{{file}}\": {{percent}} ",
+        "gog-goodie": "Ez a játék nem tűnik telepíthetőnek. Ellenőrizze a letöltött tartalmat a https://gog.com/account",
+        "goodie": "Nem telepíthető",
+        "preparing": "Készüljön le, várjon"
     },
     "submenu": {
         "addShortcut": "Parancsikon hozzáadása",
@@ -214,6 +236,7 @@
         "removeShortcut": "Parancsikonok eltávolítása",
         "settings": "Beállítások",
         "store": "Áruházi oldal",
-        "verify": "Ellenőrzés és javítás"
+        "verify": "Ellenőrzés és javítás",
+        "extraInfo": "Extra Info"
     }
 }
