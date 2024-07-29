@@ -51,7 +51,9 @@
         "aware": "我知道",
         "compability": {
             "message": "这一Windows游戏将使用兼容层。 你可能会遇到一些问题,或者游戏可能根本不可行."
-        }
+        },
+        "dont-show-again": "不再顯示",
+        "ok": "確定"
     },
     "button": {
         "add_to_favourites": "加入我的最愛",
@@ -81,7 +83,8 @@
         "update": "更新",
         "details": "詳細信息",
         "favorites": "最愛",
-        "unfavorites": "不喜歡"
+        "unfavorites": "不喜歡",
+        "remove_from_library": "移除"
     },
     "cloud_save_unsupported": "不支持",
     "disabled": "已禁用",
@@ -144,7 +147,8 @@
         },
         "playing": {
             "start": "開始遊戲",
-            "stop": "停止遊戲"
+            "stop": "停止遊戲",
+            "update": "更新"
         },
         "saves": {
             "syncing": "存檔同步中"
@@ -210,7 +214,8 @@
         "paused": "已暫停",
         "preparing": "準備下載，請稍候",
         "extracting": {
-            "cancel": "Cancel Extraction"
+            "cancel": "Cancel Extraction",
+            "progress": "提取中"
         },
         "moving-files": "移動文件\"{{file}}\"： {{percent}} ",
         "playing": "遊玩中",
