@@ -51,7 +51,9 @@
         "aware": "אני מודע",
         "compability": {
             "message": "משחק Windows זה יפעל באמצעות שכבת תאימות. אתה יכול להיתקל כמה בעיות או המשחק בכלל לא עובד."
-        }
+        },
+        "ok": "אישור",
+        "dont-show-again": "אל תראה שוב"
     },
     "button": {
         "install": "התקן",
@@ -69,7 +71,9 @@
         "no-path-selected": "לא נבחר מיקום",
         "remove_from_recent": "הסר מאחרונים",
         "queue": {
-            "remove": "הסר מהתור"
+            "remove": "הסר מהתור",
+            "cancel": "בטל הורדה",
+            "continue": "המשך הורדה"
         },
         "run-exe-first": "הפעל מתקין קודם",
         "sideload": {
@@ -78,7 +82,9 @@
         "unhide_game": "הסר משחק מרשימת המוסתרים",
         "uninstall": "הסר התקנה",
         "running-setup": "מפעיל הגדרה",
-        "unfavorites": "גירושין"
+        "unfavorites": "גירושין",
+        "favorites": "מועדף",
+        "remove_from_library": "להסיר"
     },
     "gamecard": {
         "repairing": "מתקן",
@@ -125,7 +131,8 @@
         "goodie": "לא ניתן להתקין",
         "syncingSaves": "מסנכרן שמירות",
         "extracting": {
-            "cancel": "ביטול החילוץ"
+            "cancel": "ביטול החילוץ",
+            "progress": "מחלץ"
         },
         "launching": "מפעיל",
         "playing": "משחק",
@@ -145,7 +152,8 @@
         "updating": "מעדכן משחק",
         "uninstalling": "מסיר התקנה",
         "preparing": "להכין את ההורדה, חכה",
-        "distributables": "התקנת Distributables"
+        "distributables": "התקנת Distributables",
+        "paused": "הופסק"
     },
     "submenu": {
         "settings": "הגדרות",
@@ -206,7 +214,8 @@
         },
         "playing": {
             "stop": "משחק (עצור)",
-            "start": "שחקו עכשיו"
+            "start": "שחקו עכשיו",
+            "update": "עדכון"
         },
         "ubisoft": "מתקין Ubisoft Connect",
         "saves": {
