@@ -174,7 +174,10 @@
         "login": "Σύνδεση",
         "sync": "Συγχρονισμός",
         "syncing": "Συγχρονισμός",
-        "unsync": "Αποσυγχρονισμός"
+        "unsync": "Αποσυγχρονισμός",
+        "download": "Λήψη",
+        "continue": "Συνέχεια",
+        "update": "Ενημέρωση"
     },
     "controller": {
         "hints": {
@@ -214,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "title_dm": "Download Manager Download Manager"
+        "title_dm": "Download Manager Download Manager",
+        "ETA": "Αναμενόμενη ώρα"
     },
     "epic": {
         "offline-notification-body": "Οι διαδικτυακές υπηρεσίες πιθανό να μη λειτουργούν πλήρως καθώς οι διακομιστές Epic Games ειναι εκτός σύνδεσης!",
@@ -405,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Άνοιγμα",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -468,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Συνέχιση λήψης",
+            "pause": "Παύση λήψεων"
         }
     },
     "Recent": "Παίχτηκε Πρόσφατα",
@@ -589,7 +595,8 @@
         "autoLaunchHyperPlay": "Auto Launch Hyper Παίξτε Play Play",
         "dxvkfpslimit": "Περιορισμός FPS (DX9, 10 και 11)",
         "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix",
-        "steamId": "Steam ID"
+        "steamId": "Steam ID",
+        "msync": "Ενεργοποίηση Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -624,7 +631,9 @@
             "log": "Αρχεία καταγραφής",
             "other": "Άλλα",
             "sync": "Αποθήκευση-Συγχρονισμός",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Λογαριασμοί",
+            "systemInformation": "Πληροφορίες συστήματος"
         },
         "open-config-file": "Άνοιγμα αρχείου παραμετροποίησης",
         "reset-hyperplay": "Επαναφορά HyperPlay",
@@ -648,16 +657,25 @@
             "cpuDescription": "{{numOfCores}}x {{modelName}}",
             "gogdlVersion": "Gogdl: {{gogdlVersion}}",
             "gpu": "GPU:",
-            "memory": "Μνήμη:"
+            "memory": "Μνήμη:",
+            "os": "Λειτουργικό Σύστημα",
+            "copyToClipboard": "Αντιγραφή στο πρόχειρο"
         },
-        "gamesSettings": "Παιχνίδια Ρυθμίσεις"
+        "gamesSettings": "Παιχνίδια Ρυθμίσεις",
+        "wine": {
+            "manager": {
+                "title": "Διαχειριστής Wine"
+            }
+        }
     },
     "Settings": "Ρυθμίσεις",
     "sidebar": {
         "collapse": "Σύμπτυξη πλαϊνής γραμμής",
         "uncollapse": "Κατάργηση σύμπτυξης πλαϊνής γραμμής",
         "achievements": "Επιτεύγματα",
-        "downloadManager": "Download Manager Download Manager"
+        "downloadManager": "Download Manager Download Manager",
+        "store": "Marketplace",
+        "library": "Βιβλιοθήκη"
     },
     "status": {
         "installing": "Εγκατάσταση",
@@ -697,7 +715,8 @@
         "logout_confirmation": "Είστε σίγουροι πως θέλετε να αποσυνδεθείτε;",
         "manageaccounts": "Διαχείριση Λογαριασμών",
         "quit": "Έξοδος",
-        "manageStore": "Διαχείριση καταστημάτων"
+        "manageStore": "Διαχείριση καταστημάτων",
+        "logIn": "Σύνδεση"
     },
     "webview": {
         "controls": {
@@ -761,7 +780,9 @@
                         "useRecoveryPhraseInfo": "Αυτό το χαρακτηριστικό συνιστάται για προχωρημένους χρήστες και προγραμματιστές. Η μυστική φράση ανάκτησης σας αποθηκεύεται σε τοπικό επίπεδο στο MetaMask και ποτέ δεν μοιράζεται με το HyperPlay.",
                         "title": "Επιλέξτε το πρόγραμμα περιήγησης για εισαγωγή από",
                         "cantFindProfile": "Δεν μπορείτε να βρείτε το προφίλ περιήγησης σας?",
-                        "createNewWallet": "Δημιουργήστε νέο πορτοφόλι επέκτασης MM"
+                        "createNewWallet": "Δημιουργήστε νέο πορτοφόλι επέκτασης MM",
+                        "learnMore": "Μάθετε περισσότερα",
+                        "orWord": "Ή"
                     },
                     "info": {
                         "createWalletCTA": "Δημιουργήστε ένα πορτοφόλι",
@@ -802,7 +823,8 @@
             "connectionCanceled": {
                 "description": "Επιβεβαιώνετε το αίτημα σύνδεσης στο κινητό σας πορτοφόλι για να προχωρήσετε.",
                 "title": "Η σύνδεση ακυρώθηκε!"
-            }
+            },
+            "terms": "Όροι Υπηρεσίας"
         },
         "achievements": {
             "gamesToMint": "Παιχνίδια για mint",
@@ -823,18 +845,23 @@
             }
         },
         "browserImport": {
-            "appId": "App Id"
+            "appId": "App Id",
+            "profile": "Προφίλ"
         },
         "analyticsOn": "Το Analytics μετατρέπεται",
         "buttons": {
-            "agree": "Συμφωνώ ότι συμφωνώ"
+            "agree": "Συμφωνώ ότι συμφωνώ",
+            "noThanks": "Όχι ευχαριστώ"
         },
         "changeWallet": "Λογαριασμός λογαριασμού Swap πορτοφόλι",
         "connectWallet": "Connect πορτοφόλι",
         "currentWallet": "Τρέχον πορτοφόλι",
         "gamecard": {
             "installed": "Ετοιμαστείτε να παίξετε",
-            "extracting": "Εξορισμός..."
+            "extracting": "Εξορισμός...",
+            "distributables": "Εγκατάσταση διανομέων",
+            "installing": "Μεταφορτώνεται...",
+            "paused": "Σε παύση"
         },
         "publicAlpha": "Δημόσια Alpha",
         "viewMyAccount": "Δείτε το λογαριασμό μου",
@@ -845,7 +872,15 @@
         "linkSteamAccountTitle": "Link λογαριασμό λογαριασμού Steam",
         "syncing": "Σύνθεση...",
         "viewItem": "Δείτε {{item}}",
-        "analyticsOff": "Το Analytics απενεργοποιείται"
+        "analyticsOff": "Το Analytics απενεργοποιείται",
+        "copyUrl": "Copy URL",
+        "discordApp": "Discord",
+        "folder": "Φάκελος",
+        "misc": "Ποτέ",
+        "turnAnalyticsOff": "Απενεργοποίηση",
+        "turnAnalyticsOn": "Ενεργοποίηση",
+        "logOut": "Αποσύνδεση",
+        "Sync": "Συγχρονισμός"
     },
     "hyperplayOverlay": {
         "signatureRequest": {
@@ -894,7 +929,9 @@
             "progressTowardsStreak": "πρόοδο προς το σημερινό streak.",
             "streakProgress": "Streak Progress",
             "playEachDay": "Παίξτε κάθε μέρα έτσι ώστε το streak σας να μην επαναφέρετε!",
-            "streakCompleted": "Ο Streak ολοκλήρωσε! Ισχυρίστε τις ανταμοιβές σας τώρα."
+            "streakCompleted": "Ο Streak ολοκλήρωσε! Ισχυρίστε τις ανταμοιβές σας τώρα.",
+            "days": "ημέρες",
+            "now": "Τώρα"
         },
         "readyForClaim": "Ετοιμαστείτε για αξίωση",
         "reward": "Reward",
@@ -906,11 +943,18 @@
         "errorMessage": "Υπήρχε ένα λάθος με τη συναλλαγή.",
         "linkAccount": "Σύνδεση σας λογαριασμός Steam για να ελέγξετε την επιλεξιμότητα.",
         "type": {
-            "playstreak": "Παίξτε Streak"
+            "playstreak": "Παίξτε Streak",
+            "reputation": "Φήμη"
         },
         "View Game": "Δείτε παιχνίδι",
         "createDiscordTicket": "Δημιουργήθηκε εισιτήριο Discord",
-        "notEnoughGas": "Επαρκή ισορροπία πορτοφολιού για να διεκδικήσει την ανταμοιβή σας λόγω των τελών φυσικού αερίου. Δοκιμάστε ένα διαφορετικό πορτοφόλι ή αναπληρώστε αυτό πριν αναπροσανατολίσετε."
+        "notEnoughGas": "Επαρκή ισορροπία πορτοφολιού για να διεκδικήσει την ανταμοιβή σας λόγω των τελών φυσικού αερίου. Δοκιμάστε ένα διαφορετικό πορτοφόλι ή αναπληρώστε αυτό πριν αναπροσανατολίσετε.",
+        "Play": "Αναπαραγωγή",
+        "points": "Σημεία",
+        "reputation": "Φήμη",
+        "active": "Ενεργό",
+        "signIn": "Σύνδεση",
+        "sync": "Συγχρονισμός"
     },
     "email_subscription": {
         "title": "Σας ευχαριστούμε για την εγγραφή!",
@@ -944,11 +988,16 @@
         }
     },
     "gameRelease": {
-        "prototype": "Prototype"
+        "prototype": "Prototype",
+        "alpha": "Alpha",
+        "demo": "Demo",
+        "beta": "Beta",
+        "main": "Κύριο"
     },
     "exit_game": "Exit Game",
     "sideload": {
-        "warningMessage": "Side-loading ένα παιχνίδι είναι ένα χαρακτηριστικό που προορίζεται για προγραμματιστές και έμπειρους χρήστες ισχύος. Παροχή ενός εγκαταστάτη που περιέχει malware θα μπορούσε να θέσει σε κίνδυνο τον υπολογιστή σας και να οδηγήσει σε κλοπή κεφαλαίων."
+        "warningMessage": "Side-loading ένα παιχνίδι είναι ένα χαρακτηριστικό που προορίζεται για προγραμματιστές και έμπειρους χρήστες ισχύος. Παροχή ενός εγκαταστάτη που περιέχει malware θα μπορούσε να θέσει σε κίνδυνο τον υπολογιστή σας και να οδηγήσει σε κλοπή κεφαλαίων.",
+        "warningTitle": "Σημαντικό"
     },
     "importGameErrorMessage": "Όχι ένας έγκυρος φάκελος παιχνιδιών, το παιχνίδι εισαγωγής δεν είναι εφικτό",
     "importGameErrorTitle": "Επεισόδιο Game Error",
@@ -961,5 +1010,8 @@
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Είστε συνδεδεμένοι με το HyperPlay με ένα εξωτερικό πορτοφόλι."
     },
-    "importGameErrorMessageExecutable": "Game Game Game Δεν είναι εφικτό, το παιχνίδι εισαγωγής δεν είναι εφικτό"
+    "importGameErrorMessageExecutable": "Game Game Game Δεν είναι εφικτό, το παιχνίδι εισαγωγής δεν είναι εφικτό",
+    "profile": "Προφίλ",
+    "ALL": "ΌΛΑ",
+    "analytics": "Αναλυτικά στοιχεία"
 }
