@@ -916,6 +916,6 @@
         "main": "Principal"
     },
     "exit_game": "Sair do jogo",
-    "importGameErrorMessage": "Não uma pasta de jogo válida, o jogo de importação não é possível",
+    "importGameErrorMessage": "Não é uma pasta de jogo válida, não é possível importar o jogo",
     "importGameErrorMessageExecutable": "Jogo Executável não encontrado, importando jogo não é possível"
 }
