@@ -21,10 +21,9 @@ import {
 } from './rewards/completeExternalTask'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { useMutation } from '@tanstack/react-query'
-import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
-import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { useGetRewards } from 'frontend/hooks/useGetRewards'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -43,6 +42,9 @@ export function QuestDetailsWrapper({
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
   const questMeta = questResult.data.data
+
+  const rewardsQuery = useGetRewards(selectedQuestId)
+  const questRewards = rewardsQuery.data.data
 
   const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
   const questPlayStreakData = questPlayStreakResult.data.data
@@ -203,7 +205,11 @@ export function QuestDetailsWrapper({
     completeTaskMutation.isPending ||
     claimPointsMutation.isPending
 
-  if (selectedQuestId !== null && questMeta !== undefined) {
+  if (
+    selectedQuestId !== null &&
+    questMeta !== undefined &&
+    questRewards !== undefined
+  ) {
     const questDetailsProps: QuestDetailsProps = {
       questType: questMeta.type,
       title: questMeta.name,
@@ -221,19 +227,7 @@ export function QuestDetailsWrapper({
           isSignedIn
         )
       },
-      rewards:
-        questMeta.rewards?.map((val) => ({
-          title: val.name,
-          imageUrl: val.image_url,
-          chainName: getRewardCategory(val, t),
-          numToClaim:
-            val.amount_per_user && val.decimals
-              ? getDecimalNumberFromAmount(
-                  val.amount_per_user.toString(),
-                  val.decimals
-                ).toString()
-              : undefined
-        })) ?? [],
+      rewards: questRewards ?? [],
       i18n,
       onClaimClick: async () => claimRewards(questMeta.rewards ?? []),
       onSignInClick: () => authState.openSignInModal(),
@@ -264,7 +258,11 @@ export function QuestDetailsWrapper({
         }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
       />
     )
-  } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
+  } else if (
+    questResult?.data.isLoading ||
+    questResult?.data.isFetching ||
+    rewardsQuery?.data.isLoading
+  ) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
       questType: 'PLAYSTREAK',
       title: '',
