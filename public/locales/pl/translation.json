@@ -152,7 +152,10 @@
         "login": "Zaloguj",
         "sync": "Synchronizuj",
         "syncing": "Synchronizowanie",
-        "unsync": "Desynchronizuj"
+        "unsync": "Desynchronizuj",
+        "update": "Aktualizuj",
+        "continue": "Kontynuuj",
+        "download": "Pobieranie"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Szacowany czas"
     },
     "epic": {
         "offline-notification-body": "Usługi online mogą nie działać w pełni, ponieważ serwery Epic Games są offline!",
@@ -369,7 +373,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Otwarte",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -431,7 +435,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Wstrzymaj pobieranie",
+            "resume": "Wznów pobieranie"
         }
     },
     "Recent": "Ostatnio uruchamiane",
@@ -545,7 +551,8 @@
         "disable_logs": "Wyłącz dzienniki",
         "showMetalOverlay": "Pokaż nakładkę statystyk",
         "addgamestoapplications": "Automatycznie dodawaj gry do aplikacji",
-        "alt-nile-bin": "Wybierz alternatywny plik binarny Nilu"
+        "alt-nile-bin": "Wybierz alternatywny plik binarny Nilu",
+        "msync": "Włącz Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +587,32 @@
             "log": "Log",
             "other": "Inne",
             "sync": "Synchronizuj zapisy",
-            "wineExt": "Rozszerzenia Wine"
+            "wineExt": "Rozszerzenia Wine",
+            "accounts": "Konta",
+            "systemInformation": "Informacje o Systemie"
         },
         "open-config-file": "Otwórz plik konfiguracyjny",
         "reset-hyperplay": "Zresetuj HyperPlay",
         "saves": {
             "label": "Lokalizacja zapisów gry:",
             "warning": "Zapisy w chmurze są w wazie Beta, zrób kopię swoich zapisów przed synchronizacją (na wypadek niepowodzenia)"
+        },
+        "wine": {
+            "manager": {
+                "title": "Menedżer Wine"
+            }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Skopuj do schowka",
+            "os": "System operacyjny"
         }
     },
     "Settings": "Ustawienia",
     "sidebar": {
         "collapse": "Zwiń pasek boczny",
-        "uncollapse": "Pokaż pasek boczny"
+        "uncollapse": "Pokaż pasek boczny",
+        "store": "Sklep",
+        "library": "Biblioteka"
     },
     "status": {
         "installing": "Instalowanie",
@@ -631,7 +651,8 @@
         "logout": "Wyloguj",
         "logout_confirmation": "Czy na pewno chcesz się wylogować?",
         "manageaccounts": "Zarządzaj kontami",
-        "quit": "Wyjdź"
+        "quit": "Wyjdź",
+        "logIn": "Zaloguj się"
     },
     "webview": {
         "controls": {
@@ -668,5 +689,71 @@
     },
     "prime-gaming": "Najlepsze gry",
     "amazon": "Amazonka",
-    "Amazon Games": "Gry Amazona"
+    "Amazon Games": "Gry Amazona",
+    "hyperplay": {
+        "folder": "Katalog",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "info": {
+                        "skip": "Pomiń na razie"
+                    },
+                    "import": {
+                        "learnMore": "Dowiedz się więcej."
+                    }
+                }
+            },
+            "terms": "Warunki świadczenia usług"
+        },
+        "logOut": "Wyloguj się",
+        "misc": "Nigdy",
+        "Sync": "Synchronizacja",
+        "turnAnalyticsOn": "Włącz",
+        "turnAnalyticsOff": "Wyłącz",
+        "discordApp": "Discord",
+        "buttons": {
+            "noThanks": "Nie, dziękuję"
+        },
+        "browserImport": {
+            "profile": "Profil"
+        },
+        "copyUrl": "Kopiuj adres URL",
+        "gamecard": {
+            "paused": "Wstrzymane",
+            "installing": "Pobieranie...",
+            "distributables": "Installing Distributable"
+        }
+    },
+    "gameRelease": {
+        "alpha": "Alfa",
+        "demo": "Wypróbuj",
+        "main": "Główny",
+        "beta": "Beta"
+    },
+    "quest": {
+        "active": "Aktywny",
+        "quests": "Zadania",
+        "Play": "Zagraj",
+        "playstreak": {
+            "days": "dni",
+            "now": "Teraz"
+        },
+        "points": "Punkty",
+        "reputation": "Reputacja",
+        "signIn": "Zaloguj się",
+        "sync": "Synchronizacja",
+        "connectSteamAccount": "Połącz konto zespołu",
+        "type": {
+            "reputation": "Reputacja"
+        }
+    },
+    "sideload": {
+        "warningTitle": "Ważne"
+    },
+    "ALL": "Wszystkie",
+    "analytics": "Analityka",
+    "profile": "Profil",
+    "quests": {
+        "quests": "Zadania"
+    }
 }
