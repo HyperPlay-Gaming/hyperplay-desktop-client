@@ -174,7 +174,10 @@
         "login": "Connexion",
         "sync": "Synchroniser",
         "syncing": "Synchronisation en cours",
-        "unsync": "Désynchroniser"
+        "unsync": "Désynchroniser",
+        "update": "Mise à jour",
+        "continue": "Poursuivre",
+        "download": "Télécharger"
     },
     "controller": {
         "hints": {
@@ -214,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "title_dm": "Télécharger Manager"
+        "title_dm": "Télécharger Manager",
+        "ETA": "Temps estimé"
     },
     "epic": {
         "offline-notification-body": "Les services en ligne peuvent ne pas entièrement fonctionner car les serveurs d'Epic Games sont hors ligne !",
@@ -405,7 +409,7 @@
         "offline-retry-in": "Déconnecté. Nouvel essai dans {{seconds}} secondes.",
         "retrying": "Réessayer"
     },
-    "Open": "",
+    "Open": "Ouvrir",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -468,7 +472,9 @@
             "empty": "Rien à télécharger",
             "finished": "Achevés",
             "queued": "En attente",
-            "remove": "Retirer de la liste des Téléchargements"
+            "remove": "Retirer de la liste des Téléchargements",
+            "pause": "Mettre les téléchargements en pause",
+            "resume": "Reprendre le téléchargement"
         }
     },
     "Recent": "Joué récemment",
@@ -589,7 +595,8 @@
         "steamId": "Stam ID",
         "autodxvknvapi": "Installation automatique/mise à jour DXVK-NVAPI sur Prefix",
         "autoLaunchHyperPlay": "Lancement automatique Hyper Play",
-        "dxvkfpslimit": "Limite FPS (DX9, 10 et 11)"
+        "dxvkfpslimit": "Limite FPS (DX9, 10 et 11)",
+        "msync": "Activer Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -624,7 +631,9 @@
             "log": "Log",
             "other": "Autre",
             "sync": "Synchronisation des sauvegardes",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Comptes",
+            "systemInformation": "Informations sur le système"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
@@ -646,16 +655,27 @@
             "showDetailed": "Spécifications du système",
             "steamDeck": "Steam Deck",
             "systemModel": "Modèle système:",
-            "version": "Version: {{appVersion}}"
+            "version": "Version: {{appVersion}}",
+            "os": "Système d'exploitation",
+            "cpu": "CPU :",
+            "copyToClipboard": "Copier dans le presse-papier"
         },
         "reset-extension": "Reset Extension",
-        "gamesSettings": "Paramètres de jeux"
+        "gamesSettings": "Paramètres de jeux",
+        "wine": {
+            "manager": {
+                "title": "Gestion de Wine"
+            }
+        }
     },
     "Settings": "Options",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
-        "downloadManager": "Télécharger Manager"
+        "downloadManager": "Télécharger Manager",
+        "library": "Bibliothèque",
+        "achievements": "Succès",
+        "store": "Magasin"
     },
     "status": {
         "installing": "Installing",
@@ -695,7 +715,8 @@
         "logout_confirmation": "Êtes-vous certain(e) de vouloir vous déconnecter?",
         "manageaccounts": "Comptes",
         "quit": "Quitter",
-        "manageStore": "Gérer les magasins"
+        "manageStore": "Gérer les magasins",
+        "logIn": "S'identifier"
     },
     "webview": {
         "controls": {
@@ -745,7 +766,10 @@
         },
         "gamecard": {
             "installed": "Prêt à jouer",
-            "extracting": "Extrait..."
+            "extracting": "Extrait...",
+            "installing": "Téléchargement...",
+            "paused": "En suspend",
+            "distributables": "Installation de distributeurs"
         },
         "analyticsOn": "L'analyse est activée",
         "onboarding": {
@@ -780,7 +804,8 @@
                         "createNewWallet": "Créer un nouveau portefeuille d'extension MM",
                         "orWord": "OU",
                         "title": "Sélectionnez le navigateur à importer",
-                        "cantFindProfile": "Vous ne trouvez pas votre profil de navigateur?"
+                        "cantFindProfile": "Vous ne trouvez pas votre profil de navigateur?",
+                        "learnMore": "En savoir plus."
                     },
                     "info": {
                         "createWalletDescription": "Cliquez dans “Créer un portefeuille” ci-dessous si vous n'avez pas de portefeuille ou si vous voulez en créer un nouveau:",
@@ -793,7 +818,8 @@
                             "details": "Les portefeuilles sont utilisés pour envoyer, recevoir, stocker et afficher des actifs numériques comme les jetons et les télévirements.",
                             "title": "Une maison pour vos actifs numériques"
                         },
-                        "title": "Qu'est-ce qu'un portefeuille ?"
+                        "title": "Qu'est-ce qu'un portefeuille ?",
+                        "skip": "Passer pour l'instant"
                     },
                     "scan": {
                         "title": "Scan QR avec ",
@@ -814,18 +840,21 @@
                     "communityCTA_2": "communauté. Ensemble, façonnons l'avenir du jeu !"
                 },
                 "title": "Bienvenue à Hyper Jouez Early Access!"
-            }
+            },
+            "terms": "Conditions générales d’utilisation"
         },
         "achievements": {
             "addThisGame": "Ajouter ce jeu",
             "noAchievements": {
-                "doubleCheckMessage": "On dirait qu'on n'a pas pu trouver de jeux dans votre compte Steam pour le moment. Juste un petit rappel pour double-vérifier que vos détails de jeu sont publics. De cette façon, nous pouvons accéder à vos réalisations et vous fournir la meilleure expérience."
+                "doubleCheckMessage": "On dirait qu'on n'a pas pu trouver de jeux dans votre compte Steam pour le moment. Juste un petit rappel pour double-vérifier que vos détails de jeu sont publics. De cette façon, nous pouvons accéder à vos réalisations et vous fournir la meilleure expérience.",
+                "oops": "Oups !"
             },
             "gamesToMint": "Jeux à la menthe",
             "freeMints": "Mintes libres"
         },
         "browserImport": {
-            "appId": "App Id"
+            "appId": "App Id",
+            "profile": "Profil"
         },
         "linkSteamAccountTitle": "Compte Steam Link",
         "otp": "Code de passe à une heure",
@@ -838,7 +867,20 @@
         "viewMyAccount": "Voir mon compte",
         "viewItem": "Voir {{item}}",
         "currentWallet": "Portefeuille actuel",
-        "linkSteamAccountCta": "Va à Steam"
+        "linkSteamAccountCta": "Va à Steam",
+        "syncing": "Synchronisation en cours...",
+        "turnAnalyticsOff": "Désactiver",
+        "copyUrl": "Copier l'URL",
+        "folder": "Répertoire",
+        "misc": "Jamais",
+        "Sync": "Synchroniser",
+        "turnAnalyticsOn": "Activer",
+        "buttons": {
+            "noThanks": "Non, merci",
+            "agree": "I agree"
+        },
+        "discordApp": "Discord",
+        "logOut": "Déconnexion"
     },
     "hyperplayOverlay": {
         "extensionNotification": {
@@ -899,10 +941,13 @@
             "playToStart": "Jouez à ce jeu pour commencer votre streak!",
             "progressTowardsStreak": "avance vers le streak d'aujourd'hui.",
             "streakCompleted": "Streak terminé ! Demande tes récompenses maintenant.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "days": "jours",
+            "now": "Maintenant"
         },
         "type": {
-            "playstreak": "Jouer Streak"
+            "playstreak": "Jouer Streak",
+            "reputation": "Réputation"
         },
         "readyForClaim": "Prêt pour réclamation",
         "associatedGames": "Jeux associés",
@@ -910,10 +955,20 @@
         "claimFailed": "Claim failed",
         "claimFailedMessage": "Essayez encore une fois. Si cela ne fonctionne toujours pas, créez un ticket de support Discord.",
         "createDiscordTicket": "Billet Discord",
-        "notEnoughGas": "Un solde de portefeuille insuffisant pour réclamer votre récompense en raison de frais de gaz. Essayez un portefeuille différent ou reconstituer celui-ci avant de rentrer."
+        "notEnoughGas": "Un solde de portefeuille insuffisant pour réclamer votre récompense en raison de frais de gaz. Essayez un portefeuille différent ou reconstituer celui-ci avant de rentrer.",
+        "connectSteamAccount": "Connecter le compte",
+        "reputation": "Réputation",
+        "active": "Actif",
+        "claimed": "Demandé",
+        "Play": "Jouer",
+        "points": "Points",
+        "quests": "Quêtes",
+        "sync": "Synchroniser",
+        "signIn": "Connexion"
     },
     "sideload": {
-        "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Enlever un installateur qui contient des logiciels malveillants pourrait compromettre votre ordinateur et conduire au vol de fonds."
+        "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Enlever un installateur qui contient des logiciels malveillants pourrait compromettre votre ordinateur et conduire au vol de fonds.",
+        "warningTitle": "Important"
     },
     "email_subscription": {
         "subtitle": "Vous êtes maintenant une partie de notre communauté, et nous sommes heureux de partager des mises à jour et des idées précieuses avec vous.",
@@ -934,12 +989,17 @@
                 "client": "Vous n'êtes pas connecté à l'heure actuelle, le progrès de la streak ne sera pas suivi. Connectez-vous à HyperPlay via la liste déroulante pour suivre les progrès.",
                 "overlay": "Vous n'êtes pas connecté à l'heure actuelle, le progrès de la streak ne sera pas suivi. Veuillez quitter le jeu et vous connecter à HyperPlay via la liste déroulante pour suivre les progrès."
             }
-        }
+        },
+        "quests": "Quêtes"
     },
     "accounts": "comptes",
     "exit_game": "Exit Game",
     "gameRelease": {
-        "prototype": "Prototype"
+        "prototype": "Prototype",
+        "main": "Principal",
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Mode démo"
     },
     "importGameErrorTitle": "Import Game Error",
     "achievements": {
@@ -950,5 +1010,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Vous êtes connecté à HyperPlay avec un portefeuille externe."
-    }
+    },
+    "ALL": "TOUS",
+    "analytics": "Statistiques",
+    "profile": "Profil"
 }
