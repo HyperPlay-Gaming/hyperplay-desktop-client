@@ -1,5 +1,5 @@
 import { getPlatformName, getStoreName } from 'backend/utils'
-import { AppPlatforms, InstallPlatform, Reward, Runner } from 'common/types'
+import { AppPlatforms, InstallPlatform, Runner } from 'common/types'
 import { PROVIDERS } from 'common/types/proxy-types'
 
 export interface MetricsOptIn {
@@ -304,37 +304,39 @@ export interface QuestViewed {
       id: string
     }
   }
+  sensitiveProperties?: never
 }
+
+// TODO: refactor and filter out NULL values in _trackEventPrivate so we can have null values in the type
+// and so we can reuse the same type in src/common/types
+interface Reward {
+  id: number
+  reward_type: 'ERC20' | 'ERC721' | 'ERC1155' | 'POINTS' | 'EXTERNAL-TASKS'
+  name: string
+  contract_address: `0x${string}`
+  /* eslint-disable-next-line */
+  token_ids: { amount_per_user: string; token_id: number }[]
+  image_url: string
+}
+
+type RewardPropertiesType = Reward & { quest_id: string }
 
 export interface RewardClaimStarted {
   event: 'Reward Claim Started'
-  properties: {
-    reward: Reward
-    quest: {
-      id: string
-    }
-  }
+  properties: RewardPropertiesType
+  sensitiveProperties?: never
 }
 
 export interface RewardClaimSuccess {
   event: 'Reward Claim Success'
-  properties: {
-    reward: Reward
-    quest: {
-      id: string
-    }
-  }
+  properties: RewardPropertiesType
+  sensitiveProperties?: never
 }
 
 export interface RewardClaimError {
   event: 'Reward Claim Error'
-  properties: {
-    reward: Reward
-    quest: {
-      id: string
-    }
-    message: string
-  }
+  properties: RewardPropertiesType
+  sensitiveProperties?: never
 }
 
 export type PossibleMetricPayloads =

@@ -266,15 +266,26 @@ export function QuestDetailsWrapper({
 
   async function claimRewards(rewards: Reward[]) {
     for (const reward_i of rewards) {
-      if (selectedQuestId !== null) {
-        window.api.trackEvent({
-          event: 'Reward Claim Started',
-          properties: {
-            quest: { id: selectedQuestId.toString() },
-            reward: reward_i
-          }
-        })
+      if (selectedQuestId === null) {
+        continue
       }
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      const {
+        amount_per_user,
+        chain_id,
+        marketplace_url,
+        decimals,
+        ...rewardToTrack_i
+      } = reward_i
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      const properties = {
+        ...rewardToTrack_i,
+        quest_id: selectedQuestId.toString()
+      }
+      window.api.trackEvent({
+        event: 'Reward Claim Started',
+        properties
+      })
 
       try {
         switch (reward_i.reward_type) {
@@ -296,27 +307,15 @@ export function QuestDetailsWrapper({
       } catch (err) {
         const errMsg = `${err}`
         console.error(errMsg)
-        if (selectedQuestId !== null) {
-          window.api.trackEvent({
-            event: 'Reward Claim Error',
-            properties: {
-              quest: { id: selectedQuestId.toString() },
-              reward: reward_i,
-              message: errMsg
-            }
-          })
-        }
-      }
-
-      if (selectedQuestId !== null) {
         window.api.trackEvent({
-          event: 'Reward Claim Success',
-          properties: {
-            quest: { id: selectedQuestId.toString() },
-            reward: reward_i
-          }
+          event: 'Reward Claim Error',
+          properties
         })
       }
+      window.api.trackEvent({
+        event: 'Reward Claim Success',
+        properties
+      })
     }
   }
 
