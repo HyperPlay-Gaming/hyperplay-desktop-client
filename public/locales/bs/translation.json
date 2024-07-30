@@ -925,7 +925,8 @@
         "notEnoughGas": "#Nedostatan #lisnica #bilanca #na @claim #tvoj #nagrada @due to #gas #trošak. #Pokušaj @a #drugačiji #lisnica ili #obnavljati @this #jedan prije @retry#.",
         "claimAll": "@Claim @all",
         "linkAccount": "#Veza #tvoj @Steam #račun #na #pregled eligibility#.",
-        "reputation": "#Reputacija"
+        "reputation": "#Reputacija",
+        "pointsClaimed": "#Poen"
     },
     "profile": "Profile",
     "back_to_game": "@Back #na #igra",
