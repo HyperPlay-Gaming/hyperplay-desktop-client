@@ -152,7 +152,10 @@
         "login": "Login",
         "sync": "同期",
         "syncing": "同期しています",
-        "unsync": "非同期"
+        "unsync": "非同期",
+        "continue": "続ける",
+        "download": "ダウンロード",
+        "update": "を更新"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "予定時間"
     },
     "epic": {
         "offline-notification-body": "HyperPlay will not work probably!",
@@ -369,7 +373,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "オープン日時",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -432,7 +436,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "ダウンロードの一時停止",
+            "resume": "ダウンロードを再開"
         }
     },
     "Recent": "最近のゲーム",
@@ -546,7 +552,8 @@
         "disable_logs": "ログを無効にする",
         "addgamestoapplications": "ゲームをアプリケーションに自動的に追加する",
         "showMetalOverlay": "統計オーバーレイを表示",
-        "alt-nile-bin": "代替の Nile バイナリを選択する"
+        "alt-nile-bin": "代替の Nile バイナリを選択する",
+        "msync": "Esyncを有効にする"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -581,19 +588,34 @@
             "log": "Log",
             "other": "他",
             "sync": "同期を保存",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "システム情報",
+            "accounts": "アカウント"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "systemInformation": {
+            "os": "オペレーティングシステム:",
+            "copyToClipboard": "クリップボードにコピー",
+            "cpu": "CPU:"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
         }
     },
     "Settings": "設定",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "achievements": "達成率",
+        "library": "ライブラリ",
+        "store": "Marketplace"
     },
     "status": {
         "installing": "インストール中",
@@ -632,7 +654,8 @@
         "logout": "ログアウト",
         "logout_confirmation": "ログアウトしてもよろしいですか？",
         "manageaccounts": "Manage Accounts",
-        "quit": "終了"
+        "quit": "終了",
+        "logIn": "ログイン"
     },
     "webview": {
         "controls": {
@@ -655,5 +678,91 @@
     },
     "Amazon Games": "アマゾンゲーム",
     "amazon": "アマゾン",
-    "prime-gaming": "プライムゲーミング"
+    "prime-gaming": "プライムゲーミング",
+    "hyperplay": {
+        "buttons": {
+            "noThanks": "結構です"
+        },
+        "turnAnalyticsOff": "無効にする",
+        "copyUrl": "URLをコピー",
+        "misc": "しない",
+        "browserImport": {
+            "profile": "プロフィール"
+        },
+        "logOut": "ログアウト",
+        "onboarding": {
+            "terms": "サービス利用規約",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "追加情報"
+                    },
+                    "info": {
+                        "skip": "今はスキップ"
+                    }
+                }
+            }
+        },
+        "achievements": {
+            "noAchievements": {
+                "oops": "おっとっと！"
+            }
+        },
+        "discordApp": "Discord",
+        "folder": "フォルダ",
+        "gamecard": {
+            "distributables": "配布物のインストール",
+            "paused": "一時停止済み",
+            "installing": "ダウンロード中..."
+        },
+        "turnAnalyticsOn": "有効にする",
+        "Sync": "シンク"
+    },
+    "dlc": {
+        "size": "サイズ",
+        "actions": "ショートカット",
+        "installDlcs": "すべてのDLCをインストールします",
+        "title": "タイトル"
+    },
+    "gameRelease": {
+        "beta": "ベータ",
+        "alpha": "アルファ",
+        "demo": "Demo",
+        "main": "配管"
+    },
+    "quest": {
+        "reputation": "評判度",
+        "active": "アクティブ",
+        "claimed": "受け取る",
+        "connectSteamAccount": "チームアカウントを接続",
+        "Play": "再生",
+        "quests": "クエスト",
+        "signIn": "サインイン",
+        "playstreak": {
+            "days": "日",
+            "now": "今"
+        },
+        "points": "点",
+        "type": {
+            "reputation": "評判度"
+        },
+        "sync": "シンク"
+    },
+    "quests": {
+        "quests": "クエスト"
+    },
+    "ALL": "ALL",
+    "analytics": "分析",
+    "profile": "プロフィール",
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer"
+        }
+    },
+    "externalLink": {
+        "dontAskAgain": "再度確認しない"
+    },
+    "sideload": {
+        "warningTitle": "重要"
+    }
 }
