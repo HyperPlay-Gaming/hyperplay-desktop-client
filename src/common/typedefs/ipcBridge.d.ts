@@ -223,7 +223,7 @@ interface HyperPlayAsyncIPCFunctions {
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
-  addHyperplayGame: (gameId: string, addHyperplayGame: string) => Promise<void>
+  addHyperplayGame: (gameId: string, addHyperplayGame?: string) => Promise<void>
   sendRequest: (args: unknown[]) => Promise<unknown>
   sendAsyncRequest: (
     payload: JsonRpcRequest,
