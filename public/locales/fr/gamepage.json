@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Continuer l'installation",
             "message": "Souhaitez-vous CONSERVER les fichiers téléchargés ?",
-            "title": "Arrêter l'installation"
+            "title": "Arrêter l'installation",
+            "keepFilesMessage": "Vérifiez ici si vous voulez garder les fichiers de téléchargement après l'annulation."
         },
         "uninstall": {
             "checkbox": "Supprimer le préfixe : {{prefix}}{{newLine}}Note : cela ne peut pas être annulé et supprimera également les fichiers de sauvegarde non sauvegardés.",
             "message": "Voulez-vous désinstaller ce jeu?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Désinstaller"
+            "title": "Désinstaller",
+            "prefix_warning": "Le préfixe Vin pour ce jeu est le préfixe par défaut. Si vous voulez vraiment le supprimer, vous devez le faire manuellement.",
+            "dlc": "Voulez-vous désinstaller ce DLC?"
         },
         "update": {
             "message": "Une mise à jour est disponible pour ce jeu. Souhaitez-vous le mettre à jour maintenant ?",
-            "title": "Mise à jour nécessaire du jeu"
+            "title": "Mise à jour nécessaire du jeu",
+            "message-cancel": "Il n'est pas possible de jouer à ce jeu sans mise à jour"
         },
         "wineprefix": "Sélectionner le dossier de préfixe Wine",
-        "yes": "OUI"
+        "yes": "OUI",
+        "yesCancel": "Oui, annule",
+        "aware": "Je suis au courant",
+        "compability": {
+            "message": "Ce jeu Windows va fonctionner avec une couche de compatibilité. Vous pourriez rencontrer quelques problèmes ou le jeu pourrait ne pas fonctionner du tout."
+        },
+        "dont-show-again": "Ne plus afficher",
+        "ok": "D'accord"
     },
     "button": {
         "add_to_favourites": "Ajouter aux favoris",
@@ -56,7 +67,9 @@
         "install": "Installer",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Annuler le téléchargement",
+            "continue": "Continuer le téléchargement"
         },
         "remove_from_favourites": "Retirer des favoris",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Afficher le jeu",
         "uninstall": "Désinstaller",
-        "update": "Mise à jour"
+        "update": "Mise à jour",
+        "details": "Détails",
+        "favorites": "Favoris",
+        "remove_from_library": "Supprimer",
+        "unfavorites": "Supprimer des favoris"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Désactivé",
@@ -86,14 +103,17 @@
         "neverPlayed": "Jamais",
         "platform": "Sélectionner la version de la plateforme pour installer",
         "requirements": "System Requirements",
-        "totalPlayed": "Temps passé à jouer"
+        "totalPlayed": "Temps passé à jouer",
+        "dlcs": "DLCs",
+        "selectChannelName": "Sélectionnez Channel Nom"
     },
     "gamecard": {
         "moving": "Déplacement en cours",
         "repairing": "Réparation en cours"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "Aucune description !"
     },
     "hours": "Heures",
     "how-long-to-beat": {
@@ -118,7 +138,8 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "Préfixe Wine",
-        "wineversion": "Version de Wine"
+        "wineversion": "Version de Wine",
+        "compatibility-warning": "Ce jeu Windows va fonctionner avec une couche de compatibilité. Votre expérience peut varier."
     },
     "label": {
         "game": {
@@ -126,7 +147,8 @@
         },
         "playing": {
             "start": "Jouer maintenant",
-            "stop": "Jeu en cours (Arrêter)"
+            "stop": "Jeu en cours (Arrêter)",
+            "update": "Mise à jour"
         },
         "saves": {
             "syncing": "Synchronisation des sauvegardes en cours"
@@ -187,7 +209,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total Téléchargé",
         "uninstalling": "Uninstalling",
-        "updating": "Mise à jour du jeu en cours"
+        "updating": "Mise à jour du jeu en cours",
+        "extracting": {
+            "progress": "Extrait",
+            "cancel": "Annuler Extraction"
+        },
+        "preparing": "Préparation Télécharger, s'il vous plaît attendre",
+        "gog-goodie": "Ce jeu ne semble pas être installable. Vérifier le contenu téléchargeable sur https://gog.com/account",
+        "distributables": "Installation de distributeurs",
+        "moving-files": "Fichier de mouvement '{{file}}': {{percent}} ",
+        "goodie": "Non installable",
+        "playing": "Lecture en cours",
+        "paused": "En suspend",
+        "syncingSaves": "Synchronisation des sauvegardes en cours",
+        "downloading": "Téléchargement"
     },
     "submenu": {
         "addShortcut": "Ajouter un raccourci",
@@ -201,6 +236,7 @@
         "removeShortcut": "Remove shortcuts",
         "settings": "Options",
         "store": "Page du magasin",
-        "verify": "Vérifier et réparer"
+        "verify": "Vérifier et réparer",
+        "extraInfo": "Infos supplémentaires"
     }
 }

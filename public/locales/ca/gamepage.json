@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Continua amb la instal·lació",
             "message": "Vols MANTENIR els fitxers baixats?",
-            "title": "Atura la instal·lació"
+            "title": "Atura la instal·lació",
+            "keepFilesMessage": "Consulta aquí si vols guardar els fitxers de descàrrega després de la cancel·lació."
         },
         "uninstall": {
             "checkbox": "Treu el prefix: {{prefix}}{{newLine}}Avís: No es pot desfer i també traurà les desades de les quals no s'hagin fet còpies de seguretat.",
             "message": "Vols desinstal·lar aquest joc?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Desinstal·la"
+            "title": "Desinstal·la",
+            "dlc": "Vols Desinstal·lar aquesta DLC?",
+            "prefix_warning": "El prefix Wine per a aquest joc és el prefix predeterminat. Si realment voleu eliminar-lo, heu de fer-ho manualment."
         },
         "update": {
             "message": "Hi ha una actualització per a aquest joc, el vols actualitzar ara?",
-            "title": "Cal actualitzar el joc"
+            "title": "Cal actualitzar el joc",
+            "message-cancel": "No és possible jugar aquest joc sense actualitzar"
         },
         "wineprefix": "Selecciona el directori del WinePrefix",
-        "yes": "SÍ"
+        "yes": "SÍ",
+        "dont-show-again": "No tornis a mostrar",
+        "ok": "D'acord",
+        "aware": "Sóc conscient",
+        "compability": {
+            "message": "Aquest joc de Windows s'executa amb una capa de compatibilitat. Pot ser que hi hagi problemes o que el joc no funcioni."
+        },
+        "yesCancel": "Sí, cancel·lar"
     },
     "button": {
         "add_to_favourites": "Afegeix a preferits",
@@ -56,7 +67,9 @@
         "install": "Instal·la",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Cancel·la la baixada",
+            "continue": "Continua la baixada"
         },
         "remove_from_favourites": "Treu dels preferits",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Torna a mostrar el joc",
         "uninstall": "Desinstal·la",
-        "update": "Actualitza"
+        "update": "Actualitza",
+        "remove_from_library": "Suprimeix",
+        "details": "Detalls",
+        "favorites": "Preferit",
+        "unfavorites": "Desfavorits"
     },
     "cloud_save_unsupported": "No suportat",
     "disabled": "Desactivat",
@@ -86,14 +103,17 @@
         "neverPlayed": "Mai",
         "platform": "Selecciona la versió de la plataforma per instal·lar",
         "requirements": "Requeriments del sistema",
-        "totalPlayed": "Temps jugat"
+        "totalPlayed": "Temps jugat",
+        "selectChannelName": "Seleccionar Canal Nom d'usuari",
+        "dlcs": "DLC"
     },
     "gamecard": {
         "moving": "S'està movent",
         "repairing": "S'està reparant"
     },
     "generic": {
-        "error": "Error desconegut"
+        "error": "Error desconegut",
+        "noDescription": "No hi ha descripció disponible!"
     },
     "hours": "Hores",
     "how-long-to-beat": {
@@ -124,7 +144,8 @@
             "message": "La compatibilitat amb el sistema antitrampes s'ha trencat o rebutjat. El joc no funcionarà. Segur que el voleu instal·lar de totes maneres?",
             "install": "Sí (entenc que no funcionarà)",
             "title": "Antitrampes trencat/rebutjat"
-        }
+        },
+        "compatibility-warning": "Aquest joc de Windows s'executa amb una capa de compatibilitat. La teva experiència pot variar."
     },
     "label": {
         "game": {
@@ -132,7 +153,8 @@
         },
         "playing": {
             "start": "Juga",
-            "stop": "Atura"
+            "stop": "Atura",
+            "update": "Actualitza"
         },
         "saves": {
             "syncing": "S'estan sincronitzant les partides"
@@ -153,7 +175,8 @@
         "title": "Selecciona els components a instal·lar"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Ampolla CrossOver"
     },
     "sideload": {
         "field": {
@@ -192,7 +215,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total baixat",
         "uninstalling": "Uninstalling",
-        "updating": "S'està actualitzant el joc"
+        "updating": "S'està actualitzant el joc",
+        "downloading": "S'està baixant",
+        "paused": "Pausat",
+        "playing": "Reproduint",
+        "syncingSaves": "S'estan sincronitzant les partides",
+        "extracting": {
+            "cancel": "Cancel·la l'extracció",
+            "progress": "Extracció"
+        },
+        "moving-files": "Fitxer mòbil '{{file}}': {{percent}} ",
+        "preparing": "Preparant Descarregar, si us plau esperi",
+        "distributables": "Instal·lació de distribuïdors",
+        "gog-goodie": "Aquest joc no sembla instal·lar. Veure contingut descarregable en https://gog.com/account",
+        "goodie": "No instal·lat"
     },
     "submenu": {
         "addShortcut": "Afegeix una drecera",
@@ -206,6 +242,7 @@
         "removeShortcut": "Treu les dreceres",
         "settings": "Configuració",
         "store": "Botiga",
-        "verify": "Verifica i repara"
+        "verify": "Verifica i repara",
+        "extraInfo": "Informació addicional"
     }
 }

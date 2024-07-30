@@ -152,7 +152,10 @@
         "login": "Autentificare",
         "sync": "Sincronizează",
         "syncing": "Sincronizare",
-        "unsync": "Desincronizare"
+        "unsync": "Desincronizare",
+        "update": "Actualizare",
+        "continue": "Continue",
+        "download": "Descarcă"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Timpul estimat"
     },
     "epic": {
         "offline-notification-body": "Este posibil ca serviciile online să nu funcționeze complet, deoarece serverele Epic Games sunt offline!",
@@ -263,7 +267,8 @@
         "wine": {
             "part1": "HyperPlay caută pentru versiuni de Wine, Proton și CrossOver în următoarele foldere:",
             "part2": "Pentru alte locuri, utilizați un link simbolic către unul dintre aceste dosare"
-        }
+        },
+        "msync": "Fsync își propune să reducă supraîncărcarea serverului de vin în jocurile care necesită un proces intensiv. Activarea poate îmbunătăți performanța pe nucleele Linux acceptate."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Deschide",
     "options": {
         "advanced": {
             "key": "Nume variabilă",
@@ -431,7 +436,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Continuați descărcarea",
+            "pause": "Întrerupeți descărcările"
         }
     },
     "Recent": "Jocuri Recente",
@@ -545,7 +552,9 @@
         "disable_logs": "Dezactivați jurnalele",
         "addgamestoapplications": "Adăugați automat jocuri la Aplicații",
         "showMetalOverlay": "Afișați statistici suprapuse",
-        "alt-nile-bin": "Alegeți un binar alternativ pentru Nil"
+        "alt-nile-bin": "Alegeți un binar alternativ pentru Nil",
+        "autodxvknvapi": "Instalare/Actualizare automată DXVK în Prefix",
+        "msync": "Activați Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +589,35 @@
             "log": "Buturuga",
             "other": "Altele",
             "sync": "Salvare-Sincronizare",
-            "wineExt": "Extensii de vin"
+            "wineExt": "Extensii de vin",
+            "accounts": "Conturi",
+            "systemInformation": "Informații S_istem"
         },
         "open-config-file": "Deschideți fișierul de configurare",
         "reset-hyperplay": "Resetează eroic",
         "saves": {
             "label": "Salveaza locatia:",
             "warning": "Funcția Cloud Saves este în versiune beta, vă rugăm să faceți backup înainte de sincronizare (în cazul în care ceva nu merge bine)"
+        },
+        "gamesSettings": "Setările jocului",
+        "systemInformation": {
+            "copyToClipboard": "Copiați în clipboard",
+            "os": "Sistema operativo:",
+            "memory": "Memorie",
+            "osVersion": "Versiune: {versionNumber}"
+        },
+        "wine": {
+            "manager": {
+                "title": "Manager de vinuri"
+            }
         }
     },
     "Settings": "Setări",
     "sidebar": {
         "collapse": "Restrângeți bara laterală",
-        "uncollapse": "Desfaceți bara laterală"
+        "uncollapse": "Desfaceți bara laterală",
+        "library": "Bibliotecă",
+        "store": "Marketplace"
     },
     "status": {
         "installing": "Se Instalează",
@@ -631,7 +656,8 @@
         "logout": "Deconectare",
         "logout_confirmation": "Sigur doriți să vă deconectați?",
         "manageaccounts": "Gestionați Conturile",
-        "quit": "Părăsește"
+        "quit": "Părăsește",
+        "logIn": "Log in"
     },
     "webview": {
         "controls": {
@@ -668,5 +694,63 @@
     },
     "amazon": "Amazon",
     "prime-gaming": "Prime Gaming",
-    "Amazon Games": "Jocuri Amazon"
+    "Amazon Games": "Jocuri Amazon",
+    "hyperplay": {
+        "folder": "Folder",
+        "buttons": {
+            "agree": "Sunt de acord",
+            "noThanks": "Nu, mulţumesc"
+        },
+        "discordApp": "Discord",
+        "onboarding": {
+            "terms": "Termeni serviciu",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Află mai multe"
+                    }
+                }
+            }
+        },
+        "copyUrl": "Copiați adresa URL",
+        "gamecard": {
+            "paused": "În pauză",
+            "installing": "Descărcare..."
+        },
+        "turnAnalyticsOff": "Oprește",
+        "logOut": "Deconectează-te",
+        "misc": "Niciodată",
+        "browserImport": {
+            "profile": "Profil"
+        },
+        "Sync": "Sincronizare",
+        "syncing": "Sincronizarea...",
+        "turnAnalyticsOn": "Pornește"
+    },
+    "quest": {
+        "connectSteamAccount": "Conectează contul echipei",
+        "active": "Activ",
+        "Play": "Reluați",
+        "playstreak": {
+            "days": "zile",
+            "now": "Acum"
+        },
+        "points": "Puncte",
+        "signIn": "Autentificare",
+        "sync": "Sincronizare"
+    },
+    "gameRelease": {
+        "beta": "Beta",
+        "demo": "Demo",
+        "main": "Protagonist"
+    },
+    "accounts": "Conturi",
+    "ALL": "Toate",
+    "analytics": "Telemetrie",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "FAILED": "Traducere întreruptă."
+        }
+    },
+    "profile": "Profil"
 }

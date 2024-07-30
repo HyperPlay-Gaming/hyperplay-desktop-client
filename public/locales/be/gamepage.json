@@ -35,14 +35,17 @@
             "checkbox": "Выдаліць прэфікс: {{prefix}}{{newLine}}Заўвага: гэта нельга адрабіць, а таксама прывядзе да выдалення файлаў захавання, у якіх няма рэзервовых копій.",
             "message": "Вы хочаце выдаліць гэтую гульню?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Выдаліць"
+            "title": "Выдаліць",
+            "dlc": "Выдаліць гэта прыкладанне?"
         },
         "update": {
             "message": "Да гэтай гульні ёсць абнаўленне. Усталяваць абнаўленне?",
             "title": "Гульня патрабуе абнаўлення"
         },
         "wineprefix": "Выберыце папку WinePrefix",
-        "yes": "ТАК"
+        "yes": "ТАК",
+        "dont-show-again": "Больш не паказваць",
+        "ok": "ОК"
     },
     "button": {
         "add_to_favourites": "Дадаць у абранае",
@@ -56,7 +59,9 @@
         "install": "Усталяваць",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Адмяніць спампоўку",
+            "continue": "Працягваць спампаванне"
         },
         "remove_from_favourites": "Выдаліць з абранага",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +72,10 @@
         },
         "unhide_game": "Гульня Unhide",
         "uninstall": "Выдаліць",
-        "update": "Абнаўленне"
+        "update": "Абнаўленне",
+        "remove_from_library": "Выдаліць",
+        "favorites": "Упадабаць",
+        "details": "Дэталі"
     },
     "cloud_save_unsupported": "Не падтрымліваецца",
     "disabled": "Інваліды",
@@ -132,7 +140,8 @@
         },
         "playing": {
             "start": "Гуляць зараз",
-            "stop": "Прайграванне (Стоп)"
+            "stop": "Прайграванне (Стоп)",
+            "update": "Абнавіць"
         },
         "saves": {
             "syncing": "Сінхранізацыя захаванняў"
@@ -153,7 +162,8 @@
         "title": "Выберыце кампаненты для ўстаноўкі"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Бутэлька CrossOver"
     },
     "sideload": {
         "field": {
@@ -192,7 +202,10 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Усяго спампавана",
         "uninstalling": "Uninstalling",
-        "updating": "Абнаўленне гульні"
+        "updating": "Абнаўленне гульні",
+        "paused": "На паўзе",
+        "downloading": "Спампоўка",
+        "syncingSaves": "Сінхранізацыя захаванняў"
     },
     "submenu": {
         "addShortcut": "Дадаць ярлык",

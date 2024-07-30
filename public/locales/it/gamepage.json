@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Continua l'installazione",
             "message": "Desideri tenere i files scaricati?",
-            "title": "Ferma l'installazione"
+            "title": "Ferma l'installazione",
+            "keepFilesMessage": "Controllare qui se si desidera mantenere i file di download dopo la cancellazione."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Vuoi disinstallare questo gioco?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Disinstalla"
+            "title": "Disinstalla",
+            "dlc": "Vuoi disinstallare questo DLC?",
+            "prefix_warning": "Il prefisso del vino per questo gioco è il prefisso predefinito. Se vuoi davvero cancellarlo, devi farlo manualmente."
         },
         "update": {
             "message": "Questo gioco ha un aggiornamento, desideri aggiornarlo ora?",
-            "title": "Il gioco richiede un aggiornamento"
+            "title": "Il gioco richiede un aggiornamento",
+            "message-cancel": "Non è possibile giocare a questo gioco senza aggiornare"
         },
         "wineprefix": "Seleziona la cartella del prefisso di Wine",
-        "yes": "SI"
+        "yes": "SI",
+        "dont-show-again": "Non mostrare più",
+        "ok": "OK",
+        "aware": "Sono consapevole",
+        "compability": {
+            "message": "Questo gioco Windows verrà eseguito utilizzando uno strato di compatibilità. Si potrebbe incontrare alcuni problemi o il gioco potrebbe non funzionare affatto."
+        },
+        "yesCancel": "Sì, cancella"
     },
     "button": {
         "add_to_favourites": "Aggiungi Ai Preferiti",
@@ -56,7 +67,9 @@
         "install": "Installa",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Annulla download",
+            "continue": "Continua Download"
         },
         "remove_from_favourites": "Rimuovi Dai Preferiti",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Mostra gioco",
         "uninstall": "Disinstalla",
-        "update": "Update"
+        "update": "Update",
+        "remove_from_library": "Rimuovi",
+        "unfavorites": "Non preferito",
+        "details": "Dettagli",
+        "favorites": "Preferito"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Disattivato",
@@ -87,14 +104,16 @@
         "platform": "Seleziona la versione della piattaforma da installare",
         "requirements": "Requisiti Di Sistema",
         "totalPlayed": "Tempo giocato",
-        "dlcs": "DLC"
+        "dlcs": "DLC",
+        "selectChannelName": "Seleziona Canale Nome"
     },
     "gamecard": {
         "moving": "Spostamento in corso",
         "repairing": "Riparazione in corso"
     },
     "generic": {
-        "error": "Errore sconosciuto"
+        "error": "Errore sconosciuto",
+        "noDescription": "Nessuna descrizione disponibile!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -115,7 +134,8 @@
         "game-scores": "Punteggi di gioco",
         "installedInfo": "Informazioni di installazione",
         "protondb-compatibility-info": "Livello di compatibilità Proton",
-        "steamdeck-compatibility-info": "Compatibilità SteamDeck"
+        "steamdeck-compatibility-info": "Compatibilità SteamDeck",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Spazio Disponibile",
@@ -130,7 +150,8 @@
             "message": "Il supporto dell'anticheat è non funzionante o negato. Il gioco non funzionerà. Vuoi installarlo comunque?",
             "install": "Si (Capisco che non funzionerà)",
             "title": "Anticheat Rotto/Negato"
-        }
+        },
+        "compatibility-warning": "Questo gioco Windows verrà eseguito utilizzando uno strato di compatibilità. La tua esperienza può variare."
     },
     "label": {
         "game": {
@@ -138,7 +159,8 @@
         },
         "playing": {
             "start": "Esegui ora",
-            "stop": "In esecuzione (Stop)"
+            "stop": "In esecuzione (Stop)",
+            "update": "Aggiorna"
         },
         "saves": {
             "syncing": "Sincronizzando i salvataggi"
@@ -161,7 +183,8 @@
         "title": "Seleziona i componenti da installare"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Bottiglia CrossOver"
     },
     "sideload": {
         "field": {
@@ -207,9 +230,15 @@
         "launching": "Avviando",
         "ubisoft": "Installazione di Ubisoft",
         "downloading": "Scaricamento",
-        "extracting": "Estrazione",
+        "extracting": {
+            "progress": "Estrazione",
+            "cancel": "Annulla estrazione"
+        },
         "gog-goodie": "Questo gioco non sembra essere installabile. Controlla i contenuti scaricabili su https://gog.com/account",
-        "goodie": "Non installabile"
+        "goodie": "Non installabile",
+        "paused": "In pausa",
+        "distributables": "Installazione di distributori",
+        "preparing": "Preparing Download, si prega di attendere"
     },
     "submenu": {
         "addShortcut": "Aggiungi scorciatoia",
@@ -223,6 +252,7 @@
         "removeShortcut": "Rimuovi le scorciatoie",
         "settings": "Impostazioni",
         "store": "Pagina dello store",
-        "verify": "Verifica e ripara"
+        "verify": "Verifica e ripara",
+        "extraInfo": "Informazioni aggiuntive"
     }
 }

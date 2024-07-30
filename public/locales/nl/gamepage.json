@@ -29,7 +29,8 @@
         "stopInstall": {
             "keepInstalling": "Doorgaan met installeren",
             "message": "Wilt u de gedownloade bestanden bewaren?",
-            "title": "Installatie stoppen"
+            "title": "Installatie stoppen",
+            "keepFilesMessage": "Controleer hier of je de download bestanden wilt houden na het annuleren."
         },
         "uninstall": {
             "checkbox": "Verwijder prefix: {{prefix}}{{newLine}}Note: DIt kan niet ongedaan gemaakt worden, en zal ook niet geback-upte opslagbestanden verwijderen.",
@@ -41,10 +42,18 @@
         },
         "update": {
             "message": "Dit spel heeft een update, wilt u het nu updaten?",
-            "title": "Het spel heeft een update nodig"
+            "title": "Het spel heeft een update nodig",
+            "message-cancel": "Het is niet mogelijk om dit spel te spelen zonder te overdrijven"
         },
         "wineprefix": "Selecteer WinePrefix Map",
-        "yes": "JA"
+        "yes": "JA",
+        "aware": "Ik weet het",
+        "compability": {
+            "message": "Dit Windows spel zal een compatibiliteitslaag gebruiken. Je ontmoet misschien wat problemen of het spel werkt helemaal niet."
+        },
+        "yesCancel": "Ja, annuleer",
+        "dont-show-again": "Niet opnieuw tonen",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Voeg toe aan favorieten",
@@ -58,7 +67,9 @@
         "install": "Installeren",
         "no-path-selected": "Geen pad geselecteerd",
         "queue": {
-            "remove": "Verwijder van wachtrij"
+            "remove": "Verwijder van wachtrij",
+            "cancel": "Download Annuleren",
+            "continue": "Doorgaan met Download"
         },
         "remove_from_favourites": "Verwijder uit favorieten",
         "remove_from_recent": "Verwijder uit recent",
@@ -69,7 +80,11 @@
         },
         "unhide_game": "Zet Game terug",
         "uninstall": "Verwijderen",
-        "update": "Update"
+        "update": "Update",
+        "unfavorites": "Onfavoriete",
+        "details": "Details",
+        "favorites": "Als favoriet markeren",
+        "remove_from_library": "Verwijderen"
     },
     "cloud_save_unsupported": "Niet ondersteund",
     "disabled": "Uitgeschakeld",
@@ -89,14 +104,16 @@
         "platform": "Selecteer platformversie om te installeren",
         "requirements": "Systeembenodigdheden",
         "totalPlayed": "Tijd gespeeld",
-        "dlcs": "DLCs"
+        "dlcs": "DLCs",
+        "selectChannelName": "Select Channel Naam"
     },
     "gamecard": {
         "moving": "Aan het verplaatsen",
         "repairing": "Aan het repareren"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "Geen beschrijving beschikbaar!"
     },
     "hours": "Uren",
     "how-long-to-beat": {
@@ -121,7 +138,8 @@
         "path-not-writtable": "Waarschuwing: pad mogelijk niet schrijfbaar",
         "space-after-install": "Na installatie",
         "wineprefix": "WinePrefix",
-        "wineversion": "Wine Versie"
+        "wineversion": "Wine Versie",
+        "compatibility-warning": "Dit Windows spel zal een compatibiliteitslaag gebruiken. Jouw ervaring kan varieren."
     },
     "label": {
         "game": {
@@ -130,7 +148,8 @@
         },
         "playing": {
             "start": "Nu spelen",
-            "stop": "Aan het spelen (Stoppen)"
+            "stop": "Aan het spelen (Stoppen)",
+            "update": "Aanpassen"
         },
         "saves": {
             "syncing": "Saves synchroniseren"
@@ -162,7 +181,8 @@
             "exe": "Selecteer uitvoerbaar bestand",
             "image": "App Image",
             "title": "Game/App Titel",
-            "broser": "BrowserURL"
+            "broser": "BrowserURL",
+            "supports-web3": "This Game has Web3 Features"
         },
         "placeholder": {
             "image": "Plak een foto URL hier",
@@ -197,9 +217,15 @@
         "launching": "Lancering",
         "ubisoft": "Ubisoft installeren",
         "downloading": "Downloaden",
-        "extracting": "Extraheren",
+        "extracting": {
+            "cancel": "Cancel Extract",
+            "progress": "Extraheren"
+        },
         "gog-goodie": "Deze game lijkt niet te kunnen worden geïnstalleerd. Controleer downloadbare inhoud op https://gog.com/account",
-        "goodie": "Niet installeerbaar"
+        "goodie": "Niet installeerbaar",
+        "distributables": "Installing distributable",
+        "preparing": "Vertaling:",
+        "paused": "Gepauzeerd"
     },
     "submenu": {
         "addShortcut": "Snelkoppeling toevoegen",
@@ -213,6 +239,7 @@
         "removeShortcut": "Verwijder snelkoppelingen",
         "settings": "Instellingen",
         "store": "Winkel",
-        "verify": "Verifiëren en repareren"
+        "verify": "Verifiëren en repareren",
+        "extraInfo": "Extra informatie"
     }
 }

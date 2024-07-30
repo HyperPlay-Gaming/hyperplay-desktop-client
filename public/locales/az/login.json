@@ -1,6 +1,7 @@
 {
     "button": {
-        "login": "Daxil ol"
+        "login": "Daxil ol",
+        "loading": "Yüklənir"
     },
     "message": {
         "part1": "Oyunlarınızı daxil etmək və quraşdırmaq üçün əvvəlcə aşağıdakı addımları yerinə yetirməlisiniz:",

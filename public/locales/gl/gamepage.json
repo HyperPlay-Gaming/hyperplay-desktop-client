@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Seguir instalando",
             "message": "Desexa MANTER os ficheiros descargados?",
-            "title": "Deter a instalación"
+            "title": "Deter a instalación",
+            "keepFilesMessage": "Control aquí se queres manter os ficheiros de descarga após canceling."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Desexas desinstalar o xogo?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Desinstalar"
+            "title": "Desinstalar",
+            "dlc": "Queres desinstalar esta aplicación?",
+            "prefix_warning": "O prefixo de Viño para este xogo é o default prefixo. Se realmente queres eliminalo, tes que facelo a man."
         },
         "update": {
             "message": "Este xogo ten unha actualización, ¿desexas actualizar agora?",
-            "title": "O xogo precisa unha actualización"
+            "title": "O xogo precisa unha actualización",
+            "message-cancel": "Non é posíbel de xogar este xogo sen actualización"
         },
         "wineprefix": "Seleccione o cartafol co prefixo de Wine",
-        "yes": "Sí"
+        "yes": "Sí",
+        "dont-show-again": "Non volvas mostrar",
+        "ok": "OK",
+        "aware": "Son consciente",
+        "compability": {
+            "message": "Este xogo de Xanelas correrá  utilizar unha capa de compatibilidade. Poderías atopar algúns asuntos ou o xogo non poderían traballar nada."
+        },
+        "yesCancel": "Si, cancela"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -56,7 +67,9 @@
         "install": "Instalar",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Desbotar baixada",
+            "continue": "Continuar descarga"
         },
         "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Unhide Game",
         "uninstall": "Desinstalar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "remove_from_library": "Retirar",
+        "details": "Detalles",
+        "favorites": "Favorecer",
+        "unfavorites": "Unfavorite"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Deshabilitar",
@@ -86,14 +103,17 @@
         "neverPlayed": "Nunca",
         "platform": "Select Platform",
         "requirements": "System Requirements",
-        "totalPlayed": "Tempo xogado"
+        "totalPlayed": "Tempo xogado",
+        "dlcs": "DLCs",
+        "selectChannelName": "Nome de Canle selecta"
     },
     "gamecard": {
         "moving": "Movendo",
         "repairing": "Reparando"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "Sen descrición dispoñible!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -118,7 +138,8 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "Prefixo de Wine",
-        "wineversion": "Versión de Wine"
+        "wineversion": "Versión de Wine",
+        "compatibility-warning": "Este xogo de Xanelas correrá  utilizar unha capa de compatibilidade. A vosa experiencia pode variar."
     },
     "label": {
         "game": {
@@ -126,7 +147,8 @@
         },
         "playing": {
             "start": "Xogar",
-            "stop": "Deter"
+            "stop": "Deter",
+            "update": "Actualizar"
         },
         "saves": {
             "syncing": "Sincronización de gardados"
@@ -147,7 +169,8 @@
         "title": "Seleccione os compoñentes a instalar"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -186,7 +209,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total descargado",
         "uninstalling": "Uninstalling",
-        "updating": "Actualización do xogo"
+        "updating": "Actualización do xogo",
+        "downloading": "Baixando",
+        "syncingSaves": "Sincronización de gardados",
+        "playing": "Reproducindo",
+        "paused": "En pausa",
+        "distributables": "Instalador Distributables",
+        "moving-files": "Ficheiro conmovedor '{{file}}': {{percent}} ",
+        "extracting": {
+            "cancel": "Cancela Extracción",
+            "progress": "Extraendo"
+        },
+        "goodie": "Non installable",
+        "preparing": "Preparando Descarga, compracer esperar",
+        "gog-goodie": "Este xogo non aparece para ser installable. Control downloadable contido en https://gog.com/Conta"
     },
     "submenu": {
         "addShortcut": "Engadir acceso directo",
@@ -200,6 +236,7 @@
         "removeShortcut": "Remove shortcuts",
         "settings": "Axustes",
         "store": "Páxina da tenda",
-        "verify": "Verificar e reparar"
+        "verify": "Verificar e reparar",
+        "extraInfo": "Extra Info"
     }
 }

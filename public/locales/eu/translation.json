@@ -152,7 +152,10 @@
         "login": "Hasi saioa",
         "sync": "Sinkronizatu",
         "syncing": "Sinkronizatzen",
-        "unsync": "Desinkronizatu"
+        "unsync": "Desinkronizatu",
+        "continue": "Jarraitu",
+        "download": "Deskargatu",
+        "update": "Eguneratu"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Aurreikusitako denbora"
     },
     "epic": {
         "offline-notification-body": "Baliteke lineako zerbitzuak guztiz ez funtzionatzea Epic Games zerbitzariak lineaz kanpo daudelako!",
@@ -263,7 +267,8 @@
         "wine": {
             "part1": "Heroikoek Wine, Proton eta CrossOver-en bertsioak bilatzen ditu karpeta hauetan:",
             "part2": "Beste leku batzuetarako, erabili karpeta horietako batera esteka sinboliko bat"
-        }
+        },
+        "msync": "Fsync-ek ardo-zerbitzariaren gainkostua murriztea du helburu PUZa duten jokoetan. Gaitzeak errendimendua hobetu dezake onartzen diren Linux nukleoetan."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Ireki",
     "options": {
         "advanced": {
             "key": "Aldagaiaren izena",
@@ -431,7 +436,8 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Pausatu deskargak"
         }
     },
     "Recent": "Duela gutxi jokatuta",
@@ -545,7 +551,9 @@
         "disable_logs": "Desgaitu erregistroak",
         "addgamestoapplications": "Gehitu automatikoki jokoak aplikazioetan",
         "showMetalOverlay": "Erakutsi estatistikak gainjartzea",
-        "alt-nile-bin": "Aukeratu Nile Binary alternatibo bat"
+        "alt-nile-bin": "Aukeratu Nile Binary alternatibo bat",
+        "autodxvknvapi": "Instalatu/Eguneratu automatikoki DXVK aurrizkian",
+        "msync": "Gaitu Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +588,33 @@
             "log": "Erregistroa",
             "other": "Bestela",
             "sync": "Gorde-Sinkronizazioa",
-            "wineExt": "Ardoaren luzapenak"
+            "wineExt": "Ardoaren luzapenak",
+            "accounts": "Kontuak",
+            "systemInformation": "_Sistemaren Informazioa"
         },
         "open-config-file": "Ireki Konfigurazio fitxategia",
         "reset-hyperplay": "Berrezarri HyperPlay",
         "saves": {
             "label": "Gorde kokapena:",
             "warning": "Hodeiko Gordeen eginbidea beta-n dago. Sinkronizatu aurretik gordetako babeskopiak egin behar dira (zerbait gaizki gertatzen bada)"
+        },
+        "gamesSettings": "Jokoaren ezarpenak",
+        "wine": {
+            "manager": {
+                "title": "Ardo kudeatzailea"
+            }
+        },
+        "systemInformation": {
+            "memory": "Memoria",
+            "copyToClipboard": "Kopiatu arbelera"
         }
     },
     "Settings": "Ezarpenak",
     "sidebar": {
         "collapse": "Tolestu alboko barra",
-        "uncollapse": "Tolestu alboko barra"
+        "uncollapse": "Tolestu alboko barra",
+        "library": "Liburutegia",
+        "store": "Marketplace"
     },
     "status": {
         "installing": "Instalatzen",
@@ -631,7 +653,8 @@
         "logout": "Saioa amaitu",
         "logout_confirmation": "Ziur saioa amaitu nahi duzula?",
         "manageaccounts": "Kudeatu Kontuak",
-        "quit": "Irten"
+        "quit": "Irten",
+        "logIn": "Saioa hasi"
     },
     "webview": {
         "controls": {
@@ -668,5 +691,59 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon Jokoak",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "logOut": "Saioa itxi",
+        "turnAnalyticsOn": "Piztu",
+        "browserImport": {
+            "profile": "Profila"
+        },
+        "buttons": {
+            "agree": "Ados nago",
+            "noThanks": "Ez, eskerrik asko"
+        },
+        "copyUrl": "Kopiatu URLa",
+        "discordApp": "Discordia",
+        "folder": "Karpeta",
+        "gamecard": {
+            "installing": "Deskargatzen...",
+            "paused": "Pausatua"
+        },
+        "misc": "Inoiz ez",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Gehiago jakin"
+                    }
+                }
+            },
+            "terms": "zerbitzuaren baldintzak"
+        },
+        "turnAnalyticsOff": "Itzali",
+        "Sync": "Sinkronizazioa"
+    },
+    "gameRelease": {
+        "alpha": "Alpha",
+        "demo": "Demo",
+        "main": "Nagusia",
+        "beta": "Beta"
+    },
+    "quest": {
+        "active": "Aktibo",
+        "Play": "Erreproduzitu",
+        "playstreak": {
+            "days": "egun"
+        },
+        "points": "Puntuak",
+        "signIn": "Saioa hasi",
+        "sync": "Sinkronizazioa"
+    },
+    "accounts": "Kontuak",
+    "ALL": "DENA",
+    "analytics": "Analitikak",
+    "profile": "Profila",
+    "sideload": {
+        "warningTitle": "Garrantzitsua"
+    }
 }
