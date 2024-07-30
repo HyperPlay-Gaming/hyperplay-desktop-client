@@ -119,9 +119,19 @@ const root = createRoot(container!) // createRoot(container!) if you use TypeScr
 
 const renderApp = async () => {
   const ldConfig = await window.api.getLDEnvConfig()
+  const appVersion = await window.api.getAppVersion()
+
+  const context = {
+    ...ldConfig.ldUser,
+    appVersion,
+    languageCode
+  }
+
+  console.log('LDProvider context:', context)
+
   const LDProvider = await asyncWithLDProvider({
     clientSideID: ldConfig.envId,
-    context: ldConfig.ldUser
+    context
   })
 
   root.render(
