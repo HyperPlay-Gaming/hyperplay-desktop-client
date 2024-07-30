@@ -54,7 +54,7 @@ export function QuestsSummaryTableWrapper({
   const imagesToPreload: string[] = []
   // set outline css on selected
   const gameElements =
-    quests?.map(({ id, project_id, ...rest }) => {
+    quests?.map(({ id, project_id, name, ...rest }) => {
       const imageUrl = listings
         ? listings[project_id]?.project_meta?.main_capsule
         : ''
@@ -76,6 +76,7 @@ export function QuestsSummaryTableWrapper({
             }
           }}
           selected={id === selectedQuestId}
+          description={name}
         />
       )
     }) ?? []
