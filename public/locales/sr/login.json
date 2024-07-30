@@ -10,6 +10,9 @@
         "part6": "#Pasta #tvoj"
     },
     "button": {
-        "error": "#Zabuna, #pokušaj @a #drugačiji #Kôd"
-    }
+        "error": "#Zabuna, #pokušaj @a #drugačiji #Kôd",
+        "loading": "Учитава се",
+        "login": "Пријавите се"
+    },
+    "welcome": "Welcome!"
 }
