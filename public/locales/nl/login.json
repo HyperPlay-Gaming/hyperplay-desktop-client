@@ -1,7 +1,8 @@
 {
     "button": {
         "login": "Inloggen",
-        "loading": "Aan het laden"
+        "loading": "Aan het laden",
+        "error": "Error, probeer een andere code"
     },
     "message": {
         "part1": "Om in te loggen en je spellen te installeren, moet je de volgende stappen volgen:",
