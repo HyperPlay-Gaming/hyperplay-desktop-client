@@ -174,7 +174,10 @@
         "login": "Login",
         "sync": "Synchroniseer",
         "syncing": "Synchroniseren",
-        "unsync": "De-synchroniseren"
+        "unsync": "De-synchroniseren",
+        "continue": "Door­gaan",
+        "download": "Download",
+        "update": "Aanpassen"
     },
     "controller": {
         "hints": {
@@ -214,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "title_dm": "Download Manager"
+        "title_dm": "Download Manager",
+        "ETA": "Geschatte tijd"
     },
     "epic": {
         "offline-notification-body": "HyperPlay will not work probably!",
@@ -405,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Openingstijden",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -468,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Downloads pauzeren",
+            "resume": "Download hervatten"
         }
     },
     "Recent": "Recente Spellen",
@@ -589,7 +595,8 @@
         "autoLaunchHyperPlay": "Auto Launch Hyper Speel",
         "dxvkfpslimit": "Limit FPS (DX9, 10 en 11)",
         "autodxvknvapi": "Auto Install/Update DXVK-NVAPI op Prefix",
-        "steamId": "Steam ID"
+        "steamId": "Steam ID",
+        "msync": "Esync inschakelen"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -624,7 +631,9 @@
             "log": "Log",
             "other": "Overig",
             "sync": "Save-synchronisatie",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Accounts",
+            "systemInformation": "S_ysteem informatie"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
@@ -647,17 +656,26 @@
             "legendaryVersion": "Legendary:",
             "version": "Version:",
             "osNameFlatpak": "_",
-            "osVersion": "Version 8X:"
+            "osVersion": "Version 8X:",
+            "os": "Besturingssysteem",
+            "copyToClipboard": "Kopiëren naar klembord"
         },
         "reset-extension": "Reset Extension",
-        "gamesSettings": "Games Settings"
+        "gamesSettings": "Games Settings",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
+        }
     },
     "Settings": "Instellingen",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
         "achievements": "Achievementen",
-        "downloadManager": "Download Manager"
+        "downloadManager": "Download Manager",
+        "library": "Bibliotheek",
+        "store": "Winkel"
     },
     "status": {
         "installing": "Installeren",
@@ -697,7 +715,8 @@
         "logout_confirmation": "Weet u zeker dat u wilt uitloggen?",
         "manageaccounts": "Manage Accounts",
         "quit": "Sluiten",
-        "manageStore": "Manage winkels"
+        "manageStore": "Manage winkels",
+        "logIn": "Aanmelden"
     },
     "webview": {
         "controls": {
@@ -753,7 +772,8 @@
                         "cantFindProfile": "Kan je je browserprofiel niet vinden?",
                         "details": "De browsers beneden hebben MetaMask al geïnstalleerd. Kies de enige die je wilt importeren.",
                         "title": "Selecteer de browser om te importeren",
-                        "useRecoveryPhrase": "Import Using Secret Recovery"
+                        "useRecoveryPhrase": "Import Using Secret Recovery",
+                        "learnMore": "Leer meer."
                     },
                     "info": {
                         "createWalletCTA": "Creëer een portemonnee",
@@ -803,7 +823,8 @@
                 "description": "Je portemonnee is verbonden. Je bent klaar om te spelen.",
                 "title": "Portemonnee verbonden!"
             },
-            "connectAgain": "Verbinding opnieuw"
+            "connectAgain": "Verbinding opnieuw",
+            "terms": "Algemene voorwaarden"
         },
         "analyticsOff": "Analytica wordt uitgezet",
         "changeWallet": "Slik portemonnee rekening",
@@ -821,7 +842,8 @@
         "viewPortfolio": "View portfolio",
         "analyticsOn": "Analytica wordt aangezet",
         "buttons": {
-            "agree": "Mee eens"
+            "agree": "Mee eens",
+            "noThanks": "Nee, bedankt"
         },
         "currentWallet": "Current portemonnee",
         "syncing": "Syncing...",
@@ -840,13 +862,25 @@
         "publicAlpha": "Public Alfa",
         "gamecard": {
             "extracting": "Uittrekken...",
-            "installed": "Klaar om te spelen"
+            "installed": "Klaar om te spelen",
+            "paused": "Gepauzeerd",
+            "distributables": "Installing distributable",
+            "installing": "Bezig met ophalen..."
         },
         "otp": "Een Time Passcode",
         "browserImport": {
-            "appId": "App"
+            "appId": "App",
+            "profile": "Profiel"
         },
-        "linkSteamAccountCta": "Ga naar Steam"
+        "linkSteamAccountCta": "Ga naar Steam",
+        "discordApp": "Discord",
+        "misc": "Nooit",
+        "logOut": "Uitloggen",
+        "Sync": "Sync",
+        "turnAnalyticsOff": "Uitschakelen",
+        "folder": "Map",
+        "copyUrl": "URL kopiëren",
+        "turnAnalyticsOn": "Inschakelen"
     },
     "hyperplayOverlay": {
         "signatureRequest": {
@@ -889,7 +923,8 @@
     "back_to_game": "Terug naar het spel",
     "notification": {
         "wine-download": {
-            "message": "De defecte compatibiliteit lager"
+            "message": "De defecte compatibiliteit lager",
+            "title": "Compatibility Layer"
         }
     },
     "quest": {
@@ -903,11 +938,14 @@
             "playEachDay": "Speel elke dag zodat je strepen niet meer zullen resetten!",
             "playToStart": "Speel dit spel om te beginnen!",
             "progressTowardsStreak": "vooruitgang naar de staak van vandaag.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "days": "dagen",
+            "now": "Nu"
         },
         "readyForClaim": "Klaar voor claim",
         "type": {
-            "playstreak": "Speel Streak"
+            "playstreak": "Speel Streak",
+            "reputation": "Reputatie"
         },
         "claimFailed": "Claim faalde",
         "claimFailedMessage": "Probeer het nog eens. Als het nog niet werkt, creëer dan een Discord steunboete.",
@@ -917,7 +955,14 @@
         "needMoreAchievements": "Je moet de prestaties hebben voltooid in een van deze wedstrijden.",
         "quests": "Quest",
         "createDiscordTicket": "Gecreëerd Discord ticket",
-        "notEnoughGas": "Onvoldoende portemonnee balans om je beloning te claimen door gaskosten. Probeer een andere portemonnee of replenish deze voor het terugtrekken."
+        "notEnoughGas": "Onvoldoende portemonnee balans om je beloning te claimen door gaskosten. Probeer een andere portemonnee of replenish deze voor het terugtrekken.",
+        "active": "Actief",
+        "connectSteamAccount": "Verbind het team account",
+        "signIn": "Aanmelden",
+        "Play": "Speel",
+        "points": "Punten",
+        "reputation": "Reputatie",
+        "sync": "Sync"
     },
     "quests": {
         "quests": "Quest",
@@ -929,7 +974,8 @@
         }
     },
     "sideload": {
-        "warningMessage": "Een spel verkopen is bedoeld voor ontwikkelaars en ervaren krachtgebruikers. Een installateur die malware bevat kan je computer in gevaar brengen en leiden naar diefstallen."
+        "warningMessage": "Een spel verkopen is bedoeld voor ontwikkelaars en ervaren krachtgebruikers. Een installateur die malware bevat kan je computer in gevaar brengen en leiden naar diefstallen.",
+        "warningTitle": "Belangrijk"
     },
     "accounts": "accounts",
     "ALL": "ALL",
@@ -946,7 +992,11 @@
         "title": "Game Updates Available"
     },
     "gameRelease": {
-        "prototype": "Prototype"
+        "prototype": "Prototype",
+        "main": "Hoofd",
+        "alpha": "Alfa",
+        "beta": "Bèta",
+        "demo": "Probeer het uit"
     },
     "importGameErrorMessageExecutable": "Game Uitvoerbaar niet gevonden, importeren is niet mogelijk",
     "exit_game": "Verlaat Game",
@@ -961,5 +1011,7 @@
             "minted": "♪",
             "notMinted": "_"
         }
-    }
+    },
+    "analytics": "Analytics",
+    "profile": "Profiel"
 }
