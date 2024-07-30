@@ -407,7 +407,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Abrir",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -588,7 +588,8 @@
         "addgamestoapplications": "Adicionar jogos a aplicativos automaticamente",
         "showMetalOverlay": "Mostrar sobreposição de estatísticas",
         "alt-nile-bin": "Escolha um binário alternativo do Nilo",
-        "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo"
+        "autodxvknvapi": "Auto Instalar/atualizar o DXVK-NVAPI automaticamente no prefixo",
+        "msync": "Enable Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -623,7 +624,9 @@
             "log": "Log",
             "other": "Outros",
             "sync": "Sincronização",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Contas",
+            "systemInformation": "Informações do s_istema"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
@@ -631,14 +634,25 @@
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
         },
-        "gamesSettings": "Configurações de jogos"
+        "gamesSettings": "Configurações de jogos",
+        "systemInformation": {
+            "os": "Sistema operacional",
+            "copyToClipboard": "Copiar para a área de transferência"
+        },
+        "reset-extension": "Reiniciar Extensão",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
+        }
     },
     "Settings": "Configurações",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
         "library": "Biblioteca",
-        "store": "Loja"
+        "store": "Loja",
+        "downloadManager": "Gerenciador de Downloads"
     },
     "status": {
         "installing": "Installing",
@@ -677,7 +691,8 @@
         "logout": "Sair",
         "logout_confirmation": "Logout?",
         "manageaccounts": "Manage Accounts",
-        "quit": "Fechar"
+        "quit": "Fechar",
+        "logIn": "Log in"
     },
     "webview": {
         "controls": {
@@ -892,7 +907,8 @@
         "beta": "Beta",
         "main": "Estável",
         "demo": "Demo",
-        "prototype": "Protótipo"
+        "prototype": "Protótipo",
+        "alpha": "Alpha"
     },
     "exit_game": "Sair do Jogo",
     "dlcs": {
@@ -908,5 +924,30 @@
             "multiple": "{{gameName}} e outros jogos estão prontos para atualizar."
         },
         "title": "Atualizações do jogo Disponível"
+    },
+    "profile": "Perfil",
+    "sideload": {
+        "warningTitle": "Importante:"
+    },
+    "quest": {
+        "active": "Ativo",
+        "Play": "Jogar",
+        "playstreak": {
+            "days": "dias",
+            "now": "Agora"
+        },
+        "points": "Pontos",
+        "signIn": "Entrar",
+        "sync": "Sincronizar",
+        "type": {
+            "reputation": "Reputação"
+        },
+        "reputation": "Reputação",
+        "connectSteamAccount": "Vincular conta de equipe"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer"
+        }
     }
 }
