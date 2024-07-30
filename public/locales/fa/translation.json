@@ -966,7 +966,8 @@
         "points": "نقاط",
         "signIn": "ورود",
         "sync": "همگامسازی",
-        "reward": "پاداش"
+        "reward": "پاداش",
+        "pointsClaimed": "امتیازات مطالبات"
     },
     "quests": {
         "playstreak": {
