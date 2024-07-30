@@ -75,6 +75,7 @@ export type LDUser = {
 export type LDEnv = {
   envId: string
   ldUser: LDUser
+  appVersion: string
 }
 
 export interface AppSettings extends GameSettings {

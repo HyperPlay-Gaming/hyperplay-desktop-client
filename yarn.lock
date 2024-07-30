@@ -4543,18 +4543,6 @@
     ethers "^6.11.1"
     node-fetch "^2.6.1"
 
-"@valist/sdk@^2.9.5":
-  version "2.9.5"
-  resolved "https://registry.yarnpkg.com/@valist/sdk/-/sdk-2.9.5.tgz#183cade809ad15ca796f3992f5279022e376af73"
-  integrity sha512-MHu41cWfHV7749EX941xUG3YKokXIn9/mGYQ/enPiwrHjBiwWZ5+kDkBPqBvR3eW/yzCoJj1ESF8R0F1bqv5sg==
-  dependencies:
-    "@capacitor-community/electron" "1.4.2"
-    axios "^1.4.0"
-    ethers "^5.5.4"
-    node-fetch "^2.6.1"
-    proxy-from-env "^1.1.0"
-    ua-parser-js "1.0.35"
-
 "@vitejs/plugin-react@^2.2.0":
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/@vitejs/plugin-react/-/plugin-react-2.2.0.tgz#1b9f63b8b6bc3f56258d20cd19b33f5cc761ce6e"
@@ -5537,13 +5525,6 @@ axios-retry@3.7.0:
   integrity sha512-ZTnCkJbRtfScvwiRnoVskFAfvU0UG3xNcsjwTR0mawSbIJoothxn67gKsMaNAFHRXJ1RmuLhmZBzvyXi3+9WyQ==
   dependencies:
     "@babel/runtime" "^7.15.4"
-    is-retry-allowed "^2.2.0"
-
-axios-retry@^4.4.1:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/axios-retry/-/axios-retry-4.4.2.tgz#cef7c3eb1aa004f6a7e7b1a0918907b10a1986be"
-  integrity sha512-2fjo9uDNBQjX8+GMEGOFG5TrLMZ3QijjeRYcgBI2MhrsabnvcIAfLxxIhG7+CCD68vPEQY3IM2llV70ZsrqPvA==
-  dependencies:
     is-retry-allowed "^2.2.0"
 
 axios@1.6.5:

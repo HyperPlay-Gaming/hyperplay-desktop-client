@@ -676,7 +676,11 @@
             "playstreak": "Play Streak",
             "reputation": "Reputation"
         },
-        "View Game": "View Game"
+        "View Game": "View Game",
+        "claimFailed": "Claim failed",
+        "claimFailedMessage": "Please try once more. If it still doesn't work, create a Discord support ticket.",
+        "createDiscordTicket": "Created Discord ticket",
+        "notEnoughGas": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying."
     },
     "quests": {
         "playstreak": {
