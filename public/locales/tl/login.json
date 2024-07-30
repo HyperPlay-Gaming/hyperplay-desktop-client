@@ -1,1 +1,7 @@
-{}
+{
+    "button": {
+        "loading": "Naglo-load",
+        "login": "Mag-log in"
+    },
+    "welcome": "Maligayang pagdating"
+}
