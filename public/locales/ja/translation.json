@@ -66,7 +66,8 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "アップデートで何かが間違っていた! 手動でアンインストールしてHyperPlayを再インストールしてください."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,12 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
-            }
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoftは接続します",
+                "message": "ゲームプレフィックスでUbisoft Connectのインストールが失敗しました。 ウィキページをhttps://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Macで確認してインストールします."
+            },
+            "moving": "エラー移動ゲーム {{error}}"
         },
         "info": {
             "update": {
@@ -139,12 +145,28 @@
                 "install": "Epic Servers are having major outage right now, the game cannot be installed!",
                 "update": "Epic Servers are having major outage right now, the game cannot be updated!"
             },
-            "title": "Warning"
+            "title": "Warning",
+            "wine-change": {
+                "title": "ワインが見つかりません!",
+                "message": "このタイトル({{selectedWine}})を起動するために、選択したワインバージョンが見つかりません。 {{newline}} もう一つ見つかりましたが、【X159X】を使い続けていきたいですか?",
+                "title-gptk": "ゲーム ポーティング ツールキット 互換性がない ",
+                "message-gptk": "Apple Gamingポーティングツールキットを使用してゲームを実行するには、macOSを14(Sonoma)以上にアップグレードする必要があります。 {{newline}} 私たちは、あなたのシステムにワインを見つけました, あなたは、使用して起動し続けるしたいですか {{foundWine}} ?"
+            },
+            "rosetta": {
+                "title": "Rosettaが見つかりませんでした",
+                "message": "ハイパープレイは必須 アップルシリコンチップでmacOS上で正しく動作するようにロゼッタ. 以下のコマンドを使用して、macOSターミナルからインストールしてください:「softwareupdate --install-rosetta」とHyperPlayを再起動します. "
+            }
         },
         "wineprefix": "Wine環境フォルダを選択",
         "yes": "はい",
         "dontShowAgain": "次回から確認しない",
-        "choose-nile-binary": "ナイル川バイナリを選択"
+        "choose-nile-binary": "ナイル川バイナリを選択",
+        "reset-extension": {
+            "question": {
+                "message": "MetaMask Extensionをリセットしますか?",
+                "title": "リセット延長"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Login",
         "sync": "同期",
         "syncing": "同期しています",
-        "unsync": "非同期"
+        "unsync": "非同期",
+        "continue": "続ける",
+        "download": "ダウンロード",
+        "update": "を更新"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "予定時間",
+        "title_dm": "ダウンロードマネージャ"
     },
     "epic": {
         "offline-notification-body": "HyperPlay will not work probably!",
@@ -263,7 +290,11 @@
         "wine": {
             "part1": "HyperPlayは、次のフォルダーでWine、Proton、およびCrossOverのバージョンを検索します：",
             "part2": "その他の場所については、これらのフォルダの1つへのシンボリックリンクを使用してください"
-        }
+        },
+        "dxvkfpslimit": "DXVKゲーム用のフレームレートキャップを設定する",
+        "dxvknvapi": "DXVK-NVAPI は、DXVK と Linux ネイティブ NVAPI の上に構築された NVAPI の実装で、Nvidia GPU で DLSS の使用を可能にします.",
+        "msync": "Msyncは、CPU集中ゲームでワインサーバーのオーバーヘッドを減らすことを目指しています。 複数のゲームでパフォーマンスを向上させることができます.",
+        "disable_logs": "このチェックボックスをオンに切り替えて、ログファイルへの書き込みの大部分を無効にします(重要な情報は常時記録されます)。 問題の報告の前に、この設定をオフにしてください."
     },
     "info": {
         "hyperplay": {
@@ -289,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-none-found": "ワインバージョンが見つかりませんでした, 互換性マネージャから1をダウンロード",
+        "wine-path-invalid": "ワインパスは無効です."
     },
     "install": {
         "path": "Select Install Path"
@@ -303,7 +336,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "アルファビューティカル A-Z",
+        "alphabeticalZA": "アルファビューティカルZ-A"
     },
     "loading": {
         "default": "読み込み中",
@@ -314,7 +349,8 @@
         "epic": "Epic Gamesログイン",
         "gog": "GOGログイン",
         "message": "お使いのプラットフォームにログインします。同時に複数のプラットフォームにログインすることができます。",
-        "amazon": "アマゾンログイン"
+        "amazon": "アマゾンログイン",
+        "old-mac": "MacOS バージョンは {{version}} です。 macOS 12 以降はログインが必要です."
     },
     "message": {
         "sync": "同期が完了しました",
@@ -347,7 +383,9 @@
             "error": "インストールに失敗しました",
             "finished": "インストールが完了しました",
             "imported": "Game Imported",
-            "startInstall": "Installation Started"
+            "startInstall": "Installation Started",
+            "paused": "インストールパユース",
+            "stopped": "インストール停止"
         },
         "moved": "移動が完了しました",
         "moving": "Moving Game",
@@ -359,7 +397,9 @@
         "update": {
             "canceled": "更新がキャンセルされました",
             "finished": "Update Finished",
-            "started": "Update Started"
+            "started": "Update Started",
+            "stopped": "アップデート停止",
+            "paused": "更新パユース"
         }
     },
     "offline-message": {
@@ -369,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "オープン日時",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -432,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "ダウンロードの一時停止",
+            "resume": "ダウンロードを再開"
         }
     },
     "Recent": "最近のゲーム",
@@ -500,7 +542,10 @@
             "instructions_title": "How to report a problem?",
             "last-log": "Last Log",
             "no-file": "No log file found",
-            "show-in-folder": "Show log file in folder"
+            "show-in-folder": "Show log file in folder",
+            "join-hyperplay-discord": "私たちのDiscordに参加する",
+            "instructions-part-01": "HyperPlayで問題が発生した場合は、Discord Server の問題を報告する2つの指定領域があります。 プレイヤーの方は、プレイヤーサポートフォーラムへお立ち寄りください。 ゲーム開発の場合は、開発サポートフォーラムにアクセスして問題点を報告してください.",
+            "instructions-part-02": "問題の診断と修正を可能な限り迅速に行うため、ログのコピーを含め、できるだけ多くの情報を提供してください。 当社のサポートチームは、両方のチャネルを監視し、可能な限り迅速に問題に対応するために最善を尽くします。 お客様が遭遇する問題の解決に取り組んでいる間、ご理解とご協力をお願い致します."
         },
         "mangohud": "Mangohudを有効にする（Mangohudをインストールする必要があります）",
         "manualsync": {
@@ -546,7 +591,12 @@
         "disable_logs": "ログを無効にする",
         "addgamestoapplications": "ゲームをアプリケーションに自動的に追加する",
         "showMetalOverlay": "統計オーバーレイを表示",
-        "alt-nile-bin": "代替の Nile バイナリを選択する"
+        "alt-nile-bin": "代替の Nile バイナリを選択する",
+        "msync": "Esyncを有効にする",
+        "autodxvknvapi": "プレフィックスにDXVK-NVAPIをインストール/更新",
+        "steamId": "蒸気ID",
+        "autoLaunchHyperPlay": "自動進水のハイパー プレイ",
+        "dxvkfpslimit": "FPS(DX9・10・11)の制限"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -581,19 +631,51 @@
             "log": "Log",
             "other": "他",
             "sync": "同期を保存",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "システム情報",
+            "accounts": "アカウント"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
-        }
+        },
+        "systemInformation": {
+            "os": "オペレーティングシステム:",
+            "copyToClipboard": "クリップボードにコピー",
+            "cpu": "CPU:",
+            "gogdlVersion": "ゴーグル: {{gogdlVersion}}",
+            "osVersion": "バージョン {{versionNumber}}",
+            "steamDeck": "蒸気デッキ",
+            "systemModel": "システム モデル:",
+            "version": "バージョン: {{appVersion}}",
+            "osNameFlatpak": "{{osName}} (フラットパック内)",
+            "showDetailed": "詳細なシステム仕様を表示",
+            "gpuDriver": "ドライバー: {{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "伝説: {{legendaryVersion}}",
+            "memory": "記憶:",
+            "memoryStats": "{{percentUsed}}%使用({{usedGib}}/{{totalGib}})",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gpu": "GPU:"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
+        },
+        "reset-extension": "リセット延長",
+        "gamesSettings": "ゲームの設定"
     },
     "Settings": "設定",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "achievements": "達成率",
+        "library": "ライブラリ",
+        "store": "Marketplace",
+        "downloadManager": "ダウンロードマネージャ"
     },
     "status": {
         "installing": "インストール中",
@@ -632,7 +714,9 @@
         "logout": "ログアウト",
         "logout_confirmation": "ログアウトしてもよろしいですか？",
         "manageaccounts": "Manage Accounts",
-        "quit": "終了"
+        "quit": "終了",
+        "logIn": "ログイン",
+        "manageStore": "店舗の管理"
     },
     "webview": {
         "controls": {
@@ -655,5 +739,279 @@
     },
     "Amazon Games": "アマゾンゲーム",
     "amazon": "アマゾン",
-    "prime-gaming": "プライムゲーミング"
+    "prime-gaming": "プライムゲーミング",
+    "hyperplay": {
+        "buttons": {
+            "noThanks": "結構です",
+            "agree": "同意する"
+        },
+        "turnAnalyticsOff": "無効にする",
+        "copyUrl": "URLをコピー",
+        "misc": "しない",
+        "browserImport": {
+            "profile": "プロフィール",
+            "appId": "アプリID"
+        },
+        "logOut": "ログアウト",
+        "onboarding": {
+            "terms": "サービス利用規約",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "追加情報",
+                        "createNewWallet": "新しいMMエクステンションウォレットを作成する",
+                        "details": "以下のブラウザにはMetaMaskがインストールされています。 インポートしたいものを選択します.",
+                        "orWord": "お問い合わせ",
+                        "title": "ブラウザを選択してからインポートする",
+                        "useRecoveryPhraseInfo": "この機能は、上級ユーザーや開発者におすすめです。 秘密の回復フレーズは、MetaMaskにローカルに保存され、HyperPlayと共有されていません.",
+                        "useRecoveryPhrase": "秘密の回復フレーズを使用してインポート",
+                        "cantFindProfile": "ブラウザのプロファイルが見つからない場合?"
+                    },
+                    "info": {
+                        "skip": "今はスキップ",
+                        "login": {
+                            "title": "ログインする新しい方法",
+                            "details": "すべてのウェブサイトで新しいアカウントとパスワードを作成する代わりに、ウォレットを代わりに接続します."
+                        },
+                        "digitalAssets": {
+                            "details": "ウォレットは、トークンやNFTなどのデジタルアセットを送受信、保存、表示するために使用されます.",
+                            "title": "デジタル資産のホーム"
+                        },
+                        "createWalletCTA": "ウォレットを作成する",
+                        "title": "ウォレットとは何ですか?",
+                        "createWalletDescription": "ウォレットを持っていないか、新しいウォレットを作成したい場合は、下の「ウォレットを作成」をクリックします"
+                    },
+                    "scan": {
+                        "title": "QRをスキャン ",
+                        "details": "暗号化された通信チャネルを作成します。 鍵はHyperPlayと共有されることはありません.",
+                        "getMetamask": "MetaMaskを入手",
+                        "dontHaveWallet": "ウォレットをお持ちではありませんか?",
+                        "updateWarning": "問題がありますか? MetaMaskが最新の状態にあることを確認してください."
+                    }
+                },
+                "pleaseConnect": "ウォレットを接続するか、Metamaskモバイルアプリをダウンロードしてください。\nスタート:",
+                "title": "ウォレット接続"
+            },
+            "analytics": {
+                "optOut": "常に設定でオプトアウトすることができます;",
+                "neverCollectIP": " 完全な IP アドレスを収集します;",
+                "privacyCaption": "このデータは集計され、一般データ保護規則(EU)2016/679の目的のために匿名です。 当社のプライバシー慣行に関する詳細情報については、当社のプライバシーポリシーをご覧ください ",
+                "hyperplayWill": "ハイパープレイ:",
+                "neverCollectPersonal": " 鍵、住所、残高、ハッシュ、または個人情報を収集します;",
+                "neverSellData": " 利益のためにデータを販売します。 お問い合わせ!",
+                "privacyPolicyHere": "プライバシーポリシーはこちら.",
+                "anonymized": "匿名化されたクリック&ゲームインタラクションを送信してください;",
+                "title": "HyperPlayを向上させる!",
+                "body": "HyperPlayは、ユーザーがアプリケーションとやり取りする方法をよりよく理解するために、使用データを収集したいと思います。 この情報は、アプリの使用方法を理解し、HyperPlayをより良いものにすることができます."
+            },
+            "connectAgain": "再び接続する",
+            "connectionConnected": {
+                "description": "ウォレットが接続されています。 ゲームの準備ができました.",
+                "title": "ウォレット接続!"
+            },
+            "connectionCanceled": {
+                "description": "モバイルウォレットの接続リクエストは、続行してください.",
+                "title": "接続解除!"
+            },
+            "welcome": {
+                "text": {
+                    "bugs": "HyperPlayはパブリックアルファです。 多くの機能はまだあります\n開発中、バグがあります.",
+                    "construction": "HyperPlayは工事中にあります.",
+                    "communityCTA_1": "フィードバックが大好きで、ぜひご参加ください",
+                    "communityCTA_2": "コミュニティ。 一緒に、ゲームの未来を形作りましょう!",
+                    "description": "HyperPlayはゲームランチャーであり、ゲームストアのアグリゲーターです。\n未来。 HyperPlayを使用すると、ウォレット、トークン、アセットを運ぶことができます。\nあらゆるゲームに。 HyperPlayは、Epicのライブラリ全体をサポートしています\nストア、GOG、自社のHyperPlayストア。 HyperPlayを利用することで、同意する\nお問い合わせ"
+                },
+                "title": "ハイパーへようこそ 早期アクセスを再生!"
+            }
+        },
+        "achievements": {
+            "noAchievements": {
+                "oops": "おっとっと！",
+                "doubleCheckMessage": "現時点でのSteamアカウントでゲームが見つからなかったようです。 ゲームの詳細が公開されていることをダブルチェックするだけの簡単なリマインダー。 これにより、お客様の業績にアクセスし、最高の体験を提供できます."
+            },
+            "addThisGame": "このゲームを追加",
+            "freeMints": "フリーミント",
+            "gamesToMint": "ゲームをミントに"
+        },
+        "discordApp": "Discord",
+        "folder": "フォルダ",
+        "gamecard": {
+            "distributables": "配布物のインストール",
+            "paused": "一時停止済み",
+            "installing": "ダウンロード中...",
+            "installed": "再生する準備",
+            "extracting": "抽出..."
+        },
+        "turnAnalyticsOn": "有効にする",
+        "Sync": "シンク",
+        "viewMyAccount": "アカウントを見る",
+        "accesscodes": {
+            "requirescode": "このゲームアップデートでは、アクセスコードが必要です.",
+            "success": {
+                "validation": "成功! アクセスコードが有効"
+            },
+            "error": {
+                "validation": "アクセスコードが無効"
+            }
+        },
+        "changeWallet": "Swapウォレットアカウント",
+        "connectWallet": "ウォレットを接続",
+        "currentWallet": "現在のウォレット",
+        "analyticsOn": "アナリティクスがオンになっています",
+        "linkSteamAccountDescription": "HyperPlayアカウントをリンクするためにSteamにサインインします.",
+        "syncing": "同期...",
+        "viewPortfolio": "ポートフォリオを見る",
+        "analyticsOff": "解析がオフ",
+        "viewItem": "{{item}}を見る",
+        "linkSteamAccountCta": "蒸気看板に行く",
+        "linkSteamAccountTitle": "Steamアカウントのリンク",
+        "publicAlpha": "パブリックアルファ",
+        "otp": "ワンタイムパスコード"
+    },
+    "dlc": {
+        "size": "サイズ",
+        "actions": "ショートカット",
+        "installDlcs": "すべてのDLCをインストールします",
+        "title": "タイトル",
+        "noDlcFound": "DLCが見つかりません"
+    },
+    "gameRelease": {
+        "beta": "ベータ",
+        "alpha": "アルファ",
+        "demo": "Demo",
+        "main": "配管",
+        "prototype": "プロトタイプ"
+    },
+    "quest": {
+        "reputation": "評判度",
+        "active": "アクティブ",
+        "claimed": "受け取る",
+        "connectSteamAccount": "チームアカウントを接続",
+        "Play": "再生",
+        "quests": "クエスト",
+        "signIn": "サインイン",
+        "playstreak": {
+            "days": "日",
+            "now": "今",
+            "dayResets": "日のリセット:",
+            "playEachDay": "毎日プレイして、あなたのストリークはリセットされません!",
+            "playToStart": "このゲームをプレイして、あなたのストリークを開始します!",
+            "progressTowardsStreak": "今日のストリークに向かって進んでください.",
+            "streakCompleted": "完了! 今すぐ報酬を請求してください.",
+            "streakProgress": "Streakの進捗"
+        },
+        "points": "点",
+        "type": {
+            "reputation": "評判度",
+            "playstreak": "遊ぶ Streak"
+        },
+        "sync": "シンク",
+        "associatedGames": "関連するゲーム",
+        "linkAccount": "お問い合わせ 適格性を確認するためのスチームアカウント.",
+        "claimAll": "クレーム すべて",
+        "readyForClaim": "クレームの準備",
+        "reward": "リワード",
+        "View Game": "ゲームを見る",
+        "errorMessage": "トランザクションでエラーが発生しました.",
+        "needMoreAchievements": "これらのゲームの一つで達成の {{percent}}% を完了する必要があります.",
+        "claimFailed": "クレーム失敗",
+        "claimFailedMessage": "お問い合わせ それでも機能しない場合は、Discordサポートチケットを作成します.",
+        "createDiscordTicket": "作成したDiscordチケット",
+        "notEnoughGas": "十分なウォレット残高で、ガス手数料による報酬を請求できます。 別の財布を試したり、再試行する前にこれを補充してください."
+    },
+    "quests": {
+        "quests": "クエスト",
+        "playstreak": {
+            "signInWarning": {
+                "client": "現在ログインしていないので、 streak の進捗状況が追跡されません。 右上のドロップダウンでHyperPlayにログインして進捗状況を追跡してください.",
+                "overlay": "現在ログインしていないので、 streak の進捗状況が追跡されません。 右上のドロップダウンでゲームを終了し、HyperPlayにログインして進捗状況を追跡してください."
+            }
+        }
+    },
+    "ALL": "ALL",
+    "analytics": "分析",
+    "profile": "プロフィール",
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer",
+            "message": "デフォルトの互換性レイヤーを設定する"
+        }
+    },
+    "externalLink": {
+        "dontAskAgain": "再度確認しない",
+        "warning": "外部リンクを開く."
+    },
+    "sideload": {
+        "warningTitle": "重要",
+        "warningMessage": "ゲームのサイドロードは、開発者や経験豊富なパワーユーザー向けの機能です。 マルウェアを含むインストーラをサイドロードすると、コンピュータを侵害し、資金の盗難につながる可能性があります."
+    },
+    "hyperplayOverlay": {
+        "extensionNotification": {
+            "DESCRIPTION": "プレス {{overlayKeyMod}} + Xはこのトランザクションを見る",
+            "TITLE": "取引依頼"
+        },
+        "greeting": {
+            "title": "ハイパープレイオーバーレイ",
+            "description": "HyperPlayのオーバーレイが準備完了です! プレス {{overlayKeyMod}} + X を表示または非表示にします."
+        },
+        "signatureRequest": {
+            "FAILED": "署名の中断",
+            "CONFIRMED": "提出された署名",
+            "INITIATED": "署名の保留要求"
+        },
+        "txnRequest": {
+            "INITIATED": "取引出願申請",
+            "PENDING": "提出された取引",
+            "FAILED": "取引の中断",
+            "CONFIRMED": "取引確認"
+        },
+        "chainRequest": {
+            "FAILED": "キャンセルされたカスタムネットワーク",
+            "INITIATED": "カスタムネットワークリクエスト",
+            "CONFIRMED": "カスタムネットワーク追加"
+        },
+        "description": {
+            "FAILED": "トランザクションのキャンセルまたは送信されていない場合は、再度お試しください",
+            "CONFIRMED": "トランザクションが正常に確認されました!",
+            "PENDING": "ブロックチェーン確認待ち 確認した時にお知らせします",
+            "INITIATED": "モバイルウォレットでウォレットの確認が終わる"
+        },
+        "walletWatch": {
+            "CONFIRMED": "カスタムトークン追加",
+            "INITIATED": "カスタムトークンリクエストのペンディングを追加",
+            "FAILED": "カスタムトークンのキャンセルリクエスト"
+        }
+    },
+    "dlcs": {
+        "label": "DLC を選択してインストールします"
+    },
+    "accounts": "パスワード",
+    "importGameErrorTitle": "ゲームエラーのインポート",
+    "back_to_game": "ゲームに戻る",
+    "wiki_info": {
+        "not_found": "詳細情報が見つかりませんでした."
+    },
+    "achievements": {
+        "progress": {
+            "minted": "チェーン",
+            "notMinted": "オフチェーン"
+        }
+    },
+    "exit_game": "終了ゲーム",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "外部ウォレットでHyperPlayに接続します."
+    },
+    "importGameErrorMessageExecutable": "ゲーム 実行可能が見つからず、ゲームをインポートできない",
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} と他のゲームは更新する準備ができています.",
+            "single": "{{gameName}} のアップデートが準備されています."
+        },
+        "title": "利用可能なゲームアップデート"
+    },
+    "email_subscription": {
+        "title": "購読ありがとうございます!",
+        "subtitle": "コミュニティの一員になり、貴重なアップデートやインサイトを皆様に共有できることを心よりお詫び申し上げます."
+    },
+    "importGameErrorMessage": "有効なゲームフォルダではなく、ゲームをインポートすることはできません"
 }

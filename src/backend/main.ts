@@ -676,6 +676,16 @@ if (!gotTheLock) {
 
     initTrayIcon(mainWindow)
 
+    // Call checkGameUpdates for HyperPlay games every hour
+    const checkGameUpdatesInterval = 1 * 60 * 60 * 1000
+    setInterval(async () => {
+      try {
+        await checkGameUpdates(['hyperplay'])
+      } catch (error) {
+        logError(`Error checking game updates: ${error}`, LogPrefix.Backend)
+      }
+    }, checkGameUpdatesInterval)
+
     return
   })
 }
@@ -821,27 +831,31 @@ ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 
 /// IPC handlers begin here.
 
+async function checkGameUpdates(runners: Runner[]): Promise<string[]> {
+  let oldGames: string[] = []
+  const { autoUpdateGames } = GlobalConfig.get().getSettings()
+  for (const runner of runners) {
+    let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
+    if (autoUpdateGames) {
+      gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
+    }
+    oldGames = [...oldGames, ...gamesToUpdate]
+  }
+
+  sendGameUpdatesNotifications().catch((e) =>
+    logError(
+      `Something went wrong sending update notifications: ${e}`,
+      LogPrefix.Backend
+    )
+  )
+
+  return oldGames
+}
+
 ipcMain.handle(
   'checkGameUpdates',
   async (e, runners: Runner[]): Promise<string[]> => {
-    let oldGames: string[] = []
-    const { autoUpdateGames } = GlobalConfig.get().getSettings()
-    for (const runner of runners) {
-      let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
-      if (autoUpdateGames) {
-        gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
-      }
-      oldGames = [...oldGames, ...gamesToUpdate]
-    }
-
-    sendGameUpdatesNotifications().catch((e) =>
-      logError(
-        `Something went wrong sending update notifications: ${e}`,
-        LogPrefix.Backend
-      )
-    )
-
-    return oldGames
+    return checkGameUpdates(runners)
   }
 )
 

@@ -42,11 +42,18 @@
         },
         "update": {
             "message": "该游戏有更新，您想要现在更新吗？",
-            "title": "游戏需要更新"
+            "title": "游戏需要更新",
+            "message-cancel": "如果不更新,就不可能发挥这一游戏的作用"
         },
         "wineprefix": "选择 WinePrefix 文件夹",
         "yes": "是",
-        "yesCancel": "是，取消"
+        "yesCancel": "是，取消",
+        "aware": "我知道",
+        "compability": {
+            "message": "这一Windows游戏将使用兼容层。 你可能会遇到一些问题,或者游戏可能根本不可行."
+        },
+        "dont-show-again": "不再显示",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "添加到收藏",
@@ -76,7 +83,8 @@
         "update": "更新",
         "details": "详细信息",
         "favorites": "最爱",
-        "unfavorites": "不喜欢"
+        "unfavorites": "不喜欢",
+        "remove_from_library": "移除"
     },
     "cloud_save_unsupported": "不支持",
     "disabled": "已禁用",
@@ -136,7 +144,8 @@
             "message": "反作弊支持损坏或被拒。游戏不会正常运行。你仍要安装它吗？",
             "install": "是（我理解它不会正常工作）",
             "title": "反作弊损坏/被拒"
-        }
+        },
+        "compatibility-warning": "这一Windows游戏将使用兼容层。 你的经验可能有所不同."
     },
     "label": {
         "game": {
@@ -144,7 +153,8 @@
         },
         "playing": {
             "start": "开始游戏",
-            "stop": "游戏中（停止）"
+            "stop": "游戏中（停止）",
+            "update": "更新"
         },
         "saves": {
             "syncing": "存档同步中"
@@ -211,8 +221,14 @@
         "preparing": "准备下载，请稍候",
         "syncingSaves": "同步存档",
         "downloading": "下载中",
-        "extracting": "提取中",
-        "moving-files": "移动文件\"{{file}}\"：{{percent}} "
+        "extracting": {
+            "cancel": "Cancel Extraction",
+            "progress": "提取中"
+        },
+        "moving-files": "移动文件\"{{file}}\"：{{percent}} ",
+        "distributables": "批发",
+        "gog-goodie": "这种游戏似乎无法安装。 https://gog.com/account的可下载内容",
+        "goodie": "不可安装"
     },
     "submenu": {
         "addShortcut": "添加快捷方式",

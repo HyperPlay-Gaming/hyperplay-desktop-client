@@ -22,8 +22,8 @@
             "message": "HyperPlay Cache Was Cleared!",
             "title": "Cache Cleared"
         },
-        "choose": "",
-        "choose-egs-prefix": "",
+        "choose": "Абраць",
+        "choose-egs-prefix": "Прэфікс, дзе ўсталяваны EGS",
         "choose-gogdl-binary": "Select GOGDL Binary (needs restart)",
         "choose-legendary-binary": "Select Legendary Binary (needs restart)",
         "customWine": "Select the Wine or Proton Binary",
@@ -88,7 +88,7 @@
                 "title-finished": "Update Finished"
             }
         },
-        "no": "",
+        "no": "НЕ",
         "ok": "Ok",
         "protocol": {
             "install": {
@@ -120,7 +120,7 @@
             "title": "Shortcuts Removed"
         },
         "sync": {
-            "button": "",
+            "button": "Абраць",
             "error": "",
             "title": "Select EXE to Run"
         },
@@ -150,9 +150,12 @@
         "cancel": "Cancel",
         "go_to_library": "Go to Library",
         "login": "Login",
-        "sync": "",
+        "sync": "Сінхранізаваць",
         "syncing": "",
-        "unsync": ""
+        "unsync": "",
+        "download": "Спампаваць",
+        "update": "Абнавіць",
+        "continue": "Працягнуць"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Разліковы час"
     },
     "epic": {
         "offline-notification-body": "HyperPlay will maybe not work probably!",
@@ -265,7 +269,8 @@
             "part2": "Для іншых месцаў выкарыстоўвайце сімвалічную спасылку на адну з гэтых тэчак"
         },
         "disable_logs": "Уключыце гэты сцяжок, каб адключыць большасць запісаў у файлы журналаў (крытычная інфармацыя заўсёды рэгіструецца). Не забудзьцеся ВЫКЛЮЧЫЦЬ гэту наладу, перш чым паведамляць аб любой праблеме.",
-        "dxvknvapi": "DXVK-NVAPI – гэта рэалізацыя NVAPI, пабудаваная на аснове DXVK і ўласнага NVAPI Linux, яна дазваляе выкарыстоўваць DLSS на відэакартах Nvidia."
+        "dxvknvapi": "DXVK-NVAPI – гэта рэалізацыя NVAPI, пабудаваная на аснове DXVK і ўласнага NVAPI Linux, яна дазваляе выкарыстоўваць DLSS на відэакартах Nvidia.",
+        "msync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels."
     },
     "info": {
         "hyperplay": {
@@ -309,10 +314,11 @@
         "toggleLayout": {
             "grid": "Пераключыцца на макет сеткі",
             "list": "Пераключыцца на макет спісу"
-        }
+        },
+        "label": "Бібліятэка"
     },
     "loading": {
-        "default": "",
+        "default": "Загрузка",
         "website": "Loading Website"
     },
     "login": {
@@ -350,8 +356,8 @@
             "reparing": ""
         },
         "install": {
-            "canceled": "",
-            "error": "",
+            "canceled": "Усталёўка скасаваная",
+            "error": "Памылка ўсталявання",
             "finished": "",
             "imported": "Game Imported",
             "startInstall": "Installation Started"
@@ -362,10 +368,10 @@
         "refresh": {
             "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
         },
-        "uninstalled": "",
+        "uninstalled": "Выдаліць",
         "update": {
             "canceled": "",
-            "finished": "",
+            "finished": "Update Finished",
             "started": "Update Started"
         }
     },
@@ -376,7 +382,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Адкрыць",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -439,7 +445,8 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Прыпыніць загрузку"
         }
     },
     "Recent": "Played Recently",
@@ -511,13 +518,13 @@
         },
         "mangohud": "",
         "manualsync": {
-            "download": "",
+            "download": "Спампаваць",
             "forcedownload": "",
             "forceupload": "",
-            "sync": "",
+            "sync": "Сінхранізаваць",
             "syncing": "",
             "title": "Select EXE to Run",
-            "upload": ""
+            "upload": "Запампаваць"
         },
         "maxRecentGames": "Recent Games to Show",
         "maxworkers": "",
@@ -553,7 +560,9 @@
         "disable_logs": "Адключыць часопісы",
         "addgamestoapplications": "Дадавайце гульні ў праграмы аўтаматычна",
         "showMetalOverlay": "Паказаць накладанне статыстыкі",
-        "alt-nile-bin": "Выберыце альтэрнатыўны двайковы файл Nile"
+        "alt-nile-bin": "Выберыце альтэрнатыўны двайковы файл Nile",
+        "autodxvknvapi": "Auto Install/Update DXVK on Prefix",
+        "msync": "Enable Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,21 +595,34 @@
             "games_settings_defaults": "Game Defaults",
             "general": "Генерал",
             "log": "Log",
-            "other": "",
+            "other": "Іншае",
             "sync": "",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Уліковыя запісы"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "systemInformation": {
+            "copyToClipboard": "Скапіявана у буфер абмену",
+            "memory": "Памяць"
+        },
+        "gamesSettings": "Game settings",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager (Beta)"
+            }
         }
     },
-    "Settings": "",
+    "Settings": "Налады",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "store": "Крама",
+        "library": "Бібліятэка"
     },
     "status": {
         "installing": "Ўстаноўка",
@@ -627,7 +649,7 @@
         "about": "About",
         "quit": "Quit",
         "reload": "Reload",
-        "show": ""
+        "show": "Паказаць"
     },
     "two_col_table": {
         "save_hint": "Changes in this table are not saved automatically. Click the + button"
@@ -639,13 +661,14 @@
         "logout": "Logout",
         "logout_confirmation": "Вы ўпэўнены, што хочаце выйсці?",
         "manageaccounts": "Manage Accounts",
-        "quit": "Quit"
+        "quit": "Quit",
+        "logIn": "Увайсці"
     },
     "webview": {
         "controls": {
-            "back": "",
-            "forward": "",
-            "openInBrowser": "",
+            "back": "Назад",
+            "forward": "Ісці наперад",
+            "openInBrowser": "Адкрыць ў браўзеры",
             "reload": ""
         }
     },
@@ -676,5 +699,62 @@
     },
     "amazon": "Amazon",
     "prime-gaming": "Prime Gaming",
-    "Amazon Games": "Гульні Amazon"
+    "Amazon Games": "Гульні Amazon",
+    "hyperplay": {
+        "turnAnalyticsOff": "Выключыць",
+        "turnAnalyticsOn": "Уключыць",
+        "onboarding": {
+            "terms": "Умовы абслугоўвання",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Даведацца больш"
+                    },
+                    "info": {
+                        "skip": "Пакуль прапусціць"
+                    }
+                }
+            }
+        },
+        "browserImport": {
+            "profile": "Профіль",
+            "appId": "Ідэнтыфікатар праграмы"
+        },
+        "Sync": "Сінхранізаваць",
+        "buttons": {
+            "noThanks": "Не, дзякуй"
+        },
+        "gamecard": {
+            "paused": "На паўзе"
+        },
+        "discordApp": "Discord",
+        "folder": "Каталог",
+        "logOut": "Выхад",
+        "misc": "Ніколі"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "Менеджэр Wine"
+        }
+    },
+    "profile": "Профіль",
+    "quest": {
+        "active": "Актыўны",
+        "Play": "Прайграць",
+        "playstreak": {
+            "days": "дзён",
+            "now": "Цяпер"
+        },
+        "points": "Пункты",
+        "signIn": "Увайсці",
+        "sync": "Сінхранізаваць"
+    },
+    "accounts": "акаўнты",
+    "gameRelease": {
+        "alpha": "Альфа",
+        "demo": "Дэма…",
+        "main": "Асноўная",
+        "beta": "Beta"
+    },
+    "analytics": "Аналітыка"
 }

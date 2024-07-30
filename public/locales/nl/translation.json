@@ -66,7 +66,8 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "Er ging iets mis met de update! Gelieve handmatig ongeïnstalleerd en herinstall HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,12 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
-            }
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Installatie van Ubisoft Connect in de wedstrijdvoorziening faalde. Controleer onze Wiki-pagina bij HTTPs: 'Guroic-Games-Launcher/HeroicGames Launcher/wiki/Hoi-to-Ubisoft-Connecton-Macen-Macen-Mauxin-Macen-Macen-Macen-Macen-Mac-Mac-Macen-Macen-Macen-Mac-Mac-Mac-Max-Mac-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Me-Max-Max-Me-Me-Max-Me-Me-Max-Me-Max-Me-Max-Max-Max-Max-Max-Me-Me-Max-Max-Max-Max-Max-Ma."
+            },
+            "moving": "Error Moving Game 18X"
         },
         "info": {
             "update": {
@@ -139,12 +145,28 @@
                 "install": "Epic Servers are having major outage right now, the game cannot be installed!",
                 "update": "Epic Servers are having major outage right now, the game cannot be updated!"
             },
-            "title": "Warning"
+            "title": "Warning",
+            "rosetta": {
+                "title": "Rosetta niet gevonden",
+                "message": "HyperPlay vereist Rosetta om rechtstreeks met Apple Silicon chips te rennen. Gelieve het te installeren van de MacOS terminal met het volgende bevel: \"Software-update --intall-rosetta\" en herstart HyperPlay. "
+            },
+            "wine-change": {
+                "title": "Wijn niet gevonden!",
+                "message-gptk": "Om spelletjes te kunnen runnen met de Apple Gaming telkens, moet je je macOS naar 14 of hoger upgraden. We hebben Wine op je systeem gevonden, wil je verder gaan met de lancering?",
+                "title-gptk": "Game Porting Toolkit ",
+                "message": "We konden de geselecteerde wijnversie niet vinden om deze titel te starten. We hebben er nog een gevonden, wil je verder met de lancering?"
+            }
         },
         "wineprefix": "Selecteer een Wine Prefix Folder",
         "yes": "JA",
         "dontShowAgain": "Niet meer laten zien",
-        "choose-nile-binary": "Selecteer Nijl binair"
+        "choose-nile-binary": "Selecteer Nijl binair",
+        "reset-extension": {
+            "question": {
+                "message": "Weet je zeker dat je de MetaMask Extensie wilt herstellen?",
+                "title": "Reset Extension"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Login",
         "sync": "Synchroniseer",
         "syncing": "Synchroniseren",
-        "unsync": "De-synchroniseren"
+        "unsync": "De-synchroniseren",
+        "continue": "Door­gaan",
+        "download": "Download",
+        "update": "Aanpassen"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "title_dm": "Download Manager",
+        "ETA": "Geschatte tijd"
     },
     "epic": {
         "offline-notification-body": "HyperPlay will not work probably!",
@@ -263,7 +290,11 @@
         "wine": {
             "part1": "HyperPlay zoekt naar versies van Wine, Proton en CrossOver op de volgende mappen:",
             "part2": "Voor andere locaties moet je een symbolische link begruiken naar een van deze mappen"
-        }
+        },
+        "dxvkfpslimit": "Zette een kappenkast voor DXVK spelletjes",
+        "dxvknvapi": "DXVK-NVAPI is een implementatie van NVAPI op de top van DXVK en de linux NVAPI, het staat voor het gebruik van DLSSSS op Nvidia GUPS.",
+        "msync": "Msync wil wijnserver in CPU-intensive games verminderen. Bezwaar kan verbeteren op verschillende spelletjes.",
+        "disable_logs": "Toggle deze checkbox op om de meeste schrijvers uit te schakelen om bestanden te loggen. Zorg dat je deze set afzet voordat je iets aangeeft."
     },
     "info": {
         "hyperplay": {
@@ -289,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-none-found": "Geen Wine versie werd gevonden, download één van de compatibility manager",
+        "wine-path-invalid": "Wijn Path is ongeldig, kies een andere."
     },
     "install": {
         "path": "Select Install Path"
@@ -303,7 +336,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalZA": "Alfabetische Z-A",
+        "alphabeticalAZ": "Alfabetische A-Z"
     },
     "loading": {
         "default": "Bezig met laden",
@@ -314,7 +349,8 @@
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Amazon-login"
+        "amazon": "Amazon-login",
+        "old-mac": "Je macOS versie is 38. MacOS 12 of Newer moet inloggen."
     },
     "message": {
         "sync": "Synchronisatie compleet",
@@ -347,7 +383,9 @@
             "error": "Installatie mislukt",
             "finished": "Installatie is voltooid",
             "imported": "Game Imported",
-            "startInstall": "Installation Started"
+            "startInstall": "Installation Started",
+            "paused": "Installatie Paused",
+            "stopped": "Installatie stopte"
         },
         "moved": "Klaar met verplaatsing",
         "moving": "Moving Game",
@@ -359,7 +397,9 @@
         "update": {
             "canceled": "Update geannuleerd",
             "finished": "Update is voltooid",
-            "started": "Update Started"
+            "started": "Update Started",
+            "stopped": "Update stopte",
+            "paused": "Update Paused"
         }
     },
     "offline-message": {
@@ -369,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Openingstijden",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -414,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix waar EGS is geïnstalleerd",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
-        "alt-nile-bin": "Gebruik van ingebouwde Nijl binaire..."
+        "alt-nile-bin": "Gebruik van ingebouwde Nijl binaire...",
+        "dxvkfpsvalue": "Positieve integerwaarde"
     },
     "platforms": {
         "linux": "Linux",
@@ -431,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Downloads pauzeren",
+            "resume": "Download hervatten"
         }
     },
     "Recent": "Recente Spellen",
@@ -499,7 +542,10 @@
             "instructions_title": "How to report a problem?",
             "last-log": "Last Log",
             "no-file": "No log file found",
-            "show-in-folder": "Show log file in folder"
+            "show-in-folder": "Show log file in folder",
+            "instructions-part-01": "Als je problemen tegenkomt terwijl je HyperPlay gebruikt, hebben we twee ontworpen gebieden om je problemen in onze Discord Server te melden. Als je een speler bent, meld je dan problemen door de speler-support-forum te bezoeken. Als je een speldev bent, meld je dan problemen door het Dev-supportforum te bezoeken.",
+            "join-hyperplay-discord": "Welkom bij onze Discord",
+            "instructions-part-02": "Om ons te helpen en het probleem zo snel mogelijk te repareren, geef zoveel mogelijk informatie, inclusief een kopie van je logboeken. Ons ondersteuningsteam zal beide kanalen monitoren en hun best doen om zo snel mogelijk te reageren op jouw probleem. Bedankt voor je geduld en begrip terwijl we werken om problemen op te lossen die je tegenkomt."
         },
         "mangohud": "Schakel Mangohud in (Mangohud moet zijn geïnstalleerd)",
         "manualsync": {
@@ -545,7 +591,12 @@
         "disable_logs": "Logboeken uitschakelen",
         "addgamestoapplications": "Voeg automatisch games toe aan applicaties",
         "showMetalOverlay": "Statistieken-overlay weergeven",
-        "alt-nile-bin": "Kies een alternatief Nijlbinair getal"
+        "alt-nile-bin": "Kies een alternatief Nijlbinair getal",
+        "autoLaunchHyperPlay": "Auto Launch Hyper Speel",
+        "dxvkfpslimit": "Limit FPS (DX9, 10 en 11)",
+        "autodxvknvapi": "Auto Install/Update DXVK-NVAPI op Prefix",
+        "steamId": "Steam ID",
+        "msync": "Esync inschakelen"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +631,51 @@
             "log": "Log",
             "other": "Overig",
             "sync": "Save-synchronisatie",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Accounts",
+            "systemInformation": "S_ysteem informatie"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "systemInformation": {
+            "systemModel": "System Model:",
+            "gogdlVersion": "Gogdl:",
+            "gpuDriver": "Vertaling:",
+            "memory": "Memory:",
+            "showDetailed": "Toon gedetailleerde systemen specifiek",
+            "steamDeck": "Steam Deck",
+            "cpuDescription": "_",
+            "gpuWithNumber": "GPU X:",
+            "memoryStats": "_",
+            "cpu": "CPU:",
+            "gpu": "GPU:",
+            "legendaryVersion": "Legendary:",
+            "version": "Version:",
+            "osNameFlatpak": "_",
+            "osVersion": "Version 8X:",
+            "os": "Besturingssysteem",
+            "copyToClipboard": "Kopiëren naar klembord"
+        },
+        "reset-extension": "Reset Extension",
+        "gamesSettings": "Games Settings",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
         }
     },
     "Settings": "Instellingen",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "achievements": "Achievementen",
+        "downloadManager": "Download Manager",
+        "library": "Bibliotheek",
+        "store": "Winkel"
     },
     "status": {
         "installing": "Installeren",
@@ -631,7 +714,9 @@
         "logout": "Uitloggen",
         "logout_confirmation": "Weet u zeker dat u wilt uitloggen?",
         "manageaccounts": "Manage Accounts",
-        "quit": "Sluiten"
+        "quit": "Sluiten",
+        "manageStore": "Manage winkels",
+        "logIn": "Aanmelden"
     },
     "webview": {
         "controls": {
@@ -668,5 +753,265 @@
     },
     "Amazon Games": "Amazon-spellen",
     "amazon": "Amazone",
-    "prime-gaming": "Prime-gaming"
+    "prime-gaming": "Prime-gaming",
+    "hyperplay": {
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "scan": {
+                        "getMetamask": "Haal MetaMask",
+                        "updateWarning": "Heb je problemen? Zorg ervoor dat MetaMask een afspraakje heeft.",
+                        "details": "Maak een versleutelde communicatiekanaal. Je sleutels zullen nooit gedeeld worden met HyperPlay.",
+                        "title": "Scan QR ",
+                        "dontHaveWallet": "Heeft Don een portemonnee?"
+                    },
+                    "import": {
+                        "createNewWallet": "Creëer nieuwe MM verlengings portemonnee",
+                        "orWord": "OF",
+                        "useRecoveryPhraseInfo": "Dit kenmerk wordt aanbevolen voor geavanceerde gebruikers en ontwikkelaars. Je geheime herstellende uitdrukking wordt opgeslagen in MetaMask en nooit gedeeld met HyperPlay.",
+                        "cantFindProfile": "Kan je je browserprofiel niet vinden?",
+                        "details": "De browsers beneden hebben MetaMask al geïnstalleerd. Kies de enige die je wilt importeren.",
+                        "title": "Selecteer de browser om te importeren",
+                        "useRecoveryPhrase": "Import Using Secret Recovery",
+                        "learnMore": "Leer meer."
+                    },
+                    "info": {
+                        "createWalletCTA": "Creëer een portemonnee",
+                        "createWalletDescription": "Klikken in de muur als je geen portemonnee hebt of een nieuwe wil maken:",
+                        "skip": "Skip voor nu",
+                        "title": "Wat is een portemonnee?",
+                        "digitalAssets": {
+                            "title": "Een thuis voor je Digital Assets",
+                            "details": "Walletten worden gebruikt om te sturen, te ontvangen, opslaan, en digitale activa te laten zien als tekenen en NFT's."
+                        },
+                        "login": {
+                            "details": "Een alternatief om nieuwe rekeningen en wachtwoorden te creëren op elke website, verbind je portemonnee in plaats daarvan.",
+                            "title": "A New Way To Log In"
+                        }
+                    }
+                },
+                "title": "Wallet Connecties",
+                "pleaseConnect": "Verbind uw portemonnee, of download de Metamask mobiele app om te krijgen\nBegin:"
+            },
+            "analytics": {
+                "privacyPolicyHere": "Privacy Politie hier.",
+                "anonymized": "Stuur een anoniem klik spel interactie;",
+                "neverSellData": " verkoop gegevens voor winst. Nooit!",
+                "neverCollectIP": " pak je IP-adres;",
+                "optOut": "Altijd toestaan dat je opt-out via de settings;",
+                "privacyCaption": "Deze gegevens zijn gefrustreerd en is daarom anoniem voor de doelen van generaal Data Beschermingsregelgeving 2016/679. Voor meer informatie in relatie met onze privacy praktijken, zie alsjeblieft onze ",
+                "title": "Help ons HyperPlay te verbeteren!",
+                "hyperplayWill": "HyperPlay zal:",
+                "body": "HyperPlay wil gebruiksgegevens verzamelen om beter te begrijpen hoe onze gebruikers met de aanvraag communiceren. Deze informatie helpt ons te begrijpen hoe je de app gebruikt en laat ons HyperPlay nog beter voor je maken.",
+                "neverCollectPersonal": " sleutels verzamelen, adressen, evenwichten, hashes, of persoonlijke informatie;"
+            },
+            "welcome": {
+                "text": {
+                    "communityCTA_1": "We zouden je feedback leuk vinden en je bij ons laten komen",
+                    "communityCTA_2": "gemeenschap. Samen, laten we de toekomst van het spel vormen!",
+                    "bugs": "Let op dat HyperPlay een publieke alfa is. Veel kenmerken zijn nog steeds\nin ontwikkeling, en er zullen insecten zijn.",
+                    "construction": "HyperPlay staat onder de bouw.",
+                    "description": "HyperPlay is een spelwerper en game shop aggregator van de\ntoekomst. Met HyperPlay kun je je portemonnee, token en activa dragen.\nin elke wedstrijd. HyperPlay steunt de hele bibliotheek van de Epic\nGestolen, GG, en onze eigen HyperPlay winkel. Door HyperPlay te gebruiken, ben je het ermee eens."
+                },
+                "title": "Welkom in Hyper Speel Early Access!"
+            },
+            "connectionCanceled": {
+                "description": "Bevestig het verzoek op je mobiele portemonnee om verder te gaan.",
+                "title": "Verbinding geannuleerd!"
+            },
+            "connectionConnected": {
+                "description": "Je portemonnee is verbonden. Je bent klaar om te spelen.",
+                "title": "Portemonnee verbonden!"
+            },
+            "connectAgain": "Verbinding opnieuw",
+            "terms": "Algemene voorwaarden"
+        },
+        "analyticsOff": "Analytica wordt uitgezet",
+        "changeWallet": "Slik portemonnee rekening",
+        "achievements": {
+            "gamesToMint": "Games naar Mint",
+            "noAchievements": {
+                "doubleCheckMessage": "Het lijkt erop dat we geen spelletjes konden vinden op je Steam account op dit moment. Gewoon een snelle herinnering om te controleren dat je spelgegevens in het openbaar staan. Op deze manier kunnen we toegang krijgen tot uw prestaties en u de beste ervaring geven.",
+                "oops": "Oeps!"
+            },
+            "addThisGame": "Voeg dit spel toe",
+            "freeMints": "Vrije munten"
+        },
+        "linkSteamAccountDescription": "Meld je aan Steam om je HyperPlay account te linken.",
+        "linkSteamAccountTitle": "Link Steam Account",
+        "viewPortfolio": "View portfolio",
+        "analyticsOn": "Analytica wordt aangezet",
+        "buttons": {
+            "agree": "Mee eens",
+            "noThanks": "Nee, bedankt"
+        },
+        "currentWallet": "Current portemonnee",
+        "syncing": "Syncing...",
+        "viewMyAccount": "Mijn rekening",
+        "connectWallet": "Connectie portemonnee",
+        "viewItem": "View X",
+        "accesscodes": {
+            "success": {
+                "validation": "Succes. Toegangscode is geldig"
+            },
+            "error": {
+                "validation": "Toegangscode is ongeldig"
+            },
+            "requirescode": "Dit spel update vraagt een toegangscode."
+        },
+        "publicAlpha": "Public Alfa",
+        "gamecard": {
+            "extracting": "Uittrekken...",
+            "installed": "Klaar om te spelen",
+            "paused": "Gepauzeerd",
+            "distributables": "Installing distributable",
+            "installing": "Bezig met ophalen..."
+        },
+        "otp": "Een Time Passcode",
+        "browserImport": {
+            "appId": "App",
+            "profile": "Profiel"
+        },
+        "linkSteamAccountCta": "Ga naar Steam",
+        "discordApp": "Discord",
+        "misc": "Nooit",
+        "logOut": "Uitloggen",
+        "Sync": "Sync",
+        "turnAnalyticsOff": "Uitschakelen",
+        "folder": "Map",
+        "copyUrl": "URL kopiëren",
+        "turnAnalyticsOn": "Inschakelen"
+    },
+    "hyperplayOverlay": {
+        "signatureRequest": {
+            "INITIATED": "Signature verzoek in afwachting",
+            "FAILED": "Signature onderbroken",
+            "CONFIRMED": "Ondertekening ingediend"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Custom token",
+            "INITIATED": "Plaats gebruikelijke verzoek in afwachting",
+            "FAILED": "Custom Token verzoek geannuleerd"
+        },
+        "greeting": {
+            "description": "HyperPlay Overlay is klaar! Druk 34X X om het te laten zien of te verbergen.",
+            "title": "QuaperPlay Overlay"
+        },
+        "description": {
+            "CONFIRMED": "De transactie was succesvol bevestigd!",
+            "FAILED": "De transactie werd geannuleerd of niet ingediend, probeer het nog eens",
+            "INITIATED": "Een portemonnee bevestiging in je mobiele portemonnee",
+            "PENDING": "Wachten op blokkade bevestiging. We laten het weten als het bevestigd is"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "Druk op £6 X om deze transactie te zien",
+            "TITLE": "Vertaling:"
+        },
+        "txnRequest": {
+            "INITIATED": "Vertaling:",
+            "PENDING": "Vertaling:",
+            "CONFIRMED": "Transactie bevestigd",
+            "FAILED": "Vertaling:"
+        },
+        "chainRequest": {
+            "INITIATED": "Custom verzoek",
+            "CONFIRMED": "Douane netwerk toegevoegd",
+            "FAILED": "Custom netwerk geannuleerd"
+        }
+    },
+    "importGameErrorMessage": "Geen geldig spel, importeren is onmogelijk",
+    "back_to_game": "Terug naar het spel",
+    "notification": {
+        "wine-download": {
+            "message": "De defecte compatibiliteit lager",
+            "title": "Compatibility Layer"
+        }
+    },
+    "quest": {
+        "claimAll": "Claim",
+        "claimed": "Geclaimd",
+        "reward": "Bel",
+        "View Game": "View Game",
+        "playstreak": {
+            "dayResets": "Dag resets:",
+            "streakCompleted": "Streak voltooid! Claim je beloningen nu.",
+            "playEachDay": "Speel elke dag zodat je strepen niet meer zullen resetten!",
+            "playToStart": "Speel dit spel om te beginnen!",
+            "progressTowardsStreak": "vooruitgang naar de staak van vandaag.",
+            "streakProgress": "Streak Progress",
+            "days": "dagen",
+            "now": "Nu"
+        },
+        "readyForClaim": "Klaar voor claim",
+        "type": {
+            "playstreak": "Speel Streak",
+            "reputation": "Reputatie"
+        },
+        "claimFailed": "Claim faalde",
+        "claimFailedMessage": "Probeer het nog eens. Als het nog niet werkt, creëer dan een Discord steunboete.",
+        "associatedGames": "Verenigde spelletjes",
+        "linkAccount": "Vertaling: Steam account om eligibiliteit te controleren.",
+        "errorMessage": "Er was een fout met de transactie.",
+        "needMoreAchievements": "Je moet de prestaties hebben voltooid in een van deze wedstrijden.",
+        "quests": "Quest",
+        "createDiscordTicket": "Gecreëerd Discord ticket",
+        "notEnoughGas": "Onvoldoende portemonnee balans om je beloning te claimen door gaskosten. Probeer een andere portemonnee of replenish deze voor het terugtrekken.",
+        "active": "Actief",
+        "connectSteamAccount": "Verbind het team account",
+        "signIn": "Aanmelden",
+        "Play": "Speel",
+        "points": "Punten",
+        "reputation": "Reputatie",
+        "sync": "Sync"
+    },
+    "quests": {
+        "quests": "Quest",
+        "playstreak": {
+            "signInWarning": {
+                "client": "Je bent momenteel niet ingelogd, speelsporen zullen niet worden gevolgd. login alsjeblieft naar HyperPlay via de top rechtstreeks om vooruitgang te volgen.",
+                "overlay": "Je bent momenteel niet ingelogd, speelsporen zullen niet worden gevolgd. Verlaat het spel en login naar HyperPlay via de top rechtstreeks om vooruitgang te volgen."
+            }
+        }
+    },
+    "sideload": {
+        "warningMessage": "Een spel verkopen is bedoeld voor ontwikkelaars en ervaren krachtgebruikers. Een installateur die malware bevat kan je computer in gevaar brengen en leiden naar diefstallen.",
+        "warningTitle": "Belangrijk"
+    },
+    "accounts": "accounts",
+    "ALL": "ALL",
+    "importGameErrorTitle": "Import Game Error",
+    "email_subscription": {
+        "subtitle": "Je bent nu een deel van onze gemeenschap, en we willen waardevolle updates en inzichten met je delen.",
+        "title": "Bedankt voor het invullen!"
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "En andere spelletjes zijn klaar om te updaten.",
+            "single": "Er is een update klaar voor vertrek."
+        },
+        "title": "Game Updates Available"
+    },
+    "gameRelease": {
+        "prototype": "Prototype",
+        "main": "Hoofd",
+        "alpha": "Alfa",
+        "beta": "Bèta",
+        "demo": "Probeer het uit"
+    },
+    "importGameErrorMessageExecutable": "Game Uitvoerbaar niet gevonden, importeren is niet mogelijk",
+    "exit_game": "Verlaat Game",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Je bent verbonden met HyperPlay met een externe portemonnee."
+    },
+    "dlcs": {
+        "label": "Select DLCs om te installeren:"
+    },
+    "achievements": {
+        "progress": {
+            "minted": "♪",
+            "notMinted": "_"
+        }
+    },
+    "analytics": "Analytics",
+    "profile": "Profiel"
 }

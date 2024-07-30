@@ -66,7 +66,8 @@
                 "title": "Tutulmamış İstisna baş verdi!"
             },
             "update": {
-                "title": "Yeniləmə xətası"
+                "title": "Yeniləmə xətası",
+                "message": "Bir şey yeniləşdirilməsi ilə yanlış getdi! Sifariş etmək və HyperPlay yeniləmək."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,6 +77,11 @@
             "winetricks": {
                 "message": "Winetricks icra zamanı aşağıdakı xətanı qaytardı:{{newLine}}{{error}}",
                 "title": "Winetricks xətası"
+            },
+            "moving": "Yadda saxla",
+            "ubisoft-connect": {
+                "message": "Oyun əvvəl başarısız Nickel Connect quraşdırılması. https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac daxildir.",
+                "title": "Qeydiyyat"
             }
         },
         "info": {
@@ -139,12 +145,28 @@
                 "install": "Epic Serverlərdə hazırda böyük fasilə var, oyunu quraşdırmaq mümkün deyil!",
                 "update": "Epic Serverlərdə hazırda böyük fasilə var, oyunu yeniləmək mümkün deyil!"
             },
-            "title": "Xəbərdarlıq"
+            "title": "Xəbərdarlıq",
+            "wine-change": {
+                "title": "Şərab tapmaq!",
+                "title-gptk": "Oyun Porting Toolkit uyğun deyil ",
+                "message": "Biz bu ünvanı başlatmaq üçün seçilmiş şərab versiya tapa bilər ({{selectedWine}}). {{newline}} Birini tapdıq, {{foundWine}} istifadə etmək istəyirəm?",
+                "message-gptk": "Apple Oyun porting albomundan istifadə etmək üçün, MacOS'u 14 (Sonoma) və ya daha yüksək artırmaq lazımdır. {{newline}} Sisteminizdə şərab tapdıq, {{foundWine}} istifadə etmək istəyirəm?"
+            },
+            "rosetta": {
+                "message": "HyperPlay istehsal edir Apple Silicon fiş ilə MacOS düzgün işləyir. Aşağıdakı komandadan istifadə edin: \"softwareupdate --install-rosetta\" və HyperPlay yeniləmək. ",
+                "title": "Rosetta"
+            }
         },
         "wineprefix": "Şərab Prefiks Qovluğu seçin",
         "yes": "HƏ",
         "dontShowAgain": "Bir daha göstərmə",
-        "choose-nile-binary": "Nil binarını seçin"
+        "choose-nile-binary": "Nil binarını seçin",
+        "reset-extension": {
+            "question": {
+                "message": "MetaMask Extension sıfırlamaq istəyirsiniz?",
+                "title": "Qeydiyyat"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Daxil ol",
         "sync": "Sinxronizasiya",
         "syncing": "Sinxronizasiya",
-        "unsync": "Sinxronizasiyadan çıxarın"
+        "unsync": "Sinxronizasiyadan çıxarın",
+        "continue": "Davam edin",
+        "download": "Endir",
+        "update": "Yenilə"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Təxmini vaxt",
+        "title_dm": "Pulsuz"
     },
     "epic": {
         "offline-notification-body": "Epic Games serverləri oflayn olduğu üçün onlayn xidmətlər tam işləməyə bilər!",
@@ -263,7 +290,11 @@
         "wine": {
             "part1": "Qəhrəmanlıq aşağıdakı qovluqlarda Wine, Proton və CrossOver versiyalarını axtarır:",
             "part2": "Digər yerlər üçün bu qovluqlardan birinə simvolik keçiddən istifadə edin"
-        }
+        },
+        "dxvkfpslimit": "DXVK oyunları üçün bir qazanma sayı cap",
+        "msync": "Msync CPU-iffektiv oyunlar şəhərində şərabserver yüksək azaldır. Enabling bir neçə oyun performans inkişaf edə bilər.",
+        "dxvknvapi": "DXVK-NVAPI, DXVK və Linux yerli NVAPI üst tikintisi üzərində inşa edilmiş NVAPI-nin təmin edilməsidir, bu, Nvidia GPUs DLSS istifadə üçün imkan verir.",
+        "disable_logs": "Yazıların ən çoxunu log faylları (ritik məlumat həyata keçirilir). Heç bir məhsul bildirməkdən əvvəl OFF bu ayarı çevirmək əmin olun."
     },
     "info": {
         "hyperplay": {
@@ -289,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine, Windows proqramlarını əhatə etmək üçün WINEPREFIX adlanandan istifadə edir. Bu prefiks Şərab konfiqurasiya fayllarını və C: fayl iyerarxiyasının reproduksiyasını ehtiva edir (Windows OS-də əsas disk). C: sürücüsünün bu reproduksiyasında oyun saxlama faylları və winetricks vasitəsilə quraşdırılmış asılılıqlar saxlanılır."
-        }
+        },
+        "wine-path-invalid": "Şərab yolu etibarlıdır, birini seçin.",
+        "wine-path-none-found": "No Wine versiyası tapıldı, Compatability Manager-dan birini yüklədi"
     },
     "install": {
         "path": "Quraşdırma yolunu seçin"
@@ -303,7 +336,9 @@
         "toggleLayout": {
             "grid": "Şəbəkə düzümünə keçin",
             "list": "Siyahı düzümünə keçin"
-        }
+        },
+        "alphabeticalZA": "Xarici Z-A",
+        "alphabeticalAZ": "A-Z"
     },
     "loading": {
         "default": "Yüklənir",
@@ -314,7 +349,8 @@
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Amazon Giriş"
+        "amazon": "Amazon Giriş",
+        "old-mac": "Sizin MacBook versiyası {{version}}. Əliyeva 12 və ya yenier giriş lazımdır."
     },
     "message": {
         "sync": "Sinxronizasiya tamamlandı",
@@ -347,7 +383,9 @@
             "error": "Quraşdırma uğursuz oldu",
             "finished": "Quraşdırma tamamlandı",
             "imported": "Oyun İdxal",
-            "startInstall": "Quraşdırma Başladı"
+            "startInstall": "Quraşdırma Başladı",
+            "stopped": "Qablaşdırma",
+            "paused": "Yadda saxla"
         },
         "moved": "Hərəkət tamamlandı",
         "moving": "Hərəkətli Oyun",
@@ -359,7 +397,9 @@
         "update": {
             "canceled": "Yeniləndi Ləğv edildi",
             "finished": "Yeniləmə Tamamlandı",
-            "started": "Yeniləmə Başladı"
+            "started": "Yeniləmə Başladı",
+            "stopped": "Proqram",
+            "paused": "Proqramlar"
         }
     },
     "offline-message": {
@@ -369,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Aç",
     "options": {
         "advanced": {
             "key": "Dəyişən adı",
@@ -414,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "EGS-nin quraşdırıldığı prefiks",
         "prefered_language": "2 simvollu kod (yəni: \"en\" və ya \"fr\")",
-        "alt-nile-bin": "Daxili Nil binarından istifadə..."
+        "alt-nile-bin": "Daxili Nil binarından istifadə...",
+        "dxvkfpsvalue": "Positive . (e.g. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -431,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Endirmələri dayandır",
+            "resume": "Proqramlar"
         }
     },
     "Recent": "Bu yaxınlarda oynanılıb",
@@ -499,7 +542,10 @@
             "instructions_title": "Problemi necə bildirmək olar?",
             "last-log": "Son Giriş",
             "no-file": "Heç bir jurnal faylı tapılmadı",
-            "show-in-folder": "Günlük faylını qovluqda göstərin"
+            "show-in-folder": "Günlük faylını qovluqda göstərin",
+            "instructions-part-01": "HiperPlay istifadə edən hər hansı bir problemlə karşılaşırsanız, Discord Server-da problemlərinizi bildirmək üçün iki tətbiq edilmiş sahələrimiz var. Bir oyunçusan, oyunçu-forum ziyarət etmək üçün hər hansı bir problem bildirmək. Bir oyun haqqındaysanız, hər hansı bir problem göstərin.",
+            "instructions-part-02": "Tanınmamıza kömək etmək və problemi mümkün kimi sürətlə düzeltmek üçün, girişlərin bir nümunə daxil olmaqla mümkün olduğunca məlumat verin. Bizim dəstək komandamız kanallarını izləyəcək və mümkün olduğu kimi məsullarınıza cavab vermək üçün ən yaxşılarını edəcək. Əgər problemləri həyata etmək üçün işlədikdə məsləhət və anlayış üçün təqdim edirik.",
+            "join-hyperplay-discord": "Bizim Discord daxil ol"
         },
         "mangohud": "Mangohudu aktivləşdirin (Mangohud quraşdırılmalıdır)",
         "manualsync": {
@@ -545,7 +591,12 @@
         "disable_logs": "Qeydləri deaktiv edin",
         "addgamestoapplications": "Oyunları avtomatik olaraq Proqramlara əlavə edin",
         "showMetalOverlay": "Statistikanı göstərin",
-        "alt-nile-bin": "Alternativ Nil Binarını seçin"
+        "alt-nile-bin": "Alternativ Nil Binarını seçin",
+        "msync": "Esync'i aktivləşdirin",
+        "autodxvknvapi": "Avtomatik yüksək/Update DXVK-NVAPI",
+        "dxvkfpslimit": "Limit FPS (DX9, 10 və 11)",
+        "steamId": "Qeydiyyat",
+        "autoLaunchHyperPlay": "Avtomatik başlama Hyper Oyuncaq"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +631,51 @@
             "log": "Giriş",
             "other": "Digər",
             "sync": "Saxla-Sinxronizasiya",
-            "wineExt": "Şərab uzantıları"
+            "wineExt": "Şərab uzantıları",
+            "accounts": "Hesabatlar",
+            "systemInformation": "Sistem İnformasiya"
         },
         "open-config-file": "Konfiqurasiya faylını açın",
         "reset-hyperplay": "Qəhrəmanı sıfırlayın",
         "saves": {
             "label": "Məkanı Saxla:",
             "warning": "Bulud Saxlama funksiyası Beta-dadır, lütfən, sinxronizasiya etməzdən əvvəl yaddaşı ehtiyat nüsxəsini çıxarın (nəsə səhv olarsa)"
-        }
+        },
+        "wine": {
+            "manager": {
+                "title": "Şərab meneceri"
+            }
+        },
+        "gamesSettings": "Oyunlar",
+        "systemInformation": {
+            "copyToClipboard": "Fotoqrafiya",
+            "showDetailed": "Ətraflı sistem spesifikasiyaları",
+            "osVersion": "Version {{versionNumber}}",
+            "steamDeck": "Daxil ol",
+            "systemModel": "Sistem Model:",
+            "version": "Version: {{appVersion}}",
+            "os": "Korporativ sistem:",
+            "osNameFlatpak": "{{osName}}",
+            "memoryStats": "{{percentUsed}}% ({{usedGib}} / {{totalGib}}",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "UŞAQ:",
+            "gpuDriver": "Sürücü: {{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "Kateqoriya: {{legendaryVersion}}",
+            "memory": "Memory:"
+        },
+        "reset-extension": "Qeydiyyat"
     },
     "Settings": "Parametrlər",
     "sidebar": {
         "collapse": "Yan paneli yığcamlaşdırın",
-        "uncollapse": "Kenar çubuğunu yığışdırın"
+        "uncollapse": "Kenar çubuğunu yığışdırın",
+        "store": "Mağaza",
+        "library": "Kitabxana",
+        "achievements": "Qeydiyyat",
+        "downloadManager": "Pulsuz"
     },
     "status": {
         "installing": "Quraşdırılır",
@@ -631,7 +714,9 @@
         "logout": "Çıxış",
         "logout_confirmation": "Çıxmaq istədiyinizə əminsiniz?",
         "manageaccounts": "Hesabları idarə et",
-        "quit": "Çıxın"
+        "quit": "Çıxın",
+        "logIn": "Daxil ol",
+        "manageStore": "Mağazalar"
     },
     "webview": {
         "controls": {
@@ -668,5 +753,265 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon Oyunları",
-    "prime-gaming": "Baş Oyun"
+    "prime-gaming": "Baş Oyun",
+    "analytics": "Təhlil",
+    "gameRelease": {
+        "main": "Əsas",
+        "beta": "Beta",
+        "demo": "Qeyd",
+        "prototype": "Proqram",
+        "alpha": "Axtar"
+    },
+    "hyperplay": {
+        "copyUrl": "URL-i Köçür",
+        "folder": "Folder",
+        "discordApp": "Mübahisə",
+        "misc": "Heç vaxt",
+        "Sync": "Sinxronizasiya",
+        "turnAnalyticsOff": "Söndür",
+        "gamecard": {
+            "distributables": "Dağlıqları",
+            "paused": "Fasilə verildi",
+            "extracting": "Ümumi...",
+            "installing": "İndi...",
+            "installed": "Oynamaq üçün hazır"
+        },
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Daha ətraflı öyrən",
+                        "createNewWallet": "Yeni MM uzatma cüzdanı yaradır",
+                        "details": "Aşağıdakı browser MetaMask yüklü var. Siz avtomobil istəyirsiniz birini seçin.",
+                        "orWord": "OR",
+                        "cantFindProfile": "Sizin browser profil tapa bilər?",
+                        "title": "Mərkəzi seçin",
+                        "useRecoveryPhrase": "Gizli Recovery sözlərini istifadə edin",
+                        "useRecoveryPhraseInfo": "Bu xüsusiyyət inkişafçıları və developers üçün tövsiyə olunur. Sizin gizli resurs söz MetaMask yerli saxlanılır və HyperPlay ilə paylaşmaq."
+                    },
+                    "info": {
+                        "login": {
+                            "title": "Giriş üçün Yeni Yol",
+                            "details": "Hər bir saytda yeni hesablar və şəkil yaratmaq üçün alternativ, yalnız cüzdanınızı əlavə edin."
+                        },
+                        "createWalletCTA": "Bir cüzdan yaradın",
+                        "skip": "İndi",
+                        "title": "Bir cüzdan nədir?",
+                        "digitalAssets": {
+                            "details": "Wallets göndərmək, almaq, mağaza və hesablar və NFTs kimi digital aktivlər göstərmək üçün istifadə olunur.",
+                            "title": "Sizin Digital Assets üçün bir ev"
+                        },
+                        "createWalletDescription": "Bir cüzdanınız olmaması və ya yeni bir yaratmaq istəyirsinizsə aşağıdakı “Bir cüzdan yaradın”da basın:"
+                    },
+                    "scan": {
+                        "getMetamask": "MetaMask",
+                        "dontHaveWallet": "Bir cüzdan yoxdur?",
+                        "title": "Scan QR ilə ",
+                        "updateWarning": "Məlumatlar? MetaMask tarixindən keçmək.",
+                        "details": "Bir şifreli məlumat kanalı yaradır. Sizin keyfələr HyperPlay ilə heç bir zaman paylaşacaq."
+                    }
+                },
+                "title": "Yadda saxla",
+                "pleaseConnect": "Yadda saxla\nbaşlayır:"
+            },
+            "analytics": {
+                "neverCollectIP": " tam IP ünvanınızı toplamaq;",
+                "hyperplayWill": "HyperPlay:",
+                "title": "HiperPlay inkişaf etmək üçün kömək edin!",
+                "privacyPolicyHere": "Burada Gizlilik Siyasəti.",
+                "anonymized": "E-poçt ünvanı;",
+                "neverCollectPersonal": " anahtarlar toplamaq, ünvanlar, balanslar, uşaqlar, və ya hər məlumat;",
+                "neverSellData": " qiymət üçün data satmaq. Oxunub!",
+                "optOut": "Hər zaman Ayarlar vasitəsi ilə seçim-out imkan verir;",
+                "privacyCaption": "Bu məlumat birləşdirilmişdir və bu ümumi Data Protection Təhlükəsizlik Təhlükəsizlik Təhlükəsizliyinin (AB) 2016/679 tərəfindən anonimdir. Bizim gizlilik proqramları ilə bağlı daha çox məlumat üçün, lütfen gözləyin ",
+                "body": "HyperPlay, istifadəçilərin proqramla necə əlaqədar olduğunu daha yaxşı anlamaq üçün istifadə etmək istəyirdi. Bu məlumat, app istifadə etdiyinizi anlamağa kömək edir və HyperPlay'i sizin üçün daha yaxşı edir."
+            },
+            "terms": "Xidmət xidmətləri.",
+            "connectionCanceled": {
+                "description": "Mobil cüzdanınızın davam etməsini təsdiq edin.",
+                "title": "Kompüter qorunur!"
+            },
+            "connectAgain": "Yeniyetmə",
+            "welcome": {
+                "text": {
+                    "communityCTA_1": "Biz sizin geribildirim sevirdik və bizə bizimə qoşulmaq üçün",
+                    "communityCTA_2": "community. Birgə, oyun gəlir!",
+                    "description": "HyperPlay bir oyun starter və oyun mağazası aggregator\nhaqqında HyperPlay ilə, cüzdanınızı, heç birləşdirə bilərsiniz, və aktivlər\nhər oyun. HyperPlay, Epic'in bütün kitabxanasını dəstəyir\nYadda saxla HyperPlay istifadə etdiyiniz zaman, razı olursunuz\nBizimlə",
+                    "bugs": "HyperPlay ümumi alfa olduğunu unutmayın. Bir çox xüsusiyyətlər haqqında\ninkişaf, və uşaqlar olacaq.",
+                    "construction": "HyperPlay tikinti altında."
+                },
+                "title": "Hipertaniya İlk Access oynayır!"
+            },
+            "connectionConnected": {
+                "description": "Sizin cüzdan bağlıdır. Oyuna hazırsınız.",
+                "title": "Yadda saxla!"
+            }
+        },
+        "browserImport": {
+            "profile": "Profil",
+            "appId": "Axtarış"
+        },
+        "buttons": {
+            "noThanks": "Xeyr, təşəkkürlər",
+            "agree": "Mən razılıq"
+        },
+        "logOut": "Çıx",
+        "connectWallet": "Yadda saxla",
+        "currentWallet": "Qeydiyyat",
+        "achievements": {
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "Şu anda Steam hesabında hər oyun tapa bilər kimi görünür. Oyun məlumatlarının ictimailə qarşısını almaq üçün sürətli bir resurs. Bu yol, biz sizin uğurları daxil edə bilər və ən yaxşı təcrübə ilə təmin edə bilər."
+            },
+            "addThisGame": "Bu oyuna daxil ol",
+            "freeMints": "Pulsuz Mint",
+            "gamesToMint": "Oyunlar mint"
+        },
+        "analyticsOff": "Analytics  off",
+        "linkSteamAccountDescription": "HyperPlay hesabınıza əlaqə saxlayın.",
+        "linkSteamAccountTitle": "Daxil ol",
+        "linkSteamAccountCta": "Daxil ol",
+        "viewMyAccount": "Hesabım",
+        "turnAnalyticsOn": "Tarix",
+        "otp": "One Time Passcode",
+        "viewItem": "{{item}}",
+        "analyticsOn": "Analytics  on",
+        "viewPortfolio": "Bakı",
+        "accesscodes": {
+            "error": {
+                "validation": "Access kodu qeyd olunur"
+            },
+            "requirescode": "Bu oyun yeniləndirilməsi giriş kodunu edir.",
+            "success": {
+                "validation": "Qeydiyyat! Access kodu mövcuddur"
+            }
+        },
+        "changeWallet": "Swap cüzdan hesabı",
+        "publicAlpha": "Elan",
+        "syncing": "Qeydiyyat..."
+    },
+    "quest": {
+        "active": "Aktiv",
+        "Play": "Oynat",
+        "playstreak": {
+            "days": "gün",
+            "dayResets": "Gün yenilənir:",
+            "now": "İndi",
+            "playEachDay": "Hər gün oynayır ki, sizin line sıfırlaşdırmaq olmaz!",
+            "playToStart": "Sizin line başlamaq üçün bu oyun oynayır!",
+            "progressTowardsStreak": "bu gün sənaye doğru inkişaf.",
+            "streakCompleted": "Streak tamamlandı! İndi mükafatlarınızı daxil edin.",
+            "streakProgress": "Streak Progress"
+        },
+        "points": "Nöqtələr",
+        "signIn": "Daxil ol",
+        "sync": "Sinxronizasiya",
+        "reward": "Qeydiyyat",
+        "quests": "Avtomobil",
+        "readyForClaim": "Haqqında",
+        "type": {
+            "playstreak": "Streak",
+            "reputation": "İdman"
+        },
+        "View Game": "Oyuncaq",
+        "associatedGames": "Xüsusi oyunlar",
+        "linkAccount": "Axtarış Daxil olmaq üçün vaxt hesabı.",
+        "needMoreAchievements": "Siz bu oyunlardan biri olan uğurların% {{percent}}% tamamlanması lazımdır.",
+        "claimFailed": "İdman",
+        "claimFailedMessage": "Daha çox əlaqə edin. Hala iş deyil, bir Discord dəstək bilet yaratmaq.",
+        "createDiscordTicket": "Discord bilet",
+        "claimAll": "Bütün hüquqlar",
+        "claimed": "İdman",
+        "connectSteamAccount": "Daxil ol",
+        "errorMessage": "Əməliyyat ilə bir məlumat var.",
+        "reputation": "İdman",
+        "notEnoughGas": "Qeydli cüzdan balıqları ilə mükafat iddia etmək. Retrying əvvəl bir cüzdan və ya yeniləyin."
+    },
+    "profile": "Profil",
+    "importGameErrorMessageExecutable": "Oyuncaq tapmaq mümkün deyil",
+    "importGameErrorTitle": "Avtomatik Oyun Hatası",
+    "sideload": {
+        "warningTitle": "Xüsusi",
+        "warningMessage": "Bir oyun Side-loading developers və təcrübəli enerji istifadəçiləri üçün hazırlanmış bir xüsusiyyətdir. Yadda saxla • Şifrəni unutmusunuz."
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "Hazırda qeydiyyatdan keçmək deyil. Yadda saxla.",
+                "overlay": "Hazırda qeydiyyatdan keçmək deyil. Oyun çıxmaq və HyperPlay giriş üst sağ dropdown vasitəsi ilə giriş."
+            }
+        },
+        "quests": "Avtomobil"
+    },
+    "accounts": "accounts",
+    "ALL": "ALL",
+    "email_subscription": {
+        "title": "Sizin üçün əlavə olun!",
+        "subtitle": "İndi bizim ictimai bir hissəsindəsiniz və biz sizinlə dəfəli yeniliklər və fikirlər bölüşmək üçün heyecanlanırıq."
+    },
+    "hyperplayOverlay": {
+        "chainRequest": {
+            "INITIATED": "Xüsusi şəhər",
+            "CONFIRMED": "Xüsusi şəhər əlavə",
+            "FAILED": "Xüsusi şəbəkə keçirilib"
+        },
+        "walletWatch": {
+            "INITIATED": "Daxil ol",
+            "CONFIRMED": "Xüsusi token əlavə",
+            "FAILED": "Xüsusi məlumat"
+        },
+        "description": {
+            "FAILED": "Əməliyyat dəyişdirilmiş və ya təqdim olunmuşdur, əlavə edin",
+            "CONFIRMED": "Əməliyyat uğurla təqdim edildi!",
+            "INITIATED": "Mobil cüzdanınızda cüzdan razılığı gözlənir",
+            "PENDING": "Blockchain təhlükəsizlik üçün. Bu təsdiq zaman biləcək"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Qalereya",
+            "FAILED": "Axtarış",
+            "INITIATED": "Axtarış"
+        },
+        "greeting": {
+            "title": "Pulsuz Oyun",
+            "description": "HyperPlay Overlay hazır! Press {{overlayKeyMod}} + X göndərmək və ya gizləyin."
+        },
+        "extensionNotification": {
+            "TITLE": "Qeydiyyat",
+            "DESCRIPTION": "Press {{overlayKeyMod}} + X bu məlumat görmək üçün"
+        },
+        "txnRequest": {
+            "CONFIRMED": "Əməliyyat",
+            "FAILED": "Əməliyyat davamlı",
+            "INITIATED": "Əməliyyat haqqında",
+            "PENDING": "Qeydiyyat"
+        }
+    },
+    "gameUpdateNotifications": {
+        "title": "Oyun Updates mövcuddur",
+        "body": {
+            "single": "{{gameName}} üçün hazırlıq var.",
+            "multiple": "{{gameName}} və digər oyunlar yeniləməyə hazırdır."
+        }
+    },
+    "achievements": {
+        "progress": {
+            "minted": "haqqında",
+            "notMinted": "off"
+        }
+    },
+    "notification": {
+        "wine-download": {
+            "title": "Qalereya",
+            "message": "Default uyğunluq qurulması kağızı"
+        }
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Siz xarici cüzdan ilə HiperPlay bağlıdır."
+    },
+    "exit_game": "Oyuncaq",
+    "importGameErrorMessage": "Xüsusi oyun qrupu deyil, avtomatik oyun mümkün deyil",
+    "dlcs": {
+        "label": "Yüklemek üçün DLCs seçin:"
+    },
+    "back_to_game": "Oyun üçün geri"
 }

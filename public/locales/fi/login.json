@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Kirjaudu sisään"
+        "login": "Kirjaudu sisään",
+        "error": "Virhe, kokeile eri koodia",
+        "loading": "Ladataan"
     },
     "message": {
         "part1": "Ennen kuin voit kirjautua sisään ja asentaa pelejäsi, suorita askeleet jotka alla:",

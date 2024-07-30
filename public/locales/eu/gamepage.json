@@ -36,14 +36,17 @@
             "checkbox_prefix": "Aurrizkia",
             "message": "Joko hau desinstatu nahi duzu?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Desinslalatu"
+            "title": "Desinslalatu",
+            "dlc": "Aplikazioa desinstalatu nahi duzu?"
         },
         "update": {
             "message": "Joko honek eguneraketa bat du, orain eguneratu?",
             "title": "Jokoak eguneraketa behar du"
         },
         "wineprefix": "Hautatu WinePrefix karpeta",
-        "yes": "BAI"
+        "yes": "BAI",
+        "dont-show-again": "Ez erakutsi berriro",
+        "ok": "Ados"
     },
     "button": {
         "add_to_favourites": "Gehitu gogokoetara",
@@ -57,7 +60,9 @@
         "install": "Instalatu",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Deskarga bertan behera utzi",
+            "continue": "Jarraitu deskarga"
         },
         "remove_from_favourites": "Kendu gogokoenetik",
         "remove_from_recent": "Remove From Recent",
@@ -68,7 +73,10 @@
         },
         "unhide_game": "Erakutsi jokoa",
         "uninstall": "Desinslalatu",
-        "update": "Eguneratu"
+        "update": "Eguneratu",
+        "remove_from_library": "Ezabatu",
+        "details": "Xehetasunak",
+        "favorites": "Gogokoa"
     },
     "cloud_save_unsupported": "Onartu gabe",
     "disabled": "Desgaituta",
@@ -94,7 +102,8 @@
         "repairing": "Konpontzen"
     },
     "generic": {
-        "error": "Errore ezezaguna"
+        "error": "Errore ezezaguna",
+        "noDescription": "Ez dago deskripziorik eskuragarri!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -127,7 +136,8 @@
         },
         "playing": {
             "start": "Jokatu orain",
-            "stop": "Ugalketa (Detener)"
+            "stop": "Ugalketa (Detener)",
+            "update": "Eguneratu"
         },
         "saves": {
             "syncing": "Zaintza-zaindegien sinkronizazioa"
@@ -148,7 +158,8 @@
         "title": "Instalatzeko osagaiak hautatzea"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver botila"
     },
     "sideload": {
         "field": {
@@ -187,7 +198,10 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Deskargatutakoa, guztira",
         "uninstalling": "Uninstalling",
-        "updating": "Jokoa eguneratzea"
+        "updating": "Jokoa eguneratzea",
+        "paused": "Pausatua",
+        "downloading": "Deskargatzen",
+        "syncingSaves": "Zaintza-zaindegien sinkronizazioa"
     },
     "submenu": {
         "addShortcut": "Sarbide zuzena gehitu",

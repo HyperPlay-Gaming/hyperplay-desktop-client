@@ -28,7 +28,8 @@
         "stopInstall": {
             "keepInstalling": "המשך התקנה",
             "message": "אתם מעוניינים לשמר את הקבצים שירדו?",
-            "title": "הפסק התקנה"
+            "title": "הפסק התקנה",
+            "keepFilesMessage": "בדוק כאן אם אתה רוצה לשמור את קבצי ההורדה לאחר ביטול."
         },
         "select": {
             "button": "בחרו"
@@ -41,10 +42,18 @@
         },
         "update": {
             "message": "למשחק זה יש עדכון, החל עדכון עכשיו?",
-            "title": "משחק זה צריך עדכון"
+            "title": "משחק זה צריך עדכון",
+            "message-cancel": "לא ניתן לשחק את המשחק בלי לעדכן"
         },
         "wineprefix": "בחר תיקיית WinePrefix",
-        "yes": "כן"
+        "yes": "כן",
+        "yesCancel": "כן, ביטול",
+        "aware": "אני מודע",
+        "compability": {
+            "message": "משחק Windows זה יפעל באמצעות שכבת תאימות. אתה יכול להיתקל כמה בעיות או המשחק בכלל לא עובד."
+        },
+        "ok": "אישור",
+        "dont-show-again": "אל תראה שוב"
     },
     "button": {
         "install": "התקן",
@@ -62,7 +71,9 @@
         "no-path-selected": "לא נבחר מיקום",
         "remove_from_recent": "הסר מאחרונים",
         "queue": {
-            "remove": "הסר מהתור"
+            "remove": "הסר מהתור",
+            "cancel": "בטל הורדה",
+            "continue": "המשך הורדה"
         },
         "run-exe-first": "הפעל מתקין קודם",
         "sideload": {
@@ -70,7 +81,10 @@
         },
         "unhide_game": "הסר משחק מרשימת המוסתרים",
         "uninstall": "הסר התקנה",
-        "running-setup": "מפעיל הגדרה"
+        "running-setup": "מפעיל הגדרה",
+        "unfavorites": "גירושין",
+        "favorites": "מועדף",
+        "remove_from_library": "להסיר"
     },
     "gamecard": {
         "repairing": "מתקן",
@@ -88,14 +102,16 @@
         "size": "גודל",
         "steamdeck-compatibility-info": "התאמה לSteamDeck",
         "syncsaves": "סנכרון שמירות",
-        "protondb-compatibility-info": "רמת תאימות Proton"
+        "protondb-compatibility-info": "רמת תאימות Proton",
+        "web3-supported": "תכונות Web3"
     },
     "sideload": {
         "info": {
             "broser": "קישור דפדפן",
             "exe": "בחרו קובץ הרצה",
             "image": "תמונת אפליקציה",
-            "title": "כותרת אפליקציה/משחק"
+            "title": "כותרת אפליקציה/משחק",
+            "supports-web3": "ל- Web3 תכונות"
         },
         "placeholder": {
             "title": "הוסיפו כותרת למשחק/אפליקציה שלכם",
@@ -114,7 +130,10 @@
         "gog-goodie": "נראה שהמשחק הזה לא ניתן להתקנה. בדקו את התוכן שניתן להוריד מ https://gog.com/account",
         "goodie": "לא ניתן להתקין",
         "syncingSaves": "מסנכרן שמירות",
-        "extracting": "מחלץ",
+        "extracting": {
+            "cancel": "ביטול החילוץ",
+            "progress": "מחלץ"
+        },
         "launching": "מפעיל",
         "playing": "משחק",
         "gameNotAvailable": "משחק לא זמין",
@@ -131,7 +150,10 @@
         "queued": "בתור",
         "ubisoft": "מתקין Ubisoft",
         "updating": "מעדכן משחק",
-        "uninstalling": "מסיר התקנה"
+        "uninstalling": "מסיר התקנה",
+        "preparing": "להכין את ההורדה, חכה",
+        "distributables": "התקנת Distributables",
+        "paused": "הופסק"
     },
     "submenu": {
         "settings": "הגדרות",
@@ -146,7 +168,8 @@
         "move": "הזז משחק",
         "addShortcut": "הוסף קיצור דרך",
         "addToSteam": "הוסף ל-Steam",
-        "verify": "אמת קבצים ותקן"
+        "verify": "אמת קבצים ותקן",
+        "extraInfo": "מידע נוסף"
     },
     "cloud_save_unsupported": "לא נתמך",
     "enabled": "מופעל",
@@ -163,7 +186,8 @@
         "lastPlayed": "נפתח לאחרונה",
         "neverPlayed": "מעולם לא",
         "platform": "בחר גרסת פלטפורמה להתקין",
-        "totalPlayed": "זמן במשחק"
+        "totalPlayed": "זמן במשחק",
+        "selectChannelName": "ערוץ נבחר שם השם"
     },
     "dlc": {
         "installDlcs": "התקן את כל הDLCים"
@@ -190,7 +214,8 @@
         },
         "playing": {
             "stop": "משחק (עצור)",
-            "start": "שחקו עכשיו"
+            "start": "שחקו עכשיו",
+            "update": "עדכון"
         },
         "ubisoft": "מתקין Ubisoft Connect",
         "saves": {
@@ -204,7 +229,8 @@
         "wineprefix": "WinePrefix",
         "not-enough-disk-space": "לא מספיק שטח דיסק",
         "path": "בחרו מיקום התקנה",
-        "path-not-writtable": "אזהרה: מיקום עלול להיות בלתי ניתן לכתיבה."
+        "path-not-writtable": "אזהרה: מיקום עלול להיות בלתי ניתן לכתיבה.",
+        "compatibility-warning": "משחק Windows זה יפעל באמצעות שכבת תאימות. החוויה שלך עשויה להשתנות."
     },
     "not_logged_in": {
         "amazon": "אתה לא מחובר לחשבון אמזון בHyperPlay. אל תשתמש בדף החנות כדי להתחבר, לחץ על הכפתור הבא במקום:",

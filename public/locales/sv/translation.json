@@ -66,7 +66,8 @@
                 "title": "Okänt fel!"
             },
             "update": {
-                "title": "Problem vid uppdatering"
+                "title": "Problem vid uppdatering",
+                "message": "Något gick fel med uppdateringen! Avinstallera och installera om HyperPlay manuellt."
             },
             "wine-not-found": {
                 "invalid": "Angiven Wine version hittades ej. Installera denna version eller välj något annat i spelets inställningar{{newline}}Version: {{version}}{{newline}}Sökväg: {{path}}",
@@ -76,7 +77,12 @@
             "winetricks": {
                 "message": "Winetricks misslyckades, felmeddelande:{{newLine}}{{error}}",
                 "title": "Winetricks problem"
-            }
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Installation av Ubisoft Connect i spelprefixet misslyckades. Kontrollera vår wiki sida på https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac för att installera den maunally."
+            },
+            "moving": "Fel flytta spel {{error}}"
         },
         "info": {
             "update": {
@@ -139,12 +145,28 @@
                 "install": "Epics servrar är nere för tillfället, spelet kan inte installeras!",
                 "update": "Epics servrar är nere för tillfället, spelet kan inte uppdateras!"
             },
-            "title": "Varning"
+            "title": "Varning",
+            "rosetta": {
+                "message": "HyperPlay kräver Rosetta körs korrekt på macOS med Apple Silicon chips. Installera den från macOS-terminalen med följande kommando: \"softwareupdate --install-rosetta\" och starta om HyperPlay. ",
+                "title": "Rosetta hittade inte"
+            },
+            "wine-change": {
+                "message-gptk": "För att kunna köra spel med Apple Gaming-portverktyget måste du uppgradera din macOS till 14 (Sonoma) eller högre. Vi hittade Vin på ditt system, vill du fortsätta lansera med {{foundWine}}?",
+                "title": "Vin hittade inte!",
+                "title-gptk": "Game Porting Toolkit inte kompatibelt ",
+                "message": "Vi kunde inte hitta den valda vinversionen för att starta denna titel ({{selectedWine}}). Vi hittade en annan, vill du fortsätta lansera med {{foundWine}}?"
+            }
         },
         "wineprefix": "Ange Wine-prefix mapp",
         "yes": "Ja",
         "dontShowAgain": "Visa inte igen",
-        "choose-nile-binary": "Välj Nile binär"
+        "choose-nile-binary": "Välj Nile binär",
+        "reset-extension": {
+            "question": {
+                "title": "Återställ Extension",
+                "message": "Är du säker på att du vill återställa MetaMask Extension?"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Logga in",
         "sync": "Synkronisering",
         "syncing": "Synkroniserar",
-        "unsync": "Avbryt synkronisering"
+        "unsync": "Avbryt synkronisering",
+        "continue": "Fortsätt",
+        "download": "Hämta",
+        "update": "Uppdatera"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Beräknad tid",
+        "title_dm": "Ladda ner Manager"
     },
     "epic": {
         "offline-notification-body": "Onlinetjänster kanske inte fungerar korrekt då Epics servrar är nere för tillfället!",
@@ -265,7 +292,9 @@
             "part2": "För övriga platser, använd symbolisk länk till en av dessa mappar"
         },
         "disable_logs": "Slå den här kryssrutan PÅ för att inaktivera de flesta skrivningar till loggfiler (kritisk information loggas alltid). Se till att stänga AV den här inställningen innan du rapporterar något problem.",
-        "dxvknvapi": "DXVK-NVAPI är en implementering av NVAPI byggt ovanpå DXVK och Linux-native NVAPI, det tillåter användning av DLSS på Nvidia GPU:er."
+        "dxvknvapi": "DXVK-NVAPI är en implementering av NVAPI byggt ovanpå DXVK och Linux-native NVAPI, det tillåter användning av DLSS på Nvidia GPU:er.",
+        "msync": "Msync syftar till att minska vinserver overhead i CPU-intensiva spel. Att möjliggöra kan förbättra prestanda på flera spel.",
+        "dxvkfpslimit": "Ställ en ramhastighet cap för DXVK spel"
     },
     "info": {
         "hyperplay": {
@@ -291,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-none-found": "Ingen vinversion hittades, ladda ner en från kompatibilitetshanteraren",
+        "wine-path-invalid": "Vinvägen är ogiltig, välj en annan."
     },
     "install": {
         "path": "Ange installationssökväg"
@@ -305,7 +336,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "Alfabetisk A-Z",
+        "alphabeticalZA": "Alfabetisk Z-A"
     },
     "loading": {
         "default": "Laddar",
@@ -350,7 +383,9 @@
             "error": "Installation misslyckades",
             "finished": "Installation slutförd",
             "imported": "Spelimport slutförd",
-            "startInstall": "Installation påbörjad"
+            "startInstall": "Installation påbörjad",
+            "paused": "Installation Paused",
+            "stopped": "Installation stoppad"
         },
         "moved": "Spelflytt slutförd",
         "moving": "Moving Game",
@@ -362,7 +397,9 @@
         "update": {
             "canceled": "Uppdatering avbröts",
             "finished": "Uppdatering slutförd",
-            "started": "Uppdatering påbörjad"
+            "started": "Uppdatering påbörjad",
+            "stopped": "Uppdatering stoppad",
+            "paused": "Uppdatering Paused"
         }
     },
     "offline-message": {
@@ -372,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Öppen",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -417,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix för befintlig EGS installation",
         "prefered_language": "Tvåställig bokstavskod (t.ex: \"en\" eller \"fr\")",
-        "alt-nile-bin": "Använder inbyggd Nile binär..."
+        "alt-nile-bin": "Använder inbyggd Nile binär...",
+        "dxvkfpsvalue": "Positivt heltalsvärde (t.ex. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -434,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Återupta nerladdning",
+            "pause": "Pausa hämtningar"
         }
     },
     "Recent": "Nyligen spelat",
@@ -502,7 +542,10 @@
             "instructions_title": "Hur rapporterar jag problem?",
             "last-log": "Senaste logg",
             "no-file": "Ingen loggfil hittades",
-            "show-in-folder": "Visa loggfiler i mapp"
+            "show-in-folder": "Visa loggfiler i mapp",
+            "join-hyperplay-discord": "Gå med i vår Discord",
+            "instructions-part-02": "För att hjälpa oss att diagnostisera och åtgärda problemet så snabbt som möjligt, vänligen ange så mycket information som möjligt, inklusive en kopia av dina loggar. Vårt supportteam kommer att övervaka båda kanalerna och göra sitt bästa för att svara på ditt problem så snabbt som möjligt. Tack för ditt tålamod och förståelse medan vi arbetar för att lösa eventuella problem du kan stöta på.",
+            "instructions-part-01": "Om du stöter på problem när du använder HyperPlay har vi två utsedda områden för att rapportera dina problem i vår Discord Server. Om du är en spelare, rapportera eventuella problem genom att besöka spelar-stöd-forumet. Om du är en game dev, vänligen rapportera eventuella problem genom att besöka dev-support-forumet."
         },
         "mangohud": "Aktivera Mangohud (Mangohud måste vara installerat)",
         "manualsync": {
@@ -548,7 +591,12 @@
         "disable_logs": "Inaktivera loggar",
         "addgamestoapplications": "Lägg till spel till applikationer automatiskt",
         "showMetalOverlay": "Visa statistiköverlägg",
-        "alt-nile-bin": "Välj en alternativ Nile Binär"
+        "alt-nile-bin": "Välj en alternativ Nile Binär",
+        "msync": "Aktivera Esync",
+        "autodxvknvapi": "Auto Installera/Uppdatera DXVK-NVAPI på Prefix",
+        "autoLaunchHyperPlay": "Auto Launch Hyper Spela",
+        "steamId": "Steam ID",
+        "dxvkfpslimit": "Begränsa FPS (DX9, 10 och 11)"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -583,19 +631,51 @@
             "log": "Logg",
             "other": "Övrigt",
             "sync": "Synkronisera sparfiler",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Konton",
+            "systemInformation": "System Information"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Grundinställ HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
-        }
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine hanterare"
+            }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Kopiera till Urklipp",
+            "os": "Operating system:",
+            "legendaryVersion": "Legendary: {{legendaryVersion}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "memory": "Minne:",
+            "systemModel": "Systemmodell:",
+            "version": "Version: {{appVersion}}",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "osNameFlatpak": "{{osName}} (inuti Flatpak)",
+            "gpuWithNumber": "GPU {{number}}:",
+            "osVersion": "Version {{versionNumber}}",
+            "steamDeck": "Steam Deck",
+            "gpu": "GPU:",
+            "gpuDriver": "Förare: {{driverVersion}}",
+            "memoryStats": "{{percentUsed}}% används ({{usedGib}} / {{totalGib}}",
+            "showDetailed": "Visa detaljerade systemspecifikationer"
+        },
+        "gamesSettings": "Spelinställningar",
+        "reset-extension": "Återställ Extension"
     },
     "Settings": "Inställningar",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Bibliotek",
+        "store": "Marknad",
+        "achievements": "Prestationer",
+        "downloadManager": "Ladda ner Manager"
     },
     "status": {
         "installing": "Installing",
@@ -634,7 +714,9 @@
         "logout": "Logga ut",
         "logout_confirmation": "Är du säker att du vill logga ut?",
         "manageaccounts": "Hantera konton",
-        "quit": "Avsluta"
+        "quit": "Avsluta",
+        "logIn": "Logga in",
+        "manageStore": "Hantera butiker"
     },
     "webview": {
         "controls": {
@@ -671,5 +753,265 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon spel",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "profile": "Profil",
+    "hyperplay": {
+        "browserImport": {
+            "profile": "Profil",
+            "appId": "App Id"
+        },
+        "buttons": {
+            "noThanks": "Nej tack",
+            "agree": "Jag håller med"
+        },
+        "copyUrl": "Kopiera webbadress",
+        "logOut": "Logga ut",
+        "turnAnalyticsOff": "Stäng av",
+        "discordApp": "Discord",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Läs mer",
+                        "orWord": "ELLER",
+                        "details": "Webbläsarna nedan har redan MetaMask installerat. Välj den du vill importera från.",
+                        "title": "Välj webbläsaren att importera från",
+                        "useRecoveryPhraseInfo": "Denna funktion rekommenderas för avancerade användare och utvecklare. Din hemliga återhämtningsfras lagras lokalt i MetaMask och delas aldrig med HyperPlay.",
+                        "useRecoveryPhrase": "Importera att använda Secret Recovery fras",
+                        "cantFindProfile": "Kan inte hitta din webbläsarprofil?",
+                        "createNewWallet": "Skapa ny MM förlängning plånbok"
+                    },
+                    "info": {
+                        "skip": "Hoppa över för nu",
+                        "title": "Vad är en plånbok?",
+                        "createWalletCTA": "Skapa en plånbok",
+                        "createWalletDescription": "Klicka på \"Skapa en plånbok\" nedan om du inte har en plånbok eller vill skapa en ny:",
+                        "digitalAssets": {
+                            "title": "Ett hem för dina digitala tillgångar",
+                            "details": "Plånböcker används för att skicka, ta emot, lagra och visa digitala tillgångar som tokens och NFTs."
+                        },
+                        "login": {
+                            "title": "Ett nytt sätt att logga in",
+                            "details": "Ett alternativ till att skapa nya konton och lösenord på varje webbplats, bara ansluta din plånbok istället."
+                        }
+                    },
+                    "scan": {
+                        "updateWarning": "Har du problem? Se till att MetaMask är uppdaterad.",
+                        "details": "Skapa en krypterad kommunikationskanal. Dina nycklar delas aldrig med HyperPlay.",
+                        "getMetamask": "Få MetaMask",
+                        "title": "Skanna QR med ",
+                        "dontHaveWallet": "Har du ingen plånbok?"
+                    }
+                },
+                "title": "Wallet Connections",
+                "pleaseConnect": "Vänligen anslut din plånbok eller ladda ner Metamask mobilapp för att få\nBörja:"
+            },
+            "terms": "Tjänstevillkor",
+            "connectAgain": "Anslut igen",
+            "connectionConnected": {
+                "description": "Din plånbok är ansluten. Du är redo att spela.",
+                "title": "Wallet ansluten!"
+            },
+            "connectionCanceled": {
+                "title": "Anslutning inställd!",
+                "description": "Vänligen bekräfta anslutningsbegäran på din mobila plånbok för att fortsätta."
+            },
+            "analytics": {
+                "body": "HyperPlay vill samla användningsdata för att bättre förstå hur våra användare interagerar med programmet. Denna information hjälper oss att förstå hur du använder appen och låter oss göra HyperPlay ännu bättre för dig.",
+                "title": "Hjälp oss att förbättra HyperPlay!",
+                "anonymized": "Skicka anonymiserad klick- och spelinteraktion;",
+                "hyperplayWill": "HyperPlay kommer:",
+                "neverCollectIP": " samla din fullständiga IP-adress;",
+                "neverCollectPersonal": " samla in nycklar, adresser, balanser, hashes eller någon personlig information;",
+                "neverSellData": " sälja data för vinst. Någonsin!",
+                "optOut": "Låt dig alltid välja bort via Inställningar;",
+                "privacyCaption": "Dessa uppgifter aggregeras och är därför anonyma för allmänna dataskyddsförordning (EU) 2016/679. För mer information om våra sekretesspraxis, se vår ",
+                "privacyPolicyHere": "Integritetspolicy här."
+            },
+            "welcome": {
+                "title": "Välkommen till Hyper Spela tidig åtkomst!",
+                "text": {
+                    "communityCTA_1": "Vi skulle älska din feedback och få dig att gå med oss i vår",
+                    "communityCTA_2": "gemenskap. Låt oss forma framtiden för spel!",
+                    "construction": "HyperPlay är under konstruktion.",
+                    "description": "HyperPlay är en game launcher och game store aggregator från\nFramtiden. Med HyperPlay kan du bära din plånbok, tokens och tillgångar\ntill varje spel. HyperPlay stöder hela biblioteket i Epic\nStore, GOG och vår egen HyperPlay-butik. Genom att använda HyperPlay godkänner du\ntill vår",
+                    "bugs": "Observera att HyperPlay är en offentlig alfa. Många funktioner är fortfarande\ni utveckling, och det kommer att finnas buggar."
+                }
+            }
+        },
+        "folder": "Mapp",
+        "Sync": "Synka",
+        "misc": "Aldrig",
+        "gamecard": {
+            "installing": "Hämtar...",
+            "paused": "Pausad",
+            "distributables": "Installera Distributables",
+            "extracting": "Utvinning...",
+            "installed": "Redo att spela"
+        },
+        "syncing": "Synkroniserar …",
+        "turnAnalyticsOn": "Sätt på",
+        "analyticsOn": "Analytics slås på",
+        "achievements": {
+            "freeMints": "Gratis Mints",
+            "addThisGame": "Lägg till detta spel",
+            "gamesToMint": "Spel att mint",
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "Det ser ut som om vi inte kunde hitta några spel i ditt Steam-konto just nu. Bara en snabb påminnelse om dubbelkolla att dina speluppgifter är inställda på offentliga. På så sätt kan vi komma åt dina prestationer och ge dig den bästa upplevelsen."
+            }
+        },
+        "viewItem": "Visa {{item}}",
+        "viewPortfolio": "Visa portfölj",
+        "otp": "One Time Passcode",
+        "accesscodes": {
+            "error": {
+                "validation": "Access-kod är ogiltig"
+            },
+            "success": {
+                "validation": "Framgång! Access-kod är giltig"
+            },
+            "requirescode": "Denna speluppdatering kräver en åtkomstkod."
+        },
+        "analyticsOff": "Analytics är avstängd",
+        "changeWallet": "Swap plånbok konto",
+        "publicAlpha": "Offentlig alfa",
+        "viewMyAccount": "Visa mitt konto",
+        "connectWallet": "Anslut plånbok",
+        "currentWallet": "Nuvarande plånbok",
+        "linkSteamAccountCta": "Gå till Steam Sign in",
+        "linkSteamAccountDescription": "Logga in på Steam för att länka ditt HyperPlay-konto.",
+        "linkSteamAccountTitle": "Link Steam-konto"
+    },
+    "gameRelease": {
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Prova",
+        "main": "Huvudsaklig",
+        "prototype": "Prototyp"
+    },
+    "quest": {
+        "active": "Aktiv",
+        "Play": "Spela",
+        "playstreak": {
+            "days": "dagar",
+            "now": "Nu",
+            "dayResets": "Dagens återställningar:",
+            "playEachDay": "Spela varje dag så din streak kommer inte att återställa!",
+            "playToStart": "Spela detta spel för att starta din streak!",
+            "progressTowardsStreak": "framsteg mot dagens streak.",
+            "streakCompleted": "Streak färdig! Betala dina belöningar nu.",
+            "streakProgress": "Streak Progress"
+        },
+        "points": "Punkter",
+        "connectSteamAccount": "Anslut gruppkonto",
+        "signIn": "Logga in",
+        "sync": "Synka",
+        "claimed": "Krav",
+        "errorMessage": "Det fanns ett fel med transaktionen.",
+        "quests": "Quests",
+        "readyForClaim": "Redo för krav",
+        "View Game": "Visa spel",
+        "claimAll": "Krav alla",
+        "claimFailed": "Claim misslyckades",
+        "claimFailedMessage": "Försök igen. Om det fortfarande inte fungerar, skapa en Discord supportbiljett.",
+        "needMoreAchievements": "Du måste ha slutfört {{percent}}% av prestationerna i ett av dessa spel.",
+        "reputation": "Reputation",
+        "reward": "Belöning",
+        "type": {
+            "playstreak": "Spela Streak",
+            "reputation": "Reputation"
+        },
+        "associatedGames": "Associerade spel",
+        "linkAccount": "Länka din Ångkonto för att kontrollera behörigheten.",
+        "createDiscordTicket": "Skapad Discord biljett",
+        "notEnoughGas": "Otillräcklig plånboksbalans för att hävda din belöning på grund av gasavgifter. Prova en annan plånbok eller fylla på den här innan du går tillbaka."
+    },
+    "ALL": "ALLA",
+    "analytics": "Analytics",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "FAILED": "Transaktion avbruten",
+            "CONFIRMED": "Transaktion bekräftad",
+            "PENDING": "Transaktion som lämnats in",
+            "INITIATED": "Transaktionsbegäran i väntan"
+        },
+        "description": {
+            "CONFIRMED": "Transaktionen bekräftades framgångsrikt!",
+            "FAILED": "Transaktionen avbröts eller inte lämnades in, försök igen",
+            "INITIATED": "En plånboksbekräftelse väntar i din mobila plånbok",
+            "PENDING": "Väntar på blockchain bekräftelse. Vi kommer att låta dig veta när det bekräftas"
+        },
+        "chainRequest": {
+            "INITIATED": "Anpassad nätverksförfrågan",
+            "CONFIRMED": "Anpassat nätverk tillagt",
+            "FAILED": "Anpassat nätverk avbrutet"
+        },
+        "greeting": {
+            "description": "HyperPlay Overlay är redo! Tryck {{overlayKeyMod}} + X för att visa eller dölja det.",
+            "title": "HyperPlay Overlay"
+        },
+        "extensionNotification": {
+            "TITLE": "Transaktion begärd",
+            "DESCRIPTION": "Tryck {{overlayKeyMod}} + X för att se denna transaktion"
+        },
+        "walletWatch": {
+            "FAILED": "Anpassad token begäran avbruten",
+            "CONFIRMED": "Anpassad token tillagd",
+            "INITIATED": "Lägg till anpassad token begäran i väntan"
+        },
+        "signatureRequest": {
+            "INITIATED": "Signaturbegäran i väntan",
+            "CONFIRMED": "Signatur inlämnad",
+            "FAILED": "Signatur avbruten"
+        }
+    },
+    "dlcs": {
+        "label": "Välj DLC för att installera:"
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} och andra spel är redo att uppdatera.",
+            "single": "Det finns en uppdatering redo för {{gameName}}."
+        },
+        "title": "Speluppdateringar tillgängliga"
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "Du är för närvarande inte inloggad, spela framsteg kommer inte att spåras. Vänligen logga in på HyperPlay via den högra nedgången för att spåra framsteg.",
+                "overlay": "Du är för närvarande inte inloggad, spela framsteg kommer inte att spåras. Avsluta spelet och logga in på HyperPlay via den övre högra nedgången för att spåra framsteg."
+            }
+        },
+        "quests": "Quests"
+    },
+    "accounts": "konton",
+    "achievements": {
+        "progress": {
+            "minted": "på kedjan",
+            "notMinted": "off chain"
+        }
+    },
+    "notification": {
+        "wine-download": {
+            "message": "Ställ in standard kompatibilitet lager",
+            "title": "Kompatibilitet Layer"
+        }
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Du är ansluten till HyperPlay med en extern plånbok."
+    },
+    "email_subscription": {
+        "title": "Tack för att du prenumererar!",
+        "subtitle": "Du är nu en del av vårt samhälle, och vi är glada över att dela värdefulla uppdateringar och insikter med dig."
+    },
+    "importGameErrorMessage": "Inte en giltig spelmapp, import av spel är inte möjligt",
+    "importGameErrorMessageExecutable": "Spelspel Exekutabelt som inte hittats, import av spel är inte möjligt",
+    "exit_game": "Exit Game",
+    "sideload": {
+        "warningMessage": "Side-loading ett spel är en funktion avsedd för utvecklare och erfarna strömanvändare. Sidladdning av en installatör som innehåller skadlig kod kan äventyra din dator och leda till stöld av medel.",
+        "warningTitle": "Viktigt"
+    },
+    "back_to_game": "Tillbaka till spelet",
+    "importGameErrorTitle": "Importera spelfel"
 }
