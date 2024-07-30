@@ -20,17 +20,19 @@ import {
   resyncExternalTasks
 } from './rewards/completeExternalTask'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
+  projectId: string
 }
 
 export function QuestDetailsWrapper({
-  selectedQuestId
+  selectedQuestId,
+  projectId
 }: QuestDetailsWrapperProps) {
   const flags = useFlags()
   const { writeContract, error, isError, status } = useWriteContract()
@@ -45,25 +47,35 @@ export function QuestDetailsWrapper({
 
   const rewardsQuery = useGetRewards(selectedQuestId)
   const questRewards = rewardsQuery.data.data
+  const queryClient = useQueryClient()
 
   const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
   const questPlayStreakData = questPlayStreakResult.data.data
 
   const resyncMutation = useMutation({
     mutationFn: async (rewards: Reward[]) => {
-      return resyncExternalTasks(rewards)
+      const result = await resyncExternalTasks(rewards)
+      const queryKey = `useGetG7UserCredits`
+      queryClient.invalidateQueries({ queryKey: [queryKey] })
+      return result
     }
   })
 
   const completeTaskMutation = useMutation({
     mutationFn: async (reward: Reward) => {
-      return completeExternalTask(reward)
+      const result = await completeExternalTask(reward)
+      const queryKey = `useGetG7UserCredits`
+      queryClient.invalidateQueries({ queryKey: [queryKey] })
+      return result
     }
   })
 
   const claimPointsMutation = useMutation({
     mutationFn: async (reward: Reward) => {
-      return claimPoints(reward)
+      const result = await claimPoints(reward)
+      const queryKey = `getPointsBalancesForProject:${projectId}`
+      queryClient.invalidateQueries({ queryKey: [queryKey] })
+      return result
     }
   })
 
