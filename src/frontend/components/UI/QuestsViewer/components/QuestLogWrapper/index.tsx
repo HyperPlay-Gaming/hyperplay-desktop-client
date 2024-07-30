@@ -10,6 +10,7 @@ import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
 import { Quest } from 'common/types'
 import useGetG7UserCredits from 'frontend/hooks/useGetG7UserCredits'
+import useGetPointsBalancesForProject from 'frontend/hooks/useGetPointsBalances'
 
 export interface QuestLogWrapperProps {
   projectId: string
@@ -23,9 +24,11 @@ export function QuestLogWrapper({
   setSelectedQuestId
 }: QuestLogWrapperProps) {
   const questsResults = useGetQuests(appName)
+  const quests = questsResults?.data?.data
   const userCredits = useGetG7UserCredits()
   const userCreditsBalance = userCredits?.data?.data
-  const quests = questsResults?.data?.data
+  const pointsBalancesQuery = useGetPointsBalancesForProject(appName)
+  const pointsBalances = pointsBalancesQuery?.data?.data
   const { t } = useTranslation()
 
   const i18n: QuestLogTranslations = {
@@ -40,16 +43,24 @@ export function QuestLogWrapper({
     pointsClaimed: t('quest.pointsClaimed', 'Points Claimed')
   }
 
-  let pointsBalanceProps: PointsBalanceProps[] | undefined = undefined
+  const pointsBalanceProps: PointsBalanceProps[] = []
   if (userCreditsBalance !== undefined) {
-    pointsBalanceProps = [
-      {
-        symbol: 'G7C',
-        name: 'Game7 Credits',
-        isGame7Credits: true,
-        balance: userCreditsBalance
-      }
-    ]
+    pointsBalanceProps.push({
+      symbol: 'G7C',
+      name: 'Game7 Credits',
+      isGame7Credits: true,
+      balance: userCreditsBalance
+    })
+  }
+  if (pointsBalances) {
+    for (const pointsCollection_i of pointsBalances) {
+      pointsBalanceProps.push({
+        symbol: pointsCollection_i.pointsCollection.symbol,
+        name: pointsCollection_i.pointsCollection.name,
+        imageUrl: pointsCollection_i.pointsCollection.image,
+        balance: pointsCollection_i.balance
+      })
+    }
   }
 
   let questLog = null

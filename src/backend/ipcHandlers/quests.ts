@@ -63,16 +63,18 @@ ipcMain.handle('resyncExternalTask', async (e, rewardId) => {
 
 ipcMain.handle('getG7Credits', async () => {
   const url = `${DEV_PORTAL_URL}api/v1/game7/user/total/credits`
-  const response = (await fetchWithCookie({ url, method: 'GET' })) as {
-    credits: number
-  }
-  return response.credits.toString()
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.data.credits.toString()
 })
 
 ipcMain.handle('getExternalTaskCredits', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/amount`
-  const response = (await fetchWithCookie({ url, method: 'GET' })) as {
-    credits: number
-  }
-  return response.credits.toString()
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.data.credits.toString()
+})
+
+ipcMain.handle('getPointsBalancesForProject', async (e, projectId) => {
+  const url = `${DEV_PORTAL_URL}api/v1/points/project/${projectId}/balance`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response
 })

@@ -52,3 +52,6 @@ export const getG7Credits = async () => ipcRenderer.invoke('getG7Credits')
 
 export const getExternalTaskCredits = async (rewardId: string) =>
   ipcRenderer.invoke('getExternalTaskCredits', rewardId)
+
+export const getPointsBalancesForProject = async (projectId: string) =>
+  ipcRenderer.invoke('getPointsBalancesForProject', projectId)
