@@ -6,8 +6,14 @@ import { icon } from './constants'
 import { logError, LogPrefix, logInfo } from './logger/logger'
 import { isOnline } from './online_monitor'
 
-autoUpdater.autoDownload = false
-autoUpdater.autoInstallOnAppQuit = false
+autoUpdater.autoDownload = true
+autoUpdater.autoInstallOnAppQuit = true
+
+// check for updates every 12 hours
+const interval = 1000 * 60 * 60 * 12
+setInterval(() => {
+  autoUpdater.checkForUpdates()
+}, interval)
 
 autoUpdater.on('update-available', async () => {
   if (!isOnline()) {
