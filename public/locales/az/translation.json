@@ -925,7 +925,8 @@
         "connectSteamAccount": "Daxil ol",
         "errorMessage": "Əməliyyat ilə bir məlumat var.",
         "reputation": "İdman",
-        "notEnoughGas": "Qeydli cüzdan balıqları ilə mükafat iddia etmək. Retrying əvvəl bir cüzdan və ya yeniləyin."
+        "notEnoughGas": "Qeydli cüzdan balıqları ilə mükafat iddia etmək. Retrying əvvəl bir cüzdan və ya yeniləyin.",
+        "pointsClaimed": "Qeydiyyat"
     },
     "profile": "Profil",
     "importGameErrorMessageExecutable": "Oyuncaq tapmaq mümkün deyil",
