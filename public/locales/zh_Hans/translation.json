@@ -160,7 +160,8 @@
         "syncing": "正在同步",
         "unsync": "取消同步",
         "continue": "继续",
-        "download": "下载"
+        "download": "下载",
+        "update": "更新"
     },
     "controller": {
         "hints": {
@@ -388,7 +389,7 @@
         "offline-retry-in": "离线。重试时间为 {{seconds}} 秒。",
         "retrying": "重试"
     },
-    "Open": "",
+    "Open": "打开",
     "options": {
         "advanced": {
             "key": "变量名称",
@@ -572,7 +573,9 @@
         "autodxvknvapi": "在前置自动安装并更新 DXVK",
         "experimental_features": {
             "enableNewShinyFeature": "新功能"
-        }
+        },
+        "autoUpdateGames": "自动更新游戏",
+        "msync": "启用 Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -607,7 +610,9 @@
             "log": "日志",
             "other": "其它",
             "sync": "存档-同步",
-            "wineExt": "Wine 扩展"
+            "wineExt": "Wine 扩展",
+            "accounts": "帐户",
+            "systemInformation": "系统信息"
         },
         "open-config-file": "打开配置文件",
         "reset-hyperplay": "重置 HyperPlay",
@@ -617,12 +622,25 @@
         },
         "experimental_features": {
             "title": "实验性功能"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine 管理器"
+            }
+        },
+        "gamesSettings": "游戏设置",
+        "systemInformation": {
+            "copyToClipboard": "复制到剪贴板",
+            "os": "操作系统:"
         }
     },
     "Settings": "设置",
     "sidebar": {
         "collapse": "收起侧栏",
-        "uncollapse": "展开侧栏"
+        "uncollapse": "展开侧栏",
+        "achievements": "成就",
+        "library": "库",
+        "store": "商店"
     },
     "status": {
         "installing": "安装中",
@@ -661,7 +679,8 @@
         "logout": "退出登录",
         "logout_confirmation": "你确定要退出登录吗？",
         "manageaccounts": "管理帐户",
-        "quit": "退出"
+        "quit": "退出",
+        "logIn": "登录"
     },
     "webview": {
         "controls": {
@@ -726,7 +745,8 @@
                         "useRecoveryPhrase": "使用秘密恢复短语进入",
                         "cantFindProfile": "找不到您的浏览器配置文件？",
                         "createNewWallet": "创建新的 MM 扩展钱包",
-                        "details": "通过导入，您的 MetaMask 安装和    设置将被导入 HyperPlay。"
+                        "details": "通过导入，您的 MetaMask 安装和    设置将被导入 HyperPlay。",
+                        "learnMore": "了解更多"
                     },
                     "info": {
                         "createWalletCTA": "创建钱包",
@@ -778,7 +798,19 @@
         "currentWallet": "当前钱包",
         "discordApp": "Discord",
         "misc": "从不",
-        "viewPortfolio": "查看资料库"
+        "viewPortfolio": "查看资料库",
+        "gamecard": {
+            "installing": "下载中...",
+            "distributables": "批发",
+            "paused": "已暂停",
+            "extracting": "提取中..."
+        },
+        "Sync": "同步",
+        "browserImport": {
+            "profile": "形象"
+        },
+        "folder": "文件夹",
+        "logOut": "注销"
     },
     "hyperplayOverlay": {
         "greeting": {
@@ -830,9 +862,39 @@
     "dlc": {
         "noDlcFound": "未找到可下载内容",
         "size": "大小",
-        "title": "标题"
+        "title": "标题",
+        "actions": "操作",
+        "installDlcs": "安装所有可下载内容"
     },
     "amazon": "亚马逊",
     "Amazon Games": "亚马逊游戏",
-    "prime-gaming": "优质游戏"
+    "prime-gaming": "优质游戏",
+    "externalLink": {
+        "dontAskAgain": "不再询问",
+        "warning": "您将打开一个外部链接。"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "兼容性层"
+        }
+    },
+    "profile": "形象",
+    "quest": {
+        "active": "启用",
+        "claimed": "已领取",
+        "Play": "播放",
+        "playstreak": {
+            "days": "天",
+            "now": "现在"
+        },
+        "reward": "收益",
+        "points": "点",
+        "quests": "任务",
+        "signIn": "登录",
+        "sync": "同步"
+    },
+    "quests": {
+        "quests": "任务"
+    },
+    "exit_game": "退出游戏"
 }
