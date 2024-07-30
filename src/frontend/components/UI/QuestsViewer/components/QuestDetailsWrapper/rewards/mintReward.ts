@@ -1,5 +1,4 @@
 import { DepositContract, Reward, RewardClaimSignature } from 'common/types'
-import { getAmount } from '@hyperplay/utils'
 import { questRewardAbi } from 'frontend/abis/RewardsAbi'
 import { WriteContractMutate } from 'wagmi/query'
 import { Config } from 'wagmi'
@@ -64,12 +63,7 @@ export async function mintReward({
         args: [
           BigInt(questId),
           reward.contract_address,
-          BigInt(
-            getAmount(
-              reward.amount_per_user.toString(),
-              reward.decimals
-            ).toString()
-          ),
+          BigInt(reward.amount_per_user),
           BigInt(sig.nonce),
           BigInt(sig.expiration),
           sig.signature
@@ -90,7 +84,7 @@ export async function mintReward({
           BigInt(questId),
           reward.contract_address,
           BigInt(token_id),
-          BigInt(getAmount(amount_per_user, reward.decimals).toString()),
+          BigInt(amount_per_user),
           BigInt(sig.nonce),
           BigInt(sig.expiration),
           sig.signature
