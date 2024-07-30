@@ -332,7 +332,11 @@ export function QuestDetailsWrapper({
     resetWriteContract()
   }, [selectedQuestId])
 
-  if (selectedQuestId !== null && questMeta !== undefined && questRewards !== undefined) {
+  if (
+    selectedQuestId !== null &&
+    questMeta !== undefined &&
+    questRewards !== undefined
+  ) {
     const ctaDisabled =
       !flags.questsOverlayClaimCtaEnabled ||
       (!isEligible() && !showResyncButton) ||
@@ -353,7 +357,7 @@ export function QuestDetailsWrapper({
         variant: 'danger'
       }
     }
-    
+
     const questDetailsProps: QuestDetailsProps = {
       alertProps,
       questType: questMeta.type,
