@@ -174,7 +174,10 @@
         "login": "Log Masuk",
         "sync": "Sinkronkan",
         "syncing": "Menyinkronkan",
-        "unsync": "Batalkan sinkronisasi"
+        "unsync": "Batalkan sinkronisasi",
+        "continue": "Lanjutkan",
+        "update": "Perbarui",
+        "download": "Unduh"
     },
     "controller": {
         "hints": {
@@ -214,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "title_dm": "Unduh Manajer"
+        "title_dm": "Unduh Manajer",
+        "ETA": "Perkiraan waktu"
     },
     "epic": {
         "offline-notification-body": "Layanan daring mungkin tidak akan bekerja sepenuhnya karena server Epic Games sedang luring!",
@@ -405,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Buka",
     "options": {
         "advanced": {
             "key": "Nama Variabel",
@@ -468,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Jeda unduh",
+            "resume": "Lanjutkan Download"
         }
     },
     "Recent": "Dimainkan Baru-Baru Ini",
@@ -589,7 +595,8 @@
         "autoLaunchHyperPlay": "Auto Luncurkan Hyper Login",
         "autodxvknvapi": "Auto Install / Perbarui DXVK-NVAPI pada Prefix",
         "steamId": "ID uap",
-        "dxvkfpslimit": "Batasi FPS (DX9, 10 dan 11)"
+        "dxvkfpslimit": "Batasi FPS (DX9, 10 dan 11)",
+        "msync": "Aktifkan Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -624,7 +631,9 @@
             "log": "Log",
             "other": "Lainnya",
             "sync": "Sinkronisasi Penyimpanan",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "Informasi S_istem",
+            "accounts": "Kredit dan akun"
         },
         "open-config-file": "Buka Berkas Pengaturan",
         "reset-hyperplay": "Reset HyperPlay",
@@ -648,15 +657,25 @@
             "systemModel": "Model sistem:",
             "showDetailed": "Tampilkan spesifikasi sistem rinci",
             "steamDeck": "Sitemap",
-            "version": "Versi: {{appVersion}}"
+            "version": "Versi: {{appVersion}}",
+            "copyToClipboard": "Salin ke papan klip",
+            "os": "Sistem operasi:"
         },
-        "gamesSettings": "Pengaturan Permainan"
+        "gamesSettings": "Pengaturan Permainan",
+        "wine": {
+            "manager": {
+                "title": "Manajer Wine"
+            }
+        }
     },
     "Settings": "Pengaturan",
     "sidebar": {
         "collapse": "Tutup bilah samping",
         "uncollapse": "Tampilkan bilah samping",
-        "downloadManager": "Unduh Manajer"
+        "downloadManager": "Unduh Manajer",
+        "library": "Pustaka",
+        "store": "Store",
+        "achievements": "Pencapaian"
     },
     "status": {
         "installing": "Memasang",
@@ -696,7 +715,8 @@
         "logout_confirmation": "Apakah Anda yakin ingin keluar?",
         "manageaccounts": "Kelola Akun",
         "quit": "Keluar",
-        "manageStore": "Mengelola toko"
+        "manageStore": "Mengelola toko",
+        "logIn": "Masuk"
     },
     "webview": {
         "controls": {
@@ -779,7 +799,8 @@
                         "title": "Pilih browser untuk impor dari",
                         "useRecoveryPhrase": "Impor Menggunakan frasa Pemulihan Rahasia",
                         "details": "Browser di bawah ini sudah memiliki instalasi MetaMask. Pilih salah satu yang ingin Anda impor.",
-                        "useRecoveryPhraseInfo": "Fitur ini direkomendasikan untuk pengguna dan pengembang canggih. Frase pemulihan rahasia Anda disimpan secara lokal di MetaMask dan tidak pernah dibagikan dengan HyperPlay."
+                        "useRecoveryPhraseInfo": "Fitur ini direkomendasikan untuk pengguna dan pengembang canggih. Frase pemulihan rahasia Anda disimpan secara lokal di MetaMask dan tidak pernah dibagikan dengan HyperPlay.",
+                        "learnMore": "Pelajari lebih lanjut"
                     },
                     "info": {
                         "createWalletCTA": "Buat dompet",
@@ -792,7 +813,8 @@
                         "digitalAssets": {
                             "details": "Dompet digunakan untuk mengirim, menerima, menyimpan, dan menampilkan aset digital seperti token dan NFT.",
                             "title": "Rumah untuk Aset Digital Anda"
-                        }
+                        },
+                        "skip": "Lewati dulu"
                     },
                     "scan": {
                         "dontHaveWallet": "Jangan punya dompet?",
@@ -814,7 +836,8 @@
                     "bugs": "Harap dicatat bahwa HyperPlay adalah alfa publik. Banyak fitur masih\ndalam pengembangan, dan akan ada bug."
                 },
                 "title": "Selamat Datang di Hyper Bermain Akses Awal!"
-            }
+            },
+            "terms": "Persyaratan Layanan"
         },
         "achievements": {
             "addThisGame": "Tambahkan permainan ini",
@@ -827,10 +850,12 @@
         },
         "analyticsOn": "Analytics dihidupkan",
         "browserImport": {
-            "appId": "Aplikasi Id"
+            "appId": "Aplikasi Id",
+            "profile": "Profil"
         },
         "buttons": {
-            "agree": "Sitemap"
+            "agree": "Sitemap",
+            "noThanks": "Tidak, Terima Kasih"
         },
         "connectWallet": "Login",
         "linkSteamAccountCta": "Pergi ke tanda uap di",
@@ -840,7 +865,10 @@
         "viewPortfolio": "Portofolio",
         "gamecard": {
             "installed": "Siap bermain",
-            "extracting": "Login."
+            "extracting": "Login.",
+            "distributables": "Menginstal Distributables",
+            "installing": "Mengunduh...",
+            "paused": "Dijeda"
         },
         "linkSteamAccountDescription": "Masuk ke Steam untuk menghubungkan akun HyperPlay Anda.",
         "linkSteamAccountTitle": "Link Akun Uap",
@@ -848,7 +876,15 @@
         "viewItem": "Lihat {{item}}",
         "otp": "Satu Waktu Passcode",
         "currentWallet": "Dompet saat ini",
-        "viewMyAccount": "Lihat akun saya"
+        "viewMyAccount": "Lihat akun saya",
+        "discordApp": "Discord",
+        "turnAnalyticsOn": "Nyalakan",
+        "folder": "Folder",
+        "misc": "Jangan pernah",
+        "logOut": "Keluar",
+        "copyUrl": "Salin URL",
+        "Sync": "Sinkronisasi",
+        "turnAnalyticsOff": "Matikan"
     },
     "hyperplayOverlay": {
         "signatureRequest": {
@@ -915,7 +951,9 @@
             "playToStart": "Bermain permainan ini untuk memulai streak Anda!",
             "progressTowardsStreak": "kemajuan menuju undian hari ini.",
             "streakCompleted": "Login Klaim hadiah Anda sekarang.",
-            "streakProgress": "Sitemap"
+            "streakProgress": "Sitemap",
+            "days": "hari",
+            "now": "Sekarang"
         },
         "readyForClaim": "Siap untuk klaim",
         "type": {
@@ -927,7 +965,15 @@
         "needMoreAchievements": "Anda harus menyelesaikan {{percent}}% dari pencapaian dalam salah satu permainan ini.",
         "claimFailedMessage": "Silahkan coba sekali lagi. Jika masih tidak bekerja, buat tiket dukungan Diskord.",
         "createDiscordTicket": "Dibuat tiket Discord",
-        "notEnoughGas": "Saldo dompet yang tidak memadai untuk mengklaim hadiah Anda karena biaya gas. Coba dompet yang berbeda atau mengisi ulang satu ini sebelum dicoba."
+        "notEnoughGas": "Saldo dompet yang tidak memadai untuk mengklaim hadiah Anda karena biaya gas. Coba dompet yang berbeda atau mengisi ulang satu ini sebelum dicoba.",
+        "active": "Aktif",
+        "Play": "Lanjut",
+        "signIn": "Masuk",
+        "points": "Poin",
+        "quests": "Pencarian",
+        "sync": "Sinkronisasi",
+        "claimed": "Diklaim",
+        "connectSteamAccount": "Hubungkan akun tim"
     },
     "notification": {
         "wine-download": {
@@ -948,7 +994,11 @@
         }
     },
     "gameRelease": {
-        "prototype": "Login"
+        "prototype": "Login",
+        "alpha": "Alfa",
+        "demo": "Demo",
+        "main": "Utama",
+        "beta": "Beta"
     },
     "quests": {
         "playstreak": {
@@ -956,11 +1006,13 @@
                 "client": "Anda saat ini tidak masuk, bermain streak kemajuan tidak akan dilacak. Silakan login ke HyperPlay melalui dropdown kanan atas untuk melacak kemajuan.",
                 "overlay": "Anda saat ini tidak masuk, bermain streak kemajuan tidak akan dilacak. Silakan keluarkan game dan login ke HyperPlay melalui dropdown kanan atas untuk melacak kemajuan."
             }
-        }
+        },
+        "quests": "Pencarian"
     },
     "email_subscription": {
         "title": "Terima kasih untuk berlangganan!",
         "subtitle": "Anda sekarang menjadi bagian dari komunitas kami, dan kami sangat senang untuk berbagi pembaruan dan wawasan berharga dengan Anda."
     },
-    "importGameErrorTitle": "Kesalahan Permainan Impor"
+    "importGameErrorTitle": "Kesalahan Permainan Impor",
+    "profile": "Profil"
 }
