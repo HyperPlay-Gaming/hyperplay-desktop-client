@@ -152,7 +152,10 @@
         "login": "Bejelentkezés",
         "sync": "Szinkronizálás",
         "syncing": "Szinkronizálás folyamatban",
-        "unsync": "Deszinkronizálás"
+        "unsync": "Deszinkronizálás",
+        "update": "Frissítés",
+        "download": "Letöltés",
+        "continue": "Folytatás"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Becsült idő"
     },
     "epic": {
         "offline-notification-body": "Az online szolgáltatások lehet, hogy nem működnek teljesen, mert az Epic Games szerverek offline vannak!",
@@ -370,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Megnyitás",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -432,7 +436,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Letöltések szüneteltetése",
+            "resume": "Letöltés folytatása"
         }
     },
     "Recent": "Nemrég játszott",
@@ -546,7 +552,8 @@
         "disable_logs": "Naplók letiltása",
         "showMetalOverlay": "Statisztika fedvény megjelenítése",
         "addgamestoapplications": "Adjon hozzá játékokat automatikusan az Alkalmazásokhoz",
-        "alt-nile-bin": "Válasszon egy alternatív nílusi binárist"
+        "alt-nile-bin": "Válasszon egy alternatív nílusi binárist",
+        "msync": "Esync engedélyezése"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -581,19 +588,32 @@
             "log": "Napló",
             "other": "Egyéb",
             "sync": "Mentés szinkronizálás",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "Rendszerinformációk",
+            "accounts": "Fiókok"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "HyperPlay visszaállítása",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "systemInformation": {
+            "copyToClipboard": "Másolás a vágólapra",
+            "os": "Operációs rendszer"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine kezelő"
+            }
         }
     },
     "Settings": "Beállítások",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Könyvtár",
+        "store": "Marketplace"
     },
     "status": {
         "installing": "Telepítés",
@@ -632,7 +652,8 @@
         "logout": "Kijelentkezés",
         "logout_confirmation": "Biztos, hogy ki akarsz jelentkezni?",
         "manageaccounts": "Manage Accounts",
-        "quit": "Kilépés"
+        "quit": "Kilépés",
+        "logIn": "Belépés"
     },
     "webview": {
         "controls": {
@@ -669,5 +690,63 @@
     },
     "amazon": "amazon",
     "Amazon Games": "Amazon Games",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "analytics": "Analitika",
+    "hyperplay": {
+        "turnAnalyticsOn": "Bekapcsolás",
+        "copyUrl": "URL másolása",
+        "browserImport": {
+            "profile": "Profil"
+        },
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "További információ…"
+                    }
+                }
+            },
+            "terms": "Általános Szerződési Feltételek"
+        },
+        "discordApp": "Discord",
+        "folder": "Mappa",
+        "logOut": "Kilépés",
+        "gamecard": {
+            "paused": "Szüneteltetett",
+            "installing": "Letöltés…",
+            "distributables": "Eloszthatók telepítése"
+        },
+        "buttons": {
+            "noThanks": "Nem, köszönöm"
+        },
+        "misc": "Soha",
+        "turnAnalyticsOff": "Kikapcsolás",
+        "Sync": "Szinkronizálás"
+    },
+    "gameRelease": {
+        "main": "Fő",
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Demo"
+    },
+    "quest": {
+        "active": "Aktív",
+        "Play": "Lejátszás",
+        "quests": "Küldetések",
+        "playstreak": {
+            "days": "napig",
+            "now": "Most"
+        },
+        "points": "Pontok",
+        "signIn": "Bejelentkezés",
+        "sync": "Szinkronizálás"
+    },
+    "quests": {
+        "quests": "Küldetések"
+    },
+    "sideload": {
+        "warningTitle": "Fontos"
+    },
+    "ALL": "ÖSSZES",
+    "profile": "Profil"
 }
