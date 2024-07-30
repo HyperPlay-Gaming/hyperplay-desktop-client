@@ -656,6 +656,7 @@
         "createDiscordTicket": "Created Discord ticket",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
+        "notEnoughGas": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.",
         "playstreak": {
             "dayResets": "Day resets:",
             "days": "days",
