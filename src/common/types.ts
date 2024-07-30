@@ -966,3 +966,10 @@ export interface UserPlayStreak {
   accumulated_playtime_today_in_seconds: number
   last_play_session_completed_datetime: string
 }
+
+export interface PointsCollection {
+  id: string
+  name: string
+  symbol: string
+  image: string
+}
