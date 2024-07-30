@@ -174,7 +174,10 @@
         "login": "ورود",
         "sync": "همگام سازی",
         "syncing": "در حال همگام سازی",
-        "unsync": "عدم همگام سازی"
+        "unsync": "عدم همگام سازی",
+        "continue": "ادامه",
+        "download": "دانلود",
+        "update": "روزآمدسازی"
     },
     "controller": {
         "hints": {
@@ -214,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "title_dm": "Download Manager"
+        "title_dm": "Download Manager",
+        "ETA": "زمان برآوردشده"
     },
     "epic": {
         "offline-notification-body": "به علت آفلاین بودن سرورهای اپیک گیمز سرویسهای آنلاین ممکن است کار نکنند!",
@@ -405,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "باز کردن",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -468,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "مکث بارگیری‌ها",
+            "resume": "ازسرگیری بارگیری"
         }
     },
     "Recent": "اخیرا بازی شده",
@@ -589,7 +595,8 @@
         "steamId": "Steam ID",
         "dxvkfpslimit": "محدودیت FPS (DX9، 10 و 11)",
         "autodxvknvapi": "نصب خودکار / به روز رسانی DXVK-NVAPI در Prefix",
-        "autoLaunchHyperPlay": "راه اندازی Hyper بازی Play"
+        "autoLaunchHyperPlay": "راه اندازی Hyper بازی Play",
+        "msync": "فعالسازی Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -624,7 +631,9 @@
             "log": "Log",
             "other": "بقیه",
             "sync": "همگامسازی ذخیرهها",
-            "wineExt": "افزونه های Wine"
+            "wineExt": "افزونه های Wine",
+            "accounts": "حساب‌ها",
+            "systemInformation": "اطلاعات سیستم"
         },
         "open-config-file": "باز کردن فایل پیکربندی",
         "reset-hyperplay": "Reset HyperPlay",
@@ -649,16 +658,24 @@
             "gpuDriver": "راننده: {{driverVersion}}",
             "legendaryVersion": "افسانه: {{legendaryVersion}}",
             "memory": "حافظه:",
-            "memoryStats": "{{percentUsed}}٪ استفاده شده ({{usedGib}} / {{totalGib}}"
+            "memoryStats": "{{percentUsed}}٪ استفاده شده ({{usedGib}} / {{totalGib}}",
+            "copyToClipboard": "کپی در حافظه موقت"
         },
-        "reset-extension": "افزونه Reset Extension"
+        "reset-extension": "افزونه Reset Extension",
+        "wine": {
+            "manager": {
+                "title": "مدیریت کننده Wine"
+            }
+        }
     },
     "Settings": "تنظیمات",
     "sidebar": {
         "collapse": "بستن ساید بار",
         "uncollapse": "باز کردن سایدبار",
         "downloadManager": "Download Manager",
-        "achievements": "موفقیت"
+        "achievements": "موفقیت",
+        "library": "کتابخانه",
+        "store": "بازار"
     },
     "status": {
         "installing": "در حال نصب",
@@ -698,7 +715,8 @@
         "logout_confirmation": "آیا میخواهید از حساب خود خارج شوید؟",
         "manageaccounts": "مدیریت حسابها",
         "quit": "خروج",
-        "manageStore": "مدیریت فروشگاه ها"
+        "manageStore": "مدیریت فروشگاه ها",
+        "logIn": "ورود"
     },
     "webview": {
         "controls": {
@@ -772,7 +790,8 @@
                         "title": "مرورگر را انتخاب کنید تا از",
                         "useRecoveryPhrase": "واردات با استفاده از عبارت بازیابی راز",
                         "useRecoveryPhraseInfo": "این ویژگی برای کاربران و توسعه دهندگان پیشرفته توصیه می شود. عبارت بازیابی مخفی شما به صورت محلی در MetaMask ذخیره شده و هرگز با HyperPlay به اشتراک گذاشته نمی شود.",
-                        "createNewWallet": "ایجاد کیف پول جدید MM Expansion"
+                        "createNewWallet": "ایجاد کیف پول جدید MM Expansion",
+                        "learnMore": "بیش‌تر بدانید"
                     },
                     "info": {
                         "title": "کیف پول چیست؟?",
@@ -785,7 +804,8 @@
                             "title": "خانه ای برای دارایی های دیجیتال شما"
                         },
                         "createWalletCTA": "ایجاد کیف پول",
-                        "createWalletDescription": "در “Create a Wallet” زیر کلیک کنید اگر کیف پول ندارید یا می خواهید یک کیف جدید ایجاد کنید:"
+                        "createWalletDescription": "در “Create a Wallet” زیر کلیک کنید اگر کیف پول ندارید یا می خواهید یک کیف جدید ایجاد کنید:",
+                        "skip": "فعلا رد شوید"
                     },
                     "scan": {
                         "details": "یک کانال ارتباطی رمزگذاری شده ایجاد کنید. کلیدهای شما هرگز با HyperPlay به اشتراک گذاشته نمی شوند.",
@@ -816,7 +836,8 @@
             }
         },
         "browserImport": {
-            "appId": "App Id"
+            "appId": "App Id",
+            "profile": "نمایه"
         },
         "achievements": {
             "addThisGame": "اضافه کردن این بازی",
@@ -833,7 +854,10 @@
         "linkSteamAccountTitle": "Link Steam Account",
         "gamecard": {
             "extracting": "استخراج ...",
-            "installed": "آماده بازی"
+            "installed": "آماده بازی",
+            "paused": "متوقف شده",
+            "distributables": "نصب Distributables",
+            "installing": "در حال دانلود"
         },
         "syncing": "...",
         "viewPortfolio": "View Portfolio",
@@ -844,7 +868,19 @@
         "linkSteamAccountCta": "به Steam Sign در",
         "viewItem": "مشاهده (X5X)",
         "viewMyAccount": "مشاهده حساب من",
-        "publicAlpha": "عمومی آلفا"
+        "publicAlpha": "عمومی آلفا",
+        "buttons": {
+            "noThanks": "نه ممنون",
+            "agree": "موافقم"
+        },
+        "logOut": "خروج",
+        "misc": "هرگز",
+        "copyUrl": "رونوشت از نشانی",
+        "Sync": "همگامسازی",
+        "turnAnalyticsOff": "خاموش کردن",
+        "turnAnalyticsOn": "روشن کردن",
+        "folder": "پوشه",
+        "discordApp": "Discord"
     },
     "hyperplayOverlay": {
         "txnRequest": {
@@ -889,7 +925,11 @@
         "title": "ممنون از تو برای تسلیم!"
     },
     "gameRelease": {
-        "prototype": "Prototype"
+        "prototype": "Prototype",
+        "beta": "Beta",
+        "alpha": "آلفا",
+        "demo": "دمو",
+        "main": "اصلی"
     },
     "quest": {
         "associatedGames": "بازی های مرتبط",
@@ -902,7 +942,9 @@
             "playToStart": "این بازی را برای شروع خط خود بازی کنید!",
             "progressTowardsStreak": "پیشرفت در مسیر امروز.",
             "streakCompleted": "Streak تکمیل شد! از پاداش های خود در حال حاضر بپرسید.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "days": "روزها",
+            "now": "اکنون"
         },
         "readyForClaim": "آمادگی برای ادعای",
         "type": {
@@ -918,7 +960,13 @@
         "notEnoughGas": "تعادل کیف پول کافی برای ادعای پاداش شما به دلیل هزینه های گاز یک کیف پول مختلف را امتحان کنید یا این کیف پول را قبل از دوباره پر کنید.",
         "needMoreAchievements": "شما باید {{percent}}٪ از دستاوردهای در یکی از این بازی ها را تکمیل کنید.",
         "claimFailed": "مطالبات شکست خورده",
-        "claimFailedMessage": "لطفا یک بار دیگر امتحان کنید. اگر هنوز کار نمی کند، یک بلیط پشتیبانی Discord ایجاد کنید."
+        "claimFailedMessage": "لطفا یک بار دیگر امتحان کنید. اگر هنوز کار نمی کند، یک بلیط پشتیبانی Discord ایجاد کنید.",
+        "active": "فعال",
+        "Play": "نمایش",
+        "points": "نقاط",
+        "signIn": "ورود",
+        "sync": "همگامسازی",
+        "reward": "پاداش"
     },
     "quests": {
         "playstreak": {
@@ -930,7 +978,8 @@
         "quests": "ماموریت ها"
     },
     "sideload": {
-        "warningMessage": "Side-load یک بازی یک ویژگی در نظر گرفته شده برای توسعه دهندگان و کاربران با تجربه قدرت است. یک نصب کننده جانبی که حاوی بدافزار است می تواند کامپیوتر شما را به خطر اندازد و منجر به سرقت وجوه شود."
+        "warningMessage": "Side-load یک بازی یک ویژگی در نظر گرفته شده برای توسعه دهندگان و کاربران با تجربه قدرت است. یک نصب کننده جانبی که حاوی بدافزار است می تواند کامپیوتر شما را به خطر اندازد و منجر به سرقت وجوه شود.",
+        "warningTitle": "مهم:"
     },
     "ALL": "همه چیز",
     "accounts": "حساب",
@@ -962,5 +1011,7 @@
     },
     "importGameErrorMessage": "نه یک پوشه بازی معتبر، وارد کردن بازی امکان پذیر نیست",
     "importGameErrorMessageExecutable": "بازی Game غیر قابل حذف، بازی واردات امکان پذیر نیست",
-    "importGameErrorTitle": "خطای بازی واردات"
+    "importGameErrorTitle": "خطای بازی واردات",
+    "analytics": "تحلیل‌ها",
+    "profile": "نمایه"
 }
