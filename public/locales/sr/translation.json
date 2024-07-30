@@ -154,7 +154,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "#Biti #free @sure #free @want# to reset HyperPlay? @This #volja #brisati @all @Setting a Caching ali @will ne #brisati #tvoj @Install #igra ili #tvoj @Epic credentials. Portable #inačica (AppImage, WinPortable, #...) @of HyperPlay #nužda #na #biti @restart @manually @afterwards#."
+                "message": "#Biti #free @sure #free @want# to reset HyperPlay? @This #volja #brisati @all @Setting a Caching ali @will ne #brisati #tvoj @Install #igra ili #tvoj @Epic credentials. Portable #inačica (AppImage, WinPortable, #...) @of HyperPlay #nužda #na #biti @restart @manually @afterwards#.",
+                "title": "Ресетуј HyperPlay"
             }
         }
     },
@@ -183,7 +184,9 @@
         "syncing": "Синхронизовање",
         "unsync": "Десинхронизуј",
         "login": "Пријави се",
-        "continue": "Настави"
+        "continue": "Настави",
+        "download": "Преузми",
+        "update": "Ажурирај"
     },
     "controller": {
         "hints": {
@@ -543,7 +546,8 @@
         "alt-nile-bin": "Изаберите алтернативни Нил Бинари",
         "autodxvknvapi": "#Automobil @Install/#Poboljšati DXVK-NVAPI @on #Prefiks",
         "steamId": "@Steam",
-        "autoLaunchHyperPlay": "#Automobil #Otvaranje"
+        "autoLaunchHyperPlay": "#Automobil #Otvaranje",
+        "msync": "Омогућите Есинц"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -567,7 +571,9 @@
             "log": "Пријава",
             "other": "Остало",
             "sync": "Синһронизација Чувања у Облаку",
-            "wineExt": "Вине Ектенсионс"
+            "wineExt": "Вине Ектенсионс",
+            "systemInformation": "Информације о систему",
+            "accounts": "Налози"
         },
         "default_hint": "Промене у овом одељку се примењују само као подразумеване вредности приликом инсталирања игара. Ако желите да промените подешавања већ инсталиране игре, користите дугме Подешавања на страници игре.",
         "eacRuntime": {
@@ -602,7 +608,9 @@
             "showDetailed": "#Sajam @detail #sustav #specifikacija",
             "systemModel": "#Sustav #Model#:",
             "steamDeck": "@Steam",
-            "version": "#Inačica: [@X9@X]"
+            "version": "#Inačica: [@X9@X]",
+            "copyToClipboard": "Копирај у клипборд",
+            "os": "Operating system:"
         },
         "gamesSettings": "#Igra",
         "reset-extension": "Reset",
@@ -657,7 +665,8 @@
             "list": "Пребаците се на изглед листе"
         },
         "alphabeticalZA": "Alphabetical @Z-@A",
-        "alphabeticalAZ": "Alphabetical @A-@Z"
+        "alphabeticalAZ": "Alphabetical @A-@Z",
+        "label": "Библиотека"
     },
     "status": {
         "logging": "Пријављивањем...",
@@ -669,7 +678,9 @@
         "collapse": "Скупи бочну траку",
         "uncollapse": "Поништи бочну траку",
         "downloadManager": "#Preuzimanje",
-        "achievements": "#Postignuće"
+        "achievements": "#Postignuće",
+        "library": "Библиотека",
+        "store": "Продавница"
     },
     "userselector": {
         "discord": "Дисцорд",
@@ -680,7 +691,8 @@
         "quit": "Одустати",
         "cancel": "Откажи",
         "quitMessage": "Јесте ли сигурни да желите да прекинете?",
-        "manageStore": "#Snaći #trgovinica"
+        "manageStore": "#Snaći #trgovinica",
+        "logIn": "Пријавите се"
     },
     "webview": {
         "controls": {
@@ -766,13 +778,17 @@
     "gameRelease": {
         "prototype": "@Prototype",
         "alpha": "Alpha",
-        "beta": "@Beta"
+        "beta": "@Beta",
+        "demo": "Проба",
+        "main": "Glavni"
     },
     "hyperplay": {
         "gamecard": {
             "extracting": "#Vaditi#...",
             "installed": "#Spreman #na #predstava",
-            "installing": "@Download#..."
+            "installing": "@Download#...",
+            "distributables": "#Instaliranje",
+            "paused": "Paused"
         },
         "onboarding": {
             "analytics": {
@@ -796,7 +812,8 @@
                         "title": "@Select @the @browser #na #uvoz @from",
                         "orWord": "@OR",
                         "useRecoveryPhrase": "#Uvoz #Uporabiti #Tajna #Oporavak @phrase",
-                        "useRecoveryPhraseInfo": "@This @feature @i #predlagati @for #napredan #korisnik a developers. #Tvoj #tajna #oporavak @phrase @i #čuvati @locally @in MetaMask a nikad @share #uz HyperPlay#."
+                        "useRecoveryPhraseInfo": "@This @feature @i #predlagati @for #napredan #korisnik a developers. #Tvoj #tajna #oporavak @phrase @i #čuvati @locally @in MetaMask a nikad @share #uz HyperPlay#.",
+                        "learnMore": "Saznaj više"
                     },
                     "info": {
                         "createWalletCTA": "#Stvarati @a #lisnica",
@@ -841,7 +858,8 @@
             "connectionConnected": {
                 "title": "#Lisnica #spajati#!",
                 "description": "#Tvoj #lisnica @i #spajati. #Free #biti #spreman #na #igra#."
-            }
+            },
+            "terms": "Услови коришћења"
         },
         "changeWallet": "Swap #lisnica #račun",
         "accesscodes": {
@@ -868,7 +886,8 @@
         "linkSteamAccountTitle": "#Veza @Steam",
         "analyticsOn": "Analytics @i @turn# on",
         "browserImport": {
-            "appId": "App"
+            "appId": "App",
+            "profile": "Профил"
         },
         "connectWallet": "#Spajati #lisnica",
         "viewMyAccount": "#Stav #moj #račun",
@@ -877,10 +896,19 @@
         "otp": "#Jedan #Vrijeme",
         "viewItem": "#Stav [@X5@X]",
         "buttons": {
-            "agree": "@I #pristati"
+            "agree": "@I #pristati",
+            "noThanks": "Не хвала"
         },
         "discordApp": "@Discord",
-        "linkSteamAccountCta": "@Go# to @Steam #znak @in"
+        "linkSteamAccountCta": "@Go# to @Steam #znak @in",
+        "folder": "Фолдер",
+        "misc": "Никад",
+        "logOut": "Одјавити се",
+        "syncing": "Синхронизовање…",
+        "turnAnalyticsOff": "Turn off",
+        "turnAnalyticsOn": "Укључи",
+        "copyUrl": "Копирај URL адресу",
+        "Sync": "Синхронизуј"
     },
     "exit_game": "#Izlaz",
     "accounts": "#račun",
@@ -949,7 +977,9 @@
             "playToStart": "#Predstava @this #igra #na #početak #tvoj streak#!",
             "progressTowardsStreak": "#napredak ususret #današnji streak#.",
             "streakCompleted": "Streak #završen! @Claim #tvoj #nagrada sad#.",
-            "streakProgress": "Streak"
+            "streakProgress": "Streak",
+            "days": "дана",
+            "now": "Now"
         },
         "type": {
             "reputation": "#Reputacija",
@@ -963,7 +993,12 @@
         "claimFailedMessage": "@Please #pokušaj jednom više. Li #free ipak @do ne #rad, #stvarati @a @Discord #pomoć #karta#.",
         "createDiscordTicket": "@Created @Discord #karta",
         "notEnoughGas": "#Nedostatan #lisnica #bilanca #na @claim #tvoj #nagrada @due to #gas #trošak. #Pokušaj @a #drugačiji #lisnica ili #obnavljati @this #jedan prije @retry#.",
-        "errorMessage": "Tamo #biti @a #zabuna #uz @the #transakcija#."
+        "errorMessage": "Tamo #biti @a #zabuna #uz @the #transakcija#.",
+        "active": "Активан",
+        "Play": "Играј сад",
+        "signIn": "Пријава",
+        "points": "Points",
+        "sync": "Синхронизуј"
     },
     "quests": {
         "playstreak": {
@@ -984,7 +1019,8 @@
     "importGameErrorTitle": "#Uvoz #Igra",
     "notification": {
         "wine-download": {
-            "message": "@Setting up @the default #kompatibilnost #red"
+            "message": "@Setting up @the default #kompatibilnost #red",
+            "title": "Вине Манагер"
         }
     },
     "sideload": {
@@ -993,5 +1029,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#."
-    }
+    },
+    "profile": "Профил",
+    "ALL": "СВЕ",
+    "analytics": "Рашчлањивања"
 }
