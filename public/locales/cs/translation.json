@@ -968,7 +968,8 @@
         "quests": "Úkoly",
         "signIn": "Přihlásit se",
         "sync": "Synchronizovat",
-        "connectSteamAccount": "Připojit týmový účet"
+        "connectSteamAccount": "Připojit týmový účet",
+        "pointsClaimed": "Body Tvrzené"
     },
     "quests": {
         "playstreak": {
