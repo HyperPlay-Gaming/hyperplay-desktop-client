@@ -170,7 +170,10 @@
         "login": "Accedi",
         "sync": "Sincronizza",
         "syncing": "Sincronizzazione in corso",
-        "unsync": "Annulla sincronizzazione"
+        "unsync": "Annulla sincronizzazione",
+        "update": "Aggiorna",
+        "continue": "Continuare",
+        "download": "Scarica"
     },
     "controller": {
         "hints": {
@@ -209,7 +212,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Tempo stimato"
     },
     "epic": {
         "offline-notification-body": "I servizi online potrebbero non funzionare completamente poiché i server di Epic Games sono offline!",
@@ -392,7 +396,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Aperto",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -572,7 +576,8 @@
         "addgamestoapplications": "Aggiungi giochi alla lista applicazioni automaticamente",
         "showMetalOverlay": "Mostra Overlay Statistiche",
         "alt-nile-bin": "Scegli un binario Nile alternativo",
-        "autodxvknvapi": "Installa/Aggiorna automaticamente DXVK/VKD3D sul Prefix"
+        "autodxvknvapi": "Installa/Aggiorna automaticamente DXVK/VKD3D sul Prefix",
+        "msync": "Abilita l'Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -607,19 +612,33 @@
             "log": "Log",
             "other": "Altro",
             "sync": "Sincronizzazione salvataggi",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "Informazioni di sistema",
+            "accounts": "Profili"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "systemInformation": {
+            "copyToClipboard": "Copia negli appunti",
+            "os": "Sistema Operativo:"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
         }
     },
     "Settings": "Impostazioni",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Libreria",
+        "store": "Salva",
+        "achievements": "Obiettivi"
     },
     "status": {
         "installing": "Installazione in corso",
@@ -660,7 +679,8 @@
         "manageaccounts": "Gestione Account",
         "quit": "Esci",
         "cancel": "Annulla",
-        "quitMessage": "Sei sicuro di voler uscire?"
+        "quitMessage": "Sei sicuro di voler uscire?",
+        "logIn": "Accedi"
     },
     "webview": {
         "controls": {
@@ -697,5 +717,84 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Giochi Amazon",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "onboarding": {
+            "terms": "Termini di Servizio",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Approfondisci"
+                    },
+                    "info": {
+                        "skip": "Salta per ora"
+                    }
+                }
+            }
+        },
+        "buttons": {
+            "agree": "Accetto",
+            "noThanks": "No grazie"
+        },
+        "browserImport": {
+            "profile": "Profilo"
+        },
+        "folder": "Cartella",
+        "gamecard": {
+            "installing": "Scaricamento in corso...",
+            "paused": "In pausa",
+            "distributables": "Installazione di distributori"
+        },
+        "logOut": "Disconnettiti",
+        "copyUrl": "Copia URL",
+        "discordApp": "Discord",
+        "syncing": "Sincronizzazione...",
+        "turnAnalyticsOff": "Disabilita",
+        "Sync": "Sincronizza",
+        "turnAnalyticsOn": "Abilita",
+        "misc": "Mai"
+    },
+    "gameRelease": {
+        "alpha": "Alfa",
+        "demo": "Demo",
+        "main": "Principali",
+        "beta": "Beta"
+    },
+    "quest": {
+        "active": "Attivo",
+        "claimed": "Ricevuto",
+        "quests": "Missioni",
+        "Play": "Avvia",
+        "signIn": "Accedi",
+        "playstreak": {
+            "days": "giorni",
+            "now": "Adesso"
+        },
+        "points": "Punti",
+        "sync": "Sincronizza",
+        "type": {
+            "reputation": "Reputazione"
+        },
+        "connectSteamAccount": "Associa conto della squadra",
+        "reputation": "Reputazione"
+    },
+    "quests": {
+        "quests": "Missioni"
+    },
+    "ALL": "Tutto",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "CONFIRMED": "Transazione confermata"
+        }
+    },
+    "analytics": "Statistiche",
+    "profile": "Profilo",
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer"
+        }
+    },
+    "sideload": {
+        "warningTitle": "Importante"
+    }
 }
