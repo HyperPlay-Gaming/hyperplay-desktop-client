@@ -174,7 +174,10 @@
         "login": "로그인",
         "sync": "싱크",
         "syncing": "싱크중",
-        "unsync": "싱크 해제"
+        "unsync": "싱크 해제",
+        "continue": "계속하기",
+        "download": "다운로드",
+        "update": "갱신"
     },
     "controller": {
         "hints": {
@@ -214,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "title_dm": "다운로드 Manager"
+        "title_dm": "다운로드 Manager",
+        "ETA": "예상 시간"
     },
     "epic": {
         "offline-notification-body": "Epic Games 서버가 오프라인 상태이므로 온라인 서비스가 완전히 작동하지 않을 수 있습니다!",
@@ -405,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "열기",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -468,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "다운로드 일시정지",
+            "resume": "계속 다운로드"
         }
     },
     "Recent": "최근 플레이한 게임",
@@ -589,7 +595,8 @@
         "autodxvknvapi": "Prefix에 자동 설치/업데이트 DXVK-NVAPI",
         "autoLaunchHyperPlay": "자동차 출시 하이퍼 뚱 베어",
         "dxvkfpslimit": "제한 FPS (DX9, 10 및 11)",
-        "steamId": "증기 ID"
+        "steamId": "증기 ID",
+        "msync": "Esync 활성화"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -624,7 +631,9 @@
             "log": "Log",
             "other": "기타",
             "sync": "세이브-동기화",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "시스템 정보",
+            "accounts": "장부"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
@@ -647,16 +656,26 @@
             "showDetailed": "상세한 시스템 사양 보기",
             "steamDeck": "증기 갑판",
             "systemModel": "체계 모형:",
-            "gpu": "GPU:"
+            "gpu": "GPU:",
+            "copyToClipboard": "클립보드에 복사",
+            "os": "운영체제:"
         },
         "reset-extension": "재설정 확장",
-        "gamesSettings": "게임 설정"
+        "gamesSettings": "게임 설정",
+        "wine": {
+            "manager": {
+                "title": "Wine 관리자"
+            }
+        }
     },
     "Settings": "설정",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
-        "downloadManager": "다운로드 Manager"
+        "downloadManager": "다운로드 Manager",
+        "store": "마켓",
+        "library": "도서관",
+        "achievements": "달성도"
     },
     "status": {
         "installing": "설치 중",
@@ -696,7 +715,8 @@
         "logout_confirmation": "정말로 로그아웃 하시겠습니까?",
         "manageaccounts": "계정 관리",
         "quit": "종료",
-        "manageStore": "매장 찾기"
+        "manageStore": "매장 찾기",
+        "logIn": "Log in"
     },
     "webview": {
         "controls": {
@@ -752,7 +772,8 @@
             }
         },
         "browserImport": {
-            "appId": "앱 Id"
+            "appId": "앱 Id",
+            "profile": "프로필"
         },
         "onboarding": {
             "analytics": {
@@ -808,7 +829,8 @@
                         "createNewWallet": "새로운 MM 확장 지갑 만들기",
                         "useRecoveryPhrase": "비밀번호 복구",
                         "useRecoveryPhraseInfo": "이 기능은 고급 사용자 및 개발자에게 추천합니다. 비밀 복구 구문은 MetaMask에서 로컬로 저장되며 HyperPlay와 결코 공유되지 않습니다.",
-                        "details": "아래 브라우저에는 MetaMask가 설치되어 있습니다. 가져오기와 같은 것을 선택하세요."
+                        "details": "아래 브라우저에는 MetaMask가 설치되어 있습니다. 가져오기와 같은 것을 선택하세요.",
+                        "learnMore": "더 알아보기"
                     }
                 },
                 "pleaseConnect": "지갑을 연결하거나 Metamask 모바일 앱을 다운로드하십시오.\n시작 :",
@@ -821,7 +843,8 @@
             "connectionConnected": {
                 "title": "지갑 연결!",
                 "description": "지갑이 연결됩니다. 게임이 준비되어 있습니다."
-            }
+            },
+            "terms": "서비스 약관"
         },
         "achievements": {
             "noAchievements": {
@@ -834,7 +857,10 @@
         },
         "gamecard": {
             "installed": "놀기",
-            "extracting": "추출 ..."
+            "extracting": "추출 ...",
+            "installing": "내려 받는 중...",
+            "distributables": "분산형 설치",
+            "paused": "일시중지됨"
         },
         "linkSteamAccountDescription": "HyperPlay 계정을 연결하기 위해 Steam에 로그인하십시오.",
         "linkSteamAccountTitle": "링크 증기 계정",
@@ -842,7 +868,8 @@
         "connectWallet": "지갑 연결",
         "currentWallet": "현재 지갑",
         "buttons": {
-            "agree": "나는 동의한다"
+            "agree": "나는 동의한다",
+            "noThanks": "사양하겠습니다"
         },
         "viewItem": "{{item}} 보기",
         "linkSteamAccountCta": "Steam 로그인",
@@ -852,7 +879,15 @@
         "analyticsOff": "Analytics 설정",
         "analyticsOn": "Analytics가 켜집니다",
         "changeWallet": "Swap 지갑 계정",
-        "otp": "1 시간 Passcode"
+        "otp": "1 시간 Passcode",
+        "logOut": "로그아웃",
+        "misc": "절대",
+        "copyUrl": "URL 복사",
+        "Sync": "동기화",
+        "turnAnalyticsOff": "끄기",
+        "turnAnalyticsOn": "켜기",
+        "discordApp": "디스코드",
+        "folder": "폴더"
     },
     "importGameErrorMessage": "유효한 게임 폴더가 아닙니다, 수입 게임은 불가능합니다",
     "exit_game": "출구 Game",
@@ -910,20 +945,32 @@
             "playToStart": "당신의 streak을 시작하는이 게임을 재생!",
             "progressTowardsStreak": "오늘 streak을 향해 진행.",
             "streakCompleted": "Streak 완료! 지금 보상을 받으세요.",
-            "streakProgress": "Streak 진행"
+            "streakProgress": "Streak 진행",
+            "days": "일수",
+            "now": "지금"
         },
         "View Game": "게임 보기",
         "reward": "상품정보",
         "claimFailed": "Claim 실패",
         "notEnoughGas": "가스 수수료로 인해 보상을 청구하는 충분한 지갑 잔액. 다른 지갑을 시도하거나 retrying하기 전에이 것을 보충하십시오.",
         "type": {
-            "playstreak": "다운로드"
+            "playstreak": "다운로드",
+            "reputation": "평판"
         },
         "claimFailedMessage": "한 번 더 시도하십시오. 여전히 작동하지 않는 경우 Discord 지원 티켓을 만듭니다.",
-        "createDiscordTicket": "Discord 티켓 만들기"
+        "createDiscordTicket": "Discord 티켓 만들기",
+        "active": "활성",
+        "claimed": "수령함",
+        "quests": "퀘스트",
+        "Play": "재생",
+        "signIn": "로그인",
+        "points": "포인트",
+        "sync": "동기화",
+        "reputation": "평판"
     },
     "sideload": {
-        "warningMessage": "Side-loading 게임은 개발자와 숙련 된 전력 사용자를위한 기능입니다. 악성 프로그램이 컴퓨터를 손상하고 자금을 납치 할 수있는 설치 프로그램을로드."
+        "warningMessage": "Side-loading 게임은 개발자와 숙련 된 전력 사용자를위한 기능입니다. 악성 프로그램이 컴퓨터를 손상하고 자금을 납치 할 수있는 설치 프로그램을로드.",
+        "warningTitle": "중요"
     },
     "quests": {
         "playstreak": {
@@ -931,7 +978,8 @@
                 "client": "현재 로그인되지 않습니다, streak 진행 상황을 추적하지 않습니다. 진행 상황을 추적하기 위해 top-right dropdown을 통해 HyperPlay에 로그인하십시오.",
                 "overlay": "현재 로그인되지 않습니다, streak 진행 상황을 추적하지 않습니다. 게임을 종료하고 HyperPlay에 로그인하십시오."
             }
-        }
+        },
+        "quests": "퀘스트"
     },
     "accounts": "계정 만들기",
     "overlay": {
@@ -952,11 +1000,18 @@
         }
     },
     "gameRelease": {
-        "prototype": "Prototype의 특징"
+        "prototype": "Prototype의 특징",
+        "alpha": "투명도",
+        "beta": "베타",
+        "demo": "데모",
+        "main": "주연"
     },
     "importGameErrorTitle": "게임 오류",
     "email_subscription": {
         "title": "감사합니다!",
         "subtitle": "이제 커뮤니티의 일원이며, 소중한 업데이트와 통찰력을 공유하고 싶습니다."
-    }
+    },
+    "profile": "프로필",
+    "analytics": "진단공유",
+    "ALL": "모두"
 }
