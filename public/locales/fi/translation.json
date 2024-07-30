@@ -789,7 +789,8 @@
         "notEnoughGas": "Riittämätön lompakkotasapaino palkkion saamiseksi kaasumaksujen vuoksi. Kokeile erilaista lompakkoa tai täytä tämä ennen retkeilyä.",
         "needMoreAchievements": "Sinun on täytettävä {{percent}}% saavutuksistasi näissä peleissä.",
         "quests": "Quests",
-        "View Game": "Näkymä pelistä"
+        "View Game": "Näkymä pelistä",
+        "pointsClaimed": "Väitetyt pisteet"
     },
     "gameRelease": {
         "main": "Oletus",
