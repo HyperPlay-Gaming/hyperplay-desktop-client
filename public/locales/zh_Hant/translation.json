@@ -160,7 +160,8 @@
         "syncing": "正在同步",
         "unsync": "不同步",
         "continue": "繼續",
-        "download": "下載"
+        "download": "下載",
+        "update": "更新"
     },
     "controller": {
         "hints": {
@@ -386,7 +387,7 @@
         "offline-retry-in": "離線。重試時間為 {{seconds}} 秒。",
         "retrying": "重試中"
     },
-    "Open": "",
+    "Open": "開啟",
     "options": {
         "advanced": {
             "key": "變量名稱",
@@ -566,7 +567,8 @@
         "disable_logs": "禁用日誌",
         "addgamestoapplications": "自動將遊戲新增到應用程式",
         "showMetalOverlay": "顯示統計數據疊加",
-        "alt-nile-bin": "選擇替代尼羅河二進制"
+        "alt-nile-bin": "選擇替代尼羅河二進制",
+        "msync": "啟用 Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -601,7 +603,9 @@
             "log": "日誌",
             "other": "其他",
             "sync": "存檔-同步",
-            "wineExt": "Wine 擴充元件"
+            "wineExt": "Wine 擴充元件",
+            "accounts": "帳戶",
+            "systemInformation": "系統資訊(_Y)"
         },
         "open-config-file": "開啟配置檔案",
         "reset-hyperplay": "重設 HyperPlay",
@@ -609,12 +613,24 @@
             "label": "Save Location:",
             "warning": "雲端存檔功能處於測試階段，請在同步前備份你的存檔（以防出現問題）"
         },
-        "gamesSettings": "遊戲設置"
+        "gamesSettings": "遊戲設置",
+        "systemInformation": {
+            "copyToClipboard": "複製到剪貼簿",
+            "os": "Operating system:"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine 管理員"
+            }
+        }
     },
     "Settings": "設定",
     "sidebar": {
         "collapse": "收起側邊欄",
-        "uncollapse": "展開側邊欄"
+        "uncollapse": "展開側邊欄",
+        "store": "Marketplace",
+        "achievements": "成就",
+        "library": "庫"
     },
     "status": {
         "installing": "正在安裝",
@@ -653,7 +669,8 @@
         "logout": "登出",
         "logout_confirmation": "您確定要登出嗎？",
         "manageaccounts": "管理帳號",
-        "quit": "退出"
+        "quit": "退出",
+        "logIn": "登入"
     },
     "webview": {
         "controls": {
@@ -708,7 +725,8 @@
                         "cantFindProfile": "找不到您的瀏覽器配置文件？",
                         "createNewWallet": "創建新的 MM 擴展錢包",
                         "details": "通過導入，您的 MetaMask 安裝和  設置將被導入 HyperPlay。",
-                        "useRecoveryPhrase": "使用秘密恢復短語訪問"
+                        "useRecoveryPhrase": "使用秘密恢復短語訪問",
+                        "learnMore": "了解更多"
                     }
                 },
                 "title": "錢包連接",
@@ -763,7 +781,19 @@
         "wallet": {
             "connected": "已連接",
             "notConnected": "未連接"
-        }
+        },
+        "folder": "資料夾",
+        "gamecard": {
+            "installing": "下載中...",
+            "paused": "暫停",
+            "extracting": "提取...",
+            "distributables": "批发"
+        },
+        "browserImport": {
+            "profile": "個人資料"
+        },
+        "logOut": "登出",
+        "Sync": "同步"
     },
     "hyperplayOverlay": {
         "chainRequest": {
@@ -818,5 +848,46 @@
     },
     "amazon": "亞馬遜",
     "Amazon Games": "亞馬遜遊戲",
-    "prime-gaming": "優質遊戲"
+    "prime-gaming": "優質遊戲",
+    "gameRelease": {
+        "demo": "體驗",
+        "prototype": "原型",
+        "alpha": "透明度",
+        "beta": "Beta",
+        "main": "主要"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "兼容性層"
+        }
+    },
+    "quest": {
+        "active": "有效",
+        "claimed": "已領取",
+        "connectSteamAccount": "連結團隊帳戶",
+        "quests": "任務",
+        "reputation": "聲望",
+        "signIn": "登入",
+        "Play": "遊玩",
+        "playstreak": {
+            "days": "天",
+            "now": "當前"
+        },
+        "points": "點",
+        "sync": "同步",
+        "type": {
+            "reputation": "聲望"
+        }
+    },
+    "sideload": {
+        "warningMessage": "側載遊戲是專為開發人員和有經驗的高級用戶提供的功能。側載包含惡意軟件的安裝程序可能會危及你的電腦並導致資金被盜。",
+        "warningTitle": "重要"
+    },
+    "ALL": "全部",
+    "analytics": "分析",
+    "exit_game": "退出遊戲",
+    "quests": {
+        "quests": "任務"
+    },
+    "profile": "個人資料"
 }
