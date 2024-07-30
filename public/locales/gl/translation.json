@@ -970,7 +970,8 @@
         "points": "Puntos",
         "signIn": "Rexistro",
         "sync": "Sincronizar",
-        "reputation": "Reputación"
+        "reputation": "Reputación",
+        "pointsClaimed": "Os puntos Afirmaron"
     },
     "email_subscription": {
         "title": "Grazas Para subscribir!",
