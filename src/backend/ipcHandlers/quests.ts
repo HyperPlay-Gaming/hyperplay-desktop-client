@@ -2,6 +2,7 @@ import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
 import { DEV_PORTAL_URL } from 'common/constants'
 import { GenericApiResponse, PointsClaimReturn } from 'common/types'
 import { app, ipcMain } from 'electron'
+import { logInfo } from '../api/misc'
 
 ipcMain.handle('getQuests', async (e, projectId) => {
   let url = `${DEV_PORTAL_URL}api/v1/quests?questStatus=ACTIVE`
@@ -50,6 +51,25 @@ ipcMain.handle('claimQuestPointsReward', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/points-claim`
   return (await fetchWithCookie({ url, method: 'POST' })) as PointsClaimReturn
 })
+
+ipcMain.handle(
+  'confirmRewardClaim',
+  async (
+    e,
+    params: {
+      transactionHash: string
+      rewardId: number
+    }
+  ) => {
+    logInfo(`confirmRewardClaim: ${JSON.stringify(params)}`)
+    // const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${params.rewardId}/points-claim`
+    // return fetchWithCookie({
+    //   url,
+    //   method: 'POST',
+    //   body: JSON.stringify({ transactionHash: params.transactionHash })
+    // })
+  }
+)
 
 ipcMain.handle('completeExternalTask', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/completed`

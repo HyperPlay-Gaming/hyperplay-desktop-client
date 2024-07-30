@@ -93,7 +93,7 @@ export function QuestDetailsWrapper({
   selectedQuestId
 }: QuestDetailsWrapperProps) {
   const {
-    writeContract,
+    writeContractAsync,
     error: writeContractError,
     isPending: isPendingWriteContract,
     reset: resetWriteContract
@@ -131,6 +131,28 @@ export function QuestDetailsWrapper({
   const claimPointsMutation = useMutation({
     mutationFn: async (reward: Reward) => {
       return claimPoints(reward)
+    }
+  })
+
+  const confirmClaimMutation = useMutation({
+    mutationFn: async (params: {
+      rewardId: number
+      transactionHash: string
+    }) => {
+      console.log('triggering confirmRewardClaim', params)
+      return window.api.confirmRewardClaim(params)
+    },
+    retry: 5,
+    retryDelay: 1000,
+    onError: (error, variables) => {
+      window.api.logError(
+        `Error confirming reward claim ${
+          error.message
+        }, variables: ${JSON.stringify({
+          ...variables,
+          address: account?.address
+        })}`
+      )
     }
   })
 
@@ -247,11 +269,18 @@ export function QuestDetailsWrapper({
       return
     }
 
-    return mintReward({
+    // awaiting is fine for now because we're doing a single write contract at a time,
+    // but we might want to not block the UI thread when we implement multiple claims
+    const hash = await mintReward({
       questId: questMeta.id,
       address: account.address,
       reward,
-      writeContract
+      writeContractAsync
+    })
+
+    await confirmClaimMutation.mutateAsync({
+      rewardId: reward.id,
+      transactionHash: hash
     })
   }
 

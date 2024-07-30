@@ -24,6 +24,11 @@ export const getQuests = async (projectId?: string) =>
 export const getQuest = async (questId: number) =>
   ipcRenderer.invoke('getQuest', questId)
 
+export const confirmRewardClaim = async (params: {
+  transactionHash: string
+  rewardId: number
+}) => ipcRenderer.invoke('confirmRewardClaim', params)
+
 export const getUserPlayStreak = async (questId: number) =>
   ipcRenderer.invoke('getUserPlayStreak', questId)
 

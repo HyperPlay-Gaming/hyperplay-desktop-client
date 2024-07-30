@@ -1,18 +1,20 @@
 import { DepositContract, Reward, RewardClaimSignature } from 'common/types'
 import { questRewardAbi } from 'frontend/abis/RewardsAbi'
-import { WriteContractMutate } from 'wagmi/query'
+import { WriteContractMutateAsync } from 'wagmi/query'
 import { Config } from 'wagmi'
 
 export async function mintReward({
   reward,
   questId,
   address,
-  writeContract
+  writeContractAsync,
+  onSuccess
 }: {
   reward: Reward
   questId: number
   address: `0x${string}`
-  writeContract: WriteContractMutate<Config, unknown>
+  writeContractAsync: WriteContractMutateAsync<Config, unknown>
+  onSuccess?: (hash: string) => void
 }) {
   if (reward.chain_id === null) {
     throw Error('chain id is not set for reward when trying to mint')
@@ -55,7 +57,8 @@ export async function mintReward({
     reward.amount_per_user &&
     reward.decimals
   ) {
-    writeContract(
+    console.log('trigger hash')
+    return writeContractAsync(
       {
         address: depositContractAddress,
         abi: questRewardAbi,
@@ -70,12 +73,20 @@ export async function mintReward({
         ]
       },
       {
-        onError: logError
+        onError: logError,
+        onSuccess: (hash) => {
+          window.api.logInfo(`Success hash: ${hash}`)
+          console.log('success hash', hash)
+        },
+        onSettled: () => {
+          window.api.logInfo('Settled')
+          console.log('settled')
+        }
       }
     )
   } else if (isERC1155Reward && reward.decimals !== null) {
     const { token_id, amount_per_user } = reward.token_ids[0]
-    writeContract(
+    return writeContractAsync(
       {
         address: depositContractAddress,
         abi: questRewardAbi,
@@ -91,11 +102,12 @@ export async function mintReward({
         ]
       },
       {
-        onError: logError
+        onError: logError,
+        onSuccess
       }
     )
   } else if (reward.reward_type === 'ERC721' && reward.amount_per_user) {
-    writeContract(
+    return writeContractAsync(
       {
         address: depositContractAddress,
         abi: questRewardAbi,
@@ -111,8 +123,11 @@ export async function mintReward({
         ]
       },
       {
-        onError: logError
+        onError: logError,
+        onSuccess
       }
     )
   }
+
+  throw Error('Unsupported reward type')
 }
