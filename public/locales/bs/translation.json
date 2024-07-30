@@ -152,7 +152,10 @@
         "login": "Prijavite se",
         "sync": "Sinhronizirajte",
         "syncing": "Sinhronizanje",
-        "unsync": "Desinhronizirajte"
+        "unsync": "Desinhronizirajte",
+        "continue": "Continue",
+        "download": "Preuzimanje",
+        "update": "Update"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Predviđeno vrijeme"
     },
     "epic": {
         "offline-notification-body": "Online usluge možda neće raditi u potpunosti jer su Epic Games serveri van mreže!",
@@ -369,7 +373,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Open",
     "options": {
         "advanced": {
             "key": "Ime varijable",
@@ -545,7 +549,8 @@
         "disable_logs": "Onemogući dnevnike",
         "addgamestoapplications": "Automatski dodajte igre u aplikacije",
         "showMetalOverlay": "Prikaži preklapanje statistike",
-        "alt-nile-bin": "Odaberite alternativnu Nilsku binarnu"
+        "alt-nile-bin": "Odaberite alternativnu Nilsku binarnu",
+        "msync": "Omogućite Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +585,30 @@
             "log": "Prijavite se",
             "other": "Drugi",
             "sync": "Spremi-Sinhroniziraj",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "Informacije o sistemu"
         },
         "open-config-file": "Otvorite konfig. fajl",
         "reset-hyperplay": "Resetujte HyperPlay",
         "saves": {
             "label": "Sačuvaj lokaciju:",
             "warning": "Funkcija čuvanja u oblaku je u beta verziji, napravite sigurnosnu kopiju vaših sačuvanih podataka prije sinhronizacije (u slučaju da nešto krene po zlu)"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine menadžer"
+            }
+        },
+        "systemInformation": {
+            "os": "Operativni sistem"
         }
     },
     "Settings": "Postavke",
     "sidebar": {
         "collapse": "Skupi bočnu traku",
-        "uncollapse": "Povećaj bočnu traku"
+        "uncollapse": "Povećaj bočnu traku",
+        "library": "Library",
+        "store": "Trgovina"
     },
     "status": {
         "installing": "Instalira se",
@@ -631,7 +647,8 @@
         "logout": "Odjavite se",
         "logout_confirmation": "Jeste li sigurni da se želite odjaviti?",
         "manageaccounts": "Upravljajte računima",
-        "quit": "Odustani"
+        "quit": "Odustani",
+        "logIn": "Prijavite se"
     },
     "webview": {
         "controls": {
@@ -668,5 +685,45 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon igre",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "analytics": "Analitika",
+    "hyperplay": {
+        "Sync": "Sinhronizuj",
+        "misc": "Never",
+        "syncing": "Syncing...",
+        "logOut": "Logout",
+        "turnAnalyticsOff": "Turn off",
+        "browserImport": {
+            "profile": "Profile"
+        },
+        "folder": "Folder",
+        "gamecard": {
+            "paused": "Paused",
+            "distributables": "#Instaliranje"
+        },
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Saznajte više"
+                    }
+                }
+            }
+        },
+        "discordApp": "Discord"
+    },
+    "gameRelease": {
+        "beta": "Beta"
+    },
+    "quest": {
+        "active": "Active",
+        "Play": "Pokreni",
+        "playstreak": {
+            "days": "dana",
+            "now": "Now"
+        },
+        "points": "Points",
+        "sync": "Sinhronizuj"
+    },
+    "profile": "Profile"
 }
