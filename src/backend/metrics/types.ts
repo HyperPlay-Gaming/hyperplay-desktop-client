@@ -296,6 +296,49 @@ export interface HyperPlaySummonQuestSucceeded {
   sensitiveProperties?: never
 }
 
+// fired when a quest card or quest log item is clicked and the quest details are shown
+export interface QuestViewed {
+  event: 'Quest Viewed'
+  properties: {
+    quest: {
+      id: string
+    }
+  }
+  sensitiveProperties?: never
+}
+
+// TODO: refactor and filter out NULL values in _trackEventPrivate so we can have null values in the type
+// and so we can reuse the same type in src/common/types
+interface Reward {
+  id: number
+  reward_type: 'ERC20' | 'ERC721' | 'ERC1155' | 'POINTS' | 'EXTERNAL-TASKS'
+  name: string
+  contract_address: `0x${string}`
+  /* eslint-disable-next-line */
+  token_ids: { amount_per_user: string; token_id: number }[]
+  image_url: string
+}
+
+type RewardPropertiesType = Reward & { quest_id: string }
+
+export interface RewardClaimStarted {
+  event: 'Reward Claim Started'
+  properties: RewardPropertiesType
+  sensitiveProperties?: never
+}
+
+export interface RewardClaimSuccess {
+  event: 'Reward Claim Success'
+  properties: RewardPropertiesType
+  sensitiveProperties?: never
+}
+
+export interface RewardClaimError {
+  event: 'Reward Claim Error'
+  properties: RewardPropertiesType
+  sensitiveProperties?: never
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -327,5 +370,9 @@ export type PossibleMetricPayloads =
   | HyperPlayLaunched
   | HyperPlaySummonQuestFailed
   | HyperPlaySummonQuestSucceeded
+  | QuestViewed
+  | RewardClaimStarted
+  | RewardClaimSuccess
+  | RewardClaimError
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']

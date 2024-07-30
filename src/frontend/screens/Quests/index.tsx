@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { QuestsSummaryTableWrapper } from './components/QuestsSummaryTableWrapper'
 import { QuestDetailsViewPlayWrapper } from './components/QuestDetailsViewPlay'
 import styles from './index.module.scss'
@@ -11,6 +11,10 @@ export function QuestsPage() {
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
+
+  useEffect(() => {
+    window.api.trackScreen('Quests Page')
+  }, [])
 
   let alertComponent = null
   const showAlert = !isSignedIn
