@@ -7,9 +7,8 @@ import { useNavigate } from 'react-router-dom'
 import { getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
-import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
-import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { useGetRewards } from 'frontend/hooks/useGetRewards'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -26,6 +25,9 @@ export function QuestDetailsViewPlayWrapper({
   const questMeta = questResult.data.data
   const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
   const questPlayStreakData = questPlayStreakResult.data.data
+
+  const rewardsQuery = useGetRewards(selectedQuestId)
+  const questRewards = rewardsQuery.data.data
 
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
@@ -135,19 +137,6 @@ export function QuestDetailsViewPlayWrapper({
       />
     )
   }
-  const rewards =
-    questMeta.rewards?.map((val) => ({
-      title: val.name,
-      imageUrl: val.image_url,
-      chainName: getRewardCategory(val, t),
-      numToClaim:
-        val.amount_per_user && val.decimals
-          ? getDecimalNumberFromAmount(
-              val.amount_per_user.toString(),
-              val.decimals
-            ).toString()
-          : undefined
-    })) ?? []
 
   async function navigateToGamePage(appName: string) {
     const gameInfo = await getGameInfo(appName, 'hyperplay')
@@ -163,7 +152,7 @@ export function QuestDetailsViewPlayWrapper({
       onConnectSteamAccountClick={() => console.log('steam connect click')}
       isSignedIn={true}
       i18n={i18n}
-      rewards={rewards}
+      rewards={questRewards ?? []}
       title={questMeta.name}
       description={questMeta.description}
       collapseIsOpen={collapseIsOpen}
