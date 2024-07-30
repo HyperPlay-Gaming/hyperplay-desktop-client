@@ -138,7 +138,13 @@
         },
         "sync": {
             "error": "נתיב לא חוקי",
-            "title": "בחרו מיקום עבור שמירות במשחק"
+            "title": "בחרו מיקום עבור שמירות במשחק",
+            "button": "בחרו"
+        },
+        "reset-app": {
+            "question": {
+                "title": "אפס את HyperPlay"
+            }
         }
     },
     "wine": {
@@ -156,7 +162,11 @@
         "login": "היכנס",
         "cancel": "ביטול",
         "continue": "המשך",
-        "go_to_library": "ללכת לספריה"
+        "go_to_library": "ללכת לספריה",
+        "update": "עדכון",
+        "download": "הורדה",
+        "sync": "סנכרן",
+        "syncing": "מסנכרן"
     },
     "controller": {
         "hints": {
@@ -410,7 +420,8 @@
         "start-in-tray": "התחל מצומצם",
         "steamruntime": "השתמש בSteam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "תיקיית WinePrefix"
+        "wineprefix": "תיקיית WinePrefix",
+        "msync": "הפעל Esync"
     },
     "status": {
         "processing": "מעבד קבצים, נא לחכות",
@@ -583,7 +594,9 @@
             "general": "כללי",
             "log": "לוג",
             "other": "אחר",
-            "sync": "סנכרן שמירות בענן"
+            "sync": "סנכרן שמירות בענן",
+            "accounts": "גישה לחשבונות",
+            "systemInformation": "פרטי המ_ערכת"
         },
         "open-config-file": "פתח את קובץ התצורה",
         "reset-hyperplay": "אפס את HyperPlay",
@@ -594,6 +607,10 @@
         "copiedToClipboard": "הועתק!",
         "saves": {
             "warning": "תכונת שמירת ענן נמצאת בגרסת בטה, נא לגבות את השמירה שלכם לפני הסנכרון (למקרה שמשהו ישתבש)"
+        },
+        "systemInformation": {
+            "os": "מערכת הפעלה:",
+            "copyToClipboard": "העתקה ללוח הגזירים"
         }
     },
     "Settings": "הגדרות",
@@ -629,7 +646,8 @@
         "logout_confirmation": "אתם בטוחים שאתם רוצים להתנתק?",
         "manageaccounts": "ניהול חשבונות",
         "quit": "יציאה",
-        "quitMessage": "אתה בטוח שאתה רוצה לסגור את התוכנה?"
+        "quitMessage": "אתה בטוח שאתה רוצה לסגור את התוכנה?",
+        "logIn": "היכנס"
     },
     "webview": {
         "controls": {
@@ -669,7 +687,8 @@
         "toggleLayout": {
             "grid": "בחרו אם להיות בפריסת רשת",
             "list": "בחרו אם להיות בפריסת רשימה"
-        }
+        },
+        "label": "ספריה"
     },
     "offline-message": {
         "offline": "לא מחובר לרשת",
@@ -688,5 +707,69 @@
     "Recent": "שיחקתם לאחרונה",
     "please-wait": "נא לחכות...",
     "prime-gaming": "Prime Gaming",
-    "gog-store": "חנות GOG"
+    "gog-store": "חנות GOG",
+    "hyperplay": {
+        "turnAnalyticsOff": "לכבות",
+        "browserImport": {
+            "profile": "פרופיל"
+        },
+        "gamecard": {
+            "installing": "בהורדה…",
+            "distributables": "התקנת Distributables",
+            "paused": "הופסק"
+        },
+        "Sync": "סנכרן",
+        "buttons": {
+            "noThanks": "לא, תודה"
+        },
+        "logOut": "התנתק",
+        "onboarding": {
+            "terms": "תנאי השירות",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "למד עוד"
+                    },
+                    "info": {
+                        "skip": "לדלג לעת עתה"
+                    }
+                }
+            }
+        },
+        "turnAnalyticsOn": "להפעיל",
+        "misc": "אף פעם",
+        "copyUrl": "העתק קישור",
+        "discordApp": "דיסקורד",
+        "folder": "תיקייה"
+    },
+    "analytics": "ניתוח",
+    "sideload": {
+        "warningTitle": "חשוב!"
+    },
+    "sidebar": {
+        "library": "ספריה",
+        "store": "חנות"
+    },
+    "gameRelease": {
+        "beta": "בטא",
+        "demo": "הדגמה",
+        "main": "ראשי",
+        "alpha": "אלפא"
+    },
+    "quest": {
+        "active": "פעיל",
+        "Play": "שחקו עכשיו",
+        "playstreak": {
+            "days": "ימים"
+        },
+        "signIn": "כניסה",
+        "points": "נקודות",
+        "sync": "סנכרן"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "מנהל גרסאות Wine"
+        }
+    },
+    "profile": "פרופיל"
 }
