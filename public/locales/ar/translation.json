@@ -169,7 +169,8 @@
         },
         "reset-app": {
             "question": {
-                "message": "هل أنت متأكد أنك تريد إعادة (هايبر بلاي)؟ هذا سوف يزيل كل ستينغز و كاشينج لكن لن يزيل ألعابك المثبتة أو أوراق اعتمادك وتحتاج الصيغ النقالة (الرسوم، وينبستابل، ...) من هايبر بلاي إلى إعادة صياغتها يدويا بعد ذلك."
+                "message": "هل أنت متأكد أنك تريد إعادة (هايبر بلاي)؟ هذا سوف يزيل كل ستينغز و كاشينج لكن لن يزيل ألعابك المثبتة أو أوراق اعتمادك وتحتاج الصيغ النقالة (الرسوم، وينبستابل، ...) من هايبر بلاي إلى إعادة صياغتها يدويا بعد ذلك.",
+                "title": "إعادة تعيين هِرُوِك"
             }
         }
     },
@@ -179,7 +180,10 @@
         "login": "سجل الدخول",
         "sync": "زامن",
         "syncing": "يزامن",
-        "unsync": "ألغ المزامنة"
+        "unsync": "ألغ المزامنة",
+        "continue": "مواصلة",
+        "download": "تنزيل",
+        "update": "تحديث"
     },
     "controller": {
         "hints": {
@@ -219,7 +223,8 @@
             "type": "النوع"
         },
         "title": "التنزيلات",
-        "title_dm": "مدير تحميل"
+        "title_dm": "مدير تحميل",
+        "ETA": "الوقت المتوقع"
     },
     "epic": {
         "offline-notification-body": "قد لا تعمل الخدمات عبر الإنترنت بشكل كامل لأن خوادم أَبِك جيمز غير متصلة بالإنترنت!",
@@ -338,7 +343,8 @@
             "list": "بدّل لتمكين تخطيط القوائم"
         },
         "alphabeticalAZ": "ألفابيتيكي A-Z",
-        "alphabeticalZA": "Albetical Z-A"
+        "alphabeticalZA": "Albetical Z-A",
+        "label": "المكتبة"
     },
     "Library": "مكتبة",
     "loading": {
@@ -410,7 +416,7 @@
         "offline-retry-in": "غير متصل بالانترنت. قيد إعادة المحاولة خلال {{seconds}} ثانية.",
         "retrying": "قيد إعادة المحاولة"
     },
-    "Open": "",
+    "Open": "افتح",
     "options": {
         "advanced": {
             "key": "اسم المتغير",
@@ -472,7 +478,9 @@
             "empty": "لا شيء للتنزيل",
             "finished": "مكتمل",
             "queued": "في قائمة الانتظار",
-            "remove": "أزل من التنزيلات"
+            "remove": "أزل من التنزيلات",
+            "pause": "إيقاف التحميل مؤقتًا",
+            "resume": "كفي التنزيل"
         }
     },
     "Recent": "لُعبت مؤخرا",
@@ -597,7 +605,8 @@
             "enableNewShinyFeature": "ميزة جديدة"
         },
         "steamId": "بطاقة هوية ثابتة",
-        "autoLaunchHyperPlay": "Auto Launch Hyper اللعب"
+        "autoLaunchHyperPlay": "Auto Launch Hyper اللعب",
+        "msync": "مكِّن إي.سِنك"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -632,7 +641,9 @@
             "log": "السجل",
             "other": "آخر",
             "sync": "مزامنة ملفات التخزين",
-            "wineExt": "إضافات واين"
+            "wineExt": "إضافات واين",
+            "accounts": "الحسابات",
+            "systemInformation": "معلومات ال_نظام"
         },
         "open-config-file": "افتح ملف التكوين",
         "reset-hyperplay": "إعادة تعيين هِرُوِك",
@@ -659,17 +670,25 @@
             "showDetailed": "المواصفات التفصيلية للنظام",
             "steamDeck": "Steam Deck",
             "systemModel": "نموذج النظام:",
-            "version": "Version: {{appVersion}}"
+            "version": "Version: {{appVersion}}",
+            "copyToClipboard": "انسخ الى الحافظة"
         },
         "gamesSettings": "الألعاب",
-        "reset-extension": "التمديد"
+        "reset-extension": "التمديد",
+        "wine": {
+            "manager": {
+                "title": "مدير واين"
+            }
+        }
     },
     "Settings": "الإعدادات",
     "sidebar": {
         "collapse": "اطوِ الشريط الجانبي",
         "uncollapse": "اكشف الشريط الجانبي",
         "achievements": "الإنجازات",
-        "downloadManager": "مدير تحميل"
+        "downloadManager": "مدير تحميل",
+        "library": "المكتبة",
+        "store": "Marketplace"
     },
     "status": {
         "installing": "قيد التثبيت",
@@ -709,7 +728,8 @@
         "logout_confirmation": "هل أنت متأكد أنك تريد تسجيل الخروج ؟",
         "manageaccounts": "أدر الحسابات",
         "quit": "أخرج",
-        "manageStore": "مخازن إدارة"
+        "manageStore": "مخازن إدارة",
+        "logIn": "تسجيل الدخول"
     },
     "webview": {
         "controls": {
@@ -785,7 +805,8 @@
                         "details": "لقد تم تركيب ميتا ماسك اختر الشخص الذي تود استيراده منه.",
                         "createNewWallet": "إنشاء محفظة جديدة لتمديد الذخيرة",
                         "title": "اختاروا المركب إلى الاستيراد من",
-                        "useRecoveryPhraseInfo": "ويوصى بهذه السمة للمستعملين والمطورين المتقدمين. جملتك السرية مخزنة محلياً في \"ميتا ماسك\" ولم تتقاسمها مع \"هايبر بلاي\"."
+                        "useRecoveryPhraseInfo": "ويوصى بهذه السمة للمستعملين والمطورين المتقدمين. جملتك السرية مخزنة محلياً في \"ميتا ماسك\" ولم تتقاسمها مع \"هايبر بلاي\".",
+                        "learnMore": "تعرف على المزيد"
                     },
                     "info": {
                         "createWalletDescription": "انقر في \" إحياء محفظة \" أدناه إذا لم يكن لديك محفظة أو تريد إنشاء محفظة جديدة:",
@@ -816,7 +837,8 @@
             "connectionCanceled": {
                 "description": "يرجى تأكيد طلب الاتصال على محفظتك المحمولة للمضي قدما.",
                 "title": "ألغى الإتصال!"
-            }
+            },
+            "terms": "شروط الخدمة"
         },
         "changeWallet": "حساب محفظة سويب",
         "otp": "مرّة واحدة",
@@ -830,7 +852,8 @@
             "gamesToMint": "الألعاب إلى النعناع"
         },
         "browserImport": {
-            "appId": "App Id"
+            "appId": "App Id",
+            "profile": "الملف التعريفي"
         },
         "linkSteamAccountDescription": "وقع إلى (ستيم) لربط حساب (هايبر بلاي).",
         "accesscodes": {
@@ -845,12 +868,16 @@
         "analyticsOn": "محلل",
         "linkSteamAccountCta": "الذهاب إلى ستام علامة في",
         "buttons": {
-            "agree": "أنا موافق"
+            "agree": "أنا موافق",
+            "noThanks": "لا شكرا"
         },
         "connectWallet": "محفظة متصلة",
         "gamecard": {
             "extracting": "....",
-            "installed": "مستعد للعب"
+            "installed": "مستعد للعب",
+            "paused": "متوقف مؤقتًا",
+            "installing": "ينزّل...",
+            "distributables": "المجموع"
         },
         "analyticsOff": "تم إيقاف التحليل",
         "viewItem": "View {{item}}",
@@ -858,7 +885,16 @@
         "viewPortfolio": "حافظة فيديو",
         "currentWallet": "المحفظة الحالية",
         "publicAlpha": "Public Alpha",
-        "linkSteamAccountTitle": "Link Steam account"
+        "linkSteamAccountTitle": "Link Steam account",
+        "turnAnalyticsOn": "تنشيط",
+        "copyUrl": "نسخ الرابط",
+        "folder": "مجلد",
+        "misc": "ابدا",
+        "discordApp": "ديسكورد",
+        "Sync": "مزامنة",
+        "syncing": "مزامنة ...",
+        "turnAnalyticsOff": "عطّله",
+        "logOut": "تسجيل الخروج"
     },
     "hyperplayOverlay": {
         "description": {
@@ -910,10 +946,13 @@
             "playEachDay": "ألعب كل يوم حتى لا يستعيدوا صوابكم!",
             "progressTowardsStreak": "التقدم نحو مأزق اليوم.",
             "streakCompleted": "تم الانتهاء من الاستراحة! اطالب بمكافآتك الآن.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "days": "أيام",
+            "now": "الآن"
         },
         "type": {
-            "playstreak": "اللعب ستريك"
+            "playstreak": "اللعب ستريك",
+            "reputation": "السمعة"
         },
         "View Game": "View Game",
         "connectSteamAccount": "حساب المركبة",
@@ -926,7 +965,13 @@
         "claimFailed": "باء - المطالبة",
         "claimFailedMessage": "أرجوك حاول مرة أخرى إذا ما زالَ لا يَعْملُ، يَجْعلُ a تذكرة دعم خلافِ.",
         "createDiscordTicket": "تذكرة اختراق مثبتة",
-        "notEnoughGas": "عدم كفاية رصيد المحفظة لطلب مكافأتك بسبب رسوم الغاز جربي محفظة مختلفة أو تجديد هذه قبل إعادة التجريب."
+        "notEnoughGas": "عدم كفاية رصيد المحفظة لطلب مكافأتك بسبب رسوم الغاز جربي محفظة مختلفة أو تجديد هذه قبل إعادة التجريب.",
+        "active": "نشط",
+        "signIn": "لِج",
+        "Play": "شغِّل",
+        "sync": "مزامنة",
+        "reputation": "السمعة",
+        "points": "نقاط"
     },
     "notification": {
         "wine-download": {
@@ -946,7 +991,11 @@
     "accounts": "الحسابات",
     "back_to_game": "العودة إلى اللعبة",
     "gameRelease": {
-        "prototype": "النموذج الأولي"
+        "prototype": "النموذج الأولي",
+        "alpha": "الإصدار التجريبي",
+        "beta": "بيتا",
+        "demo": "Demo",
+        "main": "رئيسي"
     },
     "gameUpdateNotifications": {
         "title": "Game Updates Available",
@@ -962,7 +1011,8 @@
         }
     },
     "sideload": {
-        "warningMessage": "إن التحميل الجانبي للعبة هو سمة موجهة للمطورين ومستعملي الطاقة المتمرسين. تحميل جانبي لحامض يحتوي على البرمجيات الخبيثة يمكن أن يضر حاسوبك ويفضي إلى سرقة الأموال."
+        "warningMessage": "إن التحميل الجانبي للعبة هو سمة موجهة للمطورين ومستعملي الطاقة المتمرسين. تحميل جانبي لحامض يحتوي على البرمجيات الخبيثة يمكن أن يضر حاسوبك ويفضي إلى سرقة الأموال.",
+        "warningTitle": "مهم:"
     },
     "exit_game": "لعبة الخروج",
     "overlay": {
@@ -975,5 +1025,8 @@
     },
     "importGameErrorMessage": "ليس مطوّر لعبة صحيح، لعبة الإستيراد غير ممكن",
     "importGameErrorMessageExecutable": "اللعبة لم يتم العثور على لعبة الاستيراد مستحيلة",
-    "importGameErrorTitle": "رمز لعبة الاستيراد"
+    "importGameErrorTitle": "رمز لعبة الاستيراد",
+    "ALL": "كل",
+    "analytics": "تحليل",
+    "profile": "الملف التعريفي"
 }
