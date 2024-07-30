@@ -152,7 +152,10 @@
         "login": "Daxil ol",
         "sync": "Sinxronizasiya",
         "syncing": "Sinxronizasiya",
-        "unsync": "Sinxronizasiyadan çıxarın"
+        "unsync": "Sinxronizasiyadan çıxarın",
+        "continue": "Davam edin",
+        "download": "Endir",
+        "update": "Yenilə"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Təxmini vaxt"
     },
     "epic": {
         "offline-notification-body": "Epic Games serverləri oflayn olduğu üçün onlayn xidmətlər tam işləməyə bilər!",
@@ -369,7 +373,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Aç",
     "options": {
         "advanced": {
             "key": "Dəyişən adı",
@@ -431,7 +435,8 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Endirmələri dayandır"
         }
     },
     "Recent": "Bu yaxınlarda oynanılıb",
@@ -545,7 +550,8 @@
         "disable_logs": "Qeydləri deaktiv edin",
         "addgamestoapplications": "Oyunları avtomatik olaraq Proqramlara əlavə edin",
         "showMetalOverlay": "Statistikanı göstərin",
-        "alt-nile-bin": "Alternativ Nil Binarını seçin"
+        "alt-nile-bin": "Alternativ Nil Binarını seçin",
+        "msync": "Esync'i aktivləşdirin"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -587,12 +593,19 @@
         "saves": {
             "label": "Məkanı Saxla:",
             "warning": "Bulud Saxlama funksiyası Beta-dadır, lütfən, sinxronizasiya etməzdən əvvəl yaddaşı ehtiyat nüsxəsini çıxarın (nəsə səhv olarsa)"
+        },
+        "wine": {
+            "manager": {
+                "title": "Şərab meneceri"
+            }
         }
     },
     "Settings": "Parametrlər",
     "sidebar": {
         "collapse": "Yan paneli yığcamlaşdırın",
-        "uncollapse": "Kenar çubuğunu yığışdırın"
+        "uncollapse": "Kenar çubuğunu yığışdırın",
+        "store": "Mağaza",
+        "library": "Kitabxana"
     },
     "status": {
         "installing": "Quraşdırılır",
@@ -631,7 +644,8 @@
         "logout": "Çıxış",
         "logout_confirmation": "Çıxmaq istədiyinizə əminsiniz?",
         "manageaccounts": "Hesabları idarə et",
-        "quit": "Çıxın"
+        "quit": "Çıxın",
+        "logIn": "Daxil ol"
     },
     "webview": {
         "controls": {
@@ -668,5 +682,49 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon Oyunları",
-    "prime-gaming": "Baş Oyun"
+    "prime-gaming": "Baş Oyun",
+    "analytics": "Təhlil",
+    "gameRelease": {
+        "main": "Əsas",
+        "beta": "Beta"
+    },
+    "hyperplay": {
+        "copyUrl": "URL-i Köçür",
+        "folder": "Folder",
+        "discordApp": "Mübahisə",
+        "misc": "Heç vaxt",
+        "Sync": "Sinxronizasiya",
+        "turnAnalyticsOff": "Söndür",
+        "gamecard": {
+            "distributables": "Dağlıqları",
+            "paused": "Fasilə verildi"
+        },
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Daha ətraflı öyrən"
+                    }
+                }
+            }
+        },
+        "browserImport": {
+            "profile": "Profil"
+        },
+        "buttons": {
+            "noThanks": "Xeyr, təşəkkürlər"
+        },
+        "logOut": "Çıx"
+    },
+    "quest": {
+        "active": "Aktiv",
+        "Play": "Oynat",
+        "playstreak": {
+            "days": "gün"
+        },
+        "points": "Nöqtələr",
+        "signIn": "Daxil ol",
+        "sync": "Sinxronizasiya"
+    },
+    "profile": "Profil"
 }
