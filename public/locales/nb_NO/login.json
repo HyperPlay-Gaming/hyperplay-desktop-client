@@ -1,6 +1,7 @@
 {
     "button": {
-        "login": "Logg inn"
+        "login": "Logg inn",
+        "loading": "Laster inn"
     },
     "message": {
         "part1": "Følg instruksen for å logge inn og installere spill:",

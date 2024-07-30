@@ -41,10 +41,13 @@
         "ubisoft": "Ubisoft o'rnatilmoqda",
         "uninstalling": "Oʻchirish",
         "updating": "O'yin yangilanmoqda",
-        "extracting": "Chiqarish",
+        "extracting": {
+            "progress": "Chiqarish"
+        },
         "downloading": "Yuklab olinmoqda",
         "gog-goodie": "Bu oʻyinni oʻrnatib boʻlmaydi. Yuklab olinadigan kontentni https://gog.com/account orqali tekshiring",
-        "goodie": "Oʻrnatish mumkin emas"
+        "goodie": "Oʻrnatish mumkin emas",
+        "paused": "Пауза қилинган"
     },
     "box": {
         "change": {
@@ -91,7 +94,9 @@
             "title": "O'yin yangilanishi kerak"
         },
         "wineprefix": "WinePrefix papkasini tanlang",
-        "yes": "HA"
+        "yes": "HA",
+        "ok": "KELISHDIKMI",
+        "dont-show-again": "Boshqa ko'rsatma"
     },
     "button": {
         "add_to_favourites": "Sevimlilarga qo'shish",
@@ -106,7 +111,8 @@
         "install": "O'rnatish",
         "no-path-selected": "Hech qanday yoʻl tanlanmagan",
         "queue": {
-            "remove": "Navbatdan olib tashlash"
+            "remove": "Navbatdan olib tashlash",
+            "continue": "Yuklab olishda davom eting"
         },
         "remove_from_favourites": "Sevimlilardan olib tashlash",
         "remove_from_recent": "Oxirgidan olib tashlash",
@@ -117,7 +123,8 @@
         },
         "unhide_game": "O'yinni ko'rsatish",
         "uninstall": "Oʻchirish",
-        "update": "Yangilash"
+        "update": "Yangilash",
+        "remove_from_library": "Ro'yxatdan o'chirish"
     },
     "cloud_save_unsupported": "Qo'llab-quvvatlanmaydi",
     "disabled": "O'chirilgan",
@@ -188,7 +195,8 @@
         "launching": "Ishga tushirilmoqda",
         "playing": {
             "start": "Hozir O'yna",
-            "stop": "Oʻynamoqda (Toʻxtatish)"
+            "stop": "Oʻynamoqda (Toʻxtatish)",
+            "update": "Yangilash"
         },
         "saves": {
             "syncing": "Saqlashlarni sinxronlash"

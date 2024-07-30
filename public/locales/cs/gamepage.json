@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Pokračovat v instalaci",
             "message": "Chcete ponechat stažené soubory?",
-            "title": "Zastavit instalaci"
+            "title": "Zastavit instalaci",
+            "keepFilesMessage": "Zkontrolujte, zda chcete zachovat stahování souborů po zrušení."
         },
         "uninstall": {
             "checkbox": "Odebete předponu: {{prefix}}{{newLine}}Poznámka: Tato akce je nevratná a také neodebere zálohované soubory uložení.",
             "message": "Chcete odinstalovat tuto hru?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Odinstalovat"
+            "title": "Odinstalovat",
+            "dlc": "Chcete odinstalovat tento DLC?",
+            "prefix_warning": "Předpona vína pro tuto hru je výchozí předpona. Chcete-li to opravdu odstranit, musíte to udělat ručně."
         },
         "update": {
             "message": "Tato hra má aktualizaci, přejete si ji aktualizovat nyní?",
-            "title": "Hra vyžaduje akualizaci"
+            "title": "Hra vyžaduje akualizaci",
+            "message-cancel": "Není možné hrát tuto hru bez aktualizace"
         },
         "wineprefix": "Vyberte složku WinePrefix",
-        "yes": "ANO"
+        "yes": "ANO",
+        "dont-show-again": "Znovu nezobrazovat",
+        "ok": "OK",
+        "aware": "Jsem si vědomi",
+        "compability": {
+            "message": "Tato hra Windows spustí pomocí kompatibilizační vrstvy. Můžete se setkat s některými problémy nebo hra nemusí fungovat vůbec."
+        },
+        "yesCancel": "Ano, zrušit"
     },
     "button": {
         "add_to_favourites": "Přidat do oblíbených",
@@ -56,7 +67,9 @@
         "install": "Instalovat",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Zrušit stahování",
+            "continue": "Pokračovat ve stahování"
         },
         "remove_from_favourites": "Odebrat z oblíbených",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Odkrýt hru",
         "uninstall": "Odinstalovat",
-        "update": "Update"
+        "update": "Update",
+        "remove_from_library": "Remove",
+        "details": "Podrobnosti",
+        "favorites": "Přidat do oblíbených",
+        "unfavorites": "Odebrat z oblíbených"
     },
     "cloud_save_unsupported": "není podporována",
     "disabled": "Zakázáno",
@@ -86,14 +103,17 @@
         "neverPlayed": "Nikdy",
         "platform": "Vyberte verzi platformy, kterou chcete nainstalovat",
         "requirements": "Systémové požadavky",
-        "totalPlayed": "Odehraný čas"
+        "totalPlayed": "Odehraný čas",
+        "selectChannelName": "Vyberte kanál Jméno",
+        "dlcs": "Čeština"
     },
     "gamecard": {
         "moving": "Přesouvám",
         "repairing": "Opravuji"
     },
     "generic": {
-        "error": "Neznámá chyba"
+        "error": "Neznámá chyba",
+        "noDescription": "Popis není dostupný!"
     },
     "hours": "Hodiny",
     "how-long-to-beat": {
@@ -124,7 +144,8 @@
             "message": "Podpora anticheatu je rozbitá nebo zakázaná. Hra nebude fungovat. Chcete jej přesto nainstalovat?",
             "install": "Ano (chápu, že to nebude fungovat)",
             "title": "Rozbitý/zakázaný anticheat"
-        }
+        },
+        "compatibility-warning": "Tato hra Windows spustí pomocí kompatibilizační vrstvy. Vaše zkušenosti se mohou lišit."
     },
     "label": {
         "game": {
@@ -132,7 +153,8 @@
         },
         "playing": {
             "start": "Hrát",
-            "stop": "Hraji (Zastavit)"
+            "stop": "Hraji (Zastavit)",
+            "update": "Aktualizovat"
         },
         "saves": {
             "syncing": "Synchronizuji uložené soubory"
@@ -153,7 +175,8 @@
         "title": "Vyberte součásti k instalaci"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -192,7 +215,20 @@
         "this-game-uses-third-party": "Tato hra používá launcher třetí strany a zatím není podporována",
         "totalDownloaded": "Celkově staženo",
         "uninstalling": "Uninstalling",
-        "updating": "Aktualizuji hru"
+        "updating": "Aktualizuji hru",
+        "paused": "Pozastaveno",
+        "downloading": "Stahování",
+        "playing": "Přehrávám",
+        "syncingSaves": "Synchronizuji uložené soubory",
+        "goodie": "Bez instalace",
+        "distributables": "Instalace Distributables",
+        "gog-goodie": "Tato hra se nezdá být instalovatelná. Zkontrolujte obsah ke stažení na https://gog.com/account",
+        "moving-files": "Přesun soubor '{{file}}': {{percent}} ",
+        "extracting": {
+            "cancel": "Zrušení výpisu",
+            "progress": "Čeština"
+        },
+        "preparing": "Příprava ke stažení, prosím počkat"
     },
     "submenu": {
         "addShortcut": "Přidat zástupce",
@@ -206,6 +242,7 @@
         "removeShortcut": "Odebrat zástupce",
         "settings": "Nastavení",
         "store": "Stránka obchodu",
-        "verify": "Zkontrolovat a opravit"
+        "verify": "Zkontrolovat a opravit",
+        "extraInfo": "Další informace"
     }
 }

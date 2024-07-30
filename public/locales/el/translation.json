@@ -66,7 +66,8 @@
                 "title": "Συνέβη μια μη διαχειρίσιμη εξαίρεση!"
             },
             "update": {
-                "title": "Σφάλμα ενημέρωσης"
+                "title": "Σφάλμα ενημέρωσης",
+                "message": "Κάτι πήγε στραβά με την ενημέρωση! Παρακαλούμε να απεγκαταστήσετε και να επαναφέρετε το Hyperstall."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,12 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
-            }
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Η εγκατάσταση του Ubisoft Connect στο πρόθεμα του παιχνιδιού απέτυχε. Ελέγξτε τη σελίδα μας wiki στο Reefgithub.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki / How-to-install-Ubisoft-Ubisoft-on-Linux-and-Mac για να την εγκαταστήσετε με μαούν."
+            },
+            "moving": "Error Moving Game {{error}}"
         },
         "info": {
             "update": {
@@ -139,12 +145,28 @@
                 "install": "Οι Epic Servers έχουν σημαντικές διακοπές λειτουργίας, το παιχνίδι δεν μπορεί να εγκατασταθεί!",
                 "update": "Οι Epic Servers έχουν σημαντικές διακοπές λειτουργίας, το παιχνίδι δεν μπορεί να ενημερωθεί!"
             },
-            "title": "Προειδοποίηση"
+            "title": "Προειδοποίηση",
+            "rosetta": {
+                "title": "Rosetta δεν βρέθηκε",
+                "message": "HyperPlay απαιτεί Rosetta για να τρέξει σωστά στο macOS με Apple Silicon chips. Παρακαλούμε να το εγκαταστήσετε από το τερματικό macOS χρησιμοποιώντας την παρακάτω εντολή: \"softwareupdate --install-rosetta\" και επανεκκίνηση HyperPlay. "
+            },
+            "wine-change": {
+                "title": "Το κρασί δεν βρέθηκε!",
+                "title-gptk": "Game Porting Toolkit Not Συμβατή ",
+                "message-gptk": "Για να είστε σε θέση να εκτελέσετε παιχνίδια χρησιμοποιώντας το εργαλείο μεταφοράς παιχνιδιών Apple πρέπει να αναβαθμίσετε το macOS σας σε 14 (Sonoma) ή υψηλότερο. {{newline}} Βρήκαμε το κρασί στο σύστημά σας, θέλετε να συνεχίσετε να ξεκινάτε χρησιμοποιώντας {{foundWine}}?",
+                "message": "Δεν θα μπορούσαμε να βρούμε την επιλεγμένη έκδοση κρασιού για να ξεκινήσει αυτόν τον τίτλο ({{selectedWine}}). {{newline}} Βρήκαμε ο ένας τον άλλον, θέλετε να συνεχίσετε να ξεκινάτε χρησιμοποιώντας {{foundWine}}?"
+            }
         },
         "wineprefix": "Διαλέξτε τον φάκελο Προθέματος Wine",
         "yes": "ΝΑΙ",
         "dontShowAgain": "Μην εμφανιστείτε ξανά",
-        "choose-nile-binary": "Επιλέξτε Nile binary"
+        "choose-nile-binary": "Επιλέξτε Nile binary",
+        "reset-extension": {
+            "question": {
+                "message": "Είστε βέβαιοι ότι θέλετε να επαναφέρετε την επέκταση MetaMask?",
+                "title": "Επανέκταση"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Σύνδεση",
         "sync": "Συγχρονισμός",
         "syncing": "Συγχρονισμός",
-        "unsync": "Αποσυγχρονισμός"
+        "unsync": "Αποσυγχρονισμός",
+        "download": "Λήψη",
+        "continue": "Συνέχεια",
+        "update": "Ενημέρωση"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "title_dm": "Download Manager Download Manager",
+        "ETA": "Αναμενόμενη ώρα"
     },
     "epic": {
         "offline-notification-body": "Οι διαδικτυακές υπηρεσίες πιθανό να μη λειτουργούν πλήρως καθώς οι διακομιστές Epic Games ειναι εκτός σύνδεσης!",
@@ -263,7 +290,11 @@
         "wine": {
             "part1": "Το HyperPlay αναζητά εκδόσεις Wine, Proton και CrossOver στους ακόλουθους φακέλους:",
             "part2": "Για άλλες τοποθεσίες, χρησιμοποιήστε έναν συμβολικό σύνδεσμο σε έναν απ' αυτούς τους φακέλους"
-        }
+        },
+        "disable_logs": "Περιφέρετε αυτό το checkbox για να απενεργοποιήσετε τα περισσότερα από τα γραπτά για αρχεία καταγραφής (κρίσιμες πληροφορίες είναι πάντα συνδεδεμένες). Φροντίστε να ενεργοποιήσετε την προσφορά αυτή πριν αναφέρετε οποιοδήποτε θέμα.",
+        "dxvkfpslimit": "Ρυθμίζει ένα cap rate για παιχνίδια DXVK",
+        "dxvknvapi": "DXVK-NVAPI είναι μια εφαρμογή του NVAPI χτισμένο πάνω από το DXVK και το linux μητρική NVAPI, επιτρέπει τη χρήση DLSS στο Nvidia GPUs.",
+        "msync": "Το Msync έχει ως στόχο να μειώσει το wine Server overhead σε παιχνίδια έντασης CPU. Το Enabling μπορεί να βελτιώσει την απόδοση σε διάφορα παιχνίδια."
     },
     "info": {
         "hyperplay": {
@@ -289,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-invalid": "Το Wine Path είναι άκυρο, παρακαλώ επιλέξτε ένα άλλο.",
+        "wine-path-none-found": "Καμία έκδοση κρασιού δεν βρέθηκε, κατεβάστε ένα από το διαχειριστή συμβατότητας"
     },
     "install": {
         "path": "Επιλέξτε διαδρομή εγκατάστασης"
@@ -303,7 +336,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "Alphabetical A-Z",
+        "alphabeticalZA": "Alphabetical Z-A"
     },
     "loading": {
         "default": "Φόρτωση",
@@ -314,7 +349,8 @@
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Είσοδος Amazon"
+        "amazon": "Είσοδος Amazon",
+        "old-mac": "Η έκδοση του MacOS σας είναι {{version}}. Το macOS 12 ή το νεότερο απαιτείται να συνδεθεί."
     },
     "message": {
         "sync": "Ο συγχρονισμός ολοκληρώθηκε",
@@ -347,7 +383,9 @@
             "error": "Αποτυχημένη Εγκατάσταση",
             "finished": "Η εγκατάσταση ολοκληρώθηκε",
             "imported": "Το παιχνίδι εισάχθηκε",
-            "startInstall": "Η Εγκατάσταση έχει ξεκινήσει"
+            "startInstall": "Η Εγκατάσταση έχει ξεκινήσει",
+            "paused": "Εγκατάσταση Pause",
+            "stopped": "Εγκατάσταση σταμάτησε"
         },
         "moved": "Η μετακίνηση ολοκληρώθηκε",
         "moving": "Μετακίνηση παιχνιδιού",
@@ -359,7 +397,9 @@
         "update": {
             "canceled": "Η ενημέρωση ακυρώθηκε",
             "finished": "Η ενημέρωση ολοκληρώθηκε",
-            "started": "Έναρξη Ενημέρωσης"
+            "started": "Έναρξη Ενημέρωσης",
+            "stopped": "Η ενημέρωση σταμάτησε",
+            "paused": "Ενημερώστε το Pause"
         }
     },
     "offline-message": {
@@ -369,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Άνοιγμα",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -414,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Πρόθημα διαδρομής εγκατάστασης EGS",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
-        "alt-nile-bin": "Χρησιμοποιώντας το ενσωματωμένο δυαδικό σύστημα Nile..."
+        "alt-nile-bin": "Χρησιμοποιώντας το ενσωματωμένο δυαδικό σύστημα Nile...",
+        "dxvkfpsvalue": "Θετική αξία integer (π.χ. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -431,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Συνέχιση λήψης",
+            "pause": "Παύση λήψεων"
         }
     },
     "Recent": "Παίχτηκε Πρόσφατα",
@@ -499,7 +542,10 @@
             "instructions_title": "How to report a problem?",
             "last-log": "Τελευταίο Αρχείο Καταγραφής",
             "no-file": "Δεν βρέθηκε αρχείο σύνδεσης",
-            "show-in-folder": "Εμφάνιση αρχείου καταγραφής στον φάκελο"
+            "show-in-folder": "Εμφάνιση αρχείου καταγραφής στον φάκελο",
+            "join-hyperplay-discord": "Ελάτε στο Discord μας",
+            "instructions-part-01": "Αν αντιμετωπίσετε οποιαδήποτε ζητήματα, ενώ χρησιμοποιείτε HyperPlay, έχουμε δύο καθορισμένες περιοχές για να αναφέρουμε τα προβλήματά σας στο Discord Server μας. Εάν είστε παίκτης, παρακαλούμε να αναφέρετε τυχόν προβλήματα με την επίσκεψη στο γράφημα υποστήριξης παίκτη. Εάν είστε ένα παιχνίδι dev, παρακαλούμε να αναφέρετε τυχόν προβλήματα με την επίσκεψη στο διάδρομο υποστήριξης του dev.",
+            "instructions-part-02": "Για να μας βοηθήσετε να διαγνώσουμε και να διορθώσετε το πρόβλημα όσο το δυνατόν γρηγορότερα, παρακαλούμε να παρέχετε όσο το δυνατόν περισσότερες πληροφορίες, συμπεριλαμβανομένου ενός αντιγράφου των καλωδίων σας. Η ομάδα υποστήριξης μας θα παρακολουθεί και τα δύο κανάλια και θα κάνει το καλύτερο δυνατό για να ανταποκριθεί στο πρόβλημά σας όσο το δυνατόν γρηγορότερα. Σας ευχαριστούμε για την υπομονή και την κατανόησή σας, ενώ εργαζόμαστε για την επίλυση τυχόν προβλημάτων που μπορεί να αντιμετωπίσετε."
         },
         "mangohud": "Ενεργοποίηση Mangohud (απαραίτητη η εγκατάσταση του Mangohud)",
         "manualsync": {
@@ -545,7 +591,12 @@
         "disable_logs": "Απενεργοποίηση αρχείων καταγραφής",
         "addgamestoapplications": "Προσθέστε αυτόματα παιχνίδια στις Εφαρμογές",
         "showMetalOverlay": "Εμφάνιση επικάλυψης στατιστικών",
-        "alt-nile-bin": "Επιλέξτε ένα εναλλακτικό δυαδικό αρχείο Nile"
+        "alt-nile-bin": "Επιλέξτε ένα εναλλακτικό δυαδικό αρχείο Nile",
+        "autoLaunchHyperPlay": "Auto Launch Hyper Παίξτε Play Play",
+        "dxvkfpslimit": "Περιορισμός FPS (DX9, 10 και 11)",
+        "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix",
+        "steamId": "Steam ID",
+        "msync": "Ενεργοποίηση Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +631,51 @@
             "log": "Αρχεία καταγραφής",
             "other": "Άλλα",
             "sync": "Αποθήκευση-Συγχρονισμός",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Λογαριασμοί",
+            "systemInformation": "Πληροφορίες συστήματος"
         },
         "open-config-file": "Άνοιγμα αρχείου παραμετροποίησης",
         "reset-hyperplay": "Επαναφορά HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Η λειτουργία Cloud Saves είναι σε Beta, δημιουργήστε αντίγραφα ασφαλείας των αποθηκευμένων παιχνιδιών σας πριν από τον συγχρονισμό (σε περίπτωση που κάτι πάει στραβά)"
+        },
+        "reset-extension": "Επανέκταση",
+        "systemInformation": {
+            "gpuDriver": "Οδηγός: {{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "showDetailed": "Δείξτε λεπτομερείς προδιαγραφές συστήματος",
+            "legendaryVersion": "Legendary: {{legendaryVersion}}",
+            "memoryStats": "{{percentUsed}}% χρησιμοποιείται ({{usedGib}} / {{totalGib}}",
+            "osNameFlatpak": "{{osName}} (μέσα από το Flatpak)",
+            "osVersion": "Έκδοση {{versionNumber}}",
+            "version": "Έκδοση: {{appVersion}}",
+            "systemModel": "Πρότυπο συστήματος:",
+            "steamDeck": "Steam Deck",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "memory": "Μνήμη:",
+            "os": "Λειτουργικό Σύστημα",
+            "copyToClipboard": "Αντιγραφή στο πρόχειρο"
+        },
+        "gamesSettings": "Παιχνίδια Ρυθμίσεις",
+        "wine": {
+            "manager": {
+                "title": "Διαχειριστής Wine"
+            }
         }
     },
     "Settings": "Ρυθμίσεις",
     "sidebar": {
         "collapse": "Σύμπτυξη πλαϊνής γραμμής",
-        "uncollapse": "Κατάργηση σύμπτυξης πλαϊνής γραμμής"
+        "uncollapse": "Κατάργηση σύμπτυξης πλαϊνής γραμμής",
+        "achievements": "Επιτεύγματα",
+        "downloadManager": "Download Manager Download Manager",
+        "store": "Marketplace",
+        "library": "Βιβλιοθήκη"
     },
     "status": {
         "installing": "Εγκατάσταση",
@@ -631,7 +714,9 @@
         "logout": "Αποσύνδεση",
         "logout_confirmation": "Είστε σίγουροι πως θέλετε να αποσυνδεθείτε;",
         "manageaccounts": "Διαχείριση Λογαριασμών",
-        "quit": "Έξοδος"
+        "quit": "Έξοδος",
+        "manageStore": "Διαχείριση καταστημάτων",
+        "logIn": "Σύνδεση"
     },
     "webview": {
         "controls": {
@@ -668,5 +753,265 @@
     },
     "amazon": "Αμαζόνα",
     "Amazon Games": "Παιχνίδια Amazon",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "onboarding": {
+            "analytics": {
+                "privacyPolicyHere": "Πολιτική απορρήτου εδώ.",
+                "hyperplayWill": "HyperPlay θα:",
+                "neverCollectIP": " συλλέξτε την πλήρη διεύθυνση IP σας;",
+                "privacyCaption": "Τα δεδομένα αυτά συγκεντρώνονται και επομένως είναι ανώνυμα για τους σκοπούς του γενικού κανονισμού προστασίας δεδομένων (ΕΕ) 2016/679. Για περισσότερες πληροφορίες σχετικά με τις πρακτικές απορρήτου μας, παρακαλούμε δείτε τις πρακτικές μας ",
+                "anonymized": "Στείλτε ανώνυμα κλικ και αλληλεπίδραση παιχνιδιού;",
+                "optOut": "Επιτρέψτε πάντα να εξαιρεθείτε μέσω ρυθμίσεων·;",
+                "neverCollectPersonal": " συλλέγουν κλειδιά, διευθύνσεις, ισορροπίες, hashes ή οποιεσδήποτε προσωπικές πληροφορίες;",
+                "neverSellData": " πωλούν δεδομένα για κέρδος. Ποτέ!",
+                "body": "Το HyperPlay θα ήθελε να συλλέξει δεδομένα χρήσης για να καταλάβει καλύτερα πώς οι χρήστες μας αλληλεπιδρούν με την εφαρμογή. Αυτές οι πληροφορίες μας βοηθούν να καταλάβουμε πώς χρησιμοποιείτε την εφαρμογή και μας επιτρέπουν να κάνουμε HyperPlay ακόμα καλύτερα για εσάς.",
+                "title": "Βοηθήστε μας να βελτιώσουμε το HyperPlay!"
+            },
+            "connectionConnected": {
+                "description": "Το πορτοφόλι σας είναι συνδεδεμένο. Είστε έτοιμοι να παίξετε.",
+                "title": "Wallet συνδεδεμένο!"
+            },
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "details": "Τα προγράμματα περιήγησης κάτω έχουν ήδη εγκαταστήσει το MetaMask. Επιλέξτε αυτό που θέλετε να εισαγάγετε από.",
+                        "useRecoveryPhrase": "Εφαρμογή μυστικής φράσης αποκατάστασης",
+                        "useRecoveryPhraseInfo": "Αυτό το χαρακτηριστικό συνιστάται για προχωρημένους χρήστες και προγραμματιστές. Η μυστική φράση ανάκτησης σας αποθηκεύεται σε τοπικό επίπεδο στο MetaMask και ποτέ δεν μοιράζεται με το HyperPlay.",
+                        "title": "Επιλέξτε το πρόγραμμα περιήγησης για εισαγωγή από",
+                        "cantFindProfile": "Δεν μπορείτε να βρείτε το προφίλ περιήγησης σας?",
+                        "createNewWallet": "Δημιουργήστε νέο πορτοφόλι επέκτασης MM",
+                        "learnMore": "Μάθετε περισσότερα",
+                        "orWord": "Ή"
+                    },
+                    "info": {
+                        "createWalletCTA": "Δημιουργήστε ένα πορτοφόλι",
+                        "skip": "Skip for Now",
+                        "digitalAssets": {
+                            "title": "Ένα σπίτι για τα ψηφιακά σας περιουσιακά στοιχεία",
+                            "details": "Τα Wallets χρησιμοποιούνται για να στείλουν, να λαμβάνουν, να αποθηκεύουν και να εμφανίζουν ψηφιακά περιουσιακά στοιχεία όπως tokens και NFTs."
+                        },
+                        "createWalletDescription": "Κάντε κλικ στο \"Create a πορτοφόλι\" παρακάτω αν δεν έχετε πορτοφόλι ή θέλετε να δημιουργήσετε ένα νέο:",
+                        "login": {
+                            "details": "Μια εναλλακτική λύση για τη δημιουργία νέων λογαριασμών και κωδικών πρόσβασης σε κάθε ιστοσελίδα, απλά συνδέστε το πορτοφόλι σας αντ 'αυτού.",
+                            "title": "Ένας νέος τρόπος για να συνδεθείτε"
+                        },
+                        "title": "Τι είναι πορτοφόλι?"
+                    },
+                    "scan": {
+                        "updateWarning": "Έχοντας ζητήματα; Βεβαιωθείτε ότι το MetaMask είναι μέχρι σήμερα.",
+                        "dontHaveWallet": "Μην έχετε πορτοφόλι?",
+                        "details": "Δημιουργήστε ένα κρυπτογραφημένο κανάλι επικοινωνίας. Τα κλειδιά σας δεν θα μοιραστούν ποτέ με το HyperPlay.",
+                        "getMetamask": "Get MetaMask",
+                        "title": "Scan QR με "
+                    }
+                },
+                "pleaseConnect": "Επικοινωνήστε με το πορτοφόλι σας ή κατεβάστε το Metamask mobile-app για να πάρετε\nΞεκίνησε:",
+                "title": "Wallet Connections"
+            },
+            "welcome": {
+                "title": "Καλώς ήρθατε στο Hyper Παίξτε Early Access!",
+                "text": {
+                    "bugs": "Παρακαλούμε σημειώστε ότι το HyperPlay είναι ένα δημόσιο άλφα. Πολλά χαρακτηριστικά είναι ακόμα\nστην ανάπτυξη και θα υπάρχουν σφάλματα.",
+                    "communityCTA_1": "Θα θέλαμε την ανάρρωσή σας και θα σας έχουμε ενταχθεί σε εμάς",
+                    "communityCTA_2": "κοινότητα. Μαζί, ας διαμορφώσουμε το μέλλον του παιχνιδιού!",
+                    "construction": "HyperPlay είναι υπό κατασκευή.",
+                    "description": "HyperPlay είναι ένα game Launcher και game store aggregator από το\nμέλλον. Με HyperPlay, μπορείτε να μεταφέρετε το πορτοφόλι σας, tokens και περιουσιακά στοιχεία\nσε κάθε παιχνίδι. HyperPlay υποστηρίζει ολόκληρη τη βιβλιοθήκη της Epic\nStore, GOG και το δικό μας κατάστημα HyperPlay. Χρησιμοποιώντας HyperPlay, συμφωνείτε\nμας"
+                }
+            },
+            "connectAgain": "Σύνδεση ξανά",
+            "connectionCanceled": {
+                "description": "Επιβεβαιώνετε το αίτημα σύνδεσης στο κινητό σας πορτοφόλι για να προχωρήσετε.",
+                "title": "Η σύνδεση ακυρώθηκε!"
+            },
+            "terms": "Όροι Υπηρεσίας"
+        },
+        "achievements": {
+            "gamesToMint": "Παιχνίδια για mint",
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "Μοιάζει να μην μπορούσαμε να βρούμε παιχνίδια στο λογαριασμό σας στο Steam αυτή τη στιγμή. Απλά μια γρήγορη υπενθύμιση για διπλό έλεγχο ότι οι λεπτομέρειες του παιχνιδιού σας είναι έτοιμες να δημοσιευτούν. Με αυτόν τον τρόπο, μπορούμε να έχουμε πρόσβαση στα επιτεύγματά σας και να σας παρέχουμε την καλύτερη εμπειρία."
+            },
+            "freeMints": "Δωρεάν Mints",
+            "addThisGame": "Προσθέστε αυτό το παιχνίδι"
+        },
+        "accesscodes": {
+            "error": {
+                "validation": "Κωδικός πρόσβασης είναι άκυρη"
+            },
+            "requirescode": "Αυτή η ενημέρωση του παιχνιδιού απαιτεί έναν κωδικό πρόσβασης.",
+            "success": {
+                "validation": "Επιτυχία! κωδικός πρόσβασης είναι έγκυρο"
+            }
+        },
+        "browserImport": {
+            "appId": "App Id",
+            "profile": "Προφίλ"
+        },
+        "analyticsOn": "Το Analytics μετατρέπεται",
+        "buttons": {
+            "agree": "Συμφωνώ ότι συμφωνώ",
+            "noThanks": "Όχι ευχαριστώ"
+        },
+        "changeWallet": "Λογαριασμός λογαριασμού Swap πορτοφόλι",
+        "connectWallet": "Connect πορτοφόλι",
+        "currentWallet": "Τρέχον πορτοφόλι",
+        "gamecard": {
+            "installed": "Ετοιμαστείτε να παίξετε",
+            "extracting": "Εξορισμός...",
+            "distributables": "Εγκατάσταση διανομέων",
+            "installing": "Μεταφορτώνεται...",
+            "paused": "Σε παύση"
+        },
+        "publicAlpha": "Δημόσια Alpha",
+        "viewMyAccount": "Δείτε το λογαριασμό μου",
+        "viewPortfolio": "Δείτε χαρτοφυλάκιο χαρτοφυλακίου",
+        "otp": "Ένα Time Passcode",
+        "linkSteamAccountCta": "Go to Steam sign in",
+        "linkSteamAccountDescription": "Εγγραφείτε στο Steam για να συνδέσετε το λογαριασμό HyperPlay σας.",
+        "linkSteamAccountTitle": "Link λογαριασμό λογαριασμού Steam",
+        "syncing": "Σύνθεση...",
+        "viewItem": "Δείτε {{item}}",
+        "analyticsOff": "Το Analytics απενεργοποιείται",
+        "copyUrl": "Copy URL",
+        "discordApp": "Discord",
+        "folder": "Φάκελος",
+        "misc": "Ποτέ",
+        "turnAnalyticsOff": "Απενεργοποίηση",
+        "turnAnalyticsOn": "Ενεργοποίηση",
+        "logOut": "Αποσύνδεση",
+        "Sync": "Συγχρονισμός"
+    },
+    "hyperplayOverlay": {
+        "signatureRequest": {
+            "FAILED": "Η υπογραφή διέκοψε",
+            "INITIATED": "Αίτηση υπογραφής εκκρεμών",
+            "CONFIRMED": "Υπογραφή"
+        },
+        "greeting": {
+            "description": "HyperPlay Overlay είναι έτοιμο! Τύπος {{overlayKeyMod}} + X για να το δείξει ή να το κρύψει.",
+            "title": "HyperPlay Overlay"
+        },
+        "walletWatch": {
+            "INITIATED": "Προσθέστε προσαρμοσμένη αίτηση εγγραφής εν αναμονή",
+            "CONFIRMED": "Custom token πρόσθεσε",
+            "FAILED": "Προσαρμοσμένη αίτηση ακυρώθηκε"
+        },
+        "description": {
+            "CONFIRMED": "Η συναλλαγή επιβεβαιώθηκε με επιτυχία!",
+            "INITIATED": "Μια επιβεβαίωση πορτοφολιού εν αναμονή στο κινητό σας πορτοφόλι",
+            "PENDING": "Περιμένοντας την επιβεβαίωση blockchain. Θα σας ενημερώσουμε όταν επιβεβαιωθεί",
+            "FAILED": "Η συναλλαγή ακυρώθηκε ή δεν υποβλήθηκε, παρακαλώ δοκιμάστε ξανά"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "Τύπος {{overlayKeyMod}} + X για να δείτε αυτή τη συναλλαγή",
+            "TITLE": "Η πράξη ζήτησε"
+        },
+        "chainRequest": {
+            "INITIATED": "Αίτηση προσαρμοσμένου δικτύου",
+            "CONFIRMED": "Προσαρμοσμένο δίκτυο πρόσθεσε",
+            "FAILED": "Το προσαρμοσμένο δίκτυο ακυρώθηκε"
+        },
+        "txnRequest": {
+            "CONFIRMED": "Η πράξη επιβεβαίωσε",
+            "FAILED": "Η πράξη διέκοψε",
+            "INITIATED": "Αίτηση συναλλαγής εν αναμονή",
+            "PENDING": "Πράξη"
+        }
+    },
+    "quest": {
+        "connectSteamAccount": "Connect λογαριασμό λογαριασμού Steam",
+        "needMoreAchievements": "Πρέπει να έχετε ολοκληρώσει το {{percent}}% των επιτευγμάτων σε ένα από αυτά τα παιχνίδια.",
+        "quests": "Quests",
+        "playstreak": {
+            "dayResets": "Η Ημέρα επαναφέρει:",
+            "playToStart": "Παίξτε αυτό το παιχνίδι για να ξεκινήσετε το streak σας!",
+            "progressTowardsStreak": "πρόοδο προς το σημερινό streak.",
+            "streakProgress": "Streak Progress",
+            "playEachDay": "Παίξτε κάθε μέρα έτσι ώστε το streak σας να μην επαναφέρετε!",
+            "streakCompleted": "Ο Streak ολοκλήρωσε! Ισχυρίστε τις ανταμοιβές σας τώρα.",
+            "days": "ημέρες",
+            "now": "Τώρα"
+        },
+        "readyForClaim": "Ετοιμαστείτε για αξίωση",
+        "reward": "Reward",
+        "claimFailed": "Η αξίωση απέτυχε",
+        "claimFailedMessage": "Προσπαθήστε για μια ακόμη φορά. Εάν εξακολουθεί να μην λειτουργεί, δημιουργήστε ένα εισιτήριο υποστήριξης Discord.",
+        "associatedGames": "Associated παιχνίδια",
+        "claimAll": "Ισχυροποίηση όλων",
+        "claimed": "Απαιτείται",
+        "errorMessage": "Υπήρχε ένα λάθος με τη συναλλαγή.",
+        "linkAccount": "Σύνδεση σας λογαριασμός Steam για να ελέγξετε την επιλεξιμότητα.",
+        "type": {
+            "playstreak": "Παίξτε Streak",
+            "reputation": "Φήμη"
+        },
+        "View Game": "Δείτε παιχνίδι",
+        "createDiscordTicket": "Δημιουργήθηκε εισιτήριο Discord",
+        "notEnoughGas": "Επαρκή ισορροπία πορτοφολιού για να διεκδικήσει την ανταμοιβή σας λόγω των τελών φυσικού αερίου. Δοκιμάστε ένα διαφορετικό πορτοφόλι ή αναπληρώστε αυτό πριν αναπροσανατολίσετε.",
+        "Play": "Αναπαραγωγή",
+        "points": "Σημεία",
+        "reputation": "Φήμη",
+        "active": "Ενεργό",
+        "signIn": "Σύνδεση",
+        "sync": "Συγχρονισμός"
+    },
+    "email_subscription": {
+        "title": "Σας ευχαριστούμε για την εγγραφή!",
+        "subtitle": "Τώρα είστε μέρος της κοινότητάς μας και είμαστε ενθουσιασμένοι που μοιραζόμαστε πολύτιμες ενημερώσεις και ιδέες μαζί σας."
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} και άλλα παιχνίδια είναι έτοιμα να ενημερώσουν.",
+            "single": "Υπάρχει μια ενημέρωση έτοιμη για {{gameName}}."
+        },
+        "title": "Πληροφορίες παιχνιδιού διαθέσιμες"
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "overlay": "Επί του παρόντος δεν είστε συνδεδεμένοι, η πρόοδος του παιχνιδιού δεν θα εντοπιστεί. Παρακαλούμε βγείτε από το παιχνίδι και συνδεθείτε στο HyperPlay μέσω της κορυφαίας κατάρρευσης για να παρακολουθήσετε την πρόοδο.",
+                "client": "Επί του παρόντος δεν είστε συνδεδεμένοι, η πρόοδος του παιχνιδιού δεν θα εντοπιστεί. Επικοινωνήστε με το HyperPlay μέσω της κορυφαίας κατάρρευσης για να παρακολουθήσετε την πρόοδο."
+            }
+        },
+        "quests": "Quests"
+    },
+    "back_to_game": "Επιστροφή στο παιχνίδι",
+    "dlcs": {
+        "label": "Επιλέξτε DLCs για να εγκαταστήσετε:"
+    },
+    "accounts": "λογαριασμοί",
+    "achievements": {
+        "progress": {
+            "minted": "στην αλυσίδα",
+            "notMinted": "off chain"
+        }
+    },
+    "gameRelease": {
+        "prototype": "Prototype",
+        "alpha": "Alpha",
+        "demo": "Demo",
+        "beta": "Beta",
+        "main": "Κύριο"
+    },
+    "exit_game": "Exit Game",
+    "sideload": {
+        "warningMessage": "Side-loading ένα παιχνίδι είναι ένα χαρακτηριστικό που προορίζεται για προγραμματιστές και έμπειρους χρήστες ισχύος. Παροχή ενός εγκαταστάτη που περιέχει malware θα μπορούσε να θέσει σε κίνδυνο τον υπολογιστή σας και να οδηγήσει σε κλοπή κεφαλαίων.",
+        "warningTitle": "Σημαντικό"
+    },
+    "importGameErrorMessage": "Όχι ένας έγκυρος φάκελος παιχνιδιών, το παιχνίδι εισαγωγής δεν είναι εφικτό",
+    "importGameErrorTitle": "Επεισόδιο Game Error",
+    "notification": {
+        "wine-download": {
+            "message": "Δημιουργία του προεπιλεγμένου στρώματος συμβατότητας",
+            "title": "Συμβατό στρώμα"
+        }
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Είστε συνδεδεμένοι με το HyperPlay με ένα εξωτερικό πορτοφόλι."
+    },
+    "importGameErrorMessageExecutable": "Game Game Game Δεν είναι εφικτό, το παιχνίδι εισαγωγής δεν είναι εφικτό",
+    "profile": "Προφίλ",
+    "ALL": "ΌΛΑ",
+    "analytics": "Αναλυτικά στοιχεία"
 }

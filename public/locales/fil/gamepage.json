@@ -44,7 +44,9 @@
             "title": "Kailangan ng Pag-update ng Laro"
         },
         "wineprefix": "Piliin ang WinePrefix Folder",
-        "yes": "OO"
+        "yes": "OO",
+        "ok": "Sige",
+        "dont-show-again": "Huwag ipakita ang edad"
     },
     "cloud_save_unsupported": "Hindi suportado",
     "disabled": "Hindi pinagana",
@@ -80,7 +82,8 @@
         "launching": "Paglulunsad",
         "playing": {
             "start": "Maglaro Ngayon",
-            "stop": "Naglalaro (Stop)"
+            "stop": "Naglalaro (Stop)",
+            "update": "I-update"
         },
         "saves": {
             "syncing": "Sini-sync ang mga pag-save"
@@ -111,7 +114,9 @@
         "updating": "Pag-update ng Laro",
         "clickToUpdate": "I-click upang I-update",
         "downloading": "Nagda-download",
-        "extracting": "Pag-extract",
+        "extracting": {
+            "progress": "Pag-extract"
+        },
         "gameNotAvailable": "Hindi available ang laro",
         "hasUpdates": "Available ang Bagong Bersyon!",
         "installed": "Naka-install",
@@ -121,7 +126,8 @@
         "moving-files": "Inilipat ang file na '{{file}}': {{percent}} ",
         "notinstalled": "Ang larong ito ay hindi naka-install",
         "gog-goodie": "Mukhang hindi mai-install ang larong ito. Tingnan ang nada-download na nilalaman sa https://gog.com/account",
-        "goodie": "Hindi mai-install"
+        "goodie": "Hindi mai-install",
+        "paused": "Sandaling Nakahinto"
     },
     "submenu": {
         "addShortcut": "Magdagdag ng shortcut",
@@ -151,7 +157,9 @@
         "install": "I-install",
         "no-path-selected": "Walang napiling landas",
         "queue": {
-            "remove": "Alisin sa Queue"
+            "remove": "Alisin sa Queue",
+            "cancel": "Ikansela ang pag-download",
+            "continue": "Magpatuloy sa Pag-download"
         },
         "remove_from_favourites": "Alisin sa Mga Paborito",
         "remove_from_recent": "Alisin Mula sa Kamakailan",
@@ -162,7 +170,9 @@
         },
         "unhide_game": "I-unhide ang Laro",
         "uninstall": "I-uninstall",
-        "update": "Update"
+        "update": "Update",
+        "favorites": "Mga paborito",
+        "remove_from_library": "Tanggalin"
     },
     "gamecard": {
         "moving": "Gumagalaw",

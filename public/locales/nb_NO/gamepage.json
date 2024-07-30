@@ -36,14 +36,17 @@
             "checkbox_prefix": "Prefiks",
             "message": "Avinstaller dette spillet?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Avinstaller"
+            "title": "Avinstaller",
+            "dlc": "Vil du avinstallere denne appen?"
         },
         "update": {
             "message": "Dette spillet har en oppdatering. Vil du bruke oppdatering nå?",
             "title": "Spillet trenger oppdatering"
         },
         "wineprefix": "Velg WinePrefix-mappe",
-        "yes": "Ja"
+        "yes": "Ja",
+        "dont-show-again": "Ikke vis igjen",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Legg til i favoritter",
@@ -57,7 +60,9 @@
         "install": "Installere",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Avbryt nedlasting",
+            "continue": "Fortsett nedlasting"
         },
         "remove_from_favourites": "Fjern fra favoritter",
         "remove_from_recent": "Remove From Recent",
@@ -68,7 +73,10 @@
         },
         "unhide_game": "Vis spill",
         "uninstall": "Avinstaller",
-        "update": "Oppdater"
+        "update": "Oppdater",
+        "details": "Informasjon",
+        "favorites": "Legg til i favoritter",
+        "remove_from_library": "Fjern"
     },
     "cloud_save_unsupported": "Ustøttet",
     "disabled": "Funksjonshemmet",
@@ -94,7 +102,8 @@
         "repairing": "Reparerer"
     },
     "generic": {
-        "error": "Ukjent feil"
+        "error": "Ukjent feil",
+        "noDescription": "Ingen beskrivelse tilgjengelig!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -127,7 +136,8 @@
         },
         "playing": {
             "start": "Leke nå",
-            "stop": "Spiller (Stopp)"
+            "stop": "Spiller (Stopp)",
+            "update": "Oppdater"
         },
         "saves": {
             "syncing": "Synkroniserer lagrer"
@@ -148,7 +158,8 @@
         "title": "Velg komponenter som skal installeres"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver flaske"
     },
     "sideload": {
         "field": {
@@ -187,7 +198,11 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Totalt nedlastede",
         "uninstalling": "Uninstalling",
-        "updating": "Oppdaterer spillet"
+        "updating": "Oppdaterer spillet",
+        "paused": "På pause",
+        "downloading": "Nedlasting pågår",
+        "playing": "Spiller",
+        "syncingSaves": "Synkroniserer lagrer"
     },
     "submenu": {
         "addShortcut": "Legg til snarvei",
