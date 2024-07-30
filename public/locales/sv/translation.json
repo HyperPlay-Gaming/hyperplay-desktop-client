@@ -152,7 +152,10 @@
         "login": "Logga in",
         "sync": "Synkronisering",
         "syncing": "Synkroniserar",
-        "unsync": "Avbryt synkronisering"
+        "unsync": "Avbryt synkronisering",
+        "continue": "Fortsätt",
+        "download": "Hämta",
+        "update": "Uppdatera"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Beräknad tid"
     },
     "epic": {
         "offline-notification-body": "Onlinetjänster kanske inte fungerar korrekt då Epics servrar är nere för tillfället!",
@@ -372,7 +376,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Öppen",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -434,7 +438,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Återupta nerladdning",
+            "pause": "Pausa hämtningar"
         }
     },
     "Recent": "Nyligen spelat",
@@ -548,7 +554,8 @@
         "disable_logs": "Inaktivera loggar",
         "addgamestoapplications": "Lägg till spel till applikationer automatiskt",
         "showMetalOverlay": "Visa statistiköverlägg",
-        "alt-nile-bin": "Välj en alternativ Nile Binär"
+        "alt-nile-bin": "Välj en alternativ Nile Binär",
+        "msync": "Aktivera Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -583,19 +590,32 @@
             "log": "Logg",
             "other": "Övrigt",
             "sync": "Synkronisera sparfiler",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Konton",
+            "systemInformation": "System Information"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Grundinställ HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine hanterare"
+            }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Kopiera till Urklipp",
+            "os": "Operating system:"
         }
     },
     "Settings": "Inställningar",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Bibliotek",
+        "store": "Marknad"
     },
     "status": {
         "installing": "Installing",
@@ -634,7 +654,8 @@
         "logout": "Logga ut",
         "logout_confirmation": "Är du säker att du vill logga ut?",
         "manageaccounts": "Hantera konton",
-        "quit": "Avsluta"
+        "quit": "Avsluta",
+        "logIn": "Logga in"
     },
     "webview": {
         "controls": {
@@ -671,5 +692,62 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon spel",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "profile": "Profil",
+    "hyperplay": {
+        "browserImport": {
+            "profile": "Profil"
+        },
+        "buttons": {
+            "noThanks": "Nej tack"
+        },
+        "copyUrl": "Kopiera webbadress",
+        "logOut": "Logga ut",
+        "turnAnalyticsOff": "Stäng av",
+        "discordApp": "Discord",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Läs mer",
+                        "orWord": "ELLER"
+                    },
+                    "info": {
+                        "skip": "Hoppa över för nu"
+                    }
+                }
+            },
+            "terms": "Tjänstevillkor"
+        },
+        "folder": "Mapp",
+        "Sync": "Synka",
+        "misc": "Aldrig",
+        "gamecard": {
+            "installing": "Hämtar...",
+            "paused": "Pausad",
+            "distributables": "Installera Distributables"
+        },
+        "syncing": "Synkroniserar …",
+        "turnAnalyticsOn": "Sätt på"
+    },
+    "gameRelease": {
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Prova",
+        "main": "Huvudsaklig"
+    },
+    "quest": {
+        "active": "Aktiv",
+        "Play": "Spela",
+        "playstreak": {
+            "days": "dagar",
+            "now": "Nu"
+        },
+        "points": "Punkter",
+        "connectSteamAccount": "Anslut gruppkonto",
+        "signIn": "Logga in",
+        "sync": "Synka"
+    },
+    "ALL": "ALLA",
+    "analytics": "Analytics"
 }
