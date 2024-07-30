@@ -83,7 +83,9 @@ export function QuestDetailsViewPlayWrapper({
     ),
     claim: t('quest.claimAll', 'Claim all'),
     signIn: t('quest.signIn', 'Sign in'),
-    play: t('quest.View Game', 'View Game'),
+    play: navigateToGame.isPending
+      ? t('please-wait', 'Please wait...')
+      : t('quest.View Game', 'View Game'),
     secondCTAText: t('quest.View Game', 'View Game'),
     connectSteamAccount: t(
       'quest.connectSteamAccount',
