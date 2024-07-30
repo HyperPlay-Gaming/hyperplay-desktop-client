@@ -152,7 +152,10 @@
         "login": "Inicia la sessió",
         "sync": "Sincronitza",
         "syncing": "S'està sincronitzant",
-        "unsync": "Dessincronitza"
+        "unsync": "Dessincronitza",
+        "update": "Actualitza",
+        "continue": "Continuar",
+        "download": "Descarrega"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Iniciat a les",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Temps estimat"
     },
     "epic": {
         "offline-notification-body": "Els serveis en línia potser no funcionen del tot, ja que els servidors d'Epic Games estan desconnectats!",
@@ -373,7 +377,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Es torna a provar"
     },
-    "Open": "",
+    "Open": "Obrir",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -435,7 +439,8 @@
             "empty": "No hi ha res per a descarregar",
             "finished": "Completat",
             "queued": "A la cua",
-            "remove": "Treu de les descàrregues"
+            "remove": "Treu de les descàrregues",
+            "pause": "Pausa les baixades"
         }
     },
     "Recent": "Jugats fa poc",
@@ -550,7 +555,8 @@
         "showMetalOverlay": "Mostra la superposició d'estadístiques",
         "addgamestoapplications": "Afegeix jocs a Aplicacions automàticament",
         "alt-nile-bin": "Trieu un binari alternatiu del Nil",
-        "autodxvknvapi": "Instal·la/Actualitza el DXVK-NVAPI al prefix automàticament"
+        "autodxvknvapi": "Instal·la/Actualitza el DXVK-NVAPI al prefix automàticament",
+        "msync": "Activa l'Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -585,19 +591,31 @@
             "log": "Registre",
             "other": "Altres",
             "sync": "Desa-sincronitza",
-            "wineExt": "Extensions del Wine"
+            "wineExt": "Extensions del Wine",
+            "systemInformation": "_Informació del sistema",
+            "accounts": "Comptes"
         },
         "open-config-file": "Obre el fitxer de configuració",
         "reset-hyperplay": "Restableix l'HyperPlay",
         "saves": {
             "label": "Ubicació de les desades:",
             "warning": "La funció de desar al núvol està en versió beta. Si us plau, feu una còpia de seguretat de les vostres partides desades abans de sincronitzar-les, per si quelcom sortís malament."
+        },
+        "systemInformation": {
+            "copyToClipboard": "Copia al portaretalls"
+        },
+        "wine": {
+            "manager": {
+                "title": "Gestor del Wine"
+            }
         }
     },
     "Settings": "Configuració",
     "sidebar": {
         "collapse": "Col·lapsa la barra lateral",
-        "uncollapse": "Expandeix la barra lateral"
+        "uncollapse": "Expandeix la barra lateral",
+        "library": "Biblioteca",
+        "store": "Botiga"
     },
     "status": {
         "installing": "S'està instal·lant...",
@@ -636,7 +654,8 @@
         "logout": "Tanca la sessió",
         "logout_confirmation": "Segur que vols tancar la sessió?",
         "manageaccounts": "Gestiona els comptes",
-        "quit": "Surt"
+        "quit": "Surt",
+        "logIn": "Inicia la sessió"
     },
     "webview": {
         "controls": {
@@ -673,5 +692,61 @@
     },
     "prime-gaming": "Prime Gaming",
     "amazon": "Amazon",
-    "Amazon Games": "Jocs d'Amazon"
+    "Amazon Games": "Jocs d'Amazon",
+    "analytics": "Estadístiques",
+    "hyperplay": {
+        "misc": "Mai",
+        "logOut": "Tanca sessió",
+        "turnAnalyticsOn": "Activa",
+        "Sync": "Sincronització",
+        "turnAnalyticsOff": "Desactiva",
+        "browserImport": {
+            "profile": "Perfil"
+        },
+        "buttons": {
+            "agree": "Estic d'acord",
+            "noThanks": "No, gràcies"
+        },
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Apreneu-ne més"
+                    }
+                }
+            },
+            "terms": "condicions del servei"
+        },
+        "gamecard": {
+            "paused": "Pausat",
+            "installing": "S'està baixant...",
+            "distributables": "Instal·lació de distribuïdors"
+        },
+        "discordApp": "Discord",
+        "folder": "Carpeta",
+        "copyUrl": "Copia l'URL"
+    },
+    "quest": {
+        "active": "Actiu",
+        "Play": "Joc",
+        "playstreak": {
+            "days": "dies",
+            "now": "Ahora"
+        },
+        "signIn": "Inicia la sessió",
+        "sync": "Sincronització",
+        "connectSteamAccount": "Connecta el compte de l'equip",
+        "points": "Punts"
+    },
+    "ALL": "TOT",
+    "gameRelease": {
+        "main": "Inici",
+        "alpha": "Alfa",
+        "beta": "Beta",
+        "demo": "Demostració"
+    },
+    "profile": "Perfil",
+    "sideload": {
+        "warningTitle": "Important"
+    }
 }
