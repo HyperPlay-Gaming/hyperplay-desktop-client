@@ -152,7 +152,10 @@
         "login": "Đăng nhập",
         "sync": "Đồng bộ",
         "syncing": "Đang đồng bộ",
-        "unsync": "Hủy đồng bộ"
+        "unsync": "Hủy đồng bộ",
+        "update": "Cập nhật",
+        "continue": "Tiếp tục",
+        "download": "Tải"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Thơi gian dự định"
     },
     "epic": {
         "offline-notification-body": "Các dịch vụ trực tuyến có thể không hoạt động đầy đủ vì máy chủ của Epic Games đang ngoại tuyến!",
@@ -263,7 +267,8 @@
         "wine": {
             "part1": "HyperPlay tìm kiếm các phiên bản Wine, Proton và CrossOver trong các thư mục sau:",
             "part2": "Đối với vị trí khác, sử dụng biểu tượng liên kết với một trong những thư mục này"
-        }
+        },
+        "msync": "Esync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Mở",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -431,7 +436,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Tiếp tục tải",
+            "pause": "Tạm dừng tải xuống"
         }
     },
     "Recent": "Chơi gần đây",
@@ -545,7 +552,9 @@
         "disable_logs": "Tắt nhật ký",
         "addgamestoapplications": "Tự động thêm trò chơi vào Ứng dụng",
         "showMetalOverlay": "Hiển thị lớp phủ thống kê",
-        "alt-nile-bin": "Chọn một nhị phân Nile thay thế"
+        "alt-nile-bin": "Chọn một nhị phân Nile thay thế",
+        "msync": "Bật Esync",
+        "autodxvknvapi": "Tự động cài đặt/cập nhật DXVK trên prefix"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +589,35 @@
             "log": "Log",
             "other": "Khác",
             "sync": "Lưu - Đồng bộ",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Người",
+            "systemInformation": "Thông tin hệ thống"
         },
         "open-config-file": "Mở tệp cấu hình",
         "reset-hyperplay": "Đặt lại HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "gamesSettings": "Game settings",
+        "systemInformation": {
+            "memory": "Bộ nhớ",
+            "copyToClipboard": "Lưu vào clipboard",
+            "os": "Operating system:"
+        },
+        "wine": {
+            "manager": {
+                "title": "Quản lý Wine"
+            }
         }
     },
     "Settings": "Cài đặt",
     "sidebar": {
         "collapse": "Thu gọn sidebar",
-        "uncollapse": "Hủy thu gọn sidebar"
+        "uncollapse": "Hủy thu gọn sidebar",
+        "store": "Marketplace",
+        "achievements": "Thành Tựu",
+        "library": "Thư Viện"
     },
     "status": {
         "installing": "Đang cài đặt",
@@ -631,7 +656,8 @@
         "logout": "Đăng xuất",
         "logout_confirmation": "Xác nhận đăng xuất?",
         "manageaccounts": "Quản lý tài khoản",
-        "quit": "Thoát"
+        "quit": "Thoát",
+        "logIn": "Đăng nhập"
     },
     "webview": {
         "controls": {
@@ -668,5 +694,77 @@
     },
     "amazon": "amazon",
     "Amazon Games": "Trò chơi Amazon",
-    "prime-gaming": "Trò chơi chính"
+    "prime-gaming": "Trò chơi chính",
+    "gameRelease": {
+        "demo": "Demo",
+        "main": "Vai chính",
+        "alpha": "Alpha",
+        "beta": "Beta"
+    },
+    "hyperplay": {
+        "buttons": {
+            "agree": "Tôi đồng ý.",
+            "noThanks": "Không cảm ơn"
+        },
+        "turnAnalyticsOn": "Bật",
+        "folder": "Thư mục",
+        "misc": "Không bao giờ",
+        "browserImport": {
+            "profile": "Hồ sơ",
+            "appId": "Định danh ứng dụng"
+        },
+        "discordApp": "Discord",
+        "gamecard": {
+            "installing": "Đang tải...",
+            "paused": "Ngừng lại"
+        },
+        "logOut": "Đăng xuất",
+        "onboarding": {
+            "terms": "Điều khoản dịch vụ",
+            "walletSelection": {
+                "screens": {
+                    "info": {
+                        "skip": "Bỏ qua bây giờ"
+                    },
+                    "import": {
+                        "learnMore": "Tìm hiểu thêm"
+                    }
+                }
+            }
+        },
+        "turnAnalyticsOff": "Tắt",
+        "Sync": "Đồng bộ",
+        "copyUrl": "Sao chép URL"
+    },
+    "quest": {
+        "active": "Tích cực",
+        "claimAll": "Nhận Tất Cả",
+        "claimed": "Đã Nhận",
+        "Play": "Chơi",
+        "quests": "Quest",
+        "signIn": "Đăng nhập",
+        "playstreak": {
+            "days": "ngày",
+            "now": "Bây giờ"
+        },
+        "points": "Điểm",
+        "sync": "Đồng bộ",
+        "reward": "Thưởng"
+    },
+    "quests": {
+        "quests": "Quest"
+    },
+    "accounts": "Người",
+    "ALL": "TẤT CẢ",
+    "analytics": "Phân tích",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "FAILED": "Bản dịch bị gián đoạn."
+        }
+    },
+    "exit_game": "Thoát game",
+    "profile": "Hồ sơ",
+    "sideload": {
+        "warningTitle": "Quan trọng"
+    }
 }

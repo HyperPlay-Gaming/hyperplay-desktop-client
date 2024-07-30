@@ -152,7 +152,10 @@
         "login": "Prijava",
         "sync": "Sinkroniziraj",
         "syncing": "Sinkroniziranje",
-        "unsync": "Desinkroniziraj"
+        "unsync": "Desinkroniziraj",
+        "continue": "Nastavi",
+        "download": "Preuzmi",
+        "update": "Ažuriraj"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Procijenjeno vrijeme"
     },
     "epic": {
         "offline-notification-body": "HyperPlay vjerojatno neče raditi zato što EpicGames serveri su ugašeni!",
@@ -263,7 +267,8 @@
         "wine": {
             "part1": "HyperPlay traži verzije za WIne, Proton i CrossOver u sljedečim mapama:",
             "part2": "Za druga mjesta, koristite simbolični link do tih mapa"
-        }
+        },
+        "msync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Otvori",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -431,7 +436,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Zaustavi preuzimanja",
+            "resume": "Nastavi preuzimanje"
         }
     },
     "Recent": "Played Recently",
@@ -545,7 +552,9 @@
         "disable_logs": "Onemogući zapisnike",
         "addgamestoapplications": "Automatski dodajte igre u aplikacije",
         "showMetalOverlay": "Prikaži preklapanje statistike",
-        "alt-nile-bin": "Odaberite alternativni Nile Binary"
+        "alt-nile-bin": "Odaberite alternativni Nile Binary",
+        "msync": "Enable Esync",
+        "autodxvknvapi": "Auto Install/Update DXVK on Prefix"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +589,33 @@
             "log": "Log",
             "other": "Ostalo",
             "sync": "Spremi-Podatke",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Konta",
+            "systemInformation": "_Informacije sustava"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "gamesSettings": "Game settings",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Kopiraj u međuspremnik",
+            "memory": "Memorija"
         }
     },
     "Settings": "Postavke",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "store": "Trgovina",
+        "library": "Biblioteka"
     },
     "status": {
         "installing": "Instaliranje u tijeku",
@@ -631,7 +654,8 @@
         "logout": "Logout",
         "logout_confirmation": "Jeste li sigurni da se želite odjaviti?",
         "manageaccounts": "Manage Accounts",
-        "quit": "Quit"
+        "quit": "Quit",
+        "logIn": "Prijavi se"
     },
     "webview": {
         "controls": {
@@ -668,5 +692,72 @@
     },
     "prime-gaming": "Prime Gaming",
     "amazon": "Amazon",
-    "Amazon Games": "Amazonove igre"
+    "Amazon Games": "Amazonove igre",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "FAILED": "Prijevod prekinut."
+        }
+    },
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer"
+        }
+    },
+    "hyperplay": {
+        "buttons": {
+            "noThanks": "Ne, hvala"
+        },
+        "folder": "Mapa",
+        "onboarding": {
+            "terms": "Uvjeti usluge",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Saznaj više.",
+                        "orWord": "ILI"
+                    }
+                }
+            }
+        },
+        "browserImport": {
+            "appId": "ID aplikacije",
+            "profile": "Profil"
+        },
+        "gamecard": {
+            "paused": "Zaustavljeno",
+            "installing": "Preuzimanje …"
+        },
+        "misc": "Nikada",
+        "turnAnalyticsOn": "Uključi",
+        "discordApp": "Discord",
+        "achievements": {
+            "noAchievements": {
+                "oops": "Ups!"
+            }
+        },
+        "Sync": "Sinkronizacija",
+        "turnAnalyticsOff": "Isključi",
+        "logOut": "Odjavi se"
+    },
+    "quest": {
+        "active": "Aktivno",
+        "Play": "Reproduciraj",
+        "playstreak": {
+            "days": "dana",
+            "now": "Sada"
+        },
+        "points": "Točke",
+        "signIn": "Prijavi se",
+        "sync": "Sinkronizacija"
+    },
+    "accounts": "Konta",
+    "ALL": "SVE",
+    "analytics": "Analitika",
+    "gameRelease": {
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Demo",
+        "main": "Glavni"
+    },
+    "profile": "Profil"
 }

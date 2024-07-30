@@ -152,7 +152,10 @@
         "login": "Вписване",
         "sync": "Синхронизиране",
         "syncing": "Синхронизиране",
-        "unsync": "Десинхронизиране"
+        "unsync": "Десинхронизиране",
+        "continue": "Продължаване",
+        "download": "Изтегляне",
+        "update": "Актуализирай"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Предполагаемо време"
     },
     "epic": {
         "offline-notification-body": "Услугите, зависещи от Интернет, може да не работят изцяло, тъй като сървърите на Epic Games не са достъпни!",
@@ -263,7 +267,8 @@
         "wine": {
             "part1": "HyperPlay търси версии на Wine, Proton и CrossOver в следните папки:",
             "part2": "За други места използвайте символна връзка към една от тези папки"
-        }
+        },
+        "msync": "Fsync има за цел да намали натоварването причинено от wineserver за игри, които значително натоварват централния процесор. Включването му може да подобри производителността при условие, че се ползва някое от поддържаните ядра на Линукс."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Отваряне",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -431,7 +436,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Прекъсни изтеглянията",
+            "resume": "Възобновете изтеглянето"
         }
     },
     "Recent": "Играно наскоро",
@@ -549,7 +556,8 @@
         "autodxvknvapi": "Автоматично инсталиране/обновяване на DXVK/VKD3D в префикса",
         "experimental_features": {
             "enableNewShinyFeature": "Нова функционалност"
-        }
+        },
+        "msync": "Включване на Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -584,7 +592,9 @@
             "log": "Журнал",
             "other": "Други",
             "sync": "Синхронизиране на запазените файлове",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Акаунти",
+            "systemInformation": "Информация за системата"
         },
         "open-config-file": "Отваряне на конфигурационния файл",
         "reset-hyperplay": "Зачистване на HyperPlay",
@@ -594,12 +604,24 @@
         },
         "experimental_features": {
             "title": "Експериментални функционалности"
+        },
+        "wine": {
+            "manager": {
+                "title": "Управление на Wine"
+            }
+        },
+        "gamesSettings": "Game settings",
+        "systemInformation": {
+            "copyToClipboard": "Копиране в междинната памет",
+            "memory": "Памет"
         }
     },
     "Settings": "Настройки",
     "sidebar": {
         "collapse": "Свиване на страничната лента",
-        "uncollapse": "Разпъване на страничната лента"
+        "uncollapse": "Разпъване на страничната лента",
+        "library": "Библиотека",
+        "store": "Магазин"
     },
     "status": {
         "installing": "Инсталиране",
@@ -638,7 +660,8 @@
         "logout": "Излизане",
         "logout_confirmation": "Наистина ли искате да излезете?",
         "manageaccounts": "Управление на акаунтите",
-        "quit": "Изход"
+        "quit": "Изход",
+        "logIn": "Влизане"
     },
     "webview": {
         "controls": {
@@ -675,5 +698,60 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Игри от Amazon",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "buttons": {
+            "noThanks": "Не, благодаря"
+        },
+        "browserImport": {
+            "profile": "Профил",
+            "appId": "Идентификатор на приложението"
+        },
+        "folder": "Папка",
+        "gamecard": {
+            "paused": "На пауза",
+            "installing": "Протича изтегляне..."
+        },
+        "discordApp": "Дискорд",
+        "misc": "Никога",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "orWord": "ИЛИ",
+                        "learnMore": "Научете повече"
+                    }
+                }
+            },
+            "terms": "Условия на услугата"
+        },
+        "logOut": "Излизане",
+        "Sync": "Синхронизиране",
+        "turnAnalyticsOff": "Изключване",
+        "copyUrl": "Копиране URL",
+        "turnAnalyticsOn": "Включване"
+    },
+    "quest": {
+        "active": "Активен",
+        "Play": "Пусни",
+        "playstreak": {
+            "days": "дни",
+            "now": "Сега"
+        },
+        "points": "Точки",
+        "signIn": "Вписване",
+        "sync": "Синхронизиране",
+        "type": {
+            "reputation": "Репутация"
+        },
+        "reputation": "Репутация"
+    },
+    "accounts": "Акаунти",
+    "analytics": "Анализ",
+    "gameRelease": {
+        "main": "Главен",
+        "beta": "Beta",
+        "alpha": "Прозрачност"
+    },
+    "profile": "Профил"
 }

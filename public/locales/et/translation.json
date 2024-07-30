@@ -152,7 +152,10 @@
         "login": "Logi sisse",
         "sync": "Sünkrooni",
         "syncing": "Sünkroonimine",
-        "unsync": "Mittesünkroniseerimine"
+        "unsync": "Mittesünkroniseerimine",
+        "update": "Ajakohastamine",
+        "download": "Laadi alla",
+        "continue": "Jätka"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Eeldatav kellaaeg"
     },
     "epic": {
         "offline-notification-body": "Võrguteenused ei pruugi täielikult töötada, kuna Epic Gamesi serverid on võrguühenduseta!",
@@ -263,7 +267,8 @@
         "wine": {
             "part1": "HyperPlay otsib Wine'i, Proton'i ja CrossOveri versioone järgmistes kaustades:",
             "part2": "Muude kohtade puhul kasutage sümboolset linki ühele neist kaustadest"
-        }
+        },
+        "msync": "Fsynci eesmärk on vähendada wineserveri koormust CPU-mahukates mängudes. Lubamine võib parandada jõudlust toetatud Linuxi kernelitel."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Ava",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -545,7 +550,9 @@
         "disable_logs": "Keela logid",
         "addgamestoapplications": "Lisage mänge rakendustesse automaatselt",
         "showMetalOverlay": "Kuva statistika ülekate",
-        "alt-nile-bin": "Valige alternatiivne Niiluse binaar"
+        "alt-nile-bin": "Valige alternatiivne Niiluse binaar",
+        "msync": "Luba Esync",
+        "autodxvknvapi": "DXVK automaatne paigaldamine/uuendamine prefiksile"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +587,34 @@
             "log": "Logi",
             "other": "Muu",
             "sync": "Salvesta-sünkrooni",
-            "wineExt": "Wine'i laiendused"
+            "wineExt": "Wine'i laiendused",
+            "accounts": "Kontod",
+            "systemInformation": "S_üsteemi info"
         },
         "open-config-file": "Ava konfiguratsioonifail",
         "reset-hyperplay": "Lähtesta HyperPlay",
         "saves": {
             "label": "Salvestuste asukoht:",
             "warning": "Pilvesalvestuse funktsioon on beetaversioonis, enne sünkroonimist varundage oma salvestused (juhuks, kui midagi läheb valesti)"
+        },
+        "gamesSettings": "Mängu seaded",
+        "wine": {
+            "manager": {
+                "title": "Wine'i haldur"
+            }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Kopeeri lõikelauale",
+            "memory": "Mälu",
+            "os": "Operatsioonisüsteem"
         }
     },
     "Settings": "Seaded",
     "sidebar": {
         "collapse": "Ahenda külgriba",
-        "uncollapse": "Lahtista külgriba"
+        "uncollapse": "Lahtista külgriba",
+        "library": "Raamatukogu",
+        "store": "Pood"
     },
     "status": {
         "installing": "Paigaldamine",
@@ -631,7 +653,8 @@
         "logout": "Logi välja",
         "logout_confirmation": "Kas olete kindel, et soovite välja logida?",
         "manageaccounts": "Kontode haldamine",
-        "quit": "Sulge"
+        "quit": "Sulge",
+        "logIn": "Logi sisse"
     },
     "webview": {
         "controls": {
@@ -668,5 +691,56 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazoni mängud",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "discordApp": "Discord",
+        "buttons": {
+            "noThanks": "Ei aitäh"
+        },
+        "logOut": "Logi välja",
+        "misc": "Mitte kunagi",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Loe lisaks",
+                        "orWord": "VÕI"
+                    }
+                }
+            }
+        },
+        "Sync": "Sünkroonimine",
+        "turnAnalyticsOff": "Lülita välja",
+        "browserImport": {
+            "appId": "Rakenduse tunnus",
+            "profile": "Profiil"
+        },
+        "folder": "Kaustik",
+        "gamecard": {
+            "paused": "Peatatud"
+        },
+        "copyUrl": "&Kopeeri URL"
+    },
+    "gameRelease": {
+        "beta": "Beta",
+        "main": "Veetrassil"
+    },
+    "quest": {
+        "active": "Aktiivne",
+        "Play": "Esita",
+        "playstreak": {
+            "days": "päeva",
+            "now": "Nüüd"
+        },
+        "points": "Punktid",
+        "signIn": "Logi sisse",
+        "sync": "Sünkroonimine"
+    },
+    "accounts": "Kontod",
+    "ALL": "Kõik",
+    "analytics": "Analüütika",
+    "sideload": {
+        "warningTitle": "Oluline"
+    },
+    "profile": "Profiil"
 }

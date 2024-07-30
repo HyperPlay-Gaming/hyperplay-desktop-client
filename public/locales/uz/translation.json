@@ -134,7 +134,12 @@
         },
         "wineprefix": "Wine prefiks papkasini tanlang",
         "yes": "HA",
-        "choose-nile-binary": "Nil ikkilik-ni tanlang"
+        "choose-nile-binary": "Nil ikkilik-ni tanlang",
+        "reset-app": {
+            "question": {
+                "title": "Qahramonlikni tiklash"
+            }
+        }
     },
     "accessibility": {
         "actions_font_family_no_default": "Harakatlar shriftlari oilasi (standart: ",
@@ -175,7 +180,8 @@
         "logout_confirmation": "Haqiqatan ham tizimdan chiqmoqchimisiz?",
         "manageaccounts": "Hisoblarni boshqarish",
         "quit": "Chiqish",
-        "quitMessage": "Chiqishni xohlayotganingizga ishonchingiz komilmi?"
+        "quitMessage": "Chiqishni xohlayotganingizga ishonchingiz komilmi?",
+        "logIn": "Tizimga kirish"
     },
     "tray": {
         "show": "Ko'rsatish",
@@ -212,7 +218,9 @@
         "login": "Tizimga kirish",
         "sync": "Sinxronlash",
         "syncing": "Sinxronlash",
-        "unsync": "Sinxronizatsiyani bekor qilish"
+        "unsync": "Sinxronizatsiyani bekor qilish",
+        "download": "Yuklash",
+        "update": "Yangilash"
     },
     "controller": {
         "hints": {
@@ -326,7 +334,8 @@
             "part1": "Qahramonlik quyidagi papkalarda Wine, Proton va CrossOver versiyalarini qidiradi:",
             "part2": "Boshqa joylar uchun ushbu papkalardan biriga ramziy havoladan foydalaning"
         },
-        "disable_logs": "Jurnal fayllariga yozishning ko'p qismini o'chirish uchun ushbu katakchani ON holatiga o'tkazing (muhim ma'lumotlar har doim qayd qilinadi). Har qanday muammo haqida xabar berishdan oldin ushbu sozlamani O‘CHIRING."
+        "disable_logs": "Jurnal fayllariga yozishning ko'p qismini o'chirish uchun ushbu katakchani ON holatiga o'tkazing (muhim ma'lumotlar har doim qayd qilinadi). Har qanday muammo haqida xabar berishdan oldin ushbu sozlamani O‘CHIRING.",
+        "msync": "Fsync protsessor talab qiladigan o'yinlarda vinoserver yukini kamaytirishga qaratilgan. Yoqish qoʻllab-quvvatlanadigan Linux yadrolarida ish faoliyatini yaxshilashi mumkin."
     },
     "info": {
         "hyperplay": {
@@ -370,7 +379,8 @@
         "toggleLayout": {
             "grid": "Toʻr tartibiga oʻtish",
             "list": "Roʻyxat tartibiga oʻtish"
-        }
+        },
+        "label": "Kutubxona"
     },
     "Library": "Kutubxona",
     "loading": {
@@ -616,7 +626,9 @@
         "disable_logs": "Jurnallarni o'chirib qo'ying",
         "addgamestoapplications": "Ilovalarga o'yinlarni avtomatik ravishda qo'shing",
         "showMetalOverlay": "Statistika qavatini ko'rsatish",
-        "alt-nile-bin": "Muqobil Nil Binarini tanlang"
+        "alt-nile-bin": "Muqobil Nil Binarini tanlang",
+        "autodxvknvapi": "Prefiksda DXVK-ni avtomatik o'rnatish/yangilash",
+        "msync": "Esync-ni yoqing"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -650,13 +662,19 @@
             "general": "General",
             "log": "Jurnal",
             "other": "Boshqa",
-            "sync": "Cloud Saves Sync"
+            "sync": "Cloud Saves Sync",
+            "accounts": "Account",
+            "systemInformation": "_Tizim ma’lumoti"
         },
         "open-config-file": "Konfiguratsiya faylini oching",
         "reset-hyperplay": "Qahramonlikni tiklash",
         "saves": {
             "warning": "Bulutli saqlash funksiyasi beta-versiyasida, sinxronlashdan oldin saqlangan maʼlumotlarning zaxira nusxasini yarating (agar biror narsa notoʻgʻri boʻlsa)"
-        }
+        },
+        "systemInformation": {
+            "memory": "Xotira"
+        },
+        "gamesSettings": "O'yin sozlamalari"
     },
     "Settings": "Sozlamalar",
     "status": {
@@ -691,5 +709,40 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon o'yinlari",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "folder": "Jild",
+        "logOut": "Chiqish",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Batafsilroq"
+                    }
+                }
+            }
+        },
+        "misc": "Hech qachon",
+        "Sync": "Sinxronlash",
+        "gamecard": {
+            "installing": "Yuklab olinmoqda…",
+            "paused": "Пауза қилинган"
+        }
+    },
+    "sidebar": {
+        "store": "Do'kon",
+        "library": "Kutubxona"
+    },
+    "quest": {
+        "active": "Faol",
+        "Play": "Hozir O'yna",
+        "signIn": "Sign in",
+        "sync": "Sinxronlash"
+    },
+    "analytics": "Tashxis",
+    "notification": {
+        "wine-download": {
+            "title": "Vino menejeri"
+        }
+    }
 }

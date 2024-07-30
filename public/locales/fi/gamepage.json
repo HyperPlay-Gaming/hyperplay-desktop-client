@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Jatka asentamista",
             "message": "Haluatko SÄILYTTÄÄ ladatut tiedostot?",
-            "title": "Pysäytä asennus"
+            "title": "Pysäytä asennus",
+            "keepFilesMessage": "Tarkista tästä, jos haluat säilyttää lataustiedostot peruutuksen jälkeen."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Haluatko poistaa pelin asennuksen?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Poista"
+            "title": "Poista",
+            "dlc": "Haluatko poistaa DLC:n?",
+            "prefix_warning": "Tämän pelin viinin etuliite on oletusarvo. Jos haluat poistaa sen, sinun on tehtävä se manuaalisesti."
         },
         "update": {
             "message": "Tälle pelille on saatavilla päivitys, haluatko asentaa sen nyt?",
-            "title": "Peli tarvitsee päivityksen"
+            "title": "Peli tarvitsee päivityksen",
+            "message-cancel": "Tätä peliä ei voi pelata päivittämättä"
         },
         "wineprefix": "Valitse WinePrefix-kansio",
-        "yes": "KYLLÄ"
+        "yes": "KYLLÄ",
+        "aware": "Olen tietoinen",
+        "compability": {
+            "message": "Tämä Windows-peli toimii yhteensopivuuskerroksen avulla. Saatat kohdata ongelmia tai peli ei ehkä toimi ollenkaan."
+        },
+        "yesCancel": "Kyllä, peruutus",
+        "dont-show-again": "Älä näytä uudelleen",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -56,7 +67,9 @@
         "install": "Asenna",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Peruuta lataus",
+            "continue": "Jatka lataamista"
         },
         "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Unhide Game",
         "uninstall": "Poista",
-        "update": "Päivitä"
+        "update": "Päivitä",
+        "unfavorites": "Epäsuosikki",
+        "details": "Yksityiskohdat",
+        "favorites": "Lisää suosikiksi",
+        "remove_from_library": "Poista"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Pois käytöstä",
@@ -86,14 +103,17 @@
         "neverPlayed": "Ei koskaan",
         "platform": "Select Platform",
         "requirements": "System Requirements",
-        "totalPlayed": "Pelattu aika"
+        "totalPlayed": "Pelattu aika",
+        "dlcs": "DLC",
+        "selectChannelName": "Valitse kanava Nimen nimi"
     },
     "gamecard": {
         "moving": "Siirretään",
         "repairing": "Korjataan"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "Ei kuvausta."
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -118,7 +138,8 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "WinePrefix",
-        "wineversion": "Wine Version"
+        "wineversion": "Wine Version",
+        "compatibility-warning": "Tämä Windows-peli toimii yhteensopivuuskerroksen avulla. Kokemuksesi voi vaihdella."
     },
     "label": {
         "game": {
@@ -126,7 +147,8 @@
         },
         "playing": {
             "start": "Pelaa nyt",
-            "stop": "Pelataan (pysäytä)"
+            "stop": "Pelataan (pysäytä)",
+            "update": "Päivitä"
         },
         "saves": {
             "syncing": "Synkronoidaan tallennuksia"
@@ -147,7 +169,8 @@
         "title": "Valitse asennettavat komponentit"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -186,7 +209,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Ladattu yhteensä",
         "uninstalling": "Uninstalling",
-        "updating": "Päivitetään peliä"
+        "updating": "Päivitetään peliä",
+        "moving-files": "Tiedoston siirtäminen (X13X): {{percent}} ",
+        "distributables": "Jakelun asentaminen",
+        "preparing": "Lataa, odota",
+        "extracting": {
+            "cancel": "Peruuta ylimääräinen",
+            "progress": "Ulkoistaminen"
+        },
+        "gog-goodie": "Tämä peli ei näytä olevan asennettavissa. Tarkista ladattava sisältö https:/gog.com/account",
+        "goodie": "Ei asennettavissa",
+        "downloading": "Tor-selaimen lataaminen",
+        "paused": "Pysäytetty",
+        "playing": "Toistaa",
+        "syncingSaves": "Synkronoidaan tallennuksia"
     },
     "submenu": {
         "addShortcut": "Lisää pikakuvake",
@@ -200,6 +236,7 @@
         "removeShortcut": "Remove shortcuts",
         "settings": "Asetukset",
         "store": "Kauppasivu",
-        "verify": "Vahvista ja korjaa"
+        "verify": "Vahvista ja korjaa",
+        "extraInfo": "Lisätietoa"
     }
 }

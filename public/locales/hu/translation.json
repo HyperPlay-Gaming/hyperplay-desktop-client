@@ -66,7 +66,8 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "Valami rosszul ment a frissítéssel! Kérjük, manuálisan telepítse és újratelepítse a HyperPlay-t."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,6 +77,11 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
+            },
+            "moving": "Error Moving Game {{error}}",
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Az Ubisoft Connect telepítése a játék előtagjában kudarcot vallott. Ellenőrizze a wiki oldalunkat a https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac telepítéséhez."
             }
         },
         "info": {
@@ -139,12 +145,28 @@
                 "install": "Az Epic szerverek nagyobb üzemszünetben vannak jelenleg, a játékot nem lehet telepíteni!",
                 "update": "Az Epic szerverek nagyobb üzemszünetben vannak jelenleg, a játékot nem lehet frissíteni!"
             },
-            "title": "Figyelmeztetés"
+            "title": "Figyelmeztetés",
+            "wine-change": {
+                "title": "Bor nem talált!",
+                "title-gptk": "Game Porting Toolkit nem kompatibilis ",
+                "message": "Nem találtuk meg a kiválasztott borverziót, hogy elindítsuk ezt a címet ({{selectedWine}}). {{newline}} Találtunk egy másikat, szeretné folytatni a {{foundWine}} használatát?",
+                "message-gptk": "Ahhoz, hogy képes legyen futtatni a játékokat az Apple Gaming porting eszköztár segítségével, frissítenie kell a macOS-t 14 (Sonoma) vagy magasabbra. {{newline}} Megtaláltuk a Wine-t a rendszerén, szeretné folytatni a {{foundWine}} használatát?"
+            },
+            "rosetta": {
+                "title": "Rosetta nem talált",
+                "message": "A HyperPlay megköveteli Rosetta, hogy megfelelően futtassa a macOS-t az Apple Silicon chipekkel. Kérjük, telepítse a macOS terminálból a következő parancs használatával: \"softwareupdate --install-rosetta\" és indítsa újra a HyperPlay-t. "
+            }
         },
         "wineprefix": "Wine prefix mappa kiválasztása",
         "yes": "IGEN",
         "dontShowAgain": "Ne mutasd újra",
-        "choose-nile-binary": "Válassza a Nílus bináris elemet"
+        "choose-nile-binary": "Válassza a Nílus bináris elemet",
+        "reset-extension": {
+            "question": {
+                "title": "Reset Extension",
+                "message": "Biztos benne, hogy vissza akarja hozni a MetaMask Extension-t?"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Bejelentkezés",
         "sync": "Szinkronizálás",
         "syncing": "Szinkronizálás folyamatban",
-        "unsync": "Deszinkronizálás"
+        "unsync": "Deszinkronizálás",
+        "update": "Frissítés",
+        "download": "Letöltés",
+        "continue": "Folytatás"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Becsült idő",
+        "title_dm": "Letöltés Manager"
     },
     "epic": {
         "offline-notification-body": "Az online szolgáltatások lehet, hogy nem működnek teljesen, mert az Epic Games szerverek offline vannak!",
@@ -264,7 +291,10 @@
         "wine": {
             "part1": "A HyperPlay a Wine, Proton és CrossOver verzióit a következő mappákban keresi:",
             "part2": "Más hely esetén, használj egy szimbolikus linket az egyik mappához"
-        }
+        },
+        "msync": "A Msync célja, hogy csökkentse a borszervezőt a CPU-intenzív játékokban. Az engedélyezés javíthatja a teljesítményt több játékon.",
+        "disable_logs": "Könyörgesse ezt az ellenőrző dobozt, hogy letiltsa a legtöbb írást a naplófájlokra (kritikus információk mindig be vannak jelentkezve). Győződjön meg róla, hogy az OFF-et ez a beállítás a probléma bejelentése előtt fordítsa.",
+        "dxvknvapi": "A DXVK-NVAPI a DXVK és a linux natív NVAPI felett épített NVAPI végrehajtása, lehetővé teszi a DLSS használatát Nvidia GPU-kon."
     },
     "info": {
         "hyperplay": {
@@ -290,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-none-found": "Nem találták meg Wine verziót, töltse le az egyiket a kompatibilitási menedzsertől",
+        "wine-path-invalid": "A Wine Path érvénytelen, válasszon másikat."
     },
     "install": {
         "path": "Telepítési útvonal kiválasztása"
@@ -304,7 +336,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "Alphabetical A-Z",
+        "alphabeticalZA": "Alphabetical Z-A"
     },
     "loading": {
         "default": "Betöltés",
@@ -315,7 +349,8 @@
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Amazon bejelentkezés"
+        "amazon": "Amazon bejelentkezés",
+        "old-mac": "A macOS verziója {{version}}. A macOS 12 vagy újabb be kell jelentkezni."
     },
     "message": {
         "sync": "Szinkronizálás befejezve",
@@ -348,7 +383,9 @@
             "error": "A telepítés meghiúsult",
             "finished": "Telepítés befejezve",
             "imported": "Játék importálva",
-            "startInstall": "Telepítés elindult"
+            "startInstall": "Telepítés elindult",
+            "stopped": "A telepítés megállt",
+            "paused": "Telepítés Paused"
         },
         "moved": "Áthelyezés befejezve",
         "moving": "Moving Game",
@@ -360,7 +397,9 @@
         "update": {
             "canceled": "Frissítés visszavonva",
             "finished": "Frissítés befejezve",
-            "started": "Frissítés elindult"
+            "started": "Frissítés elindult",
+            "stopped": "Frissítés megállt",
+            "paused": "Frissítés Paused"
         }
     },
     "offline-message": {
@@ -370,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Megnyitás",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -415,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix ahol telepítve van az EGS",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
-        "alt-nile-bin": "A beépített Nile bináris használata..."
+        "alt-nile-bin": "A beépített Nile bináris használata...",
+        "dxvkfpsvalue": "Pozitív integer érték (pl. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -432,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Letöltések szüneteltetése",
+            "resume": "Letöltés folytatása"
         }
     },
     "Recent": "Nemrég játszott",
@@ -500,7 +542,10 @@
             "instructions_title": "How to report a problem?",
             "last-log": "Utolsó napló",
             "no-file": "Nem található naplófájl",
-            "show-in-folder": "Naplófájl megjelenítése mappában"
+            "show-in-folder": "Naplófájl megjelenítése mappában",
+            "instructions-part-01": "Ha bármilyen kérdéssel találkozik a HyperPlay használatával, két kijelölt területünk van a Discord Serverünkben. Ha Ön játékos, kérjük, jelentsen be minden problémát a játékos-support-fórum látogatásával. Ha egy játék dev, kérjük, jelentsen be minden problémát, ha látogasson el a dev-support-fórum.",
+            "join-hyperplay-discord": "Csatlakozz a Discordhoz",
+            "instructions-part-02": "Annak érdekében, hogy a lehető leggyorsabban diagnosztizáljuk és javítsuk a problémát, kérjük, a lehető legtöbb információt, beleértve a naplók másolatát is. Támogató csapatunk figyelemmel kíséri mind a csatornákat, és a lehető leggyorsabban reagál a kérdésre. Köszönöm türelmeteket és megértésteket, miközben dolgozunk, hogy megoldunk minden problémát, amivel találkozhatunk."
         },
         "mangohud": "Mangohud engedélyezése (a Mangohudnak telepítve kell lennie)",
         "manualsync": {
@@ -546,7 +591,12 @@
         "disable_logs": "Naplók letiltása",
         "showMetalOverlay": "Statisztika fedvény megjelenítése",
         "addgamestoapplications": "Adjon hozzá játékokat automatikusan az Alkalmazásokhoz",
-        "alt-nile-bin": "Válasszon egy alternatív nílusi binárist"
+        "alt-nile-bin": "Válasszon egy alternatív nílusi binárist",
+        "msync": "Esync engedélyezése",
+        "dxvkfpslimit": "Limit FPS (DX9, 10 és 11)",
+        "autodxvknvapi": "Auto Install/Update DXVK-NVAPI Prefix",
+        "autoLaunchHyperPlay": "Auto Launch Hyper Játék",
+        "steamId": "Steam ID"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -581,19 +631,51 @@
             "log": "Napló",
             "other": "Egyéb",
             "sync": "Mentés szinkronizálás",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "Rendszerinformációk",
+            "accounts": "Fiókok"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "HyperPlay visszaállítása",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
-        }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Másolás a vágólapra",
+            "os": "Operációs rendszer",
+            "gpuDriver": "Vezető: {{driverVersion}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "Legendary: {{legendaryVersion}}",
+            "osNameFlatpak": "{{osName}} (inside Flatpak)",
+            "osVersion": "Verzió {{versionNumber}}",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "showDetailed": "Részletes rendszer specifikációk megjelenítése",
+            "steamDeck": "Steam Deck",
+            "systemModel": "Rendszermodell:",
+            "version": "Verzió: {{appVersion}}",
+            "memory": "Memory:",
+            "memoryStats": "{{percentUsed}}% használt ({{usedGib}} / {{totalGib}}]"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine kezelő"
+            }
+        },
+        "reset-extension": "Reset Extension",
+        "gamesSettings": "Játék beállítások"
     },
     "Settings": "Beállítások",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Könyvtár",
+        "store": "Marketplace",
+        "downloadManager": "Letöltés Manager",
+        "achievements": "Elérések"
     },
     "status": {
         "installing": "Telepítés",
@@ -632,7 +714,9 @@
         "logout": "Kijelentkezés",
         "logout_confirmation": "Biztos, hogy ki akarsz jelentkezni?",
         "manageaccounts": "Manage Accounts",
-        "quit": "Kilépés"
+        "quit": "Kilépés",
+        "logIn": "Belépés",
+        "manageStore": "Kezelési üzletek"
     },
     "webview": {
         "controls": {
@@ -669,5 +753,265 @@
     },
     "amazon": "amazon",
     "Amazon Games": "Amazon Games",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "analytics": "Analitika",
+    "hyperplay": {
+        "turnAnalyticsOn": "Bekapcsolás",
+        "copyUrl": "URL másolása",
+        "browserImport": {
+            "profile": "Profil",
+            "appId": "App Id"
+        },
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "További információ…",
+                        "details": "Az alábbi böngészők már telepítették a MetaMask-ot. Válassza ki azt, amit importálni szeretne.",
+                        "orWord": "VAGY",
+                        "useRecoveryPhraseInfo": "Ez a funkció ajánlott a fejlett felhasználók és a fejlesztők számára. A titkos helyreállítási kifejezést a MetaMaskban tároljuk, és soha nem osztjuk meg a HyperPlay-nal.",
+                        "title": "Válassza ki a böngészőt importálni",
+                        "useRecoveryPhrase": "Import használata titkos helyreállítási kifejezés",
+                        "cantFindProfile": "Nem találja meg a böngésző profilját?",
+                        "createNewWallet": "Új MM kiterjesztési pénztárca létrehozása"
+                    },
+                    "info": {
+                        "createWalletCTA": "Készítsen egy pénztárcát",
+                        "digitalAssets": {
+                            "title": "A digitális eszközök otthona",
+                            "details": "A pénztárcákat olyan digitális eszközök küldésére, fogadására, tárolására és megjelenítésére használják, mint a token és az NFT."
+                        },
+                        "skip": "Skip most",
+                        "login": {
+                            "details": "Alternatíva új fiókok és jelszavak létrehozására minden weboldalon, csak kapcsolja össze a pénztárcáját.",
+                            "title": "Új út a bejelentkezéshez"
+                        },
+                        "title": "Mi az a pénztárca?",
+                        "createWalletDescription": "Kattintson a \"Create a pénztárcát\" alatt, ha nincs pénztárcája, vagy újat akar létrehozni:"
+                    },
+                    "scan": {
+                        "dontHaveWallet": "Nincs pénztárcája?",
+                        "details": "Készítsen titkosított kommunikációs csatornát. A kulcsokat soha nem fogják megosztani a HyperPlay-szel.",
+                        "getMetamask": "Get MetaMask",
+                        "title": "Scan QR with ",
+                        "updateWarning": "Kérdések? Győződjön meg róla, hogy a MetaMask naprakész."
+                    }
+                },
+                "title": "Wallet kapcsolatok",
+                "pleaseConnect": "Kérjük, kapcsolja össze a pénztárcáját, vagy töltse le a Metamask mobil alkalmazását, hogy megkapja\nKezdőlap:"
+            },
+            "terms": "Általános Szerződési Feltételek",
+            "analytics": {
+                "privacyPolicyHere": "Adatvédelmi politika itt.",
+                "title": "Segíts nekünk javítani HyperPlay!",
+                "neverCollectPersonal": " gyűjtsön kulcsokat, címeket, egyensúlyokat, hashokat vagy bármilyen személyes információt;",
+                "neverSellData": " adatok eladása nyereségért. Ever!",
+                "body": "A HyperPlay szeretné összegyűjteni a használati adatokat, hogy jobban megértse, hogyan kapcsolódik a felhasználóink az alkalmazáshoz. Ez az információ segít megérteni, hogyan használja az alkalmazást, és lehetővé teszi számunkra, hogy a HyperPlay még jobb legyen az Ön számára.",
+                "anonymized": "Küldj anonimizált kattintást és játék interakciót;",
+                "hyperplayWill": "HyperPlay:",
+                "optOut": "Mindig engedje meg, hogy opt-out keresztül Beállítások;",
+                "neverCollectIP": " összegyűjti teljes IP-címét;",
+                "privacyCaption": "Ezeket az adatokat összesítették, ezért névtelen az (EU) 2016/679 általános adatvédelmi rendelet alkalmazásában. További információ adatvédelmi gyakorlatunkkal kapcsolatban, kérjük, lásd a miénket "
+            },
+            "connectionCanceled": {
+                "description": "Kérjük, erősítse meg a kapcsolatkérést a mobil pénztárcáján, hogy folytassa.",
+                "title": "A kapcsolat lemondott!"
+            },
+            "welcome": {
+                "text": {
+                    "communityCTA_2": "közösség. Együtt formáljuk a játék jövőjét!",
+                    "construction": "A HyperPlay építkezés alatt áll.",
+                    "communityCTA_1": "Szeretjük a visszajelzéseket, és csatlakozunk hozzánk",
+                    "description": "HyperPlay egy játék indító és játékbolt aggregátor a\njövő. A HyperPlay segítségével hordozhatja a pénztárcáját, a tokeneket és az eszközöket\nminden játék. A HyperPlay támogatja az Epic teljes könyvtárát\nÜzlet, GOG és saját HyperPlay áruházunk. A HyperPlay használatával egyetért\na mi",
+                    "bugs": "Kérjük, vegye figyelembe, hogy a HyperPlay egy nyilvános alfa. Sok jellemző még mindig\na fejlődésben, és lesznek hibák."
+                },
+                "title": "Üdvözöljük a Hyper Játssz korai hozzáférést!"
+            },
+            "connectionConnected": {
+                "description": "A pénztárcád összekapcsolódik. Készen állsz a játékra.",
+                "title": "Wallet csatlakozott!"
+            },
+            "connectAgain": "Connect újra"
+        },
+        "discordApp": "Discord",
+        "folder": "Mappa",
+        "logOut": "Kilépés",
+        "gamecard": {
+            "paused": "Szüneteltetett",
+            "installing": "Letöltés…",
+            "distributables": "Eloszthatók telepítése",
+            "extracting": "Kitermelés...",
+            "installed": "Készülj játszani"
+        },
+        "buttons": {
+            "noThanks": "Nem, köszönöm",
+            "agree": "Egyetértek"
+        },
+        "misc": "Soha",
+        "turnAnalyticsOff": "Kikapcsolás",
+        "Sync": "Szinkronizálás",
+        "accesscodes": {
+            "error": {
+                "validation": "Az Access kód érvénytelen"
+            },
+            "success": {
+                "validation": "Siker! Az Access kód érvényes"
+            },
+            "requirescode": "Ez a játékfrissítés hozzáférési kódot igényel."
+        },
+        "achievements": {
+            "gamesToMint": "Játékok mentára",
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "Úgy néz ki, hogy jelenleg nem találtunk semmilyen játékot a Steam fiókjában. Csak egy gyors emlékeztető, hogy kétszer ellenőrizze, hogy a játék részleteit nyilvánosságra hozza. Így elérhetjük az eredményeket, és a legjobb élményt nyújthatjuk Önnek."
+            },
+            "addThisGame": "Add hozzá ezt a játékot",
+            "freeMints": "Ingyenes Mint"
+        },
+        "analyticsOn": "Az analitika bekapcsolódik",
+        "changeWallet": "Swap pénztárca fiók",
+        "publicAlpha": "Public Alpha",
+        "syncing": "Szinkronizálás...",
+        "connectWallet": "Connect pénztárca",
+        "viewMyAccount": "Nézd meg fiókomat",
+        "viewPortfolio": "Portfólió",
+        "currentWallet": "Jelenlegi pénztárca",
+        "linkSteamAccountCta": "Menj Steam alá",
+        "linkSteamAccountDescription": "Jelölje be a Steam-t, hogy kapcsolja össze a HyperPlay fiókját.",
+        "linkSteamAccountTitle": "Link Steam fiók",
+        "viewItem": "{{item}}",
+        "analyticsOff": "Az analitika kikapcsolódik",
+        "otp": "Egyszer Passcode"
+    },
+    "gameRelease": {
+        "main": "Fő",
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Demo",
+        "prototype": "Prototípus"
+    },
+    "quest": {
+        "active": "Aktív",
+        "Play": "Lejátszás",
+        "quests": "Küldetések",
+        "playstreak": {
+            "days": "napig",
+            "now": "Most",
+            "dayResets": "Napi visszaállítások:",
+            "playEachDay": "Játssz minden nap, így a streak nem fog visszaállítani!",
+            "streakProgress": "Streak Progress",
+            "playToStart": "Játszd ezt a játékot, hogy kezdd el a streak!",
+            "progressTowardsStreak": "előrelépés a mai streak felé.",
+            "streakCompleted": "Streak befejeződött! Irányítsd a jutalmadat most."
+        },
+        "points": "Pontok",
+        "signIn": "Bejelentkezés",
+        "sync": "Szinkronizálás",
+        "connectSteamAccount": "Connect Steam fiók",
+        "reputation": "Reputáció",
+        "claimAll": "Minden",
+        "claimed": "Betartott",
+        "errorMessage": "Hiba volt a tranzakcióval.",
+        "readyForClaim": "Kész a követelésre",
+        "View Game": "Játék",
+        "type": {
+            "playstreak": "Játék Streak",
+            "reputation": "Reputáció"
+        },
+        "claimFailed": "Claim kudarcot vallott",
+        "claimFailedMessage": "Kérjük, próbálja meg még egyszer. Ha még mindig nem működik, hozzon létre egy Discord támogatási jegyet.",
+        "createDiscordTicket": "Készített Discord jegy",
+        "linkAccount": "Linked Steam fiók a jogosultság ellenőrzéséhez.",
+        "needMoreAchievements": "Meg kell befejezni {{percent}}% az eredmények az egyik ilyen játékok.",
+        "reward": "Jutalom",
+        "associatedGames": "Társult játékok",
+        "notEnoughGas": "Elég pénztárca-egyenleg, hogy követelje meg a jutalmat a gázdíjak miatt. Próbáljon ki egy másik pénztárcát, vagy töltse fel ezt, mielőtt visszavonul."
+    },
+    "quests": {
+        "quests": "Küldetések",
+        "playstreak": {
+            "signInWarning": {
+                "overlay": "Jelenleg nincs bejelentkezve, a streak haladást nem követik nyomon. Kérjük, hagyja ki a játékot, és jelentkezzen be a HyperPlay-ba a jobboldali leálláson keresztül a haladás nyomon követéséhez.",
+                "client": "Jelenleg nem vagy bejelentkezve, a streak haladást nem követik nyomon. Kérjük, jelentkezzen be a HyperPlay-ba a jobboldali leálláson keresztül a haladás nyomon követéséhez."
+            }
+        }
+    },
+    "sideload": {
+        "warningTitle": "Fontos",
+        "warningMessage": "A játék oldalterhelése a fejlesztők és a tapasztalt energiafelhasználók számára készült funkció. A malware-t tartalmazó telepítő félretöltése veszélyeztetheti a számítógépet, és az alapok lopásához vezethet."
+    },
+    "ALL": "ÖSSZES",
+    "profile": "Profil",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "FAILED": "A tranzakció megszakadt",
+            "INITIATED": "Tranzakciós kérés függvény",
+            "PENDING": "A továbbított tranzakció",
+            "CONFIRMED": "A tranzakció megerősítette"
+        },
+        "signatureRequest": {
+            "INITIATED": "Aláírási kérelem",
+            "CONFIRMED": "Aláírás",
+            "FAILED": "Az aláírás megszakadt"
+        },
+        "chainRequest": {
+            "CONFIRMED": "Hozzáadott egységes hálózat",
+            "FAILED": "Egyéni hálózat törölve",
+            "INITIATED": "Egyéni hálózati kérelem"
+        },
+        "extensionNotification": {
+            "TITLE": "Tranzakció kért",
+            "DESCRIPTION": "Press {{overlayKeyMod}} + X látni ezt a tranzakciót"
+        },
+        "walletWatch": {
+            "FAILED": "Egyéni token kérés törölve",
+            "INITIATED": "Adjon hozzá egyedi token kérést",
+            "CONFIRMED": "Custom Token hozzáadott"
+        },
+        "greeting": {
+            "description": "A HyperPlay Overlay készen áll! Press {{overlayKeyMod}} + X megmutatni vagy elrejteni.",
+            "title": "HyperPlay Overlay"
+        },
+        "description": {
+            "PENDING": "Várja a blockchain megerősítését. Tudni fogjuk, mikor megerősített",
+            "FAILED": "A tranzakciót törölték vagy nem nyújtották be, kérjük, próbálja meg újra",
+            "INITIATED": "A pénztárca megerősítése függ a mobil pénztárcájában",
+            "CONFIRMED": "A tranzakció sikeresen megerősítette!"
+        }
+    },
+    "importGameErrorTitle": "Import Game hiba",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Ön csatlakozik a HyperPlay-hoz egy külső pénztárcával."
+    },
+    "back_to_game": "Vissza a játékhoz",
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}} és más játékok készen állnak a frissítésre.",
+            "single": "Van egy frissítés készen {{gameName}}."
+        },
+        "title": "Game Updates elérhető"
+    },
+    "importGameErrorMessage": "Nem érvényes játék mappa, importálási játék nem lehetséges",
+    "importGameErrorMessageExecutable": "Játék Kivégezhető nem talált, import játék nem lehetséges",
+    "notification": {
+        "wine-download": {
+            "message": "Az alapértelmezett kompatibilitási réteg beállítása",
+            "title": "Kompatibilitási réteg"
+        }
+    },
+    "accounts": "fiókok",
+    "achievements": {
+        "progress": {
+            "minted": "lánc",
+            "notMinted": "lánc"
+        }
+    },
+    "exit_game": "Exit játék",
+    "dlcs": {
+        "label": "Válasszon DLC-ket telepíteni:"
+    },
+    "email_subscription": {
+        "title": "Köszönöm a feliratkozást!",
+        "subtitle": "Most a közösségünk része vagy, és izgatottak vagyunk, hogy értékes frissítéseket és betekintéseket osztunk meg veled."
+    }
 }

@@ -66,7 +66,8 @@
                 "title": "Došlo je do neuhvaćenog izuzetka!"
             },
             "update": {
-                "title": "Greška ažuriranja"
+                "title": "Greška ažuriranja",
+                "message": "#Nešto #ići #zabluda #uz @the #poboljšati! @Please @manually uninstall a reinstall HyperPlay#."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,12 @@
             "winetricks": {
                 "message": "Winetricks je vratio sljedeću grešku tokom izvršavanja: {{newLine}}{{error}}",
                 "title": "Winetricks greška"
-            }
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft",
+                "message": "#Instalacija @of Ubisoft #Spajati @in @the #igra #prefiks #zakazati. #Pregled #naš wiki #strana @at https://github.@com/@Heroic-#Igra-Launcher/HeroicGamesLauncher/wiki/Kako-#na-@install-Ubisoft-#Spajati-@on-@Linux-a-@Mac #na @install #free maunally#."
+            },
+            "moving": "#Zabuna #Micati #Igra [@X18@X]"
         },
         "info": {
             "update": {
@@ -139,12 +145,28 @@
                 "install": "Epic serveri trenutno imaju veliki prekid rada, video igra se ne može instalirati!",
                 "update": "Epic serveri trenutno imaju veliki prekid rada, video igra se ne može ažurirati!"
             },
-            "title": "Upozorenje"
+            "title": "Upozorenje",
+            "rosetta": {
+                "message": "HyperPlay @require Rosetta #na #bijeg ispravno @on macOS #uz #Jabuka @Silicon #trijeska. @Please @install #free @from @the macOS @terminal #uporabiti @the @following #komanda: @parquotesoftwareupdate --@install-rosetta@parquote a @restart HyperPlay#. ",
+                "title": "Rosetta ne #pronađen"
+            },
+            "wine-change": {
+                "title-gptk": "#Igra Porting Toolkit Ne ",
+                "message": "#Free #moći ne #naći @the @select #vino #inačica #na #otvaranje @this #naziv ([@X66@X]). [@X85@X] #Free #pronađen @another one, @do #free @want# to #nastaviti #započinjanje #uporabiti [@X159@X] #?",
+                "title": "#Vino ne #pronađen#!",
+                "message-gptk": "#Na @be# able to #bijeg #igra #uporabiti @the #Jabuka Gaming porting toolkit #free #nužda #na #unapređivati #tvoj macOS #na #14 (Sonoma) ili #visok. [@X120@X] #Free #pronađen #Vino @on #tvoj #sustav, @do #free @want# to #nastaviti #započinjanje #uporabiti [@X202@X] #?"
+            }
         },
         "wineprefix": "Odaberite Wine Prefix mapu",
         "yes": "DA",
         "dontShowAgain": "Ne prikazuj ponovo",
-        "choose-nile-binary": "Odaberite binarni Nil"
+        "choose-nile-binary": "Odaberite binarni Nil",
+        "reset-extension": {
+            "question": {
+                "title": "Reset",
+                "message": "#Biti #free @sure #free @want# to reset @the MetaMask #Produživanje#?"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Prijavite se",
         "sync": "Sinhronizirajte",
         "syncing": "Sinhronizanje",
-        "unsync": "Desinhronizirajte"
+        "unsync": "Desinhronizirajte",
+        "continue": "Continue",
+        "download": "Preuzimanje",
+        "update": "Update"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Predviđeno vrijeme",
+        "title_dm": "#Preuzimanje"
     },
     "epic": {
         "offline-notification-body": "Online usluge možda neće raditi u potpunosti jer su Epic Games serveri van mreže!",
@@ -263,7 +290,11 @@
         "wine": {
             "part1": "HyperPlay traži verzije Wine, Proton i CrossOver u sljedećim mapama:",
             "part2": "Za druga mjesta koristite simboličku vezu do jednog od ovih mapa"
-        }
+        },
+        "disable_logs": "Toggle @this checkbox @ON #na #onemogućavati @most of @the #pisati #na #zapisnik #kartoteka (#kritičan @information @i uvijek logged). @Make sure #na @turn# off @this @setting prije #izvještavanje @any #tema#.",
+        "dxvkfpslimit": "#Pribor @a #okvir #tarifa #kapica @for DXVK #igra",
+        "dxvknvapi": "DXVK-NVAPI @i @a #izvršenje @of NVAPI @build# on #vrh @of DXVK a @the linux @native NVAPI, #free #odobriti @for @the #korištenje @of DLSS @on Nvidia @GPU#.",
+        "msync": "Msync #cilj #na #smanjiti wineserver @overhead @in @CPU-#intenzivan #igra. #Omogućivati @may #poboljšati #nastup @on #više #igra#."
     },
     "info": {
         "hyperplay": {
@@ -289,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine koristi ono što se zove WINEPREFIX da inkapsulira Windows aplikacije. Ovaj prefiks sadrži Wine konfiguracijske datoteke i reprodukciju hijerarhije datoteka C: (glavni disk na Windows OS-u). U ovoj reprodukciji C: diska, pohranjuju se datoteke za spremanje vaše igre i ovisnosti instalirane putem winetricks-a."
-        }
+        },
+        "wine-path-invalid": "#Vino #Put @i @invalid, @please @select @another one#.",
+        "wine-path-none-found": "@No #Vino #inačica #biti #pronađen, #preuzimanje #jedan @from @the #Kompatibilnost"
     },
     "install": {
         "path": "Izaberi put instalacije"
@@ -303,7 +336,9 @@
         "toggleLayout": {
             "grid": "Prebacite se na raspored mreže",
             "list": "Prebacite se na izgled liste"
-        }
+        },
+        "alphabeticalAZ": "Alphabetical @A-@Z",
+        "alphabeticalZA": "Alphabetical @Z-@A"
     },
     "loading": {
         "default": "Učitava se",
@@ -314,7 +349,8 @@
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Amazon Login"
+        "amazon": "Amazon Login",
+        "old-mac": "#Tvoj macOS #inačica @i [@X22@X]. macOS #12 ili #nov @i @require #na #zapisnik @in#."
     },
     "message": {
         "sync": "Sinhranizovanje završeno",
@@ -347,7 +383,9 @@
             "error": "Instalacija neuspješna",
             "finished": "Instalacija završena",
             "imported": "Video igra uvezena",
-            "startInstall": "Instalacija započeta"
+            "startInstall": "Instalacija započeta",
+            "stopped": "#Instalacija #stati",
+            "paused": "#Instalacija"
         },
         "moved": "Premještanje završeno",
         "moving": "Igra se premješta",
@@ -359,7 +397,9 @@
         "update": {
             "canceled": "Ažuriranje otkazano",
             "finished": "Ažuriranje završeno",
-            "started": "Ažuriranje započeto"
+            "started": "Ažuriranje započeto",
+            "paused": "#Poboljšati",
+            "stopped": "#Poboljšati #stati"
         }
     },
     "offline-message": {
@@ -369,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Open",
     "options": {
         "advanced": {
             "key": "Ime varijable",
@@ -414,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefiks gdje je EGS instaliran",
         "prefered_language": "kod od 2 znaka (tj.: \"en\" ili \"fr\")",
-        "alt-nile-bin": "Koristeći ugrađeni binarni Nil..."
+        "alt-nile-bin": "Koristeći ugrađeni binarni Nil...",
+        "dxvkfpsvalue": "#Koristan @integer #vrednota (npr #30, #60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -431,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "#Rezime #preuzimanje",
+            "pause": "#Obustava #preuzimanje"
         }
     },
     "Recent": "Igrano nedavno",
@@ -499,7 +542,10 @@
             "instructions_title": "Kako prijaviti problem?",
             "last-log": "Zadnji dnevnik",
             "no-file": "Nije pronađena datoteka zapisnika",
-            "show-in-folder": "Prikaži datoteku zapisnika u mapi"
+            "show-in-folder": "Prikaži datoteku zapisnika u mapi",
+            "join-hyperplay-discord": "#Spajati #naš @Discord",
+            "instructions-part-02": "#Na #pomoć @u @diagnose a #popraviti @the #problem @as hitro @as #mogućan, @please #pružiti koliko god @information @as #mogućan, #uključivanje @a #kopija @of #tvoj #zapisnik. #Naš #pomoć #tim #volja #osmatrač @both #kanal a @do #svoj @best #na #odgovoriti #na #tvoj #tema @as hitro @as #mogućan. Hvala @for #tvoj #strpljenje a #shvaćanje @while #free #rad #na @resolve @any #problem #free @may @encounter#.",
+            "instructions-part-01": "Li #free @encounter @any #tema @while #uporabiti HyperPlay, #free #ima #dvojica #određivati #dio #na #dojava #tvoj #tema @in #naš @Discord Server. Li #free #biti @a #igrač, @please #dojava @any #problem @by #posjetiti @the #igrač-#pomoć-#forum. Li #free #biti @a #igra dev, @please #dojava @any #problem @by #posjetiti @the dev-#pomoć-#forum#."
         },
         "mangohud": "Omogući Mangohud (Mangohud treba biti instaliran)",
         "manualsync": {
@@ -545,7 +591,12 @@
         "disable_logs": "Onemogući dnevnike",
         "addgamestoapplications": "Automatski dodajte igre u aplikacije",
         "showMetalOverlay": "Prikaži preklapanje statistike",
-        "alt-nile-bin": "Odaberite alternativnu Nilsku binarnu"
+        "alt-nile-bin": "Odaberite alternativnu Nilsku binarnu",
+        "msync": "Omogućite Esync",
+        "autoLaunchHyperPlay": "#Automobil #Otvaranje",
+        "steamId": "@Steam",
+        "autodxvknvapi": "#Automobil @Install/#Poboljšati DXVK-NVAPI @on #Prefiks",
+        "dxvkfpslimit": "#Granica @FP (DX9, #10 a 11)"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +631,51 @@
             "log": "Prijavite se",
             "other": "Drugi",
             "sync": "Spremi-Sinhroniziraj",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "Informacije o sistemu",
+            "accounts": "#Račun"
         },
         "open-config-file": "Otvorite konfig. fajl",
         "reset-hyperplay": "Resetujte HyperPlay",
         "saves": {
             "label": "Sačuvaj lokaciju:",
             "warning": "Funkcija čuvanja u oblaku je u beta verziji, napravite sigurnosnu kopiju vaših sačuvanih podataka prije sinhronizacije (u slučaju da nešto krene po zlu)"
-        }
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine menadžer"
+            }
+        },
+        "systemInformation": {
+            "os": "Operativni sistem",
+            "steamDeck": "@Steam",
+            "systemModel": "#Sustav #Model#:",
+            "osVersion": "#Inačica [@X8@X]",
+            "gpuWithNumber": "@GPU [@X4@X]#:",
+            "memory": "#Spomen#:",
+            "showDetailed": "#Sajam @detail #sustav #specifikacija",
+            "version": "#Inačica: [@X9@X]",
+            "copyToClipboard": "#Kopija #na clipboard",
+            "cpu": "@CPU#:",
+            "cpuDescription": "[@X0@X]@x [@X16@X]",
+            "gogdlVersion": "Gogdl: [@X7@X]",
+            "gpu": "@GPU#:",
+            "gpuDriver": "#Šofer: [@X8@X]",
+            "legendaryVersion": "#Legendaran: [@X11@X]",
+            "memoryStats": "[@X0@X]% #uporabiti ([@X23@X] / [@X37@X]",
+            "osNameFlatpak": "[@X0@X] (#unutrašnjost Flatpak)"
+        },
+        "gamesSettings": "#Igra",
+        "reset-extension": "Reset"
     },
     "Settings": "Postavke",
     "sidebar": {
         "collapse": "Skupi bočnu traku",
-        "uncollapse": "Povećaj bočnu traku"
+        "uncollapse": "Povećaj bočnu traku",
+        "library": "Library",
+        "store": "Trgovina",
+        "achievements": "#Postignuće",
+        "downloadManager": "#Preuzimanje"
     },
     "status": {
         "installing": "Instalira se",
@@ -631,7 +714,9 @@
         "logout": "Odjavite se",
         "logout_confirmation": "Jeste li sigurni da se želite odjaviti?",
         "manageaccounts": "Upravljajte računima",
-        "quit": "Odustani"
+        "quit": "Odustani",
+        "logIn": "Prijavite se",
+        "manageStore": "#Snaći #trgovinica"
     },
     "webview": {
         "controls": {
@@ -668,5 +753,265 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon igre",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "analytics": "Analitika",
+    "hyperplay": {
+        "Sync": "Sinhronizuj",
+        "misc": "Never",
+        "syncing": "Syncing...",
+        "logOut": "Logout",
+        "turnAnalyticsOff": "Turn off",
+        "browserImport": {
+            "profile": "Profile",
+            "appId": "App"
+        },
+        "folder": "Folder",
+        "gamecard": {
+            "paused": "Paused",
+            "distributables": "#Instaliranje",
+            "extracting": "#Vaditi#...",
+            "installed": "#Spreman #na #predstava",
+            "installing": "@Download#..."
+        },
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Saznajte više",
+                        "title": "@Select @the @browser #na #uvoz @from",
+                        "cantFindProfile": "#Moći ne #naći #tvoj @browser #profil#?",
+                        "details": "@The @browser @below već #ima MetaMask @install. #Birati @the one #free #ima @like #na #uvoz @from#.",
+                        "useRecoveryPhraseInfo": "@This @feature @i #predlagati @for #napredan #korisnik a developers. #Tvoj #tajna #oporavak @phrase @i #čuvati @locally @in MetaMask a nikad @share #uz HyperPlay#.",
+                        "orWord": "@OR",
+                        "createNewWallet": "#Stvarati @new @MM #produživanje #lisnica",
+                        "useRecoveryPhrase": "#Uvoz #Uporabiti #Tajna #Oporavak @phrase"
+                    },
+                    "info": {
+                        "digitalAssets": {
+                            "title": "@A #Dom @for #tvoj @Digital",
+                            "details": "#Lisnica #biti #uporabiti #na #slati, #primiti, #trgovinica, a #prikaz @digital #sredstvo @like @token a @NFT#."
+                        },
+                        "skip": "@Skip zasada",
+                        "createWalletDescription": "@Click @in “#Stvarati @a #lisnica” @below li #free @do #nemati @a #lisnica ili @want# to #stvarati @a @new #jedan#:",
+                        "login": {
+                            "details": "@A #alternativa #na #stvarati @new #račun a #lozinka @on #svaki #stranica, tek #spajati #tvoj #lisnica @instead#.",
+                            "title": "@A @New #Put #na #Zapisnik"
+                        },
+                        "title": "#Sto @i @a #lisnica#?",
+                        "createWalletCTA": "#Stvarati @a #lisnica"
+                    },
+                    "scan": {
+                        "dontHaveWallet": "#Nemati @a #lisnica#?",
+                        "updateWarning": "#Ima #tema? @Make sure MetaMask @i @up to #datum#.",
+                        "details": "#Stvarati @a encrypted #komunikacija #kanal. #Tvoj #ključ #volja nikad #biti @share #uz HyperPlay#.",
+                        "getMetamask": "#Dobiti",
+                        "title": "@Scan @QR #uz "
+                    }
+                },
+                "pleaseConnect": "@Please #spajati #tvoj #lisnica, ili #preuzimanje @the Metamask @mobile-app #na #dobiti\n        #početi#:",
+                "title": "#Lisnica"
+            },
+            "analytics": {
+                "privacyPolicyHere": "#Privatnost #Politika tuda#.",
+                "hyperplayWill": "HyperPlay #volja#:",
+                "neverSellData": " #prodati #podatak @for #profit. Ikad#!",
+                "title": "#Pomoć @U #poboljšati HyperPlay#!",
+                "neverCollectIP": " #pokupiti #tvoj #pun @IP #obraćanje#;",
+                "optOut": "Uvijek #odobriti #free #na @opt-van @via @Setting#;",
+                "anonymized": "#Slati anonymized @click & #igra #interakcija#;",
+                "body": "HyperPlay @would @like #na #sabrati #korištenje #podatak #na @better #razumijeti kako #naš #korisnik @interact #uz @the #prijava. @This @information #pomoć @u #razumijeti kako #free #uporaba @the app a @let @u #kov HyperPlay @even @better @for #free#.",
+                "neverCollectPersonal": " #pokupiti #ključ, #obraćanje, #bilanca, hashes, ili @any @personal information#;",
+                "privacyCaption": "@This #podatak @i aggregated a @i @therefore #anoniman @for @the #cilj @of #General #Podatak #Protekcija #Odredba (@EU) 2016/#679. @For više @information @in #veza #na #naš #privatnost #praksa, @please #vidjeti #naš "
+            },
+            "welcome": {
+                "text": {
+                    "bugs": "@Please #nota da HyperPlay @i @a #narod alpha. Mnogo @feature #biti ipak\n          @in #razvoj, a tamo #volja #biti @bug#.",
+                    "construction": "HyperPlay @i ispod #izrada#.",
+                    "description": "HyperPlay @i @a #igra launcher a #igra #trgovinica aggregator @from @the\n          #futur. #Uz HyperPlay, #free #limenka #nositi #tvoj #lisnica, @token, a #sredstvo\n          @into #svaki #igra. HyperPlay #pomoć @the #cijel #biblioteka @of @the @Epic\n          #Trgovinica, @GOG, a #naš #sam HyperPlay #trgovinica. @By #uporabiti HyperPlay, #free @agree# to\n           #naš",
+                    "communityCTA_1": "#Free #ima #ljubav #tvoj feedback a #na #ima #free #spajati @u @in #naš",
+                    "communityCTA_2": "#opština. @Together, @let@'s #oblik @the #futur @of gaming#!"
+                },
+                "title": "#Dobrodošlica #na HyperPlay Rano #Pristup#!"
+            },
+            "connectionCanceled": {
+                "title": "#Veza canceled#!",
+                "description": "@Please #potvrditi @the #veza #zamolba @on #tvoj @mobile #lisnica #na @proceed#."
+            },
+            "connectAgain": "#Spajati opet",
+            "connectionConnected": {
+                "description": "#Tvoj #lisnica @i #spajati. #Free #biti #spreman #na #igra#.",
+                "title": "#Lisnica #spajati#!"
+            },
+            "terms": "#Pojam @of #Servis#."
+        },
+        "discordApp": "Discord",
+        "accesscodes": {
+            "requirescode": "@This #igra #poboljšati @require @a #pristup #kôd#.",
+            "error": {
+                "validation": "#Pristup #kôd @i @invalid"
+            },
+            "success": {
+                "validation": "#Uspjeh! #Pristup #kôd #važiti"
+            }
+        },
+        "achievements": {
+            "freeMints": "@Free",
+            "noAchievements": {
+                "oops": "Joj#!",
+                "doubleCheckMessage": "#Free @look #free #moći ne #naći @any #igra @in #tvoj @Steam #račun momentalno. Tek @a @quick @reminder #na #dvostruk-#pregled da #tvoj #igra #detalj #biti #pribor #na #narod. Ovuda, #free #limenka #pristup #tvoj #postignuće a #pružiti #free #uz @the @best #iskustvo#."
+            },
+            "addThisGame": "#Dodati @this #igra",
+            "gamesToMint": "#Igra #na @mint"
+        },
+        "analyticsOn": "Analytics @i @turn# on",
+        "otp": "#Jedan #Vrijeme",
+        "linkSteamAccountTitle": "#Veza @Steam",
+        "changeWallet": "Swap #lisnica #račun",
+        "buttons": {
+            "agree": "@I #pristati",
+            "noThanks": "@No"
+        },
+        "publicAlpha": "#Narod",
+        "analyticsOff": "Analytics @i @turn# off",
+        "copyUrl": "#Kopija",
+        "linkSteamAccountCta": "@Go# to @Steam #znak @in",
+        "linkSteamAccountDescription": "#Znak @in #na @Steam #na #veza #tvoj HyperPlay #račun#.",
+        "turnAnalyticsOn": "@Turn# on",
+        "viewItem": "#Stav [@X5@X]",
+        "viewMyAccount": "#Stav #moj #račun",
+        "connectWallet": "#Spajati #lisnica",
+        "currentWallet": "#Struja #lisnica",
+        "viewPortfolio": "#Stav @portfolio"
+    },
+    "gameRelease": {
+        "beta": "Beta",
+        "alpha": "Alpha",
+        "demo": "Demo",
+        "main": "#Velik",
+        "prototype": "@Prototype"
+    },
+    "quest": {
+        "active": "Active",
+        "Play": "Pokreni",
+        "playstreak": {
+            "days": "dana",
+            "now": "Now",
+            "dayResets": "#Dan resets#:",
+            "playEachDay": "#Predstava @each #dan #naime #tvoj streak @will ne reset#!",
+            "playToStart": "#Predstava @this #igra #na #početak #tvoj streak#!",
+            "progressTowardsStreak": "#napredak ususret #današnji streak#.",
+            "streakCompleted": "Streak #završen! @Claim #tvoj #nagrada sad#.",
+            "streakProgress": "Streak"
+        },
+        "points": "Points",
+        "sync": "Sinhronizuj",
+        "associatedGames": "#Povezan #igra",
+        "connectSteamAccount": "#Spajati @Steam #račun",
+        "claimed": "#Potraživati",
+        "errorMessage": "Tamo #biti @a #zabuna #uz @the #transakcija#.",
+        "needMoreAchievements": "#Free #nužda #na #ima #završen [@X27@X]% @of @the #postignuće @in #jedan @of @this #igra#.",
+        "quests": "#Potraga",
+        "readyForClaim": "#Spreman @for @claim",
+        "reward": "#Nagrada",
+        "signIn": "#Znak @in",
+        "type": {
+            "playstreak": "#Predstava",
+            "reputation": "#Reputacija"
+        },
+        "View Game": "#Stav",
+        "claimFailed": "@Claim #zakazati",
+        "claimFailedMessage": "@Please #pokušaj jednom više. Li #free ipak @do ne #rad, #stvarati @a @Discord #pomoć #karta#.",
+        "createDiscordTicket": "@Created @Discord #karta",
+        "notEnoughGas": "#Nedostatan #lisnica #bilanca #na @claim #tvoj #nagrada @due to #gas #trošak. #Pokušaj @a #drugačiji #lisnica ili #obnavljati @this #jedan prije @retry#.",
+        "claimAll": "@Claim @all",
+        "linkAccount": "#Veza #tvoj @Steam #račun #na #pregled eligibility#.",
+        "reputation": "#Reputacija"
+    },
+    "profile": "Profile",
+    "back_to_game": "@Back #na #igra",
+    "email_subscription": {
+        "title": "Hvala @for #pretplaćivati#!",
+        "subtitle": "#Free #biti sad @a #dio @of #naš #opština, a #free #biti @excited #na #dio @valuable #poboljšati a @insight #uz #free#."
+    },
+    "hyperplayOverlay": {
+        "chainRequest": {
+            "INITIATED": "#Običaj #mreža #zamolba",
+            "CONFIRMED": "#Običaj #mreža #dodati",
+            "FAILED": "#Običaj #mreža canceled"
+        },
+        "greeting": {
+            "title": "HyperPlay",
+            "description": "HyperPlay Overlay @i #spreman! #Pečat [@X34@X] + @X #na #sajam ili @hide #free#."
+        },
+        "txnRequest": {
+            "FAILED": "#Transakcija @interrupt",
+            "PENDING": "#Transakcija #podati",
+            "CONFIRMED": "#Transakcija #potvrditi",
+            "INITIATED": "#Transakcija #zamolba #predstojeći"
+        },
+        "walletWatch": {
+            "FAILED": "#Običaj @token #zamolba canceled",
+            "INITIATED": "#Dodati #običaj @token #zamolba #predstojeći",
+            "CONFIRMED": "#Običaj @token #dodati"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "#Potpis #podati",
+            "FAILED": "#Potpis @interrupt",
+            "INITIATED": "#Potpis #zamolba #predstojeći"
+        },
+        "description": {
+            "PENDING": "@Wait# for blockchain #potvrda. #Free @will @let #free #znati kada #free #biti #potvrditi",
+            "CONFIRMED": "@The #transakcija #biti @successfully #potvrditi#!",
+            "INITIATED": "@A #lisnica #potvrda @i #predstojeći @in #tvoj @mobile #lisnica",
+            "FAILED": "@The #transakcija #biti canceled ili ne #podati, @please #pokušaj opet"
+        },
+        "extensionNotification": {
+            "DESCRIPTION": "#Pečat [@X6@X] + @X #na #vidjeti @this #transakcija",
+            "TITLE": "#Transakcija @request"
+        }
+    },
+    "importGameErrorMessage": "Ne @a #važeći #igra @folder, #uvesti #igra @i ne #mogućan",
+    "importGameErrorMessageExecutable": "#Igra Executable ne #pronađen, #uvesti #igra @i ne #mogućan",
+    "notification": {
+        "wine-download": {
+            "message": "@Setting up @the default #kompatibilnost #red",
+            "title": "#Kompatibilnost"
+        }
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "overlay": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please #izlaz @the #igra a login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#.",
+                "client": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#."
+            }
+        },
+        "quests": "#Potraga"
+    },
+    "sideload": {
+        "warningMessage": "#Strana-@loading @a #igra @i @a @feature @intend @for developers a @experienced #moć #korisnik. #Strana-@loading @a @installer da #sadržati malware #moći #kompromis #tvoj #računar a #olovo #na #krađa @of #fond#.",
+        "warningTitle": "#Važan"
+    },
+    "accounts": "#račun",
+    "ALL": "@ALL",
+    "importGameErrorTitle": "#Uvoz #Igra",
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "[@X0@X] a @other #igra #biti #spreman #na #poboljšati#.",
+            "single": "Tamo @i @a #poboljšati #spreman @for [@X29@X]#."
+        },
+        "title": "#Igra #Poboljšati"
+    },
+    "achievements": {
+        "progress": {
+            "minted": "@on #lanac",
+            "notMinted": "@off #lanac"
+        }
+    },
+    "exit_game": "#Izlaz",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#."
+    },
+    "dlcs": {
+        "label": "@Select @DLC #na @install#:"
+    }
 }

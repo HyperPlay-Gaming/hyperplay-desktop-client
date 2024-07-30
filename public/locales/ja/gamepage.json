@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "インストールを続ける",
             "message": "ダウンロードしたファイルを保持しますか？",
-            "title": "インストールを停止する"
+            "title": "インストールを停止する",
+            "keepFilesMessage": "キャンセル後にダウンロードファイルを保存したい場合は、こちらをチェックしてください."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "このゲームをアンインストールしたいですか？",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "アンインストール"
+            "title": "アンインストール",
+            "dlc": "このDLCをアンインストールしたいですか?",
+            "prefix_warning": "このゲームのワインプレフィックスはデフォルトのプレフィックスです。 あなたが本当にそれを削除したい場合は、手動で行う必要があります."
         },
         "update": {
             "message": "このゲームにはアップデートがありますが、今すぐアップデートしたいですか？",
-            "title": "ゲームの更新が必要"
+            "title": "ゲームの更新が必要",
+            "message-cancel": "更新せずにこのゲームを再生することはできません"
         },
         "wineprefix": "Select WinePrefix Folder",
-        "yes": "はい"
+        "yes": "はい",
+        "aware": "お問い合わせ",
+        "compability": {
+            "message": "このWindowsゲームは、互換性レイヤーを使用して実行されます。 問題が発生したり、ゲームがうまくいかないこともあります."
+        },
+        "yesCancel": "はい、キャンセル",
+        "dont-show-again": "再表示しない",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -56,7 +67,9 @@
         "install": "インストール",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "ダウンロードをキャンセル",
+            "continue": "ダウンロードを続ける"
         },
         "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Unhide Game",
         "uninstall": "アンインストール",
-        "update": "アップデート"
+        "update": "アップデート",
+        "unfavorites": "お気に入り",
+        "details": "詳細",
+        "favorites": "お気に入り",
+        "remove_from_library": "削除"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "無効になっています",
@@ -86,14 +103,17 @@
         "neverPlayed": "一度もない",
         "platform": "Select Platform",
         "requirements": "System Requirements",
-        "totalPlayed": "プレイ時間"
+        "totalPlayed": "プレイ時間",
+        "dlcs": "DLCsの特長",
+        "selectChannelName": "チャネルの選択 お名前 (必須)"
     },
     "gamecard": {
         "moving": "移動しています",
         "repairing": "修復しています"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "説明文がありません。"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -118,7 +138,8 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "WinePrefix",
-        "wineversion": "Wine Version"
+        "wineversion": "Wine Version",
+        "compatibility-warning": "このWindowsゲームは、互換性レイヤーを使用して実行されます。 体験内容は異なります."
     },
     "label": {
         "game": {
@@ -126,7 +147,8 @@
         },
         "playing": {
             "start": "プレイ",
-            "stop": "プレイしています（停止）"
+            "stop": "プレイしています（停止）",
+            "update": "を更新"
         },
         "saves": {
             "syncing": "保存を同期しています"
@@ -147,7 +169,8 @@
         "title": "インストールするコンポーネントを選択します"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOverボトル"
     },
     "sideload": {
         "field": {
@@ -186,7 +209,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "ダウンロードの総数",
         "uninstalling": "Uninstalling",
-        "updating": "ゲームを更新しています"
+        "updating": "ゲームを更新しています",
+        "preparing": "ダウンロードの準備、お待ちください",
+        "moving-files": "移動ファイル '{{file}}': {{percent}} ",
+        "distributables": "配布物のインストール",
+        "extracting": {
+            "cancel": "キャンセル抽出",
+            "progress": "抽出の抽出"
+        },
+        "gog-goodie": "このゲームはインストールできません。 ダウンロード可能なコンテンツをhttps://gog.com/accountで確認",
+        "goodie": "インストール不可",
+        "paused": "一時停止済み",
+        "playing": "再生中",
+        "downloading": "ダウンロード中",
+        "syncingSaves": "保存を同期しています"
     },
     "submenu": {
         "addShortcut": "ショートカットを追加する",
@@ -200,6 +236,7 @@
         "removeShortcut": "Remove shortcuts",
         "settings": "設定",
         "store": "ストアページ",
-        "verify": "確認と修復"
+        "verify": "確認と修復",
+        "extraInfo": "余分な情報"
     }
 }

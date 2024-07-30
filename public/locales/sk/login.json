@@ -1,16 +1,18 @@
 {
     "button": {
-        "login": "Login"
+        "login": "Login",
+        "error": "Chyba, skúste iný kód",
+        "loading": "Načítanie"
     },
     "message": {
         "part1": "In order for you to be able to log in and install your games, we first need you to follow the steps below:",
-        "part2": "",
-        "part3": "",
-        "part4": "",
-        "part5": "",
-        "part6": "",
-        "part7": "",
-        "part8": ""
+        "part2": "Otvorte si",
+        "part3": "Epic Store tu",
+        "part4": ", prihláste sa do svojho účtu a skopírujte svoje",
+        "part5": "číslo autorského kódu",
+        "part6": "Uložte svoje",
+        "part7": "autorizačný kód",
+        "part8": "v vstupnej krabici nižšie a kliknite na tlačidlo prihlásenie."
     },
     "status": {
         "error": "Error",
