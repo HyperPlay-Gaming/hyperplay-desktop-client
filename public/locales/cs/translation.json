@@ -174,7 +174,10 @@
         "login": "Přihlásit se",
         "sync": "Synchronizovat",
         "syncing": "Synchronizuji",
-        "unsync": "Desynchroniozovat"
+        "unsync": "Desynchroniozovat",
+        "continue": "Pokračovat",
+        "update": "Aktualizovat",
+        "download": "Stáhnout"
     },
     "controller": {
         "hints": {
@@ -214,7 +217,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "title_dm": "Stáhnout manažer"
+        "title_dm": "Stáhnout manažer",
+        "ETA": "Odhadovaný čas"
     },
     "epic": {
         "offline-notification-body": "Online služby nemusí plně fungovat, protože servery Epic Games jsou offline!",
@@ -405,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Opakování pokusu"
     },
-    "Open": "",
+    "Open": "Otevřít",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -468,7 +472,9 @@
             "empty": "Nic ke stažení",
             "finished": "Dokončeno",
             "queued": "Ve frontě",
-            "remove": "Odebrat ze stažených"
+            "remove": "Odebrat ze stažených",
+            "pause": "Pozastavit stahování",
+            "resume": "Pokračovat ve stahování"
         }
     },
     "Recent": "Recently Played",
@@ -544,13 +550,13 @@
         },
         "mangohud": "Povolit Mangohud (Mangohud je třeba nainstalovat)",
         "manualsync": {
-            "download": "",
+            "download": "Stáhnout",
             "forcedownload": "Čeština",
             "forceupload": "Force Nahrát",
-            "sync": "",
-            "syncing": "",
+            "sync": "Synchronizovat",
+            "syncing": "Synchronizuji",
             "title": "Ruční synchronizace šetří",
-            "upload": ""
+            "upload": "Nahrát"
         },
         "maxRecentGames": "Recent Games to Show",
         "maxworkers": "Maximální počet pracovníků při stahování",
@@ -593,7 +599,8 @@
         },
         "autoLaunchHyperPlay": "Auto Spustit Hyper Čeština",
         "steamId": "Parní ID",
-        "dxvkfpslimit": "Limit FPS (DX9, 10 a 11)"
+        "dxvkfpslimit": "Limit FPS (DX9, 10 a 11)",
+        "msync": "Povolit Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -627,7 +634,9 @@
             "log": "Protokol",
             "other": "Ostatní",
             "sync": "Synchronizace uložených souborů",
-            "wineExt": "Wine rozšíření"
+            "wineExt": "Wine rozšíření",
+            "systemInformation": "In_formace o systému",
+            "accounts": "Účty"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
@@ -655,16 +664,25 @@
             "gpuDriver": "Řidič: {{driverVersion}}",
             "showDetailed": "Zobrazit podrobné specifikace systému",
             "version": "Verze: {{appVersion}}",
-            "memory": "Paměť:"
+            "memory": "Paměť:",
+            "os": "Operační systém",
+            "copyToClipboard": "Zkopírovat do schránky"
         },
-        "reset-extension": "Prodloužení prodloužení"
+        "reset-extension": "Prodloužení prodloužení",
+        "wine": {
+            "manager": {
+                "title": "Správce Wine"
+            }
+        }
     },
-    "Settings": "",
+    "Settings": "Nastavení",
     "sidebar": {
         "collapse": "Collapse sidebar",
         "uncollapse": "Uncollapse sidebar",
         "downloadManager": "Stáhnout manažer",
-        "achievements": "Úspěchy"
+        "achievements": "Úspěchy",
+        "store": "Obchod",
+        "library": "Knihovna"
     },
     "status": {
         "installing": "Instaluji",
@@ -691,7 +709,7 @@
         "about": "About",
         "quit": "Quit",
         "reload": "Reload",
-        "show": ""
+        "show": "Zobrazit klíč zabezpečení"
     },
     "two_col_table": {
         "save_hint": "Changes in this table are not saved automatically. Click the + button"
@@ -704,13 +722,14 @@
         "logout_confirmation": "Opravdu se chcete odhlásit?",
         "manageaccounts": "Spravovat účty",
         "quit": "Ukončit",
-        "manageStore": "Správa obchodů"
+        "manageStore": "Správa obchodů",
+        "logIn": "Přihlásit"
     },
     "webview": {
         "controls": {
-            "back": "",
-            "forward": "",
-            "openInBrowser": "",
+            "back": "Přejít zpět",
+            "forward": "Vpřed",
+            "openInBrowser": "Otevřít v prohlížeči",
             "reload": "Přečíst stránku"
         }
     },
@@ -794,7 +813,8 @@
                             "details": "Alternativou k vytváření nových účtů a hesel na každém webu, stačí připojit peněženku místo."
                         },
                         "title": "Co je to peněženka?",
-                        "createWalletCTA": "Vytvoření peněženky"
+                        "createWalletCTA": "Vytvoření peněženky",
+                        "skip": "Prozatím přeskočit"
                     },
                     "import": {
                         "details": "Níže jsou nainstalovány prohlížeče MetaMask. Vyberte si ten, který chcete importovat.",
@@ -803,7 +823,8 @@
                         "useRecoveryPhraseInfo": "Tato funkce se doporučuje pro pokročilé uživatele a vývojáře. Vaše tajné obnovení fráze je uložena lokálně v MetaMask a nikdy nesdíleno s HyperPlay.",
                         "createNewWallet": "Vytvořit novou prodlužovací peněženku MM",
                         "title": "Vyberte prohlížeč import z",
-                        "cantFindProfile": "Nelze najít profil prohlížeče?"
+                        "cantFindProfile": "Nelze najít profil prohlížeče?",
+                        "learnMore": "Zjistěte více."
                     },
                     "scan": {
                         "details": "Vytvořte šifrované komunikační kanál. Vaše klíče nikdy nebudou sdíleny s HyperPlay.",
@@ -846,7 +867,8 @@
                     "construction": "HyperPlay je pod konstrukcí.",
                     "description": "HyperPlay je hra spouštěč a herní obchod agregátor z\nbudoucnost. S HyperPlay můžete nést peněženku, tokeny a aktiva\ndo každé hry. HyperPlay podporuje celou knihovnu Epic\nObchod, GOG a vlastní prodej HyperPlay. Pomocí HyperPlay souhlasíte\nNaše služby"
                 }
-            }
+            },
+            "terms": "Podmínky používání"
         },
         "achievements": {
             "noAchievements": {
@@ -859,13 +881,15 @@
         },
         "analyticsOff": "Analytics je vypnuto",
         "buttons": {
-            "agree": "Souhlasím"
+            "agree": "Souhlasím",
+            "noThanks": "Ne, díky"
         },
         "otp": "Jednorázový kód Passcode",
         "viewPortfolio": "Zobrazit portfolio",
         "analyticsOn": "Analytics se zapnuto",
         "browserImport": {
-            "appId": "Aplikace Id"
+            "appId": "Aplikace Id",
+            "profile": "Profil"
         },
         "accesscodes": {
             "requirescode": "Tato hra aktualizace vyžaduje přístupový kód.",
@@ -883,12 +907,24 @@
         "viewMyAccount": "Zobrazit svůj účet",
         "gamecard": {
             "extracting": "Čeština.",
-            "installed": "Připraveno hrát"
+            "installed": "Připraveno hrát",
+            "distributables": "Instalace Distributables",
+            "paused": "Pozastaveno",
+            "installing": "Stahování…"
         },
         "publicAlpha": "Veřejné Alpha",
         "linkSteamAccountCta": "Přejděte na Steam přihlášení do Steamu",
         "linkSteamAccountDescription": "Přihlaste se k Steamu a připojte svůj účet HyperPlay.",
-        "linkSteamAccountTitle": "Link Steam účet"
+        "linkSteamAccountTitle": "Link Steam účet",
+        "syncing": "Synchronizace...",
+        "logOut": "Odhlásit se",
+        "Sync": "Synchronizovat",
+        "turnAnalyticsOn": "Zapnout",
+        "folder": "Složka",
+        "turnAnalyticsOff": "Vypnout",
+        "discordApp": "Discord",
+        "misc": "Nikdy",
+        "copyUrl": "Kopírovat URL"
     },
     "exit_game": "Exit Hra",
     "notification": {
@@ -905,7 +941,9 @@
             "playToStart": "Hrát tuto hru, abyste mohli začít svůj pruh!",
             "streakProgress": "Streak Progress",
             "progressTowardsStreak": "postup směrem k dnešnímu pruhu.",
-            "streakCompleted": "Streak dokončeno! Požádejte své odměny."
+            "streakCompleted": "Streak dokončeno! Požádejte své odměny.",
+            "days": "dnů",
+            "now": "Nyní"
         },
         "readyForClaim": "Připravený pro nárok",
         "reward": "Přihlášení",
@@ -923,7 +961,14 @@
         "createDiscordTicket": "Vytvořeno vstupenky Discord",
         "notEnoughGas": "Nedostatečná peněženka zůstatek na nárok na vaši odměnu v důsledku poplatků za plyn. Zkuste jinou peněženku nebo doplnit tento před opakováním.",
         "claimed": "Reklamace",
-        "errorMessage": "Byla chyba s transakci."
+        "errorMessage": "Byla chyba s transakci.",
+        "active": "Aktivní",
+        "Play": "Přehrát",
+        "points": "Body",
+        "quests": "Úkoly",
+        "signIn": "Přihlásit se",
+        "sync": "Synchronizovat",
+        "connectSteamAccount": "Připojit týmový účet"
     },
     "quests": {
         "playstreak": {
@@ -931,7 +976,8 @@
                 "overlay": "V současné době nejste přihlášeni, nebude sledována hra streak. Prosím, ukončete hru a přihlaste se k HyperPlay pomocí top-rightdown, abyste sledovali pokrok.",
                 "client": "V současné době nejste přihlášeni, nebude sledována hra streak. Přihlaste se k HyperPlay prostřednictvím pravého rozevíracího procesu."
             }
-        }
+        },
+        "quests": "Úkoly"
     },
     "accounts": "účty",
     "back_to_game": "Zpět na hru",
@@ -954,17 +1000,25 @@
         }
     },
     "sideload": {
-        "warningMessage": "Side-loading hra je funkce určená pro vývojáře a zkušené uživatele napájení. Side-loading instalátor, který obsahuje malware může ohrozit váš počítač a vést k krádeži prostředků."
+        "warningMessage": "Side-loading hra je funkce určená pro vývojáře a zkušené uživatele napájení. Side-loading instalátor, který obsahuje malware může ohrozit váš počítač a vést k krádeži prostředků.",
+        "warningTitle": "Důležitý"
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Jste připojeni do HyperPlay s externí peněženky."
     },
     "gameRelease": {
-        "prototype": "Čeština"
+        "prototype": "Čeština",
+        "alpha": "Alfa",
+        "demo": "Demo",
+        "main": "Hlavní",
+        "beta": "Beta"
     },
     "importGameErrorMessage": "Není platná herní složka, import hry není možné",
     "email_subscription": {
         "title": "Děkujeme Vám za přihlášení!",
         "subtitle": "Nyní jste součástí naší komunity a jsme rádi, že s vámi sdílíme cenné aktualizace a informace."
-    }
+    },
+    "profile": "Profil",
+    "ALL": "VŠE",
+    "analytics": "Analytika"
 }
