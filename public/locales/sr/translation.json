@@ -998,7 +998,9 @@
         "Play": "Играј сад",
         "signIn": "Пријава",
         "points": "Points",
-        "sync": "Синхронизуј"
+        "sync": "Синхронизуј",
+        "quests": "#Poen",
+        "pointsClaimed": "#Poen"
     },
     "quests": {
         "playstreak": {
@@ -1006,7 +1008,8 @@
                 "client": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#.",
                 "overlay": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please #izlaz @the #igra a login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#."
             }
-        }
+        },
+        "quests": "#Poen"
     },
     "achievements": {
         "progress": {
