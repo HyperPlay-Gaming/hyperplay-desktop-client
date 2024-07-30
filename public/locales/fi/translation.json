@@ -152,7 +152,10 @@
         "login": "Kirjaudu sisään",
         "sync": "Synkronoi",
         "syncing": "Synkronoidaan",
-        "unsync": "Älä synkronoi"
+        "unsync": "Älä synkronoi",
+        "update": "Päivitä",
+        "continue": "Jatka",
+        "download": "Ladata"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Arvioitu aika"
     },
     "epic": {
         "offline-notification-body": "Verkkopalvelut eivät välttämättä toimi kokonaisuudessaan Epic Games:in palvelinten ollessa vailla verkkoyhteyttä!",
@@ -369,7 +373,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Avaa",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -431,7 +435,8 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Tauota lataukset"
         }
     },
     "Recent": "Viimeksi pelatut",
@@ -545,7 +550,8 @@
         "disable_logs": "Poista lokit käytöstä",
         "addgamestoapplications": "Lisää pelejä automaattisesti sovelluksiin",
         "showMetalOverlay": "Näytä tilastojen peittokuva",
-        "alt-nile-bin": "Valitse vaihtoehtoinen Niilin binaari"
+        "alt-nile-bin": "Valitse vaihtoehtoinen Niilin binaari",
+        "msync": "Ota Esync käyttöön"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +586,32 @@
             "log": "Log",
             "other": "Muut",
             "sync": "Tallenna ja synkronoi",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Tilit",
+            "systemInformation": "_Järjestelmän tiedot"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine Manageri"
+            }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Kopioi leikepöydälle",
+            "os": "Käyttöjärjestelmä"
         }
     },
     "Settings": "Asetukset",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Kirjasto",
+        "store": "Marketplace"
     },
     "status": {
         "installing": "Installing",
@@ -631,7 +650,8 @@
         "logout": "Kirjaudu ulos",
         "logout_confirmation": "Haluatko varmasti kirjautua ulos?",
         "manageaccounts": "Hallitse tilejä",
-        "quit": "Poistu"
+        "quit": "Poistu",
+        "logIn": "Kirjaudu sisään"
     },
     "webview": {
         "controls": {
@@ -668,5 +688,69 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon pelit",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "quest": {
+        "connectSteamAccount": "Yhdistä ryhmätili",
+        "active": "Aktiivinen",
+        "Play": "Toista",
+        "points": "Pisteet",
+        "playstreak": {
+            "days": "päivät",
+            "now": "Nyt"
+        },
+        "signIn": "Kirjaudu",
+        "sync": "Sync"
+    },
+    "gameRelease": {
+        "main": "Oletus",
+        "demo": "Demo",
+        "alpha": "Alfa",
+        "beta": "Beta"
+    },
+    "hyperplay": {
+        "buttons": {
+            "noThanks": "Ei kiitos"
+        },
+        "folder": "Kansio",
+        "gamecard": {
+            "paused": "Pysäytetty",
+            "distributables": "Jakelun asentaminen",
+            "installing": "Ladataan..."
+        },
+        "logOut": "Kirjaudu ulos",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "info": {
+                        "skip": "Ohita toistaiseksi"
+                    },
+                    "import": {
+                        "learnMore": "Lue lisää",
+                        "orWord": "VAI"
+                    }
+                }
+            },
+            "terms": "Palvelun käyttöehdot"
+        },
+        "turnAnalyticsOff": "Ota pois käytöstä",
+        "turnAnalyticsOn": "Ota käyttöön",
+        "browserImport": {
+            "profile": "Profiili"
+        },
+        "Sync": "Sync",
+        "discordApp": "Discord",
+        "copyUrl": "Kopioi URL-osoite",
+        "misc": "Ei koskaan"
+    },
+    "profile": "Profiili",
+    "sideload": {
+        "warningTitle": "Tärkeä"
+    },
+    "ALL": "KAIKKI",
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer i"
+        }
+    },
+    "analytics": "Analytiikat"
 }
