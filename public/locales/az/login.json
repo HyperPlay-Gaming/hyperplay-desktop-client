@@ -1,7 +1,8 @@
 {
     "button": {
         "login": "Daxil ol",
-        "loading": "Yüklənir"
+        "loading": "Yüklənir",
+        "error": "Qeyd, müxtəlif Kod"
     },
     "message": {
         "part1": "Oyunlarınızı daxil etmək və quraşdırmaq üçün əvvəlcə aşağıdakı addımları yerinə yetirməlisiniz:",
