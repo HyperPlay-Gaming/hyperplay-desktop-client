@@ -2012,9 +2012,9 @@
     zod "^3.22.4"
 
 "@hyperplay/ui@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.6.0.tgz#d4f4677024dfcccd7ffbeb56178d515754b230a6"
-  integrity sha512-8De2yWHzIW/QaEfM0o+eH1bHrD8PlUMQVz29voGPoj/mRd6oq9N2n340ZFzdphHMhfs/eZJVNn9rjG9tFJtyYw==
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.6.2.tgz#62de66cf27f58c97c5461db0e9652aeeb15bde28"
+  integrity sha512-9pocGYLj80wZ9q2C4hGpKNaG3wgZvVSgV5E6zhUbG8+JBk2w18PsSro2+FfrcUxhtRYsW7gwGZgxIaQ9Ee3PaQ==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
