@@ -105,6 +105,15 @@ export function QuestDetailsWrapper({
     error: switchChainError
   } = useSwitchChain()
 
+  useEffect(() => {
+    if (selectedQuestId !== null) {
+      window.api.trackEvent({
+        event: 'Quest Viewed',
+        properties: { quest: { id: selectedQuestId.toString() } }
+      })
+    }
+  }, [selectedQuestId])
+
   const flags = useFlags()
   const account = useAccount()
   const { data: walletBalance } = useBalance({ address: account?.address })
@@ -257,21 +266,56 @@ export function QuestDetailsWrapper({
 
   async function claimRewards(rewards: Reward[]) {
     for (const reward_i of rewards) {
-      switch (reward_i.reward_type) {
-        case 'ERC1155':
-        case 'ERC721':
-        case 'ERC20':
-          await mintOnChainReward(reward_i)
-          break
-        case 'POINTS':
-          await claimPointsMutation.mutateAsync(reward_i)
-          break
-        case 'EXTERNAL-TASKS':
-          await completeTaskMutation.mutateAsync(reward_i)
-          break
-        default:
-          console.error(`unknown reward type ${reward_i.reward_type}`)
-          break
+      if (selectedQuestId !== null) {
+        window.api.trackEvent({
+          event: 'Reward Claim Started',
+          properties: {
+            quest: { id: selectedQuestId.toString() },
+            reward: reward_i
+          }
+        })
+      }
+
+      try {
+        switch (reward_i.reward_type) {
+          case 'ERC1155':
+          case 'ERC721':
+          case 'ERC20':
+            await mintOnChainReward(reward_i)
+            break
+          case 'POINTS':
+            await claimPointsMutation.mutateAsync(reward_i)
+            break
+          case 'EXTERNAL-TASKS':
+            await completeTaskMutation.mutateAsync(reward_i)
+            break
+          default:
+            console.error(`unknown reward type ${reward_i.reward_type}`)
+            break
+        }
+      } catch (err) {
+        const errMsg = `${err}`
+        console.error(errMsg)
+        if (selectedQuestId !== null) {
+          window.api.trackEvent({
+            event: 'Reward Claim Error',
+            properties: {
+              quest: { id: selectedQuestId.toString() },
+              reward: reward_i,
+              message: errMsg
+            }
+          })
+        }
+      }
+
+      if (selectedQuestId !== null) {
+        window.api.trackEvent({
+          event: 'Reward Claim Success',
+          properties: {
+            quest: { id: selectedQuestId.toString() },
+            reward: reward_i
+          }
+        })
       }
     }
   }

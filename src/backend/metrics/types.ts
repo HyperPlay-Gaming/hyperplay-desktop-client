@@ -1,5 +1,5 @@
 import { getPlatformName, getStoreName } from 'backend/utils'
-import { AppPlatforms, InstallPlatform, Runner } from 'common/types'
+import { AppPlatforms, InstallPlatform, Reward, Runner } from 'common/types'
 import { PROVIDERS } from 'common/types/proxy-types'
 
 export interface MetricsOptIn {
@@ -296,6 +296,47 @@ export interface HyperPlaySummonQuestSucceeded {
   sensitiveProperties?: never
 }
 
+// fired when a quest card or quest log item is clicked and the quest details are shown
+export interface QuestViewed {
+  event: 'Quest Viewed'
+  properties: {
+    quest: {
+      id: string
+    }
+  }
+}
+
+export interface RewardClaimStarted {
+  event: 'Reward Claim Started'
+  properties: {
+    reward: Reward
+    quest: {
+      id: string
+    }
+  }
+}
+
+export interface RewardClaimSuccess {
+  event: 'Reward Claim Success'
+  properties: {
+    reward: Reward
+    quest: {
+      id: string
+    }
+  }
+}
+
+export interface RewardClaimError {
+  event: 'Reward Claim Error'
+  properties: {
+    reward: Reward
+    quest: {
+      id: string
+    }
+    message: string
+  }
+}
+
 export type PossibleMetricPayloads =
   | MetricsOptIn
   | MetricsOptOut
@@ -327,5 +368,9 @@ export type PossibleMetricPayloads =
   | HyperPlayLaunched
   | HyperPlaySummonQuestFailed
   | HyperPlaySummonQuestSucceeded
+  | QuestViewed
+  | RewardClaimStarted
+  | RewardClaimSuccess
+  | RewardClaimError
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']

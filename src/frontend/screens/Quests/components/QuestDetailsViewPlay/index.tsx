@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Game, QuestDetails, QuestDetailsTranslations } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
@@ -30,6 +30,16 @@ export function QuestDetailsViewPlayWrapper({
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
   )
+
+  useEffect(() => {
+    if (selectedQuestId !== null) {
+      window.api.trackEvent({
+        event: 'Quest Viewed',
+        properties: { quest: { id: selectedQuestId.toString() } }
+      })
+    }
+  }, [selectedQuestId])
+
   if (selectedQuestId === null) {
     return null
   }
