@@ -784,28 +784,6 @@ async function callRunner(
   // TypeError is triggered
   commandParts = commandParts.filter(Boolean)
 
-  if (!logsDisabled) {
-    logInfo(
-      [(options?.logMessagePrefix ?? `Running command`) + ':', safeCommand],
-      runner.logPrefix
-    )
-
-    if (options?.logFile) {
-      logDebug(`Logging to file "${options?.logFile}"`, runner.logPrefix)
-    }
-
-    if (options?.verboseLogFile) {
-      appendFileSync(
-        options.verboseLogFile,
-        `[${new Date().toLocaleString()}] ${safeCommand}\n`
-      )
-    }
-
-    if (options?.logFile && existsSync(options.logFile)) {
-      writeFileSync(options.logFile, '')
-    }
-  }
-
   let bin = runner.bin
   let fullRunnerPath = join(runner.dir, bin)
 
@@ -841,6 +819,28 @@ async function callRunner(
     options?.env,
     fullRunnerPath
   )
+
+  if (!logsDisabled) {
+    logInfo(
+      [(options?.logMessagePrefix ?? `Running command`) + ':', safeCommand],
+      runner.logPrefix
+    )
+
+    if (options?.logFile) {
+      logDebug(`Logging to file "${options?.logFile}"`, runner.logPrefix)
+    }
+
+    if (options?.verboseLogFile) {
+      appendFileSync(
+        options.verboseLogFile,
+        `[${new Date().toLocaleString()}] ${safeCommand}\n`
+      )
+    }
+
+    if (options?.logFile && existsSync(options.logFile)) {
+      writeFileSync(options.logFile, '')
+    }
+  }
 
   // check if the same command is currently running
   // if so, return the same promise instead of running it again
@@ -1028,6 +1028,7 @@ function getRunnerCallWithoutCredentials(
         continue
       }
       modifiedCommand[sensitiveArgIndex + 1] = '<redacted>'
+    }
   }
 
   const formattedEnvVars: string[] = []
