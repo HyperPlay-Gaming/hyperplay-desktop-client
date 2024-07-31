@@ -443,8 +443,8 @@
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
+        "viewFullscreen": "View fullscreen",
         "viewItem": "View {{item}}",
-        "viewMyAccount": "View my account",
         "viewPortfolio": "View portfolio"
     },
     "HyperPlay": "",
@@ -650,10 +650,13 @@
         "associatedGames": "Associated games",
         "claimAll": "Claim all",
         "claimed": "Claimed",
+        "claimFailed": "Claim failed",
+        "claimFailedMessage": "Please try once more. If it still doesn't work, create a Discord support ticket.",
         "connectSteamAccount": "Connect Steam account",
-        "errorMessage": "There was an error with the transaction.",
+        "createDiscordTicket": "Created Discord ticket",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
+        "notEnoughGas": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.",
         "playstreak": {
             "dayResets": "Day resets:",
             "days": "days",
@@ -676,11 +679,7 @@
             "playstreak": "Play Streak",
             "reputation": "Reputation"
         },
-        "View Game": "View Game",
-        "claimFailed": "Claim failed",
-        "claimFailedMessage": "Please try once more. If it still doesn't work, create a Discord support ticket.",
-        "createDiscordTicket": "Created Discord ticket",
-        "notEnoughGas": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying."
+        "View Game": "View Game"
     },
     "quests": {
         "playstreak": {

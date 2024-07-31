@@ -84,7 +84,7 @@ const WalletDropdown: React.FC = observer(() => {
         {showMetaMaskExtensionLinks && (
           <>
             <NavigationMenuItem
-              label={t('hyperplay.viewMyAccount', `View my account`)}
+              label={t('hyperplay.viewFullscreen', `View fullscreen`)}
               to={'/metamaskHome'}
               showMetaMaskExtensionLinks={showMetaMaskExtensionLinks}
             ></NavigationMenuItem>

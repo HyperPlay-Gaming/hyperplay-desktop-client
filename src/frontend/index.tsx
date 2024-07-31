@@ -127,6 +127,10 @@ const renderApp = async () => {
     languageCode
   }
 
+  window.api.logInfo(
+    `Setting up LaunchDarkly with context: ${JSON.stringify(context, null, 2)}`
+  )
+
   const LDProvider = await asyncWithLDProvider({
     clientSideID: ldConfig.envId,
     context
