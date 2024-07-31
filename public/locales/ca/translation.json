@@ -881,7 +881,8 @@
         "otp": "One Time Passcode",
         "publicAlpha": "Públic Alpha",
         "changeWallet": "Compte de la cartera d'intercanvi",
-        "linkSteamAccountTitle": "Compte Steam Enllaç"
+        "linkSteamAccountTitle": "Compte Steam Enllaç",
+        "viewFullscreen": "Veure pantalla completa"
     },
     "quest": {
         "active": "Actiu",
