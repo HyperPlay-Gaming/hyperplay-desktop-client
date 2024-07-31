@@ -799,7 +799,7 @@ async function callRunner(
     shouldUsePowerShell = isWindows && powershellExists
   }
 
-  if (shouldUsePowerShell) {
+  if (shouldUsePowerShell && runner.name === 'legendary') {
     const argsAsString = commandParts
       .map((part) => part.replaceAll('\\', '\\\\'))
       .map((part) => `"\`"${part}\`""`)
