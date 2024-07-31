@@ -22,7 +22,6 @@ const isTooManyRequestsError = (error: string) => {
 
 const AuthModal = () => {
   const flags = useFlags()
-  console.log({ flags: { ...flags } })
   const authSession = useAuthSession()
   const webviewRef = useRef<WebviewTag>(null)
   const isAuthEnabled = flags.auth
