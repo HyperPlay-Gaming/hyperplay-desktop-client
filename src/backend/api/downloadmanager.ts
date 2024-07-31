@@ -95,3 +95,7 @@ export const resumeCurrentDownload = () =>
 
 export const pauseCurrentDownload = async () =>
   ipcRenderer.invoke('pauseCurrentDownload')
+
+export const addHyperplayGame = async (projectId: string) => {
+  await ipcRenderer.invoke('addHyperplayGame', projectId)
+}
