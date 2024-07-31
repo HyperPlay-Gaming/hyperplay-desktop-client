@@ -924,7 +924,8 @@
         "turnAnalyticsOff": "Vypnout",
         "discordApp": "Discord",
         "misc": "Nikdy",
-        "copyUrl": "Kopírovat URL"
+        "copyUrl": "Kopírovat URL",
+        "viewFullscreen": "Zobrazit celou obrazovku"
     },
     "exit_game": "Exit Hra",
     "notification": {
