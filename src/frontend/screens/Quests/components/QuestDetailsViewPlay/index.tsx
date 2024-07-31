@@ -9,6 +9,7 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
+import { useMutation } from '@tanstack/react-query'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -32,6 +33,21 @@ export function QuestDetailsViewPlayWrapper({
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
   )
+
+  const navigateToGame = useMutation({
+    mutationFn: async (appName: string) => {
+      await window.api.addHyperplayGame(appName)
+      const gameInfo = await getGameInfo(appName, 'hyperplay')
+      navigate(`/gamepage/hyperplay/${appName}`, {
+        state: { gameInfo, fromDM: false }
+      })
+    },
+    onError: (error, variable) => {
+      window.api.logError(
+        `Error navigating to ${variable} game: ${error.message}`
+      )
+    }
+  })
 
   useEffect(() => {
     if (selectedQuestId !== null) {
@@ -67,7 +83,9 @@ export function QuestDetailsViewPlayWrapper({
     ),
     claim: t('quest.claimAll', 'Claim all'),
     signIn: t('quest.signIn', 'Sign in'),
-    play: t('quest.View Game', 'View Game'),
+    play: navigateToGame.isPending
+      ? t('please-wait', 'Please wait...')
+      : t('quest.View Game', 'View Game'),
     secondCTAText: t('quest.View Game', 'View Game'),
     connectSteamAccount: t(
       'quest.connectSteamAccount',
@@ -138,15 +156,9 @@ export function QuestDetailsViewPlayWrapper({
     )
   }
 
-  async function navigateToGamePage(appName: string) {
-    const gameInfo = await getGameInfo(appName, 'hyperplay')
-    navigate(`/gamepage/hyperplay/${appName}`, {
-      state: { gameInfo, fromDM: false }
-    })
-  }
-
   return (
     <QuestDetails
+      ctaDisabled={navigateToGame.isPending}
       questType={questMeta.type}
       onSignInClick={() => console.log('sign in click')}
       onConnectSteamAccountClick={() => console.log('steam connect click')}
@@ -172,7 +184,7 @@ export function QuestDetailsViewPlayWrapper({
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}
-      onPlayClick={async () => navigateToGamePage(questMeta.project_id)}
+      onPlayClick={async () => navigateToGame.mutateAsync(questMeta.project_id)}
       key={`questDetailsLoadedId${questMeta.id}streak${!!questPlayStreakData}`}
     />
   )
