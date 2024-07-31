@@ -66,7 +66,8 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "Päivityksessä meni jotain vikaa! Ole hyvä, poista ja asenna HyperPlay uudelleen."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,12 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
-            }
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Ubisoft Connectin asentaminen pelin prefiksiin epäonnistui. Tarkista wikisivumme osoitteessa https:/github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, jotta se voidaan asentaa maunally."
+            },
+            "moving": "Error Moving Game (viittaukset | muokkaa)"
         },
         "info": {
             "update": {
@@ -139,12 +145,28 @@
                 "install": "Epicin palvelimilla on suuri katkos juuri nyt, peliä ei voi asentaa!",
                 "update": "Epic-palvelimilla on suuri katkos juuri nyt, peliä ei voi päivittää!"
             },
-            "title": "Varoitus"
+            "title": "Varoitus",
+            "wine-change": {
+                "title": "Viiniä ei löytynyt!",
+                "title-gptk": "Game Porting Toolkit ei ole yhteensopiva ",
+                "message": "Emme löytäneet valittua viiniversiota, joka lanseeraisi tämän otsikon (X66X). Löysimme toisen, haluatko jatkaa laukaisua X159X:llä?",
+                "message-gptk": "Jotta voit pelata pelejä Apple Gaming -portointityökalun avulla, sinun on päivitettävä macOS-tasosi 14 (Sonoma) tai korkeammalle. Löysimme viinin järjestelmästäsi, haluatko jatkaa laukaisua X202X:llä?"
+            },
+            "rosetta": {
+                "message": "HyperPlay vaatii Rosetta toimii oikein macOS: ssä Apple Silicon -sirujen kanssa. Asenna se macOS-terminaalista seuraavalla komennolla: ”Softwareupdate –install-rosetta” ja käynnistä HyperPlay uudelleen. ",
+                "title": "Rosetta ei löytynyt"
+            }
         },
         "wineprefix": "Valitse Wine Prefix kansio",
         "yes": "KYLLÄ",
         "dontShowAgain": "Älä näytä uudelleen",
-        "choose-nile-binary": "Valitse Niilin binaari"
+        "choose-nile-binary": "Valitse Niilin binaari",
+        "reset-extension": {
+            "question": {
+                "title": "Reset Extension",
+                "message": "Oletko varma, että haluat palauttaa MetaMaskin laajennuksen?"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Kirjaudu sisään",
         "sync": "Synkronoi",
         "syncing": "Synkronoidaan",
-        "unsync": "Älä synkronoi"
+        "unsync": "Älä synkronoi",
+        "update": "Päivitä",
+        "continue": "Jatka",
+        "download": "Ladata"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Arvioitu aika",
+        "title_dm": "Download Manageri"
     },
     "epic": {
         "offline-notification-body": "Verkkopalvelut eivät välttämättä toimi kokonaisuudessaan Epic Games:in palvelinten ollessa vailla verkkoyhteyttä!",
@@ -263,7 +290,11 @@
         "wine": {
             "part1": "HyperPlay etsii Wine, Proton- ja CrossOver -versioita seuraavista kansioista:",
             "part2": "Muille sijainneille käytä symbolista linkkiä kansioon"
-        }
+        },
+        "dxvkfpslimit": "Aseta kehyskorkeus DXVK-peleille",
+        "msync": "Msync pyrkii vähentämään CPU-intensiivisiä pelejä. Se voi parantaa suorituskykyä useissa peleissä.",
+        "disable_logs": "Pyydä tätä valintaruutua poistamaan useimmat kirjoitukset lokitiedostoihin (kriittinen tieto on aina kirjattu). Varmista, että poistat tämän asetuksen ennen kuin ilmoitat asiasta.",
+        "dxvknvapi": "DXVK-NVAPI on NVAPI:n käyttöönotto, joka on rakennettu DXVK:n ja NVAPI:n yläpuolelle, mikä mahdollistaa DLSS:n käytön Nvidia GPU:issa."
     },
     "info": {
         "hyperplay": {
@@ -289,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-none-found": "Yhteensopivuuden hallinnasta ei löytynyt viiniversiota",
+        "wine-path-invalid": "Viini on mitätön, valitse toinen."
     },
     "install": {
         "path": "Valitse asennuspolku"
@@ -303,7 +336,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "Alfabeettinen A-Z",
+        "alphabeticalZA": "Alfabeettinen Z-A"
     },
     "loading": {
         "default": "Ladataan",
@@ -314,7 +349,8 @@
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Amazon kirjautuminen"
+        "amazon": "Amazon kirjautuminen",
+        "old-mac": "MacOS-versio on (X22X). macOS 12 tai uudempi kirjautuminen."
     },
     "message": {
         "sync": "Synkronointi valmis",
@@ -347,7 +383,9 @@
             "error": "Asennus epäonnistui",
             "finished": "Asennus valmis",
             "imported": "Peli tuotu",
-            "startInstall": "Asennus aloitettu"
+            "startInstall": "Asennus aloitettu",
+            "stopped": "Asennus pysäytettiin",
+            "paused": "Asennus ohitettu"
         },
         "moved": "Siirto valmis",
         "moving": "Moving Game",
@@ -359,7 +397,9 @@
         "update": {
             "canceled": "Päivitys peruutettu",
             "finished": "Päivitys valmis",
-            "started": "Päivitys aloitettu"
+            "started": "Päivitys aloitettu",
+            "paused": "Päivitetty",
+            "stopped": "Päivitys pysähtyi"
         }
     },
     "offline-message": {
@@ -369,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Avaa",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -414,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefiksi johon EGS on asennettu",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
-        "alt-nile-bin": "Käyttämällä sisäänrakennettua Niilin binaarista..."
+        "alt-nile-bin": "Käyttämällä sisäänrakennettua Niilin binaarista...",
+        "dxvkfpsvalue": "Positiivinen kokonaisluku (esim. 30, 60,...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -431,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Tauota lataukset",
+            "resume": "Lataa uudelleen"
         }
     },
     "Recent": "Viimeksi pelatut",
@@ -499,7 +542,10 @@
             "instructions_title": "How to report a problem?",
             "last-log": "Viimeisin loki",
             "no-file": "Lokitiedostoja ei löytynyt",
-            "show-in-folder": "Näytä lokitiedosto kansiossa"
+            "show-in-folder": "Näytä lokitiedosto kansiossa",
+            "instructions-part-02": "Jotta voimme diagnosoida ja korjata ongelman mahdollisimman nopeasti, anna mahdollisimman paljon tietoa, mukaan lukien kopio lokista. Tukitiimimme seuraa molempia kanavia ja tekee parhaansa vastatakseen ongelmaasi mahdollisimman nopeasti. Kiitos kärsivällisyydestäsi ja ymmärryksestäsi, kun pyrimme ratkaisemaan mahdolliset ongelmat.",
+            "instructions-part-01": "Jos kohtaat ongelmia, kun käytät HyperPlayta, meillä on kaksi nimettyä aluetta, jotka raportoivat ongelmasi Discord Serverissä. Jos olet pelaaja, ilmoita kaikista ongelmista vierailemalla pelaaja-tuki-foorumilla. Jos olet pelin dev, ilmoita mahdollisista ongelmista vierailemalla dev-support-foorumilla.",
+            "join-hyperplay-discord": "Liity riitaamme"
         },
         "mangohud": "Ota Mangohud käyttöön (Mangohudin tulee olla asennettu)",
         "manualsync": {
@@ -545,7 +591,12 @@
         "disable_logs": "Poista lokit käytöstä",
         "addgamestoapplications": "Lisää pelejä automaattisesti sovelluksiin",
         "showMetalOverlay": "Näytä tilastojen peittokuva",
-        "alt-nile-bin": "Valitse vaihtoehtoinen Niilin binaari"
+        "alt-nile-bin": "Valitse vaihtoehtoinen Niilin binaari",
+        "msync": "Ota Esync käyttöön",
+        "autodxvknvapi": "Automaattinen asennus/Update DXVK-NVAPI prefixissä",
+        "autoLaunchHyperPlay": "Auto käynnistyy hyper Pelaa Play Play",
+        "steamId": "Steam ID",
+        "dxvkfpslimit": "FPS (DX9, 10 ja 11)"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +631,51 @@
             "log": "Log",
             "other": "Muut",
             "sync": "Tallenna ja synkronoi",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Tilit",
+            "systemInformation": "_Järjestelmän tiedot"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
-        }
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine Manageri"
+            }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Kopioi leikepöydälle",
+            "os": "Käyttöjärjestelmä",
+            "version": "Versio (X9X)",
+            "gpu": "GPU:",
+            "gpuWithNumber": "GPU (X4X):",
+            "showDetailed": "Näytä yksityiskohtaiset järjestelmävaatimukset",
+            "cpu": "CPU:",
+            "steamDeck": "Steam Deck",
+            "systemModel": "Järjestelmämalli:",
+            "osNameFlatpak": "{{osName}} (Flatpakin sisällä)",
+            "cpuDescription": "[x16X]",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpuDriver": "Kuljettaja (X8X)",
+            "legendaryVersion": "Legendaarinen (X11X)",
+            "memory": "Muisti:",
+            "memoryStats": "{{percentUsed}} % ({{usedGib}})",
+            "osVersion": "Versio (X8X)"
+        },
+        "gamesSettings": "Peliasetukset",
+        "reset-extension": "Reset Extension"
     },
     "Settings": "Asetukset",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Kirjasto",
+        "store": "Marketplace",
+        "achievements": "Saavutuksia",
+        "downloadManager": "Download Manageri"
     },
     "status": {
         "installing": "Installing",
@@ -631,7 +714,9 @@
         "logout": "Kirjaudu ulos",
         "logout_confirmation": "Haluatko varmasti kirjautua ulos?",
         "manageaccounts": "Hallitse tilejä",
-        "quit": "Poistu"
+        "quit": "Poistu",
+        "logIn": "Kirjaudu sisään",
+        "manageStore": "Hallitse myymälöitä"
     },
     "webview": {
         "controls": {
@@ -668,5 +753,265 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon pelit",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "quest": {
+        "connectSteamAccount": "Yhdistä ryhmätili",
+        "active": "Aktiivinen",
+        "Play": "Toista",
+        "points": "Pisteet",
+        "playstreak": {
+            "days": "päivät",
+            "now": "Nyt",
+            "streakCompleted": "Streak valmistui! Vaadi palkintosi nyt.",
+            "streakProgress": "Streak Progress",
+            "dayResets": "Päivän palautus:",
+            "playEachDay": "Pelaa joka päivä, jotta strippi ei palaudu!",
+            "playToStart": "Pelaa tätä peliä aloittaaksesi pelin!",
+            "progressTowardsStreak": "edistystä kohti nykypäivän rajoja."
+        },
+        "signIn": "Kirjaudu",
+        "sync": "Sync",
+        "associatedGames": "Liittyvät pelit",
+        "claimAll": "Vaatii kaikki",
+        "claimed": "Vaadittu",
+        "errorMessage": "Kaupassa oli virhe.",
+        "linkAccount": "Link Your Steam-tili tarkistaa kelpoisuuden.",
+        "readyForClaim": "Valmiina väitteeseen",
+        "reputation": "Maine",
+        "reward": "Palkinnot",
+        "type": {
+            "playstreak": "Leikkiä Streak",
+            "reputation": "Maine"
+        },
+        "claimFailed": "Väite epäonnistui",
+        "claimFailedMessage": "Kokeile vielä kerran. Jos se ei toimi, luo Discord-tukilippu.",
+        "createDiscordTicket": "Lähde: Discord",
+        "notEnoughGas": "Riittämätön lompakkotasapaino palkkion saamiseksi kaasumaksujen vuoksi. Kokeile erilaista lompakkoa tai täytä tämä ennen retkeilyä.",
+        "needMoreAchievements": "Sinun on täytettävä {{percent}}% saavutuksistasi näissä peleissä.",
+        "quests": "Quests",
+        "View Game": "Näkymä pelistä"
+    },
+    "gameRelease": {
+        "main": "Oletus",
+        "demo": "Demo",
+        "alpha": "Alfa",
+        "beta": "Beta",
+        "prototype": "Prototyyppi"
+    },
+    "hyperplay": {
+        "buttons": {
+            "noThanks": "Ei kiitos",
+            "agree": "Olen samaa mieltä"
+        },
+        "folder": "Kansio",
+        "gamecard": {
+            "paused": "Pysäytetty",
+            "distributables": "Jakelun asentaminen",
+            "installing": "Ladataan...",
+            "extracting": "Harjoittaa...",
+            "installed": "Valmiina pelaamaan"
+        },
+        "logOut": "Kirjaudu ulos",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "info": {
+                        "skip": "Ohita toistaiseksi",
+                        "createWalletCTA": "Luo lompakko",
+                        "createWalletDescription": "Klikkaa \"Luo lompakko\", jos sinulla ei ole lompakkoa tai haluat luoda uuden:",
+                        "digitalAssets": {
+                            "details": "Lompakoita käytetään lähettämään, vastaanottamaan, tallentamaan ja näyttämään digitaalisia hyödykkeitä, kuten tokeneja ja NFT: tä.",
+                            "title": "Koti digitaaliselle omaisuudelle"
+                        },
+                        "login": {
+                            "details": "Vaihtoehtona luoda uusia tilejä ja salasanoja jokaisella verkkosivustolla, yhdistä lompakko sen sijaan.",
+                            "title": "Uusi tapa päästä sisään"
+                        },
+                        "title": "Mikä on lompakko?"
+                    },
+                    "import": {
+                        "learnMore": "Lue lisää",
+                        "orWord": "VAI",
+                        "useRecoveryPhrase": "Salaisen palautuslauseen käyttäminen",
+                        "details": "Alla olevat selaimet ovat jo asennettu MetaMask. Valitse sellainen, josta haluat tuoda.",
+                        "title": "Valitse selain tuonnista",
+                        "cantFindProfile": "Etkö löydä selainprofiiliasi?",
+                        "createNewWallet": "Luo uusi MM-laajennuslompakko",
+                        "useRecoveryPhraseInfo": "Tätä ominaisuutta suositellaan edistyneille käyttäjille ja kehittäjille. Salainen toipumislause on tallennettu paikallisesti MetaMaskiin, eikä sitä ole koskaan jaettu HyperPlayn kanssa."
+                    },
+                    "scan": {
+                        "dontHaveWallet": "Onko sinulla lompakkoa?",
+                        "getMetamask": "MetaMask",
+                        "details": "Luo salattu viestintäkanava. Avaimia ei koskaan jaeta HyperPlayn kanssa.",
+                        "title": "Scan QR:llä ",
+                        "updateWarning": "Onko ongelmia? Varmista, että MetaMask on voimassa."
+                    }
+                },
+                "title": "Wallet-yhteydet",
+                "pleaseConnect": "Yhdistä lompakkosi tai lataa Metamaskin mobiilisovellus\nAloitetaan:"
+            },
+            "terms": "Palvelun käyttöehdot",
+            "connectionConnected": {
+                "description": "Lompakko on yhdistetty. Olet valmis pelaamaan.",
+                "title": "Wallet yhdistetty!"
+            },
+            "connectionCanceled": {
+                "title": "Yhteys peruttu!",
+                "description": "Vahvista yhteyspyyntö mobiililompakollasi."
+            },
+            "analytics": {
+                "neverSellData": " myy tietoja voitosta. koskaan!",
+                "privacyPolicyHere": "Yksityisyyspolitiikka täällä.",
+                "title": "Auta meitä parantamaan HyperPlaya!",
+                "neverCollectPersonal": " kerätä avaimia, osoitteita, saldoja, hasheja tai henkilökohtaisia tietoja;",
+                "body": "HyperPlay haluaa kerätä käyttötietoja ymmärtääkseen paremmin, miten käyttäjämme ovat vuorovaikutuksessa sovelluksen kanssa. Nämä tiedot auttavat meitä ymmärtämään, miten käytät sovellusta ja voimme tehdä HyperPlaysta entistä paremman sinulle.",
+                "neverCollectIP": " koko IP-osoitteesi;",
+                "privacyCaption": "Nämä tiedot on koottu ja ne ovat siten nimettömiä yleisen tietosuoja-asetuksen (EU) 2016/679 soveltamiseksi. Lisätietoja tietosuojakäytännöistämme, katso meidän ",
+                "optOut": "Asetukset aina pois päältä;",
+                "anonymized": "Lähetä anonymisoitu klikkaus ja pelin vuorovaikutus;",
+                "hyperplayWill": "HyperPlay:"
+            },
+            "welcome": {
+                "text": {
+                    "description": "HyperPlay on pelin käynnistäjä ja pelikaupan aggregaattori.\nTulevaisuus. HyperPlaylla voit kuljettaa lompakkosi, merkkisi ja omaisuutesi.\njokaiseen peliin. HyperPlay tukee koko Epicin kirjastoa\nMyymälä, GOG ja oma HyperPlay-kauppa. Käyttämällä HyperPlay, olet samaa mieltä\nMeidän",
+                    "construction": "HyperPlay on rakenteilla.",
+                    "bugs": "HyperPlay on julkinen alfa. Monet ominaisuudet ovat edelleen\nkehityksessä, ja siellä on vikoja.",
+                    "communityCTA_2": "yhteisö. Yhdessä muokataan pelien tulevaisuutta!",
+                    "communityCTA_1": "Rakastamme palautettasi ja liityt meihin"
+                },
+                "title": "Tervetuloa hyperiin Varhainen pääsy!"
+            },
+            "connectAgain": "Yhdistä uudelleen"
+        },
+        "turnAnalyticsOff": "Ota pois käytöstä",
+        "turnAnalyticsOn": "Ota käyttöön",
+        "browserImport": {
+            "profile": "Profiili",
+            "appId": "Sovellus I"
+        },
+        "Sync": "Sync",
+        "discordApp": "Discord",
+        "copyUrl": "Kopioi URL-osoite",
+        "misc": "Ei koskaan",
+        "analyticsOff": "Analytiikka poistuu",
+        "analyticsOn": "Analytiikka on päällä",
+        "accesscodes": {
+            "error": {
+                "validation": "Käyttökoodi on mitätön"
+            },
+            "requirescode": "Tämä pelin päivitys vaatii käyttökoodin.",
+            "success": {
+                "validation": "Menestystä! Access-koodi on voimassa"
+            }
+        },
+        "achievements": {
+            "noAchievements": {
+                "doubleCheckMessage": "Näyttää siltä, että emme löytäneet tällä hetkellä mitään pelejä Steam-tililtäsi. Vain nopea muistutus kaksinkertaistaa, että pelin tiedot ovat julkisia. Näin voimme hyödyntää saavutuksiasi ja tarjota sinulle parhaan kokemuksen.",
+                "oops": "Oops!"
+            },
+            "gamesToMint": "Pelit minttu",
+            "addThisGame": "Lisää tämä peli",
+            "freeMints": "Vapaita minuutteja"
+        },
+        "changeWallet": "Swap lompakkotili",
+        "linkSteamAccountCta": "Siirry Steamin merkkiin",
+        "viewMyAccount": "Katso tilini",
+        "otp": "Kerran Passcode",
+        "connectWallet": "Liitä lompakko",
+        "viewItem": "Näkymä (X5X)",
+        "syncing": "Syncing...",
+        "currentWallet": "Nykyinen lompakko",
+        "viewPortfolio": "Näkymä portfolio",
+        "publicAlpha": "Julkinen Alfa",
+        "linkSteamAccountDescription": "Kirjaudu Steamiin linkittääksesi HyperPlay-tilisi.",
+        "linkSteamAccountTitle": "Linkki Steam Tili"
+    },
+    "profile": "Profiili",
+    "sideload": {
+        "warningTitle": "Tärkeä",
+        "warningMessage": "Pelin lataaminen on kehittäjille ja kokeneille virrankäyttäjille tarkoitettu ominaisuus. Sivun lataaminen asennusohjelma, joka sisältää haittaohjelmia, voi vaarantaa tietokoneen ja johtaa varastukseen."
+    },
+    "ALL": "KAIKKI",
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer i",
+            "message": "Oletusarvoisen yhteensopivuuden määrittäminen"
+        }
+    },
+    "analytics": "Analytiikat",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "INITIATED": "Transaktiopyyntö vireillä",
+            "CONFIRMED": "Transaktiot vahvistettu",
+            "FAILED": "Transaktiot keskeytetty",
+            "PENDING": "Toimitetut transaktiot"
+        },
+        "description": {
+            "INITIATED": "Lompakon vahvistus on vireillä mobiililompakkoon",
+            "FAILED": "Tapahtuma on peruutettu tai ei toimitettu, yritä uudelleen",
+            "PENDING": "Lohkoketjun vahvistusta odotellessa. Kerromme, milloin se on vahvistettu",
+            "CONFIRMED": "Kauppa on onnistuneesti vahvistettu!"
+        },
+        "signatureRequest": {
+            "INITIATED": "Allekirjoituspyyntö vireillä",
+            "CONFIRMED": "Lähetetty allekirjoitus",
+            "FAILED": "Allekirjoitus keskeytetty"
+        },
+        "extensionNotification": {
+            "TITLE": "Pyydetty transaktio",
+            "DESCRIPTION": "Lehdistö (X6X) X Nähdään tämä tapahtuma"
+        },
+        "greeting": {
+            "title": "HyperPlay Overlay",
+            "description": "HyperPlay on valmis! Lehdistö (X34X) X näyttää tai piilottaa."
+        },
+        "chainRequest": {
+            "FAILED": "Tulliverkosto peruttu",
+            "INITIATED": "Tullin verkkopyyntö",
+            "CONFIRMED": "Tullin verkko lisätty"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Token lisätty",
+            "INITIATED": "Lisätään räätälöity pyyntö vireillä",
+            "FAILED": "Custom Token -pyyntö peruttu"
+        }
+    },
+    "email_subscription": {
+        "title": "Kiitos tilauksesta!",
+        "subtitle": "Olet nyt osa yhteisöämme ja olemme innoissamme jakamaan arvokkaita päivityksiä ja näkemyksiä kanssasi."
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "single": "Päivitys on valmis (X29X).",
+            "multiple": "[x] ja muut pelit ovat valmiita päivittämään."
+        },
+        "title": "Pelin päivitykset saatavilla"
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Olet yhteydessä HyperPlayyn ulkoisella lompakolla."
+    },
+    "accounts": "tilit",
+    "exit_game": "Exit Game",
+    "back_to_game": "Takaisin peliin",
+    "dlcs": {
+        "label": "Valitse DLC asennukseen:"
+    },
+    "achievements": {
+        "progress": {
+            "minted": "ketjussa",
+            "notMinted": "ketjun ulkopuolella"
+        }
+    },
+    "importGameErrorMessage": "Ei kelvollinen pelikansio, tuonti ei ole mahdollista",
+    "importGameErrorMessageExecutable": "Game Game Game Game Game Game pelipeli Pelin tuonti ei ole mahdollista",
+    "importGameErrorTitle": "Tuo pelivirhe",
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "Et ole tällä hetkellä kirjautuneena sisään, pelin etenemistä ei seurata. Kirjaudu HyperPlayyn huippuoikeiston kautta edistyksen seuraamiseksi.",
+                "overlay": "Et ole tällä hetkellä kirjautuneena sisään, pelin etenemistä ei seurata. Poistu pelistä ja kirjaudu HyperPlayyn huippuoikeiston kautta edistyksen seuraamiseksi."
+            }
+        },
+        "quests": "Quests"
+    }
 }

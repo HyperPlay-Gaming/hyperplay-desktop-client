@@ -66,7 +66,8 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "Qualcosa non va con l'aggiornamento! Si prega di disinstallare e reinstallare manualmente HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -150,19 +151,31 @@
             "title": "Attenzione",
             "wine-change": {
                 "message": "Non siamo riusciti a trovare la versione Wine selezionata per lanciare questo titolo ({{selectedWine}}). {{newline}} Ne abbiamo trovato un altro, vuoi continuare l'avvio utilizzando {{foundWine}} ?",
-                "title": "Wine non trovato!"
+                "title": "Wine non trovato!",
+                "title-gptk": "Game Porting Toolkit Non Compatibile ",
+                "message-gptk": "Per poter eseguire giochi utilizzando il toolkit di porting Apple Gaming è necessario aggiornare il macOS a 14 (Sonoma) o superiore. {{newline}} Abbiamo trovato Vino sul vostro sistema, volete continuare a lanciare usando {{foundWine}}?"
             },
             "sideload": {
                 "confirmExit": {
                     "title": "Sei sicuro di voler uscire?",
                     "message": "I progressi non salvati potrebbero essere persi"
                 }
+            },
+            "rosetta": {
+                "message": "IperPlay richiede Rosetta per eseguire correttamente su macOS con chip Apple Silicon. Si prega di installarlo dal terminale macOS utilizzando il seguente comando: \"softwareupdate --install-rosetta\" e riavviare HyperPlay. ",
+                "title": "Rosetta non trovata"
             }
         },
         "wineprefix": "Seleziona la cartella del prefisso di Wine",
         "yes": "SI",
         "dontShowAgain": "Non mostrare più",
-        "choose-nile-binary": "Seleziona binario di Nile"
+        "choose-nile-binary": "Seleziona binario di Nile",
+        "reset-extension": {
+            "question": {
+                "message": "Sei sicuro di voler resettare l'estensione MetaMask?",
+                "title": "Reset Estensione"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -170,7 +183,10 @@
         "login": "Accedi",
         "sync": "Sincronizza",
         "syncing": "Sincronizzazione in corso",
-        "unsync": "Annulla sincronizzazione"
+        "unsync": "Annulla sincronizzazione",
+        "update": "Aggiorna",
+        "continue": "Continuare",
+        "download": "Scarica"
     },
     "controller": {
         "hints": {
@@ -209,7 +225,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "Tempo stimato",
+        "title_dm": "Download Manager"
     },
     "epic": {
         "offline-notification-body": "I servizi online potrebbero non funzionare completamente poiché i server di Epic Games sono offline!",
@@ -283,7 +301,9 @@
             "part2": "Per altre posizioni, utilizza un link simbolico ad una di queste cartelle"
         },
         "disable_logs": "Attiva questa casella di controllo per disabilitare la maggior parte delle scritture sui file di registro (le informazioni critiche vengono sempre registrate). Assicurati di disattivare questa impostazione prima di segnalare qualsiasi problema.",
-        "dxvknvapi": "DXVK-NVAPI è un'implementazione di NVAPI che utilizza DXVK e la versione linux di NVAPI, permette l'utilizzo del DLSS sulle GPU Nvidia."
+        "dxvknvapi": "DXVK-NVAPI è un'implementazione di NVAPI che utilizza DXVK e la versione linux di NVAPI, permette l'utilizzo del DLSS sulle GPU Nvidia.",
+        "msync": "Msync ha lo scopo di ridurre l'overhead del wineerver nei giochi ad alta intensità di CPU. L'attivazione può migliorare le prestazioni su diversi giochi.",
+        "dxvkfpslimit": "Imposta un tappo frame rate per giochi DXVK"
     },
     "info": {
         "hyperplay": {
@@ -325,7 +345,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalAZ": "Alfabetico A-Z",
+        "alphabeticalZA": "Alfabetico Z-A"
     },
     "loading": {
         "default": "Caricamento in corso",
@@ -370,7 +392,9 @@
             "error": "Installazione non riuscita",
             "finished": "Installazione completata",
             "imported": "Gioco importato",
-            "startInstall": "Installazione avviata"
+            "startInstall": "Installazione avviata",
+            "paused": "Installazione Paused",
+            "stopped": "Installazione bloccata"
         },
         "moved": "Spostamento completato",
         "moving": "Moving Game",
@@ -382,7 +406,9 @@
         "update": {
             "canceled": "Aggiornamento annullato",
             "finished": "Aggiornamento completato",
-            "started": "Aggiornamento avviato"
+            "started": "Aggiornamento avviato",
+            "stopped": "Aggiornamento interrotto",
+            "paused": "Aggiornamento Paused"
         }
     },
     "offline-message": {
@@ -392,7 +418,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Aperto",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -437,7 +463,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix dove è installato EGS",
         "prefered_language": "Codice di 2 caratteri (es.: \\\"en\\\" o \\\"fr\\\")",
-        "alt-nile-bin": "Usando il binario Nile integrato..."
+        "alt-nile-bin": "Usando il binario Nile integrato...",
+        "dxvkfpsvalue": "Valore intero positivo (es. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -525,7 +552,10 @@
             "instructions_title": "Come segnalare un problema?",
             "last-log": "Ultimo accesso",
             "no-file": "Nessun log file trovato",
-            "show-in-folder": "Mostra il log file nella cartella"
+            "show-in-folder": "Mostra il log file nella cartella",
+            "instructions-part-01": "Se si verificano problemi durante l'utilizzo di HyperPlay, abbiamo due aree designate per segnalare i vostri problemi nel nostro Discord Server. Se sei un giocatore, si prega di segnalare eventuali problemi visitando il giocatore-support-forum. Se sei un dev di gioco, segnala qualsiasi problema visitando il dev-support-forum.",
+            "join-hyperplay-discord": "Unisciti al nostro Discord",
+            "instructions-part-02": "Per aiutarci a diagnosticare e risolvere il problema il più rapidamente possibile, si prega di fornire quante più informazioni possibile, tra cui una copia dei vostri registri. Il nostro team di supporto monitorerà entrambi i canali e farà del loro meglio per rispondere al tuo problema il più velocemente possibile. Grazie per la vostra pazienza e comprensione mentre lavoriamo per risolvere qualsiasi problema si può incontrare."
         },
         "mangohud": "Abilita Mangohud (Mangohud necessita di essere installato)",
         "manualsync": {
@@ -572,7 +602,10 @@
         "addgamestoapplications": "Aggiungi giochi alla lista applicazioni automaticamente",
         "showMetalOverlay": "Mostra Overlay Statistiche",
         "alt-nile-bin": "Scegli un binario Nile alternativo",
-        "autodxvknvapi": "Installa/Aggiorna automaticamente DXVK/VKD3D sul Prefix"
+        "autodxvknvapi": "Installa/Aggiorna automaticamente DXVK/VKD3D sul Prefix",
+        "msync": "Abilita l'Esync",
+        "autoLaunchHyperPlay": "Avvio automatico Hyper Gioca",
+        "steamId": "ID vapore"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -607,19 +640,51 @@
             "log": "Log",
             "other": "Altro",
             "sync": "Sincronizzazione salvataggi",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "Informazioni di sistema",
+            "accounts": "Profili"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
-        }
+        },
+        "systemInformation": {
+            "copyToClipboard": "Copia negli appunti",
+            "os": "Sistema Operativo:",
+            "osNameFlatpak": "{{osName}} (inside Flatpak)",
+            "osVersion": "Versione {{versionNumber}}",
+            "showDetailed": "Mostra le specifiche dettagliate del sistema",
+            "version": "Versione: {{appVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "Leggenda: {{legendaryVersion}}",
+            "memory": "Memoria:",
+            "memoryStats": "{{percentUsed}}% usato ({{usedGib}} / {{totalGib}}",
+            "steamDeck": "Deck vapore",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "{{gogdlVersion}}",
+            "gpu": "GPU:",
+            "gpuDriver": "Driver: {{driverVersion}}",
+            "systemModel": "Modello di sistema:"
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
+        },
+        "gamesSettings": "Impostazioni giochi",
+        "reset-extension": "Reset Estensione"
     },
     "Settings": "Impostazioni",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "Libreria",
+        "store": "Salva",
+        "achievements": "Obiettivi",
+        "downloadManager": "Download Manager"
     },
     "status": {
         "installing": "Installazione in corso",
@@ -660,7 +725,9 @@
         "manageaccounts": "Gestione Account",
         "quit": "Esci",
         "cancel": "Annulla",
-        "quitMessage": "Sei sicuro di voler uscire?"
+        "quitMessage": "Sei sicuro di voler uscire?",
+        "logIn": "Accedi",
+        "manageStore": "Gestione dei negozi"
     },
     "webview": {
         "controls": {
@@ -697,5 +764,265 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Giochi Amazon",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "onboarding": {
+            "terms": "Termini di Servizio",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Approfondisci",
+                        "cantFindProfile": "Non riesci a trovare il tuo profilo del browser?",
+                        "createNewWallet": "Crea nuovo portafoglio di estensione MM",
+                        "details": "I browser sottostanti hanno già installato MetaMask. Scegli quello da cui ti piacerebbe importare.",
+                        "useRecoveryPhrase": "Importare utilizzando la frase di recupero segreto",
+                        "orWord": "O",
+                        "useRecoveryPhraseInfo": "Questa funzione è consigliata per utenti e sviluppatori avanzati. La tua frase di recupero segreto viene memorizzata localmente in MetaMask e mai condivisa con HyperPlay.",
+                        "title": "Selezionare il browser da importare"
+                    },
+                    "info": {
+                        "skip": "Salta per ora",
+                        "createWalletCTA": "Crea un portafoglio",
+                        "login": {
+                            "title": "Un nuovo modo per accedere",
+                            "details": "Un'alternativa alla creazione di nuovi account e password su ogni sito web, basta collegare il portafoglio invece."
+                        },
+                        "createWalletDescription": "Clicca qui sotto “Crea un portafoglio” se non hai un portafoglio o vuoi crearne uno nuovo:",
+                        "digitalAssets": {
+                            "details": "I portafogli vengono utilizzati per inviare, ricevere, memorizzare e visualizzare beni digitali come gettoni e NFT.",
+                            "title": "Una casa per i vostri asset digitali"
+                        },
+                        "title": "Cos'è un portafoglio?"
+                    },
+                    "scan": {
+                        "dontHaveWallet": "Non hai un portafoglio?",
+                        "getMetamask": "Ottenere MetaMask",
+                        "details": "Creare un canale di comunicazione crittografato. Le tue chiavi non saranno mai condivise con HyperPlay.",
+                        "title": "Scansione QR con ",
+                        "updateWarning": "Hai problemi? Assicurati che MetaMask sia aggiornato."
+                    }
+                },
+                "title": "Collegamenti del portafoglio",
+                "pleaseConnect": "Si prega di collegare il portafoglio, o scaricare il Metamask mobile-app per ottenere\niniziato:"
+            },
+            "welcome": {
+                "text": {
+                    "communityCTA_2": "comunità. Insieme, formiamo il futuro del gioco!",
+                    "construction": "HyperPlay è in costruzione.",
+                    "communityCTA_1": "Ci piacerebbe il tuo feedback e per farti unire a noi",
+                    "bugs": "Si prega di notare che HyperPlay è un alfa pubblico. Molte caratteristiche sono ancora\nnello sviluppo, e ci saranno bug.",
+                    "description": "HyperPlay è un lanciatore di giochi e aggregatore di game store dal\nfuturo. Con HyperPlay, puoi portare il portafoglio, i gettoni e i beni\nin ogni gioco. HyperPlay supporta l'intera libreria dell'Epic\nStore, GOG e il nostro negozio HyperPlay. Utilizzando HyperPlay, accetti\nal nostro"
+                },
+                "title": "Benvenuti a Hyper Gioca a Early Access!"
+            },
+            "connectionConnected": {
+                "title": "Portafoglio collegato!",
+                "description": "Il portafoglio e' collegato. Sei pronto a giocare."
+            },
+            "connectAgain": "Collegare nuovamente",
+            "analytics": {
+                "anonymized": "Invia anonymized click & interazione di gioco;",
+                "hyperplayWill": "HyperPlay:",
+                "neverCollectIP": " raccogliere il tuo indirizzo IP completo;",
+                "neverSellData": " vendere i dati per il profitto. Mai!",
+                "optOut": "Consente sempre di opt-out tramite Impostazioni;",
+                "title": "Aiutaci a migliorare HyperPlay!",
+                "privacyPolicyHere": "Informativa sulla privacy qui.",
+                "neverCollectPersonal": " raccogliere chiavi, indirizzi, saldi, hash o qualsiasi informazione personale;",
+                "privacyCaption": "Questi dati sono aggregati ed sono quindi anonimi ai fini del Regolamento Generale sulla Protezione dei Dati (UE) 2016/679. Per ulteriori informazioni in relazione alle nostre pratiche sulla privacy, consultare la nostra ",
+                "body": "HyperPlay vorrebbe raccogliere i dati di utilizzo per capire meglio come i nostri utenti interagiscono con l'applicazione. Queste informazioni ci aiutano a capire come si utilizza l'app e ci permette di rendere HyperPlay ancora meglio per voi."
+            },
+            "connectionCanceled": {
+                "description": "Si prega di confermare la richiesta di connessione sul vostro portafoglio mobile per procedere.",
+                "title": "Connessione annullata!"
+            }
+        },
+        "buttons": {
+            "agree": "Accetto",
+            "noThanks": "No grazie"
+        },
+        "browserImport": {
+            "profile": "Profilo",
+            "appId": "App Id"
+        },
+        "folder": "Cartella",
+        "gamecard": {
+            "installing": "Scaricamento in corso...",
+            "paused": "In pausa",
+            "distributables": "Installazione di distributori",
+            "extracting": "Estrarre...",
+            "installed": "Pronto a giocare"
+        },
+        "logOut": "Disconnettiti",
+        "copyUrl": "Copia URL",
+        "discordApp": "Discord",
+        "syncing": "Sincronizzazione...",
+        "turnAnalyticsOff": "Disabilita",
+        "Sync": "Sincronizza",
+        "turnAnalyticsOn": "Abilita",
+        "misc": "Mai",
+        "analyticsOn": "L'analisi è attivata",
+        "accesscodes": {
+            "error": {
+                "validation": "Codice di accesso non valido"
+            },
+            "success": {
+                "validation": "Successo! Il codice di accesso è valido"
+            },
+            "requirescode": "Questo aggiornamento del gioco richiede un codice di accesso."
+        },
+        "analyticsOff": "L'analisi è disattivata",
+        "achievements": {
+            "addThisGame": "Aggiungi questo gioco",
+            "freeMints": "Free Mints",
+            "noAchievements": {
+                "oops": "Ops!",
+                "doubleCheckMessage": "Sembra che al momento non abbiamo trovato nessun gioco sul tuo account Steam. Solo un rapido promemoria di controllare doppio che i dettagli del gioco sono impostati al pubblico. In questo modo, possiamo accedere ai vostri risultati e fornire la migliore esperienza."
+            },
+            "gamesToMint": "Giochi di menta"
+        },
+        "changeWallet": "Conto portafoglio Swap",
+        "currentWallet": "Portafoglio attuale",
+        "linkSteamAccountCta": "Accedi a Steam",
+        "linkSteamAccountDescription": "Accedi a Steam per collegare il tuo account HyperPlay.",
+        "linkSteamAccountTitle": "Link Account di Steam",
+        "publicAlpha": "Alfa pubblico",
+        "otp": "One Time Passcode",
+        "viewItem": "Vedi {{item}}",
+        "viewMyAccount": "Visualizza il mio account",
+        "connectWallet": "Connetti il portafoglio",
+        "viewPortfolio": "Visualizza portafoglio"
+    },
+    "gameRelease": {
+        "alpha": "Alfa",
+        "demo": "Demo",
+        "main": "Principali",
+        "beta": "Beta",
+        "prototype": "Prototipo"
+    },
+    "quest": {
+        "active": "Attivo",
+        "claimed": "Ricevuto",
+        "quests": "Missioni",
+        "Play": "Avvia",
+        "signIn": "Accedi",
+        "playstreak": {
+            "days": "giorni",
+            "now": "Adesso",
+            "dayResets": "Ripristino del giorno:",
+            "playEachDay": "Gioca ogni giorno in modo che la tua striscia non si resetta!",
+            "playToStart": "Gioca a questo gioco per iniziare la tua striscia!",
+            "progressTowardsStreak": "progresso verso la striscia di oggi.",
+            "streakCompleted": "Streak completato! Rivendica le tue ricompense.",
+            "streakProgress": "Streak Progress"
+        },
+        "points": "Punti",
+        "sync": "Sincronizza",
+        "type": {
+            "reputation": "Reputazione",
+            "playstreak": "Gioca a Streak"
+        },
+        "connectSteamAccount": "Associa conto della squadra",
+        "reputation": "Reputazione",
+        "linkAccount": "Collegare il account Steam per verificare l'ammissibilità.",
+        "needMoreAchievements": "È necessario aver completato {{percent}}% dei risultati in uno di questi giochi.",
+        "errorMessage": "C'è stato un errore con la transazione.",
+        "readyForClaim": "Pronto per la richiesta",
+        "View Game": "Visualizza gioco",
+        "associatedGames": "Giochi associati",
+        "claimAll": "Richiedi tutto",
+        "claimFailed": "Rivenzione fallita",
+        "reward": "Reward",
+        "claimFailedMessage": "Prova ancora una volta. Se ancora non funziona, creare un biglietto di supporto Discord.",
+        "createDiscordTicket": "Creato biglietto Discord",
+        "notEnoughGas": "Bilancio portafoglio insufficiente per rivendicare la vostra ricompensa a causa di costi di gas. Prova un portafoglio diverso o ricostituisci questo prima di riprovare."
+    },
+    "quests": {
+        "quests": "Missioni",
+        "playstreak": {
+            "signInWarning": {
+                "client": "Attualmente non sei connesso, il progresso della striscia di gioco non verrà tracciato. Si prega di effettuare il login a HyperPlay attraverso la discesa in alto a destra per monitorare i progressi.",
+                "overlay": "Attualmente non sei connesso, il progresso della striscia di gioco non verrà tracciato. Si prega di uscire dal gioco e accedere a HyperPlay tramite il dropdown top-right per monitorare i progressi."
+            }
+        }
+    },
+    "ALL": "Tutto",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "CONFIRMED": "Transazione confermata",
+            "PENDING": "Transazione presentata",
+            "FAILED": "Transazione interrotta",
+            "INITIATED": "Richiesta di transazione in sospeso"
+        },
+        "signatureRequest": {
+            "FAILED": "Firma interrotta",
+            "CONFIRMED": "Firma presentata",
+            "INITIATED": "Richiesta di firma in attesa"
+        },
+        "extensionNotification": {
+            "TITLE": "Transazione richiesta",
+            "DESCRIPTION": "Premere {{overlayKeyMod}} + X per vedere questa transazione"
+        },
+        "greeting": {
+            "description": "HyperPlay Overlay è pronto! Premere {{overlayKeyMod}} + X per mostrarlo o nasconderlo.",
+            "title": "Overlay di HyperPlay"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Token personalizzato aggiunto",
+            "FAILED": "Richiesta di gettone personalizzato annullata",
+            "INITIATED": "Aggiungi richiesta token personalizzata in attesa"
+        },
+        "description": {
+            "CONFIRMED": "La transazione è stata confermata con successo!",
+            "FAILED": "La transazione è stata annullata o non presentata, si prega di riprovare",
+            "INITIATED": "Una conferma del portafoglio è in sospeso nel tuo portafoglio mobile",
+            "PENDING": "Aspettando la conferma della blockchain. Ti faremo sapere quando sara' confermato"
+        },
+        "chainRequest": {
+            "INITIATED": "Richiesta di rete personalizzata",
+            "FAILED": "Rete personalizzata cancellata",
+            "CONFIRMED": "Rete personalizzata aggiunta"
+        }
+    },
+    "analytics": "Statistiche",
+    "profile": "Profilo",
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer",
+            "message": "Impostazione dello strato di compatibilità predefinito"
+        }
+    },
+    "sideload": {
+        "warningTitle": "Importante",
+        "warningMessage": "Il caricamento laterale di un gioco è una caratteristica destinata agli sviluppatori e agli utenti di potenza esperti. Il caricamento laterale di un installatore che contiene malware potrebbe compromettere il computer e portare al furto di fondi."
+    },
+    "dlcs": {
+        "label": "Selezionare DLC per installare:"
+    },
+    "exit_game": "Gioco di uscita",
+    "gameUpdateNotifications": {
+        "body": {
+            "single": "C'è un aggiornamento pronto per {{gameName}}.",
+            "multiple": "{{gameName}} e altri giochi sono pronti ad aggiornare."
+        },
+        "title": "Aggiornamenti di gioco disponibili"
+    },
+    "importGameErrorMessageExecutable": "Gioco Eseguibile non trovato, importare il gioco non è possibile",
+    "importGameErrorTitle": "Errore di gioco di importazione",
+    "accounts": "conti correnti",
+    "back_to_game": "Torna al gioco",
+    "importGameErrorMessage": "Non una cartella di gioco valida, importare il gioco non è possibile",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Sei connesso a HyperPlay con un portafoglio esterno."
+    },
+    "achievements": {
+        "progress": {
+            "minted": "su catena",
+            "notMinted": "fuori catena"
+        }
+    },
+    "email_subscription": {
+        "title": "Grazie per la sottoscrizione!",
+        "subtitle": "Ora fai parte della nostra community e siamo entusiasti di condividere aggiornamenti e approfondimenti preziosi con te."
+    }
 }

@@ -35,14 +35,17 @@
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "இந்த விளையாட்டை நிறுவல்-நீக்க விரும்புகிறீர்களா?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "நிறுவல் நீக்கு"
+            "title": "நிறுவல் நீக்கு",
+            "dlc": "இந்தப் பயன்பாட்டை நிறுவல் நீக்க விரும்புகிறீர்களா?"
         },
         "update": {
             "message": "இந்த விளையாட்டுக்கு ஒரு புதுப்பிப்பு உள்ளது, இப்போது புதுப்பிக்க விரும்புகிறீர்களா?",
             "title": "விளையாட்டு புதுப்பிப்பு தேவை"
         },
         "wineprefix": "ஒயின் ப்ரிஃபிக்ஸ் கோப்புறையைத் தேர்ந்தெடுக்கவும்",
-        "yes": "ஆம்"
+        "yes": "ஆம்",
+        "dont-show-again": "மீண்டும் காட்டாதே",
+        "ok": "சரி"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -56,7 +59,9 @@
         "install": "நிறுவு",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "பதிவிறக்கங்களை ரத்துசெய்",
+            "continue": "பதிவிறக்கத்தை தொடரு"
         },
         "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +72,11 @@
         },
         "unhide_game": "Unhide Game",
         "uninstall": "நிறுவல் நீக்கு",
-        "update": "Update"
+        "update": "Update",
+        "remove_from_library": "நீக்கு",
+        "details": "விவரங்கள்",
+        "favorites": "பிடித்தவை",
+        "unfavorites": "மாறாத"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "முடக்கப்பட்டது",
@@ -126,7 +135,8 @@
         },
         "playing": {
             "start": "இப்போது விளையாடு",
-            "stop": "விளையாடப்படுகிறது (நிறுத்து)"
+            "stop": "விளையாடப்படுகிறது (நிறுத்து)",
+            "update": "புதுப்பிப்பு"
         },
         "saves": {
             "syncing": "சேமிப்புகள் ஒத்திசைவு செய்யப்படுகிறது"
@@ -147,7 +157,8 @@
         "title": "Select components to Install"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -186,7 +197,10 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "மொத்த பதிவிறக்கம்",
         "uninstalling": "Uninstalling",
-        "updating": "விளையாட்டு புதுப்பிக்கப்படுகிறது"
+        "updating": "விளையாட்டு புதுப்பிக்கப்படுகிறது",
+        "downloading": "பதிவிறக்குகிறது",
+        "syncingSaves": "சேமிப்புகள் ஒத்திசைவு செய்யப்படுகிறது",
+        "paused": "இடைநிறுத்தப்பட்டது"
     },
     "submenu": {
         "addShortcut": "குறுக்குவழியை சேர்",

@@ -66,7 +66,8 @@
                 "title": "Uncaught Exception occured!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "Algo foi mal co actualizar! Compracer a man uninstall e reinstall HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,6 +77,11 @@
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
                 "title": "Winetricks error"
+            },
+            "moving": "Erro Xogo Conmovedor {{error}}",
+            "ubisoft-connect": {
+                "title": "Ubisoft Conecta",
+                "message": "Instalación de Ubisoft Conecta no prefixo de xogo fallou. Control o noso wiki páxina en https://github.com/Heroico-Xogos-Launcher/HeroicGamesLauncher/wiki/Can-a-instalar-Ubisoft-Conectar-encima-Linux-e-Mac para instalalo maunally."
             }
         },
         "info": {
@@ -139,12 +145,28 @@
                 "install": "Epic Servers are having major outage right now, the game cannot be installed!",
                 "update": "Epic Servers are having major outage right now, the game cannot be updated!"
             },
-            "title": "Warning"
+            "title": "Warning",
+            "wine-change": {
+                "message-gptk": "Para ser capaz de correr os xogos que utilizan a Mazá Gaming porting toolkit te necesita a upgrade o voso macOS a 14 (Sonoma) ou máis alto. {{newline}} Fundamos Viño no voso sistema,  queres continuar lanzando utilizando {{foundWine}} ?",
+                "title-gptk": "Xogo Porting Toolkit Non Compatíbel ",
+                "title": "O viño non atopado!",
+                "message": "Non poderiamos atopar a versión de viño seleccionada para lanzar este título ({{selectedWine}}). {{newline}} Atopamos outro,  queres continuar lanzando utilizando {{foundWine}} ?"
+            },
+            "rosetta": {
+                "message": "HyperPlay Require Rosetta para correr correctamente en macOS con chips de Silicio da Mazá. Compracer instalalo desde o macOS terminal utilizando a orde seguinte: \"softwareupdate --instalar-rosetta\" e reinicio HyperPlay. ",
+                "title": "Rosetta non atopada"
+            }
         },
         "wineprefix": "Seleccionar o cartafol de prefixo de Wine",
         "yes": "Sí",
         "dontShowAgain": "Non volvas mostrar",
-        "choose-nile-binary": "Seleccione o binario do Nilo"
+        "choose-nile-binary": "Seleccione o binario do Nilo",
+        "reset-extension": {
+            "question": {
+                "message": "Es seguro queres reset o MetaMask Extensión?",
+                "title": "Reset Extensión"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "Iniciar sesión",
         "sync": "Sincronizar",
         "syncing": "Sincronizando",
-        "unsync": "Desincronizar"
+        "unsync": "Desincronizar",
+        "continue": "Continuar",
+        "download": "Baixar",
+        "update": "Actualizar"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "title_dm": "Director de descarga",
+        "ETA": "Tempo estimado"
     },
     "epic": {
         "offline-notification-body": "Os servizos en liña podería non funcionar correctamente xa que os servidores de Epic Games están sen conexión!",
@@ -263,7 +290,11 @@
         "wine": {
             "part1": "Búsquedas de versións de Wine, Proton e CrossOver nos seguintes cartafoles:",
             "part2": "Para outros lugares, use unha ligazón simbólica a un destos cartafoles"
-        }
+        },
+        "dxvkfpslimit": "Conxuntos un tapón de índice do marco para xogos de DXVK",
+        "msync": "Msync Finalidades para reducir wineserver elevado en CPU-xogos intensivos. Habilitando pode mellorar rendemento en varios xogos.",
+        "disable_logs": "Toggle Este checkbox ON para imposibilitar máis do escribe para rexistrar ficheiros (a información crítica é sempre rexistrado). Marca seguro para apagar este pondo antes de informar calquera asunto.",
+        "dxvknvapi": "DXVK-NVAPI é unha implementación de NVAPI construído sobre DXVK e o linux NVAPI nativo, deixa para o uso de DLSS en Nvidia GPUs."
     },
     "info": {
         "hyperplay": {
@@ -289,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-invalid": "Camiño de viño é nulo, compracer selecto outro.",
+        "wine-path-none-found": "Ningunha versión de Viño foi atopada, descarga un desde o Director de Compatibilidade"
     },
     "install": {
         "path": "Seleccionar a ruta de instalación"
@@ -303,7 +336,9 @@
         "toggleLayout": {
             "grid": "Toggle to a grid layout",
             "list": "Toggle to a list layout"
-        }
+        },
+        "alphabeticalZA": "Alphabetical Z-Un",
+        "alphabeticalAZ": "Alphabetical Un-Z"
     },
     "loading": {
         "default": "Cargando",
@@ -314,7 +349,8 @@
         "epic": "Epic Games Login",
         "gog": "GOG Login",
         "message": "Login with your platform. You can login to more than one platform at the same time.",
-        "amazon": "Inicio de sesión en Amazon"
+        "amazon": "Inicio de sesión en Amazon",
+        "old-mac": "O voso macOS a versión é {{version}}. macOS 12 ou máis novo é requirido para entrar no sistema."
     },
     "message": {
         "sync": "Sincronización completa",
@@ -347,7 +383,9 @@
             "error": "Erro na instalación",
             "finished": "Instalación rematada",
             "imported": "Xogo importado",
-            "startInstall": "Instalación iniciada"
+            "startInstall": "Instalación iniciada",
+            "stopped": "A instalación parou",
+            "paused": "A instalación Parou"
         },
         "moved": "Movemento rematado",
         "moving": "Moving Game",
@@ -359,7 +397,9 @@
         "update": {
             "canceled": "Actualización cancelada",
             "finished": "Actualización rematada",
-            "started": "Actualización iniciada"
+            "started": "Actualización iniciada",
+            "paused": "Actualiza Parado",
+            "stopped": "Actualiza parado"
         }
     },
     "offline-message": {
@@ -369,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Abrir",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -414,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefixo onde está instalado EGS",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")",
-        "alt-nile-bin": "Usando o binario Nile incorporado..."
+        "alt-nile-bin": "Usando o binario Nile incorporado...",
+        "dxvkfpsvalue": "Positivo integer valor (e.g. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -431,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "Continuar Descarga",
+            "pause": "Parar as descagas"
         }
     },
     "Recent": "Xogado recentemente",
@@ -499,7 +542,10 @@
             "instructions_title": "How to report a problem?",
             "last-log": "Last Log",
             "no-file": "No log file found",
-            "show-in-folder": "Show log file in folder"
+            "show-in-folder": "Show log file in folder",
+            "instructions-part-01": "Se atopas calquera asuntos mentres utilizando HyperPlay, temos dúas áreas designadas para informar os vosos asuntos na nosa Discordia Server. Se es un xogador, compracer informar calquera problemas por visitar o xogador-apoio-foro. Se es un xogo dev, compracer informar calquera problemas por visitar o dev-apoio-foro.",
+            "instructions-part-02": "Para axudarnos diagnostica e arranxar o problema tan rápido tan posíbel, compracer proporcionar tanto información como posíbel, incluíndo unha copia do voso rexistra. O noso equipo de apoio controlará ambas as dúas canles e facer o seu mellor de responder ao voso asunto tan rápido tan posíbel. Grazas Para a vosa paciencia e entendendo mentres traballamos para resolver calquera problemas podes atopar.",
+            "join-hyperplay-discord": "Unir a nosa Discordia"
         },
         "mangohud": "Habilitar Mangohud (precísase instalar Mangohud)",
         "manualsync": {
@@ -545,7 +591,12 @@
         "disable_logs": "Desactivar rexistros",
         "showMetalOverlay": "Mostrar superposición de estatísticas",
         "addgamestoapplications": "Engade xogos a Aplicacións automaticamente",
-        "alt-nile-bin": "Escolla un binario alternativo do Nilo"
+        "alt-nile-bin": "Escolla un binario alternativo do Nilo",
+        "autodxvknvapi": "O coche Instala/Actualiza DXVK-NVAPI en Prefixo",
+        "dxvkfpslimit": "FPS extremo (DX9, 10 e 11)",
+        "autoLaunchHyperPlay": "Lancha de coche HyperPlay",
+        "steamId": "Carné de identidade de vapor",
+        "msync": "Activar Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +631,51 @@
             "log": "Log",
             "other": "Outro",
             "sync": "Gardar-Sincronizar",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Contas",
+            "systemInformation": "Inf_ormación do sistema"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Restabelecer HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "systemInformation": {
+            "systemModel": "Modelo de sistema:",
+            "showDetailed": "Espectáculo especificacións de sistema detallado",
+            "steamDeck": "Vapor Deck",
+            "version": "Versión: {{appVersion}}",
+            "memory": "Memoria:",
+            "osVersion": "Versión {{versionNumber}}",
+            "gpuDriver": "Condutor: {{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "Lendario: {{legendaryVersion}}",
+            "osNameFlatpak": "{{osName}} (Dentro de Flatpak)",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "memoryStats": "{{percentUsed}}% Utilizado ({{usedGib}} / {{totalGib}}",
+            "os": "Sistema Operativo",
+            "copyToClipboard": "Copiar no portapapeis"
+        },
+        "gamesSettings": "Colocacións de xogos",
+        "reset-extension": "Reset Extensión",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
         }
     },
     "Settings": "Preferencias",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "achievements": "Consecucións",
+        "downloadManager": "Director de descarga",
+        "library": "Biblioteca",
+        "store": "Tenda"
     },
     "status": {
         "installing": "Installing",
@@ -631,7 +714,9 @@
         "logout": "Pechar sesión",
         "logout_confirmation": "Tes certeza que queres pechar a sesión?",
         "manageaccounts": "Manage Accounts",
-        "quit": "Saír"
+        "quit": "Saír",
+        "manageStore": "Xestiona tendas",
+        "logIn": "Acceder"
     },
     "webview": {
         "controls": {
@@ -668,5 +753,265 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Xogos de Amazon",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "exit_game": "Xogo de saída",
+    "hyperplay": {
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "useRecoveryPhrase": "A importación que Utiliza frase de Recuperación Secreta",
+                        "useRecoveryPhraseInfo": "Esta característica é recomendada para desenvolvedores e usuarios avanzados. A vosa frase de recuperación secreta é almacenada localmente en MetaMask e nunca compartido con HyperPlay.",
+                        "cantFindProfile": "Non pode atopar o voso perfil de navegador?",
+                        "createNewWallet": "Crea carteira de extensión de MM nova",
+                        "orWord": "OR",
+                        "title": "Selecto o navegador para importar desde",
+                        "details": "Os navegadores abaixo xa haber MetaMask instalou. Escolle o gostaríache importar desde.",
+                        "learnMore": "Aprender máis"
+                    },
+                    "scan": {
+                        "details": "Crear un encrypted canle de comunicación. As vosas chaves nunca serán compartidas con HyperPlay.",
+                        "getMetamask": "Consegue MetaMask",
+                        "title": "QR de escáner con ",
+                        "dontHaveWallet": "Non ten unha carteira?",
+                        "updateWarning": "Tendo asuntos? Marca seguro MetaMask é até data."
+                    },
+                    "info": {
+                        "login": {
+                            "title": "Un Xeito Novo de Entrar no sistema",
+                            "details": "Un alternativo a crear contrasinais e contas novas en cada sitio web, só conectar a vosa carteira polo contrario."
+                        },
+                        "digitalAssets": {
+                            "title": "Unha Casa para as vosas Vantaxes Dixitais",
+                            "details": "As carteiras están acostumado a envía, recibe, tenda, e mostrar vantaxes dixitais como tokens e NFTs."
+                        },
+                        "skip": "Salta por agora",
+                        "createWalletCTA": "Crear unha carteira",
+                        "createWalletDescription": "Clic en “Crear unha carteira” abaixo se non tes unha carteira ou quere crear un novo un:",
+                        "title": "Que é unha carteira?"
+                    }
+                },
+                "title": "Conexións de carteira",
+                "pleaseConnect": "Compracer conectar a vosa carteira, ou descargar o Metamask móbil-app para comezar\n        :"
+            },
+            "connectionConnected": {
+                "title": "A carteira conectou!",
+                "description": "A vosa carteira é conectada. Es a punto a xogo."
+            },
+            "welcome": {
+                "title": "Benvido a HyperPlay Acceso Temperán!",
+                "text": {
+                    "communityCTA_1": "Encantaría #prpers a vosa retroalimentación e para terte únenos  no noso",
+                    "communityCTA_2": "Comunitario. Xunto, deixado  forma o futuro de gaming!",
+                    "bugs": "Compracer nota que HyperPlay é unha alfa pública. Moitas características son aínda\n          en desenvolvemento, e haberá  bechos.",
+                    "description": "HyperPlay É un xogo launcher e tenda de xogo aggregator desde o\n          futuro. Con HyperPlay, podes levar a vosa carteira, tokens, e vantaxes\n          a cada xogo. HyperPlay Apoia a biblioteca enteira da Tenda\n          de Épica, GOG, e o noso propio HyperPlay tenda. Por utilizar HyperPlay, estás de acordo\n          ao noso",
+                    "construction": "HyperPlay É baixo construción."
+                }
+            },
+            "analytics": {
+                "body": "HyperPlay Gostaría reunir dato de uso a mellor entender como os nosos usuarios interactúan coa aplicación. Esta información axúdanos  entende como utilizas o app e déixanos  fai HyperPlay uniforme mellor para ti.",
+                "anonymized": "Envía anonymized interacción & de xogo do clic;",
+                "hyperplayWill": "HyperPlay :",
+                "title": "Axúdanos  mellora HyperPlay!",
+                "neverCollectIP": " Recoller o voso enderezo de #IP cheo;",
+                "neverCollectPersonal": " Recolle chaves, enderezos, equilibrios, #guiso, ou calquera información persoal;",
+                "optOut": "Sempre deixarte para optar-fóra vía Colocacións;",
+                "privacyCaption": "Este dato é agregado e é por tanto anónimo para os propósitos de Regulación de Protección de Dato Xeral (EU) 2016/679. Para máis información en relación ás nosas prácticas de privacidade, compracer ver o noso ",
+                "neverSellData": " Vende dato para beneficio. Ever!",
+                "privacyPolicyHere": "Política de privacidade aquí."
+            },
+            "connectionCanceled": {
+                "description": "Compracer confirmar a petición de conexión na vosa carteira móbil para proceder.",
+                "title": "Conexión canceled!"
+            },
+            "connectAgain": "Conecta outra vez",
+            "terms": "Condicións do servicio"
+        },
+        "viewItem": "Vista {{item}}",
+        "accesscodes": {
+            "error": {
+                "validation": "Código de acceso é nulo"
+            },
+            "success": {
+                "validation": "Éxito! Código de acceso é válido"
+            },
+            "requirescode": "Este xogo actualiza require un código de acceso."
+        },
+        "analyticsOn": "Analytics É virado encima",
+        "linkSteamAccountCta": "Vai a sinal de Vapor dentro",
+        "linkSteamAccountDescription": "Sinal dentro a Vapor para vincular o voso HyperPlay conta.",
+        "linkSteamAccountTitle": "Conta de Vapor da ligazón",
+        "achievements": {
+            "addThisGame": "Engadir este xogo",
+            "freeMints": "Mentas libres",
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "Parece non poderiamos atopar calquera xogos na vosa conta de Vapor no momento. Só un recordatorio rápido para encartar-control que os vosos detalles de xogo son postos a público. Deste xeito, podemos acceder as vosas consecucións e proporcionarte coa experiencia mellor."
+            },
+            "gamesToMint": "Xogos a menta"
+        },
+        "analyticsOff": "Analytics É apagado",
+        "buttons": {
+            "agree": "Estou de acordo",
+            "noThanks": "Non, grazas"
+        },
+        "changeWallet": "Swap Conta de carteira",
+        "viewMyAccount": "Vista a miña conta",
+        "viewPortfolio": "Cartafol de vista",
+        "otp": "Un Cronometra Passcode",
+        "browserImport": {
+            "appId": "App Id",
+            "profile": "Perfil"
+        },
+        "currentWallet": "Carteira actual",
+        "connectWallet": "Conecta carteira",
+        "publicAlpha": "Alfa pública",
+        "syncing": "Syncing...",
+        "gamecard": {
+            "extracting": "Extraendo...",
+            "installed": "A punto para xogar",
+            "paused": "En pausa",
+            "installing": "Descargando...",
+            "distributables": "Instalador Distributables"
+        },
+        "logOut": "Saír",
+        "Sync": "Sincronizar",
+        "discordApp": "Discord",
+        "folder": "Cartafol",
+        "misc": "Nunca",
+        "copyUrl": "Copy URL",
+        "turnAnalyticsOff": "Apagar",
+        "turnAnalyticsOn": "Acender"
+    },
+    "hyperplayOverlay": {
+        "greeting": {
+            "description": "HyperPlay Overlay É a punto! Prensa {{overlayKeyMod}} + X para mostrar ou escondelo.",
+            "title": "HyperPlay Overlay"
+        },
+        "extensionNotification": {
+            "TITLE": "A transacción pediu",
+            "DESCRIPTION": "Prensa {{overlayKeyMod}} + X para ver esta transacción"
+        },
+        "txnRequest": {
+            "FAILED": "A transacción interrompeu",
+            "INITIATED": "Petición de transacción pendente",
+            "PENDING": "A transacción entregou",
+            "CONFIRMED": "A transacción confirmou"
+        },
+        "walletWatch": {
+            "FAILED": "Costume token petición canceled",
+            "CONFIRMED": "Costume token engadiu",
+            "INITIATED": "Engade costume token pide pendente"
+        },
+        "chainRequest": {
+            "INITIATED": "Petición de rede do costume",
+            "CONFIRMED": "Rede de costume engadiu",
+            "FAILED": "Rede de costume canceled"
+        },
+        "description": {
+            "FAILED": "A transacción era canceled ou non entregado, compracer tentar outra vez",
+            "INITIATED": "Unha confirmación de carteira é pendente na vosa carteira móbil",
+            "PENDING": "Esperando para blockchain confirmación. @Let cando é confirmado",
+            "CONFIRMED": "A transacción era con éxito confirmou!"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "A sinatura entregou",
+            "FAILED": "A sinatura interrompeu",
+            "INITIATED": "Petición de sinatura pendente"
+        }
+    },
+    "sideload": {
+        "warningTitle": "Importante",
+        "warningMessage": "Quecargalado un xogo é unha característica pretendido para desenvolvedores e usuarios de poder experimentado. Quecargalado un instalador que contén malware podería transixir o voso computador e vantaxe a roubo de fondo."
+    },
+    "dlcs": {
+        "label": "DLC selectos para instalar:"
+    },
+    "back_to_game": "Atrás a xogo",
+    "gameUpdateNotifications": {
+        "body": {
+            "single": "hai un actualizar a punto para {{gameName}}.",
+            "multiple": "{{gameName}} E outros xogos son a punto para actualizar."
+        },
+        "title": "O xogo Actualiza Dispoñíbel"
+    },
+    "quest": {
+        "claimAll": "Reclamación todo",
+        "connectSteamAccount": "Conecta conta de Vapor",
+        "claimed": "Afirmado",
+        "errorMessage": "Había  un erro coa transacción.",
+        "quests": "Buscas",
+        "playstreak": {
+            "dayResets": "Día resets:",
+            "playEachDay": "Xogo cada día así que o voso streak  non reset!",
+            "progressTowardsStreak": "Progreso cara a hoxe  streak.",
+            "streakCompleted": "Streak Completou! Reclamación as vosas recompensas agora.",
+            "streakProgress": "Streak Progreso",
+            "playToStart": "Xogo este xogo para arrancar o voso streak!",
+            "days": "días",
+            "now": "Agora"
+        },
+        "readyForClaim": "A punto para reclamación",
+        "type": {
+            "playstreak": "Xogo Streak",
+            "reputation": "Reputación"
+        },
+        "View Game": "Xogo de vista",
+        "associatedGames": "Xogos asociados",
+        "reward": "Recompensa",
+        "claimFailed": "A reclamación fallou",
+        "linkAccount": "Ligazón a vosa conta de Vapor para comprobar eligibility.",
+        "needMoreAchievements": "Necesitas para ter completado {{percent}}% das consecucións nun destes xogos.",
+        "claimFailedMessage": "Compracer tentar unha vez máis. Se aínda non traballa, crear un tícket de apoio da Discordia.",
+        "createDiscordTicket": "Tícket de Discordia creada",
+        "notEnoughGas": "Equilibrio de carteira insuficiente para afirmar a vosa recompensa debido a custos de gas. Tentar unha carteira diferente ou replenish isto un antes de tentar novamente.",
+        "active": "Activo",
+        "Play": "Reproducir",
+        "points": "Puntos",
+        "signIn": "Rexistro",
+        "sync": "Sincronizar",
+        "reputation": "Reputación"
+    },
+    "email_subscription": {
+        "title": "Grazas Para subscribir!",
+        "subtitle": "Es agora unha parte da nosa comunidade, e somos entusiasmados para compartir valioso actualiza e ideas contigo."
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "Es actualmente non entrado no sistema, xogo streak o progreso non será seguido. Compracer login a HyperPlay vía o superior-correcto dropdown para seguir progreso.",
+                "overlay": "Es actualmente non entrado no sistema, xogo streak o progreso non será seguido. Compracer saír o xogo e login a HyperPlay vía o superior-correcto dropdown para seguir progreso."
+            }
+        },
+        "quests": "Buscas"
+    },
+    "accounts": "Contas",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Es conectado a HyperPlay cunha carteira externa."
+    },
+    "notification": {
+        "wine-download": {
+            "message": "Montando o default capa de compatibilidade",
+            "title": "Compatibility Layer"
+        }
+    },
+    "achievements": {
+        "progress": {
+            "minted": "En cadea",
+            "notMinted": "De cadea"
+        }
+    },
+    "importGameErrorMessage": "Non un cartafol de xogo válido, importando o xogo non é posíbel",
+    "importGameErrorMessageExecutable": "O xogo Executábel non atopado, importando o xogo non é posíbel",
+    "importGameErrorTitle": "Erro de Xogo da importación",
+    "gameRelease": {
+        "prototype": "Prototipo",
+        "alpha": "Alpha",
+        "beta": "Beta",
+        "demo": "Demo",
+        "main": "Principal"
+    },
+    "ALL": "TODO",
+    "analytics": "Análises",
+    "profile": "Perfil"
 }

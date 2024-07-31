@@ -74,7 +74,9 @@
             },
             "wine-change": {
                 "message": "לא יכולנו למצוא את גרסת הwine שנבחרה כדי להפעיל את התוכנה הזאת ({{selectedWine}}). {{newline}}מצאנו אחד אחר, אתם רוצים להפעיל בעזרת {{foundWine}}?",
-                "title": "Wine לא נמצא!"
+                "title": "Wine לא נמצא!",
+                "title-gptk": "משחק Porting Toolkit לא מתאים ",
+                "message-gptk": "כדי להיות מסוגל לרוץ משחקים באמצעות Apple Gaming Toolkit אתה צריך לשדרג את macOS שלך עד 14 (Sonoma) או גבוה יותר. [x120X] מצאנו יין על המערכת שלך, האם אתה רוצה להמשיך להפעיל באמצעות {{foundWine}}?"
             },
             "sideload": {
                 "confirmExit": {
@@ -82,7 +84,11 @@
                     "title": "אתה בטוח שאתה רוצה לסגור את התוכנה?"
                 }
             },
-            "title": "אזהרה"
+            "title": "אזהרה",
+            "rosetta": {
+                "title": "רוזטה לא נמצאה",
+                "message": "HyperPlay דורש רוזטה לרוץ נכון על macOS עם Apple Silicon השבבים. אנא להתקין אותו מטרמינל macOS באמצעות הפקודה הבאה: \"עדכון - התקנה מחדש\" ו- HyperPlay מחדש. "
+            }
         },
         "wineprefix": "בחרו תיקיית wine prefix",
         "default-steam-path": "מיקום Steam.",
@@ -138,7 +144,20 @@
         },
         "sync": {
             "error": "נתיב לא חוקי",
-            "title": "בחרו מיקום עבור שמירות במשחק"
+            "title": "בחרו מיקום עבור שמירות במשחק",
+            "button": "בחרו"
+        },
+        "reset-app": {
+            "question": {
+                "title": "אפס את HyperPlay",
+                "message": "אתה בטוח שאתה רוצה לשחזר את HyperPlay? זה יסיר את כל ההגדרות ואת Caching אבל לא יסיר את המשחקים המותקנים שלך או את האישורים Epic שלך. גרסאות מותאמות (AppImage, WinPortable, ...) של HyperPlay צריך להתחיל מחדש באופן ידני לאחר מכן."
+            }
+        },
+        "reset-extension": {
+            "question": {
+                "title": "איפוס",
+                "message": "האם אתה בטוח שאתה רוצה לאפס את הרחבה MetaMask?"
+            }
         }
     },
     "wine": {
@@ -156,7 +175,12 @@
         "login": "היכנס",
         "cancel": "ביטול",
         "continue": "המשך",
-        "go_to_library": "ללכת לספריה"
+        "go_to_library": "ללכת לספריה",
+        "update": "עדכון",
+        "download": "הורדה",
+        "sync": "סנכרן",
+        "syncing": "מסנכרן",
+        "unsync": "Unsync"
     },
     "controller": {
         "hints": {
@@ -202,7 +226,8 @@
             "type": "סוג"
         },
         "title": "הורדות",
-        "ETA": "זמן משוער"
+        "ETA": "זמן משוער",
+        "title_dm": "Download Manager"
     },
     "info": {
         "version": "גרסת Wine",
@@ -265,14 +290,16 @@
             "finished": "ההתקנה הסתיימה",
             "imported": "יבוא המשחק הסתיים בהצלחה",
             "paused": "ההתקנה מושהית",
-            "startInstall": "ההתקנה החלה"
+            "startInstall": "ההתקנה החלה",
+            "stopped": "המתקן הפסיק"
         },
         "update": {
             "paused": "עדכון בהשהיה",
             "canceled": "עדכון בוטל",
             "finished": "עדכון הסתיים",
             "failed": "עדכון נכשל",
-            "started": "עדכון התחיל"
+            "started": "עדכון התחיל",
+            "stopped": "עדכון הפסיק"
         },
         "error": {
             "move": "שגיאה בהזזת המשחק",
@@ -355,7 +382,10 @@
             "current-log": "לוג נוכחי",
             "instructions": "הצטרפו לדיסקורד שלנו וחפשו את החלק בשם \"#-support\". קראו את ההודעה המוצמדת \"Read Me First | Frequently Asked Questions\" ופעלו לפי ההוראות כדי לשתף את הלוגים הללו וכל מידע רלוונטי על הבעיה שלכם.",
             "no-file": "לא נמצא קובץ לוג",
-            "show-in-folder": "הצגת קובץ הלוג בתוך התיקייה שלה"
+            "show-in-folder": "הצגת קובץ הלוג בתוך התיקייה שלה",
+            "instructions-part-01": "אם אתה נתקל בכל בעיה תוך שימוש ב- HyperPlay, יש לנו שני תחומים ייעודיים לדווח על הבעיות שלך ב-Autord Server שלנו. אם אתה שחקן, נא לדווח על בעיות על ידי ביקור ב-Forum. אם אתה משחק dev, נא לדווח על בעיות על ידי ביקור ב- dev-support-forum.",
+            "instructions-part-02": "כדי לעזור לנו לאבחן ולתקן את הבעיה במהירות האפשרית, אנא לספק כמה שיותר מידע, כולל עותק של יומניך. צוות התמיכה שלנו יעקוב אחר שני הערוצים ויעשה כמיטב יכולתם להגיב לסוגיה במהירות האפשרית. תודה על הסבלנות וההבנה שלך, בעוד אנו פועלים לפתור בעיות שעשויות להיתקל בהן.",
+            "join-hyperplay-discord": "הצטרפו ל-Distord"
         },
         "mangohud": "הפעל Mangohud (צריכה להיות התקנה של Mangohud)",
         "manualsync": {
@@ -410,7 +440,10 @@
         "start-in-tray": "התחל מצומצם",
         "steamruntime": "השתמש בSteam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "תיקיית WinePrefix"
+        "wineprefix": "תיקיית WinePrefix",
+        "msync": "הפעל Esync",
+        "autoLaunchHyperPlay": "Auto Launch Hyper Play Play",
+        "steamId": "Steam ID"
     },
     "status": {
         "processing": "מעבד קבצים, נא לחכות",
@@ -500,7 +533,8 @@
             "info": "המיקום הזה נותן לHyperPlay לקבוע באיזה גרסת Proton משתמשת Steam, על מנת להוסיף משחקים שאינם מSteam לSteam."
         },
         "steamruntime": "ספריות מותאמות אישית המסופקות על ידי Steam כדי לסייע בהפעלת משחקי Linux ו-Windows (Proton). הפעלה עשויה לשפר את התאימות.",
-        "vkd3d": "VKD3D הוא שכבת תרגום מבוססת Vulkan עבור משחקי DirectX 12. הפעלה יכולה לשפר תאימות באופן משמעותי. אין השפעה על משחקי DirectX ישנים יותר."
+        "vkd3d": "VKD3D הוא שכבת תרגום מבוססת Vulkan עבור משחקי DirectX 12. הפעלה יכולה לשפר תאימות באופן משמעותי. אין השפעה על משחקי DirectX ישנים יותר.",
+        "msync": "Msync שואפת להפחית יינות בראש במשחקים CPU-intensive. Enabling עשוי לשפר את הביצועים במספר משחקים."
     },
     "Library": "ספריה",
     "message": {
@@ -583,7 +617,9 @@
             "general": "כללי",
             "log": "לוג",
             "other": "אחר",
-            "sync": "סנכרן שמירות בענן"
+            "sync": "סנכרן שמירות בענן",
+            "accounts": "גישה לחשבונות",
+            "systemInformation": "פרטי המ_ערכת"
         },
         "open-config-file": "פתח את קובץ התצורה",
         "reset-hyperplay": "אפס את HyperPlay",
@@ -594,7 +630,33 @@
         "copiedToClipboard": "הועתק!",
         "saves": {
             "warning": "תכונת שמירת ענן נמצאת בגרסת בטה, נא לגבות את השמירה שלכם לפני הסנכרון (למקרה שמשהו ישתבש)"
-        }
+        },
+        "systemInformation": {
+            "os": "מערכת הפעלה:",
+            "copyToClipboard": "העתקה ללוח הגזירים",
+            "gpu": "GPU:",
+            "osVersion": "גרסה (X8X)",
+            "cpu": "CPU:",
+            "cpuDescription": "[x0X]x [x16X]",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "תגית: X11X",
+            "osNameFlatpak": "[x0X] (side Flatpak)",
+            "steamDeck": "Steam Deck",
+            "systemModel": "מודל מערכת:",
+            "gogdlVersion": "גוגלל: X7X",
+            "gpuDriver": "תגית: X8X",
+            "showDetailed": "הצג מפרט מערכת מפורט",
+            "memory": "זיכרון:",
+            "memoryStats": "(X0X)% (X23X)",
+            "version": "תגית: X9X"
+        },
+        "wine": {
+            "manager": {
+                "title": "מנהל היין"
+            }
+        },
+        "gamesSettings": "הגדרות משחקים",
+        "reset-extension": "איפוס"
     },
     "Settings": "הגדרות",
     "store": "Epic Store",
@@ -604,7 +666,8 @@
     },
     "toolbox": {
         "settings": {
-            "wineprefix": "בחרו תיקיה עבור prefixים של Wine חדשים"
+            "wineprefix": "בחרו תיקיה עבור prefixים של Wine חדשים",
+            "default-wineprefix": "בחר את תיקיית ברירת המחדל עבור הגדרות חדשות"
         }
     },
     "tooltip": {
@@ -629,7 +692,9 @@
         "logout_confirmation": "אתם בטוחים שאתם רוצים להתנתק?",
         "manageaccounts": "ניהול חשבונות",
         "quit": "יציאה",
-        "quitMessage": "אתה בטוח שאתה רוצה לסגור את התוכנה?"
+        "quitMessage": "אתה בטוח שאתה רוצה לסגור את התוכנה?",
+        "logIn": "היכנס",
+        "manageStore": "ניהול חנויות"
     },
     "webview": {
         "controls": {
@@ -659,7 +724,8 @@
         "alternative_method": "שיטת כניסה חלופית",
         "amazon": "כניסת אמזון",
         "epic": "כניסה עם Epic Games",
-        "message": "הכנס עם הפלטפורמה שלך. אתה יכול להתחבר ליותר מפלטפורמה אחת בו זמנית."
+        "message": "הכנס עם הפלטפורמה שלך. אתה יכול להתחבר ליותר מפלטפורמה אחת בו זמנית.",
+        "old-mac": "גרסת ה-macOS שלך היא X22X. macOS 12 או חדש נדרש להיכנס."
     },
     "library": {
         "refresh": "רענן",
@@ -669,7 +735,10 @@
         "toggleLayout": {
             "grid": "בחרו אם להיות בפריסת רשת",
             "list": "בחרו אם להיות בפריסת רשימה"
-        }
+        },
+        "label": "ספריה",
+        "alphabeticalAZ": "אלפבית A-Z",
+        "alphabeticalZA": "אלפבית Z-A"
     },
     "offline-message": {
         "offline": "לא מחובר לרשת",
@@ -688,5 +757,274 @@
     "Recent": "שיחקתם לאחרונה",
     "please-wait": "נא לחכות...",
     "prime-gaming": "Prime Gaming",
-    "gog-store": "חנות GOG"
+    "gog-store": "חנות GOG",
+    "hyperplay": {
+        "turnAnalyticsOff": "לכבות",
+        "browserImport": {
+            "profile": "פרופיל",
+            "appId": "App Id"
+        },
+        "gamecard": {
+            "installing": "בהורדה…",
+            "distributables": "התקנת Distributables",
+            "paused": "הופסק",
+            "extracting": "לחלץ...",
+            "installed": "מוכן לשחק"
+        },
+        "Sync": "סנכרן",
+        "buttons": {
+            "noThanks": "לא, תודה",
+            "agree": "אני מסכים"
+        },
+        "logOut": "התנתק",
+        "onboarding": {
+            "terms": "תנאי השירות",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "למד עוד",
+                        "orWord": "או",
+                        "useRecoveryPhrase": "תגית: Secret Recovery",
+                        "useRecoveryPhraseInfo": "תכונה זו מומלצת למשתמשים מתקדמים ומפתחים. ביטוי ההתאוששות הסודי שלך מאוחסן באופן מקומי ב- MetaMask ומעולם לא משותף עם HyperPlay.",
+                        "createNewWallet": "יצירת ארנק MM",
+                        "title": "בחר את הדפדפן כדי לייבא",
+                        "details": "הדפדפנים הבאים כבר מותקנים MetaMask. בחר את זה שהיית רוצה לייבא ממנו.",
+                        "cantFindProfile": "לא מוצאים את פרופיל הדפדפן שלך?"
+                    },
+                    "info": {
+                        "skip": "לדלג לעת עתה",
+                        "login": {
+                            "title": "דרך חדשה להיכנס",
+                            "details": "אלטרנטיבה ליצירת חשבונות חדשים וסיסמאות בכל אתר, רק לחבר את הארנק במקום."
+                        },
+                        "title": "מה זה ארנק?",
+                        "createWalletDescription": "לחץ על \"לתקן ארנק\" למטה אם אין לך ארנק או רוצה ליצור חדש:",
+                        "digitalAssets": {
+                            "details": "קירות משמשים לשלוח, לקבל, לאחסן ולהציג נכסים דיגיטליים כמו אסימונים ו-NFTs.",
+                            "title": "בית לנכסים הדיגיטליים שלך"
+                        },
+                        "createWalletCTA": "צור ארנק"
+                    },
+                    "scan": {
+                        "details": "צור ערוץ תקשורת מוצפן. המפתחות שלך לעולם לא יהיו משותפים עם HyperPlay.",
+                        "dontHaveWallet": "אין ארנק?",
+                        "title": "סורק QR עם ",
+                        "updateWarning": "יש בעיות? ודא כי MetaMask הוא עד היום.",
+                        "getMetamask": "קבל MetaMask"
+                    }
+                },
+                "title": "חיבורים Wallet",
+                "pleaseConnect": "נא לחבר את הארנק שלך, או להוריד את ה- Metamask Mobile-app כדי לקבל\nהתחיל:"
+            },
+            "analytics": {
+                "hyperplayWill": "HyperPlay:",
+                "neverSellData": " למכור נתונים למטרות רווח אי פעם!",
+                "body": "HyperPlay רוצה לאסוף נתוני שימוש כדי להבין טוב יותר כיצד המשתמשים שלנו אינטראקציה עם היישום. מידע זה עוזר לנו להבין איך אתה משתמש באפליקציה ומאפשר לנו להפוך את HyperPlay אפילו טוב יותר עבורך.",
+                "privacyPolicyHere": "מדיניות הפרטיות כאן.",
+                "anonymized": "שלח אנונימיות לחץ משחק אינטראקציה;",
+                "optOut": "תמיד לאפשר לך לבטל באמצעות הגדרות;",
+                "title": "עזרו לנו לשפר את HyperPlay!",
+                "neverCollectIP": " לאסוף את כתובת ה-IP המלאה שלך;",
+                "privacyCaption": "נתונים אלה נאספים ולכן הם אנונימיים לצרכים של כללי הגנת נתונים (EU) 2016/679. לקבלת מידע נוסף ביחס לשיטות הפרטיות שלנו, אנא ראה אותנו ",
+                "neverCollectPersonal": " לאסוף מפתחות, כתובות, מאזן, חיס או כל מידע אישי;"
+            },
+            "welcome": {
+                "text": {
+                    "construction": "HyperPlay נמצאת בבנייה.",
+                    "communityCTA_2": "קהילה. בואו נעצב את העתיד של המשחקים!",
+                    "bugs": "אנא שימו לב כי HyperPlay הוא אלפא ציבורי. תכונות רבות עדיין\nבפיתוח, ויהיו באגים.",
+                    "communityCTA_1": "אנחנו נשמח את המשוב שלכם והצטרפו אלינו",
+                    "description": "HyperPlay הוא משגר משחקים ו-Game Store aggregator מהמשחק\nעתיד. עם HyperPlay, אתה יכול לשאת את הארנק שלך, אסימונים ונכסים\nלכל משחק. HyperPlay תומך בכל הספרייה של Epic\nחנות, GOG וחנות ה- HyperPlay שלנו. באמצעות HyperPlay, אתה מסכים\nלנו"
+                },
+                "title": "ברוכים הבאים להיפר שחקו ב-Early Access!"
+            },
+            "connectAgain": "שוב להתחבר",
+            "connectionCanceled": {
+                "description": "נא לאשר את בקשת החיבור על הארנק הנייד שלך להמשיך.",
+                "title": "החיבור בוטל!"
+            },
+            "connectionConnected": {
+                "description": "הארנק שלך מחובר. אתה מוכן למשחק.",
+                "title": "Wallet מחובר!"
+            }
+        },
+        "turnAnalyticsOn": "להפעיל",
+        "misc": "אף פעם",
+        "copyUrl": "העתק קישור",
+        "discordApp": "דיסקורד",
+        "folder": "תיקייה",
+        "connectWallet": "חיבור הארנק",
+        "viewPortfolio": "ראה תיק",
+        "otp": "One Time Passcode",
+        "viewItem": "תגית: X5X",
+        "achievements": {
+            "addThisGame": "הוסף את המשחק",
+            "noAchievements": {
+                "oops": "אופס!",
+                "doubleCheckMessage": "זה נראה כאילו לא מצאנו משחקים בחשבון ה-Steam שלכם כרגע. רק תזכורת מהירה לבדוק כפול כי פרטי המשחק שלך מוגדרים לציבור. בדרך זו, אנו יכולים לגשת להישגים שלכם ולספק לכם את החוויה הטובה ביותר."
+            },
+            "freeMints": "Free Mints",
+            "gamesToMint": "משחקים ל mint"
+        },
+        "analyticsOn": "Analytics מופעל",
+        "currentWallet": "הארנק הנוכחי",
+        "publicAlpha": "Alpha",
+        "syncing": "סינכרון...",
+        "viewMyAccount": "ראה החשבון שלי",
+        "accesscodes": {
+            "requirescode": "עדכון המשחק דורש קוד גישה.",
+            "success": {
+                "validation": "הצלחה! קוד הגישה הוא בתוקף"
+            },
+            "error": {
+                "validation": "קוד הגישה אינו חוקי"
+            }
+        },
+        "linkSteamAccountCta": "עקבו אחרי Steam Sign In",
+        "linkSteamAccountDescription": "היכנס ל-Steam כדי לקשר את חשבון HyperPlay שלך.",
+        "linkSteamAccountTitle": "קישור לחשבון Steam",
+        "analyticsOff": "Analytics כבוי",
+        "changeWallet": "חשבון הארנק"
+    },
+    "analytics": "ניתוח",
+    "sideload": {
+        "warningTitle": "חשוב!",
+        "warningMessage": "עומס בצד משחק הוא תכונה המיועדת למפתחים ומשתמשי חשמל מנוסים. מטען בצד של מתקין המכיל קוד זדוני יכול להתפשר על המחשב שלך להוביל לגניבת כספים."
+    },
+    "sidebar": {
+        "library": "ספריה",
+        "store": "חנות",
+        "achievements": "הישגים",
+        "downloadManager": "Download Manager"
+    },
+    "gameRelease": {
+        "beta": "בטא",
+        "demo": "הדגמה",
+        "main": "ראשי",
+        "alpha": "אלפא",
+        "prototype": "Prototype"
+    },
+    "quest": {
+        "active": "פעיל",
+        "Play": "שחקו עכשיו",
+        "playstreak": {
+            "days": "ימים",
+            "dayResets": "יום החזרה:",
+            "playEachDay": "שחקו כל יום, כך שהעוקץ שלכם לא יתאפס!",
+            "playToStart": "שחקו במשחק הזה כדי להתחיל את המשחק שלכם!",
+            "progressTowardsStreak": "התקדמות לקראת המשבר של היום.",
+            "streakCompleted": "סטראק הושלם! תטען את התגמולים שלך עכשיו.",
+            "streakProgress": "התקדמות",
+            "now": "ועכשיו"
+        },
+        "signIn": "כניסה",
+        "points": "נקודות",
+        "sync": "סנכרן",
+        "associatedGames": "משחקים קשורים",
+        "claimed": "תביעה",
+        "errorMessage": "הייתה טעות עם העסקה.",
+        "linkAccount": "קישור חשבון Steam כדי לבדוק את זכאותם.",
+        "needMoreAchievements": "אתה צריך להשלים% מההישגים באחד המשחקים האלה.",
+        "quests": "תוצאות חיפוש",
+        "readyForClaim": "מוכן לטענה",
+        "reputation": "מוניטין",
+        "reward": "תגמול",
+        "type": {
+            "playstreak": "משחק Streak",
+            "reputation": "מוניטין"
+        },
+        "View Game": "משחק View Game",
+        "claimAll": "תביעה",
+        "connectSteamAccount": "קישור חשבון Steam",
+        "claimFailed": "התביעה נכשלה",
+        "createDiscordTicket": "כרטיסים נבחרים",
+        "claimFailedMessage": "נסה פעם נוספת. אם זה עדיין לא עובד, ליצור כרטיס תמיכה דיסקורד.",
+        "notEnoughGas": "איזון ארנק חסר ערך כדי לטעון את הפרס שלך בגלל עמלות גז. נסה ארנק שונה או לחדש את זה לפני retrying."
+    },
+    "notification": {
+        "wine-download": {
+            "title": "מנהל גרסאות Wine",
+            "message": "הגדרת שכבת תאימות ברירת המחדל"
+        }
+    },
+    "profile": "פרופיל",
+    "hyperplayOverlay": {
+        "walletWatch": {
+            "FAILED": "בקשה אישית בוטלה",
+            "CONFIRMED": "המונחים:",
+            "INITIATED": "הוסף בקשה לסימון מותאם אישית"
+        },
+        "description": {
+            "CONFIRMED": "העסקה אושרה בהצלחה!",
+            "PENDING": "מחכה לאישור blockchain אנו נודיע לך מתי זה אושר",
+            "FAILED": "העסקה בוטלה או לא הוגשה, אנא נסה שוב",
+            "INITIATED": "אישור ארנק עומד על הארנק הנייד שלך"
+        },
+        "extensionNotification": {
+            "TITLE": "העסקה המבוקשת",
+            "DESCRIPTION": "[x6X] + X כדי לראות את העסקה"
+        },
+        "greeting": {
+            "title": "HyperPlay Overlay",
+            "description": "HyperPlay Overlay מוכן! [x34x] + X כדי להראות או להסתיר את זה."
+        },
+        "chainRequest": {
+            "CONFIRMED": "רשת Custom",
+            "FAILED": "רשת המכס בוטלה",
+            "INITIATED": "בקשה לרשת Custom"
+        },
+        "txnRequest": {
+            "INITIATED": "בקשת העסקה",
+            "PENDING": "העסקה הוגשה",
+            "CONFIRMED": "העסקה אישרה",
+            "FAILED": "העסקה הופסקה"
+        },
+        "signatureRequest": {
+            "CONFIRMED": "חתימה הוגשה",
+            "FAILED": "חתימה",
+            "INITIATED": "בקשה לחתימה"
+        }
+    },
+    "importGameErrorTitle": "תגית: Game Error",
+    "accounts": "חשבונות",
+    "ALL": "הכל",
+    "back_to_game": "חזרה למשחק",
+    "dlcs": {
+        "label": "בחר DLCs להתקין:"
+    },
+    "wiki_info": {
+        "not_found": "לא מצאנו מידע נוסף."
+    },
+    "exit_game": "משחק יציאה",
+    "gameUpdateNotifications": {
+        "title": "עדכון המשחק זמין",
+        "body": {
+            "multiple": "משחקים אחרים מוכנים לעדכן.",
+            "single": "יש עדכון מוכן ל-X29X."
+        }
+    },
+    "importGameErrorMessage": "לא תיקיית משחק תקפה, משחק יבוא אינו אפשרי",
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני."
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "אתה לא מחובר כרגע, לשחק התקדמות streak לא יהיה לעקוב. אנא הכנסו ל- HyperPlay דרך הירידה הימנית העליונה כדי לעקוב אחר ההתקדמות.",
+                "overlay": "אתה לא מחובר כרגע, לשחק התקדמות streak לא יהיה לעקוב. אנא צא מהמשחק והכניסה ל- HyperPlay דרך הירידה הימנית העליונה כדי לעקוב אחר ההתקדמות."
+            }
+        },
+        "quests": "תוצאות חיפוש"
+    },
+    "importGameErrorMessageExecutable": "משחק Game Game לוח לא נמצא, משחק יבוא אינו אפשרי",
+    "achievements": {
+        "progress": {
+            "minted": "על שרשרת",
+            "notMinted": "שרשרת"
+        }
+    },
+    "email_subscription": {
+        "title": "תודה על תת-ביקורת!",
+        "subtitle": "עכשיו אתה חלק מהקהילה שלנו, ואנחנו נרגשים לשתף עדכונים ותובנות חשובים איתך."
+    }
 }

@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Zaloguj"
+        "login": "Zaloguj",
+        "error": "Error próbuje stworzyć inny kodeks",
+        "loading": "Ładuję"
     },
     "message": {
         "part1": "Żeby się zalogować i móc instalować gry, najpierw wykonaj następujące kroki :",

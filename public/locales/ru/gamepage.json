@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Продолжить установку",
             "message": "Хотите ли вы оставить установленные файлы?",
-            "title": "Прекращение установки"
+            "title": "Прекращение установки",
+            "keepFilesMessage": "Проверьте здесь, если вы хотите сохранить файлы загрузки после отмены."
         },
         "uninstall": {
             "checkbox": "Удалить префикс: {{prefix}}{{newLine}} Примечание: Это действие нельзя отменить, и оно также приведет к удалению файлов сохранений.",
             "message": "Удалить эту игру?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Удалить"
+            "title": "Удалить",
+            "dlc": "Вы хотите удалить этот DLC?",
+            "prefix_warning": "Префикс Wine для этой игры - префикс по умолчанию. Если вы действительно хотите удалить его, вы должны сделать это вручную."
         },
         "update": {
             "message": "Для игры вышло обновление. Обновить сейчас?",
-            "title": "Игра нуждается в обновлении"
+            "title": "Игра нуждается в обновлении",
+            "message-cancel": "Играть в эту игру невозможно без обновления"
         },
         "wineprefix": "Выбрать папку префикса Wine",
-        "yes": "ДА"
+        "yes": "ДА",
+        "aware": "Я знаю",
+        "yesCancel": "Да, отмена",
+        "compability": {
+            "message": "Эта игра Windows будет запущена с помощью слоя совместимости. Вы можете столкнуться с некоторыми проблемами или игра может вообще не работать."
+        },
+        "dont-show-again": "Не показывать снова",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Добавить в избранное",
@@ -56,7 +67,9 @@
         "install": "Установить",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Отменить загрузку",
+            "continue": "Продолжить загрузку"
         },
         "remove_from_favourites": "Удалить из избранного",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Показать игру",
         "uninstall": "Удалить",
-        "update": "Обновить"
+        "update": "Обновить",
+        "details": "Подробности",
+        "favorites": "Любимое",
+        "remove_from_library": "Удалить",
+        "unfavorites": "Нелюбимое"
     },
     "cloud_save_unsupported": "Не поддерживается",
     "disabled": "Выключено",
@@ -86,14 +103,17 @@
         "neverPlayed": "Никогда",
         "platform": "Выберите версию платформы для установки",
         "requirements": "Системные требования",
-        "totalPlayed": "Проведено в игре"
+        "totalPlayed": "Проведено в игре",
+        "dlcs": "DLC",
+        "selectChannelName": "Выберите канал Имя"
     },
     "gamecard": {
         "moving": "Перемещение",
         "repairing": "Восстановление"
     },
     "generic": {
-        "error": "Неизвестная ошибка"
+        "error": "Неизвестная ошибка",
+        "noDescription": "Описание отсутствует"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -124,7 +144,8 @@
             "message": "Поддержка античита прервана или невозможна. Игра не будет работать. Вы всё равно хотите его установить?",
             "install": "Да (я понимаю, что это не сработает)",
             "title": "Античит прерван/отклонён"
-        }
+        },
+        "compatibility-warning": "Эта игра Windows будет запущена с помощью слоя совместимости. Ваш опыт может варьироваться."
     },
     "label": {
         "game": {
@@ -132,7 +153,8 @@
         },
         "playing": {
             "start": "Начать игру",
-            "stop": "Игра запущена (Остановить)"
+            "stop": "Игра запущена (Остановить)",
+            "update": "Обновить"
         },
         "saves": {
             "syncing": "Синхронизация сохранений"
@@ -153,7 +175,8 @@
         "title": "Выбрать компоненты для установки"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Бутылка CrossOver"
     },
     "sideload": {
         "field": {
@@ -199,9 +222,15 @@
         "launching": "Запуск",
         "ubisoft": "Установка Ubisoft",
         "downloading": "Загрузка",
-        "extracting": "Извлечение",
+        "extracting": {
+            "cancel": "Отменить экстракцию",
+            "progress": "Извлечение"
+        },
         "gog-goodie": "Кажется, эту игру нельзя установить. Проверьте загружаемый контент на https://gog.com/account",
-        "goodie": "Не устанавливается"
+        "goodie": "Не устанавливается",
+        "preparing": "Скачать, пожалуйста, подождите",
+        "distributables": "Установка распределенных",
+        "paused": "Пауза"
     },
     "submenu": {
         "addShortcut": "Создать ярлык",
@@ -215,6 +244,7 @@
         "removeShortcut": "Удалить ярлыки",
         "settings": "Настройки",
         "store": "Страница в магазине",
-        "verify": "Проверить и восстановить"
+        "verify": "Проверить и восстановить",
+        "extraInfo": "Дополнительная информация"
     }
 }

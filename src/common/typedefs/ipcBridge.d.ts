@@ -223,7 +223,7 @@ interface HyperPlayAsyncIPCFunctions {
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
-  addHyperplayGame: (gameId: string, addHyperplayGame: string) => Promise<void>
+  addHyperplayGame: (gameId: string, addHyperplayGame?: string) => Promise<void>
   sendRequest: (args: unknown[]) => Promise<unknown>
   sendAsyncRequest: (
     payload: JsonRpcRequest,
@@ -291,6 +291,11 @@ interface HyperPlayAsyncIPCFunctions {
   claimQuestPointsReward: (rewardId: string) => Promise<PointsClaimReturn>
   completeExternalTask: (rewardId: string) => Promise<GenericApiResponse>
   resyncExternalTask: (rewardId: string) => Promise<GenericApiResponse>
+  getG7Credits: () => Promise<string>
+  getExternalTaskCredits: (rewardId: string) => Promise<string>
+  getPointsBalancesForProject: (
+    projectId: string
+  ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

@@ -36,14 +36,17 @@
             "checkbox_prefix": "Prefix",
             "message": "Doriți să dezinstalați acest joc?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Dezinstalează"
+            "title": "Dezinstalează",
+            "dlc": "Doriți să dezinstalați această aplicație?"
         },
         "update": {
             "message": "Acest joc are o actualizare, vrei să actualizezi acum?",
             "title": "Jocul necesită actualizare"
         },
         "wineprefix": "Selectați folderul WinePrefix",
-        "yes": "DA"
+        "yes": "DA",
+        "dont-show-again": "Nu mai arăta",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Adaugă la favorite",
@@ -57,7 +60,9 @@
         "install": "Instalează",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "continue": "Continuați descărcarea",
+            "cancel": "Anulați descărcarea"
         },
         "remove_from_favourites": "Eliminați din Favorite",
         "remove_from_recent": "Remove From Recent",
@@ -68,7 +73,11 @@
         },
         "unhide_game": "Afișează jocul",
         "uninstall": "Dezinstalează",
-        "update": "Actualizează"
+        "update": "Actualizează",
+        "details": "Detalii",
+        "favorites": "Favorite",
+        "remove_from_library": "Șterge",
+        "unfavorites": "Nefavorite"
     },
     "cloud_save_unsupported": "Neacceptat",
     "disabled": "Dezactivat",
@@ -94,7 +103,8 @@
         "repairing": "Reparare"
     },
     "generic": {
-        "error": "Eroare Necunoscută"
+        "error": "Eroare Necunoscută",
+        "noDescription": "Nici o descriere disponibilă!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -127,7 +137,8 @@
         },
         "playing": {
             "start": "Joacă Acum",
-            "stop": "în joc (Stop)"
+            "stop": "în joc (Stop)",
+            "update": "Actualizare"
         },
         "saves": {
             "syncing": "Sincronizează Salvările"
@@ -148,7 +159,8 @@
         "title": "Selectați componentele de instalat"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -187,7 +199,11 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Descărcat total",
         "uninstalling": "Uninstalling",
-        "updating": "Joc in curs de actualizare"
+        "updating": "Joc in curs de actualizare",
+        "playing": "Activ",
+        "paused": "În pauză",
+        "syncingSaves": "Sincronizează Salvările",
+        "downloading": "Descărcare"
     },
     "submenu": {
         "addShortcut": "Adaugă scurtătură",

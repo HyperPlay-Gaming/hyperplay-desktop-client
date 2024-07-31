@@ -26,17 +26,17 @@ import {
   resyncExternalTasks
 } from './rewards/completeExternalTask'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
-import { useMutation } from '@tanstack/react-query'
-import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
-import { getDecimalNumberFromAmount } from '@hyperplay/utils'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { createPublicClient } from 'viem'
 import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
 import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
+  projectId: string
 }
 
 const averageEstimatedGasUsagePerFunction: Record<string, number> = {
@@ -90,7 +90,8 @@ async function getRewardClaimGasEstimation(reward: Reward) {
 }
 
 export function QuestDetailsWrapper({
-  selectedQuestId
+  selectedQuestId,
+  projectId
 }: QuestDetailsWrapperProps) {
   const {
     writeContractAsync,
@@ -105,6 +106,15 @@ export function QuestDetailsWrapper({
     error: switchChainError
   } = useSwitchChain()
 
+  useEffect(() => {
+    if (selectedQuestId !== null) {
+      window.api.trackEvent({
+        event: 'Quest Viewed',
+        properties: { quest: { id: selectedQuestId.toString() } }
+      })
+    }
+  }, [selectedQuestId])
+
   const flags = useFlags()
   const account = useAccount()
   const { data: walletBalance } = useBalance({ address: account?.address })
@@ -113,24 +123,37 @@ export function QuestDetailsWrapper({
   const [warningMessage, setWarningMessage] = useState<string>()
   const questMeta = questResult.data.data
 
+  const rewardsQuery = useGetRewards(selectedQuestId)
+  const questRewards = rewardsQuery.data.data
+  const queryClient = useQueryClient()
+
   const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
   const questPlayStreakData = questPlayStreakResult.data.data
 
   const resyncMutation = useMutation({
     mutationFn: async (rewards: Reward[]) => {
-      return resyncExternalTasks(rewards)
+      const result = await resyncExternalTasks(rewards)
+      const queryKey = `useGetG7UserCredits`
+      queryClient.invalidateQueries({ queryKey: [queryKey] })
+      return result
     }
   })
 
   const completeTaskMutation = useMutation({
     mutationFn: async (reward: Reward) => {
-      return completeExternalTask(reward)
+      const result = await completeExternalTask(reward)
+      const queryKey = `useGetG7UserCredits`
+      queryClient.invalidateQueries({ queryKey: [queryKey] })
+      return result
     }
   })
 
   const claimPointsMutation = useMutation({
     mutationFn: async (reward: Reward) => {
-      return claimPoints(reward)
+      const result = await claimPoints(reward)
+      const queryKey = `getPointsBalancesForProject:${projectId}`
+      queryClient.invalidateQueries({ queryKey: [queryKey] })
+      return result
     }
   })
 
@@ -286,22 +309,56 @@ export function QuestDetailsWrapper({
 
   async function claimRewards(rewards: Reward[]) {
     for (const reward_i of rewards) {
-      switch (reward_i.reward_type) {
-        case 'ERC1155':
-        case 'ERC721':
-        case 'ERC20':
-          await mintOnChainReward(reward_i)
-          break
-        case 'POINTS':
-          await claimPointsMutation.mutateAsync(reward_i)
-          break
-        case 'EXTERNAL-TASKS':
-          await completeTaskMutation.mutateAsync(reward_i)
-          break
-        default:
-          console.error(`unknown reward type ${reward_i.reward_type}`)
-          break
+      if (selectedQuestId === null) {
+        continue
       }
+      /* eslint-disable @typescript-eslint/no-unused-vars */
+      const {
+        amount_per_user,
+        chain_id,
+        marketplace_url,
+        decimals,
+        ...rewardToTrack_i
+      } = reward_i
+      /* eslint-enable @typescript-eslint/no-unused-vars */
+      const properties = {
+        ...rewardToTrack_i,
+        quest_id: selectedQuestId.toString()
+      }
+      window.api.trackEvent({
+        event: 'Reward Claim Started',
+        properties
+      })
+
+      try {
+        switch (reward_i.reward_type) {
+          case 'ERC1155':
+          case 'ERC721':
+          case 'ERC20':
+            await mintOnChainReward(reward_i)
+            break
+          case 'POINTS':
+            await claimPointsMutation.mutateAsync(reward_i)
+            break
+          case 'EXTERNAL-TASKS':
+            await completeTaskMutation.mutateAsync(reward_i)
+            break
+          default:
+            console.error(`unknown reward type ${reward_i.reward_type}`)
+            break
+        }
+      } catch (err) {
+        const errMsg = `${err}`
+        console.error(errMsg)
+        window.api.trackEvent({
+          event: 'Reward Claim Error',
+          properties
+        })
+      }
+      window.api.trackEvent({
+        event: 'Reward Claim Success',
+        properties
+      })
     }
   }
 
@@ -347,7 +404,11 @@ export function QuestDetailsWrapper({
     resetWriteContract()
   }, [selectedQuestId])
 
-  if (selectedQuestId !== null && questMeta !== undefined) {
+  if (
+    selectedQuestId !== null &&
+    questMeta !== undefined &&
+    questRewards !== undefined
+  ) {
     const ctaDisabled =
       !flags.questsOverlayClaimCtaEnabled ||
       (!isEligible() && !showResyncButton) ||
@@ -387,19 +448,7 @@ export function QuestDetailsWrapper({
           isSignedIn
         )
       },
-      rewards:
-        questMeta.rewards?.map((val) => ({
-          title: val.name,
-          imageUrl: val.image_url,
-          chainName: getRewardCategory(val, t),
-          numToClaim:
-            val.amount_per_user && val.decimals
-              ? getDecimalNumberFromAmount(
-                  val.amount_per_user.toString(),
-                  val.decimals
-                ).toString()
-              : undefined
-        })) ?? [],
+      rewards: questRewards ?? [],
       i18n,
       onClaimClick: async () =>
         claimRewardsMutation.mutate(questMeta.rewards ?? []),
@@ -427,7 +476,11 @@ export function QuestDetailsWrapper({
         }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
       />
     )
-  } else if (questResult?.data.isLoading || questResult?.data.isFetching) {
+  } else if (
+    questResult?.data.isLoading ||
+    questResult?.data.isFetching ||
+    rewardsQuery?.data.isLoading
+  ) {
     const emptyQuestDetailsProps: QuestDetailsProps = {
       questType: 'PLAYSTREAK',
       title: '',

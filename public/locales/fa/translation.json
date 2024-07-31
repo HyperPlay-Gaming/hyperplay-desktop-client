@@ -66,7 +66,8 @@
                 "title": "خطای نامشخص رخ داد!"
             },
             "update": {
-                "title": "Update Error"
+                "title": "Update Error",
+                "message": "چیزی با به روز رسانی اشتباه کرد! لطفا به صورت دستی نصب و نصب HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,6 +77,11 @@
             "winetricks": {
                 "message": "Winetricks هنگام اجرا این خطا را برگرداند:{{newLine}}{{error}}",
                 "title": "خطای Winetricks"
+            },
+            "moving": "بازی حرکت خطا (X18X)",
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "نصب Ubisoft Connect در پیشوند بازی شکست خورده است. صفحه ویکی ما را در https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/ how-to-install-Ubisoft-Connect-on-on- Linux-and-Mac برای نصب آن بررسی کنید."
             }
         },
         "info": {
@@ -139,12 +145,28 @@
                 "install": "سرورهای اپیک در حال حاضر قطعی عمده دارند، بازی نمیتواند نصب شود!",
                 "update": "سرورهای اپیک در حال حاضر قطعی عمده دارند، بازی نمیتواند بهروزرسانی شود!"
             },
-            "title": "هشدار"
+            "title": "هشدار",
+            "wine-change": {
+                "title": "شراب پیدا نشد!",
+                "message": "ما نمی توانیم نسخه شراب انتخاب شده را برای راه اندازی این عنوان (X66X) پیدا کنیم. {{newline}} ما یکدیگر را پیدا کردیم، آیا می خواهید استفاده از {{foundWine}} را ادامه دهید؟?",
+                "message-gptk": "برای اینکه بتوانید بازی ها را با استفاده از ابزار پورتینگ اپل اجرا کنید، باید macOS خود را به 14 (Sonoma) یا بالاتر ارتقا دهید. {{newline}} ما شراب را در سیستم خود پیدا کردیم، آیا می خواهید به استفاده از {{foundWine}} ادامه دهید؟?",
+                "title-gptk": "بازی Porting Toolkit نه سازگار "
+            },
+            "rosetta": {
+                "message": "HyperPlay نیازمند Rosetta برای اجرای صحیح در macOS با تراشه های سیلیکون اپل لطفا آن را از ترمینال macOS با استفاده از دستور زیر نصب کنید: \"نرم افزار به روز رسانی -install-rosetta\" و راه اندازی HyperPlay. ",
+                "title": "رزتا پیدا نشد"
+            }
         },
         "wineprefix": "انتخاب پوشه Wine Prefix",
         "yes": "بله",
         "dontShowAgain": "عدم نمایش",
-        "choose-nile-binary": "باینری Nile را انتخاب کنید"
+        "choose-nile-binary": "باینری Nile را انتخاب کنید",
+        "reset-extension": {
+            "question": {
+                "message": "آیا مطمئن هستید که می خواهید افزونه MetaMask را تنظیم کنید؟?",
+                "title": "افزونه Reset Extension"
+            }
+        }
     },
     "button": {
         "cancel": "Cancel",
@@ -152,7 +174,10 @@
         "login": "ورود",
         "sync": "همگام سازی",
         "syncing": "در حال همگام سازی",
-        "unsync": "عدم همگام سازی"
+        "unsync": "عدم همگام سازی",
+        "continue": "ادامه",
+        "download": "دانلود",
+        "update": "روزآمدسازی"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "title_dm": "Download Manager",
+        "ETA": "زمان برآوردشده"
     },
     "epic": {
         "offline-notification-body": "به علت آفلاین بودن سرورهای اپیک گیمز سرویسهای آنلاین ممکن است کار نکنند!",
@@ -263,7 +290,11 @@
         "wine": {
             "part1": "HyperPlay در این پوشهها برای نسخههای Wine، Proton و CrossOver جستوجو میکند:",
             "part2": "برای دیگر مکانها،از یک symbolic link به یکی از این پوشهها استفاده کنید"
-        }
+        },
+        "dxvknvapi": "DXVK-NVAPI یک پیاده سازی NVAPI است که در بالای DXVK و linux بومی NVAPI ساخته شده است و اجازه می دهد تا برای استفاده از DLSS در GPU های Nvidia استفاده شود.",
+        "disable_logs": "این چک باکس را به منظور غیرفعال کردن اکثر نوشته ها برای ورود به فایل ها (اطلاعات حیاتی همیشه وارد می شوند). اطمینان حاصل کنید که این تنظیمات را قبل از گزارش هر گونه مسئله تنظیم کنید.",
+        "dxvkfpslimit": "مجموعه ای از بازی های DXVK",
+        "msync": "Msync با هدف کاهش سربار Wineserver در بازی های CPU فشرده است. جذب ممکن است عملکرد را در چندین بازی بهبود بخشد."
     },
     "info": {
         "hyperplay": {
@@ -289,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
-        }
+        },
+        "wine-path-none-found": "هیچ نسخه شراب یافت نشد، دانلود یکی از مدیران Compatibility",
+        "wine-path-invalid": "مسیر شراب بی اعتبار است، لطفا یکی دیگر را انتخاب کنید."
     },
     "install": {
         "path": "انتخاب محل نصب"
@@ -303,7 +336,9 @@
         "toggleLayout": {
             "grid": "تغییر به چیدمان شبکه ای",
             "list": "تغییر به چیدمان لیستی"
-        }
+        },
+        "alphabeticalAZ": "الفبای A-Z",
+        "alphabeticalZA": "آلفابتی Z-A"
     },
     "loading": {
         "default": "در حال بارگذاری",
@@ -314,7 +349,8 @@
         "epic": "ورود Epic Games",
         "gog": "ورود GOG",
         "message": "با پلتفرم خود وارد شوید. شما می توانید همزمان از چندین پلتفرم وارد شوید.",
-        "amazon": "ورود به آمازون"
+        "amazon": "ورود به آمازون",
+        "old-mac": "نسخه macOS شما (X22X) است. macOS 12 یا جدیدتر برای ورود لازم است."
     },
     "message": {
         "sync": "همگامسازی کامل شد",
@@ -347,7 +383,9 @@
             "error": "نصب با شکست مواجه شد",
             "finished": "نصب به پایان رسید",
             "imported": "بازی وارد شد",
-            "startInstall": "نصب آغاز شد"
+            "startInstall": "نصب آغاز شد",
+            "paused": "نصب بازی Pause",
+            "stopped": "توقف نصب"
         },
         "moved": "انتقال کامل شد",
         "moving": "در حال انتقال بازی",
@@ -359,7 +397,9 @@
         "update": {
             "canceled": "بهروزرسانی لغو شد",
             "finished": "آپدیت به پایان رسید",
-            "started": "بهروزرسانی آغاز شد"
+            "started": "بهروزرسانی آغاز شد",
+            "stopped": "Update متوقف شد",
+            "paused": "Update Pause"
         }
     },
     "offline-message": {
@@ -369,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "باز کردن",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -414,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "محل نصب شده EGS",
         "prefered_language": "کد دو حرفی (مانند \"en\" یا \"fr\")",
-        "alt-nile-bin": "استفاده از باینری داخلی نیل..."
+        "alt-nile-bin": "استفاده از باینری داخلی نیل...",
+        "dxvkfpsvalue": "مقدار صحیح مثبت (به عنوان مثال 30، 60، ...)"
     },
     "platforms": {
         "linux": "لینوکس",
@@ -431,7 +472,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "مکث بارگیری‌ها",
+            "resume": "ازسرگیری بارگیری"
         }
     },
     "Recent": "اخیرا بازی شده",
@@ -499,7 +542,10 @@
             "instructions_title": "چگونه یک مشکل را گزارش کنید؟",
             "last-log": "آخرین لاگ",
             "no-file": "فایل لاگی پیدا نشد",
-            "show-in-folder": "نمایش فایل لاگ در پوشه"
+            "show-in-folder": "نمایش فایل لاگ در پوشه",
+            "instructions-part-02": "برای کمک به ما در تشخیص و رفع مشکل در اسرع وقت، لطفا به همان اندازه که ممکن است اطلاعات ارائه دهید، از جمله یک کپی از لاگ های خود را. تیم پشتیبانی ما هر دو کانال را نظارت می کند و بهترین تلاش خود را برای پاسخ دادن به موضوع شما در اسرع وقت انجام می دهد. ممنون از صبر و درک شما در حالی که ما برای حل هر گونه مشکلی که ممکن است با آن مواجه شوید کار می کنیم.",
+            "join-hyperplay-discord": "پیوستن به Discord",
+            "instructions-part-01": "اگر شما در هنگام استفاده از HyperPlay با هر گونه مشکلی مواجه می شوید، ما دو منطقه تعیین شده برای گزارش مسائل خود در سرور Discord خود داریم. اگر شما یک بازیکن هستید، لطفا هر گونه مشکلی را با بازدید از پشتیبانی بازیکن گزارش دهید. اگر شما یک بازی dev، لطفا هر گونه مشکلی را با بازدید از dev-support-forum گزارش دهید."
         },
         "mangohud": "فعالسازی Mangohud (Mangohud باید نصب شده باشد)",
         "manualsync": {
@@ -545,7 +591,12 @@
         "disable_logs": "غیرفعال کردن گزارش‌ها",
         "addgamestoapplications": "بازی ها را به طور خودکار به برنامه ها اضافه کنید",
         "showMetalOverlay": "نمایش همپوشانی آمار",
-        "alt-nile-bin": "یک باینری جایگزین نیل را انتخاب کنید"
+        "alt-nile-bin": "یک باینری جایگزین نیل را انتخاب کنید",
+        "steamId": "Steam ID",
+        "dxvkfpslimit": "محدودیت FPS (DX9، 10 و 11)",
+        "autodxvknvapi": "نصب خودکار / به روز رسانی DXVK-NVAPI در Prefix",
+        "autoLaunchHyperPlay": "راه اندازی Hyper بازی Play",
+        "msync": "فعالسازی Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +631,51 @@
             "log": "Log",
             "other": "بقیه",
             "sync": "همگامسازی ذخیرهها",
-            "wineExt": "افزونه های Wine"
+            "wineExt": "افزونه های Wine",
+            "accounts": "حساب‌ها",
+            "systemInformation": "اطلاعات سیستم"
         },
         "open-config-file": "باز کردن فایل پیکربندی",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "محل ذخیره:",
             "warning": "ویژگی ذخیره های ابری آزمایشی می باشد، لطفا قبل از هنگام سازی از ذخیره های خود نسخه پشتیبان تهیه کنید (در صورتی که مشکلی به وجود آید)"
+        },
+        "gamesSettings": "تنظیمات بازی",
+        "systemInformation": {
+            "os": "سیستم عامل:",
+            "osNameFlatpak": "{{osName}} (در سمت چپ)",
+            "osVersion": "نسخه (X8X)",
+            "showDetailed": "مشخصات سیستم دقیق",
+            "steamDeck": "Steam",
+            "systemModel": "مدل سیستم:",
+            "version": "نسخه: {{appVersion}}",
+            "gpuWithNumber": "GPU (X4X) :",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: (X7X)",
+            "gpu": "GPU:",
+            "gpuDriver": "راننده: {{driverVersion}}",
+            "legendaryVersion": "افسانه: {{legendaryVersion}}",
+            "memory": "حافظه:",
+            "memoryStats": "{{percentUsed}}٪ استفاده شده ({{usedGib}} / {{totalGib}}",
+            "copyToClipboard": "کپی در حافظه موقت"
+        },
+        "reset-extension": "افزونه Reset Extension",
+        "wine": {
+            "manager": {
+                "title": "مدیریت کننده Wine"
+            }
         }
     },
     "Settings": "تنظیمات",
     "sidebar": {
         "collapse": "بستن ساید بار",
-        "uncollapse": "باز کردن سایدبار"
+        "uncollapse": "باز کردن سایدبار",
+        "downloadManager": "Download Manager",
+        "achievements": "موفقیت",
+        "library": "کتابخانه",
+        "store": "بازار"
     },
     "status": {
         "installing": "در حال نصب",
@@ -631,7 +714,9 @@
         "logout": "خروج از حساب",
         "logout_confirmation": "آیا میخواهید از حساب خود خارج شوید؟",
         "manageaccounts": "مدیریت حسابها",
-        "quit": "خروج"
+        "quit": "خروج",
+        "manageStore": "مدیریت فروشگاه ها",
+        "logIn": "ورود"
     },
     "webview": {
         "controls": {
@@ -668,5 +753,265 @@
     },
     "amazon": "آمازون",
     "Amazon Games": "بازی های آمازون",
-    "prime-gaming": "پرایم گیمینگ"
+    "prime-gaming": "پرایم گیمینگ",
+    "hyperplay": {
+        "accesscodes": {
+            "error": {
+                "validation": "کد دسترسی بی اعتبار است"
+            },
+            "requirescode": "این به روز رسانی بازی نیاز به یک کد دسترسی دارد.",
+            "success": {
+                "validation": "موفقیت! کد دسترسی معتبر است"
+            }
+        },
+        "onboarding": {
+            "analytics": {
+                "anonymized": "ارسال کلیک ناشناس و تعامل بازی؛;",
+                "hyperplayWill": "HyperPlay:",
+                "optOut": "همیشه به شما اجازه می دهد از طریق تنظیمات انتخاب کنید;",
+                "privacyPolicyHere": "سیاست حفظ حریم خصوصی در اینجا.",
+                "neverSellData": " فروش اطلاعات برای سود تا به حال!",
+                "neverCollectIP": " آدرس IP کامل خود را جمع آوری کنید;",
+                "neverCollectPersonal": " جمع آوری کلید، آدرس، تعادل، هش یا هر گونه اطلاعات شخصی؛;",
+                "title": "کمک به ما برای بهبود HyperPlay!",
+                "body": "HyperPlay مایل به جمع آوری داده های استفاده برای درک بهتر نحوه تعامل کاربران ما با برنامه خواهد بود. این اطلاعات به ما کمک می کند تا درک کنیم که چگونه از برنامه استفاده می کنید و به ما اجازه می دهد تا HyperPlay را حتی برای شما بهتر کنیم.",
+                "privacyCaption": "این داده ها جمع آوری شده و در نتیجه برای اهداف مقررات حفاظت از داده های عمومی (EU) 2016/679 ناشناس است. برای اطلاعات بیشتر در رابطه با شیوه های حریم خصوصی ما، لطفا ببینید "
+            },
+            "connectionCanceled": {
+                "title": "اتصال لغو شد!",
+                "description": "لطفا درخواست اتصال در کیف پول تلفن همراه خود را برای ادامه تایید کنید."
+            },
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "details": "مرورگرهای زیر در حال حاضر MetaMask نصب شده اند. یکی را انتخاب کنید که دوست دارید از آن وارد شوید.",
+                        "cantFindProfile": "آیا نمی توانید پروفایل مرورگر خود را پیدا کنید؟?",
+                        "orWord": "یا",
+                        "title": "مرورگر را انتخاب کنید تا از",
+                        "useRecoveryPhrase": "واردات با استفاده از عبارت بازیابی راز",
+                        "useRecoveryPhraseInfo": "این ویژگی برای کاربران و توسعه دهندگان پیشرفته توصیه می شود. عبارت بازیابی مخفی شما به صورت محلی در MetaMask ذخیره شده و هرگز با HyperPlay به اشتراک گذاشته نمی شود.",
+                        "createNewWallet": "ایجاد کیف پول جدید MM Expansion",
+                        "learnMore": "بیش‌تر بدانید"
+                    },
+                    "info": {
+                        "title": "کیف پول چیست؟?",
+                        "login": {
+                            "details": "یک جایگزین برای ایجاد حساب های جدید و رمز عبور در هر وب سایت، فقط کیف پول خود را به جای آن متصل کنید.",
+                            "title": "یک راه جدید برای ورود به"
+                        },
+                        "digitalAssets": {
+                            "details": "کیف پول برای ارسال، دریافت، ذخیره و نمایش دارایی های دیجیتال مانند توکن ها و NFT ها استفاده می شود.",
+                            "title": "خانه ای برای دارایی های دیجیتال شما"
+                        },
+                        "createWalletCTA": "ایجاد کیف پول",
+                        "createWalletDescription": "در “Create a Wallet” زیر کلیک کنید اگر کیف پول ندارید یا می خواهید یک کیف جدید ایجاد کنید:",
+                        "skip": "فعلا رد شوید"
+                    },
+                    "scan": {
+                        "details": "یک کانال ارتباطی رمزگذاری شده ایجاد کنید. کلیدهای شما هرگز با HyperPlay به اشتراک گذاشته نمی شوند.",
+                        "dontHaveWallet": "کیف پول نداشته باشید؟?",
+                        "getMetamask": "MetaMask دریافت کنید",
+                        "title": "اسکن QR با ",
+                        "updateWarning": "داشتن مسائل؟ اطمینان حاصل کنید که MetaMask تا به امروز است."
+                    }
+                },
+                "title": "ارتباطات کیف پول",
+                "pleaseConnect": "لطفا کیف پول خود را متصل کنید یا Metamask Mobile-app را دانلود کنید.\nشروع:"
+            },
+            "terms": "شرایط خدمات.",
+            "welcome": {
+                "text": {
+                    "construction": "HyperPlay در حال ساخت است.",
+                    "communityCTA_2": "جامعه بیایید آینده بازی را شکل دهیم!",
+                    "bugs": "توجه داشته باشید که HyperPlay یک آلفا عمومی است. بسیاری از ویژگی ها هنوز\nدر توسعه، و اشکالات وجود خواهد داشت.",
+                    "communityCTA_1": "ما بازخورد شما را دوست داریم و شما را در ما ملحق می کنیم",
+                    "description": "HyperPlay یک پرتاب کننده بازی و گردآورنده فروشگاه بازی است.\nآینده با HyperPlay، می توانید کیف پول، توکن ها و دارایی های خود را حمل کنید.\nدر هر بازی HyperPlay از کل کتابخانه Epic پشتیبانی می کند\nفروشگاه، GOG و فروشگاه HyperPlay خود با استفاده از HyperPlay، شما موافقت می کنید\nبه ما"
+                },
+                "title": "خوش آمدید به Hyper بازی Early Access!"
+            },
+            "connectAgain": "اتصال دوباره",
+            "connectionConnected": {
+                "description": "کیف پول شما متصل است. شما آماده بازی هستید.",
+                "title": "کیف پول متصل!"
+            }
+        },
+        "browserImport": {
+            "appId": "App Id",
+            "profile": "نمایه"
+        },
+        "achievements": {
+            "addThisGame": "اضافه کردن این بازی",
+            "freeMints": "Free Mints",
+            "gamesToMint": "بازی برای mint",
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "به نظر می رسد که ما در حال حاضر هیچ بازی در حساب Steam خود پیدا نمی کنیم. فقط یک یادآوری سریع برای دو بار بررسی کنید که جزئیات بازی شما به صورت عمومی تنظیم شده است. به این ترتیب، ما می توانیم به دستاوردهای شما دسترسی داشته باشیم و بهترین تجربه را به شما ارائه دهیم."
+            }
+        },
+        "connectWallet": "کیف پول متصل",
+        "currentWallet": "کیف پول فعلی",
+        "linkSteamAccountDescription": "ثبت نام در Steam برای پیوند حساب HyperPlay خود.",
+        "linkSteamAccountTitle": "Link Steam Account",
+        "gamecard": {
+            "extracting": "استخراج ...",
+            "installed": "آماده بازی",
+            "paused": "متوقف شده",
+            "distributables": "نصب Distributables",
+            "installing": "در حال دانلود"
+        },
+        "syncing": "...",
+        "viewPortfolio": "View Portfolio",
+        "changeWallet": "کیف پول عوض کردن حساب",
+        "otp": "One Time Passcode",
+        "analyticsOff": "Analytics خاموش می شود",
+        "analyticsOn": "Analytics تبدیل شده است",
+        "linkSteamAccountCta": "به Steam Sign در",
+        "viewItem": "مشاهده (X5X)",
+        "viewMyAccount": "مشاهده حساب من",
+        "publicAlpha": "عمومی آلفا",
+        "buttons": {
+            "noThanks": "نه ممنون",
+            "agree": "موافقم"
+        },
+        "logOut": "خروج",
+        "misc": "هرگز",
+        "copyUrl": "رونوشت از نشانی",
+        "Sync": "همگامسازی",
+        "turnAnalyticsOff": "خاموش کردن",
+        "turnAnalyticsOn": "روشن کردن",
+        "folder": "پوشه",
+        "discordApp": "Discord"
+    },
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "CONFIRMED": "قرارداد تایید شده",
+            "FAILED": "قرارداد قطع شد",
+            "INITIATED": "درخواست معامله در انتظار",
+            "PENDING": "تراکنش ارسال شده"
+        },
+        "chainRequest": {
+            "FAILED": "شبکه سفارشی کنسل شد",
+            "INITIATED": "درخواست شبکه سفارشی",
+            "CONFIRMED": "شبکه سفارشی اضافه شده"
+        },
+        "extensionNotification": {
+            "TITLE": "درخواست معامله",
+            "DESCRIPTION": "مطبوعات (X6X) + X برای دیدن این معامله"
+        },
+        "signatureRequest": {
+            "FAILED": "امضا قطع شد",
+            "INITIATED": "درخواست امضا در انتظار",
+            "CONFIRMED": "امضای"
+        },
+        "description": {
+            "INITIATED": "تایید کیف پول در کیف پول موبایل شما",
+            "CONFIRMED": "معامله با موفقیت تایید شد!",
+            "FAILED": "معامله لغو شد یا تسلیم نشد، لطفا دوباره امتحان کنید",
+            "PENDING": "انتظار برای تایید بلاک چین ما به شما اطلاع خواهیم داد که چه زمانی تایید شده است"
+        },
+        "greeting": {
+            "title": "HyperPlay Overlay",
+            "description": "HyperPlay Overlay آماده است! مطبوعات (X34X) + X برای نشان دادن یا پنهان کردن آن."
+        },
+        "walletWatch": {
+            "INITIATED": "اضافه کردن درخواست توکن سفارشی در انتظار",
+            "CONFIRMED": "توکن های سفارشی اضافه شده",
+            "FAILED": "درخواست توکن های سفارشی لغو شد"
+        }
+    },
+    "back_to_game": "بازگشت به بازی",
+    "email_subscription": {
+        "subtitle": "شما اکنون بخشی از جامعه ما هستید و ما هیجان زده هستیم که به روز رسانی ها و بینش های ارزشمندی را با شما به اشتراک بگذاریم.",
+        "title": "ممنون از تو برای تسلیم!"
+    },
+    "gameRelease": {
+        "prototype": "Prototype",
+        "beta": "Beta",
+        "alpha": "آلفا",
+        "demo": "دمو",
+        "main": "اصلی"
+    },
+    "quest": {
+        "associatedGames": "بازی های مرتبط",
+        "claimed": "مطالبات",
+        "errorMessage": "خطایی با معامله وجود داشت.",
+        "quests": "ماموریت ها",
+        "playstreak": {
+            "dayResets": "تنظیم روز:",
+            "playEachDay": "هر روز بازی کنید تا خط شما تنظیم نشود!",
+            "playToStart": "این بازی را برای شروع خط خود بازی کنید!",
+            "progressTowardsStreak": "پیشرفت در مسیر امروز.",
+            "streakCompleted": "Streak تکمیل شد! از پاداش های خود در حال حاضر بپرسید.",
+            "streakProgress": "Streak Progress",
+            "days": "روزها",
+            "now": "اکنون"
+        },
+        "readyForClaim": "آمادگی برای ادعای",
+        "type": {
+            "playstreak": "بازی Streak",
+            "reputation": "Reputation"
+        },
+        "View Game": "بازی View Game",
+        "claimAll": "ادعای همه",
+        "connectSteamAccount": "Share Steam account",
+        "linkAccount": "لینک خود را حساب Steam برای بررسی واجد شرایط بودن.",
+        "reputation": "Reputation",
+        "createDiscordTicket": "ساخت بلیط Discord",
+        "notEnoughGas": "تعادل کیف پول کافی برای ادعای پاداش شما به دلیل هزینه های گاز یک کیف پول مختلف را امتحان کنید یا این کیف پول را قبل از دوباره پر کنید.",
+        "needMoreAchievements": "شما باید {{percent}}٪ از دستاوردهای در یکی از این بازی ها را تکمیل کنید.",
+        "claimFailed": "مطالبات شکست خورده",
+        "claimFailedMessage": "لطفا یک بار دیگر امتحان کنید. اگر هنوز کار نمی کند، یک بلیط پشتیبانی Discord ایجاد کنید.",
+        "active": "فعال",
+        "Play": "نمایش",
+        "points": "نقاط",
+        "signIn": "ورود",
+        "sync": "همگامسازی",
+        "reward": "پاداش"
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "client": "شما در حال حاضر وارد نشده اید، پیشرفت بازی ردیابی نخواهد شد. لطفا به HyperPlay از طریق افت سمت راست بالا برای پیگیری پیشرفت وارد شوید.",
+                "overlay": "شما در حال حاضر وارد نشده اید، پیشرفت بازی ردیابی نخواهد شد. لطفا از بازی خارج شوید و به HyperPlay از طریق افت سمت راست بالا برای پیگیری پیشرفت."
+            }
+        },
+        "quests": "ماموریت ها"
+    },
+    "sideload": {
+        "warningMessage": "Side-load یک بازی یک ویژگی در نظر گرفته شده برای توسعه دهندگان و کاربران با تجربه قدرت است. یک نصب کننده جانبی که حاوی بدافزار است می تواند کامپیوتر شما را به خطر اندازد و منجر به سرقت وجوه شود.",
+        "warningTitle": "مهم:"
+    },
+    "ALL": "همه چیز",
+    "accounts": "حساب",
+    "dlcs": {
+        "label": "بسته بندی ها را برای نصب انتخاب کنید:"
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "single": "یک بروزرسانی آماده برای (X29X) وجود دارد.",
+            "multiple": "{{gameName}} و دیگر بازی ها آماده به روز رسانی هستند."
+        },
+        "title": "بازی Updates"
+    },
+    "exit_game": "بازی Out Game",
+    "notification": {
+        "wine-download": {
+            "message": "تنظیم لایه سازگاری پیش فرض",
+            "title": "لایه Compatibility Layer"
+        }
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "شما به HyperPlay با کیف پول خارجی متصل هستید."
+    },
+    "achievements": {
+        "progress": {
+            "minted": "زنجیره ای",
+            "notMinted": "زنجیره ای"
+        }
+    },
+    "importGameErrorMessage": "نه یک پوشه بازی معتبر، وارد کردن بازی امکان پذیر نیست",
+    "importGameErrorMessageExecutable": "بازی Game غیر قابل حذف، بازی واردات امکان پذیر نیست",
+    "importGameErrorTitle": "خطای بازی واردات",
+    "analytics": "تحلیل‌ها",
+    "profile": "نمایه"
 }

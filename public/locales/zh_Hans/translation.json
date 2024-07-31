@@ -78,7 +78,11 @@
                 "message": "Winetricks 在执行期间返回了以下错误：{{newLine}}{{error}}",
                 "title": "Winetricks 错误"
             },
-            "moving": "移动游戏错误 {{error}}"
+            "moving": "移动游戏错误 {{error}}",
+            "ubisoft-connect": {
+                "title": "UbisoftLink",
+                "message": "在游戏前安装UbisoftLink的工作失败。 在https://github.com/Heroic-Games-Launcher/HeroicGames Launcher/wiki/How-to-install-Ubisoft-Connect-on-HCHand-Mac安装."
+            }
         },
         "info": {
             "update": {
@@ -144,13 +148,25 @@
             "title": "警告",
             "wine-change": {
                 "message": "我们无法找到启动此标题（{{selectedWine}}）所需的选定Wine版本。{{newline}}。我们找到了另一个版本，您是否希望继续使用 {{foundWine}} 启动？?",
-                "title": "未找到Wine！"
+                "title": "未找到Wine！",
+                "message-gptk": "为了能够利用果阿加明港工具包来管理游戏,你需要将玉米提高到14(Sonoma)或更高。 {{newline}} 我们发现 Wine在你的系统中,你是否希望继续使用{{foundWine}}发射?",
+                "title-gptk": "捕猎工具包 "
+            },
+            "rosetta": {
+                "title": "Rosetta",
+                "message": "所需加班费 Rosetta与Angap Silicon 团在马库西进行正确操作。 请使用以下指挥从马科斯终端安装:“软件——内斯特罗沙塔”和“重塑超级Play”. "
             }
         },
         "wineprefix": "选择 Wine Prefix 文件夹",
         "yes": "是",
         "dontShowAgain": "不再显示",
-        "choose-nile-binary": "选择尼罗河二进制文件"
+        "choose-nile-binary": "选择尼罗河二进制文件",
+        "reset-extension": {
+            "question": {
+                "message": "你们是否希望重新确定MetaMask的延伸?",
+                "title": "[X0X]"
+            }
+        }
     },
     "button": {
         "cancel": "取消",
@@ -160,7 +176,8 @@
         "syncing": "正在同步",
         "unsync": "取消同步",
         "continue": "继续",
-        "download": "下载"
+        "download": "下载",
+        "update": "更新"
     },
     "controller": {
         "hints": {
@@ -200,7 +217,8 @@
             "type": "类型"
         },
         "title": "下载",
-        "ETA": "预计时间"
+        "ETA": "预计时间",
+        "title_dm": "下载主管"
     },
     "epic": {
         "offline-notification-body": "由于 Epic Games 服务器处于离线状态，在线服务可能无法完全正常运行！",
@@ -274,7 +292,9 @@
             "part2": "如果在其它位置，请使用软链接连接到这些中的一个文件夹"
         },
         "disable_logs": "将此复选框切换为“开”可禁用对日志文件的大部分写入（始终记录关键信息）。请确保在报告任何问题之前关闭此设置。",
-        "dxvknvapi": "DXVK-NVAPI 是基于 DXVK 和 linux 原生 NVAPI 构建的 NVAPI 的实现，它允许在 Nvidia GPU 上使用 DLSS。"
+        "dxvknvapi": "DXVK-NVAPI 是基于 DXVK 和 linux 原生 NVAPI 构建的 NVAPI 的实现，它允许在 Nvidia GPU 上使用 DLSS。",
+        "dxvkfpslimit": "DXVK游戏设定了基准率上限",
+        "msync": "Msync旨在减少CPU密集型游戏中的 wine料。 增强能力可提高一些游戏的绩效."
     },
     "info": {
         "hyperplay": {
@@ -329,7 +349,8 @@
         "epic": "Epic Games 登录",
         "gog": "GOG 登录",
         "message": "平台登录。你可以同时登录超过一个平台。",
-        "amazon": "亚马逊登录"
+        "amazon": "亚马逊登录",
+        "old-mac": "页: 1 macOS 12或新手必须登录."
     },
     "message": {
         "sync": "同步完成",
@@ -388,7 +409,7 @@
         "offline-retry-in": "离线。重试时间为 {{seconds}} 秒。",
         "retrying": "重试"
     },
-    "Open": "",
+    "Open": "打开",
     "options": {
         "advanced": {
             "key": "变量名称",
@@ -433,7 +454,8 @@
         "custom_themes_path": "选择查找自定义 CSS 文件的路径",
         "egs-prefix": "Epic 游戏商城安装位置",
         "prefered_language": "双字符代码 (如: \"en\" 或 \"fr\")",
-        "alt-nile-bin": "使用内置 Nile 二进制文件..."
+        "alt-nile-bin": "使用内置 Nile 二进制文件...",
+        "dxvkfpsvalue": "积极的分类价值(例如30、60、......)"
     },
     "platforms": {
         "linux": "Linux",
@@ -523,7 +545,8 @@
             "no-file": "未找到日志文件",
             "show-in-folder": "显示文件夹中的日志文件",
             "instructions-part-01": "如果您在使用 HyperPlay 时遇到任何问题，我们在 Discord 服务器中有两个指定区域可以报告您的问题。如果您是玩家，请访问玩家支持论坛报告任何问题。如果您是游戏开发人员，请访问开发人员支持论坛报告任何问题。",
-            "instructions-part-02": "为了帮助我们尽快诊断和解决问题，请提供尽可能多的信息，包括您的日志副本。我们的支持团队将监控这两个渠道，并尽最大努力尽快回复您的问题。在我们努力解决您可能遇到的任何问题时，感谢您的耐心和理解。"
+            "instructions-part-02": "为了帮助我们尽快诊断和解决问题，请提供尽可能多的信息，包括您的日志副本。我们的支持团队将监控这两个渠道，并尽最大努力尽快回复您的问题。在我们努力解决您可能遇到的任何问题时，感谢您的耐心和理解。",
+            "join-hyperplay-discord": "加入我们的分歧"
         },
         "mangohud": "启用 MangoHud（需要已安装 Mangohud）",
         "manualsync": {
@@ -572,7 +595,12 @@
         "autodxvknvapi": "在前置自动安装并更新 DXVK",
         "experimental_features": {
             "enableNewShinyFeature": "新功能"
-        }
+        },
+        "autoUpdateGames": "自动更新游戏",
+        "msync": "启用 Esync",
+        "dxvkfpslimit": "通行证(DX9、10和11)",
+        "autoLaunchHyperPlay": "自动发射 游乐",
+        "steamId": "热液"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -607,7 +635,9 @@
             "log": "日志",
             "other": "其它",
             "sync": "存档-同步",
-            "wineExt": "Wine 扩展"
+            "wineExt": "Wine 扩展",
+            "accounts": "帐户",
+            "systemInformation": "系统信息"
         },
         "open-config-file": "打开配置文件",
         "reset-hyperplay": "重置 HyperPlay",
@@ -617,12 +647,42 @@
         },
         "experimental_features": {
             "title": "实验性功能"
-        }
+        },
+        "wine": {
+            "manager": {
+                "title": "Wine 管理器"
+            }
+        },
+        "gamesSettings": "游戏设置",
+        "systemInformation": {
+            "copyToClipboard": "复制到剪贴板",
+            "os": "操作系统:",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "gpuDriver": "司机:{{driverVersion}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "说明:{{legendaryVersion}}",
+            "memory": "记忆:",
+            "showDetailed": "详细的系统规格",
+            "steamDeck": "Iii",
+            "systemModel": "系统模式:",
+            "version": "FCCC/SBI/2008/8",
+            "memoryStats": "{{percentUsed}}%",
+            "osVersion": "{{versionNumber}}",
+            "osNameFlatpak": "{{osName}}"
+        },
+        "reset-extension": "延期"
     },
     "Settings": "设置",
     "sidebar": {
         "collapse": "收起侧栏",
-        "uncollapse": "展开侧栏"
+        "uncollapse": "展开侧栏",
+        "achievements": "成就",
+        "library": "库",
+        "store": "商店",
+        "downloadManager": "下载主管"
     },
     "status": {
         "installing": "安装中",
@@ -661,7 +721,9 @@
         "logout": "退出登录",
         "logout_confirmation": "你确定要退出登录吗？",
         "manageaccounts": "管理帐户",
-        "quit": "退出"
+        "quit": "退出",
+        "logIn": "登录",
+        "manageStore": "管理商店"
     },
     "webview": {
         "controls": {
@@ -726,7 +788,10 @@
                         "useRecoveryPhrase": "使用秘密恢复短语进入",
                         "cantFindProfile": "找不到您的浏览器配置文件？",
                         "createNewWallet": "创建新的 MM 扩展钱包",
-                        "details": "通过导入，您的 MetaMask 安装和    设置将被导入 HyperPlay。"
+                        "details": "通过导入，您的 MetaMask 安装和    设置将被导入 HyperPlay。",
+                        "learnMore": "了解更多",
+                        "useRecoveryPhraseInfo": "建议先进用户和开发商使用这一特点。 你的秘密恢复短语在当地存放在Meta Mask,从未与超Play分享.",
+                        "orWord": "页: 1"
                     },
                     "info": {
                         "createWalletCTA": "创建钱包",
@@ -778,7 +843,46 @@
         "currentWallet": "当前钱包",
         "discordApp": "Discord",
         "misc": "从不",
-        "viewPortfolio": "查看资料库"
+        "viewPortfolio": "查看资料库",
+        "gamecard": {
+            "installing": "下载中...",
+            "distributables": "批发",
+            "paused": "已暂停",
+            "extracting": "提取中...",
+            "installed": "愿意发挥作用"
+        },
+        "Sync": "同步",
+        "browserImport": {
+            "profile": "形象",
+            "appId": "App Id"
+        },
+        "folder": "文件夹",
+        "logOut": "注销",
+        "accesscodes": {
+            "success": {
+                "validation": "成功! 准入法有效"
+            },
+            "requirescode": "这一游戏更新需要一部准入法.",
+            "error": {
+                "validation": "准入法无效"
+            }
+        },
+        "achievements": {
+            "freeMints": "自由广告",
+            "gamesToMint": "群众运动",
+            "addThisGame": "添加这种游戏",
+            "noAchievements": {
+                "doubleCheckMessage": "现在,我们看不出在你的轮船账户中有任何游戏。 只是迅速提醒大家,你的游戏细节是公开的。 这样,我们就能够取得你们的成就,并向你提供最佳经验.",
+                "oops": "Oops!"
+            }
+        },
+        "syncing": "......",
+        "viewItem": "观点{{item}}",
+        "viewMyAccount": "观点",
+        "connectWallet": "连接围墙",
+        "linkSteamAccountDescription": "为连接你的超Play账户而签字.",
+        "linkSteamAccountCta": "签字",
+        "linkSteamAccountTitle": "联系船"
     },
     "hyperplayOverlay": {
         "greeting": {
@@ -830,9 +934,96 @@
     "dlc": {
         "noDlcFound": "未找到可下载内容",
         "size": "大小",
-        "title": "标题"
+        "title": "标题",
+        "actions": "操作",
+        "installDlcs": "安装所有可下载内容"
     },
     "amazon": "亚马逊",
     "Amazon Games": "亚马逊游戏",
-    "prime-gaming": "优质游戏"
+    "prime-gaming": "优质游戏",
+    "externalLink": {
+        "dontAskAgain": "不再询问",
+        "warning": "您将打开一个外部链接。"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "兼容性层",
+            "message": "建立缺省兼容性层"
+        }
+    },
+    "profile": "形象",
+    "quest": {
+        "active": "启用",
+        "claimed": "已领取",
+        "Play": "播放",
+        "playstreak": {
+            "days": "天",
+            "now": "现在",
+            "dayResets": "日志:",
+            "playEachDay": "每天玩 Play,使你们的tre子们 won!",
+            "playToStart": "日 本",
+            "progressTowardsStreak": "朝向今天的战.迈进.",
+            "streakCompleted": "Streak完成了! 现在请你奖励.",
+            "streakProgress": "Streak Progress"
+        },
+        "reward": "收益",
+        "points": "点",
+        "quests": "任务",
+        "signIn": "登录",
+        "sync": "同步",
+        "associatedGames": "联系游戏",
+        "claimAll": "1. 要求",
+        "connectSteamAccount": "1. 联接船",
+        "reputation": "投 票",
+        "claimFailed": "索赔失败",
+        "notEnoughGas": "由于汽油费,没有足够平衡地要求获得奖励。 在进行再造之前,打一条不同的围墙或补充.",
+        "claimFailedMessage": "由于汽油费,没有足够平衡地要求获得奖励。 在进行再造之前,打一条不同的围墙或补充.",
+        "createDiscordTicket": "伪造票",
+        "errorMessage": "交易有错误.",
+        "linkAccount": "联系 运输账户检查资格.",
+        "needMoreAchievements": "您需要完成其中一项比赛的{{percent}}%成就.",
+        "readyForClaim": "索赔的阅读",
+        "type": {
+            "playstreak": "国际乐施会",
+            "reputation": "投 票"
+        },
+        "View Game": "观点"
+    },
+    "quests": {
+        "quests": "任务",
+        "playstreak": {
+            "signInWarning": {
+                "overlay": "你们目前还未陷入困境,进展将无法追踪。 请通过直截了当的倒塌,将游戏和标志从超Play转向跟踪进展.",
+                "client": "你们目前还未陷入困境,进展将无法追踪。 请通过直截了当的退步向超Play表示,以跟踪进展情况."
+            }
+        }
+    },
+    "exit_game": "退出游戏",
+    "dlcs": {
+        "label": "选择DLC安装:"
+    },
+    "email_subscription": {
+        "title": "感谢您赞助!",
+        "subtitle": "你们现在就是我们社区的一部分,我们恳请与你们分享宝贵的更新和见解."
+    },
+    "gameUpdateNotifications": {
+        "body": {
+            "multiple": "{{gameName}}和其他游戏准备更新.",
+            "single": "{{gameName}}."
+        },
+        "title": "现有《野生动物最新情况》"
+    },
+    "importGameErrorMessageExecutable": "动物 无法执行,不可能进行进口游戏",
+    "importGameErrorTitle": "进口游戏",
+    "importGameErrorMessage": "进口游戏不是有效的游戏夹,不可能",
+    "achievements": {
+        "progress": {
+            "minted": "链条",
+            "notMinted": "链条"
+        }
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "你与超Play有外部围墙."
+    },
+    "back_to_game": "重获游戏"
 }
