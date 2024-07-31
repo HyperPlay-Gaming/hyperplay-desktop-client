@@ -38,6 +38,7 @@ import { DeviceStateController } from './state/DeviceState'
 import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
 import { UpdateModalController } from './components/UI/UpdateModalController'
 import { QuestsPage } from './screens/Quests'
+import { NavigateListener } from './NavigateListener'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -53,6 +54,7 @@ function App() {
         <Sidebar />
         <main className="content">
           <QaAuthHandler />
+          <NavigateListener />
           <ExtensionHandler />
           <ExtensionManager />
           <DialogHandler />
