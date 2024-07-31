@@ -14,6 +14,7 @@ import {
   flatPakHome,
   isLinux,
   isMac,
+  isWindows,
   runtimePath,
   userHome
 } from './constants'
@@ -768,6 +769,8 @@ interface RunnerProps {
 
 const commandsRunning = {}
 
+let shouldUsePowerShell: boolean | null = null
+
 async function callRunner(
   commandParts: string[],
   runner: RunnerProps,
@@ -775,18 +778,11 @@ async function callRunner(
   options?: CallRunnerOptions,
   gameInfo?: GameInfo
 ): Promise<ExecResult> {
-  const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
 
   // Necessary to get rid of possible undefined or null entries, else
   // TypeError is triggered
   commandParts = commandParts.filter(Boolean)
-
-  const safeCommand = getRunnerCallWithoutCredentials(
-    [...commandParts],
-    options?.env,
-    fullRunnerPath
-  )
 
   if (!logsDisabled) {
     logInfo(
@@ -810,7 +806,41 @@ async function callRunner(
     }
   }
 
-  const bin = runner.bin
+  let bin = runner.bin
+  let fullRunnerPath = join(runner.dir, bin)
+
+  // macOS/Linux: `spawn`ing an executable in the current working directory
+  // requires a "./"
+  if (!isWindows) bin = './' + bin
+
+  // On Windows: Use PowerShell's `Start-Process` to wait for the process and
+  // its children to exit, provided PowerShell is available
+  if (shouldUsePowerShell === null) {
+    shouldUsePowerShell =
+      isWindows && !!(await searchForExecutableOnPath('powershell'))
+  }
+
+  if (shouldUsePowerShell) {
+    const argsAsString = commandParts
+      .map((part) => part.replaceAll('\\', '\\\\'))
+      .map((part) => `"\`"${part}\`""`)
+      .join(',')
+    commandParts = [
+      'Start-Process',
+      `"\`"${fullRunnerPath}\`""`,
+      '-Wait',
+      '-NoNewWindow'
+    ]
+    if (argsAsString) commandParts.push('-ArgumentList', argsAsString)
+
+    bin = fullRunnerPath = 'powershell'
+  }
+
+  const safeCommand = getRunnerCallWithoutCredentials(
+    [...commandParts],
+    options?.env,
+    fullRunnerPath
+  )
 
   // check if the same command is currently running
   // if so, return the same promise instead of running it again
@@ -980,11 +1010,24 @@ function getRunnerCallWithoutCredentials(
   const modifiedCommand = [...command]
   // Redact sensitive arguments (Authorization Code for Legendary, token for GOGDL)
   for (const sensitiveArg of ['--code', '--token']) {
-    const sensitiveArgIndex = modifiedCommand.indexOf(sensitiveArg)
-    if (sensitiveArgIndex === -1) {
-      continue
-    }
-    modifiedCommand[sensitiveArgIndex + 1] = '<redacted>'
+    // PowerShell's argument formatting is quite different, instead of having
+    // arguments as members of `command`, they're all in one specific member
+    // (the one after "-ArgumentList")
+    if (runnerPath === 'powershell') {
+      const argumentListIndex = modifiedCommand.indexOf('-ArgumentList') + 1
+      if (!argumentListIndex) continue
+      modifiedCommand[argumentListIndex] = modifiedCommand[
+        argumentListIndex
+      ].replace(
+        new RegExp(`"${sensitiveArg}","(.*?)"`),
+        `"${sensitiveArg}","<redacted>"`
+      )
+    } else {
+      const sensitiveArgIndex = modifiedCommand.indexOf(sensitiveArg)
+      if (sensitiveArgIndex === -1) {
+        continue
+      }
+      modifiedCommand[sensitiveArgIndex + 1] = '<redacted>'
   }
 
   const formattedEnvVars: string[] = []
