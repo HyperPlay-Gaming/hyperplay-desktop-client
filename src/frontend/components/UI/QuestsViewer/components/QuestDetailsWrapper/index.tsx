@@ -123,6 +123,14 @@ export function QuestDetailsWrapper({
   const [warningMessage, setWarningMessage] = useState<string>()
   const questMeta = questResult.data.data
 
+  const rewardTypeClaimEnabled: Record<Reward['reward_type'], boolean> = {
+    ERC20: flags.erc20RewardsClaim,
+    ERC721: flags.erc721RewardsClaim,
+    ERC1155: flags.erc1155RewardsClaim,
+    POINTS: flags.pointsRewardsClaim,
+    'EXTERNAL-TASKS': flags.externalTasksRewardsClaim
+  }
+
   const rewardsQuery = useGetRewards(selectedQuestId)
   const questRewards = rewardsQuery.data.data
   const queryClient = useQueryClient()
@@ -280,7 +288,8 @@ export function QuestDetailsWrapper({
 
   async function claimRewards(rewards: Reward[]) {
     for (const reward_i of rewards) {
-      if (selectedQuestId === null) {
+      const isRewardTypeClaimable = rewardTypeClaimEnabled[reward_i.reward_type]
+      if (selectedQuestId === null || !isRewardTypeClaimable) {
         continue
       }
       /* eslint-disable @typescript-eslint/no-unused-vars */
@@ -380,10 +389,17 @@ export function QuestDetailsWrapper({
     questMeta !== undefined &&
     questRewards !== undefined
   ) {
+    const isRewardTypeClaimable = Boolean(
+      questMeta?.rewards?.some(
+        (reward) => rewardTypeClaimEnabled[reward.reward_type]
+      )
+    )
+
     const ctaDisabled =
       !flags.questsOverlayClaimCtaEnabled ||
       (!isEligible() && !showResyncButton) ||
-      isClaiming
+      isClaiming ||
+      !isRewardTypeClaimable
 
     let alertProps: InfoAlertProps | undefined
 
