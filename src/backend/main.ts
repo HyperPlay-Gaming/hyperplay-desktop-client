@@ -1318,10 +1318,8 @@ ipcMain.handle(
       await gameIsEpicForwarderOnHyperPlay(game)
 
     if (gameIsEpicForwarderOnHP && hyperPlayListing) {
-      postPlaySessionTime(
-        hyperPlayListing.project_id,
-        parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
-      )
+      // TODO: fix legendary launch await
+      postPlaySessionTime(hyperPlayListing.project_id, 900)
     } else {
       postPlaySessionTime(
         appName,
