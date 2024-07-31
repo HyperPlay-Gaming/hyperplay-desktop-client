@@ -880,7 +880,8 @@
         "viewMyAccount": "Moja historia",
         "viewPortfolio": "Portfolio",
         "changeWallet": "Strona internetowa",
-        "currentWallet": "Obecny wał"
+        "currentWallet": "Obecny wał",
+        "viewFullscreen": "Widok"
     },
     "gameRelease": {
         "alpha": "Alfa",
