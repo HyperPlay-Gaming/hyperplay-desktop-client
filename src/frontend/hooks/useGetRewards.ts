@@ -24,7 +24,11 @@ export function useGetRewards(questId: number | null) {
       }
       for (const reward_i of questRewards) {
         let numToClaim: string | undefined = undefined
-        if (reward_i.amount_per_user && reward_i.decimals) {
+        if (
+          reward_i.amount_per_user &&
+          reward_i.decimals !== undefined &&
+          reward_i.decimals !== null
+        ) {
           numToClaim = getDecimalNumberFromAmount(
             reward_i.amount_per_user.toString(),
             reward_i.decimals
