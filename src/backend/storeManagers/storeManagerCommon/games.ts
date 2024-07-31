@@ -34,6 +34,7 @@ import { PROVIDERS } from 'common/types/proxy-types'
 import { getExecutableAndArgs } from 'backend/utils'
 import { hpApi } from 'backend/utils/hyperplay_api'
 import { getHpOverlay } from 'backend/overlay'
+import { launchingGameShouldOpenOverlay } from 'backend/utils/shouldOpenOverlay'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -360,10 +361,7 @@ export async function launchGame(
       LogPrefix.Backend
     )
 
-    const shouldOpenOverlay =
-      gameInfo &&
-      (gameInfo.runner === 'hyperplay' ||
-        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
+    const { shouldOpenOverlay } = await launchingGameShouldOpenOverlay(gameInfo)
 
     await runWineCommand({
       commandParts: [exeOnly, combinedArgs ?? ''],
