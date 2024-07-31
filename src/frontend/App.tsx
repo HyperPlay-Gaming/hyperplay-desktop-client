@@ -121,7 +121,9 @@ function App() {
               </Route>
             </Route>
             <Route path="/download-manager" element={<DownloadManager />} />
-            <Route path="/quests" element={<QuestsPage />} />
+            <Route path="/quests" element={<QuestsPage />}>
+              <Route path=":questId" element={<QuestsPage />} />
+            </Route>
           </Routes>
         </main>
         <div className="controller">

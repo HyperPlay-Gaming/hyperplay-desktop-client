@@ -6,9 +6,13 @@ import { Alert, Background } from '@hyperplay/ui'
 import classNames from 'classnames'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
 
 export function QuestsPage() {
-  const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
+  const { questId = null } = useParams()
+  const [selectedQuestId, setSelectedQuestId] = useState<number | null>(
+    questId === null ? questId : parseInt(questId)
+  )
   const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
 
