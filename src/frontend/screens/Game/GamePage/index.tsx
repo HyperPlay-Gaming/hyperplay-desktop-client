@@ -551,7 +551,11 @@ export default observer(function GamePage(): JSX.Element | null {
                       )}
                     </>
                   )}
-                  <TimeContainer runner={runner} game={appName} status={status} />
+                  <TimeContainer
+                    runner={runner}
+                    game={appName}
+                    status={status}
+                  />
                 </div>
               </div>
               <div className="gameStatus">
