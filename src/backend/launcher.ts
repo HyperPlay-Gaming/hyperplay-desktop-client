@@ -795,8 +795,8 @@ async function callRunner(
   // On Windows: Use PowerShell's `Start-Process` to wait for the process and
   // its children to exit, provided PowerShell is available
   if (shouldUsePowerShell === null) {
-    shouldUsePowerShell =
-      isWindows && !!(await searchForExecutableOnPath('powershell'))
+    const powershellExists = !!(await searchForExecutableOnPath('powershell'))
+    shouldUsePowerShell = isWindows && powershellExists
   }
 
   if (shouldUsePowerShell) {
@@ -812,7 +812,8 @@ async function callRunner(
     ]
     if (argsAsString) commandParts.push('-ArgumentList', argsAsString)
 
-    bin = fullRunnerPath = 'powershell'
+    bin = 'powershell'
+    fullRunnerPath = 'powershell'
   }
 
   const safeCommand = getRunnerCallWithoutCredentials(
