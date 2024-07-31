@@ -11,12 +11,10 @@ import { join, normalize } from 'path'
 
 import {
   defaultWinePrefix,
-  fixAsarPath,
   flatPakHome,
   isLinux,
   isMac,
   isWindows,
-  publicDir,
   runtimePath,
   userHome
 } from './constants'
@@ -27,7 +25,8 @@ import {
   quoteIfNecessary,
   errorHandler,
   removeQuoteIfNecessary,
-  isMacSonomaOrHigher
+  isMacSonomaOrHigher,
+  spawnAsync
 } from './utils'
 import {
   logDebug,
@@ -55,7 +54,7 @@ import {
   WineCommandArgs,
   SteamRuntime
 } from 'common/types'
-import { execSync, spawn, spawnSync } from 'child_process'
+import { execSync, spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
@@ -909,7 +908,7 @@ async function callRunner(
 
       // close processes created by this process
       if (childPid !== undefined) {
-        killChildProcesses(childPid)
+        stopChildProcesses(childPid)
       }
 
       if (signal && !child.killed) {
@@ -930,7 +929,7 @@ async function callRunner(
 
   abortController.signal.onabort = () => {
     if (childPid !== undefined) {
-      killChildProcesses(childPid)
+      stopChildProcesses(childPid)
     }
   }
 
@@ -942,7 +941,7 @@ async function callRunner(
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
         if (childPid !== undefined) {
-          killChildProcesses(childPid)
+          stopChildProcesses(childPid)
         }
         return {
           stdout: '',
@@ -981,18 +980,72 @@ async function callRunner(
   return promise
 }
 
-function killChildProcesses(childPid: number) {
+async function stopChildProcesses(childPid: number) {
   if (isWindows) {
-    const scriptPath = fixAsarPath(
-      join(publicDir, './win32/stopProcessTree.ps1')
-    )
     logWarning(
       `Killing all processes spawned by PID ${childPid}`,
       LogPrefix.Backend
     )
-    return spawnSync(scriptPath, ['-ParentPID', childPid.toString()], {
-      shell: 'powershell.exe'
-    })
+
+    try {
+      // Get the list of child processes
+      const getChildProcesses = async (parentPid: number) => {
+        const result = await spawnAsync('powershell.exe', [
+          '-NoProfile',
+          '-Command',
+          `Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq ${parentPid} } | Select-Object -ExpandProperty ProcessId`
+        ])
+
+        if (result.stderr) {
+          logError(
+            `Error getting child processes: ${result.stderr}`,
+            LogPrefix.Backend
+          )
+        }
+
+        return result.stdout
+          .trim()
+          .split('\n')
+          .map((pid) => pid.trim())
+          .filter((pid) => pid)
+      }
+
+      // Recursively stop child processes
+      const stopProcessTree = async (parentPid: number) => {
+        const childPids = await getChildProcesses(parentPid)
+        for (const pid of childPids) {
+          stopProcessTree(parseInt(pid, 10))
+        }
+
+        // Stop the parent process
+        const stopResult = await spawnAsync('powershell.exe', [
+          '-NoProfile',
+          '-Command',
+          `Stop-Process -Id ${parentPid} -Force`
+        ])
+
+        if (stopResult.stderr) {
+          logError(
+            `Error stopping process with PID ${parentPid}: ${stopResult.stderr}`,
+            LogPrefix.Backend
+          )
+        }
+
+        logInfo(
+          `Successfully stopped process with PID: ${parentPid}`,
+          LogPrefix.Backend
+        )
+      }
+
+      stopProcessTree(childPid)
+    } catch (error) {
+      logError(
+        `Error executing PowerShell command: ${error}`,
+        LogPrefix.Backend
+      )
+    }
+
+    return
   }
 
   return execSync(`pkill -TERM -P ${childPid}`)
