@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { QuestsSummaryTableWrapper } from './components/QuestsSummaryTableWrapper'
 import { QuestDetailsViewPlayWrapper } from './components/QuestDetailsViewPlay'
 import styles from './index.module.scss'
@@ -10,9 +10,7 @@ import { useParams } from 'react-router-dom'
 
 export function QuestsPage() {
   const { questId = null } = useParams()
-  const [selectedQuestId, setSelectedQuestId] = useState<number | null>(
-    questId === null ? questId : parseInt(questId)
-  )
+  const selectedQuestId = questId === null ? questId : parseInt(questId)
   const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
 
@@ -48,10 +46,7 @@ export function QuestsPage() {
         )}
       >
         {alertComponent}
-        <QuestsSummaryTableWrapper
-          setSelectedQuestId={setSelectedQuestId}
-          selectedQuestId={selectedQuestId}
-        />
+        <QuestsSummaryTableWrapper selectedQuestId={selectedQuestId} />
         <QuestDetailsViewPlayWrapper selectedQuestId={selectedQuestId} />
       </div>
     </>
