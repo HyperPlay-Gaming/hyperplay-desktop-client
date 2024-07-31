@@ -66,7 +66,8 @@
                 "title": "Došlo k nezachycené výjimce!"
             },
             "update": {
-                "title": "Chyba aktualizace"
+                "title": "Chyba aktualizace",
+                "message": "Něco pokazilo s aktualizací! ručně odinstalovat a přeinstalovat HyperPlay."
             },
             "wine-not-found": {
                 "invalid": "The selected wine version was not found. Install it or select a different version in the game's settings{{newline}}Version: {{version}}{{newline}}Path: {{path}}",
@@ -76,7 +77,12 @@
             "winetricks": {
                 "message": "Winetricks po spuštění vrátil následující chybu:{{newLine}}{{error}}",
                 "title": "Chyba Winetricks"
-            }
+            },
+            "ubisoft-connect": {
+                "title": "Ubisoft Connect",
+                "message": "Instalace Ubisoft Connect v herní předponě selhala. Podívejte se na naši wiki stránku na https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac pro instalaci ji maunally."
+            },
+            "moving": "Chyba Pohybující hra {{error}}"
         },
         "info": {
             "update": {
@@ -139,12 +145,28 @@
                 "install": "Servery Epic mají velký výpadek, hru nelze instalovat!",
                 "update": "Servery Epic mají velký výpadek, hru nelze aktualizovat!"
             },
-            "title": "Varování"
+            "title": "Varování",
+            "wine-change": {
+                "title": "Víno nenalezeno!",
+                "message": "Nemohli jsme najít vybranou vinařskou verzi pro spuštění tohoto názvu ({{selectedWine}}). {{newline}} Našli jsme další, chcete pokračovat v spuštění pomocí {{foundWine}} ?",
+                "title-gptk": "Hra Porting Toolkit Ne Kompatibilní ",
+                "message-gptk": "Chcete-li spustit hry pomocí nástroje Apple Gaming porting Toolkit, musíte upgradovat svůj MacOS na 14 (Sonoma) nebo vyšší. {{newline}} Na vašem systému jsme našli víno, chcete pokračovat v spuštění pomocí {{foundWine}} ?"
+            },
+            "rosetta": {
+                "message": "HyperPlay vyžaduje Rosetta správně běžet na macOS s čipy Apple Silicon. Nainstalujte jej z terminálu macOS pomocí následujícího příkazu: \"softwareupdate --install-rosetta\" a restartujte HyperPlay. ",
+                "title": "Rosetta nebyl nalezen"
+            }
         },
         "wineprefix": "Vyberte složku WinePrefix",
         "yes": "ANO",
         "dontShowAgain": "Znovu nezobrazovat",
-        "choose-nile-binary": "Vyberte binární Nil"
+        "choose-nile-binary": "Vyberte binární Nil",
+        "reset-extension": {
+            "question": {
+                "message": "Přejete si skutečně obnovit rozšíření MetaMask?",
+                "title": "Prodloužení prodloužení"
+            }
+        }
     },
     "button": {
         "cancel": "Zrušit",
@@ -152,7 +174,10 @@
         "login": "Přihlásit se",
         "sync": "Synchronizovat",
         "syncing": "Synchronizuji",
-        "unsync": "Desynchroniozovat"
+        "unsync": "Desynchroniozovat",
+        "continue": "Pokračovat",
+        "update": "Aktualizovat",
+        "download": "Stáhnout"
     },
     "controller": {
         "hints": {
@@ -191,7 +216,9 @@
             "start-time": "Spuštěno",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "title_dm": "Stáhnout manažer",
+        "ETA": "Odhadovaný čas"
     },
     "epic": {
         "offline-notification-body": "Online služby nemusí plně fungovat, protože servery Epic Games jsou offline!",
@@ -265,7 +292,9 @@
             "part2": "Pro jiná místa použijte symbolický odkaz na jednu z těchto složek"
         },
         "disable_logs": "Zapnutím tohoto políčka zakážete většinu zápisů do souborů protokolu (kritické informace jsou vždy protokolovány). Před nahlášením jakéhokoli problému nezapomeňte toto nastavení vypnout.",
-        "dxvknvapi": "DXVK-NVAPI je implementace NVAPI postavená na DXVK a nativním NVAPI Linuxu, umožňuje použití DLSS na grafických kartách Nvidia."
+        "dxvknvapi": "DXVK-NVAPI je implementace NVAPI postavená na DXVK a nativním NVAPI Linuxu, umožňuje použití DLSS na grafických kartách Nvidia.",
+        "dxvkfpslimit": "Nastaví kryt rychlosti snímků pro DXVK hry",
+        "msync": "Společnost Msync je zaměřena na snížení nadpisu v podtitulových hrách CPU. Enabling může zlepšit výkon na několika hrách."
     },
     "info": {
         "hyperplay": {
@@ -291,7 +320,9 @@
         },
         "wine-repfix": {
             "message": "Wine používá funkci zvanou WINEPREFIX pro uzavření Windows aplikací v kontejnerech. Tento prefix obsahuje konfigurační soubory Wine a kopii hierarchie souborů na disku C: (hlavní disk na OS Windows). V této kopii disku C: budou uloženy vaše herní soubory a závislosti nainstalované pomocí Winetricks."
-        }
+        },
+        "wine-path-invalid": "Wine Path je neplatný, vyberte prosím jiný.",
+        "wine-path-none-found": "Nebyl nalezena žádná verze vín, stáhnout jeden z Správce kompatibility"
     },
     "install": {
         "path": "Vyberte cestu instalace"
@@ -305,7 +336,9 @@
         "toggleLayout": {
             "grid": "Přepnout na rozvržení mřížky",
             "list": "Přepnout na rozvržení seznamu"
-        }
+        },
+        "alphabeticalAZ": "Abecední A-Z",
+        "alphabeticalZA": "Abecední Z-A"
     },
     "loading": {
         "default": "Načítání",
@@ -316,7 +349,8 @@
         "epic": "Přihlášení s Epic Games",
         "gog": "Přihlášení s GOG",
         "message": "Přihlaste se pomocí své platformy. Můžete se přihlásit k více platformám najednou.",
-        "amazon": "Přihlášení na Amazon"
+        "amazon": "Přihlášení na Amazon",
+        "old-mac": "Verze vašeho macOS je {{version}}. MacOS 12 nebo novější je nutné se přihlásit."
     },
     "message": {
         "sync": "Synchronizace dokončena",
@@ -349,7 +383,9 @@
             "error": "Instalace selhala",
             "finished": "Instalace dokončena",
             "imported": "Hra importována",
-            "startInstall": "Instalace zahájena"
+            "startInstall": "Instalace zahájena",
+            "stopped": "Instalace zastavena",
+            "paused": "Instalace Paused"
         },
         "moved": "Přesun dokončen",
         "moving": "Přesouvám hru",
@@ -361,7 +397,9 @@
         "update": {
             "canceled": "Aktualizace zrušena",
             "finished": "Aktualizace dokončena",
-            "started": "Aktualizace zahájena"
+            "started": "Aktualizace zahájena",
+            "paused": "Aktualizace pozastavení",
+            "stopped": "Aktualizace zastaveno"
         }
     },
     "offline-message": {
@@ -371,7 +409,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Opakování pokusu"
     },
-    "Open": "",
+    "Open": "Otevřít",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -416,7 +454,8 @@
         "custom_themes_path": "Select the path to look for custom CSS files",
         "egs-prefix": "Prefix kde je nainstalován EGS",
         "prefered_language": "2znakový kód (tj.: \"en\" nebo \"fr\")",
-        "alt-nile-bin": "Pomocí vestavěného nilského binárního..."
+        "alt-nile-bin": "Pomocí vestavěného nilského binárního...",
+        "dxvkfpsvalue": "Pozitivní hodnota integeru (např. 30, 60, ...)"
     },
     "platforms": {
         "linux": "Linux",
@@ -433,7 +472,9 @@
             "empty": "Nic ke stažení",
             "finished": "Dokončeno",
             "queued": "Ve frontě",
-            "remove": "Odebrat ze stažených"
+            "remove": "Odebrat ze stažených",
+            "pause": "Pozastavit stahování",
+            "resume": "Pokračovat ve stahování"
         }
     },
     "Recent": "Recently Played",
@@ -502,22 +543,25 @@
             "instructions_title": "How to report a problem?",
             "last-log": "Last Log",
             "no-file": "No log file found.",
-            "show-in-folder": "Show log file in folder"
+            "show-in-folder": "Show log file in folder",
+            "instructions-part-02": "Chcete-li nám pomoci diagnostikovat a opravit problém co nejrychleji, uveďte prosím co nejvíce informací, včetně kopie Vašich protokolů. Náš tým podpory bude sledovat jak kanály, tak jak rychle reagovat na vaše problémy. Děkujeme Vám za trpělivost a pochopení, když pracujeme na řešení problémů, které se můžete setkat.",
+            "instructions-part-01": "Pokud se při používání HyperPlay setkáte s nějakými problémy, máme dvě určené oblasti, abychom mohli reportovat vaše problémy v našem Discord Serveru. Pokud jste hráč, informujte prosím jakékoli problémy tím, že navštívíte hráč-support-forum. Pokud jste hra, podělte se o jakékoli problémy tím, že navštívíte dev-support-forum.",
+            "join-hyperplay-discord": "Připojte se k našemu Discordu"
         },
-        "mangohud": "",
+        "mangohud": "Povolit Mangohud (Mangohud je třeba nainstalovat)",
         "manualsync": {
-            "download": "",
-            "forcedownload": "",
-            "forceupload": "",
-            "sync": "",
-            "syncing": "",
-            "title": "",
-            "upload": ""
+            "download": "Stáhnout",
+            "forcedownload": "Čeština",
+            "forceupload": "Force Nahrát",
+            "sync": "Synchronizovat",
+            "syncing": "Synchronizuji",
+            "title": "Ruční synchronizace šetří",
+            "upload": "Nahrát"
         },
         "maxRecentGames": "Recent Games to Show",
-        "maxworkers": "",
+        "maxworkers": "Maximální počet pracovníků při stahování",
         "minimize-on-launch": "Minimize HyperPlay After Game Launch",
-        "offlinemode": "",
+        "offlinemode": "Spustit hru Offline",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
         "primerun": {
@@ -528,8 +572,8 @@
             "description": "Use Dedicated Graphics Card"
         },
         "runexe": {
-            "message": "",
-            "title": ""
+            "message": "Přetáhněte soubory zde",
+            "title": "Spustit EXE na prefix"
         },
         "savefolder": {
             "not-found": "Save folder not found, please select it manually",
@@ -537,7 +581,7 @@
             "warning": "Please check twice if the path is correct"
         },
         "select_theme": "Select Theme",
-        "showfps": "",
+        "showfps": "Zobrazit FPS (DX9, 10 a 11)",
         "start-in-tray": "Start Minimized",
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
@@ -552,7 +596,11 @@
         "autodxvknvapi": "Automaticky instalovat/aktualizovat DXVK/VKD3D na prefixu",
         "experimental_features": {
             "enableNewShinyFeature": "Nová skvělá funkce"
-        }
+        },
+        "autoLaunchHyperPlay": "Auto Spustit Hyper Čeština",
+        "steamId": "Parní ID",
+        "dxvkfpslimit": "Limit FPS (DX9, 10 a 11)",
+        "msync": "Povolit Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -586,7 +634,9 @@
             "log": "Protokol",
             "other": "Ostatní",
             "sync": "Synchronizace uložených souborů",
-            "wineExt": "Wine rozšíření"
+            "wineExt": "Wine rozšíření",
+            "systemInformation": "In_formace o systému",
+            "accounts": "Účty"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
@@ -596,12 +646,43 @@
         },
         "experimental_features": {
             "title": "Experimentální funkce"
+        },
+        "default_hint": "Změny v této části se vztahují pouze na výchozí hodnoty při instalaci her. Chcete-li změnit nastavení již nainstalované hry, použijte tlačítko Nastavení v herní stránce.",
+        "gamesSettings": "Nastavení hry",
+        "systemInformation": {
+            "osNameFlatpak": "{{osName}} (v blízkosti Flatpak)",
+            "osVersion": "Verze {{versionNumber}}",
+            "gpuWithNumber": "GPU {{number}}:",
+            "legendaryVersion": "Legendární: {{legendaryVersion}}",
+            "steamDeck": "Čeština",
+            "systemModel": "Model systému:",
+            "memoryStats": "{{percentUsed}}% použití ({{usedGib}} / {{totalGib}}",
+            "cpu": "CPU:",
+            "cpuDescription": "{{numOfCores}}x {{modelName}}",
+            "gogdlVersion": "Gogdl: {{gogdlVersion}}",
+            "gpu": "GPU:",
+            "gpuDriver": "Řidič: {{driverVersion}}",
+            "showDetailed": "Zobrazit podrobné specifikace systému",
+            "version": "Verze: {{appVersion}}",
+            "memory": "Paměť:",
+            "os": "Operační systém",
+            "copyToClipboard": "Zkopírovat do schránky"
+        },
+        "reset-extension": "Prodloužení prodloužení",
+        "wine": {
+            "manager": {
+                "title": "Správce Wine"
+            }
         }
     },
-    "Settings": "",
+    "Settings": "Nastavení",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "downloadManager": "Stáhnout manažer",
+        "achievements": "Úspěchy",
+        "store": "Obchod",
+        "library": "Knihovna"
     },
     "status": {
         "installing": "Instaluji",
@@ -628,7 +709,7 @@
         "about": "About",
         "quit": "Quit",
         "reload": "Reload",
-        "show": ""
+        "show": "Zobrazit klíč zabezpečení"
     },
     "two_col_table": {
         "save_hint": "Changes in this table are not saved automatically. Click the + button"
@@ -640,14 +721,16 @@
         "logout": "Odhlásit se",
         "logout_confirmation": "Opravdu se chcete odhlásit?",
         "manageaccounts": "Spravovat účty",
-        "quit": "Ukončit"
+        "quit": "Ukončit",
+        "manageStore": "Správa obchodů",
+        "logIn": "Přihlásit"
     },
     "webview": {
         "controls": {
-            "back": "",
-            "forward": "",
-            "openInBrowser": "",
-            "reload": ""
+            "back": "Přejít zpět",
+            "forward": "Vpřed",
+            "openInBrowser": "Otevřít v prohlížeči",
+            "reload": "Přečíst stránku"
         }
     },
     "wine": {
@@ -677,5 +760,265 @@
     },
     "amazon": "Amazonka",
     "prime-gaming": "Prime Gaming",
-    "Amazon Games": "Amazon hry"
+    "Amazon Games": "Amazon hry",
+    "hyperplayOverlay": {
+        "txnRequest": {
+            "CONFIRMED": "Transakce potvrzená",
+            "FAILED": "Transakce přerušena",
+            "PENDING": "Transakce",
+            "INITIATED": "Žádost o transakci"
+        },
+        "walletWatch": {
+            "CONFIRMED": "Vlastní token přidán",
+            "FAILED": "Vlastní token žádost zrušena",
+            "INITIATED": "Přidání požadavku na vlastní tokeny"
+        },
+        "description": {
+            "FAILED": "Transakce byla zrušena nebo nebyla podána, zkuste to znovu",
+            "CONFIRMED": "Transakce byla úspěšně potvrzena!",
+            "INITIATED": "Potvrzení peněženky probíhá v mobilní peněžence",
+            "PENDING": "Čekání na potvrzení blockchainu. V případě, že je potvrzeno"
+        },
+        "chainRequest": {
+            "CONFIRMED": "Vlastní síť přidán",
+            "INITIATED": "Vlastní požadavek na síť",
+            "FAILED": "Vlastní síť zrušena"
+        },
+        "extensionNotification": {
+            "TITLE": "Poptávka transakce",
+            "DESCRIPTION": "Tisk {{overlayKeyMod}} + X vidět tuto transakci"
+        },
+        "greeting": {
+            "title": "HyperPlay překrytí",
+            "description": "HyperPlay Overlay je připraven! Tisk {{overlayKeyMod}} + X ukázat nebo skrýt."
+        },
+        "signatureRequest": {
+            "CONFIRMED": "Podepsáno",
+            "FAILED": "Podpisová interrupovaná",
+            "INITIATED": "Žádost o podpis"
+        }
+    },
+    "hyperplay": {
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "info": {
+                        "digitalAssets": {
+                            "title": "Domov pro vaše digitální aktiva",
+                            "details": "Peněženky se používají k odesílání, přijímání, obchodu a zobrazení digitálních aktiv, jako jsou tokeny a NFTs."
+                        },
+                        "createWalletDescription": "Klikněte na \"Vytvořit peněženku\" níže, pokud nemáte peněženku nebo chcete vytvořit nový:",
+                        "login": {
+                            "title": "Nový způsob, jak se přihlásit",
+                            "details": "Alternativou k vytváření nových účtů a hesel na každém webu, stačí připojit peněženku místo."
+                        },
+                        "title": "Co je to peněženka?",
+                        "createWalletCTA": "Vytvoření peněženky",
+                        "skip": "Prozatím přeskočit"
+                    },
+                    "import": {
+                        "details": "Níže jsou nainstalovány prohlížeče MetaMask. Vyberte si ten, který chcete importovat.",
+                        "orWord": "NEBO",
+                        "useRecoveryPhrase": "Import pomocí tajné obnovení fráze",
+                        "useRecoveryPhraseInfo": "Tato funkce se doporučuje pro pokročilé uživatele a vývojáře. Vaše tajné obnovení fráze je uložena lokálně v MetaMask a nikdy nesdíleno s HyperPlay.",
+                        "createNewWallet": "Vytvořit novou prodlužovací peněženku MM",
+                        "title": "Vyberte prohlížeč import z",
+                        "cantFindProfile": "Nelze najít profil prohlížeče?",
+                        "learnMore": "Zjistěte více."
+                    },
+                    "scan": {
+                        "details": "Vytvořte šifrované komunikační kanál. Vaše klíče nikdy nebudou sdíleny s HyperPlay.",
+                        "title": "Skenovací QR s ",
+                        "updateWarning": "Mít problémy? Ujistěte se, že MetaMask je aktuální.",
+                        "getMetamask": "Získejte MetaMask",
+                        "dontHaveWallet": "Nemám peněženku?"
+                    }
+                },
+                "title": "Připojení Peněženky",
+                "pleaseConnect": "Prosím připojte peněženku, nebo stáhnout mobilní aplikaci Metamask, abyste získali\nstart:"
+            },
+            "analytics": {
+                "body": "HyperPlay by chtěl shromažďovat data o používání, aby lépe pochopili, jak naši uživatelé interagují s aplikací. Tyto informace nám pomáhají pochopit, jak používáte aplikaci a umožňuje vám HyperPlay ještě lepší.",
+                "hyperplayWill": "HyperPlay bude:",
+                "neverCollectIP": " shromažďujte plnou IP adresu;",
+                "title": "Pomozte nám zlepšit HyperPlay!",
+                "privacyPolicyHere": "Zásady ochrany osobních údajů zde.",
+                "anonymized": "Odeslat anonymizované kliknutí & herní interakce;",
+                "neverCollectPersonal": " shromažďovat klíče, adresy, rovnováhy, hashes, nebo jakékoliv osobní údaje;",
+                "neverSellData": " prodávat data pro zisk. Novinky!",
+                "privacyCaption": "Tyto údaje jsou agregovány a jsou proto anonymní pro účely obecného nařízení o ochraně osobních údajů (EU) 2016/679. Další informace v souvislosti s našimi postupy ochrany osobních údajů naleznete v naší společnosti ",
+                "optOut": "Vždy vám umožní opt-out prostřednictvím nastavení;"
+            },
+            "connectAgain": "Připojte se znovu",
+            "connectionCanceled": {
+                "description": "Po potvrzení požadavku na připojení na mobilní peněženku.",
+                "title": "Odhlášení připojení!"
+            },
+            "connectionConnected": {
+                "title": "Peněženka připojená!",
+                "description": "Vaše peněženka je připojena. Jste připraveni na hru."
+            },
+            "welcome": {
+                "title": "Vítejte na Hyper Hrát Early Access!",
+                "text": {
+                    "communityCTA_2": "komunita. Společně tvoříme budoucnost hraní!",
+                    "communityCTA_1": "Jsme rádi, že jste se připojili k nám",
+                    "bugs": "Upozorňujeme, že HyperPlay je veřejný alfa. Mnoho funkcí je stále více\nve vývoji, a tam budou chyby.",
+                    "construction": "HyperPlay je pod konstrukcí.",
+                    "description": "HyperPlay je hra spouštěč a herní obchod agregátor z\nbudoucnost. S HyperPlay můžete nést peněženku, tokeny a aktiva\ndo každé hry. HyperPlay podporuje celou knihovnu Epic\nObchod, GOG a vlastní prodej HyperPlay. Pomocí HyperPlay souhlasíte\nNaše služby"
+                }
+            },
+            "terms": "Podmínky používání"
+        },
+        "achievements": {
+            "noAchievements": {
+                "oops": "Oops!",
+                "doubleCheckMessage": "Vypadá to, že jsme nemohli najít žádné hry ve vašem Steam účtu v okamžiku. Jednoduše nastavte, že vaše herní údaje jsou nastaveny na veřejnost. Tímto způsobem můžeme získat přístup k vašim úspěchům a poskytnout vám nejlepší zážitek."
+            },
+            "freeMints": "Volné Minty",
+            "gamesToMint": "Hry na mint",
+            "addThisGame": "Přidejte tuto hru"
+        },
+        "analyticsOff": "Analytics je vypnuto",
+        "buttons": {
+            "agree": "Souhlasím",
+            "noThanks": "Ne, díky"
+        },
+        "otp": "Jednorázový kód Passcode",
+        "viewPortfolio": "Zobrazit portfolio",
+        "analyticsOn": "Analytics se zapnuto",
+        "browserImport": {
+            "appId": "Aplikace Id",
+            "profile": "Profil"
+        },
+        "accesscodes": {
+            "requirescode": "Tato hra aktualizace vyžaduje přístupový kód.",
+            "error": {
+                "validation": "Přístupový kód je neplatný"
+            },
+            "success": {
+                "validation": "Úspěch! Přístupový kód je platný"
+            }
+        },
+        "changeWallet": "Výměna účtu peněženky",
+        "connectWallet": "Připojení peněženky",
+        "currentWallet": "Aktuální peněženka",
+        "viewItem": "Zobrazit {{item}}",
+        "viewMyAccount": "Zobrazit svůj účet",
+        "gamecard": {
+            "extracting": "Čeština.",
+            "installed": "Připraveno hrát",
+            "distributables": "Instalace Distributables",
+            "paused": "Pozastaveno",
+            "installing": "Stahování…"
+        },
+        "publicAlpha": "Veřejné Alpha",
+        "linkSteamAccountCta": "Přejděte na Steam přihlášení do Steamu",
+        "linkSteamAccountDescription": "Přihlaste se k Steamu a připojte svůj účet HyperPlay.",
+        "linkSteamAccountTitle": "Link Steam účet",
+        "syncing": "Synchronizace...",
+        "logOut": "Odhlásit se",
+        "Sync": "Synchronizovat",
+        "turnAnalyticsOn": "Zapnout",
+        "folder": "Složka",
+        "turnAnalyticsOff": "Vypnout",
+        "discordApp": "Discord",
+        "misc": "Nikdy",
+        "copyUrl": "Kopírovat URL"
+    },
+    "exit_game": "Exit Hra",
+    "notification": {
+        "wine-download": {
+            "message": "Nastavení výchozí kompatibilizační vrstvy",
+            "title": "Kompatibilita Vrstva"
+        }
+    },
+    "quest": {
+        "claimAll": "Nároky",
+        "playstreak": {
+            "dayResets": "Denní resety:",
+            "playEachDay": "Hrát každý den, takže vaše pruh nebude resetovat!",
+            "playToStart": "Hrát tuto hru, abyste mohli začít svůj pruh!",
+            "streakProgress": "Streak Progress",
+            "progressTowardsStreak": "postup směrem k dnešnímu pruhu.",
+            "streakCompleted": "Streak dokončeno! Požádejte své odměny.",
+            "days": "dnů",
+            "now": "Nyní"
+        },
+        "readyForClaim": "Připravený pro nárok",
+        "reward": "Přihlášení",
+        "type": {
+            "playstreak": "Hrát Streak",
+            "reputation": "Přihlášení"
+        },
+        "View Game": "Zobrazit hru",
+        "associatedGames": "Související hry",
+        "linkAccount": "Připojte svůj odkaz Účet Steam pro kontrolu způsobilosti.",
+        "needMoreAchievements": "Musíte dokončit {{percent}}% úspěchů v jednom z těchto her.",
+        "reputation": "Přihlášení",
+        "claimFailed": "Reklamace selhalo",
+        "claimFailedMessage": "Prosím, zkuste to jednou. Pokud ještě nefunguje, vytvořte si vstupenku na podporu Discordu.",
+        "createDiscordTicket": "Vytvořeno vstupenky Discord",
+        "notEnoughGas": "Nedostatečná peněženka zůstatek na nárok na vaši odměnu v důsledku poplatků za plyn. Zkuste jinou peněženku nebo doplnit tento před opakováním.",
+        "claimed": "Reklamace",
+        "errorMessage": "Byla chyba s transakci.",
+        "active": "Aktivní",
+        "Play": "Přehrát",
+        "points": "Body",
+        "quests": "Úkoly",
+        "signIn": "Přihlásit se",
+        "sync": "Synchronizovat",
+        "connectSteamAccount": "Připojit týmový účet"
+    },
+    "quests": {
+        "playstreak": {
+            "signInWarning": {
+                "overlay": "V současné době nejste přihlášeni, nebude sledována hra streak. Prosím, ukončete hru a přihlaste se k HyperPlay pomocí top-rightdown, abyste sledovali pokrok.",
+                "client": "V současné době nejste přihlášeni, nebude sledována hra streak. Přihlaste se k HyperPlay prostřednictvím pravého rozevíracího procesu."
+            }
+        },
+        "quests": "Úkoly"
+    },
+    "accounts": "účty",
+    "back_to_game": "Zpět na hru",
+    "gameUpdateNotifications": {
+        "title": "Aktualizace hry K dispozici",
+        "body": {
+            "multiple": "{{gameName}} a další hry jsou připraveny k aktualizaci.",
+            "single": "K dispozici je aktualizace připravené pro {{gameName}}."
+        }
+    },
+    "dlcs": {
+        "label": "Vybrat DLCs nainstalovat:"
+    },
+    "importGameErrorMessageExecutable": "Čeština Není možné spustitelné, importovat hru není možné",
+    "importGameErrorTitle": "Chyba hry",
+    "achievements": {
+        "progress": {
+            "minted": "na řetězci",
+            "notMinted": "off řetěz"
+        }
+    },
+    "sideload": {
+        "warningMessage": "Side-loading hra je funkce určená pro vývojáře a zkušené uživatele napájení. Side-loading instalátor, který obsahuje malware může ohrozit váš počítač a vést k krádeži prostředků.",
+        "warningTitle": "Důležitý"
+    },
+    "overlay": {
+        "EXTERNAL_WALLET_CONNECTED": "Jste připojeni do HyperPlay s externí peněženky."
+    },
+    "gameRelease": {
+        "prototype": "Čeština",
+        "alpha": "Alfa",
+        "demo": "Demo",
+        "main": "Hlavní",
+        "beta": "Beta"
+    },
+    "importGameErrorMessage": "Není platná herní složka, import hry není možné",
+    "email_subscription": {
+        "title": "Děkujeme Vám za přihlášení!",
+        "subtitle": "Nyní jste součástí naší komunity a jsme rádi, že s vámi sdílíme cenné aktualizace a informace."
+    },
+    "profile": "Profil",
+    "ALL": "VŠE",
+    "analytics": "Analytika"
 }

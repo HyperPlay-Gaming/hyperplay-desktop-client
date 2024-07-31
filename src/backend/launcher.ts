@@ -66,6 +66,7 @@ import { LegendaryCommand } from './storeManagers/legendary/commands'
 import { commandToArgsArray } from './storeManagers/legendary/library'
 import { searchForExecutableOnPath } from './utils/os/path'
 import { getHpOverlay } from './overlay'
+import { launchingGameShouldOpenOverlay } from './utils/shouldOpenOverlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -824,6 +825,8 @@ async function callRunner(
     return currentPromise
   }
   const hpOverlay = await getHpOverlay()
+  const { shouldOpenOverlay, gameIsEpicForwarderOnHP, hyperPlayListing } =
+    await launchingGameShouldOpenOverlay(gameInfo)
 
   let promise = new Promise<ExecResult>((res, rej) => {
     const child = spawn(bin, commandParts, {
@@ -833,19 +836,18 @@ async function callRunner(
     })
 
     childPid = child.pid
-
     logInfo(
       ['Spawned', runner.name, 'with PID', childPid!.toString()],
       LogPrefix.Backend
     )
 
-    const shouldOpenOverlay =
-      gameInfo &&
-      (gameInfo.runner === 'hyperplay' ||
-        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
-
-    if (shouldOpenOverlay)
-      hpOverlay?.openOverlay(gameInfo?.app_name, gameInfo.runner)
+    if (gameInfo && shouldOpenOverlay) {
+      if (gameIsEpicForwarderOnHP && hyperPlayListing?.project_id) {
+        hpOverlay?.openOverlay(hyperPlayListing?.project_id, gameInfo.runner)
+      } else {
+        hpOverlay?.openOverlay(gameInfo?.app_name, gameInfo.runner)
+      }
+    }
 
     const stdout: string[] = []
     const stderr: string[] = []
@@ -898,7 +900,11 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
-      if (shouldOpenOverlay) hpOverlay?.closeOverlay()
+      try {
+        if (shouldOpenOverlay) hpOverlay?.closeOverlay()
+      } catch (err) {
+        logError(`Error closing overlay: ${err}`, LogPrefix.HyperPlay)
+      }
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,

@@ -152,7 +152,10 @@
         "login": "Logg inn",
         "sync": "Synkroniser",
         "syncing": "Synkroniserer …",
-        "unsync": "Omgjør synkronisering"
+        "unsync": "Omgjør synkronisering",
+        "download": "Last ned",
+        "update": "Oppdater",
+        "continue": "Fortsett"
     },
     "controller": {
         "hints": {
@@ -263,7 +266,8 @@
         "wine": {
             "part1": "Heroiske søk etter versjoner av Wine, Proton og CrossOver i følgende mapper:",
             "part2": "For andre steder, bruk en symbolsk lenke til en av disse mappene"
-        }
+        },
+        "msync": "Fsync har som mål å redusere vinserveroverhead i CPU-intensive spill. Aktivering kan forbedre ytelsen på støttede Linux-kjerner."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +373,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Åpne",
     "options": {
         "advanced": {
             "key": "Variabelnavn",
@@ -431,7 +435,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "Sett nedlastinger på pause",
+            "resume": "Fortsett nedlasting"
         }
     },
     "Recent": "Spillt nylig",
@@ -545,7 +551,9 @@
         "disable_logs": "Deaktiver logger",
         "showMetalOverlay": "Vis statistikkoverlegg",
         "addgamestoapplications": "Legg spill til applikasjoner automatisk",
-        "alt-nile-bin": "Velg en alternativ Nile Binær"
+        "alt-nile-bin": "Velg en alternativ Nile Binær",
+        "msync": "Aktiver Esync",
+        "autodxvknvapi": "Autoinstaller/oppdater DXVK på prefiks"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +588,34 @@
             "log": "Logg",
             "other": "Annen",
             "sync": "Lagre-synkronisering",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "Kontoer",
+            "systemInformation": "Systeminformasjon"
         },
         "open-config-file": "Åpne konfigurasjonsfil",
         "reset-hyperplay": "Tilbakestill HyperPlay",
         "saves": {
             "label": "Lagre plassering:",
             "warning": "Cloud Saves-funksjonen er i beta, vennligst ta sikkerhetskopi av lagrene dine før synkronisering (i tilfelle noe går galt)"
+        },
+        "gamesSettings": "Spillinnstillinger",
+        "systemInformation": {
+            "os": "Operativsystem",
+            "memory": "Minne",
+            "copyToClipboard": "Kopier til utklippstavlen"
+        },
+        "wine": {
+            "manager": {
+                "title": "Vinsjef"
+            }
         }
     },
     "Settings": "Innstillinger",
     "sidebar": {
         "collapse": "Skjul sidefeltet",
-        "uncollapse": "Slå opp sidefeltet"
+        "uncollapse": "Slå opp sidefeltet",
+        "store": "Markedsplassen",
+        "library": "Bibliotek"
     },
     "status": {
         "installing": "Installerer",
@@ -631,7 +654,8 @@
         "logout": "Logg ut",
         "logout_confirmation": "Er du sikker på at du vil logge ut?",
         "manageaccounts": "Administrer kontoer",
-        "quit": "Avslutt"
+        "quit": "Avslutt",
+        "logIn": "Logg inn"
     },
     "webview": {
         "controls": {
@@ -668,5 +692,70 @@
     },
     "amazon": "Amazon",
     "Amazon Games": "Amazon-spill",
-    "prime-gaming": "Prime Gaming"
+    "prime-gaming": "Prime Gaming",
+    "hyperplay": {
+        "gamecard": {
+            "paused": "På pause",
+            "installing": "Laster ned …"
+        },
+        "browserImport": {
+            "profile": "Profil",
+            "appId": "App-ID"
+        },
+        "discordApp": "Discord",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Lær mer"
+                    },
+                    "info": {
+                        "createWalletCTA": "Opprett lommebok"
+                    }
+                }
+            },
+            "terms": "Bruksvilkår"
+        },
+        "logOut": "Logg ut",
+        "folder": "Mappe",
+        "Sync": "Bygger",
+        "syncing": "Synkroniserer …",
+        "buttons": {
+            "agree": "Jeg samtykker",
+            "noThanks": "Nei takk"
+        },
+        "copyUrl": "Kopier _nettadresse",
+        "turnAnalyticsOff": "Skru av",
+        "turnAnalyticsOn": "Skru på",
+        "misc": "Aldri"
+    },
+    "gameRelease": {
+        "alpha": "Alpha",
+        "main": "Hovedrolle",
+        "beta": "Beta",
+        "demo": "Demo"
+    },
+    "quest": {
+        "active": "Aktiv",
+        "Play": "Spill av",
+        "signIn": "Logg inn",
+        "playstreak": {
+            "days": "dager",
+            "now": "Nå"
+        },
+        "points": "Punkter",
+        "sync": "Bygger",
+        "type": {
+            "reputation": "Omdømme"
+        },
+        "reputation": "Omdømme",
+        "connectSteamAccount": "Koble til lagkonto"
+    },
+    "accounts": "Kontoer",
+    "ALL": "ALLE",
+    "analytics": "Analyse",
+    "profile": "Profil",
+    "sideload": {
+        "warningTitle": "Viktig"
+    }
 }

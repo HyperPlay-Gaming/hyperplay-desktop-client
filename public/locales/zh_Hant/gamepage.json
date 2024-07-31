@@ -42,11 +42,18 @@
         },
         "update": {
             "message": "此遊戲有更新，你希望現在更新嗎？",
-            "title": "遊戲需要更新"
+            "title": "遊戲需要更新",
+            "message-cancel": "如果不更新,就不可能发挥这一游戏的作用"
         },
         "wineprefix": "選擇 WinePrefix 資料夾",
         "yes": "是",
-        "yesCancel": "是，取消"
+        "yesCancel": "是，取消",
+        "aware": "我知道",
+        "compability": {
+            "message": "这一Windows游戏将使用兼容层。 你可能会遇到一些问题,或者游戏可能根本不可行."
+        },
+        "dont-show-again": "不再顯示",
+        "ok": "確定"
     },
     "button": {
         "add_to_favourites": "加入我的最愛",
@@ -76,7 +83,8 @@
         "update": "更新",
         "details": "詳細信息",
         "favorites": "最愛",
-        "unfavorites": "不喜歡"
+        "unfavorites": "不喜歡",
+        "remove_from_library": "移除"
     },
     "cloud_save_unsupported": "不支持",
     "disabled": "已禁用",
@@ -130,7 +138,8 @@
         "path-not-writtable": "警告：路徑可能不可寫入。",
         "space-after-install": "安裝後",
         "wineprefix": "WinePrefix容器",
-        "wineversion": "Wine版本"
+        "wineversion": "Wine版本",
+        "compatibility-warning": "这一Windows游戏将使用兼容层。 你的经验可能有所不同."
     },
     "label": {
         "game": {
@@ -138,7 +147,8 @@
         },
         "playing": {
             "start": "開始遊戲",
-            "stop": "停止遊戲"
+            "stop": "停止遊戲",
+            "update": "更新"
         },
         "saves": {
             "syncing": "存檔同步中"
@@ -203,10 +213,16 @@
         "downloading": "下載中",
         "paused": "已暫停",
         "preparing": "準備下載，請稍候",
-        "extracting": "提取中",
+        "extracting": {
+            "cancel": "Cancel Extraction",
+            "progress": "提取中"
+        },
         "moving-files": "移動文件\"{{file}}\"： {{percent}} ",
         "playing": "遊玩中",
-        "syncingSaves": "同步存檔"
+        "syncingSaves": "同步存檔",
+        "distributables": "批发",
+        "goodie": "不可安装",
+        "gog-goodie": "这种游戏似乎无法安装。 https://gog.com/account的可下载内容"
     },
     "submenu": {
         "addShortcut": "添加捷徑",

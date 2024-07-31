@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BrowserGameStyles from './index.module.scss'
 import ToastManager from '../ToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
@@ -25,6 +25,14 @@ export const Overlay = observer(function ({
     txnToastContainerStyle.right = 0
     txnToastContainerStyle.top = 0
   }
+
+  // fired every time the overlay opens
+  useEffect(() => {
+    window.api.trackScreen('Overlay', {
+      appName,
+      runner
+    })
+  }, [])
 
   let exitGameButtonStyle = {
     top: 'var(--space-md)',

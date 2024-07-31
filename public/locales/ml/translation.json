@@ -152,7 +152,10 @@
         "login": "അകത്ത് കയറുക",
         "sync": "ഒന്നിപ്പിക്കൂ",
         "syncing": "ഒന്നിപ്പിക്കുന്നു",
-        "unsync": "പിരിക്കൂ"
+        "unsync": "പിരിക്കൂ",
+        "continue": "തുടരുക",
+        "download": "ഡൌണ്‍ലോഡ്",
+        "update": "പുതുക്കുക"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "കണക്കാക്കിയ സമയം"
     },
     "epic": {
         "offline-notification-body": "HyperPlay will not work probably!",
@@ -263,7 +267,8 @@
         "wine": {
             "part1": "വൈനിനും പ്രോട്ടോണിനും ക്രോസ്സോവറിനുമായി ഹീറോയിക് താഴെപ്പറയുന്ന സ്ഥലങ്ങളില് തപ്പുന്നു:",
             "part2": "മറ്റിടങ്ങളെ ഈ സ്ഥലങ്ങളുമായി കോര്ക്കാന് കണ്ണികള് ഉപയോഗിക്കൂ"
-        }
+        },
+        "msync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "തുറക്കുക",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -431,7 +436,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "pause": "ഡൗൺലോഡുകൾ താൽക്കാലികമായി നിർത്തുക",
+            "resume": "ഡൌൺലോഡ് തുടരുക"
         }
     },
     "Recent": "പതിവ് കളികള്",
@@ -545,7 +552,9 @@
         "disable_logs": "ലോഗുകൾ പ്രവർത്തനരഹിതമാക്കുക",
         "addgamestoapplications": "ആപ്ലിക്കേഷനുകളിലേക്ക് ഗെയിമുകൾ സ്വയമേവ ചേർക്കുക",
         "showMetalOverlay": "സ്ഥിതിവിവരക്കണക്കുകളുടെ ഓവർലേ കാണിക്കുക",
-        "alt-nile-bin": "ഒരു ഇതര നൈൽ ബൈനറി തിരഞ്ഞെടുക്കുക"
+        "alt-nile-bin": "ഒരു ഇതര നൈൽ ബൈനറി തിരഞ്ഞെടുക്കുക",
+        "msync": "Esync വയ്ക്കൂ",
+        "autodxvknvapi": "ഉപസഗ്ഗ഻ത്തില്(പ്രഫിക്സില്) DXVK തന്നത്താന് സ്ഥാപിക്കൂ/പുതുക്കൂ"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +589,32 @@
             "log": "Log",
             "other": "മറ്റുള്ളവ",
             "sync": "ഒന്നിപ്പിക്കല് സൂക്ഷിക്കൂ",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "accounts": "അക്കൗണ്ടുകൾ"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "gamesSettings": "Game settings",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
+        },
+        "systemInformation": {
+            "copyToClipboard": "ക്ലിപ്പ്ബോര്‍ഡിലേക്ക് പകര്‍ത്തട്ടെ?",
+            "memory": "മെമ്മറി"
         }
     },
     "Settings": "ക്രമീകരണങ്ങള്",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "library": "പുസ്തകശാല",
+        "store": "കട"
     },
     "status": {
         "installing": "Installing",
@@ -631,7 +653,8 @@
         "logout": "ഇറങ്ങൂ(ലോഗൌട്ട്)",
         "logout_confirmation": "Logout?",
         "manageaccounts": "Manage Accounts",
-        "quit": "പുറത്തുകടക്കൂ"
+        "quit": "പുറത്തുകടക്കൂ",
+        "logIn": "ലോഗിൻ"
     },
     "webview": {
         "controls": {
@@ -668,5 +691,54 @@
     },
     "amazon": "ആമസോൺ",
     "Amazon Games": "ആമസോൺ ഗെയിമുകൾ",
-    "prime-gaming": "പ്രൈം ഗെയിമിംഗ്"
+    "prime-gaming": "പ്രൈം ഗെയിമിംഗ്",
+    "gameRelease": {
+        "beta": "ബീറ്റ",
+        "main": "പ്രധാന"
+    },
+    "hyperplay": {
+        "gamecard": {
+            "paused": "താല്‍ക്കാലികമായി നിര്‍ത്തിയിരിക്കുന്നു"
+        },
+        "browserImport": {
+            "profile": "പ്രൊഫൈൽ"
+        },
+        "buttons": {
+            "noThanks": "വേണ്ട, നന്ദി"
+        },
+        "folder": "Folder",
+        "misc": "ഒരിയ്ക്കലുമില്ല",
+        "Sync": "ഒന്നിപ്പിക്കൂ",
+        "turnAnalyticsOff": "Turn off",
+        "onboarding": {
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "കൂടുതൽ അറിയാൻ"
+                    }
+                }
+            },
+            "terms": "സേവന നിബന്ധനകൾ"
+        },
+        "discordApp": "ഡിസ്കോഡ഻്",
+        "logOut": "പുറത്തിറങ്ങുക"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer"
+        }
+    },
+    "quest": {
+        "active": "Active",
+        "signIn": "പ്രവേശിക്കൂ",
+        "Play": "പ്ലേയ്",
+        "playstreak": {
+            "days": "ദിവസങ്ങള്‍"
+        },
+        "points": "പോയിന്റുകള്‍",
+        "sync": "ഒന്നിപ്പിക്കൂ"
+    },
+    "accounts": "അക്കൗണ്ടുകൾ",
+    "analytics": "അപഗ്രഥനം",
+    "profile": "പ്രൊഫൈൽ"
 }

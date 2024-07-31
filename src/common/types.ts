@@ -75,6 +75,7 @@ export type LDUser = {
 export type LDEnv = {
   envId: string
   ldUser: LDUser
+  appVersion: string
 }
 
 export interface AppSettings extends GameSettings {
@@ -964,4 +965,11 @@ export interface UserPlayStreak {
   completed_counter: number
   accumulated_playtime_today_in_seconds: number
   last_play_session_completed_datetime: string
+}
+
+export interface PointsCollection {
+  id: string
+  name: string
+  symbol: string
+  image: string
 }

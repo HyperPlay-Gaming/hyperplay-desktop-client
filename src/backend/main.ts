@@ -184,6 +184,8 @@ import { hrtime } from 'process'
 import { getHyperPlayReleaseObject } from './storeManagers/hyperplay/utils'
 import { postPlaySessionTime } from './utils/quests'
 
+import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
+
 async function startProxyServer() {
   try {
     const proxyServer = await import('@hyperplay/proxy-server')
@@ -676,6 +678,16 @@ if (!gotTheLock) {
 
     initTrayIcon(mainWindow)
 
+    // Call checkGameUpdates for HyperPlay games every hour
+    const checkGameUpdatesInterval = 1 * 60 * 60 * 1000
+    setInterval(async () => {
+      try {
+        await checkGameUpdates(['hyperplay'])
+      } catch (error) {
+        logError(`Error checking game updates: ${error}`, LogPrefix.Backend)
+      }
+    }, checkGameUpdatesInterval)
+
     return
   })
 }
@@ -821,27 +833,31 @@ ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 
 /// IPC handlers begin here.
 
+async function checkGameUpdates(runners: Runner[]): Promise<string[]> {
+  let oldGames: string[] = []
+  const { autoUpdateGames } = GlobalConfig.get().getSettings()
+  for (const runner of runners) {
+    let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
+    if (autoUpdateGames) {
+      gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
+    }
+    oldGames = [...oldGames, ...gamesToUpdate]
+  }
+
+  sendGameUpdatesNotifications().catch((e) =>
+    logError(
+      `Something went wrong sending update notifications: ${e}`,
+      LogPrefix.Backend
+    )
+  )
+
+  return oldGames
+}
+
 ipcMain.handle(
   'checkGameUpdates',
   async (e, runners: Runner[]): Promise<string[]> => {
-    let oldGames: string[] = []
-    const { autoUpdateGames } = GlobalConfig.get().getSettings()
-    for (const runner of runners) {
-      let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
-      if (autoUpdateGames) {
-        gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
-      }
-      oldGames = [...oldGames, ...gamesToUpdate]
-    }
-
-    sendGameUpdatesNotifications().catch((e) =>
-      logError(
-        `Something went wrong sending update notifications: ${e}`,
-        LogPrefix.Backend
-      )
-    )
-
-    return oldGames
+    return checkGameUpdates(runners)
   }
 )
 
@@ -1298,10 +1314,18 @@ ipcMain.handle(
       BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
     tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
 
-    postPlaySessionTime(
-      appName,
-      parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
-    )
+    const { gameIsEpicForwarderOnHP, hyperPlayListing } =
+      await gameIsEpicForwarderOnHyperPlay(game)
+
+    if (gameIsEpicForwarderOnHP && hyperPlayListing) {
+      // TODO: fix legendary launch await
+      postPlaySessionTime(hyperPlayListing.project_id, 900)
+    } else {
+      postPlaySessionTime(
+        appName,
+        parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
+      )
+    }
 
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
