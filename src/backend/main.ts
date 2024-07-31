@@ -184,6 +184,8 @@ import { hrtime } from 'process'
 import { getHyperPlayReleaseObject } from './storeManagers/hyperplay/utils'
 import { postPlaySessionTime } from './utils/quests'
 
+import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
+
 async function startProxyServer() {
   try {
     const proxyServer = await import('@hyperplay/proxy-server')
@@ -1312,10 +1314,18 @@ ipcMain.handle(
       BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
     tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
 
-    postPlaySessionTime(
-      appName,
-      parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
-    )
+    const { gameIsEpicForwarderOnHP, hyperPlayListing } =
+      await gameIsEpicForwarderOnHyperPlay(game)
+
+    if (gameIsEpicForwarderOnHP && hyperPlayListing) {
+      // TODO: fix legendary launch await
+      postPlaySessionTime(hyperPlayListing.project_id, 900)
+    } else {
+      postPlaySessionTime(
+        appName,
+        parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
+      )
+    }
 
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
