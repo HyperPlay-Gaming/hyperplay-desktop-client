@@ -5,20 +5,23 @@ import { useTranslation } from 'react-i18next'
 import { timestampStore } from 'frontend/helpers/electronStores'
 
 import './index.css'
-import { Runner } from 'common/types'
+import { Runner, Status } from 'common/types'
 
 type Props = {
   runner: Runner
   game: string
+  status?: Status
 }
 
-function TimeContainer({ runner, game }: Props) {
+function TimeContainer({ runner, game, status }: Props) {
   const { t } = useTranslation('gamepage')
   const [tsInfo, setTsInfo] = useState(timestampStore.get_nodefault(game))
+
   useEffect(() => {
     async function fetchPlaytime() {
       const playTime = await window.api.fetchPlaytimeFromServer(runner, game)
       if (!playTime) {
+        setTsInfo(timestampStore.get_nodefault(game))
         return
       }
       if (tsInfo?.totalPlayed) {
@@ -39,7 +42,7 @@ function TimeContainer({ runner, game }: Props) {
     }
 
     fetchPlaytime()
-  }, [])
+  }, [status])
 
   if (!tsInfo) {
     return (
