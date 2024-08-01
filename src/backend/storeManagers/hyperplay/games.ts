@@ -101,7 +101,13 @@ export const isGameAvailable = (appName: string) => {
   }
 
   if (hpGameInfo.install && hpGameInfo.install.executable) {
-    const { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+    let { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+
+    // on linux and mac replace backslashes with forward slashes on executable
+    if (!isWindows) {
+      executable = executable.replace(/\\/g, '/')
+    }
+
     return existsSync(executable)
   }
   return false
