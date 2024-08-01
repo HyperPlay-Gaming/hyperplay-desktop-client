@@ -14,6 +14,7 @@ import {
   flatPakHome,
   isLinux,
   isMac,
+  isWindows,
   runtimePath,
   userHome
 } from './constants'
@@ -24,7 +25,8 @@ import {
   quoteIfNecessary,
   errorHandler,
   removeQuoteIfNecessary,
-  isMacSonomaOrHigher
+  isMacSonomaOrHigher,
+  spawnAsync
 } from './utils'
 import {
   logDebug,
@@ -52,7 +54,7 @@ import {
   WineCommandArgs,
   SteamRuntime
 } from 'common/types'
-import { spawn } from 'child_process'
+import { execSync, spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
@@ -778,6 +780,7 @@ async function callRunner(
 ): Promise<ExecResult> {
   const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
+  let childPid: number | undefined
 
   // Necessary to get rid of possible undefined or null entries, else
   // TypeError is triggered
@@ -831,6 +834,12 @@ async function callRunner(
       env: { ...process.env, ...options?.env },
       signal: abortController.signal
     })
+
+    childPid = child.pid
+    logInfo(
+      ['Spawned', runner.name, 'with PID', childPid!.toString()],
+      LogPrefix.Backend
+    )
 
     if (gameInfo && shouldOpenOverlay) {
       if (gameIsEpicForwarderOnHP && hyperPlayListing?.project_id) {
@@ -903,6 +912,11 @@ async function callRunner(
         appName
       })
 
+      // close processes created by this process
+      if (childPid !== undefined) {
+        stopChildProcesses(childPid)
+      }
+
       if (signal && !child.killed) {
         rej('Process terminated with signal ' + signal)
       }
@@ -919,6 +933,12 @@ async function callRunner(
     })
   })
 
+  abortController.signal.onabort = () => {
+    if (childPid !== undefined) {
+      stopChildProcesses(childPid)
+    }
+  }
+
   promise = promise
     .then(({ stdout, stderr }) => {
       return { stdout, stderr, fullCommand: safeCommand }
@@ -926,7 +946,9 @@ async function callRunner(
     .catch((error) => {
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
-
+        if (childPid !== undefined) {
+          stopChildProcesses(childPid)
+        }
         return {
           stdout: '',
           stderr: '',
@@ -962,6 +984,77 @@ async function callRunner(
   commandsRunning[key] = promise
 
   return promise
+}
+
+async function stopChildProcesses(childPid: number) {
+  if (isWindows) {
+    logWarning(
+      `Killing all processes spawned by PID ${childPid}`,
+      LogPrefix.Backend
+    )
+
+    try {
+      // Get the list of child processes
+      const getChildProcesses = async (parentPid: number) => {
+        const result = await spawnAsync('powershell.exe', [
+          '-NoProfile',
+          '-Command',
+          `Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq ${parentPid} } | Select-Object -ExpandProperty ProcessId`
+        ])
+
+        if (result.stderr) {
+          logError(
+            `Error getting child processes: ${result.stderr}`,
+            LogPrefix.Backend
+          )
+        }
+
+        return result.stdout
+          .trim()
+          .split('\n')
+          .map((pid) => pid.trim())
+          .filter((pid) => pid)
+      }
+
+      // Recursively stop child processes
+      const stopProcessTree = async (parentPid: number) => {
+        const childPids = await getChildProcesses(parentPid)
+        for (const pid of childPids) {
+          stopProcessTree(parseInt(pid, 10))
+        }
+
+        // Stop the parent process
+        const stopResult = await spawnAsync('powershell.exe', [
+          '-NoProfile',
+          '-Command',
+          `Stop-Process -Id ${parentPid} -Force`
+        ])
+
+        if (stopResult.stderr) {
+          logError(
+            `Error stopping process with PID ${parentPid}: ${stopResult.stderr}`,
+            LogPrefix.Backend
+          )
+        }
+
+        logInfo(
+          `Successfully stopped process with PID: ${parentPid}`,
+          LogPrefix.Backend
+        )
+      }
+
+      stopProcessTree(childPid)
+    } catch (error) {
+      logError(
+        `Error executing PowerShell command: ${error}`,
+        LogPrefix.Backend
+      )
+    }
+
+    return
+  }
+
+  return execSync(`pkill -TERM -P ${childPid}`)
 }
 
 /**

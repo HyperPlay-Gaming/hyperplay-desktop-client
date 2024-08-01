@@ -147,9 +147,6 @@ export async function stop(appName: string): Promise<void> {
   } = gameInfo
 
   if (executable) {
-    const split = executable.split('/')
-    const exe = split[split.length - 1]
-    killPattern(exe)
     if (!isNative(appName)) {
       const gameSettings = await getSettings(appName)
       shutdownWine(gameSettings)
