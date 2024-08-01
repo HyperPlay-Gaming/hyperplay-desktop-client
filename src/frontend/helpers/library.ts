@@ -151,7 +151,7 @@ const launch = async ({
     isNotNative &&
     JSON.parse(
       localStorage.getItem(`${SHOW_COMPATIBILITY_LAYER_WARNING}-${appName}`) ??
-      'true'
+        'true'
     )
 
   const showWarningDialog = new Promise<void>((res) => {
