@@ -101,7 +101,13 @@ export const isGameAvailable = (appName: string) => {
   }
 
   if (hpGameInfo.install && hpGameInfo.install.executable) {
-    const { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+    let { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+
+    // on linux and mac replace backslashes with forward slashes on executable
+    if (!isWindows) {
+      executable = executable.replace(/\\/g, '/')
+    }
+
     return existsSync(executable)
   }
   return false
@@ -141,9 +147,6 @@ export async function stop(appName: string): Promise<void> {
   } = gameInfo
 
   if (executable) {
-    const split = executable.split('/')
-    const exe = split[split.length - 1]
-    killPattern(exe)
     if (!isNative(appName)) {
       const gameSettings = await getSettings(appName)
       shutdownWine(gameSettings)

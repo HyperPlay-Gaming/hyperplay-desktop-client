@@ -925,7 +925,8 @@
         "needMoreAchievements": "Meg kell befejezni {{percent}}% az eredmények az egyik ilyen játékok.",
         "reward": "Jutalom",
         "associatedGames": "Társult játékok",
-        "notEnoughGas": "Elég pénztárca-egyenleg, hogy követelje meg a jutalmat a gázdíjak miatt. Próbáljon ki egy másik pénztárcát, vagy töltse fel ezt, mielőtt visszavonul."
+        "notEnoughGas": "Elég pénztárca-egyenleg, hogy követelje meg a jutalmat a gázdíjak miatt. Próbáljon ki egy másik pénztárcát, vagy töltse fel ezt, mielőtt visszavonul.",
+        "pointsClaimed": "Pontok betartott"
     },
     "quests": {
         "quests": "Küldetések",

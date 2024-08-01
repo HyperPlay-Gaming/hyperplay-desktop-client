@@ -1013,7 +1013,8 @@
         "points": "Точки",
         "signIn": "Увійдіть в систему",
         "sync": "Синхронізувати",
-        "connectSteamAccount": "Підключити аккаунт команди"
+        "connectSteamAccount": "Підключити аккаунт команди",
+        "pointsClaimed": "Окуляри Claimed"
     },
     "quests": {
         "playstreak": {
