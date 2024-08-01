@@ -36,6 +36,14 @@ export function QuestDetailsViewPlayWrapper({
 
   const navigateToGame = useMutation({
     mutationFn: async (appName: string) => {
+      const epicListingUrl = await window.api.getEpicListingUrl(appName)
+
+      console.log('epicListingUrl', epicListingUrl)
+
+      if (epicListingUrl) {
+        return navigate(`/store-page?store-url=${epicListingUrl}`)
+      }
+
       await window.api.addHyperplayGame(appName)
       const gameInfo = await getGameInfo(appName, 'hyperplay')
       navigate(`/gamepage/hyperplay/${appName}`, {
