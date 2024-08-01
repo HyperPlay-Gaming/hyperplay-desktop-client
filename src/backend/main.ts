@@ -126,7 +126,10 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
-import { addGameToLibrary } from './storeManagers/hyperplay/library'
+import {
+  addGameToLibrary,
+  getEpicListingUrl
+} from './storeManagers/hyperplay/library'
 
 import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
@@ -2017,6 +2020,10 @@ ipcMain.on('reloadApp', async () => {
 ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
   await addGameToLibrary(projectId)
 })
+
+ipcMain.handle('getEpicListingUrl', async (_e, projectId) =>
+  getEpicListingUrl(projectId)
+)
 
 ipcMain.handle(
   'isGameHidden',
