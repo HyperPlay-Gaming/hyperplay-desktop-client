@@ -924,7 +924,8 @@
         "claimFailed": "Dava başarısız oldu",
         "claimFailedMessage": "Lütfen bir kez daha deneyin. Hala çalışmıyorsa, bir Discord destek bileti oluşturun.",
         "createDiscordTicket": "Created Discord ticket",
-        "notEnoughGas": "Gaz ücretleri nedeniyle ödülünüzü talep etmek için yeterli cüzdan dengesi. Farklı bir cüzdanı deneyin ya da yeniden denemeden önce bunu tamamlayın."
+        "notEnoughGas": "Gaz ücretleri nedeniyle ödülünüzü talep etmek için yeterli cüzdan dengesi. Farklı bir cüzdanı deneyin ya da yeniden denemeden önce bunu tamamlayın.",
+        "pointsClaimed": "Puanlar Davalı"
     },
     "ALL": "Tümü",
     "analytics": "Analytics",

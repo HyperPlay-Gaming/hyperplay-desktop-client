@@ -971,7 +971,8 @@
         "Play": "شغِّل",
         "sync": "مزامنة",
         "reputation": "السمعة",
-        "points": "نقاط"
+        "points": "نقاط",
+        "pointsClaimed": "النقاط المطالب بها"
     },
     "notification": {
         "wine-download": {
