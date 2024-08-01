@@ -972,7 +972,8 @@
         "createDiscordTicket": "伪造票",
         "notEnoughGas": "由于汽油费,没有足够平衡地要求获得奖励。 在进行再造之前,打一条不同的围墙或补充.",
         "needMoreAchievements": "您需要完成其中一项比赛的{{percent}}%成就.",
-        "View Game": "观点"
+        "View Game": "观点",
+        "pointsClaimed": "要求"
     },
     "sideload": {
         "warningMessage": "側載遊戲是專為開發人員和有經驗的高級用戶提供的功能。側載包含惡意軟件的安裝程序可能會危及你的電腦並導致資金被盜。",

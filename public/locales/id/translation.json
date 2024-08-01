@@ -973,7 +973,8 @@
         "quests": "Pencarian",
         "sync": "Sinkronisasi",
         "claimed": "Diklaim",
-        "connectSteamAccount": "Hubungkan akun tim"
+        "connectSteamAccount": "Hubungkan akun tim",
+        "pointsClaimed": "Poin Diklaim"
     },
     "notification": {
         "wine-download": {

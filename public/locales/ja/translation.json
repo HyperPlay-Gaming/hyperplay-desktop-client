@@ -917,7 +917,8 @@
         "claimFailed": "クレーム失敗",
         "claimFailedMessage": "お問い合わせ それでも機能しない場合は、Discordサポートチケットを作成します.",
         "createDiscordTicket": "作成したDiscordチケット",
-        "notEnoughGas": "十分なウォレット残高で、ガス手数料による報酬を請求できます。 別の財布を試したり、再試行する前にこれを補充してください."
+        "notEnoughGas": "十分なウォレット残高で、ガス手数料による報酬を請求できます。 別の財布を試したり、再試行する前にこれを補充してください.",
+        "pointsClaimed": "ポイント申請"
     },
     "quests": {
         "quests": "クエスト",

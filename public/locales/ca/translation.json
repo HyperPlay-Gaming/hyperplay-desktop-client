@@ -918,7 +918,8 @@
         "claimFailed": "Error de reclamació",
         "claimFailedMessage": "Si us plau, intenti-ho una vegada més. Si encara no funciona, crea un tiquet de suport Discord.",
         "createDiscordTicket": "Entrada Restaurar contrasenya oblidada",
-        "notEnoughGas": "Insuficient equilibri cartera per reclamar la seva recompensa a causa de les taxes de gas. Proveu una cartera diferent o torneu-la a repetir."
+        "notEnoughGas": "Insuficient equilibri cartera per reclamar la seva recompensa a causa de les taxes de gas. Proveu una cartera diferent o torneu-la a repetir.",
+        "pointsClaimed": "Punts Reclamats"
     },
     "ALL": "TOT",
     "gameRelease": {

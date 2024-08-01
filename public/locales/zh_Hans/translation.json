@@ -987,7 +987,8 @@
             "playstreak": "国际乐施会",
             "reputation": "投 票"
         },
-        "View Game": "观点"
+        "View Game": "观点",
+        "pointsClaimed": "要求"
     },
     "quests": {
         "quests": "任务",

@@ -925,7 +925,8 @@
         "associatedGames": "Associerade spel",
         "linkAccount": "Länka din Ångkonto för att kontrollera behörigheten.",
         "createDiscordTicket": "Skapad Discord biljett",
-        "notEnoughGas": "Otillräcklig plånboksbalans för att hävda din belöning på grund av gasavgifter. Prova en annan plånbok eller fylla på den här innan du går tillbaka."
+        "notEnoughGas": "Otillräcklig plånboksbalans för att hävda din belöning på grund av gasavgifter. Prova en annan plånbok eller fylla på den här innan du går tillbaka.",
+        "pointsClaimed": "Poäng som krävs"
     },
     "ALL": "ALLA",
     "analytics": "Analytics",

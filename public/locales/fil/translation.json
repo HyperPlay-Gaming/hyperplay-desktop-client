@@ -1,0 +1,209 @@
+{
+    "All": "Lahat",
+    "hyperplay": {
+        "onboarding": {
+            "terms": "Kasunduan sa Serbisyo",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "Matuto pa"
+                    }
+                }
+            }
+        },
+        "buttons": {
+            "noThanks": "Salamat Nalang"
+        },
+        "folder": "Lagayan",
+        "gamecard": {
+            "paused": "Sandaling Nakahinto"
+        },
+        "logOut": "Mag log out",
+        "misc": "Hindi kailanman"
+    },
+    "info": {
+        "version": "Bersyon ng alak"
+    },
+    "infobox": {
+        "help": "Tulong",
+        "requirements": "Pangangailangan sa System",
+        "warning": "Babala"
+    },
+    "quest": {
+        "points": "mga puntos",
+        "reward": "gantimpala",
+        "signIn": "Mag-sign in",
+        "active": "Aktibo"
+    },
+    "setting": {
+        "library_top_option": {
+            "disabled": "Hindi pinagana"
+        },
+        "manualsync": {
+            "download": "I-download",
+            "upload": "I-upload"
+        },
+        "eosOverlay": {
+            "cancelInstall": "Kanselahin",
+            "checkForUpdates": "Maghanap ng update",
+            "disable": "Isara",
+            "enable": "Buksan",
+            "install": "I-install",
+            "remove": "I-uninstall",
+            "updateNow": "I-update"
+        },
+        "winecrossoverbottle": "CrossOver Bote",
+        "wineversion": "Bersyon ng alak"
+    },
+    "settings": {
+        "navbar": {
+            "accounts": "Account",
+            "advanced": "Advanced",
+            "general": "Pangkalahatan",
+            "other": "Karagdagan"
+        },
+        "copiedToClipboard": "Kinopya sa clipboard",
+        "systemInformation": {
+            "copyToClipboard": "Kopyahin sa clipboard"
+        }
+    },
+    "sidebar": {
+        "library": "Aklatan"
+    },
+    "status": {
+        "installing": "Installing",
+        "processing": "Pinoproseso ang mga file, mangyaring maghintay"
+    },
+    "tray": {
+        "about": "Tungkol sa",
+        "quit": "Isara"
+    },
+    "userselector": {
+        "logIn": "Mag-log in",
+        "logout": "Mag log out",
+        "logout_confirmation": "Sigurado kang gusto mong mag-log out?",
+        "quit": "Isara"
+    },
+    "webview": {
+        "controls": {
+            "back": "Bumalik",
+            "forward": "Sumulong",
+            "openInBrowser": "Buksan sa browser"
+        }
+    },
+    "wine": {
+        "actions": "Mga Gawain",
+        "release": "Petsa ng Pag-release",
+        "size": "Laki"
+    },
+    "anticheat": {
+        "reference": "Sanggunian",
+        "source": "Source",
+        "status": "Katayuan"
+    },
+    "box": {
+        "choose": "Pumili",
+        "dontShowAgain": "Huwag ipakita ang edad",
+        "error": {
+            "generic": {
+                "title": "Piliin ang EXE na Patakbuhin"
+            },
+            "title": "Error"
+        },
+        "no": "HINDI",
+        "ok": "Sige",
+        "quit": {
+            "title": "Alis"
+        },
+        "runexe": {
+            "title": "Piliin ang EXE na Patakbuhin"
+        },
+        "select": {
+            "button": "Pumili"
+        },
+        "sync": {
+            "button": "Pumili"
+        },
+        "warning": {
+            "title": "Babala"
+        },
+        "yes": "OO"
+    },
+    "button": {
+        "cancel": "Kanselahin",
+        "continue": "Ipagpatuloy",
+        "download": "I-download",
+        "update": "I-update"
+    },
+    "controller": {
+        "hints": {
+            "back": "Bumalik",
+            "options": "Pagpipilian",
+            "select": "Pumili"
+        }
+    },
+    "dlc": {
+        "actions": "Mga Gawain",
+        "installDlcs": "I-install ang lahat ng DLC",
+        "size": "Laki",
+        "title": "Pamagat"
+    },
+    "download-manager": {
+        "install-type": {
+            "install": "I-install",
+            "update": "I-update"
+        },
+        "label": {
+            "speed": "I-download"
+        },
+        "queue": {
+            "type": "Uri"
+        }
+    },
+    "error": "Error",
+    "game": {
+        "status": "Katayuan"
+    },
+    "gameRelease": {
+        "main": "Pangunahing"
+    },
+    "library": {
+        "label": "Aklatan",
+        "refresh": "I-refresh"
+    },
+    "loading": {
+        "default": "Naglo-load…"
+    },
+    "notify": {
+        "finished": {
+            "add": {
+                "steam": {
+                    "title": "Idagdag sa Steam"
+                }
+            },
+            "remove": {
+                "steam": {
+                    "title": "Alisin sa Steam"
+                }
+            }
+        },
+        "install": {
+            "canceled": "Kinansela ang pag-install",
+            "error": "Nabigo ang Pag-iinstall"
+        },
+        "uninstalled": "I-uninstall"
+    },
+    "offline-message": {
+        "ignore": "Balewalain"
+    },
+    "Open": "Buksan",
+    "Other": "Karagdagan",
+    "progress": "Takbo",
+    "queue": {
+        "label": {
+            "canceled": "Kinansela"
+        }
+    },
+    "Settings": "Mga settings",
+    "accounts": "Account"
+}
