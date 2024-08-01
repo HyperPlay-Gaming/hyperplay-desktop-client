@@ -935,7 +935,8 @@
         "reward": "Reward",
         "claimFailedMessage": "Prova ancora una volta. Se ancora non funziona, creare un biglietto di supporto Discord.",
         "createDiscordTicket": "Creato biglietto Discord",
-        "notEnoughGas": "Bilancio portafoglio insufficiente per rivendicare la vostra ricompensa a causa di costi di gas. Prova un portafoglio diverso o ricostituisci questo prima di riprovare."
+        "notEnoughGas": "Bilancio portafoglio insufficiente per rivendicare la vostra ricompensa a causa di costi di gas. Prova un portafoglio diverso o ricostituisci questo prima di riprovare.",
+        "pointsClaimed": "Punti dichiarati"
     },
     "quests": {
         "quests": "Missioni",

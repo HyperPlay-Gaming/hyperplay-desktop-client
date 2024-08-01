@@ -1004,7 +1004,8 @@
         "sync": "Sincronizar",
         "claimFailedMessage": "Por favor, tente mais uma vez. Se ainda não funcionar, crie um ticket de suporte no Discord.",
         "notEnoughGas": "Balança de carteira insuficiente para reclamar sua recompensa devido a taxas de gás. Tente uma carteira diferente ou reabastecer esta antes de retentar.",
-        "createDiscordTicket": "Criar ticket no Discord"
+        "createDiscordTicket": "Criar ticket no Discord",
+        "pointsClaimed": "Pontos Vistos"
     },
     "profile": "Perfil",
     "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas",

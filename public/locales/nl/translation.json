@@ -962,7 +962,8 @@
         "Play": "Speel",
         "points": "Punten",
         "reputation": "Reputatie",
-        "sync": "Sync"
+        "sync": "Sync",
+        "pointsClaimed": "Punt geclaimd"
     },
     "quests": {
         "quests": "Quest",

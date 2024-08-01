@@ -956,7 +956,8 @@
         "points": "Punkte",
         "reputation": "Ruf",
         "signIn": "Anmelden",
-        "sync": "Sync"
+        "sync": "Sync",
+        "pointsClaimed": "Forderungen"
     },
     "quests": {
         "playstreak": {

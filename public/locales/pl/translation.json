@@ -924,7 +924,8 @@
         "createDiscordTicket": "Oficjalna strona Created Discord",
         "View Game": "Game",
         "claimFailed": "Claimowi nie udało się zrealizować",
-        "notEnoughGas": "Niesprawiedliwe ścianki mają prawo do nagrody z powodu opłat gazowych. Poświęcony został inny muret lub uzupełniony przed retrygią."
+        "notEnoughGas": "Niesprawiedliwe ścianki mają prawo do nagrody z powodu opłat gazowych. Poświęcony został inny muret lub uzupełniony przed retrygią.",
+        "pointsClaimed": "Point Cl (ang.)"
     },
     "sideload": {
         "warningTitle": "Ważne",

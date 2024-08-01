@@ -964,7 +964,8 @@
         "Play": "Prehrať",
         "points": "Body",
         "sync": "Synchronizácia",
-        "connectSteamAccount": "Pripojiť tímový účet"
+        "connectSteamAccount": "Pripojiť tímový účet",
+        "pointsClaimed": "Body Reklamované"
     },
     "quests": {
         "playstreak": {
