@@ -612,7 +612,7 @@ class GlobalState extends PureComponent<Props> {
     storage.setItem('sidebar_collapsed', JSON.stringify(sidebarCollapsed))
 
     const pendingOps = libraryStatus.filter(
-      (game) => game.status !== 'playing' && game.status !== 'done'
+      (game) => game.status !== 'done'
     ).length
 
     if (pendingOps) {
