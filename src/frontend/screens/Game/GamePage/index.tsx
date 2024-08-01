@@ -873,14 +873,14 @@ export default observer(function GamePage(): JSX.Element | null {
         return window.api.kill(appName, gameInfo.runner)
       }
 
-          // ask to connect the wallet if its a web3 game
-    if (gameInfo.web3?.supported && !walletStore.isConnected) {
-      try {
-        await onboardingStore.startOnboarding()
-      } catch (e) {
-        console.error('User denied onboarding')
+      // ask to connect the wallet if its a web3 game
+      if (gameInfo.web3?.supported && !walletStore.isConnected) {
+        try {
+          await onboardingStore.startOnboarding()
+        } catch (e) {
+          console.error('User denied onboarding')
+        }
       }
-    }
 
       // open game
       await launch({
