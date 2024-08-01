@@ -63,6 +63,9 @@ try {
 
 export default defineConfig(({ mode }) => ({
   main: {
+    optimizeDeps: {
+      exclude: ['@auth/core']
+    },
     build: {
       rollupOptions: {
         input: 'src/backend/main.ts'
