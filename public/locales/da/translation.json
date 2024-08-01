@@ -1019,7 +1019,8 @@
         "signIn": "Log ind",
         "sync": "Synkronisering",
         "connectSteamAccount": "Forbind team-konto",
-        "points": "Punkter"
+        "points": "Punkter",
+        "pointsClaimed": "Punkter Kraved"
     },
     "importGameErrorMessageExecutable": "Spil spil Udførelse ikke fundet, import af spil er ikke muligt",
     "exit_game": "Afslut spil",

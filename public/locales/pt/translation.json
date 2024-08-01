@@ -991,7 +991,8 @@
         "claimFailed": "Reclamação falhada",
         "claimFailedMessage": "Por favor, tente mais uma vez. Se ainda não funcionar, crie um ticket de suporte Discord.",
         "createDiscordTicket": "Bilhete de discórdia criado",
-        "notEnoughGas": "Balança de carteira insuficiente para reclamar sua recompensa devido a taxas de gás. Tente uma carteira diferente ou reabastecer esta antes de retentar."
+        "notEnoughGas": "Balança de carteira insuficiente para reclamar sua recompensa devido a taxas de gás. Tente uma carteira diferente ou reabastecer esta antes de retentar.",
+        "pointsClaimed": "Pontos Vistos"
     },
     "notification": {
         "wine-download": {

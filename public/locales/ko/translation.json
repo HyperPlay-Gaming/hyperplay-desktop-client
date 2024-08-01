@@ -966,7 +966,8 @@
         "signIn": "로그인",
         "points": "포인트",
         "sync": "동기화",
-        "reputation": "평판"
+        "reputation": "평판",
+        "pointsClaimed": "공지사항"
     },
     "sideload": {
         "warningMessage": "Side-loading 게임은 개발자와 숙련 된 전력 사용자를위한 기능입니다. 악성 프로그램이 컴퓨터를 손상하고 자금을 납치 할 수있는 설치 프로그램을로드.",
