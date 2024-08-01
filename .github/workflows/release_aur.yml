@@ -1,6 +1,9 @@
 name: Update AUR
 
 on:
+  pull_request:
+    branches: [fix/aur_publishing]
+  workflow_dispatch:
   release:
     types: [published]
 
@@ -68,7 +71,7 @@ jobs:
         if: ${{ success() }}
 
       - name: Publish AUR package
-        uses: KSXGitHub/github-actions-deploy-aur@v2
+        uses: KSXGitHub/github-actions-deploy-aur@v2.7.2
         with:
           pkgname: hyperplay
           pkgbuild: ./PKGBUILD
