@@ -5,21 +5,21 @@ import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
 import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
+import { useNavigate } from 'react-router-dom'
 
 export interface QuestsSummaryTableWrapperProps {
   selectedQuestId: number | null
-  setSelectedQuestId: (id: number | null) => void
 }
 
 export function QuestsSummaryTableWrapper({
-  selectedQuestId,
-  setSelectedQuestId
+  selectedQuestId
 }: QuestsSummaryTableWrapperProps) {
   const { t } = useTranslation()
   const questsResults = useGetQuests()
   const quests = questsResults?.data?.data
   const hyperplayListings = useGetHyperPlayListings()
   const listings = hyperplayListings.data.data
+  const navigate = useNavigate()
 
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
 
@@ -70,9 +70,9 @@ export function QuestsSummaryTableWrapper({
           {...rest}
           onClick={() => {
             if (selectedQuestId === id) {
-              setSelectedQuestId(null)
+              navigate('/quests')
             } else {
-              setSelectedQuestId(id)
+              navigate(`/quests/${id}`)
             }
           }}
           selected={id === selectedQuestId}

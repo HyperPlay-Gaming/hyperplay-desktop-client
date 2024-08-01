@@ -18,5 +18,6 @@ contextBridge.exposeInMainWorld('api', {
   apiVersion: 1,
   appIsInLibrary: async (gameId: string) =>
     ipcRenderer.invoke('appIsInLibrary', gameId, 'hyperplay'),
-  goToGamePage: (gameId: string) => ipcRenderer.send('goToGamePage', gameId)
+  goToGamePage: (gameId: string) => ipcRenderer.send('goToGamePage', gameId),
+  navigate: (route: string) => ipcRenderer.send('navigate', route)
 })
