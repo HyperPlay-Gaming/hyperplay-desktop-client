@@ -85,7 +85,7 @@ export function QuestsSummaryTableWrapper({
           image={imageUrl ?? ''}
           title={title}
           {...rest}
-          //@ts-ignore
+          //@ts-expect-error
           onClick={() => {
             if (selectedQuestId === id) {
               navigate('/quests')
