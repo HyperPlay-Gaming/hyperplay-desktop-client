@@ -53,15 +53,19 @@ export function QuestsSummaryTableWrapper({
     })
   }
 
-  function gameTitleMatches(quest: Quest){
+  function gameTitleMatches(quest: Quest) {
     const title = listings ? listings[quest.project_id]?.project_meta?.name : ''
-    const gameTitleMatch = title?.toLowerCase().startsWith(searchText.toLowerCase())
+    const gameTitleMatch = title
+      ?.toLowerCase()
+      .startsWith(searchText.toLowerCase())
     return gameTitleMatch
   }
 
   const imagesToPreload: string[] = []
-  const filteredQuests = quests?.filter(quest=>{
-    const questTitleMatch = quest.name.toLowerCase().startsWith(searchText.toLowerCase())
+  const filteredQuests = quests?.filter((quest) => {
+    const questTitleMatch = quest.name
+      .toLowerCase()
+      .startsWith(searchText.toLowerCase())
     return questTitleMatch || gameTitleMatches(quest)
   })
 
@@ -97,7 +101,7 @@ export function QuestsSummaryTableWrapper({
 
   let suggestedSearchTitles = undefined
   if (searchText) {
-    suggestedSearchTitles = filteredQuests?.map(val=>val.name)
+    suggestedSearchTitles = filteredQuests?.map((val) => val.name)
   }
 
   return (
