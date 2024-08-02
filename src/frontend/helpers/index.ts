@@ -149,13 +149,11 @@ export function getPlatformName(platform: string): string {
   }
 }
 
-// get last part of the url
 const getLastPartOfUrl = (url: string) => {
   return url.split('/').pop()
 }
 
 export const fetchEpicListing = async (projectId: string) => {
-  let appName: string | undefined
   const epicListingUrl = await window.api.getEpicListingUrl(projectId)
 
   if (!epicListingUrl) {
@@ -167,22 +165,21 @@ export const fetchEpicListing = async (projectId: string) => {
   }
 
   // filter libraryState using the epicListing url to get the appName
-  if (epicListingUrl) {
-    const lastPartOfHpUrl = getLastPartOfUrl(epicListingUrl)
-    appName = libraryState.epicLibrary.filter((g) => {
-      const game = JSON.parse(JSON.stringify(g)) as GameInfo
-      if (!game.store_url) return false
+  const lastPartOfHpUrl = getLastPartOfUrl(epicListingUrl)
+  const appName = libraryState.epicLibrary.filter((g) => {
+    const game = JSON.parse(JSON.stringify(g)) as GameInfo
+    if (!game.store_url) return false
 
-      const lastPartOfEpicUrl = getLastPartOfUrl(game.store_url)
+    const lastPartOfEpicUrl = getLastPartOfUrl(game.store_url)
 
-      if (!lastPartOfEpicUrl || !lastPartOfHpUrl) return false
+    if (!lastPartOfEpicUrl || !lastPartOfHpUrl) return false
 
-      // test the last part of the URL from the start since sometimes
-      // it might includes some numbers at the end but they are the same listing.
-      // in the future might need some adjustments depending on the game, so far work with Apeiron and Moonray
-      return lastPartOfHpUrl.startsWith(lastPartOfEpicUrl)
-    })[0].app_name
-  }
+    // test the last part of the URL from the start since sometimes
+    // it might includes some numbers at the end but they are the same listing.
+    // in the future might need some adjustments depending on the game,
+    // so far work with Apeiron and Moonray
+    return lastPartOfHpUrl.startsWith(lastPartOfEpicUrl)
+  })[0].app_name
 
   return { appName, epicListingUrl }
 }

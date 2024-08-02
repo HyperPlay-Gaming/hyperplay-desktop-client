@@ -57,7 +57,6 @@ export function QuestDetailsViewPlayWrapper({
           )
         })
         .catch(async () => {
-          console.log('Game not found in library, adding to library')
           // if hyperplay game, add to library and navigate to game page
           if (runner === 'hyperplay') {
             await window.api.addHyperplayGame(appName)
