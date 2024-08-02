@@ -95,7 +95,10 @@ export function QuestsSummaryTableWrapper({
       )
     }) ?? []
 
-  const suggestedSearchTitles = filteredQuests?.map(val=>val.name)
+  let suggestedSearchTitles = undefined
+  if (searchText) {
+    suggestedSearchTitles = filteredQuests?.map(val=>val.name)
+  }
 
   return (
     <QuestsSummaryTable
