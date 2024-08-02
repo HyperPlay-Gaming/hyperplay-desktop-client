@@ -85,7 +85,7 @@ export function QuestsSummaryTableWrapper({
           image={imageUrl ?? ''}
           title={title}
           {...rest}
-          //@ts-expect-error
+          //@ts-expect-error TODO: add onClick and all root props to QuestCard props
           onClick={() => {
             if (selectedQuestId === id) {
               navigate('/quests')
