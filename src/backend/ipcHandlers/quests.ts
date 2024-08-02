@@ -2,7 +2,6 @@ import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
 import { DEV_PORTAL_URL } from 'common/constants'
 import { GenericApiResponse, PointsClaimReturn } from 'common/types'
 import { app, ipcMain } from 'electron'
-import { logInfo } from '../api/misc'
 
 ipcMain.handle('getQuests', async (e, projectId) => {
   let url = `${DEV_PORTAL_URL}api/v1/quests?questStatus=ACTIVE`
@@ -59,15 +58,18 @@ ipcMain.handle(
     params: {
       transactionHash: string
       rewardId: number
+      transferType: string
     }
   ) => {
-    logInfo(`confirmRewardClaim: ${JSON.stringify(params)}`)
-    // const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${params.rewardId}/points-claim`
-    // return fetchWithCookie({
-    //   url,
-    //   method: 'POST',
-    //   body: JSON.stringify({ transactionHash: params.transactionHash })
-    // })
+    const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${params.rewardId}/confirm-claim`
+    return fetchWithCookie({
+      url,
+      method: 'POST',
+      body: JSON.stringify({
+        transactionHash: params.transactionHash,
+        transferType: params.transferType
+      })
+    })
   }
 )
 

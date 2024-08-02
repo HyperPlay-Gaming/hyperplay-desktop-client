@@ -4,6 +4,7 @@ import {
   GetIndividualAchievementsOptions
 } from 'common/types'
 import { ipcRenderer } from 'electron'
+import { logInfo } from './misc'
 
 export const getSummaryAchievements = async (options: GetAchievementsOptions) =>
   ipcRenderer.invoke('getSummaryAchievements', options)
@@ -27,7 +28,10 @@ export const getQuest = async (questId: number) =>
 export const confirmRewardClaim = async (params: {
   transactionHash: string
   rewardId: number
-}) => ipcRenderer.invoke('confirmRewardClaim', params)
+  transferType: string
+}) => {
+  await ipcRenderer.invoke('confirmRewardClaim', params)
+}
 
 export const getUserPlayStreak = async (questId: number) =>
   ipcRenderer.invoke('getUserPlayStreak', questId)

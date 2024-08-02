@@ -3,7 +3,8 @@ import {
   QuestDetails,
   QuestDetailsProps,
   Game,
-  QuestDetailsTranslations
+  QuestDetailsTranslations,
+  Button
 } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
@@ -169,12 +170,13 @@ export function QuestDetailsWrapper({
     mutationFn: async (params: {
       rewardId: number
       transactionHash: string
+      transferType: string
     }) => {
       console.log('triggering confirmRewardClaim', params)
       return window.api.confirmRewardClaim(params)
     },
-    retry: 5,
-    retryDelay: 1000,
+    // retry: 5,
+    // retryDelay: 1000,
     onError: (error, variables) => {
       window.api.logError(
         `Error confirming reward claim ${
@@ -311,7 +313,8 @@ export function QuestDetailsWrapper({
 
     await confirmClaimMutation.mutateAsync({
       rewardId: reward.id,
-      transactionHash: hash
+      transactionHash: hash,
+      transferType: 'WITHDRAW'
     })
   }
 
@@ -484,13 +487,26 @@ export function QuestDetailsWrapper({
       chainTooltips: {}
     }
     questDetails = (
-      <QuestDetails
-        {...questDetailsProps}
-        className={styles.questDetails}
-        key={`questDetailsLoadedId${
-          questMeta.id
-        }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
-      />
+      <>
+        <Button
+          onClick={async () => {
+            await confirmClaimMutation.mutateAsync({
+              rewardId: 0,
+              transactionHash: '0x0',
+              transferType: 'WITHDRAW'
+            })
+          }}
+        >
+          Test
+        </Button>
+        <QuestDetails
+          {...questDetailsProps}
+          className={styles.questDetails}
+          key={`questDetailsLoadedId${
+            questMeta.id
+          }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
+        />
+      </>
     )
   } else if (
     questResult?.data.isLoading ||

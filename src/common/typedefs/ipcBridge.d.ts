@@ -281,6 +281,7 @@ interface HyperPlayAsyncIPCFunctions {
   confirmRewardClaim: (params: {
     transactionHash: string
     rewardId: number
+    transferType: string
   }) => Promise<void>
   getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
   getQuestRewardSignature: (
