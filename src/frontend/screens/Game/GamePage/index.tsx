@@ -21,6 +21,8 @@ import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
+import walletStore from 'frontend/state/WalletState'
+import onboardingStore from 'frontend/store/OnboardingStore'
 
 import {
   AppPlatforms,
@@ -551,7 +553,11 @@ export default observer(function GamePage(): JSX.Element | null {
                       )}
                     </>
                   )}
-                  <TimeContainer runner={runner} game={appName} />
+                  <TimeContainer
+                    runner={runner}
+                    game={appName}
+                    status={status}
+                  />
                 </div>
               </div>
               <div className="gameStatus">
@@ -865,6 +871,15 @@ export default observer(function GamePage(): JSX.Element | null {
     return async () => {
       if (isPlaying || isUpdating) {
         return window.api.kill(appName, gameInfo.runner)
+      }
+
+      // ask to connect the wallet if its a web3 game
+      if (gameInfo.web3?.supported && !walletStore.isConnected) {
+        try {
+          await onboardingStore.startOnboarding()
+        } catch (e) {
+          console.error('User denied onboarding')
+        }
       }
 
       // open game
