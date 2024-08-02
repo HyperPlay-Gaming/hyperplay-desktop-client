@@ -103,8 +103,8 @@ export function QuestsSummaryTableWrapper({
         ]
       }
       messageModalProps={{
-        title: 'No Quests Found.',
-        message: 'There were no quests found.'
+        title: t('quests.noneFound.title', 'No Quests Found.'),
+        message: t('quests.noneFound.message', 'There were no quests found.')
       }}
       pageTitle={t('quests.quests', 'Quests')}
       className={styles.tableContainer}
