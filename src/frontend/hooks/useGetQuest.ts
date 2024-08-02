@@ -4,7 +4,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query'
 export default function useGetQuest(questId: number | null) {
   const queryClient = useQueryClient()
   const queryKey = `getQuest:${questId}`
-  const query = useQuery<Quest>({
+  const query = useQuery<Quest | null>({
     queryKey: [queryKey],
     queryFn: async () => {
       if (questId === null) {
