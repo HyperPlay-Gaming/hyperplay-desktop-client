@@ -10,7 +10,7 @@ import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
-import { GameInfo, Runner } from 'common/types'
+import { Runner } from 'common/types'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -35,26 +35,34 @@ export function QuestDetailsViewPlayWrapper({
     questMeta?.eligibility?.steam_games ?? []
   )
 
-
   const navigateToGame = useMutation({
     mutationFn: async (appName: string) => {
-      let gameInfo: GameInfo | null = null
-      const {appName: epicAppName, epicListingUrl} = await fetchEpicListing(appName)
+      const { appName: epicAppName, epicListingUrl } = await fetchEpicListing(
+        appName
+      )
       const runner: Runner = epicListingUrl ? 'legendary' : 'hyperplay'
 
       // check for gameinfo to see if it is on the library
       return getGameInfo(epicAppName || appName, runner)
         .then((res) => {
-          gameInfo = res
-          return navigate(`/gamepage/${runner}/${epicAppName ? epicAppName : appName}`, {
-            state: { gameInfo, fromDM: false }
-          })
+          if (!res) {
+            throw new Error('Game not found in library')
+          }
+
+          return navigate(
+            `/gamepage/${runner}/${epicAppName ? epicAppName : appName}`,
+            {
+              state: { gameInfo: res, fromDM: false }
+            }
+          )
         })
         .catch(async () => {
+          console.log('Game not found in library, adding to library')
           // if hyperplay game, add to library and navigate to game page
           if (runner === 'hyperplay') {
             await window.api.addHyperplayGame(appName)
-            gameInfo = await getGameInfo(appName, runner)
+            const gameInfo = await getGameInfo(appName, runner)
+
             return navigate(`/gamepage/hyperplay/${appName}`, {
               state: { gameInfo, fromDM: false }
             })

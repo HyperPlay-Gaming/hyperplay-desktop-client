@@ -158,8 +158,12 @@ export const fetchEpicListing = async (projectId: string) => {
   let appName: string | undefined
   const epicListingUrl = await window.api.getEpicListingUrl(projectId)
 
-  if (!epicListingUrl || !libraryState.epicLibrary) {
+  if (!epicListingUrl) {
     return { appName: '', epicListingUrl: '' }
+  }
+
+  if (!libraryState.epicLibrary.length) {
+    return { appName: '', epicListingUrl }
   }
 
   // filter libraryState using the epicListing url to get the appName
