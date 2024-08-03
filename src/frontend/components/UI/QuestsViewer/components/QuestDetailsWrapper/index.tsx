@@ -28,7 +28,7 @@ import {
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { getPlaystreakArgsFromQuestData, resetSessionStartedTime } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { createPublicClient } from 'viem'
 import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
@@ -177,6 +177,14 @@ export function QuestDetailsWrapper({
       imageUrl: val.data?.capsule_image ?? '',
       loading: val.isLoading || val.isFetching
     })) ?? []
+
+  useEffect(()=>{
+    setInterval(async ()=>{
+      await window.api.syncPlaySession(projectId, 'hyperplay')
+      await questPlayStreakResult.invalidateQuery()
+      resetSessionStartedTime()
+    }, 1000*60)
+  }, [])
 
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
   const session = useAuthSession()
