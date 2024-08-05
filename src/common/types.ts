@@ -944,6 +944,7 @@ export interface RewardClaimSignature {
   signature: `0x${string}`
   nonce: string
   expiration: number
+  tokenIds: number[]
 }
 
 export interface DepositContract {
