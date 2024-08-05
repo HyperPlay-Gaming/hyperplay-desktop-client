@@ -171,6 +171,9 @@ export function QuestDetailsWrapper({
     },
     retry: 5,
     retryDelay: 1000,
+    onSuccess: async () => {
+      await questPlayStreakResult.invalidateQuery()
+    },
     onError: (error, variables) => {
       window.api.logError(
         `Error confirming reward claim ${
