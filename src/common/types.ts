@@ -396,7 +396,9 @@ export interface LaunchPreperationResult {
 
 export interface RpcClient {
   updatePresence(d: unknown): void
+
   reply(user: unknown, response: unknown): void
+
   disconnect(): void
 }
 
@@ -862,6 +864,7 @@ export interface GetIndividualAchievementsOptions extends PlayerOptions {
   page: number
   pageSize: number
 }
+
 export interface AchievementsStats {
   newAchievements: number
   mintedAchievements: number
@@ -879,6 +882,7 @@ export type Filter =
   | 'alphabeticalAscending'
   | 'alphabeticalDescending'
   | 'sortByInstalled'
+
 export interface FilterItem extends DropdownItemType {
   id?: Filter
 }
@@ -958,6 +962,13 @@ export interface PointsClaimReturn {
   message?: string
   // sent on success
   success?: string
+}
+
+export interface ConfirmClaimParams {
+  transactionHash: string
+  rewardId: number
+  transferType: string
+  signature: string
 }
 
 export interface UserPlayStreak {

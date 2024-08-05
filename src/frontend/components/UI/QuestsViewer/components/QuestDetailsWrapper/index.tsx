@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {
+  Game,
   QuestDetails,
   QuestDetailsProps,
-  Game,
-  QuestDetailsTranslations,
-  Button
+  QuestDetailsTranslations
 } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
@@ -12,13 +11,13 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import {
-  useWriteContract,
-  useAccount,
-  useSwitchChain,
   http,
-  useBalance
+  useAccount,
+  useBalance,
+  useSwitchChain,
+  useWriteContract
 } from 'wagmi'
-import { Reward } from 'common/types'
+import { ConfirmClaimParams, Reward, RewardClaimSignature } from 'common/types'
 import authState from 'frontend/state/authState'
 import { mintReward } from './rewards/mintReward'
 import { claimPoints } from './rewards/claimPoints'
@@ -167,16 +166,11 @@ export function QuestDetailsWrapper({
   })
 
   const confirmClaimMutation = useMutation({
-    mutationFn: async (params: {
-      rewardId: number
-      transactionHash: string
-      transferType: string
-    }) => {
-      console.log('triggering confirmRewardClaim', params)
+    mutationFn: async (params: ConfirmClaimParams) => {
       return window.api.confirmRewardClaim(params)
     },
-    // retry: 5,
-    // retryDelay: 1000,
+    retry: 5,
+    retryDelay: 1000,
     onError: (error, variables) => {
       window.api.logError(
         `Error confirming reward claim ${
@@ -302,16 +296,33 @@ export function QuestDetailsWrapper({
       return
     }
 
+    let tokenId: number | undefined = undefined
+
+    const isERC1155Reward =
+      reward.reward_type === 'ERC1155' && reward.token_ids.length === 1
+
+    if (isERC1155Reward) {
+      tokenId = reward.token_ids[0].token_id
+    }
+
+    const claimSignature: RewardClaimSignature =
+      await window.api.getQuestRewardSignature(
+        account.address,
+        reward.id,
+        tokenId
+      )
+
     // awaiting is fine for now because we're doing a single write contract at a time,
     // but we might want to not block the UI thread when we implement multiple claims
     const hash = await mintReward({
       questId: questMeta.id,
-      address: account.address,
+      signature: claimSignature,
       reward,
       writeContractAsync
     })
 
     await confirmClaimMutation.mutateAsync({
+      signature: claimSignature.signature,
       rewardId: reward.id,
       transactionHash: hash,
       transferType: 'WITHDRAW'
@@ -487,26 +498,13 @@ export function QuestDetailsWrapper({
       chainTooltips: {}
     }
     questDetails = (
-      <>
-        <Button
-          onClick={async () => {
-            await confirmClaimMutation.mutateAsync({
-              rewardId: 0,
-              transactionHash: '0x0',
-              transferType: 'WITHDRAW'
-            })
-          }}
-        >
-          Test
-        </Button>
-        <QuestDetails
-          {...questDetailsProps}
-          className={styles.questDetails}
-          key={`questDetailsLoadedId${
-            questMeta.id
-          }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
-        />
-      </>
+      <QuestDetails
+        {...questDetailsProps}
+        className={styles.questDetails}
+        key={`questDetailsLoadedId${
+          questMeta.id
+        }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
+      />
     )
   } else if (
     questResult?.data.isLoading ||

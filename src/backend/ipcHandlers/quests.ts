@@ -1,6 +1,10 @@
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
 import { DEV_PORTAL_URL } from 'common/constants'
-import { GenericApiResponse, PointsClaimReturn } from 'common/types'
+import {
+  ConfirmClaimParams,
+  GenericApiResponse,
+  PointsClaimReturn
+} from 'common/types'
 import { app, ipcMain } from 'electron'
 
 ipcMain.handle('getQuests', async (e, projectId) => {
@@ -51,27 +55,18 @@ ipcMain.handle('claimQuestPointsReward', async (e, rewardId) => {
   return (await fetchWithCookie({ url, method: 'POST' })) as PointsClaimReturn
 })
 
-ipcMain.handle(
-  'confirmRewardClaim',
-  async (
-    e,
-    params: {
-      transactionHash: string
-      rewardId: number
-      transferType: string
-    }
-  ) => {
-    const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${params.rewardId}/confirm-claim`
-    return fetchWithCookie({
-      url,
-      method: 'POST',
-      body: JSON.stringify({
-        transactionHash: params.transactionHash,
-        transferType: params.transferType
-      })
+ipcMain.handle('confirmRewardClaim', async (e, params: ConfirmClaimParams) => {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${params.rewardId}/confirm-claim`
+  return fetchWithCookie({
+    url,
+    method: 'POST',
+    body: JSON.stringify({
+      transactionHash: params.transactionHash,
+      transferType: params.transferType,
+      signature: params.signature
     })
-  }
-)
+  })
+})
 
 ipcMain.handle('completeExternalTask', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/completed`

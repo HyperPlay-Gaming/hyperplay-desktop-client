@@ -6,15 +6,13 @@ import { Config } from 'wagmi'
 export async function mintReward({
   reward,
   questId,
-  address,
-  writeContractAsync,
-  onSuccess
+  signature,
+  writeContractAsync
 }: {
   reward: Reward
   questId: number
-  address: `0x${string}`
+  signature: RewardClaimSignature
   writeContractAsync: WriteContractMutateAsync<Config, unknown>
-  onSuccess?: (hash: string) => void
 }) {
   if (reward.chain_id === null) {
     throw Error('chain id is not set for reward when trying to mint')
@@ -22,18 +20,6 @@ export async function mintReward({
 
   const isERC1155Reward =
     reward.reward_type === 'ERC1155' && reward.token_ids.length === 1
-
-  let tokenId: number | undefined = undefined
-
-  if (isERC1155Reward) {
-    tokenId = reward.token_ids[0].token_id
-  }
-
-  const sig: RewardClaimSignature = await window.api.getQuestRewardSignature(
-    address,
-    reward.id,
-    tokenId
-  )
 
   const depositContracts: DepositContract[] =
     await window.api.getDepositContracts(questId)
@@ -57,7 +43,6 @@ export async function mintReward({
     reward.amount_per_user &&
     reward.decimals
   ) {
-    console.log('trigger hash')
     return writeContractAsync(
       {
         address: depositContractAddress,
@@ -67,21 +52,13 @@ export async function mintReward({
           BigInt(questId),
           reward.contract_address,
           BigInt(reward.amount_per_user),
-          BigInt(sig.nonce),
-          BigInt(sig.expiration),
-          sig.signature
+          BigInt(signature.nonce),
+          BigInt(signature.expiration),
+          signature.signature
         ]
       },
       {
-        onError: logError,
-        onSuccess: (hash) => {
-          window.api.logInfo(`Success hash: ${hash}`)
-          console.log('success hash', hash)
-        },
-        onSettled: () => {
-          window.api.logInfo('Settled')
-          console.log('settled')
-        }
+        onError: logError
       }
     )
   } else if (isERC1155Reward && reward.decimals !== null) {
@@ -96,14 +73,13 @@ export async function mintReward({
           reward.contract_address,
           BigInt(token_id),
           BigInt(amount_per_user),
-          BigInt(sig.nonce),
-          BigInt(sig.expiration),
-          sig.signature
+          BigInt(signature.nonce),
+          BigInt(signature.expiration),
+          signature.signature
         ]
       },
       {
-        onError: logError,
-        onSuccess
+        onError: logError
       }
     )
   } else if (reward.reward_type === 'ERC721' && reward.amount_per_user) {
@@ -117,14 +93,13 @@ export async function mintReward({
           reward.contract_address,
           // TODO: supply token id from return statement of get sig
           BigInt('0'),
-          BigInt(sig.nonce),
-          BigInt(sig.expiration),
-          sig.signature
+          BigInt(signature.nonce),
+          BigInt(signature.expiration),
+          signature.signature
         ]
       },
       {
-        onError: logError,
-        onSuccess
+        onError: logError
       }
     )
   }
