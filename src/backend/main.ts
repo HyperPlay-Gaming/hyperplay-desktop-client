@@ -126,10 +126,7 @@ import {
   getMainWindow,
   sendFrontendMessage
 } from './main_window'
-import {
-  addGameToLibrary,
-  getEpicListingUrl
-} from './storeManagers/hyperplay/library'
+import { addGameToLibrary } from './storeManagers/hyperplay/library'
 
 import * as HyperPlayGameManager from 'backend/storeManagers/hyperplay/games'
 import * as HyperPlayLibraryManager from 'backend/storeManagers/hyperplay/library'
@@ -184,7 +181,10 @@ import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
 import 'backend/utils/auto_launch'
 import { hrtime } from 'process'
-import { getHyperPlayReleaseObject } from './storeManagers/hyperplay/utils'
+import {
+  getEpicListingUrl,
+  getHyperPlayReleaseObject
+} from './storeManagers/hyperplay/utils'
 import { postPlaySessionTime } from './utils/quests'
 
 import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'

@@ -40,17 +40,25 @@ export function QuestDetailsViewPlayWrapper({
       const { appName: epicAppName, epicListingUrl } = await fetchEpicListing(
         appName
       )
-      const runner: Runner = epicListingUrl ? 'legendary' : 'hyperplay'
+
+      let runner: Runner = 'hyperplay'
+      let name = appName
+      if (epicListingUrl){
+        runner = 'legendary'
+        if (epicAppName) {
+          name = epicAppName
+        }
+      }
 
       // check for gameinfo to see if it is on the library
-      return getGameInfo(epicAppName || appName, runner)
+      return getGameInfo(name, runner)
         .then((res) => {
           if (!res) {
             throw new Error('Game not found in library')
           }
-
+          
           return navigate(
-            `/gamepage/${runner}/${epicAppName ? epicAppName : appName}`,
+            `/gamepage/${runner}/${name}`,
             {
               state: { gameInfo: res, fromDM: false }
             }
@@ -59,11 +67,11 @@ export function QuestDetailsViewPlayWrapper({
         .catch(async () => {
           // if hyperplay game, add to library and navigate to game page
           if (runner === 'hyperplay') {
-            await window.api.addHyperplayGame(appName)
-            const gameInfo = await getGameInfo(appName, runner)
+            await window.api.addHyperplayGame(name)
+            const gameInfo = await getGameInfo(name, runner)
 
-            return navigate(`/gamepage/hyperplay/${appName}`, {
-              state: { gameInfo, fromDM: false }
+            return navigate(`/gamepage/hyperplay/${name}`, {
+              state: { gameInfo, fromDM: false}
             })
           }
           // if epic game, open in epic store

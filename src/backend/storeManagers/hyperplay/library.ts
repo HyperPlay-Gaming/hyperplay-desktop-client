@@ -18,7 +18,6 @@ import {
 } from './utils'
 import { getGameInfo as getGamesGameInfo } from './games'
 import { getValistListingApiUrl, qaToken } from 'backend/constants'
-import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
 
 export async function addGameToLibrary(projectId: string) {
   const currentLibrary = hpLibraryStore.get('games', [])
@@ -45,38 +44,6 @@ export async function addGameToLibrary(projectId: string) {
   const data = res.data
   const gameInfo = getGameInfoFromHpRelease(data)
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
-}
-
-// hit the valist api and get the info if the game is a epic listing
-export async function getEpicListingUrl(projectId: string): Promise<string> {
-  const listingUrl = getValistListingApiUrl(projectId)
-
-  try {
-    const getConfig =
-      qaToken !== '' ? { headers: { Authorization: `Bearer ${qaToken}` } } : {}
-    const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
-
-    if (res.status !== 200) {
-      logError(`Error when trying to get listing info ${res}`)
-      return ''
-    }
-
-    const data = res.data
-    const { epic_game_url, launch_epic } =
-      data.project_meta as ProjectMetaInterface
-
-    if (
-      !!launch_epic &&
-      !!epic_game_url &&
-      epic_game_url.startsWith('https://store.epicgames.com/')
-    ) {
-      return epic_game_url
-    }
-    return ''
-  } catch (error) {
-    logError(`Error when trying to get listing info: ${error}`)
-    return ''
-  }
 }
 
 export const getInstallInfo = async (
