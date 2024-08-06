@@ -28,11 +28,15 @@ import {
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-import { getPlaystreakArgsFromQuestData, resetSessionStartedTime } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import {
+  getPlaystreakArgsFromQuestData,
+  resetSessionStartedTime
+} from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { createPublicClient } from 'viem'
 import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
 import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
+import { wait } from '@hyperplay/utils'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -178,13 +182,19 @@ export function QuestDetailsWrapper({
       loading: val.isLoading || val.isFetching
     })) ?? []
 
-  useEffect(()=>{
-    setInterval(async ()=>{
+  useEffect(() => {
+    const syncTimer = setInterval(async () => {
       await window.api.syncPlaySession(projectId, 'hyperplay')
+      // allow for some time before read
+      await wait(5000)
       await questPlayStreakResult.invalidateQuery()
       resetSessionStartedTime()
-    }, 1000*60)
-  }, [])
+    }, 1000 * 60)
+
+    return () => {
+      clearInterval(syncTimer)
+    }
+  }, [selectedQuestId])
 
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
   const session = useAuthSession()

@@ -1155,6 +1155,9 @@ async function syncPlaySession(appName: string, runner: Runner) {
     (stopPlayingTimeMonotonic - gamePlaySessionStartTimes[appName]) /
     BigInt(1000000)
 
+  // reset the time counter
+  startNewPlaySession(appName)
+
   // update local json with time played
   const sessionPlaytimeInMinutes =
     sessionPlaytimeInMs / BigInt(1000) / BigInt(60)
@@ -1178,9 +1181,6 @@ async function syncPlaySession(appName: string, runner: Runner) {
       parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
     )
   }
-
-  // reset the time counter
-  startNewPlaySession(appName)
 
   return sessionPlaytimeInMs
 }
