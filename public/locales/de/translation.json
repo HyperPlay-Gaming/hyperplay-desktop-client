@@ -881,7 +881,8 @@
         "turnAnalyticsOn": "Einschalten",
         "discordApp": "Discord",
         "folder": "Verzeichnis",
-        "Sync": "Sync"
+        "Sync": "Sync",
+        "viewFullscreen": "Vollbild anzeigen"
     },
     "hyperplayOverlay": {
         "txnRequest": {

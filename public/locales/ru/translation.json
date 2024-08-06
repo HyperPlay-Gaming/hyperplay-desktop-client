@@ -881,7 +881,8 @@
         "syncing": "Синхронизация...",
         "viewMyAccount": "Просмотр моей учетной записи",
         "analyticsOn": "Аналитика включена",
-        "linkSteamAccountCta": "Перейти на знак Steam"
+        "linkSteamAccountCta": "Перейти на знак Steam",
+        "viewFullscreen": "Смотреть полный экран"
     },
     "gameRelease": {
         "alpha": "Альфа",

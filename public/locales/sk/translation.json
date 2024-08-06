@@ -883,7 +883,8 @@
         "discordApp": "Discord",
         "logOut": "Odhlásiť sa",
         "copyUrl": "Kopírovať adresu URL",
-        "misc": "Nikdy"
+        "misc": "Nikdy",
+        "viewFullscreen": "Zobraziť celú obrazovku"
     },
     "hyperplayOverlay": {
         "greeting": {

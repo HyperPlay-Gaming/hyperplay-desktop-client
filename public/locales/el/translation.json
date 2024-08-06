@@ -880,7 +880,8 @@
         "turnAnalyticsOff": "Απενεργοποίηση",
         "turnAnalyticsOn": "Ενεργοποίηση",
         "logOut": "Αποσύνδεση",
-        "Sync": "Συγχρονισμός"
+        "Sync": "Συγχρονισμός",
+        "viewFullscreen": "Δείτε πλήρη οθόνη"
     },
     "hyperplayOverlay": {
         "signatureRequest": {

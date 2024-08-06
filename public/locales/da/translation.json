@@ -937,7 +937,8 @@
         "folder": "Mappe",
         "turnAnalyticsOn": "Slå til",
         "Sync": "Synkronisering",
-        "syncing": "Synkroniserer..."
+        "syncing": "Synkroniserer...",
+        "viewFullscreen": "Se fuld skærm"
     },
     "hyperplayOverlay": {
         "chainRequest": {

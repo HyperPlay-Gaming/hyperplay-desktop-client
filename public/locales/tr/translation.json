@@ -880,7 +880,8 @@
         "viewPortfolio": "View portföy",
         "publicAlpha": "Public Alpha",
         "viewMyAccount": "Hesabımı Görüntüle",
-        "linkSteamAccountCta": "Steam işaretine gidin"
+        "linkSteamAccountCta": "Steam işaretine gidin",
+        "viewFullscreen": "View fullscreen"
     },
     "gameRelease": {
         "main": "Ana",
