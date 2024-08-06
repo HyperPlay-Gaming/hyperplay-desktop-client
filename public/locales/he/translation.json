@@ -884,7 +884,8 @@
         "linkSteamAccountDescription": "היכנס ל-Steam כדי לקשר את חשבון HyperPlay שלך.",
         "linkSteamAccountTitle": "קישור לחשבון Steam",
         "analyticsOff": "Analytics כבוי",
-        "changeWallet": "חשבון הארנק"
+        "changeWallet": "חשבון הארנק",
+        "viewFullscreen": "הצג מסך מלא"
     },
     "analytics": "ניתוח",
     "sideload": {

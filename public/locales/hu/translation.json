@@ -881,7 +881,8 @@
         "linkSteamAccountTitle": "Link Steam fiók",
         "viewItem": "{{item}}",
         "analyticsOff": "Az analitika kikapcsolódik",
-        "otp": "Egyszer Passcode"
+        "otp": "Egyszer Passcode",
+        "viewFullscreen": "Teljes képernyő"
     },
     "gameRelease": {
         "main": "Fő",
