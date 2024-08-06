@@ -386,9 +386,8 @@ export function QuestDetailsWrapper({
 
   if (
     selectedQuestId !== null &&
-    questMeta !== undefined &&
-    questMeta !== null &&
-    questRewards !== undefined
+    questMeta &&
+    questRewards
   ) {
     const isRewardTypeClaimable = Boolean(
       questMeta?.rewards?.some(
