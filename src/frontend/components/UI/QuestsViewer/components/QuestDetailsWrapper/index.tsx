@@ -384,11 +384,7 @@ export function QuestDetailsWrapper({
     resetWriteContract()
   }, [selectedQuestId])
 
-  if (
-    selectedQuestId !== null &&
-    questMeta &&
-    questRewards
-  ) {
+  if (selectedQuestId !== null && questMeta && questRewards) {
     const isRewardTypeClaimable = Boolean(
       questMeta?.rewards?.some(
         (reward) => rewardTypeClaimEnabled[reward.reward_type]
