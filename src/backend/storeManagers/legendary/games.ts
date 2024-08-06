@@ -42,7 +42,13 @@ import {
   isFlatpak,
   isCLINoGui
 } from '../../constants'
-import { logError, logInfo, LogPrefix, logsDisabled } from '../../logger/logger'
+import {
+  logError,
+  logInfo,
+  LogPrefix,
+  logsDisabled,
+  logWarning
+} from '../../logger/logger'
 import {
   prepareLaunch,
   prepareWineLaunch,
@@ -299,7 +305,14 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
 
   // if the API doesn't work, try graphql
   if (!extraData) {
-    extraData = await getExtraFromGraphql(namespace, slug)
+    try {
+      extraData = await getExtraFromGraphql(namespace, slug)
+    } catch (error) {
+      logWarning(
+        `Error hitting the EpicGraphQL API for ${title}`,
+        LogPrefix.Legendary
+      )
+    }
   }
 
   // if we have data, store it and return
@@ -307,7 +320,6 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
     gameInfoStore.set(namespace, extraData)
     return extraData
   } else {
-    logError('Error Getting Info from Epic API', LogPrefix.Legendary)
     return {
       about: {
         description: '',
