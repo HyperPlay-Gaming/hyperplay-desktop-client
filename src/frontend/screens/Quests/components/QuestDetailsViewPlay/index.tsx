@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { getGameInfo } from 'frontend/helpers'
+import { fetchEpicListing, getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
+import { Runner } from 'common/types'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -36,11 +37,43 @@ export function QuestDetailsViewPlayWrapper({
 
   const navigateToGame = useMutation({
     mutationFn: async (appName: string) => {
-      await window.api.addHyperplayGame(appName)
-      const gameInfo = await getGameInfo(appName, 'hyperplay')
-      navigate(`/gamepage/hyperplay/${appName}`, {
-        state: { gameInfo, fromDM: false }
-      })
+      const { appName: epicAppName, epicListingUrl } = await fetchEpicListing(
+        appName
+      )
+
+      let runner: Runner = 'hyperplay'
+      let name = appName
+      if (epicListingUrl) {
+        runner = 'legendary'
+        if (epicAppName) {
+          name = epicAppName
+        }
+      }
+
+      // check for gameinfo to see if it is on the library
+      return getGameInfo(name, runner)
+        .then((res) => {
+          if (!res) {
+            throw new Error('Game not found in library')
+          }
+
+          return navigate(`/gamepage/${runner}/${name}`, {
+            state: { gameInfo: res, fromQuests: true }
+          })
+        })
+        .catch(async () => {
+          // if hyperplay game, add to library and navigate to game page
+          if (runner === 'hyperplay') {
+            await window.api.addHyperplayGame(name)
+            const gameInfo = await getGameInfo(name, runner)
+
+            return navigate(`/gamepage/hyperplay/${name}`, {
+              state: { gameInfo, fromQuests: true }
+            })
+          }
+          // if epic game, open in epic store
+          return navigate(`/store-page?store-url=${epicListingUrl}`)
+        })
     },
     onError: (error, variable) => {
       window.api.logError(

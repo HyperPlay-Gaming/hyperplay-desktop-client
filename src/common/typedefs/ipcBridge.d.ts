@@ -295,6 +295,7 @@ interface HyperPlayAsyncIPCFunctions {
   getPointsBalancesForProject: (
     projectId: string
   ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
+  getEpicListingUrl: (appName: string) => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
