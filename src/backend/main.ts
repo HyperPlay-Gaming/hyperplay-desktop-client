@@ -1167,20 +1167,11 @@ async function syncPlaySession(appName: string, runner: Runner) {
   tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
 
   const game = gameManagerMap[runner].getGameInfo(appName)
-  const { gameIsEpicForwarderOnHP, hyperPlayListing } =
-    await gameIsEpicForwarderOnHyperPlay(game)
-
-  if (gameIsEpicForwarderOnHP && hyperPlayListing) {
-    postPlaySessionTime(
-      hyperPlayListing.project_id,
-      parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
-    )
-  } else {
-    postPlaySessionTime(
-      appName,
-      parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
-    )
-  }
+  const { hyperPlayListing } = await gameIsEpicForwarderOnHyperPlay(game)
+  postPlaySessionTime(
+    hyperPlayListing?.project_id || appName,
+    parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
+  )
 
   return sessionPlaytimeInMs
 }
