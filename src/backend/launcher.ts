@@ -54,7 +54,7 @@ import {
   WineCommandArgs,
   SteamRuntime
 } from 'common/types'
-import { execSync, spawn } from 'child_process'
+import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
@@ -1088,7 +1088,14 @@ async function stopChildProcesses(childPid: number) {
     return
   }
 
-  return execSync(`pkill -TERM -P ${childPid}`)
+  try {
+    return await spawnAsync('pkill', ['-TERM', '-P', childPid.toString()])
+  } catch (error) {
+    return logWarning(
+      `could not stop child processes from PID: ${childPid}. Maybe they were already stopped`,
+      LogPrefix.Backend
+    )
+  }
 }
 
 /**
