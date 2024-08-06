@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
 import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Quest } from 'common/types'
 
 export interface QuestsSummaryTableWrapperProps {
@@ -21,7 +21,12 @@ export function QuestsSummaryTableWrapper({
   const hyperplayListings = useGetHyperPlayListings()
   const listings = hyperplayListings.data.data
   const navigate = useNavigate()
-  const [searchText, setSearchText] = useState('')
+
+  const { search } = useLocation()
+  const searchParams = new URLSearchParams(search)
+  const searchParam = searchParams.get('search')
+
+  const [searchText, setSearchText] = useState(searchParam ?? '')
 
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
 
