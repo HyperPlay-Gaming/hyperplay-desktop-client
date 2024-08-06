@@ -62,7 +62,6 @@ ipcMain.handle('confirmRewardClaim', async (e, params: ConfirmClaimParams) => {
     method: 'POST',
     body: JSON.stringify({
       transactionHash: params.transactionHash,
-      transferType: params.transferType,
       signature: params.signature
     })
   })

@@ -327,8 +327,7 @@ export function QuestDetailsWrapper({
     await confirmClaimMutation.mutateAsync({
       signature: claimSignature.signature,
       rewardId: reward.id,
-      transactionHash: hash,
-      transferType: 'WITHDRAW'
+      transactionHash: hash
     })
   }
 
