@@ -3,7 +3,11 @@ import {
   QuestDetails,
   QuestDetailsProps,
   Game,
-  QuestDetailsTranslations
+  QuestDetailsTranslations,
+  ModalProps,
+  Modal,
+  Button,
+  Images
 } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
@@ -89,6 +93,63 @@ async function getRewardClaimGasEstimation(reward: Reward) {
   return gasNeeded
 }
 
+interface ConfirmProps extends ModalProps {
+  networkName: string
+  onConfirm: () => void
+  onCancel: () => void
+}
+
+function ConfirmClaimModal(props: ConfirmProps) {
+  const { t } = useTranslation()
+  return (
+    <Modal {...props} classNames={{ root: styles.confirmModal }}>
+      <Images.AlertTriangle
+        className={styles.alertIcon}
+        width={24}
+        height={24}
+      />
+      <div className={styles.confirmTextWrapper}>
+        <Modal.Body className={styles.confirmText}>
+          <Modal.Title>
+            {t('quest.claimWarning.title', 'Confirm Quest Reward Claim')}
+          </Modal.Title>
+          <span>
+            <span className="text--bold">
+              {t('quest.claimWarning.important', 'IMPORTANT')}:
+            </span>{' '}
+            {t(
+              'quest.claimWarning.networkMessage',
+              `Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed`,
+              { networkName: props.networkName }
+            )}{' '}
+            <span className="text--bold">
+              {t('quest.claimWarning.within24Hrs', 'within 24 hrs')}
+            </span>
+          </span>
+          <span>
+            {t('quest.claimWarning.otherwise', 'Otherwise, the Quest Reward')}{' '}
+            <span className="text--bold">
+              {t(
+                'quest.claimWarning.expire',
+                'will expire and will no longer be claimable'
+              )}
+              .
+            </span>
+          </span>
+        </Modal.Body>
+        <div className={styles.buttonsContainer}>
+          <Button type="tertiary" onClick={props.onCancel}>
+            {t('quest.claimWarning.cancel', 'cancel')}
+          </Button>
+          <Button type="secondary" onClick={props.onConfirm}>
+            {t('quest.claimWarning.confirm', 'confirm')}
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
 export function QuestDetailsWrapper({
   selectedQuestId,
   projectId
@@ -117,6 +178,7 @@ export function QuestDetailsWrapper({
 
   const flags = useFlags()
   const account = useAccount()
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
   const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
@@ -286,7 +348,20 @@ export function QuestDetailsWrapper({
     })
   }
 
-  async function claimRewards(rewards: Reward[]) {
+  async function claimRewards({
+    rewards,
+    confirmed
+  }: {
+    rewards: Reward[]
+    confirmed?: boolean
+  }) {
+    if (!confirmed) {
+      setShowConfirmModal(true)
+      return
+    }
+
+    setShowConfirmModal(false)
+
     for (const reward_i of rewards) {
       const isRewardTypeClaimable = rewardTypeClaimEnabled[reward_i.reward_type]
       if (selectedQuestId === null || !isRewardTypeClaimable) {
@@ -343,8 +418,8 @@ export function QuestDetailsWrapper({
   }
 
   const claimRewardsMutation = useMutation({
-    mutationFn: async (rewards: Reward[]) => {
-      return claimRewards(rewards)
+    mutationFn: async (params: { rewards: Reward[]; confirmed?: boolean }) => {
+      return claimRewards(params)
     },
     onSuccess: async () => {
       await questPlayStreakResult.invalidateQuery()
@@ -417,6 +492,14 @@ export function QuestDetailsWrapper({
       }
     }
 
+    let networkName = ''
+
+    if (questMeta.rewards?.[0].chain_id) {
+      networkName = chainMap[questMeta.rewards[0].chain_id]?.chain?.name ?? ''
+    }
+
+    const rewardsToClaim = questMeta.rewards ?? []
+
     const questDetailsProps: QuestDetailsProps = {
       alertProps,
       questType: questMeta.type,
@@ -438,7 +521,7 @@ export function QuestDetailsWrapper({
       rewards: questRewards ?? [],
       i18n,
       onClaimClick: async () =>
-        claimRewardsMutation.mutate(questMeta.rewards ?? []),
+        claimRewardsMutation.mutate({ rewards: rewardsToClaim }),
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
@@ -455,13 +538,27 @@ export function QuestDetailsWrapper({
       chainTooltips: {}
     }
     questDetails = (
-      <QuestDetails
-        {...questDetailsProps}
-        className={styles.questDetails}
-        key={`questDetailsLoadedId${
-          questMeta.id
-        }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
-      />
+      <>
+        <ConfirmClaimModal
+          isOpen={showConfirmModal}
+          onConfirm={() =>
+            claimRewardsMutation.mutate({
+              rewards: rewardsToClaim,
+              confirmed: true
+            })
+          }
+          onCancel={() => setShowConfirmModal(false)}
+          onClose={() => {}}
+          networkName={networkName}
+        />
+        <QuestDetails
+          {...questDetailsProps}
+          className={styles.questDetails}
+          key={`questDetailsLoadedId${
+            questMeta.id
+          }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
+        />
+      </>
     )
   } else if (
     questResult?.data.isLoading ||
