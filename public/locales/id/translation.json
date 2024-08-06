@@ -884,7 +884,8 @@
         "logOut": "Keluar",
         "copyUrl": "Salin URL",
         "Sync": "Sinkronisasi",
-        "turnAnalyticsOff": "Matikan"
+        "turnAnalyticsOff": "Matikan",
+        "viewFullscreen": "Lihat layar penuh"
     },
     "hyperplayOverlay": {
         "signatureRequest": {

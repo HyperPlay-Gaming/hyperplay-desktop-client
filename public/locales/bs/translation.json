@@ -881,7 +881,8 @@
         "viewMyAccount": "#Stav #moj #račun",
         "connectWallet": "#Spajati #lisnica",
         "currentWallet": "#Struja #lisnica",
-        "viewPortfolio": "#Stav @portfolio"
+        "viewPortfolio": "#Stav @portfolio",
+        "viewFullscreen": "#Stav fullscreen"
     },
     "gameRelease": {
         "beta": "Beta",
