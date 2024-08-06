@@ -181,7 +181,10 @@ import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
 import 'backend/utils/auto_launch'
 import { hrtime } from 'process'
-import { getHyperPlayReleaseObject } from './storeManagers/hyperplay/utils'
+import {
+  getEpicListingUrl,
+  getHyperPlayReleaseObject
+} from './storeManagers/hyperplay/utils'
 import { postPlaySessionTime } from './utils/quests'
 
 import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
@@ -2017,6 +2020,10 @@ ipcMain.on('reloadApp', async () => {
 ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
   await addGameToLibrary(projectId)
 })
+
+ipcMain.handle('getEpicListingUrl', async (_e, projectId) =>
+  getEpicListingUrl(projectId)
+)
 
 ipcMain.handle(
   'isGameHidden',
