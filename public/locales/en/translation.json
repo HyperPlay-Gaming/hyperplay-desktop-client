@@ -682,6 +682,10 @@
         "View Game": "View Game"
     },
     "quests": {
+        "noneFound": {
+            "message": "There were no quests found.",
+            "title": "No Quests Found."
+        },
         "playstreak": {
             "signInWarning": {
                 "client": "You are currently not logged in, play streak progress will not be tracked. Please login to HyperPlay via the top-right dropdown to track progress.",
