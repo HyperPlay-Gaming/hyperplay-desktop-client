@@ -967,7 +967,6 @@ export interface PointsClaimReturn {
 
 export interface ConfirmClaimParams {
   transactionHash: string
-  rewardId: number
   signature: string
 }
 

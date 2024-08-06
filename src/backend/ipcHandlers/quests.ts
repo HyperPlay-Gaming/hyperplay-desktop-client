@@ -56,7 +56,7 @@ ipcMain.handle('claimQuestPointsReward', async (e, rewardId) => {
 })
 
 ipcMain.handle('confirmRewardClaim', async (e, params: ConfirmClaimParams) => {
-  const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${params.rewardId}/confirm-claim`
+  const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/confirm-claim`
   return fetchWithCookie({
     url,
     method: 'POST',
