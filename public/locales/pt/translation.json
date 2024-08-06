@@ -880,7 +880,8 @@
         "linkSteamAccountCta": "Ir para o Steam",
         "syncing": "A sincronizar...",
         "viewMyAccount": "Ver minha conta",
-        "viewItem": "Ver {{item}}"
+        "viewItem": "Ver {{item}}",
+        "viewFullscreen": "Ver tela cheia"
     },
     "hyperplayOverlay": {
         "description": {

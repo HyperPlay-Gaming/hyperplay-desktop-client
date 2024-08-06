@@ -881,7 +881,8 @@
         "misc": "Nunca",
         "copyUrl": "Copy URL",
         "turnAnalyticsOff": "Apagar",
-        "turnAnalyticsOn": "Acender"
+        "turnAnalyticsOn": "Acender",
+        "viewFullscreen": "Vista fullscreen"
     },
     "hyperplayOverlay": {
         "greeting": {

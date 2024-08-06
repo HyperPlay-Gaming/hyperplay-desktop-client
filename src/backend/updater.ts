@@ -66,6 +66,7 @@ autoUpdater.on('update-downloaded', async () => {
   if (response === 1) {
     return autoUpdater.quitAndInstall()
   }
+  return (autoUpdater.autoInstallOnAppQuit = true)
 })
 
 const MAX_UPDATE_ATTEMPTS = 5
