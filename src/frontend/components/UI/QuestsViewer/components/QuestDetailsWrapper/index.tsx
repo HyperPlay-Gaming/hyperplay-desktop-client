@@ -178,7 +178,10 @@ export function QuestDetailsWrapper({
 
   const flags = useFlags()
   const account = useAccount()
-  const [showConfirmModal, setShowConfirmModal] = useState(false)
+  const [claimWarning, setClaimWarning] = useState({
+    show: false,
+    confirmed: false
+  })
   const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
@@ -348,20 +351,7 @@ export function QuestDetailsWrapper({
     })
   }
 
-  async function claimRewards({
-    rewards,
-    confirmed
-  }: {
-    rewards: Reward[]
-    confirmed?: boolean
-  }) {
-    if (!confirmed) {
-      setShowConfirmModal(true)
-      return
-    }
-
-    setShowConfirmModal(false)
-
+  async function claimRewards(rewards: Reward[]) {
     for (const reward_i of rewards) {
       const isRewardTypeClaimable = rewardTypeClaimEnabled[reward_i.reward_type]
       if (selectedQuestId === null || !isRewardTypeClaimable) {
@@ -418,7 +408,7 @@ export function QuestDetailsWrapper({
   }
 
   const claimRewardsMutation = useMutation({
-    mutationFn: async (params: { rewards: Reward[]; confirmed?: boolean }) => {
+    mutationFn: async (params: Reward[]) => {
       return claimRewards(params)
     },
     onSuccess: async () => {
@@ -520,8 +510,13 @@ export function QuestDetailsWrapper({
       },
       rewards: questRewards ?? [],
       i18n,
-      onClaimClick: async () =>
-        claimRewardsMutation.mutate({ rewards: rewardsToClaim }),
+      onClaimClick: async () => {
+        if (!claimWarning.confirmed) {
+          setClaimWarning({ show: true, confirmed: false })
+          return
+        }
+        claimRewardsMutation.mutate(rewardsToClaim)
+      },
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
@@ -540,14 +535,12 @@ export function QuestDetailsWrapper({
     questDetails = (
       <>
         <ConfirmClaimModal
-          isOpen={showConfirmModal}
-          onConfirm={() =>
-            claimRewardsMutation.mutate({
-              rewards: rewardsToClaim,
-              confirmed: true
-            })
-          }
-          onCancel={() => setShowConfirmModal(false)}
+          isOpen={claimWarning.show}
+          onConfirm={() => {
+            setClaimWarning({ show: false, confirmed: true })
+            claimRewardsMutation.mutate(rewardsToClaim)
+          }}
+          onCancel={() => setClaimWarning({ show: false, confirmed: false })}
           onClose={() => {}}
           networkName={networkName}
         />
