@@ -178,10 +178,7 @@ export function QuestDetailsWrapper({
 
   const flags = useFlags()
   const account = useAccount()
-  const [claimWarning, setClaimWarning] = useState({
-    show: false,
-    confirmed: false
-  })
+  const [showWarning, setShowWarning] = useState(false)
   const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
@@ -489,6 +486,9 @@ export function QuestDetailsWrapper({
     }
 
     const rewardsToClaim = questMeta.rewards ?? []
+    const isRewardOnChain = rewardsToClaim.some((reward) =>
+      ['ERC1155', 'ERC721', 'ERC20'].includes(reward.reward_type)
+    )
 
     const questDetailsProps: QuestDetailsProps = {
       alertProps,
@@ -511,11 +511,11 @@ export function QuestDetailsWrapper({
       rewards: questRewards ?? [],
       i18n,
       onClaimClick: async () => {
-        if (!claimWarning.confirmed) {
-          setClaimWarning({ show: true, confirmed: false })
-          return
+        if (isRewardOnChain) {
+          setShowWarning(true)
+        } else {
+          claimRewardsMutation.mutate(rewardsToClaim)
         }
-        claimRewardsMutation.mutate(rewardsToClaim)
       },
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
@@ -535,12 +535,12 @@ export function QuestDetailsWrapper({
     questDetails = (
       <>
         <ConfirmClaimModal
-          isOpen={claimWarning.show}
+          isOpen={showWarning}
           onConfirm={() => {
-            setClaimWarning({ show: false, confirmed: true })
+            setShowWarning(false)
             claimRewardsMutation.mutate(rewardsToClaim)
           }}
-          onCancel={() => setClaimWarning({ show: false, confirmed: false })}
+          onCancel={() => setShowWarning(false)}
           onClose={() => {}}
           networkName={networkName}
         />
