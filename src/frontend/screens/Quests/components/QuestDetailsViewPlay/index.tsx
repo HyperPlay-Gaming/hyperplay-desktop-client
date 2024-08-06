@@ -43,7 +43,7 @@ export function QuestDetailsViewPlayWrapper({
 
       let runner: Runner = 'hyperplay'
       let name = appName
-      if (epicListingUrl){
+      if (epicListingUrl) {
         runner = 'legendary'
         if (epicAppName) {
           name = epicAppName
@@ -56,13 +56,10 @@ export function QuestDetailsViewPlayWrapper({
           if (!res) {
             throw new Error('Game not found in library')
           }
-          
-          return navigate(
-            `/gamepage/${runner}/${name}`,
-            {
-              state: { gameInfo: res, fromDM: false }
-            }
-          )
+
+          return navigate(`/gamepage/${runner}/${name}`, {
+            state: { gameInfo: res, fromQuests: true }
+          })
         })
         .catch(async () => {
           // if hyperplay game, add to library and navigate to game page
@@ -71,7 +68,7 @@ export function QuestDetailsViewPlayWrapper({
             const gameInfo = await getGameInfo(name, runner)
 
             return navigate(`/gamepage/hyperplay/${name}`, {
-              state: { gameInfo, fromDM: false}
+              state: { gameInfo, fromQuests: true }
             })
           }
           // if epic game, open in epic store

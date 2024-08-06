@@ -72,7 +72,7 @@ import authState from 'frontend/state/authState'
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
-    state: { fromDM: boolean; gameInfo: GameInfo }
+    state: { fromDM?: boolean; gameInfo: GameInfo; fromQuests?: boolean }
   }
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
@@ -137,7 +137,7 @@ export default observer(function GamePage(): JSX.Element | null {
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
   const isOffline = connectivity.status !== 'online'
 
-  const backRoute = location.state?.fromDM ? '/download-manager' : '/library'
+  const backRoute = getBackRoute(location.state)
 
   const storage: Storage = window.localStorage
 
@@ -957,4 +957,17 @@ function getCurrentProgress(
           ? `${percent.toFixed(2)}% [${bytes} MB]  ${eta ? `ETA: ${eta}` : ''}`
           : '...'
       }`
+}
+
+function getBackRoute(locationState?: { fromDM?: boolean; fromQuests?: boolean }) {
+  if (!locationState) {
+    return '/library';
+  }
+  if (locationState.fromDM) {
+    return '/download-manager';
+  }
+  if (locationState.fromQuests) {
+    return '/quests';
+  }
+  return '/library';
 }
