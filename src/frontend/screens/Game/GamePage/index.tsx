@@ -69,10 +69,16 @@ import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import authState from 'frontend/state/authState'
 
+type locationState = {
+  fromDM?: boolean
+  gameInfo: GameInfo
+  fromQuests?: boolean
+}
+
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
-    state: { fromDM?: boolean; gameInfo: GameInfo; fromQuests?: boolean }
+    state: locationState
   }
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
@@ -959,15 +965,15 @@ function getCurrentProgress(
       }`
 }
 
-function getBackRoute(locationState?: { fromDM?: boolean; fromQuests?: boolean }) {
+function getBackRoute(locationState?: locationState) {
   if (!locationState) {
-    return '/library';
+    return '/library'
   }
   if (locationState.fromDM) {
-    return '/download-manager';
+    return '/download-manager'
   }
   if (locationState.fromQuests) {
-    return '/quests';
+    return '/quests'
   }
-  return '/library';
+  return '/library'
 }
