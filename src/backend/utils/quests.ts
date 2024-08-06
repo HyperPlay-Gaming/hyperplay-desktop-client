@@ -22,7 +22,7 @@ export async function postPlaySessionTime(
   })
   const resultJson = await result.json()
   logInfo(
-    `Posted playstreak playsession time. response: ${JSON.stringify(
+    `Posted playstreak playsession. response: ${JSON.stringify(
       resultJson,
       null,
       4
