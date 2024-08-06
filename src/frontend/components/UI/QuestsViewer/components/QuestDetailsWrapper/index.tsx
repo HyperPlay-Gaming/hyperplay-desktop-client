@@ -28,15 +28,13 @@ import {
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-import {
-  getPlaystreakArgsFromQuestData,
-  resetSessionStartedTime
-} from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { createPublicClient } from 'viem'
 import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
 import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
-import { wait } from '@hyperplay/utils'
+import { useSyncPlaySession } from 'frontend/hooks/useSyncInterval'
+import { useTrackQuestViewed } from 'frontend/hooks/useTrackQuestViewed'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -110,14 +108,7 @@ export function QuestDetailsWrapper({
     error: switchChainError
   } = useSwitchChain()
 
-  useEffect(() => {
-    if (selectedQuestId !== null) {
-      window.api.trackEvent({
-        event: 'Quest Viewed',
-        properties: { quest: { id: selectedQuestId.toString() } }
-      })
-    }
-  }, [selectedQuestId])
+  useTrackQuestViewed(selectedQuestId)
 
   const flags = useFlags()
   const account = useAccount()
@@ -182,19 +173,7 @@ export function QuestDetailsWrapper({
       loading: val.isLoading || val.isFetching
     })) ?? []
 
-  useEffect(() => {
-    const syncTimer = setInterval(async () => {
-      await window.api.syncPlaySession(projectId, 'hyperplay')
-      // allow for some time before read
-      await wait(5000)
-      await questPlayStreakResult.invalidateQuery()
-      resetSessionStartedTime()
-    }, 1000 * 60)
-
-    return () => {
-      clearInterval(syncTimer)
-    }
-  }, [selectedQuestId])
+  useSyncPlaySession(projectId, questPlayStreakResult.invalidateQuery)
 
   const [collapseIsOpen, setCollapseIsOpen] = useState(false)
   const session = useAuthSession()
