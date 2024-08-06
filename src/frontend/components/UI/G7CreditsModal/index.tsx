@@ -3,19 +3,24 @@ import { Button, Modal } from '@hyperplay/ui'
 import screenshot from 'frontend/assets/g7PortalScreenshot.png'
 import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 
 let isShown = true
 
 export function G7CreditsModal() {
   const [showModal, setShowModal] = useState(isShown)
   const { t } = useTranslation()
+  const navigate = useNavigate()
+
+  function closeModal() {
+    isShown = false
+    setShowModal(false)
+  }
+
   return (
     <Modal
       isOpen={showModal}
-      onClose={() => {
-        isShown = false
-        setShowModal(false)
-      }}
+      onClose={closeModal}
       className={styles.modalContainer}
       classNames={{ root: styles.root }}
       withCloseButton={true}
@@ -32,7 +37,10 @@ export function G7CreditsModal() {
       <img src={screenshot} />
       <Button
         type="secondary"
-        onClick={() => console.log('navigate to the quest tab')}
+        onClick={() => {
+          navigate('/quests?search=Game7')
+          closeModal()
+        }}
       >
         {t('quests.g7CreditsModal.title', 'Earn Game7 Credits')}
       </Button>
