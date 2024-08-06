@@ -665,6 +665,10 @@ async function getTokenGatedPlatforms(
     body: JSON.stringify(request)
   })
 
+  if (!validateResponse.ok) {
+    throw `Could not validate access ${await validateResponse.text()}`
+  }
+
   const validateResult: LicenseConfigValidateResult =
     await validateResponse.json()
 
