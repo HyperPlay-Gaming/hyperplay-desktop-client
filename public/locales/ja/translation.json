@@ -866,7 +866,8 @@
         "linkSteamAccountCta": "蒸気看板に行く",
         "linkSteamAccountTitle": "Steamアカウントのリンク",
         "publicAlpha": "パブリックアルファ",
-        "otp": "ワンタイムパスコード"
+        "otp": "ワンタイムパスコード",
+        "viewFullscreen": "フルスクリーンを見る"
     },
     "dlc": {
         "size": "サイズ",

@@ -880,7 +880,8 @@
         "turnAnalyticsOff": "خاموش کردن",
         "turnAnalyticsOn": "روشن کردن",
         "folder": "پوشه",
-        "discordApp": "Discord"
+        "discordApp": "Discord",
+        "viewFullscreen": "View Fullscreen"
     },
     "hyperplayOverlay": {
         "txnRequest": {

@@ -880,7 +880,8 @@
             "agree": "I agree"
         },
         "discordApp": "Discord",
-        "logOut": "Déconnexion"
+        "logOut": "Déconnexion",
+        "viewFullscreen": "Voir l'écran complet"
     },
     "hyperplayOverlay": {
         "extensionNotification": {

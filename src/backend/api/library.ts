@@ -150,3 +150,6 @@ export const checkHyperPlayAccessCode = async (
     accessCode
   )
 }
+
+export const getEpicListingUrl = async (appName: string) =>
+  ipcRenderer.invoke('getEpicListingUrl', appName)

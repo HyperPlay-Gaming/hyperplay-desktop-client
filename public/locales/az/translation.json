@@ -888,7 +888,8 @@
         },
         "changeWallet": "Swap cüzdan hesabı",
         "publicAlpha": "Elan",
-        "syncing": "Qeydiyyat..."
+        "syncing": "Qeydiyyat...",
+        "viewFullscreen": "Tam ekran bax"
     },
     "quest": {
         "active": "Aktiv",
