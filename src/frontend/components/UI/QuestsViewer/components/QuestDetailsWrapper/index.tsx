@@ -541,7 +541,7 @@ export function QuestDetailsWrapper({
             claimRewardsMutation.mutate(rewardsToClaim)
           }}
           onCancel={() => setShowWarning(false)}
-          onClose={() => {}}
+          onClose={() => setShowWarning(false)}
           networkName={networkName}
         />
         <QuestDetails
