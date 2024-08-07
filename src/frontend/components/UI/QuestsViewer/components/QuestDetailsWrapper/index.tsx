@@ -13,7 +13,7 @@ import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import {
   useWriteContract,
   useAccount,
@@ -113,29 +113,21 @@ function ConfirmClaimModal(props: ConfirmProps) {
           <Modal.Title>
             {t('quest.claimWarning.title', 'Confirm Quest Reward Claim')}
           </Modal.Title>
-          <span>
-            <span className="text--bold">
-              {t('quest.claimWarning.important', 'IMPORTANT')}:
-            </span>{' '}
-            {t(
-              'quest.claimWarning.networkMessage',
-              `Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed`,
-              { networkName: props.networkName }
-            )}{' '}
-            <span className="text--bold">
-              {t('quest.claimWarning.within24Hrs', 'within 24 hrs')}
-            </span>
-          </span>
-          <span>
-            {t('quest.claimWarning.otherwise', 'Otherwise, the Quest Reward')}{' '}
-            <span className="text--bold">
-              {t(
-                'quest.claimWarning.expire',
-                'will expire and will no longer be claimable'
-              )}
-              .
-            </span>
-          </span>
+          <div>
+            <Trans
+              i18nKey="quest.claimWarning.body"
+              defaultValue="<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>"
+              values={{ networkName: props.networkName }}
+              components={{ bold: <span className="text--bold" /> }}
+            />
+          </div>
+          <div>
+            <Trans
+              i18nKey="quest.claimWarning.body2"
+              values={{ networkName: props.networkName }}
+              components={{ bold: <span className="text--bold" /> }}
+            />
+          </div>
         </Modal.Body>
         <div className={styles.buttonsContainer}>
           <Button type="tertiary" onClick={props.onCancel}>
@@ -535,7 +527,7 @@ export function QuestDetailsWrapper({
     questDetails = (
       <>
         <ConfirmClaimModal
-          isOpen={showWarning}
+          isOpen={true}
           onConfirm={() => {
             setShowWarning(false)
             claimRewardsMutation.mutate(rewardsToClaim)
