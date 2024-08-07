@@ -927,7 +927,8 @@
         "claimAll": "@Claim @all",
         "linkAccount": "#Veza #tvoj @Steam #račun #na #pregled eligibility#.",
         "reputation": "#Reputacija",
-        "pointsClaimed": "#Poen"
+        "pointsClaimed": "#Poen",
+        "g7Numclaimed": "@Total #Potraživati G7 #Kredit"
     },
     "profile": "Profile",
     "back_to_game": "@Back #na #igra",
