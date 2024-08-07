@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer, webFrame } from 'electron'
-const DEV_PORTAL_URL = 'https://developers.hyperplay.xyz/'
+const DEV_PORTAL_URL =
+  'https://hyperplay-dev-git-feat-manual-otp-hyperplay.vercel.app/'
 
 const removeBackground = `
 document.onreadystatechange = function(e)
