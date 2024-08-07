@@ -7,27 +7,30 @@ import { logError, LogPrefix, logInfo } from './logger/logger'
 import { isOnline } from './online_monitor'
 
 autoUpdater.autoDownload = true
-autoUpdater.autoInstallOnAppQuit = false
+autoUpdater.autoInstallOnAppQuit = true
 
 // check for updates every 6 hours
-const interval = 1000 * 60 * 60 * 6
+const checkUpdateInterval = 1 * 60 * 60 * 1000
 setInterval(() => {
   autoUpdater.checkForUpdates()
-}, interval)
+}, checkUpdateInterval)
 
-autoUpdater.on('update-available', async () => {
+autoUpdater.on('update-available', async (info) => {
   if (!isOnline()) {
     return
   }
+  logInfo('A HyperPlay update is available, downloading it now')
+  logInfo(`Version: ${info.version}`)
+  logInfo(`Release date: ${info.releaseDate}`)
+  logInfo(`Release name: ${info.releaseName}`)
 
-  logInfo('App update is available, downloading it now')
   autoUpdater.downloadUpdate()
 })
 
 // log download progress
 autoUpdater.on('download-progress', (progress) => {
   logInfo(`Download speed: ${progress.bytesPerSecond}`)
-  logInfo(`Downloaded ${progress.percent}%`)
+  logInfo(`Downloaded ${progress.percent.toFixed(2)}%`)
   logInfo(
     `Total downloaded: ${progress.transferred} of ${progress.total} bytes`
   )
@@ -64,11 +67,10 @@ const showUpdateMessage = async () => {
     return autoUpdater.quitAndInstall()
   }
 
-  autoUpdater.autoInstallOnAppQuit = true
   didNotRestart = true
 }
 
-const timeToShowUpdateMessageAgain = 24 * 60 * 60 * 1000
+const timeToShowUpdateMessageAgain = 1 * 60 * 60 * 1000
 autoUpdater.on('update-downloaded', async () => {
   showUpdateMessage()
   if (didNotRestart) {
