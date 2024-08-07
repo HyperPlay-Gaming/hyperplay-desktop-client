@@ -925,7 +925,8 @@
         "viewPortfolio": "Näkymä portfolio",
         "publicAlpha": "Julkinen Alfa",
         "linkSteamAccountDescription": "Kirjaudu Steamiin linkittääksesi HyperPlay-tilisi.",
-        "linkSteamAccountTitle": "Linkki Steam Tili"
+        "linkSteamAccountTitle": "Linkki Steam Tili",
+        "viewFullscreen": "Näkymä Fullscreen"
     },
     "profile": "Profiili",
     "sideload": {

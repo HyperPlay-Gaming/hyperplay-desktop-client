@@ -880,7 +880,8 @@
         "turnAnalyticsOff": "Uitschakelen",
         "folder": "Map",
         "copyUrl": "URL kopiëren",
-        "turnAnalyticsOn": "Inschakelen"
+        "turnAnalyticsOn": "Inschakelen",
+        "viewFullscreen": "View fullscreen"
     },
     "hyperplayOverlay": {
         "signatureRequest": {

@@ -908,7 +908,8 @@
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Укључи",
         "copyUrl": "Копирај URL адресу",
-        "Sync": "Синхронизуј"
+        "Sync": "Синхронизуј",
+        "viewFullscreen": "#Stav fullscreen"
     },
     "exit_game": "#Izlaz",
     "accounts": "#račun",

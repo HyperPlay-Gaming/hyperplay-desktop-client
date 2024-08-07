@@ -881,7 +881,8 @@
         "currentWallet": "Nuvarande plånbok",
         "linkSteamAccountCta": "Gå till Steam Sign in",
         "linkSteamAccountDescription": "Logga in på Steam för att länka ditt HyperPlay-konto.",
-        "linkSteamAccountTitle": "Link Steam-konto"
+        "linkSteamAccountTitle": "Link Steam-konto",
+        "viewFullscreen": "Visa fullscreen"
     },
     "gameRelease": {
         "alpha": "Alpha",

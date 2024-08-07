@@ -887,7 +887,8 @@
         "turnAnalyticsOff": "끄기",
         "turnAnalyticsOn": "켜기",
         "discordApp": "디스코드",
-        "folder": "폴더"
+        "folder": "폴더",
+        "viewFullscreen": "전체 화면보기"
     },
     "importGameErrorMessage": "유효한 게임 폴더가 아닙니다, 수입 게임은 불가능합니다",
     "exit_game": "출구 Game",

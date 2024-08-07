@@ -891,7 +891,8 @@
         "viewItem": "Vedi {{item}}",
         "viewMyAccount": "Visualizza il mio account",
         "connectWallet": "Connetti il portafoglio",
-        "viewPortfolio": "Visualizza portafoglio"
+        "viewPortfolio": "Visualizza portafoglio",
+        "viewFullscreen": "Visualizza schermo intero"
     },
     "gameRelease": {
         "alpha": "Alfa",
