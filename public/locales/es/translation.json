@@ -1029,6 +1029,10 @@
                 "overlay": "Actualmente no has iniciado sesión, no se hará un seguimiento del progreso de la racha de juego. Por favor, sal del juego e inicia sesión en HyperPlay a través del menú desplegable superior derecho para realizar un seguimiento del progreso.",
                 "client": "Actualmente no has iniciado sesión. No se hará un seguimiento del progreso de la racha del juego. Inicia sesión en HyperPlay a través del menú desplegable superior derecho para realizar un seguimiento del progreso."
             }
+        },
+        "noneFound": {
+            "message": "No se encontraron misiones.",
+            "title": "No hay búsquedas."
         }
     }
 }
