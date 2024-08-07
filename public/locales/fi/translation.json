@@ -790,7 +790,8 @@
         "needMoreAchievements": "Sinun on täytettävä {{percent}}% saavutuksistasi näissä peleissä.",
         "quests": "Quests",
         "View Game": "Näkymä pelistä",
-        "pointsClaimed": "Väitetyt pisteet"
+        "pointsClaimed": "Väitetyt pisteet",
+        "g7Numclaimed": "G7-luottoja yhteensä"
     },
     "gameRelease": {
         "main": "Oletus",
