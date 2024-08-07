@@ -7,6 +7,7 @@ import {
   HyperPlayRelease,
   PointsClaimReturn,
   GenericApiResponse,
+  Quest,
   ConfirmClaimParams
 } from './../types'
 import { EventEmitter } from 'node:events'
@@ -295,6 +296,8 @@ interface HyperPlayAsyncIPCFunctions {
   getPointsBalancesForProject: (
     projectId: string
   ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
+  syncPlaySession: (appName: string, runner: Runner) => Promise<void>
+  getEpicListingUrl: (appName: string) => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
