@@ -970,7 +970,8 @@
         "signIn": "Přihlásit se",
         "sync": "Synchronizovat",
         "connectSteamAccount": "Připojit týmový účet",
-        "pointsClaimed": "Body Tvrzené"
+        "pointsClaimed": "Body Tvrzené",
+        "g7Numclaimed": "Celkem Tvrzené G7 kredity"
     },
     "quests": {
         "playstreak": {
