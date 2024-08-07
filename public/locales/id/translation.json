@@ -975,7 +975,8 @@
         "sync": "Sinkronisasi",
         "claimed": "Diklaim",
         "connectSteamAccount": "Hubungkan akun tim",
-        "pointsClaimed": "Poin Diklaim"
+        "pointsClaimed": "Poin Diklaim",
+        "g7Numclaimed": "Total Kredit G7 Klaim"
     },
     "notification": {
         "wine-download": {
