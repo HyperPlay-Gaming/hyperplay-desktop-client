@@ -941,7 +941,8 @@
         "createDiscordTicket": "כרטיסים נבחרים",
         "claimFailedMessage": "נסה פעם נוספת. אם זה עדיין לא עובד, ליצור כרטיס תמיכה דיסקורד.",
         "notEnoughGas": "איזון ארנק חסר ערך כדי לטעון את הפרס שלך בגלל עמלות גז. נסה ארנק שונה או לחדש את זה לפני retrying.",
-        "pointsClaimed": "נקודות תביעות"
+        "pointsClaimed": "נקודות תביעות",
+        "g7Numclaimed": "תגית: G7 Credits"
     },
     "notification": {
         "wine-download": {
