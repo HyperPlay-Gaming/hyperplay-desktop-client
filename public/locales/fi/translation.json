@@ -1014,6 +1014,10 @@
                 "overlay": "Et ole tällä hetkellä kirjautuneena sisään, pelin etenemistä ei seurata. Poistu pelistä ja kirjaudu HyperPlayyn huippuoikeiston kautta edistyksen seuraamiseksi."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "noneFound": {
+            "title": "Quests ei löytynyt.",
+            "message": "Etsintöjä ei löytynyt."
+        }
     }
 }
