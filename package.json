@@ -169,7 +169,7 @@
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@hyperplay/chains": "^0.3.0",
     "@hyperplay/check-disk-space": "^3.5.2",
-    "@hyperplay/ui": "^1.6.0",
+    "@hyperplay/ui": "^1.7.6",
     "@hyperplay/utils": "^0.0.16",
     "@mantine/carousel": "^7.5.1",
     "@mantine/core": "^7.5.1",

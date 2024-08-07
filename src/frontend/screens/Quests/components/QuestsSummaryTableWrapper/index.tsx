@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { QuestsSummaryTable, QuestCard, QuestFilter } from '@hyperplay/ui'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import { useTranslation } from 'react-i18next'
@@ -27,6 +27,10 @@ export function QuestsSummaryTableWrapper({
   const searchParam = searchParams.get('search')
 
   const [searchText, setSearchText] = useState(searchParam ?? '')
+
+  useEffect(() => {
+    setSearchText(searchParam ?? '')
+  }, [searchParam])
 
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
 
