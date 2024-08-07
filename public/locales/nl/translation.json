@@ -964,7 +964,8 @@
         "points": "Punten",
         "reputation": "Reputatie",
         "sync": "Sync",
-        "pointsClaimed": "Punt geclaimd"
+        "pointsClaimed": "Punt geclaimd",
+        "g7Numclaimed": "Total Claim G7 Credits"
     },
     "quests": {
         "quests": "Quest",
