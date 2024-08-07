@@ -987,7 +987,11 @@
                 "client": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#."
             }
         },
-        "quests": "#Potraga"
+        "quests": "#Potraga",
+        "noneFound": {
+            "message": "Tamo #biti @no #potraga #pronađen#.",
+            "title": "@No #Potraga #Pronađen#."
+        }
     },
     "sideload": {
         "warningMessage": "#Strana-@loading @a #igra @i @a @feature @intend @for developers a @experienced #moć #korisnik. #Strana-@loading @a @installer da #sadržati malware #moći #kompromis #tvoj #računar a #olovo #na #krađa @of #fond#.",
