@@ -966,7 +966,8 @@
         "quests": "Quêtes",
         "sync": "Synchroniser",
         "signIn": "Connexion",
-        "pointsClaimed": "Points réclamés"
+        "pointsClaimed": "Points réclamés",
+        "g7Numclaimed": "Total des crédits G7 réclamés"
     },
     "sideload": {
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Enlever un installateur qui contient des logiciels malveillants pourrait compromettre votre ordinateur et conduire au vol de fonds.",
