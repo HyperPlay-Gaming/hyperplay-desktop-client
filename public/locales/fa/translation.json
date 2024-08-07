@@ -968,7 +968,8 @@
         "signIn": "ورود",
         "sync": "همگامسازی",
         "reward": "پاداش",
-        "pointsClaimed": "امتیازات مطالبات"
+        "pointsClaimed": "امتیازات مطالبات",
+        "g7Numclaimed": "مجموع مطالبات G7"
     },
     "quests": {
         "playstreak": {
