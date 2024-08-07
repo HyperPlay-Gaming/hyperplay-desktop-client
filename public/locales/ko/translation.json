@@ -981,7 +981,11 @@
                 "overlay": "현재 로그인되지 않습니다, streak 진행 상황을 추적하지 않습니다. 게임을 종료하고 HyperPlay에 로그인하십시오."
             }
         },
-        "quests": "퀘스트"
+        "quests": "퀘스트",
+        "noneFound": {
+            "message": "찾을 수 없습니다.",
+            "title": "퀘스트 없음."
+        }
     },
     "accounts": "계정 만들기",
     "overlay": {
