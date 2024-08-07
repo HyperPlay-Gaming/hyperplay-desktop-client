@@ -973,6 +973,10 @@
                 "client": "Je bent momenteel niet ingelogd, speelsporen zullen niet worden gevolgd. login alsjeblieft naar HyperPlay via de top rechtstreeks om vooruitgang te volgen.",
                 "overlay": "Je bent momenteel niet ingelogd, speelsporen zullen niet worden gevolgd. Verlaat het spel en login naar HyperPlay via de top rechtstreeks om vooruitgang te volgen."
             }
+        },
+        "noneFound": {
+            "message": "Er waren geen zoektochten gevonden.",
+            "title": "Geen vragen gevonden."
         }
     },
     "sideload": {
