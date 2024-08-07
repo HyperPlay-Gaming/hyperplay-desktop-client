@@ -943,7 +943,11 @@
                 "overlay": "Hazırda qeydiyyatdan keçmək deyil. Oyun çıxmaq və HyperPlay giriş üst sağ dropdown vasitəsi ilə giriş."
             }
         },
-        "quests": "Avtomobil"
+        "quests": "Avtomobil",
+        "noneFound": {
+            "message": "Oxunub:.",
+            "title": "No Quests tapdı."
+        }
     },
     "accounts": "accounts",
     "ALL": "ALL",
