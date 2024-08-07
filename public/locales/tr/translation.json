@@ -991,7 +991,11 @@
                 "overlay": "Şu anda giriş yapmıyorsunuz, oyun çizgisi ilerleme izlenecek. Lütfen oyunu bırakın ve ilerlemeyi takip etmek için üst sağ damla ile HyperPlay'e giriş yapın."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "noneFound": {
+            "message": "Orada bulunan arayışı yoktu.",
+            "title": "Hiçbir Quest bulunamadı."
+        }
     },
     "accounts": "hesaplar",
     "gameUpdateNotifications": {
