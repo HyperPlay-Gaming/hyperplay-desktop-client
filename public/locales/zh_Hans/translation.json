@@ -988,7 +988,8 @@
             "reputation": "投 票"
         },
         "View Game": "观点",
-        "pointsClaimed": "要求"
+        "pointsClaimed": "要求",
+        "g7Numclaimed": "索赔总额"
     },
     "quests": {
         "quests": "任务",
