@@ -1016,7 +1016,11 @@
                 "overlay": "Atualmente, você não está conectado, o progresso da série não será rastreado. Por favor, saia do jogo e faça login no HyperPlay através do dropdown superior direito para acompanhar o progresso."
             }
         },
-        "quests": "Missões"
+        "quests": "Missões",
+        "noneFound": {
+            "message": "Não foram encontradas missões.",
+            "title": "Nenhuma busca encontrada."
+        }
     },
     "sideload": {
         "warningMessage": "O recurso de Sideloading de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O Sideloading de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos.",
