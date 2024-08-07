@@ -7,7 +7,8 @@ import {
   HyperPlayRelease,
   PointsClaimReturn,
   GenericApiResponse,
-  ConfirmClaimParams
+  ConfirmClaimParams,
+  Quest
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
