@@ -47,11 +47,8 @@ autoUpdater.on('download-progress', (progress) => {
   }) */
 })
 
-autoUpdater.on('update-downloaded', async () => {
-  if (!isOnline()) {
-    return
-  }
-
+let didNotRestart = false
+const showUpdateMessage = async () => {
   logInfo('App update is downloaded')
   const { response } = await dialog.showMessageBox({
     title: t('box.info.update.appUpdated', 'HyperPlay was updated'),
@@ -66,7 +63,18 @@ autoUpdater.on('update-downloaded', async () => {
   if (response === 1) {
     return autoUpdater.quitAndInstall()
   }
-  return (autoUpdater.autoInstallOnAppQuit = true)
+
+  autoUpdater.autoInstallOnAppQuit = true
+  didNotRestart = true
+}
+
+const timeToShowUpdateMessageAgain = 24 * 60 * 60 * 1000
+autoUpdater.on('update-downloaded', async () => {
+  showUpdateMessage()
+  if (didNotRestart) {
+    // Schedule to show the message again after 24 hours if the user did not update
+    setTimeout(showUpdateMessage, timeToShowUpdateMessageAgain)
+  }
 })
 
 const MAX_UPDATE_ATTEMPTS = 5
