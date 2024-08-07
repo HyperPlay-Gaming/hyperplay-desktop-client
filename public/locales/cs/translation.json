@@ -979,7 +979,11 @@
                 "client": "V současné době nejste přihlášeni, nebude sledována hra streak. Přihlaste se k HyperPlay prostřednictvím pravého rozevíracího procesu."
             }
         },
-        "quests": "Úkoly"
+        "quests": "Úkoly",
+        "noneFound": {
+            "message": "Nebyly nalezeny žádné úkoly.",
+            "title": "Žádná výhra nebyla nalezena."
+        }
     },
     "accounts": "účty",
     "back_to_game": "Zpět na hru",
