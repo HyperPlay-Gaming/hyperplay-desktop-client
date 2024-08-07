@@ -719,7 +719,8 @@
         "gamecard": {
             "paused": "Peatatud"
         },
-        "copyUrl": "&Kopeeri URL"
+        "copyUrl": "&Kopeeri URL",
+        "viewFullscreen": "Vaata täisekraanil"
     },
     "gameRelease": {
         "beta": "Beta",
