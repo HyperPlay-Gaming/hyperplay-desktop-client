@@ -56,7 +56,7 @@ export const Overlay = observer(function ({
   }
 
   const shouldShowExtension =
-    WalletState.provider === PROVIDERS.METAMASK_EXTENSION &&
+    WalletState.provider === PROVIDERS.METAMASK_EXTENSION ||
     OverlayState.renderState.showExtension
 
   let toastManager = null
