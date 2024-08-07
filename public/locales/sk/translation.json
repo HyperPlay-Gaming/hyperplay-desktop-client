@@ -966,7 +966,8 @@
         "points": "Body",
         "sync": "Synchronizácia",
         "connectSteamAccount": "Pripojiť tímový účet",
-        "pointsClaimed": "Body Reklamované"
+        "pointsClaimed": "Body Reklamované",
+        "g7Numclaimed": "Celkový nárok na G7 kredity"
     },
     "quests": {
         "playstreak": {
