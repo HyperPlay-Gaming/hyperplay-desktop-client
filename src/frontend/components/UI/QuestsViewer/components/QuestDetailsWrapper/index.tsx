@@ -124,6 +124,7 @@ function ConfirmClaimModal(props: ConfirmProps) {
           <div>
             <Trans
               i18nKey="quest.claimWarning.body2"
+              defaultValue="Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>"
               values={{ networkName: props.networkName }}
               components={{ bold: <span className="text--bold" /> }}
             />
