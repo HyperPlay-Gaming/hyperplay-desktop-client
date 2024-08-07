@@ -993,6 +993,10 @@
                 "client": "No s'ha iniciat la sessió, no s'ha de seguir el progrés del joc. Si us plau, introdueix dins de la caixa de text els caràcters que veu a la imatge de sota. Això és requerit per evitar enviaments automàtics.",
                 "overlay": "No s'ha iniciat la sessió, no s'ha de seguir el progrés del joc. Si us plau, introdueix dins de la caixa de text els caràcters que veu a la imatge de sota. Això és requerit per evitar enviaments automàtics."
             }
+        },
+        "noneFound": {
+            "message": "No s'han trobat missions.",
+            "title": "No hi ha recerca."
         }
     },
     "accounts": "comptes",
