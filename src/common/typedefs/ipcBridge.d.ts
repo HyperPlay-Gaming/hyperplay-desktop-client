@@ -6,7 +6,8 @@ import {
   LDEnv,
   HyperPlayRelease,
   PointsClaimReturn,
-  GenericApiResponse
+  GenericApiResponse,
+  Quest
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
