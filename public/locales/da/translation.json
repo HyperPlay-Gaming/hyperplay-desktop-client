@@ -1021,7 +1021,8 @@
         "sync": "Synkronisering",
         "connectSteamAccount": "Forbind team-konto",
         "points": "Punkter",
-        "pointsClaimed": "Punkter Kraved"
+        "pointsClaimed": "Punkter Kraved",
+        "g7Numclaimed": "Samlet krav G7 Credits"
     },
     "importGameErrorMessageExecutable": "Spil spil Udførelse ikke fundet, import af spil er ikke muligt",
     "exit_game": "Afslut spil",
