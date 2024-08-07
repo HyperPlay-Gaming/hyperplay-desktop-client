@@ -1057,6 +1057,10 @@
                 "client": "Du er i øjeblikket ikke logget ind, spille streak fremskridt vil ikke blive sporet. Log ind på HyperPlay via den øverste højre dropdown for at spore fremskridt.",
                 "overlay": "Du er i øjeblikket ikke logget ind, spille streak fremskridt vil ikke blive sporet. Afslut spillet og log ind på HyperPlay via den øverste højre dropdown for at spore fremgang."
             }
+        },
+        "noneFound": {
+            "message": "Der var ingen quests fundet.",
+            "title": "Ingen Quests Fundet."
         }
     },
     "importGameErrorMessage": "Ikke en gyldig spilmappe, import af spil er ikke muligt",
