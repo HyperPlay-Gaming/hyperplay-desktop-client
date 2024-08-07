@@ -527,7 +527,7 @@ export function QuestDetailsWrapper({
     questDetails = (
       <>
         <ConfirmClaimModal
-          isOpen={true}
+          isOpen={showWarning}
           onConfirm={() => {
             setShowWarning(false)
             claimRewardsMutation.mutate(rewardsToClaim)
