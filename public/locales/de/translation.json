@@ -958,7 +958,8 @@
         "reputation": "Ruf",
         "signIn": "Anmelden",
         "sync": "Sync",
-        "pointsClaimed": "Forderungen"
+        "pointsClaimed": "Forderungen",
+        "g7Numclaimed": "G7-Kredite insgesamt"
     },
     "quests": {
         "playstreak": {
