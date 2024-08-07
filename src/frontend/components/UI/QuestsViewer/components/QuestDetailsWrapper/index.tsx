@@ -3,13 +3,17 @@ import {
   QuestDetails,
   QuestDetailsProps,
   Game,
-  QuestDetailsTranslations
+  QuestDetailsTranslations,
+  ModalProps,
+  Modal,
+  Button,
+  Images
 } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
-import { useTranslation } from 'react-i18next'
+import { Trans, useTranslation } from 'react-i18next'
 import {
   useWriteContract,
   useAccount,
@@ -91,6 +95,56 @@ async function getRewardClaimGasEstimation(reward: Reward) {
   return gasNeeded
 }
 
+interface ConfirmProps extends ModalProps {
+  networkName: string
+  onConfirm: () => void
+  onCancel: () => void
+}
+
+function ConfirmClaimModal(props: ConfirmProps) {
+  const { t } = useTranslation()
+  return (
+    <Modal {...props} classNames={{ root: styles.confirmModal }}>
+      <Images.AlertTriangle
+        className={styles.alertIcon}
+        width={24}
+        height={24}
+      />
+      <div className={styles.confirmTextWrapper}>
+        <Modal.Body className={styles.confirmText}>
+          <Modal.Title>
+            {t('quest.claimWarning.title', 'Confirm Quest Reward Claim')}
+          </Modal.Title>
+          <div>
+            <Trans
+              i18nKey="quest.claimWarning.body"
+              defaultValue="<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>"
+              values={{ networkName: props.networkName }}
+              components={{ bold: <span className="text--bold" /> }}
+            />
+          </div>
+          <div>
+            <Trans
+              i18nKey="quest.claimWarning.body2"
+              defaultValue="Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>"
+              values={{ networkName: props.networkName }}
+              components={{ bold: <span className="text--bold" /> }}
+            />
+          </div>
+        </Modal.Body>
+        <div className={styles.buttonsContainer}>
+          <Button type="tertiary" onClick={props.onCancel}>
+            {t('quest.claimWarning.cancel', 'cancel')}
+          </Button>
+          <Button type="secondary" onClick={props.onConfirm}>
+            {t('quest.claimWarning.confirm', 'confirm')}
+          </Button>
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
 export function QuestDetailsWrapper({
   selectedQuestId,
   projectId
@@ -112,6 +166,7 @@ export function QuestDetailsWrapper({
 
   const flags = useFlags()
   const account = useAccount()
+  const [showWarning, setShowWarning] = useState(false)
   const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
@@ -340,8 +395,8 @@ export function QuestDetailsWrapper({
   }
 
   const claimRewardsMutation = useMutation({
-    mutationFn: async (rewards: Reward[]) => {
-      return claimRewards(rewards)
+    mutationFn: async (params: Reward[]) => {
+      return claimRewards(params)
     },
     onSuccess: async () => {
       await questPlayStreakResult.invalidateQuery()
@@ -410,6 +465,17 @@ export function QuestDetailsWrapper({
       }
     }
 
+    let networkName = ''
+
+    if (questMeta.rewards?.[0].chain_id) {
+      networkName = chainMap[questMeta.rewards[0].chain_id]?.chain?.name ?? ''
+    }
+
+    const rewardsToClaim = questMeta.rewards ?? []
+    const isRewardOnChain = rewardsToClaim.some((reward) =>
+      ['ERC1155', 'ERC721', 'ERC20'].includes(reward.reward_type)
+    )
+
     const questDetailsProps: QuestDetailsProps = {
       alertProps,
       questType: questMeta.type,
@@ -430,8 +496,13 @@ export function QuestDetailsWrapper({
       },
       rewards: questRewards ?? [],
       i18n,
-      onClaimClick: async () =>
-        claimRewardsMutation.mutate(questMeta.rewards ?? []),
+      onClaimClick: async () => {
+        if (isRewardOnChain) {
+          setShowWarning(true)
+        } else {
+          claimRewardsMutation.mutate(rewardsToClaim)
+        }
+      },
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
@@ -448,13 +519,25 @@ export function QuestDetailsWrapper({
       chainTooltips: {}
     }
     questDetails = (
-      <QuestDetails
-        {...questDetailsProps}
-        className={styles.questDetails}
-        key={`questDetailsLoadedId${
-          questMeta.id
-        }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
-      />
+      <>
+        <ConfirmClaimModal
+          isOpen={showWarning}
+          onConfirm={() => {
+            setShowWarning(false)
+            claimRewardsMutation.mutate(rewardsToClaim)
+          }}
+          onCancel={() => setShowWarning(false)}
+          onClose={() => setShowWarning(false)}
+          networkName={networkName}
+        />
+        <QuestDetails
+          {...questDetailsProps}
+          className={styles.questDetails}
+          key={`questDetailsLoadedId${
+            questMeta.id
+          }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
+        />
+      </>
     )
   } else if (
     questResult?.data.isLoading ||
