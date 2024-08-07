@@ -985,7 +985,11 @@
                 "overlay": "Du är för närvarande inte inloggad, spela framsteg kommer inte att spåras. Avsluta spelet och logga in på HyperPlay via den övre högra nedgången för att spåra framsteg."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "noneFound": {
+            "message": "Det fanns inga uppdrag hittades.",
+            "title": "Inga Quests hittades."
+        }
     },
     "accounts": "konton",
     "achievements": {
