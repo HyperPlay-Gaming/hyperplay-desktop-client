@@ -956,7 +956,8 @@
         "active": "Ενεργό",
         "signIn": "Σύνδεση",
         "sync": "Συγχρονισμός",
-        "pointsClaimed": "Υποχρεωμένα Σημεία"
+        "pointsClaimed": "Υποχρεωμένα Σημεία",
+        "g7Numclaimed": "Ολοκληρωμένο G7 Credits"
     },
     "email_subscription": {
         "title": "Σας ευχαριστούμε για την εγγραφή!",
