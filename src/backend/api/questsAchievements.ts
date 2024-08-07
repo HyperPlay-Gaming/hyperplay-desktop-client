@@ -1,7 +1,8 @@
 import {
   GetAchievementsOptions,
   PlayerOptions,
-  GetIndividualAchievementsOptions
+  GetIndividualAchievementsOptions,
+  Runner
 } from 'common/types'
 import { ipcRenderer } from 'electron'
 
@@ -55,3 +56,6 @@ export const getExternalTaskCredits = async (rewardId: string) =>
 
 export const getPointsBalancesForProject = async (projectId: string) =>
   ipcRenderer.invoke('getPointsBalancesForProject', projectId)
+
+export const syncPlaySession = async (appName: string, runner: Runner) =>
+  ipcRenderer.invoke('syncPlaySession', appName, runner)
