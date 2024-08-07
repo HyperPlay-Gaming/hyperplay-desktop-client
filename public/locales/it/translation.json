@@ -946,6 +946,10 @@
                 "client": "Attualmente non sei connesso, il progresso della striscia di gioco non verrà tracciato. Si prega di effettuare il login a HyperPlay attraverso la discesa in alto a destra per monitorare i progressi.",
                 "overlay": "Attualmente non sei connesso, il progresso della striscia di gioco non verrà tracciato. Si prega di uscire dal gioco e accedere a HyperPlay tramite il dropdown top-right per monitorare i progressi."
             }
+        },
+        "noneFound": {
+            "message": "Non sono state trovate missioni.",
+            "title": "Nessuna ricerca trovata."
         }
     },
     "ALL": "Tutto",
