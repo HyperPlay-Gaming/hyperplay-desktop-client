@@ -972,7 +972,8 @@
         "signIn": "Rexistro",
         "sync": "Sincronizar",
         "reputation": "Reputación",
-        "pointsClaimed": "Os puntos Afirmaron"
+        "pointsClaimed": "Os puntos Afirmaron",
+        "g7Numclaimed": "Total Afirmado G7 Créditos"
     },
     "email_subscription": {
         "title": "Grazas Para subscribir!",
