@@ -966,7 +966,8 @@
         "quests": "Quêtes",
         "sync": "Synchroniser",
         "signIn": "Connexion",
-        "pointsClaimed": "Points réclamés"
+        "pointsClaimed": "Points réclamés",
+        "g7Numclaimed": "Total des crédits G7 réclamés"
     },
     "sideload": {
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Enlever un installateur qui contient des logiciels malveillants pourrait compromettre votre ordinateur et conduire au vol de fonds.",
@@ -992,7 +993,11 @@
                 "overlay": "Vous n'êtes pas connecté à l'heure actuelle, le progrès de la streak ne sera pas suivi. Veuillez quitter le jeu et vous connecter à HyperPlay via la liste déroulante pour suivre les progrès."
             }
         },
-        "quests": "Quêtes"
+        "quests": "Quêtes",
+        "noneFound": {
+            "message": "Il n'y avait pas de quêtes trouvées.",
+            "title": "Pas de quêtes trouvées."
+        }
     },
     "accounts": "comptes",
     "exit_game": "Exit Game",

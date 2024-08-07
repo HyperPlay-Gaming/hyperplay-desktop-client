@@ -1001,7 +1001,8 @@
         "points": "Points",
         "sync": "Синхронизуј",
         "quests": "#Poen",
-        "pointsClaimed": "#Poen"
+        "pointsClaimed": "#Poen",
+        "g7Numclaimed": "@Total #Potraživati G7 #Kredit"
     },
     "quests": {
         "playstreak": {
@@ -1010,7 +1011,11 @@
                 "overlay": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please #izlaz @the #igra a login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#."
             }
         },
-        "quests": "#Poen"
+        "quests": "#Poen",
+        "noneFound": {
+            "message": "Tamo #biti @no #potraga #pronađen#.",
+            "title": "@No #Potraga #Pronađen#."
+        }
     },
     "achievements": {
         "progress": {

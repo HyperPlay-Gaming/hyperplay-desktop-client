@@ -734,7 +734,8 @@
         },
         "turnAnalyticsOff": "Tắt",
         "Sync": "Đồng bộ",
-        "copyUrl": "Sao chép URL"
+        "copyUrl": "Sao chép URL",
+        "viewFullscreen": "Xem toàn màn hình"
     },
     "quest": {
         "active": "Tích cực",

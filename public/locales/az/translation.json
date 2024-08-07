@@ -927,7 +927,8 @@
         "errorMessage": "Əməliyyat ilə bir məlumat var.",
         "reputation": "İdman",
         "notEnoughGas": "Qeydli cüzdan balıqları ilə mükafat iddia etmək. Retrying əvvəl bir cüzdan və ya yeniləyin.",
-        "pointsClaimed": "Qeydiyyat"
+        "pointsClaimed": "Qeydiyyat",
+        "g7Numclaimed": "Xüsusi G7 Kreditlər"
     },
     "profile": "Profil",
     "importGameErrorMessageExecutable": "Oyuncaq tapmaq mümkün deyil",
@@ -943,7 +944,11 @@
                 "overlay": "Hazırda qeydiyyatdan keçmək deyil. Oyun çıxmaq və HyperPlay giriş üst sağ dropdown vasitəsi ilə giriş."
             }
         },
-        "quests": "Avtomobil"
+        "quests": "Avtomobil",
+        "noneFound": {
+            "message": "Oxunub:.",
+            "title": "No Quests tapdı."
+        }
     },
     "accounts": "accounts",
     "ALL": "ALL",

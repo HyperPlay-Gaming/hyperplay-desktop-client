@@ -958,7 +958,8 @@
         "reputation": "Ruf",
         "signIn": "Anmelden",
         "sync": "Sync",
-        "pointsClaimed": "Forderungen"
+        "pointsClaimed": "Forderungen",
+        "g7Numclaimed": "G7-Kredite insgesamt"
     },
     "quests": {
         "playstreak": {
@@ -967,7 +968,11 @@
                 "overlay": "Sie sind derzeit nicht eingeloggt, Play Streak Fortschritt wird nicht verfolgt. Bitte verlassen Sie das Spiel und melden Sie sich an HyperPlay über den oberen rechten Dropdown, um den Fortschritt zu verfolgen."
             }
         },
-        "quests": "Aufträge"
+        "quests": "Aufträge",
+        "noneFound": {
+            "title": "Keine Quests gefunden.",
+            "message": "Es wurden keine Quests gefunden."
+        }
     },
     "gameRelease": {
         "prototype": "Prototyp",

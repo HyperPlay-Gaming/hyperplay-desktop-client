@@ -927,7 +927,8 @@
         "claimAll": "@Claim @all",
         "linkAccount": "#Veza #tvoj @Steam #račun #na #pregled eligibility#.",
         "reputation": "#Reputacija",
-        "pointsClaimed": "#Poen"
+        "pointsClaimed": "#Poen",
+        "g7Numclaimed": "@Total #Potraživati G7 #Kredit"
     },
     "profile": "Profile",
     "back_to_game": "@Back #na #igra",
@@ -987,7 +988,11 @@
                 "client": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#."
             }
         },
-        "quests": "#Potraga"
+        "quests": "#Potraga",
+        "noneFound": {
+            "message": "Tamo #biti @no #potraga #pronađen#.",
+            "title": "@No #Potraga #Pronađen#."
+        }
     },
     "sideload": {
         "warningMessage": "#Strana-@loading @a #igra @i @a @feature @intend @for developers a @experienced #moć #korisnik. #Strana-@loading @a @installer da #sadržati malware #moći #kompromis #tvoj #računar a #olovo #na #krađa @of #fond#.",

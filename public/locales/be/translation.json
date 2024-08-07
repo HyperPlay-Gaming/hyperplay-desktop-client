@@ -730,7 +730,8 @@
         "discordApp": "Discord",
         "folder": "Каталог",
         "logOut": "Выхад",
-        "misc": "Ніколі"
+        "misc": "Ніколі",
+        "viewFullscreen": "Поўны экран"
     },
     "notification": {
         "wine-download": {

@@ -968,7 +968,8 @@
         "points": "포인트",
         "sync": "동기화",
         "reputation": "평판",
-        "pointsClaimed": "공지사항"
+        "pointsClaimed": "공지사항",
+        "g7Numclaimed": "총 클레임 G7 크레딧"
     },
     "sideload": {
         "warningMessage": "Side-loading 게임은 개발자와 숙련 된 전력 사용자를위한 기능입니다. 악성 프로그램이 컴퓨터를 손상하고 자금을 납치 할 수있는 설치 프로그램을로드.",
@@ -981,7 +982,11 @@
                 "overlay": "현재 로그인되지 않습니다, streak 진행 상황을 추적하지 않습니다. 게임을 종료하고 HyperPlay에 로그인하십시오."
             }
         },
-        "quests": "퀘스트"
+        "quests": "퀘스트",
+        "noneFound": {
+            "message": "찾을 수 없습니다.",
+            "title": "퀘스트 없음."
+        }
     },
     "accounts": "계정 만들기",
     "overlay": {

@@ -927,7 +927,8 @@
         "linkAccount": "Länka din Ångkonto för att kontrollera behörigheten.",
         "createDiscordTicket": "Skapad Discord biljett",
         "notEnoughGas": "Otillräcklig plånboksbalans för att hävda din belöning på grund av gasavgifter. Prova en annan plånbok eller fylla på den här innan du går tillbaka.",
-        "pointsClaimed": "Poäng som krävs"
+        "pointsClaimed": "Poäng som krävs",
+        "g7Numclaimed": "Totalkrav G7 Credits"
     },
     "ALL": "ALLA",
     "analytics": "Analytics",
@@ -985,7 +986,11 @@
                 "overlay": "Du är för närvarande inte inloggad, spela framsteg kommer inte att spåras. Avsluta spelet och logga in på HyperPlay via den övre högra nedgången för att spåra framsteg."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "noneFound": {
+            "message": "Det fanns inga uppdrag hittades.",
+            "title": "Inga Quests hittades."
+        }
     },
     "accounts": "konton",
     "achievements": {

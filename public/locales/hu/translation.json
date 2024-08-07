@@ -927,7 +927,8 @@
         "reward": "Jutalom",
         "associatedGames": "Társult játékok",
         "notEnoughGas": "Elég pénztárca-egyenleg, hogy követelje meg a jutalmat a gázdíjak miatt. Próbáljon ki egy másik pénztárcát, vagy töltse fel ezt, mielőtt visszavonul.",
-        "pointsClaimed": "Pontok betartott"
+        "pointsClaimed": "Pontok betartott",
+        "g7Numclaimed": "Teljes jogú G7 hitelek"
     },
     "quests": {
         "quests": "Küldetések",
@@ -936,6 +937,10 @@
                 "overlay": "Jelenleg nincs bejelentkezve, a streak haladást nem követik nyomon. Kérjük, hagyja ki a játékot, és jelentkezzen be a HyperPlay-ba a jobboldali leálláson keresztül a haladás nyomon követéséhez.",
                 "client": "Jelenleg nem vagy bejelentkezve, a streak haladást nem követik nyomon. Kérjük, jelentkezzen be a HyperPlay-ba a jobboldali leálláson keresztül a haladás nyomon követéséhez."
             }
+        },
+        "noneFound": {
+            "title": "Nem találtak Quests.",
+            "message": "Nem találtak kereséseket."
         }
     },
     "sideload": {

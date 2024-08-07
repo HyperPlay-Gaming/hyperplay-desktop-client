@@ -972,7 +972,8 @@
         "signIn": "Rexistro",
         "sync": "Sincronizar",
         "reputation": "Reputación",
-        "pointsClaimed": "Os puntos Afirmaron"
+        "pointsClaimed": "Os puntos Afirmaron",
+        "g7Numclaimed": "Total Afirmado G7 Créditos"
     },
     "email_subscription": {
         "title": "Grazas Para subscribir!",
@@ -985,7 +986,11 @@
                 "overlay": "Es actualmente non entrado no sistema, xogo streak o progreso non será seguido. Compracer saír o xogo e login a HyperPlay vía o superior-correcto dropdown para seguir progreso."
             }
         },
-        "quests": "Buscas"
+        "quests": "Buscas",
+        "noneFound": {
+            "title": "Ningunha Busca Atopou.",
+            "message": "Non había  ningunha busca atopou."
+        }
     },
     "accounts": "Contas",
     "overlay": {
