@@ -19,11 +19,17 @@ module.exports = {
   defaultNamespace: 'translation',
   // Default namespace used in your i18next config
 
-  defaultValue: '',
+  defaultValue: null,
   // Default value to give to empty keys
 
   failOnWarnings: false,
   // Exit with an exit code of 1 on warnings
+
+  // If you wish to customize options in internally used i18next instance, you can define an object with any
+  // configuration property supported by i18next (https://www.i18next.com/overview/configuration-options).
+  // { compatibilityJSON: 'v3' } can be used to generate v3 compatible plurals.
+  // settings 'v3' since Weblate is also configured for v3 compatibility
+  i18nextOptions: { compatibilityJSON: 'v3' },
 
   indentation: 4,
   // Indentation of the catalog files
@@ -47,10 +53,11 @@ module.exports = {
         attr: 'i18nKey', // Attribute for the keys
         lexer: 'JsxLexer'
       }
-    ]
+    ],
+    default: ['JavascriptLexer']
   },
 
-  lineEnding: 'auto',
+  lineEnding: 'match',
   // Control the line ending. See options at https://github.com/ryanve/eol
 
   locales: ['en'],
@@ -65,15 +72,18 @@ module.exports = {
   // Supports JSON (.json) and YAML (.yml) file formats
   // Where to write the locale files relative to process.cwd()
 
+  // the problem with that is that we need all keys to have a default value otherwise they will be removed
+  // resetDefaultValueLocale: 'en',
+  // The locale to compare with default values to determine whether a default value has been changed.
+  // If this is set and a default value differs from a translation in the specified locale, all entries
+  // for that key across locales are reset to the default value, and existing translations are moved to
+  // the `_old` file.
+
   skipDefaultValues: false,
   // Whether to ignore default values.
 
   sort: true,
   // Whether or not to sort the catalog
-
-  useKeysAsDefaultValue: false,
-  // Whether to use the keys as the default value; ex. "Hello": "Hello", "World": "World"
-  // This option takes precedence over the `defaultValue` and `skipDefaultValues` options
 
   verbose: true
   // Display info about the parsing including some stat
