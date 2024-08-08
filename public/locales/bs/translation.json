@@ -992,6 +992,10 @@
         "noneFound": {
             "message": "Tamo #biti @no #potraga #pronađen#.",
             "title": "@No #Potraga #Pronađen#."
+        },
+        "g7CreditsModal": {
+            "title": "#Steći Game7 #Kredit",
+            "description": "@Dive @into HyperPlay@'s #vrh #igra #uz @excite #Predstava Streak #Izazov. @Each #aktivnost #ohrabriti #free #na #sudjelovati #uz @a #drugačiji #igra, showcasing @the @best @of web3 gaming. #Tvoj playtime #pitanje#!"
         }
     },
     "sideload": {
