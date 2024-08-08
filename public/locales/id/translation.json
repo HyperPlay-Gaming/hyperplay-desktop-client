@@ -1014,6 +1014,10 @@
         "noneFound": {
             "message": "Tidak ada pencarian yang ditemukan.",
             "title": "Tidak ada keputusan yang ditemukan."
+        },
+        "g7CreditsModal": {
+            "description": "Menyelam ke game top HyperPlay dengan Tantangan Streak Bermain yang menarik. Setiap aktivitas mendorong Anda untuk terlibat dengan permainan yang berbeda, menunjukkan yang terbaik dari game web3. Masalah bermain Anda!",
+            "title": "Dapatkan Kredit Game7"
         }
     },
     "email_subscription": {
