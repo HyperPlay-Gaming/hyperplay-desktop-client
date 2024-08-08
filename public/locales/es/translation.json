@@ -1015,7 +1015,8 @@
         "createDiscordTicket": "Ticket creado en Discord",
         "notEnoughGas": "El saldo del monedero es insuficiente para reclamar la recompensa debido a los gastos de gasolina. Prueba con otro monedero o recarga este antes de volver a intentarlo.",
         "claimFailedMessage": "Por favor, inténtalo una vez más. Si sigue sin funcionar, crea un ticket de soporte en Discord.",
-        "pointsClaimed": "Cuestiones reclamadas"
+        "pointsClaimed": "Cuestiones reclamadas",
+        "g7Numclaimed": "Total Claimed G7 Credits"
     },
     "back_to_game": "Volver al juego",
     "email_subscription": {
@@ -1029,6 +1030,10 @@
                 "overlay": "Actualmente no has iniciado sesión, no se hará un seguimiento del progreso de la racha de juego. Por favor, sal del juego e inicia sesión en HyperPlay a través del menú desplegable superior derecho para realizar un seguimiento del progreso.",
                 "client": "Actualmente no has iniciado sesión. No se hará un seguimiento del progreso de la racha del juego. Inicia sesión en HyperPlay a través del menú desplegable superior derecho para realizar un seguimiento del progreso."
             }
+        },
+        "noneFound": {
+            "message": "No se encontraron misiones.",
+            "title": "No hay búsquedas."
         }
     }
 }

@@ -941,7 +941,8 @@
         "createDiscordTicket": "כרטיסים נבחרים",
         "claimFailedMessage": "נסה פעם נוספת. אם זה עדיין לא עובד, ליצור כרטיס תמיכה דיסקורד.",
         "notEnoughGas": "איזון ארנק חסר ערך כדי לטעון את הפרס שלך בגלל עמלות גז. נסה ארנק שונה או לחדש את זה לפני retrying.",
-        "pointsClaimed": "נקודות תביעות"
+        "pointsClaimed": "נקודות תביעות",
+        "g7Numclaimed": "תגית: G7 Credits"
     },
     "notification": {
         "wine-download": {
@@ -1016,7 +1017,11 @@
                 "overlay": "אתה לא מחובר כרגע, לשחק התקדמות streak לא יהיה לעקוב. אנא צא מהמשחק והכניסה ל- HyperPlay דרך הירידה הימנית העליונה כדי לעקוב אחר ההתקדמות."
             }
         },
-        "quests": "תוצאות חיפוש"
+        "quests": "תוצאות חיפוש",
+        "noneFound": {
+            "message": "לא נמצאו מסעות.",
+            "title": "לא נמצאו סיורים."
+        }
     },
     "importGameErrorMessageExecutable": "משחק Game Game לוח לא נמצא, משחק יבוא אינו אפשרי",
     "achievements": {

@@ -1014,7 +1014,8 @@
         "signIn": "Увійдіть в систему",
         "sync": "Синхронізувати",
         "connectSteamAccount": "Підключити аккаунт команди",
-        "pointsClaimed": "Окуляри Claimed"
+        "pointsClaimed": "Окуляри Claimed",
+        "g7Numclaimed": "Загальний кредит G7"
     },
     "quests": {
         "playstreak": {
@@ -1023,7 +1024,11 @@
                 "overlay": "Ви в даний час не ввійшли, грайте Streak прогрес не буде відстежити. Будь ласка, введіть гру і ввімкніть до HyperPlay через верхній правий спадок, щоб відстежувати прогрес."
             }
         },
-        "quests": "Квести"
+        "quests": "Квести",
+        "noneFound": {
+            "message": "Не знайдено квестів.",
+            "title": "Не знайдено Quests."
+        }
     },
     "back_to_game": "Повернутися до гри",
     "notification": {

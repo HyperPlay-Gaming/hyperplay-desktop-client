@@ -920,7 +920,8 @@
         "claimFailedMessage": "Si us plau, intenti-ho una vegada més. Si encara no funciona, crea un tiquet de suport Discord.",
         "createDiscordTicket": "Entrada Restaurar contrasenya oblidada",
         "notEnoughGas": "Insuficient equilibri cartera per reclamar la seva recompensa a causa de les taxes de gas. Proveu una cartera diferent o torneu-la a repetir.",
-        "pointsClaimed": "Punts Reclamats"
+        "pointsClaimed": "Punts Reclamats",
+        "g7Numclaimed": "Total Reclamats G7 Crèdits"
     },
     "ALL": "TOT",
     "gameRelease": {
@@ -993,6 +994,10 @@
                 "client": "No s'ha iniciat la sessió, no s'ha de seguir el progrés del joc. Si us plau, introdueix dins de la caixa de text els caràcters que veu a la imatge de sota. Això és requerit per evitar enviaments automàtics.",
                 "overlay": "No s'ha iniciat la sessió, no s'ha de seguir el progrés del joc. Si us plau, introdueix dins de la caixa de text els caràcters que veu a la imatge de sota. Això és requerit per evitar enviaments automàtics."
             }
+        },
+        "noneFound": {
+            "message": "No s'han trobat missions.",
+            "title": "No hi ha recerca."
         }
     },
     "accounts": "comptes",

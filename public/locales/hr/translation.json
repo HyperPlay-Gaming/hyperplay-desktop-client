@@ -737,7 +737,8 @@
         },
         "Sync": "Sinkronizacija",
         "turnAnalyticsOff": "Isključi",
-        "logOut": "Odjavi se"
+        "logOut": "Odjavi se",
+        "viewFullscreen": "Prikaz preko cijelog ekrana"
     },
     "quest": {
         "active": "Aktivno",

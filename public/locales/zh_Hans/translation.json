@@ -988,7 +988,8 @@
             "reputation": "投 票"
         },
         "View Game": "观点",
-        "pointsClaimed": "要求"
+        "pointsClaimed": "要求",
+        "g7Numclaimed": "索赔总额"
     },
     "quests": {
         "quests": "任务",
@@ -997,6 +998,10 @@
                 "overlay": "你们目前还未陷入困境,进展将无法追踪。 请通过直截了当的倒塌,将游戏和标志从超Play转向跟踪进展.",
                 "client": "你们目前还未陷入困境,进展将无法追踪。 请通过直截了当的退步向超Play表示,以跟踪进展情况."
             }
+        },
+        "noneFound": {
+            "message": "没有发现任何要求.",
+            "title": "无勘探公司."
         }
     },
     "exit_game": "退出游戏",

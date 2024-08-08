@@ -993,7 +993,8 @@
         "claimFailedMessage": "Por favor, tente mais uma vez. Se ainda não funcionar, crie um ticket de suporte Discord.",
         "createDiscordTicket": "Bilhete de discórdia criado",
         "notEnoughGas": "Balança de carteira insuficiente para reclamar sua recompensa devido a taxas de gás. Tente uma carteira diferente ou reabastecer esta antes de retentar.",
-        "pointsClaimed": "Pontos Vistos"
+        "pointsClaimed": "Pontos Vistos",
+        "g7Numclaimed": "Total Claimed G7 Créditos"
     },
     "notification": {
         "wine-download": {
@@ -1008,7 +1009,11 @@
                 "overlay": "Atualmente, você não está conectado, o progresso da série não será rastreado. Por favor, saia do jogo e faça login no HyperPlay através do dropdown superior direito para acompanhar o progresso."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "noneFound": {
+            "message": "Não foram encontradas missões.",
+            "title": "Nenhuma busca encontrada."
+        }
     },
     "importGameErrorTitle": "Importar erro de jogo",
     "overlay": {

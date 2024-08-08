@@ -919,7 +919,8 @@
         "claimFailedMessage": "お問い合わせ それでも機能しない場合は、Discordサポートチケットを作成します.",
         "createDiscordTicket": "作成したDiscordチケット",
         "notEnoughGas": "十分なウォレット残高で、ガス手数料による報酬を請求できます。 別の財布を試したり、再試行する前にこれを補充してください.",
-        "pointsClaimed": "ポイント申請"
+        "pointsClaimed": "ポイント申請",
+        "g7Numclaimed": "請求総額 G7 クレジット"
     },
     "quests": {
         "quests": "クエスト",
@@ -928,6 +929,10 @@
                 "client": "現在ログインしていないので、 streak の進捗状況が追跡されません。 右上のドロップダウンでHyperPlayにログインして進捗状況を追跡してください.",
                 "overlay": "現在ログインしていないので、 streak の進捗状況が追跡されません。 右上のドロップダウンでゲームを終了し、HyperPlayにログインして進捗状況を追跡してください."
             }
+        },
+        "noneFound": {
+            "title": "クエストが見つかりません.",
+            "message": "クエストが見つかりませんでした."
         }
     },
     "ALL": "ALL",

@@ -975,7 +975,8 @@
         "sync": "Sinkronisasi",
         "claimed": "Diklaim",
         "connectSteamAccount": "Hubungkan akun tim",
-        "pointsClaimed": "Poin Diklaim"
+        "pointsClaimed": "Poin Diklaim",
+        "g7Numclaimed": "Total Kredit G7 Klaim"
     },
     "notification": {
         "wine-download": {
@@ -1009,7 +1010,11 @@
                 "overlay": "Anda saat ini tidak masuk, bermain streak kemajuan tidak akan dilacak. Silakan keluarkan game dan login ke HyperPlay melalui dropdown kanan atas untuk melacak kemajuan."
             }
         },
-        "quests": "Pencarian"
+        "quests": "Pencarian",
+        "noneFound": {
+            "message": "Tidak ada pencarian yang ditemukan.",
+            "title": "Tidak ada keputusan yang ditemukan."
+        }
     },
     "email_subscription": {
         "title": "Terima kasih untuk berlangganan!",
