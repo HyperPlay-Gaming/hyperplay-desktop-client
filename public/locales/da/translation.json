@@ -1062,6 +1062,10 @@
         "noneFound": {
             "message": "Der var ingen quests fundet.",
             "title": "Ingen Quests Fundet."
+        },
+        "g7CreditsModal": {
+            "title": "Optjen spil7 Credits",
+            "description": "Dyk ned i HyperPlay's top spil med spændende Play Streak Challenges. Hver aktivitet opfordrer dig til at engagere sig med et andet spil, der viser det bedste af web3 spil. Din spilletid betyder noget!"
         }
     },
     "importGameErrorMessage": "Ikke en gyldig spilmappe, import af spil er ikke muligt",
