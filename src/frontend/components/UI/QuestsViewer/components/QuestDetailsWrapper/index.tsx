@@ -61,7 +61,6 @@ async function getRewardClaimGasEstimation(reward: Reward) {
   const viemChain = parseChainMetadataToViemChain(chainMetadata)
 
   const publicClient = createPublicClient({
-    // @ts-expect-error: chain types are valid
     chain: viemChain,
     transport: http()
   })
