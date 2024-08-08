@@ -15,7 +15,7 @@
         }
     },
     "add_game": "Add Game",
-    "All": "",
+    "All": "All",
     "ALL": "ALL",
     "analytics": "Analytics",
     "anticheat": {
@@ -29,15 +29,15 @@
     "back_to_game": "Back to game",
     "box": {
         "cache-cleared": {
-            "message": "HyperPlay Cache Was Cleared!",
-            "title": "Cache Cleared"
+            "message": "HyperPlay cache cleared.",
+            "title": "Cache cleared"
         },
-        "choose": "",
-        "choose-egs-prefix": "",
+        "choose": "Choose",
+        "choose-egs-prefix": "Choose Prefix where EGS is installed",
         "choose-gogdl-binary": "Select GOGDL Binary (needs restart)",
-        "choose-legendary-binary": "Select Legendary Binary (needs restart)",
-        "customWine": "Select the Wine or Proton Binary",
-        "default-install-path": "",
+        "choose-legendary-binary": "Select Legendary binary",
+        "customWine": "Select the Wine or Proton binary",
+        "default-install-path": "Choose Default Install Path",
         "default-steam-path": "Steam path.",
         "dontShowAgain": "Don't show again",
         "downloadNow": "Download now",
@@ -45,11 +45,11 @@
             "add": {
                 "steam": {
                     "body": "Adding {{game}} to Steam failed with:{{newLine}} {{error}}",
-                    "title": "Error Adding Game to Steam"
+                    "title": "Adding Error"
                 }
             },
             "credentials": {
-                "message": "Your Crendentials have expired, Logout and Login Again!"
+                "message": "Your credentials have expired, please log out and log in again."
             },
             "cx-bottle-not-found": {
                 "message": "The CrossOver bottle \"{{bottle_name}}\" does not exist, can't launch!",
@@ -60,7 +60,7 @@
                 "title": "No Space"
             },
             "dxvk": {
-                "message": "Error installing DXVK/VKD3D! Check your connection!",
+                "message": "Error installing DXVK/VKD3D! Please check your connection!",
                 "title": "DXVK/VKD3D error"
             },
             "folder-not-found": {
@@ -68,7 +68,7 @@
             },
             "generic": {
                 "message": "",
-                "title": ""
+                "title": "Select EXE to Run"
             },
             "launchAborted": "Launch aborted",
             "moving": "Error Moving Game {{error}}",
@@ -79,7 +79,7 @@
             },
             "update": {
                 "message": "Something went wrong with the update! Please manually uninstall and reinstall HyperPlay.",
-                "title": "Error Updating"
+                "title": "Update Error"
             },
             "winetricks": {
                 "message": "Winetricks returned the following error during execution:{{newLine}}{{error}}",
@@ -92,15 +92,15 @@
                 "detail": "Do you want to download the update in the background?",
                 "message": "There is a new Version available!",
                 "message-finished": "Do you want to restart HyperPlay now?",
-                "title": "HyperPlay",
+                "title": "HyperPlay Games Launcher",
                 "title-finished": "Update Finished"
             }
         },
-        "no": "",
-        "ok": "Ok",
+        "no": "NO",
+        "ok": "OK",
         "protocol": {
             "install": {
-                "not_installed": "Is Not Installed, do you wish to Install it?"
+                "not_installed": "Currently not installed. Install it?"
             }
         },
         "quit": {
@@ -109,7 +109,7 @@
         },
         "reset-app": {
             "question": {
-                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of hyperplay needs to be restarted manually afterwards.",
+                "message": "Are you sure you want to reset HyperPlay? This will remove all Settings and Caching but won't remove your Installed games or your Epic credentials. Portable versions (AppImage, WinPortable, ...) of HyperPlay needs to be restarted manually afterwards.",
                 "title": "Reset HyperPlay"
             }
         },
@@ -124,19 +124,19 @@
         },
         "select": {
             "button": "Select",
-            "exe": "Select EXE..."
+            "exe": "Select EXE"
         },
         "shortcuts": {
             "message": "Shortcuts were created on Desktop and Start Menu",
             "message-mac": "Shortcuts were created on the Applications folder",
             "message-remove": "Shortcuts were removed from Desktop and Start Menu",
             "message-remove-mac": "Shortcuts were removed from the Applications folder",
-            "title": "Shortcuts Removed"
+            "title": "Shortcuts"
         },
         "sync": {
-            "button": "",
-            "error": "",
-            "title": ""
+            "button": "Choose",
+            "error": "Invalid Path",
+            "title": "Choose the saves directory"
         },
         "vcruntime": {
             "install": {
@@ -165,17 +165,17 @@
                 "title-gptk": "Game Porting Toolkit Not Compatible "
             }
         },
-        "wineprefix": "",
-        "yes": ""
+        "wineprefix": "Choose Wine Prefix Folder",
+        "yes": "YES"
     },
     "button": {
         "cancel": "Cancel",
         "continue": "Continue",
         "download": "Download",
         "go_to_library": "Go to Library",
-        "sync": "",
-        "syncing": "",
-        "unsync": "",
+        "sync": "Sync",
+        "syncing": "Syncing",
+        "unsync": "Unsync",
         "update": "Update"
     },
     "controller": {
@@ -184,7 +184,7 @@
             "backspace": "Backspace",
             "close_dialog": "Close dialog",
             "close_keyboard": "Close keyboard",
-            "close_options": "Close options",
+            "close_options": "Close Options",
             "game_details": "Game details",
             "game_settings": "Game settings",
             "install_game": "Install game",
@@ -231,7 +231,7 @@
         "title": "Thank you for subscribing!"
     },
     "epic": {
-        "offline-notification-body": "HyperPlay will probably not work!",
+        "offline-notification-body": "Online services may not work fully as Epic Games servers are offline!",
         "offline-notification-title": "offline"
     },
     "Epic Games": "Epic Games",
@@ -256,8 +256,8 @@
     },
     "gameUpdateNotifications": {
         "body": {
-            "multiple": "",
-            "single": ""
+            "multiple": "{{gameName}} and other games are ready to update.",
+            "single": "There is an update ready for {{gameName}}."
         },
         "title": "Game Updates Available"
     },
@@ -278,7 +278,7 @@
     },
     "help": {
         "amdfsr": "AMD's FSR helps boost framerate by upscaling lower resolutions in Fullscreen Mode. Image quality increases from 5 to 1 at the cost of a slight performance hit. Enabling may improve performance.",
-        "custom_themes_path": "Do not use CSS files from untrusted sources.",
+        "custom_themes_path": "Do not use CSS files from untrusted sources. When in doubt, ask for a review in our Discord channel.",
         "custom_themes_wiki": "Check the Wiki for more details on adding custom themes. Click here.",
         "disable_logs": "Toggle this checkbox ON to disable most of the writes to log files (critical information is always logged). Make sure to turn OFF this setting before reporting any issue.",
         "dxvk": "DXVK is a Vulkan-based translational layer for DirectX 9, 10 and 11 games. Enabling may improve compatibility. Might cause issues especially for older DirectX games.",
@@ -292,14 +292,14 @@
             "valid_codes": "Valid language codes are game-dependant."
         },
         "gamemode": "Feral GameMode applies automatic and temporary tweaks to the system when running games. Enabling may improve performance.",
-        "general": "",
+        "general": "Sync with EGL if you have a working installation of the Epic Games Launcher elsewhere and want to import your games to avoid downloading them again.",
         "mangohud": "MangoHUD is an overlay that displays and monitors FPS, temperatures, CPU/GPU load and other system resources.",
         "msync": "Msync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on several games.",
         "other": {
-            "part4": "",
-            "part5": "",
-            "part6": "",
-            "part7": ""
+            "part4": "Use the ",
+            "part5": "Game Arguments",
+            "part6": " to be called after the launch command, for instance: ",
+            "part7": " to skip the launcher in some games, etc."
         },
         "preferSystemLibs": "Custom Wine versions (Wine-GE, Wine-Lutris) are shipped with their library dependencies. By enabling this option, these shipped libraries will be ignored and Wine will load system libraries instead. Warning! Issues may occur if dependencies are not met.",
         "primerun": "Use dedicated graphics card to render game on multi-GPU systems. Only needed on gaming laptops or desktops that use a headless GPU for rendering (NVIDIA Optimus, AMD CrossFire)",
@@ -308,15 +308,15 @@
         },
         "steamruntime": "Custom libraries provided by Steam to help run Linux and Windows (Proton) games. Enabling might improve compatibility.",
         "sync": {
-            "part1": "",
-            "part2": "",
-            "part3": "",
-            "part4": ""
+            "part1": "HyperPlay tries to guess the right save folder and this will work on the majority of cases. In case the folder is wrong, use the override box to change it.",
+            "part2": "In case you change the prefix folder for Wine or Proton, you will need to check the path again since Proton uses a different prefix (/pfx) and username (steamuser). So you can simple erase the current path get out of the sync settings page and get back again for HyperPlay to guess the folder one more time with the right prefix.",
+            "part3": "Manual Sync: Choose Download to download the games saves stored on the Cloud. Upload to upload the local ones to the cloud. Force Download and Force Upload will ignore the version that is locally or on the cloud.",
+            "part4": "Sync Saves Automatically will sync the saves every time you Start a Game and after finishing playing."
         },
         "vkd3d": "VKD3D is a Vulkan-based translational layer for DirectX 12 games. Enabling may improve compatibility significantly. Has no effect on older DirectX games.",
         "wine": {
-            "part1": "",
-            "part2": ""
+            "part1": "HyperPlay searches for versions of Wine, Proton, and CrossOver in the following folders:",
+            "part2": "For other places, use a symbolic link to one of these folders"
         }
     },
     "hyperplay": {
@@ -394,12 +394,12 @@
                 "screens": {
                     "import": {
                         "cantFindProfile": "Can't find your browser profile?",
-                        "createNewWallet": "Create New Extension Wallet",
+                        "createNewWallet": "Create new MM extension wallet",
                         "details": "The browsers below already have MetaMask installed. Choose the one you’d like to import from.",
                         "learnMore": "Learn more.",
                         "orWord": "OR",
-                        "title": "Select a browser to import from",
-                        "useRecoveryPhrase": "Import Using Secret Recovery Phrase",
+                        "title": "Select the browser to import from",
+                        "useRecoveryPhrase": "Import Using Secret Recovery phrase",
                         "useRecoveryPhraseInfo": "This feature is recommended for advanced users and developers. Your secret recovery phrase is stored locally in MetaMask and never shared with HyperPlay."
                     },
                     "info": {
@@ -495,12 +495,12 @@
         "save-sync": {
             "searching": "Trying to detect the correct save folder (click to cancel)"
         },
-        "settings": "",
+        "settings": "Settings are saved automatically",
         "version": "Wine Version"
     },
     "infobox": {
         "help": "Help",
-        "requirements": "",
+        "requirements": "System Requirements",
         "warning": "Warning",
         "wine-path": "Wine Path",
         "wine-path-invalid": "Wine Path is invalid, please select another one.",
@@ -516,11 +516,11 @@
         "alphabeticalAZ": "Alphabetical A-Z",
         "alphabeticalZA": "Alphabetical Z-A",
         "label": "Library",
-        "refresh": "Refresh Library",
+        "refresh": "Refresh",
         "sortByStatus": "Sort by Status"
     },
     "loading": {
-        "default": "",
+        "default": "Loading",
         "website": "Loading Website"
     },
     "login": {
@@ -531,8 +531,8 @@
         "old-mac": "Your macOS version is {{version}}. macOS 12 or newer is required to log in."
     },
     "message": {
-        "sync": "",
-        "unsync": ""
+        "sync": "Sync Complete",
+        "unsync": "Unsync Complete"
     },
     "notification": {
         "wine-download": {
@@ -542,7 +542,7 @@
     },
     "notify": {
         "error": {
-            "move": "Error Moving Game",
+            "move": "Error Moving the Game",
             "reparing": "Error Repairing"
         },
         "finished": {
@@ -560,23 +560,23 @@
                     "title": "Removed from Steam"
                 }
             },
-            "reparing": ""
+            "reparing": "Finished Repairing"
         },
         "install": {
             "canceled": "Installation Canceled",
-            "error": "",
+            "error": "Installation Failed",
             "finished": "Installation Finished",
             "imported": "Game Imported",
             "paused": "Installation Paused",
             "startInstall": "Installation Started",
             "stopped": "Installation stopped"
         },
-        "moved": "",
+        "moved": "Finished Moving",
         "moving": "Moving Game",
         "refresh": {
             "error": "Couldn't fetch releases from upstream, maybe because of Github API restrictions! Try again later."
         },
-        "uninstalled": "",
+        "uninstalled": "Uninstalled",
         "update": {
             "canceled": "Update Canceled",
             "finished": "Update Finished",
@@ -590,9 +590,9 @@
         "ignore": "Ignore",
         "offline": "Offline",
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
-        "retrying": "Retrying..."
+        "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "Open",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -611,8 +611,8 @@
             "info": "Set environment variables to append to the command."
         },
         "gameargs": {
-            "placeholder": "",
-            "title": ""
+            "placeholder": "Put here the Launcher Arguments",
+            "title": "Game Arguments (To run after the command):"
         },
         "quote-args-with-spaces": "Warning: Make sure to quote args with spaces! E.g.: \"path/with spaces/\"",
         "wrapper": {
@@ -627,7 +627,7 @@
     "other": {
         "gogdl-version": "GOGDL Version: ",
         "legendary-version": "Legendary Version: ",
-        "weblate": "Help Improve this translation."
+        "weblate": "Help Translate HyperPlay."
     },
     "Other": "Other",
     "overlay": {
@@ -638,7 +638,7 @@
         "alt-legendary-bin": "Using built-in Legendary binary...",
         "custom_themes_path": "Select the path to look for custom CSS files",
         "dxvkfpsvalue": "Positive integer value (e.g. 30, 60, ...)",
-        "egs-prefix": "",
+        "egs-prefix": "Prefix where EGS is installed",
         "prefered_language": "2-char code (i.e.: \"en\" or \"fr\")"
     },
     "Please connect to the internet to access the stores": "",
@@ -653,7 +653,7 @@
         "claimFailed": "Claim failed",
         "claimFailedMessage": "Please try once more. If it still doesn't work, create a Discord support ticket.",
         "connectSteamAccount": "Connect Steam account",
-        "createDiscordTicket": "Create Discord Ticket",
+        "createDiscordTicket": "Created Discord ticket",
         "g7Numclaimed": "Total Claimed G7 Credits",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
@@ -673,7 +673,7 @@
         "quests": "Quests",
         "readyForClaim": "Ready for claim",
         "reputation": "Reputation",
-        "reward": "Rewards",
+        "reward": "Reward",
         "signIn": "Sign in",
         "sync": "Sync",
         "type": {
@@ -709,18 +709,18 @@
         }
     },
     "Recent": "Played Recently",
-    "search": "",
+    "search": "Search for Games",
     "setting": {
         "adddesktopshortcuts": "Add desktop shortcuts automatically",
         "addgamestoapplications": "Add games to Applications automatically",
         "addgamestostartmenu": "Add games to start menu automatically",
         "addgamestosteam": "Add games to Steam automatically",
-        "alt-gogdl-bin": "Choose an Alternative GOGDL Binary to use (needs restart)",
-        "alt-legendary-bin": "Choose an Alternative Legendary Binary  (needs restart)to use",
+        "alt-gogdl-bin": "Choose an Alternative GOGDL Binary to use",
+        "alt-legendary-bin": "Choose an Alternative Legendary Binary",
         "autodxvk": "Auto Install/Update DXVK on Prefix",
         "autodxvknvapi": "Auto Install/Update DXVK-NVAPI on Prefix",
         "autoLaunchHyperPlay": "Auto Launch HyperPlay",
-        "autosync": "",
+        "autosync": "Autosync Saves",
         "autoUpdateGames": "Automatically update games",
         "autovkd3d": "Auto Install/Update VKD3D on Prefix",
         "change-target-exe": "Select an alternative EXE to run",
@@ -728,16 +728,16 @@
         "crossover-version": "Crossover/Wine Version",
         "custom_themes_path": "Custom Themes Path",
         "customWineProton": "Custom Wine/Proton Paths",
-        "darktray": "Use Dark Tray Icon (needs restart)",
-        "default-install-path": "",
+        "darktray": "Use Dark Tray Icon",
+        "default-install-path": "Default Installation Path",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable navigation using controller",
+        "disable_controller": "Disable Hyperplay navigation using controller",
         "disable_logs": "Disable Logs",
         "discordRPC": "Enable Discord Rich Presence",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "dxvkfpslimit": "Limit FPS (DX9, 10 and 11)",
-        "egs-sync": "",
+        "egs-sync": "Sync with Installed Epic Games",
         "enableFSRHack": "Enable FSR Hack (Wine version needs to support it)",
         "eosOverlay": {
             "cancelInstall": "Cancel",
@@ -751,10 +751,10 @@
             "installing": "The Epic Overlay is being installed...",
             "latestVersion": "Latest Version: {{version}}",
             "notInstalled": "The Epic Overlay is not installed",
-            "notInstalledMsg": "The EOS Overlay is not installed. Do you want to install it now?",
+            "notInstalledMsg": "The Epic Overlay is not installed. Do you want to install it now?",
             "notInstalledTitle": "Overlay not installed",
             "remove": "Uninstall",
-            "removeConfirm": "Are you sure you want to uninstall the EOS Overlay?",
+            "removeConfirm": "Are you sure you want to uninstall the Epic Overlay?",
             "removeConfirmTitle": "Confirm overlay removal",
             "updateNow": "Update",
             "updating": "Updating..."
@@ -763,7 +763,7 @@
         "exit-to-tray": "Exit to System Tray",
         "FsrSharpnessStrenght": "FSR Sharpness Strength",
         "fsync": "Enable Fsync",
-        "gamemode": "",
+        "gamemode": "Use GameMode (Feral Game Mode needs to be installed)",
         "ignoreGameUpdates": "Ignore game updates",
         "language": "Choose Language",
         "library_top_option": {
@@ -774,29 +774,29 @@
         },
         "library_top_section": "Library Top Section",
         "log": {
-            "copy-to-clipboard": "Copy log content to clipboard.",
+            "copy-to-clipboard": "Copy log content to clipboard",
             "instructions_title": "How to report a problem?",
             "instructions-part-01": "If you encounter any issues while using HyperPlay, we have two designated areas to report your issues in our Discord Server. If you're a player, please report any problems by visiting the player-support-forum. If you are a game dev, please report any problems by visiting the dev-support-forum.",
             "instructions-part-02": "To help us diagnose and fix the problem as quickly as possible, please provide as much information as possible, including a copy of your logs. Our support team will monitor both channels and do their best to respond to your issue as quickly as possible. Thank you for your patience and understanding while we work to resolve any problems you may encounter.",
             "join-hyperplay-discord": "Join our Discord",
-            "no-file": "No log file found.",
+            "no-file": "No log file found",
             "show-in-folder": "Show log file in folder"
         },
-        "mangohud": "",
+        "mangohud": "Enable Mangohud (Mangohud needs to be installed)",
         "manualsync": {
-            "download": "",
-            "forcedownload": "",
-            "forceupload": "",
-            "sync": "",
-            "syncing": "",
-            "title": "",
-            "upload": ""
+            "download": "Download",
+            "forcedownload": "Force Download",
+            "forceupload": "Force Upload",
+            "sync": "Sync",
+            "syncing": "Syncing",
+            "title": "Manual Sync Saves",
+            "upload": "Upload"
         },
-        "maxRecentGames": "Recent Games to Show",
-        "maxworkers": "",
+        "maxRecentGames": "Played Recently to Show",
+        "maxworkers": "Maximum Number of Workers when downloading",
         "minimize-on-launch": "Minimize HyperPlay After Game Launch",
         "msync": "Enable Msync",
-        "offlinemode": "",
+        "offlinemode": "Run Game Offline",
         "prefered_language": "Prefered Language (Language Code)",
         "preferSystemLibs": "Prefer system libraries",
         "primerun": {
@@ -807,23 +807,23 @@
             "description": "Use Dedicated Graphics Card"
         },
         "runexe": {
-            "message": "",
-            "title": ""
+            "message": "Drag and Drop Files here",
+            "title": "Run EXE on Prefix"
         },
         "savefolder": {
             "not-found": "Save folder not found, please select it manually (click to retry)",
-            "placeholder": "",
+            "placeholder": "Select the exact save games folder",
             "warning": "Please check twice if the path is correct (click to retry)"
         },
         "select_theme": "Select Theme",
-        "showfps": "",
+        "showfps": "Show FPS (DX9, 10 and 11)",
         "showMetalOverlay": "Show Stats Overlay",
         "start-in-tray": "Start Minimized",
         "steamId": "Steam ID",
         "steamruntime": "Use Steam Runtime",
         "winecrossoverbottle": "CrossOver Bottle",
-        "wineprefix": "",
-        "wineversion": ""
+        "wineprefix": "WinePrefix folder",
+        "wineversion": "Wine Version"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -855,7 +855,7 @@
         "navbar": {
             "accounts": "Accounts",
             "advanced": "Advanced",
-            "general": "",
+            "general": "General",
             "log": "Log",
             "other": "Other",
             "sync": "Cloud Saves Sync",
@@ -908,7 +908,7 @@
         "logging": "Logging In...",
         "processing": "Processing files, please wait"
     },
-    "store": "",
+    "store": "Epic Store",
     "title": {
         "allGames": "All Games"
     },
@@ -926,7 +926,7 @@
         "about": "About",
         "quit": "Quit",
         "reload": "Reload",
-        "show": ""
+        "show": "Show"
     },
     "two_col_table": {
         "save_hint": "Changes in this table are not saved automatically. Click the + button"
@@ -934,18 +934,18 @@
     "userselector": {
         "logging_out": "Logging out",
         "logIn": "Log in",
-        "logout": "Logout",
+        "logout": "Log out",
         "logout_confirmation": "Are you sure you want to log out?",
-        "manageaccounts": "Manage accounts",
+        "manageaccounts": "Manage Accounts",
         "manageStore": "Manage stores",
         "quit": "Quit"
     },
     "webview": {
         "controls": {
-            "back": "",
-            "forward": "",
-            "openInBrowser": "",
-            "reload": ""
+            "back": "Go back",
+            "forward": "Go forward",
+            "openInBrowser": "Open in browser",
+            "reload": "Reload page"
         }
     },
     "wiki_info": {
@@ -955,7 +955,7 @@
         "actions": "Action",
         "manager": {
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Compatibility Layer",
+            "title": "Compatibility Layer ",
             "unzipping": "Unzipping"
         },
         "release": "Release Date",

@@ -2,26 +2,26 @@
     "box": {
         "aware": "I am aware",
         "change": {
-            "message": "",
-            "path": "",
-            "title": ""
+            "message": "This will change the install location of this game, are you sure?",
+            "path": "Choose a new install path",
+            "title": "Change Games Install Path"
         },
-        "choose": "",
+        "choose": "Choose",
         "compability": {
             "message": "This Windows game will run using a compatibility layer. You might encounter some issues or the game might not work at all."
         },
         "dont-show-again": "Don't show again",
-        "importpath": "",
+        "importpath": "Choose Game Folder to import",
         "move": {
-            "message": "",
-            "path": "",
-            "title": ""
+            "message": "This can take a long time, are you sure?",
+            "path": "Choose where you want to move",
+            "title": "Move Game Installation"
         },
-        "no": "",
+        "no": "NO",
         "ok": "OK",
         "repair": {
-            "message": "",
-            "title": ""
+            "message": "Do you want to try to repair this game? This can take a long time.",
+            "title": "Verify and Repair"
         },
         "runexe": {
             "title": "Select EXE to Run"
@@ -34,29 +34,29 @@
         },
         "stopInstall": {
             "keepFilesMessage": "Check here if you want to keep the download files after canceling.",
-            "keepInstalling": "",
-            "message": "",
-            "title": ""
+            "keepInstalling": "Keep Installing",
+            "message": "Do you wish to KEEP downloaded files?",
+            "title": "Do you want to cancel the download?"
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "dlc": "Do you want to Uninstall this DLC?",
-            "message": "",
+            "message": "Do you want to uninstall this game?",
             "prefix_warning": "The Wine prefix for this game is the default prefix. If you really want to delete it, you have to do it manually.",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": ""
+            "title": "Uninstall"
         },
         "update": {
-            "message": "",
+            "message": "This game has an update, apply update now?",
             "message-cancel": "It is not possible to play this game without updating",
-            "title": ""
+            "title": "Game Needs Update"
         },
         "wineprefix": "Select WinePrefix Folder",
-        "yes": "",
+        "yes": "YES",
         "yesCancel": "Yes, cancel"
     },
     "button": {
-        "cancel": "Cancel",
+        "cancel": "Pause/Cancel",
         "continue": "Continue Download",
         "details": "Details",
         "favorites": "Favorite",
@@ -64,7 +64,7 @@
         "force_update": "Force Update if Available",
         "force-innstall": "Force Install",
         "hide_game": "Hide Game",
-        "import": "",
+        "import": "Import Game",
         "install": "Install",
         "no-path-selected": "No path selected",
         "queue": {
@@ -85,11 +85,11 @@
         "update": "Update"
     },
     "cloud_save_unsupported": "Unsupported",
-    "disabled": "",
+    "disabled": "Disabled",
     "dlc": {
         "installDlcs": "Install all DLCs"
     },
-    "enabled": "",
+    "enabled": "Enabled",
     "game": {
         "dlcs": "DLCs",
         "downloadSize": "Download Size",
@@ -101,7 +101,7 @@
         "lastPlayed": "Last Played",
         "neverPlayed": "Never",
         "platform": "Select Platform",
-        "requirements": "Requirements",
+        "requirements": "System Requirements",
         "selectChannelName": "Select Channel Name",
         "totalPlayed": "Time Played"
     },
@@ -117,9 +117,9 @@
         "canRunOffline": "Online Required",
         "installedPlatform": "Installed Platform",
         "path": "Install Path",
-        "size": "",
-        "syncsaves": "",
-        "version": "",
+        "size": "Size",
+        "syncsaves": "Sync Saves",
+        "version": "Version",
         "web3-supported": "Has Web3 features"
     },
     "install": {
@@ -130,16 +130,16 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "WinePrefix",
-        "wineversion": ""
+        "wineversion": "Wine version"
     },
     "label": {
         "playing": {
-            "start": "",
-            "stop": "",
+            "start": "Play",
+            "stop": "Playing (Stop)",
             "update": "Update"
         },
         "saves": {
-            "syncing": ""
+            "syncing": "Syncing Saves"
         }
     },
     "launch": {
@@ -164,7 +164,7 @@
             "broser": "BrowserURL",
             "exe": "Select Executable",
             "image": "App Image",
-            "supports-web3": "This Game has Web3 Features",
+            "supports-web3": "This Games has Web3 Features",
             "title": "Game/App Title"
         },
         "placeholder": {
@@ -174,8 +174,8 @@
         }
     },
     "specs": {
-        "minimum": "",
-        "recommended": ""
+        "minimum": "Minimum",
+        "recommended": "Recommended"
     },
     "status": {
         "distributables": "Installing Distributables",
@@ -187,11 +187,11 @@
         "gameNotAvailable": "Game not available",
         "gog-goodie": "This game doesn't appear to be installable. Check downloadable content on https://gog.com/account",
         "goodie": "Not installable",
-        "installed": "",
-        "installing": "",
+        "installed": "Installed",
+        "installing": "Installing",
         "moving": "Moving Installation, please wait",
         "moving-files": "Moving file '{{file}}': {{percent}} ",
-        "notinstalled": "",
+        "notinstalled": "This game is not installed",
         "notSupported": "Not supported",
         "notSupportedGame": "Not Supported",
         "paused": "Paused",
@@ -199,17 +199,17 @@
         "preparing": "Preparing Download, please wait",
         "processing": "Processing files, please wait",
         "queued": "Queued",
-        "reparing": "",
+        "reparing": "Repairing Game, please wait",
         "syncingSaves": "Syncing Saves",
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total Downloaded",
         "uninstalling": "Uninstalling",
-        "updating": ""
+        "updating": "Updating Game"
     },
     "submenu": {
         "addShortcut": "Add shortcut",
         "addToSteam": "Add to Steam",
-        "change": "Change Install Location",
+        "change": "Change install path",
         "disableEosOverlay": "Disable Epic Overlay",
         "enableEosOverlay": "Enable Epic Overlay",
         "extraInfo": "Extra Info",
@@ -217,8 +217,8 @@
         "protondb": "Check Compatibility",
         "removeFromSteam": "Remove from Steam",
         "removeShortcut": "Remove shortcuts",
-        "settings": "",
-        "store": "",
+        "settings": "Settings",
+        "store": "Store Page",
         "verify": "Verify and Repair"
     }
 }
