@@ -1034,6 +1034,10 @@
         "noneFound": {
             "message": "No se encontraron misiones.",
             "title": "No hay búsquedas."
+        },
+        "g7CreditsModal": {
+            "description": "Sumérgete en los mejores juegos de HyperPlay con emocionantes Desafíos de Play Streak. Cada actividad le anima a participar con un juego diferente, mostrando lo mejor de los juegos web3. ¡Tu tiempo de juego importa!",
+            "title": "Ganar Game7 Créditos"
         }
     }
 }
