@@ -7,7 +7,8 @@ import {
   HyperPlayRelease,
   PointsClaimReturn,
   GenericApiResponse,
-  Quest
+  Quest,
+  ConfirmClaimParams
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -279,6 +280,7 @@ interface HyperPlayAsyncIPCFunctions {
   getQuest: (questId: number) => Promise<Quest>
   getUserPlayStreak: (questId: number) => Promise<UserPlayStreak>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
+  confirmRewardClaim: (params: ConfirmClaimParams) => Promise<void>
   getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
   getQuestRewardSignature: (
     address: `0x${string}`,

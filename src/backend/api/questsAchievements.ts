@@ -2,7 +2,8 @@ import {
   GetAchievementsOptions,
   PlayerOptions,
   GetIndividualAchievementsOptions,
-  Runner
+  Runner,
+  ConfirmClaimParams
 } from 'common/types'
 import { ipcRenderer } from 'electron'
 
@@ -24,6 +25,10 @@ export const getQuests = async (projectId?: string) =>
 
 export const getQuest = async (questId: number) =>
   ipcRenderer.invoke('getQuest', questId)
+
+export const confirmRewardClaim = async (params: ConfirmClaimParams) => {
+  await ipcRenderer.invoke('confirmRewardClaim', params)
+}
 
 export const getUserPlayStreak = async (questId: number) =>
   ipcRenderer.invoke('getUserPlayStreak', questId)

@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {
+  Game,
   QuestDetails,
   QuestDetailsProps,
-  Game,
   QuestDetailsTranslations
 } from '@hyperplay/ui'
 import styles from './index.module.scss'
@@ -11,13 +11,13 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import {
-  useWriteContract,
-  useAccount,
-  useSwitchChain,
   http,
-  useBalance
+  useAccount,
+  useBalance,
+  useSwitchChain,
+  useWriteContract
 } from 'wagmi'
-import { Reward } from 'common/types'
+import { ConfirmClaimParams, Reward, RewardClaimSignature } from 'common/types'
 import authState from 'frontend/state/authState'
 import { mintReward } from './rewards/mintReward'
 import { claimPoints } from './rewards/claimPoints'
@@ -96,7 +96,7 @@ export function QuestDetailsWrapper({
   projectId
 }: QuestDetailsWrapperProps) {
   const {
-    writeContract,
+    writeContractAsync,
     error: writeContractError,
     isPending: isPendingWriteContract,
     reset: resetWriteContract
@@ -157,6 +157,27 @@ export function QuestDetailsWrapper({
       const queryKey = `getPointsBalancesForProject:${projectId}`
       queryClient.invalidateQueries({ queryKey: [queryKey] })
       return result
+    }
+  })
+
+  const confirmClaimMutation = useMutation({
+    mutationFn: async (params: ConfirmClaimParams) => {
+      return window.api.confirmRewardClaim(params)
+    },
+    retry: 5,
+    retryDelay: 1000,
+    onSuccess: async () => {
+      await questPlayStreakResult.invalidateQuery()
+    },
+    onError: (error, variables) => {
+      window.api.logError(
+        `Error confirming reward claim ${
+          error.message
+        }, variables: ${JSON.stringify({
+          ...variables,
+          address: account?.address
+        })}`
+      )
     }
   })
 
@@ -275,11 +296,34 @@ export function QuestDetailsWrapper({
       return
     }
 
-    return mintReward({
+    let tokenId: number | undefined = undefined
+
+    const isERC1155Reward =
+      reward.reward_type === 'ERC1155' && reward.token_ids.length === 1
+
+    if (isERC1155Reward) {
+      tokenId = reward.token_ids[0].token_id
+    }
+
+    const claimSignature: RewardClaimSignature =
+      await window.api.getQuestRewardSignature(
+        account.address,
+        reward.id,
+        tokenId
+      )
+
+    // awaiting is fine for now because we're doing a single write contract at a time,
+    // but we might want to not block the UI thread when we implement multiple claims
+    const hash = await mintReward({
       questId: questMeta.id,
-      address: account.address,
+      signature: claimSignature,
       reward,
-      writeContract
+      writeContractAsync
+    })
+
+    await confirmClaimMutation.mutateAsync({
+      signature: claimSignature.signature,
+      transactionHash: hash
     })
   }
 
