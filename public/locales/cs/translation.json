@@ -984,6 +984,10 @@
         "noneFound": {
             "message": "Nebyly nalezeny žádné úkoly.",
             "title": "Žádná výhra nebyla nalezena."
+        },
+        "g7CreditsModal": {
+            "title": "Získejte hry7 kredity",
+            "description": "Dive to HyperPlay’s top hry s vzrušující Play Streak Challenges. Každá aktivita vás povzbuzuje, abyste se zapojili s jinou hrou, což ukazuje nejlepší ze hry na webu3. Vaše herní otázky!"
         }
     },
     "accounts": "účty",
