@@ -74,7 +74,7 @@ import Store from 'electron-store'
 import i18next from 'i18next'
 import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
-import { DEV_PORTAL_URL, valistBaseApiUrlv1 } from 'common/constants'
+import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
 interface ProgressDownloadingItem {
@@ -101,7 +101,13 @@ export const isGameAvailable = (appName: string) => {
   }
 
   if (hpGameInfo.install && hpGameInfo.install.executable) {
-    const { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+    let { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+
+    // on linux and mac replace backslashes with forward slashes on executable
+    if (!isWindows) {
+      executable = executable.replace(/\\/g, '/')
+    }
+
     return existsSync(executable)
   }
   return false
@@ -141,9 +147,6 @@ export async function stop(appName: string): Promise<void> {
   } = gameInfo
 
   if (executable) {
-    const split = executable.split('/')
-    const exe = split[split.length - 1]
-    killPattern(exe)
     if (!isNative(appName)) {
       const gameSettings = await getSettings(appName)
       shutdownWine(gameSettings)
@@ -656,11 +659,15 @@ async function getTokenGatedPlatforms(
     address,
     channel_id
   }
-  const validateUrl = `${valistBaseApiUrlv1}/license_contracts/validate`
+  const validateUrl = `${DEV_PORTAL_URL}api/v1/license_contracts/validate`
   const validateResponse = await fetch(validateUrl, {
     method: 'POST',
     body: JSON.stringify(request)
   })
+
+  if (!validateResponse.ok) {
+    throw `Could not validate access ${await validateResponse.text()}`
+  }
 
   const validateResult: LicenseConfigValidateResult =
     await validateResponse.json()

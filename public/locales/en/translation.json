@@ -443,8 +443,8 @@
         "syncing": "Syncing...",
         "turnAnalyticsOff": "Turn off",
         "turnAnalyticsOn": "Turn on",
+        "viewFullscreen": "View fullscreen",
         "viewItem": "View {{item}}",
-        "viewMyAccount": "View my account",
         "viewPortfolio": "View portfolio"
     },
     "HyperPlay": "",
@@ -650,20 +650,53 @@
         "associatedGames": "Associated games",
         "claimAll": "Claim all",
         "claimed": "Claimed",
+        "claimFailed": "Claim failed",
+        "claimFailedMessage": "Please try once more. If it still doesn't work, create a Discord support ticket.",
         "connectSteamAccount": "Connect Steam account",
-        "errorMessage": "There was an error with the transaction.",
+        "createDiscordTicket": "Created Discord ticket",
+        "g7Numclaimed": "Total Claimed G7 Credits",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
-        "Play": "Play",
-        "playstreak": "Play Streak",
+        "notEnoughGas": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.",
+        "playstreak": {
+            "dayResets": "Day resets:",
+            "days": "days",
+            "now": "Now",
+            "playEachDay": "Play each day so your streak won't reset!",
+            "playToStart": "Play this game to start your streak!",
+            "progressTowardsStreak": "progress towards today's streak.",
+            "streakCompleted": "Streak completed! Claim your rewards now.",
+            "streakProgress": "Streak Progress"
+        },
+        "points": "Points",
+        "pointsClaimed": "Points Claimed",
         "quests": "Quests",
         "readyForClaim": "Ready for claim",
         "reputation": "Reputation",
         "reward": "Reward",
         "signIn": "Sign in",
+        "sync": "Sync",
+        "type": {
+            "playstreak": "Play Streak",
+            "reputation": "Reputation"
+        },
         "View Game": "View Game"
     },
     "quests": {
+        "g7CreditsModal": {
+            "description": "Dive into HyperPlay's top games with exciting Play Streak Challenges. Each activity encourages you to engage with a different game, showcasing the best of web3 gaming. Your playtime matters!",
+            "title": "Earn Game7 Credits"
+        },
+        "noneFound": {
+            "message": "There were no quests found.",
+            "title": "No Quests Found."
+        },
+        "playstreak": {
+            "signInWarning": {
+                "client": "You are currently not logged in, play streak progress will not be tracked. Please login to HyperPlay via the top-right dropdown to track progress.",
+                "overlay": "You are currently not logged in, play streak progress will not be tracked. Please exit the game and login to HyperPlay via the top-right dropdown to track progress."
+            }
+        },
         "quests": "Quests"
     },
     "queue": {

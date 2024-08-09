@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Inicia la sessió"
+        "login": "Inicia la sessió",
+        "error": "No hi ha comentaris",
+        "loading": "S’està carregant"
     },
     "message": {
         "part1": "Per a iniciar sessió i instal·lar els teus jocs, cal que seguiu primer les passes de sota:",

@@ -21,6 +21,8 @@ import { NavLink, useLocation, useParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { UpdateComponent, SelectField } from 'frontend/components/UI'
+import walletStore from 'frontend/state/WalletState'
+import onboardingStore from 'frontend/store/OnboardingStore'
 
 import {
   AppPlatforms,
@@ -67,10 +69,16 @@ import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import authState from 'frontend/state/authState'
 
+type locationState = {
+  fromDM?: boolean
+  gameInfo: GameInfo
+  fromQuests?: boolean
+}
+
 export default observer(function GamePage(): JSX.Element | null {
   const { appName, runner } = useParams() as { appName: string; runner: Runner }
   const location = useLocation() as {
-    state: { fromDM: boolean; gameInfo: GameInfo }
+    state: locationState
   }
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
@@ -135,7 +143,7 @@ export default observer(function GamePage(): JSX.Element | null {
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
   const isOffline = connectivity.status !== 'online'
 
-  const backRoute = location.state?.fromDM ? '/download-manager' : '/library'
+  const backRoute = getBackRoute(location.state)
 
   const storage: Storage = window.localStorage
 
@@ -551,7 +559,11 @@ export default observer(function GamePage(): JSX.Element | null {
                       )}
                     </>
                   )}
-                  <TimeContainer runner={runner} game={appName} />
+                  <TimeContainer
+                    runner={runner}
+                    game={appName}
+                    status={status}
+                  />
                 </div>
               </div>
               <div className="gameStatus">
@@ -867,6 +879,15 @@ export default observer(function GamePage(): JSX.Element | null {
         return window.api.kill(appName, gameInfo.runner)
       }
 
+      // ask to connect the wallet if its a web3 game
+      if (gameInfo.web3?.supported && !walletStore.isConnected) {
+        try {
+          await onboardingStore.startOnboarding()
+        } catch (e) {
+          console.error('User denied onboarding')
+        }
+      }
+
       // open game
       await launch({
         appName,
@@ -942,4 +963,17 @@ function getCurrentProgress(
           ? `${percent.toFixed(2)}% [${bytes} MB]  ${eta ? `ETA: ${eta}` : ''}`
           : '...'
       }`
+}
+
+function getBackRoute(locationState?: locationState) {
+  if (!locationState) {
+    return '/library'
+  }
+  if (locationState.fromDM) {
+    return '/download-manager'
+  }
+  if (locationState.fromQuests) {
+    return '/quests'
+  }
+  return '/library'
 }

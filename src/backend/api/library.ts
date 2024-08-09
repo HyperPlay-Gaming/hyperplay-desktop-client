@@ -163,3 +163,6 @@ export const prepareBaseGameForModding = async ({
     zipFile,
     installPath
   })
+
+export const getEpicListingUrl = async (appName: string) =>
+  ipcRenderer.invoke('getEpicListingUrl', appName)

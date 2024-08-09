@@ -7,7 +7,13 @@ import {
 } from 'common/types'
 import axios from 'axios'
 import { getTitleFromEpicStoreUrl } from 'backend/utils'
-import { getValistListingApiUrl, valistListingsApiUrl } from 'backend/constants'
+import {
+  getValistListingApiUrl,
+  qaToken,
+  valistListingsApiUrl
+} from 'backend/constants'
+import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
+import { logError } from 'backend/api/misc'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -27,6 +33,20 @@ export async function getHyperPlayReleaseMap() {
 
   hpStoreGameReleases.forEach((val) => {
     hpStoreGameMap.set(val.project_id, val)
+  })
+
+  return hpStoreGameMap
+}
+
+export async function getHyperPlayNameToReleaseMap() {
+  const hpStoreGameReleases = (
+    await axios.get<HyperPlayRelease[]>(valistListingsApiUrl)
+  ).data
+
+  const hpStoreGameMap = new Map<string, HyperPlayRelease>()
+
+  hpStoreGameReleases.forEach((val) => {
+    hpStoreGameMap.set(val.project_name.toLowerCase(), val)
   })
 
   return hpStoreGameMap
@@ -289,4 +309,36 @@ export async function loadEpicHyperPlayGameInfoMap() {
 
 export function sanitizeVersion(ver: string) {
   return ver.toLowerCase().replaceAll(' ', '')
+}
+
+// hit the valist api and get the info if the game is a epic listing
+export async function getEpicListingUrl(projectId: string): Promise<string> {
+  const listingUrl = getValistListingApiUrl(projectId)
+
+  try {
+    const getConfig =
+      qaToken !== '' ? { headers: { Authorization: `Bearer ${qaToken}` } } : {}
+    const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
+
+    if (res.status !== 200) {
+      logError(`Error when trying to get listing info ${res}`)
+      return ''
+    }
+
+    const data = res.data
+    const { epic_game_url, launch_epic } =
+      data.project_meta as ProjectMetaInterface
+
+    if (
+      !!launch_epic &&
+      !!epic_game_url &&
+      epic_game_url.startsWith('https://store.epicgames.com/')
+    ) {
+      return epic_game_url
+    }
+    return ''
+  } catch (error) {
+    logError(`Error when trying to get listing info: ${error}`)
+    return ''
+  }
 }

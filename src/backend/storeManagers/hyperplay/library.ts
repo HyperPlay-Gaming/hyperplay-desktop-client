@@ -206,10 +206,14 @@ export async function listUpdateableGames(): Promise<string[]> {
 
     if (val.channels && val.install.channelName && val.install.platform) {
       if (!Object.hasOwn(val.channels, val.install.channelName)) {
-        console.error(`
+        logError(
+          `
         Cannot find installed channel name in channels. 
         The channel name may have been changed by the remote.
-        To continue to receive game updates, uninstall and reinstall this game: ${val.title}`)
+        To continue to receive game updates, uninstall and reinstall this game: ${val.title}`,
+          LogPrefix.HyperPlay
+        )
+        return
       }
       if (
         // games installed before 0.5.0 used gameInfo.version for install.version

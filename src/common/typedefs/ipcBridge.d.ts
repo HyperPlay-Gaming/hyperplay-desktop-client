@@ -4,7 +4,10 @@ import {
   Achievement,
   SummaryAchievement,
   LDEnv,
-  HyperPlayRelease
+  HyperPlayRelease,
+  PointsClaimReturn,
+  GenericApiResponse,
+  Quest
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -93,6 +96,8 @@ interface HyperPlaySyncIPCFunctions {
   authConnected: () => void
   goToGamePage: (appName: string) => void
   authDisconnected: () => void
+  otp: (otp: string) => void
+  navigate: (route: string) => void
 }
 
 interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
@@ -220,7 +225,7 @@ interface HyperPlayAsyncIPCFunctions {
   changeMetricsOptInStatus: (
     newStatus: MetricsOptInStatus.optedIn | MetricsOptInStatus.optedOut
   ) => Promise<void>
-  addHyperplayGame: (gameId: string, addHyperplayGame: string) => Promise<void>
+  addHyperplayGame: (gameId: string, addHyperplayGame?: string) => Promise<void>
   sendRequest: (args: unknown[]) => Promise<unknown>
   sendAsyncRequest: (
     payload: JsonRpcRequest,
@@ -272,12 +277,13 @@ interface HyperPlayAsyncIPCFunctions {
   updateAutoLaunch: () => Promise<void>
   getQuests: (projectId?: string) => Promise<Quest[]>
   getQuest: (questId: number) => Promise<Quest>
+  getUserPlayStreak: (questId: number) => Promise<UserPlayStreak>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
   getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
   getQuestRewardSignature: (
     address: `0x${string}`,
-    questId: number,
-    rewardId: number
+    rewardId: number,
+    tokenId?: number
   ) => Promise<RewardClaimSignature>
   getDepositContracts: (questId: number) => Promise<DepositContract[]>
   prepareBaseGameForModding: ({
@@ -285,6 +291,16 @@ interface HyperPlayAsyncIPCFunctions {
     zipFile: string,
     installPath: string
   }) => Promise<void>
+  claimQuestPointsReward: (rewardId: string) => Promise<PointsClaimReturn>
+  completeExternalTask: (rewardId: string) => Promise<GenericApiResponse>
+  resyncExternalTask: (rewardId: string) => Promise<GenericApiResponse>
+  getG7Credits: () => Promise<string>
+  getExternalTaskCredits: (rewardId: string) => Promise<string>
+  getPointsBalancesForProject: (
+    projectId: string
+  ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
+  syncPlaySession: (appName: string, runner: Runner) => Promise<void>
+  getEpicListingUrl: (appName: string) => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

@@ -152,7 +152,10 @@
         "login": "உள்நுழை",
         "sync": "ஒத்திசைவு செய்",
         "syncing": "ஒத்திசைவு செய்யப்படுகிறது",
-        "unsync": "ஒத்திசைவை செயல்தவிர்"
+        "unsync": "ஒத்திசைவை செயல்தவிர்",
+        "update": "புதுப்பிப்பு",
+        "continue": "தொடரவும்",
+        "download": "பதிவிறக்கம்"
     },
     "controller": {
         "hints": {
@@ -191,7 +194,8 @@
             "start-time": "Started at",
             "type": "Type"
         },
-        "title": "Downloads"
+        "title": "Downloads",
+        "ETA": "கணிக்கப்பட்ட நேரம்"
     },
     "epic": {
         "offline-notification-body": "Epic games இன் சர்வர்கள் ஆஃப்லைனில் உள்ளதால் ஆன்லைன் சேவைகள் முழுமையாக இயங்காமல் போகலாம்!",
@@ -263,7 +267,8 @@
         "wine": {
             "part1": "ஹீரோயிக் பின்வரும் கோப்புறைகளில் Wine, Proton மற்றும் crossover பதிப்புகளை தேடும்:",
             "part2": "பிற இடங்களுக்கு, இவற்றில் ஒரு கோப்புறைக்கு குறியீட்டு-இணைப்பை பயன்படுத்து"
-        }
+        },
+        "msync": "Fsync aims to reduce wineserver overhead in CPU-intensive games. Enabling may improve performance on supported Linux kernels."
     },
     "info": {
         "hyperplay": {
@@ -369,7 +374,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "Open": "",
+    "Open": "திற",
     "options": {
         "advanced": {
             "key": "Variable Name",
@@ -431,7 +436,9 @@
             "empty": "Nothing to download",
             "finished": "Completed",
             "queued": "Queued",
-            "remove": "Remove from Downloads"
+            "remove": "Remove from Downloads",
+            "resume": "பதிவிறக்கத்தை மீண்டும் தொடங்குங்கள்",
+            "pause": "இடைநிறுத்தம் பதிவிறக்கம்"
         }
     },
     "Recent": "சமீபத்தில் விளையாடியவை",
@@ -545,7 +552,9 @@
         "disable_logs": "பதிவுகளை முடக்கு",
         "addgamestoapplications": "தானாகவே பயன்பாடுகளில் கேம்களைச் சேர்க்கவும்",
         "showMetalOverlay": "புள்ளிவிவர மேலடுக்கைக் காட்டு",
-        "alt-nile-bin": "ஒரு மாற்று நைல் பைனரியைத் தேர்ந்தெடுக்கவும்"
+        "alt-nile-bin": "ஒரு மாற்று நைல் பைனரியைத் தேர்ந்தெடுக்கவும்",
+        "autodxvknvapi": "முன்னொட்டில் DXVK ஐ தானாக நிறுவு/புதுப்பி",
+        "msync": "Enable Esync"
     },
     "settings": {
         "battlEyeRuntime": {
@@ -580,19 +589,34 @@
             "log": "Log",
             "other": "மற்றவை",
             "sync": "சேமிப்பு-ஒத்திசைவு",
-            "wineExt": "Wine Extensions"
+            "wineExt": "Wine Extensions",
+            "systemInformation": "அமைப்பு தகவல் (_S)",
+            "accounts": "கணக்குகள்"
         },
         "open-config-file": "Open Config File",
         "reset-hyperplay": "Reset HyperPlay",
         "saves": {
             "label": "Save Location:",
             "warning": "Cloud Saves feature is in Beta, please backup your saves before syncing (in case something goes wrong)"
+        },
+        "systemInformation": {
+            "copyToClipboard": "கிளிப்போர்டுக்கு நகலெடுக்கவும்",
+            "memory": "நினைவு",
+            "os": "இயக்க முறைமை"
+        },
+        "gamesSettings": "Game settings",
+        "wine": {
+            "manager": {
+                "title": "Wine Manager"
+            }
         }
     },
     "Settings": "அமைப்புகள்",
     "sidebar": {
         "collapse": "Collapse sidebar",
-        "uncollapse": "Uncollapse sidebar"
+        "uncollapse": "Uncollapse sidebar",
+        "store": "Store",
+        "library": "நூலகம்"
     },
     "status": {
         "installing": "Installing",
@@ -631,7 +655,8 @@
         "logout": "வெளியேறு",
         "logout_confirmation": "நீங்கள் நிச்சயமாக வெளியேற விரும்புகிறீர்களா?",
         "manageaccounts": "Manage Accounts",
-        "quit": "வெளியேறு"
+        "quit": "வெளியேறு",
+        "logIn": "புகுபதிகை"
     },
     "webview": {
         "controls": {
@@ -668,5 +693,58 @@
     },
     "amazon": "அமேசான்",
     "Amazon Games": "அமேசான் கேம்ஸ்",
-    "prime-gaming": "பிரைம் கேமிங்"
+    "prime-gaming": "பிரைம் கேமிங்",
+    "gameRelease": {
+        "main": "முக்கிய",
+        "alpha": "ஆல்பா",
+        "beta": "Beta"
+    },
+    "hyperplay": {
+        "browserImport": {
+            "appId": "செயலி அடையாளம்",
+            "profile": "சுயவிவரம்"
+        },
+        "gamecard": {
+            "installing": "பதிவிறக்குகிறது...",
+            "paused": "இடைநிறுத்தப்பட்டது"
+        },
+        "copyUrl": "முகவரி ஐ நகலெடுக்கவும்",
+        "turnAnalyticsOn": "இயக்கவும்",
+        "Sync": "ஒத்திசைவு",
+        "turnAnalyticsOff": "அணைக்கவும்",
+        "onboarding": {
+            "terms": "பணி விதிமுறைகள்",
+            "walletSelection": {
+                "screens": {
+                    "import": {
+                        "learnMore": "மேலும் அறிக"
+                    }
+                }
+            }
+        },
+        "buttons": {
+            "noThanks": "இல்லை, நன்றி"
+        },
+        "discordApp": "டிஸ்கார்ட் (Discord)",
+        "folder": "கோப்புறை",
+        "logOut": "வெளியேறு",
+        "misc": "ஒருபோதும் இல்லை"
+    },
+    "notification": {
+        "wine-download": {
+            "title": "Compatibility Layer"
+        }
+    },
+    "quest": {
+        "Play": "விளையாடுங்கள்",
+        "playstreak": {
+            "days": "நாட்கள்"
+        },
+        "points": "புள்ளிகள்",
+        "signIn": "உள்நுழைக",
+        "sync": "ஒத்திசைவு",
+        "active": "செயலில்"
+    },
+    "accounts": "கணக்கு",
+    "profile": "சுயவிவரம்"
 }

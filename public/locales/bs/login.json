@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Prijavite se"
+        "login": "Prijavite se",
+        "error": "#Zabuna, #pokušaj @a #drugačiji #Kôd",
+        "loading": "Učitava se"
     },
     "message": {
         "part1": "Da biste se prijavili i instalirali svoje igre, prvo morate slijediti korake u nastavku:",

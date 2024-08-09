@@ -222,3 +222,12 @@ export const handleLogOut = (
     ipcRenderer.removeListener('logOut', cb)
   }
 }
+
+export const handleNavigate = (
+  onChange: (e: Electron.IpcRendererEvent, route: string) => void
+) => {
+  ipcRenderer.on('navigate', onChange)
+  return () => {
+    ipcRenderer.removeListener('navigate', onChange)
+  }
+}

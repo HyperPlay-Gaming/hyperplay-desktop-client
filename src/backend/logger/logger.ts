@@ -12,6 +12,7 @@ import { GlobalConfig } from 'backend/config'
 import { getGOGdlBin, getLegendaryBin } from 'backend/utils'
 import { join } from 'path'
 import { formatSystemInfo, getSystemInfo } from '../utils/systeminfo'
+import { getAuthSession } from 'backend/auth'
 
 export enum LogPrefix {
   General = '',
@@ -32,7 +33,8 @@ export enum LogPrefix {
   ExtraGameInfo = 'ExtraGameInfo',
   HyperPlay = 'HyperPlay',
   Sideload = 'Sideload',
-  Achievements = 'Achievements'
+  Achievements = 'Achievements',
+  Auth = 'Auth'
 }
 
 export const RunnerToLogPrefixMap = {
@@ -68,6 +70,20 @@ export function initLogger() {
       }
     )
   }
+
+  // log session details
+  getAuthSession()
+    .then((user) => {
+      logInfo(
+        `Session started by ${
+          user ? JSON.stringify(user) : 'unknown user'
+        } with userID: ${user ? user.userId : 'unknown'}`,
+        LogPrefix.Auth
+      )
+    })
+    .catch((error) =>
+      logError(['Failed to fetch user information', error], LogPrefix.Auth)
+    )
 
   // log important information: binaries, system specs
   getSystemInfo()
