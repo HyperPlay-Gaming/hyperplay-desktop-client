@@ -230,7 +230,6 @@ export default React.memo(function InstallModal({
     !channelRequiresAccessCode ||
     (channelRequiresAccessCode && accessCodeVerified)
 
-
   return (
     <div className="InstallModal">
       <Dialog
@@ -331,10 +330,21 @@ export default React.memo(function InstallModal({
           </SideloadDialog>
         )}
         {showModDialog && (
-          <ModDialog  
+          <ModDialog
             backdropClick={backdropClick}
             gameInfo={gameInfo}
-          />  
+            accessCode={accessCode}
+          >
+            {runner === 'hyperplay' && channelRequiresAccessCode ? (
+              <TextInputField
+                placeholder={'Enter access code'}
+                value={accessCode}
+                onChange={(ev) => setAccessCode(ev.target.value)}
+                htmlId="access_code_input"
+                isError={!!errorText}
+              ></TextInputField>
+            ) : null}
+          </ModDialog>
         )}
       </Dialog>
     </div>

@@ -14,6 +14,8 @@ import { Button, Images } from '@hyperplay/ui'
 interface Props {
   backdropClick: () => void
   gameInfo: GameInfo
+  accessCode: string
+  children: React.ReactNode
 }
 
 const userHome = configStore.get('userHome', '')
@@ -24,7 +26,7 @@ const userHome = configStore.get('userHome', '')
   percent: 0
 } */
 
-const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
+const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children }) => {
   const { t } = useTranslation()
   const [zipFilePath, setZipFilePath] = useState<string>('')
   const [installPath, setInstallPath] = useState<string>('')
@@ -59,7 +61,6 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
   }
 
   async function handleInstall(): Promise<void> {
-
     backdropClick()
 
     await window.api.prepareBaseGameForModding({
@@ -75,7 +76,8 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
       isInstalling: false,
       previousProgress,
       progress: previousProgress,
-      showDialogModal: () => {}
+      showDialogModal: () => {},
+      accessCode
     }) */
   }
   return (
@@ -141,6 +143,8 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo }) => {
               </li>
             </ul>
           </div>
+
+          {children}
 
           <div className={styles.step}>
             <div className={styles.stepTitle}>
