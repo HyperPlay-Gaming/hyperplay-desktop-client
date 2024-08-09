@@ -958,7 +958,8 @@
         "reputation": "Ruf",
         "signIn": "Anmelden",
         "sync": "Sync",
-        "pointsClaimed": "Forderungen"
+        "pointsClaimed": "Forderungen",
+        "g7Numclaimed": "G7-Kredite insgesamt"
     },
     "quests": {
         "playstreak": {
@@ -967,7 +968,15 @@
                 "overlay": "Sie sind derzeit nicht eingeloggt, Play Streak Fortschritt wird nicht verfolgt. Bitte verlassen Sie das Spiel und melden Sie sich an HyperPlay über den oberen rechten Dropdown, um den Fortschritt zu verfolgen."
             }
         },
-        "quests": "Aufträge"
+        "quests": "Aufträge",
+        "noneFound": {
+            "title": "Keine Quests gefunden.",
+            "message": "Es wurden keine Quests gefunden."
+        },
+        "g7CreditsModal": {
+            "description": "Tauchen Sie mit spannenden Play Streak Challenges in die Top-Spiele von HyperPlay ein. Jede Aktivität ermutigt Sie, sich mit einem anderen Spiel zu engagieren, was das Beste von web3 Gaming zeigt. Deine Spielzeit zählt!",
+            "title": "Earn Game7 Credits"
+        }
     },
     "gameRelease": {
         "prototype": "Prototyp",

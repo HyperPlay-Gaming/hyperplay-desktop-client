@@ -727,7 +727,8 @@
         "copyUrl": "Kopier _nettadresse",
         "turnAnalyticsOff": "Skru av",
         "turnAnalyticsOn": "Skru på",
-        "misc": "Aldri"
+        "misc": "Aldri",
+        "viewFullscreen": "Fullskjermsvisning"
     },
     "gameRelease": {
         "alpha": "Alpha",

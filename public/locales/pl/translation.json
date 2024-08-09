@@ -926,7 +926,8 @@
         "View Game": "Game",
         "claimFailed": "Claimowi nie udało się zrealizować",
         "notEnoughGas": "Niesprawiedliwe ścianki mają prawo do nagrody z powodu opłat gazowych. Poświęcony został inny muret lub uzupełniony przed retrygią.",
-        "pointsClaimed": "Point Cl (ang.)"
+        "pointsClaimed": "Point Cl (ang.)",
+        "g7Numclaimed": "Total Cl nadaje G7 Credits"
     },
     "sideload": {
         "warningTitle": "Ważne",
@@ -942,6 +943,14 @@
                 "client": "Obecnie nie są one zalogowane, nie będziemy śledzeni. Załóżmy, że HyperPlay będzie w stanie śledzić postępy.",
                 "overlay": "Obecnie nie są one zalogowane, nie będziemy śledzeni. Please exit the game and login to HyperPlay poprzez ostateczny spadek do postępu."
             }
+        },
+        "noneFound": {
+            "message": "Nie znaleziono żadnych śladów.",
+            "title": "Nie wiadomo."
+        },
+        "g7CreditsModal": {
+            "description": "W pierwszej części gry HyperPlaya występują ekscytujące Play Streak Challenges. Każda aktywność zachęca do angażowania się w inną grę, pokazując najlepszą grę internetową. Śmiały czas gry!",
+            "title": "Earn Game7 (ang.)"
         }
     },
     "exit_game": "Oficjalna strona gry",
