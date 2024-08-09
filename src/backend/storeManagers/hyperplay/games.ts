@@ -10,7 +10,8 @@ import {
   ChannelReleaseMeta,
   SiweValues,
   UpdateArgs,
-  WineCommandArgs
+  WineCommandArgs,
+  Runner
 } from '../../../common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
@@ -254,8 +255,18 @@ export async function importGame(
   const channel = gameInfo.channels![
     installInfo.manifest.channelName!
   ] as Channel
-  const mainExe =
-    channel.release_meta.platforms[installInfo.manifest.platform].executable
+  // Accessing the platform data with type assertion
+  const platformKey = installInfo.manifest
+    .platform as keyof PlatformsMetaInterface
+  const platformData = channel.release_meta.platforms[platformKey]
+  if (!platformData || !platformData.executable) {
+    logError(
+      `Platform data not found for ${appName} in importGame`,
+      LogPrefix.HyperPlay
+    )
+    return { stderr: '', stdout: '' }
+  }
+  const mainExe = platformData.executable
   const executable = path.join(pathName, mainExe)
 
   if (!existsSync(executable)) {
@@ -295,7 +306,7 @@ export async function importGame(
 }
 
 export async function runWineCommandOnGame(
-  runner: string,
+  runner: Runner,
   appName: string,
   { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
 ): Promise<ExecResult> {

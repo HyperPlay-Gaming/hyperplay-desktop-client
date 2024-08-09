@@ -26,7 +26,7 @@ export default function ChannelNameSelection({
       >
         {gameInfo?.channels !== undefined
           ? Object.keys(gameInfo.channels).map((p, i) => {
-              if (!gameInfo.channels) return <div>error</div>
+              if (!gameInfo.channels) return <div key={p}>error</div>
               const channel_i = gameInfo.channels[p]
               return (
                 <option value={p} key={i}>

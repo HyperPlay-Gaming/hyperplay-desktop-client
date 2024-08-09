@@ -3,13 +3,12 @@ import { Chain, hardhat, mainnet, polygon } from 'wagmi/chains'
 import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
 
 let chainsToSupport: Chain[] = []
-const transports = {}
+const transports: { [key: number]: unknown } = {}
 
 for (const chainId in chainMap) {
   const chainMetadata = chainMap[chainId]
   try {
     const chain = parseChainMetadataToViemChain(chainMetadata)
-    // @ts-expect-error: the function is valid, there is just a mismatch in the types due to different versions of viem
     chainsToSupport.push(chain)
     transports[chain.id] = http(chainMetadata.chain.rpc[0])
     // eslint-disable-next-line no-empty

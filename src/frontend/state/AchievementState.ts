@@ -77,7 +77,6 @@ class AchievementState {
       {},
       {
         deep: true,
-        proxy: false,
         name: 'AchievementState'
       }
     )

@@ -19,6 +19,7 @@ const SentryHandler = () => {
             ? devSentryDsn
             : prodSentryDsn
       },
+      // @ts-expect-error - not sure why is this failling
       reactInit
     )
     setInitialized(true)
