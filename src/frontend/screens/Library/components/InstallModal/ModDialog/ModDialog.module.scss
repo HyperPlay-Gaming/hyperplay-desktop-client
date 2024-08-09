@@ -1,0 +1,53 @@
+.MuiDialogContent-root {
+  padding-left: 0;
+}
+
+.stepContainer {
+  max-width: 720px;
+  margin-top: var(--space-md);
+
+  .step {
+    margin-bottom: var(--space-xl);
+  }
+}
+
+.stepTitle {
+  padding: var(--space-3xs) var(--space-sm);
+  border-radius: var(--space-xs);
+  background-color: var(--color-tertiary-300);
+  color: black;
+  font-size: var(--text-md);
+  width: max-content;
+  margin-top: var(--space-md);
+}
+
+.stepSubtitle {
+  font-size: var(--text-2xl);
+  font-weight: bold;
+  margin-top: var(--space-3xs);
+}
+
+.stepDescription {
+  font-size: 1em;
+  margin-bottom: var(--space-sm);
+}
+
+.sourceList {
+  padding: var(--space-2xs) var(--space-md);
+}
+
+.sourceItem {
+  font-size: var(--text-sm);
+  color: var(--color-tertiary-400);
+  margin-bottom: var(--space-3xs);
+  text-decoration: none;
+  color: var(--color-primary-200);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: var(--space-sm);
+  border: 1px solid var(--color-tertiary-300);
+  padding: var(--space-xl);
+}

@@ -286,6 +286,11 @@ interface HyperPlayAsyncIPCFunctions {
     tokenId?: number
   ) => Promise<RewardClaimSignature>
   getDepositContracts: (questId: number) => Promise<DepositContract[]>
+  prepareBaseGameForModding: ({
+    appName: string,
+    zipFile: string,
+    installPath: string
+  }) => Promise<void>
   claimQuestPointsReward: (rewardId: string) => Promise<PointsClaimReturn>
   completeExternalTask: (rewardId: string) => Promise<GenericApiResponse>
   resyncExternalTask: (rewardId: string) => Promise<GenericApiResponse>
