@@ -221,7 +221,7 @@ export default React.memo(function InstallModal({
     }
   }, [selectedChannel, accessCode])
 
-  const showModDialog = gameInfo && gameInfo.folder_name === 'ironworks'
+  const showModDialog = gameInfo && gameInfo.type === 'mod'
   const showDownloadDialog = !showModDialog && !isSideload && gameInfo
 
   const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)

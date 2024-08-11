@@ -3,7 +3,8 @@ import {
   GameInfo,
   HyperPlayRelease,
   ChannelReleaseMeta,
-  InstallPlatform
+  InstallPlatform,
+  GameType
 } from 'common/types'
 import axios from 'axios'
 import { getTitleFromEpicStoreUrl } from 'backend/utils'
@@ -275,7 +276,8 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
       title: data.project_meta.name
         ? data.project_meta.name
         : data.project_name,
-      browserUrl: isOnlyWeb ? platforms['web']?.external_url : undefined
+      browserUrl: isOnlyWeb ? platforms['web']?.external_url : undefined,
+      type: data.project_meta.type as GameType
     },
     data
   )
