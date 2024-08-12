@@ -1071,7 +1071,10 @@ export async function extract(
       }
     })
 
-    const extractService = new ExtractZipService(zipFile, destinationPath)
+    const isMod = gameInfo.type === 'mod'
+    const extractService = new ExtractZipService(zipFile, destinationPath, {
+      preserveStructure: !isMod
+    })
 
     inProgressExtractionsMap.set(appName, extractService)
 
