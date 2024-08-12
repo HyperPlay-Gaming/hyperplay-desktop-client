@@ -1,25 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import {
+  Game,
   QuestDetails,
   QuestDetailsProps,
-  Game,
-  QuestDetailsTranslations,
-  ModalProps,
-  Modal,
-  Button,
-  Images
+  QuestDetailsTranslations
 } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
-import { Trans, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import {
-  useWriteContract,
-  useAccount,
-  useSwitchChain,
   http,
-  useBalance
+  useAccount,
+  useBalance,
+  useSwitchChain,
+  useWriteContract
 } from 'wagmi'
 import { Reward } from 'common/types'
 import authState from 'frontend/state/authState'
@@ -39,6 +35,7 @@ import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
 import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
 import { useSyncPlaySession } from 'frontend/hooks/useSyncInterval'
 import { useTrackQuestViewed } from 'frontend/hooks/useTrackQuestViewed'
+import { ConfirmClaimModal } from './components/ConfirmClaimModal'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -93,56 +90,6 @@ async function getRewardClaimGasEstimation(reward: Reward) {
   )
 
   return gasNeeded
-}
-
-interface ConfirmProps extends ModalProps {
-  networkName: string
-  onConfirm: () => void
-  onCancel: () => void
-}
-
-function ConfirmClaimModal(props: ConfirmProps) {
-  const { t } = useTranslation()
-  return (
-    <Modal {...props} classNames={{ root: styles.confirmModal }}>
-      <Images.AlertTriangle
-        className={styles.alertIcon}
-        width={24}
-        height={24}
-      />
-      <div className={styles.confirmTextWrapper}>
-        <Modal.Body className={styles.confirmText}>
-          <Modal.Title>
-            {t('quest.claimWarning.title', 'Confirm Quest Reward Claim')}
-          </Modal.Title>
-          <div>
-            <Trans
-              i18nKey="quest.claimWarning.body"
-              defaultValue="<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>"
-              values={{ networkName: props.networkName }}
-              components={{ bold: <span className="text--bold" /> }}
-            />
-          </div>
-          <div>
-            <Trans
-              i18nKey="quest.claimWarning.body2"
-              defaultValue="Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>"
-              values={{ networkName: props.networkName }}
-              components={{ bold: <span className="text--bold" /> }}
-            />
-          </div>
-        </Modal.Body>
-        <div className={styles.buttonsContainer}>
-          <Button type="tertiary" onClick={props.onCancel}>
-            {t('quest.claimWarning.cancel', 'Cancel')}
-          </Button>
-          <Button type="secondary" onClick={props.onConfirm}>
-            {t('quest.claimWarning.confirm', 'Confirm')}
-          </Button>
-        </div>
-      </div>
-    </Modal>
-  )
 }
 
 export function QuestDetailsWrapper({
