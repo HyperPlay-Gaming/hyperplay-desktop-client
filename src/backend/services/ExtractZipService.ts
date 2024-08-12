@@ -1,9 +1,17 @@
 import { EventEmitter } from 'node:events'
 import { Readable } from 'node:stream'
 import { open, ZipFile, Entry } from 'yauzl'
-import { mkdirSync, createWriteStream, rmSync, existsSync } from 'graceful-fs'
+import {
+  mkdirSync,
+  createWriteStream,
+  rmSync,
+  existsSync,
+  readdirSync
+} from 'graceful-fs'
 import { captureException } from '@sentry/electron'
-import { join } from 'path'
+import path, { join } from 'path'
+import { logInfo, LogPrefix } from 'backend/logger/logger'
+import { copyRecursiveSync } from 'backend/utils'
 
 export interface ExtractZipProgressResponse {
   /** Percentage of extraction progress. */
@@ -22,6 +30,11 @@ enum ExtractionValidation {
   VALID = 'VALID'
 }
 
+type extractOptions = {
+  deleteOnEnd?: boolean
+  preserveStructure?: boolean
+}
+
 /**
  * Service class to handle extraction of ZIP files.
  * @extends {EventEmitter}
@@ -30,6 +43,7 @@ export class ExtractZipService extends EventEmitter {
   #readStream: Readable | null = null
   #zipFile = ''
   #destinationPath = ''
+  #options = { deleteOnEnd: true, preserveStructure: true }
   #canceled = false
   #paused = false
   #totalSizeInBytes = 0
@@ -48,11 +62,16 @@ export class ExtractZipService extends EventEmitter {
    * @param {string} zipFile - The path to the ZIP file.
    * @param {string} destinationPath - The path where the extracted files should be saved.
    */
-  constructor(zipFile: string, destinationPath: string) {
+  constructor(
+    zipFile: string,
+    destinationPath: string,
+    options?: extractOptions
+  ) {
     super()
 
     this.#zipFile = zipFile
     this.#destinationPath = destinationPath
+    this.#options = { ...this.#options, ...options }
     this.#resolveExtraction = () => null
     this.#rejectExtraction = () => null
   }
@@ -166,7 +185,9 @@ export class ExtractZipService extends EventEmitter {
 
     this.emit('canceled')
 
-    rmSync(this.source, { recursive: true, force: true })
+    if (this.#options.deleteOnEnd) {
+      rmSync(this.source, { recursive: true, force: true })
+    }
 
     this.removeAllListeners()
   }
@@ -224,9 +245,37 @@ export class ExtractZipService extends EventEmitter {
 
     this.emit('finished', this.#computeProgress())
 
-    // rmSync(this.source, { recursive: true, force: true })
+    if (this.#options.deleteOnEnd) {
+      rmSync(this.source, { recursive: true, force: true })
+    }
+
+    // move contents of the extracted folder to the destination path
+    if (!this.#options.preserveStructure) {
+      // get the last part of the zip file path
+      const extractedFolder = path.basename(this.#zipFile).replace('.zip', '')
+      const extractedFolderFullPath = path.join(
+        this.#destinationPath,
+        extractedFolder
+      )
+
+      logInfo(
+        `Moving contents of ${extractedFolder} to ${this.#destinationPath}`,
+        LogPrefix.HyperPlay
+      )
+
+      // move contents of the extracted folder to the destination path
+      readdirSync(extractedFolderFullPath).forEach((file) => {
+        const srcPath = path.join(extractedFolderFullPath, file)
+        const destPath = path.join(this.#destinationPath, file)
+        copyRecursiveSync(srcPath, destPath)
+      })
+
+      // remove the extracted folder
+      rmSync(extractedFolderFullPath, { recursive: true, force: true })
+    }
 
     this.removeAllListeners()
+    this.#zipFileInstance?.close()
   }
 
   /**
@@ -242,7 +291,9 @@ export class ExtractZipService extends EventEmitter {
     console.log('error', error)
     this.emit('error', error)
 
-    rmSync(this.source, { recursive: true, force: true })
+    if (this.#options.deleteOnEnd) {
+      rmSync(this.source, { recursive: true, force: true })
+    }
 
     this.removeAllListeners()
   }

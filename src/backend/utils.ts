@@ -33,7 +33,15 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
+import {
+  appendFileSync,
+  copyFileSync,
+  existsSync,
+  mkdirSync,
+  readdirSync,
+  rmSync,
+  statSync
+} from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 
@@ -1516,4 +1524,18 @@ export function getExecutableAndArgs(executableWithArgs: string): {
   const launchArgs = executableWithArgs.replace(executable, '').trim()
 
   return { executable, launchArgs }
+}
+
+export function copyRecursiveSync(src: string, dest: string) {
+  const exists = statSync(src).isDirectory()
+  if (exists) {
+    mkdirSync(dest, { recursive: true })
+    readdirSync(src).forEach((file) => {
+      const srcFile = join(src, file)
+      const destFile = join(dest, file)
+      copyRecursiveSync(srcFile, destFile)
+    })
+  } else {
+    copyFileSync(src, dest)
+  }
 }
