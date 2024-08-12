@@ -291,6 +291,7 @@ interface HyperPlayAsyncIPCFunctions {
     zipFile: string,
     installPath: string
   }) => Promise<void>
+  runModPatcher: (appName: string) => Promise<void>
   claimQuestPointsReward: (rewardId: string) => Promise<PointsClaimReturn>
   completeExternalTask: (rewardId: string) => Promise<GenericApiResponse>
   resyncExternalTask: (rewardId: string) => Promise<GenericApiResponse>

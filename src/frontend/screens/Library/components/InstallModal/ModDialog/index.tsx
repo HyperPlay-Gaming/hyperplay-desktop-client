@@ -88,6 +88,9 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children, accessC
       accessCode,
       siweValues
     })
+
+    await window.api.runModPatcher(appName)
+
   }
   return (
     <>
