@@ -224,7 +224,7 @@ export class ExtractZipService extends EventEmitter {
 
     this.emit('finished', this.#computeProgress())
 
-    rmSync(this.source, { recursive: true, force: true })
+    // rmSync(this.source, { recursive: true, force: true })
 
     this.removeAllListeners()
   }

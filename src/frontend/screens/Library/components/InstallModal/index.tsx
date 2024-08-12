@@ -334,6 +334,7 @@ export default React.memo(function InstallModal({
             backdropClick={backdropClick}
             gameInfo={gameInfo}
             accessCode={accessCode}
+            requiresToken={channelRequiresToken}
           >
             {runner === 'hyperplay' && channelRequiresAccessCode ? (
               <TextInputField

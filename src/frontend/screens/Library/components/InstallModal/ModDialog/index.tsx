@@ -9,27 +9,29 @@ import styles from './ModDialog.module.scss'
 import { configStore } from 'frontend/helpers/electronStores'
 import TextInputWithIconField from 'frontend/components/UI/TextInputWithIconField'
 import { Button, Images } from '@hyperplay/ui'
-// import { install } from 'frontend/helpers'
+import { install } from 'frontend/helpers'
+import { signSiweMessage } from 'frontend/helpers/library'
 
 interface Props {
   backdropClick: () => void
   gameInfo: GameInfo
   accessCode: string
   children: React.ReactNode
+  requiresToken: boolean
 }
 
 const userHome = configStore.get('userHome', '')
 
-/* const previousProgress = {
+ const previousProgress = {
   bytes: '0.00MB',
   eta: '00:00:00',
   percent: 0
-} */
+} 
 
-const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children }) => {
+const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children, accessCode, requiresToken }) => {
   const { t } = useTranslation()
   const [zipFilePath, setZipFilePath] = useState<string>('')
-  const [installPath, setInstallPath] = useState<string>('')
+  const [installPath, setInstallPath] = useState<string>(getDefaultInstallPath())
 
   const { title, app_name: appName } = gameInfo
 
@@ -62,6 +64,7 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children }) => {
 
   async function handleInstall(): Promise<void> {
     backdropClick()
+    let siweValues
 
     await window.api.prepareBaseGameForModding({
       appName,
@@ -69,7 +72,11 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children }) => {
       installPath
     })
 
-    /* await install({
+    if (requiresToken) {
+      siweValues = await signSiweMessage()
+    }
+
+    await install({
       gameInfo,
       installPath,
       t,
@@ -77,8 +84,10 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children }) => {
       previousProgress,
       progress: previousProgress,
       showDialogModal: () => {},
-      accessCode
-    }) */
+      channelName: 'main',
+      accessCode,
+      siweValues
+    })
   }
   return (
     <>

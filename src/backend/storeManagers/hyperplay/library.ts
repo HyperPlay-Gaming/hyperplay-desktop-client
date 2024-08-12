@@ -170,14 +170,8 @@ export async function refresh() {
   return defaultExecResult
 }
 
-export function getGameInfo(
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  appName: string,
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  forceReload?: boolean
-): GameInfo | undefined {
-  logWarning(`getGameInfo not implemented on HyperPlay Library Manager`)
-  return undefined
+export function getGameInfo(appName: string): GameInfo | undefined {
+  return getGamesGameInfo(appName)
 }
 
 /* returns array of app names (i.e. _id's) for game releases that are out of date
