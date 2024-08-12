@@ -423,22 +423,6 @@ function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
     ? process.env.MOCK_DOWNLOAD_URL
     : platformInfo.external_url
 
-  if (!downloadUrl) {
-    logInfo(
-      'Game is probably a mod, checking URL on release_meta',
-      LogPrefix.HyperPlay
-    )
-    const gameInfo = getGameInfo(appName)
-    if (
-      !gameInfo?.channels?.main?.release_meta?.external_url ||
-      gameInfo.type !== 'mod'
-    ) {
-      throw `Download URL not found in Main channel for ${appName}`
-    }
-    const { release_meta } = gameInfo.channels.main
-    return release_meta.external_url
-  }
-
   return downloadUrl
 }
 
