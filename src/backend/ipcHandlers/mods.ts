@@ -190,7 +190,7 @@ ipcMain.handle('runModPatcher', async (event, appName) => {
     return
   }
   const patcher = path.join(installPath, 'client-patcher')
-  const manifest = path.join('patch', 'manifest.json')
+  const manifest = path.join(installPath, 'patch', 'manifest.json')
 
   logInfo(
     `Running patcher ${patcher} with manifest ${manifest}`,
