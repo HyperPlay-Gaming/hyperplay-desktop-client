@@ -134,10 +134,10 @@ function ConfirmClaimModal(props: ConfirmProps) {
         </Modal.Body>
         <div className={styles.buttonsContainer}>
           <Button type="tertiary" onClick={props.onCancel}>
-            {t('quest.claimWarning.cancel', 'cancel')}
+            {t('quest.claimWarning.cancel', 'Cancel')}
           </Button>
           <Button type="secondary" onClick={props.onConfirm}>
-            {t('quest.claimWarning.confirm', 'confirm')}
+            {t('quest.claimWarning.confirm', 'Confirm')}
           </Button>
         </div>
       </div>

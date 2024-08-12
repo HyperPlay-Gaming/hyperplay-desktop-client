@@ -655,8 +655,8 @@
         "claimWarning": {
             "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>",
             "body2": "Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>",
-            "cancel": "cancel",
-            "confirm": "confirm",
+            "cancel": "Cancel",
+            "confirm": "Confirm",
             "title": "Confirm Quest Reward Claim"
         },
         "connectSteamAccount": "Connect Steam account",
