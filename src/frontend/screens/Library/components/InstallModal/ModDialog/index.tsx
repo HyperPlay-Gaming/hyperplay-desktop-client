@@ -22,16 +22,24 @@ interface Props {
 
 const userHome = configStore.get('userHome', '')
 
- const previousProgress = {
+const previousProgress = {
   bytes: '0.00MB',
   eta: '00:00:00',
   percent: 0
-} 
+}
 
-const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children, accessCode, requiresToken }) => {
+const ModDialog: React.FC<Props> = ({
+  backdropClick,
+  gameInfo,
+  children,
+  accessCode,
+  requiresToken
+}) => {
   const { t } = useTranslation()
   const [zipFilePath, setZipFilePath] = useState<string>('')
-  const [installPath, setInstallPath] = useState<string>(getDefaultInstallPath())
+  const [installPath, setInstallPath] = useState<string>(
+    getDefaultInstallPath()
+  )
 
   const { title, app_name: appName } = gameInfo
 
@@ -90,7 +98,6 @@ const ModDialog: React.FC<Props> = ({ backdropClick, gameInfo, children, accessC
     })
 
     await window.api.runModPatcher(appName)
-
   }
   return (
     <>
