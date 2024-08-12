@@ -5,7 +5,11 @@ import {
   ExtractZipProgressResponse,
   ExtractZipService
 } from 'backend/services/ExtractZipService'
-import { calculateProgress } from 'backend/storeManagers/hyperplay/games'
+import { libraryManagerMap } from 'backend/storeManagers'
+import {
+  calculateProgress,
+  getDestinationPath
+} from 'backend/storeManagers/hyperplay/games'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
 import { ipcMain } from 'electron'
 
@@ -27,20 +31,29 @@ ipcMain.handle(
       )
     })
 
+    const gameInfo = libraryManagerMap['hyperplay'].getGameInfo(appName)
+
+    if (!gameInfo) {
+      logError('Game info not found', LogPrefix.HyperPlay)
+      return
+    }
+
+    const dirPath = getDestinationPath(gameInfo, installPath)
+
     sendFrontendMessage('gameStatusUpdate', {
       appName,
       status: 'extracting',
       runner: 'hyperplay',
-      folder: installPath
+      folder: dirPath
     })
 
     window.webContents.send(`progressUpdate-${appName}`, {
       appName,
       runner: 'hyperplay',
-      folder: installPath,
+      folder: dirPath,
       status: 'extracting',
       progress: {
-        folder: installPath,
+        folder: dirPath,
         percent: 0,
         diskSpeed: 0,
         downSpeed: 0,
@@ -49,7 +62,11 @@ ipcMain.handle(
       }
     })
 
-    const extractService = new ExtractZipService(zipFile, installPath)
+    logInfo(
+      `Extracting ${zipFile} to ${dirPath} -----------------`,
+      LogPrefix.HyperPlay
+    )
+    const extractService = new ExtractZipService(zipFile, dirPath)
 
     inProgressExtractionsMap.set('baseGameForModding', extractService)
     await new Promise((resolve) => {
@@ -76,10 +93,10 @@ ipcMain.handle(
           window.webContents.send(`progressUpdate-${appName}`, {
             appName,
             runner: 'hyperplay',
-            folder: installPath,
+            folder: dirPath,
             status: 'extracting',
             progress: {
-              folder: installPath,
+              folder: dirPath,
               ...currentProgress
             }
           })
@@ -109,10 +126,10 @@ ipcMain.handle(
           window.webContents.send(`progressUpdate-${appName}`, {
             appName,
             runner: 'hyperplay',
-            folder: installPath,
+            folder: dirPath,
             status: 'done',
             progress: {
-              folder: installPath,
+              folder: dirPath,
               ...currentProgress
             }
           })
@@ -120,7 +137,7 @@ ipcMain.handle(
           window.webContents.send('gameStatusUpdate', {
             appName,
             runner: 'hyperplay',
-            folder: installPath,
+            folder: dirPath,
             status: 'done'
           })
 
