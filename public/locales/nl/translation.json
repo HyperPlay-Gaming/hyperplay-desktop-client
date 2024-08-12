@@ -964,7 +964,8 @@
         "points": "Punten",
         "reputation": "Reputatie",
         "sync": "Sync",
-        "pointsClaimed": "Punt geclaimd"
+        "pointsClaimed": "Punt geclaimd",
+        "g7Numclaimed": "Total Claim G7 Credits"
     },
     "quests": {
         "quests": "Quest",
@@ -973,6 +974,14 @@
                 "client": "Je bent momenteel niet ingelogd, speelsporen zullen niet worden gevolgd. login alsjeblieft naar HyperPlay via de top rechtstreeks om vooruitgang te volgen.",
                 "overlay": "Je bent momenteel niet ingelogd, speelsporen zullen niet worden gevolgd. Verlaat het spel en login naar HyperPlay via de top rechtstreeks om vooruitgang te volgen."
             }
+        },
+        "noneFound": {
+            "message": "Er waren geen zoektochten gevonden.",
+            "title": "Geen vragen gevonden."
+        },
+        "g7CreditsModal": {
+            "description": "Dive in HyperPlay's topspelletjes met spannende Play Streak Challenges. Elke activiteit moedigt je aan om je aan te vallen met een ander spel, het beste van Web3 spel te laten zien. Je speeltijd is belangrijk!",
+            "title": "Earn Game7 Credits"
         }
     },
     "sideload": {

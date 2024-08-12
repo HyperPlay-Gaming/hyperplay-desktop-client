@@ -742,7 +742,8 @@
     "gameRelease": {
         "beta": "Beta",
         "demo": "Demo",
-        "main": "Protagonist"
+        "main": "Protagonist",
+        "alpha": "alfa"
     },
     "accounts": "Conturi",
     "ALL": "Toate",

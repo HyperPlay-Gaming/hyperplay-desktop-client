@@ -859,7 +859,7 @@ async function callRunner(
     return currentPromise
   }
   const hpOverlay = await getHpOverlay()
-  const { shouldOpenOverlay, gameIsEpicForwarderOnHP, hyperPlayListing } =
+  const { shouldOpenOverlay, hyperPlayListing } =
     await launchingGameShouldOpenOverlay(gameInfo)
 
   let promise = new Promise<ExecResult>((res, rej) => {
@@ -876,7 +876,7 @@ async function callRunner(
     )
 
     if (gameInfo && shouldOpenOverlay) {
-      if (gameIsEpicForwarderOnHP && hyperPlayListing?.project_id) {
+      if (hyperPlayListing?.project_id) {
         hpOverlay?.openOverlay(hyperPlayListing?.project_id, gameInfo.runner)
       } else {
         hpOverlay?.openOverlay(gameInfo?.app_name, gameInfo.runner)

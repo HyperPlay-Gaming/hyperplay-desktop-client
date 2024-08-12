@@ -1144,6 +1144,47 @@ ipcMain.on('logError', (e, err) => logError(err, LogPrefix.Frontend))
 ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
+const gamePlaySessionStartTimes: Record<string, bigint> = {}
+
+function startNewPlaySession(appName: string) {
+  // Uses hrtime for monotonic timer not subject to clock drift or sync errors
+  const startPlayingTimeMonotonic = hrtime.bigint()
+  gamePlaySessionStartTimes[appName] = startPlayingTimeMonotonic
+}
+
+async function syncPlaySession(appName: string, runner: Runner) {
+  const stopPlayingTimeMonotonic = hrtime.bigint()
+  const sessionPlaytimeInMs =
+    (stopPlayingTimeMonotonic - gamePlaySessionStartTimes[appName]) /
+    BigInt(1000000)
+
+  // reset the time counter
+  startNewPlaySession(appName)
+
+  // update local json with time played
+  const sessionPlaytimeInMinutes =
+    sessionPlaytimeInMs / BigInt(1000) / BigInt(60)
+
+  const totalPlaytime =
+    sessionPlaytimeInMinutes + BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
+  tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
+
+  const game = gameManagerMap[runner].getGameInfo(appName)
+  const { hyperPlayListing } = await gameIsEpicForwarderOnHyperPlay(game)
+  postPlaySessionTime(
+    hyperPlayListing?.project_id || appName,
+    parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
+  )
+
+  return sessionPlaytimeInMs
+}
+
+ipcMain.handle(
+  'syncPlaySession',
+  async (e, appName: string, runner: Runner) => {
+    await syncPlaySession(appName, runner)
+  }
+)
 
 // get pid/tid on launch and inject
 ipcMain.handle(
@@ -1158,8 +1199,7 @@ ipcMain.handle(
     const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
     const startPlayingDate = new Date()
-    // Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    const startPlayingTimeMonotonic = hrtime.bigint()
+    startNewPlaySession(appName)
 
     if (!tsStore.has(game.app_name)) {
       tsStore.set(
@@ -1310,31 +1350,7 @@ ipcMain.handle(
     const finishedPlayingDate = new Date()
     tsStore.set(`${appName}.lastPlayed`, finishedPlayingDate.toISOString())
     // Playtime of this session in minutes. Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    const stopPlayingTimeMonotonic = hrtime.bigint()
-    const sessionPlaytimeInMs =
-      (stopPlayingTimeMonotonic - startPlayingTimeMonotonic) / BigInt(1000000)
-    const sessionPlaytimeInMinutes =
-      sessionPlaytimeInMs / BigInt(1000) / BigInt(60)
-
-    const totalPlaytime =
-      sessionPlaytimeInMinutes +
-      BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
-    tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
-
-    const { gameIsEpicForwarderOnHP, hyperPlayListing } =
-      await gameIsEpicForwarderOnHyperPlay(game)
-
-    if (gameIsEpicForwarderOnHP && hyperPlayListing) {
-      postPlaySessionTime(
-        hyperPlayListing.project_id,
-        parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
-      )
-    } else {
-      postPlaySessionTime(
-        appName,
-        parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
-      )
-    }
+    const sessionPlaytimeInMs = await syncPlaySession(appName, runner)
 
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)

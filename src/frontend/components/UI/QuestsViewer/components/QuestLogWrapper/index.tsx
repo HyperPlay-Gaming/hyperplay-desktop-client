@@ -49,7 +49,10 @@ export function QuestLogWrapper({
       symbol: 'G7C',
       name: 'Game7 Credits',
       isGame7Credits: true,
-      balance: userCreditsBalance
+      balance: userCreditsBalance,
+      i18n: {
+        totalClaimed: t('quest.g7Numclaimed', 'Total Claimed G7 Credits')
+      }
     })
   }
   if (pointsBalances) {
