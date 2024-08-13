@@ -51,6 +51,7 @@ import {
 import {
   handleArchAndPlatform,
   handlePlatformReversed,
+  runModPatcher,
   sanitizeVersion
 } from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
@@ -1264,12 +1265,6 @@ export function getGameInfo(appName: string): GameInfo {
     .get('games', [])
     .find((app) => app.app_name === appName)
 
-  // TODO: remove this in the future, it is only needed for games downloaded from v0.10 and below
-  // write manifest file
-  if (appInfo?.is_installed && appInfo.install) {
-    writeManifestFile(appName, appInfo.install)
-  }
-
   if (!appInfo) {
     throw new Error('App not found in library')
   }
@@ -1417,6 +1412,12 @@ export async function update(
     updateOnly: true,
     siweValues: args?.siweValues
   })
+
+  const isMod = gameInfo.type === 'mod'
+  if (isMod) {
+    await runModPatcher(appName)
+  }
+
   return installResult
 }
 
