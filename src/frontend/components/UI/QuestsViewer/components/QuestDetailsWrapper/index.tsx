@@ -35,6 +35,7 @@ import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
 import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
 import { useSyncPlaySession } from 'frontend/hooks/useSyncInterval'
 import { useTrackQuestViewed } from 'frontend/hooks/useTrackQuestViewed'
+import { ConfirmClaimModal } from './components/ConfirmClaimModal'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -112,6 +113,7 @@ export function QuestDetailsWrapper({
 
   const flags = useFlags()
   const account = useAccount()
+  const [showWarning, setShowWarning] = useState(false)
   const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
@@ -384,8 +386,8 @@ export function QuestDetailsWrapper({
   }
 
   const claimRewardsMutation = useMutation({
-    mutationFn: async (rewards: Reward[]) => {
-      return claimRewards(rewards)
+    mutationFn: async (params: Reward[]) => {
+      return claimRewards(params)
     },
     onSuccess: async () => {
       await questPlayStreakResult.invalidateQuery()
@@ -454,6 +456,17 @@ export function QuestDetailsWrapper({
       }
     }
 
+    let networkName = ''
+
+    if (questMeta.rewards?.[0].chain_id) {
+      networkName = chainMap[questMeta.rewards[0].chain_id]?.chain?.name ?? ''
+    }
+
+    const rewardsToClaim = questMeta.rewards ?? []
+    const isRewardOnChain = rewardsToClaim.some((reward) =>
+      ['ERC1155', 'ERC721', 'ERC20'].includes(reward.reward_type)
+    )
+
     const questDetailsProps: QuestDetailsProps = {
       alertProps,
       questType: questMeta.type,
@@ -474,8 +487,13 @@ export function QuestDetailsWrapper({
       },
       rewards: questRewards ?? [],
       i18n,
-      onClaimClick: async () =>
-        claimRewardsMutation.mutate(questMeta.rewards ?? []),
+      onClaimClick: async () => {
+        if (isRewardOnChain) {
+          setShowWarning(true)
+        } else {
+          claimRewardsMutation.mutate(rewardsToClaim)
+        }
+      },
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
@@ -492,13 +510,25 @@ export function QuestDetailsWrapper({
       chainTooltips: {}
     }
     questDetails = (
-      <QuestDetails
-        {...questDetailsProps}
-        className={styles.questDetails}
-        key={`questDetailsLoadedId${
-          questMeta.id
-        }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
-      />
+      <>
+        <ConfirmClaimModal
+          isOpen={showWarning}
+          onConfirm={() => {
+            setShowWarning(false)
+            claimRewardsMutation.mutate(rewardsToClaim)
+          }}
+          onCancel={() => setShowWarning(false)}
+          onClose={() => setShowWarning(false)}
+          networkName={networkName}
+        />
+        <QuestDetails
+          {...questDetailsProps}
+          className={styles.questDetails}
+          key={`questDetailsLoadedId${
+            questMeta.id
+          }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
+        />
+      </>
     )
   } else if (
     questResult?.data.isLoading ||
