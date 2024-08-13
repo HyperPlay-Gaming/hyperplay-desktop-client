@@ -10,12 +10,11 @@ import {
   calculateProgress,
   getDestinationPath
 } from 'backend/storeManagers/hyperplay/games'
-import { spawnAsync } from 'backend/utils'
+import { runModPatcher } from 'backend/storeManagers/hyperplay/utils'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
 import { ipcMain } from 'electron'
 
 import i18next from 'i18next'
-import path from 'path'
 
 const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
 
@@ -182,24 +181,5 @@ ipcMain.handle(
 )
 
 ipcMain.handle('runModPatcher', async (event, appName) => {
-  // game_folder/client-patcher patch -m patch/manifest.json
-  const installPath =
-    libraryManagerMap['hyperplay'].getGameInfo(appName)?.install.install_path
-  if (!installPath) {
-    logError(`Cannot find install path for ${appName}`, LogPrefix.HyperPlay)
-    return
-  }
-  const patcher = path.join(installPath, 'client-patcher')
-  const manifest = path.join(installPath, 'patch', 'manifest.json')
-
-  logInfo(
-    `Running patcher ${patcher} with manifest ${manifest}`,
-    LogPrefix.HyperPlay
-  )
-
-  try {
-    await spawnAsync(patcher, ['patch', '-m', manifest])
-  } catch (error) {
-    logError([`Error running patcher:`, error], LogPrefix.HyperPlay)
-  }
+  return runModPatcher(appName)
 })

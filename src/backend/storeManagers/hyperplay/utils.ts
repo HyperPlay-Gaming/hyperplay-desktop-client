@@ -7,14 +7,16 @@ import {
   GameType
 } from 'common/types'
 import axios from 'axios'
-import { getTitleFromEpicStoreUrl } from 'backend/utils'
+import { getTitleFromEpicStoreUrl, spawnAsync } from 'backend/utils'
 import {
   getValistListingApiUrl,
   qaToken,
   valistListingsApiUrl
 } from 'backend/constants'
 import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
-import { logError } from 'backend/api/misc'
+import { getGameInfo } from './games'
+import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
+import { join } from 'path'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -342,5 +344,27 @@ export async function getEpicListingUrl(projectId: string): Promise<string> {
   } catch (error) {
     logError(`Error when trying to get listing info: ${error}`)
     return ''
+  }
+}
+
+export const runModPatcher = async (appName: string) => {
+  // game_folder/client-patcher patch -m patch/manifest.json
+  const installPath = getGameInfo(appName)?.install.install_path
+  if (!installPath) {
+    logError(`Cannot find install path for ${appName}`, LogPrefix.HyperPlay)
+    return
+  }
+  const patcher = join(installPath, 'client-patcher')
+  const manifest = join(installPath, 'patch', 'manifest.json')
+
+  logInfo(
+    `Running patcher ${patcher} with manifest ${manifest}`,
+    LogPrefix.HyperPlay
+  )
+
+  try {
+    await spawnAsync(patcher, ['patch', '-m', manifest])
+  } catch (error) {
+    logError([`Error running patcher:`, error], LogPrefix.HyperPlay)
   }
 }
