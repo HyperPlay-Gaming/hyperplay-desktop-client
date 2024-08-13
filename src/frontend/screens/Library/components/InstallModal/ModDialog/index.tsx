@@ -96,8 +96,6 @@ const ModDialog: React.FC<Props> = ({
       accessCode,
       siweValues
     })
-
-    await window.api.runModPatcher(appName)
   }
   return (
     <>

@@ -181,5 +181,9 @@ ipcMain.handle(
 )
 
 ipcMain.handle('runModPatcher', async (event, appName) => {
-  return runModPatcher(appName)
+  try {
+    runModPatcher(appName)
+  } catch (error) {
+    throw new Error(`Error running mod patcher: ${error}`)
+  }
 })

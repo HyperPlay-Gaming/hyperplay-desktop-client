@@ -935,6 +935,15 @@ export async function install(
       channelName
     })
 
+    const isMod = gameInfo.type === 'mod'
+    if (isMod) {
+      try {
+        await runModPatcher(appName)
+      } catch (error) {
+        return { status: 'error' }
+      }
+    }
+
     if (platformToInstall === 'Windows') {
       logInfo(`Looking for  distributables for ${appName}`, LogPrefix.HyperPlay)
       await installDistributables({
@@ -1415,7 +1424,11 @@ export async function update(
 
   const isMod = gameInfo.type === 'mod'
   if (isMod) {
-    await runModPatcher(appName)
+    try {
+      await runModPatcher(appName)
+    } catch (error) {
+      return { status: 'error' }
+    }
   }
 
   return installResult
