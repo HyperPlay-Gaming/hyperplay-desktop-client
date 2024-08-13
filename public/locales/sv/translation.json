@@ -990,6 +990,10 @@
         "noneFound": {
             "message": "Det fanns inga uppdrag hittades.",
             "title": "Inga Quests hittades."
+        },
+        "g7CreditsModal": {
+            "description": "Dyk in HyperPlays toppspel med spännande Play Streak Challenges. Varje aktivitet uppmuntrar dig att engagera dig i ett annat spel, visa det bästa av web3 spel. Din speltid spelar roll!",
+            "title": "Tjäna Game7 Credits"
         }
     },
     "accounts": "konton",

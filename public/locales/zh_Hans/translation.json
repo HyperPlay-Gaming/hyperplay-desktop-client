@@ -1002,6 +1002,10 @@
         "noneFound": {
             "message": "没有发现任何要求.",
             "title": "无勘探公司."
+        },
+        "g7CreditsModal": {
+            "title": "Earn Hor7 Credits",
+            "description": "D. 进入超Play的最高游戏,挑动“游戏Streak”挑战。 每一项活动都鼓励你进行不同的游戏,展示网络3合并的最佳方式。 你的游戏时间!"
         }
     },
     "exit_game": "退出游戏",

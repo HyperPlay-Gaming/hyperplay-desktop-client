@@ -996,6 +996,10 @@
         "noneFound": {
             "message": "Orada bulunan arayışı yoktu.",
             "title": "Hiçbir Quest bulunamadı."
+        },
+        "g7CreditsModal": {
+            "description": "HyperPlay'in en iyi oyunları heyecan verici Play Streak Challenges ile. Her aktivite sizi farklı bir oyunla meşgul etmeye teşvik eder, web3 oyununun en iyisini gösterir. Oyun zamanı önemlidir!",
+            "title": "Game7 Credits"
         }
     },
     "accounts": "hesaplar",

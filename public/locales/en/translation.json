@@ -652,6 +652,13 @@
         "claimed": "Claimed",
         "claimFailed": "Claim failed",
         "claimFailedMessage": "Please try once more. If it still doesn't work, create a Discord support ticket.",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>",
+            "body2": "Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>",
+            "cancel": "Cancel",
+            "confirm": "Confirm",
+            "title": "Confirm Quest Reward Claim"
+        },
         "connectSteamAccount": "Connect Steam account",
         "createDiscordTicket": "Created Discord ticket",
         "g7Numclaimed": "Total Claimed G7 Credits",
