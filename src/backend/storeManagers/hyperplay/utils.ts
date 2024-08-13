@@ -10,13 +10,16 @@ import axios from 'axios'
 import { getTitleFromEpicStoreUrl, spawnAsync } from 'backend/utils'
 import {
   getValistListingApiUrl,
+  isWindows,
   qaToken,
   valistListingsApiUrl
 } from 'backend/constants'
 import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
-import { getGameInfo } from './games'
+import { getGameInfo, getSettings } from './games'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { join } from 'path'
+import { runWineCommand } from 'backend/launcher'
+import { existsSync } from 'graceful-fs'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -363,9 +366,23 @@ export const runModPatcher = async (appName: string) => {
     LogPrefix.HyperPlay
   )
 
+  if (!existsSync(patcher)) {
+    throw new Error(`Patcher not found at ${patcher}`)
+  }
+
   try {
-    await spawnAsync(patcher, ['patch', '-m', manifest])
+    if (!isWindows) {
+      const gameSettings = await getSettings(appName)
+      runWineCommand({
+        gameSettings,
+        commandParts: [patcher, 'patch', '-m', manifest],
+        wait: true,
+        protonVerb: 'waitforexitandrun'
+      })
+    } else {
+      await spawnAsync(patcher, ['patch', '-m', manifest])
+    }
   } catch (error) {
-    logError([`Error running patcher:`, error], LogPrefix.HyperPlay)
+    throw new Error(`Error running patcher: ${error}`)
   }
 }
