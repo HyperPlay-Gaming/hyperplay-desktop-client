@@ -105,7 +105,8 @@ const eventsToCloseMetaMaskPopupOn = [
   'mouseDown',
   'mouseUp'
 ]
-const valistListingsApiUrl = 'https://developers.hyperplay.xyz/api/v1/listings'
+const valistListingsApiUrl =
+  'https://hyperplay-dev-git-test-signature-hyperplay.vercel.app/api/v1/listings'
 const mainReleaseChannelName = 'main'
 export let qaToken = ''
 
