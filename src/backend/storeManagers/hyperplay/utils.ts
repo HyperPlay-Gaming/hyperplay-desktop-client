@@ -348,13 +348,14 @@ export async function getEpicListingUrl(projectId: string): Promise<string> {
 }
 
 export const runModPatcher = async (appName: string) => {
-  // game_folder/client-patcher patch -m patch/manifest.json
+  // game_folder/client-patcher patch.exe -m patch/manifest.json
   const installPath = getGameInfo(appName)?.install.install_path
   if (!installPath) {
     logError(`Cannot find install path for ${appName}`, LogPrefix.HyperPlay)
     return
   }
-  const patcher = join(installPath, 'client-patcher')
+
+  const patcher = join(installPath, 'client-patcher.exe')
   const manifest = join(installPath, 'patch', 'manifest.json')
 
   logInfo(
