@@ -1010,7 +1010,9 @@
         "claimWarning": {
             "body": "<bold> IMPORTANTE:</bold> Certifique-se de que você está alocando gás suficiente na rede {{networkName}} para que a transação seja confirmada com sucesso <bold> em 24 horas",
             "body2": "Caso contrário, a Recompensa de Busca <bold> expirará e não será mais reivindicada.</bold>",
-            "title": "Confirme Quest Reward Claim"
+            "title": "Confirme Quest Reward Claim",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar"
         }
     },
     "profile": "Perfil",
