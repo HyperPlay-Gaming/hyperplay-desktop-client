@@ -1002,7 +1002,11 @@
         "sync": "Синхронизуј",
         "quests": "#Poen",
         "pointsClaimed": "#Poen",
-        "g7Numclaimed": "@Total #Potraživati G7 #Kredit"
+        "g7Numclaimed": "@Total #Potraživati G7 #Kredit",
+        "claimWarning": {
+            "confirm": "Potvrdi",
+            "cancel": "Откажи"
+        }
     },
     "quests": {
         "playstreak": {
