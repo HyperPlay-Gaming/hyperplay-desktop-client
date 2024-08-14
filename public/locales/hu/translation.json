@@ -932,7 +932,9 @@
         "claimWarning": {
             "body": "<bold>IMPORTANT:</bold> Kérjük, győződjön meg róla, hogy elegendő gázt oszt ki a {{networkName}} hálózaton a tranzakció sikeres megerősítéséhez <bold> 24 órán belül.</bold>",
             "body2": "Ellenkező esetben a Quest Reward <bold> lejár, és már nem lesz követelhető.</bold>",
-            "title": "Confirm Quest Reward Claim"
+            "title": "Confirm Quest Reward Claim",
+            "cancel": "Mégsem",
+            "confirm": "Megerősítés"
         }
     },
     "quests": {
