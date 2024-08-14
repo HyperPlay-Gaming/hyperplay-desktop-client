@@ -975,7 +975,9 @@
         "claimWarning": {
             "body": "<bold>IMPORTANT:</bold> Ujistěte se, že jste přidělit dostatek plynu na {{networkName}} síť pro transakci, aby byla úspěšně potvrzena <bold>sv 24 hodin.</bold>",
             "body2": "V opačném případě bude odměna Quest Reward <bold> ukončena a již nebude tvrditelné.</bold>",
-            "title": "Potvrďte výzvu k odměně"
+            "title": "Potvrďte výzvu k odměně",
+            "confirm": "Potvrdit",
+            "cancel": "Zrušit"
         }
     },
     "quests": {
