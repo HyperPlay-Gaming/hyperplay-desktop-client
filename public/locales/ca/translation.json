@@ -925,7 +925,9 @@
         "claimWarning": {
             "body": "<bold>IMPORTANT:</bold> Si us plau, assegureu-vos que està assignant prou gas a la xarxa {{networkName}} per a la transacció per confirmar amb èxit <bold> dins de 24 hrs.</bold>",
             "body2": "En cas contrari, el premi Quest <bold> caducarà i deixarà de ser reclamable.</bold>",
-            "title": "Confirmeu la reclamació de recompenses"
+            "title": "Confirmeu la reclamació de recompenses",
+            "cancel": "Cancel·lar",
+            "confirm": "Confirmar"
         }
     },
     "ALL": "TOT",
