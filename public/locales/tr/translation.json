@@ -931,7 +931,9 @@
         "claimWarning": {
             "body": "<bold>IMPORTANT: </bold> Lütfen işlem için yeterli gaz tahsis ettiğinizden emin olun {{networkName}} 24 hrs ile <bold>",
             "body2": "Aksi takdirde, Quest Ödülü <bold> sona erecektir ve artık iddia edilebilir olmayacaktır.</bold>",
-            "title": "Quest Ödülü Dilekçesi"
+            "title": "Quest Ödülü Dilekçesi",
+            "cancel": "İptal",
+            "confirm": "Kabul Et"
         }
     },
     "ALL": "Tümü",
