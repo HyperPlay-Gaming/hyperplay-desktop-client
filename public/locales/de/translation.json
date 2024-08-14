@@ -963,7 +963,9 @@
         "claimWarning": {
             "body": "<bold>WICHTIG:</bold> Bitte stellen Sie sicher, dass Sie genügend Gas auf dem {{networkName}}-Netzwerk zuweisen, damit die Transaktion erfolgreich bestätigt wird <bold> innerhalb von 24 Stunden.</bold>",
             "body2": "Andernfalls läuft der Quest Reward <bold> ab und wird nicht mehr beanspruchbar sein.</bold>",
-            "title": "Bestätigen Sie Quest Reward Claim"
+            "title": "Bestätigen Sie Quest Reward Claim",
+            "cancel": "Abbrechen",
+            "confirm": "Bestätigen"
         }
     },
     "quests": {
