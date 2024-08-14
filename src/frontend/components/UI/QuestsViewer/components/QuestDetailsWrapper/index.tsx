@@ -17,7 +17,12 @@ import {
   useSwitchChain,
   useWriteContract
 } from 'wagmi'
-import { ConfirmClaimParams, Reward, RewardClaimSignature } from 'common/types'
+import {
+  ConfirmClaimParams,
+  Reward,
+  RewardClaimSignature,
+  UserPlayStreak
+} from 'common/types'
 import authState from 'frontend/state/authState'
 import { mintReward } from './rewards/mintReward'
 import { claimPoints } from './rewards/claimPoints'
@@ -389,11 +394,37 @@ export function QuestDetailsWrapper({
     mutationFn: async (params: Reward[]) => {
       return claimRewards(params)
     },
+    onMutate: () => {
+      if (!selectedQuestId) return
+
+      const queryKey = `getUserPlayStreak:${selectedQuestId}`
+
+      const previousData = queryClient.getQueryData([
+        queryKey
+      ]) as UserPlayStreak | null
+
+      if (!previousData) return
+
+      queryClient.setQueryData([queryKey], (oldData: UserPlayStreak) => {
+        return {
+          ...oldData,
+          current_playstreak_in_days: 0
+        }
+      })
+
+      return { previousData }
+    },
     onSuccess: async () => {
       await questPlayStreakResult.invalidateQuery()
     },
-    onError: (error) => {
+    onError: (error, _data, context) => {
       window.api.logError(`Error claiming rewards: ${error}`)
+
+      if (!selectedQuestId || !context) return
+
+      const queryKey = `getUserPlayStreak:${selectedQuestId}`
+
+      queryClient.setQueryData([queryKey], context.previousData)
     }
   })
 
