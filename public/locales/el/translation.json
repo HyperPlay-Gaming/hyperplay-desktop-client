@@ -957,7 +957,11 @@
         "signIn": "Σύνδεση",
         "sync": "Συγχρονισμός",
         "pointsClaimed": "Υποχρεωμένα Σημεία",
-        "g7Numclaimed": "Ολοκληρωμένο G7 Credits"
+        "g7Numclaimed": "Ολοκληρωμένο G7 Credits",
+        "claimWarning": {
+            "cancel": "Άκυρο",
+            "confirm": "Επιβεβαίωση"
+        }
     },
     "email_subscription": {
         "title": "Σας ευχαριστούμε για την εγγραφή!",
