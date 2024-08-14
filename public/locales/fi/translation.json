@@ -1019,6 +1019,10 @@
         "noneFound": {
             "title": "Quests ei löytynyt.",
             "message": "Etsintöjä ei löytynyt."
+        },
+        "g7CreditsModal": {
+            "description": "HyperPlayn parhaat pelit, joissa on jännittäviä Play Streak -haasteita. Jokainen aktiviteetti kannustaa sinua osallistumaan toiseen peliin ja esittelemään parhaan verkkopelin. Peliaikasi on tärkeää!",
+            "title": "Ansaitse Game7 -luottoja"
         }
     }
 }

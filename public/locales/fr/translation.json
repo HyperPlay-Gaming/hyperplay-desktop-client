@@ -997,6 +997,10 @@
         "noneFound": {
             "message": "Il n'y avait pas de quêtes trouvées.",
             "title": "Pas de quêtes trouvées."
+        },
+        "g7CreditsModal": {
+            "title": "Earn Game7 Crédits",
+            "description": "Plongez dans les meilleurs jeux d'HyperPlay avec des défis de jeu passionnants. Chaque activité vous encourage à vous engager avec un jeu différent, montrant le meilleur de web3 jeu. Ton temps de jeu est important !"
         }
     },
     "accounts": "comptes",

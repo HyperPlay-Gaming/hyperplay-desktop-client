@@ -941,6 +941,10 @@
         "noneFound": {
             "title": "Nem találtak Quests.",
             "message": "Nem találtak kereséseket."
+        },
+        "g7CreditsModal": {
+            "description": "Dive into HyperPlay top játékok izgalmas játék Streak kihívásokkal. Minden tevékenység arra ösztönzi Önt, hogy vegyen részt egy másik játék, bemutatva a legjobb web3 játék. A játékidő számít!",
+            "title": "Earn Game7 Hitelek"
         }
     },
     "sideload": {

@@ -972,6 +972,10 @@
         "noneFound": {
             "title": "Keine Quests gefunden.",
             "message": "Es wurden keine Quests gefunden."
+        },
+        "g7CreditsModal": {
+            "description": "Tauchen Sie mit spannenden Play Streak Challenges in die Top-Spiele von HyperPlay ein. Jede Aktivität ermutigt Sie, sich mit einem anderen Spiel zu engagieren, was das Beste von web3 Gaming zeigt. Deine Spielzeit zählt!",
+            "title": "Earn Game7 Credits"
         }
     },
     "gameRelease": {

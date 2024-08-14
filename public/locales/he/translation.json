@@ -1021,6 +1021,10 @@
         "noneFound": {
             "message": "לא נמצאו מסעות.",
             "title": "לא נמצאו סיורים."
+        },
+        "g7CreditsModal": {
+            "title": "10 נקודות זיכוי",
+            "description": "עקבו אחרי HyperPlay's Greatest Play Streak Challenges כל פעילות מעודדת אותך לעסוק במשחק אחר, להראות את הטוב ביותר של משחקי Web3. זמן המשחק שלך חשוב!"
         }
     },
     "importGameErrorMessageExecutable": "משחק Game Game לוח לא נמצא, משחק יבוא אינו אפשרי",

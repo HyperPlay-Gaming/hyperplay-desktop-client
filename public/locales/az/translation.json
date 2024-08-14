@@ -948,6 +948,10 @@
         "noneFound": {
             "message": "Oxunub:.",
             "title": "No Quests tapdı."
+        },
+        "g7CreditsModal": {
+            "description": "Pulsuz Play Streak Challenges ilə HyperPlay üst oyunlar daxil olmaq. Hər bir fəaliyyət, web3 oyun ən yaxşı göstərir. Sizin playtime əsas!",
+            "title": "Oyun7 Kreditlər"
         }
     },
     "accounts": "accounts",
