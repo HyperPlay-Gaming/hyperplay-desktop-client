@@ -918,6 +918,7 @@ export interface Reward {
   /* eslint-disable-next-line */
   token_ids: { amount_per_user: string; token_id: number }[]
   image_url: string
+  numClaimsLeft: string
 }
 
 export interface Quest {
