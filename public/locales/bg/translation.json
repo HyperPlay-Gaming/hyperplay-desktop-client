@@ -745,7 +745,11 @@
         "type": {
             "reputation": "Репутация"
         },
-        "reputation": "Репутация"
+        "reputation": "Репутация",
+        "claimWarning": {
+            "cancel": "Отмяна",
+            "confirm": "Потвърдете"
+        }
     },
     "accounts": "Акаунти",
     "analytics": "Анализ",
