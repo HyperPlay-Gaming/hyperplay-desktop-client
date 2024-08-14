@@ -227,7 +227,7 @@
     "lokijs": "^1.5.12",
     "mime": "^3.0.0",
     "mobx": "^6.13.1",
-    "mobx-react-lite": "^3.4.3",
+    "mobx-react-lite": "^4.0.7",
     "patch-package": "^8.0.0",
     "plist": "^3.0.5",
     "postinstall-postinstall": "^2.1.0",
