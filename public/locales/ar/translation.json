@@ -978,7 +978,9 @@
         "claimWarning": {
             "body2": "وإلا، فإن الوصية <bold> ستنتهي ولن تعود قابلة للمطالبة.</bold>",
             "title": "المطالبة بالتعويض",
-            "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>"
+            "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>",
+            "confirm": "تأكيد",
+            "cancel": "إلغاء"
         }
     },
     "notification": {
