@@ -932,7 +932,9 @@
         "claimWarning": {
             "body": "<bold>IMPORTANT: </bold> Qeydiyyatdan keçmək üçün {{networkName}} şəhərində əvvəl qəbul olunmasını təmin edin <bold> 24 hrs </bold>",
             "body2": "Aksi halde, Quest mükafatı <bold> sona çatacaq və artıq iddia edəcək.</bold>",
-            "title": "Proqramlar"
+            "title": "Proqramlar",
+            "cancel": "Ləğv et",
+            "confirm": "Təsdiqlə"
         }
     },
     "profile": "Profil",
