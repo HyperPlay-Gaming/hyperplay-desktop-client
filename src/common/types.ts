@@ -915,8 +915,11 @@ export interface Reward {
   name: string
   contract_address: `0x${string}`
   decimals: number | null
-  /* eslint-disable-next-line */
-  token_ids: { amount_per_user: string; token_id: number }[]
+  token_ids: {
+    amount_per_user: string
+    token_id: number
+    numClaimsLeft: string
+  }[]
   image_url: string
   numClaimsLeft: string
 }
