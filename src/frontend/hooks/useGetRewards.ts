@@ -45,14 +45,31 @@ export function useGetRewards(questId: number | null) {
           ).toString()
         }
 
-        const questReward_i: QuestReward = {
-          title: reward_i.name,
-          imageUrl: reward_i.image_url,
-          chainName: getRewardCategory(reward_i, t),
-          numToClaim,
-          numOfClaimsLeft: reward_i.numClaimsLeft
+        if (
+          reward_i.reward_type === 'ERC1155' &&
+          reward_i.token_ids &&
+          reward_i.token_ids.length
+        ) {
+          for (const token_i of reward_i.token_ids) {
+            const questReward_i: QuestReward = {
+              title: reward_i.name,
+              imageUrl: reward_i.image_url,
+              chainName: getRewardCategory(reward_i, t),
+              numToClaim: token_i.amount_per_user,
+              numOfClaimsLeft: token_i.numClaimsLeft
+            }
+            rewards.push(questReward_i)
+          }
+        } else {
+          const questReward_i: QuestReward = {
+            title: reward_i.name,
+            imageUrl: reward_i.image_url,
+            chainName: getRewardCategory(reward_i, t),
+            numToClaim,
+            numOfClaimsLeft: reward_i.numClaimsLeft
+          }
+          rewards.push(questReward_i)
         }
-        rewards.push(questReward_i)
       }
       return rewards
     },
