@@ -95,6 +95,15 @@ const TopNavBar = observer(() => {
               {t('GOG', 'GOG')}
             </Button>
           </NavLink>
+          <NavLink to="/game7Portal">
+            <Button
+              type="link"
+              size="small"
+              style={getStoreTextStyle(HYPERPLAY_STORE_URL)}
+            >
+              Game7
+            </Button>
+          </NavLink>
         </>
       </div>
       <div>

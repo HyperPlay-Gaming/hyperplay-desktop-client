@@ -21,6 +21,7 @@ import { observer } from 'mobx-react-lite'
 import {
   EPIC_LOGIN_URL,
   EPIC_STORE_URL,
+  G7_PORTAL,
   GOG_LOGIN_URL,
   GOG_STORE_URL,
   HYPERPLAY_STORE_URL,
@@ -78,7 +79,8 @@ function WebView() {
     '/loginGOG': GOG_LOGIN_URL,
     '/loginweb/legendary': EPIC_LOGIN_URL,
     '/loginweb/gog': GOG_LOGIN_URL,
-    '/metamaskSnaps': METAMASK_SNAPS_URL
+    '/metamaskSnaps': METAMASK_SNAPS_URL,
+    '/game7Portal': G7_PORTAL
   }
 
   let startUrl = Object.prototype.hasOwnProperty.call(urls, pathname)
@@ -126,7 +128,7 @@ function WebView() {
   }, [startUrl, runner])
 
   useEffect(() => {
-    if (!urlIsHpUrl(startUrl)) {
+    if (!urlIsHpUrl(startUrl) && pathname !== '/game7Portal') {
       return
     }
 
@@ -261,7 +263,8 @@ function WebView() {
 
   let partitionForWebview = 'persist:epicstore'
 
-  if (urlIsHpUrl(startUrl)) partitionForWebview = 'persist:hyperplaystore'
+  if (urlIsHpUrl(startUrl) || pathname === '/game7Portal')
+    partitionForWebview = 'persist:hyperplaystore'
   else if (shouldInjectProvider(startUrl))
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 

@@ -101,6 +101,7 @@ function App() {
               path="metamaskSnaps"
               element={<WebView key="metamaskSnaps" />}
             />
+            <Route path="game7Portal" element={<WebView key="game7Portal" />} />
             <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
               <Route path=":page" element={<MetaMaskPortfolio />} />
             </Route>
