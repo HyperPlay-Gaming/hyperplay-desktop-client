@@ -19,6 +19,7 @@ interface Props {
   accessCode: string
   children: React.ReactNode
   requiresToken: boolean
+  enableCTAButton: boolean
 }
 
 const userHome = configStore.get('userHome', '')
@@ -34,7 +35,8 @@ const ModDialog: React.FC<Props> = ({
   gameInfo,
   children,
   accessCode,
-  requiresToken
+  requiresToken,
+  enableCTAButton
 }) => {
   const { t } = useTranslation()
   const [zipFilePath, setZipFilePath] = useState<string>('')
@@ -258,7 +260,7 @@ const ModDialog: React.FC<Props> = ({
             type="secondary"
             size="medium"
             onClick={async () => handleInstall()}
-            disabled={!installPath || !zipFilePath}
+            disabled={!installPath || !zipFilePath || !enableCTAButton}
             leftIcon={
               <Images.DownloadIcon
                 fill="var(--color-neutral-400)"
