@@ -138,10 +138,10 @@ const ModDialog: React.FC<Props> = ({
               <li className={styles.sourceItem}>
                 <a
                   className={styles.sourceLink}
-                  href={downloadLinks.ironWorks.webtorrent}
+                  href={downloadLinks[appName]?.webtorrent ?? ''}
                   onClick={(ev) => {
                     window.api.openExternalUrl(
-                      downloadLinks.ironWorks.webtorrent
+                      downloadLinks[appName]?.webtorrent
                     )
                     ev.preventDefault()
                   }}
@@ -155,10 +155,12 @@ const ModDialog: React.FC<Props> = ({
               <li className={styles.sourceItem}>
                 <div className={styles.magnetContainer}>
                   <a
-                    href={downloadLinks.ironWorks.magnet}
+                    href={downloadLinks[appName]?.magnet ?? ''}
                     className={styles.sourceLink}
                     onClick={(ev) => {
-                      window.api.openExternalUrl(downloadLinks.ironWorks.magnet)
+                      window.api.openExternalUrl(
+                        downloadLinks[appName]?.magnet ?? ''
+                      )
                       ev.preventDefault()
                     }}
                   >
@@ -168,18 +170,18 @@ const ModDialog: React.FC<Props> = ({
                     )}
                   </a>
                   <ButtonCopy
-                    text={downloadLinks.ironWorks.magnet}
+                    text={downloadLinks[appName]?.magnet ?? ''}
                     className={styles.copyMagnetButton}
                   />
                 </div>
               </li>
               <li className={styles.sourceItem}>
                 <a
-                  href={downloadLinks.ironWorks.chromieCraft}
+                  href={downloadLinks[appName]?.chromieCraft ?? ''}
                   className={styles.sourceLink}
                   onClick={(ev) => {
                     window.api.openExternalUrl(
-                      downloadLinks.ironWorks.chromieCraft
+                      downloadLinks[appName]?.chromieCraft ?? ''
                     )
                     ev.preventDefault()
                   }}
@@ -189,11 +191,11 @@ const ModDialog: React.FC<Props> = ({
               </li>
               <li className={styles.sourceItem}>
                 <a
-                  href={downloadLinks.ironWorks.archiveOrg}
+                  href={downloadLinks[appName]?.archiveOrg ?? ''}
                   className={styles.sourceLink}
                   onClick={(ev) => {
                     window.api.openExternalUrl(
-                      downloadLinks.ironWorks.archiveOrg
+                      downloadLinks[appName]?.archiveOrg ?? ''
                     )
                     ev.preventDefault()
                   }}
