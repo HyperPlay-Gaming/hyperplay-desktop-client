@@ -263,14 +263,14 @@ const ModDialog: React.FC<Props> = ({
             disabled={!installPath || !zipFilePath || !enableCTAButton}
             leftIcon={
               <Images.DownloadIcon
-                fill="var(--color-neutral-400)"
+                fill="var(--color-neutral-100)"
                 width={20}
                 height={20}
               />
             }
             style={{ width: '100%' }}
           >
-            <div className="button-sm color-neutral-400">
+            <div className="button-sm color-neutral-100">
               {t('mods.instructions.step3.install', 'Install')}
             </div>
           </Button>
