@@ -70,10 +70,19 @@ Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications fold
 
 ### Local Development
 
-This projects uses submodules, so you need to clone it with the `--recurse-submodules` flag or run `git submodule update --init --recursive` after cloning.
+This projects uses optional NPM packages.
+
+For internal developers, use:
 
 ```bash
 yarn setup
+yarn start
+```
+
+For external developers, use:
+
+```bash
+yarn setupWithoutOptional
 yarn start
 ```
 
