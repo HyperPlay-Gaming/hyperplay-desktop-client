@@ -1,5 +1,12 @@
-export const downloadLinks = {
-  ironWorks: {
+export interface DownloadLinks {
+  chromieCraft: string
+  archiveOrg: string
+  webtorrent: string
+  magnet: string
+}
+
+export const downloadLinks: Record<string, DownloadLinks> = {
+  '0x70e6d87cd62a0a643e48cab789c47890248fe1e8d320f41ba8e1c31d90f97d81': {
     chromieCraft: 'https://chromiecraft.com/download',
     archiveOrg:
       'https://archive.org/download/World_of_Warcraft_Client_and_Installation_Archive/Patches/3.x/wow335-to-335a_engb.zip',

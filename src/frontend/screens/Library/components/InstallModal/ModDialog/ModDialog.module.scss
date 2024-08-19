@@ -5,10 +5,6 @@
 .stepContainer {
   max-width: 720px;
   margin-top: var(--space-md);
-
-  .step {
-    margin-bottom: var(--space-xl);
-  }
 }
 
 .stepTitle {
@@ -33,7 +29,7 @@
 }
 
 .sourceList {
-  padding: var(--space-2xs) var(--space-md);
+  padding: 0px var(--space-md);
 }
 
 .sourceItem {
@@ -42,6 +38,11 @@
   margin-bottom: var(--space-3xs);
   text-decoration: none;
   color: var(--color-primary-200);
+  .magnetContainer {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-xs);
+  }
 }
 
 .buttonContainer {
@@ -50,4 +51,12 @@
   margin-top: var(--space-sm);
   border: 1px solid var(--color-tertiary-300);
   padding: var(--space-xl);
+}
+
+.copyMagnetButton {
+  display: inline-flex;
+  align-items: center;
+  > svg {
+    height: var(--space-lg);
+  }
 }

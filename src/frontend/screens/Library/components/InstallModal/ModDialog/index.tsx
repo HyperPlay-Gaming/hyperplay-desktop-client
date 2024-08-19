@@ -8,9 +8,10 @@ import { faFile, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import styles from './ModDialog.module.scss'
 import { configStore } from 'frontend/helpers/electronStores'
 import TextInputWithIconField from 'frontend/components/UI/TextInputWithIconField'
-import { Button, Images } from '@hyperplay/ui'
+import { Button, ButtonCopy, Images } from '@hyperplay/ui'
 import { install } from 'frontend/helpers'
 import { signSiweMessage } from 'frontend/helpers/library'
+import { downloadLinks } from './constants'
 
 interface Props {
   backdropClick: () => void
@@ -18,6 +19,7 @@ interface Props {
   accessCode: string
   children: React.ReactNode
   requiresToken: boolean
+  enableCTAButton: boolean
 }
 
 const userHome = configStore.get('userHome', '')
@@ -33,7 +35,8 @@ const ModDialog: React.FC<Props> = ({
   gameInfo,
   children,
   accessCode,
-  requiresToken
+  requiresToken,
+  enableCTAButton
 }) => {
   const { t } = useTranslation()
   const [zipFilePath, setZipFilePath] = useState<string>('')
@@ -133,7 +136,16 @@ const ModDialog: React.FC<Props> = ({
             </p>
             <ul className={styles.sourceList}>
               <li className={styles.sourceItem}>
-                <a href="#" className={styles.sourceLink}>
+                <a
+                  className={styles.sourceLink}
+                  href={downloadLinks[appName]?.webtorrent ?? ''}
+                  onClick={(ev) => {
+                    window.api.openExternalUrl(
+                      downloadLinks[appName]?.webtorrent
+                    )
+                    ev.preventDefault()
+                  }}
+                >
                   {t(
                     'mods.instructions.step1.webTorrent',
                     'WebTorrent (recommended)'
@@ -141,20 +153,53 @@ const ModDialog: React.FC<Props> = ({
                 </a>
               </li>
               <li className={styles.sourceItem}>
-                <a href="#" className={styles.sourceLink}>
-                  {t(
-                    'mods.instructions.step1.bitTorrent',
-                    'BitTorrent Magnet Link'
-                  )}
-                </a>
+                <div className={styles.magnetContainer}>
+                  <a
+                    href={downloadLinks[appName]?.magnet ?? ''}
+                    className={styles.sourceLink}
+                    onClick={(ev) => {
+                      window.api.openExternalUrl(
+                        downloadLinks[appName]?.magnet ?? ''
+                      )
+                      ev.preventDefault()
+                    }}
+                  >
+                    {t(
+                      'mods.instructions.step1.bitTorrent',
+                      'BitTorrent Magnet Link'
+                    )}
+                  </a>
+                  <ButtonCopy
+                    text={downloadLinks[appName]?.magnet ?? ''}
+                    className={styles.copyMagnetButton}
+                  />
+                </div>
               </li>
               <li className={styles.sourceItem}>
-                <a href="#" className={styles.sourceLink}>
+                <a
+                  href={downloadLinks[appName]?.chromieCraft ?? ''}
+                  className={styles.sourceLink}
+                  onClick={(ev) => {
+                    window.api.openExternalUrl(
+                      downloadLinks[appName]?.chromieCraft ?? ''
+                    )
+                    ev.preventDefault()
+                  }}
+                >
                   {t('mods.instructions.step1.chromieCraft', 'ChromieCraft')}
                 </a>
               </li>
               <li className={styles.sourceItem}>
-                <a href="#" className={styles.sourceLink}>
+                <a
+                  href={downloadLinks[appName]?.archiveOrg ?? ''}
+                  className={styles.sourceLink}
+                  onClick={(ev) => {
+                    window.api.openExternalUrl(
+                      downloadLinks[appName]?.archiveOrg ?? ''
+                    )
+                    ev.preventDefault()
+                  }}
+                >
                   {t('mods.instructions.step1.archive', 'Archive.org')}
                 </a>
               </li>
@@ -217,17 +262,19 @@ const ModDialog: React.FC<Props> = ({
             type="secondary"
             size="medium"
             onClick={async () => handleInstall()}
-            disabled={!installPath || !zipFilePath}
+            disabled={!installPath || !zipFilePath || !enableCTAButton}
             leftIcon={
               <Images.DownloadIcon
-                fill="var(--color-success-400)"
+                fill="var(--color-neutral-100)"
                 width={20}
                 height={20}
               />
             }
             style={{ width: '100%' }}
           >
-            {t('mods.instructions.step3.install', 'Install')}
+            <div className="button-sm color-neutral-100">
+              {t('mods.instructions.step3.install', 'Install')}
+            </div>
           </Button>
         </div>
       </DialogContent>
