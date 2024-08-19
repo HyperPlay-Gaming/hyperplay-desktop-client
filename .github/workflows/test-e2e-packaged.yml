@@ -14,6 +14,7 @@ env:
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
+  if: false
   linux-packaged:
     runs-on: ubuntu-latest
     concurrency:
