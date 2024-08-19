@@ -106,7 +106,7 @@ const eventsToCloseMetaMaskPopupOn = [
   'mouseUp'
 ]
 const valistListingsApiUrl =
-  'https://hyperplay-dev-git-feat-multidomain-cookie-testing-hyperplay.vercel.app/api/v1/listings'
+  'https://developers-multidomain.hyperplay.xyz/api/v1/listings'
 const mainReleaseChannelName = 'main'
 export let qaToken = ''
 
