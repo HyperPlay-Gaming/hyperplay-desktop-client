@@ -74,7 +74,8 @@ export async function prepareBaseGameForModding({
     LogPrefix.HyperPlay
   )
   const extractService = new ExtractZipService(zipFile, dirPath, {
-    deleteOnEnd: false
+    deleteOnEnd: false,
+    preserveStructure: false
   })
 
   inProgressExtractionsMap.set('baseGameForModding', extractService)

@@ -32,6 +32,7 @@ enum ExtractionValidation {
 
 type extractOptions = {
   deleteOnEnd?: boolean
+  preserveStructure?: boolean
 }
 
 /**
@@ -42,7 +43,7 @@ export class ExtractZipService extends EventEmitter {
   #readStream: Readable | null = null
   #zipFile = ''
   #destinationPath = ''
-  #options = { deleteOnEnd: true }
+  #options = { deleteOnEnd: true, preserveStructure: true }
   #canceled = false
   #paused = false
   #totalSizeInBytes = 0
@@ -246,6 +247,31 @@ export class ExtractZipService extends EventEmitter {
 
     if (this.#options.deleteOnEnd) {
       rmSync(this.source, { recursive: true, force: true })
+    }
+
+    // move contents of the extracted folder to the destination path
+    if (!this.#options.preserveStructure) {
+      // get the last part of the zip file path
+      const extractedFolder = path.basename(this.#zipFile).replace('.zip', '')
+      const extractedFolderFullPath = path.join(
+        this.#destinationPath,
+        extractedFolder
+      )
+
+      logInfo(
+        `Moving contents of ${extractedFolder} to ${this.#destinationPath}`,
+        LogPrefix.HyperPlay
+      )
+
+      // move contents of the extracted folder to the destination path
+      readdirSync(extractedFolderFullPath).forEach((file) => {
+        const srcPath = path.join(extractedFolderFullPath, file)
+        const destPath = path.join(this.#destinationPath, file)
+        copyRecursiveSync(srcPath, destPath)
+      })
+
+      // remove the extracted folder
+      rmSync(extractedFolderFullPath, { recursive: true, force: true })
     }
 
     this.removeAllListeners()
