@@ -35,6 +35,9 @@ type InstallArgs = {
   channelName?: string
   accessCode?: string
   siweValues?: SiweValues
+  modOptions?: {
+    zipFilePath: string
+  }
 }
 
 async function install({
@@ -49,7 +52,8 @@ async function install({
   platformToInstall = 'Windows',
   channelName,
   accessCode,
-  siweValues
+  siweValues,
+  modOptions
 }: InstallArgs) {
   if (!installPath) {
     console.error('installPath is undefined')
@@ -110,7 +114,8 @@ async function install({
     gameInfo: JSON.parse(JSON.stringify(gameInfo)),
     channelName,
     accessCode,
-    siweValues
+    siweValues,
+    modOptions
   })
 }
 

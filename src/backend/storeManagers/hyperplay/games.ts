@@ -77,6 +77,7 @@ import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
+import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -802,7 +803,8 @@ export async function install(
     channelName,
     accessCode,
     updateOnly = false,
-    siweValues
+    siweValues,
+    modOptions
   }: InstallArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
@@ -813,6 +815,13 @@ export async function install(
   try {
     const gameInfo = getGameInfo(appName)
     const { title } = gameInfo
+    if (gameInfo.type === 'mod' && modOptions?.zipFilePath) {
+      await prepareBaseGameForModding({
+        appName,
+        zipFile: modOptions.zipFilePath,
+        installPath: dirpath
+      })
+    }
 
     const destinationPath = updateOnly
       ? dirpath

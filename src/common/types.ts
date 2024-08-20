@@ -308,6 +308,9 @@ export interface InstallArgs {
   accessCode?: string
   updateOnly?: boolean
   siweValues?: SiweValues
+  modOptions?: {
+    zipFilePath: string
+  }
 }
 
 export interface InstallParams extends InstallArgs {
