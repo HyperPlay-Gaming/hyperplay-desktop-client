@@ -237,6 +237,7 @@
     "react-blockies": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
+    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.9.0",
     "recharts": "^2.4.3",
     "sanitize-filename": "^1.6.3",
@@ -360,14 +361,6 @@
     "vite": "^5.2.8",
     "vite-plugin-svgr": "^2.2.2"
   },
-  "optionalDependencies": {
-    "@hyperplay/extension-importer": "^0.0.4",
-    "@hyperplay/extension-provider": "^0.0.6",
-    "@hyperplay/mock-backend": "^0.0.1",
-    "@hyperplay/overlay": "^0.0.6",
-    "@hyperplay/providers": "^0.0.5",
-    "@hyperplay/proxy-server": "^0.0.11"
-  },
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
     "allowScripts": {
@@ -395,7 +388,8 @@
       "viem>ws>bufferutil": true,
       "viem>ws>utf-8-validate": true,
       "@hyperplay/extension-importer>classic-level": true,
-      "classic-level": false
+      "classic-level": false,
+      "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": false
     }
   }
 }
