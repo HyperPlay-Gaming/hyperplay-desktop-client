@@ -86,6 +86,24 @@ yarn setupWithoutOptional
 yarn start
 ```
 
+#### M1/M2 Mac
+
+If you are using an M1 or M2 Mac and receive the following error message:
+
+```
+Error: Cannot find module @rollup/rollup-darwin-arm64. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.
+```
+
+Please try the following
+
+```bash
+rm -f yarn.lock
+rm -rf node_modules
+yarn cache clean
+yarn setupWithoutOptional
+yarn start
+```
+
 ## Credits
 
 ### Those Awesome Guys: Gamepad prompts images
