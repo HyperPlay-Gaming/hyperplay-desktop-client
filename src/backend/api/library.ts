@@ -151,19 +151,6 @@ export const checkHyperPlayAccessCode = async (
   )
 }
 
-type ModArgs = { appName: string; zipFile: string; installPath: string }
-
-export const prepareBaseGameForModding = async ({
-  appName,
-  zipFile,
-  installPath
-}: ModArgs) =>
-  ipcRenderer.invoke('prepareBaseGameForModding', {
-    appName,
-    zipFile,
-    installPath
-  })
-
 export const runModPatcher = async (appName: string) =>
   ipcRenderer.invoke('runModPatcher', appName)
 

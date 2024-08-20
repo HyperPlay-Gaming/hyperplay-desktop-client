@@ -77,12 +77,6 @@ const ModDialog: React.FC<Props> = ({
     backdropClick()
     let siweValues
 
-    await window.api.prepareBaseGameForModding({
-      appName,
-      zipFile: zipFilePath,
-      installPath
-    })
-
     if (requiresToken) {
       siweValues = await signSiweMessage()
     }
@@ -97,7 +91,10 @@ const ModDialog: React.FC<Props> = ({
       showDialogModal: () => {},
       channelName: 'main',
       accessCode,
-      siweValues
+      siweValues,
+      modOptions: {
+        zipFilePath
+      }
     })
   }
   return (

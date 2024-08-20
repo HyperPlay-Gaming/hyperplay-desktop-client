@@ -380,7 +380,15 @@ export const runModPatcher = async (appName: string) => {
         protonVerb: 'waitforexitandrun'
       })
     } else {
-      await spawnAsync(patcher, ['patch', '-m', manifest])
+      const { stderr, stdout } = await spawnAsync(
+        patcher,
+        ['patch', '-m', manifest],
+        { cwd: installPath }
+      )
+      logInfo(stdout, LogPrefix.HyperPlay)
+      if (stderr) {
+        logError(stderr, LogPrefix.HyperPlay)
+      }
     }
   } catch (error) {
     throw new Error(`Error running patcher: ${error}`)
