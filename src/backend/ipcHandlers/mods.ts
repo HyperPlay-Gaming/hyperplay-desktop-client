@@ -68,8 +68,7 @@ ipcMain.handle(
       LogPrefix.HyperPlay
     )
     const extractService = new ExtractZipService(zipFile, dirPath, {
-      deleteOnEnd: false,
-      preserveStructure: false
+      deleteOnEnd: false
     })
 
     inProgressExtractionsMap.set('baseGameForModding', extractService)
