@@ -104,6 +104,10 @@ yarn setupWithoutOptional
 yarn start
 ```
 
+#### Lavamoat
+
+Please note that at times, the console may alert you to run `yarn allow-scripts auto`. This is from `@lavamoat/allow-scripts` and is due to a dependency adding a new preinstall or postinstall script. After running `yarn allow-scripts auto` and updating the package.json to enable or disable the script, please run `yarn setup` or `yarn setupWithoutOptional` again.
+
 ## Credits
 
 ### Those Awesome Guys: Gamepad prompts images
