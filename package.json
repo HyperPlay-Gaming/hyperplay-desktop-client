@@ -204,7 +204,7 @@
     "crc": "^4.1.1",
     "discord-rich-presence-typescript": "^0.0.8",
     "electron-store": "^8.0.1",
-    "electron-updater": "^5.0.1",
+    "electron-updater": "^6.3.0",
     "embla-carousel-autoplay": ">=7.0.0",
     "embla-carousel-react": ">=7.0.0",
     "ethers": "^6.12.1",
