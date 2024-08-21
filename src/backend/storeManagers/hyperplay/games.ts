@@ -814,8 +814,9 @@ export async function install(
   let { directory, fileName } = { directory: '', fileName: '' }
   try {
     const gameInfo = getGameInfo(appName)
-    const { title } = gameInfo
-    if (gameInfo.type === 'mod' && modOptions?.zipFilePath) {
+    const { title, account_name } = gameInfo
+    const isMarketWars = account_name === 'marketWars'
+    if (isMarketWars && modOptions?.zipFilePath) {
       await prepareBaseGameForModding({
         appName,
         zipFile: modOptions.zipFilePath,
@@ -944,8 +945,7 @@ export async function install(
       channelName
     })
 
-    const isMod = gameInfo.type === 'mod'
-    if (isMod) {
+    if (isMarketWars) {
       try {
         await runModPatcher(appName)
       } catch (error) {
@@ -1428,8 +1428,8 @@ export async function update(
     siweValues: args?.siweValues
   })
 
-  const isMod = gameInfo.type === 'mod'
-  if (isMod) {
+  const isMarketWars = gameInfo.account_name === 'marketwars'
+  if (isMarketWars) {
     try {
       await runModPatcher(appName)
     } catch (error) {
