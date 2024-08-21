@@ -30,6 +30,8 @@ import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
 import { useSyncPlaySession } from 'frontend/hooks/useSyncInterval'
 import { useTrackQuestViewed } from 'frontend/hooks/useTrackQuestViewed'
 import { ConfirmClaimModal } from './components/ConfirmClaimModal'
+import { getBalance } from '@wagmi/core'
+import { config } from 'frontend/config'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -42,10 +44,7 @@ const averageEstimatedGasUsagePerFunction: Record<string, number> = {
   ERC20: 98_507
 }
 
-async function getRewardClaimGasEstimationSummary(
-  reward: Reward,
-  address: string
-) {
+async function getRewardClaimGasEstimation(reward: Reward) {
   if (!reward.chain_id) {
     throw Error(`chain_id is not set for reward: ${reward.id}`)
   }
@@ -81,16 +80,12 @@ async function getRewardClaimGasEstimationSummary(
 
   const gasPrice = await publicClient.getGasPrice()
   const gasNeeded = BigInt(gasPerFunction) * gasPrice
-  const accountBalance = await publicClient.getBalance({
-    address: address as `0x{string}`
-  })
-  const hasEnoughBalance = accountBalance >= gasNeeded
 
   window.api.logInfo(
     `Gas needed to claim ${reward.reward_type} reward: ${gasNeeded} (${gasPerFunction} gas per function * ${gasPrice} gas price)`
   )
 
-  return { accountBalance, gasNeeded, hasEnoughBalance }
+  return gasNeeded
 }
 
 export function QuestDetailsWrapper({
@@ -278,14 +273,18 @@ export function QuestDetailsWrapper({
 
     await switchChainAsync({ chainId: reward.chain_id })
 
-    const { accountBalance, gasNeeded, hasEnoughBalance } =
-      await getRewardClaimGasEstimationSummary(reward, account.address)
+    const gasNeeded = await getRewardClaimGasEstimation(reward)
+    const walletBalance = await getBalance(config, {
+      address: account.address,
+      chainId: reward.chain_id
+    })
+    const hasEnoughBalance = walletBalance.value >= gasNeeded
 
-    window.api.logInfo(`Current wallet gas: ${accountBalance}`)
+    window.api.logInfo(`Current wallet gas: ${walletBalance.value}`)
 
     if (!hasEnoughBalance) {
       window.api.logError(
-        `Not enough balance in the connected wallet to cover the gas fee associated with this Quest Reward claim. Current balance: ${accountBalance}, gas needed: ${gasNeeded}`
+        `Not enough balance in the connected wallet to cover the gas fee associated with this Quest Reward claim. Current balance: ${walletBalance.value}, gas needed: ${gasNeeded}`
       )
       setWarningMessage(
         t(
