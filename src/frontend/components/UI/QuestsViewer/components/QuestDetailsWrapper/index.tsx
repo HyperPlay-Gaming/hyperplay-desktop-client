@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {
+  Game,
   QuestDetails,
   QuestDetailsProps,
-  Game,
   QuestDetailsTranslations
 } from '@hyperplay/ui'
 import styles from './index.module.scss'
@@ -11,13 +11,13 @@ import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
 import {
-  useWriteContract,
-  useAccount,
-  useSwitchChain,
   http,
-  useBalance
+  useAccount,
+  useBalance,
+  useSwitchChain,
+  useWriteContract
 } from 'wagmi'
-import { Reward } from 'common/types'
+import { ConfirmClaimParams, Reward, RewardClaimSignature } from 'common/types'
 import authState from 'frontend/state/authState'
 import { mintReward } from './rewards/mintReward'
 import { claimPoints } from './rewards/claimPoints'
@@ -35,6 +35,7 @@ import { chainMap, parseChainMetadataToViemChain } from '@hyperplay/chains'
 import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
 import { useSyncPlaySession } from 'frontend/hooks/useSyncInterval'
 import { useTrackQuestViewed } from 'frontend/hooks/useTrackQuestViewed'
+import { ConfirmClaimModal } from './components/ConfirmClaimModal'
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -95,7 +96,7 @@ export function QuestDetailsWrapper({
   projectId
 }: QuestDetailsWrapperProps) {
   const {
-    writeContract,
+    writeContractAsync,
     error: writeContractError,
     isPending: isPendingWriteContract,
     reset: resetWriteContract
@@ -111,6 +112,7 @@ export function QuestDetailsWrapper({
 
   const flags = useFlags()
   const account = useAccount()
+  const [showWarning, setShowWarning] = useState(false)
   const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
@@ -156,6 +158,27 @@ export function QuestDetailsWrapper({
       const queryKey = `getPointsBalancesForProject:${projectId}`
       queryClient.invalidateQueries({ queryKey: [queryKey] })
       return result
+    }
+  })
+
+  const confirmClaimMutation = useMutation({
+    mutationFn: async (params: ConfirmClaimParams) => {
+      return window.api.confirmRewardClaim(params)
+    },
+    retry: 5,
+    retryDelay: 1000,
+    onSuccess: async () => {
+      await questPlayStreakResult.invalidateQuery()
+    },
+    onError: (error, variables) => {
+      window.api.logError(
+        `Error confirming reward claim ${
+          error.message
+        }, variables: ${JSON.stringify({
+          ...variables,
+          address: account?.address
+        })}`
+      )
     }
   })
 
@@ -274,11 +297,34 @@ export function QuestDetailsWrapper({
       return
     }
 
-    return mintReward({
+    let tokenId: number | undefined = undefined
+
+    const isERC1155Reward =
+      reward.reward_type === 'ERC1155' && reward.token_ids.length === 1
+
+    if (isERC1155Reward) {
+      tokenId = reward.token_ids[0].token_id
+    }
+
+    const claimSignature: RewardClaimSignature =
+      await window.api.getQuestRewardSignature(
+        account.address,
+        reward.id,
+        tokenId
+      )
+
+    // awaiting is fine for now because we're doing a single write contract at a time,
+    // but we might want to not block the UI thread when we implement multiple claims
+    const hash = await mintReward({
       questId: questMeta.id,
-      address: account.address,
+      signature: claimSignature,
       reward,
-      writeContract
+      writeContractAsync
+    })
+
+    await confirmClaimMutation.mutateAsync({
+      signature: claimSignature.signature,
+      transactionHash: hash
     })
   }
 
@@ -339,8 +385,8 @@ export function QuestDetailsWrapper({
   }
 
   const claimRewardsMutation = useMutation({
-    mutationFn: async (rewards: Reward[]) => {
-      return claimRewards(rewards)
+    mutationFn: async (params: Reward[]) => {
+      return claimRewards(params)
     },
     onSuccess: async () => {
       await questPlayStreakResult.invalidateQuery()
@@ -409,6 +455,17 @@ export function QuestDetailsWrapper({
       }
     }
 
+    let networkName = ''
+
+    if (questMeta.rewards?.[0].chain_id) {
+      networkName = chainMap[questMeta.rewards[0].chain_id]?.chain?.name ?? ''
+    }
+
+    const rewardsToClaim = questMeta.rewards ?? []
+    const isRewardOnChain = rewardsToClaim.some((reward) =>
+      ['ERC1155', 'ERC721', 'ERC20'].includes(reward.reward_type)
+    )
+
     const questDetailsProps: QuestDetailsProps = {
       alertProps,
       questType: questMeta.type,
@@ -429,8 +486,13 @@ export function QuestDetailsWrapper({
       },
       rewards: questRewards ?? [],
       i18n,
-      onClaimClick: async () =>
-        claimRewardsMutation.mutate(questMeta.rewards ?? []),
+      onClaimClick: async () => {
+        if (isRewardOnChain) {
+          setShowWarning(true)
+        } else {
+          claimRewardsMutation.mutate(rewardsToClaim)
+        }
+      },
       onSignInClick: () => authState.openSignInModal(),
       onConnectSteamAccountClick: () => window.api.signInWithProvider('steam'),
       collapseIsOpen,
@@ -447,13 +509,25 @@ export function QuestDetailsWrapper({
       chainTooltips: {}
     }
     questDetails = (
-      <QuestDetails
-        {...questDetailsProps}
-        className={styles.questDetails}
-        key={`questDetailsLoadedId${
-          questMeta.id
-        }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
-      />
+      <>
+        <ConfirmClaimModal
+          isOpen={showWarning}
+          onConfirm={() => {
+            setShowWarning(false)
+            claimRewardsMutation.mutate(rewardsToClaim)
+          }}
+          onCancel={() => setShowWarning(false)}
+          onClose={() => setShowWarning(false)}
+          networkName={networkName}
+        />
+        <QuestDetails
+          {...questDetailsProps}
+          className={styles.questDetails}
+          key={`questDetailsLoadedId${
+            questMeta.id
+          }streak${!!questPlayStreakData}isSignedIn${!!isSignedIn}`}
+        />
+      </>
     )
   } else if (
     questResult?.data.isLoading ||

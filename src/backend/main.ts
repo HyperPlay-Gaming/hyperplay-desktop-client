@@ -1144,15 +1144,20 @@ ipcMain.on('logError', (e, err) => logError(err, LogPrefix.Frontend))
 ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
-const gamePlaySessionStartTimes: Record<string, bigint> = {}
+let gamePlaySessionStartTimes: Record<string, bigint> = {}
 
 function startNewPlaySession(appName: string) {
+  gamePlaySessionStartTimes = {}
   // Uses hrtime for monotonic timer not subject to clock drift or sync errors
   const startPlayingTimeMonotonic = hrtime.bigint()
   gamePlaySessionStartTimes[appName] = startPlayingTimeMonotonic
 }
 
 async function syncPlaySession(appName: string, runner: Runner) {
+  if (!Object.hasOwn(gamePlaySessionStartTimes, appName)) {
+    return
+  }
+
   const stopPlayingTimeMonotonic = hrtime.bigint()
   const sessionPlaytimeInMs =
     (stopPlayingTimeMonotonic - gamePlaySessionStartTimes[appName]) /

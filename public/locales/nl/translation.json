@@ -965,7 +965,14 @@
         "reputation": "Reputatie",
         "sync": "Sync",
         "pointsClaimed": "Punt geclaimd",
-        "g7Numclaimed": "Total Claim G7 Credits"
+        "g7Numclaimed": "Total Claim G7 Credits",
+        "claimWarning": {
+            "body2": "Anders zal de Quest Reward verlopen en zal niet langer worden opgeëist",
+            "title": "Bevestig Quest beloning Claim",
+            "body": "_ Zorg ervoor dat je genoeg gas op het netwerk van de transactie verbindt, om succesvol bevestigd te worden dat £153 X, 173",
+            "cancel": "Annuleren",
+            "confirm": "Bevestigen"
+        }
     },
     "quests": {
         "quests": "Quest",
@@ -978,6 +985,10 @@
         "noneFound": {
             "message": "Er waren geen zoektochten gevonden.",
             "title": "Geen vragen gevonden."
+        },
+        "g7CreditsModal": {
+            "description": "Dive in HyperPlay's topspelletjes met spannende Play Streak Challenges. Elke activiteit moedigt je aan om je aan te vallen met een ander spel, het beste van Web3 spel te laten zien. Je speeltijd is belangrijk!",
+            "title": "Earn Game7 Credits"
         }
     },
     "sideload": {

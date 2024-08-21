@@ -973,7 +973,14 @@
         "sync": "Sincronizar",
         "reputation": "Reputación",
         "pointsClaimed": "Os puntos Afirmaron",
-        "g7Numclaimed": "Total Afirmado G7 Créditos"
+        "g7Numclaimed": "Total Afirmado G7 Créditos",
+        "claimWarning": {
+            "title": "Confirma Reclamación de Recompensa da Busca",
+            "body": "<bold>Importante:</bold> Compracer asegurar que estás atribuíndo bastante gas no {{networkName}} rede para a transacción para ser con éxito confirmada <bold>dentro de 24 hrs.</bold>",
+            "body2": "Doutro xeito, a Recompensa de Busca <bold>caducará e xa non será claimable.</bold>",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar"
+        }
     },
     "email_subscription": {
         "title": "Grazas Para subscribir!",
@@ -990,6 +997,10 @@
         "noneFound": {
             "title": "Ningunha Busca Atopou.",
             "message": "Non había  ningunha busca atopou."
+        },
+        "g7CreditsModal": {
+            "description": "Mergulla a HyperPlay  xogos superiores con Xogo emocionante Streak Desafíos. Cada actividade anímate  para comprometer cun xogo diferente, showcasing o mellor de web3 gaming. O voso playtime asuntos!",
+            "title": "Gaña Game7 Créditos"
         }
     },
     "accounts": "Contas",

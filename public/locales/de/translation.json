@@ -959,7 +959,14 @@
         "signIn": "Anmelden",
         "sync": "Sync",
         "pointsClaimed": "Forderungen",
-        "g7Numclaimed": "G7-Kredite insgesamt"
+        "g7Numclaimed": "G7-Kredite insgesamt",
+        "claimWarning": {
+            "body": "<bold>WICHTIG:</bold> Bitte stellen Sie sicher, dass Sie genügend Gas auf dem {{networkName}}-Netzwerk zuweisen, damit die Transaktion erfolgreich bestätigt wird <bold> innerhalb von 24 Stunden.</bold>",
+            "body2": "Andernfalls läuft der Quest Reward <bold> ab und wird nicht mehr beanspruchbar sein.</bold>",
+            "title": "Bestätigen Sie Quest Reward Claim",
+            "cancel": "Abbrechen",
+            "confirm": "Bestätigen"
+        }
     },
     "quests": {
         "playstreak": {
@@ -972,6 +979,10 @@
         "noneFound": {
             "title": "Keine Quests gefunden.",
             "message": "Es wurden keine Quests gefunden."
+        },
+        "g7CreditsModal": {
+            "description": "Tauchen Sie mit spannenden Play Streak Challenges in die Top-Spiele von HyperPlay ein. Jede Aktivität ermutigt Sie, sich mit einem anderen Spiel zu engagieren, was das Beste von web3 Gaming zeigt. Deine Spielzeit zählt!",
+            "title": "Earn Game7 Credits"
         }
     },
     "gameRelease": {

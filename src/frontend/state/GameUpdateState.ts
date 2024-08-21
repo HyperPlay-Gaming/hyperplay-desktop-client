@@ -13,10 +13,6 @@ class GameUpdateState {
   init() {}
 
   async updateGame(gameInfo: GameInfo) {
-    if (gameInfo.runner !== 'hyperplay') {
-      return
-    }
-
     // check if the cached code has more reuses and if so, use that one without prompting the user
     async function cachedAccessCodeCanBeReused() {
       if (

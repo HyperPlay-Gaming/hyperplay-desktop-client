@@ -4,11 +4,13 @@ import getPartitionCookies from './get_partition_cookies'
 export async function fetchWithCookie({
   url,
   method,
-  partition
+  partition,
+  body
 }: {
   url: string
   method: string
   partition?: string
+  body?: RequestInit['body']
 }) {
   const cookieString = await getPartitionCookies({
     partition: partition ?? 'persist:auth',
@@ -19,7 +21,8 @@ export async function fetchWithCookie({
     method: method,
     headers: {
       Cookie: cookieString
-    }
+    },
+    body
   })
   if (!response.ok) {
     throw await response.text()
