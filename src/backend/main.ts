@@ -1127,7 +1127,7 @@ if (existsSync(installed)) {
   })
 }
 
-ipcMain.handle('refreshLibrary', async (e, library?: Runner | 'all') => {
+ipcMain.handle('refreshLibrary', async (e, library?) => {
   if (library !== undefined && library !== 'all') {
     await libraryManagerMap[library].refresh()
   } else {
