@@ -225,7 +225,7 @@ const ModDialog: React.FC<Props> = ({
               value={zipFilePath.replaceAll("'", '')}
               onChange={(event) => setZipFilePath(event.target.value)}
               icon={<FontAwesomeIcon icon={faFile} />}
-              inputProps={{ readOnly: true, className: styles.folderTextInput }}
+              inputProps={{ readOnly: true }}
               onIconClick={handleZipFileSelection}
             />
           </div>
@@ -247,7 +247,7 @@ const ModDialog: React.FC<Props> = ({
               value={installPath.replaceAll("'", '')}
               onChange={(event) => setInstallPath(event.target.value)}
               icon={<FontAwesomeIcon icon={faFolderOpen} />}
-              inputProps={{ readOnly: true, className: styles.folderTextInput }}
+              inputProps={{ readOnly: true }}
               onIconClick={handleInstallPathSelection}
             />
           </div>
