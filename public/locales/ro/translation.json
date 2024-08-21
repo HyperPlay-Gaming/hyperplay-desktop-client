@@ -737,7 +737,11 @@
         },
         "points": "Puncte",
         "signIn": "Autentificare",
-        "sync": "Sincronizare"
+        "sync": "Sincronizare",
+        "claimWarning": {
+            "cancel": "Anulare",
+            "confirm": "Confirmă"
+        }
     },
     "gameRelease": {
         "beta": "Beta",

@@ -969,7 +969,14 @@
         "sync": "동기화",
         "reputation": "평판",
         "pointsClaimed": "공지사항",
-        "g7Numclaimed": "총 클레임 G7 크레딧"
+        "g7Numclaimed": "총 클레임 G7 크레딧",
+        "claimWarning": {
+            "body": "<bold> 인터페이스:</bold> {{networkName}} 트랜잭션에 충분한 가스를 할당하여 24 시간 이내에 <bold>를 성공적으로 확인해야합니다.</bold>",
+            "body2": "그렇지 않으면, 퀘스트 보상 <bold>가 만료되고 더 이상 청구되지 않습니다.</bold>",
+            "title": "Quest Reward Claim을 확인",
+            "cancel": "취소",
+            "confirm": "승인"
+        }
     },
     "sideload": {
         "warningMessage": "Side-loading 게임은 개발자와 숙련 된 전력 사용자를위한 기능입니다. 악성 프로그램이 컴퓨터를 손상하고 자금을 납치 할 수있는 설치 프로그램을로드.",

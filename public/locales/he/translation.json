@@ -942,7 +942,14 @@
         "claimFailedMessage": "נסה פעם נוספת. אם זה עדיין לא עובד, ליצור כרטיס תמיכה דיסקורד.",
         "notEnoughGas": "איזון ארנק חסר ערך כדי לטעון את הפרס שלך בגלל עמלות גז. נסה ארנק שונה או לחדש את זה לפני retrying.",
         "pointsClaimed": "נקודות תביעות",
-        "g7Numclaimed": "תגית: G7 Credits"
+        "g7Numclaimed": "תגית: G7 Credits",
+        "claimWarning": {
+            "title": "תגית: Quest Reward",
+            "body": "[x0X] חשוב: [x16x] אנא ודא כי אתה מבזבז מספיק גז ברשת X80X עבור העסקה כדי לקבל אישור מוצלח <bold>עם 24 שעות",
+            "body2": "אחרת, ה- Quest Reward (X28X) יפוג והוא כבר לא יטען",
+            "cancel": "בטל",
+            "confirm": "אישור"
+        }
     },
     "notification": {
         "wine-download": {

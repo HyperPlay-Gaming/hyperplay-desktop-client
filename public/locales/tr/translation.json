@@ -927,7 +927,14 @@
         "createDiscordTicket": "Created Discord ticket",
         "notEnoughGas": "Gaz ücretleri nedeniyle ödülünüzü talep etmek için yeterli cüzdan dengesi. Farklı bir cüzdanı deneyin ya da yeniden denemeden önce bunu tamamlayın.",
         "pointsClaimed": "Puanlar Davalı",
-        "g7Numclaimed": "Toplam Davalı G7 Kredi"
+        "g7Numclaimed": "Toplam Davalı G7 Kredi",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT: </bold> Lütfen işlem için yeterli gaz tahsis ettiğinizden emin olun {{networkName}} 24 hrs ile <bold>",
+            "body2": "Aksi takdirde, Quest Ödülü <bold> sona erecektir ve artık iddia edilebilir olmayacaktır.</bold>",
+            "title": "Quest Ödülü Dilekçesi",
+            "cancel": "İptal",
+            "confirm": "Kabul Et"
+        }
     },
     "ALL": "Tümü",
     "analytics": "Analytics",

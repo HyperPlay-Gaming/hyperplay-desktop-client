@@ -994,7 +994,14 @@
         "createDiscordTicket": "Bilhete de discórdia criado",
         "notEnoughGas": "Balança de carteira insuficiente para reclamar sua recompensa devido a taxas de gás. Tente uma carteira diferente ou reabastecer esta antes de retentar.",
         "pointsClaimed": "Pontos Vistos",
-        "g7Numclaimed": "Total Claimed G7 Créditos"
+        "g7Numclaimed": "Total Claimed G7 Créditos",
+        "claimWarning": {
+            "body": "<bold> IMPORTANTE:</bold> Certifique-se de que você está alocando gás suficiente na rede {{networkName}} para que a transação seja confirmada com sucesso <bold> em 24 horas",
+            "title": "Confirme Quest Reward Claim",
+            "body2": "Caso contrário, a Recompensa de Busca <bold> expirará e não será mais reivindicada.</bold>",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar"
+        }
     },
     "notification": {
         "wine-download": {

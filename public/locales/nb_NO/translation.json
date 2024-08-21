@@ -750,7 +750,11 @@
             "reputation": "Omdømme"
         },
         "reputation": "Omdømme",
-        "connectSteamAccount": "Koble til lagkonto"
+        "connectSteamAccount": "Koble til lagkonto",
+        "claimWarning": {
+            "cancel": "Avbryt",
+            "confirm": "Bekreft"
+        }
     },
     "accounts": "Kontoer",
     "ALL": "ALLE",

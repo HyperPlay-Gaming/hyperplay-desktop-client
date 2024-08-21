@@ -927,7 +927,14 @@
         "claimFailed": "Claimowi nie udało się zrealizować",
         "notEnoughGas": "Niesprawiedliwe ścianki mają prawo do nagrody z powodu opłat gazowych. Poświęcony został inny muret lub uzupełniony przed retrygią.",
         "pointsClaimed": "Point Cl (ang.)",
-        "g7Numclaimed": "Total Cl nadaje G7 Credits"
+        "g7Numclaimed": "Total Cl nadaje G7 Credits",
+        "claimWarning": {
+            "body2": "(Kust Reward (X28X) woli wygasa i nie będzie już rozwiązana",
+            "title": "Oficjalna strona zespołu",
+            "body": "(X0XIMPORTANT:X16X) (ang.). (Zobowiązuje się, że są one akcesorami wystarczająco gazowymi w sieci X80X dla transakcji, aby potwierdzić X153X within 24 hrs",
+            "cancel": "Anuluj",
+            "confirm": "Potwierdź"
+        }
     },
     "sideload": {
         "warningTitle": "Ważne",

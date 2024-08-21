@@ -920,7 +920,14 @@
         "createDiscordTicket": "作成したDiscordチケット",
         "notEnoughGas": "十分なウォレット残高で、ガス手数料による報酬を請求できます。 別の財布を試したり、再試行する前にこれを補充してください.",
         "pointsClaimed": "ポイント申請",
-        "g7Numclaimed": "請求総額 G7 クレジット"
+        "g7Numclaimed": "請求総額 G7 クレジット",
+        "claimWarning": {
+            "body2": "それ以外の場合は、Quest Reward <bold> が期限切れになり、もはや請求できません。</bold>",
+            "title": "クエスト報酬クレームの確認",
+            "body": "<bold>重要:</bold> {{networkName}} トランザクションのネットワーク上で十分なガスを割り当てていることを確認してください。 <bold> 24 時間で確認されます。 </bold>",
+            "cancel": "キャンセル",
+            "confirm": "確認"
+        }
     },
     "quests": {
         "quests": "クエスト",
