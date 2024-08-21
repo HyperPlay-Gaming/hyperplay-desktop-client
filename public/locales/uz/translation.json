@@ -737,7 +737,11 @@
         "active": "Faol",
         "Play": "Hozir O'yna",
         "signIn": "Sign in",
-        "sync": "Sinxronlash"
+        "sync": "Sinxronlash",
+        "claimWarning": {
+            "cancel": "Bekor qilish",
+            "confirm": "Tasdiqlash"
+        }
     },
     "analytics": "Tashxis",
     "notification": {

@@ -965,7 +965,14 @@
         "reputation": "Reputatie",
         "sync": "Sync",
         "pointsClaimed": "Punt geclaimd",
-        "g7Numclaimed": "Total Claim G7 Credits"
+        "g7Numclaimed": "Total Claim G7 Credits",
+        "claimWarning": {
+            "body2": "Anders zal de Quest Reward verlopen en zal niet langer worden opgeëist",
+            "title": "Bevestig Quest beloning Claim",
+            "body": "_ Zorg ervoor dat je genoeg gas op het netwerk van de transactie verbindt, om succesvol bevestigd te worden dat £153 X, 173",
+            "cancel": "Annuleren",
+            "confirm": "Bevestigen"
+        }
     },
     "quests": {
         "quests": "Quest",

@@ -750,7 +750,11 @@
         },
         "points": "Điểm",
         "sync": "Đồng bộ",
-        "reward": "Thưởng"
+        "reward": "Thưởng",
+        "claimWarning": {
+            "cancel": "Hủy bỏ",
+            "confirm": "Xác nhận"
+        }
     },
     "quests": {
         "quests": "Quest"

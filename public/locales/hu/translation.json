@@ -928,7 +928,14 @@
         "associatedGames": "Társult játékok",
         "notEnoughGas": "Elég pénztárca-egyenleg, hogy követelje meg a jutalmat a gázdíjak miatt. Próbáljon ki egy másik pénztárcát, vagy töltse fel ezt, mielőtt visszavonul.",
         "pointsClaimed": "Pontok betartott",
-        "g7Numclaimed": "Teljes jogú G7 hitelek"
+        "g7Numclaimed": "Teljes jogú G7 hitelek",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Kérjük, győződjön meg róla, hogy elegendő gázt oszt ki a {{networkName}} hálózaton a tranzakció sikeres megerősítéséhez <bold> 24 órán belül.</bold>",
+            "body2": "Ellenkező esetben a Quest Reward <bold> lejár, és már nem lesz követelhető.</bold>",
+            "title": "Confirm Quest Reward Claim",
+            "cancel": "Mégsem",
+            "confirm": "Megerősítés"
+        }
     },
     "quests": {
         "quests": "Küldetések",

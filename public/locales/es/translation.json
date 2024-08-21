@@ -1016,7 +1016,14 @@
         "notEnoughGas": "El saldo del monedero es insuficiente para reclamar la recompensa debido a los gastos de gasolina. Prueba con otro monedero o recarga este antes de volver a intentarlo.",
         "claimFailedMessage": "Por favor, inténtalo una vez más. Si sigue sin funcionar, crea un ticket de soporte en Discord.",
         "pointsClaimed": "Cuestiones reclamadas",
-        "g7Numclaimed": "Total Claimed G7 Credits"
+        "g7Numclaimed": "Total Claimed G7 Credits",
+        "claimWarning": {
+            "body": "<bold>IMPORTANTE:</bold> Por favor, asegúrate de que estás asignando suficiente gas en la red {{networkName}} para que la transacción se confirme con éxito <bold>en 24 horas.</bold>",
+            "body2": "De lo contrario, la recompensa de la misión <bold>expirará y ya no podrás reclamarla.</bold>",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar",
+            "title": "Confirmar reclamo de recompensa de misión"
+        }
     },
     "back_to_game": "Volver al juego",
     "email_subscription": {

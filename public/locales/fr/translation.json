@@ -967,7 +967,14 @@
         "sync": "Synchroniser",
         "signIn": "Connexion",
         "pointsClaimed": "Points réclamés",
-        "g7Numclaimed": "Total des crédits G7 réclamés"
+        "g7Numclaimed": "Total des crédits G7 réclamés",
+        "claimWarning": {
+            "cancel": "Annuler",
+            "confirm": "Confirmer",
+            "title": "Confirmer la demande de remboursement de Quest",
+            "body": "<bold>IMPORTANT:</bold> Veuillez vous assurer que vous allouez suffisamment de gaz sur le réseau {{networkName}} pour que la transaction soit confirmée avec succès <bold> sous 24h.</bold>",
+            "body2": "Sinon, le Quest Reward <bold> expirera et ne sera plus revendiqué</bold>"
+        }
     },
     "sideload": {
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Enlever un installateur qui contient des logiciels malveillants pourrait compromettre votre ordinateur et conduire au vol de fonds.",
