@@ -10,13 +10,7 @@ import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
-import {
-  http,
-  useAccount,
-  useBalance,
-  useSwitchChain,
-  useWriteContract
-} from 'wagmi'
+import { http, useAccount, useSwitchChain, useWriteContract } from 'wagmi'
 import { ConfirmClaimParams, Reward, RewardClaimSignature } from 'common/types'
 import authState from 'frontend/state/authState'
 import { mintReward } from './rewards/mintReward'
@@ -48,7 +42,10 @@ const averageEstimatedGasUsagePerFunction: Record<string, number> = {
   ERC20: 98_507
 }
 
-async function getRewardClaimGasEstimation(reward: Reward) {
+async function getRewardClaimGasEstimationSummary(
+  reward: Reward,
+  address: string
+) {
   if (!reward.chain_id) {
     throw Error(`chain_id is not set for reward: ${reward.id}`)
   }
@@ -84,12 +81,16 @@ async function getRewardClaimGasEstimation(reward: Reward) {
 
   const gasPrice = await publicClient.getGasPrice()
   const gasNeeded = BigInt(gasPerFunction) * gasPrice
+  const accountBalance = await publicClient.getBalance({
+    address: address as `0x{string}`
+  })
+  const hasEnoughBalance = accountBalance >= gasNeeded
 
   window.api.logInfo(
     `Gas needed to claim ${reward.reward_type} reward: ${gasNeeded} (${gasPerFunction} gas per function * ${gasPrice} gas price)`
   )
 
-  return gasNeeded
+  return { accountBalance, gasNeeded, hasEnoughBalance }
 }
 
 export function QuestDetailsWrapper({
@@ -114,7 +115,6 @@ export function QuestDetailsWrapper({
   const flags = useFlags()
   const account = useAccount()
   const [showWarning, setShowWarning] = useState(false)
-  const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
   const [warningMessage, setWarningMessage] = useState<string>()
@@ -276,18 +276,16 @@ export function QuestDetailsWrapper({
       return
     }
 
-    if (!walletBalance) {
-      throw Error('Wallet balance not available')
-    }
-
     await switchChainAsync({ chainId: reward.chain_id })
 
-    const gasNeeded = await getRewardClaimGasEstimation(reward)
-    const hasEnoughBalance = walletBalance.value >= gasNeeded
+    const { accountBalance, gasNeeded, hasEnoughBalance } =
+      await getRewardClaimGasEstimationSummary(reward, account.address)
+
+    window.api.logInfo(`Current wallet gas: ${accountBalance}`)
 
     if (!hasEnoughBalance) {
       window.api.logError(
-        `Not enough balance in the connected wallet to cover the gas fee associated with this Quest Reward claim. Current balance: ${walletBalance.value}, gas needed: ${gasNeeded}`
+        `Not enough balance in the connected wallet to cover the gas fee associated with this Quest Reward claim. Current balance: ${accountBalance}, gas needed: ${gasNeeded}`
       )
       setWarningMessage(
         t(
