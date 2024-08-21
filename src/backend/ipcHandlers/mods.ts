@@ -10,9 +10,7 @@ import {
   calculateProgress,
   getDestinationPath
 } from 'backend/storeManagers/hyperplay/games'
-import { runModPatcher } from 'backend/storeManagers/hyperplay/utils'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
-import { ipcMain } from 'electron'
 
 import i18next from 'i18next'
 
@@ -184,11 +182,3 @@ export async function prepareBaseGameForModding({
     extractService.extract().then()
   })
 }
-
-ipcMain.handle('runModPatcher', async (event, appName) => {
-  try {
-    runModPatcher(appName)
-  } catch (error) {
-    throw new Error(`Error running mod patcher: ${error}`)
-  }
-})

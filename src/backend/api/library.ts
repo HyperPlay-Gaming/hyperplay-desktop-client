@@ -151,8 +151,5 @@ export const checkHyperPlayAccessCode = async (
   )
 }
 
-export const runModPatcher = async (appName: string) =>
-  ipcRenderer.invoke('runModPatcher', appName)
-
 export const getEpicListingUrl = async (appName: string) =>
   ipcRenderer.invoke('getEpicListingUrl', appName)

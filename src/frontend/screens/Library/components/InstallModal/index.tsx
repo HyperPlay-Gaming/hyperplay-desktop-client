@@ -177,7 +177,7 @@ export default React.memo(function InstallModal({
 
   const channelRequiresToken = !!selectedChannel?.license_config.tokens
 
-  const showModDialog = gameInfo && gameInfo.type === 'mod'
+  const showModDialog = gameInfo && gameInfo.account_name === 'marketwars'
   const showDownloadDialog = !showModDialog && !isSideload && gameInfo
 
   const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
@@ -254,7 +254,7 @@ export default React.memo(function InstallModal({
             ) : null}
           </DownloadDialog>
         )}
-        {isSideload && (
+        {isSideload === true && (
           <SideloadDialog
             setWinePrefix={setWinePrefix}
             winePrefix={winePrefix}
@@ -284,7 +284,7 @@ export default React.memo(function InstallModal({
             ) : null}
           </SideloadDialog>
         )}
-        {showModDialog && (
+        {showModDialog === true && (
           <ModDialog
             backdropClick={backdropClick}
             gameInfo={gameInfo}
@@ -292,6 +292,13 @@ export default React.memo(function InstallModal({
             requiresToken={channelRequiresToken}
             enableCTAButton={enableCTAButton}
           >
+            {runner === 'hyperplay' && numberOfChannels > 1 ? (
+              <ChannelNameSelection
+                channelNameToInstall={channelNameToInstall}
+                setChannelNameToInstall={setChannelNameToInstall}
+                gameInfo={gameInfo}
+              />
+            ) : null}
             {runner === 'hyperplay' && channelRequiresAccessCode
               ? accessCodeInput
               : null}

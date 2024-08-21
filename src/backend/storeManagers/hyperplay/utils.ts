@@ -377,7 +377,8 @@ export const runModPatcher = async (appName: string) => {
         gameSettings,
         commandParts: [patcher, 'patch', '-m', manifest],
         wait: true,
-        protonVerb: 'waitforexitandrun'
+        protonVerb: 'waitforexitandrun',
+        startFolder: installPath
       })
     } else {
       const { stderr, stdout } = await spawnAsync(

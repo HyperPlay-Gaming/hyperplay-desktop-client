@@ -8,7 +8,7 @@ import { faFile, faFolderOpen } from '@fortawesome/free-solid-svg-icons'
 import styles from './ModDialog.module.scss'
 import { configStore } from 'frontend/helpers/electronStores'
 import TextInputWithIconField from 'frontend/components/UI/TextInputWithIconField'
-import { Button, ButtonCopy, Images } from '@hyperplay/ui'
+import { Button, Images } from '@hyperplay/ui'
 import { install } from 'frontend/helpers'
 import { signSiweMessage } from 'frontend/helpers/library'
 import { downloadLinks } from './constants'
@@ -132,7 +132,7 @@ const ModDialog: React.FC<Props> = ({
               })}
             </p>
             <ul className={styles.sourceList}>
-              <li className={styles.sourceItem}>
+{/*               <li className={styles.sourceItem}>
                 <a
                   className={styles.sourceLink}
                   href={downloadLinks[appName]?.webtorrent ?? ''}
@@ -148,8 +148,8 @@ const ModDialog: React.FC<Props> = ({
                     'WebTorrent (recommended)'
                   )}
                 </a>
-              </li>
-              <li className={styles.sourceItem}>
+              </li> */}
+{/*               <li className={styles.sourceItem}>
                 <div className={styles.magnetContainer}>
                   <a
                     href={downloadLinks[appName]?.magnet ?? ''}
@@ -171,7 +171,7 @@ const ModDialog: React.FC<Props> = ({
                     className={styles.copyMagnetButton}
                   />
                 </div>
-              </li>
+              </li> */}
               <li className={styles.sourceItem}>
                 <a
                   href={downloadLinks[appName]?.chromieCraft ?? ''}
@@ -186,7 +186,7 @@ const ModDialog: React.FC<Props> = ({
                   {t('mods.instructions.step1.chromieCraft', 'ChromieCraft')}
                 </a>
               </li>
-              <li className={styles.sourceItem}>
+{/*               <li className={styles.sourceItem}>
                 <a
                   href={downloadLinks[appName]?.archiveOrg ?? ''}
                   className={styles.sourceLink}
@@ -199,12 +199,9 @@ const ModDialog: React.FC<Props> = ({
                 >
                   {t('mods.instructions.step1.archive', 'Archive.org')}
                 </a>
-              </li>
+              </li> */}
             </ul>
           </div>
-
-          {children}
-
           <div className={styles.step}>
             <div className={styles.stepTitle}>
               {t('mods.instructions.step2.title', 'Step 2')}
@@ -254,6 +251,21 @@ const ModDialog: React.FC<Props> = ({
               onIconClick={handleInstallPathSelection}
             />
           </div>
+
+          {children !== null && 
+          <div className={styles.step} style={{paddingBottom: 'var(--space-xl-fixed)'}}>
+            <div className={styles.stepTitle}>
+              {t('mods.instructions.step4.title', 'Step 4')}
+            </div>
+            <div className={styles.stepSubtitle}>
+              {t(
+                'mods.instructions.step4.subtitle',
+                'Access Code'
+              )}
+              {children}
+            </div>
+          </div>
+          }
 
           <Button
             type="secondary"
