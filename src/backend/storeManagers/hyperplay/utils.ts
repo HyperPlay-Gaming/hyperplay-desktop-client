@@ -373,20 +373,29 @@ export const runModPatcher = async (appName: string) => {
   try {
     if (!isWindows) {
       const gameSettings = await getSettings(appName)
-      runWineCommand({
+      const { stderr, stdout } = await runWineCommand({
         gameSettings,
-        commandParts: [patcher, 'patch', '-m', manifest],
+        commandParts: [
+          'client-patcher.exe',
+          'patch',
+          '-m',
+          'patch/manifest.json'
+        ],
         wait: true,
         protonVerb: 'waitforexitandrun',
         startFolder: installPath
       })
+      logInfo(['Patch Applied', stdout], LogPrefix.HyperPlay)
+      if (stderr) {
+        logError(stderr, LogPrefix.HyperPlay)
+      }
     } else {
       const { stderr, stdout } = await spawnAsync(
-        patcher,
-        ['patch', '-m', manifest],
+        'client-patcher.exe',
+        ['patch', '-m', 'patch/manifest.json'],
         { cwd: installPath }
       )
-      logInfo(stdout, LogPrefix.HyperPlay)
+      logInfo(['Patch Applied', stdout], LogPrefix.HyperPlay)
       if (stderr) {
         logError(stderr, LogPrefix.HyperPlay)
       }
