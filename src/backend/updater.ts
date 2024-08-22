@@ -6,7 +6,7 @@ import { configStore, icon } from './constants'
 import { logInfo } from './logger/logger'
 import { isOnline } from './online_monitor'
 // to test auto update on windows locally make sure you added the option "verifyUpdateCodeSignature": false
-// under build.win in package.json and autoUpdater.currentVersion = old version here or change it in the package.json
+// under build.win in package.json and also change the app version to an old one there
 
 const appSettings = configStore.get_nodefault('settings')
 const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
