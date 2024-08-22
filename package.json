@@ -237,7 +237,6 @@
     "react-blockies": "^1.4.1",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
-    "react-markdown": "^9.0.1",
     "react-router-dom": "^6.9.0",
     "recharts": "^2.4.3",
     "sanitize-filename": "^1.6.3",
@@ -259,7 +258,6 @@
   },
   "scripts": {
     "setup": "yarn install && yarn allow-scripts",
-    "setupWithoutOptional": "yarn install --ignore-optional && yarn allow-scripts",
     "start": "electron-vite dev --watch",
     "debug:react": "react-devtools",
     "codecheck": "tsc --noEmit",
@@ -396,8 +394,7 @@
       "viem>ws>bufferutil": true,
       "viem>ws>utf-8-validate": true,
       "@hyperplay/extension-importer>classic-level": true,
-      "classic-level": false,
-      "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": false
+      "classic-level": false
     }
   }
 }
