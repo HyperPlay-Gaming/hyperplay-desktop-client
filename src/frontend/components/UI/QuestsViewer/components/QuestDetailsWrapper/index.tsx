@@ -30,8 +30,18 @@ import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
 import { useSyncPlaySession } from 'frontend/hooks/useSyncInterval'
 import { useTrackQuestViewed } from 'frontend/hooks/useTrackQuestViewed'
 import { ConfirmClaimModal } from './components/ConfirmClaimModal'
+import { RewardClaimError } from 'backend/metrics/types'
 import { getBalance } from '@wagmi/core'
 import { config } from 'frontend/config'
+
+class ClaimError extends Error {
+  properties: RewardClaimError['properties']
+
+  constructor(message: string, properties: RewardClaimError['properties']) {
+    super(message)
+    this.properties = properties
+  }
+}
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -368,13 +378,9 @@ export function QuestDetailsWrapper({
             break
         }
       } catch (err) {
-        const errMsg = `${err}`
-        console.error(errMsg)
-        window.api.trackEvent({
-          event: 'Reward Claim Error',
-          properties
-        })
+        throw new ClaimError(`${err}`, properties)
       }
+
       window.api.trackEvent({
         event: 'Reward Claim Success',
         properties
@@ -390,6 +396,13 @@ export function QuestDetailsWrapper({
       await questPlayStreakResult.invalidateQuery()
     },
     onError: (error) => {
+      if (error instanceof ClaimError) {
+        window.api.trackEvent({
+          event: 'Reward Claim Error',
+          properties: error.properties
+        })
+      }
+      console.error('Error claiming rewards:', error)
       window.api.logError(`Error claiming rewards: ${error}`)
     }
   })
