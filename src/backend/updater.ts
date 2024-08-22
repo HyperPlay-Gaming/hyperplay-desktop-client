@@ -14,16 +14,16 @@ const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
 autoUpdater.autoDownload = shouldCheckForUpdates
 autoUpdater.autoInstallOnAppQuit = false
 
-// check for updates every 6 hours
+// check for updates every hour
 const checkUpdateInterval = 1 * 60 * 60 * 1000
 setInterval(() => {
-  if (!isOnline() || shouldCheckForUpdates) {
+  if (isOnline() && shouldCheckForUpdates) {
     autoUpdater.checkForUpdates()
   }
 }, checkUpdateInterval)
 
 autoUpdater.on('update-available', async (info) => {
-  if (!isOnline()) {
+  if (!isOnline() || !shouldCheckForUpdates) {
     return
   }
   logInfo('A HyperPlay update is available, downloading it now')
