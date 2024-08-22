@@ -222,11 +222,9 @@ export function QuestDetailsWrapper({
   const isSignedIn = !!userId
 
   const hasMetStreak =
-    questPlayStreakData?.current_playstreak_in_days !== undefined &&
-    questMeta?.eligibility?.play_streak?.required_playstreak_in_days !==
-      undefined &&
-    questPlayStreakData?.current_playstreak_in_days >=
-      questMeta.eligibility?.play_streak?.required_playstreak_in_days
+    (questPlayStreakData?.current_playstreak_in_days ?? 0) >=
+    (questMeta?.eligibility?.play_streak?.required_playstreak_in_days ??
+      Infinity)
 
   const showResyncButton =
     questMeta?.type === 'PLAYSTREAK' &&
