@@ -396,7 +396,9 @@ export interface LaunchPreperationResult {
 
 export interface RpcClient {
   updatePresence(d: unknown): void
+
   reply(user: unknown, response: unknown): void
+
   disconnect(): void
 }
 
@@ -862,6 +864,7 @@ export interface GetIndividualAchievementsOptions extends PlayerOptions {
   page: number
   pageSize: number
 }
+
 export interface AchievementsStats {
   newAchievements: number
   mintedAchievements: number
@@ -879,6 +882,7 @@ export type Filter =
   | 'alphabeticalAscending'
   | 'alphabeticalDescending'
   | 'sortByInstalled'
+
 export interface FilterItem extends DropdownItemType {
   id?: Filter
 }
@@ -911,9 +915,13 @@ export interface Reward {
   name: string
   contract_address: `0x${string}`
   decimals: number | null
-  /* eslint-disable-next-line */
-  token_ids: { amount_per_user: string; token_id: number }[]
+  token_ids: {
+    amount_per_user: string
+    token_id: number
+    numClaimsLeft: string
+  }[]
   image_url: string
+  numClaimsLeft: string
 }
 
 export interface Quest {
@@ -940,6 +948,7 @@ export interface RewardClaimSignature {
   signature: `0x${string}`
   nonce: string
   expiration: number
+  tokenIds: number[]
 }
 
 export interface DepositContract {
@@ -958,6 +967,11 @@ export interface PointsClaimReturn {
   message?: string
   // sent on success
   success?: string
+}
+
+export interface ConfirmClaimParams {
+  transactionHash: string
+  signature: string
 }
 
 export interface UserPlayStreak {

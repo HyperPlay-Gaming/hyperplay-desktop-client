@@ -927,7 +927,15 @@
         "claimAll": "@Claim @all",
         "linkAccount": "#Veza #tvoj @Steam #račun #na #pregled eligibility#.",
         "reputation": "#Reputacija",
-        "pointsClaimed": "#Poen"
+        "pointsClaimed": "#Poen",
+        "g7Numclaimed": "@Total #Potraživati G7 #Kredit",
+        "claimWarning": {
+            "body": "[@X0@X]#VAŽAN:[@X16@X] @Please #osigurati da #free #biti #dodijeliti dosta #gas @on @the [@X80@X] #mreža @for @the #transakcija #na #biti @successfully #potvrditi [@X153@X]#unutar #24 hrs.[@X173@X]",
+            "body2": "Inače, @the #Potraga #Nagrada [@X28@X]#volja #isteći a #volja @no longer #biti claimable.[@X78@X]",
+            "title": "#Potvrditi #Potraga #Nagrada",
+            "confirm": "Potvrdi",
+            "cancel": "Odustanite"
+        }
     },
     "profile": "Profile",
     "back_to_game": "@Back #na #igra",
@@ -987,7 +995,15 @@
                 "client": "#Free #biti @currently ne logged @in, #predstava streak #napredak #volja ne #biti tracked. @Please login #na HyperPlay @via @the #vrh-#pravo dropdown #na #traka #napredak#."
             }
         },
-        "quests": "#Potraga"
+        "quests": "#Potraga",
+        "noneFound": {
+            "message": "Tamo #biti @no #potraga #pronađen#.",
+            "title": "@No #Potraga #Pronađen#."
+        },
+        "g7CreditsModal": {
+            "title": "#Steći Game7 #Kredit",
+            "description": "@Dive @into HyperPlay@'s #vrh #igra #uz @excite #Predstava Streak #Izazov. @Each #aktivnost #ohrabriti #free #na #sudjelovati #uz @a #drugačiji #igra, showcasing @the @best @of web3 gaming. #Tvoj playtime #pitanje#!"
+        }
     },
     "sideload": {
         "warningMessage": "#Strana-@loading @a #igra @i @a @feature @intend @for developers a @experienced #moć #korisnik. #Strana-@loading @a @installer da #sadržati malware #moći #kompromis #tvoj #računar a #olovo #na #krađa @of #fond#.",

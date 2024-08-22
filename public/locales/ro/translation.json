@@ -737,12 +737,17 @@
         },
         "points": "Puncte",
         "signIn": "Autentificare",
-        "sync": "Sincronizare"
+        "sync": "Sincronizare",
+        "claimWarning": {
+            "cancel": "Anulare",
+            "confirm": "Confirmă"
+        }
     },
     "gameRelease": {
         "beta": "Beta",
         "demo": "Demo",
-        "main": "Protagonist"
+        "main": "Protagonist",
+        "alpha": "alfa"
     },
     "accounts": "Conturi",
     "ALL": "Toate",

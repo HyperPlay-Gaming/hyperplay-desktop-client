@@ -973,7 +973,15 @@
         "sync": "مزامنة",
         "reputation": "السمعة",
         "points": "نقاط",
-        "pointsClaimed": "النقاط المطالب بها"
+        "pointsClaimed": "النقاط المطالب بها",
+        "g7Numclaimed": "مجموع الأرصدة الدائنة من فئة الخدمات العامة",
+        "claimWarning": {
+            "body2": "وإلا، فإن الوصية <bold> ستنتهي ولن تعود قابلة للمطالبة.</bold>",
+            "title": "المطالبة بالتعويض",
+            "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>",
+            "confirm": "تأكيد",
+            "cancel": "إلغاء"
+        }
     },
     "notification": {
         "wine-download": {
@@ -988,6 +996,14 @@
                 "client": "أنت لا تُسجل في الوقت الراهن، تلعب التقدم الحاد لن يتم تعقبه. يرجى الدخول إلى (هايبر بلاي) عن طريق الهبوط من أعلى اليمين لتتبع التقدم.",
                 "overlay": "أنت لا تُسجل في الوقت الراهن، تلعب التقدم الحاد لن يتم تعقبه. الرجاء الخروج من اللعبة والانتقال إلى هيبر بلاي عن طريق الهبوط من أعلى اليمين لتتبع التقدم."
             }
+        },
+        "noneFound": {
+            "title": "لا يوجد كويست.",
+            "message": "لم يتم العثور على أي مسعاً."
+        },
+        "g7CreditsModal": {
+            "description": "تَقْتلُ في ألعابِ هايبر بلاي العلياِ مَع بلاي ستريك التحدياتِ المثيرةِ. كل نشاط يشجعك على الانخراط في لعبة مختلفة، عرض أفضل من القاموس على الشبكة 3. وقت اللعب الخاص بك يهم!",
+            "title": "Earn Game7 Credits"
         }
     },
     "accounts": "الحسابات",

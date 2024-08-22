@@ -54,7 +54,7 @@ import {
   WineCommandArgs,
   SteamRuntime
 } from 'common/types'
-import { execSync, spawn } from 'child_process'
+import { spawn } from 'child_process'
 import shlex from 'shlex'
 import { isOnline } from './online_monitor'
 import { showDialogBoxModalAuto } from './dialog/dialog'
@@ -859,7 +859,7 @@ async function callRunner(
     return currentPromise
   }
   const hpOverlay = await getHpOverlay()
-  const { shouldOpenOverlay, gameIsEpicForwarderOnHP, hyperPlayListing } =
+  const { shouldOpenOverlay, hyperPlayListing } =
     await launchingGameShouldOpenOverlay(gameInfo)
 
   let promise = new Promise<ExecResult>((res, rej) => {
@@ -876,7 +876,7 @@ async function callRunner(
     )
 
     if (gameInfo && shouldOpenOverlay) {
-      if (gameIsEpicForwarderOnHP && hyperPlayListing?.project_id) {
+      if (hyperPlayListing?.project_id) {
         hpOverlay?.openOverlay(hyperPlayListing?.project_id, gameInfo.runner)
       } else {
         hpOverlay?.openOverlay(gameInfo?.app_name, gameInfo.runner)
@@ -1088,7 +1088,14 @@ async function stopChildProcesses(childPid: number) {
     return
   }
 
-  return execSync(`pkill -TERM -P ${childPid}`)
+  try {
+    return await spawnAsync('pkill', ['-TERM', '-P', childPid.toString()])
+  } catch (error) {
+    return logWarning(
+      `could not stop child processes from PID: ${childPid}. Maybe they were already stopped`,
+      LogPrefix.Backend
+    )
+  }
 }
 
 /**

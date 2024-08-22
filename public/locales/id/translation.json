@@ -975,7 +975,15 @@
         "sync": "Sinkronisasi",
         "claimed": "Diklaim",
         "connectSteamAccount": "Hubungkan akun tim",
-        "pointsClaimed": "Poin Diklaim"
+        "pointsClaimed": "Poin Diklaim",
+        "g7Numclaimed": "Total Kredit G7 Klaim",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Harap pastikan bahwa Anda mengalokasikan cukup gas di jaringan {{networkName}} untuk transaksi yang berhasil dikonfirmasi <bold> dalam 24 jam. </bold>",
+            "body2": "Jika tidak, Quest Reward <bold> akan berakhir dan tidak akan lagi dapat diklaim.</bold>",
+            "title": "Konfirmasi Klaim Reward Quest",
+            "cancel": "Batal",
+            "confirm": "Konfirmasikan"
+        }
     },
     "notification": {
         "wine-download": {
@@ -1009,7 +1017,15 @@
                 "overlay": "Anda saat ini tidak masuk, bermain streak kemajuan tidak akan dilacak. Silakan keluarkan game dan login ke HyperPlay melalui dropdown kanan atas untuk melacak kemajuan."
             }
         },
-        "quests": "Pencarian"
+        "quests": "Pencarian",
+        "noneFound": {
+            "message": "Tidak ada pencarian yang ditemukan.",
+            "title": "Tidak ada keputusan yang ditemukan."
+        },
+        "g7CreditsModal": {
+            "description": "Menyelam ke game top HyperPlay dengan Tantangan Streak Bermain yang menarik. Setiap aktivitas mendorong Anda untuk terlibat dengan permainan yang berbeda, menunjukkan yang terbaik dari game web3. Masalah bermain Anda!",
+            "title": "Dapatkan Kredit Game7"
+        }
     },
     "email_subscription": {
         "title": "Terima kasih untuk berlangganan!",

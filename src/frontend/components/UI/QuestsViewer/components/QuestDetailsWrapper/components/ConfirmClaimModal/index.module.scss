@@ -1,0 +1,34 @@
+.confirmModal {
+  display: flex;
+  max-width: 620px;
+  padding: var(--space-2lg) var(--space-xl);
+  align-items: flex-start;
+  gap: var(--space-xs);
+  flex-direction: row;
+}
+
+.confirmTextWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xl);
+  flex: 1 0 0;
+}
+
+.confirmText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2xs);
+  align-self: stretch;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-xs);
+}
+
+.alertIcon {
+  stroke: var(--color-alert-400);
+}

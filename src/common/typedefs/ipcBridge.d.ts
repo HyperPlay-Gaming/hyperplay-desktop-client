@@ -6,7 +6,9 @@ import {
   LDEnv,
   HyperPlayRelease,
   PointsClaimReturn,
-  GenericApiResponse
+  GenericApiResponse,
+  Quest,
+  ConfirmClaimParams
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -278,6 +280,7 @@ interface HyperPlayAsyncIPCFunctions {
   getQuest: (questId: number) => Promise<Quest>
   getUserPlayStreak: (questId: number) => Promise<UserPlayStreak>
   getSteamGameMetadata: (gameId: number) => Promise<unknown>
+  confirmRewardClaim: (params: ConfirmClaimParams) => Promise<void>
   getHyperPlayListings: () => Promise<Record<string, HyperPlayRelease>>
   getQuestRewardSignature: (
     address: `0x${string}`,
@@ -293,6 +296,8 @@ interface HyperPlayAsyncIPCFunctions {
   getPointsBalancesForProject: (
     projectId: string
   ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
+  syncPlaySession: (appName: string, runner: Runner) => Promise<void>
+  getEpicListingUrl: (appName: string) => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

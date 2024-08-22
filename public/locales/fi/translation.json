@@ -790,7 +790,15 @@
         "needMoreAchievements": "Sinun on täytettävä {{percent}}% saavutuksistasi näissä peleissä.",
         "quests": "Quests",
         "View Game": "Näkymä pelistä",
-        "pointsClaimed": "Väitetyt pisteet"
+        "pointsClaimed": "Väitetyt pisteet",
+        "g7Numclaimed": "G7-luottoja yhteensä",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT: </bold> Varmista, että olet jakanut tarpeeksi kaasua {{networkName}}-verkossa, jotta transaktio voidaan varmistaa onnistuneesti 24 tunnin sisällä",
+            "title": "Confirm Quest Reward Väitteet",
+            "body2": "Muussa tapauksessa Quest Reward (X28X) päättyy, eikä sitä enää voi vaatia",
+            "cancel": "Peruuta",
+            "confirm": "Vahvista"
+        }
     },
     "gameRelease": {
         "main": "Oletus",
@@ -1014,6 +1022,14 @@
                 "overlay": "Et ole tällä hetkellä kirjautuneena sisään, pelin etenemistä ei seurata. Poistu pelistä ja kirjaudu HyperPlayyn huippuoikeiston kautta edistyksen seuraamiseksi."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "noneFound": {
+            "title": "Quests ei löytynyt.",
+            "message": "Etsintöjä ei löytynyt."
+        },
+        "g7CreditsModal": {
+            "description": "HyperPlayn parhaat pelit, joissa on jännittäviä Play Streak -haasteita. Jokainen aktiviteetti kannustaa sinua osallistumaan toiseen peliin ja esittelemään parhaan verkkopelin. Peliaikasi on tärkeää!",
+            "title": "Ansaitse Game7 -luottoja"
+        }
     }
 }

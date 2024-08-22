@@ -737,7 +737,8 @@
         },
         "Sync": "Sinkronizacija",
         "turnAnalyticsOff": "Isključi",
-        "logOut": "Odjavi se"
+        "logOut": "Odjavi se",
+        "viewFullscreen": "Prikaz preko cijelog ekrana"
     },
     "quest": {
         "active": "Aktivno",
@@ -748,7 +749,11 @@
         },
         "points": "Točke",
         "signIn": "Prijavi se",
-        "sync": "Sinkronizacija"
+        "sync": "Sinkronizacija",
+        "claimWarning": {
+            "cancel": "Odustani",
+            "confirm": "Potvrdi"
+        }
     },
     "accounts": "Konta",
     "ALL": "SVE",

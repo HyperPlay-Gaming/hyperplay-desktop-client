@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { QuestsSummaryTable, QuestCard, QuestFilter } from '@hyperplay/ui'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
 import { itemType } from '@hyperplay/ui/dist/components/Dropdowns/Dropdown'
 import useGetHyperPlayListings from 'frontend/hooks/useGetHyperPlayListings'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Quest } from 'common/types'
 
 export interface QuestsSummaryTableWrapperProps {
   selectedQuestId: number | null
@@ -20,6 +21,16 @@ export function QuestsSummaryTableWrapper({
   const hyperplayListings = useGetHyperPlayListings()
   const listings = hyperplayListings.data.data
   const navigate = useNavigate()
+
+  const { search } = useLocation()
+  const searchParams = new URLSearchParams(search)
+  const searchParam = searchParams.get('search')
+
+  const [searchText, setSearchText] = useState(searchParam ?? '')
+
+  useEffect(() => {
+    setSearchText(searchParam ?? '')
+  }, [searchParam])
 
   const [activeFilter, setActiveFilter] = useState<QuestFilter>('all')
 
@@ -51,10 +62,25 @@ export function QuestsSummaryTableWrapper({
     })
   }
 
+  function gameTitleMatches(quest: Quest) {
+    const title = listings ? listings[quest.project_id]?.project_meta?.name : ''
+    const gameTitleMatch = title
+      ?.toLowerCase()
+      .startsWith(searchText.toLowerCase())
+    return gameTitleMatch
+  }
+
   const imagesToPreload: string[] = []
+  const filteredQuests = quests?.filter((quest) => {
+    const questTitleMatch = quest.name
+      .toLowerCase()
+      .startsWith(searchText.toLowerCase())
+    return questTitleMatch || gameTitleMatches(quest)
+  })
+
   // set outline css on selected
   const gameElements =
-    quests?.map(({ id, project_id, name, ...rest }) => {
+    filteredQuests?.map(({ id, project_id, name, ...rest }) => {
       const imageUrl = listings
         ? listings[project_id]?.project_meta?.main_capsule
         : ''
@@ -65,9 +91,10 @@ export function QuestsSummaryTableWrapper({
       return (
         <QuestCard
           key={id}
-          image={imageUrl}
+          image={imageUrl ?? ''}
           title={title}
           {...rest}
+          //@ts-expect-error TODO: add onClick and all root props to QuestCard props
           onClick={() => {
             if (selectedQuestId === id) {
               navigate('/quests')
@@ -80,6 +107,11 @@ export function QuestsSummaryTableWrapper({
         />
       )
     }) ?? []
+
+  let suggestedSearchTitles = undefined
+  if (searchText) {
+    suggestedSearchTitles = filteredQuests?.map((val) => val.name)
+  }
 
   return (
     <QuestsSummaryTable
@@ -108,6 +140,9 @@ export function QuestsSummaryTableWrapper({
       }}
       pageTitle={t('quests.quests', 'Quests')}
       className={styles.tableContainer}
+      searchText={searchText}
+      setSearchText={setSearchText}
+      searchSuggestions={suggestedSearchTitles}
     />
   )
 }

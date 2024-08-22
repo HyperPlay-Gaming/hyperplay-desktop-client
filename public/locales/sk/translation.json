@@ -966,7 +966,15 @@
         "points": "Body",
         "sync": "Synchronizácia",
         "connectSteamAccount": "Pripojiť tímový účet",
-        "pointsClaimed": "Body Reklamované"
+        "pointsClaimed": "Body Reklamované",
+        "g7Numclaimed": "Celkový nárok na G7 kredity",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Prosím, uistite sa, že ste pridelenie dostatok plynu na {{networkName}} sieť pre transakciu byť úspešne potvrdená <bold> do 24 hodín.</bold>",
+            "title": "Potvrdiť Quest Reward reklamáciu",
+            "body2": "V opačnom prípade Quest Reward <bold> vyprší a už nebude nárokovať.</bold>",
+            "confirm": "Potvrdiť",
+            "cancel": "Zrušiť"
+        }
     },
     "quests": {
         "playstreak": {
@@ -975,7 +983,15 @@
                 "overlay": "V súčasnosti nie ste prihlásený, hrať streak pokrok nebude sledovať. Prosím, odíďte hru a prihláste sa HyperPlay cez top-right dropdown sledovať pokrok."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "noneFound": {
+            "message": "Neboli nájdené žiadne úlohy.",
+            "title": "Žiadne Quests Nájdené."
+        },
+        "g7CreditsModal": {
+            "description": "Rozdeľte sa do hry HyperPlay s vzrušujúcou Play Streak Challenges. Každá aktivita vás povzbudzuje, aby ste sa zapojili do inej hry, ukazujú najlepšie z webu3 hry. Vaše herné záležitosti!",
+            "title": "Zarobiť Game7 kredity"
+        }
     },
     "sideload": {
         "warningMessage": "Side-loading hra je vlastnosť určená pre vývojárov a skúsených užívateľov. Side-loading inštalátor, ktorý obsahuje malware, môže ohroziť váš počítač a viesť k krádežu finančných prostriedkov.",

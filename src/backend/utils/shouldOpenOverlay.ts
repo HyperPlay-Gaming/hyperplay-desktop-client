@@ -10,24 +10,23 @@ export async function gameIsEpicForwarderOnHyperPlay(gameInfo: GameInfo) {
   if (gameIsEpicForwarderOnHP) {
     hyperPlayListing = gameNameMap.get(gameInfoTitle)
   }
-  return { gameIsEpicForwarderOnHP, hyperPlayListing }
+  return { hyperPlayListing, gameIsEpicForwarderOnHP }
 }
 
 export async function launchingGameShouldOpenOverlay(gameInfo?: GameInfo) {
   if (!gameInfo) {
     return { shouldOpenOverlay: false }
   }
-  const { gameIsEpicForwarderOnHP, hyperPlayListing } =
+  const { hyperPlayListing, gameIsEpicForwarderOnHP } =
     await gameIsEpicForwarderOnHyperPlay(gameInfo)
   const gameIsDirectOnHyperPlay = gameInfo.runner === 'hyperplay'
   const gameIsSideloadedWithWeb3 =
     gameInfo.runner === 'sideload' && !!gameInfo.web3?.supported
   return {
     shouldOpenOverlay:
-      gameIsEpicForwarderOnHP ||
       gameIsDirectOnHyperPlay ||
-      gameIsSideloadedWithWeb3,
-    gameIsEpicForwarderOnHP,
+      gameIsSideloadedWithWeb3 ||
+      gameIsEpicForwarderOnHP,
     hyperPlayListing
   }
 }

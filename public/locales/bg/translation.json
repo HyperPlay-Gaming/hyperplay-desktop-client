@@ -729,7 +729,8 @@
         "Sync": "Синхронизиране",
         "turnAnalyticsOff": "Изключване",
         "copyUrl": "Копиране URL",
-        "turnAnalyticsOn": "Включване"
+        "turnAnalyticsOn": "Включване",
+        "viewFullscreen": "Вижте на цял екран"
     },
     "quest": {
         "active": "Активен",
@@ -744,7 +745,11 @@
         "type": {
             "reputation": "Репутация"
         },
-        "reputation": "Репутация"
+        "reputation": "Репутация",
+        "claimWarning": {
+            "cancel": "Отмяна",
+            "confirm": "Потвърдете"
+        }
     },
     "accounts": "Акаунти",
     "analytics": "Анализ",

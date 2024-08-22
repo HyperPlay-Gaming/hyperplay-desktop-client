@@ -927,7 +927,15 @@
         "reward": "Jutalom",
         "associatedGames": "Társult játékok",
         "notEnoughGas": "Elég pénztárca-egyenleg, hogy követelje meg a jutalmat a gázdíjak miatt. Próbáljon ki egy másik pénztárcát, vagy töltse fel ezt, mielőtt visszavonul.",
-        "pointsClaimed": "Pontok betartott"
+        "pointsClaimed": "Pontok betartott",
+        "g7Numclaimed": "Teljes jogú G7 hitelek",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Kérjük, győződjön meg róla, hogy elegendő gázt oszt ki a {{networkName}} hálózaton a tranzakció sikeres megerősítéséhez <bold> 24 órán belül.</bold>",
+            "body2": "Ellenkező esetben a Quest Reward <bold> lejár, és már nem lesz követelhető.</bold>",
+            "title": "Confirm Quest Reward Claim",
+            "cancel": "Mégsem",
+            "confirm": "Megerősítés"
+        }
     },
     "quests": {
         "quests": "Küldetések",
@@ -936,6 +944,14 @@
                 "overlay": "Jelenleg nincs bejelentkezve, a streak haladást nem követik nyomon. Kérjük, hagyja ki a játékot, és jelentkezzen be a HyperPlay-ba a jobboldali leálláson keresztül a haladás nyomon követéséhez.",
                 "client": "Jelenleg nem vagy bejelentkezve, a streak haladást nem követik nyomon. Kérjük, jelentkezzen be a HyperPlay-ba a jobboldali leálláson keresztül a haladás nyomon követéséhez."
             }
+        },
+        "noneFound": {
+            "title": "Nem találtak Quests.",
+            "message": "Nem találtak kereséseket."
+        },
+        "g7CreditsModal": {
+            "description": "Dive into HyperPlay top játékok izgalmas játék Streak kihívásokkal. Minden tevékenység arra ösztönzi Önt, hogy vegyen részt egy másik játék, bemutatva a legjobb web3 játék. A játékidő számít!",
+            "title": "Earn Game7 Hitelek"
         }
     },
     "sideload": {
