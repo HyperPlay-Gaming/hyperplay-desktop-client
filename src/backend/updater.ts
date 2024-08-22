@@ -3,8 +3,10 @@ import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
 import { configStore, icon } from './constants'
-import { logError, LogPrefix, logInfo } from './logger/logger'
+import { logInfo } from './logger/logger'
 import { isOnline } from './online_monitor'
+// to test auto update on windows locally make sure you added the option "verifyUpdateCodeSignature": false
+// under build.win in package.json and autoUpdater.currentVersion = old version here or change it in the package.json
 
 const appSettings = configStore.get_nodefault('settings')
 const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
@@ -13,47 +15,33 @@ autoUpdater.autoDownload = shouldCheckForUpdates
 autoUpdater.autoInstallOnAppQuit = false
 
 // check for updates every 6 hours
-const interval = 1000 * 60 * 60 * 6
+const checkUpdateInterval = 1 * 60 * 60 * 1000
 setInterval(() => {
-  if (shouldCheckForUpdates) {
+  if (!isOnline() || shouldCheckForUpdates) {
     autoUpdater.checkForUpdates()
   }
-}, interval)
+}, checkUpdateInterval)
 
-autoUpdater.on('update-available', async () => {
-  if (!isOnline() || !shouldCheckForUpdates) {
+autoUpdater.on('update-available', async (info) => {
+  if (!isOnline()) {
     return
   }
-
-  logInfo('App update is available, downloading it now')
-  autoUpdater.downloadUpdate()
+  logInfo('A HyperPlay update is available, downloading it now')
+  logInfo(`Version: ${info.version}`)
+  logInfo(`Release date: ${info.releaseDate}`)
+  logInfo(`Release name: ${info.releaseName}`)
 })
 
 // log download progress
 autoUpdater.on('download-progress', (progress) => {
   logInfo(`Download speed: ${progress.bytesPerSecond}`)
-  logInfo(`Downloaded ${progress.percent}%`)
+  logInfo(`Downloaded ${progress.percent.toFixed(2)}%`)
   logInfo(
     `Total downloaded: ${progress.transferred} of ${progress.total} bytes`
   )
-
-  // TODO: use it in the future for progress bar on frontend if needed
-  /*   sendFrontendMessage(`progressUpdate-hyperplay`, {
-    appName: 'hyperplay',
-    runner: 'hyperplay',
-    status: 'downloading',
-    progress: {
-      percent: progress.percent,
-      downloadedBytes: progress.transferred,
-      downloadSize: progress.total,
-      downloadSpeed: progress.bytesPerSecond,
-      diskWriteSpeed: progress.bytesPerSecond
-    }
-  }) */
 })
 
-let didNotRestart = false
-const showUpdateMessage = async () => {
+autoUpdater.on('update-downloaded', async () => {
   logInfo('App update is downloaded')
   const { response } = await dialog.showMessageBox({
     title: t('box.info.update.appUpdated', 'HyperPlay was updated'),
@@ -68,43 +56,20 @@ const showUpdateMessage = async () => {
   if (response === 1) {
     return autoUpdater.quitAndInstall()
   }
-
-  autoUpdater.autoInstallOnAppQuit = true
-  didNotRestart = true
-}
-
-const timeToShowUpdateMessageAgain = 24 * 60 * 60 * 1000
-autoUpdater.on('update-downloaded', async () => {
-  showUpdateMessage()
-  if (didNotRestart) {
-    // Schedule to show the message again after 24 hours if the user did not update
-    setTimeout(showUpdateMessage, timeToShowUpdateMessageAgain)
-  }
 })
-
-const MAX_UPDATE_ATTEMPTS = 5
-let updateAttempts = 0
 
 autoUpdater.on('error', async (error) => {
   if (!isOnline()) {
     return
   }
 
-  updateAttempts++
-
-  if (updateAttempts < MAX_UPDATE_ATTEMPTS) {
-    return
-  }
-
-  logError(
-    ['Failed to update after ' + MAX_UPDATE_ATTEMPTS + ' attempts: ', error],
-    LogPrefix.Backend
-  )
   const { response } = await dialog.showMessageBox({
     title: t('box.error.update.title', 'Error Updating'),
     message: t(
       'box.error.update.message',
-      'Something went wrong with the update after multiple attempts! Please manually uninstall and reinstall HyperPlay.'
+      `Something went wrong with the update after multiple attempts! Please manually uninstall and reinstall HyperPlay. error: ${JSON.stringify(
+        error
+      )}`
     ),
     type: 'error',
     buttons: [t('button.cancel', 'Cancel'), t('button.download', 'Download')]
@@ -113,6 +78,4 @@ autoUpdater.on('error', async (error) => {
   if (response === 1) {
     shell.openExternal('https://www.hyperplay.xyz/downloads')
   }
-
-  updateAttempts = 0
 })
