@@ -2,21 +2,26 @@ import { dialog, shell } from 'electron'
 import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
-import { icon } from './constants'
+import { configStore, icon } from './constants'
 import { logError, LogPrefix, logInfo } from './logger/logger'
 import { isOnline } from './online_monitor'
 
-autoUpdater.autoDownload = true
+const appSettings = configStore.get_nodefault('settings')
+const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
+
+autoUpdater.autoDownload = shouldCheckForUpdates
 autoUpdater.autoInstallOnAppQuit = false
 
 // check for updates every 6 hours
 const interval = 1000 * 60 * 60 * 6
 setInterval(() => {
-  autoUpdater.checkForUpdates()
+  if (shouldCheckForUpdates) {
+    autoUpdater.checkForUpdates()
+  }
 }, interval)
 
 autoUpdater.on('update-available', async () => {
-  if (!isOnline()) {
+  if (!isOnline() || !shouldCheckForUpdates) {
     return
   }
 
