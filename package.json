@@ -361,6 +361,14 @@
     "vite": "^5.2.8",
     "vite-plugin-svgr": "^2.2.2"
   },
+  "optionalDependencies": {
+    "@hyperplay/extension-importer": "^0.0.4",
+    "@hyperplay/extension-provider": "^0.0.6",
+    "@hyperplay/mock-backend": "^0.0.1",
+    "@hyperplay/overlay": "^0.0.6",
+    "@hyperplay/providers": "^0.0.5",
+    "@hyperplay/proxy-server": "^0.0.11"
+  },
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
     "allowScripts": {

@@ -263,8 +263,8 @@ function WebView() {
 
   let partitionForWebview = 'persist:epicstore'
 
-  if (urlIsHpUrl(startUrl) || pathname === '/game7Portal')
-    partitionForWebview = 'persist:hyperplaystore'
+  if (pathname === '/game7Portal') partitionForWebview = 'persist:g7portal'
+  if (urlIsHpUrl(startUrl)) partitionForWebview = 'persist:hyperplaystore'
   else if (shouldInjectProvider(startUrl))
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 
