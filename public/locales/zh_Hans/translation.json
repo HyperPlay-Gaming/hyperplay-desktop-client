@@ -989,7 +989,14 @@
         },
         "View Game": "观点",
         "pointsClaimed": "要求",
-        "g7Numclaimed": "索赔总额"
+        "g7Numclaimed": "索赔总额",
+        "claimWarning": {
+            "body2": "否则,查询退款<bold>将到期,不再可以索偿",
+            "title": "1. 查询要求",
+            "body": "<bold>IMPORTANT:</bold> 请确保你在{{networkName}}网络上分配足够的天然气,以便在24小时内成功确认<bold>",
+            "confirm": "确认",
+            "cancel": "取消"
+        }
     },
     "quests": {
         "quests": "任务",

@@ -976,7 +976,14 @@
         "claimed": "Diklaim",
         "connectSteamAccount": "Hubungkan akun tim",
         "pointsClaimed": "Poin Diklaim",
-        "g7Numclaimed": "Total Kredit G7 Klaim"
+        "g7Numclaimed": "Total Kredit G7 Klaim",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Harap pastikan bahwa Anda mengalokasikan cukup gas di jaringan {{networkName}} untuk transaksi yang berhasil dikonfirmasi <bold> dalam 24 jam. </bold>",
+            "body2": "Jika tidak, Quest Reward <bold> akan berakhir dan tidak akan lagi dapat diklaim.</bold>",
+            "title": "Konfirmasi Klaim Reward Quest",
+            "cancel": "Batal",
+            "confirm": "Konfirmasikan"
+        }
     },
     "notification": {
         "wine-download": {

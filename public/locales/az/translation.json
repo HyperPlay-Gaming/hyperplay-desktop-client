@@ -928,7 +928,14 @@
         "reputation": "İdman",
         "notEnoughGas": "Qeydli cüzdan balıqları ilə mükafat iddia etmək. Retrying əvvəl bir cüzdan və ya yeniləyin.",
         "pointsClaimed": "Qeydiyyat",
-        "g7Numclaimed": "Xüsusi G7 Kreditlər"
+        "g7Numclaimed": "Xüsusi G7 Kreditlər",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT: </bold> Qeydiyyatdan keçmək üçün {{networkName}} şəhərində əvvəl qəbul olunmasını təmin edin <bold> 24 hrs </bold>",
+            "body2": "Aksi halde, Quest mükafatı <bold> sona çatacaq və artıq iddia edəcək.</bold>",
+            "title": "Proqramlar",
+            "cancel": "Ləğv et",
+            "confirm": "Təsdiqlə"
+        }
     },
     "profile": "Profil",
     "importGameErrorMessageExecutable": "Oyuncaq tapmaq mümkün deyil",

@@ -938,7 +938,14 @@
         "createDiscordTicket": "Creato biglietto Discord",
         "notEnoughGas": "Bilancio portafoglio insufficiente per rivendicare la vostra ricompensa a causa di costi di gas. Prova un portafoglio diverso o ricostituisci questo prima di riprovare.",
         "pointsClaimed": "Punti dichiarati",
-        "g7Numclaimed": "Crediti totali dichiarati G7"
+        "g7Numclaimed": "Crediti totali dichiarati G7",
+        "claimWarning": {
+            "body": "<bold>IMPORTANTE:</bold> Si prega di garantire che si sta allocando abbastanza gas sulla rete {{networkName}} per la transazione da confermare con successo <bold> entro 24 ore.</bold>",
+            "body2": "Altrimenti, la Quest Reward <bold> scadrà e non sarà più reclamabile.</bold>",
+            "title": "Confermare la richiesta di rimborso",
+            "cancel": "Annulla",
+            "confirm": "Conferma"
+        }
     },
     "quests": {
         "quests": "Missioni",

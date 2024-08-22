@@ -33,7 +33,11 @@
         "points": "mga puntos",
         "reward": "gantimpala",
         "signIn": "Mag-sign in",
-        "active": "Aktibo"
+        "active": "Aktibo",
+        "claimWarning": {
+            "cancel": "Kanselahin",
+            "confirm": "Kumpirmahin"
+        }
     },
     "setting": {
         "library_top_option": {
@@ -76,7 +80,8 @@
     },
     "tray": {
         "about": "Tungkol sa",
-        "quit": "Isara"
+        "quit": "Isara",
+        "show": "Ipakita"
     },
     "userselector": {
         "logIn": "Mag-log in",

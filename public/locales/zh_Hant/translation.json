@@ -974,7 +974,14 @@
         "needMoreAchievements": "您需要完成其中一项比赛的{{percent}}%成就.",
         "View Game": "观点",
         "pointsClaimed": "要求",
-        "g7Numclaimed": "索赔总额"
+        "g7Numclaimed": "索赔总额",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> 请确保你在{{networkName}}网络上分配足够的天然气,以便在24小时内成功确认<bold>",
+            "body2": "否则,查询退款<bold>将到期,不再可以索偿",
+            "title": "1. 查询要求",
+            "cancel": "取消",
+            "confirm": "確認"
+        }
     },
     "sideload": {
         "warningMessage": "側載遊戲是專為開發人員和有經驗的高級用戶提供的功能。側載包含惡意軟件的安裝程序可能會危及你的電腦並導致資金被盜。",

@@ -1022,7 +1022,14 @@
         "connectSteamAccount": "Forbind team-konto",
         "points": "Punkter",
         "pointsClaimed": "Punkter Kraved",
-        "g7Numclaimed": "Samlet krav G7 Credits"
+        "g7Numclaimed": "Samlet krav G7 Credits",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Sørg for, at du er allocating nok gas på {{networkName}} netværket for transaktionen, der skal bekræftes <bold>within 24 timer.</bold>",
+            "body2": "Ellers udløber Quest Reward <bold>, og vil ikke længere kunne påberåbe sig",
+            "title": "Bekræft belønningskrav",
+            "cancel": "Annuller",
+            "confirm": "Bekræft"
+        }
     },
     "importGameErrorMessageExecutable": "Spil spil Udførelse ikke fundet, import af spil er ikke muligt",
     "exit_game": "Afslut spil",

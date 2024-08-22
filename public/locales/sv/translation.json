@@ -928,7 +928,14 @@
         "createDiscordTicket": "Skapad Discord biljett",
         "notEnoughGas": "Otillräcklig plånboksbalans för att hävda din belöning på grund av gasavgifter. Prova en annan plånbok eller fylla på den här innan du går tillbaka.",
         "pointsClaimed": "Poäng som krävs",
-        "g7Numclaimed": "Totalkrav G7 Credits"
+        "g7Numclaimed": "Totalkrav G7 Credits",
+        "claimWarning": {
+            "body2": "Annars kommer Quest Reward <bold> att upphöra och kommer inte längre att krävas",
+            "title": "Bekräfta Quest Reward Claim",
+            "body": "<bold> VIKTIGT: </bold> Se till att du allokerar tillräckligt med gas på {{networkName}}-nätverket för att transaktionen ska bekräftas framgångsrikt <bold> inom 24 timmar",
+            "confirm": "Bekräfta",
+            "cancel": "Avbryt"
+        }
     },
     "ALL": "ALLA",
     "analytics": "Analytics",

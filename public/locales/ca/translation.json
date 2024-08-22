@@ -921,7 +921,14 @@
         "createDiscordTicket": "Entrada Restaurar contrasenya oblidada",
         "notEnoughGas": "Insuficient equilibri cartera per reclamar la seva recompensa a causa de les taxes de gas. Proveu una cartera diferent o torneu-la a repetir.",
         "pointsClaimed": "Punts Reclamats",
-        "g7Numclaimed": "Total Reclamats G7 Crèdits"
+        "g7Numclaimed": "Total Reclamats G7 Crèdits",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Si us plau, assegureu-vos que està assignant prou gas a la xarxa {{networkName}} per a la transacció per confirmar amb èxit <bold> dins de 24 hrs.</bold>",
+            "body2": "En cas contrari, el premi Quest <bold> caducarà i deixarà de ser reclamable.</bold>",
+            "title": "Confirmeu la reclamació de recompenses",
+            "cancel": "Cancel·lar",
+            "confirm": "Confirmar"
+        }
     },
     "ALL": "TOT",
     "gameRelease": {

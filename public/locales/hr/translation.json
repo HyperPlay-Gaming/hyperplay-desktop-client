@@ -749,7 +749,11 @@
         },
         "points": "Točke",
         "signIn": "Prijavi se",
-        "sync": "Sinkronizacija"
+        "sync": "Sinkronizacija",
+        "claimWarning": {
+            "cancel": "Odustani",
+            "confirm": "Potvrdi"
+        }
     },
     "accounts": "Konta",
     "ALL": "SVE",
