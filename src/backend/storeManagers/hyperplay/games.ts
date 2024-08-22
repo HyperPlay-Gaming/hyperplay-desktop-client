@@ -815,7 +815,7 @@ export async function install(
   try {
     const gameInfo = getGameInfo(appName)
     const { title, account_name } = gameInfo
-    const isMarketWars = account_name === 'marketWars'
+    const isMarketWars = account_name === 'marketwars'
     if (isMarketWars && modOptions?.zipFilePath) {
       await prepareBaseGameForModding({
         appName,

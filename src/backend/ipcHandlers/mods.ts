@@ -10,9 +10,12 @@ import {
   calculateProgress,
   getDestinationPath
 } from 'backend/storeManagers/hyperplay/games'
+import { copyRecursiveSync } from 'backend/utils'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
+import { readdirSync, rmSync } from 'graceful-fs'
 
 import i18next from 'i18next'
+import path from 'path'
 
 const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
 
@@ -72,8 +75,7 @@ export async function prepareBaseGameForModding({
     LogPrefix.HyperPlay
   )
   const extractService = new ExtractZipService(zipFile, dirPath, {
-    deleteOnEnd: false,
-    preserveStructure: false
+    deleteOnEnd: false
   })
 
   inProgressExtractionsMap.set('baseGameForModding', extractService)
@@ -148,6 +150,28 @@ export async function prepareBaseGameForModding({
           folder: dirPath,
           status: 'done'
         })
+
+        // move contents of the extracted folder to the destination path
+        // get the last part of the zip file path
+        const extractedFolder = path
+          .basename(extractService.source)
+          .replace('.zip', '')
+        const extractedFolderFullPath = path.join(dirPath, extractedFolder)
+
+        logInfo(
+          `Moving contents of ${extractedFolder} to ${dirPath}`,
+          LogPrefix.HyperPlay
+        )
+
+        // move contents of the extracted folder to the destination path
+        readdirSync(extractedFolderFullPath).forEach((file) => {
+          const srcPath = path.join(extractedFolderFullPath, file)
+          const destPath = path.join(dirPath, file)
+          copyRecursiveSync(srcPath, destPath)
+        })
+
+        // remove the extracted folder
+        rmSync(extractedFolderFullPath, { recursive: true, force: true })
 
         notify({
           title: i18next.t(

@@ -49,7 +49,7 @@ export default React.memo(function InstallModal({
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
   const [crossoverBottle, setCrossoverBottle] = useState('')
-  const [accessCode, setAccessCode] = useState('')
+  const [accessCode, setAccessCode] = useState('IHZ0R1DKPZJF')
 
   const numberOfChannels =
     (gameInfo?.channels && Object.keys(gameInfo?.channels).length) ?? 0
