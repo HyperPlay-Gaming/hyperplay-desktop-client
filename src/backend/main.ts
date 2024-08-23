@@ -185,7 +185,7 @@ import {
   getEpicListingUrl,
   getHyperPlayReleaseObject
 } from './storeManagers/hyperplay/utils'
-import { postPlaySessionTime } from './utils/quests'
+import { checkG7ConnectionStatus, postPlaySessionTime } from './utils/quests'
 
 import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
 
@@ -266,8 +266,16 @@ async function completeHyperPlayQuest() {
   if (!completeHpSummonQuestIsActive) {
     return
   }
-  logInfo('Completing HyperPlay Quest', LogPrefix.Backend)
+  logInfo('Completing HyperPlay Quest', LogPrefix.HyperPlay)
   try {
+    const isConnected = await checkG7ConnectionStatus()
+    if (!isConnected) {
+      logInfo(
+        'HyperPlay account is not connected to Game7 Account',
+        LogPrefix.HyperPlay
+      )
+    }
+
     const cookieString = await getPartitionCookies({
       partition: 'persist:auth',
       url: DEV_PORTAL_URL
@@ -286,7 +294,7 @@ async function completeHyperPlayQuest() {
         `Failed to complete summon task: ${
           error?.message ?? response.statusText
         }`,
-        LogPrefix.Backend
+        LogPrefix.HyperPlay
       )
       trackEvent({
         event: 'HyperPlay Summon Quest Failed'

@@ -1,16 +1,13 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
-import useCheckG7ConnectionStatus from './useCheckG7ConnectionStatus'
 
-export default function useGetG7UserCredits() {
+export default function useCheckG7ConnectionStatus() {
   const queryClient = useQueryClient()
-  const isConnectedToG7 = useCheckG7ConnectionStatus()
-  const queryKey = `useGetG7UserCredits`
-  const query = useQuery<string>({
+  const queryKey = `checkG7ConnectionStatus`
+  const query = useQuery<boolean>({
     queryKey: [queryKey],
     queryFn: async () => {
-      if (!isConnectedToG7) return ''
-      const response = await window.api.getG7Credits()
-      if (!response) return ''
+      const response = await window.api.checkG7ConnectionStatus()
+      if (!response) return false
       return response
     },
     refetchOnWindowFocus: false
