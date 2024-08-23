@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.18.0",
+  "version": "0.18.1",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -54,8 +54,7 @@
       ],
       "files": [
         "build/bin/win32/*"
-      ],
-      "verifyUpdateCodeSignature": false
+      ]
     },
     "portable": {
       "artifactName": "${productName}-${version}-Portable-${arch}.${ext}"
