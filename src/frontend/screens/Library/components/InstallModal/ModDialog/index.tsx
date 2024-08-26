@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { GameInfo } from 'common/types'
+import React, { useContext, useState } from 'react'
+import { GameInfo, WineInstallation } from 'common/types'
 import { DialogHeader, DialogContent } from 'frontend/components/UI/Dialog'
 import { useTranslation } from 'react-i18next'
 
@@ -12,6 +12,7 @@ import { Button, Images } from '@hyperplay/ui'
 import { install } from 'frontend/helpers'
 import { signSiweMessage } from 'frontend/helpers/library'
 import { downloadLinks } from './constants'
+import ContextProvider from 'frontend/state/ContextProvider'
 
 interface Props {
   backdropClick: () => void
@@ -20,6 +21,9 @@ interface Props {
   children: React.ReactNode
   requiresToken: boolean
   enableCTAButton: boolean
+  winePrefix: string
+  crossoverBottle: string
+  wineVersion: WineInstallation | undefined
 }
 
 const userHome = configStore.get('userHome', '')
@@ -36,13 +40,19 @@ const ModDialog: React.FC<Props> = ({
   children,
   accessCode,
   requiresToken,
-  enableCTAButton
+  enableCTAButton,
+  winePrefix,wineVersion,crossoverBottle
 }) => {
   const { t } = useTranslation()
   const [zipFilePath, setZipFilePath] = useState<string>('')
   const [installPath, setInstallPath] = useState<string>(
     getDefaultInstallPath()
   )
+
+  const { platform } =
+  useContext(ContextProvider)
+
+const isWin = platform === 'win32'
 
   const { title, app_name: appName } = gameInfo
 
@@ -80,6 +90,23 @@ const ModDialog: React.FC<Props> = ({
     if (requiresToken) {
       siweValues = await signSiweMessage()
     }
+
+        // Write Default game config with prefix on linux
+        if (!isWin) {
+          const gameSettings = await window.api.requestGameSettings(appName)
+    
+          if (wineVersion) {
+            window.api.writeConfig({
+              appName,
+              config: {
+                ...gameSettings,
+                winePrefix,
+                wineVersion,
+                wineCrossoverBottle: crossoverBottle
+              }
+            })
+          }
+        }
 
     await install({
       gameInfo,

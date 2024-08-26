@@ -49,7 +49,7 @@ export default React.memo(function InstallModal({
   const [wineVersion, setWineVersion] = useState<WineInstallation>()
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
   const [crossoverBottle, setCrossoverBottle] = useState('')
-  const [accessCode, setAccessCode] = useState('IHZ0R1DKPZJF')
+  const [accessCode, setAccessCode] = useState('')
 
   const numberOfChannels =
     (gameInfo?.channels && Object.keys(gameInfo?.channels).length) ?? 0
@@ -291,6 +291,10 @@ export default React.memo(function InstallModal({
             accessCode={accessCode}
             requiresToken={channelRequiresToken}
             enableCTAButton={enableCTAButton}
+            winePrefix={winePrefix}
+            wineVersion={wineVersion}
+            crossoverBottle={crossoverBottle}
+
           >
             {runner === 'hyperplay' && numberOfChannels > 1 ? (
               <ChannelNameSelection
@@ -302,6 +306,18 @@ export default React.memo(function InstallModal({
             {runner === 'hyperplay' && channelRequiresAccessCode
               ? accessCodeInput
               : null}
+            {hasWine ? (
+              <WineSelector
+                winePrefix={winePrefix}
+                wineVersion={wineVersion}
+                wineVersionList={wineVersionList}
+                title={gameInfo?.title}
+                setWinePrefix={setWinePrefix}
+                setWineVersion={setWineVersion}
+                crossoverBottle={crossoverBottle}
+                setCrossoverBottle={setCrossoverBottle}
+              />
+            ) : null}
           </ModDialog>
         )}
       </Dialog>
