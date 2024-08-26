@@ -124,6 +124,12 @@ const MetaMaskHome = function ({ path = 'home.html' }: MetaMaskHomeProps) {
         `document.querySelector('button.mm-box.mm-button-primary.mm-box--rounded-pill').click()`
       )
 
+      await wait(1000)
+      clickInWebview('popover-close')
+      webviewRef.current?.executeJavaScript(
+        `document.querySelector('button.mm-box.mm-button-primary.mm-box--rounded-pill').click()`
+      )
+
       for (let i = 0; i < 41; i++) {
         await clickInWebview('account-menu-icon')
         await clickInWebview('multichain-account-menu-popover-action-button')
