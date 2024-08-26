@@ -294,18 +294,19 @@ export default React.memo(function InstallModal({
             winePrefix={winePrefix}
             wineVersion={wineVersion}
             crossoverBottle={crossoverBottle}
-
           >
-            {runner === 'hyperplay' && numberOfChannels > 1 ? (
-              <ChannelNameSelection
-                channelNameToInstall={channelNameToInstall}
-                setChannelNameToInstall={setChannelNameToInstall}
-                gameInfo={gameInfo}
-              />
-            ) : null}
-            {runner === 'hyperplay' && channelRequiresAccessCode
-              ? accessCodeInput
-              : null}
+            <div style={{ paddingTop: 'var(--space-md)' }}>
+              {runner === 'hyperplay' && numberOfChannels > 1 ? (
+                <ChannelNameSelection
+                  channelNameToInstall={channelNameToInstall}
+                  setChannelNameToInstall={setChannelNameToInstall}
+                  gameInfo={gameInfo}
+                />
+              ) : null}
+              {runner === 'hyperplay' && channelRequiresAccessCode
+                ? accessCodeInput
+                : null}
+            </div>
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}

@@ -41,7 +41,9 @@ const ModDialog: React.FC<Props> = ({
   accessCode,
   requiresToken,
   enableCTAButton,
-  winePrefix,wineVersion,crossoverBottle
+  winePrefix,
+  wineVersion,
+  crossoverBottle
 }) => {
   const { t } = useTranslation()
   const [zipFilePath, setZipFilePath] = useState<string>('')
@@ -49,10 +51,9 @@ const ModDialog: React.FC<Props> = ({
     getDefaultInstallPath()
   )
 
-  const { platform } =
-  useContext(ContextProvider)
+  const { platform } = useContext(ContextProvider)
 
-const isWin = platform === 'win32'
+  const isWin = platform === 'win32'
 
   const { title, app_name: appName } = gameInfo
 
@@ -91,22 +92,22 @@ const isWin = platform === 'win32'
       siweValues = await signSiweMessage()
     }
 
-        // Write Default game config with prefix on linux
-        if (!isWin) {
-          const gameSettings = await window.api.requestGameSettings(appName)
-    
-          if (wineVersion) {
-            window.api.writeConfig({
-              appName,
-              config: {
-                ...gameSettings,
-                winePrefix,
-                wineVersion,
-                wineCrossoverBottle: crossoverBottle
-              }
-            })
+    // Write Default game config with prefix on linux
+    if (!isWin) {
+      const gameSettings = await window.api.requestGameSettings(appName)
+
+      if (wineVersion) {
+        window.api.writeConfig({
+          appName,
+          config: {
+            ...gameSettings,
+            winePrefix,
+            wineVersion,
+            wineCrossoverBottle: crossoverBottle
           }
-        }
+        })
+      }
+    }
 
     await install({
       gameInfo,
@@ -151,15 +152,15 @@ const isWin = platform === 'win32'
                 'Download World of Warcraft 3.3.5a'
               )}
             </div>
-            <p className={styles.stepDescription}>
+            <span className={styles.stepDescription}>
               {t('mods.instructions.step1.description', {
                 defaultValue:
                   'This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from several external sources:',
                 newline: '\n'
               })}
-            </p>
+            </span>
             <ul className={styles.sourceList}>
-{/*               <li className={styles.sourceItem}>
+              {/*               <li className={styles.sourceItem}>
                 <a
                   className={styles.sourceLink}
                   href={downloadLinks[appName]?.webtorrent ?? ''}
@@ -176,7 +177,7 @@ const isWin = platform === 'win32'
                   )}
                 </a>
               </li> */}
-{/*               <li className={styles.sourceItem}>
+              {/*               <li className={styles.sourceItem}>
                 <div className={styles.magnetContainer}>
                   <a
                     href={downloadLinks[appName]?.magnet ?? ''}
@@ -213,7 +214,7 @@ const isWin = platform === 'win32'
                   {t('mods.instructions.step1.chromieCraft', 'ChromieCraft')}
                 </a>
               </li>
-{/*               <li className={styles.sourceItem}>
+              {/*               <li className={styles.sourceItem}>
                 <a
                   href={downloadLinks[appName]?.archiveOrg ?? ''}
                   className={styles.sourceLink}
@@ -239,6 +240,13 @@ const isWin = platform === 'win32'
                 'Select World of Warcraft 3.3.5a.zip File'
               )}
             </div>
+            <span className={styles.stepDescription}>
+              {t('mods.instructions.step2.description', {
+                defaultValue:
+                  'Select the downloaded World of Warcraft 3.3.5a.zip file.',
+                newline: '\n'
+              })}
+            </span>
             <TextInputWithIconField
               htmlId="setzippath"
               label={t(
@@ -267,6 +275,13 @@ const isWin = platform === 'win32'
                 'Select Installation Folder'
               )}
             </div>
+            <span className={styles.stepDescription}>
+              {t('mods.instructions.step3.description', {
+                defaultValue:
+                  'Please choose the folder where World of Warcraft: Wrath of the Lich King (3.3.5a) should be installed.',
+                newline: '\n'
+              })}
+            </span>
             <TextInputWithIconField
               htmlId="setinstallpath"
               label={t('install.path', 'Select Install Path')}
@@ -279,20 +294,27 @@ const isWin = platform === 'win32'
             />
           </div>
 
-          {children !== null && 
-          <div className={styles.step} style={{paddingBottom: 'var(--space-xl-fixed)'}}>
-            <div className={styles.stepTitle}>
-              {t('mods.instructions.step4.title', 'Step 4')}
-            </div>
-            <div className={styles.stepSubtitle}>
-              {t(
-                'mods.instructions.step4.subtitle',
-                'Access Code'
-              )}
+          {children !== null && (
+            <div
+              className={styles.step}
+              style={{ paddingBottom: 'var(--space-xl-fixed)' }}
+            >
+              <div className={styles.stepTitle}>
+                {t('mods.instructions.step4.title', 'Step 4')}
+              </div>
+              <div className={styles.stepSubtitle}>
+                {t('mods.instructions.step4.subtitle', 'Access Code')}
+              </div>
+              <span className={styles.stepDescription}>
+                {t('mods.instructions.step4.description', {
+                  defaultValue:
+                    'Enter the access code to proceed with installing the game.',
+                  newline: '\n'
+                })}
+              </span>
               {children}
             </div>
-          </div>
-          }
+          )}
 
           <Button
             type="secondary"
@@ -309,7 +331,7 @@ const isWin = platform === 'win32'
             style={{ width: '100%' }}
           >
             <div className="button-sm color-neutral-100">
-              {t('mods.instructions.step3.install', 'Install')}
+              {t('button.install', 'Install')}
             </div>
           </Button>
         </div>
