@@ -412,14 +412,14 @@ export default function DownloadDialog({
   }
 
   async function handleInstallPathSelection() {
-      return window.api
-        .openDialog({
-          buttonLabel: t('box.choose'),
-          properties: ['openDirectory'],
-          title: t('install.path'),
-          defaultPath: getDefaultInstallPath()
-        })
-        .then((path) => setInstallPath(path || getDefaultInstallPath()))
+    return window.api
+      .openDialog({
+        buttonLabel: t('box.choose'),
+        properties: ['openDirectory'],
+        title: t('install.path'),
+        defaultPath: getDefaultInstallPath()
+      })
+      .then((path) => setInstallPath(path || getDefaultInstallPath()))
   }
 
   const isWebGame = gameInstallInfo?.game['name'] === 'web'
