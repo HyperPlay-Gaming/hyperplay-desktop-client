@@ -1017,10 +1017,13 @@ async function callRunner(
   return promise
 }
 
-async function stopChildProcesses(
-  childPid: number,
-  shouldLog: boolean = false
-) {
+async function stopChildProcesses({
+  childPid,
+  shouldLog = false
+}: {
+  childPid: number
+  shouldLog?: boolean
+}) {
   if (isWindows) {
     logWarning(
       `Killing all processes spawned by PID ${childPid}`,
@@ -1038,7 +1041,7 @@ async function stopChildProcesses(
 
         if (result.stderr) {
           if (shouldLog) {
-            logError(
+            logDebug(
               `Error getting child processes: ${result.stderr}`,
               LogPrefix.Backend
             )
@@ -1068,7 +1071,7 @@ async function stopChildProcesses(
 
         if (stopResult.stderr) {
           if (shouldLog) {
-            logError(
+            logDebug(
               `Error stopping process with PID ${parentPid}: ${stopResult.stderr}`,
               LogPrefix.Backend
             )
@@ -1086,7 +1089,7 @@ async function stopChildProcesses(
       stopProcessTree(childPid)
     } catch (error) {
       if (shouldLog) {
-        logError(
+        logDebug(
           `Error stopping child processes from PID: ${childPid}: ${error}`,
           LogPrefix.Backend
         )
