@@ -15,10 +15,9 @@ import {
   valistListingsApiUrl
 } from 'backend/constants'
 import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
-import { getGameInfo, getSettings } from './games'
+import { getGameInfo } from './games'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { join } from 'path'
-import { runWineCommand } from 'backend/launcher'
 import { existsSync } from 'graceful-fs'
 
 export async function getHyperPlayStoreRelease(
@@ -358,7 +357,8 @@ export const runModPatcher = async (appName: string) => {
     return
   }
 
-  const patcher = join(installPath, 'client-patcher.exe')
+  const patcherBinary = isWindows ? 'client-patcher.exe' : 'client-patcher'
+  const patcher = join(installPath, patcherBinary)
   const manifest = join(installPath, 'patch', 'manifest.json')
 
   logInfo(
@@ -371,34 +371,14 @@ export const runModPatcher = async (appName: string) => {
   }
 
   try {
-    if (!isWindows) {
-      const gameSettings = await getSettings(appName)
-      const { stderr, stdout } = await runWineCommand({
-        gameSettings,
-        commandParts: [
-          'client-patcher.exe',
-          'patch',
-          '-m',
-          'patch/manifest.json'
-        ],
-        wait: true,
-        protonVerb: 'waitforexitandrun',
-        startFolder: installPath
-      })
-      logInfo(['Patch Applied', stdout], LogPrefix.HyperPlay)
-      if (stderr) {
-        logError(stderr, LogPrefix.HyperPlay)
-      }
-    } else {
-      const { stderr, stdout } = await spawnAsync(
-        'client-patcher.exe',
-        ['patch', '-m', 'patch/manifest.json'],
-        { cwd: installPath }
-      )
-      logInfo(['Patch Applied', stdout], LogPrefix.HyperPlay)
-      if (stderr) {
-        logError(stderr, LogPrefix.HyperPlay)
-      }
+    const { stderr, stdout } = await spawnAsync(
+      patcherBinary,
+      ['patch', '-m', 'patch/manifest.json'],
+      { cwd: installPath }
+    )
+    logInfo(['Patch Applied', stdout], LogPrefix.HyperPlay)
+    if (stderr) {
+      logError(stderr, LogPrefix.HyperPlay)
     }
   } catch (error) {
     throw new Error(`Error running patcher: ${error}`)
