@@ -38,13 +38,8 @@ async function downloadAntiCheatData() {
       const data = getResult.data as unknown as AntiCheatInfo[]
       writeFileSync(anticheatDataPath, JSON.stringify(data, null, 2))
       initAcMap(data)
-
-      logInfo(`AreWeAntiCheatYet data downloaded`, LogPrefix.Backend)
     } catch (error) {
-      logWarning(
-        `Failed download of AreWeAntiCheatYet data: ${error}`,
-        LogPrefix.Backend
-      )
+      logWarning(`Failed download of AreWeAntiCheatYet data`, LogPrefix.Backend)
     }
   })
 }
