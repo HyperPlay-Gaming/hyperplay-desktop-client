@@ -375,11 +375,15 @@ const loadMainWindowURL = function () {
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(prodAppUrl)
-    autoUpdater.checkForUpdates().then((val) => {
-      logInfo(
-        `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
-      )
-    })
+    const appSettings = configStore.get_nodefault('settings')
+    const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
+    if (shouldCheckForUpdates) {
+      autoUpdater.checkForUpdates().then((val) => {
+        logInfo(
+          `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
+        )
+      })
+    }
   }
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
