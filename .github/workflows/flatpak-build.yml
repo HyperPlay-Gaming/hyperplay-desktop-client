@@ -53,7 +53,7 @@ jobs:
       - name: Build artifacts.
         run: yarn dist:linux:ci:flatpak
       - name: Clean up build files to save space
-        run: rm -rf build dist/linux-unpacked node_modules
+        run: rm -rf build dist/linux-unpacked node_modules public/bin/win32 public/bin/darwin ~/.cache
       - name: Install Axios
         run: yarn add axios
       - name: Prepare Flatpak
