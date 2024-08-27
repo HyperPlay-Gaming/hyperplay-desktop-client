@@ -167,7 +167,7 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/extension/provider'
-import 'backend/proxy/ipcHandlers.ts'
+import 'backend/proxy/ipcHandlers'
 
 import './ipcHandlers'
 import './ipcHandlers/checkDiskSpace'
