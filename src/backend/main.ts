@@ -47,8 +47,6 @@ import setup from './storeManagers/gog/setup'
 import {
   clearCache,
   execAsync,
-  getGOGdlBin,
-  getLegendaryBin,
   getPlatformName,
   getStoreName,
   isEpicServiceOffline,

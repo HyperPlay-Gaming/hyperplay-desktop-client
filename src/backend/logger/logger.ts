@@ -9,8 +9,6 @@ import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { appendMessageToLogFile, getLongestPrefix } from './logfile'
 import { backendEvents } from 'backend/backend_events'
 import { GlobalConfig } from 'backend/config'
-import { getGOGdlBin, getLegendaryBin } from 'backend/utils'
-import { join } from 'path'
 import { formatSystemInfo, getSystemInfo } from '../utils/systeminfo'
 import { getAuthSession } from 'backend/auth'
 
