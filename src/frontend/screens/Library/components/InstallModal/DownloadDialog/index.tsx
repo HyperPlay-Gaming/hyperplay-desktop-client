@@ -131,6 +131,7 @@ export default function DownloadDialog({
 
   const isWin = platform === 'win32'
   const isNotNative = platformToInstall === 'Windows' && !isWin
+  const isBrowserGame = platformToInstall === 'Browser'
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
     LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
@@ -546,7 +547,7 @@ export default function DownloadDialog({
           </SelectField>
         )}
 
-        <TextInputWithIconField
+{isBrowserGame ? null : <TextInputWithIconField
           htmlId="setinstallpath"
           label={t('install.path', 'Select Install Path')}
           placeholder={getDefaultInstallPath()}
@@ -609,7 +610,7 @@ export default function DownloadDialog({
               </span>
             ) : null
           }
-        />
+        />}
         {children}
         {haveSDL ? (
           <div className="InstallModal__sdls">
