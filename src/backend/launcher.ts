@@ -945,7 +945,7 @@ async function callRunner(
 
       // close processes created by this process
       if (childPid !== undefined) {
-        stopChildProcesses(childPid)
+        stopChildProcesses({ childPid })
       }
 
       if (signal && !child.killed) {
@@ -966,7 +966,7 @@ async function callRunner(
 
   abortController.signal.onabort = () => {
     if (childPid !== undefined) {
-      stopChildProcesses(childPid, isGame)
+      stopChildProcesses({ childPid, shouldLog: isGame })
     }
   }
 
@@ -978,7 +978,7 @@ async function callRunner(
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
         if (childPid !== undefined) {
-          stopChildProcesses(childPid)
+          stopChildProcesses({ childPid })
         }
         return {
           stdout: '',
