@@ -650,8 +650,7 @@ if (!gotTheLock) {
       }, 10000)
     }
 
-    // Will download Wine if none was found
-    // Call the initialization function at the appropriate place
+    // Setup the compatibility layer if not on Windows
     if (!isWindows) {
       initializeCompatibilityLayer()
     }

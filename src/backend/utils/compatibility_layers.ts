@@ -631,7 +631,7 @@ export async function downloadDefaultWine() {
     })
 
     if (!release) {
-      logError('Could not find default wine version', LogPrefix.Backend)
+      logError('Could not find any wine from list', LogPrefix.Backend)
       return null
     }
 
