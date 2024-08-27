@@ -861,80 +861,90 @@ export async function isMacSonomaOrHigher() {
 }
 
 export async function downloadDefaultWine() {
-  if (isWindows) {
-    return
-  }
-  // refresh wine list
-  await updateWineVersionInfos(false)
-  // get list of wines on wineDownloaderInfoStore
-  const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
+  if (isWindows) return
 
-  // use Wine-GE type if on Linux and GPTK or Wine-Crossover if on Mac
-  const isGPTKCompatible = isMac ? await isMacSonomaOrHigher() : false
-  const results = await Promise.all(
-    availableWine.map(async (version) => {
+  try {
+    // Refresh wine list
+    await updateWineVersionInfos(true)
+
+    // Get list of available wine versions
+    const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
+
+    // Determine the correct wine version based on platform and compatibility
+    const release = availableWine.find(async (version) => {
       if (isLinux) {
         return (
           version.type === 'Wine-GE' &&
           version.version.includes('Wine-GE-Proton')
         )
-      }
-
-      if (isMac) {
+      } else if (isMac) {
+        const isGPTKCompatible = await isMacSonomaOrHigher()
         return isGPTKCompatible
           ? version.type === 'Game-Porting-Toolkit'
           : version.type === 'Wine-Crossover'
       }
       return false
     })
-  )
 
-  const release = availableWine.filter((_, index) => results[index])[0]
+    if (!release) {
+      logError('Could not find default wine version', LogPrefix.Backend)
+      return null
+    }
 
-  if (!release) {
-    logError('Could not find default wine version', LogPrefix.Backend)
-    return null
-  }
-
-  // download the latest version
-  const onProgress = (state: State, progress?: ProgressInfo) => {
-    sendFrontendMessage('progressOfWineManager' + release.version, {
-      state,
-      progress
+    // Notify user and start download
+    notify({
+      title: i18next.t(
+        'notification.wine-download.title',
+        'Compatibility Layer'
+      ),
+      body: i18next.t(
+        'notification.wine-download.message',
+        'Setting up the default compatibility layer'
+      )
     })
-  }
 
-  notify({
-    title: i18next.t('notification.wine-download.title', 'Compatibility Layer'),
-    body: i18next.t(
-      'notification.wine-download.message',
-      'Setting up the default compatibility layer'
+    const onProgress = (state: State, progress?: ProgressInfo) => {
+      sendFrontendMessage(`progressOfWineManager${release.version}`, {
+        state,
+        progress
+      })
+    }
+
+    const abortController = createAbortController(release.version)
+    const result = await installWineVersion(
+      release,
+      onProgress,
+      abortController.signal
     )
-  })
 
-  const result = await installWineVersion(
-    release,
-    onProgress,
-    createAbortController(release.version).signal
-  )
-  deleteAbortController(release.version)
-  if (result === 'success') {
-    let downloadedWine = null
-    try {
-      const wineList = await GlobalConfig.get().getAlternativeWine()
-      // update the game config to use that wine
-      downloadedWine = wineList[0]
+    deleteAbortController(release.version)
+
+    if (result !== 'success') {
+      return null
+    }
+
+    // Update the game config to use the downloaded wine
+    const wineList = await GlobalConfig.get().getAlternativeWine()
+    const downloadedWine = wineList[0]
+
+    if (downloadedWine) {
       logInfo(`Changing wine version to ${downloadedWine.name}`)
       GlobalConfig.get().setSetting('wineVersion', downloadedWine)
-    } catch (error) {
-      logError(
-        ['Error when changing wine version to default', error],
-        LogPrefix.Backend
-      )
     }
+
     return downloadedWine
+  } catch (error) {
+    logError(['Error during wine download process', error], LogPrefix.Backend)
+    notify({
+      title: i18next.t('notification.wine-download-failed.title', 'Error'),
+      body: i18next.t(
+        'notification.wine-download-failed.message',
+        'Failed to setup the default compatibility layer'
+      )
+    })
+
+    return null
   }
-  return null
 }
 
 export async function setGPTKDefaultOnMacOS() {
