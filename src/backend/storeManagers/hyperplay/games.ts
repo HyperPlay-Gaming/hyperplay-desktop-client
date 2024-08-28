@@ -1359,7 +1359,7 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
 }
 
 export async function launch(appName: string): Promise<boolean> {
-  const isAvailable = isGameAvailable(appName)
+  const isAvailable = await isGameAvailable(appName)
 
   if (!isAvailable) {
     const { title } = getGameInfo(appName)
