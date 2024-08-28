@@ -29,16 +29,12 @@ ipcMain.handle('importGameFolder', async (ev, gameFolder) => {
         if (file_i.startsWith('0x') && file_i.endsWith('.json')) {
           logDebug(`Found manifest file ${filePath_i}`, LogPrefix.HyperPlay)
           const manifest = JSON.parse(readFileSync(filePath_i).toString())
-          if (
-            manifest &&
-            Object.hasOwn(manifest, 'manifest') &&
-            Object.hasOwn(manifest.manifest, 'appName')
-          ) {
-            const appName = manifest.manifest.appName
-            addGameToLibrary(appName)
-            importGame(appName, projectFolder_i)
-            atLeastOneGameImported = true
-          }
+          const appName =
+            manifest?.manifest?.appName || file_i.replace('.json', '')
+          logDebug(`app name to import ${appName}`, LogPrefix.HyperPlay)
+          await addGameToLibrary(appName)
+          await importGame(appName, projectFolder_i)
+          atLeastOneGameImported = true
         }
       }
     }
