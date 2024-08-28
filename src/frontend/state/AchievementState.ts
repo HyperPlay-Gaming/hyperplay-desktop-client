@@ -77,6 +77,7 @@ class AchievementState {
       {},
       {
         deep: true,
+        // @ts-expect-error - TS says this props doesn't exists
         proxy: false,
         name: 'AchievementState'
       }
