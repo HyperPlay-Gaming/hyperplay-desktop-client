@@ -1289,10 +1289,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/ui@^1.7.17":
-  version "1.7.17"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.7.17.tgz#e1680b5007eebcebf5d1544001f15d3a775dba63"
-  integrity sha512-NUNDJNBVxjij5dwIJ+kvOtiIZMWz/cvzAyQwjmXfOH/zeGc24MXkZQE6RKrHDcD06zKrEYWlcd6S+8ghQ6jM3w==
+"@hyperplay/ui@1.7.6":
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.7.6.tgz#e9487ff3834ea8b4d6c67304a94d2607ab349bd0"
+  integrity sha512-Kn/hyAeDqbUl3Gp6N3IRYBceI2OTSfdhvW07TjYHgv8X0vngsSq9S0jCFaNgl3Bu4wZnwmgkzyCnazPfFuQ5dg==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
