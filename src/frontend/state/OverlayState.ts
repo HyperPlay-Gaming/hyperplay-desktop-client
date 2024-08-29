@@ -25,7 +25,6 @@ class OverlayState implements OverlayStateInterface {
       {},
       {
         deep: true,
-        proxy: false,
         name: 'OverlayState'
       }
     )
