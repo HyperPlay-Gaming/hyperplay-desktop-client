@@ -167,7 +167,7 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/extension/provider'
-import 'backend/proxy/ipcHandlers.ts'
+import 'backend/proxy/ipcHandlers'
 
 import './ipcHandlers'
 import './ipcHandlers/checkDiskSpace'
@@ -1137,7 +1137,7 @@ ipcMain.handle('refreshLibrary', async (e, library?) => {
   } else {
     const allRefreshPromises = []
     for (const runner_i in libraryManagerMap) {
-      allRefreshPromises.push(libraryManagerMap[runner_i].refresh())
+      allRefreshPromises.push(libraryManagerMap[runner_i as Runner].refresh())
     }
     await Promise.allSettled(allRefreshPromises)
   }
