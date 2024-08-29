@@ -16,14 +16,12 @@ jobs:
       - name: echo ref name.
         run: echo "tag name ${{ github.ref_name }}"
       - name: Checkout repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
+
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'yarn'
       - name: Reconfigure git to use HTTP authentication
         run: >
