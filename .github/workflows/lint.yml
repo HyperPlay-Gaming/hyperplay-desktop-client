@@ -12,10 +12,7 @@ jobs:
       group: lint-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
           node-version: '20'

@@ -20,10 +20,8 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
+
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
@@ -56,10 +54,8 @@ jobs:
       - name: Install libarchive-tools for pacman build # Related https://github.com/electron-userland/electron-builder/issues/4181
         run: sudo apt-get install libarchive-tools
       - name: Checkout repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
+
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
@@ -88,10 +84,8 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
+
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
