@@ -258,6 +258,7 @@
   },
   "scripts": {
     "setup": "yarn install && yarn allow-scripts",
+    "setupWithoutOptional": "node ./dev/rmOptionalDependencies.js && yarn prettier-fix && yarn install --ignore-optional && yarn allow-scripts",
     "start": "electron-vite dev --watch",
     "debug:react": "react-devtools",
     "codecheck": "tsc --noEmit",
