@@ -967,7 +967,14 @@
         "sync": "Synchronizácia",
         "connectSteamAccount": "Pripojiť tímový účet",
         "pointsClaimed": "Body Reklamované",
-        "g7Numclaimed": "Celkový nárok na G7 kredity"
+        "g7Numclaimed": "Celkový nárok na G7 kredity",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Prosím, uistite sa, že ste pridelenie dostatok plynu na {{networkName}} sieť pre transakciu byť úspešne potvrdená <bold> do 24 hodín.</bold>",
+            "title": "Potvrdiť Quest Reward reklamáciu",
+            "body2": "V opačnom prípade Quest Reward <bold> vyprší a už nebude nárokovať.</bold>",
+            "confirm": "Potvrdiť",
+            "cancel": "Zrušiť"
+        }
     },
     "quests": {
         "playstreak": {

@@ -748,7 +748,11 @@
         },
         "points": "Пункты",
         "signIn": "Увайсці",
-        "sync": "Сінхранізаваць"
+        "sync": "Сінхранізаваць",
+        "claimWarning": {
+            "cancel": "Адмяніць",
+            "confirm": "Пацвердзіць"
+        }
     },
     "accounts": "акаўнты",
     "gameRelease": {

@@ -735,7 +735,11 @@
         },
         "points": "Punktid",
         "signIn": "Logi sisse",
-        "sync": "Sünkroonimine"
+        "sync": "Sünkroonimine",
+        "claimWarning": {
+            "cancel": "Loobu",
+            "confirm": "Kinnita"
+        }
     },
     "accounts": "Kontod",
     "ALL": "Kõik",

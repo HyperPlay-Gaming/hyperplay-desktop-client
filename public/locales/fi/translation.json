@@ -791,7 +791,14 @@
         "quests": "Quests",
         "View Game": "Näkymä pelistä",
         "pointsClaimed": "Väitetyt pisteet",
-        "g7Numclaimed": "G7-luottoja yhteensä"
+        "g7Numclaimed": "G7-luottoja yhteensä",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT: </bold> Varmista, että olet jakanut tarpeeksi kaasua {{networkName}}-verkossa, jotta transaktio voidaan varmistaa onnistuneesti 24 tunnin sisällä",
+            "title": "Confirm Quest Reward Väitteet",
+            "body2": "Muussa tapauksessa Quest Reward (X28X) päättyy, eikä sitä enää voi vaatia",
+            "cancel": "Peruuta",
+            "confirm": "Vahvista"
+        }
     },
     "gameRelease": {
         "main": "Oletus",

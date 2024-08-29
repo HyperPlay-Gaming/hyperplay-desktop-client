@@ -1006,7 +1006,14 @@
         "notEnoughGas": "Balança de carteira insuficiente para reclamar sua recompensa devido a taxas de gás. Tente uma carteira diferente ou reabastecer esta antes de retentar.",
         "createDiscordTicket": "Criar ticket no Discord",
         "pointsClaimed": "Pontos Vistos",
-        "g7Numclaimed": "Total Claimed G7 Créditos"
+        "g7Numclaimed": "Total Claimed G7 Créditos",
+        "claimWarning": {
+            "body": "<bold> IMPORTANTE:</bold> Certifique-se de que você está alocando gás suficiente na rede {{networkName}} para que a transação seja confirmada com sucesso <bold> em 24 horas",
+            "body2": "Caso contrário, a Recompensa de Busca <bold> expirará e não será mais reivindicada.</bold>",
+            "title": "Confirme Quest Reward Claim",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar"
+        }
     },
     "profile": "Perfil",
     "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas",

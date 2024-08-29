@@ -10,13 +10,7 @@ import useGetQuest from 'frontend/hooks/useGetQuest'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
-import {
-  http,
-  useAccount,
-  useBalance,
-  useSwitchChain,
-  useWriteContract
-} from 'wagmi'
+import { http, useAccount, useSwitchChain, useWriteContract } from 'wagmi'
 import { ConfirmClaimParams, Reward, RewardClaimSignature } from 'common/types'
 import authState from 'frontend/state/authState'
 import { mintReward } from './rewards/mintReward'
@@ -36,6 +30,18 @@ import { InfoAlertProps } from '@hyperplay/ui/dist/components/AlertCard'
 import { useSyncPlaySession } from 'frontend/hooks/useSyncInterval'
 import { useTrackQuestViewed } from 'frontend/hooks/useTrackQuestViewed'
 import { ConfirmClaimModal } from './components/ConfirmClaimModal'
+import { RewardClaimError } from 'backend/metrics/types'
+import { getBalance } from '@wagmi/core'
+import { config } from 'frontend/config'
+
+class ClaimError extends Error {
+  properties: RewardClaimError['properties']
+
+  constructor(message: string, properties: RewardClaimError['properties']) {
+    super(message)
+    this.properties = properties
+  }
+}
 
 export interface QuestDetailsWrapperProps {
   selectedQuestId: number | null
@@ -62,7 +68,6 @@ async function getRewardClaimGasEstimation(reward: Reward) {
   const viemChain = parseChainMetadataToViemChain(chainMetadata)
 
   const publicClient = createPublicClient({
-    // @ts-expect-error: chain types are valid
     chain: viemChain,
     transport: http()
   })
@@ -114,7 +119,6 @@ export function QuestDetailsWrapper({
   const flags = useFlags()
   const account = useAccount()
   const [showWarning, setShowWarning] = useState(false)
-  const { data: walletBalance } = useBalance({ address: account?.address })
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
   const [warningMessage, setWarningMessage] = useState<string>()
@@ -276,14 +280,16 @@ export function QuestDetailsWrapper({
       return
     }
 
-    if (!walletBalance) {
-      throw Error('Wallet balance not available')
-    }
-
     await switchChainAsync({ chainId: reward.chain_id })
 
     const gasNeeded = await getRewardClaimGasEstimation(reward)
+    const walletBalance = await getBalance(config, {
+      address: account.address,
+      chainId: reward.chain_id
+    })
     const hasEnoughBalance = walletBalance.value >= gasNeeded
+
+    window.api.logInfo(`Current wallet gas: ${walletBalance.value}`)
 
     if (!hasEnoughBalance) {
       window.api.logError(
@@ -371,13 +377,9 @@ export function QuestDetailsWrapper({
             break
         }
       } catch (err) {
-        const errMsg = `${err}`
-        console.error(errMsg)
-        window.api.trackEvent({
-          event: 'Reward Claim Error',
-          properties
-        })
+        throw new ClaimError(`${err}`, properties)
       }
+
       window.api.trackEvent({
         event: 'Reward Claim Success',
         properties
@@ -393,6 +395,13 @@ export function QuestDetailsWrapper({
       await questPlayStreakResult.invalidateQuery()
     },
     onError: (error) => {
+      if (error instanceof ClaimError) {
+        window.api.trackEvent({
+          event: 'Reward Claim Error',
+          properties: error.properties
+        })
+      }
+      console.error('Error claiming rewards:', error)
       window.api.logError(`Error claiming rewards: ${error}`)
     }
   })

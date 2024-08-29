@@ -1015,7 +1015,14 @@
         "sync": "Синхронізувати",
         "connectSteamAccount": "Підключити аккаунт команди",
         "pointsClaimed": "Окуляри Claimed",
-        "g7Numclaimed": "Загальний кредит G7"
+        "g7Numclaimed": "Загальний кредит G7",
+        "claimWarning": {
+            "body2": "В іншому випадку, Quest Reward <bold>will expire і більше не буде вимагати </bold>",
+            "title": "Підтвердити Quest Reward Claim",
+            "body": "<bold>IMPORTANT:</bold> Ми гарантуємо, що ви зносите достатній газ на мережі {{networkName}} для здійснення операції, щоб бути успішно підтверджено <bold> з 24 годин</bold>",
+            "confirm": "Прийняти",
+            "cancel": "Скасувати"
+        }
     },
     "quests": {
         "playstreak": {

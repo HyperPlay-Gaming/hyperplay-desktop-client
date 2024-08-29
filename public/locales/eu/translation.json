@@ -737,7 +737,11 @@
         },
         "points": "Puntuak",
         "signIn": "Saioa hasi",
-        "sync": "Sinkronizazioa"
+        "sync": "Sinkronizazioa",
+        "claimWarning": {
+            "cancel": "Cancel",
+            "confirm": "Berretsi"
+        }
     },
     "accounts": "Kontuak",
     "ALL": "DENA",

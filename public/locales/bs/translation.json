@@ -928,7 +928,14 @@
         "linkAccount": "#Veza #tvoj @Steam #račun #na #pregled eligibility#.",
         "reputation": "#Reputacija",
         "pointsClaimed": "#Poen",
-        "g7Numclaimed": "@Total #Potraživati G7 #Kredit"
+        "g7Numclaimed": "@Total #Potraživati G7 #Kredit",
+        "claimWarning": {
+            "body": "[@X0@X]#VAŽAN:[@X16@X] @Please #osigurati da #free #biti #dodijeliti dosta #gas @on @the [@X80@X] #mreža @for @the #transakcija #na #biti @successfully #potvrditi [@X153@X]#unutar #24 hrs.[@X173@X]",
+            "body2": "Inače, @the #Potraga #Nagrada [@X28@X]#volja #isteći a #volja @no longer #biti claimable.[@X78@X]",
+            "title": "#Potvrditi #Potraga #Nagrada",
+            "confirm": "Potvrdi",
+            "cancel": "Odustanite"
+        }
     },
     "profile": "Profile",
     "back_to_game": "@Back #na #igra",

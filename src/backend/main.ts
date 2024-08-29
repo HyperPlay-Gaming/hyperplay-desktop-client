@@ -167,7 +167,7 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/extension/provider'
-import 'backend/proxy/ipcHandlers.ts'
+import 'backend/proxy/ipcHandlers'
 
 import './ipcHandlers'
 import './ipcHandlers/checkDiskSpace'
@@ -375,11 +375,15 @@ const loadMainWindowURL = function () {
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(prodAppUrl)
-    autoUpdater.checkForUpdates().then((val) => {
-      logInfo(
-        `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
-      )
-    })
+    const appSettings = configStore.get_nodefault('settings')
+    const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
+    if (shouldCheckForUpdates) {
+      autoUpdater.checkForUpdates().then((val) => {
+        logInfo(
+          `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
+        )
+      })
+    }
   }
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -1133,7 +1137,7 @@ ipcMain.handle('refreshLibrary', async (e, library?) => {
   } else {
     const allRefreshPromises = []
     for (const runner_i in libraryManagerMap) {
-      allRefreshPromises.push(libraryManagerMap[runner_i].refresh())
+      allRefreshPromises.push(libraryManagerMap[runner_i as Runner].refresh())
     }
     await Promise.allSettled(allRefreshPromises)
   }
@@ -1144,15 +1148,20 @@ ipcMain.on('logError', (e, err) => logError(err, LogPrefix.Frontend))
 ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
-const gamePlaySessionStartTimes: Record<string, bigint> = {}
+let gamePlaySessionStartTimes: Record<string, bigint> = {}
 
 function startNewPlaySession(appName: string) {
+  gamePlaySessionStartTimes = {}
   // Uses hrtime for monotonic timer not subject to clock drift or sync errors
   const startPlayingTimeMonotonic = hrtime.bigint()
   gamePlaySessionStartTimes[appName] = startPlayingTimeMonotonic
 }
 
 async function syncPlaySession(appName: string, runner: Runner) {
+  if (!Object.hasOwn(gamePlaySessionStartTimes, appName)) {
+    return
+  }
+
   const stopPlayingTimeMonotonic = hrtime.bigint()
   const sessionPlaytimeInMs =
     (stopPlayingTimeMonotonic - gamePlaySessionStartTimes[appName]) /

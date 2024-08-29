@@ -971,7 +971,14 @@
         "sync": "Synchronizovat",
         "connectSteamAccount": "Připojit týmový účet",
         "pointsClaimed": "Body Tvrzené",
-        "g7Numclaimed": "Celkem Tvrzené G7 kredity"
+        "g7Numclaimed": "Celkem Tvrzené G7 kredity",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Ujistěte se, že jste přidělit dostatek plynu na {{networkName}} síť pro transakci, aby byla úspěšně potvrzena <bold>sv 24 hodin.</bold>",
+            "body2": "V opačném případě bude odměna Quest Reward <bold> ukončena a již nebude tvrditelné.</bold>",
+            "title": "Potvrďte výzvu k odměně",
+            "confirm": "Potvrdit",
+            "cancel": "Zrušit"
+        }
     },
     "quests": {
         "playstreak": {
