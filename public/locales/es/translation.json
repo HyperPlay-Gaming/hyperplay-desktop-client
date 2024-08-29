@@ -91,7 +91,9 @@
                 "message": "¡Hay una nueva versión disponible!",
                 "message-finished": "¿Quieres reiniciar HyperPlay ahora?",
                 "title": "Iniciador de juegos HyperPlay",
-                "title-finished": "Actualización finalizada"
+                "title-finished": "Actualización finalizada",
+                "appUpdated": "HyperPlay fue actualizado",
+                "appUpdated-message": "HyperPlay fue actualizado. ¿Quieres actualizar y reiniciar HyperPlay ahora?"
             }
         },
         "no": "NO",
