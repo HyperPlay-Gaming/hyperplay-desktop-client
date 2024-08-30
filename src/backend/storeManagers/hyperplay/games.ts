@@ -39,8 +39,8 @@ import {
   spawnAsync,
   killPattern,
   shutdownWine,
-  calculateEta,
-  getExecutableAndArgs
+  getExecutableAndArgs,
+  calculateProgress
 } from 'backend/utils'
 import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { dirname, join } from 'path'
@@ -437,10 +437,6 @@ function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
   return downloadUrl
 }
 
-function roundToTenth(x: number) {
-  return Math.round(x * 10) / 10
-}
-
 async function downloadGame(
   appName: string,
   directory: string,
@@ -548,24 +544,6 @@ async function downloadGame(
       channelName
     })
   })
-}
-
-function calculateProgress(
-  downloadedBytes: number,
-  downloadSize: number,
-  downloadSpeed: number,
-  diskWriteSpeed: number,
-  progress: number
-) {
-  const eta = calculateEta(downloadedBytes, downloadSpeed, downloadSize)
-
-  return {
-    percent: roundToTenth(progress),
-    diskSpeed: roundToTenth(diskWriteSpeed / 1024 / 1024),
-    downSpeed: roundToTenth(downloadSpeed / 1024 / 1024),
-    bytes: roundToTenth(downloadedBytes / 1024 / 1024),
-    eta
-  }
 }
 
 function sanitizeFileName(filename: string) {
