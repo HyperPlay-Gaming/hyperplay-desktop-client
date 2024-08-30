@@ -91,7 +91,9 @@
                 "message": "Ada Versi baru yang tersedia!",
                 "message-finished": "Apakah Anda ingin memulai ulang HyperPlay sekarang?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Pembaruan Selesai"
+                "title-finished": "Pembaruan Selesai",
+                "appUpdated": "HyperPlay diperbarui",
+                "appUpdated-message": "HyperPlay diperbarui. Apakah Anda ingin memperbarui dan restart HyperPlay sekarang?"
             }
         },
         "no": "TIDAK",

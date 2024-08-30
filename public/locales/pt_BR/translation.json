@@ -91,7 +91,9 @@
                 "message": "Uma nova versão está disponível!",
                 "message-finished": "Deseja reiniciar o HyperPlay agora?",
                 "title": "HyperPlay Launcher Games",
-                "title-finished": "Atualização finalizada"
+                "title-finished": "Atualização finalizada",
+                "appUpdated": "HyperPlay foi atualizado",
+                "appUpdated-message": "O HyperPlay foi atualizado. Você quer atualizar e reiniciar o HyperPlay agora?"
             }
         },
         "no": "NÃO",
