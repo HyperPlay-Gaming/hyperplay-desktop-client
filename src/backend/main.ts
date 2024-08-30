@@ -38,7 +38,7 @@ import {
 import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
-import { DXVK, Winetricks } from './tools'
+import { DXVK, SteamWindows, Winetricks } from './tools'
 import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
@@ -100,7 +100,6 @@ import {
 import { handleOtp, handleProtocol } from './protocol'
 import {
   initLogger,
-  logChangedSetting,
   logError,
   logInfo,
   LogPrefix,
@@ -1963,6 +1962,8 @@ ipcMain.handle('removeApp', async (e, args) => {
 ipcMain.handle('launchApp', async (e, appName, runner) =>
   gameManagerMap[runner].launch(appName)
 )
+
+ipcMain.handle('installSteamWindows', async () => SteamWindows.installSteam())
 
 ipcMain.handle('isNative', (e, { appName, runner }) => {
   return gameManagerMap[runner].isNative(appName)

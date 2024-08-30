@@ -619,7 +619,7 @@ export const SteamWindows = {
     ) {
       const currentProgress = calculateProgress(
         downloadedBytes,
-        Number.parseInt('0'),
+        Number.parseInt('2380800'),
         downloadSpeed,
         diskWriteSpeed,
         progress
