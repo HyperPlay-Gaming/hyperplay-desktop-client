@@ -91,7 +91,9 @@
                 "message": "目前有新版本可用！",
                 "message-finished": "你想立即重啟 HyperPlay 嗎？",
                 "title": "HyperPlay 遊戲啓動器",
-                "title-finished": "更新完成"
+                "title-finished": "更新完成",
+                "appUpdated": "更新了超Play",
+                "appUpdated-message": "对超Play进行了更新。 现在是否需要更新和重新启动超Play?"
             }
         },
         "no": "否",

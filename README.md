@@ -70,12 +70,43 @@ Download HyperPlay-x.x.x.dmg and move the HyperPlay App to the Applications fold
 
 ### Local Development
 
-This projects uses submodules, so you need to clone it with the `--recurse-submodules` flag or run `git submodule update --init --recursive` after cloning.
+This projects uses optional NPM packages.
+
+For internal developers, use:
 
 ```bash
 yarn setup
 yarn start
 ```
+
+For external developers, use:
+
+```bash
+yarn setupWithoutOptional
+yarn start
+```
+
+#### M1/M2 Mac
+
+If you are using an M1 or M2 Mac and receive the following error message:
+
+```
+Error: Cannot find module @rollup/rollup-darwin-arm64. npm has a bug related to optional dependencies (https://github.com/npm/cli/issues/4828). Please try `npm i` again after removing both package-lock.json and node_modules directory.
+```
+
+Please try the following
+
+```bash
+rm -f yarn.lock
+rm -rf node_modules
+yarn cache clean
+yarn setupWithoutOptional
+yarn start
+```
+
+#### Lavamoat
+
+Please note that at times, the console may alert you to run `yarn allow-scripts auto`. This is from `@lavamoat/allow-scripts` and is due to a dependency adding a new preinstall or postinstall script. After running `yarn allow-scripts auto` and updating the package.json to enable or disable the script, please run `yarn setup` or `yarn setupWithoutOptional` again.
 
 ## Credits
 
