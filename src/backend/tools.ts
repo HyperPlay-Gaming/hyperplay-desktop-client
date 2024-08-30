@@ -603,7 +603,6 @@ export const SteamWindows = {
     const directory = `${toolsPath}/steam`
     const fileName = 'SteamSetup.exe'
     const window = getMainWindow()
-    let downloadStarted = false
 
     if (!isOnline() || existsSync(join(directory, fileName)) || !window) {
       return
@@ -624,15 +623,6 @@ export const SteamWindows = {
         diskWriteSpeed,
         progress
       )
-
-      if (downloadedBytes > 0 && !downloadStarted) {
-        downloadStarted = true
-        sendFrontendMessage('gameStatusUpdate', {
-          appName: 'steam',
-          status: 'installing',
-          runner: 'hyperplay'
-        })
-      }
 
       window?.webContents.send(`progressUpdate-steam}`, {
         appName: 'steam',
@@ -680,32 +670,39 @@ export const SteamWindows = {
       return
     }
     writeConfig('steam', { ...gameSettings, winePrefix, wineVersion })
-    await runWineCommand({
-      commandParts: [steamSetupPath],
-      wait: true,
-      gameSettings: {
-        ...gameSettings,
-        winePrefix,
-        wineVersion
-      }
-    })
 
-    // Add Steam to the library
-    const executable = `${winePrefix}/drive_c/Program Files (x86)/Steam/Steam.exe`
+    try {
+      await runWineCommand({
+        commandParts: [steamSetupPath],
+        wait: true,
+        gameSettings: {
+          ...gameSettings,
+          winePrefix,
+          wineVersion
+        }
+      })
 
-    addNewApp({
-      app_name: 'steam',
-      runner: 'sideload',
-      art_cover: steamCoverArt,
-      art_square: steamCoverArt,
-      is_installed: true,
-      title: 'Steam for Windows',
-      canRunOffline: false,
-      install: {
-        executable,
-        platform: 'windows'
-      },
-      description: 'Play Steam Windows Games on macOS'
-    })
+      // Add Steam to the library
+      const executable = `${winePrefix}/drive_c/Program Files (x86)/Steam/Steam.exe`
+
+      addNewApp({
+        app_name: 'steam',
+        runner: 'sideload',
+        art_cover: steamCoverArt,
+        art_square: steamCoverArt,
+        is_installed: true,
+        title: 'Steam for Windows',
+        canRunOffline: false,
+        install: {
+          executable,
+          platform: 'windows'
+        },
+        description: 'Play Steam Windows Games on macOS'
+      })
+
+      logInfo(`Steam installed at ${dirname(executable)}`, LogPrefix.Backend)
+    } catch (error) {
+      logError(['Error Installing Steam', error], LogPrefix.Backend)
+    }
   }
 }
