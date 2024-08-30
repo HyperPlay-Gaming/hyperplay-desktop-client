@@ -38,7 +38,6 @@ window.addEventListener('error', (ev: ErrorEvent) => {
 
 const Backend = new HttpApi(null, {
   addPath: 'build/locales/{{lng}}/{{ns}}',
-  allowMultiLoading: false,
   loadPath: 'locales/{{lng}}/{{ns}}.json'
 })
 
