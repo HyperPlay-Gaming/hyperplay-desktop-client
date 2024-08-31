@@ -10,7 +10,8 @@ export default function useCheckG7ConnectionStatus() {
       if (!response) return false
       return response
     },
-    refetchOnWindowFocus: false
+    refetchOnWindowFocus: false,
+    staleTime: 1000 * 60
   })
 
   return {
