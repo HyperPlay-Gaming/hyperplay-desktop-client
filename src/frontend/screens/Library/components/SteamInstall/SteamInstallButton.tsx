@@ -5,11 +5,11 @@ import { Alert, Button } from '@hyperplay/ui'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
 import { WineInstallation } from 'common/types'
 import SteamInstallDialog from './SteamInstallDialog'
+import { launch } from 'frontend/helpers'
 
 const tooltipProps: Partial<TooltipProps> = {
   offset: 16,
@@ -23,8 +23,7 @@ const tooltipProps: Partial<TooltipProps> = {
 }
 
 export default observer(function SteamInstallButton() {
-  const navigate = useNavigate()
-  const { platform } = useContext(ContextProvider)
+  const { platform, showDialogModal } = useContext(ContextProvider)
   const [isInstalling, setIsInstalling] = useState(false)
   const [showInstallDialog, setShowInstallDialog] = useState(false)
   const [isCompatibilityLayerAvailable, setIsCompatibilityLayerAvailable] =
@@ -51,10 +50,13 @@ export default observer(function SteamInstallButton() {
 
   async function handleSteamInstallation() {
     if (isSteamInstalled) {
-      return navigate('/gamepage/sideload/steam', {
-        state: {
-          gameInfo: JSON.parse(JSON.stringify(isSteamInstalled))
-        }
+      return launch({
+        appName: 'steam',
+        t,
+        runner: 'sideload',
+        showDialogModal,
+        hasUpdate: false,
+        isNotNative: true
       })
     }
 
