@@ -115,7 +115,7 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
           onClick={onClose}
           disabled={isInstalling}
         >
-          {t('Cancel Installation')}
+          {t('Cancel Installation', 'Cancel Installation')}
         </Button>
       </div>
     </Dialog>

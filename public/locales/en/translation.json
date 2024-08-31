@@ -26,6 +26,7 @@
         "status": "Status",
         "title": "This game includes anticheat software"
     },
+    "At the end make sure to": "At the end make sure to",
     "back_to_game": "Back to game",
     "box": {
         "cache-cleared": {
@@ -89,13 +90,7 @@
         "info": {
             "update": {
                 "appUpdated": "HyperPlay was updated",
-                "appUpdated-message": "HyperPlay was updated. Do you want to update and restart HyperPlay now?",
-                "changelog": "Open changelog",
-                "detail": "Do you want to download the update in the background?",
-                "message": "There is a new Version available!",
-                "message-finished": "Do you want to restart HyperPlay now?",
-                "title": "HyperPlay Games Launcher",
-                "title-finished": "Update Finished"
+                "appUpdated-message": "HyperPlay was updated. Do you want to update and restart HyperPlay now?"
             }
         },
         "no": "NO",
@@ -180,6 +175,7 @@
         "unsync": "Unsync",
         "update": "Update"
     },
+    "Cancel Installation": "Cancel Installation",
     "controller": {
         "hints": {
             "back": "Back",
@@ -450,6 +446,10 @@
         "viewPortfolio": "View portfolio"
     },
     "HyperPlay": "",
+    "HyperPlay will download and start the Steam for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay will download and start the Steam for you. Please follow Steam instructions on their installer;"
+    },
+    "HyperPlay will notify you once the installation is done": "HyperPlay will notify you once the installation is done.",
     "hyperplayOverlay": {
         "chainRequest": {
             "CONFIRMED": "Custom network added",
@@ -487,6 +487,7 @@
             "INITIATED": "Add custom token request pending"
         }
     },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;",
     "importGameErrorMessage": "Not a valid game folder, importing game is not possible",
     "importGameErrorMessageExecutable": "Game Executable not found, importing game is not possible",
     "importGameErrorTitle": "Import Game Error",
@@ -514,6 +515,9 @@
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
         }
     },
+    "Install Steam": "Install Steam",
+    "Installing Steam": "Installing Steam...",
+    "Launch Steam": "Launch Steam",
     "library": {
         "alphabeticalAZ": "Alphabetical A-Z",
         "alphabeticalZA": "Alphabetical Z-A",
@@ -594,6 +598,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear": "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear.",
     "Open": "Open",
     "options": {
         "advanced": {
@@ -912,10 +917,22 @@
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Side-loading an installer that contains malware could compromise your computer and lead to theft of funds.",
         "warningTitle": "Important"
     },
+    "since it will block HyperPlay configuration until Steam is closed;": "",
     "status": {
         "installing": "Installing",
         "logging": "Logging In...",
         "processing": "Processing files, please wait"
+    },
+    "Steam Installation": "",
+    "steam-install": {
+        "compatibility-layer-not-available": "Compatibility layer not available. Please install one from \"Settings > Wine Manager\" first.",
+        "error-message": "An error occurred while installing Steam. Please try again.",
+        "error-title": "Error",
+        "launch-tooltip": "Launch Steam using the HyperPlay Compatibility Layer",
+        "ok": "OK",
+        "success-message": "Steam has been installed. You can now launch it from the Library.",
+        "success-title": "Success",
+        "tooltip": "This will install the Windows version of Steam and it will run using a HyperPlay Compatibility Layer. \n\n    Some games especially older titles, newer 3D games, or those with anti-cheat software may not work properly. \n\n    The Recommended specs are a Mac with Apple Silicon CPU (M1 or above) and at least 16GB of RAM."
     },
     "store": "Epic Store",
     "title": {
@@ -940,6 +957,7 @@
     "two_col_table": {
         "save_hint": "Changes in this table are not saved automatically. Click the + button"
     },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam'",
     "userselector": {
         "logging_out": "Logging out",
         "logIn": "Log in",

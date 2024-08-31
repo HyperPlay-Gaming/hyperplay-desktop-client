@@ -60,7 +60,7 @@ export default observer(function SteamInstallButton() {
 
   function renderButtonText() {
     if (isInstalling) {
-      return t('Installing Steam...', 'Installing Steam...')
+      return t('Installing Steam', 'Installing Steam...')
     }
     if (isSteamInstalled) {
       return t('Launch Steam', 'Launch Steam')
