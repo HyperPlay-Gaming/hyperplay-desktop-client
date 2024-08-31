@@ -25,7 +25,7 @@ import { LibraryTopBar } from './components/LibraryTopBar'
 import libraryState from '../../state/libraryState'
 import { observer } from 'mobx-react-lite'
 import storeAuthState from 'frontend/state/storeAuthState'
-import SteamInstallButton from './components/SteamInstallButton'
+import SteamInstallButton from './components/SteamInstall/SteamInstallButton'
 
 const storage = window.localStorage
 
