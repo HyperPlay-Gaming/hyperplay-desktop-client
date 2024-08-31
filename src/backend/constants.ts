@@ -93,8 +93,7 @@ const supportURL = 'https://github.com/G7DAO/HyperPlay/blob/main/Support.md'
 const discordLink = 'https://discord.gg/hyperplay'
 const twitterLink = 'https://twitter.com/HyperPlayGaming'
 const wikiLink = 'https://github.com/G7DAO/HyperPlay/wiki'
-const weblateUrl =
-  'https://hosted.weblate.org/projects/hyperplay-games-launcher'
+const weblateUrl = 'https://hosted.weblate.org/projects/hyperplay-client/'
 const wineprefixFAQ = 'https://wiki.winehq.org/FAQ#Wineprefixes'
 const hyperplaySite = 'https://docs.hyperplay.xyz/faq'
 const customThemesWikiLink =

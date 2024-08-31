@@ -91,7 +91,9 @@
                 "message": "Dostupna je nova verzija!",
                 "message-finished": "Želite li sada ponovo pokrenuti HyperPlay?",
                 "title": "HyperPlay pokretač igara",
-                "title-finished": "Ažuriranje završeno"
+                "title-finished": "Ažuriranje završeno",
+                "appUpdated": "HyperPlay #biti #poboljšati",
+                "appUpdated-message": "HyperPlay #biti #poboljšati. @Do #free @want# to #poboljšati a @restart HyperPlay sad#?"
             }
         },
         "no": "NE",

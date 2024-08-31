@@ -342,7 +342,7 @@ class GlobalConfigV0 extends GlobalConfig {
     } as AppSettings
   }
 
-  public setSetting(key: string, value: unknown) {
+  public setSetting(key: keyof AppSettings, value: never) {
     const config = this.getSettings()
     const configStoreSettings = configStore.get_nodefault('settings') || config
     configStore.set('settings', { ...configStoreSettings, [key]: value })

@@ -1,8 +1,6 @@
 import { TFunction } from 'i18next'
 
-export function getAchievementNavTranslations(
-  t: TFunction<'translation', undefined, 'translation'>
-) {
+export function getAchievementNavTranslations(t: TFunction) {
   return {
     addThisGameText: t('hyperplay.achievements.addThisGame', 'Add this game'),
     gamesToMintLabelText: t(

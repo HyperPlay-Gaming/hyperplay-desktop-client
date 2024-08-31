@@ -91,7 +91,9 @@
                 "message": "Υπάρχει μια νέα έκδοση διαθέσιμη!",
                 "message-finished": "Θέλετε να επανεκκινήσετε το HyperPlay τώρα;",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Η ενημέρωση ολοκληρώθηκε"
+                "title-finished": "Η ενημέρωση ολοκληρώθηκε",
+                "appUpdated": "HyperPlay ενημερώθηκε",
+                "appUpdated-message": "HyperPlay ενημερώθηκε. Θέλετε να ενημερώσετε και να επανεκκινήσετε το HyperPlay τώρα?"
             }
         },
         "no": "ΟΧΙ",
