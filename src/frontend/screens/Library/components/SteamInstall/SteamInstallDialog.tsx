@@ -50,8 +50,8 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
           </li>
           <li>
             {t(
-              'HyperPlay will download and start the Steam for you. Please follow Steam instructions on their installer;',
-              'HyperPlay will download and start the Steam for you. Please follow Steam instructions on their installer;'
+              'HyperPlay will download and start the Steam Setup for you. Please follow Steam instructions on their installer;',
+              'HyperPlay will download and start the Steam Setup for you. Please follow Steam instructions on their installer;'
             )}
           </li>
           <li>

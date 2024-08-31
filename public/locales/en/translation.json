@@ -446,8 +446,8 @@
         "viewPortfolio": "View portfolio"
     },
     "HyperPlay": "",
-    "HyperPlay will download and start the Steam for you": {
-        " Please follow Steam instructions on their installer;": "HyperPlay will download and start the Steam for you. Please follow Steam instructions on their installer;"
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay will download and start the Steam Setup for you. Please follow Steam instructions on their installer;"
     },
     "HyperPlay will notify you once the installation is done": "HyperPlay will notify you once the installation is done.",
     "hyperplayOverlay": {
@@ -927,11 +927,8 @@
     "steam-install": {
         "compatibility-layer-not-available": "Compatibility layer not available. Please install one from \"Settings > Wine Manager\" first.",
         "error-message": "An error occurred while installing Steam. Please try again.",
-        "error-title": "Error",
         "launch-tooltip": "Launch Steam using the HyperPlay Compatibility Layer",
-        "ok": "OK",
         "success-message": "Steam has been installed. You can now launch it from the Library.",
-        "success-title": "Success",
         "tooltip": "This will install the Windows version of Steam and it will run using a HyperPlay Compatibility Layer. \n\n    Some games especially older titles, newer 3D games, or those with anti-cheat software may not work properly. \n\n    The Recommended specs are a Mac with Apple Silicon CPU (M1 or above) and at least 16GB of RAM."
     },
     "store": "Epic Store",
