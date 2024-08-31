@@ -695,6 +695,7 @@ export const SteamWindows = {
         canRunOffline: false,
         install: {
           executable,
+          is_dlc: false,
           platform: 'windows'
         },
         description: 'Play Steam Windows Games on macOS'
