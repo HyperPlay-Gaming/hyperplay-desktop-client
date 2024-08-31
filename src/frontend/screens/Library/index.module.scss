@@ -44,7 +44,7 @@
   align-items: center;
   margin-bottom: var(--space-xl);
   gap: var(--space-md-fixed);
-  :last-child {
+  :nth-child(4) {
     margin: 0 0 0 auto;
   }
   z-index: 100;
