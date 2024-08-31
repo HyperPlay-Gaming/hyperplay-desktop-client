@@ -38,7 +38,7 @@ import {
   get_vulkan_instance_version
 } from './utils/graphics/vulkan'
 import { lt as semverLt } from 'semver'
-import { getMainWindow, sendFrontendMessage } from './main_window'
+import { getMainWindow } from './main_window'
 import { createAbortController } from './utils/aborthandler/aborthandler'
 import { GlobalConfig } from './config'
 import { gameManagerMap } from './storeManagers'
