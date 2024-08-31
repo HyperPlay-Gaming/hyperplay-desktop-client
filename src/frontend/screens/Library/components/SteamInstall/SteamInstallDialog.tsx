@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button } from '@hyperplay/ui'
 import { Dialog } from 'frontend/components/UI/Dialog'
-import ContextProvider from 'frontend/state/ContextProvider'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
@@ -10,48 +9,28 @@ interface SteamInstallDialogProps {
   isInstalling: boolean
   setIsInstalling: (value: boolean) => void
   onClose: () => void
+  setShowAlert: (value: 'success' | 'danger' | 'none') => void
 }
 
 const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
   isInstalling,
   setIsInstalling,
-  onClose
+  onClose,
+  setShowAlert
 }) => {
   const { t } = useTranslation()
-  const { showDialogModal } = useContext(ContextProvider)
 
   const handleInstallSteam = async () => {
     try {
       setIsInstalling(true)
       await window.api.installSteamWindows()
-      showDialogModal({
-        title: t('steam-install.success-title', 'Success'),
-        message: t('steam-install.success-message', {
-          defaultValue:
-            'Steam has been installed. You can now launch it from the Library.'
-        }),
-        buttons: [
-          {
-            text: t('steam-install.ok', 'OK'),
-            onClick: () => onClose()
-          }
-        ]
-      })
+      setShowAlert('success')
+      setTimeout(() => setShowAlert('none'), 5000)
       setIsInstalling(false)
+      onClose()
     } catch (error) {
-      showDialogModal({
-        title: t('steam-install.error-title', 'Error'),
-        message: t('steam-install.error-message', {
-          defaultValue:
-            'An error occurred while installing Steam. Please try again.'
-        }),
-        buttons: [
-          {
-            text: t('steam-install.ok', 'OK'),
-            onClick: () => onClose()
-          }
-        ]
-      })
+      setShowAlert('danger')
+      setTimeout(() => setShowAlert('none'), 5000)
       setIsInstalling(false)
     }
   }

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Tooltip, TooltipProps } from '@mantine/core'
 import { faSteam } from '@fortawesome/free-brands-svg-icons'
-import { Button } from '@hyperplay/ui'
+import { Alert, Button } from '@hyperplay/ui'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
@@ -29,6 +29,9 @@ export default observer(function SteamInstallButton() {
   const [showInstallDialog, setShowInstallDialog] = useState(false)
   const [isCompatibilityLayerAvailable, setIsCompatibilityLayerAvailable] =
     useState(false)
+  const [showAlert, setShowAlert] = useState<'success' | 'danger' | 'none'>(
+    'none'
+  )
 
   const isMac = platform === 'darwin'
   const isSteamInstalled =
@@ -85,6 +88,9 @@ export default observer(function SteamInstallButton() {
     `Compatibility layer not available. Please install one from "Settings > Wine Manager" first.`
   )
 
+  const showSuccessAlert = showAlert === 'success'
+  const showErrorAlert = showAlert === 'danger'
+
   return (
     <>
       <Tooltip
@@ -94,6 +100,7 @@ export default observer(function SteamInstallButton() {
             ? toolTipText
             : comatibilityLayerNotAvailableTooltip
         }
+        className={'Tooltip caption-sm'}
       >
         <Button
           type="tertiary"
@@ -109,8 +116,37 @@ export default observer(function SteamInstallButton() {
           isInstalling={isInstalling}
           setIsInstalling={setIsInstalling}
           onClose={() => setShowInstallDialog(false)}
+          setShowAlert={setShowAlert}
         />
       ) : null}
+      {showSuccessAlert && (
+        <Alert
+          style={{
+            position: 'absolute',
+            top: 50,
+            left: '35%'
+          }}
+          type="success"
+          message={t(
+            'steam-install.success-message',
+            'Steam has been installed. You can now launch it from the Library.'
+          )}
+        />
+      )}
+      {showErrorAlert && (
+        <Alert
+          style={{
+            position: 'absolute',
+            top: 50,
+            left: '35%'
+          }}
+          type="danger"
+          message={t(
+            'steam-install.error-message',
+            'An error occurred while installing Steam. Please try again.'
+          )}
+        />
+      )}
     </>
   )
 })
