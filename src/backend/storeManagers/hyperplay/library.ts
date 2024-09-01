@@ -16,7 +16,7 @@ import {
   sanitizeVersion,
   refreshGameInfoFromHpRelease
 } from './utils'
-import { getGameInfo } from './games'
+import { getGameInfo as getGamesGameInfo } from './games'
 import { getValistListingApiUrl, qaToken } from 'backend/constants'
 
 export async function addGameToLibrary(projectId: string) {
@@ -51,9 +51,9 @@ export const getInstallInfo = async (
   platformToInstall: InstallPlatform,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   lang = 'en',
-  channelNameToInstall: string
+  channelNameToInstall?: string
 ): Promise<HyperPlayInstallInfo | undefined> => {
-  const gameInfo = getGameInfo(appName)
+  const gameInfo = getGamesGameInfo(appName)
 
   if (!channelNameToInstall) {
     logWarning(
@@ -145,6 +145,10 @@ export function refreshHPGameInfo(appId: string, data: HyperPlayRelease) {
 const defaultExecResult = {
   stderr: '',
   stdout: ''
+}
+
+export function getGameInfo(appName: string): GameInfo | undefined {
+  return getGamesGameInfo(appName)
 }
 
 /**
