@@ -249,17 +249,13 @@ const GameCard = ({
     {
       // hide
       label: t('button.hide_game', 'Hide Game'),
-      onClick: handleClickStopBubbling(() =>
-        libraryState.hiddenGames?.add(appName, title)
-      ),
+      onClick: handleClickStopBubbling(() => libraryState.hideGame(appName)),
       show: !isHiddenGame
     },
     {
       // unhide
       label: t('button.unhide_game', 'Unhide Game'),
-      onClick: handleClickStopBubbling(() =>
-        libraryState.hiddenGames?.remove(appName)
-      ),
+      onClick: handleClickStopBubbling(() => libraryState.unhideGame(appName)),
       show: isHiddenGame
     },
     {

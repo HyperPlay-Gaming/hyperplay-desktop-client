@@ -188,27 +188,6 @@ class GlobalState extends PureComponent<Props> {
     this.setState({ showMetaMaskBrowserSidebarLinks: value })
   }
 
-  hideGame = (appNameToHide: string, appTitle: string) => {
-    if (libraryState.hiddenGames === undefined) return
-    const newHiddenGames = [
-      ...libraryState.hiddenGames.list,
-      { appName: appNameToHide, title: appTitle }
-    ]
-
-    libraryState.hiddenGames.list = newHiddenGames
-    configStore.set('games.hidden', newHiddenGames)
-  }
-
-  unhideGame = (appNameToUnhide: string) => {
-    if (libraryState.hiddenGames === undefined) return
-    const newHiddenGames = libraryState.hiddenGames.list.filter(
-      ({ appName }) => appName !== appNameToUnhide
-    )
-
-    libraryState.hiddenGames.list = newHiddenGames
-    configStore.set('games.hidden', newHiddenGames)
-  }
-
   addGameToFavourites = (appNameToAdd: string, appTitle: string) => {
     if (libraryState.favouriteGames === undefined) return
     const newFavouriteGames = [

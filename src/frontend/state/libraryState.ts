@@ -37,8 +37,8 @@ export class GameCollectionClass implements GameCollection {
     makeAutoObservable(this)
   }
 
-  add(appNameToAdd: string, appTitle: string) {
-    this.list.push({ appName: appNameToAdd, title: appTitle })
+  add(appNameToAdd: string) {
+    this.list.push({ appName: appNameToAdd })
   }
   remove(appNameToRemove: string) {
     this.list = this.list.filter((val) => val.appName !== appNameToRemove)
@@ -460,6 +460,26 @@ class LibraryState {
     return (
       this.hyperPlayLibrary.filter((val) => appNames.includes(val.app_name))
         .length > 0
+    )
+  }
+
+  hideGame(appName: string) {
+    if (this.hiddenGames === undefined) return
+
+    this.hiddenGames.add(appName, '')
+    configStore.set(
+      'games.hidden',
+      JSON.parse(JSON.stringify(this.hiddenGames.list))
+    )
+  }
+
+  unhideGame(appNameToUnhide: string) {
+    if (this.hiddenGames === undefined) return
+
+    this.hiddenGames.remove(appNameToUnhide)
+    configStore.set(
+      'games.hidden',
+      JSON.parse(JSON.stringify(this.hiddenGames.list))
     )
   }
 }

@@ -322,6 +322,36 @@ describe('libraryState.ts', () => {
     libraryState.libraryTopSection = 'disabled'
     expect(libraryState.showRecentGames).toBe(false)
   })
+
+  test('hide game hides game', async () => {
+    const game_a = getDummyGameInfo({
+      title: 'a',
+      is_installed: false,
+      runner: 'legendary'
+    })
+
+    const game_b = getDummyGameInfo({
+      title: 'b',
+      is_installed: false,
+      runner: 'legendary'
+    })
+    libraryState.epicLibrary = [game_a, game_b]
+
+    expect(libraryState.library.some((val) => val.app_name === game_a.app_name))
+    expect(libraryState.library.some((val) => val.app_name === game_b.app_name))
+
+    libraryState.hideGame(game_a.app_name)
+    expect(
+      libraryState.library.findIndex(
+        (val) => val.app_name === game_a.app_name
+      ) === -1
+    )
+    expect(libraryState.library.some((val) => val.app_name === game_b.app_name))
+
+    libraryState.unhideGame(game_a.app_name)
+    expect(libraryState.library.some((val) => val.app_name === game_a.app_name))
+    expect(libraryState.library.some((val) => val.app_name === game_b.app_name))
+  })
 })
 
 export {}
