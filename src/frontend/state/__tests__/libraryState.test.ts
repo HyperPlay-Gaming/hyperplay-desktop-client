@@ -159,7 +159,7 @@ describe('libraryState.ts', () => {
     ]
 
     libraryState.favouriteGames = {
-      list: [{ appName: 'c', title: 'c' }],
+      list: [{ appName: 'c' }],
       add: () => {
         console.log('add')
       },
@@ -187,7 +187,7 @@ describe('libraryState.ts', () => {
     expect(libraryState.library.length).toBe(2)
     expect(libraryState.library[0].app_name).toBe('b')
     libraryState.hiddenGames = {
-      list: [{ appName: 'b', title: 'b' }],
+      list: [{ appName: 'b' }],
       add: () => {
         console.log('add')
       },

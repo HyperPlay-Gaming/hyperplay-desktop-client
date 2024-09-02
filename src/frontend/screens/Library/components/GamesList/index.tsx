@@ -1,5 +1,5 @@
 import React from 'react'
-import { GameInfo, Runner } from 'common/types'
+import { GameInfo, HiddenGame, Runner } from 'common/types'
 import cx from 'classnames'
 import GameCard from '../GameCard'
 import { useTranslation } from 'react-i18next'
@@ -30,7 +30,7 @@ const GamesList = observer(
   }: Props): JSX.Element => {
     const { t } = useTranslation()
 
-    const favouriteGameMap = {}
+    const favouriteGameMap: Record<string, HiddenGame> = {}
     for (const game of libraryState.favouriteGames.list) {
       favouriteGameMap[game.appName] = game
     }
@@ -70,7 +70,7 @@ const GamesList = observer(
             }}
             isRecent={isRecent}
             gameInfo={gameInfo}
-            favorited={favouriteGameMap[app_name]}
+            favorited={!!favouriteGameMap[app_name]}
           />
         )
       })

@@ -188,29 +188,6 @@ class GlobalState extends PureComponent<Props> {
     this.setState({ showMetaMaskBrowserSidebarLinks: value })
   }
 
-  addGameToFavourites = (appNameToAdd: string, appTitle: string) => {
-    if (libraryState.favouriteGames === undefined) return
-    const newFavouriteGames = [
-      ...libraryState.favouriteGames.list.filter(
-        (fav) => fav.appName !== appNameToAdd
-      ),
-      { appName: appNameToAdd, title: appTitle }
-    ]
-
-    libraryState.favouriteGames.list = newFavouriteGames
-    configStore.set('games.favourites', newFavouriteGames)
-  }
-
-  removeGameFromFavourites = (appNameToRemove: string) => {
-    if (libraryState.favouriteGames === undefined) return
-    const newFavouriteGames = libraryState.favouriteGames.list.filter(
-      ({ appName }) => appName !== appNameToRemove
-    )
-
-    libraryState.favouriteGames.list = newFavouriteGames
-    configStore.set('games.favourites', newFavouriteGames)
-  }
-
   handleShowDialogModal = ({
     showDialog = true,
     ...options

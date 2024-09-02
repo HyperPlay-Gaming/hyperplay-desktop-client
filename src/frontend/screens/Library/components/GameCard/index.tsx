@@ -66,7 +66,6 @@ const GameCard = ({
   } = useContext(ContextProvider)
 
   const {
-    title,
     app_name: appName,
     runner,
     is_installed: isInstalled,
@@ -261,14 +260,14 @@ const GameCard = ({
     {
       label: t('button.favorites', 'Favorite'),
       onClick: handleClickStopBubbling(() =>
-        libraryState.favouriteGames?.add(appName, title)
+        libraryState.favouriteGame(appName)
       ),
       show: !favorited
     },
     {
       label: t('button.unfavorites', 'Unfavorite'),
       onClick: handleClickStopBubbling(() =>
-        libraryState.favouriteGames?.remove(appName)
+        libraryState.unfavouriteGame(appName)
       ),
       show: favorited
     },
@@ -337,12 +336,11 @@ const GameCard = ({
           imageUrl={gameInfo.art_square}
           favorited={favorited}
           onFavoriteClick={handleClickStopBubbling(() => {
-            if (!favorited)
-              libraryState.favouriteGames?.add(
-                gameInfo.app_name,
-                gameInfo.title
-              )
-            else libraryState.favouriteGames?.remove(gameInfo.app_name)
+            if (!favorited) {
+              libraryState.favouriteGame(gameInfo.app_name)
+            } else {
+              libraryState.unfavouriteGame(gameInfo.app_name)
+            }
           })}
           onDownloadClick={handleClickStopBubbling(buttonClick)}
           onRemoveFromQueueClick={handleClickStopBubbling(
