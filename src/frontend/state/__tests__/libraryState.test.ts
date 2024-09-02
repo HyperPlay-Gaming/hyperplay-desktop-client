@@ -368,12 +368,12 @@ describe('libraryState.ts', () => {
     libraryState.epicLibrary = [game_a, game_b]
 
     expect(
-      libraryState.favouriteGames.list.includes(
+      libraryState.favouriteGames.list.findIndex(
         (val) => val.appName === game_a.app_name
       ) === -1
     )
     expect(
-      libraryState.favouriteGames.list.includes(
+      libraryState.favouriteGames.list.findIndex(
         (val) => val.appName === game_b.app_name
       ) === -1
     )
