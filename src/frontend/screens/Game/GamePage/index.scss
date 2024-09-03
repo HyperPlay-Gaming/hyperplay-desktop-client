@@ -199,6 +199,7 @@
     text-overflow: ellipsis;
     color: var(--text-default);
     overflow: hidden;
+    line-clamp: 5;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: auto;

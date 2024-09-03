@@ -91,7 +91,9 @@
                 "message": "يتوفر إصدار جديد!",
                 "message-finished": "هل تريد إعادة تشغيل هِرُوِك الأن؟",
                 "title": "مشغل الألعاب هِرُوِك",
-                "title-finished": "انتهى التحديث"
+                "title-finished": "انتهى التحديث",
+                "appUpdated": "HyperPlay was updated",
+                "appUpdated-message": "تم تحديث هيبر بلاي هل تريد أن تستكمل وتعيد (هايبر بلاي) الآن؟?"
             }
         },
         "no": "لا",

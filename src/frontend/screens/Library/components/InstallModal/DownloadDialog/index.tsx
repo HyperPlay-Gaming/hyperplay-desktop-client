@@ -131,6 +131,7 @@ export default function DownloadDialog({
 
   const isWin = platform === 'win32'
   const isNotNative = platformToInstall === 'Windows' && !isWin
+  const isBrowserGame = platformToInstall === 'Browser'
 
   const [gameInstallInfo, setGameInstallInfo] = useState<
     LegendaryInstallInfo | GogInstallInfo | HyperPlayInstallInfo | null
@@ -557,61 +558,63 @@ export default function DownloadDialog({
           </SelectField>
         )}
 
-        <TextInputWithIconField
-          htmlId="setinstallpath"
-          label={t('install.path', 'Select Install Path')}
-          placeholder={getDefaultInstallPath()}
-          value={installPath.replaceAll("'", '')}
-          onChange={(event) => setInstallPath(event.target.value)}
-          icon={<FontAwesomeIcon icon={faFolderOpen} />}
-          inputProps={{ readOnly: true }}
-          onIconClick={handleInstallPathSelection}
-          afterInput={
-            gameDownloadSize ? (
-              <span className="smallInputInfo">
-                {validPath && (
-                  <>
-                    <span>
-                      {`${t('install.disk-space-left', 'Space Available')}: `}
+        {isBrowserGame ? null : (
+          <TextInputWithIconField
+            htmlId="setinstallpath"
+            label={t('install.path', 'Select Install Path')}
+            placeholder={getDefaultInstallPath()}
+            value={installPath.replaceAll("'", '')}
+            onChange={(event) => setInstallPath(event.target.value)}
+            icon={<FontAwesomeIcon icon={faFolderOpen} />}
+            inputProps={{ readOnly: true, className: styles.folderTextInput }}
+            onIconClick={handleInstallPathSelection}
+            afterInput={
+              gameDownloadSize ? (
+                <span className="smallInputInfo">
+                  {validPath && (
+                    <>
+                      <span>
+                        {`${t('install.disk-space-left', 'Space Available')}: `}
+                      </span>
+                      <span>
+                        <strong>{`${message}`}</strong>
+                      </span>
+                      {!notEnoughDiskSpace && (
+                        <>
+                          <span>
+                            {` - ${t(
+                              'install.space-after-install',
+                              'After Install'
+                            )}: `}
+                          </span>
+                          <span>
+                            <strong>{`${spaceLeftAfter}`}</strong>
+                          </span>
+                        </>
+                      )}
+                    </>
+                  )}
+                  {!validPath && (
+                    <span className="warning">
+                      {`${t(
+                        'install.path-not-writtable',
+                        'Warning: path might not be writable.'
+                      )}`}
                     </span>
-                    <span>
-                      <strong>{`${message}`}</strong>
+                  )}
+                  {validPath && notEnoughDiskSpace && (
+                    <span className="warning">
+                      {` (${t(
+                        'install.not-enough-disk-space',
+                        'Not enough disk space'
+                      )})`}
                     </span>
-                    {!notEnoughDiskSpace && (
-                      <>
-                        <span>
-                          {` - ${t(
-                            'install.space-after-install',
-                            'After Install'
-                          )}: `}
-                        </span>
-                        <span>
-                          <strong>{`${spaceLeftAfter}`}</strong>
-                        </span>
-                      </>
-                    )}
-                  </>
-                )}
-                {!validPath && (
-                  <span className="warning">
-                    {`${t(
-                      'install.path-not-writtable',
-                      'Warning: path might not be writable.'
-                    )}`}
-                  </span>
-                )}
-                {validPath && notEnoughDiskSpace && (
-                  <span className="warning">
-                    {` (${t(
-                      'install.not-enough-disk-space',
-                      'Not enough disk space'
-                    )})`}
-                  </span>
-                )}
-              </span>
-            ) : null
-          }
-        />
+                  )}
+                </span>
+              ) : null
+            }
+          />
+        )}
         {children}
         {haveSDL ? (
           <div className="InstallModal__sdls">
@@ -656,13 +659,15 @@ export default function DownloadDialog({
         )}
       </div>
       <DialogFooter>
-        <Button
-          type="tertiary"
-          size="medium"
-          onClick={async () => handleInstall('import')}
-        >
-          {t('button.import')}
-        </Button>
+        {isBrowserGame ? null : (
+          <Button
+            type="tertiary"
+            size="medium"
+            onClick={async () => handleInstall('import')}
+          >
+            {t('button.import')}
+          </Button>
+        )}
         <Button
           type="secondary"
           size="medium"
