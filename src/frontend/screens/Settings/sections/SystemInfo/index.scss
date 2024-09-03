@@ -43,3 +43,8 @@
     font-size: initial;
   }
 }
+
+.gridItemContainer {
+  display: flex;
+  gap: var(--space-md);
+}

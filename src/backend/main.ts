@@ -96,7 +96,7 @@ import {
   wikiLink,
   wineprefixFAQ
 } from './constants'
-import { handleProtocol } from './protocol'
+import { handleOtp, handleProtocol } from './protocol'
 import {
   initLogger,
   logChangedSetting,
@@ -167,7 +167,7 @@ import './wiki_game_info/ipc_handler'
 import './recent_games/ipc_handler'
 import './metrics/ipc_handler'
 import 'backend/extension/provider'
-import 'backend/proxy/ipcHandlers.ts'
+import 'backend/proxy/ipcHandlers'
 
 import './ipcHandlers'
 import './ipcHandlers/checkDiskSpace'
@@ -181,7 +181,13 @@ import 'backend/ipcHandlers/quests'
 import 'backend/ipcHandlers/achievements'
 import 'backend/utils/auto_launch'
 import { hrtime } from 'process'
-import { getHyperPlayReleaseObject } from './storeManagers/hyperplay/utils'
+import {
+  getEpicListingUrl,
+  getHyperPlayReleaseObject
+} from './storeManagers/hyperplay/utils'
+import { postPlaySessionTime } from './utils/quests'
+
+import { gameIsEpicForwarderOnHyperPlay } from './utils/shouldOpenOverlay'
 
 async function startProxyServer() {
   try {
@@ -225,6 +231,10 @@ let ldMainClient: LDElectron.LDElectronMainClient
 
 if (!app.isPackaged || process.env.DEBUG_HYPERPLAY === 'true') {
   app.commandLine?.appendSwitch('remote-debugging-port', '9222')
+
+  ipcMain.on('otp', (e, otp: string) => {
+    handleOtp(otp)
+  })
 }
 
 const { showOpenDialog } = dialog
@@ -365,11 +375,15 @@ const loadMainWindowURL = function () {
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(prodAppUrl)
-    autoUpdater.checkForUpdates().then((val) => {
-      logInfo(
-        `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
-      )
-    })
+    const appSettings = configStore.get_nodefault('settings')
+    const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
+    if (shouldCheckForUpdates) {
+      autoUpdater.checkForUpdates().then((val) => {
+        logInfo(
+          `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
+        )
+      })
+    }
   }
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -671,6 +685,16 @@ if (!gotTheLock) {
 
     initTrayIcon(mainWindow)
 
+    // Call checkGameUpdates for HyperPlay games every hour
+    const checkGameUpdatesInterval = 1 * 60 * 60 * 1000
+    setInterval(async () => {
+      try {
+        await checkGameUpdates(['hyperplay'])
+      } catch (error) {
+        logError(`Error checking game updates: ${error}`, LogPrefix.Backend)
+      }
+    }, checkGameUpdatesInterval)
+
     return
   })
 }
@@ -816,27 +840,31 @@ ipcMain.handle('runWineCommand', async (e, args) => runWineCommand(args))
 
 /// IPC handlers begin here.
 
+async function checkGameUpdates(runners: Runner[]): Promise<string[]> {
+  let oldGames: string[] = []
+  const { autoUpdateGames } = GlobalConfig.get().getSettings()
+  for (const runner of runners) {
+    let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
+    if (autoUpdateGames) {
+      gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
+    }
+    oldGames = [...oldGames, ...gamesToUpdate]
+  }
+
+  sendGameUpdatesNotifications().catch((e) =>
+    logError(
+      `Something went wrong sending update notifications: ${e}`,
+      LogPrefix.Backend
+    )
+  )
+
+  return oldGames
+}
+
 ipcMain.handle(
   'checkGameUpdates',
   async (e, runners: Runner[]): Promise<string[]> => {
-    let oldGames: string[] = []
-    const { autoUpdateGames } = GlobalConfig.get().getSettings()
-    for (const runner of runners) {
-      let gamesToUpdate = await libraryManagerMap[runner].listUpdateableGames()
-      if (autoUpdateGames) {
-        gamesToUpdate = await autoUpdate(runner as Runner, gamesToUpdate)
-      }
-      oldGames = [...oldGames, ...gamesToUpdate]
-    }
-
-    sendGameUpdatesNotifications().catch((e) =>
-      logError(
-        `Something went wrong sending update notifications: ${e}`,
-        LogPrefix.Backend
-      )
-    )
-
-    return oldGames
+    return checkGameUpdates(runners)
   }
 )
 
@@ -897,6 +925,10 @@ ipcMain.handle('appIsInLibrary', async (event, appName, runner) => {
 
 ipcMain.on('goToGamePage', async (event, appName) => {
   return sendFrontendMessage('goToGamePage', appName)
+})
+
+ipcMain.on('navigate', async (event, appName) => {
+  return sendFrontendMessage('navigate', appName)
 })
 
 ipcMain.handle('getGameInfo', async (event, appName, runner) => {
@@ -1105,7 +1137,7 @@ ipcMain.handle('refreshLibrary', async (e, library?) => {
   } else {
     const allRefreshPromises = []
     for (const runner_i in libraryManagerMap) {
-      allRefreshPromises.push(libraryManagerMap[runner_i].refresh())
+      allRefreshPromises.push(libraryManagerMap[runner_i as Runner].refresh())
     }
     await Promise.allSettled(allRefreshPromises)
   }
@@ -1116,6 +1148,52 @@ ipcMain.on('logError', (e, err) => logError(err, LogPrefix.Frontend))
 ipcMain.on('logInfo', (e, info) => logInfo(info, LogPrefix.Frontend))
 
 let powerDisplayId: number | null
+let gamePlaySessionStartTimes: Record<string, bigint> = {}
+
+function startNewPlaySession(appName: string) {
+  gamePlaySessionStartTimes = {}
+  // Uses hrtime for monotonic timer not subject to clock drift or sync errors
+  const startPlayingTimeMonotonic = hrtime.bigint()
+  gamePlaySessionStartTimes[appName] = startPlayingTimeMonotonic
+}
+
+async function syncPlaySession(appName: string, runner: Runner) {
+  if (!Object.hasOwn(gamePlaySessionStartTimes, appName)) {
+    return
+  }
+
+  const stopPlayingTimeMonotonic = hrtime.bigint()
+  const sessionPlaytimeInMs =
+    (stopPlayingTimeMonotonic - gamePlaySessionStartTimes[appName]) /
+    BigInt(1000000)
+
+  // reset the time counter
+  startNewPlaySession(appName)
+
+  // update local json with time played
+  const sessionPlaytimeInMinutes =
+    sessionPlaytimeInMs / BigInt(1000) / BigInt(60)
+
+  const totalPlaytime =
+    sessionPlaytimeInMinutes + BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
+  tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
+
+  const game = gameManagerMap[runner].getGameInfo(appName)
+  const { hyperPlayListing } = await gameIsEpicForwarderOnHyperPlay(game)
+  postPlaySessionTime(
+    hyperPlayListing?.project_id || appName,
+    parseInt((sessionPlaytimeInMs / BigInt(1000)).toString())
+  )
+
+  return sessionPlaytimeInMs
+}
+
+ipcMain.handle(
+  'syncPlaySession',
+  async (e, appName: string, runner: Runner) => {
+    await syncPlaySession(appName, runner)
+  }
+)
 
 // get pid/tid on launch and inject
 ipcMain.handle(
@@ -1130,8 +1208,7 @@ ipcMain.handle(
     const { minimizeOnGameLaunch } = GlobalConfig.get().getSettings()
 
     const startPlayingDate = new Date()
-    // Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    const startPlayingTimeMonotonic = hrtime.bigint()
+    startNewPlaySession(appName)
 
     if (!tsStore.has(game.app_name)) {
       tsStore.set(
@@ -1282,16 +1359,7 @@ ipcMain.handle(
     const finishedPlayingDate = new Date()
     tsStore.set(`${appName}.lastPlayed`, finishedPlayingDate.toISOString())
     // Playtime of this session in minutes. Uses hrtime for monotonic timer not subject to clock drift or sync errors
-    const stopPlayingTimeMonotonic = hrtime.bigint()
-    const sessionPlaytimeInMs =
-      (stopPlayingTimeMonotonic - startPlayingTimeMonotonic) / BigInt(1000000)
-    const sessionPlaytimeInMinutes =
-      sessionPlaytimeInMs / BigInt(1000) / BigInt(60)
-
-    const totalPlaytime =
-      sessionPlaytimeInMinutes +
-      BigInt(tsStore.get(`${appName}.totalPlayed`, 0))
-    tsStore.set(`${appName}.totalPlayed`, Number(totalPlaytime))
+    const sessionPlaytimeInMs = await syncPlaySession(appName, runner)
 
     if (runner === 'gog') {
       await updateGOGPlaytime(appName, startPlayingDate, finishedPlayingDate)
@@ -1978,6 +2046,10 @@ ipcMain.handle('addHyperplayGame', async (_e, projectId) => {
   await addGameToLibrary(projectId)
 })
 
+ipcMain.handle('getEpicListingUrl', async (_e, projectId) =>
+  getEpicListingUrl(projectId)
+)
+
 ipcMain.handle(
   'isGameHidden',
   async (_e, gameId) =>
@@ -1998,9 +2070,11 @@ function watchLibraryChanges() {
   sideloadLibraryStore.onDidChange('games', (newValue) =>
     sendFrontendMessage('onLibraryChanged', 'sideload', newValue)
   )
-  hpLibraryStore.onDidChange('games', (newValue) =>
-    sendFrontendMessage('onLibraryChanged', 'hyperplay', newValue)
-  )
+  hpLibraryStore.onDidChange('games', (newValue) => {
+    for (const win of BrowserWindow.getAllWindows()) {
+      win.webContents.send('onLibraryChanged', 'hyperplay', newValue)
+    }
+  })
 }
 
 ipcMain.on('openGameInEpicStore', async (_e, url) => {

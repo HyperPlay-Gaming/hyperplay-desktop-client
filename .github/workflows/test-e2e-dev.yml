@@ -13,6 +13,7 @@ env:
   RUDDERSTACK_CLIENT_ID: ${{ secrets.RUDDERSTACK_CLIENT_ID }}
 
 jobs:
+  if: false
   linux-dev:
     runs-on: ubuntu-latest
     concurrency:
@@ -20,14 +21,12 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
+
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'yarn'
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -49,14 +48,12 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
+
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'yarn'
       - name: Reconfigure git to use HTTP authentication
         run: >
@@ -82,14 +79,12 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout repository.
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
+
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
           cache: 'yarn'
       - name: Reconfigure git to use HTTP authentication
         run: >

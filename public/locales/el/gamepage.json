@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Συνέχιση εγκατάστασης",
             "message": "Θέλετε να ΔΙΑΤΗΡΗΣΕΤΕ τα ληφθέντα αρχεία;",
-            "title": "Διακοπή εγκατάστασης"
+            "title": "Διακοπή εγκατάστασης",
+            "keepFilesMessage": "Ελέγξτε εδώ αν θέλετε να κρατήσετε τα αρχεία λήψης μετά την ακύρωση."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Θέλετε να απεγκαταστήσετε αυτό το παιχνίδι;",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Απεγκατάσταση"
+            "title": "Απεγκατάσταση",
+            "dlc": "Θέλετε να επαναφέρετε αυτό το DLC?",
+            "prefix_warning": "Το πρόθεμα του κρασιού για αυτό το παιχνίδι είναι το προεπιλεγμένο πρόθεμα. Αν πραγματικά θέλετε να το διαγράψετε, πρέπει να το κάνετε με μη αυτόματο τρόπο."
         },
         "update": {
             "message": "Το παιχνίδι έχει μια ενημέρωση, εφαρμογή ενημερώσεως τώρα;",
-            "title": "Το παιχνίδι χρειάζεται ενημέρωση"
+            "title": "Το παιχνίδι χρειάζεται ενημέρωση",
+            "message-cancel": "Δεν είναι δυνατόν να παίξετε αυτό το παιχνίδι χωρίς ενημέρωση"
         },
         "wineprefix": "Επιλέξτε φάκελο προθεμάτων Wine",
-        "yes": "ΝΑΙ"
+        "yes": "ΝΑΙ",
+        "yesCancel": "Ναι, ακυρώστε",
+        "aware": "Γνωρίζω",
+        "compability": {
+            "message": "Αυτό το παιχνίδι Windows θα τρέξει χρησιμοποιώντας ένα στρώμα συμβατότητας. Μπορεί να αντιμετωπίσετε κάποια ζητήματα ή το παιχνίδι δεν μπορεί να λειτουργήσει καθόλου."
+        },
+        "dont-show-again": "Να μην εμφανιστεί ξανά",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Προσθήκη στα Αγαπημένα",
@@ -56,7 +67,9 @@
         "install": "Εγκατάσταση",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Ακύρωση Λήψης",
+            "continue": "Συνέχιση λήψης"
         },
         "remove_from_favourites": "Κατάργηση από τα Αγαπημένα",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Φανέρωση Παιχνιδιού",
         "uninstall": "Απεγκατάσταση",
-        "update": "Ενημέρωση"
+        "update": "Ενημέρωση",
+        "details": "Λεπτομέρειες",
+        "favorites": "Αγαπημένο",
+        "remove_from_library": "Αφαίρεση",
+        "unfavorites": "Αφαίρεση από αγαπημένα"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Απενεργοποιημένο",
@@ -86,14 +103,17 @@
         "neverPlayed": "Ποτέ",
         "platform": "Επιλέξτε Έκδοση Πλατφόρμας για εγκατάσταση",
         "requirements": "Απαιτήσεις Συστήματος",
-        "totalPlayed": "Συνολικός Χρόνος Παιχνιδιού"
+        "totalPlayed": "Συνολικός Χρόνος Παιχνιδιού",
+        "dlcs": "DLCs",
+        "selectChannelName": "Επιλέξτε Channel Όνομα"
     },
     "gamecard": {
         "moving": "Μετακίνηση",
         "repairing": "Επιδιόρθωση"
     },
     "generic": {
-        "error": "Άγνωστο Σφάλμα"
+        "error": "Άγνωστο Σφάλμα",
+        "noDescription": "Δεν υπάρχει διαθέσιμη περιγραφή."
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -118,7 +138,8 @@
         "path-not-writtable": "Προειδοποίηση: μπορεί να μην είναι δυνατή η εγγραγή στη συγκεκριμένη διαδρομή.",
         "space-after-install": "Μετά την Εγκατάσταση",
         "wineprefix": "Πρόθεμα Wine",
-        "wineversion": "Έκδοση Wine"
+        "wineversion": "Έκδοση Wine",
+        "compatibility-warning": "Αυτό το παιχνίδι Windows θα τρέξει χρησιμοποιώντας ένα στρώμα συμβατότητας. Η εμπειρία σας μπορεί να ποικίλει."
     },
     "label": {
         "game": {
@@ -126,7 +147,8 @@
         },
         "playing": {
             "start": "Παίξτε τώρα",
-            "stop": "Σε παιχνίδι (Διακοπή)"
+            "stop": "Σε παιχνίδι (Διακοπή)",
+            "update": "Ενημέρωση"
         },
         "saves": {
             "syncing": "Συγχρονισμός save"
@@ -147,7 +169,8 @@
         "title": "Διαλέξτε στοιχεία για εγκατάσταση"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Περιβάλλον"
     },
     "sideload": {
         "field": {
@@ -186,7 +209,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Σύνολο ληφθέντων",
         "uninstalling": "Uninstalling",
-        "updating": "Ενημέρωση παιχνιδιού"
+        "updating": "Ενημέρωση παιχνιδιού",
+        "distributables": "Εγκατάσταση διανομέων",
+        "extracting": {
+            "cancel": "Ακύρωση",
+            "progress": "Εξαγωγή"
+        },
+        "goodie": "Δεν είναι εφικτό",
+        "preparing": "Preparing Download, παρακαλώ περιμένετε",
+        "gog-goodie": "Αυτό το παιχνίδι δεν φαίνεται να είναι εφικτό. Ελέγξτε το περιεχόμενο downloadable στο Reefgog.com/account",
+        "moving-files": "Κινούμενο αρχείο \"{{file}}\": {{percent}} ",
+        "syncingSaves": "Συγχρονισμός save",
+        "playing": "Παίζει",
+        "downloading": "Κατεβαίνει",
+        "paused": "Σε παύση"
     },
     "submenu": {
         "addShortcut": "Προσθήκη συντόμευσης",
@@ -200,6 +236,7 @@
         "removeShortcut": "Κατάργηση συντεμεύσεων",
         "settings": "Ρυθμίσεις",
         "store": "Κατάστημα",
-        "verify": "Επαλήθευση και Επιδιόρθωση"
+        "verify": "Επαλήθευση και Επιδιόρθωση",
+        "extraInfo": "Extra Info"
     }
 }

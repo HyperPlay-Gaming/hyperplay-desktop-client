@@ -14,6 +14,7 @@ import {
   flatPakHome,
   isLinux,
   isMac,
+  isWindows,
   runtimePath,
   userHome
 } from './constants'
@@ -24,7 +25,8 @@ import {
   quoteIfNecessary,
   errorHandler,
   removeQuoteIfNecessary,
-  isMacSonomaOrHigher
+  isMacSonomaOrHigher,
+  spawnAsync
 } from './utils'
 import {
   logDebug,
@@ -64,6 +66,7 @@ import { LegendaryCommand } from './storeManagers/legendary/commands'
 import { commandToArgsArray } from './storeManagers/legendary/library'
 import { searchForExecutableOnPath } from './utils/os/path'
 import { getHpOverlay } from './overlay'
+import { launchingGameShouldOpenOverlay } from './utils/shouldOpenOverlay'
 
 async function prepareLaunch(
   gameSettings: GameSettings,
@@ -768,6 +771,8 @@ interface RunnerProps {
 
 const commandsRunning = {}
 
+let shouldUsePowerShell: boolean | null = null
+
 async function callRunner(
   commandParts: string[],
   runner: RunnerProps,
@@ -775,12 +780,47 @@ async function callRunner(
   options?: CallRunnerOptions,
   gameInfo?: GameInfo
 ): Promise<ExecResult> {
-  const fullRunnerPath = join(runner.dir, runner.bin)
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
+  let childPid: number | undefined
 
   // Necessary to get rid of possible undefined or null entries, else
   // TypeError is triggered
   commandParts = commandParts.filter(Boolean)
+
+  let bin = runner.bin
+  let fullRunnerPath = join(runner.dir, bin)
+
+  // macOS/Linux: `spawn`ing an executable in the current working directory
+  // requires a "./"
+  if (!isWindows) {
+    if (runner.name === 'legendary' || runner.name === 'gog') {
+      bin = './' + bin
+    }
+  }
+
+  // On Windows: Use PowerShell's `Start-Process` to wait for the process and
+  // its children to exit, provided PowerShell is available
+  if (shouldUsePowerShell === null && isWindows) {
+    const powershellExists = !!(await searchForExecutableOnPath('powershell'))
+    shouldUsePowerShell = isWindows && powershellExists
+  }
+
+  if (shouldUsePowerShell && runner.name === 'legendary') {
+    const argsAsString = commandParts
+      .map((part) => part.replaceAll('\\', '\\\\'))
+      .map((part) => `"\`"${part}\`""`)
+      .join(',')
+    commandParts = [
+      'Start-Process',
+      `"\`"${fullRunnerPath}\`""`,
+      '-Wait',
+      '-NoNewWindow'
+    ]
+    if (argsAsString) commandParts.push('-ArgumentList', argsAsString)
+
+    bin = 'powershell'
+    fullRunnerPath = 'powershell'
+  }
 
   const safeCommand = getRunnerCallWithoutCredentials(
     [...commandParts],
@@ -810,8 +850,6 @@ async function callRunner(
     }
   }
 
-  const bin = runner.bin
-
   // check if the same command is currently running
   // if so, return the same promise instead of running it again
   const key = [runner.name, commandParts].join(' ')
@@ -821,6 +859,8 @@ async function callRunner(
     return currentPromise
   }
   const hpOverlay = await getHpOverlay()
+  const { shouldOpenOverlay, hyperPlayListing } =
+    await launchingGameShouldOpenOverlay(gameInfo)
 
   let promise = new Promise<ExecResult>((res, rej) => {
     const child = spawn(bin, commandParts, {
@@ -829,13 +869,19 @@ async function callRunner(
       signal: abortController.signal
     })
 
-    const shouldOpenOverlay =
-      gameInfo &&
-      (gameInfo.runner === 'hyperplay' ||
-        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
+    childPid = child.pid
+    logInfo(
+      ['Spawned', runner.name, 'with PID', childPid!.toString()],
+      LogPrefix.Backend
+    )
 
-    if (shouldOpenOverlay)
-      hpOverlay?.openOverlay(gameInfo?.app_name, gameInfo.runner)
+    if (gameInfo && shouldOpenOverlay) {
+      if (hyperPlayListing?.project_id) {
+        hpOverlay?.openOverlay(hyperPlayListing?.project_id, gameInfo.runner)
+      } else {
+        hpOverlay?.openOverlay(gameInfo?.app_name, gameInfo.runner)
+      }
+    }
 
     const stdout: string[] = []
     const stderr: string[] = []
@@ -888,13 +934,22 @@ async function callRunner(
     })
 
     child.on('close', (code, signal) => {
-      if (shouldOpenOverlay) hpOverlay?.closeOverlay()
+      try {
+        if (shouldOpenOverlay) hpOverlay?.closeOverlay()
+      } catch (err) {
+        logError(`Error closing overlay: ${err}`, LogPrefix.HyperPlay)
+      }
       errorHandler({
         error: `${stdout.join().concat(stderr.join())}`,
         logPath: options?.logFile,
         runner: runner.name,
         appName
       })
+
+      // close processes created by this process
+      if (childPid !== undefined) {
+        stopChildProcesses(childPid)
+      }
 
       if (signal && !child.killed) {
         rej('Process terminated with signal ' + signal)
@@ -912,6 +967,12 @@ async function callRunner(
     })
   })
 
+  abortController.signal.onabort = () => {
+    if (childPid !== undefined) {
+      stopChildProcesses(childPid)
+    }
+  }
+
   promise = promise
     .then(({ stdout, stderr }) => {
       return { stdout, stderr, fullCommand: safeCommand }
@@ -919,7 +980,9 @@ async function callRunner(
     .catch((error) => {
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
-
+        if (childPid !== undefined) {
+          stopChildProcesses(childPid)
+        }
         return {
           stdout: '',
           stderr: '',
@@ -957,6 +1020,84 @@ async function callRunner(
   return promise
 }
 
+async function stopChildProcesses(childPid: number) {
+  if (isWindows) {
+    logWarning(
+      `Killing all processes spawned by PID ${childPid}`,
+      LogPrefix.Backend
+    )
+
+    try {
+      // Get the list of child processes
+      const getChildProcesses = async (parentPid: number) => {
+        const result = await spawnAsync('powershell.exe', [
+          '-NoProfile',
+          '-Command',
+          `Get-CimInstance Win32_Process | Where-Object { $_.ParentProcessId -eq ${parentPid} } | Select-Object -ExpandProperty ProcessId`
+        ])
+
+        if (result.stderr) {
+          logError(
+            `Error getting child processes: ${result.stderr}`,
+            LogPrefix.Backend
+          )
+        }
+
+        return result.stdout
+          .trim()
+          .split('\n')
+          .map((pid) => pid.trim())
+          .filter((pid) => pid)
+      }
+
+      // Recursively stop child processes
+      const stopProcessTree = async (parentPid: number) => {
+        const childPids = await getChildProcesses(parentPid)
+        for (const pid of childPids) {
+          stopProcessTree(parseInt(pid, 10))
+        }
+
+        // Stop the parent process
+        const stopResult = await spawnAsync('powershell.exe', [
+          '-NoProfile',
+          '-Command',
+          `Stop-Process -Id ${parentPid} -Force`
+        ])
+
+        if (stopResult.stderr) {
+          logError(
+            `Error stopping process with PID ${parentPid}: ${stopResult.stderr}`,
+            LogPrefix.Backend
+          )
+        }
+
+        logInfo(
+          `Successfully stopped process with PID: ${parentPid}`,
+          LogPrefix.Backend
+        )
+      }
+
+      stopProcessTree(childPid)
+    } catch (error) {
+      logError(
+        `Error executing PowerShell command: ${error}`,
+        LogPrefix.Backend
+      )
+    }
+
+    return
+  }
+
+  try {
+    return await spawnAsync('pkill', ['-TERM', '-P', childPid.toString()])
+  } catch (error) {
+    return logWarning(
+      `could not stop child processes from PID: ${childPid}. Maybe they were already stopped`,
+      LogPrefix.Backend
+    )
+  }
+}
+
 /**
  * Generates a formatted, safe command that can be logged
  * @param command The runner command that's executed, e.g. install, list, etc.
@@ -976,11 +1117,25 @@ function getRunnerCallWithoutCredentials(
   const modifiedCommand = [...command]
   // Redact sensitive arguments (Authorization Code for Legendary, token for GOGDL)
   for (const sensitiveArg of ['--code', '--token']) {
-    const sensitiveArgIndex = modifiedCommand.indexOf(sensitiveArg)
-    if (sensitiveArgIndex === -1) {
-      continue
+    // PowerShell's argument formatting is quite different, instead of having
+    // arguments as members of `command`, they're all in one specific member
+    // (the one after "-ArgumentList")
+    if (runnerPath === 'powershell') {
+      const argumentListIndex = modifiedCommand.indexOf('-ArgumentList') + 1
+      if (!argumentListIndex) continue
+      modifiedCommand[argumentListIndex] = modifiedCommand[
+        argumentListIndex
+      ].replace(
+        new RegExp(`"${sensitiveArg}","(.*?)"`),
+        `"${sensitiveArg}","<redacted>"`
+      )
+    } else {
+      const sensitiveArgIndex = modifiedCommand.indexOf(sensitiveArg)
+      if (sensitiveArgIndex === -1) {
+        continue
+      }
+      modifiedCommand[sensitiveArgIndex + 1] = '<redacted>'
     }
-    modifiedCommand[sensitiveArgIndex + 1] = '<redacted>'
   }
 
   const formattedEnvVars: string[] = []

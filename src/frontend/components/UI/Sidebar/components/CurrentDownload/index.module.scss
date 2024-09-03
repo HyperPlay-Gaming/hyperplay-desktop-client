@@ -1,0 +1,13 @@
+.progressContainer {
+  display: 'flex';
+  align-items: 'center';
+}
+
+.progressBarContainer {
+  width: '100%';
+  margin-right: var(--space-sm);
+}
+
+.progressValueContainer {
+  min-width: 35px;
+}

@@ -29,21 +29,32 @@
         "stopInstall": {
             "keepInstalling": "تابع التثبيت",
             "message": "هل تريد إبقاء الملفات المُنزّلة؟",
-            "title": "أوقف التثبيت"
+            "title": "أوقف التثبيت",
+            "keepFilesMessage": "تحقق هنا إذا كنت تريد الاحتفاظ بملفات تحميل بعد إلغاء."
         },
         "uninstall": {
             "checkbox": "إزالة السابقة: {{newLine}}{{prefix}} ملاحظة: سيحذف هذا القرار ملفات التخزينات التي ليس لها نسخ احتياطية ولا يمكن التراجع عن هذا.",
             "checkbox_prefix": "بادئة",
             "message": "هل تريد إلغاء تثبيت هذه اللعبة؟",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "أزِل التثبيت"
+            "title": "أزِل التثبيت",
+            "dlc": "هل تريد أن تنهي هذه الـ \"دي إل سي\"؟?",
+            "prefix_warning": "مُفتاح النبيذ لهذه المُباراة هو المُفترق المُسبق. إذا كنت حقا تريد حذفه، عليك أن تفعل ذلك يدويا."
         },
         "update": {
             "message": "هنالك تحديث متاح لهذه اللعبة، هل تريد تطبيقه الآن؟",
-            "title": "تحتاج اللعبة للتحديث"
+            "title": "تحتاج اللعبة للتحديث",
+            "message-cancel": "ليس من الممكن أن تلعب هذه اللعبة بدون تحديث"
         },
         "wineprefix": "اختر مجلد سابقات واين",
-        "yes": "نعم"
+        "yes": "نعم",
+        "dont-show-again": "لا تظهر مرَّةً أخرى",
+        "ok": "حسناً",
+        "aware": "أنا على علم",
+        "compability": {
+            "message": "لعبة (ويندوز) هذه ستسير باستخدام طبقة التوافق قد تواجه بعض المشاكل أو اللعبة قد لا تعمل على الإطلاق."
+        },
+        "yesCancel": "نعم، ألغي"
     },
     "button": {
         "add_to_favourites": "أضف للمفضلة",
@@ -57,7 +68,9 @@
         "install": "ثبت",
         "no-path-selected": "لم يُحدد مسار",
         "queue": {
-            "remove": "أزل من قائمة الانتظار"
+            "remove": "أزل من قائمة الانتظار",
+            "cancel": "إلغاء التحميل",
+            "continue": "تابع التنزيل"
         },
         "remove_from_favourites": "احذف من المفضلة",
         "remove_from_recent": "أزل من \"المشغلة مؤخرًا\"",
@@ -68,7 +81,11 @@
         },
         "unhide_game": "أظهر اللعبة",
         "uninstall": "ألغِ التثبيت",
-        "update": "حدّث"
+        "update": "حدّث",
+        "remove_from_library": "إزالة",
+        "unfavorites": "إزالة من المفضلة",
+        "details": "تفاصيل",
+        "favorites": "المفضلة"
     },
     "cloud_save_unsupported": "غير مدعوم",
     "disabled": "معطّل",
@@ -87,14 +104,17 @@
         "neverPlayed": "لم تُلعب مطلقًا",
         "platform": "حدد إصدار المنصة لتثبيته",
         "requirements": "متطلبات النظام",
-        "totalPlayed": "مدة اللعب"
+        "totalPlayed": "مدة اللعب",
+        "dlcs": "DLCs",
+        "selectChannelName": "القناة المختارة الاسم"
     },
     "gamecard": {
         "moving": "قيد النقل",
         "repairing": "قيد الإصلاح"
     },
     "generic": {
-        "error": "خطأ مجهول"
+        "error": "خطأ مجهول",
+        "noDescription": "لا يوجد وصف!"
     },
     "hours": "ساعات",
     "how-long-to-beat": {
@@ -109,7 +129,8 @@
         "path": "مسار التثبيت",
         "size": "الحجم",
         "syncsaves": "مزامنة ملفات التخزين",
-        "version": "النسخة"
+        "version": "النسخة",
+        "web3-supported": "لها موقع على الشبكة 3"
     },
     "install": {
         "disk-space-left": "المساحة المتوفرة",
@@ -124,7 +145,8 @@
             "message": "إما دعم مكافحة الغش تعطَّل أو رُفِض، فلن تعمل اللعبة إن ثبَّتتها، فهل تريد تثبيتها؟",
             "install": "حسنًا، وأعي أن لا جدوى في ذلك",
             "title": "مكافحة الغش تعطَّلت أو رُفِضت"
-        }
+        },
+        "compatibility-warning": "لعبة (ويندوز) هذه ستسير باستخدام طبقة التوافق قد تتباين تجربتك."
     },
     "label": {
         "game": {
@@ -132,7 +154,8 @@
         },
         "playing": {
             "start": "إلعب الأن",
-            "stop": "مشغّلة (أوقفها)"
+            "stop": "مشغّلة (أوقفها)",
+            "update": "تحديث"
         },
         "saves": {
             "syncing": "قيد مزامنة ملفات التخزين"
@@ -153,7 +176,8 @@
         "title": "اختر المكونات المراد تثبيتها"
     },
     "setting": {
-        "use-default-wine-settings": "استخدم إعدادات واين الافتراضية"
+        "use-default-wine-settings": "استخدم إعدادات واين الافتراضية",
+        "winecrossoverbottle": "قارورة كروس.أوفر"
     },
     "sideload": {
         "field": {
@@ -162,11 +186,14 @@
         "info": {
             "exe": "حدد قابل للتنفيذ",
             "image": "صورة التطبيق",
-            "title": "عنوان اللعبة / التطبيق"
+            "title": "عنوان اللعبة / التطبيق",
+            "supports-web3": "هذه الألعاب لها موقع على الإنترنت 3",
+            "broser": "BrowserURL"
         },
         "placeholder": {
             "image": "الصق عنوان URL للصورة هنا",
-            "title": "أضف عنوانًا إلى لعبتك / تطبيقك"
+            "title": "أضف عنوانًا إلى لعبتك / تطبيقك",
+            "url": "عُذر اللعبة هنا"
         }
     },
     "specs": {
@@ -189,7 +216,20 @@
         "this-game-uses-third-party": "تستخدم هذه اللعبة مُشغل طرف ثالث وهي غير مدعومة بعد",
         "totalDownloaded": "إجمالي التنزيلات",
         "uninstalling": "قيد إلغاء التثبيت",
-        "updating": "قيد تحديث اللعبة"
+        "updating": "قيد تحديث اللعبة",
+        "playing": "جاري التشغيل",
+        "paused": "متوقف مؤقتًا",
+        "downloading": "جاري التحميل",
+        "syncingSaves": "قيد مزامنة ملفات التخزين",
+        "moving-files": "ملف متحرك ",
+        "goodie": "لا يمكن",
+        "preparing": "جهز الحمولة من فضلك انتظر",
+        "gog-goodie": "لا يبدو أن هذه اللعبة لا يمكن تثبيتها تحقق من المحتوى القابل للتنزيل على الموقع الشبكي: https://gog.com/account",
+        "distributables": "المجموع",
+        "extracting": {
+            "cancel": "الالغاء",
+            "progress": "الاستخراج"
+        }
     },
     "submenu": {
         "addShortcut": "أضف اختصارًا",
@@ -203,6 +243,7 @@
         "removeShortcut": "أزل الاختصارات",
         "settings": "الإعدادات",
         "store": "صفحة المتجر",
-        "verify": "تحقق وأصلح"
+        "verify": "تحقق وأصلح",
+        "extraInfo": "معلومات إضافية"
     }
 }

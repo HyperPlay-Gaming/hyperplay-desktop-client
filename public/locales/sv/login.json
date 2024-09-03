@@ -1,6 +1,8 @@
 {
     "button": {
-        "login": "Logga in"
+        "login": "Logga in",
+        "loading": "Laddar",
+        "error": "Fel, prova en annan kod"
     },
     "message": {
         "part1": "För att logga in och installera spel, följ dessa instruktioner:",

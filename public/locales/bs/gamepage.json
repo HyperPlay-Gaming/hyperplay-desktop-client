@@ -29,21 +29,32 @@
         "stopInstall": {
             "keepInstalling": "Nastavite instalaciju",
             "message": "Želite li ZADRŽATI preuzete datoteke?",
-            "title": "Zaustavi instalaciju"
+            "title": "Zaustavi instalaciju",
+            "keepFilesMessage": "#Pregled tuda li #free @want# to #tvrđava @the #preuzimanje #kartoteka @after canceling#."
         },
         "uninstall": {
             "checkbox": "Želite li obrisati i prefiks? Ovo se ne može poništiti.",
             "checkbox_prefix": "Prefiks",
             "message": "Želite li izbrisati video igru?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Izbriši"
+            "title": "Izbriši",
+            "dlc": "@Do #free @want# to Uninstall @this @DLC#?",
+            "prefix_warning": "@The #Vino #prefiks @for @this #igra @i @the default #prefiks. Li #free tada @want# to @delete #free, #free @have# to @do #free @manually#."
         },
         "update": {
             "message": "Ova video igra ima ažuriranje. Želite li ažurirati sada?",
-            "title": "Video igri je potrebno ažuriranje"
+            "title": "Video igri je potrebno ažuriranje",
+            "message-cancel": "#Free @i ne #mogućan #na #predstava @this #igra @without #poboljšati"
         },
         "wineprefix": "Izaberite WinePrefix mapu",
-        "yes": "DA"
+        "yes": "DA",
+        "aware": "@I #biti #svjestan",
+        "compability": {
+            "message": "@This #Prozor #igra #volja #bijeg #uporabiti @a #kompatibilnost #red. #Free @might @encounter #kakav #tema ili @the #igra @might ne #rad uopće#."
+        },
+        "yesCancel": "@Yes, #ukidati",
+        "dont-show-again": "Ne prikazuj ponovo",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Dodaj u favorite",
@@ -57,7 +68,9 @@
         "install": "Instaliraj",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "#Ukidati",
+            "continue": "Nastavi preuzimanje"
         },
         "remove_from_favourites": "Otkloni iz favorita",
         "remove_from_recent": "Remove From Recent",
@@ -68,7 +81,11 @@
         },
         "unhide_game": "Prikaži igru",
         "uninstall": "Deinstaliraj",
-        "update": "Ažuriraj"
+        "update": "Ažuriraj",
+        "unfavorites": "Unfavorite",
+        "details": "Details",
+        "favorites": "Favorite",
+        "remove_from_library": "Ukloni"
     },
     "cloud_save_unsupported": "Nepodržano",
     "disabled": "Onemogućeno",
@@ -87,14 +104,17 @@
         "neverPlayed": "Nikada",
         "platform": "Odaberi verziju platforme za instalirati",
         "requirements": "Zahtjevi sistema",
-        "totalPlayed": "Vrijeme igranja"
+        "totalPlayed": "Vrijeme igranja",
+        "dlcs": "@DLC",
+        "selectChannelName": "@Select #Kanal"
     },
     "gamecard": {
         "moving": "Premještanje",
         "repairing": "Popravljanje"
     },
     "generic": {
-        "error": "Nepoznata greška"
+        "error": "Nepoznata greška",
+        "noDescription": "@No #opis #dostupan"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -119,7 +139,8 @@
         "path-not-writtable": "Upozorenje: put možda nije upisiv.",
         "space-after-install": "Nakon instalacije",
         "wineprefix": "WinePrefix",
-        "wineversion": "Wine verzija"
+        "wineversion": "Wine verzija",
+        "compatibility-warning": "@This #Prozor #igra #volja #bijeg #uporabiti @a #kompatibilnost #red. #Tvoj #iskustvo @may @vary#."
     },
     "label": {
         "game": {
@@ -127,7 +148,8 @@
         },
         "playing": {
             "start": "Igraj sada",
-            "stop": "Igra se (Prekini)"
+            "stop": "Igra se (Prekini)",
+            "update": "Update"
         },
         "saves": {
             "syncing": "Sinhoniziranje podataka"
@@ -148,7 +170,8 @@
         "title": "Odaberite komponente za instalaciju"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -187,7 +210,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Ukupno preuzeto",
         "uninstalling": "Uninstalling",
-        "updating": "Ažuriranje video igre"
+        "updating": "Ažuriranje video igre",
+        "distributables": "#Instaliranje",
+        "gog-goodie": "@This #igra @do ne #nastati #na #biti @installable. #Pregled downloadable #sadržaj @on https://gog.@com/#račun",
+        "preparing": "@Preparing #Preuzimanje, @please #čekanje",
+        "goodie": "Ne @installable",
+        "moving-files": "#Micati #dosje '[@X13@X]': [@X24@X] ",
+        "extracting": {
+            "cancel": "#Ukidati",
+            "progress": "#Vaditi"
+        },
+        "playing": "#Igrati",
+        "syncingSaves": "Sinhoniziranje podataka",
+        "downloading": "Preuzimanje",
+        "paused": "Paused"
     },
     "submenu": {
         "addShortcut": "Dodaj prečicu",
@@ -201,6 +237,7 @@
         "removeShortcut": "Uklonite prečice",
         "settings": "Postavke",
         "store": "Webstranica Trgovine",
-        "verify": "Provjeri i popravi"
+        "verify": "Provjeri i popravi",
+        "extraInfo": "@Extra"
     }
 }

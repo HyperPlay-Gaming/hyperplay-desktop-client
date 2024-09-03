@@ -48,7 +48,12 @@
         "wineprefix": "Pilih Folder Prefiks Wine",
         "yes": "YA",
         "yesCancel": "Ya, batalkan",
-        "ok": "Oke"
+        "ok": "Oke",
+        "aware": "Login",
+        "compability": {
+            "message": "Game Windows ini akan berjalan menggunakan lapisan kompatibilitas. Anda mungkin menemukan beberapa masalah atau permainan mungkin tidak bekerja sama sama sekali."
+        },
+        "dont-show-again": "Jangan tampilkan lagi"
     },
     "button": {
         "add_to_favourites": "Tambahkan Ke Favorit",
@@ -78,7 +83,8 @@
         "update": "Perbarui",
         "details": "Rincian",
         "remove_from_library": "Hapus",
-        "favorites": "Favorit"
+        "favorites": "Favorit",
+        "unfavorites": "Batalkan favorit"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Dinonaktifkan",
@@ -97,14 +103,17 @@
         "neverPlayed": "Tidak pernah",
         "platform": "Pilih Versi Platform yang Akan Dipasang",
         "requirements": "Persyaratan Sistem",
-        "totalPlayed": "Lama Dimainkan"
+        "totalPlayed": "Lama Dimainkan",
+        "dlcs": "Login",
+        "selectChannelName": "Pilih Saluran Login"
     },
     "gamecard": {
         "moving": "Memindahkan",
         "repairing": "Memperbaiki"
     },
     "generic": {
-        "error": "Kesalahan tidak diketahui"
+        "error": "Kesalahan tidak diketahui",
+        "noDescription": "Deskripsi tidak tersedia!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -129,7 +138,8 @@
         "path-not-writtable": "Peringatan: lokasi mungkin tidak dapat ditulis.",
         "space-after-install": "Setelah Instalasi",
         "wineprefix": "PrefiksWine",
-        "wineversion": "Versi Wine"
+        "wineversion": "Versi Wine",
+        "compatibility-warning": "Game Windows ini akan berjalan menggunakan lapisan kompatibilitas. Pengalaman Anda dapat bervariasi."
     },
     "label": {
         "game": {
@@ -137,7 +147,8 @@
         },
         "playing": {
             "start": "Mainkan sekarang",
-            "stop": "Memainkan (Berhenti)"
+            "stop": "Memainkan (Berhenti)",
+            "update": "Perbarui"
         },
         "saves": {
             "syncing": "Menyinkronkan Penyimpanan"
@@ -158,7 +169,8 @@
         "title": "Pilih komponen untuk dipasang"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -197,7 +209,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Jumlah yang Diunduh",
         "uninstalling": "Uninstalling",
-        "updating": "Memperbarui Gim"
+        "updating": "Memperbarui Gim",
+        "gog-goodie": "Game ini tidak muncul untuk dapat diinstal. URL https://gog.com/account",
+        "goodie": "Tidak dapat dipasang",
+        "distributables": "Menginstal Distributables",
+        "extracting": {
+            "cancel": "Batalkan Ekstraksi",
+            "progress": "Login"
+        },
+        "moving-files": "Pindahkan file '{{file}}': {{percent}} ",
+        "preparing": "Preparing Download",
+        "paused": "Dijeda",
+        "downloading": "Mengunduh",
+        "playing": "Memutar",
+        "syncingSaves": "Menyinkronkan Penyimpanan"
     },
     "submenu": {
         "addShortcut": "Tambahkan pintasan",
@@ -211,6 +236,7 @@
         "removeShortcut": "Remove shortcuts",
         "settings": "Pengaturan",
         "store": "Halaman Toko",
-        "verify": "Verifikasi dan Perbaiki"
+        "verify": "Verifikasi dan Perbaiki",
+        "extraInfo": "Info Tambahan"
     }
 }
