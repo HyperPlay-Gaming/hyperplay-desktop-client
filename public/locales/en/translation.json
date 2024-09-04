@@ -89,13 +89,7 @@
         "info": {
             "update": {
                 "appUpdated": "HyperPlay was updated",
-                "appUpdated-message": "HyperPlay was updated. Do you want to update and restart HyperPlay now?",
-                "changelog": "Open changelog",
-                "detail": "Do you want to download the update in the background?",
-                "message": "There is a new Version available!",
-                "message-finished": "Do you want to restart HyperPlay now?",
-                "title": "HyperPlay Games Launcher",
-                "title-finished": "Update Finished"
+                "appUpdated-message": "HyperPlay was updated. Do you want to update and restart HyperPlay now?"
             }
         },
         "no": "NO",
@@ -633,7 +627,8 @@
     },
     "Other": "Other",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet."
+        "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet.",
+        "WALLET_DISCONNECTED": "You do not have a wallet connected to HyperPlay."
     },
     "placeholder": {
         "alt-gogdl-bin": "Using built-in GOGDL binary...",
