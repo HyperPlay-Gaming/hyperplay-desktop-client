@@ -275,18 +275,19 @@ export default observer(function Library(): JSX.Element {
             />
           )}
 
-          {libraryState.showFavourites && !libraryState.showFavouritesLibrary && (
-            <>
-              <h3 className={styles.libraryHeader}>
-                {t('favourites', 'Favourites')}
-              </h3>
-              <GamesList
-                library={libraryState.favourites}
-                handleGameCardClick={handleModal}
-                isFirstLane
-              />
-            </>
-          )}
+          {libraryState.showFavourites &&
+            !libraryState.showFavouritesLibrary && (
+              <>
+                <h3 className={styles.libraryHeader}>
+                  {t('favourites', 'Favourites')}
+                </h3>
+                <GamesList
+                  library={libraryState.favourites}
+                  handleGameCardClick={handleModal}
+                  isFirstLane
+                />
+              </>
+            )}
 
           {libraryState.refreshing &&
             !libraryState.refreshingInTheBackground && (
