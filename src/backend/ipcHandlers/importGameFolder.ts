@@ -1,4 +1,4 @@
-import { logDebug, logInfo, LogPrefix } from 'backend/logger/logger'
+import { logDebug, logError, logInfo, LogPrefix } from 'backend/logger/logger'
 import { importGame } from 'backend/storeManagers/hyperplay/games'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 import { ipcMain } from 'electron'
@@ -39,16 +39,20 @@ ipcMain.handle('importGameFolder', async (ev, gameFolder) => {
       }
       const gameTopLevelFiles = readdirSync(projectFolder_i)
       for (const file_i of gameTopLevelFiles) {
-        const filePath_i = join(projectFolder_i, file_i)
-        if (file_i.startsWith('0x') && file_i.endsWith('.json')) {
-          logDebug(`Found manifest file ${filePath_i}`, LogPrefix.HyperPlay)
-          const manifest = JSON.parse(readFileSync(filePath_i).toString())
-          const appName =
-            manifest?.manifest?.appName || file_i.replace('.json', '')
-          logDebug(`app name to import ${appName}`, LogPrefix.HyperPlay)
-          await addGameToLibrary(appName)
-          await importGame(appName, projectFolder_i)
-          atLeastOneGameImported = true
+        try {
+          const filePath_i = join(projectFolder_i, file_i)
+          if (file_i.startsWith('0x') && file_i.endsWith('.json')) {
+            logDebug(`Found manifest file ${filePath_i}`, LogPrefix.HyperPlay)
+            const manifest = JSON.parse(readFileSync(filePath_i).toString())
+            const appName =
+              manifest?.manifest?.appName || file_i.replace('.json', '')
+            logDebug(`app name to import ${appName}`, LogPrefix.HyperPlay)
+            await addGameToLibrary(appName)
+            await importGame(appName, projectFolder_i)
+            atLeastOneGameImported = true
+          }
+        } catch (err) {
+          logError(`There was an error importing ${file_i}. Error ${err}`)
         }
       }
     }
