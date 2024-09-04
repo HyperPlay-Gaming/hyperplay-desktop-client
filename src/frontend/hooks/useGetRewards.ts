@@ -36,13 +36,19 @@ export function useGetRewards(questId: number | null) {
         }
 
         if (reward_i.reward_type === 'EXTERNAL-TASKS') {
-          const taskAmountToClaim = await window.api.getExternalTaskCredits(
-            reward_i.id.toString()
-          )
-          numToClaim = getDecimalNumberFromAmount(
-            taskAmountToClaim,
-            0
-          ).toString()
+          try {
+            const taskAmountToClaim = await window.api.getExternalTaskCredits(
+              reward_i.id.toString()
+            )
+            numToClaim = getDecimalNumberFromAmount(
+              taskAmountToClaim,
+              0
+            ).toString()
+          } catch (e) {
+            window.api.logError(
+              `Error getting external task credits for reward id ${reward_i}: ${e}`
+            )
+          }
         }
 
         if (
