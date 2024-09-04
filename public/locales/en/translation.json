@@ -89,13 +89,7 @@
         "info": {
             "update": {
                 "appUpdated": "HyperPlay was updated",
-                "appUpdated-message": "HyperPlay was updated. Do you want to update and restart HyperPlay now?",
-                "changelog": "Open changelog",
-                "detail": "Do you want to download the update in the background?",
-                "message": "There is a new Version available!",
-                "message-finished": "Do you want to restart HyperPlay now?",
-                "title": "HyperPlay Games Launcher",
-                "title-finished": "Update Finished"
+                "appUpdated-message": "HyperPlay was updated. Do you want to update and restart HyperPlay now?"
             }
         },
         "no": "NO",
