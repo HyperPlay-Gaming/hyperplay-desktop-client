@@ -80,6 +80,11 @@ export function ImportGameFolder() {
               {importGameFolderMutation?.error?.message}
             </div>
           ) : null}
+          {importGameFolderMutation.isSuccess ? (
+            <div className={styles.successMessage}>
+              {importGameFolderMutation?.data}
+            </div>
+          ) : null}
         </div>
       }
     />

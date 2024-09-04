@@ -2,7 +2,7 @@ import { logDebug, logInfo, LogPrefix } from 'backend/logger/logger'
 import { importGame } from 'backend/storeManagers/hyperplay/games'
 import { addGameToLibrary } from 'backend/storeManagers/hyperplay/library'
 import { ipcMain } from 'electron'
-import { readdirSync, readFileSync } from 'graceful-fs'
+import { readdirSync, readFileSync, statSync } from 'graceful-fs'
 import { join } from 'path'
 
 ipcMain.handle('importGameFolder', async (ev, gameFolder) => {
@@ -16,6 +16,13 @@ ipcMain.handle('importGameFolder', async (ev, gameFolder) => {
       `Importing all games in account folder ${accountFolder_i}`,
       LogPrefix.HyperPlay
     )
+    if (!statSync(accountFolder_i).isDirectory()) {
+      logDebug(
+        `This path is not a folder. Skipping import. Path: ${accountFolder_i}`,
+        LogPrefix.HyperPlay
+      )
+      continue
+    }
     const projectFolders = readdirSync(accountFolder_i)
     for (const project_i of projectFolders) {
       const projectFolder_i = join(accountFolder_i, project_i)
@@ -23,6 +30,13 @@ ipcMain.handle('importGameFolder', async (ev, gameFolder) => {
         `Importing all games in project folder ${accountFolder_i}`,
         LogPrefix.HyperPlay
       )
+      if (!statSync(projectFolder_i).isDirectory()) {
+        logDebug(
+          `This path is not a folder. Skipping import. Path: ${projectFolder_i}`,
+          LogPrefix.HyperPlay
+        )
+        continue
+      }
       const gameTopLevelFiles = readdirSync(projectFolder_i)
       for (const file_i of gameTopLevelFiles) {
         const filePath_i = join(projectFolder_i, file_i)
@@ -42,4 +56,5 @@ ipcMain.handle('importGameFolder', async (ev, gameFolder) => {
   if (!atLeastOneGameImported) {
     throw 'No games were imported'
   }
+  return `Successfully imported games from ${gameFolder}`
 })
