@@ -1021,7 +1021,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "شما به HyperPlay با کیف پول خارجی متصل هستید."
+        "EXTERNAL_WALLET_CONNECTED": "شما به HyperPlay با کیف پول خارجی متصل هستید.",
+        "WALLET_DISCONNECTED": "شما کیف پول متصل به HyperPlay ندارید."
     },
     "achievements": {
         "progress": {
