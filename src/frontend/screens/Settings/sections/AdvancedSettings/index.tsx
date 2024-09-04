@@ -5,8 +5,6 @@ import SettingsContext from '../../SettingsContext'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { GameStatus } from 'common/types'
 import {
-  AltGOGdlBin,
-  AltLegendaryBin,
   DisableLogs,
   DownloadNoHTTPS
 } from '../../components'
@@ -173,10 +171,6 @@ export default function AdvancedSettings() {
       <div className="settingSubheader settingsSectionHeader title">
         {t('settings.navbar.advanced')}
       </div>
-
-      <AltLegendaryBin />
-
-      <AltGOGdlBin />
 
       <DownloadNoHTTPS />
 
