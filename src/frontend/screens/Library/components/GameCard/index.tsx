@@ -165,7 +165,8 @@ const GameCard = ({
   }
 
   const isHiddenGame = libraryState.isGameHidden(appName)
-  const isBrowserGame = installPlatform === 'Browser'
+  const isBrowserGame =
+    installPlatform === 'Browser' || installPlatform === 'web'
 
   const onUninstallClick = function () {
     setShowUninstallModal(true)
