@@ -969,7 +969,8 @@
     },
     "importGameErrorTitle": "Erro ao importar o jogo",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Você está conectado ao HyperPlay com uma carteira externa."
+        "EXTERNAL_WALLET_CONNECTED": "Você está conectado ao HyperPlay com uma carteira externa.",
+        "WALLET_DISCONNECTED": "Você não tem uma carteira conectada ao HyperPlay."
     },
     "quest": {
         "associatedGames": "Jogos associados",
