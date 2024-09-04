@@ -35,14 +35,17 @@
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Искате ли да деинсталирате тази игра?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Деинсталиране"
+            "title": "Деинсталиране",
+            "dlc": "Искате ли да деинсталирате това приложение?"
         },
         "update": {
             "message": "Има ново обновление за играта. Искате ли да го приложите сега?",
             "title": "Играта се нуждае от обновяване"
         },
         "wineprefix": "Изберете папка за префикс на Wine",
-        "yes": "ДА"
+        "yes": "ДА",
+        "dont-show-again": "Да не се показва отново",
+        "ok": "Добре"
     },
     "button": {
         "add_to_favourites": "Добавяне към любимите",
@@ -56,7 +59,9 @@
         "install": "Инсталиране",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Отмяна на изтегляне",
+            "continue": "Продължаване на свалянето"
         },
         "remove_from_favourites": "Премахване от любимите",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +72,11 @@
         },
         "unhide_game": "Показване на играта",
         "uninstall": "Деинсталиране",
-        "update": "Обновяване"
+        "update": "Обновяване",
+        "details": "Подробности",
+        "favorites": "Любими",
+        "remove_from_library": "Премахване",
+        "unfavorites": "Премахване от любимите"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Изключено",
@@ -93,7 +102,8 @@
         "repairing": "Поправяне…"
     },
     "generic": {
-        "error": "Неизвестна грешка"
+        "error": "Неизвестна грешка",
+        "noDescription": "Няма налично описание!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -114,7 +124,8 @@
         "game-scores": "Резултати на играта",
         "installedInfo": "Информация за инсталацията",
         "protondb-compatibility-info": "Ниво на съвместимост с Proton",
-        "steamdeck-compatibility-info": "Съвместимост със SteamDeck"
+        "steamdeck-compatibility-info": "Съвместимост със SteamDeck",
+        "web3-supported": "Has Web3 features"
     },
     "install": {
         "disk-space-left": "Свободно място",
@@ -137,7 +148,8 @@
         },
         "playing": {
             "start": "Пускане сега",
-            "stop": "В игра (Спиране)"
+            "stop": "В игра (Спиране)",
+            "update": "Актуализирай"
         },
         "saves": {
             "syncing": "Синхронизиране на запазените файлове…"
@@ -160,7 +172,8 @@
         "title": "Изберете компоненти за инсталиране"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Бутилка CrossOver"
     },
     "sideload": {
         "field": {
@@ -206,9 +219,12 @@
         "launching": "Пускане…",
         "ubisoft": "Инсталиране на Ubisoft…",
         "downloading": "Сваляне…",
-        "extracting": "Извличане…",
+        "extracting": {
+            "progress": "Извличане…"
+        },
         "gog-goodie": "Тази игра изглежда не може да се инсталира. Проверете съдържанието за сваляне на https://gog.com/account",
-        "goodie": "Не може да се инсталира"
+        "goodie": "Не може да се инсталира",
+        "paused": "На пауза"
     },
     "submenu": {
         "addShortcut": "Добавяне на пряк път",

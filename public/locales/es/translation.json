@@ -91,7 +91,9 @@
                 "message": "¡Hay una nueva versión disponible!",
                 "message-finished": "¿Quieres reiniciar HyperPlay ahora?",
                 "title": "Iniciador de juegos HyperPlay",
-                "title-finished": "Actualización finalizada"
+                "title-finished": "Actualización finalizada",
+                "appUpdated": "HyperPlay fue actualizado",
+                "appUpdated-message": "HyperPlay fue actualizado. ¿Quieres actualizar y reiniciar HyperPlay ahora?"
             }
         },
         "no": "NO",
@@ -989,13 +991,41 @@
         "needMoreAchievements": "Necesitas haber completado\n{{percent}}% de los logros en uno de estos juegos.",
         "claimed": "Reclamado",
         "quests": "Misiones",
-        "playstreak": "Racha de juego",
+        "playstreak": {
+            "now": "Ahora",
+            "playEachDay": "¡Juega cada día para que tu racha no se reinicie!",
+            "playToStart": "¡Juega a este juego para comenzar tu racha!",
+            "dayResets": "Reiniciado el día:",
+            "progressTowardsStreak": "progreso hacia la actual racha.",
+            "days": "días",
+            "streakCompleted": "¡Racha completada! Reclama tus recompensas ahora.",
+            "streakProgress": "Progreso de la racha"
+        },
         "errorMessage": "Ha habido un error en la transacción.",
         "Play": "Jugar",
         "readyForClaim": "Listo para reclamar",
         "active": "Activo",
         "signIn": "Iniciar sesión",
-        "View Game": "Ver el juego"
+        "View Game": "Ver el juego",
+        "sync": "Sincronizar",
+        "type": {
+            "playstreak": "Racha de juego",
+            "reputation": "Reputación"
+        },
+        "points": "Puntos",
+        "claimFailed": "Reclamación rechazada",
+        "createDiscordTicket": "Ticket creado en Discord",
+        "notEnoughGas": "El saldo del monedero es insuficiente para reclamar la recompensa debido a los gastos de gasolina. Prueba con otro monedero o recarga este antes de volver a intentarlo.",
+        "claimFailedMessage": "Por favor, inténtalo una vez más. Si sigue sin funcionar, crea un ticket de soporte en Discord.",
+        "pointsClaimed": "Cuestiones reclamadas",
+        "g7Numclaimed": "Total Claimed G7 Credits",
+        "claimWarning": {
+            "body": "<bold>IMPORTANTE:</bold> Por favor, asegúrate de que estás asignando suficiente gas en la red {{networkName}} para que la transacción se confirme con éxito <bold>en 24 horas.</bold>",
+            "body2": "De lo contrario, la recompensa de la misión <bold>expirará y ya no podrás reclamarla.</bold>",
+            "cancel": "Cancelar",
+            "confirm": "Confirmar",
+            "title": "Confirmar reclamo de recompensa de misión"
+        }
     },
     "back_to_game": "Volver al juego",
     "email_subscription": {
@@ -1003,6 +1033,20 @@
         "subtitle": "Ahora formas parte de nuestra comunidad, y estamos encantados de compartir contigo valiosas actualizaciones y conocimientos."
     },
     "quests": {
-        "quests": "Misiones"
+        "quests": "Misiones",
+        "playstreak": {
+            "signInWarning": {
+                "overlay": "Actualmente no has iniciado sesión, no se hará un seguimiento del progreso de la racha de juego. Por favor, sal del juego e inicia sesión en HyperPlay a través del menú desplegable superior derecho para realizar un seguimiento del progreso.",
+                "client": "Actualmente no has iniciado sesión. No se hará un seguimiento del progreso de la racha del juego. Inicia sesión en HyperPlay a través del menú desplegable superior derecho para realizar un seguimiento del progreso."
+            }
+        },
+        "noneFound": {
+            "message": "No se encontraron misiones.",
+            "title": "No hay búsquedas."
+        },
+        "g7CreditsModal": {
+            "description": "Sumérgete en los mejores juegos de HyperPlay con emocionantes Desafíos de Play Streak. Cada actividad le anima a participar con un juego diferente, mostrando lo mejor de los juegos web3. ¡Tu tiempo de juego importa!",
+            "title": "Ganar Game7 Créditos"
+        }
     }
 }

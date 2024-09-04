@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BrowserGameStyles from './index.module.scss'
 import ToastManager from '../ToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
@@ -37,6 +37,14 @@ export const Overlay = observer(function ({
     txnToastContainerStyle.top = 0
   }
 
+  // fired every time the overlay opens
+  useEffect(() => {
+    window.api.trackScreen('Overlay', {
+      appName,
+      runner
+    })
+  }, [])
+
   let exitGameButtonStyle = {
     top: 'var(--space-md)',
     right: 'var(--space-md)',
@@ -59,7 +67,7 @@ export const Overlay = observer(function ({
   }
 
   const shouldShowExtension =
-    WalletState.provider === PROVIDERS.METAMASK_EXTENSION &&
+    WalletState.provider === PROVIDERS.METAMASK_EXTENSION ||
     OverlayState.renderState.showExtension
 
   let toastManager = null

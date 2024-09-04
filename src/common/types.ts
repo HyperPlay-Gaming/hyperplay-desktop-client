@@ -75,6 +75,7 @@ export type LDUser = {
 export type LDEnv = {
   envId: string
   ldUser: LDUser
+  appVersion: string
 }
 
 export interface AppSettings extends GameSettings {
@@ -395,7 +396,9 @@ export interface LaunchPreperationResult {
 
 export interface RpcClient {
   updatePresence(d: unknown): void
+
   reply(user: unknown, response: unknown): void
+
   disconnect(): void
 }
 
@@ -861,6 +864,7 @@ export interface GetIndividualAchievementsOptions extends PlayerOptions {
   page: number
   pageSize: number
 }
+
 export interface AchievementsStats {
   newAchievements: number
   mintedAchievements: number
@@ -878,6 +882,7 @@ export type Filter =
   | 'alphabeticalAscending'
   | 'alphabeticalDescending'
   | 'sortByInstalled'
+
 export interface FilterItem extends DropdownItemType {
   id?: Filter
 }
@@ -910,9 +915,13 @@ export interface Reward {
   name: string
   contract_address: `0x${string}`
   decimals: number | null
-  /* eslint-disable-next-line */
-  token_ids: { amount_per_user: string; token_id: number }[]
+  token_ids: {
+    amount_per_user: string
+    token_id: number
+    numClaimsLeft: string
+  }[]
   image_url: string
+  numClaimsLeft: string
 }
 
 export interface Quest {
@@ -939,6 +948,7 @@ export interface RewardClaimSignature {
   signature: `0x${string}`
   nonce: string
   expiration: number
+  tokenIds: number[]
 }
 
 export interface DepositContract {
@@ -959,9 +969,21 @@ export interface PointsClaimReturn {
   success?: string
 }
 
+export interface ConfirmClaimParams {
+  transactionHash: string
+  signature: string
+}
+
 export interface UserPlayStreak {
   current_playstreak_in_days: number
   completed_counter: number
   accumulated_playtime_today_in_seconds: number
   last_play_session_completed_datetime: string
+}
+
+export interface PointsCollection {
+  id: string
+  name: string
+  symbol: string
+  image: string
 }

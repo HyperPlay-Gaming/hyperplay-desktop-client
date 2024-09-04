@@ -10,7 +10,8 @@ import {
   ChannelReleaseMeta,
   SiweValues,
   UpdateArgs,
-  WineCommandArgs
+  WineCommandArgs,
+  Runner
 } from '../../../common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
@@ -74,7 +75,7 @@ import Store from 'electron-store'
 import i18next from 'i18next'
 import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
-import { DEV_PORTAL_URL, valistBaseApiUrlv1 } from 'common/constants'
+import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
 interface ProgressDownloadingItem {
@@ -101,7 +102,13 @@ export const isGameAvailable = (appName: string) => {
   }
 
   if (hpGameInfo.install && hpGameInfo.install.executable) {
-    const { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+    let { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+
+    // on linux and mac replace backslashes with forward slashes on executable
+    if (!isWindows) {
+      executable = executable.replace(/\\/g, '/')
+    }
+
     return existsSync(executable)
   }
   return false
@@ -141,9 +148,6 @@ export async function stop(appName: string): Promise<void> {
   } = gameInfo
 
   if (executable) {
-    const split = executable.split('/')
-    const exe = split[split.length - 1]
-    killPattern(exe)
     if (!isNative(appName)) {
       const gameSettings = await getSettings(appName)
       shutdownWine(gameSettings)
@@ -251,8 +255,18 @@ export async function importGame(
   const channel = gameInfo.channels![
     installInfo.manifest.channelName!
   ] as Channel
-  const mainExe =
-    channel.release_meta.platforms[installInfo.manifest.platform].executable
+  // Accessing the platform data with type assertion
+  const platformKey = installInfo.manifest
+    .platform as keyof PlatformsMetaInterface
+  const platformData = channel.release_meta.platforms[platformKey]
+  if (!platformData || !platformData.executable) {
+    logError(
+      `Platform data not found for ${appName} in importGame`,
+      LogPrefix.HyperPlay
+    )
+    return { stderr: '', stdout: '' }
+  }
+  const mainExe = platformData.executable
   const executable = path.join(pathName, mainExe)
 
   if (!existsSync(executable)) {
@@ -292,7 +306,7 @@ export async function importGame(
 }
 
 export async function runWineCommandOnGame(
-  runner: string,
+  runner: Runner,
   appName: string,
   { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
 ): Promise<ExecResult> {
@@ -656,11 +670,15 @@ async function getTokenGatedPlatforms(
     address,
     channel_id
   }
-  const validateUrl = `${valistBaseApiUrlv1}/license_contracts/validate`
+  const validateUrl = `${DEV_PORTAL_URL}api/v1/license_contracts/validate`
   const validateResponse = await fetch(validateUrl, {
     method: 'POST',
     body: JSON.stringify(request)
   })
+
+  if (!validateResponse.ok) {
+    throw `Could not validate access ${await validateResponse.text()}`
+  }
 
   const validateResult: LicenseConfigValidateResult =
     await validateResponse.json()

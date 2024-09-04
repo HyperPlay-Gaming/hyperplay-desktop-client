@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect } from 'react'
 import { QuestsSummaryTableWrapper } from './components/QuestsSummaryTableWrapper'
 import { QuestDetailsViewPlayWrapper } from './components/QuestDetailsViewPlay'
 import styles from './index.module.scss'
@@ -6,11 +6,18 @@ import { Alert, Background } from '@hyperplay/ui'
 import classNames from 'classnames'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import { useTranslation } from 'react-i18next'
+import { useParams } from 'react-router-dom'
+import { G7CreditsModal } from 'frontend/components/UI/G7CreditsModal'
 
 export function QuestsPage() {
-  const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
+  const { questId = null } = useParams()
+  const selectedQuestId = questId === null ? questId : parseInt(questId)
   const { isSignedIn } = useAuthSession()
   const { t } = useTranslation()
+
+  useEffect(() => {
+    window.api.trackScreen('Quests Page')
+  }, [])
 
   let alertComponent = null
   const showAlert = !isSignedIn
@@ -32,6 +39,7 @@ export function QuestsPage() {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
+      <G7CreditsModal />
       <div
         className={classNames(
           'contentContainer',
@@ -40,10 +48,7 @@ export function QuestsPage() {
         )}
       >
         {alertComponent}
-        <QuestsSummaryTableWrapper
-          setSelectedQuestId={setSelectedQuestId}
-          selectedQuestId={selectedQuestId}
-        />
+        <QuestsSummaryTableWrapper selectedQuestId={selectedQuestId} />
         <QuestDetailsViewPlayWrapper selectedQuestId={selectedQuestId} />
       </div>
     </>

@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "계속 설치",
             "message": "다운로드한 파일을 유지하겠습니까?",
-            "title": "설치 중지"
+            "title": "설치 중지",
+            "keepFilesMessage": "취소 후 다운로드 파일을 유지하려면 여기를 클릭하십시오."
         },
         "uninstall": {
             "checkbox": "prefix 제거: {{prefix}}{{newLine}}알림: 이 작업은 취소될 수 없으며 백업되지 않은 세이프파일 역시 삭제됩니다.",
             "message": "이 게임을 제거하시겠습니까?",
             "settingcheckbox": "설정 및 로그 삭제{{newLine}}알림: 이 작업은 취소될 수 없습니다. 모든 설정은 초기화되며, 로그 역시 삭제됩니다.",
-            "title": "제거"
+            "title": "제거",
+            "dlc": "이 DLC를 제거하고 싶습니까?",
+            "prefix_warning": "이 게임의 와인 접두사는 기본 접두사입니다. 당신이 정말로 삭제하려면, 당신은 수동으로해야."
         },
         "update": {
             "message": "이 게임에 업데이트가 있습니다, 지금 업데이트하시겠습니까?",
-            "title": "게임 업데이트 필요"
+            "title": "게임 업데이트 필요",
+            "message-cancel": "그것은 updating 없이 이 게임을 할 수 없습니다"
         },
         "wineprefix": "WinePrefix 폴더 선택",
-        "yes": "예"
+        "yes": "예",
+        "dont-show-again": "다시 표시 안 함",
+        "ok": "승인",
+        "aware": "나는 aware",
+        "compability": {
+            "message": "이 Windows 게임은 호환성 층을 사용하여 실행됩니다. 당신은 일부 문제 또는 게임을 모두 작동하지 않을 수 있습니다."
+        },
+        "yesCancel": "예, 취소"
     },
     "button": {
         "add_to_favourites": "즐겨찾기에 추가",
@@ -56,7 +67,9 @@
         "install": "설치",
         "no-path-selected": "선택된 경로 없음",
         "queue": {
-            "remove": "대기열에서 제거"
+            "remove": "대기열에서 제거",
+            "cancel": "다운로드 취소",
+            "continue": "계속 다운로드"
         },
         "remove_from_favourites": "즐겨찾기에서 제거",
         "remove_from_recent": "최근 목록에서 제거",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "게임 숨기기 해제",
         "uninstall": "설치 제거",
-        "update": "업데이트"
+        "update": "업데이트",
+        "remove_from_library": "제거",
+        "details": "세부 정보",
+        "favorites": "즐겨찾기",
+        "unfavorites": "즐겨찾기 해제"
     },
     "cloud_save_unsupported": "미지원",
     "disabled": "비활성화",
@@ -86,14 +103,17 @@
         "neverPlayed": "플레이 한 적 없음",
         "platform": "설치할 플랫폼 버전 선택",
         "requirements": "시스템 요구 사항",
-        "totalPlayed": "플레이 시간"
+        "totalPlayed": "플레이 시간",
+        "dlcs": "DLC 시리즈",
+        "selectChannelName": "채널 선택 이름 *"
     },
     "gamecard": {
         "moving": "옮기는 중",
         "repairing": "복구 중"
     },
     "generic": {
-        "error": "알 수 없는 오류"
+        "error": "알 수 없는 오류",
+        "noDescription": "설명이 존재하지 않습니다!"
     },
     "hours": "시간",
     "how-long-to-beat": {
@@ -118,7 +138,8 @@
         "path-not-writtable": "경고: 경로가 쓰기가 불가능할 수 있습니다.",
         "space-after-install": "설치 후",
         "wineprefix": "WinePrefix",
-        "wineversion": "Wine 버전"
+        "wineversion": "Wine 버전",
+        "compatibility-warning": "이 Windows 게임은 호환성 층을 사용하여 실행됩니다. 당신의 경험은 다를 수 있습니다."
     },
     "label": {
         "game": {
@@ -126,7 +147,8 @@
         },
         "playing": {
             "start": "실행",
-            "stop": "실행중 (중지)"
+            "stop": "실행중 (중지)",
+            "update": "갱신"
         },
         "saves": {
             "syncing": "세이브 동기화 중"
@@ -147,7 +169,8 @@
         "title": "설치할 구성 요소를 선택합니다"
     },
     "setting": {
-        "use-default-wine-settings": "기본 Wine 세팅 사용"
+        "use-default-wine-settings": "기본 Wine 세팅 사용",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -173,7 +196,10 @@
     "status": {
         "clickToUpdate": "업데이트하려면 클릭",
         "downloading": "다운로드중",
-        "extracting": "압축해제중",
+        "extracting": {
+            "progress": "압축해제중",
+            "cancel": "취소 추출"
+        },
         "gameNotAvailable": "게임 플레이 불가",
         "hasUpdates": "새 버전이 있습니다!",
         "installed": "설치됨",
@@ -191,7 +217,12 @@
         "this-game-uses-third-party": "이 게임은 아직 지원하지 않는 서드파티 게임 런처를 사용합니다.",
         "totalDownloaded": "총 다운로드",
         "uninstalling": "제거중",
-        "updating": "업데이트중"
+        "updating": "업데이트중",
+        "paused": "일시중지됨",
+        "gog-goodie": "이 게임은 설치할 수 없습니다. https://gog.com/account에서 다운로드 가능한 콘텐츠를 확인하십시오",
+        "distributables": "분산형 설치",
+        "goodie": "설치하기",
+        "preparing": "다운로드 준비, 대기"
     },
     "submenu": {
         "addShortcut": "바로가기 생성",
@@ -205,6 +236,7 @@
         "removeShortcut": "바로가기 제거",
         "settings": "설정",
         "store": "스토어 페이지",
-        "verify": "확인 및 복구"
+        "verify": "확인 및 복구",
+        "extraInfo": "추가 정보"
     }
 }

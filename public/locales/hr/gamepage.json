@@ -35,14 +35,17 @@
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Želite li deinstalirati igricu?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Deinstaliraj"
+            "title": "Deinstaliraj",
+            "dlc": "Želite li deinstalirati ovu aplikaciju?"
         },
         "update": {
             "message": "Ova igra ima ažuriranje, želite li ažurirati sada?",
             "title": "Igra treba ažuriranje"
         },
         "wineprefix": "Odaberite WinePrefix mapu",
-        "yes": "DA"
+        "yes": "DA",
+        "dont-show-again": "Nemoj više prikazivati",
+        "ok": "OK"
     },
     "button": {
         "add_to_favourites": "Dodaj u omiljene",
@@ -56,7 +59,9 @@
         "install": "Instaliraj",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "continue": "Nastavi preuzimanje",
+            "cancel": "Prekini preuzimanje"
         },
         "remove_from_favourites": "Makni iz omiljenih",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +72,11 @@
         },
         "unhide_game": "Prikaži igru",
         "uninstall": "Deinstaliraj",
-        "update": "Ažuriraj"
+        "update": "Ažuriraj",
+        "remove_from_library": "Ukloni",
+        "details": "Detalji",
+        "favorites": "Favorit",
+        "unfavorites": "Ukloni iz favorita"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Onemogućeno",
@@ -126,7 +135,8 @@
         },
         "playing": {
             "start": "Igraj Sada",
-            "stop": "Igra se (Prekini)"
+            "stop": "Igra se (Prekini)",
+            "update": "Ažuriraj"
         },
         "saves": {
             "syncing": "Sinkoniziranje podataka"
@@ -147,7 +157,8 @@
         "title": "Odaberite komponente za instalaciju"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -186,7 +197,11 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Sveukupno preuzeto",
         "uninstalling": "Uninstalling",
-        "updating": "Ažuriranje igrice"
+        "updating": "Ažuriranje igrice",
+        "syncingSaves": "Sinkoniziranje podataka",
+        "paused": "Zaustavljeno",
+        "playing": "Reprodukcija",
+        "downloading": "Preuzimanje u tijeku"
     },
     "submenu": {
         "addShortcut": "Dodaj prečace",

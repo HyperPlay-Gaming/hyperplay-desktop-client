@@ -1,0 +1,13 @@
+.modalContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(10px);
+  background-color: rgba(12, 11, 15, 0.6) !important;
+}
+
+.root {
+  max-width: 600px;
+  z-index: 1000;
+}

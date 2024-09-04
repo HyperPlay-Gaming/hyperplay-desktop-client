@@ -1,7 +1,9 @@
 import {
   GetAchievementsOptions,
   PlayerOptions,
-  GetIndividualAchievementsOptions
+  GetIndividualAchievementsOptions,
+  Runner,
+  ConfirmClaimParams
 } from 'common/types'
 import { ipcRenderer } from 'electron'
 
@@ -23,6 +25,10 @@ export const getQuests = async (projectId?: string) =>
 
 export const getQuest = async (questId: number) =>
   ipcRenderer.invoke('getQuest', questId)
+
+export const confirmRewardClaim = async (params: ConfirmClaimParams) => {
+  await ipcRenderer.invoke('confirmRewardClaim', params)
+}
 
 export const getUserPlayStreak = async (questId: number) =>
   ipcRenderer.invoke('getUserPlayStreak', questId)
@@ -47,3 +53,14 @@ export const completeExternalTask = async (rewardId: string) =>
 
 export const resyncExternalTask = async (rewardId: string) =>
   ipcRenderer.invoke('resyncExternalTask', rewardId)
+
+export const getG7Credits = async () => ipcRenderer.invoke('getG7Credits')
+
+export const getExternalTaskCredits = async (rewardId: string) =>
+  ipcRenderer.invoke('getExternalTaskCredits', rewardId)
+
+export const getPointsBalancesForProject = async (projectId: string) =>
+  ipcRenderer.invoke('getPointsBalancesForProject', projectId)
+
+export const syncPlaySession = async (appName: string, runner: Runner) =>
+  ipcRenderer.invoke('syncPlaySession', appName, runner)

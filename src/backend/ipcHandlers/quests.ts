@@ -1,6 +1,10 @@
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
 import { DEV_PORTAL_URL } from 'common/constants'
-import { GenericApiResponse, PointsClaimReturn } from 'common/types'
+import {
+  ConfirmClaimParams,
+  GenericApiResponse,
+  PointsClaimReturn
+} from 'common/types'
 import { app, ipcMain } from 'electron'
 
 ipcMain.handle('getQuests', async (e, projectId) => {
@@ -51,6 +55,18 @@ ipcMain.handle('claimQuestPointsReward', async (e, rewardId) => {
   return (await fetchWithCookie({ url, method: 'POST' })) as PointsClaimReturn
 })
 
+ipcMain.handle('confirmRewardClaim', async (e, params: ConfirmClaimParams) => {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/confirm-claim`
+  return fetchWithCookie({
+    url,
+    method: 'POST',
+    body: JSON.stringify({
+      transactionHash: params.transactionHash,
+      signature: params.signature
+    })
+  })
+})
+
 ipcMain.handle('completeExternalTask', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/completed`
   return (await fetchWithCookie({ url, method: 'POST' })) as GenericApiResponse
@@ -59,4 +75,22 @@ ipcMain.handle('completeExternalTask', async (e, rewardId) => {
 ipcMain.handle('resyncExternalTask', async (e, rewardId) => {
   const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/re-sync`
   return (await fetchWithCookie({ url, method: 'POST' })) as GenericApiResponse
+})
+
+ipcMain.handle('getG7Credits', async () => {
+  const url = `${DEV_PORTAL_URL}api/v1/game7/user/total/credits`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.data.credits.toString()
+})
+
+ipcMain.handle('getExternalTaskCredits', async (e, rewardId) => {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/rewards/${rewardId}/external-tasks/amount`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.data.credits.toString()
+})
+
+ipcMain.handle('getPointsBalancesForProject', async (e, projectId) => {
+  const url = `${DEV_PORTAL_URL}api/v1/points/project/${projectId}/balance`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response
 })

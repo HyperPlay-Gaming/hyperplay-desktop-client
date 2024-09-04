@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Game, QuestDetails, QuestDetailsTranslations } from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { getGameInfo } from 'frontend/helpers'
+import { fetchEpicListing, getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
-import { getRewardCategory } from 'frontend/helpers/getRewardCategory'
-import { getDecimalNumberFromAmount } from '@hyperplay/utils'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { useGetRewards } from 'frontend/hooks/useGetRewards'
+import { useMutation } from '@tanstack/react-query'
+import { Runner } from 'common/types'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -27,9 +28,69 @@ export function QuestDetailsViewPlayWrapper({
   const questPlayStreakResult = useGetUserPlayStreak(selectedQuestId)
   const questPlayStreakData = questPlayStreakResult.data.data
 
+  const rewardsQuery = useGetRewards(selectedQuestId)
+  const questRewards = rewardsQuery.data.data
+
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
   )
+
+  const navigateToGame = useMutation({
+    mutationFn: async (appName: string) => {
+      const { appName: epicAppName, epicListingUrl } = await fetchEpicListing(
+        appName
+      )
+
+      let runner: Runner = 'hyperplay'
+      let name = appName
+      if (epicListingUrl) {
+        runner = 'legendary'
+        if (epicAppName) {
+          name = epicAppName
+        }
+      }
+
+      // check for gameinfo to see if it is on the library
+      return getGameInfo(name, runner)
+        .then((res) => {
+          if (!res) {
+            throw new Error('Game not found in library')
+          }
+
+          return navigate(`/gamepage/${runner}/${name}`, {
+            state: { gameInfo: res, fromQuests: true }
+          })
+        })
+        .catch(async () => {
+          // if hyperplay game, add to library and navigate to game page
+          if (runner === 'hyperplay') {
+            await window.api.addHyperplayGame(name)
+            const gameInfo = await getGameInfo(name, runner)
+
+            return navigate(`/gamepage/hyperplay/${name}`, {
+              state: { gameInfo, fromQuests: true }
+            })
+          }
+          // if epic game, open in epic store
+          return navigate(`/store-page?store-url=${epicListingUrl}`)
+        })
+    },
+    onError: (error, variable) => {
+      window.api.logError(
+        `Error navigating to ${variable} game: ${error.message}`
+      )
+    }
+  })
+
+  useEffect(() => {
+    if (selectedQuestId !== null) {
+      window.api.trackEvent({
+        event: 'Quest Viewed',
+        properties: { quest: { id: selectedQuestId.toString() } }
+      })
+    }
+  }, [selectedQuestId])
+
   if (selectedQuestId === null) {
     return null
   }
@@ -55,7 +116,9 @@ export function QuestDetailsViewPlayWrapper({
     ),
     claim: t('quest.claimAll', 'Claim all'),
     signIn: t('quest.signIn', 'Sign in'),
-    play: t('quest.View Game', 'View Game'),
+    play: navigateToGame.isPending
+      ? t('please-wait', 'Please wait...')
+      : t('quest.View Game', 'View Game'),
     secondCTAText: t('quest.View Game', 'View Game'),
     connectSteamAccount: t(
       'quest.connectSteamAccount',
@@ -125,35 +188,16 @@ export function QuestDetailsViewPlayWrapper({
       />
     )
   }
-  const rewards =
-    questMeta.rewards?.map((val) => ({
-      title: val.name,
-      imageUrl: val.image_url,
-      chainName: getRewardCategory(val, t),
-      numToClaim:
-        val.amount_per_user && val.decimals
-          ? getDecimalNumberFromAmount(
-              val.amount_per_user.toString(),
-              val.decimals
-            ).toString()
-          : undefined
-    })) ?? []
-
-  async function navigateToGamePage(appName: string) {
-    const gameInfo = await getGameInfo(appName, 'hyperplay')
-    navigate(`/gamepage/hyperplay/${appName}`, {
-      state: { gameInfo, fromDM: false }
-    })
-  }
 
   return (
     <QuestDetails
+      ctaDisabled={navigateToGame.isPending}
       questType={questMeta.type}
       onSignInClick={() => console.log('sign in click')}
       onConnectSteamAccountClick={() => console.log('steam connect click')}
       isSignedIn={true}
       i18n={i18n}
-      rewards={rewards}
+      rewards={questRewards ?? []}
       title={questMeta.name}
       description={questMeta.description}
       collapseIsOpen={collapseIsOpen}
@@ -173,7 +217,7 @@ export function QuestDetailsViewPlayWrapper({
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}
-      onPlayClick={async () => navigateToGamePage(questMeta.project_id)}
+      onPlayClick={async () => navigateToGame.mutateAsync(questMeta.project_id)}
       key={`questDetailsLoadedId${questMeta.id}streak${!!questPlayStreakData}`}
     />
   )

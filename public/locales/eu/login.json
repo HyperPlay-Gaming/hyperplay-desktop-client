@@ -1,6 +1,7 @@
 {
     "button": {
-        "login": "Hasi saioa"
+        "login": "Hasi saioa",
+        "loading": "Kargatzen"
     },
     "message": {
         "part1": "Saioa hasteko eta jolasak instalatzeko, lehenik eta behin, jarraitu beharreko pausoak:",

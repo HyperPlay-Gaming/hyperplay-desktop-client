@@ -32,6 +32,27 @@ export default function ImportAndCreateOptions({
       <div className={styles.importOptionsContainer}>
         {importableBrowserOptions}
       </div>
+      <ImportOption
+        override="create"
+        title={t(
+          'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
+          `Create New Extension Wallet`
+        )}
+        classNames={styles.importCreateMMButton}
+        onClick={async () => {
+          handleImportMmExtensionClicked('CREATE')
+        }}
+      />
+      <div className={styles.otherOptionsStatement}>
+        <span className={styles.line}></span>
+        <span className={styles.otherOptionsText}>
+          {t(
+            'hyperplay.onboarding.walletSelection.screens.import.orWord',
+            `OR`
+          )}
+        </span>
+        <span className={styles.line}></span>
+      </div>
       <div className={styles.actionsContainer}>
         <Collapse title="Advanced Options">
           <div className={styles.actionsCollapseContainer}>
@@ -72,27 +93,6 @@ export default function ImportAndCreateOptions({
           </div>
         </Collapse>
       </div>
-      <div className={styles.otherOptionsStatement}>
-        <span className={styles.line}></span>
-        <span className={styles.otherOptionsText}>
-          {t(
-            'hyperplay.onboarding.walletSelection.screens.import.orWord',
-            `OR`
-          )}
-        </span>
-        <span className={styles.line}></span>
-      </div>
-      <ImportOption
-        override="create"
-        title={t(
-          'hyperplay.onboarding.walletSelection.screens.import.createNewWallet',
-          `Create New Extension Wallet`
-        )}
-        classNames={styles.importCreateMMButton}
-        onClick={async () => {
-          handleImportMmExtensionClicked('CREATE')
-        }}
-      />
     </div>
   )
 }
