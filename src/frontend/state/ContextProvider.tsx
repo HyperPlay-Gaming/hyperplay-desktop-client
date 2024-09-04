@@ -25,8 +25,6 @@ const initialContext: ContextType = {
   setTheme: () => null,
   zoomPercent: 100,
   setZoomPercent: () => null,
-  allTilesInColor: false,
-  setAllTilesInColor: () => null,
   sidebarCollapsed: false,
   setSideBarCollapsed: () => null,
   activeController: '',

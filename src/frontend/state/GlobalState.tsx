@@ -59,7 +59,6 @@ interface StateProps {
   zoomPercent: number
   primaryFontFamily: string
   secondaryFontFamily: string
-  allTilesInColor: boolean
   sidebarCollapsed: boolean
   activeController: string
   connectivity: { status: ConnectivityStatus; retryIn: number }
@@ -106,7 +105,6 @@ class GlobalState extends PureComponent<Props> {
       getComputedStyle(document.documentElement).getPropertyValue(
         '--default-primary-font-family'
       ),
-    allTilesInColor: configStore.get('allTilesInColor', false),
     activeController: '',
     connectivity: { status: 'offline', retryIn: 0 },
     showInstallModal: {
@@ -161,11 +159,6 @@ class GlobalState extends PureComponent<Props> {
       '--secondary-font-family',
       newFontFamily
     )
-  }
-
-  setAllTilesInColor = (value: boolean) => {
-    configStore.set('allTilesInColor', value)
-    this.setState({ allTilesInColor: value })
   }
 
   setShowHidden = (value: boolean) => {
@@ -642,7 +635,6 @@ class GlobalState extends PureComponent<Props> {
       refreshWineVersionInfo: this.refreshWineVersionInfo,
       setTheme: this.setTheme,
       setZoomPercent: this.setZoomPercent,
-      setAllTilesInColor: this.setAllTilesInColor,
       setSideBarCollapsed: this.setSideBarCollapsed,
       setPrimaryFontFamily: this.setPrimaryFontFamily,
       setSecondaryFontFamily: this.setSecondaryFontFamily,

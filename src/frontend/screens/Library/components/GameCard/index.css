@@ -249,13 +249,6 @@
   filter: grayscale(var(--installing-effect));
 }
 
-.gameCard:hover .gameImg:not(.installed),
-.gameCard:hover .gameLogo:not(.installed),
-.gameImg.allTilesInColor,
-.gameLogo.allTilesInColor {
-  filter: grayscale(0);
-}
-
 .icons {
   align-self: flex-end;
   width: 100%;

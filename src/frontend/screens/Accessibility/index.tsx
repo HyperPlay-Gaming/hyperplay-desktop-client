@@ -10,7 +10,6 @@ import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
 import classNames from 'classnames'
 import { SelectField } from 'frontend/components/UI'
-import ToggleSwitch from 'frontend/components/UI/ToggleSwitch'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import './index.css'
@@ -21,8 +20,6 @@ export default React.memo(function Accessibility() {
     isRTL,
     zoomPercent,
     setZoomPercent,
-    allTilesInColor,
-    setAllTilesInColor,
     setPrimaryFontFamily,
     setSecondaryFontFamily
   } = useContext(ContextProvider)
@@ -183,22 +180,6 @@ export default React.memo(function Accessibility() {
         >
           {options}
         </SelectField>
-
-        <span className="setting">
-          <label className={classNames('toggleWrapper', { isRTL: isRTL })}>
-            <ToggleSwitch
-              htmlId="setAllTitlesInColor"
-              value={allTilesInColor}
-              handleChange={() => {
-                setAllTilesInColor(!allTilesInColor)
-              }}
-              title={t(
-                'accessibility.all_tiles_in_color',
-                'Show all game tiles in color'
-              )}
-            />
-          </label>
-        </span>
       </div>
     </div>
   )
