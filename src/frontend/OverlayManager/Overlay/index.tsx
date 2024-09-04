@@ -13,23 +13,12 @@ import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
-import { useQuery } from '@tanstack/react-query'
-
-function useConnectedProvider() {
-  return useQuery({
-    queryKey: ['connectedProvider'],
-    queryFn: async () => {
-      return window.api.getConnectedProvider()
-    }
-  })
-}
 
 export const Overlay = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
   const flags = useFlags()
-  const { data: connectedProvider } = useConnectedProvider()
   const txnToastContainerStyle = {} as React.CSSProperties
   if (OverlayState.title === 'HyperPlay Toasts') {
     txnToastContainerStyle.bottom = 'unset'
@@ -115,27 +104,29 @@ export const Overlay = observer(function ({
     let extensionManager = null
     if (shouldShowExtension) {
       extensionManager = <ExtensionManager />
-    } else if (connectedProvider === 'Unconnected') {
-      extensionManager = (
-        <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
-          {t(
-            'overlay.WALLET_DISCONNECTED',
-            'You do not have a wallet connected to HyperPlay.'
-          )}
-        </div>
-      )
     } else if (
       OverlayState.renderState.showHintText &&
       OverlayState.title !== 'HyperPlay Hint Text'
     ) {
-      extensionManager = (
-        <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
-          {t(
-            'overlay.EXTERNAL_WALLET_CONNECTED',
-            'You are connected to HyperPlay with an external wallet.'
-          )}
-        </div>
-      )
+      if (WalletState.provider === 'Unconnected') {
+        extensionManager = (
+          <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
+            {t(
+              'overlay.WALLET_DISCONNECTED',
+              'You do not have a wallet connected to HyperPlay.'
+            )}
+          </div>
+        )
+      } else {
+        extensionManager = (
+          <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
+            {t(
+              'overlay.EXTERNAL_WALLET_CONNECTED',
+              'You are connected to HyperPlay with an external wallet.'
+            )}
+          </div>
+        )
+      }
     }
 
     let questsViewer = null
