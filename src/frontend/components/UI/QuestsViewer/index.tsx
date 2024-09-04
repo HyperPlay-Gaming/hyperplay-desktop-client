@@ -7,7 +7,6 @@ import { QuestDetailsWrapper } from '@hyperplay/quests-ui'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import authState from 'frontend/state/authState'
 import useAuthSession from 'frontend/hooks/useAuthSession'
-import { config } from 'frontend/config'
 import '@hyperplay/quests-ui/style.css'
 import { Reward } from 'common/types'
 
@@ -81,7 +80,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
             window.api.resyncExternalTask(rewardId)
           }}
           isSignedIn={isSignedIn}
-          config={config}
           key={'questDetailsLoading'}
         />
       </div>
