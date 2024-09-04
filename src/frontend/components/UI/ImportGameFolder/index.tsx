@@ -31,6 +31,14 @@ export function ImportGameFolder() {
       .then((path) => setGameFolderToImport(path || ''))
   }
 
+  if (importGameFolderMutation.isError && importGameFolderMutation?.error?.message){
+    console.error(importGameFolderMutation.error.message)
+  }
+
+  if (importGameFolderMutation.isSuccess && importGameFolderMutation?.data){
+    console.log(importGameFolderMutation.data)
+  }
+
   return (
     <TextInputWithIconField
       htmlId="setting-import-game-folder"
@@ -77,12 +85,12 @@ export function ImportGameFolder() {
           )}
           {importGameFolderMutation.isError ? (
             <div className={styles.errorMessage}>
-              {importGameFolderMutation?.error?.message}
+              {t('import-game-folder.error', 'There was an error during import. Please see the logs for more details.')}
             </div>
           ) : null}
           {importGameFolderMutation.isSuccess ? (
             <div className={styles.successMessage}>
-              {importGameFolderMutation?.data}
+              {t('import-game-folder.success', 'Successfully imported games!')}
             </div>
           ) : null}
         </div>
