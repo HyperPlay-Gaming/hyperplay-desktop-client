@@ -37,8 +37,12 @@ export class GameCollectionClass implements GameCollection {
     makeAutoObservable(this)
   }
 
-  add(appNameToAdd: string, appTitle: string) {
-    this.list.push({ appName: appNameToAdd, title: appTitle })
+  add(appNameToAdd: string) {
+    if (this.list.findIndex((val) => val.appName === appNameToAdd) !== -1) {
+      console.log('game has already been added to this list')
+      return
+    }
+    this.list.push({ appName: appNameToAdd })
   }
   remove(appNameToRemove: string) {
     this.list = this.list.filter((val) => val.appName !== appNameToRemove)
@@ -152,6 +156,7 @@ class LibraryState {
     this.refreshSideloadedLibrary()
 
     this.hiddenGames.list = configStore.get('games.hidden', [])
+    this.favouriteGames.list = configStore.get('games.favourites', [])
 
     this.refreshing = false
     this.refreshingInTheBackground = true
@@ -460,6 +465,46 @@ class LibraryState {
     return (
       this.hyperPlayLibrary.filter((val) => appNames.includes(val.app_name))
         .length > 0
+    )
+  }
+
+  hideGame(appName: string) {
+    if (this.hiddenGames === undefined) return
+
+    this.hiddenGames.add(appName, '')
+    configStore.set(
+      'games.hidden',
+      JSON.parse(JSON.stringify(this.hiddenGames.list))
+    )
+  }
+
+  unhideGame(appName: string) {
+    if (this.hiddenGames === undefined) return
+
+    this.hiddenGames.remove(appName)
+    configStore.set(
+      'games.hidden',
+      JSON.parse(JSON.stringify(this.hiddenGames.list))
+    )
+  }
+
+  favouriteGame(appName: string) {
+    if (this.favouriteGames === undefined) return
+
+    this.favouriteGames.add(appName, '')
+    configStore.set(
+      'games.favourites',
+      JSON.parse(JSON.stringify(this.favouriteGames.list))
+    )
+  }
+
+  unfavouriteGame(appName: string) {
+    if (this.favouriteGames === undefined) return
+
+    this.favouriteGames.remove(appName)
+    configStore.set(
+      'games.favourites',
+      JSON.parse(JSON.stringify(this.favouriteGames.list))
     )
   }
 }
