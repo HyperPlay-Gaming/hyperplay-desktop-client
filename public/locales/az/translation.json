@@ -91,7 +91,9 @@
                 "message": "Yeni Versiya mövcuddur!",
                 "message-finished": "İndi HyperPlay-i yenidən başlatmaq istəyirsiniz?",
                 "title": "Qəhrəmanlıq Oyunları Başlatıcısı",
-                "title-finished": "Yeniləmə Tamamlandı"
+                "title-finished": "Yeniləmə Tamamlandı",
+                "appUpdated": "HyperPlay yeniləndi",
+                "appUpdated-message": "HyperPlay yeniləndi. İndi HyperPlay yeniləmək və yeniləmək istəyirsiniz?"
             }
         },
         "no": "YOX",

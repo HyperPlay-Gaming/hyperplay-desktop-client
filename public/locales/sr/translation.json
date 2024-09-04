@@ -74,7 +74,9 @@
                 "message-finished": "Да ли желите сад да поново покренете HyperPlay?",
                 "changelog": "Отвори белешке промена",
                 "message": "Нова верзија је доступна!",
-                "title": "HyperPlay Games Launcher"
+                "title": "HyperPlay Games Launcher",
+                "appUpdated": "HyperPlay #biti #poboljšati",
+                "appUpdated-message": "HyperPlay #biti #poboljšati. @Do #free @want# to #poboljšati a @restart HyperPlay sad#?"
             }
         },
         "cache-cleared": {
