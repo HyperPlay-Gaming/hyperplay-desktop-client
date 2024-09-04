@@ -65,8 +65,8 @@ const TextInputField = ({
         rightSection={inputIcon}
         label={label}
       />
-      {value && warning}
-      {afterInput}
+      {afterInput && <span className="afterInput">{afterInput}</span>}
+      {value && <span className="smallMessage">{value && warning}</span>}
     </div>
   )
 }
