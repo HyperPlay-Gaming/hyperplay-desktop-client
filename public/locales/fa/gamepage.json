@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "ادامه به نصب",
             "message": "آیا مایل هستید فایلهای دانلود شده را نگه دارید؟",
-            "title": "توقف نصب"
+            "title": "توقف نصب",
+            "keepFilesMessage": "اینجا را بررسی کنید اگر می خواهید فایل های دانلود را پس از لغو نگه دارید."
         },
         "uninstall": {
             "checkbox": "حذف: {{prefix}}{{newLine}}نکته:این کار قابل بازگشت نیست و همچنین ذخیره های پشتیبانی گرفته شده را پاک می کند.",
             "message": "آیا میخواهید این بازی را حذف کنید؟",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "حذف"
+            "title": "حذف",
+            "dlc": "آیا می خواهید این افزونه را حذف کنید؟?",
+            "prefix_warning": "پیشوند شراب برای این بازی پیشوند پیش فرض است. اگر واقعا می خواهید آن را حذف کنید، باید آن را به صورت دستی انجام دهید."
         },
         "update": {
             "message": "این بازی به روزرسانی دارد، آیا مایل به روزرسانی هستید؟",
-            "title": "بازی نیاز به روزرسانی دارد"
+            "title": "بازی نیاز به روزرسانی دارد",
+            "message-cancel": "بازی کردن بدون به روز رسانی امکان پذیر نیست"
         },
         "wineprefix": "انتخاب پوشه Wine Prefix",
-        "yes": "بله"
+        "yes": "بله",
+        "dont-show-again": "عدم نمایش",
+        "ok": "خوب",
+        "aware": "می دانم",
+        "compability": {
+            "message": "این بازی ویندوز با استفاده از یک لایه سازگاری اجرا خواهد شد. شما ممکن است با برخی از مسائل مواجه شوید یا بازی ممکن است اصلا کار نکند."
+        },
+        "yesCancel": "بله، لغو"
     },
     "button": {
         "add_to_favourites": "افزودن به مورد علاقه ها",
@@ -56,7 +67,9 @@
         "install": "نصب",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "لغو دانلود",
+            "continue": "ادامه بارگیری"
         },
         "remove_from_favourites": "حذف کردن از مورد علاقه ها",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "نشان دادن بازی",
         "uninstall": "حذف",
-        "update": "بهروزرسانی"
+        "update": "بهروزرسانی",
+        "remove_from_library": "برداشتن",
+        "details": "جزییات",
+        "favorites": "برگزیدن",
+        "unfavorites": "عدم رضایت"
     },
     "cloud_save_unsupported": "پشتیبانی نشده",
     "disabled": "غیر فعال",
@@ -86,14 +103,17 @@
         "neverPlayed": "هرگز",
         "platform": "انتخاب نسخه پلتفرم برای نصب",
         "requirements": "نیازهای سیستم",
-        "totalPlayed": "زمان بازی"
+        "totalPlayed": "زمان بازی",
+        "dlcs": "DLCs",
+        "selectChannelName": "انتخاب کانال نام"
     },
     "gamecard": {
         "moving": "در حال انتقال",
         "repairing": "در حال تعمیر"
     },
     "generic": {
-        "error": "خطای نامشخص"
+        "error": "خطای نامشخص",
+        "noDescription": "No description available!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -118,7 +138,8 @@
         "path-not-writtable": "خطا: مسیر ممکن است قابل نوشتن نباشد.",
         "space-after-install": "بعد از نصب",
         "wineprefix": "Wine Prefix",
-        "wineversion": "نسخه Wine"
+        "wineversion": "نسخه Wine",
+        "compatibility-warning": "این بازی ویندوز با استفاده از یک لایه سازگاری اجرا می شود. تجربه شما ممکن است متفاوت باشد."
     },
     "label": {
         "game": {
@@ -126,7 +147,8 @@
         },
         "playing": {
             "start": "اجرا",
-            "stop": "در حال اجرا (توقف)"
+            "stop": "در حال اجرا (توقف)",
+            "update": "روزآمدسازی"
         },
         "saves": {
             "syncing": "در حال همگام سازی ذخیره ها"
@@ -147,7 +169,8 @@
         "title": "انتخاب محتواها برای نصب"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver باتل"
     },
     "sideload": {
         "field": {
@@ -186,7 +209,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "حجم کل دانلود شده",
         "uninstalling": "Uninstalling",
-        "updating": "در حال به روزرسانی بازی"
+        "updating": "در حال به روزرسانی بازی",
+        "syncingSaves": "در حال همگام سازی ذخیره ها",
+        "downloading": "در حال بارگیری",
+        "paused": "متوقف شده",
+        "distributables": "نصب Distributables",
+        "extracting": {
+            "cancel": "لغو استخراج",
+            "progress": "استخراج"
+        },
+        "moving-files": "فایل متحرک {{file}}: {{percent}} ",
+        "gog-goodie": "به نظر نمی رسد که این بازی قابل نصب باشد. محتوای قابل دانلود در https://gog.com/account",
+        "goodie": "قابل نصب نیست",
+        "playing": "بازی",
+        "preparing": "آماده سازی دانلود، لطفا صبر کنید"
     },
     "submenu": {
         "addShortcut": "افزودن میانبر",
@@ -200,6 +236,7 @@
         "removeShortcut": "حذف میانبرها",
         "settings": "تنظیمات",
         "store": "صفحه فروشگاه",
-        "verify": "بررسی و تعمیر"
+        "verify": "بررسی و تعمیر",
+        "extraInfo": "اطلاعات اضافی"
     }
 }

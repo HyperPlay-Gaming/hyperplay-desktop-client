@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import BrowserGameStyles from './index.module.scss'
 import ToastManager from '../ToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
@@ -12,6 +12,7 @@ import { BrowserGameProps } from '../types'
 import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
+import libraryState from 'frontend/state/libraryState'
 
 export const Overlay = observer(function ({
   appName,
@@ -24,6 +25,14 @@ export const Overlay = observer(function ({
     txnToastContainerStyle.right = 0
     txnToastContainerStyle.top = 0
   }
+
+  // fired every time the overlay opens
+  useEffect(() => {
+    window.api.trackScreen('Overlay', {
+      appName,
+      runner
+    })
+  }, [])
 
   let exitGameButtonStyle = {
     top: 'var(--space-md)',
@@ -47,7 +56,7 @@ export const Overlay = observer(function ({
   }
 
   const shouldShowExtension =
-    WalletState.provider === PROVIDERS.METAMASK_EXTENSION &&
+    WalletState.provider === PROVIDERS.METAMASK_EXTENSION ||
     OverlayState.renderState.showExtension
 
   let toastManager = null
@@ -99,18 +108,34 @@ export const Overlay = observer(function ({
       OverlayState.renderState.showHintText &&
       OverlayState.title !== 'HyperPlay Hint Text'
     ) {
-      extensionManager = (
-        <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
-          {t(
-            'overlay.EXTERNAL_WALLET_CONNECTED',
-            'You are connected to HyperPlay with an external wallet.'
-          )}
-        </div>
-      )
+      if (WalletState.provider === 'Unconnected') {
+        extensionManager = (
+          <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
+            {t(
+              'overlay.WALLET_DISCONNECTED',
+              'You do not have a wallet connected to HyperPlay.'
+            )}
+          </div>
+        )
+      } else {
+        extensionManager = (
+          <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
+            {t(
+              'overlay.EXTERNAL_WALLET_CONNECTED',
+              'You are connected to HyperPlay with an external wallet.'
+            )}
+          </div>
+        )
+      }
     }
 
     let questsViewer = null
-    if (flags.questsOverlayClaimModals) {
+    const gamesToShowQuestsFor =
+      (flags.gamesToShowQuestsFor as string | undefined)?.split(',') ?? []
+    if (
+      flags.questsOverlayClaimModals ||
+      libraryState.hasGame(gamesToShowQuestsFor)
+    ) {
       questsViewer = <QuestsViewer projectId={appName} />
     }
 

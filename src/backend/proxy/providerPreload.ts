@@ -17,7 +17,10 @@ const enabledTopics = [
   'connect',
   'message',
   'disconnect',
-  'chainChanged'
+  'chainChanged',
+  'close',
+  // deprecated
+  'networkChanged'
 ]
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -49,11 +52,8 @@ const provRequest = async (args: RequestArguments) => {
 }
 
 const sendRequest = async (...args: unknown[]) => {
-  const result = (await ipcRenderer.invoke('sendRequest', args)) as object
-  if (Object.hasOwn(result, 'error')) {
-    throw result[0].error.message
-  }
-  return result[0].result
+  // send method return is unknown https://eips.ethereum.org/EIPS/eip-1193#send-deprecated
+  return ipcRenderer.invoke('sendRequest', args) as unknown
 }
 
 const sendAsyncRequest = async (payload: any, callback: JsonRpcCallback) => {

@@ -6,7 +6,6 @@ import React, {
   useState,
   useLayoutEffect
 } from 'react'
-import ArrowDropUp from '@mui/icons-material/ArrowDropUp'
 import { UpdateComponent } from 'frontend/components/UI'
 import { useTranslation } from 'react-i18next'
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -19,7 +18,7 @@ import { InstallModal } from './components'
 import './index.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames'
-import { faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import { faArrowUp, faPlus, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import { Button, Background } from '@hyperplay/ui'
 import { Platform } from 'frontend/types'
 import { LibraryTopBar } from './components/LibraryTopBar'
@@ -276,18 +275,19 @@ export default observer(function Library(): JSX.Element {
             />
           )}
 
-          {libraryState.showFavourites && !libraryState.showFavouritesLibrary && (
-            <>
-              <h3 className={styles.libraryHeader}>
-                {t('favourites', 'Favourites')}
-              </h3>
-              <GamesList
-                library={libraryState.favourites}
-                handleGameCardClick={handleModal}
-                isFirstLane
-              />
-            </>
-          )}
+          {libraryState.showFavourites &&
+            !libraryState.showFavouritesLibrary && (
+              <>
+                <h3 className={styles.libraryHeader}>
+                  {t('favourites', 'Favourites')}
+                </h3>
+                <GamesList
+                  library={libraryState.favourites}
+                  handleGameCardClick={handleModal}
+                  isFirstLane
+                />
+              </>
+            )}
 
           {libraryState.refreshing &&
             !libraryState.refreshingInTheBackground && (
@@ -305,7 +305,11 @@ export default observer(function Library(): JSX.Element {
         </div>
 
         <button id="backToTopBtn" onClick={backToTop} ref={backToTopElement}>
-          <ArrowDropUp id="backToTopArrow" className="material-icons" />
+          <FontAwesomeIcon
+            id="backToTopArrow"
+            className="material-icons"
+            icon={faArrowUp}
+          />
         </button>
 
         {showModal.show && (

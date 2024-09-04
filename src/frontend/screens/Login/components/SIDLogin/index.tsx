@@ -1,10 +1,10 @@
 import React, { useContext, useState } from 'react'
-import Info from '@mui/icons-material/Info'
 import { useTranslation } from 'react-i18next'
 import './index.css'
-import { Autorenew } from '@mui/icons-material'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { Button } from '@hyperplay/ui'
+import { faInfo, faRefresh } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 interface Props {
   backdropClick: () => void
@@ -79,9 +79,10 @@ export default function SIDLogin({ backdropClick }: Props) {
                 className="sid"
               >
                 {`${t('message.part5')}`}
-                <Info
+                <FontAwesomeIcon
                   style={{ marginLeft: '4px' }}
                   className="material-icons"
+                  icon={faInfo}
                 />
               </span>
             </li>
@@ -109,7 +110,10 @@ export default function SIDLogin({ backdropClick }: Props) {
         />
         {loading && (
           <p className="message">
-            <Autorenew className="material-icons refreshing" />{' '}
+            <FontAwesomeIcon
+              className="material-icons refreshing"
+              icon={faRefresh}
+            />
           </p>
         )}
         <div className=".sidLoginButton">

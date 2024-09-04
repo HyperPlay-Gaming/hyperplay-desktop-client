@@ -35,14 +35,17 @@
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Xác nhận gỡ cài đặt game?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Gỡ cài đặt"
+            "title": "Gỡ cài đặt",
+            "dlc": "Bạn có muốn gỡ cài đặt ứng dụng này không?"
         },
         "update": {
             "message": "Game có bản cập nhật, xác nhận cập nhật?",
             "title": "Game cần cập nhật"
         },
         "wineprefix": "Chọn thư mục WinePrefix",
-        "yes": "Có"
+        "yes": "Có",
+        "dont-show-again": "Không hiển thị lại",
+        "ok": "Đống ý"
     },
     "button": {
         "add_to_favourites": "Thêm vào mục ưa thích",
@@ -56,7 +59,9 @@
         "install": "Cài đặt",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Hủy tải xuống",
+            "continue": "Tiếp tục tải"
         },
         "remove_from_favourites": "Xóa khỏi mục ưa thích",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +72,11 @@
         },
         "unhide_game": "Bỏ ẩn Game",
         "uninstall": "Gỡ cài đặt",
-        "update": "Cập nhật"
+        "update": "Cập nhật",
+        "favorites": "Yêu thích",
+        "remove_from_library": "Gỡ bỏ",
+        "details": "Chi tiết",
+        "unfavorites": "Không yêu thích"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Tắt",
@@ -93,7 +102,8 @@
         "repairing": "Đang sửa"
     },
     "generic": {
-        "error": "Lỗi chưa xác định"
+        "error": "Lỗi chưa xác định",
+        "noDescription": "Không có mô tả nào!"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -126,7 +136,8 @@
         },
         "playing": {
             "start": "Chơi ngay",
-            "stop": "Đang chơi (Dừng)"
+            "stop": "Đang chơi (Dừng)",
+            "update": "Cập nhật"
         },
         "saves": {
             "syncing": "Đang đồng bộ bản lưu"
@@ -147,7 +158,8 @@
         "title": "Chọn các thành phần cần cài"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "CrossOver Bottle"
     },
     "sideload": {
         "field": {
@@ -186,7 +198,11 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Tổng số đã tải",
         "uninstalling": "Uninstalling",
-        "updating": "Đang cập nhật Game"
+        "updating": "Đang cập nhật Game",
+        "paused": "Ngừng lại",
+        "playing": "Đang chơi",
+        "syncingSaves": "Đang đồng bộ bản lưu",
+        "downloading": "Đang tải"
     },
     "submenu": {
         "addShortcut": "Thêm shortcut",

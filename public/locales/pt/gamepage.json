@@ -29,20 +29,31 @@
         "stopInstall": {
             "keepInstalling": "Continuar Instalação",
             "message": "Deseja manter os arquivos baixados?",
-            "title": "Cancelar Instalação"
+            "title": "Cancelar Instalação",
+            "keepFilesMessage": "Marque aqui se pretende manter os arquivos de download após o cancelamento."
         },
         "uninstall": {
             "checkbox": "Remove prefix: {{prefix}}{{newLine}}Note: This can't be undone and will also remove not backed up save files.",
             "message": "Você deseja desinstalar esse jogo?",
             "settingcheckbox": "Erase settings and remove log{{newLine}}Note: This can't be undone. Any modified settings will be forgotten and log will be deleted.",
-            "title": "Desinstalar"
+            "title": "Desinstalar",
+            "dlc": "Você quer desinstalar este DLC?",
+            "prefix_warning": "O prefixo Wine para este jogo é o prefixo padrão. Se você realmente quer excluí-lo, você tem que fazê-lo manualmente."
         },
         "update": {
             "message": "Esse jogo precisa ser atualizado, deseja atualizar agora?",
-            "title": "Atualização!"
+            "title": "Atualização!",
+            "message-cancel": "Não é possível jogar este jogo sem atualizar"
         },
         "wineprefix": "Select WinePrefix Folder",
-        "yes": "SIM"
+        "yes": "SIM",
+        "aware": "Estou ciente",
+        "compability": {
+            "message": "Este jogo de Windows irá rodar usando uma camada de compatibilidade. Você poderá encontrar alguns problemas ou o jogo pode nem sequer abrir."
+        },
+        "dont-show-again": "Não mostrar novamente",
+        "ok": "Ok",
+        "yesCancel": "Sim, cancele"
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -56,7 +67,9 @@
         "install": "Instalar",
         "no-path-selected": "No path selected",
         "queue": {
-            "remove": "Remove from Queue"
+            "remove": "Remove from Queue",
+            "cancel": "Cancelar transferência",
+            "continue": "Continue a baixar"
         },
         "remove_from_favourites": "Remove From Favourites",
         "remove_from_recent": "Remove From Recent",
@@ -67,7 +80,11 @@
         },
         "unhide_game": "Unhide Game",
         "uninstall": "Desinstalar",
-        "update": "Update"
+        "update": "Atualizar",
+        "details": "Detalhes",
+        "favorites": "Favoritar",
+        "remove_from_library": "Remover da biblioteca",
+        "unfavorites": "Remover dos favoritos"
     },
     "cloud_save_unsupported": "Unsupported",
     "disabled": "Desabilitado",
@@ -86,14 +103,17 @@
         "neverPlayed": "Nunca",
         "platform": "Select Platform",
         "requirements": "Requisitos",
-        "totalPlayed": "Tempo de Jogo"
+        "totalPlayed": "Tempo de Jogo",
+        "selectChannelName": "Selecione o nome do Canal",
+        "dlcs": "DLCs"
     },
     "gamecard": {
         "moving": "Movendo",
         "repairing": "Reparando"
     },
     "generic": {
-        "error": "Unknown error"
+        "error": "Unknown error",
+        "noDescription": "Nenhuma descrição disponível"
     },
     "hours": "Hours",
     "how-long-to-beat": {
@@ -118,7 +138,8 @@
         "path-not-writtable": "Warning: path might not be writable.",
         "space-after-install": "After Install",
         "wineprefix": "WinePrefix",
-        "wineversion": "Wine Version"
+        "wineversion": "Wine Version",
+        "compatibility-warning": "Este jogo do Windows será executado usando uma camada de compatibilidade. Sua experiência pode variar."
     },
     "label": {
         "game": {
@@ -126,7 +147,8 @@
         },
         "playing": {
             "start": "Jogar",
-            "stop": "Jogando (Parar)"
+            "stop": "Jogando (Parar)",
+            "update": "Atualizar"
         },
         "saves": {
             "syncing": "Sincronizando"
@@ -147,7 +169,8 @@
         "title": "Selecione os componentes para instalar"
     },
     "setting": {
-        "use-default-wine-settings": "Use Default Compatibility Settings"
+        "use-default-wine-settings": "Use Default Compatibility Settings",
+        "winecrossoverbottle": "Garrafa CrossOver"
     },
     "sideload": {
         "field": {
@@ -186,7 +209,20 @@
         "this-game-uses-third-party": "This game uses third party launcher and it is not supported yet",
         "totalDownloaded": "Total Baixado",
         "uninstalling": "Uninstalling",
-        "updating": "Atualizando jogo"
+        "updating": "Atualizando jogo",
+        "paused": "Pausado",
+        "preparing": "Preparando Download, por favor aguarde",
+        "gog-goodie": "Este jogo não parece ser instalável. Verificar conteúdos transferíveis em https://gog.com/account",
+        "goodie": "Não instalável",
+        "downloading": "A transferir",
+        "moving-files": "Movendo Arquivo '{{file}}': {{percent}} ",
+        "extracting": {
+            "cancel": "Cancelar Extração",
+            "progress": "Extraindo"
+        },
+        "distributables": "Instalando Dependências",
+        "playing": "Jogando",
+        "syncingSaves": "Sincronizando os Saves"
     },
     "submenu": {
         "addShortcut": "Adicionar Atalhos",
@@ -200,6 +236,7 @@
         "removeShortcut": "Remove shortcuts",
         "settings": "Configurações",
         "store": "Página da Loja",
-        "verify": "Verificar e Reparar"
+        "verify": "Verificar e Reparar",
+        "extraInfo": "Informações extras"
     }
 }

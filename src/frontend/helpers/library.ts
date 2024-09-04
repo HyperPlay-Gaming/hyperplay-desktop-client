@@ -11,11 +11,11 @@ import { TFunction } from 'i18next'
 import { getGameInfo, getPlatformName } from './index'
 import { DialogModalOptions } from 'frontend/types'
 import { SiweMessage } from 'siwe'
-import { valistBaseApiUrlv1 } from 'common/constants'
 import { ethers } from 'ethers'
 import axios from 'axios'
 import authState from 'frontend/state/authState'
 import gameUpdateState from 'frontend/state/GameUpdateState'
+import { DEV_PORTAL_URL } from 'common/constants'
 
 const storage: Storage = window.localStorage
 
@@ -314,7 +314,7 @@ export async function createSiweMessage(
     : window.location.origin
 
   const statementRes = await axios.get(
-    valistBaseApiUrlv1 + '/license_contracts/validate/get-nonce'
+    DEV_PORTAL_URL + 'api/v1/license_contracts/validate/get-nonce'
   )
   const statement = String(statementRes?.data)
 

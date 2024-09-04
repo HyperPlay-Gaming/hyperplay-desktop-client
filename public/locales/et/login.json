@@ -1,6 +1,7 @@
 {
     "button": {
-        "login": "Logi sisse"
+        "login": "Logi sisse",
+        "loading": "Laadime andmeid"
     },
     "message": {
         "part1": "Sisse logimiseks ja mängude paigaldamiseks peate kõigepealt järgima alljärgnevaid samme:",

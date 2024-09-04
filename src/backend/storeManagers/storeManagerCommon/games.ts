@@ -31,10 +31,10 @@ import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { domainsAreEqual } from 'common/utils'
 import { PROVIDERS } from 'common/types/proxy-types'
-import { controlWindow } from 'backend/hyperplay-overlay/model'
-import { initOverlayRenderState } from 'backend/hyperplay-overlay'
 import { getExecutableAndArgs } from 'backend/utils'
 import { hpApi } from 'backend/utils/hyperplay_api'
+import { getHpOverlay } from 'backend/overlay'
+import { launchingGameShouldOpenOverlay } from 'backend/utils/shouldOpenOverlay'
 
 export async function getAppSettings(appName: string): Promise<GameSettings> {
   return (
@@ -61,6 +61,7 @@ const openNewBrowserGameWindow = async (
   } catch (err) {
     logError(`Error importing proxy server ${err}`, LogPrefix.HyperPlay)
   }
+  const hpOverlay = await getHpOverlay()
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
       icon: icon,
@@ -160,8 +161,7 @@ const openNewBrowserGameWindow = async (
     // this is electron's suggested way to prevent visual flash
     // https://github.com/electron/electron/blob/main/docs/api/browser-window.md#using-the-ready-to-show-event
     browserGame.on('ready-to-show', () => browserGame.show())
-
-    controlWindow(browserGame.webContents.id, 'browser')
+    hpOverlay?.controlWindow(browserGame.webContents.id, 'browser')
 
     const renderState: OverlayRenderState = {
       showToasts: true,
@@ -178,7 +178,7 @@ const openNewBrowserGameWindow = async (
      * window launch, so we send an overlay ready event when it's ready.
      */
     browserGame.webContents.ipc.once('overlayReady', () => {
-      initOverlayRenderState(
+      hpOverlay?.initOverlayRenderState(
         browserGame.webContents.id,
         renderState,
         'HyperPlay Web Game'
@@ -361,10 +361,7 @@ export async function launchGame(
       LogPrefix.Backend
     )
 
-    const shouldOpenOverlay =
-      gameInfo &&
-      (gameInfo.runner === 'hyperplay' ||
-        (gameInfo.runner === 'sideload' && gameInfo.web3?.supported))
+    const { shouldOpenOverlay } = await launchingGameShouldOpenOverlay(gameInfo)
 
     await runWineCommand({
       commandParts: [exeOnly, combinedArgs ?? ''],

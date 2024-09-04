@@ -1,10 +1,22 @@
-.questsViewerContainer {
+.root {
   position: absolute;
-  left: 400px;
   width: 1000px;
   bottom: 80px;
   top: 40px;
+  left: 400px;
+  width: 1000px;
   z-index: 4;
   display: flex;
+  flex-direction: column;
+}
+
+.questsViewerContainer {
+  display: flex;
   flex-direction: row;
+  align-items: stretch;
+  flex: 1;
+}
+
+.alert {
+  margin: var(--space-lg-fixed) 0px;
 }
