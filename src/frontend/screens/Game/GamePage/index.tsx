@@ -224,7 +224,7 @@ export default observer(function GamePage(): JSX.Element | null {
           !notInstallable &&
           !isOffline
         ) {
-          getInstallInfo(appName, runner, installPlatform)
+          getInstallInfo(appName, runner, installPlatform, channelName)
             .then((info) => {
               if (!info) {
                 throw 'Cannot get game info'

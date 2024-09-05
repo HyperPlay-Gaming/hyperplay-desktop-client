@@ -91,7 +91,9 @@
                 "message": "K dispozici je nová verze!",
                 "message-finished": "Chcete restartovat HyperPlay nyní?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Aktualizace dokončena"
+                "title-finished": "Aktualizace dokončena",
+                "appUpdated": "HyperPlay byl aktualizován",
+                "appUpdated-message": "HyperPlay byl aktualizován. Chcete aktualizovat a restartovat HyperPlay nyní?"
             }
         },
         "no": "NE",

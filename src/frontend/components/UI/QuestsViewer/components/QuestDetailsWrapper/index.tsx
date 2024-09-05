@@ -68,7 +68,6 @@ async function getRewardClaimGasEstimation(reward: Reward) {
   const viemChain = parseChainMetadataToViemChain(chainMetadata)
 
   const publicClient = createPublicClient({
-    // @ts-expect-error: chain types are valid
     chain: viemChain,
     transport: http()
   })
@@ -146,6 +145,9 @@ export function QuestDetailsWrapper({
       const queryKey = `useGetG7UserCredits`
       queryClient.invalidateQueries({ queryKey: [queryKey] })
       return result
+    },
+    onSuccess: async () => {
+      await questPlayStreakResult.invalidateQuery()
     }
   })
 
@@ -155,6 +157,9 @@ export function QuestDetailsWrapper({
       const queryKey = `useGetG7UserCredits`
       queryClient.invalidateQueries({ queryKey: [queryKey] })
       return result
+    },
+    onSuccess: async () => {
+      await questPlayStreakResult.invalidateQuery()
     }
   })
 
@@ -164,6 +169,9 @@ export function QuestDetailsWrapper({
       const queryKey = `getPointsBalancesForProject:${projectId}`
       queryClient.invalidateQueries({ queryKey: [queryKey] })
       return result
+    },
+    onSuccess: async () => {
+      await questPlayStreakResult.invalidateQuery()
     }
   })
 
@@ -212,8 +220,14 @@ export function QuestDetailsWrapper({
   const userId = session.data?.userId
   const isSignedIn = !!userId
 
+  const hasMetStreak =
+    (questPlayStreakData?.current_playstreak_in_days ?? 0) >=
+    (questMeta?.eligibility?.play_streak?.required_playstreak_in_days ??
+      Infinity)
+
   const showResyncButton =
     questMeta?.type === 'PLAYSTREAK' &&
+    !hasMetStreak &&
     !!questPlayStreakData?.completed_counter &&
     !!questMeta?.rewards?.filter((val) => val.reward_type === 'EXTERNAL-TASKS')
       ?.length

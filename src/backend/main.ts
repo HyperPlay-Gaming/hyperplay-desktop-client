@@ -47,8 +47,6 @@ import setup from './storeManagers/gog/setup'
 import {
   clearCache,
   execAsync,
-  getGOGdlBin,
-  getLegendaryBin,
   getPlatformName,
   getStoreName,
   isEpicServiceOffline,
@@ -375,11 +373,15 @@ const loadMainWindowURL = function () {
   } else {
     Menu.setApplicationMenu(null)
     mainWindow.loadURL(prodAppUrl)
-    autoUpdater.checkForUpdates().then((val) => {
-      logInfo(
-        `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
-      )
-    })
+    const appSettings = configStore.get_nodefault('settings')
+    const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
+    if (shouldCheckForUpdates) {
+      autoUpdater.checkForUpdates().then((val) => {
+        logInfo(
+          `Auto Updater found version: ${val?.updateInfo.version} released on ${val?.updateInfo.releaseDate} with name ${val?.updateInfo.releaseName}`
+        )
+      })
+    }
   }
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -484,19 +486,6 @@ if (!gotTheLock) {
 
     initImagesCache()
 
-    logInfo(
-      ['Legendary location:', join(...Object.values(getLegendaryBin()))],
-      LogPrefix.Legendary
-    )
-    logInfo(
-      ['GOGDL location:', join(...Object.values(getGOGdlBin()))],
-      LogPrefix.Gog
-    )
-    logInfo(
-      ['GOGDL location:', join(...Object.values(getGOGdlBin()))],
-      LogPrefix.Gog
-    )
-
     // TODO: Remove this after a couple of stable releases
     // Affects only current users, not new installs
     const settings = GlobalConfig.get().getSettings()
@@ -510,10 +499,6 @@ if (!gotTheLock) {
       const isLoggedIn = LegendaryUser.isLoggedIn()
 
       if (!isLoggedIn) {
-        logInfo('User Not Found, removing it from Store', {
-          prefix: LogPrefix.Backend,
-          forceLog: true
-        })
         configStore.delete('userInfo')
       }
 
@@ -1133,7 +1118,7 @@ ipcMain.handle('refreshLibrary', async (e, library?) => {
   } else {
     const allRefreshPromises = []
     for (const runner_i in libraryManagerMap) {
-      allRefreshPromises.push(libraryManagerMap[runner_i].refresh())
+      allRefreshPromises.push(libraryManagerMap[runner_i as Runner].refresh())
     }
     await Promise.allSettled(allRefreshPromises)
   }

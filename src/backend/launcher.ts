@@ -782,6 +782,7 @@ async function callRunner(
 ): Promise<ExecResult> {
   const appName = commandParts[commandParts.findIndex(() => 'launch') + 1]
   let childPid: number | undefined
+  const isGame = gameInfo !== undefined
 
   // Necessary to get rid of possible undefined or null entries, else
   // TypeError is triggered
@@ -870,10 +871,6 @@ async function callRunner(
     })
 
     childPid = child.pid
-    logInfo(
-      ['Spawned', runner.name, 'with PID', childPid!.toString()],
-      LogPrefix.Backend
-    )
 
     if (gameInfo && shouldOpenOverlay) {
       if (hyperPlayListing?.project_id) {
@@ -948,7 +945,7 @@ async function callRunner(
 
       // close processes created by this process
       if (childPid !== undefined) {
-        stopChildProcesses(childPid)
+        stopChildProcesses({ childPid })
       }
 
       if (signal && !child.killed) {
@@ -969,7 +966,7 @@ async function callRunner(
 
   abortController.signal.onabort = () => {
     if (childPid !== undefined) {
-      stopChildProcesses(childPid)
+      stopChildProcesses({ childPid, shouldLog: isGame })
     }
   }
 
@@ -981,7 +978,7 @@ async function callRunner(
       if (abortController.signal.aborted) {
         logInfo(['Abort command', `"${safeCommand}"`], runner.logPrefix)
         if (childPid !== undefined) {
-          stopChildProcesses(childPid)
+          stopChildProcesses({ childPid })
         }
         return {
           stdout: '',
@@ -1020,7 +1017,13 @@ async function callRunner(
   return promise
 }
 
-async function stopChildProcesses(childPid: number) {
+async function stopChildProcesses({
+  childPid,
+  shouldLog = false
+}: {
+  childPid: number
+  shouldLog?: boolean
+}) {
   if (isWindows) {
     logWarning(
       `Killing all processes spawned by PID ${childPid}`,
@@ -1037,10 +1040,12 @@ async function stopChildProcesses(childPid: number) {
         ])
 
         if (result.stderr) {
-          logError(
-            `Error getting child processes: ${result.stderr}`,
-            LogPrefix.Backend
-          )
+          if (shouldLog) {
+            logDebug(
+              `Error getting child processes: ${result.stderr}`,
+              LogPrefix.Backend
+            )
+          }
         }
 
         return result.stdout
@@ -1065,24 +1070,30 @@ async function stopChildProcesses(childPid: number) {
         ])
 
         if (stopResult.stderr) {
-          logError(
-            `Error stopping process with PID ${parentPid}: ${stopResult.stderr}`,
+          if (shouldLog) {
+            logDebug(
+              `Error stopping process with PID ${parentPid}: ${stopResult.stderr}`,
+              LogPrefix.Backend
+            )
+          }
+        }
+
+        if (shouldLog) {
+          logInfo(
+            `Successfully stopped process with PID: ${parentPid}`,
             LogPrefix.Backend
           )
         }
-
-        logInfo(
-          `Successfully stopped process with PID: ${parentPid}`,
-          LogPrefix.Backend
-        )
       }
 
       stopProcessTree(childPid)
     } catch (error) {
-      logError(
-        `Error executing PowerShell command: ${error}`,
-        LogPrefix.Backend
-      )
+      if (shouldLog) {
+        logDebug(
+          `Error stopping child processes from PID: ${childPid}: ${error}`,
+          LogPrefix.Backend
+        )
+      }
     }
 
     return

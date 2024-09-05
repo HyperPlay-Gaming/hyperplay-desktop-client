@@ -85,7 +85,9 @@
                 "message": "Der er en ny version tilgængelig!",
                 "message-finished": "Vil du genstarte HyperPlay nu?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Opdatering Færdig"
+                "title-finished": "Opdatering Færdig",
+                "appUpdated": "HyperPlay blev opdateret",
+                "appUpdated-message": "HyperPlay blev opdateret. Vil du opdatere og genstarte HyperPlay nu?"
             }
         },
         "ok": "OK",
