@@ -32,6 +32,9 @@
         "sideload": {
             "exe": "Select Executable"
         },
+        "stopExtraction": {
+            "title": "Do you want to cancel the Extraction?"
+        },
         "stopInstall": {
             "keepFilesMessage": "Check here if you want to keep the download files after canceling.",
             "keepInstalling": "Keep Installing",
