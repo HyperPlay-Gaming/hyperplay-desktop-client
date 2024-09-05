@@ -117,12 +117,15 @@ export function QuestDetailsWrapper({
   useTrackQuestViewed(selectedQuestId)
 
   const flags = useFlags()
+  const authSession = useAuthSession()
   const account = useAccount()
   const [showWarning, setShowWarning] = useState(false)
   const { t } = useTranslation()
   const questResult = useGetQuest(selectedQuestId)
   const [warningMessage, setWarningMessage] = useState<string>()
   const questMeta = questResult.data.data
+
+  const sessionEmail = authSession.data?.linkedAccounts.get('email')
 
   const rewardTypeClaimEnabled: Record<Reward['reward_type'], boolean> = {
     ERC20: flags.erc20RewardsClaim,
@@ -141,19 +144,55 @@ export function QuestDetailsWrapper({
 
   const resyncMutation = useMutation({
     mutationFn: async (rewards: Reward[]) => {
+      const isConnectedToG7 = await window.api.checkG7ConnectionStatus()
+
+      if (!isConnectedToG7) {
+        setWarningMessage(
+          t(
+            'quest.noG7ConnectionSync',
+            `You need to have a Game7 account linked to ${
+              sessionEmail ?? 'your email'
+            } to resync your tasks.`,
+            { email: sessionEmail ?? 'your email' }
+          )
+        )
+        return
+      }
+
       const result = await resyncExternalTasks(rewards)
       const queryKey = `useGetG7UserCredits`
       queryClient.invalidateQueries({ queryKey: [queryKey] })
       return result
+    },
+    onError: (error) => {
+      window.api.logError(`Error resyncing tasks: ${error}`)
     }
   })
 
   const completeTaskMutation = useMutation({
     mutationFn: async (reward: Reward) => {
+      const isConnectedToG7 = await window.api.checkG7ConnectionStatus()
+
+      if (!isConnectedToG7) {
+        setWarningMessage(
+          t(
+            'quest.noG7ConnectionClaim',
+            `You need to have a Game7 account linked to ${
+              sessionEmail ?? 'your email'
+            } to claim your rewards.`,
+            { email: sessionEmail ?? 'your email' }
+          )
+        )
+        return
+      }
+
       const result = await completeExternalTask(reward)
       const queryKey = `useGetG7UserCredits`
       queryClient.invalidateQueries({ queryKey: [queryKey] })
       return result
+    },
+    onError: (error) => {
+      window.api.logError(`Error completing task: ${error}`)
     }
   })
 
@@ -163,6 +202,9 @@ export function QuestDetailsWrapper({
       const queryKey = `getPointsBalancesForProject:${projectId}`
       queryClient.invalidateQueries({ queryKey: [queryKey] })
       return result
+    },
+    onError: (error) => {
+      window.api.logError(`Error claiming points: ${error}`)
     }
   })
 
@@ -360,6 +402,7 @@ export function QuestDetailsWrapper({
       })
 
       try {
+        setWarningMessage(undefined)
         switch (reward_i.reward_type) {
           case 'ERC1155':
           case 'ERC721':
@@ -451,7 +494,7 @@ export function QuestDetailsWrapper({
 
     let alertProps: InfoAlertProps | undefined
 
-    if (writeContractError || claimRewardsMutation.error || switchChainError) {
+    if (writeContractError || claimRewardsMutation.error || switchChainError || resyncMutation.error || completeTaskMutation.error) {
       alertProps = {
         showClose: false,
         title: t('quest.claimFailed', 'Claim failed'),

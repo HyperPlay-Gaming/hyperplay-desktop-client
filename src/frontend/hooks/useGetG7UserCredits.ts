@@ -8,7 +8,6 @@ export default function useGetG7UserCredits() {
   const query = useQuery<string>({
     queryKey: [queryKey],
     queryFn: async () => {
-      if (!isConnectedToG7) return ''
       const response = await window.api.getG7Credits()
       if (!response) return ''
       return response
@@ -18,6 +17,7 @@ export default function useGetG7UserCredits() {
 
   return {
     data: query,
+    enabled: isConnectedToG7.data,
     isLoading: query.isLoading || query.isFetching,
     invalidateQuery: async () =>
       queryClient.invalidateQueries({ queryKey: [queryKey] })
