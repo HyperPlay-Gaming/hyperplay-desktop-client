@@ -91,7 +91,8 @@ interface ProgressDownloadingItem {
 }
 
 const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
-const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
+export const inProgressExtractionsMap: Map<string, ExtractZipService> =
+  new Map()
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -828,11 +829,15 @@ export async function install(
     const { title, account_name } = gameInfo
     const isMarketWars = account_name === 'marketwars'
     if (isMarketWars && modOptions?.zipFilePath) {
-      await prepareBaseGameForModding({
-        appName,
-        zipFile: modOptions.zipFilePath,
-        installPath: dirpath
-      })
+      try {
+        await prepareBaseGameForModding({
+          appName,
+          zipFile: modOptions.zipFilePath,
+          installPath: dirpath
+        })
+      } catch (error) {
+        return { status: 'error' }
+      }
     }
 
     const destinationPath = updateOnly

@@ -164,6 +164,10 @@ export class ExtractZipService extends EventEmitter {
       throw new Error('Extraction has not started or has already completed.')
     }
 
+    console.log('canceling extraction--------------------------------', {
+      zip: this.#zipFile
+    })
+
     this.#canceled = true
 
     this.#readStream?.unpipe()

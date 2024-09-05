@@ -9,7 +9,8 @@ import {
 import { libraryManagerMap } from 'backend/storeManagers'
 import {
   calculateProgress,
-  getDestinationPath
+  getDestinationPath,
+  inProgressExtractionsMap
 } from 'backend/storeManagers/hyperplay/games'
 import { copyRecursiveSync } from 'backend/utils'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
@@ -17,8 +18,6 @@ import { readdirSync, rmSync } from 'graceful-fs'
 
 import i18next from 'i18next'
 import path from 'path'
-
-const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
 
 export async function prepareBaseGameForModding({
   appName,
@@ -79,7 +78,12 @@ export async function prepareBaseGameForModding({
     deleteOnEnd: false
   })
 
-  inProgressExtractionsMap.set('baseGameForModding', extractService)
+  inProgressExtractionsMap.set(appName, extractService)
+  const extractedFolder = path
+    .basename(extractService.source)
+    .replace('.zip', '')
+  const extractedFolderFullPath = path.join(dirPath, extractedFolder)
+
   await new Promise((resolve) => {
     extractService.on(
       'progress',
@@ -114,7 +118,7 @@ export async function prepareBaseGameForModding({
       }
     )
 
-    extractService.once('canceled', () => {
+    extractService.on('canceled', () => {
       logInfo(`Canceled Extracting of base game file`, LogPrefix.HyperPlay)
 
       process.noAsar = false
@@ -153,10 +157,9 @@ export async function prepareBaseGameForModding({
       })
 
       sendFrontendMessage('refreshLibrary', 'hyperplay')
+      rmSync(extractedFolderFullPath, { recursive: true, force: true })
 
-      resolve({
-        status: 'abort'
-      })
+      throw new Error('Canceled')
     })
 
     extractService.once(
@@ -198,13 +201,6 @@ export async function prepareBaseGameForModding({
           status: 'done'
         })
 
-        // move contents of the extracted folder to the destination path
-        // get the last part of the zip file path
-        const extractedFolder = path
-          .basename(extractService.source)
-          .replace('.zip', '')
-        const extractedFolderFullPath = path.join(dirPath, extractedFolder)
-
         logInfo(
           `Moving contents of ${extractedFolder} to ${dirPath}`,
           LogPrefix.HyperPlay
@@ -231,7 +227,7 @@ export async function prepareBaseGameForModding({
           )
         })
 
-        inProgressExtractionsMap.delete('baseGameForModding')
+        inProgressExtractionsMap.delete(appName)
         callAbortController(appName)
 
         resolve({
