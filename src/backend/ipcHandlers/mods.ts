@@ -1,6 +1,6 @@
 import { notify } from 'backend/dialog/dialog'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
-import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
+import { LogPrefix, logDebug, logError, logInfo } from 'backend/logger/logger'
 import { getMainWindow, sendFrontendMessage } from 'backend/main_window'
 import {
   ExtractZipProgressResponse,
@@ -157,7 +157,14 @@ export async function prepareBaseGameForModding({
       })
 
       sendFrontendMessage('refreshLibrary', 'hyperplay')
-      rmSync(extractedFolderFullPath, { recursive: true, force: true })
+      try {
+        rmSync(extractedFolderFullPath, { recursive: true, force: true })
+      } catch (error) {
+        logDebug(
+          `Error removing extracted folder ${extractedFolderFullPath} ${error}`,
+          LogPrefix.HyperPlay
+        )
+      }
 
       throw new Error('Canceled')
     })
@@ -183,6 +190,42 @@ export async function prepareBaseGameForModding({
           progressPercentage
         )
 
+        logInfo(
+          `Moving contents of ${extractedFolder} to ${dirPath}`,
+          LogPrefix.HyperPlay
+        )
+
+        // move contents of the extracted folder to the destination path
+        readdirSync(extractedFolderFullPath).forEach((file) => {
+          const srcPath = path.join(extractedFolderFullPath, file)
+          const destPath = path.join(dirPath, file)
+          copyRecursiveSync(srcPath, destPath)
+        })
+
+        // remove the extracted folder
+        try {
+          rmSync(extractedFolderFullPath, { recursive: true, force: true })
+        } catch (error) {
+          logDebug(
+            `Error removing extracted folder ${extractedFolderFullPath} ${error}`,
+            LogPrefix.HyperPlay
+          )
+        }
+
+        notify({
+          title: i18next.t(
+            'mod.baseGame.installed.title',
+            'Base Game Installed'
+          ),
+          body: i18next.t(
+            'mod.baseGame.installed.body',
+            'Mod will be applied to base game'
+          )
+        })
+
+        inProgressExtractionsMap.delete(appName)
+        callAbortController(appName)
+
         window.webContents.send(`progressUpdate-${appName}`, {
           appName,
           runner: 'hyperplay',
@@ -200,35 +243,6 @@ export async function prepareBaseGameForModding({
           folder: dirPath,
           status: 'done'
         })
-
-        logInfo(
-          `Moving contents of ${extractedFolder} to ${dirPath}`,
-          LogPrefix.HyperPlay
-        )
-
-        // move contents of the extracted folder to the destination path
-        readdirSync(extractedFolderFullPath).forEach((file) => {
-          const srcPath = path.join(extractedFolderFullPath, file)
-          const destPath = path.join(dirPath, file)
-          copyRecursiveSync(srcPath, destPath)
-        })
-
-        // remove the extracted folder
-        rmSync(extractedFolderFullPath, { recursive: true, force: true })
-
-        notify({
-          title: i18next.t(
-            'mod.baseGame.installed.title',
-            'Base Game Installed'
-          ),
-          body: i18next.t(
-            'mod.baseGame.installed.body',
-            'Mod will be applied to base game'
-          )
-        })
-
-        inProgressExtractionsMap.delete(appName)
-        callAbortController(appName)
 
         resolve({
           status: 'done'
