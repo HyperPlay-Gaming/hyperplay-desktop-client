@@ -1,7 +1,7 @@
 export const EPIC_LOGIN_URL = 'https://legendary.gl/epiclogin'
 export const HYPERPLAY_STORE_URL = 'https://store.hyperplay.xyz?isLauncher=true'
 export const G7_PORTAL =
-  'https://feat-launch-hyperplay.xps-user-portal.pages.dev/quests/hyperplay-games?layout=navless&game=0xcdfb42e4558a8d1200c75c5f61c6bdcfa8db0d498885c80837b0081d4ed5be3f'
+  'https://feat-launch-hyperplay.xps-user-portal.pages.dev/quests/hyperplay?layout=navless'
 export const EPIC_STORE_URL = 'https://www.epicgames.com/store'
 export const GOG_STORE_URL = `https://gog.com`
 export const WIKI_URL = 'https://docs.hyperplay.xyz/'
