@@ -1,17 +1,8 @@
-export interface DownloadLinks {
-  chromieCraft: string
-  archiveOrg: string
-  webtorrent: string
-  magnet: string
-}
-
-export const downloadLinks: Record<string, DownloadLinks> = {
-  '0x70e6d87cd62a0a643e48cab789c47890248fe1e8d320f41ba8e1c31d90f97d81': {
-    chromieCraft: 'https://chromiecraft.com/download',
-    archiveOrg:
-      'https://archive.org/download/World_of_Warcraft_Client_and_Installation_Archive/Patches/3.x/wow335-to-335a_engb.zip',
-    webtorrent: 'https://webtorrent.io/',
-    magnet:
-      'magnet:?xt=urn:btih:2ba2833baf733ce0a16040d43ed09491f2bf2ab2&dn=ChromieCraft_3.3.5a.zip&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.uw0.xyz%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zerobytes.xyz%3A1337%2Fannounce'
-  }
+export const marketWarsDownloadLinks: Record<string, string> = {
+  chromieCraft: 'https://chromiecraft.com/download',
+  zip: 'https://bit.ly/3JwHKKX',
+  archiveOrg: '',
+  webtorrent: 'https://webtorrent.io/',
+  magnet:
+    'magnet:?xt=urn:btih:2ba2833baf733ce0a16040d43ed09491f2bf2ab2&dn=ChromieCraft_3.3.5a.zip&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80%2Fannounce&tr=http%3A%2F%2Ftracker.opentrackr.org%3A1337%2Fannounce&tr=udp%3A%2F%2Ftracker.uw0.xyz%3A6969%2Fannounce&tr=udp%3A%2F%2Ftracker.zerobytes.xyz%3A1337%2Fannounce'
 }

@@ -1,4 +1,5 @@
 import { notify } from 'backend/dialog/dialog'
+import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { getMainWindow, sendFrontendMessage } from 'backend/main_window'
 import {
@@ -112,6 +113,52 @@ export async function prepareBaseGameForModding({
         })
       }
     )
+
+    extractService.once('canceled', () => {
+      logInfo(`Canceled Extracting of base game file`, LogPrefix.HyperPlay)
+
+      process.noAsar = false
+
+      cancelQueueExtraction()
+      callAbortController(appName)
+
+      sendFrontendMessage('gameStatusUpdate', {
+        appName,
+        status: 'done',
+        runner: 'hyperplay',
+        folder: dirPath
+      })
+
+      window.webContents.send(`progressUpdate-${appName}`, {
+        appName,
+        runner: 'hyperplay',
+        folder: dirPath,
+        status: 'done',
+        progress: {
+          folder: dirPath,
+          percent: 0,
+          diskSpeed: 0,
+          downSpeed: 0,
+          bytes: 0,
+          eta: null
+        }
+      })
+
+      notify({
+        title: i18next.t('mod.baseGame.cancel.title', 'Canceled Extraction'),
+        body: i18next.t(
+          'mod.baseGame.cancel.body',
+          'Base game extraction canceled'
+        )
+      })
+
+      sendFrontendMessage('refreshLibrary', 'hyperplay')
+
+      resolve({
+        status: 'abort'
+      })
+    })
+
     extractService.once(
       'finished',
       async ({

@@ -33,11 +33,13 @@
 }
 
 .sourceItem {
+  cursor: pointer;
   font-size: var(--text-sm);
   color: var(--color-tertiary-400);
   margin-bottom: var(--space-3xs);
   text-decoration: none;
   color: var(--color-primary-200);
+
   .magnetContainer {
     display: flex;
     flex-direction: row;

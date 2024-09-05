@@ -11,7 +11,7 @@ import TextInputWithIconField from 'frontend/components/UI/TextInputWithIconFiel
 import { Button, Images } from '@hyperplay/ui'
 import { install } from 'frontend/helpers'
 import { signSiweMessage } from 'frontend/helpers/library'
-import { downloadLinks } from './constants'
+import { marketWarsDownloadLinks } from './constants'
 import ContextProvider from 'frontend/state/ContextProvider'
 
 interface Props {
@@ -155,79 +155,32 @@ const ModDialog: React.FC<Props> = ({
             <span className={styles.stepDescription}>
               {t('mods.instructions.step1.description', {
                 defaultValue:
-                  'This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from several external sources:',
+                  'This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from sources like:',
                 newline: '\n'
               })}
             </span>
             <ul className={styles.sourceList}>
-              {/*               <li className={styles.sourceItem}>
-                <a
-                  className={styles.sourceLink}
-                  href={downloadLinks[appName]?.webtorrent ?? ''}
-                  onClick={(ev) => {
-                    window.api.openExternalUrl(
-                      downloadLinks[appName]?.webtorrent
-                    )
-                    ev.preventDefault()
-                  }}
-                >
-                  {t(
-                    'mods.instructions.step1.webTorrent',
-                    'WebTorrent (recommended)'
-                  )}
-                </a>
-              </li> */}
-              {/*               <li className={styles.sourceItem}>
-                <div className={styles.magnetContainer}>
-                  <a
-                    href={downloadLinks[appName]?.magnet ?? ''}
-                    className={styles.sourceLink}
-                    onClick={(ev) => {
-                      window.api.openExternalUrl(
-                        downloadLinks[appName]?.magnet ?? ''
-                      )
-                      ev.preventDefault()
-                    }}
-                  >
-                    {t(
-                      'mods.instructions.step1.bitTorrent',
-                      'BitTorrent Magnet Link'
-                    )}
-                  </a>
-                  <ButtonCopy
-                    text={downloadLinks[appName]?.magnet ?? ''}
-                    className={styles.copyMagnetButton}
-                  />
-                </div>
-              </li> */}
-              <li className={styles.sourceItem}>
-                <a
-                  href={downloadLinks[appName]?.chromieCraft ?? ''}
-                  className={styles.sourceLink}
-                  onClick={(ev) => {
-                    window.api.openExternalUrl(
-                      downloadLinks[appName]?.chromieCraft ?? ''
-                    )
-                    ev.preventDefault()
-                  }}
-                >
-                  {t('mods.instructions.step1.chromieCraft', 'ChromieCraft')}
-                </a>
+              <li
+                className={styles.sourceItem}
+                onClick={() =>
+                  window.api.openExternalUrl(
+                    marketWarsDownloadLinks.chromieCraft
+                  )
+                }
+              >
+                {t('mods.instructions.step1.chromieCraft', 'ChromieCraft')}
               </li>
-              {/*               <li className={styles.sourceItem}>
-                <a
-                  href={downloadLinks[appName]?.archiveOrg ?? ''}
-                  className={styles.sourceLink}
-                  onClick={(ev) => {
-                    window.api.openExternalUrl(
-                      downloadLinks[appName]?.archiveOrg ?? ''
-                    )
-                    ev.preventDefault()
-                  }}
-                >
-                  {t('mods.instructions.step1.archive', 'Archive.org')}
-                </a>
-              </li> */}
+              <li
+                className={styles.sourceItem}
+                onClick={() =>
+                  window.api.openExternalUrl(marketWarsDownloadLinks.magnet)
+                }
+              >
+                {t(
+                  'mods.instructions.step1.webtorrent',
+                  'Torrent (Magnet Link)'
+                )}
+              </li>
             </ul>
           </div>
           <div className={styles.step}>
