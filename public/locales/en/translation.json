@@ -56,7 +56,7 @@
                 "title": "CrossOver bottle not found"
             },
             "delete-files": {
-                "body": "Error removing extracted folder {{path}}. Please remove it manually.",
+                "body": "Error removing extracted folder {{path}}. Please remove it manually. \n                {{paragraph}} \n                {{error}}",
                 "title": "Error removing extracted folder"
             },
             "diskspace": {

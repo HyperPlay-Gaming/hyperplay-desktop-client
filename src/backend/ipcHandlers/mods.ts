@@ -174,9 +174,13 @@ export async function prepareBaseGameForModding({
                 ),
                 message: i18next.t(
                   'box.error.delete-files.body',
-                  `Error removing extracted folder {{path}}. Please remove it manually.`,
+                  `Error removing extracted folder {{path}}. Please remove it manually. 
+                {{paragraph}} 
+                {{error}}`,
                   {
-                    path: extractedFolderFullPath
+                    path: extractedFolderFullPath,
+                    error: error,
+                    paragraph: '\n\n'
                   }
                 ),
                 buttons: [{ text: i18next.t('box.ok', 'OK') }],
