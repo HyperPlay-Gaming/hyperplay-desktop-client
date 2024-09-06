@@ -4,10 +4,7 @@ import classNames from 'classnames'
 import SettingsContext from '../../SettingsContext'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { GameStatus } from 'common/types'
-import {
-  DisableLogs,
-  DownloadNoHTTPS
-} from '../../components'
+import { DisableLogs, DownloadNoHTTPS } from '../../components'
 import libraryState from 'frontend/state/libraryState'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
