@@ -59,6 +59,7 @@ const GameCard = ({
 
   const {
     layout,
+    allTilesInColor,
     showDialogModal,
     setIsSettingsModalOpen,
     platform
@@ -381,6 +382,7 @@ const GameCard = ({
           progress={progress}
           message={downloadStatusText}
           actionDisabled={isLaunching}
+          alwaysShowInColor={allTilesInColor}
           store={runner}
         />
       </Link>

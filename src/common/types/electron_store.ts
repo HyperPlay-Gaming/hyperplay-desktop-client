@@ -32,6 +32,7 @@ export interface StoreStructure {
     zoomPercent: number
     contentFontFamily: string
     actionsFontFamily: string
+    allTilesInColor: boolean
     language: string
     'general-logs': {
       currentLogFile: string

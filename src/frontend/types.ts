@@ -37,6 +37,8 @@ export interface ContextType {
     login: (token: string) => Promise<string>
     logout: () => Promise<void>
   }
+  allTilesInColor: boolean
+  setAllTilesInColor: (value: boolean) => void
   setSideBarCollapsed: (value: boolean) => void
   sidebarCollapsed: boolean
   activeController: string
