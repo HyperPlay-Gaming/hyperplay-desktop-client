@@ -14,7 +14,7 @@ import {
 } from 'backend/storeManagers/hyperplay/games'
 import { copyRecursiveSync } from 'backend/utils'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
-import { readdirSync, rm, rmSync } from 'graceful-fs'
+import { readdirSync, rm } from 'graceful-fs'
 
 import i18next from 'i18next'
 import path from 'path'
@@ -230,10 +230,18 @@ export async function prepareBaseGameForModding({
 
         // remove the extracted folder
         try {
-          rmSync(extractedFolderFullPath, {
-            recursive: true,
-            force: true
-          })
+          rm(
+            extractedFolderFullPath,
+            { recursive: true, force: true },
+            (error) => {
+              if (error) {
+                logDebug(
+                  `Error removing extracted folder ${extractedFolderFullPath} ${error}`,
+                  LogPrefix.HyperPlay
+                )
+              }
+            }
+          )
         } catch (error) {
           logDebug(
             `Error removing extracted folder ${extractedFolderFullPath} ${error}`,
