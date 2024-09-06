@@ -169,12 +169,15 @@ export async function prepareBaseGameForModding({
               )
               showDialogBoxModalAuto({
                 title: i18next.t(
-                  'mod.baseGame.cancel.error.title',
+                  'box.error.delete-files.title',
                   'Error removing extracted folder'
                 ),
                 message: i18next.t(
-                  'mod.baseGame.cancel.error.body',
-                  `Error removing extracted folder ${extractedFolderFullPath}. Please remove it manually.`
+                  'box.error.delete-files.body',
+                  `Error removing extracted folder {{path}}. Please remove it manually.`,
+                  {
+                    path: extractedFolderFullPath
+                  }
                 ),
                 buttons: [{ text: i18next.t('box.ok', 'OK') }],
                 type: 'ERROR'

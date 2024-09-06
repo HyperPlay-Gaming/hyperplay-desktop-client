@@ -55,6 +55,10 @@
                 "message": "The CrossOver bottle \"{{bottle_name}}\" does not exist, can't launch!",
                 "title": "CrossOver bottle not found"
             },
+            "delete-files": {
+                "body": "Error removing extracted folder {{path}}. Please remove it manually.",
+                "title": "Error removing extracted folder"
+            },
             "diskspace": {
                 "message": "Not enough available disk space",
                 "title": "No Space"
