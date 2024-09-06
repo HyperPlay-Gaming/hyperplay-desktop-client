@@ -1,4 +1,4 @@
-import { notify } from 'backend/dialog/dialog'
+import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import { cancelQueueExtraction } from 'backend/downloadmanager/downloadqueue'
 import { LogPrefix, logDebug, logError, logInfo } from 'backend/logger/logger'
 import { getMainWindow, sendFrontendMessage } from 'backend/main_window'
@@ -14,7 +14,7 @@ import {
 } from 'backend/storeManagers/hyperplay/games'
 import { copyRecursiveSync } from 'backend/utils'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
-import { readdirSync, rmSync } from 'graceful-fs'
+import { readdirSync, rm, rmSync } from 'graceful-fs'
 
 import i18next from 'i18next'
 import path from 'path'
@@ -158,7 +158,30 @@ export async function prepareBaseGameForModding({
 
       sendFrontendMessage('refreshLibrary', 'hyperplay')
       try {
-        rmSync(extractedFolderFullPath, { recursive: true, force: true })
+        rm(
+          extractedFolderFullPath,
+          { recursive: true, force: true },
+          (error) => {
+            if (error) {
+              logDebug(
+                `Error removing extracted folder ${extractedFolderFullPath} ${error}`,
+                LogPrefix.HyperPlay
+              )
+              showDialogBoxModalAuto({
+                title: i18next.t(
+                  'mod.baseGame.cancel.error.title',
+                  'Error removing extracted folder'
+                ),
+                message: i18next.t(
+                  'mod.baseGame.cancel.error.body',
+                  `Error removing extracted folder ${extractedFolderFullPath}. Please remove it manually.`
+                ),
+                buttons: [{ text: i18next.t('box.ok', 'OK') }],
+                type: 'ERROR'
+              })
+            }
+          }
+        )
       } catch (error) {
         logDebug(
           `Error removing extracted folder ${extractedFolderFullPath} ${error}`,
@@ -204,7 +227,10 @@ export async function prepareBaseGameForModding({
 
         // remove the extracted folder
         try {
-          rmSync(extractedFolderFullPath, { recursive: true, force: true })
+          rmSync(extractedFolderFullPath, {
+            recursive: true,
+            force: true
+          })
         } catch (error) {
           logDebug(
             `Error removing extracted folder ${extractedFolderFullPath} ${error}`,
