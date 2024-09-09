@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Tooltip, TooltipProps } from '@mantine/core'
 import { faSteam } from '@fortawesome/free-brands-svg-icons'
 import { Alert, Button } from '@hyperplay/ui'
@@ -24,7 +24,6 @@ const tooltipProps: Partial<TooltipProps> = {
 
 export default observer(function SteamInstallButton() {
   const { platform, showDialogModal } = useContext(ContextProvider)
-  const [isInstalling, setIsInstalling] = useState(false)
   const [showInstallDialog, setShowInstallDialog] = useState(false)
   const [showAlert, setShowAlert] = useState<'success' | 'danger' | 'none'>(
     'none'
@@ -49,6 +48,20 @@ export default observer(function SteamInstallButton() {
   const isCompatibilityLayerAvailable =
     wineList.data && wineList.data.length > 0
 
+  const installSteamMutation = useMutation({
+    mutationKey: ['steamInstall'],
+    onSuccess: () => {
+      setShowAlert('success')
+      setTimeout(() => setShowAlert('none'), 5000)
+      setShowInstallDialog(false)
+    },
+    onError: () => {
+      setShowAlert('danger')
+      setTimeout(() => setShowAlert('none'), 5000)
+    },
+    mutationFn: async () => window.api.installSteamWindows()
+  })
+
   async function handleSteamInstallation() {
     if (isSteamInstalled) {
       return launch({
@@ -64,6 +77,8 @@ export default observer(function SteamInstallButton() {
     return setShowInstallDialog(true)
   }
 
+  const isInstalling = installSteamMutation.status === 'pending'
+
   function renderButtonText() {
     if (isInstalling) {
       return t('Installing Steam', 'Installing Steam...')
@@ -73,20 +88,6 @@ export default observer(function SteamInstallButton() {
     }
     return t('Install Steam', 'Install Steam')
   }
-
-  const installSteamMutation = useMutation({
-    mutationKey: ['steamInstall'],
-    onSuccess: () => {
-      setShowAlert('success')
-      setTimeout(() => setShowAlert('none'), 5000)
-      setShowInstallDialog(false)
-    },
-    onError: () => {
-      setShowAlert('danger')
-      setTimeout(() => setShowAlert('none'), 5000)
-    },
-    mutationFn: async () => window.api.installSteamWindows()
-  })
 
   const toolTipText = isSteamInstalled
     ? t(
