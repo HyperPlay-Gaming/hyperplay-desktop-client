@@ -685,6 +685,26 @@ export const SteamWindows = {
       // Add Steam to the library
       const executable = `${winePrefix}/drive_c/Program Files (x86)/Steam/Steam.exe`
 
+      if (!existsSync(executable)) {
+        logError(['Steam executable not found', executable], LogPrefix.Backend)
+        showDialogBoxModalAuto({
+          title: i18next.t('box.error.steam.title', 'Steam error'),
+          message: i18next.t(
+            'box.error.steam.message',
+            'Steam installation failed! Please read the instructions carefully and try again! {{paragraph}} {{error}}',
+            {
+              paragraph: '\n \n',
+              error: i18next.t(
+                'box.error.steam.error',
+                'Steam executable not found. Installation was probably canceled by user or failed on Steam side.'
+              )
+            }
+          ),
+          type: 'ERROR'
+        })
+        throw new Error('Steam executable not found')
+      }
+
       addNewApp({
         app_name: 'steam',
         runner: 'sideload',
@@ -704,6 +724,21 @@ export const SteamWindows = {
       logInfo(`Steam installed at ${dirname(executable)}`, LogPrefix.Backend)
     } catch (error) {
       logError(['Error Installing Steam', error], LogPrefix.Backend)
+
+      showDialogBoxModalAuto({
+        title: i18next.t('box.error.steam.title', 'Steam error'),
+        message: i18next.t(
+          'box.error.steam.message',
+          'Steam installation failed! Please read the instructions carefully and try again! {{paragraph}} {{error}}',
+          {
+            paragraph: '\n \n',
+            error: error
+          }
+        ),
+        type: 'ERROR'
+      })
+
+      throw new Error('Steam installation failed')
     }
   }
 }
