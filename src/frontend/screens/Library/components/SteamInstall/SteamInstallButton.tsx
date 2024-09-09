@@ -10,6 +10,7 @@ import libraryState from 'frontend/state/libraryState'
 import SteamInstallDialog from './SteamInstallDialog'
 import { launch } from 'frontend/helpers'
 import { useMutation, useQuery } from '@tanstack/react-query'
+import { hasStatus } from 'frontend/hooks/hasStatus'
 
 const tooltipProps: Partial<TooltipProps> = {
   offset: 16,
@@ -29,6 +30,8 @@ export default observer(function SteamInstallButton() {
     'none'
   )
   const [isInstalling, setIsInstalling] = useState(false)
+  const { status } = hasStatus('steam')
+  const isLaunching = status === 'playing'
 
   const isMac = platform === 'darwin'
   const isSteamInstalled =
@@ -82,6 +85,9 @@ export default observer(function SteamInstallButton() {
   }
 
   function renderButtonText() {
+    if (isLaunching) {
+      return t('Launching Steam', 'Launching Steam...')
+    }
     if (isInstalling) {
       return t('Installing Steam', 'Installing Steam...')
     }
@@ -110,6 +116,8 @@ export default observer(function SteamInstallButton() {
 
   const showSuccessAlert = showAlert === 'success'
   const showErrorAlert = showAlert === 'danger'
+  const isButtonDisabled =
+    !isCompatibilityLayerAvailable || isInstalling || isLaunching
 
   return (
     <>
@@ -126,7 +134,7 @@ export default observer(function SteamInstallButton() {
           type="tertiary"
           onClick={handleSteamInstallation}
           leftIcon={<FontAwesomeIcon icon={faSteam} height={14} width={14} />}
-          disabled={!isCompatibilityLayerAvailable || isInstalling}
+          disabled={isButtonDisabled}
         >
           {renderButtonText()}
         </Button>
