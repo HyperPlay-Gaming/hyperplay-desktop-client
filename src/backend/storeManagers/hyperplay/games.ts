@@ -95,7 +95,7 @@ export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
 }
 
-export const isGameAvailable = (appName: string) => {
+export const isGameAvailable = async (appName: string) => {
   const hpGameInfo = getGameInfo(appName)
   if (hpGameInfo && hpGameInfo.install.platform === 'web') {
     return true
@@ -103,6 +103,11 @@ export const isGameAvailable = (appName: string) => {
 
   if (hpGameInfo.install && hpGameInfo.install.executable) {
     let { executable } = getExecutableAndArgs(hpGameInfo.install.executable)
+    const { targetExe } = await getSettings(appName)
+
+    if (targetExe) {
+      executable = targetExe
+    }
 
     // on linux and mac replace backslashes with forward slashes on executable
     if (!isWindows) {
@@ -1365,7 +1370,7 @@ export async function getExtraInfo(appName: string): Promise<ExtraInfo> {
 }
 
 export async function launch(appName: string): Promise<boolean> {
-  const isAvailable = isGameAvailable(appName)
+  const isAvailable = await isGameAvailable(appName)
 
   if (!isAvailable) {
     const { title } = getGameInfo(appName)

@@ -159,7 +159,7 @@ describe('libraryState.ts', () => {
     ]
 
     libraryState.favouriteGames = {
-      list: [{ appName: 'c', title: 'c' }],
+      list: [{ appName: 'c' }],
       add: () => {
         console.log('add')
       },
@@ -187,7 +187,7 @@ describe('libraryState.ts', () => {
     expect(libraryState.library.length).toBe(2)
     expect(libraryState.library[0].app_name).toBe('b')
     libraryState.hiddenGames = {
-      list: [{ appName: 'b', title: 'b' }],
+      list: [{ appName: 'b' }],
       add: () => {
         console.log('add')
       },
@@ -321,6 +321,86 @@ describe('libraryState.ts', () => {
     expect(libraryState.showRecentGames).toBe(true)
     libraryState.libraryTopSection = 'disabled'
     expect(libraryState.showRecentGames).toBe(false)
+  })
+
+  test('hide and unhide a game', async () => {
+    const game_a = getDummyGameInfo({
+      title: 'a',
+      is_installed: false,
+      runner: 'legendary'
+    })
+
+    const game_b = getDummyGameInfo({
+      title: 'b',
+      is_installed: false,
+      runner: 'legendary'
+    })
+    libraryState.epicLibrary = [game_a, game_b]
+
+    expect(libraryState.library.some((val) => val.app_name === game_a.app_name))
+    expect(libraryState.library.some((val) => val.app_name === game_b.app_name))
+
+    libraryState.hideGame(game_a.app_name)
+    expect(
+      libraryState.library.findIndex(
+        (val) => val.app_name === game_a.app_name
+      ) === -1
+    )
+    expect(libraryState.library.some((val) => val.app_name === game_b.app_name))
+
+    libraryState.unhideGame(game_a.app_name)
+    expect(libraryState.library.some((val) => val.app_name === game_a.app_name))
+    expect(libraryState.library.some((val) => val.app_name === game_b.app_name))
+  })
+
+  test('favourite and unfavourite a game', async () => {
+    const game_a = getDummyGameInfo({
+      title: 'a',
+      is_installed: false,
+      runner: 'legendary'
+    })
+
+    const game_b = getDummyGameInfo({
+      title: 'b',
+      is_installed: false,
+      runner: 'legendary'
+    })
+    libraryState.epicLibrary = [game_a, game_b]
+
+    expect(
+      libraryState.favouriteGames.list.findIndex(
+        (val) => val.appName === game_a.app_name
+      ) === -1
+    )
+    expect(
+      libraryState.favouriteGames.list.findIndex(
+        (val) => val.appName === game_b.app_name
+      ) === -1
+    )
+
+    libraryState.favouriteGame(game_a.app_name)
+    expect(
+      libraryState.favouriteGames.list.findIndex(
+        (val) => val.appName === game_a.app_name
+      ) !== -1
+    )
+    expect(
+      libraryState.favouriteGames.list.findIndex(
+        (val) => val.appName === game_b.app_name
+      ) === -1
+    )
+
+    libraryState.unfavouriteGame(game_a.app_name)
+    expect(
+      libraryState.favouriteGames.list.findIndex(
+        (val) => val.appName === game_a.app_name
+      ) === -1
+    )
+    expect(
+      libraryState.favouriteGames.list.findIndex(
+        (val) => val.appName === game_b.app_name
+      ) === -1
+    )
   })
 })
 

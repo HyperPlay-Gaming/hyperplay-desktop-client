@@ -67,9 +67,6 @@ export async function getSaveSyncLocation(
   const clientId = readInfoFile(appName, install.install_path)?.clientId
 
   if (!clientId) {
-    logWarning(
-      `No clientId in goggame-${appName}.info file. Cannot resolve save path`
-    )
     return
   }
 

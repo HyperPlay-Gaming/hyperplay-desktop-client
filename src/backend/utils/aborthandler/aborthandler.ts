@@ -5,7 +5,6 @@ const abortControllers = new Map<string, AbortController>()
 function createAbortController(id: string): AbortController {
   const abortController = new AbortController()
   // add or update map entry
-  logInfo(`Creating abort controller for ${id}`, LogPrefix.Backend)
   abortControllers.set(id, abortController)
   return abortController
 }
@@ -36,7 +35,6 @@ function callAllAbortControllers() {
 }
 
 function deleteAbortController(id: string) {
-  logInfo(`Deleting abort controller for ${id}`, LogPrefix.Backend)
   abortControllers.delete(id)
 }
 

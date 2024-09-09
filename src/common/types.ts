@@ -483,7 +483,7 @@ export type RecentGame = {
   title: string
 }
 
-export type HiddenGame = RecentGame
+export type HiddenGame = { appName: string }
 
 export type FavouriteGame = HiddenGame
 
