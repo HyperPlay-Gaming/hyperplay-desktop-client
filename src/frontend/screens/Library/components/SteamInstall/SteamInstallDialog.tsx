@@ -4,36 +4,20 @@ import { Button } from '@hyperplay/ui'
 import { Dialog } from 'frontend/components/UI/Dialog'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { useMutation } from '@tanstack/react-query'
 
 interface SteamInstallDialogProps {
   isInstalling: boolean
-  setIsInstalling: (value: boolean) => void
   onClose: () => void
-  setShowAlert: (value: 'success' | 'danger' | 'none') => void
+  onInstall: () => void
 }
 
 const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
   isInstalling,
-  setIsInstalling,
   onClose,
-  setShowAlert
+  onInstall
 }) => {
   const { t } = useTranslation()
-
-  const handleInstallSteam = async () => {
-    try {
-      setIsInstalling(true)
-      await window.api.installSteamWindows()
-      setShowAlert('success')
-      setTimeout(() => setShowAlert('none'), 5000)
-      setIsInstalling(false)
-      onClose()
-    } catch (error) {
-      setShowAlert('danger')
-      setTimeout(() => setShowAlert('none'), 5000)
-      setIsInstalling(false)
-    }
-  }
 
   return (
     <Dialog showCloseButton={false} onClose={onClose}>
@@ -79,7 +63,7 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
         <Button
           type="secondary"
           size="medium"
-          onClick={handleInstallSteam}
+          onClick={onInstall}
           disabled={isInstalling}
         >
           {isInstalling ? (

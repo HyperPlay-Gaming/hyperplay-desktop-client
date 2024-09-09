@@ -7,9 +7,9 @@ import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
 import { observer } from 'mobx-react-lite'
 import libraryState from 'frontend/state/libraryState'
-import { WineInstallation } from 'common/types'
 import SteamInstallDialog from './SteamInstallDialog'
 import { launch } from 'frontend/helpers'
+import { useMutation, useQuery } from '@tanstack/react-query'
 
 const tooltipProps: Partial<TooltipProps> = {
   offset: 16,
@@ -26,8 +26,6 @@ export default observer(function SteamInstallButton() {
   const { platform, showDialogModal } = useContext(ContextProvider)
   const [isInstalling, setIsInstalling] = useState(false)
   const [showInstallDialog, setShowInstallDialog] = useState(false)
-  const [isCompatibilityLayerAvailable, setIsCompatibilityLayerAvailable] =
-    useState(false)
   const [showAlert, setShowAlert] = useState<'success' | 'danger' | 'none'>(
     'none'
   )
@@ -38,15 +36,18 @@ export default observer(function SteamInstallButton() {
     libraryState.sideloadedLibrary.find((game) => game.app_name === 'steam')
 
   const { t } = useTranslation()
-  useEffect(() => {
-    const checkWine = async () => {
-      const winelist: WineInstallation[] = await window.api.getAlternativeWine()
-      if (winelist.length > 0) {
-        setIsCompatibilityLayerAvailable(true)
-      }
+
+  const wineList = useQuery({
+    queryKey: ['alternativeWine'],
+    queryFn: async () => {
+      const response = await window.api.getAlternativeWine()
+      if (!response) return []
+      return response
     }
-    checkWine()
-  }, [])
+  })
+
+  const isCompatibilityLayerAvailable =
+    wineList.data && wineList.data.length > 0
 
   async function handleSteamInstallation() {
     if (isSteamInstalled) {
@@ -72,6 +73,20 @@ export default observer(function SteamInstallButton() {
     }
     return t('Install Steam', 'Install Steam')
   }
+
+  const installSteamMutation = useMutation({
+    mutationKey: ['steamInstall'],
+    onSuccess: () => {
+      setShowAlert('success')
+      setTimeout(() => setShowAlert('none'), 5000)
+      setShowInstallDialog(false)
+    },
+    onError: () => {
+      setShowAlert('danger')
+      setTimeout(() => setShowAlert('none'), 5000)
+    },
+    mutationFn: async () => window.api.installSteamWindows()
+  })
 
   const toolTipText = isSteamInstalled
     ? t(
@@ -116,9 +131,8 @@ export default observer(function SteamInstallButton() {
       {showInstallDialog ? (
         <SteamInstallDialog
           isInstalling={isInstalling}
-          setIsInstalling={setIsInstalling}
           onClose={() => setShowInstallDialog(false)}
-          setShowAlert={setShowAlert}
+          onInstall={installSteamMutation.mutate}
         />
       ) : null}
       {showSuccessAlert && (
