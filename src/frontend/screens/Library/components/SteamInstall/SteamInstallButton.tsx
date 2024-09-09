@@ -28,6 +28,7 @@ export default observer(function SteamInstallButton() {
   const [showAlert, setShowAlert] = useState<'success' | 'danger' | 'none'>(
     'none'
   )
+  const [isInstalling, setIsInstalling] = useState(false)
 
   const isMac = platform === 'darwin'
   const isSteamInstalled =
@@ -54,11 +55,14 @@ export default observer(function SteamInstallButton() {
       setShowAlert('success')
       setTimeout(() => setShowAlert('none'), 5000)
       setShowInstallDialog(false)
+      setIsInstalling(false)
     },
     onError: () => {
       setShowAlert('danger')
       setTimeout(() => setShowAlert('none'), 5000)
+      setIsInstalling(false)
     },
+    onMutate: () => setIsInstalling(true),
     mutationFn: async () => window.api.installSteamWindows()
   })
 
@@ -76,8 +80,6 @@ export default observer(function SteamInstallButton() {
 
     return setShowInstallDialog(true)
   }
-
-  const isInstalling = installSteamMutation.status === 'pending'
 
   function renderButtonText() {
     if (isInstalling) {
