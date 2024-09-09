@@ -29,7 +29,6 @@ export default observer(function SteamInstallButton() {
   const [showAlert, setShowAlert] = useState<'success' | 'danger' | 'none'>(
     'none'
   )
-  const [isInstalling, setIsInstalling] = useState(false)
   const { status } = hasStatus('steam')
   const isLaunching = status === 'playing'
 
@@ -58,16 +57,16 @@ export default observer(function SteamInstallButton() {
       setShowAlert('success')
       setTimeout(() => setShowAlert('none'), 5000)
       setShowInstallDialog(false)
-      setIsInstalling(false)
     },
     onError: () => {
       setShowAlert('danger')
       setTimeout(() => setShowAlert('none'), 5000)
-      setIsInstalling(false)
+
     },
-    onMutate: () => setIsInstalling(true),
     mutationFn: async () => window.api.installSteamWindows()
   })
+
+  const isInstalling = installSteamMutation.isPending
 
   async function handleSteamInstallation() {
     if (isSteamInstalled) {
