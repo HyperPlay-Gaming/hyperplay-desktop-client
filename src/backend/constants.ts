@@ -51,6 +51,7 @@ const appFolder = join(configFolder, 'hyperplay')
 const legendaryConfigPath = join(appFolder, 'legendaryConfig', 'legendary')
 const configPath = join(appConfigFolder, 'config.json')
 const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
+const manifestsFolder = join(appConfigFolder, 'manifests')
 
 const toolsPath = join(appConfigFolder, 'tools')
 const iconsFolder = join(appConfigFolder, 'icons')
@@ -282,5 +283,6 @@ export {
   valistListingsApiUrl,
   mainReleaseChannelName,
   vulkanHelperBin,
-  cachedUbisoftInstallerPath
+  cachedUbisoftInstallerPath,
+  manifestsFolder
 }

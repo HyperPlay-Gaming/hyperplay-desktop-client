@@ -32,7 +32,8 @@ import {
   isMac,
   isWindows,
   isLinux,
-  getValidateLicenseKeysApiUrl
+  getValidateLicenseKeysApiUrl,
+  toolsPath
 } from 'backend/constants'
 import {
   downloadFile,
@@ -78,6 +79,8 @@ import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
+import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
+
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
   platformInfo?: PlatformConfig
@@ -90,6 +93,8 @@ interface ProgressDownloadingItem {
 
 const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
 const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
+
+const ipdtPatcher = path.join(toolsPath, 'ipdt')
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -1491,4 +1496,14 @@ function writeManifestFile(
   })
 
   return store.set('manifest', installedInfo)
+}
+
+export const downloadPatcher = async () => {
+  if (!existsSync(ipdtPatcher)) {
+    try {
+      await downloadIPDTForOS(toolsPath)
+    } catch (error) {
+      logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
+    }
+  }
 }
