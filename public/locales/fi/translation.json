@@ -1000,7 +1000,8 @@
         "title": "Pelin päivitykset saatavilla"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Olet yhteydessä HyperPlayyn ulkoisella lompakolla."
+        "EXTERNAL_WALLET_CONNECTED": "Olet yhteydessä HyperPlayyn ulkoisella lompakolla.",
+        "WALLET_DISCONNECTED": "Sinulla ei ole lompakkoa, joka on liitetty HyperPlayyn."
     },
     "accounts": "tilit",
     "exit_game": "Exit Game",

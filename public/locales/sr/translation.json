@@ -1050,7 +1050,8 @@
         "warningMessage": "#Strana-@loading @a #igra @i @a @feature @intend @for developers a @experienced #moć #korisnik. #Strana-@loading @a @installer da #sadržati malware #moći #kompromis #tvoj #računar a #olovo #na #krađa @of #fond#."
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#."
+        "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#.",
+        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#."
     },
     "profile": "Профил",
     "ALL": "СВЕ",

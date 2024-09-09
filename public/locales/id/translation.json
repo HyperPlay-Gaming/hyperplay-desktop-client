@@ -927,7 +927,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Anda terhubung ke HyperPlay dengan dompet eksternal."
+        "EXTERNAL_WALLET_CONNECTED": "Anda terhubung ke HyperPlay dengan dompet eksternal.",
+        "WALLET_DISCONNECTED": "Anda tidak memiliki dompet yang terhubung ke HyperPlay."
     },
     "dlcs": {
         "label": "Pilih DLC untuk menginstal:"

@@ -1016,7 +1016,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Jest połączony z HyperPlay z zewnętrzną ścianą."
+        "EXTERNAL_WALLET_CONNECTED": "Jest połączony z HyperPlay z zewnętrzną ścianą.",
+        "WALLET_DISCONNECTED": "Nie ma ścian połączonych z HyperPlay."
     },
     "dlcs": {
         "label": "Select DLC (ang.)"

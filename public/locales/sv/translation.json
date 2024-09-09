@@ -1019,7 +1019,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Du är ansluten till HyperPlay med en extern plånbok."
+        "EXTERNAL_WALLET_CONNECTED": "Du är ansluten till HyperPlay med en extern plånbok.",
+        "WALLET_DISCONNECTED": "Du har ingen plånbok ansluten till HyperPlay."
     },
     "email_subscription": {
         "title": "Tack för att du prenumererar!",

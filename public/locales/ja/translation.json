@@ -1019,7 +1019,8 @@
     },
     "exit_game": "終了ゲーム",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "外部ウォレットでHyperPlayに接続します."
+        "EXTERNAL_WALLET_CONNECTED": "外部ウォレットでHyperPlayに接続します.",
+        "WALLET_DISCONNECTED": "HyperPlayに接続されているウォレットはありません."
     },
     "importGameErrorMessageExecutable": "ゲーム 実行可能が見つからず、ゲームをインポートできない",
     "gameUpdateNotifications": {

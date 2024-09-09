@@ -1058,7 +1058,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Du er forbundet til HyperPlay med en ekstern tegnebog."
+        "EXTERNAL_WALLET_CONNECTED": "Du er forbundet til HyperPlay med en ekstern tegnebog.",
+        "WALLET_DISCONNECTED": "Du har ikke en tegnebog, der er forbundet til HyperPlay."
     },
     "quests": {
         "quests": "Quests",

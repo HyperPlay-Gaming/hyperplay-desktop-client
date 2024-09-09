@@ -1036,7 +1036,8 @@
     },
     "exit_game": "لعبة الخروج",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "أنت متصل بـ(هايبر بلاي) بمحفظة خارجية."
+        "EXTERNAL_WALLET_CONNECTED": "أنت متصل بـ(هايبر بلاي) بمحفظة خارجية.",
+        "WALLET_DISCONNECTED": "ليس لديك محفظة مرتبطة بـ(هايبر بلاي)."
     },
     "please-wait": "من فضلك انتظر.",
     "email_subscription": {

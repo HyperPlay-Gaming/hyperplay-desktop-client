@@ -1028,7 +1028,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Είστε συνδεδεμένοι με το HyperPlay με ένα εξωτερικό πορτοφόλι."
+        "EXTERNAL_WALLET_CONNECTED": "Είστε συνδεδεμένοι με το HyperPlay με ένα εξωτερικό πορτοφόλι.",
+        "WALLET_DISCONNECTED": "Δεν έχετε πορτοφόλι συνδεδεμένο με HyperPlay."
     },
     "importGameErrorMessageExecutable": "Game Game Game Δεν είναι εφικτό, το παιχνίδι εισαγωγής δεν είναι εφικτό",
     "profile": "Προφίλ",
