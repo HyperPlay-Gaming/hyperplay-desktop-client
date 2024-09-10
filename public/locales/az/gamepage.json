@@ -239,5 +239,10 @@
         "store": "Mağaza Səhifəsi",
         "verify": "Doğrulayın və Təmir edin",
         "extraInfo": "Qeydiyyat"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Bu mesajla HiperPlay Team əlaqə edin: {{error}} - {{context}}."
+        }
     }
 }
