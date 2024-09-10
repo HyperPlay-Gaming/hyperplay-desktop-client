@@ -238,5 +238,10 @@
         "store": "Áruházi oldal",
         "verify": "Ellenőrzés és javítás",
         "extraInfo": "Extra Info"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Kérjük, vegye fel a kapcsolatot a HyperPlay csapattal ezzel az üzenettel: {{error}} - {{context}}."
+        }
     }
 }
