@@ -245,5 +245,10 @@
             "paused": "已暫停",
             "extracting": "提取..."
         }
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "请联系超Play小组这一信息:{{error}}-{{context}}."
+        }
     }
 }
