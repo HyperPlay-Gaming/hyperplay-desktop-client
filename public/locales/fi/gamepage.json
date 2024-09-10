@@ -238,5 +238,10 @@
         "store": "Kauppasivu",
         "verify": "Vahvista ja korjaa",
         "extraInfo": "Lisätietoa"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Ota yhteyttä HyperPlay-tiimiin tällä viestillä: {{error}} - {{context}}."
+        }
     }
 }
