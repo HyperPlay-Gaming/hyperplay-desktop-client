@@ -238,5 +238,10 @@
         "store": "Loja Epic",
         "verify": "Verificar e Reparar",
         "extraInfo": "Informação extra"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Entre em contato com a Equipe HyperPlay com esta mensagem: {{error}} - {{context}}."
+        }
     }
 }
