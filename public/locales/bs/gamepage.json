@@ -239,5 +239,10 @@
         "store": "Webstranica Trgovine",
         "verify": "Provjeri i popravi",
         "extraInfo": "@Extra"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "@Please #doticaj @the HyperPlay #Tim #uz @this #poruka: [@X53@X] - [@X65@X]#."
+        }
     }
 }
