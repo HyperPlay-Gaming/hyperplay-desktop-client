@@ -165,10 +165,7 @@ const GameCard = ({
 
   const isHiddenGame = libraryState.isGameHidden(appName)
   const isBrowserGame =
-    installPlatform === 'Browser' ||
-    installPlatform === 'web' ||
-    // @ts-expect-error will need to update valist SDK first
-    installPlatform === 'webgl'
+    installPlatform === 'Browser' || installPlatform === 'web'
 
   const onUninstallClick = function () {
     setShowUninstallModal(true)

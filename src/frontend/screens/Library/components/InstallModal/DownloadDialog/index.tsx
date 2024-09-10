@@ -413,9 +413,7 @@ export default function DownloadDialog({
   }
 
   const isWebGame =
-    gameInstallInfo?.game['name'] === 'web' ||
-    gameInstallInfo?.game['name'] === 'webgl' ||
-    platformToInstall === 'Browser'
+    gameInstallInfo?.game['name'] === 'web' || platformToInstall === 'Browser'
 
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
