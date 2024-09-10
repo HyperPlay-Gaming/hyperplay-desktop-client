@@ -238,5 +238,10 @@
         "store": "Strona sklepu",
         "verify": "Sprawdź i napraw",
         "extraInfo": "Dodatkowe informacje"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Proszę skontaktować się z zespołem HyperPlay: X53X (X65X)."
+        }
     }
 }
