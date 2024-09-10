@@ -238,5 +238,10 @@
         "store": "Κατάστημα",
         "verify": "Επαλήθευση και Επιδιόρθωση",
         "extraInfo": "Extra Info"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Επικοινωνήστε με την ομάδα HyperPlay με αυτό το μήνυμα: {{error}} - {{context}}."
+        }
     }
 }
