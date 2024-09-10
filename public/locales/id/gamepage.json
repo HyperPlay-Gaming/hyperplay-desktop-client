@@ -238,5 +238,10 @@
         "store": "Halaman Toko",
         "verify": "Verifikasi dan Perbaiki",
         "extraInfo": "Info Tambahan"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Silakan hubungi Tim HyperPlay dengan pesan ini: {{error}} - {{context}}."
+        }
     }
 }
