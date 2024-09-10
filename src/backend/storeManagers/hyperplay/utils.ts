@@ -242,7 +242,7 @@ export function refreshGameInfoFromHpRelease(
 }
 
 const getBrowserUrl = (platforms: PlatformsMetaInterface) => {
-  const webPlatform = platforms['web'] || platforms['webgl']
+  const webPlatform = platforms['web']
   if (webPlatform && webPlatform.external_url) {
     return webPlatform.external_url
   }
@@ -258,10 +258,9 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
   const platforms = data.channels[0].release_meta.platforms
   const platformKeys = Object.keys(platforms)
   if (
-    (data.channels.length === 1 &&
-      platformKeys.length === 1 &&
-      platformKeys[0] === 'web') ||
-    platformKeys[0] === 'webgl'
+    data.channels.length === 1 &&
+    platformKeys.length === 1 &&
+    platformKeys[0] === 'web'
   )
     isOnlyWeb = true
   // these are either values that should be set on initial add and not on every refreshed
