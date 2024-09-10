@@ -238,5 +238,10 @@
         "store": "스토어 페이지",
         "verify": "확인 및 복구",
         "extraInfo": "추가 정보"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "이 메시지를 가진 HyperPlay 팀에 문의하시기 바랍니다: {{error}} - {{context}}."
+        }
     }
 }
