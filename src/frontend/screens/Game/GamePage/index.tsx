@@ -232,15 +232,11 @@ export default observer(function GamePage(): JSX.Element | null {
               setGameInstallInfo(info)
             })
             .catch((error) => {
-              const errorMessage = t(
-                'box.error.install.info',
-                `Please contact the HyperPlay Team with this message: 
-                Error: ${error} - 
-                {{context}}.`,
-                {
-                  context: `ProjectID: ${appName} | Runner: ${runner} | Install Platform: ${installPlatform} | Channel: ${channelName} | Screen: Game Page | Method: getInstallInfo`
-                }
-              )
+              const errorMessage = t('method.getInstallInfo.error', {
+                defaultValue: `Please contact the HyperPlay Team with this message: {{error}} - {{context}}.`,
+                error: error,
+                context: `ProjectID: ${appName} | Runner: ${runner} | Install Platform: ${installPlatform} | Channel: ${channelName} | Screen: Game Page | Method: getInstallInfo`
+              })
               console.error(errorMessage)
               window.api.logError(errorMessage)
               setHasError({ error: true, message: errorMessage })

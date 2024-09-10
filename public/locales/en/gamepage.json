@@ -11,11 +11,6 @@
             "message": "This Windows game will run using a compatibility layer. You might encounter some issues or the game might not work at all."
         },
         "dont-show-again": "Don't show again",
-        "error": {
-            "install": {
-                "info": ""
-            }
-        },
         "importpath": "Choose Game Folder to import",
         "move": {
             "message": "This can take a long time, are you sure?",
@@ -149,6 +144,11 @@
     },
     "launch": {
         "options": "Launch Options..."
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Please contact the HyperPlay Team with this message: {{error}} - {{context}}."
+        }
     },
     "not_logged_in": {
         "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",
