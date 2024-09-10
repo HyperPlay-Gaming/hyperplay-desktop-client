@@ -167,6 +167,7 @@ const GameCard = ({
   const isBrowserGame =
     installPlatform === 'Browser' ||
     installPlatform === 'web' ||
+    // @ts-expect-error will need to update valist SDK first
     installPlatform === 'webgl'
 
   const onUninstallClick = function () {
