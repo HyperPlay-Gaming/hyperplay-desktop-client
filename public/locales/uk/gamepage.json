@@ -251,5 +251,10 @@
             "extracting": "Витягування...",
             "installing": "Завантаження..."
         }
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Будь ласка, зв'яжіться з командою HyperPlay з цим повідомленням: {{error}} - {{context}}."
+        }
     }
 }
