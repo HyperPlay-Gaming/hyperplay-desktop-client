@@ -11,6 +11,11 @@
             "message": "This Windows game will run using a compatibility layer. You might encounter some issues or the game might not work at all."
         },
         "dont-show-again": "Don't show again",
+        "error": {
+            "install": {
+                "info": ""
+            }
+        },
         "importpath": "Choose Game Folder to import",
         "move": {
             "message": "This can take a long time, are you sure?",

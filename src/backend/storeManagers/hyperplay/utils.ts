@@ -12,7 +12,10 @@ import {
   qaToken,
   valistListingsApiUrl
 } from 'backend/constants'
-import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
+import {
+  PlatformsMetaInterface,
+  ProjectMetaInterface
+} from '@valist/sdk/dist/typesShared'
 import { logError } from 'backend/api/misc'
 
 export async function getHyperPlayStoreRelease(
@@ -83,7 +86,8 @@ export function handleArchAndPlatform(
     'windows_amd64',
     'linux_amd64',
     'darwin_amd64',
-    'web'
+    'web',
+    'webgl'
   ]
   const isHpPlatform = hpPlatforms.includes(platformToInstall)
 
@@ -237,6 +241,14 @@ export function refreshGameInfoFromHpRelease(
   }
 }
 
+const getBrowserUrl = (platforms: PlatformsMetaInterface) => {
+  const webPlatform = platforms['web'] || platforms['webgl']
+  if (webPlatform && webPlatform.external_url) {
+    return webPlatform.external_url
+  }
+  return undefined
+}
+
 /**
  * This is called when adding game to library and not during refresh
  */
@@ -246,9 +258,10 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
   const platforms = data.channels[0].release_meta.platforms
   const platformKeys = Object.keys(platforms)
   if (
-    data.channels.length === 1 &&
-    platformKeys.length === 1 &&
-    platformKeys[0] === 'web'
+    (data.channels.length === 1 &&
+      platformKeys.length === 1 &&
+      platformKeys[0] === 'web') ||
+    platformKeys[0] === 'webgl'
   )
     isOnlyWeb = true
   // these are either values that should be set on initial add and not on every refreshed
@@ -275,7 +288,7 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
       title: data.project_meta.name
         ? data.project_meta.name
         : data.project_name,
-      browserUrl: isOnlyWeb ? platforms['web']?.external_url : undefined
+      browserUrl: isOnlyWeb ? getBrowserUrl(platforms) : undefined
     },
     data
   )
