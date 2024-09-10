@@ -244,5 +244,10 @@
         "store": "Butikssida",
         "verify": "Verifiera och reparera",
         "extraInfo": "Extra information"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Vänligen kontakta HyperPlay Team med detta meddelande: {{error}} - {{context}}."
+        }
     }
 }
