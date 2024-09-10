@@ -253,5 +253,10 @@
     "specs": {
         "minimum": "מינימום",
         "recommended": "מומלצים"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "אנא צרו קשר עם צוות HyperPlay עם הודעה זו: X53X."
+        }
     }
 }
