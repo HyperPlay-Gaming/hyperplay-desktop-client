@@ -249,5 +249,10 @@
         "main-plus-extras": "Hoved + Ekstra",
         "main-story": "Hovedhistorie"
     },
-    "howLongToBeat": "Hvor længe skal man slå"
+    "howLongToBeat": "Hvor længe skal man slå",
+    "method": {
+        "getInstallInfo": {
+            "error": "Kontakt venligst HyperPlay Team med denne meddelelse: {{error}} - {{context}}."
+        }
+    }
 }
