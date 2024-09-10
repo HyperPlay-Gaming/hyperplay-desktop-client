@@ -244,5 +244,10 @@
         "store": "Botiga",
         "verify": "Verifica i repara",
         "extraInfo": "Informació addicional"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Si us plau, poseu-vos en contacte amb l'equip HyperPlay amb aquest missatge: {{error}} - {{context}}."
+        }
     }
 }
