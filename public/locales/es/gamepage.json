@@ -251,5 +251,10 @@
             "extracting": "Extrayendo...",
             "installing": "Descargando..."
         }
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Por favor, póngase en contacto con el Equipo HyperPlay con este mensaje: {{error}} - {{context}}."
+        }
     }
 }
