@@ -251,5 +251,10 @@
             "installing": "下载中...",
             "paused": "已暂停"
         }
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "请联系超Play小组这一信息:{{error}}-{{context}}."
+        }
     }
 }
