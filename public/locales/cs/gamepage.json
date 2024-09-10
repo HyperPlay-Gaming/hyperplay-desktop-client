@@ -244,5 +244,10 @@
         "store": "Stránka obchodu",
         "verify": "Zkontrolovat a opravit",
         "extraInfo": "Další informace"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Kontaktujte prosím HyperPlay Tým s touto zprávou: {{error}} - {{context}}."
+        }
     }
 }
