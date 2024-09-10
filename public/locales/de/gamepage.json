@@ -238,5 +238,10 @@
         "store": "Store-Seite",
         "verify": "Prüfen und reparieren",
         "extraInfo": "Weitere Infos"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Bitte kontaktieren Sie das HyperPlay Team mit dieser Nachricht: {{error}} - {{context}}."
+        }
     }
 }
