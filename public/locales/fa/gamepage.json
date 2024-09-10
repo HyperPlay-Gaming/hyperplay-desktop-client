@@ -238,5 +238,10 @@
         "store": "صفحه فروشگاه",
         "verify": "بررسی و تعمیر",
         "extraInfo": "اطلاعات اضافی"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "لطفا با تیم HyperPlay با این پیام تماس بگیرید: {{error}}."
+        }
     }
 }
