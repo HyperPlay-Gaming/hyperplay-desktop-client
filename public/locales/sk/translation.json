@@ -183,7 +183,8 @@
         "unsync": "Unsync",
         "download": "Stiahnuť",
         "update": "Aktualizovať",
-        "continue": "Pokračovať"
+        "continue": "Pokračovať",
+        "install": "Inštalovať"
     },
     "controller": {
         "hints": {
@@ -1052,7 +1053,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Základná hra extrakcia zrušené"
+                "body": "Základná hra extrakcia zrušené",
+                "title": "Zrušiť extrakciu"
             },
             "installed": {
                 "body": "Mod bude aplikovaná na základnú hru",
@@ -1076,11 +1078,13 @@
                 "chromieCraft": "ChromieCraft",
                 "description": "Táto hra je mod pre svet Warcraft: hnev Lich King (3.3.5a). Aby hrať tento mod, hráči musia vlastniť kópiu World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nie je hostiteľom World of Warcraft. Hráči, ktorí vlastnia svet Warcraft môže získať verziu 3.3.5a z zdrojov, ako sú:",
                 "webtorrent": "Torrent (Magnet Link)",
-                "subtitle": "Stiahnuť svet Warcraft 3.3.5a"
+                "subtitle": "Stiahnuť svet Warcraft 3.3.5a",
+                "title": "Krok 1"
             },
             "step2": {
                 "subtitle": "Vyberte ChromieCraft_3.3.5a.zip Aktuality",
-                "description": "Vyberte stiahnutý ChromieCraft_3.3.5a.zip súbor."
+                "description": "Vyberte stiahnutý ChromieCraft_3.3.5a.zip súbor.",
+                "title": "Krok 2"
             },
             "step3": {
                 "description": "Prosím vyberte priečinok, kde je svet Warcraft: hnev Lich King (3.3.5a) by mal byť inštalovaný.",
