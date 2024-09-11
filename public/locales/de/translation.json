@@ -1035,5 +1035,15 @@
     "exit_game": "Exit Spiel",
     "profile": "Profil",
     "ALL": "ALLE",
-    "analytics": "Analytik"
+    "analytics": "Analytik",
+    "import-game-folder": {
+        "label": "Import Spiel Folder",
+        "placeholder": "Wählen Sie den Spielordner zum Import",
+        "success": "Erfolgreich importierte Spiele!",
+        "cta": "Import Spiel Folder",
+        "dialog": {
+            "title": "Wählen Sie Game Folder zum Import"
+        },
+        "error": "Beim Import gab es einen Fehler. Weitere Details finden Sie in den Logs."
+    }
 }
