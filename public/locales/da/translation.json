@@ -1088,5 +1088,15 @@
     },
     "profile": "Profil",
     "ALL": "ALLE",
-    "analytics": "Analyser"
+    "analytics": "Analyser",
+    "import-game-folder": {
+        "cta": "Import af spilmappe",
+        "dialog": {
+            "title": "Vælg Game Folder til Import"
+        },
+        "error": "Der var en fejl under import. Se logerne for flere detaljer.",
+        "label": "Import af spilmappe",
+        "placeholder": "Vælg spilmappen for at importere",
+        "success": "Vi importerede spil!"
+    }
 }
