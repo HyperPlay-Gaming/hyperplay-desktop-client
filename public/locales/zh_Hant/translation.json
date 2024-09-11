@@ -183,7 +183,8 @@
         "unsync": "不同步",
         "continue": "繼續",
         "download": "下載",
-        "update": "更新"
+        "update": "更新",
+        "install": "安裝"
     },
     "controller": {
         "hints": {
@@ -1056,7 +1057,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "取消的基层游戏"
+                "body": "取消的基层游戏",
+                "title": "Cancel Extraction"
             },
             "installed": {
                 "body": "修改适用于基础游戏",
@@ -1080,15 +1082,18 @@
                 "description": "这一游戏是为战火世界所 mo的:利奇国王的Wrath(3.3.5a)。 为了发挥这一作用,参与者必须拥有一份3.3.5a.{{newline}}{{newline}}超Play的《世界战舰》副本。 拥有战舰的运动员可以从下列来源获得3.3.5a版本:",
                 "subtitle": "3.3.5a",
                 "webtorrent": "Torrent(Magnet Link)",
-                "chromieCraft": "ChromieCraft"
+                "chromieCraft": "ChromieCraft",
+                "title": "第 1 步"
             },
             "step2": {
                 "description": "选择下载 ChromieCraft_3.3.5a.zip file.",
-                "subtitle": "Selected ChromieCraft_3.3.5a.zip 文件"
+                "subtitle": "Selected ChromieCraft_3.3.5a.zip 文件",
+                "title": "第 2 步"
             },
             "step3": {
                 "description": "请选择安装世界军舰的夹:Lch King的Wrath(3.3.5a).",
-                "subtitle": "选 举 Folder"
+                "subtitle": "选 举 Folder",
+                "title": "第3步"
             },
             "step4": {
                 "description": "加入进入法,着手安装游戏.",
