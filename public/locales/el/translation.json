@@ -1034,5 +1034,15 @@
     "importGameErrorMessageExecutable": "Game Game Game Δεν είναι εφικτό, το παιχνίδι εισαγωγής δεν είναι εφικτό",
     "profile": "Προφίλ",
     "ALL": "ΌΛΑ",
-    "analytics": "Αναλυτικά στοιχεία"
+    "analytics": "Αναλυτικά στοιχεία",
+    "import-game-folder": {
+        "cta": "Import Game Folder",
+        "dialog": {
+            "title": "Επιλέξτε game Folder για εισαγωγή"
+        },
+        "error": "Υπήρχε ένα λάθος κατά τη διάρκεια της εισαγωγής. Παρακαλούμε δείτε τα αρχεία καταγραφής για περισσότερες λεπτομέρειες.",
+        "label": "Import Game Folder",
+        "placeholder": "Επιλέξτε το φάκελο παιχνιδιού για την εισαγωγή",
+        "success": "Επιτυχώς εισαγόμενα παιχνίδια!"
+    }
 }
