@@ -571,8 +571,8 @@
                 "webtorrent": "Torrent (Magnet Link)"
             },
             "step2": {
-                "description": "Select the downloaded World of Warcraft 3.3.5a.zip file.",
-                "subtitle": "Select World of Warcraft 3.3.5a.zip File",
+                "description": "Select the downloaded ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Select ChromieCraft_3.3.5a.zip File",
                 "title": "Step 2"
             },
             "step3": {

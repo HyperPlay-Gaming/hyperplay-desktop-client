@@ -190,13 +190,13 @@ const ModDialog: React.FC<Props> = ({
             <div className={styles.stepSubtitle}>
               {t(
                 'mods.instructions.step2.subtitle',
-                'Select World of Warcraft 3.3.5a.zip File'
+                'Select ChromieCraft_3.3.5a.zip File'
               )}
             </div>
             <span className={styles.stepDescription}>
               {t('mods.instructions.step2.description', {
                 defaultValue:
-                  'Select the downloaded World of Warcraft 3.3.5a.zip file.',
+                  'Select the downloaded ChromieCraft_3.3.5a.zip file.',
                 newline: '\n'
               })}
             </span>
