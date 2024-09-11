@@ -183,7 +183,8 @@
         "unsync": "Desincronizar",
         "continue": "Continuar",
         "download": "Baixar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "install": "Instalar"
     },
     "controller": {
         "hints": {
@@ -1079,7 +1080,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Extracción de xogo da base canceled"
+                "body": "Extracción de xogo da base canceled",
+                "title": "Cancela Extracción"
             },
             "installed": {
                 "body": "Mod Será aplicado para basear xogo",
