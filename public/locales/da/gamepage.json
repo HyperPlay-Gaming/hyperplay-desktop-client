@@ -54,7 +54,10 @@
         "compability": {
             "message": "Dette Windows-spil kører ved hjælp af et kompatibilitetslag. Du kan møde nogle problemer eller spillet kan ikke arbejde overhovedet."
         },
-        "yesCancel": "Ja, annullere"
+        "yesCancel": "Ja, annullere",
+        "stopExtraction": {
+            "title": "Vil du annullere udsugningen?"
+        }
     },
     "button": {
         "cancel": "Pause/Afbryd",
