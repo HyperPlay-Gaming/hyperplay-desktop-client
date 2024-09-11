@@ -192,7 +192,8 @@
         "login": "Пријави се",
         "continue": "Настави",
         "download": "Преузми",
-        "update": "Ажурирај"
+        "update": "Ажурирај",
+        "install": "Поступак инсталирања"
     },
     "controller": {
         "hints": {
@@ -1073,7 +1074,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "#Baza #igra #ekstrakcija canceled"
+                "body": "#Baza #igra #ekstrakcija canceled",
+                "title": "#Ukidati"
             },
             "installed": {
                 "body": "Mod #volja #biti #važiti #na #baza #igra",
@@ -1097,11 +1099,13 @@
                 "chromieCraft": "ChromieCraft",
                 "description": "@This #igra @i @a mod @for #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a). @In order to #predstava @this mod, #igrač morati #sam @a #kopija @of #Svijet @of Warcraft 3.3.5@a. [@X155@X] [@X167@X] HyperPlay @do ne #domaćin #Svijet @of Warcraft. #Igrač @who #sam #Svijet @of Warcraft #limenka @obtain #inačica 3.3.5@a @from #izvor @like#:",
                 "subtitle": "#Preuzimanje #Svijet @of Warcraft 3.3.5@a",
-                "webtorrent": "#Bujica (@Magnet #Veza)"
+                "webtorrent": "#Bujica (@Magnet #Veza)",
+                "title": "Корак 1"
             },
             "step2": {
                 "description": "@Select @the @download ChromieCraft_3.3.5@a.@zip #dosje#.",
-                "subtitle": "@Select ChromieCraft_3.3.5@a.@zip #Dosje"
+                "subtitle": "@Select ChromieCraft_3.3.5@a.@zip #Dosje",
+                "title": "Корак 2"
             },
             "step3": {
                 "description": "@Please #birati @the @folder gdje #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a) trebati #biti @install#.",
