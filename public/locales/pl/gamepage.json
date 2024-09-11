@@ -53,6 +53,9 @@
         "aware": "Jestem świadomy",
         "compability": {
             "message": "Gra będzie uruchamiana przy użyciu warstwy kompatybilności. Możesz spotkać się z pewnymi problemami lub gry nie może pracować."
+        },
+        "stopExtraction": {
+            "title": "Czy chcesz odwołać dyrekcję?"
         }
     },
     "button": {
