@@ -34,11 +34,6 @@ type Props = {
   state?: DownloadManagerState
 }
 
-const options: Intl.DateTimeFormatOptions = {
-  hour: 'numeric',
-  minute: 'numeric'
-}
-
 function convertToTime(time: number) {
   const date = time ? new Date(time) : new Date()
   const fullDate = new Intl.DateTimeFormat(undefined, {
