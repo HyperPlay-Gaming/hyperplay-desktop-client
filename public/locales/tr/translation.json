@@ -183,7 +183,8 @@
         "unsync": "Eşzamanlamayı kaldır",
         "download": "İndir",
         "continue": "Devam",
-        "update": "Güncelle"
+        "update": "Güncelle",
+        "install": "Kur"
     },
     "controller": {
         "hints": {
@@ -1060,7 +1061,8 @@
                 "title": "Base Game"
             },
             "cancel": {
-                "body": "Base oyun ekstraksiyonu iptal edildi"
+                "body": "Base oyun ekstraksiyonu iptal edildi",
+                "title": "Cancel Ekstraksiyon"
             }
         },
         "instructions": {
@@ -1076,15 +1078,18 @@
                 "chromieCraft": "KromieCraft",
                 "description": "Bu oyun World of Warcraft için bir mod: Lich King (.3.5a) Wrath. Bu mod oynamak için, oyuncular World of Warcraft 3.3.5a'nın bir kopyasını sahibi olmalıdır. {{newline}} {{newline}} HyperPlay, World of Warcraft'ı barındırmaz. World of Warcraft'a sahip oyuncular, 33.5a'yı gibi kaynaklardan elde edebilir:",
                 "subtitle": "World of Warcraft 33.5a",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "1. adım"
             },
             "step2": {
                 "description": "İndirilenleri seçin KromieCraft_3.3.5a.zip dosyası.",
-                "subtitle": "ChromieCraft_3.3.5a.zip Dosya"
+                "subtitle": "ChromieCraft_3.3.5a.zip Dosya",
+                "title": "2. adım"
             },
             "step3": {
                 "description": "Lütfen World of Warcraft'ın nerede yer aldığı klasörü seçin: Lich King'in Wrath of the Lich King (3.3.5a) yüklenmesi gerekir.",
-                "subtitle": "Uygulamayı seçin Folder"
+                "subtitle": "Uygulamayı seçin Folder",
+                "title": "3. adım"
             },
             "step4": {
                 "description": "Oyun yükleme ile devam etmek için erişim kodu girin.",
