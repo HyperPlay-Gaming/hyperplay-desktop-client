@@ -192,7 +192,8 @@
         "unsync": "Annulla sincronizzazione",
         "update": "Aggiorna",
         "continue": "Continuare",
-        "download": "Scarica"
+        "download": "Scarica",
+        "install": "Installa"
     },
     "controller": {
         "hints": {
@@ -1063,7 +1064,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Estrazione del gioco di base annullata"
+                "body": "Estrazione del gioco di base annullata",
+                "title": "Annulla estrazione"
             },
             "installed": {
                 "body": "Mod sarà applicato al gioco di base",
@@ -1087,11 +1089,13 @@
                 "description": "Questo gioco è un mod per World of Warcraft: Wrath of the Lich King (3.3.5a). Per giocare a questo mod, i giocatori devono possedere una copia di World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay non ospita World of Warcraft. I giocatori che possiedono World of Warcraft possono ottenere la versione 3.3.5a da fonti come:",
                 "subtitle": "Scarica World of Warcraft 3.3.5a",
                 "webtorrent": "Torrent (Magnet Link)",
-                "chromieCraft": "ChromieCraft"
+                "chromieCraft": "ChromieCraft",
+                "title": "Passo 1"
             },
             "step2": {
                 "description": "Seleziona il download ChromieCraft_3.3.5a.zip file.",
-                "subtitle": "Selezionare ChromieCraft_3.3.5a.zip File"
+                "subtitle": "Selezionare ChromieCraft_3.3.5a.zip File",
+                "title": "Passo 2"
             },
             "step4": {
                 "description": "Inserisci il codice di accesso per procedere con l'installazione del gioco.",
