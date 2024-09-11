@@ -183,7 +183,8 @@
         "unsync": "Desinhronizirajte",
         "continue": "Continue",
         "download": "Preuzimanje",
-        "update": "Update"
+        "update": "Update",
+        "install": "Install"
     },
     "controller": {
         "hints": {
@@ -1069,7 +1070,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "#Baza #igra #ekstrakcija canceled"
+                "body": "#Baza #igra #ekstrakcija canceled",
+                "title": "#Ukidati"
             },
             "installed": {
                 "body": "Mod #volja #biti #važiti #na #baza #igra",
@@ -1086,5 +1088,15 @@
                 "placeholder": "@Select @Zip"
             }
         }
+    },
+    "import-game-folder": {
+        "cta": "#Uvoz #Igra",
+        "dialog": {
+            "title": "@Select #Igra @Folder #na #Uvoz"
+        },
+        "error": "Tamo #biti @a #zabuna #tokom #uvoz. @Please #vidjeti @the #zapisnik @for više #detalj#.",
+        "label": "#Uvoz #Igra",
+        "placeholder": "#Birati @the #igra @folder #na #uvoz",
+        "success": "@Successfully #uvesti #igra#!"
     }
 }
