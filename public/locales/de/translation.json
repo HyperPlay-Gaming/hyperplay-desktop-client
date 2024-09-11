@@ -183,7 +183,8 @@
         "unsync": "Nicht mehr synchronisieren",
         "update": "Aktualisieren",
         "continue": "Fortfahren",
-        "download": "Herunterladen"
+        "download": "Herunterladen",
+        "install": "Installieren"
     },
     "controller": {
         "hints": {
@@ -1061,7 +1062,8 @@
                 "title": "Installieren von Basis-Spiel"
             },
             "cancel": {
-                "body": "Basis-Spiel Extraktion abgebrochen"
+                "body": "Basis-Spiel Extraktion abgebrochen",
+                "title": "Auszug abbrechen"
             }
         },
         "instructions": {
@@ -1077,20 +1079,24 @@
                 "chromieCraft": "Chromatographie",
                 "description": "Dieses Spiel ist ein Mod für World of Warcraft: Zorn des Lich King (3.3.5a). Um diese Mod zu spielen, müssen die Spieler eine Kopie von World of Warcraft 3.3.5a besitzen. {{newline}} {{newline}} HyperPlay beherbergt nicht World of Warcraft. Spieler, die World of Warcraft besitzen, können Version 3.3.5a aus Quellen wie:",
                 "subtitle": "World of Warcraft 3.3.5a herunterladen",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Schritt 1"
             },
             "step2": {
                 "subtitle": "Wählen Sie ChromieCraft_3.3.5a.zip Datei",
-                "description": "Wählen Sie den Download aus ChromieCraft_3.3.5a.zip Datei."
+                "description": "Wählen Sie den Download aus ChromieCraft_3.3.5a.zip Datei.",
+                "title": "Schritt 2"
             },
             "step3": {
                 "description": "Bitte wählen Sie den Ordner, in dem World of Warcraft: Zorn des Lich-Königs (3.3.5a) installiert werden sollte.",
-                "subtitle": "Installation auswählen Ordner"
+                "subtitle": "Installation auswählen Ordner",
+                "title": "Schritt 3"
             },
             "title": "Anleitung",
             "step4": {
                 "description": "Geben Sie den Zugangscode ein, um das Spiel zu installieren.",
-                "subtitle": "Zugriffscode"
+                "subtitle": "Zugriffscode",
+                "title": "Schritt 4"
             }
         }
     }
