@@ -101,7 +101,10 @@
             "message": "@This #Prozor #igra #volja #bijeg #uporabiti @a #kompatibilnost #red. #Free @might @encounter #kakav #tema ili @the #igra @might ne #rad uopće#."
         },
         "dont-show-again": "Не приказуј поново",
-        "ok": "У реду"
+        "ok": "У реду",
+        "stopExtraction": {
+            "title": "@Do #free @want# to #ukidati @the #Ekstrakcija#?"
+        }
     },
     "disabled": "Онемогућено",
     "dlc": {
