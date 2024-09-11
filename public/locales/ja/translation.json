@@ -179,7 +179,8 @@
         "unsync": "非同期",
         "continue": "続ける",
         "download": "ダウンロード",
-        "update": "を更新"
+        "update": "を更新",
+        "install": "インストール"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1035,35 @@
         "title": "購読ありがとうございます!",
         "subtitle": "コミュニティの一員になり、貴重なアップデートやインサイトを皆様に共有できることを心よりお詫び申し上げます."
     },
-    "importGameErrorMessage": "有効なゲームフォルダではなく、ゲームをインポートすることはできません"
+    "importGameErrorMessage": "有効なゲームフォルダではなく、ゲームをインポートすることはできません",
+    "import-game-folder": {
+        "cta": "インポートゲームフォルダ",
+        "dialog": {
+            "title": "インポートするゲームフォルダを選択"
+        },
+        "error": "インポート中にエラーがありました。 詳しくはログをご覧ください.",
+        "placeholder": "ゲームフォルダを選択してインポートします",
+        "success": "うまくインポートされたゲーム!",
+        "label": "インポートゲームフォルダ"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "title": "ステップ 1"
+            },
+            "step3": {
+                "title": "ステップ 3"
+            },
+            "step2": {
+                "title": "ステップ 2"
+            }
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "title": "キャンセル抽出"
+            }
+        }
+    }
 }
