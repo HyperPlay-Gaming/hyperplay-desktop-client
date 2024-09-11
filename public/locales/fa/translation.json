@@ -183,7 +183,8 @@
         "unsync": "عدم همگام سازی",
         "continue": "ادامه",
         "download": "دانلود",
-        "update": "روزآمدسازی"
+        "update": "روزآمدسازی",
+        "install": "نصب"
     },
     "controller": {
         "hints": {
@@ -1060,7 +1061,8 @@
                 "title": "نصب بازی Base Game"
             },
             "cancel": {
-                "body": "استخراج بازی Base بازی کنسل شد"
+                "body": "استخراج بازی Base بازی کنسل شد",
+                "title": "لغو استخراج"
             }
         },
         "instructions": {
@@ -1076,15 +1078,18 @@
                 "description": "این بازی روشی برای World of Warcraft: Wrath of the Lich King (3.3.5a) است. برای بازی در این حالت، بازیکنان باید یک نسخه از World of Warcraft 3.3.5a داشته باشند. {{newline}} HyperPlay میزبان World of Warcraft نیست. بازیکنانی که دارای World of Warcraft هستند می توانند نسخه 3.3.5a را از منابعی مانند:",
                 "subtitle": "دانلود بازی World of Warcraft 33.5a",
                 "webtorrent": "تورنت (Magnet Link)",
-                "chromieCraft": "Chromiecraft"
+                "chromieCraft": "Chromiecraft",
+                "title": "گام ۱"
             },
             "step2": {
                 "description": "گزینه The Download را انتخاب کنید فایل Chromiecraft_3.3.5a.zip.",
-                "subtitle": "انتخاب Chromiecraft_3.3.5a.zip File File"
+                "subtitle": "انتخاب Chromiecraft_3.3.5a.zip File File",
+                "title": "گام ۲"
             },
             "step3": {
                 "description": "لطفا پوشه ای را انتخاب کنید که World of Warcraft: Wrath of the Lich King (3.3.5a) باید نصب شود.",
-                "subtitle": "گزینه install Folder"
+                "subtitle": "گزینه install Folder",
+                "title": "گام ۳"
             },
             "step4": {
                 "description": "کد دسترسی را وارد کنید تا با نصب بازی ادامه دهید.",
