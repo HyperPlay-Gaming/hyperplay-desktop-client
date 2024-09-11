@@ -82,7 +82,11 @@
                 "title": "Ubisoft Connect",
                 "message": "Η εγκατάσταση του Ubisoft Connect στο πρόθεμα του παιχνιδιού απέτυχε. Ελέγξτε τη σελίδα μας wiki στο Reefgithub.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki / How-to-install-Ubisoft-Ubisoft-on-Linux-and-Mac για να την εγκαταστήσετε με μαούν."
             },
-            "moving": "Error Moving Game {{error}}"
+            "moving": "Error Moving Game {{error}}",
+            "delete-files": {
+                "body": "Απομακρύνθηκε φάκελος {{path}}. Παρακαλώ αφαιρέστε το με το χέρι.\n{{paragraph}}\n{{error}}",
+                "title": "Η αφαίρεση σφάλματος που εξάγεται φάκελο"
+            }
         },
         "info": {
             "update": {
@@ -1044,5 +1048,53 @@
         "label": "Import Game Folder",
         "placeholder": "Επιλέξτε το φάκελο παιχνιδιού για την εισαγωγή",
         "success": "Επιτυχώς εισαγόμενα παιχνίδια!"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "title": "Base Game Εγκατάσταση",
+                "body": "Mod θα εφαρμοστεί στο βασικό παιχνίδι"
+            },
+            "installing": {
+                "body": "Εξάγοντας αρχεία βασικού παιχνιδιού",
+                "title": "Εγκατάσταση παιχνίδι βάσης"
+            },
+            "cancel": {
+                "body": "Η εξόρυξη παιχνιδιών βάσης ακυρώθηκε"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Επιλέξτε Base Game File",
+                "placeholder": "Επιλέξτε Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Αυτό το παιχνίδι είναι ένα mod για το World of Warcraft: Wrath του Lich King (3.3.5a). Για να παίξει αυτό το mod, οι παίκτες πρέπει να κατέχουν ένα αντίγραφο του World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay δεν φιλοξενεί τον κόσμο του Warcraft. Οι παίκτες που κατέχουν το World of Warcraft μπορούν να λάβουν έκδοση 3.3.5a από πηγές όπως:",
+                "subtitle": "Κατεβάστε τον κόσμο του Warcraft 3.3.5a",
+                "title": "Βήμα 1 Βήμα 1",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "step2": {
+                "description": "Επιλέξτε το κατέβασμα ChromieCraft_3.3.5a.zip αρχείο.",
+                "subtitle": "Επιλέξτε ChromieCraft_3.3.5a.zip File File File File File File",
+                "title": "Βήμα 2 Βήμα 2"
+            },
+            "step3": {
+                "description": "Παρακαλώ επιλέξτε το φάκελο όπου θα πρέπει να εγκατασταθεί το World of Warcraft: Wrath του Lich King (3.3.5a).",
+                "subtitle": "Επιλέξτε εγκατάσταση Folder",
+                "title": "Βήμα 3 Βήμα 3"
+            },
+            "step4": {
+                "description": "Εισάγετε τον κωδικό πρόσβασης για να προχωρήσετε στην εγκατάσταση του παιχνιδιού.",
+                "subtitle": "Κωδικός πρόσβασης",
+                "title": "Βήμα 4"
+            },
+            "title": "Mod Οδηγίες"
+        }
     }
 }
