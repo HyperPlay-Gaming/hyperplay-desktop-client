@@ -423,7 +423,9 @@ export default function DownloadDialog({
       .then((path) => setInstallPath(path || getDefaultInstallPath()))
   }
 
-  const isWebGame = gameInstallInfo?.game['name'] === 'web'
+  const isWebGame =
+    gameInstallInfo?.game['name'] === 'web' || platformToInstall === 'Browser'
+
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
 

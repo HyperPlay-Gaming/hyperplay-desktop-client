@@ -1013,7 +1013,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Ste spojený s HyperPlay s externou peňaženky."
+        "EXTERNAL_WALLET_CONNECTED": "Ste spojený s HyperPlay s externou peňaženky.",
+        "WALLET_DISCONNECTED": "Nemáte peňaženku pripojené k HyperPlay."
     },
     "exit_game": "Exit hra",
     "back_to_game": "Späť na hru",

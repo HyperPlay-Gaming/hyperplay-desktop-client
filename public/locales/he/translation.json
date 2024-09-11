@@ -127,7 +127,9 @@
                 "message": "יש גרסה חדשה זמינה!",
                 "changelog": "פתח רשימת שינויים",
                 "detail": "אתם רוצים להוריד את האפדייט ברקע?",
-                "message-finished": "רוצים לפתוח מחדש את HyperPlay עכשיו?"
+                "message-finished": "רוצים לפתוח מחדש את HyperPlay עכשיו?",
+                "appUpdated": "HyperPlay עודכן",
+                "appUpdated-message": "HyperPlay עודכן. רוצים לעדכן ולהפעיל מחדש את HyperPlay עכשיו?"
             }
         },
         "ok": "בסדר",
@@ -1015,7 +1017,8 @@
     },
     "importGameErrorMessage": "לא תיקיית משחק תקפה, משחק יבוא אינו אפשרי",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני."
+        "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני.",
+        "WALLET_DISCONNECTED": "אין לכם ארנק המחובר ל- HyperPlay."
     },
     "quests": {
         "playstreak": {

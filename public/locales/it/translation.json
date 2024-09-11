@@ -1033,7 +1033,8 @@
     "back_to_game": "Torna al gioco",
     "importGameErrorMessage": "Non una cartella di gioco valida, importare il gioco non è possibile",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Sei connesso a HyperPlay con un portafoglio esterno."
+        "EXTERNAL_WALLET_CONNECTED": "Sei connesso a HyperPlay con un portafoglio esterno.",
+        "WALLET_DISCONNECTED": "Non hai un portafoglio collegato a HyperPlay."
     },
     "achievements": {
         "progress": {

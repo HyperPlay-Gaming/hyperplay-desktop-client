@@ -14,11 +14,14 @@ import {
   qaToken,
   valistListingsApiUrl
 } from 'backend/constants'
-import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
 import { getGameInfo } from './games'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { join } from 'path'
 import { existsSync } from 'graceful-fs'
+import {
+  PlatformsMetaInterface,
+  ProjectMetaInterface
+} from '@valist/sdk/dist/typesShared'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -88,7 +91,8 @@ export function handleArchAndPlatform(
     'windows_amd64',
     'linux_amd64',
     'darwin_amd64',
-    'web'
+    'web',
+    'webgl'
   ]
   const isHpPlatform = hpPlatforms.includes(platformToInstall)
 
@@ -240,6 +244,14 @@ export function refreshGameInfoFromHpRelease(
     account_name: data.account_name,
     networks: data.project_meta.networks
   }
+}
+
+const getBrowserUrl = (platforms: PlatformsMetaInterface) => {
+  const webPlatform = platforms['web']
+  if (webPlatform && webPlatform.external_url) {
+    return webPlatform.external_url
+  }
+  return undefined
 }
 
 /**

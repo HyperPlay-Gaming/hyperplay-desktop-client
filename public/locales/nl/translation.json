@@ -1021,7 +1021,8 @@
     "importGameErrorMessageExecutable": "Game Uitvoerbaar niet gevonden, importeren is niet mogelijk",
     "exit_game": "Verlaat Game",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Je bent verbonden met HyperPlay met een externe portemonnee."
+        "EXTERNAL_WALLET_CONNECTED": "Je bent verbonden met HyperPlay met een externe portemonnee.",
+        "WALLET_DISCONNECTED": "Je hebt geen portemonnee verbonden met HyperPlay."
     },
     "dlcs": {
         "label": "Select DLCs om te installeren:"
