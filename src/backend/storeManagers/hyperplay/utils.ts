@@ -18,10 +18,7 @@ import { getGameInfo } from './games'
 import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
 import { join } from 'path'
 import { existsSync } from 'graceful-fs'
-import {
-  PlatformsMetaInterface,
-  ProjectMetaInterface
-} from '@valist/sdk/dist/typesShared'
+import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
 
 export async function getHyperPlayStoreRelease(
   appName: string
