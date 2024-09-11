@@ -33,15 +33,7 @@ import {
   SpawnOptions,
   spawnSync
 } from 'child_process'
-import {
-  appendFileSync,
-  copyFileSync,
-  existsSync,
-  mkdirSync,
-  readdirSync,
-  rmSync,
-  statSync
-} from 'graceful-fs'
+import { appendFileSync, existsSync, rmSync } from 'graceful-fs'
 import { promisify } from 'util'
 import i18next, { t } from 'i18next'
 
@@ -96,6 +88,7 @@ import {
   deviceNameCache,
   vendorNameCache
 } from './utils/systeminfo/gpu/pci_ids'
+import { copyFile, mkdir, readdir, stat } from 'fs/promises'
 
 const execAsync = promisify(exec)
 
@@ -1526,16 +1519,19 @@ export function getExecutableAndArgs(executableWithArgs: string): {
   return { executable, launchArgs }
 }
 
-export function copyRecursiveSync(src: string, dest: string) {
-  const exists = statSync(src).isDirectory()
+export async function copyRecursiveAsync(src: string, dest: string) {
+  const exists = (await stat(src)).isDirectory()
   if (exists) {
-    mkdirSync(dest, { recursive: true })
-    readdirSync(src).forEach((file) => {
-      const srcFile = join(src, file)
-      const destFile = join(dest, file)
-      copyRecursiveSync(srcFile, destFile)
-    })
+    await mkdir(dest, { recursive: true })
+    const files = await readdir(src)
+    await Promise.all(
+      files.map(async (file) => {
+        const srcFile = join(src, file)
+        const destFile = join(dest, file)
+        await copyRecursiveAsync(srcFile, destFile)
+      })
+    )
   } else {
-    copyFileSync(src, dest)
+    await copyFile(src, dest)
   }
 }

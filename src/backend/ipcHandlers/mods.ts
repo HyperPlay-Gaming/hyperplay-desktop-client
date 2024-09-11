@@ -12,7 +12,7 @@ import {
   getDestinationPath,
   inProgressExtractionsMap
 } from 'backend/storeManagers/hyperplay/games'
-import { copyRecursiveSync } from 'backend/utils'
+import { copyRecursiveAsync } from 'backend/utils'
 import { callAbortController } from 'backend/utils/aborthandler/aborthandler'
 import { readdirSync, rm } from 'graceful-fs'
 
@@ -29,7 +29,9 @@ export async function prepareBaseGameForModding({
   installPath: string
 }) {
   const window = getMainWindow()
-  if (!window) return
+  if (!window) {
+    return
+  }
 
   notify({
     title: i18next.t('mod.baseGame.installing.title', 'Installing Base Game'),
@@ -226,10 +228,10 @@ export async function prepareBaseGameForModding({
         )
 
         // move contents of the extracted folder to the destination path
-        readdirSync(extractedFolderFullPath).forEach((file) => {
+        readdirSync(extractedFolderFullPath).forEach(async (file) => {
           const srcPath = path.join(extractedFolderFullPath, file)
           const destPath = path.join(dirPath, file)
-          copyRecursiveSync(srcPath, destPath)
+          await copyRecursiveAsync(srcPath, destPath)
         })
 
         // remove the extracted folder
