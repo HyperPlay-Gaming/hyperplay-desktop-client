@@ -189,7 +189,8 @@
         "unsync": "ألغ المزامنة",
         "continue": "مواصلة",
         "download": "تنزيل",
-        "update": "تحديث"
+        "update": "تحديث",
+        "install": "تثبيت"
     },
     "controller": {
         "hints": {
@@ -1067,7 +1068,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "استخراج لعبة القاعدة"
+                "body": "استخراج لعبة القاعدة",
+                "title": "الالغاء"
             },
             "installed": {
                 "body": "(مود) سيطبق على لعبة القاعدة",
