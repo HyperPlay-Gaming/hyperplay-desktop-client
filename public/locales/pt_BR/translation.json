@@ -1040,5 +1040,15 @@
     "sideload": {
         "warningMessage": "O recurso de Sideloading de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O Sideloading de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos.",
         "warningTitle": "Importante"
+    },
+    "import-game-folder": {
+        "success": "Jogos bem importados!",
+        "cta": "Pasta de jogo de importação",
+        "dialog": {
+            "title": "Selecione a pasta de jogo para importar"
+        },
+        "error": "Houve um erro durante a importação. Consulte os logs para obter mais detalhes.",
+        "label": "Pasta de jogo de importação",
+        "placeholder": "Escolha a pasta do jogo para importar"
     }
 }
