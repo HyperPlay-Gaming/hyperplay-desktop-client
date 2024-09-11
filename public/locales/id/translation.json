@@ -183,7 +183,8 @@
         "unsync": "Batalkan sinkronisasi",
         "continue": "Lanjutkan",
         "update": "Perbarui",
-        "download": "Unduh"
+        "download": "Unduh",
+        "install": "Instal"
     },
     "controller": {
         "hints": {
@@ -1059,7 +1060,8 @@
         },
         "baseGame": {
             "cancel": {
-                "body": "Ekstraksi permainan dasar dibatalkan"
+                "body": "Ekstraksi permainan dasar dibatalkan",
+                "title": "Batalkan Ekstraksi"
             },
             "installed": {
                 "body": "Mod akan diterapkan untuk permainan dasar",
