@@ -183,7 +183,8 @@
         "unsync": "Deszinkronizálás",
         "update": "Frissítés",
         "download": "Letöltés",
-        "continue": "Folytatás"
+        "continue": "Folytatás",
+        "install": "Telepítés"
     },
     "controller": {
         "hints": {
@@ -1042,7 +1043,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Alapvető játék extrakció törölve"
+                "body": "Alapvető játék extrakció törölve",
+                "title": "Törölje a kitermelést"
             },
             "installing": {
                 "body": "Kitermelés alapjáték fájlok",
