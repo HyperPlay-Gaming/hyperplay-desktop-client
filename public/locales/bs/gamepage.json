@@ -54,7 +54,10 @@
         },
         "yesCancel": "@Yes, #ukidati",
         "dont-show-again": "Ne prikazuj ponovo",
-        "ok": "OK"
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "@Do #free @want# to #ukidati @the #Ekstrakcija#?"
+        }
     },
     "button": {
         "add_to_favourites": "Dodaj u favorite",
