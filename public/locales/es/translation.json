@@ -183,7 +183,8 @@
         "unsync": "Desincronizar",
         "download": "Descargar",
         "continue": "Continuar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "install": "Instalar"
     },
     "controller": {
         "hints": {
@@ -1067,7 +1068,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Extracción del juego base cancelada"
+                "body": "Extracción del juego base cancelada",
+                "title": "Cancelar la extracción"
             },
             "installed": {
                 "title": "Base Juego instalado",
@@ -1091,19 +1093,23 @@
                 "chromieCraft": "ChromieCraft",
                 "description": "Este juego es un mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para jugar este mod, los jugadores deben poseer una copia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay no alberga World of Warcraft. Los jugadores que poseen World of Warcraft pueden obtener la versión 3.3.5a de fuentes como:",
                 "webtorrent": "Torrent (Magnet Link)",
-                "subtitle": "Descargar World of Warcraft 3.3.5a"
+                "subtitle": "Descargar World of Warcraft 3.3.5a",
+                "title": "Paso 1"
             },
             "step2": {
                 "description": "Seleccione la descarga ChromieCraft_3.3.5a.zip file.",
-                "subtitle": "Seleccione ChromieCraft_3.3.5a.zip Archivo"
+                "subtitle": "Seleccione ChromieCraft_3.3.5a.zip Archivo",
+                "title": "Paso 2"
             },
             "step3": {
                 "description": "Por favor seleccione la carpeta donde World of Warcraft: Wrath of the Lich King (3.3.5a) debe ser instalado.",
-                "subtitle": "Seleccione la instalación Folder"
+                "subtitle": "Seleccione la instalación Folder",
+                "title": "Tercer paso"
             },
             "step4": {
                 "description": "Introduzca el código de acceso para proceder con la instalación del juego.",
-                "subtitle": "Código de acceso"
+                "subtitle": "Código de acceso",
+                "title": "Paso 4"
             },
             "title": "Mod Instrucciones"
         }
