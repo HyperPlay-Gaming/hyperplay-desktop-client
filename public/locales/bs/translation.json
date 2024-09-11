@@ -1029,7 +1029,8 @@
     },
     "exit_game": "#Izlaz",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#."
+        "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#.",
+        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#."
     },
     "dlcs": {
         "label": "@Select @DLC #na @install#:"

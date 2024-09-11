@@ -412,7 +412,9 @@ export default function DownloadDialog({
     return t('button.no-path-selected', 'No path selected')
   }
 
-  const isWebGame = gameInstallInfo?.game['name'] === 'web'
+  const isWebGame =
+    gameInstallInfo?.game['name'] === 'web' || platformToInstall === 'Browser'
+
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
 

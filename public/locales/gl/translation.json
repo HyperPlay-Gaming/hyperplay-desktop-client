@@ -1007,7 +1007,8 @@
     },
     "accounts": "Contas",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Es conectado a HyperPlay cunha carteira externa."
+        "EXTERNAL_WALLET_CONNECTED": "Es conectado a HyperPlay cunha carteira externa.",
+        "WALLET_DISCONNECTED": "Non tes unha carteira conectou a HyperPlay."
     },
     "notification": {
         "wine-download": {

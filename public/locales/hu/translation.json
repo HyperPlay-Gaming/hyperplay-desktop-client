@@ -1001,7 +1001,8 @@
     },
     "importGameErrorTitle": "Import Game hiba",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Ön csatlakozik a HyperPlay-hoz egy külső pénztárcával."
+        "EXTERNAL_WALLET_CONNECTED": "Ön csatlakozik a HyperPlay-hoz egy külső pénztárcával.",
+        "WALLET_DISCONNECTED": "Nincs olyan pénztárcád, amely a HyperPlay-hoz kapcsolódik."
     },
     "back_to_game": "Vissza a játékhoz",
     "gameUpdateNotifications": {

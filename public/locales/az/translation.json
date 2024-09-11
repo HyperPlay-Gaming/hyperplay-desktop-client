@@ -1026,7 +1026,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Siz xarici cüzdan ilə HiperPlay bağlıdır."
+        "EXTERNAL_WALLET_CONNECTED": "Siz xarici cüzdan ilə HiperPlay bağlıdır.",
+        "WALLET_DISCONNECTED": "HyperPlay bağlı bir cüzdanınız yoxdur."
     },
     "exit_game": "Oyuncaq",
     "importGameErrorMessage": "Xüsusi oyun qrupu deyil, avtomatik oyun mümkün deyil",
