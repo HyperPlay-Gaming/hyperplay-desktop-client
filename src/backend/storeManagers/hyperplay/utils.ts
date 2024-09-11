@@ -246,14 +246,6 @@ export function refreshGameInfoFromHpRelease(
   }
 }
 
-const getBrowserUrl = (platforms: PlatformsMetaInterface) => {
-  const webPlatform = platforms['web']
-  if (webPlatform && webPlatform.external_url) {
-    return webPlatform.external_url
-  }
-  return undefined
-}
-
 /**
  * This is called when adding game to library and not during refresh
  */
