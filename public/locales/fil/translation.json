@@ -210,5 +210,8 @@
         }
     },
     "Settings": "Mga settings",
-    "accounts": "Account"
+    "accounts": "Account",
+    "import-game-folder": {
+        "placeholder": "Piliin ang Folder ng Laro na ii-import"
+    }
 }
