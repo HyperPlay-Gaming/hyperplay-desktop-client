@@ -52,6 +52,7 @@ import {
 import {
   handleArchAndPlatform,
   handlePlatformReversed,
+  runModPatcher,
   sanitizeVersion
 } from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
@@ -77,6 +78,7 @@ import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
+import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -89,7 +91,8 @@ interface ProgressDownloadingItem {
 }
 
 const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
-const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
+export const inProgressExtractionsMap: Map<string, ExtractZipService> =
+  new Map()
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -420,7 +423,7 @@ const findExecutables = async (folderPath: string): Promise<string[]> => {
   return executables
 }
 
-function cleanUpDownload(appName: string, directory: string) {
+export function cleanUpDownload(appName: string, directory: string) {
   inProgressDownloadsMap.delete(appName)
   inProgressExtractionsMap.delete(appName)
   deleteAbortController(appName)
@@ -555,7 +558,7 @@ async function downloadGame(
   })
 }
 
-function calculateProgress(
+export function calculateProgress(
   downloadedBytes: number,
   downloadSize: number,
   downloadSpeed: number,
@@ -710,7 +713,7 @@ function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
   writeManifestFile(appName, installedInfo)
 }
 
-function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
+export function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
   if (
     gameInfo.account_name === undefined ||
     gameInfo.project_name === undefined
@@ -817,7 +820,8 @@ export async function install(
     channelName,
     accessCode,
     updateOnly = false,
-    siweValues
+    siweValues,
+    modOptions
   }: InstallArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
@@ -827,7 +831,19 @@ export async function install(
   let { directory, fileName } = { directory: '', fileName: '' }
   try {
     const gameInfo = getGameInfo(appName)
-    const { title } = gameInfo
+    const { title, account_name } = gameInfo
+    const isMarketWars = account_name === 'marketwars'
+    if (isMarketWars && modOptions?.zipFilePath) {
+      try {
+        await prepareBaseGameForModding({
+          appName,
+          zipFile: modOptions.zipFilePath,
+          installPath: dirpath
+        })
+      } catch (error) {
+        return { status: 'error' }
+      }
+    }
 
     const destinationPath = updateOnly
       ? dirpath
@@ -949,6 +965,14 @@ export async function install(
       installVersion,
       channelName
     })
+
+    if (isMarketWars) {
+      try {
+        await runModPatcher(appName)
+      } catch (error) {
+        return { status: 'error' }
+      }
+    }
 
     if (platformToInstall === 'Windows') {
       logInfo(`Looking for  distributables for ${appName}`, LogPrefix.HyperPlay)
@@ -1277,12 +1301,6 @@ export function getGameInfo(appName: string): GameInfo {
     .get('games', [])
     .find((app) => app.app_name === appName)
 
-  // TODO: remove this in the future, it is only needed for games downloaded from v0.10 and below
-  // write manifest file
-  if (appInfo?.is_installed && appInfo.install) {
-    writeManifestFile(appName, appInfo.install)
-  }
-
   if (!appInfo) {
     throw new Error('App not found in library')
   }
@@ -1430,6 +1448,16 @@ export async function update(
     updateOnly: true,
     siweValues: args?.siweValues
   })
+
+  const isMarketWars = gameInfo.account_name === 'marketwars'
+  if (isMarketWars) {
+    try {
+      await runModPatcher(appName)
+    } catch (error) {
+      return { status: 'error' }
+    }
+  }
+
   return installResult
 }
 

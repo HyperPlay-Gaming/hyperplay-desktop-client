@@ -3,20 +3,22 @@ import {
   GameInfo,
   HyperPlayRelease,
   ChannelReleaseMeta,
-  InstallPlatform
+  InstallPlatform,
+  GameType
 } from 'common/types'
 import axios from 'axios'
-import { getTitleFromEpicStoreUrl } from 'backend/utils'
+import { getTitleFromEpicStoreUrl, spawnAsync } from 'backend/utils'
 import {
   getValistListingApiUrl,
+  isWindows,
   qaToken,
   valistListingsApiUrl
 } from 'backend/constants'
-import {
-  PlatformsMetaInterface,
-  ProjectMetaInterface
-} from '@valist/sdk/dist/typesShared'
-import { logError } from 'backend/api/misc'
+import { getGameInfo } from './games'
+import { LogPrefix, logError, logInfo } from 'backend/logger/logger'
+import { join } from 'path'
+import { existsSync } from 'graceful-fs'
+import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
 
 export async function getHyperPlayStoreRelease(
   appName: string
@@ -241,14 +243,6 @@ export function refreshGameInfoFromHpRelease(
   }
 }
 
-const getBrowserUrl = (platforms: PlatformsMetaInterface) => {
-  const webPlatform = platforms['web']
-  if (webPlatform && webPlatform.external_url) {
-    return webPlatform.external_url
-  }
-  return undefined
-}
-
 /**
  * This is called when adding game to library and not during refresh
  */
@@ -287,7 +281,8 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
       title: data.project_meta.name
         ? data.project_meta.name
         : data.project_name,
-      browserUrl: isOnlyWeb ? getBrowserUrl(platforms) : undefined
+      browserUrl: isOnlyWeb ? platforms['web']?.external_url : undefined,
+      type: data.project_meta.type as GameType
     },
     data
   )
@@ -352,5 +347,40 @@ export async function getEpicListingUrl(projectId: string): Promise<string> {
   } catch (error) {
     logError(`Error when trying to get listing info: ${error}`)
     return ''
+  }
+}
+
+export const runModPatcher = async (appName: string) => {
+  const installPath = getGameInfo(appName)?.install.install_path
+  if (!installPath) {
+    logError(`Cannot find install path for ${appName}`, LogPrefix.HyperPlay)
+    return
+  }
+
+  const patcherBinary = isWindows ? 'client-patcher.exe' : 'client-patcher'
+  const patcher = join(installPath, patcherBinary)
+  const manifest = join(installPath, 'patch', 'manifest.json')
+
+  logInfo(
+    `Running patcher ${patcher} with manifest ${manifest}`,
+    LogPrefix.HyperPlay
+  )
+
+  if (!existsSync(patcher)) {
+    throw new Error(`Patcher not found at ${patcher}`)
+  }
+
+  try {
+    const { stderr, stdout } = await spawnAsync(
+      patcherBinary,
+      ['patch', '-m', 'patch/manifest.json'],
+      { cwd: installPath }
+    )
+    logInfo(['Patch Applied', stdout], LogPrefix.HyperPlay)
+    if (stderr) {
+      logError(stderr, LogPrefix.HyperPlay)
+    }
+  } catch (error) {
+    throw new Error(`Error running patcher: ${error}`)
   }
 }
