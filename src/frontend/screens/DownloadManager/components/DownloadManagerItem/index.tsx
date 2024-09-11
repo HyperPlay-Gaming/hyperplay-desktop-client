@@ -41,15 +41,14 @@ const options: Intl.DateTimeFormatOptions = {
 
 function convertToTime(time: number) {
   const date = time ? new Date(time) : new Date()
-  const hour = new Intl.DateTimeFormat(undefined, options).format(date)
-  const dateTwo = new Intl.DateTimeFormat(undefined, {
+  const fullDate = new Intl.DateTimeFormat(undefined, {
     year: 'numeric',
     month: 'numeric',
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric'
   }).format(date)
-  return { hour, fullDate: dateTwo }
+  return { fullDate }
 }
 
 type InstallInfo =
