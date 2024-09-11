@@ -55,6 +55,10 @@
                 "message": "The CrossOver bottle \"{{bottle_name}}\" does not exist, can't launch!",
                 "title": "CrossOver bottle not found"
             },
+            "delete-files": {
+                "body": "Error removing extracted folder {{path}}. Please remove it manually. \n                {{paragraph}} \n                {{error}}",
+                "title": "Error removing extracted folder"
+            },
             "diskspace": {
                 "message": "Not enough available disk space",
                 "title": "No Space"
@@ -169,6 +173,7 @@
         "continue": "Continue",
         "download": "Download",
         "go_to_library": "Go to Library",
+        "install": "Install",
         "sync": "Sync",
         "syncing": "Syncing",
         "unsync": "Unsync",
@@ -518,6 +523,9 @@
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
         }
     },
+    "install": {
+        "path": "Select Install Path"
+    },
     "library": {
         "alphabeticalAZ": "Alphabetical A-Z",
         "alphabeticalZA": "Alphabetical Z-A",
@@ -539,6 +547,56 @@
     "message": {
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Base game extraction canceled",
+                "title": "Canceled Extraction"
+            },
+            "installed": {
+                "body": "Mod will be applied to base game",
+                "title": "Base Game Installed"
+            },
+            "installing": {
+                "body": "Extracting base game files",
+                "title": "Installing Base Game"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Select Base Game File Location",
+                "placeholder": "Select Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "selectZip": "",
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from sources like:",
+                "subtitle": "Download World of Warcraft 3.3.5a",
+                "title": "Step 1",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "step2": {
+                "description": "Select the downloaded ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Select ChromieCraft_3.3.5a.zip File",
+                "title": "Step 2"
+            },
+            "step3": {
+                "description": "Please choose the folder where World of Warcraft: Wrath of the Lich King (3.3.5a) should be installed.",
+                "subtitle": "Select Installation Folder",
+                "title": "Step 3"
+            },
+            "step4": {
+                "description": "Enter the access code to proceed with installing the game.",
+                "subtitle": "Access Code",
+                "title": "Step 4"
+            },
+            "title": "Mod Instructions"
+        }
     },
     "notification": {
         "wine-download": {

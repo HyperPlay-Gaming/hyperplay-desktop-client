@@ -26,10 +26,9 @@ import WineSelector from './WineSelector'
 import { getPlatformName } from 'frontend/helpers'
 import PlatformSelection from 'frontend/components/UI/PlatformSelection'
 import ChannelNameSelection from 'frontend/components/UI/ChannelNameSelection'
-import TextInputField from 'frontend/components/UI/TextInputField'
-import { useTranslation } from 'react-i18next'
-import styles from './index.module.scss'
 import gameRequiresAccessCodes from 'frontend/helpers/gameRequiresAccessCodes'
+import ModDialog from './ModDialog'
+import { AccessCodeInput } from 'frontend/components/UI/AccessCodeInput'
 
 type Props = {
   appName: string
@@ -51,10 +50,6 @@ export default React.memo(function InstallModal({
   const [wineVersionList, setWineVersionList] = useState<WineInstallation[]>([])
   const [crossoverBottle, setCrossoverBottle] = useState('')
   const [accessCode, setAccessCode] = useState('')
-  const [accessCodeVerified, setAccessCodeVerified] = useState(false)
-  const [errorText, setErrorText] = useState('')
-  const [successText, setSuccessText] = useState('')
-  const { t } = useTranslation()
 
   const numberOfChannels =
     (gameInfo?.channels && Object.keys(gameInfo?.channels).length) ?? 0
@@ -182,51 +177,26 @@ export default React.memo(function InstallModal({
 
   const channelRequiresToken = !!selectedChannel?.license_config.tokens
 
-  useEffect(() => {
-    async function validateAccessCode() {
-      if (selectedChannel?.channel_id !== undefined) {
-        const result = await window.api.checkHyperPlayAccessCode(
-          selectedChannel?.license_config.id,
-          accessCode
-        )
-
-        setAccessCodeVerified(result.valid)
-
-        if (result.valid) {
-          setErrorText('')
-          setSuccessText(
-            t(
-              'hyperplay.accesscodes.success.validation',
-              'Success! Access code is valid'
-            )
-          )
-        } else {
-          setSuccessText('')
-          setErrorText(
-            t(
-              'hyperplay.accesscodes.error.validation',
-              'Access code is invalid'
-            )
-          )
-        }
-      }
-    }
-
-    if (accessCode && channelRequiresAccessCode) validateAccessCode()
-    else {
-      setErrorText('')
-      setSuccessText('')
-      setAccessCodeVerified(false)
-    }
-  }, [selectedChannel, accessCode])
-
-  const showDownloadDialog = !isSideload && gameInfo
+  const showModDialog = gameInfo && gameInfo.account_name === 'marketwars'
+  const showDownloadDialog = !showModDialog && !isSideload && gameInfo
 
   const disabledPlatformSelection = Boolean(runner === 'sideload' && appName)
+
+  const [accessCodeVerified, setAccessCodeVerified] = useState(false)
 
   const enableCTAButton =
     !channelRequiresAccessCode ||
     (channelRequiresAccessCode && accessCodeVerified)
+
+  const accessCodeInput = (
+    <AccessCodeInput
+      setAccessCodeVerified={setAccessCodeVerified}
+      channelRequiresAccessCode={true}
+      accessCode={accessCode}
+      inputProps={{ onChange: (ev) => setAccessCode(ev.target.value) }}
+      licenseConfigId={selectedChannel?.license_config.id}
+    />
+  )
 
   return (
     <div className="InstallModal">
@@ -235,7 +205,7 @@ export default React.memo(function InstallModal({
         showCloseButton
         className={'InstallModal__dialog'}
       >
-        {showDownloadDialog ? (
+        {showDownloadDialog && (
           <DownloadDialog
             appName={appName}
             runner={runner}
@@ -266,23 +236,10 @@ export default React.memo(function InstallModal({
                 gameInfo={gameInfo}
               />
             ) : null}
-            {runner === 'hyperplay' && channelRequiresAccessCode ? (
-              <TextInputField
-                placeholder={'Enter access code'}
-                value={accessCode}
-                onChange={(ev) => setAccessCode(ev.target.value)}
-                htmlId="access_code_input"
-                isError={!!errorText}
-              ></TextInputField>
-            ) : null}
-            {errorText && (
-              <div className={`caption ${styles.errorText}`}>{errorText}</div>
-            )}
-            {successText && (
-              <div className={`caption ${styles.successText}`}>
-                {successText}
-              </div>
-            )}
+            {runner === 'hyperplay' && channelRequiresAccessCode
+              ? accessCodeInput
+              : null}
+
             {hasWine ? (
               <WineSelector
                 winePrefix={winePrefix}
@@ -296,7 +253,8 @@ export default React.memo(function InstallModal({
               />
             ) : null}
           </DownloadDialog>
-        ) : (
+        )}
+        {isSideload === true && (
           <SideloadDialog
             setWinePrefix={setWinePrefix}
             winePrefix={winePrefix}
@@ -325,6 +283,43 @@ export default React.memo(function InstallModal({
               />
             ) : null}
           </SideloadDialog>
+        )}
+        {showModDialog === true && (
+          <ModDialog
+            backdropClick={backdropClick}
+            gameInfo={gameInfo}
+            accessCode={accessCode}
+            requiresToken={channelRequiresToken}
+            enableCTAButton={enableCTAButton}
+            winePrefix={winePrefix}
+            wineVersion={wineVersion}
+            crossoverBottle={crossoverBottle}
+          >
+            <div style={{ paddingTop: 'var(--space-md)' }}>
+              {runner === 'hyperplay' && numberOfChannels > 1 ? (
+                <ChannelNameSelection
+                  channelNameToInstall={channelNameToInstall}
+                  setChannelNameToInstall={setChannelNameToInstall}
+                  gameInfo={gameInfo}
+                />
+              ) : null}
+              {runner === 'hyperplay' && channelRequiresAccessCode
+                ? accessCodeInput
+                : null}
+            </div>
+            {hasWine ? (
+              <WineSelector
+                winePrefix={winePrefix}
+                wineVersion={wineVersion}
+                wineVersionList={wineVersionList}
+                title={gameInfo?.title}
+                setWinePrefix={setWinePrefix}
+                setWineVersion={setWineVersion}
+                crossoverBottle={crossoverBottle}
+                setCrossoverBottle={setCrossoverBottle}
+              />
+            ) : null}
+          </ModDialog>
         )}
       </Dialog>
     </div>
