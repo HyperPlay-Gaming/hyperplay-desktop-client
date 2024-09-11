@@ -183,7 +183,8 @@
         "unsync": "Älä synkronoi",
         "update": "Päivitä",
         "continue": "Jatka",
-        "download": "Ladata"
+        "download": "Ladata",
+        "install": "Asenna"
     },
     "controller": {
         "hints": {
@@ -1052,7 +1053,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Peruspelin louhinta peruttu"
+                "body": "Peruspelin louhinta peruttu",
+                "title": "Peruuta ylimääräinen"
             },
             "installed": {
                 "body": "Mod käytetään peruspeliin",
@@ -1076,15 +1078,18 @@
                 "chromieCraft": "ChromieCraft",
                 "description": "World of Warcraft: Wrath of the Lich King (3.3.5a). Jotta voit pelata tätä modia, pelaajien täytyy omistaa kopio World of Warcraft 3.3.5a. {{newline}} HyperPlay ei isännöi World of Warcraftia. Pelaajat, jotka omistavat World of Warcraftin, voivat hankkia version 3.3.5a esimerkiksi seuraavista lähteistä:",
                 "subtitle": "World Warcraft 3.3.5a",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Vaihe 1"
             },
             "step2": {
                 "description": "Valitse ladattu ChromieCraft_3.3.5a.zip-tiedosto.",
-                "subtitle": "Valitse ChromieCraft_3.3.5a.zip Tiedosto"
+                "subtitle": "Valitse ChromieCraft_3.3.5a.zip Tiedosto",
+                "title": "Vaihe 2"
             },
             "step3": {
                 "description": "Valitse kansio, jossa World of Warcraft: Wrath of the Lich King (3.3.5a) on asennettava.",
-                "subtitle": "Valitse asennus Kansiot"
+                "subtitle": "Valitse asennus Kansiot",
+                "title": "Vaihe 3"
             },
             "step4": {
                 "description": "Anna pääsykoodi jatkaa asentamalla pelin.",
