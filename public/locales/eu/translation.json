@@ -749,5 +749,8 @@
     "profile": "Profila",
     "sideload": {
         "warningTitle": "Garrantzitsua"
+    },
+    "import-game-folder": {
+        "placeholder": "Aukeratu inportatzeko joko karpeta"
     }
 }
