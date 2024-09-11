@@ -231,7 +231,8 @@
         "cancel": "Afbestille",
         "download": "Hent",
         "update": "Opdater",
-        "continue": "Fortsæt"
+        "continue": "Fortsæt",
+        "install": "Installér"
     },
     "help": {
         "esync": "Esync sigter mod at reducere vinserveroverhead i CPU-intensive spil. Aktivering kan forbedre ydeevnen.",
@@ -1106,7 +1107,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Base spiludvinding annulleret"
+                "body": "Base spiludvinding annulleret",
+                "title": "Annuller udsugning"
             },
             "installed": {
                 "body": "Mod vil blive anvendt til base spil",
