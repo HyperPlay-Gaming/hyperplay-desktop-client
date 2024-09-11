@@ -183,7 +183,8 @@
         "unsync": "Dessincronizar",
         "continue": "Continuar",
         "update": "Atualizar",
-        "download": "Baixar"
+        "download": "Baixar",
+        "install": "Instalar"
     },
     "controller": {
         "hints": {
@@ -1058,7 +1059,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Extração de jogo de base cancelada"
+                "body": "Extração de jogo de base cancelada",
+                "title": "Cancelar Extração"
             },
             "installed": {
                 "body": "Mod será aplicado ao jogo base",
@@ -1082,19 +1084,23 @@
                 "chromieCraft": "Travessas de cromo",
                 "description": "Este jogo é um mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para jogar este mod, os jogadores devem possuir uma cópia do World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay não hospeda World of Warcraft. Os jogadores que possuem World of Warcraft podem obter a versão 3.3.5a de fontes como:",
                 "webtorrent": "Torrent (Magnet Link)",
-                "subtitle": "Baixar World of Warcraft 3.3.5a"
+                "subtitle": "Baixar World of Warcraft 3.3.5a",
+                "title": "Passo 1"
             },
             "step2": {
                 "description": "Selecione o download ChromieCraft_3.3.5a.zip ficheiro.",
-                "subtitle": "Selecione ChromieCraft_3.3.5a.zip Arquivo"
+                "subtitle": "Selecione ChromieCraft_3.3.5a.zip Arquivo",
+                "title": "Passo 2"
             },
             "step3": {
                 "description": "Por favor, escolha a pasta onde World of Warcraft: Wrath of the Lich King (3.3.5a) deve ser instalado.",
-                "subtitle": "Selecione a instalação Pasta"
+                "subtitle": "Selecione a instalação Pasta",
+                "title": "Passo 3"
             },
             "step4": {
                 "description": "Digite o código de acesso para prosseguir com a instalação do jogo.",
-                "subtitle": "Código de acesso"
+                "subtitle": "Código de acesso",
+                "title": "Passo 4"
             },
             "title": "Instruções de Mod"
         }
