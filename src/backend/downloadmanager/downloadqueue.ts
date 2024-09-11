@@ -133,7 +133,11 @@ async function addToQueue(element: DMQueueElement) {
   } else {
     const installInfo = await libraryManagerMap[
       element.params.runner
-    ].getInstallInfo(element.params.appName, element.params.platformToInstall)
+    ].getInstallInfo(
+      element.params.appName,
+      element.params.platformToInstall,
+      element.params.channelName ?? 'main'
+    )
 
     element.params.size = installInfo?.manifest?.download_size
       ? getFileSize(installInfo?.manifest?.download_size)

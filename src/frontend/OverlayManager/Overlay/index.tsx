@@ -108,14 +108,25 @@ export const Overlay = observer(function ({
       OverlayState.renderState.showHintText &&
       OverlayState.title !== 'HyperPlay Hint Text'
     ) {
-      extensionManager = (
-        <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
-          {t(
-            'overlay.EXTERNAL_WALLET_CONNECTED',
-            'You are connected to HyperPlay with an external wallet.'
-          )}
-        </div>
-      )
+      if (WalletState.provider === 'Unconnected') {
+        extensionManager = (
+          <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
+            {t(
+              'overlay.WALLET_DISCONNECTED',
+              'You do not have a wallet connected to HyperPlay.'
+            )}
+          </div>
+        )
+      } else {
+        extensionManager = (
+          <div className={`${BrowserGameStyles.overlayToggleHint} title`}>
+            {t(
+              'overlay.EXTERNAL_WALLET_CONNECTED',
+              'You are connected to HyperPlay with an external wallet.'
+            )}
+          </div>
+        )
+      }
     }
 
     let questsViewer = null

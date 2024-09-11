@@ -12,7 +12,10 @@ import {
   qaToken,
   valistListingsApiUrl
 } from 'backend/constants'
-import { ProjectMetaInterface } from '@valist/sdk/dist/typesShared'
+import {
+  PlatformsMetaInterface,
+  ProjectMetaInterface
+} from '@valist/sdk/dist/typesShared'
 import { logError } from 'backend/api/misc'
 
 export async function getHyperPlayStoreRelease(
@@ -83,7 +86,8 @@ export function handleArchAndPlatform(
     'windows_amd64',
     'linux_amd64',
     'darwin_amd64',
-    'web'
+    'web',
+    'webgl'
   ]
   const isHpPlatform = hpPlatforms.includes(platformToInstall)
 
@@ -237,6 +241,14 @@ export function refreshGameInfoFromHpRelease(
   }
 }
 
+const getBrowserUrl = (platforms: PlatformsMetaInterface) => {
+  const webPlatform = platforms['web']
+  if (webPlatform && webPlatform.external_url) {
+    return webPlatform.external_url
+  }
+  return undefined
+}
+
 /**
  * This is called when adding game to library and not during refresh
  */
@@ -275,7 +287,7 @@ export function getGameInfoFromHpRelease(data: HyperPlayRelease): GameInfo {
       title: data.project_meta.name
         ? data.project_meta.name
         : data.project_name,
-      browserUrl: isOnlyWeb ? platforms['web']?.external_url : undefined
+      browserUrl: isOnlyWeb ? getBrowserUrl(platforms) : undefined
     },
     data
   )

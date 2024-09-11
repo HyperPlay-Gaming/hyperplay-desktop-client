@@ -1028,7 +1028,8 @@
     "exit_game": "Çıkış Oyunu",
     "back_to_game": "Oyuna Geri Dönüş",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Dış bir cüzdanla HyperPlay'e bağlanırsınız."
+        "EXTERNAL_WALLET_CONNECTED": "Dış bir cüzdanla HyperPlay'e bağlanırsınız.",
+        "WALLET_DISCONNECTED": "HyperPlay ile bağlantılı bir cüzdana sahip değilsiniz."
     },
     "email_subscription": {
         "title": "Alt tarif için teşekkür ederiz!",

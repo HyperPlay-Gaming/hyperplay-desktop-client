@@ -47,8 +47,6 @@ import setup from './storeManagers/gog/setup'
 import {
   clearCache,
   execAsync,
-  getGOGdlBin,
-  getLegendaryBin,
   getPlatformName,
   getStoreName,
   isEpicServiceOffline,
@@ -488,19 +486,6 @@ if (!gotTheLock) {
 
     initImagesCache()
 
-    logInfo(
-      ['Legendary location:', join(...Object.values(getLegendaryBin()))],
-      LogPrefix.Legendary
-    )
-    logInfo(
-      ['GOGDL location:', join(...Object.values(getGOGdlBin()))],
-      LogPrefix.Gog
-    )
-    logInfo(
-      ['GOGDL location:', join(...Object.values(getGOGdlBin()))],
-      LogPrefix.Gog
-    )
-
     // TODO: Remove this after a couple of stable releases
     // Affects only current users, not new installs
     const settings = GlobalConfig.get().getSettings()
@@ -514,10 +499,6 @@ if (!gotTheLock) {
       const isLoggedIn = LegendaryUser.isLoggedIn()
 
       if (!isLoggedIn) {
-        logInfo('User Not Found, removing it from Store', {
-          prefix: LogPrefix.Backend,
-          forceLog: true
-        })
         configStore.delete('userInfo')
       }
 

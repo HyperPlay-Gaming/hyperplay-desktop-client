@@ -1029,7 +1029,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Vous êtes connecté à HyperPlay avec un portefeuille externe."
+        "EXTERNAL_WALLET_CONNECTED": "Vous êtes connecté à HyperPlay avec un portefeuille externe.",
+        "WALLET_DISCONNECTED": "Vous n'avez pas de portefeuille connecté à HyperPlay."
     },
     "ALL": "TOUS",
     "analytics": "Statistiques",
