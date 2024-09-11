@@ -53,7 +53,10 @@
         },
         "dont-show-again": "Não mostrar novamente",
         "ok": "Ok",
-        "yesCancel": "Sim, cancele"
+        "yesCancel": "Sim, cancele",
+        "stopExtraction": {
+            "title": "Você quer cancelar a extração?"
+        }
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
