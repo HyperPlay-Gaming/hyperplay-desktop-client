@@ -183,7 +183,8 @@
         "unsync": "Avbryt synkronisering",
         "continue": "Fortsätt",
         "download": "Hämta",
-        "update": "Uppdatera"
+        "update": "Uppdatera",
+        "install": "Installera"
     },
     "controller": {
         "hints": {
@@ -1056,7 +1057,8 @@
                 "title": "Basspel installerat"
             },
             "cancel": {
-                "body": "Base game extraction avbryts"
+                "body": "Base game extraction avbryts",
+                "title": "Avbryt extraktion"
             },
             "installing": {
                 "body": "Extrahera basspelfiler",
@@ -1076,11 +1078,13 @@
                 "chromieCraft": "ChromieCraft",
                 "description": "Detta spel är en mod för World of Warcraft: Wrath of the Lich King (3.3.5a). För att spela denna mod måste spelarna äga en kopia av World of Warcraft 3.3.5a. {{newline}} HyperPlay är inte värd för World of Warcraft. Spelare som äger World of Warcraft kan få version 3.3.5a från källor som:",
                 "subtitle": "Ladda ner World of Warcraft 3.3.5a",
-                "webtorrent": "Torrent (Magnet Link)"
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Steg 1"
             },
             "step2": {
                 "description": "Välj den nedladdade ChromieCraft_3.3.5a.zip-fil.",
-                "subtitle": "Välj ChromieCraft_3.3.5a.zip Fil"
+                "subtitle": "Välj ChromieCraft_3.3.5a.zip Fil",
+                "title": "Steg 2"
             },
             "step3": {
                 "description": "Vänligen välj mappen där World of Warcraft: Wrath of the Lich King (3.3.5a) ska installeras.",
