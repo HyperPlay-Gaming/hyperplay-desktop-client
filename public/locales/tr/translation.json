@@ -1034,5 +1034,15 @@
     "email_subscription": {
         "title": "Alt tarif için teşekkür ederiz!",
         "subtitle": "Artık topluluğumuzun bir parçasısınız ve sizinle değerli güncellemeler ve öngörüleri paylaşmak heyecanlıyız."
+    },
+    "import-game-folder": {
+        "cta": "Import Game Folder",
+        "dialog": {
+            "title": "Oyun Folder'ı İthalat için seçin"
+        },
+        "error": "İthalat sırasında bir hata vardı. Lütfen daha fazla ayrıntı için logları görün.",
+        "label": "Import Game Folder",
+        "placeholder": "Ithal etmek için oyun klasörü seçin",
+        "success": "Başarılı olarak ithal edilen oyunlar!"
     }
 }
