@@ -1322,9 +1322,9 @@
   integrity sha512-iBNlMXAT7Vg/Nwn7P9aqdFn9+LBJ6mH4OY5lOvHtdcYQxlcUi+QsUVNmfSqicEb9BjxHbSrQ6hjcnnhG9f7Dig==
 
 "@hyperplay/ui@^1.7.18":
-  version "1.7.18"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.7.18.tgz#76a832282f983b469fb43f6beb086d78de8a14c0"
-  integrity sha512-rpJH4z5GLzt0uCBqQ/NE3Dty5W8aUGo2PpcX+yQE01E1pmKxl8eQhT2DSsKKOrL/aFuq0ILGp2NyDEIn0B+7Dg==
+  version "1.7.19"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.7.19.tgz#43bc58405a5cc4866d55b548203ce2bdeca6d3fa"
+  integrity sha512-uXqjABDqxvjXbF7o+GMriXyTgp62X39aPohr4W26G2uk+r+vNNy3t0JDGd0B4SyZnovcoCEocfWS6oirAOVnNg==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
@@ -3826,7 +3826,18 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@valist/sdk@^2.9.1", "@valist/sdk@^2.9.17":
+"@valist/sdk@^2.9.1":
+  version "2.10.1"
+  resolved "https://registry.yarnpkg.com/@valist/sdk/-/sdk-2.10.1.tgz#16e5ee22f0e8b00c522b571c62790613c8176ab4"
+  integrity sha512-UL1ffMmfo/We5Qb1SkrdgtSYOhozf+tIE2XGslsmXDNHgF17tUpRxPtX6cxA1rlv2M8ycvjfqxofQLIcQxqLqg==
+  dependencies:
+    "@ethersproject/contracts" "^5.7.0"
+    axios "^1.4.0"
+    axios-retry "^4.4.1"
+    ethers "^6.11.1"
+    node-fetch "^2.6.1"
+
+"@valist/sdk@^2.9.17":
   version "2.9.17"
   resolved "https://registry.yarnpkg.com/@valist/sdk/-/sdk-2.9.17.tgz#05969eba1d6165be76cb89350b78cec1e99456e6"
   integrity sha512-5l2DHfoX70cErmCnyN3wjhzlvHvR2mQixsUI8mjA5YDjIBO4+dN86kfttA1kt8Feb8nN6hZRcGbO949kDRQcng==
