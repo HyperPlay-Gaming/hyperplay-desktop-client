@@ -1024,7 +1024,8 @@
         "warningTitle": "Důležitý"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Jste připojeni do HyperPlay s externí peněženky."
+        "EXTERNAL_WALLET_CONNECTED": "Jste připojeni do HyperPlay s externí peněženky.",
+        "WALLET_DISCONNECTED": "Nemáte peněženku připojenou k HyperPlay."
     },
     "gameRelease": {
         "prototype": "Čeština",

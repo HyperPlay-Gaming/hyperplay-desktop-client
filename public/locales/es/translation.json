@@ -940,7 +940,8 @@
         "closeOverlay": "Pulsa {{overlayKeyMod}} + X para cerrar la superposición"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo."
+        "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo.",
+        "WALLET_DISCONNECTED": "Usted no tiene una cartera conectada a HyperPlay."
     },
     "sideload": {
         "warningTitle": "Importante",

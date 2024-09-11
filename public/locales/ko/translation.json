@@ -1003,7 +1003,8 @@
     },
     "accounts": "계정 만들기",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "HyperPlay와 외부 지갑에 연결됩니다."
+        "EXTERNAL_WALLET_CONNECTED": "HyperPlay와 외부 지갑에 연결됩니다.",
+        "WALLET_DISCONNECTED": "HyperPlay에 연결된 지갑이 없습니다."
     },
     "importGameErrorMessageExecutable": "(한국어) 실행할 수 없습니다, 수입 게임 가능",
     "back_to_game": "게임으로 돌아가기",
