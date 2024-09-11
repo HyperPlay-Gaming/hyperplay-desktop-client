@@ -155,7 +155,8 @@
         "unsync": "Hủy đồng bộ",
         "update": "Cập nhật",
         "continue": "Tiếp tục",
-        "download": "Tải"
+        "download": "Tải",
+        "install": "Cài đặt"
     },
     "controller": {
         "hints": {
@@ -771,5 +772,28 @@
     "profile": "Hồ sơ",
     "sideload": {
         "warningTitle": "Quan trọng"
+    },
+    "import-game-folder": {
+        "placeholder": "Chọn thư mục game để import"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "title": "Bước 1"
+            },
+            "step3": {
+                "title": "Bước 3"
+            },
+            "step2": {
+                "title": "Bước 2"
+            }
+        }
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "placeholder": "Chọn một tệp tin"
+            }
+        }
     }
 }
