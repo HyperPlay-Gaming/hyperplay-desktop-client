@@ -183,7 +183,8 @@
         "unsync": "De-synchroniseren",
         "continue": "Door­gaan",
         "download": "Download",
-        "update": "Aanpassen"
+        "update": "Aanpassen",
+        "install": "Installeer"
     },
     "controller": {
         "hints": {
@@ -1060,7 +1061,8 @@
                 "title": "Installing Base Game"
             },
             "cancel": {
-                "body": "Basiswedstrijd geannuleerd"
+                "body": "Basiswedstrijd geannuleerd",
+                "title": "Cancel Extract"
             }
         },
         "instructions": {
