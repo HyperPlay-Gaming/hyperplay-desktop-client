@@ -183,7 +183,8 @@
         "unsync": "Sinxronizasiyadan çıxarın",
         "continue": "Davam edin",
         "download": "Endir",
-        "update": "Yenilə"
+        "update": "Yenilə",
+        "install": "Yüklə"
     },
     "controller": {
         "hints": {
@@ -1079,7 +1080,8 @@
     "mod": {
         "baseGame": {
             "cancel": {
-                "body": "Ümumi oyun ekstraksiyası"
+                "body": "Ümumi oyun ekstraksiyası",
+                "title": "Cancel"
             },
             "installed": {
                 "body": "Mod baza oyun üçün uyğun olacaq",
