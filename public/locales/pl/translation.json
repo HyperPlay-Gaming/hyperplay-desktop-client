@@ -183,7 +183,8 @@
         "unsync": "Desynchronizuj",
         "update": "Aktualizuj",
         "continue": "Kontynuuj",
-        "download": "Pobieranie"
+        "download": "Pobieranie",
+        "install": "Zainstaluj"
     },
     "controller": {
         "hints": {
@@ -1056,7 +1057,8 @@
                 "body": "Okładka"
             },
             "cancel": {
-                "body": "Ekstrakcja gier komputerowych anulowana"
+                "body": "Ekstrakcja gier komputerowych anulowana",
+                "title": "Cancel Extraction"
             },
             "installed": {
                 "body": "Modu zostanie zastosowany do gry bazowej",
@@ -1076,15 +1078,18 @@
                 "chromieCraft": "ChromieCraft",
                 "description": "Gra jest modem dla World of Warcraft: Wrath of the Lich King (3,3.5a). Gracze muszą posiadać kopię World of Warcraft 3,3.5a. X155X X167X HyperPlay nie host World of Warcraft. Gracze, którzy posiadają World of Warcraft, mogą uzyskać wersję 3.3,5a",
                 "subtitle": "Download World Warcraft 3,3.5a (ang.)",
-                "webtorrent": "Magnet Link (ang.)"
+                "webtorrent": "Magnet Link (ang.)",
+                "title": "Krok 1"
             },
             "step2": {
                 "description": "Selected ściągnięty do pobrania. ChromieCraft_3.3.5a.zip (ang.).",
-                "subtitle": "ChromieCraft_3.3.5a (ang.). File"
+                "subtitle": "ChromieCraft_3.3.5a (ang.). File",
+                "title": "Krok 2"
             },
             "step3": {
                 "description": "Proszę wybrać folder, w którym powinien zostać zainstalowany świat Warcraft: Wrath of the Lich King (3,5a).",
-                "subtitle": "Instalacja Folder"
+                "subtitle": "Instalacja Folder",
+                "title": "Krok 3"
             },
             "step4": {
                 "description": "Wejście do kodu dostępu do gry, aby zainstalować grę.",
