@@ -179,7 +179,8 @@
         "unsync": "Dessincronitza",
         "update": "Actualitza",
         "continue": "Continuar",
-        "download": "Descarrega"
+        "download": "Descarrega",
+        "install": "Instal·lar"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1035,35 @@
     },
     "importGameErrorMessage": "No és possible una carpeta de joc vàlida, la importació de joc no és possible",
     "importGameErrorMessageExecutable": "Joc Executable no trobat, la importació de joc no és possible",
-    "back_to_game": "Tornar al joc"
+    "back_to_game": "Tornar al joc",
+    "import-game-folder": {
+        "dialog": {
+            "title": "Seleccioneu la carpeta del joc per importar"
+        },
+        "error": "Hi ha un error en la importació. Si us plau, consulteu els registres per obtenir més detalls.",
+        "label": "Importar la carpeta del joc",
+        "placeholder": "Trieu la carpeta del joc per importar",
+        "success": "Jocs importats amb èxit!",
+        "cta": "Importar la carpeta del joc"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "title": "Pas 1"
+            },
+            "step2": {
+                "title": "Pas 2"
+            },
+            "step3": {
+                "title": "Pas 3"
+            }
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "title": "Cancel·la l'extracció"
+            }
+        }
+    }
 }
