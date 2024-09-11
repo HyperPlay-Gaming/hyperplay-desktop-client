@@ -481,6 +481,16 @@
             "INITIATED": "Add custom token request pending"
         }
     },
+    "import-game-folder": {
+        "cta": "Import Game Folder",
+        "dialog": {
+            "title": "Select Game Folder to Import"
+        },
+        "error": "There was an error during import. Please see the logs for more details.",
+        "label": "Import Game Folder",
+        "placeholder": "Choose the game folder to import",
+        "success": "Successfully imported games!"
+    },
     "importGameErrorMessage": "Not a valid game folder, importing game is not possible",
     "importGameErrorMessageExecutable": "Game Executable not found, importing game is not possible",
     "importGameErrorTitle": "Import Game Error",
