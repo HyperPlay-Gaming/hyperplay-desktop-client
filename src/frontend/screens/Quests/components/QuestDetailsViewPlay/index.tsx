@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Game, QuestDetails, QuestDetailsTranslations } from '@hyperplay/ui'
+import {
+  Game,
+  MarkdownDescription,
+  QuestDetails,
+  QuestDetailsTranslations
+} from '@hyperplay/ui'
 import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import styles from './index.module.scss'
@@ -199,7 +204,11 @@ export function QuestDetailsViewPlayWrapper({
       i18n={i18n}
       rewards={questRewards ?? []}
       title={questMeta.name}
-      description={questMeta.description}
+      description={
+        <MarkdownDescription classNames={{ root: styles.markdownDescription }}>
+          {questMeta.description}
+        </MarkdownDescription>
+      }
       collapseIsOpen={collapseIsOpen}
       toggleCollapse={() => setCollapseIsOpen(!collapseIsOpen)}
       onClaimClick={() => console.log('claim click')}

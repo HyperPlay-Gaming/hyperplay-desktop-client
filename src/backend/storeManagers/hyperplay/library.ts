@@ -30,7 +30,8 @@ export async function addGameToLibrary(projectId: string) {
 
   if (sameGameInLibrary !== undefined) {
     logWarning(
-      `Cannot add game to library since game is already added to the library!`
+      `Cannot add game to library since game is already added to the library!`,
+      LogPrefix.HyperPlay
     )
     return
   }
@@ -42,6 +43,13 @@ export async function addGameToLibrary(projectId: string) {
   const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
 
   const data = res.data
+  if (Object.keys(data).length === 0) {
+    logWarning(
+      `Cannot add game to library since game is no longer distributed by HyperPlay.`,
+      LogPrefix.HyperPlay
+    )
+    return
+  }
   const gameInfo = getGameInfoFromHpRelease(data)
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 }
