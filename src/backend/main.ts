@@ -1994,6 +1994,9 @@ ipcMain.handle(
 // sends messages to renderer process through preload.ts callbacks
 backendEvents.on('walletConnected', function (accounts: string[]) {
   getMainWindow()?.webContents.send('walletConnected', accounts)
+  trackEvent({
+    event: 'Wallet Connected'
+  })
 })
 
 backendEvents.on('walletDisconnected', function (code: number, reason: string) {
@@ -2006,12 +2009,24 @@ backendEvents.on('connectionRequestRejected', function () {
 
 backendEvents.on('chainChanged', function (chainId: number) {
   getMainWindow()?.webContents.send('chainChanged', chainId)
+  trackEvent({
+    event: 'Chain Changed',
+    properties: {
+      chainId
+    }
+  })
 })
 
 backendEvents.on(
   'accountsChanged',
   function (accounts: string[], provider: PROVIDERS) {
     getMainWindow()?.webContents.send('accountChanged', accounts, provider)
+    trackEvent({
+      event: 'Accounts Changed',
+      properties: {
+        provider
+      }
+    })
   }
 )
 

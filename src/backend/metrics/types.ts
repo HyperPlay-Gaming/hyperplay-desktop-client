@@ -56,6 +56,22 @@ export interface WalletConnected {
   sensitiveProperties?: never
 }
 
+export interface ChainChanged {
+  event: 'Chain Changed'
+  properties: {
+    chainId: number
+  }
+  sensitiveProperties?: never
+}
+
+export interface AccountsChanged {
+  event: 'Accounts Changed'
+  properties: {
+    provider: PROVIDERS
+  }
+  sensitiveProperties?: never
+}
+
 export interface MetaMaskInitialized {
   event: 'MetaMask Initialized'
   properties?: {
@@ -374,5 +390,7 @@ export type PossibleMetricPayloads =
   | RewardClaimStarted
   | RewardClaimSuccess
   | RewardClaimError
+  | ChainChanged
+  | AccountsChanged
 
 export type PossibleMetricEventNames = PossibleMetricPayloads['event']
