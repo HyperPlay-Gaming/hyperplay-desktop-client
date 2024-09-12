@@ -155,7 +155,8 @@
         "unsync": "Omgjør synkronisering",
         "download": "Last ned",
         "update": "Oppdater",
-        "continue": "Fortsett"
+        "continue": "Fortsett",
+        "install": "Installer"
     },
     "controller": {
         "hints": {
@@ -750,7 +751,11 @@
             "reputation": "Omdømme"
         },
         "reputation": "Omdømme",
-        "connectSteamAccount": "Koble til lagkonto"
+        "connectSteamAccount": "Koble til lagkonto",
+        "claimWarning": {
+            "cancel": "Avbryt",
+            "confirm": "Bekreft"
+        }
     },
     "accounts": "Kontoer",
     "ALL": "ALLE",
@@ -758,5 +763,15 @@
     "profile": "Profil",
     "sideload": {
         "warningTitle": "Viktig"
+    },
+    "import-game-folder": {
+        "placeholder": "Vleg spillmappe å importere"
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "placeholder": "Velg ei fil"
+            }
+        }
     }
 }

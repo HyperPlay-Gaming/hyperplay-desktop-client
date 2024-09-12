@@ -735,7 +735,11 @@
         },
         "points": "Punktid",
         "signIn": "Logi sisse",
-        "sync": "Sünkroonimine"
+        "sync": "Sünkroonimine",
+        "claimWarning": {
+            "cancel": "Loobu",
+            "confirm": "Kinnita"
+        }
     },
     "accounts": "Kontod",
     "ALL": "Kõik",
@@ -743,5 +747,8 @@
     "sideload": {
         "warningTitle": "Oluline"
     },
-    "profile": "Profiil"
+    "profile": "Profiil",
+    "import-game-folder": {
+        "placeholder": "Valige imporditav mängude kaust"
+    }
 }

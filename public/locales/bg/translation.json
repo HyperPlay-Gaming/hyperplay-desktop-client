@@ -155,7 +155,8 @@
         "unsync": "Десинхронизиране",
         "continue": "Продължаване",
         "download": "Изтегляне",
-        "update": "Актуализирай"
+        "update": "Актуализирай",
+        "install": "Инсталиране"
     },
     "controller": {
         "hints": {
@@ -745,7 +746,11 @@
         "type": {
             "reputation": "Репутация"
         },
-        "reputation": "Репутация"
+        "reputation": "Репутация",
+        "claimWarning": {
+            "cancel": "Отмяна",
+            "confirm": "Потвърдете"
+        }
     },
     "accounts": "Акаунти",
     "analytics": "Анализ",
@@ -754,5 +759,8 @@
         "beta": "Beta",
         "alpha": "Прозрачност"
     },
-    "profile": "Профил"
+    "profile": "Профил",
+    "import-game-folder": {
+        "placeholder": "Изберете папка с игри за внасяне"
+    }
 }

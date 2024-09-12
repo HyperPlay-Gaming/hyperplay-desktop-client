@@ -52,7 +52,7 @@ export async function removeShortcuts(appName: string): Promise<void> {
   return removeShortcutsUtil(getGameInfo(appName))
 }
 
-export function isGameAvailable(appName: string): boolean {
+export async function isGameAvailable(appName: string): Promise<boolean> {
   const { install } = getGameInfo(appName)
 
   if (install && install.platform === 'Browser') {

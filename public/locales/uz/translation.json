@@ -220,7 +220,8 @@
         "syncing": "Sinxronlash",
         "unsync": "Sinxronizatsiyani bekor qilish",
         "download": "Yuklash",
-        "update": "Yangilash"
+        "update": "Yangilash",
+        "install": "O'rnatish"
     },
     "controller": {
         "hints": {
@@ -737,7 +738,11 @@
         "active": "Faol",
         "Play": "Hozir O'yna",
         "signIn": "Sign in",
-        "sync": "Sinxronlash"
+        "sync": "Sinxronlash",
+        "claimWarning": {
+            "cancel": "Bekor qilish",
+            "confirm": "Tasdiqlash"
+        }
     },
     "analytics": "Tashxis",
     "notification": {
@@ -745,5 +750,8 @@
             "title": "Vino menejeri"
         }
     },
-    "accounts": "Account"
+    "accounts": "Account",
+    "import-game-folder": {
+        "placeholder": "Import qilish uchun o'yin papkasini tanlang"
+    }
 }

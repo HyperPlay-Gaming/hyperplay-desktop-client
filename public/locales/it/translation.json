@@ -85,6 +85,10 @@
             },
             "legendary": {
                 "generic": "C'è stato un errore! Prova a uscire e accedere al tuo account Epic. {{newline}} {{error}}"
+            },
+            "delete-files": {
+                "body": "Errore rimuovere la cartella estratto {{path}}. Si prega di rimuoverlo manualmente.\n{{paragraph}}\n{{error}}",
+                "title": "Eliminazione errore cartella estratta"
             }
         },
         "info": {
@@ -94,7 +98,9 @@
                 "message": "È disponibile una nuova versione!",
                 "message-finished": "Vuoi riavviare HyperPlay ora?",
                 "title": "HyperPlay Games Launcher",
-                "title-finished": "Aggiornamento terminato"
+                "title-finished": "Aggiornamento terminato",
+                "appUpdated": "HyperPlay è stato aggiornato",
+                "appUpdated-message": "HyperPlay è stato aggiornato. Vuoi aggiornare e riavviare HyperPlay ora?"
             }
         },
         "no": "NO",
@@ -186,7 +192,8 @@
         "unsync": "Annulla sincronizzazione",
         "update": "Aggiorna",
         "continue": "Continuare",
-        "download": "Scarica"
+        "download": "Scarica",
+        "install": "Installa"
     },
     "controller": {
         "hints": {
@@ -938,7 +945,14 @@
         "createDiscordTicket": "Creato biglietto Discord",
         "notEnoughGas": "Bilancio portafoglio insufficiente per rivendicare la vostra ricompensa a causa di costi di gas. Prova un portafoglio diverso o ricostituisci questo prima di riprovare.",
         "pointsClaimed": "Punti dichiarati",
-        "g7Numclaimed": "Crediti totali dichiarati G7"
+        "g7Numclaimed": "Crediti totali dichiarati G7",
+        "claimWarning": {
+            "body": "<bold>IMPORTANTE:</bold> Si prega di garantire che si sta allocando abbastanza gas sulla rete {{networkName}} per la transazione da confermare con successo <bold> entro 24 ore.</bold>",
+            "body2": "Altrimenti, la Quest Reward <bold> scadrà e non sarà più reclamabile.</bold>",
+            "title": "Confermare la richiesta di rimborso",
+            "cancel": "Annulla",
+            "confirm": "Conferma"
+        }
     },
     "quests": {
         "quests": "Missioni",
@@ -1024,7 +1038,8 @@
     "back_to_game": "Torna al gioco",
     "importGameErrorMessage": "Non una cartella di gioco valida, importare il gioco non è possibile",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Sei connesso a HyperPlay con un portafoglio esterno."
+        "EXTERNAL_WALLET_CONNECTED": "Sei connesso a HyperPlay con un portafoglio esterno.",
+        "WALLET_DISCONNECTED": "Non hai un portafoglio collegato a HyperPlay."
     },
     "achievements": {
         "progress": {
@@ -1035,5 +1050,64 @@
     "email_subscription": {
         "title": "Grazie per la sottoscrizione!",
         "subtitle": "Ora fai parte della nostra community e siamo entusiasti di condividere aggiornamenti e approfondimenti preziosi con te."
+    },
+    "import-game-folder": {
+        "cta": "Importa la cartella del gioco",
+        "dialog": {
+            "title": "Selezionare la cartella di gioco da importare"
+        },
+        "error": "C'è stato un errore durante l'importazione. Si prega di vedere i registri per ulteriori dettagli.",
+        "label": "Importa la cartella del gioco",
+        "placeholder": "Scegliere la cartella di gioco da importare",
+        "success": "Giochi di successo importati!"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Estrazione del gioco di base annullata",
+                "title": "Annulla estrazione"
+            },
+            "installed": {
+                "body": "Mod sarà applicato al gioco di base",
+                "title": "Gioco base installato"
+            },
+            "installing": {
+                "body": "Estrazione di file di gioco di base",
+                "title": "Installazione del gioco Base"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Selezionare Base Game File Location",
+                "placeholder": "Selezionare File Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "Questo gioco è un mod per World of Warcraft: Wrath of the Lich King (3.3.5a). Per giocare a questo mod, i giocatori devono possedere una copia di World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay non ospita World of Warcraft. I giocatori che possiedono World of Warcraft possono ottenere la versione 3.3.5a da fonti come:",
+                "subtitle": "Scarica World of Warcraft 3.3.5a",
+                "webtorrent": "Torrent (Magnet Link)",
+                "chromieCraft": "ChromieCraft",
+                "title": "Passo 1"
+            },
+            "step2": {
+                "description": "Seleziona il download ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Selezionare ChromieCraft_3.3.5a.zip File",
+                "title": "Passo 2"
+            },
+            "step4": {
+                "description": "Inserisci il codice di accesso per procedere con l'installazione del gioco.",
+                "subtitle": "Codice di accesso",
+                "title": "Passo 4"
+            },
+            "title": "Istruzioni Mod",
+            "step3": {
+                "description": "Si prega di scegliere la cartella in cui World of Warcraft: Wrath of the Lich King (3.3.5a) deve essere installato.",
+                "subtitle": "Selezionare l'installazione Cartella",
+                "title": "Passo 3"
+            }
+        }
     }
 }

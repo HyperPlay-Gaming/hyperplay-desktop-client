@@ -30,14 +30,11 @@ jobs:
       - name: install libnss, libatk, libatk-bridge, libcups, libgtk-3
         run: sudo dnf install nss-tools atk-devel at-spi2-atk-devel cups-devel gtk3-devel -y
       - name: Checkout Repo
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
-          token: ${{ secrets.pat }}
+        uses: actions/checkout@v4
       - name: Setup NodeJS
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '20'
       - name: Reconfigure git to use HTTP authentication
         run: >
           git config --global url."https://github.com/".insteadOf
@@ -53,7 +50,7 @@ jobs:
       - name: Build artifacts.
         run: yarn dist:linux:ci:flatpak
       - name: Clean up build files to save space
-        run: rm -rf build dist/linux-unpacked node_modules
+        run: rm -rf build dist/linux-unpacked node_modules public/bin/win32 public/bin/darwin ~/.cache
       - name: Install Axios
         run: yarn add axios
       - name: Prepare Flatpak

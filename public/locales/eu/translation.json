@@ -155,7 +155,8 @@
         "unsync": "Desinkronizatu",
         "continue": "Jarraitu",
         "download": "Deskargatu",
-        "update": "Eguneratu"
+        "update": "Eguneratu",
+        "install": "Ezarri"
     },
     "controller": {
         "hints": {
@@ -737,7 +738,11 @@
         },
         "points": "Puntuak",
         "signIn": "Saioa hasi",
-        "sync": "Sinkronizazioa"
+        "sync": "Sinkronizazioa",
+        "claimWarning": {
+            "cancel": "Cancel",
+            "confirm": "Berretsi"
+        }
     },
     "accounts": "Kontuak",
     "ALL": "DENA",
@@ -745,5 +750,8 @@
     "profile": "Profila",
     "sideload": {
         "warningTitle": "Garrantzitsua"
+    },
+    "import-game-folder": {
+        "placeholder": "Aukeratu inportatzeko joko karpeta"
     }
 }

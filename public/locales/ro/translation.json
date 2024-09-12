@@ -737,7 +737,11 @@
         },
         "points": "Puncte",
         "signIn": "Autentificare",
-        "sync": "Sincronizare"
+        "sync": "Sincronizare",
+        "claimWarning": {
+            "cancel": "Anulare",
+            "confirm": "Confirmă"
+        }
     },
     "gameRelease": {
         "beta": "Beta",
@@ -753,5 +757,8 @@
             "FAILED": "Traducere întreruptă."
         }
     },
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "placeholder": "Alege dosarul de joc pentru a importa"
+    }
 }

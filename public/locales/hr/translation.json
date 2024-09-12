@@ -155,7 +155,8 @@
         "unsync": "Desinkroniziraj",
         "continue": "Nastavi",
         "download": "Preuzmi",
-        "update": "Ažuriraj"
+        "update": "Ažuriraj",
+        "install": "Insraliraj"
     },
     "controller": {
         "hints": {
@@ -749,7 +750,11 @@
         },
         "points": "Točke",
         "signIn": "Prijavi se",
-        "sync": "Sinkronizacija"
+        "sync": "Sinkronizacija",
+        "claimWarning": {
+            "cancel": "Odustani",
+            "confirm": "Potvrdi"
+        }
     },
     "accounts": "Konta",
     "ALL": "SVE",
@@ -760,5 +765,8 @@
         "demo": "Demo",
         "main": "Glavni"
     },
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "placeholder": "Odaberi mapu igre za uvesti"
+    }
 }

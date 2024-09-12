@@ -56,6 +56,10 @@
             },
             "credentials": {
                 "message": "האישורים שלכם בתוכנה פגו, אנא התנתקו וכנסו שוב."
+            },
+            "delete-files": {
+                "body": "הסרת התיקיה (X32X). אנא הסר אותו באופן ידני.\n[x86x]\n(X117X)",
+                "title": "שגיאה הסרת תיקיות"
             }
         },
         "runexe": {
@@ -127,7 +131,9 @@
                 "message": "יש גרסה חדשה זמינה!",
                 "changelog": "פתח רשימת שינויים",
                 "detail": "אתם רוצים להוריד את האפדייט ברקע?",
-                "message-finished": "רוצים לפתוח מחדש את HyperPlay עכשיו?"
+                "message-finished": "רוצים לפתוח מחדש את HyperPlay עכשיו?",
+                "appUpdated": "HyperPlay עודכן",
+                "appUpdated-message": "HyperPlay עודכן. רוצים לעדכן ולהפעיל מחדש את HyperPlay עכשיו?"
             }
         },
         "ok": "בסדר",
@@ -180,7 +186,8 @@
         "download": "הורדה",
         "sync": "סנכרן",
         "syncing": "מסנכרן",
-        "unsync": "Unsync"
+        "unsync": "Unsync",
+        "install": "התקנה"
     },
     "controller": {
         "hints": {
@@ -942,7 +949,14 @@
         "claimFailedMessage": "נסה פעם נוספת. אם זה עדיין לא עובד, ליצור כרטיס תמיכה דיסקורד.",
         "notEnoughGas": "איזון ארנק חסר ערך כדי לטעון את הפרס שלך בגלל עמלות גז. נסה ארנק שונה או לחדש את זה לפני retrying.",
         "pointsClaimed": "נקודות תביעות",
-        "g7Numclaimed": "תגית: G7 Credits"
+        "g7Numclaimed": "תגית: G7 Credits",
+        "claimWarning": {
+            "title": "תגית: Quest Reward",
+            "body": "[x0X] חשוב: [x16x] אנא ודא כי אתה מבזבז מספיק גז ברשת X80X עבור העסקה כדי לקבל אישור מוצלח <bold>עם 24 שעות",
+            "body2": "אחרת, ה- Quest Reward (X28X) יפוג והוא כבר לא יטען",
+            "cancel": "בטל",
+            "confirm": "אישור"
+        }
     },
     "notification": {
         "wine-download": {
@@ -1008,7 +1022,8 @@
     },
     "importGameErrorMessage": "לא תיקיית משחק תקפה, משחק יבוא אינו אפשרי",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני."
+        "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני.",
+        "WALLET_DISCONNECTED": "אין לכם ארנק המחובר ל- HyperPlay."
     },
     "quests": {
         "playstreak": {
@@ -1037,5 +1052,67 @@
     "email_subscription": {
         "title": "תודה על תת-ביקורת!",
         "subtitle": "עכשיו אתה חלק מהקהילה שלנו, ואנחנו נרגשים לשתף עדכונים ותובנות חשובים איתך."
+    },
+    "import-game-folder": {
+        "error": "הייתה טעות במהלך היבוא. אנא ראו את יומני לפרטים נוספים.",
+        "label": "משחק Folder",
+        "placeholder": "בחר את תיקיית המשחק לייבוא",
+        "success": "משחקים מיובאים בהצלחה!",
+        "cta": "משחק Folder",
+        "dialog": {
+            "title": "משחק Folder ייבוא"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "title": "משחק בסיס מותקן",
+                "body": "שינוי יהיה מיושם על משחק בסיס"
+            },
+            "cancel": {
+                "body": "משחק בסיס בוטל",
+                "title": "ביטול החילוץ"
+            },
+            "installing": {
+                "body": "החלפת קבצים",
+                "title": "משחק בסיס"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "משחק בסיס File Location",
+                "placeholder": "תגית: Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "subtitle": "להורדה World of Warcraft 3.3.5a",
+                "title": "שלב 1",
+                "chromieCraft": "ChromieCraft",
+                "description": "משחק זה הוא שיטה עבור World of Warcraft: Wrath of the Lich King (3.3.5a). על מנת לשחק בשיטה זו, השחקנים חייבים להחזיק עותק של World of Warcraft 3.3.5a. [X156X] HyperPlay אינו מארח את World of Warcraft. שחקנים שבבעלותם World of Warcraft יכולים לקבל גרסה 3.3.5a ממקורות כגון:",
+                "webtorrent": "טורנט (Magnet Link)"
+            },
+            "step2": {
+                "title": "שלב 2",
+                "description": "בחר את ההורדה קובץ ChromieCraft_3.3.5a.zip.",
+                "subtitle": "בחר ChromieCraft_3.3.5a.zip File"
+            },
+            "step4": {
+                "subtitle": "קוד גישה",
+                "description": "הזן את קוד הגישה כדי להמשיך עם התקנת המשחק.",
+                "title": "שלב 4"
+            },
+            "step3": {
+                "description": "נא לבחור את התיקיה שבה יש להתקין את World of Warcraft: Wrath of the Lich King (3.3.5a).",
+                "subtitle": "התקנה Folder",
+                "title": "שלב 3"
+            },
+            "title": "הוראות"
+        }
+    },
+    "install": {
+        "path": "בחרו מיקום התקנה"
     }
 }

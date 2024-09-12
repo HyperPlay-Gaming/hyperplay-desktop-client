@@ -82,7 +82,11 @@
                 "title": "Ubisoft Connect",
                 "message": "تنصيب \"أوبيسوفت كونكت\" في المباراة فشلت تحقّق من صفحتنا في الموقع الشبكي التالي: https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/ How-to-install-Ubisoft-Connect-on-Linux-and-Mac to install it maunally."
             },
-            "moving": "Error Moving Game {{error}}"
+            "moving": "Error Moving Game {{error}}",
+            "delete-files": {
+                "body": "Error removing extracted folder {{path}}. من فضلك ازيله يدوياً\n{{paragraph}}\n{{error}}",
+                "title": "Error removing extracted folder"
+            }
         },
         "info": {
             "update": {
@@ -91,7 +95,9 @@
                 "message": "يتوفر إصدار جديد!",
                 "message-finished": "هل تريد إعادة تشغيل هِرُوِك الأن؟",
                 "title": "مشغل الألعاب هِرُوِك",
-                "title-finished": "انتهى التحديث"
+                "title-finished": "انتهى التحديث",
+                "appUpdated": "HyperPlay was updated",
+                "appUpdated-message": "تم تحديث هيبر بلاي هل تريد أن تستكمل وتعيد (هايبر بلاي) الآن؟?"
             }
         },
         "no": "لا",
@@ -183,7 +189,8 @@
         "unsync": "ألغ المزامنة",
         "continue": "مواصلة",
         "download": "تنزيل",
-        "update": "تحديث"
+        "update": "تحديث",
+        "install": "تثبيت"
     },
     "controller": {
         "hints": {
@@ -974,7 +981,14 @@
         "reputation": "السمعة",
         "points": "نقاط",
         "pointsClaimed": "النقاط المطالب بها",
-        "g7Numclaimed": "مجموع الأرصدة الدائنة من فئة الخدمات العامة"
+        "g7Numclaimed": "مجموع الأرصدة الدائنة من فئة الخدمات العامة",
+        "claimWarning": {
+            "body2": "وإلا، فإن الوصية <bold> ستنتهي ولن تعود قابلة للمطالبة.</bold>",
+            "title": "المطالبة بالتعويض",
+            "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>",
+            "confirm": "تأكيد",
+            "cancel": "إلغاء"
+        }
     },
     "notification": {
         "wine-download": {
@@ -1027,7 +1041,8 @@
     },
     "exit_game": "لعبة الخروج",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "أنت متصل بـ(هايبر بلاي) بمحفظة خارجية."
+        "EXTERNAL_WALLET_CONNECTED": "أنت متصل بـ(هايبر بلاي) بمحفظة خارجية.",
+        "WALLET_DISCONNECTED": "ليس لديك محفظة مرتبطة بـ(هايبر بلاي)."
     },
     "please-wait": "من فضلك انتظر.",
     "email_subscription": {
@@ -1039,5 +1054,64 @@
     "importGameErrorTitle": "رمز لعبة الاستيراد",
     "ALL": "كل",
     "analytics": "تحليل",
-    "profile": "الملف التعريفي"
+    "profile": "الملف التعريفي",
+    "import-game-folder": {
+        "dialog": {
+            "title": "\"لعبة مختارة\""
+        },
+        "cta": "Carth Game Folder",
+        "error": "كان هناك خطأ أثناء الاستيراد يرجى الاطلاع على السجلات لمزيد من التفاصيل.",
+        "label": "Carth Game Folder",
+        "placeholder": "اختر ملف اللعبة",
+        "success": "ألعاب مستوردة ناجحة!"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "استخراج لعبة القاعدة",
+                "title": "الالغاء"
+            },
+            "installed": {
+                "body": "(مود) سيطبق على لعبة القاعدة",
+                "title": "لعبة القاعدة"
+            },
+            "installing": {
+                "body": "Extracting base game files",
+                "title": "تركيب لعبة القاعدة"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "الموقع الشبكي للقاعدة",
+                "placeholder": "Select Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "هذه اللعبة هي شعار لعالم الحرف الحربي: غضب ملك ليك (3.3.5 أ). وبغية لعب هذا النموذج، يجب على اللاعبين أن يمتلكوا نسخة من World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay لا يستضيفون عالم الحرب. يمكن لللاعبين الذين يمتلكون عالم السحرة الحصول على النسخة 3.3.5 (أ) من مصادر مثل:",
+                "subtitle": "حمولة العالم",
+                "title": "الخطوة 1",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "step2": {
+                "description": "اختيار التنزيل ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Select ChromieCraft_3.3.5a.zip File",
+                "title": "الخطوة 2"
+            },
+            "step3": {
+                "description": "يُرجى اختيار الملف الذي ينبغي أن يُركَّز فيه عالم الحروف الحربية: غضب ملك الليتش (3.3.5 أ).",
+                "subtitle": "التركيب الحر Folder",
+                "title": "الخطوة 3"
+            },
+            "step4": {
+                "description": "أدخل رمز الدخول للبدء في تركيب اللعبة.",
+                "subtitle": "قانون الدخول",
+                "title": "الخطوة 4"
+            },
+            "title": "التعليمات الحديثة"
+        }
+    }
 }
