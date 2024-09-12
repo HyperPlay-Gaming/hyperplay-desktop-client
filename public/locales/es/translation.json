@@ -1061,9 +1061,9 @@
             "title": "Seleccionar carpeta de juego para importar"
         },
         "error": "Hubo un error durante la importación. Por favor, vea los registros para más detalles.",
-        "label": "Carpeta de juego de importación",
+        "label": "Importar carpeta de juegos",
         "placeholder": "Elija la carpeta del juego para importar",
-        "success": "Juegos importados con éxito!"
+        "success": "¡Juegos importados con éxito!"
     },
     "mod": {
         "baseGame": {
@@ -1072,17 +1072,17 @@
                 "title": "Cancelar la extracción"
             },
             "installed": {
-                "title": "Base Juego instalado",
+                "title": "Juego base instalado",
                 "body": "Mod se aplicará al juego base"
             },
             "installing": {
                 "body": "Extracting base juego archivos",
-                "title": "Instalación de base Juego"
+                "title": "Instalación del juego base"
             }
         },
         "instructions": {
             "zip": {
-                "path": "Seleccionar Base Juego de ubicación",
+                "path": "Seleccione la ubicación del archivo principal del juego",
                 "placeholder": "Seleccione el archivo Zip"
             }
         }
@@ -1104,14 +1104,14 @@
             "step3": {
                 "description": "Por favor seleccione la carpeta donde World of Warcraft: Wrath of the Lich King (3.3.5a) debe ser instalado.",
                 "subtitle": "Seleccione la instalación Folder",
-                "title": "Tercer paso"
+                "title": "Paso 3"
             },
             "step4": {
                 "description": "Introduzca el código de acceso para proceder con la instalación del juego.",
                 "subtitle": "Código de acceso",
                 "title": "Paso 4"
             },
-            "title": "Mod Instrucciones"
+            "title": "Instrucciones de modificación"
         }
     }
 }
