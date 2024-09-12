@@ -53,7 +53,10 @@
             "message": "这一Windows游戏将使用兼容层。 你可能会遇到一些问题,或者游戏可能根本不可行."
         },
         "dont-show-again": "不再显示",
-        "ok": "OK"
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "你们是否想取消摘取?"
+        }
     },
     "button": {
         "add_to_favourites": "添加到收藏",
@@ -250,6 +253,11 @@
             "extracting": "提取中...",
             "installing": "下载中...",
             "paused": "已暂停"
+        }
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "请联系超Play小组这一信息:{{error}}-{{context}}."
         }
     }
 }

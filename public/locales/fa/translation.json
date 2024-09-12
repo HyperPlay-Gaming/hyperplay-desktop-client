@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "title": "Ubisoft Connect",
                 "message": "نصب Ubisoft Connect در پیشوند بازی شکست خورده است. صفحه ویکی ما را در https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/ how-to-install-Ubisoft-Connect-on-on- Linux-and-Mac برای نصب آن بررسی کنید."
+            },
+            "delete-files": {
+                "body": "خطای حذف پوشه استخراج شده (X32X) لطفا آن را به صورت دستی حذف کنید.\n{{paragraph}}\n{{error}}",
+                "title": "خطای حذف پوشه استخراج شده"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "عدم همگام سازی",
         "continue": "ادامه",
         "download": "دانلود",
-        "update": "روزآمدسازی"
+        "update": "روزآمدسازی",
+        "install": "نصب"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     "importGameErrorMessageExecutable": "بازی Game غیر قابل حذف، بازی واردات امکان پذیر نیست",
     "importGameErrorTitle": "خطای بازی واردات",
     "analytics": "تحلیل‌ها",
-    "profile": "نمایه"
+    "profile": "نمایه",
+    "import-game-folder": {
+        "cta": "بازی Import Game Folder",
+        "dialog": {
+            "title": "انتخاب Game Folder برای واردات"
+        },
+        "placeholder": "پوشه بازی را برای واردات انتخاب کنید",
+        "error": "خطایی در هنگام واردات وجود داشت. لطفاً لاگ ها را برای جزئیات بیشتر ببینید.",
+        "label": "بازی Import Game Folder",
+        "success": "موفق ترین بازی های وارداتی!"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Mod برای پایه بازی استفاده خواهد شد",
+                "title": "بازی Base Game نصب شده"
+            },
+            "installing": {
+                "body": "استخراج فایل های بازی پایه",
+                "title": "نصب بازی Base Game"
+            },
+            "cancel": {
+                "body": "استخراج بازی Base بازی کنسل شد",
+                "title": "لغو استخراج"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "گزینه Base Game File Location",
+                "placeholder": "گزینه Zip File را انتخاب کنید"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "این بازی روشی برای World of Warcraft: Wrath of the Lich King (3.3.5a) است. برای بازی در این حالت، بازیکنان باید یک نسخه از World of Warcraft 3.3.5a داشته باشند. {{newline}} HyperPlay میزبان World of Warcraft نیست. بازیکنانی که دارای World of Warcraft هستند می توانند نسخه 3.3.5a را از منابعی مانند:",
+                "subtitle": "دانلود بازی World of Warcraft 33.5a",
+                "webtorrent": "تورنت (Magnet Link)",
+                "chromieCraft": "Chromiecraft",
+                "title": "گام ۱"
+            },
+            "step2": {
+                "description": "گزینه The Download را انتخاب کنید فایل Chromiecraft_3.3.5a.zip.",
+                "subtitle": "انتخاب Chromiecraft_3.3.5a.zip File File",
+                "title": "گام ۲"
+            },
+            "step3": {
+                "description": "لطفا پوشه ای را انتخاب کنید که World of Warcraft: Wrath of the Lich King (3.3.5a) باید نصب شود.",
+                "subtitle": "گزینه install Folder",
+                "title": "گام ۳"
+            },
+            "step4": {
+                "description": "کد دسترسی را وارد کنید تا با نصب بازی ادامه دهید.",
+                "subtitle": "کد دسترسی",
+                "title": "مرحله 4"
+            },
+            "title": "دستورالعمل های Mod"
+        }
+    }
 }

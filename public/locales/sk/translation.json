@@ -82,7 +82,11 @@
                 "title": "Ubisoft Connect",
                 "message": "Inštalácia Ubisoft Connect v hre predfix zlyhal. Pozrite sa na našu stránku wiki na https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, aby ho inštalovať maunally."
             },
-            "moving": "Chyba Pohybujúce sa hry {{error}}"
+            "moving": "Chyba Pohybujúce sa hry {{error}}",
+            "delete-files": {
+                "body": "Odstránenie chyby extrahované zložky {{path}}. Prosím, odstráňte ho manuálne.\n{{paragraph}}\n{{error}}",
+                "title": "Odstránenie chyby extrahované zložky"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +183,8 @@
         "unsync": "Unsync",
         "download": "Stiahnuť",
         "update": "Aktualizovať",
-        "continue": "Pokračovať"
+        "continue": "Pokračovať",
+        "install": "Inštalovať"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     },
     "profile": "Profil",
     "analytics": "Analýzy",
-    "ALL": "VŠE"
+    "ALL": "VŠE",
+    "import-game-folder": {
+        "success": "Úspešne importované hry!",
+        "dialog": {
+            "title": "Vyberte Game Folder Import"
+        },
+        "error": "Počas importu došlo k chybe. Viac informácií nájdete v logoch.",
+        "label": "Import Hra Folder",
+        "placeholder": "Vyberte si zložku hry na import",
+        "cta": "Import Hra Folder"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Základná hra extrakcia zrušené",
+                "title": "Zrušiť extrakciu"
+            },
+            "installed": {
+                "body": "Mod bude aplikovaná na základnú hru",
+                "title": "Základná hra Inštalovaná"
+            },
+            "installing": {
+                "body": "Extrahovanie základných herných súborov",
+                "title": "Inštalácia Base Hra"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Vyberte miesto Base Game",
+                "placeholder": "Vyberte Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Táto hra je mod pre svet Warcraft: hnev Lich King (3.3.5a). Aby hrať tento mod, hráči musia vlastniť kópiu World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nie je hostiteľom World of Warcraft. Hráči, ktorí vlastnia svet Warcraft môže získať verziu 3.3.5a z zdrojov, ako sú:",
+                "webtorrent": "Torrent (Magnet Link)",
+                "subtitle": "Stiahnuť svet Warcraft 3.3.5a",
+                "title": "Krok 1"
+            },
+            "step2": {
+                "subtitle": "Vyberte ChromieCraft_3.3.5a.zip Aktuality",
+                "description": "Vyberte stiahnutý ChromieCraft_3.3.5a.zip súbor.",
+                "title": "Krok 2"
+            },
+            "step3": {
+                "description": "Prosím vyberte priečinok, kde je svet Warcraft: hnev Lich King (3.3.5a) by mal byť inštalovaný.",
+                "subtitle": "Vyberte inštaláciu Folder",
+                "title": "Krok 3"
+            },
+            "step4": {
+                "description": "Zadajte prístupový kód pre pokračovanie s inštaláciou hry.",
+                "subtitle": "Prístupový kód",
+                "title": "Krok 4"
+            },
+            "title": "Modové inštrukcie"
+        }
+    }
 }

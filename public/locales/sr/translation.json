@@ -61,6 +61,10 @@
             },
             "legendary": {
                 "generic": "Дошло је до грешке! Покушајте да се одјавите и пријавите на свој Епиц налог. [Кс69Кс] [Кс82Кс]"
+            },
+            "delete-files": {
+                "body": "#Zabuna #brisati #vaditi @folder [@X32@X]. @Please #brisati #free @manually. \n                [@X86@X] \n                [@X117@X]",
+                "title": "#Zabuna #brisati #vaditi @folder"
             }
         },
         "quit": {
@@ -188,7 +192,8 @@
         "login": "Пријави се",
         "continue": "Настави",
         "download": "Преузми",
-        "update": "Ажурирај"
+        "update": "Ажурирај",
+        "install": "Поступак инсталирања"
     },
     "controller": {
         "hints": {
@@ -1055,5 +1060,64 @@
     },
     "profile": "Профил",
     "ALL": "СВЕ",
-    "analytics": "Рашчлањивања"
+    "analytics": "Рашчлањивања",
+    "import-game-folder": {
+        "success": "@Successfully #uvesti #igra#!",
+        "cta": "#Uvoz #Igra",
+        "dialog": {
+            "title": "@Select #Igra @Folder #na #Uvoz"
+        },
+        "error": "Tamo #biti @a #zabuna #tokom #uvoz. @Please #vidjeti @the #zapisnik @for više #detalj#.",
+        "label": "#Uvoz #Igra",
+        "placeholder": "#Birati @the #igra @folder #na #uvoz"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "#Baza #igra #ekstrakcija canceled",
+                "title": "#Ukidati"
+            },
+            "installed": {
+                "body": "Mod #volja #biti #važiti #na #baza #igra",
+                "title": "#Baza #Igra"
+            },
+            "installing": {
+                "body": "#Vaditi #baza #igra #kartoteka",
+                "title": "#Instaliranje #Baza"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "@Select #Baza #Igra #Dosje",
+                "placeholder": "@Select @Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "@This #igra @i @a mod @for #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a). @In order to #predstava @this mod, #igrač morati #sam @a #kopija @of #Svijet @of Warcraft 3.3.5@a. [@X155@X] [@X167@X] HyperPlay @do ne #domaćin #Svijet @of Warcraft. #Igrač @who #sam #Svijet @of Warcraft #limenka @obtain #inačica 3.3.5@a @from #izvor @like#:",
+                "subtitle": "#Preuzimanje #Svijet @of Warcraft 3.3.5@a",
+                "webtorrent": "#Bujica (@Magnet #Veza)",
+                "title": "Корак 1"
+            },
+            "step2": {
+                "description": "@Select @the @download ChromieCraft_3.3.5@a.@zip #dosje#.",
+                "subtitle": "@Select ChromieCraft_3.3.5@a.@zip #Dosje",
+                "title": "Корак 2"
+            },
+            "step3": {
+                "description": "@Please #birati @the @folder gdje #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a) trebati #biti @install#.",
+                "subtitle": "@Select #Instalacija",
+                "title": "#Čin #3."
+            },
+            "step4": {
+                "description": "#Ući @the #pristup #kôd #na @proceed #uz #instaliranje @the #igra#.",
+                "subtitle": "#Pristup",
+                "title": "#Čin #4."
+            },
+            "title": "Mod"
+        }
+    }
 }

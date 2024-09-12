@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "message": "La instalación de Ubisoft Connect en el prefijo del juego ha fallado. Consulta nuestra página wiki en https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para instalarlo manualmente.",
                 "title": "Ubisoft Connect"
+            },
+            "delete-files": {
+                "body": "Eliminar la carpeta extraída {{path}}. Por favor, retírelo manualmente.\n{{paragraph}}\n{{error}}",
+                "title": "Eliminación de errores carpeta extraída"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "Desincronizar",
         "download": "Descargar",
         "continue": "Continuar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "install": "Instalar"
     },
     "controller": {
         "hints": {
@@ -1048,6 +1053,65 @@
         "g7CreditsModal": {
             "description": "Sumérgete en los mejores juegos de HyperPlay con emocionantes Desafíos de Play Streak. Cada actividad le anima a participar con un juego diferente, mostrando lo mejor de los juegos web3. ¡Tu tiempo de juego importa!",
             "title": "Ganar Game7 Créditos"
+        }
+    },
+    "import-game-folder": {
+        "cta": "Carpeta de juego de importación",
+        "dialog": {
+            "title": "Seleccionar carpeta de juego para importar"
+        },
+        "error": "Hubo un error durante la importación. Por favor, vea los registros para más detalles.",
+        "label": "Carpeta de juego de importación",
+        "placeholder": "Elija la carpeta del juego para importar",
+        "success": "Juegos importados con éxito!"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Extracción del juego base cancelada",
+                "title": "Cancelar la extracción"
+            },
+            "installed": {
+                "title": "Base Juego instalado",
+                "body": "Mod se aplicará al juego base"
+            },
+            "installing": {
+                "body": "Extracting base juego archivos",
+                "title": "Instalación de base Juego"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Seleccionar Base Juego de ubicación",
+                "placeholder": "Seleccione el archivo Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Este juego es un mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para jugar este mod, los jugadores deben poseer una copia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay no alberga World of Warcraft. Los jugadores que poseen World of Warcraft pueden obtener la versión 3.3.5a de fuentes como:",
+                "webtorrent": "Torrent (Magnet Link)",
+                "subtitle": "Descargar World of Warcraft 3.3.5a",
+                "title": "Paso 1"
+            },
+            "step2": {
+                "description": "Seleccione la descarga ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Seleccione ChromieCraft_3.3.5a.zip Archivo",
+                "title": "Paso 2"
+            },
+            "step3": {
+                "description": "Por favor seleccione la carpeta donde World of Warcraft: Wrath of the Lich King (3.3.5a) debe ser instalado.",
+                "subtitle": "Seleccione la instalación Folder",
+                "title": "Tercer paso"
+            },
+            "step4": {
+                "description": "Introduzca el código de acceso para proceder con la instalación del juego.",
+                "subtitle": "Código de acceso",
+                "title": "Paso 4"
+            },
+            "title": "Mod Instrucciones"
         }
     }
 }

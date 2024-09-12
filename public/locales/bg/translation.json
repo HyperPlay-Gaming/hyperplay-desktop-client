@@ -155,7 +155,8 @@
         "unsync": "Десинхронизиране",
         "continue": "Продължаване",
         "download": "Изтегляне",
-        "update": "Актуализирай"
+        "update": "Актуализирай",
+        "install": "Инсталиране"
     },
     "controller": {
         "hints": {
@@ -758,5 +759,8 @@
         "beta": "Beta",
         "alpha": "Прозрачност"
     },
-    "profile": "Профил"
+    "profile": "Профил",
+    "import-game-folder": {
+        "placeholder": "Изберете папка с игри за внасяне"
+    }
 }

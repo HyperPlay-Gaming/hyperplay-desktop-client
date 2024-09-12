@@ -757,5 +757,8 @@
             "FAILED": "Traducere întreruptă."
         }
     },
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "placeholder": "Alege dosarul de joc pentru a importa"
+    }
 }

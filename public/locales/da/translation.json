@@ -76,6 +76,10 @@
             "moving": "Fejl Flyttespil {{error}}",
             "generic": {
                 "title": "Vælg EXE til at køre"
+            },
+            "delete-files": {
+                "title": "Fejl ved fjernelse af udpakket mappe",
+                "body": "Fejl ved fjernelse af ekstra mappe {{path}}. Fjern det manuelt.\n{{paragraph}}\n{{error}}"
             }
         },
         "info": {
@@ -227,7 +231,8 @@
         "cancel": "Afbestille",
         "download": "Hent",
         "update": "Opdater",
-        "continue": "Fortsæt"
+        "continue": "Fortsæt",
+        "install": "Installér"
     },
     "help": {
         "esync": "Esync sigter mod at reducere vinserveroverhead i CPU-intensive spil. Aktivering kan forbedre ydeevnen.",
@@ -1088,5 +1093,64 @@
     },
     "profile": "Profil",
     "ALL": "ALLE",
-    "analytics": "Analyser"
+    "analytics": "Analyser",
+    "import-game-folder": {
+        "cta": "Import af spilmappe",
+        "dialog": {
+            "title": "Vælg Game Folder til Import"
+        },
+        "error": "Der var en fejl under import. Se logerne for flere detaljer.",
+        "label": "Import af spilmappe",
+        "placeholder": "Vælg spilmappen for at importere",
+        "success": "Vi importerede spil!"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Base spiludvinding annulleret",
+                "title": "Annuller udsugning"
+            },
+            "installed": {
+                "body": "Mod vil blive anvendt til base spil",
+                "title": "Base Game Installeret"
+            },
+            "installing": {
+                "body": "Uddrag af base spil filer",
+                "title": "Installation af Base Game"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Vælg Base Game File Location",
+                "placeholder": "Vælg Zip-fil"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Dette spil er en mod for Warcraft: Wrath af Lich King (3.3.5a). For at spille denne mod skal spillere eje en kopi af Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ikke vært for Warcraft. Spillere, der ejer Warcraft kan få version 3.3.5a fra kilder som:",
+                "subtitle": "Download World of Warcraft 3.3.5a",
+                "title": "Trin 1",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "step2": {
+                "description": "Vælg den downloadede ChromieCraft_3.3.5a.zip-fil.",
+                "subtitle": "Vælg ChromieCraft_3.3.5a.zip Filen fil",
+                "title": "Trin 2"
+            },
+            "step3": {
+                "description": "Vælg mappen, hvor Warcraft: Wrath of te Lich King (3.3.5a) skal installeres.",
+                "subtitle": "Vælg Installation Mappemappe",
+                "title": "Trin 3"
+            },
+            "step4": {
+                "subtitle": "Adgangskode",
+                "title": "Trin 4",
+                "description": "Indtast adgangskoden for at fortsætte med at installere spillet."
+            },
+            "title": "Mod Instruktioner"
+        }
+    }
 }

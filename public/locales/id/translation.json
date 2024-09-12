@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "message": "Instalasi Ubisoft Connect di awal pertandingan gagal. Periksa halaman wiki kami di https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac untuk menginstalnya secara maunally.",
                 "title": "Login"
+            },
+            "delete-files": {
+                "body": "Kesalahan menghapus folder yang diekstrak {{path}}. Silakan hapus secara manual.\n{{paragraph}}\n{{error}}",
+                "title": "Kesalahan menghapus folder yang diekstrak"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "Batalkan sinkronisasi",
         "continue": "Lanjutkan",
         "update": "Perbarui",
-        "download": "Unduh"
+        "download": "Unduh",
+        "install": "Instal"
     },
     "controller": {
         "hints": {
@@ -1035,5 +1040,64 @@
         "subtitle": "Anda sekarang menjadi bagian dari komunitas kami, dan kami sangat senang untuk berbagi pembaruan dan wawasan berharga dengan Anda."
     },
     "importGameErrorTitle": "Kesalahan Permainan Impor",
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "success": "Game yang benar-benar diimpor!",
+        "cta": "Folder Game Impor",
+        "dialog": {
+            "title": "Pilih Folder Game untuk Impor"
+        },
+        "error": "Ada kesalahan selama impor. Silakan lihat log untuk rincian lebih lanjut.",
+        "label": "Folder Game Impor",
+        "placeholder": "Pilih folder game untuk mengimpor"
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "path": "Pilih Lokasi File Game Basis",
+                "placeholder": "Pilih File Zip"
+            }
+        },
+        "baseGame": {
+            "cancel": {
+                "body": "Ekstraksi permainan dasar dibatalkan",
+                "title": "Batalkan Ekstraksi"
+            },
+            "installed": {
+                "body": "Mod akan diterapkan untuk permainan dasar",
+                "title": "Permainan Basis Dipasang"
+            },
+            "installing": {
+                "body": "Mengekstrak file permainan dasar",
+                "title": "Menginstal Game Basis"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "webtorrent": "Sitemap",
+                "chromieCraft": "Login",
+                "description": "Game ini adalah mod untuk World of Warcraft: Wrath of the Lich King (3.3.5a). Untuk bermain mod ini, pemain harus memiliki salinan World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay tidak tuan rumah World of Warcraft. Pemain yang memiliki World of Warcraft dapat memperoleh versi 3.3.5a dari sumber seperti:",
+                "subtitle": "Unduh World of Warcraft 3.3.5a",
+                "title": "Langkah 1"
+            },
+            "step2": {
+                "description": "Pilih download ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "KromieCraft_3.3.5a.zip Login",
+                "title": "Langkah 2"
+            },
+            "step3": {
+                "subtitle": "Pilih Instalasi Login",
+                "title": "Langkah 3",
+                "description": "Silahkan pilih folder di mana World of Warcraft: Wrath of the Lich King (3.3.5a) harus dipasang."
+            },
+            "step4": {
+                "description": "Masukkan kode akses untuk melanjutkan dengan menginstal permainan.",
+                "subtitle": "Kode Akses",
+                "title": "Langkah 4"
+            },
+            "title": "Instruksi Mod"
+        }
+    }
 }

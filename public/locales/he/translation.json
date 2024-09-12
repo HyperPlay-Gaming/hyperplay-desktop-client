@@ -56,6 +56,10 @@
             },
             "credentials": {
                 "message": "האישורים שלכם בתוכנה פגו, אנא התנתקו וכנסו שוב."
+            },
+            "delete-files": {
+                "body": "הסרת התיקיה (X32X). אנא הסר אותו באופן ידני.\n[x86x]\n(X117X)",
+                "title": "שגיאה הסרת תיקיות"
             }
         },
         "runexe": {
@@ -182,7 +186,8 @@
         "download": "הורדה",
         "sync": "סנכרן",
         "syncing": "מסנכרן",
-        "unsync": "Unsync"
+        "unsync": "Unsync",
+        "install": "התקנה"
     },
     "controller": {
         "hints": {
@@ -1047,5 +1052,67 @@
     "email_subscription": {
         "title": "תודה על תת-ביקורת!",
         "subtitle": "עכשיו אתה חלק מהקהילה שלנו, ואנחנו נרגשים לשתף עדכונים ותובנות חשובים איתך."
+    },
+    "import-game-folder": {
+        "error": "הייתה טעות במהלך היבוא. אנא ראו את יומני לפרטים נוספים.",
+        "label": "משחק Folder",
+        "placeholder": "בחר את תיקיית המשחק לייבוא",
+        "success": "משחקים מיובאים בהצלחה!",
+        "cta": "משחק Folder",
+        "dialog": {
+            "title": "משחק Folder ייבוא"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "title": "משחק בסיס מותקן",
+                "body": "שינוי יהיה מיושם על משחק בסיס"
+            },
+            "cancel": {
+                "body": "משחק בסיס בוטל",
+                "title": "ביטול החילוץ"
+            },
+            "installing": {
+                "body": "החלפת קבצים",
+                "title": "משחק בסיס"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "משחק בסיס File Location",
+                "placeholder": "תגית: Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "subtitle": "להורדה World of Warcraft 3.3.5a",
+                "title": "שלב 1",
+                "chromieCraft": "ChromieCraft",
+                "description": "משחק זה הוא שיטה עבור World of Warcraft: Wrath of the Lich King (3.3.5a). על מנת לשחק בשיטה זו, השחקנים חייבים להחזיק עותק של World of Warcraft 3.3.5a. [X156X] HyperPlay אינו מארח את World of Warcraft. שחקנים שבבעלותם World of Warcraft יכולים לקבל גרסה 3.3.5a ממקורות כגון:",
+                "webtorrent": "טורנט (Magnet Link)"
+            },
+            "step2": {
+                "title": "שלב 2",
+                "description": "בחר את ההורדה קובץ ChromieCraft_3.3.5a.zip.",
+                "subtitle": "בחר ChromieCraft_3.3.5a.zip File"
+            },
+            "step4": {
+                "subtitle": "קוד גישה",
+                "description": "הזן את קוד הגישה כדי להמשיך עם התקנת המשחק.",
+                "title": "שלב 4"
+            },
+            "step3": {
+                "description": "נא לבחור את התיקיה שבה יש להתקין את World of Warcraft: Wrath of the Lich King (3.3.5a).",
+                "subtitle": "התקנה Folder",
+                "title": "שלב 3"
+            },
+            "title": "הוראות"
+        }
+    },
+    "install": {
+        "path": "בחרו מיקום התקנה"
     }
 }

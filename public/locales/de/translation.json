@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "message": "Installation von Ubisoft Connect im Spiel-Präfix gescheitert. Überprüfen Sie unsere Wiki-Seite unter https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, um sie maunally zu installieren.",
                 "title": "Ubisoft Connect"
+            },
+            "delete-files": {
+                "body": "Fehler entfernen extrahierter Ordner {{path}}. Bitte entfernen Sie es manuell.\n(X86X)\n(X117X)",
+                "title": "Entfernen des extrahierten Ordners"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "Nicht mehr synchronisieren",
         "update": "Aktualisieren",
         "continue": "Fortfahren",
-        "download": "Herunterladen"
+        "download": "Herunterladen",
+        "install": "Installieren"
     },
     "controller": {
         "hints": {
@@ -1035,5 +1040,64 @@
     "exit_game": "Exit Spiel",
     "profile": "Profil",
     "ALL": "ALLE",
-    "analytics": "Analytik"
+    "analytics": "Analytik",
+    "import-game-folder": {
+        "label": "Import Spiel Folder",
+        "placeholder": "Wählen Sie den Spielordner zum Import",
+        "success": "Erfolgreich importierte Spiele!",
+        "cta": "Import Spiel Folder",
+        "dialog": {
+            "title": "Wählen Sie Game Folder zum Import"
+        },
+        "error": "Beim Import gab es einen Fehler. Weitere Details finden Sie in den Logs."
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Mod wird auf Basis-Spiel angewendet",
+                "title": "Basis-Spiel installiert"
+            },
+            "installing": {
+                "body": "Extrahieren von Basis-Spieldateien",
+                "title": "Installieren von Basis-Spiel"
+            },
+            "cancel": {
+                "body": "Basis-Spiel Extraktion abgebrochen",
+                "title": "Auszug abbrechen"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "placeholder": "Wählen Sie Zip-Datei",
+                "path": "Wählen Sie Base Game File Standort"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "Chromatographie",
+                "description": "Dieses Spiel ist ein Mod für World of Warcraft: Zorn des Lich King (3.3.5a). Um diese Mod zu spielen, müssen die Spieler eine Kopie von World of Warcraft 3.3.5a besitzen. {{newline}} {{newline}} HyperPlay beherbergt nicht World of Warcraft. Spieler, die World of Warcraft besitzen, können Version 3.3.5a aus Quellen wie:",
+                "subtitle": "World of Warcraft 3.3.5a herunterladen",
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Schritt 1"
+            },
+            "step2": {
+                "subtitle": "Wählen Sie ChromieCraft_3.3.5a.zip Datei",
+                "description": "Wählen Sie den Download aus ChromieCraft_3.3.5a.zip Datei.",
+                "title": "Schritt 2"
+            },
+            "step3": {
+                "description": "Bitte wählen Sie den Ordner, in dem World of Warcraft: Zorn des Lich-Königs (3.3.5a) installiert werden sollte.",
+                "subtitle": "Installation auswählen Ordner",
+                "title": "Schritt 3"
+            },
+            "title": "Anleitung",
+            "step4": {
+                "description": "Geben Sie den Zugangscode ein, um das Spiel zu installieren.",
+                "subtitle": "Zugriffscode",
+                "title": "Schritt 4"
+            }
+        }
+    }
 }

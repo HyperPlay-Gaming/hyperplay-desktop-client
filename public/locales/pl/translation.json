@@ -82,7 +82,11 @@
                 "title": "Ubisoft Connect",
                 "message": "Instalacja Ubisoft Connect w prefiksie gry nie powiodła się. Check naszą stronę internetową na stronie https:/github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, aby instalować ją w sposób matematyczny."
             },
-            "moving": "Error Moving Game (ang.)"
+            "moving": "Error Moving Game (ang.)",
+            "delete-files": {
+                "title": "Error usuwanie folderu",
+                "body": "Error usuwający folder (X32X). Zdejmuje go ręcznie.\n(X86X) (ang.).\n(X117X) (ang.)"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +183,8 @@
         "unsync": "Desynchronizuj",
         "update": "Aktualizuj",
         "continue": "Kontynuuj",
-        "download": "Pobieranie"
+        "download": "Pobieranie",
+        "install": "Zainstaluj"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     "email_subscription": {
         "title": "Dziękuję za podpisanie!",
         "subtitle": "Teraz jesteśmy częścią naszej społeczności i jesteśmy podekscytowani do podzielenia wartościowych aktualizacji i wglądu z nami."
+    },
+    "import-game-folder": {
+        "dialog": {
+            "title": "Wybrana gra na stronie Import"
+        },
+        "label": "Oficjalna strona Game Fold",
+        "placeholder": "Choose the game folder by importować",
+        "success": "Sukcesywnie importowane gry!",
+        "cta": "Oficjalna strona Game Fold",
+        "error": "W czasie importu nastąpił błąd. Wygląda na więcej szczegółów."
+    },
+    "mod": {
+        "baseGame": {
+            "installing": {
+                "title": "Installing Base Game (ang.)",
+                "body": "Okładka"
+            },
+            "cancel": {
+                "body": "Ekstrakcja gier komputerowych anulowana",
+                "title": "Cancel Extraction"
+            },
+            "installed": {
+                "body": "Modu zostanie zastosowany do gry bazowej",
+                "title": "Base Game Install (ang.)"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Strona internetowa File Location",
+                "placeholder": "Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Gra jest modem dla World of Warcraft: Wrath of the Lich King (3,3.5a). Gracze muszą posiadać kopię World of Warcraft 3,3.5a. X155X X167X HyperPlay nie host World of Warcraft. Gracze, którzy posiadają World of Warcraft, mogą uzyskać wersję 3.3,5a",
+                "subtitle": "Download World Warcraft 3,3.5a (ang.)",
+                "webtorrent": "Magnet Link (ang.)",
+                "title": "Krok 1"
+            },
+            "step2": {
+                "description": "Selected ściągnięty do pobrania. ChromieCraft_3.3.5a.zip (ang.).",
+                "subtitle": "ChromieCraft_3.3.5a (ang.). File",
+                "title": "Krok 2"
+            },
+            "step3": {
+                "description": "Proszę wybrać folder, w którym powinien zostać zainstalowany świat Warcraft: Wrath of the Lich King (3,5a).",
+                "subtitle": "Instalacja Folder",
+                "title": "Krok 3"
+            },
+            "step4": {
+                "description": "Wejście do kodu dostępu do gry, aby zainstalować grę.",
+                "subtitle": "Data dostępu",
+                "title": "Step 4"
+            },
+            "title": "Mod Instrukcje"
+        }
     }
 }

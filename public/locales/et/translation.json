@@ -747,5 +747,8 @@
     "sideload": {
         "warningTitle": "Oluline"
     },
-    "profile": "Profiil"
+    "profile": "Profiil",
+    "import-game-folder": {
+        "placeholder": "Valige imporditav mängude kaust"
+    }
 }

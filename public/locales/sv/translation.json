@@ -82,7 +82,11 @@
                 "title": "Ubisoft Connect",
                 "message": "Installation av Ubisoft Connect i spelprefixet misslyckades. Kontrollera vår wiki sida på https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac för att installera den maunally."
             },
-            "moving": "Fel flytta spel {{error}}"
+            "moving": "Fel flytta spel {{error}}",
+            "delete-files": {
+                "body": "Fel ta bort extraherad mapp {{path}}. Ta bort den manuellt.\n{{paragraph}}\n{{error}}",
+                "title": "Fel ta bort extraherad mapp"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +183,8 @@
         "unsync": "Avbryt synkronisering",
         "continue": "Fortsätt",
         "download": "Hämta",
-        "update": "Uppdatera"
+        "update": "Uppdatera",
+        "install": "Installera"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
         "warningTitle": "Viktigt"
     },
     "back_to_game": "Tillbaka till spelet",
-    "importGameErrorTitle": "Importera spelfel"
+    "importGameErrorTitle": "Importera spelfel",
+    "import-game-folder": {
+        "placeholder": "Välj spelmappen för import",
+        "success": "Framgångsrikt importerade spel!",
+        "cta": "Importera Game Folder",
+        "dialog": {
+            "title": "Välj Game Folder för att importera"
+        },
+        "error": "Det fanns ett fel under importen. Se loggar för mer information.",
+        "label": "Importera Game Folder"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Mod kommer att tillämpas på basspel",
+                "title": "Basspel installerat"
+            },
+            "cancel": {
+                "body": "Base game extraction avbryts",
+                "title": "Avbryt extraktion"
+            },
+            "installing": {
+                "body": "Extrahera basspelfiler",
+                "title": "Installera Base Game"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Välj Base Game File Plats",
+                "placeholder": "Välj Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Detta spel är en mod för World of Warcraft: Wrath of the Lich King (3.3.5a). För att spela denna mod måste spelarna äga en kopia av World of Warcraft 3.3.5a. {{newline}} HyperPlay är inte värd för World of Warcraft. Spelare som äger World of Warcraft kan få version 3.3.5a från källor som:",
+                "subtitle": "Ladda ner World of Warcraft 3.3.5a",
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Steg 1"
+            },
+            "step2": {
+                "description": "Välj den nedladdade ChromieCraft_3.3.5a.zip-fil.",
+                "subtitle": "Välj ChromieCraft_3.3.5a.zip Fil",
+                "title": "Steg 2"
+            },
+            "step3": {
+                "description": "Vänligen välj mappen där World of Warcraft: Wrath of the Lich King (3.3.5a) ska installeras.",
+                "subtitle": "Välj Installation Mamma",
+                "title": "Steg 3"
+            },
+            "step4": {
+                "description": "Ange åtkomstkoden för att fortsätta med att installera spelet.",
+                "subtitle": "Access Code",
+                "title": "Steg 4"
+            },
+            "title": "Mod Instruktioner"
+        }
+    }
 }

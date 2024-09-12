@@ -53,7 +53,10 @@
             "message": "Ce jeu Windows va fonctionner avec une couche de compatibilité. Vous pourriez rencontrer quelques problèmes ou le jeu pourrait ne pas fonctionner du tout."
         },
         "dont-show-again": "Ne plus afficher",
-        "ok": "D'accord"
+        "ok": "D'accord",
+        "stopExtraction": {
+            "title": "Vous voulez annuler l'extraction ?"
+        }
     },
     "button": {
         "add_to_favourites": "Ajouter aux favoris",
@@ -238,5 +241,10 @@
         "store": "Page du magasin",
         "verify": "Vérifier et réparer",
         "extraInfo": "Infos supplémentaires"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Veuillez contacter l'équipe HyperPlay avec ce message : {{error}} - {{context}}."
+        }
     }
 }

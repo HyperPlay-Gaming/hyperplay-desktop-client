@@ -155,7 +155,8 @@
         "unsync": "ஒத்திசைவை செயல்தவிர்",
         "update": "புதுப்பிப்பு",
         "continue": "தொடரவும்",
-        "download": "பதிவிறக்கம்"
+        "download": "பதிவிறக்கம்",
+        "install": "நிறுவு"
     },
     "controller": {
         "hints": {
@@ -750,5 +751,18 @@
         }
     },
     "accounts": "கணக்கு",
-    "profile": "சுயவிவரம்"
+    "profile": "சுயவிவரம்",
+    "import-game-folder": {
+        "placeholder": "இறக்குமதி செய்ய விளையாட்டு கோப்புறையை தேர்வுசெய்க"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "title": "படி 1"
+            },
+            "step2": {
+                "title": "படி 2"
+            }
+        }
+    }
 }

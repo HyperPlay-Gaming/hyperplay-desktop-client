@@ -82,7 +82,11 @@
                 "title": "Rita Connect",
                 "message": "Oyunun prefix'teki Jedi Connect'in kurulumu başarısız oldu. wiki sayfasını https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac'de kontrol edin."
             },
-            "moving": "Hata Hareketli Oyun {{error}}"
+            "moving": "Hata Hareketli Oyun {{error}}",
+            "delete-files": {
+                "body": "Hata kaldırılmış klasörü {{path}}. Lütfen manuel olarak kaldırın.\n{{paragraph}}\n{{error}}",
+                "title": "Hata kaldırıldı klasör"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +183,8 @@
         "unsync": "Eşzamanlamayı kaldır",
         "download": "İndir",
         "continue": "Devam",
-        "update": "Güncelle"
+        "update": "Güncelle",
+        "install": "Kur"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     "email_subscription": {
         "title": "Alt tarif için teşekkür ederiz!",
         "subtitle": "Artık topluluğumuzun bir parçasısınız ve sizinle değerli güncellemeler ve öngörüleri paylaşmak heyecanlıyız."
+    },
+    "import-game-folder": {
+        "cta": "Import Game Folder",
+        "dialog": {
+            "title": "Oyun Folder'ı İthalat için seçin"
+        },
+        "error": "İthalat sırasında bir hata vardı. Lütfen daha fazla ayrıntı için logları görün.",
+        "label": "Import Game Folder",
+        "placeholder": "Ithal etmek için oyun klasörü seçin",
+        "success": "Başarılı olarak ithal edilen oyunlar!"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Mod, temel oyuna uygulanacak",
+                "title": "Base Game yüklendi"
+            },
+            "installing": {
+                "body": "Özgün oyun dosyaları",
+                "title": "Base Game"
+            },
+            "cancel": {
+                "body": "Base oyun ekstraksiyonu iptal edildi",
+                "title": "Cancel Ekstraksiyon"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "placeholder": "Zip File",
+                "path": "Base Game File Konum"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "KromieCraft",
+                "description": "Bu oyun World of Warcraft için bir mod: Lich King (.3.5a) Wrath. Bu mod oynamak için, oyuncular World of Warcraft 3.3.5a'nın bir kopyasını sahibi olmalıdır. {{newline}} {{newline}} HyperPlay, World of Warcraft'ı barındırmaz. World of Warcraft'a sahip oyuncular, 33.5a'yı gibi kaynaklardan elde edebilir:",
+                "subtitle": "World of Warcraft 33.5a",
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "1. adım"
+            },
+            "step2": {
+                "description": "İndirilenleri seçin KromieCraft_3.3.5a.zip dosyası.",
+                "subtitle": "ChromieCraft_3.3.5a.zip Dosya",
+                "title": "2. adım"
+            },
+            "step3": {
+                "description": "Lütfen World of Warcraft'ın nerede yer aldığı klasörü seçin: Lich King'in Wrath of the Lich King (3.3.5a) yüklenmesi gerekir.",
+                "subtitle": "Uygulamayı seçin Folder",
+                "title": "3. adım"
+            },
+            "step4": {
+                "description": "Oyun yükleme ile devam etmek için erişim kodu girin.",
+                "subtitle": "Access Code",
+                "title": "Adım 4"
+            },
+            "title": "Mod Talimatlar"
+        }
     }
 }

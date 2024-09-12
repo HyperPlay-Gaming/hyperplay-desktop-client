@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "title": "UbisoftLink",
                 "message": "在游戏前安装UbisoftLink的工作失败。 在https://github.com/Heroic-Games-Launcher/HeroicGames Launcher/wiki/How-to-install-Ubisoft-Connect-on-HCHand-Mac安装."
+            },
+            "delete-files": {
+                "body": "{{path}} 请人工删除。\n{{paragraph}}\n{{error}}",
+                "title": "删除摘取的夹"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "不同步",
         "continue": "繼續",
         "download": "下載",
-        "update": "更新"
+        "update": "更新",
+        "install": "安裝"
     },
     "controller": {
         "hints": {
@@ -1038,5 +1043,64 @@
     },
     "back_to_game": "重获游戏",
     "importGameErrorTitle": "进口游戏",
-    "importGameErrorMessage": "进口游戏不是有效的游戏夹,不可能"
+    "importGameErrorMessage": "进口游戏不是有效的游戏夹,不可能",
+    "import-game-folder": {
+        "placeholder": "选择进口的游戏夹",
+        "success": "成功进口的游戏!",
+        "cta": "进口猎物",
+        "dialog": {
+            "title": "选择性游戏 Folder to Import"
+        },
+        "error": "进口期间有错误。 详情请见记录.",
+        "label": "进口猎物"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "取消的基层游戏",
+                "title": "Cancel Extraction"
+            },
+            "installed": {
+                "body": "修改适用于基础游戏",
+                "title": "地下室"
+            },
+            "installing": {
+                "body": "摘取基本游戏档案",
+                "title": "藏匿基地"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "选择性基地博爱",
+                "placeholder": "选择Zip 文件"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "这一游戏是为战火世界所 mo的:利奇国王的Wrath(3.3.5a)。 为了发挥这一作用,参与者必须拥有一份3.3.5a.{{newline}}{{newline}}超Play的《世界战舰》副本。 拥有战舰的运动员可以从下列来源获得3.3.5a版本:",
+                "subtitle": "3.3.5a",
+                "webtorrent": "Torrent(Magnet Link)",
+                "chromieCraft": "ChromieCraft",
+                "title": "第 1 步"
+            },
+            "step2": {
+                "description": "选择下载 ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Selected ChromieCraft_3.3.5a.zip 文件",
+                "title": "第 2 步"
+            },
+            "step3": {
+                "description": "请选择安装世界军舰的夹:Lch King的Wrath(3.3.5a).",
+                "subtitle": "选 举 Folder",
+                "title": "第3步"
+            },
+            "step4": {
+                "description": "加入进入法,着手安装游戏.",
+                "subtitle": "准入法",
+                "title": "步骤4"
+            },
+            "title": "修改指示"
+        }
+    }
 }

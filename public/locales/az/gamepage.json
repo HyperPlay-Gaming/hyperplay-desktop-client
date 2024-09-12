@@ -54,7 +54,10 @@
             "message": "Bu Windows oyun uyğunluq kağızı istifadə edəcək. Siz sənaye və ya oyun bütün işləyə bilər."
         },
         "dont-show-again": "Bir daha göstərmə",
-        "ok": "tamam"
+        "ok": "tamam",
+        "stopExtraction": {
+            "title": "Ekstraksiyanı qarşılamaq istəyirsiniz?"
+        }
     },
     "button": {
         "add_to_favourites": "Sevimlilərə əlavə edin",
@@ -239,5 +242,10 @@
         "store": "Mağaza Səhifəsi",
         "verify": "Doğrulayın və Təmir edin",
         "extraInfo": "Qeydiyyat"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Bu mesajla HiperPlay Team əlaqə edin: {{error}} - {{context}}."
+        }
     }
 }
