@@ -11,7 +11,6 @@ import {
   faForward,
   faRefresh
 } from '@fortawesome/free-solid-svg-icons'
-import cn from 'classnames'
 
 interface WebviewControlsProps {
   webview: WebviewTag | null
@@ -96,7 +95,7 @@ export default function WebviewControls({
   if (_url && allowList.includes(_url.host)) return null
 
   return (
-    <div className={cn('WebviewControls', classNames?.root)}>
+    <div className={cx('WebviewControls', classNames?.root)}>
       <div className="WebviewControls__icons">
         <SvgButton
           className="WebviewControls__icon"
