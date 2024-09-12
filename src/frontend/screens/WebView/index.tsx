@@ -30,6 +30,7 @@ import {
 import { METAMASK_SNAPS_URL } from 'common/constants'
 import storeAuthState from 'frontend/state/storeAuthState'
 import { getGameInfo } from 'frontend/helpers'
+import cn from 'classnames'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
@@ -40,7 +41,11 @@ function shouldInjectProvider(url: string) {
   return url === METAMASK_SNAPS_URL
 }
 
-function WebView() {
+function WebView({
+  classNames
+}: {
+  classNames?: { root?: string; webview?: string; webviewControls?: string }
+}) {
   const { i18n } = useTranslation()
   const { pathname, search } = useLocation()
   const { t } = useTranslation()
@@ -269,18 +274,19 @@ function WebView() {
     partitionForWebview = 'persist:InPageWindowEthereumExternalWallet'
 
   return (
-    <div className="WebView">
+    <div className={cn('WebView', classNames?.root)}>
       {webviewRef.current && (
         <WebviewControls
           webview={webviewRef.current}
           initURL={startUrl}
           openInBrowser={!startUrl.startsWith('login')}
+          classNames={{ root: classNames?.webviewControls }}
         />
       )}
       {loading.refresh && <UpdateComponent message={loading.message} />}
       <webview
         ref={webviewRef}
-        className="WebView__webview"
+        className={cn('WebView__webview', classNames?.webview)}
         partition={partitionForWebview}
         src={startUrl}
         allowpopups={trueAsStr}
