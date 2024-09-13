@@ -139,7 +139,6 @@ async function installQueueElement(params: InstallParams): Promise<{
 
     return { status }
   } catch (error) {
-    trackFailedInstall(`${error}`)
     errorMessage(`${error}`)
     return { status: 'error' }
   } finally {
