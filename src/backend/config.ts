@@ -140,19 +140,13 @@ abstract class GlobalConfig {
     }
 
     const getGPTKWine = await getGamingPortingToolkitWine()
-    const getSystemGPTK = await getSystemGamingPortingToolkitWine()
     const crossover = await getCrossover()
     const wineOnMac = await getWineOnMac()
-    const wineskinWine = await getWineskinWine()
-    const whiskyWine = await getWhisky()
 
     return new Set([
       ...getGPTKWine,
-      ...getSystemGPTK,
       ...crossover,
       ...wineOnMac,
-      ...wineskinWine,
-      ...whiskyWine
     ])
   }
 

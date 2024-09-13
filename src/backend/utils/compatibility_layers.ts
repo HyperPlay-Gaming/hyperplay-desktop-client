@@ -239,7 +239,9 @@ export async function getLinuxWineSet(
  *
  * @returns Promise<Set<WineInstallation>>
  */
-export async function getWineOnMac(): Promise<Set<WineInstallation>> {
+export async function getWineOnMac(
+  searchSystem = false
+): Promise<Set<WineInstallation>> {
   const wineSet = new Set<WineInstallation>()
   if (!isMac) {
     return wineSet
@@ -256,16 +258,18 @@ export async function getWineOnMac(): Promise<Set<WineInstallation>> {
   }
 
   // search for wine installed around the system
-  await execAsync('mdfind kMDItemCFBundleIdentifier = "*.wine"').then(
-    async ({ stdout }) => {
-      stdout.split('\n').forEach((winePath) => {
-        // avoid duplicating toolkit wine
-        if (!winePath.includes('game-porting-toolkit')) {
-          winePaths.add(winePath)
-        }
-      })
-    }
-  )
+  if (searchSystem) {
+    await execAsync('mdfind kMDItemCFBundleIdentifier = "*.wine"').then(
+      async ({ stdout }) => {
+        stdout.split('\n').forEach((winePath) => {
+          // avoid duplicating toolkit wine
+          if (!winePath.includes('game-porting-toolkit')) {
+            winePaths.add(winePath)
+          }
+        })
+      }
+    )
+  }
 
   winePaths.forEach((winePath) => {
     const infoFilePath = join(winePath, 'Contents/Info.plist')
@@ -614,21 +618,27 @@ export async function downloadDefaultWine() {
     // Get list of available wine versions
     const availableWine = wineDownloaderInfoStore.get('wine-releases', [])
 
-    // Determine the correct wine version based on platform and compatibility
-    const release = availableWine.find(async (version) => {
-      if (isLinux) {
-        return (
-          version.type === 'Wine-GE' &&
-          version.version.includes('Wine-GE-Proton')
-        )
-      } else if (isMac) {
-        const isGPTKCompatible = await isMacSonomaOrHigher()
-        return isGPTKCompatible
-          ? version.type === 'Game-Porting-Toolkit'
-          : version.type === 'Wine-Crossover'
-      }
-      return false
-    })
+    // use Wine-GE type if on Linux and GPTK or Wine-Crossover if on Mac
+    const isGPTKCompatible = isMac ? await isMacSonomaOrHigher() : false
+    const results = await Promise.all(
+      availableWine.map(async (version) => {
+        if (isLinux) {
+          return (
+            version.type === 'Wine-GE' &&
+            version.version.includes('Wine-GE-Proton')
+          )
+        }
+
+        if (isMac) {
+          return isGPTKCompatible
+            ? version.type === 'Game-Porting-Toolkit'
+            : version.type === 'Wine-Crossover'
+        }
+        return false
+      })
+    )
+
+    const release = availableWine.filter((_, index) => results[index])[0]
 
     if (!release) {
       logError('Could not find any wine from list', LogPrefix.Backend)
