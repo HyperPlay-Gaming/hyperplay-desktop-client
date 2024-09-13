@@ -138,7 +138,8 @@
         "cancel": "Kanselahin",
         "continue": "Ipagpatuloy",
         "download": "I-download",
-        "update": "I-update"
+        "update": "I-update",
+        "install": "I-install"
     },
     "controller": {
         "hints": {
@@ -210,5 +211,11 @@
         }
     },
     "Settings": "Mga settings",
-    "accounts": "Account"
+    "accounts": "Account",
+    "import-game-folder": {
+        "placeholder": "Piliin ang Folder ng Laro na ii-import"
+    },
+    "install": {
+        "path": "Piliin ang Install Path"
+    }
 }

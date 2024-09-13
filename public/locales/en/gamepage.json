@@ -32,6 +32,9 @@
         "sideload": {
             "exe": "Select Executable"
         },
+        "stopExtraction": {
+            "title": "Do you want to cancel the Extraction?"
+        },
         "stopInstall": {
             "keepFilesMessage": "Check here if you want to keep the download files after canceling.",
             "keepInstalling": "Keep Installing",
@@ -144,6 +147,11 @@
     },
     "launch": {
         "options": "Launch Options..."
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Please contact the HyperPlay Team with this message: {{error}} - {{context}}."
+        }
     },
     "not_logged_in": {
         "epic": "You are not logged in with an Epic account in HyperPlay. Don't use the store page to login, click the following button instead:",

@@ -53,7 +53,10 @@
         },
         "dont-show-again": "Não mostrar novamente",
         "yesCancel": "Sim, cancelar",
-        "ok": "OK"
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "Você quer cancelar a extração?"
+        }
     },
     "button": {
         "add_to_favourites": "Adicionar aos favoritos",
@@ -238,5 +241,10 @@
         "store": "Loja Epic",
         "verify": "Verificar e Reparar",
         "extraInfo": "Informação extra"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Entre em contato com a Equipe HyperPlay com esta mensagem: {{error}} - {{context}}."
+        }
     }
 }

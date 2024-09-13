@@ -412,7 +412,20 @@ export default function DownloadDialog({
     return t('button.no-path-selected', 'No path selected')
   }
 
-  const isWebGame = gameInstallInfo?.game['name'] === 'web'
+  async function handleInstallPathSelection() {
+    return window.api
+      .openDialog({
+        buttonLabel: t('box.choose'),
+        properties: ['openDirectory'],
+        title: t('install.path'),
+        defaultPath: getDefaultInstallPath()
+      })
+      .then((path) => setInstallPath(path || getDefaultInstallPath()))
+  }
+
+  const isWebGame =
+    gameInstallInfo?.game['name'] === 'web' || platformToInstall === 'Browser'
+
   const nativeGameIsReadyToInstall =
     installPath && gameDownloadSize && !gettingInstallInfo
 
@@ -556,16 +569,7 @@ export default function DownloadDialog({
             onChange={(event) => setInstallPath(event.target.value)}
             icon={<FontAwesomeIcon icon={faFolderOpen} />}
             inputProps={{ readOnly: true, className: styles.folderTextInput }}
-            onIconClick={async () =>
-              window.api
-                .openDialog({
-                  buttonLabel: t('box.choose'),
-                  properties: ['openDirectory'],
-                  title: t('install.path'),
-                  defaultPath: getDefaultInstallPath()
-                })
-                .then((path) => setInstallPath(path || getDefaultInstallPath()))
-            }
+            onIconClick={handleInstallPathSelection}
             afterInput={
               gameDownloadSize ? (
                 <span className="smallInputInfo">

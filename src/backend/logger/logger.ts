@@ -9,8 +9,6 @@ import { showDialogBoxModalAuto } from '../dialog/dialog'
 import { appendMessageToLogFile, getLongestPrefix } from './logfile'
 import { backendEvents } from 'backend/backend_events'
 import { GlobalConfig } from 'backend/config'
-import { getGOGdlBin, getLegendaryBin } from 'backend/utils'
-import { join } from 'path'
 import { formatSystemInfo, getSystemInfo } from '../utils/systeminfo'
 import { getAuthSession } from 'backend/auth'
 
@@ -97,15 +95,6 @@ export function initLogger() {
     .catch((error) =>
       logError(['Failed to fetch system information', error], LogPrefix.Backend)
     )
-
-  logInfo(['Legendary location:', join(...Object.values(getLegendaryBin()))], {
-    prefix: LogPrefix.Legendary,
-    forceLog: true
-  })
-  logInfo(['GOGDL location:', join(...Object.values(getGOGdlBin()))], {
-    prefix: LogPrefix.Gog,
-    forceLog: true
-  })
 
   // listen to the settingChanged event, log change and enable/disable logging if needed
   backendEvents.on('settingChanged', ({ key, oldValue, newValue }) => {
