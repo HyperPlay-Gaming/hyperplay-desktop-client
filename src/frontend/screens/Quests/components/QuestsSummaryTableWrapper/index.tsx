@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { QuestsSummaryTable, QuestCard, QuestFilter } from '@hyperplay/ui'
+import {
+  QuestsSummaryTable,
+  QuestCard,
+  QuestFilter,
+  SearchBar
+} from '@hyperplay/ui'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import { useTranslation } from 'react-i18next'
 import styles from './index.module.scss'
@@ -94,7 +99,6 @@ export function QuestsSummaryTableWrapper({
           image={imageUrl ?? ''}
           title={title}
           {...rest}
-          //@ts-expect-error TODO: add onClick and all root props to QuestCard props
           onClick={() => {
             if (selectedQuestId === id) {
               navigate('/quests')
@@ -140,9 +144,15 @@ export function QuestsSummaryTableWrapper({
       }}
       pageTitle={t('quests.quests', 'Quests')}
       className={styles.tableContainer}
-      searchText={searchText}
-      setSearchText={setSearchText}
-      searchSuggestions={suggestedSearchTitles}
+      searchBar={
+        <SearchBar
+          searchText={searchText}
+          setSearchText={setSearchText}
+          i18n={{ placeholder: 'Search Quest' }}
+          styles={{ container: { margin: '0px 0px 0px auto' } }}
+          suggestions={suggestedSearchTitles}
+        />
+      }
     />
   )
 }

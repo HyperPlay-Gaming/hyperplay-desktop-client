@@ -69,7 +69,6 @@ export class GOGUser {
       logError('Unable to login information, HyperPlay offline', LogPrefix.Gog)
       return
     }
-    logInfo('Checking if login is valid', LogPrefix.Gog)
     if (!this.isLoggedIn()) {
       logWarning('User is not logged in', LogPrefix.Gog)
       return
@@ -100,7 +99,6 @@ export class GOGUser {
     delete data.email
 
     configStore.set('userData', data)
-    logInfo('Saved username to config file', LogPrefix.Gog)
 
     return data
   }

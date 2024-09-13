@@ -53,7 +53,10 @@
         },
         "yesCancel": "Kyllä, peruutus",
         "dont-show-again": "Älä näytä uudelleen",
-        "ok": "OK"
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "Haluatko peruuttaa lisäyksen?"
+        }
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -238,5 +241,10 @@
         "store": "Kauppasivu",
         "verify": "Vahvista ja korjaa",
         "extraInfo": "Lisätietoa"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Ota yhteyttä HyperPlay-tiimiin tällä viestillä: {{error}} - {{context}}."
+        }
     }
 }

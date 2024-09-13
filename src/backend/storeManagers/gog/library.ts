@@ -67,9 +67,6 @@ export async function getSaveSyncLocation(
   const clientId = readInfoFile(appName, install.install_path)?.clientId
 
   if (!clientId) {
-    logWarning(
-      `No clientId in goggame-${appName}.info file. Cannot resolve save path`
-    )
     return
   }
 
@@ -244,9 +241,11 @@ export async function refresh(): Promise<ExecResult> {
   for (const chunk of chunks) {
     const settled = await Promise.allSettled(chunk)
     const fulfilled = settled
-      .filter((promise) => promise.status === 'fulfilled')
-      //@ts-expect-error Typescript is confused about this filter statement, it's correct however
-      .map((promise: PromiseFulfilledResult<GameInfo>) => promise.value)
+      .filter(
+        (promise): promise is PromiseFulfilledResult<GameInfo> =>
+          promise.status === 'fulfilled'
+      )
+      .map((promise) => promise.value)
 
     fulfilled.forEach((data: GameInfo) => {
       if (data?.app_name) {
@@ -924,7 +923,7 @@ export async function getProductApi(
     url.searchParams.set('expand', expand.join(','))
   }
 
-  const headers = {}
+  const headers: Record<string, string> = {}
   if (access_token) {
     headers['Authorization'] = `Bearer ${access_token}`
   }

@@ -53,7 +53,10 @@
         "compability": {
             "message": "Questo gioco Windows verrà eseguito utilizzando uno strato di compatibilità. Si potrebbe incontrare alcuni problemi o il gioco potrebbe non funzionare affatto."
         },
-        "yesCancel": "Sì, cancella"
+        "yesCancel": "Sì, cancella",
+        "stopExtraction": {
+            "title": "Vuoi annullare l'estrazione?"
+        }
     },
     "button": {
         "add_to_favourites": "Aggiungi Ai Preferiti",
@@ -254,5 +257,10 @@
         "store": "Pagina dello store",
         "verify": "Verifica e ripara",
         "extraInfo": "Informazioni aggiuntive"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Contatta il Team HyperPlay con questo messaggio: {{error}} - {{context}}."
+        }
     }
 }

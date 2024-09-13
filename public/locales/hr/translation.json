@@ -155,7 +155,8 @@
         "unsync": "Desinkroniziraj",
         "continue": "Nastavi",
         "download": "Preuzmi",
-        "update": "Ažuriraj"
+        "update": "Ažuriraj",
+        "install": "Insraliraj"
     },
     "controller": {
         "hints": {
@@ -764,5 +765,8 @@
         "demo": "Demo",
         "main": "Glavni"
     },
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "placeholder": "Odaberi mapu igre za uvesti"
+    }
 }

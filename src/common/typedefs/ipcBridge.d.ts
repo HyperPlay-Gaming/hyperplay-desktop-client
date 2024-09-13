@@ -298,6 +298,7 @@ interface HyperPlayAsyncIPCFunctions {
   ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
   syncPlaySession: (appName: string, runner: Runner) => Promise<void>
   getEpicListingUrl: (appName: string) => Promise<string>
+  importGameFolder: (gameFolder: string) => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -456,6 +457,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
     appName: string
   ) => Promise<number | undefined>
   pauseCurrentDownload: () => Promise<void>
+  getQuestsForGame: (projectId: string) => Promise<Quest[]>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

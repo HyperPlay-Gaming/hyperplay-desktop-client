@@ -22,6 +22,10 @@ enum ExtractionValidation {
   VALID = 'VALID'
 }
 
+type extractOptions = {
+  deleteOnEnd?: boolean
+}
+
 /**
  * Service class to handle extraction of ZIP files.
  * @extends {EventEmitter}
@@ -30,6 +34,7 @@ export class ExtractZipService extends EventEmitter {
   #readStream: Readable | null = null
   #zipFile = ''
   #destinationPath = ''
+  #options = { deleteOnEnd: true }
   #canceled = false
   #paused = false
   #totalSizeInBytes = 0
@@ -48,11 +53,16 @@ export class ExtractZipService extends EventEmitter {
    * @param {string} zipFile - The path to the ZIP file.
    * @param {string} destinationPath - The path where the extracted files should be saved.
    */
-  constructor(zipFile: string, destinationPath: string) {
+  constructor(
+    zipFile: string,
+    destinationPath: string,
+    options?: extractOptions
+  ) {
     super()
 
     this.#zipFile = zipFile
     this.#destinationPath = destinationPath
+    this.#options = { ...this.#options, ...options }
     this.#resolveExtraction = () => null
     this.#rejectExtraction = () => null
   }
@@ -166,7 +176,9 @@ export class ExtractZipService extends EventEmitter {
 
     this.emit('canceled')
 
-    rmSync(this.source, { recursive: true, force: true })
+    if (this.#options.deleteOnEnd) {
+      rmSync(this.source, { recursive: true, force: true })
+    }
 
     this.removeAllListeners()
   }
@@ -224,9 +236,12 @@ export class ExtractZipService extends EventEmitter {
 
     this.emit('finished', this.#computeProgress())
 
-    rmSync(this.source, { recursive: true, force: true })
+    if (this.#options.deleteOnEnd) {
+      rmSync(this.source, { recursive: true, force: true })
+    }
 
     this.removeAllListeners()
+    this.#zipFileInstance?.close()
   }
 
   /**
@@ -242,7 +257,9 @@ export class ExtractZipService extends EventEmitter {
     console.log('error', error)
     this.emit('error', error)
 
-    rmSync(this.source, { recursive: true, force: true })
+    if (this.#options.deleteOnEnd) {
+      rmSync(this.source, { recursive: true, force: true })
+    }
 
     this.removeAllListeners()
   }

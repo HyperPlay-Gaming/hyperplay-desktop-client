@@ -155,7 +155,8 @@
         "unsync": "Omgjør synkronisering",
         "download": "Last ned",
         "update": "Oppdater",
-        "continue": "Fortsett"
+        "continue": "Fortsett",
+        "install": "Installer"
     },
     "controller": {
         "hints": {
@@ -762,5 +763,15 @@
     "profile": "Profil",
     "sideload": {
         "warningTitle": "Viktig"
+    },
+    "import-game-folder": {
+        "placeholder": "Vleg spillmappe å importere"
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "placeholder": "Velg ei fil"
+            }
+        }
     }
 }
