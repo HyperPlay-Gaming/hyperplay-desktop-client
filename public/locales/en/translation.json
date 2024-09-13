@@ -454,7 +454,7 @@
     "HyperPlay will download and start the Steam Setup for you": {
         " Please follow Steam instructions on their installer;": "HyperPlay will download and start the Steam Setup for you. Please follow Steam instructions on their installer;"
     },
-    "HyperPlay will notify you once the installation is done": "HyperPlay will notify you once the installation is done.",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay will notify you once the installation is done;",
     "hyperplayOverlay": {
         "chainRequest": {
             "CONFIRMED": "Custom network added",
@@ -604,7 +604,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
-    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear": "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear.",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;",
     "Open": "Open",
     "options": {
         "advanced": {

@@ -46,14 +46,14 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
           </li>
           <li>
             {t(
-              'HyperPlay will notify you once the installation is done.',
-              'HyperPlay will notify you once the installation is done.'
+              'HyperPlay will notify you once the installation is done;',
+              'HyperPlay will notify you once the installation is done;'
             )}
           </li>
           <li>
             {t(
-              'On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear.',
-              'On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear.'
+              'On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;',
+              'On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;'
             )}
           </li>
         </ul>
@@ -71,14 +71,16 @@ const SteamInstallDialog: React.FC<SteamInstallDialogProps> = ({
             t('Install Steam', 'Install Steam')
           )}
         </Button>
-        <Button
-          type="tertiary"
-          size="medium"
-          onClick={onClose}
-          disabled={isInstalling}
-        >
-          {t('Cancel Installation', 'Cancel Installation')}
-        </Button>
+        {isInstalling ? null : (
+          <Button
+            type="tertiary"
+            size="medium"
+            onClick={onClose}
+            disabled={isInstalling}
+          >
+            {t('Cancel Installation', 'Cancel Installation')}
+          </Button>
+        )}
       </div>
     </Dialog>
   )
