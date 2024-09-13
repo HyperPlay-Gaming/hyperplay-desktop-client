@@ -61,7 +61,6 @@ export default observer(function SteamInstallButton() {
     onError: () => {
       setShowAlert('danger')
       setTimeout(() => setShowAlert('none'), 5000)
-
     },
     mutationFn: async () => window.api.installSteamWindows()
   })
