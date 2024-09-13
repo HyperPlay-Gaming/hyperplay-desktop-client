@@ -82,7 +82,11 @@
                 "title": "Ubisoft",
                 "message": "#Instalacija @of Ubisoft #Spajati @in @the #igra #prefiks #zakazati. #Pregled #naš wiki #strana @at https://github.@com/@Heroic-#Igra-Launcher/HeroicGamesLauncher/wiki/Kako-#na-@install-Ubisoft-#Spajati-@on-@Linux-a-@Mac #na @install #free maunally#."
             },
-            "moving": "#Zabuna #Micati #Igra [@X18@X]"
+            "moving": "#Zabuna #Micati #Igra [@X18@X]",
+            "delete-files": {
+                "body": "#Zabuna #brisati #vaditi @folder [@X32@X]. @Please #brisati #free @manually. \n                [@X86@X] \n                [@X117@X]",
+                "title": "#Zabuna #brisati #vaditi @folder"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +183,8 @@
         "unsync": "Desinhronizirajte",
         "continue": "Continue",
         "download": "Preuzimanje",
-        "update": "Update"
+        "update": "Update",
+        "install": "Install"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     },
     "dlcs": {
         "label": "@Select @DLC #na @install#:"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "@This #igra @i @a mod @for #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a). @In order to #predstava @this mod, #igrač morati #sam @a #kopija @of #Svijet @of Warcraft 3.3.5@a. [@X155@X] [@X167@X] HyperPlay @do ne #domaćin #Svijet @of Warcraft. #Igrač @who #sam #Svijet @of Warcraft #limenka @obtain #inačica 3.3.5@a @from #izvor @like#:",
+                "subtitle": "#Preuzimanje #Svijet @of Warcraft 3.3.5@a",
+                "title": "#Čin #1.",
+                "webtorrent": "#Bujica (@Magnet #Veza)"
+            },
+            "step2": {
+                "description": "@Select @the @download ChromieCraft_3.3.5@a.@zip #dosje#.",
+                "subtitle": "@Select ChromieCraft_3.3.5@a.@zip #Dosje",
+                "title": "#Čin #2."
+            },
+            "step3": {
+                "description": "@Please #birati @the @folder gdje #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a) trebati #biti @install#.",
+                "subtitle": "@Select #Instalacija",
+                "title": "#Čin #3."
+            },
+            "step4": {
+                "description": "#Ući @the #pristup #kôd #na @proceed #uz #instaliranje @the #igra#.",
+                "subtitle": "#Pristup",
+                "title": "#Čin #4."
+            },
+            "title": "Mod"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "#Baza #igra #ekstrakcija canceled",
+                "title": "#Ukidati"
+            },
+            "installed": {
+                "body": "Mod #volja #biti #važiti #na #baza #igra",
+                "title": "#Baza #Igra"
+            },
+            "installing": {
+                "body": "#Vaditi #baza #igra #kartoteka",
+                "title": "#Instaliranje #Baza"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "@Select #Baza #Igra #Dosje",
+                "placeholder": "@Select @Zip"
+            }
+        }
+    },
+    "import-game-folder": {
+        "cta": "#Uvoz #Igra",
+        "dialog": {
+            "title": "@Select #Igra @Folder #na #Uvoz"
+        },
+        "error": "Tamo #biti @a #zabuna #tokom #uvoz. @Please #vidjeti @the #zapisnik @for više #detalj#.",
+        "label": "#Uvoz #Igra",
+        "placeholder": "#Birati @the #igra @folder #na #uvoz",
+        "success": "@Successfully #uvesti #igra#!"
     }
 }

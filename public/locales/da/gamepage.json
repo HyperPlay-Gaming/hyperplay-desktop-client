@@ -54,7 +54,10 @@
         "compability": {
             "message": "Dette Windows-spil kører ved hjælp af et kompatibilitetslag. Du kan møde nogle problemer eller spillet kan ikke arbejde overhovedet."
         },
-        "yesCancel": "Ja, annullere"
+        "yesCancel": "Ja, annullere",
+        "stopExtraction": {
+            "title": "Vil du annullere udsugningen?"
+        }
     },
     "button": {
         "cancel": "Pause/Afbryd",
@@ -249,5 +252,10 @@
         "main-plus-extras": "Hoved + Ekstra",
         "main-story": "Hovedhistorie"
     },
-    "howLongToBeat": "Hvor længe skal man slå"
+    "howLongToBeat": "Hvor længe skal man slå",
+    "method": {
+        "getInstallInfo": {
+            "error": "Kontakt venligst HyperPlay Team med denne meddelelse: {{error}} - {{context}}."
+        }
+    }
 }

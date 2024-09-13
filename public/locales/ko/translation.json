@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "title": "Ubisoft 연결",
                 "message": "Ubisoft의 설치는 게임 접두사에서 실패했습니다. https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac에서 wiki 페이지를 확인하십시오."
+            },
+            "delete-files": {
+                "body": "오류 제거 추출 폴더 {{path}}. 자주 묻는 질문\n{{paragraph}}\n{{error}}",
+                "title": "오류 제거 추출 폴더"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "싱크 해제",
         "continue": "계속하기",
         "download": "다운로드",
-        "update": "갱신"
+        "update": "갱신",
+        "install": "설치"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     },
     "profile": "프로필",
     "analytics": "진단공유",
-    "ALL": "모두"
+    "ALL": "모두",
+    "import-game-folder": {
+        "success": "성공적으로 수입 된 게임!",
+        "cta": "수입 게임 폴더",
+        "dialog": {
+            "title": "Game Folder를 사용하여 가져 오기"
+        },
+        "error": "수입 중 오류가 있었습니다. 자세한 내용은 로그를 참조하십시오.",
+        "label": "수입 게임 폴더",
+        "placeholder": "게임 폴더를 가져 오기"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "기본 게임 추출 취소",
+                "title": "취소 추출"
+            },
+            "installed": {
+                "body": "Mod는 기본 게임에 적용됩니다",
+                "title": "기본 게임 설치"
+            },
+            "installing": {
+                "body": "기본 게임 파일 추출",
+                "title": "기본 게임 설치"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Base Game 파일 선택",
+                "placeholder": "Zip 파일 선택"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft의 특징",
+                "description": "이 게임은 월드 오브 워크래프트의 모드입니다: 리치 킹의 Wrath (3.3.5a). 이 모드를 재생하려면 플레이어는 Warcraft 3.3.5a의 세계 사본을 소유해야합니다. {{newline}} {{newline}} HyperPlay는 Warcraft의 세계를 호스팅하지 않습니다. Warcraft의 세계를 소유 한 플레이어는 다음과 같은 소스에서 3.3.5a 버전을 얻을 수 있습니다",
+                "subtitle": "다운로드 월드 오브 워크래프트 3.3.5a",
+                "webtorrent": "토렌트 (Magnet Link)",
+                "title": "1단계"
+            },
+            "step3": {
+                "description": "월드 오브 워크래프트(World of Warcraft: Wrath of Lich King (3.3.5a)가 설치되어야 하는 폴더를 선택하십시오.",
+                "subtitle": "연락처 한국어",
+                "title": "3단계"
+            },
+            "step4": {
+                "description": "게임 설치를 진행하려면 액세스 코드를 입력하십시오.",
+                "subtitle": "오시는 길",
+                "title": "단계 4"
+            },
+            "title": "Mod 지침",
+            "step2": {
+                "description": "다운로드 ChromieCraft_3.3.5a.zip 파일.",
+                "subtitle": "ChromieCraft_3.3.5a.zip을 선택하십시오. 파일 형식",
+                "title": "2단계"
+            }
+        }
+    }
 }

@@ -82,7 +82,11 @@
                 "title": "Ubisoftは接続します",
                 "message": "ゲームプレフィックスでUbisoft Connectのインストールが失敗しました。 ウィキページをhttps://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Macで確認してインストールします."
             },
-            "moving": "エラー移動ゲーム {{error}}"
+            "moving": "エラー移動ゲーム {{error}}",
+            "delete-files": {
+                "body": "抽出されたフォルダを外すエラー{{path}}。 手動で削除してください。\n{{paragraph}}\n{{error}}",
+                "title": "抽出されたフォルダを除去するエラー"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +183,8 @@
         "unsync": "非同期",
         "continue": "続ける",
         "download": "ダウンロード",
-        "update": "を更新"
+        "update": "を更新",
+        "install": "インストール"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
         "title": "購読ありがとうございます!",
         "subtitle": "コミュニティの一員になり、貴重なアップデートやインサイトを皆様に共有できることを心よりお詫び申し上げます."
     },
-    "importGameErrorMessage": "有効なゲームフォルダではなく、ゲームをインポートすることはできません"
+    "importGameErrorMessage": "有効なゲームフォルダではなく、ゲームをインポートすることはできません",
+    "import-game-folder": {
+        "cta": "インポートゲームフォルダ",
+        "dialog": {
+            "title": "インポートするゲームフォルダを選択"
+        },
+        "error": "インポート中にエラーがありました。 詳しくはログをご覧ください.",
+        "placeholder": "ゲームフォルダを選択してインポートします",
+        "success": "うまくインポートされたゲーム!",
+        "label": "インポートゲームフォルダ"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "title": "ステップ 1",
+                "chromieCraft": "クロムクラフト",
+                "description": "このゲームは、ウォークラフトの世界のためのMODです: リッチキングの神話 (3.3.5a). このMODを再生するには、プレイヤーはWarcraft 3.3.5aのWorldのコピーを所有しなければなりません。 {{newline}} {{newline}} HyperPlayはWarcraftのWorldをホストしていません。 WarcraftのWorldを所有しているプレイヤーは、以下のようなソースからバージョン3.3.5aを得ることができます",
+                "subtitle": "Warcraftのワールドをダウンロード 3.3.5a",
+                "webtorrent": "トレント(マグネットリンク)"
+            },
+            "step3": {
+                "title": "ステップ 3",
+                "subtitle": "インストールを選択 フォルダ",
+                "description": "ワールド・オブ・ウォークラフト: リッチ・キング (3.3.5a) をインストールするフォルダを選択してください."
+            },
+            "step2": {
+                "title": "ステップ 2",
+                "description": "ダウンロードする ChromieCraft_3.3.5a.zipファイル.",
+                "subtitle": "選択する ChromieCraft_3.3.5a.zip ファイル"
+            },
+            "step4": {
+                "subtitle": "アクセスコード",
+                "description": "ゲームのインストールを進めるためにアクセスコードを入力してください.",
+                "title": "ステップ4"
+            },
+            "title": "Mod の指示"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "title": "キャンセル抽出",
+                "body": "ベースゲーム抽出解除"
+            },
+            "installed": {
+                "body": "Mod はベース ゲームに適用します",
+                "title": "ベースゲームインストール"
+            },
+            "installing": {
+                "body": "ベースゲームファイルを抽出する",
+                "title": "ベースゲームのインストール"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "ベースゲームファイルの場所を選択",
+                "placeholder": "Zipファイルの選択"
+            }
+        }
+    }
 }

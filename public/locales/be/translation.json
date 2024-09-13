@@ -761,5 +761,8 @@
         "main": "Асноўная",
         "beta": "Beta"
     },
-    "analytics": "Аналітыка"
+    "analytics": "Аналітыка",
+    "import-game-folder": {
+        "placeholder": "Выберыце папку для імпарту гульняў"
+    }
 }

@@ -53,6 +53,9 @@
         "aware": "Estoy consciente",
         "compability": {
             "message": "Este juego para Windows se ejecutará utilizando una capa de compatibilidad. Es posible que encuentres algunos problemas o que el juego no funcione en absoluto."
+        },
+        "stopExtraction": {
+            "title": "¿Quieres cancelar la Extracción?"
         }
     },
     "button": {
@@ -250,6 +253,11 @@
             "paused": "Pausado",
             "extracting": "Extrayendo...",
             "installing": "Descargando..."
+        }
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Por favor, póngase en contacto con el Equipo HyperPlay con este mensaje: {{error}} - {{context}}."
         }
     }
 }

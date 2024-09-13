@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "message": "Не вдалося встановити Ubisoft Connect в префіксі грі. Перевірте нашу сторінку вікі https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac для ручного встановлення.",
                 "title": "Ubisoft Connect"
+            },
+            "delete-files": {
+                "body": "Видалення помилок екстракції папки {{path}}. Будь ласка, зніміть його вручну.\n{{paragraph}}\n{{error}}",
+                "title": "Видалення помилок вилучення папки"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "Розсинхронізувати",
         "continue": "Продовжити",
         "download": "Завантажити",
-        "update": "Оновити"
+        "update": "Оновити",
+        "install": "Почати встановлення"
     },
     "controller": {
         "hints": {
@@ -1055,5 +1060,64 @@
         "title": "Дякуємо за реєстрацію!",
         "subtitle": "Ви зараз є частиною нашої спільноти, і ми раді поділитися цінними оновленнями та ідеями."
     },
-    "Please connect to the internet to access the stores": "Під'єднайтеся до мережі, щоб отримати доступ до магазинів"
+    "Please connect to the internet to access the stores": "Під'єднайтеся до мережі, щоб отримати доступ до магазинів",
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Базовий витяг гри скасовано",
+                "title": "Скасувати вилучення"
+            },
+            "installed": {
+                "body": "Мод буде застосовуватися до базової гри",
+                "title": "Базова гра Встановлюється"
+            },
+            "installing": {
+                "body": "Вилучення базових файлів гри",
+                "title": "Встановлення базової гри"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Виберіть базовий ігровий файл розташування",
+                "placeholder": "Виберіть файл Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ХроміКрафт",
+                "description": "Ця гра є модом для світу Warcraft: Wrath of Lich King (3.3.5a). Для того, щоб грати в цей мод, гравці повинні володіти копію Всесвітнього Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не займає світ Warcraft. Гравці, які мають власний світ Warcraft, можуть отримати версію 3.3.5a з джерел:",
+                "subtitle": "Завантажити світ Warcraft 3.3.5a",
+                "webtorrent": "Торент (Magnet Link)",
+                "title": "Крок 1"
+            },
+            "step4": {
+                "subtitle": "Код доступу",
+                "description": "Введіть код доступу, щоб продовжити установку гри.",
+                "title": "Крок 4"
+            },
+            "title": "Мод Інструкції",
+            "step2": {
+                "description": "Виберіть завантаженість ChromieCraft_3.3.5a.zip файл.",
+                "subtitle": "Виберіть ChromieCraft_3.3.5a.zip Головна",
+                "title": "Крок 2"
+            },
+            "step3": {
+                "description": "Будь ласка, оберіть папку, де повинен бути встановлена Всесвітня Warcraft.",
+                "subtitle": "Виберіть установку Склад",
+                "title": "Крок 3"
+            }
+        }
+    },
+    "import-game-folder": {
+        "cta": "Імпорт Game Folder",
+        "dialog": {
+            "title": "Виберіть Game Folder для імпорту"
+        },
+        "placeholder": "Виберіть папку ігор для імпорту",
+        "success": "Успішно імпортовані ігри!",
+        "error": "Помилки при імпорті. Будь ласка, див. журнали для отримання більш детальної інформації.",
+        "label": "Імпорт Game Folder"
+    }
 }

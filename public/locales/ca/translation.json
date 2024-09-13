@@ -82,7 +82,11 @@
                 "title": "Ubisoft Connect",
                 "message": "Ha fallat la instal·lació de Ubisoft Connect en el prefix del joc. Podeu fer servir aquestes etiquetes i atributs HTML: <a href=\"\" title=\"\"> <abbr title=\"\"> <acronym title=\"\"> <b> <blockquote cite=\"\"> <cite> <code> <del datetime=\"\"> <em> <i> <q cite=\"\"> <strike> <strong>."
             },
-            "moving": "Error Moving Game {{error}}"
+            "moving": "Error Moving Game {{error}}",
+            "delete-files": {
+                "title": "L'eliminació d'errors carpeta extreta",
+                "body": "L'eliminació d'errors carpeta extreta {{path}}. Si us plau, traieu-lo manualment.\n{{paragraph}}\n{{error}}"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +183,8 @@
         "unsync": "Dessincronitza",
         "update": "Actualitza",
         "continue": "Continuar",
-        "download": "Descarrega"
+        "download": "Descarrega",
+        "install": "Instal·lar"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     },
     "importGameErrorMessage": "No és possible una carpeta de joc vàlida, la importació de joc no és possible",
     "importGameErrorMessageExecutable": "Joc Executable no trobat, la importació de joc no és possible",
-    "back_to_game": "Tornar al joc"
+    "back_to_game": "Tornar al joc",
+    "import-game-folder": {
+        "dialog": {
+            "title": "Seleccioneu la carpeta del joc per importar"
+        },
+        "error": "Hi ha un error en la importació. Si us plau, consulteu els registres per obtenir més detalls.",
+        "label": "Importar la carpeta del joc",
+        "placeholder": "Trieu la carpeta del joc per importar",
+        "success": "Jocs importats amb èxit!",
+        "cta": "Importar la carpeta del joc"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "title": "Pas 1",
+                "chromieCraft": "CromieCraft",
+                "description": "Aquest joc és un mod per al World of Warcraft: la ira del rei Lich (3.3.5a). Per tal de jugar aquest mod, els jugadors han de tenir una còpia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay no acull World of Warcraft. Els jugadors que posseeixen World of Warcraft poden obtenir la versió 3.3.5a de fonts com:",
+                "subtitle": "Descarregar World of Warcraft 3.3.5a",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "step2": {
+                "title": "Pas 2",
+                "subtitle": "Seleccioneu ChromieCraft_3.3.5a.zip Fitxer",
+                "description": "Seleccioneu la descàrrega Fitxer ChromieCraft_3.3.5a.zip."
+            },
+            "step3": {
+                "title": "Pas 3",
+                "subtitle": "Seleccionar Instal·lació Carpeta",
+                "description": "Si us plau, trieu la carpeta on s'ha d'instal·lar World of Warcraft: la ira del rei Lich (3.3.5a)."
+            },
+            "step4": {
+                "subtitle": "Codi d'Accés",
+                "description": "Introduïu el codi d'accés per procedir a la instal·lació del joc.",
+                "title": "Pas 4"
+            },
+            "title": "Instruccions Mod"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "title": "Cancel·la l'extracció",
+                "body": "Extracció del joc base cancel·lada"
+            },
+            "installed": {
+                "body": "Mod s'aplicarà al joc base",
+                "title": "Joc Base instal·lat"
+            },
+            "installing": {
+                "body": "Extracció d'arxius de joc base",
+                "title": "Instal·lació del joc base"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Seleccioneu la base de joc d'arxius Ubicació",
+                "placeholder": "Seleccioneu fitxers Zip"
+            }
+        }
+    }
 }

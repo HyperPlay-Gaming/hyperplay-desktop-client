@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "title": "Ubisoft Conecta",
                 "message": "Instalación de Ubisoft Conecta no prefixo de xogo fallou. Control o noso wiki páxina en https://github.com/Heroico-Xogos-Launcher/HeroicGamesLauncher/wiki/Can-a-instalar-Ubisoft-Conectar-encima-Linux-e-Mac para instalalo maunally."
+            },
+            "delete-files": {
+                "title": "O erro que tira cartafol extraído",
+                "body": "O erro que tira cartafol extraído {{path}}. Compracer tiralo a man. \n                {{paragraph}} \n                {{error}}"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "Desincronizar",
         "continue": "Continuar",
         "download": "Baixar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "install": "Instalar"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     },
     "ALL": "TODO",
     "analytics": "Análises",
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "import-game-folder": {
+        "cta": "Cartafol de Xogo da importación",
+        "dialog": {
+            "title": "Cartafol de Xogo selecto para Importar"
+        },
+        "error": "Había  un erro durante importación. Compracer ver o rexistra para máis detalles.",
+        "label": "Cartafol de Xogo da importación",
+        "placeholder": "Escoller o cartafol de xogo para importar",
+        "success": "Xogos importados con éxito!"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "Este xogo é un mod para Mundo de Warcraft: Ira do Lich Rei (3.3.5un). Para xogo este mod, os xogadores teñen que posuír unha copia de Mundo de Warcraft 3.3.5un. {{newline}} {{newline}} HyperPlay Cervas non Mundo anfitrión de Warcraft. Xogadores que posúen Mundo de Warcraft pode obter versión 3.3.5un desde a fontes lles gosta:",
+                "subtitle": "Mundo de descarga de Warcraft 3.3.5un",
+                "title": "Paso 1",
+                "webtorrent": "Torrente (Ligazón de Imán)",
+                "chromieCraft": "ChromieCraft"
+            },
+            "step2": {
+                "description": "Selecto o descargado ChromieCraft_3.3.5un.zip Ficheiro.",
+                "subtitle": "Selecto ChromieCraft_3.3.5un.zip Ficheiro",
+                "title": "Paso 2"
+            },
+            "step4": {
+                "description": "Introducir o código de acceso para proceder con instalar o xogo.",
+                "title": "Paso 4",
+                "subtitle": "Código de acceso"
+            },
+            "step3": {
+                "description": "Compracer escoller o cartafol onde Mundial de Warcraft: Ira do Lich Rei (3.3.5un) tería que ser instalado.",
+                "subtitle": "Cartafol de Instalación selecta",
+                "title": "Paso 3"
+            },
+            "title": "Mod Instrucións"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Extracción de xogo da base canceled",
+                "title": "Cancela Extracción"
+            },
+            "installed": {
+                "body": "Mod Será aplicado para basear xogo",
+                "title": "Xogo de base Instalou"
+            },
+            "installing": {
+                "body": "Extraendo ficheiros de xogo da base",
+                "title": "Xogo de Base instaladora"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Ficheiro de Xogo de Base selecto Localización",
+                "placeholder": "Selecto Zip Ficheiro"
+            }
+        }
+    }
 }

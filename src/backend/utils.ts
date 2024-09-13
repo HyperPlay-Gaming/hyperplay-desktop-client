@@ -90,6 +90,7 @@ import {
   deviceNameCache,
   vendorNameCache
 } from './utils/systeminfo/gpu/pci_ids'
+import { copyFile, mkdir, readdir, stat } from 'fs/promises'
 
 const execAsync = promisify(exec)
 
@@ -1565,5 +1566,22 @@ export const writeConfig = (appName: string, config: Partial<AppSettings>) => {
   } else {
     GameConfig.get(appName).config = config as GameSettings
     GameConfig.get(appName).flush()
+  }
+}
+
+export async function copyRecursiveAsync(src: string, dest: string) {
+  const exists = (await stat(src)).isDirectory()
+  if (exists) {
+    await mkdir(dest, { recursive: true })
+    const files = await readdir(src)
+    await Promise.all(
+      files.map(async (file) => {
+        const srcFile = join(src, file)
+        const destFile = join(dest, file)
+        await copyRecursiveAsync(srcFile, destFile)
+      })
+    )
+  } else {
+    await copyFile(src, dest)
   }
 }

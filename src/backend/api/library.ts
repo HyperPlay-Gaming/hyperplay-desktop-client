@@ -156,3 +156,6 @@ export const getEpicListingUrl = async (appName: string) =>
 
 export const installSteamWindows = async () =>
   ipcRenderer.invoke('installSteamWindows')
+
+export const importGameFolder = async (gameFolder: string) =>
+  ipcRenderer.invoke('importGameFolder', gameFolder)

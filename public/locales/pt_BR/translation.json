@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "title": "Ubisoft Connect",
                 "message": "A instalação do Ubisoft Connect no prefixo do jogo falhou. Confira nossa página wiki em https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para instalá-lo manualmente."
+            },
+            "delete-files": {
+                "title": "Erro removendo a pasta extraída",
+                "body": "Erro removendo a pasta extraída {{path}}. Por favor, remova-o manualmente.\n{{paragraph}}\n{{error}}"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "Dessincronizar",
         "continue": "Continuar",
         "update": "Atualizar",
-        "download": "Baixar"
+        "download": "Baixar",
+        "install": "Instalar"
     },
     "controller": {
         "hints": {
@@ -1040,5 +1045,64 @@
     "sideload": {
         "warningMessage": "O recurso de Sideloading de um jogo é um recurso destinado a desenvolvedores e usuários avançados experientes. O Sideloading de um instalador que contém malware pode comprometer seu computador e levar ao roubo de fundos.",
         "warningTitle": "Importante"
+    },
+    "import-game-folder": {
+        "success": "Jogos bem importados!",
+        "cta": "Pasta de jogo de importação",
+        "dialog": {
+            "title": "Selecione a pasta de jogo para importar"
+        },
+        "error": "Houve um erro durante a importação. Consulte os logs para obter mais detalhes.",
+        "label": "Pasta de jogo de importação",
+        "placeholder": "Escolha a pasta do jogo para importar"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Extração de jogo de base cancelada",
+                "title": "Cancelar Extração"
+            },
+            "installed": {
+                "body": "Mod será aplicado ao jogo base",
+                "title": "Base Game Instalado"
+            },
+            "installing": {
+                "body": "Extraindo arquivos de jogo base",
+                "title": "Instalando o Jogo Base"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Selecione Base Game File Localização",
+                "placeholder": "Selecione o arquivo Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "Travessas de cromo",
+                "description": "Este jogo é um mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para jogar este mod, os jogadores devem possuir uma cópia do World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay não hospeda World of Warcraft. Os jogadores que possuem World of Warcraft podem obter a versão 3.3.5a de fontes como:",
+                "webtorrent": "Torrent (Magnet Link)",
+                "subtitle": "Baixar World of Warcraft 3.3.5a",
+                "title": "Passo 1"
+            },
+            "step2": {
+                "description": "Selecione o download ChromieCraft_3.3.5a.zip ficheiro.",
+                "subtitle": "Selecione ChromieCraft_3.3.5a.zip Arquivo",
+                "title": "Passo 2"
+            },
+            "step3": {
+                "description": "Por favor, escolha a pasta onde World of Warcraft: Wrath of the Lich King (3.3.5a) deve ser instalado.",
+                "subtitle": "Selecione a instalação Pasta",
+                "title": "Passo 3"
+            },
+            "step4": {
+                "description": "Digite o código de acesso para prosseguir com a instalação do jogo.",
+                "subtitle": "Código de acesso",
+                "title": "Passo 4"
+            },
+            "title": "Instruções de Mod"
+        }
     }
 }

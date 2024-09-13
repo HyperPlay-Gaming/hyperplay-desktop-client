@@ -53,7 +53,10 @@
             "message": "משחק Windows זה יפעל באמצעות שכבת תאימות. אתה יכול להיתקל כמה בעיות או המשחק בכלל לא עובד."
         },
         "ok": "אישור",
-        "dont-show-again": "אל תראה שוב"
+        "dont-show-again": "אל תראה שוב",
+        "stopExtraction": {
+            "title": "רוצים לבטל את המיצוי?"
+        }
     },
     "button": {
         "install": "התקן",
@@ -253,5 +256,10 @@
     "specs": {
         "minimum": "מינימום",
         "recommended": "מומלצים"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "אנא צרו קשר עם צוות HyperPlay עם הודעה זו: X53X."
+        }
     }
 }

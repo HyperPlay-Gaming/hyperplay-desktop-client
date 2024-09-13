@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "title": "Ubisoft Connect",
                 "message": "Az Ubisoft Connect telepítése a játék előtagjában kudarcot vallott. Ellenőrizze a wiki oldalunkat a https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac telepítéséhez."
+            },
+            "delete-files": {
+                "title": "Hiba eltávolítása kivont mappát",
+                "body": "Hiba eltávolítása kivont mappát {{path}}. Kérjük, távolítsa el manuálisan.\n{{paragraph}}\n{{error}}"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "Deszinkronizálás",
         "update": "Frissítés",
         "download": "Letöltés",
-        "continue": "Folytatás"
+        "continue": "Folytatás",
+        "install": "Telepítés"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     "email_subscription": {
         "title": "Köszönöm a feliratkozást!",
         "subtitle": "Most a közösségünk része vagy, és izgatottak vagyunk, hogy értékes frissítéseket és betekintéseket osztunk meg veled."
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Alapvető játék extrakció törölve",
+                "title": "Törölje a kitermelést"
+            },
+            "installing": {
+                "body": "Kitermelés alapjáték fájlok",
+                "title": "Installing Base játék"
+            },
+            "installed": {
+                "body": "Mod lesz alkalmazva a base játék",
+                "title": "Base Game telepítve"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Válasszon Base Game File Location",
+                "placeholder": "Válasszon Zip File"
+            }
+        }
+    },
+    "import-game-folder": {
+        "cta": "Import Game Folder",
+        "dialog": {
+            "title": "Válasszon játék mappát importálni"
+        },
+        "error": "Volt egy hiba az import során. Kérjük, lásd a naplókat további részletekért.",
+        "label": "Import Game Folder",
+        "placeholder": "Válassza ki a játék mappát importálni",
+        "success": "Sikeresen importált játékok!"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Ez a játék egy mod for World of Warcraft: Wrath of the Lich King (3.3.5a). Annak érdekében, hogy ez az anya legyen, a játékosoknak rendelkezniük kell a World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nem fogadja el a World of Warcraft. Azok a játékosok, akik birtokolják a World of Warcraft 3.3.5a verziót olyan forrásokból, mint:",
+                "subtitle": "Letöltés World of Warcraft 3.3.5a",
+                "title": "1. lépés",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "step2": {
+                "description": "Válassza ki a letöltött ChromieCraft_3.3.5a.zip fájl.",
+                "subtitle": "Válasszon ChromieCraft_3.3.5a.zip File",
+                "title": "2. lépés"
+            },
+            "step3": {
+                "description": "Kérjük, válassza ki a mappát, ahol a World of Warcraft: Wrath of the Lich King (3,3.5a) kell telepíteni.",
+                "subtitle": "Válasszon telepítést Folder",
+                "title": "3. lépés"
+            },
+            "step4": {
+                "description": "Írja be a hozzáférési kódot a játék telepítéséhez.",
+                "subtitle": "Hozzáférési kód",
+                "title": "4. lépés"
+            },
+            "title": "Mod utasítások"
+        }
     }
 }

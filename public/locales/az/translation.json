@@ -82,6 +82,10 @@
             "ubisoft-connect": {
                 "message": "Oyun əvvəl başarısız Nickel Connect quraşdırılması. https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac daxildir.",
                 "title": "Qeydiyyat"
+            },
+            "delete-files": {
+                "body": "Fayl qoymaq {{path}}. Daxil ol\n{{paragraph}}\n{{error}}",
+                "title": "Fayl qablaşdırmaq"
             }
         },
         "info": {
@@ -179,7 +183,8 @@
         "unsync": "Sinxronizasiyadan çıxarın",
         "continue": "Davam edin",
         "download": "Endir",
-        "update": "Yenilə"
+        "update": "Yenilə",
+        "install": "Yüklə"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
     "dlcs": {
         "label": "Yüklemek üçün DLCs seçin:"
     },
-    "back_to_game": "Oyun üçün geri"
+    "back_to_game": "Oyun üçün geri",
+    "import-game-folder": {
+        "dialog": {
+            "title": "Pulsuz Oyun Folder seçin"
+        },
+        "cta": "Avtomatik oyun kateqoriya",
+        "error": "Avtomobil zamanı bir səhv idi. Daha ətraflı məlumat üçün girişlər baxın.",
+        "label": "Avtomatik oyun kateqoriya",
+        "placeholder": "Pulsuz oyun qrup seçin",
+        "success": "Ətraflı avtomobil!"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "Bu oyun World of Warcraft üçün bir mod: Lich King Wrath (3.3.5a). Bu modu oynamaq üçün, oyunçular Warcraft Dünya nümunə sahibi olmalıdır 3.3.5a. {{newline}} {{newline}} HyperPlay Warcraft World ev sahibi deyil. Warcraft-ın öz dünya sahibi olan oyunçular, kimi mövzulardan 3.3.5a verə bilər:",
+                "subtitle": "World of Warcraft 3.3.5a",
+                "title": "Addım 1",
+                "webtorrent": "Torrent (Magnet Link)",
+                "chromieCraft": "ChromieCraft"
+            },
+            "step2": {
+                "description": "Qeyd olun ChromieCraft_3.3.5a.zip fak.",
+                "subtitle": "ChromieCraft_3.3.5a.zip Oxunub",
+                "title": "Addım 2"
+            },
+            "step3": {
+                "description": "World of Warcraft: Lich King Wrath (.3.5a) quraşdırılması lazımdır.",
+                "subtitle": "Qablaşdırma kateqoriya",
+                "title": "Addım 3"
+            },
+            "step4": {
+                "description": "Oyun yüklemek üçün giriş kodunu daxil edin.",
+                "subtitle": "Giriş Kodu",
+                "title": "Ad Soyad"
+            },
+            "title": "Modullar"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Ümumi oyun ekstraksiyası",
+                "title": "Cancel"
+            },
+            "installed": {
+                "body": "Mod baza oyun üçün uyğun olacaq",
+                "title": "Ümumi Oyun"
+            },
+            "installing": {
+                "body": "Bazar oyun faylları",
+                "title": "Ümumi Oyun"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "placeholder": "Oxunub",
+                "path": "Base Game File Yerevanı"
+            }
+        }
+    }
 }

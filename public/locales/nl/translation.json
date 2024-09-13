@@ -82,7 +82,11 @@
                 "title": "Ubisoft Connect",
                 "message": "Installatie van Ubisoft Connect in de wedstrijdvoorziening faalde. Controleer onze Wiki-pagina bij HTTPs: 'Guroic-Games-Launcher/HeroicGames Launcher/wiki/Hoi-to-Ubisoft-Connecton-Macen-Macen-Mauxin-Macen-Macen-Macen-Macen-Mac-Mac-Macen-Macen-Macen-Mac-Mac-Mac-Max-Mac-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Me-Max-Max-Me-Me-Max-Me-Me-Max-Me-Max-Me-Max-Max-Max-Max-Max-Me-Me-Max-Max-Max-Max-Max-Ma."
             },
-            "moving": "Error Moving Game 18X"
+            "moving": "Error Moving Game 18X",
+            "delete-files": {
+                "body": "Error verwijderde vouwen. Verwijder het handmatig.\n86X\n_117X",
+                "title": "Error verwijderen"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +183,8 @@
         "unsync": "De-synchroniseren",
         "continue": "Door­gaan",
         "download": "Download",
-        "update": "Aanpassen"
+        "update": "Aanpassen",
+        "install": "Installeer"
     },
     "controller": {
         "hints": {
@@ -1034,5 +1039,64 @@
         }
     },
     "analytics": "Analytics",
-    "profile": "Profiel"
+    "profile": "Profiel",
+    "import-game-folder": {
+        "cta": "Import Game Folder",
+        "dialog": {
+            "title": "Select Game Folder aan Import"
+        },
+        "error": "Er was een fout tijdens het import. Zie de logboeken voor meer details.",
+        "label": "Import Game Folder",
+        "placeholder": "Kies de spel map om te importeren",
+        "success": "Succesvolle geïmporteerde spelletjes!"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "title": "Base Game Installe",
+                "body": "Mod zal worden toegevoegd aan basis spel"
+            },
+            "installing": {
+                "body": "De basisbestanden uittrekken",
+                "title": "Installing Base Game"
+            },
+            "cancel": {
+                "body": "Basiswedstrijd geannuleerd",
+                "title": "Cancel Extract"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Select Base Game File",
+                "placeholder": "Select Zip Fi"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "Dit spel is een modder voor World of Warcraft: Wrath of the Lich King (3,3,5a) Om deze modder te spelen, moeten spelers een kopie van World of Warcraft 3,5a hebben. Spelers die de wereld van Warcraft bezitten kunnen versie 3,3,5a van bronnen als:",
+                "title": "Stap 1",
+                "webtorrent": "Torrent (Magnet Link)",
+                "chromieCraft": "ChromieCraft",
+                "subtitle": "Download World of Warcraft 3,3,5"
+            },
+            "step2": {
+                "description": "Selecteer de download ChromieCraft 3,5a.",
+                "subtitle": "Select ChromieCraft3,3,5a. Veld",
+                "title": "Stap 2"
+            },
+            "step3": {
+                "description": "Kies alsjeblieft de map waar World of Warcraft, Wrath of the Lich King geïnstalleerd moet worden.",
+                "subtitle": "Select Install Folder",
+                "title": "Stap 3"
+            },
+            "step4": {
+                "description": "Voer de toegangscode in om het spel te installeren.",
+                "subtitle": "Access Code",
+                "title": "Stap 4"
+            },
+            "title": "Mod Instructies"
+        }
+    }
 }

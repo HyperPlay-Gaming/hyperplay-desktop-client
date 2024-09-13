@@ -1,0 +1,64 @@
+.MuiDialogContent-root {
+  padding-left: 0;
+}
+
+.stepContainer {
+  max-width: 720px;
+  margin-top: var(--space-md);
+
+  .stepTitle {
+    padding: var(--space-3xs) var(--space-sm);
+    border-radius: var(--space-xs);
+    background-color: var(--color-tertiary-300);
+    color: black;
+    font-size: var(--text-md);
+    width: max-content;
+    margin-top: var(--space-md);
+  }
+
+  .stepSubtitle {
+    font-size: var(--text-2xl);
+    font-weight: bold;
+    margin-top: var(--space-3xs);
+  }
+
+  .stepDescription {
+    font-size: var(--text-md);
+    margin-bottom: var(--space-xs);
+  }
+}
+
+.sourceList {
+  padding: 0px var(--space-md);
+}
+
+.sourceItem {
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--color-tertiary-400);
+  margin-bottom: var(--space-3xs);
+  text-decoration: none;
+  color: var(--color-primary-200);
+
+  .magnetContainer {
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-xs);
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: var(--space-sm);
+  border: 1px solid var(--color-tertiary-300);
+  padding: var(--space-xl);
+}
+
+.copyMagnetButton {
+  display: inline-flex;
+  align-items: center;
+  > svg {
+    height: var(--space-lg);
+  }
+}

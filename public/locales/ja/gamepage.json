@@ -53,7 +53,10 @@
         },
         "yesCancel": "はい、キャンセル",
         "dont-show-again": "再表示しない",
-        "ok": "OK"
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "抽出をキャンセルしたいですか?"
+        }
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -238,5 +241,10 @@
         "store": "ストアページ",
         "verify": "確認と修復",
         "extraInfo": "余分な情報"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "このメッセージでHyperPlayチームに連絡してください:{{error}} - {{context}}."
+        }
     }
 }

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DownloadToast, Images, CircularButton } from '@hyperplay/ui'
+import Draggable from 'react-draggable'
 import { DMQueueElement, GameStatus, InstallProgress } from 'common/types'
 import { DMQueue } from 'frontend/types'
 import ContextProvider from 'frontend/state/ContextProvider'
@@ -205,60 +206,62 @@ export default function DownloadToastManager() {
   const adjustedDownloadSizeInBytes = downloadSizeInMB * 1024 * 1024
 
   return (
-    <div className={DownloadToastManagerStyles.downloadManagerContainer}>
-      {showDownloadToast ? (
-        <DownloadToast
-          imgUrl={imgUrl}
-          gameTitle={title}
-          downloadedInBytes={adjustedDownloadedInBytes}
-          downloadSizeInBytes={adjustedDownloadSizeInBytes}
-          estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
-          onCancelClick={() => {
-            setShowStopInstallModal(true)
-            window.api.trackEvent({
-              event: 'DownloadToastInteraction',
-              properties: { buttonClicked: 'cancel' }
-            })
-          }}
-          onPauseClick={async () => window.api.pauseCurrentDownload()}
-          onStartClick={() => window.api.resumeCurrentDownload()}
-          onCloseClick={() => {
-            setShowDownloadToast(false)
-            window.api.trackEvent({
-              event: 'DownloadToastInteraction',
-              properties: { buttonClicked: 'close' }
-            })
-          }}
-          onPlayClick={async () => {
-            launch({
-              appName,
-              t,
-              runner,
-              hasUpdate: false,
-              showDialogModal,
-              isNotNative: isNotNative(platform, installedPlatform!)
-            })
-            window.api.trackEvent({
-              event: 'DownloadToastInteraction',
-              properties: { buttonClicked: 'play' }
-            })
-          }}
-          status={getDownloadStatus()}
-          statusText={downloadStatusText ?? 'Downloading'}
-        />
-      ) : (
-        downloadIcon()
-      )}
-      {showStopInstallModal ? (
-        <StopInstallationModal
-          installPath={installPath}
-          folderName={folder_name}
-          progress={progress}
-          gameInfo={gameInfo}
-          status={status}
-          onClose={() => setShowStopInstallModal(false)}
-        />
-      ) : null}
-    </div>
+    <Draggable>
+      <div className={DownloadToastManagerStyles.downloadManagerContainer}>
+        {showDownloadToast ? (
+          <DownloadToast
+            imgUrl={imgUrl}
+            gameTitle={title}
+            downloadedInBytes={adjustedDownloadedInBytes}
+            downloadSizeInBytes={adjustedDownloadSizeInBytes}
+            estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
+            onCancelClick={() => {
+              setShowStopInstallModal(true)
+              window.api.trackEvent({
+                event: 'DownloadToastInteraction',
+                properties: { buttonClicked: 'cancel' }
+              })
+            }}
+            onPauseClick={async () => window.api.pauseCurrentDownload()}
+            onStartClick={() => window.api.resumeCurrentDownload()}
+            onCloseClick={() => {
+              setShowDownloadToast(false)
+              window.api.trackEvent({
+                event: 'DownloadToastInteraction',
+                properties: { buttonClicked: 'close' }
+              })
+            }}
+            onPlayClick={async () => {
+              launch({
+                appName,
+                t,
+                runner,
+                hasUpdate: false,
+                showDialogModal,
+                isNotNative: isNotNative(platform, installedPlatform!)
+              })
+              window.api.trackEvent({
+                event: 'DownloadToastInteraction',
+                properties: { buttonClicked: 'play' }
+              })
+            }}
+            status={getDownloadStatus()}
+            statusText={downloadStatusText ?? 'Downloading'}
+          />
+        ) : (
+          downloadIcon()
+        )}
+        {showStopInstallModal ? (
+          <StopInstallationModal
+            installPath={installPath}
+            folderName={folder_name}
+            progress={progress}
+            gameInfo={gameInfo}
+            status={status}
+            onClose={() => setShowStopInstallModal(false)}
+          />
+        ) : null}
+      </div>
+    </Draggable>
   )
 }
