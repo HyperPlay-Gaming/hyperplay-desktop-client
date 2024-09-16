@@ -38,7 +38,7 @@ import {
 import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
-import { DXVK, Winetricks } from './tools'
+import { DXVK, SteamWindows, Winetricks } from './tools'
 import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
@@ -60,7 +60,8 @@ import {
   wait,
   getShellPath,
   checkWineBeforeLaunch,
-  downloadDefaultWine
+  downloadDefaultWine,
+  writeConfig
 } from './utils'
 import {
   configPath,
@@ -97,7 +98,6 @@ import {
 import { handleOtp, handleProtocol } from './protocol'
 import {
   initLogger,
-  logChangedSetting,
   logError,
   logInfo,
   LogPrefix,
@@ -1065,31 +1065,9 @@ ipcMain.on('toggleVKD3D', (event, { appName, action }) => {
     })
 })
 
-ipcMain.handle('writeConfig', (event, { appName, config }) => {
-  logInfo(
-    `Writing config for ${appName === 'default' ? 'HyperPlay' : appName}`,
-    LogPrefix.Backend
-  )
-  const oldConfig =
-    appName === 'default'
-      ? GlobalConfig.get().getSettings()
-      : GameConfig.get(appName).config
-
-  // log only the changed setting
-  logChangedSetting(config, oldConfig)
-
-  if (appName === 'default') {
-    GlobalConfig.get().set(config as AppSettings)
-    GlobalConfig.get().flush()
-    const currentConfigStore = configStore.get_nodefault('settings')
-    if (currentConfigStore) {
-      configStore.set('settings', { ...currentConfigStore, ...config })
-    }
-  } else {
-    GameConfig.get(appName).config = config as GameSettings
-    GameConfig.get(appName).flush()
-  }
-})
+ipcMain.handle('writeConfig', (event, { appName, config }) =>
+  writeConfig(appName, config)
+)
 
 ipcMain.on('setSetting', (event, { appName, key, value }) => {
   if (appName === 'default') {
@@ -1965,6 +1943,8 @@ ipcMain.handle('removeApp', async (e, args) => {
 ipcMain.handle('launchApp', async (e, appName, runner) =>
   gameManagerMap[runner].launch(appName)
 )
+
+ipcMain.handle('installSteamWindows', async () => SteamWindows.installSteam())
 
 ipcMain.handle('isNative', (e, { appName, runner }) => {
   return gameManagerMap[runner].isNative(appName)

@@ -11,7 +11,8 @@ import {
   GameInfo,
   GameSettings,
   State,
-  ProgressInfo
+  ProgressInfo,
+  AppSettings
 } from 'common/types'
 import axios from 'axios'
 import download from 'backend/utils/downloadFile/download_file'
@@ -50,6 +51,7 @@ import {
   isLinux
 } from './constants'
 import {
+  logChangedSetting,
   logError,
   logInfo,
   LogPrefix,
@@ -1517,6 +1519,54 @@ export function getExecutableAndArgs(executableWithArgs: string): {
   const launchArgs = executableWithArgs.replace(executable, '').trim()
 
   return { executable, launchArgs }
+}
+
+function roundToTenth(x: number) {
+  return Math.round(x * 10) / 10
+}
+
+export function calculateProgress(
+  downloadedBytes: number,
+  downloadSize: number,
+  downloadSpeed: number,
+  diskWriteSpeed: number,
+  progress: number
+) {
+  const eta = calculateEta(downloadedBytes, downloadSpeed, downloadSize)
+
+  return {
+    percent: roundToTenth(progress),
+    diskSpeed: roundToTenth(diskWriteSpeed / 1024 / 1024),
+    downSpeed: roundToTenth(downloadSpeed / 1024 / 1024),
+    bytes: roundToTenth(downloadedBytes / 1024 / 1024),
+    eta
+  }
+}
+
+export const writeConfig = (appName: string, config: Partial<AppSettings>) => {
+  logInfo(
+    `Writing config for ${appName === 'default' ? 'HyperPlay' : appName}`,
+    LogPrefix.Backend
+  )
+  const oldConfig =
+    appName === 'default'
+      ? GlobalConfig.get().getSettings()
+      : GameConfig.get(appName).config
+
+  // log only the changed setting
+  logChangedSetting(config, oldConfig)
+
+  if (appName === 'default') {
+    GlobalConfig.get().set(config as AppSettings)
+    GlobalConfig.get().flush()
+    const currentConfigStore = configStore.get_nodefault('settings')
+    if (currentConfigStore) {
+      configStore.set('settings', { ...currentConfigStore, ...config })
+    }
+  } else {
+    GameConfig.get(appName).config = config as GameSettings
+    GameConfig.get(appName).flush()
+  }
 }
 
 export async function copyRecursiveAsync(src: string, dest: string) {
