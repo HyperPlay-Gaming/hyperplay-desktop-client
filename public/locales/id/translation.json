@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Kesalahan menghapus folder yang diekstrak {{path}}. Silakan hapus secara manual.\n{{paragraph}}\n{{error}}",
                 "title": "Kesalahan menghapus folder yang diekstrak"
+            },
+            "steam": {
+                "error": "Dieksekusi uap tidak ditemukan. Instalasi mungkin dibatalkan oleh pengguna atau gagal di sisi uap.",
+                "message": "Instalasi uap gagal! Silakan baca petunjuk dengan hati-hati dan coba lagi! {{paragraph}} {{error}}",
+                "title": "Kesalahan uap"
             }
         },
         "info": {
@@ -1099,5 +1104,25 @@
             },
             "title": "Instruksi Mod"
         }
-    }
+    },
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay akan mengunduh dan memulai Pengaturan uap untuk Anda. Silahkan ikuti petunjuk uap pada installer mereka;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay akan memberitahu Anda setelah instalasi dilakukan;",
+    "Cancel Installation": "Login",
+    "Installing Steam": "Menginstal uap ...",
+    "Launching Steam": "Luncurkan uap ...",
+    "steam-install": {
+        "success-message": "Uap telah dipasang. Sekarang Anda dapat meluncurkannya dari Perpustakaan.",
+        "compatibility-layer-not-available": "Kompatibilitas lapisan tidak tersedia. Silakan instal satu dari \"Pengaturan> Wine Manager\" pertama.",
+        "error-message": "Kesalahan terjadi saat memasang uap. Silahkan coba lagi.",
+        "launch-tooltip": "Luncurkan uap menggunakan Lapisan Kompatibilitas HyperPlay",
+        "tooltip": "Ini akan menginstal versi Windows uap dan akan berjalan menggunakan hiperPlay Compatibility Layer.\n\nBeberapa permainan terutama judul yang lebih tua, game 3D yang lebih baru, atau mereka dengan perangkat lunak anti-cheat mungkin tidak bekerja dengan benar.\n\nSpesifikasi yang disarankan adalah Mac dengan Apple Silicon CPU (M1 atau di atas) dan setidaknya 16GB RAM."
+    },
+    "At the end make sure to": "Pada akhir pastikan",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Jika Anda ingin melanjutkan, bersabar karena dapat mengambil beberapa menit untuk menyelesaikan tergantung pada koneksi internet Anda dan konfigurasi sistem;",
+    "Install Steam": "Menginstal uap",
+    "Launch Steam": "Luncurkan uap",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Pada peluncuran pertama uap akan mengunduh file yang diperlukan dan akan memakan waktu beberapa menit untuk menyelesaikan dan layar login muncul;",
+    "UNCHECK 'Run Steam'": "Sitemap Sitemap"
 }
