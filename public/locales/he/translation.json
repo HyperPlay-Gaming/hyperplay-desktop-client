@@ -60,6 +60,11 @@
             "delete-files": {
                 "body": "הסרת התיקיה (X32X). אנא הסר אותו באופן ידני.\n[x86x]\n(X117X)",
                 "title": "שגיאה הסרת תיקיות"
+            },
+            "steam": {
+                "error": "קיטור לא מצא. ההתקנה בוטלה על ידי משתמשים או נכשלה בצד Steam.",
+                "message": "התקנת Steam נכשלה! נא לקרוא את ההוראות בזהירות ולנסות שוב! [x81X]",
+                "title": "טעות Steam"
             }
         },
         "runexe": {
@@ -1114,5 +1119,25 @@
     },
     "install": {
         "path": "בחרו מיקום התקנה"
-    }
+    },
+    "Cancel Installation": "ביטול ההתקנה",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay יורד והתחל את ההתקנה של Steam עבורך. נא לעקוב אחר הוראות Steam על ההתקנה שלהם;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay יודיע לך ברגע שהתקנה בוצעה;",
+    "Launching Steam": "שיגור Steam...",
+    "steam-install": {
+        "compatibility-layer-not-available": "שכבת תאימות לא זמינה. נא להתקין תחילה את אחד מ\"מנהלי יין\".",
+        "error-message": "טעות התרחשה בעת התקנת Steam. אנא נסה שוב.",
+        "launch-tooltip": "המונחים: Hyperplay Compatibility Layer",
+        "success-message": "Steam מותקנת. עכשיו אתה יכול להתחיל את זה מהספריה.",
+        "tooltip": "זה יתקין את גירסת Windows של Steam והוא יפעל באמצעות שכבת תאימות HyperPlay.\n\nכמה משחקים במיוחד תארים ישנים יותר, משחקים חדשים יותר 3D, או אלה עם תוכנות נגד צ'אט עשויים לא לעבוד כראוי.\n\nהמפרטים המומלצים הם Mac עם Apple Silicon CPU (M1 ומעלה) ולפחות 16GB של RAM."
+    },
+    "At the end make sure to": "בסוף לוודא",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "אם אתה רוצה להמשיך, להיות סבלני כי זה יכול לקחת כמה דקות כדי לסיים בהתאם לחיבור האינטרנט שלך ותצורת המערכת;",
+    "Install Steam": "התקנת Steam",
+    "Installing Steam": "התקנת Steam.",
+    "Launch Steam": "שיגור Steam",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "בהשקה ראשונה Steam מורידה את הקבצים הדרושים ויקח כמה דקות כדי לסיים את מסך הכניסה להופיע;",
+    "UNCHECK 'Run Steam'": "UNCHECK - Run Steam \"\""
 }
