@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Видалення помилок екстракції папки {{path}}. Будь ласка, зніміть його вручну.\n{{paragraph}}\n{{error}}",
                 "title": "Видалення помилок вилучення папки"
+            },
+            "steam": {
+                "title": "Помилки",
+                "error": "Не знайдено Steam. Встановити, ймовірно, скасовано користувачем або не вдалося на стороні Steam.",
+                "message": "Не вдалося встановити Steam! Будь ласка, ознайомтеся з інструкцією, ретельно і спробуйте знову! {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -1119,5 +1124,25 @@
         "success": "Успішно імпортовані ігри!",
         "error": "Помилки при імпорті. Будь ласка, див. журнали для отримання більш детальної інформації.",
         "label": "Імпорт Game Folder"
-    }
+    },
+    "Cancel Installation": "Скасувати встановлення",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay завантажить і запустіть Steam Setup для вас. Будь ласка, дотримуйтесь інструкцій Steam на їх установці;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay повідомить про те, як виконується установка;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Якщо ви хочете продовжити, будьте пацієнтом кілька хвилин, щоб закінчити в залежності від конфігурації інтернету та системи;",
+    "Install Steam": "Встановити Steam",
+    "Installing Steam": "Установка Steam ...",
+    "At the end make sure to": "В кінці переконайтеся, що",
+    "Launch Steam": "Запуск Steam",
+    "Launching Steam": "Запуск Steam ...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "На першому запуску Steam завантажить необхідні файли і займе кілька хвилин, щоб закінчити і з'являтися екран входу;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Не доступний шар сумісності. Будь ласка, встановіть один з «Налаштування» першим.",
+        "error-message": "Похибка сталася при установці Steam. Будь ласка, спробуйте знову.",
+        "launch-tooltip": "Запустіть Steam за допомогою шару сумісності HyperPlay",
+        "success-message": "Встановлено Steam. Ви можете запустити його з бібліотеки.",
+        "tooltip": "Це дозволить встановити Windows версію Steam і він буде працювати за допомогою шару сумісності HyperPlay.\n\nДеякі ігри особливо старші заголовки, новіші 3D ігри, або ті, хто з антивірусним програмним забезпеченням не може працювати належним чином.\n\nРекомендовані характеристики є Mac з Apple Silicon CPU (M1 або вище) і принаймні 16 Гб оперативної пам'яті."
+    },
+    "UNCHECK 'Run Steam'": "УНІЧК \"Рун Пар\" Р"
 }
