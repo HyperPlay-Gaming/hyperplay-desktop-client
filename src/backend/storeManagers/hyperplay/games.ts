@@ -991,6 +991,9 @@ export async function install(
     )
     if (!`${error}`.includes('Download stopped or paused')) {
       callAbortController(appName)
+      return {
+        status: 'abort'
+      }
     }
 
     return {
