@@ -86,6 +86,11 @@
             "delete-files": {
                 "title": "Error usuwanie folderu",
                 "body": "Error usuwający folder (X32X). Zdejmuje go ręcznie.\n(X86X) (ang.).\n(X117X) (ang.)"
+            },
+            "steam": {
+                "title": "Steam error",
+                "error": "Steam executable not found. Instalacja została prawdopodobnie odwołana przez użytkownika lub zawieszona po stronie Steam.",
+                "message": "Instalacja Steam nie powiodła się. Czy odczytuje instrukcje ostrożnie i spróbować jeszcze raz! (X81X) (X95X) (ang.)"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "Mod Instrukcje"
         }
-    }
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Na pierwszym uruchomieniu platforma Steam będzie pobierana niezbędne pliki i będzie trwać kilka minut, aby zakończyć pracę, a ekran loginowy;",
+    "At the end make sure to": "Pod koniec jest pewny siebie",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay będzie pobrać i zacząć Steam Setup for you. Proszę o instrukcję Steam;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay informuje Ciebie, że kiedyś zostanie wykonana instalacja;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Jeśli chcesz kontynuować, będzie pacjentem, ponieważ może trwać kilka minut, aby zakończyć się w zależności od połączenia internetowego i systemu;",
+    "Install Steam": "Steam",
+    "Installing Steam": "Installing Steam (ang.).",
+    "Launch Steam": "Launch Steam",
+    "Launching Steam": "Launching Steam (ang.).",
+    "Cancel Installation": "Cancel Installation",
+    "steam-install": {
+        "compatibility-layer-not-available": "Warstość nie jest dostępna. Po raz pierwszy pojawił się utwór „Settings > Wine Manager”.",
+        "error-message": "Błędne błędy pojawiły się podczas instalacji Steam. Ponownie próbuje.",
+        "launch-tooltip": "Launch Steam korzysta z HyperPlay Compatibility Layer",
+        "success-message": "Steam zostało zainstalowane. Obecnie można ją wystrzelić z biblioteki.",
+        "tooltip": "Umożliwia to zainstalowanie wersji systemu Windows Steam i korzysta z HyperPlay Compatibility Layer.\n\nNiektóre gry, zwłaszcza starsze tytuły, nowsze gry 3D lub te z oprogramowaniem antycheatowym mogą nie działać właściwie.\n\nWskaźniki rekomendowane to Mac z procesorem Apple Silicon (M1 lub więcej) i przynajmniej 16 GB pamięci RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam (ang.). '"
 }
