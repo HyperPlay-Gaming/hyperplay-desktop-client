@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Erro removendo a pasta extraída {{path}}. Por favor, remova-o manualmente.\n{{paragraph}}\n{{error}}",
                 "title": "Erro removendo a pasta extraída"
+            },
+            "steam": {
+                "error": "Executável a vapor não encontrado. A instalação provavelmente foi cancelada pelo usuário ou falhou no lado Steam.",
+                "message": "A instalação do vapor falhou! Por favor, leia as instruções cuidadosamente e tente novamente! {{paragraph}}",
+                "title": "Erro de vapor"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "Instruções de Mod"
         }
-    }
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "Instalando o Steam..."
+    },
+    "Install Steam": "Instalar o Steam",
+    "Installing Steam": "Instalando o Steam...",
+    "Launching Steam": "Lançamento do Steam...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "No início o Steam irá baixar os arquivos necessários e levará alguns minutos para terminar e a tela de login para aparecer;",
+    "steam-install": {
+        "tooltip": "Isso instalará a versão do Windows do Steam e será executado usando uma camada de compatibilidade HyperPlay.\n\nAlguns jogos especialmente títulos mais antigos, jogos 3D mais recentes, ou aqueles com software anti-cheat pode não funcionar corretamente.\n\nAs especificações recomendadas são um Mac com CPU Apple Silicon (M1 ou superior) e pelo menos 16GB de RAM.",
+        "compatibility-layer-not-available": "Camada de compatibilidade não disponível. Por favor, instale um de \"Configurações > Wine Manager\" primeiro.",
+        "error-message": "Um erro ocorreu ao instalar o Steam. Por favor, tente novamente.",
+        "launch-tooltip": "Lançar vapor usando a camada de compatibilidade HyperPlay",
+        "success-message": "O vapor foi instalado. Agora você pode lançá-lo da Biblioteca."
+    },
+    "At the end make sure to": "Erro de vapor",
+    "Cancel Installation": "Cancelar instalação",
+    "HyperPlay will notify you once the installation is done;": "O HyperPlay irá notificá-lo quando a instalação for feita;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Se você quiser continuar, seja paciente, pois pode levar alguns minutos para terminar dependendo de sua conexão de internet e configuração do sistema;",
+    "Launch Steam": "Lançar vapor"
 }
