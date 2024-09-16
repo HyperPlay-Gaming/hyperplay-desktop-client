@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Chyba odstranění extrahované složky {{path}}. ručně odstranit.\n{{paragraph}}\n{{error}}",
                 "title": "Chyba odstranění extrahované složky"
+            },
+            "steam": {
+                "error": "Parní spustitelný ne nalezeno. Instalace byla pravděpodobně zrušena uživatelem nebo neúspěšně na straně Steam.",
+                "message": "Parní instalace selhala! Prosím, přečtěte si pokyny pečlivě a zkuste to znovu! {{paragraph}} {{error}}",
+                "title": "Parní chyba"
             }
         },
         "info": {
@@ -1105,5 +1110,25 @@
         "label": "Import herní složky",
         "placeholder": "Vyberte složku hry pro import",
         "success": "Úspěšně dovážené hry!"
-    }
+    },
+    "Install Steam": "Instalace Steam",
+    "Installing Steam": "Instalace Steam ...",
+    "Launch Steam": "Spustit Steam",
+    "Launching Steam": "Spuštění Steam ...",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vás upozorní po dokončení instalace;",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Na prvním spuštění Steam stáhnout potřebné soubory a bude trvat několik minut k dokončení a přihlašovací obrazovka se zobrazí;",
+    "steam-install": {
+        "error-message": "Chyba nastala při instalaci Steamu. Prosím, zkuste to znovu.",
+        "compatibility-layer-not-available": "Kompatibilita vrstva není k dispozici. Nejprve prosím nainstalujte jednu z \"Nastavení > nejprve vinicový manažer\".",
+        "launch-tooltip": "Spusťte Steam pomocí HyperPlay kompatibility vrstvy",
+        "success-message": "Steam byl nainstalován. Nyní můžete spustit z knihovny.",
+        "tooltip": "To nainstaluje verzi systému Windows Steam a bude spuštěn pomocí HyperPlay kompatibility vrstvy.\n\nNěkteré hry zejména starší tituly, novější 3D hry, nebo ty s anti-cheat software nemusí fungovat správně.\n\nDoporučené specifikace jsou Mac s Apple Silicon CPU (M1 nebo výše) a nejméně 16GB RAM."
+    },
+    "At the end make sure to": "Na konci se ujistěte, že",
+    "Cancel Installation": "Zrušit instalaci",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay stáhnout a začít Steam Setup pro vás. Postupujte podle pokynů Steam na jejich instalátoru;"
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Pokud chcete pokračovat, buďte trpěliví, protože může trvat několik minut, než je možné dokončit v závislosti na vašem připojení k internetu a konfiguraci systému;",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam V"
 }
