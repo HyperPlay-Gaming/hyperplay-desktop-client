@@ -188,7 +188,8 @@
         "unsync": "Рассинхронизировать",
         "continue": "Продолжить",
         "download": "Скачать",
-        "update": "Обновить"
+        "update": "Обновить",
+        "install": "Установить"
     },
     "controller": {
         "hints": {
@@ -1067,7 +1068,8 @@
                 "title": "Установка базовой игры"
             },
             "cancel": {
-                "body": "Базовая добыча игры отменена"
+                "body": "Базовая добыча игры отменена",
+                "title": "Отменить экстракцию"
             }
         },
         "instructions": {
@@ -1081,22 +1083,26 @@
         "instructions": {
             "step2": {
                 "subtitle": "Выберите ChromieCraft_3.3.5a.zip Файл",
-                "description": "Выберите загруженный ChromieCraft_3.3.5a.zip файл."
+                "description": "Выберите загруженный ChromieCraft_3.3.5a.zip файл.",
+                "title": "Шаг 2"
             },
             "step3": {
                 "description": "Выберите папку, в которой должен быть установлен World of Warcraft: Wrath of the Lich King (3.3.5a).",
-                "subtitle": "Выберите установку Папка"
+                "subtitle": "Выберите установку Папка",
+                "title": "Шаг 3"
             },
             "step4": {
                 "description": "Введите код доступа, чтобы продолжить установку игры.",
-                "subtitle": "Код доступа"
+                "subtitle": "Код доступа",
+                "title": "Шаг 4"
             },
             "title": "Модные инструкции",
             "step1": {
                 "chromieCraft": "ChromieCraft",
                 "description": "Эта игра является модом для World of Warcraft: Wrath of the Lich King (3.3.5a). Чтобы играть в этот мод, игроки должны владеть копией World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не принимает World of Warcraft. Игроки, которые владеют World of Warcraft, могут получить версию 3.3.5a из таких источников, как:",
                 "subtitle": "Скачать World of Warcraft 3.3.5a",
-                "webtorrent": "Торрент (Magnet Link)"
+                "webtorrent": "Торрент (Magnet Link)",
+                "title": "Шаг 1"
             }
         }
     },
