@@ -154,5 +154,8 @@ export const checkHyperPlayAccessCode = async (
 export const getEpicListingUrl = async (appName: string) =>
   ipcRenderer.invoke('getEpicListingUrl', appName)
 
+export const installSteamWindows = async () =>
+  ipcRenderer.invoke('installSteamWindows')
+
 export const importGameFolder = async (gameFolder: string) =>
   ipcRenderer.invoke('importGameFolder', gameFolder)
