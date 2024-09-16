@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "#Zabuna #brisati #vaditi @folder [@X32@X]. @Please #brisati #free @manually. \n                [@X86@X] \n                [@X117@X]",
                 "title": "#Zabuna #brisati #vaditi @folder"
+            },
+            "steam": {
+                "error": "@Steam executable ne #pronađen. #Instalacija #biti vjerojatno canceled @by #korisnik ili #zakazati @on @Steam #strana#.",
+                "message": "@Steam #instalacija #zakazati! @Please #čitati @the #izučavanje pažljivo a #pokušaj opet! [@X81@X] [@X95@X]",
+                "title": "@Steam #zabuna"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
         "label": "#Uvoz #Igra",
         "placeholder": "#Birati @the #igra @folder #na #uvoz",
         "success": "@Successfully #uvesti #igra#!"
+    },
+    "Cancel Installation": "#Ukidati",
+    "At the end make sure to": "@At the end @make sure #na",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay #volja #preuzimanje a #početak @the @Steam Setup @for #free. @Please @follow @Steam #izučavanje @on #svoj @installer#;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay #volja @notify #free jednom @the #instalacija @i #raditi#;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Li #free #želja #na #nastaviti, #biti #pacijent otkad #free #limenka #uzeti @a few #minuta #na @finish @depend @on #tvoj #internet #veza a #sustav #konfiguracija#;",
+    "Install Steam": "@Install",
+    "Installing Steam": "#Instaliranje @Steam#...",
+    "Launch Steam": "#Otvaranje",
+    "UNCHECK 'Run Steam'": "UNCHECK '#Bijeg @Steam'",
+    "Launching Steam": "#Započinjanje @Steam#...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "@On najprije #otvaranje @Steam #volja #preuzimanje @the #neodložan #kartoteka a #volja #uzeti @a few #minuta #na @finish a @the login #ekran #na #nastati#;",
+    "steam-install": {
+        "compatibility-layer-not-available": "#Kompatibilnost #red ne #dostupan. @Please @install #jedan @from @parquote@Setting > #Vino #Upravitelj@parquote najprije#.",
+        "error-message": "@A #zabuna @occur @while #instaliranje @Steam. @Please #pokušaj opet#.",
+        "launch-tooltip": "#Otvaranje @Steam #uporabiti @the HyperPlay #Kompatibilnost",
+        "success-message": "@Steam #ima #biti @install. #Free #limenka sad #otvaranje #free @from @the #Biblioteka#.",
+        "tooltip": "@This #volja @install @the #Prozor #inačica @of @Steam a #free #volja #bijeg #uporabiti @a HyperPlay #Kompatibilnost #Red. \n\n    #Kakav #igra osobito #star #naziv, #nov 3@D #igra, ili @that #uz @anti-@cheat #softver @may ne #rad @properly. \n\n    @The #Predlagati specs #biti @a @Mac #uz #Jabuka @Silicon @CPU (M1 ili @above) a barem 16@GB @of @RAM#."
     }
 }
