@@ -51,16 +51,12 @@ import {
   getStoreName,
   isEpicServiceOffline,
   handleExit,
-  checkRosettaInstall,
   openUrlOrFile,
   resetApp,
-  setGPTKDefaultOnMacOS,
   showAboutWindow,
   showItemInFolder,
   wait,
   getShellPath,
-  checkWineBeforeLaunch,
-  downloadDefaultWine,
   writeConfig
 } from './utils'
 import {
@@ -81,7 +77,6 @@ import {
   isCLIFullscreen,
   isCLINoGui,
   isFlatpak,
-  isMac,
   isSteamDeckGameMode,
   onboardLocalStore,
   publicDir,
@@ -149,6 +144,13 @@ import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL, devSentryDsn, prodSentryDsn } from 'common/constants'
 import { getHpOverlay, initOverlay } from './overlay'
+
+import { initExtension } from './extension/importer'
+import { hpApi } from './utils/hyperplay_api'
+import {
+  initializeCompatibilityLayer,
+  checkWineBeforeLaunch
+} from './utils/compatibility_layers'
 
 /*
  * INSERT OTHER IPC HANDLERS HERE
@@ -633,21 +635,10 @@ if (!gotTheLock) {
       }, 10000)
     }
 
-    // Will download Wine if none was found
-    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
-    const toolkitDownloaded = availableWine.some(
-      (wine) => wine.type === 'toolkit'
-    )
-    const shouldDownloadWine =
-      !availableWine.length || (isMac && !toolkitDownloaded)
-
-    Promise.all([
-      DXVK.getLatest(),
-      Winetricks.download(),
-      shouldDownloadWine ? downloadDefaultWine() : null,
-      isMac && checkRosettaInstall(),
-      isMac && !shouldDownloadWine && setGPTKDefaultOnMacOS()
-    ])
+    // Setup the compatibility layer if not on Windows
+    if (!isWindows) {
+      initializeCompatibilityLayer()
+    }
 
     // set initial zoom level after a moment, if set in sync the value stays as 1
     setTimeout(() => {
@@ -2071,5 +2062,3 @@ ipcMain.handle('getHyperPlayListings', async () => {
  */
 
 import './storeManagers/legendary/eos_overlay/ipc_handler'
-import { initExtension } from './extension/importer'
-import { hpApi } from './utils/hyperplay_api'
