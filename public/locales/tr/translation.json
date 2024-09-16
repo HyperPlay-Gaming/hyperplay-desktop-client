@@ -255,7 +255,7 @@
         "ignore_hidden": "Gizlileri Yoksay",
         "platform": "Platform",
         "show_all_games": "Tüm oyunları göster",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Kullanılabilir olmayan oyunları göster",
         "show_favourites_only": "Yalnızca Favorileri göster",
         "show_hidden": "Gizlileri Göster",
         "store": "Mağazayı Filtrele"
@@ -738,7 +738,7 @@
         "manager": {
             "link": "Wine Yöneticisi",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine Yöneticisi",
+            "title": "Uyumluluk Katmanı ",
             "unzipping": "Çıkartılıyor"
         },
         "release": "Release Date",
