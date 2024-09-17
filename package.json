@@ -330,7 +330,7 @@
     "@types/ws": "^8.5.12",
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "@valist/sdk": "^2.9.17",
+    "@valist/sdk": "^2.10.5",
     "@vitejs/plugin-react": "^4.3.1",
     "cross-env": "^7.0.3",
     "electron": "^32.0.1",
@@ -363,9 +363,9 @@
     "@hyperplay/extension-provider": "^0.0.6",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^0.0.6",
+    "@hyperplay/patcher": "^0.0.6",
     "@hyperplay/providers": "^0.0.5",
-    "@hyperplay/proxy-server": "^0.0.11",
-    "@hyperplay/patcher": "^0.0.6"
+    "@hyperplay/proxy-server": "^0.0.11"
   },
   "packageManager": "yarn@1.22.19",
   "lavamoat": {
