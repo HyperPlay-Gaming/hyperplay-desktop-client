@@ -33,6 +33,7 @@ import {
   isWindows,
   isLinux,
   getValidateLicenseKeysApiUrl,
+  ipdtPatcher,
   toolsPath
 } from 'backend/constants'
 import {
@@ -79,7 +80,7 @@ import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
-import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
+import { downloadIPDTForOS } from '@hyperplay/patcher'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -93,8 +94,6 @@ interface ProgressDownloadingItem {
 
 const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
 const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
-
-const ipdtPatcher = path.join(toolsPath, 'ipdt')
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)

@@ -51,7 +51,6 @@ const appFolder = join(configFolder, 'hyperplay')
 const legendaryConfigPath = join(appFolder, 'legendaryConfig', 'legendary')
 const configPath = join(appConfigFolder, 'config.json')
 const gamesConfigPath = join(appConfigFolder, 'GamesConfig')
-const manifestsFolder = join(appConfigFolder, 'manifests')
 
 const toolsPath = join(appConfigFolder, 'tools')
 const iconsFolder = join(appConfigFolder, 'icons')
@@ -72,6 +71,9 @@ const cachedUbisoftInstallerPath = join(
   'tools',
   'UbisoftConnectInstaller.exe'
 )
+
+const ipdtPatcher = join(toolsPath, 'ipdt')
+const ipdtManifestsPath = join(appConfigFolder, 'manifests')
 
 const { currentLogFile, lastLogFile, legendaryLogFile, gogdlLogFile } =
   createNewLogFileAndClearOldOnes()
@@ -203,20 +205,31 @@ const execOptions = {
   shell: getShell()
 }
 
-const defaultFolders = [gamesConfigPath, iconsFolder, imagesCachePath]
+const defaultFolders = [
+  gamesConfigPath,
+  iconsFolder,
+  imagesCachePath,
+  toolsPath,
+  ipdtManifestsPath
+]
 
-const necessaryFoldersByPlatform = {
+const necessaryFoldersByPlatform: {
+  [key in 'win32' | 'linux' | 'darwin']: string[]
+} = {
   win32: [...defaultFolders],
-  linux: [...defaultFolders, toolsPath],
-  darwin: [...defaultFolders, toolsPath]
+  linux: [...defaultFolders],
+  darwin: [...defaultFolders]
 }
 
 export function createNecessaryFolders() {
-  necessaryFoldersByPlatform[platform()].forEach((folder: string) => {
-    if (!existsSync(folder)) {
-      mkdirSync(folder)
-    }
-  })
+  const platformKey = platform() as 'win32' | 'linux' | 'darwin'
+  if (necessaryFoldersByPlatform[platformKey]) {
+    necessaryFoldersByPlatform[platformKey].forEach((folder: string) => {
+      if (!existsSync(folder)) {
+        mkdirSync(folder)
+      }
+    })
+  }
 }
 
 const onboardLocalStore = new TypeCheckedStoreBackend('onboardingStore', {
@@ -284,5 +297,6 @@ export {
   mainReleaseChannelName,
   vulkanHelperBin,
   cachedUbisoftInstallerPath,
-  manifestsFolder
+  ipdtManifestsPath as manifestsFolder,
+  ipdtPatcher
 }
