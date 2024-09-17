@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Error removing extracted folder {{path}}. من فضلك ازيله يدوياً\n{{paragraph}}\n{{error}}",
                 "title": "Error removing extracted folder"
+            },
+            "steam": {
+                "error": "لا يمكن التنفيذ ربما تم إلغاء التركيب من قبل المستخدم أو فشل على جانب ستام.",
+                "message": "لقد فشلت التركيبة من فضلك اقرأ التعليمات بعناية وحاول مرة أخرى {{paragraph}} {{error}}",
+                "title": "خطأ فادح"
             }
         },
         "info": {
@@ -1113,5 +1118,25 @@
             },
             "title": "التعليمات الحديثة"
         }
-    }
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "إذا كنت ترغب في الاستمرار، أن تكون صبورا لأنه يمكن أن يستغرق بضع دقائق لإنهاء بناء على اتصال الإنترنت الخاص بك وتشكيل النظام؛;",
+    "steam-install": {
+        "success-message": "تم تركيب البخار يمكنك الآن إطلاقه من المكتبة.",
+        "compatibility-layer-not-available": "طبقة المقارنات غير متاحة. من فضلك ضع واحداً من \"مدير النبيذ\" أولاً.",
+        "error-message": "حدث خطأ في حين غرس ستام. أرجوك حاول مرة أخرى.",
+        "launch-tooltip": "مركبة الإطلاق التي تستخدم مواصفات المقارنات",
+        "tooltip": "هذا سيثبت نسخة (ويندوز) من (ستيام) وسيدار باستخدام (هايبر بلاي)\n\nفبعض المباريات، ولا سيما الألقاب القديمة، أو المباريات الثلاثية الأبعاد، أو تلك التي لها برامج مضادة للمضغ قد لا تعمل على نحو سليم.\n\nThe Recommended specs are a Mac with Apple Silicon CPU (M1 or above) and at least 16GB of RAM."
+    },
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "(هايبر بلاي) سيحمّل ويبدأ بـ (ستيم ستوب) من أجلك يُرجى اتباع تعليمات ستيام على مُسلّمهم؛;"
+    },
+    "Install Steam": "Install Steam",
+    "Installing Steam": "تركيب ستام...",
+    "Launch Steam": "الإطلاق",
+    "Launching Steam": "إطلاق (ستام)...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "في أول عملية إطلاق ستيام ستحمّل الملفات اللازمة وستستغرق بضع دقائق للانتهاء وشاشة الدخول لظهورها؛;",
+    "At the end make sure to": "في النهاية تأكد من",
+    "Cancel Installation": "التركيب",
+    "HyperPlay will notify you once the installation is done;": "(هايبر بلاي) سيعلمك حالما يتم التركيب;",
+    "UNCHECK 'Run Steam'": "UNCHECK Run Steam '"
 }

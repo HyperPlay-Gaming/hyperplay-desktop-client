@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Suppression d'erreur du dossier extrait {{path}}. Veuillez l'enlever manuellement.\n{{paragraph}}\n{{error}}",
                 "title": "Suppression d'erreur du dossier extrait"
+            },
+            "steam": {
+                "error": "Steam exécutable non trouvé. L'installation a probablement été annulée par l'utilisateur ou échouée du côté Steam.",
+                "message": "L'installation de vapeur a échoué ! Veuillez lire attentivement les instructions et réessayer! {{paragraph}} {{error}}",
+                "title": "Erreur de vapeur"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "Mod Instructions"
         }
-    }
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vous avertira une fois l'installation terminée;",
+    "Launch Steam": "Lancer Steam",
+    "Launching Steam": "Lancer Steam...",
+    "Install Steam": "Installez Steam",
+    "Installing Steam": "Installer Steam...",
+    "steam-install": {
+        "compatibility-layer-not-available": "Couche de compatibilité non disponible. S'il vous plaît installer un de \"Settings > Wine Manager\" d'abord.",
+        "error-message": "Une erreur s'est produite lors de l'installation de Steam. Veuillez réessayer.",
+        "launch-tooltip": "Lancer la vapeur en utilisant la couche de compatibilité HyperPlay",
+        "success-message": "La vapeur a été installée. Vous pouvez maintenant le lancer de la Bibliothèque.",
+        "tooltip": "Cela installera la version Windows de Steam et il fonctionnera avec une couche de compatibilité HyperPlay.\n\nCertains jeux particulièrement les titres plus anciens, les nouveaux jeux 3D, ou ceux avec un logiciel anti-cheat peuvent ne pas fonctionner correctement.\n\nLes spécifications recommandées sont un Mac avec Apple Silicon CPU (M1 ou plus) et au moins 16 Go de RAM."
+    },
+    "At the end make sure to": "A la fin assurez-vous de",
+    "Cancel Installation": "Annuler Installation",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay téléchargera et commencera le Steam Setup pour vous. Veuillez suivre les instructions de Steam sur leur installateur;"
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Si vous souhaitez continuer, soyez patient car il peut prendre quelques minutes pour terminer en fonction de votre connexion Internet et de la configuration du système;",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Lors du premier lancement, Steam téléchargera les fichiers nécessaires et prendra quelques minutes pour terminer et l'écran de connexion pour apparaître;",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '"
 }

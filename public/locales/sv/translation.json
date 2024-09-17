@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Fel ta bort extraherad mapp {{path}}. Ta bort den manuellt.\n{{paragraph}}\n{{error}}",
                 "title": "Fel ta bort extraherad mapp"
+            },
+            "steam": {
+                "error": "Ång körbar inte hittades. Installationen avbröts förmodligen av användaren eller misslyckades på Steam-sidan.",
+                "message": "Steam installation misslyckades! Läs instruktionerna noggrant och försök igen! {{paragraph}} {{error}}",
+                "title": "Steam fel"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "Mod Instruktioner"
         }
-    }
+    },
+    "Install Steam": "Installera Steam",
+    "Installing Steam": "Installera Steam...",
+    "Launch Steam": "Starta Steam",
+    "Launching Steam": "Starta Steam...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Vid första lanseringen kommer Steam att ladda ner de nödvändiga filerna och ta några minuter att slutföra och inloggningsskärmen visas;",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay laddar ner och startar Steam Setup för dig. Följ Steam-instruktioner på deras installatör;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay kommer att meddela dig när installationen är klar;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Kompatibilitetsskiktet inte tillgängligt. Installera en från \"Settings > Wine Manager\" först.",
+        "error-message": "Ett fel inträffade när du installerade Steam. Försök igen.",
+        "launch-tooltip": "Starta Steam med HyperPlay Compatibility Layer",
+        "success-message": "Steam har installerats. Du kan nu lansera den från biblioteket.",
+        "tooltip": "Detta kommer att installera Windows-versionen av Steam och det kommer att köras med en HyperPlay Compatibility Layer.\n\nVissa spel särskilt äldre titlar, nyare 3D-spel, eller de med anti-fusk programvara kanske inte fungerar korrekt.\n\nRekommenderade specifikationer är en Mac med Apple Silicon CPU (M1 eller högre) och minst 16 GB RAM."
+    },
+    "At the end make sure to": "I slutet se till att",
+    "Cancel Installation": "Avbryt installation",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Om du vill fortsätta, ha tålamod eftersom det kan ta några minuter att avsluta beroende på din internetanslutning och systemkonfiguration;",
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam \""
 }

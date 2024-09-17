@@ -155,7 +155,8 @@
         "unsync": "Desincronizare",
         "update": "Actualizare",
         "continue": "Continue",
-        "download": "Descarcă"
+        "download": "Descarcă",
+        "install": "Instalează"
     },
     "controller": {
         "hints": {
@@ -760,5 +761,22 @@
     "profile": "Profil",
     "import-game-folder": {
         "placeholder": "Alege dosarul de joc pentru a importa"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "title": "Pasul 1"
+            },
+            "step2": {
+                "title": "Pasul 2"
+            }
+        }
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "placeholder": "Selectează un fişier"
+            }
+        }
     }
 }

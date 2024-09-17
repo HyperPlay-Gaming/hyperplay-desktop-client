@@ -86,6 +86,11 @@
             "delete-files": {
                 "title": "Hiba eltávolítása kivont mappát",
                 "body": "Hiba eltávolítása kivont mappát {{path}}. Kérjük, távolítsa el manuálisan.\n{{paragraph}}\n{{error}}"
+            },
+            "steam": {
+                "title": "Steam hiba",
+                "error": "Steam végrehajtható nem talált. A telepítést valószínűleg törölte a felhasználó, vagy nem sikerült a Steam oldalán.",
+                "message": "A Steam telepítése kudarcot vallott! Kérjük, olvassa el az utasításokat gondosan, és próbálja meg újra! {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "Mod utasítások"
         }
-    }
+    },
+    "At the end make sure to": "A végén győződjön meg róla, hogy",
+    "steam-install": {
+        "compatibility-layer-not-available": "Kompatibilitási réteg nem érhető el. Kérjük, telepítse az egyiket a \"Settings > Wine Manager\"-től.",
+        "error-message": "Hiba történt, miközben telepítette a Steamot. Kérjük, próbálja meg újra.",
+        "launch-tooltip": "Indítsa el a Steam-t a HyperPlay kompatibilitási réteg segítségével",
+        "success-message": "Steam telepítve lett. Most elindíthatja a Könyvtárból.",
+        "tooltip": "Ez telepíti a Steam Windows verzióját, és egy HyperPlay kompatibilitási réteget használ.\n\nNéhány játék különösen idősebb címek, újabb 3D játékok, vagy azok, akik csaló szoftver nem működik megfelelően.\n\nAz ajánlott példák Mac Apple Silicon CPU (M1 vagy annál magasabb) és legalább 16 GB RAM."
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Az első indításkor a Steam letölti a szükséges fájlokat, és néhány percet vesz igénybe, hogy befejezze, és megjelenik a bejelentkezési képernyő;",
+    "Cancel Installation": "Törölje a telepítést",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "A HyperPlay letölti és elindítja a Steam Setup-ot az Ön számára. Kérjük, kövesse a Steam utasításait a telepítőjére;"
+    },
+    "HyperPlay will notify you once the installation is done;": "A HyperPlay értesíti Önt, miután a telepítést elvégezték;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Ha folytatni kívánja, légy türelmes, mivel néhány percig eltarthat az internetkapcsolattól és a rendszer konfigurációjától függően;",
+    "Install Steam": "Telepítse Steam",
+    "Installing Steam": "Installing Steam...",
+    "Launch Steam": "Indítsa el a Steam",
+    "Launching Steam": "Indítási gőz...",
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam \"...\""
 }

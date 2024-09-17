@@ -80,6 +80,11 @@
             "delete-files": {
                 "title": "Fejl ved fjernelse af udpakket mappe",
                 "body": "Fejl ved fjernelse af ekstra mappe {{path}}. Fjern det manuelt.\n{{paragraph}}\n{{error}}"
+            },
+            "steam": {
+                "title": "Steam-fejl",
+                "error": "Steam-eksekverbare ikke fundet. Installationen blev sandsynligvis annulleret af brugeren eller mislykkedes på Steam side.",
+                "message": "Dampinstallation mislykkedes! Læs instruktionerne omhyggeligt og prøv igen! {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -1152,5 +1157,25 @@
             },
             "title": "Mod Instruktioner"
         }
-    }
+    },
+    "Cancel Installation": "Annuller installation",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "På første gang Steam vil downloade de nødvendige filer og vil tage et par minutter at afslutte og login-skærmen til at vises;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Hvis du ønsker at fortsætte, være patient, da det kan tage et par minutter at afslutte afhængigt af din internetforbindelse og systemkonfiguration;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Kompatibilitet lag ikke tilgængelig. Installer venligst en fra \"Indstillinger > Wine Manager\" først.",
+        "error-message": "En fejl opstod, mens du installerer Steam. Prøv igen.",
+        "launch-tooltip": "Start Steam ved hjælp af HyperPlay kompatibilitet Layer",
+        "success-message": "Steam er blevet installeret. Du kan nu starte det fra biblioteket.",
+        "tooltip": "Dette vil installere Windows-versionen af Steam, og det vil køre ved hjælp af en HyperPlay kompatibilitet Layer.\n\nNogle spil især ældre titler, nyere 3D spil, eller dem med anti-cheat software virker ikke ordentligt.\n\nDe anbefalede specifikationer er en Mac med Apple Silicon CPU (M1 eller derover) og mindst 16 GB RAM."
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vil underrette dig, når installationen er udført;",
+    "Launching Steam": "Lancering af Steam...",
+    "At the end make sure to": "Ved udgangen skal du sørge for at",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay vil downloade og starte Steam Setup for dig. Følg instruktionerne på deres installatør;"
+    },
+    "Install Steam": "Installer Steam",
+    "Installing Steam": "Installation af Steam...",
+    "Launch Steam": "Start Steam",
+    "UNCHECK 'Run Steam'": "Hoteller i nærheden af UNCHECK 'Run Steam ''"
 }

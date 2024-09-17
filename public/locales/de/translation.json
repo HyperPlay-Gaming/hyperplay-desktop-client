@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Fehler entfernen extrahierter Ordner {{path}}. Bitte entfernen Sie es manuell.\n(X86X)\n(X117X)",
                 "title": "Entfernen des extrahierten Ordners"
+            },
+            "steam": {
+                "error": "Dampf ausführbar nicht gefunden. Die Installation wurde wahrscheinlich vom Benutzer storniert oder auf Steam Seite gescheitert.",
+                "message": "Dampfinstallation ist gescheitert! Bitte lesen Sie die Anweisungen sorgfältig und versuchen Sie es erneut! {{paragraph}} {{error}}",
+                "title": "Steam-Fehler"
             }
         },
         "info": {
@@ -1099,5 +1104,25 @@
                 "title": "Schritt 4"
             }
         }
-    }
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay wird Sie nach der Installation benachrichtigen;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Kompatibilitätsschicht nicht verfügbar. Bitte installieren Sie eine von \"Settings > Wine Manager\" zuerst.",
+        "error-message": "Bei der Installation von Steam kam es zu einem Fehler. Bitte versuchen Sie es noch mal.",
+        "launch-tooltip": "Starten Sie Steam mit der HyperPlay Compatibility Layer",
+        "success-message": "Steam wurde installiert. Sie können es jetzt aus der Bibliothek starten.",
+        "tooltip": "Dies wird die Windows-Version von Steam installieren und es wird mit einer HyperPlay Compatibility Layer ausgeführt.\n\nEinige Spiele, vor allem ältere Titel, neuere 3D-Spiele, oder diejenigen mit Anti-Cheat-Software kann nicht richtig funktionieren.\n\nDie empfohlenen Spezifikationen sind ein Mac mit Apple Silicon CPU (M1 oder höher) und mindestens 16 GB RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Wenn Sie fortfahren möchten, geduldig sein, da es ein paar Minuten dauern kann, um zu beenden, abhängig von Ihrer Internetverbindung und Systemkonfiguration;",
+    "Install Steam": "Installieren Sie Steam",
+    "Installing Steam": "Installation von Steam...",
+    "Launch Steam": "Start Steam",
+    "Launching Steam": "Steam starten...",
+    "At the end make sure to": "Am Ende stellen Sie sicher",
+    "Cancel Installation": "Installation abbrechen",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay wird das Steam Setup für Sie herunterladen und starten. Bitte folgen Sie Steam-Anweisungen auf ihrem Installer;"
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Beim ersten Start wird Steam die notwendigen Dateien herunterladen und ein paar Minuten dauern, um zu beenden und den Login-Bildschirm zu erscheinen;"
 }

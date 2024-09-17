@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "خطای حذف پوشه استخراج شده (X32X) لطفا آن را به صورت دستی حذف کنید.\n{{paragraph}}\n{{error}}",
                 "title": "خطای حذف پوشه استخراج شده"
+            },
+            "steam": {
+                "error": "Steam Executive پیدا نشد. نصب احتمالا توسط کاربر لغو شده یا در سمت Steam شکست خورده است.",
+                "message": "نصب Steam شکست خورد! لطفا دستورالعمل ها را با دقت بخوانید و دوباره امتحان کنید! {{paragraph}} {{error}}",
+                "title": "خطای Steam"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "دستورالعمل های Mod"
         }
-    }
+    },
+    "At the end make sure to": "در پایان مطمئن شوید",
+    "Cancel Installation": "لغو نصب",
+    "Launch Steam": "راه اندازی Steam",
+    "Launching Steam": "راه اندازی Steam ...",
+    "Install Steam": "نصب Steam",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay دانلود و راه اندازی Steam را برای شما آغاز خواهد کرد. لطفا دستورالعمل های Steam را در نصب خود دنبال کنید;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay به شما اطلاع می دهد زمانی که نصب انجام می شود;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "اگر می خواهید ادامه دهید، صبور باشید زیرا می تواند چند دقیقه طول بکشد تا بسته به اتصال اینترنت و پیکربندی سیستم شما به پایان برسد;",
+    "Installing Steam": "نصب Steam.",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "در اولین پرتاب Steam فایل های ضروری را دانلود می کند و چند دقیقه طول می کشد تا به پایان برسد و صفحه ورود ظاهر شود;",
+    "steam-install": {
+        "compatibility-layer-not-available": "لایه ی Compatibility موجود نیست. لطفا ابتدا یکی را از “Settings > Wine Manager” نصب کنید.",
+        "error-message": "یک خطا در هنگام نصب Steam رخ داد. لطفا دوباره امتحان کنید.",
+        "launch-tooltip": "راه اندازی Steam با استفاده از HyperPlay Compatibility Layer",
+        "success-message": "Steam نصب شده است. حالا می توانید آن را از کتابخانه راه اندازی کنید.",
+        "tooltip": "این نسخه ویندوز Steam را نصب می کند و با استفاده از یک لایه HyperPlay Compatibility اجرا می شود.\n\nبرخی از بازی ها به ویژه عناوین قدیمی تر، بازی های سه بعدی جدید یا کسانی که دارای نرم افزار ضدcheat هستند ممکن است به درستی کار نکنند.\n\nمشخصات توصیه شده یک مک با پردازنده سیلیکون اپل (M1 یا بالاتر) و حداقل 16 گیگابایت رم است."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam\" \"\""
 }
