@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "抽出されたフォルダを外すエラー{{path}}。 手動で削除してください。\n{{paragraph}}\n{{error}}",
                 "title": "抽出されたフォルダを除去するエラー"
+            },
+            "steam": {
+                "message": "蒸気の取付けは失敗しました! 注意して、もう一度お試しください! {{paragraph}} {{error}}",
+                "title": "蒸気エラー",
+                "error": "蒸気実行可能が見つかりません。 インストールは、おそらくユーザーによってキャンセルされたり、Steam側で失敗したりしました."
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
                 "placeholder": "Zipファイルの選択"
             }
         }
-    }
+    },
+    "At the end make sure to": "最後は必ず",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlayはSteamセットアップをダウンロードして起動します。 インストーラのSteamの指示に従ってください;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlayはインストールが完了すると通知されます;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "続行を希望される場合は、インターネット接続やシステム構成により数分で完了できるため、患者様をお待ちください;",
+    "Launching Steam": "スチームを立ち上げる...",
+    "Cancel Installation": "インストールをキャンセル",
+    "Install Steam": "Steamをインストールする",
+    "Installing Steam": "Steamのインストール...",
+    "Launch Steam": "打ち上げ蒸気",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "初回起動時にSteamは必要なファイルをダウンロードし、完了まで数分かかります。ログイン画面が表示されます;",
+    "steam-install": {
+        "compatibility-layer-not-available": "互換性レイヤーは使用できません。 まずは「設定 > ワインマネージャー」からインストールしてください.",
+        "error-message": "Steamのインストール中にエラーが発生しました。 お問い合わせ.",
+        "launch-tooltip": "HyperPlayの互換性レイヤーを使用してSteamを起動する",
+        "success-message": "Steamをインストールしました。 ライブラリから起動できるようになりました.",
+        "tooltip": "これは、SteamのWindowsバージョンをインストールし、HyperPlayの互換性レイヤーを使用して実行されます。\n\n一部のゲームは、特に古いタイトル、新しい3Dゲーム、またはアンチチートソフトウェアを備えたゲームが正常に動作しない場合があります。\n\n推奨スペックは、Apple Silicon CPU(M1以上)と16GB以上のRAMを搭載したMacです."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam(オンスチーム) お問い合わせ"
 }

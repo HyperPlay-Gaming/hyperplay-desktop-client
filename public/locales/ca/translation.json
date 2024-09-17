@@ -86,6 +86,11 @@
             "delete-files": {
                 "title": "L'eliminació d'errors carpeta extreta",
                 "body": "L'eliminació d'errors carpeta extreta {{path}}. Si us plau, traieu-lo manualment.\n{{paragraph}}\n{{error}}"
+            },
+            "steam": {
+                "title": "Error de vapor",
+                "error": "No s'ha trobat cap executable de vapor. La instal·lació va ser probablement cancel·lada per l'usuari o fallada al costat de Steam.",
+                "message": "Ha fallat la instal·lació de vapor! Si us plau, llegiu les instruccions i torneu-ho a provar. {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
                 "placeholder": "Seleccioneu fitxers Zip"
             }
         }
-    }
+    },
+    "Cancel Installation": "Cancel·lació",
+    "Install Steam": "Instal·lar Steam",
+    "steam-install": {
+        "error-message": "S'ha produït un error en instal·lar Steam. Si us plau, intenti-ho novament.",
+        "compatibility-layer-not-available": "Capa de compatibilitat no disponible. Si us plau, instal·leu-ne un des de \"Settings > Wine Manager\" primer.",
+        "launch-tooltip": "Llançament de vapor utilitzant la capa de compatibilitat HyperPlay",
+        "success-message": "S'ha instal·lat vapor. Ara pots llançar-la des de la Biblioteca.",
+        "tooltip": "Això instal·larà la versió de Windows de Steam i funcionarà amb una capa de compatibilitat HyperPlay.\n\nAlguns jocs especialment antics, nous jocs 3D, o aquells amb programari anti-xec no poden funcionar correctament.\n\nLes especificacions recomanades són un Mac amb Apple Silicon CPU (M1 o superior) i almenys 16 GB de RAM."
+    },
+    "At the end make sure to": "Al final, assegureu-vos de",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay descarregarà i iniciarà la configuració de vapor per a vostè. Seguiu les instruccions de vapor al seu instal·lador;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay t'avisarà una vegada realitzada la instal·lació;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Si voleu continuar, tingueu paciència ja que pot trigar uns minuts a acabar en funció de la vostra connexió a Internet i la configuració del sistema;",
+    "Installing Steam": "Instal·lació de vapor ...",
+    "Launch Steam": "Llançament de vapor",
+    "Launching Steam": "Llançament de vapor ...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "En el primer llançament Steam descarregarà els arxius necessaris i trigarà uns minuts a acabar i la pantalla d'inici de sessió a aparèixer;",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '"
 }

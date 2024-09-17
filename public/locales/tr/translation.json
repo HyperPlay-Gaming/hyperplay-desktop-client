@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Hata kaldırılmış klasörü {{path}}. Lütfen manuel olarak kaldırın.\n{{paragraph}}\n{{error}}",
                 "title": "Hata kaldırıldı klasör"
+            },
+            "steam": {
+                "error": "Steam executable bulunamadı. Kurulum muhtemelen kullanıcı tarafından iptal edildi veya Steam tarafında başarısız oldu.",
+                "message": "Steam yükleme başarısız oldu! Lütfen talimatları dikkatlice okuyun ve tekrar deneyin! {{paragraph}} {{error}}",
+                "title": "Buhar hatası"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "Mod Talimatlar"
         }
-    }
+    },
+    "Cancel Installation": "Cancel Tesis",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay size bir kez yükleme yapılır;",
+    "Installing Steam": "Steam'i yükleyin...",
+    "Launch Steam": "Steam",
+    "At the end make sure to": "Sonunda emin olun",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay sizin için Steam Ayarını indirecek ve başlatacaktır. Lütfen taksitlerinde Steam talimatları takip edin;"
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Devam etmek istiyorsanız, hasta olun çünkü internet bağlantınıza ve sistem yapılandırmanıza bağlı olarak bitirmek için birkaç dakika sürebilir;",
+    "Install Steam": "Steam",
+    "Launching Steam": "Steam'i başlatmak...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "İlk başta Steam gerekli dosyaları indirecek ve ortaya çıkacak giriş ekranı ve birkaç dakika alacak;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Uyumluluk katmanı mevcut değildir. Lütfen önce \"Settings > Wine Manager\"dan birini yükleyin.",
+        "error-message": "Bir hata Steam'i yükleme sırasında gerçekleşti. Lütfen tekrar deneyin.",
+        "launch-tooltip": "HiperPlay Uyumluluk Katmanı kullanarak Steam başlatın",
+        "success-message": "Steam kuruldu. Şimdi onu Kütüphaneden başlatabilirsiniz.",
+        "tooltip": "Bu, Steam'in Windows versiyonunu kuracak ve HiperPlay Uyumluluk Katmanını kullanacak.\n\nBazı oyunlar özellikle yaşlı başlıklar, yeni 3D oyunları veya anti-cheat yazılımı ile olanlar düzgün çalışmayabilir.\n\nÖnerilen özellikler Apple Silikon CPU (M1 veya üstü) ve en az 16GB RAM ile bir Mac."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam ‘ ‘ ‘"
 }

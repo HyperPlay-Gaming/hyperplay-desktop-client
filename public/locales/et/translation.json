@@ -155,7 +155,8 @@
         "unsync": "Mittesünkroniseerimine",
         "update": "Ajakohastamine",
         "download": "Laadi alla",
-        "continue": "Jätka"
+        "continue": "Jätka",
+        "install": "Installi"
     },
     "controller": {
         "hints": {
@@ -750,5 +751,12 @@
     "profile": "Profiil",
     "import-game-folder": {
         "placeholder": "Valige imporditav mängude kaust"
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "placeholder": "Vali fail"
+            }
+        }
     }
 }

@@ -82,7 +82,16 @@
                 "title": "Ubisoft Connect",
                 "message": "Установка Ubisoft Connect в префиксе игры потерпела неудачу. Проверьте нашу страницу вики на https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, чтобы установить его manually."
             },
-            "moving": "Ошибка перемещения игры {{error}}"
+            "moving": "Ошибка перемещения игры {{error}}",
+            "steam": {
+                "title": "Ошибка",
+                "error": "Steam исполняемый не найден. Установка, вероятно, была отменена пользователем или потерпела неудачу на стороне Steam.",
+                "message": "Паровая установка не сработала! Пожалуйста, внимательно прочитайте инструкции и попробуйте еще раз! {{paragraph}} {{error}}"
+            },
+            "delete-files": {
+                "body": "Ошибка удаления извлеченной папки {{path}}. Удалите его вручную.\n{{paragraph}}\n{{error}}",
+                "title": "Ошибка удаления извлеченной папки"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +188,8 @@
         "unsync": "Рассинхронизировать",
         "continue": "Продолжить",
         "download": "Скачать",
-        "update": "Обновить"
+        "update": "Обновить",
+        "install": "Установить"
     },
     "controller": {
         "hints": {
@@ -1045,5 +1055,74 @@
         "label": "Импорт папки игры",
         "success": "Успешно импортированные игры!",
         "cta": "Импорт папки игры"
-    }
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Если вы хотите продолжить, будьте терпеливы, так как это может занять несколько минут, чтобы закончить в зависимости от вашего интернет-соединения и конфигурации системы;",
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Мод будет применен к базовой игре",
+                "title": "Базовая игра установлена"
+            },
+            "installing": {
+                "body": "Извлечение базовых игровых файлов",
+                "title": "Установка базовой игры"
+            },
+            "cancel": {
+                "body": "Базовая добыча игры отменена",
+                "title": "Отменить экстракцию"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Выберите местоположение базового файла",
+                "placeholder": "Выберите файл Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step2": {
+                "subtitle": "Выберите ChromieCraft_3.3.5a.zip Файл",
+                "description": "Выберите загруженный ChromieCraft_3.3.5a.zip файл.",
+                "title": "Шаг 2"
+            },
+            "step3": {
+                "description": "Выберите папку, в которой должен быть установлен World of Warcraft: Wrath of the Lich King (3.3.5a).",
+                "subtitle": "Выберите установку Папка",
+                "title": "Шаг 3"
+            },
+            "step4": {
+                "description": "Введите код доступа, чтобы продолжить установку игры.",
+                "subtitle": "Код доступа",
+                "title": "Шаг 4"
+            },
+            "title": "Модные инструкции",
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Эта игра является модом для World of Warcraft: Wrath of the Lich King (3.3.5a). Чтобы играть в этот мод, игроки должны владеть копией World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не принимает World of Warcraft. Игроки, которые владеют World of Warcraft, могут получить версию 3.3.5a из таких источников, как:",
+                "subtitle": "Скачать World of Warcraft 3.3.5a",
+                "webtorrent": "Торрент (Magnet Link)",
+                "title": "Шаг 1"
+            }
+        }
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "На первом запуске Steam загрузит необходимые файлы и займет несколько минут, чтобы закончить, и экран входа появится;",
+    "steam-install": {
+        "error-message": "При установке Steam произошла ошибка. Попробуй еще раз.",
+        "launch-tooltip": "Запустить Steam с помощью уровня совместимости HyperPlay",
+        "success-message": "Пар был установлен. Теперь вы можете запустить его из библиотеки.",
+        "compatibility-layer-not-available": "Совместимость слоя отсутствует. Пожалуйста, сначала установите один из \"Settings > Wine Manager\".",
+        "tooltip": "Это установит Windows-версию Steam и будет работать с помощью уровня совместимости HyperPlay.\n\nНекоторые игры, особенно старые, новые 3D-игры, или те, у которых есть программное обеспечение против денег, могут не работать должным образом.\n\nРекомендуемые характеристики - это Mac с процессором Apple Silicon (M1 или выше) и по меньшей мере 16 ГБ оперативной памяти."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam \"",
+    "Install Steam": "Установить",
+    "At the end make sure to": "В конце убедитесь, что",
+    "Cancel Installation": "Отменить установку",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay загрузит и запустит Steam Setup для вас. Пожалуйста, следуйте инструкциям Steam на их установщике;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay уведомит вас после завершения установки;",
+    "Installing Steam": "Установка Steam...",
+    "Launch Steam": "Запуск",
+    "Launching Steam": "Запуск Steam..."
 }

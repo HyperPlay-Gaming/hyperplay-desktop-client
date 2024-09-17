@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Fayl qoymaq {{path}}. Daxil ol\n{{paragraph}}\n{{error}}",
                 "title": "Fayl qablaşdırmaq"
+            },
+            "steam": {
+                "title": "Steam  Steam",
+                "error": "Daxil ol Qablaşdırma haqqında istifadəçi tərəfindən istifadə olunub və ya Steam tərəfindən başarısız oldu.",
+                "message": "Steam quraşdırma başarısız oldu! Müəlliflik hüquququ © 2019 {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
                 "path": "Base Game File Yerevanı"
             }
         }
-    }
+    },
+    "Cancel Installation": "Qablaşdırma",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "İlk start Steam lazımi faylları yükləyəcək və görünmək üçün bir neçə dərəcək;",
+    "steam-install": {
+        "launch-tooltip": "HyperPlay Compatability Layer istifadə Steam başlayır",
+        "compatibility-layer-not-available": "Təhlükəsizlik kağızı mövcud deyil. \"Settings > Wine Manager\" dəstək.",
+        "error-message": "Steam quraşdırmaq zaman bir səhv meydana geldi. Qeydiyyat.",
+        "success-message": "Steam quraşdırılmışdır. İndi Kitabxanadan başlaya bilərsiniz.",
+        "tooltip": "Bu Steam Windows versiyasını yükləcək və HyperPlay Compatability Layer istifadə edəcək.\n\nBöyük Britaniya oyunçular, yenier 3D oyunlar, və ya anti-cheat proqram ilə olanlar düzgün işləyə bilər.\n\nXüsusi spektrlər Apple Silikon CPU (M1 və ya yuxarı) və ən azı 16GB RAM ilə bir Mac var."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam  '",
+    "At the end make sure to": "Sonda əmin et",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay download və sizin üçün Steam quraşdırma başlayacaq. Daxil ol;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay quraşdırma çıxarılır sonra sizə bildirmək olacaq;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Daxil olmaq istəyirsinizsə, internet bağlantısı və sistem konfiqurasiyasına qəbul etmək üçün bir neçə dəqiq ola bilər;",
+    "Install Steam": "Daxil ol",
+    "Installing Steam": "Daxil ol...",
+    "Launch Steam": "Daxil ol",
+    "Launching Steam": "Daxil ol."
 }

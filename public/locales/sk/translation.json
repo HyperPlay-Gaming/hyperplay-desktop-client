@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Odstránenie chyby extrahované zložky {{path}}. Prosím, odstráňte ho manuálne.\n{{paragraph}}\n{{error}}",
                 "title": "Odstránenie chyby extrahované zložky"
+            },
+            "steam": {
+                "title": "Parná chyba",
+                "error": "Steam spustiteľný nebol nájdený. Inštalácia bola pravdepodobne zrušená užívateľom alebo zlyhala na Steam strane.",
+                "message": "Parná inštalácia zlyhala! Pozorne si prečítajte pokyny a skúste to znova! {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "Modové inštrukcie"
         }
-    }
+    },
+    "Install Steam": "Nainštalujte Steam",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Na prvom spustení Steam bude sťahovať potrebné súbory a bude trvať niekoľko minút na dokončenie a prihlásenie obrazovky sa objaví;",
+    "Installing Steam": "Inštalácia pary...",
+    "Launch Steam": "Spustenie Steam",
+    "Launching Steam": "Spustenie pary...",
+    "steam-install": {
+        "compatibility-layer-not-available": "Kompatibilita vrstva nie je k dispozícii. Nainštalujte jeden z \"Nastavenia > Wine Manager\" prvý.",
+        "error-message": "Pri inštalácii pary došlo k chybe. Skúste prosím znova.",
+        "launch-tooltip": "Spustenie Steam pomocou HyperPlay kompatibility Vrstva",
+        "success-message": "Steam bol nainštalovaný. Teraz môžete spustiť z knižnice.",
+        "tooltip": "To bude inštalovať verziu Windows Steam a bude spustiť pomocou HyperPlay kompatibility vrstvy.\n\nNiektoré hry obzvlášť staršie tituly, novšie 3D hry, alebo tie s anti-cheat softvér nemusí fungovať správne.\n\nOdporúčané špecifikácie sú Mac s procesorom Apple Silicon (M1 alebo vyššie) a aspoň 16GB RAM."
+    },
+    "At the end make sure to": "Na konci uistite sa, že",
+    "Cancel Installation": "Zrušiť inštaláciu",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay bude stiahnuť a začať Steam Setup pre vás. Prosím, postupujte podľa pokynov Steam na ich inštalátor;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vás informuje po dokončení inštalácie;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Ak chcete pokračovať, buďte trpezliví, pretože to môže trvať niekoľko minút na dokončenie v závislosti na vašom pripojenie k internetu a konfigurácii systému;",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam \""
 }

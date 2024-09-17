@@ -89,6 +89,11 @@
             "delete-files": {
                 "body": "Errore rimuovere la cartella estratto {{path}}. Si prega di rimuoverlo manualmente.\n{{paragraph}}\n{{error}}",
                 "title": "Eliminazione errore cartella estratta"
+            },
+            "steam": {
+                "message": "L'installazione di vapore è fallita! Si prega di leggere attentamente le istruzioni e riprovare! {{paragraph}} {{error}}",
+                "title": "Errore di vapore",
+                "error": "Eseguibile a vapore non trovato. L'installazione è stata probabilmente annullata dall'utente o non è riuscita da Steam."
             }
         },
         "info": {
@@ -1109,5 +1114,25 @@
                 "title": "Passo 3"
             }
         }
-    }
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Al primo lancio Steam scaricherà i file necessari e ci vorranno alcuni minuti per finire e la schermata di login per apparire;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Strato di compatibilità non disponibile. Si prega di installare uno da \"Impostazioni > Wine Manager\" prima.",
+        "error-message": "Si è verificato un errore durante l'installazione di Steam. Per favore riprovate.",
+        "launch-tooltip": "Avviare Steam utilizzando il livello di compatibilità HyperPlay",
+        "success-message": "Steam è stato installato. Ora puoi lanciarlo dalla Biblioteca.",
+        "tooltip": "Questo installerà la versione di Windows di Steam e verrà eseguito utilizzando un livello di compatibilità HyperPlay.\n\nAlcuni giochi particolarmente vecchi titoli, nuovi giochi 3D, o quelli con software anti-cheat non possono funzionare correttamente.\n\nLe specifiche consigliate sono un Mac con CPU Apple Silicon (M1 o superiore) e almeno 16GB di RAM."
+    },
+    "Cancel Installation": "Annulla installazione",
+    "Installing Steam": "Installazione di Steam...",
+    "Launch Steam": "Lancia vapore",
+    "Launching Steam": "Avviare Steam...",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam' '",
+    "Install Steam": "Installare Steam",
+    "At the end make sure to": "Alla fine assicurarsi di",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay scaricherà e inizierà il Steam Setup per voi. Si prega di seguire istruzioni Steam sul loro installatore;"
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Se si desidera continuare, essere paziente in quanto può richiedere alcuni minuti per finire a seconda della connessione internet e della configurazione del sistema;",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay ti avviserà una volta che l'installazione sarà terminata;"
 }

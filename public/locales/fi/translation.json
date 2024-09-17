@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Väärin poistettu kansio (X32X) Poista se manuaalisesti.\n[x86x]\n(X117X)",
                 "title": "Virhe poistaa uutettu kansio"
+            },
+            "steam": {
+                "error": "Steamia ei löytynyt. Käyttäjä on todennäköisesti peruuttanut asennuksen tai epäonnistunut Steamin puolella.",
+                "message": "Steamin asennus epäonnistui! Lue ohjeet huolellisesti ja yritä uudelleen! {{paragraph}}",
+                "title": "Steam-virhe"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
             },
             "title": "Mod-ohjeet"
         }
-    }
+    },
+    "steam-install": {
+        "tooltip": "Tämä asentaa Steamin Windows-version ja se toimii HyperPlay-yhteensopivuuskerroksella.\n\nJotkut pelit, erityisesti vanhemmat pelit, uudemmat 3D-pelit tai ne, joilla on petostentorjuntaohjelmisto, eivät välttämättä toimi kunnolla.\n\nSuositellut näytöt ovat Mac, jossa on Apple Silicon CPU (M1 tai uudempi) ja vähintään 16 Gt RAM.",
+        "compatibility-layer-not-available": "Yhteensopivuutta ei ole saatavilla. Ole hyvä ja asenna ensin \"Settings > Wine Manager\".",
+        "error-message": "Virhe tapahtui asennuksen aikana. Kokeile uudelleen.",
+        "launch-tooltip": "Käynnistä Steam HyperPlay Compatibility Layer",
+        "success-message": "Steam on asennettu. Nyt voit aloittaa sen kirjastosta."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECKR:n RUN Steam \"\"\"",
+    "At the end make sure to": "Lopuksi varmista, että",
+    "Cancel Installation": "Peruuta asennus",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay lataa ja käynnistää Steam Setup. Noudata Steam-ohjeita asentimessasi;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay ilmoittaa sinulle asennuksen jälkeen;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Jos haluat jatkaa, ole kärsivällinen, koska se voi kestää muutaman minuutin, riippuen Internet-yhteydestä ja järjestelmän kokoonpanosta;",
+    "Install Steam": "Asenna Steam",
+    "Installing Steam": "Asentaminen Steam...",
+    "Launch Steam": "Käynnistä Steam",
+    "Launching Steam": "Steamin käynnistäminen...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Ensimmäisessä laukaisussa Steam lataa tarvittavat tiedostot ja kestää muutaman minuutin ja kirjautuminen näkyy;"
 }

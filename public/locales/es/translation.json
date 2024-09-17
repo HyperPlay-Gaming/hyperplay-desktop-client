@@ -85,7 +85,12 @@
             },
             "delete-files": {
                 "body": "Eliminar la carpeta extraída {{path}}. Por favor, retírelo manualmente.\n{{paragraph}}\n{{error}}",
-                "title": "Eliminación de errores carpeta extraída"
+                "title": "Error al eliminar la carpeta extraída"
+            },
+            "steam": {
+                "error": "No se encontró el ejecutable de Steam. Probablemente el usuario canceló la instalación o esta falló en Steam.",
+                "message": "¡La instalación de Steam falló! ¡Por favor, lea atentamente las instrucciones y prueba de nuevo! {{paragraph}} {{error}}",
+                "title": "Error en Steam"
             }
         },
         "info": {
@@ -96,8 +101,8 @@
                 "message-finished": "¿Quieres reiniciar HyperPlay ahora?",
                 "title": "Iniciador de juegos HyperPlay",
                 "title-finished": "Actualización finalizada",
-                "appUpdated": "HyperPlay fue actualizado",
-                "appUpdated-message": "HyperPlay fue actualizado. ¿Quieres actualizar y reiniciar HyperPlay ahora?"
+                "appUpdated": "Se actualizó HyperPlay",
+                "appUpdated-message": "Se actualizó HyperPlay. ¿Quieres actualizar y reiniciar HyperPlay ahora?"
             }
         },
         "no": "NO",
@@ -910,7 +915,7 @@
         "chainRequest": {
             "INITIATED": "Requisitos de una red personalizada",
             "FAILED": "Red personalizada cancelada",
-            "CONFIRMED": "Se ha añadido una red personalizada"
+            "CONFIRMED": "Añadida una red personalizada"
         },
         "description": {
             "FAILED": "La transacción se ha cancelado o no se ha enviado, por favor inténtelo de nuevo",
@@ -1056,11 +1061,11 @@
         }
     },
     "import-game-folder": {
-        "cta": "Carpeta de juego de importación",
+        "cta": "Importar la carpeta del juego",
         "dialog": {
             "title": "Seleccionar carpeta de juego para importar"
         },
-        "error": "Hubo un error durante la importación. Por favor, vea los registros para más detalles.",
+        "error": "Se produjo un error durante la importación. Por favor, consulta los registros para obtener más detalles.",
         "label": "Importar carpeta de juegos",
         "placeholder": "Elija la carpeta del juego para importar",
         "success": "¡Juegos importados con éxito!"
@@ -1069,14 +1074,14 @@
         "baseGame": {
             "cancel": {
                 "body": "Extracción del juego base cancelada",
-                "title": "Cancelar la extracción"
+                "title": "Extracción cancelada"
             },
             "installed": {
                 "title": "Juego base instalado",
                 "body": "Mod se aplicará al juego base"
             },
             "installing": {
-                "body": "Extracting base juego archivos",
+                "body": "Extrayendo archivos del juego base",
                 "title": "Instalación del juego base"
             }
         },
@@ -1113,5 +1118,25 @@
             },
             "title": "Instrucciones de modificación"
         }
-    }
+    },
+    "Cancel Installation": "Cancelar instalación",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "En el primer lanzamiento Steam descargará los archivos necesarios y tomará unos minutos para terminar y aparecerá la pantalla de inicio de sesión;",
+    "Launch Steam": "Ejecutar Steam",
+    "At the end make sure to": "Finalmente, asegúrese",
+    "steam-install": {
+        "compatibility-layer-not-available": "Capa de compatibilidad no disponible. Por favor, instale uno de \"Configuración > Wine Manager\" primero.",
+        "error-message": "Se produjo un error al instalar Steam. Por favor, inténtalo de nuevo.",
+        "launch-tooltip": "Iniciar Steam usando la capa de compatibilidad HyperPlay",
+        "success-message": "Steam ha sido instalado. Ahora puedes ejecutarlo desde la Biblioteca.",
+        "tooltip": "Esto instalará la versión de Windows de Steam y funcionará usando una capa de compatibilidad HyperPlay.\n\nAlgunos juegos especialmente títulos antiguos, juegos 3D más nuevos, o aquellos con software anti-cheat puede no funcionar correctamente.\n\nLas especificaciones recomendadas son un Mac con Apple Silicon CPU (M1 o superior) y al menos 16 GB de RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay le notificará una vez finalizada la instalación;",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay se descargará e iniciará la configuración de Steam. Por favor, siga las instrucciones de Steam durante la instalación;"
+    },
+    "Launching Steam": "Ejecutando Steam...",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Si desea continuar, tenga paciencia ya que puede tardar unos minutos en finalizar dependiendo de su conexión a Internet y la configuración del sistema;",
+    "Install Steam": "Instalar Steam",
+    "Installing Steam": "Instalando Steam..."
 }

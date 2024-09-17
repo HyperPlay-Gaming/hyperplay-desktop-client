@@ -86,6 +86,11 @@
             "delete-files": {
                 "title": "O erro que tira cartafol extraído",
                 "body": "O erro que tira cartafol extraído {{path}}. Compracer tiralo a man. \n                {{paragraph}} \n                {{error}}"
+            },
+            "steam": {
+                "error": "O vapor executábel non atopado. A instalación era probabelmente canceled por usuario ou fallado en lado de Vapor.",
+                "message": "Instalación de vapor fallou! Compracer lido as instrucións coidadosamente e tentar outra vez! {{paragraph}} {{error}}",
+                "title": "Erro de vapor"
             }
         },
         "info": {
@@ -1098,5 +1103,25 @@
                 "placeholder": "Selecto Zip Ficheiro"
             }
         }
-    }
+    },
+    "Cancel Installation": "Cancela Instalación",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay Descargará e arrancar o Vapor Setup para ti. Compracer seguir instrucións de Vapor no seu instalador;"
+    },
+    "steam-install": {
+        "launch-tooltip": "Vapor de lancha que utiliza o HyperPlay Capa de Compatibilidade",
+        "compatibility-layer-not-available": "Capa de compatibilidade non dispoñíbel. Compracer instalar un desde \"Director > de Viño das Colocacións\" primeiro.",
+        "error-message": "Un erro ocorrido mentres Vapor instalador. Compracer tentar outra vez.",
+        "success-message": "O vapor foi instalado. Agora o podes lanzar desde a Biblioteca.",
+        "tooltip": "Isto instalará a versión de Xanelas do vapor e el correrán  utilizar un HyperPlay Capa de Compatibilidade. \n\n    Algúns xogos especialmente títulos máis vellos, máis novo 3D xogos, ou aqueles con anti-software de trampa non pode traballar correctamente. \n\n    O Recomendado specs é un Mac con CPU de Silicio da Mazá (M1 ou encima) e polo menos 16GB de RAM."
+    },
+    "At the end make sure to": "Ao final fai seguro a",
+    "UNCHECK 'Run Steam'": "CKde UNCHE 'Vapor de Carreira'",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay Notificarate unha vez a instalación é feita;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Se desexas para continuar, ser paciente xa que pode tomar uns cantos minutos para acabar dependendo na vosa conexión de internet e configuración de sistema;",
+    "Install Steam": "Instala Vapor",
+    "Installing Steam": "Vapor instalador...",
+    "Launch Steam": "Vapor de lancha",
+    "Launching Steam": "Lanzando Vapor...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "En primeiro Vapor de lancha descargará os ficheiros necesarios e tomará uns cantos minutos para acabar e o login pantalla para aparecer;"
 }

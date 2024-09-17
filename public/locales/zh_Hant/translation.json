@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "{{path}} 请人工删除。\n{{paragraph}}\n{{error}}",
                 "title": "删除摘取的夹"
+            },
+            "steam": {
+                "error": "无法查获的是油轮。 安装可能由用户取消,或者在船上失败.",
+                "message": "船舶安装工作失败! 请仔细阅读这些指示并再次尝试! {{paragraph}} {{error}}",
+                "title": "2. 船舶错误"
             }
         },
         "info": {
@@ -1102,5 +1107,25 @@
             },
             "title": "修改指示"
         }
-    }
+    },
+    "Cancel Installation": "集装箱",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "超级邮局将下载和开始为你安装轮机。 请遵循关于安装厂的轮船指示;"
+    },
+    "HyperPlay will notify you once the installation is done;": "一旦安装完毕,超Play将通知你;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "如果您愿意继续学习,因为视您的互联网连接和系统配置情况,可以花几分钟时间完成学业;",
+    "Launch Steam": "发射场",
+    "Launching Steam": "发射船...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "第一次发射船将下载必要的文件,需要几分钟才能完成,日志屏幕将登上;",
+    "Install Steam": "1. 停泊船.",
+    "Installing Steam": "1. 停泊船.",
+    "At the end make sure to": "2. 船舶错误",
+    "steam-install": {
+        "compatibility-layer-not-available": "无法找到的合格等级。 请首先从“Settings”安装一个酒吧.",
+        "error-message": "安装船时发生错误。 请再次审判.",
+        "launch-tooltip": "利用超Play兼容性发射",
+        "success-message": "已经安装了轮船。 现在,你可以从图书馆发射.",
+        "tooltip": "这将安装Windows版本的轮船,它将使用超Play兼容性。\n\n某些游戏,特别是旧题目、新的3D游戏,或具有反制软件的游戏,可能无法正常运转。\n\n推荐的光谱是Mac和Ampa Silicon CPU(M1或以上)和至少16GB of RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK'Runell 页: 1"
 }
