@@ -214,7 +214,7 @@ export async function listUpdateableGames(): Promise<string[]> {
       return
     }
 
-    if (!gameIsInstalled(val)) return
+    if (!gameIsInstalled(val) || val.install?.version === undefined) return
 
     if (val.channels && val.install.channelName && val.install.platform) {
       if (!Object.hasOwn(val.channels, val.install.channelName)) {
@@ -231,7 +231,7 @@ export async function listUpdateableGames(): Promise<string[]> {
       if (
         sanitizeVersion(
           val.channels[val.install.channelName].release_meta.name
-        ) !== sanitizeVersion(val.install.version!) &&
+        ) !== sanitizeVersion(val.install.version) &&
         Object.keys(
           val.channels[val.install.channelName].release_meta.platforms
         ).includes(val.install.platform)
