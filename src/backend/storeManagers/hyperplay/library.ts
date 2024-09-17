@@ -16,7 +16,10 @@ import {
   sanitizeVersion,
   refreshGameInfoFromHpRelease
 } from './utils'
-import { getGameInfo as getGamesGameInfo } from './games'
+import {
+  downloadLatestGameIpdtManifest,
+  getGameInfo as getGamesGameInfo
+} from './games'
 import { getValistListingApiUrl, qaToken } from 'backend/constants'
 
 export async function addGameToLibrary(projectId: string) {
@@ -171,6 +174,14 @@ export async function refresh() {
           LogPrefix.HyperPlay
         )
         throw new Error('GameId not find in API')
+      }
+
+      if (
+        gameId ===
+        '0x799b758a631f05bbd441e865d0fc6be19a7b2884656c20abe5ca322bf4ebcb00'
+      ) {
+        console.log(JSON.stringify(gameData.channels, null, 2))
+        downloadLatestGameIpdtManifest(gameId)
       }
 
       refreshHPGameInfo(gameId, gameData)

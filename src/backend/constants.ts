@@ -297,6 +297,6 @@ export {
   mainReleaseChannelName,
   vulkanHelperBin,
   cachedUbisoftInstallerPath,
-  ipdtManifestsPath as manifestsFolder,
+  ipdtManifestsPath,
   ipdtPatcher
 }

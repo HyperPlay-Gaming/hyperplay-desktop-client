@@ -11,7 +11,8 @@ import {
   SiweValues,
   UpdateArgs,
   WineCommandArgs,
-  Runner
+  Runner,
+  AppPlatforms
 } from '../../../common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
@@ -34,7 +35,8 @@ import {
   isLinux,
   getValidateLicenseKeysApiUrl,
   ipdtPatcher,
-  toolsPath
+  toolsPath,
+  ipdtManifestsPath
 } from 'backend/constants'
 import {
   downloadFile,
@@ -81,6 +83,7 @@ import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
 import { downloadIPDTForOS } from '@hyperplay/patcher'
+import { chmod } from 'fs/promises'
 
 interface ProgressDownloadingItem {
   DownloadItem: DownloadItem
@@ -1498,11 +1501,48 @@ function writeManifestFile(
 }
 
 export const downloadPatcher = async () => {
+  // TODO: Figure it out how to update the patcher when needed
+
   if (!existsSync(ipdtPatcher)) {
     try {
       await downloadIPDTForOS(toolsPath)
+      if (!isWindows) {
+        await chmod(ipdtPatcher, 0o755)
+      }
     } catch (error) {
       logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
     }
   }
+}
+
+export async function downloadLatestGameIpdtManifest(appName: string) {
+  const {
+    install: { channelName, platform },
+    channels
+  } = getGameInfo(appName)
+  if (!channelName || !platform || !channels) {
+    logError(
+      `Channel name or platform not found for ${appName}`,
+      LogPrefix.HyperPlay
+    )
+    return
+  }
+
+  const platformKey = platform as AppPlatforms
+  const { name: version, platforms } = channels[channelName].release_meta
+  if (platforms[platformKey]) {
+    const manifestUrl = platforms[platformKey].manifest
+    if (!manifestUrl) {
+      logError(`Manifest url not found for ${appName}`, LogPrefix.HyperPlay)
+      return
+    }
+    // download and save the manifest file as a json file in manifest folder
+    return downloadFile(
+      manifestUrl,
+      ipdtManifestsPath,
+      `${appName}_${platform}_${version}.json`,
+      createAbortController(appName)
+    )
+  }
+  return
 }
