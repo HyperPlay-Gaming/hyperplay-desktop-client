@@ -231,7 +231,7 @@ export async function listUpdateableGames(): Promise<string[]> {
       if (
         sanitizeVersion(
           val.channels[val.install.channelName].release_meta.name
-        ) > sanitizeVersion(val.install.version!) &&
+        ) !== sanitizeVersion(val.install.version!) &&
         Object.keys(
           val.channels[val.install.channelName].release_meta.platforms
         ).includes(val.install.platform)
