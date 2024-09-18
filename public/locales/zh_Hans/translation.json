@@ -82,6 +82,15 @@
             "ubisoft-connect": {
                 "title": "UbisoftLink",
                 "message": "在游戏前安装UbisoftLink的工作失败。 在https://github.com/Heroic-Games-Launcher/HeroicGames Launcher/wiki/How-to-install-Ubisoft-Connect-on-HCHand-Mac安装."
+            },
+            "delete-files": {
+                "body": "{{path}} 请人工删除。\n{{paragraph}}\n{{error}}",
+                "title": "删除摘取的夹"
+            },
+            "steam": {
+                "error": "无法查获的是油轮。 安装可能由用户取消,或者在船上失败.",
+                "message": "船舶安装工作失败! 请仔细阅读这些指示并再次尝试! {{paragraph}} {{error}}",
+                "title": "2. 船舶错误"
             }
         },
         "info": {
@@ -179,7 +188,8 @@
         "unsync": "取消同步",
         "continue": "继续",
         "download": "下载",
-        "update": "更新"
+        "update": "更新",
+        "install": "安装"
     },
     "controller": {
         "hints": {
@@ -1042,7 +1052,87 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "你与超Play有外部围墙."
+        "EXTERNAL_WALLET_CONNECTED": "你与超Play有外部围墙.",
+        "WALLET_DISCONNECTED": "你没有与超Play连接的围墙."
     },
-    "back_to_game": "重获游戏"
+    "back_to_game": "重获游戏",
+    "import-game-folder": {
+        "dialog": {
+            "title": "选择性游戏 Folder to Import"
+        },
+        "label": "进口猎物",
+        "cta": "进口猎物",
+        "error": "进口期间有错误。 详情请见记录.",
+        "placeholder": "选择进口的游戏夹",
+        "success": "成功进口的游戏!"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "修改适用于基础游戏",
+                "title": "地下室"
+            },
+            "installing": {
+                "body": "摘取基本游戏档案",
+                "title": "藏匿基地"
+            },
+            "cancel": {
+                "body": "取消的基层游戏",
+                "title": "Cancel Extraction"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "placeholder": "选择Zip 文件",
+                "path": "选择性基地博爱"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "这一游戏是为战火世界所 mo的:利奇国王的Wrath(3.3.5a)。 为了发挥这一作用,参与者必须拥有一份3.3.5a.{{newline}}{{newline}}超Play的《世界战舰》副本。 拥有战舰的运动员可以从下列来源获得3.3.5a版本:",
+                "subtitle": "3.3.5a",
+                "webtorrent": "Torrent(Magnet Link)",
+                "title": "第一步"
+            },
+            "step2": {
+                "description": "选择下载 ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Selected ChromieCraft_3.3.5a.zip 文件",
+                "title": "第二步"
+            },
+            "step3": {
+                "description": "请选择安装世界军舰的夹:Lch King的Wrath(3.3.5a).",
+                "subtitle": "选 举 Folder",
+                "title": "第三步"
+            },
+            "step4": {
+                "subtitle": "准入法",
+                "description": "加入进入法,着手安装游戏.",
+                "title": "第四步"
+            },
+            "title": "修改指示"
+        }
+    },
+    "Cancel Installation": "集装箱",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "超级邮局将下载和开始为你安装轮机。 请遵循关于安装厂的轮船指示;"
+    },
+    "At the end make sure to": "2. 船舶错误",
+    "HyperPlay will notify you once the installation is done;": "一旦安装完毕,超Play将通知你;",
+    "Install Steam": "1. 停泊船.",
+    "Installing Steam": "1. 停泊船.",
+    "Launch Steam": "发射场",
+    "Launching Steam": "发射船...",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "如果您愿意继续学习,因为视您的互联网连接和系统配置情况,可以花几分钟时间完成学业;",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "第一次发射船将下载必要的文件,需要几分钟才能完成,日志屏幕将登上;",
+    "steam-install": {
+        "compatibility-layer-not-available": "无法找到的合格等级。 请首先从“Settings”安装一个酒吧.",
+        "error-message": "安装船时发生错误。 请再次审判.",
+        "launch-tooltip": "利用超Play兼容性发射",
+        "success-message": "已经安装了轮船。 现在,你可以从图书馆发射.",
+        "tooltip": "这将安装Windows版本的轮船,它将使用超Play兼容性。\n\n某些游戏,特别是旧题目、新的3D游戏,或具有反制软件的游戏,可能无法正常运转。\n\n推荐的光谱是Mac和Ampa Silicon CPU(M1或以上)和至少16GB of RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK'Runell 页: 1"
 }

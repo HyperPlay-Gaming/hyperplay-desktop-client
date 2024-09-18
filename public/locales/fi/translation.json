@@ -82,7 +82,16 @@
                 "title": "Ubisoft Connect",
                 "message": "Ubisoft Connectin asentaminen pelin prefiksiin epäonnistui. Tarkista wikisivumme osoitteessa https:/github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, jotta se voidaan asentaa maunally."
             },
-            "moving": "Error Moving Game (viittaukset | muokkaa)"
+            "moving": "Error Moving Game (viittaukset | muokkaa)",
+            "delete-files": {
+                "body": "Väärin poistettu kansio (X32X) Poista se manuaalisesti.\n[x86x]\n(X117X)",
+                "title": "Virhe poistaa uutettu kansio"
+            },
+            "steam": {
+                "error": "Steamia ei löytynyt. Käyttäjä on todennäköisesti peruuttanut asennuksen tai epäonnistunut Steamin puolella.",
+                "message": "Steamin asennus epäonnistui! Lue ohjeet huolellisesti ja yritä uudelleen! {{paragraph}}",
+                "title": "Steam-virhe"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +188,8 @@
         "unsync": "Älä synkronoi",
         "update": "Päivitä",
         "continue": "Jatka",
-        "download": "Ladata"
+        "download": "Ladata",
+        "install": "Asenna"
     },
     "controller": {
         "hints": {
@@ -1000,7 +1010,8 @@
         "title": "Pelin päivitykset saatavilla"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Olet yhteydessä HyperPlayyn ulkoisella lompakolla."
+        "EXTERNAL_WALLET_CONNECTED": "Olet yhteydessä HyperPlayyn ulkoisella lompakolla.",
+        "WALLET_DISCONNECTED": "Sinulla ei ole lompakkoa, joka on liitetty HyperPlayyn."
     },
     "accounts": "tilit",
     "exit_game": "Exit Game",
@@ -1033,5 +1044,84 @@
             "description": "HyperPlayn parhaat pelit, joissa on jännittäviä Play Streak -haasteita. Jokainen aktiviteetti kannustaa sinua osallistumaan toiseen peliin ja esittelemään parhaan verkkopelin. Peliaikasi on tärkeää!",
             "title": "Ansaitse Game7 -luottoja"
         }
-    }
+    },
+    "import-game-folder": {
+        "cta": "Tuonti Game Folder",
+        "dialog": {
+            "title": "Valitse pelikansio tuonnissa"
+        },
+        "error": "Tuonnin aikana tapahtui virhe. Ole hyvä ja katso lisätietoja.",
+        "label": "Tuonti Game Folder",
+        "placeholder": "Valitse pelikansio tuodaksesi",
+        "success": "Onnistuneesti tuotuja pelejä!"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Peruspelin louhinta peruttu",
+                "title": "Peruuta ylimääräinen"
+            },
+            "installed": {
+                "body": "Mod käytetään peruspeliin",
+                "title": "Peruspeli asennettu"
+            },
+            "installing": {
+                "body": "Poista peruspelitiedostot",
+                "title": "Peruspelin asentaminen"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Valitse Base Game File Sijainti",
+                "placeholder": "Valitse Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "World of Warcraft: Wrath of the Lich King (3.3.5a). Jotta voit pelata tätä modia, pelaajien täytyy omistaa kopio World of Warcraft 3.3.5a. {{newline}} HyperPlay ei isännöi World of Warcraftia. Pelaajat, jotka omistavat World of Warcraftin, voivat hankkia version 3.3.5a esimerkiksi seuraavista lähteistä:",
+                "subtitle": "World Warcraft 3.3.5a",
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Vaihe 1"
+            },
+            "step2": {
+                "description": "Valitse ladattu ChromieCraft_3.3.5a.zip-tiedosto.",
+                "subtitle": "Valitse ChromieCraft_3.3.5a.zip Tiedosto",
+                "title": "Vaihe 2"
+            },
+            "step3": {
+                "description": "Valitse kansio, jossa World of Warcraft: Wrath of the Lich King (3.3.5a) on asennettava.",
+                "subtitle": "Valitse asennus Kansiot",
+                "title": "Vaihe 3"
+            },
+            "step4": {
+                "description": "Anna pääsykoodi jatkaa asentamalla pelin.",
+                "subtitle": "Käyttökoodi",
+                "title": "Vaihe 4"
+            },
+            "title": "Mod-ohjeet"
+        }
+    },
+    "steam-install": {
+        "tooltip": "Tämä asentaa Steamin Windows-version ja se toimii HyperPlay-yhteensopivuuskerroksella.\n\nJotkut pelit, erityisesti vanhemmat pelit, uudemmat 3D-pelit tai ne, joilla on petostentorjuntaohjelmisto, eivät välttämättä toimi kunnolla.\n\nSuositellut näytöt ovat Mac, jossa on Apple Silicon CPU (M1 tai uudempi) ja vähintään 16 Gt RAM.",
+        "compatibility-layer-not-available": "Yhteensopivuutta ei ole saatavilla. Ole hyvä ja asenna ensin \"Settings > Wine Manager\".",
+        "error-message": "Virhe tapahtui asennuksen aikana. Kokeile uudelleen.",
+        "launch-tooltip": "Käynnistä Steam HyperPlay Compatibility Layer",
+        "success-message": "Steam on asennettu. Nyt voit aloittaa sen kirjastosta."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECKR:n RUN Steam \"\"\"",
+    "At the end make sure to": "Lopuksi varmista, että",
+    "Cancel Installation": "Peruuta asennus",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay lataa ja käynnistää Steam Setup. Noudata Steam-ohjeita asentimessasi;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay ilmoittaa sinulle asennuksen jälkeen;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Jos haluat jatkaa, ole kärsivällinen, koska se voi kestää muutaman minuutin, riippuen Internet-yhteydestä ja järjestelmän kokoonpanosta;",
+    "Install Steam": "Asenna Steam",
+    "Installing Steam": "Asentaminen Steam...",
+    "Launch Steam": "Käynnistä Steam",
+    "Launching Steam": "Steamin käynnistäminen...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Ensimmäisessä laukaisussa Steam lataa tarvittavat tiedostot ja kestää muutaman minuutin ja kirjautuminen näkyy;"
 }

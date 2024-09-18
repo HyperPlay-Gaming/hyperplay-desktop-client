@@ -30,7 +30,8 @@ export async function addGameToLibrary(projectId: string) {
 
   if (sameGameInLibrary !== undefined) {
     logWarning(
-      `Cannot add game to library since game is already added to the library!`
+      `Cannot add game to library since game is already added to the library!`,
+      LogPrefix.HyperPlay
     )
     return
   }
@@ -42,6 +43,13 @@ export async function addGameToLibrary(projectId: string) {
   const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
 
   const data = res.data
+  if (Object.keys(data).length === 0) {
+    logWarning(
+      `Cannot add game to library since game is no longer distributed by HyperPlay.`,
+      LogPrefix.HyperPlay
+    )
+    return
+  }
   const gameInfo = getGameInfoFromHpRelease(data)
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 }
@@ -51,16 +59,25 @@ export const getInstallInfo = async (
   platformToInstall: InstallPlatform,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   lang = 'en',
-  channelNameToInstall = 'main'
+  channelNameToInstall?: string
 ): Promise<HyperPlayInstallInfo | undefined> => {
   const gameInfo = getGamesGameInfo(appName)
+
+  if (!channelNameToInstall) {
+    logWarning(
+      'channelNameToInstall is undefined in getInstallInfo, probably a false positive.',
+      LogPrefix.HyperPlay
+    )
+    return
+  }
 
   if (
     gameInfo.channels === undefined ||
     gameInfo.channels[channelNameToInstall].release_meta === undefined
   ) {
-    console.error(
-      'Channels or Release Meta were undefined in getInstallInfo for HyperPlay Library Manager'
+    logError(
+      'Channels or Release Meta were undefined in getInstallInfo for HyperPlay Library Manager',
+      LogPrefix.HyperPlay
     )
     return undefined
   }
@@ -77,8 +94,9 @@ export const getInstallInfo = async (
   const info = releaseMeta.platforms[requestedPlatform]
 
   if (info === undefined) {
-    console.error(
-      'Info was undefined in getInstallInfo for HyperPlay Library Manager'
+    logError(
+      'Info was undefined in getInstallInfo for HyperPlay Library Manager',
+      LogPrefix.HyperPlay
     )
     return undefined
   }
@@ -137,6 +155,10 @@ const defaultExecResult = {
   stdout: ''
 }
 
+export function getGameInfo(appName: string): GameInfo | undefined {
+  return getGamesGameInfo(appName)
+}
+
 /**
  * Refreshes the entire library
  * this is only used when the user clicks the refresh button
@@ -170,16 +192,6 @@ export async function refresh() {
   return defaultExecResult
 }
 
-export function getGameInfo(
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  appName: string,
-  /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
-  forceReload?: boolean
-): GameInfo | undefined {
-  logWarning(`getGameInfo not implemented on HyperPlay Library Manager`)
-  return undefined
-}
-
 /* returns array of app names (i.e. _id's) for game releases that are out of date
  * a game's app name is only returned if the game is installed
  * since library release data is updated on each app launch
@@ -202,7 +214,7 @@ export async function listUpdateableGames(): Promise<string[]> {
       return
     }
 
-    if (!gameIsInstalled(val)) return
+    if (!gameIsInstalled(val) || val.install?.version === undefined) return
 
     if (val.channels && val.install.channelName && val.install.platform) {
       if (!Object.hasOwn(val.channels, val.install.channelName)) {
@@ -215,13 +227,14 @@ export async function listUpdateableGames(): Promise<string[]> {
         )
         return
       }
+      // if the installed version is less than the latest version && the installed platform is the same as the latest platform
       if (
-        // games installed before 0.5.0 used gameInfo.version for install.version
-        // so for backwards compatibility we remove spaces and lower case channel release meta name here
-        val.install.version !==
         sanitizeVersion(
-          val.channels[val.install.channelName].release_meta.name || ''
-        )
+          val.channels[val.install.channelName].release_meta.name
+        ) !== sanitizeVersion(val.install.version) &&
+        Object.keys(
+          val.channels[val.install.channelName].release_meta.platforms
+        ).includes(val.install.platform)
       ) {
         updateableGames.push(val.app_name)
       }

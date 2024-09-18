@@ -82,6 +82,15 @@
             "ubisoft-connect": {
                 "message": "Не вдалося встановити Ubisoft Connect в префіксі грі. Перевірте нашу сторінку вікі https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac для ручного встановлення.",
                 "title": "Ubisoft Connect"
+            },
+            "delete-files": {
+                "body": "Видалення помилок екстракції папки {{path}}. Будь ласка, зніміть його вручну.\n{{paragraph}}\n{{error}}",
+                "title": "Видалення помилок вилучення папки"
+            },
+            "steam": {
+                "title": "Помилки",
+                "error": "Не знайдено Steam. Встановити, ймовірно, скасовано користувачем або не вдалося на стороні Steam.",
+                "message": "Не вдалося встановити Steam! Будь ласка, ознайомтеся з інструкцією, ретельно і спробуйте знову! {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -176,10 +185,11 @@
         "login": "Увійти",
         "sync": "Синхронізувати",
         "syncing": "Синхронізація",
-        "unsync": "Десинхронізувати",
+        "unsync": "Розсинхронізувати",
         "continue": "Продовжити",
         "download": "Завантажити",
-        "update": "Оновити"
+        "update": "Оновити",
+        "install": "Почати встановлення"
     },
     "controller": {
         "hints": {
@@ -776,10 +786,10 @@
                         "title": "Що таке гаманець?"
                     },
                     "import": {
-                        "details": "Імпортуючи, установка і налаштування MetaMask будуть імпортовані в HyperPlay.",
+                        "details": "У наведених нижче браузерах вже встановлено MetaMask. Виберіть той, з якого ви хочете імпортувати.",
                         "title": "Виберіть браузер для імпорту",
                         "createNewWallet": "Створити новий гаманець розширення MM",
-                        "useRecoveryPhrase": "Доступ за допомогою секретної фрази відновлення",
+                        "useRecoveryPhrase": "Імпорт з використанням секретної фрази відновлення",
                         "cantFindProfile": "Не можете знайти свій профіль браузера?",
                         "orWord": "АБО",
                         "useRecoveryPhraseInfo": "Ця функція рекомендована для досвідчених користувачів і розробників. Ваша секретна фраза відновлення зберігається локально в MetaMask і ніколи не ділиться з HyperPlay.",
@@ -948,7 +958,8 @@
         "alpha": "Альфа"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Ви під'єднані до HyperPlay за допомогою зовнішнього гаманця."
+        "EXTERNAL_WALLET_CONNECTED": "Ви під'єднані до HyperPlay за допомогою зовнішнього гаманця.",
+        "WALLET_DISCONNECTED": "Ви не маєте гаманець, підключеного до HyperPlay."
     },
     "dlc": {
         "size": "Розмір",
@@ -976,7 +987,7 @@
     "gameUpdateNotifications": {
         "title": "Доступно оновлення ігор",
         "body": {
-            "single": "Є оновлення для {{gameName}}.",
+            "single": "Є готове оновлення для {{gameName}}.",
             "multiple": "{{gameName}} та інші ігри готові до оновлення."
         }
     },
@@ -1053,5 +1064,85 @@
     "email_subscription": {
         "title": "Дякуємо за реєстрацію!",
         "subtitle": "Ви зараз є частиною нашої спільноти, і ми раді поділитися цінними оновленнями та ідеями."
-    }
+    },
+    "Please connect to the internet to access the stores": "Під'єднайтеся до мережі, щоб отримати доступ до магазинів",
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Базовий витяг гри скасовано",
+                "title": "Скасувати вилучення"
+            },
+            "installed": {
+                "body": "Мод буде застосовуватися до базової гри",
+                "title": "Базова гра Встановлюється"
+            },
+            "installing": {
+                "body": "Вилучення базових файлів гри",
+                "title": "Встановлення базової гри"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Виберіть базовий ігровий файл розташування",
+                "placeholder": "Виберіть файл Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ХроміКрафт",
+                "description": "Ця гра є модом для світу Warcraft: Wrath of Lich King (3.3.5a). Для того, щоб грати в цей мод, гравці повинні володіти копію Всесвітнього Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay не займає світ Warcraft. Гравці, які мають власний світ Warcraft, можуть отримати версію 3.3.5a з джерел:",
+                "subtitle": "Завантажити світ Warcraft 3.3.5a",
+                "webtorrent": "Торент (Magnet Link)",
+                "title": "Крок 1"
+            },
+            "step4": {
+                "subtitle": "Код доступу",
+                "description": "Введіть код доступу, щоб продовжити установку гри.",
+                "title": "Крок 4"
+            },
+            "title": "Мод Інструкції",
+            "step2": {
+                "description": "Виберіть завантаженість ChromieCraft_3.3.5a.zip файл.",
+                "subtitle": "Виберіть ChromieCraft_3.3.5a.zip Головна",
+                "title": "Крок 2"
+            },
+            "step3": {
+                "description": "Будь ласка, оберіть папку, де повинен бути встановлена Всесвітня Warcraft.",
+                "subtitle": "Виберіть установку Склад",
+                "title": "Крок 3"
+            }
+        }
+    },
+    "import-game-folder": {
+        "cta": "Імпорт Game Folder",
+        "dialog": {
+            "title": "Виберіть Game Folder для імпорту"
+        },
+        "placeholder": "Виберіть папку ігор для імпорту",
+        "success": "Успішно імпортовані ігри!",
+        "error": "Помилки при імпорті. Будь ласка, див. журнали для отримання більш детальної інформації.",
+        "label": "Імпорт Game Folder"
+    },
+    "Cancel Installation": "Скасувати встановлення",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay завантажить і запустіть Steam Setup для вас. Будь ласка, дотримуйтесь інструкцій Steam на їх установці;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay повідомить про те, як виконується установка;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Якщо ви хочете продовжити, будьте пацієнтом кілька хвилин, щоб закінчити в залежності від конфігурації інтернету та системи;",
+    "Install Steam": "Встановити Steam",
+    "Installing Steam": "Установка Steam ...",
+    "At the end make sure to": "В кінці переконайтеся, що",
+    "Launch Steam": "Запуск Steam",
+    "Launching Steam": "Запуск Steam ...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "На першому запуску Steam завантажить необхідні файли і займе кілька хвилин, щоб закінчити і з'являтися екран входу;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Не доступний шар сумісності. Будь ласка, встановіть один з «Налаштування» першим.",
+        "error-message": "Похибка сталася при установці Steam. Будь ласка, спробуйте знову.",
+        "launch-tooltip": "Запустіть Steam за допомогою шару сумісності HyperPlay",
+        "success-message": "Встановлено Steam. Ви можете запустити його з бібліотеки.",
+        "tooltip": "Це дозволить встановити Windows версію Steam і він буде працювати за допомогою шару сумісності HyperPlay.\n\nДеякі ігри особливо старші заголовки, новіші 3D ігри, або ті, хто з антивірусним програмним забезпеченням не може працювати належним чином.\n\nРекомендовані характеристики є Mac з Apple Silicon CPU (M1 або вище) і принаймні 16 Гб оперативної пам'яті."
+    },
+    "UNCHECK 'Run Steam'": "УНІЧК \"Рун Пар\" Р"
 }

@@ -224,7 +224,7 @@ export default observer(function GamePage(): JSX.Element | null {
           !notInstallable &&
           !isOffline
         ) {
-          getInstallInfo(appName, runner, installPlatform)
+          getInstallInfo(appName, runner, installPlatform, channelName)
             .then((info) => {
               if (!info) {
                 throw 'Cannot get game info'
@@ -232,9 +232,14 @@ export default observer(function GamePage(): JSX.Element | null {
               setGameInstallInfo(info)
             })
             .catch((error) => {
-              console.error(error)
-              window.api.logError(`${`${error}`}`)
-              setHasError({ error: true, message: `${error}` })
+              const errorMessage = t('method.getInstallInfo.error', {
+                defaultValue: `Please contact the HyperPlay Team with this message: {{error}} - {{context}}.`,
+                error: error,
+                context: `ProjectID: ${appName} | Runner: ${runner} | Install Platform: ${installPlatform} | Channel: ${channelName} | Screen: Game Page | Method: getInstallInfo`
+              })
+              console.error(errorMessage)
+              window.api.logError(errorMessage)
+              setHasError({ error: true, message: errorMessage })
             })
         }
 

@@ -53,7 +53,10 @@
         },
         "yesCancel": "Áno, zrušiť",
         "dont-show-again": "Znovu nezobrazovat",
-        "ok": "OK"
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "Chcete zrušiť extrakciu?"
+        }
     },
     "button": {
         "add_to_favourites": "Pridať do obľúbených",
@@ -238,5 +241,10 @@
         "store": "Stránka obchodu",
         "verify": "Overiť a opraviť",
         "extraInfo": "Ďalšie informácie"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Kontaktujte HyperPlay Team s touto správou: {{error}} - {{context}}."
+        }
     }
 }

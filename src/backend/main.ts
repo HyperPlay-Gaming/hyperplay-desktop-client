@@ -38,7 +38,7 @@ import {
 import * as LDElectron from 'launchdarkly-electron-client-sdk'
 import Backend from 'i18next-fs-backend'
 import i18next from 'i18next'
-import { DXVK, Winetricks } from './tools'
+import { DXVK, SteamWindows, Winetricks } from './tools'
 import { GameConfig } from './game_config'
 import { GlobalConfig } from './config'
 import { LegendaryUser } from 'backend/storeManagers/legendary/user'
@@ -47,22 +47,17 @@ import setup from './storeManagers/gog/setup'
 import {
   clearCache,
   execAsync,
-  getGOGdlBin,
-  getLegendaryBin,
   getPlatformName,
   getStoreName,
   isEpicServiceOffline,
   handleExit,
-  checkRosettaInstall,
   openUrlOrFile,
   resetApp,
-  setGPTKDefaultOnMacOS,
   showAboutWindow,
   showItemInFolder,
   wait,
   getShellPath,
-  checkWineBeforeLaunch,
-  downloadDefaultWine
+  writeConfig
 } from './utils'
 import {
   configPath,
@@ -82,7 +77,6 @@ import {
   isCLIFullscreen,
   isCLINoGui,
   isFlatpak,
-  isMac,
   isSteamDeckGameMode,
   onboardLocalStore,
   publicDir,
@@ -99,7 +93,6 @@ import {
 import { handleOtp, handleProtocol } from './protocol'
 import {
   initLogger,
-  logChangedSetting,
   logError,
   logInfo,
   LogPrefix,
@@ -151,6 +144,13 @@ import { legendarySetup } from 'backend/storeManagers/legendary/setup'
 import * as Sentry from '@sentry/electron'
 import { DEV_PORTAL_URL, devSentryDsn, prodSentryDsn } from 'common/constants'
 import { getHpOverlay, initOverlay } from './overlay'
+
+import { initExtension } from './extension/importer'
+import { hpApi } from './utils/hyperplay_api'
+import {
+  initializeCompatibilityLayer,
+  checkWineBeforeLaunch
+} from './utils/compatibility_layers'
 
 /*
  * INSERT OTHER IPC HANDLERS HERE
@@ -496,19 +496,6 @@ if (!gotTheLock) {
 
     initImagesCache()
 
-    logInfo(
-      ['Legendary location:', join(...Object.values(getLegendaryBin()))],
-      LogPrefix.Legendary
-    )
-    logInfo(
-      ['GOGDL location:', join(...Object.values(getGOGdlBin()))],
-      LogPrefix.Gog
-    )
-    logInfo(
-      ['GOGDL location:', join(...Object.values(getGOGdlBin()))],
-      LogPrefix.Gog
-    )
-
     // TODO: Remove this after a couple of stable releases
     // Affects only current users, not new installs
     const settings = GlobalConfig.get().getSettings()
@@ -522,10 +509,6 @@ if (!gotTheLock) {
       const isLoggedIn = LegendaryUser.isLoggedIn()
 
       if (!isLoggedIn) {
-        logInfo('User Not Found, removing it from Store', {
-          prefix: LogPrefix.Backend,
-          forceLog: true
-        })
         configStore.delete('userInfo')
       }
 
@@ -660,21 +643,10 @@ if (!gotTheLock) {
       }, 10000)
     }
 
-    // Will download Wine if none was found
-    const availableWine = (await GlobalConfig.get().getAlternativeWine()) || []
-    const toolkitDownloaded = availableWine.some(
-      (wine) => wine.type === 'toolkit'
-    )
-    const shouldDownloadWine =
-      !availableWine.length || (isMac && !toolkitDownloaded)
-
-    Promise.all([
-      DXVK.getLatest(),
-      Winetricks.download(),
-      shouldDownloadWine ? downloadDefaultWine() : null,
-      isMac && checkRosettaInstall(),
-      isMac && !shouldDownloadWine && setGPTKDefaultOnMacOS()
-    ])
+    // Setup the compatibility layer if not on Windows
+    if (!isWindows) {
+      initializeCompatibilityLayer()
+    }
 
     // set initial zoom level after a moment, if set in sync the value stays as 1
     setTimeout(() => {
@@ -1092,31 +1064,9 @@ ipcMain.on('toggleVKD3D', (event, { appName, action }) => {
     })
 })
 
-ipcMain.handle('writeConfig', (event, { appName, config }) => {
-  logInfo(
-    `Writing config for ${appName === 'default' ? 'HyperPlay' : appName}`,
-    LogPrefix.Backend
-  )
-  const oldConfig =
-    appName === 'default'
-      ? GlobalConfig.get().getSettings()
-      : GameConfig.get(appName).config
-
-  // log only the changed setting
-  logChangedSetting(config, oldConfig)
-
-  if (appName === 'default') {
-    GlobalConfig.get().set(config as AppSettings)
-    GlobalConfig.get().flush()
-    const currentConfigStore = configStore.get_nodefault('settings')
-    if (currentConfigStore) {
-      configStore.set('settings', { ...currentConfigStore, ...config })
-    }
-  } else {
-    GameConfig.get(appName).config = config as GameSettings
-    GameConfig.get(appName).flush()
-  }
-})
+ipcMain.handle('writeConfig', (event, { appName, config }) =>
+  writeConfig(appName, config)
+)
 
 ipcMain.on('setSetting', (event, { appName, key, value }) => {
   if (appName === 'default') {
@@ -1993,6 +1943,8 @@ ipcMain.handle('launchApp', async (e, appName, runner) =>
   gameManagerMap[runner].launch(appName)
 )
 
+ipcMain.handle('installSteamWindows', async () => SteamWindows.installSteam())
+
 ipcMain.handle('isNative', (e, { appName, runner }) => {
   return gameManagerMap[runner].isNative(appName)
 })
@@ -2118,5 +2070,3 @@ ipcMain.handle('getHyperPlayListings', async () => {
  */
 
 import './storeManagers/legendary/eos_overlay/ipc_handler'
-import { initExtension } from './extension/importer'
-import { hpApi } from './utils/hyperplay_api'

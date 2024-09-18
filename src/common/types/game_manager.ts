@@ -57,7 +57,7 @@ export interface GameManager {
   update: (appName: string, args?: UpdateArgs) => Promise<InstallResult>
   forceUninstall: (appName: string) => Promise<void>
   stop: (appName: string) => Promise<void>
-  isGameAvailable: (appName: string) => boolean
+  isGameAvailable: (appName: string) => Promise<boolean>
   pause: (appName: string) => Promise<void>
 }
 

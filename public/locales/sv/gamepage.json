@@ -53,7 +53,10 @@
         },
         "yesCancel": "Ja, Avbryt",
         "dont-show-again": "Visa inte igen",
-        "ok": "OK"
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "Vill du avbryta extraktionen?"
+        }
     },
     "button": {
         "add_to_favourites": "Lägg till i Favoriter",
@@ -244,5 +247,10 @@
         "store": "Butikssida",
         "verify": "Verifiera och reparera",
         "extraInfo": "Extra information"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Vänligen kontakta HyperPlay Team med detta meddelande: {{error}} - {{context}}."
+        }
     }
 }

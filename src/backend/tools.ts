@@ -10,7 +10,13 @@ import {
   rm
 } from 'graceful-fs'
 import { exec, spawn } from 'child_process'
-import { execAsync, getWineFromProton } from './utils'
+import {
+  calculateProgress,
+  downloadFile,
+  execAsync,
+  getWineFromProton,
+  writeConfig
+} from './utils'
 import {
   execOptions,
   toolsPath,
@@ -32,6 +38,11 @@ import {
   get_vulkan_instance_version
 } from './utils/graphics/vulkan'
 import { lt as semverLt } from 'semver'
+import { getMainWindow } from './main_window'
+import { createAbortController } from './utils/aborthandler/aborthandler'
+import { GlobalConfig } from './config'
+import { gameManagerMap } from './storeManagers'
+import { addNewApp } from './storeManagers/sideload/library'
 
 export const DXVK = {
   getLatest: async () => {
@@ -576,4 +587,158 @@ function getDxvkUrl(): string {
   // FIXME: We currently lack a "Don't download at all" option here, but
   //        that would also need bigger changes in the frontend
   return 'https://api.github.com/repos/doitsujin/dxvk/releases/latest'
+}
+
+/**
+ * Download and Install the Windows version of Steam on a Wine Prefix on macOS only
+ */
+export const SteamWindows = {
+  downloadSteam: async () => {
+    if (!isMac) {
+      return
+    }
+
+    const steamURL =
+      'https://cdn.cloudflare.steamstatic.com/client/installer/SteamSetup.exe'
+    const directory = `${toolsPath}/steam`
+    const fileName = 'SteamSetup.exe'
+    const window = getMainWindow()
+
+    if (!isOnline() || existsSync(join(directory, fileName)) || !window) {
+      return
+    }
+
+    const abortController = createAbortController('steam-download')
+
+    function handleProgess(
+      downloadedBytes: number,
+      downloadSpeed: number,
+      diskWriteSpeed: number,
+      progress: number
+    ) {
+      const currentProgress = calculateProgress(
+        downloadedBytes,
+        Number.parseInt('2380800'),
+        downloadSpeed,
+        diskWriteSpeed,
+        progress
+      )
+
+      window?.webContents.send(`progressUpdate-steam}`, {
+        appName: 'steam',
+        status: 'installing',
+        runner: 'hyperplay',
+        progress: {
+          ...currentProgress
+        }
+      })
+    }
+
+    try {
+      logInfo('Downloading Steam', LogPrefix.Backend)
+      await downloadFile(
+        steamURL,
+        directory,
+        fileName,
+        abortController,
+        handleProgess
+      )
+      return
+    } catch (error) {
+      return logWarning(['Error Downloading Steam', error], LogPrefix.Backend)
+    }
+  },
+  installSteam: async () => {
+    if (!isMac) {
+      return
+    }
+
+    const steamCoverArt =
+      'https://cdn2.steamgriddb.com/file/sgdb-cdn/grid/a7e8ba67562ea4d4ca0421066466ece4.png'
+    const steamSetupPath = `${toolsPath}/steam/SteamSetup.exe`
+    const { defaultWinePrefix, wineVersion } = GlobalConfig.get().getSettings()
+    // won't use just Steam here to avoid issue with people that already has a prefix with this name
+    const winePrefix = join(dirname(defaultWinePrefix), 'SteamHyperPlay')
+
+    if (!existsSync(steamSetupPath)) {
+      await SteamWindows.downloadSteam()
+    }
+
+    // Run Steam Setup and write settings
+    const gameSettings = await gameManagerMap['sideload'].getSettings('steam')
+    if (!gameSettings) {
+      return
+    }
+    writeConfig('steam', { ...gameSettings, winePrefix, wineVersion })
+
+    try {
+      await runWineCommand({
+        commandParts: [steamSetupPath],
+        wait: true,
+        gameSettings: {
+          ...gameSettings,
+          winePrefix,
+          wineVersion
+        }
+      })
+
+      // Add Steam to the library
+      const executable = `${winePrefix}/drive_c/Program Files (x86)/Steam/Steam.exe`
+
+      if (!existsSync(executable)) {
+        logError(['Steam executable not found', executable], LogPrefix.Backend)
+        showDialogBoxModalAuto({
+          title: i18next.t('box.error.steam.title', 'Steam error'),
+          message: i18next.t(
+            'box.error.steam.message',
+            'Steam installation failed! Please read the instructions carefully and try again! {{paragraph}} {{error}}',
+            {
+              paragraph: '\n \n',
+              error: i18next.t(
+                'box.error.steam.error',
+                'Steam executable not found. Installation was probably canceled by user or failed on Steam side.'
+              )
+            }
+          ),
+          type: 'ERROR'
+        })
+        throw new Error('Steam executable not found')
+      }
+
+      addNewApp({
+        app_name: 'steam',
+        runner: 'sideload',
+        art_cover: steamCoverArt,
+        art_square: steamCoverArt,
+        is_installed: true,
+        title: 'Steam for Windows',
+        canRunOffline: false,
+        install: {
+          executable,
+          is_dlc: false,
+          platform: 'windows'
+        },
+        description: 'Play Steam Windows Games on macOS'
+      })
+
+      logInfo(`Steam installed at ${dirname(executable)}`, LogPrefix.Backend)
+    } catch (error) {
+      logError(['Error Installing Steam', error], LogPrefix.Backend)
+
+      showDialogBoxModalAuto({
+        title: i18next.t('box.error.steam.title', 'Steam error'),
+        message: i18next.t(
+          'box.error.steam.message',
+          'Steam installation failed! Please read the instructions carefully and try again! {{paragraph}} {{error}}',
+          {
+            paragraph: '\n \n',
+            error: error
+          }
+        ),
+        type: 'ERROR'
+      })
+
+      throw new Error('Steam installation failed')
+    }
+  }
 }

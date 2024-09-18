@@ -155,7 +155,8 @@
         "unsync": "പിരിക്കൂ",
         "continue": "തുടരുക",
         "download": "ഡൌണ്‍ലോഡ്",
-        "update": "പുതുക്കുക"
+        "update": "പുതുക്കുക",
+        "install": "ഇൻസ്റ്റാളുചെയ്യൽ ആരംഭിക്കുക"
     },
     "controller": {
         "hints": {
@@ -744,5 +745,8 @@
     },
     "accounts": "അക്കൗണ്ടുകൾ",
     "analytics": "അപഗ്രഥനം",
-    "profile": "പ്രൊഫൈൽ"
+    "profile": "പ്രൊഫൈൽ",
+    "import-game-folder": {
+        "placeholder": "ഇറക്കുമതി ചെയ്യുവാനുള്ള കളിയറ തിരഞ്ഞെടുക്കൂ"
+    }
 }

@@ -82,6 +82,15 @@
             "ubisoft-connect": {
                 "title": "Ubisoft Conecta",
                 "message": "Instalación de Ubisoft Conecta no prefixo de xogo fallou. Control o noso wiki páxina en https://github.com/Heroico-Xogos-Launcher/HeroicGamesLauncher/wiki/Can-a-instalar-Ubisoft-Conectar-encima-Linux-e-Mac para instalalo maunally."
+            },
+            "delete-files": {
+                "title": "O erro que tira cartafol extraído",
+                "body": "O erro que tira cartafol extraído {{path}}. Compracer tiralo a man. \n                {{paragraph}} \n                {{error}}"
+            },
+            "steam": {
+                "error": "O vapor executábel non atopado. A instalación era probabelmente canceled por usuario ou fallado en lado de Vapor.",
+                "message": "Instalación de vapor fallou! Compracer lido as instrucións coidadosamente e tentar outra vez! {{paragraph}} {{error}}",
+                "title": "Erro de vapor"
             }
         },
         "info": {
@@ -179,7 +188,8 @@
         "unsync": "Desincronizar",
         "continue": "Continuar",
         "download": "Baixar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "install": "Instalar"
     },
     "controller": {
         "hints": {
@@ -1007,7 +1017,8 @@
     },
     "accounts": "Contas",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Es conectado a HyperPlay cunha carteira externa."
+        "EXTERNAL_WALLET_CONNECTED": "Es conectado a HyperPlay cunha carteira externa.",
+        "WALLET_DISCONNECTED": "Non tes unha carteira conectou a HyperPlay."
     },
     "notification": {
         "wine-download": {
@@ -1033,5 +1044,84 @@
     },
     "ALL": "TODO",
     "analytics": "Análises",
-    "profile": "Perfil"
+    "profile": "Perfil",
+    "import-game-folder": {
+        "cta": "Cartafol de Xogo da importación",
+        "dialog": {
+            "title": "Cartafol de Xogo selecto para Importar"
+        },
+        "error": "Había  un erro durante importación. Compracer ver o rexistra para máis detalles.",
+        "label": "Cartafol de Xogo da importación",
+        "placeholder": "Escoller o cartafol de xogo para importar",
+        "success": "Xogos importados con éxito!"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "Este xogo é un mod para Mundo de Warcraft: Ira do Lich Rei (3.3.5un). Para xogo este mod, os xogadores teñen que posuír unha copia de Mundo de Warcraft 3.3.5un. {{newline}} {{newline}} HyperPlay Cervas non Mundo anfitrión de Warcraft. Xogadores que posúen Mundo de Warcraft pode obter versión 3.3.5un desde a fontes lles gosta:",
+                "subtitle": "Mundo de descarga de Warcraft 3.3.5un",
+                "title": "Paso 1",
+                "webtorrent": "Torrente (Ligazón de Imán)",
+                "chromieCraft": "ChromieCraft"
+            },
+            "step2": {
+                "description": "Selecto o descargado ChromieCraft_3.3.5un.zip Ficheiro.",
+                "subtitle": "Selecto ChromieCraft_3.3.5un.zip Ficheiro",
+                "title": "Paso 2"
+            },
+            "step4": {
+                "description": "Introducir o código de acceso para proceder con instalar o xogo.",
+                "title": "Paso 4",
+                "subtitle": "Código de acceso"
+            },
+            "step3": {
+                "description": "Compracer escoller o cartafol onde Mundial de Warcraft: Ira do Lich Rei (3.3.5un) tería que ser instalado.",
+                "subtitle": "Cartafol de Instalación selecta",
+                "title": "Paso 3"
+            },
+            "title": "Mod Instrucións"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Extracción de xogo da base canceled",
+                "title": "Cancela Extracción"
+            },
+            "installed": {
+                "body": "Mod Será aplicado para basear xogo",
+                "title": "Xogo de base Instalou"
+            },
+            "installing": {
+                "body": "Extraendo ficheiros de xogo da base",
+                "title": "Xogo de Base instaladora"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Ficheiro de Xogo de Base selecto Localización",
+                "placeholder": "Selecto Zip Ficheiro"
+            }
+        }
+    },
+    "Cancel Installation": "Cancela Instalación",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay Descargará e arrancar o Vapor Setup para ti. Compracer seguir instrucións de Vapor no seu instalador;"
+    },
+    "steam-install": {
+        "launch-tooltip": "Vapor de lancha que utiliza o HyperPlay Capa de Compatibilidade",
+        "compatibility-layer-not-available": "Capa de compatibilidade non dispoñíbel. Compracer instalar un desde \"Director > de Viño das Colocacións\" primeiro.",
+        "error-message": "Un erro ocorrido mentres Vapor instalador. Compracer tentar outra vez.",
+        "success-message": "O vapor foi instalado. Agora o podes lanzar desde a Biblioteca.",
+        "tooltip": "Isto instalará a versión de Xanelas do vapor e el correrán  utilizar un HyperPlay Capa de Compatibilidade. \n\n    Algúns xogos especialmente títulos máis vellos, máis novo 3D xogos, ou aqueles con anti-software de trampa non pode traballar correctamente. \n\n    O Recomendado specs é un Mac con CPU de Silicio da Mazá (M1 ou encima) e polo menos 16GB de RAM."
+    },
+    "At the end make sure to": "Ao final fai seguro a",
+    "UNCHECK 'Run Steam'": "CKde UNCHE 'Vapor de Carreira'",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay Notificarate unha vez a instalación é feita;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Se desexas para continuar, ser paciente xa que pode tomar uns cantos minutos para acabar dependendo na vosa conexión de internet e configuración de sistema;",
+    "Install Steam": "Instala Vapor",
+    "Installing Steam": "Vapor instalador...",
+    "Launch Steam": "Vapor de lancha",
+    "Launching Steam": "Lanzando Vapor...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "En primeiro Vapor de lancha descargará os ficheiros necesarios e tomará uns cantos minutos para acabar e o login pantalla para aparecer;"
 }

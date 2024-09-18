@@ -82,6 +82,15 @@
             "ubisoft-connect": {
                 "message": "Oyun əvvəl başarısız Nickel Connect quraşdırılması. https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac daxildir.",
                 "title": "Qeydiyyat"
+            },
+            "delete-files": {
+                "body": "Fayl qoymaq {{path}}. Daxil ol\n{{paragraph}}\n{{error}}",
+                "title": "Fayl qablaşdırmaq"
+            },
+            "steam": {
+                "title": "Steam  Steam",
+                "error": "Daxil ol Qablaşdırma haqqında istifadəçi tərəfindən istifadə olunub və ya Steam tərəfindən başarısız oldu.",
+                "message": "Steam quraşdırma başarısız oldu! Müəlliflik hüquququ © 2019 {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -179,7 +188,8 @@
         "unsync": "Sinxronizasiyadan çıxarın",
         "continue": "Davam edin",
         "download": "Endir",
-        "update": "Yenilə"
+        "update": "Yenilə",
+        "install": "Yüklə"
     },
     "controller": {
         "hints": {
@@ -1026,12 +1036,92 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Siz xarici cüzdan ilə HiperPlay bağlıdır."
+        "EXTERNAL_WALLET_CONNECTED": "Siz xarici cüzdan ilə HiperPlay bağlıdır.",
+        "WALLET_DISCONNECTED": "HyperPlay bağlı bir cüzdanınız yoxdur."
     },
     "exit_game": "Oyuncaq",
     "importGameErrorMessage": "Xüsusi oyun qrupu deyil, avtomatik oyun mümkün deyil",
     "dlcs": {
         "label": "Yüklemek üçün DLCs seçin:"
     },
-    "back_to_game": "Oyun üçün geri"
+    "back_to_game": "Oyun üçün geri",
+    "import-game-folder": {
+        "dialog": {
+            "title": "Pulsuz Oyun Folder seçin"
+        },
+        "cta": "Avtomatik oyun kateqoriya",
+        "error": "Avtomobil zamanı bir səhv idi. Daha ətraflı məlumat üçün girişlər baxın.",
+        "label": "Avtomatik oyun kateqoriya",
+        "placeholder": "Pulsuz oyun qrup seçin",
+        "success": "Ətraflı avtomobil!"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "Bu oyun World of Warcraft üçün bir mod: Lich King Wrath (3.3.5a). Bu modu oynamaq üçün, oyunçular Warcraft Dünya nümunə sahibi olmalıdır 3.3.5a. {{newline}} {{newline}} HyperPlay Warcraft World ev sahibi deyil. Warcraft-ın öz dünya sahibi olan oyunçular, kimi mövzulardan 3.3.5a verə bilər:",
+                "subtitle": "World of Warcraft 3.3.5a",
+                "title": "Addım 1",
+                "webtorrent": "Torrent (Magnet Link)",
+                "chromieCraft": "ChromieCraft"
+            },
+            "step2": {
+                "description": "Qeyd olun ChromieCraft_3.3.5a.zip fak.",
+                "subtitle": "ChromieCraft_3.3.5a.zip Oxunub",
+                "title": "Addım 2"
+            },
+            "step3": {
+                "description": "World of Warcraft: Lich King Wrath (.3.5a) quraşdırılması lazımdır.",
+                "subtitle": "Qablaşdırma kateqoriya",
+                "title": "Addım 3"
+            },
+            "step4": {
+                "description": "Oyun yüklemek üçün giriş kodunu daxil edin.",
+                "subtitle": "Giriş Kodu",
+                "title": "Ad Soyad"
+            },
+            "title": "Modullar"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Ümumi oyun ekstraksiyası",
+                "title": "Cancel"
+            },
+            "installed": {
+                "body": "Mod baza oyun üçün uyğun olacaq",
+                "title": "Ümumi Oyun"
+            },
+            "installing": {
+                "body": "Bazar oyun faylları",
+                "title": "Ümumi Oyun"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "placeholder": "Oxunub",
+                "path": "Base Game File Yerevanı"
+            }
+        }
+    },
+    "Cancel Installation": "Qablaşdırma",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "İlk start Steam lazımi faylları yükləyəcək və görünmək üçün bir neçə dərəcək;",
+    "steam-install": {
+        "launch-tooltip": "HyperPlay Compatability Layer istifadə Steam başlayır",
+        "compatibility-layer-not-available": "Təhlükəsizlik kağızı mövcud deyil. \"Settings > Wine Manager\" dəstək.",
+        "error-message": "Steam quraşdırmaq zaman bir səhv meydana geldi. Qeydiyyat.",
+        "success-message": "Steam quraşdırılmışdır. İndi Kitabxanadan başlaya bilərsiniz.",
+        "tooltip": "Bu Steam Windows versiyasını yükləcək və HyperPlay Compatability Layer istifadə edəcək.\n\nBöyük Britaniya oyunçular, yenier 3D oyunlar, və ya anti-cheat proqram ilə olanlar düzgün işləyə bilər.\n\nXüsusi spektrlər Apple Silikon CPU (M1 və ya yuxarı) və ən azı 16GB RAM ilə bir Mac var."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam  '",
+    "At the end make sure to": "Sonda əmin et",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay download və sizin üçün Steam quraşdırma başlayacaq. Daxil ol;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay quraşdırma çıxarılır sonra sizə bildirmək olacaq;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Daxil olmaq istəyirsinizsə, internet bağlantısı və sistem konfiqurasiyasına qəbul etmək üçün bir neçə dəqiq ola bilər;",
+    "Install Steam": "Daxil ol",
+    "Installing Steam": "Daxil ol...",
+    "Launch Steam": "Daxil ol",
+    "Launching Steam": "Daxil ol."
 }

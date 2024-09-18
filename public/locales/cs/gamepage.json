@@ -53,7 +53,10 @@
         "compability": {
             "message": "Tato hra Windows spustí pomocí kompatibilizační vrstvy. Můžete se setkat s některými problémy nebo hra nemusí fungovat vůbec."
         },
-        "yesCancel": "Ano, zrušit"
+        "yesCancel": "Ano, zrušit",
+        "stopExtraction": {
+            "title": "Chcete zrušit Extraction?"
+        }
     },
     "button": {
         "add_to_favourites": "Přidat do oblíbených",
@@ -244,5 +247,10 @@
         "store": "Stránka obchodu",
         "verify": "Zkontrolovat a opravit",
         "extraInfo": "Další informace"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Kontaktujte prosím HyperPlay Tým s touto zprávou: {{error}} - {{context}}."
+        }
     }
 }
