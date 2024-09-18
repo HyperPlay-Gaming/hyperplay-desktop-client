@@ -64,6 +64,7 @@ const TextInputField = ({
         )}
         rightSection={inputIcon}
         label={label}
+        readOnly={true}
       />
       {value && warning}
       {afterInput}

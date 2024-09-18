@@ -568,7 +568,7 @@ export default function DownloadDialog({
             value={installPath.replaceAll("'", '')}
             onChange={(event) => setInstallPath(event.target.value)}
             icon={<FontAwesomeIcon icon={faFolderOpen} />}
-            inputProps={{ readOnly: true, className: styles.folderTextInput }}
+            inputProps={{ className: styles.folderTextInput }}
             onIconClick={handleInstallPathSelection}
             afterInput={
               gameDownloadSize ? (
