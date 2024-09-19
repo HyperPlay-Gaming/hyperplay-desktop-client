@@ -16,9 +16,11 @@ export interface QuestsViewerProps {
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
-  const { isSignedIn } = useAuthSession()
+  const { isSignedIn, data } = useAuthSession()
   const { t } = useTranslation()
   const flags = useFlags()
+
+  const sessionEmail = data?.linkedAccounts.get('email')
 
   let alertComponent = null
   if (!isSignedIn) {
@@ -44,6 +46,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           setSelectedQuestId={setSelectedQuestId}
         />
         <QuestDetailsWrapper
+          sessionEmail={sessionEmail}
+          checkG7ConnectionStatus={window.api.checkG7ConnectionStatus}
           logInfo={window.api.logInfo}
           logError={window.api.logError}
           projectId={appName}

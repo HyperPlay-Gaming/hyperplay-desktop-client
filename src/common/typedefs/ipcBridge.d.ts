@@ -296,6 +296,7 @@ interface HyperPlayAsyncIPCFunctions {
   getPointsBalancesForProject: (
     projectId: string
   ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
+  checkG7ConnectionStatus: () => Promise<boolean>
   syncPlaySession: (appName: string, runner: Runner) => Promise<void>
   getEpicListingUrl: (appName: string) => Promise<string>
   importGameFolder: (gameFolder: string) => Promise<string>
