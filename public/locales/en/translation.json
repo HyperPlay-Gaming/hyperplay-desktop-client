@@ -736,6 +736,9 @@
         "g7Numclaimed": "Total Claimed G7 Credits",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
+        "noG7ConnectionClaim": "You need to have a Game7 account linked to {{email}} to claim your rewards.",
+        "noG7ConnectionSync": "You need to have a Game7 account linked to {{email}} to resync your tasks.",
+        "notEnoughGas": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.",
         "playstreak": {
             "dayResets": "Day resets:",
             "days": "days",

@@ -1,4 +1,5 @@
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
+import { checkG7ConnectionStatus } from 'backend/utils/quests'
 import { DEV_PORTAL_URL } from 'common/constants'
 import {
   ConfirmClaimParams,
@@ -93,4 +94,8 @@ ipcMain.handle('getPointsBalancesForProject', async (e, projectId) => {
   const url = `${DEV_PORTAL_URL}api/v1/points/project/${projectId}/balance`
   const response = await fetchWithCookie({ url, method: 'GET' })
   return response
+})
+
+ipcMain.handle('checkG7ConnectionStatus', async () => {
+  return checkG7ConnectionStatus()
 })
