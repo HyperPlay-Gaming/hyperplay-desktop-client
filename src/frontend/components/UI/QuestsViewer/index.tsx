@@ -24,7 +24,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   if (!isSignedIn) {
     alertComponent = (
       <Alert
-        className={styles.alert}
         message={t(
           'quests.playstreak.signInWarning.overlay',
           'You are currently not logged in, play streak progress will not be tracked. Please exit the game and login to HyperPlay via the top-right dropdown to track progress.'
@@ -36,53 +35,60 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
 
   return (
     <div className={styles.root}>
-      {alertComponent}
-      <div className={styles.questsViewerContainer}>
-        <QuestLogWrapper
-          projectId={appName}
-          selectedQuestId={selectedQuestId}
-          setSelectedQuestId={setSelectedQuestId}
-        />
-        <QuestDetailsWrapper
-          logInfo={window.api.logInfo}
-          logError={window.api.logError}
-          projectId={appName}
-          flags={{
-            rewardTypeClaimEnabled: {
-              ERC20: flags.erc20RewardsClaim,
-              ERC721: flags.erc721RewardsClaim,
-              ERC1155: flags.erc1155RewardsClaim,
-              POINTS: flags.pointsRewardsClaim,
-              'EXTERNAL-TASKS': flags.externalTasksRewardsClaim
-            },
-            questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled
-          }}
-          trackEvent={window.api.trackEvent}
-          signInWithSteamAccount={() => window.api.signInWithProvider('steam')}
-          openDiscordLink={window.api.openDiscordLink}
-          selectedQuestId={selectedQuestId}
-          getQuest={window.api.getQuest}
-          getUserPlayStreak={window.api.getUserPlayStreak}
-          getSteamGameMetadata={window.api.getSteamGameMetadata}
-          claimPoints={async (reward: Reward) =>
-            window.api.claimQuestPointsReward(reward.id.toString())
-          }
-          completeExternalTask={async (reward: Reward) =>
-            window.api.completeExternalTask(reward.id.toString())
-          }
-          getQuestRewardSignature={window.api.getQuestRewardSignature}
-          confirmRewardClaim={window.api.confirmRewardClaim}
-          getExternalTaskCredits={window.api.getExternalTaskCredits}
-          syncPlaySession={window.api.syncPlaySession}
-          getDepositContracts={window.api.getDepositContracts}
-          openSignInModal={authState.openSignInModal}
-          resyncExternalTask={async (rewardId: string) => {
-            window.api.resyncExternalTask(rewardId)
-          }}
-          isSignedIn={isSignedIn}
-          key={'questDetailsLoading'}
-        />
+      <div className={styles.leftSection}>
+        {alertComponent}
+        <div className={styles.questsViewerContainer}>
+          <QuestLogWrapper
+            projectId={appName}
+            selectedQuestId={selectedQuestId}
+            setSelectedQuestId={setSelectedQuestId}
+          />
+          <QuestDetailsWrapper
+            className={styles.detailsWrapper}
+            checkG7ConnectionStatus={async () => Promise.resolve(true)}
+            logInfo={window.api.logInfo}
+            logError={window.api.logError}
+            projectId={appName}
+            flags={{
+              rewardTypeClaimEnabled: {
+                ERC20: flags.erc20RewardsClaim,
+                ERC721: flags.erc721RewardsClaim,
+                ERC1155: flags.erc1155RewardsClaim,
+                POINTS: flags.pointsRewardsClaim,
+                'EXTERNAL-TASKS': flags.externalTasksRewardsClaim
+              },
+              questsOverlayClaimCtaEnabled: flags.questsOverlayClaimCtaEnabled
+            }}
+            trackEvent={window.api.trackEvent}
+            signInWithSteamAccount={() =>
+              window.api.signInWithProvider('steam')
+            }
+            openDiscordLink={window.api.openDiscordLink}
+            selectedQuestId={selectedQuestId}
+            getQuest={window.api.getQuest}
+            getUserPlayStreak={window.api.getUserPlayStreak}
+            getSteamGameMetadata={window.api.getSteamGameMetadata}
+            claimPoints={async (reward: Reward) =>
+              window.api.claimQuestPointsReward(reward.id.toString())
+            }
+            completeExternalTask={async (reward: Reward) =>
+              window.api.completeExternalTask(reward.id.toString())
+            }
+            getQuestRewardSignature={window.api.getQuestRewardSignature}
+            confirmRewardClaim={window.api.confirmRewardClaim}
+            getExternalTaskCredits={window.api.getExternalTaskCredits}
+            syncPlaySession={window.api.syncPlaySession}
+            getDepositContracts={window.api.getDepositContracts}
+            openSignInModal={authState.openSignInModal}
+            resyncExternalTask={async (rewardId: string) => {
+              window.api.resyncExternalTask(rewardId)
+            }}
+            isSignedIn={isSignedIn}
+            key={'questDetailsLoading'}
+          />
+        </div>
       </div>
+      <div className={styles.rightSection} />
     </div>
   )
 }
