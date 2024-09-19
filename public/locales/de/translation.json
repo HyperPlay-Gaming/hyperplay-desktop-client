@@ -978,7 +978,9 @@
             "title": "Bestätigen Sie Quest Reward Claim",
             "cancel": "Abbrechen",
             "confirm": "Bestätigen"
-        }
+        },
+        "noG7ConnectionClaim": "Sie müssen ein Game7-Konto mit {{email}} verknüpft haben, um Ihre Belohnungen zu beanspruchen.",
+        "noG7ConnectionSync": "Sie müssen ein Game7-Konto mit {{email}} verknüpft haben, um Ihre Aufgaben neu zu synchronisieren."
     },
     "quests": {
         "playstreak": {
