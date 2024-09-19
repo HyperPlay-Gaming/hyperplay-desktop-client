@@ -618,6 +618,10 @@
         "wine-download": {
             "message": "Setting up the default compatibility layer",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "Failed to setup the default compatibility layer",
+            "title": "Error"
         }
     },
     "notify": {
