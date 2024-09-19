@@ -940,7 +940,9 @@
             "title": "Confirmeu la reclamació de recompenses",
             "cancel": "Cancel·lar",
             "confirm": "Confirmar"
-        }
+        },
+        "noG7ConnectionClaim": "Has de tenir un compte Game7 vinculat a {{email}} per reclamar les teves recompenses.",
+        "noG7ConnectionSync": "Si us plau, introdueix dins de la caixa de text els caràcters que veu a la imatge de sota. Això és requerit per evitar enviaments automàtics."
     },
     "ALL": "TOT",
     "gameRelease": {
