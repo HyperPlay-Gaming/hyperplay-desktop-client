@@ -961,7 +961,9 @@
             "body2": "אחרת, ה- Quest Reward (X28X) יפוג והוא כבר לא יטען",
             "cancel": "בטל",
             "confirm": "אישור"
-        }
+        },
+        "noG7ConnectionClaim": "אתה צריך חשבון Game7 מקושר X43X כדי לטעון את התגמולים שלך.",
+        "noG7ConnectionSync": "אתה צריך חשבון Game7 מקושר ל-X43X כדי לסנן את המשימות שלך."
     },
     "notification": {
         "wine-download": {
