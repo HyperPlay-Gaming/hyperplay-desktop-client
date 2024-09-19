@@ -990,7 +990,9 @@
             "title": "Potvrďte výzvu k odměně",
             "confirm": "Potvrdit",
             "cancel": "Zrušit"
-        }
+        },
+        "noG7ConnectionClaim": "Musíte mít účet Game7 napojený na {{email}} pro uplatnění vašich odměn.",
+        "noG7ConnectionSync": "Musíte mít účet Game7 spojenou s {{email}} pro resyncování vašich úkolů."
     },
     "quests": {
         "playstreak": {
