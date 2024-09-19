@@ -947,7 +947,9 @@
             "title": "Confirm Quest Reward Claim",
             "cancel": "Mégsem",
             "confirm": "Megerősítés"
-        }
+        },
+        "noG7ConnectionClaim": "Egy Game7 fiókot kell tartalmaznia a {{email}}-hez, hogy követelje meg jutalmait.",
+        "noG7ConnectionSync": "Szüksége van egy Game7-fiókra, amely a {{email}}-hez kapcsolódik, hogy újra bemutassa a feladatait."
     },
     "quests": {
         "quests": "Küldetések",
