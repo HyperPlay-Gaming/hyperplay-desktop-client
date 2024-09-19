@@ -34,6 +34,13 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     )
   }
 
+  /**
+   t("quest.claimWarning.body", "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 7 days.</bold>")
+    t("quest.claimWarning.body2", "Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>")
+    t('quest.claimWarning.cancel', 'Cancel')
+    t('quest.claimWarning.confirm', 'Confirm')
+   */
+
   return (
     <div className={styles.root}>
       {alertComponent}
