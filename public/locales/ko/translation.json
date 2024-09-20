@@ -1026,7 +1026,8 @@
             "title": "호환성 층"
         },
         "wine-download-failed": {
-            "message": "기본 호환성 레이어 설정 실패"
+            "message": "기본 호환성 레이어 설정 실패",
+            "title": "오류"
         }
     },
     "achievements": {
