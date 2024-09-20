@@ -969,7 +969,8 @@
             "message": "デフォルトの互換性レイヤーを設定する"
         },
         "wine-download-failed": {
-            "message": "デフォルトの互換性レイヤーを設定できなかった"
+            "message": "デフォルトの互換性レイヤーを設定できなかった",
+            "title": "エラー"
         }
     },
     "externalLink": {
