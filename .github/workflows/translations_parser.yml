@@ -7,24 +7,14 @@ on:
 
 jobs:
   parser:
-    runs-on: ubuntu-latest
-    concurrency:
-      group: parser-${{ github.ref }}
-      cancel-in-progress: true
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          cache: 'yarn'
-      - name: Reconfigure git to use HTTP authentication
-        run: >
-          git config --global url."https://github.com/".insteadOf
-          ssh://git@github.com/
-      - name: Authenticate with private NPM package
-        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
-      - name: Install modules.
-        run: yarn setup
-      - name: Check Typescript syntax
-        run: yarn i18n --fail-on-update
+    uses: HyperPlay-Gaming/workflows/.github/workflows/nodejs_commands.yml@main
+    with:
+      node_version: '20'
+      pkg_manager: 'yarn'
+      install: 'yarn install --immutable --frozen-lockfile'
+      name: 'parser'
+      command_one: 'yarn i18n --fail-on-update'
+      command_one_name: 'i18n parser'
+      checkout_recursive: true
+    secrets:
+      NPM_TOKEN: '${{ secrets.NPM_TOKEN }}'
