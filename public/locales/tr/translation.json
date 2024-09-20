@@ -1004,6 +1004,9 @@
         "wine-download": {
             "message": "Varsayılan uyumluluk katmanını kurmak",
             "title": "Uyumluluk Katmanı"
+        },
+        "wine-download-failed": {
+            "title": "Hata"
         }
     },
     "quests": {
