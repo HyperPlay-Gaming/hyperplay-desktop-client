@@ -1030,7 +1030,8 @@
             "title": "Kompatibilitet Layer"
         },
         "wine-download-failed": {
-            "title": "Fel"
+            "title": "Fel",
+            "message": "Underlåten att ställa in standardkompatibilitetsskiktet"
         }
     },
     "overlay": {
