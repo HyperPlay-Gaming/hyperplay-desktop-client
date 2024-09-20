@@ -1020,7 +1020,8 @@
             "message": "Einrichtung der Standardkompatibilitätsschicht"
         },
         "wine-download-failed": {
-            "message": "Nicht eingerichtet, um die Standard-Kompatibilitätsschicht"
+            "message": "Nicht eingerichtet, um die Standard-Kompatibilitätsschicht",
+            "title": "Fehler"
         }
     },
     "email_subscription": {
