@@ -1540,7 +1540,7 @@ export async function downloadLatestGameIpdtManifest(appName: string) {
     return downloadFile(
       manifestUrl,
       ipdtManifestsPath,
-      `${appName}_${platform}_${version}.json`,
+      `${appName}-${platform}-${version}`,
       createAbortController(appName)
     )
   }
