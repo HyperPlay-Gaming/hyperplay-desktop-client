@@ -1018,6 +1018,9 @@
         "wine-download": {
             "title": "Kompatibilitätsebene",
             "message": "Einrichtung der Standardkompatibilitätsschicht"
+        },
+        "wine-download-failed": {
+            "message": "Nicht eingerichtet, um die Standard-Kompatibilitätsschicht"
         }
     },
     "email_subscription": {
