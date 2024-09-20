@@ -938,7 +938,8 @@
             "message": "Configuration de la couche de compatibilité par défaut"
         },
         "wine-download-failed": {
-            "message": "Failed to setup the default compatibility layer"
+            "message": "Failed to setup the default compatibility layer",
+            "title": "Erreur"
         }
     },
     "dlcs": {
