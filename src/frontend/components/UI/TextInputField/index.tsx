@@ -1,7 +1,6 @@
 import React, { ChangeEvent, FocusEvent, ReactNode, useContext } from 'react'
 import classnames from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
-import { TextInput } from '@hyperplay/ui'
 import './index.scss'
 
 interface TextInputFieldProps {
@@ -41,7 +40,7 @@ const TextInputField = ({
   inputProps
 }: TextInputFieldProps) => {
   const { isRTL } = useContext(ContextProvider)
-  const { className: inputPropsClassName } = inputProps ?? {}
+  const { className: inputPropsClassName, ...restInputProps } = inputProps ?? {}
 
   return (
     <div
@@ -49,7 +48,9 @@ const TextInputField = ({
         isRTL
       })}
     >
-      <TextInput
+      {label && <label htmlFor={htmlId}>{label}</label>}
+      {inputIcon}
+      <input
         type="text"
         id={htmlId}
         value={value}
@@ -62,8 +63,7 @@ const TextInputField = ({
           isError ? 'inputFieldError' : '',
           inputPropsClassName
         )}
-        rightSection={inputIcon}
-        label={label}
+        {...restInputProps}
       />
       {afterInput && <span className="afterInput">{afterInput}</span>}
       {value && <span className="smallMessage">{value && warning}</span>}
