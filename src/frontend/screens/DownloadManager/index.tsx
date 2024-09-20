@@ -76,6 +76,8 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     t('download-manager.install-type.update', 'Update')
     */
 
+  const showProgress = state === 'running' && appName && currentElement
+
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
@@ -111,7 +113,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
                 />
               </div>
             </div>
-            {state === 'running' ? (
+            {showProgress ? (
               <ProgressHeader state={state} appName={appName} />
             ) : null}
           </Tabs.Panel>
