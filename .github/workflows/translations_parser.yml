@@ -15,7 +15,7 @@ jobs:
       name: 'i18n parser'
       command_one: 'yarn i18n --fail-on-update'
       command_one_name: 'i18n parser'
-      checkout_recursive: true
+      checkout_recursive: false
     secrets:
       NPM_TOKEN: '${{ secrets.NPM_TOKEN }}'
       pat: ${{ secrets.pat }}
