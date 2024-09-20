@@ -1028,6 +1028,9 @@
         "wine-download": {
             "message": "Ställ in standard kompatibilitet lager",
             "title": "Kompatibilitet Layer"
+        },
+        "wine-download-failed": {
+            "title": "Fel"
         }
     },
     "overlay": {
