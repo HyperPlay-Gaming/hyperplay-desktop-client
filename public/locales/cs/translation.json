@@ -946,7 +946,8 @@
             "title": "Kompatibilita Vrstva"
         },
         "wine-download-failed": {
-            "message": "Vypnuto nastavení výchozí kompatibilizační vrstvy"
+            "message": "Vypnuto nastavení výchozí kompatibilizační vrstvy",
+            "title": "Chyba"
         }
     },
     "quest": {
