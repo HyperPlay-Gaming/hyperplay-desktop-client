@@ -618,6 +618,10 @@
         "wine-download": {
             "message": "Setting up the default compatibility layer",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "Failed to setup the default compatibility layer",
+            "title": "Error"
         }
     },
     "notify": {
@@ -732,6 +736,12 @@
         "associatedGames": "Associated games",
         "claimAll": "Claim all",
         "claimed": "Claimed",
+        "claimWarning": {
+            "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 7 days.</bold>",
+            "body2": "Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>",
+            "cancel": "Cancel",
+            "confirm": "Confirm"
+        },
         "connectSteamAccount": "Connect Steam account",
         "g7Numclaimed": "Total Claimed G7 Credits",
         "linkAccount": "Link your Steam account to check eligibility.",
