@@ -1002,7 +1002,8 @@
             "title": "#Kompatibilnost"
         },
         "wine-download-failed": {
-            "message": "#Zakazati #na setup @the default #kompatibilnost #red"
+            "message": "#Zakazati #na setup @the default #kompatibilnost #red",
+            "title": "Greška"
         }
     },
     "quests": {
