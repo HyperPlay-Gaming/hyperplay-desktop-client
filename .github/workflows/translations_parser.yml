@@ -18,3 +18,4 @@ jobs:
       checkout_recursive: true
     secrets:
       NPM_TOKEN: '${{ secrets.NPM_TOKEN }}'
+      pat: ${{ secrets.pat }}
