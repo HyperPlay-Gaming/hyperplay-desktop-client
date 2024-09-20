@@ -1036,7 +1036,9 @@
             "cancel": "Cancelar",
             "confirm": "Confirmar",
             "title": "Confirmar reclamo de recompensa de misión"
-        }
+        },
+        "noG7ConnectionClaim": "Necesitas tener una cuenta Game7 vinculada a {{email}} para reclamar tus recompensas.",
+        "noG7ConnectionSync": "Necesitas tener una cuenta Game7 vinculada a {{email}} para resonar tus tareas."
     },
     "back_to_game": "Volver al juego",
     "email_subscription": {
