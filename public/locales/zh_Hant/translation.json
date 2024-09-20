@@ -993,7 +993,9 @@
             "title": "1. 查询要求",
             "cancel": "取消",
             "confirm": "確認"
-        }
+        },
+        "noG7ConnectionClaim": "你们需要拥有一个与{{email}}相联的游戏7账户,以争取你们的奖励.",
+        "noG7ConnectionSync": "你们需要拥有一个与{{email}}相联的“游戏7”账户,以完成你们的任务."
     },
     "sideload": {
         "warningMessage": "側載遊戲是專為開發人員和有經驗的高級用戶提供的功能。側載包含惡意軟件的安裝程序可能會危及你的電腦並導致資金被盜。",
