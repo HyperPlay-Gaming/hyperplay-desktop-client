@@ -1032,7 +1032,8 @@
             "title": "لایه Compatibility Layer"
         },
         "wine-download-failed": {
-            "message": "شکست در تنظیم لایه سازگاری پیش فرض"
+            "message": "شکست در تنظیم لایه سازگاری پیش فرض",
+            "title": "خطا"
         }
     },
     "overlay": {
