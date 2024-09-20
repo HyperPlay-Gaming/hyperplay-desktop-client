@@ -727,6 +727,9 @@
     "notification": {
         "wine-download": {
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "title": "പിശക്"
         }
     },
     "quest": {
