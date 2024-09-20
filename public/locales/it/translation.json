@@ -1024,7 +1024,8 @@
             "message": "Impostazione dello strato di compatibilità predefinito"
         },
         "wine-download-failed": {
-            "title": "Errore"
+            "title": "Errore",
+            "message": "Non riuscita a configurare lo strato di compatibilità predefinito"
         }
     },
     "sideload": {
