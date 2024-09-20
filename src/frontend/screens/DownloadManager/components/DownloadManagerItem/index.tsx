@@ -116,7 +116,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       }
     }
     getNewInfo()
-  }, [element])
+  }, [element, current, state])
 
   const {
     art_cover,
