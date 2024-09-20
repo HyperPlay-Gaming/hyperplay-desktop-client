@@ -1062,7 +1062,8 @@
             "title": "Kompatibilitet Layer"
         },
         "wine-download-failed": {
-            "message": "Detaljeret om opsætning af standardkompatibilitetslaget"
+            "message": "Detaljeret om opsætning af standardkompatibilitetslaget",
+            "title": "Fejl"
         }
     },
     "importGameErrorTitle": "Import af spilfejl",
