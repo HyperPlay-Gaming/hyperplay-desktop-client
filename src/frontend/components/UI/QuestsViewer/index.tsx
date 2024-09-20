@@ -22,6 +22,15 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
 
   const sessionEmail = data?.linkedAccounts.get('email')
 
+  /**
+   Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
+   As a heads up, everytime you add a new key on any library, you need to add it as a block comment anywhere in the code as well.
+   
+   t("quest.noG7ConnectionClaim", "You need to have a Game7 account linked to {{email}} to claim your rewards.")
+   t("quest.noG7ConnectionSync", "You need to have a Game7 account linked to {{email}} to resync your tasks.")
+   t("quest.notEnoughGas", "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.")
+   */
+
   let alertComponent = null
   if (!isSignedIn) {
     alertComponent = (
