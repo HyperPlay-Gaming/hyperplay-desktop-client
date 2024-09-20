@@ -992,7 +992,8 @@
             "title": "Compatibilidad"
         },
         "wine-download-failed": {
-            "message": "Failed to setup the default compatibility layer"
+            "message": "Failed to setup the default compatibility layer",
+            "title": "Error"
         }
     },
     "quest": {
