@@ -111,6 +111,9 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
                 />
               </div>
             </div>
+            {state === 'running' ? (
+              <ProgressHeader state={state} appName={appName} />
+            ) : null}
           </Tabs.Panel>
 
           <Tabs.Panel value="queued">
@@ -126,7 +129,6 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
             </div>
           </Tabs.Panel>
         </Tabs>
-        <ProgressHeader state={state} appName={appName} />
       </div>
     </>
   )
