@@ -944,6 +944,9 @@
         "wine-download": {
             "message": "Nastavení výchozí kompatibilizační vrstvy",
             "title": "Kompatibilita Vrstva"
+        },
+        "wine-download-failed": {
+            "message": "Vypnuto nastavení výchozí kompatibilizační vrstvy"
         }
     },
     "quest": {
