@@ -1022,6 +1022,9 @@
         "wine-download": {
             "title": "Compatibility Layer",
             "message": "Impostazione dello strato di compatibilità predefinito"
+        },
+        "wine-download-failed": {
+            "title": "Errore"
         }
     },
     "sideload": {
