@@ -1061,6 +1061,9 @@
         "wine-download": {
             "message": "Налаштування шару сумісності за замовчуванням",
             "title": "Рівень сумісності"
+        },
+        "wine-download-failed": {
+            "title": "Помилка"
         }
     },
     "email_subscription": {
