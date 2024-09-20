@@ -947,7 +947,9 @@
             "title": "Proqramlar",
             "cancel": "Ləğv et",
             "confirm": "Təsdiqlə"
-        }
+        },
+        "noG7ConnectionClaim": "Sizin mükafatları iddia etmək üçün {{email}} ilə bağlı bir Game7 hesabı olmalıdır.",
+        "noG7ConnectionSync": "{{email}} ilə bağlı bir Game7 hesabınız olması lazımdır."
     },
     "profile": "Profil",
     "importGameErrorMessageExecutable": "Oyuncaq tapmaq mümkün deyil",

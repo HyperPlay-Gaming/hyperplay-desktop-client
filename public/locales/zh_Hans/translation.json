@@ -1008,7 +1008,9 @@
             "body": "<bold>IMPORTANT:</bold> 请确保你在{{networkName}}网络上分配足够的天然气,以便在24小时内成功确认<bold>",
             "confirm": "确认",
             "cancel": "取消"
-        }
+        },
+        "noG7ConnectionClaim": "你们需要拥有一个与{{email}}相联的游戏7账户,以争取你们的奖励.",
+        "noG7ConnectionSync": "你们需要拥有一个与{{email}}相联的“游戏7”账户,以完成你们的任务."
     },
     "quests": {
         "quests": "任务",

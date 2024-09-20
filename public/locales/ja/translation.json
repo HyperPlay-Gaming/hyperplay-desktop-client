@@ -939,7 +939,9 @@
             "body": "<bold>重要:</bold> {{networkName}} トランザクションのネットワーク上で十分なガスを割り当てていることを確認してください。 <bold> 24 時間で確認されます。 </bold>",
             "cancel": "キャンセル",
             "confirm": "確認"
-        }
+        },
+        "noG7ConnectionClaim": "{{email}}にリンクされているGame7アカウントをお持ちで、報酬を請求する必要があります.",
+        "noG7ConnectionSync": "{{email}} にリンクされている Game7 アカウントをお持ちで、タスクを再同期する必要があります."
     },
     "quests": {
         "quests": "クエスト",

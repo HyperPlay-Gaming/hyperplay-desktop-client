@@ -996,7 +996,9 @@
             "title": "Konfirmasi Klaim Reward Quest",
             "cancel": "Batal",
             "confirm": "Konfirmasikan"
-        }
+        },
+        "noG7ConnectionClaim": "Anda harus memiliki akun Game7 yang terkait dengan {{email}} untuk mengklaim hadiah Anda.",
+        "noG7ConnectionSync": "Anda harus memiliki akun Game7 yang terkait dengan {{email}} untuk menginkronkan tugas Anda."
     },
     "notification": {
         "wine-download": {

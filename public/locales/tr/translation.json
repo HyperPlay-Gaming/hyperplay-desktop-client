@@ -946,7 +946,9 @@
             "title": "Quest Ödülü Dilekçesi",
             "cancel": "İptal",
             "confirm": "Kabul Et"
-        }
+        },
+        "noG7ConnectionClaim": "Ödüllerinizi iddia etmek için [X43X) ile bağlantılı bir Game7 hesabına ihtiyacınız var.",
+        "noG7ConnectionSync": "Görevlerinizi yeniden tanımlamak için [X43X ile bağlantılı bir Game7 hesabına sahip olmanız gerekir."
     },
     "ALL": "Tümü",
     "analytics": "Analytics",

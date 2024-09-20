@@ -984,7 +984,9 @@
             "body": "_ Zorg ervoor dat je genoeg gas op het netwerk van de transactie verbindt, om succesvol bevestigd te worden dat £153 X, 173",
             "cancel": "Annuleren",
             "confirm": "Bevestigen"
-        }
+        },
+        "noG7ConnectionClaim": "Je moet een Game7 account hebben om je beloningen op te eisen.",
+        "noG7ConnectionSync": "Je moet een Game7 account hebben om je taken te herstellen."
     },
     "quests": {
         "quests": "Quest",
