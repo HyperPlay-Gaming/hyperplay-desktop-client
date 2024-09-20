@@ -993,7 +993,9 @@
             "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>",
             "confirm": "تأكيد",
             "cancel": "إلغاء"
-        }
+        },
+        "noG7ConnectionClaim": "يجب أن يكون لديك حساب لعبة 7 مرتبط بـ {{email}} للمطالبة بمكافآتك.",
+        "noG7ConnectionSync": "يجب أن يكون لديك حساب لعبة 7 مرتبط بـ {{email}} لتصليح مهامك."
     },
     "notification": {
         "wine-download": {

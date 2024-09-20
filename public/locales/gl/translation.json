@@ -992,7 +992,9 @@
             "body2": "Doutro xeito, a Recompensa de Busca <bold>caducará e xa non será claimable.</bold>",
             "cancel": "Cancelar",
             "confirm": "Confirmar"
-        }
+        },
+        "noG7ConnectionClaim": "Necesitas para ter un Game7 a conta vinculou a {{email}} para afirmar as vosas recompensas.",
+        "noG7ConnectionSync": "Necesitas para ter un Game7 a conta vinculou a {{email}} a resync as vosas tarefas."
     },
     "email_subscription": {
         "title": "Grazas Para subscribir!",

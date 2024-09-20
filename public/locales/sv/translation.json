@@ -947,7 +947,9 @@
             "body": "<bold> VIKTIGT: </bold> Se till att du allokerar tillräckligt med gas på {{networkName}}-nätverket för att transaktionen ska bekräftas framgångsrikt <bold> inom 24 timmar",
             "confirm": "Bekräfta",
             "cancel": "Avbryt"
-        }
+        },
+        "noG7ConnectionClaim": "Du måste ha ett Game7-konto kopplat till {{email}} för att göra anspråk på dina belöningar.",
+        "noG7ConnectionSync": "Du måste ha ett Game7-konto kopplat till {{email}} för att synkronisera dina uppgifter."
     },
     "ALL": "ALLA",
     "analytics": "Analytics",

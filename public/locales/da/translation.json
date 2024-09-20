@@ -1041,7 +1041,9 @@
             "title": "Bekræft belønningskrav",
             "cancel": "Annuller",
             "confirm": "Bekræft"
-        }
+        },
+        "noG7ConnectionClaim": "Du skal have en Game7-konto knyttet til {{email}} for at kræve dine belønninger.",
+        "noG7ConnectionSync": "Du skal have en Game7-konto knyttet til {{email}} for at gensyne dine opgaver."
     },
     "importGameErrorMessageExecutable": "Spil spil Udførelse ikke fundet, import af spil er ikke muligt",
     "exit_game": "Afslut spil",

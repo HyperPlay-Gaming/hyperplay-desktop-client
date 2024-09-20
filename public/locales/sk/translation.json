@@ -986,7 +986,9 @@
             "body2": "V opačnom prípade Quest Reward <bold> vyprší a už nebude nárokovať.</bold>",
             "confirm": "Potvrdiť",
             "cancel": "Zrušiť"
-        }
+        },
+        "noG7ConnectionClaim": "Musíte mať účet Game7 spojený s {{email}} požadovať svoje odmeny.",
+        "noG7ConnectionSync": "Musíte mať účet Game7 spojený s {{email}} pre opätovné úlohy."
     },
     "quests": {
         "playstreak": {

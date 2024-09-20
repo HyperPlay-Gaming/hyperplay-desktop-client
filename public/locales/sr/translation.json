@@ -1021,7 +1021,9 @@
             "title": "#Potvrditi #Potraga #Nagrada",
             "body": "[@X0@X]#VAŽAN:[@X16@X] @Please #osigurati da #free #biti #dodijeliti dosta #gas @on @the [@X80@X] #mreža @for @the #transakcija #na #biti @successfully #potvrditi [@X153@X]#unutar #24 hrs.[@X173@X]",
             "body2": "Inače, @the #Potraga #Nagrada [@X28@X]#volja #isteći a #volja @no longer #biti claimable.[@X78@X]"
-        }
+        },
+        "noG7ConnectionClaim": "#Free #nužda #na #ima @a Game7 #račun #povezati #na [@X43@X] #na @claim #tvoj #nagrada#.",
+        "noG7ConnectionSync": "#Free #nužda #na #ima @a Game7 #račun #povezati #na [@X43@X] #na resync #tvoj #zadatak#."
     },
     "quests": {
         "playstreak": {

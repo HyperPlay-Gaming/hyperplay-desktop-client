@@ -986,7 +986,9 @@
             "title": "Confirmer la demande de remboursement de Quest",
             "body": "<bold>IMPORTANT:</bold> Veuillez vous assurer que vous allouez suffisamment de gaz sur le réseau {{networkName}} pour que la transaction soit confirmée avec succès <bold> sous 24h.</bold>",
             "body2": "Sinon, le Quest Reward <bold> expirera et ne sera plus revendiqué</bold>"
-        }
+        },
+        "noG7ConnectionClaim": "Vous devez avoir un compte Game7 lié à {{email}} pour réclamer vos récompenses.",
+        "noG7ConnectionSync": "Vous devez avoir un compte Game7 lié à {{email}} pour resync vos tâches."
     },
     "sideload": {
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Enlever un installateur qui contient des logiciels malveillants pourrait compromettre votre ordinateur et conduire au vol de fonds.",
