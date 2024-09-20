@@ -977,7 +977,8 @@
             "message": "Configurando a camada de compatibilidade padrão"
         },
         "wine-download-failed": {
-            "message": "Falhado para configurar a camada de compatibilidade padrão"
+            "message": "Falhado para configurar a camada de compatibilidade padrão",
+            "title": "Erro"
         }
     },
     "importGameErrorTitle": "Erro ao importar o jogo",
