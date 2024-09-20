@@ -938,6 +938,9 @@
         "wine-download": {
             "message": "De defecte compatibiliteit lager",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "Gefaald om de compatibiliteit lager te zetten"
         }
     },
     "quest": {
