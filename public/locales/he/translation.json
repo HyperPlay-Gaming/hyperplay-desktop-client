@@ -56,6 +56,15 @@
             },
             "credentials": {
                 "message": "האישורים שלכם בתוכנה פגו, אנא התנתקו וכנסו שוב."
+            },
+            "delete-files": {
+                "body": "הסרת התיקיה (X32X). אנא הסר אותו באופן ידני.\n[x86x]\n(X117X)",
+                "title": "שגיאה הסרת תיקיות"
+            },
+            "steam": {
+                "error": "קיטור לא מצא. ההתקנה בוטלה על ידי משתמשים או נכשלה בצד Steam.",
+                "message": "התקנת Steam נכשלה! נא לקרוא את ההוראות בזהירות ולנסות שוב! [x81X]",
+                "title": "טעות Steam"
             }
         },
         "runexe": {
@@ -127,7 +136,9 @@
                 "message": "יש גרסה חדשה זמינה!",
                 "changelog": "פתח רשימת שינויים",
                 "detail": "אתם רוצים להוריד את האפדייט ברקע?",
-                "message-finished": "רוצים לפתוח מחדש את HyperPlay עכשיו?"
+                "message-finished": "רוצים לפתוח מחדש את HyperPlay עכשיו?",
+                "appUpdated": "HyperPlay עודכן",
+                "appUpdated-message": "HyperPlay עודכן. רוצים לעדכן ולהפעיל מחדש את HyperPlay עכשיו?"
             }
         },
         "ok": "בסדר",
@@ -180,7 +191,8 @@
         "download": "הורדה",
         "sync": "סנכרן",
         "syncing": "מסנכרן",
-        "unsync": "Unsync"
+        "unsync": "Unsync",
+        "install": "התקנה"
     },
     "controller": {
         "hints": {
@@ -949,7 +961,9 @@
             "body2": "אחרת, ה- Quest Reward (X28X) יפוג והוא כבר לא יטען",
             "cancel": "בטל",
             "confirm": "אישור"
-        }
+        },
+        "noG7ConnectionClaim": "אתה צריך חשבון Game7 מקושר X43X כדי לטעון את התגמולים שלך.",
+        "noG7ConnectionSync": "אתה צריך חשבון Game7 מקושר ל-X43X כדי לסנן את המשימות שלך."
     },
     "notification": {
         "wine-download": {
@@ -1015,7 +1029,8 @@
     },
     "importGameErrorMessage": "לא תיקיית משחק תקפה, משחק יבוא אינו אפשרי",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני."
+        "EXTERNAL_WALLET_CONNECTED": "אתה מחובר ל- HyperPlay עם ארנק חיצוני.",
+        "WALLET_DISCONNECTED": "אין לכם ארנק המחובר ל- HyperPlay."
     },
     "quests": {
         "playstreak": {
@@ -1044,5 +1059,87 @@
     "email_subscription": {
         "title": "תודה על תת-ביקורת!",
         "subtitle": "עכשיו אתה חלק מהקהילה שלנו, ואנחנו נרגשים לשתף עדכונים ותובנות חשובים איתך."
-    }
+    },
+    "import-game-folder": {
+        "error": "הייתה טעות במהלך היבוא. אנא ראו את יומני לפרטים נוספים.",
+        "label": "משחק Folder",
+        "placeholder": "בחר את תיקיית המשחק לייבוא",
+        "success": "משחקים מיובאים בהצלחה!",
+        "cta": "משחק Folder",
+        "dialog": {
+            "title": "משחק Folder ייבוא"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "title": "משחק בסיס מותקן",
+                "body": "שינוי יהיה מיושם על משחק בסיס"
+            },
+            "cancel": {
+                "body": "משחק בסיס בוטל",
+                "title": "ביטול החילוץ"
+            },
+            "installing": {
+                "body": "החלפת קבצים",
+                "title": "משחק בסיס"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "משחק בסיס File Location",
+                "placeholder": "תגית: Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "subtitle": "להורדה World of Warcraft 3.3.5a",
+                "title": "שלב 1",
+                "chromieCraft": "ChromieCraft",
+                "description": "משחק זה הוא שיטה עבור World of Warcraft: Wrath of the Lich King (3.3.5a). על מנת לשחק בשיטה זו, השחקנים חייבים להחזיק עותק של World of Warcraft 3.3.5a. [X156X] HyperPlay אינו מארח את World of Warcraft. שחקנים שבבעלותם World of Warcraft יכולים לקבל גרסה 3.3.5a ממקורות כגון:",
+                "webtorrent": "טורנט (Magnet Link)"
+            },
+            "step2": {
+                "title": "שלב 2",
+                "description": "בחר את ההורדה קובץ ChromieCraft_3.3.5a.zip.",
+                "subtitle": "בחר ChromieCraft_3.3.5a.zip File"
+            },
+            "step4": {
+                "subtitle": "קוד גישה",
+                "description": "הזן את קוד הגישה כדי להמשיך עם התקנת המשחק.",
+                "title": "שלב 4"
+            },
+            "step3": {
+                "description": "נא לבחור את התיקיה שבה יש להתקין את World of Warcraft: Wrath of the Lich King (3.3.5a).",
+                "subtitle": "התקנה Folder",
+                "title": "שלב 3"
+            },
+            "title": "הוראות"
+        }
+    },
+    "install": {
+        "path": "בחרו מיקום התקנה"
+    },
+    "Cancel Installation": "ביטול ההתקנה",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay יורד והתחל את ההתקנה של Steam עבורך. נא לעקוב אחר הוראות Steam על ההתקנה שלהם;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay יודיע לך ברגע שהתקנה בוצעה;",
+    "Launching Steam": "שיגור Steam...",
+    "steam-install": {
+        "compatibility-layer-not-available": "שכבת תאימות לא זמינה. נא להתקין תחילה את אחד מ\"מנהלי יין\".",
+        "error-message": "טעות התרחשה בעת התקנת Steam. אנא נסה שוב.",
+        "launch-tooltip": "המונחים: Hyperplay Compatibility Layer",
+        "success-message": "Steam מותקנת. עכשיו אתה יכול להתחיל את זה מהספריה.",
+        "tooltip": "זה יתקין את גירסת Windows של Steam והוא יפעל באמצעות שכבת תאימות HyperPlay.\n\nכמה משחקים במיוחד תארים ישנים יותר, משחקים חדשים יותר 3D, או אלה עם תוכנות נגד צ'אט עשויים לא לעבוד כראוי.\n\nהמפרטים המומלצים הם Mac עם Apple Silicon CPU (M1 ומעלה) ולפחות 16GB של RAM."
+    },
+    "At the end make sure to": "בסוף לוודא",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "אם אתה רוצה להמשיך, להיות סבלני כי זה יכול לקחת כמה דקות כדי לסיים בהתאם לחיבור האינטרנט שלך ותצורת המערכת;",
+    "Install Steam": "התקנת Steam",
+    "Installing Steam": "התקנת Steam.",
+    "Launch Steam": "שיגור Steam",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "בהשקה ראשונה Steam מורידה את הקבצים הדרושים ויקח כמה דקות כדי לסיים את מסך הכניסה להופיע;",
+    "UNCHECK 'Run Steam'": "UNCHECK - Run Steam \"\""
 }

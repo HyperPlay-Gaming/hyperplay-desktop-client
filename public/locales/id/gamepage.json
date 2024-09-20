@@ -53,7 +53,10 @@
         "compability": {
             "message": "Game Windows ini akan berjalan menggunakan lapisan kompatibilitas. Anda mungkin menemukan beberapa masalah atau permainan mungkin tidak bekerja sama sama sekali."
         },
-        "dont-show-again": "Jangan tampilkan lagi"
+        "dont-show-again": "Jangan tampilkan lagi",
+        "stopExtraction": {
+            "title": "Apakah Anda ingin membatalkan Ekstraksi?"
+        }
     },
     "button": {
         "add_to_favourites": "Tambahkan Ke Favorit",
@@ -238,5 +241,10 @@
         "store": "Halaman Toko",
         "verify": "Verifikasi dan Perbaiki",
         "extraInfo": "Info Tambahan"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Silakan hubungi Tim HyperPlay dengan pesan ini: {{error}} - {{context}}."
+        }
     }
 }

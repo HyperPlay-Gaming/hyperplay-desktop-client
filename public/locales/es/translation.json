@@ -82,6 +82,15 @@
             "ubisoft-connect": {
                 "message": "La instalación de Ubisoft Connect en el prefijo del juego ha fallado. Consulta nuestra página wiki en https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac para instalarlo manualmente.",
                 "title": "Ubisoft Connect"
+            },
+            "delete-files": {
+                "body": "Eliminar la carpeta extraída {{path}}. Por favor, retírelo manualmente.\n{{paragraph}}\n{{error}}",
+                "title": "Error al eliminar la carpeta extraída"
+            },
+            "steam": {
+                "error": "No se encontró el ejecutable de Steam. Probablemente el usuario canceló la instalación o esta falló en Steam.",
+                "message": "¡La instalación de Steam falló! ¡Por favor, lea atentamente las instrucciones y prueba de nuevo! {{paragraph}} {{error}}",
+                "title": "Error en Steam"
             }
         },
         "info": {
@@ -92,8 +101,8 @@
                 "message-finished": "¿Quieres reiniciar HyperPlay ahora?",
                 "title": "Iniciador de juegos HyperPlay",
                 "title-finished": "Actualización finalizada",
-                "appUpdated": "HyperPlay fue actualizado",
-                "appUpdated-message": "HyperPlay fue actualizado. ¿Quieres actualizar y reiniciar HyperPlay ahora?"
+                "appUpdated": "Se actualizó HyperPlay",
+                "appUpdated-message": "Se actualizó HyperPlay. ¿Quieres actualizar y reiniciar HyperPlay ahora?"
             }
         },
         "no": "NO",
@@ -179,7 +188,8 @@
         "unsync": "Desincronizar",
         "download": "Descargar",
         "continue": "Continuar",
-        "update": "Actualizar"
+        "update": "Actualizar",
+        "install": "Instalar"
     },
     "controller": {
         "hints": {
@@ -905,7 +915,7 @@
         "chainRequest": {
             "INITIATED": "Requisitos de una red personalizada",
             "FAILED": "Red personalizada cancelada",
-            "CONFIRMED": "Se ha añadido una red personalizada"
+            "CONFIRMED": "Añadida una red personalizada"
         },
         "description": {
             "FAILED": "La transacción se ha cancelado o no se ha enviado, por favor inténtelo de nuevo",
@@ -940,7 +950,8 @@
         "closeOverlay": "Pulsa {{overlayKeyMod}} + X para cerrar la superposición"
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo."
+        "EXTERNAL_WALLET_CONNECTED": "Estás conectado a HyperPlay con un monedero externo.",
+        "WALLET_DISCONNECTED": "Usted no tiene una cartera conectada a HyperPlay."
     },
     "sideload": {
         "warningTitle": "Importante",
@@ -1025,7 +1036,9 @@
             "cancel": "Cancelar",
             "confirm": "Confirmar",
             "title": "Confirmar reclamo de recompensa de misión"
-        }
+        },
+        "noG7ConnectionClaim": "Necesitas tener una cuenta Game7 vinculada a {{email}} para reclamar tus recompensas.",
+        "noG7ConnectionSync": "Necesitas tener una cuenta Game7 vinculada a {{email}} para resonar tus tareas."
     },
     "back_to_game": "Volver al juego",
     "email_subscription": {
@@ -1048,5 +1061,84 @@
             "description": "Sumérgete en los mejores juegos de HyperPlay con emocionantes Desafíos de Play Streak. Cada actividad le anima a participar con un juego diferente, mostrando lo mejor de los juegos web3. ¡Tu tiempo de juego importa!",
             "title": "Ganar Game7 Créditos"
         }
-    }
+    },
+    "import-game-folder": {
+        "cta": "Importar la carpeta del juego",
+        "dialog": {
+            "title": "Seleccionar carpeta de juego para importar"
+        },
+        "error": "Se produjo un error durante la importación. Por favor, consulta los registros para obtener más detalles.",
+        "label": "Importar carpeta de juegos",
+        "placeholder": "Elija la carpeta del juego para importar",
+        "success": "¡Juegos importados con éxito!"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Extracción del juego base cancelada",
+                "title": "Extracción cancelada"
+            },
+            "installed": {
+                "title": "Juego base instalado",
+                "body": "Mod se aplicará al juego base"
+            },
+            "installing": {
+                "body": "Extrayendo archivos del juego base",
+                "title": "Instalación del juego base"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Seleccione la ubicación del archivo principal del juego",
+                "placeholder": "Seleccione el archivo Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Este juego es un mod para World of Warcraft: Wrath of the Lich King (3.3.5a). Para jugar este mod, los jugadores deben poseer una copia de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay no alberga World of Warcraft. Los jugadores que poseen World of Warcraft pueden obtener la versión 3.3.5a de fuentes como:",
+                "webtorrent": "Torrent (Magnet Link)",
+                "subtitle": "Descargar World of Warcraft 3.3.5a",
+                "title": "Paso 1"
+            },
+            "step2": {
+                "description": "Seleccione la descarga ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Seleccione ChromieCraft_3.3.5a.zip Archivo",
+                "title": "Paso 2"
+            },
+            "step3": {
+                "description": "Por favor seleccione la carpeta donde World of Warcraft: Wrath of the Lich King (3.3.5a) debe ser instalado.",
+                "subtitle": "Seleccione la instalación Folder",
+                "title": "Paso 3"
+            },
+            "step4": {
+                "description": "Introduzca el código de acceso para proceder con la instalación del juego.",
+                "subtitle": "Código de acceso",
+                "title": "Paso 4"
+            },
+            "title": "Instrucciones de modificación"
+        }
+    },
+    "Cancel Installation": "Cancelar instalación",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "En el primer lanzamiento Steam descargará los archivos necesarios y tomará unos minutos para terminar y aparecerá la pantalla de inicio de sesión;",
+    "Launch Steam": "Ejecutar Steam",
+    "At the end make sure to": "Finalmente, asegúrese",
+    "steam-install": {
+        "compatibility-layer-not-available": "Capa de compatibilidad no disponible. Por favor, instale uno de \"Configuración > Wine Manager\" primero.",
+        "error-message": "Se produjo un error al instalar Steam. Por favor, inténtalo de nuevo.",
+        "launch-tooltip": "Iniciar Steam usando la capa de compatibilidad HyperPlay",
+        "success-message": "Steam ha sido instalado. Ahora puedes ejecutarlo desde la Biblioteca.",
+        "tooltip": "Esto instalará la versión de Windows de Steam y funcionará usando una capa de compatibilidad HyperPlay.\n\nAlgunos juegos especialmente títulos antiguos, juegos 3D más nuevos, o aquellos con software anti-cheat puede no funcionar correctamente.\n\nLas especificaciones recomendadas son un Mac con Apple Silicon CPU (M1 o superior) y al menos 16 GB de RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay le notificará una vez finalizada la instalación;",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay se descargará e iniciará la configuración de Steam. Por favor, siga las instrucciones de Steam durante la instalación;"
+    },
+    "Launching Steam": "Ejecutando Steam...",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Si desea continuar, tenga paciencia ya que puede tardar unos minutos en finalizar dependiendo de su conexión a Internet y la configuración del sistema;",
+    "Install Steam": "Instalar Steam",
+    "Installing Steam": "Instalando Steam..."
 }

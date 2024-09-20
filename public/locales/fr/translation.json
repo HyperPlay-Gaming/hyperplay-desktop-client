@@ -82,7 +82,16 @@
                 "title": "Ubisoft Connect",
                 "message": "L'installation d'Ubisoft Connect dans le préfixe de jeu a échoué. Consultez notre page wiki à l'adresse https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac pour l'installer maunally."
             },
-            "moving": "Jeu d'erreur {{error}}"
+            "moving": "Jeu d'erreur {{error}}",
+            "delete-files": {
+                "body": "Suppression d'erreur du dossier extrait {{path}}. Veuillez l'enlever manuellement.\n{{paragraph}}\n{{error}}",
+                "title": "Suppression d'erreur du dossier extrait"
+            },
+            "steam": {
+                "error": "Steam exécutable non trouvé. L'installation a probablement été annulée par l'utilisateur ou échouée du côté Steam.",
+                "message": "L'installation de vapeur a échoué ! Veuillez lire attentivement les instructions et réessayer! {{paragraph}} {{error}}",
+                "title": "Erreur de vapeur"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +188,8 @@
         "unsync": "Désynchroniser",
         "update": "Mise à jour",
         "continue": "Poursuivre",
-        "download": "Télécharger"
+        "download": "Télécharger",
+        "install": "Installer"
     },
     "controller": {
         "hints": {
@@ -976,7 +986,9 @@
             "title": "Confirmer la demande de remboursement de Quest",
             "body": "<bold>IMPORTANT:</bold> Veuillez vous assurer que vous allouez suffisamment de gaz sur le réseau {{networkName}} pour que la transaction soit confirmée avec succès <bold> sous 24h.</bold>",
             "body2": "Sinon, le Quest Reward <bold> expirera et ne sera plus revendiqué</bold>"
-        }
+        },
+        "noG7ConnectionClaim": "Vous devez avoir un compte Game7 lié à {{email}} pour réclamer vos récompenses.",
+        "noG7ConnectionSync": "Vous devez avoir un compte Game7 lié à {{email}} pour resync vos tâches."
     },
     "sideload": {
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Enlever un installateur qui contient des logiciels malveillants pourrait compromettre votre ordinateur et conduire au vol de fonds.",
@@ -1029,9 +1041,89 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Vous êtes connecté à HyperPlay avec un portefeuille externe."
+        "EXTERNAL_WALLET_CONNECTED": "Vous êtes connecté à HyperPlay avec un portefeuille externe.",
+        "WALLET_DISCONNECTED": "Vous n'avez pas de portefeuille connecté à HyperPlay."
     },
     "ALL": "TOUS",
     "analytics": "Statistiques",
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "dialog": {
+            "title": "Sélectionnez le dossier de jeu pour importer"
+        },
+        "error": "Il y avait une erreur lors de l'importation. Veuillez consulter les journaux pour plus de détails.",
+        "label": "Import Game Folder",
+        "placeholder": "Choisissez le dossier de jeu à importer",
+        "success": "Jeux importés avec succès!",
+        "cta": "Import Game Folder"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Mod sera appliqué au jeu de base",
+                "title": "Base Game Installé"
+            },
+            "installing": {
+                "body": "Extraire des fichiers de base",
+                "title": "Installation du jeu de base"
+            },
+            "cancel": {
+                "body": "Extraction du jeu de base annulée",
+                "title": "Annuler Extraction"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Sélectionnez le fichier de base",
+                "placeholder": "Sélectionnez Fichier Zip"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Ce jeu est un mod pour World of Warcraft: Wrath of the Lich King (3.3.5a). Pour jouer à ce mod, les joueurs doivent posséder une copie de World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay n'héberge pas World of Warcraft. Les joueurs qui possèdent World of Warcraft peuvent obtenir la version 3.3.5a de sources comme:",
+                "subtitle": "Télécharger World of Warcraft 3.3.5a",
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Étape 1"
+            },
+            "step2": {
+                "description": "Sélectionnez le téléchargement Fichier ChromieCraft_3.3.5a.zip.",
+                "subtitle": "Sélectionnez ChromieCraft_3.3.5a.zip Fichier",
+                "title": "Étape 2"
+            },
+            "step3": {
+                "description": "Veuillez choisir le dossier où World of Warcraft: Wrath of the Lich King (3.3.5a) doit être installé.",
+                "subtitle": "Sélectionnez Installation Folder",
+                "title": "Étape 3"
+            },
+            "step4": {
+                "description": "Entrez le code d'accès pour procéder à l'installation du jeu.",
+                "subtitle": "Code d ' accès",
+                "title": "Étape 4"
+            },
+            "title": "Mod Instructions"
+        }
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vous avertira une fois l'installation terminée;",
+    "Launch Steam": "Lancer Steam",
+    "Launching Steam": "Lancer Steam...",
+    "Install Steam": "Installez Steam",
+    "Installing Steam": "Installer Steam...",
+    "steam-install": {
+        "compatibility-layer-not-available": "Couche de compatibilité non disponible. S'il vous plaît installer un de \"Settings > Wine Manager\" d'abord.",
+        "error-message": "Une erreur s'est produite lors de l'installation de Steam. Veuillez réessayer.",
+        "launch-tooltip": "Lancer la vapeur en utilisant la couche de compatibilité HyperPlay",
+        "success-message": "La vapeur a été installée. Vous pouvez maintenant le lancer de la Bibliothèque.",
+        "tooltip": "Cela installera la version Windows de Steam et il fonctionnera avec une couche de compatibilité HyperPlay.\n\nCertains jeux particulièrement les titres plus anciens, les nouveaux jeux 3D, ou ceux avec un logiciel anti-cheat peuvent ne pas fonctionner correctement.\n\nLes spécifications recommandées sont un Mac avec Apple Silicon CPU (M1 ou plus) et au moins 16 Go de RAM."
+    },
+    "At the end make sure to": "A la fin assurez-vous de",
+    "Cancel Installation": "Annuler Installation",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay téléchargera et commencera le Steam Setup pour vous. Veuillez suivre les instructions de Steam sur leur installateur;"
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Si vous souhaitez continuer, soyez patient car il peut prendre quelques minutes pour terminer en fonction de votre connexion Internet et de la configuration du système;",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Lors du premier lancement, Steam téléchargera les fichiers nécessaires et prendra quelques minutes pour terminer et l'écran de connexion pour apparaître;",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '"
 }

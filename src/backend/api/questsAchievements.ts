@@ -64,3 +64,6 @@ export const getPointsBalancesForProject = async (projectId: string) =>
 
 export const syncPlaySession = async (appName: string, runner: Runner) =>
   ipcRenderer.invoke('syncPlaySession', appName, runner)
+
+export const checkG7ConnectionStatus = async () =>
+  ipcRenderer.invoke('checkG7ConnectionStatus')

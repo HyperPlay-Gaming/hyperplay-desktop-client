@@ -9,7 +9,7 @@ import {
 import { copySync } from 'fs-extra'
 import path from 'node:path'
 import { GameInfo, InstalledInfo } from 'common/types'
-import { checkWineBeforeLaunch, getShellPath, spawnAsync } from '../../utils'
+import { getShellPath, spawnAsync } from '../../utils'
 import { GameConfig } from '../../game_config'
 import { logError, logInfo, LogPrefix, logWarning } from '../../logger/logger'
 import { isWindows } from '../../constants'
@@ -18,6 +18,7 @@ import { isOnline } from '../../online_monitor'
 import { getWinePath, runWineCommand, verifyWinePrefix } from '../../launcher'
 import { logFileLocation } from 'backend/storeManagers/storeManagerCommon/games'
 import { getGameInfo as getGogLibraryGameInfo } from 'backend/storeManagers/gog/library'
+import { checkWineBeforeLaunch } from 'backend/utils/compatibility_layers'
 const nonNativePathSeparator = path.sep === '/' ? '\\' : '/'
 
 /**

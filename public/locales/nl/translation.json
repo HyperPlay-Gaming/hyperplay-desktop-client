@@ -82,7 +82,16 @@
                 "title": "Ubisoft Connect",
                 "message": "Installatie van Ubisoft Connect in de wedstrijdvoorziening faalde. Controleer onze Wiki-pagina bij HTTPs: 'Guroic-Games-Launcher/HeroicGames Launcher/wiki/Hoi-to-Ubisoft-Connecton-Macen-Macen-Mauxin-Macen-Macen-Macen-Macen-Mac-Mac-Macen-Macen-Macen-Mac-Mac-Mac-Max-Mac-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Max-Me-Max-Max-Me-Me-Max-Me-Me-Max-Me-Max-Me-Max-Max-Max-Max-Max-Me-Me-Max-Max-Max-Max-Max-Ma."
             },
-            "moving": "Error Moving Game 18X"
+            "moving": "Error Moving Game 18X",
+            "delete-files": {
+                "body": "Error verwijderde vouwen. Verwijder het handmatig.\n86X\n_117X",
+                "title": "Error verwijderen"
+            },
+            "steam": {
+                "error": "Stem executabel gevonden. Installatie werd waarschijnlijk geannuleerd door gebruiker of gefaald aan Steam zijde.",
+                "message": "Steam installatie faalde! Lees de instructies voorzichtig en probeer het opnieuw. _",
+                "title": "Steamfout"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +188,8 @@
         "unsync": "De-synchroniseren",
         "continue": "Door­gaan",
         "download": "Download",
-        "update": "Aanpassen"
+        "update": "Aanpassen",
+        "install": "Installeer"
     },
     "controller": {
         "hints": {
@@ -974,7 +984,9 @@
             "body": "_ Zorg ervoor dat je genoeg gas op het netwerk van de transactie verbindt, om succesvol bevestigd te worden dat £153 X, 173",
             "cancel": "Annuleren",
             "confirm": "Bevestigen"
-        }
+        },
+        "noG7ConnectionClaim": "Je moet een Game7 account hebben om je beloningen op te eisen.",
+        "noG7ConnectionSync": "Je moet een Game7 account hebben om je taken te herstellen."
     },
     "quests": {
         "quests": "Quest",
@@ -1021,7 +1033,8 @@
     "importGameErrorMessageExecutable": "Game Uitvoerbaar niet gevonden, importeren is niet mogelijk",
     "exit_game": "Verlaat Game",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Je bent verbonden met HyperPlay met een externe portemonnee."
+        "EXTERNAL_WALLET_CONNECTED": "Je bent verbonden met HyperPlay met een externe portemonnee.",
+        "WALLET_DISCONNECTED": "Je hebt geen portemonnee verbonden met HyperPlay."
     },
     "dlcs": {
         "label": "Select DLCs om te installeren:"
@@ -1033,5 +1046,84 @@
         }
     },
     "analytics": "Analytics",
-    "profile": "Profiel"
+    "profile": "Profiel",
+    "import-game-folder": {
+        "cta": "Import Game Folder",
+        "dialog": {
+            "title": "Select Game Folder aan Import"
+        },
+        "error": "Er was een fout tijdens het import. Zie de logboeken voor meer details.",
+        "label": "Import Game Folder",
+        "placeholder": "Kies de spel map om te importeren",
+        "success": "Succesvolle geïmporteerde spelletjes!"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "title": "Base Game Installe",
+                "body": "Mod zal worden toegevoegd aan basis spel"
+            },
+            "installing": {
+                "body": "De basisbestanden uittrekken",
+                "title": "Installing Base Game"
+            },
+            "cancel": {
+                "body": "Basiswedstrijd geannuleerd",
+                "title": "Cancel Extract"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Select Base Game File",
+                "placeholder": "Select Zip Fi"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "Dit spel is een modder voor World of Warcraft: Wrath of the Lich King (3,3,5a) Om deze modder te spelen, moeten spelers een kopie van World of Warcraft 3,5a hebben. Spelers die de wereld van Warcraft bezitten kunnen versie 3,3,5a van bronnen als:",
+                "title": "Stap 1",
+                "webtorrent": "Torrent (Magnet Link)",
+                "chromieCraft": "ChromieCraft",
+                "subtitle": "Download World of Warcraft 3,3,5"
+            },
+            "step2": {
+                "description": "Selecteer de download ChromieCraft 3,5a.",
+                "subtitle": "Select ChromieCraft3,3,5a. Veld",
+                "title": "Stap 2"
+            },
+            "step3": {
+                "description": "Kies alsjeblieft de map waar World of Warcraft, Wrath of the Lich King geïnstalleerd moet worden.",
+                "subtitle": "Select Install Folder",
+                "title": "Stap 3"
+            },
+            "step4": {
+                "description": "Voer de toegangscode in om het spel te installeren.",
+                "subtitle": "Access Code",
+                "title": "Stap 4"
+            },
+            "title": "Mod Instructies"
+        }
+    },
+    "Cancel Installation": "Cancel Installation",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay zal de Steam Setup voor je downloaden. Volg Steam instructies op hun installatie;"
+    },
+    "At the end make sure to": "Aan het eind zorg dat",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay zal je inlichten als de installatie gedaan is;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Als je wilt doorgaan, wees geduldig, want het kan een paar minuten duren om af te maken van je internetverbinding en systeemconfiguratie;",
+    "Install Steam": "Install Steam",
+    "Installing Steam": "Installing Steam...",
+    "Launch Steam": "Launch Steam",
+    "Launching Steam": "Launching Steam...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Bij de eerste lancering zal Steam de nodige bestanden downloaden en zal een paar minuten duren om het login scherm te verschijnen;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Compatibiliteitslaag niet beschikbaar. Gelieve er eerst een te installeren van \"Settings\" Wine Manager.",
+        "error-message": "Er is een fout gebeurd toen hij Steam installeerde. Probeer het nog eens.",
+        "launch-tooltip": "Launch Steam gebruikt de HyperPlay Compatibility Layer",
+        "success-message": "Steam is geïnstalleerd. Je kunt het nu uit de bibliotheek lanceren.",
+        "tooltip": "Dit zal de Windows versie van Steam installeren en het zal rennen met een HyperPlay Compatibility Layer.\n\nVooral oudere titels, nieuwere 3D wedstrijden, of die met anti-kaat software werkt niet goed.\n\nDe herstellende specificaties zijn een Mac met Apple Silicon CPU (M1 of boven) en minstens 16GB van RAM."
+    }
 }

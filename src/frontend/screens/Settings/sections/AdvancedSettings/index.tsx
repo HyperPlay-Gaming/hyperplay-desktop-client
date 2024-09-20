@@ -18,6 +18,7 @@ import {
   faUpload,
   faX
 } from '@fortawesome/free-solid-svg-icons'
+import { ImportGameFolder } from 'frontend/components/UI/ImportGameFolder'
 
 export default function AdvancedSettings() {
   const { config } = useContext(SettingsContext)
@@ -173,6 +174,8 @@ export default function AdvancedSettings() {
       <DownloadNoHTTPS />
 
       <DisableLogs />
+
+      <ImportGameFolder />
 
       <hr />
 
