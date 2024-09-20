@@ -737,6 +737,9 @@
     "notification": {
         "wine-download": {
             "title": "Менеджэр Wine"
+        },
+        "wine-download-failed": {
+            "title": "Памылка"
         }
     },
     "profile": "Профіль",
