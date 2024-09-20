@@ -1032,7 +1032,8 @@
             "title": "Kompatibilitási réteg"
         },
         "wine-download-failed": {
-            "message": "Hibás az alapértelmezett kompatibilitási réteg létrehozása"
+            "message": "Hibás az alapértelmezett kompatibilitási réteg létrehozása",
+            "title": "Hiba"
         }
     },
     "accounts": "fiókok",
