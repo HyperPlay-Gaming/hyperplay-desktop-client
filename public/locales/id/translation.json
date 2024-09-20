@@ -1006,7 +1006,8 @@
             "title": "Lapisan Kompatibilitas"
         },
         "wine-download-failed": {
-            "message": "Gagal untuk mengatur lapisan kompatibilitas default"
+            "message": "Gagal untuk mengatur lapisan kompatibilitas default",
+            "title": "Kesalahan"
         }
     },
     "sideload": {
