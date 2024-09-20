@@ -6,13 +6,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  parser:
+  i18n_parser:
     uses: HyperPlay-Gaming/workflows/.github/workflows/nodejs_commands.yml@main
     with:
       node_version: '20'
       pkg_manager: 'yarn'
-      install: 'yarn install --immutable --frozen-lockfile'
-      name: 'parser'
+      install: 'yarn setup'
+      name: 'i18n parser'
       command_one: 'yarn i18n --fail-on-update'
       command_one_name: 'i18n parser'
       checkout_recursive: true
