@@ -1013,7 +1013,9 @@
             "body2": "Caso contrário, a Recompensa de Busca <bold> expirará e não será mais reivindicada.</bold>",
             "cancel": "Cancelar",
             "confirm": "Confirmar"
-        }
+        },
+        "noG7ConnectionClaim": "Você precisa ter uma conta Game7 ligada a {{email}} para reivindicar suas recompensas.",
+        "noG7ConnectionSync": "Você precisa ter uma conta Game7 vinculada a {{email}} para resync suas tarefas."
     },
     "notification": {
         "wine-download": {

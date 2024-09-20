@@ -810,7 +810,9 @@
             "body2": "Muussa tapauksessa Quest Reward (X28X) päättyy, eikä sitä enää voi vaatia",
             "cancel": "Peruuta",
             "confirm": "Vahvista"
-        }
+        },
+        "noG7ConnectionClaim": "Sinulla on oltava Game7-tili, joka on yhdistetty {{email}}, jotta voit saada palkintosi.",
+        "noG7ConnectionSync": "Sinulla on oltava Game7-tili, joka on yhdistetty (X43X) tehtävien uudelleen synkronointiin."
     },
     "gameRelease": {
         "main": "Oletus",

@@ -946,7 +946,9 @@
             "body": "(X0XIMPORTANT:X16X) (ang.). (Zobowiązuje się, że są one akcesorami wystarczająco gazowymi w sieci X80X dla transakcji, aby potwierdzić X153X within 24 hrs",
             "cancel": "Anuluj",
             "confirm": "Potwierdź"
-        }
+        },
+        "noG7ConnectionClaim": "Musisz posiadać konto Game7, powiązane z X43X, aby stwierdzić nagrody.",
+        "noG7ConnectionSync": "Musisz posiadać konto Game7, powiązane z X43X."
     },
     "sideload": {
         "warningTitle": "Ważne",
