@@ -33,7 +33,8 @@ export async function addGameToLibrary(projectId: string) {
 
   if (sameGameInLibrary !== undefined) {
     logWarning(
-      `Cannot add game to library since game is already added to the library!`
+      `Cannot add game to library since game is already added to the library!`,
+      LogPrefix.HyperPlay
     )
     return
   }
@@ -45,6 +46,13 @@ export async function addGameToLibrary(projectId: string) {
   const res = await axios.get<HyperPlayRelease>(listingUrl, getConfig)
 
   const data = res.data
+  if (Object.keys(data).length === 0) {
+    logWarning(
+      `Cannot add game to library since game is no longer distributed by HyperPlay.`,
+      LogPrefix.HyperPlay
+    )
+    return
+  }
   const gameInfo = getGameInfoFromHpRelease(data)
   hpLibraryStore.set('games', [...currentLibrary, gameInfo])
 }
@@ -210,7 +218,7 @@ export async function listUpdateableGames(): Promise<string[]> {
       return
     }
 
-    if (!gameIsInstalled(val)) return
+    if (!gameIsInstalled(val) || val.install?.version === undefined) return
 
     if (val.channels && val.install.channelName && val.install.platform) {
       if (!Object.hasOwn(val.channels, val.install.channelName)) {
@@ -223,13 +231,14 @@ export async function listUpdateableGames(): Promise<string[]> {
         )
         return
       }
+      // if the installed version is less than the latest version && the installed platform is the same as the latest platform
       if (
-        // games installed before 0.5.0 used gameInfo.version for install.version
-        // so for backwards compatibility we remove spaces and lower case channel release meta name here
-        val.install.version !==
         sanitizeVersion(
-          val.channels[val.install.channelName].release_meta.name || ''
-        )
+          val.channels[val.install.channelName].release_meta.name
+        ) !== sanitizeVersion(val.install.version) &&
+        Object.keys(
+          val.channels[val.install.channelName].release_meta.platforms
+        ).includes(val.install.platform)
       ) {
         updateableGames.push(val.app_name)
       }

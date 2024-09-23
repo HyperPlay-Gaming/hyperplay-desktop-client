@@ -82,7 +82,16 @@
                 "title": "Ubisoft Connect",
                 "message": "Inštalácia Ubisoft Connect v hre predfix zlyhal. Pozrite sa na našu stránku wiki na https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, aby ho inštalovať maunally."
             },
-            "moving": "Chyba Pohybujúce sa hry {{error}}"
+            "moving": "Chyba Pohybujúce sa hry {{error}}",
+            "delete-files": {
+                "body": "Odstránenie chyby extrahované zložky {{path}}. Prosím, odstráňte ho manuálne.\n{{paragraph}}\n{{error}}",
+                "title": "Odstránenie chyby extrahované zložky"
+            },
+            "steam": {
+                "title": "Parná chyba",
+                "error": "Steam spustiteľný nebol nájdený. Inštalácia bola pravdepodobne zrušená užívateľom alebo zlyhala na Steam strane.",
+                "message": "Parná inštalácia zlyhala! Pozorne si prečítajte pokyny a skúste to znova! {{paragraph}} {{error}}"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +188,8 @@
         "unsync": "Unsync",
         "download": "Stiahnuť",
         "update": "Aktualizovať",
-        "continue": "Pokračovať"
+        "continue": "Pokračovať",
+        "install": "Inštalovať"
     },
     "controller": {
         "hints": {
@@ -976,7 +986,9 @@
             "body2": "V opačnom prípade Quest Reward <bold> vyprší a už nebude nárokovať.</bold>",
             "confirm": "Potvrdiť",
             "cancel": "Zrušiť"
-        }
+        },
+        "noG7ConnectionClaim": "Musíte mať účet Game7 spojený s {{email}} požadovať svoje odmeny.",
+        "noG7ConnectionSync": "Musíte mať účet Game7 spojený s {{email}} pre opätovné úlohy."
     },
     "quests": {
         "playstreak": {
@@ -1034,5 +1046,84 @@
     },
     "profile": "Profil",
     "analytics": "Analýzy",
-    "ALL": "VŠE"
+    "ALL": "VŠE",
+    "import-game-folder": {
+        "success": "Úspešne importované hry!",
+        "dialog": {
+            "title": "Vyberte Game Folder Import"
+        },
+        "error": "Počas importu došlo k chybe. Viac informácií nájdete v logoch.",
+        "label": "Import Hra Folder",
+        "placeholder": "Vyberte si zložku hry na import",
+        "cta": "Import Hra Folder"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Základná hra extrakcia zrušené",
+                "title": "Zrušiť extrakciu"
+            },
+            "installed": {
+                "body": "Mod bude aplikovaná na základnú hru",
+                "title": "Základná hra Inštalovaná"
+            },
+            "installing": {
+                "body": "Extrahovanie základných herných súborov",
+                "title": "Inštalácia Base Hra"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Vyberte miesto Base Game",
+                "placeholder": "Vyberte Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Táto hra je mod pre svet Warcraft: hnev Lich King (3.3.5a). Aby hrať tento mod, hráči musia vlastniť kópiu World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay nie je hostiteľom World of Warcraft. Hráči, ktorí vlastnia svet Warcraft môže získať verziu 3.3.5a z zdrojov, ako sú:",
+                "webtorrent": "Torrent (Magnet Link)",
+                "subtitle": "Stiahnuť svet Warcraft 3.3.5a",
+                "title": "Krok 1"
+            },
+            "step2": {
+                "subtitle": "Vyberte ChromieCraft_3.3.5a.zip Aktuality",
+                "description": "Vyberte stiahnutý ChromieCraft_3.3.5a.zip súbor.",
+                "title": "Krok 2"
+            },
+            "step3": {
+                "description": "Prosím vyberte priečinok, kde je svet Warcraft: hnev Lich King (3.3.5a) by mal byť inštalovaný.",
+                "subtitle": "Vyberte inštaláciu Folder",
+                "title": "Krok 3"
+            },
+            "step4": {
+                "description": "Zadajte prístupový kód pre pokračovanie s inštaláciou hry.",
+                "subtitle": "Prístupový kód",
+                "title": "Krok 4"
+            },
+            "title": "Modové inštrukcie"
+        }
+    },
+    "Install Steam": "Nainštalujte Steam",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Na prvom spustení Steam bude sťahovať potrebné súbory a bude trvať niekoľko minút na dokončenie a prihlásenie obrazovky sa objaví;",
+    "Installing Steam": "Inštalácia pary...",
+    "Launch Steam": "Spustenie Steam",
+    "Launching Steam": "Spustenie pary...",
+    "steam-install": {
+        "compatibility-layer-not-available": "Kompatibilita vrstva nie je k dispozícii. Nainštalujte jeden z \"Nastavenia > Wine Manager\" prvý.",
+        "error-message": "Pri inštalácii pary došlo k chybe. Skúste prosím znova.",
+        "launch-tooltip": "Spustenie Steam pomocou HyperPlay kompatibility Vrstva",
+        "success-message": "Steam bol nainštalovaný. Teraz môžete spustiť z knižnice.",
+        "tooltip": "To bude inštalovať verziu Windows Steam a bude spustiť pomocou HyperPlay kompatibility vrstvy.\n\nNiektoré hry obzvlášť staršie tituly, novšie 3D hry, alebo tie s anti-cheat softvér nemusí fungovať správne.\n\nOdporúčané špecifikácie sú Mac s procesorom Apple Silicon (M1 alebo vyššie) a aspoň 16GB RAM."
+    },
+    "At the end make sure to": "Na konci uistite sa, že",
+    "Cancel Installation": "Zrušiť inštaláciu",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay bude stiahnuť a začať Steam Setup pre vás. Prosím, postupujte podľa pokynov Steam na ich inštalátor;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vás informuje po dokončení inštalácie;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Ak chcete pokračovať, buďte trpezliví, pretože to môže trvať niekoľko minút na dokončenie v závislosti na vašom pripojenie k internetu a konfigurácii systému;",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam \""
 }

@@ -53,7 +53,10 @@
         "compability": {
             "message": "Aquest joc de Windows s'executa amb una capa de compatibilitat. Pot ser que hi hagi problemes o que el joc no funcioni."
         },
-        "yesCancel": "Sí, cancel·lar"
+        "yesCancel": "Sí, cancel·lar",
+        "stopExtraction": {
+            "title": "Vols cancel·lar l'extracció?"
+        }
     },
     "button": {
         "add_to_favourites": "Afegeix a preferits",
@@ -244,5 +247,10 @@
         "store": "Botiga",
         "verify": "Verifica i repara",
         "extraInfo": "Informació addicional"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Si us plau, poseu-vos en contacte amb l'equip HyperPlay amb aquest missatge: {{error}} - {{context}}."
+        }
     }
 }

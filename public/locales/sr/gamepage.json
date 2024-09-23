@@ -101,7 +101,10 @@
             "message": "@This #Prozor #igra #volja #bijeg #uporabiti @a #kompatibilnost #red. #Free @might @encounter #kakav #tema ili @the #igra @might ne #rad uopće#."
         },
         "dont-show-again": "Не приказуј поново",
-        "ok": "У реду"
+        "ok": "У реду",
+        "stopExtraction": {
+            "title": "@Do #free @want# to #ukidati @the #Ekstrakcija#?"
+        }
     },
     "disabled": "Онемогућено",
     "dlc": {
@@ -253,5 +256,10 @@
     },
     "help": {
         "cloud_save_unsupported": "Ова игра не подржава чување у облаку. Ове информације пружају програмери игре. Неке игре имплементирају сопствени систем чувања у облаку"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "@Please #doticaj @the HyperPlay #Tim #uz @this #poruka: [@X53@X] - [@X65@X]#."
+        }
     }
 }

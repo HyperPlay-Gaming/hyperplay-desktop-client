@@ -1,0 +1,14 @@
+.afterInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs-fixed);
+  margin: var(--space-xs-fixed) 0px;
+}
+
+.errorMessage {
+  color: var(--color-error-400);
+}
+
+.successMessage {
+  color: var(--color-success-400);
+}

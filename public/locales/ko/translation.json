@@ -82,6 +82,15 @@
             "ubisoft-connect": {
                 "title": "Ubisoft 연결",
                 "message": "Ubisoft의 설치는 게임 접두사에서 실패했습니다. https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac에서 wiki 페이지를 확인하십시오."
+            },
+            "delete-files": {
+                "body": "오류 제거 추출 폴더 {{path}}. 자주 묻는 질문\n{{paragraph}}\n{{error}}",
+                "title": "오류 제거 추출 폴더"
+            },
+            "steam": {
+                "error": "Steam 실행할 수 없습니다. 설치는 사용자가 취소되거나 Steam 측에 실패했습니다.",
+                "message": "증기 설치 실패! 자주 묻는 질문 {{paragraph}} {{error}}",
+                "title": "증기 오류"
             }
         },
         "info": {
@@ -179,7 +188,8 @@
         "unsync": "싱크 해제",
         "continue": "계속하기",
         "download": "다운로드",
-        "update": "갱신"
+        "update": "갱신",
+        "install": "설치"
     },
     "controller": {
         "hints": {
@@ -978,7 +988,9 @@
             "title": "Quest Reward Claim을 확인",
             "cancel": "취소",
             "confirm": "승인"
-        }
+        },
+        "noG7ConnectionClaim": "보상을 청구하려면 {{email}}에 연결된 Game7 계정이 있어야 합니다.",
+        "noG7ConnectionSync": "작업을 재 동기화하려면 {{email}}에 연결된 Game7 계정이 있어야 합니다."
     },
     "sideload": {
         "warningMessage": "Side-loading 게임은 개발자와 숙련 된 전력 사용자를위한 기능입니다. 악성 프로그램이 컴퓨터를 손상하고 자금을 납치 할 수있는 설치 프로그램을로드.",
@@ -1034,5 +1046,84 @@
     },
     "profile": "프로필",
     "analytics": "진단공유",
-    "ALL": "모두"
+    "ALL": "모두",
+    "import-game-folder": {
+        "success": "성공적으로 수입 된 게임!",
+        "cta": "수입 게임 폴더",
+        "dialog": {
+            "title": "Game Folder를 사용하여 가져 오기"
+        },
+        "error": "수입 중 오류가 있었습니다. 자세한 내용은 로그를 참조하십시오.",
+        "label": "수입 게임 폴더",
+        "placeholder": "게임 폴더를 가져 오기"
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "기본 게임 추출 취소",
+                "title": "취소 추출"
+            },
+            "installed": {
+                "body": "Mod는 기본 게임에 적용됩니다",
+                "title": "기본 게임 설치"
+            },
+            "installing": {
+                "body": "기본 게임 파일 추출",
+                "title": "기본 게임 설치"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Base Game 파일 선택",
+                "placeholder": "Zip 파일 선택"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft의 특징",
+                "description": "이 게임은 월드 오브 워크래프트의 모드입니다: 리치 킹의 Wrath (3.3.5a). 이 모드를 재생하려면 플레이어는 Warcraft 3.3.5a의 세계 사본을 소유해야합니다. {{newline}} {{newline}} HyperPlay는 Warcraft의 세계를 호스팅하지 않습니다. Warcraft의 세계를 소유 한 플레이어는 다음과 같은 소스에서 3.3.5a 버전을 얻을 수 있습니다",
+                "subtitle": "다운로드 월드 오브 워크래프트 3.3.5a",
+                "webtorrent": "토렌트 (Magnet Link)",
+                "title": "1단계"
+            },
+            "step3": {
+                "description": "월드 오브 워크래프트(World of Warcraft: Wrath of Lich King (3.3.5a)가 설치되어야 하는 폴더를 선택하십시오.",
+                "subtitle": "연락처 한국어",
+                "title": "3단계"
+            },
+            "step4": {
+                "description": "게임 설치를 진행하려면 액세스 코드를 입력하십시오.",
+                "subtitle": "오시는 길",
+                "title": "단계 4"
+            },
+            "title": "Mod 지침",
+            "step2": {
+                "description": "다운로드 ChromieCraft_3.3.5a.zip 파일.",
+                "subtitle": "ChromieCraft_3.3.5a.zip을 선택하십시오. 파일 형식",
+                "title": "2단계"
+            }
+        }
+    },
+    "At the end make sure to": "끝에서 확인",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "첫 번째 발사 증기는 필요한 파일을 다운로드하고 완료하는 몇 분 및 로그인 화면이 나타납니다;",
+    "Launch Steam": "Steam 출시",
+    "steam-install": {
+        "error-message": "증기를 설치하면서 오류가 발생했습니다. 다시 시도하십시오.",
+        "launch-tooltip": "HyperPlay 호환성 레이어를 사용하여 Steam 실행",
+        "success-message": "증기가 설치되었습니다. 이제 도서관에서 시작할 수 있습니다.",
+        "tooltip": "이것은 Steam의 Windows 버전을 설치하고 HyperPlay 호환성 레이어를 사용하여 실행됩니다.\n\n일부 게임 특히 이전 제목, 새로운 3D 게임, 또는 안티 cheat 소프트웨어와 그 제대로 작동하지 않을 수 있습니다.\n\n권장 사양은 Apple Silicon CPU (M1 이상) 및 RAM의 최소 16GB의 Mac입니다.",
+        "compatibility-layer-not-available": "호환성 층은 유효하지 않습니다. 먼저 \"Settings > Wine Manager\"에서 하나를 설치하십시오."
+    },
+    "Install Steam": "Steam 설치",
+    "Cancel Installation": "공지사항",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay는 다운로드하고 Steam Setup을 시작합니다. 설치자에 증기 지시를 따르십시오;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay는 한 번 설치가 완료됩니다;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "계속하려면, 환자가 인터넷 연결 및 시스템 구성에 따라 완료하는 데 몇 분 걸릴 수 있기 때문에;",
+    "Installing Steam": "Steam 설치 ...",
+    "Launching Steam": "Steam 출시 ...",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run 스팀 이름 *"
 }

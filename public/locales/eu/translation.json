@@ -155,7 +155,8 @@
         "unsync": "Desinkronizatu",
         "continue": "Jarraitu",
         "download": "Deskargatu",
-        "update": "Eguneratu"
+        "update": "Eguneratu",
+        "install": "Ezarri"
     },
     "controller": {
         "hints": {
@@ -749,5 +750,8 @@
     "profile": "Profila",
     "sideload": {
         "warningTitle": "Garrantzitsua"
+    },
+    "import-game-folder": {
+        "placeholder": "Aukeratu inportatzeko joko karpeta"
     }
 }

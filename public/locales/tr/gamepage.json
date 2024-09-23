@@ -53,7 +53,10 @@
             "message": "Bu Windows oyunu bir uyumluluk katmanı kullanarak çalışacak. Bazı sorunlarla karşılaşabilirsiniz veya oyun hiç çalışmayabilir."
         },
         "dont-show-again": "Bir daha gösterme",
-        "ok": "Tamam"
+        "ok": "Tamam",
+        "stopExtraction": {
+            "title": "Ekstraksiyonu iptal etmek ister misiniz?"
+        }
     },
     "button": {
         "add_to_favourites": "Favorilere Ekle",
@@ -238,5 +241,10 @@
         "store": "Mağaza Sayfası",
         "verify": "Doğrula ve Onar",
         "extraInfo": "Ekstra Info"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Please contact the HyperPlay Team with this message: {{error}} - {{context}}."
+        }
     }
 }

@@ -43,8 +43,8 @@ import {
   spawnAsync,
   killPattern,
   shutdownWine,
-  calculateEta,
-  getExecutableAndArgs
+  getExecutableAndArgs,
+  calculateProgress
 } from 'backend/utils'
 import { notify, showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import path, { dirname, join } from 'path'
@@ -57,6 +57,7 @@ import {
   getHyperPlayStoreRelease,
   handleArchAndPlatform,
   handlePlatformReversed,
+  runModPatcher,
   sanitizeVersion
 } from './utils'
 import { getSettings as getSettingsSideload } from 'backend/storeManagers/sideload/games'
@@ -82,6 +83,7 @@ import { gameManagerMap } from '..'
 import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
+import { prepareBaseGameForModding } from 'backend/ipcHandlers/mods'
 
 import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
@@ -97,7 +99,8 @@ interface ProgressDownloadingItem {
 }
 
 const inProgressDownloadsMap: Map<string, ProgressDownloadingItem> = new Map()
-const inProgressExtractionsMap: Map<string, ExtractZipService> = new Map()
+export const inProgressExtractionsMap: Map<string, ExtractZipService> =
+  new Map()
 
 export async function getSettings(appName: string): Promise<GameSettings> {
   return getSettingsSideload(appName)
@@ -428,7 +431,7 @@ const findExecutables = async (folderPath: string): Promise<string[]> => {
   return executables
 }
 
-function cleanUpDownload(appName: string, directory: string) {
+export function cleanUpDownload(appName: string, directory: string) {
   inProgressDownloadsMap.delete(appName)
   inProgressExtractionsMap.delete(appName)
   deleteAbortController(appName)
@@ -448,10 +451,6 @@ function getDownloadUrl(platformInfo: PlatformConfig, appName: string) {
     : platformInfo.external_url
 
   return downloadUrl
-}
-
-function roundToTenth(x: number) {
-  return Math.round(x * 10) / 10
 }
 
 async function downloadGame(
@@ -561,24 +560,6 @@ async function downloadGame(
       channelName
     })
   })
-}
-
-function calculateProgress(
-  downloadedBytes: number,
-  downloadSize: number,
-  downloadSpeed: number,
-  diskWriteSpeed: number,
-  progress: number
-) {
-  const eta = calculateEta(downloadedBytes, downloadSpeed, downloadSize)
-
-  return {
-    percent: roundToTenth(progress),
-    diskSpeed: roundToTenth(diskWriteSpeed / 1024 / 1024),
-    downSpeed: roundToTenth(downloadSpeed / 1024 / 1024),
-    bytes: roundToTenth(downloadedBytes / 1024 / 1024),
-    eta
-  }
 }
 
 function sanitizeFileName(filename: string) {
@@ -718,7 +699,7 @@ function updateInstalledInfo(appName: string, installedInfo: InstalledInfo) {
   writeManifestFile(appName, installedInfo)
 }
 
-function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
+export function getDestinationPath(gameInfo: GameInfo, dirpath: string) {
   if (
     gameInfo.account_name === undefined ||
     gameInfo.project_name === undefined
@@ -825,7 +806,8 @@ export async function install(
     channelName,
     accessCode,
     updateOnly = false,
-    siweValues
+    siweValues,
+    modOptions
   }: InstallArgs
 ): Promise<InstallResult> {
   if (await resumeIfPaused(appName)) {
@@ -835,7 +817,19 @@ export async function install(
   let { directory, fileName } = { directory: '', fileName: '' }
   try {
     const gameInfo = getGameInfo(appName)
-    const { title } = gameInfo
+    const { title, account_name } = gameInfo
+    const isMarketWars = account_name === 'marketwars'
+    if (isMarketWars && modOptions?.zipFilePath) {
+      try {
+        await prepareBaseGameForModding({
+          appName,
+          zipFile: modOptions.zipFilePath,
+          installPath: dirpath
+        })
+      } catch (error) {
+        return { status: 'error' }
+      }
+    }
 
     const destinationPath = updateOnly
       ? dirpath
@@ -957,6 +951,14 @@ export async function install(
       installVersion,
       channelName
     })
+
+    if (isMarketWars) {
+      try {
+        await runModPatcher(appName)
+      } catch (error) {
+        return { status: 'error' }
+      }
+    }
 
     if (platformToInstall === 'Windows') {
       logInfo(`Looking for  distributables for ${appName}`, LogPrefix.HyperPlay)
@@ -1285,12 +1287,6 @@ export function getGameInfo(appName: string): GameInfo {
     .get('games', [])
     .find((app) => app.app_name === appName)
 
-  // TODO: remove this in the future, it is only needed for games downloaded from v0.10 and below
-  // write manifest file
-  if (appInfo?.is_installed && appInfo.install) {
-    writeManifestFile(appName, appInfo.install)
-  }
-
   if (!appInfo) {
     throw new Error('App not found in library')
   }
@@ -1430,6 +1426,7 @@ export async function update(
   }
 
   // try patching first, if it fails, download the new version
+  const isMarketWars = gameInfo.account_name === 'marketwars'
   try {
     const {
       channels,
@@ -1446,6 +1443,15 @@ export async function update(
 
     const newVersion = channels[channelName].release_meta.name
     await applyPatching(appName, newVersion)
+
+    if (isMarketWars) {
+      try {
+        await runModPatcher(appName)
+      } catch (error) {
+        return { status: 'error' }
+      }
+    }
+
     return { status: 'done' }
   } catch (error) {
     //install the new version
@@ -1457,6 +1463,13 @@ export async function update(
       updateOnly: true,
       siweValues: args?.siweValues
     })
+    if (isMarketWars) {
+      try {
+        await runModPatcher(appName)
+      } catch (error) {
+        return { status: 'error' }
+      }
+    }
     return installResult
   }
 }

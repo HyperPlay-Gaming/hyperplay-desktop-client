@@ -53,7 +53,10 @@
         },
         "yesCancel": "Ja, annuleer",
         "dont-show-again": "Niet opnieuw tonen",
-        "ok": "OK"
+        "ok": "OK",
+        "stopExtraction": {
+            "title": "Wil je de Extractie annuleren?"
+        }
     },
     "button": {
         "add_to_favourites": "Voeg toe aan favorieten",
@@ -241,5 +244,10 @@
         "store": "Winkel",
         "verify": "Verifiëren en repareren",
         "extraInfo": "Extra informatie"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Neem contact op met het HyperPlay Team met dit bericht:."
+        }
     }
 }

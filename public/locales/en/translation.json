@@ -26,6 +26,7 @@
         "status": "Status",
         "title": "This game includes anticheat software"
     },
+    "At the end make sure to": "At the end make sure to",
     "back_to_game": "Back to game",
     "box": {
         "cache-cleared": {
@@ -55,6 +56,10 @@
                 "message": "The CrossOver bottle \"{{bottle_name}}\" does not exist, can't launch!",
                 "title": "CrossOver bottle not found"
             },
+            "delete-files": {
+                "body": "Error removing extracted folder {{path}}. Please remove it manually. \n                {{paragraph}} \n                {{error}}",
+                "title": "Error removing extracted folder"
+            },
             "diskspace": {
                 "message": "Not enough available disk space",
                 "title": "No Space"
@@ -72,6 +77,11 @@
             },
             "launchAborted": "Launch aborted",
             "moving": "Error Moving Game {{error}}",
+            "steam": {
+                "error": "Steam executable not found. Installation was probably canceled by user or failed on Steam side.",
+                "message": "Steam installation failed! Please read the instructions carefully and try again! {{paragraph}} {{error}}",
+                "title": "Steam error"
+            },
             "title": "Error",
             "ubisoft-connect": {
                 "message": "Installation of Ubisoft Connect in the game prefix failed. Check our wiki page at https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac to install it maunally.",
@@ -169,11 +179,13 @@
         "continue": "Continue",
         "download": "Download",
         "go_to_library": "Go to Library",
+        "install": "Install",
         "sync": "Sync",
         "syncing": "Syncing",
         "unsync": "Unsync",
         "update": "Update"
     },
+    "Cancel Installation": "Cancel Installation",
     "controller": {
         "hints": {
             "back": "Back",
@@ -444,6 +456,10 @@
         "viewPortfolio": "View portfolio"
     },
     "HyperPlay": "",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay will download and start the Steam Setup for you. Please follow Steam instructions on their installer;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay will notify you once the installation is done;",
     "hyperplayOverlay": {
         "chainRequest": {
             "CONFIRMED": "Custom network added",
@@ -481,6 +497,17 @@
             "INITIATED": "Add custom token request pending"
         }
     },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;",
+    "import-game-folder": {
+        "cta": "Import Game Folder",
+        "dialog": {
+            "title": "Select Game Folder to Import"
+        },
+        "error": "There was an error during import. Please see the logs for more details.",
+        "label": "Import Game Folder",
+        "placeholder": "Choose the game folder to import",
+        "success": "Successfully imported games!"
+    },
     "importGameErrorMessage": "Not a valid game folder, importing game is not possible",
     "importGameErrorMessageExecutable": "Game Executable not found, importing game is not possible",
     "importGameErrorTitle": "Import Game Error",
@@ -508,6 +535,13 @@
             "message": "Wine uses what is called a WINEPREFIX to encapsulate Windows applications. This prefix contains the Wine configuration files and a reproduction of the file hierarchy of C: (the main disk on a Windows OS). In this reproduction of the C: drive, your game save files and dependencies installed via winetricks are stored."
         }
     },
+    "install": {
+        "path": "Select Install Path"
+    },
+    "Install Steam": "Install Steam",
+    "Installing Steam": "Installing Steam...",
+    "Launch Steam": "Launch Steam",
+    "Launching Steam": "Launching Steam...",
     "library": {
         "alphabeticalAZ": "Alphabetical A-Z",
         "alphabeticalZA": "Alphabetical Z-A",
@@ -530,10 +564,64 @@
         "sync": "Sync Complete",
         "unsync": "Unsync Complete"
     },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "Base game extraction canceled",
+                "title": "Canceled Extraction"
+            },
+            "installed": {
+                "body": "Mod will be applied to base game",
+                "title": "Base Game Installed"
+            },
+            "installing": {
+                "body": "Extracting base game files",
+                "title": "Installing Base Game"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Select Base Game File Location",
+                "placeholder": "Select Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "selectZip": "",
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "This game is a mod for World of Warcraft: Wrath of the Lich King (3.3.5a). In order to play this mod, players must own a copy of World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay does not host World of Warcraft. Players who own World of Warcraft can obtain version 3.3.5a from sources like:",
+                "subtitle": "Download World of Warcraft 3.3.5a",
+                "title": "Step 1",
+                "webtorrent": "Torrent (Magnet Link)"
+            },
+            "step2": {
+                "description": "Select the downloaded ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "Select ChromieCraft_3.3.5a.zip File",
+                "title": "Step 2"
+            },
+            "step3": {
+                "description": "Please choose the folder where World of Warcraft: Wrath of the Lich King (3.3.5a) should be installed.",
+                "subtitle": "Select Installation Folder",
+                "title": "Step 3"
+            },
+            "step4": {
+                "description": "Enter the access code to proceed with installing the game.",
+                "subtitle": "Access Code",
+                "title": "Step 4"
+            },
+            "title": "Mod Instructions"
+        }
+    },
     "notification": {
         "wine-download": {
             "message": "Setting up the default compatibility layer",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "Failed to setup the default compatibility layer",
+            "title": "Error"
         }
     },
     "notify": {
@@ -588,6 +676,7 @@
         "offline-retry-in": "Offline. Retrying in {{seconds}} seconds.",
         "retrying": "Retrying"
     },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;",
     "Open": "Open",
     "options": {
         "advanced": {
@@ -647,20 +736,18 @@
         "associatedGames": "Associated games",
         "claimAll": "Claim all",
         "claimed": "Claimed",
-        "claimFailed": "Claim failed",
-        "claimFailedMessage": "Please try once more. If it still doesn't work, create a Discord support ticket.",
         "claimWarning": {
-            "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 24 hrs.</bold>",
+            "body": "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 7 days.</bold>",
             "body2": "Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>",
             "cancel": "Cancel",
-            "confirm": "Confirm",
-            "title": "Confirm Quest Reward Claim"
+            "confirm": "Confirm"
         },
         "connectSteamAccount": "Connect Steam account",
-        "createDiscordTicket": "Created Discord ticket",
         "g7Numclaimed": "Total Claimed G7 Credits",
         "linkAccount": "Link your Steam account to check eligibility.",
         "needMoreAchievements": "You need to have completed {{percent}}% of the achievements in one of these games.",
+        "noG7ConnectionClaim": "You need to have a Game7 account linked to {{email}} to claim your rewards.",
+        "noG7ConnectionSync": "You need to have a Game7 account linked to {{email}} to resync your tasks.",
         "notEnoughGas": "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.",
         "playstreak": {
             "dayResets": "Day resets:",
@@ -681,8 +768,7 @@
         "signIn": "Sign in",
         "sync": "Sync",
         "type": {
-            "playstreak": "Play Streak",
-            "reputation": "Reputation"
+            "playstreak": "Play Streak"
         },
         "View Game": "View Game"
     },
@@ -907,10 +993,19 @@
         "warningMessage": "Side-loading a game is a feature intended for developers and experienced power users. Side-loading an installer that contains malware could compromise your computer and lead to theft of funds.",
         "warningTitle": "Important"
     },
+    "since it will block HyperPlay configuration until Steam is closed;": "",
     "status": {
         "installing": "Installing",
         "logging": "Logging In...",
         "processing": "Processing files, please wait"
+    },
+    "Steam Installation": "",
+    "steam-install": {
+        "compatibility-layer-not-available": "Compatibility layer not available. Please install one from \"Settings > Wine Manager\" first.",
+        "error-message": "An error occurred while installing Steam. Please try again.",
+        "launch-tooltip": "Launch Steam using the HyperPlay Compatibility Layer",
+        "success-message": "Steam has been installed. You can now launch it from the Library.",
+        "tooltip": "This will install the Windows version of Steam and it will run using a HyperPlay Compatibility Layer. \n\n    Some games especially older titles, newer 3D games, or those with anti-cheat software may not work properly. \n\n    The Recommended specs are a Mac with Apple Silicon CPU (M1 or above) and at least 16GB of RAM."
     },
     "store": "Epic Store",
     "title": {
@@ -935,6 +1030,7 @@
     "two_col_table": {
         "save_hint": "Changes in this table are not saved automatically. Click the + button"
     },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam'",
     "userselector": {
         "logging_out": "Logging out",
         "logIn": "Log in",

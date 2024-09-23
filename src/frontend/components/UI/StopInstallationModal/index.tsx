@@ -23,28 +23,40 @@ export default function StopInstallationModal(props: StopInstallProps) {
   const { t } = useTranslation('gamepage')
   const checkbox = useRef<HTMLInputElement>(null)
 
-  const { runner, title, app_name } = props.gameInfo
+  const { runner, title, app_name, account_name } = props.gameInfo
   const isExtracting = props.status === 'extracting'
+
+  const showCheckbox = !isExtracting && account_name !== 'marketwars'
 
   return (
     <Dialog onClose={props.onClose} showCloseButton>
       <DialogHeader onClose={props.onClose}>
-        {t('gamepage:box.stopInstall.title')}
+        {isExtracting
+          ? t(
+              'gamepage:box.stopExtraction.title',
+              'Do you want to cancel the Extraction?'
+            )
+          : t(
+              'gamepage:box.stopInstall.title',
+              'Do you want to cancel the Download?'
+            )}
       </DialogHeader>
       <DialogContent className="body dialogContent">
-        <Checkbox
-          ref={checkbox}
-          onClick={() => console.log(checkbox.current?.checked)}
-          defaultChecked={false}
-          type="secondary"
-        >
-          <div className="body">
-            {t(
-              'gamepage:box.stopInstall.keepFilesMessage',
-              'Check here if you want to keep the download files after canceling.'
-            )}
-          </div>
-        </Checkbox>
+        {showCheckbox ? (
+          <Checkbox
+            ref={checkbox}
+            onClick={() => console.log(checkbox.current?.checked)}
+            defaultChecked={false}
+            type="secondary"
+          >
+            <div className="body">
+              {t(
+                'gamepage:box.stopInstall.keepFilesMessage',
+                'Check here if you want to keep the download files after canceling.'
+              )}
+            </div>
+          </Checkbox>
+        ) : null}
       </DialogContent>
       <DialogFooter>
         <Button
