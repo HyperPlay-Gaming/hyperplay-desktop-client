@@ -1,5 +1,13 @@
 $topNavBarHeight: 30px;
 
+.root {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
 .txnToastContainer {
   position: absolute;
   right: 10px;
@@ -34,4 +42,27 @@ $topNavBarHeight: 30px;
   left: 0;
   right: 0;
   z-index: 2;
+}
+
+.contentContainer {
+  z-index: 3;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  padding: var(--space-2lg);
+  gap: var(--space-xl);
+  margin: auto;
+  max-height: 100%;
+}
+
+.buttonContainer {
+  display: flex;
+  gap: var(--space-xs);
+  justify-content: flex-end;
+}
+
+.rightSideContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2lg);
 }
