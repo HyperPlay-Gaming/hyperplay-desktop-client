@@ -9,17 +9,21 @@ import authState from 'frontend/state/authState'
 import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import { Reward } from 'common/types'
+import useGetQuests from 'frontend/hooks/useGetQuests'
 
 export interface QuestsViewerProps {
   projectId: string
 }
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
+  const questResults = useGetQuests(appName)
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn, data } = useAuthSession()
   const { t } = useTranslation()
   const flags = useFlags()
-
+  const quests = questResults?.data?.data
+  const initialQuestId = quests?.[0]?.id ?? null
+  const visibleQuestId = selectedQuestId ?? initialQuestId
   const sessionEmail = data?.linkedAccounts.get('email')
 
   /**
@@ -49,8 +53,9 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       {alertComponent}
       <div className={styles.questsViewerContainer}>
         <QuestLogWrapper
+          questsResults={questResults}
           projectId={appName}
-          selectedQuestId={selectedQuestId}
+          selectedQuestId={visibleQuestId}
           setSelectedQuestId={setSelectedQuestId}
         />
         <QuestDetailsWrapper
@@ -73,7 +78,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           trackEvent={window.api.trackEvent}
           signInWithSteamAccount={() => window.api.signInWithProvider('steam')}
           openDiscordLink={window.api.openDiscordLink}
-          selectedQuestId={selectedQuestId}
+          selectedQuestId={visibleQuestId}
           getQuest={window.api.getQuest}
           getUserPlayStreak={window.api.getUserPlayStreak}
           getSteamGameMetadata={window.api.getSteamGameMetadata}
