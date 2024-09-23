@@ -16,7 +16,13 @@ import {
 } from '../../../common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
-import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
+import {
+  LogPrefix,
+  logDebug,
+  logError,
+  logInfo,
+  logWarning
+} from 'backend/logger/logger'
 import {
   ExtractZipService,
   ExtractZipProgressResponse
@@ -54,6 +60,7 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import {
+  getHyperPlayStoreRelease,
   handleArchAndPlatform,
   handlePlatformReversed,
   sanitizeVersion
@@ -1518,29 +1525,39 @@ export const downloadPatcher = async () => {
 export async function downloadLatestGameIpdtManifest(appName: string) {
   const {
     install: { channelName, platform },
-    channels
+    is_installed
   } = getGameInfo(appName)
-  if (!channelName || !platform || !channels) {
+  if (!channelName || !platform || !is_installed) {
+    return
+  }
+
+  // since we don't have the manifest field on the listings API yet, we need to hit the gaming API to have this information
+  const { channels } = await getHyperPlayStoreRelease(appName)
+  const currentChannel = channels.find(
+    (channel) => channel.channel_name === channelName
+  )
+
+  if (!currentChannel) {
     logError(
-      `Channel name or platform not found for ${appName}`,
+      `Channel not found for ${appName} and channel ${channelName}, maybe the channel was removed by the developer `,
       LogPrefix.HyperPlay
     )
     return
   }
 
   const platformKey = platform as AppPlatforms
-  const { name: version, platforms } = channels[channelName].release_meta
+  const { name: version, platforms } = currentChannel.release_meta
   if (platforms[platformKey]) {
     const manifestUrl = platforms[platformKey].manifest
     if (!manifestUrl) {
-      logError(`Manifest url not found for ${appName}`, LogPrefix.HyperPlay)
+      // not logging here since it will flood with info since not all games have manifest
       return
     }
     // download and save the manifest file as a json file in manifest folder
     return downloadFile(
       manifestUrl,
       ipdtManifestsPath,
-      `${appName}-${platform}-${version}`,
+      `${appName}-${platform}-${version}.json`,
       createAbortController(appName)
     )
   }

@@ -142,6 +142,7 @@ export function refreshHPGameInfo(appId: string, data: HyperPlayRelease) {
   const gameInfo: GameInfo = refreshGameInfoFromHpRelease(currentInfo, data)
 
   currentLibrary[gameIndex] = gameInfo
+  downloadLatestGameIpdtManifest(appId)
   return hpLibraryStore.set('games', currentLibrary)
 }
 
@@ -174,14 +175,6 @@ export async function refresh() {
           LogPrefix.HyperPlay
         )
         throw new Error('GameId not find in API')
-      }
-
-      if (
-        gameId ===
-        '0x799b758a631f05bbd441e865d0fc6be19a7b2884656c20abe5ca322bf4ebcb00'
-      ) {
-        console.log(JSON.stringify(gameData.channels, null, 2))
-        downloadLatestGameIpdtManifest(gameId)
       }
 
       refreshHPGameInfo(gameId, gameData)
