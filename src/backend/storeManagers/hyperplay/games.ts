@@ -318,22 +318,25 @@ export async function runWineCommandOnGame(
   appName: string,
   { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
 ): Promise<ExecResult> {
-  if (isNative(appName)) {
-    logError('runWineCommand called on native game!', LogPrefix.Gog)
-    return { stdout: '', stderr: '' }
-  }
-  const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
-  const gameSettings = await gameManagerMap[runner].getSettings(appName)
+  if (!gameManagerMap[runner].isNative(appName)) {
+    const { folder_name, install } = gameManagerMap[runner].getGameInfo(appName)
+    const gameSettings = await gameManagerMap[runner].getSettings(appName)
 
-  return runWineCommand({
-    gameSettings,
-    installFolderName: folder_name,
-    gameInstallPath: install.install_path,
-    commandParts,
-    wait,
-    protonVerb,
-    startFolder
-  })
+    return runWineCommand({
+      gameSettings,
+      installFolderName: folder_name,
+      gameInstallPath: install.install_path,
+      commandParts,
+      wait,
+      protonVerb,
+      startFolder
+    })
+  }
+  logError(
+    `runWineCommand called on native game: ${appName}`,
+    LogPrefix.Backend
+  )
+  return { stdout: '', stderr: '' }
 }
 
 type DistArgs = {
