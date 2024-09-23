@@ -83,7 +83,7 @@ import { runWineCommand } from 'backend/launcher'
 import { DEV_PORTAL_URL } from 'common/constants'
 import getPartitionCookies from 'backend/utils/get_partition_cookies'
 
-import { downloadIPDTForOS } from '@hyperplay/patcher'
+import { downloadIPDTForOS, patchFolder } from '@hyperplay/patcher'
 import { chmod } from 'fs/promises'
 
 interface ProgressDownloadingItem {
@@ -1518,7 +1518,7 @@ export const downloadPatcher = async () => {
 
 export async function downloadLatestGameIpdtManifest(appName: string) {
   const {
-    install: { channelName, platform, version },
+    install: { channelName, platform, version: installedVersion },
     is_installed
   } = getGameInfo(appName)
   if (!channelName || !platform || !is_installed) {
@@ -1540,7 +1540,7 @@ export async function downloadLatestGameIpdtManifest(appName: string) {
   }
 
   const platformKey = platform as AppPlatforms
-  const { name, platforms } = currentChannel.release_meta
+  const { name: newVersion, platforms } = currentChannel.release_meta
   if (platforms[platformKey]) {
     const manifestUrl = platforms[platformKey].manifest
     if (!manifestUrl) {
@@ -1549,11 +1549,11 @@ export async function downloadLatestGameIpdtManifest(appName: string) {
     }
 
     // download only if the manifest file is not already downloaded and its the same version
-    const manifestName = `${appName}-${platform}-${version}.json`
+    const manifestName = `${appName}-${platform}-${installedVersion}.json`
     const manifestPath = path.join(ipdtManifestsPath, manifestName)
 
     // TODO: Update this to download the manifest for the installed version of the game once the API is available
-    if (existsSync(manifestPath) && version === name) {
+    if (existsSync(manifestPath) && installedVersion === newVersion) {
       return
     }
 
@@ -1567,3 +1567,81 @@ export async function downloadLatestGameIpdtManifest(appName: string) {
   }
   return
 }
+
+async function applyPatching(appName: string, newVersion: string) {
+  // get previous and current manifest
+  const gameInfo = getGameInfo(appName)
+  const { install_path, version } = gameInfo.install
+
+  if (!version || !install_path) {
+    logError(
+      `Version or install path not found for ${appName} in applyPatching`,
+      LogPrefix.HyperPlay
+    )
+    throw new Error('Version or install path not found')
+  }
+
+  const previousManifest = getManifest(appName, version)
+  const currentManifest = getManifest(appName, newVersion)
+
+  if (!existsSync(previousManifest) || !existsSync(currentManifest)) {
+    logError(
+      `Manifests not found for ${gameInfo.title} in applyPatching`,
+      LogPrefix.HyperPlay
+    )
+    throw new Error('Manifest not found')
+  }
+
+  const ipfsGateway = process.env.IPFS_GATEWAY
+
+  logInfo(
+    `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
+    LogPrefix.HyperPlay
+  )
+
+  try {
+    for await (const output of patchFolder(
+      ipdtPatcher,
+      install_path,
+      currentManifest,
+      previousManifest,
+      ipfsGateway
+    )) {
+      logInfo(output, LogPrefix.HyperPlay)
+    }
+  } catch (error) {
+    throw new Error(`Error while patching ${error}`)
+  }
+}
+
+function getManifest(appName: string, version: string) {
+  const manifestPath = path.join(
+    ipdtManifestsPath,
+    `${appName}-${version}.json`
+  )
+  if (!existsSync(manifestPath)) {
+    return ''
+  }
+
+  return manifestPath
+}
+
+// TODO: finish this method for Repair Game purposes
+/* export async function generateManifestFromFolder(appName: string) {
+  const gameInfo = getGameInfo(appName)
+  const { install_path, version } = gameInfo.install
+
+  if (!version || !install_path) {
+    logError(
+      `Version or install path not found for ${appName} in generateManifestFromFolder`,
+      LogPrefix.HyperPlay
+    )
+    throw new Error('Version or install path not found')
+  }
+
+  const manifestPath = getManifest(appName, version)
+  const generatedManifest = join(manifestPath, '.current')
+
+  // generate manifest from folder
+  const manifest = await generateManifestFile(install_path, generatedManifest)
+} */
