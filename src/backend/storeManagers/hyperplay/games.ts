@@ -16,13 +16,7 @@ import {
 } from '../../../common/types'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
-import {
-  LogPrefix,
-  logDebug,
-  logError,
-  logInfo,
-  logWarning
-} from 'backend/logger/logger'
+import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
 import {
   ExtractZipService,
   ExtractZipProgressResponse
@@ -1524,7 +1518,7 @@ export const downloadPatcher = async () => {
 
 export async function downloadLatestGameIpdtManifest(appName: string) {
   const {
-    install: { channelName, platform },
+    install: { channelName, platform, version },
     is_installed
   } = getGameInfo(appName)
   if (!channelName || !platform || !is_installed) {
@@ -1546,18 +1540,28 @@ export async function downloadLatestGameIpdtManifest(appName: string) {
   }
 
   const platformKey = platform as AppPlatforms
-  const { name: version, platforms } = currentChannel.release_meta
+  const { name, platforms } = currentChannel.release_meta
   if (platforms[platformKey]) {
     const manifestUrl = platforms[platformKey].manifest
     if (!manifestUrl) {
       // not logging here since it will flood with info since not all games have manifest
       return
     }
+
+    // download only if the manifest file is not already downloaded and its the same version
+    const manifestName = `${appName}-${platform}-${version}.json`
+    const manifestPath = path.join(ipdtManifestsPath, manifestName)
+
+    // TODO: Update this to download the manifest for the installed version of the game once the API is available
+    if (existsSync(manifestPath) && version === name) {
+      return
+    }
+
     // download and save the manifest file as a json file in manifest folder
     return downloadFile(
       manifestUrl,
       ipdtManifestsPath,
-      `${appName}-${platform}-${version}.json`,
+      manifestName,
       createAbortController(appName)
     )
   }
