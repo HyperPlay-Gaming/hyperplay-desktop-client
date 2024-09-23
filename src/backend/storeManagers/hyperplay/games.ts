@@ -1429,16 +1429,36 @@ export async function update(
     return { status: 'error' }
   }
 
-  //install the new version
-  const installResult = await install(appName, {
-    path: gameInfo.install.install_path,
-    platformToInstall: gameInfo.install.platform,
-    channelName: gameInfo.install.channelName,
-    accessCode: args?.accessCode,
-    updateOnly: true,
-    siweValues: args?.siweValues
-  })
-  return installResult
+  // try patching first, if it fails, download the new version
+  try {
+    const {
+      channels,
+      install: { channelName, platform }
+    } = gameInfo
+
+    if (!channelName || !platform || !channels) {
+      logError(
+        `Channel name or platform not found for ${appName} in update`,
+        LogPrefix.HyperPlay
+      )
+      throw new Error('Channel name or platform not found')
+    }
+
+    const newVersion = channels[channelName].release_meta.name
+    await applyPatching(appName, newVersion)
+    return { status: 'done' }
+  } catch (error) {
+    //install the new version
+    const installResult = await install(appName, {
+      path: gameInfo.install.install_path,
+      platformToInstall: gameInfo.install.platform,
+      channelName: gameInfo.install.channelName,
+      accessCode: args?.accessCode,
+      updateOnly: true,
+      siweValues: args?.siweValues
+    })
+    return installResult
+  }
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
