@@ -53,14 +53,6 @@ const preloads = [
   'src/backend/auth_provider_preload.ts'
 ]
 
-// only set alias if the extension-provider optional package was added
-try {
-  statSync(join(__dirname, 'node_modules', '@hyperplay', 'extension-provider'))
-  preloads.push(
-    'node_modules/@hyperplay/extension-provider/src/extensionPreload.ts'
-  )
-} catch (err) {}
-
 export default defineConfig(({ mode }) => ({
   main: {
     build: {
