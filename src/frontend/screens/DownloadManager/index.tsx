@@ -44,7 +44,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     return () => {
       removeHandleDMQueueInformation()
     }
-  }, [])
+  }, [finishedElem])
 
   useEffect(() => {
     window.api.getDMQueueInformation().then(({ finished }: DMQueue) => {
@@ -75,8 +75,6 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     t('download-manager.install-type.install', 'Install')
     t('download-manager.install-type.update', 'Update')
     */
-
-  const showProgress = state === 'running' && appName && currentElement
 
   return (
     <>
@@ -113,9 +111,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
                 />
               </div>
             </div>
-            {showProgress ? (
-              <ProgressHeader state={state} appName={appName} />
-            ) : null}
+            <ProgressHeader state={state} appName={appName} />
           </Tabs.Panel>
 
           <Tabs.Panel value="queued">
