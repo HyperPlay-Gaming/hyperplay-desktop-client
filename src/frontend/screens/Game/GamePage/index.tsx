@@ -28,6 +28,7 @@ import {
   AppPlatforms,
   ExtraInfo,
   GameInfo,
+  GamePageActions,
   HyperPlayInstallInfo,
   InstallProgress,
   Runner,
@@ -73,7 +74,7 @@ type locationState = {
   fromDM?: boolean
   gameInfo: GameInfo
   fromQuests?: boolean
-  action: 'launch' | 'install'
+  action: GamePageActions
 }
 
 export default observer(function GamePage(): JSX.Element | null {
