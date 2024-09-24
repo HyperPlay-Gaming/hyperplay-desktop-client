@@ -944,6 +944,10 @@
         "wine-download": {
             "message": "Nastavení výchozí kompatibilizační vrstvy",
             "title": "Kompatibilita Vrstva"
+        },
+        "wine-download-failed": {
+            "message": "Vypnuto nastavení výchozí kompatibilizační vrstvy",
+            "title": "Chyba"
         }
     },
     "quest": {
@@ -990,7 +994,9 @@
             "title": "Potvrďte výzvu k odměně",
             "confirm": "Potvrdit",
             "cancel": "Zrušit"
-        }
+        },
+        "noG7ConnectionClaim": "Musíte mít účet Game7 napojený na {{email}} pro uplatnění vašich odměn.",
+        "noG7ConnectionSync": "Musíte mít účet Game7 spojenou s {{email}} pro resyncování vašich úkolů."
     },
     "quests": {
         "playstreak": {

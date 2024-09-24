@@ -975,6 +975,10 @@
         "wine-download": {
             "title": "Camada de compatibilidade",
             "message": "Configurando a camada de compatibilidade padrão"
+        },
+        "wine-download-failed": {
+            "message": "Falhado para configurar a camada de compatibilidade padrão",
+            "title": "Erro"
         }
     },
     "importGameErrorTitle": "Erro ao importar o jogo",
@@ -1026,7 +1030,9 @@
             "title": "Confirme Quest Reward Claim",
             "cancel": "Cancelar",
             "confirm": "Confirmar"
-        }
+        },
+        "noG7ConnectionClaim": "Você precisa ter uma conta Game7 ligada a {{email}} para reivindicar suas recompensas.",
+        "noG7ConnectionSync": "Você precisa ter uma conta Game7 vinculada a {{email}} para resync suas tarefas."
     },
     "profile": "Perfil",
     "Please connect to the internet to access the stores": "Por favor se conecte à internet para acessar as lojas",

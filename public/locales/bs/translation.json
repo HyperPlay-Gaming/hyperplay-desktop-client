@@ -947,7 +947,9 @@
             "title": "#Potvrditi #Potraga #Nagrada",
             "confirm": "Potvrdi",
             "cancel": "Odustanite"
-        }
+        },
+        "noG7ConnectionClaim": "#Free #nužda #na #ima @a Game7 #račun #povezati #na [@X43@X] #na @claim #tvoj #nagrada#.",
+        "noG7ConnectionSync": "#Free #nužda #na #ima @a Game7 #račun #povezati #na [@X43@X] #na resync #tvoj #zadatak#."
     },
     "profile": "Profile",
     "back_to_game": "@Back #na #igra",
@@ -998,6 +1000,10 @@
         "wine-download": {
             "message": "@Setting up @the default #kompatibilnost #red",
             "title": "#Kompatibilnost"
+        },
+        "wine-download-failed": {
+            "message": "#Zakazati #na setup @the default #kompatibilnost #red",
+            "title": "Greška"
         }
     },
     "quests": {

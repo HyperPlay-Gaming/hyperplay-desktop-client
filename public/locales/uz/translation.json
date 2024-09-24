@@ -748,6 +748,9 @@
     "notification": {
         "wine-download": {
             "title": "Vino menejeri"
+        },
+        "wine-download-failed": {
+            "title": "Xato"
         }
     },
     "accounts": "Account",

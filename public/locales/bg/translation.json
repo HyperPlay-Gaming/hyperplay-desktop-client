@@ -762,5 +762,10 @@
     "profile": "Профил",
     "import-game-folder": {
         "placeholder": "Изберете папка с игри за внасяне"
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Грешка"
+        }
     }
 }
