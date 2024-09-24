@@ -69,6 +69,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           setSelectedQuestId={setSelectedQuestId}
         />
         <QuestDetailsWrapper
+          tOverride={t}
           sessionEmail={sessionEmail}
           className={styles.detailsWrapper}
           checkG7ConnectionStatus={window.api.checkG7ConnectionStatus}
