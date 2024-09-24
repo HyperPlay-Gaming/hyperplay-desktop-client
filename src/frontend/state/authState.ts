@@ -9,7 +9,7 @@ class AuthState {
   authToken = ''
 
   constructor() {
-    makeAutoObservable(this)
+    makeAutoObservable(this, {}, { autoBind: true })
     this.signInModalOpen = onboardingStore.get(
       'openAuthModalIfAppReloads',
       false
