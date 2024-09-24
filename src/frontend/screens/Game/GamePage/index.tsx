@@ -73,6 +73,7 @@ type locationState = {
   fromDM?: boolean
   gameInfo: GameInfo
   fromQuests?: boolean
+  action: 'launch' | 'install'
 }
 
 export default observer(function GamePage(): JSX.Element | null {
@@ -83,7 +84,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
 
-  const { gameInfo: locationGameInfo } = location.state
+  const { gameInfo: locationGameInfo, action } = location.state
 
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
@@ -152,6 +153,17 @@ export default observer(function GamePage(): JSX.Element | null {
     gameInstallInfo?.manifest?.disk_size || 0,
     gameInstallInfo?.manifest?.download_size || 0
   )
+
+  useEffect(() => {
+    if (!action) return
+    if (action === 'install') {
+      return setShowModal({ game: appName, show: true })
+    }
+    if (action === 'launch') {
+      if (gameInfo.is_installed) handlePlay()()
+      else return setShowModal({ game: appName, show: true })
+    }
+  }, [action])
 
   // Track the screen view once each time the appName, gameInfo or runner changes
   useEffect(() => {
