@@ -1,6 +1,6 @@
 import './index.scss'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
 import {
   BackArrowOutlinedCircled,
@@ -144,6 +144,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
   const isOffline = connectivity.status !== 'online'
+  const isBrowserGame = Boolean(gameInfo.browserUrl)
 
   const backRoute = getBackRoute(location.state)
 
@@ -155,14 +156,20 @@ export default observer(function GamePage(): JSX.Element | null {
     gameInstallInfo?.manifest?.download_size || 0
   )
 
+  const hasRun = useRef(false)
   useEffect(() => {
-    if (!action) return
+    if (!action || hasRun.current) return
+    hasRun.current = true
+
     if (action === 'install') {
       return setShowModal({ game: appName, show: true })
     }
     if (action === 'launch') {
-      if (gameInfo.is_installed) handlePlay()()
-      else return setShowModal({ game: appName, show: true })
+      if (isBrowserGame || gameInfo.is_installed) {
+        handlePlay()()
+      } else {
+        return setShowModal({ game: appName, show: true })
+      }
     }
   }, [action])
 
@@ -343,7 +350,6 @@ export default observer(function GamePage(): JSX.Element | null {
     const isLinux = ['linux', 'linux_amd64', 'linux_arm64']
     const isMacNative = isMac.includes(installPlatform ?? '')
     const isLinuxNative = isLinux.includes(installPlatform ?? '')
-    const isBrowserGame = gameInfo.browserUrl
     const isNative = isWin || isMacNative || isLinuxNative || isBrowserGame
     const isHyperPlayGame = runner === 'hyperplay'
 
@@ -964,6 +970,7 @@ export default observer(function GamePage(): JSX.Element | null {
     })
   }
 })
+
 function getCurrentProgress(
   progress: InstallProgress,
   percent: number | undefined,
