@@ -903,8 +903,8 @@ ipcMain.handle('appIsInLibrary', async (event, appName, runner) => {
   return HyperPlayGameManager.appIsInLibrary(appName)
 })
 
-ipcMain.on('goToGamePage', async (event, appName) => {
-  return sendFrontendMessage('goToGamePage', appName)
+ipcMain.on('goToGamePage', async (event, args) => {
+  return sendFrontendMessage('goToGamePage', args)
 })
 
 ipcMain.on('navigate', async (event, appName) => {
