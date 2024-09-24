@@ -59,7 +59,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
    */
 
   return (
-    <>
+    <div className={styles.container}>
       {alertComponent}
       <div className={styles.questsViewerContainer}>
         <QuestLogWrapper
@@ -111,6 +111,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           key={'questDetailsLoading'}
         />
       </div>
-    </>
+    </div>
   )
 }
