@@ -89,7 +89,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           getExternalTaskCredits={window.api.getExternalTaskCredits}
           syncPlaySession={window.api.syncPlaySession}
           getDepositContracts={window.api.getDepositContracts}
-          openSignInModal={authState.openSignInModal}
+          openSignInModal={() => authState.openSignInModal()}
           resyncExternalTask={async (rewardId: string) => {
             window.api.resyncExternalTask(rewardId)
           }}
