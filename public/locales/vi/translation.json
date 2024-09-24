@@ -795,5 +795,10 @@
                 "placeholder": "Chọn một tệp tin"
             }
         }
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Lỗi"
+        }
     }
 }

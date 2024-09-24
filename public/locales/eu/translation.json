@@ -753,5 +753,10 @@
     },
     "import-game-folder": {
         "placeholder": "Aukeratu inportatzeko joko karpeta"
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Errorea"
+        }
     }
 }
