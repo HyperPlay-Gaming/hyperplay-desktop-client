@@ -144,7 +144,8 @@ export default observer(function GamePage(): JSX.Element | null {
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
   const isOffline = connectivity.status !== 'online'
-    const isBrowserGame =
+  const installPlatform = gameInfo.install?.platform
+  const isBrowserGame =
     installPlatform === 'Browser' || installPlatform === 'web'
 
   const backRoute = getBackRoute(location.state)
