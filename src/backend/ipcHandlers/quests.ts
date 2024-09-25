@@ -99,3 +99,12 @@ ipcMain.handle('getPointsBalancesForProject', async (e, projectId) => {
 ipcMain.handle('checkG7ConnectionStatus', async () => {
   return checkG7ConnectionStatus()
 })
+
+ipcMain.handle('syncPlayStreakWithExternalSource', async (e, params) => {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/playStreak/sync`
+  return fetchWithCookie({
+    url,
+    method: 'POST',
+    body: JSON.stringify(params)
+  })
+})

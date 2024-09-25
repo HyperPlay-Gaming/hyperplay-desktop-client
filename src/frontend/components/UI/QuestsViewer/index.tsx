@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
 import styles from './index.module.scss'
 import { QuestLogWrapper } from './components/QuestLogWrapper'
 import { Alert } from '@hyperplay/ui'
@@ -25,6 +26,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const initialQuestId = quests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
   const sessionEmail = data?.linkedAccounts.get('email')
+
+  console.log('flags', { ...flags })
 
   /**
    Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -58,6 +61,38 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     t('quest.claimWarning.confirm', 'Confirm')
    */
 
+  const syncPlayStreakMutation = useMutation({
+    mutationFn: async ({
+      questId,
+      signature
+    }: {
+      questId: number
+      signature: string
+    }) => {
+      return window.api.syncPlayStreakWithExternalSource({
+        quest_id: questId,
+        signature
+      })
+    },
+    onSuccess: () => {
+      console.log('Playstreak synced with external source')
+      window.api.logInfo('Playstreak synced with external source')
+    },
+    onError: (error) => {
+      console.error(`Error syncing playstreak with external source`, error)
+      window.api.logError(
+        `Error syncing playstreak with external source: ${error.message}`
+      )
+    }
+  })
+
+  const syncPlayStreakWithExternalSource = async (
+    questId: number,
+    signature: string
+  ) => {
+    syncPlayStreakMutation.mutate({ questId, signature })
+  }
+
   return (
     <div className={styles.container}>
       {alertComponent}
@@ -70,6 +105,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         />
         <QuestDetailsWrapper
           tOverride={t}
+          showSecondCTA={true}
+          i18n={{
+            secondCTAText: 'Sync'
+          }}
           sessionEmail={sessionEmail}
           className={styles.detailsWrapper}
           checkG7ConnectionStatus={window.api.checkG7ConnectionStatus}

@@ -54,6 +54,11 @@ export const completeExternalTask = async (rewardId: string) =>
 export const resyncExternalTask = async (rewardId: string) =>
   ipcRenderer.invoke('resyncExternalTask', rewardId)
 
+export const syncPlayStreakWithExternalSource = async (params: {
+  quest_id: number
+  signature: string
+}) => ipcRenderer.invoke('syncPlayStreakWithExternalSource', params)
+
 export const getG7Credits = async () => ipcRenderer.invoke('getG7Credits')
 
 export const getExternalTaskCredits = async (rewardId: string) =>

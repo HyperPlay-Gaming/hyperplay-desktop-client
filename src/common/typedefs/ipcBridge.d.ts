@@ -300,6 +300,10 @@ interface HyperPlayAsyncIPCFunctions {
   syncPlaySession: (appName: string, runner: Runner) => Promise<void>
   getEpicListingUrl: (appName: string) => Promise<string>
   importGameFolder: (gameFolder: string) => Promise<string>
+  syncPlayStreakWithExternalSource: (params: {
+    quest_id: number
+    signature: string
+  }) => Promise<GenericApiResponse>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
