@@ -993,5 +993,3 @@ export interface PointsCollection {
   symbol: string
   image: string
 }
-
-export type GamePageActions = 'install' | 'launch' | 'uninstall'

@@ -131,7 +131,7 @@ function WebView() {
     }
 
     const removeHandleGoToGamePage = window.api.handleGoToGamePage(
-      async (_, { gameId, action }) => {
+      async (_, gameId, action) => {
         const gameInfo = await getGameInfo(gameId, 'hyperplay')
         navigate(`/gamepage/hyperplay/${gameId}`, {
           state: { gameInfo, fromDM: false, action }

@@ -5,9 +5,9 @@ import {
   LaunchParams,
   ImportGameArgs,
   GameStatus,
-  GameInfo,
-  GamePageActions
+  GameInfo
 } from 'common/types'
+import { GamePageActions } from '@hyperplay/utils'
 
 export const openDialog = async (args: Electron.OpenDialogOptions) =>
   ipcRenderer.invoke('openDialog', args)
@@ -61,7 +61,8 @@ export const handleGameStatus = (
 export const handleGoToGamePage = (
   onChange: (
     e: Electron.IpcRendererEvent,
-    args: { gameId: string; action: GamePageActions }
+    gameId: string,
+    action: GamePageActions
   ) => void
 ) => {
   ipcRenderer.on('goToGamePage', onChange)

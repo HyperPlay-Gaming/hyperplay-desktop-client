@@ -8,8 +8,7 @@ import {
   PointsClaimReturn,
   GenericApiResponse,
   Quest,
-  ConfirmClaimParams,
-  GamePageActions
+  ConfirmClaimParams
 } from './../types'
 import { EventEmitter } from 'node:events'
 import { IpcMainEvent, OpenDialogOptions } from 'electron'
@@ -96,7 +95,7 @@ interface HyperPlaySyncIPCFunctions {
   killOverlay: () => void
   toggleOverlay: () => void
   authConnected: () => void
-  goToGamePage: (args: { gameId: string; action: GamePageActions }) => void
+  goToGamePage: (gameId: string, action: GamePageActions) => void
   authDisconnected: () => void
   otp: (otp: string) => void
   navigate: (route: string) => void

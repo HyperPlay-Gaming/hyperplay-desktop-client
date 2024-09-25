@@ -28,7 +28,6 @@ import {
   AppPlatforms,
   ExtraInfo,
   GameInfo,
-  GamePageActions,
   HyperPlayInstallInfo,
   InstallProgress,
   Runner,
@@ -69,6 +68,7 @@ import libraryState from 'frontend/state/libraryState'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { useEstimatedUncompressedSize } from 'frontend/hooks/useEstimatedUncompressedSize'
 import authState from 'frontend/state/authState'
+import { GamePageActions } from '@hyperplay/utils'
 
 type locationState = {
   fromDM?: boolean
