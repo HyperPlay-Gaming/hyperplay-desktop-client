@@ -26,6 +26,7 @@ import libraryState from 'frontend/state/libraryState'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Images } from '@hyperplay/ui'
 import styles from './index.module.scss'
+import { GamePageActions } from '@hyperplay/utils'
 const { PauseIcon, PlayIcon, XCircle, DownloadIcon } = Images
 
 type Props = {
@@ -127,7 +128,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const canceled = status === 'error' || (status === 'abort' && !current)
   const isExtracting = gameProgressStatus === 'extracting'
 
-  const goToGamePage = (action?: 'launch' | 'install') => {
+  const goToGamePage = (action?: GamePageActions) => {
     if (is_dlc) {
       return
     }
