@@ -3,9 +3,12 @@ import { useTranslation } from 'react-i18next'
 import { DMQueueElement, DownloadManagerState } from 'common/types'
 import ProgressHeader from './components/ProgressHeader'
 import { DMQueue } from 'frontend/types'
-import { Background, Tabs, getTabsClassNames } from '@hyperplay/ui'
+import { Background, Button, Tabs, getTabsClassNames } from '@hyperplay/ui'
 import styles from './index.module.scss'
 import { DownloadTable } from './components/DownloadTable'
+import { downloadManagerStore } from 'frontend/helpers/electronStores'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
 
 export default React.memo(function DownloadManager(): JSX.Element | null {
   const { t } = useTranslation()
@@ -61,6 +64,11 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
       })) ||
     []
 
+  const handleClearList = () => {
+    setFinishedElem([])
+    downloadManagerStore.set('finished', [])
+  }
+
   /*
     Other Keys:
     t('queue.label.empty', 'Nothing to download')
@@ -71,7 +79,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
   return (
     <>
       <Background style={{ position: 'absolute' }}></Background>
-      <div className="contentContainer">
+      <div className={'contentContainer'}>
         <h3 className={styles.title}>
           {t('download-manager.title_dm', 'Download Manager')}
         </h3>
@@ -82,6 +90,15 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
             { list: 'outline' }
           )}
         >
+          <Button
+            className={styles.clearButton}
+            onClick={() => handleClearList()}
+            type="tertiary"
+            leftIcon={<FontAwesomeIcon icon={faTrash} />}
+            size="small"
+          >
+            {t('queue.label.clear', 'Clear List')}
+          </Button>
           <Tabs.List>
             <Tabs.Tab value="downloading">Downloading</Tabs.Tab>
             <Tabs.Tab value="queued">Queued</Tabs.Tab>
