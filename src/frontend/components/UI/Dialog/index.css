@@ -79,4 +79,5 @@
   display: flex;
   gap: 16px;
   justify-content: start;
+  margin-top: var(--space-md);
 }
