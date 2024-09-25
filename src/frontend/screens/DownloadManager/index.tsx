@@ -16,6 +16,7 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
   const [queuedElements, setQueuedElements] = useState<DMQueueElement[]>([])
   const [currentElement, setCurrentElement] = useState<DMQueueElement>()
   const [finishedElem, setFinishedElem] = useState<DMQueueElement[]>()
+  const [activeTab, setActiveTab] = useState<string | null>('downloading')
 
   const appName = currentElement?.params?.appName ?? ''
 
@@ -69,6 +70,8 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
     downloadManagerStore.set('finished', [])
   }
 
+  const showClearListButton = activeTab === 'downloaded'
+
   /*
     Other Keys:
     t('queue.label.empty', 'Nothing to download')
@@ -84,21 +87,24 @@ export default React.memo(function DownloadManager(): JSX.Element | null {
           {t('download-manager.title_dm', 'Download Manager')}
         </h3>
         <Tabs
-          defaultValue="downloading"
+          value={activeTab}
+          onChange={setActiveTab}
           classNames={getTabsClassNames(
             { list: styles.tabsList, panel: styles.tabsPanel },
             { list: 'outline' }
           )}
         >
-          <Button
-            className={styles.clearButton}
-            onClick={() => handleClearList()}
-            type="tertiary"
-            leftIcon={<FontAwesomeIcon icon={faTrash} />}
-            size="small"
-          >
-            {t('queue.label.clear', 'Clear List')}
-          </Button>
+          {showClearListButton ? (
+            <Button
+              className={styles.clearButton}
+              onClick={() => handleClearList()}
+              type="tertiary"
+              leftIcon={<FontAwesomeIcon icon={faTrash} />}
+              size="small"
+            >
+              {t('queue.label.clear', 'Clear List')}
+            </Button>
+          ) : null}
           <Tabs.List>
             <Tabs.Tab value="downloading">Downloading</Tabs.Tab>
             <Tabs.Tab value="queued">Queued</Tabs.Tab>
