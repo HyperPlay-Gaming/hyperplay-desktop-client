@@ -16,9 +16,11 @@ export interface QuestsViewerProps {
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
-  const { isSignedIn } = useAuthSession()
+  const { isSignedIn, data } = useAuthSession()
   const { t } = useTranslation()
   const flags = useFlags()
+
+  const sessionEmail = data?.linkedAccounts.get('email')
 
   let alertComponent = null
   if (!isSignedIn) {
@@ -34,6 +36,16 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     )
   }
 
+  /**
+   Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
+   As a heads up, everytime you add a new key on any library, you need to add it as a block comment anywhere in the code as well.
+   
+   t("quest.claimWarning.body", "<bold>IMPORTANT:</bold> Please ensure that you are allocating enough gas on the {{networkName}} network for the transaction to be successfully confirmed <bold>within 7 days.</bold>")
+    t("quest.claimWarning.body2", "Otherwise, the Quest Reward <bold>will expire and will no longer be claimable.</bold>")
+    t('quest.claimWarning.cancel', 'Cancel')
+    t('quest.claimWarning.confirm', 'Confirm')
+   */
+
   return (
     <div className={styles.root}>
       {alertComponent}
@@ -44,6 +56,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           setSelectedQuestId={setSelectedQuestId}
         />
         <QuestDetailsWrapper
+          sessionEmail={sessionEmail}
+          checkG7ConnectionStatus={window.api.checkG7ConnectionStatus}
           logInfo={window.api.logInfo}
           logError={window.api.logError}
           projectId={appName}

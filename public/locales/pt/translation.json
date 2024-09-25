@@ -1013,12 +1013,18 @@
             "body2": "Caso contrário, a Recompensa de Busca <bold> expirará e não será mais reivindicada.</bold>",
             "cancel": "Cancelar",
             "confirm": "Confirmar"
-        }
+        },
+        "noG7ConnectionClaim": "Você precisa ter uma conta Game7 ligada a {{email}} para reivindicar suas recompensas.",
+        "noG7ConnectionSync": "Você precisa ter uma conta Game7 vinculada a {{email}} para resync suas tarefas."
     },
     "notification": {
         "wine-download": {
             "title": "Compatibility Layer",
             "message": "Configurando a camada de compatibilidade padrão"
+        },
+        "wine-download-failed": {
+            "message": "Falhado para configurar a camada de compatibilidade padrão",
+            "title": "Erro"
         }
     },
     "quests": {

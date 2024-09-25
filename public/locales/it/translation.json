@@ -957,7 +957,9 @@
             "title": "Confermare la richiesta di rimborso",
             "cancel": "Annulla",
             "confirm": "Conferma"
-        }
+        },
+        "noG7ConnectionClaim": "Devi avere un account Game7 collegato a {{email}} per rivendicare le tue ricompense.",
+        "noG7ConnectionSync": "È necessario disporre di un account Game7 collegato a {{email}} per risincronare le attività."
     },
     "quests": {
         "quests": "Missioni",
@@ -1020,6 +1022,10 @@
         "wine-download": {
             "title": "Compatibility Layer",
             "message": "Impostazione dello strato di compatibilità predefinito"
+        },
+        "wine-download-failed": {
+            "title": "Errore",
+            "message": "Non riuscita a configurare lo strato di compatibilità predefinito"
         }
     },
     "sideload": {
