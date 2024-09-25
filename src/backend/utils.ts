@@ -1247,7 +1247,7 @@ const platformMap: Record<string, PlatformName> = {
 }
 
 export function getPlatformName(platform: string): PlatformName {
-  return platformMap[platform] || 'Unknown'
+  return platformMap[platform] || platform || 'Unknown'
 }
 
 export function getExecutableAndArgs(executableWithArgs: string): {
