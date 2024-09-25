@@ -8,7 +8,11 @@ self.addEventListener('activate', () => {
     console.log('Service Worker activated.');
   
     // Import the logger script
-    importScripts('logger.js');
+    importScripts('./logger.js');
 });
 
-chrome.tabs.create({ url: "https://hyperplay.xyz", windowId: 3 })
+// chrome.tabs.create({ url: "https://hyperplay.xyz", windowId: 3 })
+
+chrome.runtime.onConnect.addListener((port)=> {
+    console.log('chrome runtime connect called with port ', port)
+})
