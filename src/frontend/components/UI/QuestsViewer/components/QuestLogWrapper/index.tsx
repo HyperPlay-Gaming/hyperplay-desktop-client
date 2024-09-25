@@ -5,25 +5,26 @@ import {
   QuestLogInfo,
   QuestLogTranslations
 } from '@hyperplay/ui'
-import useGetQuests from 'frontend/hooks/useGetQuests'
 import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
 import { Quest } from 'common/types'
 import useGetG7UserCredits from 'frontend/hooks/useGetG7UserCredits'
 import useGetPointsBalancesForProject from 'frontend/hooks/useGetPointsBalances'
+import useGetQuests from 'frontend/hooks/useGetQuests'
 
 export interface QuestLogWrapperProps {
+  questsResults: ReturnType<typeof useGetQuests>
   projectId: string
   selectedQuestId: number | null
   setSelectedQuestId: (id: number | null) => void
 }
 
 export function QuestLogWrapper({
+  questsResults,
   projectId: appName,
   selectedQuestId,
   setSelectedQuestId
 }: QuestLogWrapperProps) {
-  const questsResults = useGetQuests(appName)
   const quests = questsResults?.data?.data
   const userCredits = useGetG7UserCredits()
   const userCreditsBalance = userCredits?.data?.data
@@ -74,12 +75,6 @@ export function QuestLogWrapper({
         title: val.name,
         state: 'ACTIVE',
         onClick: () => {
-          // deselect
-          if (selectedQuestId === val.id) {
-            setSelectedQuestId(null)
-            return
-          }
-          //select
           setSelectedQuestId(val.id)
         },
         selected: selectedQuestId === val.id,

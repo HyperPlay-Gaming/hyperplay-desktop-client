@@ -1,14 +1,4 @@
 .mmContainer {
-  position: fixed;
-  top: 0px;
-  right: 0px;
-  left: 0px;
-  bottom: 0px;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  z-index: 100000;
-  top: var(--top-navbar-height);
   background-color: transparent;
   border: none;
   outline: none;
