@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import extensionState from 'frontend/state/ExtensionState'
 import ExtensionContentsStyles from './index.module.scss'
 
+const trueAsStr = 'false' as unknown as boolean | undefined
+
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
 /* eslint-disable react/no-unknown-property */
@@ -22,8 +24,31 @@ const animation = {
   transition: { duration: 0.2 }
 }
 
+export function ExtensionPopup() {
+  return (
+    <webview
+      nodeintegrationinsubframes="true"
+      webpreferences="contextIsolation=true, nodeIntegration=true"
+      src={`chrome-extension://${extensionState.extensionId}/popup.html`}
+      className={ExtensionContentsStyles.mmWindow}
+      allowpopups={trueAsStr}
+    ></webview>
+  )
+}
+
+export function ExtensionNotification() {
+  return (
+    <webview
+      nodeintegrationinsubframes="true"
+      webpreferences="contextIsolation=true, nodeIntegration=true"
+      src={`chrome-extension://${extensionState.extensionId}/notification.html`}
+      className={ExtensionContentsStyles.mmWindow}
+      allowpopups={trueAsStr}
+    ></webview>
+  )
+}
+
 export default function ExtensionContents() {
-  const trueAsStr = 'false' as unknown as boolean | undefined
   return (
     <AnimatePresence>
       {extensionState.isPopupOpen ? (
@@ -31,13 +56,7 @@ export default function ExtensionContents() {
           {...animation}
           className={ExtensionContentsStyles.mmWindowContainer}
         >
-          <webview
-            nodeintegrationinsubframes="true"
-            webpreferences="contextIsolation=true, nodeIntegration=true"
-            src={`chrome-extension://${extensionState.extensionId}/popup.html`}
-            className={ExtensionContentsStyles.mmWindow}
-            allowpopups={trueAsStr}
-          ></webview>
+          <ExtensionPopup />
         </motion.div>
       ) : null}
       {extensionState.isNotificationOpen ? (
@@ -45,13 +64,7 @@ export default function ExtensionContents() {
           {...animation}
           className={ExtensionContentsStyles.mmWindowContainer}
         >
-          <webview
-            nodeintegrationinsubframes="true"
-            webpreferences="contextIsolation=true, nodeIntegration=true"
-            src={`chrome-extension://${extensionState.extensionId}/notification.html`}
-            className={ExtensionContentsStyles.mmWindow}
-            allowpopups={trueAsStr}
-          ></webview>
+          <ExtensionNotification />
         </motion.div>
       ) : null}
     </AnimatePresence>
