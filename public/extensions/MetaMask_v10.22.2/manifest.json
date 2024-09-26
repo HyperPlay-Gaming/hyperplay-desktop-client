@@ -50,10 +50,23 @@
       "js": [
         "vendor/trezor/content-script.js"
       ]
+    },
+    {
+      "matches": [
+        "file://*/*",
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "scripts/inpage.js"
+      ],
+      "run_at": "document_start",
+      "world": "MAIN",
+      "all_frames": true
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: 60e3a595",
+  "description": "other build from git id: 88a002d1",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
