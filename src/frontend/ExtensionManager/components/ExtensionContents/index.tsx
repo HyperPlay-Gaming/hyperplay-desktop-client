@@ -5,8 +5,6 @@ import ExtensionContentsStyles from './index.module.scss'
 
 const trueAsStr = 'false' as unknown as boolean | undefined
 
-type ExtensionState = 'popup' | 'notification'
-
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
 /* eslint-disable react/no-unknown-property */
@@ -26,7 +24,8 @@ const animation = {
   transition: { duration: 0.2 }
 }
 
-export function ExtensionPopup({ state }: { state: ExtensionState }) {
+export const ExtensionContents = observer(() => {
+  const state = extensionState.isPopupOpen ? 'popup' : 'notification'
   return (
     <webview
       nodeintegrationinsubframes="true"
@@ -36,30 +35,19 @@ export function ExtensionPopup({ state }: { state: ExtensionState }) {
       allowpopups={trueAsStr}
     ></webview>
   )
-}
-
-export const ExtensionContents = observer(() => {
-  const state = extensionState.isPopupOpen ? 'popup' : 'notification'
-  return <ExtensionPopup state={state} />
 })
 
 export const FloatingExtensionContents = observer(() => {
+  const shouldShow =
+    extensionState.isPopupOpen || extensionState.isNotificationOpen
   return (
     <AnimatePresence>
-      {extensionState.isPopupOpen ? (
+      {shouldShow ? (
         <motion.div
           {...animation}
           className={ExtensionContentsStyles.mmWindowContainer}
         >
-          <ExtensionPopup state="popup" />
-        </motion.div>
-      ) : null}
-      {extensionState.isNotificationOpen ? (
-        <motion.div
-          {...animation}
-          className={ExtensionContentsStyles.mmWindowContainer}
-        >
-          <ExtensionPopup state="notification" />
+          <ExtensionContents />
         </motion.div>
       ) : null}
     </AnimatePresence>
