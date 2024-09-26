@@ -40,7 +40,7 @@
         "scripts/lockdown-more.js",
         "scripts/contentscript.js"
       ],
-      "run_at": "document_idle",
+      "run_at": "document_start",
       "all_frames": true
     },
     {
@@ -53,7 +53,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: 9ebb30c8",
+  "description": "other build from git id: 60e3a595",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
@@ -75,7 +75,6 @@
   "permissions": [
     "activeTab",
     "alarms",
-    "notifications",
     "scripting",
     "storage",
     "unlimitedStorage",
