@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite'
 import { motion, AnimatePresence } from 'framer-motion'
 import extensionState from 'frontend/state/ExtensionState'
 import ExtensionContentsStyles from './index.module.scss'
@@ -37,12 +38,12 @@ export function ExtensionPopup({ state }: { state: ExtensionState }) {
   )
 }
 
-export function ExtensionContents() {
+export const ExtensionContents = observer(() => {
   const state = extensionState.isPopupOpen ? 'popup' : 'notification'
   return <ExtensionPopup state={state} />
-}
+})
 
-export function FloatingExtensionContents() {
+export const FloatingExtensionContents = observer(() => {
   return (
     <AnimatePresence>
       {extensionState.isPopupOpen ? (
@@ -63,4 +64,4 @@ export function FloatingExtensionContents() {
       ) : null}
     </AnimatePresence>
   )
-}
+})
