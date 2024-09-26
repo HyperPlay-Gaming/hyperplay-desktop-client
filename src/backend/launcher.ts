@@ -872,7 +872,7 @@ async function callRunner(
 
     childPid = child.pid
 
-    if (gameInfo && shouldOpenOverlay) {
+    if ((gameInfo && shouldOpenOverlay) || gameInfo?.app_name === 'Fortnite') {
       if (hyperPlayListing?.project_id) {
         hpOverlay?.openOverlay(hyperPlayListing?.project_id, gameInfo.runner)
       } else {
