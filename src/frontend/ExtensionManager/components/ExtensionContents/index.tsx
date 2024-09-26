@@ -1,4 +1,4 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite'
 import { motion, AnimatePresence } from 'framer-motion'
 import extensionState from 'frontend/state/ExtensionState'
 import ExtensionContentsStyles from './index.module.scss'
@@ -24,49 +24,32 @@ const animation = {
   transition: { duration: 0.2 }
 }
 
-export function ExtensionPopup() {
+export const ExtensionContents = observer(() => {
+  const state = extensionState.isPopupOpen ? 'popup' : 'notification'
   return (
     <webview
       nodeintegrationinsubframes="true"
       webpreferences="contextIsolation=true, nodeIntegration=true"
-      src={`chrome-extension://${extensionState.extensionId}/popup.html`}
+      src={`chrome-extension://${extensionState.extensionId}/${state}.html`}
       className={ExtensionContentsStyles.mmWindow}
       allowpopups={trueAsStr}
     ></webview>
   )
-}
+})
 
-export function ExtensionNotification() {
-  return (
-    <webview
-      nodeintegrationinsubframes="true"
-      webpreferences="contextIsolation=true, nodeIntegration=true"
-      src={`chrome-extension://${extensionState.extensionId}/notification.html`}
-      className={ExtensionContentsStyles.mmWindow}
-      allowpopups={trueAsStr}
-    ></webview>
-  )
-}
-
-export default function ExtensionContents() {
+export const FloatingExtensionContents = observer(() => {
+  const shouldShow =
+    extensionState.isPopupOpen || extensionState.isNotificationOpen
   return (
     <AnimatePresence>
-      {extensionState.isPopupOpen ? (
+      {shouldShow ? (
         <motion.div
           {...animation}
           className={ExtensionContentsStyles.mmWindowContainer}
         >
-          <ExtensionPopup />
-        </motion.div>
-      ) : null}
-      {extensionState.isNotificationOpen ? (
-        <motion.div
-          {...animation}
-          className={ExtensionContentsStyles.mmWindowContainer}
-        >
-          <ExtensionNotification />
+          <ExtensionContents />
         </motion.div>
       ) : null}
     </AnimatePresence>
   )
-}
+})

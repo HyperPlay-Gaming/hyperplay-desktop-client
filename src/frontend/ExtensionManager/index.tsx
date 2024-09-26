@@ -4,8 +4,9 @@ import { observer } from 'mobx-react-lite'
 import extensionState from 'frontend/state/ExtensionState'
 import OverlayState from 'frontend/state/OverlayState'
 import ContextProvider from 'frontend/state/ContextProvider'
-import ExtensionContents, {
-  ExtensionPopup
+import {
+  FloatingExtensionContents,
+  ExtensionContents
 } from './components/ExtensionContents'
 
 const ExtensionManager = function () {
@@ -42,7 +43,7 @@ const ExtensionManager = function () {
   }
 
   if (isOverlay) {
-    return <ExtensionPopup />
+    return <ExtensionContents />
   }
 
   /* eslint-disable react/no-unknown-property */
@@ -52,7 +53,7 @@ const ExtensionManager = function () {
       ref={rootRef}
       style={mmContainerStyle}
     >
-      <ExtensionContents />
+      <FloatingExtensionContents />
     </dialog>
   )
 }

@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.19.3",
+  "version": "0.19.4",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
