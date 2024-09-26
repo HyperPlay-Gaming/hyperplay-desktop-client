@@ -1,4 +1,4 @@
-import { GamePageActions } from '@hyperplay/utils'
+import { GamePageActions } from 'common/types'
 import { contextBridge, ipcRenderer } from 'electron'
 
 contextBridge.exposeInMainWorld('api', {

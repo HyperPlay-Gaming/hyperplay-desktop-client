@@ -6,7 +6,8 @@ import {
   DMQueueElement,
   DownloadManagerState,
   GameInfo,
-  HyperPlayInstallInfo
+  HyperPlayInstallInfo,
+  GamePageActions
 } from 'common/types'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import {
@@ -26,7 +27,6 @@ import libraryState from 'frontend/state/libraryState'
 import { hasStatus } from 'frontend/hooks/hasStatus'
 import { Images } from '@hyperplay/ui'
 import styles from './index.module.scss'
-import { GamePageActions } from '@hyperplay/utils'
 const { PauseIcon, PlayIcon, XCircle, DownloadIcon } = Images
 
 type Props = {
