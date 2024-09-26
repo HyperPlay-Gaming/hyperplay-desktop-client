@@ -79,9 +79,9 @@ index 49e7ae6..16fcc07 100644
 -  "mksnapshot-v32.1.2-win32-arm64-x64.zip": "286fbd00deb8e0c806230633703aeab692848235a2881fa746b6db0a5f425f97",
 -  "mksnapshot-v32.1.2-win32-ia32.zip": "a49e4c843e8f3e49fd8b8f35ab36d75eae56644d725eba3a9c68c2fc2a6aed17",
 -  "mksnapshot-v32.1.2-win32-x64.zip": "aaf24b934dddc724a171a550d18c2236fd660a0ef5b5b72385e4997519caf605"
-+  "electron-v32.1.2-darwin-arm64.zip": "4a38a9b68d3a9d375b081734a2bbc1ae34dddf6b20af4cc2afef0969057fc5d3",
-+  "electron-v32.1.2-darwin-x64.zip": "93a0c93a77ea30be953a08cb840597a3f409b5b2e21b9da75da80a2b301b3fc1",
-+  "electron-v32.1.2-linux-arm64.zip": "7394b314292350cd80983767c22be79efc7be17172322afd90d27e91374271e8",
-+  "electron-v32.1.2-linux-x64.zip": "002dc987170d7404d0b8de6d2b7a0704c9ae914ca1d3f765a00e6e0478bda280",
-+  "electron-v32.1.2-win32-x64.zip": "2b1c1db95b4eca7477536307a7bff9047ea97ee58bbf7fc077331e91a38178a4"
++  "electron-v32.1.2-darwin-arm64.zip": "9bc51f3270bd06cbd57b449f39e79f78423b0835e19143c2fa3fd4167d3784f9",
++  "electron-v32.1.2-darwin-x64.zip": "95759d8339559831fead6181fc0019403dc77651f91eba19de618c03aa705fca",
++  "electron-v32.1.2-linux-arm64.zip": "cf4ee59966cfbb8ae198ba4a9fac0c2750d22ccc07edac854546191d09861853",
++  "electron-v32.1.2-linux-x64.zip": "f10c1ce8e6025b2b47a70cf0225d472103099b7e039b9ec217904c2b1cc42741",
++  "electron-v32.1.2-win32-x64.zip": "90b34adea9e463b63ac8d1c8300d2e5d0f02c4497f2f56e982ebb054fcbaa5ab"
  }
