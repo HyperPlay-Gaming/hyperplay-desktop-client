@@ -1,9 +1,10 @@
-import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import extensionState from 'frontend/state/ExtensionState'
 import ExtensionContentsStyles from './index.module.scss'
 
 const trueAsStr = 'false' as unknown as boolean | undefined
+
+type ExtensionState = 'popup' | 'notification'
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -24,31 +25,24 @@ const animation = {
   transition: { duration: 0.2 }
 }
 
-export function ExtensionPopup() {
+export function ExtensionPopup({ state }: { state: ExtensionState }) {
   return (
     <webview
       nodeintegrationinsubframes="true"
       webpreferences="contextIsolation=true, nodeIntegration=true"
-      src={`chrome-extension://${extensionState.extensionId}/popup.html`}
+      src={`chrome-extension://${extensionState.extensionId}/${state}.html`}
       className={ExtensionContentsStyles.mmWindow}
       allowpopups={trueAsStr}
     ></webview>
   )
 }
 
-export function ExtensionNotification() {
-  return (
-    <webview
-      nodeintegrationinsubframes="true"
-      webpreferences="contextIsolation=true, nodeIntegration=true"
-      src={`chrome-extension://${extensionState.extensionId}/notification.html`}
-      className={ExtensionContentsStyles.mmWindow}
-      allowpopups={trueAsStr}
-    ></webview>
-  )
+export function ExtensionContents() {
+  const state = extensionState.isPopupOpen ? 'popup' : 'notification'
+  return <ExtensionPopup state={state} />
 }
 
-export default function ExtensionContents() {
+export function FloatingExtensionContents() {
   return (
     <AnimatePresence>
       {extensionState.isPopupOpen ? (
@@ -56,7 +50,7 @@ export default function ExtensionContents() {
           {...animation}
           className={ExtensionContentsStyles.mmWindowContainer}
         >
-          <ExtensionPopup />
+          <ExtensionPopup state="popup" />
         </motion.div>
       ) : null}
       {extensionState.isNotificationOpen ? (
@@ -64,7 +58,7 @@ export default function ExtensionContents() {
           {...animation}
           className={ExtensionContentsStyles.mmWindowContainer}
         >
-          <ExtensionNotification />
+          <ExtensionPopup state="notification" />
         </motion.div>
       ) : null}
     </AnimatePresence>
