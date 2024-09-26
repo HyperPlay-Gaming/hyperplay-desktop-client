@@ -196,7 +196,7 @@
     "compare-versions": "^6.1.1",
     "crc": "^4.3.2",
     "discord-rich-presence-typescript": "^0.0.8",
-    "electron": "^32.1.2",
+    "electron": "32.1.2",
     "electron-store": "^8.2.0",
     "electron-updater": "^6.2.1",
     "embla-carousel-autoplay": ">=7.0.0",
@@ -362,7 +362,7 @@
     "vite-plugin-svgr": "^2.2.2"
   },
   "optionalDependencies": {
-    "@hyperplay/extension-importer": "^0.0.4",
+    "@hyperplay/extension-importer": "^0.1.0-alpha",
     "@hyperplay/extension-provider": "^0.0.6",
     "@hyperplay/mock-backend": "^0.0.1",
     "@hyperplay/overlay": "^0.0.6",
