@@ -10,7 +10,7 @@
       "512": "images/icon-512.png"
     },
     "default_title": "MetaMask",
-    "default_popup": "popup.html"
+    "default_popup": "popup-init.html"
   },
   "author": "https://metamask.io",
   "background": {
@@ -66,7 +66,7 @@
     }
   ],
   "default_locale": "en",
-  "description": "other build from git id: 88a002d1",
+  "description": "other build from git id: 8b73be60",
   "host_permissions": [
     "http://localhost:8545/",
     "file://*/*",
@@ -94,9 +94,15 @@
     "webRequest",
     "offscreen"
   ],
+  "sandbox": {
+    "pages": [
+      "snaps/index.html"
+    ]
+  },
   "short_name": "__MSG_appName__",
   "content_security_policy": {
-    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'none'; frame-ancestors 'none';"
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'none'; frame-ancestors 'none';",
+    "sandbox": "sandbox allow-scripts; script-src 'self' 'unsafe-inline' 'unsafe-eval'; object-src 'none'; default-src 'none'; connect-src *;"
   },
   "externally_connectable": {
     "matches": [
@@ -107,5 +113,5 @@
     ]
   },
   "minimum_chrome_version": "89",
-  "version": "12.0.5"
+  "version": "12.3.0"
 }
