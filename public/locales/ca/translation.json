@@ -1031,6 +1031,10 @@
         "wine-download": {
             "title": "Capa de compatibilitat",
             "message": "Configuració de la capa de compatibilitat predeterminada"
+        },
+        "wine-download-failed": {
+            "message": "No està Registrat? Clic aquí per registrar-se ..",
+            "title": "Errors"
         }
     },
     "importGameErrorTitle": "Error de joc d'importació",

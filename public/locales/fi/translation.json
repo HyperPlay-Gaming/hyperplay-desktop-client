@@ -960,6 +960,10 @@
         "wine-download": {
             "title": "Compatibility Layer i",
             "message": "Oletusarvoisen yhteensopivuuden määrittäminen"
+        },
+        "wine-download-failed": {
+            "message": "Epäonnistuneen yhteensopivuuden määrittäminen",
+            "title": "Virhe"
         }
     },
     "analytics": "Analytiikat",

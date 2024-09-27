@@ -702,6 +702,9 @@
     "notification": {
         "wine-download": {
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "title": "Pogreška"
         }
     },
     "hyperplay": {
