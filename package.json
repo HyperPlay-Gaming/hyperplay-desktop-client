@@ -252,7 +252,7 @@
     "zod": "^3.23.8"
   },
   "scripts": {
-    "setup": "yarn install && yarn allow-scripts",
+    "setup": "yarn install && patch-package && yarn allow-scripts",
     "setupWithoutOptional": "node ./dev/rmOptionalDependencies.js && yarn prettier-fix && yarn install --ignore-optional && yarn allow-scripts",
     "start": "electron-vite dev --watch",
     "debug:react": "react-devtools",
@@ -287,7 +287,6 @@
     "flatpak:prepare": "node ./flatpak/prepareFlatpak.js",
     "flatpak:prepare-release": "node ./flatpak/prepareFlatpak.js release",
     "i18n": "i18next",
-    "postinstall": "patch-package",
     "prepare": "husky install",
     "prettier": "prettier --check .",
     "prettier-fix": "prettier --write .",
