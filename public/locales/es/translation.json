@@ -990,6 +990,10 @@
         "wine-download": {
             "message": "Configuración de la capa de compatibilidad por defecto",
             "title": "Compatibilidad"
+        },
+        "wine-download-failed": {
+            "message": "Failed to setup the default compatibility layer",
+            "title": "Error"
         }
     },
     "quest": {

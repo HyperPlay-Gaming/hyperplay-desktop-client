@@ -34,27 +34,6 @@ export const Overlay = observer(function ({
     })
   }, [])
 
-  let exitGameButtonStyle = {
-    top: 'var(--space-md)',
-    right: 'var(--space-md)',
-    position: 'absolute',
-    zIndex: 200,
-    display: 'flex',
-    gap: 'var(--space-sm)'
-  } as React.CSSProperties
-
-  if (
-    OverlayState.renderState.showExitGameButton &&
-    !OverlayState.renderState.showExtension
-  ) {
-    exitGameButtonStyle = {
-      ...exitGameButtonStyle,
-      top: 0,
-      right: 0,
-      overflowY: 'hidden'
-    }
-  }
-
   const shouldShowExtension =
     WalletState.provider === PROVIDERS.METAMASK_EXTENSION ||
     OverlayState.renderState.showExtension
@@ -76,7 +55,7 @@ export const Overlay = observer(function ({
     let exitGameButton = null
     if (OverlayState.renderState.showExitGameButton) {
       exitGameButton = (
-        <div style={exitGameButtonStyle}>
+        <div className={BrowserGameStyles.buttonContainer}>
           <Button
             onClick={async () => {
               // mac can take ~5 seconds to close the wine process, so we close the overlay instantly
@@ -140,12 +119,16 @@ export const Overlay = observer(function ({
     }
 
     overlayItems = (
-      <>
-        <div className={BrowserGameStyles.bgFilter}></div>
-        {exitGameButton}
-        {extensionManager}
-        {questsViewer}
-      </>
+      <div className={BrowserGameStyles.root}>
+        <div className={BrowserGameStyles.bgFilter} />
+        <div className={BrowserGameStyles.contentContainer}>
+          {questsViewer}
+          <div className={BrowserGameStyles.rightSideContainer}>
+            {exitGameButton}
+            {extensionManager}
+          </div>
+        </div>
+      </div>
     )
   }
 

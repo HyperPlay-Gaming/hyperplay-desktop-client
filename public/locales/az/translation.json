@@ -1035,6 +1035,10 @@
         "wine-download": {
             "title": "Qalereya",
             "message": "Default uyğunluq qurulması kağızı"
+        },
+        "wine-download-failed": {
+            "title": "Səhv",
+            "message": "Default uyğunluq kağızı quraşdırmaq"
         }
     },
     "overlay": {

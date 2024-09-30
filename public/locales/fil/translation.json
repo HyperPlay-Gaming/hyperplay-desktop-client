@@ -217,5 +217,10 @@
     },
     "install": {
         "path": "Piliin ang Install Path"
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Error"
+        }
     }
 }

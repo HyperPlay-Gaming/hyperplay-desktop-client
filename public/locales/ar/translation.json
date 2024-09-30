@@ -1001,6 +1001,10 @@
         "wine-download": {
             "message": "إنشاء طبقة التوافق الافتراضي",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "فشل في وضع طبقة التوافق الافتراضي",
+            "title": "خطأ"
         }
     },
     "quests": {

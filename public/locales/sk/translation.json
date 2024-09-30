@@ -1022,6 +1022,10 @@
         "wine-download": {
             "message": "Nastavenie predvolenej kompatibility vrstvy",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "Obdarené nastavenie predvolenej kompatibility vrstvy",
+            "title": "Error"
         }
     },
     "overlay": {

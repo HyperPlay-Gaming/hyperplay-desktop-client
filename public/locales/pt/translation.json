@@ -1021,6 +1021,10 @@
         "wine-download": {
             "title": "Compatibility Layer",
             "message": "Configurando a camada de compatibilidade padrão"
+        },
+        "wine-download-failed": {
+            "message": "Falhado para configurar a camada de compatibilidade padrão",
+            "title": "Erro"
         }
     },
     "quests": {
