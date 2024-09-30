@@ -27,7 +27,8 @@ import {
   rmSync,
   readdirSync,
   readFileSync,
-  statSync
+  statSync,
+  writeFile
 } from 'graceful-fs'
 import {
   isMac,
@@ -1535,11 +1536,26 @@ function writeManifestFile(
 }
 
 export const downloadPatcher = async () => {
-  // TODO: Figure it out how to update the patcher when needed
-
   if (!existsSync(ipdtPatcher)) {
     try {
       await downloadIPDTForOS(toolsPath)
+
+      const version = await getIpdtPatcherVersion()
+      const versionFile = path.join(toolsPath, 'ipdt_version.txt')
+
+      logInfo(
+        `IPDT patcher ${version} downloaded successfully`,
+        LogPrefix.HyperPlay
+      )
+      writeFile(versionFile, version, (err) => {
+        if (err) {
+          logError(
+            `Error writing IPDT version file: ${err}`,
+            LogPrefix.HyperPlay
+          )
+        }
+      })
+
       if (!isWindows) {
         await chmod(ipdtPatcher, 0o755)
       }
@@ -1547,6 +1563,11 @@ export const downloadPatcher = async () => {
       logError(`Error downloading IPDT: ${error}`, LogPrefix.HyperPlay)
     }
   }
+}
+
+const getIpdtPatcherVersion = async () => {
+  const { stdout } = await spawnAsync(ipdtPatcher, ['-version'])
+  return `${stdout}`.split(' ')[2]
 }
 
 export async function downloadLatestGameIpdtManifest(appName: string) {
