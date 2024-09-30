@@ -108,3 +108,9 @@ ipcMain.handle('syncPlayStreakWithExternalSource', async (e, params) => {
     body: JSON.stringify(params)
   })
 })
+
+ipcMain.handle('getCSRFToken', async () => {
+  const url = `${DEV_PORTAL_URL}api/auth/csrf`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.csrfToken
+})

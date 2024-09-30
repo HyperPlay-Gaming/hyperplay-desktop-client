@@ -11,6 +11,8 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import { Reward } from 'common/types'
 import useGetQuests from 'frontend/hooks/useGetQuests'
+import { useSignMessage } from 'wagmi'
+import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 
 export interface QuestsViewerProps {
   projectId: string
@@ -26,8 +28,16 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const initialQuestId = quests?.[0]?.id ?? null
   const visibleQuestId = selectedQuestId ?? initialQuestId
   const sessionEmail = data?.linkedAccounts.get('email')
+  const { invalidateQuery } = useGetUserPlayStreak(visibleQuestId)
+  const { signMessageAsync } = useSignMessage()
 
-  console.log('flags', { ...flags })
+  const questsWithExternalSync: number[] = flags.questsWithExternalSync
+
+  let showSyncButton = false
+
+  if (visibleQuestId && questsWithExternalSync.includes(visibleQuestId)) {
+    showSyncButton = true
+  }
 
   /**
    Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -62,19 +72,31 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
    */
 
   const syncPlayStreakMutation = useMutation({
-    mutationFn: async ({
-      questId,
-      signature
-    }: {
-      questId: number
-      signature: string
-    }) => {
+    mutationFn: async () => {
+      if (!isSignedIn) {
+        window.api.logError('Not signed in')
+        console.error('Not signed in')
+        return
+      }
+
+      if (!visibleQuestId) {
+        window.api.logError('No quest selected')
+        console.error('No quest selected')
+        return
+      }
+
+      const csrfToken = await window.api.getCSRFToken()
+      console.log('csrfToken', csrfToken)
+      const message = `Sync play-streak of quest with ID: ${visibleQuestId} \n\nNonce: ${csrfToken}`
+      const signature = await signMessageAsync({ message })
+
       return window.api.syncPlayStreakWithExternalSource({
-        quest_id: questId,
+        quest_id: visibleQuestId,
         signature
       })
     },
-    onSuccess: () => {
+    onSuccess: async () => {
+      await invalidateQuery()
       console.log('Playstreak synced with external source')
       window.api.logInfo('Playstreak synced with external source')
     },
@@ -85,13 +107,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       )
     }
   })
-
-  const syncPlayStreakWithExternalSource = async (
-    questId: number,
-    signature: string
-  ) => {
-    syncPlayStreakMutation.mutate({ questId, signature })
-  }
 
   return (
     <div className={styles.container}>
@@ -105,9 +120,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         />
         <QuestDetailsWrapper
           tOverride={t}
-          showSecondCTA={true}
+          showSecondCTA={showSyncButton}
+          onSecondCTAClick={syncPlayStreakMutation.mutate}
           i18n={{
-            secondCTAText: 'Sync'
+            secondCTAText: t('quests.syncPlayStreak', 'Sync')
           }}
           sessionEmail={sessionEmail}
           className={styles.detailsWrapper}

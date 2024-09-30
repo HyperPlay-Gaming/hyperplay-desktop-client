@@ -304,6 +304,7 @@ interface HyperPlayAsyncIPCFunctions {
     quest_id: number
     signature: string
   }) => Promise<GenericApiResponse>
+  getCSRFToken: () => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

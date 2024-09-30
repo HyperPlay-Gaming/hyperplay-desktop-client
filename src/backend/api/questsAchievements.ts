@@ -72,3 +72,5 @@ export const syncPlaySession = async (appName: string, runner: Runner) =>
 
 export const checkG7ConnectionStatus = async () =>
   ipcRenderer.invoke('checkG7ConnectionStatus')
+
+export const getCSRFToken = async () => ipcRenderer.invoke('getCSRFToken')

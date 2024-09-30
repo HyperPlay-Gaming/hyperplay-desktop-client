@@ -787,7 +787,8 @@
                 "overlay": "You are currently not logged in, play streak progress will not be tracked. Please exit the game and login to HyperPlay via the top-right dropdown to track progress."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "syncPlayStreak": "Sync"
     },
     "queue": {
         "label": {
