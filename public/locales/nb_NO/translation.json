@@ -773,5 +773,10 @@
                 "placeholder": "Velg ei fil"
             }
         }
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Feil"
+        }
     }
 }

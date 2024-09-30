@@ -961,6 +961,10 @@
         "wine-download": {
             "title": "兼容性层",
             "message": "建立缺省兼容性层"
+        },
+        "wine-download-failed": {
+            "title": "错误",
+            "message": "未能建立违约兼容性层"
         }
     },
     "profile": "形象",

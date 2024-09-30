@@ -1055,6 +1055,10 @@
         "wine-download": {
             "message": "@Setting up @the default #kompatibilnost #red",
             "title": "Вине Манагер"
+        },
+        "wine-download-failed": {
+            "message": "#Zakazati #na setup @the default #kompatibilnost #red",
+            "title": "Грешка"
         }
     },
     "sideload": {

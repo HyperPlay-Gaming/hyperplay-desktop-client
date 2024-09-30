@@ -947,6 +947,10 @@
         "wine-download": {
             "title": "兼容性層",
             "message": "建立缺省兼容性层"
+        },
+        "wine-download-failed": {
+            "message": "未能建立违约兼容性层",
+            "title": "故障"
         }
     },
     "quest": {

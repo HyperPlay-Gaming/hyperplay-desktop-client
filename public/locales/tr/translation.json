@@ -1004,6 +1004,10 @@
         "wine-download": {
             "message": "Varsayılan uyumluluk katmanını kurmak",
             "title": "Uyumluluk Katmanı"
+        },
+        "wine-download-failed": {
+            "title": "Hata",
+            "message": "Varsayılan uyumluluk katmanını kurmak için başarısız oldu"
         }
     },
     "quests": {

@@ -4,13 +4,15 @@ import { observer } from 'mobx-react-lite'
 import extensionState from 'frontend/state/ExtensionState'
 import OverlayState from 'frontend/state/OverlayState'
 import ContextProvider from 'frontend/state/ContextProvider'
-import ExtensionContents from './components/ExtensionContents'
+import {
+  FloatingExtensionContents,
+  ExtensionContents
+} from './components/ExtensionContents'
 
 const ExtensionManager = function () {
   const rootRef = useRef<HTMLDialogElement | null>(null)
   const { connectivity } = useContext(ContextProvider)
   const isOffline = connectivity.status !== 'online'
-
   const mmContainerStyle = {} as React.CSSProperties
 
   const isOverlay =
@@ -41,14 +43,7 @@ const ExtensionManager = function () {
   }
 
   if (isOverlay) {
-    return (
-      <div
-        className={ExtensionManagerStyles.mmContainer}
-        style={mmContainerStyle}
-      >
-        <ExtensionContents />
-      </div>
-    )
+    return <ExtensionContents />
   }
 
   /* eslint-disable react/no-unknown-property */
@@ -58,7 +53,7 @@ const ExtensionManager = function () {
       ref={rootRef}
       style={mmContainerStyle}
     >
-      <ExtensionContents />
+      <FloatingExtensionContents />
     </dialog>
   )
 }
