@@ -149,7 +149,8 @@ import { initExtension } from './extension/importer'
 import { hpApi } from './utils/hyperplay_api'
 import {
   initializeCompatibilityLayer,
-  checkWineBeforeLaunch
+  checkWineBeforeLaunch,
+  runWineCommandOnGame
 } from './utils/compatibility_layers'
 
 /*
@@ -224,7 +225,7 @@ import {
 import { uuid } from 'short-uuid'
 import { LDEnvironmentId, ldOptions } from './ldconstants'
 import getPartitionCookies from './utils/get_partition_cookies'
-import { runWineCommandOnGame } from 'backend/storeManagers/hyperplay/games'
+
 import { formatSystemInfo, getSystemInfo } from './utils/systeminfo'
 
 let ldMainClient: LDElectron.LDElectronMainClient
