@@ -305,6 +305,10 @@ interface HyperPlayAsyncIPCFunctions {
     signature: string
   }) => Promise<GenericApiResponse>
   getCSRFToken: () => Promise<string>
+  checkPendingSync: (params: {
+    wallet: string
+    questId: number
+  }) => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

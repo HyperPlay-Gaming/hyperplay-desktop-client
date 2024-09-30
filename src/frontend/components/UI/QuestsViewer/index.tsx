@@ -11,7 +11,7 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import { Reward } from 'common/types'
 import useGetQuests from 'frontend/hooks/useGetQuests'
-import { useSignMessage } from 'wagmi'
+import { useAccount, useSignMessage } from 'wagmi'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 
 export interface QuestsViewerProps {
@@ -19,6 +19,7 @@ export interface QuestsViewerProps {
 }
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
+  const { address, isConnected } = useAccount()
   const questResults = useGetQuests(appName)
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn, data } = useAuthSession()
@@ -67,7 +68,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const syncPlayStreakMutation = useMutation({
     mutationFn: async (questId: number) => {
       const csrfToken = await window.api.getCSRFToken()
-      console.log('csrfToken', csrfToken)
       const message = `Sync play-streak of quest with ID: ${visibleQuestId} \n\nNonce: ${csrfToken}`
       const signature = await signMessageAsync({ message })
 
@@ -89,7 +89,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     }
   })
 
-  const syncPlayStreak = () => {
+  const syncPlayStreak = async () => {
     if (!isSignedIn) {
       window.api.logError('Not signed in')
       console.error('Not signed in')
@@ -102,7 +102,24 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
       return
     }
 
-    if (questsWithExternalSync.includes(visibleQuestId)) {
+    if (!address) {
+      window.api.logError('No wallet address')
+      console.error('No wallet address')
+      return
+    }
+
+    let hasPendingSync = false
+
+    try {
+      hasPendingSync = await window.api.checkPendingSync({
+        wallet: address,
+        questId: visibleQuestId
+      })
+    } catch (error) {
+      console.error('Error checking pending sync', error)
+    }
+
+    if (questsWithExternalSync.includes(visibleQuestId) && hasPendingSync) {
       syncPlayStreakMutation.mutate(visibleQuestId)
     } else {
       invalidateQuery()
@@ -121,7 +138,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         />
         <QuestDetailsWrapper
           tOverride={t}
-          showSecondCTA={true}
+          showSecondCTA={isConnected}
           onSecondCTAClick={syncPlayStreak}
           i18n={{
             secondCTAText: t('quests.syncPlayStreak', 'Sync')

@@ -114,3 +114,12 @@ ipcMain.handle('getCSRFToken', async () => {
   const response = await fetchWithCookie({ url, method: 'GET' })
   return response.csrfToken
 })
+
+ipcMain.handle(
+  'checkPendingSync',
+  async (e, { wallet, questId }: { wallet: string; questId: number }) => {
+    const url = `${DEV_PORTAL_URL}api/v1/quests/${questId}/playstreak/sync?wallet=${wallet}`
+    const response = await fetchWithCookie({ url, method: 'GET' })
+    return response.hasPendingSync
+  }
+)
