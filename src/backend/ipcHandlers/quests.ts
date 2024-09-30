@@ -101,7 +101,7 @@ ipcMain.handle('checkG7ConnectionStatus', async () => {
 })
 
 ipcMain.handle('syncPlayStreakWithExternalSource', async (e, params) => {
-  const url = `${DEV_PORTAL_URL}api/v1/quests/playStreak/sync`
+  const url = `${DEV_PORTAL_URL}api/v1/quests/${params.quest_id}/playstreak/sync`
   return fetchWithCookie({
     url,
     method: 'POST',
