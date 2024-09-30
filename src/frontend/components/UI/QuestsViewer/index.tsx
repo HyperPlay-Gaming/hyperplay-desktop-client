@@ -30,14 +30,7 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const sessionEmail = data?.linkedAccounts.get('email')
   const { invalidateQuery } = useGetUserPlayStreak(visibleQuestId)
   const { signMessageAsync } = useSignMessage()
-
   const questsWithExternalSync: number[] = flags.questsWithExternalSync
-
-  let showSyncButton = false
-
-  if (visibleQuestId && questsWithExternalSync.includes(visibleQuestId)) {
-    showSyncButton = true
-  }
 
   /**
    Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -72,26 +65,14 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
    */
 
   const syncPlayStreakMutation = useMutation({
-    mutationFn: async () => {
-      if (!isSignedIn) {
-        window.api.logError('Not signed in')
-        console.error('Not signed in')
-        return
-      }
-
-      if (!visibleQuestId) {
-        window.api.logError('No quest selected')
-        console.error('No quest selected')
-        return
-      }
-
+    mutationFn: async (questId: number) => {
       const csrfToken = await window.api.getCSRFToken()
       console.log('csrfToken', csrfToken)
       const message = `Sync play-streak of quest with ID: ${visibleQuestId} \n\nNonce: ${csrfToken}`
       const signature = await signMessageAsync({ message })
 
       return window.api.syncPlayStreakWithExternalSource({
-        quest_id: visibleQuestId,
+        quest_id: questId,
         signature
       })
     },
@@ -108,6 +89,26 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     }
   })
 
+  const syncPlayStreak = () => {
+    if (!isSignedIn) {
+      window.api.logError('Not signed in')
+      console.error('Not signed in')
+      return
+    }
+
+    if (!visibleQuestId) {
+      window.api.logError('No quest selected')
+      console.error('No quest selected')
+      return
+    }
+
+    if (questsWithExternalSync.includes(visibleQuestId)) {
+      syncPlayStreakMutation.mutate(visibleQuestId)
+    } else {
+      invalidateQuery()
+    }
+  }
+
   return (
     <div className={styles.container}>
       {alertComponent}
@@ -120,8 +121,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
         />
         <QuestDetailsWrapper
           tOverride={t}
-          showSecondCTA={showSyncButton}
-          onSecondCTAClick={syncPlayStreakMutation.mutate}
+          showSecondCTA={true}
+          onSecondCTAClick={syncPlayStreak}
           i18n={{
             secondCTAText: t('quests.syncPlayStreak', 'Sync')
           }}
