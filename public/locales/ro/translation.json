@@ -778,5 +778,10 @@
                 "placeholder": "Selectează un fişier"
             }
         }
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Eroare"
+        }
     }
 }

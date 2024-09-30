@@ -758,5 +758,10 @@
                 "placeholder": "Vali fail"
             }
         }
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Viga"
+        }
     }
 }

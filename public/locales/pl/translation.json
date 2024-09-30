@@ -1025,6 +1025,10 @@
         "wine-download": {
             "title": "Layer",
             "message": "Rozwiązanie domyślnej warstwy kompatybilności"
+        },
+        "wine-download-failed": {
+            "message": "Udowodniono, aby zbudować domyślną warstwę kompatybilności",
+            "title": "Błąd"
         }
     },
     "overlay": {

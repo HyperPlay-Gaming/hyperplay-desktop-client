@@ -969,6 +969,10 @@
         "wine-download": {
             "title": "מנהל גרסאות Wine",
             "message": "הגדרת שכבת תאימות ברירת המחדל"
+        },
+        "wine-download-failed": {
+            "message": "נכשל בהקמת שכבת תאימות ברירת המחדל",
+            "title": "שגיאה"
         }
     },
     "profile": "פרופיל",
