@@ -781,8 +781,7 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${
-        (error as Error).message
+      `cancelExtraction: Error while canceling the operation ${(error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1600,7 +1599,7 @@ export async function downloadGameIpdtManifest(
   const platformKey = platform as AppPlatforms
   const { name: newVersion, platforms } = currentChannel.release_meta
   if (platforms[platformKey]) {
-    const manifestUrl = platforms[platformKey].manifest
+    const manifestUrl = platforms[platformKey]?.manifest
     if (!manifestUrl) {
       // not logging here since it will flood with info since not all games have manifest
       return
