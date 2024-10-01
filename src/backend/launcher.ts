@@ -875,7 +875,7 @@ async function callRunner(
 
     if (
       (gameInfo && shouldOpenOverlay) ||
-      extGamesWithQuests.includes(appName)
+      (gameInfo && extGamesWithQuests.includes(gameInfo?.app_name))
     ) {
       if (hyperPlayListing?.project_id) {
         hpOverlay?.openOverlay(hyperPlayListing?.project_id, gameInfo.runner)
