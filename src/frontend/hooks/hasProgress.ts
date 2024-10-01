@@ -3,17 +3,24 @@ import { GameStatus, InstallProgress } from 'common/types'
 
 const storage: Storage = window.localStorage
 
-export const hasProgress = (appName: string) => {
+const nullProgress: InstallProgress = {
+  bytes: '0',
+  eta: '00:00:00',
+  percent: 0
+}
+
+const convertEtaToMs = (eta: string) => {
+  const [hours, minutes, seconds] = eta.split(':').map(Number)
+  return hours * 60 * 60 * 1000 + minutes * 60 * 1000 + seconds * 1000 || 0
+}
+
+export const hasProgress = (appName: string, isExtracting?: boolean) => {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
   ) as InstallProgress
 
   const [progress, setProgress] = useState<InstallProgress>(
-    previousProgress ?? {
-      bytes: '0.00MB',
-      eta: '00:00:00',
-      percent: 0
-    }
+    previousProgress ?? nullProgress
   )
 
   const calculatePercent = (currentProgress: InstallProgress) => {
@@ -51,5 +58,15 @@ export const hasProgress = (appName: string) => {
     }
   }, [appName])
 
-  return [progress, previousProgress]
+  useEffect(() => {
+    if (isExtracting) {
+      setProgress(nullProgress) // reset progress to 0
+    }
+  }, [])
+
+  return {
+    progress,
+    previousProgress,
+    etaInMs: convertEtaToMs(progress.eta || '00:00:00')
+  }
 }
