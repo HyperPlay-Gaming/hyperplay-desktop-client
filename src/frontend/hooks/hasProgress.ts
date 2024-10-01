@@ -70,7 +70,8 @@ export const hasProgress = (appName: string, isExtracting?: boolean) => {
   if (!currentApp) {
     return {
       progress: nullProgress,
-      previousProgress
+      previousProgress,
+      etaInMs: 0
     }
   }
 
