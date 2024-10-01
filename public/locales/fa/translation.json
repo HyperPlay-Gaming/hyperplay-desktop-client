@@ -82,6 +82,15 @@
             "ubisoft-connect": {
                 "title": "Ubisoft Connect",
                 "message": "نصب Ubisoft Connect در پیشوند بازی شکست خورده است. صفحه ویکی ما را در https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/ how-to-install-Ubisoft-Connect-on-on- Linux-and-Mac برای نصب آن بررسی کنید."
+            },
+            "delete-files": {
+                "body": "خطای حذف پوشه استخراج شده (X32X) لطفا آن را به صورت دستی حذف کنید.\n{{paragraph}}\n{{error}}",
+                "title": "خطای حذف پوشه استخراج شده"
+            },
+            "steam": {
+                "error": "Steam Executive پیدا نشد. نصب احتمالا توسط کاربر لغو شده یا در سمت Steam شکست خورده است.",
+                "message": "نصب Steam شکست خورد! لطفا دستورالعمل ها را با دقت بخوانید و دوباره امتحان کنید! {{paragraph}} {{error}}",
+                "title": "خطای Steam"
             }
         },
         "info": {
@@ -179,7 +188,8 @@
         "unsync": "عدم همگام سازی",
         "continue": "ادامه",
         "download": "دانلود",
-        "update": "روزآمدسازی"
+        "update": "روزآمدسازی",
+        "install": "نصب"
     },
     "controller": {
         "hints": {
@@ -978,7 +988,9 @@
             "body2": "در غیر این صورت، پاداش تلاش (X28X) منقضی خواهد شد و دیگر قابل قبول نخواهد بود",
             "cancel": "لغو",
             "confirm": "تأیید"
-        }
+        },
+        "noG7ConnectionClaim": "شما باید یک حساب Game7 مرتبط با {{email}} داشته باشید تا پاداش های خود را مطالبه کنید.",
+        "noG7ConnectionSync": "شما باید یک حساب Game7 مرتبط با {{email}} داشته باشید تا وظایف خود را دوباره تنظیم کنید."
     },
     "quests": {
         "playstreak": {
@@ -1018,6 +1030,10 @@
         "wine-download": {
             "message": "تنظیم لایه سازگاری پیش فرض",
             "title": "لایه Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "شکست در تنظیم لایه سازگاری پیش فرض",
+            "title": "خطا"
         }
     },
     "overlay": {
@@ -1034,5 +1050,84 @@
     "importGameErrorMessageExecutable": "بازی Game غیر قابل حذف، بازی واردات امکان پذیر نیست",
     "importGameErrorTitle": "خطای بازی واردات",
     "analytics": "تحلیل‌ها",
-    "profile": "نمایه"
+    "profile": "نمایه",
+    "import-game-folder": {
+        "cta": "بازی Import Game Folder",
+        "dialog": {
+            "title": "انتخاب Game Folder برای واردات"
+        },
+        "placeholder": "پوشه بازی را برای واردات انتخاب کنید",
+        "error": "خطایی در هنگام واردات وجود داشت. لطفاً لاگ ها را برای جزئیات بیشتر ببینید.",
+        "label": "بازی Import Game Folder",
+        "success": "موفق ترین بازی های وارداتی!"
+    },
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "body": "Mod برای پایه بازی استفاده خواهد شد",
+                "title": "بازی Base Game نصب شده"
+            },
+            "installing": {
+                "body": "استخراج فایل های بازی پایه",
+                "title": "نصب بازی Base Game"
+            },
+            "cancel": {
+                "body": "استخراج بازی Base بازی کنسل شد",
+                "title": "لغو استخراج"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "گزینه Base Game File Location",
+                "placeholder": "گزینه Zip File را انتخاب کنید"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "description": "این بازی روشی برای World of Warcraft: Wrath of the Lich King (3.3.5a) است. برای بازی در این حالت، بازیکنان باید یک نسخه از World of Warcraft 3.3.5a داشته باشند. {{newline}} HyperPlay میزبان World of Warcraft نیست. بازیکنانی که دارای World of Warcraft هستند می توانند نسخه 3.3.5a را از منابعی مانند:",
+                "subtitle": "دانلود بازی World of Warcraft 33.5a",
+                "webtorrent": "تورنت (Magnet Link)",
+                "chromieCraft": "Chromiecraft",
+                "title": "گام ۱"
+            },
+            "step2": {
+                "description": "گزینه The Download را انتخاب کنید فایل Chromiecraft_3.3.5a.zip.",
+                "subtitle": "انتخاب Chromiecraft_3.3.5a.zip File File",
+                "title": "گام ۲"
+            },
+            "step3": {
+                "description": "لطفا پوشه ای را انتخاب کنید که World of Warcraft: Wrath of the Lich King (3.3.5a) باید نصب شود.",
+                "subtitle": "گزینه install Folder",
+                "title": "گام ۳"
+            },
+            "step4": {
+                "description": "کد دسترسی را وارد کنید تا با نصب بازی ادامه دهید.",
+                "subtitle": "کد دسترسی",
+                "title": "مرحله 4"
+            },
+            "title": "دستورالعمل های Mod"
+        }
+    },
+    "At the end make sure to": "در پایان مطمئن شوید",
+    "Cancel Installation": "لغو نصب",
+    "Launch Steam": "راه اندازی Steam",
+    "Launching Steam": "راه اندازی Steam ...",
+    "Install Steam": "نصب Steam",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay دانلود و راه اندازی Steam را برای شما آغاز خواهد کرد. لطفا دستورالعمل های Steam را در نصب خود دنبال کنید;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay به شما اطلاع می دهد زمانی که نصب انجام می شود;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "اگر می خواهید ادامه دهید، صبور باشید زیرا می تواند چند دقیقه طول بکشد تا بسته به اتصال اینترنت و پیکربندی سیستم شما به پایان برسد;",
+    "Installing Steam": "نصب Steam.",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "در اولین پرتاب Steam فایل های ضروری را دانلود می کند و چند دقیقه طول می کشد تا به پایان برسد و صفحه ورود ظاهر شود;",
+    "steam-install": {
+        "compatibility-layer-not-available": "لایه ی Compatibility موجود نیست. لطفا ابتدا یکی را از “Settings > Wine Manager” نصب کنید.",
+        "error-message": "یک خطا در هنگام نصب Steam رخ داد. لطفا دوباره امتحان کنید.",
+        "launch-tooltip": "راه اندازی Steam با استفاده از HyperPlay Compatibility Layer",
+        "success-message": "Steam نصب شده است. حالا می توانید آن را از کتابخانه راه اندازی کنید.",
+        "tooltip": "این نسخه ویندوز Steam را نصب می کند و با استفاده از یک لایه HyperPlay Compatibility اجرا می شود.\n\nبرخی از بازی ها به ویژه عناوین قدیمی تر، بازی های سه بعدی جدید یا کسانی که دارای نرم افزار ضدcheat هستند ممکن است به درستی کار نکنند.\n\nمشخصات توصیه شده یک مک با پردازنده سیلیکون اپل (M1 یا بالاتر) و حداقل 16 گیگابایت رم است."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam\" \"\""
 }

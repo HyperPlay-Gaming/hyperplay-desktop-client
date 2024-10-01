@@ -82,7 +82,16 @@
                 "title": "Ubisoft Connect",
                 "message": "Instalacja Ubisoft Connect w prefiksie gry nie powiodła się. Check naszą stronę internetową na stronie https:/github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac, aby instalować ją w sposób matematyczny."
             },
-            "moving": "Error Moving Game (ang.)"
+            "moving": "Error Moving Game (ang.)",
+            "delete-files": {
+                "title": "Error usuwanie folderu",
+                "body": "Error usuwający folder (X32X). Zdejmuje go ręcznie.\n(X86X) (ang.).\n(X117X) (ang.)"
+            },
+            "steam": {
+                "title": "Steam error",
+                "error": "Steam executable not found. Instalacja została prawdopodobnie odwołana przez użytkownika lub zawieszona po stronie Steam.",
+                "message": "Instalacja Steam nie powiodła się. Czy odczytuje instrukcje ostrożnie i spróbować jeszcze raz! (X81X) (X95X) (ang.)"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +188,8 @@
         "unsync": "Desynchronizuj",
         "update": "Aktualizuj",
         "continue": "Kontynuuj",
-        "download": "Pobieranie"
+        "download": "Pobieranie",
+        "install": "Zainstaluj"
     },
     "controller": {
         "hints": {
@@ -936,7 +946,9 @@
             "body": "(X0XIMPORTANT:X16X) (ang.). (Zobowiązuje się, że są one akcesorami wystarczająco gazowymi w sieci X80X dla transakcji, aby potwierdzić X153X within 24 hrs",
             "cancel": "Anuluj",
             "confirm": "Potwierdź"
-        }
+        },
+        "noG7ConnectionClaim": "Musisz posiadać konto Game7, powiązane z X43X, aby stwierdzić nagrody.",
+        "noG7ConnectionSync": "Musisz posiadać konto Game7, powiązane z X43X."
     },
     "sideload": {
         "warningTitle": "Ważne",
@@ -1013,6 +1025,10 @@
         "wine-download": {
             "title": "Layer",
             "message": "Rozwiązanie domyślnej warstwy kompatybilności"
+        },
+        "wine-download-failed": {
+            "message": "Udowodniono, aby zbudować domyślną warstwę kompatybilności",
+            "title": "Błąd"
         }
     },
     "overlay": {
@@ -1034,5 +1050,84 @@
     "email_subscription": {
         "title": "Dziękuję za podpisanie!",
         "subtitle": "Teraz jesteśmy częścią naszej społeczności i jesteśmy podekscytowani do podzielenia wartościowych aktualizacji i wglądu z nami."
-    }
+    },
+    "import-game-folder": {
+        "dialog": {
+            "title": "Wybrana gra na stronie Import"
+        },
+        "label": "Oficjalna strona Game Fold",
+        "placeholder": "Choose the game folder by importować",
+        "success": "Sukcesywnie importowane gry!",
+        "cta": "Oficjalna strona Game Fold",
+        "error": "W czasie importu nastąpił błąd. Wygląda na więcej szczegółów."
+    },
+    "mod": {
+        "baseGame": {
+            "installing": {
+                "title": "Installing Base Game (ang.)",
+                "body": "Okładka"
+            },
+            "cancel": {
+                "body": "Ekstrakcja gier komputerowych anulowana",
+                "title": "Cancel Extraction"
+            },
+            "installed": {
+                "body": "Modu zostanie zastosowany do gry bazowej",
+                "title": "Base Game Install (ang.)"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "Strona internetowa File Location",
+                "placeholder": "Zip File"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "Gra jest modem dla World of Warcraft: Wrath of the Lich King (3,3.5a). Gracze muszą posiadać kopię World of Warcraft 3,3.5a. X155X X167X HyperPlay nie host World of Warcraft. Gracze, którzy posiadają World of Warcraft, mogą uzyskać wersję 3.3,5a",
+                "subtitle": "Download World Warcraft 3,3.5a (ang.)",
+                "webtorrent": "Magnet Link (ang.)",
+                "title": "Krok 1"
+            },
+            "step2": {
+                "description": "Selected ściągnięty do pobrania. ChromieCraft_3.3.5a.zip (ang.).",
+                "subtitle": "ChromieCraft_3.3.5a (ang.). File",
+                "title": "Krok 2"
+            },
+            "step3": {
+                "description": "Proszę wybrać folder, w którym powinien zostać zainstalowany świat Warcraft: Wrath of the Lich King (3,5a).",
+                "subtitle": "Instalacja Folder",
+                "title": "Krok 3"
+            },
+            "step4": {
+                "description": "Wejście do kodu dostępu do gry, aby zainstalować grę.",
+                "subtitle": "Data dostępu",
+                "title": "Step 4"
+            },
+            "title": "Mod Instrukcje"
+        }
+    },
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Na pierwszym uruchomieniu platforma Steam będzie pobierana niezbędne pliki i będzie trwać kilka minut, aby zakończyć pracę, a ekran loginowy;",
+    "At the end make sure to": "Pod koniec jest pewny siebie",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay będzie pobrać i zacząć Steam Setup for you. Proszę o instrukcję Steam;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay informuje Ciebie, że kiedyś zostanie wykonana instalacja;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Jeśli chcesz kontynuować, będzie pacjentem, ponieważ może trwać kilka minut, aby zakończyć się w zależności od połączenia internetowego i systemu;",
+    "Install Steam": "Steam",
+    "Installing Steam": "Installing Steam (ang.).",
+    "Launch Steam": "Launch Steam",
+    "Launching Steam": "Launching Steam (ang.).",
+    "Cancel Installation": "Cancel Installation",
+    "steam-install": {
+        "compatibility-layer-not-available": "Warstość nie jest dostępna. Po raz pierwszy pojawił się utwór „Settings > Wine Manager”.",
+        "error-message": "Błędne błędy pojawiły się podczas instalacji Steam. Ponownie próbuje.",
+        "launch-tooltip": "Launch Steam korzysta z HyperPlay Compatibility Layer",
+        "success-message": "Steam zostało zainstalowane. Obecnie można ją wystrzelić z biblioteki.",
+        "tooltip": "Umożliwia to zainstalowanie wersji systemu Windows Steam i korzysta z HyperPlay Compatibility Layer.\n\nNiektóre gry, zwłaszcza starsze tytuły, nowsze gry 3D lub te z oprogramowaniem antycheatowym mogą nie działać właściwie.\n\nWskaźniki rekomendowane to Mac z procesorem Apple Silicon (M1 lub więcej) i przynajmniej 16 GB pamięci RAM."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam (ang.). '"
 }

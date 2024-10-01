@@ -155,7 +155,8 @@
         "unsync": "",
         "download": "Спампаваць",
         "update": "Абнавіць",
-        "continue": "Працягнуць"
+        "continue": "Працягнуць",
+        "install": "Ўсталяваць"
     },
     "controller": {
         "hints": {
@@ -736,6 +737,9 @@
     "notification": {
         "wine-download": {
             "title": "Менеджэр Wine"
+        },
+        "wine-download-failed": {
+            "title": "Памылка"
         }
     },
     "profile": "Профіль",
@@ -761,5 +765,8 @@
         "main": "Асноўная",
         "beta": "Beta"
     },
-    "analytics": "Аналітыка"
+    "analytics": "Аналітыка",
+    "import-game-folder": {
+        "placeholder": "Выберыце папку для імпарту гульняў"
+    }
 }

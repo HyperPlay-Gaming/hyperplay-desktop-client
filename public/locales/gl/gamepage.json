@@ -53,7 +53,10 @@
         "compability": {
             "message": "Este xogo de Xanelas correrá  utilizar unha capa de compatibilidade. Poderías atopar algúns asuntos ou o xogo non poderían traballar nada."
         },
-        "yesCancel": "Si, cancela"
+        "yesCancel": "Si, cancela",
+        "stopExtraction": {
+            "title": "Queres cancelar a Extracción?"
+        }
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -238,5 +241,10 @@
         "store": "Páxina da tenda",
         "verify": "Verificar e reparar",
         "extraInfo": "Extra Info"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Compracer contactar o HyperPlay Equipo con esta mensaxe: {{error}} - {{context}}."
+        }
     }
 }

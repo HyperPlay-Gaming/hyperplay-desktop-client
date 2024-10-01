@@ -1,7 +1,9 @@
-import React from 'react'
+import { observer } from 'mobx-react-lite'
 import { motion, AnimatePresence } from 'framer-motion'
 import extensionState from 'frontend/state/ExtensionState'
 import ExtensionContentsStyles from './index.module.scss'
+
+const trueAsStr = 'false' as unknown as boolean | undefined
 
 //Module type augmentation necessary to use experimental feature nodeintegrationinsubframes
 //https://www.electronjs.org/docs/latest/api/webview-tag
@@ -22,38 +24,32 @@ const animation = {
   transition: { duration: 0.2 }
 }
 
-export default function ExtensionContents() {
-  const trueAsStr = 'false' as unknown as boolean | undefined
+export const ExtensionContents = observer(() => {
+  const state = extensionState.isPopupOpen ? 'popup' : 'notification'
+  return (
+    <webview
+      nodeintegrationinsubframes="true"
+      webpreferences="contextIsolation=true, nodeIntegration=true"
+      src={`chrome-extension://${extensionState.extensionId}/${state}.html`}
+      className={ExtensionContentsStyles.mmWindow}
+      allowpopups={trueAsStr}
+    ></webview>
+  )
+})
+
+export const FloatingExtensionContents = observer(() => {
+  const shouldShow =
+    extensionState.isPopupOpen || extensionState.isNotificationOpen
   return (
     <AnimatePresence>
-      {extensionState.isPopupOpen ? (
+      {shouldShow ? (
         <motion.div
           {...animation}
           className={ExtensionContentsStyles.mmWindowContainer}
         >
-          <webview
-            nodeintegrationinsubframes="true"
-            webpreferences="contextIsolation=true, nodeIntegration=true"
-            src={`chrome-extension://${extensionState.extensionId}/popup.html`}
-            className={ExtensionContentsStyles.mmWindow}
-            allowpopups={trueAsStr}
-          ></webview>
-        </motion.div>
-      ) : null}
-      {extensionState.isNotificationOpen ? (
-        <motion.div
-          {...animation}
-          className={ExtensionContentsStyles.mmWindowContainer}
-        >
-          <webview
-            nodeintegrationinsubframes="true"
-            webpreferences="contextIsolation=true, nodeIntegration=true"
-            src={`chrome-extension://${extensionState.extensionId}/notification.html`}
-            className={ExtensionContentsStyles.mmWindow}
-            allowpopups={trueAsStr}
-          ></webview>
+          <ExtensionContents />
         </motion.div>
       ) : null}
     </AnimatePresence>
   )
-}
+})

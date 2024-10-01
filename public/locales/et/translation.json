@@ -155,7 +155,8 @@
         "unsync": "Mittesünkroniseerimine",
         "update": "Ajakohastamine",
         "download": "Laadi alla",
-        "continue": "Jätka"
+        "continue": "Jätka",
+        "install": "Installi"
     },
     "controller": {
         "hints": {
@@ -747,5 +748,20 @@
     "sideload": {
         "warningTitle": "Oluline"
     },
-    "profile": "Profiil"
+    "profile": "Profiil",
+    "import-game-folder": {
+        "placeholder": "Valige imporditav mängude kaust"
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "placeholder": "Vali fail"
+            }
+        }
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Viga"
+        }
+    }
 }

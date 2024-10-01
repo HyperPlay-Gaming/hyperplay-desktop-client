@@ -82,7 +82,16 @@
                 "title": "Ubisoft Connect",
                 "message": "Instalace Ubisoft Connect v herní předponě selhala. Podívejte se na naši wiki stránku na https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac pro instalaci ji maunally."
             },
-            "moving": "Chyba Pohybující hra {{error}}"
+            "moving": "Chyba Pohybující hra {{error}}",
+            "delete-files": {
+                "body": "Chyba odstranění extrahované složky {{path}}. ručně odstranit.\n{{paragraph}}\n{{error}}",
+                "title": "Chyba odstranění extrahované složky"
+            },
+            "steam": {
+                "error": "Parní spustitelný ne nalezeno. Instalace byla pravděpodobně zrušena uživatelem nebo neúspěšně na straně Steam.",
+                "message": "Parní instalace selhala! Prosím, přečtěte si pokyny pečlivě a zkuste to znovu! {{paragraph}} {{error}}",
+                "title": "Parní chyba"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +188,8 @@
         "unsync": "Desynchroniozovat",
         "continue": "Pokračovat",
         "update": "Aktualizovat",
-        "download": "Stáhnout"
+        "download": "Stáhnout",
+        "install": "Instalace"
     },
     "controller": {
         "hints": {
@@ -934,6 +944,10 @@
         "wine-download": {
             "message": "Nastavení výchozí kompatibilizační vrstvy",
             "title": "Kompatibilita Vrstva"
+        },
+        "wine-download-failed": {
+            "message": "Vypnuto nastavení výchozí kompatibilizační vrstvy",
+            "title": "Chyba"
         }
     },
     "quest": {
@@ -980,7 +994,9 @@
             "title": "Potvrďte výzvu k odměně",
             "confirm": "Potvrdit",
             "cancel": "Zrušit"
-        }
+        },
+        "noG7ConnectionClaim": "Musíte mít účet Game7 napojený na {{email}} pro uplatnění vašich odměn.",
+        "noG7ConnectionSync": "Musíte mít účet Game7 spojenou s {{email}} pro resyncování vašich úkolů."
     },
     "quests": {
         "playstreak": {
@@ -1041,5 +1057,84 @@
     },
     "profile": "Profil",
     "ALL": "VŠE",
-    "analytics": "Analytika"
+    "analytics": "Analytika",
+    "mod": {
+        "baseGame": {
+            "installed": {
+                "title": "Základní hra instalovaná",
+                "body": "Mod bude aplikován na základní hru"
+            },
+            "cancel": {
+                "body": "Základní hra extrakce zrušena",
+                "title": "Zrušení výpisu"
+            },
+            "installing": {
+                "body": "Extrahování základních herních souborů",
+                "title": "Instalace základní hry"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "placeholder": "Vyberte soubor Zip",
+                "path": "Vyberte Umístění základního herního souboru"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "Čeština",
+                "description": "Tato hra je mod pro World of Warcraft: Wrath of the Lich King (3.3.5a). Chcete-li hrát tento mod, hráči musí vlastní kopii World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay ne hostitele World of Warcraft. Hráči, kteří vlastní World of Warcraft mohou získat verzi 3.3.5a z zdrojů, jako jsou:",
+                "subtitle": "Ke stažení World of Warcraft 3.3.5a",
+                "webtorrent": "Torrent (Magnet Link)",
+                "title": "Krok 1"
+            },
+            "step2": {
+                "description": "Vyberte si stažený ChromieCraft_3.3.5a.zip soubor.",
+                "subtitle": "Vyberte ChromieCraft_3.3.5a.zip Čeština",
+                "title": "Krok 2"
+            },
+            "step3": {
+                "description": "Vezměte prosím na vědomí složku, kde by měla být instalována World of Warcraft: Wrath of Lich King (3.3.5a).",
+                "subtitle": "Vyberte instalaci Čeština",
+                "title": "Krok 3"
+            },
+            "step4": {
+                "description": "Zadejte přístupový kód, který chcete pokračovat s instalací hry.",
+                "subtitle": "Přístupový kód",
+                "title": "Krok 4"
+            },
+            "title": "Pokyny pro moduly"
+        }
+    },
+    "import-game-folder": {
+        "cta": "Import herní složky",
+        "dialog": {
+            "title": "Vyberte herní složku do Importu"
+        },
+        "error": "Během importu došlo k chybě. Více informací naleznete v protokolu.",
+        "label": "Import herní složky",
+        "placeholder": "Vyberte složku hry pro import",
+        "success": "Úspěšně dovážené hry!"
+    },
+    "Install Steam": "Instalace Steam",
+    "Installing Steam": "Instalace Steam ...",
+    "Launch Steam": "Spustit Steam",
+    "Launching Steam": "Spuštění Steam ...",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay vás upozorní po dokončení instalace;",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Na prvním spuštění Steam stáhnout potřebné soubory a bude trvat několik minut k dokončení a přihlašovací obrazovka se zobrazí;",
+    "steam-install": {
+        "error-message": "Chyba nastala při instalaci Steamu. Prosím, zkuste to znovu.",
+        "compatibility-layer-not-available": "Kompatibilita vrstva není k dispozici. Nejprve prosím nainstalujte jednu z \"Nastavení > nejprve vinicový manažer\".",
+        "launch-tooltip": "Spusťte Steam pomocí HyperPlay kompatibility vrstvy",
+        "success-message": "Steam byl nainstalován. Nyní můžete spustit z knihovny.",
+        "tooltip": "To nainstaluje verzi systému Windows Steam a bude spuštěn pomocí HyperPlay kompatibility vrstvy.\n\nNěkteré hry zejména starší tituly, novější 3D hry, nebo ty s anti-cheat software nemusí fungovat správně.\n\nDoporučené specifikace jsou Mac s Apple Silicon CPU (M1 nebo výše) a nejméně 16GB RAM."
+    },
+    "At the end make sure to": "Na konci se ujistěte, že",
+    "Cancel Installation": "Zrušit instalaci",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay stáhnout a začít Steam Setup pro vás. Postupujte podle pokynů Steam na jejich instalátoru;"
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Pokud chcete pokračovat, buďte trpěliví, protože může trvat několik minut, než je možné dokončit v závislosti na vašem připojení k internetu a konfiguraci systému;",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam V"
 }
