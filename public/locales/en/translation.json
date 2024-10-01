@@ -792,7 +792,11 @@
     "queue": {
         "label": {
             "canceled": "Canceled",
-            "empty": "Nothing to download",
+            "clear": "Clear List",
+            "empty": {
+                "finished": "Nothing downloaded",
+                "queue": "Nothing to download"
+            },
             "pause": "Pause download",
             "remove": "Remove from Downloads",
             "resume": "Resume download"
