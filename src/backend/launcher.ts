@@ -772,6 +772,7 @@ interface RunnerProps {
 const commandsRunning = {}
 
 let shouldUsePowerShell: boolean | null = null
+const extGamesWithQuests = ['Fortnite', 'Sugar']
 
 async function callRunner(
   commandParts: string[],
@@ -872,7 +873,10 @@ async function callRunner(
 
     childPid = child.pid
 
-    if (gameInfo && shouldOpenOverlay) {
+    if (
+      (gameInfo && shouldOpenOverlay) ||
+      extGamesWithQuests.includes(appName)
+    ) {
       if (hyperPlayListing?.project_id) {
         hpOverlay?.openOverlay(hyperPlayListing?.project_id, gameInfo.runner)
       } else {
