@@ -1,6 +1,7 @@
 import React, { lazy } from 'react'
 import OverlayManager from './OverlayManager'
 import { Runner } from 'common/types'
+import { otherStoreGames } from './helpers'
 const App = lazy(async () => import('./App'))
 
 const Views = {
@@ -24,10 +25,12 @@ const ViewManager = function () {
     }
   )
 
+  const runner = otherStoreGames.includes(params.appName ?? '')
+    ? 'legendary'
+    : 'hyperplay'
+
   if (params.view === 'BrowserGame' && params.appName && params.runner) {
-    return (
-      <OverlayManager appName={params.appName ?? ''} runner={params.runner} />
-    )
+    return <OverlayManager appName={params.appName ?? ''} runner={runner} />
   }
 
   // if view doesn't match a key in Views Map, throw
