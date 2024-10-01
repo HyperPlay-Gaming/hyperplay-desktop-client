@@ -780,8 +780,7 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${
-        (error as Error).message
+      `cancelExtraction: Error while canceling the operation ${(error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1442,7 +1441,7 @@ export async function update(
     }
 
     const newVersion = channels[channelName].release_meta.name
-    await applyPatching(appName, newVersion)
+    await applyPatching(appName, platform, newVersion)
 
     if (isMarketWars) {
       try {
@@ -1549,7 +1548,10 @@ export const downloadPatcher = async () => {
   }
 }
 
-export async function downloadLatestGameIpdtManifest(appName: string) {
+export async function downloadGameIpdtManifest(
+  appName: string,
+  version?: string
+) {
   const {
     install: { channelName, platform, version: installedVersion },
     is_installed
@@ -1557,6 +1559,7 @@ export async function downloadLatestGameIpdtManifest(appName: string) {
   if (!channelName || !platform || !is_installed) {
     return
   }
+  const releaseVersion = version || installedVersion
 
   // since we don't have the manifest field on the listings API yet, we need to hit the gaming API to have this information
   const { channels } = await getHyperPlayStoreRelease(appName)
@@ -1582,7 +1585,7 @@ export async function downloadLatestGameIpdtManifest(appName: string) {
     }
 
     // download only if the manifest file is not already downloaded and its the same version
-    const manifestName = `${appName}-${platform}-${installedVersion}.json`
+    const manifestName = `${appName}-${platform}-${releaseVersion}.json`
     const manifestPath = path.join(ipdtManifestsPath, manifestName)
 
     // TODO: Update this to download the manifest for the installed version of the game once the API is available
@@ -1601,7 +1604,12 @@ export async function downloadLatestGameIpdtManifest(appName: string) {
   return
 }
 
-async function applyPatching(appName: string, newVersion: string) {
+async function applyPatching(
+  appName: string,
+  platformKey: string,
+  newVersion: string
+) {
+  console.log('I got inside applyPatching!')
   // get previous and current manifest
   const gameInfo = getGameInfo(appName)
   const { install_path, version } = gameInfo.install
@@ -1614,10 +1622,15 @@ async function applyPatching(appName: string, newVersion: string) {
     throw new Error('Version or install path not found')
   }
 
-  const previousManifest = getManifest(appName, version)
-  const currentManifest = getManifest(appName, newVersion)
+  const previousManifest = getManifest(appName, platformKey, version)
+  const currentManifest = getManifest(appName, platformKey, newVersion)
+  const currentManifestExists = existsSync(currentManifest)
 
-  if (!existsSync(previousManifest) || !existsSync(currentManifest)) {
+  if (!currentManifestExists) {
+    await downloadGameIpdtManifest(appName)
+  }
+
+  if (!existsSync(previousManifest) || !currentManifestExists) {
     logError(
       `Manifests not found for ${gameInfo.title} in applyPatching`,
       LogPrefix.HyperPlay
@@ -1625,12 +1638,20 @@ async function applyPatching(appName: string, newVersion: string) {
     throw new Error('Manifest not found')
   }
 
-  const ipfsGateway = process.env.IPFS_GATEWAY
+  const ipfsGateway = process.env.IPFS_API
 
   logInfo(
     `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
     LogPrefix.HyperPlay
   )
+
+  console.log({
+    ipdtPatcher,
+    install_path,
+    currentManifest,
+    previousManifest,
+    ipfsGateway
+  })
 
   try {
     for await (const output of patchFolder(
@@ -1643,14 +1664,16 @@ async function applyPatching(appName: string, newVersion: string) {
       logInfo(output, LogPrefix.HyperPlay)
     }
   } catch (error) {
+    console.log({ error })
     throw new Error(`Error while patching ${error}`)
   }
+  console.log('done patching')
 }
 
-function getManifest(appName: string, version: string) {
+function getManifest(appName: string, platformName: string, version: string) {
   const manifestPath = path.join(
     ipdtManifestsPath,
-    `${appName}-${version}.json`
+    `${appName}-${platformName}-${version}.json`
   )
   if (!existsSync(manifestPath)) {
     return ''

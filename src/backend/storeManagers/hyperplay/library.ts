@@ -17,7 +17,7 @@ import {
   refreshGameInfoFromHpRelease
 } from './utils'
 import {
-  downloadLatestGameIpdtManifest,
+  downloadGameIpdtManifest,
   getGameInfo as getGamesGameInfo
 } from './games'
 import { getValistListingApiUrl, qaToken } from 'backend/constants'
@@ -150,7 +150,7 @@ export function refreshHPGameInfo(appId: string, data: HyperPlayRelease) {
   const gameInfo: GameInfo = refreshGameInfoFromHpRelease(currentInfo, data)
 
   currentLibrary[gameIndex] = gameInfo
-  downloadLatestGameIpdtManifest(appId)
+  downloadGameIpdtManifest(appId, gameInfo.version)
   return hpLibraryStore.set('games', currentLibrary)
 }
 
