@@ -17,6 +17,7 @@ import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
 
+const otherStoreGames = ['Fortnite', 'Sugar']
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
 }
@@ -48,7 +49,7 @@ export function QuestDetailsViewPlayWrapper({
 
       let runner: Runner = 'hyperplay'
       let name = appName
-      if (epicListingUrl) {
+      if (epicListingUrl || otherStoreGames.includes(appName)) {
         runner = 'legendary'
         if (epicAppName) {
           name = epicAppName
