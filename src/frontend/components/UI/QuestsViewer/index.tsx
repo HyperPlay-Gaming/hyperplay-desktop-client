@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
 import styles from './index.module.scss'
 import { QuestLogWrapper } from './components/QuestLogWrapper'
 import { Alert } from '@hyperplay/ui'
@@ -11,15 +10,14 @@ import useAuthSession from 'frontend/hooks/useAuthSession'
 import '@hyperplay/quests-ui/style.css'
 import { Reward } from 'common/types'
 import useGetQuests from 'frontend/hooks/useGetQuests'
-import { useAccount, useSignMessage } from 'wagmi'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
+import { useSyncPlayStreak } from 'frontend/hooks/useSyncPlayStreak'
 
 export interface QuestsViewerProps {
   projectId: string
 }
 
 export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
-  const { address, isConnected } = useAccount()
   const questResults = useGetQuests(appName)
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
   const { isSignedIn, data } = useAuthSession()
@@ -30,8 +28,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const visibleQuestId = selectedQuestId ?? initialQuestId
   const sessionEmail = data?.linkedAccounts.get('email')
   const { invalidateQuery } = useGetUserPlayStreak(visibleQuestId)
-  const { signMessageAsync } = useSignMessage()
-  const questsWithExternalSync: number[] = flags.questsWithExternalSync
+
+  const { syncPlayStreak } = useSyncPlayStreak({
+    refreshPlayStreak: invalidateQuery
+  })
 
   /**
    Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -65,67 +65,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
     t('quest.claimWarning.confirm', 'Confirm')
    */
 
-  const syncPlayStreakMutation = useMutation({
-    mutationFn: async (questId: number) => {
-      const csrfToken = await window.api.getCSRFToken()
-      const message = `Sync play-streak of quest with ID: ${visibleQuestId} \n\nNonce: ${csrfToken}`
-      const signature = await signMessageAsync({ message })
-
-      return window.api.syncPlayStreakWithExternalSource({
-        quest_id: questId,
-        signature
-      })
-    },
-    onSuccess: async () => {
-      await invalidateQuery()
-      console.log('Playstreak synced with external source')
-      window.api.logInfo('Playstreak synced with external source')
-    },
-    onError: (error) => {
-      console.error(`Error syncing playstreak with external source`, error)
-      window.api.logError(
-        `Error syncing playstreak with external source: ${error.message}`
-      )
-    }
-  })
-
-  const syncPlayStreak = async () => {
-    if (!isSignedIn) {
-      window.api.logError('Not signed in')
-      console.error('Not signed in')
-      return
-    }
-
-    if (!visibleQuestId) {
-      window.api.logError('No quest selected')
-      console.error('No quest selected')
-      return
-    }
-
-    if (!address) {
-      window.api.logError('No wallet address')
-      console.error('No wallet address')
-      return
-    }
-
-    let hasPendingSync = false
-
-    try {
-      hasPendingSync = await window.api.checkPendingSync({
-        wallet: address,
-        questId: visibleQuestId
-      })
-    } catch (error) {
-      console.error('Error checking pending sync', error)
-    }
-
-    if (questsWithExternalSync.includes(visibleQuestId) && hasPendingSync) {
-      syncPlayStreakMutation.mutate(visibleQuestId)
-    } else {
-      invalidateQuery()
-    }
-  }
-
   return (
     <div className={styles.container}>
       {alertComponent}
@@ -137,12 +76,8 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           setSelectedQuestId={setSelectedQuestId}
         />
         <QuestDetailsWrapper
+          syncPlayStreak={syncPlayStreak}
           tOverride={t}
-          showSecondCTA={isConnected}
-          onSecondCTAClick={syncPlayStreak}
-          i18n={{
-            secondCTAText: t('quests.syncPlayStreak', 'Sync')
-          }}
           sessionEmail={sessionEmail}
           className={styles.detailsWrapper}
           checkG7ConnectionStatus={window.api.checkG7ConnectionStatus}

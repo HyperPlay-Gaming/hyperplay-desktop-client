@@ -757,7 +757,8 @@
             "playToStart": "Play this game to start your streak!",
             "progressTowardsStreak": "progress towards today's streak.",
             "streakCompleted": "Streak completed! Claim your rewards now.",
-            "streakProgress": "Streak Progress"
+            "streakProgress": "Streak Progress",
+            "sync": "Sync Progress"
         },
         "points": "Points",
         "pointsClaimed": "Points Claimed",
@@ -787,8 +788,7 @@
                 "overlay": "You are currently not logged in, play streak progress will not be tracked. Please exit the game and login to HyperPlay via the top-right dropdown to track progress."
             }
         },
-        "quests": "Quests",
-        "syncPlayStreak": "Sync"
+        "quests": "Quests"
     },
     "queue": {
         "label": {

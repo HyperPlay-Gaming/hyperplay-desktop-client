@@ -16,6 +16,7 @@ import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakAr
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
+import { useSyncPlayStreak } from 'frontend/hooks/useSyncPlayStreak'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -39,6 +40,10 @@ export function QuestDetailsViewPlayWrapper({
   const getSteamGameResult = useGetSteamGame(
     questMeta?.eligibility?.steam_games ?? []
   )
+
+  const { syncPlayStreak } = useSyncPlayStreak({
+    refreshPlayStreak: questPlayStreakResult.invalidateQuery
+  })
 
   const navigateToGame = useMutation({
     mutationFn: async (appName: string) => {
@@ -135,6 +140,7 @@ export function QuestDetailsViewPlayWrapper({
     },
     sync: t('quest.sync', 'Sync'),
     streakProgressI18n: {
+      sync: t('quest.playstreak.sync', 'Sync'),
       streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
       days: t('quest.playstreak.days', 'days'),
       playToStart: t(
@@ -180,6 +186,7 @@ export function QuestDetailsViewPlayWrapper({
             steamAccountLinked: false
           },
           playStreak: {
+            onSync: () => console.log('sync'),
             currentStreakInDays: 0,
             requiredStreakInDays: 1,
             minimumSessionTimeInSeconds: 100,
@@ -219,10 +226,10 @@ export function QuestDetailsViewPlayWrapper({
           eligible: false,
           steamAccountLinked: false
         },
-        playStreak: getPlaystreakArgsFromQuestData(
-          questMeta,
-          questPlayStreakData
-        )
+        playStreak: {
+          ...getPlaystreakArgsFromQuestData(questMeta, questPlayStreakData),
+          onSync: async () => syncPlayStreak(selectedQuestId)
+        }
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}
