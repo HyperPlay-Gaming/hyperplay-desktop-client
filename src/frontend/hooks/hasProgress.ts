@@ -14,6 +14,8 @@ const convertEtaToMs = (eta: string) => {
   return hours * 60 * 60 * 1000 + minutes * 60 * 1000 + seconds * 1000 || 0
 }
 
+let currentApp: string = ''
+
 export const hasProgress = (appName: string, isExtracting?: boolean) => {
   const previousProgress = JSON.parse(
     storage.getItem(appName) || '{}'
@@ -41,7 +43,8 @@ export const hasProgress = (appName: string, isExtracting?: boolean) => {
       _e: Electron.IpcRendererEvent,
       { appName: appWithProgress, progress: currentProgress }: GameStatus
     ) => {
-      if (appName === appWithProgress && currentProgress) {
+      if (appWithProgress && appName === appWithProgress && currentProgress) {
+        currentApp = appName
         setProgress({
           ...currentProgress,
           percent: calculatePercent(currentProgress)
@@ -63,6 +66,13 @@ export const hasProgress = (appName: string, isExtracting?: boolean) => {
       setProgress(nullProgress) // reset progress to 0
     }
   }, [])
+
+  if (!currentApp) {
+    return {
+      progress: nullProgress,
+      previousProgress
+    }
+  }
 
   return {
     progress,
