@@ -481,7 +481,10 @@
             "canceled": "Cancelado",
             "clear": "Limpiar lista",
             "downloading": "Descargando",
-            "empty": "Nada para descargar",
+            "empty": {
+                "finished": "Nada descargado",
+                "queue": "Nada que descargar"
+            },
             "finished": "Completado",
             "queued": "Encolado",
             "remove": "Eliminar de las descargas",
