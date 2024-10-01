@@ -489,7 +489,6 @@ if (!gotTheLock) {
     const openOverlayAcceleratorMac = 'Option+X'
     globalShortcut.register(openOverlayAcceleratorMac, toggle)
 
-    initExtension(hpApi)
     initOverlay(hpApi)
 
     initOnlineMonitor()
@@ -685,8 +684,10 @@ ipcMain.once('loadingScreenReady', () => {
   logInfo('Loading Screen Ready', LogPrefix.Backend)
 })
 
-ipcMain.once('frontendReady', () => {
+ipcMain.once('frontendReady', async () => {
   logInfo('Frontend Ready', LogPrefix.Backend)
+  await initExtension(hpApi)
+  ipcMain.emit('reloadApp')
   handleProtocol([openUrlArgument, ...process.argv])
   setTimeout(() => {
     logInfo('Starting the Download Queue', LogPrefix.Backend)
