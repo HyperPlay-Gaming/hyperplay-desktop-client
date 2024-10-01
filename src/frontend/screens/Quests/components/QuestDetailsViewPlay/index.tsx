@@ -50,8 +50,6 @@ export function QuestDetailsViewPlayWrapper({
         appName
       )
 
-      console.log('url', epicListingUrl)
-
       let runner: Runner = 'hyperplay'
       let name = appName
       if (epicListingUrl || otherStoreGames.includes(appName)) {
