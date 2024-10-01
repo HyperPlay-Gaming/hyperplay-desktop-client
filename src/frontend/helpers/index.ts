@@ -155,11 +155,23 @@ const getLastPartOfUrl = (url: string) => {
   return url.split('/').pop()
 }
 
+export const otherStoreGames = ['Fortnite', 'Sugar']
+
 export const fetchEpicListing = async (projectId: string) => {
   const epicListingUrl = await window.api.getEpicListingUrl(projectId)
 
-  if (!epicListingUrl) {
-    return { appName: '', epicListingUrl: '' }
+  const fortniteUrl = 'https://store.epicgames.com/en-US/p/fortnite'
+  const rocketLeagueUrl = 'https://store.epicgames.com/en-US/p/rocket-league'
+
+  if (!epicListingUrl || otherStoreGames.includes(projectId)) {
+    switch (projectId) {
+      case 'Fortnite':
+        return { appName: 'Fortnite', epicListingUrl: fortniteUrl }
+      case 'Sugar':
+        return { appName: 'Sugar', epicListingUrl: rocketLeagueUrl }
+      default:
+        return { appName: '', epicListingUrl }
+    }
   }
 
   if (!libraryState.epicLibrary.length) {

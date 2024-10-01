@@ -9,7 +9,11 @@ import { useTranslation } from 'react-i18next'
 import useGetQuest from 'frontend/hooks/useGetQuest'
 import styles from './index.module.scss'
 import { useNavigate } from 'react-router-dom'
-import { fetchEpicListing, getGameInfo } from 'frontend/helpers'
+import {
+  fetchEpicListing,
+  getGameInfo,
+  otherStoreGames
+} from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
@@ -17,7 +21,6 @@ import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
 
-const otherStoreGames = ['Fortnite', 'Sugar']
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
 }
@@ -46,6 +49,8 @@ export function QuestDetailsViewPlayWrapper({
       const { appName: epicAppName, epicListingUrl } = await fetchEpicListing(
         appName
       )
+
+      console.log('url', epicListingUrl)
 
       let runner: Runner = 'hyperplay'
       let name = appName
