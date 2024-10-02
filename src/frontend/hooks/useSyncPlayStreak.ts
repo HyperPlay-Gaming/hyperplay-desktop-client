@@ -31,6 +31,8 @@ export function useSyncPlayStreak({
             'warning',
             'Please connect your wallet to sync your play streak'
           )
+          window.api.focusMainWindow()
+          window.api.openOnboarding()
           return
         }
 
@@ -46,6 +48,8 @@ export function useSyncPlayStreak({
             'warning',
             'Please connect your wallet to sync your play streak'
           )
+          window.api.focusMainWindow()
+          window.api.openOnboarding()
           return
         }
 
