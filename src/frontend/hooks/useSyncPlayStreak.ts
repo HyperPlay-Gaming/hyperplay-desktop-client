@@ -1,7 +1,10 @@
-import { useAccount, useSignMessage } from 'wagmi'
+import { useAccount, useConnect, useSignMessage } from 'wagmi'
 import useAuthSession from './useAuthSession'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useMutation } from '@tanstack/react-query'
+import onboardingStore from 'frontend/store/OnboardingStore'
+import { injected } from 'wagmi/connectors'
+import authState from 'frontend/state/authState'
 
 export function useSyncPlayStreak({
   refreshPlayStreak
@@ -12,21 +15,37 @@ export function useSyncPlayStreak({
   const { isSignedIn } = useAuthSession()
   const { address } = useAccount()
   const { signMessageAsync } = useSignMessage()
+  const { connectAsync } = useConnect()
   const questsWithExternalSync: number[] = flags.questsWithExternalSync
 
   const { mutate } = useMutation({
     mutationFn: async (questId: number) => {
       if (questsWithExternalSync.includes(questId)) {
-        let hasPendingSync = false
+        const currentProvider = await window.api.getConnectedProvider()
+        const isWalletConnected = currentProvider !== 'Unconnected'
 
-        if (!address) {
-          alert('Please connect your wallet to sync your play streak')
+        if (!isWalletConnected) {
+          onboardingStore.openOnboarding()
           return
         }
 
+        let wallet = address
+
+        if (!address) {
+          const { accounts } = await connectAsync({ connector: injected() })
+          wallet = accounts[0]
+        }
+
+        if (!wallet) {
+          onboardingStore.openOnboarding()
+          return
+        }
+
+        let hasPendingSync = false
+
         try {
           hasPendingSync = await window.api.checkPendingSync({
-            wallet: address,
+            wallet,
             questId
           })
         } catch (error) {
@@ -62,7 +81,7 @@ export function useSyncPlayStreak({
 
   const syncPlayStreak = async (questId: number) => {
     if (!isSignedIn) {
-      alert('Please sign in to sync your play streak')
+      authState.openSignInModal()
       return
     }
 
