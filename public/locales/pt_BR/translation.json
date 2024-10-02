@@ -482,7 +482,8 @@
             "clear": "Limpar Lista",
             "downloading": "Baixando",
             "empty": {
-                "finished": "Nada"
+                "finished": "Nada",
+                "queue": "Nada na fila"
             },
             "finished": "Concluído",
             "queued": "Na fila",
