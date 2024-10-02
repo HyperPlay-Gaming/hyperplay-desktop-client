@@ -491,7 +491,8 @@
             "clear": "Cancella Lista",
             "downloading": "Scaricamento",
             "empty": {
-                "finished": "Niente scaricato"
+                "finished": "Niente scaricato",
+                "queue": "Niente da scaricare"
             },
             "finished": "Completato",
             "queued": "In coda",
