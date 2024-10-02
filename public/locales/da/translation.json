@@ -771,7 +771,8 @@
             "queued": "I kø",
             "canceled": "Annulleret",
             "empty": {
-                "finished": "Intet downloadet"
+                "finished": "Intet downloadet",
+                "queue": "Intet at downloade"
             },
             "remove": "Fjern fra downloads",
             "resume": "Genop download",
