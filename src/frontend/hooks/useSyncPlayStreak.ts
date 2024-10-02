@@ -2,7 +2,6 @@ import { useAccount, useConnect, useSignMessage } from 'wagmi'
 import useAuthSession from './useAuthSession'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useMutation } from '@tanstack/react-query'
-import onboardingStore from 'frontend/store/OnboardingStore'
 import { injected } from 'wagmi/connectors'
 import authState from 'frontend/state/authState'
 
@@ -24,8 +23,11 @@ export function useSyncPlayStreak({
         const currentProvider = await window.api.getConnectedProvider()
         const isWalletConnected = currentProvider !== 'Unconnected'
 
+        // we do window.api.focusMainWindow() instead of onboardingStore.openOnboarding()
+        // because this can be called from a game window, not the main window
         if (!isWalletConnected) {
-          onboardingStore.openOnboarding()
+          window.api.focusMainWindow()
+          window.api.openOnboarding()
           return
         }
 
@@ -37,7 +39,8 @@ export function useSyncPlayStreak({
         }
 
         if (!wallet) {
-          onboardingStore.openOnboarding()
+          window.api.focusMainWindow()
+          window.api.openOnboarding()
           return
         }
 

@@ -82,3 +82,12 @@ export const checkPendingSync = async ({
   wallet: string
   questId: number
 }) => ipcRenderer.invoke('checkPendingSync', { wallet, questId })
+
+export const handleOpenOnboarding = (
+  onChange: (e: Electron.IpcRendererEvent) => void
+) => {
+  ipcRenderer.on('openOnboarding', onChange)
+  return () => {
+    ipcRenderer.removeListener('openOnboarding', onChange)
+  }
+}

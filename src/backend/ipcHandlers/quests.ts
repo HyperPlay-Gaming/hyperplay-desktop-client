@@ -1,3 +1,4 @@
+import { sendFrontendMessage } from 'backend/main_window'
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
 import { checkG7ConnectionStatus } from 'backend/utils/quests'
 import { DEV_PORTAL_URL } from 'common/constants'
@@ -123,3 +124,7 @@ ipcMain.handle(
     return response.hasPendingSync
   }
 )
+
+ipcMain.on('openOnboarding', () => {
+  sendFrontendMessage('openOnboarding')
+})
