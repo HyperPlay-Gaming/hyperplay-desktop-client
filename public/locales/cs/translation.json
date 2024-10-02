@@ -482,7 +482,8 @@
             "clear": "Vymazat seznam",
             "downloading": "Stahování",
             "empty": {
-                "finished": "Nic stažené"
+                "finished": "Nic stažené",
+                "queue": "Nic ke stažení"
             },
             "finished": "Dokončeno",
             "queued": "Ve frontě",
