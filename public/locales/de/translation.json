@@ -482,7 +482,8 @@
             "clear": "Liste leeren",
             "downloading": "Lade herunter",
             "empty": {
-                "finished": "Nichts heruntergeladen"
+                "finished": "Nichts heruntergeladen",
+                "queue": "Nichts zum Herunterladen"
             },
             "finished": "Abgeschlossen",
             "queued": "In Warteschlange",
