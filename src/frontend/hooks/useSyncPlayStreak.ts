@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import extensionState from 'frontend/state/ExtensionState'
 import { useSyncPlayStreak as useSyncPlayStreakCore } from '@hyperplay/quests-ui'
 
+// @dev: this hook needs to be used in a component with MobX observer
 export function useSyncPlayStreak({
   refreshPlayStreak
 }: {
