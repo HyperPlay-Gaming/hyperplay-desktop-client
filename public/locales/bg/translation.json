@@ -196,7 +196,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Предполагаемо време"
+        "ETA": "Предполагаемо време",
+        "title_dm": "Мениджър на изтеглянията"
     },
     "epic": {
         "offline-notification-body": "Услугите, зависещи от Интернет, може да не работят изцяло, тъй като сървърите на Epic Games не са достъпни!",
@@ -434,7 +435,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -622,7 +625,8 @@
         "collapse": "Свиване на страничната лента",
         "uncollapse": "Разпъване на страничната лента",
         "library": "Библиотека",
-        "store": "Магазин"
+        "store": "Магазин",
+        "downloadManager": "Мениджър на изтеглянията"
     },
     "status": {
         "installing": "Инсталиране",
