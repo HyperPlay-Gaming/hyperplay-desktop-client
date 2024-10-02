@@ -482,7 +482,8 @@
             "clear": "Esborra la llista",
             "downloading": "Es descarrega",
             "empty": {
-                "queue": "No hi ha res per a descarregar"
+                "queue": "No hi ha res per a descarregar",
+                "finished": "No hi ha comentaris"
             },
             "finished": "Completat",
             "queued": "A la cua",
