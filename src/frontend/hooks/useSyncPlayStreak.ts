@@ -1,11 +1,12 @@
 import { useAccount, useConnect, useSignMessage } from 'wagmi'
 import useAuthSession from './useAuthSession'
 import { useFlags } from 'launchdarkly-react-client-sdk'
-import { useMutation } from '@tanstack/react-query'
 import { injected } from 'wagmi/connectors'
 import authState from 'frontend/state/authState'
 import alertStore from 'frontend/store/AlertStore'
 import { useTranslation } from 'react-i18next'
+import extensionState from 'frontend/state/ExtensionState'
+import { useSyncPlayStreak as useSyncPlayStreakCore } from '@hyperplay/quests-ui'
 
 export function useSyncPlayStreak({
   refreshPlayStreak
@@ -20,82 +21,44 @@ export function useSyncPlayStreak({
   const questsWithExternalSync: number[] = flags.questsWithExternalSync
   const { t } = useTranslation()
 
-  const { mutate } = useMutation({
-    mutationFn: async (questId: number) => {
-      if (questsWithExternalSync.includes(questId)) {
-        const currentProvider = await window.api.getConnectedProvider()
-        const isWalletConnected = currentProvider !== 'Unconnected'
-
-        // we do window.api.focusMainWindow() instead of onboardingStore.openOnboarding()
-        // because this can be called from a game window, not the main window
-        if (!isWalletConnected) {
-          alertStore.setAlert(
-            'warning',
-            t(
-              'quests.playstreak.walletNotConnected',
-              'Please connect a wallet to sync your progress.'
-            )
-          )
-          window.api.focusMainWindow()
-          window.api.openOnboarding()
-          return
-        }
-
-        let wallet = address
-
-        if (!address) {
-          const { accounts } = await connectAsync({ connector: injected() })
-          wallet = accounts[0]
-        }
-
-        if (!wallet) {
-          alertStore.setAlert(
-            'warning',
-            t(
-              'quests.playstreak.walletNotConnected',
-              'Please connect a wallet to sync your progress.'
-            )
-          )
-          window.api.focusMainWindow()
-          window.api.openOnboarding()
-          return
-        }
-
-        let hasPendingSync = false
-
-        try {
-          hasPendingSync = await window.api.checkPendingSync({
-            wallet,
-            questId
-          })
-        } catch (error) {
-          console.error('Error checking pending sync', error)
-        }
-
-        if (!hasPendingSync) {
-          return
-        }
-
-        const csrfToken = await window.api.getCSRFToken()
-        const message = `Sync play-streak of quest with ID: ${questId} \n\nNonce: ${csrfToken}`
-        const signature = await signMessageAsync({ message })
-
-        await window.api.syncPlayStreakWithExternalSource({
-          quest_id: questId,
-          signature
-        })
-      }
-    },
-    onSuccess: async () => {
-      refreshPlayStreak()
-      console.log('Playstreak synced with external source')
-      window.api.logInfo('Playstreak synced with external source')
-    },
-    onError: (error) => {
-      console.error(`Error syncing playstreak with external source`, error)
-      window.api.logError(
-        `Error syncing playstreak with external source: ${error.message}`
+  const showWalletWarning = () => {
+    alertStore.setAlert(
+      'warning',
+      t(
+        'quests.playstreak.walletNotConnected',
+        'Please connect a wallet to sync your progress.'
       )
+    )
+  }
+
+  const { mutate } = useSyncPlayStreakCore({
+    getCSRFToken: async () => {
+      return window.api.getCSRFToken()
+    },
+    syncPlayStreakWithExternalSource: async ({ quest_id, signature }) => {
+      return window.api.syncPlayStreakWithExternalSource({
+        quest_id,
+        signature
+      })
+    },
+    checkPendingSync: async ({ wallet, questId }) => {
+      return window.api.checkPendingSync({ wallet, questId })
+    },
+    signMessage: async (message) => {
+      return signMessageAsync({ message })
+    },
+    mutationOptions: {
+      onSuccess: async () => {
+        refreshPlayStreak()
+        console.log('Playstreak synced with external source')
+        window.api.logInfo('Playstreak synced with external source')
+      },
+      onError: (error) => {
+        console.error(`Error syncing playstreak with external source`, error)
+        window.api.logError(
+          `Error syncing playstreak with external source: ${error.message}`
+        )
+      }
     }
   })
 
@@ -105,7 +68,43 @@ export function useSyncPlayStreak({
       return
     }
 
-    mutate(questId)
+    console.log('questsWithExternalSync', questsWithExternalSync)
+
+    if (!questsWithExternalSync.includes(questId)) {
+      refreshPlayStreak()
+      return
+    }
+
+    const currentProvider = await window.api.getConnectedProvider()
+    const web3Provider = await window.api.getCurrentWeb3Provider()
+
+    const isWalletUnConnected =
+      currentProvider === 'Unconnected' && !web3Provider
+
+    // we do window.api.focusMainWindow() instead of onboardingStore.openOnboarding()
+    // because this can be called from a game window, not the main window
+    if (isWalletUnConnected) {
+      showWalletWarning()
+      window.api.focusMainWindow()
+      window.api.openOnboarding()
+      return
+    }
+
+    let connectedAddress = address
+
+    if (!connectedAddress) {
+      showWalletWarning()
+      extensionState.showPopup()
+      const { accounts } = await connectAsync({ connector: injected() })
+      connectedAddress = accounts[0]
+    }
+
+    if (!connectedAddress) {
+      showWalletWarning()
+      return
+    }
+
+    mutate({ questId, address: connectedAddress })
   }
 
   return {
