@@ -482,7 +482,8 @@
             "clear": "Effacer la liste",
             "downloading": "En cours de téléchargement",
             "empty": {
-                "finished": "Rien téléchargé"
+                "finished": "Rien téléchargé",
+                "queue": "Rien à télécharger"
             },
             "finished": "Achevés",
             "queued": "En attente",
