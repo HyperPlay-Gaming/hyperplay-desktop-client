@@ -482,7 +482,8 @@
             "clear": "Clear List",
             "downloading": "Downloading",
             "empty": {
-                "finished": "دانلود آهنگ Nothing"
+                "finished": "دانلود آهنگ Nothing",
+                "queue": "Nothing to download"
             },
             "finished": "Completed",
             "queued": "Queued",
