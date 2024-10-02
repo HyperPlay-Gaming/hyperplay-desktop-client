@@ -481,7 +481,9 @@
             "canceled": "Annulé",
             "clear": "Effacer la liste",
             "downloading": "En cours de téléchargement",
-            "empty": "Rien à télécharger",
+            "empty": {
+                "finished": "Rien téléchargé"
+            },
             "finished": "Achevés",
             "queued": "En attente",
             "remove": "Retirer de la liste des Téléchargements",
