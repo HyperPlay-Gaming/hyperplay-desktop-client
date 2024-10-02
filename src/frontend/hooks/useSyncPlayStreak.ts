@@ -5,6 +5,7 @@ import { useMutation } from '@tanstack/react-query'
 import { injected } from 'wagmi/connectors'
 import authState from 'frontend/state/authState'
 import alertStore from 'frontend/store/AlertStore'
+import { useTranslation } from 'react-i18next'
 
 export function useSyncPlayStreak({
   refreshPlayStreak
@@ -17,6 +18,7 @@ export function useSyncPlayStreak({
   const { signMessageAsync } = useSignMessage()
   const { connectAsync } = useConnect()
   const questsWithExternalSync: number[] = flags.questsWithExternalSync
+  const { t } = useTranslation()
 
   const { mutate } = useMutation({
     mutationFn: async (questId: number) => {
@@ -29,7 +31,10 @@ export function useSyncPlayStreak({
         if (!isWalletConnected) {
           alertStore.setAlert(
             'warning',
-            'Please connect your wallet to sync your play streak'
+            t(
+              'quests.playstreak.walletNotConnected',
+              'Please connect a wallet to sync your progress.'
+            )
           )
           window.api.focusMainWindow()
           window.api.openOnboarding()
@@ -46,7 +51,10 @@ export function useSyncPlayStreak({
         if (!wallet) {
           alertStore.setAlert(
             'warning',
-            'Please connect your wallet to sync your play streak'
+            t(
+              'quests.playstreak.walletNotConnected',
+              'Please connect a wallet to sync your progress.'
+            )
           )
           window.api.focusMainWindow()
           window.api.openOnboarding()
