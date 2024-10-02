@@ -482,7 +482,8 @@
             "clear": "Clear List",
             "downloading": "Downloading",
             "empty": {
-                "finished": "Semmi letöltött"
+                "finished": "Semmi letöltött",
+                "queue": "Nothing to download"
             },
             "finished": "Completed",
             "queued": "Queued",
