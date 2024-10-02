@@ -482,7 +482,8 @@
             "clear": "Clear List",
             "downloading": "Downloading",
             "empty": {
-                "finished": "Ingenting nedladdat"
+                "finished": "Ingenting nedladdat",
+                "queue": "Nothing to download"
             },
             "finished": "Completed",
             "queued": "Queued",
