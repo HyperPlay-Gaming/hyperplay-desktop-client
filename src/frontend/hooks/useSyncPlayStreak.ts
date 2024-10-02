@@ -4,6 +4,7 @@ import { useFlags } from 'launchdarkly-react-client-sdk'
 import { useMutation } from '@tanstack/react-query'
 import { injected } from 'wagmi/connectors'
 import authState from 'frontend/state/authState'
+import alertStore from 'frontend/store/AlertStore'
 
 export function useSyncPlayStreak({
   refreshPlayStreak
@@ -26,8 +27,10 @@ export function useSyncPlayStreak({
         // we do window.api.focusMainWindow() instead of onboardingStore.openOnboarding()
         // because this can be called from a game window, not the main window
         if (!isWalletConnected) {
-          window.api.focusMainWindow()
-          window.api.openOnboarding()
+          alertStore.setAlert(
+            'warning',
+            'Please connect your wallet to sync your play streak'
+          )
           return
         }
 
@@ -39,8 +42,10 @@ export function useSyncPlayStreak({
         }
 
         if (!wallet) {
-          window.api.focusMainWindow()
-          window.api.openOnboarding()
+          alertStore.setAlert(
+            'warning',
+            'Please connect your wallet to sync your play streak'
+          )
           return
         }
 
