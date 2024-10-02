@@ -481,7 +481,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "دانلود آهنگ Nothing"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
