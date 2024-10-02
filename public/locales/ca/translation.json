@@ -481,7 +481,9 @@
             "canceled": "Cancel·lat",
             "clear": "Esborra la llista",
             "downloading": "Es descarrega",
-            "empty": "No hi ha res per a descarregar",
+            "empty": {
+                "queue": "No hi ha res per a descarregar"
+            },
             "finished": "Completat",
             "queued": "A la cua",
             "remove": "Treu de les descàrregues",
