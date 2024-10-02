@@ -1,13 +1,8 @@
-import {
-  GameInfo,
-  HyperPlayInstallInfo,
-  InstallPlatform,
-  Runner
-} from 'common/types'
+import { HyperPlayInstallInfo, InstallPlatform, Runner } from 'common/types'
 import { GogInstallInfo } from 'common/types/gog'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { getGameInfo, getInstallInfo } from 'frontend/helpers'
-import { useEffect, useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
 type InstallInfo =
   | GogInstallInfo
@@ -28,29 +23,29 @@ export const useGameInfo = ({
   platform,
   channel
 }: UseGameInfoProps) => {
-  const [gameInfo, setGameInfo] = useState<GameInfo | null>(null)
-  const [installInfo, setInstallInfo] = useState<InstallInfo | null>(null)
+  const query = useQuery({
+    queryKey: ['gameData', appName, runner, platform, channel],
+    queryFn: async () => {
+      const gameInfo = await getGameInfo(appName, runner)
 
-  useEffect(() => {
-    const getNewInfo = async () => {
-      const newInfo = (await getGameInfo(appName, runner)) as GameInfo
-
-      if (newInfo && platform) {
-        const installInfo = await getInstallInfo(
+      let installInfo: InstallInfo = null
+      if (gameInfo && platform) {
+        installInfo = await getInstallInfo(
           appName,
-          newInfo.runner,
+          gameInfo.runner,
           platform,
-          channel || 'main'
+          channel ?? 'main'
         )
-        setInstallInfo(installInfo)
       }
 
-      if (newInfo) {
-        setGameInfo(newInfo)
-      }
+      return { gameInfo, installInfo }
     }
-    getNewInfo()
-  }, [appName, runner, platform, channel])
+  })
 
-  return { gameInfo, installInfo }
+  return {
+    ...query.data,
+    isLoading: query.isLoading,
+    isError: query.isError || false,
+    error: query.error
+  }
 }
