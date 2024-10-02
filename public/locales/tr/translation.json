@@ -482,7 +482,8 @@
             "clear": "Clear List",
             "downloading": "Downloading",
             "empty": {
-                "finished": "Hiçbir şey indirilmedi"
+                "finished": "Hiçbir şey indirilmedi",
+                "queue": "Nothing to download"
             },
             "finished": "Completed",
             "queued": "Queued",
