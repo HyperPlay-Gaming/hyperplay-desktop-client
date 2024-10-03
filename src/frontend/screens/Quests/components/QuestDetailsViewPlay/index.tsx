@@ -135,6 +135,7 @@ export function QuestDetailsViewPlayWrapper({
     },
     sync: t('quest.sync', 'Sync'),
     streakProgressI18n: {
+      sync: t('quest.playstreak.sync', 'Sync'),
       streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
       days: t('quest.playstreak.days', 'days'),
       playToStart: t(
@@ -180,6 +181,9 @@ export function QuestDetailsViewPlayWrapper({
             steamAccountLinked: false
           },
           playStreak: {
+            onSync: () => {
+              console.log('onSync')
+            },
             currentStreakInDays: 0,
             requiredStreakInDays: 1,
             minimumSessionTimeInSeconds: 100,

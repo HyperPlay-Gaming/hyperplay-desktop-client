@@ -14,6 +14,9 @@ export function getPlaystreakArgsFromQuestData(
     sessionStartedTime = dateTimeCurrentSessionStartedInMsSinceEpoch
   }
   return {
+    onSync: () => {
+      console.log('onSync')
+    },
     requiredStreakInDays:
       questMeta?.eligibility?.play_streak.required_playstreak_in_days ?? 0,
     currentStreakInDays: questPlayStreakData?.current_playstreak_in_days ?? 0,
