@@ -11,7 +11,7 @@ import '@hyperplay/quests-ui/style.css'
 import { Reward } from 'common/types'
 import useGetQuests from 'frontend/hooks/useGetQuests'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
-import { useSyncPlayStreak } from 'frontend/hooks/useSyncPlayStreak'
+import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import { observer } from 'mobx-react-lite'
 
 export interface QuestsViewerProps {
@@ -31,9 +31,10 @@ export const QuestsViewer = observer(
     const sessionEmail = data?.linkedAccounts.get('email')
     const { invalidateQuery } = useGetUserPlayStreak(visibleQuestId)
 
-    const { syncPlayStreak } = useSyncPlayStreak({
-      refreshPlayStreak: invalidateQuery
-    })
+    const { syncPlayStreakWithExternalSource } =
+      useSyncPlayStreakWithExternalSource({
+        refreshPlayStreak: invalidateQuery
+      })
 
     /**
    Don't delete this comment block since it's used for translation parsing for keys that are on the quests-ui library.
@@ -78,7 +79,8 @@ export const QuestsViewer = observer(
             setSelectedQuestId={setSelectedQuestId}
           />
           <QuestDetailsWrapper
-            syncPlayStreak={syncPlayStreak}
+            questsWithExternalPlayStreakSync={flags.questsWithExternalSync}
+            syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
             tOverride={t}
             sessionEmail={sessionEmail}
             className={styles.detailsWrapper}

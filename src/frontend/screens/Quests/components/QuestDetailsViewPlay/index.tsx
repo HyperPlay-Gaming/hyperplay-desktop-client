@@ -16,8 +16,9 @@ import { getPlaystreakArgsFromQuestData } from '@hyperplay/quests-ui'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
-import { useSyncPlayStreak } from 'frontend/hooks/useSyncPlayStreak'
+import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import { observer } from 'mobx-react-lite'
+import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -27,6 +28,8 @@ export const QuestDetailsViewPlayWrapper = observer(
   ({ selectedQuestId }: QuestDetailsViewPlayWrapperProps) => {
     const navigate = useNavigate()
     const { t } = useTranslation()
+    const flags = useFlags()
+    const questsWithExternalSync: number[] = flags.questsWithExternalSync
     const [collapseIsOpen, setCollapseIsOpen] = useState(false)
 
     const questResult = useGetQuest(selectedQuestId)
@@ -41,9 +44,25 @@ export const QuestDetailsViewPlayWrapper = observer(
       questMeta?.eligibility?.steam_games ?? []
     )
 
-    const { syncPlayStreak } = useSyncPlayStreak({
-      refreshPlayStreak: questPlayStreakResult.invalidateQuery
-    })
+    const { syncPlayStreakWithExternalSource } =
+      useSyncPlayStreakWithExternalSource({
+        refreshPlayStreak: questPlayStreakResult.invalidateQuery
+      })
+
+    const handleSyncPlayStreak = async () => {
+      if (!questMeta) {
+        console.error('Quest meta is null')
+        window.api.logError('Quest meta is null')
+        return
+      }
+
+      if (questsWithExternalSync.includes(questMeta.id)) {
+        syncPlayStreakWithExternalSource(questMeta.id)
+      } else {
+        await window.api.syncPlaySession(questMeta.project_id, 'hyperplay')
+        await questPlayStreakResult.invalidateQuery()
+      }
+    }
 
     const navigateToGame = useMutation({
       mutationFn: async (appName: string) => {
@@ -233,10 +252,11 @@ export const QuestDetailsViewPlayWrapper = observer(
             eligible: false,
             steamAccountLinked: false
           },
-          playStreak: {
-            ...getPlaystreakArgsFromQuestData(questMeta, questPlayStreakData),
-            onSync: async () => syncPlayStreak(selectedQuestId)
-          }
+          playStreak: getPlaystreakArgsFromQuestData({
+            questMeta,
+            questPlayStreakData,
+            onSync: handleSyncPlayStreak
+          })
         }}
         classNames={{ root: styles.questDetailsRoot }}
         isQuestsPage={true}

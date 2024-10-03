@@ -1,25 +1,22 @@
 import { useAccount, useConnect, useSignMessage } from 'wagmi'
 import useAuthSession from './useAuthSession'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 import { injected } from 'wagmi/connectors'
-import authState from 'frontend/state/authState'
 import alertStore from 'frontend/store/AlertStore'
 import { useTranslation } from 'react-i18next'
 import extensionState from 'frontend/state/ExtensionState'
-import { useSyncPlayStreak as useSyncPlayStreakCore } from '@hyperplay/quests-ui'
+import { useSyncPlayStreakWithExternalSource as useSyncPlayStreakWithExternalSourceCore } from '@hyperplay/quests-ui'
+import authState from 'frontend/state/authState'
 
 // @dev: this hook needs to be used in a component with MobX observer
-export function useSyncPlayStreak({
+export function useSyncPlayStreakWithExternalSource({
   refreshPlayStreak
 }: {
   refreshPlayStreak: () => void
 }) {
-  const flags = useFlags()
   const { isSignedIn } = useAuthSession()
   const { address } = useAccount()
   const { signMessageAsync } = useSignMessage()
   const { connectAsync } = useConnect()
-  const questsWithExternalSync: number[] = flags.questsWithExternalSync
   const { t } = useTranslation()
 
   const showWalletWarning = () => {
@@ -32,7 +29,7 @@ export function useSyncPlayStreak({
     )
   }
 
-  const { mutate } = useSyncPlayStreakCore({
+  const { mutate } = useSyncPlayStreakWithExternalSourceCore({
     getCSRFToken: async () => {
       return window.api.getCSRFToken()
     },
@@ -63,16 +60,9 @@ export function useSyncPlayStreak({
     }
   })
 
-  const syncPlayStreak = async (questId: number) => {
+  const syncPlayStreakWithExternalSource = async (questId: number) => {
     if (!isSignedIn) {
       authState.openSignInModal()
-      return
-    }
-
-    console.log('questsWithExternalSync', questsWithExternalSync)
-
-    if (!questsWithExternalSync.includes(questId)) {
-      refreshPlayStreak()
       return
     }
 
@@ -109,6 +99,6 @@ export function useSyncPlayStreak({
   }
 
   return {
-    syncPlayStreak
+    syncPlayStreakWithExternalSource
   }
 }
