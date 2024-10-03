@@ -39,6 +39,7 @@ import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
 import { UpdateModalController } from './components/UI/UpdateModalController'
 import { QuestsPage } from './screens/Quests'
 import { NavigateListener } from './NavigateListener'
+import AlertToast from './components/UI/AlertToast'
 
 function App() {
   const { sidebarCollapsed, isSettingsModalOpen, connectivity } =
@@ -53,6 +54,7 @@ function App() {
         <TopNavBar />
         <Sidebar />
         <main className="content">
+          <AlertToast />
           <QaAuthHandler />
           <NavigateListener />
           <ExtensionHandler />
