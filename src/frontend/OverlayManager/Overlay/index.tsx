@@ -13,6 +13,7 @@ import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
+import AlertToast from 'frontend/components/UI/AlertToast'
 
 export const Overlay = observer(function ({
   appName,
@@ -122,6 +123,7 @@ export const Overlay = observer(function ({
       <div className={BrowserGameStyles.root}>
         <div className={BrowserGameStyles.bgFilter} />
         <div className={BrowserGameStyles.contentContainer}>
+          <AlertToast />
           {questsViewer}
           <div className={BrowserGameStyles.rightSideContainer}>
             {exitGameButton}

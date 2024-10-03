@@ -16,7 +16,7 @@ import { getPlaystreakArgsFromQuestData } from '@hyperplay/quests-ui'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
-// import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
+import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import { observer } from 'mobx-react-lite'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 
@@ -44,10 +44,10 @@ export const QuestDetailsViewPlayWrapper = observer(
       questMeta?.eligibility?.steam_games ?? []
     )
 
-    // const { syncPlayStreakWithExternalSource } =
-    //   useSyncPlayStreakWithExternalSource({
-    //     refreshPlayStreak: questPlayStreakResult.invalidateQuery
-    //   })
+    const { syncPlayStreakWithExternalSource } =
+      useSyncPlayStreakWithExternalSource({
+        refreshPlayStreak: questPlayStreakResult.invalidateQuery
+      })
 
     const handleSyncPlayStreak = async () => {
       if (!questMeta) {
@@ -57,7 +57,7 @@ export const QuestDetailsViewPlayWrapper = observer(
       }
 
       if (questsWithExternalSync.includes(questMeta.id)) {
-        // syncPlayStreakWithExternalSource(questMeta.id)
+        syncPlayStreakWithExternalSource(questMeta.id)
       } else {
         await window.api.syncPlaySession(questMeta.project_id, 'hyperplay')
         await questPlayStreakResult.invalidateQuery()

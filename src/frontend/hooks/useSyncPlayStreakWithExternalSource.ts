@@ -65,10 +65,13 @@ export function useSyncPlayStreakWithExternalSource({
       authState.openSignInModal()
       return
     }
+
     const currentProvider = await window.api.getConnectedProvider()
     const web3Provider = await window.api.getCurrentWeb3Provider()
+
     const isWalletUnConnected =
       currentProvider === 'Unconnected' && !web3Provider
+
     // we do window.api.focusMainWindow() instead of onboardingStore.openOnboarding()
     // because this can be called from a game window, not the main window
     if (isWalletUnConnected) {
@@ -77,17 +80,21 @@ export function useSyncPlayStreakWithExternalSource({
       window.api.openOnboarding()
       return
     }
+
     let connectedAddress = address
+
     if (!connectedAddress) {
       showWalletWarning()
       extensionState.showPopup()
       const { accounts } = await connectAsync({ connector: injected() })
       connectedAddress = accounts[0]
     }
+
     if (!connectedAddress) {
       showWalletWarning()
       return
     }
+
     mutate({ questId, address: connectedAddress })
   }
 

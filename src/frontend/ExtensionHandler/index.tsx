@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom'
 
 declare global {
   interface Window {
-    // @ts-expect-error: conflict with wagmi
     ethereum: {
       /*eslint-disable-next-line @typescript-eslint/no-explicit-any */
       request: (args: any) => any
