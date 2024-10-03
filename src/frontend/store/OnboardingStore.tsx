@@ -13,6 +13,9 @@ class OnboardingStore {
 
   constructor() {
     makeAutoObservable(this)
+    window.api.handleOpenOnboarding(() => {
+      this.openOnboarding()
+    })
   }
 
   public openOnboarding() {
