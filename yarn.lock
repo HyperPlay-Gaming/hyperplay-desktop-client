@@ -1335,17 +1335,17 @@
   dependencies:
     bignumber.js "^9.1.2"
 
-"@hyperplay/utils@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.16.tgz#92520b12b2870260c34d7e76195713a5b0be2acc"
-  integrity sha512-2k0kTePgNfgnW2kDM5ZkQv1Q+K24EQRipyr5ECgNtaWmJrF11It/OZ0Yjsdr+cK/zEiFmCCNWet+kqGqGt80JQ==
-  dependencies:
-    bignumber.js "^9.1.2"
-
 "@hyperplay/utils@^0.0.9":
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.0.9.tgz#80836cfde5c4d63e41f5df809ae2e80314600c5a"
   integrity sha512-gMAa6gdFXfLrJUjPAD2is06qNo4MHzpb6Cbzt4xfNd7wI9chOblQ+piwTI1oFWs44GgfacsMq6i5esNly3hELg==
+  dependencies:
+    bignumber.js "^9.1.2"
+
+"@hyperplay/utils@^0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@hyperplay/utils/-/utils-0.2.4.tgz#17621d43f0d92a3d22de87dc08d96b0f2db2291c"
+  integrity sha512-aQLyh8xpVDK+R0jvHrU6eHtmcMu18PP+33bFlGvrqfLRhHfN7xmThrCfPzueWSP3u4MDQku6lQT3bYzMrATjvQ==
   dependencies:
     bignumber.js "^9.1.2"
 
