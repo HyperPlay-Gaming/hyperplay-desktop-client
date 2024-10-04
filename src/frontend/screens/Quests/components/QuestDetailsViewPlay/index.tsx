@@ -159,7 +159,7 @@ export const QuestDetailsViewPlayWrapper = observer(
       },
       sync: t('quest.sync', 'Sync'),
       streakProgressI18n: {
-        sync: t('quest.playstreak.sync', 'Sync'),
+        sync: t('quest.playstreak.sync', 'Sync Progress'),
         streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
         days: t('quest.playstreak.days', 'days'),
         playToStart: t(
