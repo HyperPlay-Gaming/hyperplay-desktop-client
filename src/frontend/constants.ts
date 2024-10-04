@@ -1,5 +1,6 @@
 export const EPIC_LOGIN_URL = 'https://legendary.gl/epiclogin'
-export const HYPERPLAY_STORE_URL = 'https://store.hyperplay.xyz?isLauncher=true'
+export const HYPERPLAY_STORE_URL =
+  'https://hyperplay-store-git-feat-gamepageactions-hyperplay.vercel.app?isLauncher=true'
 export const EPIC_STORE_URL = 'https://www.epicgames.com/store'
 export const GOG_STORE_URL = `https://gog.com`
 export const WIKI_URL = 'https://docs.hyperplay.xyz/'

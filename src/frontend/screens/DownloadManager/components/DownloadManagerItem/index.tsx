@@ -6,7 +6,8 @@ import {
   DMQueueElement,
   DownloadManagerState,
   GameInfo,
-  HyperPlayInstallInfo
+  HyperPlayInstallInfo,
+  GamePageActions
 } from 'common/types'
 import { CachedImage, SvgButton } from 'frontend/components/UI'
 import {
@@ -130,20 +131,21 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
   const canceled = status === 'error' || (status === 'abort' && !current)
   const isExtracting = gameProgressStatus === 'extracting'
 
-  const goToGamePage = () => {
+  const goToGamePage = (action?: GamePageActions) => {
     if (is_dlc) {
       return
     }
     return navigate(`/gamepage/${runner}/${appName}`, {
-      state: { fromDM: true, gameInfo: gameInfo }
+      state: { fromDM: true, gameInfo: gameInfo, action }
     })
   }
 
   // using one element for the different states so it doesn't
   // lose focus from the button when using a game controller
-  const handleMainActionClick = () => {
+  const handleMainActionClick = async () => {
+    const action = finished ? 'launch' : 'install'
     if (finished || canceled) {
-      return goToGamePage()
+      return goToGamePage(action)
     }
 
     // gameInfo must be defined in order to get folder name for stop installation modal
