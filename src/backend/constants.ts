@@ -122,6 +122,8 @@ export function getValistListingApiUrl(projectId: string) {
   )
 }
 
+export const patchApiUrl = `${DEV_PORTAL_URL}api/v1/patches`
+
 export function getValidateLicenseKeysApiUrl() {
   return `${DEV_PORTAL_URL}api/v1/license_keys/validate`
 }

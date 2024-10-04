@@ -12,8 +12,8 @@ import {
   UpdateArgs,
   WineCommandArgs,
   Runner,
-  AppPlatforms
 } from '../../../common/types'
+import { generateID } from '@valist/sdk';
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
 import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
@@ -55,7 +55,7 @@ import {
   deleteAbortController
 } from 'backend/utils/aborthandler/aborthandler'
 import {
-  getHyperPlayStoreRelease,
+  getHyperPlayReleaseManifest,
   handleArchAndPlatform,
   handlePlatformReversed,
   runModPatcher,
@@ -1571,58 +1571,31 @@ const getIpdtPatcherVersion = async () => {
 
 export async function downloadGameIpdtManifest(
   appName: string,
-  version?: string
+  version: string
 ) {
   const {
     install: { channelName, platform, version: installedVersion },
     is_installed
   } = getGameInfo(appName)
-  if (!channelName || !platform || !is_installed) {
-    return
-  }
-  const releaseVersion = version || installedVersion
+  if (!channelName || !platform || !is_installed) return false
 
-  // since we don't have the manifest field on the listings API yet, we need to hit the gaming API to have this information
-  const { channels } = await getHyperPlayStoreRelease(appName)
-  const currentChannel = channels.find(
-    (channel) => channel.channel_name === channelName
+  // download only if the manifest file is not already downloaded and its the same version
+  const manifestName = `${appName}-${platform}-${version}.json`
+  const manifestPath = path.join(ipdtManifestsPath, manifestName)
+  if (existsSync(manifestPath)) return false
+
+  const releaseId = generateID(appName, version)
+  const manifestUrl = await getHyperPlayReleaseManifest(releaseId, platform)
+  if (!manifestUrl) return false
+
+  // download and save the manifest file as a json file in manifest folder
+  await downloadFile(
+    manifestUrl,
+    ipdtManifestsPath,
+    manifestName,
+    createAbortController(appName)
   )
-
-  if (!currentChannel) {
-    logError(
-      `Channel not found for ${appName} and channel ${channelName}, maybe the channel was removed by the developer `,
-      LogPrefix.HyperPlay
-    )
-    return
-  }
-
-  const platformKey = platform as AppPlatforms
-  const { name: newVersion, platforms } = currentChannel.release_meta
-  if (platforms[platformKey]) {
-    const manifestUrl = platforms[platformKey]?.manifest
-    if (!manifestUrl) {
-      // not logging here since it will flood with info since not all games have manifest
-      return
-    }
-
-    // download only if the manifest file is not already downloaded and its the same version
-    const manifestName = `${appName}-${platform}-${releaseVersion}.json`
-    const manifestPath = path.join(ipdtManifestsPath, manifestName)
-
-    // TODO: Update this to download the manifest for the installed version of the game once the API is available
-    if (existsSync(manifestPath) && installedVersion === newVersion) {
-      return
-    }
-
-    // download and save the manifest file as a json file in manifest folder
-    return downloadFile(
-      manifestUrl,
-      ipdtManifestsPath,
-      manifestName,
-      createAbortController(appName)
-    )
-  }
-  return
+  return true;
 }
 
 async function applyPatching(
@@ -1643,20 +1616,32 @@ async function applyPatching(
     throw new Error('Version or install path not found')
   }
 
-  const previousManifest = getManifest(appName, platformKey, version)
-  const currentManifest = getManifest(appName, platformKey, newVersion)
-  const currentManifestExists = existsSync(currentManifest)
+  let previousManifest = getManifest(appName, platformKey, version)
+  let currentManifest = getManifest(appName, platformKey, newVersion)
 
-  if (!currentManifestExists) {
-    await downloadGameIpdtManifest(appName)
+  if (!existsSync(currentManifest)) {
+    console.log('downloading manifest for new install')
+    const manifestCreated = await downloadGameIpdtManifest(appName, newVersion)
+    if (!manifestCreated) {
+      logError(
+        `Manifests not found for latest version of ${gameInfo.title} in applyPatching`,
+        LogPrefix.HyperPlay
+      )
+      throw new Error('Manifest for latest version not found')
+    }
+    currentManifest = getManifest(appName, platformKey, newVersion)
   }
 
-  if (!existsSync(previousManifest) || !currentManifestExists) {
-    logError(
-      `Manifests not found for ${gameInfo.title} in applyPatching`,
-      LogPrefix.HyperPlay
-    )
-    throw new Error('Manifest not found')
+  if (!existsSync(previousManifest)) {
+    const manifestCreated = await downloadGameIpdtManifest(appName, version)
+    if (!manifestCreated) {
+      logError(
+        `Manifests not found for installed version of ${gameInfo.title} in applyPatching`,
+        LogPrefix.HyperPlay
+      )
+      throw new Error('Manifest for installed version not found')
+    }
+    previousManifest = getManifest(appName, platformKey, version)
   }
 
   const ipfsGateway = process.env.IPFS_API
@@ -1692,11 +1677,13 @@ async function applyPatching(
 }
 
 function getManifest(appName: string, platformName: string, version: string) {
-  const manifestPath = path.join(
+  const manifestPath = path.normalize(path.join(
     ipdtManifestsPath,
     `${appName}-${platformName}-${version}.json`
-  )
+  ))
+
   if (!existsSync(manifestPath)) {
+    console.log('does not exist')
     return ''
   }
 
