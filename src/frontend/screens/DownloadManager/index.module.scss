@@ -1,45 +1,3 @@
-.dmItemList > .gameListHeader {
-  padding: var(--space-md) 0;
-  grid-template-columns: 2fr 1fr 1fr 1fr 10%;
-  margin: 0 var(--space-sm-fixed);
-}
-
-.downloadManager
-  > .MuiTabs-root
-  > .MuiTabs-scroller
-  > .MuiTabs-flexContainer
-  > .MuiTab-root {
-  color: var(--text-default);
-}
-
-.downloadManager
-  > .MuiTabs-root
-  > .MuiTabs-scroller
-  > .MuiTabs-flexContainer
-  > .Mui-selected {
-  color: var(--accent);
-}
-
-.downloadManager > .MuiTabs-root > .MuiTabs-scroller > .MuiTabs-indicator {
-  background-color: var(--accent);
-}
-
-.downloadManager {
-  padding: 0;
-  margin: 0;
-}
-
-.downloadManagerCurrentSectionTitle {
-  margin: 0px 0px 0px 0px;
-  text-align: initial;
-  padding-left: 30px;
-}
-
-.downloadManagerQueuedSectionTitle {
-  margin: 30px 0px 0px 0px;
-  text-align: initial;
-}
-
 .tabsList {
   margin: var(--space-2lg-fixed) 0px;
 }
@@ -50,4 +8,14 @@
 
 .title {
   text-align: left;
+}
+
+.empty {
+  text-align: center;
+  margin-top: var(--space-2lg-fixed);
+}
+
+.clearButton {
+  position: absolute;
+  right: var(--space-xl-fixed);
 }

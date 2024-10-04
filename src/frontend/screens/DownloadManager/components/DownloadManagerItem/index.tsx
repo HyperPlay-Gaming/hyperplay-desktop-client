@@ -35,15 +35,16 @@ type Props = {
   state?: DownloadManagerState
 }
 
-const options: Intl.DateTimeFormatOptions = {
-  hour: 'numeric',
-  minute: 'numeric'
-}
-
 function convertToTime(time: number) {
   const date = time ? new Date(time) : new Date()
-  const hour = new Intl.DateTimeFormat(undefined, options).format(date)
-  return { hour, fullDate: date.toLocaleString() }
+  const fullDate = new Intl.DateTimeFormat(undefined, {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  }).format(date)
+  return { fullDate }
 }
 
 type InstallInfo =
@@ -86,7 +87,8 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     path,
     gameInfo: DmGameInfo,
     size,
-    platformToInstall
+    platformToInstall,
+    channelName
   } = params
 
   const [gameInfo, setGameInfo] = useState(DmGameInfo)
@@ -100,11 +102,12 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     const getNewInfo = async () => {
       const newInfo = (await getGameInfo(appName, runner)) as GameInfo
 
-      if (size?.includes('?') && !installInfo) {
+      if (!installInfo) {
         const installInfo = await getInstallInfo(
           appName,
           runner,
-          platformToInstall
+          platformToInstall,
+          channelName
         )
         setInstallInfo(installInfo)
       }
@@ -114,7 +117,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
       }
     }
     getNewInfo()
-  }, [element])
+  }, [element, current, state])
 
   const {
     art_cover,
@@ -244,7 +247,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     update: t2('download-manager.install-type.update', 'Update')
   }
 
-  const { hour, fullDate } = getTime()
+  const { fullDate } = getTime()
 
   return (
     <>
@@ -279,7 +282,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
             </span>
           </span>
         </td>
-        <td title={fullDate}>{hour}</td>
+        <td title={fullDate}>{fullDate}</td>
         <td>{translatedTypes[type]}</td>
         <td>{getStoreName(runner, t2('Other'))}</td>
         <td>
