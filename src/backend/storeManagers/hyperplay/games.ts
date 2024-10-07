@@ -11,12 +11,18 @@ import {
   SiweValues,
   UpdateArgs,
   WineCommandArgs,
-  Runner,
+  Runner
 } from '../../../common/types'
-import { generateID } from '@valist/sdk';
+import { generateID } from '@valist/sdk'
 import { hpLibraryStore } from './electronStore'
 import { sendFrontendMessage, getMainWindow } from 'backend/main_window'
-import { LogPrefix, logError, logInfo, logWarning } from 'backend/logger/logger'
+import {
+  LogPrefix,
+  logDebug,
+  logError,
+  logInfo,
+  logWarning
+} from 'backend/logger/logger'
 import {
   ExtractZipService,
   ExtractZipProgressResponse
@@ -781,7 +787,8 @@ export async function cancelExtraction(appName: string) {
     }
   } catch (error: unknown) {
     logInfo(
-      `cancelExtraction: Error while canceling the operation ${(error as Error).message
+      `cancelExtraction: Error while canceling the operation ${
+        (error as Error).message
       } `,
       LogPrefix.HyperPlay
     )
@@ -1589,13 +1596,17 @@ export async function downloadGameIpdtManifest(
   if (!manifestUrl) return false
 
   // download and save the manifest file as a json file in manifest folder
+  logInfo(
+    `Downloading manifest for ${appName} from ${manifestUrl} to ${manifestPath}`,
+    LogPrefix.HyperPlay
+  )
   await downloadFile(
     manifestUrl,
     ipdtManifestsPath,
     manifestName,
     createAbortController(appName)
   )
-  return true;
+  return true
 }
 
 async function applyPatching(
@@ -1615,36 +1626,10 @@ async function applyPatching(
     )
     throw new Error('Version or install path not found')
   }
+  const previousManifest = await getManifest(appName, platformKey, version)
+  const currentManifest = await getManifest(appName, platformKey, newVersion)
 
-  let previousManifest = getManifest(appName, platformKey, version)
-  let currentManifest = getManifest(appName, platformKey, newVersion)
-
-  if (!existsSync(currentManifest)) {
-    console.log('downloading manifest for new install')
-    const manifestCreated = await downloadGameIpdtManifest(appName, newVersion)
-    if (!manifestCreated) {
-      logError(
-        `Manifests not found for latest version of ${gameInfo.title} in applyPatching`,
-        LogPrefix.HyperPlay
-      )
-      throw new Error('Manifest for latest version not found')
-    }
-    currentManifest = getManifest(appName, platformKey, newVersion)
-  }
-
-  if (!existsSync(previousManifest)) {
-    const manifestCreated = await downloadGameIpdtManifest(appName, version)
-    if (!manifestCreated) {
-      logError(
-        `Manifests not found for installed version of ${gameInfo.title} in applyPatching`,
-        LogPrefix.HyperPlay
-      )
-      throw new Error('Manifest for installed version not found')
-    }
-    previousManifest = getManifest(appName, platformKey, version)
-  }
-
-  const ipfsGateway = process.env.IPFS_API
+  const ipfsGateway = import.meta.env.IPFS_API
 
   logInfo(
     `Patching ${gameInfo.title} from ${version} to ${newVersion}`,
@@ -1676,15 +1661,28 @@ async function applyPatching(
   console.log('done patching')
 }
 
-function getManifest(appName: string, platformName: string, version: string) {
-  const manifestPath = path.normalize(path.join(
-    ipdtManifestsPath,
-    `${appName}-${platformName}-${version}.json`
-  ))
+async function getManifest(
+  appName: string,
+  platformName: string,
+  version: string
+) {
+  const manifestPath = path.normalize(
+    path.join(ipdtManifestsPath, `${appName}-${platformName}-${version}.json`)
+  )
 
   if (!existsSync(manifestPath)) {
-    console.log('does not exist')
-    return ''
+    console.log(`${manifestPath} does not exist, downloading it`)
+    logDebug(
+      `Manifest for ${appName} not found for version ${version} and platform ${platformName}`,
+      LogPrefix.HyperPlay
+    )
+
+    try {
+      await downloadGameIpdtManifest(appName, version)
+      return manifestPath
+    } catch (error) {
+      return ''
+    }
   }
 
   return manifestPath
