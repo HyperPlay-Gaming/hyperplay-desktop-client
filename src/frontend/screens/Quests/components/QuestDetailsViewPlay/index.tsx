@@ -42,29 +42,17 @@ export function QuestDetailsViewPlayWrapper({
 
   const navigateToGame = useMutation({
     mutationFn: async (appName: string) => {
-      let epicListingUrl = ''
-      let name = appName
+      const { appName: epicAppName, epicListingUrl } = await fetchEpicListing(
+        appName
+      )
+
       let runner: Runner = 'hyperplay'
-
-      // HP listing project ids are 66 character hex strings (including the 0x). Assume all others are Epic games for now
-      if (appName.length === 66 && appName.startsWith('0x')) {
-        const {
-          appName: epicAppName,
-          epicListingUrl: epicListingUrlForForwarderListing
-        } = await fetchEpicListing(appName)
-        epicListingUrl = epicListingUrlForForwarderListing
-
-        if (epicListingUrl) {
-          runner = 'legendary'
-          if (epicAppName) {
-            name = epicAppName
-          }
-        }
-      } else {
-        // TODO: refactor to get this from a runner string returned by getQuests API
+      let name = appName
+      if (epicListingUrl) {
         runner = 'legendary'
-        const info = await window.api.getExtraInfo(appName, runner)
-        epicListingUrl = info?.storeUrl ?? ''
+        if (epicAppName) {
+          name = epicAppName
+        }
       }
 
       // check for gameinfo to see if it is on the library
