@@ -61,6 +61,8 @@ export const QuestDetailsViewPlayWrapper = observer(
       } else {
         await window.api.syncPlaySession(questMeta.project_id, 'hyperplay')
         await questPlayStreakResult.invalidateQuery()
+        window.api.logInfo(`Synced play session for quest ${questMeta.id}`)
+        console.log(`Synced play session for quest ${questMeta.id}`)
       }
     }
 
