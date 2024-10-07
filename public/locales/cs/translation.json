@@ -481,7 +481,10 @@
             "canceled": "Zrušeno",
             "clear": "Vymazat seznam",
             "downloading": "Stahování",
-            "empty": "Nic ke stažení",
+            "empty": {
+                "finished": "Nic stažené",
+                "queue": "Nic ke stažení"
+            },
             "finished": "Dokončeno",
             "queued": "Ve frontě",
             "remove": "Odebrat ze stažených",
