@@ -16,9 +16,7 @@ import {
   sanitizeVersion,
   refreshGameInfoFromHpRelease
 } from './utils'
-import {
-  getGameInfo as getGamesGameInfo
-} from './games'
+import { getGameInfo as getGamesGameInfo } from './games'
 import { getValistListingApiUrl, qaToken } from 'backend/constants'
 
 export async function addGameToLibrary(projectId: string) {

@@ -48,7 +48,7 @@ export async function getHyperPlayReleaseManifest(
     method: 'GET',
     headers: {
       Cookie: cookieString
-    },
+    }
   })
   const data = await validateResult.json()
   return data?.manifest
