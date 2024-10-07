@@ -95,7 +95,7 @@ interface HyperPlaySyncIPCFunctions {
   killOverlay: () => void
   toggleOverlay: () => void
   authConnected: () => void
-  goToGamePage: (appName: string) => void
+  goToGamePage: (gameId: string, action: GamePageActions) => void
   authDisconnected: () => void
   otp: (otp: string) => void
   navigate: (route: string) => void
