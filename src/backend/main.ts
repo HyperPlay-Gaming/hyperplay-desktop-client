@@ -666,9 +666,21 @@ if (!gotTheLock) {
 
     initTrayIcon(mainWindow)
 
+    await HyperPlayGameManager.downloadPatcher()
+      .then(async () => {
+        logInfo('Patcher downloaded', LogPrefix.HyperPlay)
+      })
+      .catch((e) => {
+        logError(`Error downloading patcher: ${e}`, LogPrefix.HyperPlay)
+      })
+
     // Call checkGameUpdates for HyperPlay games every hour
     const checkGameUpdatesInterval = 1 * 60 * 60 * 1000
     setInterval(async () => {
+      if (!isOnline()) {
+        return
+      }
+
       try {
         await checkGameUpdates(['hyperplay'])
       } catch (error) {
