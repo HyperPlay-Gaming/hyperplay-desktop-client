@@ -1,11 +1,12 @@
 .textInputFieldWrapper.withRightButton {
-  grid-template-areas: 'label label' 'input button';
+  display: grid;
+  grid-template-areas: 'input after';
   grid-template-columns: auto min-content;
   grid-column-gap: var(--space-xs-fixed);
 }
 
-.textInputFieldWrapper.withRightButton .rightButton {
-  grid-area: button;
+.textInputFieldWrapper.withRightButton .afterInput {
+  grid-area: after;
 }
 
 .textInputFieldWrapper .smallMessage {

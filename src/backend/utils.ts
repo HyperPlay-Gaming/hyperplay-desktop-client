@@ -419,20 +419,12 @@ function splitPathAndName(fullPath: string): { dir: string; bin: string } {
 }
 
 function getLegendaryBin(): { dir: string; bin: string } {
-  const settings = GlobalConfig.get().getSettings()
-  if (settings?.altLegendaryBin) {
-    return splitPathAndName(settings.altLegendaryBin)
-  }
   return splitPathAndName(
     fixAsarPath(join(publicDir, 'bin', process.platform, 'legendary'))
   )
 }
 
 function getGOGdlBin(): { dir: string; bin: string } {
-  const settings = GlobalConfig.get().getSettings()
-  if (settings?.altGogdlBin) {
-    return splitPathAndName(settings.altGogdlBin)
-  }
   return splitPathAndName(
     fixAsarPath(join(publicDir, 'bin', process.platform, 'gogdl'))
   )
