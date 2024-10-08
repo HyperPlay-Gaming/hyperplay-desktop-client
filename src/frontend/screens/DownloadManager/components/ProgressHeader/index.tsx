@@ -104,7 +104,7 @@ export default function ProgressHeader(props: {
           </div>
         </div>
       </div>
-      {showDownloadBar && (
+      {showDownloadBar ? (
         <div className="downloadBar">
           <div className="downloadProgressStats">
             <p className="downloadStat" color="var(--text-default)">{`${
@@ -132,7 +132,7 @@ export default function ProgressHeader(props: {
             </div>
           </div>
         </div>
-      )}
+      ) : null}
     </>
   )
 }

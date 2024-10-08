@@ -196,7 +196,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Thơi gian dự định"
+        "ETA": "Thơi gian dự định",
+        "title_dm": "Quản lý tải xuống"
     },
     "epic": {
         "offline-notification-body": "Các dịch vụ trực tuyến có thể không hoạt động đầy đủ vì máy chủ của Epic Games đang ngoại tuyến!",
@@ -434,7 +435,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -618,7 +621,8 @@
         "uncollapse": "Hủy thu gọn sidebar",
         "store": "Marketplace",
         "achievements": "Thành Tựu",
-        "library": "Thư Viện"
+        "library": "Thư Viện",
+        "downloadManager": "Quản lý tải xuống"
     },
     "status": {
         "installing": "Đang cài đặt",

@@ -5,15 +5,12 @@ import styles from './index.module.scss'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 
-let isShown = true
-
 export function G7CreditsModal() {
-  const [showModal, setShowModal] = useState(isShown)
+  const [showModal, setShowModal] = useState(true)
   const { t } = useTranslation()
   const navigate = useNavigate()
 
   function closeModal() {
-    isShown = false
     setShowModal(false)
   }
 
@@ -38,11 +35,20 @@ export function G7CreditsModal() {
       <Button
         type="secondary"
         onClick={() => {
-          navigate('/quests?search=Game7')
+          navigate('/game7Portal')
           closeModal()
         }}
       >
         {t('quests.g7CreditsModal.title', 'Earn Game7 Credits')}
+      </Button>
+      <Button
+        type="tertiary"
+        onClick={() => {
+          navigate('/quests')
+          closeModal()
+        }}
+      >
+        {t('quests.viewAllQuests.title', 'View All Quests')}
       </Button>
     </Modal>
   )

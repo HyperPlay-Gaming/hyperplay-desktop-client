@@ -20,9 +20,9 @@ export function DownloadTable({
   return (
     <table className={styles.dmItemList}>
       <DownloadManagerHeader time={time} />
-      {elements.map((el, key) => (
+      {elements.map((el) => (
         <DownloadManagerItem
-          key={key}
+          key={el.params.appName}
           element={el}
           current={!!isCurrent}
           state={state}

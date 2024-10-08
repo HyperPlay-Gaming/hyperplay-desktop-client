@@ -196,7 +196,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Timpul estimat"
+        "ETA": "Timpul estimat",
+        "title_dm": "Manager Descărcări"
     },
     "epic": {
         "offline-notification-body": "Este posibil ca serviciile online să nu funcționeze complet, deoarece serverele Epic Games sunt offline!",
@@ -434,7 +435,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -618,7 +621,8 @@
         "collapse": "Restrângeți bara laterală",
         "uncollapse": "Desfaceți bara laterală",
         "library": "Bibliotecă",
-        "store": "Marketplace"
+        "store": "Marketplace",
+        "downloadManager": "Manager Descărcări"
     },
     "status": {
         "installing": "Se Instalează",
