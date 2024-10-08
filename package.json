@@ -176,7 +176,7 @@
     "@mantine/core": "^7.12.0",
     "@mantine/dropzone": "^7.12.0",
     "@mantine/hooks": "^7.12.0",
-    "@metamask/sdk": "^0.15.0",
+    "@metamask/sdk": "^0.29.0",
     "@mysten/sui.js": "^0.54.1",
     "@node-steam/vdf": "^2.2.0",
     "@rudderstack/rudder-sdk-node": "^2.0.7",
@@ -398,7 +398,8 @@
       "@hyperplay/extension-importer>classic-level": true,
       "classic-level": false,
       "i18next-parser>esbuild": false,
-      "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": false
+      "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
+      "@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true
     }
   }
 }
