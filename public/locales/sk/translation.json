@@ -1008,6 +1008,9 @@
         "g7CreditsModal": {
             "description": "Rozdeľte sa do hry HyperPlay s vzrušujúcou Play Streak Challenges. Každá aktivita vás povzbudzuje, aby ste sa zapojili do inej hry, ukazujú najlepšie z webu3 hry. Vaše herné záležitosti!",
             "title": "Zarobiť Game7 kredity"
+        },
+        "viewAllQuests": {
+            "title": "Zobraziť všetky Quests"
         }
     },
     "sideload": {
