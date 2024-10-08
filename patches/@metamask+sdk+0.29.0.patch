@@ -1,5 +1,5 @@
 diff --git a/node_modules/@metamask/sdk/dist/browser/es/src/index.d.ts b/node_modules/@metamask/sdk/dist/browser/es/src/index.d.ts
-index 00333e8..6b3e69d 100644
+index e2afc39..c07e7f4 100644
 --- a/node_modules/@metamask/sdk/dist/browser/es/src/index.d.ts
 +++ b/node_modules/@metamask/sdk/dist/browser/es/src/index.d.ts
 @@ -6,17 +6,6 @@ import { MetaMaskSDK, MetaMaskSDKOptions } from './sdk';
@@ -17,11 +17,11 @@ index 00333e8..6b3e69d 100644
 -        MSStream: unknown;
 -    }
 -}
- export { CommunicationLayerPreference, ConnectionStatus, DEFAULT_SERVER_URL, EventType, MessageType, MetaMaskSDK, PROVIDER_UPDATE_TYPE, PlatformType, RPC_URLS_MAP, SDKProvider, };
- export type { MetaMaskSDKOptions, SDKLoggingOptions, ServiceStatus };
+ export type { RPC_URLS_MAP, MetaMaskSDKOptions, SDKLoggingOptions, ServiceStatus, };
+ export { DEFAULT_SERVER_URL, EventType, CommunicationLayerPreference, MetaMaskSDK, SDKProvider, PROVIDER_UPDATE_TYPE, PlatformType, ConnectionStatus, MessageType, RPCMethodResult, RPCMethodCache, };
  export default MetaMaskSDK;
 diff --git a/node_modules/@metamask/sdk/dist/node/es/src/index.d.ts b/node_modules/@metamask/sdk/dist/node/es/src/index.d.ts
-index 00333e8..6b3e69d 100644
+index e2afc39..c07e7f4 100644
 --- a/node_modules/@metamask/sdk/dist/node/es/src/index.d.ts
 +++ b/node_modules/@metamask/sdk/dist/node/es/src/index.d.ts
 @@ -6,17 +6,6 @@ import { MetaMaskSDK, MetaMaskSDKOptions } from './sdk';
@@ -39,6 +39,6 @@ index 00333e8..6b3e69d 100644
 -        MSStream: unknown;
 -    }
 -}
- export { CommunicationLayerPreference, ConnectionStatus, DEFAULT_SERVER_URL, EventType, MessageType, MetaMaskSDK, PROVIDER_UPDATE_TYPE, PlatformType, RPC_URLS_MAP, SDKProvider, };
- export type { MetaMaskSDKOptions, SDKLoggingOptions, ServiceStatus };
+ export type { RPC_URLS_MAP, MetaMaskSDKOptions, SDKLoggingOptions, ServiceStatus, };
+ export { DEFAULT_SERVER_URL, EventType, CommunicationLayerPreference, MetaMaskSDK, SDKProvider, PROVIDER_UPDATE_TYPE, PlatformType, ConnectionStatus, MessageType, RPCMethodResult, RPCMethodCache, };
  export default MetaMaskSDK;
