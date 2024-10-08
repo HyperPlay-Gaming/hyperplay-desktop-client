@@ -1010,6 +1010,9 @@
         "g7CreditsModal": {
             "description": "Dive in HyperPlay's topspelletjes met spannende Play Streak Challenges. Elke activiteit moedigt je aan om je aan te vallen met een ander spel, het beste van Web3 spel te laten zien. Je speeltijd is belangrijk!",
             "title": "Earn Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "View All Quest"
         }
     },
     "sideload": {
