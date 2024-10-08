@@ -1309,10 +1309,10 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/quests-ui@0.0.23-sync-play-streak-external-preview-1":
-  version "0.0.23-sync-play-streak-external-preview-1"
-  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.23-sync-play-streak-external-preview-1.tgz#14f49068e419bf98725c69683dca41785978df23"
-  integrity sha512-F7h2aidab4qyHWttcnX5IJjz/ZS8hPOOEFDxoqD39WYK/MmDhmoM2EUhjmQrYRY6Me6yL5T89a4l34c91rJbjg==
+"@hyperplay/quests-ui@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.23.tgz#14bc29655c13f60828094e53283f4ccfe4acb5b6"
+  integrity sha512-9Sr+WwGsz0pGlwX6xkvd9Yb8wNJRjRoeEQesnzUl3RyrqbiLZZqKPSx61Zz4zgdGaXAJci51WcXnNUEI7IY8bw==
   dependencies:
     classnames "^2.5.1"
 
