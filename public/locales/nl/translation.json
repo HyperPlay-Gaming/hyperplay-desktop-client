@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Error verwijderde vouwen. Verwijder het handmatig.\n86X\n_117X",
                 "title": "Error verwijderen"
+            },
+            "steam": {
+                "error": "Stem executabel gevonden. Installatie werd waarschijnlijk geannuleerd door gebruiker of gefaald aan Steam zijde.",
+                "message": "Steam installatie faalde! Lees de instructies voorzichtig en probeer het opnieuw. _",
+                "title": "Steamfout"
             }
         },
         "info": {
@@ -476,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Niets gedownload",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -933,6 +941,10 @@
         "wine-download": {
             "message": "De defecte compatibiliteit lager",
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "message": "Gefaald om de compatibiliteit lager te zetten",
+            "title": "Fout"
         }
     },
     "quest": {
@@ -979,7 +991,9 @@
             "body": "_ Zorg ervoor dat je genoeg gas op het netwerk van de transactie verbindt, om succesvol bevestigd te worden dat £153 X, 173",
             "cancel": "Annuleren",
             "confirm": "Bevestigen"
-        }
+        },
+        "noG7ConnectionClaim": "Je moet een Game7 account hebben om je beloningen op te eisen.",
+        "noG7ConnectionSync": "Je moet een Game7 account hebben om je taken te herstellen."
     },
     "quests": {
         "quests": "Quest",
@@ -1098,5 +1112,25 @@
             },
             "title": "Mod Instructies"
         }
+    },
+    "Cancel Installation": "Cancel Installation",
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam '",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay zal de Steam Setup voor je downloaden. Volg Steam instructies op hun installatie;"
+    },
+    "At the end make sure to": "Aan het eind zorg dat",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay zal je inlichten als de installatie gedaan is;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Als je wilt doorgaan, wees geduldig, want het kan een paar minuten duren om af te maken van je internetverbinding en systeemconfiguratie;",
+    "Install Steam": "Install Steam",
+    "Installing Steam": "Installing Steam...",
+    "Launch Steam": "Launch Steam",
+    "Launching Steam": "Launching Steam...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Bij de eerste lancering zal Steam de nodige bestanden downloaden en zal een paar minuten duren om het login scherm te verschijnen;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Compatibiliteitslaag niet beschikbaar. Gelieve er eerst een te installeren van \"Settings\" Wine Manager.",
+        "error-message": "Er is een fout gebeurd toen hij Steam installeerde. Probeer het nog eens.",
+        "launch-tooltip": "Launch Steam gebruikt de HyperPlay Compatibility Layer",
+        "success-message": "Steam is geïnstalleerd. Je kunt het nu uit de bibliotheek lanceren.",
+        "tooltip": "Dit zal de Windows versie van Steam installeren en het zal rennen met een HyperPlay Compatibility Layer.\n\nVooral oudere titels, nieuwere 3D wedstrijden, of die met anti-kaat software werkt niet goed.\n\nDe herstellende specificaties zijn een Mac met Apple Silicon CPU (M1 of boven) en minstens 16GB van RAM."
     }
 }

@@ -1,6 +1,7 @@
 import { LogPrefix, logInfo } from 'backend/logger/logger'
 import getPartitionCookies from './get_partition_cookies'
 import { DEV_PORTAL_URL } from 'common/constants'
+import { fetchWithCookie } from './fetch_with_cookie'
 
 export async function postPlaySessionTime(
   appName: string,
@@ -36,4 +37,10 @@ export async function postPlaySessionTime(
     )}`,
     LogPrefix.HyperPlay
   )
+}
+
+export async function checkG7ConnectionStatus() {
+  const url = `${DEV_PORTAL_URL}api/v1/game7/user/connected`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.connected
 }

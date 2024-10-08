@@ -29,7 +29,7 @@
         "stopInstall": {
             "keepInstalling": "Pokračujte v inštalácii",
             "message": "Prajete si PONECHAŤ stiahnuté súbory?",
-            "title": "Zastaviť inštaláciu",
+            "title": "Chcete zrušiť sťahovanie?",
             "keepFilesMessage": "Skontrolujte, či chcete, aby súbory na stiahnutie po zrušení."
         },
         "uninstall": {
@@ -98,8 +98,8 @@
     "game": {
         "downloadSize": "Veľkosť na stiahnutie",
         "firstPlayed": "Prvýkrát hrané",
-        "getting-download-size": "Geting download size",
-        "getting-install-size": "Geting install size",
+        "getting-download-size": "Získanie veľkosti sťahovania",
+        "getting-install-size": "Získanie veľkosti inštalácie",
         "installSize": "Veľkosť inštalácie",
         "language": "Jazyk",
         "lastPlayed": "Naposledy hrané",

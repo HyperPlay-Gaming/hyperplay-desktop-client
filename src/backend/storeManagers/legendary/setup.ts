@@ -7,7 +7,8 @@ import { existsSync, createWriteStream, statSync } from 'graceful-fs'
 import { showDialogBoxModalAuto } from 'backend/dialog/dialog'
 import i18next from 'i18next'
 import { getWinePath } from 'backend/launcher'
-import { getGameInfo, getSettings, runWineCommandOnGame } from './games'
+import { getGameInfo, getSettings } from './games'
+import { runWineCommandOnGame } from 'backend/utils/compatibility_layers'
 
 const UBISOFT_INSTALLER_URL =
   'https://ubistatic3-a.akamaihd.net/orbit/launcher_installer/UbisoftConnectInstaller.exe'
@@ -19,7 +20,7 @@ export const legendarySetup = async (appName: string) => {
   }
 
   // Fixes games like Fallout New Vegas and Dishonored: Death of the Outsider
-  await runWineCommandOnGame(appName, {
+  await runWineCommandOnGame('legendary', appName, {
     commandParts: ['reg', 'add', 'HKEY_CLASSES_ROOT\\com.epicgames.launcher'],
     wait: true,
     protonVerb: 'waitforexitandrun'
@@ -48,7 +49,7 @@ const installUbisoftConnect = async (appName: string) => {
   try {
     await downloadIfNotCached(cachedUbisoftInstallerPath, UBISOFT_INSTALLER_URL)
 
-    await runWineCommandOnGame(appName, {
+    await runWineCommandOnGame('legendary', appName, {
       commandParts: [cachedUbisoftInstallerPath, '/S']
     })
   } catch (error) {

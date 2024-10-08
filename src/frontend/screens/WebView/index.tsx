@@ -34,7 +34,10 @@ import cn from 'classnames'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
-  return urlToTest.hostname === 'store.hyperplay.xyz'
+  return (
+    urlToTest.hostname ===
+    'hyperplay-store-git-feat-gamepageactions-hyperplay.vercel.app'
+  )
 }
 
 function shouldInjectProvider(url: string) {
@@ -138,10 +141,10 @@ function WebView({
     }
 
     const removeHandleGoToGamePage = window.api.handleGoToGamePage(
-      async (_, gameId) => {
+      async (_, gameId, action) => {
         const gameInfo = await getGameInfo(gameId, 'hyperplay')
         navigate(`/gamepage/hyperplay/${gameId}`, {
-          state: { gameInfo, fromDM: false }
+          state: { gameInfo, fromDM: false, action }
         })
       }
     )

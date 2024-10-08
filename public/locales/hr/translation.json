@@ -434,7 +434,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -702,6 +704,9 @@
     "notification": {
         "wine-download": {
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "title": "Pogreška"
         }
     },
     "hyperplay": {

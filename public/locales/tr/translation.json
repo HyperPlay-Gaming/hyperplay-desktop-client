@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Hata kaldırılmış klasörü {{path}}. Lütfen manuel olarak kaldırın.\n{{paragraph}}\n{{error}}",
                 "title": "Hata kaldırıldı klasör"
+            },
+            "steam": {
+                "error": "Steam executable bulunamadı. Kurulum muhtemelen kullanıcı tarafından iptal edildi veya Steam tarafında başarısız oldu.",
+                "message": "Steam yükleme başarısız oldu! Lütfen talimatları dikkatlice okuyun ve tekrar deneyin! {{paragraph}} {{error}}",
+                "title": "Buhar hatası"
             }
         },
         "info": {
@@ -255,7 +260,7 @@
         "ignore_hidden": "Gizlileri Yoksay",
         "platform": "Platform",
         "show_all_games": "Tüm oyunları göster",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Kullanılabilir olmayan oyunları göster",
         "show_favourites_only": "Yalnızca Favorileri göster",
         "show_hidden": "Gizlileri Göster",
         "store": "Mağazayı Filtrele"
@@ -476,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Hiçbir şey indirilmedi",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -738,7 +746,7 @@
         "manager": {
             "link": "Wine Yöneticisi",
             "not-found": "No Wine versions found. Please click the refresh icon to try again.",
-            "title": "Wine Yöneticisi",
+            "title": "Uyumluluk Katmanı ",
             "unzipping": "Çıkartılıyor"
         },
         "release": "Release Date",
@@ -941,7 +949,9 @@
             "title": "Quest Ödülü Dilekçesi",
             "cancel": "İptal",
             "confirm": "Kabul Et"
-        }
+        },
+        "noG7ConnectionClaim": "Ödüllerinizi iddia etmek için [X43X) ile bağlantılı bir Game7 hesabına ihtiyacınız var.",
+        "noG7ConnectionSync": "Görevlerinizi yeniden tanımlamak için [X43X ile bağlantılı bir Game7 hesabına sahip olmanız gerekir."
     },
     "ALL": "Tümü",
     "analytics": "Analytics",
@@ -997,6 +1007,10 @@
         "wine-download": {
             "message": "Varsayılan uyumluluk katmanını kurmak",
             "title": "Uyumluluk Katmanı"
+        },
+        "wine-download-failed": {
+            "title": "Hata",
+            "message": "Varsayılan uyumluluk katmanını kurmak için başarısız oldu"
         }
     },
     "quests": {
@@ -1098,5 +1112,25 @@
             },
             "title": "Mod Talimatlar"
         }
-    }
+    },
+    "Cancel Installation": "Cancel Tesis",
+    "HyperPlay will notify you once the installation is done;": "HyperPlay size bir kez yükleme yapılır;",
+    "Installing Steam": "Steam'i yükleyin...",
+    "Launch Steam": "Steam",
+    "At the end make sure to": "Sonunda emin olun",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay sizin için Steam Ayarını indirecek ve başlatacaktır. Lütfen taksitlerinde Steam talimatları takip edin;"
+    },
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Devam etmek istiyorsanız, hasta olun çünkü internet bağlantınıza ve sistem yapılandırmanıza bağlı olarak bitirmek için birkaç dakika sürebilir;",
+    "Install Steam": "Steam",
+    "Launching Steam": "Steam'i başlatmak...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "İlk başta Steam gerekli dosyaları indirecek ve ortaya çıkacak giriş ekranı ve birkaç dakika alacak;",
+    "steam-install": {
+        "compatibility-layer-not-available": "Uyumluluk katmanı mevcut değildir. Lütfen önce \"Settings > Wine Manager\"dan birini yükleyin.",
+        "error-message": "Bir hata Steam'i yükleme sırasında gerçekleşti. Lütfen tekrar deneyin.",
+        "launch-tooltip": "HiperPlay Uyumluluk Katmanı kullanarak Steam başlatın",
+        "success-message": "Steam kuruldu. Şimdi onu Kütüphaneden başlatabilirsiniz.",
+        "tooltip": "Bu, Steam'in Windows versiyonunu kuracak ve HiperPlay Uyumluluk Katmanını kullanacak.\n\nBazı oyunlar özellikle yaşlı başlıklar, yeni 3D oyunları veya anti-cheat yazılımı ile olanlar düzgün çalışmayabilir.\n\nÖnerilen özellikler Apple Silikon CPU (M1 veya üstü) ve en az 16GB RAM ile bir Mac."
+    },
+    "UNCHECK 'Run Steam'": "UNCHECK 'Run Steam ‘ ‘ ‘"
 }

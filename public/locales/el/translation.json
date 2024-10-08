@@ -86,6 +86,11 @@
             "delete-files": {
                 "body": "Απομακρύνθηκε φάκελος {{path}}. Παρακαλώ αφαιρέστε το με το χέρι.\n{{paragraph}}\n{{error}}",
                 "title": "Η αφαίρεση σφάλματος που εξάγεται φάκελο"
+            },
+            "steam": {
+                "title": "Σφάλμα σφάλματος Steam",
+                "error": "Steam δεν βρέθηκε. Η εγκατάσταση πιθανότατα ακυρώθηκε από τον χρήστη ή απέτυχε στην πλευρά του Steam.",
+                "message": "Η εγκατάσταση του Steam απέτυχε! Παρακαλούμε διαβάστε προσεκτικά τις οδηγίες και δοκιμάστε ξανά! {{paragraph}} {{error}}"
             }
         },
         "info": {
@@ -476,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Τίποτα δεν κατεβάσει",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -971,7 +979,9 @@
             "body": "<bold> IMPORTANT:</bold> Σας παρακαλούμε να εξασφαλίσετε αρκετό αέριο στο δίκτυο {{networkName}} για τη συναλλαγή που πρέπει να επιβεβαιωθεί με επιτυχία <bold> με 24 hrs.</bold>",
             "body2": "Διαφορετικά, το Quest Reward <bold> θα λήξει και δεν θα είναι πλέον δυνατό",
             "title": "Επιβεβαίωση Quest Reward αξιώσεις"
-        }
+        },
+        "noG7ConnectionClaim": "Πρέπει να έχετε λογαριασμό Game7 που συνδέεται με το {{email}} για να διεκδικήσετε τις ανταμοιβές σας.",
+        "noG7ConnectionSync": "Πρέπει να έχετε λογαριασμό Game7 που συνδέεται με το {{email}} για να ανασυνάψετε τα καθήκοντά σας."
     },
     "email_subscription": {
         "title": "Σας ευχαριστούμε για την εγγραφή!",
@@ -1030,6 +1040,10 @@
         "wine-download": {
             "message": "Δημιουργία του προεπιλεγμένου στρώματος συμβατότητας",
             "title": "Συμβατό στρώμα"
+        },
+        "wine-download-failed": {
+            "title": "Σφάλμα",
+            "message": "Απέτυχε να ρυθμίσει το προεπιλεγμένο στρώμα συμβατότητας"
         }
     },
     "overlay": {
@@ -1098,5 +1112,25 @@
             },
             "title": "Mod Οδηγίες"
         }
-    }
+    },
+    "Cancel Installation": "Εγκατάσταση",
+    "At the end make sure to": "Στο τέλος βεβαιωθείτε ότι",
+    "steam-install": {
+        "launch-tooltip": "Ξεκινήστε το Steam χρησιμοποιώντας το HyperPlay PowerPoint",
+        "compatibility-layer-not-available": "Συμβατό στρώμα δεν είναι διαθέσιμο. Μπορείτε να εγκαταστήσετε ένα από το \"Settings > Wine Manager\" πρώτα.",
+        "error-message": "Ένα λάθος συνέβη κατά την εγκατάσταση του Steam. Παρακαλώ δοκιμάστε ξανά.",
+        "success-message": "Το Steam έχει εγκατασταθεί. Τώρα μπορείτε να το ξεκινήσετε από τη Βιβλιοθήκη.",
+        "tooltip": "Αυτό θα εγκαταστήσει την έκδοση των Windows του Steam και θα τρέξει χρησιμοποιώντας ένα HyperPlay PowerPoint.\n\nΟρισμένα παιχνίδια ειδικά παλαιότερους τίτλους, νεότερα 3D παιχνίδια, ή εκείνα με λογισμικό anti-cheat μπορεί να μην λειτουργούν σωστά.\n\nΟι συνιστώμενες προδιαγραφές είναι ένα Mac με την Apple Silicon CPU (M1 ή παραπάνω) και τουλάχιστον 16GB μνήμης RAM."
+    },
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay θα κατεβάσει και θα ξεκινήσει το Steam Setup για εσάς. Παρακαλώ ακολουθήστε τις οδηγίες του Steam στον εγκαταστάτη τους;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay θα σας ενημερώσει μόλις γίνει η εγκατάσταση;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Εάν επιθυμείτε να συνεχίσετε, να είστε υπομονετικοί, δεδομένου ότι μπορεί να διαρκέσει μερικά λεπτά για να ολοκληρωθεί ανάλογα με τη σύνδεση στο διαδίκτυο και τη διαμόρφωση του συστήματος;",
+    "Install Steam": "Εγκατάσταση Steam",
+    "Installing Steam": "Εγκατάσταση Steam...",
+    "Launch Steam": "Launch Steam",
+    "Launching Steam": "Ξεκινώντας το Steam...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Στην πρώτη εκτόξευση του Steam θα κατεβάσει τα απαραίτητα αρχεία και θα χρειαστούν μερικά λεπτά για να ολοκληρωθεί και την οθόνη σύνδεσης που θα εμφανιστεί;",
+    "UNCHECK 'Run Steam'": "UNCHECK \"Run Steam «««"
 }
