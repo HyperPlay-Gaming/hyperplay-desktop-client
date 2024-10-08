@@ -475,6 +475,11 @@ if (!gotTheLock) {
     epicStoreSession.setPreloads([
       path.join(__dirname, '../preload/webview_style_preload.js')
     ])
+    const g7PortalSession = session.fromPartition('persist:g7portal')
+    g7PortalSession.setPreloads([
+      path.join(__dirname, '../preload/hyperplay_store_preload.js'),
+      path.join(__dirname, '../preload/providerPreload.js')
+    ])
 
     // keyboards with alt and no option key can be used with mac so register both
     const hpOverlay = await getHpOverlay()

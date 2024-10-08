@@ -17,6 +17,9 @@ interface WebviewControlsProps {
   initURL: string
   openInBrowser: boolean
   disableUrl?: boolean
+  classNames?: {
+    root?: string
+  }
 }
 
 function removeSelection(event: SyntheticEvent<unknown>) {
@@ -34,7 +37,8 @@ export default function WebviewControls({
   webview,
   initURL,
   openInBrowser,
-  disableUrl
+  disableUrl,
+  classNames
 }: WebviewControlsProps) {
   const [url, setUrl] = React.useState(initURL)
   const { t } = useTranslation()
@@ -87,14 +91,15 @@ export default function WebviewControls({
 
   const _url = url !== '' ? new URL(url) : null
   const allowList = [
-    'hyperplay-store-git-feat-gamepageactions-hyperplay.vercel.app',
-    'docs.hyperplay.xyz'
+    'store.hyperplay.xyz',
+    'docs.hyperplay.xyz',
+    'app.game7.io'
   ]
 
   if (_url && allowList.includes(_url.host)) return null
 
   return (
-    <div className="WebviewControls">
+    <div className={cx('WebviewControls', classNames?.root)}>
       <div className="WebviewControls__icons">
         <SvgButton
           className="WebviewControls__icon"
