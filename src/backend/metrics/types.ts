@@ -345,6 +345,7 @@ export interface ClientUpdateNotified {
     currentVersion: string
     newVersion: string
   }
+  sensitiveProperties?: never
 }
 
 export interface ClientUpdateError {
@@ -354,6 +355,7 @@ export interface ClientUpdateError {
     newVersion: string
     error: string
   }
+  sensitiveProperties?: never
 }
 
 export interface ClientUpdateDownloaded {
@@ -362,6 +364,7 @@ export interface ClientUpdateDownloaded {
     currentVersion: string
     newVersion: string
   }
+  sensitiveProperties?: never
 }
 
 export type PossibleMetricPayloads =
