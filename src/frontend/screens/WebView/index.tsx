@@ -268,7 +268,6 @@ function WebView({
 
   let partitionForWebview = 'persist:epicstore'
 
-  console.log('webview url is hp url ', urlIsHpUrl(startUrl), startUrl)
   if (pathname === '/game7Portal') partitionForWebview = 'persist:g7portal'
   if (urlIsHpUrl(startUrl)) partitionForWebview = 'persist:hyperplaystore'
   else if (shouldInjectProvider(startUrl))
