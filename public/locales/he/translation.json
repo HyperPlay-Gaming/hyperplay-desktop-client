@@ -329,7 +329,10 @@
             "downloading": "מוריד",
             "canceled": "בוטל",
             "clear": "מחק רשימה",
-            "empty": "אין מה להוריד",
+            "empty": {
+                "finished": "שום דבר לא הורד",
+                "queue": "אין מה להוריד"
+            },
             "finished": "הושלם",
             "pause": "השהה הורדה",
             "queued": "בתור",

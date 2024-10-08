@@ -481,7 +481,10 @@
             "canceled": "Cancelado",
             "clear": "Limpar Lista",
             "downloading": "Baixando",
-            "empty": "Nada na fila",
+            "empty": {
+                "finished": "Nada",
+                "queue": "Nada na fila"
+            },
             "finished": "Concluído",
             "queued": "Na fila",
             "remove": "Remover da fila",

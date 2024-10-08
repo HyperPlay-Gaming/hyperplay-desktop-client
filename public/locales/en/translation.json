@@ -789,7 +789,10 @@
             },
             "walletNotConnected": "Please connect a wallet to sync your progress."
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "viewAllQuests": {
+            "title": "View All Quests"
+        }
     },
     "queue": {
         "label": {

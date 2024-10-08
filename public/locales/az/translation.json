@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Heç bir şey download",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",

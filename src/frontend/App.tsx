@@ -39,6 +39,7 @@ import EmailSubscriptionModal from './components/UI/EmailSubscriptionModal'
 import { UpdateModalController } from './components/UI/UpdateModalController'
 import { QuestsPage } from './screens/Quests'
 import { NavigateListener } from './NavigateListener'
+import G7Webview from './screens/G7Webview'
 import AlertToast from './components/UI/AlertToast'
 
 function App() {
@@ -103,6 +104,7 @@ function App() {
               path="metamaskSnaps"
               element={<WebView key="metamaskSnaps" />}
             />
+            <Route path="game7Portal" element={<G7Webview />} />
             <Route path="metamaskPortfolio" element={<MetaMaskPortfolio />}>
               <Route path=":page" element={<MetaMaskPortfolio />} />
             </Route>

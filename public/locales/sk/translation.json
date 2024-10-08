@@ -260,7 +260,7 @@
         "ignore_hidden": "Ignore Hidden",
         "platform": "",
         "show_all_games": "Show all games",
-        "show_available_games": "Show non-Available games",
+        "show_available_games": "Zobraziť neprístupné hry",
         "show_favourites_only": "Show Favourites only",
         "show_hidden": "Show Hidden",
         "store": "Filter Store"
@@ -481,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Nič stiahnuté",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -509,7 +512,7 @@
         "default-install-path": "Default inštalácia Cesta",
         "default-steam-path": "Default Steam path",
         "defaultWinePrefix": "Set Folder for new Wine Prefixes",
-        "disable_controller": "Disable HyperPlay navigation using controller",
+        "disable_controller": "Disable Hyperplay navigácia pomocou regulátora",
         "discordRPC": "Enable Discord Rich Presence",
         "download-no-https": "Download games without HTTPS (useful for CDNs e.g. LanCache)",
         "egs-sync": "Sync s Inštalované Epic hry",
