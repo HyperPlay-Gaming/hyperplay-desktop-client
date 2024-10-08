@@ -490,7 +490,10 @@
             "canceled": "Annullato",
             "clear": "Cancella Lista",
             "downloading": "Scaricamento",
-            "empty": "Niente da scaricare",
+            "empty": {
+                "finished": "Niente scaricato",
+                "queue": "Niente da scaricare"
+            },
             "finished": "Completato",
             "queued": "In coda",
             "remove": "Rimuovi dai Download",

@@ -117,7 +117,6 @@ export default function DownloadToastManager() {
   }, [isExtracting])
 
   if (currentElement === undefined) {
-    console.debug('no downloads active in download toast manager')
     return <></>
   }
 

@@ -481,7 +481,10 @@
             "canceled": "Abgebrochen",
             "clear": "Liste leeren",
             "downloading": "Lade herunter",
-            "empty": "Nichts zum Herunterladen",
+            "empty": {
+                "finished": "Nichts heruntergeladen",
+                "queue": "Nichts zum Herunterladen"
+            },
             "finished": "Abgeschlossen",
             "queued": "In Warteschlange",
             "remove": "Aus Downloads entfernen",

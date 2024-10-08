@@ -993,3 +993,5 @@ export interface PointsCollection {
   symbol: string
   image: string
 }
+
+export type { GamePageActions } from '@hyperplay/utils'

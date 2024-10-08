@@ -787,12 +787,19 @@
                 "overlay": "You are currently not logged in, play streak progress will not be tracked. Please exit the game and login to HyperPlay via the top-right dropdown to track progress."
             }
         },
-        "quests": "Quests"
+        "quests": "Quests",
+        "viewAllQuests": {
+            "title": "View All Quests"
+        }
     },
     "queue": {
         "label": {
             "canceled": "Canceled",
-            "empty": "Nothing to download",
+            "clear": "Clear List",
+            "empty": {
+                "finished": "Nothing downloaded",
+                "queue": "Nothing to download"
+            },
             "pause": "Pause download",
             "remove": "Remove from Downloads",
             "resume": "Resume download"
