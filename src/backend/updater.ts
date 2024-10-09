@@ -17,6 +17,8 @@ let newVersion: string
 autoUpdater.autoDownload = shouldCheckForUpdates
 autoUpdater.autoInstallOnAppQuit = false
 
+let isAppUpdating = false
+
 // check for updates every hour
 const checkUpdateInterval = 1 * 60 * 60 * 1000
 setInterval(() => {
@@ -50,6 +52,7 @@ autoUpdater.on('update-available', async (info) => {
 
 // log download progress
 autoUpdater.on('download-progress', (progress) => {
+  isAppUpdating = true
   logInfo(
     'Downloading HyperPlay update...' +
       `Download speed: ${progress.bytesPerSecond}, ` +
@@ -90,6 +93,7 @@ autoUpdater.on('error', async (error) => {
     return
   }
 
+  isAppUpdating = false
   logError(`Error updating HyperPlay: ${error.message}`, LogPrefix.AutoUpdater)
 
   trackEvent({
@@ -125,3 +129,7 @@ autoUpdater.on('error', async (error) => {
     shell.openExternal('https://www.hyperplay.xyz/downloads')
   }
 })
+
+export function isClientUpdating() {
+  return isAppUpdating
+}

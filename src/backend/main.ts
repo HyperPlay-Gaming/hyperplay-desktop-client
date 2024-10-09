@@ -152,6 +152,7 @@ import {
   checkWineBeforeLaunch,
   runWineCommandOnGame
 } from './utils/compatibility_layers'
+import { isClientUpdating } from 'backend/updater'
 
 /*
  * INSERT OTHER IPC HANDLERS HERE
@@ -1158,6 +1159,10 @@ ipcMain.handle(
     await syncPlaySession(appName, runner)
   }
 )
+
+ipcMain.handle('isClientUpdating', async () => {
+  return isClientUpdating()
+})
 
 // get pid/tid on launch and inject
 ipcMain.handle(
