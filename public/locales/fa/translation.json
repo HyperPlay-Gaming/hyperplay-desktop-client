@@ -1010,6 +1010,9 @@
         "g7CreditsModal": {
             "title": "اعتبار بازی 7",
             "description": "بازی های برتر HyperPlay با چالش های هیجان انگیز Play Streak هر فعالیت شما را تشویق می کند تا با یک بازی متفاوت درگیر شوید و بهترین بازی های Web3 را نشان دهید. زمان بازی شما مهم است!"
+        },
+        "viewAllQuests": {
+            "title": "مشاهده All Quests"
         }
     },
     "sideload": {
