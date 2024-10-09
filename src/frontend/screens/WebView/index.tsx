@@ -34,7 +34,10 @@ import cn from 'classnames'
 
 function urlIsHpUrl(url: string) {
   const urlToTest = new URL(url)
-  return urlToTest.hostname === 'store.hyperplay.xyz'
+  return (
+    urlToTest.hostname ===
+    'hyperplay-store-git-feat-checkuptapi-hyperplay.vercel.app'
+  )
 }
 
 function shouldInjectProvider(url: string) {
