@@ -1,6 +1,6 @@
 {
   "name": "hyperplay",
-  "version": "0.19.4",
+  "version": "0.20.0",
   "private": true,
   "main": "build/main/main.js",
   "homepage": "./",
@@ -176,7 +176,7 @@
     "@mantine/core": "^7.12.0",
     "@mantine/dropzone": "^7.12.0",
     "@mantine/hooks": "^7.12.0",
-    "@metamask/sdk": "^0.15.0",
+    "@metamask/sdk": "^0.29.0",
     "@mysten/sui.js": "^0.54.1",
     "@node-steam/vdf": "^2.2.0",
     "@rudderstack/rudder-sdk-node": "^2.0.7",
@@ -201,7 +201,7 @@
     "embla-carousel-autoplay": ">=7.0.0",
     "embla-carousel-react": ">=7.0.0",
     "ethers": "^6.12.1",
-    "express": "^4.19.2",
+    "express": "^4.21.0",
     "filesize": "^10.1.4",
     "find-process": "^1.4.7",
     "font-list": "^1.5.1",
@@ -398,7 +398,8 @@
       "@hyperplay/extension-importer>classic-level": true,
       "classic-level": false,
       "i18next-parser>esbuild": false,
-      "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": false
+      "wagmi>@wagmi/connectors>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true,
+      "@hyperplay/providers>@metamask/sdk>@metamask/sdk-communication-layer>utf-8-validate": true
     }
   }
 }
