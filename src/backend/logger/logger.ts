@@ -32,7 +32,8 @@ export enum LogPrefix {
   HyperPlay = 'HyperPlay',
   Sideload = 'Sideload',
   Achievements = 'Achievements',
-  Auth = 'Auth'
+  Auth = 'Auth',
+  AutoUpdater = 'AutoUpdater'
 }
 
 export const RunnerToLogPrefixMap = {
