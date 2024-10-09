@@ -160,6 +160,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   'auth:accountNotConnected': () => void
   'auth:otpFinished': () => void
   focusMainWindow: () => void
+  openOnboarding: () => void
 }
 
 interface RequestArguments {
@@ -300,6 +301,15 @@ interface HyperPlayAsyncIPCFunctions {
   syncPlaySession: (appName: string, runner: Runner) => Promise<void>
   getEpicListingUrl: (appName: string) => Promise<string>
   importGameFolder: (gameFolder: string) => Promise<string>
+  syncPlayStreakWithExternalSource: (params: {
+    quest_id: number
+    signature: string
+  }) => Promise<GenericApiResponse>
+  getCSRFToken: () => Promise<string>
+  checkPendingSync: (params: {
+    wallet: string
+    questId: number
+  }) => Promise<boolean>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {

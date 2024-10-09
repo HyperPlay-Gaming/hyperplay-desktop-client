@@ -1309,17 +1309,17 @@
     supertest "^6.3.3"
     zod "^3.22.4"
 
-"@hyperplay/quests-ui@^0.0.21":
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.21.tgz#b14f70bac0eece560b5950f1b61c5d7e04fb6594"
-  integrity sha512-pqQN5s3UlLHQ02Bb63D8ftQFlZWPaKoXoP32Y++fgjsdKMw0pTGX3S1PxIkzXY+efbQcX5SDOVRrLX9qq0bj0Q==
+"@hyperplay/quests-ui@^0.0.23":
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/@hyperplay/quests-ui/-/quests-ui-0.0.23.tgz#14bc29655c13f60828094e53283f4ccfe4acb5b6"
+  integrity sha512-9Sr+WwGsz0pGlwX6xkvd9Yb8wNJRjRoeEQesnzUl3RyrqbiLZZqKPSx61Zz4zgdGaXAJci51WcXnNUEI7IY8bw==
   dependencies:
     classnames "^2.5.1"
 
-"@hyperplay/ui@^1.7.18":
-  version "1.7.19"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.7.19.tgz#43bc58405a5cc4866d55b548203ce2bdeca6d3fa"
-  integrity sha512-uXqjABDqxvjXbF7o+GMriXyTgp62X39aPohr4W26G2uk+r+vNNy3t0JDGd0B4SyZnovcoCEocfWS6oirAOVnNg==
+"@hyperplay/ui@^1.8.0":
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.1.tgz#0e3d5b39092d91d3df535fa18e2e45a7075f42eb"
+  integrity sha512-EH8ZqbZLRqHcILZPEiai8XSt2BlSf42PWQntQwlkLDnCdhYv8yY1UrXNWPQL8zY1FZnws/MBrAV4NmtyN3TcFA==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
