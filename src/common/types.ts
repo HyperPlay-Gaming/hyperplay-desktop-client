@@ -948,6 +948,10 @@ export interface Quest {
       minimum_session_time_in_seconds: number
     }
   }
+  quest_external_game: null | {
+    runner: Runner
+    store_redirect_url: string
+  }
 }
 
 export interface RewardClaimSignature {
