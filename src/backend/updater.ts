@@ -3,13 +3,16 @@ import { autoUpdater } from 'electron-updater'
 import { t } from 'i18next'
 
 import { configStore, icon } from './constants'
-import { logInfo } from './logger/logger'
+import { logError, logInfo, LogPrefix } from './logger/logger'
 import { isOnline } from './online_monitor'
+import { trackEvent } from './api/metrics'
+import { captureException } from '@sentry/electron'
 // to test auto update on windows locally make sure you added the option "verifyUpdateCodeSignature": false
 // under build.win in package.json and also change the app version to an old one there
 
 const appSettings = configStore.get_nodefault('settings')
 const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
+let newVersion: string
 
 autoUpdater.autoDownload = shouldCheckForUpdates
 autoUpdater.autoInstallOnAppQuit = false
@@ -26,23 +29,47 @@ autoUpdater.on('update-available', async (info) => {
   if (!isOnline() || !shouldCheckForUpdates) {
     return
   }
-  logInfo('A HyperPlay update is available, downloading it now')
-  logInfo(`Version: ${info.version}`)
-  logInfo(`Release date: ${info.releaseDate}`)
-  logInfo(`Release name: ${info.releaseName}`)
+  newVersion = info.version
+
+  trackEvent({
+    event: 'Client Update Notified',
+    properties: {
+      currentVersion: autoUpdater.currentVersion.version,
+      newVersion
+    }
+  })
+
+  logInfo(
+    'A HyperPlay update is available, downloading it now',
+    LogPrefix.AutoUpdater
+  )
+  logInfo(`Version: ${info.version}`, LogPrefix.AutoUpdater)
+  logInfo(`Release date: ${info.releaseDate}`, LogPrefix.AutoUpdater)
+  logInfo(`Release name: ${info.releaseName}`, LogPrefix.AutoUpdater)
 })
 
 // log download progress
 autoUpdater.on('download-progress', (progress) => {
-  logInfo(`Download speed: ${progress.bytesPerSecond}`)
-  logInfo(`Downloaded ${progress.percent.toFixed(2)}%`)
   logInfo(
-    `Total downloaded: ${progress.transferred} of ${progress.total} bytes`
+    'Downloading HyperPlay update...' +
+      `Download speed: ${progress.bytesPerSecond}, ` +
+      `Downloaded: ${progress.percent.toFixed(2)}%, ` +
+      `Total downloaded: ${progress.transferred} of ${progress.total} bytes`,
+    LogPrefix.AutoUpdater
   )
 })
 
 autoUpdater.on('update-downloaded', async () => {
   logInfo('App update is downloaded')
+
+  trackEvent({
+    event: 'Client Update Downloaded',
+    properties: {
+      currentVersion: autoUpdater.currentVersion.version,
+      newVersion
+    }
+  })
+
   const { response } = await dialog.showMessageBox({
     title: t('box.info.update.appUpdated', 'HyperPlay was updated'),
     message: t(
@@ -62,6 +89,25 @@ autoUpdater.on('error', async (error) => {
   if (!isOnline()) {
     return
   }
+
+  logError(`Error updating HyperPlay: ${error.message}`, LogPrefix.AutoUpdater)
+
+  trackEvent({
+    event: 'Client Update Error',
+    properties: {
+      currentVersion: autoUpdater.currentVersion.version,
+      newVersion,
+      error: error.message
+    }
+  })
+
+  captureException(error, {
+    tags: {
+      event: 'Client Update Error',
+      currentVersion: autoUpdater.currentVersion.version,
+      newVersion
+    }
+  })
 
   const { response } = await dialog.showMessageBox({
     title: t('box.error.update.title', 'Error Updating'),
