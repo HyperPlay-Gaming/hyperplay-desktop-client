@@ -22,7 +22,7 @@ import {
   screen,
   session
 } from 'electron'
-import 'backend/updater'
+
 import { autoUpdater } from 'electron-updater'
 import { cpus, platform } from 'os'
 import {
