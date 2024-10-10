@@ -234,3 +234,5 @@ export const handleNavigate = (
 
 export const isClientUpdating = async () =>
   ipcRenderer.invoke('isClientUpdating')
+
+export const restartClient = () => ipcRenderer.send('restartClient')

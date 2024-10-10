@@ -1164,6 +1164,8 @@ ipcMain.handle('isClientUpdating', async () => {
   return isClientUpdating()
 })
 
+ipcMain.on('restartClient', () => autoUpdater.quitAndInstall())
+
 // get pid/tid on launch and inject
 ipcMain.handle(
   'launch',
