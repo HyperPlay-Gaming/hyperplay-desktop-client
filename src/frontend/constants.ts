@@ -1,5 +1,6 @@
 export const EPIC_LOGIN_URL = 'https://legendary.gl/epiclogin'
-export const HYPERPLAY_STORE_URL = 'https://store.hyperplay.xyz?isLauncher=true'
+export const HYPERPLAY_STORE_URL =
+  'https://hyperplay-store-git-feat-checkuptapi-hyperplay.vercel.app?isLauncher=true'
 export const G7_PORTAL = 'https://app.game7.io/quests/hyperplay?layout=navless'
 export const EPIC_STORE_URL = 'https://www.epicgames.com/store'
 export const GOG_STORE_URL = `https://gog.com`

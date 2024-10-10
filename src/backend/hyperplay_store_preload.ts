@@ -21,5 +21,7 @@ contextBridge.exposeInMainWorld('api', {
     ipcRenderer.invoke('appIsInLibrary', gameId, 'hyperplay'),
   goToGamePage: (gameId: string, action: GamePageActions) =>
     ipcRenderer.send('goToGamePage', gameId, action),
-  navigate: (route: string) => ipcRenderer.send('navigate', route)
+  navigate: (route: string) => ipcRenderer.send('navigate', route),
+  isClientUpdating: async () => ipcRenderer.invoke('isClientUpdating'),
+  restartClient: () => ipcRenderer.send('restartClient')
 })
