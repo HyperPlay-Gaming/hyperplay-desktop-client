@@ -32,7 +32,7 @@ const ScanScreen = (props: ScanScreenProps) => {
           `Create an encrypted communication channel. Your keys will never be shared with HyperPlay.`
         )}
       </div>
-      <QrCodeGradientBorder qrUrl={url} imageMargin="-14px" />
+      <QrCodeGradientBorder qrUrl={url} imageMargin="-7px" />
       <div className={`body-sm ${ScanScreenStyles.getWalletText}`}>
         {t(
           'hyperplay.onboarding.walletSelection.screens.scan.dontHaveWallet',

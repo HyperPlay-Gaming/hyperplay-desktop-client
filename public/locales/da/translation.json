@@ -770,7 +770,10 @@
             "finished": "Afsluttet",
             "queued": "I kø",
             "canceled": "Annulleret",
-            "empty": "Intet at downloade",
+            "empty": {
+                "finished": "Intet downloadet",
+                "queue": "Intet at downloade"
+            },
             "remove": "Fjern fra downloads",
             "resume": "Genop download",
             "pause": "Sæt downloads på pause"

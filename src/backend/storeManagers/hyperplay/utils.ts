@@ -50,9 +50,11 @@ export async function getHyperPlayNameToReleaseMap() {
 
   const hpStoreGameMap = new Map<string, HyperPlayRelease>()
 
-  hpStoreGameReleases.forEach((val) => {
-    hpStoreGameMap.set(val.project_name.toLowerCase(), val)
-  })
+  hpStoreGameReleases
+    .filter((val) => !!val.project_meta.name)
+    .forEach((val) => {
+      hpStoreGameMap.set(val.project_meta.name!.toLowerCase(), val)
+    })
 
   return hpStoreGameMap
 }

@@ -506,7 +506,9 @@
             "canceled": "Bekor qilingan",
             "clear": "Roʻyxatni tozalash",
             "downloading": "Yuklab olinmoqda",
-            "empty": "Yuklab olish uchun hech narsa",
+            "empty": {
+                "queue": "Yuklab olish uchun hech narsa"
+            },
             "finished": "Bajarildi",
             "queued": "Navbatda",
             "remove": "Yuklab olishlardan olib tashlash",

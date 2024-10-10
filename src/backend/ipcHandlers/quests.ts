@@ -4,11 +4,12 @@ import { DEV_PORTAL_URL } from 'common/constants'
 import {
   ConfirmClaimParams,
   GenericApiResponse,
-  PointsClaimReturn
+  PointsClaimReturn,
+  Quest
 } from 'common/types'
 import { app, ipcMain } from 'electron'
 
-ipcMain.handle('getQuests', async (e, projectId) => {
+export async function getQuests(projectId?: string): Promise<Quest[]> {
   let url = `${DEV_PORTAL_URL}api/v1/quests?questStatus=ACTIVE`
   if (projectId) {
     url += `&projectId=${projectId}`
@@ -29,7 +30,9 @@ ipcMain.handle('getQuests', async (e, projectId) => {
     questsMetaJson = questsMetaJson.concat(testQuestsMetaJson)
   }
   return questsMetaJson
-})
+}
+
+ipcMain.handle('getQuests', async (e, projectId) => getQuests(projectId))
 
 ipcMain.handle('getQuest', async (e, questId) => {
   const questResult = await fetch(`${DEV_PORTAL_URL}api/v1/quests/${questId}`)

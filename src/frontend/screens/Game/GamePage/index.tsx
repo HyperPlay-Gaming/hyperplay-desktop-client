@@ -1,6 +1,6 @@
 import './index.scss'
 
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 
 import {
   BackArrowOutlinedCircled,
@@ -31,7 +31,8 @@ import {
   HyperPlayInstallInfo,
   InstallProgress,
   Runner,
-  WineInstallation
+  WineInstallation,
+  GamePageActions
 } from 'common/types'
 import { LegendaryInstallInfo } from 'common/types/legendary'
 import { GogInstallInfo } from 'common/types/gog'
@@ -73,6 +74,7 @@ type locationState = {
   fromDM?: boolean
   gameInfo: GameInfo
   fromQuests?: boolean
+  action: GamePageActions
 }
 
 export default observer(function GamePage(): JSX.Element | null {
@@ -83,7 +85,7 @@ export default observer(function GamePage(): JSX.Element | null {
   const { t } = useTranslation('gamepage')
   const { t: t2 } = useTranslation()
 
-  const { gameInfo: locationGameInfo } = location.state
+  const { gameInfo: locationGameInfo, action } = location.state
 
   const [showModal, setShowModal] = useState({ game: '', show: false })
 
@@ -142,6 +144,9 @@ export default observer(function GamePage(): JSX.Element | null {
   const notSupportedGame =
     gameInfo.runner !== 'sideload' && gameInfo.thirdPartyManagedApp === 'Origin'
   const isOffline = connectivity.status !== 'online'
+  const installPlatform = gameInfo.install?.platform
+  const isBrowserGame =
+    installPlatform === 'Browser' || installPlatform === 'web'
 
   const backRoute = getBackRoute(location.state)
 
@@ -152,6 +157,23 @@ export default observer(function GamePage(): JSX.Element | null {
     gameInstallInfo?.manifest?.disk_size || 0,
     gameInstallInfo?.manifest?.download_size || 0
   )
+
+  const hasRun = useRef(false)
+  useEffect(() => {
+    if (!action || hasRun.current) return
+    hasRun.current = true
+
+    if (action === 'install') {
+      return setShowModal({ game: appName, show: true })
+    }
+    if (action === 'launch') {
+      if (isBrowserGame || gameInfo.is_installed) {
+        handlePlay()()
+      } else {
+        return setShowModal({ game: appName, show: true })
+      }
+    }
+  }, [action])
 
   // Track the screen view once each time the appName, gameInfo or runner changes
   useEffect(() => {
@@ -330,7 +352,6 @@ export default observer(function GamePage(): JSX.Element | null {
     const isLinux = ['linux', 'linux_amd64', 'linux_arm64']
     const isMacNative = isMac.includes(installPlatform ?? '')
     const isLinuxNative = isLinux.includes(installPlatform ?? '')
-    const isBrowserGame = gameInfo.browserUrl
     const isNative = isWin || isMacNative || isLinuxNative || isBrowserGame
     const isHyperPlayGame = runner === 'hyperplay'
 
@@ -951,6 +972,7 @@ export default observer(function GamePage(): JSX.Element | null {
     })
   }
 })
+
 function getCurrentProgress(
   progress: InstallProgress,
   percent: number | undefined,
