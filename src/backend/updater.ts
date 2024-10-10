@@ -86,6 +86,7 @@ autoUpdater.on('update-downloaded', async () => {
   if (response === 1) {
     return autoUpdater.quitAndInstall()
   }
+  isAppUpdating = false
 })
 
 autoUpdater.on('error', async (error) => {
