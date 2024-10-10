@@ -47,12 +47,19 @@ export function QuestDetailsViewPlayWrapper({
       )
 
       let runner: Runner = 'hyperplay'
+      let storeRedirectUrl = 'https://store.epicgames.com/'
       let name = appName
       if (epicListingUrl) {
+        storeRedirectUrl = epicListingUrl
         runner = 'legendary'
         if (epicAppName) {
           name = epicAppName
         }
+      }
+
+      if (questMeta && questMeta?.quest_external_game !== null) {
+        runner = questMeta.quest_external_game.runner
+        storeRedirectUrl = questMeta.quest_external_game.store_redirect_url
       }
 
       // check for gameinfo to see if it is on the library
@@ -77,7 +84,7 @@ export function QuestDetailsViewPlayWrapper({
             })
           }
           // if epic game, open in epic store
-          return navigate(`/store-page?store-url=${epicListingUrl}`)
+          return navigate(`/store-page?store-url=${storeRedirectUrl}`)
         })
     },
     onError: (error, variable) => {

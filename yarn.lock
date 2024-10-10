@@ -2989,6 +2989,11 @@
   resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.52.2.tgz#a023864a892fda9858b724d667eb19cd84ce054a"
   integrity sha512-9vvbFecK4A0nDnrc/ks41e3UHONF1DAnGz8Tgbxkl59QcvKWmc0ewhYuIKRh8NC4ja5LTHT9EH16KHbn2AIYWA==
 
+"@tanstack/query-core@^5.59.0":
+  version "5.59.0"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-5.59.0.tgz#d8323f1c6eb0e573ab0aa85a7b7690d0c263818a"
+  integrity sha512-WGD8uIhX6/deH/tkZqPNcRyAhDUqs729bWKoByYHSogcshXfFbppOdTER5+qY7mFvu8KEFJwT0nxr8RfPTVh0Q==
+
 "@tanstack/react-query@^5.51.23":
   version "5.52.2"
   resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-5.52.2.tgz#3fffbc86351edcaeec335bc8958bcab4204bd169"
