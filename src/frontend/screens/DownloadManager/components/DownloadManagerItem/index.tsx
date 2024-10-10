@@ -125,7 +125,7 @@ const DownloadManagerItem = observer(({ element, current, state }: Props) => {
     install: { is_dlc }
   } = gameInfo || {}
 
-  const [progress] = hasProgress(appName)
+  const { progress } = hasProgress(appName)
   const { status } = element
   const finished = status === 'done'
   const canceled = status === 'error' || (status === 'abort' && !current)

@@ -75,7 +75,7 @@ const GameCard = ({
   const isInstallable =
     gameInfo.installable === undefined || gameInfo.installable // If it's undefined we assume it's installable
 
-  const [progress, previousProgress] = hasProgress(appName)
+  const { progress, previousProgress } = hasProgress(appName)
   const { install_size: size = '0', platform: installPlatform } = {
     ...gameInstallInfo
   }
