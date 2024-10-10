@@ -19,7 +19,7 @@ env:
 jobs:
   flatpak:
     name: 'Flatpak Build'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest-8core
     concurrency:
       group: flatpak-${{ github.ref }}
       cancel-in-progress: true
