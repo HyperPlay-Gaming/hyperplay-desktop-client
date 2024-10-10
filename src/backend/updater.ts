@@ -17,7 +17,7 @@ const shouldCheckForUpdates = appSettings?.checkForUpdatesOnStartup === true
 let newVersion: string
 
 autoUpdater.autoDownload = shouldCheckForUpdates
-autoUpdater.autoInstallOnAppQuit = false
+autoUpdater.autoInstallOnAppQuit = true
 
 let isAppUpdating = false
 let hasUpdated = false
