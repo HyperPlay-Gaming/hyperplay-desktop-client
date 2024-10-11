@@ -69,6 +69,10 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           setSelectedQuestId={setSelectedQuestId}
         />
         <QuestDetailsWrapper
+          questsWithExternalPlayStreakSync={[]}
+          syncPlayStreakWithExternalSource={async () =>
+            console.log('sync external')
+          }
           tOverride={t}
           sessionEmail={sessionEmail}
           className={styles.detailsWrapper}
