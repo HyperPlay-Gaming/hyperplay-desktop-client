@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 import { fetchEpicListing, getGameInfo } from 'frontend/helpers'
 import useGetSteamGame from 'frontend/hooks/useGetSteamGame'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
-import { getPlaystreakArgsFromQuestData } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { getPlaystreakArgsFromQuestData } from '@hyperplay/quests-ui'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
@@ -142,6 +142,7 @@ export function QuestDetailsViewPlayWrapper({
     },
     sync: t('quest.sync', 'Sync'),
     streakProgressI18n: {
+      sync: t('quest.playstreak.sync', 'Sync Progress'),
       streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
       days: t('quest.playstreak.days', 'days'),
       playToStart: t(
@@ -191,7 +192,8 @@ export function QuestDetailsViewPlayWrapper({
             requiredStreakInDays: 1,
             minimumSessionTimeInSeconds: 100,
             accumulatedPlaytimeTodayInSeconds: 0,
-            lastPlaySessionCompletedDateTimeUTC: new Date().toISOString()
+            lastPlaySessionCompletedDateTimeUTC: new Date().toISOString(),
+            onSync: () => console.log('on sync')
           }
         }}
         classNames={{ root: styles.questDetailsRoot }}
@@ -226,10 +228,11 @@ export function QuestDetailsViewPlayWrapper({
           eligible: false,
           steamAccountLinked: false
         },
-        playStreak: getPlaystreakArgsFromQuestData(
+        playStreak: getPlaystreakArgsFromQuestData({
           questMeta,
-          questPlayStreakData
-        )
+          questPlayStreakData,
+          onSync: () => console.log('sync will be added in a future release')
+        })
       }}
       classNames={{ root: styles.questDetailsRoot }}
       isQuestsPage={true}

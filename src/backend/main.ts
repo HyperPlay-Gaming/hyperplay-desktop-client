@@ -1122,6 +1122,7 @@ function startNewPlaySession(appName: string) {
 }
 
 async function syncPlaySession(appName: string, runner: Runner) {
+  logInfo(`syncPlaySession for ${appName} runner: ${runner}`, LogPrefix.Backend)
   if (!Object.hasOwn(gamePlaySessionStartTimes, appName)) {
     return
   }
