@@ -142,6 +142,7 @@ export function QuestDetailsViewPlayWrapper({
     },
     sync: t('quest.sync', 'Sync'),
     streakProgressI18n: {
+      sync: 'Sync',
       streakProgress: t('quest.playstreak.streakProgress', 'Streak Progress'),
       days: t('quest.playstreak.days', 'days'),
       playToStart: t(
@@ -191,7 +192,8 @@ export function QuestDetailsViewPlayWrapper({
             requiredStreakInDays: 1,
             minimumSessionTimeInSeconds: 100,
             accumulatedPlaytimeTodayInSeconds: 0,
-            lastPlaySessionCompletedDateTimeUTC: new Date().toISOString()
+            lastPlaySessionCompletedDateTimeUTC: new Date().toISOString(),
+            onSync: () => console.log('onSync called')
           }
         }}
         classNames={{ root: styles.questDetailsRoot }}
