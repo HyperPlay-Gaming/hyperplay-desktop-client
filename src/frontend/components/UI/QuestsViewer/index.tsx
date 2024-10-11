@@ -73,7 +73,6 @@ export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
           syncPlayStreakWithExternalSource={async () =>
             console.log('sync external')
           }
-          // @ts-expect-error TFunction type mismatch
           tOverride={t}
           sessionEmail={sessionEmail}
           className={styles.detailsWrapper}
