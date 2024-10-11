@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DownloadToast, Images, CircularButton } from '@hyperplay/ui'
 import Draggable from 'react-draggable'
-import { DMQueueElement, GameStatus, InstallProgress } from 'common/types'
+import { DMQueueElement } from 'common/types'
 import { DMQueue } from 'frontend/types'
 import ContextProvider from 'frontend/state/ContextProvider'
 import { useTranslation } from 'react-i18next'
@@ -12,31 +12,31 @@ import { downloadStatus } from '@hyperplay/ui/dist/components/DownloadToast'
 import { useGetDownloadStatusText } from 'frontend/hooks/useGetDownloadStatusText'
 import DMQueueState from 'frontend/state/DMQueueState'
 import { isNotNative } from 'frontend/helpers/library'
-
-const nullProgress: InstallProgress = {
-  bytes: '0',
-  eta: '00:00:00'
-}
+import { hasProgress } from 'frontend/hooks/hasProgress'
+import { useGameInfo } from 'frontend/hooks/useGameInfo'
 
 export default function DownloadToastManager() {
   const [latestElement, setLatestElement] = useState<DMQueueElement>()
   const [currentElement, setCurrentElement] = useState<DMQueueElement>()
-  const [progress, setProgress] = useState<InstallProgress>(nullProgress)
   const [showDownloadToast, setShowDownloadToast] = useState(true)
   const { showDialogModal, platform } = useContext(ContextProvider)
   const { t } = useTranslation('gamepage')
   const [showPlay, setShowPlay] = useState(false)
   const [showStopInstallModal, setShowStopInstallModal] = useState(false)
-
   const appName = currentElement?.params?.gameInfo?.app_name ?? ''
   const gameInfo = currentElement?.params.gameInfo
   const { statusText: downloadStatusText, status } = useGetDownloadStatusText(
     appName,
     gameInfo
   )
+  const { installInfo } = useGameInfo({
+    appName,
+    runner: gameInfo?.runner ?? 'hyperplay',
+    platform: currentElement?.params.platformToInstall
+  })
   const installedPlatform = currentElement?.params.platformToInstall
   const isExtracting = status === 'extracting'
-  const isInstallingDistributables = status === 'distributables'
+  const { progress, etaInMs } = hasProgress(appName, isExtracting)
 
   let showPlayTimeout: NodeJS.Timeout | undefined = undefined
 
@@ -80,41 +80,6 @@ export default function DownloadToastManager() {
       removeHandleDMQueueInformation()
     }
   }, [])
-
-  useEffect(() => {
-    if (!currentElement) return
-    setProgress(nullProgress)
-    const handleProgressUpdate = async (
-      _e: Electron.IpcRendererEvent,
-      { appName: appWithProgress, progress: currentProgress }: GameStatus
-    ) => {
-      if (
-        currentElement?.params.appName === appWithProgress &&
-        currentProgress?.bytes &&
-        currentProgress.percent
-      ) {
-        setProgress(currentProgress)
-      }
-    }
-
-    const setGameStatusRemoveListener =
-      currentElement?.params.appName !== undefined
-        ? window.api.onProgressUpdate(
-            currentElement?.params.appName,
-            handleProgressUpdate
-          )
-        : () => console.log('appName was undefined in download toast manager')
-
-    return () => {
-      setGameStatusRemoveListener()
-    }
-  }, [currentElement])
-
-  useEffect(() => {
-    if (isExtracting) {
-      setProgress(nullProgress) // reset progress to 0
-    }
-  }, [isExtracting])
 
   if (currentElement === undefined) {
     return <></>
@@ -167,14 +132,6 @@ export default function DownloadToastManager() {
   const title = currentElement?.params.gameInfo.title
     ? currentElement?.params.gameInfo.title
     : 'Game'
-  const downloadSizeInMB = progress.percent
-    ? (downloadedMB / progress.percent) * 100
-    : 0
-
-  const estimatedCompletionTimeInMs =
-    progress.downSpeed && !isInstallingDistributables
-      ? (downloadSizeInMB / progress.downSpeed) * 1000
-      : 0
 
   let imgUrl = currentElement?.params.gameInfo.art_cover
     ? currentElement?.params.gameInfo.art_cover
@@ -202,7 +159,7 @@ export default function DownloadToastManager() {
   }
 
   const adjustedDownloadedInBytes = downloadedMB * 1024 * 1024
-  const adjustedDownloadSizeInBytes = downloadSizeInMB * 1024 * 1024
+  const adjustedDownloadSizeInBytes = installInfo?.manifest.download_size || 0
 
   return (
     <Draggable>
@@ -213,7 +170,7 @@ export default function DownloadToastManager() {
             gameTitle={title}
             downloadedInBytes={adjustedDownloadedInBytes}
             downloadSizeInBytes={adjustedDownloadSizeInBytes}
-            estimatedCompletionTimeInMs={estimatedCompletionTimeInMs}
+            estimatedCompletionTimeInMs={etaInMs}
             onCancelClick={() => {
               setShowStopInstallModal(true)
               window.api.trackEvent({
