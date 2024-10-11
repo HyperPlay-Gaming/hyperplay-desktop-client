@@ -52,3 +52,7 @@
   gap: var(--space-2lg);
   padding: var(--space-2lg-fixed) var(--space-xl-fixed);
 }
+
+.hideOverlay {
+  display: none;
+}

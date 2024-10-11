@@ -24,7 +24,8 @@ export function getPlaystreakArgsFromQuestData(
       new Date().toISOString(),
     accumulatedPlaytimeTodayInSeconds:
       questPlayStreakData?.accumulated_playtime_today_in_seconds ?? 0,
-    dateTimeCurrentSessionStartedInMsSinceEpoch: sessionStartedTime
+    dateTimeCurrentSessionStartedInMsSinceEpoch: sessionStartedTime,
+    onSync: () => console.log('onSync called')
   }
 }
 

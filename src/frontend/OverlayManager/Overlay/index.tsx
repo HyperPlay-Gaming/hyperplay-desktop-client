@@ -13,6 +13,7 @@ import { Button, NavBarOverlay, NavItem, Images } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
+import classNames from 'classnames'
 
 export const Overlay = observer(function ({
   appName,
@@ -120,8 +121,11 @@ export const Overlay = observer(function ({
     }
 
     const selectedRoute = '/quests'
+    const classNameMods: Record<string, boolean> = {}
+    classNameMods[BrowserGameStyles.hideOverlay] = !OverlayState.showOverlay
+    
     overlayItems = (
-      <div className={BrowserGameStyles.root}>
+      <div className={classNames(BrowserGameStyles.root, classNameMods)}>
         <div className={BrowserGameStyles.bgFilter} />
         <div className={BrowserGameStyles.contentContainer}>
           <NavBarOverlay
