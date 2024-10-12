@@ -123,7 +123,7 @@ export const Overlay = observer(function ({
     const selectedRoute = '/quests'
     const classNameMods: Record<string, boolean> = {}
     classNameMods[BrowserGameStyles.hideOverlay] = !OverlayState.showOverlay
-    
+
     overlayItems = (
       <div className={classNames(BrowserGameStyles.root, classNameMods)}>
         <div className={BrowserGameStyles.bgFilter} />
@@ -146,6 +146,7 @@ export const Overlay = observer(function ({
                 key={'/marketplace'}
                 collapsed={collapsed}
                 currentRoute={selectedRoute}
+                classNames={{ link: BrowserGameStyles.disabled }}
               />,
               <NavItem
                 title={'Achievements'}
@@ -154,6 +155,7 @@ export const Overlay = observer(function ({
                 key={'/achievements'}
                 collapsed={collapsed}
                 currentRoute={selectedRoute}
+                classNames={{ link: BrowserGameStyles.disabled }}
               />
             ]}
             setCollapsed={setCollapsed}
