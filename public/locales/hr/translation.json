@@ -155,7 +155,8 @@
         "unsync": "Desinkroniziraj",
         "continue": "Nastavi",
         "download": "Preuzmi",
-        "update": "Ažuriraj"
+        "update": "Ažuriraj",
+        "install": "Insraliraj"
     },
     "controller": {
         "hints": {
@@ -433,7 +434,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -701,6 +704,9 @@
     "notification": {
         "wine-download": {
             "title": "Compatibility Layer"
+        },
+        "wine-download-failed": {
+            "title": "Pogreška"
         }
     },
     "hyperplay": {
@@ -764,5 +770,8 @@
         "demo": "Demo",
         "main": "Glavni"
     },
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "placeholder": "Odaberi mapu igre za uvesti"
+    }
 }

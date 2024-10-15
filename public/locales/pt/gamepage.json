@@ -53,7 +53,10 @@
         },
         "dont-show-again": "Não mostrar novamente",
         "ok": "Ok",
-        "yesCancel": "Sim, cancele"
+        "yesCancel": "Sim, cancele",
+        "stopExtraction": {
+            "title": "Você quer cancelar a extração?"
+        }
     },
     "button": {
         "add_to_favourites": "Add To Favourites",
@@ -238,5 +241,10 @@
         "store": "Página da Loja",
         "verify": "Verificar e Reparar",
         "extraInfo": "Informações extras"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Entre em contato com a Equipe HyperPlay com esta mensagem: {{error}} - {{context}}."
+        }
     }
 }

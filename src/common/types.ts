@@ -134,6 +134,8 @@ export interface ExtraInfo {
 
 export type GameConfigVersion = 'auto' | 'v0' | 'v0.1'
 
+export type GameType = 'native' | 'mod' | 'browser'
+
 export interface GameInfo {
   runner: 'legendary' | 'gog' | 'hyperplay' | 'sideload'
   store_url?: string
@@ -178,6 +180,7 @@ export interface GameInfo {
   accessCodesCache?: Record<string, string>
   siweValues?: SiweValues
   networks?: ContractMetadata[]
+  type?: GameType
 }
 
 export interface GameSettings {
@@ -305,6 +308,9 @@ export interface InstallArgs {
   accessCode?: string
   updateOnly?: boolean
   siweValues?: SiweValues
+  modOptions?: {
+    zipFilePath: string
+  }
 }
 
 export interface InstallParams extends InstallArgs {
@@ -485,7 +491,7 @@ export type RecentGame = {
   title: string
 }
 
-export type HiddenGame = RecentGame
+export type HiddenGame = { appName: string }
 
 export type FavouriteGame = HiddenGame
 
@@ -942,6 +948,10 @@ export interface Quest {
       minimum_session_time_in_seconds: number
     }
   }
+  quest_external_game: null | {
+    runner: Runner
+    store_redirect_url: string
+  }
 }
 
 export interface RewardClaimSignature {
@@ -987,3 +997,5 @@ export interface PointsCollection {
   symbol: string
   image: string
 }
+
+export type { GamePageActions } from '@hyperplay/utils'

@@ -82,6 +82,15 @@
             "ubisoft-connect": {
                 "message": "Instalasi Ubisoft Connect di awal pertandingan gagal. Periksa halaman wiki kami di https://github.com/Heroic-Games-Launcher/HeroicGamesLauncher/wiki/How-to-install-Ubisoft-Connect-on-Linux-and-Mac untuk menginstalnya secara maunally.",
                 "title": "Login"
+            },
+            "delete-files": {
+                "body": "Kesalahan menghapus folder yang diekstrak {{path}}. Silakan hapus secara manual.\n{{paragraph}}\n{{error}}",
+                "title": "Kesalahan menghapus folder yang diekstrak"
+            },
+            "steam": {
+                "error": "Dieksekusi uap tidak ditemukan. Instalasi mungkin dibatalkan oleh pengguna atau gagal di sisi uap.",
+                "message": "Instalasi uap gagal! Silakan baca petunjuk dengan hati-hati dan coba lagi! {{paragraph}} {{error}}",
+                "title": "Kesalahan uap"
             }
         },
         "info": {
@@ -179,7 +188,8 @@
         "unsync": "Batalkan sinkronisasi",
         "continue": "Lanjutkan",
         "update": "Perbarui",
-        "download": "Unduh"
+        "download": "Unduh",
+        "install": "Instal"
     },
     "controller": {
         "hints": {
@@ -471,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "Tidak ada download",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -927,7 +940,8 @@
         }
     },
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "Anda terhubung ke HyperPlay dengan dompet eksternal."
+        "EXTERNAL_WALLET_CONNECTED": "Anda terhubung ke HyperPlay dengan dompet eksternal.",
+        "WALLET_DISCONNECTED": "Anda tidak memiliki dompet yang terhubung ke HyperPlay."
     },
     "dlcs": {
         "label": "Pilih DLC untuk menginstal:"
@@ -985,12 +999,18 @@
             "title": "Konfirmasi Klaim Reward Quest",
             "cancel": "Batal",
             "confirm": "Konfirmasikan"
-        }
+        },
+        "noG7ConnectionClaim": "Anda harus memiliki akun Game7 yang terkait dengan {{email}} untuk mengklaim hadiah Anda.",
+        "noG7ConnectionSync": "Anda harus memiliki akun Game7 yang terkait dengan {{email}} untuk menginkronkan tugas Anda."
     },
     "notification": {
         "wine-download": {
             "message": "Menyiapkan layer kompatibilitas default",
             "title": "Lapisan Kompatibilitas"
+        },
+        "wine-download-failed": {
+            "message": "Gagal untuk mengatur lapisan kompatibilitas default",
+            "title": "Kesalahan"
         }
     },
     "sideload": {
@@ -1034,5 +1054,84 @@
         "subtitle": "Anda sekarang menjadi bagian dari komunitas kami, dan kami sangat senang untuk berbagi pembaruan dan wawasan berharga dengan Anda."
     },
     "importGameErrorTitle": "Kesalahan Permainan Impor",
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "success": "Game yang benar-benar diimpor!",
+        "cta": "Folder Game Impor",
+        "dialog": {
+            "title": "Pilih Folder Game untuk Impor"
+        },
+        "error": "Ada kesalahan selama impor. Silakan lihat log untuk rincian lebih lanjut.",
+        "label": "Folder Game Impor",
+        "placeholder": "Pilih folder game untuk mengimpor"
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "path": "Pilih Lokasi File Game Basis",
+                "placeholder": "Pilih File Zip"
+            }
+        },
+        "baseGame": {
+            "cancel": {
+                "body": "Ekstraksi permainan dasar dibatalkan",
+                "title": "Batalkan Ekstraksi"
+            },
+            "installed": {
+                "body": "Mod akan diterapkan untuk permainan dasar",
+                "title": "Permainan Basis Dipasang"
+            },
+            "installing": {
+                "body": "Mengekstrak file permainan dasar",
+                "title": "Menginstal Game Basis"
+            }
+        }
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "webtorrent": "Sitemap",
+                "chromieCraft": "Login",
+                "description": "Game ini adalah mod untuk World of Warcraft: Wrath of the Lich King (3.3.5a). Untuk bermain mod ini, pemain harus memiliki salinan World of Warcraft 3.3.5a. {{newline}} {{newline}} HyperPlay tidak tuan rumah World of Warcraft. Pemain yang memiliki World of Warcraft dapat memperoleh versi 3.3.5a dari sumber seperti:",
+                "subtitle": "Unduh World of Warcraft 3.3.5a",
+                "title": "Langkah 1"
+            },
+            "step2": {
+                "description": "Pilih download ChromieCraft_3.3.5a.zip file.",
+                "subtitle": "KromieCraft_3.3.5a.zip Login",
+                "title": "Langkah 2"
+            },
+            "step3": {
+                "subtitle": "Pilih Instalasi Login",
+                "title": "Langkah 3",
+                "description": "Silahkan pilih folder di mana World of Warcraft: Wrath of the Lich King (3.3.5a) harus dipasang."
+            },
+            "step4": {
+                "description": "Masukkan kode akses untuk melanjutkan dengan menginstal permainan.",
+                "subtitle": "Kode Akses",
+                "title": "Langkah 4"
+            },
+            "title": "Instruksi Mod"
+        }
+    },
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay akan mengunduh dan memulai Pengaturan uap untuk Anda. Silahkan ikuti petunjuk uap pada installer mereka;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay akan memberitahu Anda setelah instalasi dilakukan;",
+    "Cancel Installation": "Login",
+    "Installing Steam": "Menginstal uap ...",
+    "Launching Steam": "Luncurkan uap ...",
+    "steam-install": {
+        "success-message": "Uap telah dipasang. Sekarang Anda dapat meluncurkannya dari Perpustakaan.",
+        "compatibility-layer-not-available": "Kompatibilitas lapisan tidak tersedia. Silakan instal satu dari \"Pengaturan> Wine Manager\" pertama.",
+        "error-message": "Kesalahan terjadi saat memasang uap. Silahkan coba lagi.",
+        "launch-tooltip": "Luncurkan uap menggunakan Lapisan Kompatibilitas HyperPlay",
+        "tooltip": "Ini akan menginstal versi Windows uap dan akan berjalan menggunakan hiperPlay Compatibility Layer.\n\nBeberapa permainan terutama judul yang lebih tua, game 3D yang lebih baru, atau mereka dengan perangkat lunak anti-cheat mungkin tidak bekerja dengan benar.\n\nSpesifikasi yang disarankan adalah Mac dengan Apple Silicon CPU (M1 atau di atas) dan setidaknya 16GB RAM."
+    },
+    "At the end make sure to": "Pada akhir pastikan",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Jika Anda ingin melanjutkan, bersabar karena dapat mengambil beberapa menit untuk menyelesaikan tergantung pada koneksi internet Anda dan konfigurasi sistem;",
+    "Install Steam": "Menginstal uap",
+    "Launch Steam": "Luncurkan uap",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "Pada peluncuran pertama uap akan mengunduh file yang diperlukan dan akan memakan waktu beberapa menit untuk menyelesaikan dan layar login muncul;",
+    "UNCHECK 'Run Steam'": "Sitemap Sitemap"
 }

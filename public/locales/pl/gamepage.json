@@ -53,6 +53,9 @@
         "aware": "Jestem świadomy",
         "compability": {
             "message": "Gra będzie uruchamiana przy użyciu warstwy kompatybilności. Możesz spotkać się z pewnymi problemami lub gry nie może pracować."
+        },
+        "stopExtraction": {
+            "title": "Czy chcesz odwołać dyrekcję?"
         }
     },
     "button": {
@@ -238,5 +241,10 @@
         "store": "Strona sklepu",
         "verify": "Sprawdź i napraw",
         "extraInfo": "Dodatkowe informacje"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Proszę skontaktować się z zespołem HyperPlay: X53X (X65X)."
+        }
     }
 }

@@ -72,7 +72,8 @@
         }
     },
     "sidebar": {
-        "library": "Aklatan"
+        "library": "Aklatan",
+        "downloadManager": "Tagapamahala ng Pag-download"
     },
     "status": {
         "installing": "Installing",
@@ -81,7 +82,8 @@
     "tray": {
         "about": "Tungkol sa",
         "quit": "Isara",
-        "show": "Ipakita"
+        "show": "Ipakita",
+        "reload": "I-reload"
     },
     "userselector": {
         "logIn": "Mag-log in",
@@ -138,7 +140,8 @@
         "cancel": "Kanselahin",
         "continue": "Ipagpatuloy",
         "download": "I-download",
-        "update": "I-update"
+        "update": "I-update",
+        "install": "I-install"
     },
     "controller": {
         "hints": {
@@ -162,8 +165,10 @@
             "speed": "I-download"
         },
         "queue": {
-            "type": "Uri"
-        }
+            "type": "Uri",
+            "start-time": "Nagsimula noong"
+        },
+        "title_dm": "Tagapamahala ng Pag-download"
     },
     "error": "Error",
     "game": {
@@ -210,5 +215,20 @@
         }
     },
     "Settings": "Mga settings",
-    "accounts": "Account"
+    "accounts": "Account",
+    "import-game-folder": {
+        "placeholder": "Piliin ang Folder ng Laro na ii-import"
+    },
+    "install": {
+        "path": "Piliin ang Install Path"
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Error"
+        }
+    },
+    "favourites": "Paborito",
+    "accessibility": {
+        "zoom": "Palakihin"
+    }
 }

@@ -95,7 +95,7 @@ interface HyperPlaySyncIPCFunctions {
   killOverlay: () => void
   toggleOverlay: () => void
   authConnected: () => void
-  goToGamePage: (appName: string) => void
+  goToGamePage: (gameId: string, action: GamePageActions) => void
   authDisconnected: () => void
   otp: (otp: string) => void
   navigate: (route: string) => void
@@ -296,8 +296,10 @@ interface HyperPlayAsyncIPCFunctions {
   getPointsBalancesForProject: (
     projectId: string
   ) => Promise<{ pointsCollection: PointsCollection; balance: string }[]>
+  checkG7ConnectionStatus: () => Promise<boolean>
   syncPlaySession: (appName: string, runner: Runner) => Promise<void>
   getEpicListingUrl: (appName: string) => Promise<string>
+  importGameFolder: (gameFolder: string) => Promise<string>
 }
 
 interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
@@ -457,6 +459,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   ) => Promise<number | undefined>
   pauseCurrentDownload: () => Promise<void>
   getQuestsForGame: (projectId: string) => Promise<Quest[]>
+  installSteamWindows: () => Promise<void>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file

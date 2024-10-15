@@ -2,6 +2,7 @@ import React, { ChangeEvent, FocusEvent, ReactNode, useContext } from 'react'
 import classnames from 'classnames'
 import ContextProvider from 'frontend/state/ContextProvider'
 import './index.scss'
+import { TextInput, TextInputProps } from '@hyperplay/ui'
 
 interface TextInputFieldProps {
   htmlId: string
@@ -17,10 +18,7 @@ interface TextInputFieldProps {
   onBlur?: (event: FocusEvent<HTMLInputElement>) => void
   maxLength?: number
   isError?: boolean
-  inputProps?: React.DetailedHTMLProps<
-    React.InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
+  inputProps?: TextInputProps & React.RefAttributes<HTMLInputElement>
 }
 
 const TextInputField = ({
@@ -40,7 +38,7 @@ const TextInputField = ({
   inputProps
 }: TextInputFieldProps) => {
   const { isRTL } = useContext(ContextProvider)
-  const { className: inputPropsClassName, ...restInputProps } = inputProps ?? {}
+  const { className: inputPropsClassName, ...textInputProps } = inputProps ?? {}
 
   return (
     <div
@@ -48,9 +46,7 @@ const TextInputField = ({
         isRTL
       })}
     >
-      {label && <label htmlFor={htmlId}>{label}</label>}
-      {inputIcon}
-      <input
+      <TextInput
         type="text"
         id={htmlId}
         value={value}
@@ -63,7 +59,9 @@ const TextInputField = ({
           isError ? 'inputFieldError' : '',
           inputPropsClassName
         )}
-        {...restInputProps}
+        rightSection={inputIcon}
+        label={label}
+        {...textInputProps}
       />
       {value && warning}
       {afterInput}

@@ -11,8 +11,7 @@ import {
   GameInfo,
   InstallArgs,
   InstallPlatform,
-  InstallProgress,
-  WineCommandArgs
+  InstallProgress
 } from 'common/types'
 import { GameConfig } from '../../game_config'
 import { GlobalConfig } from '../../config'
@@ -55,8 +54,7 @@ import {
   setupEnvVars,
   setupWrappers,
   launchCleanup,
-  getRunnerCallWithoutCredentials,
-  runWineCommand as runWineCommandUtil
+  getRunnerCallWithoutCredentials
 } from '../../launcher'
 import {
   addShortcuts as addShortcutsUtil,
@@ -1004,7 +1002,7 @@ export async function pause(appName: string) {
   return stop(appName)
 }
 
-export function isGameAvailable(appName: string) {
+export async function isGameAvailable(appName: string) {
   const info = getGameInfo(appName)
   if (info && info.is_installed) {
     if (info.install.install_path && existsSync(info.install.install_path!)) {
@@ -1014,27 +1012,4 @@ export function isGameAvailable(appName: string) {
     }
   }
   return false
-}
-
-export async function runWineCommandOnGame(
-  appName: string,
-  { commandParts, wait = false, protonVerb, startFolder }: WineCommandArgs
-): Promise<ExecResult> {
-  if (isNative(appName)) {
-    logError('runWineCommand called on native game!', LogPrefix.Legendary)
-    return { stdout: '', stderr: '' }
-  }
-
-  const { folder_name, install } = getGameInfo(appName)
-  const gameSettings = await getSettings(appName)
-
-  return runWineCommandUtil({
-    gameSettings,
-    gameInstallPath: install.install_path,
-    installFolderName: folder_name,
-    commandParts,
-    wait,
-    protonVerb,
-    startFolder
-  })
 }

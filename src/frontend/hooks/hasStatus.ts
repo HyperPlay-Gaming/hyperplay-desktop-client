@@ -13,7 +13,7 @@ export const hasStatus = (
   gameSize?: string
 ) => {
   const { libraryStatus } = React.useContext(ContextProvider)
-  const [progress] = hasProgress(appName)
+  const { progress } = hasProgress(appName)
   const { t } = useTranslation('gamepage')
 
   const [gameStatus, setGameStatus] = React.useState<{

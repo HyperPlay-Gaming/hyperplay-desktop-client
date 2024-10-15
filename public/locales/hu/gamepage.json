@@ -53,7 +53,10 @@
         "compability": {
             "message": "Ez a Windows játék egy kompatibilitási réteg használatával fog futni. Találkozhat néhány kérdéssel, vagy a játék egyáltalán nem működik."
         },
-        "yesCancel": "Igen, töröl"
+        "yesCancel": "Igen, töröl",
+        "stopExtraction": {
+            "title": "El akarja törölni a kitermelést?"
+        }
     },
     "button": {
         "add_to_favourites": "Kedvencekhez adás",
@@ -238,5 +241,10 @@
         "store": "Áruházi oldal",
         "verify": "Ellenőrzés és javítás",
         "extraInfo": "Extra Info"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Kérjük, vegye fel a kapcsolatot a HyperPlay csapattal ezzel az üzenettel: {{error}} - {{context}}."
+        }
     }
 }

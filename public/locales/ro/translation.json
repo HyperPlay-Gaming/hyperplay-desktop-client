@@ -155,7 +155,8 @@
         "unsync": "Desincronizare",
         "update": "Actualizare",
         "continue": "Continue",
-        "download": "Descarcă"
+        "download": "Descarcă",
+        "install": "Instalează"
     },
     "controller": {
         "hints": {
@@ -195,7 +196,8 @@
             "type": "Type"
         },
         "title": "Downloads",
-        "ETA": "Timpul estimat"
+        "ETA": "Timpul estimat",
+        "title_dm": "Manager Descărcări"
     },
     "epic": {
         "offline-notification-body": "Este posibil ca serviciile online să nu funcționeze complet, deoarece serverele Epic Games sunt offline!",
@@ -433,7 +435,9 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -617,7 +621,8 @@
         "collapse": "Restrângeți bara laterală",
         "uncollapse": "Desfaceți bara laterală",
         "library": "Bibliotecă",
-        "store": "Marketplace"
+        "store": "Marketplace",
+        "downloadManager": "Manager Descărcări"
     },
     "status": {
         "installing": "Se Instalează",
@@ -757,5 +762,30 @@
             "FAILED": "Traducere întreruptă."
         }
     },
-    "profile": "Profil"
+    "profile": "Profil",
+    "import-game-folder": {
+        "placeholder": "Alege dosarul de joc pentru a importa"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "title": "Pasul 1"
+            },
+            "step2": {
+                "title": "Pasul 2"
+            }
+        }
+    },
+    "mod": {
+        "instructions": {
+            "zip": {
+                "placeholder": "Selectează un fişier"
+            }
+        }
+    },
+    "notification": {
+        "wine-download-failed": {
+            "title": "Eroare"
+        }
+    }
 }

@@ -53,7 +53,10 @@
         "compability": {
             "message": "Dieses Windows-Spiel wird mit einer Kompatibilitätsschicht ausgeführt. Sie könnten einige Probleme auftreten oder das Spiel kann überhaupt nicht funktionieren."
         },
-        "yesCancel": "Ja, abbrechen"
+        "yesCancel": "Ja, abbrechen",
+        "stopExtraction": {
+            "title": "Möchten Sie die Extraktion abbrechen?"
+        }
     },
     "button": {
         "add_to_favourites": "Zu Favoriten hinzufügen",
@@ -238,5 +241,10 @@
         "store": "Store-Seite",
         "verify": "Prüfen und reparieren",
         "extraInfo": "Weitere Infos"
+    },
+    "method": {
+        "getInstallInfo": {
+            "error": "Bitte kontaktieren Sie das HyperPlay Team mit dieser Nachricht: {{error}} - {{context}}."
+        }
     }
 }

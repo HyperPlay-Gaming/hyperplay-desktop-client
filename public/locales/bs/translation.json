@@ -82,7 +82,16 @@
                 "title": "Ubisoft",
                 "message": "#Instalacija @of Ubisoft #Spajati @in @the #igra #prefiks #zakazati. #Pregled #naš wiki #strana @at https://github.@com/@Heroic-#Igra-Launcher/HeroicGamesLauncher/wiki/Kako-#na-@install-Ubisoft-#Spajati-@on-@Linux-a-@Mac #na @install #free maunally#."
             },
-            "moving": "#Zabuna #Micati #Igra [@X18@X]"
+            "moving": "#Zabuna #Micati #Igra [@X18@X]",
+            "delete-files": {
+                "body": "#Zabuna #brisati #vaditi @folder [@X32@X]. @Please #brisati #free @manually. \n                [@X86@X] \n                [@X117@X]",
+                "title": "#Zabuna #brisati #vaditi @folder"
+            },
+            "steam": {
+                "error": "@Steam executable ne #pronađen. #Instalacija #biti vjerojatno canceled @by #korisnik ili #zakazati @on @Steam #strana#.",
+                "message": "@Steam #instalacija #zakazati! @Please #čitati @the #izučavanje pažljivo a #pokušaj opet! [@X81@X] [@X95@X]",
+                "title": "@Steam #zabuna"
+            }
         },
         "info": {
             "update": {
@@ -179,7 +188,8 @@
         "unsync": "Desinhronizirajte",
         "continue": "Continue",
         "download": "Preuzimanje",
-        "update": "Update"
+        "update": "Update",
+        "install": "Install"
     },
     "controller": {
         "hints": {
@@ -471,7 +481,10 @@
             "canceled": "Canceled",
             "clear": "Clear List",
             "downloading": "Downloading",
-            "empty": "Nothing to download",
+            "empty": {
+                "finished": "#Ništica @download",
+                "queue": "Nothing to download"
+            },
             "finished": "Completed",
             "queued": "Queued",
             "remove": "Remove from Downloads",
@@ -937,7 +950,9 @@
             "title": "#Potvrditi #Potraga #Nagrada",
             "confirm": "Potvrdi",
             "cancel": "Odustanite"
-        }
+        },
+        "noG7ConnectionClaim": "#Free #nužda #na #ima @a Game7 #račun #povezati #na [@X43@X] #na @claim #tvoj #nagrada#.",
+        "noG7ConnectionSync": "#Free #nužda #na #ima @a Game7 #račun #povezati #na [@X43@X] #na resync #tvoj #zadatak#."
     },
     "profile": "Profile",
     "back_to_game": "@Back #na #igra",
@@ -988,6 +1003,10 @@
         "wine-download": {
             "message": "@Setting up @the default #kompatibilnost #red",
             "title": "#Kompatibilnost"
+        },
+        "wine-download-failed": {
+            "message": "#Zakazati #na setup @the default #kompatibilnost #red",
+            "title": "Greška"
         }
     },
     "quests": {
@@ -1029,9 +1048,89 @@
     },
     "exit_game": "#Izlaz",
     "overlay": {
-        "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#."
+        "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#.",
+        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#."
     },
     "dlcs": {
         "label": "@Select @DLC #na @install#:"
+    },
+    "mods": {
+        "instructions": {
+            "step1": {
+                "chromieCraft": "ChromieCraft",
+                "description": "@This #igra @i @a mod @for #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a). @In order to #predstava @this mod, #igrač morati #sam @a #kopija @of #Svijet @of Warcraft 3.3.5@a. [@X155@X] [@X167@X] HyperPlay @do ne #domaćin #Svijet @of Warcraft. #Igrač @who #sam #Svijet @of Warcraft #limenka @obtain #inačica 3.3.5@a @from #izvor @like#:",
+                "subtitle": "#Preuzimanje #Svijet @of Warcraft 3.3.5@a",
+                "title": "#Čin #1.",
+                "webtorrent": "#Bujica (@Magnet #Veza)"
+            },
+            "step2": {
+                "description": "@Select @the @download ChromieCraft_3.3.5@a.@zip #dosje#.",
+                "subtitle": "@Select ChromieCraft_3.3.5@a.@zip #Dosje",
+                "title": "#Čin #2."
+            },
+            "step3": {
+                "description": "@Please #birati @the @folder gdje #Svijet @of Warcraft: @Wrath @of @the Lich #Kralj (3.3.5@a) trebati #biti @install#.",
+                "subtitle": "@Select #Instalacija",
+                "title": "#Čin #3."
+            },
+            "step4": {
+                "description": "#Ući @the #pristup #kôd #na @proceed #uz #instaliranje @the #igra#.",
+                "subtitle": "#Pristup",
+                "title": "#Čin #4."
+            },
+            "title": "Mod"
+        }
+    },
+    "mod": {
+        "baseGame": {
+            "cancel": {
+                "body": "#Baza #igra #ekstrakcija canceled",
+                "title": "#Ukidati"
+            },
+            "installed": {
+                "body": "Mod #volja #biti #važiti #na #baza #igra",
+                "title": "#Baza #Igra"
+            },
+            "installing": {
+                "body": "#Vaditi #baza #igra #kartoteka",
+                "title": "#Instaliranje #Baza"
+            }
+        },
+        "instructions": {
+            "zip": {
+                "path": "@Select #Baza #Igra #Dosje",
+                "placeholder": "@Select @Zip"
+            }
+        }
+    },
+    "import-game-folder": {
+        "cta": "#Uvoz #Igra",
+        "dialog": {
+            "title": "@Select #Igra @Folder #na #Uvoz"
+        },
+        "error": "Tamo #biti @a #zabuna #tokom #uvoz. @Please #vidjeti @the #zapisnik @for više #detalj#.",
+        "label": "#Uvoz #Igra",
+        "placeholder": "#Birati @the #igra @folder #na #uvoz",
+        "success": "@Successfully #uvesti #igra#!"
+    },
+    "Cancel Installation": "#Ukidati",
+    "At the end make sure to": "@At the end @make sure #na",
+    "HyperPlay will download and start the Steam Setup for you": {
+        " Please follow Steam instructions on their installer;": "HyperPlay #volja #preuzimanje a #početak @the @Steam Setup @for #free. @Please @follow @Steam #izučavanje @on #svoj @installer#;"
+    },
+    "HyperPlay will notify you once the installation is done;": "HyperPlay #volja @notify #free jednom @the #instalacija @i #raditi#;",
+    "If you wish to continue, be patient since it can take a few minutes to finish depending on your internet connection and system configuration;": "Li #free #želja #na #nastaviti, #biti #pacijent otkad #free #limenka #uzeti @a few #minuta #na @finish @depend @on #tvoj #internet #veza a #sustav #konfiguracija#;",
+    "Install Steam": "@Install",
+    "Installing Steam": "#Instaliranje @Steam#...",
+    "Launch Steam": "#Otvaranje",
+    "UNCHECK 'Run Steam'": "UNCHECK '#Bijeg @Steam'",
+    "Launching Steam": "#Započinjanje @Steam#...",
+    "On first launch Steam will download the necessary files and will take a few minutes to finish and the login screen to appear;": "@On najprije #otvaranje @Steam #volja #preuzimanje @the #neodložan #kartoteka a #volja #uzeti @a few #minuta #na @finish a @the login #ekran #na #nastati#;",
+    "steam-install": {
+        "compatibility-layer-not-available": "#Kompatibilnost #red ne #dostupan. @Please @install #jedan @from @parquote@Setting > #Vino #Upravitelj@parquote najprije#.",
+        "error-message": "@A #zabuna @occur @while #instaliranje @Steam. @Please #pokušaj opet#.",
+        "launch-tooltip": "#Otvaranje @Steam #uporabiti @the HyperPlay #Kompatibilnost",
+        "success-message": "@Steam #ima #biti @install. #Free #limenka sad #otvaranje #free @from @the #Biblioteka#.",
+        "tooltip": "@This #volja @install @the #Prozor #inačica @of @Steam a #free #volja #bijeg #uporabiti @a HyperPlay #Kompatibilnost #Red. \n\n    #Kakav #igra osobito #star #naziv, #nov 3@D #igra, ili @that #uz @anti-@cheat #softver @may ne #rad @properly. \n\n    @The #Predlagati specs #biti @a @Mac #uz #Jabuka @Silicon @CPU (M1 ili @above) a barem 16@GB @of @RAM#."
     }
 }
