@@ -20,11 +20,9 @@ jobs:
         uses: contributor-assistant/github-action@v2.6.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.pat }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.CLA_TOKEN }}
         with:
           path-to-signatures: 'signatures/version1/cla.json'
           path-to-document: 'https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/blob/main/doc/cla.md'
           branch: 'cla_signs'
           allowlist: weblate,bot*
-          create-file-commit-message: '[CLA] Creating file for storing CLA Signatures'
-          signed-commit-message: '[CLA] $contributorName has signed the CLA'
