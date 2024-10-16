@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import BrowserGameStyles from './index.module.scss'
 import ToastManager from '../ToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
@@ -9,7 +9,7 @@ import { t } from 'i18next'
 import ExtensionManager from 'frontend/ExtensionManager'
 import TransactionState from 'frontend/state/TransactionState'
 import { BrowserGameProps } from '../types'
-import { Button, NavBarOverlay, NavItem, Images } from '@hyperplay/ui'
+import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
@@ -22,7 +22,6 @@ export const Overlay = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
-  const [collapsed, setCollapsed] = useState(false)
   const flags = useFlags()
   const txnToastContainerStyle = {} as React.CSSProperties
   if (OverlayState.title === 'HyperPlay Toasts') {
@@ -123,7 +122,6 @@ export const Overlay = observer(function ({
       questsViewer = <QuestsViewer projectId={appName} />
     }
 
-    const selectedRoute = '/quests'
     const classNameMods: Record<string, boolean> = {}
     classNameMods[BrowserGameStyles.hideOverlay] = !OverlayState.showOverlay
 
