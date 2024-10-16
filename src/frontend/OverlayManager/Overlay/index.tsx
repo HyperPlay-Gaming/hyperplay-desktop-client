@@ -124,6 +124,8 @@ export const Overlay = observer(function ({
     const classNameMods: Record<string, boolean> = {}
     classNameMods[BrowserGameStyles.hideOverlay] = !OverlayState.showOverlay
 
+    const comingSoonText = t('overlay.comingSoon', 'Coming Soon')
+
     overlayItems = (
       <div className={classNames(BrowserGameStyles.root, classNameMods)}>
         <div className={BrowserGameStyles.bgFilter} />
@@ -147,6 +149,7 @@ export const Overlay = observer(function ({
                 collapsed={collapsed}
                 currentRoute={selectedRoute}
                 classNames={{ link: BrowserGameStyles.disabled }}
+                secondaryTag={comingSoonText}
               />,
               <NavItem
                 title={'Achievements'}
@@ -156,6 +159,7 @@ export const Overlay = observer(function ({
                 collapsed={collapsed}
                 currentRoute={selectedRoute}
                 classNames={{ link: BrowserGameStyles.disabled }}
+                secondaryTag={comingSoonText}
               />
             ]}
             setCollapsed={setCollapsed}
