@@ -1046,7 +1046,8 @@
     "importGameErrorTitle": "Error de joc d'importació",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Estàs connectat a HyperPlay amb una cartera externa.",
-        "WALLET_DISCONNECTED": "No teniu una cartera connectada a HyperPlay."
+        "WALLET_DISCONNECTED": "No teniu una cartera connectada a HyperPlay.",
+        "comingSoon": "Pròximament"
     },
     "achievements": {
         "progress": {
