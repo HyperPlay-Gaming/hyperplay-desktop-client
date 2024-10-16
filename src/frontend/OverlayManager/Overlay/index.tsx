@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import BrowserGameStyles from './index.module.scss'
 import ToastManager from '../ToastManager'
 import { PROVIDERS } from 'common/types/proxy-types'
@@ -9,7 +9,7 @@ import { t } from 'i18next'
 import ExtensionManager from 'frontend/ExtensionManager'
 import TransactionState from 'frontend/state/TransactionState'
 import { BrowserGameProps } from '../types'
-import { Button } from '@hyperplay/ui'
+import { Button, NavBarOverlay, NavItem, Images } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
@@ -19,6 +19,7 @@ export const Overlay = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
+  const [collapsed, setCollapsed] = useState(false)
   const flags = useFlags()
   const txnToastContainerStyle = {} as React.CSSProperties
   if (OverlayState.title === 'HyperPlay Toasts') {
@@ -119,12 +120,68 @@ export const Overlay = observer(function ({
       questsViewer = <QuestsViewer projectId={appName} />
     }
 
+    const selectedRoute = '/quests'
     const classNameMods: Record<string, boolean> = {}
     classNameMods[BrowserGameStyles.hideOverlay] = !OverlayState.showOverlay
+
+    const comingSoonText = t('overlay.comingSoon', 'Coming Soon')
+
     overlayItems = (
       <div className={classNames(BrowserGameStyles.root, classNameMods)}>
         <div className={BrowserGameStyles.bgFilter} />
         <div className={BrowserGameStyles.contentContainer}>
+          <NavBarOverlay
+            linkItems={[
+              <NavItem
+                title={'Quests'}
+                route={'/quests'}
+                icon={<Images.QuestIcon fill="white" />}
+                alertNumber={10}
+                key={'/quests'}
+                collapsed={collapsed}
+                currentRoute={selectedRoute}
+              />,
+              <NavItem
+                title={'Marketplace'}
+                route={'/marketplace'}
+                icon={<Images.Home fill="white" />}
+                key={'/marketplace'}
+                collapsed={collapsed}
+                currentRoute={selectedRoute}
+                classNames={{ link: BrowserGameStyles.disabled }}
+                secondaryTag={comingSoonText}
+              />,
+              <NavItem
+                title={'Achievements'}
+                route={'/achievements'}
+                icon={<Images.TrophyOutline fill="white" />}
+                key={'/achievements'}
+                collapsed={collapsed}
+                currentRoute={selectedRoute}
+                classNames={{ link: BrowserGameStyles.disabled }}
+                secondaryTag={comingSoonText}
+              />,
+              <NavItem
+                title={'Portfolio'}
+                route={'/portfolio'}
+                icon={
+                  <Images.MetaMaskColored
+                    fill="none"
+                    width={22}
+                    height={36}
+                    opacity={'60%'}
+                  />
+                }
+                key={'/portfolio'}
+                collapsed={collapsed}
+                currentRoute={selectedRoute}
+                classNames={{ link: BrowserGameStyles.disabled }}
+                secondaryTag={comingSoonText}
+              />
+            ]}
+            setCollapsed={setCollapsed}
+            collapsed={collapsed}
+          />
           {questsViewer}
           <div className={BrowserGameStyles.rightSideContainer}>
             {exitGameButton}

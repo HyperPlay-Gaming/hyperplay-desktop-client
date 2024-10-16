@@ -1324,9 +1324,9 @@
     classnames "^2.5.1"
 
 "@hyperplay/ui@^1.7.18":
-  version "1.8.2"
-  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.2.tgz#cbc0c38f431787a778162763dc342800523abe9d"
-  integrity sha512-UxV2/g5/bG3FYk3DcU45oqDX/gCh9vXu6cZClBrVq0lje+K+JRCKQSnvSNTMbq8ubG2BOtuTiW1j1b5AAeYJrw==
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/@hyperplay/ui/-/ui-1.8.3.tgz#5ecfcacdb782ac16ea8411fd19ec5ad3077f642b"
+  integrity sha512-IObNBY9xsz2J0dLZ07OaFXBFIFKh7V/p9JedvUzQWpcDfBeuUJ+TixWTKBw5+4G/TmwSL6576YZFUVxSBD1BpQ==
 
 "@hyperplay/utils@^0.0.12":
   version "0.0.12"
