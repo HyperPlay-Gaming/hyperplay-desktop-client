@@ -1053,7 +1053,8 @@
     "importGameErrorTitle": "Importar erro de jogo",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Você está conectado ao HyperPlay com uma carteira externa.",
-        "WALLET_DISCONNECTED": "Você não tem uma carteira conectada ao HyperPlay."
+        "WALLET_DISCONNECTED": "Você não tem uma carteira conectada ao HyperPlay.",
+        "comingSoon": "Brevemente"
     },
     "importGameErrorMessage": "Não uma pasta de jogo válida, o jogo de importação não é possível",
     "importGameErrorMessageExecutable": "Jogo Executável não encontrado, importando jogo não é possível",
