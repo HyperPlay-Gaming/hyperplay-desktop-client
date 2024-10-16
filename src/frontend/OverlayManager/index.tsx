@@ -9,11 +9,13 @@ import { Overlay } from './Overlay'
 import { WebviewTag } from 'electron'
 import WebviewControls from 'frontend/components/UI/WebviewControls'
 import AuthModal from 'frontend/components/UI/AuthModal'
+import { useKeepPlaystreaksInSync } from 'frontend/hooks/useKeepPlaystreaksInSync'
 
 const OverlayManager = observer(function ({
   appName,
   runner
 }: BrowserGameProps) {
+  useKeepPlaystreaksInSync(appName)
   const url = OverlayState.renderState.browserGameUrl
 
   /* eslint-disable-next-line @typescript-eslint/no-explicit-any */

@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react'
 import { GenericStore } from './types'
+import { questPlayStreakSyncState } from '@hyperplay/quests-ui'
+import { useQueryClient } from '@tanstack/react-query'
 
 const StoreController = () => {
+  const queryClient = useQueryClient()
+
   useEffect(() => {
     const stores = import.meta.glob<{ default: GenericStore }>([
       './*Store.ts*',
@@ -15,6 +19,13 @@ const StoreController = () => {
 
         await store.init?.()
       }
+      questPlayStreakSyncState.init({
+        getQuests: window.api.getQuests,
+        getQuest: window.api.getQuest,
+        getUserPlayStreak: window.api.getUserPlayStreak,
+        syncPlaySession: window.api.syncPlaySession,
+        appQueryClient: queryClient
+      })
     }
 
     initializableStores()
