@@ -1,7 +1,5 @@
 name: 'CLA Assistant'
 on:
-  pull_request:
-    branches: [fix/cla_ci]
   push:
     branches: [fix/cla_ci]
   issue_comment:
