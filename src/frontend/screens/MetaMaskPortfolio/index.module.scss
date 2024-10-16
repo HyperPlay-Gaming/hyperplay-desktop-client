@@ -1,0 +1,20 @@
+@import '@hyperplay/ui/utilities/_loading.scss';
+
+.homeDiv {
+  height: 100%;
+  width: 100%;
+}
+
+.homeWebview {
+  height: 100%;
+}
+
+.hide {
+  display: none;
+}
+
+.loader {
+  @include shinyLoader;
+  height: 100%;
+  width: 100%;
+}
