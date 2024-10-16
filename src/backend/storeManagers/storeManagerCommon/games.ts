@@ -135,6 +135,9 @@ const openNewBrowserGameWindow = async (
 
         /* this overrides the handler set in extension-importer but falls back to its behavior */
         contents.setWindowOpenHandler(({ url }) => {
+          if (url === 'about:blank') {
+            return { action: 'allow' }
+          }
           const urlToOpen = new URL(url)
           const protocol = urlToOpen.protocol
 
