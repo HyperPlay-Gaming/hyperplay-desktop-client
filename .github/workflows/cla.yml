@@ -20,7 +20,7 @@ jobs:
         uses: contributor-assistant/github-action@v2.6.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PERSONAL_ACCESS_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.pat }}
         with:
           path-to-signatures: 'signatures/version1/cla.json'
           path-to-document: 'https://github.com/HyperPlay-Gaming/hyperplay-desktop-client/blob/main/doc/cla.md'
