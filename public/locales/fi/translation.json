@@ -1020,7 +1020,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Olet yhteydessä HyperPlayyn ulkoisella lompakolla.",
-        "WALLET_DISCONNECTED": "Sinulla ei ole lompakkoa, joka on liitetty HyperPlayyn."
+        "WALLET_DISCONNECTED": "Sinulla ei ole lompakkoa, joka on liitetty HyperPlayyn.",
+        "comingSoon": "Tulossa pian"
     },
     "accounts": "tilit",
     "exit_game": "Exit Game",
