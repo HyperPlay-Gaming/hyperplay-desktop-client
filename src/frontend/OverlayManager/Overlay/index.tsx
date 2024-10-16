@@ -160,6 +160,23 @@ export const Overlay = observer(function ({
                 currentRoute={selectedRoute}
                 classNames={{ link: BrowserGameStyles.disabled }}
                 secondaryTag={comingSoonText}
+              />,
+              <NavItem
+                title={'Portfolio'}
+                route={'/portfolio'}
+                icon={
+                  <Images.MetaMaskColored
+                    fill="none"
+                    width={22}
+                    height={36}
+                    opacity={'60%'}
+                  />
+                }
+                key={'/portfolio'}
+                collapsed={collapsed}
+                currentRoute={selectedRoute}
+                classNames={{ link: BrowserGameStyles.disabled }}
+                secondaryTag={comingSoonText}
               />
             ]}
             setCollapsed={setCollapsed}
