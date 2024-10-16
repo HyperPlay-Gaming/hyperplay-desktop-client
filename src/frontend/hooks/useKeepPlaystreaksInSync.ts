@@ -1,19 +1,26 @@
 import { questPlayStreakSyncState } from '@hyperplay/quests-ui'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef } from 'react'
 
 export function useKeepPlaystreaksInSync(appName: string) {
-  const [syncInitialized, setSyncInitialized] = useState(false)
+  const syncInitializedRef = useRef(false)
+
   useEffect(() => {
-    if (syncInitialized) {
-      return questPlayStreakSyncState.clearAllTimers
+    return () => {
+      if (syncInitializedRef.current) {
+        questPlayStreakSyncState.clearAllTimers()
+      }
     }
-    return
-  }, [syncInitialized])
+  }, [])
+
   useEffect(() => {
-    async function initSync() {
-      await questPlayStreakSyncState.keepProjectQuestsInSync(appName)
-      setSyncInitialized(true)
+    const initSync = async () => {
+      try {
+        await questPlayStreakSyncState.keepProjectQuestsInSync(appName)
+        syncInitializedRef.current = true
+      } catch (error) {
+        console.error('Failed to initialize sync:', error)
+      }
     }
     initSync()
-  }, [])
+  }, [appName])
 }
