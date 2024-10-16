@@ -962,7 +962,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Ви під'єднані до HyperPlay за допомогою зовнішнього гаманця.",
-        "WALLET_DISCONNECTED": "Ви не маєте гаманець, підключеного до HyperPlay."
+        "WALLET_DISCONNECTED": "Ви не маєте гаманець, підключеного до HyperPlay.",
+        "comingSoon": "Очікуйте невдовзі"
     },
     "dlc": {
         "size": "Розмір",
