@@ -52,3 +52,7 @@
   flex-direction: column;
   gap: var(--space-2lg);
 }
+
+.hideOverlay {
+  display: none;
+}
