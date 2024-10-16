@@ -17,7 +17,6 @@ export function NavBarOverlayWrapper() {
           title={'Quests'}
           route={'/quests'}
           icon={<Images.QuestIcon fill="white" />}
-          alertNumber={10}
           key={'/quests'}
           collapsed={collapsed}
           currentRoute={pathname}
