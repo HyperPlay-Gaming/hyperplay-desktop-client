@@ -1065,7 +1065,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "你与超Play有外部围墙.",
-        "WALLET_DISCONNECTED": "你没有与超Play连接的围墙."
+        "WALLET_DISCONNECTED": "你没有与超Play连接的围墙.",
+        "comingSoon": "新赛季即将开启"
     },
     "back_to_game": "重获游戏",
     "import-game-folder": {
