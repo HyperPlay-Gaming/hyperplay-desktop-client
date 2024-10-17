@@ -6,7 +6,6 @@ import {
   CheckUpdatesOnStartup,
   DefaultInstallPath,
   DefaultSteamPath,
-  DisableController,
   EgsSettings,
   HyperPlayAnalytics,
   LibraryTopSection,
@@ -56,7 +55,9 @@ export default function GeneralSettings() {
 
       <Shortcuts />
 
-      <DisableController />
+      {/* 
+      disabled until we fix the controller navigation in hyperplay
+      <DisableController /> */}
 
       <HyperPlayAnalytics />
 

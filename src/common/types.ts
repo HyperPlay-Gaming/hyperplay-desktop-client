@@ -82,8 +82,6 @@ export interface AppSettings extends GameSettings {
   addDesktopShortcuts: boolean
   addStartMenuShortcuts: boolean
   addSteamShortcuts: boolean
-  altGogdlBin: string
-  altLegendaryBin: string
   autoUpdateGames: boolean
   checkForUpdatesOnStartup: boolean
   autoLaunchHyperPlay: boolean

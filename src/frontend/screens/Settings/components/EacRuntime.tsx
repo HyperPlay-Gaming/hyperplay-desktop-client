@@ -5,6 +5,7 @@ import useSetting from 'frontend/hooks/useSetting'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSyncAlt } from '@fortawesome/free-solid-svg-icons'
 import ContextProvider from 'frontend/state/ContextProvider'
+import SettingsContext from '../SettingsContext'
 
 const EacRuntime = () => {
   const { t } = useTranslation()
@@ -12,6 +13,11 @@ const EacRuntime = () => {
   const [eacRuntime, setEacRuntime] = useSetting('eacRuntime', false)
   const [useGameMode, setUseGameMode] = useSetting('useGameMode', false)
   const { showDialogModal } = useContext(ContextProvider)
+  const { gameInfo } = useContext(SettingsContext)
+
+  if (gameInfo?.runner === 'hyperplay') {
+    return null
+  }
 
   const handleEacRuntime = async () => {
     if (!eacRuntime) {
