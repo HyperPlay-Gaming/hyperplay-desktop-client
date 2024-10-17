@@ -53,7 +53,8 @@ import type { SystemInformation } from 'backend/utils/systeminfo'
 import {
   MetaMaskInitMethod,
   ImportableBrowser,
-  MetaMaskImportOptions
+  MetaMaskImportOptions,
+  ClientUpdateStatuses
 } from '@hyperplay/utils'
 
 /**
@@ -160,6 +161,7 @@ interface SyncIPCFunctions extends HyperPlaySyncIPCFunctions {
   'auth:accountNotConnected': () => void
   'auth:otpFinished': () => void
   focusMainWindow: () => void
+  restartClient: () => void
 }
 
 interface RequestArguments {
@@ -460,6 +462,7 @@ interface AsyncIPCFunctions extends HyperPlayAsyncIPCFunctions {
   pauseCurrentDownload: () => Promise<void>
   getQuestsForGame: (projectId: string) => Promise<Quest[]>
   installSteamWindows: () => Promise<void>
+  isClientUpdating: () => Promise<ClientUpdateStatuses>
 }
 
 // This is quite ugly & throws a lot of errors in a regular .ts file
