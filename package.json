@@ -171,7 +171,7 @@
     "@hyperplay/check-disk-space": "^3.5.2",
     "@hyperplay/quests-ui": "^0.0.25",
     "@hyperplay/ui": "^1.7.18",
-    "@hyperplay/utils": "^0.2.4",
+    "@hyperplay/utils": "^0.2.5",
     "@mantine/carousel": "^7.12.0",
     "@mantine/core": "^7.12.0",
     "@mantine/dropzone": "^7.12.0",
