@@ -19,7 +19,7 @@ export function NavBarOverlayWrapper() {
           icon={<Images.QuestIcon fill="white" />}
           key={'/quests'}
           collapsed={collapsed}
-          currentRoute={pathname}
+          currentRoute={pathname === '/' ? '/quests' : pathname}
           component={Link}
           to={'/quests'}
         />,
