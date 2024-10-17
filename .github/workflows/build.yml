@@ -46,13 +46,11 @@ jobs:
           path: dist/HyperPlay*.exe
           retention-days: 7
   build_linux:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     concurrency:
       group: build-linux-${{ github.ref }}
       cancel-in-progress: true
     steps:
-      - name: Install libarchive-tools for pacman build # Related https://github.com/electron-userland/electron-builder/issues/4181
-        run: sudo apt-get install libarchive-tools
       - name: Checkout repository.
         uses: actions/checkout@v4
 
