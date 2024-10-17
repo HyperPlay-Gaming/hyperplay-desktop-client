@@ -1009,6 +1009,9 @@
         "g7CreditsModal": {
             "title": "Κερδίστε Game7 Credits",
             "description": "Αποκτήστε τα κορυφαία παιχνίδια του HyperPlay με συναρπαστικές προκλήσεις Play Streak. Κάθε δραστηριότητα σας ενθαρρύνει να συνεργαστείτε με ένα διαφορετικό παιχνίδι, δείχνοντας το καλύτερο παιχνίδι web3. Το playtime σας έχει σημασία!"
+        },
+        "viewAllQuests": {
+            "title": "Δείτε όλες τις αναζητήσεις"
         }
     },
     "back_to_game": "Επιστροφή στο παιχνίδι",
@@ -1048,7 +1051,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Είστε συνδεδεμένοι με το HyperPlay με ένα εξωτερικό πορτοφόλι.",
-        "WALLET_DISCONNECTED": "Δεν έχετε πορτοφόλι συνδεδεμένο με HyperPlay."
+        "WALLET_DISCONNECTED": "Δεν έχετε πορτοφόλι συνδεδεμένο με HyperPlay.",
+        "comingSoon": "Έρχεται σύντομα"
     },
     "importGameErrorMessageExecutable": "Game Game Game Δεν είναι εφικτό, το παιχνίδι εισαγωγής δεν είναι εφικτό",
     "profile": "Προφίλ",

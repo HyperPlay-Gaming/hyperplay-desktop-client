@@ -761,7 +761,8 @@
     "gameRelease": {
         "main": "Главен",
         "beta": "Beta",
-        "alpha": "Прозрачност"
+        "alpha": "Прозрачност",
+        "demo": "Демонстрация"
     },
     "profile": "Профил",
     "import-game-folder": {
@@ -771,5 +772,8 @@
         "wine-download-failed": {
             "title": "Грешка"
         }
+    },
+    "overlay": {
+        "comingSoon": "Очаквайте скоро…"
     }
 }

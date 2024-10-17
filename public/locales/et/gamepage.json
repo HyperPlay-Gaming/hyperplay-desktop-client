@@ -101,7 +101,8 @@
         "repairing": "Parandamine"
     },
     "generic": {
-        "error": "Teadmata viga"
+        "error": "Teadmata viga",
+        "noDescription": "Raamatu kirjeldus pole saadaval."
     },
     "hours": "Hours",
     "how-long-to-beat": {

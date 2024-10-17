@@ -1000,6 +1000,9 @@
         "g7CreditsModal": {
             "description": "Tauchen Sie mit spannenden Play Streak Challenges in die Top-Spiele von HyperPlay ein. Jede Aktivität ermutigt Sie, sich mit einem anderen Spiel zu engagieren, was das Beste von web3 Gaming zeigt. Deine Spielzeit zählt!",
             "title": "Earn Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "Alle Quests anzeigen"
         }
     },
     "gameRelease": {
@@ -1044,7 +1047,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Sie sind mit HyperPlay mit einer externen Geldbörse verbunden.",
-        "WALLET_DISCONNECTED": "Sie haben keine Geldbörse mit HyperPlay verbunden."
+        "WALLET_DISCONNECTED": "Sie haben keine Geldbörse mit HyperPlay verbunden.",
+        "comingSoon": "Demnächst verfügbar"
     },
     "sideload": {
         "warningMessage": "Side-loading ein Spiel ist eine Funktion für Entwickler und erfahrene Power-Nutzer. Side-loaden eines Installers, der Malware enthält könnte Ihren Computer kompromittieren und zu Diebstahl von Geld führen.",

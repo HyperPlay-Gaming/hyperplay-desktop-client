@@ -1078,7 +1078,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Du er forbundet til HyperPlay med en ekstern tegnebog.",
-        "WALLET_DISCONNECTED": "Du har ikke en tegnebog, der er forbundet til HyperPlay."
+        "WALLET_DISCONNECTED": "Du har ikke en tegnebog, der er forbundet til HyperPlay.",
+        "comingSoon": "Kommer snart"
     },
     "quests": {
         "quests": "Quests",
@@ -1095,6 +1096,9 @@
         "g7CreditsModal": {
             "title": "Optjen spil7 Credits",
             "description": "Dyk ned i HyperPlay's top spil med spændende Play Streak Challenges. Hver aktivitet opfordrer dig til at engagere sig med et andet spil, der viser det bedste af web3 spil. Din spilletid betyder noget!"
+        },
+        "viewAllQuests": {
+            "title": "Se alle Quests"
         }
     },
     "importGameErrorMessage": "Ikke en gyldig spilmappe, import af spil er ikke muligt",

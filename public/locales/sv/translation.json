@@ -1018,6 +1018,9 @@
         "g7CreditsModal": {
             "description": "Dyk in HyperPlays toppspel med spännande Play Streak Challenges. Varje aktivitet uppmuntrar dig att engagera dig i ett annat spel, visa det bästa av web3 spel. Din speltid spelar roll!",
             "title": "Tjäna Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "Visa alla Quests"
         }
     },
     "accounts": "konton",
@@ -1039,7 +1042,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Du är ansluten till HyperPlay med en extern plånbok.",
-        "WALLET_DISCONNECTED": "Du har ingen plånbok ansluten till HyperPlay."
+        "WALLET_DISCONNECTED": "Du har ingen plånbok ansluten till HyperPlay.",
+        "comingSoon": "Kommer snart"
     },
     "email_subscription": {
         "title": "Tack för att du prenumererar!",

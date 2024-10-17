@@ -1028,6 +1028,9 @@
         "g7CreditsModal": {
             "description": "HyperPlay'in en iyi oyunları heyecan verici Play Streak Challenges ile. Her aktivite sizi farklı bir oyunla meşgul etmeye teşvik eder, web3 oyununun en iyisini gösterir. Oyun zamanı önemlidir!",
             "title": "Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "Tüm Questleri Görüntüle"
         }
     },
     "accounts": "hesaplar",
@@ -1048,7 +1051,8 @@
     "back_to_game": "Oyuna Geri Dönüş",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Dış bir cüzdanla HyperPlay'e bağlanırsınız.",
-        "WALLET_DISCONNECTED": "HyperPlay ile bağlantılı bir cüzdana sahip değilsiniz."
+        "WALLET_DISCONNECTED": "HyperPlay ile bağlantılı bir cüzdana sahip değilsiniz.",
+        "comingSoon": "Çok yakında"
     },
     "email_subscription": {
         "title": "Alt tarif için teşekkür ederiz!",

@@ -961,6 +961,9 @@
         "g7CreditsModal": {
             "title": "Game7クレジットを獲得",
             "description": "HyperPlayのトップゲームにエキサイティングなプレイ・ストリーク・チャレンジを組み込む 各活動は、Web3ゲームのベストを提示し、さまざまなゲームに従事することを奨励します。 プレイタイムの問題!"
+        },
+        "viewAllQuests": {
+            "title": "すべての質問を見る"
         }
     },
     "ALL": "ALL",
@@ -1039,7 +1042,8 @@
     "exit_game": "終了ゲーム",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "外部ウォレットでHyperPlayに接続します.",
-        "WALLET_DISCONNECTED": "HyperPlayに接続されているウォレットはありません."
+        "WALLET_DISCONNECTED": "HyperPlayに接続されているウォレットはありません.",
+        "comingSoon": "Coming Soon"
     },
     "importGameErrorMessageExecutable": "ゲーム 実行可能が見つからず、ゲームをインポートできない",
     "gameUpdateNotifications": {

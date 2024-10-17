@@ -1018,12 +1018,16 @@
         "g7CreditsModal": {
             "description": "Mergulla a HyperPlay  xogos superiores con Xogo emocionante Streak Desafíos. Cada actividade anímate  para comprometer cun xogo diferente, showcasing o mellor de web3 gaming. O voso playtime asuntos!",
             "title": "Gaña Game7 Créditos"
+        },
+        "viewAllQuests": {
+            "title": "Vista Todas as Buscas"
         }
     },
     "accounts": "Contas",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Es conectado a HyperPlay cunha carteira externa.",
-        "WALLET_DISCONNECTED": "Non tes unha carteira conectou a HyperPlay."
+        "WALLET_DISCONNECTED": "Non tes unha carteira conectou a HyperPlay.",
+        "comingSoon": "Proximamente"
     },
     "notification": {
         "wine-download": {
