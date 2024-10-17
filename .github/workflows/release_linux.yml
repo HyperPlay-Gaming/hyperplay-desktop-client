@@ -12,7 +12,7 @@ env:
 
 jobs:
   draft-releases:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - run: sudo apt-get install --no-install-recommends -y libarchive-tools libopenjp2-tools rpm
       - name: Checkout repository.

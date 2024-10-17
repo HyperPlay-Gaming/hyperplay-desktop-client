@@ -46,7 +46,7 @@ jobs:
           path: dist/HyperPlay*.exe
           retention-days: 7
   build_linux:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     concurrency:
       group: build-linux-${{ github.ref }}
       cancel-in-progress: true
