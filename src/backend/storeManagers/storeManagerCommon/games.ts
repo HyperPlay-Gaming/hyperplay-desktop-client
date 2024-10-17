@@ -26,7 +26,12 @@ import { access, chmod } from 'fs/promises'
 import shlex from 'shlex'
 import { showDialogBoxModalAuto } from '../../dialog/dialog'
 import { createAbortController } from '../../utils/aborthandler/aborthandler'
-import { app, BrowserWindow } from 'electron'
+import {
+  app,
+  BrowserWindow,
+  BrowserWindowConstructorOptions,
+  WindowOpenHandlerResponse
+} from 'electron'
 import { gameManagerMap } from '../index'
 const buildDir = resolve(__dirname, '../../build')
 import { domainsAreEqual } from 'common/utils'
@@ -47,6 +52,24 @@ export function logFileLocation(appName: string) {
   return join(gamesConfigPath, `${appName}-lastPlay.log`)
 }
 
+const openBlankWindow = (options: BrowserWindowConstructorOptions) => {
+  options.show = false
+  const browserGame = new BrowserWindow(options)
+
+  browserGame.webContents.on('will-navigate', async (...params) => {
+    import('@hyperplay/extension-importer').then((extensionImporter) => {
+      extensionImporter?.windowOpenHandlerForExtension(
+        params[0].url,
+        browserGame.webContents,
+        hpApi
+      )
+      browserGame.close()
+    })
+  })
+
+  return browserGame.webContents
+}
+
 const openNewBrowserGameWindow = async (
   browserUrl: string,
   gameInfo: GameInfo
@@ -62,6 +85,35 @@ const openNewBrowserGameWindow = async (
     logError(`Error importing proxy server ${err}`, LogPrefix.HyperPlay)
   }
   const hpOverlay = await getHpOverlay()
+  const urlParent = new URL(browserUrl)
+
+  function handleUrlOpen(
+    url: string,
+    contents: Electron.WebContents
+  ): WindowOpenHandlerResponse {
+    const urlToOpen = new URL(url)
+    const protocol = urlToOpen.protocol
+
+    if (url === 'about:blank') {
+      return { action: 'allow', createWindow: openBlankWindow }
+    }
+
+    if (
+      ['https:', 'http:'].includes(protocol) &&
+      domainsAreEqual(urlToOpen, urlParent)
+    ) {
+      openNewBrowserGameWindow(url, gameInfo)
+      return { action: 'deny' }
+    }
+    return (
+      extensionImporter?.windowOpenHandlerForExtension(
+        url,
+        contents,
+        hpApi
+      ) ?? { action: 'deny' }
+    )
+  }
+
   return new Promise((res) => {
     const browserGame = new BrowserWindow({
       icon: icon,
@@ -120,7 +172,6 @@ const openNewBrowserGameWindow = async (
           gameInfo.runner
         }`
 
-    const urlParent = new URL(browserUrl)
     const openNewBroswerGameWindowListener = (
       ev: Electron.Event,
       contents: Electron.WebContents
@@ -134,24 +185,9 @@ const openNewBrowserGameWindow = async (
         )
 
         /* this overrides the handler set in extension-importer but falls back to its behavior */
-        contents.setWindowOpenHandler(({ url }) => {
-          const urlToOpen = new URL(url)
-          const protocol = urlToOpen.protocol
-
-          if (
-            ['https:', 'http:'].includes(protocol) &&
-            domainsAreEqual(urlToOpen, urlParent)
-          ) {
-            openNewBrowserGameWindow(url, gameInfo)
-            return { action: 'deny' }
-          }
-          return (
-            extensionImporter?.windowOpenHandlerForExtension(
-              url,
-              contents,
-              hpApi
-            ) ?? { action: 'deny' }
-          )
+        contents.setWindowOpenHandler((handler) => {
+          const { url } = handler
+          return handleUrlOpen(url, contents)
         })
       }
     }
