@@ -22,7 +22,7 @@ import {
   screen,
   session
 } from 'electron'
-import 'backend/updater'
+
 import { autoUpdater } from 'electron-updater'
 import { cpus, platform } from 'os'
 import {
@@ -152,6 +152,7 @@ import {
   checkWineBeforeLaunch,
   runWineCommandOnGame
 } from './utils/compatibility_layers'
+import { isClientUpdating } from 'backend/updater'
 
 /*
  * INSERT OTHER IPC HANDLERS HERE
@@ -1158,6 +1159,12 @@ ipcMain.handle(
     await syncPlaySession(appName, runner)
   }
 )
+
+ipcMain.handle('isClientUpdating', async () => {
+  return isClientUpdating()
+})
+
+ipcMain.on('restartClient', () => autoUpdater.quitAndInstall())
 
 // get pid/tid on launch and inject
 ipcMain.handle(
