@@ -1,3 +1,4 @@
+import { sendFrontendMessage } from 'backend/main_window'
 import { fetchWithCookie } from 'backend/utils/fetch_with_cookie'
 import { checkG7ConnectionStatus } from 'backend/utils/quests'
 import { DEV_PORTAL_URL } from 'common/constants'
@@ -101,4 +102,32 @@ ipcMain.handle('getPointsBalancesForProject', async (e, projectId) => {
 
 ipcMain.handle('checkG7ConnectionStatus', async () => {
   return checkG7ConnectionStatus()
+})
+
+ipcMain.handle('syncPlayStreakWithExternalSource', async (e, params) => {
+  const url = `${DEV_PORTAL_URL}api/v1/quests/${params.quest_id}/playstreak/sync`
+  return fetchWithCookie({
+    url,
+    method: 'POST',
+    body: JSON.stringify(params)
+  })
+})
+
+ipcMain.handle('getCSRFToken', async () => {
+  const url = `${DEV_PORTAL_URL}api/auth/csrf`
+  const response = await fetchWithCookie({ url, method: 'GET' })
+  return response.csrfToken
+})
+
+ipcMain.handle(
+  'checkPendingSync',
+  async (e, { wallet, questId }: { wallet: string; questId: number }) => {
+    const url = `${DEV_PORTAL_URL}api/v1/quests/${questId}/playstreak/sync?wallet=${wallet}`
+    const response = await fetchWithCookie({ url, method: 'GET' })
+    return response.hasPendingSync
+  }
+)
+
+ipcMain.on('openOnboarding', () => {
+  sendFrontendMessage('openOnboarding')
 })

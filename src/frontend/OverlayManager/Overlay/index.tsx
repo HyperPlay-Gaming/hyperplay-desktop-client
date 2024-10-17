@@ -13,6 +13,7 @@ import { Button, NavBarOverlay, NavItem, Images } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
+import AlertToast from 'frontend/components/UI/AlertToast'
 import classNames from 'classnames'
 
 export const Overlay = observer(function ({
@@ -124,12 +125,13 @@ export const Overlay = observer(function ({
     const classNameMods: Record<string, boolean> = {}
     classNameMods[BrowserGameStyles.hideOverlay] = !OverlayState.showOverlay
 
-    const comingSoonText = t('overlay.comingSoon', 'Coming Soon')
+    // const comingSoonText = t('overlay.comingSoon', 'Coming Soon')
 
     overlayItems = (
       <div className={classNames(BrowserGameStyles.root, classNameMods)}>
         <div className={BrowserGameStyles.bgFilter} />
         <div className={BrowserGameStyles.contentContainer}>
+          <AlertToast />
           <NavBarOverlay
             linkItems={[
               <NavItem
@@ -148,7 +150,7 @@ export const Overlay = observer(function ({
                 collapsed={collapsed}
                 currentRoute={selectedRoute}
                 classNames={{ link: BrowserGameStyles.disabled }}
-                secondaryTag={comingSoonText}
+                // secondaryTag={comingSoonText}
               />,
               <NavItem
                 title={'Achievements'}
@@ -158,7 +160,7 @@ export const Overlay = observer(function ({
                 collapsed={collapsed}
                 currentRoute={selectedRoute}
                 classNames={{ link: BrowserGameStyles.disabled }}
-                secondaryTag={comingSoonText}
+                // secondaryTag={comingSoonText}
               />,
               <NavItem
                 title={'Portfolio'}
@@ -175,7 +177,7 @@ export const Overlay = observer(function ({
                 collapsed={collapsed}
                 currentRoute={selectedRoute}
                 classNames={{ link: BrowserGameStyles.disabled }}
-                secondaryTag={comingSoonText}
+                // secondaryTag={comingSoonText}
               />
             ]}
             setCollapsed={setCollapsed}
