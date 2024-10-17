@@ -716,6 +716,7 @@
     },
     "Other": "Other",
     "overlay": {
+        "comingSoon": "Coming Soon",
         "EXTERNAL_WALLET_CONNECTED": "You are connected to HyperPlay with an external wallet.",
         "WALLET_DISCONNECTED": "You do not have a wallet connected to HyperPlay."
     },
