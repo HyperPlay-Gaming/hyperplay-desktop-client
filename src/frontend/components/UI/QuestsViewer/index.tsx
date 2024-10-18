@@ -18,7 +18,7 @@ export interface QuestsViewerProps {
   projectId: string
 }
 
-export const QuestsViewer = ({ projectId: appName }: QuestsViewerProps) => {
+export function QuestsViewer({ projectId: appName }: QuestsViewerProps) {
   const { address } = useAccount()
   const questResults = useGetQuests(appName)
   const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
