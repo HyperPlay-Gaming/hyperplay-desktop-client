@@ -51,6 +51,8 @@ jobs:
       group: build-linux-${{ github.ref }}
       cancel-in-progress: true
     steps:
+      - name: Update deps
+        run: sudo apt-get update
       - name: Install libarchive-tools for pacman build # Related https://github.com/electron-userland/electron-builder/issues/4181
         run: sudo apt-get install libarchive-tools
       - name: Checkout repository.
