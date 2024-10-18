@@ -1020,7 +1020,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Olet yhteydessä HyperPlayyn ulkoisella lompakolla.",
-        "WALLET_DISCONNECTED": "Sinulla ei ole lompakkoa, joka on liitetty HyperPlayyn."
+        "WALLET_DISCONNECTED": "Sinulla ei ole lompakkoa, joka on liitetty HyperPlayyn.",
+        "comingSoon": "Tulossa pian"
     },
     "accounts": "tilit",
     "exit_game": "Exit Game",
@@ -1052,6 +1053,9 @@
         "g7CreditsModal": {
             "description": "HyperPlayn parhaat pelit, joissa on jännittäviä Play Streak -haasteita. Jokainen aktiviteetti kannustaa sinua osallistumaan toiseen peliin ja esittelemään parhaan verkkopelin. Peliaikasi on tärkeää!",
             "title": "Ansaitse Game7 -luottoja"
+        },
+        "viewAllQuests": {
+            "title": "Katso kaikki Quests"
         }
     },
     "import-game-folder": {

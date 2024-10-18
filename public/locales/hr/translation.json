@@ -773,5 +773,8 @@
     "profile": "Profil",
     "import-game-folder": {
         "placeholder": "Odaberi mapu igre za uvesti"
+    },
+    "overlay": {
+        "comingSoon": "Dolazi uskoro …"
     }
 }

@@ -1016,6 +1016,9 @@
         "g7CreditsModal": {
             "title": "Získejte hry7 kredity",
             "description": "Dive to HyperPlay’s top hry s vzrušující Play Streak Challenges. Každá aktivita vás povzbuzuje, abyste se zapojili s jinou hrou, což ukazuje nejlepší ze hry na webu3. Vaše herní otázky!"
+        },
+        "viewAllQuests": {
+            "title": "Zobrazit všechny úkoly"
         }
     },
     "accounts": "účty",
@@ -1044,7 +1047,8 @@
     },
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Jste připojeni do HyperPlay s externí peněženky.",
-        "WALLET_DISCONNECTED": "Nemáte peněženku připojenou k HyperPlay."
+        "WALLET_DISCONNECTED": "Nemáte peněženku připojenou k HyperPlay.",
+        "comingSoon": "Čeština"
     },
     "gameRelease": {
         "prototype": "Čeština",

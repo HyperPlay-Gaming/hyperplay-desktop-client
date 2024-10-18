@@ -1010,6 +1010,9 @@
         "g7CreditsModal": {
             "description": "Dive in HyperPlay's topspelletjes met spannende Play Streak Challenges. Elke activiteit moedigt je aan om je aan te vallen met een ander spel, het beste van Web3 spel te laten zien. Je speeltijd is belangrijk!",
             "title": "Earn Game7 Credits"
+        },
+        "viewAllQuests": {
+            "title": "View All Quest"
         }
     },
     "sideload": {
@@ -1041,7 +1044,8 @@
     "exit_game": "Verlaat Game",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Je bent verbonden met HyperPlay met een externe portemonnee.",
-        "WALLET_DISCONNECTED": "Je hebt geen portemonnee verbonden met HyperPlay."
+        "WALLET_DISCONNECTED": "Je hebt geen portemonnee verbonden met HyperPlay.",
+        "comingSoon": "Binnenkort"
     },
     "dlcs": {
         "label": "Select DLCs om te installeren:"

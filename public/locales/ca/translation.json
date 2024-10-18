@@ -1026,6 +1026,9 @@
         "g7CreditsModal": {
             "title": "Guanyar els crèdits Game7",
             "description": "Submergeix-te als millors jocs d'HyperPlay amb l'excitant joc Streak Challenges. Cada activitat t'anima a participar amb un joc diferent, mostrant el millor dels jocs web3. El teu temps de joc!"
+        },
+        "viewAllQuests": {
+            "title": "Veure totes les recerques"
         }
     },
     "accounts": "comptes",
@@ -1043,7 +1046,8 @@
     "importGameErrorTitle": "Error de joc d'importació",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Estàs connectat a HyperPlay amb una cartera externa.",
-        "WALLET_DISCONNECTED": "No teniu una cartera connectada a HyperPlay."
+        "WALLET_DISCONNECTED": "No teniu una cartera connectada a HyperPlay.",
+        "comingSoon": "Pròximament"
     },
     "achievements": {
         "progress": {

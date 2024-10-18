@@ -1024,6 +1024,9 @@
         "g7CreditsModal": {
             "title": "#Steći Game7 #Kredit",
             "description": "@Dive @into HyperPlay@'s #vrh #igra #uz @excite #Predstava Streak #Izazov. @Each #aktivnost #ohrabriti #free #na #sudjelovati #uz @a #drugačiji #igra, showcasing @the @best @of web3 gaming. #Tvoj playtime #pitanje#!"
+        },
+        "viewAllQuests": {
+            "title": "#Stav @All"
         }
     },
     "sideload": {
@@ -1049,7 +1052,8 @@
     "exit_game": "#Izlaz",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "#Free #biti #spajati #na HyperPlay #uz @a #vanjski #lisnica#.",
-        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#."
+        "WALLET_DISCONNECTED": "#Free @do #nemati @a #lisnica #spajati #na HyperPlay#.",
+        "comingSoon": "#Doći"
     },
     "dlcs": {
         "label": "@Select @DLC #na @install#:"

@@ -969,6 +969,9 @@
         "g7CreditsModal": {
             "description": "Включите в топ-игры HyperPlay с захватывающими проблемами Play Streak. Каждая деятельность побуждает вас заниматься другой игрой, демонстрируя лучшее из веб-3 игр. Время игры важно!",
             "title": "Earn Game7 Кредиты"
+        },
+        "viewAllQuests": {
+            "title": "Просмотр всех квестов"
         }
     },
     "ALL": "Все",
@@ -1047,7 +1050,8 @@
     "exit_game": "Выход игры",
     "overlay": {
         "EXTERNAL_WALLET_CONNECTED": "Вы подключены к HyperPlay с внешним кошельком.",
-        "WALLET_DISCONNECTED": "У вас нет кошелька, подключенного к HyperPlay."
+        "WALLET_DISCONNECTED": "У вас нет кошелька, подключенного к HyperPlay.",
+        "comingSoon": "Скоро будет"
     },
     "importGameErrorMessage": "Не действительная игровая папка, импортировать игру невозможно",
     "importGameErrorMessageExecutable": "Игра Исполняемый не найден, импортировать игру невозможно",
