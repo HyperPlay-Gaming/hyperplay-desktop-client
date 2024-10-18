@@ -91,7 +91,6 @@ export const QuestsViewer = observer(
           />
           <QuestDetailsWrapper
             getPendingExternalSync={getPendingExternalSync}
-            questsWithExternalPlayStreakSync={flags.questsWithExternalSync}
             syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
             tOverride={t}
             sessionEmail={sessionEmail}
