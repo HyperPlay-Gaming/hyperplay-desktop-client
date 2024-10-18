@@ -40,7 +40,9 @@ const ScanScreen = (props: ScanScreenProps) => {
         )}{' '}
         <a
           onClick={() =>
-            window.api.openExternalUrl('https://metamask.io/download/')
+            window.api.openExternalUrl(
+              'https://metamask.io/download/?utm_source=hyperplay'
+            )
           }
           className="button-sm"
         >
