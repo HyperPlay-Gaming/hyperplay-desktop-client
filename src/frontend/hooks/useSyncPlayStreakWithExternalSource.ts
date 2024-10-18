@@ -29,7 +29,7 @@ export function useSyncPlayStreakWithExternalSource({
     )
   }
 
-  const { mutate } = useSyncPlayStreakWithExternalSourceCore({
+  const { mutateAsync } = useSyncPlayStreakWithExternalSourceCore({
     getCSRFToken: async () => {
       return window.api.getCSRFToken()
     },
@@ -95,7 +95,7 @@ export function useSyncPlayStreakWithExternalSource({
       return
     }
 
-    mutate({ questId, address: connectedAddress })
+    return mutateAsync({ questId, address: connectedAddress })
   }
 
   return {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import styles from './index.module.scss'
 import { QuestLogWrapper } from './components/QuestLogWrapper'
 import { Alert } from '@hyperplay/ui'
@@ -13,6 +13,7 @@ import useGetQuests from 'frontend/hooks/useGetQuests'
 import useGetUserPlayStreak from 'frontend/hooks/useGetUserPlayStreak'
 import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import { observer } from 'mobx-react-lite'
+import { useAccount } from 'wagmi'
 
 export interface QuestsViewerProps {
   projectId: string
@@ -20,6 +21,7 @@ export interface QuestsViewerProps {
 
 export const QuestsViewer = observer(
   ({ projectId: appName }: QuestsViewerProps) => {
+    const { address } = useAccount()
     const questResults = useGetQuests(appName)
     const [selectedQuestId, setSelectedQuestId] = useState<number | null>(null)
     const { isSignedIn, data } = useAuthSession()
@@ -30,6 +32,14 @@ export const QuestsViewer = observer(
     const visibleQuestId = selectedQuestId ?? initialQuestId
     const sessionEmail = data?.linkedAccounts.get('email')
     const { invalidateQuery } = useGetUserPlayStreak(visibleQuestId)
+
+    const getPendingExternalSync = useCallback(async () => {
+      if (!address || !visibleQuestId) return false
+      return window.api.checkPendingSync({
+        questId: visibleQuestId,
+        wallet: address
+      })
+    }, [address, visibleQuestId])
 
     const { syncPlayStreakWithExternalSource } =
       useSyncPlayStreakWithExternalSource({
@@ -43,6 +53,7 @@ export const QuestsViewer = observer(
    t("quest.noG7ConnectionClaim", "You need to have a Game7 account linked to {{email}} to claim your rewards.")
    t("quest.noG7ConnectionSync", "You need to have a Game7 account linked to {{email}} to resync your tasks.")
    t("quest.notEnoughGas", "Insufficient wallet balance to claim your reward due to gas fees. Try a different wallet or replenish this one before retrying.")
+   t("quest.playstreak.syncSuccess", "Progress synced")
    */
 
     let alertComponent = null
@@ -79,6 +90,7 @@ export const QuestsViewer = observer(
             setSelectedQuestId={setSelectedQuestId}
           />
           <QuestDetailsWrapper
+            getPendingExternalSync={getPendingExternalSync}
             questsWithExternalPlayStreakSync={flags.questsWithExternalSync}
             syncPlayStreakWithExternalSource={syncPlayStreakWithExternalSource}
             tOverride={t}

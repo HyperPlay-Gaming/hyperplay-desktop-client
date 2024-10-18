@@ -16,9 +16,7 @@ import { getPlaystreakArgsFromQuestData } from '@hyperplay/quests-ui'
 import { useGetRewards } from 'frontend/hooks/useGetRewards'
 import { useMutation } from '@tanstack/react-query'
 import { Runner } from 'common/types'
-import { useSyncPlayStreakWithExternalSource } from 'frontend/hooks/useSyncPlayStreakWithExternalSource'
 import { observer } from 'mobx-react-lite'
-import { useFlags } from 'launchdarkly-react-client-sdk'
 
 export interface QuestDetailsViewPlayWrapperProps {
   selectedQuestId: number | null
@@ -28,8 +26,6 @@ export const QuestDetailsViewPlayWrapper = observer(
   ({ selectedQuestId }: QuestDetailsViewPlayWrapperProps) => {
     const navigate = useNavigate()
     const { t } = useTranslation()
-    const flags = useFlags()
-    const questsWithExternalSync: number[] = flags.questsWithExternalSync
     const [collapseIsOpen, setCollapseIsOpen] = useState(false)
 
     const questResult = useGetQuest(selectedQuestId)
@@ -43,28 +39,6 @@ export const QuestDetailsViewPlayWrapper = observer(
     const getSteamGameResult = useGetSteamGame(
       questMeta?.eligibility?.steam_games ?? []
     )
-
-    const { syncPlayStreakWithExternalSource } =
-      useSyncPlayStreakWithExternalSource({
-        refreshPlayStreak: questPlayStreakResult.invalidateQuery
-      })
-
-    const handleSyncPlayStreak = async () => {
-      if (!questMeta) {
-        console.error('Quest meta is null')
-        window.api.logError('Quest meta is null')
-        return
-      }
-
-      if (questsWithExternalSync.includes(questMeta.id)) {
-        syncPlayStreakWithExternalSource(questMeta.id)
-      } else {
-        await window.api.syncPlaySession(questMeta.project_id, 'hyperplay')
-        await questPlayStreakResult.invalidateQuery()
-        window.api.logInfo(`Synced play session for quest ${questMeta.id}`)
-        console.log(`Synced play session for quest ${questMeta.id}`)
-      }
-    }
 
     const navigateToGame = useMutation({
       mutationFn: async (appName: string) => {
@@ -216,7 +190,6 @@ export const QuestDetailsViewPlayWrapper = observer(
               steamAccountLinked: false
             },
             playStreak: {
-              onSync: () => console.log('sync'),
               currentStreakInDays: 0,
               requiredStreakInDays: 1,
               minimumSessionTimeInSeconds: 100,
@@ -261,8 +234,7 @@ export const QuestDetailsViewPlayWrapper = observer(
           },
           playStreak: getPlaystreakArgsFromQuestData({
             questMeta,
-            questPlayStreakData,
-            onSync: handleSyncPlayStreak
+            questPlayStreakData
           })
         }}
         classNames={{ root: styles.questDetailsRoot }}
