@@ -1,5 +1,5 @@
 import { wait } from '@hyperplay/utils'
-import { resetSessionStartedTime } from 'frontend/helpers/getPlaystreakArgsFromQuestData'
+import { resetSessionStartedTime } from '@hyperplay/quests-ui'
 import { useEffect } from 'react'
 
 export function useSyncPlaySession(

@@ -13,6 +13,7 @@ import { Button } from '@hyperplay/ui'
 import { QuestsViewer } from 'frontend/components/UI/QuestsViewer'
 import { useFlags } from 'launchdarkly-react-client-sdk'
 import libraryState from 'frontend/state/libraryState'
+import AlertToast from 'frontend/components/UI/AlertToast'
 import classNames from 'classnames'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import MetaMaskPortfolio from 'frontend/screens/MetaMaskPortfolio'
@@ -129,6 +130,7 @@ export const Overlay = observer(function ({
       <div className={classNames(BrowserGameStyles.root, classNameMods)}>
         <div className={BrowserGameStyles.bgFilter} />
         <div className={BrowserGameStyles.contentContainer}>
+          <AlertToast />
           <HashRouter>
             <NavBarOverlayWrapper />
             <Routes>
